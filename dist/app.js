@@ -42,18 +42,13 @@
   let navOpen = false;
 
   if (navToggle && nav) {
-    const syncNavState = () => {
+    navToggle.addEventListener('click', () => {
+      navOpen = !navOpen;
       nav.classList.toggle('is-open', navOpen);
-      document.body.classList.toggle('nav-open', navOpen);
       navToggle.setAttribute('aria-expanded', String(navOpen));
       navToggle.innerHTML = navOpen
         ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
         : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
-    };
-
-    navToggle.addEventListener('click', () => {
-      navOpen = !navOpen;
-      syncNavState();
     });
 
     // Close nav on link click (mobile)
@@ -61,7 +56,9 @@
       link.addEventListener('click', () => {
         if (navOpen) {
           navOpen = false;
-          syncNavState();
+          nav.classList.remove('is-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
         }
       });
     });
@@ -75,13 +72,6 @@
   let ticking = false;
 
   function updateHeader() {
-    if (document.body.classList.contains('nav-open')) {
-      header?.classList.remove('header--hidden');
-      header?.style.boxShadow = 'var(--shadow-sm)';
-      ticking = false;
-      return;
-    }
-
     const scrollY = window.scrollY;
     if (scrollY > 80) {
       if (scrollY > lastScrollY && scrollY > 200) {
