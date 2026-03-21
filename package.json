@@ -1,0 +1,12 @@
+{
+  "name": "fitpo50",
+  "version": "1.0.0",
+  "description": "FitPo50 website",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
