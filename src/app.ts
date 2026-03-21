@@ -75,6 +75,13 @@
   let ticking = false;
 
   function updateHeader() {
+    if (document.body.classList.contains('nav-open')) {
+      header?.classList.remove('header--hidden');
+      header?.style.boxShadow = 'var(--shadow-sm)';
+      ticking = false;
+      return;
+    }
+
     const scrollY = window.scrollY;
     if (scrollY > 80) {
       if (scrollY > lastScrollY && scrollY > 200) {

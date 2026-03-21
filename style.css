@@ -276,6 +276,10 @@ a:hover {
     overflow: hidden;
   }
 
+  .header {
+    overflow: visible;
+  }
+
   .nav-toggle { display: flex; }
   .nav {
     position: fixed;
@@ -283,6 +287,9 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 0;
+    width: 100vw;
+    min-height: 100vh;
+    min-height: 100dvh;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -295,6 +302,7 @@ a:hover {
     transition: transform 0.35s var(--ease-out);
     z-index: 60;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .nav.is-open {
     transform: translateX(0);
@@ -316,10 +324,6 @@ a:hover {
     margin-top: var(--space-3);
     color: #EAF4F7;
     background: rgba(255, 255, 255, 0.06);
-  }
-
-  .header {
-    background: rgba(14, 26, 30, 0.96);
   }
 }
 
