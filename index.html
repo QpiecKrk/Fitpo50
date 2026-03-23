@@ -259,11 +259,19 @@
         <div class="about__image-wrap" style="width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); filter: contrast(105%) saturate(110%) sepia(10%); border: 6px solid white; transform: rotate(-2deg); z-index: 2; overflow: hidden; position: relative;">
           <!-- Nakładka kolorystyczna filtru graficznego -->
           <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14, 143, 170, 0.1), rgba(224, 122, 31, 0.1)); mix-blend-mode: overlay; z-index: 1;"></div>
-          <img src="./assets/hero.png" alt="Trening na siłowni" loading="lazy" width="2752" height="1536" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture>
+            <source srcset="./assets/hero.avif" type="image/avif">
+            <source srcset="./assets/hero.webp" type="image/webp">
+            <img src="./assets/hero.png" alt="Trening na siłowni" loading="lazy" width="2752" height="1536" style="width: 100%; height: 100%; object-fit: cover;">
+          </picture>
         </div>
         <div class="about__image-wrap" style="width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); filter: contrast(105%) saturate(110%) sepia(10%); border: 6px solid white; transform: rotate(3deg) translateY(-40px) translateX(20px); z-index: 1; overflow: hidden; position: relative;">
           <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14, 143, 170, 0.1), rgba(224, 122, 31, 0.1)); mix-blend-mode: overlay; z-index: 1;"></div>
-          <img src="./assets/bio-outdoor.png" alt="Bieganie w parku" loading="lazy" width="2400" height="1792" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture>
+            <source srcset="./assets/bio-outdoor.avif" type="image/avif">
+            <source srcset="./assets/bio-outdoor.webp" type="image/webp">
+            <img src="./assets/bio-outdoor.png" alt="Bieganie w parku" loading="lazy" width="2400" height="1792" style="width: 100%; height: 100%; object-fit: cover;">
+          </picture>
         </div>
       </div>
 
@@ -865,7 +873,27 @@
     <div class="articles-grid-preview articles-grid-preview--home" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8); margin-top: var(--space-12);">
       
 
-      <!-- Karta 1 -->
+      <!-- Karta 1: Bieganie niszczy kolana -->
+      <a href="bieganie-niszczy-kolana.html" class="article-promo-card reveal" style="display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--color-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid var(--color-border);">
+        <div style="position: relative; height: 200px; overflow: hidden;">
+          <picture>
+            <source srcset="./assets/hero-bieganie.avif" type="image/avif">
+            <source srcset="./assets/hero-bieganie.webp" type="image/webp">
+            <img src="./assets/hero-bieganie.png" alt="Bieganie niszczy kolana - prawda czy mit?" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
+          </picture>
+          <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-sm);">Zdrowie</div>
+        </div>
+        <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--space-3); font-size: 0.85rem; color: var(--color-text-muted); font-weight: 500;">
+            <span style="display: flex; align-items: center; gap: 4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 12 min czytania</span>
+          </div>
+          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Bieganie niszczy kolana — prawda czy mit?</h4>
+          <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Sprawdź, co mówi nauka o bieganiu po 50-tce i dlaczego Twoje kolana potrzebują ruchu.</p>
+          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Karta 2 -->
       <a href="sen-po-50.html" class="article-promo-card reveal" style="display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--color-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid var(--color-border);">
         <div style="position: relative; height: 200px; overflow: hidden;">
           <img src="./assets/para_spi_spokojnie.png" alt="Sen i regeneracja po 50-tce" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
@@ -881,7 +909,7 @@
         </div>
       </a>
 
-      <!-- Karta 2 -->
+      <!-- Karta 3 -->
       <a href="badania-po-50.html" class="article-promo-card reveal" style="display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--color-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid var(--color-border);">
         <div style="position: relative; height: 200px; overflow: hidden;">
           <img src="./assets/senior_with_test_results.png" alt="Badania przed treningiem po 50-tce" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
@@ -893,22 +921,6 @@
           </div>
           <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Badania przed treningiem po 50-tce</h4>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Jakie badania naprawdę warto zrobić przed startem na siłowni i na co zwrócić uwagę.</p>
-          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- Karta 3 -->
-      <a href="suplementacja-po-50.html" class="article-promo-card reveal" style="display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--color-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid var(--color-border);">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="./assets/creatine_counter.png" alt="Białko i kreatyna po 50-tce" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
-          <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-sm);">Suplementacja</div>
-        </div>
-        <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
-          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--space-3); font-size: 0.85rem; color: var(--color-text-muted); font-weight: 500;">
-            <span style="display: flex; align-items: center; gap: 4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 9 min czytania</span>
-          </div>
-          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Białko i kreatyna po 50-tce</h4>
-          <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Co mówi nauka o dwóch najpopularniejszych suplementach i czy po 50-tce warto je brać.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>

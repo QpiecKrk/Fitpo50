@@ -180,6 +180,7 @@ Używana na stronie głównej pod BIO. Prowadzi bezpośrednio do najświeższego
 - **3 Filary**: Strona opiera się na trzech głównych kategoriach: **Ruch**, **Jedzenie**, **Zdrowie**.
 - **Kategoria Wiedza**: Została usunięta. Artykuły wcześniej przypisane do "Wiedzy" (np. Badania przed treningiem) są teraz w kategorii **Zdrowie**.
 - **Nawigacja**: Menu główne i kafelki na stronie głównej ("3 Podstawowe Kroki") prowadzą do substadiów tych trzech filarów.
+- **Czytelnia na stronie głównej**: Sekcja „Najnowsze Porady i Artykuły” na `index.html` musi zawsze zawierać **tylko 3 najnowsze** kafelki. Przy dodawaniu nowego artykułu, najstarszy z tej sekcji musi zostać usunięty.
 
 ## Kompatybilność (Safari)
 
@@ -187,14 +188,40 @@ Używana na stronie głównej pod BIO. Prowadzi bezpośrednio do najświeższego
 - **Flex Gap**: Starsze wersje Safari nie wspierają `gap` w Flexboxie. W sekcjach takich jak `steps-banner__actions` stosujemy fallbacki oparte na marginesach (`@supports not (gap: 1rem)`).
 - **Zabezpieczenia Grid**: Dla kontenerów z tekstem w Gridzie stosujemy `min-width: 0`, aby zapobiec rozciąganiu layoutu w Safari.
 
-## Zasady pracy
+## Standard Artykułu (Layout & Komponenty)
 
-- Najpierw sprawdz aktualny stan plikow, potem edytuj.
-- Nie cofaj tych ustalen bez wyraznej prosby.
-- Zachowuj spojny standard SEO i on-page w calym repo.
-- Po dodaniu nowej indeksowalnej strony aktualizujemy `sitemap.xml` (z `<lastmod>` w formacie `YYYY-MM-DD`).
-- Jesli zmieniamy obraz referencyjny dla strony, aktualizujemy rowniez `og:image` i `twitter:image`.
-- Przy dodawaniu nowych sekcji pod BIO na stronie głównej, zachowujemy klasę `reveal` dla spójności animacji.
+Aby zachować 100% spójności wizualnej (zgodnie z projektami w PDF/zrzutach), stosujemy następujące klasy i strukturę:
+
+### 1. Nagłówek i Intro
+- **Wrapper**: `.article-page`
+- **Meta**: `.article-header__meta` (Dział, ikona zegara, czas czytania).
+- **Tytuł**: `.article-header__title` (H1 z fontem `Zodiak`).
+- **Pierwszy akapit**: Klasa `.drop-cap` dla efektownego inicjału.
+
+### 2. Elementy Wyróżnione (Callouts)
+- **Cytat / Ważna myśl**: Klasa `.article-quote`. Stosowana do bloków tekstu na szarym/zielonym tle z paskiem z boku (widoczne na zrzutach jako kluczowe wnioski).
+- **Motto na zdjęciu**: Klasa `.hero-motto` wewnątrz `.article-hero`. Zawsze z lewym obramowaniem `var(--color-accent)`.
+
+### 3. Struktura Treści
+- **Nagłówki sekcji**: 
+  - `H2`: Główne sekcje (mają automatyczną linię dekoracyjną pod spodem w CSS).
+  - `H3`: Podsekcje (kolor `var(--color-accent)`).
+- **Tabele danych**: Używamy standardowego tagu `table` wewnątrz `.article-content`. Nagłówki `th` powinny mieć tło `var(--bg-surface)`.
+
+### 4. Stopka Artykułu
+- **Źródła**: Lista `<ol>` na końcu artykułu z małym fontem (`0.85rem`) i kolorem `var(--color-text-faint)`.
+- **Nota medyczna**: Klasa `.medical-disclaimer` na samym dole.
+- **Kafelki promujące (Czytelnia)**: Sekcja `.porady-preview` na dole strony musi zawierać kafelki (`.article-promo-card`) identyczne z tymi na stronie głównej: obrazek (z `transition: transform 0.5s ease`), etykieta kategorii, czas czytania (ikona + minuty), tytuł, krótki opis oraz przycisk `.btn--outline` z ikoną strzałki SVG. Standardowo umieszczamy 3 najbardziej adekwatne artykuły.
+
+## Automatyzacja tworzenia artykułów
+
+Jeśli użytkownik poda tekst artykułu (np. ze zrzutu ekranu lub dokumentu):
+1.  **Analiza Treści**: Agent wyodrębnia tytuł, wstęp, śródtytuły, tabele i źródła.
+2.  **Strukturyzacja**: Mapuje treść na powyższe komponenty wizualne.
+3.  **SEO**: Automatycznie generuje meta opisy, tagi społecznościowe i JSON-LD (BlogPosting).
+4.  **Bezpieczeństwo**: Treść pozostaje niezmieniona, chyba że użytkownik prosi o redakcję.
+5.  **Logika i Rozmieszczenie Zdjęć**: Jeśli użytkownik poprosi o wygenerowanie zdjęć do artykułu, agent umieszcza je w tekście w miejscach, które najlepiej ilustrują dany fragment (logiczne wplecenie w treść), stosując tag `<picture>` i klasę `inline-img`.
+6.  **Linkowanie Wewnętrzne**: Agent wyszukuje w tekście słowa kluczowe (np. „Siłownia”, „Dieta”, „Sen”) i zamienia je na linki do istniejących już artykułów (celujemy w ok. 4 linki na artykuł). Nie tworzymy nowych zdań — wykorzystujemy naturalne wystąpienia słów w dostarczonej treści.
 
 ## Mobile Responsiveness (kluczowe breakpointy)
 
@@ -202,10 +229,15 @@ Używana na stronie głównej pod BIO. Prowadzi bezpośrednio do najświeższego
 - **`< 640px`**: `.featured-article__content` przechodzi na `grid-template-columns: 1fr`, obrazek wycentrowany z `margin-inline: auto`, przyciski na `width: 100%`. `.about-promo` przechodzi na `grid-template-columns: 1fr`.
 - **`< 360px`**: Dodatkowe zmniejszenia paddingów, fontów i badgy dla iPhone SE.
 - **`@supports not (gap: 1rem)`**: Fallback margin-based dla starszego Safari w `.steps-banner__actions`.
+- **Kafelki pod artykułem (np. bieganie)**: Sekcja dolna "Czytaj dalej" musi zawierać takie same kafelki w każdym artykule, spójne z ogólnym standardem kafelków.
+- **Karuzela katalogu (porady.html) - Złote Zasady**:
+    1. **HTML Kafelka**: Zawsze używamy pełnej struktury z odznaką (`.article-index-card__label` - pomarańczowe jajo) i czystym tekstem czasu (`.article-index-card__meta` np. "10 min czytania", bez ikon SVG). Przycisk dolny to niebieski napis "Otwórz ->".
+    2. **CSS Siatki (Grid)**: Karty MUSZĄ układać się precyzyjnie w kolumnach bez rozciągania. Bezwzględnie unikamy `auto-fit`, który rozciąga pojedyncze elementy (np. 9. kafelek) na pełną stronę. Używamy explicit grid w media queries: `repeat(4, 1fr)` (desktop), `repeat(2, 1fr)` (tablet), `1fr` (mobile). Domyślnie `repeat(auto-fill, minmax(220px, 1fr))`.
+    3. **JavaScript (Nawigacja)**: Grupowanie po 8 elementów (`initialVisibleArticles = 8`). JavaScript zarządza wyłącznie stylami `transform` (translacja X). **Zakaz** używania funkcji `scrollIntoView()` przy klikaniu przycisków karuzeli ("Wróć"/"Dalej"), aby zapobiec nagłym i nienaturalnym "skokom" strony w górę. Oraz dbamy by karuzela nie miała zduplikowanych starych kontenerów na zapleczu HTML.
 
 ## Sitemap Standard
 
 - `sitemap.xml` musi zawierać **wszystkie** publiczne strony.
 - Format wpisu: `<loc>` + `<lastmod>YYYY-MM-DD</lastmod>`.
 - `<lastmod>` aktualizujemy za każdym razem, gdy zmieniamy daną stronę.
-- Obecne strony w sitemap: `/`, `rusz-sie`, `jedzenie`, `zdrowie`, `porady`, `jak-zaczac-na-silowni-po-50`, `badania-po-50`, `bledy-50`, `silownia-dla-ludzi`, `motywacja-po-50`, `dieta-po-50`, `suplementacja-po-50`, `sen-po-50`.
+- Obecne strony w sitemap: `/`, `rusz-sie`, `jedzenie`, `zdrowie`, `porady`, `jak-zaczac-na-silowni-po-50`, `badania-po-50`, `bledy-50`, `silownia-dla-ludzi`, `motywacja-po-50`, `dieta-po-50`, `suplementacja-po-50`, `sen-po-50`, `bieganie-niszczy-kolana`.

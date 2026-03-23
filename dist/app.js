@@ -1,7 +1,5 @@
-/* ============================================================
-   FitPo50 — Application JavaScript (compiled placeholder)
-   Dark mode, accordions, scroll animations, mobile nav
-   ============================================================ */
+// Log for verification
+console.log("FitPo50 Carousel Logic Active - v2");
 
 (function () {
   'use strict';
@@ -13,7 +11,6 @@
   const root = document.documentElement;
   let currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   root.setAttribute('data-theme', currentTheme);
-  updateThemeIcon();
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
@@ -33,6 +30,7 @@
       themeToggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
     }
   }
+  updateThemeIcon();
 
   // ----------------------------------------------------------
   // MOBILE NAV TOGGLE
@@ -64,9 +62,7 @@
 
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
-        if (navOpen) {
-          setNavState(false);
-        }
+        if (navOpen) setNavState(false);
       });
     });
 
@@ -76,121 +72,33 @@
         navToggle.focus();
       }
     });
-
-    document.addEventListener('click', event => {
-      if (!navOpen || window.innerWidth >= 768) return;
-      const target = event.target;
-      if (!nav.contains(target) && !navToggle.contains(target)) {
-        setNavState(false);
-      }
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768 && navOpen) {
-        setNavState(false);
-      }
-    });
   }
 
   // ----------------------------------------------------------
-  // HEADER SCROLL BEHAVIOR (hide on scroll down, show on up)
-  // ----------------------------------------------------------
-  const header = document.querySelector('.header');
-  let lastScrollY = window.scrollY;
-  let ticking = false;
-
-  function updateHeader() {
-    const scrollY = window.scrollY;
-    if (scrollY > 80) {
-      if (scrollY > lastScrollY && scrollY > 200) {
-        header.classList.add('header--hidden');
-      } else {
-        header.classList.remove('header--hidden');
-      }
-      header.style.boxShadow = 'var(--shadow-sm)';
-    } else {
-      header.classList.remove('header--hidden');
-      header.style.boxShadow = 'none';
-    }
-    lastScrollY = scrollY;
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateHeader);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  // ----------------------------------------------------------
-  // ARTICLE ACCORDIONS
-  // ----------------------------------------------------------
-  const articleCards = document.querySelectorAll('.article-card');
-
-  articleCards.forEach(card => {
-    const header = card.querySelector('.article-card__header');
-    const body = card.querySelector('.article-card__body');
-
-    if (!header || !body) return;
-
-    function toggleCard() {
-      const isOpen = card.classList.contains('is-open');
-
-      // Close all other cards
-      articleCards.forEach(otherCard => {
-        if (otherCard !== card && otherCard.classList.contains('is-open')) {
-          otherCard.classList.remove('is-open');
-          const otherHeader = otherCard.querySelector('.article-card__header');
-          if (otherHeader) otherHeader.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      // Toggle current
-      card.classList.toggle('is-open', !isOpen);
-      header.setAttribute('aria-expanded', String(!isOpen));
-
-      // Scroll into view if opening
-      if (!isOpen) {
-        setTimeout(() => {
-          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
-      }
-    }
-
-    header.addEventListener('click', toggleCard);
-    header.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleCard();
-      }
-    });
-  });
-
-  // ----------------------------------------------------------
-  // ARTICLE CATALOG SEARCH
+  // ARTICLE CATALOG SEARCH & CAROUSEL
   // ----------------------------------------------------------
   const articleSearchInput = document.querySelector('[data-article-search]');
   const articleSearchClear = document.querySelector('[data-article-search-clear]');
   const articleItems = Array.from(document.querySelectorAll('[data-article-item]'));
   const articleCountTargets = document.querySelectorAll('[data-article-count]');
-  const articleSearchStatus = document.querySelector('[data-search-status]');
-  const articleSearchEmpty = document.querySelector('[data-search-empty]');
-  const articleSearchMatches = document.querySelector('[data-search-matches]');
   const articleResults = document.querySelector('[data-article-results]');
-  const articleSearchResultsStrip = document.querySelector('[data-search-results-strip]');
-  const articleMoreWrap = document.querySelector('[data-article-more-wrap]');
-  const articleMoreButton = document.querySelector('[data-article-more]');
+  const carouselPagination = document.querySelector('[data-article-pagination]');
+  const carouselPrev = document.querySelector('[data-carousel-prev]');
+  const carouselNext = document.querySelector('[data-carousel-next]');
+  const carouselIndicator = document.querySelector('[data-carousel-indicator]');
   const categoryFilters = Array.from(document.querySelectorAll('[data-category-filter]'));
   const articleSort = document.querySelector('[data-article-sort]');
   const catalogSummary = document.querySelector('[data-catalog-summary]');
+  const articleSearchStatus = document.querySelector('[data-search-status]');
+  const articleSearchEmpty = document.querySelector('[data-search-empty]');
+  const articleSearchMatches = document.querySelector('[data-search-matches]');
+  const articleSearchResultsStrip = document.querySelector('[data-search-results-strip]');
 
   if (articleSearchInput && articleItems.length > 0) {
     let searchCommitted = false;
-    let articlesExpanded = false;
-    const initialVisibleArticles = 8;
     let activeCategory = 'all';
     let activeSort = 'newest';
+    const initialVisibleArticles = 8;
     const categoryLabels = {
       all: 'we wszystkich kategoriach',
       start: 'w kategorii Start',
@@ -200,6 +108,9 @@
       zdrowie: 'w kategorii Zdrowie',
       wiedza: 'w kategorii Wiedza'
     };
+
+    let currentPageIndex = 0;
+    let totalPages = 1;
 
     const normalize = (value) => value
       .toLocaleLowerCase('pl-PL')
@@ -212,172 +123,125 @@
       return match ? Number(match[0]) : 999;
     };
 
+    const updateCarouselPosition = () => {
+      if (!articleResults || !carouselIndicator || !carouselPrev || !carouselNext) return;
+      articleResults.style.transform = `translateX(-${currentPageIndex * 100}%)`;
+      carouselIndicator.textContent = `Strona ${currentPageIndex + 1} z ${totalPages}`;
+      carouselPrev.disabled = currentPageIndex === 0;
+      carouselNext.disabled = currentPageIndex === totalPages - 1;
+    };
+
     const updateArticleSearch = () => {
+      if (!articleResults) return;
+
       const query = normalize(articleSearchInput.value);
       const sortedItems = [...articleItems].sort((a, b) => {
         if (activeSort === 'alphabetical') {
-          const aTitle = a.dataset.articleTitle ?? '';
-          const bTitle = b.dataset.articleTitle ?? '';
-          return aTitle.localeCompare(bTitle, 'pl');
+          return (a.dataset.articleTitle || '').localeCompare(b.dataset.articleTitle || '', 'pl');
         }
-
         if (activeSort === 'shortest') {
-          const aTime = getReadTimeValue(a.dataset.readTime ?? '');
-          const bTime = getReadTimeValue(b.dataset.readTime ?? '');
-          return aTime - bTime;
+          return getReadTimeValue(a.dataset.readTime || '') - getReadTimeValue(b.dataset.readTime || '');
         }
-
-        const aOrder = Number(a.dataset.order ?? '0');
-        const bOrder = Number(b.dataset.order ?? '0');
-        return bOrder - aOrder;
+        return Number(b.dataset.order || '0') - Number(a.dataset.order || '0');
       });
 
-      sortedItems.forEach(item => {
-        if (articleResults) {
-          articleResults.appendChild(item);
-        }
-      });
-
-      let visibleCount = 0;
-      const matchedArticles = [];
+      const matchedArticlesForList = [];
+      const visibleItems = [];
 
       sortedItems.forEach(item => {
-        const searchText = normalize(item.dataset.searchText ?? item.textContent ?? '');
-        const category = item.dataset.category ?? 'all';
+        const searchText = normalize(item.dataset.searchText || item.textContent || '');
+        const category = item.dataset.category || 'all';
         const matchesQuery = query.length === 0 || searchText.includes(query);
         const matchesCategory = activeCategory === 'all' || category === activeCategory;
-        const matches = matchesQuery && matchesCategory;
-        if (matches) {
-          visibleCount += 1;
-          const title = item.dataset.articleTitle ?? item.textContent?.trim() ?? 'Artykuł';
-          const href = item.getAttribute('href') ?? '#';
-          matchedArticles.push({ title, href });
+        
+        if (matchesQuery && matchesCategory) {
+          visibleItems.push(item);
+          matchedArticlesForList.push({ 
+            title: item.dataset.articleTitle || 'Artykuł', 
+            href: item.getAttribute('href') || '#' 
+          });
+          item.hidden = false;
+        } else {
+          item.hidden = true;
         }
-        const shouldCollapse = query.length === 0 && !articlesExpanded && matches && visibleCount > initialVisibleArticles;
-        item.hidden = !matches || shouldCollapse;
       });
 
-      articleCountTargets.forEach(target => {
-        target.textContent = String(visibleCount);
-      });
+      // Clear track and rebuild pages
+      articleResults.innerHTML = '';
+      totalPages = Math.ceil(visibleItems.length / initialVisibleArticles) || 1;
+      currentPageIndex = 0;
 
-      if (catalogSummary) {
-        const categoryLabel = categoryLabels[activeCategory] ?? 'we wszystkich kategoriach';
-        catalogSummary.textContent = `${visibleCount} ${visibleCount === 1 ? 'artykuł' : visibleCount < 5 ? 'artykuły' : 'artykułów'} ${categoryLabel}`;
+      for (let i = 0; i < totalPages; i++) {
+        const page = document.createElement('div');
+        page.className = 'carousel-page';
+        visibleItems.slice(i * initialVisibleArticles, (i + 1) * initialVisibleArticles)
+                  .forEach(item => page.appendChild(item));
+        articleResults.appendChild(page);
       }
 
-      if (articleSearchStatus) {
-        articleSearchStatus.textContent = query.length === 0
-          ? 'Wpisz słowo i zobacz, w których artykułach występuje temat.'
-          : visibleCount > 0
-            ? `Znaleziono ${visibleCount} ${visibleCount === 1 ? 'artykuł' : visibleCount < 5 ? 'artykuły' : 'artykułów'} dla frazy "${articleSearchInput.value.trim()}".`
-            : `Brak wyników dla frazy "${articleSearchInput.value.trim()}".`;
-      }
+      // Update UI elements
+      articleCountTargets.forEach(t => t.textContent = String(visibleItems.length));
+      if (catalogSummary) catalogSummary.textContent = `${visibleItems.length} artykułów ${categoryLabels[activeCategory] || ''}`;
+      if (articleSearchStatus) articleSearchStatus.textContent = query.length === 0 ? 'Wpisz słowo...' : `Znaleziono ${visibleItems.length} wyników.`;
+      if (articleSearchEmpty) articleSearchEmpty.hidden = visibleItems.length > 0;
+      if (carouselPagination) carouselPagination.hidden = totalPages <= 1;
 
       if (articleSearchMatches) {
         articleSearchMatches.innerHTML = '';
-        articleSearchMatches.hidden = query.length === 0 || matchedArticles.length === 0;
-        if (articleSearchResultsStrip) {
-          articleSearchResultsStrip.classList.toggle('is-visible', searchCommitted && query.length > 0 && matchedArticles.length > 0);
-        }
-
-        if (query.length > 0 && matchedArticles.length > 0) {
-          matchedArticles.forEach(article => {
-            const link = document.createElement('a');
-            link.className = 'search-match';
-            link.href = article.href;
-            link.textContent = article.title;
-            articleSearchMatches.appendChild(link);
-          });
-        }
+        articleSearchMatches.hidden = query.length === 0 || matchedArticlesForList.length === 0;
+        matchedArticlesForList.forEach(article => {
+          const a = document.createElement('a');
+          a.className = 'search-match';
+          a.href = article.href;
+          a.textContent = article.title;
+          articleSearchMatches.appendChild(a);
+        });
       }
 
-      if (articleSearchEmpty) {
-        articleSearchEmpty.hidden = visibleCount > 0;
-      }
-
-      if (articleMoreWrap && articleMoreButton) {
-        const hiddenByCollapse = query.length === 0 && !articlesExpanded && visibleCount > initialVisibleArticles;
-        articleMoreWrap.hidden = !hiddenByCollapse;
-        if (hiddenByCollapse) {
-          const remaining = visibleCount - initialVisibleArticles;
-          articleMoreButton.textContent = `Pokaz jeszcze ${remaining} ${remaining === 1 ? 'artykuł' : remaining < 5 ? 'artykuły' : 'artykułów'}`;
-        }
-      }
-
-      if (!searchCommitted || query.length === 0 || matchedArticles.length === 0) {
-        if (articleSearchResultsStrip) {
-          articleSearchResultsStrip.classList.remove('is-visible');
-        }
-      }
-
-      if (articleSearchClear) {
-        articleSearchClear.hidden = query.length === 0;
-      }
+      updateCarouselPosition();
     };
 
     articleSearchInput.addEventListener('input', () => {
       searchCommitted = false;
       updateArticleSearch();
     });
-    articleSearchInput.addEventListener('keydown', (e) => {
-      if (e.key !== 'Enter') return;
-      e.preventDefault();
-      searchCommitted = true;
+
+    articleSearchClear?.addEventListener('click', () => {
+      articleSearchInput.value = '';
       updateArticleSearch();
+      articleSearchInput.focus();
+    });
 
-      const target = articleSearchMatches && !articleSearchMatches.hidden && articleSearchMatches.childElementCount > 0
-        ? articleSearchMatches
-        : !articleSearchEmpty?.hidden
-          ? articleSearchEmpty
-          : articleResults;
-
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    carouselPrev?.addEventListener('click', () => {
+      if (currentPageIndex > 0) {
+        currentPageIndex--;
+        updateCarouselPosition();
       }
     });
 
-    if (articleSearchClear) {
-      articleSearchClear.addEventListener('click', () => {
-        searchCommitted = false;
-        articlesExpanded = false;
-        articleSearchInput.value = '';
-        updateArticleSearch();
-        articleSearchInput.focus();
-      });
-    }
-
-    categoryFilters.forEach(filter => {
-      filter.addEventListener('click', () => {
-        activeCategory = filter.dataset.categoryFilter ?? 'all';
-        articlesExpanded = false;
-        categoryFilters.forEach(button => {
-          button.classList.toggle('is-active', button === filter);
-        });
-        updateArticleSearch();
-      });
+    carouselNext?.addEventListener('click', () => {
+      if (currentPageIndex < totalPages - 1) {
+        currentPageIndex++;
+        updateCarouselPosition();
+      }
     });
 
-    if (articleSort) {
-      articleSort.addEventListener('change', () => {
-        activeSort = articleSort.value;
-        articlesExpanded = false;
-        updateArticleSearch();
-      });
-    }
+    categoryFilters.forEach(f => f.addEventListener('click', () => {
+      activeCategory = f.dataset.categoryFilter || 'all';
+      categoryFilters.forEach(b => b.classList.toggle('is-active', b === f));
+      updateArticleSearch();
+    }));
 
-    if (articleMoreButton) {
-      articleMoreButton.addEventListener('click', () => {
-        articlesExpanded = true;
-        updateArticleSearch();
-      });
-    }
+    articleSort?.addEventListener('change', () => {
+      activeSort = articleSort.value;
+      updateArticleSearch();
+    });
 
     updateArticleSearch();
   }
 
   // ----------------------------------------------------------
-  // SCROLL REVEAL (IntersectionObserver)
+  // SCROLL REVEAL & SMOOTH SCROLL
   // ----------------------------------------------------------
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -386,26 +250,17 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -40px 0px'
-  });
+  }, { threshold: 0.1 });
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // ----------------------------------------------------------
-  // SMOOTH SCROLL for hash links
-  // ----------------------------------------------------------
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href');
-      if (targetId === '#' || targetId === '#top') return; // let default handle #top
-      const target = document.querySelector(targetId);
+      const target = targetId && targetId !== '#' ? document.querySelector(targetId) : null;
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Update URL hash without scrolling
-        history.pushState(null, '', targetId);
       }
     });
   });

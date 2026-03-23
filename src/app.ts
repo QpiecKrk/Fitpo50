@@ -56,7 +56,7 @@
       navToggle.setAttribute('aria-expanded', String(navOpen));
       navToggle.setAttribute('aria-label', navOpen ? 'Zamknij menu nawigacji' : 'Otwórz menu nawigacji');
       navToggle.innerHTML = navOpen ? closeNavIcon : defaultNavIcon;
-    });
+    };
 
     navToggle.addEventListener('click', () => {
       setNavState(!navOpen);
@@ -107,10 +107,10 @@
       } else {
         header?.classList.remove('header--hidden');
       }
-      header?.style.boxShadow = 'var(--shadow-sm)';
+      if (header) header.style.boxShadow = 'var(--shadow-sm)';
     } else {
       header?.classList.remove('header--hidden');
-      header?.style.boxShadow = 'none';
+      if (header) header.style.boxShadow = 'none';
     }
     lastScrollY = scrollY;
     ticking = false;
@@ -144,8 +144,9 @@
         }
       });
       // Toggle current
+      const currentHeader = card.querySelector<HTMLElement>('.article-card__header');
       card.classList.toggle('is-open', !isOpen);
-      header.setAttribute('aria-expanded', String(!isOpen));
+      if (currentHeader) currentHeader.setAttribute('aria-expanded', String(!isOpen));
       // Scroll into view if opening
       if (!isOpen) {
         setTimeout(() => {
@@ -175,11 +176,15 @@
   const articleSearchMatches = document.querySelector<HTMLElement>('[data-search-matches]');
   const articleResults = document.querySelector<HTMLElement>('[data-article-results]');
   const articleSearchResultsStrip = document.querySelector<HTMLElement>('[data-search-results-strip]');
-  const articleMoreWrap = document.querySelector<HTMLElement>('[data-article-more-wrap]');
-  const articleMoreButton = document.querySelector<HTMLButtonElement>('[data-article-more]');
   const categoryFilters = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-category-filter]'));
   const articleSort = document.querySelector<HTMLSelectElement>('[data-article-sort]');
   const catalogSummary = document.querySelector<HTMLElement>('[data-catalog-summary]');
+
+  // Carousel elements
+  const carouselPagination = document.querySelector<HTMLElement>('[data-article-pagination]');
+  const carouselPrev = document.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+  const carouselNext = document.querySelector<HTMLButtonElement>('[data-carousel-next]');
+  const carouselIndicator = document.querySelector<HTMLElement>('[data-carousel-indicator]');
 
   if (articleSearchInput && articleItems.length > 0) {
     let searchCommitted = false;
@@ -209,7 +214,26 @@
       return match ? Number(match[0]) : 999;
     };
 
+    let currentPageIndex = 0;
+    let totalPages = 1;
+
+    const updateCarouselPosition = () => {
+      if (!articleResults || !carouselIndicator || !carouselPrev || !carouselNext) return;
+
+      const offset = currentPageIndex * 100;
+      articleResults.style.transform = `translateX(-${offset}%)`;
+
+      carouselIndicator.textContent = `Strona ${currentPageIndex + 1} z ${totalPages}`;
+      carouselPrev.disabled = currentPageIndex === 0;
+      carouselNext.disabled = currentPageIndex === totalPages - 1;
+
+      // Accessibility: notify screen readers?
+      articleResults.setAttribute('aria-label', `Wyświetlona strona ${currentPageIndex + 1} z ${totalPages}`);
+    };
+
     const updateArticleSearch = () => {
+      if (!articleResults) return;
+
       const query = normalize(articleSearchInput.value);
       const sortedItems = [...articleItems].sort((a, b) => {
         if (activeSort === 'alphabetical') {
@@ -229,12 +253,8 @@
         return bOrder - aOrder;
       });
 
-      sortedItems.forEach(item => {
-        articleResults?.appendChild(item);
-      });
-
-      let visibleCount = 0;
-      const matchedArticles: Array<{ title: string; href: string }> = [];
+      const matchedArticlesForList: Array<{ title: string; href: string }> = [];
+      const visibleItems: HTMLElement[] = [];
 
       sortedItems.forEach(item => {
         const searchText = normalize(item.dataset.searchText ?? item.textContent ?? '');
@@ -244,39 +264,57 @@
         const matches = matchesQuery && matchesCategory;
 
         if (matches) {
-          visibleCount += 1;
+          visibleItems.push(item);
           const title = item.dataset.articleTitle ?? item.textContent?.trim() ?? 'Artykuł';
           const href = item.getAttribute('href') ?? '#';
-          matchedArticles.push({ title, href });
+          matchedArticlesForList.push({ title, href });
         }
-        const shouldCollapse = query.length === 0 && !articlesExpanded && matches && visibleCount > initialVisibleArticles;
-        item.hidden = !matches || shouldCollapse;
+        item.hidden = !matches;
+      });
+
+      // Clear current pages and re-group
+      articleResults.innerHTML = '';
+      totalPages = Math.ceil(visibleItems.length / initialVisibleArticles) || 1;
+      currentPageIndex = 0; // Reset on search
+
+      for (let i = 0; i < totalPages; i++) {
+        const page = document.createElement('div');
+        page.className = 'carousel-page';
+        const pageItems = visibleItems.slice(i * initialVisibleArticles, (i + 1) * initialVisibleArticles);
+        pageItems.forEach(item => page.appendChild(item));
+        articleResults.appendChild(page);
+      }
+
+      // Re-trigger reveal animations for new positions
+      visibleItems.forEach(item => {
+        item.classList.remove('is-visible');
+        if (revealObserver) revealObserver.observe(item);
       });
 
       articleCountTargets.forEach(target => {
-        target.textContent = String(visibleCount);
+        target.textContent = String(visibleItems.length);
       });
 
       if (catalogSummary) {
         const categoryLabel = categoryLabels[activeCategory] ?? 'we wszystkich kategoriach';
-        catalogSummary.textContent = `${visibleCount} ${visibleCount === 1 ? 'artykuł' : visibleCount < 5 ? 'artykuły' : 'artykułów'} ${categoryLabel}`;
+        catalogSummary.textContent = `${visibleItems.length} ${visibleItems.length === 1 ? 'artykuł' : visibleItems.length < 5 ? 'artykuły' : 'artykułów'} ${categoryLabel}`;
       }
 
       if (articleSearchStatus) {
         articleSearchStatus.textContent = query.length === 0
           ? 'Wpisz słowo i zobacz, w których artykułach występuje temat.'
-          : visibleCount > 0
-            ? `Znaleziono ${visibleCount} ${visibleCount === 1 ? 'artykuł' : visibleCount < 5 ? 'artykuły' : 'artykułów'} dla frazy "${articleSearchInput.value.trim()}".`
+          : visibleItems.length > 0
+            ? `Znaleziono ${visibleItems.length} ${visibleItems.length === 1 ? 'artykuł' : visibleItems.length < 5 ? 'artykuły' : 'artykułów'} dla frazy "${articleSearchInput.value.trim()}".`
             : `Brak wyników dla frazy "${articleSearchInput.value.trim()}".`;
       }
 
       if (articleSearchMatches) {
         articleSearchMatches.innerHTML = '';
-        articleSearchMatches.hidden = query.length === 0 || matchedArticles.length === 0;
-        articleSearchResultsStrip?.classList.toggle('is-visible', searchCommitted && query.length > 0 && matchedArticles.length > 0);
+        articleSearchMatches.hidden = query.length === 0 || matchedArticlesForList.length === 0;
+        articleSearchResultsStrip?.classList.toggle('is-visible', searchCommitted && query.length > 0 && matchedArticlesForList.length > 0);
 
-        if (query.length > 0 && matchedArticles.length > 0) {
-          matchedArticles.forEach(article => {
+        if (query.length > 0 && matchedArticlesForList.length > 0) {
+          matchedArticlesForList.forEach(article => {
             const link = document.createElement('a');
             link.className = 'search-match';
             link.href = article.href;
@@ -287,19 +325,16 @@
       }
 
       if (articleSearchEmpty) {
-        articleSearchEmpty.hidden = visibleCount > 0;
+        articleSearchEmpty.hidden = visibleItems.length > 0;
       }
 
-      if (articleMoreWrap && articleMoreButton) {
-        const hiddenByCollapse = query.length === 0 && !articlesExpanded && visibleCount > initialVisibleArticles;
-        articleMoreWrap.hidden = !hiddenByCollapse;
-        if (hiddenByCollapse) {
-          const remaining = visibleCount - initialVisibleArticles;
-          articleMoreButton.textContent = `Pokaz jeszcze ${remaining} ${remaining === 1 ? 'artykuł' : remaining < 5 ? 'artykuły' : 'artykułów'}`;
-        }
+      if (carouselPagination) {
+        carouselPagination.hidden = totalPages <= 1;
       }
 
-      if (!searchCommitted || query.length === 0 || matchedArticles.length === 0) {
+      updateCarouselPosition();
+
+      if (!searchCommitted || query.length === 0 || matchedArticlesForList.length === 0) {
         articleSearchResultsStrip?.classList.remove('is-visible');
       }
 
@@ -348,13 +383,21 @@
 
     articleSort?.addEventListener('change', () => {
       activeSort = articleSort.value;
-      articlesExpanded = false;
       updateArticleSearch();
     });
 
-    articleMoreButton?.addEventListener('click', () => {
-      articlesExpanded = true;
-      updateArticleSearch();
+    carouselPrev?.addEventListener('click', () => {
+      if (currentPageIndex > 0) {
+        currentPageIndex--;
+        updateCarouselPosition();
+      }
+    });
+
+    carouselNext?.addEventListener('click', () => {
+      if (currentPageIndex < totalPages - 1) {
+        currentPageIndex++;
+        updateCarouselPosition();
+      }
     });
 
     updateArticleSearch();
