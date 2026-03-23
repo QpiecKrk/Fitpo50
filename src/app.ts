@@ -193,6 +193,7 @@
       motywacja: 'w kategorii Motywacja',
       odzywianie: 'w kategorii Odżywianie',
       suplementacja: 'w kategorii Suplementacja',
+      zdrowie: 'w kategorii Zdrowie',
       wiedza: 'w kategorii Wiedza'
     };
 

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruch | FitPo50</title>
+<meta name="description" content="Ruch po 50-tce to nie katorga. To Twoja polisa na sprawność. Dowiedz się, jak zacząć bez bólu i kontuzji.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Ruch | FitPo50">
+<meta property="og:description" content="Ruch po 50-tce to nie katorga. Dowiedz się, jak zacząć bez bólu i kontuzji.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fitpo50.pl/rusz-sie.html">
+<meta property="og:image" content="https://fitpo50.pl/assets/Hero_RuszSie.png">
+<meta property="og:locale" content="pl_PL">
+<link rel="canonical" href="https://fitpo50.pl/rusz-sie.html">
+
+<!-- Fonts: Zodiak (display) + Work Sans (body) -->
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css">
+
+<style>
+.subpage-hero {
+  position: relative;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: var(--space-16);
+}
+.subpage-hero__bg {
+  position: absolute;
+  inset: 0;
+}
+.subpage-hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+.subpage-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(11, 24, 33, 0.88) 0%, rgba(11, 24, 33, 0.58) 45%, rgba(11, 24, 33, 0.78) 100%);
+}
+.subpage-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
+}
+.subpage-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-4);
+  color: var(--color-accent);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+}
+.subpage-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.35rem, 4.8vw, 4.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  margin-bottom: var(--space-4);
+  color: white;
+}
+.subpage-hero__subtitle {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 54ch;
+  color: rgba(255, 255, 255, 0.86);
+  margin-inline: auto;
+  margin-bottom: var(--space-8);
+}
+
+/* Article Cards from Porady (Compact Version) */
+.articles-grid-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+  text-align: left;
+}
+
+.article-index-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: var(--space-4);
+  text-decoration: none;
+  color: inherit;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-index-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 143, 170, 0.12);
+  border-color: var(--color-primary-light);
+}
+
+.article-index-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.article-index-card__label {
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.article-index-card__meta {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.article-index-card__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.2;
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+}
+
+.article-index-card__desc {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: var(--space-3);
+  flex-grow: 1;
+}
+
+.article-index-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.article-index-card__cta svg {
+  width: 14px;
+  height: 14px;
+}
+</style>
+</head>
+<body>
+
+<header class="header" id="top">
+  <div class="container header__inner">
+    <a href="index.html#top" class="logo" aria-label="FitPo50 — strona główna">
+      <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img">
+    </a>
+    <button class="nav-toggle" aria-label="Otwórz menu nawigacji" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
+      <a href="index.html" class="nav__link">Strona Główna</a>
+      <a href="index.html#o-nas" class="nav__link">O mnie</a>
+      <a href="index.html#baza-wiedzy" class="nav__link">Baza wiedzy</a>
+      <a href="porady.html" class="nav__link">Porady</a>
+      <a href="https://www.instagram.com/fitpo50" class="nav__link" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Przełącz na tryb ciemny">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="subpage-hero">
+    <div class="subpage-hero__bg">
+      <img src="./assets/Hero_Rusz.png" alt="Ruch po 50-tce">
+      <div class="subpage-hero__overlay"></div>
+    </div>
+    <div class="container subpage-hero__content">
+      <span class="subpage-hero__eyebrow">Krok 1: Aktywność</span>
+      <h1 class="subpage-hero__title">Ruch</h1>
+      <p class="subpage-hero__subtitle">Ruch po 50-tce to nie katorga. To Twoja polisa na sprawność. Dowiedz się, jak zacząć bez bólu i kontuzji.</p>
+    </div>
+  </section>
+
+  <section class="subpage-content section-padding">
+    <div class="container" style="max-width: 900px;">
+      <div style="text-align: center; margin-bottom: var(--space-12);">
+        <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-6); line-height: 1.1;">
+          Wystarczy, że <span style="color: var(--color-accent);">zaczniesz.</span>
+        </h2>
+        <p style="font-size: 1.25rem; color: var(--text-base); line-height: 1.8; max-width: 800px; margin: 0 auto 1.5rem;">
+          Po 50-tce ciało działa inaczej — ale wciąż <span style="color: var(--color-accent); font-weight: 700;">działa świetnie</span>, jeśli mu na to pozwolisz. Tu znajdziesz artykuły pisane z myślą o Tobie: bez szaleńczych planów, bez kultu bólu, za to z <span style="color: var(--color-primary); font-weight: 700;">konkretną wiedzą</span> o tym, jak ruszać się <span style="color: var(--color-primary); font-weight: 700;">mądrze, regularnie i bez szkody dla stawów.</span>
+        </p>
+        <p style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--text-base);">
+          Bo sprawność po pięćdziesiątce to nie przypadek. To <span style="color: var(--color-accent);">decyzja.</span>
+        </p>
+      </div>
+
+      <div class="articles-grid-preview" style="max-width: 1000px; margin: 0 auto; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <!-- Kafelka Motywacja -->
+        <a href="motywacja-po-50.html" class="article-index-card reveal">
+          <div class="article-index-card__top">
+            <span class="article-index-card__label">Ruch</span>
+            <span class="article-index-card__meta">8 min czytania</span>
+          </div>
+          <h3 class="article-index-card__title">Jak zmusić się do ćwiczenia po 50-tce?</h3>
+          <p class="article-index-card__desc">Zobacz, jak przechytrzyć mózg i zbudować nawyk treningowy po 50-tce bez liczenia na chwilową motywację.</p>
+          <div class="article-index-card__cta">
+            Czytaj artykuł 
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        </a>
+
+        <!-- Kafelka Jak zacząć -->
+        <a href="jak-zaczac-na-silowni-po-50.html" class="article-index-card reveal">
+          <div class="article-index-card__top">
+            <span class="article-index-card__label">Ruch</span>
+            <span class="article-index-card__meta">5 min czytania</span>
+          </div>
+          <h3 class="article-index-card__title">Jak zacząć na siłowni po 50-tce?</h3>
+          <p class="article-index-card__desc">Praktyczny przewodnik o pierwszym treningu, stroju, planie i spokojnym wejściu na siłownię bez chaosu.</p>
+          <div class="article-index-card__cta">
+            Czytaj artykuł 
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        <!-- Kafelka Siłownia dla ludzi -->
+        <a href="silownia-dla-ludzi.html" class="article-index-card reveal">
+          <div class="article-index-card__top">
+            <span class="article-index-card__label">Ruch</span>
+            <span class="article-index-card__meta">6 min czytania</span>
+          </div>
+          <h3 class="article-index-card__title">Siłownia nie jest dla mięśni. Jest dla ludzi.</h3>
+          <p class="article-index-card__desc">O wspólnocie, samotności i o tym, dlaczego siłownia po 50-tce daje więcej niż sam ruch.</p>
+          <div class="article-index-card__cta">
+            Czytaj artykuł 
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        <!-- Kafelka 5 Błędów -->
+        <a href="bledy-50.html" class="article-index-card reveal">
+          <div class="article-index-card__top">
+            <span class="article-index-card__label">Ruch</span>
+            <span class="article-index-card__meta">7 min czytania</span>
+          </div>
+          <h3 class="article-index-card__title">5 największych błędów początkujących po 50-tce</h3>
+          <p class="article-index-card__desc">Najczęstsze pułapki na starcie: brak rozgrzewki, za duże ciężary i ignorowanie sygnałów ciała.</p>
+          <div class="article-index-card__cta">
+            Czytaj artykuł 
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        </a>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-12);">
+        <a href="index.html" class="btn btn--outline" style="color: var(--color-primary); border-color: var(--color-primary);">Wróć do strony głównej</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="index.html#top" class="logo" aria-label="FitPo50 — strona główna">
+          <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img logo__img--footer">
+        </a>
+        <p class="footer__brand-desc">Praktyczna wiedza o treningu, diecie i regeneracji dla osób po 50‑tce. Od Grześka — nie trenera, nie lekarza, po prostu kogoś, kto też ćwiczy.</p>
+      </div>
+
+      <div>
+        <h4 class="footer__heading">Nawigacja</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="index.html">Strona Główna</a></li>
+          <li><a href="index.html#o-nas">O mnie</a></li>
+          <li><a href="index.html#baza-wiedzy">Baza wiedzy</a></li>
+          <li><a href="porady.html">Porady</a></li>
+          <li><a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer__heading">Czytelnia</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="jak-zaczac-na-silowni-po-50.html">Jak zacząć na siłowni po 50-tce</a></li>
+          <li><a href="suplementacja-po-50.html">Białko i kreatyna po 50-tce</a></li>
+          <li><a href="dieta-po-50.html">Dieta po 50-tce kontra nawyki</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__disclaimer">⚠️ Uwaga: Autor nie jest lekarzem, trenerem personalnym ani dietetykiem. Treści mają charakter informacyjny i edukacyjny. Przed rozpoczęciem treningów skonsultuj się ze specjalistą — szczególnie jeśli masz schorzenia przewlekłe lub urazy.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="./dist/app.js" defer></script>
+
+</body>
+</html>

@@ -28,47 +28,53 @@
   "description": "Spis porad i artykułów FitPo50 o treningu, diecie, zdrowiu i formie po 50-tce.",
   "mainEntity": {
     "@type": "ItemList",
-    "numberOfItems": 7,
+    "numberOfItems": 8,
     "itemListElement": [
       {
         "@type": "ListItem",
         "position": 1,
+        "url": "https://fitpo50.pl/sen-po-50.html",
+        "name": "Sen i regeneracja po 50-tce - dlaczego sen jest kluczowy"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
         "url": "https://fitpo50.pl/badania-po-50.html",
         "name": "Badania przed treningiem po 50-tce. Co musisz sprawdzić?"
       },
       {
         "@type": "ListItem",
-        "position": 2,
+        "position": 3,
         "url": "https://fitpo50.pl/suplementacja-po-50.html",
         "name": "Białko w proszku i kreatyna po 50-tce"
       },
       {
         "@type": "ListItem",
-        "position": 3,
+        "position": 4,
         "url": "https://fitpo50.pl/dieta-po-50.html",
         "name": "Dieta po 50-tce kontra nawyki"
       },
       {
         "@type": "ListItem",
-        "position": 4,
+        "position": 5,
         "url": "https://fitpo50.pl/motywacja-po-50.html",
         "name": "Jak zmusić się do ćwiczenia po 50-tce?"
       },
       {
         "@type": "ListItem",
-        "position": 5,
+        "position": 6,
         "url": "https://fitpo50.pl/silownia-dla-ludzi.html",
         "name": "Siłownia nie jest dla mięśni. Jest dla ludzi."
       },
       {
         "@type": "ListItem",
-        "position": 6,
+        "position": 7,
         "url": "https://fitpo50.pl/jak-zaczac-na-silowni-po-50.html",
         "name": "Jak zacząć na siłowni po 50-tce"
       },
       {
         "@type": "ListItem",
-        "position": 7,
+        "position": 8,
         "url": "https://fitpo50.pl/bledy-50.html",
         "name": "5 największych błędów początkujących po 50-tce"
       }
@@ -437,6 +443,7 @@
   margin-bottom: var(--space-2);
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -449,6 +456,7 @@
   flex-grow: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -636,7 +644,7 @@
 
         <div class="porady-hero__stats">
           <div class="porady-stat">
-            <strong data-article-count>7</strong>
+            <strong data-article-count>8</strong>
             <span>artykuły teraz</span>
           </div>
           <div class="porady-stat">
@@ -678,11 +686,9 @@
       <div class="catalog-toolbar__row">
         <div class="catalog-toolbar__filters" role="toolbar" aria-label="Filtry kategorii">
           <button type="button" class="catalog-filter is-active" data-category-filter="all">Wszystkie</button>
-          <button type="button" class="catalog-filter" data-category-filter="start">Start</button>
-          <button type="button" class="catalog-filter" data-category-filter="motywacja">Motywacja</button>
-          <button type="button" class="catalog-filter" data-category-filter="odzywianie">Odżywianie</button>
-          <button type="button" class="catalog-filter" data-category-filter="suplementacja">Suplementacja</button>
-          <button type="button" class="catalog-filter" data-category-filter="wiedza">Wiedza</button>
+          <button type="button" class="catalog-filter" data-category-filter="ruch">Ruch</button>
+          <button type="button" class="catalog-filter" data-category-filter="jedzenie">Jedzenie</button>
+          <button type="button" class="catalog-filter" data-category-filter="zdrowie">Zdrowie</button>
         </div>
 
         <label class="catalog-sort">
@@ -696,7 +702,7 @@
       </div>
 
       <div class="catalog-toolbar__summary">
-        <strong data-catalog-summary>7 artykułów</strong>
+        <strong data-catalog-summary>8 artykułów</strong>
         <span>Filtruj po kategorii albo sortuj bez utraty widoczności treści.</span>
       </div>
     </div>
@@ -715,7 +721,17 @@
       </div>
 
       <div class="articles-grid-preview" data-article-results>
-        <a href="badania-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Badania przed treningiem po 50-tce. Co musisz sprawdzić?" data-search-text="badania przed treningiem po 50-tce co musisz sprawdzić zdrowie kardiolog lekarz ciśnienie tętnicze morfologia lipidogram cholesterol ekg spoczynkowe witamina d tsh tarczyca sygnały alarmowe ból w klatce piersiowej duszność omdlenie nadciśnienie cukrzyca profilaktyka serce wysiłek" data-read-time="8 min" data-category="wiedza" data-order="7">
+        <!-- Artykuł 8: Sen i regeneracja -->
+        <a href="sen-po-50.html" class="article-index-card reveal" data-article-item data-category="zdrowie" data-order="8" data-read-time="10 min" data-article-title="Sen i regeneracja po 50-tce" data-search-text="sen regeneracja mięśnie hormony forma sen po 50 odpoczynek hormon wzrostu kortyzol testosteron sarkopenia regeneracja po treningu po 50-tce">
+          <div class="article-index-card__top">
+            <span class="article-index-card__label">Zdrowie</span>
+            <span class="article-index-card__meta">10 min czytania</span>
+          </div>
+          <h3 class="article-index-card__title">Sen i regeneracja po 50-tce - dlaczego sen jest kluczowy</h3>
+          <p class="article-index-card__desc">Dlaczego sen to fundament zdrowia i wyników treningowych po 50. roku życia.</p>
+          <span class="article-index-card__cta">Otwórz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span>
+        </a>
+        <a href="badania-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Badania przed treningiem po 50-tce. Co musisz sprawdzić?" data-search-text="badania przed treningiem po 50-tce co musisz sprawdzić zdrowie kardiolog lekarz ciśnienie tętnicze morfologia lipidogram cholesterol ekg spoczynkowe witamina d tsh tarczyca sygnały alarmowe ból w klatce piersiowej duszność omdlenie nadciśnienie cukrzyca profilaktyka serce wysiłek" data-read-time="8 min" data-category="zdrowie" data-order="7">
           <div class="article-index-card__top">
             <span class="article-index-card__label">Zdrowie</span>
             <span class="article-index-card__meta">8 min czytania</span>
@@ -724,27 +740,27 @@
           <p class="article-index-card__desc">Jakie badania naprawdę warto zrobić przed startem na siłowni i na co zwrócić uwagę, by trenować bezpiecznie.</p>
           <span class="article-index-card__cta">Otwórz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span>
         </a>
-        <a href="suplementacja-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Białko w proszku i kreatyna po 50-tce. Co mówi nauka" data-search-text="białko w proszku kreatyna po 50-tce co mówi nauka czy warto brać suplementacja suplementy whey serwatka roślinne okno anaboliczne synteza białek mięśniowych leucyna oporność anaboliczna siła kości bezpieczeństwo nerki monohydrat monohydrat kreatyny dawkowanie starzenie sprawność" data-read-time="9 min" data-category="suplementacja" data-order="6">
+        <a href="suplementacja-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Białko w proszku i kreatyna po 50-tce. Co mówi nauka" data-search-text="białko w proszku kreatyna po 50-tce co mówi nauka czy warto brać suplementacja suplementy whey serwatka roślinne okno anaboliczne synteza białek mięśniowych leucyna oporność anaboliczna siła kości bezpieczeństwo nerki monohydrat monohydrat kreatyny dawkowanie starzenie sprawność" data-read-time="9 min" data-category="jedzenie" data-order="6">
           <div class="article-index-card__top">
-            <span class="article-index-card__label">Suplementacja</span>
+            <span class="article-index-card__label">Jedzenie</span>
             <span class="article-index-card__meta">9 min czytania</span>
           </div>
           <h3 class="article-index-card__title">Białko w proszku i kreatyna po 50-tce</h3>
           <p class="article-index-card__desc">Co mówi nauka o dwóch najpopularniejszych suplementach i czy po 50-tce naprawdę warto je brać.</p>
           <span class="article-index-card__cta">Otwórz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span>
         </a>
-        <a href="dieta-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Dieta po 50-tce kontra nawyki. Czemu diety nie działają" data-search-text="dieta po 50-tce kontra nawyki czemu diety nie działają co naprawdę zmienia życie biologia nawyk schudłem wróciłem do starych nawyków porażka biologia neurologiczny fakt mózg ewolucja wspomnienia emocje nagrody deprywacja restrykcyjne diety projekt życie mycie zębów stopniowo zmiana nawyku 66 dni rewolucja mózg nie protestuje etapy mały krok rośnie szansa smak wyuczony plastyczny preferencje smakowe brokuł oduczyć oswajanie smaku forma zmienia wszystko elastyczne podejście wzorzec diety addytywna białko warzywa picie wody cierpliwość" data-read-time="8 min" data-category="odzywianie" data-order="5">
+        <a href="dieta-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Dieta po 50-tce kontra nawyki. Czemu diety nie działają" data-search-text="dieta po 50-tce kontra nawyki czemu diety nie działają co naprawdę zmienia życie biologia nawyk schudłem wróciłem do starych nawyków porażka biologia neurologiczny fakt mózg ewolucja wspomnienia emocje nagrody deprywacja restrykcyjne diety projekt życie mycie zębów stopniowo zmiana nawyku 66 dni rewolucja mózg nie protestuje etapy mały krok rośnie szansa smak wyuczony plastyczny preferencje smakowe brokuł oduczyć oswajanie smaku forma zmienia wszystko elastyczne podejście wzorzec diety addytywna białko warzywa picie wody cierpliwość" data-read-time="8 min" data-category="jedzenie" data-order="5">
           <div class="article-index-card__top">
-            <span class="article-index-card__label">Odżywianie</span>
+            <span class="article-index-card__label">Jedzenie</span>
             <span class="article-index-card__meta">8 min czytania</span>
           </div>
           <h3 class="article-index-card__title">Dieta po 50-tce kontra nawyki</h3>
           <p class="article-index-card__desc">Dlaczego restrykcyjne diety przegrywają z codziennymi nawykami i co naprawdę pomaga po 50-tce.</p>
           <span class="article-index-card__cta">Otwórz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span>
         </a>
-        <a href="motywacja-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Jak zmusić się do ćwiczenia po 50-tce?" data-search-text="jak zmusić się do ćwiczenia po 50-tce motywacja nawyk biologia ewolucja oszczędzanie energii ewolucyjnie unikanie wysiłku 200 000 lat mózg da się przechytrzyć motywacja jest przeceniana nawyk jest wszystkim stały nie negocjuj z własną głową 66 dni sześć tygodni moment krytyczny tożsamość zamiast celu jestem osobą która ćwiczy śledzenie postępów motywacja wizualna krzyżyk w kalendarzu dopamina zarządzalne cel tak łatwy że aż głupio nie zrobić mechanizm wyjścia z domu nagroda po treningu kłamstwa które możesz sobie darować" data-read-time="8 min" data-category="motywacja" data-order="4">
+        <a href="motywacja-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Jak zmusić się do ćwiczenia po 50-tce?" data-search-text="jak zmusić się do ćwiczenia po 50-tce motywacja nawyk biologia ewolucja oszczędzanie energii ewolucyjnie unikanie wysiłku 200 000 lat mózg da się przechytrzyć motywacja jest przeceniana nawyk jest wszystkim stały nie negocjuj z własną głową 66 dni sześć tygodni moment krytyczny tożsamość zamiast celu jestem osobą która ćwiczy śledzenie postępów motywacja wizualna krzyżyk w kalendarzu dopamina zarządzalne cel tak łatwy że aż głupio nie zrobić mechanizm wyjścia z domu nagroda po treningu kłamstwa które możesz sobie darować" data-read-time="8 min" data-category="ruch" data-order="4">
           <div class="article-index-card__top">
-            <span class="article-index-card__label">Motywacja</span>
+            <span class="article-index-card__label">Ruch</span>
             <span class="article-index-card__meta">8 min czytania</span>
           </div>
           <h3 class="article-index-card__title">Jak zmusić się do ćwiczenia po 50-tce?</h3>
@@ -752,9 +768,9 @@
           <span class="article-index-card__cta">Otwórz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span>
         </a>
 
-        <a href="silownia-dla-ludzi.html" class="article-index-card reveal" data-article-item data-article-title="Siłownia nie jest dla mięśni. Jest dla ludzi." data-search-text="siłownia nie jest dla mięśni jest dla ludzi wchodzisz na siłownię po to żeby ćwiczyć zostajesz bo tam są ludzie epidemia o której mówi się za mało samotność dorośli po pięćdziesiątce epidemia światowa organizacja zdrowia sho neurochemia biologia samotność zabija 26 procent ryzyka śmierci palenie 15 papierosów dziennie kortyzol stany zapalne układ odpornościowy choroby serca demencja naturalne środowisko do przerywania samotności badanie fitness dla starszych relacje spotkanie 15-30 procent niższa szansa na samotność kawiarnia kościół klub książkowy wspólny cel bez wspólnej historii powtarzalność matka znajomości fundament relacji ćwiczenia grupowe wspólny wysiłek fizyczny więzi równość warunków demokratyzujące wymiana doświadczeń operacja kolana biodra niezamierzony mentoring pomoc cel i struktura dnia emerytura poczucie sprawczości rozwój mimo wieku wyjście z domu wyjście na kawę nawyk poczucie przynależności wspólna motywacja zajęcia grupowe spinning pilates joga trening funkcjonalny nie idziesz na siłownię po to żeby poznać ludzi poznajesz przy okazji nie jest wymuszony zaplanowany ani sztuczny zaufanie wspólny pot bóle kolan" data-read-time="6 min" data-category="wiedza" data-order="3">
+        <a href="silownia-dla-ludzi.html" class="article-index-card reveal" data-article-item data-article-title="Siłownia nie jest dla mięśni. Jest dla ludzi." data-search-text="siłownia nie jest dla mięśni jest dla ludzi wchodzisz na siłownię po to żeby ćwiczyć zostajesz bo tam są ludzie epidemia o której mówi się za mało samotność dorośli po pięćdziesiątce epidemia światowa organizacja zdrowia sho neurochemia biologia samotność zabija 26 procent ryzyka śmierci palenie 15 papierosów dziennie kortyzol stany zapalne układ odpornościowy choroby serca demencja naturalne środowisko do przerywania samotności badanie fitness dla starszych relacje spotkanie 15-30 procent niższa szansa na samotność kawiarnia kościół klub książkowy wspólny cel bez wspólnej historii powtarzalność matka znajomości fundament relacji ćwiczenia grupowe wspólny wysiłek fizyczny więzi równość warunków demokratyzujące wymiana doświadczeń operacja kolana biodra niezamierzony mentoring pomoc cel i struktura dnia emerytura poczucie sprawczości rozwój mimo wieku wyjście z domu wyjście na kawę nawyk poczucie przynależności wspólna motywacja zajęcia grupowe spinning pilates joga trening funkcjonalny nie idziesz na siłownię po to żeby poznać ludzi poznajesz przy okazji nie jest wymuszony zaplanowany ani sztuczny zaufanie wspólny pot bóle kolan" data-read-time="6 min" data-category="ruch" data-order="3">
           <div class="article-index-card__top">
-            <span class="article-index-card__label">Wiedza</span>
+            <span class="article-index-card__label">Ruch</span>
             <span class="article-index-card__meta">6 min czytania</span>
           </div>
           <h3 class="article-index-card__title">Siłownia nie jest dla mięśni. Jest dla ludzi.</h3>
@@ -762,9 +778,9 @@
           <span class="article-index-card__cta">Otwórz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span>
         </a>
 
-        <a href="jak-zaczac-na-silowni-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Jak zacząć na siłowni po 50-tce" data-search-text="jak zacząć na siłowni po 50-tce przewodnik bez bullshitu masz ponad 50 lat i myślisz o siłowni wiek wstyd poczucie że to nie miejsce dla ciebie najpierw liczby bo liczby nie kłamią 23 procent polaków po 50-tce regularnie uprawia trening siłowy regularny trening oporowy redukuje ryzyko niepełnosprawności ruchowej poprawia gęstość kości przyspiesza metabolizm poprawia jakość snu prawda o siłowni której nikt ci nie powie nikt nie ocenia twoich ciężarów techniki ani ciała każdy skupia się na sobie pierwszy krok trener personalny jeden raz wystarczy zarezerwuj 30-minutową sesję z trenerem przy pierwszej wizycie pokaż mi 5 podstawowych ćwiczeń i jak nie skrzywdzić kolan ubierz się tak żeby dobrze się czuć buty treningowe spodnie sportowe przewiewne koszulki plan na pierwsze 4 tygodnie prosty jak budowa cepa 3 razy w tygodniu 45 minut maksymalnie ciężary lekkie technika ważniejsza niż ego przerwy między seriami 90-120 sekund ból mięśni dzień po treningu normalny ból stawów kolan łokci kręgosłupa stop i konsultacja co zabrać na pierwszą wizytę butelka wody ręcznik słuchawki telefon z aplikacją do notowania ćwiczeń czego nie zabierać suplement pre-workout jedna rzecz której się nie spodziewasz zaczniesz chcieć tam wracać ciało zaczyna pamiętać jak to jest czuć się sprawnym silnym lekkim podsumowanie największa bariera jest w głowie doświadczenie cierpliwość samoświadomość determinacja jedyne co musisz zrobić to wejść przez drzwi pierwszy raz" data-read-time="5 min" data-category="start" data-order="2">
+        <a href="jak-zaczac-na-silowni-po-50.html" class="article-index-card reveal" data-article-item data-article-title="Jak zacząć na siłowni po 50-tce" data-search-text="jak zacząć na siłowni po 50-tce przewodnik bez bullshitu masz ponad 50 lat i myślisz o siłowni wiek wstyd poczucie że to nie miejsce dla ciebie najpierw liczby bo liczby nie kłamią 23 procent polaków po 50-tce regularnie uprawia trening siłowy regularny trening oporowy redukuje ryzyko niepełnosprawności ruchowej poprawia gęstość kości przyspiesza metabolizm poprawia quality snu prawda o siłowni której nikt ci nie powie nikt nie ocenia twoich ciężarów techniki ani ciała każdy skupia się na sobie pierwszy krok trener personalny jeden raz wystarczy zarezerwuj 30-minutową sesję z trenerem przy pierwszej wizycie pokaż mi 5 podstawowych ćwiczeń i jak nie skrzywdzić kolan ubierz się tak żeby dobrze się czuć buty treningowe spodnie sportowe przewiewne koszulki plan na pierwsze 4 tygodnie prosty jak budowa cepa 3 razy w tygodniu 45 minut maksymalnie ciężary lekkie technika ważniejsza niż ego przerwy między seriami 90-120 sekund ból mięśni dzień po treningu normalny ból stawów kolan łokci kręgosłupa stop i konsultacja co zabrać na pierwszą wizytę butelka wody ręcznik słuchawki telefon z aplikacją do notowania ćwiczeń czego nie zabierać suplement pre-workout jedna rzecz której się nie spodziewasz zaczniesz chcieć tam wracać ciało zaczyna pamiętać jak to jest czuć się sprawnym silnym lekkim podsumowanie największa bariera jest w głowie doświadczenie cierpliwość samoświadomość determinacja jedyne co musisz zrobić to wejść przez drzwi pierwszy raz" data-read-time="5 min" data-category="ruch" data-order="2">
           <div class="article-index-card__top">
-            <span class="article-index-card__label">Start</span>
+            <span class="article-index-card__label">Ruch</span>
             <span class="article-index-card__meta">5 min czytania</span>
           </div>
           <h3 class="article-index-card__title">Jak zacząć na siłowni po 50-tce</h3>
@@ -772,9 +788,9 @@
           <span class="article-index-card__cta">Otwórz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span>
         </a>
 
-        <a href="bledy-50.html" class="article-index-card reveal" data-article-item data-article-title="5 największych błędów początkujących po 50-tce" data-search-text="5 największych błędów początkujących po 50-tce wchodzisz na siłownię z dobrymi chęciami oto najczęstsze błędy błąd numer 1 za ciężko na start ciało po pięćdziesiątce reaguje na nowe obciążenie inaczej ścięgna i stawy adaptują się wolniej niż mięśnie możesz poczuć się silny po tygodniu treningu ale ścięgno achillesa chrząstka kolana mankiet rotatorów potrzebują kilku tygodni zacznij od 50-60 procent tego co czujesz że możesz zrobić technika i zakres ruchu przed ciężarem błąd numer 2 pomijanie rozgrzewki po co marnować czas na rozgrzewkę zimny mięsień ma obniżony przepływ krwi i mniejszą elastyczność 5-10 minut dynamicznego ruchu przed treningiem krążenia ramion przysiady bez obciążenia wypady bez ciężaru błąd numer 3 tylko cardio bieżnia orbitrek i nic więcej po 50-tce tracimy 1-2 procent masy mięśniowej rocznie mięśnie to metabolizm stabilność stawów gęstość kości i sprawność za 15 lat dwie sesje siłowe tygodniowo to minimum cardio nie wystarczy błąd numer 4 brak regeneracji więcej to lepiej odpoczynek jest częścią treningu mięśnie rosną i naprawiają się po ćwiczeniach przerwa 48 godzin między sesjami te same partie mięśniowe sen 7-8 godzin trzy sesje w tygodniu na początek błąd numer 5 ignorowanie bólów stawów przejdzie ból mięśni normalny doms ale ból stawów kolana biodra łokcia barku to sygnał alarmowy ból mięśni ćwicz ból stawu stop dwa-trzy dni przerwy obniż obciążenie zmień ćwiczenie jeśli ból wraca skonsultuj się z fizjoterapeutą kontuzje kolana rozgrzewka cardio regeneracja sen przeciążenie sarkopenia trening siłowy" data-read-time="7 min" data-category="wiedza" data-order="1">
+        <a href="bledy-50.html" class="article-index-card reveal" data-article-item data-article-title="5 największych błędów początkujących po 50-tce" data-search-text="5 największych błędów początkujących po 50-tce wchodzisz na siłownię z dobrymi chęciami oto najczęstsze błędy błąd numer 1 za ciężko na start ciało po pięćdziesiątce reaguje na nowe obciążenie inaczej ścięgna i stawy adaptują się wolniej niż mięśnie możesz poczuć się silny po tygodniu treningu ale ścięgno achillesa chrząstka kolana mankiet rotatorów potrzebują kilku tygodni zacznij od 50-60 procent tego co czujesz że możesz zrobić technika i zakres ruchu przed ciężarem błąd numer 2 pomijanie rozgrzewki po co marnować czas na rozgrzewkę zimny mięsień ma obniżony przepływ krwi i mniejszą elastyczność 5-10 minut dynamicznego ruchu przed treningiem krążenia ramion przysiady bez obciążenia wypady bez ciężaru błąd numer 3 tylko cardio bieżnia orbitrek i nic więcej po 50-tce tracimy 1-2 procent masy mięśniowej rocznie mięśnie to metabolizm stabilność stawów gęstość kości i sprawność za 15 lat dwie sesje siłowe tygodniowo to minimum cardio nie wystarczy błąd numer 4 brak regeneracji więcej to lepiej odpoczynek jest częścią treningu mięśnie rosną i naprawiają się po ćwiczeniach przerwa 48 godzin między sesjami te same partie mięśniowe sen 7-8 godzin trzy sesje w tygodniu na początek błąd numer 5 ignorowanie bólów stawów przejdzie ból mięśni normalny doms ale ból stawów kolana biodra łokcia barku to sygnał alarmowy ból mięśni ćwicz ból stawu stop dwa-trzy dni przerwy obniż obciążenie zmień ćwiczenie jeśli ból wraca skonsultuj się z fizjoterapeutą kontuzje kolana rozgrzewka cardio regeneracja sen przeciążenie sarkopenia trening siłowy" data-read-time="7 min" data-category="ruch" data-order="1">
           <div class="article-index-card__top">
-            <span class="article-index-card__label">Wiedza</span>
+            <span class="article-index-card__label">Ruch</span>
             <span class="article-index-card__meta">7 min czytania</span>
           </div>
           <h3 class="article-index-card__title">5 największych błędów początkujących po 50-tce</h3>
