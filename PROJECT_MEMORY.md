@@ -197,18 +197,16 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
   - `gap` w flexie
   - elementy grid/flex bez `min-width: 0`
 
-## Porady.html
+## Porady.html (Karuzela i Paginacja)
 
-- `porady.html` to czytelnia i katalog wszystkich artykulow.
-- Karty maja miec spojna strukture:
-  - odznaka kategorii
-  - czas czytania jako tekst
-  - tytul
-  - krotki opis
-  - CTA `Otworz`
-- Karuzela i filtrowanie nie moga prowadzic do martwych linkow.
-- Nie zostawiamy starych, zduplikowanych kontenerow ani nieaktualnych licznikow.
-- Nie uzywamy rozwiazan, ktore robia nienaturalne skoki strony przy nawigacji karuzeli.
+- `porady.html` to czytelnia i główny katalog wszystkich artykułów (obecnie równo 9 artykułów). Złote zasady:
+  1. **Zgodność liczników i warstwy SEO**: Licznik w HTML (np. `data-article-count`), rzeczywista liczba kafli na stronie oraz deklaracja wpisów w sekcji `<script type="application/ld+json">` (elementy `"numberOfItems"` oraz ich `"position"`) MUSZĄ się zawsze zgadzać co do sztuki. Jeśli oddajesz nowy artykuł, dopisz go na pozycję nr 1 w schemacie JSON-LD i wymuś przesunięcie pozostałych układów.
+  2. **Struktura kart HTML**: Używamy pełnej zwięzłej struktury dla kafelków (`.article-index-card`): pomarańczowa odznaka `.article-index-card__label`, czysty tekst czasu `.article-index-card__meta` (bez ikon SVG), a CTA dolne to tekst "Otwórz ->". 
+  3. **Wymogi ułożenia CSS Grid**: Karty KATEGORYCZNIE układają się w sztywnym podziale. Żeby pojedyncze artykuły na końcu karuzeli się nie rozciągały, definiujemy twardą siatkę: `grid-template-columns: repeat(4, 1fr)` (desktop), `repeat(2, 1fr)` (tablet), oraz `1fr` dla mobile. **Zakaz korzystania z `auto-fit`** w klasie `.carousel-page`.
+  4. **Zapobieganie awariom Grid w Safari**: Z powodu znanego wycieku szerokości WebKit/Safari, klasa kontenerowa `.carousel-page` (bedąca elementem list flex) MUSI posiadać atrybuty `min-width: 0;` oraz `max-width: 100%;`. Dodatkowo same obiekty `.article-index-card` też używają `min-width: 0;`. Skutecznie blokuje to przedziury (blowouty) karuzeli w 1 wielki, rozciągnięty ciąg na urządzeniach Apple.
+  5. **Nawigacja JS**: Stronicowanie (zmiana translateZ) obsługiwane jest gładkim przesuwaniem, logiki skryptu grupującej po max 8 elementów na okienko. **Surowy zakaz** używania polecenia `.scrollIntoView()` pod guzikami "Dalej" i "Wróć", ponieważ powoduje to szkodliwe "skoki" ekranu użytkownika w pionie.
+
+Nie zostawiamy starych, duplikujących się bloków zaplecza, ani martwych linków do archiwalnego HTML, którego w bazie nie ma!
 
 ## Sitemap
 
@@ -237,4 +235,7 @@ Jesli artykul ma obrazy:
 ## Zasada koncowa
 
 - Tresci artykulow pozostaja merytorycznie nietkniete, jesli uzytkownik nie prosi o redakcje.
+- **KRYTYCZNE**: Nigdy nie pomijamy `article:modified_time` oraz `dateModified` w schema.
+- **KRYTYCZNE**: Obrazy MUSZA isc przez tag `<picture>` z AVIF i WebP. Nigdy nie zostawiamy samych `<img>` bez wymiarow i lazy loading.
+- **KRYTYCZNE**: W sekcjach "Więcej Porad" (stopka artykułu) używamy sztywnego gridu `repeat(3, 1fr)` (zakaz `auto-fit`) oraz CTA "Czytaj artykuł ->". Nazwa sekcji nie może zawierać słowa "Wiedza".
 - Zmiany techniczne, SEO i wizualne nie powinny przypadkiem zmieniac sensu tresci.
