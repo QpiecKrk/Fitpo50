@@ -404,6 +404,8 @@
 .carousel-page {
   flex: 0 0 100%;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: var(--space-3);
@@ -434,6 +436,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  min-width: 0;
   padding: var(--space-4);
   text-decoration: none;
   color: inherit;
