@@ -1346,14 +1346,31 @@ a:hover {
   text-decoration: none;
 }
 
-@media (max-width: 479px) {
-  .articles-grid-preview {
-    grid-template-columns: 1fr !important;
-  }
+/* Responsive Grid for Article Previews */
+.articles-grid-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+}
 
-  .articles-grid-preview--home {
-    gap: var(--space-5) !important;
+@media (max-width: 991px) {
+  .articles-grid-preview {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
   }
+}
+
+@media (max-width: 640px) {
+  .articles-grid-preview {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+}
+
+.articles-grid-preview--home {
+  gap: var(--space-8);
 }
 .footer__links a:hover { color: var(--color-text); }
 

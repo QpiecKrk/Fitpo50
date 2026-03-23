@@ -237,5 +237,5 @@ Jesli artykul ma obrazy:
 - Tresci artykulow pozostaja merytorycznie nietkniete, jesli uzytkownik nie prosi o redakcje.
 - **KRYTYCZNE**: Nigdy nie pomijamy `article:modified_time` oraz `dateModified` w schema.
 - **KRYTYCZNE**: Obrazy MUSZA isc przez tag `<picture>` z AVIF i WebP. Nigdy nie zostawiamy samych `<img>` bez wymiarow i lazy loading.
-- **KRYTYCZNE**: W sekcjach "Więcej Porad" (stopka artykułu) używamy sztywnego gridu `repeat(3, 1fr)` (zakaz `auto-fit`) oraz CTA "Czytaj artykuł ->". Nazwa sekcji nie może zawierać słowa "Wiedza".
+- **KRYTYCZNE**: W sekcjach "Więcej Porad" (stopka artykułu) używamy klasy `.articles-grid-preview`. NIGDY nie dodajemy tam stylów inline typu `grid-template-columns`. Układem zarządza centralnie `style.css` (1 kolumna na telefonie, 2 na tablecie, 3 na desktopie). CTA kart promocyjnych to zawsze tekstowe "Czytaj artykuł ->", a nazwa sekcji nie może zawierać słowa "Wiedza".
 - Zmiany techniczne, SEO i wizualne nie powinny przypadkiem zmieniac sensu tresci.
