@@ -194,7 +194,7 @@
 <header class="header" id="top">
   <div class="container header__inner">
     <a href="#top" class="logo" aria-label="FitPo50 — strona główna">
-      <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img">
+      <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img" width="48" height="48">
     </a>
 
     <button class="nav-toggle" aria-label="Otwórz menu nawigacji" aria-expanded="false">
@@ -223,7 +223,7 @@
     <picture>
       <source srcset="./assets/hero.avif" type="image/avif">
       <source srcset="./assets/hero.webp" type="image/webp">
-      <img src="./assets/hero.png" alt="Mężczyzna po 50-tce pewnie trenujący z hantlami w nowoczesnej siłowni" width="1920" height="1080" loading="eager">
+      <img src="./assets/hero.png" alt="Mężczyzna po 50-tce pewnie trenujący z hantlami w nowoczesnej siłowni" width="1200" height="670" loading="eager">
     </picture>
   </div>
   <div class="hero__overlay"></div>
@@ -249,9 +249,10 @@
      ============================================================ -->
 <section class="about section-padding" id="o-nas">
   <div class="container">
-    <div class="about__header reveal">
-      <span class="about__label">O mnie</span>
-      <h2 class="about__title" style="font-family: var(--font-display); color: var(--color-primary);">Hej, jestem <span class="about__name-highlight" style="color: var(--color-accent);">Grzesiek</span></h2>
+    <div class="section-header reveal">
+      <span class="section-header__label">O mnie</span>
+      <h2 class="section-header__title" style="font-family: var(--font-display); color: var(--color-primary);">Hej, jestem <span class="about__name-highlight" style="color: var(--color-accent);">Grzesiek</span></h2>
+      <div class="section-header__line"></div>
     </div>
 
     <div class="about__story reveal" style="align-items: center;">
@@ -262,7 +263,7 @@
           <picture>
             <source srcset="./assets/hero.avif" type="image/avif">
             <source srcset="./assets/hero.webp" type="image/webp">
-            <img src="./assets/hero.png" alt="Trening na siłowni" loading="lazy" width="2752" height="1536" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="./assets/hero.png" alt="Trening na siłowni" loading="lazy" width="800" height="447" style="width: 100%; height: 100%; object-fit: cover;">
           </picture>
         </div>
         <div class="about__image-wrap" style="width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); filter: contrast(105%) saturate(110%) sepia(10%); border: 6px solid white; transform: rotate(3deg) translateY(-40px) translateX(20px); z-index: 1; overflow: hidden; position: relative;">
@@ -270,7 +271,7 @@
           <picture>
             <source srcset="./assets/bio-outdoor.avif" type="image/avif">
             <source srcset="./assets/bio-outdoor.webp" type="image/webp">
-            <img src="./assets/bio-outdoor.png" alt="Bieganie w parku" loading="lazy" width="2400" height="1792" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="./assets/bio-outdoor.png" alt="Bieganie w parku" loading="lazy" width="800" height="597" style="width: 100%; height: 100%; object-fit: cover;">
           </picture>
         </div>
       </div>
@@ -396,7 +397,13 @@
             <p>Najczęstszy błąd początkujących po 50-tce: <strong>trenowanie jak za 20 lat</strong>. Twoje ciało się zmieniło — i to jest OK. Nie musisz bić rekordów. Musisz być konsekwentny i mądry. Minimum <strong>48 godzin przerwy</strong> przed ponownym treningiem tej samej grupy mięśniowej.</p>
 
             <p>Pamiętaj: regularna aktywność fizyczna <strong>zmniejsza ryzyko upadków o 30%</strong> (CDC). Ćwiczenia nie zwiększają ryzyka kontuzji — wręcz je zmniejszają.</p>
-            <p class="source">Źródła: CDC, IHRSA, Gold's Gym Trends</p>
+            <div style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--color-border);">
+              <small style="color: var(--color-text-muted); display: flex; flex-direction: column; gap: 4px;">
+                <strong style="color: var(--color-text);">Źródła uzupełniające:</strong>
+                <a href="https://www.cdc.gov/physicalactivity/basics/older_adults/index.htm" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">1. CDC: Physical Activity Guidelines for Older Adults</a>
+                <a href="https://www.healthandfitness.org/resources/research/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">2. Health & Fitness Association (IHRSA)</a>
+              </small>
+            </div>
           </div>
         </div>
       </article>
@@ -438,7 +445,15 @@
             <h4>Mit 7: „Trening siłowy nie jest dla kobiet"</h4>
             <p>❌ <strong>Fakt:</strong> Kluczowy szczególnie w perimenopauzie i menopauzie. Buduje kości, chroni stawy, poprawia równowagę. NASM podkreśla wagę treningu dostosowanego do etapu życia.</p>
 
-            <p class="source">Źródła: CDC, AJCN, BMJ, NASM Trends</p>
+            <div style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--color-border);">
+              <small style="color: var(--color-text-muted); display: flex; flex-direction: column; gap: 4px;">
+                <strong style="color: var(--color-text);">Opracowano na podstawie:</strong>
+                <a href="https://www.cdc.gov/physicalactivity/basics/older_adults/index.htm" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">1. CDC: Physical Activity Basics</a>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/33355911/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">2. PubMed: Resistance Training in Older Adults (AJCN/NIH)</a>
+                <a href="https://bjsm.bmj.com/content/52/24/1544" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">3. BMJ: Physical activity and healthy ageing</a>
+                <a href="https://www.nasm.org/continuing-education/fitness-specializations/senior-fitness-specialist" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">4. NASM: Senior Fitness Guidelines</a>
+              </small>
+            </div>
           </div>
         </div>
       </article>
@@ -896,7 +911,7 @@
           </div>
           <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Rezonans cię nastraszył? Dyskopatia a ruch</h4>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Dlaczego diagnoza to nie wyrok bezruchu. Fakty medyczne o bólu kręgosłupa.</p>
-          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
         </div>
       </a>
 
@@ -906,7 +921,7 @@
           <picture>
             <source srcset="./assets/hero-bieganie.avif" type="image/avif">
             <source srcset="./assets/hero-bieganie.webp" type="image/webp">
-            <img src="./assets/hero-bieganie.png" alt="Bieganie niszczy kolana - prawda czy mit?" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
+            <img src="./assets/hero-bieganie.png" alt="Bieganie niszczy kolana - prawda czy mit?" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="360">
           </picture>
           <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-sm);">Zdrowie</div>
         </div>
@@ -916,14 +931,18 @@
           </div>
           <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Bieganie niszczy kolana — prawda czy mit?</h4>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Sprawdź, co mówi nauka o bieganiu po 50-tce i dlaczego Twoje kolana potrzebują ruchu.</p>
-          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
         </div>
       </a>
 
       <!-- Karta 2 -->
       <a href="sen-po-50.html" class="article-promo-card reveal" style="display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--color-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid var(--color-border);">
         <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="./assets/para_spi_spokojnie.png" alt="Sen i regeneracja po 50-tce" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
+          <picture>
+            <source srcset="./assets/para_spi_spokojnie.avif" type="image/avif">
+            <source srcset="./assets/para_spi_spokojnie.webp" type="image/webp">
+            <img src="./assets/para_spi_spokojnie.png" alt="Sen i regeneracja po 50-tce" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
+          </picture>
           <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-sm);">Zdrowie</div>
         </div>
         <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
@@ -932,7 +951,7 @@
           </div>
           <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Sen i regeneracja po 50-tce</h4>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Dlaczego sen to fundament zdrowia i wyników treningowych po 50. roku życia.</p>
-          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
         </div>
       </a>
 
@@ -950,7 +969,7 @@
     <div class="footer__inner">
       <div class="footer__brand">
         <a href="#top" class="logo" aria-label="FitPo50 — strona główna">
-          <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img logo__img--footer">
+          <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img logo__img--footer" width="72" height="72">
         </a>
         <p class="footer__brand-desc">Praktyczna wiedza o treningu, diecie i regeneracji dla osób po 50‑tce. Od Grześka — nie trenera, nie lekarza, po prostu kogoś, kto też ćwiczy.</p>
       </div>

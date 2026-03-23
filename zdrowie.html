@@ -104,90 +104,6 @@
   margin-bottom: var(--space-8);
 }
 
-/* Article Cards from Porady (Compact Version) */
-.articles-grid-preview {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-3);
-  margin-top: var(--space-8);
-  text-align: left;
-}
-
-.article-index-card {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  padding: var(--space-4);
-  text-decoration: none;
-  color: inherit;
-  background: var(--color-bg);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.article-index-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(14, 143, 170, 0.12);
-  border-color: var(--color-primary-light);
-}
-
-.article-index-card__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
-  margin-bottom: var(--space-3);
-}
-
-.article-index-card__label {
-  display: inline-flex;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--color-accent);
-  color: white;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.article-index-card__meta {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  font-weight: 600;
-}
-
-.article-index-card__title {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  line-height: 1.2;
-  margin-bottom: var(--space-2);
-  color: var(--color-primary);
-}
-
-.article-index-card__desc {
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
-  line-height: 1.4;
-  margin-bottom: var(--space-3);
-  flex-grow: 1;
-}
-
-.article-index-card__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
-.article-index-card__cta svg {
-  width: 14px;
-  height: 14px;
-}
 </style>
 </head>
 <body>
@@ -195,7 +111,7 @@
 <header class="header" id="top">
   <div class="container header__inner">
     <a href="index.html#top" class="logo" aria-label="FitPo50 — strona główna">
-      <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img">
+      <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img" width="48" height="48">
     </a>
     <button class="nav-toggle" aria-label="Otwórz menu nawigacji" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -219,7 +135,7 @@
       <picture>
         <source srcset="./assets/Hero_Spraw.avif" type="image/avif">
         <source srcset="./assets/Hero_Spraw.webp" type="image/webp">
-        <img src="./assets/Hero_Spraw.png" alt="Sprawdź zdrowie po 50-tce" loading="eager" width="1536" height="1024">
+        <img src="./assets/Hero_Spraw.png" alt="Sprawdź zdrowie po 50-tce" loading="eager" width="1200" height="800">
       </picture>
       <div class="subpage-hero__overlay"></div>
     </div>
@@ -245,62 +161,63 @@
         </p>
       </div>
 
-      <div class="articles-grid-preview" style="max-width: 680px; margin: 0 auto;">
-        <!-- Kafelka Dyskopatia -->
-        <a href="dyskopatia-po-50.html" class="article-index-card reveal">
-          <div class="article-index-card__top">
-            <span class="article-index-card__label">Zdrowie</span>
-            <span class="article-index-card__meta">10 min czytania</span>
-          </div>
-          <h3 class="article-index-card__title">Rezonans cię nastraszył? Dyskopatia a ruch</h3>
-          <p class="article-index-card__desc">Dlaczego diagnoza dyskopatii lub przepukliny dysku to nie wyrok bezruchu. Fakty naukowe o bólu kręgosłupa po 50-tce.</p>
-          <div class="article-index-card__cta">
-            Czytaj artykuł 
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </div>
-        </a>
+      <div class="carousel-viewport" data-simple-carousel="zdrowie" style="max-width: 1000px; margin: 0 auto;">
+        <div class="carousel-track">
+          <!-- Kafelka Dyskopatia -->
+          <a href="dyskopatia-po-50.html" class="article-index-card reveal">
+            <div class="article-index-card__top">
+              <span class="article-index-card__label">Zdrowie</span>
+              <span class="article-index-card__meta">10 min czytania</span>
+            </div>
+            <h3 class="article-index-card__title">Rezonans i dyskopatia a ruch po 50</h3>
+            <p class="article-index-card__desc">Diagnoza dyskopatii to nie wyrok bezruchu. Fakty o bólu kręgosłupa i bezpiecznym ruchu po 50-tce.</p>
+            <div class="article-index-card__cta">Czytaj artykuł -></div>
+          </a>
 
-        <!-- Kafelka Bieganie -->
-        <a href="bieganie-niszczy-kolana.html" class="article-index-card reveal">
-          <div class="article-index-card__top">
-            <span class="article-index-card__label">Zdrowie</span>
-            <span class="article-index-card__meta">12 min czytania</span>
-          </div>
-          <h3 class="article-index-card__title">Bieganie niszczy kolana — prawda czy mit?</h3>
-          <p class="article-index-card__desc">Sprawdź, co mówi nauka o bieganiu po 50-tce i dlaczego Twoje kolana potrzebują ruchu bardziej niż myślisz.</p>
-          <div class="article-index-card__cta">
-            Czytaj artykuł 
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </div>
-        </a>
+          <!-- Kafelka Bieganie -->
+          <a href="bieganie-niszczy-kolana.html" class="article-index-card reveal">
+            <div class="article-index-card__top">
+              <span class="article-index-card__label">Zdrowie</span>
+              <span class="article-index-card__meta">12 min czytania</span>
+            </div>
+            <h3 class="article-index-card__title">Bieganie niszczy kolana — prawda czy mit?</h3>
+            <p class="article-index-card__desc">Sprawdź, co mówi nauka o bieganiu po 50-tce i dlaczego Twoje kolana potrzebują ruchu bardziej niż myślisz.</p>
+            <div class="article-index-card__cta">Czytaj artykuł -></div>
+          </a>
 
-        <!-- Kafelka Sen -->
-        <a href="sen-po-50.html" class="article-index-card reveal">
-          <div class="article-index-card__top">
-            <span class="article-index-card__label">Zdrowie</span>
-            <span class="article-index-card__meta">10 min czytania</span>
-          </div>
-          <h3 class="article-index-card__title">Sen i regeneracja po 50-tce</h3>
-          <p class="article-index-card__desc">Dlaczego sen to fundament zdrowia i wyników treningowych po 50. roku życia.</p>
-          <div class="article-index-card__cta">
-            Czytaj artykuł 
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </div>
-        </a>
+          <!-- Kafelka Sen -->
+          <a href="sen-po-50.html" class="article-index-card reveal">
+            <div class="article-index-card__top">
+              <span class="article-index-card__label">Zdrowie</span>
+              <span class="article-index-card__meta">10 min czytania</span>
+            </div>
+            <h3 class="article-index-card__title">Sen i regeneracja po 50-tce</h3>
+            <p class="article-index-card__desc">Dlaczego sen to fundament zdrowia i wyników treningowych po 50. roku życia.</p>
+            <div class="article-index-card__cta">Czytaj artykuł -></div>
+          </a>
 
-        <!-- Kafelka Badania -->
-        <a href="badania-po-50.html" class="article-index-card reveal">
-          <div class="article-index-card__top">
-            <span class="article-index-card__label">Zdrowie</span>
-            <span class="article-index-card__meta">8 min czytania</span>
-          </div>
-          <h3 class="article-index-card__title">Badania przed treningiem po 50-tce</h3>
-          <p class="article-index-card__desc">Jakie badania naprawdę warto zrobić przed startem na siłowni i na co zwrócić uwagę, by trenować bezpiecznie.</p>
-          <div class="article-index-card__cta">
-            Czytaj artykuł 
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </div>
-        </a>
+          <!-- Kafelka Badania -->
+          <a href="badania-po-50.html" class="article-index-card reveal">
+            <div class="article-index-card__top">
+              <span class="article-index-card__label">Zdrowie</span>
+              <span class="article-index-card__meta">8 min czytania</span>
+            </div>
+            <h3 class="article-index-card__title">Badania przed treningiem po 50-tce</h3>
+            <p class="article-index-card__desc">Jakie badania naprawdę warto zrobić przed startem na siłowni i na co zwrócić uwagę, by trenować bezpiecznie.</p>
+            <div class="article-index-card__cta">Czytaj artykuł -></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Nawigacja karuzeli -->
+      <div class="carousel-nav" data-carousel-nav="zdrowie" hidden>
+        <button type="button" class="btn btn--primary" data-carousel-prev aria-label="Poprzednia strona">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg> WRÓĆ
+        </button>
+        <div class="carousel-indicator" data-carousel-indicator>Strona 1 z 1</div>
+        <button type="button" class="btn btn--primary" data-carousel-next aria-label="Następna strona">
+          DALEJ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </button>
       </div>
 
       <div style="text-align: center; margin-top: var(--space-12);">
@@ -315,7 +232,7 @@
     <div class="footer__inner">
       <div class="footer__brand">
         <a href="index.html#top" class="logo" aria-label="FitPo50 — strona główna">
-          <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img logo__img--footer">
+          <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img logo__img--footer" width="72" height="72">
         </a>
         <p class="footer__brand-desc">Praktyczna wiedza o treningu, diecie i regeneracji dla osób po 50‑tce. Od Grześka — nie trenera, nie lekarza, po prostu kogoś, kto też ćwiczy.</p>
       </div>

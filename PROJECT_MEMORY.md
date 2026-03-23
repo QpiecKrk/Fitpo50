@@ -91,6 +91,17 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
   - lista artykulow
   - kolejnosc
 
+## Standardy obrazow i mediow
+
+- **Logo (`logo.jpg`):**
+  - Oryginalne wymiary: 693x693px (kwadrat).
+  - W nagłówku (`.logo__img`): zawsze `width="48" height="48"`.
+  - W stopce (`.logo__img--footer`): zawsze `width="72" height="72"`.
+- **Zdjecia w artykulach:**
+  - Zawsze stosujemy `loading="lazy"`.
+  - Zawsze podajemy `width` i `height` odpowiadajace proporcjom obrazu.
+  - Rekomendowany format: `picture` z AVIF/WebP jako sourcami i fallbackiem <img>.
+
 ## Zrodla
 
 - Sekcja `Zrodla` powinna byc obecna tam, gdzie to zasadne.

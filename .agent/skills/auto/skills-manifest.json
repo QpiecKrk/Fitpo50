@@ -1,0 +1,24 @@
+{
+  "project": {
+    "enabled": true,
+    "lastGenerated": "2026-03-23T21:24:27.474Z",
+    "observationCount": 5,
+    "skillCount": 0,
+    "domain": "project",
+    "triggerGlobs": [
+      "**/*"
+    ],
+    "description": "Project for Fitpo50. 1 conventions."
+  },
+  "html": {
+    "enabled": true,
+    "lastGenerated": "2026-03-23T21:24:27.475Z",
+    "observationCount": 13,
+    "skillCount": 0,
+    "domain": "html",
+    "triggerGlobs": [
+      "**/*.html"
+    ],
+    "description": "Html for Fitpo50. 10 conventions."
+  }
+}

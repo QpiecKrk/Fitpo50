@@ -1,5 +1,8 @@
-// Log for verification
-console.log("FitPo50 Carousel Logic Active - v2");
+// Initialization guard to prevent double execution
+if (window.__fitpo50_initialized) {
+  console.log("FitPo50 already initialized. Skipping duplicate execution.");
+} else {
+  window.__fitpo50_initialized = true;
 
 (function () {
   'use strict';
@@ -72,7 +75,92 @@ console.log("FitPo50 Carousel Logic Active - v2");
         navToggle.focus();
       }
     });
+
+    document.addEventListener('click', (event) => {
+      if (!navOpen || window.innerWidth >= 768) return;
+      const target = event.target;
+      if (!nav.contains(target) && !navToggle.contains(target)) {
+        setNavState(false);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && navOpen) {
+        setNavState(false);
+      }
+    });
   }
+
+  // ----------------------------------------------------------
+  // HEADER SCROLL BEHAVIOR (hide on scroll down, show on up)
+  // ----------------------------------------------------------
+  const header = document.querySelector('.header');
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function updateHeader() {
+    const scrollY = window.scrollY;
+    if (scrollY > 80) {
+      if (scrollY > lastScrollY && scrollY > 200) {
+        header?.classList.add('header--hidden');
+      } else {
+        header?.classList.remove('header--hidden');
+      }
+      if (header) header.style.boxShadow = 'var(--shadow-sm)';
+    } else {
+      header?.classList.remove('header--hidden');
+      if (header) header.style.boxShadow = 'none';
+    }
+    lastScrollY = scrollY;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // ----------------------------------------------------------
+  // ARTICLE ACCORDIONS
+  // ----------------------------------------------------------
+  const articleCards = document.querySelectorAll('.article-card');
+
+  articleCards.forEach(card => {
+    const header = card.querySelector('.article-card__header');
+    const body = card.querySelector('.article-card__body');
+    if (!header || !body) return;
+
+    function toggleCard() {
+      const isOpen = card.classList.contains('is-open');
+      // Close all other cards
+      articleCards.forEach(otherCard => {
+        if (otherCard !== card && otherCard.classList.contains('is-open')) {
+          otherCard.classList.remove('is-open');
+          const otherHeader = otherCard.querySelector('.article-card__header');
+          if (otherHeader) otherHeader.setAttribute('aria-expanded', 'false');
+        }
+      });
+      // Toggle current
+      card.classList.toggle('is-open', !isOpen);
+      header.setAttribute('aria-expanded', String(!isOpen));
+      // Scroll into view if opening
+      if (!isOpen) {
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+
+    header.addEventListener('click', toggleCard);
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleCard();
+      }
+    });
+  });
 
   // ----------------------------------------------------------
   // ARTICLE CATALOG SEARCH & CAROUSEL
@@ -241,6 +329,90 @@ console.log("FitPo50 Carousel Logic Active - v2");
   }
 
   // ----------------------------------------------------------
+  // SIMPLE CAROUSELS (Subpages)
+  // ----------------------------------------------------------
+  function initSimpleCarousels() {
+    const carousels = document.querySelectorAll('[data-simple-carousel]');
+    
+    carousels.forEach(carousel => {
+      const track = carousel.querySelector('.carousel-track');
+      const nav = document.querySelector(`[data-carousel-nav="${carousel.dataset.simpleCarousel}"]`);
+      if (!track || !nav) return;
+
+      const items = Array.from(track.children);
+      const prevBtn = nav.querySelector('[data-carousel-prev]');
+      const nextBtn = nav.querySelector('[data-carousel-next]');
+      const indicator = nav.querySelector('[data-carousel-indicator]');
+      
+      let itemsPerPage = 3;
+      if (window.innerWidth < 640) itemsPerPage = 1;
+      else if (window.innerWidth < 1024) itemsPerPage = 2;
+
+      let currentPage = 0;
+      let totalPages = Math.ceil(items.length / itemsPerPage);
+
+      function update() {
+        track.innerHTML = '';
+        totalPages = Math.ceil(items.length / itemsPerPage);
+        
+        // Safety check for index
+        if (currentPage >= totalPages) currentPage = Math.max(0, totalPages - 1);
+
+        for (let i = 0; i < totalPages; i++) {
+          const page = document.createElement('div');
+          page.className = 'carousel-page carousel-page--3cols';
+          items.slice(i * itemsPerPage, (i + 1) * itemsPerPage).forEach(item => {
+            page.appendChild(item);
+          });
+          track.appendChild(page);
+        }
+
+        track.style.transform = `translateX(-${currentPage * 100}%)`;
+        if (indicator) indicator.textContent = `Strona ${currentPage + 1} z ${totalPages}`;
+        if (prevBtn) prevBtn.disabled = currentPage === 0;
+        if (nextBtn) nextBtn.disabled = currentPage === totalPages - 1;
+        
+        // Hide nav if only one page
+        nav.hidden = totalPages <= 1;
+      }
+
+      prevBtn?.addEventListener('click', () => {
+        if (currentPage > 0) {
+          currentPage--;
+          update();
+        }
+      });
+
+      nextBtn?.addEventListener('click', () => {
+        if (currentPage < totalPages - 1) {
+          currentPage++;
+          update();
+        }
+      });
+
+      // Handle resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          let newItemsPerPage = 3;
+          if (window.innerWidth < 640) newItemsPerPage = 1;
+          else if (window.innerWidth < 1024) newItemsPerPage = 2;
+          
+          if (newItemsPerPage !== itemsPerPage) {
+            itemsPerPage = newItemsPerPage;
+            update();
+          }
+        }, 250);
+      });
+
+      update();
+    });
+  }
+
+  initSimpleCarousels();
+
+  // ----------------------------------------------------------
   // SCROLL REVEAL & SMOOTH SCROLL
   // ----------------------------------------------------------
   const revealObserver = new IntersectionObserver((entries) => {
@@ -266,3 +438,4 @@ console.log("FitPo50 Carousel Logic Active - v2");
   });
 
 })();
+}
