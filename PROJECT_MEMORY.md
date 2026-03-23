@@ -29,6 +29,34 @@ Ten plik zbiera stałe ustalenia projektowe do stosowania przy kolejnych zmianac
   - `twitter:image`
   - `article:published_time`
   - `article:modified_time`
+  - `meta property="article:author"` jesli stosowane w pozostalych artykulach
+
+## SEO stron zbiorczych i glownej
+
+- Strona glowna powinna miec:
+  - `title`
+  - `meta name="description"`
+  - `link rel="canonical"`
+  - `og:title`
+  - `og:description`
+  - `og:type`
+  - `og:url`
+  - `og:image`
+  - `og:locale`
+  - `twitter:card`
+  - `twitter:title`
+  - `twitter:description`
+  - `twitter:image`
+- Strony zbiorcze (`porady.html`, `rusz-sie.html`, `jedzenie.html`, `zdrowie.html`) powinny miec:
+  - `title`
+  - `meta name="description"`
+  - `meta name="robots" content="index,follow"`
+  - `link rel="canonical"`
+  - komplet `og:*`
+  - komplet `twitter:*`
+  - schema `CollectionPage`
+- `porady.html` powinno uzywac `CollectionPage` z `mainEntity` typu `ItemList`.
+- Strony 3 krokow (`rusz-sie.html`, `jedzenie.html`, `zdrowie.html`) powinny uzywac prostego `CollectionPage` z `isPartOf` wskazujacym `WebSite`.
 
 ## Schema
 
@@ -45,6 +73,12 @@ Ten plik zbiera stałe ustalenia projektowe do stosowania przy kolejnych zmianac
   - `keywords`
   - `author`
   - `publisher`
+- Dla strony glownej utrzymujemy:
+  - `WebSite`
+  - `Organization`
+- Dla stron zbiorczych utrzymujemy:
+  - `CollectionPage`
+- Nie mieszamy typow schema bez potrzeby. Jesli strona jest lista tresci, preferujemy `CollectionPage`, a nie `Article`.
 
 ## Zrodla
 
@@ -55,6 +89,8 @@ Ten plik zbiera stałe ustalenia projektowe do stosowania przy kolejnych zmianac
   - `rel="noopener noreferrer"`
 - Nie zgadujemy konkretnych publikacji, jesli nie da sie ich uczciwie ustalic bez weryfikacji.
 - Gdy nie da sie podac konkretnego artykulu, mozna linkowac strone czasopisma, DOI albo strone instytucji.
+- Nie podajemy pozornie precyzyjnych cytowan typu "badanie z 2025", jesli w kodzie nie wskazujemy konkretnej publikacji.
+- W tematach zdrowotnych i suplementacyjnych preferujemy zrodla instytucjonalne, DOI, PubMed, czasopisma i przeglady systematyczne.
 
 ## Obrazy
 
@@ -73,17 +109,67 @@ Used for featured links within subpages or where a full-width grid isn't appropr
 - Hero moze miec `loading="eager"`.
 - Obrazy nizej w tresci i karty artykulow powinny miec `loading="lazy"` jesli to ma sens.
 - Gdzie to mozliwe, dodajemy `width` i `height`.
+- Hero, featured, listing i inline images powinny miec jawne `width` i `height`, zeby ograniczac CLS.
+- Dla kart artykulow i ilustracji wewnatrz tresci preferujemy:
+  - `loading="lazy"`
+  - zachowanie proporcji zgodnych z faktycznym plikiem
+- Dla logo tez warto podawac rozmiary, jesli nie koliduje to z obecnym layoutem.
+
+## Procedura dodawania nowego artykułu (Workflow)
+
+Dodanie nowego wpisu wymaga aktualizacji w 3-4 miejscach (zasada automatyzacji manualnej):
+
+1.  **Nowy plik HTML**: Stworzenie artykułu na bazie szablonu (np. `sen-po-50.html`).
+2.  **Strona kategorii**: Jeśli artykuł to "Zdrowie", musi trafić na `zdrowie.html` jako kafelk/tile.
+3.  **Strona zbiorcza**: Każdy nowy artykuł MUSI zostać dodany do listy na `porady.html` (z odpowiednim `data-category`).
+4.  **Sitemap**: Aktualizacja `sitemap.xml`.
+
+## Wygląd kafelków (Design Patterns)
+
+Mamy dwa główne typy linków do artykułów, które musimy zachować:
+
+- **Pełna Karta (`article-promo-card`)**: Używana na stronie głównej w "Czytelni". Zawiera zdjęcie, odznakę kategorii i animację `reveal`.
+- **Kompaktowy Kafel (`Compact Article Tile`)**: Używany na stronach kategorii (`rusz-sie.html`, etc.).
+    - **Bez zdjęcia**.
+    - **Eyebrow**: Mała, pomarańczowa odznaka kategorii na górze.
+    - **CTA**: Zawsze "Czytaj artykuł →".
+    - **Spójność**: Wszystkie kafelki na stronie kategorii muszą być identyczne graficznie (marginesy, zaokrąglenia, kolory).
 
 ## Sekcja: Najnowszy Artykuł (Featured)
 
-- Umieszczana pod sekcją BIO na stronie głównej.
-- **Badge**: Zawsze zawiera napis "UWAGA: nowy artykuł" z animacją `pulse-glow-intense`.
-- **Zdjecie**: Zawiera miniaturę (tilted/przekrzywioną) z najnowszego artykułu, z białą ramką (6px solid white) i cieniem.
-- **Hook**: Powinien być krótki, angażujący i nakierowany na korzyść czytelnika.
-- **Przycisk**: Nowoczesny CTA prowadzący bezpośrednio do pełnej treści artykułu.
+Używana na stronie głównej pod BIO. Prowadzi bezpośrednio do najświeższego wpisu. Przy każdym nowym artykule należy rozważyć podmianę linku w tej sekcji, aby promować najnowszą treść.
+
+## Stan projektu i nawigacja
+
+- **3 Filary**: Strona opiera się na trzech głównych kategoriach: **Ruch**, **Jedzenie**, **Zdrowie**.
+- **Kategoria Wiedza**: Została usunięta. Artykuły wcześniej przypisane do "Wiedzy" (np. Badania przed treningiem) są teraz w kategorii **Zdrowie**.
+- **Nawigacja**: Menu główne i kafelki na stronie głównej ("3 Podstawowe Kroki") prowadzą do substadiów tych trzech filarów.
+
+## Kompatybilność (Safari)
+
+- **Aspect-ratio**: Dla zdjęć stosujemy `width: 100%` i `aspect-ratio`, ale w sekcjach krytycznych (jak Bio) dodajemy jawne `max-width`, aby uniknąć problemów na Safari < 15.
+- **Flex Gap**: Starsze wersje Safari nie wspierają `gap` w Flexboxie. W sekcjach takich jak `steps-banner__actions` stosujemy fallbacki oparte na marginesach (`@supports not (gap: 1rem)`).
+- **Zabezpieczenia Grid**: Dla kontenerów z tekstem w Gridzie stosujemy `min-width: 0`, aby zapobiec rozciąganiu layoutu w Safari.
 
 ## Zasady pracy
 
 - Najpierw sprawdz aktualny stan plikow, potem edytuj.
 - Nie cofaj tych ustalen bez wyraznej prosby.
 - Zachowuj spojny standard SEO i on-page w calym repo.
+- Po dodaniu nowej indeksowalnej strony aktualizujemy `sitemap.xml` (z `<lastmod>` w formacie `YYYY-MM-DD`).
+- Jesli zmieniamy obraz referencyjny dla strony, aktualizujemy rowniez `og:image` i `twitter:image`.
+- Przy dodawaniu nowych sekcji pod BIO na stronie głównej, zachowujemy klasę `reveal` dla spójności animacji.
+
+## Mobile Responsiveness (kluczowe breakpointy)
+
+- **`< 480px`**: `footer__inner` i `articles-grid-preview` przechodzą na `1fr` (1 kolumna).
+- **`< 640px`**: `.featured-article__content` przechodzi na `grid-template-columns: 1fr`, obrazek wycentrowany z `margin-inline: auto`, przyciski na `width: 100%`. `.about-promo` przechodzi na `grid-template-columns: 1fr`.
+- **`< 360px`**: Dodatkowe zmniejszenia paddingów, fontów i badgy dla iPhone SE.
+- **`@supports not (gap: 1rem)`**: Fallback margin-based dla starszego Safari w `.steps-banner__actions`.
+
+## Sitemap Standard
+
+- `sitemap.xml` musi zawierać **wszystkie** publiczne strony.
+- Format wpisu: `<loc>` + `<lastmod>YYYY-MM-DD</lastmod>`.
+- `<lastmod>` aktualizujemy za każdym razem, gdy zmieniamy daną stronę.
+- Obecne strony w sitemap: `/`, `rusz-sie`, `jedzenie`, `zdrowie`, `porady`, `jak-zaczac-na-silowni-po-50`, `badania-po-50`, `bledy-50`, `silownia-dla-ludzi`, `motywacja-po-50`, `dieta-po-50`, `suplementacja-po-50`, `sen-po-50`.

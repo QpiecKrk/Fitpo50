@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FitPo50 | Trening i dieta po 50-tce</title>
 <meta name="description" content="FitPo50 to praktyczna wiedza o treningu, diecie i sprawności po 50-tce. Bez chaosu, bez straszenia, z naciskiem na to, co działa.">
+<meta name="robots" content="index,follow">
 <meta property="og:title" content="FitPo50 — Siła nie ma daty ważności">
 <meta property="og:description" content="Praktyczna wiedza o treningu, diecie i sprawności po 50-tce. Bez chaosu, bez straszenia, z naciskiem na to, co działa.">
 <meta property="og:type" content="website">
@@ -49,67 +50,6 @@
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css">
 <style>
-.hero__news {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  width: fit-content;
-  margin-bottom: var(--space-5);
-  padding: 14px 18px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, rgba(224, 122, 31, 0.96) 0%, rgba(255, 166, 43, 0.94) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: white;
-  text-decoration: none;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 18px 42px rgba(224, 122, 31, 0.28);
-  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.hero__news:hover {
-  transform: translateY(-3px) scale(1.01);
-  background: linear-gradient(135deg, rgba(229, 132, 43, 1) 0%, rgba(255, 179, 71, 1) 100%);
-  border-color: rgba(255, 255, 255, 0.34);
-  box-shadow: 0 22px 48px rgba(224, 122, 31, 0.36);
-}
-
-.hero__news-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 30px;
-  padding: 0 12px;
-  border-radius: 999px;
-  background: var(--color-accent);
-  color: white;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.hero__news-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.hero__news-copy strong {
-  font-size: 1rem;
-  line-height: 1.15;
-}
-
-.hero__news-copy span {
-  font-size: 0.86rem;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.hero__news svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-
 .about-promo {
   margin-top: var(--space-20);
   border-radius: var(--radius-lg);
@@ -232,14 +172,16 @@
 }
 
 @media (max-width: 640px) {
-  .hero__news {
-    width: 100%;
-    align-items: flex-start;
-    border-radius: var(--radius-md);
-  }
-
   .about-promo__content {
     padding: var(--space-7);
+  }
+
+  .about-promo {
+    grid-template-columns: 1fr;
+  }
+
+  .about-promo__visual {
+    min-height: 200px;
   }
 }
 </style>
@@ -916,7 +858,7 @@
       }
     </style>
 
-    <div class="articles-grid-preview" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8); margin-top: var(--space-12);">
+    <div class="articles-grid-preview articles-grid-preview--home" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8); margin-top: var(--space-12);">
       
 
       <!-- Karta 1 -->
