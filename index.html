@@ -220,7 +220,11 @@
      ============================================================ -->
 <section class="hero" id="hero">
   <div class="hero__bg">
-    <img src="./assets/hero.png" alt="Mężczyzna po 50-tce pewnie trenujący z hantlami w nowoczesnej siłowni" width="1920" height="1080" loading="eager">
+    <picture>
+      <source srcset="./assets/hero.avif" type="image/avif">
+      <source srcset="./assets/hero.webp" type="image/webp">
+      <img src="./assets/hero.png" alt="Mężczyzna po 50-tce pewnie trenujący z hantlami w nowoczesnej siłowni" width="1920" height="1080" loading="eager">
+    </picture>
   </div>
   <div class="hero__overlay"></div>
   <div class="container hero__content">

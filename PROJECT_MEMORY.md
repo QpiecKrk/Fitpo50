@@ -94,7 +94,43 @@ Ten plik zbiera stałe ustalenia projektowe do stosowania przy kolejnych zmianac
 
 ## Obrazy
 
-### Compact Article Tile (No-Image)
+### Format: `<picture>` z AVIF/WebP/PNG
+
+**Każdy obraz hero/featured musi używać elementu `<picture>`** z następującym schematem:
+
+```html
+<picture>
+  <source srcset="./assets/NAZWA.avif" type="image/avif">
+  <source srcset="./assets/NAZWA.webp" type="image/webp">
+  <img src="./assets/NAZWA.png" alt="..." loading="eager" width="W" height="H">
+</picture>
+```
+
+- **AVIF** — priorytetowy format (najmniejszy, ~40× mniejszy od PNG) — Safari 16+, Chrome, Firefox
+- **WebP** — fallback dla starszych przeglądarek
+- **PNG** — ostateczny fallback
+- `loading="eager"` dla hero, `loading="lazy"` dla pozostałych
+- `width` i `height` zawsze podajemy, aby uniknąć CLS
+
+### Generowanie AVIF i WebP
+
+Po wygenerowaniu nowego obrazu PNG, konwertujemy od razu:
+```bash
+ffmpeg -i NAZWA.png -c:v libaom-av1 -crf 30 -b:v 0 NAZWA.avif
+ffmpeg -i NAZWA.png -quality 85 NAZWA.webp
+```
+### Automatyzacja dla AI (Instrukcja dla agenta)
+
+Kiedy użytkownik poprosi o nowe zdjęcie, wykonaj te kroki:
+
+1.  **Generowanie**: Użyj narzędzia `generate_image`, aby stworzyć obraz PNG o odpowiednich wymiarach (np. 1024x1024 lub 1920x1080).
+2.  **Konwersja**:
+    - Sprawdź, czy `ffmpeg` jest dostępny. Jeśli tak, wykonaj konwersję do AVIF i WebP.
+    - Jeśli narzędzia brak, poproś użytkownika o zgodę na instalację przez `brew install ffmpeg`.
+3.  **Implementacja**: Wstaw obraz do kodu HTML, używając skrótu `<picture>` z AVIF/WebP/PNG i dodaj `loading="lazy"` (chyba że to Hero).
+4.  **Optymalizacja**: Upewnij się, że `width` i `height` są zgodne z faktycznym rozmiarem wygenerowanego pliku.
+
+
 Used for featured links within subpages or where a full-width grid isn't appropriate.
 
 - **Container**: `max-width: 320px` (for single card) or `minmax(200px, 1fr)` in a grid.
