@@ -238,4 +238,7 @@ Jesli artykul ma obrazy:
 - **KRYTYCZNE**: Nigdy nie pomijamy `article:modified_time` oraz `dateModified` w schema.
 - **KRYTYCZNE**: Obrazy MUSZA isc przez tag `<picture>` z AVIF i WebP. Nigdy nie zostawiamy samych `<img>` bez wymiarow i lazy loading.
 - **KRYTYCZNE**: W sekcjach "Więcej Porad" (stopka artykułu) używamy klasy `.articles-grid-preview`. NIGDY nie dodajemy tam stylów inline typu `grid-template-columns`. Układem zarządza centralnie `style.css` (1 kolumna na telefonie, 2 na tablecie, 3 na desktopie). CTA kart promocyjnych to zawsze tekstowe "Czytaj artykuł ->", a nazwa sekcji nie może zawierać słowa "Wiedza".
+- **KRYTYCZNE**: Sekcja Hero na `index.html` korzysta z animacji wejściowych (klasa `.hero__eyebrow`, `.hero__title` itd.) oraz efektu paralaksy (skrypt na dole strony). Przy edycji nagłówka należy zachować klasę `.floating` dla badge'a oraz dbać o to, by obraz tła miał `will-change: transform`.
+- **KRYTYCZNE**: Sekcja `featured-article` (pod biogramem na `index.html`) musi zawsze zawierać absolutnie najnowszy artykuł. Ponadto pierwsza karta w sekcji `articles-grid-preview` (Czytelnia) powinna być tym samym lub drugim w kolejności najnowszym wpisem.
+- **KRYTYCZNE**: Wszystkie nagłówki sekcji (`section-header`) muszą posiadać element `<div class="section-header__line"></div>` oraz sub-klasy animacyjne. Standard to: etykieta (slide), tytuł (fade-up), linia (scale-out) i opis (fade-in), wyzwalane przez klasę `.reveal`.
 - Zmiany techniczne, SEO i wizualne nie powinny przypadkiem zmieniac sensu tresci.

@@ -1372,6 +1372,51 @@ a:hover {
 .articles-grid-preview--home {
   gap: var(--space-8);
 }
+
+/* ============================================================
+   HERO ANIMATIONS
+   ============================================================ */
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.hero__eyebrow,
+.hero__title,
+.hero__subtitle,
+.hero__actions {
+  opacity: 0;
+  animation: heroEntrance 0.8s var(--ease-out) forwards;
+}
+
+.hero__eyebrow { 
+  animation-delay: 0.1s;
+  display: inline-block; /* Required for transform */
+}
+.hero__eyebrow.floating {
+  animation: heroEntrance 0.8s var(--ease-out) forwards, 
+             badgeFloat 3s ease-in-out infinite 0.9s;
+}
+
+.hero__title    { animation-delay: 0.3s; }
+.hero__subtitle { animation-delay: 0.5s; }
+.hero__actions  { animation-delay: 0.7s; }
+
+.hero__bg {
+  will-change: transform;
+}
+
 .footer__links a:hover { color: var(--color-text); }
 
 .footer__bottom {
@@ -1415,6 +1460,66 @@ a:hover {
   transform: translateY(0);
 }
 
+/* Section Header Specific Animations */
+.section-header .section-header__label {
+  display: block;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.8s var(--ease-out);
+}
+
+.section-header .section-header__title {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s var(--ease-out) 0.2s;
+}
+
+.section-header .section-header__line {
+  width: 60px;
+  height: 3px;
+  background: var(--color-accent);
+  margin: 1.5rem 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s var(--ease-out) 0.4s;
+}
+
+.section-header .section-header__desc {
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out) 0.6s;
+}
+
+/* Visibility triggers via existing .reveal system or .is-visible class */
+.section-header.is-visible .section-header__label,
+.section-header.reveal.is-visible .section-header__label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.section-header.is-visible .section-header__title,
+.section-header.reveal.is-visible .section-header__title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header.is-visible .section-header__line,
+.section-header.reveal.is-visible .section-header__line {
+  transform: scaleX(1);
+}
+
+.section-header.is-visible .section-header__desc,
+.section-header.reveal.is-visible .section-header__desc {
+  opacity: 1;
+}
+
+/* Center-aligned headers support */
+.section-header[style*="text-align: center"] .section-header__line,
+.section-header[style*="text-align:center"] .section-header__line {
+  margin-inline: auto;
+}
+
+
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -1422,6 +1527,42 @@ a:hover {
     transition: none;
   }
 }
+
+/* Staggered Reveal for Grids */
+.articles-grid .reveal:nth-child(1) { transition-delay: 0.1s; }
+.articles-grid .reveal:nth-child(2) { transition-delay: 0.2s; }
+.articles-grid .reveal:nth-child(3) { transition-delay: 0.3s; }
+.articles-grid .reveal:nth-child(4) { transition-delay: 0.4s; }
+
+.articles-grid-preview .reveal:nth-child(1) { transition-delay: 0.1s; }
+.articles-grid-preview .reveal:nth-child(2) { transition-delay: 0.2s; }
+.articles-grid-preview .reveal:nth-child(3) { transition-delay: 0.3s; }
+
+/* Article Card Hover Effects (Knowledge Base) */
+.article-card {
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Article Promo Card Hover Effects (Czytelnia / Footer) */
+.article-promo-card {
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+}
+.article-promo-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(14, 143, 170, 0.12);
+  border-color: var(--color-primary-light);
+}
+.article-promo-card:hover .article-promo-img {
+  transform: scale(1.06);
+}
+.article-promo-img {
+  transition: transform 0.6s var(--ease-out);
+}
+
 
 /* ============================================================
    DECORATIVE PATTERNS
