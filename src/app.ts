@@ -226,6 +226,12 @@
 
       const offset = currentPageIndex * 100;
       articleResults.style.transform = `translateX(-${offset}%)`;
+      
+      // Force visibility for items on the active page to avoid 'jumpy' reveal during slide
+      const activePage = articleResults.children[currentPageIndex] as HTMLElement;
+      if (activePage) {
+        activePage.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+      }
 
       carouselIndicator.textContent = `Strona ${currentPageIndex + 1} z ${totalPages}`;
       carouselPrev.disabled = currentPageIndex === 0;

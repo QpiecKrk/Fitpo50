@@ -218,6 +218,12 @@ if (window.__fitpo50_initialized) {
     const updateCarouselPosition = () => {
       if (!articleResults || !carouselIndicator || !carouselPrev || !carouselNext) return;
       articleResults.style.transform = `translateX(-${currentPageIndex * 100}%)`;
+      
+      const activePage = articleResults.children[currentPageIndex];
+      if (activePage) {
+        activePage.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+      }
+
       carouselIndicator.textContent = `Strona ${currentPageIndex + 1} z ${totalPages}`;
       carouselPrev.disabled = currentPageIndex === 0;
       carouselNext.disabled = currentPageIndex === totalPages - 1;
@@ -372,6 +378,12 @@ if (window.__fitpo50_initialized) {
         }
 
         track.style.transform = `translateX(-${currentPage * 100}%)`;
+
+        const activePage = track.children[currentPage];
+        if (activePage) {
+          activePage.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+        }
+
         if (indicator) indicator.textContent = `Strona ${currentPage + 1} z ${totalPages}`;
         if (prevBtn) prevBtn.disabled = currentPage === 0;
         if (nextBtn) nextBtn.disabled = currentPage === totalPages - 1;

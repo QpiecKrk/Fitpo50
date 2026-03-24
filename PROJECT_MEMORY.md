@@ -1,4 +1,4 @@
-# FitPo50 Project Memory
+x# FitPo50 Project Memory
 
 Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach.
 
@@ -168,6 +168,7 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
   - sekcja `Zrodla`
   - `.medical-disclaimer`
   - sekcja `.porady-preview` z 3 adekwatnymi kafelkami
+  - **Linkowanie wewnętrzne (Interlinking)**: W treści artykułu stosujemy maksymalnie 4 linki do innych artykułów wewnątrz serwisu. Linkujemy słowa kluczowe naturalnie występujące w tekście, nie zmieniając jego brzmienia (np. słowo „siłownia” staje się linkiem do artykułu o tym, jak zacząć).
 
 ## Kafelki i linkowanie artykulow
 
@@ -210,7 +211,7 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 
 ## Porady.html (Karuzela i Paginacja)
 
-- `porady.html` to czytelnia i główny katalog wszystkich artykułów (obecnie równo 9 artykułów). Złote zasady:
+- `porady.html` to czytelnia i główny katalog wszystkich artykułów (obecnie równo 11 artykułów). Złote zasady:
   1. **Zgodność liczników i warstwy SEO**: Licznik w HTML (np. `data-article-count`), rzeczywista liczba kafli na stronie oraz deklaracja wpisów w sekcji `<script type="application/ld+json">` (elementy `"numberOfItems"` oraz ich `"position"`) MUSZĄ się zawsze zgadzać co do sztuki. Jeśli oddajesz nowy artykuł, dopisz go na pozycję nr 1 w schemacie JSON-LD i wymuś przesunięcie pozostałych układów.
   2. **Struktura kart HTML**: Używamy pełnej zwięzłej struktury dla kafelków (`.article-index-card`): pomarańczowa odznaka `.article-index-card__label`, czysty tekst czasu `.article-index-card__meta` (bez ikon SVG), a CTA dolne to tekst "Otwórz ->". 
   3. **Wymogi ułożenia CSS Grid**: Karty KATEGORYCZNIE układają się w sztywnym podziale. Żeby pojedyncze artykuły na końcu karuzeli się nie rozciągały, definiujemy twardą siatkę: `grid-template-columns: repeat(4, 1fr)` (desktop), `repeat(2, 1fr)` (tablet), oraz `1fr` dla mobile. **Zakaz korzystania z `auto-fit`** w klasie `.carousel-page`.
