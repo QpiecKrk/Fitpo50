@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 18 notes | Score threshold: >40
+> 54 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -18,16 +18,36 @@
 
 **Stack:** TypeScript
 
-## 📝 NOTE: 1 uncommitted file(s) in working tree.\n\n## Project Standards
+## 📝 NOTE: 1 uncommitted file(s) in working tree.\n\n## Important Warnings
 
-- convention in walkthrough.md
-- convention in suplementacja-po-50.html
-- convention in motywacja-po-50.html
-- convention in zdrowie.html
-- convention in bledy-50.html
-- convention in silownia-dla-ludzi.html
-- convention in dyskopatia-po-50.html
-- convention in rusz-sie.html
+- **gotcha in task.md** — - - [/] **Weryfikacja**
++ - [x] **Weryfikacja**
+-   - [ ] Sprawdzenie 
+- **gotcha in scratchpad_o1gsw9jp.md** — - - [ ] Open the mobile menu (Issue: Click on nav-toggle hits the butt
+- **gotcha in scratchpad_o1gsw9jp.md** — - - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't seem 
+
+## Active: `.`
+
+- **Strengthened types Nawigacja**
+- **convention in badania-po-50.html**
+- **Strengthened types Zmie**
+- **Strengthened types Nawigacja**
+- **Strengthened types Nawigacja**
+
+## Project Standards
+
+- Strengthened types Nawigacja
+- convention in badania-po-50.html
+- Strengthened types Zmie
+- Strengthened types Nawigacja
+- Strengthened types Nawigacja
+- Strengthened types Nawigacja
+- Strengthened types Nawigacja
+- Strengthened types Nawigacja
+
+## Learned Patterns
+
+- When encountering this, fix by: problem-fix in walkthrough.md (seen 2x)
 
 ## Available Tools (ON-DEMAND only)
 - `query(q)` — Deep search when stuck

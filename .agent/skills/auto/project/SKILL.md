@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 1 conventions."
+description: "Project for Fitpo50. 3 gotchas, 4 conventions, 11 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,15 +10,113 @@ enabled: true
 
 # Project
 
-Auto-compiled from **5 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **25 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+
+## ⚠️ Anti-Patterns & Gotchas
+
+> **CRITICAL:** These are real gotchas from this project. Ignoring them WILL cause bugs.
+
+| ❌ Don't | Details |
+|----------|----------|
+| gotcha in task.md | - - [/] **Weryfikacja** + - [x] **Weryfikacja** -   - [ ] Sprawdzenie w symulatorze mobilnym +   - [ |
+| gotcha in scratchpad_o1gsw9jp.md | - - [ ] Open the mobile menu (Issue: Click on nav-toggle hits the button but menu doesn't open or li |
+| gotcha in scratchpad_o1gsw9jp.md | - - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't seem to trigger menu in screenshot) |
+
+## 🔧 Problem Playbooks
+
+### Patched security issue Open
+- - [ ] Open `index.html` and set viewport to 375x667.
++ - [x] Open `index.html` and set viewport to 375x667. (Attempted, reported Viewport Size: 500 x 580 in tool output, but window was resized)
+- - [ ] Find element with `id="main-nav"`.
++ - [x] Find element with `id="main-nav"`. (Found via JS injection)
+- - [ ] Retrieve properties of `id="main-nav"` (tag, class, size, styles).
++ - [x] Retrieve p
+
+**Actionable Steps:**
+1. Modified 1 files
+2. identifier: Open
+3. identifier: Attempted
+4. identifier: Viewport
+5. identifier: Size
+
+### problem-fix in scratchpad_ns03491g.md
+- - [ ] Open mobile menu (click hamburger)
++ - [ ] Open mobile menu (click hamburger) - Attempted clicking (924, 55) and (920, 65), not opening yet.
+
+📌 IDE AST Context: Modified symbols likely include [# Mobile Menu Fix Verification]
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in scratchpad_ns03491g.md
+- - [ ] Open index.html
++ - [x] Open index.html
+- - [ ] Set viewport to 375x667
++ - [x] Set viewport to 375x667
+
+📌 IDE AST Context: Modified symbols likely include [# Mobile Menu Fix Verification]
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in implementation_plan.md.resolved
+- # Plan naprawy widoczności menu mobilnego
++ # Plan naprawy menu mobilnego (v2) - Usunięcie konfliktu filtrów
+- Problem: Menu mobilne po otwarciu wyświetla się jako wąski, pusty pasek lub jest całkowicie niewidoczne.
++ Problem: Menu mobilne nadal wyświetla się jako wąski pasek, a ekran jest zablokowany.
+- Przyczyna: Właściwość `backdrop-filter: blur(...)` na elemencie `.header` powoduje, że dziec
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in scratchpad_uve2mjzw.md
+- - [x] Open index.html and set viewport to 375x667 (Currently 500x580 in browser, trying to work with it)
++ - [x] Open index.html and set viewport to 375x667 (Current: 500x580)
+- - [/] Open the mobile menu (Failed to trigger via pixel click (924,55))
++ - [/] Open the mobile menu (Still trying, pixel and keyboard failed)
+- - Will try to trigger via keyboard or different coordinates.
++ - Keyboard (
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in scratchpad_uve2mjzw.md
+- - [ ] Open index.html and set viewport to 375x667
++ - [x] Open index.html and set viewport to 375x667 (Currently 500x580 in browser, trying to work with it)
+- - [ ] Open the mobile menu
++ - [/] Open the mobile menu (Failed to trigger via pixel click (924,55))
+- - 
++ - Viewport is 500x580 instead of requested 375x667.
+- 
++ - Pixel click at (924, 55) did not open the menu. Button label remains "Ot
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in walkthrough.md.resolved
+- ![Fix: Menu mobilne z widocznymi linkami](file:///Users/grzegorzkupiec/.gemini/antigravity/brain/94f11028-6387-4cc3-ba4e-59bbbf0aae76/mobile_menu_open_check_v3_1774358351434.png)
++ ![Fix: Menu mobilne z widocznymi linkami](/Users/grzegorzkupiec/.gemini/antigravity/brain/94f11028-6387-4cc3-ba4e-59bbbf0aae76/mobile_menu_open_check_v3_1774358351434.png)
+- 
++ ---
+- Aby strona prezentowała się maksym
+
+**Actionable Steps:**
+1. Modified 1 files
 
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
+- 📐 **problem-fix in scratchpad_uve2mjzw.md — confirmed 3x** — - - [ ] Inspect computed height/width of '.nav' and '.nav__link' (Partially done via DOM inference)
+
+- 📐 **problem-fix in scratchpad_o1gsw9jp.md — confirmed 3x** — - - [x] Resize window (Current: 500x580 reported by read_page)
++ - [x] Resize window to mobile viewp
+- 📐 **Strengthened types Plan** — - # Plan poprawy jakości źródeł na stronie głównej ([index.html](file:///Users/grzegorzkupiec/Librar
 - 📐 **convention in walkthrough.md** — - ![Nowe CTA na stronie głównej (Czytaj artykuł ->)](file:///Users/grzegorzkupiec/.gemini/antigravit
 
 ## 🤔 Decisions & Trade-offs
 
+- **Optimized Plan** — - # Standaryzacja Wymiarów Logo dla Core Web Vitals (CLS)
++ # Plan poprawy jakości źródeł na stronie
 - **Optimized Aktualizacja** — -   - [/] Aktualizacja `PROJECT_MEMORY.md` o nowe standardy
 +   - [x] Aktualizacja `PROJECT_MEMORY.m
 - **Optimized Wdro** — - - [ ] **Wdrożenie Zmian**
@@ -28,4 +126,4 @@ Auto-compiled from **5 real patterns** in **Fitpo50**. This skill is auto-routed
 + # Standaryzacja Wymiarów Logo dla Core Web Vit
 
 ---
-*Auto-generated by BrainSync 🧠 | 5 patterns | 2026-03-23*
+*Auto-generated by BrainSync 🧠 | 25 patterns | 2026-03-24*
