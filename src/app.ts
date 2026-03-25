@@ -182,7 +182,7 @@
   const articleSearchResultsStrip = document.querySelector<HTMLElement>('[data-search-results-strip]');
   const categoryFilters = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-category-filter]'));
   const articleSort = document.querySelector<HTMLSelectElement>('[data-article-sort]');
-  const catalogSummary = document.querySelector<HTMLElement>('[data-catalog-summary]');
+  const catalogSummaries = document.querySelectorAll<HTMLElement>('[data-catalog-summary]');
 
   // Carousel elements
   const carouselPagination = document.querySelector<HTMLElement>('[data-article-pagination]');
@@ -305,10 +305,10 @@
         target.textContent = String(visibleItems.length);
       });
 
-      if (catalogSummary) {
+      catalogSummaries.forEach(summary => {
         const categoryLabel = categoryLabels[activeCategory] ?? 'we wszystkich kategoriach';
-        catalogSummary.textContent = `${visibleItems.length} ${visibleItems.length === 1 ? 'artykuł' : visibleItems.length < 5 ? 'artykuły' : 'artykułów'} ${categoryLabel}`;
-      }
+        summary.textContent = `${visibleItems.length} ${visibleItems.length === 1 ? 'artykuł' : visibleItems.length < 5 ? 'artykuły' : 'artykułów'} ${categoryLabel}`;
+      });
 
       if (articleSearchStatus) {
         articleSearchStatus.textContent = query.length === 0

@@ -180,7 +180,7 @@ if (window.__fitpo50_initialized) {
   const carouselIndicator = document.querySelector('[data-carousel-indicator]');
   const categoryFilters = Array.from(document.querySelectorAll('[data-category-filter]'));
   const articleSort = document.querySelector('[data-article-sort]');
-  const catalogSummary = document.querySelector('[data-catalog-summary]');
+  const catalogSummaries = document.querySelectorAll('[data-catalog-summary]');
   const articleSearchStatus = document.querySelector('[data-search-status]');
   const articleSearchEmpty = document.querySelector('[data-search-empty]');
   const articleSearchMatches = document.querySelector('[data-search-matches]');
@@ -279,7 +279,9 @@ if (window.__fitpo50_initialized) {
 
       // Update UI elements
       articleCountTargets.forEach(t => t.textContent = String(visibleItems.length));
-      if (catalogSummary) catalogSummary.textContent = `${visibleItems.length} artykułów ${categoryLabels[activeCategory] || ''}`;
+      catalogSummaries.forEach(function (summary) {
+        summary.textContent = `${visibleItems.length} artykułów ${categoryLabels[activeCategory] || ''}`;
+      });
       if (articleSearchStatus) articleSearchStatus.textContent = query.length === 0 ? 'Wpisz słowo...' : `Znaleziono ${visibleItems.length} wyników.`;
       if (articleSearchEmpty) articleSearchEmpty.hidden = visibleItems.length > 0;
       if (carouselPagination) carouselPagination.hidden = totalPages <= 1;
