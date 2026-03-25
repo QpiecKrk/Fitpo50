@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Canonical host: always use https://fitpo50.pl
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\.fitpo50\.pl$ [NC]
+RewriteRule ^ https://fitpo50.pl%{REQUEST_URI} [R=301,L]
