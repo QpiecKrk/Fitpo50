@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitPo50 | Trening i dieta po 50-tce</title>
+<meta name="description" content="FitPo50 to praktyczna wiedza o treningu, diecie i sprawności po 50-tce. Bez chaosu, bez straszenia, z naciskiem na to, co działa.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="FitPo50 — Siła nie ma daty ważności">
+<meta property="og:description" content="Praktyczna wiedza o treningu, diecie i sprawności po 50-tce. Bez chaosu, bez straszenia, z naciskiem na to, co działa.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fitpo50.pl/">
+<meta property="og:image" content="https://fitpo50.pl/assets/hero.png">
+<meta property="og:locale" content="pl_PL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FitPo50 — Siła nie ma daty ważności">
+<meta name="twitter:description" content="Praktyczna wiedza o treningu, diecie i sprawności po 50-tce. Bez chaosu, bez straszenia, z naciskiem na to, co działa.">
+<meta name="twitter:image" content="https://fitpo50.pl/assets/hero.png">
+<link rel="canonical" href="https://fitpo50.pl/">
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FitPo50",
+    "url": "https://fitpo50.pl/",
+    "inLanguage": "pl-PL",
+    "description": "Praktyczna wiedza o treningu, diecie i sprawności po 50-tce."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "FitPo50",
+    "url": "https://fitpo50.pl/",
+    "logo": "https://fitpo50.pl/assets/logo.jpg",
+    "sameAs": [
+      "https://www.instagram.com/fitpo50"
+    ]
+  }
+]
+</script>
+
+<!-- Fonts: Zodiak (display) from Fontshare + Work Sans (body) from Google -->
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css?v=1.1">
+<style>
+.about-promo {
+  margin-top: var(--space-20);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 24px 52px rgba(14, 143, 170, 0.18);
+  background: linear-gradient(135deg, #13485d 0%, #1a6d87 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.9fr);
+  color: white;
+}
+
+.about-promo__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: var(--space-6) var(--space-7);
+}
+
+.about-promo__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-4);
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.about-promo__eyebrow-star {
+  color: #ffd24d;
+  font-size: 0.95rem;
+  text-shadow: 0 0 14px rgba(255, 210, 77, 0.55);
+}
+
+.about-promo__text {
+  width: min(100%, 40rem);
+}
+
+.about-promo__title {
+  font-family: var(--font-display);
+  max-width: 14ch;
+  font-size: clamp(1.6rem, 2.6vw, 2.35rem);
+  line-height: 0.98;
+  margin-bottom: var(--space-2);
+  color: white;
+}
+
+.about-promo__hook {
+  max-width: 36ch;
+  margin-bottom: var(--space-4);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.35vw, 1.14rem);
+  line-height: 1.5;
+  color: white;
+}
+
+.about-promo__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: var(--space-4);
+}
+
+.about-promo__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.about-promo__visual {
+  position: relative;
+  min-height: 320px;
+}
+
+.about-promo__visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(19, 72, 93, 0.14), rgba(19, 72, 93, 0.02));
+  z-index: 1;
+}
+
+.about-promo__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.porady-preview__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-8);
+}
+
+@media (max-width: 900px) {
+  .about-promo {
+    grid-template-columns: 1fr;
+  }
+
+  .about-promo__content {
+    padding: var(--space-6);
+  }
+
+  .about-promo__visual {
+    min-height: 220px;
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-promo__content {
+    padding: var(--space-7);
+  }
+
+  .about-promo {
+    grid-template-columns: 1fr;
+  }
+
+  .about-promo__visual {
+    min-height: 200px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header" id="top">
+  <div class="container header__inner">
+    <a href="#top" class="logo" aria-label="FitPo50 — strona główna">
+      <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img" width="48" height="48">
+    </a>
+    <nav class="header__desktop-nav" aria-label="Nawigacja pulpit">
+      <a href="#o-nas" class="nav__link">O mnie</a>
+      <a href="#baza-wiedzy" class="nav__link">Baza wiedzy</a>
+      <a href="porady.html" class="nav__link">Porady</a>
+      <a href="https://www.instagram.com/fitpo50" class="nav__link" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+
+    
+    </div>
+<nav class="header__scroll" aria-label="Kategorie mobilne">
+  <div class="header__scroll-inner">
+    <a href="index.html" class="header__scroll-link header__scroll-link--active">Główna</a>
+    <a href="#baza-wiedzy" class="header__scroll-link">Wiedza</a>
+    <a href="#trendy" class="header__scroll-link">Trendy</a>
+    <a href="porady.html" class="header__scroll-link ">Porady</a>
+    <a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer" class="header__scroll-link">Instagram</a>
+  </div>
+</nav>
+</header>
+
+
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero__bg">
+    <picture>
+      <source srcset="./assets/hero.avif" type="image/avif">
+      <source srcset="./assets/hero.webp" type="image/webp">
+      <img src="./assets/hero.png" alt="Mężczyzna po 50-tce pewnie trenujący z hantlami w nowoczesnej siłowni" width="1200" height="670" loading="eager">
+    </picture>
+  </div>
+  <div class="hero__overlay"></div>
+  <div class="container hero__content">
+    <span class="hero__eyebrow floating">Aktywność, dieta, fakty</span>
+    <h1 class="hero__title">Siła nie ma<br>daty ważności</h1>
+    <p class="hero__subtitle">Praktyczny przewodnik po treningu, jedzeniu i regeneracji po 50-tce. Bez straszenia, bez medycznego żargonu — sprawdzone podejście od kogoś, kto sam jest w temacie.</p>
+    <div class="hero__actions">
+      <a href="#baza-wiedzy" class="btn btn--primary">
+        Poznaj podstawy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17l10-10M7 7h10v10"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fitpo50" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Śledź @fitpo50
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     O NAS
+     ============================================================ -->
+<section class="about section-padding" id="o-nas">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-header__label">O mnie</span>
+      <h2 class="section-header__title" style="font-family: var(--font-display); color: var(--color-primary);">Hej, jestem <span class="about__name-highlight" style="color: var(--color-accent);">Grzesiek</span></h2>
+      <div class="section-header__line"></div>
+    </div>
+
+    <div class="about__story reveal" style="align-items: center;">
+      <div class="about__images-col" style="display: flex; flex-direction: column; padding-bottom: 40px;">
+        <div class="about__image-wrap" style="width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); filter: contrast(105%) saturate(110%) sepia(10%); border: 6px solid white; transform: rotate(-2deg); z-index: 2; overflow: hidden; position: relative;">
+          <!-- Nakładka kolorystyczna filtru graficznego -->
+          <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14, 143, 170, 0.1), rgba(224, 122, 31, 0.1)); mix-blend-mode: overlay; z-index: 1;"></div>
+          <picture>
+            <source srcset="./assets/hero.avif" type="image/avif">
+            <source srcset="./assets/hero.webp" type="image/webp">
+            <img src="./assets/hero.png" alt="Trening na siłowni" loading="lazy" width="800" height="447" style="width: 100%; height: 100%; object-fit: cover;">
+          </picture>
+        </div>
+        <div class="about__image-wrap" style="width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); filter: contrast(105%) saturate(110%) sepia(10%); border: 6px solid white; transform: rotate(3deg) translateY(-40px) translateX(20px); z-index: 1; overflow: hidden; position: relative;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14, 143, 170, 0.1), rgba(224, 122, 31, 0.1)); mix-blend-mode: overlay; z-index: 1;"></div>
+          <picture>
+            <source srcset="./assets/bio-outdoor.avif" type="image/avif">
+            <source srcset="./assets/bio-outdoor.webp" type="image/webp">
+            <img src="./assets/bio-outdoor.png" alt="Bieganie w parku" loading="lazy" width="800" height="597" style="width: 100%; height: 100%; object-fit: cover;">
+          </picture>
+        </div>
+      </div>
+
+      <div class="about__text-col" style="font-size: 0.95rem; line-height: 1.7;">
+        <p class="about__lead" style="font-size: 1.25rem; font-family: var(--font-display); color: var(--color-text); line-height: 1.4; margin-bottom: var(--space-4);">
+          Mam <strong style="color: var(--color-primary);">ponad 50 lat.</strong> W pewnym momencie rzuciłem palenie i zrozumiałem, że jeśli nie wypełnię tej pustki czymś dobrym, prędzej czy później wrócę do starego.
+        </p>
+
+        <p class="about__text" style="font-size: 0.95rem; margin-bottom: var(--space-3);">
+          U mnie tą nową rutyną stała się <strong>siłownia.</strong> Przez pierwszy rok ćwiczyłem z <a href="https://www.instagram.com/_athletic_body__" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent); font-weight: 700; text-decoration: underline;">Filipem</a> — nie po to, żeby wyglądać jak kulturysta, tylko żeby nauczyć się wszystkiego porządnie, spokojnie i bez głupich błędów. To była jedna z <strong>lepszych decyzji</strong>, jakie wtedy podjąłem.
+        </p>
+
+        <blockquote class="about__quote" style="font-size: 1.1rem; background: var(--color-surface-2); border-left: 4px solid var(--color-accent); padding: var(--space-4); margin: var(--space-5) 0; border-radius: 0 8px 8px 0;">
+          Zegarek sportowy — to on naprawdę <strong style="color: var(--color-accent);">zmienił moje myślenie.</strong> Kroki, tętno, sen, codzienna aktywność — nagle przestałem działać „na oko”. Zacząłem widzieć <strong>liczby</strong>, a za nimi swoje prawdziwe nawyki.
+        </blockquote>
+
+        <p class="about__text" style="font-size: 0.95rem; margin-bottom: var(--space-3);">
+          Dziś nie palę i ruszam się codziennie. <strong>Godzina aktywności</strong> to dla mnie nic nadzwyczajnego — po prostu część życia, tak naturalna jak spotkanie z kimś bliskim czy poranna kawa.
+        </p>
+
+        <p class="about__text" style="font-size: 0.95rem; margin-bottom: var(--space-3);">
+          Znam też tę mniej wygodną stronę tego wszystkiego: <em style="color: var(--color-text-muted);">zwątpienie, stare kontuzje, zmęczenie pracą, chaos porad z internetu.</em> Sam przez to przechodziłem. Właśnie dlatego stworzyłem <strong style="color: var(--color-primary);">FitPo50</strong> — miejsce, w którym zbieram to, co naprawdę ma sens: ruch, jedzenie, suplementy, regenerację i zdrowie po pięćdziesiątce.
+        </p>
+
+        <p class="about__text" style="font-size: 0.95rem; margin-bottom: var(--space-5);">
+          Nie interesuje mnie fit-lans ani puste motywacyjne hasła. Interesuje mnie to, <strong>co działa.</strong> To, czym się tu dzielę, opieram nie tylko na własnym doświadczeniu, ale też na <strong>wiedzy medycznej i badaniach naukowych</strong>, które czytam, porządkuję i przekładam na normalny, ludzki język.
+        </p>
+
+        <p class="about__text about__text--cta" style="font-size: 1.05rem; font-weight: 600; border-top: 1px solid var(--color-border); padding-top: var(--space-4);">
+          Jeśli jesteś w podobnym miejscu — <a href="#baza-wiedzy" style="color: var(--color-accent); border-bottom: 2px solid var(--color-accent); padding-bottom: 2px; text-decoration: none;">wpadaj.</a> Może właśnie teraz jest dobry moment, żeby coś wreszcie zmienić.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         3 PODSTAWOWE KROKI (Banner)
+         ============================================================ -->
+    <div class="steps-banner reveal">
+      <div class="steps-banner__card">
+        <h2 class="steps-banner__title">
+          <strong>WRÓĆ DO FORMY PO 50-TCE.</strong>
+          <span>to 3 Podstawowe Kroki</span>
+        </h2>
+        <div class="steps-banner__actions">
+          <a href="rusz-sie.html" class="btn btn--primary steps-banner__btn">Zacznij się ruszać</a>
+          <a href="jedzenie.html" class="btn btn--accent steps-banner__btn">Uporządkuj jedzenie</a>
+          <a href="zdrowie.html" class="btn btn--outline steps-banner__btn" style="color: var(--color-primary); border-color: var(--color-primary);">Sprawdź zdrowie</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         NAJNOWSZY ARTYKUŁ (Featured)
+         ============================================================ -->
+    <div class="featured-article reveal">
+      <div class="featured-article__content">
+        <div class="featured-article__text">
+          <span class="featured-article__badge">UWAGA: nowy artykuł</span>
+          <h2 class="featured-article__title">Zaciśnij dłoń. Właśnie zrobiłeś ważniejszy test zdrowotny niż pomiar ciśnienia.</h2>
+          <p class="featured-article__excerpt">Jedno ściśnięcie mówi o Twoim sercu więcej niż myślisz. Poznaj wyniki badań The Lancet na 140 000 osób i sprawdź swoje normy.</p>
+          
+          <a href="sila-chwytu-po-50.html" class="featured-article__btn">
+            Sprawdź swoją siłę chwytu
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="featured-article__image-wrap">
+          <picture>
+            <img src="./assets/sila_chwytu_1_dynamometr.png" alt="Osoba dojrzała wykonująca test siły chwytu dynamometrem" loading="lazy" width="640" height="640">
+          </picture>
+        </div>
+      </div>
+    </div>
+    <!-- Opcjonalnie: Tło lub grafika jeśli potrzebna, ale tu skupiamy się na mocnym CTA i Badge -->
+  </div>
+</section>
+
+<!-- ============================================================
+     BAZA WIEDZY
+     ============================================================ -->
+<section class="knowledge section-padding" id="baza-wiedzy">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-header__label">Baza wiedzy</span>
+      <h2 class="section-header__title">Wszystko, co musisz wiedzieć</h2>
+      <div class="section-header__line"></div>
+      <p class="section-header__desc">Szybka baza podstaw na start. Rozwiń temat albo przejdź do pełnej czytelni <a href="porady.html">porad</a>, jeśli chcesz więcej konkretu.</p>
+    </div>
+
+    <div class="articles-grid">
+
+      <!-- ARTICLE 1 -->
+      <article class="article-card reveal" id="article-1">
+        <div class="article-card__header" role="button" tabindex="0" aria-expanded="false" aria-controls="article-1-body">
+          <div class="article-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11v11h-11z"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+          </div>
+          <div class="article-card__meta">
+            <span class="article-card__number">01</span>
+            <h3 class="article-card__title">Jak zacząć na siłowni po 50‑tce</h3>
+          </div>
+          <svg class="article-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="article-card__body" id="article-1-body">
+          <div class="article-card__content">
+            <h4>Pierwszy krok jest najtrudniejszy</h4>
+            <p>Wejście na siłownię po 50-tce może onieśmielać — młodzi ludzie wokół, niezrozumiały sprzęt, obawy o zdrowie. Ale prawda jest taka: <strong>dorośli 65+ odwiedzają siłownie częściej niż jakakolwiek inna grupa wiekowa</strong> (raport IHRSA 2023). Nie jesteś wyjątkiem — jesteś częścią rosnącego trendu.</p>
+
+            <h4>Od czego zacząć?</h4>
+            <ul>
+              <li><strong>Zbadaj się.</strong> Wizyta u lekarza to nie formalność — to twój punkt startowy. Powiedz lekarzowi, że planujesz trening siłowy.</li>
+              <li><strong>Wybierz ćwiczenia wielostawowe.</strong> Przysiady, wiosłowanie, wyciskanie, podciąganie (z asystą) — to fundamenty. Angażują wiele grup mięśniowych jednocześnie.</li>
+              <li><strong>Zacznij od 2–3 sesji tygodniowo, po 30 minut.</strong> To wystarczy. CDC zaleca 150 minut umiarkowanego cardio + 2 dni siły + ćwiczenia równowagi tygodniowo.</li>
+              <li><strong>Forma ważniejsza niż ciężar.</strong> Naucz się wzorców ruchowych ZANIM zwiększysz obciążenie. Progressive overload — stopniowe zwiększanie — to klucz.</li>
+              <li><strong>Rozgrzewka jest obowiązkowa.</strong> 10 minut na orbitreku lub rowerze + mobilność stawów. Nie bierz tego na luz.</li>
+            </ul>
+
+            <h4>Czego unikać?</h4>
+            <p>Najczęstszy błąd początkujących po 50-tce: <strong>trenowanie jak za 20 lat</strong>. Twoje ciało się zmieniło — i to jest OK. Nie musisz bić rekordów. Musisz być konsekwentny i mądry. Minimum <strong>48 godzin przerwy</strong> przed ponownym treningiem tej samej grupy mięśniowej.</p>
+
+            <p>Pamiętaj: regularna aktywność fizyczna <strong>zmniejsza ryzyko upadków o 30%</strong> (CDC). Ćwiczenia nie zwiększają ryzyka kontuzji — wręcz je zmniejszają.</p>
+            <div style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--color-border);">
+              <small style="color: var(--color-text-muted); display: flex; flex-direction: column; gap: 4px;">
+                <strong style="color: var(--color-text);">Źródła uzupełniające:</strong>
+                <a href="https://www.cdc.gov/physicalactivity/basics/older_adults/index.htm" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">1. CDC: Physical Activity Guidelines for Older Adults</a>
+                <a href="https://www.healthandfitness.org/resources/research/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">2. Health & Fitness Association (IHRSA)</a>
+              </small>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE 2 -->
+      <article class="article-card reveal" id="article-2">
+        <div class="article-card__header" role="button" tabindex="0" aria-expanded="false" aria-controls="article-2-body">
+          <div class="article-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="article-card__meta">
+            <span class="article-card__number">02</span>
+            <h3 class="article-card__title">7 mitów o treningu po 50‑tce</h3>
+          </div>
+          <svg class="article-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="article-card__body" id="article-2-body">
+          <div class="article-card__content">
+            <p>Internet pełen jest porad fitness dla „seniorów" — niestety wiele z nich to bzdury. Oto siedem najczęstszych mitów i&nbsp;naukowa prawda.</p>
+
+            <h4>Mit 1: „Ćwiczenia po 50 są niebezpieczne"</h4>
+            <p>❌ <strong>Fakt:</strong> Regularna aktywność zmniejsza ryzyko upadków o 30% (CDC). Ćwiczenia ZMNIEJSZAJĄ ryzyko kontuzji, nie zwiększają.</p>
+
+            <h4>Mit 2: „Tracę mięśnie, więc po co ćwiczyć?"</h4>
+            <p>❌ <strong>Fakt:</strong> Osoby 60+ mogą zyskać do <strong>20% siły mięśniowej</strong> przy regularnym treningu oporowym (American Journal of Clinical Nutrition). Sarkopenię MOŻNA spowolnić w każdym wieku.</p>
+
+            <h4>Mit 3: „Za późno, żeby zacząć"</h4>
+            <p>❌ <strong>Fakt:</strong> Ciało adaptuje się w KAŻDYM wieku — nawet 70+, 80+. Badanie BMJ potwierdza korzyści z rozpoczęcia ćwiczeń nawet w późnym wieku.</p>
+
+            <h4>Mit 4: „Cardio wystarczy"</h4>
+            <p>❌ <strong>Fakt:</strong> Cardio NIE buduje gęstości kości, nie zachowuje masy mięśniowej. Trening siłowy to fundament — cardio to ważny, ale DODATKOWY element.</p>
+
+            <h4>Mit 5: „Nie chcę być za muskularny/a"</h4>
+            <p>❌ <strong>Fakt:</strong> Po 50-tce hormonalnie nie da się „przypadkiem" zbudować ogromnych mięśni. Efekt: szczupła sylwetka, lepsza postawa, szybszy metabolizm.</p>
+
+            <h4>Mit 6: „Im więcej, tym lepiej"</h4>
+            <p>❌ <strong>Fakt:</strong> 2–3 sesje siłowe tygodniowo po 30 minut to optymalny zakres. Recovery jest CZĘŚCIĄ treningu — nie luksusem.</p>
+
+            <h4>Mit 7: „Trening siłowy nie jest dla kobiet"</h4>
+            <p>❌ <strong>Fakt:</strong> Kluczowy szczególnie w perimenopauzie i menopauzie. Buduje kości, chroni stawy, poprawia równowagę. NASM podkreśla wagę treningu dostosowanego do etapu życia.</p>
+
+            <div style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--color-border);">
+              <small style="color: var(--color-text-muted); display: flex; flex-direction: column; gap: 4px;">
+                <strong style="color: var(--color-text);">Opracowano na podstawie:</strong>
+                <a href="https://www.cdc.gov/physicalactivity/basics/older_adults/index.htm" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">1. CDC: Physical Activity Basics</a>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/33355911/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">2. PubMed: Resistance Training in Older Adults (AJCN/NIH)</a>
+                <a href="https://bjsm.bmj.com/content/52/24/1544" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">3. BMJ: Physical activity and healthy ageing</a>
+                <a href="https://www.nasm.org/continuing-education/fitness-specializations/senior-fitness-specialist" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">4. NASM: Senior Fitness Guidelines</a>
+              </small>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE 3 -->
+      <article class="article-card reveal" id="article-3">
+        <div class="article-card__header" role="button" tabindex="0" aria-expanded="false" aria-controls="article-3-body">
+          <div class="article-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div class="article-card__meta">
+            <span class="article-card__number">03</span>
+            <h3 class="article-card__title">Białko i dieta po 50‑tce</h3>
+          </div>
+          <svg class="article-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="article-card__body" id="article-3-body">
+          <div class="article-card__content">
+            <h4>Białko — fundament po 50-tce</h4>
+            <p>Z wiekiem nasze ciało gorzej przyswaja białko. Dlatego po 50-tce potrzebujemy go WIĘCEJ, nie mniej. Zalecane spożycie to <strong>1.0–1.6 g białka na kg masy ciała dziennie</strong> (vs. 0.8 g dla młodszych osób).</p>
+            <p>Alarmujący fakt: <strong>~46% osób powyżej 51 roku życia NIE spełnia dziennego zapotrzebowania na białko</strong> (UCLA Health). To oznacza przyspieszoną utratę masy mięśniowej, osłabione kości i wolniejszą regenerację.</p>
+
+            <h4>Jak jeść białko?</h4>
+            <ul>
+              <li><strong>Rozłóż równomiernie w ciągu dnia.</strong> 25–30 g białka w każdym posiłku jest lepsze niż 80 g na kolację.</li>
+              <li><strong>Łącz z treningiem siłowym.</strong> Trening + białko = najlepszy efekt na masę mięśniową. Jedno bez drugiego to połowa potencjału.</li>
+              <li><strong>Wybieraj różnorodne źródła:</strong> drób, ryby, jaja, nabiał, rośliny strączkowe, orzechy.</li>
+            </ul>
+
+            <h4>Ogólne zasady diety po 50-tce</h4>
+            <p>30-letnie badanie opublikowane w <strong>Nature Medicine (2025)</strong> wykazało, że dieta AHEI daje <strong>86% większe szanse na zdrowe starzenie się</strong>. Co to oznacza w praktyce?</p>
+            <ul>
+              <li><strong>Więcej:</strong> owoce, warzywa, pełne ziarna, nienasycone tłuszcze, orzechy, nasiona, rośliny strączkowe</li>
+              <li><strong>Mniej:</strong> tłuszcze trans, sód, napoje słodzone, czerwone i przetworzone mięso</li>
+              <li><strong>Ultra-przetworzona żywność (UPF)</strong> odwrotnie koreluje ze zdrowym starzeniem się — ograniczaj do minimum</li>
+            </ul>
+            <p>I nie zapominaj o <strong>nawodnieniu</strong> — po 50-tce mechanizm pragnienia słabnie, więc pij regularnie, nawet gdy nie czujesz pragnienia.</p>
+
+            <p class="source">Źródła: UCLA Health, Harvard Health, Nature Medicine 2025, NCOA, NIA</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE 4 -->
+      <article class="article-card reveal" id="article-4">
+        <div class="article-card__header" role="button" tabindex="0" aria-expanded="false" aria-controls="article-4-body">
+          <div class="article-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="article-card__meta">
+            <span class="article-card__number">04</span>
+            <h3 class="article-card__title">Plan tygodnia: od zera do bohatera</h3>
+          </div>
+          <svg class="article-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="article-card__body" id="article-4-body">
+          <div class="article-card__content">
+            <p>Oto przykładowy plan tygodniowy dla osoby 50+ zaczynającej przygodę z regularnym treningiem. Plan jest zgodny z zaleceniami CDC: 150 min umiarkowanego cardio + 2 dni siły + ćwiczenia równowagi.</p>
+
+            <h4>Poniedziałek — Siłownia (30 min)</h4>
+            <ul>
+              <li>Rozgrzewka: 10 min orbitrek/rower</li>
+              <li>Przysiady (goblet squat) — 3×10</li>
+              <li>Wiosłowanie hantlem — 3×10 na stronę</li>
+              <li>Wyciskanie hantli na ławce — 3×10</li>
+              <li>Deska (plank) — 3×20 sek</li>
+            </ul>
+
+            <h4>Wtorek — Cardio + mobilność (40 min)</h4>
+            <ul>
+              <li>30 min marsz/rower w umiarkowanym tempie</li>
+              <li>10 min stretching i mobilność stawów</li>
+            </ul>
+
+            <h4>Środa — Odpoczynek aktywny</h4>
+            <p>Lekki spacer, basen, joga. Regeneracja jest CZĘŚCIĄ treningu.</p>
+
+            <h4>Czwartek — Siłownia (30 min)</h4>
+            <ul>
+              <li>Rozgrzewka: 10 min</li>
+              <li>Wykroki (lunges) — 3×8 na nogę</li>
+              <li>Ściąganie drążka (lat pulldown) — 3×10</li>
+              <li>Wyciskanie stojąc (shoulder press) — 3×10</li>
+              <li>Martwy ciąg rumuński — 3×10</li>
+            </ul>
+
+            <h4>Piątek — Cardio (30 min)</h4>
+            <ul>
+              <li>Rower stacjonarny lub orbitrek, tempo umiarkowane</li>
+              <li>Opcjonalnie: 10 min ćwiczeń równowagi (stanie na jednej nodze, tandem walk)</li>
+            </ul>
+
+            <h4>Sobota — Aktywność rekreacyjna</h4>
+            <p>Dłuższy spacer, wycieczka rowerowa, pływanie. Baw się ruchem!</p>
+
+            <h4>Niedziela — Odpoczynek</h4>
+            <p>Pełna regeneracja. Sen 7–8 godzin to fundament — nie luksus.</p>
+
+            <p><strong>Progressive overload:</strong> Co 1–2 tygodnie dodaj powtórzenie, serię lub niewielkie obciążenie. Postęp ma być powolny i stały.</p>
+            <p class="source">Źródła: CDC, ACSM, Gold's Gym Trends</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE 5 -->
+      <article class="article-card reveal" id="article-5">
+        <div class="article-card__header" role="button" tabindex="0" aria-expanded="false" aria-controls="article-5-body">
+          <div class="article-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="article-card__meta">
+            <span class="article-card__number">05</span>
+            <h3 class="article-card__title">Trendy fitness: co działa, a&nbsp;co to ściema?</h3>
+          </div>
+          <svg class="article-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="article-card__body" id="article-5-body">
+          <div class="article-card__content">
+            <p>Każdy rok przynosi nowe buzzwordy w fitness. Przeanalizowałem raporty ACSM, NASM, Gold's Gym i Les Mills. Oto co naprawdę ma znaczenie, a co jest chwilową modą.</p>
+
+            <h4>✅ Trening siłowy — niekwestionowany lider</h4>
+            <p>Wszystkie raporty są zgodne: <strong>trening siłowy to #1 trend dla osób 50+</strong>. ACSM umieścił „programy fitness dla starszych dorosłych" na 2. miejscu swojego rankingu trendów. Les Mills podkreśla, że siła w różnych formach (joga, pilates, obwodówki) jest kluczowa dla KAŻDEGO wieku.</p>
+
+            <h4>✅ Recovery jako strategia postępu</h4>
+            <p>Gold's Gym stawia recovery na piedestale: <strong>cold plunges, sauny infrared, terapia perkusyjna, optymalizacja snu</strong>. To nie luksus — to narzędzia, które przyspieszają regenerację i pozwalają trenować konsekwentniej.</p>
+
+            <h4>✅ Active aging / longevity</h4>
+            <p>Les Mills nazywa „longevity" następną wielką granicą fitness. Połączenie siły, mobilności i równowagi — to jest recepta na niezależne i aktywne życie po 60, 70, 80+.</p>
+
+            <h4>⚠️ GLP-1 / leki odchudzające (Ozempic, Wegovy)</h4>
+            <p>Trend GLP-1 jest ogromny, ale NASM ostrzega: <strong>bez treningu siłowego tracisz mięśnie, nie tylko tłuszcz</strong>. Jeśli bierzesz GLP-1, trening oporowy jest KONIECZNY. Leki nie zastąpią aktywności fizycznej.</p>
+
+            <h4>⚠️ Wearables i tracking</h4>
+            <p>Smartwatche i ringi fitness mogą być pomocne — ale obsesja na punkcie danych bywa kontrproduktywna. Słuchaj ciała, nie tylko algorytmu.</p>
+
+            <p class="source">Źródła: ACSM Top Trends, NASM Trends, Gold's Gym Trends, Les Mills</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE 6 -->
+      <article class="article-card reveal" id="article-6">
+        <div class="article-card__header" role="button" tabindex="0" aria-expanded="false" aria-controls="article-6-body">
+          <div class="article-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </div>
+          <div class="article-card__meta">
+            <span class="article-card__number">06</span>
+            <h3 class="article-card__title">Sen i regeneracja — dlaczego odpoczynek to trening</h3>
+          </div>
+          <svg class="article-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="article-card__body" id="article-6-body">
+          <div class="article-card__content">
+            <h4>Trening łamie — sen naprawia</h4>
+            <p>Każdy trening siłowy to kontrolowane uszkodzenie włókien mięśniowych. Prawdziwy wzrost siły i masy mięśniowej nie odbywa się na siłowni — <strong>odbywa się w nocy, podczas snu</strong>. Badanie opublikowane w <strong>Cell (UC Berkeley, 2025)</strong> pokazało, że głęboki sen non-REM uruchamia uwalnianie hormonu wzrostu, który bezpośrednio buduje mięśnie, wzmacnia kości i redukuje tkankę tłuszczową.</p>
+
+            <h4>Ile snu potrzebujesz?</h4>
+            <p>Minimum <strong>7–8 godzin</strong> nieprzerwanego snu. Badanie z <strong>BMC Geriatrics (2025)</strong> na osobach 50+ wykazało, że optymalny czas snu (6–9h) jest silnie powiązany z zachowaniem masy mięśniowej, sprawnością poznawczą i brakiem depresji. Za krótki sen przyspiesza sarkopenię — utratę mięśni związaną z wiekiem.</p>
+            <p>Badanie z <strong>Physiological Reports</strong> potwierdziło: nawet <strong>jedna noc niedoboru snu</strong> podnosi kortyzol i obniża syntezę białek mięśniowych — czyli cofasz efekty treningu.</p>
+
+            <h4>Dni odpoczynku to nie lenistwo</h4>
+            <ul>
+              <li><strong>Min. 48h przerwy</strong> przed treningiem tej samej grupy mięśniowej — to nie opinia, to fizjologia.</li>
+              <li><strong>1–2 dni pełnego odpoczynku w tygodniu</strong> — ACSM zaleca to nawet zaawansowanym.</li>
+              <li><strong>Aktywna regeneracja:</strong> lekki spacer, basen, joga, stretching — to przyspiesza regenerację, nie spowalnia.</li>
+            </ul>
+
+            <h4>Praktyczne tipy na lepszy sen</h4>
+            <ul>
+              <li>Stała pora zasypiania i budzenia — również w weekendy</li>
+              <li>Ostatni posiłek 3–4h przed snem (jelita potrzebują ~5h na trawienie)</li>
+              <li>Brak ekranów 60 min przed snem</li>
+              <li>Chłodna sypialnia (18–20°C)</li>
+              <li>Trening rano wspomaga zegar biologiczny i głęboki sen w nocy</li>
+            </ul>
+
+            <p class="source">Źródła: UC Berkeley / Cell (2025), BMC Geriatrics (2025), Frontiers in Neuroscience (2025), CNN Health (2025), ACSM</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE 7 -->
+      <article class="article-card reveal" id="article-7">
+        <div class="article-card__header" role="button" tabindex="0" aria-expanded="false" aria-controls="article-7-body">
+          <div class="article-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="article-card__meta">
+            <span class="article-card__number">07</span>
+            <h3 class="article-card__title">Równowaga i mobilność — broń przeciw upadkom</h3>
+          </div>
+          <svg class="article-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="article-card__body" id="article-7-body">
+          <div class="article-card__content">
+            <h4>Upadki to nie „chłopskie sprawy” — to problem #1 po 60-tce</h4>
+            <p>Każdego roku w USA dochodzi do <strong>ponad miliona hospitalizacji związanych z upadkami</strong> osób starszych (CDC). Najczęstsza przyczyna? Nie śliskość podłogi — <strong>słabe mięśnie, ograniczona mobilność stawów i zaburzona równowaga</strong>. Każdy z tych elementów można trenować.</p>
+
+            <h4>Co mówi nauka?</h4>
+            <p>Przegląd <strong>27 badań klinicznych (Life, 2025)</strong> pokazał skuteczność różnych programów:</p>
+            <ul>
+              <li><strong>Tai Chi:</strong> redukcja upadków o 31–58%</li>
+              <li><strong>Program Otago</strong> (siła + równowaga w domu): redukcja o 23–40%</li>
+              <li><strong>Trening równowagi reaktywnej:</strong> redukcja upadków w laboratorium o 50–75%</li>
+              <li><strong>Trening wieloskładnikowy</strong> (siła + równowaga + mobilność): redukcja o 20–45%</li>
+            </ul>
+            <p>Najlepsze efekty dają programy trwające <strong>12–24 miesiące</strong> — równowaga wymaga systematyczności.</p>
+
+            <h4>Proste ćwiczenia do wykonania w domu</h4>
+            <ul>
+              <li><strong>Stanie na jednej nodze</strong> — 30 sek na stronę, trzymając się krzesła (stopniowo puszczaj)</li>
+              <li><strong>Tandem walk</strong> — marsz stopa za stopą, pięta do palców, 10 kroków</li>
+              <li><strong>Wstawanie z krzesła bez rąk</strong> — świetny test siły nóg i równowagi</li>
+              <li><strong>Krążenia kostek</strong> — poprawia stabilność stawu skokowego</li>
+              <li><strong>Rozciąganie biodra i łydki</strong> — poprawa długości kroku i chodu (badanie: po 4 tyg. rozciągania parametry chodu wracają do poziomu młodych dorosłych)</li>
+            </ul>
+
+            <h4>Elastyczność = dłuższe życie</h4>
+            <p>Nowe badania pokazują, że <strong>osoby z gorszą elastycznością mają sztywniejsze tętnice</strong> — co jest czynnikiem ryzyka chorób serca. Regularne rozciąganie może zmniejszać sztywność tętnic, szczególnie u mężczyzn w średnim wieku (BBC Science Focus, 2025).</p>
+
+            <p class="source">Źródła: CDC, Life — systematic review (2025), PeerJ (2025), Journal of Aging Research, BBC Science Focus (2025), Rochester Athletic Club / Mayo Clinic</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE 8 -->
+      <article class="article-card reveal" id="article-8">
+        <div class="article-card__header" role="button" tabindex="0" aria-expanded="false" aria-controls="article-8-body">
+          <div class="article-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M9 16l2 2 4-4"/></svg>
+          </div>
+          <div class="article-card__meta">
+            <span class="article-card__number">08</span>
+            <h3 class="article-card__title">Suplementy po 50‑tce — co ma sens, a co to wyrzucanie pieniędzy</h3>
+          </div>
+          <svg class="article-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="article-card__body" id="article-8-body">
+          <div class="article-card__content">
+            <h4>Najpierw dieta, potem suplementy</h4>
+            <p>Suplementy NIE zastąpią zdrowego jedzenia — ale po 50-tce niektóre składniki trudniej dostarczyć z samej diety. Dr Eric Verdin, badacz biologii starzenia, codziennie bierze cztery suplementy. Eksperci z <strong>New York Times (2025)</strong> potwierdzają: witamina D, B12 i omega-3 to trójka, którą najczęściej zalecają osobom 50+.</p>
+
+            <h4>✅ Witamina D</h4>
+            <p><strong>~35% dorosłych ma niedobory</strong> (Cleveland Clinic). Po 50-tce skóra produkuje ją mniej efektywnie. Kluczowa dla kości, mięśni i odporności. Zalecenie: <strong>zrób badanie krwi</strong> — dawka zależy od poziomu. Przeciętnie 1000–2000 IU dziennie.</p>
+
+            <h4>✅ Witamina B12</h4>
+            <p>Z wiekiem wchłanianie B12 z pożywienia spada. Niedobory prowadzą do zmęczenia, uszkodzeń nerwów i problemów z pamięcią. Szczególnie ważna jeśli ograniczasz mięso.</p>
+
+            <h4>✅ Omega-3 (kwasy tłuszczowe)</h4>
+            <p>Wspierają serce i mózg. Harvard T.H. Chan potwierdza: zmniejszają ryzyko chorób sercowo-naczyniowych, obniżają ciśnienie i poprawiają funkcje naczyń krwionośnych. Najlepiej z ryb (2–3 porcje/tydzień), ale suplement jest sensowny jeśli ryb nie jesz regularnie.</p>
+
+            <h4>✅ Kreatyna — nie tylko dla kulturystów</h4>
+            <p>Zaskakujące? Metaanaliza z <strong>American Journal of Lifestyle Medicine (2024)</strong> pokazała: kreatyna u osób 48–84 lat zwiększyła siłę w wyciskaniu na ławce i prasie nóg. W jednym badaniu mężczyźni 50–71 lat po 32 tyg. treningu z kreatyną zyskali <strong>+30 kg w prasie nóg i +14 kg w klatce</strong>. Poza mięśniami — wstępne badania sugerują korzyści poznawcze. Dawka: min. 5g dziennie.</p>
+
+            <h4>❌ Co raczej NIE działa?</h4>
+            <ul>
+              <li><strong>Kolagen w proszku</strong> — brak solidnych dowodów na skuteczność doustnego kolagenu na stawy u osób zdrowych</li>
+              <li><strong>„Spalacze tłuszczu”</strong> — marketing. Żaden suplement nie „spala" tłuszczu bez deficytu kalorycznego</li>
+              <li><strong>Mega-dawki witamin</strong> — więcej ≠ lepiej. Nadmiar witaminy A, E czy żelaza może szkodzić</li>
+            </ul>
+            <p>❗ Zawsze skonsultuj suplementację z lekarzem — interakcje z lekami są realne, szczególnie po 50-tce.</p>
+
+            <p class="source">Źródła: Business Insider / Dr Eric Verdin (2025), NYT (2025), Cleveland Clinic, Harvard T.H. Chan, American Journal of Lifestyle Medicine (2024)</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRENDY
+     ============================================================ -->
+<section class="trends section-padding" id="trendy">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-header__label">Obecne Trendy</span>
+      <h2 class="section-header__title">Co naprawdę działa?</h2>
+      <div class="section-header__line"></div>
+      <p class="section-header__desc">Szybki przegląd trendów fitness — oceniamy wiarygodność i&nbsp;przydatność dla osób&nbsp;50+.</p>
+    </div>
+
+    <div class="trends-grid">
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--works">✅ Działa</span>
+        <h3 class="trend-card__title">Trening siłowy</h3>
+        <p class="trend-card__desc">Niekwestionowany fundament. Buduje mięśnie, wzmacnia kości, poprawia metabolizm. ACSM, NASM i Les Mills jednogłośnie — #1 dla 50+.</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--works">✅ Działa</span>
+        <h3 class="trend-card__title">Recovery i regeneracja</h3>
+        <p class="trend-card__desc">Cold plunge, sauna IR, optymalizacja snu. Gold's Gym stawia regenerację na równi z treningiem. Min. 48h przerwy dla tej samej grupy mięśniowej.</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--works">✅ Działa</span>
+        <h3 class="trend-card__title">Longevity / active aging</h3>
+        <p class="trend-card__desc">Połączenie siły, mobilności i równowagi. Les Mills nazywa to „następną wielką granicą". Nie trening dla seniorów — trening dla NIEZALEŻNOŚCI.</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--caution">⚠️ Ostrożnie</span>
+        <h3 class="trend-card__title">GLP-1 / leki (Ozempic)</h3>
+        <p class="trend-card__desc">Skuteczne w utracie wagi, ale bez treningu siłowego tracisz mięśnie. NASM ostrzega: leki nie zastąpią aktywności fizycznej. Konsultuj z lekarzem.</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--caution">⚠️ Ostrożnie</span>
+        <h3 class="trend-card__title">Wearables i biohacking</h3>
+        <p class="trend-card__desc">Smartwatche pomagają monitorować postępy, ale obsesja na punkcie danych bywa kontrproduktywna. Użyteczne narzędzie, nie cel sam w sobie.</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--works">✅ Działa</span>
+        <h3 class="trend-card__title">Autofagia i głodówka przerywana</h3>
+        <p class="trend-card__desc">Pierwszy trial kliniczny u ludzi (2025) potwierdził: głodówka przerywana aktywuje autofagię — naturalne „sprzątanie" komórek. Metoda 16/8 poprawia BMI, insulinowrażliwość i markery starzenia. Uwaga po 50-tce: pilnuj białka w oknie jedzenia i skonsultuj z lekarzem, jeśli bierzesz leki.</p>
+      </div>
+
+    </div>
+
+    <!-- NIE DZIAŁA -->
+    <div class="section-header reveal" style="margin-top: var(--space-16);">
+      <h2 class="section-header__title">Co nie działa?</h2>
+      <div class="section-header__line"></div>
+      <p class="section-header__desc">Popularne przekonania, które nauka obaliła</p>
+    </div>
+
+    <div class="trends-grid">
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--myth">❌ Nie działa</span>
+        <h3 class="trend-card__title">Spot reduction — lokalne spalanie tłuszczu</h3>
+        <p class="trend-card__desc">100 brzuszków dziennie nie spali tłuszczu z brzucha. Ciało samo decyduje, skąd bierze energię. Żadne ćwiczenie nie „spala" tłuszczu z wybranego miejsca — to wielokrotnie obalony mit (Journal of Strength &amp; Conditioning Research).</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--myth">❌ Nie działa</span>
+        <h3 class="trend-card__title">Detoksy i oczyszczające soki</h3>
+        <p class="trend-card__desc">Wątroba i nerki robią detoks 24/7 — nie potrzebujesz drogich soków. „Detoksykacyjne" diety to marketing, nie nauka. Brak dowodów klinicznych, że pomagają w odchudzaniu lub „oczyszczaniu" (British Dietetic Association).</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--myth">❌ Nie działa</span>
+        <h3 class="trend-card__title">Rozciąganie statyczne przed treningiem</h3>
+        <p class="trend-card__desc">Klasyczny rozciąg przed wysiłkiem NIE chroni przed kontuzjami i może nawet zmniejszyć siłę mięśni. Zamiast tego: dynamiczna rozgrzewka (przysiady z ciężarem ciała, krążenia ramion, marsz z wysokim unoszeniem kolan). Rozciąganie statyczne — po treningu (CDC, ACSM).</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--myth">❌ Nie działa</span>
+        <h3 class="trend-card__title">„No pain, no gain” — bez bólu nie ma efektów</h3>
+        <p class="trend-card__desc">Ból mięśni nie jest wskaźnikiem efektywnego treningu. DOMS (opóźniona bolesność mięśni) to reakcja ochronna organizmu na nowe obciążenie, nie dowód postępu. Co więcej, badania z Frontiers in Psychology pokazują, że osoby ćwiczące z umiarkowana intensywnością częściej budują trwały nawyk niż te, które forsują się do bólu. Ostry ból w stawie? To sygnał kontuzji, nie postępu (Massachusetts General Hospital, Military Health System 2024).</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--myth">❌ Nie działa</span>
+        <h3 class="trend-card__title">Mięśnie zamieniają się w tłuszcz po zaprzestaniu ćwiczeń</h3>
+        <p class="trend-card__desc">Biologicznie niemożliwe — mięśnie (miocyty) i tkanka tłuszczowa (adipocyty) to zupełnie różne typy komórek. Gdy przestajesz ćwiczyć, mięśnie się kurzą (atrofia), a nadwyżka kaloryczna prowadzi do odkładania tłuszczu. Oba procesy zachodzą jednocześnie, tworząc iluzję „premiany” (The Journal of Physiology, Piedmont Healthcare).</p>
+      </div>
+
+      <div class="trend-card reveal">
+        <span class="trend-card__badge trend-card__badge--myth">❌ Nie działa</span>
+        <h3 class="trend-card__title">Więcej potu = więcej spalonych kalorii</h3>
+        <p class="trend-card__desc">Pocenie się to mechanizm chłodzenia ciała, nie miernik spalania tłuszczu. Ilość potu zależy od temperatury, wilgotności, genetyki i poziomu nawodnienia — nie od ilości spalonych kalorii. Badanie z Medicine and Science in Sports and Exercise potwierdza: spalanie zależy od obciążenia mechanicznego treningu, nie od reakcji termoregulacyjnej organizmu (Affinity Health, 2024).</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INSTAGRAM CTA
+     ============================================================ -->
+<section class="instagram-cta section-padding" id="instagram">
+  <div class="container">
+    <div class="instagram-cta__inner reveal">
+      <span class="section-header__label">Instagram</span>
+      <h2 class="instagram-cta__title">Codzienne dawki motywacji</h2>
+      <div class="section-header__line"></div>
+      <p class="instagram-cta__desc">Reelsy, tipy, mity do obalenia — wszystko w krótkich, praktycznych filmach. Dołącz do @fitpo50 na Instagramie.</p>
+
+      <div class="reels-grid">
+        <div class="reel-card">
+          <div class="reel-card__play"><svg viewBox="0 0 16 16"><path d="M5 3l8 5-8 5V3z"/></svg></div>
+          <div class="reel-card__content">
+            <p class="reel-card__title">3 ćwiczenia na początek</p>
+            <p class="reel-card__views">12.4k wyświetleń</p>
+          </div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-card__play"><svg viewBox="0 0 16 16"><path d="M5 3l8 5-8 5V3z"/></svg></div>
+          <div class="reel-card__content">
+            <p class="reel-card__title">Mit: za późno na siłownię</p>
+            <p class="reel-card__views">8.7k wyświetleń</p>
+          </div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-card__play"><svg viewBox="0 0 16 16"><path d="M5 3l8 5-8 5V3z"/></svg></div>
+          <div class="reel-card__content">
+            <p class="reel-card__title">Białko po 50-tce</p>
+            <p class="reel-card__views">15.1k wyświetleń</p>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://www.instagram.com/fitpo50" class="btn btn--accent" target="_blank" rel="noopener noreferrer" style="margin-top: var(--space-8);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Obserwuj @fitpo50
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PORADY PREVIEW SECTION
+     ============================================================ -->
+<section class="porady-preview section-padding" id="porady-preview" style="background-color: var(--bg-surface);">
+  <div class="container">
+    <div class="section-header reveal" style="text-align: center;">
+      <span class="section-header__label">Czytelnia</span>
+      <h2 class="section-header__title">Najnowsze Porady i Artykuły</h2>
+      <div class="section-header__line" style="margin-inline: auto;"></div>
+      <p class="section-header__desc">Praktyczna wiedza, którą możesz wdrożyć na najbliższym treningu. Czas na czytanie zamiast scrollowania.</p>
+    </div>
+
+    <style>
+      .article-promo-card:hover .article-promo-img {
+        transform: scale(1.05);
+      }
+      .article-promo-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(14, 143, 170, 0.15) !important;
+        border-color: var(--color-primary-light) !important;
+      }
+    </style>
+
+    <div class="articles-grid-preview articles-grid-preview--home">
+      
+      <!-- Karta Nowość: Siła Chwytu -->
+      <a href="sila-chwytu-po-50.html" class="article-promo-card reveal" style="display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--color-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid var(--color-border);">
+        <div style="position: relative; height: 200px; overflow: hidden;">
+          <picture>
+            <img src="./assets/sila_chwytu_1_dynamometr.png" alt="Test siły chwytu" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
+          </picture>
+          <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-sm);">Zdrowie</div>
+        </div>
+        <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--space-3); font-size: 0.85rem; color: var(--color-text-muted); font-weight: 500;">
+            <span style="display: flex; align-items: center; gap: 4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 7 min czytania</span>
+          </div>
+          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Zaciśnij dłoń. Właśnie zrobiłeś ważniejszy test zdrowotny niż pomiar ciśnienia.</h4>
+          <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Dlaczego uścisk dłoni mówi o Twoim sercu więcej niż ciśnieniomierz?</p>
+          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj -></span>
+        </div>
+      </a>
+
+      <!-- Karta: Trening Maszynowy -->
+      <a href="trening-maszynowy-po-50.html" class="article-promo-card reveal" style="display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--color-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid var(--color-border);">
+        <div style="position: relative; height: 200px; overflow: hidden;">
+          <picture>
+            <source srcset="./assets/maszyny_1_chest_press_1774368225570.avif" type="image/avif">
+            <img src="./assets/maszyny_1_chest_press_1774368225570.png" alt="Trening maszynowy po 50-tce" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
+          </picture>
+          <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-sm);">Ruch</div>
+        </div>
+        <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--space-3); font-size: 0.85rem; color: var(--color-text-muted); font-weight: 500;">
+            <span style="display: flex; align-items: center; gap: 4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 8 min czytania</span>
+          </div>
+          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Pierwsze kroki na siłowni</h4>
+          <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">30-dniowy plan treningowy na maszynach od zera.</p>
+          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
+        </div>
+      </a>
+
+      <!-- Karta: Dyskopatia po 50-tce -->
+      <a href="dyskopatia-po-50.html" class="article-promo-card reveal" style="display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--color-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid var(--color-border);">
+        <div style="position: relative; height: 200px; overflow: hidden;">
+          <picture>
+            <source srcset="./assets/mri_confident.avif" type="image/avif">
+            <source srcset="./assets/mri_confident.webp" type="image/webp">
+            <img src="./assets/mri_confident.png" alt="Dyskopatia po 50-tce" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;" class="article-promo-img" loading="lazy" width="640" height="640">
+          </picture>
+          <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-sm);">Zdrowie</div>
+        </div>
+        <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--space-3); font-size: 0.85rem; color: var(--color-text-muted); font-weight: 500;">
+            <span style="display: flex; align-items: center; gap: 4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10 min czytania</span>
+          </div>
+          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Dyskopatia a ruch</h4>
+          <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Fakty o kręgosłupie i bólu.</p>
+          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj -></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="porady-preview__actions reveal">
+      <a href="porady.html" class="btn btn--outline">Przejdź do wszystkich porad <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+    </div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="#top" class="logo" aria-label="FitPo50 — strona główna">
+          <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img logo__img--footer" width="72" height="72">
+        </a>
+        <p class="footer__brand-desc">Praktyczna wiedza o treningu, diecie i regeneracji dla osób po 50‑tce. Od Grześka — nie trenera, nie lekarza, po prostu kogoś, kto też ćwiczy.</p>
+      </div>
+
+      <div>
+        <h4 class="footer__heading">Nawigacja</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="#o-nas">O mnie</a></li>
+          <li><a href="#baza-wiedzy">Baza wiedzy</a></li>
+          <li><a href="#trendy">Obecne Trendy</a></li>
+          <li><a href="porady.html" style="color: var(--color-primary);">Porady</a></li>
+          <li><a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer__heading">Śledź nas</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer">Instagram @fitpo50</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__disclaimer">⚠️ Uwaga: Autor nie jest lekarzem, trenerem personalnym ani dietetykiem. Treści mają charakter informacyjny i edukacyjny. Przed rozpoczęciem treningów skonsultuj się ze specjalistą — szczególnie jeśli masz schorzenia przewlekłe lub urazy.</p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    // Hero Parallax Effect
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const heroBg = document.querySelector('.hero__bg');
+      if (heroBg && scrolled < window.innerHeight) {
+        heroBg.style.transform = `translateY(${scrolled * 0.15}px)`;
+      }
+    });
+  </script>
+  <script src="./dist/app.js" defer></script>
+
+<nav class="bottom-nav" aria-label="Nawigacja dolna">
+  <a href="index.html" class="bottom-nav__item bottom-nav__item--active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Dom</span>
+  </a>
+  <a href="porady.html" class="bottom-nav__item ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    <span>Porady</span>
+  </a>
+  <a href="#baza-wiedzy" class="bottom-nav__item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <span>Wiedza</span>
+  </a>
+  <a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer" class="bottom-nav__item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    <span>Instagram</span>
+  </a>
+</nav>
+</body>
+</html>
