@@ -1,4 +1,4 @@
-x# FitPo50 Project Memory
+# FitPo50 Project Memory
 
 Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach.
 
@@ -87,7 +87,7 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 - Dla stron zbiorczych utrzymujemy `CollectionPage`.
 - `porady.html` powinno uzywac `CollectionPage` z `mainEntity` typu `ItemList`.
 - Dane w schema musza zgadzac sie z realna zawartoscia strony:
-  - liczba elementow
+  - Liczba artykułów: 14 (głównie Zdrowie i Ruch, 1 nowy w Jedzenie: "Jedz więcej")
   - lista artykulow
   - kolejnosc
 
@@ -98,7 +98,8 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
   - W nagłówku (`.logo__img`): zawsze `width="48" height="48"`.
   - W stopce (`.logo__img--footer`): zawsze `width="72" height="72"`.
 - **Zdjecia w artykulach:**
-  - Zawsze stosujemy `loading="lazy"`.
+  - Domyslnie stosujemy `loading="lazy"`.
+  - Dla hero stosujemy `loading="eager"`.
   - Zawsze podajemy `width` i `height` odpowiadajace proporcjom obrazu.
   - Rekomendowany format: `picture` z AVIF/WebP jako sourcami i fallbackiem <img>.
 
@@ -147,10 +148,10 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 - Przy optymalizacji obrazow generujemy:
   - `AVIF` jako format priorytetowy
   - `WebP` jako fallback
-- Jesli narzedzia sa dostepne, mozna uzywac:
-  - `avifenc`
-  - `cwebp`
-  - albo `ffmpeg`
+- Do konwersji uzywamy:
+  - `avifenc` dla AVIF
+  - `cwebp` dla WebP
+- Nie uzywamy `ffmpeg` do WebP w tym projekcie.
 - Po wygenerowaniu nowych plikow trzeba podpiac je do HTML przez `picture`, a nie tylko zostawic w katalogu `assets`.
 
 ## Standard artykulu
@@ -211,12 +212,79 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 
 ## Porady.html (Karuzela i Paginacja)
 
-- `porady.html` to czytelnia i główny katalog wszystkich artykułów (obecnie równo 12 artykułów). Złote zasady:
+- `porady.html` to czytelnia i glowny katalog wszystkich artykulow (obecnie równo 14 artykulow). Zlote zasady:
   1. **Zgodność liczników i warstwy SEO**: Licznik w HTML (np. `data-article-count`), rzeczywista liczba kafli na stronie oraz deklaracja wpisów w sekcji `<script type="application/ld+json">` (elementy `"numberOfItems"` oraz ich `"position"`) MUSZĄ się zawsze zgadzać co do sztuki. Jeśli oddajesz nowy artykuł, dopisz go na pozycję nr 1 w schemacie JSON-LD i wymuś przesunięcie pozostałych układów.
   2. **Struktura kart HTML**: Używamy pełnej zwięzłej struktury dla kafelków (`.article-index-card`): pomarańczowa odznaka `.article-index-card__label`, czysty tekst czasu `.article-index-card__meta` (bez ikon SVG), a CTA dolne to tekst "Otwórz ->". 
   3. **Wymogi ułożenia CSS Grid**: Karty KATEGORYCZNIE układają się w sztywnym podziale. Żeby pojedyncze artykuły na końcu karuzeli się nie rozciągały, definiujemy twardą siatkę: `grid-template-columns: repeat(4, 1fr)` (desktop), `repeat(2, 1fr)` (tablet), oraz `1fr` dla mobile. **Zakaz korzystania z `auto-fit`** w klasie `.carousel-page`.
   4. **Zapobieganie awariom Grid w Safari**: Z powodu znanego wycieku szerokości WebKit/Safari, klasa kontenerowa `.carousel-page` (bedąca elementem list flex) MUSI posiadać atrybuty `min-width: 0;` oraz `max-width: 100%;`. Dodatkowo same obiekty `.article-index-card` też używają `min-width: 0;`. Skutecznie blokuje to przedziury (blowouty) karuzeli w 1 wielki, rozciągnięty ciąg na urządzeniach Apple.
   5. **Nawigacja JS**: Stronicowanie (zmiana translateZ) obsługiwane jest gładkim przesuwaniem, logiki skryptu grupującej po max 8 elementów na okienko. **Surowy zakaz** używania polecenia `.scrollIntoView()` pod guzikami "Dalej" i "Wróć", ponieważ powoduje to szkodliwe "skoki" ekranu użytkownika w pionie.
+
+## Tryb operacyjny agenta (doprecyzowanie)
+
+- Po zmianach **nie wykonuj `git commit` ani `git push` bez mojej wyraznej komendy**.
+- Przy dodaniu nowego artykulu **zawsze** zaktualizuj:
+  - strone kategorii,
+  - `porady.html`,
+  - `sitemap.xml`,
+  - sekcje featured na `index.html` (jesli nowy wpis jest najnowszy).
+- Dla nowych obrazow:
+  - generuj `webp` (i `avif`, jesli ma sens),
+  - zostaw fallback `png/jpg`,
+  - podawaj `width` i `height`,
+  - hero: `loading="eager"`, pozostale: `loading="lazy"`.
+- Przy poprawkach mobile/Safari:
+  - najpierw lokalna poprawka sekcji,
+  - nie ruszaj globalnego CSS, jesli nie jest to konieczne.
+- Jesli mozna zachowac istniejacy wzorzec projektu, **nie pytaj o warianty stylistyczne**, tylko wdrazaj.
+- Po zakonczeniu podaj krotki raport:
+  1. co zmienione,
+  2. jakie pliki,
+  3. jak szybko sprawdzic wynik,
+  4. status `git` (`git status --short`, w tym pliki untracked i nowe assety).
+- Jesli pojawi sie blocker lub ryzyko utraty danych:
+  - zadaj jedno krotkie pytanie i czekaj na decyzje.
+
+## Konwersja obrazow i komendy shell (stabilnosc)
+
+- Dla WebP uzywaj `cwebp`, nie `ffmpeg`:
+  - `ffmpeg` w tym srodowisku moze nie miec encodera WebP.
+- Dla AVIF uzywaj `avifenc`.
+- Nie tworz dlugich lancuchow komend typu `cmd1 && cmd2 && cmd3 ...` dla wielu plikow.
+- Przy kopiowaniu/przenoszeniu wielu obrazow wykonuj operacje pojedynczo lub petla po jednym pliku.
+- Przy pracy na sciezkach z iCloud, spacjami i znakami specjalnymi:
+  - zawsze uzywaj pelnego quotingu (`"..."`) dla sciezek,
+  - unikaj recznego skladania bardzo dlugich polecen.
+- Gdy konwersja obrazow sie zawiesza:
+  - przerwij krok,
+  - wykonaj konwersje lokalnie stabilnym zestawem (`cwebp`/`avifenc`),
+  - potem edytuj tylko HTML (bez dodatkowych testow i bez nowych komend shell).
+- W zadaniach "podlacz obrazki" domyslnie:
+  - nie otwieraj Preview/Visual Verification,
+  - nie uruchamiaj audytu calego repo,
+  - edytuj tylko wskazany plik HTML + odpowiadajace mu pliki w `assets`.
+- Gdy pojedyncza komenda shell nie pokazuje postepu przez >90 sekund:
+  - przerwij krok,
+  - zmien strategie na krotsze komendy per plik.
+- Nie tworz tymczasowych skryptow typu `_convert_images.sh`, jesli nie zostalo to wyraznie zlecone.
+
+## Globalna stabilnosc wykonania (dla wszystkich zadan)
+
+- Stosuj zasade `fail fast`:
+  - jesli krok nie ma postepu >90 sekund, przerwij i zmien strategie.
+- Nie ponawiaj tej samej blednej komendy wiecej niz 2 razy.
+- Po bledach typu `No such file`, `operation not permitted`, `encoder not found`:
+  - zatrzymaj petle retry,
+  - zastosuj plan B (krotsze komendy, inny tool, etapowanie pracy).
+- Unikaj bardzo dlugich komend i lancuchow `&&`; preferuj kroki atomowe.
+- W jednym zadaniu nie mieszaj wielu faz naraz:
+  - najpierw zmiana kodu/HTML,
+  - potem assety/konwersje,
+  - na koncu szybka weryfikacja.
+- Trzymaj scisly zakres zmian:
+  - nie edytuj plikow poza zakresem zlecenia bez wyraznej prosby.
+- Preview/Visual Verification uruchamiaj tylko na wyrazna prosbe uzytkownika.
+- Po 2 nieudanych probach wykonania kroku:
+  - zakoncz krotkim raportem blokera i zaproponuj jedna bezpieczna alternatywe.
 
 Nie zostawiamy starych, duplikujących się bloków zaplecza, ani martwych linków do archiwalnego HTML, którego w bazie nie ma!
 
@@ -248,7 +316,7 @@ Jesli artykul ma obrazy:
 
 - Tresci artykulow pozostaja merytorycznie nietkniete, jesli uzytkownik nie prosi o redakcje.
 - **KRYTYCZNE**: Nigdy nie pomijamy `article:modified_time` oraz `dateModified` w schema.
-- **KRYTYCZNE**: Obrazy MUSZA isc przez tag `<picture>` z AVIF i WebP. Nigdy nie zostawiamy samych `<img>` bez wymiarow i lazy loading.
+- **KRYTYCZNE**: Obrazy hero/featured/inline w artykulach MUSZA isc przez tag `<picture>` z AVIF i WebP (fallback png/jpg). Wyjatek: logo i male ikony techniczne.
 - **KRYTYCZNE**: W sekcjach "Więcej Porad" (stopka artykułu) używamy klasy `.articles-grid-preview`. NIGDY nie dodajemy tam stylów inline typu `grid-template-columns`. Układem zarządza centralnie `style.css` (1 kolumna na telefonie, 2 na tablecie, 3 na desktopie). CTA kart promocyjnych to zawsze tekstowe "Czytaj artykuł ->", a nazwa sekcji nie może zawierać słowa "Wiedza".
 - **KRYTYCZNE**: Sekcja Hero na `index.html` korzysta z animacji wejściowych (klasa `.hero__eyebrow`, `.hero__title` itd.) oraz efektu paralaksy (skrypt na dole strony). Przy edycji nagłówka należy zachować klasę `.floating` dla badge'a oraz dbać o to, by obraz tła miał `will-change: transform`.
 - **KRYTYCZNE**: Sekcja `featured-article` (pod biogramem na `index.html`) musi zawsze zawierać absolutnie najnowszy artykuł. Ponadto pierwsza karta w sekcji `articles-grid-preview` (Czytelnia) powinna być tym samym lub drugim w kolejności najnowszym wpisem.
