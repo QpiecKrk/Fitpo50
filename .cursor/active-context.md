@@ -1,23 +1,23 @@
 > **BrainSync Context Pumper** 🧠
-> Dynamically loaded for active file: `badania-po-50.html` (Domain: **Generic Logic**)
+> Dynamically loaded for active file: `index.html` (Domain: **Generic Logic**)
 
 ### 📐 Generic Logic Conventions & Fixes
 - **[convention] Strengthened types Nawigacja**: -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
 +     
--       <a href="index.html" class="nav__link">Strona Główna</a>
+-       <a href="#o-nas" class="nav__link">O mnie</a>
 +   </div>
--       <a href="index.html#o-nas" class="nav__link">O mnie</a>
+-       <a href="#baza-wiedzy" class="nav__link">Baza wiedzy</a>
 + </header>
--       <a href="index.html#baza-wiedzy" class="nav__link">Baza wiedzy</a>
+-       <a href="#trendy" class="nav__link">Obecne Trendy</a>
 + 
 -       <a href="porady.html" class="nav__link" style="color: var(--color-primary); font-weight: 600;">Porady</a>
 + <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
 -       <a href="https://www.instagram.com/fitpo50" class="nav__link" target="_blank" rel="noopener noreferrer">Instagram</a>
-+       <a href="index.html" class="nav__link">Strona Główna</a>
++       <a href="#o-nas" class="nav__link">O mnie</a>
 - 
-+       <a href="index.html#o-nas" class="nav__link">O mnie</a>
++       <a href="#baza-wiedzy" class="nav__link">Baza wiedzy</a>
 -       <button class="theme-toggle" data-theme-toggle aria-label="Przełącz na tryb ciemny">
-+       <a href="index.html#baza-wiedzy" class="nav__link">Baza wiedzy</a>
++       <a href="#trendy" class="nav__link">Obecne Trendy</a>
 -         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
 +       <a href="porady.html" class="nav__link" style="color: var(--color-primary); font-weight: 600;">Porady</a>
 -       </button>
@@ -30,31 +30,30 @@
 +         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
 - 
 +       </button>
-- <main class="article-page">
+- <!-- ============================================================
 +     </nav>
--   <div class="container">
+-      HERO
 + 
--     <div class="article-header reveal">
-+ <main class="article-page">
--       <div class="article-header__meta">
-+   <div class="container">
--         <span style="color: var(--color-accent); font-weight: 700;">Zdrowie</span>
-+     <div class="article-he
+-      ============================================================ -->
++ <!-- ============================================================
+- <section class="hero" id="hero">
++      HERO
+-   <div class="hero__bg">
++      ===========================================================
 … [diff truncated]
 
 📌 IDE AST Context: Modified symbols likely include [html]
-- **[convention] convention in badania-po-50.html**: File updated (external): badania-po-50.html
+- **[convention] convention in .gitignore**: File updated (external): .gitignore
 
-Content summary (661 lines):
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Badania przed treningiem po 50-tce: co naprawdę musisz sprawdzić? | FitPo50</title>
-<meta name="description" content="Jakie badania przed treningiem po 50-tce naprawdę warto zrobić, a czego nie musisz? Sprawdź konkretną listę badań i sygnały alarmowe dla aktywnych 50+.">
-<meta name="robots" content="index,follow">
-<meta property="og:title" content="Badania 
+Content summary (8 lines):
+
+AGENT.md
+CLAUDE.md
+.agent-mem/
+
+# Auto-generated agent rules (personalized per developer)
+.brainsync/agent-rules.md
+
 - **[convention] Strengthened types Zmie**: -   .header {
 +   .nav-toggle { display: flex; }
 -     /* Stop backdrop-filter from being a "Containing Block" trap on mobile */
@@ -130,20 +129,20 @@ Content summary (661 lines):
 📌 IDE AST Context: Modified symbols likely include [:root, :root, [data-theme="light"], [data-theme="dark"], @media (prefers-color-scheme: dark)]
 - **[convention] Strengthened types Nawigacja**: -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
 +     
--       <a href="#o-nas" class="nav__link">O mnie</a>
+-       <a href="index.html" class="nav__link">Strona Główna</a>
 +   </div>
--       <a href="#baza-wiedzy" class="nav__link">Baza wiedzy</a>
+-       <a href="index.html#o-nas" class="nav__link">O mnie</a>
 + </header>
--       <a href="#trendy" class="nav__link">Obecne Trendy</a>
+-       <a href="index.html#baza-wiedzy" class="nav__link">Baza wiedzy</a>
 + 
 -       <a href="porady.html" class="nav__link" style="color: var(--color-primary); font-weight: 600;">Porady</a>
 + <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
 -       <a href="https://www.instagram.com/fitpo50" class="nav__link" target="_blank" rel="noopener noreferrer">Instagram</a>
-+       <a href="#o-nas" class="nav__link">O mnie</a>
++       <a href="index.html" class="nav__link">Strona Główna</a>
 - 
-+       <a href="#baza-wiedzy" class="nav__link">Baza wiedzy</a>
++       <a href="index.html#o-nas" class="nav__link">O mnie</a>
 -       <button class="theme-toggle" data-theme-toggle aria-label="Przełącz na tryb ciemny">
-+       <a href="#trendy" class="nav__link">Obecne Trendy</a>
++       <a href="index.html#baza-wiedzy" class="nav__link">Baza wiedzy</a>
 -         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
 +       <a href="porady.html" class="nav__link" style="color: var(--color-primary); font-weight: 600;">Porady</a>
 -       </button>
@@ -156,16 +155,16 @@ Content summary (661 lines):
 +         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
 - 
 +       </button>
-- <!-- ============================================================
+- <main class="article-page">
 +     </nav>
--      HERO
+-   <div class="container">
 + 
--      ============================================================ -->
-+ <!-- ============================================================
-- <section class="hero" id="hero">
-+      HERO
--   <div class="hero__bg">
-+      ===========================================================
+-     <div class="article-header reveal">
++ <main class="article-page">
+-       <div class="article-header__meta">
++   <div class="container">
+-         <span style="color: var(--color-accent); font-weight: 700;">Ruch</span>
++     <div class="article-heade
 … [diff truncated]
 
 📌 IDE AST Context: Modified symbols likely include [html]
@@ -205,8 +204,8 @@ Content summary (661 lines):
 + <main class="article-page">
 -       <div class="article-header__meta">
 +   <div class="container">
--         <span style="color: var(--color-accent); font-weight: 700;">Ruch</span>
-+     <div class="article-heade
+-         <span style="color: var(--color-accent); font-weight: 700;">Zdrowie</span>
++     <div class="article-he
 … [diff truncated]
 
 📌 IDE AST Context: Modified symbols likely include [html]

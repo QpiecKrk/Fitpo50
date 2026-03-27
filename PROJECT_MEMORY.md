@@ -26,6 +26,10 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 - Nie pokazujemy widocznej daty publikacji lub aktualizacji na gorze artykulu.
 - Daty moga byc obecne tylko w SEO i schema.
 - Uklad artykulu ma byc spojny z istniejacym standardem wizualnym.
+- **Sekcja „Czytaj również”:** Na dole każdego artykułu (nad footerem) zawsze dodajemy sekcję o klasie `porady-preview section-padding`. 
+  - Musi ona zawierać nagłówek ze snem `section-header__label` o treści „Czytelnia” oraz tytuł `section-header__title` o treści „Najnowsze Porady i Artykuły”.
+  - Poniżej znajdują się dokładnie 3 kafelki w jednym rzędzie (grid 3-kolumnowy).
+  - Każdy kafelek musi zawierać: zdjęcie (picture), kategorię, czas czytania, tytuł (h4), krótki opis oraz przycisk „Czytaj artykuł ->”.
 
 ## SEO artykulow
 
@@ -87,7 +91,7 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 - Dla stron zbiorczych utrzymujemy `CollectionPage`.
 - `porady.html` powinno uzywac `CollectionPage` z `mainEntity` typu `ItemList`.
 - Dane w schema musza zgadzac sie z realna zawartoscia strony:
-  - Liczba artykułów: 14 (głównie Zdrowie i Ruch, 1 nowy w Jedzenie: "Jedz więcej")
+  - Liczba artykułów: 15 (głównie Zdrowie i Ruch, 2 artykuły w Jedzenie: "Jedz więcej" oraz "Nawodnienie po 50-tce")
   - lista artykulow
   - kolejnosc
 

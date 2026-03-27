@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 3 gotchas, 4 conventions, 11 fixes."
+description: "Project for Fitpo50. 26 gotchas, 37 conventions, 11 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **25 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **82 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -18,6 +18,29 @@ Auto-compiled from **25 real patterns** in **Fitpo50**. This skill is auto-route
 
 | ❌ Don't | Details |
 |----------|----------|
+| Don't mix CommonJS (require) and ESM (import) in s | Don't mix CommonJS (require) and ESM (import) in same project |
+| Don't use "any" type in TypeScript — define proper | Don't use "any" type in TypeScript — define proper types/interfaces |
+| Handle Promise rejections — always .catch() or try | Handle Promise rejections — always .catch() or try/catch with await |
+| Use === not == — strict equality prevents type coe | Use === not == — strict equality prevents type coercion bugs |
+| Agent: follow existing project patterns — don't in | Agent: follow existing project patterns — don't introduce a different style |
+| Agent: don't generate code with "any" type — defin | Agent: don't generate code with "any" type — define proper TypeScript types |
+| Agent: always handle loading/error states — don't  | Agent: always handle loading/error states — don't just render data |
+| Agent: don't use deprecated APIs — check library v | Agent: don't use deprecated APIs — check library version, use current API |
+| Agent: check existing code before creating utility | Agent: check existing code before creating utility functions — avoid duplicates |
+| Don't expose database errors to clients — map to u | Don't expose database errors to clients — map to user-friendly messages |
+| Always validate data on the SERVER — client valida | Always validate data on the SERVER — client validation is for UX only |
+| Don't fetch data inside render loops or hot paths | Don't fetch data inside render loops or hot paths |
+| Don't swallow errors silently — empty catch blocks | Don't swallow errors silently — empty catch blocks hide bugs |
+| Never store session tokens in localStorage — use h | Never store session tokens in localStorage — use httpOnly cookies |
+| Use parameterized queries — never string concatena | Use parameterized queries — never string concatenation for SQL |
+| Don't store passwords in plain text — use bcrypt,  | Don't store passwords in plain text — use bcrypt, argon2, or scrypt |
+| Don't use innerHTML — use textContent or sanitized | Don't use innerHTML — use textContent or sanitized rendering |
+| Sanitize ALL user input before database queries —  | Sanitize ALL user input before database queries — prevent SQL injection |
+| Never use eval(), exec(), or Function() with user  | Never use eval(), exec(), or Function() with user input |
+| Don't hardcode API keys, passwords, database URLs, | Don't hardcode API keys, passwords, database URLs, or secrets anywhere |
+| Don't leave console.log, print(), debugger, or TOD | Don't leave console.log, print(), debugger, or TODO in production code |
+| Don't commit .env, secrets, API keys, or credentia | Don't commit .env, secrets, API keys, or credentials — add to .gitignore |
+| Never force push to main, master, or production br | Never force push to main, master, or production branches |
 | gotcha in task.md | - - [/] **Weryfikacja** + - [x] **Weryfikacja** -   - [ ] Sprawdzenie w symulatorze mobilnym +   - [ |
 | gotcha in scratchpad_o1gsw9jp.md | - - [ ] Open the mobile menu (Issue: Click on nav-toggle hits the button but menu doesn't open or li |
 | gotcha in scratchpad_o1gsw9jp.md | - - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't seem to trigger menu in screenshot) |
@@ -103,27 +126,80 @@ Auto-compiled from **25 real patterns** in **Fitpo50**. This skill is auto-route
 **Actionable Steps:**
 1. Modified 1 files
 
+### problem-fix in walkthrough.md
+- ![Fix: Menu mobilne z widocznymi linkami](file:///Users/grzegorzkupiec/.gemini/antigravity/brain/94f11028-6387-4cc3-ba4e-59bbbf0aae76/mobile_menu_open_check_v3_1774358351434.png)
++ ![Fix: Menu mobilne z widocznymi linkami](/Users/grzegorzkupiec/.gemini/antigravity/brain/94f11028-6387-4cc3-ba4e-59bbbf0aae76/mobile_menu_open_check_v3_1774358351434.png)
+- 
++ ---
+- Aby strona prezentowała się maksym
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in walkthrough.md.resolved
+- # Walkthrough - Wzmocnienie Wiarygodności Źródeł ([index.html](file:///Users/grzegorzkupiec/Library/Mobile%20Documents/com~apple~CloudDocs/%21%21%21%20ROBOCZA%20%21%21%21%21%21%20/Robocza/FitPo50/index.html))
++ # Walkthrough - Naprawa Menu Mobilnego
+- Aby strona prezentowała się maksymalnie profesjonalnie i budowała ekspercki autorytet, ogólnikowe źródła tekstowe (typu "CDC, BMJ") w sekcjach tek
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in scratchpad_o1gsw9jp.md
+- - [ ] Open the mobile menu (Issue: Click on nav-toggle hits button, app.js is loaded, but menu doesn't open in DOM)
++ - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't open menu; Tabbing scrolls page, suggesting it misses the button or it's not in order)
+
+📌 IDE AST Context: Modified symbols likely include [# Task: Verify Mobile Menu Fix]
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in scratchpad_o1gsw9jp.md
+- - [ ] Open `index.html`
++ - [x] Open `index.html`
+- - [ ] Resize window to 375x667
++ - [x] Resize window to 375x667
+- - [ ] Open the mobile menu
++ - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't seem to trigger menu in screenshot)
+
+📌 IDE AST Context: Modified symbols likely include [# Task: Verify Mobile Menu Fix]
+
+**Actionable Steps:**
+1. Modified 1 files
+
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
-- 📐 **problem-fix in scratchpad_uve2mjzw.md — confirmed 3x** — - - [ ] Inspect computed height/width of '.nav' and '.nav__link' (Partially done via DOM inference)
+- 📐 **convention in .gitignore** — File updated (external): .gitignore
 
-- 📐 **problem-fix in scratchpad_o1gsw9jp.md — confirmed 3x** — - - [x] Resize window (Current: 500x580 reported by read_page)
-+ - [x] Resize window to mobile viewp
-- 📐 **Strengthened types Plan** — - # Plan poprawy jakości źródeł na stronie głównej ([index.html](file:///Users/grzegorzkupiec/Librar
-- 📐 **convention in walkthrough.md** — - ![Nowe CTA na stronie głównej (Czytaj artykuł ->)](file:///Users/grzegorzkupiec/.gemini/antigravit
+Content summary (8 lines):
 
-## 🤔 Decisions & Trade-offs
+AGENT.md
+CLAUDE.md
+.agent-mem/
 
-- **Optimized Plan** — - # Standaryzacja Wymiarów Logo dla Core Web Vitals (CLS)
-+ # Plan poprawy jakości źródeł na stronie
-- **Optimized Aktualizacja** — -   - [/] Aktualizacja `PROJECT_MEMORY.md` o nowe standardy
-+   - [x] Aktualizacja `PROJECT_MEMORY.m
-- **Optimized Wdro** — - - [ ] **Wdrożenie Zmian**
-+ - [x] **Wdrożenie Zmian**
--   - [ ] Aktualizacja nagłówka we wszystkic
-- **Optimized Standaryzacja** — - # Standaryzacja CTA (Call to Action) dla SEO i UI
-+ # Standaryzacja Wymiarów Logo dla Core Web Vit
+# A
+- 📐 **Enable strict mode in tsconfig.json** — Enable strict mode in tsconfig.json
+- 📐 **Prefer Array methods (map, filter, reduce) over manual loops** — Prefer Array methods (map, filter, reduce) over manual loops
+- 📐 **Use template literals for string interpolation, not concatenation** — Use template literals for string interpolation, not concatenation
+- 📐 **Use optional chaining (?.) and nullish coalescing (??) for safe access** — Use optional chaining (?.) and nullish coalescing (??) for safe access
+- 📐 **Use const by default, let when reassignment needed, never var** — Use const by default, let when reassignment needed, never var
+- 📐 **Version your API from day 1 (/api/v1/)** — Version your API from day 1 (/api/v1/)
+- 📐 **Use consistent response format across all endpoints** — Use consistent response format across all endpoints
+- 📐 **Implement soft delete for important data — don't hard delete without confirmation** — Implement soft delete for important data — don't hard delete without confirmation
+- 📐 **Handle timezone correctly — store UTC, display in user's timezone** — Handle timezone correctly — store UTC, display in user's timezone
+- 📐 **Make layouts responsive from the start — mobile-first approach** — Make layouts responsive from the start — mobile-first approach
+- 📐 **Disable submit button during form submission — prevent double-submit** — Disable submit button during form submission — prevent double-submit
+- 📐 **Always add empty states ("No items yet" with call-to-action)** — Always add empty states ("No items yet" with call-to-action)
+- 📐 **Always add error states with retry button — not just blank screen** — Always add error states with retry button — not just blank screen
+- 📐 **Always add loading states for async operations (skeleton, spinner)** — Always add loading states for async operations (skeleton, spinner)
+- 📐 **Test edge cases: empty input, null, boundary values, error scenarios** — Test edge cases: empty input, null, boundary values, error scenarios
+- 📐 **Each test should be independent — no shared mutable state between tests** — Each test should be independent — no shared mutable state between tests
+- 📐 **Write tests for business logic — test behavior/output, not implementation details** — Write tests for business logic — test behavior/output, not implementation details
+- 📐 **Close resources (streams, connections, handles) when done** — Close resources (streams, connections, handles) when done
+- 📐 **Debounce user input handlers (search, resize, scroll)** — Debounce user input handlers (search, resize, scroll)
+- 📐 **Use pagination for lists over 100 items** — Use pagination for lists over 100 items
+- 📐 **Implement retry logic for transient failures with exponential backoff** — Implement retry logic for transient failures with exponential backoff
+- 📐 **Return proper HTTP status codes — not 500 for everything** — Return proper HTTP status codes — not 500 for everything
+- 📐 **Always wra
 
----
-*Auto-generated by BrainSync 🧠 | 25 patterns | 2026-03-24*
+... [Truncated — see individual observations for full content]
