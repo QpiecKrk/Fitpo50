@@ -335,17 +335,21 @@
       <div class="featured-article__content">
         <div class="featured-article__text">
           <span class="featured-article__badge">OSTATNIO DODANE</span>
-          <h2 class="featured-article__title">Woda na siłowni po 50-tce — nawodnienie, które zmienia trening</h2>
-          <p class="featured-article__excerpt">Dlaczego po 50-tce pragnienie to zły doradca? Poznaj naukowy protokół nawadniania dla osób aktywnych.</p>
+          <h2 class="featured-article__title">Pół godziny mniej siedzenia dziennie. Co się dzieje z ciałem po roku — i dlaczego to brzmi absurdalnie prosto.</h2>
+          <p class="featured-article__excerpt">To może być najważniejsze 30 minut Twojego dnia. Zobacz, jak małe przerwy w siedzeniu regenerują zdrowie po 50-tce.</p>
           
-          <a href="nawodnienie-na-treningu-po-50.html" class="featured-article__btn">
-            Sprawdź jak pić mądrzej
+          <a href="siedzenie-po-50.html" class="featured-article__btn">
+            Sprawdź jak wstać mądrze
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
 
         <div class="featured-article__image-wrap">
-          <img src="./assets/hydration_hero.png" alt="Dojrzały mężczyzna z butelką wody na nowoczesnej siłowni" loading="lazy" width="612" height="612" style="object-fit: cover; width: 100%; height: 100%;">
+          <picture>
+            <source srcset="./assets/siedzenie_aktywnosc.avif" type="image/avif">
+            <source srcset="./assets/siedzenie_aktywnosc.webp" type="image/webp">
+            <img src="./assets/siedzenie_aktywnosc.png" alt="Osoba robiąca przerwę od pracy przy biurku, przeciągająca się z uśmiechem" loading="lazy" width="612" height="612" style="object-fit: cover; width: 100%; height: 100%;">
+          </picture>
         </div>
       </div>
     </div>
@@ -870,10 +874,27 @@
 
     <div class="articles-grid-preview articles-grid-preview--home">
       
-      <!-- Karta Nowość: Nawodnienie -->
+      <!-- Karta Nowość: Siedzenie -->
+      <a href="siedzenie-po-50.html" class="article-promo-card reveal">
+        <div style="height: 200px; overflow: hidden; position: relative;">
+          <picture>
+            <source srcset="./assets/siedzenie_aktywnosc.avif" type="image/avif">
+            <source srcset="./assets/siedzenie_aktywnosc.webp" type="image/webp">
+            <img src="./assets/siedzenie_aktywnosc.png" alt="Pół godziny mniej siedzenia" style="width:100%; height:100%; object-fit:cover;" class="article-promo-img" loading="lazy" width="640" height="640">
+          </picture>
+          <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Zdrowie</div>
+        </div>
+        <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
+          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Pół godziny mniej siedzenia dziennie</h4>
+          <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">To może być najważniejsze 30 minut Twojego dnia. Zobacz dlaczego.</p>
+          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj -></span>
+        </div>
+      </a>
+
+      <!-- Karta: Nawodnienie -->
       <a href="nawodnienie-na-treningu-po-50.html" class="article-promo-card reveal">
         <div style="height: 200px; overflow: hidden; position: relative;">
-          <img src="./assets/hydration_hero.png" alt="Nawodnienie po 50-tce" style="width:100%; height:100%; object-fit:cover;" class="article-promo-img" loading="lazy">
+          <img src="./assets/hydration_hero.png" alt="Nawodnienie po 50-tce" style="width:100%; height:100%; object-fit:cover;" class="article-promo-img" loading="lazy" width="640" height="640">
           <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Jedzenie</div>
         </div>
         <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
@@ -899,20 +920,7 @@
         </div>
       </a>
 
-      <!-- Karta: Jedz Więcej -->
-      <a href="jedz-wiecej-po-50.html" class="article-promo-card reveal">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <picture>
-            <img src="./assets/jedz_wiecej_hero.png" alt="Jedz więcej po 50-tce" style="width:100%; height:100%; object-fit:cover;" class="article-promo-img" loading="lazy">
-          </picture>
-          <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Jedzenie</div>
-        </div>
-        <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
-          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Jedz więcej. Dlaczego niedojadanie po 50-tce niszczy efekty...</h4>
-          <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Ograniczanie jedzenia przy treningu to błąd. Dowiedz się dlaczego.</p>
-          <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj -></span>
-        </div>
-      </a>
+
 
 
     </div>
@@ -948,9 +956,9 @@
       <div>
         <h4 class="footer__heading">Czytelnia</h4>
         <ul class="footer__links" role="list">
-          <li><a href="motywacja-zniknela-po-50.html" style="color: var(--color-accent);">Motywacja zniknęła</a></li>
+          <li><a href="siedzenie-po-50.html" style="color: var(--color-accent);">Pół godziny mniej siedzenia</a></li>
+          <li><a href="motywacja-zniknela-po-50.html">Motywacja zniknęła</a></li>
           <li><a href="jedz-wiecej-po-50.html">Jedz więcej</a></li>
-          <li><a href="sila-chwytu-po-50.html">Siła chwytu</a></li>
         </ul>
       </div>
     </div>

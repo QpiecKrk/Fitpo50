@@ -1,8 +1,8 @@
 {
   "project": {
     "enabled": true,
-    "lastGenerated": "2026-03-27T22:13:24.707Z",
-    "observationCount": 82,
+    "lastGenerated": "2026-03-28T19:16:59.791Z",
+    "observationCount": 93,
     "skillCount": 0,
     "domain": "project",
     "triggerGlobs": [
@@ -12,18 +12,18 @@
   },
   "html": {
     "enabled": true,
-    "lastGenerated": "2026-03-27T22:13:24.706Z",
-    "observationCount": 32,
+    "lastGenerated": "2026-03-28T19:16:59.791Z",
+    "observationCount": 43,
     "skillCount": 0,
     "domain": "html",
     "triggerGlobs": [
       "**/*.html"
     ],
-    "description": "Html for Fitpo50. 26 conventions."
+    "description": "Html for Fitpo50. 1 gotchas, 30 conventions."
   },
   "problem-fix": {
     "enabled": true,
-    "lastGenerated": "2026-03-27T22:13:24.707Z",
+    "lastGenerated": "2026-03-28T19:16:59.791Z",
     "observationCount": 0,
     "skillCount": 1,
     "domain": "problem-fix",
@@ -34,7 +34,7 @@
   },
   "convention": {
     "enabled": true,
-    "lastGenerated": "2026-03-27T22:13:24.707Z",
+    "lastGenerated": "2026-03-28T19:16:59.791Z",
     "observationCount": 0,
     "skillCount": 1,
     "domain": "convention",

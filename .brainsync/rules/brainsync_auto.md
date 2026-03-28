@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 115 notes | Score threshold: >40
+> 137 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -18,16 +18,20 @@
 
 **Stack:** TypeScript
 
-## 📝 NOTE: 1 uncommitted file(s) in working tree.\n\n## Project Standards
+## 📝 NOTE: 1 uncommitted file(s) in working tree.\n\n## Important Warnings
 
+- **gotcha in siedzenie-po-50.html** — -           <li>[1] Dunstan DW et al. (2021). Sit less and move more f
+
+## Project Standards
+
+- Strengthened types Osoba
+- Strengthened types Twojego
+- convention in motywacja-zniknela-po-50.html
+- what-changed in nawodnienie-na-treningu-po-50.html
 - Strengthened types OSTATNIO
 - convention in .gitignore
 - Enable strict mode in tsconfig.json
 - Prefer Array methods (map, filter, reduce) over manual loops
-- Use template literals for string interpolation, not concatenation
-- Use optional chaining (?.) and nullish coalescing (??) for safe access
-- Use const by default, let when reassignment needed, never var
-- Version your API from day 1 (/api/v1/)
 
 ## Learned Patterns
 
