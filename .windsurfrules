@@ -1,5 +1,5 @@
 # Fitpo50 — Project Memory
-# Auto-synced | 138 observations
+# Auto-synced | 179 observations
 
 **Stack:** TypeScript
 
@@ -22,6 +22,7 @@
 
 # 📐 Conventions
 
+- Git Commit: Krótki opis zmiany — confirmed 3x
 - Enable strict mode in tsconfig.json
 - Prefer Array methods (map, filter, reduce) over manual loops
 - Use template literals for string interpolation, not concatenation
@@ -29,7 +30,6 @@
 - Use const by default, let when reassignment needed, never var
 - Version your API from day 1 (/api/v1/)
 - Use consistent response format across all endpoints
-- Implement soft delete for important data — don't hard delete without confirmation
 
 # ⚡ Available Tools (ON-DEMAND only)
 - `save(title, content, category)` — Save a note + auto-detect conflicts

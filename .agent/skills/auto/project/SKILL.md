@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 37 conventions, 11 fixes."
+description: "Project for Fitpo50. 26 gotchas, 38 conventions, 11 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **93 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **94 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -169,6 +169,9 @@ Auto-compiled from **93 real patterns** in **Fitpo50**. This skill is auto-route
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
+- 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
+Message: Krótki opis zmiany
+Branch: main
 - 📐 **convention in .gitignore** — File updated (external): .gitignore
 
 Content summary (8 lines):
@@ -199,7 +202,6 @@ CLAUDE.md
 - 📐 **Debounce user input handlers (search, resize, scroll)** — Debounce user input handlers (search, resize, scroll)
 - 📐 **Use pagination for lists over 100 items** — Use pagination for lists over 100 items
 - 📐 **Implement retry logic for transient failures with exponential backoff** — Implement retry logic for transient failures with exponential backoff
-- 📐 **Return proper HTTP status codes — not 500 for everything** — Return proper HTTP status codes — not 500 for everything
-- 📐 **Always wra
+- 📐 **Return prope
 
 ... [Truncated — see individual observations for full content]

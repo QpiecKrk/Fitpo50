@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 137 notes | Score threshold: >40
+> 163 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -20,23 +20,30 @@
 
 ## 📝 NOTE: 1 uncommitted file(s) in working tree.\n\n## Important Warnings
 
+- **gotcha in siedzenie-po-50.html** — -           <span class="article-quote__source">Źródło: Dunstan DW et 
+- **gotcha in siedzenie-po-50.html** — -           <li>[1] <a href="https://doi.org/10.1038/s41569-021-00571-
 - **gotcha in siedzenie-po-50.html** — -           <li>[1] Dunstan DW et al. (2021). Sit less and move more f
 
 ## Project Standards
 
-- Strengthened types Osoba
-- Strengthened types Twojego
+- what-changed in nawodnienie-na-treningu-po-50.html — confirmed 3x
+- convention in sila-chwytu-po-50.html
+- convention in trening-maszynowy-po-50.html
+- convention in jedz-wiecej-po-50.html
 - convention in motywacja-zniknela-po-50.html
-- what-changed in nawodnienie-na-treningu-po-50.html
-- Strengthened types OSTATNIO
-- convention in .gitignore
-- Enable strict mode in tsconfig.json
-- Prefer Array methods (map, filter, reduce) over manual loops
+- convention in suplementacja-po-50.html
+- Strengthened types ACSM
+- Strengthened types Efekty
+
+## Recent Decisions
+
+- decision in jedz-wiecej-po-50.html
 
 ## Learned Patterns
 
 - When encountering this, fix by: problem-fix in walkthrough.md (seen 2x)
-- Always: Strengthened types Nawigacja (seen 12x)
+- Always: convention in motywacja-zniknela-po-50.html (seen 2x)
+- Always: convention in suplementacja-po-50.html (seen 2x)
 - Agent generates new migration for every change (squash related changes)
 - Agent installs packages without checking if already installed
 
