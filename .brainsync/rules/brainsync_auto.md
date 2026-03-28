@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 163 notes | Score threshold: >40
+> 181 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -26,14 +26,14 @@
 
 ## Project Standards
 
-- what-changed in nawodnienie-na-treningu-po-50.html — confirmed 3x
-- convention in sila-chwytu-po-50.html
-- convention in trening-maszynowy-po-50.html
-- convention in jedz-wiecej-po-50.html
-- convention in motywacja-zniknela-po-50.html
-- convention in suplementacja-po-50.html
-- Strengthened types ACSM
-- Strengthened types Efekty
+- convention in jak-zaczac-na-silowni-po-50.html
+- convention in badania-po-50.html
+- convention in bieganie-niszczy-kolana.html
+- convention in dieta-po-50.html
+- convention in sen-po-50.html
+- convention in motywacja-po-50.html
+- convention in rusz-sie.html
+- what-changed in motywacja-zniknela-po-50.html — confirmed 3x
 
 ## Recent Decisions
 
