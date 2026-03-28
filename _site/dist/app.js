@@ -36,65 +36,9 @@ if (window.__fitpo50_initialized) {
   updateThemeIcon();
 
   // ----------------------------------------------------------
-  // MOBILE NAV TOGGLE
+  // MOBILE NAV TOGGLE (Handled by CSS/HTML structure in new version)
   // ----------------------------------------------------------
-  const navToggle = document.querySelector('.nav-toggle');
-  const nav = document.getElementById('main-nav');
-  const header = document.querySelector('.header');
-  const body = document.body;
-  let navOpen = false;
-
-  if (navToggle && nav) {
-    if (header && nav.parentElement !== header) {
-      header.appendChild(nav);
-    }
-
-    const defaultNavIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
-    const closeNavIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
-    const navLinks = Array.from(nav.querySelectorAll('.nav__link'));
-
-    navToggle.setAttribute('aria-controls', 'main-nav');
-
-    const setNavState = open => {
-      navOpen = open;
-      nav.classList.toggle('is-open', navOpen);
-      body.classList.toggle('nav-open', navOpen);
-      navToggle.setAttribute('aria-expanded', String(navOpen));
-      navToggle.setAttribute('aria-label', navOpen ? 'Zamknij menu nawigacji' : 'Otwórz menu nawigacji');
-      navToggle.innerHTML = navOpen ? closeNavIcon : defaultNavIcon;
-    };
-
-    navToggle.addEventListener('click', () => {
-      setNavState(!navOpen);
-    });
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (navOpen) setNavState(false);
-      });
-    });
-
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && navOpen) {
-        setNavState(false);
-        navToggle.focus();
-      }
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!navOpen || window.innerWidth >= 768) return;
-      const target = event.target;
-      if (!nav.contains(target) && !navToggle.contains(target)) {
-        setNavState(false);
-      }
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768 && navOpen) {
-        setNavState(false);
-      }
-    });
-  }
+  // Legacy nav toggle logic removed to prevent DOM corruption.
 
   // ----------------------------------------------------------
   // HEADER SCROLL BEHAVIOR (hide on scroll down, show on up)

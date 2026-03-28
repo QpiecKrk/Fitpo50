@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 38 conventions, 11 fixes."
+description: "Project for Fitpo50. 26 gotchas, 41 conventions, 11 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **96 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **190 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -169,6 +169,18 @@ Auto-compiled from **96 real patterns** in **Fitpo50**. This skill is auto-route
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
+- 📐 **convention in maszyny_4_shoulder_press_1774368276474.avif** — File updated (external): _site/assets/maszyny_4_shoulder_press_1774368276474.avif
+
+Content summary (
+- 📐 **convention in .htaccess** — File updated (external): _site/.htaccess
+
+Content summary (15 lines):
+RewriteEngine On
+
+# Always use
+- 📐 **Git Commit: Krótki opis zmiany — confirmed 4x** — Captured via Git commit.
+Message: Krótki opis zmiany
+Branch: main
 - 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
 Message: Krótki opis zmiany
 Branch: main
@@ -198,10 +210,6 @@ CLAUDE.md
 - 📐 **Test edge cases: empty input, null, boundary values, error scenarios** — Test edge cases: empty input, null, boundary values, error scenarios
 - 📐 **Each test should be independent — no shared mutable state between tests** — Each test should be independent — no shared mutable state between tests
 - 📐 **Write tests for business logic — test behavior/output, not implementation details** — Write tests for business logic — test behavior/output, not implementation details
-- 📐 **Close resources (streams, connections, handles) when done** — Close resources (streams, connections, handles) when done
-- 📐 **Debounce user input handlers (search, resize, scroll)** — Debounce user input handlers (search, resize, scroll)
-- 📐 **Use pagination for lists over 100 items** — Use pagination for lists over 100 items
-- 📐 **Implement retry logic for transient failures with exponential backoff** — Implement retry logic for transient failures with exponential backoff
-- 📐 **Return prope
+- 📐 **Close resources (streams, connections, handles) when done** — Close re
 
 ... [Truncated — see individual observations for full content]

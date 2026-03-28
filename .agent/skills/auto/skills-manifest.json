@@ -1,29 +1,29 @@
 {
   "project": {
     "enabled": true,
-    "lastGenerated": "2026-03-28T21:27:56.329Z",
-    "observationCount": 96,
+    "lastGenerated": "2026-03-28T21:37:56.481Z",
+    "observationCount": 190,
     "skillCount": 0,
     "domain": "project",
     "triggerGlobs": [
       "**/*"
     ],
-    "description": "Project for Fitpo50. 26 gotchas, 38 conventions, 11 fixes."
+    "description": "Project for Fitpo50. 26 gotchas, 41 conventions, 11 fixes."
   },
   "html": {
     "enabled": true,
-    "lastGenerated": "2026-03-28T21:27:56.329Z",
-    "observationCount": 84,
+    "lastGenerated": "2026-03-28T21:37:56.481Z",
+    "observationCount": 118,
     "skillCount": 0,
     "domain": "html",
     "triggerGlobs": [
       "**/*.html"
     ],
-    "description": "Html for Fitpo50. 3 gotchas, 55 conventions."
+    "description": "Html for Fitpo50. 3 gotchas, 58 conventions."
   },
   "problem-fix": {
     "enabled": true,
-    "lastGenerated": "2026-03-28T21:27:56.329Z",
+    "lastGenerated": "2026-03-28T21:37:56.481Z",
     "observationCount": 0,
     "skillCount": 1,
     "domain": "problem-fix",
@@ -34,13 +34,25 @@
   },
   "convention": {
     "enabled": true,
-    "lastGenerated": "2026-03-28T21:27:56.330Z",
+    "lastGenerated": "2026-03-28T21:37:56.481Z",
     "observationCount": 0,
-    "skillCount": 6,
+    "skillCount": 9,
     "domain": "convention",
     "triggerGlobs": [
       "**/*"
     ],
     "description": "Convention for Fitpo50. ."
+  },
+  "css": {
+    "enabled": true,
+    "lastGenerated": "2026-03-28T21:37:56.481Z",
+    "observationCount": 3,
+    "skillCount": 0,
+    "domain": "css",
+    "triggerGlobs": [
+      "**/*.css",
+      "**/*.scss"
+    ],
+    "description": "Css for Fitpo50. 1 conventions."
   }
 }

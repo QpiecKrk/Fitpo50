@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 181 notes | Score threshold: >40
+> 312 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -26,14 +26,14 @@
 
 ## Project Standards
 
+- convention in maszyny_4_shoulder_press_1774368276474.avif
+- convention in .htaccess
+- what-changed in nawodnienie-na-treningu-po-50.html — confirmed 3x
 - convention in jak-zaczac-na-silowni-po-50.html
 - convention in badania-po-50.html
 - convention in bieganie-niszczy-kolana.html
+- what-changed in siedzenie-po-50.html — confirmed 3x
 - convention in dieta-po-50.html
-- convention in sen-po-50.html
-- convention in motywacja-po-50.html
-- convention in rusz-sie.html
-- what-changed in motywacja-zniknela-po-50.html — confirmed 3x
 
 ## Recent Decisions
 
@@ -42,8 +42,8 @@
 ## Learned Patterns
 
 - When encountering this, fix by: problem-fix in walkthrough.md (seen 2x)
-- Always: convention in motywacja-zniknela-po-50.html (seen 2x)
-- Always: convention in suplementacja-po-50.html (seen 2x)
+- Always: convention in badania-po-50.html (seen 2x)
+- Always: convention in motywacja-po-50.html (seen 2x)
 - Agent generates new migration for every change (squash related changes)
 - Agent installs packages without checking if already installed
 

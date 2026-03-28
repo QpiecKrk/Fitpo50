@@ -1869,26 +1869,10 @@ a:hover {
   }
 }
 
-/* Articles grid: 8 articles layout (existing override) */
+/* Articles grid: 8 articles layout (Standard 4x2 grid) */
 @media (min-width: 1024px) {
   .articles-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-  .articles-grid .article-card:nth-child(1),
-  .articles-grid .article-card:nth-child(2),
-  .articles-grid .article-card:nth-child(3) {
-    grid-column: span 2;
-  }
-  .articles-grid .article-card:nth-child(4) {
-    grid-column: 1 / 4;
-  }
-  .articles-grid .article-card:nth-child(5) {
-    grid-column: 4 / 7;
-  }
-  .articles-grid .article-card:nth-child(6),
-  .articles-grid .article-card:nth-child(7),
-  .articles-grid .article-card:nth-child(8) {
-    grid-column: span 2;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
