@@ -105,12 +105,13 @@ try {
     }
 
     // Regeneruj strony dni + kalendarz (json_encode, bez regex na JS)
+    $syncedCount = 0;
     foreach (array_unique($affectedDates) as $d) {
-        syncDay($db, $d);
+        $syncedCount = syncDay($db, $d);
     }
 
     $_SESSION['flash_success'] = $status === 'published'
-        ? 'Wpis opublikowany! Strona dnia i kalendarz zaktualizowane.'
+        ? "Wpis opublikowany! Kalendarz zsynchronizowany ($syncedCount dni)."
         : 'Wpis zapisany.';
     header("Location: ../entry-form.php?id=$id");
 

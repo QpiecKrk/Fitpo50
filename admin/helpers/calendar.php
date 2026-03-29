@@ -15,10 +15,11 @@
 /**
  * Aktualizuje stronę dnia I kalendarz — wywołaj po każdej zmianie.
  */
-function syncDay(PDO $db, string $date): void {
+function syncDay(PDO $db, string $date): int {
     regenerateDayPage($db, $date);
-    calendarRebuild($db);
+    $count = calendarRebuild($db);
     sitemapRebuild($db);
+    return $count;
 }
 
 /**
@@ -69,9 +70,9 @@ function regenerateDayPage(PDO $db, string $date): void {
  *     między // ENTRIES_START a // ENTRIES_END
  *  4. Zero regex na treści JS — replacement to PHP string
  */
-function calendarRebuild(PDO $db): void {
+function calendarRebuild(PDO $db): int {
     $calFile = SITE_ROOT . 'moje-sukcesy.html';
-    if (!file_exists($calFile)) return;
+    if (!file_exists($calFile)) return 0;
 
     // Pobierz wszystkie opublikowane daty
     $stmt = $db->query(
@@ -89,6 +90,8 @@ function calendarRebuild(PDO $db): void {
             'url'  => SITE_URL . 'sukcesy/' . $date . '.html',
         ];
     }
+
+    $count = count($items);
 
     // Wygeneruj poprawny JavaScript przez json_encode
     $json    = json_encode(
@@ -121,6 +124,8 @@ function calendarRebuild(PDO $db): void {
     }
 
     file_put_contents($calFile, $updated);
+
+    return $count;
 }
 
 /**

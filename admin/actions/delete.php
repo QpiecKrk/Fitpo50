@@ -37,9 +37,9 @@ try {
     $db->prepare('DELETE FROM entries WHERE id = ?')->execute([$id]);
 
     // 4. Regeneruj stronę dnia + kalendarz (json_encode, bez regex na JS)
-    syncDay($db, $date);
+    $syncedCount = syncDay($db, $date);
 
-    $_SESSION['flash_success'] = 'Wpis usunięty. Strona dnia i kalendarz zaktualizowane.';
+    $_SESSION['flash_success'] = "Wpis usunięty! Kalendarz zaktualizowany ($syncedCount dni).";
 
 } catch (Exception $e) {
     $_SESSION['flash_error'] = 'Błąd podczas usuwania: ' . $e->getMessage();
