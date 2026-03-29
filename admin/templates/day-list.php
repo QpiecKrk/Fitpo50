@@ -6,6 +6,30 @@ $siteUrl  = defined('SITE_URL') ? SITE_URL : 'https://fitpo50.pl/';
 $dateFormatted = date('j F Y', strtotime($date ?? ''));
 $pageTitle = 'Wpisy z ' . $dateFormatted;
 $pageUrl   = $siteUrl . 'wpisy-' . ($date ?? '') . '.html';
+
+if (!function_exists('renderMediaPicture')) {
+    function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height, $loading = 'lazy') {
+        $alt = htmlspecialchars($originalName);
+        $src = htmlspecialchars($adminUrl . 'uploads/' . $filename);
+        $base = pathinfo($filename, PATHINFO_FILENAME);
+        $avif = ADMIN_ROOT . 'uploads/' . $base . '.avif';
+        $webp = ADMIN_ROOT . 'uploads/' . $base . '.webp';
+
+        if (file_exists($avif) || file_exists($webp)) {
+            $html = '<picture>';
+            if (file_exists($avif)) {
+                $html .= '<source type="image/avif" srcset="' . htmlspecialchars($adminUrl . 'uploads/' . $base . '.avif') . '">';
+            }
+            if (file_exists($webp)) {
+                $html .= '<source type="image/webp" srcset="' . htmlspecialchars($adminUrl . 'uploads/' . $base . '.webp') . '">';
+            }
+            $html .= '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:auto;object-fit:cover;">';
+            $html .= '</picture>';
+            return $html;
+        }
+        return '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:auto;object-fit:cover;">';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -120,9 +144,7 @@ $pageUrl   = $siteUrl . 'wpisy-' . ($date ?? '') . '.html';
 
         <?php if ($heroImg): ?>
         <div class="article-hero reveal">
-          <img src="<?= htmlspecialchars($adminUrl . 'uploads/' . $heroImg['filename']) ?>"
-               alt="<?= htmlspecialchars($heroImg['original_name'] ?? $title) ?>"
-               loading="lazy" width="1200" height="675">
+          <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $adminUrl, '1200', '675', 'lazy') ?>
         </div>
         <?php endif; ?>
 
@@ -135,9 +157,9 @@ $pageUrl   = $siteUrl . 'wpisy-' . ($date ?? '') . '.html';
           ?>
           <div class="entry-media-gallery">
             <?php foreach ($restMedia as $m): if (!str_starts_with($m['mime_type'] ?? '', 'image/')) continue; ?>
-            <img src="<?= htmlspecialchars($adminUrl . 'uploads/' . $m['filename']) ?>"
-                 alt="<?= htmlspecialchars($m['original_name'] ?? '') ?>"
-                 loading="lazy" width="800" height="600">
+            <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.1);">
+              <?= renderMediaPicture($m['filename'], $m['original_name'] ?? '', $adminUrl, '800', '600', 'lazy') ?>
+            </div>
             <?php endforeach; ?>
           </div>
           <?php endif; ?>

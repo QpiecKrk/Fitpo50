@@ -135,11 +135,18 @@ function handleUploads(PDO $db, int $entryId): void {
         $destPath = UPLOADS_DIR . $filename;
         
         // Kompresja i skalowanie
+        $destDir = UPLOADS_DIR;
+        $baseName = uniqid('img_', true);
+        
         if ($mime === 'image/gif') {
             // Animowanych GIF nie ruszamy GD, żeby nie zepsuć klatek
-            $success = move_uploaded_file($files['tmp_name'][$i], $destPath);
+            $filename = $baseName . '.gif';
+            move_uploaded_file($files['tmp_name'][$i], $destDir . $filename);
+            $success = true;
         } else {
-            $success = processAndSaveImage($files['tmp_name'][$i], $destPath, $mime);
+            $generated = processAndSaveImageVariants($files['tmp_name'][$i], $baseName, $mime, $destDir);
+            $filename = $generated['jpg'] ?? ($baseName . '.jpg');
+            $success = !empty($generated);
         }
 
         if ($success) {
@@ -150,19 +157,24 @@ function handleUploads(PDO $db, int $entryId): void {
 }
 
 /**
- * Optymalizuje obraz: obraca według EXIF, skaluje (max 1920px) i kompresuje.
+ * Optymalizuje obraz: obraca według EXIF, skaluje (max 1600px) i kompresuje 
+ * do 3 wariantów: AVIF, WebP, JPG.
+ * Zwraca mapę z wygenerowanymi nazwami plików.
  */
-function processAndSaveImage(string $sourcePath, string $destPath, string $mime): bool {
-    // 1. Wczytaj obraz
+function processAndSaveImageVariants(string $sourcePath, string $baseName, string $mime, string $destDir): array {
     $image = match ($mime) {
         'image/jpeg' => @imagecreatefromjpeg($sourcePath),
         'image/png'  => @imagecreatefrompng($sourcePath),
         'image/webp' => @imagecreatefromwebp($sourcePath),
         default      => false,
     };
-    if (!$image) return move_uploaded_file($sourcePath, $destPath); // fallback
+    if (!$image) {
+        // Fallback w razie uszkodzonego nagłówka: kopiowanie
+        move_uploaded_file($sourcePath, $destDir . $baseName . '.jpg');
+        return ['jpg' => $baseName . '.jpg'];
+    }
 
-    // 2. Korekta orientacji EXIF (tylko JPEG)
+    // Korekta orientacji EXIF (tylko JPEG)
     if ($mime === 'image/jpeg' && function_exists('exif_read_data')) {
         $exif = @exif_read_data($sourcePath);
         if (!empty($exif['Orientation'])) {
@@ -175,9 +187,9 @@ function processAndSaveImage(string $sourcePath, string $destPath, string $mime)
         }
     }
 
-    // 3. Oblicz wymiary (Max 1920x1920)
-    $maxWidth = 1920;
-    $maxHeight = 1920;
+    // Oblicz wymiary (Max 1600px)
+    $maxWidth = 1600;
+    $maxHeight = 1600;
     $origWidth = imagesx($image);
     $origHeight = imagesy($image);
 
@@ -187,35 +199,50 @@ function processAndSaveImage(string $sourcePath, string $destPath, string $mime)
         $newHeight = (int)round($origHeight * $ratio);
 
         $resized = imagecreatetruecolor($newWidth, $newHeight);
-
-        // Zachowanie przezroczystości dla PNG / WebP
-        if ($mime === 'image/png' || $mime === 'image/webp') {
-            imagealphablending($resized, false);
-            imagesavealpha($resized, true);
-            $transparent = imagecolorallocatealpha($resized, 255, 255, 255, 127);
-            imagefilledrectangle($resized, 0, 0, $newWidth, $newHeight, $transparent);
-        }
+        imagealphablending($resized, false);
+        imagesavealpha($resized, true);
+        $transparent = imagecolorallocatealpha($resized, 255, 255, 255, 127);
+        imagefilledrectangle($resized, 0, 0, $newWidth, $newHeight, $transparent);
 
         imagecopyresampled($resized, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
         imagedestroy($image);
         $image = $resized;
-    } else {
-        // Zapewnienie kanału alpha dla niemodyfikowanych wymiarowo PNG/WebP
-        if ($mime === 'image/png' || $mime === 'image/webp') {
-            imagealphablending($image, false);
-            imagesavealpha($image, true);
-        }
     }
 
-    // 4. Zapis z kompresją
-    $result = match ($mime) {
-        'image/jpeg' => imagejpeg($image, $destPath, 82),   // Quality 82
-        'image/png'  => imagepng($image, $destPath, 7),     // Kompresja 7 (0-9)
-        'image/webp' => imagewebp($image, $destPath, 85),   // Quality 85
-    };
+    $generated = [];
+    $gd_info = gd_info();
+
+    // 1. Zapisz JPG (wymagane, fallback)
+    $jpgPath = $destDir . $baseName . '.jpg';
+    // By usunąć czarne tło z elementów PNG przy konwersji do JPG:
+    $jpgImage = imagecreatetruecolor(imagesx($image), imagesy($image));
+    $white = imagecolorallocate($jpgImage, 255, 255, 255);
+    imagefill($jpgImage, 0, 0, $white);
+    imagecopy($jpgImage, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+    imagejpeg($jpgImage, $jpgPath, 82); // Quality 82
+    imagedestroy($jpgImage);
+    $generated['jpg'] = $baseName . '.jpg';
+
+    // Włączyć obsługę przezroczystości dla natywnych WebP/AVIF
+    imagealphablending($image, false);
+    imagesavealpha($image, true);
+
+    // 2. Zapisz WebP (jeśli obsługiwane)
+    if (!empty($gd_info['WebP Support'])) {
+        $webpPath = $destDir . $baseName . '.webp';
+        imagewebp($image, $webpPath, 85);
+        $generated['webp'] = $baseName . '.webp';
+    }
+
+    // 3. Zapisz AVIF (jeśli obsługiwane przez GD w PHP 8+)
+    if (!empty($gd_info['AVIF Support']) && function_exists('imageavif')) {
+        $avifPath = $destDir . $baseName . '.avif';
+        imageavif($image, $avifPath, 75);
+        $generated['avif'] = $baseName . '.avif';
+    }
 
     imagedestroy($image);
-    return $result;
+    return $generated;
 }
 
 function generateArticleHtml(array $entry, array $media): string {

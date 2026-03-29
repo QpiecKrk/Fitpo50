@@ -28,6 +28,29 @@ foreach ($media as $m) {
 // Czas czytania (szacunek: ~200 słów/min)
 $words   = str_word_count(strip_tags($content));
 $readMin = max(1, round($words / 200));
+
+// Helper: bezpieczne renderowanie mediów z picture (avif, webp) + leniwe ładownie
+function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height, $loading = 'lazy') {
+    $alt = htmlspecialchars($originalName);
+    $src = htmlspecialchars($adminUrl . 'uploads/' . $filename);
+    $base = pathinfo($filename, PATHINFO_FILENAME);
+    $avif = ADMIN_ROOT . 'uploads/' . $base . '.avif';
+    $webp = ADMIN_ROOT . 'uploads/' . $base . '.webp';
+
+    if (file_exists($avif) || file_exists($webp)) {
+        $html = '<picture>';
+        if (file_exists($avif)) {
+            $html .= '<source type="image/avif" srcset="' . htmlspecialchars($adminUrl . 'uploads/' . $base . '.avif') . '">';
+        }
+        if (file_exists($webp)) {
+            $html .= '<source type="image/webp" srcset="' . htmlspecialchars($adminUrl . 'uploads/' . $base . '.webp') . '">';
+        }
+        $html .= '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:auto;object-fit:cover;">';
+        $html .= '</picture>';
+        return $html;
+    }
+    return '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:auto;object-fit:cover;">';
+}
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -171,9 +194,7 @@ $readMin = max(1, round($words / 200));
 
     <?php if ($heroImg): ?>
     <div class="article-hero reveal">
-      <img src="<?= htmlspecialchars($adminUrl . 'uploads/' . $heroImg['filename']) ?>"
-           alt="<?= htmlspecialchars($heroImg['original_name'] ?? $title) ?>"
-           loading="eager" width="1200" height="675">
+      <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $adminUrl, '1200', '675', 'eager') ?>
     </div>
     <?php endif; ?>
 
@@ -187,9 +208,9 @@ $readMin = max(1, round($words / 200));
       ?>
       <div class="entry-media-gallery">
         <?php foreach ($restMedia as $m): if (!str_starts_with($m['mime_type'] ?? '', 'image/')) continue; ?>
-        <img src="<?= htmlspecialchars($adminUrl . 'uploads/' . $m['filename']) ?>"
-             alt="<?= htmlspecialchars($m['original_name'] ?? '') ?>"
-             loading="lazy" width="800" height="600">
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.1);">
+          <?= renderMediaPicture($m['filename'], $m['original_name'] ?? '', $adminUrl, '800', '600', 'lazy') ?>
+        </div>
         <?php endforeach; ?>
       </div>
       <?php endif; ?>
