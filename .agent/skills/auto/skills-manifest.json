@@ -1,18 +1,18 @@
 {
   "project": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T16:51:17.352Z",
-    "observationCount": 220,
+    "lastGenerated": "2026-03-29T17:01:17.341Z",
+    "observationCount": 222,
     "skillCount": 0,
     "domain": "project",
     "triggerGlobs": [
       "**/*"
     ],
-    "description": "Project for Fitpo50. 26 gotchas, 48 conventions, 13 fixes."
+    "description": "Project for Fitpo50. 26 gotchas, 49 conventions, 13 fixes."
   },
   "html": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T16:51:17.352Z",
+    "lastGenerated": "2026-03-29T17:01:17.341Z",
     "observationCount": 164,
     "skillCount": 0,
     "domain": "html",
@@ -23,7 +23,7 @@
   },
   "problem-fix": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T16:51:17.353Z",
+    "lastGenerated": "2026-03-29T17:01:17.342Z",
     "observationCount": 0,
     "skillCount": 2,
     "domain": "problem-fix",
@@ -34,9 +34,9 @@
   },
   "convention": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T16:51:17.353Z",
+    "lastGenerated": "2026-03-29T17:01:17.341Z",
     "observationCount": 0,
-    "skillCount": 27,
+    "skillCount": 28,
     "domain": "convention",
     "triggerGlobs": [
       "**/*"
@@ -45,7 +45,7 @@
   },
   "css": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T16:51:17.352Z",
+    "lastGenerated": "2026-03-29T17:01:17.341Z",
     "observationCount": 7,
     "skillCount": 0,
     "domain": "css",
@@ -57,7 +57,7 @@
   },
   "shell": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T16:51:17.353Z",
+    "lastGenerated": "2026-03-29T17:01:17.341Z",
     "observationCount": 2,
     "skillCount": 0,
     "domain": "shell",
@@ -69,8 +69,8 @@
   },
   "php": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T16:51:17.352Z",
-    "observationCount": 10,
+    "lastGenerated": "2026-03-29T17:01:17.341Z",
+    "observationCount": 12,
     "skillCount": 0,
     "domain": "php",
     "triggerGlobs": [

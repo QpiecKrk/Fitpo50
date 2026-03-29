@@ -250,8 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
             dot.classList.add('entry-carousel__dot');
             if (i === 0) dot.classList.add('entry-carousel__dot--active');
             dot.setAttribute('aria-label', `Idź do zdjęcia ${i + 1}`);
-            dot.addEventListener('click', () => {
-                track.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' });
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                track.scrollTo({ left: track.offsetWidth * i, behavior: 'smooth' });
             });
             dotsContainer.appendChild(dot);
         });
@@ -265,14 +266,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        track.addEventListener('scroll', updateActiveDot);
+        track.addEventListener('scroll', updateActiveDot, { passive: true });
 
-        prevBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -track.offsetWidth, behavior: 'smooth' });
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const index = Math.round(track.scrollLeft / track.offsetWidth);
+            track.scrollTo({ left: track.offsetWidth * (index - 1), behavior: 'smooth' });
         });
 
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({ left: track.offsetWidth, behavior: 'smooth' });
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const index = Math.round(track.scrollLeft / track.offsetWidth);
+            track.scrollTo({ left: track.offsetWidth * (index + 1), behavior: 'smooth' });
         });
 
         // Keyboard navigation

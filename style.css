@@ -2152,7 +2152,8 @@ a:hover {
   overflow: hidden;
   box-shadow: 0 15px 40px rgba(0,0,0,.15);
   aspect-ratio: 16/9;
-  background: #0f1418;
+  background: #1a1f24;
+  touch-action: pan-y;
 }
 
 .entry-carousel__track {
@@ -2164,6 +2165,8 @@ a:hover {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  position: relative;
+  z-index: 1;
 }
 
 .entry-carousel__track::-webkit-scrollbar {
@@ -2204,7 +2207,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
+  z-index: 20;
   transition: all 0.2s ease;
   padding: 0;
 }
@@ -2229,7 +2232,7 @@ a:hover {
   transform: translateX(-50%);
   display: flex;
   gap: 8px;
-  z-index: 10;
+  z-index: 20;
 }
 
 .entry-carousel__dot {
