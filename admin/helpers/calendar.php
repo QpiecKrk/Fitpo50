@@ -61,20 +61,15 @@ function regenerateDayPage(PDO $db, string $date): void {
 
 /**
  * Przebudowuje const userEntries w moje-sukcesy.html
- * bezpośrednio z bazy danych.
- *
- * Mechanizm:
- *  1. Pobiera wszystkie daty z opublikowanymi wpisami
- *  2. json_encode() → gwarantuje poprawny JS
- *  3. preg_replace_callback podmienia CAŁY blok
- *     między // ENTRIES_START a // ENTRIES_END
- *  4. Zero regex na treści JS — replacement to PHP string
+ * bezpośrednio z bazy danych z atomowym zapisem i weryfikacją.
  */
 function calendarRebuild(PDO $db): int {
     $calFile = SITE_ROOT . 'moje-sukcesy.html';
+    $tmpFile = $calFile . '.tmp';
+    
     if (!file_exists($calFile)) return 0;
 
-    // Pobierz wszystkie opublikowane daty
+    // 1. Pobierz wszystkie opublikowane daty
     $stmt = $db->query(
         "SELECT DISTINCT entry_date FROM entries
          WHERE status = 'published'
@@ -82,7 +77,7 @@ function calendarRebuild(PDO $db): int {
     );
     $dates = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-    // Zbuduj tablicę wpisów
+    // 2. Zbuduj tablicę wpisów
     $items = [];
     foreach ($dates as $date) {
         $items[] = [
@@ -91,10 +86,10 @@ function calendarRebuild(PDO $db): int {
         ];
     }
 
-    $count = count($items);
+    $dbCount = count($items);
 
-    // Wygeneruj poprawny JavaScript przez json_encode
-    $json    = json_encode(
+    // 3. Wygeneruj poprawny JavaScript
+    $json = json_encode(
         $items,
         JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
     );
@@ -103,8 +98,11 @@ function calendarRebuild(PDO $db): int {
     }
     $newDecl = "const userEntries = {$json};";
 
-    // Podmień CAŁY blok między markerami
+    // 4. Podmień CAŁY blok między markerami
     $content = file_get_contents($calFile);
+    if (!$content) {
+        throw new RuntimeException('Nie udało się odczytać pliku moje-sukcesy.html');
+    }
 
     if (!preg_match('/\/\/ ENTRIES_START.*?\/\/ ENTRIES_END/s', $content)) {
         throw new RuntimeException('Brak markerów ENTRIES_START/ENTRIES_END w moje-sukcesy.html');
@@ -113,19 +111,45 @@ function calendarRebuild(PDO $db): int {
     $updated = preg_replace_callback(
         '/\/\/ ENTRIES_START.*?\/\/ ENTRIES_END/s',
         static function () use ($newDecl): string {
-            // Replacement to PHP string — żadnych specjalnych znaków regex
             return "// ENTRIES_START\n  {$newDecl}\n  // ENTRIES_END";
         },
         $content
     );
 
     if ($updated === null) {
-        throw new RuntimeException('Nie udało się podmienić bloku wpisów kalendarza.');
+        throw new RuntimeException('Błąd preg_replace przy generowaniu kalendarza.');
     }
 
-    file_put_contents($calFile, $updated);
+    // 5. ATOMICZNY ZAPIS
+    if (file_put_contents($tmpFile, $updated) === false) {
+        throw new RuntimeException('Błąd zapisu pliku tymczasowego kalendarza.');
+    }
 
-    return $count;
+    if (!@rename($tmpFile, $calFile)) {
+        @unlink($tmpFile);
+        throw new RuntimeException('Błąd przy zamianie pliku kalendarza (moje-sukcesy.html).');
+    }
+
+    // 6. WERYFIKACJA PO ZAPISIE
+    $savedContent = file_get_contents($calFile);
+    if (!$savedContent) {
+        throw new RuntimeException('WERYFIKACJA FAILED: Plik kalendarza jest pusty po zapisie!');
+    }
+
+    // Sprawdź czy nowa zawartość jest spójna
+    preg_match('/\/\/ ENTRIES_START\s*const userEntries\s*=\s*(\[[\s\S]*?\]);\s*\/\/ ENTRIES_END/', $savedContent, $m);
+    $finalCount = 0;
+    if (isset($m[1])) {
+        $decoded = json_decode($m[1], true);
+        $finalCount = is_array($decoded) ? count($decoded) : 0;
+    }
+
+    // Krytyczne zabezpieczenie: jeśli w bazie są wpisy, a w pliku ich nie ma — COFNIJ/ALARM
+    if ($dbCount > 0 && $finalCount === 0) {
+        throw new RuntimeException("KRYTYCZNA NIESPÓJNOŚĆ: W bazie jest $dbCount wpisów, ale zapisał się pusty kalendarz!");
+    }
+
+    return $finalCount;
 }
 
 /**
@@ -142,7 +166,7 @@ function sitemapRebuild(PDO $db): int {
     if (!@$dom->load($sitemapFile)) return 0;
 
     $urlset = $dom->documentElement;
-    if (!$urlset || $urlset->tagName !== 'urlset') return 0;
+    if (!$urlset || $urlset->tagName !== 'urlset' || !($urlset instanceof DOMElement)) return 0;
 
     // Remove old sukcesy/ entries
     $toRemove = [];

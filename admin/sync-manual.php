@@ -50,13 +50,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $synced = true;
         
         // Weryfikacja po zapisie
+        $calContentAfter = file_get_contents(SITE_ROOT . 'moje-sukcesy.html');
+        preg_match('/\/\/ ENTRIES_START\s*const userEntries\s*=\s*(\[[\s\S]*?\]);\s*\/\/ ENTRIES_END/', $calContentAfter, $m);
+        $finalCalCount = 0;
+        if (isset($m[1])) {
+            $decoded = json_decode($m[1], true);
+            $finalCalCount = is_array($decoded) ? count($decoded) : 0;
+        }
+
         $sitemapContentAfter = file_get_contents(SITE_ROOT . 'sitemap.xml');
         $verifySitemapCount = substr_count($sitemapContentAfter, '/sukcesy/');
         
         $stats[] = "✓ Zsynchronizowano pomyślnie:";
-        $stats[] = "— Kalendarz: $syncedCalCount dni";
-        $stats[] = "— Sitemap: $syncedSitemapCount adresów (Weryfikacja pliku: $verifySitemapCount)";
+        $stats[] = "— Kalendarz: $syncedCalCount dni (w pliku: $finalCalCount)";
+        $stats[] = "— Sitemap: $syncedSitemapCount adresów (w pliku: $verifySitemapCount)";
         
+        // Twarda walidacja niespójności
+        if ($publishedCount > 0 && $finalCalCount === 0) {
+            $errors[] = "⚠️ KRYTYCZNA NIESPÓJNOŚĆ: Kalendarz w HTML jest pustY, mimo że w bazie jest $publishedCount wpisów!";
+        }
+
         if ($verifySitemapCount !== $syncedSitemapCount) {
             $errors[] = "UWAGA: Rozbieżność w sitemapie! Oczekiwano $syncedSitemapCount, znaleziono $verifySitemapCount.";
         }
