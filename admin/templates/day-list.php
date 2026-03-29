@@ -98,6 +98,7 @@ if (!function_exists('renderMediaPicture')) {
 
 .article-header { text-align: center; margin-bottom: var(--space-8); padding: 0 var(--space-6); max-width: 980px; margin-inline: auto; }
 .article-header__title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; color: var(--text-base); margin-bottom: var(--space-6); letter-spacing: -.02em; font-weight: 700; }
+.article-header__lead { font-size: clamp(1.1rem, 2.1vw, 1.32rem); color: var(--color-accent); max-width: 62ch; margin: 0 auto; line-height: 1.7; font-weight: 600; }
 .article-hero { position: relative; width: 100%; max-width: 1000px; margin: 0 auto var(--space-10); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); }
 .article-hero img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
 .article-content { max-width: 720px; margin: 0 auto var(--space-12); font-size: 1.125rem; line-height: 1.8; color: var(--text-muted); padding: 0 var(--space-6); }
@@ -168,7 +169,7 @@ if (!function_exists('renderMediaPicture')) {
         <div class="article-header reveal">
           <h2 class="article-header__title" style="color: var(--color-primary);"><?= htmlspecialchars($title) ?></h2>
           <?php if ($lead): ?>
-            <p style="font-size:1.2rem;color:var(--text-muted);max-width:60ch;margin:0 auto;"><?= htmlspecialchars($lead) ?></p>
+            <p class="article-header__lead"><?= htmlspecialchars($lead) ?></p>
           <?php endif; ?>
         </div>
 

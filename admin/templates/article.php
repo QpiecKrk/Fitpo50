@@ -128,6 +128,7 @@ function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height
 .article-header { text-align: center; margin-bottom: var(--space-12); max-width: 980px; margin-inline: auto; padding: 0 var(--space-6); }
 .article-header__meta { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: var(--space-6); font-size: .95rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 .article-header__title { font-family: var(--font-display); font-size: clamp(2.25rem, 5.4vw, 4.1rem); line-height: 1.1; color: var(--text-base); margin-bottom: var(--space-6); letter-spacing: -.02em; font-weight: 700; }
+.article-header__lead { font-size: clamp(1.1rem, 2.1vw, 1.32rem); color: var(--color-accent); max-width: 62ch; margin: 0 auto; line-height: 1.7; font-weight: 600; }
 .article-hero { position: relative; width: 100%; max-width: 1000px; margin: 0 auto var(--space-16); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); }
 .article-hero picture, .article-hero img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
 .article-content { max-width: 720px; margin: 0 auto; font-size: 1.125rem; line-height: 1.8; color: var(--text-muted); padding: 0 var(--space-6); }
@@ -188,7 +189,7 @@ function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height
       </div>
       <h1 class="article-header__title" style="color: var(--color-primary);"><?= htmlspecialchars($title) ?></h1>
       <?php if ($lead): ?>
-        <p style="font-size:1.2rem;color:var(--text-muted);max-width:60ch;margin:0 auto;"><?= htmlspecialchars($lead) ?></p>
+        <p class="article-header__lead"><?= htmlspecialchars($lead) ?></p>
       <?php endif; ?>
     </div>
 

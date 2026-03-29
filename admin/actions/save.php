@@ -260,6 +260,13 @@ function generateArticleHtml(array $entry, array $media): string {
 function sanitizeHtml(string $html): string {
     if (empty($html)) return '';
 
+    $normalized = str_replace(["\r\n", "\r"], "\n", trim($html));
+    if (!preg_match('/<\s*[a-zA-Z][^>]*>/', $normalized)) {
+        $html = autoFormatPlainText($normalized);
+    } else {
+        $html = $normalized;
+    }
+
     $libxml_prev = libxml_use_internal_errors(true);
     $dom = new DOMDocument();
     
@@ -329,4 +336,93 @@ function sanitizeHtml(string $html): string {
     libxml_use_internal_errors($libxml_prev);
     
     return trim($out);
+}
+
+function autoFormatPlainText(string $text): string {
+    if ($text === '') return '';
+
+    $blocks = preg_split('/\n{2,}/', $text) ?: [];
+    $out = [];
+
+    foreach ($blocks as $blockRaw) {
+        $block = trim($blockRaw);
+        if ($block === '') continue;
+
+        $lines = array_values(array_filter(array_map('trim', explode("\n", $block)), static fn($line) => $line !== ''));
+        if (empty($lines)) continue;
+
+        if (isBulletBlock($lines)) {
+            $items = [];
+            foreach ($lines as $line) {
+                $clean = preg_replace('/^[-*]\s+/u', '', $line);
+                $safe = htmlspecialchars($clean ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+                $items[] = '<li>' . autoEmphasizeKeywords($safe) . '</li>';
+            }
+            $out[] = "<ul>\n" . implode("\n", $items) . "\n</ul>";
+            continue;
+        }
+
+        if (isNumberedBlock($lines)) {
+            $items = [];
+            foreach ($lines as $line) {
+                $clean = preg_replace('/^\d+[\.\)]\s+/u', '', $line);
+                $safe = htmlspecialchars($clean ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+                $items[] = '<li>' . autoEmphasizeKeywords($safe) . '</li>';
+            }
+            $out[] = "<ol>\n" . implode("\n", $items) . "\n</ol>";
+            continue;
+        }
+
+        if (count($lines) === 1) {
+            if (preg_match('/^#{2,3}\s+(.+)$/u', $lines[0], $m)) {
+                $heading = htmlspecialchars(trim($m[1]), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+                $out[] = '<h3>' . autoEmphasizeKeywords($heading) . '</h3>';
+                continue;
+            }
+            if (isAutoHeading($lines[0])) {
+                $heading = htmlspecialchars(rtrim($lines[0], ':'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+                $out[] = '<h3>' . autoEmphasizeKeywords($heading) . '</h3>';
+                continue;
+            }
+        }
+
+        $paragraphLines = [];
+        foreach ($lines as $line) {
+            $safeLine = htmlspecialchars($line, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+            $paragraphLines[] = autoEmphasizeKeywords($safeLine);
+        }
+        $out[] = '<p>' . implode("<br>\n", $paragraphLines) . '</p>';
+    }
+
+    return implode("\n", $out);
+}
+
+function isBulletBlock(array $lines): bool {
+    foreach ($lines as $line) {
+        if (!preg_match('/^[-*]\s+.+/u', $line)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function isNumberedBlock(array $lines): bool {
+    foreach ($lines as $line) {
+        if (!preg_match('/^\d+[\.\)]\s+.+/u', $line)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function isAutoHeading(string $line): bool {
+    $line = trim($line);
+    $length = mb_strlen($line);
+    if ($length < 8 || $length > 72) return false;
+    return str_ends_with($line, ':');
+}
+
+function autoEmphasizeKeywords(string $text): string {
+    $text = preg_replace('/^(Wazne|Ważne|Uwaga|Tip|Wskazowka|Wskazówka|Kluczowe|Cel|Plan|Progres|Postep|Postęp)(\s*:)/iu', '<strong>$1</strong>$2', $text);
+    return (string)preg_replace('/\b(najwazniejsze|najważniejsze|kluczowe|wazne|ważne|uwaga|wskazowka|wskazówka|tip|progres|postep|postęp)\b/iu', '<strong>$1</strong>', $text);
 }
