@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 45 conventions, 11 fixes."
+description: "Project for Fitpo50. 26 gotchas, 45 conventions, 12 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **201 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **205 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -46,6 +46,19 @@ Auto-compiled from **201 real patterns** in **Fitpo50**. This skill is auto-rout
 | gotcha in scratchpad_o1gsw9jp.md | - - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't seem to trigger menu in screenshot) |
 
 ## 🔧 Problem Playbooks
+
+### problem-fix in scratchpad_aeciidv5.md
+- - [/] Open https://fitpo50.pl/moje-sukcesy.html
++ - [x] Open https://fitpo50.pl/moje-sukcesy.html
+- - [ ] Check Console for JavaScript errors
++ - [x] Check Console for JavaScript errors (None found except favicon 404)
+- - [ ] Inspect #calendar-track element
++ - [x] Inspect #calendar-track element (Visible in screenshot, correctly rendered)
+- - [ ] Analyze why the calendar is invisible
++ - [ ] An
+
+**Actionable Steps:**
+1. Modified 1 files
 
 ### Patched security issue Open
 - - [ ] Open `index.html` and set viewport to 375x667.
@@ -222,10 +235,6 @@ CLAUDE.md
 - 📐 **Implement soft delete for important data — don't hard delete without confirmation** — Implement soft delete for important data — don't hard delete without confirmation
 - 📐 **Handle timezone correctly — store UTC, display in user's timezone** — Handle timezone correctly — store UTC, display in user's timezone
 - 📐 **Make layouts responsive from the start — mobile-first approach** — Make layouts responsive from the start — mobile-first approach
-- 📐 **Disable submit button during form submission — prevent double-submit** — Disable submit button during form submission — prevent double-submit
-- 📐 **Always add empty states ("No items yet" with call-to-action)** — Always add empty states ("No items yet" with call-to-action)
-- 📐 **Always add error states with retry button — not just blank screen** — Always add error states with retry button — not just blank screen
-- 📐 **Always add loading states for async operations (skeleton, spinner)** — Always add loading states for async operations (skeleton, spinner)
-- 📐 **Te
+- 📐 **Disable submit button during form submission — prevent double-submit** — Disable subm
 
 ... [Truncated — see individual observations for full content]

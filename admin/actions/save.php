@@ -122,7 +122,7 @@ exit;
 
 // ── helpers ──────────────────────────────────────────────────────────
 function handleUploads(PDO $db, int $entryId): void {
-    $allowed = ['image/jpeg','image/png','image/webp','image/avif','image/gif'];
+    $allowed = ['image/jpeg','image/png','image/webp','image/gif'];
     $maxSize = 10 * 1024 * 1024;
     $files   = $_FILES['media_files'];
     $count   = count($files['name']);
@@ -132,11 +132,90 @@ function handleUploads(PDO $db, int $entryId): void {
         if (!in_array($mime, $allowed)) continue;
         $ext      = strtolower(pathinfo($files['name'][$i], PATHINFO_EXTENSION));
         $filename = uniqid('img_', true) . '.' . $ext;
-        if (move_uploaded_file($files['tmp_name'][$i], UPLOADS_DIR . $filename)) {
+        $destPath = UPLOADS_DIR . $filename;
+        
+        // Kompresja i skalowanie
+        if ($mime === 'image/gif') {
+            // Animowanych GIF nie ruszamy GD, żeby nie zepsuć klatek
+            $success = move_uploaded_file($files['tmp_name'][$i], $destPath);
+        } else {
+            $success = processAndSaveImage($files['tmp_name'][$i], $destPath, $mime);
+        }
+
+        if ($success) {
             $db->prepare('INSERT INTO media (entry_id,filename,original_name,mime_type,sort_order) VALUES (?,?,?,?,?)')
                ->execute([$entryId, $filename, $files['name'][$i], $mime, $i]);
         }
     }
+}
+
+/**
+ * Optymalizuje obraz: obraca według EXIF, skaluje (max 1920px) i kompresuje.
+ */
+function processAndSaveImage(string $sourcePath, string $destPath, string $mime): bool {
+    // 1. Wczytaj obraz
+    $image = match ($mime) {
+        'image/jpeg' => @imagecreatefromjpeg($sourcePath),
+        'image/png'  => @imagecreatefrompng($sourcePath),
+        'image/webp' => @imagecreatefromwebp($sourcePath),
+        default      => false,
+    };
+    if (!$image) return move_uploaded_file($sourcePath, $destPath); // fallback
+
+    // 2. Korekta orientacji EXIF (tylko JPEG)
+    if ($mime === 'image/jpeg' && function_exists('exif_read_data')) {
+        $exif = @exif_read_data($sourcePath);
+        if (!empty($exif['Orientation'])) {
+            $image = match ($exif['Orientation']) {
+                3 => imagerotate($image, 180, 0),
+                6 => imagerotate($image, -90, 0),
+                8 => imagerotate($image, 90, 0),
+                default => $image
+            };
+        }
+    }
+
+    // 3. Oblicz wymiary (Max 1920x1920)
+    $maxWidth = 1920;
+    $maxHeight = 1920;
+    $origWidth = imagesx($image);
+    $origHeight = imagesy($image);
+
+    if ($origWidth > $maxWidth || $origHeight > $maxHeight) {
+        $ratio = min($maxWidth / $origWidth, $maxHeight / $origHeight);
+        $newWidth = (int)round($origWidth * $ratio);
+        $newHeight = (int)round($origHeight * $ratio);
+
+        $resized = imagecreatetruecolor($newWidth, $newHeight);
+
+        // Zachowanie przezroczystości dla PNG / WebP
+        if ($mime === 'image/png' || $mime === 'image/webp') {
+            imagealphablending($resized, false);
+            imagesavealpha($resized, true);
+            $transparent = imagecolorallocatealpha($resized, 255, 255, 255, 127);
+            imagefilledrectangle($resized, 0, 0, $newWidth, $newHeight, $transparent);
+        }
+
+        imagecopyresampled($resized, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
+        imagedestroy($image);
+        $image = $resized;
+    } else {
+        // Zapewnienie kanału alpha dla niemodyfikowanych wymiarowo PNG/WebP
+        if ($mime === 'image/png' || $mime === 'image/webp') {
+            imagealphablending($image, false);
+            imagesavealpha($image, true);
+        }
+    }
+
+    // 4. Zapis z kompresją
+    $result = match ($mime) {
+        'image/jpeg' => imagejpeg($image, $destPath, 82),   // Quality 82
+        'image/png'  => imagepng($image, $destPath, 7),     // Kompresja 7 (0-9)
+        'image/webp' => imagewebp($image, $destPath, 85),   // Quality 85
+    };
+
+    imagedestroy($image);
+    return $result;
 }
 
 function generateArticleHtml(array $entry, array $media): string {

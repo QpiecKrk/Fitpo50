@@ -39,12 +39,15 @@ $pageUrl   = $siteUrl . 'wpisy-' . ($date ?? '') . '.html';
 .day-list-header { text-align: center; margin-bottom: var(--space-12); }
 .day-list-header__label { display: inline-block; background: var(--color-primary); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--space-4); }
 .day-list-header__title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text-base); letter-spacing: -.02em; }
-.day-list-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-8); max-width: 720px; margin: 0 auto; padding: 0 var(--space-6); }
-.entry-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-8); text-decoration: none; color: inherit; display: block; transition: all .25s ease; }
-.entry-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(14,143,170,.12); border-color: var(--color-primary); }
-.entry-card__title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--color-primary); margin-bottom: var(--space-3); line-height: 1.25; }
-.entry-card__lead { font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
-.entry-card__cta { display: inline-block; margin-top: var(--space-4); font-weight: 600; color: var(--color-accent); font-size: .95rem; }
+
+.day-list-container { display: flex; flex-direction: column; max-width: 800px; margin: 0 auto; padding: 0 var(--space-6); }
+.entry-card { background: var(--color-surface); padding: var(--space-8); text-decoration: none; color: inherit; display: block; border-radius: var(--radius-md); transition: background-color .2s ease; }
+.entry-card:hover { background: var(--color-surface-2); }
+.entry-card__title { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--text-base); margin-bottom: var(--space-3); line-height: 1.25; }
+.entry-card__lead { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; }
+.entry-card__cta { display: inline-block; margin-top: var(--space-5); font-weight: 600; color: var(--color-primary); font-size: .95rem; text-transform: uppercase; letter-spacing: 1px; }
+
+.day-list-separator { border: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(14, 143, 170, 0.2), transparent); margin: var(--space-8) 0; width: 100%; display: block; }
 </style>
 </head>
 <body>
@@ -78,15 +81,18 @@ $pageUrl   = $siteUrl . 'wpisy-' . ($date ?? '') . '.html';
       <h1 class="day-list-header__title">Wpisy z <?= htmlspecialchars($dateFormatted) ?></h1>
     </div>
 
-    <div class="day-list-grid">
-      <?php foreach ($entries as $e): ?>
-      <a href="<?= htmlspecialchars($siteUrl . $e['html_file']) ?>" class="entry-card reveal">
-        <div class="entry-card__title"><?= htmlspecialchars($e['title']) ?></div>
-        <?php if (!empty($e['lead'])): ?>
-          <p class="entry-card__lead"><?= htmlspecialchars($e['lead']) ?></p>
+    <div class="day-list-container">
+      <?php foreach ($entries as $index => $e): ?>
+        <?php if ($index > 0): ?>
+          <hr class="day-list-separator">
         <?php endif; ?>
-        <span class="entry-card__cta">Czytaj wpis →</span>
-      </a>
+        <a href="<?= htmlspecialchars($siteUrl . $e['html_file']) ?>" class="entry-card reveal">
+          <div class="entry-card__title"><?= htmlspecialchars($e['title']) ?></div>
+          <?php if (!empty($e['lead'])): ?>
+            <p class="entry-card__lead"><?= htmlspecialchars($e['lead']) ?></p>
+          <?php endif; ?>
+          <span class="entry-card__cta">CZYTAJ WPIS →</span>
+        </a>
       <?php endforeach; ?>
     </div>
 

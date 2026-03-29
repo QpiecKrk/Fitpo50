@@ -1,18 +1,18 @@
 {
   "project": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T12:59:09.963Z",
-    "observationCount": 201,
+    "lastGenerated": "2026-03-29T13:29:21.987Z",
+    "observationCount": 205,
     "skillCount": 0,
     "domain": "project",
     "triggerGlobs": [
       "**/*"
     ],
-    "description": "Project for Fitpo50. 26 gotchas, 45 conventions, 11 fixes."
+    "description": "Project for Fitpo50. 26 gotchas, 45 conventions, 12 fixes."
   },
   "html": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T12:59:09.962Z",
+    "lastGenerated": "2026-03-29T13:29:21.987Z",
     "observationCount": 164,
     "skillCount": 0,
     "domain": "html",
@@ -23,7 +23,7 @@
   },
   "problem-fix": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T12:59:09.964Z",
+    "lastGenerated": "2026-03-29T13:29:21.988Z",
     "observationCount": 0,
     "skillCount": 1,
     "domain": "problem-fix",
@@ -34,7 +34,7 @@
   },
   "convention": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T12:59:09.964Z",
+    "lastGenerated": "2026-03-29T13:29:21.988Z",
     "observationCount": 0,
     "skillCount": 24,
     "domain": "convention",
@@ -45,7 +45,7 @@
   },
   "css": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T12:59:09.963Z",
+    "lastGenerated": "2026-03-29T13:29:21.987Z",
     "observationCount": 5,
     "skillCount": 0,
     "domain": "css",
@@ -57,7 +57,7 @@
   },
   "shell": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T12:59:09.964Z",
+    "lastGenerated": "2026-03-29T13:29:21.987Z",
     "observationCount": 2,
     "skillCount": 0,
     "domain": "shell",
@@ -69,13 +69,13 @@
   },
   "php": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T12:59:09.961Z",
-    "observationCount": 3,
+    "lastGenerated": "2026-03-29T13:29:21.987Z",
+    "observationCount": 5,
     "skillCount": 0,
     "domain": "php",
     "triggerGlobs": [
       "**/*.php"
     ],
-    "description": "Php for Fitpo50. ."
+    "description": "Php for Fitpo50. 1 fixes."
   }
 }
