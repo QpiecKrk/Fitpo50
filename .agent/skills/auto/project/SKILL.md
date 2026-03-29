@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 41 conventions, 11 fixes."
+description: "Project for Fitpo50. 26 gotchas, 43 conventions, 11 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **190 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **196 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -169,6 +169,21 @@ Auto-compiled from **190 real patterns** in **Fitpo50**. This skill is auto-rout
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
+- 📐 **convention in .gitignore** — File updated (external): .gitignore
+
+Content summary (8 lines):
+
+AGENT.md
+CLAUDE.md
+.agent-mem/
+
+# A
+- 📐 **convention in .htaccess** — File updated (external): .htaccess
+
+Content summary (15 lines):
+RewriteEngine On
+
+# Always use the c
 - 📐 **convention in maszyny_4_shoulder_press_1774368276474.avif** — File updated (external): _site/assets/maszyny_4_shoulder_press_1774368276474.avif
 
 Content summary (
@@ -208,8 +223,6 @@ CLAUDE.md
 - 📐 **Always add error states with retry button — not just blank screen** — Always add error states with retry button — not just blank screen
 - 📐 **Always add loading states for async operations (skeleton, spinner)** — Always add loading states for async operations (skeleton, spinner)
 - 📐 **Test edge cases: empty input, null, boundary values, error scenarios** — Test edge cases: empty input, null, boundary values, error scenarios
-- 📐 **Each test should be independent — no shared mutable state between tests** — Each test should be independent — no shared mutable state between tests
-- 📐 **Write tests for business logic — test behavior/output, not implementation details** — Write tests for business logic — test behavior/output, not implementation details
-- 📐 **Close resources (streams, connections, handles) when done** — Close re
+- 📐 **Each test should be independent — no shared mutable state between tests** — Each test should be independent — no shared mutable
 
 ... [Truncated — see individual observations for full content]

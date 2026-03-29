@@ -1,29 +1,29 @@
 {
   "project": {
     "enabled": true,
-    "lastGenerated": "2026-03-28T21:37:56.481Z",
-    "observationCount": 190,
+    "lastGenerated": "2026-03-29T07:02:27.485Z",
+    "observationCount": 196,
     "skillCount": 0,
     "domain": "project",
     "triggerGlobs": [
       "**/*"
     ],
-    "description": "Project for Fitpo50. 26 gotchas, 41 conventions, 11 fixes."
+    "description": "Project for Fitpo50. 26 gotchas, 43 conventions, 11 fixes."
   },
   "html": {
     "enabled": true,
-    "lastGenerated": "2026-03-28T21:37:56.481Z",
-    "observationCount": 118,
+    "lastGenerated": "2026-03-29T07:02:27.485Z",
+    "observationCount": 123,
     "skillCount": 0,
     "domain": "html",
     "triggerGlobs": [
       "**/*.html"
     ],
-    "description": "Html for Fitpo50. 3 gotchas, 58 conventions."
+    "description": "Html for Fitpo50. 3 gotchas, 59 conventions."
   },
   "problem-fix": {
     "enabled": true,
-    "lastGenerated": "2026-03-28T21:37:56.481Z",
+    "lastGenerated": "2026-03-29T07:02:27.485Z",
     "observationCount": 0,
     "skillCount": 1,
     "domain": "problem-fix",
@@ -34,9 +34,9 @@
   },
   "convention": {
     "enabled": true,
-    "lastGenerated": "2026-03-28T21:37:56.481Z",
+    "lastGenerated": "2026-03-29T07:02:27.485Z",
     "observationCount": 0,
-    "skillCount": 9,
+    "skillCount": 11,
     "domain": "convention",
     "triggerGlobs": [
       "**/*"
@@ -45,8 +45,8 @@
   },
   "css": {
     "enabled": true,
-    "lastGenerated": "2026-03-28T21:37:56.481Z",
-    "observationCount": 3,
+    "lastGenerated": "2026-03-29T07:02:27.485Z",
+    "observationCount": 5,
     "skillCount": 0,
     "domain": "css",
     "triggerGlobs": [
@@ -54,5 +54,17 @@
       "**/*.scss"
     ],
     "description": "Css for Fitpo50. 1 conventions."
+  },
+  "shell": {
+    "enabled": true,
+    "lastGenerated": "2026-03-29T07:02:27.485Z",
+    "observationCount": 2,
+    "skillCount": 0,
+    "domain": "shell",
+    "triggerGlobs": [
+      "**/*.sh",
+      "**/*.bash"
+    ],
+    "description": "Shell for Fitpo50. ."
   }
 }
