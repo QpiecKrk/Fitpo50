@@ -319,41 +319,39 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (slides.length < 2) return;
 
+        let currentIndex = 0;
+
         // Create dots
         slides.forEach((_, i) => {
             const dot = document.createElement('button');
             dot.classList.add('entry-carousel__dot');
             if (i === 0) dot.classList.add('entry-carousel__dot--active');
             dot.setAttribute('aria-label', `Idź do zdjęcia ${i + 1}`);
-            dot.addEventListener('click', () => {
-                track.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' });
-            });
+            dot.addEventListener('click', () => goToSlide(i));
             dotsContainer.appendChild(dot);
         });
 
         const dots = Array.from(dotsContainer.children);
 
-        const updateActiveDot = () => {
-            const index = Math.round(track.scrollLeft / track.offsetWidth);
+        const goToSlide = (index) => {
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
             dots.forEach((dot, i) => {
-                dot.classList.toggle('entry-carousel__dot--active', i === index);
+                dot.classList.toggle('entry-carousel__dot--active', i === currentIndex);
             });
         };
 
-        track.addEventListener('scroll', updateActiveDot);
-
-        prevBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -track.offsetWidth, behavior: 'smooth' });
-        });
-
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({ left: track.offsetWidth, behavior: 'smooth' });
-        });
+        prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
 
         // Keyboard navigation
         carousel.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') prevBtn.click();
-            if (e.key === 'ArrowRight') nextBtn.click();
+            if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+            if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
         });
     });
 });
