@@ -18,6 +18,7 @@
 function syncDay(PDO $db, string $date): void {
     regenerateDayPage($db, $date);
     calendarRebuild($db);
+    sitemapRebuild($db);
 }
 
 /**
@@ -120,4 +121,59 @@ function calendarRebuild(PDO $db): void {
     }
 
     file_put_contents($calFile, $updated);
+}
+
+/**
+ * Przebudowuje sitemap.xml dopisując aktualne strony dni z katalogu sukcesy/
+ */
+function sitemapRebuild(PDO $db): void {
+    $sitemapFile = SITE_ROOT . 'sitemap.xml';
+    if (!file_exists($sitemapFile)) return;
+
+    $dom = new DOMDocument();
+    $dom->preserveWhiteSpace = false;
+    $dom->formatOutput = true;
+    if (!@$dom->load($sitemapFile)) return;
+
+    $urlset = $dom->documentElement;
+    if (!$urlset || $urlset->tagName !== 'urlset') return;
+
+    // Remove old sukcesy/ entries
+    $toRemove = [];
+    foreach ($urlset->getElementsByTagName('url') as $urlNode) {
+        $locNode = $urlNode->getElementsByTagName('loc')->item(0);
+        if ($locNode && str_contains($locNode->nodeValue, '/sukcesy/')) {
+            $toRemove[] = $urlNode;
+        }
+    }
+    foreach ($toRemove as $node) {
+        $urlset->removeChild($node);
+    }
+
+    // Dodaj aktualne dni
+    $stmt = $db->query(
+        "SELECT entry_date, MAX(updated_at) as last_updated 
+         FROM entries 
+         WHERE status = 'published' 
+         GROUP BY entry_date 
+         ORDER BY entry_date DESC"
+    );
+    $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($dates as $row) {
+        $date = $row['entry_date'];
+        $lastmod = date('Y-m-d', strtotime($row['last_updated']));
+        
+        $urlNode = $dom->createElement('url');
+        
+        $locNode = $dom->createElement('loc', SITE_URL . "sukcesy/{$date}.html");
+        $urlNode->appendChild($locNode);
+        
+        $lastmodNode = $dom->createElement('lastmod', $lastmod);
+        $urlNode->appendChild($lastmodNode);
+        
+        $urlset->appendChild($urlNode);
+    }
+
+    $dom->save($sitemapFile);
 }

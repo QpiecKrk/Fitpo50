@@ -5,7 +5,28 @@
 $siteUrl  = defined('SITE_URL') ? SITE_URL : 'https://fitpo50.pl/';
 $dateFormatted = date('j F Y', strtotime($date ?? ''));
 $pageTitle = 'Wpisy z ' . $dateFormatted;
-$pageUrl   = $siteUrl . 'wpisy-' . ($date ?? '') . '.html';
+$pageDesc  = 'Wszystkie wpisy FitPo50 z dnia ' . $dateFormatted . '.';
+$pageUrl   = $siteUrl . 'sukcesy/' . ($date ?? '') . '.html';
+
+$adminUrl  = defined('ADMIN_URL') ? ADMIN_URL : 'https://admin.fitpo50.pl/';
+$ogImage   = $siteUrl . 'assets/Hero_Porady1.png'; // Domyślne tło
+foreach ($entries as $e) {
+    if (!empty($e['media'])) {
+        foreach ($e['media'] as $m) {
+            if (str_starts_with($m['mime_type'] ?? '', 'image/')) {
+                // Wybierzmy pierwsze znalezione zdjęcie jako OG Image
+                // Zamieniamy na JPG by mieć 100% kompatybilności z Facebookiem/X
+                $base = pathinfo($m['filename'], PATHINFO_FILENAME);
+                if (file_exists(ADMIN_ROOT . 'uploads/' . $base . '.jpg')) {
+                    $ogImage = $adminUrl . 'uploads/' . $base . '.jpg';
+                } else {
+                    $ogImage = $adminUrl . 'uploads/' . $m['filename'];
+                }
+                break 2;
+            }
+        }
+    }
+}
 
 if (!function_exists('renderMediaPicture')) {
     function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height, $loading = 'lazy') {
@@ -44,12 +65,21 @@ if (!function_exists('renderMediaPicture')) {
   gtag("config", "G-S21SKTVM7K");
 </script>
 <title><?= htmlspecialchars($pageTitle) ?> | FitPo50</title>
-<meta name="description" content="Wszystkie wpisy FitPo50 z dnia <?= htmlspecialchars($dateFormatted) ?>.">
+<meta name="description" content="<?= htmlspecialchars($pageDesc) ?>">
 <meta name="robots" content="index,follow">
-<meta property="og:title" content="<?= htmlspecialchars($pageTitle) ?>">
+
+<meta property="og:title" content="<?= htmlspecialchars($pageTitle) ?> | FitPo50">
+<meta property="og:description" content="<?= htmlspecialchars($pageDesc) ?>">
 <meta property="og:type" content="website">
 <meta property="og:url" content="<?= $pageUrl ?>">
+<meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
 <meta property="og:locale" content="pl_PL">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= htmlspecialchars($pageTitle) ?> | FitPo50">
+<meta name="twitter:description" content="<?= htmlspecialchars($pageDesc) ?>">
+<meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
+
 <link rel="canonical" href="<?= $pageUrl ?>">
 
 <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&amp;display=swap" rel="stylesheet">

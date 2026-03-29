@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 46 conventions, 12 fixes."
+description: "Project for Fitpo50. 26 gotchas, 47 conventions, 12 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **209 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **210 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -188,6 +188,9 @@ Branch: main
 - 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
 Message: Krótki opis zmiany
 Branch: main
+- 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
+Message: Krótki opis zmiany
+Branch: main
 - 📐 **what-changed in task.md — confirmed 3x** — - - [ ] Zaktualizować plik `style.css` o style dla kalendarza (grid dni, karuzela, zielony fistaszek
 - 📐 **convention in .gitignore** — File updated (external): .gitignore
 
@@ -236,7 +239,6 @@ CLAUDE.md
 - 📐 **Version your API from day 1 (/api/v1/)** — Version your API from day 1 (/api/v1/)
 - 📐 **Use consistent response format across all endpoints** — Use consistent response format across all endpoints
 - 📐 **Implement soft delete for important data — don't hard delete without confirmation** — Implement soft delete for important data — don't hard delete without confirmation
-- 📐 **Handle timezone correctly — store UTC, display in user's timezone** — Handle timezone correctly — store UTC, display in user's timezone
-- 📐 **Make layouts responsive from the start — mobile-first approach** — Make layouts responsive from the
+- 📐 **Handle timezone correctly — store UTC, display in user's timezone** — Handle timezone correctly — store UTC, display in
 
 ... [Truncated — see individual observations for full content]
