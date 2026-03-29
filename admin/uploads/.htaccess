@@ -1,0 +1,8 @@
+# Blokada wykonywania PHP w katalogu uploads
+<FilesMatch "\.php$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Blokada directory listing
+Options -Indexes

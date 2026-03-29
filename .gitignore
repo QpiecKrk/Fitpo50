@@ -5,3 +5,11 @@ CLAUDE.md
 
 # Auto-generated agent rules (personalized per developer)
 .brainsync/agent-rules.md
+
+# === Admin panel — pliki prywatne (NIE commitować) ===
+admin/config.php
+admin/uploads/*
+!admin/uploads/.htaccess
+
+# === Generowane strony dni (sukcesy/) ===
+sukcesy/*.html

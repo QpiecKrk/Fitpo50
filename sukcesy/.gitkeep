@@ -1,0 +1,2 @@
+# Ten plik zapewnia, że katalog sukcesy/ istnieje w repo.
+# Wygenerowane pliki HTML (sukcesy/YYYY-MM-DD.html) są wykluczone przez .gitignore.
