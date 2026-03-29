@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 43 conventions, 11 fixes."
+description: "Project for Fitpo50. 26 gotchas, 44 conventions, 11 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **196 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **198 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -169,6 +169,7 @@ Auto-compiled from **196 real patterns** in **Fitpo50**. This skill is auto-rout
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
+- 📐 **what-changed in task.md — confirmed 3x** — - - [ ] Zaktualizować plik `style.css` o style dla kalendarza (grid dni, karuzela, zielony fistaszek
 - 📐 **convention in .gitignore** — File updated (external): .gitignore
 
 Content summary (8 lines):
@@ -222,7 +223,6 @@ CLAUDE.md
 - 📐 **Always add empty states ("No items yet" with call-to-action)** — Always add empty states ("No items yet" with call-to-action)
 - 📐 **Always add error states with retry button — not just blank screen** — Always add error states with retry button — not just blank screen
 - 📐 **Always add loading states for async operations (skeleton, spinner)** — Always add loading states for async operations (skeleton, spinner)
-- 📐 **Test edge cases: empty input, null, boundary values, error scenarios** — Test edge cases: empty input, null, boundary values, error scenarios
-- 📐 **Each test should be independent — no shared mutable state between tests** — Each test should be independent — no shared mutable
+- 📐 **Test edge cases: empty input, null, boundary values, error scenarios** — Test edge cases: empty input, null, boundary values,
 
 ... [Truncated — see individual observations for full content]

@@ -1,6 +1,6 @@
 ---
 name: html
-description: "Html for Fitpo50. 3 gotchas, 59 conventions."
+description: "Html for Fitpo50. 3 gotchas, 76 conventions."
 domain: html
 triggers:
   - glob: "**/*.html"
@@ -10,7 +10,7 @@ enabled: true
 
 # Html
 
-Auto-compiled from **123 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on html files.
+Auto-compiled from **161 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on html files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -25,6 +25,76 @@ Auto-compiled from **123 real patterns** in **Fitpo50**. This skill is auto-rout
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
+- 📐 **Strengthened types Moje** — -       <a href="https://www.instagram.com/fitpo50" class="nav__link" target="_blank" rel="noopener 
+- 📐 **what-changed in siedzenie-po-50.html — confirmed 3x** — File updated (external): siedzenie-po-50.html
+
+Content summary (824 lines):
+<!DOCTYPE html>
+<html la
+- 📐 **what-changed in nawodnienie-na-treningu-po-50.html — confirmed 3x** — File updated (external): nawodnienie-na-treningu-po-50.html
+
+Content summary (683 lines):
+<!DOCTYPE 
+- 📐 **what-changed in jak-zaczac-na-silowni-po-50.html — confirmed 3x** — File updated (external): jak-zaczac-na-silowni-po-50.html
+
+Content summary (571 lines):
+<!DOCTYPE ht
+- 📐 **what-changed in trening-maszynowy-po-50.html — confirmed 3x** — File updated (external): trening-maszynowy-po-50.html
+
+Content summary (895 lines):
+<!DOCTYPE html>
+
+- 📐 **what-changed in sila-chwytu-po-50.html — confirmed 3x** — File updated (external): sila-chwytu-po-50.html
+
+Content summary (693 lines):
+<!DOCTYPE html>
+<html 
+- 📐 **what-changed in badania-po-50.html — confirmed 3x** — File updated (external): badania-po-50.html
+
+Content summary (699 lines):
+<!DOCTYPE html>
+<html lang
+- 📐 **what-changed in silownia-dla-ludzi.html — confirmed 3x** — File updated (external): silownia-dla-ludzi.html
+
+Content summary (629 lines):
+<!DOCTYPE html>
+<html
+- 📐 **what-changed in jedzenie.html — confirmed 3x** — File updated (external): jedzenie.html
+
+Content summary (306 lines):
+<!DOCTYPE html>
+<html lang="pl"
+- 📐 **what-changed in motywacja-po-50.html — confirmed 3x** — File updated (external): motywacja-po-50.html
+
+Content summary (767 lines):
+<!DOCTYPE html>
+<html la
+- 📐 **what-changed in suplementacja-po-50.html — confirmed 3x** — -         Czyli tak, okno anaboliczne istnieje. Ale nie jest tak absurdalnie wąskie, jak przez lata 
+- 📐 **what-changed in dyskopatia-po-50.html — confirmed 3x** — -         Przez dekady obowiązywała jedna główna rekomendacja dla bólu kręgosłupa: odpoczynek i bezr
+- 📐 **what-changed in motywacja-zniknela-po-50.html — confirmed 3x** — File updated (external): motywacja-zniknela-po-50.html
+
+Content summary (722 lines):
+<!DOCTYPE html>
+- 📐 **what-changed in sen-po-50.html — confirmed 3x** — File updated (external): sen-po-50.html
+
+Content summary (700 lines):
+<!DOCTYPE html>
+<html lang="pl
+- 📐 **what-changed in dieta-po-50.html — confirmed 3x** — File updated (external): dieta-po-50.html
+
+Content summary (704 lines):
+<!DOCTYPE html>
+<html lang="
+- 📐 **what-changed in jedz-wiecej-po-50.html — confirmed 3x** — File updated (external): jedz-wiecej-po-50.html
+
+Content summary (761 lines):
+<!DOCTYPE html>
+<html 
+- 📐 **what-changed in bieganie-niszczy-kolana.html — confirmed 3x** — File updated (external): bieganie-niszczy-kolana.html
+
+Content summary (478 lines):
+<!DOCTYPE html>
+
 - 📐 **what-changed in bledy-50.html — confirmed 3x** — File updated (external): bledy-50.html
 
 Content summary (595 lines):
@@ -126,57 +196,6 @@ Content summary (683 lines):
 Content summary (724 lines):
 <!DOCTYPE html>
 - 📐 **what-changed in nawodnienie-na-treningu-po-50.html** — -       <div class="articles-grid-preview" style="display: grid; grid-template-columns: repeat(auto-
-- 📐 **Strengthened types OSTATNIO** — -           <span class="featured-article__badge">UWAGA: nowy artykuł</span>
-+           <span class
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -       <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img">
-+       <img src="./assets/log
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja — ensures atomic multi-step database operations** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="index.ht
-- 📐 **Strengthened types Nawigacja** — -     <nav class="nav" id="main-nav" aria-label="Nawigacja główna">
-+     
--       <a href="#o-nas" 
-- 📐 **convention in suplementacja-po-50.html** — File updated (external): suplementacja-po-50.html
-
-Content summary (656 lines):
-<!DOCTYPE html>
-<htm
 
 ## 🔵 Architecture
 
@@ -186,8 +205,9 @@ Content summary (656 lines):
 
 ## 🤔 Decisions & Trade-offs
 
+- **trade-off in trening-maszynowy-po-50.html** — -       <p>Ten plan nie powstał z powietrza. Oparty jest na najnowszych wytycznych Amerykańskiego Ko
 - **decision in jedz-wiecej-po-50.html** — -         <cite>Źródło: Hall KD. (2013). Diet versus Exercise in the Biggest Loser Weight Loss Compe
 - **Optimized Madura** — -           <tr><td>[1]</td><td>Madura P. et al. (2023). Hydration Status in Older Adults. Nutrients
 
 ---
-*Auto-generated by BrainSync 🧠 | 123 patterns | 2026-03-29*
+*Auto-generated by BrainSync 🧠 | 161 patterns | 2026-03-29*

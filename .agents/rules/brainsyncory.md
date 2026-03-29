@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 327 notes | Score threshold: >40
+> 367 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -26,14 +26,14 @@
 
 ## Project Standards
 
-- what-changed in bledy-50.html — confirmed 3x
-- convention in .gitignore
-- convention in .htaccess
-- convention in maszyny_4_shoulder_press_1774368276474.avif
-- what-changed in zdrowie.html — confirmed 3x
+- Strengthened types Moje
+- what-changed in siedzenie-po-50.html — confirmed 3x
+- what-changed in nawodnienie-na-treningu-po-50.html — confirmed 3x
+- what-changed in jak-zaczac-na-silowni-po-50.html — confirmed 3x
+- what-changed in trening-maszynowy-po-50.html — confirmed 3x
 - what-changed in sila-chwytu-po-50.html — confirmed 3x
-- convention in .htaccess
-- Replaced auth Google — introduces API versioning for backward compatibility — confirmed 10x
+- what-changed in badania-po-50.html — confirmed 3x
+- what-changed in silownia-dla-ludzi.html — confirmed 3x
 
 ## Recent Decisions
 
@@ -42,9 +42,9 @@
 
 ## Learned Patterns
 
-- When encountering this, fix by: problem-fix in walkthrough.md (seen 2x)
-- Always: what-changed in bledy-50.html — confirmed 3x (seen 2x)
-- Always: convention in .gitignore (seen 2x)
+- Always: convention in motywacja-zniknela-po-50.html (seen 2x)
+- Always: what-changed in sila-chwytu-po-50.html — confirmed 3x (seen 2x)
+- Always: convention in badania-po-50.html (seen 2x)
 - Agent generates new migration for every change (squash related changes)
 - Agent installs packages without checking if already installed
 
