@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 47 conventions, 12 fixes."
+description: "Project for Fitpo50. 26 gotchas, 47 conventions, 13 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **210 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **212 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -46,6 +46,19 @@ Auto-compiled from **210 real patterns** in **Fitpo50**. This skill is auto-rout
 | gotcha in scratchpad_o1gsw9jp.md | - - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't seem to trigger menu in screenshot) |
 
 ## 🔧 Problem Playbooks
+
+### Patched security issue Analiza — prevents XSS injection attacks
+- - [ ] Analiza pola `content` w `entry-form.php` celem upewnienia się o braku narzuconego WYSIWYG (TinyMCE itp.).
++ - [x] Analiza pola `content` w `entry-form.php` celem upewnienia się o braku narzuconego WYSIWYG (TinyMCE itp.).
+- - [ ] Implementacja `sanitizeHtml()` w obszarze helperów w `admin/actions/save.php`.
++ - [x] Implementacja `sanitizeHtml()` w obszarze helperów w `admin/actions/save.ph
+
+**Actionable Steps:**
+1. Modified 1 files
+2. identifier: Analiza
+3. identifier: WYSIWYG
+4. identifier: TinyMCE
+5. identifier: Implementacja
 
 ### problem-fix in scratchpad_aeciidv5.md
 - - [/] Open https://fitpo50.pl/moje-sukcesy.html
@@ -235,10 +248,6 @@ CLAUDE.md
 - 📐 **Prefer Array methods (map, filter, reduce) over manual loops** — Prefer Array methods (map, filter, reduce) over manual loops
 - 📐 **Use template literals for string interpolation, not concatenation** — Use template literals for string interpolation, not concatenation
 - 📐 **Use optional chaining (?.) and nullish coalescing (??) for safe access** — Use optional chaining (?.) and nullish coalescing (??) for safe access
-- 📐 **Use const by default, let when reassignment needed, never var** — Use const by default, let when reassignment needed, never var
-- 📐 **Version your API from day 1 (/api/v1/)** — Version your API from day 1 (/api/v1/)
-- 📐 **Use consistent response format across all endpoints** — Use consistent response format across all endpoints
-- 📐 **Implement soft delete for important data — don't hard delete without confirmation** — Implement soft delete for important data — don't hard delete without confirmation
-- 📐 **Handle timezone correctly — store UTC, display in user's timezone** — Handle timezone correctly — store UTC, display in
+- 📐 **Use const by default, 
 
 ... [Truncated — see individual observations for full content]

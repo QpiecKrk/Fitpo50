@@ -1,5 +1,5 @@
 # Fitpo50 — Project Memory
-# Auto-synced | 387 observations
+# Auto-synced | 391 observations
 
 **Stack:** TypeScript
 
@@ -24,12 +24,12 @@
 
 - Git Commit: Krótki opis zmiany — confirmed 3x
 - Git Commit: Krótki opis zmiany — confirmed 3x
+- Git Commit: Krótki opis zmiany — confirmed 3x
 - Git Commit: Krótki opis zmiany — confirmed 4x
 - Git Commit: Krótki opis zmiany — confirmed 3x
 - Enable strict mode in tsconfig.json
 - Prefer Array methods (map, filter, reduce) over manual loops
 - Use template literals for string interpolation, not concatenation
-- Use optional chaining (?.) and nullish coalescing (??) for safe access
 
 # ⚡ Available Tools (ON-DEMAND only)
 - `save(title, content, category)` — Save a note + auto-detect conflicts

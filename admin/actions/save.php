@@ -11,9 +11,9 @@ $db     = getDb();
 $id     = isset($_POST['id']) ? (int)$_POST['id'] : null;
 $action = $_POST['action'] ?? 'save';
 
-$title      = trim($_POST['title'] ?? '');
-$lead       = trim($_POST['lead'] ?? '');
-$content    = trim($_POST['content'] ?? '');
+$title      = strip_tags(trim($_POST['title'] ?? ''));
+$lead       = strip_tags(trim($_POST['lead'] ?? ''));
+$content    = sanitizeHtml(trim($_POST['content'] ?? ''));
 $entry_date = trim($_POST['entry_date'] ?? '');
 $status     = in_array($_POST['status'] ?? '', ['draft','published','hidden'])
               ? $_POST['status'] : 'draft';
@@ -252,4 +252,81 @@ function generateArticleHtml(array $entry, array $media): string {
     $filename = $entry['slug'] . '.html';
     file_put_contents(SITE_ROOT . $filename, $html);
     return $filename;
+}
+
+/**
+ * Bezpiecznie oczyszcza wejściowy HTML zostawiając tylko whitelist tagów i atrybutów.
+ */
+function sanitizeHtml(string $html): string {
+    if (empty($html)) return '';
+
+    $libxml_prev = libxml_use_internal_errors(true);
+    $dom = new DOMDocument();
+    
+    $encoded = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+    $success = @$dom->loadHTML('<body>' . $encoded . '</body>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    
+    if (!$success) {
+        libxml_use_internal_errors($libxml_prev);
+        return strip_tags($html);
+    }
+    
+    $allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'blockquote', 'a', 'span', 'div'];
+    $allowedAttributes = ['href', 'class', 'id', 'target', 'rel'];
+
+    $removeInvalidNodes = function (DOMNode $node) use (&$removeInvalidNodes, $allowedTags, $allowedAttributes) {
+        for ($i = $node->childNodes->length - 1; $i >= 0; $i--) {
+            $child = $node->childNodes->item($i);
+            
+            if ($child instanceof DOMElement) {
+                $tag = strtolower($child->tagName);
+                if (!in_array($tag, $allowedTags)) {
+                    if (in_array($tag, ['script', 'style', 'iframe', 'object', 'embed'])) {
+                        $node->removeChild($child);
+                    } else {
+                        while ($child->firstChild) {
+                            $node->insertBefore($child->firstChild, $child);
+                        }
+                        $node->removeChild($child);
+                    }
+                    continue;
+                }
+                
+                for ($a = $child->attributes->length - 1; $a >= 0; $a--) {
+                    $attr = $child->attributes->item($a);
+                    $attrName = strtolower($attr->name);
+                    
+                    if (!in_array($attrName, $allowedAttributes)) {
+                        $child->removeAttributeNode($attr);
+                        continue;
+                    }
+                    
+                    if ($attrName === 'href' && preg_match('/^(javascript|vbscript|data):/i', $attr->value)) {
+                        $child->removeAttributeNode($attr);
+                    }
+                }
+                $removeInvalidNodes($child);
+            }
+        }
+    };
+    
+    $body = $dom->getElementsByTagName('body')->item(0);
+    if ($body) {
+        $removeInvalidNodes($body);
+    }
+    
+    $out = '';
+    if ($body) {
+        foreach ($body->childNodes as $child) {
+            $out .= $dom->saveHTML($child);
+        }
+    }
+    
+    // Usunięcie znaków końca linii i niepotrzebnych encji dodanych przez libxml, jeżeli wystąpiły by na obrzeżach
+    $out = str_replace(['%5C', '%22'], ['\\', '"'], $out);
+    
+    libxml_clear_errors();
+    libxml_use_internal_errors($libxml_prev);
+    
+    return trim($out);
 }

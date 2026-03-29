@@ -247,5 +247,31 @@ if (!function_exists('renderMediaPicture')) {
   </a>
 </nav>
 
+<?php
+$jsonLd = [
+  "@context" => "https://schema.org",
+  "@type" => "CollectionPage",
+  "name" => $pageTitle,
+  "description" => $pageDesc,
+  "url" => $pageUrl,
+  "isPartOf" => [
+    "@type" => "WebSite",
+    "name" => "FitPo50",
+    "url" => $siteUrl
+  ],
+  "publisher" => [
+    "@type" => "Organization",
+    "name" => "FitPo50",
+    "logo" => [
+      "@type" => "ImageObject",
+      "url" => $siteUrl . "assets/logo.jpg"
+    ]
+  ]
+];
+?>
+<script type="application/ld+json">
+<?= json_encode($jsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
+</script>
+
 </body>
 </html>

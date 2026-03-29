@@ -2093,3 +2093,49 @@ a:hover {
     margin-bottom: 4px;
   }
 }
+
+/* ============================================================
+   MOJE SUKCESY - ARTKULARNE WPISY & CALLOUTS
+   ============================================================ */
+.entry-callout {
+  margin: var(--space-8) 0;
+  padding: var(--space-6) var(--space-8);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--color-primary);
+  background: var(--color-surface);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.entry-callout--note {
+  border-left-color: var(--color-primary);
+  background: var(--color-surface);
+}
+
+.entry-callout--tip {
+  border-left-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+[data-theme="dark"] .entry-callout--tip {
+  background: rgba(240, 146, 58, 0.1);
+}
+
+.entry-callout--important {
+  border-left-color: var(--color-error);
+  background: rgba(192, 56, 72, 0.05); /* very light red */
+}
+[data-theme="dark"] .entry-callout--important {
+  background: rgba(224, 88, 104, 0.1);
+}
+
+/* Typografia wewnątrz artykułu - listy poprawione */
+.article-content ul, 
+.article-content ol {
+  margin: var(--space-6) 0;
+  padding-left: var(--space-6);
+}
+.article-content li {
+  margin-bottom: var(--space-2);
+}
