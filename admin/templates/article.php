@@ -25,7 +25,7 @@ $words   = str_word_count(strip_tags($content));
 $readMin = max(1, round($words / 200));
 
 // Helper: bezpieczne renderowanie mediów z picture (avif, webp) + leniwe ładownie
-function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height, $loading = 'lazy') {
+function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height, $loading = 'lazy', $fit = 'cover') {
     $alt = htmlspecialchars($originalName);
     $src = htmlspecialchars($adminUrl . 'uploads/' . $filename);
     $base = pathinfo($filename, PATHINFO_FILENAME);
@@ -40,11 +40,11 @@ function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height
         if (file_exists($webp)) {
             $html .= '<source type="image/webp" srcset="' . htmlspecialchars($adminUrl . 'uploads/' . $base . '.webp') . '">';
         }
-        $html .= '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:auto;object-fit:cover;">';
+        $html .= '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:100%;object-fit:' . $fit . ';">';
         $html .= '</picture>';
         return $html;
     }
-    return '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:auto;object-fit:cover;">';
+    return '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:100%;object-fit:' . $fit . ';">';
 }
 ?>
 <!DOCTYPE html>
@@ -197,7 +197,7 @@ function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height
       <div class="entry-carousel__track">
         <?php foreach ($imageMedia as $idx => $m): ?>
           <div class="entry-carousel__slide">
-            <?= renderMediaPicture($m['filename'], $m['original_name'] ?? $title, $adminUrl, '1200', '675', $idx === 0 ? 'eager' : 'lazy') ?>
+            <?= renderMediaPicture($m['filename'], $m['original_name'] ?? $title, $adminUrl, '1200', '675', $idx === 0 ? 'eager' : 'lazy', 'contain') ?>
           </div>
         <?php endforeach; ?>
       </div>
@@ -319,39 +319,41 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (slides.length < 2) return;
 
-        let currentIndex = 0;
-
         // Create dots
         slides.forEach((_, i) => {
             const dot = document.createElement('button');
             dot.classList.add('entry-carousel__dot');
             if (i === 0) dot.classList.add('entry-carousel__dot--active');
             dot.setAttribute('aria-label', `Idź do zdjęcia ${i + 1}`);
-            dot.addEventListener('click', () => goToSlide(i));
+            dot.addEventListener('click', () => {
+                track.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' });
+            });
             dotsContainer.appendChild(dot);
         });
 
         const dots = Array.from(dotsContainer.children);
 
-        const goToSlide = (index) => {
-            if (index < 0) index = slides.length - 1;
-            if (index >= slides.length) index = 0;
-            
-            currentIndex = index;
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
+        const updateActiveDot = () => {
+            const index = Math.round(track.scrollLeft / track.offsetWidth);
             dots.forEach((dot, i) => {
-                dot.classList.toggle('entry-carousel__dot--active', i === currentIndex);
+                dot.classList.toggle('entry-carousel__dot--active', i === index);
             });
         };
 
-        prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-        nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+        track.addEventListener('scroll', updateActiveDot);
+
+        prevBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -track.offsetWidth, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: track.offsetWidth, behavior: 'smooth' });
+        });
 
         // Keyboard navigation
         carousel.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
-            if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+            if (e.key === 'ArrowLeft') prevBtn.click();
+            if (e.key === 'ArrowRight') nextBtn.click();
         });
     });
 });
