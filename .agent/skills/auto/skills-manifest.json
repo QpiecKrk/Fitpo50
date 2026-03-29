@@ -1,18 +1,18 @@
 {
   "project": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T17:31:17.337Z",
-    "observationCount": 227,
+    "lastGenerated": "2026-03-29T18:11:17.344Z",
+    "observationCount": 239,
     "skillCount": 0,
     "domain": "project",
     "triggerGlobs": [
       "**/*"
     ],
-    "description": "Project for Fitpo50. 26 gotchas, 49 conventions, 13 fixes."
+    "description": "Project for Fitpo50. 26 gotchas, 53 conventions, 16 fixes."
   },
   "html": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T17:31:17.338Z",
+    "lastGenerated": "2026-03-29T18:11:17.344Z",
     "observationCount": 164,
     "skillCount": 0,
     "domain": "html",
@@ -23,7 +23,7 @@
   },
   "problem-fix": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T17:31:17.338Z",
+    "lastGenerated": "2026-03-29T18:11:17.344Z",
     "observationCount": 0,
     "skillCount": 2,
     "domain": "problem-fix",
@@ -34,9 +34,9 @@
   },
   "convention": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T17:31:17.338Z",
+    "lastGenerated": "2026-03-29T18:11:17.344Z",
     "observationCount": 0,
-    "skillCount": 28,
+    "skillCount": 29,
     "domain": "convention",
     "triggerGlobs": [
       "**/*"
@@ -45,7 +45,7 @@
   },
   "css": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T17:31:17.337Z",
+    "lastGenerated": "2026-03-29T18:11:17.344Z",
     "observationCount": 7,
     "skillCount": 0,
     "domain": "css",
@@ -57,7 +57,7 @@
   },
   "shell": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T17:31:17.338Z",
+    "lastGenerated": "2026-03-29T18:11:17.344Z",
     "observationCount": 2,
     "skillCount": 0,
     "domain": "shell",
@@ -69,13 +69,13 @@
   },
   "php": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T17:31:17.337Z",
-    "observationCount": 20,
+    "lastGenerated": "2026-03-29T18:11:17.344Z",
+    "observationCount": 36,
     "skillCount": 0,
     "domain": "php",
     "triggerGlobs": [
       "**/*.php"
     ],
-    "description": "Php for Fitpo50. 2 conventions, 3 fixes."
+    "description": "Php for Fitpo50. 5 conventions, 4 fixes."
   }
 }

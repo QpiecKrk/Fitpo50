@@ -1,17 +1,21 @@
 <?php
 // ============================================================
 // Jednorazowy skrypt do generowania hasha hasła — KASUJE SIĘ PO UŻYCIU
-// Uruchom RAZ: https://admin.fitpo50.pl/init-hash.php?token=setup2026fitpo50
+// Uruchom RAZ: https://admin.fitpo50.pl/init-hash.php?token=CHANGE_ME&pass=TwojeTajneHaslo
 // Skopiuj hash do config.php → plik zostanie automatycznie usunięty.
 // ============================================================
 
 $token = $_GET['token'] ?? '';
-if ($token !== 'setup2026fitpo50') {
+if ($token !== 'CHANGE_ME') {
     http_response_code(403);
-    die('403 Forbidden');
+    die('403 Forbidden — Ustaw bezpieczny token w kodzie przed użyciem.');
 }
 
-$password = '272Archawili';
+$password = $_GET['pass'] ?? '';
+if (!$password) {
+    die('Błąd: Podaj hasło w parametrze &pass=... aby wygenerować hash.');
+}
+
 $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
 $verify = password_verify($password, $hash);
 

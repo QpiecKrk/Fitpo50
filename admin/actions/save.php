@@ -123,7 +123,7 @@ exit;
 
 // ── helpers ──────────────────────────────────────────────────────────
 function handleUploads(PDO $db, int $entryId): void {
-    $allowed = ['image/jpeg','image/png','image/webp','image/gif'];
+    $allowed = ['image/jpeg','image/png','image/webp','image/gif','image/avif'];
     $maxSize = 10 * 1024 * 1024;
     $files   = $_FILES['media_files'];
     $count   = count($files['name']);
@@ -330,8 +330,7 @@ function sanitizeHtml(string $html): string {
         }
     }
     
-    // Usunięcie znaków końca linii i niepotrzebnych encji dodanych przez libxml, jeżeli wystąpiły by na obrzeżach
-    $out = str_replace(['%5C', '%22'], ['\\', '"'], $out);
+    // DOMDocument sam dba o poprawność encji w $dom->saveHTML()
     
     libxml_clear_errors();
     libxml_use_internal_errors($libxml_prev);

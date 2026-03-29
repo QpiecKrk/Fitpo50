@@ -9,33 +9,40 @@ requireLogin();
 $db = getDb();
 $errors = [];
 $stats = [];
+$synced = false;
+$csrf = csrfToken();
 
+// 1. Podstawowe statystyki (zawsze widoczne przez GET)
 try {
-    // 1. Sprawdź liczbę wpisów w bazie
     $stmt = $db->query("SELECT COUNT(*) FROM entries WHERE status = 'published'");
     $publishedCount = (int)$stmt->fetchColumn();
-    $stats[] = "Wpisy o statusie 'published' w bazie: <strong>$publishedCount</strong>";
+    $stats[] = "Wpisy o statusie 'published' w bazie: $publishedCount";
 
-    // 2. Wykonaj pełną przebudowę kalendarza
-    $syncedCount = calendarRebuild($db);
-    $stats[] = "Liczba dni wpisanych do moje-sukcesy.html: <strong>$syncedCount</strong>";
-
-    // 3. Sprawdź czy plik istnieje i czy fistaszki tam są
     $calFile = SITE_ROOT . 'moje-sukcesy.html';
     $content = file_get_contents($calFile);
-    if (strpos($content, 'const userEntries = [];') !== false && $syncedCount > 0) {
-        $errors[] = "UWAGA: Mimo synchronizacji $syncedCount dni, w pliku nadal widnieje pusty userEntries! Możliwy problem z uprawnieniami zapisu lub markerami.";
+    preg_match('/\/\/ ENTRIES_START\s*const userEntries\s*=\s*(\[[\s\S]*?\]);\s*\/\/ ENTRIES_END/', $content, $m);
+    $currentCount = 0;
+    if (isset($m[1])) {
+        $decoded = json_decode($m[1], true);
+        $currentCount = is_array($decoded) ? count($decoded) : 0;
     }
-
-    // 4. Pobierz próbkę dat dla pewności
-    if ($publishedCount > 0) {
-        $stmt = $db->query("SELECT entry_date FROM entries WHERE status = 'published' ORDER BY entry_date DESC LIMIT 5");
-        $sample = $stmt->fetchAll(PDO::FETCH_COLUMN);
-        $stats[] = "Ostatnie daty w bazie: " . implode(", ", $sample);
-    }
+    $stats[] = "Aktualnie w moje-sukcesy.html: $currentCount dni";
 
 } catch (Exception $e) {
-    $errors[] = "BŁĄD KRYTYCZNY: " . $e->getMessage();
+    $errors[] = "Błąd odczytu statystyk: " . $e->getMessage();
+}
+
+// 2. Faktyczna synchronizacja (tylko przez POST z CSRF)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
+        verifyCsrf();
+        $syncedCount = calendarRebuild($db);
+        sitemapRebuild($db);
+        $synced = true;
+        $stats[] = "✓ Zsynchronizowano pomyślnie $syncedCount dni oraz mapę strony.";
+    } catch (Exception $e) {
+        $errors[] = "BŁĄD SYNCHRONIZACJI: " . $e->getMessage();
+    }
 }
 
 ?>
@@ -59,19 +66,21 @@ try {
         <h1>Diagnostyka Kalendarza</h1>
         
         <?php foreach ($stats as $stat): ?>
-            <div class="stat"><?= $stat ?></div>
+            <div class="stat"><?= h($stat) ?></div>
         <?php endforeach; ?>
 
         <?php foreach ($errors as $error): ?>
-            <div class="error"><?= $error ?></div>
+            <div class="error"><?= h($error) ?></div>
         <?php endforeach; ?>
 
-        <?php if (empty($errors)): ?>
-            <p class="success">✓ Synchronizacja zakończona pomyślnie.</p>
-        <?php endif; ?>
+        <form method="POST" action="sync-manual.php" style="margin-top: 20px;">
+            <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
+            <button type="submit" class="btn" style="background: #27ae60; border: none; cursor: pointer; font-size: 1rem;">
+                🚀 Uruchom pełną synchronizację (POST)
+            </button>
+        </form>
 
-        <a href="dashboard.php" class="btn">Powrót do pulpitu</a>
-        <a href="sync-manual.php" class="btn" style="background: #27ae60;">Uruchom ponownie</a>
+        <a href="dashboard.php" class="btn" style="background: #64748b;">Powrót do pulpitu</a>
     </div>
 </body>
 </html>

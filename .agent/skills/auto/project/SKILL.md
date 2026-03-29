@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 49 conventions, 13 fixes."
+description: "Project for Fitpo50. 26 gotchas, 53 conventions, 16 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **227 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **239 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -46,6 +46,52 @@ Auto-compiled from **227 real patterns** in **Fitpo50**. This skill is auto-rout
 | gotcha in scratchpad_o1gsw9jp.md | - - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't seem to trigger menu in screenshot) |
 
 ## 🔧 Problem Playbooks
+
+### Patched security issue Plan
+- # Plan poprawy spójności i funkcjonalności panelu
++ # Plan refaktoryzacji i poprawy bezpieczeństwa
+- Rozwiążemy szereg drobnych niespójności, które wpływają na SEO, wydajność (cache) oraz stabilność przesyłania plików.
++ Zajmiemy się porządkowaniem kodu (Clean Code) oraz usunięciem drobnych braków w zabezpieczeniach wyświetlania danych.
+- > [!IMPORTANT]
++ > [!NOTE]
+- > Zmienimy wersjonowanie `st
+
+**Actionable Steps:**
+1. Modified 1 files
+2. identifier: Plan
+3. identifier: Zajmiemy
+4. identifier: Clean
+5. identifier: Code
+
+### Patched security issue Plan — prevents XSS injection attacks
+- # Plan naprawy SEO i bezpieczeństwa
++ # Plan poprawy spójności i funkcjonalności panelu
+- Rozwiążemy problem niedziałających podglądów social media oraz zabezpieczymy panel przed atakami CSRF.
++ Rozwiążemy szereg drobnych niespójności, które wpływają na SEO, wydajność (cache) oraz stabilność przesyłania plików.
+- > Zmienimy sposób działania `sync-manual.php` na żądanie typu **POST** z ochroną **
+
+**Actionable Steps:**
+1. Modified 1 files
+2. identifier: Plan
+3. identifier: Rozwi
+4. identifier: SEO
+5. identifier: Zmienimy
+
+### Patched security issue Zadania
+- # Zadania: Czyszczenie bezpieczeństwa
++ # Zadania: SEO i Bezpieczeństwo CSRF
+- - [ ] Aktualizacja `admin/config.php` (usunięcie hasła z komentarza).
++ - [ ] Aktualizacja `admin/robots.txt` (odblokowanie /uploads/).
+- - [ ] Aktualizacja `admin/init-hash.php` (usunięcie twardo wpisanej zmiennej, dodanie parametru URL).
++ - [ ] Aktualizacja `admin/sync-manual.php` (logika POST + CSRF + formularz).
+
+
+**Actionable Steps:**
+1. Modified 1 files
+2. identifier: Zadania
+3. identifier: SEO
+4. identifier: Bezpiecze
+5. identifier: CSRF
 
 ### Patched security issue Analiza — prevents XSS injection attacks
 - - [ ] Analiza pola `content` w `entry-form.php` celem upewnienia się o braku narzuconego WYSIWYG (TinyMCE itp.).
@@ -195,63 +241,10 @@ Auto-compiled from **227 real patterns** in **Fitpo50**. This skill is auto-rout
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
-- 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
-Message: Krótki opis zmiany
-Branch: main
-- 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
-Message: Krótki opis zmiany
-Branch: main
-- 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
-Message: Krótki opis zmiany
-Branch: main
-- 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
-Message: Krótki opis zmiany
-Branch: main
-- 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
-Message: Krótki opis zmiany
-Branch: main
-- 📐 **what-changed in task.md — confirmed 3x** — - - [ ] Zaktualizować plik `style.css` o style dla kalendarza (grid dni, karuzela, zielony fistaszek
-- 📐 **convention in .gitignore** — File updated (external): .gitignore
-
-Content summary (8 lines):
-
-AGENT.md
-CLAUDE.md
-.agent-mem/
-
-# A
-- 📐 **convention in .htaccess** — File updated (external): .htaccess
-
-Content summary (15 lines):
-RewriteEngine On
-
-# Always use the c
-- 📐 **convention in maszyny_4_shoulder_press_1774368276474.avif** — File updated (external): _site/assets/maszyny_4_shoulder_press_1774368276474.avif
-
-Content summary (
-- 📐 **convention in .htaccess** — File updated (external): _site/.htaccess
-
-Content summary (15 lines):
-RewriteEngine On
-
-# Always use
-- 📐 **Git Commit: Krótki opis zmiany — confirmed 4x** — Captured via Git commit.
-Message: Krótki opis zmiany
-Branch: main
-- 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
-Message: Krótki opis zmiany
-Branch: main
-- 📐 **convention in .gitignore** — File updated (external): .gitignore
-
-Content summary (8 lines):
-
-AGENT.md
-CLAUDE.md
-.agent-mem/
-
-# A
-- 📐 **Enable strict mode in tsconfig.json** — Enable strict mode in tsconfig.json
-- 📐 **Prefer Array methods (map, filter, reduce) over manual loops** — Prefer Array methods (map, filter, reduce) over manual loops
-- 📐 **Use template literals for string interpolation, not concatenation** — Us
+- 📐 **what-changed in task.md — confirmed 3x** — - # Zadania: Spójność i Funkcjonalność
++ # Zadania: Refaktoryzacja i Clean Code
+- - [ ] Aktualizacja
+- 📐 **Patched security issue Plan — confirmed 7x** — - # Plan poprawy spójności i funkcjonalności panelu
++ # Plan refaktoryzacji i poprawy bezpiecze
 
 ... [Truncated — see individual observations for full content]

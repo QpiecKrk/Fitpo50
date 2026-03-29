@@ -52,10 +52,11 @@ define('PASSWORD_HASH', '');             // ← uzupełnisz w kroku 4
 Otwórz w przeglądarce (będziesz zapytany o Basic Auth):
 
 ```
-https://admin.fitpo50.pl/init-db.php?token=setup2026fitpo50
+https://admin.fitpo50.pl/init-db.php?token=CHANGE_ME
 ```
 
 - Skrypt tworzy tabele `entries`, `media`, `failed_logins`
+- **Ustaw własny token** w kodzie skryptu przed uruchomieniem
 - **Kasuje się automatycznie** po wykonaniu
 - Jeśli nie usunął się sam → usuń `init-db.php` ręcznie przez FTP
 
@@ -66,10 +67,11 @@ https://admin.fitpo50.pl/init-db.php?token=setup2026fitpo50
 > ⚠️ `init-hash.php` **nie jest podlinkowany nigdzie** — wywołujesz go tylko raz, tu.
 
 ```
-https://admin.fitpo50.pl/init-hash.php?token=setup2026fitpo50
+https://admin.fitpo50.pl/init-hash.php?token=CHANGE_ME&pass=TwojeWybraneHaslo
 ```
 
-- Skrypt wyświetli hash bcrypt dla hasła `272Archawili`
+- **Ustaw własny token** w kodzie skryptu przed uruchomieniem
+- Skrypt wyświetli hash bcrypt dla Twojego hasła
 - **Skopiuj hash** do `config.php` → `PASSWORD_HASH`
 - **Kasuje się automatycznie** po wykonaniu
 - Jeśli nie usunął się sam → usuń `init-hash.php` ręcznie przez FTP
@@ -101,7 +103,7 @@ chmod 600 /home/u542460614/domains/fitpo50.pl/public_html/admin/config.php
 Przejdź na `https://admin.fitpo50.pl` → Basic Auth → strona logowania PHP.
 
 **Checklist testowy:**
-- [ ] Logowanie hasłem `272Archawili` działa
+- [ ] Logowanie Twoim hasłem działa
 - [ ] 5 złych haseł → blokada na 15 min
 - [ ] Dodanie wpisu (roboczy) — brak fistaszka w kalendarzu
 - [ ] Zmiana na "Opublikowany" → plik HTML wygenerowany + fistaszek w kalendarzu

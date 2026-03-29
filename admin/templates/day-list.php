@@ -3,6 +3,7 @@
 // Zmienne: $date (string YYYY-MM-DD), $entries (array of entry rows)
 
 $siteUrl  = defined('SITE_URL') ? SITE_URL : 'https://fitpo50.pl/';
+$uploadsUrl = $siteUrl . 'admin/uploads/';
 $dateFormatted = date('j F Y', strtotime($date ?? ''));
 $pageTitle = 'Wpisy z ' . $dateFormatted;
 $pageDesc  = 'Wszystkie wpisy FitPo50 z dnia ' . $dateFormatted . '.';
@@ -18,9 +19,9 @@ foreach ($entries as $e) {
                 // Zamieniamy na JPG by mieć 100% kompatybilności z Facebookiem/X
                 $base = pathinfo($m['filename'], PATHINFO_FILENAME);
                 if (file_exists(ADMIN_ROOT . 'uploads/' . $base . '.jpg')) {
-                    $ogImage = $adminUrl . 'uploads/' . $base . '.jpg';
+                    $ogImage = $uploadsUrl . $base . '.jpg';
                 } else {
-                    $ogImage = $adminUrl . 'uploads/' . $m['filename'];
+                    $ogImage = $uploadsUrl . $m['filename'];
                 }
                 break 2;
             }
@@ -29,26 +30,11 @@ foreach ($entries as $e) {
 }
 
 if (!function_exists('renderMediaPicture')) {
-    function renderMediaPicture($filename, $originalName, $adminUrl, $width, $height, $loading = 'lazy', $fit = 'cover') {
+    function renderMediaPicture($filename, $originalName, $uploadsUrl, $adminUrl, $width, $height, $loading = 'lazy', $fit = 'cover') {
         $alt = htmlspecialchars($originalName);
-        $src = htmlspecialchars($adminUrl . 'uploads/' . $filename);
-        $base = pathinfo($filename, PATHINFO_FILENAME);
-        $avif = ADMIN_ROOT . 'uploads/' . $base . '.avif';
-        $webp = ADMIN_ROOT . 'uploads/' . $base . '.webp';
-
-        if (file_exists($avif) || file_exists($webp)) {
-            $html = '<picture>';
-            if (file_exists($avif)) {
-                $html .= '<source type="image/avif" srcset="' . htmlspecialchars($adminUrl . 'uploads/' . $base . '.avif') . '">';
-            }
-            if (file_exists($webp)) {
-                $html .= '<source type="image/webp" srcset="' . htmlspecialchars($adminUrl . 'uploads/' . $base . '.webp') . '">';
-            }
-            $html .= '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:100%;object-fit:' . $fit . ';">';
-            $html .= '</picture>';
-            return $html;
-        }
-        return '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" style="width:100%;height:100%;object-fit:' . $fit . ';">';
+        $srcPrimary = htmlspecialchars($uploadsUrl . $filename);
+        $srcFallback = htmlspecialchars($adminUrl . 'uploads/' . $filename);
+        return '<img src="' . $srcPrimary . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';}" style="width:100%;height:100%;object-fit:' . $fit . ';">';
     }
 }
 ?>
@@ -171,14 +157,14 @@ if (!function_exists('renderMediaPicture')) {
 
         <?php if ($imageCount === 1): ?>
         <div class="article-hero reveal">
-          <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $adminUrl, '1200', '675', 'eager') ?>
+          <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', 'eager') ?>
         </div>
         <?php elseif ($imageCount >= 2): ?>
         <div class="entry-carousel reveal" aria-label="Galeria zdjęć wpisu" tabindex="0">
           <div class="entry-carousel__track">
             <?php foreach ($imageMedia as $idx => $m): ?>
               <div class="entry-carousel__slide">
-                <?= renderMediaPicture($m['filename'], $m['original_name'] ?? $title, $adminUrl, '1200', '675', $idx === 0 ? 'eager' : 'lazy', 'contain') ?>
+                <?= renderMediaPicture($m['filename'], $m['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', $idx === 0 ? 'eager' : 'lazy', 'contain') ?>
               </div>
             <?php endforeach; ?>
           </div>
@@ -232,62 +218,7 @@ if (!function_exists('renderMediaPicture')) {
 </footer>
 
 <script src="<?= $siteUrl ?>dist/app.js" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const carousels = document.querySelectorAll('.entry-carousel');
-    carousels.forEach(carousel => {
-        const track = carousel.querySelector('.entry-carousel__track');
-        const slides = Array.from(track.children);
-        const dotsContainer = carousel.querySelector('.entry-carousel__dots');
-        const prevBtn = carousel.querySelector('.entry-carousel__btn--prev');
-        const nextBtn = carousel.querySelector('.entry-carousel__btn--next');
-        
-        if (slides.length < 2) return;
-
-        // Create dots
-        slides.forEach((_, i) => {
-            const dot = document.createElement('button');
-            dot.classList.add('entry-carousel__dot');
-            if (i === 0) dot.classList.add('entry-carousel__dot--active');
-            dot.setAttribute('aria-label', `Idź do zdjęcia ${i + 1}`);
-            dot.addEventListener('click', (e) => {
-                e.preventDefault();
-                track.scrollTo({ left: track.offsetWidth * i, behavior: 'smooth' });
-            });
-            dotsContainer.appendChild(dot);
-        });
-
-        const dots = Array.from(dotsContainer.children);
-
-        const updateActiveDot = () => {
-            const index = Math.round(track.scrollLeft / track.offsetWidth);
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('entry-carousel__dot--active', i === index);
-            });
-        };
-
-        track.addEventListener('scroll', updateActiveDot, { passive: true });
-
-        prevBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const index = Math.round(track.scrollLeft / track.offsetWidth);
-            track.scrollTo({ left: track.offsetWidth * (index - 1), behavior: 'smooth' });
-        });
-
-        nextBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const index = Math.round(track.scrollLeft / track.offsetWidth);
-            track.scrollTo({ left: track.offsetWidth * (index + 1), behavior: 'smooth' });
-        });
-
-        // Keyboard navigation
-        carousel.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') prevBtn.click();
-            if (e.key === 'ArrowRight') nextBtn.click();
-        });
-    });
-});
-</script>
+<?php require ADMIN_ROOT . 'templates/carousel-script.php'; ?>
 
 <nav class="bottom-nav" aria-label="Nawigacja dolna">
   <a href="<?= $siteUrl ?>index.html" class="bottom-nav__item">

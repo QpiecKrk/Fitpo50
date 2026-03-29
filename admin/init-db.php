@@ -1,16 +1,16 @@
 <?php
 // ============================================================
 // init-db.php — jednorazowa inicjalizacja bazy danych
-// Uruchom RAZ: https://admin.fitpo50.pl/init-db.php?token=setup2026fitpo50
+// Uruchom RAZ: https://admin.fitpo50.pl/init-db.php?token=CHANGE_ME
 // Kasuje się automatycznie po wykonaniu.
 // ============================================================
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/auth.php';
 
 $token = $_GET['token'] ?? '';
-if ($token !== 'setup2026fitpo50') {
+if ($token !== 'CHANGE_ME') {
     http_response_code(403);
-    die('403 Forbidden');
+    die('403 Forbidden — Ustaw bezpieczny token w kodzie przed użyciem.');
 }
 
 $errors = [];

@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 421 notes | Score threshold: >40
+> 449 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -26,14 +26,14 @@
 
 ## Project Standards
 
+- what-changed in task.md — confirmed 3x
+- Patched security issue Plan — confirmed 7x
+- Fixed null crash in DOMDocument — prevents null/undefined runtime crashes — confirmed 3x
+- Added session cookies authentication — prevents null/undefined runtime crashes — confirmed 3x
+- Replaced auth Plan — confirmed 5x
+- Replaced auth Panel — prevents null/undefined runtime crashes — confirmed 3x
 - Updated entries database schema — confirmed 4x
 - Strengthened types Nawigacja — prevents null/undefined runtime crashes
-- Strengthened types Moje
-- what-changed in siedzenie-po-50.html — confirmed 3x
-- what-changed in nawodnienie-na-treningu-po-50.html — confirmed 3x
-- what-changed in jak-zaczac-na-silowni-po-50.html — confirmed 3x
-- what-changed in trening-maszynowy-po-50.html — confirmed 3x
-- what-changed in sila-chwytu-po-50.html — confirmed 3x
 
 ## Recent Decisions
 
