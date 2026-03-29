@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 411 notes | Score threshold: >40
+> 421 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -26,6 +26,7 @@
 
 ## Project Standards
 
+- Updated entries database schema — confirmed 4x
 - Strengthened types Nawigacja — prevents null/undefined runtime crashes
 - Strengthened types Moje
 - what-changed in siedzenie-po-50.html — confirmed 3x
@@ -33,7 +34,6 @@
 - what-changed in jak-zaczac-na-silowni-po-50.html — confirmed 3x
 - what-changed in trening-maszynowy-po-50.html — confirmed 3x
 - what-changed in sila-chwytu-po-50.html — confirmed 3x
-- what-changed in badania-po-50.html — confirmed 3x
 
 ## Recent Decisions
 

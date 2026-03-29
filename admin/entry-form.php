@@ -26,6 +26,7 @@ if (isset($_GET['id'])) {
 }
 
 $pageTitle = $editMode ? 'Edytuj wpis' : 'Nowy wpis';
+$logoUrl = 'assets/logo.jpg?v=2';
 $today = date('Y-m-d');
 ?>
 <!DOCTYPE html>
@@ -46,7 +47,8 @@ $today = date('Y-m-d');
 <header class="panel-header">
   <div class="panel-header__inner">
     <div class="panel-header__brand">
-      <img src="../assets/logo.jpg" alt="FitPo50" width="36" height="36">
+      <img src="<?= h($logoUrl) ?>" alt="FitPo50" width="36" height="36"
+           onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='https://fitpo50.pl/assets/logo.jpg';}">
       <span class="panel-header__title">Panel redakcyjny</span>
     </div>
     <nav class="panel-header__nav">

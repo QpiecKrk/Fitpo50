@@ -5,6 +5,7 @@ startSecureSession();
 
 $error = '';
 $timeout = isset($_GET['timeout']);
+$logoUrl = 'assets/logo.jpg?v=2';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     verifyCsrf();
@@ -50,7 +51,8 @@ $csrf = csrfToken();
 <div class="login-wrap">
   <div class="login-card">
     <div class="login-logo">
-      <img src="../assets/logo.jpg" alt="FitPo50" width="56" height="56">
+      <img src="<?= h($logoUrl) ?>" alt="FitPo50" width="56" height="56"
+           onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='https://fitpo50.pl/assets/logo.jpg';}">
     </div>
     <h1 class="login-title">Panel FitPo50</h1>
     <p class="login-subtitle">Redakcja wpisów</p>

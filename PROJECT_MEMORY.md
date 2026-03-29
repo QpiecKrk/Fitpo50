@@ -18,6 +18,9 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 - Zachowujemy obecny kierunek serwisu: praktyczny, czytelny, bez nadmiaru ozdobnikow.
 - Nie cofamy ustalen projektowych i SEO bez wyraznej prosby.
 - Przy kazdej zmianie najpierw sprawdzamy stan pliku, potem edytujemy.
+- Po zmianach frontowych (CSS/JS/template) pamietamy o cache:
+  - podbijamy wersje assetow (`?v=`), jesli to potrzebne,
+  - przy diagnozie "nie dziala" najpierw sprawdzamy wersje bez cache.
 
 ## Architektura serwisu
 

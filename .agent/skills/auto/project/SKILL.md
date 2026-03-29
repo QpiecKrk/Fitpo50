@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **224 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **227 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
