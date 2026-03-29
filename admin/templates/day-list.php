@@ -40,14 +40,24 @@ $pageUrl   = $siteUrl . 'wpisy-' . ($date ?? '') . '.html';
 .day-list-header__label { display: inline-block; background: var(--color-primary); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--space-4); }
 .day-list-header__title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text-base); letter-spacing: -.02em; }
 
-.day-list-container { display: flex; flex-direction: column; max-width: 800px; margin: 0 auto; padding: 0 var(--space-6); }
-.entry-card { background: var(--color-surface); padding: var(--space-8); text-decoration: none; color: inherit; display: block; border-radius: var(--radius-md); transition: background-color .2s ease; }
-.entry-card:hover { background: var(--color-surface-2); }
-.entry-card__title { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--text-base); margin-bottom: var(--space-3); line-height: 1.25; }
-.entry-card__lead { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; }
-.entry-card__cta { display: inline-block; margin-top: var(--space-5); font-weight: 600; color: var(--color-primary); font-size: .95rem; text-transform: uppercase; letter-spacing: 1px; }
+.day-list-container { display: flex; flex-direction: column; width: 100%; margin: 0 auto; }
 
-.day-list-separator { border: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(14, 143, 170, 0.2), transparent); margin: var(--space-8) 0; width: 100%; display: block; }
+.article-header { text-align: center; margin-bottom: var(--space-8); padding: 0 var(--space-6); max-width: 980px; margin-inline: auto; }
+.article-header__title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; color: var(--text-base); margin-bottom: var(--space-6); letter-spacing: -.02em; font-weight: 700; }
+.article-hero { position: relative; width: 100%; max-width: 1000px; margin: 0 auto var(--space-10); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); }
+.article-hero img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+.article-content { max-width: 720px; margin: 0 auto var(--space-12); font-size: 1.125rem; line-height: 1.8; color: var(--text-muted); padding: 0 var(--space-6); }
+.article-content > * + * { margin-top: var(--space-6); }
+.article-content h2 { font-family: var(--font-display); font-size: 2.25rem; color: var(--text-base); margin-top: var(--space-12); margin-bottom: var(--space-6); line-height: 1.3; position: relative; padding-bottom: var(--space-3); }
+.article-content h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 60px; height: 4px; background: var(--color-primary); border-radius: 2px; }
+.article-content h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--color-accent); margin-top: var(--space-10); }
+.article-content p { margin-bottom: var(--space-4); }
+.article-content img { width: 100%; border-radius: var(--radius-md); margin: var(--space-10) 0; box-shadow: 0 10px 30px rgba(0,0,0,.1); }
+.article-quote { background: var(--color-surface); border-left: 4px solid var(--color-primary); padding: var(--space-6) var(--space-8); margin: var(--space-10) 0; font-style: italic; font-size: 1.35rem; color: var(--text-base); border-radius: 0 var(--radius-md) var(--radius-md) 0; font-family: var(--font-display); }
+.entry-media-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-4); margin: var(--space-10) 0; }
+.entry-media-gallery img { width: 100%; border-radius: var(--radius-md); box-shadow: 0 6px 16px rgba(0,0,0,.1); }
+
+.day-list-separator { border: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(14, 143, 170, 0.4), transparent); margin: var(--space-20) 0; width: 100%; display: block; }
 </style>
 </head>
 <body>
@@ -82,17 +92,57 @@ $pageUrl   = $siteUrl . 'wpisy-' . ($date ?? '') . '.html';
     </div>
 
     <div class="day-list-container">
-      <?php foreach ($entries as $index => $e): ?>
+      <?php foreach ($entries as $index => $e): 
+          $title      = $e['title'];
+          $lead       = $e['lead'] ?? '';
+          $content    = $e['content'];
+          $media      = $e['media'] ?? [];
+          
+          $heroImg = null;
+          $adminUrl   = defined('ADMIN_URL') ? ADMIN_URL : 'https://admin.fitpo50.pl/';
+          foreach ($media as $m) {
+              if (str_starts_with($m['mime_type'] ?? '', 'image/')) {
+                  $heroImg = $m;
+                  break;
+              }
+          }
+      ?>
         <?php if ($index > 0): ?>
           <hr class="day-list-separator">
         <?php endif; ?>
-        <a href="<?= htmlspecialchars($siteUrl . $e['html_file']) ?>" class="entry-card reveal">
-          <div class="entry-card__title"><?= htmlspecialchars($e['title']) ?></div>
-          <?php if (!empty($e['lead'])): ?>
-            <p class="entry-card__lead"><?= htmlspecialchars($e['lead']) ?></p>
+
+        <div class="article-header reveal">
+          <h2 class="article-header__title" style="color: var(--color-primary);"><?= htmlspecialchars($title) ?></h2>
+          <?php if ($lead): ?>
+            <p style="font-size:1.2rem;color:var(--text-muted);max-width:60ch;margin:0 auto;"><?= htmlspecialchars($lead) ?></p>
           <?php endif; ?>
-          <span class="entry-card__cta">CZYTAJ WPIS →</span>
-        </a>
+        </div>
+
+        <?php if ($heroImg): ?>
+        <div class="article-hero reveal">
+          <img src="<?= htmlspecialchars($adminUrl . 'uploads/' . $heroImg['filename']) ?>"
+               alt="<?= htmlspecialchars($heroImg['original_name'] ?? $title) ?>"
+               loading="lazy" width="1200" height="675">
+        </div>
+        <?php endif; ?>
+
+        <article class="article-content">
+          <?= $content ?>
+
+          <?php
+          $restMedia = array_slice($media, $heroImg ? 1 : 0);
+          if (!empty($restMedia)):
+          ?>
+          <div class="entry-media-gallery">
+            <?php foreach ($restMedia as $m): if (!str_starts_with($m['mime_type'] ?? '', 'image/')) continue; ?>
+            <img src="<?= htmlspecialchars($adminUrl . 'uploads/' . $m['filename']) ?>"
+                 alt="<?= htmlspecialchars($m['original_name'] ?? '') ?>"
+                 loading="lazy" width="800" height="600">
+            <?php endforeach; ?>
+          </div>
+          <?php endif; ?>
+        </article>
+
       <?php endforeach; ?>
     </div>
 

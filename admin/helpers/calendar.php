@@ -36,6 +36,14 @@ function regenerateDayPage(PDO $db, string $date): void {
     $stmt->execute([$date]);
     $entries = $stmt->fetchAll();
 
+    // Pobierz zdjęcia (media) dla każdego wpisu, by móc pokazać całość artykułu
+    foreach ($entries as &$e) {
+        $mStmt = $db->prepare('SELECT * FROM media WHERE entry_id=? ORDER BY sort_order,id');
+        $mStmt->execute([$e['id']]);
+        $e['media'] = $mStmt->fetchAll();
+    }
+    unset($e);
+
     if (empty($entries)) {
         if (file_exists($dayFile)) @unlink($dayFile);
         return;
