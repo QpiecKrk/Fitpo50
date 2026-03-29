@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
+require_once __DIR__ . '/../helpers/calendar.php';
 requireLogin();
 verifyCsrf();
 
@@ -24,7 +25,7 @@ try {
         if (file_exists($path)) @unlink($path);
     }
 
-    // 2. Usuń media tego wpisu (orphan cleanup)
+    // 2. Usuń media (orphan cleanup)
     $mediaFiles = $db->prepare('SELECT filename FROM media WHERE entry_id = ?');
     $mediaFiles->execute([$id]);
     foreach ($mediaFiles->fetchAll() as $m) {
@@ -32,11 +33,11 @@ try {
         if (file_exists($fp)) @unlink($fp);
     }
 
-    // 3. Usuń wpis z bazy (CASCADE usuwa rekordy z tabeli media)
+    // 3. Usuń wpis z bazy (CASCADE usuwa media)
     $db->prepare('DELETE FROM entries WHERE id = ?')->execute([$id]);
 
-    // 4. Regeneruj stronę dnia i kalendarz na podstawie pozostałych wpisów
-    regenerateDayPage($db, $date);
+    // 4. Regeneruj stronę dnia + kalendarz (json_encode, bez regex na JS)
+    syncDay($db, $date);
 
     $_SESSION['flash_success'] = 'Wpis usunięty. Strona dnia i kalendarz zaktualizowane.';
 
@@ -46,48 +47,3 @@ try {
 
 header('Location: ../dashboard.php');
 exit;
-
-// ============================================================
-function regenerateDayPage(PDO $db, string $date): void {
-    $stmt = $db->prepare("SELECT * FROM entries WHERE entry_date = ? AND status = 'published' ORDER BY created_at ASC");
-    $stmt->execute([$date]);
-    $entries = $stmt->fetchAll();
-
-    if (empty($entries)) {
-        $dayPath = SITE_ROOT . 'sukcesy/' . $date . '.html';
-        if (file_exists($dayPath)) @unlink($dayPath);
-        removeFromCalendar($date);
-        return;
-    }
-
-    generateDayListPage($date, $entries);
-    $url = SITE_URL . 'sukcesy/' . $date . '.html';
-    injectCalendarEntry($date, $url);
-}
-
-function generateDayListPage(string $date, array $entries): void {
-    $dir = SITE_ROOT . 'sukcesy/';
-    if (!is_dir($dir)) @mkdir($dir, 0755, true);
-    ob_start();
-    require ADMIN_ROOT . 'templates/day-list.php';
-    $html = ob_get_clean();
-    file_put_contents($dir . $date . '.html', $html);
-}
-
-function removeFromCalendar(string $date): void {
-    $calFile = SITE_ROOT . 'moje-sukcesy.html';
-    if (!file_exists($calFile)) return;
-    $content = file_get_contents($calFile);
-    $content = preg_replace('/\s*\{[^}]*date:\s*"' . preg_quote($date, '/') . '"[^}]*\},?/', '', $content);
-    if ($content !== null) file_put_contents($calFile, $content);
-}
-
-function injectCalendarEntry(string $date, string $url): void {
-    $calFile = SITE_ROOT . 'moje-sukcesy.html';
-    if (!file_exists($calFile)) return;
-    $content = file_get_contents($calFile);
-    $content = preg_replace('/\s*\{[^}]*date:\s*"' . preg_quote($date, '/') . '"[^}]*\},?/', '', $content);
-    $newEntry = "\n    { date: \"$date\", url: \"$url\" },";
-    $content  = preg_replace('/(const userEntries\s*=\s*\[)/', '$1' . $newEntry, $content);
-    if ($content !== null) file_put_contents($calFile, $content);
-}

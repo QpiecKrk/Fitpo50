@@ -1,19 +1,19 @@
 {
   "project": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T10:29:24.479Z",
-    "observationCount": 198,
+    "lastGenerated": "2026-03-29T12:59:09.963Z",
+    "observationCount": 201,
     "skillCount": 0,
     "domain": "project",
     "triggerGlobs": [
       "**/*"
     ],
-    "description": "Project for Fitpo50. 26 gotchas, 44 conventions, 11 fixes."
+    "description": "Project for Fitpo50. 26 gotchas, 45 conventions, 11 fixes."
   },
   "html": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T10:29:24.479Z",
-    "observationCount": 161,
+    "lastGenerated": "2026-03-29T12:59:09.962Z",
+    "observationCount": 164,
     "skillCount": 0,
     "domain": "html",
     "triggerGlobs": [
@@ -23,7 +23,7 @@
   },
   "problem-fix": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T10:29:24.479Z",
+    "lastGenerated": "2026-03-29T12:59:09.964Z",
     "observationCount": 0,
     "skillCount": 1,
     "domain": "problem-fix",
@@ -34,9 +34,9 @@
   },
   "convention": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T10:29:24.479Z",
+    "lastGenerated": "2026-03-29T12:59:09.964Z",
     "observationCount": 0,
-    "skillCount": 23,
+    "skillCount": 24,
     "domain": "convention",
     "triggerGlobs": [
       "**/*"
@@ -45,7 +45,7 @@
   },
   "css": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T10:29:24.479Z",
+    "lastGenerated": "2026-03-29T12:59:09.963Z",
     "observationCount": 5,
     "skillCount": 0,
     "domain": "css",
@@ -57,7 +57,7 @@
   },
   "shell": {
     "enabled": true,
-    "lastGenerated": "2026-03-29T10:29:24.479Z",
+    "lastGenerated": "2026-03-29T12:59:09.964Z",
     "observationCount": 2,
     "skillCount": 0,
     "domain": "shell",
@@ -66,5 +66,16 @@
       "**/*.bash"
     ],
     "description": "Shell for Fitpo50. ."
+  },
+  "php": {
+    "enabled": true,
+    "lastGenerated": "2026-03-29T12:59:09.961Z",
+    "observationCount": 3,
+    "skillCount": 0,
+    "domain": "php",
+    "triggerGlobs": [
+      "**/*.php"
+    ],
+    "description": "Php for Fitpo50. ."
   }
 }

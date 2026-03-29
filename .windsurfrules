@@ -1,5 +1,5 @@
 # Fitpo50 — Project Memory
-# Auto-synced | 369 observations
+# Auto-synced | 378 observations
 
 **Stack:** TypeScript
 
@@ -22,6 +22,7 @@
 
 # 📐 Conventions
 
+- Git Commit: Krótki opis zmiany — confirmed 3x
 - Git Commit: Krótki opis zmiany — confirmed 4x
 - Git Commit: Krótki opis zmiany — confirmed 3x
 - Enable strict mode in tsconfig.json
@@ -29,7 +30,6 @@
 - Use template literals for string interpolation, not concatenation
 - Use optional chaining (?.) and nullish coalescing (??) for safe access
 - Use const by default, let when reassignment needed, never var
-- Version your API from day 1 (/api/v1/)
 
 # ⚡ Available Tools (ON-DEMAND only)
 - `save(title, content, category)` — Save a note + auto-detect conflicts
