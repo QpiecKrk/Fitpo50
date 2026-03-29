@@ -130,18 +130,19 @@ function calendarRebuild(PDO $db): int {
 
 /**
  * Przebudowuje sitemap.xml dopisując aktualne strony dni z katalogu sukcesy/
+ * @return int Liczba dopisanych stron /sukcesy/
  */
-function sitemapRebuild(PDO $db): void {
+function sitemapRebuild(PDO $db): int {
     $sitemapFile = SITE_ROOT . 'sitemap.xml';
-    if (!file_exists($sitemapFile)) return;
+    if (!file_exists($sitemapFile)) return 0;
 
     $dom = new DOMDocument();
     $dom->preserveWhiteSpace = false;
     $dom->formatOutput = true;
-    if (!@$dom->load($sitemapFile)) return;
+    if (!@$dom->load($sitemapFile)) return 0;
 
     $urlset = $dom->documentElement;
-    if (!$urlset || $urlset->tagName !== 'urlset') return;
+    if (!$urlset || $urlset->tagName !== 'urlset') return 0;
 
     // Remove old sukcesy/ entries
     $toRemove = [];
@@ -165,6 +166,7 @@ function sitemapRebuild(PDO $db): void {
     );
     $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $count = 0;
     foreach ($dates as $row) {
         $date = $row['entry_date'];
         $lastmod = date('Y-m-d', strtotime($row['last_updated']));
@@ -178,7 +180,12 @@ function sitemapRebuild(PDO $db): void {
         $urlNode->appendChild($lastmodNode);
         
         $urlset->appendChild($urlNode);
+        $count++;
     }
 
-    $dom->save($sitemapFile);
+    if ($dom->save($sitemapFile) === false) {
+        throw new RuntimeException('Błąd zapisu pliku sitemap.xml. Sprawdź uprawnienia.');
+    }
+
+    return $count;
 }

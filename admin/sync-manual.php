@@ -18,15 +18,22 @@ try {
     $publishedCount = (int)$stmt->fetchColumn();
     $stats[] = "Wpisy o statusie 'published' w bazie: $publishedCount";
 
+    // Statystyki Kalendarza
     $calFile = SITE_ROOT . 'moje-sukcesy.html';
-    $content = file_get_contents($calFile);
-    preg_match('/\/\/ ENTRIES_START\s*const userEntries\s*=\s*(\[[\s\S]*?\]);\s*\/\/ ENTRIES_END/', $content, $m);
-    $currentCount = 0;
+    $calContent = file_get_contents($calFile);
+    preg_match('/\/\/ ENTRIES_START\s*const userEntries\s*=\s*(\[[\s\S]*?\]);\s*\/\/ ENTRIES_END/', $calContent, $m);
+    $currentCalCount = 0;
     if (isset($m[1])) {
         $decoded = json_decode($m[1], true);
-        $currentCount = is_array($decoded) ? count($decoded) : 0;
+        $currentCalCount = is_array($decoded) ? count($decoded) : 0;
     }
-    $stats[] = "Aktualnie w moje-sukcesy.html: $currentCount dni";
+    $stats[] = "Aktualnie w moje-sukcesy.html: $currentCalCount dni";
+
+    // Statystyki Sitemap
+    $sitemapFile = SITE_ROOT . 'sitemap.xml';
+    $sitemapContent = file_exists($sitemapFile) ? file_get_contents($sitemapFile) : '';
+    $currentSitemapCount = substr_count($sitemapContent, '/sukcesy/');
+    $stats[] = "Aktualnie w sitemap.xml: $currentSitemapCount wpisów /sukcesy/";
 
 } catch (Exception $e) {
     $errors[] = "Błąd odczytu statystyk: " . $e->getMessage();
@@ -36,10 +43,23 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         verifyCsrf();
-        $syncedCount = calendarRebuild($db);
-        sitemapRebuild($db);
+        
+        $syncedCalCount = calendarRebuild($db);
+        $syncedSitemapCount = sitemapRebuild($db);
+        
         $synced = true;
-        $stats[] = "✓ Zsynchronizowano pomyślnie $syncedCount dni oraz mapę strony.";
+        
+        // Weryfikacja po zapisie
+        $sitemapContentAfter = file_get_contents(SITE_ROOT . 'sitemap.xml');
+        $verifySitemapCount = substr_count($sitemapContentAfter, '/sukcesy/');
+        
+        $stats[] = "✓ Zsynchronizowano pomyślnie:";
+        $stats[] = "— Kalendarz: $syncedCalCount dni";
+        $stats[] = "— Sitemap: $syncedSitemapCount adresów (Weryfikacja pliku: $verifySitemapCount)";
+        
+        if ($verifySitemapCount !== $syncedSitemapCount) {
+            $errors[] = "UWAGA: Rozbieżność w sitemapie! Oczekiwano $syncedSitemapCount, znaleziono $verifySitemapCount.";
+        }
     } catch (Exception $e) {
         $errors[] = "BŁĄD SYNCHRONIZACJI: " . $e->getMessage();
     }

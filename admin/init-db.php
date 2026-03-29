@@ -1,16 +1,23 @@
 <?php
 // ============================================================
 // init-db.php — jednorazowa inicjalizacja bazy danych
-// Uruchom RAZ: https://admin.fitpo50.pl/init-db.php?token=CHANGE_ME
-// Kasuje się automatycznie po wykonaniu.
+// Uruchom RAZ: https://admin.fitpo50.pl/init-db.php?token=TWOJ_TOKEN
+// PO UŻYCIU: Usuń ten plik rącznie z serwera dla bezpieczeństwa!
+// Kasuje się automatycznie po poprawnym wykonaniu.
 // ============================================================
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/auth.php';
 
-$token = $_GET['token'] ?? '';
-if ($token !== 'CHANGE_ME') {
+// Hardening: Blokada na produkcji
+if (defined('APP_ENV') && APP_ENV !== 'dev') {
     http_response_code(403);
-    die('403 Forbidden — Ustaw bezpieczny token w kodzie przed użyciem.');
+    die('403 Forbidden — Skrypty instalacyjne są zablokowane na produkcji. Zmień APP_ENV na "dev" w config.php aby uruchomić.');
+}
+
+$token = $_GET['token'] ?? '';
+if ($token === 'CHANGE_ME' || $token === '') {
+    http_response_code(403);
+    die('403 Forbidden — Ustaw bezpieczny, własny token w kodzie skryptu (zamiast CHANGE_ME) przed jego wywołaniem.');
 }
 
 $errors = [];

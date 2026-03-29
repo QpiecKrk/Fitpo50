@@ -1,14 +1,22 @@
-<?php
 // ============================================================
 // Jednorazowy skrypt do generowania hasha hasła — KASUJE SIĘ PO UŻYCIU
-// Uruchom RAZ: https://admin.fitpo50.pl/init-hash.php?token=CHANGE_ME&pass=TwojeTajneHaslo
+// Uruchom RAZ: https://admin.fitpo50.pl/init-hash.php?token=TWOJ_TOKEN&pass=TwojeTajneHaslo
+// PO UŻYCIU: Usuń ten plik ręcznie z serwera dla bezpieczeństwa!
 // Skopiuj hash do config.php → plik zostanie automatycznie usunięty.
 // ============================================================
 
-$token = $_GET['token'] ?? '';
-if ($token !== 'CHANGE_ME') {
+require_once __DIR__ . '/config.php';
+
+// Hardening: Blokada na produkcji
+if (defined('APP_ENV') && APP_ENV !== 'dev') {
     http_response_code(403);
-    die('403 Forbidden — Ustaw bezpieczny token w kodzie przed użyciem.');
+    die('403 Forbidden — Skrypty instalacyjne są zablokowane na produkcji. Zmień APP_ENV na "dev" w config.php aby uruchomić.');
+}
+
+$token = $_GET['token'] ?? '';
+if ($token === 'CHANGE_ME' || $token === '') {
+    http_response_code(403);
+    die('403 Forbidden — Ustaw bezpieczny, własny token w kodzie skryptu (zamiast CHANGE_ME) przed jego wywołaniem.');
 }
 
 $password = $_GET['pass'] ?? '';

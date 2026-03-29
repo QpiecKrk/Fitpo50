@@ -2268,3 +2268,28 @@ a:hover {
     height: 14px;
   }
 }
+
+/* MOBILE LANDSCAPE OPTIMIZATION */
+@media (max-width: 900px) and (orientation: landscape) {
+  .entry-carousel {
+    aspect-ratio: 21 / 9;
+    max-height: 65vh;
+    margin-bottom: var(--space-6);
+  }
+  .entry-carousel__btn {
+    width: 32px;
+    height: 32px;
+  }
+  .entry-carousel__btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  .entry-carousel__dots {
+    bottom: var(--space-2);
+    gap: 6px;
+  }
+  .entry-carousel__dot {
+    width: 8px;
+    height: 8px;
+  }
+}
