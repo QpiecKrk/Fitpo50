@@ -207,27 +207,96 @@ $today = date('Y-m-d');
 </main>
 
 <script>
-// Podgląd wybranych plików przed uploadem
-document.getElementById('media_files').addEventListener('change', function() {
-  const preview = document.getElementById('upload-preview');
+// Podgląd i kumulacja wybranych plików (rozwiązanie dla mobile/aparatu)
+let accumulatedFiles = [];
+const fileInput = document.getElementById('media_files');
+const preview = document.getElementById('upload-preview');
+const form = document.getElementById('entry-form');
+
+fileInput.addEventListener('change', function() {
+  const newFiles = Array.from(this.files);
+  
+  newFiles.forEach(file => {
+    // Prosty fingerprint do unikania duplikatów
+    const identifier = file.name + '-' + file.size + '-' + file.lastModified;
+    const exists = accumulatedFiles.find(f => (f.name + '-' + f.size + '-' + f.lastModified) === identifier);
+    
+    if (!exists) {
+      accumulatedFiles.push(file);
+    }
+  });
+
+  renderPreview();
+  
+  // Czyścimy input, aby kolejne kliknięcie i zrobienie tego samego zdjęcia/wybór z aparatu 
+  // znów wyzwoliło zdarzenie "change". Przed wysłaniem i tak wstrzykniemy accumulatedFiles.
+  this.value = '';
+});
+
+function renderPreview() {
   preview.innerHTML = '';
-  Array.from(this.files).forEach(file => {
+  accumulatedFiles.forEach((file, index) => {
+    const item = document.createElement('div');
+    item.className = 'upload-preview__item';
+    item.style.position = 'relative'; // dla przycisku usuwania
+
+    // Przycisk usuwania
+    const removeBtn = document.createElement('button');
+    removeBtn.innerHTML = '✕';
+    removeBtn.type = 'button';
+    removeBtn.style.position = 'absolute';
+    removeBtn.style.top = '4px';
+    removeBtn.style.right = '4px';
+    removeBtn.style.background = 'rgba(230, 48, 81, 0.9)'; // pasuje do kolorystyki panelu (danger)
+    removeBtn.style.color = '#fff';
+    removeBtn.style.border = 'none';
+    removeBtn.style.borderRadius = '50%';
+    removeBtn.style.width = '24px';
+    removeBtn.style.height = '24px';
+    removeBtn.style.cursor = 'pointer';
+    removeBtn.style.zIndex = '10';
+    removeBtn.style.display = 'flex';
+    removeBtn.style.alignItems = 'center';
+    removeBtn.style.justifyContent = 'center';
+    removeBtn.style.fontSize = '12px';
+    removeBtn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+    
+    removeBtn.onclick = (e) => {
+      e.preventDefault();
+      accumulatedFiles.splice(index, 1);
+      renderPreview();
+    };
+
     if (file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = e => {
-        const d = document.createElement('div');
-        d.className = 'upload-preview__item';
-        d.innerHTML = `<img src="${e.target.result}" alt="${file.name}"><span>${file.name}</span>`;
-        preview.appendChild(d);
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.alt = file.name;
+        
+        const span = document.createElement('span');
+        span.textContent = file.name;
+        
+        item.appendChild(removeBtn);
+        item.appendChild(img);
+        item.appendChild(span);
+        preview.appendChild(item);
       };
       reader.readAsDataURL(file);
     } else {
-      const d = document.createElement('div');
-      d.className = 'upload-preview__item';
-      d.innerHTML = `<div class="media-file-icon">📎</div><span>${file.name}</span>`;
-      preview.appendChild(d);
+      item.innerHTML = `<div class="media-file-icon">📎</div><span>${file.name}</span>`;
+      item.appendChild(removeBtn);
+      preview.appendChild(item);
     }
   });
+}
+
+// Intercepcja wysyłania formularza
+form.addEventListener('submit', function() {
+  // Transfer zgromadzonych plików do natywnego inputa przed wysłaniem żądania
+  const dt = new DataTransfer();
+  accumulatedFiles.forEach(f => dt.items.add(f));
+  fileInput.files = dt.files;
 });
 </script>
 
