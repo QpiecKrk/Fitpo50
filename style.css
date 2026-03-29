@@ -2139,3 +2139,122 @@ a:hover {
 .article-content li {
   margin-bottom: var(--space-2);
 }
+
+/* ============================================================
+   IMAGE CAROUSEL - Moje Sukcesy
+   ============================================================ */
+.entry-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto var(--space-12);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,.15);
+  aspect-ratio: 16/9;
+  background: var(--color-surface);
+}
+
+.entry-carousel__track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.entry-carousel__track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.entry-carousel__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.entry-carousel__slide picture,
+.entry-carousel__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Controls */
+.entry-carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.entry-carousel__btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.entry-carousel__btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.entry-carousel__btn--prev { left: var(--space-4); }
+.entry-carousel__btn--next { right: var(--space-4); }
+
+.entry-carousel__dots {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.entry-carousel__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.entry-carousel__dot--active {
+  background: white;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 640px) {
+  .entry-carousel__btn {
+    width: 36px;
+    height: 36px;
+  }
+  .entry-carousel__btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -153,14 +153,10 @@ if (!function_exists('renderMediaPicture')) {
           $content    = $e['content'];
           $media      = $e['media'] ?? [];
           
-          $heroImg = null;
+          $imageMedia = array_values(array_filter($media, fn($m) => str_starts_with($m['mime_type'] ?? '', 'image/')));
+          $imageCount = count($imageMedia);
+          $heroImg = $imageCount > 0 ? reset($imageMedia) : null;
           $adminUrl   = defined('ADMIN_URL') ? ADMIN_URL : 'https://admin.fitpo50.pl/';
-          foreach ($media as $m) {
-              if (str_starts_with($m['mime_type'] ?? '', 'image/')) {
-                  $heroImg = $m;
-                  break;
-              }
-          }
       ?>
         <?php if ($index > 0): ?>
           <hr class="day-list-separator">
@@ -173,27 +169,31 @@ if (!function_exists('renderMediaPicture')) {
           <?php endif; ?>
         </div>
 
-        <?php if ($heroImg): ?>
+        <?php if ($imageCount === 1): ?>
         <div class="article-hero reveal">
-          <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $adminUrl, '1200', '675', 'lazy') ?>
+          <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $adminUrl, '1200', '675', 'eager') ?>
+        </div>
+        <?php elseif ($imageCount >= 2): ?>
+        <div class="entry-carousel reveal" aria-label="Galeria zdjęć wpisu" tabindex="0">
+          <div class="entry-carousel__track">
+            <?php foreach ($imageMedia as $idx => $m): ?>
+              <div class="entry-carousel__slide">
+                <?= renderMediaPicture($m['filename'], $m['original_name'] ?? $title, $adminUrl, '1200', '675', $idx === 0 ? 'eager' : 'lazy') ?>
+              </div>
+            <?php endforeach; ?>
+          </div>
+          <button class="entry-carousel__btn entry-carousel__btn--prev" aria-label="Poprzednie zdjęcie">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="entry-carousel__btn entry-carousel__btn--next" aria-label="Następne zdjęcie">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div class="entry-carousel__dots"></div>
         </div>
         <?php endif; ?>
 
         <article class="article-content">
           <?= $content ?>
-
-          <?php
-          $restMedia = array_slice($media, $heroImg ? 1 : 0);
-          if (!empty($restMedia)):
-          ?>
-          <div class="entry-media-gallery">
-            <?php foreach ($restMedia as $m): if (!str_starts_with($m['mime_type'] ?? '', 'image/')) continue; ?>
-            <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.1);">
-              <?= renderMediaPicture($m['filename'], $m['original_name'] ?? '', $adminUrl, '800', '600', 'lazy') ?>
-            </div>
-            <?php endforeach; ?>
-          </div>
-          <?php endif; ?>
         </article>
 
       <?php endforeach; ?>
@@ -232,6 +232,57 @@ if (!function_exists('renderMediaPicture')) {
 </footer>
 
 <script src="<?= $siteUrl ?>dist/app.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const carousels = document.querySelectorAll('.entry-carousel');
+    carousels.forEach(carousel => {
+        const track = carousel.querySelector('.entry-carousel__track');
+        const slides = Array.from(track.children);
+        const dotsContainer = carousel.querySelector('.entry-carousel__dots');
+        const prevBtn = carousel.querySelector('.entry-carousel__btn--prev');
+        const nextBtn = carousel.querySelector('.entry-carousel__btn--next');
+        
+        if (slides.length < 2) return;
+
+        // Create dots
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.classList.add('entry-carousel__dot');
+            if (i === 0) dot.classList.add('entry-carousel__dot--active');
+            dot.setAttribute('aria-label', `Idź do zdjęcia ${i + 1}`);
+            dot.addEventListener('click', () => {
+                track.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' });
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsContainer.children);
+
+        const updateActiveDot = () => {
+            const index = Math.round(track.scrollLeft / track.offsetWidth);
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('entry-carousel__dot--active', i === index);
+            });
+        };
+
+        track.addEventListener('scroll', updateActiveDot);
+
+        prevBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -track.offsetWidth, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: track.offsetWidth, behavior: 'smooth' });
+        });
+
+        // Keyboard navigation
+        carousel.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevBtn.click();
+            if (e.key === 'ArrowRight') nextBtn.click();
+        });
+    });
+});
+</script>
 
 <nav class="bottom-nav" aria-label="Nawigacja dolna">
   <a href="<?= $siteUrl ?>index.html" class="bottom-nav__item">

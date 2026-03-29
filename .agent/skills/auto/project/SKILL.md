@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 47 conventions, 13 fixes."
+description: "Project for Fitpo50. 26 gotchas, 48 conventions, 13 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **213 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **214 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -204,6 +204,9 @@ Branch: main
 - 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
 Message: Krótki opis zmiany
 Branch: main
+- 📐 **Git Commit: Krótki opis zmiany — confirmed 3x** — Captured via Git commit.
+Message: Krótki opis zmiany
+Branch: main
 - 📐 **what-changed in task.md — confirmed 3x** — - - [ ] Zaktualizować plik `style.css` o style dla kalendarza (grid dni, karuzela, zielony fistaszek
 - 📐 **convention in .gitignore** — File updated (external): .gitignore
 
@@ -247,7 +250,6 @@ CLAUDE.md
 - 📐 **Enable strict mode in tsconfig.json** — Enable strict mode in tsconfig.json
 - 📐 **Prefer Array methods (map, filter, reduce) over manual loops** — Prefer Array methods (map, filter, reduce) over manual loops
 - 📐 **Use template literals for string interpolation, not concatenation** — Use template literals for string interpolation, not concatenation
-- 📐 **Use optional chaining (?.) and nullish coalescing (??) for safe access** — Use optional chaining (?.) and nullish coalescing (??) for safe access
-- 📐 **Use const by default, 
+- 📐 **Use optional chaining (?.) and nullish coalescing (?
 
 ... [Truncated — see individual observations for full content]

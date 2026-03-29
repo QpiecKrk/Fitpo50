@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 392 notes | Score threshold: >40
+> 396 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -23,6 +23,14 @@
 - **gotcha in siedzenie-po-50.html** — -           <span class="article-quote__source">Źródło: Dunstan DW et 
 - **gotcha in siedzenie-po-50.html** — -           <li>[1] <a href="https://doi.org/10.1038/s41569-021-00571-
 - **gotcha in siedzenie-po-50.html** — -           <li>[1] Dunstan DW et al. (2021). Sit less and move more f
+
+## Active: `.`
+
+- **gotcha in siedzenie-po-50.html**
+- **gotcha in siedzenie-po-50.html**
+- **gotcha in siedzenie-po-50.html**
+- **Strengthened types Moje**
+- **what-changed in siedzenie-po-50.html — confirmed 3x**
 
 ## Project Standards
 
