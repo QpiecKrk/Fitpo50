@@ -2,6 +2,17 @@
 
 Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach.
 
+## Podzial pamieci modulowej
+
+- Glowny plik (`PROJECT_MEMORY.md`) zawiera zasady przekrojowe i wspolne.
+- Szczegoly dla modulow trzymamy osobno:
+  - `MEMORY_PORADY.md` - klasyczne artykuly i czytelnia `porady.html`.
+  - `MEMORY_MOJE_SUKCESY.md` - kalendarz oraz strony dnia `sukcesy/YYYY-MM-DD.html`.
+- Zasada pracy:
+  - gdy zadanie dotyczy `Porady`, czytamy i stosujemy `MEMORY_PORADY.md`,
+  - gdy zadanie dotyczy `Moje Sukcesy`, czytamy i stosujemy `MEMORY_MOJE_SUKCESY.md`,
+  - nie mieszamy logiki miedzy modulami.
+
 ## Zasady ogolne
 
 - Zachowujemy obecny kierunek serwisu: praktyczny, czytelny, bez nadmiaru ozdobnikow.
