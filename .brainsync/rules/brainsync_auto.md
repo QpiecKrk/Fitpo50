@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 452 notes | Score threshold: >40
+> 464 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -24,16 +24,20 @@
 - **gotcha in siedzenie-po-50.html** — -           <li>[1] <a href="https://doi.org/10.1038/s41569-021-00571-
 - **gotcha in siedzenie-po-50.html** — -           <li>[1] Dunstan DW et al. (2021). Sit less and move more f
 
+## Active: `admin/api`
+
+- **Fixed null crash in Exception**
+
 ## Project Standards
 
-- what-changed in task.md — confirmed 3x
-- Patched security issue Plan — confirmed 7x
 - Fixed null crash in DOMDocument — prevents null/undefined runtime crashes — confirmed 3x
 - Added session cookies authentication — prevents null/undefined runtime crashes — confirmed 3x
-- Replaced auth Plan — confirmed 5x
 - Replaced auth Panel — prevents null/undefined runtime crashes — confirmed 3x
 - Updated entries database schema — confirmed 4x
 - Strengthened types Nawigacja — prevents null/undefined runtime crashes
+- what-changed in style.css — confirmed 3x
+- what-changed in task.md — confirmed 3x
+- Patched security issue Plan — confirmed 7x
 
 ## Recent Decisions
 
