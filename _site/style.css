@@ -500,6 +500,15 @@ a:hover {
   color: #fff;
 }
 
+.btn--zdrowie {
+  background: var(--color-gold);
+  color: #1b1b1b;
+}
+.btn--zdrowie:hover {
+  background: #d8a32a;
+  color: #1b1b1b;
+}
+
 .btn--ciekawe {
   background: linear-gradient(135deg, #4CB870 0%, #16A085 100%);
   color: #fff;
@@ -1284,6 +1293,26 @@ a:hover {
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.article-index-card[data-category="ruch"] .article-index-card__label {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.article-index-card[data-category="jedzenie"] .article-index-card__label {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.article-index-card[data-category="zdrowie"] .article-index-card__label {
+  background: var(--color-gold);
+  color: #1b1b1b;
+}
+
+.article-index-card[data-category="ciekawe"] .article-index-card__label {
+  background: var(--color-success);
+  color: #fff;
 }
 
 .article-index-card__meta {
