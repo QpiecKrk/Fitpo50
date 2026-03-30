@@ -10,9 +10,12 @@ CLAUDE.md
 admin/config.php
 admin/uploads/*
 !admin/uploads/.htaccess
+_site/admin/uploads/*
+!_site/admin/uploads/.htaccess
 
 # === Generowane strony dni (sukcesy/) ===
 sukcesy/*.html
+_site/sukcesy/*.html
 
 # Local-only files (do not commit)
 node_modules/
@@ -33,3 +36,31 @@ _site/calendar-entries.local.json
 * 2.xml
 * 2.sh
 * 2.md
+* 3.html
+* 3.css
+* 3.js
+* 3.json
+* 3.txt
+* 3.xml
+* 3.sh
+* 3.md
+* 4.html
+* 4.css
+* 4.js
+* 4.json
+* 4.txt
+* 4.xml
+* 4.sh
+* 4.md
+
+# local tool artifacts (do not commit)
+.agent/lessons.md
+.brainsync/ip_rules.md
+
+# generated test pages (never publish)
+2026-03-30-mdlsdmslds.html
+2026-03-31-dupa.html
+testtest.txt
+_site/2026-03-30-mdlsdmslds.html
+_site/2026-03-31-dupa.html
+_site/testtest.txt
