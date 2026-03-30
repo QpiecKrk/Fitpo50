@@ -5,3 +5,31 @@ CLAUDE.md
 
 # Auto-generated agent rules (personalized per developer)
 .brainsync/agent-rules.md
+
+# === Admin panel — pliki prywatne (NIE commitować) ===
+admin/config.php
+admin/uploads/*
+!admin/uploads/.htaccess
+
+# === Generowane strony dni (sukcesy/) ===
+sukcesy/*.html
+
+# Local-only files (do not commit)
+node_modules/
+_site/node_modules/
+package-lock.json
+_site/package-lock.json
+admin/database.sqlite
+_site/admin/database.sqlite
+calendar-entries.local.json
+_site/calendar-entries.local.json
+
+# accidental duplicate export files
+* 2.html
+* 2.css
+* 2.js
+* 2.json
+* 2.txt
+* 2.xml
+* 2.sh
+* 2.md
