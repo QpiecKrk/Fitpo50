@@ -500,6 +500,15 @@ a:hover {
   color: #fff;
 }
 
+.btn--ciekawe {
+  background: linear-gradient(135deg, #4CB870 0%, #16A085 100%);
+  color: #fff;
+}
+.btn--ciekawe:hover {
+  background: linear-gradient(135deg, #3DA161 0%, #138D75 100%);
+  color: #fff;
+}
+
 .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
 /* --- Redesigned Latest Article Block --- */

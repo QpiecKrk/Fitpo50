@@ -24,12 +24,13 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 
 ## Architektura serwisu
 
-- Serwis opiera sie na trzech glownych filarach:
-  - `rusz-sie.html`
-  - `jedzenie.html`
-  - `zdrowie.html`
+- Serwis opiera sie na czterech glownych filarach:
+  - `rusz-sie.html` (Ruch)
+  - `jedzenie.html` (Jedzenie)
+  - `zdrowie.html` (Zdrowie)
+  - `ciekawe.html` (Ciekawe)
 - Strona zbiorcza artykulow to `porady.html`.
-- Kategoria `Wiedza` zostala usunieta. Powiazane tresci wpadaja do jednego z trzech filarow, najczesciej do `Zdrowie`.
+- Kategoria `Wiedza` zostala usunieta. Powiazane tresci wpadaja do jednego z czterech filarow (najczesciej do `Zdrowie` lub `Ciekawe`).
 - Na stronie glownej sekcja "Najnowsze Porady i Artykuly" ma zawierac tylko 3 najnowsze kafelki.
 
 ## Artykuly
@@ -75,7 +76,7 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
   - `link rel="canonical"`
   - komplet `og:*`
   - komplet `twitter:*`
-- Strony zbiorcze (`porady.html`, `rusz-sie.html`, `jedzenie.html`, `zdrowie.html`) powinny miec:
+- Strony zbiorcze (`porady.html`, `rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`) powinny miec:
   - `title`
   - `meta name="description"`
   - `meta name="robots" content="index,follow"`
@@ -105,7 +106,7 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 - Dla stron zbiorczych utrzymujemy `CollectionPage`.
 - `porady.html` powinno uzywac `CollectionPage` z `mainEntity` typu `ItemList`.
 - Dane w schema musza zgadzac sie z realna zawartoscia strony:
-  - Liczba artykułów: 15 (głównie Zdrowie i Ruch, 2 artykuły w Jedzenie: "Jedz więcej" oraz "Nawodnienie po 50-tce")
+  - Liczba artykułów: 15 (uklad: Ruch, Jedzenie, Zdrowie, Ciekawe)
   - lista artykulow
   - kolejnosc
 
@@ -341,3 +342,31 @@ Jesli artykul ma obrazy:
 - **KRYTYCZNE**: Wszystkie nagłówki sekcji (`section-header`) muszą posiadać element `<div class="section-header__line"></div>` oraz sub-klasy animacyjne. Standard to: etykieta (slide), tytuł (fade-up), linia (scale-out) i opis (fade-in), wyzwalane przez klasę `.reveal`.
 - **KRYTYCZNE**: Artykuł „Siła chwytu” (12. w kolejności) wprowadził wzorzec długiego, angażującego tytułu na kafelkach: „Zaciśnij dłoń. Właśnie zrobiłeś ważniejszy test zdrowotny niż pomiar ciśnienia.”. Należy utrzymać ten standard dla tego wpisu we wszystkich sekcjach (Home, Porady, Zdrowie).
 - Zmiany techniczne, SEO i wizualne nie powinny przypadkiem zmieniac sensu tresci.
+
+## Ustalenia krytyczne 2026-03 (Moje Sukcesy)
+
+- Znikanie "fistaszkow" traktujemy jako blad krytyczny i zabezpieczamy warstwowo:
+  - backend: atomowy zapis kalendarza (`.tmp` + `rename`) i walidacja po zapisie,
+  - admin: twarda diagnostyka niespojnosci w `admin/sync-manual.php`,
+  - frontend: fallback self-heal (API) tylko gdy `userEntries.length === 0`.
+- `admin/sync-manual.php` dziala w trybie `POST + CSRF` i ma synchronizowac:
+  - kalendarz (`calendarRebuild`),
+  - sitemap (`sitemapRebuild`),
+  - oraz raportowac liczby po zapisie.
+- `sitemapRebuild()` ma zwracac liczbe wpisow `/sukcesy/` i rzucac wyjatek przy bledzie zapisu.
+- Media dla stron "Moje Sukcesy" i stron dnia:
+  - primary URL: `https://fitpo50.pl/admin/uploads/...`,
+  - fallback `onerror`: `https://admin.fitpo50.pl/uploads/...`,
+  - dotyczy tez `og:image` (preferujemy domene glowna).
+- W mobile landscape karuzela ma miec odchudzony profil:
+  - `@media (max-width: 900px) and (orientation: landscape)`,
+  - bardziej plaski ratio (`21/9`) i limit wysokosci (`max-height: 65vh`),
+  - mniejsze kontrolki (strzalki/kropki), bez zmian JS.
+- Admin login/header/form ma miec widoczne logo z fallbackiem do domeny glownej:
+  - jesli lokalny asset nie wejdzie, podmieniamy `src` na `https://fitpo50.pl/assets/logo.jpg`.
+- Skrypty instalacyjne (`init-db.php`, `init-hash.php`) sa domyslnie zablokowane na produkcji:
+  - uruchamianie tylko przy `APP_ENV === 'dev'`,
+  - token `CHANGE_ME` nigdy nie moze przejsc jako poprawny.
+- Przy commitach produkcyjnych nie mieszamy plikow agenta i pamieci narzedzi:
+  - pomijamy `.agent/*`, `.brainsync/*`, `.cursor/*`, `.windsurfrules`,
+  - commitujemy tylko pliki z realna logika/aplikacja.

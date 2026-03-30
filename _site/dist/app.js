@@ -142,7 +142,8 @@ if (window.__fitpo50_initialized) {
       odzywianie: 'w kategorii Odżywianie',
       suplementacja: 'w kategorii Suplementacja',
       zdrowie: 'w kategorii Zdrowie',
-      wiedza: 'w kategorii Wiedza'
+      wiedza: 'w kategorii Wiedza',
+      ciekawe: 'w kategorii Ciekawe'
     };
 
     let currentPageIndex = 0;

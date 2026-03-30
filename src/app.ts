@@ -203,7 +203,8 @@
       odzywianie: 'w kategorii Odżywianie',
       suplementacja: 'w kategorii Suplementacja',
       zdrowie: 'w kategorii Zdrowie',
-      wiedza: 'w kategorii Wiedza'
+      wiedza: 'w kategorii Wiedza',
+      ciekawe: 'w kategorii Ciekawe'
     };
 
     const normalize = (value: string) =>
