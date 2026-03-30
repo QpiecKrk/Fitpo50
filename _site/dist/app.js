@@ -177,7 +177,6 @@
     const carouselPrev = document.querySelector('[data-carousel-prev]');
     const carouselNext = document.querySelector('[data-carousel-next]');
     const carouselIndicator = document.querySelector('[data-carousel-indicator]');
-    let revealObserver = null;
     if (articleSearchInput && articleItems.length > 0) {
         let searchCommitted = false;
         let articlesExpanded = false;
@@ -374,19 +373,18 @@
     // ----------------------------------------------------------
     // SCROLL REVEAL (IntersectionObserver)
     // ----------------------------------------------------------
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+                revealObserver.unobserve(entry.target);
             }
         });
     }, {
         threshold: 0.1,
         rootMargin: '0px 0px -40px 0px'
     });
-    revealObserver = observer;
-    document.querySelectorAll('.reveal').forEach(el => revealObserver === null || revealObserver === void 0 ? void 0 : revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     // ----------------------------------------------------------
     // SMOOTH SCROLL for hash links
     // ----------------------------------------------------------
