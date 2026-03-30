@@ -86,6 +86,9 @@ function calendarRebuild(PDO $db): int {
         ];
     }
 
+    // Osobne, stabilne źródło danych dla frontendu kalendarza (same-origin JSON).
+    writeCalendarEntriesJson($items);
+
     $dbCount = count($items);
 
     // 3. Wygeneruj poprawny JavaScript
@@ -180,6 +183,49 @@ function calendarRebuild(PDO $db): int {
     }
 
     return $finalCount;
+}
+
+/**
+ * Zapisuje publiczny plik calendar-entries.json atomowo.
+ * Frontend może dzięki temu działać bez zależności od CORS/admin subdomeny.
+ *
+ * @param array<int,array{date:string,url:string}> $items
+ */
+function writeCalendarEntriesJson(array $items): void {
+    $jsonFile = SITE_ROOT . 'calendar-entries.json';
+    $tmpFile = $jsonFile . '.tmp';
+
+    $payload = [
+        'ok' => true,
+        'entries' => $items,
+    ];
+
+    $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    if (!is_string($json)) {
+        throw new RuntimeException('Nie udało się wygenerować JSON dla calendar-entries.json.');
+    }
+
+    if (file_put_contents($tmpFile, $json) === false) {
+        @unlink($tmpFile);
+        throw new RuntimeException('Błąd zapisu pliku tymczasowego calendar-entries.json.');
+    }
+
+    $written = file_get_contents($tmpFile);
+    if ($written === false) {
+        @unlink($tmpFile);
+        throw new RuntimeException('Błąd odczytu pliku tymczasowego calendar-entries.json.');
+    }
+
+    $decoded = json_decode($written, true);
+    if (!is_array($decoded) || !isset($decoded['entries']) || !is_array($decoded['entries'])) {
+        @unlink($tmpFile);
+        throw new RuntimeException('Weryfikacja calendar-entries.json nie powiodła się (niepoprawny JSON).');
+    }
+
+    if (!@rename($tmpFile, $jsonFile)) {
+        @unlink($tmpFile);
+        throw new RuntimeException('Błąd podmiany pliku calendar-entries.json.');
+    }
 }
 
 /**

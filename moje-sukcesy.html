@@ -206,6 +206,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const startDate = new Date(2025, 0, 1);
   const endDate = new Date(2028, 11, 31);
+  const calendarDataUrl = './calendar-entries.json';
+  const localCalendarApiUrl = './admin/api/calendar-entries.php';
   const calendarApiUrl = document.querySelector('meta[name="calendar-api-url"]')?.content || 'https://admin.fitpo50.pl/api/calendar-entries.php';
   
   const track = document.getElementById('calendar-track');
@@ -344,28 +346,42 @@ document.addEventListener("DOMContentLoaded", () => {
     track.style.transition = '';
   });
 
-  async function loadFallbackEntries() {
+  async function fetchEntriesFromSource(sourceUrl) {
     const controller = new AbortController();
     const timeoutId = window.setTimeout(() => controller.abort(), 1800);
     try {
-      const response = await fetch(calendarApiUrl, { signal: controller.signal });
-      if (!response.ok) return;
+      const response = await fetch(sourceUrl, { signal: controller.signal, cache: 'no-store' });
+      if (!response.ok) return { ok: false, entries: [] };
       const data = await response.json();
-      const fallbackEntries = sanitizeEntries(data?.entries);
-      if (!data?.ok || fallbackEntries.length === 0) return;
-      userEntries = fallbackEntries;
-      renderCalendar();
-      updateCarousel();
+      const normalized = sanitizeEntries(Array.isArray(data) ? data : data?.entries);
+      return { ok: true, entries: normalized };
     } catch (e) {
-      console.warn("Calendar fallback failed:", e);
+      console.warn("Calendar source failed:", sourceUrl, e);
+      return { ok: false, entries: [] };
     } finally {
       window.clearTimeout(timeoutId);
     }
   }
 
-  if (userEntries.length === 0) {
-    void loadFallbackEntries();
+  async function refreshEntries() {
+    const sources = [
+      { url: calendarDataUrl, allowEmpty: false },
+      { url: localCalendarApiUrl, allowEmpty: true },
+      { url: calendarApiUrl, allowEmpty: true }
+    ];
+
+    for (const source of sources) {
+      const result = await fetchEntriesFromSource(source.url);
+      if (!result.ok) continue;
+      if (!source.allowEmpty && result.entries.length === 0) continue;
+      userEntries = result.entries;
+      renderCalendar();
+      updateCarousel();
+      return;
+    }
   }
+
+  void refreshEntries();
 });
 </script>
 
