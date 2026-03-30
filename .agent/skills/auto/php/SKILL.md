@@ -1,6 +1,6 @@
 ---
 name: php
-description: "Php for Fitpo50. 5 conventions, 6 fixes."
+description: "Php for Fitpo50. 35 conventions, 19 fixes, 3 error→fix pairs."
 domain: php
 triggers:
   - glob: "**/*.php"
@@ -10,9 +10,287 @@ enabled: true
 
 # Php
 
-Auto-compiled from **40 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on php files.
+Auto-compiled from **150 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on php files.
 
 ## 🔧 Problem Playbooks
+
+### Known Error → Fix
+
+| Error Pattern | Fix | Seen |
+|-------|-----|------|
+| `$errors = [];` | problem-fix in sync-manual.php | 6x |
+| `$error = '';` | problem-fix in login.php | 6x |
+| `if (!empty($_SESSION['flash_error'])) { ?>` | problem-fix in flash.php | 5x |
+
+### problem-fix in login.php
+File updated (external): _site/admin/login.php
+
+Content summary (93 lines):
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';
+startSecureSession();
+
+$error = '';
+$timeout = isset($_GET['timeout']);
+$logoUrl = 'assets/logo.jpg?v=2';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    verifyCsrf();
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+
+    if (isRateLimited($ip
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in sync-manual.php
+File updated (external): _site/admin/sync-manual.php
+
+Content summary (120 lines):
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/helpers/calendar.php';
+
+// Wymagamy zalogowania, aby nie każdy mógł wywołać sync
+requireLogin();
+
+$db = getDb();
+$errors = [];
+$stats = [];
+$synced = false;
+$csrf = csrfToken();
+
+// 1. Podstawowe statystyki (zaws
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in flash.php
+File updated (external): _site/admin/partials/flash.php
+
+Content summary (12 lines):
+<?php
+// partials/flash.php — wyświetla flash messages z sesji
+// Dołącz przez: require __DIR__ . '/../partials/flash.php';
+if (!empty($_SESSION['flash_success'])) { ?>
+  <div class="alert alert--success"><?= htmlspecialchars($_SESSION['flash_success']) ?></div>
+  <?php unset($_SESSION['flash_success']);
+}
+if (!em
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in login.php
+File updated (external): admin/login.php
+
+Content summary (93 lines):
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';
+startSecureSession();
+
+$error = '';
+$timeout = isset($_GET['timeout']);
+$logoUrl = 'assets/logo.jpg?v=2';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    verifyCsrf();
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+
+    if (isRateLimited($ip)) {
+ 
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### Fixed null crash in January — prevents null/undefined runtime crashes
+- $dateFormatted = date('j F Y', strtotime($date ?? ''));
++ $months = [
+- $pageTitle = 'Wpisy z ' . $dateFormatted;
++   'January' => 'stycznia', 'February' => 'lutego', 'March' => 'marca', 
+- $pageDesc  = 'Wszystkie wpisy FitPo50 z dnia ' . $dateFormatted . '.';
++   'April' => 'kwietnia', 'May' => 'maja', 'June' => 'czerwca',
+- $pageUrl   = $siteUrl . 'sukcesy/' . ($date ?? '') . '.html';
++   'Jul
+
+**Actionable Steps:**
+1. Modified 1 files
+2. identifier: January
+3. identifier: February
+4. identifier: March
+5. identifier: April
+
+### problem-fix in sync-manual.php
+File updated (external): _site/admin/sync-manual.php
+
+Content summary (120 lines):
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/helpers/calendar.php';
+
+// Wymagamy zalogowania, aby nie każdy mógł wywołać sync
+requireLogin();
+
+$db = getDb();
+$errors = [];
+$stats = [];
+$synced = false;
+$csrf = csrfToken();
+
+// 1. Podstawowe statystyki (zaws
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in sync-manual.php
+File updated (external): admin/sync-manual.php
+
+Content summary (120 lines):
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/helpers/calendar.php';
+
+// Wymagamy zalogowania, aby nie każdy mógł wywołać sync
+requireLogin();
+
+$db = getDb();
+$errors = [];
+$stats = [];
+$synced = false;
+$csrf = csrfToken();
+
+// 1. Podstawowe statystyki (zawsze wid
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in login.php
+File updated (external): admin/login.php
+
+Content summary (93 lines):
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';
+startSecureSession();
+
+$error = '';
+$timeout = isset($_GET['timeout']);
+$logoUrl = 'assets/logo.jpg?v=2';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    verifyCsrf();
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+
+    if (isRateLimited($ip)) {
+ 
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in flash.php
+File updated (external): _site/admin/partials/flash.php
+
+Content summary (12 lines):
+<?php
+// partials/flash.php — wyświetla flash messages z sesji
+// Dołącz przez: require __DIR__ . '/../partials/flash.php';
+if (!empty($_SESSION['flash_success'])) { ?>
+  <div class="alert alert--success"><?= htmlspecialchars($_SESSION['flash_success']) ?></div>
+  <?php unset($_SESSION['flash_success']);
+}
+if (!em
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in flash.php
+File updated (external): _site/admin/partials/flash.php
+
+Content summary (12 lines):
+<?php
+// partials/flash.php — wyświetla flash messages z sesji
+// Dołącz przez: require __DIR__ . '/../partials/flash.php';
+if (!empty($_SESSION['flash_success'])) { ?>
+  <div class="alert alert--success"><?= htmlspecialchars($_SESSION['flash_success']) ?></div>
+  <?php unset($_SESSION['flash_success']);
+}
+if (!em
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in login.php
+File updated (external): admin/login.php
+
+Content summary (93 lines):
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';
+startSecureSession();
+
+$error = '';
+$timeout = isset($_GET['timeout']);
+$logoUrl = 'assets/logo.jpg?v=2';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    verifyCsrf();
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+
+    if (isRateLimited($ip)) {
+ 
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in login.php
+File updated (external): _site/admin/login.php
+
+Content summary (93 lines):
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';
+startSecureSession();
+
+$error = '';
+$timeout = isset($_GET['timeout']);
+$logoUrl = 'assets/logo.jpg?v=2';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    verifyCsrf();
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+
+    if (isRateLimited($ip
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in sync-manual.php
+File updated (external): admin/sync-manual.php
+
+Content summary (120 lines):
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/helpers/calendar.php';
+
+// Wymagamy zalogowania, aby nie każdy mógł wywołać sync
+requireLogin();
+
+$db = getDb();
+$errors = [];
+$stats = [];
+$synced = false;
+$csrf = csrfToken();
+
+// 1. Podstawowe statystyki (zawsze wid
+
+**Actionable Steps:**
+1. Modified 1 files
 
 ### Fixed null crash in Wpisy — prevents null/undefined runtime crashes
 - $dateFormatted = date('j F Y', strtotime($date ?? ''));
@@ -133,34 +411,39 @@ try {
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
-- 📐 **Fixed null crash in DOMDocument — prevents null/undefined runtime crashes — confirmed 3x** — -     $allowed = ['image/jpeg','image/png','image/webp','image/gif'];
-+     $allowed = ['image/jpeg'
-- 📐 **Added session cookies authentication — prevents null/undefined runtime crashes — confirmed 3x** — -         $synced = true;
-+         sitemapRebuild($db);
--         $stats[] = "<span class='success'
-- 📐 **Replaced auth Panel — prevents null/undefined runtime crashes — confirmed 3x** — - $logoUrl = 'assets/logo.jpg';
-+ $logoUrl = 'assets/logo.jpg?v=2';
--       <img src="<?= h($logoUrl
-- 📐 **Updated entries database schema — confirmed 4x** — - function syncDay(PDO $db, string $date): void {
-+ function syncDay(PDO $db, string $date): int {
--
-- 📐 **Strengthened types Nawigacja — prevents null/undefined runtime crashes** — - .article-hero { position: relative; width: 100%; max-width: 1000px; margin: 0 auto var(--space-16)
+- 📐 **Replaced auth Admin — uses a proper password hashing algorithm — confirmed 4x** — - define('DB_HOST', 'localhost');
++ // ============================================================
 
-## 🔵 Architecture
+- 📐 **what-changed in config.php — confirmed 4x** — File updated (external): admin/config.php
 
-### how-it-works in day-list.php
-- .article-header { text-align: center; margin-bottom: var(--space-6); padding: 0 var(--space-6); max-width: 980px; margin-inline: auto; }
-+ .article-header { text-align: center; margin-bottom: var(--
+Content summary (25 lines):
+<?php
+define('DB_HOST', 'loca
+- 📐 **convention in article.php** — File updated (external): _site/admin/templates/article.php
 
-### how-it-works in day-list.php
-- .article-header { text-align: center; margin-bottom: var(--space-8); padding: 0 var(--space-6); max-width: 980px; margin-inline: auto; }
-+ .article-header { text-align: center; margin-bottom: var(--
+Content summary (319 lines):
+<?php
+// ar
+- 📐 **what-changed in calendar.php — confirmed 3x** — File updated (external): _site/admin/helpers/calendar.php
 
-## 🤔 Decisions & Trade-offs
+Content summary (308 lines):
+<?php
+/**
+ *
+- 📐 **what-changed in calendar-entries.php — confirmed 3x** — File updated (external): _site/admin/api/calendar-entries.php
 
-- **trade-off in article.php** — - <script>
-+ <?php require ADMIN_ROOT . 'templates/carousel-script.php'; ?>
-- document.addEventListe
+Content summary (55 lines):
+<?php
+/**
+- 📐 **Updated entries database schema — hardens HTTP security headers — confirmed 3x** — -  * Aktualizuje strony dnia (wybrany dzień + sąsiedzi dla nawigacji) I kalendarz.
++  * Aktualizuje 
+- 📐 **Fixed null crash in Regeneruj — prevents XSS injection attacks — confirmed 3x** — -     // Regeneruj strony dni + kalendarz (jednorazowo dla wszystkich dat i ich sąsiadów)
++     // R
+- 📐 **what-changed in auth.php — confirmed 3x** — File updated (external): admin/auth.php
 
----
-*Auto-generated by BrainSync 🧠 | 40 patterns | 2026-03-29*
+Content summary (120 lines):
+<?php
+// =====================
+- 📐 **what-changed in init-hash.php — confirmed 3x** — File upda
+
+... [Truncated — see individual observations for full content]
