@@ -1,6 +1,6 @@
 ---
 name: html
-description: "Html for Fitpo50. 3 gotchas, 111 conventions, 7 fixes."
+description: "Html for Fitpo50. 3 gotchas, 76 conventions."
 domain: html
 triggers:
   - glob: "**/*.html"
@@ -10,7 +10,7 @@ enabled: true
 
 # Html
 
-Auto-compiled from **377 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on html files.
+Auto-compiled from **164 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on html files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -22,275 +22,9 @@ Auto-compiled from **377 real patterns** in **Fitpo50**. This skill is auto-rout
 | gotcha in siedzenie-po-50.html | -           <li>[1] <a href="https://doi.org/10.1038/s41569-021-00571-8" target="_blank" rel="noopen |
 | gotcha in siedzenie-po-50.html | -           <li>[1] Dunstan DW et al. (2021). Sit less and move more for cardiovascular health. Natu |
 
-## 🔧 Problem Playbooks
-
-### Fixed null crash in Stycze — prevents XSS injection attacks
--   const calendarDataUrl = './calendar-entries.json';
-+   const isLocalPreview = ['localhost', '127.0.0.1'].includes(window.location.hostname);
--   const localCalendarApiUrl = './admin/api/calendar-entries.php';
-+   const localPreviewDataUrl = './calendar-entries.local.json';
--   const calendarApiUrl = document.querySelector('meta[name="calendar-api-url"]')?.content || 'https://admin.fitpo50.pl/a
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: Stycze
-3. identifier: Luty
-4. identifier: Marzec
-5. identifier: Kwiecie
-
-### Fixed null crash in Stycze — prevents XSS injection attacks
--   const calendarApiUrl = document.querySelector('meta[name="calendar-api-url"]')?.content || 'https://admin.fitpo50.pl/api/calendar-entries.php';
-+   const localCalendarApiUrl = './admin/api/calendar-entries.php';
--   
-+   const calendarApiUrl = document.querySelector('meta[name="calendar-api-url"]')?.content || 'https://admin.fitpo50.pl/api/calendar-entries.php';
--   const track = document.getE
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: Stycze
-3. identifier: Luty
-4. identifier: Marzec
-5. identifier: Kwiecie
-
-### Fixed null crash in Stycze — prevents XSS injection attacks
--   const calendarApiUrl = document.querySelector('meta[name="calendar-api-url"]')?.content || 'https://admin.fitpo50.pl/api/calendar-entries.php';
-+   const calendarDataUrl = './calendar-entries.json';
--   
-+   const calendarApiUrl = document.querySelector('meta[name="calendar-api-url"]')?.content || 'https://admin.fitpo50.pl/api/calendar-entries.php';
--   const track = document.getElementById('c
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: Stycze
-3. identifier: Luty
-4. identifier: Marzec
-5. identifier: Kwiecie
-
-### Fixed null crash in Stycze — prevents XSS injection attacks
--   const calendarApiUrl = document.querySelector('meta[name="calendar-api-url"]')?.content || 'https://admin.fitpo50.pl/api/calendar-entries.php';
-+   const calendarDataUrl = './calendar-entries.json';
--   
-+   const calendarApiUrl = document.querySelector('meta[name="calendar-api-url"]')?.content || 'https://admin.fitpo50.pl/api/calendar-entries.php';
--   const track = document.getElementById('c
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: Stycze
-3. identifier: Luty
-4. identifier: Marzec
-5. identifier: Kwiecie
-
-### Fixed null crash in Date — prevents XSS injection attacks
--     return entries.filter((entry) => (
-+     return entries.flatMap((entry) => {
--       entry &&
-+       if (!entry || typeof entry.date !== "string" || typeof entry.url !== "string") {
--       typeof entry.date === "string" &&
-+         return [];
--       /^\d{4}-\d{2}-\d{2}$/.test(entry.date) &&
-+       }
--       typeof entry.url === "string" &&
-+       const normalizedDate = entry.date.slice
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: Date
-3. identifier: Map
-4. identifier: Pon
-5. identifier: Wto
-
-### Fixed null crash in AbortController — prevents XSS injection attacks
--   renderCalendar();
-+   userEntries = sanitizeEntries(userEntries);
--   
-+   renderCalendar();
--   prevBtn.addEventListener('click', () => {
-+   
--      if(currentMonthIndex > 0) {
-+   prevBtn.addEventListener('click', () => {
--         currentMonthIndex--;
-+      if(currentMonthIndex > 0) {
--         updateCarousel();
-+         currentMonthIndex--;
--      }
-+         updateCarousel();
--   });
-+
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: AbortController
-3. identifier: Calendar
-
-### Fixed null crash in DOMContentLoaded — adds runtime type validation before use
-- document.addEventListener("DOMContentLoaded", () => {
-+ document.addEventListener("DOMContentLoaded", async () => {
--   const userEntries = [];
-+   let userEntries = [];
--   const startDate = new Date(2025, 0, 1); // Generuj miesiące od Stycznia 2025
-+   // FALLBACK API (Self-Heal)
--   const endDate = new Date(2028, 11, 31); // Do Grudnia 2028
-+   if (userEntries.length === 0) {
--   
-+     try {
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: DOMContentLoaded
-3. identifier: FALLBACK
-4. identifier: API
-5. identifier: Self
-
 ## 📐 Conventions & Best Practices
 
 ### Project Conventions
-- 📐 **what-changed in 2026-03-30.html — confirmed 3x** — File updated (external): sukcesy/2026-03-30.html
-
-Content summary (243 lines):
-<!DOCTYPE html>
-<html
-- 📐 **what-changed in 2026-03-31.html — confirmed 3x** — File updated (external): sukcesy/2026-03-31.html
-
-Content summary (256 lines):
-<!DOCTYPE html>
-<html
-- 📐 **Optimized Musi — confirmed 18x** — - <!DOCTYPE html>
-+ style.css:1031:.section-header__label {
-- <html lang="pl">
-+ style.css:1714:.sec
-- 📐 **Optimized Musi** — - <!DOCTYPE html>
-+ style.css:1031:.section-header__label {
-- <html lang="pl">
-+ style.css:1714:.sec
-- 📐 **what-changed in bieganie-niszczy-kolana.html — confirmed 3x** — File updated (external): bieganie-niszczy-kolana.html
-
-Content summary (45 lines):
-style.css:1031:.s
-- 📐 **what-changed in bledy-50.html — confirmed 3x** — File updated (external): bledy-50.html
-
-Content summary (45 lines):
-style.css:1031:.section-header__
-- 📐 **what-changed in ciekawe.html — confirmed 3x** — File updated (external): ciekawe.html
-
-Content summary (45 lines):
-style.css:1031:.section-header__l
-- 📐 **what-changed in dieta-po-50.html — confirmed 4x** — File updated (external): dieta-po-50.html
-
-Content summary (45 lines):
-style.css:1031:.section-heade
-- 📐 **what-changed in trening-maszynowy-po-50.html — confirmed 3x** — File updated (external): _site/trening-maszynowy-po-50.html
-
-Content summary (895 lines):
-<!DOCTYPE 
-- 📐 **what-changed in zdrowie.html — confirmed 4x** — File updated (external): _site/zdrowie.html
-
-Content summary (329 lines):
-<!DOCTYPE html>
-<html lang
-- 📐 **what-changed in suplementacja-po-50.html — confirmed 4x** — File updated (external): _site/suplementacja-po-50.html
-
-Content summary (694 lines):
-<!DOCTYPE html
-- 📐 **what-changed in silownia-dla-ludzi.html — confirmed 3x** — File updated (external): _site/silownia-dla-ludzi.html
-
-Content summary (629 lines):
-<!DOCTYPE html>
-- 📐 **what-changed in sila-chwytu-po-50.html — confirmed 3x** — File updated (external): _site/sila-chwytu-po-50.html
-
-Content summary (765 lines):
-<!DOCTYPE html>
-
-- 📐 **what-changed in siedzenie-po-50.html — confirmed 3x** — File updated (external): _site/siedzenie-po-50.html
-
-Content summary (824 lines):
-<!DOCTYPE html>
-<h
-- 📐 **what-changed in sen-po-50.html — confirmed 4x** — File updated (external): _site/sen-po-50.html
-
-Content summary (702 lines):
-<!DOCTYPE html>
-<html la
-- 📐 **what-changed in porady.html — confirmed 4x** — File updated (external): _site/porady.html
-
-Content summary (1094 lines):
-<!DOCTYPE html>
-<html lang
-- 📐 **what-changed in motywacja-po-50.html — confirmed 3x** — File updated (external): _site/motywacja-po-50.html
-
-Content summary (767 lines):
-<!DOCTYPE html>
-<h
-- 📐 **what-changed in moje-sukcesy.html — confirmed 4x** — File updated (external): _site/moje-sukcesy.html
-
-Content summary (435 lines):
-<!DOCTYPE html>
-<html
-- 📐 **what-changed in jak-zaczac-na-silowni-po-50.html — confirmed 3x** — File updated (external): _site/jak-zaczac-na-silowni-po-50.html
-
-Content summary (571 lines):
-<!DOCT
-- 📐 **what-changed in jedzenie.html — confirmed 3x** — File updated (external): _site/jedzenie.html
-
-Content summary (306 lines):
-<!DOCTYPE html>
-<html lan
-- 📐 **what-changed in jedz-wiecej-po-50.html — confirmed 4x** — File updated (external): _site/jedz-wiecej-po-50.html
-
-Content summary (835 lines):
-<!DOCTYPE html>
-
-- 📐 **what-changed in index.html — confirmed 4x** — File updated (external): _site/index.html
-
-Content summary (1053 lines):
-<!DOCTYPE html>
-<html lang=
-- 📐 **what-changed in dyskopatia-po-50.html — confirmed 4x** — File updated (external): _site/dyskopatia-po-50.html
-
-Content summary (753 lines):
-<!DOCTYPE html>
-<
-- 📐 **what-changed in motywacja-zniknela-po-50.html — confirmed 3x** — File updated (external): motywacja-zniknela-po-50.html
-
-Content summary (724 lines):
-<!DOCTYPE html>
-- 📐 **what-changed in nawodnienie-na-treningu-po-50.html — confirmed 3x** — File updated (external): nawodnienie-na-treningu-po-50.html
-
-Content summary (683 lines):
-<!DOCTYPE 
-- 📐 **Fixed null crash in Stycze — prevents XSS injection attacks — confirmed 4x** — -   const calendarApiUrl = document.querySelector('meta[name="calendar-api-url"]')?.content || 'http
-- 📐 **Fixed null crash in Date — prevents XSS injection attacks — confirmed 3x** — -     return entries.filter((entry) => (
-+     return entries.flatMap((entry) => {
--       entry &&
-
-- 📐 **what-changed in porady.html — confirmed 3x** — File updated (external): _site/porady.html
-
-Content summary (1094 lines):
-<!DOCTYPE html>
-<html lang
-- 📐 **what-changed in index.html — confirmed 4x** — File updated (external): _site/index.html
-
-Content summary (1053 lines):
-<!DOCTYPE html>
-<html lang=
-- 📐 **what-changed in google4a31b58b207723ed.html — confirmed 3x** — File updated (external): _site/google4a31b58b207723ed.html
-
-Content summary (1 lines):
-google-site-v
-- 📐 **what-changed in rusz-sie.html — confirmed 4x** — File updated (external): _site/rusz-sie.html
-
-Content summary (306 lines):
-<!DOCTYPE html>
-<html lan
-- 📐 **what-changed in badania-po-50.html** — File updated (external): _site/badania-po-50.html
-
-Content summary (699 lines):
-<!DOCTYPE html>
-<htm
-- 📐 **what-changed in moje-sukcesy.html — confirmed 3x** — File updated (external): moje-sukcesy.html
-
-Content summary (414 lines):
-<!DOCTYPE html>
-<html lang=
 - 📐 **Strengthened types Moje** — -       <a href="https://www.instagram.com/fitpo50" class="nav__link" target="_blank" rel="noopener 
 - 📐 **what-changed in siedzenie-po-50.html — confirmed 3x** — File updated (external): siedzenie-po-50.html
 
@@ -310,11 +44,6 @@ Content summary (571 lines):
 Content summary (895 lines):
 <!DOCTYPE html>
 
-- 📐 **what-changed in bieganie-niszczy-kolana.html** — File updated (external): bieganie-niszczy-kolana.html
-
-Content summary (480 lines):
-<!DOCTYPE html>
-
 - 📐 **what-changed in sila-chwytu-po-50.html — confirmed 3x** — File updated (external): sila-chwytu-po-50.html
 
 Content summary (693 lines):
@@ -325,6 +54,160 @@ Content summary (693 lines):
 Content summary (699 lines):
 <!DOCTYPE html>
 <html lang
-- 📐 **what-changed in silownia-dla-ludzi.html — confirmed 3x** — File updated (external): silownia-dla-ludzi
+- 📐 **what-changed in silownia-dla-ludzi.html — confirmed 3x** — File updated (external): silownia-dla-ludzi.html
 
-... [Truncated — see individual observations for full content]
+Content summary (629 lines):
+<!DOCTYPE html>
+<html
+- 📐 **what-changed in jedzenie.html — confirmed 3x** — File updated (external): jedzenie.html
+
+Content summary (306 lines):
+<!DOCTYPE html>
+<html lang="pl"
+- 📐 **what-changed in motywacja-po-50.html — confirmed 3x** — File updated (external): motywacja-po-50.html
+
+Content summary (767 lines):
+<!DOCTYPE html>
+<html la
+- 📐 **what-changed in suplementacja-po-50.html — confirmed 3x** — -         Czyli tak, okno anaboliczne istnieje. Ale nie jest tak absurdalnie wąskie, jak przez lata 
+- 📐 **what-changed in dyskopatia-po-50.html — confirmed 3x** — -         Przez dekady obowiązywała jedna główna rekomendacja dla bólu kręgosłupa: odpoczynek i bezr
+- 📐 **what-changed in motywacja-zniknela-po-50.html — confirmed 3x** — File updated (external): motywacja-zniknela-po-50.html
+
+Content summary (722 lines):
+<!DOCTYPE html>
+- 📐 **what-changed in sen-po-50.html — confirmed 3x** — File updated (external): sen-po-50.html
+
+Content summary (700 lines):
+<!DOCTYPE html>
+<html lang="pl
+- 📐 **what-changed in dieta-po-50.html — confirmed 3x** — File updated (external): dieta-po-50.html
+
+Content summary (704 lines):
+<!DOCTYPE html>
+<html lang="
+- 📐 **what-changed in jedz-wiecej-po-50.html — confirmed 3x** — File updated (external): jedz-wiecej-po-50.html
+
+Content summary (761 lines):
+<!DOCTYPE html>
+<html 
+- 📐 **what-changed in bieganie-niszczy-kolana.html — confirmed 3x** — File updated (external): bieganie-niszczy-kolana.html
+
+Content summary (478 lines):
+<!DOCTYPE html>
+
+- 📐 **what-changed in bledy-50.html — confirmed 3x** — File updated (external): bledy-50.html
+
+Content summary (595 lines):
+<!DOCTYPE html>
+<html lang="pl"
+- 📐 **what-changed in zdrowie.html — confirmed 3x** — File updated (external): _site/zdrowie.html
+
+Content summary (327 lines):
+<!DOCTYPE html>
+<html lang
+- 📐 **what-changed in sila-chwytu-po-50.html — confirmed 3x** — File updated (external): _site/sila-chwytu-po-50.html
+
+Content summary (691 lines):
+<!DOCTYPE html>
+
+- 📐 **Replaced auth Google — introduces API versioning for backward compatibility — confirmed 10x** — - <title>Jedz więcej po 50-tce: dlaczego niedojadanie szkodzi | FitPo50</title>
++ <!-- Google tag (g
+- 📐 **what-changed in nawodnienie-na-treningu-po-50.html — confirmed 3x** — - <meta property="og:title" content="Woda na siłowni po 50-tce — nawodnienie, które zmienia trening"
+- 📐 **convention in jak-zaczac-na-silowni-po-50.html** — File updated (external): jak-zaczac-na-silowni-po-50.html
+
+Content summary (560 lines):
+<!DOCTYPE ht
+- 📐 **convention in badania-po-50.html** — File updated (external): badania-po-50.html
+
+Content summary (688 lines):
+<!DOCTYPE html>
+<html lang
+- 📐 **convention in bieganie-niszczy-kolana.html** — File updated (external): bieganie-niszczy-kolana.html
+
+Content summary (469 lines):
+<!DOCTYPE html>
+
+- 📐 **what-changed in siedzenie-po-50.html — confirmed 3x** — - <title>Pół godziny mniej siedzenia dziennie: co się zmienia w rok? Badania po 50-tce | FitPo50</ti
+- 📐 **convention in dieta-po-50.html** — File updated (external): dieta-po-50.html
+
+Content summary (695 lines):
+<!DOCTYPE html>
+<html lang="
+- 📐 **convention in sen-po-50.html** — File updated (external): sen-po-50.html
+
+Content summary (691 lines):
+<!DOCTYPE html>
+<html lang="pl
+- 📐 **convention in motywacja-po-50.html** — File updated (external): motywacja-po-50.html
+
+Content summary (756 lines):
+<!DOCTYPE html>
+<html la
+- 📐 **convention in rusz-sie.html** — File updated (external): rusz-sie.html
+
+Content summary (306 lines):
+<!DOCTYPE html>
+<html lang="pl"
+- 📐 **what-changed in motywacja-zniknela-po-50.html — confirmed 3x** — -         <small>Źródło: André N. et al. (2024). A Behavioral Perspective for Improving Exercise Adh
+- 📐 **what-changed in nawodnienie-na-treningu-po-50.html — confirmed 3x** — -       <h2>Źródła</h2>
++       <h2 id="zrodla">Źródła</h2>
+
+📌 IDE AST Context: Modified symbols li
+- 📐 **convention in sila-chwytu-po-50.html** — File updated (external): sila-chwytu-po-50.html
+
+Content summary (682 lines):
+<!DOCTYPE html>
+<html 
+- 📐 **convention in trening-maszynowy-po-50.html** — File updated (external): trening-maszynowy-po-50.html
+
+Content summary (884 lines):
+<!DOCTYPE html>
+
+- 📐 **convention in jedz-wiecej-po-50.html** — File updated (external): jedz-wiecej-po-50.html
+
+Content summary (752 lines):
+<!DOCTYPE html>
+<html 
+- 📐 **convention in motywacja-zniknela-po-50.html** — File updated (external): motywacja-zniknela-po-50.html
+
+Content summary (713 lines):
+<!DOCTYPE html>
+- 📐 **convention in suplementacja-po-50.html** — File updated (external): suplementacja-po-50.html
+
+Content summary (683 lines):
+<!DOCTYPE html>
+<htm
+- 📐 **Strengthened types ACSM** — -             <p class="source">Źródła: ACSM Top Trends, NASM Trends, Gold's Gym Trends, Les Mills</
+- 📐 **Strengthened types Efekty** — -             <p>Każdy trening siłowy to kontrolowane uszkodzenie włókien mięśniowych. Prawdziwy wzr
+- 📐 **Strengthened types About** — -             <p class="source">Źródła: UC Berkeley / Cell (2025), BMC Geriatrics (2025), Frontiers 
+- 📐 **Strengthened types Facts** — -             <p class="source">Źródła: CDC, Life — systematic review (2025), PeerJ (2025), Journal 
+- 📐 **Strengthened types Dlaczego** — -             <h4>Upadki to nie „chłopskie sprawy” — to problem #1 po 60-tce</h4>
++             <h4>
+- 📐 **Strengthened types Cleveland** — -             <p class="source">Źródła: Business Insider / Dr Eric Verdin (2025), NYT (2025), Clevel
+- 📐 **Strengthened types Suplementy** — -             <p>Suplementy NIE zastąpią zdrowego jedzenia — ale po 50-tce niektóre składniki trudni
+- 📐 **Strengthened types Physical** — -             <p class="source">Źródła: CDC, ACSM, Gold's Gym Trends</p>
++             <div style="m
+- 📐 **Strengthened types UCLA** — -             <p class="source">Źródła: UCLA Health, Harvard Health, Nature Medicine 2025, NCOA, NIA
+- 📐 **Strengthened types Osoba** — -         <source srcset="./assets/siedzenie_hero_v2.webp" type="image/webp">
++         <img src="./
+- 📐 **Strengthened types Twojego** — -           <h2 class="featured-article__title">Woda na siłowni po 50-tce — nawodnienie, które zmien
+- 📐 **convention in motywacja-zniknela-po-50.html** — File updated (external): motywacja-zniknela-po-50.html
+
+Content summary (724 lines):
+<!DOCTYPE html>
+- 📐 **what-changed in nawodnienie-na-treningu-po-50.html** — -       <div class="articles-grid-preview" style="display: grid; grid-template-columns: repeat(auto-
+
+## 🔵 Architecture
+
+### how-it-works in index.html
+-         <div class="featured-article__image-wrap" style="background: linear-gradient(135deg, #0E8FAA 0%, #E07A1F 100%); display: flex; align-items: center; justify-content: center;">
++         <div 
+
+## 🤔 Decisions & Trade-offs
+
+- **trade-off in trening-maszynowy-po-50.html** — -       <p>Ten plan nie powstał z powietrza. Oparty jest na najnowszych wytycznych Amerykańskiego Ko
+- **decision in jedz-wiecej-po-50.html** — -         <cite>Źródło: Hall KD. (2013). Diet versus Exercise in the Biggest Loser Weight Loss Compe
+- **Optimized Madura** — -           <tr><td>[1]</td><td>Madura P. et al. (2023). Hydration Status in Older Adults. Nutrients
+
+---
+*Auto-generated by BrainSync 🧠 | 164 patterns | 2026-03-29*

@@ -27,8 +27,7 @@ Ten plik dotyczy tylko modulu "Moje Sukcesy" (kalendarz + strony dnia).
   - strone dnia,
   - kalendarz.
 - Gdy fistaszki znikaja mimo wpisow `published`, najpierw sprawdzamy:
-  - czy `let userEntries` nie jest puste w `moje-sukcesy.html`,
-  - czy `calendar-entries.json` zawiera aktualne dni,
+  - czy `const userEntries` nie jest puste w `moje-sukcesy.html`,
   - czy sync zapisuje do wlasciwego `SITE_ROOT`.
 - Utrzymujemy narzedzie diagnostyczne `admin/sync-manual.php` do recznego wymuszenia synchronizacji i podgladu liczby dni.
 - `sync-manual.php` wykonuje synchronizacje tylko przez `POST + CSRF`.
@@ -41,8 +40,7 @@ Ten plik dotyczy tylko modulu "Moje Sukcesy" (kalendarz + strony dnia).
   - walidacja pliku po zapisie,
   - twardy blad przy probie zapisu pustego kalendarza, gdy sa wpisy `published`.
 - Fallback self-heal:
-  - glownym zrodlem dni jest `calendar-entries.json` (same-origin, bez CORS),
-  - gdy JSON jest pusty/niedostepny, `moje-sukcesy.html` pobiera dane z `admin/api/calendar-entries.php`,
+  - gdy `userEntries` jest puste, `moje-sukcesy.html` pobiera dane z `admin/api/calendar-entries.php`,
   - API zwraca tylko dane read-only (`date`, `url`) dla opublikowanych dni.
 
 ## Strony dnia (`sukcesy/`)

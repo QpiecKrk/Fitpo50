@@ -1,7 +1,7 @@
 
 
 # Project Memory — Fitpo50
-> 1408 notes | Score threshold: >40
+> 464 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -18,37 +18,37 @@
 
 **Stack:** TypeScript
 
-## 📝 NOTE: 1 uncommitted file(s) in working tree.\n\n## Project Standards
+## 📝 NOTE: 1 uncommitted file(s) in working tree.\n\n## Important Warnings
 
-- what-changed in img_69c950be419127.16387010.avif — confirmed 3x
-- what-changed in img_69c950bc885014.16296533.avif — confirmed 3x
-- what-changed in img_69c94f1b0281b1.68960703.avif — confirmed 3x
-- what-changed in img_69c94995be17b3.80838490.avif — confirmed 3x
-- what-changed in img_69c94996748582.14685994.avif — confirmed 3x
-- what-changed in img_69c9499379b856.95244065.avif — confirmed 3x
-- what-changed in img_69c938d06b83f2.21745720.avif — confirmed 3x
-- what-changed in img_69c94994441361.71354714.avif — confirmed 3x
+- **gotcha in siedzenie-po-50.html** — -           <span class="article-quote__source">Źródło: Dunstan DW et 
+- **gotcha in siedzenie-po-50.html** — -           <li>[1] <a href="https://doi.org/10.1038/s41569-021-00571-
+- **gotcha in siedzenie-po-50.html** — -           <li>[1] Dunstan DW et al. (2021). Sit less and move more f
 
-## Known Fixes
+## Active: `admin/api`
 
-- ❌ $errors = []; → ✅ problem-fix in sync-manual.php
-- ❌ $error = ''; → ✅ problem-fix in login.php
-- ❌ if (!empty($_SESSION['flash_error'])) { ?> → ✅ problem-fix in flash.php
-- ❌ - } catch (Exception $e) { → ✅ Fixed null crash in Regeneruj — prevents XSS injection attacks
-- ❌ set -euo pipefail → ✅ problem-fix in export_site.sh
+- **Fixed null crash in Exception**
+
+## Project Standards
+
+- Fixed null crash in DOMDocument — prevents null/undefined runtime crashes — confirmed 3x
+- Added session cookies authentication — prevents null/undefined runtime crashes — confirmed 3x
+- Replaced auth Panel — prevents null/undefined runtime crashes — confirmed 3x
+- Updated entries database schema — confirmed 4x
+- Strengthened types Nawigacja — prevents null/undefined runtime crashes
+- what-changed in style.css — confirmed 3x
+- what-changed in task.md — confirmed 3x
+- Patched security issue Plan — confirmed 7x
 
 ## Recent Decisions
 
-- decision in .htaccess
-- decision in .htaccess
-- Optimized Aktualizacja — hardens HTTP security headers
-- Optimized Plan — hardens HTTP security headers
+- decision in tsconfig.json
+- decision in jedz-wiecej-po-50.html
 
 ## Learned Patterns
 
 - Always: convention in motywacja-zniknela-po-50.html (seen 2x)
+- Always: what-changed in sila-chwytu-po-50.html — confirmed 3x (seen 2x)
 - Always: convention in badania-po-50.html (seen 2x)
-- Always: convention in motywacja-po-50.html (seen 2x)
 - Agent generates new migration for every change (squash related changes)
 - Agent installs packages without checking if already installed
 

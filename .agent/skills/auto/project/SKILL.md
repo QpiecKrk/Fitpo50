@@ -1,6 +1,6 @@
 ---
 name: project
-description: "Project for Fitpo50. 26 gotchas, 197 conventions, 21 fixes."
+description: "Project for Fitpo50. 26 gotchas, 53 conventions, 16 fixes."
 domain: project
 triggers:
   - glob: "**/*"
@@ -10,7 +10,7 @@ enabled: true
 
 # Project
 
-Auto-compiled from **819 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
+Auto-compiled from **242 real patterns** in **Fitpo50**. This skill is auto-routed to agents when working on project files.
 
 ## ⚠️ Anti-Patterns & Gotchas
 
@@ -46,87 +46,6 @@ Auto-compiled from **819 real patterns** in **Fitpo50**. This skill is auto-rout
 | gotcha in scratchpad_o1gsw9jp.md | - - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't seem to trigger menu in screenshot) |
 
 ## 🔧 Problem Playbooks
-
-### Patched security issue Utrzymujemy — hardens HTTP security headers
--   - czy `const userEntries` nie jest puste w `moje-sukcesy.html`,
-+   - czy `let userEntries` nie jest puste w `moje-sukcesy.html`,
--   - czy sync zapisuje do wlasciwego `SITE_ROOT`.
-+   - czy `calendar-entries.json` zawiera aktualne dni,
-- - Utrzymujemy narzedzie diagnostyczne `admin/sync-manual.php` do recznego wymuszenia synchronizacji i podgladu liczby dni.
-+   - czy sync zapisuje do wlasciw
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: Utrzymujemy
-3. identifier: POST
-4. identifier: CSRF
-5. identifier: Fallback
-
-### Patched security issue Utrzymujemy — hardens HTTP security headers
--   - czy `let userEntries` nie jest puste w `moje-sukcesy.html`,
-+   - czy `const userEntries` nie jest puste w `moje-sukcesy.html`,
--   - czy `calendar-entries.json` zawiera aktualne dni,
-+   - czy sync zapisuje do wlasciwego `SITE_ROOT`.
--   - czy sync zapisuje do wlasciwego `SITE_ROOT`.
-+ - Utrzymujemy narzedzie diagnostyczne `admin/sync-manual.php` do recznego wymuszenia synchronizacji i podg
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: Utrzymujemy
-3. identifier: POST
-4. identifier: CSRF
-5. identifier: Fallback
-
-### Patched security issue Utrzymujemy — hardens HTTP security headers
--   - czy `const userEntries` nie jest puste w `moje-sukcesy.html`,
-+   - czy `let userEntries` nie jest puste w `moje-sukcesy.html`,
--   - czy sync zapisuje do wlasciwego `SITE_ROOT`.
-+   - czy `calendar-entries.json` zawiera aktualne dni,
-- - Utrzymujemy narzedzie diagnostyczne `admin/sync-manual.php` do recznego wymuszenia synchronizacji i podgladu liczby dni.
-+   - czy sync zapisuje do wlasciw
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: Utrzymujemy
-3. identifier: POST
-4. identifier: CSRF
-5. identifier: Fallback
-
-### Patched security issue Plan — prevents XSS injection attacks
-- # Plan wdrożenia 4. filaru: „Ciekawe”
-+ # Plan naprawy kalendarza „Moje Sukcesy”
-- Pełne wdrożenie kategorii „Ciekawe” jako równorzędnego elementu obok Ruchu, Jedzenia i Zdrowia.
-+ Naprawa błędów w inicjalizacji kalendarza oraz wzmocnienie odporności na różne formaty danych z API/bazy.
-- ## User Review Required
-+ ## Proponowane zmiany
-- > [!IMPORTANT]
-+ ### [moje-sukcesy.html](file:///Users/grze
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: Plan
-3. identifier: Moje
-4. identifier: Sukcesy
-5. identifier: Naprawa
-
-### Patched security issue POST — hardens HTTP security headers
-- 
-+ - `sync-manual.php` wykonuje synchronizacje tylko przez `POST + CSRF`.
-- ## Strony dnia (`sukcesy/`)
-+ - `sync-manual.php` ma raportowac osobno:
-- 
-+   - liczbe dni w kalendarzu,
-- - Assety musza uzywac sciezek, ktore dzialaja z podkatalogu `sukcesy/`:
-+   - liczbe wpisow `/sukcesy/` w `sitemap.xml`,
--   - preferuj URL oparte o `SITE_URL` zamiast relatywnych `./...`.
-+   - i alarmowac niespoj
-
-**Actionable Steps:**
-1. Modified 1 files
-2. identifier: POST
-3. identifier: CSRF
-4. identifier: Fallback
-5. identifier: API
 
 ### Patched security issue Plan
 - # Plan poprawy spójności i funkcjonalności panelu
@@ -258,6 +177,74 @@ Auto-compiled from **819 real patterns** in **Fitpo50**. This skill is auto-rout
 
 ### problem-fix in scratchpad_uve2mjzw.md
 - - [ ] Open index.html and set viewport to 375x667
-+ - [x] Open index.html and set viewport to 375x667 (Current
++ - [x] Open index.html and set viewport to 375x667 (Currently 500x580 in browser, trying to work with it)
+- - [ ] Open the mobile menu
++ - [/] Open the mobile menu (Failed to trigger via pixel click (924,55))
+- - 
++ - Viewport is 500x580 instead of requested 375x667.
+- 
++ - Pixel click at (924, 55) did not open the menu. Button label remains "Ot
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in walkthrough.md.resolved
+- ![Fix: Menu mobilne z widocznymi linkami](file:///Users/grzegorzkupiec/.gemini/antigravity/brain/94f11028-6387-4cc3-ba4e-59bbbf0aae76/mobile_menu_open_check_v3_1774358351434.png)
++ ![Fix: Menu mobilne z widocznymi linkami](/Users/grzegorzkupiec/.gemini/antigravity/brain/94f11028-6387-4cc3-ba4e-59bbbf0aae76/mobile_menu_open_check_v3_1774358351434.png)
+- 
++ ---
+- Aby strona prezentowała się maksym
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in walkthrough.md
+- ![Fix: Menu mobilne z widocznymi linkami](file:///Users/grzegorzkupiec/.gemini/antigravity/brain/94f11028-6387-4cc3-ba4e-59bbbf0aae76/mobile_menu_open_check_v3_1774358351434.png)
++ ![Fix: Menu mobilne z widocznymi linkami](/Users/grzegorzkupiec/.gemini/antigravity/brain/94f11028-6387-4cc3-ba4e-59bbbf0aae76/mobile_menu_open_check_v3_1774358351434.png)
+- 
++ ---
+- Aby strona prezentowała się maksym
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in walkthrough.md.resolved
+- # Walkthrough - Wzmocnienie Wiarygodności Źródeł ([index.html](file:///Users/grzegorzkupiec/Library/Mobile%20Documents/com~apple~CloudDocs/%21%21%21%20ROBOCZA%20%21%21%21%21%21%20/Robocza/FitPo50/index.html))
++ # Walkthrough - Naprawa Menu Mobilnego
+- Aby strona prezentowała się maksymalnie profesjonalnie i budowała ekspercki autorytet, ogólnikowe źródła tekstowe (typu "CDC, BMJ") w sekcjach tek
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in scratchpad_o1gsw9jp.md
+- - [ ] Open the mobile menu (Issue: Click on nav-toggle hits button, app.js is loaded, but menu doesn't open in DOM)
++ - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't open menu; Tabbing scrolls page, suggesting it misses the button or it's not in order)
+
+📌 IDE AST Context: Modified symbols likely include [# Task: Verify Mobile Menu Fix]
+
+**Actionable Steps:**
+1. Modified 1 files
+
+### problem-fix in scratchpad_o1gsw9jp.md
+- - [ ] Open `index.html`
++ - [x] Open `index.html`
+- - [ ] Resize window to 375x667
++ - [x] Resize window to 375x667
+- - [ ] Open the mobile menu
++ - [ ] Open the mobile menu (Issue: Click on nav-toggle doesn't seem to trigger menu in screenshot)
+
+📌 IDE AST Context: Modified symbols likely include [# Task: Verify Mobile Menu Fix]
+
+**Actionable Steps:**
+1. Modified 1 files
+
+## 📐 Conventions & Best Practices
+
+### Project Conventions
+- 📐 **what-changed in task.md — confirmed 3x** — - # Zadania: Spójność i Funkcjonalność
++ # Zadania: Refaktoryzacja i Clean Code
+- - [ ] Aktualizacja
+- 📐 **Patched security issue Plan — confirmed 7x** — - # Plan poprawy spójności i funkcjonalności panelu
++ # Plan refaktoryzacji i poprawy bezpiecze
 
 ... [Truncated — see individual observations for full content]
