@@ -1,6 +1,84 @@
-# FitPo50 Project Memory
+# Project Memory
 
-Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach.
+## Project goal
+- FitPo50 to serwis z praktyczna wiedza dla osob 50+ o ruchu, jedzeniu, zdrowiu i wybranych tematach lifestyle / ciekawostkach.
+- Celem projektu jest latwa, wiarygodna i spojna publikacja tresci.
+- Jednym z kluczowych elementow projektu jest stabilny i przewidywalny modul "Moje Sukcesy".
+
+## Architecture rules
+- 4 filary tresci: `rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`.
+- Strona zbiorcza artykulow to `porady.html`.
+- Logika "Moje Sukcesy" jest oddzielona od logiki "Porady".
+- Deploy publicznej strony idzie z katalogu `_site`.
+
+## Non-negotiables
+- Nie cofamy ustalen SEO/architektury bez wyraznej decyzji.
+- Nie mieszamy logiki modulow `Porady` i `Moje Sukcesy`.
+- Przy publikacji, wycofaniu lub usunieciu wpisu w "Moje Sukcesy" zawsze trzeba wykonac pelna synchronizacje powiazanych danych (np. JSON, sitemap, kalendarz, fallback danych).
+- Do commita nie trafiaja pliki narzedziowe (`.agent`, `.brainsync`, `.cursor`, itp.).
+
+## Coding rules
+- Najpierw czytamy aktualny stan plikow, potem edytujemy.
+- Zmiany robimy minimalne i bezpieczne, bez zbednych refaktorow.
+- Po zmianach frontowych uwzgledniamy cache i aktualnosc assetow.
+- Export/deploy: `./scripts/export_site.sh` (awaryjnie `SKIP_TS_BUILD=1 ./scripts/export_site.sh`).
+
+## How to work on this repo
+- Najpierw przeczytaj ten plik w calosci.
+- Przed edycja sprawdz aktualny stan powiazanych plikow.
+- Przy zmianach w "Moje Sukcesy" sprawdz takze synchronizacje, sitemape i fallback danych.
+- Przy zmianach frontowych uwzglednij cache, wersjonowanie assetow i stan w `_site`.
+- Zmiany maja byc lokalne, minimalne i zgodne z istniejaca architektura.
+- Jesli zadanie koliduje z tym dokumentem, najpierw wskaz konflikt, a nie wprowadzaj zmian w ciemno.
+- Standard językowy: nagłówki techniczne są po angielsku, treść dokumentacji po polsku, a taski, review i rozmowy z agentami prowadzimy po polsku. Nazwy plików, ścieżek, komend, kluczy konfiguracyjnych i elementów technicznych zostają w oryginalnym brzmieniu.
+
+## Critical files / areas
+- `_site/` - publiczny output do deployu
+- `porady.html` - zbiorcza strona artykulow
+- `rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html` - 4 filary tresci
+- modul "Moje Sukcesy" - logika oddzielona od "Porady"
+- `scripts/export_site.sh` - podstawowy export/deploy workflow
+
+## Scope boundaries
+- Domyslnie nie ruszamy: `admin/config.php`, `admin/uploads/`, danych produkcyjnych.
+- Nie zmieniamy publicznych URL-i bez potrzeby migracyjnej.
+- Nie przebudowujemy design systemu przy zadaniach lokalnych.
+
+## Known risks
+- Rozjazd miedzy source a `_site` powoduje regresje na produkcji.
+- CORS/cache potrafia ukryc realny stan kalendarza.
+- Brak synchronizacji po zmianie statusu wpisu powoduje znikanie "fistaszkow".
+- Manualne `git add .` moze przypadkiem commitowac pliki narzedziowe.
+
+## Current priorities
+- Stabilnosc modulu "Moje Sukcesy" (kalendarz, sync, sitemap, fallback danych).
+- Utrzymanie spojnosci kategorii i filtrowania w `porady.html`.
+- Bezpieczny, powtarzalny deploy z `_site`.
+
+## Open questions
+- Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?
+- Czy rozszerzamy automatyczne testy synchronizacji (rollback + spojnosc JSON/sitemap)?
+
+## Definition of done
+Zmiana jest gotowa dopiero, gdy:
+- jest zgodna z architektura i zasadami z tego pliku,
+- nie miesza logiki `Porady` i `Moje Sukcesy`,
+- zostala sprawdzona pod katem synchronizacji, jesli dotyczy statusu wpisow,
+- output publiczny w `_site` jest aktualny,
+- nie dodano do commita plikow narzedziowych,
+- ryzyka cache/CORS zostaly uwzglednione, jesli zmiana dotyczy frontu lub API.
+
+## Review checklist
+Przy review sprawdzaj w pierwszej kolejnosci:
+- zgodnosc z architektura projektu,
+- czy nie mieszamy logiki `Porady` i `Moje Sukcesy`,
+- czy synchronizacja po zmianach statusu wpisu nadal dziala,
+- czy deploy/public output w `_site` jest spojny,
+- czy zmiana nie psuje SEO, sitemapy lub publicznych URL-i,
+- czy nie dodano do commita plikow narzedziowych,
+- czy zmiana nie jest wieksza niz wymaga task.
+
+## Detailed reference
 
 ## Podzial pamieci modulowej
 
