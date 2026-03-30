@@ -21,6 +21,9 @@ Ten plik zbiera stale ustalenia projektowe do stosowania przy kolejnych zmianach
 - Po zmianach frontowych (CSS/JS/template) pamietamy o cache:
   - podbijamy wersje assetow (`?v=`), jesli to potrzebne,
   - przy diagnozie "nie dziala" najpierw sprawdzamy wersje bez cache.
+- Deploy statyczny robimy przez `./scripts/export_site.sh` (automatyzuje build TS i eksport do `_site/`).
+- Awaryjnie, gdy lokalnie brak toolchainu TS, mozna uzyc `SKIP_TS_BUILD=1 ./scripts/export_site.sh`.
+- Na serwer wysylamy zawartosc `_site/`, nie katalog glowny repo.
 
 ## Architektura serwisu
 
