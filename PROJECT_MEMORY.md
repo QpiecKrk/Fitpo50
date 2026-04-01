@@ -187,7 +187,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 - Dla stron zbiorczych utrzymujemy `CollectionPage`.
 - `porady.html` powinno uzywac `CollectionPage` z `mainEntity` typu `ItemList`.
 - Dane w schema musza zgadzac sie z realna zawartoscia strony:
-  - Liczba artykułów: 15 (uklad: Ruch, Jedzenie, Zdrowie, Ciekawe)
+  - Liczba artykułów: 17 (uklad: Ruch, Jedzenie, Zdrowie, Ciekawe)
   - lista artykulow
   - kolejnosc
 
@@ -312,7 +312,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 
 ## Porady.html (Karuzela i Paginacja)
 
-- `porady.html` to czytelnia i glowny katalog wszystkich artykulow (obecnie równo 14 artykulow). Zlote zasady:
+- `porady.html` to czytelnia i glowny katalog wszystkich artykulow (obecnie równo 17 artykulow). Zlote zasady:
   1. **Zgodność liczników i warstwy SEO**: Licznik w HTML (np. `data-article-count`), rzeczywista liczba kafli na stronie oraz deklaracja wpisów w sekcji `<script type="application/ld+json">` (elementy `"numberOfItems"` oraz ich `"position"`) MUSZĄ się zawsze zgadzać co do sztuki. Jeśli oddajesz nowy artykuł, dopisz go na pozycję nr 1 w schemacie JSON-LD i wymuś przesunięcie pozostałych układów.
   2. **Struktura kart HTML**: Używamy pełnej zwięzłej struktury dla kafelków (`.article-index-card`): pomarańczowa odznaka `.article-index-card__label`, czysty tekst czasu `.article-index-card__meta` (bez ikon SVG), a CTA dolne to tekst "Otwórz ->". 
   3. **Wymogi ułożenia CSS Grid**: Karty KATEGORYCZNIE układają się w sztywnym podziale. Żeby pojedyncze artykuły na końcu karuzeli się nie rozciągały, definiujemy twardą siatkę: `grid-template-columns: repeat(4, 1fr)` (desktop), `repeat(2, 1fr)` (tablet), oraz `1fr` dla mobile. **Zakaz korzystania z `auto-fit`** w klasie `.carousel-page`.

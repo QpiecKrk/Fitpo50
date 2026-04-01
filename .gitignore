@@ -2,6 +2,7 @@
 AGENT.md
 CLAUDE.md
 .agent-mem/
+.DS_Store
 
 # Auto-generated agent rules (personalized per developer)
 .brainsync/agent-rules.md
@@ -64,3 +65,10 @@ testtest.txt
 _site/2026-03-30-mdlsdmslds.html
 _site/2026-03-31-dupa.html
 _site/testtest.txt
+
+# export artifacts that should never be tracked
+_site/MEMORY_MOJE_SUKCESY.md
+_site/MEMORY_PORADY.md
+_site/check.js
+_site/clean.js
+_site/copy_pngs.sh

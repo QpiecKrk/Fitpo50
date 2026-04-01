@@ -54,10 +54,15 @@ rsync -a \
   --exclude="CLAUDE.md" \
   --exclude="DEPLOY.md" \
   --exclude="PROJECT_MEMORY.md" \
+  --exclude="MEMORY_PORADY.md" \
+  --exclude="MEMORY_MOJE_SUKCESY.md" \
   --exclude="package.json" \
   --exclude="tsconfig.json" \
   --exclude="src/" \
   --exclude="scripts/" \
+  --exclude="check.js" \
+  --exclude="clean.js" \
+  --exclude="copy_pngs.sh" \
   --exclude="_site/" \
   "$ROOT_DIR/" "$OUTPUT_DIR/"
 
