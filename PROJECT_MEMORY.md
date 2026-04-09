@@ -276,6 +276,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 - Na stronie glownej uzywamy pelnych kart promocyjnych.
 - Na stronach kategorii uzywamy kompaktowych kafelkow bez zdjec.
 - Kafelki na jednej stronie kategorii musza byc graficznie spojne.
+- Strony kategorii (`rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`) maja uzywac tego samego wzorca kart i tej samej logiki karuzeli/paginacji co `porady.html` (ten sam layout kart, meta czasu, CTA, grupowanie po 8, `WRÓĆ/DALEJ`, bez `scrollIntoView()` pod nawigacja karuzeli).
 - Kolory etykiet kategorii musza byc stale i spójne na wszystkich stronach:
   - `Ruch` -> niebieski (`var(--color-primary)`),
   - `Jedzenie` -> pomaranczowy (`var(--color-accent)`),

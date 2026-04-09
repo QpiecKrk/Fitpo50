@@ -416,6 +416,72 @@
   }
 
   // ----------------------------------------------------------
+  // SIMPLE CATEGORY CAROUSEL (category subpages)
+  // ----------------------------------------------------------
+  const simpleCarousels = Array.from(document.querySelectorAll<HTMLElement>('[data-simple-carousel]'));
+  const simplePageSize = 8;
+
+  simpleCarousels.forEach(carousel => {
+    const carouselId = carousel.dataset.simpleCarousel;
+    if (!carouselId) return;
+
+    const track = carousel.querySelector<HTMLElement>('.carousel-track');
+    const nav = document.querySelector<HTMLElement>(`[data-carousel-nav="${carouselId}"]`);
+    if (!track || !nav) return;
+
+    const prevButton = nav.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+    const nextButton = nav.querySelector<HTMLButtonElement>('[data-carousel-next]');
+    const indicator = nav.querySelector<HTMLElement>('[data-carousel-indicator]');
+    if (!prevButton || !nextButton || !indicator) return;
+
+    const items = Array.from(track.querySelectorAll<HTMLElement>('.article-index-card'));
+    if (items.length === 0) return;
+
+    track.innerHTML = '';
+
+    const totalPages = Math.ceil(items.length / simplePageSize) || 1;
+    const pages: HTMLElement[] = [];
+
+    for (let i = 0; i < totalPages; i++) {
+      const page = document.createElement('div');
+      page.className = 'carousel-page';
+      const pageItems = items.slice(i * simplePageSize, (i + 1) * simplePageSize);
+      pageItems.forEach(item => page.appendChild(item));
+      track.appendChild(page);
+      pages.push(page);
+    }
+
+    let currentPageIndex = 0;
+
+    const updatePosition = () => {
+      const offset = currentPageIndex * 100;
+      track.style.transform = `translateX(-${offset}%)`;
+
+      const activePage = pages[currentPageIndex];
+      activePage?.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+
+      indicator.textContent = `Strona ${currentPageIndex + 1} z ${totalPages}`;
+      prevButton.disabled = currentPageIndex === 0;
+      nextButton.disabled = currentPageIndex === totalPages - 1;
+    };
+
+    prevButton.addEventListener('click', () => {
+      if (currentPageIndex === 0) return;
+      currentPageIndex -= 1;
+      updatePosition();
+    });
+
+    nextButton.addEventListener('click', () => {
+      if (currentPageIndex >= totalPages - 1) return;
+      currentPageIndex += 1;
+      updatePosition();
+    });
+
+    nav.hidden = totalPages <= 1;
+    updatePosition();
+  });
+
+  // ----------------------------------------------------------
   // SCROLL REVEAL (IntersectionObserver)
   // ----------------------------------------------------------
   const observer = new IntersectionObserver((entries) => {
