@@ -18,11 +18,34 @@ $entry_date = trim($_POST['entry_date'] ?? '');
 $status     = in_array($_POST['status'] ?? '', ['draft','published','hidden'])
               ? $_POST['status'] : 'draft';
 if ($action === 'draft') $status = 'draft';
+$videoSource = in_array($_POST['video_source'] ?? '', ['none', 'youtube', 'upload'], true)
+    ? $_POST['video_source']
+    : 'none';
+$youtubeUrl = trim($_POST['youtube_url'] ?? '');
+$youtubeOrientation = normalizeOrientation($_POST['youtube_orientation'] ?? 'horizontal');
+$uploadedVideoOrientation = normalizeOrientation($_POST['uploaded_video_orientation'] ?? 'horizontal');
+$deleteUploadedVideo = !empty($_POST['delete_uploaded_video']);
+$youtubeVideoIdFromInput = null;
+$hasNewUploadedVideo = isset($_FILES['uploaded_video_file'])
+    && ($_FILES['uploaded_video_file']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
 
 $errors = [];
 if (!$title)      $errors[] = 'Tytuł jest wymagany.';
 if (!$content)    $errors[] = 'Treść jest wymagana.';
 if (!$entry_date || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $entry_date)) $errors[] = 'Nieprawidłowa data.';
+if ($videoSource === 'youtube') {
+    if ($youtubeUrl === '') {
+        $errors[] = 'Dodaj link YouTube lub wybierz inne źródło wideo.';
+    } else {
+        $youtubeVideoIdFromInput = extractYouTubeVideoId($youtubeUrl);
+        if (!$youtubeVideoIdFromInput) {
+            $errors[] = 'Nie udało się odczytać ID filmu z linku YouTube.';
+        }
+    }
+}
+if ($videoSource === 'upload' && !$hasNewUploadedVideo && !$id) {
+    $errors[] = 'Wgraj plik wideo lub wybierz inne źródło.';
+}
 
 if ($errors) {
     $_SESSION['flash_error'] = implode(' ', $errors);
@@ -33,19 +56,27 @@ if ($errors) {
 $slug = generateSlug($entry_date, $title);
 
 try {
+    ensureVideoColumns($db);
     $affectedDates = [];
+
+    $youtubeVideoId = null;
+    $uploadedVideoFilename = null;
+    $uploadedVideoMime = null;
 
     if ($id) {
         $old = $db->prepare('SELECT * FROM entries WHERE id = ?');
         $old->execute([$id]);
         $oldEntry = $old->fetch();
+        if (!$oldEntry) {
+            throw new RuntimeException('Nie znaleziono wpisu do edycji.');
+        }
+        $youtubeVideoId = $oldEntry['youtube_video_id'] ?? null;
+        $uploadedVideoFilename = $oldEntry['uploaded_video_filename'] ?? null;
+        $uploadedVideoMime = $oldEntry['uploaded_video_mime'] ?? null;
 
         $check = $db->prepare('SELECT id FROM entries WHERE slug = ? AND id != ?');
         $check->execute([$slug, $id]);
         if ($check->fetch()) $slug .= '-' . substr(uniqid(), -4);
-
-        $db->prepare('UPDATE entries SET title=?,slug=?,entry_date=?,lead=?,content=?,status=?,updated_at=NOW() WHERE id=?')
-           ->execute([$title, $slug, $entry_date, $lead, $content, $status, $id]);
 
         // Zbierz daty do regeneracji (stara data jeśli się zmieniła)
         $affectedDates[] = $entry_date;
@@ -67,10 +98,73 @@ try {
         $check->execute([$slug]);
         if ($check->fetch()) $slug .= '-' . substr(uniqid(), -4);
 
-        $db->prepare('INSERT INTO entries (title,slug,entry_date,lead,content,status) VALUES (?,?,?,?,?,?)')
-           ->execute([$title, $slug, $entry_date, $lead, $content, $status]);
-        $id = (int)$db->lastInsertId();
         $affectedDates[] = $entry_date;
+    }
+
+    if ($youtubeVideoIdFromInput !== null) {
+        $youtubeVideoId = $youtubeVideoIdFromInput;
+    } elseif (!$id) {
+        $youtubeVideoId = null;
+    }
+
+    if ($deleteUploadedVideo && $uploadedVideoFilename) {
+        $oldVideoPath = UPLOADS_DIR . $uploadedVideoFilename;
+        if (file_exists($oldVideoPath)) @unlink($oldVideoPath);
+        $uploadedVideoFilename = null;
+        $uploadedVideoMime = null;
+    }
+
+    if ($hasNewUploadedVideo) {
+        $uploadedVideo = handleVideoUpload($_FILES['uploaded_video_file']);
+        if ($uploadedVideoFilename && $uploadedVideoFilename !== $uploadedVideo['filename']) {
+            $oldVideoPath = UPLOADS_DIR . $uploadedVideoFilename;
+            if (file_exists($oldVideoPath)) @unlink($oldVideoPath);
+        }
+        $uploadedVideoFilename = $uploadedVideo['filename'];
+        $uploadedVideoMime = $uploadedVideo['mime'];
+    }
+
+    if ($videoSource === 'youtube' && !$youtubeVideoId) {
+        throw new RuntimeException('Wybrane źródło YouTube wymaga poprawnego linku.');
+    }
+    if ($videoSource === 'upload' && !$uploadedVideoFilename) {
+        throw new RuntimeException('Wybrane źródło "Plik wideo" wymaga dodanego pliku.');
+    }
+
+    if ($id) {
+        $db->prepare('UPDATE entries SET title=?,slug=?,entry_date=?,lead=?,content=?,status=?,video_source=?,youtube_video_id=?,youtube_orientation=?,uploaded_video_filename=?,uploaded_video_mime=?,uploaded_video_orientation=?,updated_at=NOW() WHERE id=?')
+           ->execute([
+               $title,
+               $slug,
+               $entry_date,
+               $lead,
+               $content,
+               $status,
+               $videoSource,
+               $youtubeVideoId,
+               $youtubeOrientation,
+               $uploadedVideoFilename,
+               $uploadedVideoMime,
+               $uploadedVideoOrientation,
+               $id
+           ]);
+    } else {
+        $db->prepare('INSERT INTO entries (title,slug,entry_date,lead,content,status,video_source,youtube_video_id,youtube_orientation,uploaded_video_filename,uploaded_video_mime,uploaded_video_orientation) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)')
+           ->execute([
+               $title,
+               $slug,
+               $entry_date,
+               $lead,
+               $content,
+               $status,
+               $videoSource,
+               $youtubeVideoId,
+               $youtubeOrientation,
+               $uploadedVideoFilename,
+               $uploadedVideoMime,
+               $uploadedVideoOrientation
+           ]);
+        $id = (int)$db->lastInsertId();
     }
 
     // Usuń zaznaczone media
@@ -425,4 +519,122 @@ function isAutoHeading(string $line): bool {
 function autoEmphasizeKeywords(string $text): string {
     $text = preg_replace('/^(Wazne|Ważne|Uwaga|Tip|Wskazowka|Wskazówka|Kluczowe|Cel|Plan|Progres|Postep|Postęp)(\s*:)/iu', '<strong>$1</strong>$2', $text);
     return (string)preg_replace('/\b(najwazniejsze|najważniejsze|kluczowe|wazne|ważne|uwaga|wskazowka|wskazówka|tip|progres|postep|postęp)\b/iu', '<strong>$1</strong>', $text);
+}
+
+function normalizeOrientation(string $value): string {
+    return $value === 'vertical' ? 'vertical' : 'horizontal';
+}
+
+function extractYouTubeVideoId(string $url): ?string {
+    $url = trim($url);
+    if ($url === '') return null;
+
+    if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $url)) {
+        return $url;
+    }
+
+    $parts = @parse_url($url);
+    if (!is_array($parts)) return null;
+
+    $host = strtolower($parts['host'] ?? '');
+    $path = trim($parts['path'] ?? '', '/');
+    parse_str($parts['query'] ?? '', $query);
+
+    if (str_contains($host, 'youtu.be') && $path !== '') {
+        $candidate = explode('/', $path)[0];
+        return preg_match('/^[a-zA-Z0-9_-]{11}$/', $candidate) ? $candidate : null;
+    }
+
+    if (str_contains($host, 'youtube.com') || str_contains($host, 'youtube-nocookie.com')) {
+        if (!empty($query['v']) && preg_match('/^[a-zA-Z0-9_-]{11}$/', (string)$query['v'])) {
+            return (string)$query['v'];
+        }
+
+        $segments = $path !== '' ? explode('/', $path) : [];
+        if (count($segments) >= 2 && in_array($segments[0], ['shorts', 'embed', 'live'], true)) {
+            return preg_match('/^[a-zA-Z0-9_-]{11}$/', $segments[1]) ? $segments[1] : null;
+        }
+    }
+
+    return null;
+}
+
+function handleVideoUpload(array $file): array {
+    $maxSize = 150 * 1024 * 1024; // 150 MB
+    $allowedMime = [
+        'video/mp4',
+        'video/webm',
+        'video/quicktime',
+        'video/x-m4v',
+    ];
+    $allowedExt = ['mp4', 'webm', 'mov', 'm4v'];
+
+    $error = $file['error'] ?? UPLOAD_ERR_NO_FILE;
+    if ($error !== UPLOAD_ERR_OK) {
+        throw new RuntimeException('Nie udało się wgrać pliku wideo (kod błędu: ' . (int)$error . ').');
+    }
+
+    $size = (int)($file['size'] ?? 0);
+    if ($size <= 0 || $size > $maxSize) {
+        throw new RuntimeException('Plik wideo jest pusty albo przekracza limit 150 MB.');
+    }
+
+    $tmpName = (string)($file['tmp_name'] ?? '');
+    if ($tmpName === '' || !is_uploaded_file($tmpName)) {
+        throw new RuntimeException('Nieprawidłowy plik tymczasowy uploadu wideo.');
+    }
+
+    $mime = (string)(mime_content_type($tmpName) ?: '');
+    $originalName = (string)($file['name'] ?? 'video.mp4');
+    $ext = strtolower((string)pathinfo($originalName, PATHINFO_EXTENSION));
+
+    $isMimeAllowed = in_array($mime, $allowedMime, true);
+    $isExtAllowed = in_array($ext, $allowedExt, true);
+    if (!$isMimeAllowed && !$isExtAllowed) {
+        throw new RuntimeException('Nieobsługiwany format wideo. Dozwolone: MP4, MOV, M4V, WebM.');
+    }
+
+    if (!$isExtAllowed) {
+        $ext = match ($mime) {
+            'video/webm' => 'webm',
+            'video/quicktime' => 'mov',
+            'video/x-m4v' => 'm4v',
+            default => 'mp4',
+        };
+    }
+
+    $filename = uniqid('vid_', true) . '.' . $ext;
+    $destPath = UPLOADS_DIR . $filename;
+    if (!move_uploaded_file($tmpName, $destPath)) {
+        throw new RuntimeException('Nie udało się zapisać pliku wideo na serwerze.');
+    }
+
+    return [
+        'filename' => $filename,
+        'mime' => $isMimeAllowed ? $mime : ('video/' . ($ext === 'mov' ? 'quicktime' : $ext)),
+    ];
+}
+
+function ensureVideoColumns(PDO $db): void {
+    static $checked = false;
+    if ($checked) return;
+
+    $columns = [
+        'video_source' => "ALTER TABLE entries ADD COLUMN video_source VARCHAR(16) NOT NULL DEFAULT 'none' AFTER status",
+        'youtube_video_id' => "ALTER TABLE entries ADD COLUMN youtube_video_id VARCHAR(32) NULL AFTER video_source",
+        'youtube_orientation' => "ALTER TABLE entries ADD COLUMN youtube_orientation VARCHAR(12) NOT NULL DEFAULT 'horizontal' AFTER youtube_video_id",
+        'uploaded_video_filename' => "ALTER TABLE entries ADD COLUMN uploaded_video_filename VARCHAR(300) NULL AFTER youtube_orientation",
+        'uploaded_video_mime' => "ALTER TABLE entries ADD COLUMN uploaded_video_mime VARCHAR(100) NULL AFTER uploaded_video_filename",
+        'uploaded_video_orientation' => "ALTER TABLE entries ADD COLUMN uploaded_video_orientation VARCHAR(12) NOT NULL DEFAULT 'horizontal' AFTER uploaded_video_mime",
+    ];
+
+    foreach ($columns as $columnName => $ddl) {
+        $stmt = $db->prepare('SHOW COLUMNS FROM entries LIKE ?');
+        $stmt->execute([$columnName]);
+        if (!$stmt->fetch()) {
+            $db->exec($ddl);
+        }
+    }
+
+    $checked = true;
 }

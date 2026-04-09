@@ -33,6 +33,11 @@ try {
         if (file_exists($fp)) @unlink($fp);
     }
 
+    if (!empty($entry['uploaded_video_filename'])) {
+        $videoPath = UPLOADS_DIR . $entry['uploaded_video_filename'];
+        if (file_exists($videoPath)) @unlink($videoPath);
+    }
+
     // 3. Usuń wpis z bazy (CASCADE usuwa media)
     $db->prepare('DELETE FROM entries WHERE id = ?')->execute([$id]);
 

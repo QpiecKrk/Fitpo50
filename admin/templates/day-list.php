@@ -12,6 +12,9 @@ $pageUrl   = $siteUrl . 'sukcesy/' . ($date ?? '') . '.html';
 $adminUrl  = defined('ADMIN_URL') ? ADMIN_URL : 'https://admin.fitpo50.pl/';
 $ogImage   = $siteUrl . 'assets/Hero_Porady1.png'; // Domyślne tło
 foreach ($entries as $e) {
+    $videoSource = $e['video_source'] ?? 'none';
+    $youtubeVideoId = $e['youtube_video_id'] ?? '';
+
     if (!empty($e['media'])) {
         foreach ($e['media'] as $m) {
             if (str_starts_with($m['mime_type'] ?? '', 'image/')) {
@@ -27,6 +30,12 @@ foreach ($entries as $e) {
             }
         }
     }
+
+    if ($videoSource === 'youtube' && preg_match('/^[a-zA-Z0-9_-]{11}$/', $youtubeVideoId)) {
+        $ogImage = 'https://i.ytimg.com/vi/' . $youtubeVideoId . '/hqdefault.jpg';
+        break;
+    }
+
 }
 
 if (!function_exists('renderMediaPicture')) {
@@ -35,6 +44,33 @@ if (!function_exists('renderMediaPicture')) {
         $srcPrimary = htmlspecialchars($uploadsUrl . $filename);
         $srcFallback = htmlspecialchars($adminUrl . 'uploads/' . $filename);
         return '<img src="' . $srcPrimary . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';}" style="width:100%;height:100%;object-fit:' . $fit . ';">';
+    }
+}
+
+if (!function_exists('renderEntryVideo')) {
+    function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl): string {
+        $source = $entry['video_source'] ?? 'none';
+        $youtubeId = $entry['youtube_video_id'] ?? '';
+        $youtubeOrientation = ($entry['youtube_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
+        $uploadedFilename = $entry['uploaded_video_filename'] ?? '';
+        $uploadedMime = $entry['uploaded_video_mime'] ?? 'video/mp4';
+        $uploadedOrientation = ($entry['uploaded_video_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
+
+        if ($source === 'youtube' && preg_match('/^[a-zA-Z0-9_-]{11}$/', $youtubeId)) {
+            $orientationClass = $youtubeOrientation === 'vertical' ? 'is-vertical' : 'is-horizontal';
+            $embedUrl = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($youtubeId) . '?rel=0&modestbranding=1';
+            return '<div class="entry-video reveal ' . $orientationClass . '"><iframe src="' . htmlspecialchars($embedUrl) . '" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>';
+        }
+
+        if ($source === 'upload' && $uploadedFilename !== '') {
+            $orientationClass = $uploadedOrientation === 'vertical' ? 'is-vertical' : 'is-horizontal';
+            $srcPrimary = htmlspecialchars($uploadsUrl . $uploadedFilename);
+            $srcFallback = htmlspecialchars($adminUrl . 'uploads/' . $uploadedFilename);
+            $mime = htmlspecialchars($uploadedMime);
+            return '<div class="entry-video reveal ' . $orientationClass . '"><video controls preload="metadata" playsinline src="' . $srcPrimary . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';this.load();}"><source src="' . $srcPrimary . '" type="' . $mime . '">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video></div>';
+        }
+
+        return '';
     }
 }
 ?>
@@ -87,6 +123,10 @@ if (!function_exists('renderMediaPicture')) {
 .article-header__lead { font-size: clamp(1.1rem, 2.1vw, 1.32rem); color: var(--color-accent); max-width: 62ch; margin: 0 auto; line-height: 1.7; font-weight: 600; }
 .article-hero { position: relative; width: 100%; max-width: 1000px; margin: 0 auto var(--space-5); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); }
 .article-hero img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+.entry-video { width: 100%; max-width: 1000px; margin: 0 auto var(--space-5); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); background: #000; }
+.entry-video iframe, .entry-video video { display: block; width: 100%; height: 100%; border: 0; background: #000; }
+.entry-video.is-horizontal { aspect-ratio: 16 / 9; }
+.entry-video.is-vertical { aspect-ratio: 9 / 16; max-width: 520px; }
 .article-content { max-width: 720px; margin: 0 auto var(--space-6); font-size: 1.125rem; line-height: 1.8; color: var(--text-muted); padding: 0 var(--space-6); }
 .article-content > * + * { margin-top: var(--space-6); }
 .article-content h2 { font-family: var(--font-display); font-size: 2.25rem; color: var(--text-base); margin-top: var(--space-12); margin-bottom: var(--space-6); line-height: 1.3; position: relative; padding-bottom: var(--space-3); }
@@ -142,6 +182,12 @@ if (!function_exists('renderMediaPicture')) {
           $imageMedia = array_values(array_filter($media, fn($m) => str_starts_with($m['mime_type'] ?? '', 'image/')));
           $imageCount = count($imageMedia);
           $heroImg = $imageCount > 0 ? reset($imageMedia) : null;
+          $videoSource = $e['video_source'] ?? 'none';
+          $youtubeVideoId = $e['youtube_video_id'] ?? '';
+          $uploadedVideoFilename = $e['uploaded_video_filename'] ?? '';
+          $hasYoutubeVideo = $videoSource === 'youtube' && preg_match('/^[a-zA-Z0-9_-]{11}$/', $youtubeVideoId);
+          $hasUploadedVideo = $videoSource === 'upload' && $uploadedVideoFilename !== '';
+          $hasVideo = $hasYoutubeVideo || $hasUploadedVideo;
           $adminUrl   = defined('ADMIN_URL') ? ADMIN_URL : 'https://admin.fitpo50.pl/';
       ?>
         <?php if ($index > 0): ?>
@@ -155,7 +201,9 @@ if (!function_exists('renderMediaPicture')) {
           <?php endif; ?>
         </div>
 
-        <?php if ($imageCount === 1): ?>
+        <?php if ($hasVideo): ?>
+        <?= renderEntryVideo($e, $uploadsUrl, $adminUrl) ?>
+        <?php elseif ($imageCount === 1): ?>
         <div class="article-hero reveal">
           <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', 'eager') ?>
         </div>

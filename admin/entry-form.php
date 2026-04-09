@@ -28,6 +28,16 @@ if (isset($_GET['id'])) {
 $pageTitle = $editMode ? 'Edytuj wpis' : 'Nowy wpis';
 $logoUrl = 'assets/logo.jpg?v=2';
 $today = date('Y-m-d');
+$videoSourceValue = $entry['video_source'] ?? 'none';
+if (!in_array($videoSourceValue, ['none', 'youtube', 'upload'], true)) {
+    $videoSourceValue = 'none';
+}
+$youtubeVideoId = $entry['youtube_video_id'] ?? '';
+$youtubeUrlValue = $youtubeVideoId ? ('https://www.youtube.com/watch?v=' . $youtubeVideoId) : '';
+$youtubeOrientationValue = ($entry['youtube_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
+$uploadedVideoFilename = $entry['uploaded_video_filename'] ?? '';
+$uploadedVideoMime = $entry['uploaded_video_mime'] ?? '';
+$uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -188,6 +198,64 @@ $today = date('Y-m-d');
             </div>
           </div>
 
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Wideo</h3>
+            <div class="form-group">
+              <label for="video_source" class="form-label">Źródło wideo</label>
+              <select id="video_source" name="video_source" class="form-input form-select">
+                <option value="none" <?= $videoSourceValue === 'none' ? 'selected' : '' ?>>Brak</option>
+                <option value="youtube" <?= $videoSourceValue === 'youtube' ? 'selected' : '' ?>>YouTube (link)</option>
+                <option value="upload" <?= $videoSourceValue === 'upload' ? 'selected' : '' ?>>Plik z telefonu/komputera</option>
+              </select>
+              <p class="form-hint">Wideo zastępuje hero ze zdjęć na stronie wpisu.</p>
+            </div>
+
+            <div class="video-settings" id="youtube-settings">
+              <div class="form-group">
+                <label for="youtube_url" class="form-label">Link YouTube</label>
+                <input type="url" id="youtube_url" name="youtube_url" class="form-input"
+                       placeholder="https://www.youtube.com/watch?v=..."
+                       value="<?= h($youtubeUrlValue) ?>">
+                <p class="form-hint">Obsługiwane: `youtube.com/watch`, `youtu.be`, `youtube.com/shorts`.</p>
+              </div>
+              <div class="form-group">
+                <label for="youtube_orientation" class="form-label">Orientacja YouTube</label>
+                <select id="youtube_orientation" name="youtube_orientation" class="form-input form-select">
+                  <option value="horizontal" <?= $youtubeOrientationValue === 'horizontal' ? 'selected' : '' ?>>Pozioma (16:9)</option>
+                  <option value="vertical" <?= $youtubeOrientationValue === 'vertical' ? 'selected' : '' ?>>Pionowa (9:16)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="video-settings" id="upload-settings">
+              <div class="form-group">
+                <label for="uploaded_video_file" class="form-label">Plik wideo</label>
+                <input type="file" id="uploaded_video_file" name="uploaded_video_file" class="form-input"
+                       accept="video/mp4,video/webm,video/quicktime,video/x-m4v,.mp4,.webm,.mov,.m4v">
+                <p class="form-hint">MP4, MOV, M4V, WebM. Limit: 150 MB.</p>
+              </div>
+              <div class="form-group">
+                <label for="uploaded_video_orientation" class="form-label">Orientacja pliku</label>
+                <select id="uploaded_video_orientation" name="uploaded_video_orientation" class="form-input form-select">
+                  <option value="horizontal" <?= $uploadedVideoOrientationValue === 'horizontal' ? 'selected' : '' ?>>Pozioma (16:9)</option>
+                  <option value="vertical" <?= $uploadedVideoOrientationValue === 'vertical' ? 'selected' : '' ?>>Pionowa (9:16)</option>
+                </select>
+              </div>
+              <?php if ($uploadedVideoFilename): ?>
+                <div class="video-existing">
+                  <p><strong>Aktualny plik:</strong> <?= h($uploadedVideoFilename) ?></p>
+                  <?php if ($uploadedVideoMime): ?>
+                    <p><strong>MIME:</strong> <?= h($uploadedVideoMime) ?></p>
+                  <?php endif; ?>
+                  <p><a href="<?= ADMIN_URL ?>uploads/<?= h($uploadedVideoFilename) ?>" target="_blank" rel="noopener noreferrer">Podgląd pliku ↗</a></p>
+                  <label class="media-item__delete">
+                    <input type="checkbox" name="delete_uploaded_video" value="1"> Usuń aktualny plik wideo
+                  </label>
+                </div>
+              <?php endif; ?>
+            </div>
+          </div>
+
           <!-- Niebezpieczna strefa -->
           <?php if ($editMode): ?>
           <div class="sidebar-card sidebar-card--danger">
@@ -214,6 +282,20 @@ let accumulatedFiles = [];
 const fileInput = document.getElementById('media_files');
 const preview = document.getElementById('upload-preview');
 const form = document.getElementById('entry-form');
+const videoSourceSelect = document.getElementById('video_source');
+const youtubeSettings = document.getElementById('youtube-settings');
+const uploadSettings = document.getElementById('upload-settings');
+
+function toggleVideoSettings() {
+  const source = videoSourceSelect ? videoSourceSelect.value : 'none';
+  if (youtubeSettings) youtubeSettings.style.display = source === 'youtube' ? 'block' : 'none';
+  if (uploadSettings) uploadSettings.style.display = source === 'upload' ? 'block' : 'none';
+}
+
+if (videoSourceSelect) {
+  videoSourceSelect.addEventListener('change', toggleVideoSettings);
+  toggleVideoSettings();
+}
 
 fileInput.addEventListener('change', function() {
   const newFiles = Array.from(this.files);

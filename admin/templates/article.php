@@ -19,7 +19,23 @@ $pageUrl    = $siteUrl . $slug . '.html';
 $imageMedia = array_values(array_filter($media, fn($m) => str_starts_with($m['mime_type'] ?? '', 'image/')));
 $imageCount = count($imageMedia);
 $heroImg = $imageCount > 0 ? reset($imageMedia) : null;
+$videoSource = $entry['video_source'] ?? 'none';
+if (!in_array($videoSource, ['none', 'youtube', 'upload'], true)) {
+    $videoSource = 'none';
+}
+$youtubeVideoId = $entry['youtube_video_id'] ?? '';
+$youtubeOrientation = ($entry['youtube_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
+$uploadedVideoFilename = $entry['uploaded_video_filename'] ?? '';
+$uploadedVideoMime = $entry['uploaded_video_mime'] ?? 'video/mp4';
+$uploadedVideoOrientation = ($entry['uploaded_video_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
+$hasYoutubeVideo = $videoSource === 'youtube' && preg_match('/^[a-zA-Z0-9_-]{11}$/', $youtubeVideoId);
+$hasUploadedVideo = $videoSource === 'upload' && $uploadedVideoFilename !== '';
+$hasVideo = $hasYoutubeVideo || $hasUploadedVideo;
+
 $heroUrl = $heroImg ? ($uploadsUrl . $heroImg['filename']) : ($siteUrl . 'assets/Hero_Porady1.png');
+if (!$heroImg && $hasYoutubeVideo) {
+    $heroUrl = 'https://i.ytimg.com/vi/' . $youtubeVideoId . '/hqdefault.jpg';
+}
 
 // Czas czytania (szacunek: ~200 słów/min)
 $words   = str_word_count(strip_tags($content));
@@ -31,6 +47,31 @@ function renderMediaPicture($filename, $originalName, $uploadsUrl, $adminUrl, $w
     $srcPrimary = htmlspecialchars($uploadsUrl . $filename);
     $srcFallback = htmlspecialchars($adminUrl . 'uploads/' . $filename);
     return '<img src="' . $srcPrimary . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';}" style="width:100%;height:100%;object-fit:' . $fit . ';">';
+}
+
+function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl): string {
+    $source = $entry['video_source'] ?? 'none';
+    $youtubeId = $entry['youtube_video_id'] ?? '';
+    $youtubeOrientation = ($entry['youtube_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
+    $uploadedFilename = $entry['uploaded_video_filename'] ?? '';
+    $uploadedMime = $entry['uploaded_video_mime'] ?? 'video/mp4';
+    $uploadedOrientation = ($entry['uploaded_video_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
+
+    if ($source === 'youtube' && preg_match('/^[a-zA-Z0-9_-]{11}$/', $youtubeId)) {
+        $orientationClass = $youtubeOrientation === 'vertical' ? 'is-vertical' : 'is-horizontal';
+        $embedUrl = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($youtubeId) . '?rel=0&modestbranding=1';
+        return '<div class="entry-video reveal ' . $orientationClass . '"><iframe src="' . htmlspecialchars($embedUrl) . '" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>';
+    }
+
+    if ($source === 'upload' && $uploadedFilename !== '') {
+        $orientationClass = $uploadedOrientation === 'vertical' ? 'is-vertical' : 'is-horizontal';
+        $srcPrimary = htmlspecialchars($uploadsUrl . $uploadedFilename);
+        $srcFallback = htmlspecialchars($adminUrl . 'uploads/' . $uploadedFilename);
+        $mime = htmlspecialchars($uploadedMime);
+        return '<div class="entry-video reveal ' . $orientationClass . '"><video controls preload="metadata" playsinline src="' . $srcPrimary . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';this.load();}"><source src="' . $srcPrimary . '" type="' . $mime . '">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video></div>';
+    }
+
+    return '';
 }
 ?>
 <!DOCTYPE html>
@@ -112,6 +153,10 @@ function renderMediaPicture($filename, $originalName, $uploadsUrl, $adminUrl, $w
 .article-header__lead { font-size: clamp(1.1rem, 2.1vw, 1.32rem); color: var(--color-accent); max-width: 62ch; margin: 0 auto; line-height: 1.7; font-weight: 600; }
 .article-hero { position: relative; width: 100%; max-width: 1000px; margin: 0 auto var(--space-16); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); }
 .article-hero picture, .article-hero img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+.entry-video { width: 100%; max-width: 1000px; margin: 0 auto var(--space-16); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); background: #000; }
+.entry-video iframe, .entry-video video { display: block; width: 100%; height: 100%; border: 0; background: #000; }
+.entry-video.is-horizontal { aspect-ratio: 16 / 9; }
+.entry-video.is-vertical { aspect-ratio: 9 / 16; max-width: 520px; }
 .article-content { max-width: 720px; margin: 0 auto; font-size: 1.125rem; line-height: 1.8; color: var(--text-muted); padding: 0 var(--space-6); }
 .article-content > * + * { margin-top: var(--space-6); }
 .article-content h2 { font-family: var(--font-display); font-size: 2.25rem; color: var(--text-base); margin-top: var(--space-12); margin-bottom: var(--space-6); line-height: 1.3; position: relative; padding-bottom: var(--space-3); }
@@ -174,7 +219,9 @@ function renderMediaPicture($filename, $originalName, $uploadsUrl, $adminUrl, $w
       <?php endif; ?>
     </div>
 
-    <?php if ($imageCount === 1): ?>
+    <?php if ($hasVideo): ?>
+    <?= renderEntryVideo($entry, $uploadsUrl, $adminUrl) ?>
+    <?php elseif ($imageCount === 1): ?>
     <div class="article-hero reveal">
       <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', 'eager') ?>
     </div>
