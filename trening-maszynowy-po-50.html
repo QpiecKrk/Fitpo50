@@ -68,10 +68,10 @@
 }
 </script>
 
-<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css?v=3.0">
@@ -238,6 +238,7 @@
   margin-bottom: var(--space-4);
 }
 </style>
+<link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
 </head>
 <body>
 
@@ -791,7 +792,7 @@
           <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Ruch</div>
         </div>
         <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
-          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3);">Jak zacząć na siłowni po 50-tce</h4>
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3);">Jak zacząć na siłowni po 50-tce</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Pierwsze kroki, wybór siłowni i walka z oporem psychicznym.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
         </div>
@@ -808,7 +809,7 @@
           <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Ruch</div>
         </div>
         <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
-          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3);">5 błędów początkujących po 50-tce</h4>
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3);">5 błędów początkujących po 50-tce</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Najczęstsze pułapki i jak ich uniknąć już na pierwszej sesji.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
         </div>
@@ -825,7 +826,7 @@
           <div style="position: absolute; top: 12px; left: 12px; background: var(--color-accent); color: white; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Zdrowie</div>
         </div>
         <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
-          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3);">Badania przed startem</h4>
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3);">Badania przed startem</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Co sprawdzić u lekarza, zanim złapiesz za pierwszy hantel.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
         </div>
@@ -845,7 +846,7 @@
       </div>
 
       <div>
-        <h4 class="footer__heading">Nawigacja</h4>
+        <h3 class="footer__heading">Nawigacja</h3>
         <ul class="footer__links" role="list">
           <li><a href="index.html">Strona Główna</a></li>
           <li><a href="index.html#o-nas">O mnie</a></li>
@@ -855,7 +856,7 @@
       </div>
 
       <div>
-        <h4 class="footer__heading">Czytelnia</h4>
+        <h3 class="footer__heading">Czytelnia</h3>
         <ul class="footer__links" role="list">
           <li><a href="trening-maszynowy-po-50.html" style="color: var(--color-accent);">Maszyny po 50-tce</a></li>
           <li><a href="badania-po-50.html">Badania przed startem</a></li>

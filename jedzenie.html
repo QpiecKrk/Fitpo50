@@ -44,10 +44,10 @@
 </script>
 
 <!-- Fonts: Zodiak (display) + Work Sans (body) -->
-<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css?v=1.2">
@@ -113,6 +113,7 @@
   margin-bottom: var(--space-8);
 }
 </style>
+<link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
 </head>
 <body>
 
@@ -254,7 +255,7 @@
       </div>
 
       <div>
-        <h4 class="footer__heading">Nawigacja</h4>
+        <h3 class="footer__heading">Nawigacja</h3>
         <ul class="footer__links" role="list">
           <li><a href="index.html">Strona Główna</a></li>
           <li><a href="index.html#o-nas">O mnie</a></li>
@@ -265,7 +266,7 @@
       </div>
 
       <div>
-        <h4 class="footer__heading">Czytelnia</h4>
+        <h3 class="footer__heading">Czytelnia</h3>
         <ul class="footer__links" role="list">
           <li><a href="jak-zaczac-na-silowni-po-50.html">Jak zacząć na siłowni po 50-tce</a></li>
           <li><a href="suplementacja-po-50.html">Białko i kreatyna po 50-tce</a></li>

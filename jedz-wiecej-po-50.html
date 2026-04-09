@@ -59,10 +59,10 @@
 }
 </script>
 
-<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css?v=3.0">
@@ -320,6 +320,7 @@
   text-align: center;
 }
 </style>
+<link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
 </head>
 <body>
 
@@ -723,7 +724,7 @@
         </div>
         <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
           <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: var(--space-3);">9 min czytania</p>
-          <h4 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Motywacja zniknęła. To normalne.</h4>
+          <h3 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Motywacja zniknęła. To normalne.</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Dlaczego motywacja znika i jak przechytrzyć własną biologię po 50-tce.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4); margin-top: auto;">Czytaj artykuł -></span>
         </div>
@@ -740,7 +741,7 @@
         </div>
         <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
           <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: var(--space-3);">12 min czytania</p>
-          <h4 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Woda na siłowni po 50-tce — nawodnienie, które zmienia trening</h4>
+          <h3 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Woda na siłowni po 50-tce — nawodnienie, które zmienia trening</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Sprawdź, jak prosty protokół nawadniania poprawia energię i bezpieczeństwo treningu.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4); margin-top: auto;">Czytaj artykuł -></span>
         </div>
@@ -757,7 +758,7 @@
         </div>
         <div style="padding: var(--space-6); display: flex; flex-direction: column; flex-grow: 1;">
           <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: var(--space-3);">7 min czytania</p>
-          <h4 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Zaciśnij dłoń. Właśnie zrobiłeś ważniejszy test zdrowotny niż pomiar ciśnienia.</h4>
+          <h3 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Zaciśnij dłoń. Właśnie zrobiłeś ważniejszy test zdrowotny niż pomiar ciśnienia.</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Poznaj prosty test siły chwytu i zobacz, co mówi o Twojej długoterminowej sprawności.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4); margin-top: auto;">Czytaj artykuł -></span>
         </div>
@@ -777,7 +778,7 @@
       </div>
 
       <div>
-        <h4 class="footer__heading">Nawigacja</h4>
+        <h3 class="footer__heading">Nawigacja</h3>
         <ul class="footer__links" role="list">
           <li><a href="index.html">Strona Główna</a></li>
           <li><a href="porady.html">Porady</a></li>
@@ -786,7 +787,7 @@
       </div>
 
       <div>
-        <h4 class="footer__heading">Czytelnia</h4>
+        <h3 class="footer__heading">Czytelnia</h3>
         <ul class="footer__links" role="list">
           <li><a href="jedz-wiecej-po-50.html" style="color: var(--color-accent);">Jedz więcej</a></li>
           <li><a href="sila-chwytu-po-50.html">Siła chwytu</a></li>

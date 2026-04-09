@@ -60,10 +60,10 @@
 }
 </script>
 
-<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css?v=3.1">
@@ -302,6 +302,7 @@
   object-position: center 30%;
 }
 </style>
+<link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
 </head>
 <body>
 
@@ -619,7 +620,7 @@
           <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--space-3); font-size: 0.85rem; color: var(--color-text-muted); font-weight: 500;">
             <span style="display: flex; align-items: center; gap: 4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 8 min czytania</span>
           </div>
-          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Motywacja zniknęła. To normalne.</h4>
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Motywacja zniknęła. To normalne.</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Dlaczego motywacja znika i jak przechytrzyć własną biologię.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
         </div>
@@ -639,7 +640,7 @@
           <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--space-3); font-size: 0.85rem; color: var(--color-text-muted); font-weight: 500;">
             <span style="display: flex; align-items: center; gap: 4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 12 min czytania</span>
           </div>
-          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Jedz więcej. Stop dla głodówek.</h4>
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Jedz więcej. Stop dla głodówek.</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Dlaczego niedojadanie niszczy Twoje mięśnie po 50-tce.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
         </div>
@@ -655,7 +656,7 @@
           <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--space-3); font-size: 0.85rem; color: var(--color-text-muted); font-weight: 500;">
             <span style="display: flex; align-items: center; gap: 4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 7 min czytania</span>
           </div>
-          <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Uścisk dłoni a Twoje serce.</h4>
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-bottom: var(--space-3); line-height: 1.3;">Uścisk dłoni a Twoje serce.</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-4); flex-grow: 1;">Prosty test siły chwytu, który mówi więcej niż ciśnieniomierz.</p>
           <span class="btn btn--outline" style="border-color: var(--color-primary); color: var(--color-primary); align-self: flex-start; padding: var(--space-2) var(--space-4);">Czytaj artykuł -></span>
         </div>
@@ -675,7 +676,7 @@
         <p class="footer__brand-desc">Praktyczna wiedza o formie po 50-tce. Bez chaosu, bez straszenia, z naciskiem na to, co działa.</p>
       </div>
       <div>
-        <h4 class="footer__heading">Czytelnia</h4>
+        <h3 class="footer__heading">Czytelnia</h3>
         <ul class="footer__links" role="list">
           <li><a href="nawodnienie-na-treningu-po-50.html" style="color: var(--article-accent);">Nawodnienie po 50</a></li>
           <li><a href="jedz-wiecej-po-50.html">Jedz więcej</a></li>
