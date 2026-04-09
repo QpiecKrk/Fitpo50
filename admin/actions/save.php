@@ -561,13 +561,14 @@ function extractYouTubeVideoId(string $url): ?string {
 
 function handleVideoUpload(array $file): array {
     $maxSize = 150 * 1024 * 1024; // 150 MB
-    $allowedMime = [
-        'video/mp4',
-        'video/webm',
-        'video/quicktime',
-        'video/x-m4v',
+    $allowedExtToMime = [
+        'mp4' => ['video/mp4'],
+        'webm' => ['video/webm'],
+        'mov' => ['video/quicktime'],
+        'm4v' => ['video/x-m4v', 'video/mp4'],
     ];
-    $allowedExt = ['mp4', 'webm', 'mov', 'm4v'];
+    $allowedExt = array_keys($allowedExtToMime);
+    $allowedMime = array_values(array_unique(array_merge(...array_values($allowedExtToMime))));
 
     $error = $file['error'] ?? UPLOAD_ERR_NO_FILE;
     if ($error !== UPLOAD_ERR_OK) {
@@ -590,17 +591,16 @@ function handleVideoUpload(array $file): array {
 
     $isMimeAllowed = in_array($mime, $allowedMime, true);
     $isExtAllowed = in_array($ext, $allowedExt, true);
-    if (!$isMimeAllowed && !$isExtAllowed) {
-        throw new RuntimeException('Nieobsługiwany format wideo. Dozwolone: MP4, MOV, M4V, WebM.');
+    if (!$isExtAllowed) {
+        throw new RuntimeException('Nieobsługiwane rozszerzenie pliku wideo. Dozwolone: MP4, MOV, M4V, WebM.');
+    }
+    if (!$isMimeAllowed) {
+        throw new RuntimeException('Nieobsługiwany typ MIME wideo. Dozwolone: video/mp4, video/webm, video/quicktime, video/x-m4v.');
     }
 
-    if (!$isExtAllowed) {
-        $ext = match ($mime) {
-            'video/webm' => 'webm',
-            'video/quicktime' => 'mov',
-            'video/x-m4v' => 'm4v',
-            default => 'mp4',
-        };
+    $expectedMimes = $allowedExtToMime[$ext] ?? [];
+    if (!in_array($mime, $expectedMimes, true)) {
+        throw new RuntimeException('Nieobsługiwany format wideo. Dozwolone: MP4, MOV, M4V, WebM.');
     }
 
     $filename = uniqid('vid_', true) . '.' . $ext;
@@ -611,7 +611,7 @@ function handleVideoUpload(array $file): array {
 
     return [
         'filename' => $filename,
-        'mime' => $isMimeAllowed ? $mime : ('video/' . ($ext === 'mov' ? 'quicktime' : $ext)),
+        'mime' => $mime,
     ];
 }
 

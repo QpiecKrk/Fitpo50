@@ -48,7 +48,7 @@ if (!function_exists('renderMediaPicture')) {
 }
 
 if (!function_exists('renderEntryVideo')) {
-    function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl): string {
+    function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl, string $posterUrl = ''): string {
         $source = $entry['video_source'] ?? 'none';
         $youtubeId = $entry['youtube_video_id'] ?? '';
         $youtubeOrientation = ($entry['youtube_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
@@ -67,7 +67,8 @@ if (!function_exists('renderEntryVideo')) {
             $srcPrimary = htmlspecialchars($uploadsUrl . $uploadedFilename);
             $srcFallback = htmlspecialchars($adminUrl . 'uploads/' . $uploadedFilename);
             $mime = htmlspecialchars($uploadedMime);
-            return '<div class="entry-video reveal ' . $orientationClass . '"><video controls preload="metadata" playsinline src="' . $srcPrimary . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';this.load();}"><source src="' . $srcPrimary . '" type="' . $mime . '">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video></div>';
+            $poster = $posterUrl !== '' ? ' poster="' . htmlspecialchars($posterUrl) . '"' : '';
+            return '<div class="entry-video reveal ' . $orientationClass . '"><video controls preload="metadata" playsinline' . $poster . ' src="' . $srcPrimary . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';this.load();}"><source src="' . $srcPrimary . '" type="' . $mime . '">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video></div>';
         }
 
         return '';
@@ -188,6 +189,10 @@ if (!function_exists('renderEntryVideo')) {
           $hasYoutubeVideo = $videoSource === 'youtube' && preg_match('/^[a-zA-Z0-9_-]{11}$/', $youtubeVideoId);
           $hasUploadedVideo = $videoSource === 'upload' && $uploadedVideoFilename !== '';
           $hasVideo = $hasYoutubeVideo || $hasUploadedVideo;
+          $videoPosterUrl = $heroImg ? ($uploadsUrl . $heroImg['filename']) : ($siteUrl . 'assets/Hero_Porady1.png');
+          if (!$heroImg && $hasYoutubeVideo) {
+              $videoPosterUrl = 'https://i.ytimg.com/vi/' . $youtubeVideoId . '/hqdefault.jpg';
+          }
           $adminUrl   = defined('ADMIN_URL') ? ADMIN_URL : 'https://admin.fitpo50.pl/';
       ?>
         <?php if ($index > 0): ?>
@@ -202,7 +207,7 @@ if (!function_exists('renderEntryVideo')) {
         </div>
 
         <?php if ($hasVideo): ?>
-        <?= renderEntryVideo($e, $uploadsUrl, $adminUrl) ?>
+        <?= renderEntryVideo($e, $uploadsUrl, $adminUrl, $videoPosterUrl) ?>
         <?php elseif ($imageCount === 1): ?>
         <div class="article-hero reveal">
           <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', 'eager') ?>

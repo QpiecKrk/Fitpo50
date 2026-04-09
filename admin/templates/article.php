@@ -31,11 +31,22 @@ $uploadedVideoOrientation = ($entry['uploaded_video_orientation'] ?? 'horizontal
 $hasYoutubeVideo = $videoSource === 'youtube' && preg_match('/^[a-zA-Z0-9_-]{11}$/', $youtubeVideoId);
 $hasUploadedVideo = $videoSource === 'upload' && $uploadedVideoFilename !== '';
 $hasVideo = $hasYoutubeVideo || $hasUploadedVideo;
+$videoOrientation = $hasYoutubeVideo ? $youtubeOrientation : ($hasUploadedVideo ? $uploadedVideoOrientation : 'horizontal');
+$videoWidth = $videoOrientation === 'vertical' ? 720 : 1280;
+$videoHeight = $videoOrientation === 'vertical' ? 1280 : 720;
+$youtubeEmbedUrl = $hasYoutubeVideo
+    ? ('https://www.youtube-nocookie.com/embed/' . rawurlencode($youtubeVideoId) . '?rel=0&modestbranding=1')
+    : '';
+$youtubeWatchUrl = $hasYoutubeVideo
+    ? ('https://www.youtube.com/watch?v=' . rawurlencode($youtubeVideoId))
+    : '';
+$uploadedVideoUrl = $hasUploadedVideo ? ($uploadsUrl . $uploadedVideoFilename) : '';
 
 $heroUrl = $heroImg ? ($uploadsUrl . $heroImg['filename']) : ($siteUrl . 'assets/Hero_Porady1.png');
 if (!$heroImg && $hasYoutubeVideo) {
     $heroUrl = 'https://i.ytimg.com/vi/' . $youtubeVideoId . '/hqdefault.jpg';
 }
+$videoPosterUrl = $heroUrl;
 
 // Czas czytania (szacunek: ~200 słów/min)
 $words   = str_word_count(strip_tags($content));
@@ -49,7 +60,7 @@ function renderMediaPicture($filename, $originalName, $uploadsUrl, $adminUrl, $w
     return '<img src="' . $srcPrimary . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';}" style="width:100%;height:100%;object-fit:' . $fit . ';">';
 }
 
-function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl): string {
+function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl, string $posterUrl = ''): string {
     $source = $entry['video_source'] ?? 'none';
     $youtubeId = $entry['youtube_video_id'] ?? '';
     $youtubeOrientation = ($entry['youtube_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
@@ -68,7 +79,8 @@ function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl): s
         $srcPrimary = htmlspecialchars($uploadsUrl . $uploadedFilename);
         $srcFallback = htmlspecialchars($adminUrl . 'uploads/' . $uploadedFilename);
         $mime = htmlspecialchars($uploadedMime);
-        return '<div class="entry-video reveal ' . $orientationClass . '"><video controls preload="metadata" playsinline src="' . $srcPrimary . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';this.load();}"><source src="' . $srcPrimary . '" type="' . $mime . '">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video></div>';
+        $poster = $posterUrl !== '' ? ' poster="' . htmlspecialchars($posterUrl) . '"' : '';
+        return '<div class="entry-video reveal ' . $orientationClass . '"><video controls preload="metadata" playsinline' . $poster . ' src="' . $srcPrimary . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';this.load();}"><source src="' . $srcPrimary . '" type="' . $mime . '">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video></div>';
     }
 
     return '';
@@ -96,6 +108,19 @@ function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl): s
 <meta property="og:url" content="<?= $pageUrl ?>">
 <meta property="og:image" content="<?= htmlspecialchars($heroUrl) ?>">
 <meta property="og:locale" content="pl_PL">
+<?php if ($hasYoutubeVideo): ?>
+<meta property="og:video" content="<?= htmlspecialchars($youtubeEmbedUrl) ?>">
+<meta property="og:video:secure_url" content="<?= htmlspecialchars($youtubeEmbedUrl) ?>">
+<meta property="og:video:type" content="text/html">
+<meta property="og:video:width" content="<?= $videoWidth ?>">
+<meta property="og:video:height" content="<?= $videoHeight ?>">
+<?php elseif ($hasUploadedVideo): ?>
+<meta property="og:video" content="<?= htmlspecialchars($uploadedVideoUrl) ?>">
+<meta property="og:video:secure_url" content="<?= htmlspecialchars($uploadedVideoUrl) ?>">
+<meta property="og:video:type" content="<?= htmlspecialchars($uploadedVideoMime) ?>">
+<meta property="og:video:width" content="<?= $videoWidth ?>">
+<meta property="og:video:height" content="<?= $videoHeight ?>">
+<?php endif; ?>
 <meta property="article:published_time" content="<?= $dateIso ?>">
 <meta property="article:modified_time" content="<?= $dateModIso ?>">
 <meta property="article:author" content="FitPo50">
@@ -137,6 +162,35 @@ function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl): s
   }
 }
 </script>
+<?php if ($hasVideo): ?>
+<?php
+$videoSchema = [
+  "@context" => "https://schema.org",
+  "@type" => "VideoObject",
+  "name" => $title,
+  "description" => $lead ?: mb_substr(strip_tags($content), 0, 155),
+  "thumbnailUrl" => [$videoPosterUrl],
+  "uploadDate" => $dateIso,
+  "inLanguage" => "pl-PL",
+  "publisher" => [
+    "@type" => "Organization",
+    "name" => "FitPo50",
+    "url" => "https://fitpo50.pl/"
+  ],
+  "mainEntityOfPage" => $pageUrl,
+];
+if ($hasYoutubeVideo) {
+    $videoSchema["embedUrl"] = $youtubeEmbedUrl;
+    $videoSchema["url"] = $youtubeWatchUrl;
+}
+if ($hasUploadedVideo) {
+    $videoSchema["contentUrl"] = $uploadedVideoUrl;
+}
+?>
+<script type="application/ld+json">
+<?= json_encode($videoSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>
+</script>
+<?php endif; ?>
 
 <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&amp;display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -220,7 +274,7 @@ function renderEntryVideo(array $entry, string $uploadsUrl, string $adminUrl): s
     </div>
 
     <?php if ($hasVideo): ?>
-    <?= renderEntryVideo($entry, $uploadsUrl, $adminUrl) ?>
+    <?= renderEntryVideo($entry, $uploadsUrl, $adminUrl, $videoPosterUrl) ?>
     <?php elseif ($imageCount === 1): ?>
     <div class="article-hero reveal">
       <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', 'eager') ?>
