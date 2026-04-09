@@ -78,6 +78,33 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 - czy nie dodano do commita plikow narzedziowych,
 - czy zmiana nie jest wieksza niz wymaga task.
 
+## Ustalenia z dnia 2026-04-09
+
+- **Format dostarczania artykulow:**
+  - preferowany format wsadowy to `JSON` (najmniej bledow i najlepsza automatyzacja SEO/schema),
+  - fallback: czysty tekst/Markdown z DOCX,
+  - zrzuty ekranu traktujemy jako ostatecznosc (duzo wiecej pracy recznej i ryzyko bledow).
+- **Wizual artykulow (wszystkie kategorie):**
+  - utrzymujemy merytoryczna tresc 1:1, ale dopuszczamy umiarkowane wyroznienia wizualne:
+    - pogrubienia (`<strong>`) w kluczowych zdaniach,
+    - akcenty kolorystyczne i callouty tam, gdzie wzmacnia to przekaz,
+    - bez przesady i bez "przekolorowania" calego artykulu.
+  - wyroznienia maja byc spojne z obecnym stylem serwisu (nie zmieniamy design systemu lokalnym taskiem).
+- **Kafelki kategorii i karuzele:**
+  - strony kategorii (`rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`) maja byc wizualnie i funkcjonalnie zgodne z wzorcem z `porady.html`,
+  - ten sam standard meta czasu czytania, CTA i paginacji `WRÓĆ/DALEJ`,
+  - po zmianach w CSS/HTML pilnujemy wersjonowania assetow (`?v=`), zeby cache nie maskowal efektu.
+- **Spojnosc kolorow etykiet kategorii:**
+  - mapowanie kolorow etykiet jest stale na wszystkich listach/kafelkach,
+  - nie dodajemy inline kolorow sprzecznych z mapowaniem kategorii.
+- **Admin i media (Moje Sukcesy):**
+  - panel obsluguje video z YouTube oraz upload video,
+  - trzeba respektowac orientacje pion/poziom (bez obcinania kadrów),
+  - dla YouTube wystarcza link; plik video nie jest kopiowany na nasz serwer.
+- **SEO i technikalia video:**
+  - dla wpisow video utrzymujemy poprawne meta i dane strukturalne (`VideoObject`, `og:video*`),
+  - po zmianach sprawdzamy render i walidacje (struktura + podglad social).
+
 ## Detailed reference
 
 ## Podzial pamieci modulowej
