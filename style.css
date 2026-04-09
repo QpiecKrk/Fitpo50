@@ -1398,6 +1398,11 @@ a:hover {
   padding: 0;
 }
 
+.articles-grid-preview.carousel-track {
+  gap: 0 !important;
+  margin-top: 0;
+}
+
 .carousel-page {
   flex: 0 0 100%;
   width: 100%;
