@@ -10,7 +10,7 @@ $pageDesc  = 'Wszystkie wpisy FitPo50 z dnia ' . $dateFormatted . '.';
 $pageUrl   = $siteUrl . 'sukcesy/' . ($date ?? '') . '.html';
 
 $adminUrl  = defined('ADMIN_URL') ? ADMIN_URL : 'https://admin.fitpo50.pl/';
-$ogImage   = $siteUrl . 'assets/Hero_Porady1.png'; // Domyślne tło
+$ogImage   = $siteUrl . 'assets/hero.jpg'; // Domyślne tło
 foreach ($entries as $e) {
     $videoSource = $e['video_source'] ?? 'none';
     $youtubeVideoId = $e['youtube_video_id'] ?? '';
@@ -44,6 +44,16 @@ if (!function_exists('renderMediaPicture')) {
         $srcPrimary = htmlspecialchars($uploadsUrl . $filename);
         $srcFallback = htmlspecialchars($adminUrl . 'uploads/' . $filename);
         return '<img src="' . $srcPrimary . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" loading="' . $loading . '" onerror="if(!this.dataset.fallback){this.dataset.fallback=\'1\';this.src=\'' . $srcFallback . '\';}" style="width:100%;height:100%;object-fit:' . $fit . ';">';
+    }
+}
+
+if (!function_exists('isUploadedImageVertical')) {
+    function isUploadedImageVertical(string $filename): bool {
+        $imagePath = ADMIN_ROOT . 'uploads/' . $filename;
+        if (!is_file($imagePath)) return false;
+        $size = @getimagesize($imagePath);
+        if (!is_array($size) || !isset($size[0], $size[1])) return false;
+        return $size[1] > $size[0];
     }
 }
 
@@ -124,6 +134,8 @@ if (!function_exists('renderEntryVideo')) {
 .article-header__lead { font-size: clamp(1.1rem, 2.1vw, 1.32rem); color: var(--color-accent); max-width: 62ch; margin: 0 auto; line-height: 1.7; font-weight: 600; }
 .article-hero { position: relative; width: 100%; max-width: 1000px; margin: 0 auto var(--space-5); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); }
 .article-hero img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+.article-hero--vertical { max-width: 520px; background: #0b0b0b; }
+.article-hero--vertical img { aspect-ratio: 9/16; object-fit: contain; background: #0b0b0b; }
 .entry-video { width: 100%; max-width: 1000px; margin: 0 auto var(--space-5); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); background: #000; }
 .entry-video iframe, .entry-video video { display: block; width: 100%; height: 100%; border: 0; background: #000; }
 .entry-video.is-horizontal { aspect-ratio: 16 / 9; }
@@ -189,10 +201,16 @@ if (!function_exists('renderEntryVideo')) {
           $hasYoutubeVideo = $videoSource === 'youtube' && preg_match('/^[a-zA-Z0-9_-]{11}$/', $youtubeVideoId);
           $hasUploadedVideo = $videoSource === 'upload' && $uploadedVideoFilename !== '';
           $hasVideo = $hasYoutubeVideo || $hasUploadedVideo;
-          $videoPosterUrl = $heroImg ? ($uploadsUrl . $heroImg['filename']) : ($siteUrl . 'assets/Hero_Porady1.png');
+          $videoPosterUrl = '';
+          if ($heroImg) {
+              $videoPosterUrl = $uploadsUrl . $heroImg['filename'];
+          }
           if (!$heroImg && $hasYoutubeVideo) {
               $videoPosterUrl = 'https://i.ytimg.com/vi/' . $youtubeVideoId . '/hqdefault.jpg';
           }
+          $singleHeroIsVertical = $heroImg ? isUploadedImageVertical($heroImg['filename']) : false;
+          $singleHeroFit = $singleHeroIsVertical ? 'contain' : 'cover';
+          $singleHeroClass = $singleHeroIsVertical ? ' article-hero--vertical' : '';
           $adminUrl   = defined('ADMIN_URL') ? ADMIN_URL : 'https://admin.fitpo50.pl/';
       ?>
         <?php if ($index > 0): ?>
@@ -209,8 +227,8 @@ if (!function_exists('renderEntryVideo')) {
         <?php if ($hasVideo): ?>
         <?= renderEntryVideo($e, $uploadsUrl, $adminUrl, $videoPosterUrl) ?>
         <?php elseif ($imageCount === 1): ?>
-        <div class="article-hero reveal">
-          <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', 'eager') ?>
+        <div class="article-hero reveal<?= $singleHeroClass ?>">
+          <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', 'eager', $singleHeroFit) ?>
         </div>
         <?php elseif ($imageCount >= 2): ?>
         <div class="entry-carousel reveal" aria-label="Galeria zdjęć wpisu" tabindex="0">

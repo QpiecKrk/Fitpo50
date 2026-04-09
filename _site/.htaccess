@@ -1,3 +1,26 @@
+# === Canonical redirect: HTTP -> HTTPS + www -> non-www ===
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\.fitpo50\.pl$ [NC]
+  RewriteRule ^ https://fitpo50.pl%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# === MIME types for modern image formats ===
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+</IfModule>
+
+# === Security headers ===
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://admin.fitpo50.pl; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.fontshare.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https://api.fontshare.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://admin.fitpo50.pl; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https://fitpo50.pl https://admin.fitpo50.pl; upgrade-insecure-requests"
+</IfModule>
+
 # === Block direct access to SQLite database files ===
 <FilesMatch "\.sqlite$">
   <IfModule mod_authz_core.c>

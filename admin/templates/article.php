@@ -42,11 +42,28 @@ $youtubeWatchUrl = $hasYoutubeVideo
     : '';
 $uploadedVideoUrl = $hasUploadedVideo ? ($uploadsUrl . $uploadedVideoFilename) : '';
 
-$heroUrl = $heroImg ? ($uploadsUrl . $heroImg['filename']) : ($siteUrl . 'assets/Hero_Porady1.png');
+$heroUrl = $heroImg ? ($uploadsUrl . $heroImg['filename']) : ($siteUrl . 'assets/hero.jpg');
 if (!$heroImg && $hasYoutubeVideo) {
     $heroUrl = 'https://i.ytimg.com/vi/' . $youtubeVideoId . '/hqdefault.jpg';
 }
-$videoPosterUrl = $heroUrl;
+$videoPosterUrl = '';
+if ($heroImg) {
+    $videoPosterUrl = $heroUrl;
+} elseif ($hasYoutubeVideo) {
+    $videoPosterUrl = 'https://i.ytimg.com/vi/' . $youtubeVideoId . '/hqdefault.jpg';
+}
+$singleHeroIsVertical = false;
+if ($heroImg) {
+    $heroPath = ADMIN_ROOT . 'uploads/' . $heroImg['filename'];
+    if (is_file($heroPath)) {
+        $heroSize = @getimagesize($heroPath);
+        if (is_array($heroSize) && isset($heroSize[0], $heroSize[1])) {
+            $singleHeroIsVertical = $heroSize[1] > $heroSize[0];
+        }
+    }
+}
+$singleHeroFit = $singleHeroIsVertical ? 'contain' : 'cover';
+$singleHeroClass = $singleHeroIsVertical ? ' article-hero--vertical' : '';
 
 // Czas czytania (szacunek: ~200 słów/min)
 $words   = str_word_count(strip_tags($content));
@@ -169,7 +186,6 @@ $videoSchema = [
   "@type" => "VideoObject",
   "name" => $title,
   "description" => $lead ?: mb_substr(strip_tags($content), 0, 155),
-  "thumbnailUrl" => [$videoPosterUrl],
   "uploadDate" => $dateIso,
   "inLanguage" => "pl-PL",
   "publisher" => [
@@ -185,6 +201,9 @@ if ($hasYoutubeVideo) {
 }
 if ($hasUploadedVideo) {
     $videoSchema["contentUrl"] = $uploadedVideoUrl;
+}
+if ($videoPosterUrl !== '') {
+    $videoSchema["thumbnailUrl"] = [$videoPosterUrl];
 }
 ?>
 <script type="application/ld+json">
@@ -207,6 +226,8 @@ if ($hasUploadedVideo) {
 .article-header__lead { font-size: clamp(1.1rem, 2.1vw, 1.32rem); color: var(--color-accent); max-width: 62ch; margin: 0 auto; line-height: 1.7; font-weight: 600; }
 .article-hero { position: relative; width: 100%; max-width: 1000px; margin: 0 auto var(--space-16); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); }
 .article-hero picture, .article-hero img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+.article-hero--vertical { max-width: 520px; background: #0b0b0b; }
+.article-hero--vertical picture, .article-hero--vertical img { aspect-ratio: 9/16; object-fit: contain; background: #0b0b0b; }
 .entry-video { width: 100%; max-width: 1000px; margin: 0 auto var(--space-16); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,.15); background: #000; }
 .entry-video iframe, .entry-video video { display: block; width: 100%; height: 100%; border: 0; background: #000; }
 .entry-video.is-horizontal { aspect-ratio: 16 / 9; }
@@ -276,8 +297,8 @@ if ($hasUploadedVideo) {
     <?php if ($hasVideo): ?>
     <?= renderEntryVideo($entry, $uploadsUrl, $adminUrl, $videoPosterUrl) ?>
     <?php elseif ($imageCount === 1): ?>
-    <div class="article-hero reveal">
-      <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', 'eager') ?>
+    <div class="article-hero reveal<?= $singleHeroClass ?>">
+      <?= renderMediaPicture($heroImg['filename'], $heroImg['original_name'] ?? $title, $uploadsUrl, $adminUrl, '1200', '675', 'eager', $singleHeroFit) ?>
     </div>
     <?php elseif ($imageCount >= 2): ?>
     <div class="entry-carousel reveal" aria-label="Galeria zdjęć wpisu" tabindex="0">
