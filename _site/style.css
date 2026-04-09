@@ -1162,6 +1162,14 @@ a:hover {
   line-height: 1.7;
   margin-bottom: var(--space-3);
 }
+.article-card__content p.article-card__subheading {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-base);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+}
 .article-card__content ul {
   list-style: none;
   padding: 0;
