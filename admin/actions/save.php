@@ -629,9 +629,16 @@ function ensureVideoColumns(PDO $db): void {
     ];
 
     foreach ($columns as $columnName => $ddl) {
-        $stmt = $db->prepare('SHOW COLUMNS FROM entries LIKE ?');
+        $stmt = $db->prepare(
+            "SELECT COUNT(*) 
+             FROM information_schema.COLUMNS 
+             WHERE TABLE_SCHEMA = DATABASE() 
+               AND TABLE_NAME = 'entries' 
+               AND COLUMN_NAME = ?"
+        );
         $stmt->execute([$columnName]);
-        if (!$stmt->fetch()) {
+        $exists = (int)$stmt->fetchColumn() > 0;
+        if (!$exists) {
             $db->exec($ddl);
         }
     }
