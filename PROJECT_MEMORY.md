@@ -174,6 +174,10 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - `article:published_time`
   - `article:modified_time`
 - Jesli w innych artykulach jest stosowane `article:author`, utrzymujemy ten sam wzorzec.
+- Zasada dat:
+  - `datePublished`/`article:published_time` = faktyczna data publikacji na stronie (nie data napisania draftu).
+  - `dateModified`/`article:modified_time` = data ostatniej istotnej aktualizacji merytorycznej.
+  - Przy pierwszej publikacji oba pola moga byc takie same.
 
 ## SEO strony glownej i stron zbiorczych
 
