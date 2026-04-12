@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         verifyCsrf();
         
         $syncedCalCount = calendarRebuild($db);
+        $orphanRemovedCount = getLastOrphanCleanupCount();
         $syncedSitemapCount = sitemapRebuild($db);
         
         $synced = true;
@@ -63,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $stats[] = "✓ Zsynchronizowano pomyślnie:";
         $stats[] = "— Kalendarz: $syncedCalCount dni (w pliku: $finalCalCount)";
+        $stats[] = "— Cleanup osieroconych stron dnia: usunięto $orphanRemovedCount";
         $stats[] = "— Sitemap: $syncedSitemapCount adresów (w pliku: $verifySitemapCount)";
         
         // Twarda walidacja niespójności

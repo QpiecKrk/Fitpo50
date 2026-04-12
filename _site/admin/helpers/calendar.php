@@ -60,6 +60,63 @@ function regenerateDayPage(PDO $db, string $date): void {
 }
 
 /**
+ * Usuwa osierocone strony dnia: sukcesy/YYYY-MM-DD.html,
+ * które nie mają już odpowiadającej daty wpisu published w bazie.
+ *
+ * @param array<int,string> $publishedDates
+ */
+function cleanupOrphanedDayPages(array $publishedDates): int {
+    $dir = SITE_ROOT . 'sukcesy/';
+    if (!is_dir($dir)) {
+        return 0;
+    }
+
+    $publishedMap = [];
+    foreach ($publishedDates as $date) {
+        if (is_string($date) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+            $publishedMap[$date] = true;
+        }
+    }
+
+    $files = glob($dir . '*.html');
+    if ($files === false) {
+        return 0;
+    }
+
+    $removed = 0;
+    foreach ($files as $filePath) {
+        $baseName = basename($filePath);
+        if (!preg_match('/^(\d{4}-\d{2}-\d{2})\.html$/', $baseName, $m)) {
+            continue;
+        }
+        $fileDate = $m[1];
+        if (!isset($publishedMap[$fileDate]) && is_file($filePath)) {
+            if (@unlink($filePath)) {
+                $removed++;
+            }
+        }
+    }
+
+    return $removed;
+}
+
+/**
+ * Zapamiętuje liczbę osieroconych stron dnia usuniętych
+ * podczas ostatniego przebudowania kalendarza.
+ */
+function setLastOrphanCleanupCount(int $count): void {
+    $GLOBALS['fitpo50_last_orphan_cleanup_count'] = max(0, $count);
+}
+
+/**
+ * Zwraca liczbę osieroconych stron dnia usuniętych
+ * podczas ostatniego przebudowania kalendarza.
+ */
+function getLastOrphanCleanupCount(): int {
+    return (int)($GLOBALS['fitpo50_last_orphan_cleanup_count'] ?? 0);
+}
+
+/**
  * Przebudowuje const userEntries w moje-sukcesy.html
  * bezpośrednio z bazy danych z atomowym zapisem i weryfikacją.
  */
@@ -72,10 +129,14 @@ function calendarRebuild(PDO $db): int {
     // 1. Pobierz wszystkie opublikowane daty
     $stmt = $db->query(
         "SELECT DISTINCT entry_date FROM entries
-         WHERE status = 'published'
+         WHERE status = 'published' AND entry_date IS NOT NULL
          ORDER BY entry_date DESC"
     );
     $dates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    // 1a. Usuń osierocone strony dnia, które nie mają już wpisów published.
+    $orphanRemovedCount = cleanupOrphanedDayPages($dates);
+    setLastOrphanCleanupCount($orphanRemovedCount);
 
     // 2. Zbuduj tablicę wpisów
     $items = [];
