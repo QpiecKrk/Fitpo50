@@ -489,3 +489,16 @@ Jesli artykul ma obrazy:
 - Przy commitach produkcyjnych nie mieszamy plikow agenta i pamieci narzedzi:
   - pomijamy `.agent/*`, `.brainsync/*`, `.cursor/*`, `.windsurfrules`,
   - commitujemy tylko pliki z realna logika/aplikacja.
+
+## Ustalenia krytyczne 2026-04-12 (Publikacja artykulow)
+
+- **BEZWZGLEDNIE**: kazdy nowy artykul i aktualizacja artykulu musi byc wykonana z zachowaniem kolejnosci i standardu:
+  - `SEO -> AEO -> GEO -> AIO`.
+- **BEZWZGLEDNIE**: w kazdym artykule musza byc zastosowane wyroznienia wizualne:
+  - pogrubienia (`<strong>`),
+  - italiki (`<em>`),
+  - kolorowe akcenty tekstowe (np. klasy tonalne/callouty).
+- **BEZWZGLEDNIE**: artykuly maja wygladac atrakcyjnie wizualnie, z celowym roznicowaniem typografii:
+  - rozne wielkosci czcionek (naglowki, akcenty, leady, callouty),
+  - rozne rodzaje czcionek (co najmniej font display + font body) w ramach wzorca projektu.
+- Powyzsze zasady sa nadrzedne wobec starszego zapisu o "umiarkowanych wyroznieniach" i stosujemy je globalnie dla wszystkich artykulow.
