@@ -16,16 +16,9 @@ $entry = $stmt->fetch();
 if (!$entry) { header('Location: ../dashboard.php'); exit; }
 
 try {
-    // Generuj HTML artykułu
-    $mediaRows = $db->prepare('SELECT * FROM media WHERE entry_id = ? ORDER BY sort_order, id');
-    $mediaRows->execute([$id]);
-    $entryMedia = $mediaRows->fetchAll();
-
-    ob_start();
-    require ADMIN_ROOT . 'templates/article.php';
-    $articleHtml = ob_get_clean();
-    $htmlFile = $entry['slug'] . '.html';
-    file_put_contents(SITE_ROOT . $htmlFile, $articleHtml);
+    // Dla "Moje Sukcesy" publikacja wskazuje stronę dnia, bez tworzenia osobnego slug.html.
+    cleanupLegacyStandaloneHtml($entry['html_file'] ?? null);
+    $htmlFile = buildDayHtmlPath((string)$entry['entry_date']);
 
     // Zaktualizuj status w bazie
     $db->prepare('UPDATE entries SET html_file=?, published_at=NOW(), status=? WHERE id=?')
@@ -42,3 +35,17 @@ try {
 
 header('Location: ../dashboard.php');
 exit;
+
+function buildDayHtmlPath(string $entryDate): string {
+    return 'sukcesy/' . $entryDate . '.html';
+}
+
+function cleanupLegacyStandaloneHtml(?string $htmlFile): void {
+    if (!$htmlFile) return;
+    if (str_starts_with($htmlFile, 'sukcesy/')) return;
+    if (!str_ends_with($htmlFile, '.html')) return;
+    $path = SITE_ROOT . $htmlFile;
+    if (is_file($path)) {
+        @unlink($path);
+    }
+}

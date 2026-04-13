@@ -87,8 +87,10 @@ try {
         // Jeśli publikacja cofnięta — usuń plik HTML artykułu
         if ($oldEntry['status'] === 'published' && $status !== 'published') {
             if (!empty($oldEntry['html_file'])) {
-                $p = SITE_ROOT . $oldEntry['html_file'];
-                if (file_exists($p)) @unlink($p);
+                if (!isSharedDayHtmlFile($oldEntry['html_file'])) {
+                    $p = SITE_ROOT . $oldEntry['html_file'];
+                    if (file_exists($p)) @unlink($p);
+                }
             }
             $db->prepare('UPDATE entries SET html_file=NULL, published_at=NULL WHERE id=?')->execute([$id]);
         }
@@ -183,17 +185,12 @@ try {
     // Upload nowych mediów
     if (!empty($_FILES['media_files']['name'][0])) handleUploads($db, $id);
 
-    // Generuj HTML artykułu jeśli published
+    // Dla "Moje Sukcesy" zapisujemy link do strony dnia (bez tworzenia osobnego slug.html)
     if ($status === 'published') {
-        $entryRow = $db->prepare('SELECT * FROM entries WHERE id=?');
-        $entryRow->execute([$id]);
-        $entryData = $entryRow->fetch();
-
-        $mediaRows = $db->prepare('SELECT * FROM media WHERE entry_id=? ORDER BY sort_order,id');
-        $mediaRows->execute([$id]);
-        $entryMedia = $mediaRows->fetchAll();
-
-        $htmlFile = generateArticleHtml($entryData, $entryMedia);
+        if ($id && isset($oldEntry['html_file'])) {
+            cleanupLegacyStandaloneHtml($oldEntry['html_file']);
+        }
+        $htmlFile = buildDayHtmlPath($entry_date);
         $db->prepare('UPDATE entries SET html_file=?,published_at=NOW() WHERE id=?')->execute([$htmlFile, $id]);
         $affectedDates[] = $entry_date;
     }
@@ -340,13 +337,22 @@ function processAndSaveImageVariants(string $sourcePath, string $baseName, strin
     return $generated;
 }
 
-function generateArticleHtml(array $entry, array $media): string {
-    ob_start();
-    require ADMIN_ROOT . 'templates/article.php';
-    $html = ob_get_clean();
-    $filename = $entry['slug'] . '.html';
-    file_put_contents(SITE_ROOT . $filename, $html);
-    return $filename;
+function buildDayHtmlPath(string $entryDate): string {
+    return 'sukcesy/' . $entryDate . '.html';
+}
+
+function cleanupLegacyStandaloneHtml(?string $htmlFile): void {
+    if (!$htmlFile) return;
+    if (str_starts_with($htmlFile, 'sukcesy/')) return;
+    if (!str_ends_with($htmlFile, '.html')) return;
+    $path = SITE_ROOT . $htmlFile;
+    if (is_file($path)) {
+        @unlink($path);
+    }
+}
+
+function isSharedDayHtmlFile(?string $htmlFile): bool {
+    return is_string($htmlFile) && preg_match('#^sukcesy/\d{4}-\d{2}-\d{2}\.html$#', $htmlFile) === 1;
 }
 
 /**

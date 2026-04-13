@@ -21,8 +21,10 @@ try {
 
     // 1. Usuń plik HTML artykułu
     if (!empty($entry['html_file'])) {
-        $path = SITE_ROOT . $entry['html_file'];
-        if (file_exists($path)) @unlink($path);
+        if (!isSharedDayHtmlFile($entry['html_file'])) {
+            $path = SITE_ROOT . $entry['html_file'];
+            if (file_exists($path)) @unlink($path);
+        }
     }
 
     // 2. Usuń media (orphan cleanup)
@@ -52,3 +54,7 @@ try {
 
 header('Location: ../dashboard.php');
 exit;
+
+function isSharedDayHtmlFile(?string $htmlFile): bool {
+    return is_string($htmlFile) && preg_match('#^sukcesy/\d{4}-\d{2}-\d{2}\.html$#', $htmlFile) === 1;
+}
