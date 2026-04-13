@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://fitpo50.pl/assets/powrot-do-formy-po-50-hero.png">
 <meta property="og:locale" content="pl_PL">
 <meta property="article:published_time" content="2026-04-12">
-<meta property="article:modified_time" content="2026-04-12">
+<meta property="article:modified_time" content="2026-04-13">
 <meta property="article:author" content="FitPo50">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Powrót do formy po 50-tce — kompletny przewodnik od kanapy do siłowni">
@@ -42,7 +42,7 @@
   "url": "https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html",
   "image": "https://fitpo50.pl/assets/powrot-do-formy-po-50-hero.png",
   "datePublished": "2026-04-12",
-  "dateModified": "2026-04-12",
+  "dateModified": "2026-04-13",
   "keywords": [
     "powrót do formy po 50",
     "siłownia po 50",
@@ -142,6 +142,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css?v=3.1">
@@ -206,15 +207,17 @@
   position: absolute;
   bottom: 8%;
   left: 4%;
-  background: rgba(0, 0, 0, 0.72);
+  background: linear-gradient(135deg, rgba(16, 60, 33, 0.86), rgba(13, 44, 86, 0.8));
   backdrop-filter: blur(4px);
   color: white;
   padding: var(--space-4) var(--space-6);
-  border-left: 6px solid var(--color-accent);
-  font-family: var(--font-display);
+  border-left: 6px solid #f59f00;
+  font-family: "Caveat", cursive;
   font-size: clamp(1rem, 2.4vw, 1.6rem);
   font-weight: 700;
+  letter-spacing: 0.01em;
   max-width: 88%;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
 }
 
 .article-content {
@@ -250,6 +253,70 @@
   height: 3px;
   background-color: var(--color-accent);
   border-radius: 2px;
+}
+
+.article-content h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  line-height: 1.3;
+  color: #1f7a3b;
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+  border-left: 4px solid rgba(31, 122, 59, 0.28);
+  padding-left: 10px;
+}
+
+.article-content > h3:nth-of-type(3n+1) {
+  color: #1f7a3b;
+  border-left-color: rgba(31, 122, 59, 0.35);
+}
+
+.article-content > h3:nth-of-type(3n+2) {
+  color: #cf5f00;
+  border-left-color: rgba(207, 95, 0, 0.35);
+}
+
+.article-content > h3:nth-of-type(3n+3) {
+  color: #0f5f9a;
+  border-left-color: rgba(15, 95, 154, 0.35);
+}
+
+.article-content p,
+.article-content li {
+  font-family: "Work Sans", sans-serif;
+}
+
+.article-content p {
+  color: #2b3038;
+}
+
+.article-content ul li::marker {
+  color: #1f7a3b;
+}
+
+.article-content ol li::marker {
+  color: #d46b08;
+  font-weight: 700;
+}
+
+.article-content li {
+  line-height: 1.82;
+  margin-bottom: 0.34rem;
+}
+
+.article-content li strong {
+  color: #1b4f8c;
+}
+
+.article-content h2 + p {
+  background: linear-gradient(180deg, #f6fbff 0%, #ffffff 100%);
+  border: 1px solid #d7e7f7;
+  border-left: 5px solid #0f5f9a;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 1.12rem;
+  line-height: 1.72;
+  color: #223040;
 }
 
 .drop-cap::first-letter {
@@ -309,33 +376,39 @@
   border: 1px solid #f3d9b7;
   border-left: 4px solid var(--color-accent);
   border-radius: var(--radius-md);
-  background: #fff6eb;
+  background: linear-gradient(180deg, #fff8ee 0%, #fff2df 100%);
   padding: var(--space-5);
+  box-shadow: 0 10px 24px rgba(212, 107, 8, 0.08);
 }
 
 .highlight-box--primary {
-  background: #edf5ff;
+  background: linear-gradient(180deg, #f2f8ff 0%, #e6f1ff 100%);
   border: 1px solid #c9dfff;
   border-left-color: var(--color-primary);
+  box-shadow: 0 10px 24px rgba(15, 95, 154, 0.1);
 }
 
 .highlight-box--success {
-  background: #eefaf5;
+  background: linear-gradient(180deg, #f1fbf6 0%, #e2f5ec 100%);
   border: 1px solid #cbeadf;
   border-left-color: #1e8f64;
+  box-shadow: 0 10px 24px rgba(30, 143, 100, 0.1);
 }
 
 .highlight-box h3 {
   margin: 0 0 var(--space-3) 0;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: var(--color-text);
+  letter-spacing: 0.01em;
 }
 
 .info-source {
   margin-top: var(--space-3);
-  font-size: 0.9rem;
+  font-size: 1.08rem;
   color: var(--color-text-muted);
-  font-style: italic;
+  font-family: "Caveat", cursive;
+  font-style: normal;
+  letter-spacing: 0.02em;
 }
 
 .qa-grid {
@@ -348,6 +421,11 @@
   border-radius: var(--radius-md);
   background: #fff;
   padding: var(--space-5);
+  box-shadow: 0 6px 16px rgba(26, 36, 51, 0.06);
+}
+
+.qa-card:nth-child(odd) {
+  background: #f9fcff;
 }
 
 .qa-card h3 {
@@ -382,15 +460,27 @@
 }
 
 .article-quote {
-  background: var(--color-surface);
+  background: linear-gradient(135deg, #f3fbf5 0%, #fff5e8 100%);
   border-left: 4px solid var(--color-accent);
   padding: var(--space-6) var(--space-8);
   margin: var(--space-10) 0;
-  font-style: italic;
+  font-style: normal;
   font-size: 1.32rem;
   color: var(--color-text);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   font-family: var(--font-display);
+}
+
+.article-quote p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.article-quote strong {
+  font-family: "Caveat", cursive;
+  font-size: clamp(1.45rem, 2.8vw, 2rem);
+  color: #cf5f00;
+  letter-spacing: 0.02em;
 }
 
 .sources-list {
@@ -500,18 +590,37 @@
     </div>
 
     <article class="article-content">
-      <p class="drop-cap">Hej, mówię Wam szczerze — kiedy skończyłem 50 lat i wyjrzałem w lustro, nie byłem z siebie za bardzo dumny. Kilogramy się zebrały, kondycja gdzieś uciekła, wchodzenie po schodach bez zadyszki stało się marzeniem, a założenie skarpetki na stojąco na jednej nodze — porażką. Znacie to uczucie? Spoko, jesteście w dobrym miejscu. Właśnie dlatego napisałem ten artykuł — żebyś wiedział dokładnie, jak ruszyć tyłek i zacząć. Bez głupich błędów, bez kontuzji i bez obciachu. Zrobię to razem z Tobą, krok po kroku.</p>
+      <p class="drop-cap">Hej, mówię Wam szczerze – kiedy skończyłem 50 lat i wyjrzałem w lustro, nie byłem z siebie za bardzo dumny. Kilogramy się zebrały, kondycja gdzieś uciekła, wchodzenie po schodach bez zadyszki stało się marzeniem, a założenie skarpetki na stojąco na jednej nodze to porażka. Znacie to uczucie? Spoko, jesteście w dobrym miejscu. Właśnie dlatego napisałem ten artykuł – żebyś wiedział dokładnie, jak ruszyć tyłek i zacząć, bez głupich błędów, bez kontuzji i bez obciachu. Zrobię to razem z Tobą, krok po kroku. Czytaj dalej, bo to może być najlepsze, co zrobisz dla siebie w tym roku.</p>
 
-      <h2><span class="krok-badge">KROK 0</span>Twoje ciało po 50-tce — co się naprawdę zmienia (i dlaczego zasady gry są inne niż w młodości)</h2>
-      <p>Zanim pójdziemy dalej, muszę Ci powiedzieć jedną ważną rzecz. Nie dlatego, żeby Cię przestraszyć — wręcz przeciwnie. Dlatego, że jak rozumiesz, co się dzieje z Twoim ciałem po pięćdziesiątce, to przestajesz się na siebie złościć i zaczynasz działać mądrze. Więc — co się właściwie zmienia? Po pierwsze: <strong class="tone-accent">sarkopenia</strong>. Twoje mięśnie zaczynają znikać już po 30-tce, po cichu, 3–8% masy mięśniowej na dekadę. Po 50-tce tempo utraty przyspiesza. Nie dlatego, że jesteś leniwy — to normalna fizjologia. Ciało po prostu potrzebuje coraz silniejszego bodźca, żeby utrzymać mięśnie. Bez treningu mięśnie topnieją i zastępuje je tkanka tłuszczowa.</p>
-      <p>Po drugie: <strong class="tone-primary">hormony</strong>. Testosteron u mężczyzn spada o około 1% rocznie już od 30-tki — łącznie to potrafi zrobić różnicę. U kobiet menopauza radykalnie zmienia gospodarkę estrogenową, co wpływa na mięśnie, kości i metabolizm. Po trzecie: <strong class="tone-accent">regeneracja trwa dłużej</strong>. W 25 latach wchodziłeś na siłownię co drugi dzień i czułeś się świetnie. Po 50-tce mięśnie i ścięgna potrzebują więcej czasu na odbudowę — i to nie słabość, to biologia. Stawy mają mniej mazi stawowej, chrząstki są mniej elastyczne. Dlatego właśnie w tym przewodniku mówię: zaczynaj od mniejszych ciężarów, daj sobie więcej czasu na regenerację i nigdy nie pomijaj rozgrzewki. To nie przesada — to szanowanie własnego mechanizmu.</p>
-      <p><strong class="tone-strong">🧠 Dobra wiadomość na koniec tego rozdziału:</strong> Twoje ciało nadal doskonale adaptuje się do treningu — w każdym wieku. Badania pokazują, że osoby 65–90-letnie, które zaczęły regularnie ćwiczyć siłowo, zwiększyły siłę o ponad 170% w ciągu 10 tygodni. Tak. Sto siedemdziesiąt procent. Ciało w każdym wieku czeka na impuls. Ty jesteś tym impulsem.</p>
+      <h2><span class="krok-badge">KROK 1</span>MOTYWACJA – CZYLI DLACZEGO W OGÓLE MAM TO ROBIĆ?</h2>
+      <p>Zacznijmy od najważniejszej rzeczy – od głowy. Bo wiesz co? Możesz mieć najlepszy plan treningowy na świecie, najdroższe buty i karnet w wypasionej siłowni w mieście, ale jeśli nie masz mocnego DLACZEGO – to i tak odpuścisz po tygodniu.</p>
+
+      <h3>Znajdź swoje własne DLACZEGO</h3>
+      <p>Siądź sobie spokojnie, weź kawę (bez cukru, ale do tego dojdziemy) i napisz na kartce lub w telefonie, dlaczego chcesz wrócić do formy. Nie pisz 'bo powinienem' – to za mało. Pisz konkretnie:</p>
+      <ul>
+        <li>Chcę bawić się z wnukami bez zadyszki</li>
+        <li>Chcę znowu wejść w te spodnie, co leżą od 3 lat na półce</li>
+        <li>Chcę żyć dłużej i zdrowiej – mam plany i nie zamierzam rezygnować</li>
+        <li>Chcę czuć się dobrze we własnej skórze, kiedy wchodzę na plażę</li>
+        <li>Chcę mieć energię wieczorami, a nie padać o 20:00</li>
+      </ul>
+      <p>To są PRAWDZIWE powody. I wiesz co? Mówię Ci – zapisz to i wróć do tej kartki za każdym razem, kiedy nie będzie Ci się chciało wyjść z domu.</p>
+
+      <h3>Zmień nastawienie – to nie kara, to nagroda</h3>
+      <p>Wiem, wiem – siłownia brzmi jak tortura. Ale posłuchaj: każdy trening to coś, co DAJESZ swojemu ciału, nie coś, co mu ZABIERASZ. To inwestycja, nie poświęcenie. Po 50-tce aktywność fizyczna to nie fanaberia – to konieczność, żeby cieszyć się życiem w pełni.</p>
+
+      <div class="highlight-box highlight-box--success">
+        <p>✅ Badania pokazują, że już kilka tygodni regularnego treningu radykalnie poprawia samopoczucie, jakość snu i poziom energii. To coś, co poczujesz na własnej skórze naprawdę szybko.</p>
+      </div>
+
+      <h3>Ustaw cel realistycznie – bez szaleństw na start</h3>
+      <p>Mówię Wam wprost: nie będziesz wyglądał jak Stallone po 3 miesiącach. Ale za to po 3 miesiącach możesz wejść bez zadyszki na 4. piętro, wstać rano bez bólu pleców i poczuć, że żyjesz, a nie tylko egzystujesz. To jest właśnie prawdziwy cel na start. Małe cele, wielkie zmiany.</p>
 
       <figure class="inline-figure reveal">
         <picture>
           <source srcset="./assets/powrot-do-formy-s1.avif" type="image/avif">
           <source srcset="./assets/powrot-do-formy-s1.webp" type="image/webp">
-          <img src="./assets/powrot-do-formy-s1.png" alt="Kolorowa, zabawna infografika pokazująca ciało 50-latka — po lewej smutny schemat z &quot;efektami czasu&quot;, po prawej ten sam schemat z mięśniami po treningu, styl komiksowy" loading="lazy" width="2400" height="1792">
+          <img src="./assets/powrot-do-formy-s1.png" alt="Infografika zmian po 50-tce i efektów treningu" loading="lazy" width="2400" height="1792">
         </picture>
       </figure>
 
@@ -519,175 +628,446 @@
         <picture>
           <source srcset="./assets/powrot-do-formy-extra1.avif" type="image/avif">
           <source srcset="./assets/powrot-do-formy-extra1.webp" type="image/webp">
-          <img src="./assets/powrot-do-formy-extra1.png" alt="Zabawna ilustracja: animowany mięsień bicepsa siedzący smutno na ławce, zauważający swój zanik" loading="lazy" width="2048" height="2048">
+          <img src="./assets/powrot-do-formy-extra1.png" alt="Ilustracja motywacyjna dotycząca powrotu do formy po 50-tce" loading="lazy" width="2048" height="2048">
         </picture>
       </figure>
 
-      <div class="highlight-box">
-        <h3>Fakt naukowy</h3>
-        <p>Tracimy <strong>3–8% masy mięśniowej na dekadę</strong> po 30-tce. Po 50-tce tempo przyspiesza. Ale badania Harvard pokazują: osoby w wieku 65–90 lat zwiększyły siłę o <strong>ponad 170%</strong> po 10 tygodniach treningu siłowego. Nigdy nie jest za późno.</p>
-        <div class="info-source">Fiatarone MA et al., JAMA 1990 / Journal of Cachexia, Sarcopenia and Muscle 2023</div>
-      </div>
+      <h2><span class="krok-badge">KROK 2</span>NAJPIERW BADANIA – BEZ TEGO ANI RUSZ!</h2>
+      <p>Słuchajcie – i tu jestem z Wami absolutnie poważny. Zanim zrobisz pierwszy wykrok na siłownię, MUSISZ pójść do lekarza. Wiem, że to ostatnia rzecz, na którą masz ochotę, ale to podstawa i absolutnie nie wolno tego pomijać. Po 50-tce organizm nie jest taki sam jak w 20-tce, i to jest fakt. Są jakieś programy w Centrach Medycznych specjalnie pod sport. Koszt nie przewyższa kupna nowej koszulki.</p>
 
-      <h2><span class="krok-badge">KROK 1–2</span>Motywacja i badania — zanim wejdziesz na salę, zajrzyj do głowy i do lekarza</h2>
-      <p>Zacznijmy od najważniejszej rzeczy — od głowy. Bo wiesz co? Możesz mieć najlepszy plan treningowy na świecie, najdroższe buty i karnet w najtrendowniejszej siłowni w mieście. Ale jeśli nie masz mocnego <strong class="tone-primary">DLACZEGO</strong> — to i tak odpuścisz po tygodniu. Siądź sobie spokojnie, weź kawę i napisz na kartce lub w telefonie, dlaczego chcesz wrócić do formy. Nie pisz "bo powinienem" — to za mało. Pisz konkretnie: chcę bawić się z wnukami bez zadyszki, chcę znowu wejść w te spodnie co leżą od 3 lat na półce, chcę mieć energię wieczorami, a nie padać o 20:00. Wróć do tej kartki za każdym razem, kiedy nie będzie Ci się chciało wychodzić z domu. Działa.</p>
-      <p>Zanim jednak wyjdziesz z domu w kierunku siłowni — najpierw idź do lekarza. Mówię poważnie, bez żartów. Po 50-tce organizm nie jest taki sam jak w 20-tce, i to jest fakt. Absolutne minimum to: morfologia, glukoza na czczo, profil lipidowy, TSH (tarczyca kradnie energię i mało kto o tym wie!), EKG spoczynkowe i pomiar ciśnienia. Jeśli masz historię chorób serca w rodzinie — poproś o EKG wysiłkowe. Jeśli bolą kolana lub plecy — ortopeda albo fizjoterapeuta przed siłownią, nie po kontuzji. Powiedz lekarzowi wprost, że planujesz regularny trening siłowy — sam dobierze badania do Twojej sytuacji. Koszt pakietu badań nie przewyższa kupna nowej koszulki treningowej.</p>
-      <p><strong class="tone-strong">🔍 Mit vs. rzeczywistość: "Jestem zdrowy, po co mi badania?"</strong> Nadciśnienie przez lata nie daje żadnych objawów. Wysoki cukier też. Niedoczynność tarczycy sprawia, że czujesz się zmęczony i myślisz, że to lenistwo. Wiele osób dowiedziało się o tych problemach właśnie przy okazji badań przed rozpoczęciem treningu. Lepiej wiedzieć PRZED niż dowiedzieć się na bieżni.</p>
+      <h3>Dlaczego badania są obowiązkowe?</h3>
+      <p>Serce i układ krążenia są szczególnie narażone podczas wysiłku fizycznego po długiej przerwie. Niektórzy uważają się za zdrowych, a potem okazuje się, że mają nadciśnienie, które wcześniej nie dawało objawów, albo poziom cukru jest za wysoki, co zmienia dobór ćwiczeń. Lepiej to wiedzieć PRZED niż dowiedzieć się na bieżni.</p>
+
+      <h3>Lista badań, które musisz zrobić</h3>
+      <p><strong class="tone-accent">Badania podstawowe (absolutne minimum):</strong></p>
+      <ul>
+        <li>Morfologia krwi z rozmazem – żebyś wiedział, czy nie masz anemii, stanów zapalnych, problemów z krwią</li>
+        <li>Glukoza na czczo – wykrycie cukrzycy lub stanu przedcukrzycowego, co zmienia plan treningowy</li>
+        <li>Profil lipidowy (cholesterol, HDL, LDL, trójglicerydy) – ważny dla zdrowia serca</li>
+        <li>Kwas moczowy – jeśli miewałeś bóle stawów, to obowiązkowe</li>
+        <li>TSH (tarczyca) – niedoczynność tarczycy to złodziej energii, sprawdź koniecznie</li>
+        <li>Badanie moczu ogólne – kontrola nerek i dróg moczowych</li>
+        <li>Ciśnienie tętnicze – zmierz i powtarzaj regularnie</li>
+      </ul>
+
+      <p><strong class="tone-accent">Badania serca – bardzo ważne po 50-tce:</strong></p>
+      <ul>
+        <li>EKG spoczynkowe – podstawowe badanie serca, koniecznie przed intensywnym treningiem</li>
+        <li>EKG wysiłkowe (test na bieżni) – jeśli lekarz zdecyduje, że jest wskazany – pozwala sprawdzić serce pod obciążeniem</li>
+        <li>ECHO serca – jeśli masz historię chorób serca w rodzinie lub podwyższone ciśnienie</li>
+      </ul>
+
+      <p><strong class="tone-accent">Układ ruchu – szczególnie jeśli bolą stawy:</strong></p>
+      <ul>
+        <li>Konsultacja ortopedyczna – jeśli masz bóle kolan, bioder, kręgosłupa, to obowiązek</li>
+        <li>USG stawów – sprawdzenie stanu chrząstek, więzadeł, łąkotek</li>
+        <li>Ocena postawy i zakresu ruchomości – najlepiej u fizjoterapeuty</li>
+      </ul>
+
+      <p><strong class="tone-accent">Dodatkowe – dla kompletnego obrazu:</strong></p>
+      <ul>
+        <li>Hormony (testosteron u mężczyzn, estrogen u kobiet) – po 50-tce hormony mocno wpływają na efekty treningowe</li>
+        <li>Witamina D3 – niedobory są bardzo powszechne i wpływają na mięśnie i kości</li>
+        <li>Magnez i żelazo – przy zmęczeniu i skurczach</li>
+      </ul>
+
+      <div class="highlight-box highlight-box--success">
+        <p>✅ Powiedz lekarzowi, że planujesz zacząć regularnie trenować na siłowni – on sam zaproponuje odpowiednie badania do Twojej sytuacji.</p>
+        <p><strong class="tone-accent">⚠️ Nie lekceważ wyników!</strong> Jeśli cokolwiek odbiega od normy, skonsultuj z lekarzem, jak dostosować trening. To nie jest koniec świata – to tylko punkt startowy.</p>
+      </div>
 
       <figure class="inline-figure reveal">
         <picture>
           <source srcset="./assets/powrot-do-formy-s2.avif" type="image/avif">
           <source srcset="./assets/powrot-do-formy-s2.webp" type="image/webp">
-          <img src="./assets/powrot-do-formy-s2.png" alt="Zabawna grafika: po lewej rozczochrana postać na kanapie z pilotem i chipsy, po prawej ta sama postać — pewna siebie, w stroju sportowym, na siłowni; styl flat design, żywe kolory" loading="lazy" width="2400" height="1792">
+          <img src="./assets/powrot-do-formy-s2.png" alt="Przejście z kanapy do aktywności" loading="lazy" width="2400" height="1792">
         </picture>
       </figure>
 
-      <div class="highlight-box highlight-box--primary">
-        <h3>Minimum przed startem</h3>
-        <p><strong>Minimalna lista badań przed treningiem:</strong> morfologia, glukoza, profil lipidowy, TSH, EKG spoczynkowe, ciśnienie tętnicze. Opcjonalnie: EKG wysiłkowe, witamina D3, testosteron/estrogen. <strong>Koszt: mniej niż nowa para butów treningowych.</strong></p>
-        <div class="info-source">Rekomendacje własne / konsultacja z lekarzem rodzinnym</div>
+      <h2><span class="krok-badge">KROK 3</span>ZAKUPY – ZAINWESTUJ W SIEBIE, BO TO SIĘ OPŁACA!</h2>
+      <p>A teraz coś, co lubię najbardziej – zakupy! I mówię Wam – to nie jest błahostka. Kiedy zakładasz porządny strój, w którym dobrze wyglądasz i dobrze się czujesz, to zupełnie inaczej idziesz na trening. To psychologia, nie wymówka. Dobry sprzęt też naprawdę pomaga.</p>
+
+      <h3>👜 BUTY – nie oszczędzaj!</h3>
+      <p>Mówię Wam serio – buty to ważna inwestycja. Po 50-tce stawy są wrażliwsze i zła amortyzacja to prosta droga do kontuzji. Nie kupuj 'czegoś z szafy' ani przypadkowych trampek. Buty treningowe to osobna kategoria – zaprojektowana właśnie do tego.</p>
+
+      <h3>Jakie buty wybrać na siłownię?</h3>
+      <p>Wszystko zależy od tego, co będziesz robić:</p>
+      <p><strong>Do treningu siłowego (maszyny, wolne ciężary):</strong> Potrzebujesz butów z PŁASKĄ, TWARDĄ podeszwą i dobrą stabilizacją boczną. Dobra amortyzacja tu nie pomaga – wręcz przeszkadza, bo odbiera czucie gruntu przy podnoszeniu ciężarów. Szukaj modeli: Nike Metcon, adidas Powerlift, Reebok Nano, New Balance Minimus – to bestsellerowe modele do siłowni. Ja uwielbiam buty płaskie, bez dropa, więc Nike Free Run dla mnie są idealne. Najczęściej widzę ludzi jednak w Metconach.</p>
+      <p><strong>Do cardio (bieżnia, orbitrek, rower):</strong> Tu potrzebujesz dobrej AMORTYZACJI, żeby chronić kolana i biodra. Sprawdzą się: Nike Air, Asics Gel, adidas Cloudfoam, New Balance Fresh Foam. Te technologie realnie chronią stawy – po 50-tce to nie jest luksus, to konieczność.</p>
+      <p><strong>Uniwersalne (i siłownia, i cardio):</strong> Najlepszy wybór na start to buty do treningu ogólnego, które sprawdzą się w obu sytuacjach. Polecam: Nike Free Metcon, Under Armour TriBase, New Balance 608.</p>
+
+      <div class="highlight-box highlight-box--success">
+        <p>✅ Idź do sklepu i PRZYMIERZ buty z tymi samymi skarpetami, w których będziesz trenować. Nigdy nie kupuj butów sportowych online bez wcześniejszego sprawdzenia rozmiaru w sklepie stacjonarnym! Uwaga, skarpety też ważne. Najlepiej kupić jakieś do biegania, będą ok do wszystkiego na siłowni.</p>
       </div>
 
-      <h2><span class="krok-badge">KROK 3–5</span>Zakupy, siłownia i trener — inwestycja, która procentuje</h2>
-      <p>Zanim zaczniesz narzekać, że to dużo wydatków — posłuchaj. Na start możesz się wyposażyć za <strong>400–700 zł</strong> i mieć wszystko, czego potrzebujesz. Kluczowe są dwie rzeczy: buty i jeden porządny strój. Buty to nie fanaberia — po 50-tce stawy są wrażliwsze i zła amortyzacja to prosta droga do kontuzji. Do treningu siłowego potrzebujesz płaskiej, twardej podeszwy (Nike Metcon, Reebok Nano, adidas Powerlift — ja sam uwielbiam Nike Free Run za zerowy drop). Do cardio — dobra amortyzacja (Nike Air, Asics Gel, New Balance Fresh Foam). Nigdy nie kupuj butów biegowych do podnoszenia ciężarów — zbyt miękka podeszwa przy martwym ciągu to proszenie się o kłopoty. Do odzieży: zapomnij o starej bawełnianej koszulce — moknie i przykleja się do ciała. Szukaj materiałów Dri-FIT, Climalite lub HeatGear. 4F to polska marka, solidna i przyzwoita cenowo.</p>
-      <p>Przy wyborze siłowni — jedna żelazna zasada: <strong class="tone-accent">siłownia musi być blisko</strong>. Jeśli musisz jechać 30 minut specjalnie po nią, to przy pierwszym zmęczeniu odpuścisz. Odwiedź 2–3 siłownie przed zakupem karnetu — większość oferuje darmowe wejście próbne. Sprawdź czystość, stan maszyn, klimatyzację i atmosferę. Szczególnie ważne dla 50-latka: <strong>zajęcia grupowe</strong> w cenie karnetu. Pilates, body balance, stretching, TRX — to złoto na początku. Trener prowadzi Cię przez ćwiczenia, masz motywację grupy i poznajesz ludzi w podobnym wieku. Zacznij od karnetu miesięcznego, nie rocznego — dopiero po 2–3 miesiącach regularnych wizyt karnet roczny ma sens.</p>
-      <p>I trener personalny — krótka odpowiedź: TAK, szczególnie na początku. Nauczy Cię prawidłowej techniki (kontuzje po 50-tce leczą się długo), ułoży plan pod Twoje schorzenia i cele, i co ważne — pokaże Ci siłownię od środka. Nie musisz chodzić do niego co tydzień. <strong>3–5 sesji wdrożeniowych na start</strong> to absolutne minimum i naprawdę wystarczy do solidnego fundamentu. Jeśli budżet jest napięty, kup gotowy plan (od 100 zł) i wspieraj się Instagramem — jest tam mnóstwo instruktaży technicznych. Na siłowni śmiało wyciągasz telefon i próbujesz odwzorować ćwiczenia. To nie obciach, każdy tak robi.</p>
+      <p><strong class="tone-accent">⚠️ Nie kupuj butów biegowych do treningu siłowego – zbyt miękka podeszwa przy podnoszeniu ciężarów jest niebezpieczna i zwiększa ryzyko kontuzji.</strong></p>
+
+      <h3>👕 ODZIEŻ TRENINGOWA – w czym dobrze się czuć</h3>
+      <p>Zapomnij o starej koszulce od piżamy i dresach z hipermarketu. Serio. Dobra odzież treningowa to nie snobizm – to komfort, który sprawia, że chce Ci się trenować. A kiedy dobrze wyglądasz w lustrze siłowni, masz więcej motywacji. Psychologia działa!</p>
+
+      <h3>Co kupić na start:</h3>
+      <p><strong>KOSZULKI / T-SHIRTY:</strong></p>
+      <ul>
+        <li>Szukaj materiałów z technologią odprowadzania wilgoci (Dri-FIT Nike, Climalite adidas, HeatGear Under Armour)</li>
+        <li>Bawełna NIC – moknie, przykleja się do ciała i jest niekomfortowa przy wysiłku</li>
+        <li>Kolor i krój – Twój wybór. Ważne, żebyś czuł się dobrze i pewnie. Ja mówię: zainwestuj w coś, co naprawdę lubisz</li>
+        <li>Marki: Nike, adidas, Under Armour, Reebok, 4F (polskie, tańsze i bardzo dobre!)</li>
+      </ul>
+
+      <p><strong>SPODNIE / SPODENKI:</strong></p>
+      <ul>
+        <li>Spodnie do ćwiczeń lub spodenki – materiał musi być elastyczny (stretch)</li>
+        <li>Unikaj zwykłych dresów – przemakają, jest za gorąco</li>
+        <li>Leginsy kompresyjne (dla kobiet i mężczyzn!) – świetnie wspierają mięśnie i stawy kolanowe</li>
+        <li>Spodenki do ćwiczeń z materiałem oddychającym – idealne na cardio</li>
+      </ul>
+
+      <p><strong>BIUSTONOSZ SPORTOWY (dla pań – absolutnie obowiązkowy!):</strong></p>
+      <ul>
+        <li>Przy intensywniejszym wysiłku dobry biustonosz sportowy to nie opcja, to konieczność</li>
+        <li>Szukaj modeli z oznaczeniem 'high impact' lub 'medium impact'</li>
+        <li>Polecam: Nike, adidas, Under Armour, Decathlon Domyos</li>
+      </ul>
+
+      <p><strong>SKARPETY – niedoceniane, a bardzo ważne:</strong></p>
+      <ul>
+        <li>Nie trenuj w zwykłych bawełnianych skarpetach – mokną i powodują obtarcia</li>
+        <li>Kupuj skarpety treningowe z technologią odprowadzania wilgoci</li>
+        <li>Dobrze sprawdzają się skarpety Decathlon, Nike Performance, adidas</li>
+      </ul>
+
+      <p><strong>TORBA TRENINGOWA:</strong></p>
+      <ul>
+        <li>Prosta i funkcjonalna – kieszeń na buty, ręcznik, bidon, ubranie na zmianę</li>
+        <li>Marki: adidas, Nike – nie musisz wydawać fortuny, Decathlon ma świetne opcje za grosze</li>
+      </ul>
+
+      <p><strong class="tone-accent">Ile to wszystko kosztuje?</strong><br>Mówię Wam szczerze: na start możesz się wyposażyć za 400-700 zł i mieć wszystko, co potrzebne. Nie musisz kupować wszystkiego naraz od razu. Zacznij od butów i jednej koszulki – reszta poczeka na kolejną wypłatę. Albo odwiedź Decathlon – tam znajdziesz przyzwoite rzeczy w dobrej cenie.</p>
 
       <figure class="inline-figure reveal">
         <picture>
           <source srcset="./assets/powrot-do-formy-s3.avif" type="image/avif">
           <source srcset="./assets/powrot-do-formy-s3.webp" type="image/webp">
-          <img src="./assets/powrot-do-formy-s3.png" alt="Kolorowe, wesołe zdjęcie flatlay: buty treningowe, koszulka sportowa, bidon, słuchawki, rękawice, ręcznik — rozłożone na jasnej podłodze jak gotowy zestaw superbohatera, jasne kolory, widok z góry" loading="lazy" width="2400" height="1792">
+          <img src="./assets/powrot-do-formy-s3.png" alt="Sprzęt i odzież treningowa" loading="lazy" width="2400" height="1792">
         </picture>
       </figure>
 
-      <div class="highlight-box">
-        <h3>Koszty startowe</h3>
-        <p>Orientacyjne koszty na start: buty treningowe 250–450 zł, odzież 150–250 zł, karnet miesięczny 100–200 zł, 3–5 sesji z trenerem 250–500 zł. <strong>Łącznie: mniej niż jeden miesiąc na siłowni w absurdalnym tempie bez planu</strong> — i dużo zdrowszy kręgosłup.</p>
-        <div class="info-source">Ceny orientacyjne / rynek polski 2026</div>
+      <h2><span class="krok-badge">KROK 4</span>WYBÓR SIŁOWNI I KARNETU – TO MA ZNACZENIE!</h2>
+      <p>OK, masz motywację, masz wyniki badań, masz nowy sprzęt. Teraz czas wybrać miejsce, gdzie to wszystko się wydarzy. I tu też jest kilka rzeczy, na które warto zwrócić uwagę.</p>
+
+      <h3>Jak wybrać siłownię?</h3>
+      <p>Moje złote zasady przy wyborze siłowni dla 50-latka:</p>
+      <p><strong>1. LOKALIZACJA – najważniejsza rzecz!</strong></p>
+      <p>Siłownia musi być blisko – domu, pracy, po drodze. Jeśli musisz jechać 30 minut specjalnie po nią, to przy pierwszym zmęczeniu odpuścisz. Zasada: siłownia powinna być tak blisko, żeby nie było wymówki, żeby nie pojechać. Ja sam nie korzystam z natrysków ani sauny po ćwiczeniach, więc spadam szybko do samochodu i do domu.</p>
+
+      <p><strong>2. SPRAWDŹ OFERTĘ ZAJĘĆ GRUPOWYCH – to bardzo ważne dla 50-latków!</strong></p>
+      <p>Zajęcia grupowe to złoto, szczególnie na początku. Dlaczego?</p>
+      <ul>
+        <li>Trener prowadzi Cię przez ćwiczenia – mniej szans na błędną technikę</li>
+        <li>Motywacja grupy – kiedy inni ćwiczą, Ty też ćwiczysz</li>
+        <li>Poznajesz ludzi w podobnym wieku i o podobnych celach</li>
+        <li>Jest super atmosfera – serio!</li>
+      </ul>
+      <p>Szukaj siłowni z zajęciami takimi jak: Body Combat, Pilates, Joga, Aqua Aerobik, Stretching, TRX, Body Balance – to są zajęcia, które świetnie sprawdzają się po 50-tce. Często są w cenie karnetu, warto dopytać.</p>
+
+      <p><strong>3. PYTAJ O TRENERÓW!</strong></p>
+      <p>Dobra siłownia ma trenerów dostępnych na miejscu. Dowiedz się czy w cenie karnetu masz możliwość krótkiej konsultacji z trenerem na początku – wiele siłowni to oferuje! Zapytaj wprost przy zapisywaniu się: 'Czy w cenie karnetu mam możliwość wstępnej konsultacji z trenerem i pokazania mi podstawowych ćwiczeń?' Jeśli odpowiedź brzmi TAK – bingo!</p>
+
+      <p><strong>4. ODWIEDŹ SIŁOWNIĘ PRZED ZAKUPEM KARNETU!</strong></p>
+      <p>Większość siłowni oferuje darmowe wejście próbne. Skorzystaj z tego! Sprawdź: czy jest czysto, czy jest klimatyzacja, czy maszyny są w dobrym stanie, jak personel traktuje klientów, czy jest miejsce parkingowe. Poczuj atmosferę – to ważne.</p>
+
+      <h3>Jaki karnet wybrać?</h3>
+      <p>Mówię Wam jak jest: zacznij od KARNETU MIESIĘCZNEGO, nie rocznego. Dlaczego? Bo najpierw musisz sprawdzić, czy ta konkretna siłownia Ci odpowiada. Dopiero jak chodzisz regularnie przez 2-3 miesiące, warto pomyśleć o karnecie rocznym – będzie tańszy.</p>
+
+      <p><strong class="tone-accent">Orientacyjne ceny karnetów w Polsce (2026):</strong></p>
+      <ul>
+        <li>Jednorazowe wejście: 30-50 zł</li>
+        <li>Karnet miesięczny: 100-200 zł (sieciówki taniej, prywatne kluby drożej)</li>
+        <li>Karnet kwartalny (3 miesiące): 400-500 zł</li>
+        <li>Karnet roczny: znacznie taniej w przeliczeniu na miesiąc</li>
+        <li>Zniżki dla seniorów: 10-20% – pytaj, bo nie zawsze jest to wyeksponowane!</li>
+        <li>Moja Well Fitness to koszt 130 zł</li>
+      </ul>
+
+      <div class="highlight-box highlight-box--success">
+        <p>✅ Wiele siłowni w pakiecie 'Premium' lub 'All-inclusive' ma wliczone zajęcia grupowe. Warto dopłacić kilkadziesiąt złotych więcej miesięcznie, żeby mieć dostęp do grup – to świetna inwestycja na początku!</p>
       </div>
 
-      <h2><span class="krok-badge">KROK 6–7</span>Pierwszy trening i błędy, które kosztują kontuzję</h2>
-      <p>OK — wchodzisz na siłownię po raz pierwszy (albo po wielu latach przerwy)... i czujesz się obco. Setki maszyn, młodsze osoby dookoła, wszystko brzęczy i hałasuje. Nie panikuj. Każdy tam zaczynał od zera. Pierwsze <strong class="tone-primary">dwa tygodnie mają jeden cel: przyzwyczaić ciało i głowę do regularności</strong>. Zapomnij o efektach — na to przyjdzie czas. Trenuj 2–3 razy w tygodniu, każda sesja 45–60 minut, nie więcej. Zawsze 10–15 minut rozgrzewki przed i 10 minut rozciągania po. Zacznij od ćwiczeń wielostawowych na maszynach (bezpieczniejsze niż wolne ciężary): leg press, ściąganie drążka na lince, wyciskanie na maszynie, mostek biodrowy, plank od 15 sekund. <strong>Zacznij od mniejszego obciążenia niż myślisz że powinieneś.</strong> Nie ma w tym wstydu. Technika jest ważniejsza od ciężaru — przez pierwsze tygodnie uczysz się ruchu, nie bijesz rekordów.</p>
-      <p>Teraz błędy — bo popełniają je prawie wszyscy 50-latkowie wracający na siłownię. <strong>Błąd nr 1:</strong> zbyt duże ciężary na start. "Kiedyś dźwigałem 80 kg, zacznę od 40" — NIE. Mięśnie wracają szybciej niż ścięgna i stawy. Zacznij od 20% tego, co kiedyś unosiłeś. <strong>Błąd nr 2:</strong> brak rozgrzewki. Bez niej jesteś jak zimny silnik na pełnych obrotach. <strong>Błąd nr 3:</strong> trenowanie przez ból. Dyskomfort mięśniowy przy ćwiczeniu — OK. Ostry ból w stawie, kłucie, pieczenie — natychmiast STOP. <strong>Błąd nr 4:</strong> "będę chodzić 5 razy w tygodniu!" — i po 2 tygodniach kontuzja lub totalne wypalenie. Buduj powoli.</p>
-      <p><strong class="tone-strong">🧠 Ciekawostka o zakwasach (DOMS):</strong> te słynne bóle mięśniowe po pierwszym treningu są silniejsze po 48 godzinach niż po 24 — stąd nazwa: Delayed Onset Muscle Soreness. Są normalną reakcją mięśni, które dostały nowy bodziec, nie kontuzją. Z każdym kolejnym treningiem są coraz słabsze. Jeśli po pierwszym treningu ledwo wchodzisz po schodach — to znaczy, że trening zadziałał. Gratulacje. Przy okazji — ja przez lata ćwiczyłem bez stretchingu i dzisiaj żałuję. Nadrabiam, ale to mozolna sprawa. Uczcie się na moich błędach, nie na swoich.</p>
+      <p><strong class="tone-success">Nie daj się złapać w pułapkę umowy!</strong></p>
+      <p>Uwaga: uważaj na długoterminowe umowy w dużych sieciach za 30 zł miesięcznie. Brzmi pięknie, ale często trzeba podpisać umowę na 24 miesiące, a z niej wyjście bywa trudne i kosztowne. Na początek lepiej zapłacić więcej miesięcznie, ale bez zobowiązań.</p>
+
+      <h2><span class="krok-badge">KROK 5</span>TRENER PERSONALNY – CZY NAPRAWDĘ POTRZEBUJĘ?</h2>
+      <p>Krótka odpowiedź: TAK. Szczególnie na początku. Długa odpowiedź? To zależy od budżetu, ale przynajmniej kilka godzin na start to absolutne minimum. Opowiem Ci, dlaczego.</p>
+
+      <h3>Dlaczego trener to inwestycja, nie wydatek?</h3>
+      <ul>
+        <li>Nauczy Cię <strong>PRAWIDŁOWEJ TECHNIKI</strong> – to chroni przed kontuzjami, które po 50-tce leczą się długo</li>
+        <li>Ułoży <strong>PLAN TRENINGOWY</strong> dopasowany do Twojego zdrowia, celów i możliwości</li>
+        <li><strong>ZMOTYWUJE</strong> Cię – trudno odpuścić, kiedy ktoś na Ciebie czeka</li>
+        <li>Pomoże Ci <strong>BEZPIECZNIE</strong> dobrać obciążenia – nie za małe (bo bez efektów) i nie za duże (bo kontuzja)</li>
+        <li>Pokaże Ci siłownię od środka – jak używać maszyn, co jest do czego</li>
+      </ul>
+
+      <h3>Jak wybrać dobrego trenera?</h3>
+      <p>Nie każdy, kto ma mięśnie, jest dobrym trenerem. Sprawdź:</p>
+      <ul>
+        <li>Certyfikaty i wykształcenie – pytaj wprost, dobry trener nie będzie miał nic do ukrycia</li>
+        <li>Doświadczenie z osobami 50+ – to ważne, bo trening dla 50-latka różni się od treningu dla 25-latka</li>
+        <li>Podejście – czy słucha Twoich potrzeb i ograniczeń, czy tylko krzyczy</li>
+        <li>Opinie – zapytaj w siłowni, kto jest najlepiej oceniany przez starszych klientów</li>
+        <li>Darmowa konsultacja wstępna – większość trenerów ją oferuje, skorzystaj zanim zapłacisz</li>
+      </ul>
+
+      <h3>Co powiedzieć trenerowi na pierwszej sesji?</h3>
+      <p>Powiedz trenerowi WSZYSTKO:</p>
+      <ul>
+        <li>Wyniki badań i ewentualne schorzenia (kolano, plecy, nadciśnienie itp.)</li>
+        <li>Ile lat minęło od ostatniej regularnej aktywności</li>
+        <li>Jakie masz cele – schudnąć, poprawić kondycję, zbudować siłę?</li>
+        <li>Czego się boisz lub czego nie lubisz</li>
+        <li>Ile razy w tygodniu możesz trenować</li>
+      </ul>
+
+      <div class="highlight-box highlight-box--success">
+        <p>✅ Wiele siłowni oferuje pakiet 'wdrożeniowy' dla nowych klientów – 3-5 treningów z trenerem w atrakcyjnej cenie, które wprowadzają Cię w podstawy. Zapytaj o taką opcję przy zapisywaniu się!</p>
+      </div>
+
+      <h3>Orientacyjne koszty trenera personalnego:</h3>
+      <ul>
+        <li>Pojedynczy trening (60 min): 80-170 zł (w zależności od miasta i doświadczenia trenera)</li>
+        <li>Pakiet 4-5 treningów miesięcznie: 400-650 zł</li>
+        <li>Pakiet 10 treningów (kupione z góry): taniej o 5-10%</li>
+        <li>Trening w parze (ze znajomym): druga osoba płaci 30-50% ceny</li>
+        <li>Plan treningowy bez regularnych spotkań: od ok. 100 zł jednorazowo</li>
+      </ul>
+      <p>Mówię Wam: jeśli budżet jest ograniczony, to skup się na 3-5 treningach na wdrożenie, a potem ćwicz sam z gotowym planem. To wystarczy na dobry start. Ja często wspieram się Instagramem. Jest dużo porad jak wykonywać prawidłowo ćwiczenia i jakie zestawy. Na siłowni śmiało wyciągasz telefon i próbujesz odwzorować ćwiczenia. To nie obciach, każdy tak się wspiera i nie ma w tym nic dziwnego, że czegoś nie wiesz.</p>
+
+      <h2><span class="krok-badge">KROK 6</span>PIERWSZY TRENING – CO CIĘ CZEKA I JAK TO PRZEŻYĆ</h2>
+      <p>OK, zapisałeś się, kupiłeś ciuchy, zrobiłeś badania. Jesteś gotowy. I wchodzisz na siłownię po raz pierwszy (albo po wielu latach przerwy) ... i czujesz się obco. Setki maszyn, młodsze osoby dookoła, wszystko brzęczy i hałasuje. Nie panikuj. Mówię Ci – każdy tam zaczynał od zera.</p>
+
+      <h3>Pierwsze 2 tygodnie – adaptacja</h3>
+      <p>Te dwa tygodnie mają jeden cel: przyzwyczaić ciało i głowę do regularności. Zapomnij o efektach – na to przyjdzie czas. Teraz chodzi o to, żeby <strong>WEJŚĆ W RYTM</strong>. Staraj się bywać na początku zawsze w tych samych godzinach. Jest szansa, że kogoś poznasz i łatwiej będzie się zaaklimatyzować. Większość ludzi chodzi tam w miarę systematycznie więc każda pora ma swoich uczestników.</p>
+
+      <ul>
+        <li>Trenuj 2-3 razy w tygodniu, nie więcej, tak na początek</li>
+        <li>Każdy trening niech trwa 45-60 minut – nie 2 godziny!</li>
+        <li>Zacznij od ćwiczeń z własną masą ciała i lekkich maszyn</li>
+        <li>ZAWSZE zacznij od rozgrzewki (10-15 minut)</li>
+        <li>ZAWSZE kończ rozciąganiem (10 minut)</li>
+        <li>Pij wodę, a najlepiej wodę z elektrolitami. Kup sobie w aptece, koniecznie bez cukru</li>
+      </ul>
+
+      <h3>Przykładowy plan pierwszych tygodni</h3>
+      <p><strong class="tone-accent">Tygodnie 1-4: Fundamenty</strong></p>
+      <ul>
+        <li>Trening obwodowy całego ciała 2-3 razy w tygodniu</li>
+        <li>Ćwiczenia z maszynami z lekkim obciążeniem</li>
+        <li>Cardio o niskiej intensywności: spacer na bieżni, orbitrek, rower stacjonarny (15-20 minut)</li>
+        <li>Rozciąganie i ćwiczenia mobilizacyjne na każdym treningu</li>
+        <li>Trochę musisz się spocić 😊</li>
+      </ul>
+
+      <p><strong class="tone-accent">Tygodnie 5-8: Budowanie bazy</strong></p>
+      <ul>
+        <li>Powoli zwiększaj obciążenia – jeśli ostatnie powtórzenia są za łatwe, czas dodać odrobinę ciężaru. Teraz jest nowa świadomość, że lepiej mniej powtórzeń z większym ciężarem niż więcej z mniejszym</li>
+        <li>Cardio zwiększ do 20-30 minut</li>
+        <li>Możesz zacząć chodzić na zajęcia grupowe – pilates, body balance, stretching to świetne opcje. Zwłaszcza stretching bo to zawsze samemu gorzej idzie, przynajmniej mnie 😊</li>
+        <li>Zacznij notować swoje treningi – co ćwiczyłeś, z jakim obciążeniem. Warto bo to mobilizuje zawsze</li>
+      </ul>
+
+      <p><strong class="tone-accent">Miesiąc 3 i dalej: Progresja</strong></p>
+      <ul>
+        <li>Pełny trening siłowy 3 razy w tygodniu z koncentracją na technice</li>
+        <li>Cardio 3-4 razy w tygodniu (można łączyć z siłownią)</li>
+        <li>Stopniowo zwiększaj intensywność – to klucz do efektów</li>
+      </ul>
+
+      <h3>Ćwiczenia, od których warto zacząć</h3>
+      <p>Mówię Wam: zacznij od ćwiczeń wielostawowych i maszyn – to bezpieczniejsze niż wolne ciężary na początku. Podstawowe ruchy, które powinny być w Twoim planie:</p>
+
+      <p><strong class="tone-accent">Dolna część ciała:</strong></p>
+      <ul>
+        <li>Przysiady na maszynie (leg press) – świetne dla kolan, można kontrolować zakres</li>
+        <li>Wyprosty nóg i zginanie nóg na maszynie</li>
+        <li>Wspięcia na palce – dla łydek i stabilności</li>
+      </ul>
+
+      <p><strong class="tone-accent">Górna część ciała:</strong></p>
+      <ul>
+        <li>Wyciskanie na maszynie (klatka piersiowa)</li>
+        <li>Ściąganie drążka (linka) – plecy</li>
+        <li>Uginanie ramion z hantlami (biceps) – lekkie hantle</li>
+        <li>Wyciskanie nad głowę (ramiona) – maszyna lub lekkie hantle</li>
+      </ul>
+
+      <p><strong class="tone-accent">Core (brzuch i plecy):</strong></p>
+      <ul>
+        <li>Plank (deska) – zacznij od 15-20 sekund, buduj stopniowo</li>
+        <li>Mostek biodrowy – świetny dla pośladków i odcinka lędźwiowego</li>
+        <li>Ćwiczenia na rotatory – ważne dla zdrowych pleców</li>
+      </ul>
+
+      <div class="highlight-box highlight-box--success">
+        <p>✅ Zacznij od MNIEJSZEGO OBCIĄŻENIA niż myślisz, że powinieneś. Technika jest ważniejsza od ciężaru. Przez pierwsze tygodnie masz uczyć się ruchu, a nie bić rekordy.</p>
+      </div>
+
+      <h3>ROZGRZEWKA – nigdy jej nie pomijaj!</h3>
+      <p>Mówię Wam poważnie: po 50-tce stawy i mięśnie potrzebują więcej czasu, żeby się rozgrzać. Pominięcie rozgrzewki to prosta droga do naderwania mięśnia lub kontuzji stawu. 10-15 minut inwestycji = ochrona na cały trening. Ja latami ćwiczyłem bez stretchingu i rozciągania i dzisiaj żałuję. Nadrabiam, ale mozolna sprawa.</p>
+      <ul>
+        <li>5 minut marszu lub jazdy na rowerku w spokojnym tempie</li>
+        <li>Krążenia ramionami, barkami, biodrami</li>
+        <li>Wypady (wykroki) bez obciążenia</li>
+        <li>Przysiady z własną masą ciała – 10-15 sztuk</li>
+        <li>Rozciąganie dynamiczne (NIE statyczne przed treningiem!)</li>
+      </ul>
 
       <figure class="inline-figure reveal">
         <picture>
           <source srcset="./assets/powrot-do-formy-extra2.avif" type="image/avif">
           <source srcset="./assets/powrot-do-formy-extra2.webp" type="image/webp">
-          <img src="./assets/powrot-do-formy-extra2.png" alt="Zabawny komiks w 3 kadrach: triumf po pierwszym treningu → ledwo wstaje z zakwasami → wraca po więcej" loading="lazy" width="2752" height="1536">
+          <img src="./assets/powrot-do-formy-extra2.png" alt="Pierwszy trening i zakwasy" loading="lazy" width="2752" height="1536">
         </picture>
       </figure>
+
+      <h2><span class="krok-badge">KROK 7</span>CZEGO UNIKAĆ – BŁĘDY, KTÓRE MOGĄ CIĘ KOSZTOWAĆ KONTUZJĘ</h2>
+      <p>Czas na to, co najważniejsze z punktu widzenia bezpieczeństwa. Mówię Wam z doświadczenia i z wiedzy ekspertów – te błędy popełniają prawie wszyscy 50-latkowie wracający na siłownię. Uniknij ich!</p>
 
       <div class="highlight-box">
-        <h3>Plan pierwszych 8 tygodni</h3>
-        <p><strong>Plan pierwszych 8 tygodni:</strong> Tygodnie 1–4: trening obwodowy całego ciała 2–3×/tydz., lekkie maszyny, cardio 15–20 min. Tygodnie 5–8: stopniowo więcej obciążenia, cardio do 30 min, zajęcia grupowe. Miesiąc 3+: pełny trening siłowy 3×/tydz., progresja obciążeń.</p>
-        <div class="info-source">Doświadczenie własne / rekomendacje ACSM dla 50+</div>
+        <p>⚠️ BŁĄD 1: Zaczynanie od zbyt dużych ciężarów To jest numer jeden wśród kontuzji. 'Kiedyś to dźwigałem 80 kg, więc zacznę od 40' – NIE. Zacznij od 20% tego, co kiedyś unosiłeś. Mięśnie wróci szybciej niż myślisz, ale ścięgna i stawy potrzebują więcej czasu na adaptację.</p>
+      </div>
+      <div class="highlight-box">
+        <p>⚠️ BŁĄD 2: Pomijanie rozgrzewki i rozciągania Wiem, że Ci się spieszy. Ale bez rozgrzewki jesteś jak zimny silnik na pełnych obrotach – coś pęknie. Obowiązkowo 10-15 minut przed treningiem i 10 minut rozciągania po.</p>
+      </div>
+      <div class="highlight-box">
+        <p>⚠️ BŁĄD 3: Trenowanie z bólem. Ból to sygnał od ciała. Dyskomfort mięśniowy przy ćwiczeniu to normalne. Zakwasy na następny dzień, to znak dobrego treningu, ale ostry ból w stawie, kłucie, pieczenie to natychmiast STOP. Trenowanie przez ból to najkrótsza droga do poważnej kontuzji.</p>
+      </div>
+      <div class="highlight-box">
+        <p>⚠️ BŁĄD 4: Za dużo, za szybko 'Będę chodzić 5 razy w tygodniu!' – i po 2 tygodniach jest kontuzja lub totalnie odpada motywacja. Zacznij od 2-3 razy w tygodniu. Buduj powoli. Ciało musi mieć czas na regenerację.</p>
+      </div>
+      <div class="highlight-box">
+        <p>⚠️ BŁĄD 5: Brak regeneracji i snu Po 50-tce organizm potrzebuje więcej czasu na odbudowę mięśni. Minimum 7-8 godzin snu, dni odpoczynku między treningami. Mięśnie rosną podczas odpoczynku, nie podczas treningu!</p>
+      </div>
+      <div class="highlight-box">
+        <p>⚠️ BŁĄD 6: Zaniedbanie diety i nawodnienia Możesz trenować najlepiej na świecie, ale bez odpowiedniej diety efektów nie będzie. I pamiętaj o wodzie – podczas treningu pij regularnie małymi łykami, minimum 500 ml podczas sesji.</p>
+      </div>
+      <div class="highlight-box">
+        <p>⚠️ BŁĄD 7: Porównywanie się do innych W siłowni jest 25-latek, który dźwiga podwójnie więcej od Ciebie. I co z tego? Ty nie jesteś tam, żeby go pobić – jesteś tam dla siebie. Jedyna osoba, z którą warto się porównywać, jest Ty sprzed miesiąca.</p>
+      </div>
+      <div class="highlight-box">
+        <p>⚠️ BŁĄD 8: Rezygnacja po pierwszych zakwasach Pierwsze dni po treningu mogą boleć – i to całkiem mocno. To normalne, szczególnie gdy mięśnie były od dawna uśpione. To nie kontuzja, to DOMS – opóźniona bolesność mięśniowa. Mija po 2-4 dniach i z każdym treningiem jest coraz mniejsza.</p>
       </div>
 
-      <h2><span class="krok-badge">KROK 8–10</span>Dieta, regeneracja i mierzenie postępów — bez tego cała reszta nie zadziała</h2>
-      <p>Nie napisałem tego artykułu, żeby Ci mówić, że masz siedzieć na sałatkach. Ale mówię Wam szczerze: trening bez porządnej diety to jak budowanie domu bez fundamentów. Możesz się napracować, a efektów nie będzie. Najważniejsza rzecz po 50-tce to <strong class="tone-accent">białko</strong>. Sarkopenia postępuje, mięśnie potrzebują materiału budulcowego. Cel: 1,5–2 gramy białka na kilogram masy ciała dziennie. Jajka, kurczak, ryby, twaróg, jogurt grecki, rośliny strączkowe. Jedz coś lekkiego przed treningiem (1,5–2 godziny wcześniej) i uzupełnij białko i węglowodany po. Woda: minimum 2–2,5 litra dziennie, w dniach treningowych więcej. Odwodnienie drastycznie obniża wydolność. Ogranicz — nie eliminuj — cukry proste i alkohol. Nikt nie powiedział, że masz być mnichem.</p>
-      <p>Regeneracja to <strong class="tone-success">część treningu, nie przerwa od treningu</strong>. Po 50-tce organizm potrzebuje więcej czasu na odbudowę mięśni niż w młodości. Minimum 7–8 godzin snu — mięśnie rosną właśnie wtedy. Rolowanie pianką (foam roller) na zakwasy i napięte mięśnie: kup, nie pożałujesz. Rozciąganie statyczne po treningu (nie przed!). Suplementy warte rozważenia po konsultacji z lekarzem: witamina D3+K2 (niedobory są powszechne w Polsce), magnez (skurcze, sen), kolagen (stawy i ścięgna) i omega-3 (serce i stawy). Jeśli nie dajesz rady z białkiem z jedzenia — shake proteinowy. Polecam smak czekoladowy, naprawdę da się żyć. Nie kupuj bez konsultacji drogich stacków "na masę" z reklam w internecie.</p>
+      <h2><span class="krok-badge">KROK 8</span>DIETA – BO BEZ TEGO NIE MA EFEKTÓW</h2>
+      <p>Hej, nie napisałem tego artykułu, żeby Ci mówić, że masz siedzieć na sałatkach. Mówię Wam jednak szczerze: trening bez porządnej diety to jak budowanie domu bez fundamentów. Możesz się napracować, a efektów nie będzie.</p>
 
-      <figure class="inline-figure reveal">
-        <picture>
-          <source srcset="./assets/powrot-do-formy-extra4.avif" type="image/avif">
-          <source srcset="./assets/powrot-do-formy-extra4.webp" type="image/webp">
-          <img src="./assets/powrot-do-formy-extra4.png" alt="Zabawna ilustracja: po lewej sensowne suplementy z uśmiechniętymi ikonami, po prawej absurdalny stack z efektami specjalnymi" loading="lazy" width="2400" height="1792">
-        </picture>
-      </figure>
+      <h3>Podstawowe zasady żywienia dla trenującego 50-latka</h3>
+      <p><strong>1. BIAŁKO to priorytet!</strong></p>
+      <p>Po 50-tce mięśnie tracą się szybciej niż w młodości (sarkopenia – to normalne zjawisko). Żeby temu przeciwdziałać, potrzebujesz więcej białka. Cel to 1,5-2 gramy białka na każdy kilogram masy ciała dziennie. Dobrej jakości białko to: jajka, kurczak, ryby, twaróg, jogurt grecki, rośliny strączkowe.</p>
 
-      <p>I ostatnia rzecz — <strong class="tone-primary">mierz postępy, bo waga Cię okłamuje</strong>. Kiedy budujesz mięśnie i spalasz tłuszcz jednocześnie (rekompozycja ciała — u 50-latków to zupełnie normalne!), waga może stać w miejscu albo nawet rosnąć, a Ty wyglądasz lepiej i lepiej się czujesz. Mierz obwody (talia, biodra, uda, ramiona) raz w miesiącu. Rób zdjęcia sylwetki. Notuj ciężary na treningach. I co miesiąc zrób sobie małą nagrodę za regularność — masaż, nowa koszulka, kolacja na mieście. Wzmacniaj pozytywne zachowania. Mózg lubi nagrody i wraca po więcej.</p>
+      <p><strong>2. Jedz przed i po treningu</strong></p>
+      <ul>
+        <li>Przed treningiem (1,5-2 godziny): lekki posiłek z węglowodanami i białkiem – np. owsianka z jogurtem, kanapka z jajkiem</li>
+        <li>Po treningu (do 2 godzin): posiłek z białkiem i węglowodanami – żeby odbudować mięśnie i uzupełnić glikogen</li>
+      </ul>
+
+      <p><strong>3. Nawodnienie – woda, woda, woda!</strong></p>
+      <p>Minimum 2-2,5 litra wody dziennie. W dniach treningowych więcej. Odwodnienie drastycznie obniża wydolność i naraża na skurcze mięśni.</p>
+
+      <p><strong>4. Ogranicz, nie eliminuj</strong></p>
+      <p>Nie przechodź na restrykcyjną dietę. Ogranicz cukry proste, przetworzoną żywność, alkohol. Nie musisz z czegokolwiek całkowicie rezygnować – ważna jest równowaga i regularność.</p>
+
+      <div class="highlight-box highlight-box--success">
+        <p>✅ Rozważ wizytę u dietetyka, jeśli chcesz schudnąć lub masz dodatkowe schorzenia (cukrzyca, cholesterol). Dobrze zbilansowana dieta to połowa sukcesu!</p>
+      </div>
 
       <figure class="inline-figure reveal">
         <picture>
           <source srcset="./assets/powrot-do-formy-s5.avif" type="image/avif">
           <source srcset="./assets/powrot-do-formy-s5.webp" type="image/webp">
-          <img src="./assets/powrot-do-formy-s5.png" alt="Kolorowe zdjęcie produktów bogatych w białko ułożonych w zabawny sposób: jajka, łosoś, twaróg, kurczak — z grafiką nakładki showing &quot;BIAŁKO&quot; z dużą strzałką i checklistą, jasne tło, styl editorial food photography" loading="lazy" width="2400" height="1792">
+          <img src="./assets/powrot-do-formy-s5.png" alt="Produkty bogate w białko" loading="lazy" width="2400" height="1792">
         </picture>
       </figure>
 
-      <div class="highlight-box highlight-box--primary">
-        <h3>Minimum suplementacyjne</h3>
-        <p><strong>Minimum suplementacyjne po 50-tce (po konsultacji z lekarzem):</strong> Witamina D3+K2, magnez, kolagen, omega-3. Opcjonalnie: białko w proszku jeśli nie dajesz rady z jedzeniem. <strong>Bez egzotycznych stacków z reklam — serio.</strong></p>
-        <div class="info-source">Doświadczenie własne / rekomendacje dietetyczne dla 50+</div>
+      <h2><span class="krok-badge">KROK 9</span>REGENERACJA I DODATKI – ZADBAJ O SIEBIE PO TRENINGU</h2>
+      <h3>Co robić po treningu?</h3>
+      <ul>
+        <li>Rozciąganie statyczne (10-15 minut) – dopiero PO treningu, nie przed</li>
+        <li>Zimny lub letni prysznic – nie lodowaty, ale chłodny pomaga mięśniom. Mnie się nigdy nie udało wejść pod zimną wodę. Jestem zmarzluchem, więc kocham gorący prysznic 😊</li>
+        <li>Rolowanie pianką (wał roller) – świetne na zakwasy i napięte mięśnie, kup, nie pożałujesz</li>
+        <li>Odpoczynek i sen – minimum 7-8 godzin</li>
+      </ul>
+
+      <h3>Suplementy – co warto rozważyć?</h3>
+      <p>Mówię Wam szczerze: bez suplementów możesz osiągnąć wszystko. Ale kilka z nich naprawdę pomaga po 50-tce – skonsultuj z lekarzem, czy możesz je stosować:</p>
+      <ul>
+        <li>Witamina D3 + K2 – niedobory są powszechne, wpływa na kości, mięśnie i odporność</li>
+        <li>Magnez – zmniejsza skurcze, poprawia sen i regenerację</li>
+        <li>Kolagen – wspiera stawy i ścięgna, co po 50-tce jest naprawdę ważne</li>
+        <li>Białko w proszku (np. whey protein) – tylko jeśli nie dajesz rady dostarczyć odpowiedniej ilości białka z jedzenia. Można kupić świetne smakowe. Polecam czekoladę</li>
+        <li>Omega-3 – dobre dla serca i stawów</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p>⚠️ Nie kupuj bez konsultacji z lekarzem drogich stacków suplementacyjnych 'na masę' reklamowanych w necie. Wiele z nich jest niepotrzebnych, niektóre mogą wchodzić w interakcje z lekami.</p>
       </div>
 
-      <h2>Szybkie odpowiedzi (AEO)</h2>
-      <div class="qa-grid">
-        <div class="qa-card">
-          <h3>Od czego zacząć powrót na siłownię po 50-tce?</h3>
-          <p>Kolejność jest ważna: najpierw lekarz (badania podstawowe + EKG), potem zakupy (buty dopasowane do aktywności), potem wybór siłowni (blisko domu!), potem 3–5 sesji z trenerem na wdrożenie. Zaczynasz od 2–3 treningów tygodniowo, 45–60 minut, z naciskiem na technikę i lekkie obciążenia. Cel pierwszych 4 tygodni: regularność, nie efekty.</p>
-        </div>
-        <div class="qa-card">
-          <h3>Czy trener personalny jest potrzebny po 50-tce?</h3>
-          <p>Na start — zdecydowanie tak. Minimum 3–5 sesji wdrożeniowych, żeby nauczyć się prawidłowej techniki i uniknąć kontuzji, które po 50-tce leczą się długo. Jeśli budżet jest ograniczony, kup plan treningowy (od 100 zł) i wspieraj się Instagramem. Technika ćwiczeń jest dostępna bezpłatnie — wystarczy wyciągnąć telefon na siłowni.</p>
-        </div>
-        <div class="qa-card">
-          <h3>Co jeść, żeby miały sens treningi po 50-tce?</h3>
-          <p>Priorytet numer jeden: białko. 1,5–2 g na kilogram masy ciała dziennie. Jajka, kurczak, ryby, twaróg, jogurt grecki. Posiłek przed treningiem 1,5–2 godziny wcześniej (białko + węglowodany). Posiłek po treningu w ciągu 2 godzin. Woda: minimum 2–2,5 litra dziennie. Alkohol i cukry proste — ogranicz, nie eliminuj. Nikt nie mówi, że masz być mnichem.</p>
-        </div>
-        <div class="qa-card">
-          <h3>Zakwasy po pierwszym treningu — czy to normalne?</h3>
-          <p>Tak, i to bardzo normalne — szczególnie po długiej przerwie. DOMS (Delayed Onset Muscle Soreness) pojawia się 24–48 godzin po treningu i mija po 2–4 dniach. To nie kontuzja — to mięśnie reagujące na nowy bodziec. Z każdym kolejnym treningiem zakwasy są coraz słabsze. Foam roller i lekki ruch (spacer) pomagają przyspieszyć regenerację.</p>
-        </div>
-        <div class="qa-card">
-          <h3>Jak mierzyć efekty, jeśli waga nie spada?</h3>
-          <p>Waga to jeden z najgorszych wskaźników postępów u 50-latka. Przy rekompozycji ciała (spalasz tłuszcz i budujesz mięśnie jednocześnie) waga może stać lub rosnąć, a Ty wyglądasz i czujesz się lepiej. Mierz: obwody ciała raz w miesiącu, zdjęcia sylwetki, ciężary na treningach, poziom energii i jakość snu. Te liczby powiedzą Ci więcej niż waga.</p>
-        </div>
+      <figure class="inline-figure reveal">
+        <picture>
+          <source srcset="./assets/powrot-do-formy-extra4.avif" type="image/avif">
+          <source srcset="./assets/powrot-do-formy-extra4.webp" type="image/webp">
+          <img src="./assets/powrot-do-formy-extra4.png" alt="Suplementy i regeneracja" loading="lazy" width="2400" height="1792">
+        </picture>
+      </figure>
+
+      <h2><span class="krok-badge">KROK 10</span>MIERZ POSTĘPY I ŚWIĘTUJ KAŻDY SUKCES!</h2>
+      <p>To jest etap, który sprawia, że kontynuujesz, kiedy motywacja opada. Mierzenie efektów pokazuje, że Twoja praca przynosi rezultaty – nawet jeśli waga stoi w miejscu.</p>
+
+      <h3>Co mierzyć?</h3>
+      <ul>
+        <li>Obwody ciała (talia, biodra, uda, ramiona) – mierz raz w miesiącu, rano, na czczo</li>
+        <li>Zdjęcia sylwetki – rób co miesiąc, w tym samym oświetleniu i pozycji</li>
+        <li>Waga – nie codziennie! Raz w tygodniu, rano, po toalecie, przed śniadaniem, o stałej porze</li>
+        <li>Wyniki treningowe – notuj, z jakimi ciężarami ćwiczysz i ile powtórzeń</li>
+        <li>Samopoczucie – oceniaj subiektywnie: energia, sen, nastrój, ból</li>
+      </ul>
+
+      <p>Mówię Wam – będą tygodnie, kiedy waga nie ruszy, ale obwody się zmniejszą. Albo waga wzrośnie (bo mięśnie ważą więcej niż tłuszcz), a wyglądasz lepiej. Dlatego nie miej obsesji na punkcie wagi. Często następuje rekompozycja ciała, która zakłada osiągnięcie efektów, które daje redukcja i budowanie masy, ale w tym samym czasie. Innymi słowy spalasz tłuszcz a budujesz mięśnie.</p>
+
+      <div class="highlight-box highlight-box--success">
+        <p>✅ Co miesiąc zrób sobie małą nagrodę za regularność treningową – nowa koszulka, masaż, wyjście do restauracji z rodziną. Wzmacniaj pozytywne zachowania!</p>
       </div>
 
-      <h2>Cytaty, które warto zapamiętać (GEO)</h2>
-      <div class="insights-list">
-        <ul>
-          <li><strong>Sarkopenia jest normalna. Trening siłowy jest odpowiedzią. To nie jest opcja — to konieczność po 50-tce.</strong></li>
-          <li><strong>Siłownia to nie tortura. To coś, co DAJESZ swojemu ciału — nie coś, co mu ZABIERASZ.</strong></li>
-          <li><strong>Zacznij od 20% obciążenia, które kiedyś unosiłeś. Mięśnie wrócą szybciej niż stawy. Nie ryzykuj.</strong></li>
-          <li><strong>Zakwasy to znak, że trening zadziałał. Ostry ból w stawie — to znak, żeby natychmiast przestać.</strong></li>
-          <li><strong>Waga to jeden z najgorszych wskaźników postępów. Mierz obwody, mierz siłę, mierz energię.</strong></li>
-          <li><strong>50 lat to nie koniec. Badania pokazują: 90-latkowie zwiększają siłę o setki procent po 10 tygodniach treningu. Co to mówi o Tobie?</strong></li>
-        </ul>
-      </div>
+      <h2>PODSUMOWANIE – TWÓJ PLAN DZIAŁANIA</h2>
+      <p>OK, zebrałem to wszystko dla Ciebie w jeden krótki plan. Wykonaj kolejno:</p>
+      <ol>
+        <li>Zapisz DLACZEGO chcesz zacząć i trzymaj to w widocznym miejscu</li>
+        <li>Idź do lekarza na podstawowe badania (morfologia, EKG, cholesterol, glukoza, TSH)</li>
+        <li>Kup dobre buty treningowe dopasowane do aktywności (siłownia vs cardio)</li>
+        <li>Zaopatrz się w odzież treningową z materiałów odprowadzających wilgoć</li>
+        <li>Odwiedź 2-3 siłownie w okolicy, skorzystaj z bezpłatnego wejścia próbnego</li>
+        <li>Kup karnet miesięczny z opcją zajęć grupowych i zapytaj o wdrożenie z trenerem</li>
+        <li>Umów się na 3-5 treningów z trenerem personalnym na wdrożenie i ułożenie planu</li>
+        <li>Zacznij od 2-3 treningów tygodniowo, nie forsuj się w pierwszych tygodniach</li>
+        <li>Mierz postępy raz w miesiącu i nagradzaj siebie za regularność</li>
+        <li>Nie poddawaj się po trudnych tygodniach – wróć do kartki z DLACZEGO i idź dalej!</li>
+      </ol>
 
-      <h2>W skrócie (AIO)</h2>
-      <div class="summary-list">
-        <ul>
-          <li>Po 50-tce ciało traci 3–8% masy mięśniowej na dekadę — trening siłowy to jedyna skuteczna odpowiedź.</li>
-          <li>Przed pierwszym treningiem: lekarz, morfologia, EKG, cholesterol, TSH. Bez tego ani rusz.</li>
-          <li>Buty do siłowni i do cardio to dwa różne modele — zła podeszwa przy ciężarach to kontuzja.</li>
-          <li>Pierwsze 4 tygodnie: regularność, nie efekty. 2–3 razy w tygodniu, 45–60 minut, lekkie obciążenia.</li>
-          <li>Białko 1,5–2g/kg masy ciała dziennie — klucz do walki z sarkopenia i utrzymania mięśni.</li>
-          <li>Waga kłamie. Mierz obwody, zdjęcia, siłę i energię. Rekompozycja ciała po 50-tce jest normą.</li>
-        </ul>
-      </div>
-
-      <div class="article-quote"><blockquote><p>Kiedy skończyłem 50 lat i wyjrzałem w lustro, nie byłem z siebie dumny. Dziś mówię Wam z pełnym przekonaniem: 50 lat to nie koniec. To dopiero początek najlepszej wersji Ciebie. Dasz radę. Zaczynajcie.</p></blockquote></div>
+      <div class="article-quote"><blockquote><p>50 lat to nie koniec. To dopiero początek najlepszej wersji Ciebie.<br><strong class="tone-accent">Dasz radę. Mówię to Wam z pełnym przekonaniem. Zaczynajcie!</strong></p></blockquote></div>
+      <p class="info-source" style="text-align:center;">fitpo50.pl – bo po pięćdziesiątce można więcej niż myślisz</p>
 
       <div class="sources-list">
         <h3 id="zrodla">Źródła</h3>
         <ol>
-          <li><a href="https://doi.org/10.1001/jama.263.22.3029" target="_blank" rel="noopener noreferrer">Fiatarone MA et al. — High-intensity strength training in nonagenarians. JAMA, 1990.</a></li>
-          <li><a href="https://doi.org/10.1002/jcsm.13225" target="_blank" rel="noopener noreferrer">Wiedmann N. et al. — Exercise for sarcopenia in older people. Journal of Cachexia, Sarcopenia and Muscle, 2023.</a></li>
-          <li><a href="https://www.acsm.org/education-resources/trending-topics-resources/physical-activity-guidelines" target="_blank" rel="noopener noreferrer">American College of Sports Medicine — Physical Activity Guidelines for Older Adults.</a></li>
-          <li><a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener noreferrer">WHO Guidelines on Physical Activity and Sedentary Behaviour for Adults 50+, 2020.</a></li>
-          <li><a href="https://www.health.harvard.edu/staying-healthy/preserve-your-muscle-mass" target="_blank" rel="noopener noreferrer">Harvard Health Publishing — Preserve your muscle mass (2024).</a></li>
-          <li><a href="https://my.clevelandclinic.org/health/diseases/23167-sarcopenia" target="_blank" rel="noopener noreferrer">Cleveland Clinic — Sarcopenia (Muscle Loss): Symptoms, Causes &amp; Treatment (2025).</a></li>
-          <li><a href="https://doi.org/10.2165/00007256-200535040-00004" target="_blank" rel="noopener noreferrer">Kraemer WJ, Ratamess NA — Hormonal responses and adaptations to resistance exercise and training. Sports Medicine, 2005.</a></li>
-          <li><a href="https://www.acsm.org/docs/default-source/files-for-resource-library/delayed-onset-muscle-soreness.pdf" target="_blank" rel="noopener noreferrer">ACSM — Delayed Onset Muscle Soreness (DOMS), 2021.</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/30312372/" target="_blank" rel="noopener noreferrer">Cruz-Jentoft AJ et al. Sarcopenia: revised European consensus on definition and diagnosis (EWGSOP2). Age Ageing, 2019.</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/2342214/" target="_blank" rel="noopener noreferrer">Fiatarone MA et al. High-intensity strength training in nonagenarians. JAMA, 1990.</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/23867520/" target="_blank" rel="noopener noreferrer">Bauer J et al. Evidence-based recommendations for optimal dietary protein intake in older people (PROT-AGE). J Am Med Dir Assoc, 2013.</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/12617692/" target="_blank" rel="noopener noreferrer">Cheung K et al. Delayed onset muscle soreness: treatment strategies and performance factors. Sports Med, 2003.</a></li>
+          <li><a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener noreferrer">WHO Guidelines on Physical Activity and Sedentary Behaviour, 2020.</a></li>
+          <li><a href="https://www.cdc.gov/physical-activity-basics/guidelines/older-adults.html" target="_blank" rel="noopener noreferrer">CDC: Physical activity guidelines for older adults (aktualizacja 2025-12-04).</a></li>
         </ol>
       </div>
 
-      <div class="sources-list" style="margin-top: var(--space-8); padding-top: var(--space-6);">
-        <h3>Czytaj też</h3>
-        <ul>
-          <li><a href="/rusz-sie.html">Ruch i ćwiczenia po 50-tce</a></li>
-          <li><a href="/zdrowie.html">Zdrowie i profilaktyka</a></li>
-          <li><a href="/porady.html">Porady praktyczne</a></li>
-        </ul>
-      </div>
-
-      <div class="medical-disclaimer"><p><em>⚠️ <strong>Ważna informacja osobista:</strong> Nie jestem lekarzem, dietetykiem ani certyfikowanym trenerem. Ten artykuł to wyłącznie moje własne doświadczenia, przemyślenia i obserwacje człowieka, który sam przeszedł przez ten proces po pięćdziesiątce. To, co u mnie zadziałało, może nie działać tak samo u Ciebie — każde ciało jest inne, każda historia zdrowotna jest inna. Artykuł ma charakter wyłącznie informacyjny i <strong>nie zastępuje konsultacji lekarskiej</strong>. Przed rozpoczęciem jakiegokolwiek programu treningowego skonsultuj się ze swoim lekarzem — szczególnie jeśli masz jakiekolwiek schorzenia przewlekłe lub nie ćwiczyłeś przez dłuższy czas. Dbaj o siebie mądrze.</em></p></div>
+      <div class="medical-disclaimer"><p><em>⚠️ Ten materiał ma charakter edukacyjny i nie zastępuje indywidualnej konsultacji lekarskiej.</em></p></div>
     </article>
   </div>
 </main>
