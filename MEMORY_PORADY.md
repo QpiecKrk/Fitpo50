@@ -15,6 +15,12 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
   - czas czytania
 - Nie pokazujemy widocznej daty publikacji/aktualizacji na gorze artykulu.
 - Na dole artykulu (nad footerem) zawsze sekcja "Czytelnia" (`.porady-preview.section-padding`) z 3 kafelkami.
+- Interlinking w tresci: docelowo 2-4 linki wewnetrzne osadzone w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
+- Dopuszczamy bardziej wyrazisty styl artykulu (kolory, callouty, typografia, tabele), ale:
+  - zachowujemy spojnosc z designem serwisu,
+  - trzymamy max 2-3 rodziny fontow na artykul,
+  - nie rozwalamy layoutu stylami inline (szczegolnie w sekcji "Czytelnia"),
+  - tabelki musza byc responsywne i czytelne na mobile.
 
 ## SEO i schema
 

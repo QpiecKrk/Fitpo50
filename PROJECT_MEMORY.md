@@ -90,6 +90,11 @@ Przy review sprawdzaj w pierwszej kolejnosci:
     - akcenty kolorystyczne i callouty tam, gdzie wzmacnia to przekaz,
     - bez przesady i bez "przekolorowania" calego artykulu.
   - wyroznienia maja byc spojne z obecnym stylem serwisu (nie zmieniamy design systemu lokalnym taskiem).
+  - dla nowych artykulow mozemy stosowac bardziej wyraziste formatowanie (kolory, typografia, sekcje wyroznione), ale:
+    - opieramy sie na istniejacych tokenach/zmiennych (`var(--color-*)`, istniejące klasy i skale),
+    - nie mieszamy wielu przypadkowych krojow (docelowo max 2-3 rodziny fontow),
+    - nie dodajemy nadmiarowych stylow inline dla layoutu i kart "Czytelnia",
+    - tabelki sa dopuszczone, ale musza byc czytelne mobilnie (responsywne) i miec lekkie, spojne tlo.
 - **Kafelki kategorii i karuzele:**
   - strony kategorii (`rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`) maja byc wizualnie i funkcjonalnie zgodne z wzorcem z `porady.html`,
   - ten sam standard meta czasu czytania, CTA i paginacji `WRÓĆ/DALEJ`,
@@ -301,7 +306,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - sekcja `Zrodla`
   - `.medical-disclaimer`
   - sekcja `.porady-preview` z 3 adekwatnymi kafelkami
-  - **Linkowanie wewnętrzne (Interlinking)**: W treści artykułu stosujemy maksymalnie 4 linki do innych artykułów wewnątrz serwisu. Linkujemy słowa kluczowe naturalnie występujące w tekście, nie zmieniając jego brzmienia (np. słowo „siłownia” staje się linkiem do artykułu o tym, jak zacząć).
+  - **Linkowanie wewnętrzne (Interlinking)**: Docelowo dajemy 2-4 linki wewnętrzne osadzone bezpośrednio w akapitach artykułu (naturalne anchory wynikające z treści, bez zmiany brzmienia zdań). Sama lista typu "Czytaj też" lub same kafelki "Czytelnia" nie zastępują tych linków kontekstowych.
 
 ## Kafelki i linkowanie artykulow
 
@@ -497,6 +502,8 @@ Jesli artykul ma obrazy:
 
 ## Ustalenia krytyczne 2026-04-12 (Publikacja artykulow)
 
+- **BEZWZGLEDNIE (GLOBALNIE)**: caly serwis (strona glowna, strony kategorii, strony zbiorcze i artykuly) utrzymujemy w standardzie:
+  - `SEO -> AEO -> GEO -> AIO`.
 - **BEZWZGLEDNIE**: kazdy nowy artykul i aktualizacja artykulu musi byc wykonana z zachowaniem kolejnosci i standardu:
   - `SEO -> AEO -> GEO -> AIO`.
 - **BEZWZGLEDNIE**: w kazdym artykule musza byc zastosowane wyroznienia wizualne:
