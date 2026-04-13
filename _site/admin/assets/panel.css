@@ -561,6 +561,28 @@ a:hover { text-decoration: underline; }
   gap: 0.2rem;
 }
 
+.video-settings {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  background: rgba(255,255,255,.02);
+}
+
+.video-existing {
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--panel-muted);
+}
+
+.video-existing p {
+  margin: 0 0 0.35rem;
+}
+
+.video-existing a {
+  color: var(--panel-primary);
+}
+
 /* ============================================================
    Responsive
    ============================================================ */

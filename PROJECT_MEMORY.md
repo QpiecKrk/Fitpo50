@@ -178,6 +178,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - `datePublished`/`article:published_time` = faktyczna data publikacji na stronie (nie data napisania draftu).
   - `dateModified`/`article:modified_time` = data ostatniej istotnej aktualizacji merytorycznej.
   - Przy pierwszej publikacji oba pola moga byc takie same.
+  - Przy publikacji nowego artykulu ustawiamy aktualna date dnia publikacji (`datePublished` i `article:published_time`), a wpis jest traktowany jako najnowszy.
 
 ## SEO strony glownej i stron zbiorczych
 
@@ -218,7 +219,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 - Dla stron zbiorczych utrzymujemy `CollectionPage`.
 - `porady.html` powinno uzywac `CollectionPage` z `mainEntity` typu `ItemList`.
 - Dane w schema musza zgadzac sie z realna zawartoscia strony:
-  - Liczba artykułów: 17 (uklad: Ruch, Jedzenie, Zdrowie, Ciekawe)
+  - Liczba artykulow: dynamiczna (zgodna 1:1 z aktualna liczba kart w `porady.html`; nie trzymamy stalej wartosci typu 17)
   - lista artykulow
   - kolejnosc
 
@@ -326,8 +327,9 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 
 ## Featured na stronie glownej
 
-- Sekcja "Najnowszy Artykul" pod BIO promuje najnowszy wpis.
-- Przy nowym artykule trzeba rozwazyc podmiane tej sekcji na swiezsza tresc.
+- Sekcja "Najnowszy Artykul" pod BIO zawsze promuje najnowszy artykul wg daty publikacji.
+- Na `index.html` w sekcji `articles-grid-preview` zawsze pokazujemy 3 najnowsze kafelki.
+- Pierwszy kafelek w tej sekcji musi byc tym samym wpisem co `featured-article`.
 
 ## Mobile i Safari
 
@@ -349,8 +351,8 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 
 ## Porady.html (Karuzela i Paginacja)
 
-- `porady.html` to czytelnia i glowny katalog wszystkich artykulow (obecnie równo 17 artykulow). Zlote zasady:
-  1. **Zgodność liczników i warstwy SEO**: Licznik w HTML (np. `data-article-count`), rzeczywista liczba kafli na stronie oraz deklaracja wpisów w sekcji `<script type="application/ld+json">` (elementy `"numberOfItems"` oraz ich `"position"`) MUSZĄ się zawsze zgadzać co do sztuki. Jeśli oddajesz nowy artykuł, dopisz go na pozycję nr 1 w schemacie JSON-LD i wymuś przesunięcie pozostałych układów.
+- `porady.html` to czytelnia i glowny katalog wszystkich artykulow. Zlote zasady:
+  1. **Zgodność liczników i warstwy SEO**: Licznik w HTML (np. `data-article-count`), rzeczywista liczba kafli na stronie oraz deklaracja wpisów w sekcji `<script type="application/ld+json">` (elementy `"numberOfItems"` oraz ich `"position"`) MUSZĄ się zawsze zgadzać co do sztuki. Kolejnosc pozycji w JSON-LD ma byc spójna z przyjeta kolejnoscia katalogu (nie wpisujemy numerow recznie na stale).
   2. **Struktura kart HTML**: Używamy pełnej zwięzłej struktury dla kafelków (`.article-index-card`): pomarańczowa odznaka `.article-index-card__label`, czysty tekst czasu `.article-index-card__meta` (bez ikon SVG), a CTA dolne to tekst "Otwórz ->". 
   3. **Wymogi ułożenia CSS Grid**: Karty KATEGORYCZNIE układają się w sztywnym podziale. Żeby pojedyncze artykuły na końcu karuzeli się nie rozciągały, definiujemy twardą siatkę: `grid-template-columns: repeat(4, 1fr)` (desktop), `repeat(2, 1fr)` (tablet), oraz `1fr` dla mobile. **Zakaz korzystania z `auto-fit`** w klasie `.carousel-page`.
   4. **Zapobieganie awariom Grid w Safari**: Z powodu znanego wycieku szerokości WebKit/Safari, klasa kontenerowa `.carousel-page` (bedąca elementem list flex) MUSI posiadać atrybuty `min-width: 0;` oraz `max-width: 100%;`. Dodatkowo same obiekty `.article-index-card` też używają `min-width: 0;`. Skutecznie blokuje to przedziury (blowouty) karuzeli w 1 wielki, rozciągnięty ciąg na urządzeniach Apple.
@@ -363,7 +365,10 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - strone kategorii,
   - `porady.html`,
   - `sitemap.xml`,
-  - sekcje featured na `index.html` (jesli nowy wpis jest najnowszy).
+  - `index.html`:
+    - sekcje `featured-article`,
+    - pierwszy kafelek w `articles-grid-preview`,
+    - oraz caly zestaw 3 kafelkow jako 3 najnowsze wpisy.
 - Dla nowych obrazow:
   - generuj `webp` (i `avif`, jesli ma sens),
   - zostaw fallback `png/jpg`,
@@ -457,7 +462,7 @@ Jesli artykul ma obrazy:
 - **KRYTYCZNE**: Obrazy hero/featured/inline w artykulach MUSZA isc przez tag `<picture>` z AVIF i WebP (fallback png/jpg). Wyjatek: logo i male ikony techniczne.
 - **KRYTYCZNE**: W sekcjach "Więcej Porad" (stopka artykułu) używamy klasy `.articles-grid-preview`. NIGDY nie dodajemy tam stylów inline typu `grid-template-columns`. Układem zarządza centralnie `style.css` (1 kolumna na telefonie, 2 na tablecie, 3 na desktopie). CTA kart promocyjnych to zawsze tekstowe "Czytaj artykuł ->", a nazwa sekcji nie może zawierać słowa "Wiedza".
 - **KRYTYCZNE**: Sekcja Hero na `index.html` korzysta z animacji wejściowych (klasa `.hero__eyebrow`, `.hero__title` itd.) oraz efektu paralaksy (skrypt na dole strony). Przy edycji nagłówka należy zachować klasę `.floating` dla badge'a oraz dbać o to, by obraz tła miał `will-change: transform`.
-- **KRYTYCZNE**: Sekcja `featured-article` (pod biogramem na `index.html`) musi zawsze zawierać absolutnie najnowszy artykuł. Ponadto pierwsza karta w sekcji `articles-grid-preview` (Czytelnia) powinna być tym samym lub drugim w kolejności najnowszym wpisem.
+- **KRYTYCZNE**: Sekcja `featured-article` (pod biogramem na `index.html`) oraz pierwszy kafelek w `articles-grid-preview` musza byc ze soba spójne i zawsze wskazywac najnowszy artykul.
 - **KRYTYCZNE**: Wszystkie nagłówki sekcji (`section-header`) muszą posiadać element `<div class="section-header__line"></div>` oraz sub-klasy animacyjne. Standard to: etykieta (slide), tytuł (fade-up), linia (scale-out) i opis (fade-in), wyzwalane przez klasę `.reveal`.
 - **KRYTYCZNE**: Artykuł „Siła chwytu” (12. w kolejności) wprowadził wzorzec długiego, angażującego tytułu na kafelkach: „Zaciśnij dłoń. Właśnie zrobiłeś ważniejszy test zdrowotny niż pomiar ciśnienia.”. Należy utrzymać ten standard dla tego wpisu we wszystkich sekcjach (Home, Porady, Zdrowie).
 - Zmiany techniczne, SEO i wizualne nie powinny przypadkiem zmieniac sensu tresci.

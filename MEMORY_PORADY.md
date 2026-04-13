@@ -47,4 +47,7 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
   - odpowiednia strona kategorii (Ruch/Jedzenie/Zdrowie/Ciekawe),
   - `porady.html`,
   - `sitemap.xml`,
-  - sekcje featured na `index.html` (jesli nowy wpis jest najnowszy).
+  - `index.html`:
+    - sekcja `featured-article`,
+    - pierwszy kafelek w dolnej sekcji 3 kart (`articles-grid-preview`),
+    - cala sekcja ma zawsze pokazywac 3 najnowsze wpisy wg daty publikacji.
