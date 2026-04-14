@@ -178,6 +178,8 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - `twitter:image`
   - `article:published_time`
   - `article:modified_time`
+- `title` ma byc krotki, wyszukiwalny i semantycznie spojny z `h1` (bez sztucznego "upychania" fraz).
+- Lead artykulu powinien zawierac minimum jedno naturalne zdanie z frazami intencyjnymi (np. "trening po 50", "silownia po 50 roku zycia"), bez keyword stuffing.
 - Jesli w innych artykulach jest stosowane `article:author`, utrzymujemy ten sam wzorzec.
 - Zasada dat:
   - `datePublished`/`article:published_time` = faktyczna data publikacji na stronie (nie data napisania draftu).
@@ -306,7 +308,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - sekcja `Zrodla`
   - `.medical-disclaimer`
   - sekcja `.porady-preview` z 3 adekwatnymi kafelkami
-  - **Linkowanie wewnętrzne (Interlinking)**: Docelowo dajemy 2-4 linki wewnętrzne osadzone bezpośrednio w akapitach artykułu (naturalne anchory wynikające z treści, bez zmiany brzmienia zdań). Sama lista typu "Czytaj też" lub same kafelki "Czytelnia" nie zastępują tych linków kontekstowych.
+  - **Linkowanie wewnętrzne (Interlinking)**: Dajemy minimum 4 linki wewnętrzne osadzone bezpośrednio w akapitach artykułu (naturalne anchory wynikające z treści, bez zmiany brzmienia zdań). Sama lista typu "Czytaj też" lub same kafelki "Czytelnia" nie zastępują tych linków kontekstowych.
 
 ## Kafelki i linkowanie artykulow
 
@@ -514,3 +516,24 @@ Jesli artykul ma obrazy:
   - rozne wielkosci czcionek (naglowki, akcenty, leady, callouty),
   - rozne rodzaje czcionek (co najmniej font display + font body) w ramach wzorca projektu.
 - Powyzsze zasady sa nadrzedne wobec starszego zapisu o "umiarkowanych wyroznieniach" i stosujemy je globalnie dla wszystkich artykulow.
+
+## Ustalenia krytyczne 2026-04-14 (Doprecyzowanie publikacji)
+
+- Dla NOWEGO artykulu:
+  - `datePublished` i `article:published_time` ustawiamy na faktyczna date publikacji (dzien wdrozenia),
+  - nie uzywamy daty draftu ani daty przygotowania materialu.
+- `dateModified` i `article:modified_time` aktualizujemy przy kazdej istotnej zmianie merytorycznej.
+- Kazdy claim liczbowy (np. `%`, liczba dni, ryzyko, wzrost/spadek) musi miec odpowiadajace zrodlo z URL w sekcji `Zrodla`.
+  - Jesli brak pewnego zrodla, usuwamy liczbe albo opisujemy mechanizm bez twardej wartosci liczbowej.
+- Publikacja artykulu jest zakonczona dopiero po pelnej synchronizacji:
+  - plik artykulu,
+  - odpowiednia strona kategorii,
+  - `porady.html`,
+  - `index.html` (`featured-article` + 3 kafelki `articles-grid-preview`),
+  - `sitemap.xml`,
+  - eksport do `_site`.
+- W `porady.html` zawsze utrzymujemy spojność:
+  - `numberOfItems` == liczba kart `data-article-item` == licznik `data-article-count`,
+  - `data-order` pozostaje unikalne.
+- Interlinking w tresci artykulu:
+  - minimum 4 linki wewnetrzne osadzone kontekstowo w akapitach (nie tylko sekcja `Czytelnia`).
