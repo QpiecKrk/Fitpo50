@@ -33,6 +33,10 @@ if (!empty($_GET['id'])) {
 
 $logoUrl = 'assets/logo.jpg?v=2';
 $pageTitle = $editMode ? 'Edytuj news' : 'Dodaj news';
+$httpHost = strtolower((string)($_SERVER['HTTP_HOST'] ?? ''));
+$newsPreviewBase = strpos($httpHost, 'admin.') === 0
+    ? 'https://fitpo50.pl/assets/news/'
+    : '../assets/news/';
 $sources = $item['sources'];
 if (empty($sources)) {
     $sources = [['label' => '', 'url' => '']];
@@ -99,10 +103,10 @@ if (empty($sources)) {
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<strong class='news-text-strong-black'>" data-wrap-close="</strong>" title="Czarny bold"><strong>B+</strong></button>
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<em>" data-wrap-close="</em>" title="Kursywa"><em>I</em></button>
 
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--1'>" data-wrap-close="</span>" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;"><span class="sr-only">Kolor 1</span></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--2'>" data-wrap-close="</span>" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;"><span class="sr-only">Kolor 2</span></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--3'>" data-wrap-close="</span>" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;"><span class="sr-only">Kolor 3</span></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--4'>" data-wrap-close="</span>" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;"><span class="sr-only">Kolor 4</span></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--1'>" data-wrap-close="</span>" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;background:#E6F6F8;border-color:#0B7285;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--2'>" data-wrap-close="</span>" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;background:#EAF1FF;border-color:#1D4ED8;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--3'>" data-wrap-close="</span>" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--4'>" data-wrap-close="</span>" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
             </div>
 
             <div class="news-editor-toolbar" style="margin-top:0.5rem;">
@@ -163,9 +167,9 @@ if (empty($sources)) {
             <?php if (!empty($item['image_base'])): ?>
               <div class="news-image-preview">
                 <picture>
-                  <source srcset="../assets/news/<?= h($item['image_base']) ?>.avif" type="image/avif">
-                  <source srcset="../assets/news/<?= h($item['image_base']) ?>.webp" type="image/webp">
-                  <img src="../assets/news/<?= h($item['image_base']) ?>.jpg" alt="<?= h($item['image_alt'] ?: $item['title']) ?>" width="320" height="240" loading="lazy">
+                  <source srcset="<?= h($newsPreviewBase . $item['image_base']) ?>.avif" type="image/avif">
+                  <source srcset="<?= h($newsPreviewBase . $item['image_base']) ?>.webp" type="image/webp">
+                  <img src="<?= h($newsPreviewBase . $item['image_base']) ?>.jpg" alt="<?= h($item['image_alt'] ?: $item['title']) ?>" width="320" height="240" loading="lazy">
                 </picture>
               </div>
               <label class="media-item__delete" style="margin:0.6rem 0 0.8rem;">
@@ -207,11 +211,37 @@ if (empty($sources)) {
   const addSourceButton = document.getElementById('add-source-btn');
   const sourcesList = document.getElementById('news-sources-list');
   const sourceTemplate = document.getElementById('news-source-template');
+  let savedSelection = null;
+
+  function rememberSelection() {
+    if (!textarea) return;
+    savedSelection = {
+      start: textarea.selectionStart ?? 0,
+      end: textarea.selectionEnd ?? 0,
+    };
+  }
+
+  function resolveSelection() {
+    if (!textarea) return null;
+    const current = {
+      start: textarea.selectionStart ?? 0,
+      end: textarea.selectionEnd ?? 0,
+    };
+    if (current.end > current.start) {
+      return current;
+    }
+    if (savedSelection && savedSelection.end > savedSelection.start) {
+      return savedSelection;
+    }
+    return current;
+  }
 
   function wrapSelection(openTag, closeTag) {
     if (!textarea) return;
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
+    const range = resolveSelection();
+    if (!range) return;
+    const start = range.start;
+    const end = range.end;
 
     if (start === end) {
       alert('Najpierw zaznacz słowo lub fragment tekstu.');
@@ -227,19 +257,31 @@ if (empty($sources)) {
     const cursorStart = start + openTag.length;
     const cursorEnd = cursorStart + selected.length;
     textarea.setSelectionRange(cursorStart, cursorEnd);
+    rememberSelection();
+  }
+
+  if (textarea) {
+    ['select', 'keyup', 'mouseup', 'touchend', 'input'].forEach((eventName) => {
+      textarea.addEventListener(eventName, rememberSelection);
+    });
   }
 
   toolbarButtons.forEach((button) => {
-    button.addEventListener('mousedown', (event) => {
-      event.preventDefault();
+    ['pointerdown', 'mousedown'].forEach((eventName) => {
+      button.addEventListener(eventName, (event) => {
+        rememberSelection();
+        event.preventDefault();
+      });
     });
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
       wrapSelection(button.getAttribute('data-wrap-open') || '', button.getAttribute('data-wrap-close') || '');
     });
   });
 
   if (insertLinkButton) {
     insertLinkButton.addEventListener('click', () => {
+      rememberSelection();
       if (!linkSelect || !linkSelect.value) {
         alert('Wybierz link wewnętrzny z listy.');
         return;
