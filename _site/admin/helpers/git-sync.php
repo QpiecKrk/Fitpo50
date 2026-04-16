@@ -115,6 +115,7 @@ function runGitAutoSync(array $groups, string $actionLabel): array {
     } finally {
         @flock($lockHandle, LOCK_UN);
         fclose($lockHandle);
+        @unlink($lockPath);
     }
 }
 
