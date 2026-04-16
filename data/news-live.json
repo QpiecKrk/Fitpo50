@@ -1,11 +1,11 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-16T10:52:10+00:00",
+    "updatedAt": "2026-04-16T10:53:14+00:00",
     "items": [
         {
             "id": "news_93dbe4b07a3f",
             "title": "Nawet małe światło w nocy może podnosić cukier rano",
-            "content_html": "<p><strong>Badanie opublikowane w PNAS</strong> pokazało, że sen przy górnym świetle o natężeniu około 100 luksów może pogarszać kontrolę glukozy już następnego ranka. To ważne, bo 100 luksów nie oznacza ostrego światła.</p>\n<p>W praktyce problemem nie musi być tylko włączona lampa, ale też telewizor, światło z korytarza albo uliczna latarnia wpadająca przez cienkie zasłony.</p>\n<p><span class=\"news-text-tone--2\">Światło działa nawet przez zamknięte powieki.</span> Organizm dostaje sygnał, że noc nie jest naprawdę ciemna, co może tłumić melatoninę, pobudzać układ współczulny i pogarszać jakość snu.</p>\n<p>To nie znaczy, że jedna gorsza noc wszystko rozwala. Problem częściej jest cichy i kumulacyjny.</p>\n<p><strong class=\"news-text-strong-black\">Wniosek praktyczny:</strong> sypialnia powinna być możliwie ciemna. Wyłącz TV, usuń zbędne lampki, zasłoń okna i ogranicz światło z korytarza.</p>",
+            "content_html": "<p><strong>Badanie opublikowane w PNAS</strong> pokazało, że sen przy górnym świetle o natężeniu około 100 luksów może pogarszać kontrolę glukozy już następnego ranka. To ważne, bo 100 luksów nie oznacza ostrego światła.</p>\n<p>W praktyce problemem nie musi być tylko włączona lampa, ale też telewizor, światło z korytarza albo uliczna latarnia wpadająca przez cienkie zasłony.</p>\n<p><span class=\"news-text-tone--2\"><strong>Światło działa nawet przez zamknięte powieki</strong>.</span> Organizm dostaje sygnał, że noc nie jest naprawdę ciemna, co może tłumić melatoninę, pobudzać układ współczulny i pogarszać jakość snu.</p>\n<p>To nie znaczy, że jedna gorsza noc wszystko rozwala. Problem częściej jest cichy i kumulacyjny.</p>\n<p><strong class=\"news-text-strong-black\">Wniosek praktyczny:</strong> sypialnia powinna być możliwie ciemna. Wyłącz TV, usuń zbędne lampki, zasłoń okna i ogranicz światło z korytarza.</p>",
             "status": "published",
             "sort_order": 1,
             "image_base": "news_20260416_094003_237b3c7b",
@@ -21,7 +21,7 @@
                 }
             ],
             "created_at": "2026-04-16T09:40:03+00:00",
-            "updated_at": "2026-04-16T10:52:10+00:00",
+            "updated_at": "2026-04-16T10:53:14+00:00",
             "published_at": "2026-04-16T09:40:03+00:00"
         },
         {
