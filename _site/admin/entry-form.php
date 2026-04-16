@@ -50,9 +50,9 @@ $uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horiz
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/panel.css">
+<link rel="stylesheet" href="assets/panel.css?v=20260416-4">
 </head>
-<body class="panel-body">
+<body class="panel-body panel-body--entry-form panel-body--has-mobile-nav">
 
 <header class="panel-header">
   <div class="panel-header__inner">
@@ -111,9 +111,42 @@ $uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horiz
 
           <div class="form-group">
             <label for="content" class="form-label">Treść główna <span class="required">*</span></label>
-            <textarea id="content" name="content" class="form-input form-textarea form-textarea--lg"
-              required placeholder="Treść wpisu — HTML lub czysty tekst..."><?= h($entry['content'] ?? '') ?></textarea>
-            <p class="form-hint">Możesz używać HTML: &lt;p&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;ul&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;blockquote&gt; itp.</p>
+            <div class="entry-editor-layout">
+              <aside class="entry-editor-rail news-editor-toolbar" role="toolbar" aria-label="Formatowanie wpisu">
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline entry-editor-action" data-format-open="<strong>" data-format-close="</strong>" data-active-check="strong" title="Pogrubienie"><strong>B</strong></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline entry-editor-action" data-format-open="<strong class='news-text-strong-black'>" data-format-close="</strong>" data-active-check="class:news-text-strong-black" title="Czarny bold"><strong>B+</strong></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline entry-editor-action" data-format-open="<em>" data-format-close="</em>" data-active-check="em" title="Kursywa"><em>I</em></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--1'>" data-format-close="</span>" data-active-check="class:news-text-tone--1" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;background:#E6F6F8;border-color:#0B7285;"></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--2'>" data-format-close="</span>" data-active-check="class:news-text-tone--2" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;background:#EAF1FF;border-color:#1D4ED8;"></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
+              </aside>
+
+              <div class="entry-editor-main">
+                <div class="news-editor-toolbar news-editor-toolbar--links">
+                  <input type="url" id="entry-link-url" class="form-input" placeholder="Wklej link (https://... lub /sciezka.html)">
+                  <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="entry-insert-link-btn">Wstaw link</button>
+                </div>
+
+                <div class="news-editor-surface">
+                  <div id="entry-content-editor"
+                       class="news-content-editor"
+                       contenteditable="true"
+                       spellcheck="true"
+                       data-placeholder="Wpisz treść wpisu i formatuj ją szybko z paska po lewej lub na dole telefonu."></div>
+                </div>
+              </div>
+            </div>
+            <div class="news-editor-mobile-bar" role="toolbar" aria-label="Szybkie formatowanie mobilne">
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline entry-editor-action" data-format-open="<strong>" data-format-close="</strong>" data-active-check="strong" title="Pogrubienie"><strong>B</strong></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline entry-editor-action" data-format-open="<strong class='news-text-strong-black'>" data-format-close="</strong>" data-active-check="class:news-text-strong-black" title="Czarny bold"><strong>B+</strong></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline entry-editor-action" data-format-open="<em>" data-format-close="</em>" data-active-check="em" title="Kursywa"><em>I</em></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--1'>" data-format-close="</span>" data-active-check="class:news-text-tone--1" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;background:#E6F6F8;border-color:#0B7285;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--2'>" data-format-close="</span>" data-active-check="class:news-text-tone--2" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;background:#EAF1FF;border-color:#1D4ED8;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
+            </div>
+            <textarea id="content" name="content" class="entry-content-input-hidden" hidden required><?= h($entry['content'] ?? '') ?></textarea>
           </div>
 
           <!-- Upload mediów -->
@@ -156,7 +189,7 @@ $uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horiz
         <div class="form-sidebar">
 
           <!-- Akcje -->
-          <div class="sidebar-card">
+          <div class="sidebar-card form-actions-desktop">
             <h3 class="sidebar-card__title">Publikacja</h3>
             <div class="form-group">
               <label for="status" class="form-label">Status</label>
@@ -272,6 +305,10 @@ $uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horiz
 
         </div>
       </div>
+      <div class="form-actions-mobile" data-form-actions-mobile>
+        <button type="submit" name="action" value="save" class="btn-panel btn-panel--primary btn-full">💾 Zapisz</button>
+        <button type="submit" name="action" value="draft" class="btn-panel btn-panel--outline btn-full">📝 Roboczy</button>
+      </div>
     </form>
 
   </div>
@@ -286,6 +323,12 @@ const form = document.getElementById('entry-form');
 const videoSourceSelect = document.getElementById('video_source');
 const youtubeSettings = document.getElementById('youtube-settings');
 const uploadSettings = document.getElementById('upload-settings');
+const entryEditor = document.getElementById('entry-content-editor');
+const entryContentInput = document.getElementById('content');
+const entryToolbarButtons = document.querySelectorAll('.entry-editor-action');
+const entryLinkInput = document.getElementById('entry-link-url');
+const entryInsertLinkButton = document.getElementById('entry-insert-link-btn');
+let entrySavedSelection = null;
 
 function toggleVideoSettings() {
   const source = videoSourceSelect ? videoSourceSelect.value : 'none';
@@ -296,6 +339,158 @@ function toggleVideoSettings() {
 if (videoSourceSelect) {
   videoSourceSelect.addEventListener('change', toggleVideoSettings);
   toggleVideoSettings();
+}
+
+if (entryEditor && entryContentInput) {
+  entryEditor.innerHTML = entryContentInput.value.trim() !== '' ? entryContentInput.value : '<p><br></p>';
+
+  function syncEntryTextareaFromEditor() {
+    entryContentInput.value = entryEditor.innerHTML.trim();
+  }
+
+  function entrySelectionWithinEditor(selection) {
+    if (!selection || selection.rangeCount === 0) return false;
+    const range = selection.getRangeAt(0);
+    return entryEditor.contains(range.commonAncestorContainer);
+  }
+
+  function rememberEntrySelection() {
+    const selection = window.getSelection();
+    if (!entrySelectionWithinEditor(selection)) return;
+    entrySavedSelection = selection.getRangeAt(0).cloneRange();
+  }
+
+  function restoreEntrySelection() {
+    if (!entrySavedSelection) return false;
+    const selection = window.getSelection();
+    if (!selection) return false;
+    selection.removeAllRanges();
+    selection.addRange(entrySavedSelection);
+    return true;
+  }
+
+  function entryRangeToHtml(range) {
+    const temp = document.createElement('div');
+    temp.appendChild(range.cloneContents());
+    return temp.innerHTML;
+  }
+
+  function wrapEntrySelection(openTag, closeTag) {
+    entryEditor.focus();
+    if (!restoreEntrySelection()) {
+      rememberEntrySelection();
+    }
+
+    const selection = window.getSelection();
+    if (!entrySelectionWithinEditor(selection)) {
+      alert('Najpierw zaznacz słowo lub fragment tekstu.');
+      return;
+    }
+
+    const range = selection.getRangeAt(0);
+    if (range.collapsed) {
+      alert('Najpierw zaznacz słowo lub fragment tekstu.');
+      return;
+    }
+
+    const selectedHtml = entryRangeToHtml(range);
+    document.execCommand('insertHTML', false, openTag + selectedHtml + closeTag);
+    syncEntryTextareaFromEditor();
+    rememberEntrySelection();
+    updateEntryToolbarState();
+  }
+
+  function entryEnsureNotEmpty() {
+    const plain = (entryEditor.textContent || '').replace(/\u00a0/g, ' ').trim();
+    return plain !== '';
+  }
+
+  function entryGetSelectionElement() {
+    const selection = window.getSelection();
+    if (!entrySelectionWithinEditor(selection)) return null;
+
+    let node = selection.getRangeAt(0).commonAncestorContainer;
+    if (node.nodeType === Node.TEXT_NODE) {
+      node = node.parentElement;
+    }
+
+    return node instanceof Element ? node : null;
+  }
+
+  function entryMatchesActiveCheck(element, check) {
+    if (!element || !check) return false;
+    if (check === 'strong') return !!element.closest('strong, b, .news-text-strong-black');
+    if (check === 'em') return !!element.closest('em, i');
+    if (check.startsWith('class:')) {
+      const cls = check.slice('class:'.length).trim();
+      return cls !== '' ? !!element.closest('.' + cls) : false;
+    }
+    return false;
+  }
+
+  function updateEntryToolbarState() {
+    const selectedEl = entryGetSelectionElement();
+    entryToolbarButtons.forEach((button) => {
+      const check = button.getAttribute('data-active-check') || '';
+      const active = selectedEl ? entryMatchesActiveCheck(selectedEl, check) : false;
+      button.classList.toggle('is-active', active);
+    });
+  }
+
+  function bindEntryToolbarAction(button) {
+    const eventName = window.PointerEvent ? 'pointerdown' : ('ontouchstart' in window ? 'touchstart' : 'mousedown');
+    const opts = eventName === 'touchstart' ? { passive: false } : false;
+
+    button.addEventListener(eventName, (event) => {
+      event.preventDefault();
+      rememberEntrySelection();
+      wrapEntrySelection(button.getAttribute('data-format-open') || '', button.getAttribute('data-format-close') || '');
+    }, opts);
+
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  }
+
+  document.addEventListener('selectionchange', rememberEntrySelection);
+  document.addEventListener('selectionchange', updateEntryToolbarState);
+
+  ['input', 'keyup', 'blur'].forEach((eventName) => {
+    entryEditor.addEventListener(eventName, () => {
+      syncEntryTextareaFromEditor();
+      rememberEntrySelection();
+      updateEntryToolbarState();
+    });
+  });
+
+  entryEditor.addEventListener('focus', () => {
+    rememberEntrySelection();
+    updateEntryToolbarState();
+  });
+
+  entryToolbarButtons.forEach((button) => bindEntryToolbarAction(button));
+
+  if (entryInsertLinkButton) {
+    const entryLinkEventName = window.PointerEvent ? 'pointerdown' : ('ontouchstart' in window ? 'touchstart' : 'mousedown');
+    const entryLinkEventOpts = entryLinkEventName === 'touchstart' ? { passive: false } : false;
+
+    const applyEntryLink = (event) => {
+      event.preventDefault();
+      rememberEntrySelection();
+      const href = (entryLinkInput?.value || '').trim();
+      if (!href) {
+        alert('Wklej link do pola obok.');
+        return;
+      }
+      wrapEntrySelection('<a href="' + href + '">', '</a>');
+    };
+
+    entryInsertLinkButton.addEventListener(entryLinkEventName, applyEntryLink, entryLinkEventOpts);
+    entryInsertLinkButton.addEventListener('click', (event) => event.preventDefault());
+  }
+
+  syncEntryTextareaFromEditor();
+  updateEntryToolbarState();
 }
 
 fileInput.addEventListener('change', function() {
@@ -377,13 +572,31 @@ function renderPreview() {
 }
 
 // Intercepcja wysyłania formularza
-form.addEventListener('submit', function() {
+form.addEventListener('submit', function(event) {
+  if (entryEditor && entryContentInput) {
+    entryContentInput.value = entryEditor.innerHTML.trim();
+    const plain = (entryEditor.textContent || '').replace(/\u00a0/g, ' ').trim();
+    if (!plain) {
+      event.preventDefault();
+      alert('Treść wpisu jest wymagana.');
+      entryEditor.focus();
+      return;
+    }
+  }
+
   // Transfer zgromadzonych plików do natywnego inputa przed wysłaniem żądania
   const dt = new DataTransfer();
   accumulatedFiles.forEach(f => dt.items.add(f));
   fileInput.files = dt.files;
 });
 </script>
+
+<nav class="panel-mobile-nav" aria-label="Nawigacja panelu">
+  <a href="dashboard.php" class="panel-mobile-nav__item">Wpisy</a>
+  <a href="entry-form.php" class="panel-mobile-nav__item panel-mobile-nav__item--active">Nowy</a>
+  <a href="news-dashboard.php" class="panel-mobile-nav__item">Newsy</a>
+  <a href="logout.php" class="panel-mobile-nav__item panel-mobile-nav__item--logout">Wyloguj</a>
+</nav>
 
 </body>
 </html>

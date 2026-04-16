@@ -33,9 +33,9 @@ $total = array_sum($cnt);
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/panel.css">
+<link rel="stylesheet" href="assets/panel.css?v=20260416-4">
 </head>
-<body class="panel-body">
+<body class="panel-body panel-body--dashboard panel-body--has-mobile-nav">
 
 <header class="panel-header">
   <div class="panel-header__inner">
@@ -99,6 +99,55 @@ $total = array_sum($cnt);
         <a href="entry-form.php" class="btn-panel btn-panel--primary">Dodaj pierwszy wpis</a>
       </div>
     <?php else: ?>
+      <div class="entries-mobile-cards">
+        <?php foreach ($entries as $e): ?>
+          <article class="entry-mobile-card">
+            <div class="entry-mobile-card__head">
+              <div class="entry-mobile-card__date"><?= h($e['entry_date']) ?></div>
+              <span class="status-badge status-badge--<?= h($e['status']) ?>">
+                <?php echo match($e['status']) {
+                  'published' => '✅ Opublikowany',
+                  'draft'     => '📝 Roboczy',
+                  'hidden'    => '🙈 Ukryty',
+                  default     => h($e['status']),
+                }; ?>
+              </span>
+            </div>
+            <h3 class="entry-mobile-card__title"><?= h($e['title']) ?></h3>
+            <?php if ($e['lead']): ?>
+              <p class="entry-mobile-card__lead"><?= h(mb_substr($e['lead'], 0, 120)) ?><?= mb_strlen($e['lead']) > 120 ? '…' : '' ?></p>
+            <?php endif; ?>
+            <?php if ($e['html_file']): ?>
+              <a href="<?= SITE_URL . h($e['html_file']) ?>" target="_blank" rel="noopener noreferrer" class="link-small">
+                <?= h($e['html_file']) ?> ↗
+              </a>
+            <?php endif; ?>
+            <div class="entry-mobile-card__actions">
+              <a href="entry-form.php?id=<?= $e['id'] ?>" class="btn-panel btn-panel--sm btn-panel--outline">Edytuj</a>
+              <?php if ($e['status'] !== 'published'): ?>
+                <form method="POST" action="actions/publish.php">
+                  <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
+                  <input type="hidden" name="id" value="<?= $e['id'] ?>">
+                  <button type="submit" class="btn-panel btn-panel--sm btn-panel--success">Opublikuj</button>
+                </form>
+              <?php else: ?>
+                <form method="POST" action="actions/unpublish.php">
+                  <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
+                  <input type="hidden" name="id" value="<?= $e['id'] ?>">
+                  <button type="submit" class="btn-panel btn-panel--sm btn-panel--warn">Cofnij publ.</button>
+                </form>
+              <?php endif; ?>
+              <form method="POST" action="actions/delete.php"
+                    onsubmit="return confirm('Usunąć wpis „<?= addslashes(h($e['title'])) ?>”? Tej operacji nie można cofnąć.')">
+                <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
+                <input type="hidden" name="id" value="<?= $e['id'] ?>">
+                <button type="submit" class="btn-panel btn-panel--sm btn-panel--danger">Usuń</button>
+              </form>
+            </div>
+          </article>
+        <?php endforeach; ?>
+      </div>
+
       <div class="entries-table-wrap">
         <table class="entries-table">
           <thead>
@@ -170,6 +219,13 @@ $total = array_sum($cnt);
 
   </div>
 </main>
+
+<nav class="panel-mobile-nav" aria-label="Nawigacja panelu">
+  <a href="dashboard.php" class="panel-mobile-nav__item panel-mobile-nav__item--active">Wpisy</a>
+  <a href="entry-form.php" class="panel-mobile-nav__item">Nowy</a>
+  <a href="news-dashboard.php" class="panel-mobile-nav__item">Newsy</a>
+  <a href="logout.php" class="panel-mobile-nav__item panel-mobile-nav__item--logout">Wyloguj</a>
+</nav>
 
 </body>
 </html>

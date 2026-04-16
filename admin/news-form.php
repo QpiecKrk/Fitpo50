@@ -53,9 +53,9 @@ if (empty($sources)) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/panel.css?v=20260416-3">
+<link rel="stylesheet" href="assets/panel.css?v=20260416-4">
 </head>
-<body class="panel-body panel-body--news-form">
+<body class="panel-body panel-body--news-form panel-body--has-mobile-nav">
 
 <header class="panel-header">
   <div class="panel-header__inner">
@@ -98,34 +98,47 @@ if (empty($sources)) {
           <div class="form-group">
             <label for="news-content" class="form-label">Treść newsa <span class="required">*</span></label>
 
-            <div class="news-editor-toolbar" role="toolbar" aria-label="Formatowanie treści">
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<strong>" data-wrap-close="</strong>" title="Pogrubienie"><strong>B</strong></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<strong class='news-text-strong-black'>" data-wrap-close="</strong>" title="Czarny bold"><strong>B+</strong></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<em>" data-wrap-close="</em>" title="Kursywa"><em>I</em></button>
+            <div class="news-editor-layout">
+              <aside class="news-editor-rail news-editor-toolbar" role="toolbar" aria-label="Formatowanie treści">
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<strong>" data-format-close="</strong>" data-active-check="strong" title="Pogrubienie"><strong>B</strong></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<strong class='news-text-strong-black'>" data-format-close="</strong>" data-active-check="class:news-text-strong-black" title="Czarny bold"><strong>B+</strong></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<em>" data-format-close="</em>" data-active-check="em" title="Kursywa"><em>I</em></button>
 
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--1'>" data-wrap-close="</span>" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;background:#E6F6F8;border-color:#0B7285;"></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--2'>" data-wrap-close="</span>" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;background:#EAF1FF;border-color:#1D4ED8;"></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--3'>" data-wrap-close="</span>" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--4'>" data-wrap-close="</span>" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--1'>" data-format-close="</span>" data-active-check="class:news-text-tone--1" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;background:#E6F6F8;border-color:#0B7285;"></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--2'>" data-format-close="</span>" data-active-check="class:news-text-tone--2" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;background:#EAF1FF;border-color:#1D4ED8;"></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
+              </aside>
+
+              <div class="news-editor-main">
+                <div class="news-editor-toolbar news-editor-toolbar--links">
+                  <select id="internal-link-select" class="form-input form-select">
+                    <option value="">Wybierz link wewnętrzny...</option>
+                    <?php foreach ($internalLinks as $link): ?>
+                      <option value="<?= h($link['href']) ?>"><?= h($link['label']) ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                  <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="insert-link-btn">Wstaw link</button>
+                </div>
+
+                <div class="news-editor-surface" style="background:#f8fbff;border:1px solid #cfe1ea;">
+                  <div id="news-content-editor"
+                       class="news-content-editor"
+                       contenteditable="true"
+                       spellcheck="true"
+                       style="background:#ffffff;color:#102130;"
+                       data-placeholder="Wpisz treść newsa i formatuj ją z paska nad edytorem."></div>
+                </div>
+              </div>
             </div>
-
-            <div class="news-editor-toolbar news-editor-toolbar--links">
-              <select id="internal-link-select" class="form-input form-select">
-                <option value="">Wybierz link wewnętrzny...</option>
-                <?php foreach ($internalLinks as $link): ?>
-                  <option value="<?= h($link['href']) ?>"><?= h($link['label']) ?></option>
-                <?php endforeach; ?>
-              </select>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="insert-link-btn">Wstaw link</button>
-            </div>
-
-            <div class="news-editor-surface" style="background:#f8fbff;border:1px solid #cfe1ea;">
-              <div id="news-content-editor"
-                   class="news-content-editor"
-                   contenteditable="true"
-                   spellcheck="true"
-                   style="background:#ffffff;color:#102130;"
-                   data-placeholder="Wpisz treść newsa i formatuj ją z paska nad edytorem."></div>
+            <div class="news-editor-mobile-bar" role="toolbar" aria-label="Szybkie formatowanie mobilne">
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<strong>" data-format-close="</strong>" data-active-check="strong" title="Pogrubienie"><strong>B</strong></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<strong class='news-text-strong-black'>" data-format-close="</strong>" data-active-check="class:news-text-strong-black" title="Czarny bold"><strong>B+</strong></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<em>" data-format-close="</em>" data-active-check="em" title="Kursywa"><em>I</em></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--1'>" data-format-close="</span>" data-active-check="class:news-text-tone--1" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;background:#E6F6F8;border-color:#0B7285;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--2'>" data-format-close="</span>" data-active-check="class:news-text-tone--2" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;background:#EAF1FF;border-color:#1D4ED8;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
             </div>
             <input type="hidden" id="news-content" name="content" value="<?= h($item['content_html']) ?>">
           </div>
@@ -146,7 +159,7 @@ if (empty($sources)) {
         </div>
 
         <div class="form-sidebar">
-          <div class="sidebar-card">
+          <div class="sidebar-card form-actions-desktop">
             <h3 class="sidebar-card__title">Publikacja</h3>
             <div class="form-group">
               <label for="status" class="form-label">Status</label>
@@ -197,6 +210,10 @@ if (empty($sources)) {
           </div>
         </div>
       </div>
+      <div class="form-actions-mobile" data-form-actions-mobile>
+        <button type="submit" class="btn-panel btn-panel--primary btn-full">💾 Zapisz news</button>
+        <a href="news-dashboard.php" class="btn-panel btn-panel--outline btn-full">Anuluj</a>
+      </div>
     </form>
   </div>
 </main>
@@ -213,7 +230,7 @@ if (empty($sources)) {
 (function () {
   const textarea = document.getElementById('news-content');
   const editor = document.getElementById('news-content-editor');
-  const toolbarButtons = document.querySelectorAll('[data-wrap-open]');
+  const toolbarButtons = document.querySelectorAll('[data-format-open]');
   const linkSelect = document.getElementById('internal-link-select');
   const insertLinkButton = document.getElementById('insert-link-btn');
   const addSourceButton = document.getElementById('add-source-btn');
@@ -262,7 +279,9 @@ if (empty($sources)) {
 
   function wrapSelection(openTag, closeTag) {
     editor.focus();
-    restoreSelection();
+    if (!restoreSelection()) {
+      rememberSelection();
+    }
 
     const selection = window.getSelection();
     if (!selectionWithinEditor(selection)) {
@@ -280,6 +299,7 @@ if (empty($sources)) {
     document.execCommand('insertHTML', false, openTag + selectedHtml + closeTag);
     syncTextareaFromEditor();
     rememberSelection();
+    updateToolbarState();
   }
 
   function ensureEditorNotEmpty() {
@@ -288,33 +308,80 @@ if (empty($sources)) {
   }
 
   document.addEventListener('selectionchange', rememberSelection);
+  document.addEventListener('selectionchange', updateToolbarState);
 
   ['input', 'keyup', 'blur'].forEach((eventName) => {
     editor.addEventListener(eventName, () => {
       syncTextareaFromEditor();
       rememberSelection();
+      updateToolbarState();
     });
   });
 
-  editor.addEventListener('focus', rememberSelection);
+  editor.addEventListener('focus', () => {
+    rememberSelection();
+    updateToolbarState();
+  });
   syncTextareaFromEditor();
 
-  toolbarButtons.forEach((button) => {
-    ['pointerdown', 'mousedown', 'touchstart'].forEach((eventName) => {
-      const options = eventName === 'touchstart' ? { passive: false } : false;
-      button.addEventListener(eventName, (event) => {
-        rememberSelection();
-        event.preventDefault();
-      }, options);
+  function getSelectionElement() {
+    const selection = window.getSelection();
+    if (!selectionWithinEditor(selection)) {
+      return null;
+    }
+
+    let node = selection.getRangeAt(0).commonAncestorContainer;
+    if (node.nodeType === Node.TEXT_NODE) {
+      node = node.parentElement;
+    }
+
+    return node instanceof Element ? node : null;
+  }
+
+  function matchesActiveCheck(element, check) {
+    if (!element || !check) return false;
+    if (check === 'strong') return !!element.closest('strong, b, .news-text-strong-black');
+    if (check === 'em') return !!element.closest('em, i');
+    if (check.startsWith('class:')) {
+      const cls = check.slice('class:'.length).trim();
+      return cls !== '' ? !!element.closest('.' + cls) : false;
+    }
+    return false;
+  }
+
+  function updateToolbarState() {
+    const selectedEl = getSelectionElement();
+    toolbarButtons.forEach((button) => {
+      const check = button.getAttribute('data-active-check') || '';
+      const active = selectedEl ? matchesActiveCheck(selectedEl, check) : false;
+      button.classList.toggle('is-active', active);
     });
+  }
+
+  function bindToolbarAction(button) {
+    const eventName = window.PointerEvent ? 'pointerdown' : ('ontouchstart' in window ? 'touchstart' : 'mousedown');
+    const opts = eventName === 'touchstart' ? { passive: false } : false;
+
+    button.addEventListener(eventName, (event) => {
+      event.preventDefault();
+      rememberSelection();
+      wrapSelection(button.getAttribute('data-format-open') || '', button.getAttribute('data-format-close') || '');
+    }, opts);
+
     button.addEventListener('click', (event) => {
       event.preventDefault();
-      wrapSelection(button.getAttribute('data-wrap-open') || '', button.getAttribute('data-wrap-close') || '');
     });
+  }
+
+  toolbarButtons.forEach((button) => {
+    bindToolbarAction(button);
   });
 
   if (insertLinkButton) {
-    insertLinkButton.addEventListener('click', (event) => {
+    const linkEventName = window.PointerEvent ? 'pointerdown' : ('ontouchstart' in window ? 'touchstart' : 'mousedown');
+    const linkEventOpts = linkEventName === 'touchstart' ? { passive: false } : false;
+
+    const applyInternalLink = (event) => {
       event.preventDefault();
       rememberSelection();
       if (!linkSelect || !linkSelect.value) {
@@ -322,7 +389,10 @@ if (empty($sources)) {
         return;
       }
       wrapSelection('<a href="' + linkSelect.value + '">', '</a>');
-    });
+    };
+
+    insertLinkButton.addEventListener(linkEventName, applyInternalLink, linkEventOpts);
+    insertLinkButton.addEventListener('click', (event) => event.preventDefault());
   }
 
   const form = document.getElementById('news-form');
@@ -361,8 +431,17 @@ if (empty($sources)) {
       bindSourceRemoveButton(sourcesList);
     });
   }
+
+  updateToolbarState();
 })();
 </script>
+
+<nav class="panel-mobile-nav" aria-label="Nawigacja panelu">
+  <a href="dashboard.php" class="panel-mobile-nav__item">Wpisy</a>
+  <a href="entry-form.php" class="panel-mobile-nav__item">Nowy</a>
+  <a href="news-dashboard.php" class="panel-mobile-nav__item panel-mobile-nav__item--active">Newsy</a>
+  <a href="logout.php" class="panel-mobile-nav__item panel-mobile-nav__item--logout">Wyloguj</a>
+</nav>
 
 </body>
 </html>

@@ -42,9 +42,9 @@ $logoUrl = 'assets/logo.jpg?v=2';
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/panel.css">
+<link rel="stylesheet" href="assets/panel.css?v=20260416-4">
 </head>
-<body class="panel-body">
+<body class="panel-body panel-body--news-dashboard panel-body--has-mobile-nav">
 
 <header class="panel-header">
   <div class="panel-header__inner">
@@ -101,6 +101,38 @@ $logoUrl = 'assets/logo.jpg?v=2';
         <a href="news-form.php" class="btn-panel btn-panel--primary">Dodaj pierwszy news</a>
       </div>
     <?php else: ?>
+      <div class="entries-mobile-cards">
+        <?php foreach ($filtered as $item): ?>
+          <article class="entry-mobile-card">
+            <div class="entry-mobile-card__head">
+              <div class="entry-mobile-card__date">Kolejność: <?= (int)$item['sort_order'] ?></div>
+              <span class="status-badge status-badge--<?= h($item['status']) ?>">
+                <?= $item['status'] === 'published' ? '✅ Opublikowany' : '📝 Roboczy' ?>
+              </span>
+            </div>
+            <h3 class="entry-mobile-card__title"><?= h($item['title']) ?></h3>
+            <p class="entry-mobile-card__meta">Miniatura: <?= $item['image_base'] ? 'Tak' : 'Brak' ?> · Źródła: <?= count($item['sources']) ?></p>
+            <p class="entry-mobile-card__meta">Aktualizacja: <?= h(substr($item['updated_at'], 0, 16)) ?></p>
+            <div class="entry-mobile-card__actions">
+              <a href="news-form.php?id=<?= h($item['id']) ?>" class="btn-panel btn-panel--sm btn-panel--outline">Edytuj</a>
+              <form method="POST" action="actions/news-status.php">
+                <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
+                <input type="hidden" name="id" value="<?= h($item['id']) ?>">
+                <input type="hidden" name="status" value="<?= $item['status'] === 'published' ? 'draft' : 'published' ?>">
+                <button type="submit" class="btn-panel btn-panel--sm <?= $item['status'] === 'published' ? 'btn-panel--warn' : 'btn-panel--success' ?>">
+                  <?= $item['status'] === 'published' ? 'Cofnij publ.' : 'Opublikuj' ?>
+                </button>
+              </form>
+              <form method="POST" action="actions/news-delete.php" onsubmit="return confirm('Usunąć ten news? Operacji nie można cofnąć.');">
+                <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
+                <input type="hidden" name="id" value="<?= h($item['id']) ?>">
+                <button type="submit" class="btn-panel btn-panel--sm btn-panel--danger">Usuń</button>
+              </form>
+            </div>
+          </article>
+        <?php endforeach; ?>
+      </div>
+
       <div class="entries-table-wrap">
         <table class="entries-table">
           <thead>
@@ -152,6 +184,13 @@ $logoUrl = 'assets/logo.jpg?v=2';
 
   </div>
 </main>
+
+<nav class="panel-mobile-nav" aria-label="Nawigacja panelu">
+  <a href="dashboard.php" class="panel-mobile-nav__item">Wpisy</a>
+  <a href="entry-form.php" class="panel-mobile-nav__item">Nowy</a>
+  <a href="news-dashboard.php" class="panel-mobile-nav__item panel-mobile-nav__item--active">Newsy</a>
+  <a href="logout.php" class="panel-mobile-nav__item panel-mobile-nav__item--logout">Wyloguj</a>
+</nav>
 
 </body>
 </html>
