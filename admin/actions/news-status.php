@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/news.php';
+require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
 
@@ -39,9 +40,15 @@ try {
     $store['items'] = sortNewsItems($store['items']);
     saveNewsStore($store);
 
+    $gitSync = runGitAutoSync(['news'], 'news status');
+
     $_SESSION['flash_success'] = $status === 'published'
-        ? 'News został opublikowany.'
-        : 'Publikacja newsa została cofnięta.';
+        ? 'News został opublikowany.' . gitSyncResultNote($gitSync)
+        : 'Publikacja newsa została cofnięta.' . gitSyncResultNote($gitSync);
+    $gitError = gitSyncFlashError($gitSync);
+    if ($gitError !== null) {
+        $_SESSION['flash_error'] = $gitError;
+    }
 } catch (Throwable $e) {
     $_SESSION['flash_error'] = 'Błąd: ' . $e->getMessage();
 }

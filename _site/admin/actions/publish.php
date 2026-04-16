@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/calendar.php';
+require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
 
@@ -27,7 +28,13 @@ try {
     // Regeneruj stronę dnia + kalendarz (json_encode, bez regex na JS)
     syncDay($db, $entry['entry_date']);
 
-    $_SESSION['flash_success'] = 'Wpis opublikowany! Strona dnia i fistaszek zaktualizowane.';
+    $gitSync = runGitAutoSync(['sukcesy'], 'moje-sukcesy publish');
+
+    $_SESSION['flash_success'] = 'Wpis opublikowany! Strona dnia i fistaszek zaktualizowane.' . gitSyncResultNote($gitSync);
+    $gitError = gitSyncFlashError($gitSync);
+    if ($gitError !== null) {
+        $_SESSION['flash_error'] = $gitError;
+    }
 
 } catch (Exception $e) {
     $_SESSION['flash_error'] = 'Błąd publikacji: ' . $e->getMessage();

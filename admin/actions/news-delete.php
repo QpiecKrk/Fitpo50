@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/news.php';
+require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
 
@@ -29,10 +30,20 @@ try {
         deleteNewsImageVariants($item['image_base']);
     }
 
+    $wasPublished = ($item['status'] ?? '') === 'published';
+
     $store = deleteNewsItemById($store, $id);
     saveNewsStore($store);
 
-    $_SESSION['flash_success'] = 'News został usunięty.';
+    $gitSync = $wasPublished
+        ? runGitAutoSync(['news'], 'news delete')
+        : null;
+
+    $_SESSION['flash_success'] = 'News został usunięty.' . gitSyncResultNote($gitSync);
+    $gitError = gitSyncFlashError($gitSync);
+    if ($gitError !== null) {
+        $_SESSION['flash_error'] = $gitError;
+    }
 } catch (Throwable $e) {
     $_SESSION['flash_error'] = 'Błąd: ' . $e->getMessage();
 }

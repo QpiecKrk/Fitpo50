@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/news.php';
+require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
 
@@ -103,9 +104,20 @@ try {
     $store['items'] = sortNewsItems($store['items']);
     saveNewsStore($store);
 
+    $wasPublishedBefore = $existing && ($existing['status'] ?? '') === 'published';
+    $touchesPublished = $status === 'published' || $wasPublishedBefore;
+    $gitSync = $touchesPublished
+        ? runGitAutoSync(['news'], 'news save/publish')
+        : null;
+
     $_SESSION['flash_success'] = $status === 'published'
-        ? 'News zapisany i opublikowany (live + fallback).'
-        : 'News zapisany jako roboczy.';
+        ? 'News zapisany i opublikowany (live + fallback).' . gitSyncResultNote($gitSync)
+        : 'News zapisany jako roboczy.' . gitSyncResultNote($gitSync);
+
+    $gitError = gitSyncFlashError($gitSync);
+    if ($gitError !== null) {
+        $_SESSION['flash_error'] = $gitError;
+    }
 
     header('Location: ../news-form.php?id=' . urlencode($itemId));
     exit;

@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/calendar.php';
+require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
 
@@ -33,7 +34,13 @@ try {
     // Regeneruj stronę dnia + kalendarz (json_encode, bez regex na JS)
     syncDay($db, $date);
 
-    $_SESSION['flash_success'] = 'Wpis cofnięty do roboczych. Strona dnia i fistaszek zaktualizowane.';
+    $gitSync = runGitAutoSync(['sukcesy'], 'moje-sukcesy unpublish');
+
+    $_SESSION['flash_success'] = 'Wpis cofnięty do roboczych. Strona dnia i fistaszek zaktualizowane.' . gitSyncResultNote($gitSync);
+    $gitError = gitSyncFlashError($gitSync);
+    if ($gitError !== null) {
+        $_SESSION['flash_error'] = $gitError;
+    }
 
 } catch (Exception $e) {
     $_SESSION['flash_error'] = 'Błąd cofania publikacji: ' . $e->getMessage();

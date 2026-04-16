@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/calendar.php';
+require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
 
@@ -46,7 +47,16 @@ try {
     // 4. Regeneruj stronę dnia + kalendarz (json_encode, bez regex na JS)
     $syncedCount = syncDay($db, $date);
 
-    $_SESSION['flash_success'] = "Wpis usunięty! Kalendarz zaktualizowany ($syncedCount dni).";
+    $touchesPublished = ($entry['status'] ?? '') === 'published' || !empty($entry['html_file']);
+    $gitSync = $touchesPublished
+        ? runGitAutoSync(['sukcesy'], 'moje-sukcesy delete')
+        : null;
+
+    $_SESSION['flash_success'] = "Wpis usunięty! Kalendarz zaktualizowany ($syncedCount dni)." . gitSyncResultNote($gitSync);
+    $gitError = gitSyncFlashError($gitSync);
+    if ($gitError !== null) {
+        $_SESSION['flash_error'] = $gitError;
+    }
 
 } catch (Exception $e) {
     $_SESSION['flash_error'] = 'Błąd podczas usuwania: ' . $e->getMessage();

@@ -28,6 +28,12 @@ _site/admin/database.sqlite
 calendar-entries.local.json
 _site/calendar-entries.local.json
 
+# runtime backups for NEWS autosave (keep only .gitkeep tracked)
+data/news-backups/*.json
+!data/news-backups/.gitkeep
+_site/data/news-backups/*.json
+!_site/data/news-backups/.gitkeep
+
 # accidental duplicate export files
 * 2.html
 * 2.css

@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/calendar.php';
+require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
 
@@ -201,9 +202,20 @@ try {
         $syncedCount = syncDay($db, $d);
     }
 
+    $wasPublishedBefore = isset($oldEntry) && ($oldEntry['status'] ?? '') === 'published';
+    $touchesPublished = $status === 'published' || $wasPublishedBefore;
+    $gitSync = $touchesPublished
+        ? runGitAutoSync(['sukcesy'], 'moje-sukcesy save/publish')
+        : null;
+
     $_SESSION['flash_success'] = $status === 'published'
-        ? "Wpis opublikowany! Kalendarz zsynchronizowany ($syncedCount dni)."
-        : 'Wpis zapisany.';
+        ? "Wpis opublikowany! Kalendarz zsynchronizowany ($syncedCount dni)." . gitSyncResultNote($gitSync)
+        : 'Wpis zapisany.' . gitSyncResultNote($gitSync);
+
+    $gitError = gitSyncFlashError($gitSync);
+    if ($gitError !== null) {
+        $_SESSION['flash_error'] = $gitError;
+    }
     header("Location: ../entry-form.php?id=$id");
 
 } catch (Exception $e) {
