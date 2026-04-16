@@ -33,6 +33,8 @@ data/news-backups/*.json
 !data/news-backups/.gitkeep
 _site/data/news-backups/*.json
 !_site/data/news-backups/.gitkeep
+data/git-sync.lock
+_site/data/git-sync.lock
 
 # accidental duplicate export files
 * 2.html
