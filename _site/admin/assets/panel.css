@@ -246,10 +246,6 @@ a:hover { text-decoration: underline; }
 .panel-nav-link--logout { color: var(--panel-danger); }
 .panel-nav-link--logout:hover { background: rgba(239,68,68,.1); }
 
-.panel-mobile-nav {
-  display: none;
-}
-
 /* ============================================================
    Panel Main Layout
    ============================================================ */
@@ -915,47 +911,7 @@ a:hover { text-decoration: underline; }
 @media (max-width: 900px) {
   .form-grid { grid-template-columns: 1fr; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .panel-header__nav { display: none; }
-  .panel-mobile-nav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 120;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.35rem;
-    padding: 0.55rem 0.6rem calc(0.55rem + env(safe-area-inset-bottom));
-    background: rgba(8, 14, 20, 0.97);
-    border-top: 1px solid rgba(48,54,61,.95);
-    backdrop-filter: blur(8px);
-  }
-  .panel-mobile-nav__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    border-radius: 10px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--panel-muted);
-    border: 1px solid rgba(255,255,255,.08);
-    background: rgba(255,255,255,.03);
-    text-decoration: none;
-  }
-  .panel-mobile-nav__item--active {
-    color: #9fe7f8;
-    border-color: rgba(14,143,170,.7);
-    background: rgba(14,143,170,.2);
-  }
-  .panel-mobile-nav__item--logout {
-    color: #ffb4b4;
-    border-color: rgba(239,68,68,.45);
-    background: rgba(239,68,68,.12);
-  }
-  .panel-body--has-mobile-nav .panel-main {
-    padding-bottom: 6.9rem;
-  }
+  .panel-header__nav { width: 100%; overflow-x: auto; }
   .form-actions-desktop {
     display: none;
   }
@@ -963,7 +919,7 @@ a:hover { text-decoration: underline; }
     position: fixed;
     left: 0.75rem;
     right: 0.75rem;
-    bottom: calc(5.4rem + env(safe-area-inset-bottom));
+    bottom: calc(0.75rem + env(safe-area-inset-bottom));
     z-index: 110;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -981,7 +937,7 @@ a:hover { text-decoration: underline; }
   }
   .panel-body--news-form .panel-main,
   .panel-body--entry-form .panel-main {
-    padding-bottom: 13rem;
+    padding-bottom: 11.2rem;
   }
   .panel-body--dashboard .entries-mobile-cards,
   .panel-body--news-dashboard .entries-mobile-cards {
@@ -1004,7 +960,7 @@ a:hover { text-decoration: underline; }
     position: fixed;
     left: 0.75rem;
     right: 0.75rem;
-    bottom: calc(10.9rem + env(safe-area-inset-bottom));
+    bottom: calc(5.8rem + env(safe-area-inset-bottom));
     z-index: 109;
     display: flex;
     align-items: center;
@@ -1012,8 +968,8 @@ a:hover { text-decoration: underline; }
     overflow-x: auto;
     padding: 0.52rem;
     border-radius: 12px;
-    border: 1px solid rgba(48,54,61,.85);
-    background: rgba(10,18,26,.94);
+    border: 1px solid #6f99b0;
+    background: rgba(244,251,255,.98);
     box-shadow: 0 10px 22px rgba(0,0,0,.35);
     backdrop-filter: blur(7px);
   }
@@ -1022,11 +978,21 @@ a:hover { text-decoration: underline; }
     min-height: 44px;
     padding: 0;
     justify-content: center;
+    border-color: #2e6b85;
+    background: #ffffff;
+    color: #13485d;
   }
   .news-editor-mobile-bar .news-color-chip {
-    min-width: 1.85rem;
-    width: 1.85rem;
-    height: 1.85rem;
+    min-width: 2.05rem;
+    width: 2.05rem;
+    height: 2.05rem;
+    border-width: 2px;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 0 1px #173847, 0 2px 4px rgba(0,0,0,.22);
+  }
+  .news-editor-mobile-bar .news-editor-action.is-active,
+  .news-editor-mobile-bar .entry-editor-action.is-active {
+    box-shadow: 0 0 0 2px #0e8faa inset, 0 0 0 1px #0a3f52;
   }
   .news-editor-toolbar--links {
     align-items: stretch;

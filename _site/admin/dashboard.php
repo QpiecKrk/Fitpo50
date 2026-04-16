@@ -33,9 +33,9 @@ $total = array_sum($cnt);
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/panel.css?v=20260416-4">
+<link rel="stylesheet" href="assets/panel.css?v=20260416-5">
 </head>
-<body class="panel-body panel-body--dashboard panel-body--has-mobile-nav">
+<body class="panel-body panel-body--dashboard">
 
 <header class="panel-header">
   <div class="panel-header__inner">
@@ -219,13 +219,6 @@ $total = array_sum($cnt);
 
   </div>
 </main>
-
-<nav class="panel-mobile-nav" aria-label="Nawigacja panelu">
-  <a href="dashboard.php" class="panel-mobile-nav__item panel-mobile-nav__item--active">Wpisy</a>
-  <a href="entry-form.php" class="panel-mobile-nav__item">Nowy</a>
-  <a href="news-dashboard.php" class="panel-mobile-nav__item">Newsy</a>
-  <a href="logout.php" class="panel-mobile-nav__item panel-mobile-nav__item--logout">Wyloguj</a>
-</nav>
 
 </body>
 </html>
