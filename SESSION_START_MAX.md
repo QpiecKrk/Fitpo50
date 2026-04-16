@@ -6,6 +6,8 @@ Wklej ponizszy blok jako pierwsza wiadomosc w nowej sesji.
 Pracujemy domyslnie po polsku.
 Wszystkie podsumowania, plany, review, komentarze i rekomendacje zapisuj po polsku, chyba ze wyraznie poprosze inaczej.
 Nazwy plikow, komend, sciezek i elementow technicznych zostawiaj w oryginalnym brzmieniu.
+NADRZEDNIE: Zakladaj, ze nie znam sie technicznie. Tlumacz wszystko prostym jezykiem, krok po kroku, jedna czynnosc na raz.
+Przy instrukcjach terminalowych podawaj gotowe komendy i wyjasniaj, co zobacze po ich uruchomieniu.
 
 START TECHNICZNY (zawsze na poczatku sesji):
 1) Od razu zsynchronizuj lokalne repo z GitHub (zanim zaczniesz analize):
@@ -63,4 +65,3 @@ Raport koncowy po zadaniu:
 W nowej sesji mozesz napisac:
 
 - "Stosuj instrukcje z `SESSION_START_MAX.md` i zacznij od startu technicznego."
-
