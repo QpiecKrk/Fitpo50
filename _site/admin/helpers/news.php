@@ -672,10 +672,3 @@ function extractTitleFromHtmlFile(string $path): string {
 
     return '';
 }
-
-function exportNewsStoreAsDownload(array $store): void {
-    $filename = 'news-export-' . date('Y-m-d_H-i-s') . '.json';
-    header('Content-Type: application/json; charset=utf-8');
-    header('Content-Disposition: attachment; filename="' . $filename . '"');
-    echo json_encode($store, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-}

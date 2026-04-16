@@ -14,7 +14,7 @@ $item = [
     'title' => '',
     'content_html' => '',
     'status' => 'draft',
-    'sort_order' => 9999,
+    'sort_order' => 1,
     'image_base' => '',
     'image_alt' => '',
     'sources' => [],
@@ -95,13 +95,14 @@ if (empty($sources)) {
             <label for="news-content" class="form-label">Treść newsa <span class="required">*</span></label>
 
             <div class="news-editor-toolbar" role="toolbar" aria-label="Formatowanie treści">
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<strong>" data-wrap-close="</strong>"><strong>B</strong></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<em>" data-wrap-close="</em>"><em>I</em></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<strong>" data-wrap-close="</strong>" title="Pogrubienie"><strong>B</strong></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<strong class='news-text-strong-black'>" data-wrap-close="</strong>" title="Czarny bold"><strong>B+</strong></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<em>" data-wrap-close="</em>" title="Kursywa"><em>I</em></button>
 
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<span class=\"news-text-tone--1\">" data-wrap-close="</span>" style="color:#0B7285;">Kolor 1</button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<span class=\"news-text-tone--2\">" data-wrap-close="</span>" style="color:#1D4ED8;">Kolor 2</button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<span class=\"news-text-tone--3\">" data-wrap-close="</span>" style="color:#B45309;">Kolor 3</button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline" data-wrap-open="<span class=\"news-text-tone--4\">" data-wrap-close="</span>" style="color:#7C3AED;">Kolor 4</button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--1'>" data-wrap-close="</span>" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;"><span class="sr-only">Kolor 1</span></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--2'>" data-wrap-close="</span>" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;"><span class="sr-only">Kolor 2</span></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--3'>" data-wrap-close="</span>" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;"><span class="sr-only">Kolor 3</span></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--4'>" data-wrap-close="</span>" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;"><span class="sr-only">Kolor 4</span></button>
             </div>
 
             <div class="news-editor-toolbar" style="margin-top:0.5rem;">
@@ -229,6 +230,9 @@ if (empty($sources)) {
   }
 
   toolbarButtons.forEach((button) => {
+    button.addEventListener('mousedown', (event) => {
+      event.preventDefault();
+    });
     button.addEventListener('click', () => {
       wrapSelection(button.getAttribute('data-wrap-open') || '', button.getAttribute('data-wrap-close') || '');
     });

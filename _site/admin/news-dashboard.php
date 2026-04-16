@@ -81,10 +81,6 @@ $logoUrl = 'assets/logo.jpg?v=2';
         <div class="stat-card__num"><?= $counts['draft'] ?></div>
         <div class="stat-card__label">Robocze</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-card__num">JSON</div>
-        <div class="stat-card__label"><a href="news-export.php" style="color:inherit; text-decoration: underline;">Eksport</a></div>
-      </div>
     </div>
 
     <div class="panel-toolbar">

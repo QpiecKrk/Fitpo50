@@ -15,7 +15,7 @@ $id = trim((string)($_POST['id'] ?? ''));
 $title = trim(strip_tags((string)($_POST['title'] ?? '')));
 $contentRaw = trim((string)($_POST['content'] ?? ''));
 $status = (string)($_POST['status'] ?? 'draft');
-$sortOrder = (int)($_POST['sort_order'] ?? 9999);
+$sortOrder = (int)($_POST['sort_order'] ?? 1);
 $imageAlt = trim(strip_tags((string)($_POST['image_alt'] ?? '')));
 $deleteImage = !empty($_POST['delete_image']);
 
@@ -24,7 +24,7 @@ if (!in_array($status, ['draft', 'published'], true)) {
 }
 
 if ($sortOrder < 1 || $sortOrder > 9999) {
-    $sortOrder = 9999;
+    $sortOrder = 1;
 }
 
 $redirect = $id !== '' ? ('Location: ../news-form.php?id=' . urlencode($id)) : 'Location: ../news-form.php';
