@@ -189,6 +189,7 @@ function resolveGitSyncPaths(string $repoRoot, array $groups): array {
     $groupMap = [
         'news' => [
             'data/news-live.json',
+            '_site/data/news-live.json',
             'assets/data/news-fallback.json',
             'assets/news',
             'data/news-backups/.gitkeep',

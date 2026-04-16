@@ -139,7 +139,16 @@ function saveNewsStore(array $store, bool $withBackup = true): void {
     }
 
     atomicWriteJson($livePath, $payload);
+    writeNewsLiveMirrorPayload($payload);
     writeNewsFallbackPayload($payload);
+}
+
+function writeNewsLiveMirrorPayload(array $store): void {
+    $siteLive = SITE_ROOT . '_site' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'news-live.json';
+    $siteLiveDir = dirname($siteLive);
+    if (is_dir($siteLiveDir)) {
+        atomicWriteJson($siteLive, $store);
+    }
 }
 
 function atomicWriteJson(string $filePath, array $payload): void {
@@ -437,10 +446,10 @@ function normalizeNewsSources(array $labels, array $urls): array {
     return $sources;
 }
 
-function processNewsImageUpload(array $file, ?string $oldBase = null): array {
+function processNewsImageUpload(array $file): array {
     $error = (int)($file['error'] ?? UPLOAD_ERR_NO_FILE);
     if ($error === UPLOAD_ERR_NO_FILE) {
-        return ['image_base' => $oldBase ?? '', 'image_alt' => ''];
+        return ['image_base' => '', 'image_alt' => ''];
     }
 
     if ($error !== UPLOAD_ERR_OK) {
@@ -536,10 +545,6 @@ function processNewsImageUpload(array $file, ?string $oldBase = null): array {
         @unlink($webpPath);
         @unlink($avifPath);
         throw new RuntimeException('Konwersja miniatury nie powiodła się. News nie został zapisany.');
-    }
-
-    if ($oldBase) {
-        deleteNewsImageVariants($oldBase);
     }
 
     return [

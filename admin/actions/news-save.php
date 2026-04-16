@@ -28,6 +28,8 @@ if ($sortOrder < 1 || $sortOrder > 9999) {
 }
 
 $redirect = $id !== '' ? ('Location: ../news-form.php?id=' . urlencode($id)) : 'Location: ../news-form.php';
+$newUploadedImageBase = null;
+$previousImageBase = null;
 
 try {
     $store = loadNewsStore();
@@ -64,12 +66,13 @@ try {
     $itemId = $existing['id'] ?? ('news_' . bin2hex(random_bytes(6)));
 
     $imageBase = $existing['image_base'] ?? '';
+    $previousImageBase = $imageBase !== '' ? $imageBase : null;
     $hasNewUpload = isset($_FILES['news_image']) && (int)($_FILES['news_image']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
 
     if ($hasNewUpload) {
-        // Stary obraz usuwamy dopiero po udanej konwersji nowego wariantu.
-        $processed = processNewsImageUpload($_FILES['news_image'], $imageBase !== '' ? $imageBase : null);
+        $processed = processNewsImageUpload($_FILES['news_image']);
         $imageBase = $processed['image_base'];
+        $newUploadedImageBase = $imageBase;
     } elseif ($deleteImage && $imageBase !== '') {
         deleteNewsImageVariants($imageBase);
         $imageBase = '';
@@ -103,6 +106,9 @@ try {
     $store = upsertNewsItem($store, $item);
     $store['items'] = sortNewsItems($store['items']);
     saveNewsStore($store);
+    if ($newUploadedImageBase !== null && $previousImageBase !== null && $previousImageBase !== $newUploadedImageBase) {
+        deleteNewsImageVariants($previousImageBase);
+    }
 
     $wasPublishedBefore = $existing && ($existing['status'] ?? '') === 'published';
     $touchesPublished = $status === 'published' || $wasPublishedBefore;
@@ -123,6 +129,9 @@ try {
     exit;
 
 } catch (Throwable $e) {
+    if ($newUploadedImageBase !== null) {
+        deleteNewsImageVariants($newUploadedImageBase);
+    }
     $_SESSION['flash_error'] = 'Błąd: ' . $e->getMessage();
     header($redirect);
     exit;
