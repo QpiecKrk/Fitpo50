@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-16T10:08:43+00:00",
+    "updatedAt": "2026-04-16T10:09:08+00:00",
     "items": [
         {
             "id": "news_coffee_minerals_002",
@@ -77,7 +77,7 @@
         {
             "id": "news_93dbe4b07a3f",
             "title": "Nawet małe światło w nocy może podnosić cukier ran",
-            "content_html": "<p>Badanie opublikowane w &lt;span class=\\PNAS pokazało, że sen przy górnym świetle o natężeniu około 100 luksów może pogarszać kontrolę glukozy już następnego ranka. To ważne, bo 100 luksów nie oznacza ostrego światła. W praktyce problemem nie musi być tylko włączona lampa, ale też telewizor, światło z korytarza albo uliczna latarnia wpadająca przez cienkie zasłony.</p>\n<p>&lt;span class=\\Światło działa nawet przez zamknięte powieki. Organizm dostaje sygnał, że noc nie jest naprawdę ciemna, co może tłumić melatoninę, pobudzać układ współczulny i pogarszać jakość snu. A to odbija się nie tylko na regeneracji, ale też na metabolizmie.</p>\n<p>To nie znaczy, że jedna gorsza noc wszystko rozwala. Problem jest raczej cichy i kumulacyjny. Im częściej śpisz w rozjaśnionej sypialni, tym gorzej dla snu, nastroju i gospodarki metabolicznej.</p>\n<p>&lt;span class=\\Wniosek praktyczny</p>\n<p>Sypialnia powinna być możliwie ciemna. Wyłącz TV, usuń zbędne lampki, zasłoń okna i ogranicz światło z korytarza.</p>",
+            "content_html": "<p>Badanie opublikowane w &lt;span class=\\PNAS pokazało, że sen przy górnym świetle o natężeniu około 100 luksów może pogarszać kontrolę glukozy już następnego ranka. To ważne, bo 100 luksów nie oznacza ostrego światła. W praktyce problemem nie musi być tylko włączona lampa, ale też telewizor, światło z korytarza albo uliczna latarnia wpadająca przez cienkie zasłony.</p>\n<p>&lt;span class=\\Światło działa nawet przez zamknięte powieki. Organizm dostaje sygnał, że noc nie jest naprawdę ciemna, co może tłumić melatoninę, pobudzać układ współczulny i pogarszać jakość snu. A to odbija się nie tylko na regeneracji, ale też na metabolizmie.</p>\n<p>To nie znaczy, że jedna gorsza noc wszystko rozwala. Problem jest raczej cichy i kumulacyjny. Im częściej śpisz w rozjaśnionej sypialni, tym gorzej dla snu, nastroju i gospodarki metabolicznej.</p> \n<p>&lt;span class=\\Wniosek praktyczny</p>\n<p>Sypialnia powinna być możliwie ciemna. Wyłącz TV, usuń zbędne lampki, zasłoń okna i ogranicz światło z korytarza.</p>",
             "status": "published",
             "sort_order": 9999,
             "image_base": "news_20260416_094003_237b3c7b",
@@ -93,7 +93,7 @@
                 }
             ],
             "created_at": "2026-04-16T09:40:03+00:00",
-            "updated_at": "2026-04-16T10:08:43+00:00",
+            "updated_at": "2026-04-16T10:09:08+00:00",
             "published_at": "2026-04-16T09:40:03+00:00"
         }
     ]
