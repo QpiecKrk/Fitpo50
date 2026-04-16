@@ -53,9 +53,9 @@ if (empty($sources)) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/panel.css">
+<link rel="stylesheet" href="assets/panel.css?v=20260416-3">
 </head>
-<body class="panel-body">
+<body class="panel-body panel-body--news-form">
 
 <header class="panel-header">
   <div class="panel-header__inner">
@@ -109,8 +109,8 @@ if (empty($sources)) {
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip" data-wrap-open="<span class='news-text-tone--4'>" data-wrap-close="</span>" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
             </div>
 
-            <div class="news-editor-toolbar" style="margin-top:0.5rem;">
-              <select id="internal-link-select" class="form-input form-select" style="max-width: 420px;">
+            <div class="news-editor-toolbar news-editor-toolbar--links">
+              <select id="internal-link-select" class="form-input form-select">
                 <option value="">Wybierz link wewnętrzny...</option>
                 <?php foreach ($internalLinks as $link): ?>
                   <option value="<?= h($link['href']) ?>"><?= h($link['label']) ?></option>
@@ -119,15 +119,15 @@ if (empty($sources)) {
               <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="insert-link-btn">Wstaw link</button>
             </div>
 
-            <div class="news-editor-surface">
+            <div class="news-editor-surface" style="background:#f8fbff;border:1px solid #cfe1ea;">
               <div id="news-content-editor"
                    class="news-content-editor"
                    contenteditable="true"
                    spellcheck="true"
+                   style="background:#ffffff;color:#102130;"
                    data-placeholder="Wpisz treść newsa i formatuj ją z paska nad edytorem."></div>
             </div>
-            <textarea id="news-content" name="content" class="form-input form-textarea form-textarea--lg news-content-input-hidden" required><?= h($item['content_html']) ?></textarea>
-            <p class="form-hint">Kliknij w zaznaczone słowo, aby dodać <strong>bold</strong>, <em>italic</em>, kolor lub link wewnętrzny. Zewnętrzne linki dodawaj wyłącznie w sekcji źródeł.</p>
+            <input type="hidden" id="news-content" name="content" value="<?= h($item['content_html']) ?>">
           </div>
 
           <div class="form-group">
@@ -300,11 +300,12 @@ if (empty($sources)) {
   syncTextareaFromEditor();
 
   toolbarButtons.forEach((button) => {
-    ['pointerdown', 'mousedown'].forEach((eventName) => {
+    ['pointerdown', 'mousedown', 'touchstart'].forEach((eventName) => {
+      const options = eventName === 'touchstart' ? { passive: false } : false;
       button.addEventListener(eventName, (event) => {
         rememberSelection();
         event.preventDefault();
-      });
+      }, options);
     });
     button.addEventListener('click', (event) => {
       event.preventDefault();
