@@ -1,7 +1,38 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-16T13:56:16+00:00",
+    "updatedAt": "2026-04-16T15:31:26+00:00",
     "items": [
+        {
+            "id": "news_248770aa69f7",
+            "title": "Nowe wytyczne 2026: nie potrzebujesz idealnego planu ćwiczeń. Zacznij nawet po \"swojemu\"",
+            "content_html": "<p class=\"p1\"><strong>Dobra wiadomość: </strong>nauka znowu zabiła mit, że trening siłowy musi być skomplikowany, ciężki i rozpisany jak lot na Marsa. W najnowszych wytycznych <span class=\"news-text-tone--3\">American College of Sports Medicine </span>najważniejszy wniosek jest prosty: największą różnicę robi przejście z „nic nie robię” na „robię cokolwiek regularnie”. <span class=\"Apple-converted-space\"> </span><span class=\"s1\"></span></p><p class=\"p2\"><br></p><p class=\"p1\"><span>To nie znaczy, że technika i plan nie mają znaczenia</span>. Mają. Ale dla zdrowia, siły, sprawności i utrzymania mięśni kluczowe jest przede wszystkim to, żeby trening oporowy w ogóle wszedł w rutynę. Nie trzeba od razu przerzucać sztangi jak wściekły żubr. Mogą to być <span class=\"news-text-tone--2\">hantle, gumy, maszyny, a nawet ćwiczenia z masą ciała. </span><span class=\"Apple-converted-space\"> </span><span class=\"s1\"></span></p><p class=\"p2\"><br></p><p class=\"p1\">Dla osób <span class=\"news-text-tone--4\">50+</span> to szczególnie ważne, bo trening oporowy wspiera siłę mięśni, sprawność i codzienne funkcjonowanie. Czyli mniej filozofii, więcej konkretu: dwa sensowne treningi tygodniowo zrobione naprawdę są warte więcej niż perfekcyjny plan, którego nigdy nie zaczniesz. <span class=\"Apple-converted-space\"> </span><span class=\"s1\"></span></p><p class=\"p2\"><br></p><p class=\"p3\"><span class=\"s2\"></span></p><strong>Wniosek</strong><br><p></p><p class=\"p2\"><strong>Regularny, prosty trening siłowy wygrywa z wiecznym kombinowaniem nad „idealnym planem”.</strong><br></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260416_153126_12fca71a.avif",
+                "webp": "./assets/news/news_20260416_153126_12fca71a.webp",
+                "jpg": "./assets/news/news_20260416_153126_12fca71a.jpg",
+                "alt": "ćwiczenia dla seniorów",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Currier BS, D’Souza AC, Fiatarone Singh MA et al., Medicine & Science in Sports & Exercise (2026)",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12965823/"
+                },
+                {
+                    "label": "American College of Sports Medicine, ACSM Publishes Updated Resistance Training Guidelines (2026)",
+                    "url": "https://acsm.org/resistance-training-guidelines-update-2026/"
+                },
+                {
+                    "label": "American College of Sports Medicine, ACSM Releases New Position Stand on Resistance Training (2026)",
+                    "url": "https://acsm.org/science-spotlight-acsm-releases-new-position-stand-on-resistance-training/"
+                }
+            ],
+            "updated_at": "2026-04-16T15:31:26+00:00",
+            "published_at": "2026-04-16T15:31:26+00:00",
+            "excerpt": "Dobra wiadomość: nauka znowu zabiła mit, że trening siłowy musi być skomplikowany, ciężki i rozpisany jak lot na Marsa. W najnowszych wytycznych American College of Sports Medicine najważniejszy wniosek jest prosty: naj…"
+        },
         {
             "id": "news_6341c71421e0",
             "title": "Już 1700 kroków więcej dziennie może robić różnicę",
