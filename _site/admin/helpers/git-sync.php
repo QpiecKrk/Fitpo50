@@ -94,11 +94,44 @@ function runGitAutoSync(array $groups, string $actionLabel): array {
             $branch = gitAutoSyncFallbackBranch();
         }
 
-        $pushResult = runGitCommand(['git', 'push', gitAutoSyncRemote(), $branch], $repoRoot);
+        $remote = gitAutoSyncRemote();
+        $pushResult = runGitCommand(['git', 'push', $remote, $branch], $repoRoot);
         if ($pushResult['exit_code'] !== 0) {
+            $pushErrorRaw = trim($pushResult['stderr'] . "\n" . $pushResult['stdout']);
+            if (isNonFastForwardPushError($pushErrorRaw)) {
+                $pullResult = runGitCommand(['git', 'pull', '--rebase', $remote, $branch], $repoRoot);
+                if ($pullResult['exit_code'] === 0) {
+                    $pushRetry = runGitCommand(['git', 'push', $remote, $branch], $repoRoot);
+                    if ($pushRetry['exit_code'] === 0) {
+                        $hashResult = runGitCommand(['git', 'rev-parse', '--short', 'HEAD'], $repoRoot);
+                        $commitHash = trim($hashResult['stdout']);
+
+                        return [
+                            'status' => 'ok',
+                            'message' => 'Wysłano zmiany do Git (' . $branch . ') po automatycznej synchronizacji.',
+                            'commit' => $commitHash !== '' ? $commitHash : null,
+                            'branch' => $branch,
+                        ];
+                    }
+
+                    return [
+                        'status' => 'error',
+                        'message' => 'Commit zapisany lokalnie, ale push po rebase się nie udał: ' . shortenGitError(trim($pushRetry['stderr'] . "\n" . $pushRetry['stdout'])),
+                        'branch' => $branch,
+                    ];
+                }
+
+                runGitCommand(['git', 'rebase', '--abort'], $repoRoot);
+                return [
+                    'status' => 'error',
+                    'message' => 'Commit zapisany lokalnie, ale auto-rebase przed push się nie udał: ' . shortenGitError(trim($pullResult['stderr'] . "\n" . $pullResult['stdout'])),
+                    'branch' => $branch,
+                ];
+            }
+
             return [
                 'status' => 'error',
-                'message' => 'Commit zapisany lokalnie, ale push się nie udał: ' . shortenGitError($pushResult['stderr']),
+                'message' => 'Commit zapisany lokalnie, ale push się nie udał: ' . shortenGitError($pushErrorRaw),
                 'branch' => $branch,
             ];
         }
@@ -232,4 +265,11 @@ function shortenGitError(string $error): string {
         return $line;
     }
     return mb_substr($line, 0, 217) . '...';
+}
+
+function isNonFastForwardPushError(string $error): bool {
+    $haystack = strtolower($error);
+    return str_contains($haystack, '[rejected]')
+        || str_contains($haystack, 'fetch first')
+        || str_contains($haystack, 'non-fast-forward');
 }
