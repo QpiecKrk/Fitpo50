@@ -1,7 +1,29 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-16T13:22:49+00:00",
+    "updatedAt": "2026-04-16T13:56:16+00:00",
     "items": [
+        {
+            "id": "news_6341c71421e0",
+            "title": "Już 1700 kroków więcej dziennie może robić różnicę",
+            "content_html": "<p><span>Nowe badanie opublikowane </span><span>7 kwietnia 2026</span><span> w </span><span><span class=\"news-text-tone--4\"><span></span><span>Nature Communications</span></span> pokazało, że u osób, które dużo siedzą, dołożenie około </span><span>1700–5500 kroków dziennie</span><span> wiązało się z niższym ryzykiem wielu chorób przewlekłych. </span></p><p><span>Chodzi m.in. o <strong>otyłość, cukrzycę, nadciśnienie, bezdech senny i depresję.</strong> Jednocześnie autorzy uczciwie zaznaczyli, że same kroki </span><span>nie wyzerowały</span><span> ryzyka wszystkich problemów — np. dla choroby wieńcowej i niewydolności serca nie dało się całkiem “odrobić” skutków długiego siedzenia samym chodzeniem.  </span></p><p><span>To jest dobry news, bo nie wciska bajki typu „10 tysięcy albo nic”. Przekaz jest prostszy: </span><span><span class=\"news-text-tone--3\"><span></span><span>siedź mniej, ruszaj się więcej, a nawet umiarkowany wzrost liczby kroków ma sens</span><span>.</span></span> Badanie było duże i oparte na danych z urządzeń Fitbit, ale nadal ma charakter obserwacyjny, więc nie dowodzi w 100%, że same kroki były jedyną przyczyną lepszych wyników zdrowotnych.  </span></p><p><span>Wniosek praktyczny</span></p><p><span>Nie musisz od razu robić rewolucji. Jeśli dużo siedzisz, dołóż na start </span><span>około 1500–2000 kroków dziennie</span><span>. To już może mieć znaczenie.</span></p><span style=\"font-kerning: none;\"><br></span>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260416_135616_b56a7e07",
+            "image_alt": "Już 1700 kroków więcej dziennie może robić różnicę",
+            "sources": [
+                {
+                    "label": "Nature Communications (2026) — Daily steps offset risks of sedentary behavior in the All of Us research program",
+                    "url": "https://www.nature.com/articles/s41467-026-71652-0"
+                },
+                {
+                    "label": "Fitbit / Google Enterprise — All of Us Research: Increased Step Counts Associated with Lower Rates of Chronic Conditions",
+                    "url": "https://fitbit.google/enterprise/blog/all-of-us-research-increased-step-counts-associated-with-lower-rates-of-chronic-conditions/"
+                }
+            ],
+            "created_at": "2026-04-16T13:56:16+00:00",
+            "updated_at": "2026-04-16T13:56:16+00:00",
+            "published_at": "2026-04-16T13:56:16+00:00"
+        },
         {
             "id": "news_93dbe4b07a3f",
             "title": "Nawet małe światło w nocy może podnosić cukier rano",
