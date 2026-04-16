@@ -591,23 +591,75 @@ a:hover { text-decoration: underline; }
   margin-bottom: 0.6rem;
 }
 
+.news-editor-surface {
+  background: #f8fbff;
+  border: 1px solid #cfe1ea;
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.news-content-editor {
+  min-height: 360px;
+  padding: 0.95rem 1rem;
+  color: #102130;
+  background: transparent;
+  border-radius: inherit;
+  font-family: var(--font-body);
+  font-size: 0.97rem;
+  line-height: 1.58;
+  overflow-wrap: anywhere;
+}
+
+.news-content-editor:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(14,143,170,.18);
+}
+
+.news-content-editor:empty::before {
+  content: attr(data-placeholder);
+  color: #5f7380;
+}
+
+.news-content-editor p,
+.news-content-editor ul,
+.news-content-editor ol {
+  margin: 0 0 0.55rem;
+}
+
+.news-content-editor ul,
+.news-content-editor ol {
+  padding-left: 1.05rem;
+}
+
+.news-content-editor a {
+  color: #0b5a75;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.news-content-editor .news-text-tone--1 { color: #0B7285; font-weight: 600; }
+.news-content-editor .news-text-tone--2 { color: #1D4ED8; font-weight: 600; }
+.news-content-editor .news-text-tone--3 { color: #B45309; font-weight: 600; }
+.news-content-editor .news-text-tone--4 { color: #7C3AED; font-weight: 600; }
+.news-content-editor .news-text-strong-black { color: #111827; font-weight: 800; }
+
+.news-content-input-hidden {
+  display: none;
+}
+
 .news-color-chip {
-  width: 1.9rem;
-  min-width: 1.9rem;
-  height: 1.9rem;
+  width: 1.55rem;
+  min-width: 1.55rem;
+  height: 1.55rem;
   padding: 0;
-  border-radius: 0.45rem;
+  border-radius: 999px;
   position: relative;
   overflow: hidden;
+  border-width: 2px;
 }
 
 .news-color-chip::before {
-  content: '';
-  position: absolute;
-  inset: 0.22rem;
-  border-radius: 0.32rem;
-  background: var(--chip-color, #0B7285);
-  border: 1px solid rgba(255,255,255,.25);
+  content: none;
 }
 
 .sr-only {
@@ -663,6 +715,8 @@ a:hover { text-decoration: underline; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .panel-toolbar { flex-direction: column; align-items: flex-start; }
   .entries-table { font-size: 0.82rem; }
+  .news-editor-toolbar { overflow-x: auto; white-space: nowrap; flex-wrap: nowrap; padding-bottom: 0.25rem; }
+  .news-content-editor { min-height: 280px; font-size: 1rem; }
   .news-source-row { grid-template-columns: 1fr; }
   .news-source-row .btn-panel { width: 100%; justify-content: center; }
 }

@@ -119,7 +119,14 @@ if (empty($sources)) {
               <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="insert-link-btn">Wstaw link</button>
             </div>
 
-            <textarea id="news-content" name="content" class="form-input form-textarea form-textarea--lg" required placeholder="Wklej treść newsa. Możesz używać prostego tekstu, list i formatowania z paska."><?= h($item['content_html']) ?></textarea>
+            <div class="news-editor-surface">
+              <div id="news-content-editor"
+                   class="news-content-editor"
+                   contenteditable="true"
+                   spellcheck="true"
+                   data-placeholder="Wpisz treść newsa i formatuj ją z paska nad edytorem."></div>
+            </div>
+            <textarea id="news-content" name="content" class="form-input form-textarea form-textarea--lg news-content-input-hidden" required><?= h($item['content_html']) ?></textarea>
             <p class="form-hint">Kliknij w zaznaczone słowo, aby dodać <strong>bold</strong>, <em>italic</em>, kolor lub link wewnętrzny. Zewnętrzne linki dodawaj wyłącznie w sekcji źródeł.</p>
           </div>
 
@@ -205,6 +212,7 @@ if (empty($sources)) {
 <script>
 (function () {
   const textarea = document.getElementById('news-content');
+  const editor = document.getElementById('news-content-editor');
   const toolbarButtons = document.querySelectorAll('[data-wrap-open]');
   const linkSelect = document.getElementById('internal-link-select');
   const insertLinkButton = document.getElementById('insert-link-btn');
@@ -213,58 +221,83 @@ if (empty($sources)) {
   const sourceTemplate = document.getElementById('news-source-template');
   let savedSelection = null;
 
-  function rememberSelection() {
-    if (!textarea) return;
-    savedSelection = {
-      start: textarea.selectionStart ?? 0,
-      end: textarea.selectionEnd ?? 0,
-    };
+  if (!textarea || !editor) return;
+
+  editor.innerHTML = textarea.value.trim() !== '' ? textarea.value : '<p><br></p>';
+
+  function syncTextareaFromEditor() {
+    textarea.value = editor.innerHTML.trim();
   }
 
-  function resolveSelection() {
-    if (!textarea) return null;
-    const current = {
-      start: textarea.selectionStart ?? 0,
-      end: textarea.selectionEnd ?? 0,
-    };
-    if (current.end > current.start) {
-      return current;
+  function selectionWithinEditor(selection) {
+    if (!selection || selection.rangeCount === 0) {
+      return false;
     }
-    if (savedSelection && savedSelection.end > savedSelection.start) {
-      return savedSelection;
+    const range = selection.getRangeAt(0);
+    return editor.contains(range.commonAncestorContainer);
+  }
+
+  function rememberSelection() {
+    const selection = window.getSelection();
+    if (!selectionWithinEditor(selection)) {
+      return;
     }
-    return current;
+    savedSelection = selection.getRangeAt(0).cloneRange();
+  }
+
+  function restoreSelection() {
+    if (!savedSelection) return false;
+    const selection = window.getSelection();
+    if (!selection) return false;
+    selection.removeAllRanges();
+    selection.addRange(savedSelection);
+    return true;
+  }
+
+  function rangeToHtml(range) {
+    const temp = document.createElement('div');
+    temp.appendChild(range.cloneContents());
+    return temp.innerHTML;
   }
 
   function wrapSelection(openTag, closeTag) {
-    if (!textarea) return;
-    const range = resolveSelection();
-    if (!range) return;
-    const start = range.start;
-    const end = range.end;
+    editor.focus();
+    restoreSelection();
 
-    if (start === end) {
+    const selection = window.getSelection();
+    if (!selectionWithinEditor(selection)) {
       alert('Najpierw zaznacz słowo lub fragment tekstu.');
       return;
     }
 
-    const value = textarea.value;
-    const selected = value.slice(start, end);
-    const nextValue = value.slice(0, start) + openTag + selected + closeTag + value.slice(end);
-    textarea.value = nextValue;
-    textarea.focus();
+    const range = selection.getRangeAt(0);
+    if (range.collapsed) {
+      alert('Najpierw zaznacz słowo lub fragment tekstu.');
+      return;
+    }
 
-    const cursorStart = start + openTag.length;
-    const cursorEnd = cursorStart + selected.length;
-    textarea.setSelectionRange(cursorStart, cursorEnd);
+    const selectedHtml = rangeToHtml(range);
+    document.execCommand('insertHTML', false, openTag + selectedHtml + closeTag);
+    syncTextareaFromEditor();
     rememberSelection();
   }
 
-  if (textarea) {
-    ['select', 'keyup', 'mouseup', 'touchend', 'input'].forEach((eventName) => {
-      textarea.addEventListener(eventName, rememberSelection);
-    });
+  function ensureEditorNotEmpty() {
+    const plain = (editor.textContent || '').replace(/\u00a0/g, ' ').trim();
+    return plain !== '';
   }
+
+  document.addEventListener('selectionchange', rememberSelection);
+
+  ['input', 'keyup', 'blur'].forEach((eventName) => {
+    editor.addEventListener(eventName, () => {
+      syncTextareaFromEditor();
+      rememberSelection();
+    });
+  });
+
+  editor.addEventListener('focus', rememberSelection);
+  syncTextareaFromEditor();
 
   toolbarButtons.forEach((button) => {
     ['pointerdown', 'mousedown'].forEach((eventName) => {
@@ -280,14 +313,26 @@ if (empty($sources)) {
   });
 
   if (insertLinkButton) {
-    insertLinkButton.addEventListener('click', () => {
+    insertLinkButton.addEventListener('click', (event) => {
+      event.preventDefault();
       rememberSelection();
       if (!linkSelect || !linkSelect.value) {
         alert('Wybierz link wewnętrzny z listy.');
         return;
       }
-      const href = linkSelect.value;
-      wrapSelection('<a href="' + href + '">', '</a>');
+      wrapSelection('<a href="' + linkSelect.value + '">', '</a>');
+    });
+  }
+
+  const form = document.getElementById('news-form');
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      syncTextareaFromEditor();
+      if (!ensureEditorNotEmpty()) {
+        event.preventDefault();
+        alert('Treść newsa jest wymagana.');
+        editor.focus();
+      }
     });
   }
 
