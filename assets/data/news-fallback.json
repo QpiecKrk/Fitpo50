@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-16T10:13:09+00:00",
+    "updatedAt": "2026-04-16T10:46:23+00:00",
     "items": [
+        {
+            "id": "news_93dbe4b07a3f",
+            "title": "Nawet małe światło w nocy może podnosić cukier rano",
+            "content_html": "<p><strong>Badanie opublikowane w PNAS</strong> pokazało, że sen przy górnym świetle o natężeniu około 100 luksów może pogarszać kontrolę glukozy już następnego ranka. To ważne, bo 100 luksów nie oznacza ostrego światła.</p>\n<p>W praktyce problemem nie musi być tylko włączona lampa, ale też telewizor, światło z korytarza albo uliczna latarnia wpadająca przez cienkie zasłony.</p>\n<p><span class=\"news-text-tone--2\">Światło działa nawet przez zamknięte powieki.</span> Organizm dostaje sygnał, że noc nie jest naprawdę ciemna, co może tłumić melatoninę, pobudzać układ współczulny i pogarszać jakość snu.</p>\n<p>To nie znaczy, że jedna gorsza noc wszystko rozwala. Problem częściej jest cichy i kumulacyjny.</p>\n<p><strong class=\"news-text-strong-black\">Wniosek praktyczny:</strong> sypialnia powinna być możliwie ciemna. Wyłącz TV, usuń zbędne lampki, zasłoń okna i ogranicz światło z korytarza.</p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260416_094003_237b3c7b.avif",
+                "webp": "./assets/news/news_20260416_094003_237b3c7b.webp",
+                "jpg": "./assets/news/news_20260416_094003_237b3c7b.jpg",
+                "alt": "Sen przy świetle",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Mason IC et al., Proceedings of the National Academy of Sciences (2022) — Light exposure during sleep impairs cardiometabolic function",
+                    "url": "https://www.pnas.org/doi/10.1073/pnas.2113290119"
+                },
+                {
+                    "label": "Obayashi K et al., American Journal of Epidemiology (2018) — Bedroom light exposure at night and the incidence of depressive symptoms",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/29020124/"
+                }
+            ],
+            "updated_at": "2026-04-16T10:46:23+00:00",
+            "published_at": "2026-04-16T09:40:03+00:00",
+            "excerpt": "Badanie opublikowane w PNAS pokazało, że sen przy górnym świetle o natężeniu około 100 luksów może pogarszać kontrolę glukozy już następnego ranka. To ważne, bo 100 luksów nie oznacza ostrego światła. W praktyce problem…"
+        },
         {
             "id": "news_coffee_minerals_002",
             "title": "Kawa nie „wypłukuje” cię magicznie. Ale może pogarszać problem",
@@ -83,33 +110,6 @@
             "updated_at": "2026-04-16T07:56:24+00:00",
             "published_at": "2026-04-16T07:56:24+00:00",
             "excerpt": "Badania pokazują, że regularne zanurzanie się w zimnej wodzie bezpośrednio po treningu siłowym może ograniczać przyrost mięśni i siły. W 12-tygodniowym badaniu osoby stosujące cold plunge po każdej sesji osiągnęły istot…"
-        },
-        {
-            "id": "news_93dbe4b07a3f",
-            "title": "Nawet małe światło w nocy może podnosić cukier ran",
-            "content_html": "<p>Badanie opublikowane w &lt;span class=\\PNAS pokazało, że sen przy górnym świetle o natężeniu około 100 luksów może pogarszać kontrolę glukozy już następnego ranka. To ważne, bo 100 luksów nie oznacza ostrego światła. W praktyce problemem nie musi być tylko włączona lampa, ale też telewizor, światło z korytarza albo uliczna latarnia wpadająca przez cienkie zasłony.</p>\n<p>&lt;span class=\\Światło działa nawet przez zamknięte powieki. Organizm dostaje sygnał, że noc nie jest naprawdę ciemna, co może tłumić melatoninę, pobudzać układ współczulny i pogarszać jakość snu. A to odbija się nie tylko na regeneracji, ale też na metabolizmie.</p>\n<p>To nie znaczy, że jedna gorsza noc wszystko rozwala. Problem jest raczej cichy i kumulacyjny. Im częściej śpisz w rozjaśnionej sypialni, tym gorzej dla snu, nastroju i gospodarki metabolicznej.</p>  \n<p>&lt;span class=\\Wniosek praktyczny</p>\n<p>Sypialnia powinna być możliwie ciemna. Wyłącz TV, usuń zbędne lampki, zasłoń okna i ogranicz światło z korytarza.</p>",
-            "sort_order": 9999,
-            "image": {
-                "avif": "./assets/news/news_20260416_094003_237b3c7b.avif",
-                "webp": "./assets/news/news_20260416_094003_237b3c7b.webp",
-                "jpg": "./assets/news/news_20260416_094003_237b3c7b.jpg",
-                "alt": "Sen przy świetle",
-                "width": 640,
-                "height": 480
-            },
-            "sources": [
-                {
-                    "label": "Mason IC et al., Proceedings of the National Academy of Sciences (2022) — Light exposure during sleep impairs cardiometabolic function",
-                    "url": "https://www.pnas.org/doi/10.1073/pnas.2113290119"
-                },
-                {
-                    "label": "Obayashi K et al., American Journal of Epidemiology (2018) — Bedroom light exposure at night and the incidence of depressive symptoms",
-                    "url": "https://pubmed.ncbi.nlm.nih.gov/29020124/"
-                }
-            ],
-            "updated_at": "2026-04-16T10:13:09+00:00",
-            "published_at": "2026-04-16T09:40:03+00:00",
-            "excerpt": "Badanie opublikowane w &lt;span class=\\PNAS pokazało, że sen przy górnym świetle o natężeniu około 100 luksów może pogarszać kontrolę glukozy już następnego ranka. To ważne, bo 100 luksów nie oznacza ostrego światła. W…"
         }
     ]
 }
