@@ -42,7 +42,7 @@ $logoUrl = 'assets/logo.jpg?v=2';
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/panel.css?v=20260416-5">
+<link rel="stylesheet" href="assets/panel.css?v=20260416-6">
 </head>
 <body class="panel-body panel-body--news-dashboard">
 
@@ -55,9 +55,7 @@ $logoUrl = 'assets/logo.jpg?v=2';
     </div>
     <nav class="panel-header__nav">
       <a href="dashboard.php" class="panel-nav-link">Wpisy</a>
-      <a href="entry-form.php" class="panel-nav-link">Nowy wpis</a>
       <a href="news-dashboard.php" class="panel-nav-link panel-nav-link--active">Newsy</a>
-      <a href="../moje-sukcesy.html" target="_blank" rel="noopener noreferrer" class="panel-nav-link">Moje Sukcesy ↗</a>
       <a href="logout.php" class="panel-nav-link panel-nav-link--logout">Wyloguj</a>
     </nav>
   </div>

@@ -1020,4 +1020,7 @@ a:hover { text-decoration: underline; }
   .form-actions-mobile {
     grid-template-columns: 1fr;
   }
+  .news-editor-mobile-bar {
+    bottom: calc(8.1rem + env(safe-area-inset-bottom));
+  }
 }
