@@ -49,6 +49,41 @@
   }
 ]
 </script>
+<script type="application/ld+json" id="news-feed-schema">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Szybkie newsy i ciekawostki",
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "numberOfItems": 1,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Article",
+        "headline": "Zimne kąpiele po treningu mogą hamować efekty",
+        "url": "https://fitpo50.pl/#news",
+        "datePublished": "2026-04-16",
+        "dateModified": "2026-04-16",
+        "image": "https://fitpo50.pl/assets/news/news_cold_plunge_01.jpg",
+        "author": {
+          "@type": "Organization",
+          "name": "FitPo50"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "FitPo50",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://fitpo50.pl/assets/logo.jpg"
+          }
+        }
+      }
+    }
+  ]
+}
+</script>
 
 <!-- Fonts: Zodiak (display) from Fontshare + Work Sans (body) from Google -->
 <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -57,7 +92,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 <link rel="stylesheet" href="./base.css">
-<link rel="stylesheet" href="./style.css?v=1.1">
+<link rel="stylesheet" href="./style.css?v=1.2">
 <style>
 .about-promo {
   margin-top: var(--space-20);
@@ -208,6 +243,7 @@
     </a>
     <nav class="header__desktop-nav" aria-label="Nawigacja pulpit">
       <a href="#o-nas" class="nav__link">O mnie</a>
+      <a href="#news" class="nav__link">NEWS</a>
       <a href="#baza-wiedzy" class="nav__link">Baza wiedzy</a>
       <a href="porady.html" class="nav__link">Porady</a>
       <a href="moje-sukcesy.html" class="nav__link">Moje Sukcesy</a>
@@ -219,6 +255,7 @@
 <nav class="header__scroll" aria-label="Kategorie mobilne">
   <div class="header__scroll-inner">
     <a href="index.html" class="header__scroll-link header__scroll-link--active">Główna</a>
+    <a href="#news" class="header__scroll-link">NEWS</a>
     <a href="#baza-wiedzy" class="header__scroll-link">Wiedza</a>
     <a href="#trendy" class="header__scroll-link">Trendy</a>
     <a href="porady.html" class="header__scroll-link ">Porady</a>
@@ -367,6 +404,31 @@
       </div>
     </div>
     <!-- Opcjonalnie: Tło lub grafika jeśli potrzebna, ale tu skupiamy się na mocnym CTA i Badge -->
+  </div>
+</section>
+
+<!-- ============================================================
+     NEWS
+     ============================================================ -->
+<section class="news-pulse section-padding" id="news">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-header__label">NEWS</span>
+      <h2 class="section-header__title">Szybkie newsy i ciekawostki</h2>
+      <div class="section-header__line"></div>
+      <p class="section-header__desc">Krótki format: konkrety, źródła i praktyczny kontekst dla osób 50+.</p>
+    </div>
+
+    <div class="news-pulse__frame reveal">
+      <div class="news-pulse__scroll" data-news-feed role="feed" aria-label="Szybkie newsy i ciekawostki" tabindex="0">
+        <article class="news-card news-card--placeholder">
+          <div class="news-card__content">
+            <h3 class="news-card__title">Ładowanie newsów…</h3>
+            <p class="news-card__body">Sekcja NEWS pobiera najnowsze wpisy z panelu redakcyjnego.</p>
+          </div>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -882,44 +944,14 @@
 </section>
 
 <!-- ============================================================
-     INSTAGRAM CTA
+     CZYTELNIA PREVIEW
      ============================================================ -->
-<section class="instagram-cta section-padding" id="instagram">
+<section class="home-reading section-padding" id="instagram">
   <div class="container">
-    <div class="instagram-cta__inner reveal">
-      <span class="section-header__label">Instagram</span>
-      <h2 class="instagram-cta__title">Codzienne dawki motywacji</h2>
+    <div class="section-header reveal">
+      <span class="section-header__label">Czytelnia</span>
+      <h2 class="section-header__title">Najnowsze Porady i Artykuły</h2>
       <div class="section-header__line"></div>
-      <p class="instagram-cta__desc">Reelsy, tipy, mity do obalenia — wszystko w krótkich, praktycznych filmach. Dołącz do @fitpo50 na Instagramie.</p>
-
-      <div class="reels-grid">
-        <div class="reel-card">
-          <div class="reel-card__play"><svg viewBox="0 0 16 16"><path d="M5 3l8 5-8 5V3z"/></svg></div>
-          <div class="reel-card__content">
-            <p class="reel-card__title">3 ćwiczenia na początek</p>
-            <p class="reel-card__views">12.4k wyświetleń</p>
-          </div>
-        </div>
-        <div class="reel-card">
-          <div class="reel-card__play"><svg viewBox="0 0 16 16"><path d="M5 3l8 5-8 5V3z"/></svg></div>
-          <div class="reel-card__content">
-            <p class="reel-card__title">Mit: za późno na siłownię</p>
-            <p class="reel-card__views">8.7k wyświetleń</p>
-          </div>
-        </div>
-        <div class="reel-card">
-          <div class="reel-card__play"><svg viewBox="0 0 16 16"><path d="M5 3l8 5-8 5V3z"/></svg></div>
-          <div class="reel-card__content">
-            <p class="reel-card__title">Białko po 50-tce</p>
-            <p class="reel-card__views">15.1k wyświetleń</p>
-          </div>
-        </div>
-      </div>
-
-      <a href="https://www.instagram.com/fitpo50" class="btn btn--accent" target="_blank" rel="noopener noreferrer" style="margin-top: var(--space-8);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        Śledź @fitpo50 na Instagramie
-      </a>
     </div>
 
     <div class="articles-grid-preview articles-grid-preview--home">
@@ -983,6 +1015,8 @@
     <div class="porady-preview__actions reveal">
       <a href="porady.html" class="btn btn--outline">Przejdź do wszystkich porad <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
     </div>
+  </div>
+</section>
 
 <!-- ============================================================
      FOOTER
@@ -1001,6 +1035,7 @@
         <h3 class="footer__heading">Nawigacja</h3>
         <ul class="footer__links" role="list">
           <li><a href="#o-nas">O mnie</a></li>
+          <li><a href="#news">NEWS</a></li>
           <li><a href="#baza-wiedzy">Baza wiedzy</a></li>
           <li><a href="#trendy">Obecne Trendy</a></li>
           <li><a href="porady.html" style="color: var(--color-primary);">Porady</a></li>
@@ -1033,6 +1068,203 @@
         heroBg.style.transform = `translateY(${scrolled * 0.15}px)`;
       }
     });
+  </script>
+  <script>
+    (function () {
+      const feedRoot = document.querySelector('[data-news-feed]');
+      if (!feedRoot) return;
+
+      const schemaNode = document.getElementById('news-feed-schema');
+
+      const fallbackVersion = Math.floor(Date.now() / 60000);
+      const sources = [
+        './admin/api/news-feed.php',
+        'https://admin.fitpo50.pl/api/news-feed.php',
+        `./assets/data/news-fallback.json?v=${fallbackVersion}`
+      ];
+
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/\"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function normalizeItem(item) {
+        return {
+          id: String(item.id ?? ''),
+          title: String(item.title ?? 'Bez tytułu'),
+          content_html: String(item.content_html ?? ''),
+          image: item.image && typeof item.image === 'object' ? item.image : null,
+          sources: Array.isArray(item.sources) ? item.sources : [],
+          updated_at: String(item.updated_at ?? ''),
+          published_at: String(item.published_at ?? '')
+        };
+      }
+
+      function buildSourcesHtml(newsItem) {
+        if (!Array.isArray(newsItem.sources) || newsItem.sources.length === 0) {
+          return '';
+        }
+
+        const links = newsItem.sources.map((source, index) => {
+          const label = escapeHtml(source.label || `Źródło ${index + 1}`);
+          const url = escapeHtml(source.url || '#');
+          return `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a></li>`;
+        }).join('');
+
+        return `
+          <details class="news-card__sources">
+            <summary>Źródła (${newsItem.sources.length})</summary>
+            <ol>${links}</ol>
+          </details>
+        `;
+      }
+
+      function buildImageHtml(newsItem) {
+        if (!newsItem.image || !newsItem.image.jpg) {
+          return '';
+        }
+
+        const alt = escapeHtml(newsItem.image.alt || newsItem.title);
+        const width = Number(newsItem.image.width || 640);
+        const height = Number(newsItem.image.height || 480);
+        const avif = newsItem.image.avif ? `<source srcset="${escapeHtml(newsItem.image.avif)}" type="image/avif">` : '';
+        const webp = newsItem.image.webp ? `<source srcset="${escapeHtml(newsItem.image.webp)}" type="image/webp">` : '';
+
+        return `
+          <div class="news-card__media">
+            <picture>
+              ${avif}
+              ${webp}
+              <img src="${escapeHtml(newsItem.image.jpg)}" alt="${alt}" loading="lazy" width="${width}" height="${height}">
+            </picture>
+          </div>
+        `;
+      }
+
+      function attachBodyStyling(cardNode) {
+        const contentNode = cardNode.querySelector('.news-card__body');
+        if (!contentNode) return;
+        const anchors = contentNode.querySelectorAll('a[href]');
+        anchors.forEach((anchor) => {
+          const href = anchor.getAttribute('href') || '';
+          if (/^https?:\/\//i.test(href)) {
+            anchor.setAttribute('target', '_blank');
+            anchor.setAttribute('rel', 'noopener noreferrer');
+          }
+        });
+      }
+
+      function renderNews(items) {
+        if (!Array.isArray(items) || items.length === 0) {
+          feedRoot.innerHTML = `
+            <article class="news-card news-card--placeholder">
+              <div class="news-card__content">
+                <h3 class="news-card__title">Brak opublikowanych newsów</h3>
+                <p class="news-card__body">Dodaj pierwszy wpis w panelu administracyjnym, aby sekcja NEWS wyświetliła treści live.</p>
+              </div>
+            </article>
+          `;
+          return;
+        }
+
+        feedRoot.innerHTML = '';
+
+        items.forEach((rawItem, index) => {
+          const newsItem = normalizeItem(rawItem);
+          const card = document.createElement('article');
+          const hasImage = !!(newsItem.image && newsItem.image.jpg);
+          card.className = `news-card ${index % 2 === 0 ? 'news-card--mint' : 'news-card--blue'}${hasImage ? '' : ' news-card--no-media'}`;
+          card.setAttribute('data-news-id', newsItem.id);
+
+          card.innerHTML = `
+            ${buildImageHtml(newsItem)}
+            <div class="news-card__content">
+              <h3 class="news-card__title">${escapeHtml(newsItem.title)}</h3>
+              <div class="news-card__body">${newsItem.content_html}</div>
+              ${buildSourcesHtml(newsItem)}
+            </div>
+          `;
+
+          attachBodyStyling(card);
+          feedRoot.appendChild(card);
+        });
+      }
+
+      function updateNewsSchema(items) {
+        if (!schemaNode || !Array.isArray(items) || items.length === 0) return;
+
+        const schema = {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          name: 'Szybkie newsy i ciekawostki',
+          itemListOrder: 'https://schema.org/ItemListOrderAscending',
+          numberOfItems: items.length,
+          itemListElement: items.map((rawItem, idx) => {
+            const item = normalizeItem(rawItem);
+            const image = item.image && item.image.jpg
+              ? ('https://fitpo50.pl/' + item.image.jpg.replace(/^\.\//, ''))
+              : 'https://fitpo50.pl/assets/logo.jpg';
+            const dateValue = (item.published_at || item.updated_at || '').slice(0, 10) || '2026-04-16';
+
+            return {
+              '@type': 'ListItem',
+              position: idx + 1,
+              item: {
+                '@type': 'Article',
+                headline: item.title,
+                url: 'https://fitpo50.pl/#news',
+                datePublished: dateValue,
+                dateModified: dateValue,
+                image,
+                author: { '@type': 'Organization', name: 'FitPo50' },
+                publisher: {
+                  '@type': 'Organization',
+                  name: 'FitPo50',
+                  logo: { '@type': 'ImageObject', url: 'https://fitpo50.pl/assets/logo.jpg' }
+                }
+              }
+            };
+          })
+        };
+
+        schemaNode.textContent = JSON.stringify(schema);
+      }
+
+      async function tryFetch(url) {
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+          cache: 'no-store'
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP_${response.status}`);
+        }
+        const data = await response.json();
+        if (!data || !Array.isArray(data.items)) {
+          throw new Error('INVALID_PAYLOAD');
+        }
+        return data;
+      }
+
+      (async function initNews() {
+        for (const url of sources) {
+          try {
+            const payload = await tryFetch(url);
+            renderNews(payload.items);
+            updateNewsSchema(payload.items);
+            return;
+          } catch (error) {
+            // Próbujemy kolejne źródło (live -> fallback)
+          }
+        }
+
+        renderNews([]);
+      })();
+    })();
   </script>
   <script src="./dist/app.js" defer></script>
 

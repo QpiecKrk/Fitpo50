@@ -47,6 +47,7 @@ $total = array_sum($cnt);
     <nav class="panel-header__nav">
       <a href="dashboard.php" class="panel-nav-link panel-nav-link--active">Wpisy</a>
       <a href="entry-form.php" class="panel-nav-link">Nowy wpis</a>
+      <a href="news-dashboard.php" class="panel-nav-link">Newsy</a>
       <a href="../moje-sukcesy.html" target="_blank" rel="noopener noreferrer" class="panel-nav-link">Moje Sukcesy ↗</a>
       <a href="logout.php" class="panel-nav-link panel-nav-link--logout">Wyloguj</a>
     </nav>

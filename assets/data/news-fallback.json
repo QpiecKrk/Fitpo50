@@ -1,0 +1,88 @@
+{
+    "version": 1,
+    "updatedAt": "2026-04-16T08:45:13+00:00",
+    "items": [
+        {
+            "id": "news_coffee_minerals_002",
+            "title": "Kawa nie „wypłukuje” cię magicznie. Ale może pogarszać problem",
+            "content_html": "<p><strong>Kawa sama w sobie nie robi automatycznie niedoboru magnezu i wapnia.</strong> To popularny skrót myślowy, który często upraszcza temat.</p>\n<p>Kofeina może zwiększać wydalanie wapnia z moczem, a część badań wskazuje także wpływ na gospodarkę magnezową. Przy umiarkowanym piciu kawy i sensownej diecie nie ma jednak mocnych dowodów, że sama kawa u większości osób prowadzi do przewlekłych niedoborów.</p>\n<p>Dużo lepiej udokumentowane jest coś innego: kofeina może pogarszać sen, zwiększać napięcie i nasilać lęk u części osób, zwłaszcza przy większych dawkach albo późno w ciągu dnia.</p>\n<p>Jeśli po kilku kawach czujesz rozjazd, częściej problemem jest dawka, pora i słaba baza żywieniowa. Kawa po śniadaniu zwykle ma więcej sensu niż kawa zamiast śniadania.</p>\n<p><strong>Wniosek praktyczny:</strong></p>\n<ul>\n  <li>nie demonizuj kawy, tylko kontroluj dawkę i porę,</li>\n  <li>dbaj o magnez i wapń z jedzenia na co dzień,</li>\n  <li>suplement traktuj jako dodatek, nie alibi dla chaosu.</li>\n</ul>\n<p>Jeśli chcesz podejść do kofeiny rozsądnie, zobacz też <a href=\"kawa-jako-preworkout-po-50.html\">kawę jako pre-workout po 50</a> i <a href=\"sen-po-50.html\">jak poprawić sen po 50</a>.</p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_coffee_minerals_01.avif",
+                "webp": "./assets/news/news_coffee_minerals_01.webp",
+                "jpg": "./assets/news/news_coffee_minerals_01.jpg",
+                "alt": "Filiżanka kawy i grafika magnezu oraz wapnia na tle zmęczonego mężczyzny",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "PMID: 12204390 — badanie o kofeinie i wydalaniu wapnia",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/12204390/"
+                },
+                {
+                    "label": "PMID: 33052484 — przegląd danych o kofeinie i zdrowiu",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/33052484/"
+                },
+                {
+                    "label": "NIH ODS — Magnesium Fact Sheet for Health Professionals",
+                    "url": "https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/"
+                },
+                {
+                    "label": "PMID: 26899133 — caffeine, anxiety and mood",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/26899133/"
+                },
+                {
+                    "label": "PMID: 17950009 — caffeine and sleep in everyday use",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/17950009/"
+                },
+                {
+                    "label": "PMID: 23108937 — caffeine and sleep quality",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/23108937/"
+                },
+                {
+                    "label": "NIH ODS — Exercise and Athletic Performance (kontekst praktyczny)",
+                    "url": "https://ods.od.nih.gov/factsheets/ExerciseAndAthleticPerformance-HealthProfessional/"
+                }
+            ],
+            "updated_at": "2026-04-16T08:44:08+00:00",
+            "published_at": "2026-04-16T08:44:08+00:00",
+            "excerpt": "Kawa sama w sobie nie robi automatycznie niedoboru magnezu i wapnia. To popularny skrót myślowy, który często upraszcza temat. Kofeina może zwiększać wydalanie wapnia z moczem, a część badań wskazuje także wpływ na gosp…"
+        },
+        {
+            "id": "news_cold_plunge_001",
+            "title": "Zimne kąpiele po treningu mogą hamować efekty",
+            "content_html": "<p><strong>Badania pokazują</strong>, że regularne zanurzanie się w zimnej wodzie bezpośrednio po treningu siłowym może ograniczać przyrost mięśni i siły.</p>\n<p>W 12-tygodniowym badaniu osoby stosujące cold plunge po każdej sesji osiągnęły istotnie mniejsze przyrosty masy mięśniowej i siły niż grupa stosująca aktywną regenerację. <span class=\"news-text-tone--3\">W tym konkretnym protokole różnice sięgały około 66% mniejszego przyrostu masy mięśniowej.</span></p>\n<p>Mechanizm jest praktyczny: zimno może osłabiać sygnały anaboliczne po wysiłku, które odpowiadają za adaptację mięśni.</p>\n<p><strong>Wniosek praktyczny:</strong></p>\n<ul>\n  <li>zimne kąpiele mogą pomóc w odczuciu regeneracji i bólu,</li>\n  <li>ale stosowane od razu po treningu siłowym mogą osłabiać progres,</li>\n  <li>lepiej planować je w dni bez treningu lub kilka godzin później.</li>\n</ul>\n<p>Jeśli chcesz zaplanować siłę po 50-tce bez chaosu, zobacz też <a href=\"trening-maszynowy-po-50.html\">praktyczny schemat treningu oporowego</a>.</p>",
+            "sort_order": 2,
+            "image": {
+                "avif": "./assets/news/news_cold_plunge_01.avif",
+                "webp": "./assets/news/news_cold_plunge_01.webp",
+                "jpg": "./assets/news/news_cold_plunge_01.jpg",
+                "alt": "Mężczyzna w zimnej kąpieli po treningu siłowym",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Roberts, L.A. et al. (2015). Post-exercise cold water immersion attenuates acute anabolic signalling and long-term adaptations in muscle to strength training (PMC)",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4594298/"
+                },
+                {
+                    "label": "The Journal of Physiology — publikacja oryginalna (DOI: 10.1113/JP270570)",
+                    "url": "https://physoc.onlinelibrary.wiley.com/doi/10.1113/JP270570"
+                },
+                {
+                    "label": "Machado, A.F. et al. (2020). Can water immersion alter recovery after high-intensity exercise? A systematic review and meta-analysis (PMC)",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7339943/"
+                },
+                {
+                    "label": "Poppendieck, W. et al. (2022). Cooling and performance recovery of trained athletes: a meta-analytical review",
+                    "url": "https://www.tandfonline.com/doi/full/10.1080/17461391.2022.2033851"
+                }
+            ],
+            "updated_at": "2026-04-16T07:56:24+00:00",
+            "published_at": "2026-04-16T07:56:24+00:00",
+            "excerpt": "Badania pokazują, że regularne zanurzanie się w zimnej wodzie bezpośrednio po treningu siłowym może ograniczać przyrost mięśni i siły. W 12-tygodniowym badaniu osoby stosujące cold plunge po każdej sesji osiągnęły istot…"
+        }
+    ]
+}

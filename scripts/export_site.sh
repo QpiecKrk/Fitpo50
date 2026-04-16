@@ -56,6 +56,7 @@ rsync -a \
   --exclude="PROJECT_MEMORY.md" \
   --exclude="MEMORY_PORADY.md" \
   --exclude="MEMORY_MOJE_SUKCESY.md" \
+  --exclude="MEMORY_NEWSY.md" \
   --exclude="package.json" \
   --exclude="tsconfig.json" \
   --exclude="src/" \

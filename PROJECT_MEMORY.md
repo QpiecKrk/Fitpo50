@@ -118,9 +118,11 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 - Szczegoly dla modulow trzymamy osobno:
   - `MEMORY_PORADY.md` - klasyczne artykuly i czytelnia `porady.html`.
   - `MEMORY_MOJE_SUKCESY.md` - kalendarz oraz strony dnia `sukcesy/YYYY-MM-DD.html`.
+  - `MEMORY_NEWSY.md` - sekcja `NEWS` na `index.html` oraz panel admin do szybkich newsow.
 - Zasada pracy:
   - gdy zadanie dotyczy `Porady`, czytamy i stosujemy `MEMORY_PORADY.md`,
   - gdy zadanie dotyczy `Moje Sukcesy`, czytamy i stosujemy `MEMORY_MOJE_SUKCESY.md`,
+  - gdy zadanie dotyczy sekcji `NEWS`, czytamy i stosujemy `MEMORY_NEWSY.md`,
   - nie mieszamy logiki miedzy modulami.
 
 ## Zasady ogolne
