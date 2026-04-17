@@ -88,6 +88,12 @@ _site/MEMORY_PORADY.md
 _site/check.js
 _site/clean.js
 _site/copy_pngs.sh
+_site/SESSION_START_MAX.md
+
+# timestamped NEWS thumbs generated during export (avoid status noise)
+_site/assets/news/news_20*.avif
+_site/assets/news/news_20*.jpg
+_site/assets/news/news_20*.webp
 
 # Auto-generated AI agent exclusions
 .cursorrules

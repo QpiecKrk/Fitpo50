@@ -57,6 +57,7 @@ rsync -a \
   --exclude="MEMORY_PORADY.md" \
   --exclude="MEMORY_MOJE_SUKCESY.md" \
   --exclude="MEMORY_NEWSY.md" \
+  --exclude="SESSION_START_MAX.md" \
   --exclude="package.json" \
   --exclude="tsconfig.json" \
   --exclude="src/" \
