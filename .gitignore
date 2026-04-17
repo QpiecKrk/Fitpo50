@@ -68,6 +68,12 @@ _site/data/git-sync.lock
 .cursor/
 .vscode/
 
+# tool-generated artifacts (never track in repo)
+.agent/
+.agents/
+.brainsync/
+.windsurfrules
+
 # generated test pages (never publish)
 2026-03-30-mdlsdmslds.html
 2026-03-31-dupa.html
@@ -86,6 +92,5 @@ _site/copy_pngs.sh
 # Auto-generated AI agent exclusions
 .cursorrules
 .clineRules
-.windsurfrules
 .gemini/
 .cline/

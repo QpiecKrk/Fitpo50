@@ -13,7 +13,7 @@ START TECHNICZNY (zawsze na poczatku sesji):
 1) Od razu zsynchronizuj lokalne repo z GitHub (zanim zaczniesz analize):
    cd /Users/grzegorzkupiec/Projects/FitPo50-local
    git pull --ff-only origin main
-   git restore .agent/skills/auto/shell/SKILL.md 2>/dev/null || true
+   git restore .agent .agents .brainsync .cursor .windsurfrules 2>/dev/null || true
    git status --short
 2) Pokaz mi wynik i dopiero potem przejdz do pracy.
 
