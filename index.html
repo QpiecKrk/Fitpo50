@@ -90,6 +90,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="image" href="./assets/hero.avif" type="image/avif" imagesrcset="./assets/hero.avif 1200w, ./assets/hero.webp 1200w, ./assets/hero.jpg 1200w" imagesizes="100vw">
 
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css?v=1.2">
@@ -276,7 +277,7 @@
     <picture>
       <source srcset="./assets/hero.avif" type="image/avif">
       <source srcset="./assets/hero.webp" type="image/webp">
-      <img src="./assets/hero.jpg" alt="Mężczyzna po 50-tce pewnie trenujący z hantlami w nowoczesnej siłowni" width="1200" height="670" loading="eager">
+      <img src="./assets/hero.jpg" alt="Mężczyzna po 50-tce pewnie trenujący z hantlami w nowoczesnej siłowni" width="1200" height="670" loading="eager" fetchpriority="high" decoding="async">
     </picture>
   </div>
   <div class="hero__overlay"></div>

@@ -21,6 +21,42 @@
   Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://admin.fitpo50.pl; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.fontshare.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https://api.fontshare.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://admin.fitpo50.pl; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https://fitpo50.pl https://admin.fitpo50.pl; upgrade-insecure-requests"
 </IfModule>
 
+# === Compression for text resources ===
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# === Cache lifetimes ===
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML should revalidate quickly
+  ExpiresByType text/html "access plus 10 minutes"
+
+  # Static assets
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Keep HTML fresh
+  <FilesMatch "\.(html?)$">
+    Header set Cache-Control "public, max-age=600, must-revalidate"
+  </FilesMatch>
+
+  # Immutable cache for versioned/static assets
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|avif|svg|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
 # === Block direct access to SQLite database files ===
 <FilesMatch "\.sqlite$">
   <IfModule mod_authz_core.c>
