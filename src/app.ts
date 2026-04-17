@@ -517,6 +517,52 @@
   });
 
   // ----------------------------------------------------------
+  // READING SANCTUARY (focus mode)
+  // ----------------------------------------------------------
+  const readingModeStorageKey = 'fitpo50_reading_sanctuary';
+  const canUseReadingMode = !window.location.pathname.includes('/admin/')
+    && document.querySelector('.article-content') !== null;
+
+  if (canUseReadingMode) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'reading-sanctuary-toggle';
+    btn.setAttribute('aria-label', 'Włącz tryb czytania');
+    btn.setAttribute('aria-pressed', 'false');
+    btn.innerHTML = `
+      <span class="reading-sanctuary-toggle__icon" aria-hidden="true">Aa</span>
+      <span class="reading-sanctuary-toggle__label">Tryb czytania</span>
+    `;
+
+    const setReadingMode = (enabled: boolean) => {
+      document.body.classList.toggle('reading-sanctuary-active', enabled);
+      btn.classList.toggle('is-active', enabled);
+      btn.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+      btn.setAttribute('aria-label', enabled ? 'Wyłącz tryb czytania' : 'Włącz tryb czytania');
+      try {
+        window.localStorage.setItem(readingModeStorageKey, enabled ? '1' : '0');
+      } catch {
+        // Ignore localStorage failures (private mode etc.)
+      }
+    };
+
+    let initialEnabled = false;
+    try {
+      initialEnabled = window.localStorage.getItem(readingModeStorageKey) === '1';
+    } catch {
+      initialEnabled = false;
+    }
+
+    btn.addEventListener('click', () => {
+      const nextValue = !document.body.classList.contains('reading-sanctuary-active');
+      setReadingMode(nextValue);
+    });
+
+    document.body.appendChild(btn);
+    setReadingMode(initialEnabled);
+  }
+
+  // ----------------------------------------------------------
   // INSTANT CLICK (prefetch on intent)
   // ----------------------------------------------------------
   const prefetchedUrls = new Set<string>();

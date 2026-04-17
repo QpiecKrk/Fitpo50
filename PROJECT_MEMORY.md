@@ -79,6 +79,11 @@
   - Prefetch uruchamia sie na intencji (`mouseover`, `focusin`, `touchstart`) tylko dla linkow wewnetrznych.
   - Wykluczenia: linki zewnetrzne, `mailto:`, `tel:`, `javascript:`, `target="_blank"`, `download`, hash-only i sciezki `/admin/`.
 
+- **Reading Sanctuary / Tryb czytania:**
+  - Przycisk trybu czytania ma byc widoczny **tylko na stronach artykulow** (gdy na stronie istnieje `.article-content`).
+  - Nie pokazujemy tego przycisku na stronie glownej, stronach kategorii/list i w panelu admin.
+  - Efekt ma byc subtelny: poprawa czytelnosci tresci artykulu, bez globalnego "zoltawienia" calego viewportu i bez mocnego wygaszania sekcji typu NEWS.
+
 - **Dodatkowa zasada praktyczna (po ostatnich zmianach):**
   - Przy zmianach w `src/app.ts` zawsze wykonujemy `npm run build`, aby zsynchronizowac `dist/app.js` przed commitem.
   - Przy zmianach frontowych, ktore sa publikowane statycznie, pilnujemy spojnosci source <-> `_site` przed deployem.

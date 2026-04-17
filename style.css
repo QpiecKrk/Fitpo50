@@ -2754,3 +2754,115 @@ a:hover {
     height: 8px;
   }
 }
+
+/* ============================================================
+   READING SANCTUARY (Focus Mode)
+   ============================================================ */
+.reading-sanctuary-toggle {
+  position: fixed;
+  right: clamp(10px, 2.2vw, 20px);
+  bottom: calc(74px + env(safe-area-inset-bottom));
+  z-index: 70;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(14, 143, 170, 0.34);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #11384f;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 8px 22px rgba(13, 46, 64, 0.18);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.reading-sanctuary-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(13, 46, 64, 0.22);
+}
+
+.reading-sanctuary-toggle__icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 143, 170, 0.16);
+  color: #0b5e78;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.reading-sanctuary-toggle.is-active {
+  background: rgba(255, 248, 231, 0.94);
+  border-color: rgba(180, 125, 36, 0.38);
+  color: #5a3f1c;
+}
+
+.reading-sanctuary-toggle.is-active .reading-sanctuary-toggle__icon {
+  background: rgba(243, 201, 111, 0.26);
+  color: #6a4716;
+}
+
+body.reading-sanctuary-active {
+  color: #21313b;
+}
+
+body.reading-sanctuary-active main {
+  background: transparent;
+}
+
+body.reading-sanctuary-active .article-content {
+  background: rgba(255, 250, 238, 0.78);
+  border: 1px solid rgba(203, 176, 128, 0.26);
+  border-radius: 20px;
+  padding: clamp(1.1rem, 1vw + 0.9rem, 1.8rem);
+  box-shadow: 0 8px 24px rgba(18, 39, 49, 0.08);
+  font-size: clamp(1.08rem, 0.98rem + 0.45vw, 1.24rem);
+  line-height: 1.9;
+  letter-spacing: 0.005em;
+  color: #2d2a26;
+}
+
+body.reading-sanctuary-active .article-content h2,
+body.reading-sanctuary-active .article-content h3,
+body.reading-sanctuary-active .article-header__title {
+  color: #222;
+}
+
+body.reading-sanctuary-active .article-content p,
+body.reading-sanctuary-active .article-content li {
+  max-width: 68ch;
+}
+
+body.reading-sanctuary-active .subpage-content p,
+body.reading-sanctuary-active .article-card__content p,
+body.reading-sanctuary-active .news-card__body p {
+  font-size: clamp(1.02rem, 0.96rem + 0.28vw, 1.14rem);
+  line-height: 1.78;
+}
+
+body.reading-sanctuary-active .article-content a {
+  color: #0c5f8a;
+}
+
+@media (max-width: 640px) {
+  .reading-sanctuary-toggle {
+    right: 10px;
+    bottom: calc(84px + env(safe-area-inset-bottom));
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .reading-sanctuary-toggle__label {
+    display: none;
+  }
+}
