@@ -98,8 +98,8 @@ $total = array_sum($cnt);
       </div>
     <?php else: ?>
       <div class="entries-mobile-cards">
-        <?php foreach ($entries as $e): ?>
-          <article class="entry-mobile-card">
+        <?php foreach ($entries as $idx => $e): ?>
+          <article class="entry-mobile-card js-batch-item" data-batch-index="<?= $idx ?>">
             <div class="entry-mobile-card__head">
               <div class="entry-mobile-card__date"><?= h($e['entry_date']) ?></div>
               <span class="status-badge status-badge--<?= h($e['status']) ?>">
@@ -145,6 +145,10 @@ $total = array_sum($cnt);
           </article>
         <?php endforeach; ?>
       </div>
+      <div class="entries-batch-controls js-batch-controls" data-batch-target=".entries-mobile-cards .js-batch-item" data-batch-size="10">
+        <button type="button" class="btn-panel btn-panel--outline btn-panel--sm" data-batch-more>Pokaż kolejne 10</button>
+        <span class="entries-batch-status" data-batch-status></span>
+      </div>
 
       <div class="entries-table-wrap">
         <table class="entries-table">
@@ -158,8 +162,8 @@ $total = array_sum($cnt);
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($entries as $e): ?>
-            <tr>
+            <?php foreach ($entries as $idx => $e): ?>
+            <tr class="js-batch-item" data-batch-index="<?= $idx ?>">
               <td class="col-date"><?= h($e['entry_date']) ?></td>
               <td class="col-title">
                 <strong><?= h($e['title']) ?></strong>
@@ -213,10 +217,61 @@ $total = array_sum($cnt);
           </tbody>
         </table>
       </div>
+      <div class="entries-batch-controls js-batch-controls" data-batch-target=".entries-table tbody .js-batch-item" data-batch-size="10">
+        <button type="button" class="btn-panel btn-panel--outline btn-panel--sm" data-batch-more>Pokaż kolejne 10</button>
+        <span class="entries-batch-status" data-batch-status></span>
+      </div>
     <?php endif; ?>
 
   </div>
 </main>
+
+<script>
+  (function () {
+    const controls = document.querySelectorAll('.js-batch-controls');
+    if (!controls.length) return;
+
+    controls.forEach((control) => {
+      const targetSelector = control.getAttribute('data-batch-target');
+      const step = Number(control.getAttribute('data-batch-size')) || 10;
+      const button = control.querySelector('[data-batch-more]');
+      const status = control.querySelector('[data-batch-status]');
+      if (!targetSelector || !button || !status) return;
+
+      const items = Array.from(document.querySelectorAll(targetSelector));
+      if (items.length <= step) {
+        control.hidden = true;
+        return;
+      }
+
+      let visible = step;
+
+      function update() {
+        items.forEach((item, index) => {
+          item.hidden = index >= visible;
+        });
+
+        const visibleNow = Math.min(visible, items.length);
+        const left = Math.max(items.length - visibleNow, 0);
+
+        status.textContent = `Pokazano ${visibleNow} z ${items.length}`;
+        if (left <= 0) {
+          control.hidden = true;
+          return;
+        }
+
+        button.textContent = `Pokaż kolejne ${Math.min(step, left)}`;
+      }
+
+      button.addEventListener('click', () => {
+        visible = Math.min(visible + step, items.length);
+        update();
+      });
+
+      update();
+    });
+  })();
+</script>
 
 </body>
 </html>

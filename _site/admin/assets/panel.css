@@ -376,6 +376,19 @@ a:hover { text-decoration: underline; }
 .entries-table tbody tr:last-child td { border-bottom: none; }
 .entries-table tbody tr:hover { background: rgba(255,255,255,.025); }
 
+.entries-batch-controls {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.entries-batch-status {
+  font-size: 0.78rem;
+  color: var(--panel-muted);
+}
+
 .col-date { white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--panel-muted); font-size: 0.85rem; }
 .col-title { min-width: 240px; }
 .col-file  { font-size: 0.8rem; }
@@ -1009,6 +1022,7 @@ a:hover { text-decoration: underline; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .panel-toolbar { flex-direction: column; align-items: flex-start; }
   .entries-table { font-size: 0.82rem; }
+  .entries-batch-controls { flex-direction: column; align-items: flex-start; }
   .panel-body--news-form .form-main { padding: 0.8rem; }
   .panel-body--entry-form .form-main { padding: 0.8rem; }
   .news-editor-toolbar { overflow-x: auto; white-space: nowrap; flex-wrap: nowrap; padding: 0.4rem; padding-bottom: 0.25rem; }

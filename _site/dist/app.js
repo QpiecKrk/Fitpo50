@@ -461,4 +461,116 @@
             }
         });
     });
+    // ----------------------------------------------------------
+    // READING SANCTUARY (focus mode)
+    // ----------------------------------------------------------
+    const readingModeStorageKey = 'fitpo50_reading_sanctuary';
+    const canUseReadingMode = !window.location.pathname.includes('/admin/')
+        && document.querySelector('.article-content') !== null;
+    if (canUseReadingMode) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'reading-sanctuary-toggle';
+        btn.setAttribute('aria-label', 'Włącz tryb czytania');
+        btn.setAttribute('aria-pressed', 'false');
+        btn.innerHTML = `
+      <span class="reading-sanctuary-toggle__icon" aria-hidden="true">Aa</span>
+      <span class="reading-sanctuary-toggle__label">Tryb czytania</span>
+    `;
+        const setReadingMode = (enabled) => {
+            document.body.classList.toggle('reading-sanctuary-active', enabled);
+            btn.classList.toggle('is-active', enabled);
+            btn.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+            btn.setAttribute('aria-label', enabled ? 'Wyłącz tryb czytania' : 'Włącz tryb czytania');
+            try {
+                window.localStorage.setItem(readingModeStorageKey, enabled ? '1' : '0');
+            }
+            catch (_a) {
+                // Ignore localStorage failures (private mode etc.)
+            }
+        };
+        let initialEnabled = false;
+        try {
+            initialEnabled = window.localStorage.getItem(readingModeStorageKey) === '1';
+        }
+        catch (_a) {
+            initialEnabled = false;
+        }
+        btn.addEventListener('click', () => {
+            const nextValue = !document.body.classList.contains('reading-sanctuary-active');
+            setReadingMode(nextValue);
+        });
+        document.body.appendChild(btn);
+        setReadingMode(initialEnabled);
+    }
+    // ----------------------------------------------------------
+    // INSTANT CLICK (prefetch on intent)
+    // ----------------------------------------------------------
+    const prefetchedUrls = new Set();
+    function isPrefetchableLink(anchor) {
+        var _a, _b;
+        const href = (_b = (_a = anchor.getAttribute('href')) === null || _a === void 0 ? void 0 : _a.trim()) !== null && _b !== void 0 ? _b : '';
+        if (!href || href.startsWith('#'))
+            return false;
+        if (anchor.hasAttribute('download'))
+            return false;
+        if (anchor.target && anchor.target !== '_self')
+            return false;
+        if (/^(mailto:|tel:|javascript:)/i.test(href))
+            return false;
+        if (href.includes('/admin/'))
+            return false;
+        let url;
+        try {
+            url = new URL(anchor.href, window.location.href);
+        }
+        catch (_c) {
+            return false;
+        }
+        if (url.origin !== window.location.origin)
+            return false;
+        if (url.pathname.startsWith('/admin/'))
+            return false;
+        if (url.pathname === window.location.pathname && url.hash)
+            return false;
+        if (!/\.html$/i.test(url.pathname) && url.pathname !== '/' && !url.pathname.endsWith('/'))
+            return false;
+        return true;
+    }
+    function prefetchUrl(url) {
+        if (!url || prefetchedUrls.has(url))
+            return;
+        prefetchedUrls.add(url);
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = url;
+        link.as = 'document';
+        document.head.appendChild(link);
+    }
+    function schedulePrefetch(anchor) {
+        if (!isPrefetchableLink(anchor))
+            return;
+        window.setTimeout(() => prefetchUrl(anchor.href), 50);
+    }
+    document.addEventListener('mouseover', (event) => {
+        var _a;
+        const anchor = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest('a[href]');
+        if (!anchor)
+            return;
+        schedulePrefetch(anchor);
+    }, { passive: true });
+    document.addEventListener('focusin', (event) => {
+        var _a;
+        const anchor = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest('a[href]');
+        if (!anchor)
+            return;
+        schedulePrefetch(anchor);
+    });
+    document.addEventListener('touchstart', (event) => {
+        var _a;
+        const anchor = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest('a[href]');
+        if (!anchor)
+            return;
+        schedulePrefetch(anchor);
+    }, { passive: true });
 })();

@@ -10,15 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: ../dashboard.php'
 
 $db     = getDb();
 $id     = isset($_POST['id']) ? (int)$_POST['id'] : null;
-$action = $_POST['action'] ?? 'save';
 
 $title      = strip_tags(trim($_POST['title'] ?? ''));
 $lead       = strip_tags(trim($_POST['lead'] ?? ''));
 $content    = sanitizeHtml(trim($_POST['content'] ?? ''));
 $entry_date = trim($_POST['entry_date'] ?? '');
-$status     = in_array($_POST['status'] ?? '', ['draft','published','hidden'])
-              ? $_POST['status'] : 'draft';
-if ($action === 'draft') $status = 'draft';
+$status     = 'draft';
 $videoSource = in_array($_POST['video_source'] ?? '', ['none', 'youtube', 'upload'], true)
     ? $_POST['video_source']
     : 'none';
@@ -208,9 +205,7 @@ try {
         ? runGitAutoSync(['sukcesy'], 'moje-sukcesy save/publish')
         : null;
 
-    $_SESSION['flash_success'] = $status === 'published'
-        ? "Wpis opublikowany! Kalendarz zsynchronizowany ($syncedCount dni)." . gitSyncResultNote($gitSync)
-        : 'Wpis zapisany.' . gitSyncResultNote($gitSync);
+    $_SESSION['flash_success'] = 'Wpis zapisany jako roboczy.' . gitSyncResultNote($gitSync);
 
     $gitError = gitSyncFlashError($gitSync);
     if ($gitError !== null) {
