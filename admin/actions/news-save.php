@@ -14,14 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $id = trim((string)($_POST['id'] ?? ''));
 $title = trim(strip_tags((string)($_POST['title'] ?? '')));
 $contentRaw = trim((string)($_POST['content'] ?? ''));
-$status = (string)($_POST['status'] ?? 'draft');
+$status = 'draft';
 $sortOrder = (int)($_POST['sort_order'] ?? 1);
 $imageAlt = trim(strip_tags((string)($_POST['image_alt'] ?? '')));
 $deleteImage = !empty($_POST['delete_image']);
-
-if (!in_array($status, ['draft', 'published'], true)) {
-    $status = 'draft';
-}
 
 if ($sortOrder < 1 || $sortOrder > 9999) {
     $sortOrder = 1;
@@ -116,9 +112,7 @@ try {
         ? runGitAutoSync(['news'], 'news save/publish')
         : null;
 
-    $_SESSION['flash_success'] = $status === 'published'
-        ? 'News zapisany i opublikowany (live + fallback).' . gitSyncResultNote($gitSync)
-        : 'News zapisany jako roboczy.' . gitSyncResultNote($gitSync);
+    $_SESSION['flash_success'] = 'News zapisany jako roboczy.' . gitSyncResultNote($gitSync);
 
     $gitError = gitSyncFlashError($gitSync);
     if ($gitError !== null) {

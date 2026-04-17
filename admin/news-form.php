@@ -159,14 +159,9 @@ if (empty($sources)) {
         <div class="form-sidebar">
           <div class="sidebar-card form-actions-desktop">
             <h3 class="sidebar-card__title">Publikacja</h3>
-            <div class="form-group">
-              <label for="status" class="form-label">Status</label>
-              <select id="status" name="status" class="form-input form-select">
-                <option value="draft" <?= $item['status'] === 'draft' ? 'selected' : '' ?>>📝 Roboczy</option>
-                <option value="published" <?= $item['status'] === 'published' ? 'selected' : '' ?>>✅ Opublikowany</option>
-              </select>
-              <p class="form-hint">Po statusie <strong>Opublikowany</strong> news pojawia się od razu na stronie.</p>
-            </div>
+            <p class="form-hint" style="margin-bottom:0.9rem;">
+              Zapisz zawsze odkłada news do <strong>Roboczych</strong>. Publikację robisz potem z listy newsów przyciskiem <strong>Opublikuj</strong>.
+            </p>
 
             <div class="form-group">
               <label for="sort-order" class="form-label">Kolejność</label>
@@ -175,7 +170,7 @@ if (empty($sources)) {
             </div>
 
             <div class="btn-stack">
-              <button type="submit" class="btn-panel btn-panel--primary btn-full">💾 Zapisz news</button>
+              <button type="submit" class="btn-panel btn-panel--primary btn-full">💾 Zapisz news (roboczy)</button>
               <a href="news-dashboard.php" class="btn-panel btn-panel--outline btn-full">Anuluj</a>
             </div>
           </div>
@@ -209,7 +204,7 @@ if (empty($sources)) {
         </div>
       </div>
       <div class="form-actions-mobile" data-form-actions-mobile>
-        <button type="submit" class="btn-panel btn-panel--primary btn-full">💾 Zapisz news</button>
+        <button type="submit" class="btn-panel btn-panel--primary btn-full">💾 Zapisz news (roboczy)</button>
         <a href="news-dashboard.php" class="btn-panel btn-panel--outline btn-full">Anuluj</a>
       </div>
     </form>

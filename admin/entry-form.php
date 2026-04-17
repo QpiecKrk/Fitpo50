@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/helpers/news.php';
 requireLogin();
 
 $db = getDb();
@@ -38,6 +39,7 @@ $youtubeOrientationValue = ($entry['youtube_orientation'] ?? 'horizontal') === '
 $uploadedVideoFilename = $entry['uploaded_video_filename'] ?? '';
 $uploadedVideoMime = $entry['uploaded_video_mime'] ?? '';
 $uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
+$internalLinks = getInternalArticleOptions();
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -122,6 +124,12 @@ $uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horiz
 
               <div class="entry-editor-main">
                 <div class="news-editor-toolbar news-editor-toolbar--links">
+                  <select id="entry-internal-link-select" class="form-input form-select">
+                    <option value="">Wybierz link wewnętrzny...</option>
+                    <?php foreach ($internalLinks as $link): ?>
+                      <option value="<?= h($link['href']) ?>"><?= h($link['label']) ?></option>
+                    <?php endforeach; ?>
+                  </select>
                   <input type="url" id="entry-link-url" class="form-input" placeholder="Wklej link (https://... lub /sciezka.html)">
                   <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="entry-insert-link-btn">Wstaw link</button>
                 </div>
@@ -189,26 +197,13 @@ $uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horiz
           <!-- Akcje -->
           <div class="sidebar-card form-actions-desktop">
             <h3 class="sidebar-card__title">Publikacja</h3>
-            <div class="form-group">
-              <label for="status" class="form-label">Status</label>
-              <select id="status" name="status" class="form-input form-select">
-                <?php foreach (['draft'=>'📝 Roboczy','published'=>'✅ Opublikowany','hidden'=>'🙈 Ukryty'] as $k=>$v): ?>
-                  <option value="<?= $k ?>" <?= ($entry['status'] ?? 'draft') === $k ? 'selected' : '' ?>><?= $v ?></option>
-                <?php endforeach; ?>
-              </select>
-              <p class="form-hint">
-                <strong>Roboczy</strong> — niewidoczny publicznie, bez fistaszka.<br>
-                <strong>Opublikowany</strong> — generuje stronę + fistaszek w kalendarzu.<br>
-                <strong>Ukryty</strong> — bez strony i fistaszka.
-              </p>
-            </div>
+            <p class="form-hint" style="margin-bottom:0.9rem;">
+              Zapisz zawsze odkłada wpis do <strong>Roboczych</strong>. Publikację robisz potem z listy wpisów przyciskiem <strong>Opublikuj</strong>.
+            </p>
 
             <div class="btn-stack">
               <button type="submit" name="action" value="save" class="btn-panel btn-panel--primary btn-full">
-                💾 Zapisz
-              </button>
-              <button type="submit" name="action" value="draft" class="btn-panel btn-panel--outline btn-full">
-                📝 Zapisz jako roboczy
+                💾 Zapisz (roboczy)
               </button>
               <?php if ($editMode && $entry['status'] === 'published' && $entry['html_file']): ?>
                 <a href="<?= SITE_URL . h($entry['html_file']) ?>" target="_blank" rel="noopener noreferrer"
@@ -304,8 +299,7 @@ $uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horiz
         </div>
       </div>
       <div class="form-actions-mobile" data-form-actions-mobile>
-        <button type="submit" name="action" value="save" class="btn-panel btn-panel--primary btn-full">💾 Zapisz</button>
-        <button type="submit" name="action" value="draft" class="btn-panel btn-panel--outline btn-full">📝 Roboczy</button>
+        <button type="submit" name="action" value="save" class="btn-panel btn-panel--primary btn-full">💾 Zapisz (roboczy)</button>
       </div>
     </form>
 
@@ -324,6 +318,7 @@ const uploadSettings = document.getElementById('upload-settings');
 const entryEditor = document.getElementById('entry-content-editor');
 const entryContentInput = document.getElementById('content');
 const entryToolbarButtons = document.querySelectorAll('.entry-editor-action');
+const entryInternalLinkSelect = document.getElementById('entry-internal-link-select');
 const entryLinkInput = document.getElementById('entry-link-url');
 const entryInsertLinkButton = document.getElementById('entry-insert-link-btn');
 let entrySavedSelection = null;
@@ -475,13 +470,26 @@ if (entryEditor && entryContentInput) {
     const applyEntryLink = (event) => {
       event.preventDefault();
       rememberEntrySelection();
-      const href = (entryLinkInput?.value || '').trim();
-      if (!href) return;
+      const href = (entryLinkInput?.value || '').trim() || (entryInternalLinkSelect?.value || '').trim();
+      if (!href) {
+        alert('Wybierz link wewnętrzny lub wklej adres URL.');
+        return;
+      }
       wrapEntrySelection('<a href="' + href + '">', '</a>');
+      if (entryInternalLinkSelect) entryInternalLinkSelect.value = '';
     };
 
     entryInsertLinkButton.addEventListener(entryLinkEventName, applyEntryLink, entryLinkEventOpts);
     entryInsertLinkButton.addEventListener('click', (event) => event.preventDefault());
+  }
+
+  if (entryInternalLinkSelect && entryLinkInput) {
+    entryInternalLinkSelect.addEventListener('change', () => {
+      const selectedValue = (entryInternalLinkSelect.value || '').trim();
+      if (selectedValue) {
+        entryLinkInput.value = selectedValue;
+      }
+    });
   }
 
   syncEntryTextareaFromEditor();
