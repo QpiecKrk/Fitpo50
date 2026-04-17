@@ -1162,6 +1162,134 @@
         });
       }
 
+      function buildNewsCard(rawItem, index) {
+        const newsItem = normalizeItem(rawItem);
+        const card = document.createElement('article');
+        const hasImage = !!(newsItem.image && newsItem.image.jpg);
+        card.className = `news-card ${index % 2 === 0 ? 'news-card--mint' : 'news-card--blue'}${hasImage ? '' : ' news-card--no-media'}`;
+        card.setAttribute('data-news-id', newsItem.id);
+
+        card.innerHTML = `
+          ${buildImageHtml(newsItem)}
+          <div class="news-card__content">
+            <h3 class="news-card__title">${escapeHtml(newsItem.title)}</h3>
+            <div class="news-card__body">${newsItem.content_html}</div>
+            ${buildSourcesHtml(newsItem)}
+          </div>
+        `;
+
+        attachBodyStyling(card);
+        return card;
+      }
+
+      const initialBatchSize = 5;
+      const nextBatchSize = 5;
+      let allNewsItems = [];
+      let renderedCount = 0;
+      let isBatchLoading = false;
+      let observer = null;
+      let observerSupported = false;
+      let paginationNode = null;
+      let loaderNode = null;
+      let sentinelNode = null;
+      let moreButton = null;
+
+      function ensurePagination() {
+        if (paginationNode) return;
+
+        paginationNode = document.createElement('div');
+        paginationNode.className = 'news-feed-pagination';
+
+        loaderNode = document.createElement('div');
+        loaderNode.className = 'news-feed-loader';
+        loaderNode.setAttribute('aria-live', 'polite');
+        loaderNode.hidden = true;
+        loaderNode.innerHTML = `
+          <span class="news-feed-loader__dot"></span>
+          <span class="news-feed-loader__dot"></span>
+          <span class="news-feed-loader__dot"></span>
+        `;
+
+        sentinelNode = document.createElement('div');
+        sentinelNode.className = 'news-feed-sentinel';
+        sentinelNode.setAttribute('aria-hidden', 'true');
+
+        moreButton = document.createElement('button');
+        moreButton.type = 'button';
+        moreButton.className = 'news-feed-more-btn';
+        moreButton.textContent = 'Pokaż kolejne 5 newsów';
+        moreButton.hidden = true;
+        moreButton.addEventListener('click', () => appendNextBatch());
+
+        paginationNode.appendChild(loaderNode);
+        paginationNode.appendChild(sentinelNode);
+        paginationNode.appendChild(moreButton);
+      }
+
+      function setBatchLoadingState(loading) {
+        isBatchLoading = loading;
+        if (!loaderNode) return;
+        loaderNode.hidden = !loading;
+        feedRoot.setAttribute('aria-busy', loading ? 'true' : 'false');
+      }
+
+      function updatePaginationVisibility() {
+        if (!paginationNode) return;
+
+        const hasMore = renderedCount < allNewsItems.length;
+        paginationNode.hidden = !hasMore;
+
+        if (!hasMore) {
+          if (observer) observer.disconnect();
+          return;
+        }
+
+        moreButton.hidden = observerSupported;
+      }
+
+      async function appendNextBatch() {
+        if (isBatchLoading) return;
+        if (renderedCount >= allNewsItems.length) return;
+
+        setBatchLoadingState(true);
+        await new Promise((resolve) => window.setTimeout(resolve, 280));
+
+        const nextItems = allNewsItems.slice(renderedCount, renderedCount + nextBatchSize);
+        const fragment = document.createDocumentFragment();
+        nextItems.forEach((item, idx) => {
+          fragment.appendChild(buildNewsCard(item, renderedCount + idx));
+        });
+        feedRoot.insertBefore(fragment, paginationNode);
+        renderedCount += nextItems.length;
+
+        setBatchLoadingState(false);
+        updatePaginationVisibility();
+      }
+
+      function enableAutoBatching() {
+        if (!('IntersectionObserver' in window) || !sentinelNode) {
+          observerSupported = false;
+          updatePaginationVisibility();
+          return;
+        }
+
+        observerSupported = true;
+        observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              appendNextBatch();
+            }
+          });
+        }, {
+          root: feedRoot,
+          threshold: 0.16,
+          rootMargin: '0px 0px 140px 0px'
+        });
+
+        observer.observe(sentinelNode);
+        updatePaginationVisibility();
+      }
+
       function renderNews(items) {
         if (!Array.isArray(items) || items.length === 0) {
           feedRoot.innerHTML = `
@@ -1172,30 +1300,31 @@
               </div>
             </article>
           `;
+          feedRoot.setAttribute('aria-busy', 'false');
           return;
         }
 
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+
+        observerSupported = false;
+        allNewsItems = items.map((item) => normalizeItem(item));
+        renderedCount = 0;
+        setBatchLoadingState(false);
         feedRoot.innerHTML = '';
+        ensurePagination();
 
-        items.forEach((rawItem, index) => {
-          const newsItem = normalizeItem(rawItem);
-          const card = document.createElement('article');
-          const hasImage = !!(newsItem.image && newsItem.image.jpg);
-          card.className = `news-card ${index % 2 === 0 ? 'news-card--mint' : 'news-card--blue'}${hasImage ? '' : ' news-card--no-media'}`;
-          card.setAttribute('data-news-id', newsItem.id);
-
-          card.innerHTML = `
-            ${buildImageHtml(newsItem)}
-            <div class="news-card__content">
-              <h3 class="news-card__title">${escapeHtml(newsItem.title)}</h3>
-              <div class="news-card__body">${newsItem.content_html}</div>
-              ${buildSourcesHtml(newsItem)}
-            </div>
-          `;
-
-          attachBodyStyling(card);
-          feedRoot.appendChild(card);
+        const firstBatch = allNewsItems.slice(0, initialBatchSize);
+        firstBatch.forEach((item, index) => {
+          feedRoot.appendChild(buildNewsCard(item, index));
         });
+        renderedCount = firstBatch.length;
+
+        feedRoot.appendChild(paginationNode);
+        updatePaginationVisibility();
+        enableAutoBatching();
       }
 
       function updateNewsSchema(items) {
