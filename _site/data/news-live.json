@@ -1,7 +1,33 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-17T09:34:01+00:00",
+    "updatedAt": "2026-04-17T15:25:10+00:00",
     "items": [
+        {
+            "id": "news_2779aaed12c2",
+            "title": "Cukier i ruch",
+            "content_html": "<p><span><strong>Insulinooporność</strong> nie buduje się w tydzień… ale może zacząć się cofać szybciej, niż się wydaje.</span><span><br></span><span><span class=\"news-text-tone--1\">Badania</span> pokazują, że już po około 6–8 tygodniach regularnego <a href=\"silownia-dla-ludzi.html\">treningu</a> (zwłaszcza siłowego) <span class=\"news-text-tone--1\">poprawia się wrażliwość</span> na insulinę u osób 50+.</span></p><p><span><span>Co ciekawe, nie zawsze widać to na wadze.</span><span> </span></span><span>Organizm zaczyna lepiej „<span class=\"news-text-tone--4\">zarządzać</span>” <a href=\"ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html\">cukrem</a> we krwi, zanim zdążysz zobaczyć efekty w lustrze.</span></p><p><span>Nowe podejście jest proste:<span class=\"news-text-tone--4\"> mięśnie działają jak magazyn</span> dla glukozy.</span><span><br>\n</span><span>Im więcej ich używasz, tym mniej cukru krąży we <a href=\"apob-apoa-badania-cholesterol.html\">krwi</a> i tym mniejsze obciążenie dla organizmu.</span></p><p><strong>Ruch działa na poziomie metabolicznym szybciej niż wygląd – poprawa zdrowia zaczyna się wcześniej, niż widać efekty.</strong><br></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260417_152501_37e5dbc9",
+            "image_alt": "Insulinooporność",
+            "sources": [
+                {
+                    "label": "Diabetologia – Resistance training improves insulin sensitivity in older adults",
+                    "url": "https://link.springer.com/article/10.1007/s00125-006-0500-7"
+                },
+                {
+                    "label": "American Diabetes Association – Physical activity and insulin sensitivity",
+                    "url": "https://diabetesjournals.org/care/article/39/11/2065/37147/Physical-Activity-Exercise-and-Diabetes"
+                },
+                {
+                    "label": "Mayo Clinic – Insulin resistance and exercise",
+                    "url": "https://www.mayoclinic.org/diseases-conditions/insulin-resistance/in-depth/exercise/art-20048389"
+                }
+            ],
+            "created_at": "2026-04-17T15:25:01+00:00",
+            "updated_at": "2026-04-17T15:25:10+00:00",
+            "published_at": "2026-04-17T15:25:10+00:00"
+        },
         {
             "id": "news_974c26043fea",
             "title": "Brzuch to nie „problem estetyczny”. To aktywny organ",
