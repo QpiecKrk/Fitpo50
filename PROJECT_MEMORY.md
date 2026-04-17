@@ -55,6 +55,34 @@
 - Utrzymanie spojnosci kategorii i filtrowania w `porady.html`.
 - Bezpieczny, powtarzalny deploy z `_site`.
 
+## Ustalenia operacyjne (2026-04-17)
+
+- **Panel wpisow i newsow - flow publikacji:**
+  - Przycisk `Zapisz` w `admin/entry-form.php` i `admin/news-form.php` **zawsze zapisuje do `draft`**.
+  - Publikacja jest wykonywana tylko z list:
+    - wpisy: `admin/dashboard.php` (przycisk `Opublikuj`)
+    - newsy: `admin/news-dashboard.php` (przycisk `Opublikuj`)
+  - W formularzach usuniety zostal osobny przycisk `Roboczy` oraz wybor statusu publikacji.
+  - W `news-form` usuniety zostal zbedny przycisk `Anuluj` z dolnej sekcji akcji.
+
+- **Batchowanie list (wydajnosc i UX):**
+  - Strona glowna (`#news`): ladowanie partiami `5 + 5` z:
+    - auto-ladowaniem przez `IntersectionObserver`,
+    - fallbackiem `Pokaz kolejne 5` gdy observer nie zadziala.
+  - Panel admin:
+    - `admin/dashboard.php` (wpisy): `10 + 10`
+    - `admin/news-dashboard.php` (newsy): `10 + 10`
+  - Celem jest utrzymanie plynnosci przy duzej liczbie rekordow (np. 50+).
+
+- **Instant click / prefetch (frontend publiczny):**
+  - Wdrozone globalnie przez `src/app.ts` + `dist/app.js`.
+  - Prefetch uruchamia sie na intencji (`mouseover`, `focusin`, `touchstart`) tylko dla linkow wewnetrznych.
+  - Wykluczenia: linki zewnetrzne, `mailto:`, `tel:`, `javascript:`, `target="_blank"`, `download`, hash-only i sciezki `/admin/`.
+
+- **Dodatkowa zasada praktyczna (po ostatnich zmianach):**
+  - Przy zmianach w `src/app.ts` zawsze wykonujemy `npm run build`, aby zsynchronizowac `dist/app.js` przed commitem.
+  - Przy zmianach frontowych, ktore sa publikowane statycznie, pilnujemy spojnosci source <-> `_site` przed deployem.
+
 ## Open questions
 - Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?
 - Czy rozszerzamy automatyczne testy synchronizacji (rollback + spojnosc JSON/sitemap)?
