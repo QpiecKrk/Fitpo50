@@ -1,7 +1,38 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-16T15:34:52+00:00",
+    "updatedAt": "2026-04-17T09:31:43+00:00",
     "items": [
+        {
+            "id": "news_974c26043fea",
+            "title": "Brzuch to nie „problem estetyczny”. To aktywny organ",
+            "content_html": "<p><span>To, co nazywasz „<span class=\"news-text-tone--4\">oponką</span>”, wcale nie jest bierne.</span><span><br></span><span><strong>Tłuszcz trzewny</strong> – ten ukryty głębiej w brzuchu – działa jak narząd hormonalny. Wydziela substancje zapalne, które zwiększają ryzyko <span class=\"news-text-tone--1\">cukrzycy typu 2</span>, chorób serca, a nawet problemów z pamięcią.</span></p><p><span>Nowe podejście w medycynie jest proste: </span><span><strong><span>nie chodzi już o wagę, tylko o to, </span><span>gdzie</span><span> masz tłuszcz</span></strong>.</span><br><span></span></p><p><span><br></span></p><p><span>I tu dobra wiadomość – ten najgroźniejszy tłuszcz reaguje szybciej niż myślisz.</span><span><br>\n</span><span>Tłuszcz trzewny ma wyższy metabolizm niż ten pod skórą, więc organizm „sięga po niego” wcześniej, gdy zaczynasz się ruszać.</span></p><p><span>Badania pokazują, że już po kilku tygodniach regularnego ruchu (nawet bez dużej utraty wagi) jego ilość zaczyna </span><strong>spadać.</strong><br><span></span></p><p><span>Czyli możesz wyglądać podobnie w lustrze, ale w środku zachodzą realne zmiany. </span>Co ważne — nie musisz trenować „hardkorowo”.</p><span style=\"font-kerning: none;\"><p style='margin-bottom: 12px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 20px; line-height: normal; font-family: \"Times New Roman\"; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal; -webkit-text-stroke-width: 0px; -webkit-text-stroke-color: rgb(0, 0, 0);'><span style=\"font-kerning: none;\"><span style=\"color: rgb(124, 58, 237); font-weight: 600; font-family: var(--font-body); font-size: 1rem;\">Regularność</span> wygrywa z intensywnością.</span><span style=\"font-size: 12px; font-kerning: none;\"><br>\n</span><span style=\"font-kerning: none;\">Dla organizmu po 50-tce sygnał<span class=\"news-text-tone--1\"> „ruszam się co tydzień”</span> jest ważniejszy niż jednorazowy zryw.</span></p><div><span style=\"font-kerning: none;\"><br></span></div></span><span style=\"font-kerning: none;\"><br></span>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260417_093132_8254f22d.avif",
+                "webp": "./assets/news/news_20260417_093132_8254f22d.webp",
+                "jpg": "./assets/news/news_20260417_093132_8254f22d.jpg",
+                "alt": "Tłuszcz trzewny",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Nature Reviews Endocrinology – Visceral fat as a key player in metabolic diseas",
+                    "url": "https://www.nature.com/articles/nrendo.2012.11"
+                },
+                {
+                    "label": "Circulation – Abdominal visceral and subcutaneous adipose tissue compartments",
+                    "url": "https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.106.675355"
+                },
+                {
+                    "label": "Harvard Health Publishing – Abdominal fat and what to do about it",
+                    "url": "https://www.health.harvard.edu/staying-healthy/abdominal-fat-and-what-to-do-about-it"
+                }
+            ],
+            "updated_at": "2026-04-17T09:31:43+00:00",
+            "published_at": "2026-04-17T09:31:43+00:00",
+            "excerpt": "To, co nazywasz „oponką”, wcale nie jest bierne.Tłuszcz trzewny – ten ukryty głębiej w brzuchu – działa jak narząd hormonalny. Wydziela substancje zapalne, które zwiększają ryzyko cukrzycy typu 2, chorób serca, a nawet…"
+        },
         {
             "id": "news_248770aa69f7",
             "title": "Nowe wytyczne 2026: nie potrzebujesz idealnego planu ćwiczeń. Zacznij nawet po \"swojemu\"",
