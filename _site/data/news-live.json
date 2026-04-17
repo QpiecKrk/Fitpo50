@@ -1,7 +1,33 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-17T15:25:10+00:00",
+    "updatedAt": "2026-04-17T15:36:34+00:00",
     "items": [
+        {
+            "id": "news_7ae24beb34ce",
+            "title": "Smartwatch wie o Tobie więcej, niż myślisz",
+            "content_html": "<p><span>Jeszcze niedawno zegarek liczył kroki.</span><span><br>\n</span><span>Dziś zaczyna <span class=\"news-text-tone--3\">analizować zdrowie</span>.</span></p><p><span>Nowe badania pokazują, że dane z urządzeń typu <a href=\"media-spolecznosciowe-po-50.html\">smartwatch</a> – takie jak tętno spoczynkowe, zmienność rytmu serca (HRV) czy wzorce ruchu – mogą sygnalizować problemy zdrowotne na <span class=\"news-text-tone--3\">długo przed pojawieniem się objawów</span>. W niektórych przypadkach algorytmy wykrywają wczesne oznaki chorób neurologicznych, jak Parkinson, na podstawie samego sposobu <a href=\"dlaczego-bieznia-to-za-malo.html\">poruszania</a> się.</span></p><p><span>To zmienia podejście do profilaktyki.</span><span><br>\n</span><span>Zamiast reagować na chorobę, zaczynamy ją <span class=\"news-text-tone--3\">przewidywać</span>.</span></p><p><span>Jednocześnie eksperci studzą emocje — to nadal narzędzie wspierające, nie diagnostyczne. Dane mogą wskazać kierunek, ale nie <strong>zastąpią lekarza</strong>.</span></p><p><span>Dla osób 50+ oznacza to jedno: codzienny ruch i regularność zaczynają być nie tylko „<span class=\"news-text-tone--3\">zdrowym nawykiem</span>”, ale też źródłem danych, które mogą realnie pomóc w <a href=\"badania-po-50.html\">kontroli</a> zdrowia.</span></p><p><strong>Twoje ciało wysyła sygnały wcześniej, niż pojawiają się objawy — technologia zaczyna je wreszcie odczytywać.</strong><br><span></span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260417_153612_903bdd14",
+            "image_alt": "Smartwatch wie o Tobie więcej, niż myślisz",
+            "sources": [
+                {
+                    "label": "Nature Medicine – Digital biomarkers and wearable health monitoring",
+                    "url": "https://www.nature.com/articles/s41591-019-0445-8"
+                },
+                {
+                    "label": "npj Digital Medicine – Wearable devices for early disease detection",
+                    "url": "https://www.nature.com/articles/s41746-020-0302-3"
+                },
+                {
+                    "label": "Harvard Health Publishing – Can wearable devices predict health problems?",
+                    "url": "https://www.health.harvard.edu/staying-healthy/can-wearable-devices-predict-health-problems"
+                }
+            ],
+            "created_at": "2026-04-17T15:36:12+00:00",
+            "updated_at": "2026-04-17T15:36:34+00:00",
+            "published_at": "2026-04-17T15:36:34+00:00"
+        },
         {
             "id": "news_2779aaed12c2",
             "title": "Cukier i ruch",
