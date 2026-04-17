@@ -461,4 +461,74 @@
             }
         });
     });
+    // ----------------------------------------------------------
+    // INSTANT CLICK (prefetch on intent)
+    // ----------------------------------------------------------
+    const prefetchedUrls = new Set();
+    function isPrefetchableLink(anchor) {
+        var _a, _b;
+        const href = (_b = (_a = anchor.getAttribute('href')) === null || _a === void 0 ? void 0 : _a.trim()) !== null && _b !== void 0 ? _b : '';
+        if (!href || href.startsWith('#'))
+            return false;
+        if (anchor.hasAttribute('download'))
+            return false;
+        if (anchor.target && anchor.target !== '_self')
+            return false;
+        if (/^(mailto:|tel:|javascript:)/i.test(href))
+            return false;
+        if (href.includes('/admin/'))
+            return false;
+        let url;
+        try {
+            url = new URL(anchor.href, window.location.href);
+        }
+        catch (_c) {
+            return false;
+        }
+        if (url.origin !== window.location.origin)
+            return false;
+        if (url.pathname.startsWith('/admin/'))
+            return false;
+        if (url.pathname === window.location.pathname && url.hash)
+            return false;
+        if (!/\.html$/i.test(url.pathname) && url.pathname !== '/' && !url.pathname.endsWith('/'))
+            return false;
+        return true;
+    }
+    function prefetchUrl(url) {
+        if (!url || prefetchedUrls.has(url))
+            return;
+        prefetchedUrls.add(url);
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = url;
+        link.as = 'document';
+        document.head.appendChild(link);
+    }
+    function schedulePrefetch(anchor) {
+        if (!isPrefetchableLink(anchor))
+            return;
+        window.setTimeout(() => prefetchUrl(anchor.href), 50);
+    }
+    document.addEventListener('mouseover', (event) => {
+        var _a;
+        const anchor = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest('a[href]');
+        if (!anchor)
+            return;
+        schedulePrefetch(anchor);
+    }, { passive: true });
+    document.addEventListener('focusin', (event) => {
+        var _a;
+        const anchor = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest('a[href]');
+        if (!anchor)
+            return;
+        schedulePrefetch(anchor);
+    });
+    document.addEventListener('touchstart', (event) => {
+        var _a;
+        const anchor = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest('a[href]');
+        if (!anchor)
+            return;
+        schedulePrefetch(anchor);
+    }, { passive: true });
 })();

@@ -516,4 +516,65 @@
     });
   });
 
+  // ----------------------------------------------------------
+  // INSTANT CLICK (prefetch on intent)
+  // ----------------------------------------------------------
+  const prefetchedUrls = new Set<string>();
+
+  function isPrefetchableLink(anchor: HTMLAnchorElement): boolean {
+    const href = anchor.getAttribute('href')?.trim() ?? '';
+    if (!href || href.startsWith('#')) return false;
+    if (anchor.hasAttribute('download')) return false;
+    if (anchor.target && anchor.target !== '_self') return false;
+    if (/^(mailto:|tel:|javascript:)/i.test(href)) return false;
+    if (href.includes('/admin/')) return false;
+
+    let url: URL;
+    try {
+      url = new URL(anchor.href, window.location.href);
+    } catch {
+      return false;
+    }
+
+    if (url.origin !== window.location.origin) return false;
+    if (url.pathname.startsWith('/admin/')) return false;
+    if (url.pathname === window.location.pathname && url.hash) return false;
+    if (!/\.html$/i.test(url.pathname) && url.pathname !== '/' && !url.pathname.endsWith('/')) return false;
+    return true;
+  }
+
+  function prefetchUrl(url: string) {
+    if (!url || prefetchedUrls.has(url)) return;
+    prefetchedUrls.add(url);
+
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = url;
+    link.as = 'document';
+    document.head.appendChild(link);
+  }
+
+  function schedulePrefetch(anchor: HTMLAnchorElement) {
+    if (!isPrefetchableLink(anchor)) return;
+    window.setTimeout(() => prefetchUrl(anchor.href), 50);
+  }
+
+  document.addEventListener('mouseover', (event) => {
+    const anchor = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
+    if (!anchor) return;
+    schedulePrefetch(anchor);
+  }, { passive: true });
+
+  document.addEventListener('focusin', (event) => {
+    const anchor = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
+    if (!anchor) return;
+    schedulePrefetch(anchor);
+  });
+
+  document.addEventListener('touchstart', (event) => {
+    const anchor = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
+    if (!anchor) return;
+    schedulePrefetch(anchor);
+  }, { passive: true });
+
 })();
