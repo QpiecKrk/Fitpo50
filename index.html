@@ -3,14 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>FitPo50 | Trening i dieta po 50-tce</title>
 <meta name="description" content="FitPo50 to praktyczna wiedza o treningu, diecie i sprawności po 50-tce. Bez chaosu, bez straszenia, z naciskiem na to, co działa.">
@@ -1091,56 +1105,8 @@
   </div>
 </footer>
 
-  <script>
-    // Hero Parallax Effect (desktop only to reduce mobile forced reflow)
-    (() => {
-      const heroBg = document.querySelector('.hero__bg');
-      if (!heroBg) return;
-
-      const desktopMq = window.matchMedia('(min-width: 992px)');
-      const motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
-      let ticking = false;
-
-      const resetTransform = () => {
-        heroBg.style.transform = '';
-      };
-
-      const updateParallax = () => {
-        const scrolled = window.scrollY;
-        if (scrolled < window.innerHeight) {
-          heroBg.style.transform = `translate3d(0, ${scrolled * 0.15}px, 0)`;
-        }
-        ticking = false;
-      };
-
-      const onScroll = () => {
-        if (!desktopMq.matches || motionMq.matches) return;
-        if (ticking) return;
-        ticking = true;
-        window.requestAnimationFrame(updateParallax);
-      };
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      const onModeChange = () => {
-        if (!desktopMq.matches || motionMq.matches) {
-          resetTransform();
-        } else {
-          onScroll();
-        }
-      };
-
-      if (typeof desktopMq.addEventListener === 'function') {
-        desktopMq.addEventListener('change', onModeChange);
-        motionMq.addEventListener('change', onModeChange);
-      } else {
-        desktopMq.addListener(onModeChange);
-        motionMq.addListener(onModeChange);
-      }
-    })();
-  </script>
   <script src="./dist/news-feed.js" defer></script>
-  <script src="./dist/app.js" defer></script>
+  <script src="./dist/home.js" defer></script>
 
 <nav class="bottom-nav" aria-label="Nawigacja dolna">
   <a href="index.html" class="bottom-nav__item bottom-nav__item--active">
