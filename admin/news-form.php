@@ -171,7 +171,6 @@ if (empty($sources)) {
 
             <div class="btn-stack">
               <button type="submit" class="btn-panel btn-panel--primary btn-full">💾 Zapisz news (roboczy)</button>
-              <a href="news-dashboard.php" class="btn-panel btn-panel--outline btn-full">Anuluj</a>
             </div>
           </div>
 
@@ -205,7 +204,6 @@ if (empty($sources)) {
       </div>
       <div class="form-actions-mobile" data-form-actions-mobile>
         <button type="submit" class="btn-panel btn-panel--primary btn-full">💾 Zapisz news (roboczy)</button>
-        <a href="news-dashboard.php" class="btn-panel btn-panel--outline btn-full">Anuluj</a>
       </div>
     </form>
   </div>
