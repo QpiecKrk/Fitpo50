@@ -539,3 +539,17 @@ Jesli artykul ma obrazy:
   - `data-order` pozostaje unikalne.
 - Interlinking w tresci artykulu:
   - minimum 4 linki wewnetrzne osadzone kontekstowo w akapitach (nie tylko sekcja `Czytelnia`).
+
+## Ustalenia krytyczne 2026-04-17 (Wizual premium artykulow)
+
+- Standard wizualny artykulow jest trwale opisany w `MEMORY_PORADY.md` (sekcja: "Standard wizualny artykulu (obowiazuje od 2026-04-17)") i jest obowiazkowy przy nowych publikacjach oraz istotnych aktualizacjach.
+- Wzorce referencyjne:
+  - `powrot-do-formy-po-50-kompletny-przewodnik.html` (styl premium),
+  - `trening-3x30-dla-50-plus.html` (tagi zasad/cwiczen, callouty, stack obrazow).
+- W kazdym artykule wymagamy:
+  - wyraznej hierarchii typografii (display + body + akcent),
+  - kolorystycznych wyroznien fraz (klasy tonalne),
+  - oznaczania sekwencji "Po pierwsze..." i "Cwiczenie X..." klasami wizualnymi,
+  - separatorow i grupowania 2+ obrazow pod rzad (`.figure-stack`),
+  - co najmniej 2 calloutow + mocnego cytatu koncowego.
+- Zakaz "minimalnej surowej sciany tekstu" przy publikacjach poradnikowych: artykul ma byc merytoryczny i jednoczesnie wizualnie prowadzic czytelnika.

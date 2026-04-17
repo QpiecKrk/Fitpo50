@@ -22,6 +22,80 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
   - nie rozwalamy layoutu stylami inline (szczegolnie w sekcji "Czytelnia"),
   - tabelki musza byc responsywne i czytelne na mobile.
 
+## Standard wizualny artykulu (obowiazuje od 2026-04-17)
+
+Wzorcem referencyjnym dla stylu premium jest:
+- `powrot-do-formy-po-50-kompletny-przewodnik.html` (ogolny klimat i rytm),
+- `trening-3x30-dla-50-plus.html` (konkretne klasy dla wyroznien i sekcji treningowych).
+
+Elementy obowiazkowe (minimum):
+- Hero z haslem (`.hero-motto`) i wyraznym kontrastem.
+- Pierwszy akapit z `drop-cap`.
+- Co najmniej 2 callouty (`.highlight-box` / modyfikatory) w kluczowych miejscach tekstu.
+- Mocny cytat koncowy (`.article-quote`).
+- Co najmniej 4 kontekstowe linki wewnetrzne osadzone w akapitach.
+- Sekcja `Zrodla` + `medical-disclaimer` + `Czytelnia` (3 karty).
+
+Typografia:
+- Bazowo:
+  - display: `var(--font-display)` / Zodiak,
+  - body: `Work Sans`,
+  - akcent cytatowy/odreczny: `Caveat`.
+- Nie przekraczamy 3 rodzin fontow w jednym artykule.
+- Hierarchia ma byc czytelna: mocny H1/H2, spokojny body, wyrazne akcenty.
+
+System wyroznien tekstu:
+- Stosujemy klasy tonalne zamiast przypadkowych inline:
+  - `.tone-strong`
+  - `.tone-primary`
+  - `.tone-accent`
+  - `.tone-success`
+- Dla list zasad typu "Po pierwsze..." stosujemy etykiety `pill`:
+  - `.rule-tag`
+- Dla fragmentow treningowych typu "Cwiczenie 1..." stosujemy:
+  - `.exercise-tag`
+- Zasada czytelnosci:
+  - max 1 mocny akcent tonalny na akapit (poza linkami),
+  - nie malujemy calego akapitu, tylko frazy nozne.
+
+Callouty i bloki pomocnicze:
+- Standard:
+  - `.highlight-box`
+- Warianty:
+  - `.highlight-box--primary`
+  - `.highlight-box--success`
+- Uzywamy ich do:
+  - podsumowania sekcji,
+  - sygnalu "co najwazniejsze",
+  - praktycznej wskazowki do wdrozenia.
+
+Obrazy i separatory:
+- Gdy w sekcji wystepuja 2+ obrazki pod rzad, grupujemy je:
+  - wrapper `.figure-stack`,
+  - podpis grupy `.figure-stack__label`,
+  - obrazki jako `.inline-figure`.
+- `inline-figure` ma miec subtelna ramke/cien; bez "golego" obrazka.
+- Obowiazkowo `picture` (`avif -> webp -> fallback`) oraz sensowne `alt`.
+
+Responsywnosc:
+- Kazdy artykul musi byc czytelny mobile-first:
+  - brak poziomego scrolla przez ozdobniki,
+  - boxy i tagi nie moga "pekac" layoutu,
+  - obrazki i tabele skaluja sie poprawnie.
+
+Czego nie robimy:
+- Brak losowych kolorow i stylu "kazdy blok inny".
+- Brak nadmiaru inline CSS, jesli da sie uzyc klas.
+- Brak upychania 4-5 linkow wewnetrznych w jednym akapicie.
+- Brak "sciany obrazkow" bez odstepu i separatora.
+
+Szybka checklista przed oddaniem artykulu:
+1. Czy jest hero, drop-cap, co najmniej 2 callouty i mocny cytat?
+2. Czy "Po pierwsze..." / "Cwiczenie 1..." sa wizualnie oznaczone?
+3. Czy linki wewnetrzne sa rozlozone naturalnie po tekscie?
+4. Czy bloki obrazow pod rzad maja `.figure-stack`?
+5. Czy finalny wyglad jest spojny z referencja i nie psuje mobile?
+
 ## SEO i schema
 
 - Artykuly: `BlogPosting` + komplet meta (`title`, `description`, canonical, og, twitter, article times).
