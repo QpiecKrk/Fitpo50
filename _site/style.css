@@ -2163,8 +2163,10 @@ a:hover {
 .hero__subtitle { animation-delay: 0.5s; }
 .hero__actions  { animation-delay: 0.7s; }
 
-.hero__bg {
-  will-change: transform;
+@media (min-width: 992px) and (prefers-reduced-motion: no-preference) {
+  .hero__bg {
+    will-change: transform;
+  }
 }
 
 .footer__links a:hover { color: var(--color-text); }

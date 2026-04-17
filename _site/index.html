@@ -91,7 +91,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
-<link rel="preload" as="image" href="./assets/hero.avif" type="image/avif" fetchpriority="high">
+<link
+  rel="preload"
+  as="image"
+  href="./assets/hero-768.avif"
+  type="image/avif"
+  imagesrcset="./assets/hero-768.avif 768w, ./assets/hero-1024.avif 1024w, ./assets/hero.avif 1200w"
+  imagesizes="100vw"
+  fetchpriority="high"
+>
 
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css?v=1.2">
@@ -276,9 +284,27 @@
 <section class="hero" id="hero">
   <div class="hero__bg">
     <picture>
-      <source srcset="./assets/hero.avif" type="image/avif">
-      <source srcset="./assets/hero.webp" type="image/webp">
-      <img src="./assets/hero.jpg" alt="Mężczyzna po 50-tce pewnie trenujący z hantlami w nowoczesnej siłowni" width="1200" height="670" loading="eager" fetchpriority="high" decoding="async">
+      <source
+        srcset="./assets/hero-768.avif 768w, ./assets/hero-1024.avif 1024w, ./assets/hero.avif 1200w"
+        sizes="100vw"
+        type="image/avif"
+      >
+      <source
+        srcset="./assets/hero-768.webp 768w, ./assets/hero-1024.webp 1024w, ./assets/hero.webp 1200w"
+        sizes="100vw"
+        type="image/webp"
+      >
+      <img
+        src="./assets/hero-1024.jpg"
+        srcset="./assets/hero-768.jpg 768w, ./assets/hero-1024.jpg 1024w, ./assets/hero.jpg 1200w"
+        sizes="100vw"
+        alt="Mężczyzna po 50-tce pewnie trenujący z hantlami w nowoczesnej siłowni"
+        width="1200"
+        height="670"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      >
     </picture>
   </div>
   <div class="hero__overlay"></div>
@@ -1066,14 +1092,52 @@
 </footer>
 
   <script>
-    // Hero Parallax Effect
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
+    // Hero Parallax Effect (desktop only to reduce mobile forced reflow)
+    (() => {
       const heroBg = document.querySelector('.hero__bg');
-      if (heroBg && scrolled < window.innerHeight) {
-        heroBg.style.transform = `translateY(${scrolled * 0.15}px)`;
+      if (!heroBg) return;
+
+      const desktopMq = window.matchMedia('(min-width: 992px)');
+      const motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let ticking = false;
+
+      const resetTransform = () => {
+        heroBg.style.transform = '';
+      };
+
+      const updateParallax = () => {
+        const scrolled = window.scrollY;
+        if (scrolled < window.innerHeight) {
+          heroBg.style.transform = `translate3d(0, ${scrolled * 0.15}px, 0)`;
+        }
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (!desktopMq.matches || motionMq.matches) return;
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(updateParallax);
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      const onModeChange = () => {
+        if (!desktopMq.matches || motionMq.matches) {
+          resetTransform();
+        } else {
+          onScroll();
+        }
+      };
+
+      if (typeof desktopMq.addEventListener === 'function') {
+        desktopMq.addEventListener('change', onModeChange);
+        motionMq.addEventListener('change', onModeChange);
+      } else {
+        desktopMq.addListener(onModeChange);
+        motionMq.addListener(onModeChange);
       }
-    });
+    })();
   </script>
   <script src="./dist/news-feed.js" defer></script>
   <script src="./dist/app.js" defer></script>
