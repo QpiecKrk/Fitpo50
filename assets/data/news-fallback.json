@@ -1,7 +1,38 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-17T15:36:34+00:00",
+    "updatedAt": "2026-04-18T17:00:46+00:00",
     "items": [
+        {
+            "id": "news_d7eeb857ab60",
+            "title": "LED nie leczy raka. Ale nauka właśnie zrobiła ważny krok",
+            "content_html": "<p><span>W sieci krąży teza, że „<strong>30 minut światła LED niszczy komórki raka bez szkody dla zdrowych</strong>”.</span><span><br>\n</span><span>Brzmi jak przełom — i częściowo nim jest. Ale nie tak, jak sugerują posty.</span></p><p><span>Badania prowadzone m.in. przez <span class=\"news-text-tone--1\">University of Texas i University of Porto</span> pokazują, że specjalne </span><span><span class=\"news-text-tone--4\"><span></span><span>nanocząstki tlenku cyny (SnOx)</span></span> mogą być „aktywowane” przez światło podczerwone (LED/NIR).</span><span><br>\n</span><span>Po naświetleniu zaczynają wytwarzać lokalne ciepło, które niszczy komórki nowotworowe.</span></p><p><span>W warunkach laboratoryjnych efekty są bardzo obiecujące:</span></p><ul>\n<li><span>wysoka skuteczność niszczenia komórek nowotworowych</span></li>\n<li><span>minimalny wpływ na zdrowe komórki</span></li>\n</ul><p><span>To jednak kluczowy moment:</span><span><br></span><span>są to </span><span><span class=\"news-text-tone--1\"><span></span><span>badania laboratoryjne (in vitro)</span></span>, a nie leczenie stosowane u ludzi.</span></p><p><span>Technologia należy do grupy tzw. </span><span><span class=\"news-text-tone--1\"><span></span><span>terapii fototermicznych</span></span>, które od lat są rozwijane jako bardziej precyzyjna alternatywa dla klasycznych metod (chemioterapia, radioterapia).</span><span><br>\n</span><span>Różnica polega na tym, że zamiast działać „na cały organizm”, celem jest trafienie dokładnie w chore komórki.</span></p><p><span>Dla medycyny to ważny kierunek.</span><span><br>\n</span><span>Dla pacjenta dziś — jeszcze nie rozwiązanie.</span></p><p><span>To nie jest przełomowe leczenie. To wczesny, ale bardzo obiecujący krok w stronę terapii, które będą działały precyzyjnie, a nie wyniszczająco.</span><br></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260418_170022_dec064e6.avif",
+                "webp": "./assets/news/news_20260418_170022_dec064e6.webp",
+                "jpg": "./assets/news/news_20260418_170022_dec064e6.jpg",
+                "alt": "LED nie leczy raka. Ale nauka właśnie zrobiła ważny krok",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "University of Texas at Austin – LED light therapy research",
+                    "url": "https://news.utexas.edu/2025/10/09/led-light-blasts-cancer-cells-and-spares-healthy-ones/"
+                },
+                {
+                    "label": "ACS Nano – SnOx nanoflakes in photothermal cancer therapy",
+                    "url": "https://pubs.acs.org/doi/10.1021/acsnano.5c03135"
+                },
+                {
+                    "label": "ScienceDaily – LED light destroys cancer cells study summary",
+                    "url": "https://www.sciencedaily.com/releases/2025/10/251020092831.htm"
+                }
+            ],
+            "updated_at": "2026-04-18T17:00:46+00:00",
+            "published_at": "2026-04-18T17:00:46+00:00",
+            "excerpt": "W sieci krąży teza, że „30 minut światła LED niszczy komórki raka bez szkody dla zdrowych”. Brzmi jak przełom — i częściowo nim jest. Ale nie tak, jak sugerują posty.Badania prowadzone m.in. przez University of Texas i…"
+        },
         {
             "id": "news_7ae24beb34ce",
             "title": "Smartwatch wie o Tobie więcej, niż myślisz",
