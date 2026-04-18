@@ -91,6 +91,31 @@
   - Przy zmianach w `src/app.ts` zawsze wykonujemy `npm run build`, aby zsynchronizowac `dist/app.js` przed commitem.
   - Przy zmianach frontowych, ktore sa publikowane statycznie, pilnujemy spojnosci source <-> `_site` przed deployem.
 
+## Ustalenia operacyjne (2026-04-18)
+
+- **Nowy artykul = obowiazkowy FAQ dla widza i SEO:**
+  - Po dodaniu kazdego nowego artykulu trzeba przygotowac FAQ na bazie **realnych pytan z sieci** (autocomplete / PAA / popularne zapytania), a nie pytan generycznych.
+  - FAQ ma byc dodane jednoczesnie w 2 warstwach:
+    - widoczne na stronie artykulu (sekcja FAQ dla czytelnika),
+    - w danych strukturalnych `FAQPage` (SEO/AEO).
+  - Zasada publikacyjna: artykul nie jest "done", dopoki nie ma obu warstw FAQ.
+
+- **Zasada jakosci FAQ (na przyszlosc):**
+  - Pytania maja odpowiadac intencjom uzytkownika i byc jezykowo naturalne (jak w wyszukiwarce).
+  - Odpowiedzi maja byc krotkie, konkretne i zgodne z trescia artykulu.
+  - Przy aktualizacji artykulu aktualizujemy rowniez FAQ (widoczne + schema), jesli temat lub wnioski sie zmienily.
+
+- **Performance / frontend po ostatnich poprawkach:**
+  - Export (`scripts/export_site.sh`) robi teraz automatyczna minifikacje:
+    - CSS: `style.css` i `article.css`
+    - JS: pliki `dist/*.js` w `_site`.
+  - Wprowadzony `article.css` jako wspolny krok refaktoru dla stron artykulowych.
+  - Dalsze prace nad inline CSS robimy etapowo i bezpiecznie (najpierw wspolny styl, potem redukcja duplikatow).
+
+- **Spojnosc publikacji statycznej:**
+  - Kazda zmiana frontowa musi byc zsynchronizowana w source i `_site` przed deployem.
+  - Po wiekszych zmianach uruchamiamy pelny export, a nie reczne kopiowanie pojedynczych plikow.
+
 ## Open questions
 - Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?
 - Czy rozszerzamy automatyczne testy synchronizacji (rollback + spojnosc JSON/sitemap)?
