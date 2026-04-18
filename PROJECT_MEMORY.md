@@ -540,7 +540,11 @@ Jesli artykul ma obrazy:
   - `.key-takeaways h2`
   - `.key-takeaways li`
   Przy dodawaniu nowego artykulu lub zmianach w template zawsze sprawdzamy ten zestaw selektorow.
-- **KRYTYCZNE**: Obrazy hero/featured/inline w artykulach MUSZA isc przez tag `<picture>` z AVIF i WebP (fallback png/jpg). Wyjatek: logo i male ikony techniczne.
+- **KRYTYCZNE**: Obrazy hero/featured/inline w artykulach MUSZA isc przez tag `<picture>` z AVIF i WebP (fallback `jpg/jpeg`, bez `png` jako formatu docelowego). Wyjatek: logo i male ikony techniczne.
+- **KRYTYCZNE**: Jesli material zrodlowy przychodzi jako `PNG`, workflow jest staly:
+  - generujemy `AVIF` + `WebP` (oraz `JPG/JPEG`, gdy potrzebny fallback),
+  - przepinamy wszystkie referencje w HTML/JSON-LD/OG/Twitter/preload na nowe rozszerzenia,
+  - dopiero po weryfikacji `rg '\\.png'` usuwamy pliki `PNG` z `assets` i `_site/assets`.
 - **KRYTYCZNE**: W sekcjach "Więcej Porad" (stopka artykułu) używamy klasy `.articles-grid-preview`. NIGDY nie dodajemy tam stylów inline typu `grid-template-columns`. Układem zarządza centralnie `style.css` (1 kolumna na telefonie, 2 na tablecie, 3 na desktopie). CTA kart promocyjnych to zawsze tekstowe "Czytaj artykuł ->", a nazwa sekcji nie może zawierać słowa "Wiedza".
 - **KRYTYCZNE**: Sekcja Hero na `index.html` korzysta z animacji wejściowych (klasa `.hero__eyebrow`, `.hero__title` itd.) oraz efektu paralaksy (skrypt na dole strony). Przy edycji nagłówka należy zachować klasę `.floating` dla badge'a oraz dbać o to, by obraz tła miał `will-change: transform`.
 - **KRYTYCZNE**: Sekcja `featured-article` (pod biogramem na `index.html`) oraz pierwszy kafelek w `articles-grid-preview` musza byc ze soba spójne i zawsze wskazywac najnowszy artykul.
