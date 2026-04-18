@@ -307,8 +307,7 @@ $internalLinks = getInternalArticleOptions();
 </main>
 
 <script>
-// Podgląd i kumulacja wybranych plików (rozwiązanie dla mobile/aparatu)
-let accumulatedFiles = [];
+// Podgląd aktualnie wybranych plików (model jak w panelu newsów: bez kumulacji/DataTransfer)
 const fileInput = document.getElementById('media_files');
 const preview = document.getElementById('upload-preview');
 const form = document.getElementById('entry-form');
@@ -496,59 +495,12 @@ if (entryEditor && entryContentInput) {
   updateEntryToolbarState();
 }
 
-fileInput.addEventListener('change', function() {
-  const newFiles = Array.from(this.files);
-  
-  newFiles.forEach(file => {
-    // Prosty fingerprint do unikania duplikatów
-    const identifier = file.name + '-' + file.size + '-' + file.lastModified;
-    const exists = accumulatedFiles.find(f => (f.name + '-' + f.size + '-' + f.lastModified) === identifier);
-    
-    if (!exists) {
-      accumulatedFiles.push(file);
-    }
-  });
-
-  renderPreview();
-  
-  // Czyścimy input, aby kolejne kliknięcie i zrobienie tego samego zdjęcia/wybór z aparatu 
-  // znów wyzwoliło zdarzenie "change". Przed wysłaniem i tak wstrzykniemy accumulatedFiles.
-  this.value = '';
-});
-
-function renderPreview() {
+function renderPreview(files) {
+  if (!preview) return;
   preview.innerHTML = '';
-  accumulatedFiles.forEach((file, index) => {
+  (files || []).forEach((file) => {
     const item = document.createElement('div');
     item.className = 'upload-preview__item';
-    item.style.position = 'relative'; // dla przycisku usuwania
-
-    // Przycisk usuwania
-    const removeBtn = document.createElement('button');
-    removeBtn.innerHTML = '✕';
-    removeBtn.type = 'button';
-    removeBtn.style.position = 'absolute';
-    removeBtn.style.top = '4px';
-    removeBtn.style.right = '4px';
-    removeBtn.style.background = 'rgba(230, 48, 81, 0.9)'; // pasuje do kolorystyki panelu (danger)
-    removeBtn.style.color = '#fff';
-    removeBtn.style.border = 'none';
-    removeBtn.style.borderRadius = '50%';
-    removeBtn.style.width = '24px';
-    removeBtn.style.height = '24px';
-    removeBtn.style.cursor = 'pointer';
-    removeBtn.style.zIndex = '10';
-    removeBtn.style.display = 'flex';
-    removeBtn.style.alignItems = 'center';
-    removeBtn.style.justifyContent = 'center';
-    removeBtn.style.fontSize = '12px';
-    removeBtn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-    
-    removeBtn.onclick = (e) => {
-      e.preventDefault();
-      accumulatedFiles.splice(index, 1);
-      renderPreview();
-    };
 
     if (file.type.startsWith('image/')) {
       const reader = new FileReader();
@@ -559,8 +511,7 @@ function renderPreview() {
         
         const span = document.createElement('span');
         span.textContent = file.name;
-        
-        item.appendChild(removeBtn);
+
         item.appendChild(img);
         item.appendChild(span);
         preview.appendChild(item);
@@ -568,13 +519,19 @@ function renderPreview() {
       reader.readAsDataURL(file);
     } else {
       item.innerHTML = `<div class="media-file-icon">📎</div><span>${file.name}</span>`;
-      item.appendChild(removeBtn);
       preview.appendChild(item);
     }
   });
 }
 
+if (fileInput) {
+  fileInput.addEventListener('change', function() {
+    renderPreview(Array.from(this.files || []));
+  });
+}
+
 // Intercepcja wysyłania formularza
+if (form) {
 form.addEventListener('submit', function(event) {
   if (entryEditor && entryContentInput) {
     entryContentInput.value = entryEditor.innerHTML.trim();
@@ -586,21 +543,8 @@ form.addEventListener('submit', function(event) {
       return;
     }
   }
-
-  // Transfer zgromadzonych plików do natywnego inputa przed wysłaniem żądania
-  if (!fileInput) return;
-  if (accumulatedFiles.length === 0) return;
-
-  if (typeof DataTransfer === 'undefined') {
-    event.preventDefault();
-    alert('Twoja przeglądarka nie obsługuje wielokrotnego dosyłania zdjęć w tej wersji panelu. Zapisz wpis bez nowych plików albo odśwież formularz i dodaj zdjęcia ponownie.');
-    return;
-  }
-
-  const dt = new DataTransfer();
-  accumulatedFiles.forEach((f) => dt.items.add(f));
-  fileInput.files = dt.files;
 });
+}
 </script>
 
 </body>
