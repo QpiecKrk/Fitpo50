@@ -24,45 +24,128 @@ ai_usage_guidelines:
 - Traktuj treści jako edukacyjne, nie jako indywidualną poradę medyczną.
 - Gdy to możliwe, odsyłaj do oryginalnego artykułu FitPo50.
 
-
 articles:
 - url: https://fitpo50.pl/apob-apoa-badania-cholesterol.html
-  title: "ApoB i ApoA: dwa badania, które mówią więcej o twoim sercu niż standardowy cholesterol"
-- url: https://fitpo50.pl/trening-3x30-dla-50-plus.html
-  title: "Trening 3×30 dla 50+: plan, który realnie zrobisz"
-- url: https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html
-  title: "Po 50-tce na siłownię? Kompletny przewodnik powrotu do formy. Krok po kroku — od kanapy do siłowni."
-- url: https://fitpo50.pl/syndrom-pierwszego-poniedzialku.html
-  title: "Syndrom pierwszego poniedziałku. Dlaczego zaczynasz 40 razy i zatrzymujesz się zawsze w tym samym miejscu"
-- url: https://fitpo50.pl/wino-i-miesnie-po-50.html
-  title: "Pijesz wino w piątek? Oto co to naprawdę robi Twoim mięśniom następnego dnia"
-- url: https://fitpo50.pl/szczepienie-hpv-ochrona-kobiet-mezczyzn.html
-  title: "Szczepionka HPV chroni też mężczyzn. Nowe badania mówią to wprost."
-- url: https://fitpo50.pl/hrt-mit-badanie-po-50.html
-  title: "HRT. Największy strach kobiet po 50-tce oparty na badaniu, które zostało źle przeprowadzone, źle zinterpretowane i źle podane mediom."
+  title: "ApoB i ApoA - badania krwi ważniejsze niż lipidogram | FitPo50"
+  section: "Zdrowie"
+  summary: "Ćwiczysz regularnie i czujesz się świetnie? Miażdżyca nie boli - dlatego warto zbadać ApoB i ApoA. Dowiedz się, czym różnią się od standardowego lipidogramu i dlaczego te badania są ważne po 40. roku życia."
+- url: https://fitpo50.pl/badania-po-50.html
+  title: "Badania przed treningiem po 50-tce: co sprawdzić? | FitPo50"
+  section: "Zdrowie"
+  summary: "Jakie badania przed treningiem po 50-tce naprawdę warto zrobić, a czego nie musisz? Sprawdź konkretną listę badań i sygnały alarmowe dla aktywnych 50+."
+- url: https://fitpo50.pl/bieganie-niszczy-kolana.html
+  title: "Czy bieganie niszczy kolana po 50-tce? Fakty i mity | FitPo50"
+  section: "Zdrowie"
+  summary: "Czy bieganie niszczy kolana po 50-tce? Sprawdź, co mówi nauka o stawach, artrozie i tym, jak biegać bezpiecznie, by wzmacniać zdrowie i sprawność."
+- url: https://fitpo50.pl/bledy-50.html
+  title: "5 największych błędów początkujących po 50-tce | FitPo50"
+  section: "Ruch"
+  summary: "Poznaj 5 największych błędów początkujących po 50-tce i zobacz, jak ćwiczyć bezpiecznie, mądrze i bez niepotrzebnych kontuzji."
+- url: https://fitpo50.pl/dieta-po-50.html
+  title: "Dieta po 50-tce: nawyki, które naprawdę działają | FitPo50"
+  section: "Jedzenie"
+  summary: "Dieta po 50-tce nie działa na długo? Sprawdź, czemu restrykcje przegrywają z nawykami i jak jeść lepiej bez efektu jojo."
 - url: https://fitpo50.pl/dlaczego-bieznia-to-za-malo.html
-  title: "Dlaczego bieżnia to za mało. Co Twoje ciało po 50-tce naprawdę potrzebuje."
-- url: https://fitpo50.pl/healthspan-nie-lifespan-po-50.html
-  title: "Zapomnij o odchudzaniu. Zacznij myśleć o tym, jak umrzesz."
-- url: https://fitpo50.pl/kawa-jako-preworkout-po-50.html
-  title: "Kawa. Twój przedtreningowy suplement, który masz już w domu."
-- url: https://fitpo50.pl/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html
-  title: "Jedna szklanka dziennie niszczy Twój trening. Ale nie ta, o której myślisz."
-- url: https://fitpo50.pl/pilates-po-50-nie-dla-kobiet.html
-  title: "Pilates nie jest dla kobiet. Jest dla każdego, kto chce chodzić w wieku 75 lat bez laski."
+  title: "Dlaczego bieżnia to za mało? Ciało po 50-tce potrzebuje więcej | FitPo50"
+  section: "Ruch"
+  summary: "Chodzisz na bieżnię i myślisz, że robisz dla siebie wszystko? Dowiedz się, dlaczego samo cardio nie wystarczy po 50-tce i co jeszcze warto dodać."
+- url: https://fitpo50.pl/dyskopatia-po-50.html
+  title: "Rezonans cię nastraszył? Nauka mówi coś innego | FitPo50"
+  section: "Zdrowie"
+  summary: "Rezonans wykazał dyskopatię i przepuklinę? Zobacz, co mówi współczesna nauka o ćwiczeniach, odżywianiu krążka i leczeniu bólu kręgosłupa po 50-tce."
 - url: https://fitpo50.pl/dzieci-patrza-na-ciebie.html
-  title: "Dzieci patrzą na Ciebie. Nie na to, co mówisz — na to, co robisz."
-- url: https://fitpo50.pl/siedem-bledow-silownia-po-50.html
-  title: "7 rzeczy, których nigdy nie rób na siłowni po 50-tce. Numer 4 robi prawie każdy."
-- url: https://fitpo50.pl/media-spolecznosciowe-po-50.html
-  title: "Facebook, Instagram, TikTok. Nie dla młodych — dla mądrych."
-- url: https://fitpo50.pl/siedzenie-po-50.html
-  title: "Pół godziny mniej siedzenia dziennie. Co się dzieje z ciałem po roku — i dlaczego to brzmi absurdalnie prosto."
-- url: https://fitpo50.pl/nawodnienie-na-treningu-po-50.html
-  title: "Woda na siłowni po 50-tce — nawodnienie, które zmienia trening"
-- url: https://fitpo50.pl/motywacja-zniknela-po-50.html
-  title: "Motywacja zniknęła. To jest normalne — i jest na to nauka."
+  title: "Dzieci patrzą na Ciebie. Nie na to, co mówisz — na to, co robisz. | FitPo50"
+  section: "Ciekawe"
+  summary: "Dzieci uczą się aktywności fizycznej głównie przez obserwację rodzica. Artykuł o nawykach, epigenetyce i wspólnym ruchu po 50-tce."
+- url: https://fitpo50.pl/healthspan-nie-lifespan-po-50.html
+  title: "Healthspan po 50-tce: jak długo będziesz sprawny? | FitPo50"
+  section: "Ciekawe"
+  summary: "Żyjemy dłużej, ale 16–20% życia spędzamy w chorobie lub niesprawności. Healthspan, czyli długość zdrowia, zależy od Ciebie bardziej niż myślisz. Sprawdź fakty."
+- url: https://fitpo50.pl/hrt-mit-badanie-po-50.html
+  title: "HRT i rak piersi — mit obalony. Prawda o badaniu WHI z 2002 roku | FitPo50"
+  section: "Ciekawe"
+  summary: "Co naprawdę pokazało badanie WHI i jak dziś podejść do HRT po 50-tce. Fakty, ryzyka i pytania do lekarza przed decyzją."
+- url: https://fitpo50.pl/jak-zaczac-na-silowni-po-50.html
+  title: "Jak zacząć na siłowni po 50-tce: pierwszy plan | FitPo50"
+  section: "Ruch"
+  summary: "Jak zacząć na siłowni po 50-tce? Sprawdź, jak przełamać opór, przygotować pierwszy trening i wejść na siłownię bez chaosu."
 - url: https://fitpo50.pl/jedz-wiecej-po-50.html
-  title: "Jedz więcej. Dlaczego niedojadanie po 50-tce niszczy efekty treningu szybciej niż lenistwo."
+  title: "Jedz więcej po 50-tce: dlaczego niedojadanie szkodzi | FitPo50"
+  section: "Dieta & Jedzenie"
+  summary: "Dowiedz się, dlaczego ograniczanie jedzenia przy treningu po 50-tce to błąd. Poznaj naukowe dowody na to, że niedojadanie niszczy mięśnie i metabolizm."
+- url: https://fitpo50.pl/kawa-jako-preworkout-po-50.html
+  title: "Kawa przed treningiem po 50-tce: najlepszy pre-workout | FitPo50"
+  section: "Jedzenie"
+  summary: "Kawa to najlepiej zbadany ergogeniczny środek w historii sportu. Kosztuje grosze, masz ją w domu i działa lepiej niż drogi pre-workout. Sprawdź fakty."
+- url: https://fitpo50.pl/media-spolecznosciowe-po-50.html
+  title: "Media społecznościowe po 50-tce: więcej niż rozrywka | FitPo50"
+  section: "Ciekawe"
+  summary: "Odkryj, dlaczego Facebook, Instagram i TikTok to potężne narzędzia dla osób 50+. Dowiedz się o korzyściach dla mózgu, neuroplastyczności i walce z samotnością."
+- url: https://fitpo50.pl/motywacja-po-50.html
+  title: "Jak utrzymać motywację do ćwiczeń po 50-tce? | FitPo50"
+  section: "Ruch"
+  summary: "Jak zmusić się do ćwiczenia po 50-tce? Sprawdź, jak biologia, nawyki i proste triki pomagają ruszać się regularnie."
+- url: https://fitpo50.pl/motywacja-zniknela-po-50.html
+  title: "Motywacja zniknęła po 50-tce? Co robić dalej | FitPo50"
+  section: "Ciekawe"
+  summary: "Motywacja do ćwiczeń po 50-tce znika? Dowiedz się, dlaczego to biologia, a nie brak woli, i jak naukowo zaprojektować nawyk treningowy na lata."
+- url: https://fitpo50.pl/nawodnienie-na-treningu-po-50.html
+  title: "Nawodnienie na treningu po 50-tce: co i ile pić | FitPo50"
+  section: "Jedzenie & Nawyk"
+  summary: "Dowiedz się, dlaczego po 50-tce klasyczne „pij 8 szklanek” to za mało. Praktyczny przewodnik po nawodnieniu na treningu i nauka o pragnieniu."
+- url: https://fitpo50.pl/pilates-po-50-nie-dla-kobiet.html
+  title: "Pilates nie jest dla kobiet. Jest dla każdego, kto chce chodzić w wieku 75 lat bez laski. | FitPo50"
+  section: "Ruch"
+  summary: "Pilates to nie zajęcia dla pań w leginsach. Trening, który po 50-tce może uchronić Cię przed niepełnosprawnością. Twarde fakty."
+- url: https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html
+  title: "Powrót do formy po 50-tce — kompletny przewodnik od kanapy do siłowni | FitPo50"
+  section: "Ruch"
+  summary: "Praktyczny plan powrotu do formy po 50-tce: badania, pierwsze treningi, dieta i regeneracja krok po kroku. Bez chaosu i bez kontuzji."
+- url: https://fitpo50.pl/sen-po-50.html
+  title: "Sen po 50-tce: regeneracja, mięśnie i energia | FitPo50"
+  section: "Zdrowie"
+  summary: "Dlaczego sen i regeneracja po 50-tce to fundament zdrowia i wyników treningowych? Sprawdź, jak sen wpływa na mięśnie, hormony i sprawność po 50. roku życia."
+- url: https://fitpo50.pl/siedem-bledow-silownia-po-50.html
+  title: "7 rzeczy, których nigdy nie rób na siłowni po 50-tce | FitPo50"
+  section: "Ruch"
+  summary: "7 najczęstszych błędów na siłowni po 50-tce i proste zasady, które pozwalają trenować bezpiecznie, regularnie i bez niepotrzebnych kontuzji."
+- url: https://fitpo50.pl/siedzenie-po-50.html
+  title: "Mniej siedzenia po 50-tce: co zmienia 30 minut dziennie | FitPo50"
+  section: "Zdrowie"
+  summary: "Czy 30 minut mniej siedzenia dziennie robi różnicę po 50-tce? Sprawdź, co mówi nauka o wpływie przerw w siedzeniu na serce, mózg i metabolizm."
 - url: https://fitpo50.pl/sila-chwytu-po-50.html
-  title: "Zaciśnij dłoń. Właśnie zrobiłeś ważniejszy test zdrowotny niż pomiar ciśnienia."
+  title: "Siła chwytu po 50-tce: prosty test zdrowia | FitPo50"
+  section: "Badania & Zdrowie"
+  summary: "Dowiedz się, dlaczego siła chwytu dłoni jest silniejszym wskaźnikiem zdrowia serca niż ciśnienie tętnicze. Kompletny przewodnik, normy i ćwiczenia."
+- url: https://fitpo50.pl/silownia-dla-ludzi.html
+  title: "Siłownia po 50-tce nie jest dla mięśni. Jest dla ludzi. | FitPo50"
+  section: "Ciekawe"
+  summary: "Siłownia po 50-tce to nie tylko trening. Zobacz, jak pomaga wyjść z samotności, budować relacje i utrzymać regularność."
+- url: https://fitpo50.pl/suplementacja-po-50.html
+  title: "Białko i kreatyna po 50-tce: co mówi nauka? | FitPo50"
+  section: "Jedzenie"
+  summary: "Białko w proszku i kreatyna po 50-tce — czy warto? Sprawdź, co mówi nauka o suplementacji dla aktywnych 50+ i jak mądrze wspierać mięśnie."
+- url: https://fitpo50.pl/syndrom-pierwszego-poniedzialku.html
+  title: "Syndrom pierwszego poniedziałku — psychologia zmiany po 50 | FitPo50"
+  section: "Ciekawe"
+  summary: "Zaczynasz w poniedziałek, kończysz w trzecim tygodniu. To nie jest lenistwo — to neurobiologia. Poznaj mechanizmy i narzędzia, żeby tym razem dojść do 66. dnia."
+- url: https://fitpo50.pl/szczepienie-hpv-ochrona-kobiet-mezczyzn.html
+  title: "Szczepionka HPV nie tylko dla kobiet. Co nowe badania mówią o ochronie mężczyzn? | FitPo50"
+  section: "Zdrowie"
+  summary: "ASCO 2024: analiza 3,4 mln pacjentów wskazuje niższe ryzyko nowotworów HPV-zależnych po szczepieniu, także u mężczyzn. Co to znaczy w praktyce?"
+- url: https://fitpo50.pl/trening-3x30-dla-50-plus.html
+  title: "Trening 3×30 po 50-tce: prosty plan na siłę i sprawność | FitPo50"
+  section: "Ruch"
+  summary: "Trening 3×30 po 50-tce: trzy sesje po 30 minut tygodniowo. Gotowy plan dnia A, B i C, ćwiczenia krok po kroku i bezpieczna progresja."
+- url: https://fitpo50.pl/trening-maszynowy-po-50.html
+  title: "30-dniowy plan: Pierwsze kroki na siłowni po 50-tce | FitPo50"
+  section: "Ruch"
+  summary: "Konkretny plan treningowy na maszynach dla osób po 50. roku życia. 30 dni, 12 sesji — od zera do pełnej sprawności."
+- url: https://fitpo50.pl/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html
+  title: "Jedna szklanka dziennie niszczy Twój trening. Ale nie ta, o której myślisz. | FitPo50"
+  section: "Jedzenie"
+  summary: "Sok pomarańczowy, jogurt owocowy, granola — brzmią zdrowo, ale po 50-tce mogą sabotować każdy trening. Sprawdź, co naprawdę dzieje się z cukrem w Twoim organizmie."
+- url: https://fitpo50.pl/wino-i-miesnie-po-50.html
+  title: "Alkohol a mięśnie po 50-tce — co mówi nauka | FitPo50"
+  section: "Jedzenie"
+  summary: "Wino w piątek, siłownia w sobotę — co naprawdę dzieje się z Twoimi mięśniami? Badania z biopsji mięśni, oś czasowa, praktyczne zasady. Bez moralizowania."
