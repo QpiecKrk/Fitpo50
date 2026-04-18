@@ -158,6 +158,12 @@ function sanitizeSitemap() {
     return fs.existsSync(localPath) ? block : '';
   });
 
+  // Keep sitemap clean: remove leftover blank lines after URL removals.
+  xml = xml
+    .replace(/^\s*$/gm, '')
+    .replace(/\n{2,}/g, '\n')
+    .trimEnd() + '\n';
+
   if (xml !== original) {
     fs.writeFileSync(sitemapPath, xml, 'utf8');
     return true;

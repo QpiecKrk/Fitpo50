@@ -5,6 +5,15 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 OUTPUT_DIR="${1:-$ROOT_DIR/_site}"
 
+NODE_BIN="${NODE_BIN:-$(command -v node || true)}"
+if [[ -z "$NODE_BIN" && -x "/opt/homebrew/bin/node" ]]; then
+  NODE_BIN="/opt/homebrew/bin/node"
+fi
+if [[ -z "$NODE_BIN" ]]; then
+  echo "ERROR: node nie jest dostępny w PATH ani w /opt/homebrew/bin/node." >&2
+  exit 1
+fi
+
 run_ts_build() {
   if [[ "${SKIP_TS_BUILD:-0}" == "1" ]]; then
     echo "SKIP_TS_BUILD=1 -> pomijam build TypeScript."
@@ -36,7 +45,13 @@ run_ts_build
 echo "Uruchamiam walidację SEO hardening (Sprint 1)..."
 (
   cd "$ROOT_DIR"
-  node scripts/check_sprint1_hardening.mjs
+  "$NODE_BIN" scripts/check_sprint1_hardening.mjs
+)
+
+echo "Uruchamiam walidację AEO/GEO hardening (Sprint 2)..."
+(
+  cd "$ROOT_DIR"
+  "$NODE_BIN" scripts/check_sprint2_aeo_geo.mjs
 )
 
 rm -rf "$OUTPUT_DIR"
