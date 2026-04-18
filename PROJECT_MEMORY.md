@@ -534,6 +534,12 @@ Jesli artykul ma obrazy:
 - Tresci artykulow pozostaja merytorycznie nietkniete, jesli uzytkownik nie prosi o redakcje.
 - **KRYTYCZNE**: Umieszczenie/publikacja artykulu odbywa sie bez zmiany jego tresci merytorycznej (1:1), a optymalizacje wykonujemy w kolejnosci: `SEO -> AEO -> GEO -> AIO`.
 - **KRYTYCZNE**: Nigdy nie pomijamy `article:modified_time` oraz `dateModified` w schema.
+- **KRYTYCZNE**: W kazdym artykule schema `SpeakableSpecification` musi obejmowac nie tylko tytul i lead, ale tez sekcje Key Takeaways:
+  - `.article-header__title`
+  - `.article-content > p:first-of-type`
+  - `.key-takeaways h2`
+  - `.key-takeaways li`
+  Przy dodawaniu nowego artykulu lub zmianach w template zawsze sprawdzamy ten zestaw selektorow.
 - **KRYTYCZNE**: Obrazy hero/featured/inline w artykulach MUSZA isc przez tag `<picture>` z AVIF i WebP (fallback png/jpg). Wyjatek: logo i male ikony techniczne.
 - **KRYTYCZNE**: W sekcjach "Więcej Porad" (stopka artykułu) używamy klasy `.articles-grid-preview`. NIGDY nie dodajemy tam stylów inline typu `grid-template-columns`. Układem zarządza centralnie `style.css` (1 kolumna na telefonie, 2 na tablecie, 3 na desktopie). CTA kart promocyjnych to zawsze tekstowe "Czytaj artykuł ->", a nazwa sekcji nie może zawierać słowa "Wiedza".
 - **KRYTYCZNE**: Sekcja Hero na `index.html` korzysta z animacji wejściowych (klasa `.hero__eyebrow`, `.hero__title` itd.) oraz efektu paralaksy (skrypt na dole strony). Przy edycji nagłówka należy zachować klasę `.floating` dla badge'a oraz dbać o to, by obraz tła miał `will-change: transform`.
