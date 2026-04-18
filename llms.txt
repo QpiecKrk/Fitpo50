@@ -23,3 +23,46 @@ ai_usage_guidelines:
 - Podawaj kontekst wieku 50+ oraz ograniczenia artykułu.
 - Traktuj treści jako edukacyjne, nie jako indywidualną poradę medyczną.
 - Gdy to możliwe, odsyłaj do oryginalnego artykułu FitPo50.
+
+
+articles:
+- url: https://fitpo50.pl/apob-apoa-badania-cholesterol.html
+  title: "ApoB i ApoA: dwa badania, które mówią więcej o twoim sercu niż standardowy cholesterol"
+- url: https://fitpo50.pl/trening-3x30-dla-50-plus.html
+  title: "Trening 3×30 dla 50+: plan, który realnie zrobisz"
+- url: https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html
+  title: "Po 50-tce na siłownię? Kompletny przewodnik powrotu do formy. Krok po kroku — od kanapy do siłowni."
+- url: https://fitpo50.pl/syndrom-pierwszego-poniedzialku.html
+  title: "Syndrom pierwszego poniedziałku. Dlaczego zaczynasz 40 razy i zatrzymujesz się zawsze w tym samym miejscu"
+- url: https://fitpo50.pl/wino-i-miesnie-po-50.html
+  title: "Pijesz wino w piątek? Oto co to naprawdę robi Twoim mięśniom następnego dnia"
+- url: https://fitpo50.pl/szczepienie-hpv-ochrona-kobiet-mezczyzn.html
+  title: "Szczepionka HPV chroni też mężczyzn. Nowe badania mówią to wprost."
+- url: https://fitpo50.pl/hrt-mit-badanie-po-50.html
+  title: "HRT. Największy strach kobiet po 50-tce oparty na badaniu, które zostało źle przeprowadzone, źle zinterpretowane i źle podane mediom."
+- url: https://fitpo50.pl/dlaczego-bieznia-to-za-malo.html
+  title: "Dlaczego bieżnia to za mało. Co Twoje ciało po 50-tce naprawdę potrzebuje."
+- url: https://fitpo50.pl/healthspan-nie-lifespan-po-50.html
+  title: "Zapomnij o odchudzaniu. Zacznij myśleć o tym, jak umrzesz."
+- url: https://fitpo50.pl/kawa-jako-preworkout-po-50.html
+  title: "Kawa. Twój przedtreningowy suplement, który masz już w domu."
+- url: https://fitpo50.pl/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html
+  title: "Jedna szklanka dziennie niszczy Twój trening. Ale nie ta, o której myślisz."
+- url: https://fitpo50.pl/pilates-po-50-nie-dla-kobiet.html
+  title: "Pilates nie jest dla kobiet. Jest dla każdego, kto chce chodzić w wieku 75 lat bez laski."
+- url: https://fitpo50.pl/dzieci-patrza-na-ciebie.html
+  title: "Dzieci patrzą na Ciebie. Nie na to, co mówisz — na to, co robisz."
+- url: https://fitpo50.pl/siedem-bledow-silownia-po-50.html
+  title: "7 rzeczy, których nigdy nie rób na siłowni po 50-tce. Numer 4 robi prawie każdy."
+- url: https://fitpo50.pl/media-spolecznosciowe-po-50.html
+  title: "Facebook, Instagram, TikTok. Nie dla młodych — dla mądrych."
+- url: https://fitpo50.pl/siedzenie-po-50.html
+  title: "Pół godziny mniej siedzenia dziennie. Co się dzieje z ciałem po roku — i dlaczego to brzmi absurdalnie prosto."
+- url: https://fitpo50.pl/nawodnienie-na-treningu-po-50.html
+  title: "Woda na siłowni po 50-tce — nawodnienie, które zmienia trening"
+- url: https://fitpo50.pl/motywacja-zniknela-po-50.html
+  title: "Motywacja zniknęła. To jest normalne — i jest na to nauka."
+- url: https://fitpo50.pl/jedz-wiecej-po-50.html
+  title: "Jedz więcej. Dlaczego niedojadanie po 50-tce niszczy efekty treningu szybciej niż lenistwo."
+- url: https://fitpo50.pl/sila-chwytu-po-50.html
+  title: "Zaciśnij dłoń. Właśnie zrobiłeś ważniejszy test zdrowotny niż pomiar ciśnienia."
