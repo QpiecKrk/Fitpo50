@@ -42,6 +42,33 @@ run_ts_build() {
 
 run_ts_build
 
+run_minification() {
+  local cleancss_bin="$ROOT_DIR/node_modules/.bin/cleancss"
+  local terser_bin="$ROOT_DIR/node_modules/.bin/terser"
+
+  if [[ ! -x "$cleancss_bin" || ! -x "$terser_bin" ]]; then
+    echo "Pominięto minifikację (brak clean-css-cli lub terser)."
+    return 0
+  fi
+
+  echo "Minifikuję CSS/JS w katalogu eksportu..."
+
+  if [[ -f "$OUTPUT_DIR/style.css" ]]; then
+    "$cleancss_bin" -O2 "$OUTPUT_DIR/style.css" -o "$OUTPUT_DIR/style.css"
+  fi
+
+  if [[ -f "$OUTPUT_DIR/article.css" ]]; then
+    "$cleancss_bin" -O2 "$OUTPUT_DIR/article.css" -o "$OUTPUT_DIR/article.css"
+  fi
+
+  if [[ -d "$OUTPUT_DIR/dist" ]]; then
+    local js_file
+    while IFS= read -r -d '' js_file; do
+      "$terser_bin" "$js_file" --compress --mangle -o "$js_file"
+    done < <(find "$OUTPUT_DIR/dist" -type f -name "*.js" -print0)
+  fi
+}
+
 echo "Uruchamiam walidację SEO hardening (Sprint 1)..."
 (
   cd "$ROOT_DIR"
@@ -96,5 +123,7 @@ rsync -a \
   --exclude="copy_pngs.sh" \
   --exclude="_site/" \
   "$ROOT_DIR/" "$OUTPUT_DIR/"
+
+run_minification
 
 echo "Exported clean site to: $OUTPUT_DIR"
