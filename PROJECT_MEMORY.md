@@ -105,6 +105,11 @@
   - Odpowiedzi maja byc krotkie, konkretne i zgodne z trescia artykulu.
   - Przy aktualizacji artykulu aktualizujemy rowniez FAQ (widoczne + schema), jesli temat lub wnioski sie zmienily.
 
+- **ClaimReview dla tresci „mit vs fakt”:**
+  - Jesli artykul obala popularny mit lub ocenia kontrowersyjne twierdzenie zdrowotne, dodajemy schema `ClaimReview`.
+  - Minimalny standard: `url`, `claimReviewed`, `author`, `datePublished`, `dateModified`, `reviewRating`.
+  - `reviewRating` utrzymujemy spojnie z dotychczasowym wzorcem (`ratingValue: 1`, `alternateName: "Mit"`), gdy teza jest falszywa.
+
 - **Performance / frontend po ostatnich poprawkach:**
   - Export (`scripts/export_site.sh`) robi teraz automatyczna minifikacje:
     - CSS: `style.css` i `article.css`
