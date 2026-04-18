@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Jak zacząć na siłowni po 50-tce: pierwszy plan | FitPo50</title>
 <meta name="description" content="Jak zacząć na siłowni po 50-tce? Sprawdź, jak przełamać opór, przygotować pierwszy trening i wejść na siłownię bez chaosu.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Jak zacząć chodzić na siłownię po 50-tce — przewodnik bez bullshitu">
 <meta property="og:description" content="Praktyczny przewodnik dla początkujących po 50-tce: pierwszy trening, prosty plan i spokojne wejście na siłownię.">
 <meta property="og:type" content="article">
@@ -64,7 +80,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 987,
+  "timeRequired": "PT5M"
 }
 </script>
 

@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Badania przed treningiem po 50-tce: co sprawdzić? | FitPo50</title>
 <meta name="description" content="Jakie badania przed treningiem po 50-tce naprawdę warto zrobić, a czego nie musisz? Sprawdź konkretną listę badań i sygnały alarmowe dla aktywnych 50+.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Badania przed treningiem po 50-tce. Co naprawdę musisz sprawdzić?">
 <meta property="og:description" content="Nie czekaj na idealne wyniki. Dowiedz się, które badania są kluczowe przed startem na siłowni po pięćdziesiątce.">
 <meta property="og:type" content="article">
@@ -64,7 +80,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1480,
+  "timeRequired": "PT8M"
 }
 </script>
 

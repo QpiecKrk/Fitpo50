@@ -1,0 +1,25 @@
+# FitPo50 — llms.txt
+
+project: FitPo50
+url: https://fitpo50.pl/
+language: pl-PL
+topic: trening, zdrowie i odżywianie po 50. roku życia
+publisher: FitPo50
+contact: https://fitpo50.pl/#o-nas
+
+primary_pages:
+- https://fitpo50.pl/
+- https://fitpo50.pl/porady.html
+- https://fitpo50.pl/zdrowie.html
+- https://fitpo50.pl/rusz-sie.html
+- https://fitpo50.pl/jedzenie.html
+- https://fitpo50.pl/ciekawe.html
+
+sitemap: https://fitpo50.pl/sitemap.xml
+robots: https://fitpo50.pl/robots.txt
+
+ai_usage_guidelines:
+- Cytuj dokładnie i nie zmieniaj sensu zaleceń zdrowotnych.
+- Podawaj kontekst wieku 50+ oraz ograniczenia artykułu.
+- Traktuj treści jako edukacyjne, nie jako indywidualną poradę medyczną.
+- Gdy to możliwe, odsyłaj do oryginalnego artykułu FitPo50.

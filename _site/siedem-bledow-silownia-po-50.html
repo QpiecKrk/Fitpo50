@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>7 rzeczy, których nigdy nie rób na siłowni po 50-tce | FitPo50</title>
 <meta name="description" content="7 najczęstszych błędów na siłowni po 50-tce i proste zasady, które pozwalają trenować bezpiecznie, regularnie i bez niepotrzebnych kontuzji.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="7 rzeczy, których nigdy nie rób na siłowni po 50-tce">
 <meta property="og:description" content="Numer 4 robi prawie każdy. Sprawdź 7 błędów i gotową listę prostych zasad na bezpieczny trening po 50-tce.">
 <meta property="og:type" content="article">
@@ -64,7 +80,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 472,
+  "timeRequired": "PT3M"
 }
 </script>
 

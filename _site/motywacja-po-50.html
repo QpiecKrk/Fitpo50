@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Jak utrzymać motywację do ćwiczeń po 50-tce? | FitPo50</title>
 <meta name="description" content="Jak zmusić się do ćwiczenia po 50-tce? Sprawdź, jak biologia, nawyki i proste triki pomagają ruszać się regularnie.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Jak zmusić się do ćwiczenia po 50-tce? Prawdziwe odpowiedzi i kilka kłamstw, które możesz sobie darować">
 <meta property="og:description" content="Zobacz, jak przechytrzyć mózg i zbudować nawyk treningowy po 50-tce bez liczenia na chwilową motywację.">
 <meta property="og:type" content="article">
@@ -64,7 +80,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1742,
+  "timeRequired": "PT8M"
 }
 </script>
 

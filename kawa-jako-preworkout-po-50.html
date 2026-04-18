@@ -4,16 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
-  gtag("config", "G-S21SKTVM7K");
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Kawa przed treningiem po 50-tce: najlepszy pre-workout | FitPo50</title>
 <meta name="description" content="Kawa to najlepiej zbadany ergogeniczny środek w historii sportu. Kosztuje grosze, masz ją w domu i działa lepiej niż drogi pre-workout. Sprawdź fakty.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Kawa. Twój przedtreningowy suplement, który masz już w domu.">
 <meta property="og:description" content="76% profesjonalnych sportowców pije kawę przed zawodami. Ty przepłacasz za gorsze zamienniki. Czas to zmienić.">
 <meta property="og:type" content="article">
@@ -64,7 +81,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1221,
+  "timeRequired": "PT9M"
 }
 </script>
 

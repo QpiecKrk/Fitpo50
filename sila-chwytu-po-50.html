@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Siła chwytu po 50-tce: prosty test zdrowia | FitPo50</title>
 <meta name="description" content="Dowiedz się, dlaczego siła chwytu dłoni jest silniejszym wskaźnikiem zdrowia serca niż ciśnienie tętnicze. Kompletny przewodnik, normy i ćwiczenia.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Zaciśnij dłoń. Właśnie zrobiłeś ważniejszy test zdrowotny niż pomiar ciśnienia.">
 <meta property="og:description" content="Jedno ściśnięcie dłoni mówi o Twoim sercu więcej niż myślisz. Poznaj wyniki badań naukowych na 140 000 osób.">
 <meta property="og:type" content="article">
@@ -55,7 +71,9 @@
     }
   },
   "datePublished": "2026-03-24T12:00:00+01:00",
-  "dateModified": "2026-03-27T16:00:00+01:00"
+  "dateModified": "2026-03-27T16:00:00+01:00",
+  "wordCount": 1713,
+  "timeRequired": "PT12M"
 }
 </script>
 

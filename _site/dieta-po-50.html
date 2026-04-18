@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Dieta po 50-tce: nawyki, które naprawdę działają | FitPo50</title>
 <meta name="description" content="Dieta po 50-tce nie działa na długo? Sprawdź, czemu restrykcje przegrywają z nawykami i jak jeść lepiej bez efektu jojo.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Dieta po 50-tce kontra nawyki. Czemu diety nie działają i co naprawdę zmienia życie">
 <meta property="og:description" content="Sprawdź, czemu dieta po 50-tce często kończy się powrotem do starych schematów i co działa lepiej niż restrykcje.">
 <meta property="og:type" content="article">
@@ -64,7 +80,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1467,
+  "timeRequired": "PT8M"
 }
 </script>
 

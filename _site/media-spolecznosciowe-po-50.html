@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Media społecznościowe po 50-tce: więcej niż rozrywka | FitPo50</title>
 <meta name="description" content="Odkryj, dlaczego Facebook, Instagram i TikTok to potężne narzędzia dla osób 50+. Dowiedz się o korzyściach dla mózgu, neuroplastyczności i walce z samotnością.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Facebook, Instagram, TikTok. Nie dla młodych — dla mądrych.">
 <meta property="og:description" content="Dla osób po 50-tce media społecznościowe to nie tylko zdjęcia obiadów. To trening dla mózgu i skuteczne narzędzie przeciw samotności. Sprawdź naukowe dowody.">
 <meta property="og:type" content="article">
@@ -57,7 +73,9 @@
     }
   },
   "datePublished": "2026-03-31T12:00:00+01:00",
-  "dateModified": "2026-04-16T16:45:00+02:00"
+  "dateModified": "2026-04-16T16:45:00+02:00",
+  "wordCount": 2031,
+  "timeRequired": "PT10M"
 }
 </script>
 

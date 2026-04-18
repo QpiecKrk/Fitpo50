@@ -3,16 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);} 
+  function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
-  gtag("config", "G-S21SKTVM7K");
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Trening 3×30 po 50-tce: prosty plan na siłę i sprawność | FitPo50</title>
 <meta name="description" content="Trening 3×30 po 50-tce: trzy sesje po 30 minut tygodniowo. Gotowy plan dnia A, B i C, ćwiczenia krok po kroku i bezpieczna progresja.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Trening 3×30 dla 50+: plan, który realnie zrobisz">
 <meta property="og:description" content="Trzy treningi po 30 minut tygodniowo: siła, cardio i mobilność. Plan dla osób po 50-tce, który da się utrzymać.">
 <meta property="og:type" content="article">
@@ -63,7 +80,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1785,
+  "timeRequired": "PT12M"
 }
 </script>
 

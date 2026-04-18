@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Sen po 50-tce: regeneracja, mięśnie i energia | FitPo50</title>
 <meta name="description" content="Dlaczego sen i regeneracja po 50-tce to fundament zdrowia i wyników treningowych? Sprawdź, jak sen wpływa na mięśnie, hormony i sprawność po 50. roku życia.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Sen i regeneracja po 50-tce: dlaczego sen jest kluczowy dla mięśni, hormonów i formy">
 <meta property="og:description" content="Sen to nie przerwa od treningu. To moment, w którym Twoje ciało wykonuje najważniejszą pracę. Dowiedz się, jak zadbać o regenerację po 50-tce.">
 <meta property="og:type" content="article">
@@ -65,7 +81,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1510,
+  "timeRequired": "PT10M"
 }
 </script>
 

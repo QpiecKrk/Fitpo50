@@ -33,6 +33,12 @@ run_ts_build() {
 
 run_ts_build
 
+echo "Uruchamiam walidację SEO hardening (Sprint 1)..."
+(
+  cd "$ROOT_DIR"
+  node scripts/check_sprint1_hardening.mjs
+)
+
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
@@ -58,6 +64,8 @@ rsync -a \
   --exclude="MEMORY_MOJE_SUKCESY.md" \
   --exclude="MEMORY_NEWSY.md" \
   --exclude="SESSION_START_MAX.md" \
+  --exclude="audit_*.md" \
+  --exclude="test-tts.mp3" \
   --exclude="package.json" \
   --exclude="tsconfig.json" \
   --exclude="src/" \

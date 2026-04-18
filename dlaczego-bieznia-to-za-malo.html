@@ -4,16 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
-  gtag("config", "G-S21SKTVM7K");
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Dlaczego bieżnia to za mało? Ciało po 50-tce potrzebuje więcej | FitPo50</title>
 <meta name="description" content="Chodzisz na bieżnię i myślisz, że robisz dla siebie wszystko? Dowiedz się, dlaczego samo cardio nie wystarczy po 50-tce i co jeszcze warto dodać.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Bieżnia to za mało — co Twoje ciało naprawdę potrzebuje po 50-tce">
 <meta property="og:description" content="Regularne cardio to świetny start. Ale jest jedna rzecz, której bieżnia Ci nie da — i która po 50-tce robi ogromną różnicę.">
 <meta property="og:type" content="article">
@@ -65,7 +82,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1565,
+  "timeRequired": "PT7M"
 }
 </script>
 

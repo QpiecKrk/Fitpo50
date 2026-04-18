@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Czy bieganie niszczy kolana po 50-tce? Fakty i mity | FitPo50</title>
 <meta name="description" content="Czy bieganie niszczy kolana po 50-tce? Sprawdź, co mówi nauka o stawach, artrozie i tym, jak biegać bezpiecznie, by wzmacniać zdrowie i sprawność.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Bieganie niszczy kolana. (I inne kłamstwa, w które uwierzyłeś.)">
 <meta property="og:description" content="Nauka mówi jasno: rekreacyjne bieganie może chronić Twoje kolana. Dowiedz się, dlaczego nie powinieneś rezygnować z ruchu po 50. roku życia.">
 <meta property="og:type" content="article">
@@ -64,7 +80,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1034,
+  "timeRequired": "PT12M"
 }
 </script>
 

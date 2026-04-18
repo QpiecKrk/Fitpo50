@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Pilates nie jest dla kobiet. Jest dla każdego, kto chce chodzić w wieku 75 lat bez laski. | FitPo50</title>
 <meta name="description" content="Pilates to nie zajęcia dla pań w leginsach. Trening, który po 50-tce może uchronić Cię przed niepełnosprawnością. Twarde fakty.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Pilates po 50-tce: nie dla kobiet, dla każdego kto chce normalnie chodzić za 20 lat">
 <meta property="og:description" content="Upadki to pierwsza przyczyna trwałej niepełnosprawności po 65-tce. Pilates redukuje to ryzyko bardziej niż większość metod rehabilitacyjnych. Sprawdź, co mówią badania.">
 <meta property="og:type" content="article">
@@ -65,7 +81,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1018,
+  "timeRequired": "PT9M"
 }
 </script>
 

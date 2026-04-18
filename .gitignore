@@ -78,9 +78,13 @@ _site/data/git-sync.lock
 2026-03-30-mdlsdmslds.html
 2026-03-31-dupa.html
 testtest.txt
+test-tts.mp3
+audit_*.md
 _site/2026-03-30-mdlsdmslds.html
 _site/2026-03-31-dupa.html
 _site/testtest.txt
+_site/test-tts.mp3
+_site/audit_*.md
 
 # export artifacts that should never be tracked
 _site/MEMORY_MOJE_SUKCESY.md

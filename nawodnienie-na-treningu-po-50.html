@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
 
-  gtag("config", "G-S21SKTVM7K");
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Nawodnienie na treningu po 50-tce: co i ile pić | FitPo50</title>
 <meta name="description" content="Dowiedz się, dlaczego po 50-tce klasyczne „pij 8 szklanek” to za mało. Praktyczny przewodnik po nawodnieniu na treningu i nauka o pragnieniu.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Nawodnienie na treningu po 50-tce: co i ile pić">
 <meta property="og:description" content="Dlaczego po pięćdziesiątce pragnienie to zły doradca? Poznaj naukowy protokół nawadniania dla aktywnych.">
 <meta property="og:type" content="article">
@@ -56,7 +72,9 @@
     }
   },
   "datePublished": "2026-03-27T22:50:00+01:00",
-  "dateModified": "2026-04-01T18:55:00+02:00"
+  "dateModified": "2026-04-01T18:55:00+02:00",
+  "wordCount": 1383,
+  "timeRequired": "PT12M"
 }
 </script>
 

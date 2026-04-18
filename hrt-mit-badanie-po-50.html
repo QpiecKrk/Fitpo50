@@ -4,16 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
-  gtag("config", "G-S21SKTVM7K");
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>HRT i rak piersi — mit obalony. Prawda o badaniu WHI z 2002 roku | FitPo50</title>
 <meta name="description" content="Co naprawdę pokazało badanie WHI i jak dziś podejść do HRT po 50-tce. Fakty, ryzyka i pytania do lekarza przed decyzją.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="HRT nie jest tym, czym go straszono. Oto co naprawdę wykazało badanie z 2002 roku.">
 <meta property="og:description" content="W 2002 roku media ogłosiły: HRT powoduje raka i zawały. Kobiety masowo odstawiały leki. Badanie było błędne. Napisali o tym sami jego autorzy.">
 <meta property="og:type" content="article">
@@ -65,7 +82,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1911,
+  "timeRequired": "PT12M"
 }
 </script>
 

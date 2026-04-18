@@ -3,16 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);} 
+  function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
-  gtag("config", "G-S21SKTVM7K");
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>ApoB i ApoA - badania krwi ważniejsze niż lipidogram | FitPo50</title>
 <meta name="description" content="Ćwiczysz regularnie i czujesz się świetnie? Miażdżyca nie boli - dlatego warto zbadać ApoB i ApoA. Dowiedz się, czym różnią się od standardowego lipidogramu i dlaczego te badania są ważne po 40. roku życia.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="ApoB i ApoA: co mówią o twoim sercu, czego nie powie zwykły cholesterol">
 <meta property="og:description" content="Regularne treningi to za mało. Miażdżyca rozwija się cicho - poznaj badania ApoB i ApoA, które dają pełniejszy obraz ryzyka sercowo-naczyniowego.">
 <meta property="og:type" content="article">
@@ -63,7 +80,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1048,
+  "timeRequired": "PT8M"
 }
 </script>
 

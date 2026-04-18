@@ -4,16 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
-  gtag("config", "G-S21SKTVM7K");
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
 <title>Syndrom pierwszego poniedziałku — psychologia zmiany po 50 | FitPo50</title>
 <meta name="description" content="Zaczynasz w poniedziałek, kończysz w trzecim tygodniu. To nie jest lenistwo — to neurobiologia. Poznaj mechanizmy i narzędzia, żeby tym razem dojść do 66. dnia.">
 <meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
 <meta property="og:title" content="Syndrom pierwszego poniedziałku. Dlaczego zawsze zatrzymujesz się w tym samym miejscu">
 <meta property="og:description" content="Fresh Start Effect, dopamina, all-or-nothing — trzy mechanizmy które niszczą każdy restart. I pięć sposobów żeby je obejść.">
 <meta property="og:type" content="article">
@@ -64,7 +81,9 @@
       "@type": "ImageObject",
       "url": "https://fitpo50.pl/assets/logo.jpg"
     }
-  }
+  },
+  "wordCount": 1071,
+  "timeRequired": "PT11M"
 }
 </script>
 
