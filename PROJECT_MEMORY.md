@@ -54,6 +54,9 @@
 - Stabilnosc modulu "Moje Sukcesy" (kalendarz, sync, sitemap, fallback danych).
 - Utrzymanie spojnosci kategorii i filtrowania w `porady.html`.
 - Bezpieczny, powtarzalny deploy z `_site`.
+- Kolejnosc wdrozen tresciowych:
+  - najpierw **Sprint 3 (AIO)**,
+  - potem globalny tuning FAQ na wszystkich artykulach na bazie **realnych zapytan z wyszukiwarki** (autocomplete/PAA), a nie pytan generycznych.
 
 ## Ustalenia operacyjne (2026-04-17)
 

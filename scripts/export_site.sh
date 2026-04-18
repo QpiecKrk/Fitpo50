@@ -54,6 +54,12 @@ echo "Uruchamiam walidację AEO/GEO hardening (Sprint 2)..."
   "$NODE_BIN" scripts/check_sprint2_aeo_geo.mjs
 )
 
+echo "Uruchamiam walidację AIO/GEO hardening (Sprint 3)..."
+(
+  cd "$ROOT_DIR"
+  "$NODE_BIN" scripts/check_sprint3_aio_geo.mjs
+)
+
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
