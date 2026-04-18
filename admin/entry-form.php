@@ -152,7 +152,7 @@ $internalLinks = getInternalArticleOptions();
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
             </div>
-            <textarea id="content" name="content" class="entry-content-input-hidden" hidden required><?= h($entry['content'] ?? '') ?></textarea>
+            <textarea id="content" name="content" class="entry-content-input-hidden" hidden><?= h($entry['content'] ?? '') ?></textarea>
           </div>
 
           <!-- Upload mediów -->
@@ -588,8 +588,17 @@ form.addEventListener('submit', function(event) {
   }
 
   // Transfer zgromadzonych plików do natywnego inputa przed wysłaniem żądania
+  if (!fileInput) return;
+  if (accumulatedFiles.length === 0) return;
+
+  if (typeof DataTransfer === 'undefined') {
+    event.preventDefault();
+    alert('Twoja przeglądarka nie obsługuje wielokrotnego dosyłania zdjęć w tej wersji panelu. Zapisz wpis bez nowych plików albo odśwież formularz i dodaj zdjęcia ponownie.');
+    return;
+  }
+
   const dt = new DataTransfer();
-  accumulatedFiles.forEach(f => dt.items.add(f));
+  accumulatedFiles.forEach((f) => dt.items.add(f));
   fileInput.files = dt.files;
 });
 </script>
