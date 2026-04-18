@@ -288,7 +288,7 @@ $internalLinks = getInternalArticleOptions();
           <div class="sidebar-card sidebar-card--danger">
             <h3 class="sidebar-card__title sidebar-card__title--danger">Strefa niebezpieczna</h3>
             <form method="POST" action="actions/delete.php"
-                  onsubmit="return confirm('Usunąć wpis „<?= addslashes(h($entry['title'])) ?>"?\nOperacja usunie stronę HTML i fistaszek z kalendarza.\nTej operacji nie można cofnąć.')">
+                  onsubmit="return confirm('Usunąć wpis „<?= addslashes(h($entry['title'])) ?>”?\nOperacja usunie stronę HTML i fistaszek z kalendarza.\nTej operacji nie można cofnąć.')">
               <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
               <input type="hidden" name="id" value="<?= $entry['id'] ?>">
               <button type="submit" class="btn-panel btn-panel--danger btn-full">🗑 Usuń wpis</button>
