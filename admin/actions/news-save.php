@@ -119,7 +119,7 @@ try {
         $_SESSION['flash_error'] = $gitError;
     }
 
-    header('Location: ../news-form.php?id=' . urlencode($itemId));
+    header('Location: ../news-dashboard.php');
     exit;
 
 } catch (Throwable $e) {

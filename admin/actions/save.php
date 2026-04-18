@@ -211,7 +211,7 @@ try {
     if ($gitError !== null) {
         $_SESSION['flash_error'] = $gitError;
     }
-    header("Location: ../entry-form.php?id=$id");
+    header('Location: ../dashboard.php');
 
 } catch (Exception $e) {
     $_SESSION['flash_error'] = 'Błąd: ' . $e->getMessage();
