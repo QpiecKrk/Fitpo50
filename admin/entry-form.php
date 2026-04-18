@@ -85,7 +85,7 @@ $internalLinks = getInternalArticleOptions();
       <?php endif; ?>
     </div>
 
-    <form method="POST" action="actions/save.php" enctype="multipart/form-data" id="entry-form">
+    <form method="POST" action="actions/save.php" enctype="multipart/form-data" id="entry-form" novalidate>
       <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
       <?php if ($editMode): ?>
         <input type="hidden" name="id" value="<?= $entry['id'] ?>">
@@ -130,7 +130,7 @@ $internalLinks = getInternalArticleOptions();
                       <option value="<?= h($link['href']) ?>"><?= h($link['label']) ?></option>
                     <?php endforeach; ?>
                   </select>
-                  <input type="url" id="entry-link-url" class="form-input" placeholder="Wklej link (https://... lub /sciezka.html)">
+                  <input type="text" id="entry-link-url" class="form-input" inputmode="url" autocomplete="off" placeholder="Wklej link (https://... lub /sciezka.html)">
                   <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="entry-insert-link-btn">Wstaw link</button>
                 </div>
 

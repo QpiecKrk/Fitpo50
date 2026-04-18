@@ -82,7 +82,7 @@ if (empty($sources)) {
       <a href="news-dashboard.php" class="btn-panel btn-panel--outline btn-panel--sm">← Wróć do listy</a>
     </div>
 
-    <form method="POST" action="actions/news-save.php" enctype="multipart/form-data" id="news-form">
+    <form method="POST" action="actions/news-save.php" enctype="multipart/form-data" id="news-form" novalidate>
       <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
       <input type="hidden" name="id" value="<?= h($item['id']) ?>">
 
@@ -147,7 +147,7 @@ if (empty($sources)) {
               <?php foreach ($sources as $source): ?>
                 <div class="news-source-row">
                   <input type="text" name="source_label[]" class="form-input" placeholder="Nazwa źródła" value="<?= h($source['label']) ?>">
-                  <input type="url" name="source_url[]" class="form-input" placeholder="https://..." value="<?= h($source['url']) ?>">
+                  <input type="text" name="source_url[]" class="form-input" inputmode="url" autocomplete="off" placeholder="https://..." value="<?= h($source['url']) ?>">
                   <button type="button" class="btn-panel btn-panel--sm btn-panel--danger" data-remove-source>Usuń</button>
                 </div>
               <?php endforeach; ?>
@@ -212,7 +212,7 @@ if (empty($sources)) {
 <template id="news-source-template">
   <div class="news-source-row">
     <input type="text" name="source_label[]" class="form-input" placeholder="Nazwa źródła">
-    <input type="url" name="source_url[]" class="form-input" placeholder="https://...">
+    <input type="text" name="source_url[]" class="form-input" inputmode="url" autocomplete="off" placeholder="https://...">
     <button type="button" class="btn-panel btn-panel--sm btn-panel--danger" data-remove-source>Usuń</button>
   </div>
 </template>
