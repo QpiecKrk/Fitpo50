@@ -165,6 +165,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - strony kategorii (`rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`) maja byc wizualnie i funkcjonalnie zgodne z wzorcem z `porady.html`,
   - ten sam standard meta czasu czytania, CTA i paginacji `WRÓĆ/DALEJ`,
   - po zmianach w CSS/HTML pilnujemy wersjonowania assetow (`?v=`), zeby cache nie maskowal efektu.
+  - w prototypie `index1.html` 4 kafelki wejscia do kategorii (Ruch/Jedzenie/Zdrowie/Ciekawe) maja stale, recznie przypisane zdjecia ilustrujace kategorie; te obrazy nie sa rotowane ani podmieniane automatycznie przez zadne skrypty (news/faq/czytelnia).
 - **Spojnosc kolorow etykiet kategorii:**
   - mapowanie kolorow etykiet jest stale na wszystkich listach/kafelkach,
   - nie dodajemy inline kolorow sprzecznych z mapowaniem kategorii.
