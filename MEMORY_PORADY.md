@@ -108,6 +108,9 @@ Szybka checklista przed oddaniem artykulu:
 - Karty kategorii musza byc spojne wizualnie.
 - Nie uzywamy `scrollIntoView()` pod nawigacja karuzeli.
 - Dla Safari pilnujemy `min-width: 0` na kluczowych kontenerach/gridach.
+- Przy przebudowie kolejnych stron kategorii na wzorzec nowego `index.html` utrzymujemy ta sama zasade nocnego tla:
+  - na telefonach dopuszczamy ciemne tlo (warstwa strony + warstwa kontenera),
+  - na desktopie domyslnie zostaje jasny wariant.
 
 ## Obrazy
 

@@ -166,6 +166,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - ten sam standard meta czasu czytania, CTA i paginacji `WRÓĆ/DALEJ`,
   - po zmianach w CSS/HTML pilnujemy wersjonowania assetow (`?v=`), zeby cache nie maskowal efektu.
   - na stronie glownej (`index.html`) 4 kafelki wejscia do kategorii (Ruch/Jedzenie/Zdrowie/Ciekawe) maja stale, recznie przypisane zdjecia ilustrujace kategorie; te obrazy nie sa rotowane ani podmieniane automatycznie przez zadne skrypty (news/faq/czytelnia).
+  - tryb nocny tla na mobile (telefon): utrzymujemy spojnie na `index.html`, `o-mnie.html` i wszystkich przyszlych stronach przebudowywanych na nowym wzorcu Bento; na desktopie domyslnie zostaje jasne tlo (chyba ze zapadnie osobna decyzja).
 - **Spojnosc kolorow etykiet kategorii:**
   - mapowanie kolorow etykiet jest stale na wszystkich listach/kafelkach,
   - nie dodajemy inline kolorow sprzecznych z mapowaniem kategorii.
