@@ -28,6 +28,7 @@
       font-family: "Work Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color: var(--ink);
       background: linear-gradient(180deg, #efe7da 0%, var(--bg-sand) 100%);
+      overflow-x: hidden;
     }
 
     .shell {
@@ -106,6 +107,7 @@
       color: var(--ink-soft);
       overflow-x: auto;
       white-space: nowrap;
+      min-width: 0;
     }
 
     .menu a {
@@ -516,6 +518,35 @@
     }
     .ticker-content strong {
       color: #1f2b45;
+    }
+    .ticker-content .news-text-tone--1,
+    .ticker-content .news-text-tone--1 span,
+    .ticker-content a.news-text-tone--1 {
+      color: #2f6d9b !important;
+      font-weight: 700;
+    }
+    .ticker-content .news-text-tone--2,
+    .ticker-content .news-text-tone--2 span,
+    .ticker-content a.news-text-tone--2 {
+      color: #2f8b57 !important;
+      font-weight: 700;
+    }
+    .ticker-content .news-text-tone--3,
+    .ticker-content .news-text-tone--3 span,
+    .ticker-content a.news-text-tone--3 {
+      color: #cc7a2d !important;
+      font-weight: 700;
+    }
+    .ticker-content .news-text-tone--4,
+    .ticker-content .news-text-tone--4 span,
+    .ticker-content a.news-text-tone--4 {
+      color: #7b57c2 !important;
+      font-weight: 700;
+    }
+    .ticker-content .news-text-strong-black,
+    .ticker-content strong.news-text-strong-black {
+      color: #17233f !important;
+      font-weight: 800;
     }
     .ticker-sources {
       margin-top: 0.52rem;
@@ -1038,9 +1069,34 @@
 
     .small { font-size: 0.84rem; }
 
+    @media (hover: none) and (pointer: coarse) {
+      .shell {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: 10px;
+      }
+      .topbar { grid-template-columns: 1fr; }
+      .hero, .latest-article, .quick, .faq-box, .categories, .news-feed { grid-column: 1 / -1; }
+      .latest-article, .news-feed { grid-row: auto; }
+      .bottom-row { grid-template-columns: 1fr; }
+      .reading-grid { grid-template-columns: 1fr; }
+      .news-feed {
+        height: auto;
+        max-height: none;
+        overflow: hidden;
+      }
+      .news-feed .card-body { min-height: 0; }
+      .news-ticker {
+        max-height: min(62vh, 560px);
+        overflow-y: auto;
+      }
+    }
+
     @media (max-width: 1080px) {
       .topbar { grid-template-columns: 1fr; }
-      .hero, .latest-article, .quick, .faq-box, .categories, .news-feed { grid-column: span 12; }
+      .hero, .latest-article, .quick, .faq-box, .categories, .news-feed { grid-column: 1 / -1; }
+      .latest-article, .news-feed { grid-row: auto; }
       .news-feed {
         height: auto;
         max-height: none;
@@ -1064,6 +1120,7 @@
 
     @media (max-width: 700px) {
       .categories { grid-template-columns: 1fr; }
+      .knowledge-box { display: none; }
       .hero { min-height: 360px; }
       .latest-article { min-height: 240px; }
       .latest-article__wrap {
@@ -1103,6 +1160,7 @@
         <a href="jedzenie.html">Jedzenie</a>
         <a href="zdrowie.html">Zdrowie</a>
         <a href="ciekawe.html">Ciekawe</a>
+        <a href="moje-sukcesy.html">Dziennik</a>
         <a href="o-mnie.html">O mnie</a>
       </nav>
       <div class="searchbar">
@@ -1984,6 +2042,16 @@
 
     let knowledgeDoc = null;
     const knowledgeHtmlCache = new Map();
+    const knowledgeFallbackContent = {
+      'article-1-body': '<p><strong>Start po 50-tce nie wymaga heroizmu.</strong> Wystarczy prosty plan: 2 treningi siłowe tygodniowo, krótki spacer po posiłku i sen jako priorytet.</p><p><a href="jak-zaczac-na-silowni-po-50.html">Przejdź do pełnego materiału</a></p>',
+      'article-2-body': '<p><strong>Najczęstsze mity:</strong> „za późno”, „trzeba codziennie”, „ból = progres”. W praktyce działa regularność, technika i regeneracja.</p><p><a href="siedem-bledow-silownia-po-50.html">Zobacz 7 mitów i ich korektę</a></p>',
+      'article-3-body': '<p><strong>Białko po 50-tce</strong> pomaga chronić mięśnie i utrzymać sprawność. Klucz to rozłożenie podaży w ciągu dnia, nie jeden „idealny” posiłek.</p><p><a href="jedz-wiecej-po-50.html">Czytaj o białku i diecie</a></p>',
+      'article-4-body': '<p><strong>Plan tygodnia:</strong> minimum, które działa: 2 sesje oporowe + 2-3 krótkie spacery + 1 dzień aktywnej regeneracji.</p><p><a href="powrot-do-formy-po-50-kompletny-przewodnik.html">Otwórz plan krok po kroku</a></p>',
+      'article-5-body': '<p><strong>Trendy warto filtrować.</strong> Nie wszystko, co głośne, jest skuteczne. Na FitPo50 oddzielamy marketing od wyników badań.</p><p><a href="ciekawe.html">Przejdź do działu Ciekawe</a></p>',
+      'article-6-body': '<p><strong>Sen to fundament regeneracji.</strong> Bez niego rośnie apetyt, spada energia i trudniej o progres treningowy.</p><p><a href="sen-po-50.html">Sprawdź zasady regeneracji</a></p>',
+      'article-7-body': '<p><strong>Mobilność i równowaga</strong> są równie ważne jak siła. To one decydują o sprawności na co dzień i mniejszym ryzyku urazów.</p><p><a href="rusz-sie.html">Zobacz praktyczne wskazówki</a></p>',
+      'article-8-body': '<p><strong>Suplementy to dodatek, nie baza.</strong> Najpierw ruch, jedzenie, sen i badania. Dopiero potem precyzyjne wsparcie.</p><p><a href="suplementacja-po-50.html">Czytaj o suplementacji po 50-tce</a></p>'
+    };
 
     async function getKnowledgeDoc() {
       if (knowledgeDoc) return knowledgeDoc;
@@ -2005,12 +2073,12 @@
           const doc = await getKnowledgeDoc();
           const sourceNode = doc.getElementById(sourceId);
           const contentNode = sourceNode?.querySelector('.article-card__content');
-          contentHtml = contentNode ? contentNode.innerHTML : '';
+          contentHtml = contentNode ? contentNode.innerHTML : (knowledgeFallbackContent[sourceId] || '');
           knowledgeHtmlCache.set(sourceId, contentHtml || '<p>Brak treści dla tej karty.</p>');
         }
         body.innerHTML = contentHtml || '<p>Brak treści dla tej karty.</p>';
       } catch (_) {
-        body.innerHTML = '<p>Nie udało się wczytać pełnej treści. Spróbuj odświeżyć stronę.</p>';
+        body.innerHTML = knowledgeFallbackContent[sourceId] || '<p>Nie udało się wczytać pełnej treści. Spróbuj odświeżyć stronę.</p>';
       }
       body.dataset.loaded = '1';
     }
