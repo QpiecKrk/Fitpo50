@@ -206,7 +206,7 @@ $total = array_sum($cnt);
                   </form>
                 <?php endif; ?>
                 <form method="POST" action="actions/delete.php" style="display:inline;"
-                      onsubmit="return confirm('Usunąć wpis „<?= addslashes(h($e['title'])) ?>"? Tej operacji nie można cofnąć.')">
+                      onsubmit="return confirm('Usunąć wpis „<?= addslashes(h($e['title'])) ?>”? Tej operacji nie można cofnąć.')">
                   <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
                   <input type="hidden" name="id" value="<?= $e['id'] ?>">
                   <button type="submit" class="btn-panel btn-panel--sm btn-panel--danger">Usuń</button>

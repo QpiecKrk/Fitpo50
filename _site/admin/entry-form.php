@@ -85,7 +85,7 @@ $internalLinks = getInternalArticleOptions();
       <?php endif; ?>
     </div>
 
-    <form method="POST" action="actions/save.php" enctype="multipart/form-data" id="entry-form">
+    <form method="POST" action="actions/save.php" enctype="multipart/form-data" id="entry-form" novalidate>
       <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
       <?php if ($editMode): ?>
         <input type="hidden" name="id" value="<?= $entry['id'] ?>">
@@ -130,7 +130,7 @@ $internalLinks = getInternalArticleOptions();
                       <option value="<?= h($link['href']) ?>"><?= h($link['label']) ?></option>
                     <?php endforeach; ?>
                   </select>
-                  <input type="url" id="entry-link-url" class="form-input" placeholder="Wklej link (https://... lub /sciezka.html)">
+                  <input type="text" id="entry-link-url" class="form-input" inputmode="url" autocomplete="off" placeholder="Wklej link (https://... lub /sciezka.html)">
                   <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="entry-insert-link-btn">Wstaw link</button>
                 </div>
 
@@ -152,7 +152,7 @@ $internalLinks = getInternalArticleOptions();
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip entry-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
             </div>
-            <textarea id="content" name="content" class="entry-content-input-hidden" hidden required><?= h($entry['content'] ?? '') ?></textarea>
+            <textarea id="content" name="content" class="entry-content-input-hidden" hidden><?= h($entry['content'] ?? '') ?></textarea>
           </div>
 
           <!-- Upload mediów -->
@@ -287,12 +287,12 @@ $internalLinks = getInternalArticleOptions();
           <?php if ($editMode): ?>
           <div class="sidebar-card sidebar-card--danger">
             <h3 class="sidebar-card__title sidebar-card__title--danger">Strefa niebezpieczna</h3>
-            <form method="POST" action="actions/delete.php"
-                  onsubmit="return confirm('Usunąć wpis „<?= addslashes(h($entry['title'])) ?>"?\nOperacja usunie stronę HTML i fistaszek z kalendarza.\nTej operacji nie można cofnąć.')">
-              <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
-              <input type="hidden" name="id" value="<?= $entry['id'] ?>">
-              <button type="submit" class="btn-panel btn-panel--danger btn-full">🗑 Usuń wpis</button>
-            </form>
+            <button
+              type="submit"
+              form="delete-entry-form"
+              class="btn-panel btn-panel--danger btn-full"
+              onclick="return confirm('Usunąć wpis „<?= addslashes(h($entry['title'])) ?>”?\nOperacja usunie stronę HTML i fistaszek z kalendarza.\nTej operacji nie można cofnąć.')"
+            >🗑 Usuń wpis</button>
           </div>
           <?php endif; ?>
 
@@ -302,13 +302,18 @@ $internalLinks = getInternalArticleOptions();
         <button type="submit" name="action" value="save" class="btn-panel btn-panel--primary btn-full">💾 Zapisz (roboczy)</button>
       </div>
     </form>
+    <?php if ($editMode): ?>
+      <form id="delete-entry-form" method="POST" action="actions/delete.php" style="display:none;">
+        <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
+        <input type="hidden" name="id" value="<?= $entry['id'] ?>">
+      </form>
+    <?php endif; ?>
 
   </div>
 </main>
 
 <script>
-// Podgląd i kumulacja wybranych plików (rozwiązanie dla mobile/aparatu)
-let accumulatedFiles = [];
+// Podgląd aktualnie wybranych plików (model jak w panelu newsów: bez kumulacji/DataTransfer)
 const fileInput = document.getElementById('media_files');
 const preview = document.getElementById('upload-preview');
 const form = document.getElementById('entry-form');
@@ -496,59 +501,12 @@ if (entryEditor && entryContentInput) {
   updateEntryToolbarState();
 }
 
-fileInput.addEventListener('change', function() {
-  const newFiles = Array.from(this.files);
-  
-  newFiles.forEach(file => {
-    // Prosty fingerprint do unikania duplikatów
-    const identifier = file.name + '-' + file.size + '-' + file.lastModified;
-    const exists = accumulatedFiles.find(f => (f.name + '-' + f.size + '-' + f.lastModified) === identifier);
-    
-    if (!exists) {
-      accumulatedFiles.push(file);
-    }
-  });
-
-  renderPreview();
-  
-  // Czyścimy input, aby kolejne kliknięcie i zrobienie tego samego zdjęcia/wybór z aparatu 
-  // znów wyzwoliło zdarzenie "change". Przed wysłaniem i tak wstrzykniemy accumulatedFiles.
-  this.value = '';
-});
-
-function renderPreview() {
+function renderPreview(files) {
+  if (!preview) return;
   preview.innerHTML = '';
-  accumulatedFiles.forEach((file, index) => {
+  (files || []).forEach((file) => {
     const item = document.createElement('div');
     item.className = 'upload-preview__item';
-    item.style.position = 'relative'; // dla przycisku usuwania
-
-    // Przycisk usuwania
-    const removeBtn = document.createElement('button');
-    removeBtn.innerHTML = '✕';
-    removeBtn.type = 'button';
-    removeBtn.style.position = 'absolute';
-    removeBtn.style.top = '4px';
-    removeBtn.style.right = '4px';
-    removeBtn.style.background = 'rgba(230, 48, 81, 0.9)'; // pasuje do kolorystyki panelu (danger)
-    removeBtn.style.color = '#fff';
-    removeBtn.style.border = 'none';
-    removeBtn.style.borderRadius = '50%';
-    removeBtn.style.width = '24px';
-    removeBtn.style.height = '24px';
-    removeBtn.style.cursor = 'pointer';
-    removeBtn.style.zIndex = '10';
-    removeBtn.style.display = 'flex';
-    removeBtn.style.alignItems = 'center';
-    removeBtn.style.justifyContent = 'center';
-    removeBtn.style.fontSize = '12px';
-    removeBtn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-    
-    removeBtn.onclick = (e) => {
-      e.preventDefault();
-      accumulatedFiles.splice(index, 1);
-      renderPreview();
-    };
 
     if (file.type.startsWith('image/')) {
       const reader = new FileReader();
@@ -559,8 +517,7 @@ function renderPreview() {
         
         const span = document.createElement('span');
         span.textContent = file.name;
-        
-        item.appendChild(removeBtn);
+
         item.appendChild(img);
         item.appendChild(span);
         preview.appendChild(item);
@@ -568,13 +525,19 @@ function renderPreview() {
       reader.readAsDataURL(file);
     } else {
       item.innerHTML = `<div class="media-file-icon">📎</div><span>${file.name}</span>`;
-      item.appendChild(removeBtn);
       preview.appendChild(item);
     }
   });
 }
 
+if (fileInput) {
+  fileInput.addEventListener('change', function() {
+    renderPreview(Array.from(this.files || []));
+  });
+}
+
 // Intercepcja wysyłania formularza
+if (form) {
 form.addEventListener('submit', function(event) {
   if (entryEditor && entryContentInput) {
     entryContentInput.value = entryEditor.innerHTML.trim();
@@ -586,12 +549,8 @@ form.addEventListener('submit', function(event) {
       return;
     }
   }
-
-  // Transfer zgromadzonych plików do natywnego inputa przed wysłaniem żądania
-  const dt = new DataTransfer();
-  accumulatedFiles.forEach(f => dt.items.add(f));
-  fileInput.files = dt.files;
 });
+}
 </script>
 
 </body>
