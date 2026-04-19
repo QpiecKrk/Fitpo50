@@ -1,7 +1,29 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-18T18:50:53+00:00",
+    "updatedAt": "2026-04-19T11:12:22+00:00",
     "items": [
+        {
+            "id": "news_49f6ec656bd7",
+            "title": "Białko przed snem może wspierać nocną regenerację mięśni",
+            "content_html": "<p><span>Badania pokazują, że spożycie ok. </span><span><span class=\"news-text-tone--4\"><span></span><span>30–40 g <a href=\"suplementacja-po-50.html\">białka</a> przed snem</span></span> może zwiększać nocną syntezę białek mięśniowych.</span><span><br>\n</span><span>Efekt utrzymuje się przez kilka godzin <a href=\"sen-po-50.html\">snu</a> i wspiera regenerację po treningu.</span></p><p><span>W części badań nie zaobserwowano negatywnego wpływu na jakość snu u zdrowych osób.</span><span><br></span><span><span class=\"news-text-tone--4\">Kluczowe</span> znaczenie ma jednak całkowita podaż białka w ciągu dnia i regularny trening – sam wieczorny posiłek nie zastąpi tych podstaw.</span></p><p><strong><span style=\"font-kerning: none;\"></span></strong></p><p><strong>Białko przed snem może wspierać regenerację mięśni, ale działa tylko jako element całości</strong><br><span></span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260419_111219_036ee3d2",
+            "image_alt": "Białko przed snem może wspierać nocną regenerację mięśni",
+            "sources": [
+                {
+                    "label": "Journal of Nutrition – Pre-sleep protein ingestion and muscle protein synthesis",
+                    "url": "https://academic.oup.com/jn/article/146/4/826/4584718"
+                },
+                {
+                    "label": "Medicine & Science in Sports & Exercise – Protein ingestion before sleep improves overnight recovery",
+                    "url": "https://journals.lww.com/acsm-msse/fulltext/2012/08000/protein_ingestion_before_sleep_improves.24.aspx"
+                }
+            ],
+            "created_at": "2026-04-19T11:12:19+00:00",
+            "updated_at": "2026-04-19T11:12:22+00:00",
+            "published_at": "2026-04-19T11:12:22+00:00"
+        },
         {
             "id": "news_d7eeb857ab60",
             "title": "LED nie leczy raka. Ale nauka właśnie zrobiła ważny krok",
