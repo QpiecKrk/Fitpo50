@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>O mnie - FitPo50</title>
   <meta name="description" content="Poznaj historię FitPo50. Ruch, zdrowie i konkretne doświadczenia po 50-tce bez marketingowego szumu.">
+  <script>
+    (function () {
+      try {
+        var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var h = new Date().getHours();
+        var isNight = (h >= 19 || h < 7);
+        if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+      } catch (_) {}
+    })();
+  </script>
   <style>
     :root {
       --bg-sand: #f4efe6;
@@ -29,6 +40,9 @@
       color: var(--ink);
       background: linear-gradient(180deg, #efe7da 0%, var(--bg-sand) 100%);
     }
+    html.night-shell body {
+      background: linear-gradient(180deg, #080d16 0%, #121b2a 100%);
+    }
 
     .shell {
       width: min(1260px, calc(100% - 28px));
@@ -38,6 +52,11 @@
       border-radius: 24px;
       box-shadow: var(--shadow);
       padding: 14px;
+    }
+    html.night-shell .shell {
+      background: #0f1623;
+      border-color: #2b3950;
+      box-shadow: 0 18px 38px rgba(6, 10, 18, 0.55);
     }
 
     .topbar {
@@ -711,7 +730,7 @@
           })
           .filter(Boolean)
           .filter((path) => path.endsWith('.html'))
-          .filter((path) => !['/index1.html', '/o-mnie.html', '/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/moje-sukcesy.html'].includes(path))
+          .filter((path) => !['/o-mnie.html', '/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/moje-sukcesy.html'].includes(path))
           .slice(0, 3);
 
         if (!paths.length) throw new Error('NO_READING_PATHS');
