@@ -467,8 +467,8 @@
     }
     .ticker-thumb {
       float: left;
-      width: 178px;
-      height: 126px;
+      width: 210px;
+      height: 150px;
       border-radius: 10px;
       object-fit: cover;
       border: 1px solid rgba(31, 43, 69, 0.12);
@@ -1044,7 +1044,14 @@
       .news-feed {
         height: auto;
         max-height: none;
-        overflow: visible;
+        overflow: hidden;
+      }
+      .news-feed .card-body {
+        min-height: 0;
+      }
+      .news-ticker {
+        max-height: min(62vh, 560px);
+        overflow-y: auto;
       }
       .knowledge-box,
       .knowledge-hub {
