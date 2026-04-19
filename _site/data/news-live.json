@@ -1,7 +1,29 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-19T11:12:22+00:00",
+    "updatedAt": "2026-04-19T20:03:54+00:00",
     "items": [
+        {
+            "id": "news_50c56934c74d",
+            "title": "Czy obcinanie węglowodanów niszczy hormony? Sprawdzamy fakty",
+            "content_html": "<p><span>Teza, że eliminacja <a href=\"apob-apoa-badania-cholesterol.html\">węglowodanów</a> „niszczy tarczycę i testosteron”, jest popularna w sieci, ale nauka pokazuje bardziej złożony obraz.</span></p><p><span>W badaniach klinicznych diety niskowęglowodanowe mogą prowadzić do </span><span><span class=\"news-text-tone--4\"><span></span><span>spadku aktywnej formy hormonu tarczycy (T3)</span><span>.</span></span> Nie zawsze oznacza to chorobę, ale jest to adaptacja organizmu do niższej podaży energii i glukozy.</span></p><p><span>Jeśli chodzi o <span class=\"news-text-tone--4\">testosteron</span> – wyniki są mieszane. U części mężczyzn bardzo niska podaż węglowodanów może obniżać jego poziom, zwłaszcza przy dużym stresie <a href=\"trening-3x30-dla-50-plus.html\">treningowym</a>. Jednak nie jest to reguła i zależy od całkowitej kaloryczności, białka i stylu życia.</span></p><p><span>Organizm faktycznie potrafi produkować glukozę z białka (<span class=\"news-text-tone--3\">glukoneogeneza</span>), ale nie jest to wyłącznie „<span class=\"news-text-tone--4\">awaryjny tryb</span>” — to naturalny proces, który zachodzi również przy normalnej diecie.</span></p><p><span>Węglowodany pozostają ważnym paliwem dla <a href=\"silownia-dla-ludzi.html\">mózgu</a> i układu nerwowego, ale ich całkowite wykluczenie nie jest automatycznie szkodliwe dla każdego. Kluczowe znaczenie ma kontekst: poziom aktywności, zdrowie metaboliczne i jakość diety.</span></p><p><strong><span style=\"font-kerning: none;\"></span></strong></p><p><strong>To nie same węglowodany ani ich brak decydują o zdrowiu hormonalnym — kluczowy jest całkowity bilans energetyczny, stres i stan metaboliczny organizmu.</strong><br><span></span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260419_200351_c2e274aa",
+            "image_alt": "Węglowodany",
+            "sources": [
+                {
+                    "label": "Journal of Applied Physiology – Low carbohydrate diets and testosterone",
+                    "url": "https://journals.physiology.org/doi/full/10.1152/japplphysiol.00367.2022"
+                },
+                {
+                    "label": "Nutrition & Metabolism – Gluconeogenesis and metabolic adaptation",
+                    "url": "https://nutritionandmetabolism.biomedcentral.com/articles/10.1186/1743-7075-2-34"
+                }
+            ],
+            "created_at": "2026-04-19T20:03:51+00:00",
+            "updated_at": "2026-04-19T20:03:54+00:00",
+            "published_at": "2026-04-19T20:03:54+00:00"
+        },
         {
             "id": "news_49f6ec656bd7",
             "title": "Białko przed snem może wspierać nocną regenerację mięśni",
