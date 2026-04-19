@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FitPo50 — Prototyp Bento (index1)</title>
   <meta name="robots" content="noindex,nofollow">
+  <script>
+    (function () {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var forcedDark = p.get('theme') === 'dark';
+        var forcedLight = p.get('theme') === 'light';
+        if (forcedDark) document.documentElement.classList.add('theme-dark');
+        if (forcedLight) document.documentElement.classList.add('theme-light');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var h = new Date().getHours();
+        var isNight = (h >= 19 || h < 7);
+        if ((forcedDark || prefersDark || isNight) && !forcedLight) {
+          document.documentElement.classList.add('night-shell');
+        }
+      } catch (_) {}
+    })();
+  </script>
   <style>
     :root {
       --bg-sand: #f4efe6;
@@ -21,6 +38,24 @@
       --radius-lg: 16px;
       --shadow: 0 10px 24px rgba(31, 43, 69, 0.12);
     }
+    @media (prefers-color-scheme: dark) {
+      html:not(.theme-light) {
+        --bg-sand: #111723;
+        --bg-cream: #161f2d;
+        --line: #2a3a52;
+        --ink: #e8eef8;
+        --ink-soft: #b6c4d9;
+        --shadow: 0 14px 34px rgba(3, 8, 16, 0.55);
+      }
+    }
+    html.theme-dark {
+      --bg-sand: #111723;
+      --bg-cream: #161f2d;
+      --line: #2a3a52;
+      --ink: #e8eef8;
+      --ink-soft: #b6c4d9;
+      --shadow: 0 14px 34px rgba(3, 8, 16, 0.55);
+    }
 
     * { box-sizing: border-box; }
     body {
@@ -29,6 +64,9 @@
       color: var(--ink);
       background: linear-gradient(180deg, #efe7da 0%, var(--bg-sand) 100%);
       overflow-x: hidden;
+    }
+    html.night-shell body {
+      background: linear-gradient(180deg, #080d16 0%, #121b2a 100%);
     }
 
     .shell {
@@ -39,6 +77,11 @@
       border-radius: 24px;
       box-shadow: var(--shadow);
       padding: 14px;
+    }
+    html.night-shell .shell {
+      background: #0f1623;
+      border-color: #2b3950;
+      box-shadow: 0 18px 38px rgba(6, 10, 18, 0.55);
     }
 
     .topbar {
@@ -57,6 +100,28 @@
       min-height: 60px;
       display: flex;
       align-items: center;
+    }
+    html.theme-dark .brand,
+    html.theme-dark .menu,
+    html.theme-dark .searchbar {
+      background: #1d2738;
+      border-color: #324661;
+    }
+    html.theme-dark .searchbar input {
+      color: #dce8f7;
+    }
+    html.theme-dark .menu a {
+      color: #c7d7ee;
+    }
+    @media (prefers-color-scheme: dark) {
+      html:not(.theme-light) .brand,
+      html:not(.theme-light) .menu,
+      html:not(.theme-light) .searchbar {
+        background: #1d2738;
+        border-color: #324661;
+      }
+      html:not(.theme-light) .searchbar input { color: #dce8f7; }
+      html:not(.theme-light) .menu a { color: #c7d7ee; }
     }
 
     .brand {
@@ -150,6 +215,16 @@
       background: var(--white);
       min-height: 130px;
       position: relative;
+    }
+    html.theme-dark .card {
+      background: #1b2638;
+      border-color: #324661;
+    }
+    @media (prefers-color-scheme: dark) {
+      html:not(.theme-light) .card {
+        background: #1b2638;
+        border-color: #324661;
+      }
     }
 
     .card.sage { background: linear-gradient(180deg, #d7e0d3 0%, #c8d4c2 100%); }
