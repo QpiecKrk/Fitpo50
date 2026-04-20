@@ -493,6 +493,23 @@
       font-size: .9rem;
       cursor: pointer;
     }
+    .contact-form button[disabled] {
+      opacity: .65;
+      cursor: wait;
+    }
+    .contact-status {
+      margin-top: 6px;
+      min-height: 1.2em;
+      font-size: .84rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.92);
+    }
+    .contact-status--error {
+      color: #ffd1d1;
+    }
+    .contact-status--success {
+      color: #d8ffe5;
+    }
     .contact-mail {
       margin-top: 8px;
       font-size: .82rem;
@@ -677,12 +694,14 @@
           <aside class="contact-bento" data-title="kontakt">
             <h3>Kontakt</h3>
             <p>Masz pytanie, temat artykułu albo chcesz współpracować? Napisz bezpośrednio.</p>
-            <form class="contact-form" id="contactForm">
-              <input type="text" id="contactName" placeholder="Twoje imię">
-              <input type="email" id="contactEmail" placeholder="Twój e-mail">
-              <textarea id="contactMessage" placeholder="Twoja wiadomość..." required></textarea>
+            <form class="contact-form" id="contactForm" action="contact-send.php" method="post" novalidate>
+              <input type="text" id="contactName" name="name" placeholder="Twoje imię">
+              <input type="email" id="contactEmail" name="email" placeholder="Twój e-mail">
+              <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">
+              <textarea id="contactMessage" name="message" placeholder="Twoja wiadomość..." required></textarea>
               <button type="submit">Wyślij wiadomość</button>
             </form>
+            <div id="contactStatus" class="contact-status" aria-live="polite"></div>
             <div class="contact-mail">E-mail: fitpo50tce@gmail.com</div>
           </aside>
 
@@ -848,18 +867,53 @@
 
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-      contactForm.addEventListener('submit', (event) => {
+      const contactStatus = document.getElementById('contactStatus');
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const setStatus = (text, type) => {
+        if (!contactStatus) return;
+        contactStatus.textContent = text || '';
+        contactStatus.classList.remove('contact-status--error', 'contact-status--success');
+        if (type) contactStatus.classList.add(`contact-status--${type}`);
+      };
+
+      contactForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         const name = (document.getElementById('contactName')?.value || '').trim();
         const email = (document.getElementById('contactEmail')?.value || '').trim();
         const message = (document.getElementById('contactMessage')?.value || '').trim();
-        if (!message) return;
+        if (!message) {
+          setStatus('Wpisz treść wiadomości.', 'error');
+          return;
+        }
 
-        const subject = encodeURIComponent(`Kontakt z formularza FitPo50${name ? ` - ${name}` : ''}`);
-        const body = encodeURIComponent(
-          `${name ? `Imię: ${name}\n` : ''}${email ? `E-mail: ${email}\n` : ''}\nWiadomość:\n${message}`
-        );
-        window.location.href = `mailto:fitpo50tce@gmail.com?subject=${subject}&body=${body}`;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Wysyłanie...';
+        }
+        setStatus('Wysyłanie wiadomości...', null);
+
+        try {
+          const response = await fetch(contactForm.getAttribute('action') || 'contact-send.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ name, email, message, website: '' })
+          });
+
+          const payload = await response.json().catch(() => ({}));
+          if (!response.ok || !payload.ok) {
+            throw new Error(payload.error || 'Nie udało się wysłać wiadomości.');
+          }
+
+          contactForm.reset();
+          setStatus('Wiadomość wysłana. Dziękuję!', 'success');
+        } catch (_) {
+          setStatus('Nie udało się wysłać wiadomości. Napisz proszę na: fitpo50tce@gmail.com', 'error');
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Wyślij wiadomość';
+          }
+        }
       });
     }
 
