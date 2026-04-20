@@ -170,6 +170,17 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 - **Spojnosc kolorow etykiet kategorii:**
   - mapowanie kolorow etykiet jest stale na wszystkich listach/kafelkach,
   - nie dodajemy inline kolorow sprzecznych z mapowaniem kategorii.
+  - standard mapowania (obowiazkowy we wszystkich sekcjach "Czytelnia", karuzelach i listach):
+    - `Ruch` -> `#2f6f99` (niebieski), tekst `#ffffff`,
+    - `Jedzenie` -> `rgba(201, 109, 49, 0.94)`, tekst `#ffffff`,
+    - `Zdrowie` -> `rgba(228, 188, 74, 0.96)`, tekst `#4e3a04`,
+    - `Ciekawe` -> `rgba(67, 149, 84, 0.94)`, tekst `#ffffff`.
+  - etykieta `Ruch` ma byc zawsze niebieska; nie stosujemy alternatywnych odcieni dla tej kategorii.
+- **Tryb nocny tła (kluczowa zasada UI):**
+  - Ciemne oba tła (`body` + `shell`) uruchamiamy **wylacznie na telefonach komorkowych**.
+  - Na desktopie i tabletach pozostaje jasne tlo, niezaleznie od pory dnia i `prefers-color-scheme`.
+  - Menu/topbar nie zmienia mechaniki ani ukladu z powodu tej reguly.
+  - Regula obowiazuje na wszystkich stronach w nowym ukladzie (`index`, `o-mnie`, `porady`, `rusz-sie`, `jedzenie`, `zdrowie`, `ciekawe`, `dziennik`) oraz przy kazdej nowej podstronie.
 - **Admin i media (Moje Sukcesy):**
   - panel obsluguje video z YouTube oraz upload video,
   - trzeba respektowac orientacje pion/poziom (bez obcinania kadrów),

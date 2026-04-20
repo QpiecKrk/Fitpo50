@@ -199,10 +199,12 @@ function resolveGitSyncPaths(string $repoRoot, array $groups): array {
         ],
         'sukcesy' => [
             'calendar-entries.json',
+            'dziennik.html',
             'moje-sukcesy.html',
             'sitemap.xml',
             'sukcesy',
             '_site/calendar-entries.json',
+            '_site/dziennik.html',
             '_site/moje-sukcesy.html',
             '_site/sitemap.xml',
             '_site/sukcesy',

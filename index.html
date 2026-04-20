@@ -751,7 +751,7 @@
       padding: 5px 8px;
       border-radius: 999px;
     }
-    .read-card__badge--ruch { background: rgba(111, 200, 186, 0.96); color: #173a39; }
+    .read-card__badge--ruch { background: #2f6f99; color: #ffffff; }
     .read-card__badge--jedzenie { background: rgba(201, 109, 49, 0.94); }
     .read-card__badge--zdrowie { background: rgba(228, 188, 74, 0.96); color: #4e3a04; }
     .read-card__badge--ciekawe { background: rgba(67, 149, 84, 0.94); }
@@ -1230,7 +1230,7 @@
         <a href="jedzenie.html">Jedzenie</a>
         <a href="zdrowie.html">Zdrowie</a>
         <a href="ciekawe.html">Ciekawe</a>
-        <a href="moje-sukcesy.html">Dziennik</a>
+        <a href="dziennik.html">Dziennik</a>
         <a href="o-mnie.html">O mnie</a>
       </nav>
       <div class="searchbar">
@@ -1794,7 +1794,7 @@
           })
           .filter(Boolean)
           .filter((path) => path.endsWith('.html'))
-          .filter((path) => !['/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/moje-sukcesy.html'].includes(path))
+          .filter((path) => !['/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/dziennik.html'].includes(path))
           .slice(0, 36);
 
         const faqCandidates = [];
@@ -1867,7 +1867,7 @@
           })
           .filter(Boolean)
           .filter((path) => path.endsWith('.html'))
-          .filter((path) => !['/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/moje-sukcesy.html'].includes(path));
+          .filter((path) => !['/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/dziennik.html'].includes(path));
 
         const latestPath = paths[0];
         if (!latestPath) throw new Error('NO_ARTICLES');
@@ -1979,7 +1979,7 @@
           })
           .filter(Boolean)
           .filter((path) => path.endsWith('.html'))
-          .filter((path) => !['/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/moje-sukcesy.html'].includes(path))
+          .filter((path) => !['/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/dziennik.html'].includes(path))
           .slice(0, 3);
 
         if (!paths.length) throw new Error('NO_READING_PATHS');

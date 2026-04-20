@@ -19,7 +19,13 @@ try {
     $stats[] = "Wpisy o statusie 'published' w bazie: $publishedCount";
 
     // Statystyki Kalendarza
-    $calFile = SITE_ROOT . 'moje-sukcesy.html';
+    $calFile = SITE_ROOT . 'dziennik.html';
+    if (!file_exists($calFile)) {
+        $legacyCalFile = SITE_ROOT . 'moje-sukcesy.html';
+        if (file_exists($legacyCalFile)) {
+            $calFile = $legacyCalFile;
+        }
+    }
     $calContent = file_get_contents($calFile);
     preg_match('/\/\/ ENTRIES_START\s*(?:let|const)\s+userEntries\s*=\s*(\[[\s\S]*?\]);\s*\/\/ ENTRIES_END/', (string)$calContent, $m);
     $currentCalCount = 0;
@@ -27,7 +33,7 @@ try {
         $decoded = json_decode($m[1], true);
         $currentCalCount = is_array($decoded) ? count($decoded) : 0;
     }
-    $stats[] = "Aktualnie w moje-sukcesy.html: $currentCalCount dni";
+    $stats[] = "Aktualnie w dziennik.html: $currentCalCount dni";
 
     // Statystyki Sitemap
     $sitemapFile = SITE_ROOT . 'sitemap.xml';
@@ -51,7 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $synced = true;
         
         // Weryfikacja po zapisie
-        $calContentAfter = file_get_contents(SITE_ROOT . 'moje-sukcesy.html');
+        $calFileAfter = SITE_ROOT . 'dziennik.html';
+        if (!file_exists($calFileAfter)) {
+            $legacyCalFile = SITE_ROOT . 'moje-sukcesy.html';
+            if (file_exists($legacyCalFile)) {
+                $calFileAfter = $legacyCalFile;
+            }
+        }
+        $calContentAfter = file_get_contents($calFileAfter);
         preg_match('/\/\/ ENTRIES_START\s*(?:let|const)\s+userEntries\s*=\s*(\[[\s\S]*?\]);\s*\/\/ ENTRIES_END/', (string)$calContentAfter, $m);
         $finalCalCount = 0;
         if (isset($m[1])) {

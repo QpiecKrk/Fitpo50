@@ -637,6 +637,7 @@ function getInternalArticleOptions(): array {
         'jedzenie.html',
         'zdrowie.html',
         'ciekawe.html',
+        'dziennik.html',
         'moje-sukcesy.html',
         'google4a31b58b207723ed.html',
     ];

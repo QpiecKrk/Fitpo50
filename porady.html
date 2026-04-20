@@ -27,6 +27,17 @@
     }
   }, { once: true });
 </script>
+<script>
+  (function () {
+    try {
+      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var h = new Date().getHours();
+      var isNight = (h >= 19 || h < 7);
+      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+    } catch (_) {}
+  })();
+</script>
 <title>Porady FitPo50 | Artykuły o formie po 50-tce</title>
 <meta name="description" content="Porady FitPo50: artykuły o treningu, diecie, zdrowiu i sprawności po 50-tce. Przeglądaj tematy i znajdź treści dla siebie.">
 <meta name="robots" content="index,follow">
@@ -294,13 +305,155 @@
 <link rel="stylesheet" href="./style.css?v=1.2">
 
 <style>
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #efe7da 0%, #f4efe6 100%);
+}
+
+.shell {
+  width: min(1260px, calc(100% - 28px));
+  margin: 18px auto 30px;
+  background: #fbf7f0;
+  border: 1px solid #d7cebf;
+  border-radius: 24px;
+  box-shadow: 0 10px 24px rgba(31, 43, 69, 0.12);
+  padding: 14px;
+}
+
+html.night-shell body {
+  background: linear-gradient(180deg, #080d16 0%, #121b2a 100%);
+}
+
+html.night-shell .shell {
+  background: #0f1623;
+  border-color: #2b3950;
+  box-shadow: 0 18px 38px rgba(6, 10, 18, 0.55);
+}
+
+@media (max-width: 820px) and (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(180deg, #080d16 0%, #121b2a 100%);
+  }
+  .shell {
+    background: #0f1623;
+    border-color: #2b3950;
+    box-shadow: 0 18px 38px rgba(6, 10, 18, 0.55);
+  }
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr) 220px;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.brand,
+.menu,
+.searchbar {
+  background: #f7f1e7;
+  border: 1px solid #d7cebf;
+  border-radius: 14px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  padding: 0 16px;
+  gap: 10px;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
+.brand__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.02;
+}
+
+.brand__name {
+  color: #d57a4e;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 1.02rem;
+}
+
+.brand__tagline {
+  color: var(--color-text);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
+
+.menu {
+  padding: 0 16px;
+  gap: 18px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.menu a {
+  color: inherit;
+  text-decoration: none;
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.menu a:hover,
+.menu a.is-active {
+  color: var(--color-text);
+  border-bottom-color: #b86b4f;
+}
+
+.searchbar {
+  padding: 0 12px;
+  gap: 8px;
+}
+
+.searchbar input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: 0.98rem;
+  color: var(--color-text);
+}
+
+main {
+  display: grid;
+  gap: 12px;
+}
+
+main .container {
+  width: 100%;
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .porady-hero {
   position: relative;
-  min-height: 52vh;
+  height: 290px;
+  min-height: 290px;
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: var(--space-20);
+  padding-top: 0;
+  border-radius: 22px;
 }
 
 .porady-hero__bg {
@@ -328,10 +481,10 @@
   z-index: 1;
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-6);
+  gap: 10px;
   align-items: center;
-  padding-top: var(--space-10);
-  padding-bottom: var(--space-10);
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .porady-hero__intro {
@@ -355,7 +508,7 @@
 
 .porady-hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.35rem, 4.8vw, 4.2rem);
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
   line-height: 0.98;
   letter-spacing: -0.04em;
   margin-bottom: var(--space-4);
@@ -363,11 +516,11 @@
 }
 
 .porady-hero__subtitle {
-  font-size: 0.98rem;
-  line-height: 1.65;
+  font-size: 0.9rem;
+  line-height: 1.45;
   max-width: 58ch;
   color: rgba(255, 255, 255, 0.86);
-  margin-bottom: var(--space-6);
+  margin-bottom: 0;
 }
 
 .porady-hero__stats {
@@ -406,17 +559,16 @@
 }
 
 .catalog-toolbar {
-  position: sticky;
-  top: 78px;
-  z-index: 20;
-  width: min(1120px, calc(100% - 32px));
-  margin: calc(var(--space-8) * -1) auto var(--space-8);
-  padding: var(--space-4);
+  position: static;
+  z-index: auto;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(14, 143, 170, 0.14);
-  box-shadow: 0 14px 28px rgba(11, 24, 33, 0.08);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(160deg, #d38a6c 0%, #b86b4f 100%);
+  border: 1px solid rgba(113, 58, 41, 0.38);
+  box-shadow: 0 8px 24px rgba(31, 43, 69, 0.08);
+  color: #1f2b45;
 }
 
 [data-theme="dark"] .catalog-toolbar {
@@ -450,38 +602,71 @@
   min-height: 40px;
   padding: 0 16px;
   border-radius: 999px;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
-  color: var(--color-text);
+  border: 2px solid transparent;
   font-size: 0.84rem;
-  font-weight: 600;
-  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
 }
 
-.catalog-filter:hover,
+.catalog-filter[data-category-filter="all"] {
+  background: rgba(111, 200, 186, 0.96);
+  border-color: rgba(56, 129, 117, 0.78);
+  color: #173a39;
+}
+
+.catalog-filter[data-category-filter="ruch"] {
+  background: #2f6f99;
+  border-color: #1f4f70;
+  color: #ffffff;
+}
+
+.catalog-filter[data-category-filter="jedzenie"] {
+  background: rgba(201, 109, 49, 0.94);
+  border-color: rgba(138, 64, 18, 0.75);
+  color: #ffffff;
+}
+
+.catalog-filter[data-category-filter="zdrowie"] {
+  background: rgba(228, 188, 74, 0.96);
+  border-color: rgba(150, 118, 23, 0.76);
+  color: #4e3a04;
+}
+
+.catalog-filter[data-category-filter="ciekawe"] {
+  background: rgba(67, 149, 84, 0.94);
+  border-color: rgba(42, 100, 54, 0.78);
+  color: #ffffff;
+}
+
+.catalog-filter:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
 .catalog-filter.is-active {
-  background: rgba(14, 143, 170, 0.08);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.82), 0 5px 14px rgba(12, 19, 33, 0.2);
+  filter: saturate(1.06);
 }
 
 .catalog-sort {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--color-text-muted);
+  color: #f9ece2;
   font-size: 0.84rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .catalog-sort select {
   min-height: 40px;
   padding: 0 14px;
   border-radius: 999px;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
-  color: var(--color-text);
+  border: 2px solid rgba(255, 255, 255, 0.46);
+  background: rgba(255, 255, 255, 0.96);
+  color: #1f2b45;
   font-size: 0.84rem;
+  font-weight: 800;
 }
 
 .catalog-toolbar__summary {
@@ -489,12 +674,19 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
-  color: var(--color-text-muted);
+  color: #f5e6dc;
   font-size: 0.84rem;
 }
 
 .catalog-toolbar__summary strong {
-  color: var(--color-text);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+}
+
+.catalog-toolbar__summary span,
+.catalog-sort span {
+  color: #f5e6dc;
+  font-weight: 700;
 }
 
 .search-bar {
@@ -585,7 +777,15 @@
   overflow: hidden;
   width: 100%;
   position: relative;
-  padding-bottom: var(--space-8);
+  padding: var(--space-4);
+  border-radius: 22px;
+  border: 1px solid #d7cebf;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 42%),
+    linear-gradient(160deg, #f7f1e7 0%, #f0eadf 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-6);
 }
 
 .articles-grid-preview.carousel-track {
@@ -635,20 +835,20 @@
   flex-direction: column;
   min-height: 100%;
   min-width: 0;
-  padding: var(--space-4);
+  padding: var(--space-4) var(--space-4) var(--space-5);
   text-decoration: none;
   color: inherit;
-  background: var(--color-bg);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  background: linear-gradient(180deg, #ffffff 0%, #fdfaf5 100%);
+  border-radius: 16px;
+  border: 1px solid #d7cebf;
+  box-shadow: 0 8px 18px rgba(31, 43, 69, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .article-index-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(14, 143, 170, 0.15) !important;
-  border-color: var(--color-primary-light) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px rgba(47, 111, 153, 0.15) !important;
+  border-color: rgba(47, 111, 153, 0.35) !important;
 }
 
 .article-index-card[hidden] {
@@ -667,9 +867,9 @@
 .article-index-card__label {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 999px;
-  background: var(--color-accent);
+  background: #2f6f99;
   color: white;
   font-size: 0.72rem;
   font-weight: 700;
@@ -690,7 +890,7 @@
 
 .article-index-card__title {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.06rem;
   line-height: 1.25;
   margin-bottom: var(--space-2);
   display: -webkit-box;
@@ -718,9 +918,11 @@
   align-items: center;
   gap: 8px;
   margin-top: auto;
-  font-size: 0.86rem;
-  font-weight: 700;
-  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #2f6f99;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .article-index-card__cta svg {
@@ -734,7 +936,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-8);
-  margin-top: var(--space-12);
+  margin-top: var(--space-8);
 }
 
 .carousel-indicator {
@@ -775,12 +977,17 @@
 
 .search-results-strip {
   background: var(--color-surface);
-  padding-top: var(--space-5);
+  padding-top: 0;
   display: none;
 }
 
 .search-results-strip.is-visible {
   display: block;
+}
+
+.catalog-section {
+  padding: 0;
+  margin: 0;
 }
 
 .search-match {
@@ -818,7 +1025,185 @@
   font-size: 1.5rem;
 }
 
+.catalog-bento {
+  border: 1px solid #d7cebf;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(155deg, #f3e2bd 0%, #e8cc95 100%);
+  border: 1px solid rgba(168, 125, 62, 0.32);
+  box-shadow: 0 8px 24px rgba(31, 43, 69, 0.08);
+  padding: 16px;
+}
+
+.carousel-bento {
+  border: 1px solid rgba(56, 103, 86, 0.36);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(120% 120% at 10% 0%, rgba(205, 235, 198, 0.42) 0%, rgba(205, 235, 198, 0) 55%),
+    linear-gradient(145deg, #9acb9f 0%, #74b297 48%, #5a9886 100%);
+  box-shadow: 0 8px 24px rgba(31, 43, 69, 0.08);
+  padding: 16px;
+}
+
+.reading-room {
+  margin-top: 12px;
+  border-radius: var(--radius-lg);
+  border: 1px solid #d7cebf;
+  background: linear-gradient(155deg, #f3efe6 0%, #ebe4d5 100%);
+  padding: 16px;
+}
+
+.reading-room__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.reading-room__head h3 {
+  margin: 0;
+  font-size: clamp(1.22rem, 2vw, 1.58rem);
+  color: #1f2b45;
+}
+
+.reading-room__head .title-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reading-room__head .title-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+.reading-room__head p {
+  margin: 0;
+  color: #34415d;
+  font-weight: 600;
+  max-width: 720px;
+}
+
+.reading-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.read-card {
+  background: #fff;
+  border: 1px solid rgba(31, 43, 69, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+  box-shadow: 0 8px 24px rgba(31, 43, 69, 0.08);
+}
+
+.read-card__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #d9d9d9;
+}
+
+.read-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.001);
+  transition: transform 220ms ease;
+}
+
+.read-card:hover .read-card__media img {
+  transform: scale(1.03);
+}
+
+.read-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  background: rgba(19, 39, 89, 0.9);
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 800;
+  padding: 5px 8px;
+  border-radius: 999px;
+}
+
+.read-card__badge--ruch { background: #2f6f99; color: #ffffff; }
+.read-card__badge--jedzenie { background: rgba(201, 109, 49, 0.94); }
+.read-card__badge--zdrowie { background: rgba(228, 188, 74, 0.96); color: #4e3a04; }
+.read-card__badge--ciekawe { background: rgba(67, 149, 84, 0.94); }
+
+.read-card__body {
+  padding: 12px 13px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+
+.read-card h4 {
+  margin: 0;
+  font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+  line-height: 1.15;
+  color: #1f2b45;
+  text-wrap: balance;
+}
+
+.read-card p {
+  margin: 0;
+  color: #34425f;
+  line-height: 1.34;
+  font-size: 0.95rem;
+}
+
+.read-card__cta {
+  margin-top: auto;
+  align-self: flex-start;
+  text-decoration: none;
+  font-weight: 800;
+  color: #fff;
+  background: #2f6f99;
+  border-radius: 999px;
+  padding: 8px 13px;
+  line-height: 1;
+}
+
+.read-card--loading {
+  border-style: dashed;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 16px;
+  color: #34415d;
+  font-weight: 700;
+  min-height: 220px;
+}
+
+@media (max-width: 960px) {
+  .reading-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 980px) {
+  .topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .searchbar {
+    display: none;
+  }
+
   .porady-collection__top {
     justify-items: center;
   }
@@ -826,12 +1211,13 @@
 
 @media (max-width: 640px) {
   .porady-hero {
-    min-height: auto;
+    height: 290px;
+    min-height: 290px;
   }
 
   .porady-hero__content {
-    padding-top: var(--space-14);
-    padding-bottom: var(--space-12);
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 
   .porady-stat {
@@ -850,7 +1236,7 @@
 
   .catalog-toolbar {
     top: 72px;
-    width: min(1120px, calc(100% - 20px));
+    width: 100%;
     padding: var(--space-3);
   }
 
@@ -867,6 +1253,13 @@
     width: 100%;
   }
 
+  .shell {
+    width: calc(100% - 16px);
+    margin: 8px auto 18px;
+    padding: 10px;
+    border-radius: 16px;
+  }
+
   .article-index-card {
     padding: var(--space-4);
   }
@@ -878,43 +1271,41 @@
   .article-index-card__meta {
     font-size: 0.78rem;
   }
+
+  .reading-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 <link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
 </head>
 <body>
+<div class="shell">
 
-<header class="header" id="top">
-  <div class="container header__inner">
-    <a href="index.html#top" class="logo" aria-label="FitPo50 — strona główna">
-      <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img" width="48" height="48">
-    </a>
-    <nav class="header__desktop-nav" aria-label="Nawigacja pulpit">
-      <a href="index.html#o-nas" class="nav__link">O mnie</a>
-      <a href="index.html#news" class="nav__link">NEWS</a>
-      <a href="index.html#baza-wiedzy" class="nav__link">Baza wiedzy</a>
-      <a href="porady.html" class="nav__link">Porady</a>
-      <a href="moje-sukcesy.html" class="nav__link">Moje Sukcesy</a>
-      <a href="https://www.instagram.com/fitpo50" class="nav__link" target="_blank" rel="noopener noreferrer">Instagram</a>
-    </nav>
-
-    
-
-    
-    </div>
-<nav class="header__scroll" aria-label="Kategorie mobilne">
-  <div class="header__scroll-inner">
-    <a href="index.html" class="header__scroll-link ">Główna</a>
-    <a href="index.html#news" class="header__scroll-link">NEWS</a>
-    <a href="index.html#baza-wiedzy" class="header__scroll-link">Baza wiedzy</a>
-    <a href="porady.html" class="header__scroll-link header__scroll-link--active">Porady</a>
-    <a href="moje-sukcesy.html" class="header__scroll-link">Moje Sukcesy</a>
-    <a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer" class="header__scroll-link">Instagram</a>
-  </div>
-</nav>
+<header class="topbar">
+  <a href="index.html" class="brand" aria-label="FitPo50 — strona główna">
+    <img class="brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" onerror="this.style.display='none'">
+    <span class="brand__text">
+      <span class="brand__name">FitPo50</span>
+      <span class="brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span>
+    </span>
+  </a>
+  <nav class="menu" aria-label="Menu główne">
+    <a href="index.html">Home</a>
+    <a href="porady1.html" class="is-active">Porady</a>
+    <a href="index.html#news">News</a>
+    <a href="rusz-sie.html">Ruch</a>
+    <a href="jedzenie.html">Jedzenie</a>
+    <a href="zdrowie.html">Zdrowie</a>
+    <a href="ciekawe.html">Ciekawe</a>
+    <a href="dziennik.html">Dziennik</a>
+    <a href="o-mnie.html">O mnie</a>
+  </nav>
+  <label class="searchbar" aria-label="Szukaj artykułów">
+    <span aria-hidden="true">🔎</span>
+    <input type="search" placeholder="Szukaj porad...">
+  </label>
 </header>
-
-
 
 <main>
   <section class="porady-hero">
@@ -985,19 +1376,17 @@
     </div>
   </section>
 
-  <section class="catalog-section section-padding" id="katalog">
+  <section class="catalog-section" id="katalog">
     <div class="container">
       
-      <div class="catalog-header reveal" style="text-align: center; margin-bottom: var(--space-8);">
+      <div class="catalog-header catalog-bento reveal" style="text-align: center; margin-bottom: 12px;">
         <div class="catalog-header__info">
           <h2 class="catalog-header__title" data-catalog-summary style="margin-inline: auto;">34 artykuły we wszystkich kategoriach</h2>
           <div class="section-header__line" style="margin-inline: auto;"></div>
           <p class="catalog-header__desc" style="max-width: 800px; margin-inline: auto;">Zebrane w jednym miejscu, żeby łatwo znaleźć temat, do którego chcesz wrócić albo który chcesz przeczytać po raz pierwszy.</p>
         </div>
-
-        <a href="index.html#baza-wiedzy" class="btn btn--primary" style="background-color: #0E8FAA; color: #FFFFFF; border: none;">Wróć do strony głównej <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
       </div>
-      <!-- Catalog results -->
+      <div class="carousel-bento">
       <div class="carousel-viewport">
         <div class="articles-grid-preview carousel-track" data-article-results>
           <!-- Artykuł 34: VO2 max -->
@@ -1371,6 +1760,7 @@
           DALEJ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
         </button>
       </div>
+      </div>
 
       <div class="search-empty" data-search-empty hidden>
         <strong>Brak wyników</strong>
@@ -1378,53 +1768,144 @@
       </div>
     </div>
   </section>
+
+  <section>
+    <div class="container">
+      <section id="czytelnia" class="reading-room" data-title="czytelnia trzy ostatnie artykuly">
+        <div class="reading-room__head">
+          <h3>
+            <span class="title-with-icon">
+              <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18v16H6.5A2.5 2.5 0 0 0 4 21Z"></path>
+                <path d="M7 7h8M7 11h8M7 15h5"></path>
+              </svg>
+              Czytelnia
+            </span>
+          </h3>
+          <p>Duża garść wiedzy podana prosto, konkretnie i po ludzku.</p>
+        </div>
+        <div class="reading-grid" id="readingRoomGrid" data-random-related-grid>
+          <article class="read-card read-card--loading">Ładowanie najnowszych artykułów...</article>
+          <article class="read-card read-card--loading">Ładowanie najnowszych artykułów...</article>
+          <article class="read-card read-card--loading">Ładowanie najnowszych artykułów...</article>
+        </div>
+      </section>
+    </div>
+  </section>
 </main>
 
-<footer class="footer" id="footer">
-  <div class="container">
-    <div class="footer__inner">
-      <div class="footer__brand">
-        <a href="index.html#top" class="logo" aria-label="FitPo50 — strona główna">
-          <img src="./assets/logo.jpg" alt="FitPo50" class="logo__img logo__img--footer" width="72" height="72">
-        </a>
-        <p class="footer__brand-desc">Praktyczna wiedza o treningu, diecie i regeneracji dla osób po 50‑tce. Od Grześka — nie trenera, nie lekarza, po prostu kogoś, kto też ćwiczy.</p>
-      </div>
-
-      <div>
-        <h3 class="footer__heading">Nawigacja</h3>
-        <ul class="footer__links" role="list">
-          <li><a href="index.html">Strona Główna</a></li>
-          <li><a href="index.html#o-nas">O mnie</a></li>
-          <li><a href="index.html#baza-wiedzy">Baza wiedzy</a></li>
-          <li><a href="porady.html" style="color: var(--color-primary);">Porady</a></li>
-          <li><a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="footer__heading">Czytelnia</h3>
-        <ul class="footer__links" role="list">
-          <li><a href="jak-zaczac-na-silowni-po-50.html">Jak zacząć na siłowni po 50-tce</a></li>
-          <li><a href="suplementacja-po-50.html">Białko i kreatyna po 50-tce</a></li>
-          <li><a href="dieta-po-50.html">Dieta po 50-tce kontra nawyki</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer__bottom">
-      <p class="footer__disclaimer">⚠️ Uwaga: Autor nie jest lekarzem, trenerem personalnym ani dietetykiem. Treści mają charakter informacyjny i edukacyjny. Przed rozpoczęciem treningów skonsultuj się ze specjalistą — szczególnie jeśli masz schorzenia przewlekłe lub urazy.</p>
-    </div>
-  </div>
-</footer>
+</div>
 
 <script src="./dist/app.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const grid = document.querySelector('[data-random-related-grid]');
+    if (!grid) return;
+
+    const pool = [
+      {
+        href: 'wydolnosc-vo2max-starzenie-po-50.html',
+        category: 'Zdrowie',
+        badgeColor: 'var(--color-accent)',
+        title: 'Wydolność po 50: VO2 max mówi o Twoim starzeniu więcej niż obwód pasa',
+        desc: 'Prosty test 6-minutowego marszu i plan cardio, który realnie poprawia wydolność.',
+        img: 'vo2max-cardio-lake-couple',
+        alt: 'Spacerująca para nad wodą',
+        width: 1080,
+        height: 607
+      },
+      {
+        href: 'powrot-do-formy-po-50-kompletny-przewodnik.html',
+        category: 'Ruch',
+        badgeColor: 'var(--color-primary)',
+        title: 'Po 50-tce na siłownię? Kompletny przewodnik powrotu do formy',
+        desc: 'Krok po kroku od badań i pierwszych treningów do stabilnego planu nawyków.',
+        img: 'powrot-do-formy-po-50-hero',
+        alt: 'Ilustracja superbohatera po 50',
+        width: 1080,
+        height: 603
+      },
+      {
+        href: 'dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html',
+        category: 'Jedzenie',
+        badgeColor: 'var(--color-accent)',
+        title: 'Dieta keto a cholesterol: co naprawdę mówi nauka',
+        desc: 'Najważniejsze wnioski z badań bez uproszczeń i bez marketingowych skrótów.',
+        img: 'keto-cholesterol-hero',
+        alt: 'Grafika o diecie keto i cholesterolu',
+        width: 1080,
+        height: 607
+      },
+      {
+        href: 'siedem-bledow-silownia-po-50.html',
+        category: 'Ruch',
+        badgeColor: 'var(--color-primary)',
+        title: '7 rzeczy, których nigdy nie rób na siłowni po 50-tce',
+        desc: 'Najczęstsze błędy, które zatrzymują postęp i zwiększają ryzyko kontuzji.',
+        img: 'siedzenie_hero_v2',
+        alt: 'Błędy treningowe po 50',
+        width: 1080,
+        height: 603
+      },
+      {
+        href: 'apob-apoa-badania-cholesterol.html',
+        category: 'Zdrowie',
+        badgeColor: 'var(--color-accent)',
+        title: 'ApoB i ApoA: dwa badania ważniejsze niż sam LDL',
+        desc: 'Jak czytać nowoczesną diagnostykę ryzyka sercowo-naczyniowego po 50-tce.',
+        img: 'apob-apoa-hero',
+        alt: 'Badania krwi i profil lipidowy',
+        width: 1080,
+        height: 607
+      },
+      {
+        href: 'kawa-jako-preworkout-po-50.html',
+        category: 'Jedzenie',
+        badgeColor: 'var(--color-accent)',
+        title: 'Kawa jako pre-workout po 50: dawki i bezpieczeństwo',
+        desc: 'Jak użyć kofeiny mądrze przed treningiem i nie przesadzić z obciążeniem układu nerwowego.',
+        img: 'kawa_preworkout_hero',
+        alt: 'Kawa przed treningiem',
+        width: 1080,
+        height: 607
+      }
+    ];
+
+    const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, 3);
+    const toBadgeClass = (category) => {
+      const value = category.toLowerCase();
+      if (value.includes('ruch')) return 'read-card__badge--ruch';
+      if (value.includes('jedzenie')) return 'read-card__badge--jedzenie';
+      if (value.includes('zdrowie')) return 'read-card__badge--zdrowie';
+      return 'read-card__badge--ciekawe';
+    };
+
+    grid.innerHTML = shuffled.map(item => `
+      <article class="read-card">
+        <a class="read-card__media" href="${item.href}" aria-label="${item.title}">
+          <picture>
+            <source srcset="./assets/${item.img}.avif" type="image/avif">
+            <source srcset="./assets/${item.img}.webp" type="image/webp">
+            <img src="./assets/${item.img}.webp" alt="${item.alt}" loading="lazy" width="${item.width}" height="${item.height}">
+          </picture>
+          <span class="read-card__badge ${toBadgeClass(item.category)}">${item.category}</span>
+        </a>
+        <div class="read-card__body">
+          <h4>${item.title}</h4>
+          <p>${item.desc}</p>
+          <a class="read-card__cta" href="${item.href}">Czytaj artykuł</a>
+        </div>
+      </article>
+    `).join('');
+  });
+</script>
 
 <nav class="bottom-nav" aria-label="Nawigacja dolna">
   <a href="index.html" class="bottom-nav__item ">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span>Dom</span>
   </a>
-  <a href="porady.html" class="bottom-nav__item bottom-nav__item--active">
+  <a href="porady1.html" class="bottom-nav__item bottom-nav__item--active">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
     <span>Porady</span>
   </a>
