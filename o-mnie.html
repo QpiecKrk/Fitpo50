@@ -217,8 +217,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center calc(50% + 50px);
       display: block;
-      filter: saturate(1.06) contrast(1.03);
+      filter: brightness(1.5) saturate(1.06) contrast(1.03);
     }
     .hero-bento__overlay {
       position: absolute;
@@ -284,6 +285,30 @@
       color: #f9fbff;
       max-height: calc(100% - 28px);
       overflow-y: auto;
+    }
+    .story-card__panel--compact {
+      max-height: calc(10 * 1.45em + 30px);
+      line-height: 1.45;
+      padding-top: 18px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,.55) rgba(255,255,255,.16);
+    }
+    .story-card__panel--compact::-webkit-scrollbar {
+      width: 8px;
+    }
+    .story-card__panel--compact::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,.52);
+      border-radius: 999px;
+    }
+    .story-card__panel--compact::-webkit-scrollbar-track {
+      background: rgba(255,255,255,.12);
+      border-radius: 999px;
+    }
+    .story-card__panel--compact .story-card__lead,
+    .story-card__panel--compact .story-card__quote,
+    .story-card__panel--compact p {
+      font-size: 1rem !important;
+      line-height: 1.45 !important;
     }
     .story-card__panel p {
       margin: 0 0 10px;
@@ -403,6 +428,15 @@
       display: grid;
       grid-template-rows: auto 1fr;
       gap: 12px;
+    }
+    .story-card--photo-only::before {
+      background: none;
+    }
+    .story-card--no-darken::before {
+      background: none;
+    }
+    .story-card--left-darken::before {
+      background: linear-gradient(180deg, rgba(17,32,57,.16) 0%, rgba(17,32,57,.30) 100%);
     }
 
     .contact-bento {
@@ -615,7 +649,11 @@
 
     <main class="about-grid" id="gridRoot">
       <section class="card hero-bento" data-title="hero o mnie powrot do formy">
-        <img src="./assets/keto-cholesterol-hero.jpg" alt="Gotowanie i aktywny styl życia po 50-tce">
+        <picture>
+          <source srcset="./assets/o-mnie-hero-dji.avif" type="image/avif">
+          <source srcset="./assets/o-mnie-hero-dji.webp" type="image/webp">
+          <img src="./assets/o-mnie-hero-dji.jpg" alt="Hero strony O mnie - widok lotniczy wybrzeża">
+        </picture>
         <div class="hero-bento__overlay">
           <span class="hero-badge">O mnie</span>
           <h1>Wróć do formy po 50-tce</h1>
@@ -623,13 +661,15 @@
       </section>
 
       <section class="story-row" data-title="historia o mnie kontakt">
-        <article class="card story-card" style="background-image:url('./assets/hero.jpg')" data-title="pierwsza czesc o mnie">
-          <div class="story-card__panel">
+        <article class="card story-card story-card--no-darken" style="background-image:url('./assets/o-mnie-bento-left.jpg'); background-position:center calc(50% - 30px);" data-title="pierwsza czesc o mnie">
+          <div class="story-card__panel story-card__panel--compact">
             <p class="story-card__lead"><span class="story-opening">Mam ponad 50 lat.</span> W pewnym momencie rzuciłem palenie i zrozumiałem, że jeśli nie wypełnię tej pustki czymś dobrym, prędzej czy później wrócę do starego.</p>
             <p>U mnie tą nową rutyną stała się <strong>siłownia.</strong> Przez pierwszy rok ćwiczyłem z <a href="https://www.instagram.com/_athletic_body__" target="_blank" rel="noopener noreferrer">Filipem</a> — nie po to, żeby wyglądać jak kulturysta, tylko żeby nauczyć się wszystkiego porządnie, spokojnie i bez głupich błędów. To była jedna z <strong>lepszych decyzji</strong>, jakie wtedy podjąłem.</p>
             <blockquote class="story-card__quote">Zegarek sportowy — to on naprawdę <strong>zmienił moje myślenie.</strong> Kroki, tętno, sen, codzienna aktywność — nagle przestałem działać „na oko”. Zacząłem widzieć <strong>liczby</strong>, a za nimi swoje prawdziwe nawyki.</blockquote>
             <p><span class="hl-box-blue">Dziś nie palę i ruszam się codziennie.</span> <strong>Godzina aktywności</strong> to dla mnie nic nadzwyczajnego — po prostu część życia, tak naturalna jak spotkanie z kimś bliskim czy poranna kawa.</p>
             <p>Znam też tę mniej wygodną stronę tego wszystkiego: <span class="story-opening-red">zwątpienie, stare kontuzje, zmęczenie pracą, chaos porad z internetu.</span> Sam przez to przechodziłem. Właśnie dlatego stworzyłem <strong>FitPo50</strong> — miejsce, w którym zbieram to, co naprawdę ma sens: ruch, jedzenie, suplementy, regenerację i zdrowie po pięćdziesiątce.</p>
+            <p>Nie interesuje mnie fit-lans ani puste motywacyjne hasła. Interesuje mnie to, <strong class="hl-blue-strong">co działa.</strong> To, czym się tu dzielę, opieram nie tylko na własnym doświadczeniu, ale też na <span class="story-opening-green">wiedzy medycznej i badaniach naukowych</span>, które czytam, porządkuję i przekładam na normalny, ludzki język.</p>
+            <p><strong>Jeśli jesteś w podobnym miejscu — <a href="index.html">wpadaj</a>.</strong> Może właśnie teraz jest dobry moment, żeby coś wreszcie zmienić.</p>
           </div>
         </article>
 
@@ -646,12 +686,7 @@
             <div class="contact-mail">E-mail: fitpo50tce@gmail.com</div>
           </aside>
 
-          <article class="card story-card" style="background-image:url('./assets/bio-outdoor.jpg')" data-title="druga czesc o mnie">
-            <div class="story-card__panel">
-              <p>Nie interesuje mnie fit-lans ani puste motywacyjne hasła. Interesuje mnie to, <strong class="hl-blue-strong">co działa.</strong> To, czym się tu dzielę, opieram nie tylko na własnym doświadczeniu, ale też na <span class="story-opening-green">wiedzy medycznej i badaniach naukowych</span>, które czytam, porządkuję i przekładam na normalny, ludzki język.</p>
-              <p><strong>Jeśli jesteś w podobnym miejscu — <a href="index.html">wpadaj</a>.</strong> Może właśnie teraz jest dobry moment, żeby coś wreszcie zmienić.</p>
-            </div>
-          </article>
+          <article class="card story-card story-card--photo-only" style="background-image:url('./assets/grzes-portret.jpeg'); background-position:center calc(50% + 150px);" data-title="druga czesc o mnie"></article>
         </div>
       </section>
     </main>
