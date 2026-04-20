@@ -412,6 +412,10 @@
       background-position: center;
       background-repeat: no-repeat;
     }
+    /* Dla hero VO2 max przesuwamy kadr w lewo, by postać była po prawej. */
+    .latest-article.is-vo2-hero {
+      background-position: calc(30% - 15px) calc(58% + 100px);
+    }
     .latest-article::before {
       content: "";
       position: absolute;
@@ -1632,6 +1636,68 @@
       return `${text.slice(0, maxLen).trimEnd()}...`;
     }
 
+    function resolveOgImageCandidates(ogImage, fallbackImage) {
+      const candidates = [];
+      if (ogImage) {
+        try {
+          const parsed = new URL(ogImage, 'https://fitpo50.pl');
+          // Lokalnie preferujemy plik z assets, ale zostawiamy też URL zdalny jako drugi krok.
+          if (/fitpo50\.pl$/i.test(parsed.hostname)) {
+            candidates.push(`.${parsed.pathname}`);
+            candidates.push(parsed.toString());
+          } else {
+            candidates.push(parsed.toString());
+          }
+        } catch (_) {}
+      }
+      if (fallbackImage) candidates.push(fallbackImage);
+      return [...new Set(candidates.filter(Boolean))];
+    }
+
+    function loadFirstAvailableImage(candidates) {
+      const unique = [...new Set((candidates || []).filter(Boolean))];
+      if (!unique.length) return Promise.resolve('./assets/keto-cholesterol-hero.jpg');
+
+      return new Promise((resolve) => {
+        let i = 0;
+        const tryNext = () => {
+          if (i >= unique.length) {
+            resolve('./assets/keto-cholesterol-hero.jpg');
+            return;
+          }
+          const src = unique[i++];
+          const probe = new Image();
+          probe.onload = () => resolve(src);
+          probe.onerror = tryNext;
+          probe.src = src;
+        };
+        tryNext();
+      });
+    }
+
+    function isVo2Article(path) {
+      return /wydolnosc-vo2max-starzenie-po-50\.html$/i.test(path || '');
+    }
+
+    async function setLatestArticleBackground(imageCandidates, latestPath) {
+      if (!latestArticleCard) return;
+      const bestSrc = await loadFirstAvailableImage(imageCandidates);
+      latestArticleCard.style.backgroundImage = `url('${bestSrc}')`;
+      latestArticleCard.classList.toggle('is-vo2-hero', isVo2Article(latestPath));
+    }
+
+    window.__fitpoImageFallback = function (img) {
+      if (!img) return;
+      const alt = img.dataset.fallbackSrc;
+      if (alt && img.src !== alt) {
+        img.src = alt;
+        img.dataset.fallbackSrc = '';
+        return;
+      }
+      img.onerror = null;
+      img.src = './assets/keto-cholesterol-hero.jpg';
+    };
+
     function toTitleFromPath(path) {
       const slug = (path || '').replace(/^\//, '').replace(/\.html$/i, '').replace(/-/g, ' ').trim();
       if (!slug) return 'Strona główna';
@@ -1769,12 +1835,12 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Dieta keto a cholesterol po 50. Co naprawdę mówią badania?',
-        excerpt: 'Praktyczne omówienie LDL, HDL i trójglicerydów z naciskiem na to, co warto monitorować indywidualnie.',
-        image: './assets/keto-cholesterol-hero.jpg',
-        url: 'dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html'
+        title: 'Wydolność po 50: VO2 max mówi o Twoim starzeniu więcej niż obwód pasa',
+        excerpt: 'Praktyczny przewodnik: test 6-minutowego marszu, plan cardio i konkretne kroki poprawy wydolności po 50-tce.',
+        image: './assets/vo2max-lead-miasto-schody.webp',
+        url: 'wydolnosc-vo2max-starzenie-po-50.html'
       };
-      if (latestArticleCard) latestArticleCard.style.backgroundImage = `url('${fallback.image}')`;
+      await setLatestArticleBackground([fallback.image], fallback.url);
 
       try {
         const sitemapRes = await fetch('./sitemap.xml', { cache: 'no-store' });
@@ -1809,20 +1875,18 @@
         const title = extractArticleTitle(doc);
         const description = getMetaContent(doc, 'description') || stripHtml((doc.querySelector('article p') || {}).textContent || '');
         const ogImage = getMetaContent(doc, 'og:image', 'property');
-        const image = ogImage
-          ? (ogImage.startsWith('http') ? ogImage : `.${new URL(ogImage, 'https://fitpo50.pl').pathname}`)
-          : fallback.image;
+        const imageCandidates = resolveOgImageCandidates(ogImage, fallback.image);
 
         latestArticleTitle.textContent = title || fallback.title;
         latestArticleExcerpt.textContent = truncate(description || fallback.excerpt, 190);
         latestArticleLink.href = latestPath.replace(/^\//, '');
-        if (latestArticleCard) latestArticleCard.style.backgroundImage = `url('${image}')`;
+        await setLatestArticleBackground(imageCandidates, latestPath.replace(/^\//, ''));
         syncNewsHeightToLeftColumn();
       } catch (_) {
         latestArticleTitle.textContent = fallback.title;
         latestArticleExcerpt.textContent = fallback.excerpt;
         latestArticleLink.href = fallback.url;
-        if (latestArticleCard) latestArticleCard.style.backgroundImage = `url('${fallback.image}')`;
+        await setLatestArticleBackground([fallback.image], fallback.url);
         syncNewsHeightToLeftColumn();
       }
     }
@@ -1831,17 +1895,18 @@
       const value = (path || '').toLowerCase();
       if (/keto|jedzenie|bialko|cukier|wino|dieta|tłuszcz|tluszcz/.test(value)) return 'Jedzenie';
       if (/trening|silowni|siłowni|ruch|mobiln|sprawn|plan-tygodnia/.test(value)) return 'Ruch';
-      if (/cholesterol|apob|apoa|zdrowie|lipido|serc|badan/.test(value)) return 'Zdrowie';
+      if (/cholesterol|apob|apoa|zdrowie|lipido|serc|badan|vo2max|wydolnosc|wydolność/.test(value)) return 'Zdrowie';
       return 'Ciekawe';
     }
 
     function createReadingCard(item) {
       const categoryClass = `read-card__badge--${(item.category || '').toLowerCase()}`;
+      const fallbackAttr = item.imageFallback ? ` data-fallback-src="${item.imageFallback}"` : '';
       return `
         <article class="read-card">
           <a class="read-card__media" href="${item.url}">
             <span class="read-card__badge ${categoryClass}">${item.category}</span>
-            <img src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.src='./assets/keto-cholesterol-hero.jpg'">
+            <img src="${item.image}" alt="${item.title}" loading="lazy"${fallbackAttr} onerror="window.__fitpoImageFallback(this)">
           </a>
           <div class="read-card__body">
             <h4>${item.title}</h4>
@@ -1855,6 +1920,13 @@
     function renderReadingFallback() {
       if (!readingRoomGrid) return;
       const fallback = [
+        {
+          category: 'Zdrowie',
+          title: 'Wydolność po 50: VO2 max mówi o Twoim starzeniu więcej niż obwód pasa',
+          excerpt: 'Jak ocenić wydolność testem 6-minutowego marszu i poprawić ją prostym planem cardio.',
+          image: './assets/vo2max-lead-miasto-schody.webp',
+          url: 'wydolnosc-vo2max-starzenie-po-50.html'
+        },
         {
           category: 'Jedzenie',
           title: 'Dieta keto a cholesterol: LDL, HDL i trójglicerydy po 50-tce',
@@ -1917,15 +1989,16 @@
             const title = extractArticleTitle(doc);
             const description = getMetaContent(doc, 'description') || stripHtml((doc.querySelector('article p') || {}).textContent || '');
             const ogImage = getMetaContent(doc, 'og:image', 'property');
-            const image = ogImage
-              ? (ogImage.startsWith('http') ? ogImage : `.${new URL(ogImage, 'https://fitpo50.pl').pathname}`)
-              : './assets/keto-cholesterol-hero.jpg';
+            const imageCandidates = resolveOgImageCandidates(ogImage, './assets/keto-cholesterol-hero.jpg');
+            const image = imageCandidates[0] || './assets/keto-cholesterol-hero.jpg';
+            const imageFallback = imageCandidates[1] || '';
 
             cards.push({
               category: inferCategoryFromPath(path),
               title: title || toTitleFromPath(path),
               excerpt: truncate(description || 'Przejdź do artykułu, aby poznać szczegóły.', 140),
               image,
+              imageFallback,
               url: path.replace(/^\//, '')
             });
           } catch (_) {}
