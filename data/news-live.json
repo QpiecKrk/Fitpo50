@@ -1,7 +1,33 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-21T07:19:07+00:00",
+    "updatedAt": "2026-04-21T13:43:50+00:00",
     "items": [
+        {
+            "id": "news_5e7cba2c42b0",
+            "title": "Kofeina pomaga na siłowni. Może też hamować efekty",
+            "content_html": "<p><span><a href=\"kawa-jako-preworkout-po-50.html\">Kofeina</a> od lat uchodzi za jeden z najskuteczniejszych suplementów treningowych.</span><span><br></span><span><span class=\"news-text-tone--1\">Nowe badania</span> potwierdzają, że może realnie poprawiać jakość <a href=\"trening-3x30-dla-50-plus.html\">treningu</a> — ale nie bez kosztów.</span></p><p><span>W 6-tygodniowym badaniu z udziałem aktywnych mężczyzn porównano kofeinę (<span class=\"news-text-tone--4\">ok. 3 mg/kg przed treningiem</span>) z <strong>placebo</strong> podczas identycznego treningu siłowego.</span><span><br>\n</span><span>Efekt: grupa kofeinowa osiągnęła </span><span><strong><span></span><span><strong><span></span><span>większy przyrost mięśni (ok. 17% vs 7%)</span></strong></span></strong>, mimo braku różnic w <a href=\"sila-chwytu-po-50.html\">sile</a> czy objętości treningowej.</span></p><p><span><span>Mechanizm jest prosty</span>: kofeina blokuje adenozynę, zmniejsza odczucie zmęczenia i pozwala trenować bliżej granicy możliwości.</span></p><p><span>Jest jednak druga strona.</span><span><br>\n</span><span>Badania pokazują, że kofeina przyjęta nawet </span><span><strong><span></span><span>6–8 godzin przed snem może pogarszać jego jakość i długość</span></strong>. A to bezpośrednio uderza w regenerację, syntezę białek mięśniowych i gospodarkę <a href=\"testosteron-po-50-naturalnie-bez-trt.html\">hormonalną</a>.</span></p><p><span>W praktyce oznacza to jedno:</span><span><br></span><span><span class=\"news-text-tone--4\">krótkoterminowo możesz trenować</span> lepiej, ale długoterminowo — jeśli zaburzasz sen — możesz ograniczać efekty.</span></p><p><strong>Kofeina może wspierać rozwój mięśni, ale tylko wtedy, gdy nie psuje snu — a więc i regeneracji.</strong><br><span></span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260421_134346_3409cd28",
+            "image_alt": "Kofeina pomaga na siłowni. Może też hamować efekty",
+            "sources": [
+                {
+                    "label": "Journal of the International Society of Sports Nutrition – Caffeine and resistance training adaptations",
+                    "url": "https://jissn.biomedcentral.com/articles/10.1186/s12970-021-00454-7"
+                },
+                {
+                    "label": "Sleep Medicine Reviews – Caffeine effects on sleep",
+                    "url": "https://www.sciencedirect.com/science/article/pii/S1087079213000498"
+                },
+                {
+                    "label": "Journal of Applied Physiology – Caffeine ingestion and sleep disruption",
+                    "url": "https://journals.physiology.org/doi/full/10.1152/japplphysiol.00571.2013"
+                }
+            ],
+            "created_at": "2026-04-21T13:43:46+00:00",
+            "updated_at": "2026-04-21T13:43:50+00:00",
+            "published_at": "2026-04-21T13:43:50+00:00"
+        },
         {
             "id": "news_094813e88410",
             "title": "Trening może „odmłodzić serce”? Badania pokazują, co naprawdę się zmienia",
