@@ -216,7 +216,7 @@ if ($videoPosterUrl !== '') {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./base.css">
-<link rel="stylesheet" href="./style.css?v=1.2">
+<link rel="stylesheet" href="./style.css?v=1.3">
 
 <style>
 .article-page { padding-top: var(--space-20); padding-bottom: var(--space-12); }
