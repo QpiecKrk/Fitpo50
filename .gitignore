@@ -98,6 +98,9 @@ _site/SESSION_START_MAX.md
 _site/assets/news/news_20*.avif
 _site/assets/news/news_20*.jpg
 _site/assets/news/news_20*.webp
+assets/news/news_20*.avif
+assets/news/news_20*.jpg
+assets/news/news_20*.webp
 
 # Auto-generated AI agent exclusions
 .cursorrules
