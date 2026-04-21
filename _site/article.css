@@ -497,3 +497,39 @@ body.article-template .medical-disclaimer {
     margin: var(--space-3);
   }
 }
+
+/* Night-mode readability fix:
+   keep standard article text dark on the light bento surface,
+   while preserving light text inside intentionally dark callout blocks. */
+[data-theme="dark"] body.article-template .article-content p,
+[data-theme="dark"] body.article-template .article-content li,
+[data-theme="dark"] body.article-template .article-content blockquote {
+  color: #243543 !important;
+}
+
+[data-theme="dark"] body.article-template .article-content > h2,
+[data-theme="dark"] body.article-template .article-content > h3,
+[data-theme="dark"] body.article-template .article-header__title,
+[data-theme="dark"] body.article-template .tone-strong {
+  color: #1f2d3b !important;
+}
+
+[data-theme="dark"] body.article-template .article-kicker-card__meta,
+[data-theme="dark"] body.article-template .medical-disclaimer {
+  color: #4e5e6d !important;
+}
+
+[data-theme="dark"] body.article-template .article-content .key-takeaways,
+[data-theme="dark"] body.article-template .article-content .highlight-box,
+[data-theme="dark"] body.article-template .article-content .faq-item,
+[data-theme="dark"] body.article-template .article-content .article-quote,
+[data-theme="dark"] body.article-template .article-content .key-takeaways p,
+[data-theme="dark"] body.article-template .article-content .key-takeaways li,
+[data-theme="dark"] body.article-template .article-content .highlight-box p,
+[data-theme="dark"] body.article-template .article-content .highlight-box li,
+[data-theme="dark"] body.article-template .article-content .faq-item p,
+[data-theme="dark"] body.article-template .article-content .faq-item li,
+[data-theme="dark"] body.article-template .article-content .article-quote p,
+[data-theme="dark"] body.article-template .article-content .article-quote li {
+  color: #d8e8ec !important;
+}
