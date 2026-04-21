@@ -364,7 +364,7 @@ ${articleInner}
   </div>
 </footer>
 
-<script src="./dist/cmp.js" defer></script>
+<script src="./dist/cmp.js?v=1.1" defer></script>
 <script src="./dist/app.js" defer></script>
 </body>
 </html>

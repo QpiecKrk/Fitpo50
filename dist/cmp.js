@@ -2,6 +2,7 @@
 (() => {
     const STORAGE_KEY = 'fitpo50_cookie_consent_v1';
     const GA_ID = 'G-S21SKTVM7K';
+    const ADS_ID = 'AW-18108612630';
     const GA_SRC = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
     const win = window;
     const styleId = 'fitpo50-cmp-style';
@@ -231,6 +232,8 @@
     };
     let consentState = safeParse(localStorage.getItem(STORAGE_KEY));
     const hasAnalyticsConsent = () => Boolean(consentState === null || consentState === void 0 ? void 0 : consentState.analytics);
+    const hasMarketingConsent = () => Boolean(consentState === null || consentState === void 0 ? void 0 : consentState.marketing);
+    const hasAnyTagConsent = () => hasAnalyticsConsent() || hasMarketingConsent();
     const initGtagBridge = () => {
         window.dataLayer = window.dataLayer || [];
         if (typeof win.gtag !== 'function') {
@@ -240,30 +243,39 @@
             };
         }
     };
+    const applyGtagConfig = () => {
+        if (typeof win.gtag !== 'function')
+            return;
+        if (hasAnalyticsConsent()) {
+            win.gtag('config', GA_ID);
+        }
+        if (hasMarketingConsent()) {
+            win.gtag('config', ADS_ID);
+        }
+    };
     const ensureAnalyticsLoaded = () => {
-        if (!hasAnalyticsConsent())
+        if (!hasAnyTagConsent())
             return;
         initGtagBridge();
-        if (win.__fitpo50AnalyticsInjected)
-            return;
-        win.__fitpo50AnalyticsInjected = true;
-        if (typeof win.gtag === 'function') {
+        if (!win.__fitpo50GtagBootstrapped && typeof win.gtag === 'function') {
             win.gtag('js', new Date());
+            win.__fitpo50GtagBootstrapped = true;
         }
+        if (win.__fitpo50AnalyticsInjected) {
+            applyGtagConfig();
+            return;
+        }
+        win.__fitpo50AnalyticsInjected = true;
         const existing = document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_ID}"]`);
         if (existing) {
-            if (typeof win.gtag === 'function') {
-                win.gtag('config', GA_ID);
-            }
+            applyGtagConfig();
             return;
         }
         const script = document.createElement('script');
         script.async = true;
         script.src = GA_SRC;
         script.onload = () => {
-            if (typeof win.gtag === 'function') {
-                win.gtag('config', GA_ID);
-            }
+            applyGtagConfig();
         };
         document.head.appendChild(script);
     };
@@ -274,7 +286,7 @@
             if (node instanceof HTMLScriptElement &&
                 typeof node.src === 'string' &&
                 node.src.includes('googletagmanager.com/gtag/js') &&
-                !hasAnalyticsConsent()) {
+                !hasAnyTagConsent()) {
                 return node;
             }
             return originalAppendChild.call(this, node);
