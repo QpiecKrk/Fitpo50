@@ -468,6 +468,7 @@
     const canUseReadingMode = !window.location.pathname.includes('/admin/')
         && document.querySelector('.article-content') !== null;
     if (canUseReadingMode) {
+        const articleContent = document.querySelector('.article-content');
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'reading-sanctuary-toggle';
@@ -489,6 +490,29 @@
                 // Ignore localStorage failures (private mode etc.)
             }
         };
+        const toggleReadingModeWithoutJump = (enabled) => {
+            const anchorSelectors = 'h2,h3,p,li,figure,blockquote,.highlight-box,.key-takeaways,.faq-item,table';
+            const anchors = articleContent ? Array.from(articleContent.querySelectorAll(anchorSelectors)) : [];
+            const anchor = anchors.find((el) => {
+                const rect = el.getBoundingClientRect();
+                return rect.bottom > 0 && rect.top < window.innerHeight;
+            }) || null;
+            const anchorTopBefore = anchor ? anchor.getBoundingClientRect().top : 0;
+            const fallbackScrollY = window.scrollY;
+            setReadingMode(enabled);
+            window.requestAnimationFrame(() => {
+                if (anchor && anchor.isConnected) {
+                    const anchorTopAfter = anchor.getBoundingClientRect().top;
+                    const delta = anchorTopAfter - anchorTopBefore;
+                    if (Math.abs(delta) > 1) {
+                        window.scrollTo({ top: window.scrollY + delta, left: 0, behavior: 'auto' });
+                    }
+                    return;
+                }
+                const maxScrollY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                window.scrollTo({ top: Math.min(fallbackScrollY, maxScrollY), left: 0, behavior: 'auto' });
+            });
+        };
         let initialEnabled = false;
         try {
             initialEnabled = window.localStorage.getItem(readingModeStorageKey) === '1';
@@ -498,7 +522,7 @@
         }
         btn.addEventListener('click', () => {
             const nextValue = !document.body.classList.contains('reading-sanctuary-active');
-            setReadingMode(nextValue);
+            toggleReadingModeWithoutJump(nextValue);
         });
         document.body.appendChild(btn);
         setReadingMode(initialEnabled);

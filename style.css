@@ -2970,6 +2970,128 @@ body.reading-sanctuary-active .article-content a {
   color: #0c5f8a;
 }
 
+/* Stronger focus mode for article pages:
+   reduce bento noise and leave a clean reading column. */
+body.article-template.reading-sanctuary-active .article-main-bento {
+  background: #fffdf9;
+  border-color: #e1d6c4;
+  box-shadow: none;
+}
+
+body.article-template.reading-sanctuary-active .article-intro-grid {
+  display: block;
+  max-width: 780px;
+  margin: 0 auto 8px;
+}
+
+body.article-template.reading-sanctuary-active .article-kicker-card {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0 var(--space-6);
+}
+
+body.article-template.reading-sanctuary-active .article-kicker-card::after,
+body.article-template.reading-sanctuary-active .article-kicker-card__meta .article-kicker-card__category-pill {
+  display: none;
+}
+
+body.article-template.reading-sanctuary-active .article-kicker-card__meta {
+  margin-bottom: 6px;
+  color: #5b6572;
+  font-size: 0.88rem;
+}
+
+body.article-template.reading-sanctuary-active .article-hero {
+  display: none;
+}
+
+body.article-template.reading-sanctuary-active .article-content {
+  max-width: 74ch;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: clamp(1.12rem, 1.02rem + 0.48vw, 1.28rem);
+  line-height: 1.92;
+  color: #222a33;
+}
+
+body.article-template.reading-sanctuary-active .article-content > * {
+  max-width: 74ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.article-template.reading-sanctuary-active .article-content > :is(.inline-figure, .figure-stack, .table-wrap, .key-takeaways, .highlight-box, .faq-list, .article-quote) {
+  max-width: 100%;
+}
+
+body.article-template.reading-sanctuary-active .article-content h2 + p,
+body.article-template.reading-sanctuary-active .key-takeaways,
+body.article-template.reading-sanctuary-active .highlight-box,
+body.article-template.reading-sanctuary-active .faq-item,
+body.article-template.reading-sanctuary-active .article-quote {
+  background: #ffffff;
+  border: 1px solid #e4d9c8;
+  box-shadow: none;
+}
+
+body.article-template.reading-sanctuary-active .reading-room,
+body.article-template.reading-sanctuary-active .site-footer-bento {
+  display: none;
+}
+
+html.night-shell body.article-template.reading-sanctuary-active,
+[data-theme="dark"] body.article-template.reading-sanctuary-active {
+  color: #e9edf4;
+}
+
+html.night-shell body.article-template.reading-sanctuary-active .article-main-bento,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-main-bento {
+  background: #131c2a;
+  border-color: #2e4059;
+}
+
+html.night-shell body.article-template.reading-sanctuary-active .article-content,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-content {
+  color: #e5edf8;
+}
+
+html.night-shell body.article-template.reading-sanctuary-active .article-content p,
+html.night-shell body.article-template.reading-sanctuary-active .article-content li,
+html.night-shell body.article-template.reading-sanctuary-active .article-content blockquote,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-content p,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-content li,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-content blockquote {
+  color: #dfe8f5 !important;
+}
+
+html.night-shell body.article-template.reading-sanctuary-active .article-content h2,
+html.night-shell body.article-template.reading-sanctuary-active .article-content h3,
+html.night-shell body.article-template.reading-sanctuary-active .article-header__title,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-content h2,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-content h3,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-header__title {
+  color: #f0f5ff !important;
+}
+
+html.night-shell body.article-template.reading-sanctuary-active .article-content h2 + p,
+html.night-shell body.article-template.reading-sanctuary-active .key-takeaways,
+html.night-shell body.article-template.reading-sanctuary-active .highlight-box,
+html.night-shell body.article-template.reading-sanctuary-active .faq-item,
+html.night-shell body.article-template.reading-sanctuary-active .article-quote,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-content h2 + p,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .key-takeaways,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .highlight-box,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .faq-item,
+[data-theme="dark"] body.article-template.reading-sanctuary-active .article-quote {
+  background: #1a2638;
+  border-color: #334963;
+}
+
 @media (max-width: 640px) {
   .reading-sanctuary-toggle {
     right: 10px;
@@ -2980,6 +3102,16 @@ body.reading-sanctuary-active .article-content a {
 
   .reading-sanctuary-toggle__label {
     display: none;
+  }
+
+  body.article-template.reading-sanctuary-active .article-content {
+    padding: 0 var(--space-4);
+    font-size: 1.08rem;
+    line-height: 1.84;
+  }
+
+  body.article-template.reading-sanctuary-active .article-kicker-card {
+    padding: 0 var(--space-4);
   }
 }
 

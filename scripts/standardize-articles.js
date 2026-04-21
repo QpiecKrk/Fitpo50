@@ -99,7 +99,7 @@ function cleanupHead(headInner) {
 
   const styleBlock = [
     '<link rel="stylesheet" href="./base.css">',
-    '<link rel="stylesheet" href="./style.css?v=1.3">',
+    '<link rel="stylesheet" href="./style.css?v=1.4">',
     '<link rel="stylesheet" href="./article.css?v=1.4">',
     '<link rel="icon" href="./assets/logo.jpg" type="image/jpeg">',
     '<link rel="stylesheet" href="./assets/footer.css?v=1">',
@@ -365,7 +365,7 @@ ${articleInner}
 </footer>
 
 <script src="./dist/cmp.js?v=1.1" defer></script>
-<script src="./dist/app.js" defer></script>
+<script src="./dist/app.js?v=1.1" defer></script>
 </body>
 </html>
 `;
