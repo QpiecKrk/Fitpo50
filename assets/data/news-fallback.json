@@ -1,7 +1,38 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-19T20:03:54+00:00",
+    "updatedAt": "2026-04-21T07:19:07+00:00",
     "items": [
+        {
+            "id": "news_094813e88410",
+            "title": "Trening może „odmłodzić serce”? Badania pokazują, co naprawdę się zmienia",
+            "content_html": "<p><span>Regularny, intensywny <a href=\"trening-maszynowy-po-50.html\">trening</a> może istotnie poprawić kondycję serca u osób w średnim wieku — ale określenia typu „odmłodzenie o 20 lat” są uproszczeniem.</span></p><p><span>Badanie opublikowane w </span><span><span class=\"news-text-tone--1\"><span></span><span>Circulation</span><span> (Levine i wsp., 2018)</span></span><span> objęło osoby w wieku 45–64 lat, które przez 2 lata realizowały program </span><a href=\"trening-3x30-dla-50-plus.html\">treningowy</a><span> 4–5 razy w tygodniu.</span><span> </span></span><span>Efekt:</span></p><p><span>- wzrost VO₂max o ok. 18%</span></p><p><strong class=\"news-text-strong-black\"></strong></p><p><span>- zmniejszenie sztywności lewej komory serca</span></p><p><span>To drugi parametr ma kluczowe znaczenie, ponieważ jego pogorszenie jest jednym z głównych czynników prowadzących do niewydolności serca z zachowaną frakcją wyrzutową.</span></p><p><span>Badacze podkreślają jednak ważny szczegół:</span><span><br></span><span><strong>2–3 treningi tygodniowo poprawiają zdrowie, ale nie wystarczają, by odwrócić zmiany strukturalne w sercu.</strong><br>\n</span><span>Dopiero większa objętość i intensywność treningu wpływa na jego „plastyczność”.</span></p><p><span>Wnioski są jednoznaczne:</span><span><br>\n</span><span>ruch działa jak interwencja medyczna — ale tylko wtedy, gdy jest regularny i odpowiednio intensywny.</span></p><p><strong>Trening nie cofa czasu, ale może częściowo odwrócić zmiany w sercu związane z wiekiem — pod warunkiem odpowiedniej intensywności i systematyczności.</strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260421_071903_c8e9e385.avif",
+                "webp": "./assets/news/news_20260421_071903_c8e9e385.webp",
+                "jpg": "./assets/news/news_20260421_071903_c8e9e385.jpg",
+                "alt": "Serce młode",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Circulation – Exercise training in middle-aged adults improves cardiac compliance (Levine et al., 2018)",
+                    "url": "https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.118.033615"
+                },
+                {
+                    "label": "PubMed – Exercise training and cardiovascular aging (PMCID: PMC5893372)",
+                    "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5893372/"
+                },
+                {
+                    "label": "American Heart Association – Physical activity and heart health",
+                    "url": "https://www.heart.org/en/healthy-living/fitness"
+                }
+            ],
+            "updated_at": "2026-04-21T07:19:07+00:00",
+            "published_at": "2026-04-21T07:19:07+00:00",
+            "excerpt": "Regularny, intensywny trening może istotnie poprawić kondycję serca u osób w średnim wieku — ale określenia typu „odmłodzenie o 20 lat” są uproszczeniem.Badanie opublikowane w Circulation (Levine i wsp., 2018) objęło os…"
+        },
         {
             "id": "news_50c56934c74d",
             "title": "Czy obcinanie węglowodanów niszczy hormony? Sprawdzamy fakty",
