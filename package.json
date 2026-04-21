@@ -4,7 +4,9 @@
   "description": "FitPo50 website",
   "main": "dist/app.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "article:new": "node scripts/create-article-from-template.js",
+    "article:validate": "node scripts/validate-article-standard.js"
   },
   "devDependencies": {
     "clean-css-cli": "^5.6.3",

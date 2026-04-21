@@ -10,16 +10,22 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 ## Zasady tresci i layoutu
 
 - Artykul to pojedyncza strona docelowa.
+- Obowiazuje kanoniczny standard z `ARTICLE_STANDARD.md` (bez recznych wariantow layoutu).
+- Nowe artykuly tworzymy z `article-template-bento.html` lub przez generator:
+  - `node scripts/create-article-from-template.js ...`
+- Przed oddaniem artykulu uruchamiamy walidator:
+  - `node scripts/validate-article-standard.js <plik.html>`
 - W headerze artykulu pokazujemy tylko:
   - dzial
   - czas czytania
 - Nie pokazujemy widocznej daty publikacji/aktualizacji na gorze artykulu.
 - Na dole artykulu (nad footerem) zawsze sekcja "Czytelnia" (`.porady-preview.section-padding`) z 3 kafelkami.
+- Naglowek sekcji "Czytelnia" ma byc index-style (`.reading-room__head` + ikona), nie wariant alternatywny.
 - Interlinking w tresci: docelowo 2-4 linki wewnetrzne osadzone w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
 - Dopuszczamy bardziej wyrazisty styl artykulu (kolory, callouty, typografia, tabele), ale:
   - zachowujemy spojnosc z designem serwisu,
   - trzymamy max 2-3 rodziny fontow na artykul,
-  - nie rozwalamy layoutu stylami inline (szczegolnie w sekcji "Czytelnia"),
+  - nie rozwalamy layoutu stylami inline (zakaz `style=\"...\"`, szczegolnie w sekcji "Czytelnia"),
   - tabelki musza byc responsywne i czytelne na mobile.
 
 ## Standard wizualny artykulu (obowiazuje od 2026-04-17)
@@ -101,6 +107,12 @@ Szybka checklista przed oddaniem artykulu:
 - Artykuly: `BlogPosting` + komplet meta (`title`, `description`, canonical, og, twitter, article times).
 - `porady.html`: `CollectionPage` + `ItemList`.
 - Liczniki i schema musza byc zgodne z realna liczba kart.
+- Anty-regresja SEO:
+  - `<title>` artykulu: docelowo 55-65 znakow (nie przekraczaj 65).
+  - `meta description`: docelowo 140-160 znakow (nie przekraczaj 160).
+- Anty-regresja AEO:
+  - `BlogPosting` ma zawierac `speakable` (`SpeakableSpecification`).
+  - Sekcja `key-takeaways` ma byc wysoko w tresci (po wstepie), nie dopiero pod koniec artykulu.
 
 ## Kafelki i indeks porad
 
@@ -134,3 +146,28 @@ Szybka checklista przed oddaniem artykulu:
     - sekcja `featured-article`,
     - pierwszy kafelek w dolnej sekcji 3 kart (`articles-grid-preview`),
     - cala sekcja ma zawsze pokazywac 3 najnowsze wpisy wg daty publikacji.
+
+## Anty-regresja (obowiazkowe przy kazdym nowym wpisie)
+
+- `data-order`:
+  - na `porady.html` i stronie kategorii `data-order` musi byc unikalne,
+  - nowy wpis dostaje `max + 1`,
+  - nie zostawiamy duplikatow (np. dwa wpisy z tym samym numerem).
+
+- Daty publikacji (krytyczne dla "Nowy artykul" na `index.html`):
+  - ustawiaj:
+    - `meta property="article:published_time"` = faktyczna data publikacji,
+    - `BlogPosting.datePublished` = ta sama data,
+    - `article:modified_time` i `BlogPosting.dateModified` = data aktualizacji.
+  - Bez poprawnych dat nowy wpis nie pojawi sie jako najnowszy na `index.html`.
+
+- `index.html` - zasada dzialania:
+  - "Nowy artykul" sortuje po `sitemap.xml` + `published_time/datePublished`,
+  - nie po kolejnosci kart na `porady.html`.
+
+- Koncowa kontrola przed oddaniem:
+  - nowy wpis widoczny na stronie kategorii,
+  - nowy wpis widoczny na `porady.html` z najwyzszym `data-order`,
+  - URL obecny w `sitemap.xml`,
+  - nowy wpis wskakuje do sekcji "Nowy artykul" na `index.html`,
+  - source i `_site` sa zsynchronizowane 1:1.

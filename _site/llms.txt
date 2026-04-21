@@ -5,7 +5,7 @@ url: https://fitpo50.pl/
 language: pl-PL
 topic: trening, zdrowie i odżywianie po 50. roku życia
 publisher: FitPo50
-contact: https://fitpo50.pl/#o-nas
+contact: https://fitpo50.pl/o-mnie.html
 
 primary_pages:
 - https://fitpo50.pl/
@@ -14,6 +14,7 @@ primary_pages:
 - https://fitpo50.pl/rusz-sie.html
 - https://fitpo50.pl/jedzenie.html
 - https://fitpo50.pl/ciekawe.html
+- https://fitpo50.pl/o-mnie.html
 
 sitemap: https://fitpo50.pl/sitemap.xml
 robots: https://fitpo50.pl/robots.txt
@@ -65,6 +66,10 @@ articles:
   title: "Healthspan po 50-tce: jak długo będziesz sprawny? | FitPo50"
   section: "Ciekawe"
   summary: "Żyjemy dłużej, ale 16–20% życia spędzamy w chorobie lub niesprawności. Healthspan, czyli długość zdrowia, zależy od Ciebie bardziej niż myślisz. Sprawdź fakty."
+- url: https://fitpo50.pl/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html
+  title: "Zegar Epigenetyczny Horvatha – biologiczny wiek DNA i metylacja | FitPo50"
+  section: "Ciekawe"
+  summary: "PESEL i DNA mogą pokazywać inny wiek. Artykuł wyjaśnia metylację DNA, zegar Horvatha, GrimAge, DunedinPACE oraz badania TRIIM i Fitzgerald."
 - url: https://fitpo50.pl/hrt-mit-badanie-po-50.html
   title: "HRT i rak piersi — mit obalony. Prawda o badaniu WHI z 2002 roku | FitPo50"
   section: "Ciekawe"

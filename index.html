@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FitPo50 | Trening i dieta po 50-tce</title>
-  <meta name="description" content="FitPo50 to praktyczna wiedza o treningu, diecie, zdrowiu i sprawnosci po 50-tce. Bez chaosu i marketingowej sciemy.">
+  <meta name="description" content="FitPo50 to praktyczna wiedza o treningu, diecie, zdrowiu i sprawności po 50-tce. Bez chaosu i marketingowej ściemy.">
   <meta name="robots" content="index,follow">
   <meta name="author" content="FitPo50">
   <link rel="canonical" href="https://fitpo50.pl/">
 
   <meta property="og:title" content="FitPo50 | Trening i dieta po 50-tce">
-  <meta property="og:description" content="Praktyczne porady o ruchu, jedzeniu i zdrowiu po 50-tce. Konkret, regularnosc i rzetelne zrodla.">
+  <meta property="og:description" content="Praktyczne porady o ruchu, jedzeniu i zdrowiu po 50-tce. Konkret, regularność i rzetelne źródła.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fitpo50.pl/">
   <meta property="og:image" content="https://fitpo50.pl/assets/hero-og.jpg">
@@ -18,7 +18,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FitPo50 | Trening i dieta po 50-tce">
-  <meta name="twitter:description" content="Praktyczne porady o ruchu, jedzeniu i zdrowiu po 50-tce. Konkret, regularnosc i rzetelne zrodla.">
+  <meta name="twitter:description" content="Praktyczne porady o ruchu, jedzeniu i zdrowiu po 50-tce. Konkret, regularność i rzetelne źródła.">
   <meta name="twitter:image" content="https://fitpo50.pl/assets/hero-og.jpg">
 
   <script type="application/ld+json">
@@ -1736,6 +1736,124 @@
       return Math.floor(diff / oneDay);
     }
 
+    const NON_ARTICLE_PATHS = new Set([
+      '/index.html',
+      '/porady.html',
+      '/rusz-sie.html',
+      '/jedzenie.html',
+      '/zdrowie.html',
+      '/ciekawe.html',
+      '/dziennik.html',
+      '/o-mnie.html',
+      '/moje-sukcesy.html',
+      '/polityka-prywatnosci.html'
+    ]);
+
+    function normalizeFitpoPath(loc) {
+      try {
+        const parsed = new URL((loc || '').trim());
+        if (!/fitpo50\.pl$/i.test(parsed.hostname)) return null;
+        return parsed.pathname === '/' ? '/index.html' : parsed.pathname;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function parseLastmodTimestamp(value) {
+      const ts = Date.parse((value || '').trim());
+      return Number.isFinite(ts) ? ts : Number.NEGATIVE_INFINITY;
+    }
+
+    function getArticleEntriesFromSitemapDoc(sitemapDoc) {
+      const urlNodes = Array.from(sitemapDoc.querySelectorAll('url'));
+      const entries = urlNodes
+        .map((urlNode, idx) => {
+          const loc = (urlNode.querySelector('loc')?.textContent || '').trim();
+          const path = normalizeFitpoPath(loc);
+          if (!path) return null;
+          const lastmod = (urlNode.querySelector('lastmod')?.textContent || '').trim();
+          return { path, lastmodTs: parseLastmodTimestamp(lastmod), order: idx };
+        })
+        .filter(Boolean)
+        .filter((entry) => entry.path.endsWith('.html'))
+        .filter((entry) => !NON_ARTICLE_PATHS.has(entry.path))
+        .filter((entry) => !entry.path.startsWith('/sukcesy/'));
+
+      entries.sort((a, b) => (b.lastmodTs - a.lastmodTs) || (a.order - b.order));
+      return entries;
+    }
+
+    let sortedArticleEntriesCachePromise = null;
+
+    function getPublishedTimestampFromJsonLd(node) {
+      if (!node) return Number.NEGATIVE_INFINITY;
+      if (Array.isArray(node)) {
+        return node.reduce((best, item) => Math.max(best, getPublishedTimestampFromJsonLd(item)), Number.NEGATIVE_INFINITY);
+      }
+      if (typeof node !== 'object') return Number.NEGATIVE_INFINITY;
+      const typeValue = node['@type'];
+      const types = Array.isArray(typeValue) ? typeValue : [typeValue];
+      const isArticleLike = types.some((t) => /article|blogposting|newsarticle/i.test(String(t || '')));
+      let ownTs = Number.NEGATIVE_INFINITY;
+      if (isArticleLike) {
+        ownTs = parseLastmodTimestamp(node.datePublished || node.dateCreated || '');
+      }
+      if (Array.isArray(node['@graph'])) {
+        ownTs = Math.max(ownTs, getPublishedTimestampFromJsonLd(node['@graph']));
+      }
+      return ownTs;
+    }
+
+    function getPublishedTimestampFromDoc(doc) {
+      const metaCandidates = [
+        getMetaContent(doc, 'article:published_time', 'property'),
+        getMetaContent(doc, 'datePublished', 'itemprop'),
+        getMetaContent(doc, 'datePublished')
+      ];
+      let best = metaCandidates.reduce((acc, value) => Math.max(acc, parseLastmodTimestamp(value)), Number.NEGATIVE_INFINITY);
+
+      const jsonScripts = Array.from(doc.querySelectorAll('script[type="application/ld+json"]'));
+      for (const script of jsonScripts) {
+        const raw = (script.textContent || '').trim();
+        if (!raw) continue;
+        try {
+          const parsed = JSON.parse(raw);
+          best = Math.max(best, getPublishedTimestampFromJsonLd(parsed));
+        } catch (_) {}
+      }
+      return best;
+    }
+
+    async function getSortedArticleEntries() {
+      if (!sortedArticleEntriesCachePromise) {
+        sortedArticleEntriesCachePromise = (async () => {
+          const sitemapRes = await fetch('./sitemap.xml', { cache: 'no-store' });
+          if (!sitemapRes.ok) throw new Error('SITEMAP_FETCH_FAILED');
+          const sitemapXml = await sitemapRes.text();
+          const sitemapDoc = new DOMParser().parseFromString(sitemapXml, 'application/xml');
+          const baseEntries = getArticleEntriesFromSitemapDoc(sitemapDoc);
+          const enriched = await Promise.all(baseEntries.map(async (entry) => {
+            try {
+              const articleRes = await fetch(`.${entry.path}`, { cache: 'no-store' });
+              if (!articleRes.ok) return { ...entry, publishedTs: Number.NEGATIVE_INFINITY };
+              const html = await articleRes.text();
+              const doc = new DOMParser().parseFromString(html, 'text/html');
+              return { ...entry, publishedTs: getPublishedTimestampFromDoc(doc) };
+            } catch (_) {
+              return { ...entry, publishedTs: Number.NEGATIVE_INFINITY };
+            }
+          }));
+
+          enriched.sort((a, b) => (b.publishedTs - a.publishedTs) || (b.lastmodTs - a.lastmodTs) || (a.order - b.order));
+          return enriched;
+        })().catch((error) => {
+          sortedArticleEntriesCachePromise = null;
+          throw error;
+        });
+      }
+      return sortedArticleEntriesCachePromise;
+    }
+
     function extractFaqJsonFromHtml(htmlText) {
       const doc = new DOMParser().parseFromString(htmlText, 'text/html');
       const jsonScripts = doc.querySelectorAll('script[type="application/ld+json"]');
@@ -1795,25 +1913,8 @@
       ];
 
       try {
-        const sitemapRes = await fetch('./sitemap.xml', { cache: 'no-store' });
-        if (!sitemapRes.ok) throw new Error('SITEMAP_FETCH_FAILED');
-        const sitemapXml = await sitemapRes.text();
-        const sitemapDoc = new DOMParser().parseFromString(sitemapXml, 'application/xml');
-        const locNodes = Array.from(sitemapDoc.querySelectorAll('url > loc'));
-        const paths = locNodes
-          .map((node) => (node.textContent || '').trim())
-          .map((loc) => {
-            try {
-              const parsed = new URL(loc);
-              if (!/fitpo50\.pl$/i.test(parsed.hostname)) return null;
-              return parsed.pathname === '/' ? '/index.html' : parsed.pathname;
-            } catch (_) {
-              return null;
-            }
-          })
-          .filter(Boolean)
-          .filter((path) => path.endsWith('.html'))
-          .filter((path) => !['/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/dziennik.html'].includes(path))
+        const paths = (await getSortedArticleEntries())
+          .map((entry) => entry.path)
           .slice(0, 36);
 
         const faqCandidates = [];
@@ -1867,28 +1968,7 @@
       await setLatestArticleBackground([fallback.image], fallback.url);
 
       try {
-        const sitemapRes = await fetch('./sitemap.xml', { cache: 'no-store' });
-        if (!sitemapRes.ok) throw new Error('SITEMAP_FETCH_FAILED');
-        const sitemapXml = await sitemapRes.text();
-        const sitemapDoc = new DOMParser().parseFromString(sitemapXml, 'application/xml');
-        const locNodes = Array.from(sitemapDoc.querySelectorAll('url > loc'));
-
-        const paths = locNodes
-          .map((node) => (node.textContent || '').trim())
-          .map((loc) => {
-            try {
-              const parsed = new URL(loc);
-              if (!/fitpo50\.pl$/i.test(parsed.hostname)) return null;
-              return parsed.pathname === '/' ? '/index.html' : parsed.pathname;
-            } catch (_) {
-              return null;
-            }
-          })
-          .filter(Boolean)
-          .filter((path) => path.endsWith('.html'))
-          .filter((path) => !['/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/dziennik.html'].includes(path));
-
-        const latestPath = paths[0];
+        const latestPath = (await getSortedArticleEntries())[0]?.path;
         if (!latestPath) throw new Error('NO_ARTICLES');
 
         const articleRes = await fetch(`.${latestPath}`, { cache: 'no-store' });
@@ -1979,26 +2059,8 @@
     async function loadReadingRoom() {
       if (!readingRoomGrid) return;
       try {
-        const sitemapRes = await fetch('./sitemap.xml', { cache: 'no-store' });
-        if (!sitemapRes.ok) throw new Error('SITEMAP_FETCH_FAILED');
-        const sitemapXml = await sitemapRes.text();
-        const sitemapDoc = new DOMParser().parseFromString(sitemapXml, 'application/xml');
-        const locNodes = Array.from(sitemapDoc.querySelectorAll('url > loc'));
-
-        const paths = locNodes
-          .map((node) => (node.textContent || '').trim())
-          .map((loc) => {
-            try {
-              const parsed = new URL(loc);
-              if (!/fitpo50\.pl$/i.test(parsed.hostname)) return null;
-              return parsed.pathname === '/' ? '/index.html' : parsed.pathname;
-            } catch (_) {
-              return null;
-            }
-          })
-          .filter(Boolean)
-          .filter((path) => path.endsWith('.html'))
-          .filter((path) => !['/index.html', '/porady.html', '/rusz-sie.html', '/jedzenie.html', '/zdrowie.html', '/ciekawe.html', '/dziennik.html'].includes(path))
+        const paths = (await getSortedArticleEntries())
+          .map((entry) => entry.path)
           .slice(0, 3);
 
         if (!paths.length) throw new Error('NO_READING_PATHS');

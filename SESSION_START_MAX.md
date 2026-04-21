@@ -22,6 +22,7 @@ Nastepnie:
 - jesli zadanie dotyczy Porady, przeczytaj `MEMORY_PORADY.md`,
 - jesli zadanie dotyczy Moje Sukcesy, przeczytaj `MEMORY_MOJE_SUKCESY.md`,
 - jesli zadanie dotyczy NEWS, przeczytaj `MEMORY_NEWSY.md`.
+- jesli zadanie dotyczy artykulow, przeczytaj tez `ARTICLE_STANDARD.md`.
 
 Zasady:
 - nie zgaduj,
@@ -33,11 +34,21 @@ Zasady:
 - nie uzywaj polecen destrukcyjnych bez mojej wyraznej zgody.
 
 Publikacja artykulow:
+- nowy artykul tworzymy przez `article-template-bento.html` (lub generator `node scripts/create-article-from-template.js ...`),
+- obowiazkowo uruchom walidator standardu: `node scripts/validate-article-standard.js <plik.html>`,
+- artykul nie przechodzi, jesli ma inline CSS lub lokalny `<style>`,
+- naglowek "Czytelnia" ma byc index-style (`reading-room__head` z ikona),
+- footer `site-footer-bento` musi byc wewnatrz `<body>`,
 - dla nowego artykulu `datePublished` i `article:published_time` ustawiaj na faktyczna date publikacji,
 - `dateModified` i `article:modified_time` aktualizuj przy kazdej istotnej zmianie merytorycznej,
 - kazdy claim liczbowy (%, dni, ryzyko, wzrost/spadek) musi miec zrodlo z URL; bez zrodla nie podawaj liczby,
 - nowy artykul = obowiazkowa synchronizacja: strona kategorii + `porady.html` + `index.html` (`featured-article` i 3 kafelki) + `sitemap.xml` + eksport do `_site`,
 - w `porady.html` pilnuj spojnosci: `numberOfItems` = liczba kart `data-article-item` = `data-article-count`; `data-order` ma byc unikalne,
+- nowy wpis dostaje `data-order = max + 1` (bez duplikatow) na `porady.html` i stronie kategorii,
+- "Nowy artykul" na `index.html` bierze kolejnosc z `sitemap.xml` + `article:published_time`/`datePublished` (nie z `data-order`),
+- dlatego przy publikacji ustawiaj faktyczne daty publikacji (`article:published_time`, `datePublished`) oraz aktualizuj `dateModified`/`article:modified_time`,
+- SEO guardrails: `<title>` max 65 znakow, `meta description` max 160 znakow,
+- AEO guardrails: w `BlogPosting` dodawaj `speakable`, a sekcje `.key-takeaways` umieszczaj po wstepie (nie na samym dole),
 - interlinking w tresci: minimum 4 linki kontekstowe w akapitach (nie tylko sekcja Czytelnia).
 
 Modul NEWS:

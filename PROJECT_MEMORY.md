@@ -121,6 +121,35 @@
   - Kazda zmiana frontowa musi byc zsynchronizowana w source i `_site` przed deployem.
   - Po wiekszych zmianach uruchamiamy pelny export, a nie reczne kopiowanie pojedynczych plikow.
 
+## Ustalenia operacyjne (2026-04-21) - anty-regresja artykulow
+
+- **Numeracja kart artykulow (`data-order`) - zasada twarda:**
+  - Na `porady.html` i stronie kategorii docelowej (`rusz-sie.html` / `jedzenie.html` / `zdrowie.html` / `ciekawe.html`) `data-order` musi byc **unikalne**.
+  - Nowy artykul zawsze dostaje numer `max(data-order) + 1` (bez duplikatow).
+  - Nie wolno recznie nadpisywac istniejacego numeru na wartosc juz zajeta.
+
+- **"Nowy artykul" na `index.html` - jak dziala naprawde:**
+  - Sekcja "Nowy artykul" nie czyta `data-order` z `porady.html`.
+  - Kolejnosc bierze z `sitemap.xml` + `article:published_time` / `datePublished` z HTML artykulu.
+  - Przy nowym wpisie trzeba ustawic poprawnie:
+    - `meta property="article:published_time"`,
+    - `BlogPosting.datePublished`,
+    - `BlogPosting.dateModified` (i odpowiednik `article:modified_time`).
+
+- **Obowiazkowa checklista publikacyjna nowego artykulu:**
+  - dodaj URL do `sitemap.xml` z aktualnym `lastmod`,
+  - dodaj/uzupelnij wpis w `llms.txt`,
+  - dodaj karte na stronie kategorii + `porady.html`,
+  - zweryfikuj, ze nowy wpis jest najwyzej w sortowaniu "Nowy artykul" (wg dat publikacji),
+  - zsynchronizuj source i `_site` dla wszystkich powyzszych zmian.
+
+- **Minimalna walidacja po podpieciu artykulu (obowiazkowa):**
+  - sprawdz, czy `data-order` nowego wpisu jest najwyzsze i unikalne,
+  - sprawdz, czy `article:published_time` i `datePublished` wskazuja faktyczna date publikacji,
+  - sprawdz, czy URL istnieje jednoczesnie w source i `_site`.
+  - sprawdz SEO meta: `<title>` <= 65 znakow, `meta description` <= 160 znakow,
+  - sprawdz AEO: `BlogPosting.speakable` obecne oraz `.key-takeaways` umieszczone po wstepie.
+
 ## Open questions
 - Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?
 - Czy rozszerzamy automatyczne testy synchronizacji (rollback + spojnosc JSON/sitemap)?
@@ -229,16 +258,39 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 
 ## Artykuly
 
+- Kanoniczny standard artykułów jest opisany w `ARTICLE_STANDARD.md` i jest **obowiązkowy**.
+- Golden template (wzorzec referencyjny): `wydolnosc-vo2max-starzenie-po-50.html`.
+- Szablon do tworzenia nowych wpisów: `article-template-bento.html`.
+- Każdy nowy artykuł ma być tworzony wyłącznie z szablonu; nie robimy ręcznych wariantów layoutu.
 - W headerze artykulu pokazujemy tylko:
   - dzial
   - czas czytania
 - Nie pokazujemy widocznej daty publikacji lub aktualizacji na gorze artykulu.
 - Daty moga byc obecne tylko w SEO i schema.
 - Uklad artykulu ma byc spojny z istniejacym standardem wizualnym.
-- **Sekcja „Czytaj również”:** Na dole każdego artykułu (nad footerem) zawsze dodajemy sekcję o klasie `porady-preview section-padding`. 
-  - Musi ona zawierać nagłówek ze snem `section-header__label` o treści „Czytelnia” oraz tytuł `section-header__title` o treści „Najnowsze Porady i Artykuły”.
-  - Poniżej znajdują się dokładnie 3 kafelki w jednym rzędzie (grid 3-kolumnowy).
-  - Każdy kafelek musi zawierać: zdjęcie (picture), kategorię, czas czytania, tytuł (h4), krótki opis oraz przycisk „Czytaj artykuł ->”.
+- **Sekcja „Czytelnia” (obowiązkowa):** Na dole każdego artykułu (nad footerem) zawsze dodajemy sekcję o klasach `reading-room porady-preview section-padding` z `id="porady-preview"`.
+  - Nagłówek ma być identyczny jak na `index.html` (układ `reading-room__head` + `title-with-icon` + `title-icon`).
+  - Poniżej mają być dokładnie 3 kafelki w układzie `articles-grid-preview`.
+  - Każdy kafelek zawiera: `picture`, kategorię, czas czytania, tytuł (`h4`), krótki opis i CTA „Czytaj artykuł ->”.
+- Zakazane w artykułach:
+  - inline CSS (`style="..."`),
+  - lokalne bloki `<style>` (docelowy standard),
+  - footer poza `<body>`.
+- Wymagane klasy na `body` artykułu:
+  - `article-template`,
+  - `article--ruch` lub `article--jedzenie` lub `article--zdrowie` lub `article--ciekawe`.
+- System kolorów kategorii (stały):
+  - `Ruch`: `#2f6f99` / `#ffffff`,
+  - `Jedzenie`: `rgba(201, 109, 49, 0.94)` / `#ffffff`,
+  - `Zdrowie`: `rgba(228, 188, 74, 0.96)` / `#4e3a04`,
+  - `Ciekawe`: `rgba(67, 149, 84, 0.94)` / `#ffffff`.
+- Zmiany globalne designu robimy przez tokeny CSS (jedna edycja = wszystkie artykuły):
+  - fonty: `--font-display`, `--font-body`, `--font-ui`,
+  - spacing/radius/type scale: `--space-*`, `--radius-*`, `--text-*`,
+  - breakpointy: `--bp-mobile`, `--bp-phone-dark`, `--bp-topbar-collapse`.
+- Narzędzia standardu:
+  - generator: `node scripts/create-article-from-template.js ...`,
+  - walidator: `node scripts/validate-article-standard.js <plik.html>`.
 
 ## SEO artykulow
 
