@@ -1,7 +1,33 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-21T13:43:50+00:00",
+    "updatedAt": "2026-04-22T18:19:15+00:00",
     "items": [
+        {
+            "id": "news_179948678030",
+            "title": "Czy dojrzałe banany „niszczą komórki raka”? Fakty zamiast mitu",
+            "content_html": "<p><span>W sieci krąży teza, że bardzo dojrzałe (ciemne) banany produkują substancje, które „<span class=\"news-text-tone--4\">zabijają komórki rakowe</span>”.</span><span><br>\n</span><span>To nie jest prawda w takiej formie.</span></p><p><span>Źródłem tego mitu jest stare japońskie badanie, które pokazało, że dojrzewające banany zwiększają poziom </span><span><span class=\"news-text-tone--1\"><span></span><span>TNF-like substances</span></span> (czynników związanych z odpornością).</span><span><br>\n</span><span>Problem:</span><span><br>\n</span><span>👉 były to </span><span><strong><span></span><span>badania laboratoryjne i na zwierzętach</span></strong>, nie na ludziach</span><span><br>\n</span><span>👉 nie pokazano, że <a href=\"dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html\">jedzenie</a> banana leczy lub zapobiega rakowi</span></p><p><span>Dojrzałe banany faktycznie mają więcej:</span></p><ul>\n<li><span class=\"news-text-tone--4\"><li><span>antyoksydantów</span></li>\n<li><span>łatwo przyswajalnych cukrów</span></li>\n<li><span>związków wspierających układ odpornościowy</span></li></span></li>\n</ul><p><span>Ale to </span><strong><span>nie jest terapia przeciwnowotworowa</span><span>.</span></strong></p><p><span>Nie istnieją wiarygodne <a href=\"badania-po-50.html\">badania</a> kliniczne potwierdzające, że jedzenie bananów — nawet bardzo dojrzałych — niszczy komórki rakowe u ludzi.</span></p><p><strong>Dojrzałe banany mogą wspierać odporność, ale nie mają działania przeciwnowotworowego — to viralowy mit oparty na źle zinterpretowanych badaniach. </strong><br><span></span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260422_181556_1680364b",
+            "image_alt": "Banany nowotwór",
+            "sources": [
+                {
+                    "label": "Japanese study on TNF-like substances in bananas (Mizuno et al.)",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/15779968/"
+                },
+                {
+                    "label": "National Cancer Institute – Diet and cancer myths",
+                    "url": "https://www.cancer.gov/about-cancer/causes-prevention/risk/diet"
+                },
+                {
+                    "label": "World Cancer Research Fund – Diet and cancer evidence",
+                    "url": "https://www.wcrf.org/diet-activity-and-cancer/"
+                }
+            ],
+            "created_at": "2026-04-22T18:15:56+00:00",
+            "updated_at": "2026-04-22T18:19:15+00:00",
+            "published_at": "2026-04-22T18:19:15+00:00"
+        },
         {
             "id": "news_5e7cba2c42b0",
             "title": "Kofeina pomaga na siłowni. Może też hamować efekty",
