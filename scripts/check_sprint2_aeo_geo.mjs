@@ -11,7 +11,8 @@ for (const file of htmlFiles) {
   const fullPath = path.join(ROOT, file);
   const html = fs.readFileSync(fullPath, 'utf8');
   const isBlogArticle = /"@type":\s*"BlogPosting"/.test(html);
-  if (!isBlogArticle) continue;
+  const isTemplate = file === 'article-template-bento.html';
+  if (!isBlogArticle || isTemplate) continue;
 
   if (!/"@type":\s*"FAQPage"/.test(html)) {
     errors.push(`${file}: brak FAQPage schema`);

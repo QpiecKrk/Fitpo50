@@ -27,8 +27,9 @@ function hasExternalCitationCandidate(html) {
 for (const file of htmlFiles) {
   const fullPath = path.join(ROOT, file);
   const html = fs.readFileSync(fullPath, 'utf8');
+  const isTemplate = file === 'article-template-bento.html';
 
-  if (!/"@type":\s*"BlogPosting"/.test(html)) continue;
+  if (!/"@type":\s*"BlogPosting"/.test(html) || isTemplate) continue;
 
   if (!/class="key-takeaways/i.test(html)) {
     errors.push(`${file}: brak bloku "Kluczowe wnioski" (key-takeaways)`);

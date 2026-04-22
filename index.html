@@ -1960,10 +1960,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Wydolność po 50: VO2 max mówi o Twoim starzeniu więcej niż obwód pasa',
-        excerpt: 'Praktyczny przewodnik: test 6-minutowego marszu, plan cardio i konkretne kroki poprawy wydolności po 50-tce.',
-        image: './assets/vo2max-lead-miasto-schody.webp',
-        url: 'wydolnosc-vo2max-starzenie-po-50.html'
+        title: 'Sarkopeniczna otyłość po 50: problem, którego nie widać w lustrze',
+        excerpt: 'Jak rozpoznać ukryty spadek masy mięśniowej, jakie sygnały ostrzegawcze warto znać i co robić, żeby odzyskać sprawność.',
+        image: './assets/sarkopenia-lead-lustro-cien.webp',
+        url: 'sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html'
       };
       await setLatestArticleBackground([fallback.image], fallback.url);
 
@@ -2026,6 +2026,13 @@
       const fallback = [
         {
           category: 'Zdrowie',
+          title: 'Sarkopeniczna otyłość po 50: problem, którego nie widać w lustrze',
+          excerpt: 'Dlaczego masa ciała może nie pokazywać spadku mięśni i jak wcześnie wychwycić ryzyko.',
+          image: './assets/sarkopenia-lead-lustro-cien.webp',
+          url: 'sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html'
+        },
+        {
+          category: 'Zdrowie',
           title: 'Wydolność po 50: VO2 max mówi o Twoim starzeniu więcej niż obwód pasa',
           excerpt: 'Jak ocenić wydolność testem 6-minutowego marszu i poprawić ją prostym planem cardio.',
           image: './assets/vo2max-lead-miasto-schody.webp',
@@ -2037,20 +2044,6 @@
           excerpt: 'Rzetelny przegląd badań oraz praktyczny monitoring wyników bez marketingowych skrótów.',
           image: './assets/keto-cholesterol-hero.jpg',
           url: 'dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'ApoB i ApoA: które markery lepiej opisują ryzyko sercowe?',
-          excerpt: 'Jak czytać nowoczesne markery lipidowe i jak łączyć je z klasycznym lipidogramem.',
-          image: './assets/apob-apoa-hero.webp',
-          url: 'apob-apoa-badania-cholesterol.html'
-        },
-        {
-          category: 'Ruch',
-          title: 'Trening 3x30 dla 50+: prosty plan bez przeciążania stawów',
-          excerpt: 'Krótkie sesje, sensowna progresja i regeneracja, która naprawdę działa.',
-          image: './assets/silka-hero.webp',
-          url: 'trening-3x30-dla-50-plus.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

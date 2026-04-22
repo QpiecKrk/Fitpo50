@@ -17,7 +17,8 @@ for (const file of htmlFiles) {
   }
 
   const hasBlogPosting = /"@type":\s*"BlogPosting"/.test(html);
-  if (hasBlogPosting) {
+  const isTemplate = file === 'article-template-bento.html';
+  if (hasBlogPosting && !isTemplate) {
     if (!/<meta name="author" content="FitPo50">/i.test(html)) {
       errors.push(`${file}: brak <meta name="author" content="FitPo50">`);
     }

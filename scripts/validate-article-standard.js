@@ -64,6 +64,52 @@ function validateFile(filePath) {
     }
   }
 
+  const localPaths = [];
+  for (const m of raw.matchAll(/<img[^>]*\ssrc="([^"]+)"/gi)) {
+    localPaths.push(m[1]);
+  }
+  for (const m of raw.matchAll(/<source[^>]*\ssrcset="([^"]+)"/gi)) {
+    const first = m[1].split(',')[0].trim().split(/\s+/)[0];
+    if (first) localPaths.push(first);
+  }
+  for (const m of raw.matchAll(/<link[^>]*\shref="([^"]+)"/gi)) {
+    localPaths.push(m[1]);
+  }
+  for (const m of raw.matchAll(/<script[^>]*\ssrc="([^"]+)"/gi)) {
+    localPaths.push(m[1]);
+  }
+  for (const m of raw.matchAll(/<a[^>]*\shref="([^"]+)"/gi)) {
+    localPaths.push(m[1]);
+  }
+
+  const checked = new Set();
+  for (const p of localPaths) {
+    if (!p) continue;
+    if (/^(https?:)?\/\//i.test(p)) continue;
+    if (p.startsWith('#') || p.startsWith('mailto:') || p.startsWith('tel:') || p.startsWith('javascript:')) continue;
+
+    const clean = p.split('#')[0].split('?')[0].trim();
+    if (!clean || clean === '/') continue;
+    const normalized = clean.replace(/^\.\//, '').replace(/^\//, '');
+    if (!normalized) continue;
+    if (checked.has(normalized)) continue;
+    checked.add(normalized);
+
+    const abs = path.resolve(process.cwd(), normalized);
+    if (!fs.existsSync(abs)) {
+      errors.push(`Brak lokalnego pliku referencji: ${clean}`);
+    }
+  }
+
+  const sourcesListMatch = raw.match(/<ol\s+class="sources-list"[\s\S]*?<\/ol>/i);
+  if (sourcesListMatch) {
+    const liItems = sourcesListMatch[0].match(/<li[\s\S]*?<\/li>/gi) || [];
+    const withoutLinks = liItems.filter((li) => !/<a\s+[^>]*href="https?:\/\/[^"]+"/i.test(li));
+    if (withoutLinks.length) {
+      errors.push(`Źródła: ${withoutLinks.length} pozycji bez klikalnego linku URL`);
+    }
+  }
+
   return errors;
 }
 
