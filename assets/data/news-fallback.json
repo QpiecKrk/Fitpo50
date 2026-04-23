@@ -1,7 +1,38 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-23T10:26:43+00:00",
+    "updatedAt": "2026-04-23T12:17:56+00:00",
     "items": [
+        {
+            "id": "news_39f7a7ca2578",
+            "title": "Magnez + witamina D: duet, który działa lepiej razem niż osobno?",
+            "content_html": "<p><span>Wiele osób po 50-tce bierze witaminę D albo magnez. Rzadziej myśli o tym, że te dwa składniki </span><span><strong><span></span><span>współpracują</span></strong> – i to ma znaczenie.</span></p><p><span></span><br></p><p><span><span>Witamina D</span> pomaga m.in. kościom, mięśniom i odporności. <span class=\"news-text-tone--1\">Magnez</span> bierze udział w setkach procesów w <a href=\"dzieci-patrza-na-ciebie.html\">organizmie</a>, w tym w pracy <a href=\"silownia-dla-ludzi.html\">mięśni</a> i układu nerwowego. Klucz: </span><strong><span>magnez jest potrzebny do aktywacji witaminy D</span><span>.</span></strong></p><p><span><strong>Co mówi nauka?</strong><br>\n</span><span>Przegląd badań (</span><span><span class=\"news-text-tone--2\"><span></span><span>Journal of Osteopathic Medicine</span></span>) wskazuje, że odpowiedni poziom magnezu może </span><span><strong><span></span><span><strong><span></span><span>poprawiać działanie witaminy D</span></strong></span></strong> w organizmie – m.in. jej metabolizm i wykorzystanie.</span><span><br>\n</span><span>To może przekładać się na lepsze efekty dla kości, mięśni i <a href=\"dyskopatia-po-50.html\">układu nerwowego</a>.</span></p><p><span>Ale: to głównie dane przeglądowe i obserwacyjne. Nie ma jednej, prostej „recepty” dla wszystkich.</span></p><p><span><strong>Co to oznacza w praktyce?</strong><br>\n</span><span>Jeśli bierzesz <span class=\"news-text-tone--3\">witaminę D</span>, a masz niedobór magnezu – jej działanie może być słabsze.</span><span><br>\n</span><span>Dlatego ważne jest </span><span>uzupełnianie obu składników</span><span>, najlepiej najpierw z diety, a dopiero potem z <a href=\"suplementacja-po-50.html\">suplementów</a>.</span></p><p><strong>To nie magia. To współpraca. Organizm działa w systemie – nie w pojedynczych „tabletkach”.</strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260423_121753_b2a3fbbe.avif",
+                "webp": "./assets/news/news_20260423_121753_b2a3fbbe.webp",
+                "jpg": "./assets/news/news_20260423_121753_b2a3fbbe.jpg",
+                "alt": "Witamina D",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Uwitonze A.M., Razzaque M.S., Role of Magnesium in Vitamin D Activation and Function, Journal of Osteopathic Medicine",
+                    "url": "https://doi.org/10.7556/jaoa.2018.037"
+                },
+                {
+                    "label": "NIH Office of Dietary Supplements – Magnesium",
+                    "url": "https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/"
+                },
+                {
+                    "label": "NIH Office of Dietary Supplements – Vitamin D",
+                    "url": "https://ods.od.nih.gov/factsheets/VitaminD-HealthProfessional/"
+                }
+            ],
+            "updated_at": "2026-04-23T12:17:56+00:00",
+            "published_at": "2026-04-23T12:17:56+00:00",
+            "excerpt": "Wiele osób po 50-tce bierze witaminę D albo magnez. Rzadziej myśli o tym, że te dwa składniki współpracują – i to ma znaczenie.Witamina D pomaga m.in. kościom, mięśniom i odporności. Magnez bierze udział w setkach proce…"
+        },
         {
             "id": "news_06109fae62fb",
             "title": "Czy jagody naprawdę „odmładzają mózg”? Sprawdź, co mówi nauka.",
