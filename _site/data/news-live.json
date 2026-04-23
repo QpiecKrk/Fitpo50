@@ -1,7 +1,29 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-22T18:23:13+00:00",
+    "updatedAt": "2026-04-23T04:13:15+00:00",
     "items": [
+        {
+            "id": "news_8043a497c7da",
+            "title": "Peptydy „na formę” – obiecujące, ale czy bezpieczne?",
+            "content_html": "<p><span><span>Peptydy</span> coraz częściej pojawiają się jako „<strong>nowoczesny sposób</strong>” na lepszą formę po 50-tce.</span><span><br>\n</span><span>To krótkie łańcuchy aminokwasów, które mogą wpływać m.in. na regenerację, hormony i metabolizm.</span></p><p><span>Problem w tym, że większość badań jest na etapie </span><strong><span>laboratoryjnym lub na zwierzętach</span><span>.</span></strong><br><span></span></p><p><span>Brakuje solidnych <span class=\"news-text-tone--3\">dowodów</span> na skuteczność i bezpieczeństwo u ludzi — szczególnie przy dłuższym stosowaniu.</span></p><p><span>Dodatkowo wiele peptydów działa jak leki, a rynek jest słabo kontrolowany.</span><br><span></span></p><p><span>To oznacza realne <span class=\"news-text-tone--3\">ryzyko</span>: skutki uboczne, zaburzenia hormonalne i niepewny skład produktów.</span></p><p><strong><span>Peptydy to dziś bardziej eksperyment niż sprawdzone rozwiązanie. </span><span>Dla formy po 50-tce nadal wygrywają podstawy:</span><span> </span><span>trening, białko, sen i regularność.</span></strong></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260423_041312_da46a77a",
+            "image_alt": "Peptydy",
+            "sources": [
+                {
+                    "label": "Endocrine Reviews – Peptide hormones and their clinical applications",
+                    "url": "https://academic.oup.com/edrv/article/36/2/234/2354709"
+                },
+                {
+                    "label": "Frontiers in Endocrinology – Therapeutic peptides: current status and future directions",
+                    "url": "https://www.frontiersin.org/articles/10.3389/fendo.2019.00395/full"
+                }
+            ],
+            "created_at": "2026-04-23T04:13:12+00:00",
+            "updated_at": "2026-04-23T04:13:15+00:00",
+            "published_at": "2026-04-23T04:13:15+00:00"
+        },
         {
             "id": "news_179948678030",
             "title": "Czy dojrzałe banany „niszczą komórki raka”? Fakty zamiast mitu",
