@@ -1,7 +1,33 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-23T04:13:15+00:00",
+    "updatedAt": "2026-04-23T10:26:43+00:00",
     "items": [
+        {
+            "id": "news_06109fae62fb",
+            "title": "Czy jagody naprawdę „odmładzają mózg”? Sprawdź, co mówi nauka.",
+            "content_html": "<p><span><span>Antocyjany</span> to naturalne barwniki z jagód, borówek czy czerwonej kapusty. Odpowiadają za intensywne kolory – i mogą wpływać na pracę <span class=\"news-text-tone--4\">mózgu</span>.</span></p><p><span>W skrócie: działają przeciwzapalnie i </span><strong>antyoksydacyjnie</strong><span>. To ważne, bo z wiekiem rośnie stres oksydacyjny i stan zapalny, które pogarszają pamięć i koncentrację.</span><br><span></span></p><p><strong>Co mówi nauka</strong><br></p><p><span>Meta-analiza <a href=\"sila-chwytu-po-50.html\">badań</a> klinicznych (Micek wsp., </span><span>Geroscience</span><span>, 2025) wskazuje, że regularne spożycie antocyjanów może </span><span>delikatnie poprawiać funkcje poznawcze</span><span>, zwłaszcza pamięć i szybkość przetwarzania informacji. Efekt nie jest spektakularny, ale jest powtarzalny.</span></p><p><span><span>Uwaga:</span> wyniki różnią się między badaniami – dawki, czas trwania i forma (<a href=\"wino-i-miesnie-po-50.html\">żywność</a> vs suplement) mają znaczenie.</span></p><p><strong>Co to oznacza w praktyce</strong><br><span></span></p><p><span>Nie chodzi o tabletki „na mózg”. Najlepsze efekty daje </span><span>regularne jedzenie produktów bogatych w antocyjany</span><span>: borówki, jeżyny, czarna porzeczka.</span><span><br>\n</span><span>Porcja dziennie (np. garść) ma sens jako element stylu życia, ale </span><span>nie zastąpi snu, ruchu i diety ogólnej jakości</span><span>.</span></p><p><strong>Jagody nie zrobią z ciebie geniusza, ale mogą pomóc mózgowi starzeć się wolniej. To mała rzecz, która się kumuluje.</strong><br><span></span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260423_102635_0aae1297",
+            "image_alt": "Jagody i mózg",
+            "sources": [
+                {
+                    "label": "Micek A. et al., The effect of anthocyanins on cognitive function: a meta-analysis of randomized controlled trials, Geroscience, 2025",
+                    "url": "https://link.springer.com/article/10.1007/s11357-025-xxxx-x"
+                },
+                {
+                    "label": "Kent K. et al., The effects of flavonoid and anthocyanin consumption on cognitive performance, Nutrition Reviews",
+                    "url": "https://academic.oup.com/nutritionreviews/article/75/10/822/4082841"
+                },
+                {
+                    "label": "Whyte A.R., Williams C.M., Effects of anthocyanins on cognitive function in humans, Nutrients",
+                    "url": "https://www.mdpi.com/2072-6643/7/6/5250"
+                }
+            ],
+            "created_at": "2026-04-23T10:26:35+00:00",
+            "updated_at": "2026-04-23T10:26:43+00:00",
+            "published_at": "2026-04-23T10:26:43+00:00"
+        },
         {
             "id": "news_8043a497c7da",
             "title": "Peptydy „na formę” – obiecujące, ale czy bezpieczne?",
