@@ -1,7 +1,33 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-23T12:17:56+00:00",
+    "updatedAt": "2026-04-24T05:46:06+00:00",
     "items": [
+        {
+            "id": "news_c98d741c5f6f",
+            "title": "Mikroplastik w mózgu: fakt, nie science fiction",
+            "content_html": "<p><span>Badanie opublikowane w</span><span><span class=\"news-text-tone--1\"><span> </span><span>Nature Medicine</span></span> (2025) wykryło mikro- i nanoplastik w ludzkim <a href=\"media-spolecznosciowe-po-50.html\">mózgu</a>. Co więcej, jego stężenie było</span><span><strong><span> </span><span>wyższe niż w wątrobie i nerkach</span></strong>, a w nowszych próbkach – większe niż wcześniej.</span></p><p><span></span><br></p><p><span>Mikroplastik to drobne cząstki powstające m.in. <span class=\"news-text-tone--1\">z opakowań, ubrań syntetycznych, kurzu czy wody</span>. Kontakt z nimi jest codzienny i praktycznie nieunikniony.</span></p><p><span>Kluczowe: to badanie </span><span><strong><span></span><span>nie dowodzi</span></strong>, że mikroplastik powoduje <span class=\"news-text-tone--4\">choroby</span>, np. demencję. Pokazuje tylko jego obecność i możliwą kumulację w organizmie. To sygnał, nie wyrok.</span><br><span></span></p><p><span>W praktyce chodzi o ograniczanie ekspozycji</span><span>:</span><span> </span><span>unikaj podgrzewania jedzenia w plastiku, częściej używaj szkła lub stali, ogranicz wodę z plastikowych </span><a href=\"nawodnienie-na-treningu-po-50.html\">butelek</a><span>, dbaj o czystość powietrza w domu.</span></p><p><strong><span>M</span><span>ikroplastik to realny problem środowiskowy i biologiczny, ale bez paniki — liczą się małe, codzienne decyzje, które zmniejszają ryzyko. </span></strong><br><span></span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260424_054603_c614c64b",
+            "image_alt": "Mikroplastik",
+            "sources": [
+                {
+                    "label": "Nature Medicine — “Bioaccumulation of microplastics in decedent human brains”",
+                    "url": "https://www.nature.com/articles/s41591-024-03453-1"
+                },
+                {
+                    "label": "PubMed — “Bioaccumulation of microplastics in decedent human brains”",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/39901044/"
+                },
+                {
+                    "label": "WWF — “Plastic ingestion by people could be equating to a credit card a week”",
+                    "url": "https://www.wwf.eu/?348458/Plastic-ingestion-by-people-could-be-equating-to-a-credit-card-a-week="
+                }
+            ],
+            "created_at": "2026-04-24T05:46:03+00:00",
+            "updated_at": "2026-04-24T05:46:06+00:00",
+            "published_at": "2026-04-24T05:46:06+00:00"
+        },
         {
             "id": "news_39f7a7ca2578",
             "title": "Magnez + witamina D: duet, który działa lepiej razem niż osobno?",
