@@ -37,6 +37,7 @@
   ExpiresByType text/css "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/json "access plus 5 minutes"
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
   ExpiresByType image/webp "access plus 1 year"
@@ -54,6 +55,11 @@
   # Immutable cache for versioned/static assets
   <FilesMatch "\.(css|js|jpg|jpeg|png|webp|avif|svg|woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # JSON payloads for dynamic sections (short cache)
+  <FilesMatch "\.(json)$">
+    Header set Cache-Control "public, max-age=300, must-revalidate"
   </FilesMatch>
 </IfModule>
 

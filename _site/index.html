@@ -29,7 +29,12 @@
       "name": "FitPo50",
       "url": "https://fitpo50.pl/",
       "inLanguage": "pl-PL",
-      "description": "Serwis o treningu, diecie i zdrowiu po 50-tce."
+      "description": "Serwis o treningu, diecie i zdrowiu po 50-tce.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://fitpo50.pl/index.html?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@context": "https://schema.org",
@@ -214,6 +219,8 @@
       display: grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 12px;
+      --hero-card-height: 360px;
+      --latest-card-height: 340px;
     }
 
     .card {
@@ -240,6 +247,7 @@
       grid-column: 1 / span 6;
       grid-row: 1;
       min-height: 250px;
+      height: var(--hero-card-height);
       border-radius: var(--radius-xl);
     }
 
@@ -393,10 +401,19 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      background-size: cover;
-      background-position: center;
       position: relative;
       overflow: hidden;
+    }
+    .cat__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      z-index: 0;
+      background: #e8ddcb;
     }
 
     .cat::before {
@@ -404,9 +421,14 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(24, 34, 52, 0.08) 30%, rgba(24, 34, 52, 0.78) 100%);
+      z-index: 1;
     }
-
-    .cat > * { position: relative; z-index: 1; color: #fff; }
+    .cat strong,
+    .cat span {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
     .cat strong { font-size: 1.18rem; }
     .cat span { font-size: 0.92rem; opacity: 0.92; }
 
@@ -416,26 +438,41 @@
       grid-column: 1 / span 6;
       grid-row: 2;
       min-height: 170px;
+      height: var(--latest-card-height);
       border-radius: var(--radius-xl);
       position: relative;
       overflow: hidden;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      isolation: isolate;
+      background: #e8ddcb;
     }
-    /* Dla hero VO2 max przesuwamy kadr w lewo, by postać była po prawej. */
-    .latest-article.is-vo2-hero {
-      background-position: calc(30% - 15px) calc(58% + 100px);
+    .latest-article__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      z-index: 0;
+      background: #d8d2c8;
     }
     .latest-article::before {
       content: "";
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(24, 34, 52, 0.1) 0%, rgba(24, 34, 52, 0.5) 100%);
+      z-index: 1;
+    }
+    .latest-article .card-body {
+      position: relative;
+      z-index: 2;
+      height: 100%;
     }
     .news-feed {
       grid-column: 7 / span 6;
       grid-row: 1 / span 2;
+      height: calc(var(--hero-card-height) + var(--latest-card-height) + 12px);
+      max-height: calc(var(--hero-card-height) + var(--latest-card-height) + 12px);
       overflow: hidden;
     }
     .latest-article__wrap {
@@ -539,6 +576,7 @@
       border-radius: 12px;
       padding: 12px;
       margin: 0 0 10px;
+      min-height: 174px;
     }
     .ticker-item:last-child { margin-bottom: 0; }
     .ticker-item::after {
@@ -550,6 +588,8 @@
       float: left;
       width: 210px;
       height: 150px;
+      aspect-ratio: 210 / 150;
+      display: block;
       border-radius: 10px;
       object-fit: cover;
       border: 1px solid rgba(31, 43, 69, 0.12);
@@ -569,6 +609,30 @@
     }
     .ticker-body {
       min-width: 0;
+      min-height: 150px;
+    }
+    .ticker-item--skeleton {
+      pointer-events: none;
+    }
+    .ticker-item--skeleton .ticker-thumb,
+    .ticker-item--skeleton .sk-line {
+      animation: tickerPulse 1.25s ease-in-out infinite;
+    }
+    .ticker-item--skeleton .sk-line {
+      height: 12px;
+      border-radius: 8px;
+      background: rgba(31, 43, 69, 0.12);
+      margin-bottom: 10px;
+    }
+    .ticker-item--skeleton .sk-line:last-child {
+      margin-bottom: 0;
+    }
+    .ticker-item--skeleton .sk-line--lg { width: 82%; height: 15px; }
+    .ticker-item--skeleton .sk-line--md { width: 100%; }
+    .ticker-item--skeleton .sk-line--sm { width: 72%; }
+    @keyframes tickerPulse {
+      0%, 100% { opacity: 0.52; }
+      50% { opacity: 1; }
     }
     .ticker-content {
       color: #3f4d66;
@@ -1165,6 +1229,10 @@
         max-height: none;
         overflow: hidden;
       }
+      .hero,
+      .latest-article {
+        height: auto;
+      }
       .news-feed .card-body { min-height: 0; }
       .news-ticker {
         max-height: min(62vh, 560px);
@@ -1180,6 +1248,10 @@
         height: auto;
         max-height: none;
         overflow: hidden;
+      }
+      .hero,
+      .latest-article {
+        height: auto;
       }
       .news-feed .card-body {
         min-height: 0;
@@ -1211,7 +1283,15 @@
         float: none;
         width: 100%;
         height: 166px;
+        aspect-ratio: auto;
         margin: 0 0 10px;
+      }
+      .ticker-item {
+        display: block;
+        min-height: 0;
+      }
+      .ticker-item--skeleton .ticker-thumb {
+        margin-bottom: 10px;
       }
       .hub-grid { grid-template-columns: 1fr; }
       .truth-grid {
@@ -1277,12 +1357,13 @@
       </section>
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
+        <img class="latest-article__bg" id="latestArticleImage" src="./assets/nordic-walking-para-technika-park-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Ładowanie najnowszego artykułu…</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Pobieram ostatnio opublikowany materiał i przygotowuję zajawkę.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="porady.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Nordic Walking: kompletny przewodnik dla 50+. Technika, kije i jak zacząć bez kontuzji</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Kompletny przewodnik nordic walking po 50-tce: technika, dobór kijów, plan startowy i naukowe korzyści dla serca, mózgu oraz stawów.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="nordic-walking-jak-zaczac-technika-kije-zdrowie.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -1310,6 +1391,22 @@
             </span>
           </p>
           <div class="news-ticker" id="newsTickerList">
+            <article class="ticker-item ticker-item--skeleton" aria-hidden="true">
+              <div class="ticker-thumb"></div>
+              <div class="ticker-body">
+                <div class="sk-line sk-line--lg"></div>
+                <div class="sk-line sk-line--md"></div>
+                <div class="sk-line sk-line--sm"></div>
+              </div>
+            </article>
+            <article class="ticker-item ticker-item--skeleton" aria-hidden="true">
+              <div class="ticker-thumb"></div>
+              <div class="ticker-body">
+                <div class="sk-line sk-line--lg"></div>
+                <div class="sk-line sk-line--md"></div>
+                <div class="sk-line sk-line--sm"></div>
+              </div>
+            </article>
             <div class="news-feed-sentinel" id="newsFeedSentinel" aria-hidden="true"></div>
           </div>
           <div class="news-feed-loader" id="newsFeedLoader">Ładowanie kolejnych newsów...</div>
@@ -1354,19 +1451,23 @@
       </section>
 
       <section id="kategorie" class="categories" aria-label="4 kategorie">
-        <a class="cat" href="rusz-sie.html" data-title="kategoria ruch" style="background-image:url('./assets/silka-hero.webp');">
+        <a class="cat" href="rusz-sie.html" data-title="kategoria ruch">
+          <img class="cat__bg" src="./assets/silka-hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
           <strong>Ruch</strong>
           <span>Trening, mobilność, sprawność</span>
         </a>
-        <a class="cat" href="jedzenie.html" data-title="kategoria jedzenie" style="background-image:url('./assets/Hero_Upo.webp');">
+        <a class="cat" href="jedzenie.html" data-title="kategoria jedzenie">
+          <img class="cat__bg" src="./assets/Hero_Upo.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
           <strong>Jedzenie</strong>
           <span>Dieta, nawyki, praktyczne wybory</span>
         </a>
-        <a class="cat" href="zdrowie.html" data-title="kategoria zdrowie" style="background-image:url('./assets/apob-apoa-hero.webp');">
+        <a class="cat" href="zdrowie.html" data-title="kategoria zdrowie">
+          <img class="cat__bg" src="./assets/apob-apoa-hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
           <strong>Zdrowie</strong>
           <span>Profilaktyka i badania</span>
         </a>
-        <a class="cat" href="ciekawe.html" data-title="kategoria ciekawe" style="background-image:url('./assets/wino_miesnie_hero.webp');">
+        <a class="cat" href="ciekawe.html" data-title="kategoria ciekawe">
+          <img class="cat__bg" src="./assets/wino_miesnie_hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
           <strong>Ciekawe</strong>
           <span>Tematy, które zmieniają perspektywę</span>
         </a>
@@ -1588,13 +1689,10 @@
 
     const tipsTitle = document.getElementById('tipsTitle');
     const tipsList = document.getElementById('tipsList');
-    const heroCard = document.querySelector('.hero');
-    const latestArticleCard = document.querySelector('.latest-article');
-    const newsFeedCard = document.querySelector('.news-feed');
-    const gridRoot = document.getElementById('gridRoot');
     const latestArticleTitle = document.getElementById('latestArticleTitle');
     const latestArticleExcerpt = document.getElementById('latestArticleExcerpt');
     const latestArticleLink = document.getElementById('latestArticleLink');
+    const latestArticleImage = document.getElementById('latestArticleImage');
     const faqQuestion = document.getElementById('faqQuestion');
     const faqAnswer = document.getElementById('faqAnswer');
     const faqSource = document.getElementById('faqSource');
@@ -1628,19 +1726,6 @@
       tipsList.innerHTML = item.tips.map(t => `<li>${t}</li>`).join('');
     }
 
-    function syncNewsHeightToLeftColumn() {
-      if (!heroCard || !latestArticleCard || !newsFeedCard || !gridRoot) return;
-      if (window.innerWidth <= 1080) {
-        newsFeedCard.style.height = '';
-        newsFeedCard.style.maxHeight = '';
-        return;
-      }
-      const rowGap = parseFloat(getComputedStyle(gridRoot).rowGap || '0') || 0;
-      const targetHeight = heroCard.offsetHeight + latestArticleCard.offsetHeight + rowGap;
-      newsFeedCard.style.height = `${targetHeight}px`;
-      newsFeedCard.style.maxHeight = `${targetHeight}px`;
-    }
-
     function stripHtml(html) {
       const tmp = document.createElement('div');
       tmp.innerHTML = html || '';
@@ -1660,54 +1745,9 @@
       return `${text.slice(0, maxLen).trimEnd()}...`;
     }
 
-    function resolveOgImageCandidates(ogImage, fallbackImage) {
-      const candidates = [];
-      if (ogImage) {
-        try {
-          const parsed = new URL(ogImage, 'https://fitpo50.pl');
-          // Lokalnie preferujemy plik z assets, ale zostawiamy też URL zdalny jako drugi krok.
-          if (/fitpo50\.pl$/i.test(parsed.hostname)) {
-            candidates.push(`.${parsed.pathname}`);
-            candidates.push(parsed.toString());
-          } else {
-            candidates.push(parsed.toString());
-          }
-        } catch (_) {}
-      }
-      if (fallbackImage) candidates.push(fallbackImage);
-      return [...new Set(candidates.filter(Boolean))];
-    }
-
-    function loadFirstAvailableImage(candidates) {
-      const unique = [...new Set((candidates || []).filter(Boolean))];
-      if (!unique.length) return Promise.resolve('./assets/keto-cholesterol-hero.jpg');
-
-      return new Promise((resolve) => {
-        let i = 0;
-        const tryNext = () => {
-          if (i >= unique.length) {
-            resolve('./assets/keto-cholesterol-hero.jpg');
-            return;
-          }
-          const src = unique[i++];
-          const probe = new Image();
-          probe.onload = () => resolve(src);
-          probe.onerror = tryNext;
-          probe.src = src;
-        };
-        tryNext();
-      });
-    }
-
-    function isVo2Article(path) {
-      return /wydolnosc-vo2max-starzenie-po-50\.html$/i.test(path || '');
-    }
-
-    async function setLatestArticleBackground(imageCandidates, latestPath) {
-      if (!latestArticleCard) return;
-      const bestSrc = await loadFirstAvailableImage(imageCandidates);
-      latestArticleCard.style.backgroundImage = `url('${bestSrc}')`;
-      latestArticleCard.classList.toggle('is-vo2-hero', isVo2Article(latestPath));
+    function setLatestArticleImage(imagePath) {
+      if (!latestArticleImage) return;
+      latestArticleImage.src = imagePath || './assets/keto-cholesterol-hero.jpg';
     }
 
     window.__fitpoImageFallback = function (img) {
@@ -1722,164 +1762,12 @@
       img.src = './assets/keto-cholesterol-hero.jpg';
     };
 
-    function toTitleFromPath(path) {
-      const slug = (path || '').replace(/^\//, '').replace(/\.html$/i, '').replace(/-/g, ' ').trim();
-      if (!slug) return 'Strona główna';
-      return slug.charAt(0).toUpperCase() + slug.slice(1);
-    }
-
     function getDayKey() {
       const now = new Date();
       const start = new Date(now.getFullYear(), 0, 0);
       const diff = now - start;
       const oneDay = 1000 * 60 * 60 * 24;
       return Math.floor(diff / oneDay);
-    }
-
-    const NON_ARTICLE_PATHS = new Set([
-      '/index.html',
-      '/porady.html',
-      '/rusz-sie.html',
-      '/jedzenie.html',
-      '/zdrowie.html',
-      '/ciekawe.html',
-      '/dziennik.html',
-      '/o-mnie.html',
-      '/moje-sukcesy.html',
-      '/polityka-prywatnosci.html'
-    ]);
-
-    function normalizeFitpoPath(loc) {
-      try {
-        const parsed = new URL((loc || '').trim());
-        if (!/fitpo50\.pl$/i.test(parsed.hostname)) return null;
-        return parsed.pathname === '/' ? '/index.html' : parsed.pathname;
-      } catch (_) {
-        return null;
-      }
-    }
-
-    function parseLastmodTimestamp(value) {
-      const ts = Date.parse((value || '').trim());
-      return Number.isFinite(ts) ? ts : Number.NEGATIVE_INFINITY;
-    }
-
-    function getArticleEntriesFromSitemapDoc(sitemapDoc) {
-      const urlNodes = Array.from(sitemapDoc.querySelectorAll('url'));
-      const entries = urlNodes
-        .map((urlNode, idx) => {
-          const loc = (urlNode.querySelector('loc')?.textContent || '').trim();
-          const path = normalizeFitpoPath(loc);
-          if (!path) return null;
-          const lastmod = (urlNode.querySelector('lastmod')?.textContent || '').trim();
-          return { path, lastmodTs: parseLastmodTimestamp(lastmod), order: idx };
-        })
-        .filter(Boolean)
-        .filter((entry) => entry.path.endsWith('.html'))
-        .filter((entry) => !NON_ARTICLE_PATHS.has(entry.path))
-        .filter((entry) => !entry.path.startsWith('/sukcesy/'));
-
-      entries.sort((a, b) => (b.lastmodTs - a.lastmodTs) || (a.order - b.order));
-      return entries;
-    }
-
-    let sortedArticleEntriesCachePromise = null;
-
-    function getPublishedTimestampFromJsonLd(node) {
-      if (!node) return Number.NEGATIVE_INFINITY;
-      if (Array.isArray(node)) {
-        return node.reduce((best, item) => Math.max(best, getPublishedTimestampFromJsonLd(item)), Number.NEGATIVE_INFINITY);
-      }
-      if (typeof node !== 'object') return Number.NEGATIVE_INFINITY;
-      const typeValue = node['@type'];
-      const types = Array.isArray(typeValue) ? typeValue : [typeValue];
-      const isArticleLike = types.some((t) => /article|blogposting|newsarticle/i.test(String(t || '')));
-      let ownTs = Number.NEGATIVE_INFINITY;
-      if (isArticleLike) {
-        ownTs = parseLastmodTimestamp(node.datePublished || node.dateCreated || '');
-      }
-      if (Array.isArray(node['@graph'])) {
-        ownTs = Math.max(ownTs, getPublishedTimestampFromJsonLd(node['@graph']));
-      }
-      return ownTs;
-    }
-
-    function getPublishedTimestampFromDoc(doc) {
-      const metaCandidates = [
-        getMetaContent(doc, 'article:published_time', 'property'),
-        getMetaContent(doc, 'datePublished', 'itemprop'),
-        getMetaContent(doc, 'datePublished')
-      ];
-      let best = metaCandidates.reduce((acc, value) => Math.max(acc, parseLastmodTimestamp(value)), Number.NEGATIVE_INFINITY);
-
-      const jsonScripts = Array.from(doc.querySelectorAll('script[type="application/ld+json"]'));
-      for (const script of jsonScripts) {
-        const raw = (script.textContent || '').trim();
-        if (!raw) continue;
-        try {
-          const parsed = JSON.parse(raw);
-          best = Math.max(best, getPublishedTimestampFromJsonLd(parsed));
-        } catch (_) {}
-      }
-      return best;
-    }
-
-    async function getSortedArticleEntries() {
-      if (!sortedArticleEntriesCachePromise) {
-        sortedArticleEntriesCachePromise = (async () => {
-          const sitemapRes = await fetch('./sitemap.xml', { cache: 'no-store' });
-          if (!sitemapRes.ok) throw new Error('SITEMAP_FETCH_FAILED');
-          const sitemapXml = await sitemapRes.text();
-          const sitemapDoc = new DOMParser().parseFromString(sitemapXml, 'application/xml');
-          const baseEntries = getArticleEntriesFromSitemapDoc(sitemapDoc);
-          const enriched = await Promise.all(baseEntries.map(async (entry) => {
-            try {
-              const articleRes = await fetch(`.${entry.path}`, { cache: 'no-store' });
-              if (!articleRes.ok) return { ...entry, publishedTs: Number.NEGATIVE_INFINITY };
-              const html = await articleRes.text();
-              const doc = new DOMParser().parseFromString(html, 'text/html');
-              return { ...entry, publishedTs: getPublishedTimestampFromDoc(doc) };
-            } catch (_) {
-              return { ...entry, publishedTs: Number.NEGATIVE_INFINITY };
-            }
-          }));
-
-          enriched.sort((a, b) => (b.publishedTs - a.publishedTs) || (b.lastmodTs - a.lastmodTs) || (a.order - b.order));
-          return enriched;
-        })().catch((error) => {
-          sortedArticleEntriesCachePromise = null;
-          throw error;
-        });
-      }
-      return sortedArticleEntriesCachePromise;
-    }
-
-    function extractFaqJsonFromHtml(htmlText) {
-      const doc = new DOMParser().parseFromString(htmlText, 'text/html');
-      const jsonScripts = doc.querySelectorAll('script[type="application/ld+json"]');
-      const snippets = [];
-
-      for (const script of jsonScripts) {
-        const raw = (script.textContent || '').trim();
-        if (!raw) continue;
-        let parsed;
-        try {
-          parsed = JSON.parse(raw);
-        } catch (_) {
-          continue;
-        }
-
-        const normalized = Array.isArray(parsed) ? parsed : [parsed];
-        normalized.forEach((node) => {
-          if (!node || node['@type'] !== 'FAQPage' || !Array.isArray(node.mainEntity) || !node.mainEntity.length) return;
-          const first = node.mainEntity[0] || {};
-          const question = stripHtml(first.name || '');
-          const answer = stripHtml(first?.acceptedAnswer?.text || '');
-          if (question && answer) snippets.push({ question, answer });
-        });
-      }
-
-      return snippets;
     }
 
     function renderDailyFaq(item) {
@@ -1912,95 +1800,21 @@
         }
       ];
 
-      try {
-        const paths = (await getSortedArticleEntries())
-          .map((entry) => entry.path)
-          .slice(0, 36);
-
-        const faqCandidates = [];
-        for (const path of paths) {
-          try {
-            const res = await fetch(`.${path}`, { cache: 'no-store' });
-            if (!res.ok) continue;
-            const html = await res.text();
-            const snippets = extractFaqJsonFromHtml(html);
-            if (!snippets.length) continue;
-            const firstSnippet = snippets[0];
-            faqCandidates.push({
-              question: firstSnippet.question,
-              answer: firstSnippet.answer,
-              url: path.replace(/^\//, ''),
-              sourceLabel: toTitleFromPath(path)
-            });
-          } catch (_) {}
-        }
-
-        const pool = faqCandidates.length ? faqCandidates : fallbackFaqPool;
-        const dailyIndex = getDayKey() % pool.length;
-        renderDailyFaq(pool[dailyIndex]);
-      } catch (_) {
-        const dailyIndex = getDayKey() % fallbackFaqPool.length;
-        renderDailyFaq(fallbackFaqPool[dailyIndex]);
-      }
-    }
-
-    function getMetaContent(doc, name, attr = 'name') {
-      const node = doc.querySelector(`meta[${attr}="${name}"]`);
-      return node ? (node.getAttribute('content') || '').trim() : '';
-    }
-
-    function extractArticleTitle(doc) {
-      const h1 = doc.querySelector('h1');
-      if (h1 && h1.textContent.trim()) return h1.textContent.trim();
-      const ogTitle = getMetaContent(doc, 'og:title', 'property');
-      if (ogTitle) return ogTitle;
-      const title = doc.title || '';
-      return title.replace(/\s*[-|]\s*FitPo50.*$/i, '').trim() || 'Najnowszy artykuł';
+      const dailyIndex = getDayKey() % fallbackFaqPool.length;
+      renderDailyFaq(fallbackFaqPool[dailyIndex]);
     }
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Sarkopeniczna otyłość po 50: problem, którego nie widać w lustrze',
-        excerpt: 'Jak rozpoznać ukryty spadek masy mięśniowej, jakie sygnały ostrzegawcze warto znać i co robić, żeby odzyskać sprawność.',
-        image: './assets/sarkopenia-lead-lustro-cien.webp',
-        url: 'sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html'
+        title: 'Nordic Walking: kompletny przewodnik dla 50+. Technika, kije i jak zacząć bez kontuzji',
+        excerpt: 'Kompletny przewodnik nordic walking po 50-tce: technika, dobór kijów, plan startowy i naukowe korzyści dla serca, mózgu oraz stawów.',
+        image: './assets/nordic-walking-para-technika-park-hero.webp',
+        url: 'nordic-walking-jak-zaczac-technika-kije-zdrowie.html'
       };
-      await setLatestArticleBackground([fallback.image], fallback.url);
-
-      try {
-        const latestPath = (await getSortedArticleEntries())[0]?.path;
-        if (!latestPath) throw new Error('NO_ARTICLES');
-
-        const articleRes = await fetch(`.${latestPath}`, { cache: 'no-store' });
-        if (!articleRes.ok) throw new Error('ARTICLE_FETCH_FAILED');
-        const html = await articleRes.text();
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-
-        const title = extractArticleTitle(doc);
-        const description = getMetaContent(doc, 'description') || stripHtml((doc.querySelector('article p') || {}).textContent || '');
-        const ogImage = getMetaContent(doc, 'og:image', 'property');
-        const imageCandidates = resolveOgImageCandidates(ogImage, fallback.image);
-
-        latestArticleTitle.textContent = title || fallback.title;
-        latestArticleExcerpt.textContent = truncate(description || fallback.excerpt, 190);
-        latestArticleLink.href = latestPath.replace(/^\//, '');
-        await setLatestArticleBackground(imageCandidates, latestPath.replace(/^\//, ''));
-        syncNewsHeightToLeftColumn();
-      } catch (_) {
-        latestArticleTitle.textContent = fallback.title;
-        latestArticleExcerpt.textContent = fallback.excerpt;
-        latestArticleLink.href = fallback.url;
-        await setLatestArticleBackground([fallback.image], fallback.url);
-        syncNewsHeightToLeftColumn();
-      }
-    }
-
-    function inferCategoryFromPath(path) {
-      const value = (path || '').toLowerCase();
-      if (/keto|jedzenie|bialko|cukier|wino|dieta|tłuszcz|tluszcz/.test(value)) return 'Jedzenie';
-      if (/trening|silowni|siłowni|ruch|mobiln|sprawn|plan-tygodnia/.test(value)) return 'Ruch';
-      if (/cholesterol|apob|apoa|zdrowie|lipido|serc|badan|vo2max|wydolnosc|wydolność/.test(value)) return 'Zdrowie';
-      return 'Ciekawe';
+      latestArticleTitle.textContent = fallback.title;
+      latestArticleExcerpt.textContent = fallback.excerpt;
+      latestArticleLink.href = fallback.url;
+      setLatestArticleImage(fallback.image);
     }
 
     function createReadingCard(item) {
@@ -2051,43 +1865,7 @@
 
     async function loadReadingRoom() {
       if (!readingRoomGrid) return;
-      try {
-        const paths = (await getSortedArticleEntries())
-          .map((entry) => entry.path)
-          .slice(0, 3);
-
-        if (!paths.length) throw new Error('NO_READING_PATHS');
-
-        const cards = [];
-        for (const path of paths) {
-          try {
-            const articleRes = await fetch(`.${path}`, { cache: 'no-store' });
-            if (!articleRes.ok) continue;
-            const html = await articleRes.text();
-            const doc = new DOMParser().parseFromString(html, 'text/html');
-            const title = extractArticleTitle(doc);
-            const description = getMetaContent(doc, 'description') || stripHtml((doc.querySelector('article p') || {}).textContent || '');
-            const ogImage = getMetaContent(doc, 'og:image', 'property');
-            const imageCandidates = resolveOgImageCandidates(ogImage, './assets/keto-cholesterol-hero.jpg');
-            const image = imageCandidates[0] || './assets/keto-cholesterol-hero.jpg';
-            const imageFallback = imageCandidates[1] || '';
-
-            cards.push({
-              category: inferCategoryFromPath(path),
-              title: title || toTitleFromPath(path),
-              excerpt: truncate(description || 'Przejdź do artykułu, aby poznać szczegóły.', 140),
-              image,
-              imageFallback,
-              url: path.replace(/^\//, '')
-            });
-          } catch (_) {}
-        }
-
-        if (!cards.length) throw new Error('NO_READING_CARDS');
-        readingRoomGrid.innerHTML = cards.map(createReadingCard).join('');
-      } catch (_) {
-        renderReadingFallback();
-      }
+      renderReadingFallback();
     }
 
     function getItemImage(item) {
@@ -2130,15 +1908,19 @@
       });
     }
 
-    function createTickerItem(item) {
+    function createTickerItem(item, options = {}) {
+      const eager = options.eager === true;
+      const highPriority = options.highPriority === true;
       const imageSrc = getItemImage(item);
       const imageAlt = item?.image?.alt || item?.image_alt || (item.title || 'Miniatura newsa');
       const contentHtml = (item?.content_html || '').trim();
       const fallbackExcerpt = escapeHtml(stripHtml(item?.excerpt || '').trim());
       const bodyHtml = contentHtml || `<p>${fallbackExcerpt || 'Brak opisu.'}</p>`;
+      const loadingAttr = eager ? 'eager' : 'lazy';
+      const fetchPriorityAttr = highPriority ? 'high' : 'auto';
       return `
         <article class="ticker-item">
-          <img class="ticker-thumb" src="${imageSrc}" alt="${imageAlt}" loading="lazy" onerror="this.src='./assets/keto-cholesterol-hero.jpg'">
+          <img class="ticker-thumb" src="${imageSrc}" alt="${imageAlt}" width="210" height="150" loading="${loadingAttr}" fetchpriority="${fetchPriorityAttr}" decoding="async" onerror="this.src='./assets/keto-cholesterol-hero.jpg'">
           <div class="ticker-body">
             <h4>${escapeHtml(item?.title || 'Aktualność')}</h4>
             <div class="ticker-content">${bodyHtml}</div>
@@ -2158,11 +1940,15 @@
         newsFeedLoader.textContent = 'Ładowanie kolejnych newsów...';
         newsFeedLoader.classList.add('is-visible');
       }
-      await new Promise((resolve) => setTimeout(resolve, 220));
+      const isFirstBatch = renderedNewsCount === 0;
+      const batchHtml = nextItems.map((item, idx) => createTickerItem(item, {
+        eager: isFirstBatch,
+        highPriority: isFirstBatch && idx < 2
+      })).join('');
       if (newsFeedSentinel) {
-        newsFeedSentinel.insertAdjacentHTML('beforebegin', nextItems.map(createTickerItem).join(''));
+        newsFeedSentinel.insertAdjacentHTML('beforebegin', batchHtml);
       } else {
-        newsTickerList.insertAdjacentHTML('beforeend', nextItems.map(createTickerItem).join(''));
+        newsTickerList.insertAdjacentHTML('beforeend', batchHtml);
       }
       ensureTickerContentLinks(newsTickerList);
       renderedNewsCount += nextItems.length;
@@ -2197,27 +1983,48 @@
       newsObserver.observe(newsFeedSentinel);
     }
 
+    async function fetchJsonWithTimeout(url, timeoutMs) {
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const res = await fetch(url, { signal: controller.signal });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (_) {
+        return null;
+      } finally {
+        window.clearTimeout(timer);
+      }
+    }
+
+    async function firstValidNewsData(endpoints, timeoutMs) {
+      const settled = await Promise.allSettled(endpoints.map((url) => fetchJsonWithTimeout(url, timeoutMs)));
+      for (let idx = 0; idx < settled.length; idx += 1) {
+        const payload = settled[idx].status === 'fulfilled' ? settled[idx].value : null;
+        const items = Array.isArray(payload?.items) ? payload.items : [];
+        if (items.length > 0) return items;
+      }
+      return [];
+    }
+
     async function loadNewsFeed() {
-      const endpoints = [
-        './admin/api/news-feed.php',
-        'https://admin.fitpo50.pl/api/news-feed.php',
+      const localItems = await firstValidNewsData([
         './data/news-live.json',
         './assets/data/news-fallback.json'
-      ];
-      for (const url of endpoints) {
-        try {
-          const res = await fetch(url, { cache: 'no-store' });
-          if (!res.ok) continue;
-          const data = await res.json();
-          const items = Array.isArray(data?.items) ? data.items : [];
-          if (items.length > 0) {
-            allNewsItems = items;
-            renderedNewsCount = 0;
-            resetNewsTicker();
-            renderNextNewsBatch().then(enableAutoNewsBatching);
-            return;
-          }
-        } catch (_) {}
+      ], 900);
+
+      const remoteItems = localItems.length ? [] : await firstValidNewsData([
+        './admin/api/news-feed.php',
+        'https://admin.fitpo50.pl/api/news-feed.php'
+      ], 1600);
+
+      const itemsToRender = localItems.length ? localItems : remoteItems;
+      if (itemsToRender.length > 0) {
+        allNewsItems = itemsToRender;
+        renderedNewsCount = 0;
+        resetNewsTicker();
+        renderNextNewsBatch().then(enableAutoNewsBatching);
+        return;
       }
 
       allNewsItems = [
@@ -2234,13 +2041,15 @@
     const seed = new Date().getDate();
     let tipsIdx = seed;
     renderTips(tipsIdx);
-    syncNewsHeightToLeftColumn();
     loadLatestArticle();
-    loadDailyFaq();
     loadNewsFeed();
-    loadReadingRoom();
-    window.addEventListener('resize', syncNewsHeightToLeftColumn);
-
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => loadDailyFaq(), { timeout: 1800 });
+      window.requestIdleCallback(() => loadReadingRoom(), { timeout: 2200 });
+    } else {
+      setTimeout(() => loadDailyFaq(), 800);
+      setTimeout(() => loadReadingRoom(), 1100);
+    }
     setInterval(() => {
       tipsIdx += 1;
       renderTips(tipsIdx);
@@ -2271,10 +2080,7 @@
 
     async function getKnowledgeDoc() {
       if (knowledgeDoc) return knowledgeDoc;
-      const res = await fetch('./index.html', { cache: 'no-store' });
-      if (!res.ok) throw new Error('KNOWLEDGE_FETCH_FAILED');
-      const html = await res.text();
-      knowledgeDoc = new DOMParser().parseFromString(html, 'text/html');
+      knowledgeDoc = document;
       return knowledgeDoc;
     }
 
