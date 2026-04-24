@@ -36,6 +36,7 @@ Zasady:
 Publikacja artykulow:
 - nowy artykul tworzymy przez `article-template-bento.html` (lub generator `node scripts/create-article-from-template.js ...`),
 - obowiazkowo uruchom walidator standardu: `node scripts/validate-article-standard.js <plik.html>`,
+- obowiazkowo generuj PDF artykulu i podpinaj duzy przycisk w hero: `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>` (albo hurtowo: `npm run article:pdf:sync`),
 - artykul nie przechodzi, jesli ma inline CSS lub lokalny `<style>`,
 - naglowek "Czytelnia" ma byc index-style (`reading-room__head` z ikona),
 - footer `site-footer-bento` musi byc wewnatrz `<body>`,

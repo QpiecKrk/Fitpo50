@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "article:new": "node scripts/create-article-from-template.js",
-    "article:validate": "node scripts/validate-article-standard.js"
+    "article:validate": "node scripts/validate-article-standard.js",
+    "article:pdf:sync": "python3 scripts/sync_article_pdfs_and_buttons.py"
   },
   "devDependencies": {
     "clean-css-cli": "^5.6.3",

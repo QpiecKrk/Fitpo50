@@ -586,6 +586,28 @@ Przy dodawaniu nowego artykulu aktualizujemy:
 2. odpowiednia strone kategorii
 3. `porady.html`
 4. `sitemap.xml`
+5. PDF artykulu + duzy przycisk pobierania w hero (z rozmiarem KB)
+
+PDF workflow (obowiazkowy):
+
+1. wygeneruj PDF i zaktualizuj przycisk:
+   - `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>`
+2. hurtowo dla wszystkich artykulow:
+   - `npm run article:pdf:sync`
+3. mapowanie ma byc 1:1: `slug.html` -> `assets/pdf/slug.pdf` (bez pomylek)
+4. przycisk PDF na hero ma byc linkiem `<a ... download>` (bez wymuszania `role="button"`)
+5. metadane PDF sa obowiazkowe i musza byc poprawne:
+   - `/Title` = pelny tytul artykulu (`h1.article-header__title`) - nie generyczne "Kluczowe wnioski",
+   - `/Author` = `FitPo50`,
+   - `/Creator` = `FitPo50 PDF Generator`,
+   - `/Subject` ma zawierac kontekst artykulu.
+6. schema `BlogPosting` musi zawierac link do wersji PDF przez `encoding` (`MediaObject`):
+   - `contentUrl` = `https://fitpo50.pl/assets/pdf/<slug>.pdf`,
+   - `encodingFormat` = `application/pdf`,
+   - `inLanguage` = `pl-PL`,
+   - `name` = `<headline> (PDF)`.
+7. przy kazdej publikacji/aktualizacji artykulu uruchomienie `article:pdf:sync` jest elementem Definition of Done.
+8. strategia indeksacji PDF (kanonical HTTP header vs `X-Robots-Tag: noindex`) to decyzja serwerowa i nie moze byc pomijana przy wdrozeniu produkcyjnym.
 
 Jesli artykul ma obrazy:
 

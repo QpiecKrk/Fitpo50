@@ -288,7 +288,7 @@ body.article-template .article-hero {
   position: relative;
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto var(--space-16);
+  margin: 0 auto var(--space-6);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
@@ -303,20 +303,120 @@ body.article-template .article-hero img {
   object-fit: cover;
 }
 
-body.article-template .hero-motto {
+body.article-template .pdf-hero-download {
+  position: relative;
+  z-index: 1;
+  width: min(800px, calc(100% - 48px));
+  margin: 0 auto var(--space-8);
+  display: grid;
+  gap: 4px;
+  text-decoration: none;
+  color: #ffffff;
+  padding: clamp(10px, 1.3vw, 14px);
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  background: linear-gradient(120deg, rgba(15, 35, 55, 0.86), rgba(75, 102, 126, 0.82));
+  box-shadow: 0 12px 24px rgba(5, 18, 30, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+body.article-template .pdf-hero-download:hover {
+  transform: translateY(-2px);
+  border-color: #ffffff;
+  box-shadow: 0 22px 42px rgba(5, 18, 30, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
+body.article-template .pdf-hero-download:focus-visible {
+  outline: 3px solid rgba(245, 159, 0, 0.9);
+  outline-offset: 2px;
+}
+
+body.article-template .pdf-hero-download__eyebrow {
+  font-family: var(--font-ui);
+  font-size: clamp(0.54rem, 0.69vw, 0.66rem);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.86);
+  font-weight: 700;
+}
+
+body.article-template .pdf-hero-download__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.65vw, 1.45rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  max-width: calc(100% - 76px);
+}
+
+body.article-template .pdf-hero-download__meta {
+  font-family: var(--font-ui);
+  font-size: clamp(0.78rem, 0.94vw, 0.9rem);
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 600;
+}
+
+body.article-template .pdf-hero-download__badge {
   position: absolute;
-  bottom: 8%;
-  left: 4%;
+  right: 12px;
+  top: 12px;
+  transform: none;
+  display: block;
+  min-width: 50px;
+  height: 36px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.14);
+  color: transparent;
+  font-family: var(--font-ui);
+  font-size: 0;
+  pointer-events: none;
+}
+
+body.article-template .pdf-hero-download__badge::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 14px;
+  border: 1.5px solid rgba(231, 243, 255, 0.95);
+  border-radius: 3px;
+}
+
+body.article-template .pdf-hero-download__badge::after {
+  content: "PDF";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+  padding: 1px 4px;
+  border-radius: 5px;
+  background: rgba(205, 229, 246, 0.96);
+  color: #305368;
+  font-family: var(--font-ui);
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+body.article-template .hero-motto {
+  position: static;
+  margin: 0;
   background: linear-gradient(135deg, rgba(16, 60, 33, 0.86), rgba(13, 44, 86, 0.8));
   color: #ffffff;
   padding: var(--space-4) var(--space-6);
-  border-left: 6px solid #f59f00;
+  border-left: 5px solid #f59f00;
   font-family: "Caveat", cursive;
-  font-size: clamp(1.1rem, 2.7vw, 1.75rem);
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
   font-weight: 700;
   line-height: 1.25;
-  max-width: 86%;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  max-width: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 body.article-template .article-content {
@@ -483,6 +583,63 @@ body.article-template .medical-disclaimer {
 @media (max-width: 640px) {
   body.article-template .article-main-bento {
     border-radius: 20px;
+  }
+
+  body.article-template .pdf-hero-download {
+    position: relative;
+    width: auto;
+    margin: var(--space-3);
+    border-radius: 16px;
+    border-color: rgba(255, 255, 255, 0.9);
+    background: linear-gradient(130deg, rgba(26, 38, 54, 0.95), rgba(96, 126, 146, 0.9));
+    box-shadow: 0 12px 24px rgba(8, 17, 28, 0.36);
+    padding: 12px 14px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  body.article-template .pdf-hero-download__eyebrow {
+    font-size: 0.76rem;
+    line-height: 1.25;
+    opacity: 0.95;
+  }
+
+  body.article-template .pdf-hero-download__title {
+    max-width: calc(100% - 62px);
+    font-size: clamp(1.04rem, 6vw, 1.36rem);
+    line-height: 1.1;
+    letter-spacing: 0.005em;
+  }
+
+  body.article-template .pdf-hero-download__meta {
+    font-size: 0.7rem;
+    opacity: 0.95;
+  }
+
+  body.article-template .pdf-hero-download__badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transform: none;
+    min-width: 44px;
+    height: 32px;
+    border-radius: 8px;
+    padding: 0 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-color: rgba(233, 246, 255, 0.9);
+    background: rgba(184, 213, 232, 0.22);
+    color: #edf7ff;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    font-weight: 800;
+    pointer-events: none;
+  }
+
+  body.article-template .pdf-hero-download__badge::before,
+  body.article-template .pdf-hero-download__badge::after {
+    display: none;
   }
 
   body.article-template .article-content {

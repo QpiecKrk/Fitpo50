@@ -61,8 +61,12 @@ Zasada: „zmień raz, zmień wszędzie”.
 - dodaj URL do `sitemap.xml` i wpis do `llms.txt`.
 5. Walidacja standardu:
 `node scripts/validate-article-standard.js <plik.html>`
-6. Synchronizacja do `_site`.
-7. Kontrola końcowa:
+6. PDF + przycisk pobierania (obowiązkowe):
+`python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>`
+albo hurtowo:
+`npm run article:pdf:sync`
+7. Synchronizacja do `_site`.
+8. Kontrola końcowa:
 - nowy wpis jest widoczny w `porady.html` i na stronie kategorii,
 - sekcja "Nowy artykuł" na `index.html` wskazuje ten wpis.
 

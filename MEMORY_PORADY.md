@@ -15,6 +15,9 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
   - `node scripts/create-article-from-template.js ...`
 - Przed oddaniem artykulu uruchamiamy walidator:
   - `node scripts/validate-article-standard.js <plik.html>`
+- Przed publikacja artykulu obowiazkowo generujemy PDF i podpinamy przycisk hero:
+  - `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>`
+  - albo hurtowo: `npm run article:pdf:sync`
 - W headerze artykulu pokazujemy tylko:
   - dzial
   - czas czytania
@@ -141,6 +144,7 @@ Szybka checklista przed oddaniem artykulu:
 - Aktualizacja przy nowym artykule:
   - odpowiednia strona kategorii (Ruch/Jedzenie/Zdrowie/Ciekawe),
   - `porady.html`,
+  - PDF artykulu (`assets/pdf/<slug>.pdf`) + przycisk pobierania na hero z aktualnym rozmiarem pliku w KB,
   - `sitemap.xml`,
   - `index.html`:
     - sekcja `featured-article`,
