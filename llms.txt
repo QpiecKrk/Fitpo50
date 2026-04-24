@@ -162,3 +162,8 @@ articles:
   title: "Alkohol a mięśnie po 50-tce — co mówi nauka | FitPo50"
   section: "Jedzenie"
   summary: "Wino w piątek, siłownia w sobotę — co naprawdę dzieje się z Twoimi mięśniami? Badania z biopsji mięśni, oś czasowa, praktyczne zasady. Bez moralizowania."
+
+- url: https://fitpo50.pl/nordic-walking-jak-zaczac-technika-kije-zdrowie.html
+  title: "Nordic Walking po 50-tce: technika, kije i korzyści | FitPo50"
+  section: "Ruch"
+  summary: "Kompletny przewodnik nordic walking po 50-tce: technika, dobór kijów, plan startowy i wnioski z najnowszych badań."
