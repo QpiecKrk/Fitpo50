@@ -1,12 +1,12 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-25T05:25:54+00:00",
+    "updatedAt": "2026-04-25T05:25:57+00:00",
     "items": [
         {
             "id": "news_e50f13ef924d",
             "title": "Testosteron się „resetuje”? Nowe dane pokazują zmianę, nie tylko spadek",
             "content_html": "<p><span>Nowy przegląd badań opublikowany w </span><span><span class=\"news-text-tone--4\"><span></span><span>Journal of Endocrinological Investigation</span></span> (Santi i wsp., 2025) sugeruje, że zmiany poziomu <a href=\"testosteron-po-50-naturalnie-bez-trt.html\">testosteronu</a> u zdrowych mężczyzn to nie tylko prosty spadek z wiekiem.</span></p><p><span>Autorzy wskazują na tzw. </span><span><strong><span></span><span>„resetowanie osi HPG”</span></strong> (<span class=\"news-text-tone--4\">podwzgórze–przysadka–gonady</span>), czyli układu odpowiedzialnego za produkcję hormonów. Oznacza to, że organizm może dostosowywać poziomy <span class=\"news-text-tone--4\">testosteronu i hormonu luteinizującego</span> (LH) w bardziej dynamiczny sposób, niż wcześniej zakładano.</span></p><p><span>To ważna zmiana w myśleniu:</span><span><br>\n</span><span>👉 nie tylko „mniej testosteronu”, ale </span><strong><span>inna regulacja hormonalna</span></strong></p><p><span>Jednocześnie badanie ma charakter przeglądowy, więc nie daje jednej odpowiedzi dla wszystkich. <a href=\"silownia-dla-ludzi.html\">Styl życia</a>, masa ciała, <a href=\"sen-po-50.html\">sen</a> i </span><a href=\"nordic-walking-jak-zaczac-technika-kije-zdrowie.html\">aktywność</a><span> nadal pozostają kluczowe dla poziomu hormonów.</span></p><p><strong>Testosteron nie tylko spada z wiekiem — organizm może zmieniać sposób jego regulacji.</strong><br><span></span></p>",
-            "status": "draft",
+            "status": "published",
             "sort_order": 1,
             "image_base": "news_20260425_052358_dde0291d",
             "image_alt": "Testosteron regeneracja",
@@ -25,8 +25,8 @@
                 }
             ],
             "created_at": "2026-04-25T05:23:58+00:00",
-            "updated_at": "2026-04-25T05:25:54+00:00",
-            "published_at": ""
+            "updated_at": "2026-04-25T05:25:57+00:00",
+            "published_at": "2026-04-25T05:25:57+00:00"
         },
         {
             "id": "news_c98d741c5f6f",
