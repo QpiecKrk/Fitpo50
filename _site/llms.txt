@@ -176,4 +176,8 @@ articles:
   title: "Etykiety, składy i „chemia” w jedzeniu. Jak nie dać się nabrać przy sklepowej półce? | FitPo50"
   section: "Ciekawe"
   summary: "Etykieta to prawda o produkcie, ale napisana małą czcionką i językiem marketingu. Tłumaczymy jak czytać składy, co oznaczają E-numery i gdzie chowa się cukier."
+- url: https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html
+  title: "Post przerywany po 50-tce: korzyści i ryzyko dla mięśni | FitPo50"
+  section: "Jedzenie"
+  summary: "Post przerywany po 50-tce: co mówią badania o korzyściach metabolicznych i ryzyku utraty mięśni? Praktyczny przewodnik oparty na najnowszych meta-analizach."
 
