@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-25T05:25:57+00:00",
+    "updatedAt": "2026-04-26T09:34:46+00:00",
     "items": [
+        {
+            "id": "news_c0f0f2fc9455",
+            "title": "Jedna tabletka zamiast trzech? Nowe badanie daje mocne wyniki po udarze",
+            "content_html": "<p><span>Nowe badanie TRIDENT, opublikowane w </span><span><span class=\"news-text-tone--1\"><span></span><span>New England Journal of Medicine</span></span>, pokazuje, że tzw. „potrójna pigułka” może znacząco zmniejszyć ryzyko kolejnego <a href=\"apob-apoa-badania-cholesterol.html\">udaru</a>.</span></p><p><span>Chodzi o lek <strong>GMRx2</strong> – jedną tabletkę łączącą trzy składniki obniżające ciśnienie krwi w niskich dawkach.</span><span><br>\n</span><span>W badaniu wykazano, że takie podejście </span><span><strong><span></span><span>zmniejszyło ryzyko kolejnego udaru o 39%</span></strong> u pacjentów po wcześniejszym krwotoku śródmózgowym.</span></p><p><span>W liczbach wygląda to konkretnie:</span><span><br>\n</span><span>👉 </span><span>jeden udar mniej na około 35 leczonych osób w ciągu 3 lat</span></p><p><span>W badaniu wzięło udział <strong>1670</strong> pacjentów. Oprócz mniejszego ryzyka <a href=\"siedzenie-po-50.html\">udaru</a> zauważono też:</span></p><ul>\n<li><span>spadek poważnych incydentów sercowo-naczyniowych o 33%</span></li>\n<li><span>profil bezpieczeństwa podobny do placebo</span></li>\n</ul><p><span>Dlaczego to ważne?</span><span><br>\n</span><span>Bo zamiast kilku leków osobno, pacjent bierze <span class=\"news-text-tone--1\">jedną</span> tabletkę — co zwiększa regularność i skuteczność leczenia.</span></p><p><strong>Prostsze leczenie (jedna tabletka zamiast kilku) może realnie zmniejszać ryzyko udaru — i poprawiać efekty terapii.</strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260426_093352_6d408a04.avif",
+                "webp": "./assets/news/news_20260426_093352_6d408a04.webp",
+                "jpg": "./assets/news/news_20260426_093352_6d408a04.jpg",
+                "alt": "Udar mózgu",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Medical Xpress – Triple pill stroke prevention",
+                    "url": "https://medicalxpress.com"
+                },
+                {
+                    "label": "New England Journal of Medicine – TRIDENT trial (2025)",
+                    "url": "https://www.nejm.org"
+                }
+            ],
+            "updated_at": "2026-04-26T09:34:46+00:00",
+            "published_at": "2026-04-26T09:34:46+00:00",
+            "excerpt": "Nowe badanie TRIDENT, opublikowane w New England Journal of Medicine, pokazuje, że tzw. „potrójna pigułka” może znacząco zmniejszyć ryzyko kolejnego udaru.Chodzi o lek GMRx2 – jedną tabletkę łączącą trzy składniki obniż…"
+        },
         {
             "id": "news_e50f13ef924d",
             "title": "Testosteron się „resetuje”? Nowe dane pokazują zmianę, nie tylko spadek",
