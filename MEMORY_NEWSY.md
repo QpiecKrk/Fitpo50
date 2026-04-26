@@ -30,6 +30,10 @@
 ## Frontend sekcji NEWS
 - Stała szerokość kontenera zgodna z layoutem strony.
 - Feed pionowy, przewijany wewnątrz kontenera.
+- Batchowanie na stronie głównej jest regułą twardą:
+  - pierwszy render: dokładnie 5 newsów (`NEWS_BATCH_SIZE = 5`),
+  - kolejne partie: dopiero po faktycznym przewijaniu/interakcji użytkownika wewnątrz listy,
+  - zakazane jest automatyczne "dopompowywanie" kolejnych partii bez scrolla użytkownika (efekt rozsuwania bento przy starcie).
 - Karty newsów:
   - pełna szerokość kontenera,
   - wysokość zależna od treści,
@@ -48,3 +52,6 @@
 ## Operacyjne
 - Nie wykonujemy `git commit` ani `git push` bez wyraźnej komendy użytkownika.
 - Po zmianach frontowych pamiętamy o aktualizacji `_site` przez eksport.
+- Przy każdej zmianie logiki ładowania NEWS trzeba zrobić szybki test ręczny:
+  - po odświeżeniu strony bez scrolla widoczne jest tylko pierwsze 5 newsów,
+  - kolejne newsy dociągają się dopiero po przewijaniu feedu.

@@ -16,6 +16,7 @@ function isArticleHtml(content) {
 function validateFile(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
+  const isoDateTimeWithTimezone = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(Z|[+-]\d{2}:\d{2})$/;
 
   const requiredPatterns = [
     { label: 'body.article-template', regex: /<body[^>]*class="[^"]*article-template[^"]*"/i },
@@ -107,6 +108,28 @@ function validateFile(filePath) {
     const withoutLinks = liItems.filter((li) => !/<a\s+[^>]*href="https?:\/\/[^"]+"/i.test(li));
     if (withoutLinks.length) {
       errors.push(`Źródła: ${withoutLinks.length} pozycji bez klikalnego linku URL`);
+    }
+  }
+
+  const metaPublished = raw.match(/<meta\s+property="article:published_time"\s+content="([^"]+)"/i);
+  if (metaPublished && !isoDateTimeWithTimezone.test(metaPublished[1])) {
+    errors.push('article:published_time musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T08:00:00+02:00)');
+  }
+  const metaModified = raw.match(/<meta\s+property="article:modified_time"\s+content="([^"]+)"/i);
+  if (metaModified && !isoDateTimeWithTimezone.test(metaModified[1])) {
+    errors.push('article:modified_time musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T09:30:00+02:00)');
+  }
+
+  for (const m of raw.matchAll(/"datePublished"\s*:\s*"([^"]+)"/g)) {
+    if (!isoDateTimeWithTimezone.test(m[1])) {
+      errors.push('BlogPosting.datePublished musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T08:00:00+02:00)');
+      break;
+    }
+  }
+  for (const m of raw.matchAll(/"dateModified"\s*:\s*"([^"]+)"/g)) {
+    if (!isoDateTimeWithTimezone.test(m[1])) {
+      errors.push('BlogPosting.dateModified musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T09:30:00+02:00)');
+      break;
     }
   }
 

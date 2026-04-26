@@ -33,6 +33,15 @@ function nowDate() {
   return new Date().toISOString().slice(0, 10);
 }
 
+function toIsoDateTimeWithTimezone(input, fallbackTime = '08:00:00') {
+  const raw = String(input || '').trim();
+  if (!raw) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    return `${raw}T${fallbackTime}+02:00`;
+  }
+  return raw;
+}
+
 function toIsoDuration(readingTime) {
   const m = String(readingTime || '').match(/(\d+)/);
   const mins = m ? Number(m[1]) : 10;
@@ -54,7 +63,7 @@ const description = (args.description || '').trim();
 const categoryRaw = (args.category || '').trim();
 
 if (!slug || !title || !description || !categoryRaw) {
-  console.error('Użycie: node scripts/create-article-from-template.js --slug <slug> --title "<tytuł>" --category <ruch|jedzenie|zdrowie|ciekawe> --description "<opis>" [--reading-time "11 min czytania"] [--hero-image nazwa] [--force true] [--sync-site true]');
+  console.error('Użycie: node scripts/create-article-from-template.js --slug <slug> --title "<tytuł>" --category <ruch|jedzenie|zdrowie|ciekawe> --description "<opis>" [--date-published YYYY-MM-DD lub pełny ISO] [--date-modified YYYY-MM-DD lub pełny ISO] [--reading-time "11 min czytania"] [--hero-image nazwa] [--force true] [--sync-site true]');
   process.exit(1);
 }
 
@@ -77,8 +86,10 @@ if (fs.existsSync(outPath) && !force) {
   process.exit(1);
 }
 
-const datePublished = (args['date-published'] || nowDate()).trim();
-const dateModified = (args['date-modified'] || datePublished).trim();
+const datePublishedRaw = (args['date-published'] || nowDate()).trim();
+const dateModifiedRaw = (args['date-modified'] || datePublishedRaw).trim();
+const datePublished = toIsoDateTimeWithTimezone(datePublishedRaw, '08:00:00');
+const dateModified = toIsoDateTimeWithTimezone(dateModifiedRaw, '09:30:00');
 const readingTime = (args['reading-time'] || '11 min czytania').trim();
 const heroImage = (args['hero-image'] || slug).trim();
 const heroAlt = (args['hero-alt'] || title).trim();

@@ -55,6 +55,7 @@ Zasada: „zmień raz, zmień wszędzie”.
 3. Ustaw daty publikacji:
 `article:published_time` i `BlogPosting.datePublished` = faktyczna data publikacji.
 `article:modified_time` i `BlogPosting.dateModified` = data ostatniej istotnej aktualizacji.
+Format obowiązkowy: pełny ISO 8601 z godziną i strefą czasową (np. `2026-04-24T08:00:00+02:00`).
 4. Podpięcie nawigacyjne:
 - dodaj wpis na stronie kategorii i w `porady.html`,
 - ustaw `data-order = max + 1` (unikalne) na obu listach,

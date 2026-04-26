@@ -163,6 +163,7 @@ Szybka checklista przed oddaniem artykulu:
     - `meta property="article:published_time"` = faktyczna data publikacji,
     - `BlogPosting.datePublished` = ta sama data,
     - `article:modified_time` i `BlogPosting.dateModified` = data aktualizacji.
+    - wszystkie pola daty zapisujemy jako pełny ISO 8601 z godziną i strefą (np. `2026-04-24T08:00:00+02:00`).
   - Bez poprawnych dat nowy wpis nie pojawi sie jako najnowszy na `index.html`.
 
 - `index.html` - zasada dzialania:
