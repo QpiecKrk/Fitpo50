@@ -444,6 +444,32 @@
     });
     revealObserver = observer;
     document.querySelectorAll('.reveal').forEach(el => revealObserver === null || revealObserver === void 0 ? void 0 : revealObserver.observe(el));
+    const googleAdsPdfConversionId = 'AW-18108612630/VY2pCMLU56IcEJaA7rpD';
+    const googleTagWindow = window;
+    function isArticlePdfDownload(anchor) {
+        let url;
+        try {
+            url = new URL(anchor.href, window.location.href);
+        }
+        catch (_a) {
+            return false;
+        }
+        return url.origin === window.location.origin
+            && /^\/assets\/pdf\/[^/]+\.pdf$/i.test(url.pathname);
+    }
+    document.addEventListener('click', (event) => {
+        var _a;
+        const anchor = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest('a[href]');
+        if (!anchor || !isArticlePdfDownload(anchor) || typeof googleTagWindow.gtag !== 'function') {
+            return;
+        }
+        googleTagWindow.gtag('event', 'conversion', {
+            send_to: googleAdsPdfConversionId,
+            value: 1.0,
+            currency: 'PLN',
+            event_label: new URL(anchor.href, window.location.href).pathname
+        });
+    });
     // ----------------------------------------------------------
     // SMOOTH SCROLL for hash links
     // ----------------------------------------------------------

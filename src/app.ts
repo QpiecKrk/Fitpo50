@@ -500,6 +500,44 @@
   document.querySelectorAll('.reveal').forEach(el => revealObserver?.observe(el));
 
   // ----------------------------------------------------------
+  // GOOGLE ADS: PDF DOWNLOAD CONVERSION
+  // ----------------------------------------------------------
+  type GtagFunction = (
+    command: 'event',
+    eventName: string,
+    params: Record<string, unknown>
+  ) => void;
+
+  const googleAdsPdfConversionId = 'AW-18108612630/VY2pCMLU56IcEJaA7rpD';
+  const googleTagWindow = window as Window & { gtag?: GtagFunction };
+
+  function isArticlePdfDownload(anchor: HTMLAnchorElement): boolean {
+    let url: URL;
+    try {
+      url = new URL(anchor.href, window.location.href);
+    } catch {
+      return false;
+    }
+
+    return url.origin === window.location.origin
+      && /^\/assets\/pdf\/[^/]+\.pdf$/i.test(url.pathname);
+  }
+
+  document.addEventListener('click', (event) => {
+    const anchor = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
+    if (!anchor || !isArticlePdfDownload(anchor) || typeof googleTagWindow.gtag !== 'function') {
+      return;
+    }
+
+    googleTagWindow.gtag('event', 'conversion', {
+      send_to: googleAdsPdfConversionId,
+      value: 1.0,
+      currency: 'PLN',
+      event_label: new URL(anchor.href, window.location.href).pathname
+    });
+  });
+
+  // ----------------------------------------------------------
   // SMOOTH SCROLL for hash links
   // ----------------------------------------------------------
   document.querySelectorAll('a[href^="#"]').forEach(link => {
