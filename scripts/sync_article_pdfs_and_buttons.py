@@ -54,9 +54,9 @@ def collect_article_files(slugs: list[str] | None) -> list[Path]:
 def build_button_block(slug: str, size_kb: int) -> str:
     return (
         f"      {MARKER_START}\n"
-        f'      <a class="pdf-hero-download" href="./assets/pdf/{slug}.pdf" download aria-label="Pobierz artykul w PDF ({size_kb} KB)">\n'
+        f'      <a class="pdf-hero-download" href="./assets/pdf/{slug}.pdf" download aria-label="Pobierz artykuł w PDF ({size_kb} KB)">\n'
         f'        <span class="pdf-hero-download__eyebrow">Chcesz przeczytać na spokojnie? Pobierz PDF</span>\n'
-        f'        <span class="pdf-hero-download__title">Pobierz artykul (PDF)</span>\n'
+        f'        <span class="pdf-hero-download__title">Pobierz artykuł (PDF)</span>\n'
         f'        <span class="pdf-hero-download__meta">Rozmiar pliku: {size_kb} KB</span>\n'
         f'        <span class="pdf-hero-download__badge" aria-hidden="true">PDF</span>\n'
         f"      </a>\n"
