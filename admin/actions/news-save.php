@@ -6,16 +6,18 @@ require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
 
-function pluralizeLinkWord(int $count): string {
+const NEWS_AUTO_LINK_MIN_WORDS = 80;
+
+function pluralizeSourceAdj(int $count): string {
+    if ($count === 1) {
+        return 'nieprawidłowe źródło';
+    }
     $mod10 = $count % 10;
     $mod100 = $count % 100;
-    if ($count === 1) {
-        return 'link';
-    }
     if ($mod10 >= 2 && $mod10 <= 4 && !($mod100 >= 12 && $mod100 <= 14)) {
-        return 'linki';
+        return 'nieprawidłowe źródła';
     }
-    return 'linków';
+    return 'nieprawidłowych źródeł';
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -26,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $id = trim((string)($_POST['id'] ?? ''));
 $title = trim(strip_tags((string)($_POST['title'] ?? '')));
 $contentRaw = trim((string)($_POST['content'] ?? ''));
+$currentHref = trim((string)($_POST['current_href'] ?? ''));
 $status = 'draft';
 $sortOrder = (int)($_POST['sort_order'] ?? 1);
 $imageAlt = trim(strip_tags((string)($_POST['image_alt'] ?? '')));
@@ -59,6 +62,17 @@ try {
     if ($contentHtml === '') {
         throw new RuntimeException('Po oczyszczeniu treści news jest pusty.');
     }
+
+    $contentPlain = trim(preg_replace('/\s+/u', ' ', strip_tags($contentHtml)) ?? '');
+    $newsWordCount = countWordsUtf8($contentPlain);
+    $newsLinkLimits = deriveAutoLinkLimitsForWordCount($newsWordCount, 'news');
+    $autoLinkResult = autoLinkInternalArticlesInHtml($contentHtml, [
+        'min_words' => NEWS_AUTO_LINK_MIN_WORDS,
+        'min_links' => $newsLinkLimits['min_links'],
+        'max_links' => $newsLinkLimits['max_links'],
+        'current_href' => $currentHref,
+    ]);
+    $contentHtml = $autoLinkResult['html'];
 
     $linkErrors = validateInternalLinksInNewsHtml($contentHtml);
     if (!empty($linkErrors)) {
@@ -127,9 +141,14 @@ try {
         : null;
 
     $successMessage = 'News zapisany jako roboczy.' . gitSyncResultNote($gitSync);
+    $successMessage .= formatAutoInternalLinksMessage(
+        (int)($autoLinkResult['added'] ?? 0),
+        (bool)($autoLinkResult['skipped_short'] ?? false),
+        NEWS_AUTO_LINK_MIN_WORDS
+    );
     $invalidCount = count($invalidSources);
     if ($invalidCount > 0) {
-        $successMessage .= ' Uwaga: pominięto ' . $invalidCount . ' nieprawidłow' . ($invalidCount === 1 ? 'y' : 'e') . ' ' . pluralizeLinkWord($invalidCount) . ' źródłow' . ($invalidCount === 1 ? 'y' : 'e') . '.';
+        $successMessage .= ' Uwaga: pominięto ' . $invalidCount . ' ' . pluralizeSourceAdj($invalidCount) . '.';
     }
     $_SESSION['flash_success'] = $successMessage;
 

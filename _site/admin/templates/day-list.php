@@ -165,7 +165,7 @@ if (!function_exists('renderEntryVideo')) {
       <a href="<?= $siteUrl ?>index.html#o-nas" class="nav__link">O mnie</a>
       <a href="<?= $siteUrl ?>index.html#baza-wiedzy" class="nav__link">Baza wiedzy</a>
       <a href="<?= $siteUrl ?>porady.html" class="nav__link">Porady</a>
-      <a href="<?= $siteUrl ?>moje-sukcesy.html" class="nav__link">Moje Sukcesy</a>
+      <a href="<?= $siteUrl ?>dziennik.html" class="nav__link">Dziennik</a>
       <a href="https://www.instagram.com/fitpo50" class="nav__link" target="_blank" rel="noopener noreferrer">Instagram</a>
     </nav>
   </div>
@@ -173,7 +173,7 @@ if (!function_exists('renderEntryVideo')) {
     <div class="header__scroll-inner">
       <a href="<?= $siteUrl ?>index.html" class="header__scroll-link">Główna</a>
       <a href="<?= $siteUrl ?>porady.html" class="header__scroll-link">Porady</a>
-      <a href="<?= $siteUrl ?>moje-sukcesy.html" class="header__scroll-link">Moje Sukcesy</a>
+      <a href="<?= $siteUrl ?>dziennik.html" class="header__scroll-link">Dziennik</a>
     </div>
   </nav>
 </header>
@@ -181,7 +181,7 @@ if (!function_exists('renderEntryVideo')) {
 <main class="day-list-page">
   <div class="container">
     <div class="day-list-header reveal">
-      <span class="day-list-header__label">Moje Sukcesy</span>
+      <span class="day-list-header__label">Dziennik</span>
       <h1 class="day-list-header__title">Wpisy z <?= htmlspecialchars($dateFormatted) ?></h1>
     </div>
 
@@ -257,7 +257,7 @@ if (!function_exists('renderEntryVideo')) {
     </div>
 
     <div style="text-align:center;margin-top:var(--space-12);">
-      <a href="<?= $siteUrl ?>moje-sukcesy.html" class="btn btn--outline" style="border-color:var(--color-primary);color:var(--color-primary);">
+      <a href="<?= $siteUrl ?>dziennik.html" class="btn btn--outline" style="border-color:var(--color-primary);color:var(--color-primary);">
         ← Wróć do kalendarza
       </a>
     </div>
@@ -278,7 +278,7 @@ if (!function_exists('renderEntryVideo')) {
         <ul class="footer__links" role="list">
           <li><a href="<?= $siteUrl ?>index.html">Strona Główna</a></li>
           <li><a href="<?= $siteUrl ?>porady.html">Porady</a></li>
-          <li><a href="<?= $siteUrl ?>moje-sukcesy.html" style="color:var(--color-primary);">Moje Sukcesy</a></li>
+          <li><a href="<?= $siteUrl ?>dziennik.html" style="color:var(--color-primary);">Dziennik</a></li>
         </ul>
       </div>
     </div>
@@ -300,9 +300,9 @@ if (!function_exists('renderEntryVideo')) {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
     <span>Porady</span>
   </a>
-  <a href="<?= $siteUrl ?>moje-sukcesy.html" class="bottom-nav__item bottom-nav__item--active">
+  <a href="<?= $siteUrl ?>dziennik.html" class="bottom-nav__item bottom-nav__item--active">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
-    <span>Sukcesy</span>
+    <span>Dziennik</span>
   </a>
 </nav>
 

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/internal-links.php';
 
 const NEWS_CARD_IMAGE_WIDTH = 640;
 const NEWS_CARD_IMAGE_HEIGHT = 480;
@@ -366,34 +367,20 @@ function isNewsBulletBlock(array $lines): bool {
 }
 
 function validateInternalLinksInNewsHtml(string $html): array {
-    $errors = [];
-
-    $prev = libxml_use_internal_errors(true);
-    $dom = new DOMDocument();
-    $encoded = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-    $loaded = @$dom->loadHTML('<body>' . $encoded . '</body>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-    if (!$loaded) {
-        libxml_use_internal_errors($prev);
-        return $errors;
+    $errors = validateArticleOnlyLinksInHtml($html);
+    if ($errors === []) {
+        return [];
     }
 
-    $anchors = $dom->getElementsByTagName('a');
-    foreach ($anchors as $a) {
-        $href = trim((string)$a->getAttribute('href'));
-        if ($href === '') {
-            continue;
-        }
-
-        if (!isAllowedInternalHref($href)) {
-            $errors[] = 'W treści newsa wykryto niedozwolony link zewnętrzny: ' . $href;
-        }
+    $out = [];
+    foreach ($errors as $error) {
+        $out[] = str_replace(
+            'W treści wykryto niedozwolony link.',
+            'W treści newsa wykryto niedozwolony link.',
+            $error
+        );
     }
-
-    libxml_clear_errors();
-    libxml_use_internal_errors($prev);
-
-    return $errors;
+    return $out;
 }
 
 function isAllowedInternalHref(string $href): bool {
@@ -444,6 +431,52 @@ function normalizeNewsSources(array $labels, array $urls): array {
     }
 
     return $sources;
+}
+
+/**
+ * @param array<int,string> $labels
+ * @param array<int,string> $urls
+ * @return array{sources:array<int,array{label:string,url:string}>,invalid:array<int,array{index:int,reason:string,url:string}>}
+ */
+function normalizeNewsSourcesLenient(array $labels, array $urls): array {
+    $sources = [];
+    $invalid = [];
+    $count = max(count($labels), count($urls));
+
+    for ($i = 0; $i < $count; $i++) {
+        $label = trim((string)($labels[$i] ?? ''));
+        $url = trim((string)($urls[$i] ?? ''));
+
+        if ($label === '' && $url === '') {
+            continue;
+        }
+
+        if ($label === '' || $url === '') {
+            $invalid[] = ['index' => $i + 1, 'reason' => 'brak nazwy lub URL', 'url' => $url];
+            continue;
+        }
+
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            $invalid[] = ['index' => $i + 1, 'reason' => 'nieprawidłowy URL', 'url' => $url];
+            continue;
+        }
+
+        $scheme = strtolower((string)parse_url($url, PHP_URL_SCHEME));
+        if (!in_array($scheme, ['http', 'https'], true)) {
+            $invalid[] = ['index' => $i + 1, 'reason' => 'nieobsługiwany protokół', 'url' => $url];
+            continue;
+        }
+
+        $sources[] = [
+            'label' => $label,
+            'url' => $url,
+        ];
+    }
+
+    return [
+        'sources' => $sources,
+        'invalid' => $invalid,
+    ];
 }
 
 function processNewsImageUpload(array $file): array {
@@ -626,54 +659,4 @@ function sortNewsItems(array $items): array {
     });
 
     return $items;
-}
-
-function getInternalArticleOptions(): array {
-    $files = glob(SITE_ROOT . '*.html') ?: [];
-    $excluded = [
-        'index.html',
-        'porady.html',
-        'rusz-sie.html',
-        'jedzenie.html',
-        'zdrowie.html',
-        'ciekawe.html',
-        'moje-sukcesy.html',
-        'google4a31b58b207723ed.html',
-    ];
-
-    $options = [];
-
-    foreach ($files as $path) {
-        $basename = basename($path);
-        if (in_array($basename, $excluded, true)) {
-            continue;
-        }
-
-        $title = extractTitleFromHtmlFile($path);
-        $options[] = [
-            'href' => $basename,
-            'label' => $title ?: $basename,
-        ];
-    }
-
-    usort($options, static fn(array $a, array $b): int => strcasecmp($a['label'], $b['label']));
-
-    return $options;
-}
-
-function extractTitleFromHtmlFile(string $path): string {
-    $content = file_get_contents($path, false, null, 0, 6000);
-    if ($content === false) {
-        return '';
-    }
-
-    if (preg_match('/<title>(.*?)<\/title>/is', $content, $m)) {
-        return trim(html_entity_decode(strip_tags($m[1]), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
-    }
-
-    if (preg_match('/<h1[^>]*>(.*?)<\/h1>/is', $content, $m)) {
-        return trim(html_entity_decode(strip_tags($m[1]), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
-    }
-
-    return '';
 }

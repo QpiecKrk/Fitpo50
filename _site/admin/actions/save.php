@@ -3,8 +3,11 @@ require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/calendar.php';
 require_once __DIR__ . '/../helpers/git-sync.php';
+require_once __DIR__ . '/../helpers/internal-links.php';
 requireLogin();
 verifyCsrf();
+
+const ENTRY_AUTO_LINK_MIN_WORDS = 80;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: ../dashboard.php'); exit; }
 
@@ -14,6 +17,23 @@ $id     = isset($_POST['id']) ? (int)$_POST['id'] : null;
 $title      = strip_tags(trim($_POST['title'] ?? ''));
 $lead       = strip_tags(trim($_POST['lead'] ?? ''));
 $content    = sanitizeHtml(trim($_POST['content'] ?? ''));
+$currentHref = trim((string)($_POST['current_href'] ?? ''));
+$contentPlain = trim(preg_replace('/\s+/u', ' ', strip_tags($content)) ?? '');
+$entryWordCount = countWordsUtf8($contentPlain);
+$entryLinkLimits = deriveAutoLinkLimitsForWordCount($entryWordCount, 'entry');
+$entryAutoLinkResult = autoLinkInternalArticlesInHtml($content, [
+    'min_words' => ENTRY_AUTO_LINK_MIN_WORDS,
+    'min_links' => $entryLinkLimits['min_links'],
+    'max_links' => $entryLinkLimits['max_links'],
+    'current_href' => $currentHref,
+]);
+$content = $entryAutoLinkResult['html'];
+$entryLinkErrors = validateArticleOnlyLinksInHtml($content);
+if ($entryLinkErrors !== []) {
+    $_SESSION['flash_error'] = implode(' ', $entryLinkErrors);
+    header($id ? "Location: ../entry-form.php?id=$id" : 'Location: ../entry-form.php');
+    exit;
+}
 $entry_date = trim($_POST['entry_date'] ?? '');
 $status     = 'draft';
 $videoSource = in_array($_POST['video_source'] ?? '', ['none', 'youtube', 'upload'], true)
@@ -205,7 +225,13 @@ try {
         ? runGitAutoSync(['sukcesy'], 'moje-sukcesy save/publish')
         : null;
 
-    $_SESSION['flash_success'] = 'Wpis zapisany jako roboczy.' . gitSyncResultNote($gitSync);
+    $_SESSION['flash_success'] = 'Wpis zapisany jako roboczy.'
+        . gitSyncResultNote($gitSync)
+        . formatAutoInternalLinksMessage(
+            (int)($entryAutoLinkResult['added'] ?? 0),
+            (bool)($entryAutoLinkResult['skipped_short'] ?? false),
+            ENTRY_AUTO_LINK_MIN_WORDS
+        );
 
     $gitError = gitSyncFlashError($gitSync);
     if ($gitError !== null) {

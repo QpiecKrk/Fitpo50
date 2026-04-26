@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/auth.php';
-require_once __DIR__ . '/helpers/news.php';
 requireLogin();
 
 $db = getDb();
@@ -39,7 +38,6 @@ $youtubeOrientationValue = ($entry['youtube_orientation'] ?? 'horizontal') === '
 $uploadedVideoFilename = $entry['uploaded_video_filename'] ?? '';
 $uploadedVideoMime = $entry['uploaded_video_mime'] ?? '';
 $uploadedVideoOrientationValue = ($entry['uploaded_video_orientation'] ?? 'horizontal') === 'vertical' ? 'vertical' : 'horizontal';
-$internalLinks = getInternalArticleOptions();
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -123,17 +121,6 @@ $internalLinks = getInternalArticleOptions();
               </aside>
 
               <div class="entry-editor-main">
-                <div class="news-editor-toolbar news-editor-toolbar--links">
-                  <select id="entry-internal-link-select" class="form-input form-select">
-                    <option value="">Wybierz link wewnętrzny...</option>
-                    <?php foreach ($internalLinks as $link): ?>
-                      <option value="<?= h($link['href']) ?>"><?= h($link['label']) ?></option>
-                    <?php endforeach; ?>
-                  </select>
-                  <input type="text" id="entry-link-url" class="form-input" inputmode="url" autocomplete="off" placeholder="Wklej link (https://... lub /sciezka.html)">
-                  <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="entry-insert-link-btn">Wstaw link</button>
-                </div>
-
                 <div class="news-editor-surface">
                   <div id="entry-content-editor"
                        class="news-content-editor"
@@ -323,9 +310,6 @@ const uploadSettings = document.getElementById('upload-settings');
 const entryEditor = document.getElementById('entry-content-editor');
 const entryContentInput = document.getElementById('content');
 const entryToolbarButtons = document.querySelectorAll('.entry-editor-action');
-const entryInternalLinkSelect = document.getElementById('entry-internal-link-select');
-const entryLinkInput = document.getElementById('entry-link-url');
-const entryInsertLinkButton = document.getElementById('entry-insert-link-btn');
 let entrySavedSelection = null;
 
 function toggleVideoSettings() {
@@ -467,35 +451,6 @@ if (entryEditor && entryContentInput) {
   });
 
   entryToolbarButtons.forEach((button) => bindEntryToolbarAction(button));
-
-  if (entryInsertLinkButton) {
-    const entryLinkEventName = window.PointerEvent ? 'pointerdown' : ('ontouchstart' in window ? 'touchstart' : 'mousedown');
-    const entryLinkEventOpts = entryLinkEventName === 'touchstart' ? { passive: false } : false;
-
-    const applyEntryLink = (event) => {
-      event.preventDefault();
-      rememberEntrySelection();
-      const href = (entryLinkInput?.value || '').trim() || (entryInternalLinkSelect?.value || '').trim();
-      if (!href) {
-        alert('Wybierz link wewnętrzny lub wklej adres URL.');
-        return;
-      }
-      wrapEntrySelection('<a href="' + href + '">', '</a>');
-      if (entryInternalLinkSelect) entryInternalLinkSelect.value = '';
-    };
-
-    entryInsertLinkButton.addEventListener(entryLinkEventName, applyEntryLink, entryLinkEventOpts);
-    entryInsertLinkButton.addEventListener('click', (event) => event.preventDefault());
-  }
-
-  if (entryInternalLinkSelect && entryLinkInput) {
-    entryInternalLinkSelect.addEventListener('change', () => {
-      const selectedValue = (entryInternalLinkSelect.value || '').trim();
-      if (selectedValue) {
-        entryLinkInput.value = selectedValue;
-      }
-    });
-  }
 
   syncEntryTextareaFromEditor();
   updateEntryToolbarState();

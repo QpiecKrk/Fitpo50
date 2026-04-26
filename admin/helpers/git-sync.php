@@ -243,7 +243,39 @@ function resolveGitSyncPaths(string $repoRoot, array $groups): array {
         }
     }
 
-    return array_values(array_unique($paths));
+    $uniquePaths = array_values(array_unique($paths));
+
+    if (!in_array('news', $groups, true)) {
+        $uniquePaths = array_values(array_filter(
+            $uniquePaths,
+            static fn(string $path): bool => !isNewsSyncPath($path)
+        ));
+    }
+
+    return $uniquePaths;
+}
+
+function isNewsSyncPath(string $path): bool {
+    $normalized = ltrim(str_replace('\\', '/', $path), '/');
+
+    $prefixes = [
+        'data/news-live.json',
+        '_site/data/news-live.json',
+        'assets/data/news-fallback.json',
+        '_site/assets/data/news-fallback.json',
+        'assets/news',
+        '_site/assets/news',
+        'data/news-backups',
+        '_site/data/news-backups',
+    ];
+
+    foreach ($prefixes as $prefix) {
+        if ($normalized === $prefix || str_starts_with($normalized, $prefix . '/')) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 function gitSyncPathRelevant(string $repoRoot, string $path): bool {

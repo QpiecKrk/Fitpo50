@@ -4,7 +4,7 @@
  * Zarządzanie wpisami kalendarza przez json_encode + markery.
  * NIE operujemy regexem na treści JS.
  *
- * Format markerów w moje-sukcesy.html:
+ * Format markerów w dziennik.html:
  *   // ENTRIES_START
  *   const userEntries = [...];
  *   // ENTRIES_END
@@ -117,14 +117,20 @@ function getLastOrphanCleanupCount(): int {
 }
 
 /**
- * Przebudowuje const userEntries w moje-sukcesy.html
+ * Przebudowuje const userEntries w dziennik.html
  * bezpośrednio z bazy danych z atomowym zapisem i weryfikacją.
  */
 function calendarRebuild(PDO $db): int {
-    $calFile = SITE_ROOT . 'moje-sukcesy.html';
+    $calFile = SITE_ROOT . 'dziennik.html';
+    if (!file_exists($calFile)) {
+        $legacyCalFile = SITE_ROOT . 'moje-sukcesy.html';
+        if (file_exists($legacyCalFile)) {
+            $calFile = $legacyCalFile;
+        } else {
+            return 0;
+        }
+    }
     $tmpFile = $calFile . '.tmp';
-    
-    if (!file_exists($calFile)) return 0;
 
     // 1. Pobierz wszystkie opublikowane daty
     $stmt = $db->query(
@@ -165,7 +171,7 @@ function calendarRebuild(PDO $db): int {
     // 4. Podmień CAŁY blok między markerami
     $content = file_get_contents($calFile);
     if ($content === false) {
-        throw new RuntimeException('Nie udało się odczytać pliku moje-sukcesy.html');
+        throw new RuntimeException('Nie udało się odczytać pliku dziennik.html');
     }
     $backupContent = $content;
 
@@ -191,7 +197,7 @@ function calendarRebuild(PDO $db): int {
     };
 
     if (!preg_match('/\/\/ ENTRIES_START.*?\/\/ ENTRIES_END/s', $content)) {
-        throw new RuntimeException('Brak markerów ENTRIES_START/ENTRIES_END w moje-sukcesy.html');
+        throw new RuntimeException('Brak markerów ENTRIES_START/ENTRIES_END w dziennik.html');
     }
 
     $updated = preg_replace_callback(
@@ -218,7 +224,7 @@ function calendarRebuild(PDO $db): int {
 
     if (!@rename($tmpFile, $calFile)) {
         @unlink($tmpFile);
-        throw new RuntimeException('Błąd przy zamianie pliku kalendarza (moje-sukcesy.html).');
+        throw new RuntimeException('Błąd przy zamianie pliku kalendarza (dziennik.html).');
     }
 
     // 6. WERYFIKACJA PO ZAPISIE

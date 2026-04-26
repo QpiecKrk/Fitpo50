@@ -6,7 +6,6 @@ requireLogin();
 
 $csrf = csrfToken();
 $store = loadNewsStore();
-$internalLinks = getInternalArticleOptions();
 
 $editMode = false;
 $item = [
@@ -109,16 +108,6 @@ if (empty($sources)) {
               </aside>
 
               <div class="news-editor-main">
-                <div class="news-editor-toolbar news-editor-toolbar--links">
-                  <select id="internal-link-select" class="form-input form-select">
-                    <option value="">Wybierz link wewnętrzny...</option>
-                    <?php foreach ($internalLinks as $link): ?>
-                      <option value="<?= h($link['href']) ?>"><?= h($link['label']) ?></option>
-                    <?php endforeach; ?>
-                  </select>
-                  <button type="button" class="btn-panel btn-panel--sm btn-panel--primary" id="insert-link-btn">Wstaw link</button>
-                </div>
-
                 <div class="news-editor-surface" style="background:#f8fbff;border:1px solid #cfe1ea;">
                   <div id="news-content-editor"
                        class="news-content-editor"
@@ -222,8 +211,6 @@ if (empty($sources)) {
   const textarea = document.getElementById('news-content');
   const editor = document.getElementById('news-content-editor');
   const toolbarButtons = document.querySelectorAll('[data-format-open]');
-  const linkSelect = document.getElementById('internal-link-select');
-  const insertLinkButton = document.getElementById('insert-link-btn');
   const addSourceButton = document.getElementById('add-source-btn');
   const sourcesList = document.getElementById('news-sources-list');
   const sourceTemplate = document.getElementById('news-source-template');
@@ -367,21 +354,6 @@ if (empty($sources)) {
   toolbarButtons.forEach((button) => {
     bindToolbarAction(button);
   });
-
-  if (insertLinkButton) {
-    const linkEventName = window.PointerEvent ? 'pointerdown' : ('ontouchstart' in window ? 'touchstart' : 'mousedown');
-    const linkEventOpts = linkEventName === 'touchstart' ? { passive: false } : false;
-
-    const applyInternalLink = (event) => {
-      event.preventDefault();
-      rememberSelection();
-      if (!linkSelect || !linkSelect.value) return;
-      wrapSelection('<a href="' + linkSelect.value + '">', '</a>');
-    };
-
-    insertLinkButton.addEventListener(linkEventName, applyInternalLink, linkEventOpts);
-    insertLinkButton.addEventListener('click', (event) => event.preventDefault());
-  }
 
   const form = document.getElementById('news-form');
   if (form) {
