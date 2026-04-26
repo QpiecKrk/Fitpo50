@@ -150,6 +150,63 @@
   - sprawdz SEO meta: `<title>` <= 65 znakow, `meta description` <= 160 znakow,
   - sprawdz AEO: `BlogPosting.speakable` obecne oraz `.key-takeaways` umieszczone po wstepie.
 
+## Ustalenia operacyjne (2026-04-26) - importer `.fitpo50.json` (kanon)
+
+- **Jeden kanoniczny importer:**
+  - Do publikacji artykulow JSON uzywamy `scripts/import-article.js`.
+  - `scripts/create-article-from-template.js` zostaje tylko jako narzedzie do recznych szkicow.
+
+- **Obowiazkowy flow przed importem (precheck):**
+  - Najpierw uruchom:
+    - `node scripts/import-article.js --file "<sciezka/do/pliku.fitpo50.json>" --precheck true`
+  - Import wykonujemy dopiero gdy precheck zwroci:
+    - `Błędy blokujące import: brak`
+    - `Czy mogę użyć importera teraz: TAK`
+
+- **Bledy blokujace (nie importujemy, dopoki istnieja):**
+  - `sources[]` musi byc lista obiektow `{ "label", "url" }` (bez samych URL-i).
+  - `label` zrodla nie moze byc sama domena (np. `alab.pl`) - musi byc pelna nazwa zrodla.
+  - `url` zrodla musi zaczynac sie od `http://` lub `https://`.
+  - `key_takeaways[]` minimum 3 punkty (AEO).
+  - brak wymaganych sekcji tresci (`sections[]`) lub leadu.
+  - brak hero assetow: `.avif`, `.webp`, `.jpg` w `assets/` (oraz w `_site/assets/`, gdy sync-site wlaczony).
+
+- **SEO/AEO guardrails wymuszane przy imporcie:**
+  - `<title>` jest budowany z `seo_title` (lub `title`) i skracany automatycznie do bezpiecznej dlugosci.
+  - Finalny `<title>` ma pozostawac <= 65 znakow (z `| FitPo50`).
+  - Sekcja `.key-takeaways` jest renderowana po leadzie.
+  - `speakable` w schema wskazuje tylko na realnie istniejace selektory (zalezne od obecnosci `.key-takeaways`).
+
+- **Co importer robi automatycznie po poprawnym imporcie:**
+  - generuje/aktualizuje artykul HTML (source + `_site`),
+  - aktualizuje listingi:
+    - `index.html` ("Nowy artykul" + dolne kafelki fallback),
+    - `porady.html`,
+    - strone kategorii (`rusz-sie.html` / `jedzenie.html` / `zdrowie.html` / `ciekawe.html`),
+    - oraz odpowiedniki w `_site`,
+  - aktualizuje `sitemap.xml` i `llms.txt`,
+  - **zawsze** generuje PDF + duzy przycisk "Pobierz PDF" (`sync_article_pdfs_and_buttons.py`).
+
+- **Bezpieczenstwo i znane ograniczenie:**
+  - Do czasu naprawy helpera PHP, uruchamiaj import z:
+    - `--run-internal-links false`
+  - Powod: tryb auto-linkowania moze przebudowac caly HTML do fragmentu `body`.
+
+- **Komenda publikacyjna (zalecana):**
+  - `node scripts/import-article.js --file "<sciezka/do/pliku.fitpo50.json>" --publish true --run-internal-links false --validate true`
+
+- **Kontrola po imporcie (obowiazkowa):**
+  - sprawdz obecność artykulu w `index.html`, `porady.html` i stronie kategorii,
+  - sprawdz `<title>` <= 65 znakow,
+  - sprawdz, ze istnieja:
+    - sekcja `.key-takeaways`,
+    - przycisk `.pdf-hero-download`,
+    - poprawna lista `sources-list` (pelne nazwy + linki),
+  - sprawdz synchronizacje source <-> `_site`.
+
+- **Granica modulow (anty-regresja):**
+  - Importer artykulow nie moze modyfikowac danych NEWS ani miniatur Bento News.
+
 ## Open questions
 - Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?
 - Czy rozszerzamy automatyczne testy synchronizacji (rollback + spojnosc JSON/sitemap)?

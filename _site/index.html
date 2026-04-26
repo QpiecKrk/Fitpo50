@@ -1357,13 +1357,13 @@
       </section>
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
-        <img class="latest-article__bg" id="latestArticleImage" src="./assets/nordic-walking-para-technika-park-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        <img class="latest-article__bg" id="latestArticleImage" src="./assets/etykiety-sklad-produktow-lupa-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Nordic Walking: kompletny przewodnik dla 50+. Technika, kije i jak zacząć bez kontuzji</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Kompletny przewodnik nordic walking po 50-tce: technika, dobór kijów, plan startowy i naukowe korzyści dla serca, mózgu oraz stawów.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="nordic-walking-jak-zaczac-technika-kije-zdrowie.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Jak czytać etykiety? Przewodnik po składach i E-numerach</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Etykieta to prawda o produkcie, ale napisana małą czcionką i językiem marketingu. Tłumaczymy jak czytać składy, co oznaczają E-numery i gdzie chowa się cukier.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="jak-czytac-etykiety-sklad-produktow-e-numery-inci.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2045,10 +2045,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Nordic Walking: kompletny przewodnik dla 50+. Technika, kije i jak zacząć bez kontuzji',
-        excerpt: 'Kompletny przewodnik nordic walking po 50-tce: technika, dobór kijów, plan startowy i naukowe korzyści dla serca, mózgu oraz stawów.',
-        image: './assets/nordic-walking-para-technika-park-hero.webp',
-        url: 'nordic-walking-jak-zaczac-technika-kije-zdrowie.html'
+        title: 'Jak czytać etykiety? Przewodnik po składach i E-numerach',
+        excerpt: 'Etykieta to prawda o produkcie, ale napisana małą czcionką i językiem marketingu. Tłumaczymy jak czytać składy, co oznaczają E-numery i gdzie chowa się cukier.',
+        image: './assets/etykiety-sklad-produktow-lupa-hero.webp',
+        url: 'jak-czytac-etykiety-sklad-produktow-e-numery-inci.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2078,11 +2078,18 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Zdrowie',
-          title: 'Sarkopeniczna otyłość po 50: problem, którego nie widać w lustrze',
-          excerpt: 'Dlaczego masa ciała może nie pokazywać spadku mięśni i jak wcześnie wychwycić ryzyko.',
-          image: './assets/sarkopenia-lead-lustro-cien.webp',
-          url: 'sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html'
+          category: 'Ciekawe',
+          title: 'Jak czytać etykiety? Przewodnik po składach i E-numerach',
+          excerpt: 'Etykieta to prawda o produkcie, ale napisana małą czcionką i językiem marketingu. Tłumaczymy jak czytać składy, co oznaczają E-numery i gdzie chowa się cukier.',
+          image: './assets/etykiety-sklad-produktow-lupa-hero.webp',
+          url: 'jak-czytac-etykiety-sklad-produktow-e-numery-inci.html'
+        },
+        {
+          category: 'Ciekawe',
+          title: 'AI w szpitalu: czy sztuczna inteligencja faktycznie pomaga pacjentom?',
+          excerpt: 'AI już działa w gabinetach i szpitalach. Sprawdzamy, co mówią badania o realnym wpływie na zdrowie pacjentów.',
+          image: './assets/ai-medycyna-lekarz-monitor-rtg-hero.webp',
+          url: 'ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html'
         },
         {
           category: 'Zdrowie',
@@ -2090,13 +2097,6 @@
           excerpt: 'Jak ocenić wydolność testem 6-minutowego marszu i poprawić ją prostym planem cardio.',
           image: './assets/vo2max-lead-miasto-schody.webp',
           url: 'wydolnosc-vo2max-starzenie-po-50.html'
-        },
-        {
-          category: 'Jedzenie',
-          title: 'Dieta keto a cholesterol: LDL, HDL i trójglicerydy po 50-tce',
-          excerpt: 'Rzetelny przegląd badań oraz praktyczny monitoring wyników bez marketingowych skrótów.',
-          image: './assets/keto-cholesterol-hero.jpg',
-          url: 'dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
@@ -2236,12 +2236,19 @@
       }
     }
 
-    async function firstValidNewsData(endpoints, timeoutMs) {
-      const settled = await Promise.allSettled(endpoints.map((url) => fetchJsonWithTimeout(url, timeoutMs)));
-      for (let idx = 0; idx < settled.length; idx += 1) {
-        const payload = settled[idx].status === 'fulfilled' ? settled[idx].value : null;
-        const items = Array.isArray(payload?.items) ? payload.items : [];
-        if (items.length > 0) return items;
+    async function firstValidNewsData(endpoints, timeoutMs, options = {}) {
+      const firstEndpointRetries = Number.isInteger(options.firstEndpointRetries)
+        ? Math.max(0, options.firstEndpointRetries)
+        : 0;
+
+      for (let idx = 0; idx < endpoints.length; idx += 1) {
+        const url = endpoints[idx];
+        const maxAttempts = idx === 0 ? firstEndpointRetries + 1 : 1;
+        for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+          const payload = await fetchJsonWithTimeout(url, timeoutMs);
+          const items = Array.isArray(payload?.items) ? payload.items : [];
+          if (items.length > 0) return items;
+        }
       }
       return [];
     }
@@ -2250,12 +2257,12 @@
       const localItems = await firstValidNewsData([
         './data/news-live.json',
         './assets/data/news-fallback.json'
-      ], 900);
+      ], 3000, { firstEndpointRetries: 1 });
 
       const remoteItems = localItems.length ? [] : await firstValidNewsData([
         './admin/api/news-feed.php',
         'https://admin.fitpo50.pl/api/news-feed.php'
-      ], 1600);
+      ], 2200);
 
       const itemsToRender = localItems.length ? localItems : remoteItems;
       if (itemsToRender.length > 0) {

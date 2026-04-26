@@ -167,3 +167,13 @@ articles:
   title: "Nordic Walking po 50-tce: technika, kije i korzyści | FitPo50"
   section: "Ruch"
   summary: "Kompletny przewodnik nordic walking po 50-tce: technika, dobór kijów, plan startowy i wnioski z najnowszych badań."
+
+- url: https://fitpo50.pl/ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html
+  title: "AI w szpitalu – czy sztuczna inteligencja faktycznie pomaga pacjentom? | FitPo50"
+  section: "Ciekawe"
+  summary: "AI już działa w gabinetach i szpitalach. Artykuł omawia fakty, badania i ograniczenia skuteczności AI dla pacjentów."
+- url: https://fitpo50.pl/jak-czytac-etykiety-sklad-produktow-e-numery-inci.html
+  title: "Etykiety, składy i „chemia” w jedzeniu. Jak nie dać się nabrać przy sklepowej półce? | FitPo50"
+  section: "Ciekawe"
+  summary: "Etykieta to prawda o produkcie, ale napisana małą czcionką i językiem marketingu. Tłumaczymy jak czytać składy, co oznaczają E-numery i gdzie chowa się cukier."
+
