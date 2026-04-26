@@ -207,6 +207,26 @@
 - **Granica modulow (anty-regresja):**
   - Importer artykulow nie moze modyfikowac danych NEWS ani miniatur Bento News.
 
+## Ustalenia operacyjne (2026-04-26) - obrazy w tresci i PDF
+
+- **Mapowanie obrazow sekcyjnych (wymagane przez importer):**
+  - `image_prompts[]` sluzy jako brief do generacji grafik i mapowania `section_ref`,
+  - samo `image_prompts[]` **nie osadza** obrazow w tresci artykulu,
+  - aby obraz pojawil sie w HTML artykulu, trzeba ustawic `sections[].image`:
+    - `src` (np. `./assets/nazwa.webp`),
+    - `alt`,
+    - opcjonalnie `caption`.
+
+- **Zasada spojnosc danych obrazow:**
+  - `hero_image` musi odpowiadac wpisowi `image_prompts` z `section_ref: "hero"`,
+  - dla sekcji utrzymujemy zgodnosc:
+    - `image_prompts.section_ref == "sekcja-N"` <-> `sections[N-1].image.src`.
+
+- **PDF po zmianach w tresci artykulu:**
+  - po recznej edycji tresci/obrazow artykulu zawsze uruchamiamy:
+    - `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>`
+  - po generacji potwierdzamy, ze PDF istnieje w `assets/pdf/` i `_site/assets/pdf/`.
+
 ## Open questions
 - Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?
 - Czy rozszerzamy automatyczne testy synchronizacji (rollback + spojnosc JSON/sitemap)?
