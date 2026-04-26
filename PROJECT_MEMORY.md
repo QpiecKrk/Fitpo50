@@ -236,6 +236,7 @@
     - `curl -sL https://fitpo50.pl/index.html | rg "<slug>"`
     - `curl -sL https://fitpo50.pl/porady.html | rg "<slug>"`
     - `curl -I https://fitpo50.pl/assets/<related-image>.jpg` (oczekiwane `200`).
+  - fallback 3 kafelkow na `index.html` (`renderReadingFallback`) nie moze miec na stale zaszytych "historycznych" wpisow; po imporcie ma odzwierciedlac 3 najnowsze artykuly (nowy + poprzedni latest + kolejny aktualny).
 
 ## Open questions
 - Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?

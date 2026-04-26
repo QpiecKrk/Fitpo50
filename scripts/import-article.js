@@ -21,6 +21,35 @@ const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const LLMS_PATH = path.join(ROOT, 'llms.txt');
+const READING_ROOM_FALLBACKS = [
+  {
+    url: 'ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html',
+    image: 'ukryty-cukier-nazwy-etykiety-infografika',
+    alt: 'Ukryty cukier na etykietach produktów',
+    category: 'jedzenie',
+    time: '12 min',
+    title: 'Ukryty cukier po 50: pułapki zdrowego jedzenia',
+    description: 'Poznaj najczęstsze nazwy cukru na etykietach i naucz się wyłapywać marketingowe triki.',
+  },
+  {
+    url: 'jak-zaczac-na-silowni-po-50.html',
+    image: 'poczatek-hero',
+    alt: 'Jak zacząć trening siłowy po 50 roku życia',
+    category: 'ruch',
+    time: '10 min',
+    title: 'Jak zacząć na siłowni po 50 i nie zrezygnować po 3 tygodniach',
+    description: 'Prosty plan startu krok po kroku: bez chaosu, bez kontuzji i bez presji na szybkie efekty.',
+  },
+  {
+    url: 'dieta-po-50.html',
+    image: 'dieta-hero',
+    alt: 'Podstawy diety po 50 bez skrajnych zasad',
+    category: 'jedzenie',
+    time: '11 min',
+    title: 'Dieta po 50: prosty system, który da się utrzymać na co dzień',
+    description: 'Najważniejsze zasady odżywiania po 50-tce: co jeść, jak planować i czego nie komplikować.',
+  },
+];
 
 function parseArgs(argv) {
   const out = {};
@@ -43,6 +72,27 @@ function parseArgs(argv) {
     }
   }
   return out;
+}
+
+function printUsage() {
+  console.log([
+    'Usage:',
+    '  node scripts/import-article.js --file "/path/to/article.fitpo50.json" [options]',
+    '',
+    'Options:',
+    '  --precheck true|false           only validate input (default: false)',
+    '  --dry-run true|false            do not write files (default: false)',
+    '  --publish true|false            update listings/sitemap/llms (default: true)',
+    '  --sync-site true|false          mirror changes to _site (default: true)',
+    '  --run-internal-links true|false run PHP internal-link helper (default: false)',
+    '  --validate true|false           run article validator (default: true)',
+    '  --force true|false              overwrite existing article HTML (default: false)',
+    '  --category <key>                override JSON category',
+    '  --help                          show this help',
+    '',
+    'Recommended publish command:',
+    '  node scripts/import-article.js --file "...fitpo50.json" --publish true --run-internal-links false --validate true',
+  ].join('\n'));
 }
 
 function boolOpt(value, fallback) {
@@ -90,11 +140,37 @@ function stripTags(html) {
     .trim();
 }
 
+function getWarsawOffset(dateStr) {
+  try {
+    const probeUtc = new Date(`${dateStr}T12:00:00Z`);
+    const tzValue = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Europe/Warsaw',
+      timeZoneName: 'shortOffset',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).formatToParts(probeUtc).find((p) => p.type === 'timeZoneName')?.value || 'GMT+2';
+
+    const m = tzValue.match(/^GMT([+-])(\d{1,2})(?::?(\d{2}))?$/i);
+    if (!m) return '+02:00';
+    const sign = m[1];
+    const hh = String(m[2]).padStart(2, '0');
+    const mm = String(m[3] || '00').padStart(2, '0');
+    return `${sign}${hh}:${mm}`;
+  } catch (_err) {
+    return '+02:00';
+  }
+}
+
 function toIsoDateTimeWithTimezone(input, fallbackTime) {
   const raw = String(input || '').trim();
   if (!raw) return '';
   if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    return `${raw}T${fallbackTime}+02:00`;
+    return `${raw}T${fallbackTime}${getWarsawOffset(raw)}`;
+  }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(raw)) {
+    const datePart = raw.slice(0, 10);
+    return `${raw}${getWarsawOffset(datePart)}`;
   }
   return raw;
 }
@@ -822,8 +898,58 @@ function upsertCategoryListing(html, ctx) {
   return out;
 }
 
+function unescapeJsSingleQuoted(value) {
+  return String(value || '')
+    .replace(/\\\\/g, '\\')
+    .replace(/\\'/g, "'");
+}
+
+function extractCurrentLatestFromIndex(html) {
+  const imageMatch = html.match(/<img class="latest-article__bg" id="latestArticleImage"[^>]*src="([^"]+)"/i);
+  const titleMatch = html.match(/<h4 class="latest-article__title" id="latestArticleTitle">([\s\S]*?)<\/h4>/i);
+  const excerptMatch = html.match(/<p class="latest-article__excerpt" id="latestArticleExcerpt">([\s\S]*?)<\/p>/i);
+  const linkMatch = html.match(/<a class="latest-article__cta" id="latestArticleLink" href="([^"]+)"/i);
+
+  const url = linkMatch ? String(linkMatch[1] || '').trim() : '';
+  if (!url) return null;
+
+  return {
+    category: 'Ciekawe',
+    title: stripTags(titleMatch ? titleMatch[1] : '').trim(),
+    excerpt: stripTags(excerptMatch ? excerptMatch[1] : '').trim(),
+    image: imageMatch ? String(imageMatch[1] || '').trim() : '',
+    url,
+  };
+}
+
+function extractReadingFallbackCardsFromIndex(html) {
+  const out = [];
+  const blockMatch = html.match(/function renderReadingFallback\(\)\s*\{[\s\S]*?const fallback = \[([\s\S]*?)\]\s*;/i);
+  if (!blockMatch) return out;
+  const block = blockMatch[1];
+
+  const cardRx = /\{\s*category:\s*'((?:\\'|[^'])*)',\s*title:\s*'((?:\\'|[^'])*)',\s*excerpt:\s*'((?:\\'|[^'])*)',\s*image:\s*'((?:\\'|[^'])*)',\s*url:\s*'((?:\\'|[^'])*)'\s*\}/gms;
+  for (const m of block.matchAll(cardRx)) {
+    out.push({
+      category: unescapeJsSingleQuoted(m[1]),
+      title: unescapeJsSingleQuoted(m[2]),
+      excerpt: unescapeJsSingleQuoted(m[3]),
+      image: unescapeJsSingleQuoted(m[4]),
+      url: unescapeJsSingleQuoted(m[5]),
+    });
+  }
+  return out;
+}
+
+function escJsSingle(value) {
+  return String(value || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+}
+
 function upsertIndexListing(html, ctx) {
   let out = html;
+  const previousLatest = extractCurrentLatestFromIndex(out);
+  const previousFallback = extractReadingFallbackCardsFromIndex(out);
+
   out = replaceFirstOrThrow(out, /(<img class="latest-article__bg" id="latestArticleImage"[^>]*src=")[^"]+(")/, `$1${ctx.heroImageWebp}$2`, 'latestArticleImage.src');
   out = replaceFirstOrThrow(out, /(<h4 class="latest-article__title" id="latestArticleTitle">)([\s\S]*?)(<\/h4>)/, `$1${escapeHtml(ctx.title)}$3`, 'latestArticleTitle');
   out = replaceFirstOrThrow(out, /(<p class="latest-article__excerpt" id="latestArticleExcerpt">)([\s\S]*?)(<\/p>)/, `$1${escapeHtml(ctx.excerpt)}$3`, 'latestArticleExcerpt');
@@ -831,37 +957,59 @@ function upsertIndexListing(html, ctx) {
 
   const fallbackBlock = [
     'const fallback = {',
-    `        title: '${ctx.title.replace(/'/g, "\\'")}',`,
-    `        excerpt: '${ctx.excerpt.replace(/'/g, "\\'")}',`,
+    `        title: '${escJsSingle(ctx.title)}',`,
+    `        excerpt: '${escJsSingle(ctx.excerpt)}',`,
     `        image: '${ctx.heroImageWebp}',`,
     `        url: '${ctx.href}'`,
     '      };',
   ].join('\n');
   out = replaceFirstOrThrow(out, /const fallback = \{[\s\S]*?\n\s*\};/, fallbackBlock, 'loadLatestArticle.fallback');
 
+  const composed = [
+    {
+      category: ctx.categoryLabel,
+      title: ctx.title,
+      excerpt: ctx.excerpt,
+      image: ctx.heroImageWebp,
+      url: ctx.href,
+    },
+  ];
+
+  if (previousLatest && previousLatest.url !== ctx.href) {
+    composed.push(previousLatest);
+  }
+
+  for (const item of previousFallback) {
+    if (composed.find((x) => x.url === item.url)) continue;
+    composed.push(item);
+    if (composed.length >= 3) break;
+  }
+
+  while (composed.length < 3) {
+    composed.push({
+      category: 'Ciekawe',
+      title: 'AI w szpitalu: czy sztuczna inteligencja faktycznie pomaga pacjentom?',
+      excerpt: 'AI już działa w gabinetach i szpitalach. Sprawdzamy, co mówią badania o realnym wpływie na zdrowie pacjentów.',
+      image: './assets/ai-medycyna-lekarz-monitor-rtg-hero.webp',
+      url: 'ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html',
+    });
+  }
+
+  const cards = composed.slice(0, 3).map((item) => [
+    '        {',
+    `          category: '${escJsSingle(item.category)}',`,
+    `          title: '${escJsSingle(item.title)}',`,
+    `          excerpt: '${escJsSingle(item.excerpt)}',`,
+    `          image: '${escJsSingle(item.image)}',`,
+    `          url: '${escJsSingle(item.url)}'`,
+    '        }',
+  ].join('\n'));
+
   const readingBlock = [
     'const fallback = [',
-    '        {',
-    `          category: '${ctx.categoryLabel}',`,
-    `          title: '${ctx.title.replace(/'/g, "\\'")}',`,
-    `          excerpt: '${ctx.excerpt.replace(/'/g, "\\'")}',`,
-    `          image: '${ctx.heroImageWebp}',`,
-    `          url: '${ctx.href}'`,
-    '        },',
-    '        {',
-    "          category: 'Ciekawe',",
-    "          title: 'AI w szpitalu: czy sztuczna inteligencja faktycznie pomaga pacjentom?',",
-    "          excerpt: 'AI już działa w gabinetach i szpitalach. Sprawdzamy, co mówią badania o realnym wpływie na zdrowie pacjentów.',",
-    "          image: './assets/ai-medycyna-lekarz-monitor-rtg-hero.webp',",
-    "          url: 'ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html'",
-    '        },',
-    '        {',
-    "          category: 'Zdrowie',",
-    "          title: 'Wydolność po 50: VO2 max mówi o Twoim starzeniu więcej niż obwód pasa',",
-    "          excerpt: 'Jak ocenić wydolność testem 6-minutowego marszu i poprawić ją prostym planem cardio.',",
-    "          image: './assets/vo2max-lead-miasto-schody.webp',",
-    "          url: 'wydolnosc-vo2max-starzenie-po-50.html'",
-    '        }',
+    `${cards[0]},`,
+    `${cards[1]},`,
+    `${cards[2]}`,
     '      ];',
   ].join('\n');
   out = replaceFirstOrThrow(out, /const fallback = \[[\s\S]*?\n\s*\];/, readingBlock, 'renderReadingFallback');
@@ -925,6 +1073,33 @@ function runCommand(label, command, args, opts = {}) {
   return result;
 }
 
+function stripXmlProcessingInstruction(html) {
+  return String(html || '').replace(/^\s*<\?xml[^>]*>\s*/i, '');
+}
+
+function assertNoReadingRoomPlaceholders(html) {
+  const checks = [
+    { rx: /Powiązany artykuł\s*[123]/i, msg: 'Wykryto placeholder "Powiązany artykuł X" w sekcji Czytelnia.' },
+    { rx: /Krótki opis powiązanego artykułu\./i, msg: 'Wykryto placeholder opisu w sekcji Czytelnia.' },
+    { rx: /\{\{RELATED_[^}]+\}\}/, msg: 'Wykryto nierozwiązany placeholder {{RELATED_*}} w HTML.' },
+  ];
+
+  for (const check of checks) {
+    if (check.rx.test(html)) {
+      throw new Error(`${check.msg} Uzupełnij related_articles w JSON albo popraw fallback importera.`);
+    }
+  }
+}
+
+function sanitizeHtmlFileAfterPhpRewrite(filePath) {
+  if (!fs.existsSync(filePath)) return false;
+  const original = fs.readFileSync(filePath, 'utf8');
+  const sanitized = stripXmlProcessingInstruction(original);
+  if (sanitized === original) return false;
+  fs.writeFileSync(filePath, sanitized, 'utf8');
+  return true;
+}
+
 function runInternalLinks(slug, dryRun) {
   if (dryRun) return { skipped: true };
 
@@ -948,13 +1123,17 @@ function runInternalLinks(slug, dryRun) {
   const res = runCommand('Internal linking', 'php', ['-r', phpCode, htmlPath]);
 
   const parsed = JSON.parse((res.stdout || '').trim() || '{}');
+  const removedXmlPi = sanitizeHtmlFileAfterPhpRewrite(htmlPath);
 
   const sitePath = path.join(ROOT, '_site', `${slug}.html`);
   if (fs.existsSync(sitePath)) {
     fs.copyFileSync(htmlPath, sitePath);
   }
 
-  return parsed;
+  return {
+    ...parsed,
+    removedXmlPi,
+  };
 }
 
 function runValidator(slug, dryRun) {
@@ -1024,18 +1203,19 @@ function normalizePayload(data, cliCategory) {
   const related = normalizeArray(data.related_articles || data.related || []).slice(0, 3);
 
   const relatedDefaults = [0, 1, 2].map((idx) => {
+    const fallback = READING_ROOM_FALLBACKS[idx];
     const item = related[idx] || {};
-    const rCat = normalizeCategory(item.category || category.label);
-    const imageBase = String(item.image || item.image_base || heroImage).trim();
+    const rCat = normalizeCategory(item.category || fallback.category || category.label);
+    const imageBase = String(item.image || item.image_base || fallback.image || heroImage).trim();
     return {
-      url: String(item.url || 'porady.html').trim() || 'porady.html',
+      url: String(item.url || fallback.url || 'porady.html').trim() || 'porady.html',
       image: imageBase,
-      alt: String(item.alt || item.title || `Powiązany artykuł ${idx + 1}`).trim(),
+      alt: String(item.alt || item.title || fallback.alt || title).trim(),
       categoryLabel: rCat.label,
       categoryKey: rCat.key,
-      time: String(item.time || item.reading_time || readingTime.replace(/\s*czytania/i, '')).trim(),
-      title: String(item.title || `Powiązany artykuł ${idx + 1}`).trim(),
-      description: String(item.description || 'Krótki opis powiązanego artykułu.').trim(),
+      time: String(item.time || item.reading_time || fallback.time || readingTime.replace(/\s*czytania/i, '')).trim(),
+      title: String(item.title || fallback.title || title).trim(),
+      description: String(item.description || fallback.description || metaDescription).trim(),
     };
   });
 
@@ -1155,6 +1335,8 @@ function buildHtmlFromTemplate(template, payload) {
 
   html = upsertSpeakableSchema(html, payload.keyTakeaways.length > 0);
 
+  assertNoReadingRoomPlaceholders(html);
+
   return html;
 }
 
@@ -1184,16 +1366,21 @@ function printSummary(report) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  if (boolOpt(args.help, false) || boolOpt(args.h, false)) {
+    printUsage();
+    return;
+  }
 
   const inputFile = args.file;
   if (!inputFile) {
+    printUsage();
     throw new Error('Podaj plik JSON: --file /sciezka/do/artykul.fitpo50.json');
   }
 
   const dryRun = boolOpt(args['dry-run'], false);
   const publish = boolOpt(args.publish, true);
   const syncSite = boolOpt(args['sync-site'], true);
-  const runInternal = boolOpt(args['run-internal-links'], true);
+  const runInternal = boolOpt(args['run-internal-links'], false);
   const runValidate = boolOpt(args.validate, true);
   const precheckOnly = boolOpt(args.precheck, false) || boolOpt(args['check-only'], false);
   const force = boolOpt(args.force, false);
@@ -1260,6 +1447,7 @@ function main() {
 
   let internalLinksResult = null;
   if (runInternal) {
+    console.warn('\nUwaga: --run-internal-links=true jest trybem podwyższonego ryzyka (helper może przebudować HTML).');
     internalLinksResult = runInternalLinks(payload.slug, dryRun);
   }
 
