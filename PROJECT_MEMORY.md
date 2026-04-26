@@ -227,6 +227,16 @@
     - `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>`
   - po generacji potwierdzamy, ze PDF istnieje w `assets/pdf/` i `_site/assets/pdf/`.
 
+- **Incydent anty-regresyjny (listingi + kafelki Czytelni):**
+  - sam commit z plikiem artykulu nie wystarcza; publikacja jest "done" dopiero, gdy na produkcji sa tez:
+    - listingi (`index.html`, `porady.html`, strona kategorii),
+    - metadane publikacyjne (`sitemap.xml`, `llms.txt`),
+    - wszystkie assety kart "Czytelnia" (miniatury related, bez 404).
+  - po pushu obowiazkowo robimy live-check:
+    - `curl -sL https://fitpo50.pl/index.html | rg "<slug>"`
+    - `curl -sL https://fitpo50.pl/porady.html | rg "<slug>"`
+    - `curl -I https://fitpo50.pl/assets/<related-image>.jpg` (oczekiwane `200`).
+
 ## Open questions
 - Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?
 - Czy rozszerzamy automatyczne testy synchronizacji (rollback + spojnosc JSON/sitemap)?
