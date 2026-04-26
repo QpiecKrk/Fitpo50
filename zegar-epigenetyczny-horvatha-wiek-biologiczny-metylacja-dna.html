@@ -3,6 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+        gtag("config", "AW-18108612630");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
+</script>
 <script>
   (function () {
     try {
