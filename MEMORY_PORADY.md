@@ -11,8 +11,8 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 
 - Artykul to pojedyncza strona docelowa.
 - Obowiazuje kanoniczny standard z `ARTICLE_STANDARD.md` (bez recznych wariantow layoutu).
-- Nowe artykuly tworzymy z `article-template-bento.html` lub przez generator:
-  - `node scripts/create-article-from-template.js ...`
+- Kanoniczny flow publikacji: `scripts/import-article.js` z plikow `.fitpo50.json` (zawsze z precheck).
+- `article-template-bento.html` / `node scripts/create-article-from-template.js ...` stosujemy tylko do recznych szkicow i materialow roboczych.
 - Przed oddaniem artykulu uruchamiamy walidator:
   - `node scripts/validate-article-standard.js <plik.html>`
 - Przed publikacja artykulu obowiazkowo generujemy PDF i podpinamy przycisk hero:
@@ -24,7 +24,7 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Nie pokazujemy widocznej daty publikacji/aktualizacji na gorze artykulu.
 - Na dole artykulu (nad footerem) zawsze sekcja "Czytelnia" (`.porady-preview.section-padding`) z 3 kafelkami.
 - Naglowek sekcji "Czytelnia" ma byc index-style (`.reading-room__head` + ikona), nie wariant alternatywny.
-- Interlinking w tresci: docelowo 2-4 linki wewnetrzne osadzone w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
+- Interlinking w tresci: minimum 4 linki wewnetrzne osadzone w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
 - Dopuszczamy bardziej wyrazisty styl artykulu (kolory, callouty, typografia, tabele), ale:
   - zachowujemy spojnosc z designem serwisu,
   - trzymamy max 2-3 rodziny fontow na artykul,
@@ -129,18 +129,13 @@ Szybka checklista przed oddaniem artykulu:
 
 ## Obrazy
 
-- Preferowany `picture`: `avif` -> `webp` -> fallback `jpg/png`.
+- Preferowany `picture`: `avif` -> `webp` -> fallback `jpg/jpeg` (PNG tylko dla logo/ikon technicznych).
 - Hero: `loading="eager"`.
 - Pozostale: `loading="lazy"`.
 - Gdzie mozliwe podajemy `width` i `height`.
 
 ## Aktualizacja przy nowym artykule
 
-- Zawsze zaktualizuj:
-  - Jedzenie
-  - Zdrowie
-  - Ciekawe
-- To NIE jest tag pomocniczy. To osobna kategoria i osobna strona zbiorcza.
 - Aktualizacja przy nowym artykule:
   - odpowiednia strona kategorii (Ruch/Jedzenie/Zdrowie/Ciekawe),
   - `porady.html`,

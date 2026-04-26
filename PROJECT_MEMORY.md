@@ -196,6 +196,7 @@
   - `node scripts/import-article.js --file "<sciezka/do/pliku.fitpo50.json>" --publish true --run-internal-links false --validate true`
 
 - **Kontrola po imporcie (obowiazkowa):**
+  - uruchom gate przed deployem: `npm run predeploy:check` (oraz wariant ze slugiem: `node scripts/predeploy-gate.js --slug <slug>`),
   - sprawdz obecność artykulu w `index.html`, `porady.html` i stronie kategorii,
   - sprawdz `<title>` <= 65 znakow,
   - sprawdz, ze istnieja:
@@ -236,7 +237,13 @@
     - `curl -sL https://fitpo50.pl/index.html | rg "<slug>"`
     - `curl -sL https://fitpo50.pl/porady.html | rg "<slug>"`
     - `curl -I https://fitpo50.pl/assets/<related-image>.jpg` (oczekiwane `200`).
+  - `git push` nie oznacza automatycznego wdrozenia na Hostinger; po pushu trzeba potwierdzic stan live na `https://fitpo50.pl`.
   - fallback 3 kafelkow na `index.html` (`renderReadingFallback`) nie moze miec na stale zaszytych "historycznych" wpisow; po imporcie ma odzwierciedlac 3 najnowsze artykuly (nowy + poprzedni latest + kolejny aktualny).
+  - Automatyczny workflow przy komendzie usera `git push`:
+    - najpierw `npm run predeploy:check`,
+    - raport wynikow (PASS/FAIL + kluczowe bledy),
+    - przy PASS: `git add -A` -> `git commit` (automatyczny komunikat) -> `git push`,
+    - bezpiecznik: przy nienaturalnie duzym, mieszanym zakresie zmian STOP i krotkie pytanie o zgode.
 
 ## Open questions
 - Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?
@@ -377,7 +384,8 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - spacing/radius/type scale: `--space-*`, `--radius-*`, `--text-*`,
   - breakpointy: `--bp-mobile`, `--bp-phone-dark`, `--bp-topbar-collapse`.
 - Narzędzia standardu:
-  - generator: `node scripts/create-article-from-template.js ...`,
+  - kanoniczny importer publikacyjny: `node scripts/import-article.js --file "<plik.fitpo50.json>" --precheck true`,
+  - generator szkicu (opcjonalnie): `node scripts/create-article-from-template.js ...`,
   - walidator: `node scripts/validate-article-standard.js <plik.html>`.
 
 ## SEO artykulow
@@ -599,7 +607,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
     - oraz caly zestaw 3 kafelkow jako 3 najnowsze wpisy.
 - Dla nowych obrazow:
   - generuj `webp` (i `avif`, jesli ma sens),
-  - zostaw fallback `png/jpg`,
+  - zostaw fallback `jpg/jpeg` (PNG tylko dla logo i ikon technicznych),
   - podawaj `width` i `height`,
   - hero: `loading="eager"`, pozostale: `loading="lazy"`.
 - Przy poprawkach mobile/Safari:

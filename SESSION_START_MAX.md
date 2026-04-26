@@ -32,9 +32,14 @@ Zasady:
 - sygnalizuj ryzyka, zalozenia i wplyw zmian na reszte systemu,
 - nie wykonuj `git commit` ani `git push` bez mojej wyraznej komendy,
 - nie uzywaj polecen destrukcyjnych bez mojej wyraznej zgody.
+- Gdy wydaje komenda `git push`, najpierw uruchamiasz gate i raport:
+  - `npm run predeploy:check`
+  - jesli PASS: wykonaj `git add -A` -> `git commit` (automatyczny komunikat) -> `git push`,
+  - jesli FAIL: STOP, raport bledow i brak push.
+  - bezpiecznik: jesli commit obejmuje nienaturalnie duzy zakres (duzo plikow niezwiazanych z biezacym taskiem), STOP i krotkie pytanie o zgode.
 
 Publikacja artykulow:
-- nowy artykul tworzymy przez `article-template-bento.html` (lub generator `node scripts/create-article-from-template.js ...`),
+- kanoniczny flow publikacji artykulow: `scripts/import-article.js` (`.fitpo50.json` + precheck); `article-template-bento.html` / `create-article-from-template.js` tylko do recznych szkicow,
 - obowiazkowo uruchom walidator standardu: `node scripts/validate-article-standard.js <plik.html>`,
 - obowiazkowo generuj PDF artykulu i podpinaj duzy przycisk w hero: `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>` (albo hurtowo: `npm run article:pdf:sync`),
 - artykul nie przechodzi, jesli ma inline CSS lub lokalny `<style>`,
