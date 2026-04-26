@@ -6,6 +6,18 @@ require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
 
+function pluralizeLinkWord(int $count): string {
+    $mod10 = $count % 10;
+    $mod100 = $count % 100;
+    if ($count === 1) {
+        return 'link';
+    }
+    if ($mod10 >= 2 && $mod10 <= 4 && !($mod100 >= 12 && $mod100 <= 14)) {
+        return 'linki';
+    }
+    return 'linków';
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../news-dashboard.php');
     exit;
@@ -53,10 +65,12 @@ try {
         throw new RuntimeException(implode(' ', $linkErrors));
     }
 
-    $sources = normalizeNewsSources(
+    $sourcesResult = normalizeNewsSourcesLenient(
         (array)($_POST['source_label'] ?? []),
         (array)($_POST['source_url'] ?? [])
     );
+    $sources = $sourcesResult['sources'];
+    $invalidSources = $sourcesResult['invalid'];
 
     $now = date('c');
     $itemId = $existing['id'] ?? ('news_' . bin2hex(random_bytes(6)));
@@ -112,7 +126,12 @@ try {
         ? runGitAutoSync(['news'], 'news save/publish')
         : null;
 
-    $_SESSION['flash_success'] = 'News zapisany jako roboczy.' . gitSyncResultNote($gitSync);
+    $successMessage = 'News zapisany jako roboczy.' . gitSyncResultNote($gitSync);
+    $invalidCount = count($invalidSources);
+    if ($invalidCount > 0) {
+        $successMessage .= ' Uwaga: pominięto ' . $invalidCount . ' nieprawidłow' . ($invalidCount === 1 ? 'y' : 'e') . ' ' . pluralizeLinkWord($invalidCount) . ' źródłow' . ($invalidCount === 1 ? 'y' : 'e') . '.';
+    }
+    $_SESSION['flash_success'] = $successMessage;
 
     $gitError = gitSyncFlashError($gitSync);
     if ($gitError !== null) {

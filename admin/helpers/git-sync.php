@@ -99,8 +99,31 @@ function runGitAutoSync(array $groups, string $actionLabel): array {
         if ($pushResult['exit_code'] !== 0) {
             $pushErrorRaw = trim($pushResult['stderr'] . "\n" . $pushResult['stdout']);
             if (isNonFastForwardPushError($pushErrorRaw)) {
+                $draftProtection = null;
+                if (in_array('news', $groups, true)) {
+                    $draftProtection = captureLocalNewsDrafts($repoRoot);
+                    if (($draftProtection['status'] ?? 'error') !== 'ok') {
+                        return [
+                            'status' => 'error',
+                            'message' => 'Commit zapisany lokalnie, ale nie udało się zabezpieczyć draftów NEWS przed rebase: ' . ($draftProtection['message'] ?? 'nieznany błąd'),
+                            'branch' => $branch,
+                        ];
+                    }
+                }
+
                 $pullResult = runGitCommand(['git', 'pull', '--rebase', $remote, $branch], $repoRoot);
                 if ($pullResult['exit_code'] === 0) {
+                    if ($draftProtection !== null) {
+                        $restoreResult = restoreLocalNewsDrafts($repoRoot, $draftProtection);
+                        if (($restoreResult['status'] ?? 'error') !== 'ok') {
+                            return [
+                                'status' => 'error',
+                                'message' => 'Commit zapisany lokalnie, ale po rebase nie udało się przywrócić draftów NEWS: ' . ($restoreResult['message'] ?? 'nieznany błąd'),
+                                'branch' => $branch,
+                            ];
+                        }
+                    }
+
                     $pushRetry = runGitCommand(['git', 'push', $remote, $branch], $repoRoot);
                     if ($pushRetry['exit_code'] === 0) {
                         $hashResult = runGitCommand(['git', 'rev-parse', '--short', 'HEAD'], $repoRoot);
@@ -275,4 +298,164 @@ function isNonFastForwardPushError(string $error): bool {
     return str_contains($haystack, '[rejected]')
         || str_contains($haystack, 'fetch first')
         || str_contains($haystack, 'non-fast-forward');
+}
+
+/**
+ * @return array{status:string,message?:string,drafts?:array<int,array<string,mixed>>}
+ */
+function captureLocalNewsDrafts(string $repoRoot): array {
+    $storePath = $repoRoot . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'news-live.json';
+    if (!is_file($storePath)) {
+        return ['status' => 'ok', 'drafts' => []];
+    }
+
+    $raw = file_get_contents($storePath);
+    if ($raw === false || trim($raw) === '') {
+        return ['status' => 'ok', 'drafts' => []];
+    }
+
+    $decoded = json_decode($raw, true);
+    if (!is_array($decoded)) {
+        return ['status' => 'error', 'message' => 'Lokalny news-live.json ma nieprawidłowy JSON.'];
+    }
+
+    $drafts = [];
+    foreach (($decoded['items'] ?? []) as $item) {
+        if (!is_array($item)) {
+            continue;
+        }
+        if ((string)($item['status'] ?? '') !== 'draft') {
+            continue;
+        }
+
+        $id = trim((string)($item['id'] ?? ''));
+        if ($id === '') {
+            continue;
+        }
+
+        $drafts[] = $item;
+    }
+
+    return ['status' => 'ok', 'drafts' => $drafts];
+}
+
+/**
+ * @param array{status:string,drafts?:array<int,array<string,mixed>>} $snapshot
+ * @return array{status:string,message?:string}
+ */
+function restoreLocalNewsDrafts(string $repoRoot, array $snapshot): array {
+    $drafts = $snapshot['drafts'] ?? [];
+    if (!is_array($drafts) || $drafts === []) {
+        return ['status' => 'ok'];
+    }
+
+    $storePath = $repoRoot . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'news-live.json';
+    $storeRaw = is_file($storePath) ? file_get_contents($storePath) : false;
+    $store = [];
+    if ($storeRaw !== false && trim((string)$storeRaw) !== '') {
+        $decoded = json_decode((string)$storeRaw, true);
+        if (!is_array($decoded)) {
+            return ['status' => 'error', 'message' => 'Po rebase news-live.json ma nieprawidłowy JSON.'];
+        }
+        $store = $decoded;
+    }
+
+    $items = [];
+    foreach (($store['items'] ?? []) as $item) {
+        if (is_array($item)) {
+            $items[] = $item;
+        }
+    }
+
+    $indexById = [];
+    foreach ($items as $idx => $item) {
+        $id = trim((string)($item['id'] ?? ''));
+        if ($id !== '') {
+            $indexById[$id] = $idx;
+        }
+    }
+
+    $changed = false;
+    foreach ($drafts as $draft) {
+        if (!is_array($draft)) {
+            continue;
+        }
+        $id = trim((string)($draft['id'] ?? ''));
+        if ($id === '') {
+            continue;
+        }
+
+        if (!array_key_exists($id, $indexById)) {
+            $items[] = $draft;
+            $indexById[$id] = count($items) - 1;
+            $changed = true;
+            continue;
+        }
+
+        $existing = $items[$indexById[$id]] ?? null;
+        if (!is_array($existing)) {
+            $items[$indexById[$id]] = $draft;
+            $changed = true;
+            continue;
+        }
+
+        if ((string)($existing['status'] ?? '') === 'draft') {
+            $merged = array_replace($existing, $draft);
+            if ($merged !== $existing) {
+                $items[$indexById[$id]] = $merged;
+                $changed = true;
+            }
+        }
+    }
+
+    if (!$changed) {
+        return ['status' => 'ok'];
+    }
+
+    $store['version'] = 1;
+    $store['updatedAt'] = date('c');
+    $store['items'] = $items;
+
+    $writeResult = atomicWriteGitSyncJson($storePath, $store);
+    if (($writeResult['status'] ?? 'error') !== 'ok') {
+        return $writeResult;
+    }
+
+    $mirrorPath = $repoRoot . DIRECTORY_SEPARATOR . '_site' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'news-live.json';
+    if (is_dir(dirname($mirrorPath))) {
+        $mirrorWrite = atomicWriteGitSyncJson($mirrorPath, $store);
+        if (($mirrorWrite['status'] ?? 'error') !== 'ok') {
+            return $mirrorWrite;
+        }
+    }
+
+    $add = runGitCommand(['git', 'add', '-A', '--', 'data/news-live.json', '_site/data/news-live.json'], $repoRoot);
+    if ($add['exit_code'] !== 0) {
+        return ['status' => 'error', 'message' => 'Nie udało się dodać przywróconych draftów do indeksu Git: ' . shortenGitError($add['stderr'])];
+    }
+
+    return ['status' => 'ok'];
+}
+
+/**
+ * @param array<string,mixed> $payload
+ * @return array{status:string,message?:string}
+ */
+function atomicWriteGitSyncJson(string $path, array $payload): array {
+    $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    if ($json === false) {
+        return ['status' => 'error', 'message' => 'Nie udało się zakodować JSON podczas ochrony draftów NEWS.'];
+    }
+
+    $tmp = $path . '.tmp';
+    if (file_put_contents($tmp, $json . "\n", LOCK_EX) === false) {
+        return ['status' => 'error', 'message' => 'Nie udało się zapisać pliku tymczasowego: ' . basename($path)];
+    }
+
+    if (!@rename($tmp, $path)) {
+        @unlink($tmp);
+        return ['status' => 'error', 'message' => 'Nie udało się podmienić pliku: ' . basename($path)];
+    }
+
+    return ['status' => 'ok'];
 }

@@ -446,6 +446,52 @@ function normalizeNewsSources(array $labels, array $urls): array {
     return $sources;
 }
 
+/**
+ * @param array<int,string> $labels
+ * @param array<int,string> $urls
+ * @return array{sources:array<int,array{label:string,url:string}>,invalid:array<int,array{index:int,reason:string,url:string}>}
+ */
+function normalizeNewsSourcesLenient(array $labels, array $urls): array {
+    $sources = [];
+    $invalid = [];
+    $count = max(count($labels), count($urls));
+
+    for ($i = 0; $i < $count; $i++) {
+        $label = trim((string)($labels[$i] ?? ''));
+        $url = trim((string)($urls[$i] ?? ''));
+
+        if ($label === '' && $url === '') {
+            continue;
+        }
+
+        if ($label === '' || $url === '') {
+            $invalid[] = ['index' => $i + 1, 'reason' => 'brak nazwy lub URL', 'url' => $url];
+            continue;
+        }
+
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            $invalid[] = ['index' => $i + 1, 'reason' => 'nieprawidłowy URL', 'url' => $url];
+            continue;
+        }
+
+        $scheme = strtolower((string)parse_url($url, PHP_URL_SCHEME));
+        if (!in_array($scheme, ['http', 'https'], true)) {
+            $invalid[] = ['index' => $i + 1, 'reason' => 'nieobsługiwany protokół', 'url' => $url];
+            continue;
+        }
+
+        $sources[] = [
+            'label' => $label,
+            'url' => $url,
+        ];
+    }
+
+    return [
+        'sources' => $sources,
+        'invalid' => $invalid,
+    ];
+}
+
 function processNewsImageUpload(array $file): array {
     $error = (int)($file['error'] ?? UPLOAD_ERR_NO_FILE);
     if ($error === UPLOAD_ERR_NO_FILE) {
