@@ -339,6 +339,23 @@ function normalizeSections(rawSections) {
   return sections;
 }
 
+function countInternalHtmlLinks(htmlChunks) {
+  const unique = new Set();
+  const rx = /<a\b[^>]*href="([^"]+)"/gi;
+  for (const chunk of normalizeArray(htmlChunks)) {
+    const html = String(chunk || '');
+    for (const m of html.matchAll(rx)) {
+      const href = String(m[1] || '').trim();
+      if (!href) continue;
+      if (/^(https?:|mailto:|tel:|javascript:|#)/i.test(href)) continue;
+      if (!/\.html(?:[?#].*)?$/i.test(href)) continue;
+      if (/^\.?\/?porady\.html(?:[?#].*)?$/i.test(href)) continue;
+      unique.add(href.replace(/^\.\//, ''));
+    }
+  }
+  return unique.size;
+}
+
 function validateInput(data) {
   const errors = [];
   const title = String(data.title || '').trim();
@@ -349,6 +366,36 @@ function validateInput(data) {
 
   const sections = normalizeSections(data.sections || []);
   if (!sections.length) errors.push('Brak sekcji: sections[].');
+  if (sections.length > 0) {
+    const sectionParagraphErrors = [];
+    for (const section of sections) {
+      const firstParagraph = section.blocks.find((b) => b.type === 'paragraph' && String(b.html || '').trim());
+      if (!firstParagraph) {
+        sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}" nie ma akapitu otwierającego.`);
+        continue;
+      }
+      const words = countWordsUtf8(stripTags(firstParagraph.html));
+      if (words < 35 || words > 80) {
+        sectionParagraphErrors.push(
+          `Sekcja "${section.title || '(bez tytułu)'}": pierwszy akapit powinien mieć 35-80 słów (ma ${words}).`
+        );
+      }
+    }
+    errors.push(...sectionParagraphErrors);
+
+    const linkSource = [];
+    for (const section of sections) {
+      for (const block of section.blocks) {
+        if (block.type === 'paragraph' || block.type === 'html') {
+          linkSource.push(block.html || '');
+        }
+      }
+    }
+    const internalLinks = countInternalHtmlLinks(linkSource);
+    if (internalLinks < 4) {
+      errors.push(`AEO/GEO: dodaj minimum 4 linki wewnętrzne w treści sekcji (obecnie: ${internalLinks}).`);
+    }
+  }
   const keyTakeaways = normalizeKeyTakeaways(data.key_takeaways || data.takeaways || []);
   if (keyTakeaways.length < 3) {
     errors.push('AEO: dodaj minimum 3 elementy w key_takeaways[] (sekcja "Kluczowe wnioski").');

@@ -13,6 +13,85 @@ function isArticleHtml(content) {
   return /<body[^>]*class="[^"]*article-template[^"]*"/i.test(content);
 }
 
+function stripTags(html) {
+  return String(html || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function countWords(text) {
+  const m = String(text || '').match(/[\p{L}\p{N}]+/gu);
+  return m ? m.length : 0;
+}
+
+function countInternalContextLinks(articleContentHtml) {
+  const rx = /<a\b[^>]*href="([^"]+)"/gi;
+  const unique = new Set();
+  for (const m of articleContentHtml.matchAll(rx)) {
+    const href = String(m[1] || '').trim();
+    if (!href) continue;
+    if (/^(https?:|mailto:|tel:|javascript:|#)/i.test(href)) continue;
+    if (!/\.html(?:[?#].*)?$/i.test(href)) continue;
+    if (/^\.?\/?porady\.html(?:[?#].*)?$/i.test(href)) continue;
+    unique.add(href.replace(/^\.\//, ''));
+  }
+  return unique.size;
+}
+
+function extractArticleContentHtml(raw) {
+  const startMatch = raw.match(/<article\s+class="article-content">/i);
+  if (!startMatch || startMatch.index === undefined) return '';
+  const start = startMatch.index + startMatch[0].length;
+  const endBySources = raw.search(/<h2\s+id="zrodla">/i);
+  const endByMain = raw.search(/<\/main>/i);
+  let end = -1;
+  if (endBySources > start) end = endBySources;
+  if (end === -1 && endByMain > start) end = endByMain;
+  if (end === -1) end = raw.length;
+  return raw.slice(start, end);
+}
+
+function validateAnswerFirstParagraphs(raw, errors) {
+  const h2Rx = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
+  const h2s = [...raw.matchAll(h2Rx)];
+  const skippedTitles = new Set([
+    'kluczowe wnioski',
+    'najczęściej zadawane pytania',
+    'zrodla',
+    'źródła',
+  ]);
+
+  let checked = 0;
+  for (let i = 0; i < h2s.length; i += 1) {
+    const current = h2s[i];
+    const next = h2s[i + 1];
+    const title = stripTags(current[1]).toLowerCase();
+    if (skippedTitles.has(title)) continue;
+    if (title.includes('źródła') || title.includes('zrodla')) continue;
+
+    const sectionStart = current.index + current[0].length;
+    const sectionEnd = next ? next.index : raw.length;
+    const sectionHtml = raw.slice(sectionStart, sectionEnd);
+    const pMatch = sectionHtml.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i);
+    if (!pMatch) {
+      errors.push(`Sekcja "${stripTags(current[1])}" nie zawiera akapitu otwierającego <p>.`);
+      continue;
+    }
+    checked += 1;
+    const words = countWords(stripTags(pMatch[1]));
+    if (words < 35 || words > 80) {
+      errors.push(`Sekcja "${stripTags(current[1])}": pierwszy akapit powinien mieć 35-80 słów (ma ${words}).`);
+    }
+  }
+
+  if (checked === 0) {
+    errors.push('Nie znaleziono sekcji H2 do walidacji answer-first.');
+  }
+}
+
 function validateFile(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
@@ -131,6 +210,17 @@ function validateFile(filePath) {
       errors.push('BlogPosting.dateModified musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T09:30:00+02:00)');
       break;
     }
+  }
+
+  const articleContentHtml = extractArticleContentHtml(raw);
+  if (!articleContentHtml) {
+    errors.push('Brak <article class="article-content"> do walidacji AEO/GEO.');
+  } else {
+    const internalLinks = countInternalContextLinks(articleContentHtml);
+    if (internalLinks < 4) {
+      errors.push(`Za mało linków kontekstowych w treści: ${internalLinks}/4.`);
+    }
+    validateAnswerFirstParagraphs(articleContentHtml, errors);
   }
 
   return errors;

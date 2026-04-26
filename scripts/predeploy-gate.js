@@ -49,6 +49,112 @@ function normalizeSlug(input) {
   return s.endsWith('.html') ? s.slice(0, -5) : s;
 }
 
+function stripTags(html) {
+  return String(html || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function countWords(text) {
+  const m = String(text || '').match(/[\p{L}\p{N}]+/gu);
+  return m ? m.length : 0;
+}
+
+function countInternalContextLinks(articleContentHtml) {
+  const rx = /<a\b[^>]*href="([^"]+)"/gi;
+  const unique = new Set();
+  for (const m of articleContentHtml.matchAll(rx)) {
+    const href = String(m[1] || '').trim();
+    if (!href) continue;
+    if (/^(https?:|mailto:|tel:|javascript:|#)/i.test(href)) continue;
+    if (!/\.html(?:[?#].*)?$/i.test(href)) continue;
+    if (/^\.?\/?porady\.html(?:[?#].*)?$/i.test(href)) continue;
+    unique.add(href.replace(/^\.\//, ''));
+  }
+  return unique.size;
+}
+
+function extractArticleContentHtml(raw) {
+  const startMatch = raw.match(/<article\s+class="article-content">/i);
+  if (!startMatch || startMatch.index === undefined) return '';
+  const start = startMatch.index + startMatch[0].length;
+  const endBySources = raw.search(/<h2\s+id="zrodla">/i);
+  const endByMain = raw.search(/<\/main>/i);
+  let end = -1;
+  if (endBySources > start) end = endBySources;
+  if (end === -1 && endByMain > start) end = endByMain;
+  if (end === -1) end = raw.length;
+  return raw.slice(start, end);
+}
+
+function validateAnswerFirstParagraphs(articleContentHtml, strictErrors, softWarnings, relPath, strictMode) {
+  const h2Rx = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
+  const h2s = [...articleContentHtml.matchAll(h2Rx)];
+  const skippedTitles = new Set([
+    'kluczowe wnioski',
+    'najczęściej zadawane pytania',
+    'zrodla',
+    'źródła',
+  ]);
+
+  let checked = 0;
+  for (let i = 0; i < h2s.length; i += 1) {
+    const current = h2s[i];
+    const next = h2s[i + 1];
+    const title = stripTags(current[1]).toLowerCase();
+    if (skippedTitles.has(title)) continue;
+    if (title.includes('źródła') || title.includes('zrodla')) continue;
+
+    const sectionStart = current.index + current[0].length;
+    const sectionEnd = next ? next.index : articleContentHtml.length;
+    const sectionHtml = articleContentHtml.slice(sectionStart, sectionEnd);
+    const pMatch = sectionHtml.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i);
+    if (!pMatch) {
+      const msg = `${relPath}: sekcja "${stripTags(current[1])}" nie ma akapitu otwierającego.`;
+      if (strictMode) strictErrors.push(msg); else softWarnings.push(msg);
+      continue;
+    }
+    checked += 1;
+    const words = countWords(stripTags(pMatch[1]));
+    if (words < 35 || words > 80) {
+      const msg = `${relPath}: sekcja "${stripTags(current[1])}" ma pierwszy akapit poza zakresem 35-80 słów (${words}).`;
+      if (strictMode) strictErrors.push(msg); else softWarnings.push(msg);
+    }
+  }
+
+  if (checked === 0) {
+    const msg = `${relPath}: brak sekcji H2 do walidacji answer-first.`;
+    if (strictMode) strictErrors.push(msg); else softWarnings.push(msg);
+  }
+}
+
+function validateArticleAeoGeo(relPath, errors, warnings, strictMode = false) {
+  if (!exists(relPath)) {
+    errors.push(`Brak pliku artykułu do walidacji AEO/GEO: ${relPath}`);
+    return;
+  }
+  const html = readUtf8(relPath);
+  const articleContentHtml = extractArticleContentHtml(html);
+  if (!articleContentHtml) {
+    errors.push(`${relPath}: brak <article class="article-content">.`);
+    return;
+  }
+  const links = countInternalContextLinks(articleContentHtml);
+  if (links < 4) {
+    const msg = `${relPath}: za mało linków kontekstowych w treści (${links}/4).`;
+    if (strictMode) errors.push(msg); else warnings.push(msg);
+  }
+  validateAnswerFirstParagraphs(articleContentHtml, errors, warnings, relPath, strictMode);
+
+  const faqCount = (articleContentHtml.match(/<article\s+class="faq-item"/gi) || []).length;
+  if (faqCount > 0 && faqCount < 4) {
+    warnings.push(`${relPath}: sekcja FAQ ma mniej niż 4 odpowiedzi (${faqCount}).`);
+  }
+}
+
 function extractLatestLink(indexHtml) {
   const m = indexHtml.match(/id="latestArticleLink"\s+href="([^"]+)"/i);
   return m ? m[1].trim() : '';
@@ -187,7 +293,13 @@ function main() {
   assertFileMirror('sitemap.xml', errors);
   assertFileMirror('llms.txt', errors);
 
-  // 6) optional slug checks
+  // 6) AEO/GEO quality on latest article
+  if (latestHref) {
+    validateArticleAeoGeo(latestHref, errors, warnings, false);
+    validateArticleAeoGeo(`_site/${latestHref}`, errors, warnings, false);
+  }
+
+  // 7) optional slug checks
   const slug = normalizeSlug(args.slug);
   if (slug) {
     const slugFile = `${slug}.html`;
@@ -200,9 +312,11 @@ function main() {
     if (!poradyHtml.includes(slugNeedle)) errors.push(`porady.html nie zawiera "${slugNeedle}"`);
     if (!hasInSitemap(sitemapXml, slugNeedle)) errors.push(`sitemap.xml nie zawiera "${slugNeedle}"`);
     if (!llmsTxt.includes(`https://fitpo50.pl/${slugNeedle}`)) warnings.push(`llms.txt nie zawiera "${slugNeedle}"`);
+    validateArticleAeoGeo(slugFile, errors, warnings, true);
+    validateArticleAeoGeo(slugMirror, errors, warnings, true);
   }
 
-  // 7) optional asset existence checks
+  // 8) optional asset existence checks
   for (const rel of args.assets) {
     if (!rel) continue;
     if (!exists(rel)) errors.push(`Brak assetu: ${rel}`);
