@@ -50,6 +50,16 @@ const READING_ROOM_FALLBACKS = [
     description: 'Najważniejsze zasady odżywiania po 50-tce: co jeść, jak planować i czego nie komplikować.',
   },
 ];
+const CATEGORY_LANDING_URLS = new Set([
+  'index.html',
+  'porady.html',
+  'rusz-sie.html',
+  'jedzenie.html',
+  'zdrowie.html',
+  'ciekawe.html',
+  'dziennik.html',
+  'o-mnie.html',
+]);
 
 function parseArgs(argv) {
   const out = {};
@@ -356,6 +366,22 @@ function countInternalHtmlLinks(htmlChunks) {
   return unique.size;
 }
 
+function normalizeLocalHtmlHref(href) {
+  const raw = String(href || '').trim();
+  if (!raw) return '';
+  if (/^(https?:|mailto:|tel:|javascript:|#)/i.test(raw)) return '';
+  const clean = raw.split('#')[0].split('?')[0].trim();
+  if (!clean) return '';
+  if (!/\.html$/i.test(clean)) return '';
+  return clean.replace(/^\.\//, '').replace(/^\/+/, '');
+}
+
+function isCategoryLandingHref(href) {
+  const normalized = normalizeLocalHtmlHref(href);
+  if (!normalized) return false;
+  return CATEGORY_LANDING_URLS.has(normalized.toLowerCase());
+}
+
 function validateInput(data) {
   const errors = [];
   const title = String(data.title || '').trim();
@@ -422,6 +448,22 @@ function validateInput(data) {
     if (url && !/^https?:\/\//i.test(url)) errors.push(`Źródło #${idx}: url musi zaczynać się od http:// lub https://.`);
     if (label && isGenericSourceLabel(label)) {
       errors.push(`Źródło #${idx}: label "${label}" jest zbyt ogólny. Podaj pełną nazwę źródła.`);
+    }
+  }
+
+  const relatedRaw = normalizeArray(data.related_articles || data.related || []).slice(0, 3);
+  for (let i = 0; i < relatedRaw.length; i += 1) {
+    const item = relatedRaw[i];
+    const idx = i + 1;
+    const url = normalizeLocalHtmlHref(item?.url || item?.href || '');
+    if (!url) {
+      errors.push(`related_articles #${idx}: url musi wskazywać lokalny plik artykułu *.html.`);
+      continue;
+    }
+    if (isCategoryLandingHref(url)) {
+      errors.push(
+        `related_articles #${idx}: url "${url}" wskazuje stronę kategorii, a nie artykuł. Podaj konkretny slug artykułu *.html.`
+      );
     }
   }
 
@@ -1254,8 +1296,13 @@ function normalizePayload(data, cliCategory) {
     const item = related[idx] || {};
     const rCat = normalizeCategory(item.category || fallback.category || category.label);
     const imageBase = String(item.image || item.image_base || fallback.image || heroImage).trim();
+    const rawUrl = String(item.url || item.href || '').trim();
+    const normalizedUrl = normalizeLocalHtmlHref(rawUrl);
+    const safeUrl = (!normalizedUrl || isCategoryLandingHref(normalizedUrl))
+      ? fallback.url
+      : normalizedUrl;
     return {
-      url: String(item.url || fallback.url || 'porady.html').trim() || 'porady.html',
+      url: safeUrl,
       image: imageBase,
       alt: String(item.alt || item.title || fallback.alt || title).trim(),
       categoryLabel: rCat.label,

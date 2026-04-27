@@ -181,6 +181,25 @@ function validateFile(filePath) {
     }
   }
 
+  const categoryLandingUrls = new Set([
+    'index.html',
+    'porady.html',
+    'rusz-sie.html',
+    'jedzenie.html',
+    'zdrowie.html',
+    'ciekawe.html',
+    'dziennik.html',
+    'o-mnie.html',
+  ]);
+  const readingRoomCardRx = /<a\s+href="([^"]+)"\s+class="article-promo-card reveal">/gi;
+  for (const m of raw.matchAll(readingRoomCardRx)) {
+    const href = String(m[1] || '').trim();
+    const normalized = href.split('#')[0].split('?')[0].replace(/^\.\//, '').replace(/^\/+/, '');
+    if (categoryLandingUrls.has(normalized.toLowerCase())) {
+      errors.push(`Czytelnia: link "${href}" wskazuje stronę kategorii. Ustaw konkretny artykuł *.html.`);
+    }
+  }
+
   const sourcesListMatch = raw.match(/<ol\s+class="sources-list"[\s\S]*?<\/ol>/i);
   if (sourcesListMatch) {
     const liItems = sourcesListMatch[0].match(/<li[\s\S]*?<\/li>/gi) || [];

@@ -1303,13 +1303,6 @@
 <link rel="stylesheet" href="./assets/footer.css?v=1">
   <meta name="google-adsense-account" content="ca-pub-4993821807276758">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758" crossorigin="anonymous"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18108612630"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "AW-18108612630");
-  </script>
 </head>
 <body>
   <div class="shell">
@@ -2266,8 +2259,11 @@
     }
 
     async function loadNewsFeed() {
+      const host = String(window.location.hostname || '').toLowerCase();
+      const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
+
       // API-first: panel redakcyjny jest źródłem prawdy dla statusów draft/published.
-      const remoteItemsRaw = await firstValidNewsData([
+      const remoteItemsRaw = isLocalHost ? [] : await firstValidNewsData([
         './admin/api/news-feed.php',
         'https://admin.fitpo50.pl/api/news-feed.php'
       ], 2200);

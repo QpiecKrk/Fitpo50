@@ -4,7 +4,13 @@
   const ADS_ID = 'AW-18108612630';
   const GA_SRC = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
   
-  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const host = window.location.hostname.toLowerCase();
+  const isLocal = (
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host === '::1' ||
+    host.endsWith('.local')
+  );
   if (isLocal) {
     (window as any)[`ga-disable-${GA_ID}`] = true;
     (window as any)[`ga-disable-${ADS_ID}`] = true;

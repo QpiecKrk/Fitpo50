@@ -15,7 +15,14 @@ START TECHNICZNY (zawsze na poczatku sesji):
    git pull --ff-only origin main
    git restore .agent .agents .brainsync .cursor .windsurfrules 2>/dev/null || true
    git status --short
-2) Pokaz mi wynik i dopiero potem przejdz do pracy.
+2) Jesli `git pull` zatrzyma sie przez konflikt "untracked files would be overwritten" (zwykle `assets/news/news_20*`):
+   BACKUP_TMP="/tmp/fitpo50-news-backup-$(date +%Y%m%d-%H%M%S)"
+   mkdir -p "$BACKUP_TMP"
+   git ls-files --others --exclude-standard -- assets/news/news_20* > /tmp/fitpo50-untracked-news.txt
+   while IFS= read -r f; do [ -n "$f" ] || continue; mkdir -p "$BACKUP_TMP/$(dirname "$f")"; mv "$f" "$BACKUP_TMP/$f"; done < /tmp/fitpo50-untracked-news.txt
+   git pull --ff-only origin main
+   git status --short
+3) Pokaz mi wynik i dopiero potem przejdz do pracy.
 
 Przed rozpoczeciem pracy zawsze najpierw przeczytaj `PROJECT_MEMORY.md`.
 Nastepnie:

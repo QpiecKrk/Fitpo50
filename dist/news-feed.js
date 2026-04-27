@@ -6,11 +6,17 @@
   if (!feedRoot) return;
 
   const fallbackVersion = Math.floor(Date.now() / 60000);
-  const sources = [
-    './admin/api/news-feed.php',
-    'https://admin.fitpo50.pl/api/news-feed.php',
-    `./assets/data/news-fallback.json?v=${fallbackVersion}`
-  ];
+  const host = String(window.location.hostname || '').toLowerCase();
+  const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
+  const sources = isLocalHost
+    ? [
+      `./assets/data/news-fallback.json?v=${fallbackVersion}`
+    ]
+    : [
+      './admin/api/news-feed.php',
+      'https://admin.fitpo50.pl/api/news-feed.php',
+      `./assets/data/news-fallback.json?v=${fallbackVersion}`
+    ];
 
   function escapeHtml(str) {
     if (!str) return '';
