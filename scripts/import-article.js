@@ -21,6 +21,65 @@ const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const LLMS_PATH = path.join(ROOT, 'llms.txt');
+const REQUIRED_ARTICLE_IMAGE_EXT = ['avif', 'webp', 'jpg'];
+const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
+const MIN_FAQ_ITEMS = 4;
+const NETWORK_FAQ_BANK = {
+  zdrowie: [
+    {
+      question: 'Jak szybko można zauważyć pierwsze efekty po wdrożeniu zaleceń?',
+      answer: 'Pierwsze sygnały poprawy pojawiają się zwykle po kilku tygodniach regularnych zmian, ale tempo zależy od punktu wyjścia, leków i chorób towarzyszących. Najbezpieczniej monitorować postęp wspólnie z lekarzem na konkretnych wskaźnikach.',
+    },
+    {
+      question: 'Jakie badania kontrolne warto wykonać po 50. roku życia w tym temacie?',
+      answer: 'Zakres badań zależy od historii zdrowia i objawów. Najczęściej plan obejmuje pomiary domowe, podstawowe badania krwi oraz ocenę ryzyka sercowo-naczyniowego podczas wizyty lekarskiej.',
+    },
+    {
+      question: 'Kiedy zmiana stylu życia nie wystarcza i trzeba rozważyć leczenie?',
+      answer: 'Jeśli mimo konsekwentnych zmian parametry pozostają nieprawidłowe lub rośnie ryzyko powikłań, konieczna jest konsultacja lekarska i ewentualna modyfikacja terapii. Nie warto samodzielnie odstawiać ani zmieniać leków.',
+    },
+  ],
+  ruch: [
+    {
+      question: 'Ile treningów tygodniowo daje realny efekt po 50. roku życia?',
+      answer: 'Najlepiej działa regularność, a nie jednorazowe zrywy. U większości osób poprawę daje stały plan 2-4 jednostek tygodniowo, dopasowany do kondycji, regeneracji i ewentualnych ograniczeń zdrowotnych.',
+    },
+    {
+      question: 'Jak uniknąć przeciążenia i bólu przy powrocie do aktywności?',
+      answer: 'Kluczowe są stopniowanie obciążeń, technika i dni regeneracyjne. Gdy ból utrzymuje się dłużej niż kilka dni lub narasta, warto zmniejszyć intensywność i skonsultować plan z fizjoterapeutą lub lekarzem.',
+    },
+  ],
+  jedzenie: [
+    {
+      question: 'Czy trzeba liczyć każdą kalorię, żeby poprawić wyniki zdrowotne?',
+      answer: 'Nie zawsze. U wielu osób wystarczają powtarzalne nawyki: więcej białka i błonnika, mniej żywności wysokoprzetworzonej oraz regularne pory posiłków. Liczenie kalorii bywa pomocne okresowo, ale nie jest obowiązkowe dla każdego.',
+    },
+    {
+      question: 'Jakie błędy żywieniowe najczęściej blokują efekty po 50. roku życia?',
+      answer: 'Najczęściej to zbyt mała podaż białka, nieregularne posiłki, niedoszacowanie przekąsek i picia kalorii oraz zbyt mało warzyw. Małe, konsekwentne korekty zwykle działają lepiej niż restrykcyjna dieta na krótko.',
+    },
+  ],
+  ciekawe: [
+    {
+      question: 'Jak odróżnić medialną sensację od wiarygodnych danych naukowych?',
+      answer: 'Warto sprawdzić źródło, typ badania, liczebność próby i to, czy wynik potwierdzają inne publikacje. Pojedyncze doniesienie nie powinno być podstawą dużych decyzji zdrowotnych.',
+    },
+    {
+      question: 'Czy opisywane rozwiązanie ma sens dla każdej osoby po 50. roku życia?',
+      answer: 'Zwykle nie. Skuteczność zależy od stanu zdrowia, leków, celów i stylu życia. Najlepsze efekty daje dopasowanie zaleceń do własnej sytuacji, a nie kopiowanie planu 1:1.',
+    },
+  ],
+  default: [
+    {
+      question: 'Od czego zacząć, żeby wdrożyć temat bez chaosu i zniechęcenia?',
+      answer: 'Najlepiej od jednego małego kroku na 1-2 tygodnie i prostego monitorowania efektów. Dopiero po utrwaleniu nawyku dokładamy kolejne elementy.',
+    },
+    {
+      question: 'Po czym poznać, że obrany kierunek naprawdę działa?',
+      answer: 'Po trendzie, nie po pojedynczym dniu. Regularne pomiary i notatki tygodniowe pokazują, czy zmiany przekładają się na lepsze samopoczucie i wyniki.',
+    },
+  ],
+};
 const READING_ROOM_FALLBACKS = [
   {
     url: 'ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html',
@@ -283,6 +342,44 @@ function normalizeFaq(raw) {
   return out;
 }
 
+function ensureMinFaqFromNetworkSeeds(faqItems, categoryKey, contextTitle) {
+  const normalizedFaq = normalizeArray(faqItems);
+  const out = [...normalizedFaq];
+  const notes = [];
+  const usedQuestions = new Set(
+    out.map((f) => String(f?.question || '').trim().toLowerCase()).filter(Boolean)
+  );
+  if (out.length >= MIN_FAQ_ITEMS) {
+    return { faq: out, notes };
+  }
+
+  const pool = [
+    ...(NETWORK_FAQ_BANK[categoryKey] || []),
+    ...NETWORK_FAQ_BANK.default,
+  ];
+
+  for (const item of pool) {
+    if (out.length >= MIN_FAQ_ITEMS) break;
+    const question = String(item.question || '').trim();
+    const answer = String(item.answer || '').trim();
+    if (!question || !answer) continue;
+    const qKey = question.toLowerCase();
+    if (usedQuestions.has(qKey)) continue;
+    usedQuestions.add(qKey);
+    out.push({
+      question,
+      answerHtml: ensureParagraphHtml(answer),
+    });
+  }
+
+  if (out.length > normalizedFaq.length) {
+    notes.push(
+      `FAQ: brakujące pytania uzupełniono automatycznie (${out.length}/${MIN_FAQ_ITEMS}) na bazie banku pytań sieciowych (autocomplete/PAA) dla tematu "${contextTitle}".`
+    );
+  }
+  return { faq: out, notes };
+}
+
 function normalizeKeyTakeaways(raw) {
   const out = [];
   for (const item of normalizeArray(raw)) {
@@ -364,6 +461,171 @@ function countInternalHtmlLinks(htmlChunks) {
     }
   }
   return unique.size;
+}
+
+function commandExists(bin) {
+  const res = spawnSync('which', [bin], { cwd: ROOT, stdio: 'ignore' });
+  return res.status === 0;
+}
+
+function assetPath(base, ext, inSite = false) {
+  const rootDir = inSite ? path.join(ROOT, '_site', 'assets') : path.join(ROOT, 'assets');
+  return path.join(rootDir, `${base}.${ext}`);
+}
+
+function ensureDirFor(filePath) {
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+
+function firstExistingSourceImage(base, extraDirs = []) {
+  const scanDirs = [path.join(ROOT, 'assets'), ...normalizeArray(extraDirs).filter(Boolean)];
+  for (const ext of SOURCE_IMAGE_EXT) {
+    for (const dir of scanDirs) {
+      const p = path.join(dir, `${base}.${ext}`);
+      if (fs.existsSync(p)) {
+        return { ext, path: p };
+      }
+    }
+  }
+  return null;
+}
+
+function runConversion(cmd, args) {
+  const res = spawnSync(cmd, args, { cwd: ROOT, encoding: 'utf8' });
+  return {
+    ok: res.status === 0,
+    stderr: String(res.stderr || '').trim(),
+    stdout: String(res.stdout || '').trim(),
+  };
+}
+
+function generateMissingVariant(base, targetExt, source) {
+  const targetPath = assetPath(base, targetExt, false);
+  if (fs.existsSync(targetPath)) {
+    return { ok: true, created: false, targetPath };
+  }
+  ensureDirFor(targetPath);
+
+  const srcExt = String(source.ext || '').toLowerCase();
+  const srcPath = source.path;
+  const srcIsJpg = srcExt === 'jpg' || srcExt === 'jpeg';
+
+  if (targetExt === srcExt || (targetExt === 'jpg' && srcIsJpg)) {
+    fs.copyFileSync(srcPath, targetPath);
+    return { ok: true, created: true, targetPath };
+  }
+
+  if (targetExt === 'webp') {
+    if (!commandExists('cwebp')) {
+      return { ok: false, created: false, targetPath, error: 'Brak narzędzia cwebp (Homebrew webp).' };
+    }
+    const out = runConversion('cwebp', ['-quiet', '-q', '88', srcPath, '-o', targetPath]);
+    if (!out.ok) {
+      return { ok: false, created: false, targetPath, error: `cwebp failed: ${out.stderr || out.stdout}` };
+    }
+    return { ok: true, created: true, targetPath };
+  }
+
+  if (targetExt === 'avif') {
+    if (!commandExists('avifenc')) {
+      return { ok: false, created: false, targetPath, error: 'Brak narzędzia avifenc (Homebrew libavif).' };
+    }
+    const out = runConversion('avifenc', ['--speed', '6', '--min', '20', '--max', '32', srcPath, targetPath]);
+    if (!out.ok) {
+      return { ok: false, created: false, targetPath, error: `avifenc failed: ${out.stderr || out.stdout}` };
+    }
+    return { ok: true, created: true, targetPath };
+  }
+
+  if (targetExt === 'jpg') {
+    if (srcIsJpg) {
+      fs.copyFileSync(srcPath, targetPath);
+      return { ok: true, created: true, targetPath };
+    }
+    if (process.platform === 'darwin' && commandExists('sips')) {
+      const out = runConversion('sips', ['-s', 'format', 'jpeg', srcPath, '--out', targetPath]);
+      if (!out.ok) {
+        return { ok: false, created: false, targetPath, error: `sips failed: ${out.stderr || out.stdout}` };
+      }
+      return { ok: true, created: true, targetPath };
+    }
+    if (commandExists('magick')) {
+      const out = runConversion('magick', [srcPath, targetPath]);
+      if (!out.ok) {
+        return { ok: false, created: false, targetPath, error: `magick failed: ${out.stderr || out.stdout}` };
+      }
+      return { ok: true, created: true, targetPath };
+    }
+    return { ok: false, created: false, targetPath, error: 'Brak konwertera do JPG (sips/magick).' };
+  }
+
+  return { ok: false, created: false, targetPath, error: `Nieobsługiwany target ext: ${targetExt}` };
+}
+
+function mirrorAssetVariantToSite(base, ext) {
+  const sourcePath = assetPath(base, ext, false);
+  if (!fs.existsSync(sourcePath)) return false;
+  const siteAssetsDir = path.join(ROOT, '_site', 'assets');
+  if (!fs.existsSync(siteAssetsDir)) return false;
+  const sitePath = assetPath(base, ext, true);
+  ensureDirFor(sitePath);
+  fs.copyFileSync(sourcePath, sitePath);
+  return true;
+}
+
+function extractSectionImageBases(sections) {
+  const bases = new Set();
+  const rx = /<img\b[^>]*src="([^"]+)"/gi;
+  for (const section of normalizeArray(sections)) {
+    for (const block of normalizeArray(section?.blocks)) {
+      const html = String(block?.html || '');
+      for (const m of html.matchAll(rx)) {
+        const src = String(m[1] || '').trim();
+        if (!src) continue;
+        if (!/assets\//i.test(src)) continue;
+        const base = normalizeImageBase(src);
+        if (base) bases.add(base);
+      }
+    }
+  }
+  return [...bases];
+}
+
+function autoPrepareArticleAssets(payload, syncSite, extraImageDirs = []) {
+  const bases = new Set([
+    String(payload?.heroImage || '').trim(),
+    ...extractSectionImageBases(payload?.sections || []),
+  ]);
+  const notes = [];
+  const warnings = [];
+
+  for (const base of bases) {
+    if (!base) continue;
+    const source = firstExistingSourceImage(base, extraImageDirs);
+    if (!source) continue;
+
+    for (const ext of REQUIRED_ARTICLE_IMAGE_EXT) {
+      const result = generateMissingVariant(base, ext, source);
+      if (result.ok && result.created) {
+        notes.push(`assets/${base}.${ext}: utworzono automatycznie ze źródła .${source.ext}`);
+      } else if (!result.ok) {
+        warnings.push(`assets/${base}.${ext}: ${result.error}`);
+      }
+    }
+
+    if (syncSite) {
+      for (const ext of REQUIRED_ARTICLE_IMAGE_EXT) {
+        if (mirrorAssetVariantToSite(base, ext)) {
+          notes.push(`_site/assets/${base}.${ext}: zsynchronizowano`);
+        }
+      }
+    }
+  }
+
+  return { notes, warnings };
 }
 
 function normalizeLocalHtmlHref(href) {
@@ -663,7 +925,7 @@ function ensureHeroAssetsExist(heroImageBase, syncSite) {
   }
 }
 
-function buildPrecheckReport({ inputPath, json, payload, validation, syncSite }) {
+function buildPrecheckReport({ inputPath, json, payload, validation, syncSite, assetPrep }) {
   const autoFixes = [];
   const blockers = [];
 
@@ -689,6 +951,15 @@ function buildPrecheckReport({ inputPath, json, payload, validation, syncSite })
   }
   for (const fix of validation.autoFixes || []) {
     autoFixes.push(fix);
+  }
+  for (const note of assetPrep?.notes || []) {
+    autoFixes.push(note);
+  }
+  for (const warn of assetPrep?.warnings || []) {
+    autoFixes.push(`Auto-konwersja grafiki: ${warn}`);
+  }
+  for (const note of payload?.faqAutoNotes || []) {
+    autoFixes.push(note);
   }
 
   if (!payload.slug) {
@@ -1442,7 +1713,9 @@ function normalizePayload(data, cliCategory) {
 
   const keyTakeaways = normalizeKeyTakeaways(data.key_takeaways || data.takeaways || []);
   const sections = normalizeSections(data.sections || []);
-  const faqItems = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
+  const faqNormalized = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
+  const faqAuto = ensureMinFaqFromNetworkSeeds(faqNormalized, category.key, title || slug || 'artykuł');
+  const faqItems = faqAuto.faq;
   const sources = normalizeSources(data.sources || []);
 
   // Uwaga: related_articles / related z JSON służy tylko do walidacji komunikatów.
@@ -1484,6 +1757,7 @@ function normalizePayload(data, cliCategory) {
     keyTakeaways,
     sections,
     faqItems,
+    faqAutoNotes: faqAuto.notes,
     sources,
     relatedDefaults,
     wordCount: countWordsUtf8(plainForWordCount),
@@ -1637,6 +1911,7 @@ function main() {
 
   const json = parseJsonFile(resolvedInput);
   const payload = normalizePayload(json, args.category);
+  const assetPrep = autoPrepareArticleAssets(payload, syncSite, [path.dirname(resolvedInput)]);
   const check = validateInput(json);
   const precheck = buildPrecheckReport({
     inputPath: resolvedInput,
@@ -1644,6 +1919,7 @@ function main() {
     payload,
     validation: check,
     syncSite,
+    assetPrep,
   });
   printPrecheckReport(precheck);
 

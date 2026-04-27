@@ -27,6 +27,7 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Naglowek sekcji "Czytelnia" ma byc index-style (`.reading-room__head` + ikona), nie wariant alternatywny.
 - Interlinking w tresci: minimum 4 linki wewnetrzne osadzone w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
 - Crosslinki wewnetrzne dopinamy recznie po imporcie (kontrola redakcyjna); nie przenosimy automatycznie linkow z promptu/modelu.
+- FAQ: jesli JSON dostarczy za malo pytan, importer ma dopisac brakujace automatycznie (bank pytan sieciowych/PAA), a nie przerywac publikacji.
 - Dopuszczamy bardziej wyrazisty styl artykulu (kolory, callouty, typografia, tabele), ale:
   - zachowujemy spojnosc z designem serwisu,
   - trzymamy max 2-3 rodziny fontow na artykul,

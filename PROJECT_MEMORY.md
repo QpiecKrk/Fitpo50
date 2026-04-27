@@ -104,6 +104,7 @@
   - Pytania maja odpowiadac intencjom uzytkownika i byc jezykowo naturalne (jak w wyszukiwarce).
   - Odpowiedzi maja byc krotkie, konkretne i zgodne z trescia artykulu.
   - Przy aktualizacji artykulu aktualizujemy rowniez FAQ (widoczne + schema), jesli temat lub wnioski sie zmienily.
+  - **Pewnik operacyjny:** przy imporcie brakujace FAQ uzupelniamy automatycznie (zamiast wywalania bledu) na bazie banku pytan sieciowych autocomplete/PAA; minimum 4 pytania na artykul.
 
 - **ClaimReview dla tresci „mit vs fakt”:**
   - Jesli artykul obala popularny mit lub ocenia kontrowersyjne twierdzenie zdrowotne, dodajemy schema `ClaimReview`.
