@@ -1,0 +1,41 @@
+name: News Integrity Check
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'data/news-live.json'
+      - 'assets/data/news-fallback.json'
+      - '_site/data/news-live.json'
+      - '_site/assets/data/news-fallback.json'
+      - 'assets/news/**'
+      - '_site/assets/news/**'
+      - 'scripts/news-integrity-check.js'
+      - '.github/workflows/news-integrity-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/news-live.json'
+      - 'assets/data/news-fallback.json'
+      - '_site/data/news-live.json'
+      - '_site/assets/data/news-fallback.json'
+      - 'assets/news/**'
+      - '_site/assets/news/**'
+      - 'scripts/news-integrity-check.js'
+      - '.github/workflows/news-integrity-check.yml'
+
+jobs:
+  news_integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run NEWS integrity check
+        run: npm run news:integrity
