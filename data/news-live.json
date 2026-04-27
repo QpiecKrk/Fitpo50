@@ -1,7 +1,103 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-26T09:34:46+00:00",
+    "updatedAt": "2026-04-27T10:29:49+00:00",
     "items": [
+        {
+            "id": "news_807e567fce8a",
+            "title": "Mózg ma „drugą sieć”? Nowe badanie zmienia sposób myślenia",
+            "content_html": "<p><span>Nowe badanie opublikowane w </span><span><span class=\"news-text-tone--4\"><span></span><span>Nature</span></span> pokazuje, że mózg może działać inaczej, niż uczono przez lata.</span><span><br>\n</span><span>Nie tylko neurony odpowiadają za komunikację.</span></p><p><span>Naukowcy z NYU odkryli, że tzw. </span><span><strong><span></span><span>astrocyty</span></strong> – komórki uznawane dotąd za „pomocnicze” – tworzą własną sieć sygnałów w <span class=\"news-text-tone--4\">mózgu</span>.</span><span><br>\n</span><span>Co ważne, ta sieć działa </span><span><strong><span></span><span>na duże odległości</span></strong> i łączy obszary, które wcześniej nie były ze sobą powiązane.</span></p><p><span>To <a href=\"syndrom-pierwszego-poniedzialku.html\">pierwszy</a> raz, kiedy udało się stworzyć tak dokładną, <span class=\"news-text-tone--4\">trójwymiarową</span> mapę tych połączeń.</span></p><p><span>Jeszcze ciekawsze jest to, że sieci te mogą się zmieniać wraz z doświadczeniem – np. po utracie zmysłów.</span><span><br>\n</span><span>To sugeruje, że mózg jest jeszcze bardziej „<span class=\"news-text-tone--4\">plastyczny</span>”, niż myśleliśmy.</span></p><p><strong>Mózg to nie tylko neurony – istnieje druga, ukryta sieć, która może zmieniać nasze rozumienie chorób i działania mózgu. </strong><br><span></span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260426_192157_59fc975b",
+            "image_alt": "Mózg",
+            "sources": [
+                {
+                    "label": "Nature – Astrocyte signaling networks study",
+                    "url": "https://www.nature.com"
+                },
+                {
+                    "label": "NYU Langone Health – Brain astrocyte research",
+                    "url": "https://nyulangone.org"
+                }
+            ],
+            "created_at": "2026-04-26T19:21:56+00:00",
+            "updated_at": "2026-04-27T10:29:49+00:00",
+            "published_at": "2026-04-27T10:29:49+00:00"
+        },
+        {
+            "id": "news_b89e05e1dd56",
+            "title": "Aspiryna a rak jelita: pomaga, ale nie dla każdego",
+            "content_html": "<p><span><a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">Badania</a> pokazują, że regularne stosowanie <span class=\"news-text-tone--3\">aspiryny</span> może </span><span><strong><span></span><span>zmniejszać ryzyko raka jelita grubego</span><span>.</span></strong><br>\n</span><span>Dzieje się to głównie przez działanie przeciwzapalne i wpływ na procesy związane z rozwojem nowotworów.</span></p><p><span>Najmocniejsze dane:</span><span><br>\n</span><span>👉 długoterminowe stosowanie (kilka lat) wiąże się ze spadkiem ryzyka </span><span><span class=\"news-text-tone--1\">zachorowania i śmiertelności</span><br>\n</span><span>👉 efekt jest wyraźniejszy u osób z wyższym ryzykiem (<span class=\"news-text-tone--1\">np. historia polipów, chorób jelit</span>)</span></p><p><span>Ale jest ważne „<span class=\"news-text-tone--3\">ale</span>”:</span></p><p><span><span>Aspiryna</span> to nie suplement.</span><span><br>\n</span><span>To lek z realnymi skutkami ubocznymi:</span></p><ul>\n<li><span><strong>krwawienia</strong> z przewodu pokarmowego</span></li>\n<li><span>ryzyko <strong>udaru</strong> krwotocznego</span></li>\n</ul><p><span>Dlatego nie jest zalecana „profilaktycznie dla każdego”.</span></p><p><strong>Aspiryna może zmniejszać ryzyko raka jelita, ale tylko u wybranych osób — i zawsze pod kontrolą lekarza.</strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260426_194109_2c6cb9e7",
+            "image_alt": "Aspiryna rak",
+            "sources": [
+                {
+                    "label": "USPSTF (US Preventive Services Task Force)",
+                    "url": "https://www.uspreventiveservicestaskforce.org"
+                },
+                {
+                    "label": "The Lancet – Aspirin in cancer prevention",
+                    "url": "https://www.thelancet.com"
+                },
+                {
+                    "label": "National Cancer Institute – Aspirin and colorectal cancer",
+                    "url": "https://www.cancer.gov"
+                }
+            ],
+            "created_at": "2026-04-26T19:41:09+00:00",
+            "updated_at": "2026-04-26T19:41:09+00:00",
+            "published_at": ""
+        },
+        {
+            "id": "news_c0b3ffafe0a7",
+            "title": "Czy komórki macierzyste wyleczą cukrzycę? Jest postęp, ale bez sensacji",
+            "content_html": "<p><span>W ostatnich badaniach naukowcy testują terapię komórkami <span class=\"news-text-tone--2\">macierzystymi</span>, które mogą przekształcać się w komórki produkujące <span class=\"news-text-tone--2\">insulinę</span>.</span><span><br></span><span><strong>Cel</strong>: przywrócić <a href=\"testosteron-po-50-naturalnie-bez-trt.html\">naturalną</a> produkcję insuliny w organizmie.</span></p><p><span>W części badań klinicznych (m.in. USA, Chiny) u niektórych pacjentów z cukrzycą typu 1 <span class=\"news-text-tone--2\">udało się</span>:</span><span><br>\n</span><span>👉 zmniejszyć zapotrzebowanie na insulinę</span><span><br>\n</span><span>👉 a w pojedynczych przypadkach czasowo ją odstawić</span></p><p><span><span>To duży krok</span> — ale daleko od „leku dla wszystkich”.</span></p><p><span></span><br></p><p><span>Co jest ważne:</span></p><ul>\n<li><span>to wciąż </span><strong><span></span><span>wczesny etap badań klinicznych</span></strong></li>\n<li><span>terapia działa tylko u <strong>wybranych</strong> pacjentów</span></li>\n<li><span>wymaga kontroli układu odpornościowego (<strong>ryzyko odrzutu</strong>)</span></li>\n<li><span>nie ma jeszcze długoterminowych danych </span><strong>bezpieczeństwa.</strong></li>\n</ul><p><strong><span style=\"font-kerning: none;\"></span></strong></p><p><strong>Komórki macierzyste mogą zmienić leczenie cukrzycy, ale dziś to kierunek badań, nie gotowe rozwiązanie.</strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260426_193300_51ae5c2b",
+            "image_alt": "Cukrzyca i komórki macierzyste",
+            "sources": [
+                {
+                    "label": "NEJM – Stem cell therapy in type 1 diabetes",
+                    "url": "https://www.nejm.org"
+                },
+                {
+                    "label": "Nature – Stem-cell-derived islet therapy",
+                    "url": "https://www.nature.com"
+                }
+            ],
+            "created_at": "2026-04-26T19:33:00+00:00",
+            "updated_at": "2026-04-26T19:33:00+00:00",
+            "published_at": ""
+        },
+        {
+            "id": "news_cef3534f25c4",
+            "title": "Jedno wstrzyknięcie i słuch wraca? Przełom w terapii genowej",
+            "content_html": "<p><span>Nowe <a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">badanie</a> opublikowane w </span><span><span class=\"news-text-tone--4\"><span></span><span>Nature</span></span> pokazuje, że terapia genowa może realnie <span class=\"news-text-tone--1\">przywracać słuch</span> u osób z wrodzoną głuchotą.</span></p><p><span>Chodzi o mutację w genie </span><span><strong><span></span><span>OTOF</span></strong>, która zaburza przekazywanie dźwięku w uchu wewnętrznym.</span><span><br>\n</span><span>Naukowcy zastosowali jednorazowe wstrzyknięcie „<span class=\"news-text-tone--1\">sprawnego</span>” genu bezpośrednio do ucha.</span></p><p><span>Efekt:</span><span><br>\n</span><span>👉 poprawa słuchu u około </span><span><strong><span></span><span>90% pacjentów</span></strong><br>\n</span><span>👉 działanie utrzymywało się nawet do </span><strong><span>2,5 roku</span></strong></p><p><span>W badaniu wzięły udział <strong>42</strong> osoby. To jak dotąd największe i najdłuższe badanie tego typu.</span></p><p><span>Co ważne – to dopiero początek.</span><span><br>\n</span><span>Terapia działa tylko w konkretnym typie genetycznej głuchoty, ale naukowcy już pracują nad rozszerzeniem tej metody na inne przypadki.</span></p><p><strong>Terapia genowa zaczyna realnie „naprawiać” przyczynę choroby, a nie tylko jej objawy.</strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260426_192640_c2c547b1",
+            "image_alt": "Geny słuch",
+            "sources": [
+                {
+                    "label": "Nature – Gene therapy for OTOF hearing loss",
+                    "url": "https://www.nature.com"
+                },
+                {
+                    "label": "Mass General Brigham – Clinical trial results",
+                    "url": "https://www.massgeneralbrigham.org"
+                },
+                {
+                    "label": "Fudan University – Hearing gene therapy research",
+                    "url": "https://www.fudan.edu.cn"
+                }
+            ],
+            "created_at": "2026-04-26T19:26:40+00:00",
+            "updated_at": "2026-04-26T19:26:40+00:00",
+            "published_at": ""
+        },
         {
             "id": "news_c0f0f2fc9455",
             "title": "Jedna tabletka zamiast trzech? Nowe badanie daje mocne wyniki po udarze",
