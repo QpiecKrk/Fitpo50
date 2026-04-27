@@ -1350,13 +1350,13 @@
       </section>
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
-        <img class="latest-article__bg" id="latestArticleImage" src="./assets/waty-trening-apple-watch-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        <img class="latest-article__bg" id="latestArticleImage" src="./assets/tluszcz-trzewny-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Waty na Apple Watch: Dlaczego po 50-tce są ważniejsze niż tętno?</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Apple Watch pokazuje moc w watach. Poznaj obiektywną metrykę zdrowia serca i mitochondriów po 50. roku życia. Dowiedz się, jak trenować mądrzej i żyć dłużej.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="waty-apple-watch-moc-zdrowie-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Tłuszcz trzewny otacza Twoje organy i produkuje hormony zapalne. Poznaj naukowe metody jego redukcji po 50. roku życia. Sprawdź, jak sen i stres wpływają na wagę.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="tluszcz-trzewny-choroby-jak-walczyc.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2038,10 +2038,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Waty na Apple Watch: Dlaczego po 50-tce są ważniejsze niż tętno?',
-        excerpt: 'Apple Watch pokazuje moc w watach. Poznaj obiektywną metrykę zdrowia serca i mitochondriów po 50. roku życia. Dowiedz się, jak trenować mądrzej i żyć dłużej.',
-        image: './assets/waty-trening-apple-watch-hero.webp',
-        url: 'waty-apple-watch-moc-zdrowie-po-50.html'
+        title: 'Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze',
+        excerpt: 'Tłuszcz trzewny otacza Twoje organy i produkuje hormony zapalne. Poznaj naukowe metody jego redukcji po 50. roku życia. Sprawdź, jak sen i stres wpływają na wagę.',
+        image: './assets/tluszcz-trzewny-hero.webp',
+        url: 'tluszcz-trzewny-choroby-jak-walczyc.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2071,6 +2071,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Zdrowie',
+          title: 'Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze',
+          excerpt: 'Tłuszcz trzewny otacza Twoje organy i produkuje hormony zapalne. Poznaj naukowe metody jego redukcji po 50. roku życia. Sprawdź, jak sen i stres wpływają na wagę.',
+          image: './assets/tluszcz-trzewny-hero.webp',
+          url: 'tluszcz-trzewny-choroby-jak-walczyc.html'
+        },
+        {
           category: 'Ciekawe',
           title: 'Waty na Apple Watch: Dlaczego po 50-tce są ważniejsze niż tętno?',
           excerpt: 'Apple Watch pokazuje moc w watach. Poznaj obiektywną metrykę zdrowia serca i mitochondriów po 50. roku życia. Dowiedz się, jak trenować mądrzej i żyć dłużej.',
@@ -2083,13 +2090,6 @@
           excerpt: 'Post przerywany po 50-tce: co mówią badania o korzyściach metabolicznych i ryzyku utraty mięśni? Praktyczny przewodnik oparty na najnowszych meta-analizach.',
           image: './assets/if-50plus-hero.webp',
           url: 'post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Jak czytać etykiety? Przewodnik po składach i E-numerach',
-          excerpt: 'Etykieta to prawda o produkcie, ale napisana małą czcionką i językiem marketingu. Tłumaczymy jak czytać składy, co oznaczają E-numery i gdzie chowa się cukier.',
-          image: './assets/etykiety-sklad-produktow-lupa-hero.webp',
-          url: 'jak-czytac-etykiety-sklad-produktow-e-numery-inci.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

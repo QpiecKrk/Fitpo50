@@ -471,7 +471,7 @@ function getRelatedCandidatesFromPorady(currentSlug) {
   return [...new Set(hrefs)];
 }
 
-function buildSafeRelatedDefaults(relatedRaw, { currentSlug, currentCategory, readingTime, heroImage, heroAlt, metaDescription, title }) {
+function buildSafeRelatedDefaults({ currentSlug, currentCategory, readingTime, heroImage, heroAlt, metaDescription, title }) {
   const existingPool = [
     ...getRelatedCandidatesFromPorady(currentSlug),
     ...READING_ROOM_FALLBACKS
@@ -482,12 +482,8 @@ function buildSafeRelatedDefaults(relatedRaw, { currentSlug, currentCategory, re
   const pool = [...new Set(existingPool)];
   const selected = [];
   for (let i = 0; i < 3; i += 1) {
-    const item = relatedRaw[i] || {};
-    const preferred = normalizeLocalHtmlHref(item.url || item.href || '');
-    if (isUsableRelatedHref(preferred, currentSlug) && !selected.includes(preferred)) {
-      selected.push(preferred);
-      continue;
-    }
+    // Zasada projektowa: nie ufamy URL-om z JSON related_articles.
+    // Karty Czytelni budujemy wyłącznie z istniejących lokalnie artykułów.
     const replacement = pool.find((href) => !selected.includes(href));
     if (replacement) {
       selected.push(replacement);
@@ -498,25 +494,22 @@ function buildSafeRelatedDefaults(relatedRaw, { currentSlug, currentCategory, re
   }
 
   return selected.map((href, idx) => {
-    const jsonItem = relatedRaw[idx] || {};
     const fallback = READING_ROOM_FALLBACKS[idx] || READING_ROOM_FALLBACKS[0];
     const meta = readArticleMetaByHref(href);
     const categoryObj = normalizeCategory(
       meta?.categoryKey
-      || jsonItem.category
       || fallback.category
       || currentCategory.label
     );
 
-    const cardImage = normalizeImageBase(jsonItem.image || jsonItem.image_base)
-      || meta?.heroImage
+    const cardImage = normalizeImageBase(meta?.heroImage)
       || normalizeImageBase(fallback.image)
       || normalizeImageBase(heroImage);
-    const cardTitle = String(jsonItem.title || meta?.title || fallback.title || title).trim();
-    const cardDesc = String(jsonItem.description || meta?.description || fallback.description || metaDescription).trim();
-    const cardTime = String(jsonItem.time || jsonItem.reading_time || meta?.readTime || fallback.time || readingTime).trim()
+    const cardTitle = String(meta?.title || fallback.title || title).trim();
+    const cardDesc = String(meta?.description || fallback.description || metaDescription).trim();
+    const cardTime = String(meta?.readTime || fallback.time || readingTime).trim()
       .replace(/\s*czytania/i, '');
-    const cardAlt = String(jsonItem.alt || meta?.heroAlt || cardTitle || heroAlt).trim();
+    const cardAlt = String(meta?.heroAlt || cardTitle || heroAlt).trim();
 
     return {
       url: isUsableRelatedHref(href, currentSlug) ? href : normalizeLocalHtmlHref(fallback.url),
@@ -569,7 +562,10 @@ function validateInput(data) {
     }
     const internalLinks = countInternalHtmlLinks(linkSource);
     if (internalLinks < 4) {
-      errors.push(`AEO/GEO: dodaj minimum 4 linki wewnętrzne w treści sekcji (obecnie: ${internalLinks}).`);
+      autoFixes.push(
+        `AEO/GEO: wykryto ${internalLinks}/4 linków wewnętrznych w treści. ` +
+        'Crosslinki wewnętrzne uzupełniamy ręcznie po imporcie (kontrola redakcyjna).'
+      );
     }
   }
   const keyTakeaways = normalizeKeyTakeaways(data.key_takeaways || data.takeaways || []);
@@ -608,19 +604,19 @@ function validateInput(data) {
     const idx = i + 1;
     const url = normalizeLocalHtmlHref(item?.url || item?.href || '');
     if (!url) {
-      autoFixes.push(`related_articles #${idx}: brak/niepoprawny url -> importer podstawi poprawny artykuł z porady.html.`);
+      autoFixes.push(`related_articles #${idx}: brak/niepoprawny url -> importer ignoruje ten URL i dobierze kartę z istniejących artykułów.`);
       continue;
     }
     if (isCategoryLandingHref(url)) {
-      autoFixes.push(`related_articles #${idx}: url "${url}" wskazuje kategorię -> podmienię na konkretny artykuł.`);
+      autoFixes.push(`related_articles #${idx}: url "${url}" wskazuje kategorię -> importer ignoruje ten URL i dobierze konkretny artykuł.`);
       continue;
     }
     if (!articleFileExists(url)) {
-      autoFixes.push(`related_articles #${idx}: url "${url}" nie istnieje lokalnie -> podmienię na istniejący artykuł.`);
+      autoFixes.push(`related_articles #${idx}: url "${url}" nie istnieje lokalnie -> importer ignoruje ten URL i dobierze istniejący artykuł.`);
       continue;
     }
     if (currentSlug && url.toLowerCase() === `${currentSlug.toLowerCase()}.html`) {
-      autoFixes.push(`related_articles #${idx}: url "${url}" wskazuje bieżący artykuł -> podmienię na inny.`);
+      autoFixes.push(`related_articles #${idx}: url "${url}" wskazuje bieżący artykuł -> importer ignoruje ten URL i dobierze inny.`);
     }
   }
 
@@ -1335,7 +1331,7 @@ function assertNoReadingRoomPlaceholders(html) {
 
   for (const check of checks) {
     if (check.rx.test(html)) {
-      throw new Error(`${check.msg} Uzupełnij related_articles w JSON albo popraw fallback importera.`);
+      throw new Error(`${check.msg} Importer ignoruje related_articles z JSON; popraw fallback importera.`);
     }
   }
 }
@@ -1449,8 +1445,9 @@ function normalizePayload(data, cliCategory) {
   const faqItems = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
   const sources = normalizeSources(data.sources || []);
 
-  const related = normalizeArray(data.related_articles || data.related || []).slice(0, 3);
-  const relatedDefaults = buildSafeRelatedDefaults(related, {
+  // Uwaga: related_articles / related z JSON służy tylko do walidacji komunikatów.
+  // Faktyczne karty Czytelni budujemy wyłącznie z lokalnego katalogu artykułów.
+  const relatedDefaults = buildSafeRelatedDefaults({
     currentSlug: slug,
     currentCategory: category,
     readingTime,

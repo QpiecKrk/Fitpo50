@@ -12,6 +12,7 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Artykul to pojedyncza strona docelowa.
 - Obowiazuje kanoniczny standard z `ARTICLE_STANDARD.md` (bez recznych wariantow layoutu).
 - Kanoniczny flow publikacji: `scripts/import-article.js` z plikow `.fitpo50.json` (zawsze z precheck).
+- Regula importera dla "Czytelni": linki z JSON (`related_articles` / `related`) sa ignorowane; importer dobiera 3 karty tylko z lokalnie istniejacych artykulow.
 - `article-template-bento.html` / `node scripts/create-article-from-template.js ...` stosujemy tylko do recznych szkicow i materialow roboczych.
 - Przed oddaniem artykulu uruchamiamy walidator:
   - `node scripts/validate-article-standard.js <plik.html>`
@@ -25,6 +26,7 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Na dole artykulu (nad footerem) zawsze sekcja "Czytelnia" (`.porady-preview.section-padding`) z 3 kafelkami.
 - Naglowek sekcji "Czytelnia" ma byc index-style (`.reading-room__head` + ikona), nie wariant alternatywny.
 - Interlinking w tresci: minimum 4 linki wewnetrzne osadzone w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
+- Crosslinki wewnetrzne dopinamy recznie po imporcie (kontrola redakcyjna); nie przenosimy automatycznie linkow z promptu/modelu.
 - Dopuszczamy bardziej wyrazisty styl artykulu (kolory, callouty, typografia, tabele), ale:
   - zachowujemy spojnosc z designem serwisu,
   - trzymamy max 2-3 rodziny fontow na artykul,

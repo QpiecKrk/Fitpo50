@@ -538,6 +538,8 @@ Przy review sprawdzaj w pierwszej kolejnosci:
   - `.medical-disclaimer`
   - sekcja `.porady-preview` z 3 adekwatnymi kafelkami
   - **Linkowanie wewnętrzne (Interlinking)**: Dajemy minimum 4 linki wewnętrzne osadzone bezpośrednio w akapitach artykułu (naturalne anchory wynikające z treści, bez zmiany brzmienia zdań). Sama lista typu "Czytaj też" lub same kafelki "Czytelnia" nie zastępują tych linków kontekstowych.
+  - **Regula importera (Czytelnia)**: przy imporcie z JSON ignorujemy `related_articles`/`related` z pliku wejściowego. Karty Czytelni dobieramy wyłącznie z lokalnie istniejących artykułów, żeby nie powstawały martwe linki.
+  - **Regula redakcyjna (crosslinki)**: crosslinki w treści artykułu dopinamy ręcznie po imporcie (kontrola redakcyjna), nie ufamy automatycznym linkom z modelu.
 
 ## Kafelki i linkowanie artykulow
 

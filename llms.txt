@@ -184,4 +184,8 @@ articles:
   title: "Waty na Apple Watch: Dlaczego po 50-tce są ważniejsze niż tętno? | FitPo50"
   section: "Ciekawe"
   summary: "Apple Watch pokazuje moc w watach. Poznaj obiektywną metrykę zdrowia serca i mitochondriów po 50. roku życia. Dowiedz się, jak trenować mądrzej i żyć dłużej."
+- url: https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html
+  title: "Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze | FitPo50"
+  section: "Zdrowie"
+  summary: "Tłuszcz trzewny otacza Twoje organy i produkuje hormony zapalne. Poznaj naukowe metody jego redukcji po 50. roku życia. Sprawdź, jak sen i stres wpływają na wagę."
 
