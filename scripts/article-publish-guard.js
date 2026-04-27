@@ -214,7 +214,7 @@ function validateSpeakable(relPath, html, blogPosting) {
 }
 
 function validateKeyTakeaways(relPath, html, articleContent) {
-  const keyPos = html.search(/class="key-takeaways"/i);
+  const keyPos = html.search(/class="[^"]*\bkey-takeaways\b[^"]*"/i);
   if (keyPos === -1) {
     errors.push(`${relPath}: brak sekcji .key-takeaways.`);
     return;
