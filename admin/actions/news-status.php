@@ -31,6 +31,13 @@ try {
         throw new RuntimeException('Nie znaleziono newsa do zmiany statusu.');
     }
 
+    if ($status === 'published') {
+        $imageBase = trim((string)($item['image_base'] ?? ''));
+        if ($imageBase !== '' && !newsImageVariantsExist($imageBase)) {
+            throw new RuntimeException('Nie można opublikować: miniatura newsa nie istnieje w assets/news. Dodaj miniaturę ponownie i zapisz.');
+        }
+    }
+
     $now = date('c');
     $item['status'] = $status;
     $item['updated_at'] = $now;

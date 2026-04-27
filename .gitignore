@@ -94,15 +94,12 @@ _site/clean.js
 _site/copy_pngs.sh
 _site/SESSION_START_MAX.md
 
-# timestamped NEWS thumbs generated during export (avoid status noise)
+# NEWS thumbs are production assets and must be tracked in git.
+# Mirror thumbnails in _site are build artifacts and stay ignored.
 _site/assets/news/news_20*.avif
 _site/assets/news/news_20*.jpg
 _site/assets/news/news_20*.webp
 _site/assets/news/news_20*
-assets/news/news_20*.avif
-assets/news/news_20*.jpg
-assets/news/news_20*.webp
-assets/news/news_20*
 
 # Auto-generated AI agent exclusions
 .cursorrules

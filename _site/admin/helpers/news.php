@@ -224,6 +224,9 @@ function buildPublicImageData(array $item): ?array {
     if ($base === '') {
         return null;
     }
+    if (!newsImageVariantsExist($base)) {
+        return null;
+    }
 
     $prefix = './assets/news/' . $base;
 
@@ -608,6 +611,22 @@ function deleteNewsImageVariants(?string $base): void {
             @unlink($path);
         }
     }
+}
+
+function newsImageVariantsExist(?string $base): bool {
+    $base = trim((string)$base);
+    if ($base === '') {
+        return false;
+    }
+
+    $dir = newsAssetsDirPath();
+    foreach (['jpg', 'webp', 'avif'] as $ext) {
+        if (is_file($dir . $base . '.' . $ext)) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 function upsertNewsItem(array $store, array $item): array {

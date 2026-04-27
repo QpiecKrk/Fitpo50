@@ -43,6 +43,10 @@ function exists(relPath) {
   return fs.existsSync(path.join(ROOT, relPath));
 }
 
+function readJson(relPath) {
+  return JSON.parse(readUtf8(relPath));
+}
+
 function normalizeSlug(input) {
   const s = String(input || '').trim();
   if (!s) return '';
@@ -216,6 +220,41 @@ function assertFileMirror(relPath, errors) {
   }
 }
 
+function validatePublishedNewsImages(errors, warnings) {
+  const candidates = ['data/news-live.json', '_site/data/news-live.json'];
+
+  for (const rel of candidates) {
+    if (!exists(rel)) {
+      warnings.push(`Brak ${rel} — pomijam kontrolę miniatur NEWS.`);
+      continue;
+    }
+
+    let parsed;
+    try {
+      parsed = readJson(rel);
+    } catch (err) {
+      errors.push(`${rel}: niepoprawny JSON (${err.message})`);
+      continue;
+    }
+
+    const items = Array.isArray(parsed.items) ? parsed.items : [];
+    for (const item of items) {
+      if (!item || item.status !== 'published') continue;
+      const imageBase = String(item.image_base || '').trim();
+      if (!imageBase) continue;
+      const newsDir = rel.startsWith('_site/')
+        ? '_site/assets/news'
+        : 'assets/news';
+      const hasAnyVariant = ['jpg', 'webp', 'avif']
+        .some((ext) => exists(`${newsDir}/${imageBase}.${ext}`));
+      if (!hasAnyVariant) {
+        const title = String(item.title || item.id || '(bez tytułu)');
+        errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak plików miniatur w ${newsDir}/`);
+      }
+    }
+  }
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const errors = [];
@@ -321,6 +360,9 @@ function main() {
     if (!rel) continue;
     if (!exists(rel)) errors.push(`Brak assetu: ${rel}`);
   }
+
+  // 9) published NEWS must have existing thumbnail files
+  validatePublishedNewsImages(errors, warnings);
 
   printAndExit(errors, warnings);
 }

@@ -102,6 +102,10 @@ try {
         $imageBase = '';
     }
 
+    if ($imageBase !== '' && !newsImageVariantsExist($imageBase)) {
+        throw new RuntimeException('Miniatura została utracona (brak plików w assets/news). Wgraj miniaturę ponownie przed zapisem.');
+    }
+
     $imageAltFinal = $imageAlt;
     if ($imageBase !== '' && $imageAltFinal === '') {
         $imageAltFinal = $title;
