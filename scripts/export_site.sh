@@ -100,6 +100,8 @@ rsync -a \
   --exclude=".brainsync/" \
   --exclude=".cursor/" \
   --exclude=".vscode/" \
+  --exclude=".github/" \
+  --exclude=".githooks/" \
   --exclude=".clinerules" \
   --exclude=".cursorrules" \
   --exclude=".windsurfrules" \

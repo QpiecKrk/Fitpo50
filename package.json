@@ -8,7 +8,10 @@
     "article:new": "node scripts/create-article-from-template.js",
     "article:validate": "node scripts/validate-article-standard.js",
     "article:pdf:sync": "python3 scripts/sync_article_pdfs_and_buttons.py",
-    "predeploy:check": "node scripts/predeploy-gate.js"
+    "predeploy:check": "node scripts/predeploy-gate.js",
+    "check:build-export": "npm run build && SKIP_TS_BUILD=1 ./scripts/export_site.sh /tmp/fitpo50-export-check",
+    "prepush:local": "npm run predeploy:check && npm run check:build-export",
+    "hooks:install": "bash scripts/install-git-hooks.sh"
   },
   "devDependencies": {
     "clean-css-cli": "^5.6.3",

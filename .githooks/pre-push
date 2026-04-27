@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+cd "$ROOT_DIR"
+
+echo "Pre-push: uruchamiam predeploy gate + build/export..."
+npm run prepush:local
+echo "Pre-push: OK."
