@@ -7,6 +7,7 @@
     "build": "tsc",
     "article:new": "node scripts/create-article-from-template.js",
     "article:validate": "node scripts/validate-article-standard.js",
+    "article:guard": "node scripts/article-publish-guard.js",
     "article:pdf:sync": "python3 scripts/sync_article_pdfs_and_buttons.py",
     "predeploy:check": "node scripts/predeploy-gate.js",
     "news:integrity": "node scripts/news-integrity-check.js",
