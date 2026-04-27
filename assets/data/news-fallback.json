@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-27T11:27:12+00:00",
+    "updatedAt": "2026-04-27T11:27:22+00:00",
     "items": [
+        {
+            "id": "news_807e567fce8a",
+            "title": "Mózg ma „drugą sieć”? Nowe badanie zmienia sposób myślenia",
+            "content_html": "<p><span>Nowe badanie opublikowane w </span><span><span class=\"news-text-tone--4\"><span></span><span>Nature</span></span> pokazuje, że mózg może działać inaczej, niż uczono przez lata.</span><span><br>\n</span><span>Nie tylko neurony odpowiadają za komunikację.</span></p><p><span>Naukowcy z NYU odkryli, że tzw. </span><span><strong><span></span><span>astrocyty</span></strong> – komórki uznawane dotąd za „pomocnicze” – tworzą własną sieć sygnałów w <span class=\"news-text-tone--4\">mózgu</span>.</span><span><br>\n</span><span>Co ważne, ta sieć działa </span><span><strong><span></span><span>na duże odległości</span></strong> i łączy obszary, które wcześniej nie były ze sobą powiązane.</span></p><p><span>To <a href=\"syndrom-pierwszego-poniedzialku.html\">pierwszy</a> raz, kiedy udało się stworzyć tak dokładną, <span class=\"news-text-tone--4\">trójwymiarową</span> mapę tych połączeń.</span></p><p><span>Jeszcze ciekawsze jest to, że sieci te mogą się zmieniać wraz z doświadczeniem – np. po utracie zmysłów.</span><span><br>\n</span><span>To sugeruje, że mózg jest jeszcze bardziej „<span class=\"news-text-tone--4\">plastyczny</span>”, niż myśleliśmy.</span></p><p><strong>Mózg to nie tylko neurony – istnieje druga, ukryta sieć, która może zmieniać nasze rozumienie chorób i działania mózgu. </strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260427_112712_afcc5128.avif",
+                "webp": "./assets/news/news_20260427_112712_afcc5128.webp",
+                "jpg": "./assets/news/news_20260427_112712_afcc5128.jpg",
+                "alt": "Mózg",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Nature – Astrocyte signaling networks study",
+                    "url": "https://www.nature.com"
+                },
+                {
+                    "label": "NYU Langone Health – Brain astrocyte research",
+                    "url": "https://nyulangone.org"
+                }
+            ],
+            "updated_at": "2026-04-27T11:27:22+00:00",
+            "published_at": "2026-04-27T11:27:22+00:00",
+            "excerpt": "Nowe badanie opublikowane w Nature pokazuje, że mózg może działać inaczej, niż uczono przez lata. Nie tylko neurony odpowiadają za komunikację.Naukowcy z NYU odkryli, że tzw. astrocyty – komórki uznawane dotąd za „pomoc…"
+        },
         {
             "id": "news_b89e05e1dd56",
             "title": "Aspiryna a rak jelita: pomaga, ale nie dla każdego",
