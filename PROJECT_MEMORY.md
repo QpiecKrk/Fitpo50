@@ -332,6 +332,8 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 ## Zasady ogolne
 
 - Zachowujemy obecny kierunek serwisu: praktyczny, czytelny, bez nadmiaru ozdobnikow.
+- Nadrzedna kolejnosc priorytetow dla tresci, publikacji i automatyzacji: **SEO -> AEO -> GEO -> AIO**.
+- Przy konflikcie decyzji najpierw zabezpieczamy SEO, potem AEO, potem GEO, a na koncu AIO.
 - Nie cofamy ustalen projektowych i SEO bez wyraznej prosby.
 - Przy kazdej zmianie najpierw sprawdzamy stan pliku, potem edytujemy.
 - Po zmianach frontowych (CSS/JS/template) pamietamy o cache:
