@@ -1,7 +1,33 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-27T11:27:22+00:00",
+    "updatedAt": "2026-04-27T11:27:48+00:00",
     "items": [
+        {
+            "id": "news_b89e05e1dd56",
+            "title": "Aspiryna a rak jelita: pomaga, ale nie dla każdego",
+            "content_html": "<p><span><a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">Badania</a> pokazują, że regularne stosowanie <span class=\"news-text-tone--3\">aspiryny</span> może </span><span><strong><span></span><span>zmniejszać ryzyko raka jelita grubego</span><span>.</span></strong><br>\n</span><span>Dzieje się to głównie przez działanie przeciwzapalne i wpływ na procesy związane z rozwojem nowotworów.</span></p><p><span>Najmocniejsze dane:</span><span><br>\n</span><span>👉 długoterminowe stosowanie (kilka lat) wiąże się ze spadkiem ryzyka </span><span><span class=\"news-text-tone--1\">zachorowania i śmiertelności</span><br>\n</span><span>👉 efekt jest wyraźniejszy u osób z wyższym ryzykiem (<span class=\"news-text-tone--1\">np. historia polipów, chorób jelit</span>)</span></p><p><span>Ale jest ważne „<span class=\"news-text-tone--3\">ale</span>”:</span></p><p><span><span>Aspiryna</span> to nie suplement.</span><span><br>\n</span><span>To lek z realnymi skutkami ubocznymi:</span></p><ul>\n<li><span><strong>krwawienia</strong> z przewodu pokarmowego</span></li>\n<li><span>ryzyko <strong>udaru</strong> krwotocznego</span></li>\n</ul><p><span>Dlatego nie jest zalecana „profilaktycznie dla każdego”.</span></p><p><strong>Aspiryna może zmniejszać ryzyko raka jelita, ale tylko u wybranych osób — i zawsze pod kontrolą lekarza.</strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260427_112748_5f884f16",
+            "image_alt": "Apiryna",
+            "sources": [
+                {
+                    "label": "USPSTF (US Preventive Services Task Force)",
+                    "url": "https://www.uspreventiveservicestaskforce.org"
+                },
+                {
+                    "label": "The Lancet – Aspirin in cancer prevention",
+                    "url": "https://www.thelancet.com"
+                },
+                {
+                    "label": "National Cancer Institute – Aspirin and colorectal cancer",
+                    "url": "https://www.cancer.gov"
+                }
+            ],
+            "created_at": "2026-04-26T19:41:09+00:00",
+            "updated_at": "2026-04-27T11:27:47+00:00",
+            "published_at": ""
+        },
         {
             "id": "news_c0b3ffafe0a7",
             "title": "Czy komórki macierzyste wyleczą cukrzycę? Jest postęp, ale bez sensacji",
@@ -71,32 +97,6 @@
             "created_at": "2026-04-26T19:21:56+00:00",
             "updated_at": "2026-04-27T11:27:22+00:00",
             "published_at": "2026-04-27T11:27:22+00:00"
-        },
-        {
-            "id": "news_b89e05e1dd56",
-            "title": "Aspiryna a rak jelita: pomaga, ale nie dla każdego",
-            "content_html": "<p><span><a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">Badania</a> pokazują, że regularne stosowanie <span class=\"news-text-tone--3\">aspiryny</span> może </span><span><strong><span></span><span>zmniejszać ryzyko raka jelita grubego</span><span>.</span></strong><br>\n</span><span>Dzieje się to głównie przez działanie przeciwzapalne i wpływ na procesy związane z rozwojem nowotworów.</span></p><p><span>Najmocniejsze dane:</span><span><br>\n</span><span>👉 długoterminowe stosowanie (kilka lat) wiąże się ze spadkiem ryzyka </span><span><span class=\"news-text-tone--1\">zachorowania i śmiertelności</span><br>\n</span><span>👉 efekt jest wyraźniejszy u osób z wyższym ryzykiem (<span class=\"news-text-tone--1\">np. historia polipów, chorób jelit</span>)</span></p><p><span>Ale jest ważne „<span class=\"news-text-tone--3\">ale</span>”:</span></p><p><span><span>Aspiryna</span> to nie suplement.</span><span><br>\n</span><span>To lek z realnymi skutkami ubocznymi:</span></p><ul>\n<li><span><strong>krwawienia</strong> z przewodu pokarmowego</span></li>\n<li><span>ryzyko <strong>udaru</strong> krwotocznego</span></li>\n</ul><p><span>Dlatego nie jest zalecana „profilaktycznie dla każdego”.</span></p><p><strong>Aspiryna może zmniejszać ryzyko raka jelita, ale tylko u wybranych osób — i zawsze pod kontrolą lekarza.</strong><br><span></span></p>",
-            "status": "published",
-            "sort_order": 1,
-            "image_base": "",
-            "image_alt": "",
-            "sources": [
-                {
-                    "label": "USPSTF (US Preventive Services Task Force)",
-                    "url": "https://www.uspreventiveservicestaskforce.org"
-                },
-                {
-                    "label": "The Lancet – Aspirin in cancer prevention",
-                    "url": "https://www.thelancet.com"
-                },
-                {
-                    "label": "National Cancer Institute – Aspirin and colorectal cancer",
-                    "url": "https://www.cancer.gov"
-                }
-            ],
-            "created_at": "2026-04-26T19:41:09+00:00",
-            "updated_at": "2026-04-27T11:07:05.482Z",
-            "published_at": "2026-04-27T10:38:00+00:00"
         },
         {
             "id": "news_c0f0f2fc9455",
