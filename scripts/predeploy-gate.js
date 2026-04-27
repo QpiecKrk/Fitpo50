@@ -242,14 +242,27 @@ function validatePublishedNewsImages(errors, warnings) {
       if (!item || item.status !== 'published') continue;
       const imageBase = String(item.image_base || '').trim();
       if (!imageBase) continue;
-      const newsDir = rel.startsWith('_site/')
-        ? '_site/assets/news'
-        : 'assets/news';
-      const hasAnyVariant = ['jpg', 'webp', 'avif']
-        .some((ext) => exists(`${newsDir}/${imageBase}.${ext}`));
-      if (!hasAnyVariant) {
+      const sourceDir = 'assets/news';
+      const siteDir = '_site/assets/news';
+      const hasSourceVariant = ['jpg', 'webp', 'avif']
+        .some((ext) => exists(`${sourceDir}/${imageBase}.${ext}`));
+      const hasSiteVariant = ['jpg', 'webp', 'avif']
+        .some((ext) => exists(`${siteDir}/${imageBase}.${ext}`));
+
+      if (rel.startsWith('_site/')) {
+        if (!hasSiteVariant && !hasSourceVariant) {
+          const title = String(item.title || item.id || '(bez tytułu)');
+          errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak plików miniatur w ${siteDir}/ oraz ${sourceDir}/`);
+        } else if (!hasSiteVariant && hasSourceVariant) {
+          const title = String(item.title || item.id || '(bez tytułu)');
+          warnings.push(`${rel}: opublikowany news "${title}" ma miniatury tylko w ${sourceDir}/ (brak mirroru w ${siteDir}/).`);
+        }
+        continue;
+      }
+
+      if (!hasSourceVariant) {
         const title = String(item.title || item.id || '(bez tytułu)');
-        errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak plików miniatur w ${newsDir}/`);
+        errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak plików miniatur w ${sourceDir}/`);
       }
     }
   }
