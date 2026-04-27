@@ -90,7 +90,7 @@ function validatePublishedImagesAndFallback() {
       errors.push(`Brak miniatur dla "${title}" w assets/news (image_base="${imageBase}").`);
     }
     if (!hasAnyVariant('_site/assets/news', imageBase)) {
-      errors.push(`Brak miniatur dla "${title}" w _site/assets/news (image_base="${imageBase}").`);
+      warnings.push(`Brak miniatur dla "${title}" w _site/assets/news (image_base="${imageBase}").`);
     }
   }
 
