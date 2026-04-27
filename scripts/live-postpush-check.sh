@@ -2,13 +2,16 @@
 set -euo pipefail
 
 BASE_URL="${1:-https://fitpo50.pl}"
+RETRIES="${RETRIES:-4}"
+DELAY="${DELAY:-2}"
+TIMEOUT="${TIMEOUT:-20}"
 
 echo "Live post-push check: ${BASE_URL}"
 
 check_200() {
   local url="$1"
   local code
-  code="$(curl -s -o /dev/null -w "%{http_code}" "$url")"
+  code="$(curl -sS --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors -o /dev/null -w "%{http_code}" "$url")"
   if [[ "$code" != "200" ]]; then
     echo "[FAIL] ${url} -> HTTP ${code}"
     return 1
@@ -19,7 +22,18 @@ check_200() {
 check_contains() {
   local url="$1"
   local needle="$2"
-  if ! curl -sL "$url" | grep -q "$needle"; then
+  local ok="0"
+  local attempt
+  local body
+  for attempt in $(seq 1 $((RETRIES + 1))); do
+    body="$(curl -sSL --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors "$url" || true)"
+    if grep -q "$needle" <<<"$body"; then
+      ok="1"
+      break
+    fi
+    sleep "$DELAY"
+  done
+  if [[ "$ok" != "1" ]]; then
     echo "[FAIL] ${url} -> brak wzorca: ${needle}"
     return 1
   fi
@@ -37,4 +51,3 @@ check_contains "${BASE_URL}/sitemap.xml" "https://fitpo50.pl/"
 check_contains "${BASE_URL}/porady.html" "data-article-item"
 
 echo "Live post-push check: PASS"
-
