@@ -376,14 +376,164 @@ function normalizeLocalHtmlHref(href) {
   return clean.replace(/^\.\//, '').replace(/^\/+/, '');
 }
 
+function normalizeImageBase(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  const noQuery = raw.split('#')[0].split('?')[0].trim();
+  const fileName = noQuery.split('/').pop() || '';
+  return fileName.replace(/\.(avif|webp|jpe?g|png)$/i, '').trim();
+}
+
 function isCategoryLandingHref(href) {
   const normalized = normalizeLocalHtmlHref(href);
   if (!normalized) return false;
   return CATEGORY_LANDING_URLS.has(normalized.toLowerCase());
 }
 
+function articleFileExists(href) {
+  const normalized = normalizeLocalHtmlHref(href);
+  if (!normalized) return false;
+  return fs.existsSync(path.join(ROOT, normalized));
+}
+
+function isUsableRelatedHref(href, currentSlug) {
+  const normalized = normalizeLocalHtmlHref(href);
+  if (!normalized) return false;
+  if (isCategoryLandingHref(normalized)) return false;
+  if (!articleFileExists(normalized)) return false;
+  if (currentSlug && normalized.toLowerCase() === `${String(currentSlug).toLowerCase()}.html`) return false;
+  return true;
+}
+
+const articleMetaCache = new Map();
+
+function firstMatch(text, regex, fallback = '') {
+  const m = String(text || '').match(regex);
+  return m ? String(m[1] || '').trim() : fallback;
+}
+
+function readArticleMetaByHref(href) {
+  const normalized = normalizeLocalHtmlHref(href);
+  if (!normalized) return null;
+  if (articleMetaCache.has(normalized)) return articleMetaCache.get(normalized);
+
+  const filePath = path.join(ROOT, normalized);
+  if (!fs.existsSync(filePath)) {
+    articleMetaCache.set(normalized, null);
+    return null;
+  }
+
+  const html = fs.readFileSync(filePath, 'utf8');
+  const title = firstMatch(html, /<meta\s+property="og:title"\s+content="([^"]+)"/i)
+    || firstMatch(html, /<title>([^<]+)<\/title>/i)
+    || '';
+  const description = firstMatch(html, /<meta\s+name="description"\s+content="([^"]+)"/i) || '';
+  const readTime = firstMatch(html, /<span\s+class="article-meta__time">([^<]+)<\/span>/i) || '';
+  const categoryKey = firstMatch(html, /\barticle--(ruch|jedzenie|zdrowie|ciekawe)\b/i, '').toLowerCase();
+  const heroAlt = firstMatch(html, /<img[^>]*class="[^"]*hero-image[^"]*"[^>]*alt="([^"]+)"/i) || title;
+
+  const ogImage = firstMatch(html, /<meta\s+property="og:image"\s+content="([^"]+)"/i);
+  const preloadImage = firstMatch(html, /<link\s+rel="preload"[^>]*as="image"[^>]*href="([^"]+)"/i);
+  const heroImgSrc = firstMatch(html, /<img[^>]*class="[^"]*hero-image[^"]*"[^>]*src="([^"]+)"/i);
+  const heroImage = normalizeImageBase(ogImage) || normalizeImageBase(preloadImage) || normalizeImageBase(heroImgSrc);
+
+  const meta = {
+    href: normalized,
+    title,
+    description,
+    readTime,
+    categoryKey: categoryKey || 'ciekawe',
+    categoryLabel: normalizeCategory(categoryKey || 'ciekawe').label,
+    heroImage,
+    heroAlt,
+  };
+  articleMetaCache.set(normalized, meta);
+  return meta;
+}
+
+function getRelatedCandidatesFromPorady(currentSlug) {
+  const filePath = path.join(ROOT, 'porady.html');
+  if (!fs.existsSync(filePath)) return [];
+
+  const html = fs.readFileSync(filePath, 'utf8');
+  const tagRx = /<a\b[^>]*data-article-item[^>]*>/gi;
+  const hrefs = [];
+
+  for (const m of html.matchAll(tagRx)) {
+    const tag = String(m[0] || '');
+    const href = firstMatch(tag, /\bhref="([^"]+)"/i);
+    const normalized = normalizeLocalHtmlHref(href);
+    if (!normalized) continue;
+    if (!isUsableRelatedHref(normalized, currentSlug)) continue;
+    hrefs.push(normalized);
+  }
+
+  return [...new Set(hrefs)];
+}
+
+function buildSafeRelatedDefaults(relatedRaw, { currentSlug, currentCategory, readingTime, heroImage, heroAlt, metaDescription, title }) {
+  const existingPool = [
+    ...getRelatedCandidatesFromPorady(currentSlug),
+    ...READING_ROOM_FALLBACKS
+      .map((item) => normalizeLocalHtmlHref(item.url))
+      .filter((href) => isUsableRelatedHref(href, currentSlug)),
+  ];
+
+  const pool = [...new Set(existingPool)];
+  const selected = [];
+  for (let i = 0; i < 3; i += 1) {
+    const item = relatedRaw[i] || {};
+    const preferred = normalizeLocalHtmlHref(item.url || item.href || '');
+    if (isUsableRelatedHref(preferred, currentSlug) && !selected.includes(preferred)) {
+      selected.push(preferred);
+      continue;
+    }
+    const replacement = pool.find((href) => !selected.includes(href));
+    if (replacement) {
+      selected.push(replacement);
+      continue;
+    }
+    const fallback = normalizeLocalHtmlHref(READING_ROOM_FALLBACKS[i]?.url || '');
+    selected.push(fallback || '');
+  }
+
+  return selected.map((href, idx) => {
+    const jsonItem = relatedRaw[idx] || {};
+    const fallback = READING_ROOM_FALLBACKS[idx] || READING_ROOM_FALLBACKS[0];
+    const meta = readArticleMetaByHref(href);
+    const categoryObj = normalizeCategory(
+      meta?.categoryKey
+      || jsonItem.category
+      || fallback.category
+      || currentCategory.label
+    );
+
+    const cardImage = normalizeImageBase(jsonItem.image || jsonItem.image_base)
+      || meta?.heroImage
+      || normalizeImageBase(fallback.image)
+      || normalizeImageBase(heroImage);
+    const cardTitle = String(jsonItem.title || meta?.title || fallback.title || title).trim();
+    const cardDesc = String(jsonItem.description || meta?.description || fallback.description || metaDescription).trim();
+    const cardTime = String(jsonItem.time || jsonItem.reading_time || meta?.readTime || fallback.time || readingTime).trim()
+      .replace(/\s*czytania/i, '');
+    const cardAlt = String(jsonItem.alt || meta?.heroAlt || cardTitle || heroAlt).trim();
+
+    return {
+      url: isUsableRelatedHref(href, currentSlug) ? href : normalizeLocalHtmlHref(fallback.url),
+      image: cardImage,
+      alt: cardAlt,
+      categoryLabel: categoryObj.label,
+      categoryKey: categoryObj.key,
+      time: cardTime,
+      title: cardTitle,
+      description: cardDesc,
+    };
+  });
+}
+
 function validateInput(data) {
   const errors = [];
+  const autoFixes = [];
   const title = String(data.title || '').trim();
   if (!title) errors.push('Brak pola title.');
 
@@ -452,22 +602,29 @@ function validateInput(data) {
   }
 
   const relatedRaw = normalizeArray(data.related_articles || data.related || []).slice(0, 3);
+  const currentSlug = String(data.slug || '').trim();
   for (let i = 0; i < relatedRaw.length; i += 1) {
     const item = relatedRaw[i];
     const idx = i + 1;
     const url = normalizeLocalHtmlHref(item?.url || item?.href || '');
     if (!url) {
-      errors.push(`related_articles #${idx}: url musi wskazywać lokalny plik artykułu *.html.`);
+      autoFixes.push(`related_articles #${idx}: brak/niepoprawny url -> importer podstawi poprawny artykuł z porady.html.`);
       continue;
     }
     if (isCategoryLandingHref(url)) {
-      errors.push(
-        `related_articles #${idx}: url "${url}" wskazuje stronę kategorii, a nie artykuł. Podaj konkretny slug artykułu *.html.`
-      );
+      autoFixes.push(`related_articles #${idx}: url "${url}" wskazuje kategorię -> podmienię na konkretny artykuł.`);
+      continue;
+    }
+    if (!articleFileExists(url)) {
+      autoFixes.push(`related_articles #${idx}: url "${url}" nie istnieje lokalnie -> podmienię na istniejący artykuł.`);
+      continue;
+    }
+    if (currentSlug && url.toLowerCase() === `${currentSlug.toLowerCase()}.html`) {
+      autoFixes.push(`related_articles #${idx}: url "${url}" wskazuje bieżący artykuł -> podmienię na inny.`);
     }
   }
 
-  return { errors, sections, sources };
+  return { errors, autoFixes, sections, sources };
 }
 
 function collectMissingHeroAssets(heroImageBase, syncSite) {
@@ -533,6 +690,9 @@ function buildPrecheckReport({ inputPath, json, payload, validation, syncSite })
 
   for (const err of validation.errors) {
     blockers.push(err);
+  }
+  for (const fix of validation.autoFixes || []) {
+    autoFixes.push(fix);
   }
 
   if (!payload.slug) {
@@ -1290,27 +1450,14 @@ function normalizePayload(data, cliCategory) {
   const sources = normalizeSources(data.sources || []);
 
   const related = normalizeArray(data.related_articles || data.related || []).slice(0, 3);
-
-  const relatedDefaults = [0, 1, 2].map((idx) => {
-    const fallback = READING_ROOM_FALLBACKS[idx];
-    const item = related[idx] || {};
-    const rCat = normalizeCategory(item.category || fallback.category || category.label);
-    const imageBase = String(item.image || item.image_base || fallback.image || heroImage).trim();
-    const rawUrl = String(item.url || item.href || '').trim();
-    const normalizedUrl = normalizeLocalHtmlHref(rawUrl);
-    const safeUrl = (!normalizedUrl || isCategoryLandingHref(normalizedUrl))
-      ? fallback.url
-      : normalizedUrl;
-    return {
-      url: safeUrl,
-      image: imageBase,
-      alt: String(item.alt || item.title || fallback.alt || title).trim(),
-      categoryLabel: rCat.label,
-      categoryKey: rCat.key,
-      time: String(item.time || item.reading_time || fallback.time || readingTime.replace(/\s*czytania/i, '')).trim(),
-      title: String(item.title || fallback.title || title).trim(),
-      description: String(item.description || fallback.description || metaDescription).trim(),
-    };
+  const relatedDefaults = buildSafeRelatedDefaults(related, {
+    currentSlug: slug,
+    currentCategory: category,
+    readingTime,
+    heroImage,
+    heroAlt,
+    metaDescription,
+    title,
   });
 
   const plainForWordCount = [
