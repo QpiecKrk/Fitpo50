@@ -1,0 +1,45 @@
+name: Daily Smoke
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * *"
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Smoke test static _site
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --directory _site >/tmp/fitpo50-smoke.log 2>&1 &
+          SERVER_PID=$!
+          trap "kill $SERVER_PID >/dev/null 2>&1 || true" EXIT
+          sleep 2
+
+          URLS=(
+            "/"
+            "/index.html"
+            "/porady.html"
+            "/rusz-sie.html"
+            "/jedzenie.html"
+            "/zdrowie.html"
+            "/ciekawe.html"
+            "/sitemap.xml"
+            "/llms.txt"
+            "/style.css"
+            "/dist/app.js"
+            "/assets/data/news-fallback.json"
+            "/data/news-live.json"
+          )
+
+          for u in "${URLS[@]}"; do
+            echo "Checking $u"
+            curl -fsS "http://127.0.0.1:4173$u" >/dev/null
+          done
+
+          echo "Daily smoke: PASS"
