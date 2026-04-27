@@ -180,4 +180,8 @@ articles:
   title: "Post przerywany po 50-tce: korzyści i ryzyko dla mięśni | FitPo50"
   section: "Jedzenie"
   summary: "Post przerywany po 50-tce: co mówią badania o korzyściach metabolicznych i ryzyku utraty mięśni? Praktyczny przewodnik oparty na najnowszych meta-analizach."
+- url: https://fitpo50.pl/waty-apple-watch-moc-zdrowie-po-50.html
+  title: "Waty na Apple Watch: Dlaczego po 50-tce są ważniejsze niż tętno? | FitPo50"
+  section: "Ciekawe"
+  summary: "Apple Watch pokazuje moc w watach. Poznaj obiektywną metrykę zdrowia serca i mitochondriów po 50. roku życia. Dowiedz się, jak trenować mądrzej i żyć dłużej."
 

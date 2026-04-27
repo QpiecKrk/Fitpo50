@@ -1357,13 +1357,13 @@
       </section>
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
-        <img class="latest-article__bg" id="latestArticleImage" src="./assets/if-50plus-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        <img class="latest-article__bg" id="latestArticleImage" src="./assets/waty-trening-apple-watch-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Post przerywany po 50-tce: korzyści i ryzyko dla mięśni</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Post przerywany po 50-tce: co mówią badania o korzyściach metabolicznych i ryzyku utraty mięśni? Praktyczny przewodnik oparty na najnowszych meta-analizach.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Waty na Apple Watch: Dlaczego po 50-tce są ważniejsze niż tętno?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Apple Watch pokazuje moc w watach. Poznaj obiektywną metrykę zdrowia serca i mitochondriów po 50. roku życia. Dowiedz się, jak trenować mądrzej i żyć dłużej.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="waty-apple-watch-moc-zdrowie-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2045,10 +2045,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Post przerywany po 50-tce: korzyści i ryzyko dla mięśni',
-        excerpt: 'Post przerywany po 50-tce: co mówią badania o korzyściach metabolicznych i ryzyku utraty mięśni? Praktyczny przewodnik oparty na najnowszych meta-analizach.',
-        image: './assets/if-50plus-hero.webp',
-        url: 'post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html'
+        title: 'Waty na Apple Watch: Dlaczego po 50-tce są ważniejsze niż tętno?',
+        excerpt: 'Apple Watch pokazuje moc w watach. Poznaj obiektywną metrykę zdrowia serca i mitochondriów po 50. roku życia. Dowiedz się, jak trenować mądrzej i żyć dłużej.',
+        image: './assets/waty-trening-apple-watch-hero.webp',
+        url: 'waty-apple-watch-moc-zdrowie-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2078,7 +2078,14 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Jedzenie',
+          category: 'Ciekawe',
+          title: 'Waty na Apple Watch: Dlaczego po 50-tce są ważniejsze niż tętno?',
+          excerpt: 'Apple Watch pokazuje moc w watach. Poznaj obiektywną metrykę zdrowia serca i mitochondriów po 50. roku życia. Dowiedz się, jak trenować mądrzej i żyć dłużej.',
+          image: './assets/waty-trening-apple-watch-hero.webp',
+          url: 'waty-apple-watch-moc-zdrowie-po-50.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Post przerywany po 50-tce: korzyści i ryzyko dla mięśni',
           excerpt: 'Post przerywany po 50-tce: co mówią badania o korzyściach metabolicznych i ryzyku utraty mięśni? Praktyczny przewodnik oparty na najnowszych meta-analizach.',
           image: './assets/if-50plus-hero.webp',
@@ -2090,13 +2097,6 @@
           excerpt: 'Etykieta to prawda o produkcie, ale napisana małą czcionką i językiem marketingu. Tłumaczymy jak czytać składy, co oznaczają E-numery i gdzie chowa się cukier.',
           image: './assets/etykiety-sklad-produktow-lupa-hero.webp',
           url: 'jak-czytac-etykiety-sklad-produktow-e-numery-inci.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'AI w szpitalu: czy sztuczna inteligencja faktycznie pomaga pacjentom?',
-          excerpt: 'AI już działa w gabinetach i szpitalach. Sprawdzamy, co mówią badania o realnym wpływie na zdrowie pacjentów.',
-          image: './assets/ai-medycyna-lekarz-monitor-rtg-hero.webp',
-          url: 'ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
@@ -2253,18 +2253,34 @@
       return [];
     }
 
-    async function loadNewsFeed() {
-      const localItems = await firstValidNewsData([
-        './data/news-live.json',
-        './assets/data/news-fallback.json'
-      ], 3000, { firstEndpointRetries: 1 });
+    function filterPublishedNews(items) {
+      if (!Array.isArray(items)) return [];
+      return items.filter((item) => {
+        if (!item || typeof item !== 'object') return false;
+        const status = typeof item.status === 'string' ? item.status.toLowerCase() : '';
+        // API public payload nie zawiera statusu, ale lokalny news-live.json go zawiera.
+        // Jeśli status istnieje, wpuszczamy wyłącznie "published".
+        if (status && status !== 'published') return false;
+        return true;
+      });
+    }
 
-      const remoteItems = localItems.length ? [] : await firstValidNewsData([
+    async function loadNewsFeed() {
+      // API-first: panel redakcyjny jest źródłem prawdy dla statusów draft/published.
+      const remoteItemsRaw = await firstValidNewsData([
         './admin/api/news-feed.php',
         'https://admin.fitpo50.pl/api/news-feed.php'
       ], 2200);
 
-      const itemsToRender = localItems.length ? localItems : remoteItems;
+      const remoteItems = filterPublishedNews(remoteItemsRaw);
+
+      const localItemsRaw = remoteItems.length ? [] : await firstValidNewsData([
+        './data/news-live.json',
+        './assets/data/news-fallback.json'
+      ], 3000, { firstEndpointRetries: 1 });
+
+      const localItems = filterPublishedNews(localItemsRaw);
+      const itemsToRender = remoteItems.length ? remoteItems : localItems;
       if (itemsToRender.length > 0) {
         allNewsItems = itemsToRender;
         renderedNewsCount = 0;

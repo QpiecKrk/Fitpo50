@@ -651,6 +651,16 @@ function sortNewsItems(array $items): array {
         $aNorm = normalizeNewsItem($a);
         $bNorm = normalizeNewsItem($b);
 
+        // W panelu redakcyjnym robocze mają być zawsze na górze listy.
+        if ($aNorm['status'] !== $bNorm['status']) {
+            if ($aNorm['status'] === 'draft') {
+                return -1;
+            }
+            if ($bNorm['status'] === 'draft') {
+                return 1;
+            }
+        }
+
         if ($aNorm['sort_order'] === $bNorm['sort_order']) {
             return strcmp($bNorm['updated_at'], $aNorm['updated_at']);
         }

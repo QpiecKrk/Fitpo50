@@ -4,6 +4,12 @@
     const GA_ID = 'G-S21SKTVM7K';
     const ADS_ID = 'AW-18108612630';
     const GA_SRC = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (isLocal) {
+        window[`ga-disable-${GA_ID}`] = true;
+        window[`ga-disable-${ADS_ID}`] = true;
+        console.log('FitPo50: Środowisko lokalne wykryte. Śledzenie Google Analytics zostało zablokowane.');
+    }
     const win = window;
     const styleId = 'fitpo50-cmp-style';
     if (!document.getElementById(styleId)) {
@@ -254,6 +260,8 @@
         }
     };
     const ensureAnalyticsLoaded = () => {
+        if (isLocal)
+            return;
         if (!hasAnyTagConsent())
             return;
         initGtagBridge();
@@ -286,7 +294,7 @@
             if (node instanceof HTMLScriptElement &&
                 typeof node.src === 'string' &&
                 node.src.includes('googletagmanager.com/gtag/js') &&
-                !hasAnyTagConsent()) {
+                (isLocal || !hasAnyTagConsent())) {
                 return node;
             }
             return originalAppendChild.call(this, node);
