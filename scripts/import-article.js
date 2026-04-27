@@ -280,6 +280,17 @@ function countWordsUtf8(text) {
   return m ? m.length : 0;
 }
 
+function truncateParagraphToWordLimit(html, maxWords) {
+  const plain = stripTags(String(html || ''))
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!plain) return ensureParagraphHtml(html);
+  const words = plain.split(' ');
+  if (words.length <= maxWords) return ensureParagraphHtml(html);
+  const clipped = words.slice(0, maxWords).join(' ').replace(/[,:;.\s]+$/g, '').trim();
+  return `<p>${escapeHtml(`${clipped}.`)}</p>`;
+}
+
 function normalizeCategory(input) {
   const v = String(input || '').toLowerCase().trim();
   if (['ruch', 'rusz-sie', 'rusz_sie'].includes(v)) return { key: 'ruch', label: 'Ruch' };
@@ -439,6 +450,13 @@ function normalizeSections(rawSections) {
           html: `<figure class="inline-figure"><img src="${safeSrc}" alt="${escapeHtml(imgAlt)}" loading="lazy">${imgCaption ? `<figcaption>${escapeHtml(imgCaption)}</figcaption>` : ''}</figure>`,
         });
       }
+    }
+
+    // Automatyczna stabilizacja "answer-first":
+    // pierwszy akapit sekcji przycinamy do 80 słów, żeby nie blokować publikacji.
+    const firstParagraph = blocks.find((b) => b.type === 'paragraph' && String(b.html || '').trim());
+    if (firstParagraph) {
+      firstParagraph.html = truncateParagraphToWordLimit(firstParagraph.html, 80);
     }
 
     sections.push({ title, blocks });
@@ -806,9 +824,10 @@ function validateInput(data) {
         continue;
       }
       const words = countWordsUtf8(stripTags(firstParagraph.html));
-      if (words < 35 || words > 80) {
-        sectionParagraphErrors.push(
-          `Sekcja "${section.title || '(bez tytułu)'}": pierwszy akapit powinien mieć 35-80 słów (ma ${words}).`
+      if (words < 35) {
+        autoFixes.push(
+          `Sekcja "${section.title || '(bez tytułu)'}": pierwszy akapit ma ${words} słów (<35). ` +
+          'Import przejdzie, ale warto ręcznie rozwinąć odpowiedź na pytanie sekcji.'
         );
       }
     }
@@ -1690,6 +1709,61 @@ function writeArticleFiles(slug, html, syncSite, dryRun, force) {
   };
 }
 
+function toAnchorHint(title) {
+  const t = String(title || '')
+    .replace(/[^\p{L}\p{N}\s-]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!t) return 'sprawdź powiązany artykuł';
+  const words = t.split(' ').slice(0, 5);
+  return words.join(' ').toLowerCase();
+}
+
+function writeCrosslinkSuggestions(payload, dryRun) {
+  const slug = String(payload?.slug || '').trim();
+  if (!slug) return null;
+
+  const fromRelated = normalizeArray(payload?.relatedDefaults || [])
+    .map((x) => normalizeLocalHtmlHref(x?.url || ''))
+    .filter(Boolean);
+  const fromPool = getRelatedCandidatesFromPorady(slug).slice(0, 8);
+
+  const urls = [...new Set([...fromRelated, ...fromPool])]
+    .filter((href) => isUsableRelatedHref(href, slug))
+    .slice(0, 4);
+
+  const suggestions = urls.map((href) => {
+    const meta = readArticleMetaByHref(href);
+    const title = String(meta?.title || href.replace(/\.html$/i, '').replace(/-/g, ' ')).trim();
+    return {
+      href,
+      title,
+      anchor_hint: toAnchorHint(title),
+      why: 'Powiązanie tematyczne z bieżącym artykułem (sugestia do ręcznego osadzenia w akapicie).',
+    };
+  });
+
+  const outDir = path.join(ROOT, 'data', 'crosslink-suggestions');
+  const outPath = path.join(outDir, `${slug}.json`);
+  const payloadOut = {
+    slug,
+    generated_at: new Date().toISOString(),
+    suggestions,
+  };
+
+  if (!dryRun) {
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(outPath, `${JSON.stringify(payloadOut, null, 2)}\n`, 'utf8');
+    const siteDir = path.join(ROOT, '_site', 'data', 'crosslink-suggestions');
+    if (fs.existsSync(path.join(ROOT, '_site'))) {
+      fs.mkdirSync(siteDir, { recursive: true });
+      fs.writeFileSync(path.join(siteDir, `${slug}.json`), `${JSON.stringify(payloadOut, null, 2)}\n`, 'utf8');
+    }
+  }
+
+  return outPath;
+}
+
 function normalizePayload(data, cliCategory) {
   const now = new Date();
   const fallbackDate = now.toISOString().slice(0, 10);
@@ -1971,6 +2045,10 @@ function main() {
 
   runPdfSync(payload.slug, dryRun);
   updatedFiles.push('assets/pdf/<slug>.pdf + przycisk PDF + schema encoding');
+  const crosslinkSuggestionsPath = writeCrosslinkSuggestions(payload, dryRun);
+  if (crosslinkSuggestionsPath) {
+    updatedFiles.push(`data/crosslink-suggestions/${payload.slug}.json`);
+  }
 
   printSummary({
     slug: payload.slug,

@@ -1,0 +1,905 @@
+{
+  "generatedAt": "2026-04-27T19:53:07.968Z",
+  "policy": {
+    "priority": "SEO -> AEO -> GEO -> AIO",
+    "thresholds": {
+      "freshDays": 45,
+      "warningDays": 120,
+      "staleDays": 180
+    }
+  },
+  "totals": {
+    "articles": 43,
+    "critical": 0,
+    "stale": 0,
+    "watch": 0,
+    "unknown": 1,
+    "needsRefreshNow": 1
+  },
+  "topPriority": [
+    {
+      "file": "article-template-bento.html",
+      "dateModified": "{{DATE_MODIFIED}}",
+      "ageDays": null,
+      "freshness": "unknown",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 0,
+        "wordCount": 168
+      },
+      "priorityScore": 150,
+      "action": "pilna aktualizacja (SEO/AEO/GEO)"
+    },
+    {
+      "file": "bledy-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 1438
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "dlaczego-bieznia-to-za-malo.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 2002
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "hrt-mit-badanie-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 2427
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "jak-zaczac-na-silowni-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 5,
+        "internalLinks": 3,
+        "wordCount": 1371
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "kawa-jako-preworkout-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 1632
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "motywacja-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 4,
+        "internalLinks": 3,
+        "wordCount": 2121
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+      "dateModified": "2026-04-24T09:30:00+02:00",
+      "ageDays": 3,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 4,
+        "internalLinks": 3,
+        "wordCount": 1688
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "siedem-bledow-silownia-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 1236
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "silownia-dla-ludzi.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 1,
+        "internalLinks": 2,
+        "wordCount": 2118
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "suplementacja-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 5,
+        "internalLinks": 3,
+        "wordCount": 1754
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 2,
+        "wordCount": 1793
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "wino-i-miesnie-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 1833
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "dieta-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 2,
+        "internalLinks": 4,
+        "wordCount": 1873
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "dzieci-patrza-na-ciebie.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 1235
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "healthspan-nie-lifespan-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 2089
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "jedz-wiecej-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 2280
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "pilates-po-50-nie-dla-kobiet.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 1424
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "powrot-do-formy-po-50-kompletny-przewodnik.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 4365
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
+      "dateModified": "2026-04-22T09:30:00+02:00",
+      "ageDays": 5,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 5,
+        "internalLinks": 4,
+        "wordCount": 1951
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    }
+  ],
+  "all": [
+    {
+      "file": "article-template-bento.html",
+      "dateModified": "{{DATE_MODIFIED}}",
+      "ageDays": null,
+      "freshness": "unknown",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 0,
+        "wordCount": 168
+      },
+      "priorityScore": 150,
+      "action": "pilna aktualizacja (SEO/AEO/GEO)"
+    },
+    {
+      "file": "bledy-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 1438
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "dlaczego-bieznia-to-za-malo.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 2002
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "hrt-mit-badanie-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 2427
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "jak-zaczac-na-silowni-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 5,
+        "internalLinks": 3,
+        "wordCount": 1371
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "kawa-jako-preworkout-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 1632
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "motywacja-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 4,
+        "internalLinks": 3,
+        "wordCount": 2121
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+      "dateModified": "2026-04-24T09:30:00+02:00",
+      "ageDays": 3,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 4,
+        "internalLinks": 3,
+        "wordCount": 1688
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "siedem-bledow-silownia-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 1236
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "silownia-dla-ludzi.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 1,
+        "internalLinks": 2,
+        "wordCount": 2118
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "suplementacja-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 5,
+        "internalLinks": 3,
+        "wordCount": 1754
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 2,
+        "wordCount": 1793
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "wino-i-miesnie-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 3,
+        "wordCount": 1833
+      },
+      "priorityScore": 60,
+      "action": "aktualizacja w tym tygodniu"
+    },
+    {
+      "file": "dieta-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 2,
+        "internalLinks": 4,
+        "wordCount": 1873
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "dzieci-patrza-na-ciebie.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 1235
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "healthspan-nie-lifespan-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 2089
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "jedz-wiecej-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 2280
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "pilates-po-50-nie-dla-kobiet.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 1424
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "powrot-do-formy-po-50-kompletny-przewodnik.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 4365
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
+      "dateModified": "2026-04-22T09:30:00+02:00",
+      "ageDays": 5,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 5,
+        "internalLinks": 4,
+        "wordCount": 1951
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "sen-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 1918
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "trening-3x30-dla-50-plus.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 5,
+        "internalLinks": 4,
+        "wordCount": 2205
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 0,
+        "internalLinks": 4,
+        "wordCount": 2179
+      },
+      "priorityScore": 45,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html",
+      "dateModified": "2026-04-26T12:00:00+02:00",
+      "ageDays": 1,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 7,
+        "internalLinks": 0,
+        "wordCount": 1697
+      },
+      "priorityScore": 35,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "badania-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 7,
+        "internalLinks": 3,
+        "wordCount": 1875
+      },
+      "priorityScore": 35,
+      "action": "monitoring i lekki refresh"
+    },
+    {
+      "file": "apob-apoa-badania-cholesterol.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 8,
+        "internalLinks": 5,
+        "wordCount": 1329
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "bieganie-niszczy-kolana.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 6,
+        "internalLinks": 4,
+        "wordCount": 1434
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html",
+      "dateModified": "2026-04-19T09:30:00+02:00",
+      "ageDays": 8,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 10,
+        "internalLinks": 4,
+        "wordCount": 2861
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "dyskopatia-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 8,
+        "internalLinks": 5,
+        "wordCount": 2411
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "media-spolecznosciowe-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 10,
+        "internalLinks": 4,
+        "wordCount": 2437
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "motywacja-zniknela-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 6,
+        "internalLinks": 4,
+        "wordCount": 2147
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "nawodnienie-na-treningu-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 6,
+        "internalLinks": 4,
+        "wordCount": 1821
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "siedzenie-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 9,
+        "internalLinks": 4,
+        "wordCount": 1960
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "sila-chwytu-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 9,
+        "internalLinks": 4,
+        "wordCount": 2124
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "syndrom-pierwszego-poniedzialku.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 7,
+        "internalLinks": 4,
+        "wordCount": 1544
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "testosteron-po-50-naturalnie-bez-trt.html",
+      "dateModified": "2026-04-19T09:30:00+02:00",
+      "ageDays": 8,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 7,
+        "internalLinks": 5,
+        "wordCount": 1206
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "trening-maszynowy-po-50.html",
+      "dateModified": "2026-04-18T09:30:00+02:00",
+      "ageDays": 9,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 7,
+        "internalLinks": 4,
+        "wordCount": 2385
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "wydolnosc-vo2max-starzenie-po-50.html",
+      "dateModified": "2026-04-20T09:30:00+02:00",
+      "ageDays": 7,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 0,
+        "sourceCount": 6,
+        "internalLinks": 7,
+        "wordCount": 1349
+      },
+      "priorityScore": 20,
+      "action": "OK"
+    },
+    {
+      "file": "jak-czytac-etykiety-sklad-produktow-e-numery-inci.html",
+      "dateModified": "2026-04-26T08:00:00+02:00",
+      "ageDays": 1,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 4,
+        "sourceCount": 6,
+        "internalLinks": 0,
+        "wordCount": 2625
+      },
+      "priorityScore": 15,
+      "action": "OK"
+    },
+    {
+      "file": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+      "dateModified": "2026-04-21T09:30:00+02:00",
+      "ageDays": 6,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 5,
+        "sourceCount": 10,
+        "internalLinks": 0,
+        "wordCount": 3233
+      },
+      "priorityScore": 15,
+      "action": "OK"
+    },
+    {
+      "file": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "dateModified": "2026-04-26T08:00:00+02:00",
+      "ageDays": 1,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 5,
+        "sourceCount": 8,
+        "internalLinks": 6,
+        "wordCount": 2203
+      },
+      "priorityScore": 0,
+      "action": "OK"
+    },
+    {
+      "file": "tluszcz-trzewny-choroby-jak-walczyc.html",
+      "dateModified": "2026-04-26T08:00:00+02:00",
+      "ageDays": 1,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 4,
+        "sourceCount": 6,
+        "internalLinks": 4,
+        "wordCount": 1935
+      },
+      "priorityScore": 0,
+      "action": "OK"
+    },
+    {
+      "file": "waty-apple-watch-moc-zdrowie-po-50.html",
+      "dateModified": "2026-04-26T08:00:00+02:00",
+      "ageDays": 1,
+      "freshness": "fresh",
+      "signals": {
+        "faqCount": 4,
+        "sourceCount": 6,
+        "internalLinks": 4,
+        "wordCount": 1899
+      },
+      "priorityScore": 0,
+      "action": "OK"
+    }
+  ]
+}

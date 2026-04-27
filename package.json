@@ -11,6 +11,10 @@
     "article:guard:diff": "node scripts/run-article-guard-diff.js",
     "reading-room:verify": "node scripts/reading-room-link-verifier.js --diff",
     "schema:validate": "node scripts/schema-validator.js --diff",
+    "adsense:readiness": "node scripts/adsense-readiness-check.js",
+    "faq:refresh:report": "node scripts/faq-refresh-report.js",
+    "content:freshness:report": "node scripts/content-freshness-bot.js",
+    "live:postpush:check": "bash scripts/live-postpush-check.sh https://fitpo50.pl",
     "article:pdf:sync": "python3 scripts/sync_article_pdfs_and_buttons.py",
     "predeploy:check": "node scripts/predeploy-gate.js",
     "news:integrity": "node scripts/news-integrity-check.js",
@@ -20,7 +24,7 @@
     "broken-links:crawl": "node scripts/broken-links-crawler.js /tmp/fitpo50-export-check",
     "workflow:maintenance": "node scripts/workflow-maintenance-check.js",
     "check:build-export": "npm run build && SKIP_TS_BUILD=1 ./scripts/export_site.sh /tmp/fitpo50-export-check && npm run smoke:static && npm run broken-links:crawl",
-    "prepush:local": "npm run prepush:diff-guard && npm run predeploy:check && npm run news:integrity && npm run article:guard:diff && npm run reading-room:verify && npm run schema:validate && npm run json:gate:diff && npm run check:build-export",
+    "prepush:local": "npm run prepush:diff-guard && npm run predeploy:check && npm run news:integrity && npm run article:guard:diff && npm run reading-room:verify && npm run schema:validate && npm run adsense:readiness && npm run json:gate:diff && npm run check:build-export",
     "hooks:install": "bash scripts/install-git-hooks.sh"
   },
   "devDependencies": {

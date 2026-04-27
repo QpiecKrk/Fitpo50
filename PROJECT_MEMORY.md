@@ -57,6 +57,14 @@
 - Kolejnosc wdrozen tresciowych:
   - najpierw **Sprint 3 (AIO)**,
   - potem globalny tuning FAQ na wszystkich artykulach na bazie **realnych zapytan z wyszukiwarki** (autocomplete/PAA), a nie pytan generycznych.
+ - Aktywne automatyzacje pre-push (lokalnie przez `git push`):
+   - `reading-room-link-verifier` (karty Czytelni: poprawne URL + assety),
+   - `schema-validator` (BlogPosting/FAQPage/speakable + daty ISO),
+   - `broken-links-crawler` po eksporcie (`/tmp/fitpo50-export-check`),
+   - `adsense-readiness-check` (`ads.txt` + kod AdSense na kluczowych stronach).
+ - Aktywne automatyzacje harmonogramowe:
+   - `FAQ Refresh Report` (raz w tygodniu, raport kandydatów do odświeżenia FAQ),
+   - `Live Post-Push Check` (workflow na push do `main`, szybki live-check kluczowych URL).
 
 ## Ustalenia operacyjne (2026-04-17)
 

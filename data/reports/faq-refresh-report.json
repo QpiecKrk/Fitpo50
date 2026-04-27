@@ -1,0 +1,171 @@
+{
+  "generatedAt": "2026-04-27T19:45:27.417Z",
+  "maxAgeDays": 120,
+  "minFaq": 4,
+  "totals": {
+    "articles": 43,
+    "staleFaqCandidates": 1,
+    "lowFaqCount": 38
+  },
+  "stale": [
+    {
+      "file": "article-template-bento.html",
+      "dateModified": "{{DATE_MODIFIED}}",
+      "ageDays": null
+    }
+  ],
+  "lowFaq": [
+    {
+      "file": "ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html",
+      "faqCount": 0
+    },
+    {
+      "file": "apob-apoa-badania-cholesterol.html",
+      "faqCount": 0
+    },
+    {
+      "file": "article-template-bento.html",
+      "faqCount": 0
+    },
+    {
+      "file": "badania-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "bieganie-niszczy-kolana.html",
+      "faqCount": 0
+    },
+    {
+      "file": "bledy-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html",
+      "faqCount": 0
+    },
+    {
+      "file": "dieta-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "dlaczego-bieznia-to-za-malo.html",
+      "faqCount": 0
+    },
+    {
+      "file": "dyskopatia-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "dzieci-patrza-na-ciebie.html",
+      "faqCount": 0
+    },
+    {
+      "file": "healthspan-nie-lifespan-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "hrt-mit-badanie-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "jak-zaczac-na-silowni-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "jedz-wiecej-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "kawa-jako-preworkout-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "media-spolecznosciowe-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "motywacja-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "motywacja-zniknela-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "nawodnienie-na-treningu-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+      "faqCount": 0
+    },
+    {
+      "file": "pilates-po-50-nie-dla-kobiet.html",
+      "faqCount": 0
+    },
+    {
+      "file": "powrot-do-formy-po-50-kompletny-przewodnik.html",
+      "faqCount": 0
+    },
+    {
+      "file": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
+      "faqCount": 0
+    },
+    {
+      "file": "sen-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "siedem-bledow-silownia-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "siedzenie-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "sila-chwytu-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "silownia-dla-ludzi.html",
+      "faqCount": 0
+    },
+    {
+      "file": "suplementacja-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "syndrom-pierwszego-poniedzialku.html",
+      "faqCount": 0
+    },
+    {
+      "file": "szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
+      "faqCount": 0
+    },
+    {
+      "file": "testosteron-po-50-naturalnie-bez-trt.html",
+      "faqCount": 0
+    },
+    {
+      "file": "trening-3x30-dla-50-plus.html",
+      "faqCount": 0
+    },
+    {
+      "file": "trening-maszynowy-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
+      "faqCount": 0
+    },
+    {
+      "file": "wino-i-miesnie-po-50.html",
+      "faqCount": 0
+    },
+    {
+      "file": "wydolnosc-vo2max-starzenie-po-50.html",
+      "faqCount": 0
+    }
+  ]
+}
