@@ -237,9 +237,16 @@ function toIsoDateTimeWithTimezone(input, fallbackTime) {
   if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
     return `${raw}T${fallbackTime}${getWarsawOffset(raw)}`;
   }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(raw)) {
+    const datePart = raw.slice(0, 10);
+    return `${raw}:00${getWarsawOffset(datePart)}`;
+  }
   if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(raw)) {
     const datePart = raw.slice(0, 10);
     return `${raw}${getWarsawOffset(datePart)}`;
+  }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})$/.test(raw)) {
+    return raw.replace(/(Z|[+-]\d{2}:\d{2})$/, ':00$1');
   }
   return raw;
 }
@@ -267,8 +274,15 @@ function normalizeSeoTitleBase(rawTitle) {
   return truncateAtWordBoundary(clean, 53);
 }
 
+function normalizeMetaDescription(rawDescription) {
+  const clean = stripTags(String(rawDescription || ''))
+    .replace(/\s+/g, ' ')
+    .trim();
+  return truncateAtWordBoundary(clean, 160);
+}
+
 function buildSpeakableSelectors(hasKeyTakeaways) {
-  const selectors = ['.article-header__title', '.drop-cap'];
+  const selectors = ['.article-header__title', '.article-content p'];
   if (hasKeyTakeaways) {
     selectors.push('.key-takeaways h2', '.key-takeaways li');
   }
@@ -1774,7 +1788,7 @@ function normalizePayload(data, cliCategory) {
   const category = normalizeCategory(cliCategory || data.category || data.section || 'ciekawe');
 
   const leadRaw = String(data.lead || data.lead_paragraph || data.excerpt || '').trim();
-  const metaDescription = String(data.meta_description || data.description || data.excerpt || stripTags(leadRaw)).trim();
+  const metaDescription = normalizeMetaDescription(data.meta_description || data.description || data.excerpt || leadRaw);
 
   const datePublished = toIsoDateTimeWithTimezone(data.date_published || data.published_at || fallbackDate, '08:00:00');
   const dateModified = toIsoDateTimeWithTimezone(data.date_modified || data.updated_at || datePublished, '09:30:00');

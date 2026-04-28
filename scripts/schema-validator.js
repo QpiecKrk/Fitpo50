@@ -112,7 +112,7 @@ function validateArticleSchemas(file, html) {
     }
   }
 
-  const faqItems = (html.match(/<article\s+class="faq-item"/gi) || []).length;
+  const faqItems = (html.match(/<[^>]+class="[^"]*\bfaq-item\b[^"]*"/gi) || []).length;
   const faqSchema = firstType(parsed, 'FAQPage');
   if (faqItems > 0 && !faqSchema) {
     errors.push(`${file}: ma sekcję FAQ (${faqItems}) ale brak FAQPage schema.`);
@@ -172,4 +172,3 @@ try {
   console.error(`[FAIL] schema-validator -> ${err.message || err}`);
   process.exit(1);
 }
-

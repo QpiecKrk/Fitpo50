@@ -192,4 +192,8 @@ articles:
   title: "Jak organizm spala tłuszcz po 50-tce? Cykl krok po kroku | FitPo50"
   section: "Zdrowie"
   summary: "Dowiedz się, jak organizm spala tłuszcz zapasowy po 50-tce. Lipoliza, transport i rola mitochondriów – procesy wyjaśnione prosto i rzetelnie."
+- url: https://fitpo50.pl/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html
+  title: "Mobilność vs rozciąganie: program dla stawów po pięćdziesiątce | FitPo50"
+  section: "Ruch"
+  summary: "Mobilność to nie rozciąganie – i ta różnica zmienia wszystko po 50. Program dbania o stawy oparty na nauce, który utrzyma Twoją sprawność przez całe dekady."
 

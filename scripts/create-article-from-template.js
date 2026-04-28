@@ -33,13 +33,58 @@ function nowDate() {
   return new Date().toISOString().slice(0, 10);
 }
 
+function getWarsawOffset(dateStr) {
+  try {
+    const probeUtc = new Date(`${dateStr}T12:00:00Z`);
+    const tzValue = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Europe/Warsaw',
+      timeZoneName: 'shortOffset',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).formatToParts(probeUtc).find((p) => p.type === 'timeZoneName')?.value || 'GMT+2';
+
+    const m = tzValue.match(/^GMT([+-])(\d{1,2})(?::?(\d{2}))?$/i);
+    if (!m) return '+02:00';
+    const sign = m[1];
+    const hh = String(m[2]).padStart(2, '0');
+    const mm = String(m[3] || '00').padStart(2, '0');
+    return `${sign}${hh}:${mm}`;
+  } catch (_err) {
+    return '+02:00';
+  }
+}
+
 function toIsoDateTimeWithTimezone(input, fallbackTime = '08:00:00') {
   const raw = String(input || '').trim();
   if (!raw) return '';
   if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    return `${raw}T${fallbackTime}+02:00`;
+    return `${raw}T${fallbackTime}${getWarsawOffset(raw)}`;
+  }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(raw)) {
+    const datePart = raw.slice(0, 10);
+    return `${raw}:00${getWarsawOffset(datePart)}`;
+  }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(raw)) {
+    const datePart = raw.slice(0, 10);
+    return `${raw}${getWarsawOffset(datePart)}`;
+  }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})$/.test(raw)) {
+    return raw.replace(/(Z|[+-]\d{2}:\d{2})$/, ':00$1');
   }
   return raw;
+}
+
+function truncateAtWordBoundary(text, maxChars) {
+  const value = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!value) return '';
+  if (value.length <= maxChars) return value;
+  const slice = value.slice(0, maxChars + 1);
+  const cut = slice.lastIndexOf(' ');
+  if (cut >= Math.floor(maxChars * 0.6)) {
+    return slice.slice(0, cut).trim();
+  }
+  return value.slice(0, maxChars).trim();
 }
 
 function toIsoDuration(readingTime) {
@@ -59,7 +104,7 @@ function replaceAll(template, replacements) {
 const args = parseArgs(process.argv.slice(2));
 const slug = (args.slug || '').trim();
 const title = (args.title || '').trim();
-const description = (args.description || '').trim();
+const description = truncateAtWordBoundary((args.description || '').trim(), 160);
 const categoryRaw = (args.category || '').trim();
 
 if (!slug || !title || !description || !categoryRaw) {
