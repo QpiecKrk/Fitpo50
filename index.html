@@ -1350,13 +1350,13 @@
       </section>
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
-        <img class="latest-article__bg" id="latestArticleImage" src="./assets/mobilnosc-stawy-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        <img class="latest-article__bg" id="latestArticleImage" src="./assets/markery-krwi-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Mobilność vs rozciąganie: program dla stawów po pięćdziesiątce</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Mobilność to nie rozciąganie – i ta różnica zmienia wszystko po 50. Program dbania o stawy oparty na nauce, który utrzyma Twoją sprawność przez całe dekady.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Markery krwi: co naprawdę mówią o twoim zdrowiu?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Markery krwi to narzędzie, nie wyrok. Sprawdź, które badania mają solidne dowody naukowe, a które dają fałszywe poczucie bezpieczeństwa lub zbędny strach.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2038,10 +2038,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Mobilność vs rozciąganie: program dla stawów po pięćdziesiątce',
-        excerpt: 'Mobilność to nie rozciąganie – i ta różnica zmienia wszystko po 50. Program dbania o stawy oparty na nauce, który utrzyma Twoją sprawność przez całe dekady.',
-        image: './assets/mobilnosc-stawy-hero.webp',
-        url: 'mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html'
+        title: 'Markery krwi: co naprawdę mówią o twoim zdrowiu?',
+        excerpt: 'Markery krwi to narzędzie, nie wyrok. Sprawdź, które badania mają solidne dowody naukowe, a które dają fałszywe poczucie bezpieczeństwa lub zbędny strach.',
+        image: './assets/markery-krwi-hero.webp',
+        url: 'markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2071,7 +2071,14 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Ruch',
+          category: 'Zdrowie',
+          title: 'Markery krwi: co naprawdę mówią o twoim zdrowiu?',
+          excerpt: 'Markery krwi to narzędzie, nie wyrok. Sprawdź, które badania mają solidne dowody naukowe, a które dają fałszywe poczucie bezpieczeństwa lub zbędny strach.',
+          image: './assets/markery-krwi-hero.webp',
+          url: 'markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Mobilność vs rozciąganie: program dla stawów po pięćdziesiątce',
           excerpt: 'Mobilność to nie rozciąganie – i ta różnica zmienia wszystko po 50. Program dbania o stawy oparty na nauce, który utrzyma Twoją sprawność przez całe dekady.',
           image: './assets/mobilnosc-stawy-hero.webp',
@@ -2083,13 +2090,6 @@
           excerpt: 'Dowiedz się, jak organizm spala tłuszcz zapasowy po 50-tce. Lipoliza, transport i rola mitochondriów – procesy wyjaśnione prosto i rzetelnie.',
           image: './assets/tluszcz-energia-metabolizm-hero.webp',
           url: 'jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze',
-          excerpt: 'Tłuszcz trzewny otacza Twoje organy i produkuje hormony zapalne. Poznaj naukowe metody jego redukcji po 50. roku życia. Sprawdź, jak sen i stres wpływają na wagę.',
-          image: './assets/tluszcz-trzewny-hero.webp',
-          url: 'tluszcz-trzewny-choroby-jak-walczyc.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
