@@ -6,13 +6,8 @@ function run(cmd, args) {
   return spawnSync(cmd, args, { encoding: 'utf8' });
 }
 
-function readChangedFiles() {
-  const diff = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
-  if (diff.status !== 0) {
-    const msg = String(diff.stderr || diff.stdout || '').trim();
-    throw new Error(`Nie udało się odczytać diff origin/main...HEAD: ${msg}`);
-  }
-  return String(diff.stdout || '')
+function parseNameStatus(output) {
+  return String(output || '')
     .split('\n')
     .map((s) => s.trim())
     .filter(Boolean)
@@ -22,6 +17,22 @@ function readChangedFiles() {
     })
     .filter((x) => x.status === 'A')
     .map((x) => x.file);
+}
+
+function readChangedFiles() {
+  const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
+  if (primary.status === 0) {
+    return parseNameStatus(primary.stdout);
+  }
+
+  // CI fallback: shallow/detached checkout often lacks origin/main.
+  const fallback = run('git', ['diff', '--name-status', 'HEAD~1..HEAD']);
+  if (fallback.status === 0) {
+    return parseNameStatus(fallback.stdout);
+  }
+
+  const msg = String(primary.stderr || primary.stdout || fallback.stderr || fallback.stdout || '').trim();
+  throw new Error(`Nie udało się odczytać diff (origin/main...HEAD ani HEAD~1..HEAD): ${msg}`);
 }
 
 function main() {
