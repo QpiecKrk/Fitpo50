@@ -1,7 +1,38 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-27T11:27:54+00:00",
+    "updatedAt": "2026-04-28T04:36:26+00:00",
     "items": [
+        {
+            "id": "news_cef3534f25c4",
+            "title": "Jedno wstrzyknięcie i słuch wraca? Przełom w terapii genowej",
+            "content_html": "<p><span>Nowe <a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">badanie</a> opublikowane w </span><span><span class=\"news-text-tone--4\"><span></span><span>Nature</span></span> pokazuje, że terapia genowa może realnie <span class=\"news-text-tone--1\">przywracać słuch</span> u osób z wrodzoną głuchotą.</span></p><p><span>Chodzi o mutację w genie </span><span><strong><span></span><span>OTOF</span></strong>, która zaburza przekazywanie dźwięku w uchu wewnętrznym.</span><span><br>\n</span><span>Naukowcy zastosowali jednorazowe wstrzyknięcie „<span class=\"news-text-tone--1\">sprawnego</span>” genu bezpośrednio do ucha.</span></p><p><span>Efekt:</span><span><br>\n</span><span>👉 poprawa słuchu u około </span><span><strong><span></span><span>90% pacjentów</span></strong><br>\n</span><span>👉 działanie utrzymywało się nawet do </span><strong><span>2,5 roku</span></strong></p><p><span>W badaniu wzięły udział <strong>42</strong> osoby. To jak dotąd największe i najdłuższe badanie tego typu.</span></p><p><span>Co ważne – to dopiero początek.</span><span><br>\n</span><span>Terapia działa tylko w konkretnym typie genetycznej głuchoty, ale naukowcy już pracują nad rozszerzeniem tej metody na inne przypadki.</span></p><p><strong>Terapia genowa zaczyna realnie „naprawiać” przyczynę choroby, a nie tylko jej objawy.</strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260426_192640_c2c547b1.avif",
+                "webp": "./assets/news/news_20260426_192640_c2c547b1.webp",
+                "jpg": "./assets/news/news_20260426_192640_c2c547b1.jpg",
+                "alt": "Geny słuch",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Nature – Gene therapy for OTOF hearing loss",
+                    "url": "https://www.nature.com"
+                },
+                {
+                    "label": "Mass General Brigham – Clinical trial results",
+                    "url": "https://www.massgeneralbrigham.org"
+                },
+                {
+                    "label": "Fudan University – Hearing gene therapy research",
+                    "url": "https://www.fudan.edu.cn"
+                }
+            ],
+            "updated_at": "2026-04-28T04:36:26+00:00",
+            "published_at": "2026-04-28T04:36:26+00:00",
+            "excerpt": "Nowe badanie opublikowane w Nature pokazuje, że terapia genowa może realnie przywracać słuch u osób z wrodzoną głuchotą.Chodzi o mutację w genie OTOF, która zaburza przekazywanie dźwięku w uchu wewnętrznym. Naukowcy zas…"
+        },
         {
             "id": "news_b89e05e1dd56",
             "title": "Aspiryna a rak jelita: pomaga, ale nie dla każdego",
