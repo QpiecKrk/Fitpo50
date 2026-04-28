@@ -22,6 +22,7 @@
     "prepush:diff-guard": "node scripts/prepush-diff-guard.js",
     "smoke:static": "node scripts/static-smoke-check.js /tmp/fitpo50-export-check",
     "broken-links:crawl": "node scripts/broken-links-crawler.js /tmp/fitpo50-export-check",
+    "hostinger:clean-repo": "bash scripts/hostinger-clean-repo.sh",
     "workflow:maintenance": "node scripts/workflow-maintenance-check.js",
     "check:build-export": "npm run build && SKIP_TS_BUILD=1 ./scripts/export_site.sh /tmp/fitpo50-export-check && npm run smoke:static && npm run broken-links:crawl",
     "prepush:local": "npm run prepush:diff-guard && npm run predeploy:check && npm run news:integrity && npm run article:guard:diff && npm run reading-room:verify && npm run schema:validate && npm run adsense:readiness && npm run json:gate:diff && npm run check:build-export",
