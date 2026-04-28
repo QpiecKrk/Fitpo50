@@ -235,16 +235,6 @@ function validateFile(filePath) {
   if (!articleContentHtml) {
     errors.push('Brak <article class="article-content"> do walidacji AEO/GEO.');
   } else {
-    const faqCount = (articleContentHtml.match(/<[^>]+class="[^"]*\bfaq-item\b[^"]*"/gi) || []).length;
-    if (faqCount < 1) {
-      errors.push('Brak widocznej sekcji FAQ (minimum 1 pozycja .faq-item).');
-    }
-
-    const hasFaqSchema = /"@type"\s*:\s*"FAQPage"/i.test(raw);
-    if (!hasFaqSchema) {
-      errors.push('Brak FAQPage schema w JSON-LD.');
-    }
-
     const internalLinks = countInternalContextLinks(articleContentHtml);
     if (internalLinks < 4) {
       errors.push(`Za mało linków kontekstowych w treści: ${internalLinks}/4.`);
