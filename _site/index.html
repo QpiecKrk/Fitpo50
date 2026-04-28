@@ -1350,13 +1350,13 @@
       </section>
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
-        <img class="latest-article__bg" id="latestArticleImage" src="./assets/tluszcz-trzewny-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        <img class="latest-article__bg" id="latestArticleImage" src="./assets/tluszcz-energia-metabolizm-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Tłuszcz trzewny otacza Twoje organy i produkuje hormony zapalne. Poznaj naukowe metody jego redukcji po 50. roku życia. Sprawdź, jak sen i stres wpływają na wagę.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="tluszcz-trzewny-choroby-jak-walczyc.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Jak organizm spala tłuszcz po 50-tce? Cykl krok po kroku</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Dowiedz się, jak organizm spala tłuszcz zapasowy po 50-tce. Lipoliza, transport i rola mitochondriów – procesy wyjaśnione prosto i rzetelnie.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2038,10 +2038,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze',
-        excerpt: 'Tłuszcz trzewny otacza Twoje organy i produkuje hormony zapalne. Poznaj naukowe metody jego redukcji po 50. roku życia. Sprawdź, jak sen i stres wpływają na wagę.',
-        image: './assets/tluszcz-trzewny-hero.webp',
-        url: 'tluszcz-trzewny-choroby-jak-walczyc.html'
+        title: 'Jak organizm spala tłuszcz po 50-tce? Cykl krok po kroku',
+        excerpt: 'Dowiedz się, jak organizm spala tłuszcz zapasowy po 50-tce. Lipoliza, transport i rola mitochondriów – procesy wyjaśnione prosto i rzetelnie.',
+        image: './assets/tluszcz-energia-metabolizm-hero.webp',
+        url: 'jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2072,6 +2072,13 @@
       const fallback = [
         {
           category: 'Zdrowie',
+          title: 'Jak organizm spala tłuszcz po 50-tce? Cykl krok po kroku',
+          excerpt: 'Dowiedz się, jak organizm spala tłuszcz zapasowy po 50-tce. Lipoliza, transport i rola mitochondriów – procesy wyjaśnione prosto i rzetelnie.',
+          image: './assets/tluszcz-energia-metabolizm-hero.webp',
+          url: 'jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze',
           excerpt: 'Tłuszcz trzewny otacza Twoje organy i produkuje hormony zapalne. Poznaj naukowe metody jego redukcji po 50. roku życia. Sprawdź, jak sen i stres wpływają na wagę.',
           image: './assets/tluszcz-trzewny-hero.webp',
@@ -2083,13 +2090,6 @@
           excerpt: 'Apple Watch pokazuje moc w watach. Poznaj obiektywną metrykę zdrowia serca i mitochondriów po 50. roku życia. Dowiedz się, jak trenować mądrzej i żyć dłużej.',
           image: './assets/waty-trening-apple-watch-hero.webp',
           url: 'waty-apple-watch-moc-zdrowie-po-50.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Post przerywany po 50-tce: korzyści i ryzyko dla mięśni',
-          excerpt: 'Post przerywany po 50-tce: co mówią badania o korzyściach metabolicznych i ryzyku utraty mięśni? Praktyczny przewodnik oparty na najnowszych meta-analizach.',
-          image: './assets/if-50plus-hero.webp',
-          url: 'post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

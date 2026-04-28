@@ -188,4 +188,8 @@ articles:
   title: "Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze | FitPo50"
   section: "Zdrowie"
   summary: "Tłuszcz trzewny otacza Twoje organy i produkuje hormony zapalne. Poznaj naukowe metody jego redukcji po 50. roku życia. Sprawdź, jak sen i stres wpływają na wagę."
+- url: https://fitpo50.pl/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html
+  title: "Jak organizm spala tłuszcz po 50-tce? Cykl krok po kroku | FitPo50"
+  section: "Zdrowie"
+  summary: "Dowiedz się, jak organizm spala tłuszcz zapasowy po 50-tce. Lipoliza, transport i rola mitochondriów – procesy wyjaśnione prosto i rzetelnie."
 
