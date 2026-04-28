@@ -7,7 +7,7 @@ function run(cmd, args) {
 }
 
 function readChangedFiles() {
-  const diff = run('git', ['diff', '--name-only', 'origin/main...HEAD']);
+  const diff = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
   if (diff.status !== 0) {
     const msg = String(diff.stderr || diff.stdout || '').trim();
     throw new Error(`Nie udało się odczytać diff origin/main...HEAD: ${msg}`);
@@ -15,7 +15,13 @@ function readChangedFiles() {
   return String(diff.stdout || '')
     .split('\n')
     .map((s) => s.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+    .map((line) => {
+      const parts = line.split('\t');
+      return { status: parts[0], file: parts[1] || '' };
+    })
+    .filter((x) => x.status === 'A')
+    .map((x) => x.file);
 }
 
 function main() {
@@ -37,4 +43,3 @@ try {
   console.error(`[FAIL] article:guard:diff -> ${err.message || err}`);
   process.exit(1);
 }
-
