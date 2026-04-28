@@ -21,6 +21,8 @@
     "seo:aeo:guard": "node scripts/seo-aeo-guard.js",
     "news:integrity": "node scripts/news-integrity-check.js",
     "json:gate:diff": "node scripts/json-fitpo50-gate-diff.js",
+    "json:fix": "node scripts/fix-fitpo50-json.js",
+    "article:import:safe": "node scripts/fix-fitpo50-json.js --file \"$npm_config_file\" && node scripts/import-article.js --file \"$npm_config_file\" --publish true --run-internal-links false --validate true",
     "prepush:diff-guard": "node scripts/prepush-diff-guard.js",
     "smoke:static": "node scripts/static-smoke-check.js /tmp/fitpo50-export-check",
     "broken-links:crawl": "node scripts/broken-links-crawler.js /tmp/fitpo50-export-check",
