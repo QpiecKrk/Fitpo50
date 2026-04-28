@@ -330,6 +330,18 @@
 <link rel="stylesheet" href="./style.css?v=1.4">
 
 <style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   background: linear-gradient(180deg, #efe7da 0%, #f4efe6 100%);
@@ -714,6 +726,8 @@ main .container {
   gap: 10px;
   color: #f5e6dc;
   font-size: 0.84rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .catalog-toolbar__summary strong {
