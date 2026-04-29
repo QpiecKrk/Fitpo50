@@ -13,9 +13,13 @@ function parseNameStatus(output) {
     .filter(Boolean)
     .map((line) => {
       const parts = line.split('\t');
-      return { status: parts[0], file: parts[1] || '' };
+      const status = String(parts[0] || '').trim();
+      const file = status.startsWith('R') || status.startsWith('C')
+        ? (parts[2] || '')
+        : (parts[1] || '');
+      return { status, file };
     })
-    .filter((x) => x.status === 'A')
+    .filter((x) => x.file && !x.status.startsWith('D'))
     .map((x) => x.file);
 }
 
