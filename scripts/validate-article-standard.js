@@ -92,6 +92,28 @@ function validateAnswerFirstParagraphs(raw, errors) {
   }
 }
 
+function validateInlineFiguresUsePicture(articleContentHtml, errors) {
+  const figureRx = /<figure\b[^>]*class="[^"]*\binline-figure\b[^"]*"[^>]*>([\s\S]*?)<\/figure>/gi;
+  let idx = 0;
+  for (const m of articleContentHtml.matchAll(figureRx)) {
+    idx += 1;
+    const figureHtml = String(m[1] || '');
+    if (!/<picture\b/i.test(figureHtml)) {
+      errors.push(`Inline figure #${idx}: brak tagu <picture> (wymagane AVIF/WebP + fallback).`);
+      continue;
+    }
+    if (!/<source\b[^>]*type="image\/avif"/i.test(figureHtml)) {
+      errors.push(`Inline figure #${idx}: brak source dla AVIF.`);
+    }
+    if (!/<source\b[^>]*type="image\/webp"/i.test(figureHtml)) {
+      errors.push(`Inline figure #${idx}: brak source dla WebP.`);
+    }
+    if (!/<img\b/i.test(figureHtml)) {
+      errors.push(`Inline figure #${idx}: brak fallback <img>.`);
+    }
+  }
+}
+
 function validateFile(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
@@ -235,6 +257,7 @@ function validateFile(filePath) {
   if (!articleContentHtml) {
     errors.push('Brak <article class="article-content"> do walidacji AEO/GEO.');
   } else {
+    validateInlineFiguresUsePicture(articleContentHtml, errors);
     const internalLinks = countInternalContextLinks(articleContentHtml);
     if (internalLinks < 4) {
       errors.push(`Za mało linków kontekstowych w treści: ${internalLinks}/4.`);

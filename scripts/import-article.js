@@ -458,10 +458,9 @@ function normalizeSections(rawSections) {
       const imgAlt = String(entry.image.alt || title || 'Grafika artykułu').trim();
       const imgCaption = String(entry.image.caption || '').trim();
       if (imgSrc) {
-        const safeSrc = escapeHtml(imgSrc);
         blocks.push({
           type: 'html',
-          html: `<figure class="inline-figure"><img src="${safeSrc}" alt="${escapeHtml(imgAlt)}" loading="lazy">${imgCaption ? `<figcaption>${escapeHtml(imgCaption)}</figcaption>` : ''}</figure>`,
+          html: toInlinePictureHtml(imgSrc, imgAlt, imgCaption),
         });
       }
     }
@@ -493,6 +492,20 @@ function countInternalHtmlLinks(htmlChunks) {
     }
   }
   return unique.size;
+}
+
+function toInlinePictureHtml(imgSrc, imgAlt, imgCaption) {
+  const normalizedSrc = String(imgSrc || '').trim();
+  const escapedAlt = escapeHtml(String(imgAlt || 'Grafika artykułu').trim());
+  const escapedCaption = escapeHtml(String(imgCaption || '').trim());
+  const localSrcMatch = normalizedSrc.match(/^(.*)\.(avif|webp|jpe?g|png)$/i);
+
+  if (!localSrcMatch) {
+    return `<figure class="inline-figure"><img src="${escapeHtml(normalizedSrc)}" alt="${escapedAlt}" loading="lazy">${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
+  }
+
+  const base = localSrcMatch[1];
+  return `<figure class="inline-figure"><picture><source srcset="${escapeHtml(`${base}.avif`)}" type="image/avif"><source srcset="${escapeHtml(`${base}.webp`)}" type="image/webp"><img src="${escapeHtml(`${base}.jpg`)}" alt="${escapedAlt}" loading="lazy"></picture>${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
 }
 
 function commandExists(bin) {
