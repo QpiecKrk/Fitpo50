@@ -200,4 +200,8 @@ articles:
   title: "Markery krwi: co naprawdę mówią o twoim zdrowiu? | FitPo50"
   section: "Zdrowie"
   summary: "Markery krwi to narzędzie, nie wyrok. Sprawdź, które badania mają solidne dowody naukowe, a które dają fałszywe poczucie bezpieczeństwa lub zbędny strach."
+- url: https://fitpo50.pl/waga-smart-pomiar-skladu-ciala-prawda.html
+  title: "Waga łazienkowa smart: Ile z 16 parametrów to prawda? | FitPo50"
+  section: "Ciekawe"
+  summary: "Nowoczesna waga smart mierzy BMI, tłuszcz trzewny i masę mięśni. Sprawdź, które parametry są wiarygodne po 50. roku życia, a które to tylko marketingowy"
 
