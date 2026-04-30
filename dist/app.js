@@ -457,18 +457,34 @@
         return url.origin === window.location.origin
             && /^\/assets\/pdf\/[^/]+\.pdf$/i.test(url.pathname);
     }
-    document.addEventListener('click', (event) => {
-        var _a;
-        const anchor = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest('a[href]');
-        if (!anchor || !isArticlePdfDownload(anchor) || typeof googleTagWindow.gtag !== 'function') {
+    function trackPdfDownloadConversion(anchor) {
+        const href = new URL(anchor.href, window.location.href);
+        const eventLabel = href.pathname;
+        const gtag = googleTagWindow.gtag;
+        if (typeof gtag !== 'function')
             return;
-        }
-        googleTagWindow.gtag('event', 'conversion', {
+        // Keep this event for GA4 diagnostics so we can compare Ads vs GA4 counts.
+        gtag('event', 'file_download', {
+            file_extension: 'pdf',
+            file_name: href.pathname.split('/').pop() || '',
+            link_url: href.href,
+            link_domain: href.hostname,
+            send_to: 'G-S21SKTVM7K'
+        });
+        gtag('event', 'conversion', {
             send_to: googleAdsPdfConversionId,
             value: 1.0,
             currency: 'PLN',
-            event_label: new URL(anchor.href, window.location.href).pathname
+            event_label: eventLabel,
+            transport_type: 'beacon'
         });
+    }
+    document.addEventListener('click', (event) => {
+        var _a;
+        const anchor = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest('a[href]');
+        if (!anchor || !isArticlePdfDownload(anchor))
+            return;
+        trackPdfDownloadConversion(anchor);
     });
     // ----------------------------------------------------------
     // SMOOTH SCROLL for hash links

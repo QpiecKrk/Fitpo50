@@ -523,18 +523,35 @@
       && /^\/assets\/pdf\/[^/]+\.pdf$/i.test(url.pathname);
   }
 
-  document.addEventListener('click', (event) => {
-    const anchor = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
-    if (!anchor || !isArticlePdfDownload(anchor) || typeof googleTagWindow.gtag !== 'function') {
-      return;
-    }
+  function trackPdfDownloadConversion(anchor: HTMLAnchorElement): void {
+    const href = new URL(anchor.href, window.location.href);
+    const eventLabel = href.pathname;
+    const gtag = googleTagWindow.gtag;
 
-    googleTagWindow.gtag('event', 'conversion', {
+    if (typeof gtag !== 'function') return;
+
+    // Keep this event for GA4 diagnostics so we can compare Ads vs GA4 counts.
+    gtag('event', 'file_download', {
+      file_extension: 'pdf',
+      file_name: href.pathname.split('/').pop() || '',
+      link_url: href.href,
+      link_domain: href.hostname,
+      send_to: 'G-S21SKTVM7K'
+    });
+
+    gtag('event', 'conversion', {
       send_to: googleAdsPdfConversionId,
       value: 1.0,
       currency: 'PLN',
-      event_label: new URL(anchor.href, window.location.href).pathname
+      event_label: eventLabel,
+      transport_type: 'beacon'
     });
+  }
+
+  document.addEventListener('click', (event) => {
+    const anchor = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
+    if (!anchor || !isArticlePdfDownload(anchor)) return;
+    trackPdfDownloadConversion(anchor);
   });
 
   // ----------------------------------------------------------
