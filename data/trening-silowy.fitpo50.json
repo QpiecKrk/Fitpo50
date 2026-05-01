@@ -1,7 +1,7 @@
 {
   "title": "Trening siłowy po 50: Jak odmłodzić swoje komórki i DNA?",
   "slug": "trening-silowy-starzenie-komorkowe-dna",
-  "meta_description": "Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń tygodniowo.",
+  "meta_description": "Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie dzięki 60 minutom ćwiczeń tygodniowo.",
   "category": "ruch",
   "lead": "Trening siłowy to znacznie więcej niż budowanie mięśni czy poprawa sylwetki – to potężna interwencja biologiczna, która zmienia sposób, w jaki starzeje się Twoje ciała na poziomie komórkowym. Najnowsze badania wykazują, że regularny opór mięśniowy aktywuje enzymy naprawcze DNA, wydłuża telomery (ochronne końcówki chromosomów) i uwalnia miokininy, które działają jak naturalny nawóz dla Twojego mózgu. Dla osoby po 50. roku życia każda sesja z obciążeniem to sygnał wysyłany do organizmu: „nadal jesteśmy w fazie wzrostu i regeneracji”, co pozwala realnie obniżyć wiek biologiczny nawet o kilka lat.",
   "reading_time": "12 min",
@@ -173,35 +173,6 @@
     {
       "label": "Endocrine Reviews: Muscle-Organ Crosstalk and Myokines, 2020",
       "url": "https://pubmed.ncbi.nlm.nih.gov/32101302/"
-    }
-  ],
-  "related_articles": [
-    {
-      "url": "zdrowie.html",
-      "image": "sarkopenia-test-thumb",
-      "alt": "Test wstawania z krzesła",
-      "category": "zdrowie",
-      "time": "10 min",
-      "title": "Sarkopenia: Cicha epidemia po 50-tce",
-      "description": "Jak rozpoznać utratę mięśni i dlaczego to groźniejsze niż tłuszcz."
-    },
-    {
-      "url": "jedzenie.html",
-      "image": "bialko-senior-thumb",
-      "alt": "Produkty wysokobiałkowe na stole",
-      "category": "jedzenie",
-      "time": "9 min",
-      "title": "Białko po 50-tce: Ile go naprawdę potrzebujesz?",
-      "description": "Klucz do budowy mięśni i regeneracji w dojrzałym wieku."
-    },
-    {
-      "url": "rusz-sie.html",
-      "image": "trening-silowy-poczatek-thumb",
-      "alt": "Pierwszy trening na siłowni",
-      "category": "ruch",
-      "time": "15 min",
-      "title": "Plan treningowy: Twoje pierwsze 12 tygodni",
-      "description": "Bezpieczny i skuteczny przewodnik po siłowni dla osób 50+."
     }
   ],
   "image_prompts": [
