@@ -43,7 +43,8 @@ function parseDiffHtmlFiles() {
   return String(diff.stdout || '')
     .split('\n')
     .map((s) => normalizeRel(s))
-    .filter((f) => f.endsWith('.html') && !f.startsWith('_site/'));
+    .filter((f) => f.endsWith('.html') && !f.startsWith('_site/'))
+    .filter((f) => fs.existsSync(path.join(ROOT, f)));
 }
 
 function allArticleFiles() {
@@ -156,4 +157,3 @@ try {
   console.error(`[FAIL] reading-room-link-verifier -> ${err.message || err}`);
   process.exit(1);
 }
-
