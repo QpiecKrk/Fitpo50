@@ -204,4 +204,8 @@ articles:
   title: "Waga łazienkowa smart: Ile z 16 parametrów to prawda? | FitPo50"
   section: "Ciekawe"
   summary: "Nowoczesna waga smart mierzy BMI, tłuszcz trzewny i masę mięśni. Sprawdź, które parametry są wiarygodne po 50. roku życia, a które to tylko marketingowy"
+- url: https://fitpo50.pl/upf-jedzenie-ultra-przetworzone-uzaleznienie.html
+  title: "Czy jedzenie uzależnia jak narkotyki? Prawda o UPF po 50-tce | FitPo50"
+  section: "Jedzenie"
+  summary: "Żywność ultra-przetworzona aktywuje te same ośrodki w mózgu co kokaina. Dowiedz się, dlaczego kobiety po 50-tce są najbardziej narażone i jak wyjść z pułapki"
 

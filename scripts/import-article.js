@@ -155,6 +155,7 @@ function printUsage() {
     '  --sync-site true|false          mirror changes to _site (default: true)',
     '  --run-internal-links true|false run PHP internal-link helper (default: false)',
     '  --validate true|false           run article validator (default: true)',
+    '  --faq-strict true|false         require FAQ from real web research metadata (default: true)',
     '  --force true|false              overwrite existing article HTML (default: false)',
     '  --category <key>                override JSON category',
     '  --help                          show this help',
@@ -365,6 +366,43 @@ function normalizeFaq(raw) {
     out.push({ question, answerHtml });
   }
   return out;
+}
+
+function normalizeFaqResearch(raw) {
+  const out = [];
+  for (const item of normalizeArray(raw)) {
+    if (!item || typeof item !== 'object') continue;
+    const question = String(item.question || item.q || '').trim();
+    const sourceLabel = String(item.source_label || item.label || '').trim();
+    const sourceUrl = String(item.source_url || item.url || '').trim();
+    if (!question || !sourceLabel || !sourceUrl) continue;
+    if (!/^https?:\/\//i.test(sourceUrl)) continue;
+    out.push({ question, sourceLabel, sourceUrl });
+  }
+  return out;
+}
+
+function isFaqPlaceholder(question, answerHtml) {
+  const q = String(question || '').trim().toLowerCase();
+  const a = stripTags(answerHtml || '').trim().toLowerCase();
+  if (!q || !a) return true;
+  if (q.includes('pytanie do doprecyzowania')) return true;
+  if (a.includes('odpowiedź do uzupełnienia') || a.includes('odpowiedz do uzupelnienia')) return true;
+  return false;
+}
+
+function containsEditorialPlaceholder(text) {
+  const value = String(text || '');
+  if (!value) return false;
+  const patterns = [
+    /do uzupełnienia redakcyjnego/i,
+    /do uzupelnienia redakcyjnego/i,
+    /pytanie do doprecyzowania/i,
+    /odpowiedź do uzupełnienia/i,
+    /odpowiedz do uzupelnienia/i,
+    /\{\{[^}]+\}\}/,
+  ];
+  return patterns.some((rx) => rx.test(value));
 }
 
 function ensureMinFaqFromNetworkSeeds(faqItems, categoryKey, contextTitle) {
@@ -831,20 +869,37 @@ function buildSafeRelatedDefaults({ currentSlug, currentCategory, readingTime, h
   });
 }
 
-function validateInput(data) {
+function validateInput(data, opts = {}) {
+  const faqStrict = opts.faqStrict !== false;
   const errors = [];
   const autoFixes = [];
   const title = String(data.title || '').trim();
   if (!title) errors.push('Brak pola title.');
+  if (containsEditorialPlaceholder(title)) {
+    errors.push('Title: wykryto placeholder redakcyjny.');
+  }
+  if (/\bi\s+cofnąć\s*$/i.test(title)) {
+    errors.push('Title: wygląda na urwany (kończy się na "i cofnąć"). Uzupełnij pełny sens.');
+  }
+  const seoTitleRaw = String(data.seo_title || data.meta_title || '').trim();
+  if (seoTitleRaw && /\bi\s+cofnąć\s*$/i.test(seoTitleRaw)) {
+    errors.push('SEO title: wygląda na urwany (kończy się na "i cofnąć"). Uzupełnij pełny sens.');
+  }
 
   const lead = String(data.lead || data.lead_paragraph || '').trim();
   if (!lead) errors.push('Brak pola lead / lead_paragraph.');
+  if (containsEditorialPlaceholder(lead)) {
+    errors.push('Lead: wykryto placeholder redakcyjny.');
+  }
 
   const sections = normalizeSections(data.sections || []);
   if (!sections.length) errors.push('Brak sekcji: sections[].');
   if (sections.length > 0) {
     const sectionParagraphErrors = [];
     for (const section of sections) {
+      if (containsEditorialPlaceholder(section.title)) {
+        sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": wykryto placeholder w tytule.`);
+      }
       const firstParagraph = section.blocks.find((b) => b.type === 'paragraph' && String(b.html || '').trim());
       if (!firstParagraph) {
         sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}" nie ma akapitu otwierającego.`);
@@ -856,6 +911,13 @@ function validateInput(data) {
           `Sekcja "${section.title || '(bez tytułu)'}": pierwszy akapit ma ${words} słów (<35). ` +
           'Import przejdzie, ale warto ręcznie rozwinąć odpowiedź na pytanie sekcji.'
         );
+      }
+
+      for (const block of section.blocks) {
+        if (containsEditorialPlaceholder(block.html || '')) {
+          sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": wykryto placeholder w treści/boxie.`);
+          break;
+        }
       }
     }
     errors.push(...sectionParagraphErrors);
@@ -902,6 +964,34 @@ function validateInput(data) {
     if (url && !/^https?:\/\//i.test(url)) errors.push(`Źródło #${idx}: url musi zaczynać się od http:// lub https://.`);
     if (label && isGenericSourceLabel(label)) {
       errors.push(`Źródło #${idx}: label "${label}" jest zbyt ogólny. Podaj pełną nazwę źródła.`);
+    }
+  }
+
+  const faqItems = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
+  if (faqStrict) {
+    const faqResearch = normalizeFaqResearch(data.faq_research || data.faq_sources || []);
+    if (faqItems.length < MIN_FAQ_ITEMS) {
+      errors.push(`FAQ: wymagane minimum ${MIN_FAQ_ITEMS} pytań (bez auto-dopisywania).`);
+    }
+    const placeholderIdx = faqItems.findIndex((it) => isFaqPlaceholder(it.question, it.answerHtml));
+    if (placeholderIdx >= 0) {
+      errors.push(`FAQ #${placeholderIdx + 1}: wykryto placeholder. Uzupełnij realne pytanie i odpowiedź.`);
+    }
+    const faqPlaceholderAny = faqItems.findIndex((it) => containsEditorialPlaceholder(it.question) || containsEditorialPlaceholder(it.answerHtml));
+    if (faqPlaceholderAny >= 0) {
+      errors.push(`FAQ #${faqPlaceholderAny + 1}: wykryto placeholder redakcyjny.`);
+    }
+    if (faqResearch.length < MIN_FAQ_ITEMS) {
+      errors.push(
+        `FAQ research: dodaj minimum ${MIN_FAQ_ITEMS} wpisy w faq_research[] z polami question + source_label + source_url (pytania z sieci: autocomplete/PAA).`
+      );
+    }
+    const researchQuestions = new Set(faqResearch.map((x) => x.question.toLowerCase()));
+    for (let i = 0; i < Math.min(faqItems.length, MIN_FAQ_ITEMS); i += 1) {
+      const q = String(faqItems[i].question || '').trim().toLowerCase();
+      if (!researchQuestions.has(q)) {
+        errors.push(`FAQ #${i + 1}: pytanie nie ma potwierdzenia w faq_research[].`);
+      }
     }
   }
 
@@ -1791,7 +1881,8 @@ function writeCrosslinkSuggestions(payload, dryRun) {
   return outPath;
 }
 
-function normalizePayload(data, cliCategory) {
+function normalizePayload(data, cliCategory, options = {}) {
+  const faqStrict = options.faqStrict !== false;
   const now = new Date();
   const fallbackDate = now.toISOString().slice(0, 10);
 
@@ -1815,7 +1906,9 @@ function normalizePayload(data, cliCategory) {
   const keyTakeaways = normalizeKeyTakeaways(data.key_takeaways || data.takeaways || []);
   const sections = normalizeSections(data.sections || []);
   const faqNormalized = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
-  const faqAuto = ensureMinFaqFromNetworkSeeds(faqNormalized, category.key, title || slug || 'artykuł');
+  const faqAuto = faqStrict
+    ? { faq: faqNormalized, notes: [] }
+    : ensureMinFaqFromNetworkSeeds(faqNormalized, category.key, title || slug || 'artykuł');
   const faqItems = faqAuto.faq;
   const sources = normalizeSources(data.sources || []);
 
@@ -1995,6 +2088,7 @@ function main() {
   const syncSite = boolOpt(args['sync-site'], true);
   const runInternal = boolOpt(args['run-internal-links'], false);
   const runValidate = boolOpt(args.validate, true);
+  const faqStrict = boolOpt(args['faq-strict'], true);
   const precheckOnly = boolOpt(args.precheck, false) || boolOpt(args['check-only'], false);
   const force = boolOpt(args.force, false);
 
@@ -2011,9 +2105,9 @@ function main() {
   }
 
   const json = parseJsonFile(resolvedInput);
-  const payload = normalizePayload(json, args.category);
+  const payload = normalizePayload(json, args.category, { faqStrict });
   const assetPrep = autoPrepareArticleAssets(payload, syncSite, [path.dirname(resolvedInput)]);
-  const check = validateInput(json);
+  const check = validateInput(json, { faqStrict });
   const precheck = buildPrecheckReport({
     inputPath: resolvedInput,
     json,

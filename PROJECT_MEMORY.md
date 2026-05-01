@@ -204,6 +204,41 @@
 - **Komenda publikacyjna (zalecana):**
   - `node scripts/import-article.js --file "<sciezka/do/pliku.fitpo50.json>" --publish true --run-internal-links false --validate true`
 
+## Ustalenia operacyjne (2026-05-01) - szybki pipeline + twarda kontrola FAQ (SEO/AEO/GEO/AIO)
+
+- **Jedna komenda publikacyjna (szybciej, bez pomijania kontroli):**
+  - `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --force <true|false>`
+  - Pipeline wykonuje sekwencję:
+    1) precheck,
+    2) import + walidacja + PDF + sync,
+    3) gate slugowy `predeploy-gate`.
+  - `npm` alias: `npm run article:pipeline -- --file "<...>" --category ciekawe --force true`
+
+- **FAQ z sieci (bez pytań „z głowy”) - zasada twarda:**
+  - Importer działa domyślnie w trybie `--faq-strict true`.
+  - Artykuł nie przechodzi, jeśli:
+    - FAQ ma mniej niż 4 pytania,
+    - FAQ zawiera placeholdery,
+    - brak `faq_research[]` z minimum 4 wpisami.
+  - Wymagany format `faq_research[]`:
+    - `question`
+    - `source_label`
+    - `source_url` (`https://...`)
+  - Każde pytanie FAQ musi mieć odpowiednik w `faq_research[]`.
+
+- **Anty-placeholder (twardy FAIL):**
+  - Artykuł nie przechodzi importu, jeśli zawiera jakiekolwiek placeholdery redakcyjne w tytule, leadzie, sekcjach, boxach lub FAQ.
+  - Blokowane frazy obejmują m.in.:
+    - `Do uzupełnienia redakcyjnego`
+    - `Pytanie do doprecyzowania`
+    - `Odpowiedź do uzupełnienia`
+    - nierozwiązane znaczniki `{{...}}`
+  - Dodatkowy bezpiecznik SEO: tytuły urwane (np. kończące się na `i cofnąć`) są traktowane jako błąd blokujący.
+
+- **Schema obowiązkowe dla każdego artykułu:**
+  - `BlogPosting` (z datami ISO, `speakable`, zgodnością z metadanymi strony),
+  - `FAQPage` (zgodny 1:1 z widoczną sekcją FAQ).
+
 - **Kontrola po imporcie (obowiazkowa):**
   - uruchom gate przed deployem: `npm run predeploy:check` (oraz wariant ze slugiem: `node scripts/predeploy-gate.js --slug <slug>`),
   - sprawdz obecność artykulu w `index.html`, `porady.html` i stronie kategorii,

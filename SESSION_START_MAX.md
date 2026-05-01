@@ -47,8 +47,13 @@ Zasady:
 
 Publikacja artykulow:
 - kanoniczny flow publikacji artykulow: `scripts/import-article.js` (`.fitpo50.json` + precheck); `article-template-bento.html` / `create-article-from-template.js` tylko do recznych szkicow,
+- preferuj szybki pipeline jednej komendy: `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --force <true|false>`,
 - obowiazkowo uruchom walidator standardu: `node scripts/validate-article-standard.js <plik.html>`,
 - obowiazkowo generuj PDF artykulu i podpinaj duzy przycisk w hero: `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>` (albo hurtowo: `npm run article:pdf:sync`),
+- FAQ ma byc oparte o realne pytania z sieci (autocomplete/PAA), nie wymyslane; wymagane `faq_research[]` (min. 4 wpisy: `question`, `source_label`, `source_url`),
+- w imporcie trzymaj `--faq-strict true` (domyslnie), czyli brak `faq_research[]` lub placeholdery FAQ = twardy FAIL,
+- placeholdery redakcyjne (np. "Do uzupełnienia redakcyjnego", "Pytanie do doprecyzowania", "Odpowiedź do uzupełnienia", `{{...}}`) sa twardym FAIL importu w całym artykule (nie tylko FAQ),
+- tytul urwany (np. konczacy sie na "i cofnąć") jest traktowany jako blad blokujacy,
 - artykul nie przechodzi, jesli ma inline CSS lub lokalny `<style>`,
 - naglowek "Czytelnia" ma byc index-style (`reading-room__head` z ikona),
 - footer `site-footer-bento` musi byc wewnatrz `<body>`,

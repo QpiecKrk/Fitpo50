@@ -168,7 +168,8 @@ svg {
 
 @media (min-width: 821px) {
   .site-footer-bento {
-    height: 292px;
+    min-height: 292px;
+    height: auto;
   }
 
   .site-footer-bento__grid {
