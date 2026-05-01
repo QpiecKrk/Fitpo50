@@ -7,7 +7,7 @@ const TODAY = '2026-04-27';
 const ALLOWED_CATEGORIES = new Set(['zdrowie', 'ciekawe', 'jedzenie', 'ruch']);
 
 function parseArgs(argv) {
-  const out = { write: true };
+  const out = { write: false };
   for (let i = 0; i < argv.length; i += 1) {
     const t = argv[i];
     if (t === '--file') {
@@ -22,6 +22,11 @@ function parseArgs(argv) {
     }
   }
   return out;
+}
+
+function isInsideRepo(absPath, repoRoot) {
+  const rel = path.relative(repoRoot, absPath);
+  return !!rel && !rel.startsWith('..') && !path.isAbsolute(rel);
 }
 
 function stripTags(text) {
@@ -96,7 +101,7 @@ function dedupeSources(sources) {
   const out = [];
   for (const s of sources) {
     if (!s || typeof s !== 'object') continue;
-    const label = String(s.label || '').replace(/\s+/g, ' ').trim();
+    const label = String(s.label || s.citation || s.title || s.name || '').replace(/\s+/g, ' ').trim();
     const url = String(s.url || '').trim();
     if (!label || !/^https:\/\//i.test(url)) continue;
     const key = url.toLowerCase();
@@ -105,6 +110,33 @@ function dedupeSources(sources) {
     out.push({ label, url });
   }
   return out;
+}
+
+function htmlToParagraphs(contentHtml) {
+  const html = String(contentHtml || '');
+  const matches = [...html.matchAll(/<p\b[^>]*>[\s\S]*?<\/p>/gi)].map((m) => m[0].trim()).filter(Boolean);
+  return matches;
+}
+
+function htmlToListItems(contentHtml) {
+  const html = String(contentHtml || '');
+  const out = [];
+  for (const ul of html.matchAll(/<ul\b[^>]*>([\s\S]*?)<\/ul>/gi)) {
+    const body = String(ul[1] || '');
+    for (const li of body.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/gi)) {
+      const text = stripTags(String(li[1] || '')).replace(/\s+/g, ' ').trim();
+      if (text) out.push(text);
+    }
+  }
+  return out;
+}
+
+function firstMeaningfulSentenceFromParagraph(paragraphHtml) {
+  const plain = stripTags(String(paragraphHtml || '')).replace(/\s+/g, ' ').trim();
+  if (!plain) return 'Najważniejsze: świadome nawyki i regularna praktyka pomagają utrzymać sprawność po 50. roku życia.';
+  const sentence = plain.match(/^[^.!?]+[.!?]?/);
+  const base = sentence ? sentence[0].trim() : plain;
+  return base.length > 220 ? `${base.slice(0, 217).trimEnd()}...` : base;
 }
 
 function validate(json) {
@@ -142,12 +174,18 @@ function validate(json) {
 function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
-    console.error('Użycie: node scripts/fix-fitpo50-json.js --file /path/file.fitpo50.json [--write true|false]');
+    console.error('Użycie: node scripts/fix-fitpo50-json.js --file data/import/file.fitpo50.json [--write true|false]');
     process.exit(1);
   }
-  const file = path.resolve(process.cwd(), args.file);
+  const repoRoot = process.cwd();
+  const file = path.resolve(repoRoot, args.file);
   if (!fs.existsSync(file)) {
     console.error(`[FAIL] Brak pliku: ${file}`);
+    process.exit(1);
+  }
+  if (!isInsideRepo(file, repoRoot)) {
+    console.error(`[FAIL] Plik wejściowy jest poza repo: ${file}`);
+    console.error('[FAIL] Najpierw skopiuj JSON do data/import/ i uruchom ponownie.');
     process.exit(1);
   }
 
@@ -211,14 +249,17 @@ function main() {
   const sections = Array.isArray(json.sections) ? json.sections : [];
   json.sections = sections.map((s, idx) => {
     const section = (s && typeof s === 'object') ? s : {};
-    const title = stripTags(String(section.title || `Sekcja ${idx + 1}`)).trim();
-    const paragraphsRaw = Array.isArray(section.paragraphs_html) ? section.paragraphs_html : [];
+    const title = stripTags(String(section.title || section.heading || `Sekcja ${idx + 1}`)).trim();
+    const paragraphsRaw = Array.isArray(section.paragraphs_html)
+      ? section.paragraphs_html
+      : htmlToParagraphs(section.content_html || '');
     const paragraphs = paragraphsRaw.map((p) => removeLocalHtmlLinks(ensureParagraphWrapper(p))).filter(Boolean);
     while (paragraphs.length < 2) paragraphs.push('<p>Do uzupełnienia redakcyjnego.</p>');
     paragraphs[0] = padFirstParagraphToRange(paragraphs[0], 35, 80);
 
-    const listItems = Array.isArray(section.list_items) ? section.list_items : [];
+    const listItems = Array.isArray(section.list_items) ? section.list_items : htmlToListItems(section.content_html || '');
     const infoBox = section.info_box && typeof section.info_box === 'object' ? section.info_box : {};
+    const fallbackInfoContent = `<p>${firstMeaningfulSentenceFromParagraph(paragraphs[0])}</p>`;
     const image = section.image && typeof section.image === 'object' ? section.image : {};
     return {
       title,
@@ -227,7 +268,7 @@ function main() {
       info_box: {
         style: 'accent',
         title: stripTags(String(infoBox.title || `Ważne: ${title}`)).trim(),
-        content_html: removeLocalHtmlLinks(ensureParagraphWrapper(infoBox.content_html || '<p>Do uzupełnienia redakcyjnego.</p>')),
+        content_html: removeLocalHtmlLinks(ensureParagraphWrapper(infoBox.content_html || fallbackInfoContent)),
       },
       image: {
         src: String(image.src || `./assets/${json.slug}-sekcja-${idx + 1}.webp`).trim(),
@@ -240,7 +281,7 @@ function main() {
   const faq = Array.isArray(json.answer_blocks) ? json.answer_blocks : [];
   json.answer_blocks = faq.map((f) => ({
     question: stripTags(String((f && f.question) || '')).trim(),
-    answer_html: removeLocalHtmlLinks(ensureParagraphWrapper((f && f.answer_html) || '')),
+    answer_html: removeLocalHtmlLinks(ensureParagraphWrapper((f && (f.answer_html || f.answer)) || '')),
   })).filter((f) => f.question && f.answer_html);
 
   while (json.answer_blocks.length < 4) {
@@ -251,6 +292,33 @@ function main() {
   }
 
   json.sources = dedupeSources(Array.isArray(json.sources) ? json.sources : []);
+
+  const faqResearchRaw = Array.isArray(json.faq_research) ? json.faq_research : [];
+  const faqResearch = faqResearchRaw
+    .map((r) => ({
+      question: stripTags(String((r && r.question) || '')).replace(/\s+/g, ' ').trim(),
+      source_label: stripTags(String((r && (r.source_label || r.label || r.citation || r.title)) || '')).replace(/\s+/g, ' ').trim(),
+      source_url: String((r && (r.source_url || r.url)) || '').trim(),
+    }))
+    .filter((r) => r.question && r.source_label && /^https:\/\//i.test(r.source_url));
+
+  if (faqResearch.length >= 4) {
+    json.faq_research = faqResearch;
+  } else {
+    const auto = [];
+    const sourcePool = json.sources.slice(0, Math.max(4, json.sources.length));
+    for (let i = 0; i < Math.min(4, json.answer_blocks.length); i += 1) {
+      const q = json.answer_blocks[i];
+      const s = sourcePool[i] || sourcePool[0];
+      if (!q || !s) continue;
+      auto.push({
+        question: q.question,
+        source_label: s.label,
+        source_url: s.url,
+      });
+    }
+    json.faq_research = auto;
+  }
 
   const imagePrompts = Array.isArray(json.image_prompts) ? json.image_prompts : [];
   const mapped = imagePrompts.map((p) => (p && typeof p === 'object' ? p : {}));
@@ -309,7 +377,10 @@ function main() {
   const finalErrors = validate(json);
 
   if (args.write) {
+    const backupPath = `${file}.bak`;
+    fs.copyFileSync(file, backupPath);
     fs.writeFileSync(file, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
+    console.log(`[OK] Backup zapisany: ${path.relative(repoRoot, backupPath)}`);
   } else {
     process.stdout.write(`${JSON.stringify(json, null, 2)}\n`);
   }
@@ -324,4 +395,3 @@ function main() {
 }
 
 main();
-

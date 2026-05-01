@@ -3,6 +3,9 @@
 const { spawnSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
+
+let tempWorkingCopy = '';
 
 function parseArgs(argv) {
   const out = {};
@@ -46,6 +49,24 @@ function detectSlug(jsonPath) {
   return slug;
 }
 
+function safeSlug(value) {
+  return String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function ensureImportCopy(sourcePath, slug) {
+  const importDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-import-'));
+  const target = path.join(importDir, `${safeSlug(slug)}.fitpo50.json`);
+  fs.copyFileSync(sourcePath, target);
+  return target;
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
@@ -60,10 +81,16 @@ function main() {
   const category = args.category ? String(args.category) : '';
   const force = boolOpt(args.force, false);
   const slug = detectSlug(input);
+  const workingCopy = ensureImportCopy(input, slug);
+  tempWorkingCopy = workingCopy;
+  console.log(`[INFO] Source JSON: ${input}`);
+  console.log(`[INFO] Working copy JSON: ${workingCopy}`);
 
-  const common = ['scripts/import-article.js', '--file', input, '--faq-strict', 'true'];
+  const common = ['scripts/import-article.js', '--file', workingCopy, '--faq-strict', 'true'];
   if (category) common.push('--category', category);
 
+  run('JSON auto-fix (working copy)', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingCopy, '--write', 'true']);
+  run('JSON gate (single file)', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
   run('Precheck (strict FAQ)', 'node', [...common, '--precheck', 'true']);
   run(
     'Import + walidacja + PDF + sync',
@@ -76,15 +103,34 @@ function main() {
       '--force', force ? 'true' : 'false',
     ],
   );
+  run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug]);
+  run('NEWS integrity', 'node', ['scripts/news-integrity-check.js']);
   run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
 
   console.log('\n[PASS] Article pipeline completed.');
+  return { workingCopy };
 }
 
 try {
-  main();
+  const result = main();
+  tempWorkingCopy = result?.workingCopy || '';
+  if (tempWorkingCopy) {
+    try {
+      fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });
+      console.log('[CLEANUP] Removed temporary working JSON directory.');
+    } catch (_err) {
+      console.warn('[WARN] Could not remove temporary working JSON directory.');
+    }
+  }
 } catch (err) {
   console.error(`\n[FAIL] ${err.message || err}`);
+  if (tempWorkingCopy) {
+    try {
+      fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });
+      console.log('[CLEANUP] Removed temporary working JSON directory after failure.');
+    } catch (_err) {
+      // no-op
+    }
+  }
   process.exit(1);
 }
-

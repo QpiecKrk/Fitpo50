@@ -208,4 +208,8 @@ articles:
   title: "Czy jedzenie uzależnia jak narkotyki? Prawda o UPF po 50-tce | FitPo50"
   section: "Jedzenie"
   summary: "Żywność ultra-przetworzona aktywuje te same ośrodki w mózgu co kokaina. Dowiedz się, dlaczego kobiety po 50-tce są najbardziej narażone i jak wyjść z pułapki"
+- url: https://fitpo50.pl/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html
+  title: "Sakady — supresja sakadyczna i 40 000 ślepych chwil dziennie | FitPo50"
+  section: "Ciekawe"
+  summary: "Sakady to błyskawiczne skoki oczu wykonywane tysiące razy dziennie. Mózg aktywnie je ukrywa zanim oko ruszy. Supresja sakadyczna i zmiany po 50-tce."
 

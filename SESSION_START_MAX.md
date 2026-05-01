@@ -48,6 +48,15 @@ Zasady:
 Publikacja artykulow:
 - kanoniczny flow publikacji artykulow: `scripts/import-article.js` (`.fitpo50.json` + precheck); `article-template-bento.html` / `create-article-from-template.js` tylko do recznych szkicow,
 - preferuj szybki pipeline jednej komendy: `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --force <true|false>`,
+- pipeline publikacyjny musi wykonywac kolejnosc: `fix-fitpo50-json` -> `json-fitpo50-gate --file` -> `import-article --precheck` -> `import-article --publish` -> `sync-site-assets-mirror` -> `news-integrity` -> `predeploy-gate --slug`,
+- `fix-fitpo50-json` dziala w trybie bezpiecznym:
+  - domyslnie `--write false` (tylko check/stdout),
+  - zapis tylko przy `--write true`,
+  - przed zapisem tworzony jest backup `*.bak`,
+- pliki JSON spoza repo (np. `~/Downloads`) sa blokowane przez fixer, ale `article-pipeline` obsluguje to przez bezpieczna kopie robocza,
+- `article-pipeline` automatycznie tworzy kopie robocza w `/tmp/fitpo50-import-*/<slug>.fitpo50.json`, pracuje tylko na niej i usuwa ja po zakonczeniu (takze po bledzie),
+- brak tolerancji na bledy: jesli ktorykolwiek krok gate/validator zwroci FAIL, publikacja i push sa zatrzymane,
+- przed `prepush` zawsze uruchamiaj mirror zasobow: `npm run assets:mirror:sync` (PDF + miniatury NEWS + JSON mirror do `_site`),
 - obowiazkowo uruchom walidator standardu: `node scripts/validate-article-standard.js <plik.html>`,
 - obowiazkowo generuj PDF artykulu i podpinaj duzy przycisk w hero: `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>` (albo hurtowo: `npm run article:pdf:sync`),
 - FAQ ma byc oparte o realne pytania z sieci (autocomplete/PAA), nie wymyslane; wymagane `faq_research[]` (min. 4 wpisy: `question`, `source_label`, `source_url`),

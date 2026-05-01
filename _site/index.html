@@ -1436,13 +1436,13 @@
       </section>
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
-        <img class="latest-article__bg" id="latestArticleImage" src="./assets/zegar-epigenetyczny-horvatha-dna-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        <img class="latest-article__bg" id="latestArticleImage" src="./assets/sakady-mozg-oko-sciezki-sakad-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Zegar epigenetyczny Horvatha: jak zmierzyć i cofnąć wiek biologiczny</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Zegar Horvatha mierzy wiek Twojego DNA z dokładnością do miesięcy. Dowiedz się, co przyspiesza starzenie i jak cofnąć wiek biologiczny o 3 lata w 8 tygodni.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Sakady — supresja sakadyczna i 40 000 ślepych chwil dziennie</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Sakady to błyskawiczne skoki oczu wykonywane tysiące razy dziennie. Mózg aktywnie je ukrywa zanim oko ruszy. Supresja sakadyczna i zmiany po 50-tce.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2173,10 +2173,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Zegar epigenetyczny Horvatha: jak zmierzyć i cofnąć wiek biologiczny',
-        excerpt: 'Zegar Horvatha mierzy wiek Twojego DNA z dokładnością do miesięcy. Dowiedz się, co przyspiesza starzenie i jak cofnąć wiek biologiczny o 3 lata w 8 tygodni.',
-        image: './assets/zegar-epigenetyczny-horvatha-dna-hero.webp',
-        url: 'zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html'
+        title: 'Sakady — supresja sakadyczna i 40 000 ślepych chwil dziennie',
+        excerpt: 'Sakady to błyskawiczne skoki oczu wykonywane tysiące razy dziennie. Mózg aktywnie je ukrywa zanim oko ruszy. Supresja sakadyczna i zmiany po 50-tce.',
+        image: './assets/sakady-mozg-oko-sciezki-sakad-hero.webp',
+        url: 'sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2207,6 +2207,13 @@
       const fallback = [
         {
           category: 'Ciekawe',
+          title: 'Sakady — supresja sakadyczna i 40 000 ślepych chwil dziennie',
+          excerpt: 'Sakady to błyskawiczne skoki oczu wykonywane tysiące razy dziennie. Mózg aktywnie je ukrywa zanim oko ruszy. Supresja sakadyczna i zmiany po 50-tce.',
+          image: './assets/sakady-mozg-oko-sciezki-sakad-hero.webp',
+          url: 'sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Zegar epigenetyczny Horvatha: jak zmierzyć i cofnąć wiek biologiczny',
           excerpt: 'Zegar Horvatha mierzy wiek Twojego DNA z dokładnością do miesięcy. Dowiedz się, co przyspiesza starzenie i jak cofnąć wiek biologiczny o 3 lata w 8 tygodni.',
           image: './assets/zegar-epigenetyczny-horvatha-dna-hero.webp',
@@ -2218,13 +2225,6 @@
           excerpt: 'Żywność ultra-przetworzona aktywuje te same ośrodki w mózgu co kokaina. Dowiedz się, dlaczego kobiety po 50-tce są najbardziej narażone i jak wyjść z pułapki',
           image: './assets/upf-mozg-chips-hero.webp',
           url: 'upf-jedzenie-ultra-przetworzone-uzaleznienie.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Waga łazienkowa smart: Ile z 16 parametrów to prawda?',
-          excerpt: 'Nowoczesna waga smart mierzy BMI, tłuszcz trzewny i masę mięśni. Sprawdź, które parametry są wiarygodne po 50. roku życia, a które to tylko marketingowy',
-          image: './assets/waga-smart-hero.webp',
-          url: 'waga-smart-pomiar-skladu-ciala-prawda.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

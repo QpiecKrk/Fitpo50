@@ -33,10 +33,14 @@ function countInternalContextLinks(articleContentHtml) {
   for (const m of articleContentHtml.matchAll(rx)) {
     const href = String(m[1] || '').trim();
     if (!href) continue;
-    if (/^(https?:|mailto:|tel:|javascript:|#)/i.test(href)) continue;
-    if (!/\.html(?:[?#].*)?$/i.test(href)) continue;
-    if (/^\.?\/?porady\.html(?:[?#].*)?$/i.test(href)) continue;
-    unique.add(href.replace(/^\.\//, ''));
+    const isAbsInternal = /^https?:\/\/(www\.)?fitpo50\.pl\/[^"\s]+\.html(?:[?#].*)?$/i.test(href);
+    const isRelInternal = !/^(https?:|mailto:|tel:|javascript:|#)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
+    if (!isAbsInternal && !isRelInternal) continue;
+    const normalized = href
+      .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
+      .replace(/^\.\//, '');
+    if (/^porady\.html(?:[?#].*)?$/i.test(normalized)) continue;
+    unique.add(normalized);
   }
   return unique.size;
 }

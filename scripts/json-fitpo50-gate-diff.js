@@ -22,6 +22,21 @@ function readChangedFiles() {
     .filter(Boolean);
 }
 
+function parseArgs(argv) {
+  const out = { files: [] };
+  for (let i = 0; i < argv.length; i += 1) {
+    const token = String(argv[i] || '');
+    if (token === '--file') {
+      const next = argv[i + 1];
+      if (next && !String(next).startsWith('--')) {
+        out.files.push(String(next));
+        i += 1;
+      }
+    }
+  }
+  return out;
+}
+
 function isFitpoJson(file) {
   return /\.fitpo50\.json$/i.test(file) || /fitpo50\.json$/i.test(file);
 }
@@ -117,15 +132,25 @@ function validateFile(file) {
 }
 
 function main() {
-  const changed = readChangedFiles();
-  const targets = changed.filter(isFitpoJson);
+  const args = parseArgs(process.argv.slice(2));
+  let targets = [];
+  if (args.files.length) {
+    targets = args.files;
+  } else {
+    const changed = readChangedFiles();
+    targets = changed.filter(isFitpoJson);
+  }
   if (!targets.length) {
     console.log('[PASS] json:gate:diff - brak zmienionych plików *.fitpo50.json');
     return;
   }
 
-  for (const file of targets) {
-    if (!fs.existsSync(file)) continue;
+  const normalized = [...new Set(targets.map((f) => String(f || '').trim()).filter(Boolean))];
+  for (const file of normalized) {
+    if (!fs.existsSync(file)) {
+      errors.push(`${file}: plik nie istnieje.`);
+      continue;
+    }
     validateFile(file);
   }
 
@@ -140,7 +165,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(`[PASS] json:gate:diff - sprawdzono pliki: ${targets.length}`);
+  console.log(`[PASS] json:gate:diff - sprawdzono pliki: ${normalized.length}`);
 }
 
 try {
@@ -149,4 +174,3 @@ try {
   console.error(`[FAIL] json:gate:diff -> ${err.message || err}`);
   process.exit(1);
 }
-

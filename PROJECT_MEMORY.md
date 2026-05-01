@@ -173,7 +173,7 @@
     - `Czy mogę użyć importera teraz: TAK`
 
 - **Bledy blokujace (nie importujemy, dopoki istnieja):**
-  - `sources[]` musi byc lista obiektow `{ "label", "url" }` (bez samych URL-i).
+  - `sources[]` musi byc lista obiektow z adresem `url`; akceptujemy pola opisowe `label` lub `citation` (fallback: `title`/`name`). W eksporcie normalizujemy do `{ "label", "url" }`.
   - `label` zrodla nie moze byc sama domena (np. `alab.pl`) - musi byc pelna nazwa zrodla.
   - `url` zrodla musi zaczynac sie od `http://` lub `https://`.
   - `key_takeaways[]` minimum 3 punkty (AEO).
@@ -213,6 +213,32 @@
     2) import + walidacja + PDF + sync,
     3) gate slugowy `predeploy-gate`.
   - `npm` alias: `npm run article:pipeline -- --file "<...>" --category ciekawe --force true`
+
+## Ustalenia operacyjne (2026-05-01) - twardy pipeline bez luk
+
+- Obowiazuje kolejnosc kontroli dla kazdego nowego/edytowanego artykulu JSON:
+  1. `node scripts/fix-fitpo50-json.js --file "<plik.fitpo50.json>"`
+  2. `node scripts/json-fitpo50-gate-diff.js --file "<plik.fitpo50.json>"`
+  3. `node scripts/import-article.js --file "<plik.fitpo50.json>" --faq-strict true --precheck true`
+  4. `node scripts/import-article.js --file "<plik.fitpo50.json>" --faq-strict true --publish true --run-internal-links false --validate true`
+  5. `node scripts/sync-site-assets-mirror.js --slug <slug>`
+  6. `node scripts/news-integrity-check.js`
+  7. `node scripts/predeploy-gate.js --slug <slug>`
+
+- Cel: lapac bledy JSON (lokalne linki `.html`, meta_description poza limitem, placeholdery, niedozwolone pola `related*`) na poczatku, a nie dopiero przy `git push`.
+- Dodatkowy sync mirror:
+  - `assets/pdf/*` -> `_site/assets/pdf/*`,
+  - opublikowane miniatury NEWS z `assets/news/*` -> `_site/assets/news/*`,
+  - `data/news-live.json` <-> `_site/data/news-live.json`,
+  - `assets/data/news-fallback.json` <-> `_site/assets/data/news-fallback.json`.
+- `prepush:local` najpierw wykonuje `assets:mirror:check`, dopiero potem wszystkie gate/checki.
+- Zasada "nic z bledem nie przechodzi": FAIL ktoregokolwiek gate zatrzymuje pipeline i push.
+- Ochrona oryginalnych JSON:
+  - `fix-fitpo50-json` domyslnie nie nadpisuje pliku (`--write false`),
+  - zapis wymaga jawnego `--write true`,
+  - przy zapisie tworzony jest backup `*.bak`,
+  - pliki JSON poza repo sa blokowane przez fixer,
+  - `article-pipeline` zawsze tworzy i uzywa kopii roboczej w `/tmp/fitpo50-import-*/<slug>.fitpo50.json` i usuwa ja po zakonczeniu (rowniez po FAIL).
 
 - **FAQ z sieci (bez pytań „z głowy”) - zasada twarda:**
   - Importer działa domyślnie w trybie `--faq-strict true`.
