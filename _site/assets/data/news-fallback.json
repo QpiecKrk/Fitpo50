@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-04-28T13:08:47+00:00",
+    "updatedAt": "2026-05-01T09:28:15+00:00",
     "items": [
+        {
+            "id": "news_2bdf428cd43c",
+            "title": "Zone 2 cardio — dobre, ale bez magii",
+            "content_html": "<p><span><span>Zone 2 cardio</span> często pokazuje się jako „sekret spalania tłuszczu”. Prawda jest prostsza: przy umiarkowanej intensywności organizm rzeczywiście korzysta proporcjonalnie bardziej z <strong>tłuszczu jako paliwa</strong>. Ale to nie znaczy, że samo <strong>Zone 2</strong> automatycznie odchudza.</span></p><p><span>Redukcja tkanki tłuszczowej nadal zależy głównie od </span><strong>bilansu kalorii</strong><span>, regularności, </span><span class=\"news-text-tone--1\">diety, snu i całkowitej aktywności</span><span>. Mocniejszy trening może spalić więcej energii w krótszym czasie, ale trudniej robić go często. Tu </span><span class=\"news-text-tone--4\">Zone 2</span><span> ma przewagę: </span><strong>mniej męczy, łatwiej je powtarzać i dobrze łączy się z treningiem siłowym.</strong><br><span></span></p><p><span>Najnowszy przegląd badań z 2025 roku studzi zachwyt: nie ma mocnych dowodów, że </span><span class=\"news-text-tone--4\">Zone 2</span><span> jest „</span><strong>najlepszą</strong><span>” strefą dla mitochondriów, spalania tłuszczu czy zdrowia <a href=\"post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html\">metabolicznego</a>. Jest po prostu bardzo użytecznym narzędziem.</span><br><span></span></p><p><strong><span>R</span><span>ób spokojne cardio, marsze albo rower, ale nie traktuj Zone 2 jak religii. Najlepiej działa w pakiecie: ruch + siła + dieta + regularność.</span></strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260501_092812_99ceb402.avif",
+                "webp": "./assets/news/news_20260501_092812_99ceb402.webp",
+                "jpg": "./assets/news/news_20260501_092812_99ceb402.jpg",
+                "alt": "Cardio bieg",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Sports Medicine, 2025 — “Much Ado About Zone 2…”",
+                    "url": "https://link.springer.com/article/10.1007/s40279-025-02261-y"
+                },
+                {
+                    "label": "GSSI — “Regulation of Fat Metabolism During Exercise”",
+                    "url": "https://www.gssiweb.org/sports-science-exchange/article/regulation-of-fat-metabolism-during-exercise"
+                }
+            ],
+            "updated_at": "2026-05-01T09:28:15+00:00",
+            "published_at": "2026-05-01T09:28:15+00:00",
+            "excerpt": "Zone 2 cardio często pokazuje się jako „sekret spalania tłuszczu”. Prawda jest prostsza: przy umiarkowanej intensywności organizm rzeczywiście korzysta proporcjonalnie bardziej z tłuszczu jako paliwa. Ale to nie znaczy,…"
+        },
         {
             "id": "news_c0b3ffafe0a7",
             "title": "Czy komórki macierzyste wyleczą cukrzycę? Jest postęp, ale bez sensacji",
