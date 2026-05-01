@@ -252,6 +252,7 @@
     - najpierw `npm run predeploy:check`,
     - raport wynikow (PASS/FAIL + kluczowe bledy),
     - przy PASS: `git add -A` -> `git commit` (automatyczny komunikat) -> `git push`,
+    - przy FAIL (hook/gate): STOP tylko na czas naprawy; naprawic wszystkie blokery push, ponowic gate i dopiero po PASS wykonac push zgodnie z komenda usera,
     - bezpiecznik: przy nienaturalnie duzym, mieszanym zakresie zmian STOP i krotkie pytanie o zgode.
 
 ## Open questions
