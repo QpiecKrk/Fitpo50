@@ -89,7 +89,7 @@ function main() {
   const common = ['scripts/import-article.js', '--file', workingCopy, '--faq-strict', 'true'];
   if (category) common.push('--category', category);
 
-  run('JSON auto-fix (working copy)', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingCopy, '--write', 'true']);
+  run('JSON auto-fix (working copy)', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingCopy, '--write', 'true', '--allow-outside-repo', 'true']);
   run('JSON gate (single file)', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
   run('Precheck (strict FAQ)', 'node', [...common, '--precheck', 'true']);
   run(

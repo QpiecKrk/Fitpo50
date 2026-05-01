@@ -5,9 +5,19 @@ const path = require('path');
 
 const TODAY = '2026-04-27';
 const ALLOWED_CATEGORIES = new Set(['zdrowie', 'ciekawe', 'jedzenie', 'ruch']);
+const CATEGORY_LANDING_PAGES = new Set([
+  'index.html',
+  'porady.html',
+  'rusz-sie.html',
+  'jedzenie.html',
+  'zdrowie.html',
+  'ciekawe.html',
+  'dziennik.html',
+  'o-mnie.html',
+]);
 
 function parseArgs(argv) {
-  const out = { write: false };
+  const out = { write: false, allowOutsideRepo: false };
   for (let i = 0; i < argv.length; i += 1) {
     const t = argv[i];
     if (t === '--file') {
@@ -17,6 +27,11 @@ function parseArgs(argv) {
     }
     if (t === '--write') {
       out.write = String(argv[i + 1] || 'true').trim().toLowerCase() !== 'false';
+      i += 1;
+      continue;
+    }
+    if (t === '--allow-outside-repo') {
+      out.allowOutsideRepo = String(argv[i + 1] || 'true').trim().toLowerCase() !== 'false';
       i += 1;
       continue;
     }
@@ -66,7 +81,18 @@ function removeLocalHtmlLinks(html) {
     (_full, href, text) => {
       const h = String(href || '').trim();
       if (/^(https?:|mailto:|tel:|#|javascript:)/i.test(h)) return _full;
-      if (/\.html(?:[?#].*)?$/i.test(h)) return String(text || '');
+      if (/\.html(?:[?#].*)?$/i.test(h)) {
+        const normalized = h
+          .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
+          .replace(/^\.\//, '')
+          .replace(/^\/+/, '')
+          .split('#')[0]
+          .split('?')[0]
+          .trim()
+          .toLowerCase();
+        if (CATEGORY_LANDING_PAGES.has(normalized)) return String(text || '');
+        return _full;
+      }
       return _full;
     }
   );
@@ -183,7 +209,7 @@ function main() {
     console.error(`[FAIL] Brak pliku: ${file}`);
     process.exit(1);
   }
-  if (!isInsideRepo(file, repoRoot)) {
+  if (!isInsideRepo(file, repoRoot) && !args.allowOutsideRepo) {
     console.error(`[FAIL] Plik wejściowy jest poza repo: ${file}`);
     console.error('[FAIL] Najpierw skopiuj JSON do data/import/ i uruchom ponownie.');
     process.exit(1);

@@ -1436,13 +1436,13 @@
       </section>
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
-        <img class="latest-article__bg" id="latestArticleImage" src="./assets/sakady-mozg-oko-sciezki-sakad-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        <img class="latest-article__bg" id="latestArticleImage" src="./assets/trening-silowy-dna-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Sakady — supresja sakadyczna i 40 000 ślepych chwil dziennie</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Sakady to błyskawiczne skoki oczu wykonywane tysiące razy dziennie. Mózg aktywnie je ukrywa zanim oko ruszy. Supresja sakadyczna i zmiany po 50-tce.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Trening siłowy po 50: Jak odmłodzić swoje komórki i DNA?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="trening-silowy-starzenie-komorkowe-dna.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2173,10 +2173,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Sakady — supresja sakadyczna i 40 000 ślepych chwil dziennie',
-        excerpt: 'Sakady to błyskawiczne skoki oczu wykonywane tysiące razy dziennie. Mózg aktywnie je ukrywa zanim oko ruszy. Supresja sakadyczna i zmiany po 50-tce.',
-        image: './assets/sakady-mozg-oko-sciezki-sakad-hero.webp',
-        url: 'sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html'
+        title: 'Trening siłowy po 50: Jak odmłodzić swoje komórki i DNA?',
+        excerpt: 'Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń',
+        image: './assets/trening-silowy-dna-hero.webp',
+        url: 'trening-silowy-starzenie-komorkowe-dna.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2206,6 +2206,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Ruch',
+          title: 'Trening siłowy po 50: Jak odmłodzić swoje komórki i DNA?',
+          excerpt: 'Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń',
+          image: './assets/trening-silowy-dna-hero.webp',
+          url: 'trening-silowy-starzenie-komorkowe-dna.html'
+        },
+        {
           category: 'Ciekawe',
           title: 'Sakady — supresja sakadyczna i 40 000 ślepych chwil dziennie',
           excerpt: 'Sakady to błyskawiczne skoki oczu wykonywane tysiące razy dziennie. Mózg aktywnie je ukrywa zanim oko ruszy. Supresja sakadyczna i zmiany po 50-tce.',
@@ -2218,13 +2225,6 @@
           excerpt: 'Zegar Horvatha mierzy wiek Twojego DNA z dokładnością do miesięcy. Dowiedz się, co przyspiesza starzenie i jak cofnąć wiek biologiczny o 3 lata w 8 tygodni.',
           image: './assets/zegar-epigenetyczny-horvatha-dna-hero.webp',
           url: 'zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Czy jedzenie uzależnia jak narkotyki? Prawda o UPF po 50-tce',
-          excerpt: 'Żywność ultra-przetworzona aktywuje te same ośrodki w mózgu co kokaina. Dowiedz się, dlaczego kobiety po 50-tce są najbardziej narażone i jak wyjść z pułapki',
-          image: './assets/upf-mozg-chips-hero.webp',
-          url: 'upf-jedzenie-ultra-przetworzone-uzaleznienie.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

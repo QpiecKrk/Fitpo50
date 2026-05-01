@@ -212,4 +212,8 @@ articles:
   title: "Sakady — supresja sakadyczna i 40 000 ślepych chwil dziennie | FitPo50"
   section: "Ciekawe"
   summary: "Sakady to błyskawiczne skoki oczu wykonywane tysiące razy dziennie. Mózg aktywnie je ukrywa zanim oko ruszy. Supresja sakadyczna i zmiany po 50-tce."
+- url: https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html
+  title: "Trening siłowy po 50: Jak odmłodzić swoje komórki i DNA? | FitPo50"
+  section: "Ruch"
+  summary: "Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń"
 
