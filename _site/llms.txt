@@ -216,4 +216,8 @@ articles:
   title: "Trening siłowy po 50: Jak odmłodzić swoje komórki i DNA? | FitPo50"
   section: "Ruch"
   summary: "Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń"
+- url: https://fitpo50.pl/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html
+  title: "Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda? | FitPo50"
+  section: "Zdrowie"
+  summary: "Peptydy to biologiczne SMS-y do Twoich komórek. Od kolagenu po semaglutyd – sprawdzamy co działa, co jest bezpieczne, a co pozostaje niebezpiecznym"
 

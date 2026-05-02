@@ -59,6 +59,7 @@ Publikacja artykulow:
 - przed `prepush` zawsze uruchamiaj mirror zasobow: `npm run assets:mirror:sync` (PDF + miniatury NEWS + JSON mirror do `_site`),
 - obowiazkowo uruchom walidator standardu: `node scripts/validate-article-standard.js <plik.html>`,
 - obowiazkowo generuj PDF artykulu i podpinaj duzy przycisk w hero: `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>` (albo hurtowo: `npm run article:pdf:sync`),
+- BEZWZGLEDNIE: zanim napiszesz, ze zadanie/artykul jest "gotowe", najpierw wykonaj generowanie PDF (`python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>` lub `npm run article:pdf:sync`) i potwierdz obecność pliku PDF w obu lokalizacjach: `assets/pdf/` oraz `_site/assets/pdf/`; bez tego nie wolno oglaszac statusu "gotowe",
 - FAQ ma byc oparte o realne pytania z sieci (autocomplete/PAA), nie wymyslane; wymagane `faq_research[]` (min. 4 wpisy: `question`, `source_label`, `source_url`),
 - w imporcie trzymaj `--faq-strict true` (domyslnie), czyli brak `faq_research[]` lub placeholdery FAQ = twardy FAIL,
 - placeholdery redakcyjne (np. "Do uzupełnienia redakcyjnego", "Pytanie do doprecyzowania", "Odpowiedź do uzupełnienia", `{{...}}`) sa twardym FAIL importu w całym artykule (nie tylko FAQ),
