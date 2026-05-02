@@ -153,7 +153,7 @@ function printUsage() {
     '  --dry-run true|false            do not write files (default: false)',
     '  --publish true|false            update listings/sitemap/llms (default: true)',
     '  --sync-site true|false          mirror changes to _site (default: true)',
-    '  --run-internal-links true|false run PHP internal-link helper (default: false)',
+    '  --run-internal-links true|false|auto run PHP internal-link helper (default: auto)',
     '  --validate true|false           run article validator (default: true)',
     '  --faq-strict true|false         require FAQ from real web research metadata (default: true)',
     '  --force true|false              overwrite existing article HTML (default: false)',
@@ -161,7 +161,7 @@ function printUsage() {
     '  --help                          show this help',
     '',
     'Recommended publish command:',
-    '  node scripts/import-article.js --file "...fitpo50.json" --publish true --run-internal-links false --validate true',
+    '  node scripts/import-article.js --file "...fitpo50.json" --publish true --run-internal-links auto --validate true',
   ].join('\n'));
 }
 
@@ -1762,9 +1762,9 @@ function runInternalLinks(slug, dryRun) {
     '$html = file_get_contents($file);',
     'if ($html === false) { fwrite(STDERR, "Nie udało się odczytać HTML."); exit(2); }',
     '$result = autoLinkInternalArticlesInHtml($html, [',
-    '  "min_words" => 80,',
-    '  "min_links" => 2,',
-    '  "max_links" => 2,',
+    '  "min_words" => 40,',
+    '  "min_links" => 4,',
+    '  "max_links" => 6,',
     '  "current_href" => basename($file),',
     ']);',
     'file_put_contents($file, $result["html"]);',
@@ -2086,7 +2086,7 @@ function main() {
   const dryRun = boolOpt(args['dry-run'], false);
   const publish = boolOpt(args.publish, true);
   const syncSite = boolOpt(args['sync-site'], true);
-  const runInternal = boolOpt(args['run-internal-links'], false);
+  const runInternalMode = String(args['run-internal-links'] ?? 'auto').trim().toLowerCase();
   const runValidate = boolOpt(args.validate, true);
   const faqStrict = boolOpt(args['faq-strict'], true);
   const precheckOnly = boolOpt(args.precheck, false) || boolOpt(args['check-only'], false);
@@ -2155,8 +2155,15 @@ function main() {
   }
 
   let internalLinksResult = null;
+  const sectionHtmlForAuto = payload.sections.flatMap((section) => section.blocks.map((b) => b.html || ''));
+  const sectionInternalLinks = countInternalHtmlLinks(sectionHtmlForAuto);
+  const runInternal = runInternalMode === 'true'
+    || runInternalMode === '1'
+    || runInternalMode === 'yes'
+    || runInternalMode === 'on'
+    || (runInternalMode === 'auto' && sectionInternalLinks === 0);
   if (runInternal) {
-    console.warn('\nUwaga: --run-internal-links=true jest trybem podwyższonego ryzyka (helper może przebudować HTML).');
+    console.warn('\nUwaga: auto-linking wewnętrzny włączony (helper może przebudować HTML).');
     internalLinksResult = runInternalLinks(payload.slug, dryRun);
   }
 

@@ -98,7 +98,7 @@ function main() {
     [
       ...common,
       '--publish', 'true',
-      '--run-internal-links', 'false',
+      '--run-internal-links', 'auto',
       '--validate', 'true',
       '--force', force ? 'true' : 'false',
     ],

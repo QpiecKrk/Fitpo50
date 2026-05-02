@@ -78,6 +78,7 @@ Publikacja artykulow:
 - SEO guardrails: `<title>` max 65 znakow, `meta description` max 160 znakow,
 - AEO guardrails: w `BlogPosting` dodawaj `speakable`, a sekcje `.key-takeaways` umieszczaj po wstepie (nie na samym dole),
 - interlinking w tresci: minimum 4 linki kontekstowe w akapitach (nie tylko sekcja Czytelnia).
+- jesli JSON wejsciowy nie ma linkow kontekstowych, uruchamiaj import z `--run-internal-links auto` (auto-linking przed walidacja), aby domknac wymaganie minimum 4 linkow.
 
 Modul NEWS:
 - traktuj `MEMORY_NEWSY.md` jako zrodlo zasad,

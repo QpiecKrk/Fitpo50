@@ -198,11 +198,11 @@
 
 - **Bezpieczenstwo i znane ograniczenie:**
   - Do czasu naprawy helpera PHP, uruchamiaj import z:
-    - `--run-internal-links false`
-  - Powod: tryb auto-linkowania moze przebudowac caly HTML do fragmentu `body`.
+    - `--run-internal-links auto`
+  - Zasada: gdy JSON nie zawiera linkow kontekstowych, importer uruchamia auto-linking po imporcie i przed walidacja.
 
 - **Komenda publikacyjna (zalecana):**
-  - `node scripts/import-article.js --file "<sciezka/do/pliku.fitpo50.json>" --publish true --run-internal-links false --validate true`
+  - `node scripts/import-article.js --file "<sciezka/do/pliku.fitpo50.json>" --publish true --run-internal-links auto --validate true`
 
 ## Ustalenia operacyjne (2026-05-01) - szybki pipeline + twarda kontrola FAQ (SEO/AEO/GEO/AIO)
 
@@ -220,7 +220,7 @@
   1. `node scripts/fix-fitpo50-json.js --file "<plik.fitpo50.json>"`
   2. `node scripts/json-fitpo50-gate-diff.js --file "<plik.fitpo50.json>"`
   3. `node scripts/import-article.js --file "<plik.fitpo50.json>" --faq-strict true --precheck true`
-  4. `node scripts/import-article.js --file "<plik.fitpo50.json>" --faq-strict true --publish true --run-internal-links false --validate true`
+  4. `node scripts/import-article.js --file "<plik.fitpo50.json>" --faq-strict true --publish true --run-internal-links auto --validate true`
   5. `node scripts/sync-site-assets-mirror.js --slug <slug>`
   6. `node scripts/news-integrity-check.js`
   7. `node scripts/predeploy-gate.js --slug <slug>`
