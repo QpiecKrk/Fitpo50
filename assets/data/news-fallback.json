@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-01T09:28:15+00:00",
+    "updatedAt": "2026-05-02T11:13:49+00:00",
     "items": [
+        {
+            "id": "news_2e625ff6e7cd",
+            "title": "Czy jajko przed snem stabilizuje cukier?",
+            "content_html": "<p><span>Nie ma mocnych dowodów, że </span><span><strong><span></span><span>jedno jajko przed snem automatycznie zapobiega nocnym spadkom cukru</span></strong>. To zbyt proste hasło z internetu.</span></p><p><span>Jajko może być dobrą małą </span><span class=\"news-text-tone--1\">przekąską</span><span>, bo zawiera </span><span class=\"news-text-tone--4\">białko, tłuszcz i mało węglowodanów</span><span>. U części osób może pomóc <a href=\"motywacja-po-50.html\">utrzymać</a> stabilniejszą glikemię niż słodka przekąska. Jedno badanie u osób z </span><span class=\"news-text-tone--4\">cukrzycą typu 2</span><span> sugerowało korzystniejszy efekt przekąski białkowo-tłuszczowej, ale nie oznacza to uniwersalnej ochrony przed hipoglikemią.</span><br><span></span></p><p><span>Przeglądy badań pokazują, że efekt przekąsek przed snem jest </span><strong>mieszany</strong><span>. Dużo zależy od leków, insuliny, aktywności fizycznej, alkoholu, poziomu cukru przed snem i indywidualnej reakcji </span><span>organizmu.</span><br><span></span></p><p><strong><span>J</span><span>ajko przed snem może być rozsądniejsze niż ciastko, ale nie jest „lekiem” na nocne spadki cukru. Przy częstych spadkach trzeba analizować pomiary i leczenie z lekarzem.</span></strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260502_105447_a0f8ef76.avif",
+                "webp": "./assets/news/news_20260502_105447_a0f8ef76.webp",
+                "jpg": "./assets/news/news_20260502_105447_a0f8ef76.jpg",
+                "alt": "Jajko przed snem",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Bedtime snack review",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9630881/"
+                },
+                {
+                    "label": "American Diabetes Association: Hypoglycemia",
+                    "url": "https://diabetes.org/living-with-diabetes/hypoglycemia-low-blood-glucose/causes-prevention"
+                }
+            ],
+            "updated_at": "2026-05-02T11:13:49+00:00",
+            "published_at": "2026-05-02T11:13:49+00:00",
+            "excerpt": "Nie ma mocnych dowodów, że jedno jajko przed snem automatycznie zapobiega nocnym spadkom cukru. To zbyt proste hasło z internetu.Jajko może być dobrą małą przekąską, bo zawiera białko, tłuszcz i mało węglowodanów. U czę…"
+        },
         {
             "id": "news_2bdf428cd43c",
             "title": "Zone 2 cardio — dobre, ale bez magii",

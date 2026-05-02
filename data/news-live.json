@@ -1,7 +1,117 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-01T11:16:38+00:00",
+    "updatedAt": "2026-05-02T11:13:49+00:00",
     "items": [
+        {
+            "id": "news_075855833e61",
+            "title": "Markery nowotworowe z krwi: dlaczego trzeba uważać",
+            "content_html": "<p><span>Nie ma jednego prostego <a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">badania</a> krwi, które </span><span><strong><span></span><span>wyklucza raka</span></strong>. To ważne, bo hasła typu „<span class=\"news-text-tone--2\">zrób pakiet markerów i sprawdź, czy masz nowotwór</span>” brzmią dobrze marketingowo, ale medycznie są ryzykowne.</span></p><p><span>Klasyczne <span class=\"news-text-tone--3\">markery nowotworowe</span> mają ograniczoną </span><span><strong><span></span><span><strong><span></span><span>czułość i swoistość</span></strong></span></strong>. Mogą wyjść podwyższone u osoby bez raka, np. przy stanie zapalnym, chorobach <span class=\"news-text-tone--3\">wątroby, endometriozie czy łagodnych zmianach</span>. Mogą też być prawidłowe mimo rozwijającego się <span class=\"news-text-tone--3\">nowotworu</span>. To daje albo <strong>fałszywy alarm</strong>, albo fałszywe poczucie bezpieczeństwa.</span><br><span></span></p><p><span>W praktyce markery częściej służą do </span><span><strong><span></span><span>monitorowania leczenia</span></strong>, kontroli nawrotu albo oceny przebiegu choroby u osoby już diagnozowanej. Nie są dobrym <span class=\"news-text-tone--4\">narzędziem do przesiewowego</span> szukania raka u zdrowych ludzi. Wyjątkiem bywa </span><span><strong><span></span><span>PSA</span></strong>, stosowane w ocenie ryzyka <span class=\"news-text-tone--4\">raka prostaty,</span> ale ono też nie jest idealne — może dawać wyniki fałszywie dodatnie i prowadzić do niepotrzebnych badań.</span><br><span></span></p><p><strong><span>J</span><span>eśli chcesz robić profilaktykę raka, lepiej wybierać badania zgodne z wiekiem, płcią, objawami i historią rodzinną: kolonoskopia, cytologia/HPV, mammografia, badanie skóry, USG lub inne badania zalecone przez lekarza. Pakiet markerów „na wszelki wypadek” to często więcej stresu niż realnej ochrony.</span></strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260502_111329_938f9699",
+            "image_alt": "Markery nowotworowe",
+            "sources": [
+                {
+                    "label": "National Cancer Institute — PSA Test",
+                    "url": "https://www.cancer.gov/types/prostate/psa-fact-sheet"
+                },
+                {
+                    "label": "Zwrotnik Raka — Profilaktyka nowotworów",
+                    "url": "https://www.zwrotnikraka.pl/profilaktyka-nowotworow-wszystko-co-musisz-wiedziec/"
+                }
+            ],
+            "created_at": "2026-05-02T11:13:29+00:00",
+            "updated_at": "2026-05-02T11:13:29+00:00",
+            "published_at": ""
+        },
+        {
+            "id": "news_ec4403abe0f3",
+            "title": "Pomidory + awokado: czy naprawdę zwiększają wchłanianie likopenu?",
+            "content_html": "<p><span>To <span class=\"news-text-tone--4\">viralowe hasło</span> ma sens, ale wymaga doprecyzowania. <span class=\"news-text-tone--4\">Likopen</span>, czyli czerwony barwnik obecny m.in. w pomidorach, należy do <span class=\"news-text-tone--1\">karotenoidów</span>. Jest związkiem rozpuszczalnym w tłuszczach, więc <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">organizm</a> lepiej go wchłania, gdy w posiłku pojawi się źródło tłuszczu — na przykład <strong>awokado, oliwa albo orzechy</strong>.</span></p><p><span>Najczęściej cytowane badanie pochodzi z 2005 roku. Sprawdzano w nim, jak dodanie <span class=\"news-text-tone--3\">awokado do salsy pomidorowej</span> wpływa na wchłanianie karotenoidów u ludzi. Wynik: dodanie awokado zwiększyło wchłanianie <span class=\"news-text-tone--2\">likopenu</span> </span><span><strong><span></span><span>4,4 raza</span></strong>, czyli mniej więcej o </span><span><strong><span></span><span>440%</span></strong>, oraz beta-karotenu </span><span><strong><span></span><span>2,6 raza</span></strong>. Czyli liczba z grafiki nie jest wzięta z sufitu.  </span><br><span></span></p><p><span>Ale jest haczyk. To było małe badanie żywieniowe, a nie dowód, że <a href=\"upf-jedzenie-ultra-przetworzone-uzaleznienie.html\">jedzenie</a> pomidorów z awokado „</span><span class=\"news-text-tone--4\">zwalcza raka</span><span>”. </span><strong>Likopen</strong><span> ma właściwości antyoksydacyjne i jest badany pod kątem zdrowia serca, skóry i profilaktyki </span><span class=\"news-text-tone--3\">chorób przewlekłych</span><span>, ale sama większa absorpcja nie oznacza automatycznie mniejszego ryzyka nowotworu. To częsty internetowy skrót: prawdziwy mechanizm, za mocny wniosek.</span><br><span></span></p><p><span>Warto też pamiętać, że </span><span class=\"news-text-tone--1\">likopen</span><span> często lepiej przyswaja się z przetworzonych pomidorów, np. sosu, passaty czy przecieru, zwłaszcza gdy są podane z </span><span class=\"news-text-tone--1\">tłuszczem</span><span>. Surowy pomidor z awokado też ma sens, ale </span><span class=\"news-text-tone--1\">sos pomidorowy</span><span> z oliwą może być równie dobrym, a czasem lepszym rozwiązaniem.</span><br><span></span></p><p><strong><span>P</span><span>omidory z awokado to dobre połączenie. Nie dlatego, że jest magiczne, tylko dlatego, że tłuszcz pomaga wchłaniać karotenoidy. Jedz spokojnie — tylko bez bajki, że jedna sałatka robi za onkologa.</span></strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260502_110840_fa74589b",
+            "image_alt": "Avocado i pomidory",
+            "sources": [
+                {
+                    "label": "Carotenoid absorption from salad and salsa by humans is enhanced by the addition of avocado or avocado oil",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/15735074/"
+                },
+                {
+                    "label": "Journal of Nutrition / ScienceDirect — Carotenoid Absorption from Salad and Salsa by Humans…",
+                    "url": "https://www.sciencedirect.com/science/article/pii/S0022316622100763"
+                }
+            ],
+            "created_at": "2026-05-02T11:08:40+00:00",
+            "updated_at": "2026-05-02T11:08:40+00:00",
+            "published_at": ""
+        },
+        {
+            "id": "news_5ddd305c596f",
+            "title": "Zastrzyk na tłuszcz z brzucha? Brzmi efektownie, ale spokojnie. To nie rewolucja",
+            "content_html": "<p><span>Naukowcy z Columbia University opisali materiał o nazwie </span><span><strong><span></span><span>P-G3</span></strong>, który ma trafiać do tkanki tłuszczowej i ograniczać nieprawidłowe <span class=\"news-text-tone--4\">magazynowanie tłuszczu</span> w powiększonych komórkach. W badaniu chodziło głównie o </span><span><strong><span></span><span>tłuszcz trzewny</span></strong>, czyli ten <a href=\"post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html\">metabolicznie</a> najbardziej problematyczny. To ważne, bo właśnie on najmocniej wiąże się z <span class=\"news-text-tone--3\">insulinoopornością</span>, stanem zapalnym i chorobami sercowo-naczyniowymi.  </span></p><p><span>Brzmi jak „<span class=\"news-text-tone--4\">odchudzanie bez szkody dla organizmu</span>”, ale tu trzeba przyhamować entuzjazm. Najważniejsze: </span><span><strong><span></span><span>to nie jest potwierdzona terapia dla ludzi</span><span>.</span></strong> Główne wyniki pochodzą z badań na otyłych myszach oraz z analiz ludzkiej tkanki tłuszczowej poza organizmem. <span class=\"news-text-tone--4\">U myszy P-G3 zmniejszał tłuszcz trzewny</span>, zwiększał wydatek energetyczny i poprawiał niektóre parametry metaboliczne. To obiecujące, ale nadal jest to etap przedkliniczny, a nie gotowy zabieg z gabinetu medycyny estetycznej.  </span><br><span></span></p><p><span>Największa różnica względem liposukcji jest taka, że ta technologia </span><span><strong><span></span><span>nie ma fizycznie „wycinać” tłuszczu</span></strong>, tylko wpływać na zachowanie komórek tłuszczowych. <span class=\"news-text-tone--1\">Problem w tym, że między dobrym wynikiem u myszy a bezpiecznym leczeniem człowieka jest długa droga</span>: trzeba potwierdzić skuteczność, bezpieczeństwo, <a href=\"kawa-jako-preworkout-po-50.html\">dawkowanie</a>, możliwe działania niepożądane i trwałość efektu. Nowsze przeglądy badań nad celowanym dostarczaniem leków do <strong>tkanki tłuszczowej</strong> pokazują, że kierunek jest ciekawy, ale wciąż ograniczają go problemy translacyjne, m.in. toksyczność, precyzja dostarczania i produkcja takich terapii na większą skalę.  </span><br><span></span></p><p><strong><span>T</span><span>o interesująca technologia i sensowny kierunek badań nad otyłością, ale na dziś bardziej przypomina </span><span>obietnicę laboratoriów niż gotowe rozwiązanie dla pacjenta</span><span>. Czyli: ciekawie, ale jeszcze bez fanfar i bez hasła „żegnaj brzuchu do wakacji”.</span></strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260502_110358_b3fe38aa",
+            "image_alt": "Lek na tłuszcz na brzuchu",
+            "sources": [
+                {
+                    "label": "Nature Nanotechnology / PubMed — “Selective targeting of visceral adiposity by polycation nanomedicine”",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/36456644/?utm_source=chatgpt.com"
+                },
+                {
+                    "label": "PMC Review 2025 — “Adipose tissue-targeted drug delivery for treating obesity”",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12377096/?utm_source=chatgpt.com"
+                }
+            ],
+            "created_at": "2026-05-02T11:03:57+00:00",
+            "updated_at": "2026-05-02T11:03:57+00:00",
+            "published_at": ""
+        },
+        {
+            "id": "news_4e7b91f5bf86",
+            "title": "AI przeskanowała Reddita. Czy Ozempic i Mounjaro mają skutki uboczne, których nie widać w ulotkach?",
+            "content_html": "<p><span>Naukowcy z University of Pennsylvania przeanalizowali </span><span><strong><span></span><span>410 198 postów z Reddita</span></strong> o lekach GLP-1, czyli m.in. semaglutydzie i tirzepatydzie — substancjach znanych z preparatów takich jak <span class=\"news-text-tone--4\">Ozempic, Wegovy, Mounjaro czy Zepbound</span>. Dane obejmowały wpisy z lat 2019–2025 i </span><span><strong><span></span><span>67 008 użytkowników</span></strong>, którzy deklarowali stosowanie tych <span class=\"news-text-tone--4\">leków</span>.</span></p><p><span>Wynik jest ciekawy, ale wymaga ostrożności. </span><span><strong><span></span><span>43,5% użytkowników opisało przynajmniej jeden skutek uboczny</span></strong>. Najczęściej pojawiały się znane problemy żołądkowo-jelitowe: <span class=\"news-text-tone--4\">nudności, wymioty, zaparcia i biegunka</span>. Mniej oczywiste sygnały to m.in. </span><strong><span>zmęczenie, zaburzenia miesiączkowania, dreszcze, uczucie zimna i uderzenia gorąca</span><span>.</span></strong><br><span></span></p><p><span>To nie znaczy, że Reddit „</span><span class=\"news-text-tone--1\">udowodnił</span><span>” nowe działania niepożądane. Posty z internetu nie są badaniem klinicznym. Nie znamy pełnej historii zdrowia użytkowników, dawek, innych leków ani tego, czy objaw </span><span class=\"news-text-tone--4\"><a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">naprawdę</a> wynikał z GLP-1</span><span>. Dodatkowo częściej piszą osoby, którym coś przeszkadza.</span><br><span></span></p><p><span>Ale takie dane mogą działać jak system </span><span class=\"news-text-tone--1\">wczesnego ostrzegania</span><span>. Jeśli tysiące osób opisują podobne objawy, to nie jest jeszcze dowód, ale sygnał wart sprawdzenia.</span><br><span></span></p><p><strong>Ozempic i Mounjaro mają znany profil skutków ubocznych, głównie żołądkowo-jelitowych. Reddit nie zastępuje lekarza, ale może szybciej pokazać, o czym pacjenci naprawdę mówią.</strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260502_105916_f91e049e",
+            "image_alt": "Ozempic, Wegovy, Mounjaro czy Zepbound",
+            "sources": [
+                {
+                    "label": "Self-Reported Side Effects of Semaglutide and Tirzepatide in Online Communities",
+                    "url": "https://arxiv.org/abs/2603.12341"
+                },
+                {
+                    "label": "Medical News Today",
+                    "url": "https://www.medicalnewstoday.com/articles/ai-study-reddit-posts-reveals-possible-new-side-effects-weight-loss-drugs"
+                }
+            ],
+            "created_at": "2026-05-02T10:59:16+00:00",
+            "updated_at": "2026-05-02T10:59:16+00:00",
+            "published_at": ""
+        },
+        {
+            "id": "news_2e625ff6e7cd",
+            "title": "Czy jajko przed snem stabilizuje cukier?",
+            "content_html": "<p><span>Nie ma mocnych dowodów, że </span><span><strong><span></span><span>jedno jajko przed snem automatycznie zapobiega nocnym spadkom cukru</span></strong>. To zbyt proste hasło z internetu.</span></p><p><span>Jajko może być dobrą małą </span><span class=\"news-text-tone--1\">przekąską</span><span>, bo zawiera </span><span class=\"news-text-tone--4\">białko, tłuszcz i mało węglowodanów</span><span>. U części osób może pomóc <a href=\"motywacja-po-50.html\">utrzymać</a> stabilniejszą glikemię niż słodka przekąska. Jedno badanie u osób z </span><span class=\"news-text-tone--4\">cukrzycą typu 2</span><span> sugerowało korzystniejszy efekt przekąski białkowo-tłuszczowej, ale nie oznacza to uniwersalnej ochrony przed hipoglikemią.</span><br><span></span></p><p><span>Przeglądy badań pokazują, że efekt przekąsek przed snem jest </span><strong>mieszany</strong><span>. Dużo zależy od leków, insuliny, aktywności fizycznej, alkoholu, poziomu cukru przed snem i indywidualnej reakcji </span><span>organizmu.</span><br><span></span></p><p><strong><span>J</span><span>ajko przed snem może być rozsądniejsze niż ciastko, ale nie jest „lekiem” na nocne spadki cukru. Przy częstych spadkach trzeba analizować pomiary i leczenie z lekarzem.</span></strong><br><span></span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260502_105447_a0f8ef76",
+            "image_alt": "Jajko przed snem",
+            "sources": [
+                {
+                    "label": "Bedtime snack review",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9630881/"
+                },
+                {
+                    "label": "American Diabetes Association: Hypoglycemia",
+                    "url": "https://diabetes.org/living-with-diabetes/hypoglycemia-low-blood-glucose/causes-prevention"
+                }
+            ],
+            "created_at": "2026-05-02T10:54:46+00:00",
+            "updated_at": "2026-05-02T11:13:49+00:00",
+            "published_at": "2026-05-02T11:13:49+00:00"
+        },
         {
             "id": "news_2bdf428cd43c",
             "title": "Zone 2 cardio — dobre, ale bez magii",
