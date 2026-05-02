@@ -49,6 +49,7 @@ Publikacja artykulow:
 - kanoniczny flow publikacji artykulow: `scripts/import-article.js` (`.fitpo50.json` + precheck); `article-template-bento.html` / `create-article-from-template.js` tylko do recznych szkicow,
 - preferuj szybki pipeline jednej komendy: `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --force <true|false>`,
 - pipeline publikacyjny musi wykonywac kolejnosc: `fix-fitpo50-json` -> `json-fitpo50-gate --file` -> `import-article --precheck` -> `import-article --publish` -> `sync-site-assets-mirror` -> `news-integrity` -> `predeploy-gate --slug`,
+- na etapie `json-fitpo50-gate --file` traktuj `meta_description` poza limitem (145-160 znakow) jako twardy blokujacy FAIL i nie przechodz dalej do importu/publikacji,
 - `fix-fitpo50-json` dziala w trybie bezpiecznym:
   - domyslnie `--write false` (tylko check/stdout),
   - zapis tylko przy `--write true`,
@@ -56,6 +57,8 @@ Publikacja artykulow:
 - pliki JSON spoza repo (np. `~/Downloads`) sa blokowane przez fixer, ale `article-pipeline` obsluguje to przez bezpieczna kopie robocza,
 - `article-pipeline` automatycznie tworzy kopie robocza w `/tmp/fitpo50-import-*/<slug>.fitpo50.json`, pracuje tylko na niej i usuwa ja po zakonczeniu (takze po bledzie),
 - brak tolerancji na bledy: jesli ktorykolwiek krok gate/validator zwroci FAIL, publikacja i push sa zatrzymane,
+- przed ogloszeniem statusu "gotowe" obowiazkowo uruchom `npm run json:gate:diff`; ma byc PASS (brak blokujacych bledow w `.fitpo50.json`),
+- przed ogloszeniem statusu "gotowe" obowiazkowo sprawdz, czy `data/import/*.fitpo50.json` nie zostawia blockerow push; jesli zostawia, popraw albo usun/przenies plik roboczy z repo i ponow gate, dopiero potem wolno oglosic "gotowe",
 - przed `prepush` zawsze uruchamiaj mirror zasobow: `npm run assets:mirror:sync` (PDF + miniatury NEWS + JSON mirror do `_site`),
 - obowiazkowo uruchom walidator standardu: `node scripts/validate-article-standard.js <plik.html>`,
 - obowiazkowo generuj PDF artykulu i podpinaj duzy przycisk w hero: `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>` (albo hurtowo: `npm run article:pdf:sync`),
