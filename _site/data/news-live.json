@@ -1,7 +1,29 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-02T11:13:49+00:00",
+    "updatedAt": "2026-05-03T09:44:42+00:00",
     "items": [
+        {
+            "id": "news_24b1585d5429",
+            "title": "Schłodzony ryż a cukier we krwi: czy to naprawdę działa?",
+            "content_html": "<p><span>Tak, w tym haśle jest sporo prawdy, ale z kilkoma ważnymi <span class=\"news-text-tone--3\">zastrzeżeniami</span>. Gdy ugotowany ryż zostanie schłodzony, część skrobi zmienia strukturę w tzw. </span><span><strong><span></span><span>skrobię oporną</span></strong>. <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">Organizm</a> trawi ją wolniej, trochę bardziej jak <span class=\"news-text-tone--3\">błonnik</span>, więc po takim ryżu wzrost glukozy we krwi może być mniejszy niż po świeżo ugotowanym.</span></p><p><span>W <a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">badaniu</a> z 2015 roku porównano świeżo ugotowany biały ryż z ryżem schłodzonym przez </span><span><strong><span></span><span>24 godziny w 4°C</span></strong>, a potem podgrzanym. Ten schłodzony i odgrzany miał więcej <span class=\"news-text-tone--4\">skrobi opornej </span>i powodował niższą odpowiedź <span class=\"news-text-tone--2\">glikemiczną niż świeży ryż</span>. Podobne wnioski pojawiły się w badaniu u osób z cukrzycą typu 1: <strong>ryż po chłodzeniu dawał niższy wzrost glukozy po posiłku.</strong> <span class=\"news-text-tone--2\">Tu jednak ważny haczyk</span> — przy standardowej dawce insuliny zwiększał też ryzyko hipoglikemii.  </span><br><span></span></p><p><span>Czy trzeba chłodzić dokładnie 12–24 godziny? Najlepiej bazować na badaniach, w których często używano </span><span><strong><span></span><span>24 godzin w lodówce przy ok. 4°C</span><span>.</span></strong> Krótsze <span class=\"news-text-tone--1\">chłodzenie</span> też może coś zmieniać, ale efekt może być słabszy.</span><br><span></span></p><p><strong>Co z olejem kokosowym?</strong><span> Tu internet trochę odleciał. Były doniesienia, że gotowanie ryżu z olejem kokosowym i późniejsze chłodzenie może mocno zwiększyć ilość skrobi opornej, ale te dane były głównie wstępne i mocno medialne. </span><span class=\"news-text-tone--1\">Nie traktowałbym tego jako pewnej metody na „obcięcie kalorii o połowę”.</span><span> </span><span> </span><br><span></span></p><p><strong><span>U</span><span>gotowanie ryżu, szybkie schłodzenie go w lodówce i zjedzenie następnego dnia po podgrzaniu może być prostym sposobem na łagodniejszy skok cukru. Ale to nie robi z ryżu produktu „bez kalorii” i nie zastępuje kontroli porcji.</span></strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260503_094436_a98bfc4a",
+            "image_alt": "Ryż a cukier w organiźmie",
+            "sources": [
+                {
+                    "label": "Effect of cooling of cooked white rice on resistant starch content and glycemic response",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/26693746/"
+                },
+                {
+                    "label": "Influence of resistant starch resulting from the cooling of rice on postprandial glycemia in type 1 diabetes",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/35429987/"
+                }
+            ],
+            "created_at": "2026-05-03T09:44:36+00:00",
+            "updated_at": "2026-05-03T09:44:36+00:00",
+            "published_at": ""
+        },
         {
             "id": "news_075855833e61",
             "title": "Markery nowotworowe z krwi: dlaczego trzeba uważać",
@@ -72,7 +94,7 @@
             "id": "news_4e7b91f5bf86",
             "title": "AI przeskanowała Reddita. Czy Ozempic i Mounjaro mają skutki uboczne, których nie widać w ulotkach?",
             "content_html": "<p><span>Naukowcy z University of Pennsylvania przeanalizowali </span><span><strong><span></span><span>410 198 postów z Reddita</span></strong> o lekach GLP-1, czyli m.in. semaglutydzie i tirzepatydzie — substancjach znanych z preparatów takich jak <span class=\"news-text-tone--4\">Ozempic, Wegovy, Mounjaro czy Zepbound</span>. Dane obejmowały wpisy z lat 2019–2025 i </span><span><strong><span></span><span>67 008 użytkowników</span></strong>, którzy deklarowali stosowanie tych <span class=\"news-text-tone--4\">leków</span>.</span></p><p><span>Wynik jest ciekawy, ale wymaga ostrożności. </span><span><strong><span></span><span>43,5% użytkowników opisało przynajmniej jeden skutek uboczny</span></strong>. Najczęściej pojawiały się znane problemy żołądkowo-jelitowe: <span class=\"news-text-tone--4\">nudności, wymioty, zaparcia i biegunka</span>. Mniej oczywiste sygnały to m.in. </span><strong><span>zmęczenie, zaburzenia miesiączkowania, dreszcze, uczucie zimna i uderzenia gorąca</span><span>.</span></strong><br><span></span></p><p><span>To nie znaczy, że Reddit „</span><span class=\"news-text-tone--1\">udowodnił</span><span>” nowe działania niepożądane. Posty z internetu nie są badaniem klinicznym. Nie znamy pełnej historii zdrowia użytkowników, dawek, innych leków ani tego, czy objaw </span><span class=\"news-text-tone--4\"><a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">naprawdę</a> wynikał z GLP-1</span><span>. Dodatkowo częściej piszą osoby, którym coś przeszkadza.</span><br><span></span></p><p><span>Ale takie dane mogą działać jak system </span><span class=\"news-text-tone--1\">wczesnego ostrzegania</span><span>. Jeśli tysiące osób opisują podobne objawy, to nie jest jeszcze dowód, ale sygnał wart sprawdzenia.</span><br><span></span></p><p><strong>Ozempic i Mounjaro mają znany profil skutków ubocznych, głównie żołądkowo-jelitowych. Reddit nie zastępuje lekarza, ale może szybciej pokazać, o czym pacjenci naprawdę mówią.</strong><br><span></span></p>",
-            "status": "draft",
+            "status": "published",
             "sort_order": 1,
             "image_base": "news_20260502_105916_f91e049e",
             "image_alt": "Ozempic, Wegovy, Mounjaro czy Zepbound",
@@ -87,8 +109,8 @@
                 }
             ],
             "created_at": "2026-05-02T10:59:16+00:00",
-            "updated_at": "2026-05-02T10:59:16+00:00",
-            "published_at": ""
+            "updated_at": "2026-05-03T09:44:42+00:00",
+            "published_at": "2026-05-03T09:44:42+00:00"
         },
         {
             "id": "news_2e625ff6e7cd",

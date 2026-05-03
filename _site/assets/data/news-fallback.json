@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-02T11:13:49+00:00",
+    "updatedAt": "2026-05-03T09:44:42+00:00",
     "items": [
+        {
+            "id": "news_4e7b91f5bf86",
+            "title": "AI przeskanowała Reddita. Czy Ozempic i Mounjaro mają skutki uboczne, których nie widać w ulotkach?",
+            "content_html": "<p><span>Naukowcy z University of Pennsylvania przeanalizowali </span><span><strong><span></span><span>410 198 postów z Reddita</span></strong> o lekach GLP-1, czyli m.in. semaglutydzie i tirzepatydzie — substancjach znanych z preparatów takich jak <span class=\"news-text-tone--4\">Ozempic, Wegovy, Mounjaro czy Zepbound</span>. Dane obejmowały wpisy z lat 2019–2025 i </span><span><strong><span></span><span>67 008 użytkowników</span></strong>, którzy deklarowali stosowanie tych <span class=\"news-text-tone--4\">leków</span>.</span></p><p><span>Wynik jest ciekawy, ale wymaga ostrożności. </span><span><strong><span></span><span>43,5% użytkowników opisało przynajmniej jeden skutek uboczny</span></strong>. Najczęściej pojawiały się znane problemy żołądkowo-jelitowe: <span class=\"news-text-tone--4\">nudności, wymioty, zaparcia i biegunka</span>. Mniej oczywiste sygnały to m.in. </span><strong><span>zmęczenie, zaburzenia miesiączkowania, dreszcze, uczucie zimna i uderzenia gorąca</span><span>.</span></strong><br><span></span></p><p><span>To nie znaczy, że Reddit „</span><span class=\"news-text-tone--1\">udowodnił</span><span>” nowe działania niepożądane. Posty z internetu nie są badaniem klinicznym. Nie znamy pełnej historii zdrowia użytkowników, dawek, innych leków ani tego, czy objaw </span><span class=\"news-text-tone--4\"><a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">naprawdę</a> wynikał z GLP-1</span><span>. Dodatkowo częściej piszą osoby, którym coś przeszkadza.</span><br><span></span></p><p><span>Ale takie dane mogą działać jak system </span><span class=\"news-text-tone--1\">wczesnego ostrzegania</span><span>. Jeśli tysiące osób opisują podobne objawy, to nie jest jeszcze dowód, ale sygnał wart sprawdzenia.</span><br><span></span></p><p><strong>Ozempic i Mounjaro mają znany profil skutków ubocznych, głównie żołądkowo-jelitowych. Reddit nie zastępuje lekarza, ale może szybciej pokazać, o czym pacjenci naprawdę mówią.</strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260502_105916_f91e049e.avif",
+                "webp": "./assets/news/news_20260502_105916_f91e049e.webp",
+                "jpg": "./assets/news/news_20260502_105916_f91e049e.jpg",
+                "alt": "Ozempic, Wegovy, Mounjaro czy Zepbound",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Self-Reported Side Effects of Semaglutide and Tirzepatide in Online Communities",
+                    "url": "https://arxiv.org/abs/2603.12341"
+                },
+                {
+                    "label": "Medical News Today",
+                    "url": "https://www.medicalnewstoday.com/articles/ai-study-reddit-posts-reveals-possible-new-side-effects-weight-loss-drugs"
+                }
+            ],
+            "updated_at": "2026-05-03T09:44:42+00:00",
+            "published_at": "2026-05-03T09:44:42+00:00",
+            "excerpt": "Naukowcy z University of Pennsylvania przeanalizowali 410 198 postów z Reddita o lekach GLP-1, czyli m.in. semaglutydzie i tirzepatydzie — substancjach znanych z preparatów takich jak Ozempic, Wegovy, Mounjaro czy Zepbo…"
+        },
         {
             "id": "news_2e625ff6e7cd",
             "title": "Czy jajko przed snem stabilizuje cukier?",
