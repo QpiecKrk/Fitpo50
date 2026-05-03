@@ -220,4 +220,8 @@ articles:
   title: "Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda? | FitPo50"
   section: "Zdrowie"
   summary: "Peptydy to biologiczne SMS-y do Twoich komórek. Od kolagenu po semaglutyd – sprawdzamy co działa, co jest bezpieczne, a co pozostaje niebezpiecznym"
+- url: https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html
+  title: "Trening siłowy jako eliksir młodości po 50-tce – praktyczny | FitPo50"
+  section: "Ruch"
+  summary: "Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo."
 

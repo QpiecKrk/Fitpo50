@@ -20,6 +20,11 @@
   <meta name="twitter:title" content="FitPo50 | Trening i dieta po 50-tce">
   <meta name="twitter:description" content="Praktyczne porady o ruchu, jedzeniu i zdrowiu po 50-tce. Konkret, regularność i rzetelne źródła.">
   <meta name="twitter:image" content="https://fitpo50.pl/assets/hero-og.jpg">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
+  <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+  <link rel="preload" as="image" href="./assets/hero-main-mountains.avif" type="image/avif" fetchpriority="high">
 
   <script type="application/ld+json">
   [
@@ -1394,7 +1399,7 @@
   <div class="shell">
     <header class="topbar">
       <div class="brand">
-        <img class="brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" onerror="this.style.display='none'">
+        <img class="brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="112" height="112" loading="eager" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
         <div class="brand__text">
           <span class="brand__name">FitPo50</span>
           <span class="brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span>
@@ -1422,7 +1427,7 @@
         <picture>
           <source srcset="./assets/hero-main-mountains.avif" type="image/avif">
           <source srcset="./assets/hero-main-mountains.webp" type="image/webp">
-          <img src="./assets/hero-main-mountains.jpg" alt="Główne hero FitPo50 - krajobraz górski">
+          <img src="./assets/hero-main-mountains.jpg" alt="Główne hero FitPo50 - krajobraz górski" width="1600" height="900" loading="eager" fetchpriority="high" decoding="async">
         </picture>
         <div class="hero-overlay">
           <span class="eyebrow">AKTYWNOŚĆ, DIETA, FAKTY</span>
@@ -1436,13 +1441,16 @@
       </section>
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
-        <img class="latest-article__bg" id="latestArticleImage" src="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        <picture aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/trening-silowy-hormony-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda?</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Peptydy to biologiczne SMS-y do Twoich komórek. Od kolagenu po semaglutyd – sprawdzamy co działa, co jest bezpieczne, a co pozostaje niebezpiecznym</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Trening siłowy jako eliksir młodości po 50-tce – praktyczny</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="trening-silowy-eliksir-mlodosci-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -1539,22 +1547,34 @@
 
       <section id="kategorie" class="categories" aria-label="4 kategorie">
         <a class="cat" href="rusz-sie.html" data-title="kategoria ruch">
-          <img class="cat__bg" src="./assets/silka-hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          <picture aria-hidden="true">
+            <source srcset="./assets/silka-hero.avif" type="image/avif">
+            <img class="cat__bg" src="./assets/silka-hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          </picture>
           <strong>Ruch</strong>
           <span>Trening, mobilność, sprawność</span>
         </a>
         <a class="cat" href="jedzenie.html" data-title="kategoria jedzenie">
-          <img class="cat__bg" src="./assets/Hero_Upo.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          <picture aria-hidden="true">
+            <source srcset="./assets/Hero_Upo.avif" type="image/avif">
+            <img class="cat__bg" src="./assets/Hero_Upo.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          </picture>
           <strong>Jedzenie</strong>
           <span>Dieta, nawyki, praktyczne wybory</span>
         </a>
         <a class="cat" href="zdrowie.html" data-title="kategoria zdrowie">
-          <img class="cat__bg" src="./assets/apob-apoa-hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          <picture aria-hidden="true">
+            <source srcset="./assets/apob-apoa-hero.avif" type="image/avif">
+            <img class="cat__bg" src="./assets/apob-apoa-hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          </picture>
           <strong>Zdrowie</strong>
           <span>Profilaktyka i badania</span>
         </a>
         <a class="cat" href="ciekawe.html" data-title="kategoria ciekawe">
-          <img class="cat__bg" src="./assets/wino_miesnie_hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          <picture aria-hidden="true">
+            <source srcset="./assets/wino_miesnie_hero.avif" type="image/avif">
+            <img class="cat__bg" src="./assets/wino_miesnie_hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          </picture>
           <strong>Ciekawe</strong>
           <span>Tematy, które zmieniają perspektywę</span>
         </a>
@@ -2112,9 +2132,18 @@
       return `${text.slice(0, maxLen).trimEnd()}...`;
     }
 
+    function toAvifIfPossible(imagePath) {
+      if (!imagePath || typeof imagePath !== 'string') return '';
+      if (/\.webp$/i.test(imagePath)) return imagePath.replace(/\.webp$/i, '.avif');
+      return imagePath;
+    }
+
     function setLatestArticleImage(imagePath) {
       if (!latestArticleImage) return;
-      latestArticleImage.src = imagePath || './assets/keto-cholesterol-hero.jpg';
+      const nextImage = imagePath || './assets/keto-cholesterol-hero.jpg';
+      const avifSource = document.getElementById('latestArticleImageAvifSource');
+      if (avifSource) avifSource.setAttribute('srcset', toAvifIfPossible(nextImage));
+      latestArticleImage.src = nextImage;
     }
 
     window.__fitpoImageFallback = function (img) {
@@ -2173,10 +2202,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda?',
-        excerpt: 'Peptydy to biologiczne SMS-y do Twoich komórek. Od kolagenu po semaglutyd – sprawdzamy co działa, co jest bezpieczne, a co pozostaje niebezpiecznym',
-        image: './assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp',
-        url: 'peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html'
+        title: 'Trening siłowy jako eliksir młodości po 50-tce – praktyczny',
+        excerpt: 'Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo.',
+        image: './assets/trening-silowy-hormony-50-hero.webp',
+        url: 'trening-silowy-eliksir-mlodosci-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2206,7 +2235,14 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Zdrowie',
+          category: 'Ruch',
+          title: 'Trening siłowy jako eliksir młodości po 50-tce – praktyczny',
+          excerpt: 'Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo.',
+          image: './assets/trening-silowy-hormony-50-hero.webp',
+          url: 'trening-silowy-eliksir-mlodosci-po-50.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda?',
           excerpt: 'Peptydy to biologiczne SMS-y do Twoich komórek. Od kolagenu po semaglutyd – sprawdzamy co działa, co jest bezpieczne, a co pozostaje niebezpiecznym',
           image: './assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp',
@@ -2218,13 +2254,6 @@
           excerpt: 'Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń',
           image: './assets/trening-silowy-dna-hero.webp',
           url: 'trening-silowy-starzenie-komorkowe-dna.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Sakady — supresja sakadyczna i 40 000 ślepych chwil dziennie',
-          excerpt: 'Sakady to błyskawiczne skoki oczu wykonywane tysiące razy dziennie. Mózg aktywnie je ukrywa zanim oko ruszy. Supresja sakadyczna i zmiany po 50-tce.',
-          image: './assets/sakady-mozg-oko-sciezki-sakad-hero.webp',
-          url: 'sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
@@ -2486,11 +2515,12 @@
     renderTips(tipsIdx);
     renderDailyTruthLinks();
     loadLatestArticle();
-    loadNewsFeed();
     if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => loadNewsFeed(), { timeout: 1600 });
       window.requestIdleCallback(() => loadDailyFaq(), { timeout: 1800 });
       window.requestIdleCallback(() => loadReadingRoom(), { timeout: 2200 });
     } else {
+      setTimeout(() => loadNewsFeed(), 300);
       setTimeout(() => loadDailyFaq(), 800);
       setTimeout(() => loadReadingRoom(), 1100);
     }
@@ -2499,15 +2529,18 @@
       renderTips(tipsIdx);
     }, 9000);
 
-    document.getElementById('searchInput').addEventListener('input', function () {
-      const q = this.value.toLowerCase().trim();
-      const cards = document.querySelectorAll('[data-title]');
-      cards.forEach(card => {
-        const hit = !q || card.dataset.title.includes(q);
-        card.style.outline = hit && q ? '2px solid rgba(184,107,79,.45)' : 'none';
-        card.style.outlineOffset = '2px';
+    const searchInputEl = document.getElementById('searchInput');
+    if (searchInputEl) {
+      searchInputEl.addEventListener('input', function () {
+        const q = this.value.toLowerCase().trim();
+        const cards = document.querySelectorAll('[data-title]');
+        cards.forEach(card => {
+          const hit = !q || card.dataset.title.includes(q);
+          card.style.outline = hit && q ? '2px solid rgba(184,107,79,.45)' : 'none';
+          card.style.outlineOffset = '2px';
+        });
       });
-    });
+    }
 
     let knowledgeDoc = null;
     const knowledgeHtmlCache = new Map();
@@ -2571,7 +2604,6 @@
       // Start with all cards collapsed.
     }
   </script><script src="./dist/cmp.js?v=1.1" defer></script>
-</body>
 <footer class="site-footer-bento" aria-label="Stopka FitPo50">
   <div class="site-footer-bento__grid">
     <section class="site-footer-bento__card" aria-label="O serwisie FitPo50">
@@ -2604,4 +2636,5 @@
     <p class="site-footer-bento__note">Ważna informacja: nie jestem lekarzem. Treści na stronie mają charakter edukacyjny i informacyjny, nie zastępują konsultacji medycznej ani indywidualnych zaleceń specjalisty.</p>
   </div>
 </footer>
+</body>
 </html>
