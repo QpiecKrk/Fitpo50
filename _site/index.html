@@ -1443,14 +1443,14 @@
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
           <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/trening-silowy-hormony-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Trening siłowy jako eliksir młodości po 50-tce – praktyczny</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="trening-silowy-eliksir-mlodosci-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Rentgen, tomografia CT i rezonans MRI — czym się różnią?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Rentgen, tomografia CT i rezonans MRI to trzy różne technologie. Dowiedz się czym się różnią, kiedy stosować każde z nich i co zmienia się po 50-tce.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="rentgen-tomografia-ct-rezonans-mri-roznice-badania.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2202,10 +2202,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Trening siłowy jako eliksir młodości po 50-tce – praktyczny',
-        excerpt: 'Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo.',
-        image: './assets/trening-silowy-hormony-50-hero.webp',
-        url: 'trening-silowy-eliksir-mlodosci-po-50.html'
+        title: 'Rentgen, tomografia CT i rezonans MRI — czym się różnią?',
+        excerpt: 'Rentgen, tomografia CT i rezonans MRI to trzy różne technologie. Dowiedz się czym się różnią, kiedy stosować każde z nich i co zmienia się po 50-tce.',
+        image: './assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.webp',
+        url: 'rentgen-tomografia-ct-rezonans-mri-roznice-badania.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2235,7 +2235,14 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Ruch',
+          category: 'Ciekawe',
+          title: 'Rentgen, tomografia CT i rezonans MRI — czym się różnią?',
+          excerpt: 'Rentgen, tomografia CT i rezonans MRI to trzy różne technologie. Dowiedz się czym się różnią, kiedy stosować każde z nich i co zmienia się po 50-tce.',
+          image: './assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.webp',
+          url: 'rentgen-tomografia-ct-rezonans-mri-roznice-badania.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Trening siłowy jako eliksir młodości po 50-tce – praktyczny',
           excerpt: 'Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo.',
           image: './assets/trening-silowy-hormony-50-hero.webp',
@@ -2247,13 +2254,6 @@
           excerpt: 'Peptydy to biologiczne SMS-y do Twoich komórek. Od kolagenu po semaglutyd – sprawdzamy co działa, co jest bezpieczne, a co pozostaje niebezpiecznym',
           image: './assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp',
           url: 'peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Trening siłowy po 50: Jak odmłodzić swoje komórki i DNA?',
-          excerpt: 'Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń',
-          image: './assets/trening-silowy-dna-hero.webp',
-          url: 'trening-silowy-starzenie-komorkowe-dna.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

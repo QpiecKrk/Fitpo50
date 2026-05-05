@@ -224,4 +224,8 @@ articles:
   title: "Trening siłowy jako eliksir młodości po 50-tce – praktyczny | FitPo50"
   section: "Ruch"
   summary: "Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo."
+- url: https://fitpo50.pl/rentgen-tomografia-ct-rezonans-mri-roznice-badania.html
+  title: "Rentgen, tomografia CT i rezonans MRI — czym się różnią? | FitPo50"
+  section: "Ciekawe"
+  summary: "Rentgen, tomografia CT i rezonans MRI to trzy różne technologie. Dowiedz się czym się różnią, kiedy stosować każde z nich i co zmienia się po 50-tce."
 
