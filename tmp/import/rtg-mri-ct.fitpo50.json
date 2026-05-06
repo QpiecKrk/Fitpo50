@@ -1,0 +1,393 @@
+{
+  "title": "Rentgen, tomografia CT i rezonans MRI — czym się różnią?",
+  "slug": "rentgen-tomografia-ct-rezonans-mri-roznice-badania",
+  "meta_description": "Rentgen, tomografia CT i rezonans MRI to trzy różne technologie. Dowiedz się czym się różnią, kiedy stosować każde z nich i co zmienia się po 50-tce.",
+  "category": "ciekawe",
+  "lead": "Rentgen, tomografia komputerowa CT i rezonans magnetyczny MRI — trzy badania obrazowe, które lekarz może zlecić tego samego dnia, w tej samej przychodni, w sprawie tego samego problemu. A jednak działają zupełnie inaczej, pokazują różne rzeczy i niosą różne ryzyko. 90% pacjentów nie zna tej różnicy. Po pięćdziesiątce, gdy badania diagnostyczne stają się częścią życia, warto to zmienić.",
+  "reading_time": "9",
+  "date_published": "2026-04-27",
+  "hero_image": "rtg-mri-ct-badania-obrazowe-porownanie-hero",
+  "hero_alt": "Porównanie czterech obrazów granatu — zdjęcie, rentgen RTG, rezonans MRI i tomografia CT — wizualizacja różnic między technikami obrazowania",
+  "hero_motto_html": "<em>Ten sam organ, te same tkanki — a każde badanie pokazuje coś zupełnie innego. Wiedza o tym może przyspieszyć twoją diagnozę o tygodnie.</em>",
+  "key_takeaways": [
+    "Rentgen RTG używa promieniowania jonizującego i najlepiej pokazuje kości — dawka to ok. 0,1 mSv, czyli tyle co 10 dni naturalnego tła radiacyjnego.",
+    "Tomografia CT to wielokrotny rentgen z dawką 2–20 mSv — pokazuje przekroje 3D tkanek miękkich, naczyń i narządów wewnętrznych.",
+    "Rezonans MRI nie używa promieniowania jonizującego — działa na polach magnetycznych i najlepiej obrazuje mózg, rdzeń kręgowy i chrząstki.",
+    "Po 50. roku życia lekarze częściej zlecają CT i MRI niż RTG — zmiany zwyrodnieniowe i nowotwory wymagają dokładniejszego obrazowania."
+  ],
+  "sections": [
+    {
+      "title": "Czym różnią się rentgen, tomografia CT i rezonans MRI?",
+      "paragraphs_html": [
+        "<p>Rentgen (RTG), tomografia komputerowa (CT) i rezonans magnetyczny (MRI) to trzy fundamentalnie różne technologie diagnostyczne. Łączy je jedno: wszystkie tworzą obraz wnętrza ciała bez konieczności operacji. Różni je wszystko inne — fizyka, bezpieczeństwo, czas badania i to, co pokazują najlepiej.</p>",
+        "<p>Rentgen działa na promieniowaniu jonizującym rentgenowskim (promieniach X), które przechodzi przez ciało i pada na detektor. Gęste struktury — kości i metale — pochłaniają więcej promieni i wypadają jasno. Tkanki miękkie przepuszczają promieniowanie i wypadają ciemno. Efekt: płaski, dwuwymiarowy obraz. Tomografia CT to rentgen wykonany setki razy wokół ciała — komputer składa z tego przekroje i modele 3D. Rezonans MRI nie używa promieniowania jonizującego w ogóle: działa na silnym polu magnetycznym i falach radiowych, które pobudzają atomy wodoru w tkankach do emisji sygnałów. Z tych sygnałów komputer buduje szczegółowy obraz — szczególnie tkanek miękkich.</p> <p>Zobacz też: <a href=\"https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html\">Markery krwi po 50-tce</a>.</p>",
+        "<p>Ważne jest też to, czego żadne z tych badań nie zastąpi: oceny lekarza. Obraz to narzędzie, nie diagnoza.</p>"
+      ],
+      "list_items": [
+        "RTG: promieniowanie X, obraz 2D, najlepszy do kości i płuc",
+        "CT: wielokrotny RTG, obraz 3D, najlepszy do narządów i naczyń",
+        "MRI: pole magnetyczne, bez promieniowania, najlepszy do mózgu i chrząstek",
+        "Czas badania: RTG kilka sekund, CT kilka minut, MRI 20–60 minut"
+      ],
+      "info_box": {
+        "style": "accent",
+        "title": "Ważne: Czym różnią się rentgen, tomografia CT i rezonans MRI?",
+        "content_html": "<p>Rentgen (RTG), tomografia komputerowa (CT) i rezonans magnetyczny (MRI) to trzy fundamentalnie różne technologie diagnostyczne. Łączy je jedno: wszystkie tworzą obraz wnętrza ciała bez konieczności operacji. Różni je wszystko inne — fizyka, bezpieczeństwo, czas badania i to, co pokazują najlepiej.</p>"
+      },
+      "image": {
+        "src": "./assets/rtg-mri-ct-schemat-porownanie-trzech-technologii.webp",
+        "alt": "Schemat porównujący zasady działania rentgena RTG, tomografii CT i rezonansu MRI w jednej grafice",
+        "caption": "Trzy technologie — trzy zupełnie różne fizyki. RTG to cień, CT to plastry, MRI to sygnały magnetyczne składane w obraz przez komputer."
+      }
+    },
+    {
+      "title": "Rentgen RTG — jak działa i kiedy go stosują lekarze?",
+      "paragraphs_html": [
+        "<p>Rentgen to najstarsza i najprostsza technika obrazowania. Promienie X przechodzą przez ciało, a detektor rejestruje różnice pochłaniania. Kości i zwapnienia wychodzą jasno, a tkanki miękkie ciemniej. Dzięki temu RTG pozostaje szybkim badaniem pierwszego wyboru przy urazach i ocenie płuc.</p>",
+        "<p>Rentgen jest badaniem z wyboru przy złamaniach, zwichnięciach, ocenie stawów, zmianach w płucach (zapalenie płuc, gruźlica, nowotwory płuca), ocenie serca i aorty oraz przy połkniętych ciałach obcych. Dawka promieniowania jest niska: zdjęcie klatki piersiowej to ok. 0,1 mSv — równowartość 10 dni naturalnego tła promieniowania kosmicznego i ziemskiego, któremu jesteśmy stale poddawani.</p>",
+        "<p>Ograniczenie rentgenu to nakładanie się struktur. Na płaskim obrazie 2D żebra zakrywają płuca, a kręgi zasłaniają rdzeń. To właśnie dlatego przy podejrzeniu skomplikowanych zmian lekarz sięga po CT lub MRI. Mimo to rentgen pozostaje pierwszym badaniem w większości ścieżek diagnostycznych — jest szybki, tani i dostępny w każdym szpitalu.</p>"
+      ],
+      "list_items": [
+        "Wskazania: złamania, płuca, serce, stawy, ciała obce",
+        "Dawka promieniowania: klatka piersiowa 0,1 mSv, kręgosłup lędźwiowy 1,8 mSv",
+        "Czas badania: kilka sekund ekspozycji, wynik w minutach",
+        "Ograniczenia: obraz 2D, słabo widoczne tkanki miękkie i mózg"
+      ],
+      "info_box": {
+        "style": "accent",
+        "title": "Ważne: Rentgen RTG — jak działa i kiedy go stosują lekarze?",
+        "content_html": "<p>Rentgen to najstarsza i najprostsza technika obrazowania. Promienie X przechodzą przez ciało, a detektor rejestruje różnice pochłaniania. Kości i zwapnienia wychodzą jasno, a tkanki miękkie ciemniej. Dzięki temu RTG pozostaje szybkim badaniem pierwszego wyboru przy urazach i ocenie płuc.</p>"
+      },
+      "image": {
+        "src": "./assets/rentgen-rtg-klatka-piersiowa-prawdziwy-skan.webp",
+        "alt": "Prawdziwy rentgen RTG klatki piersiowej pokazujący żebra, płuca i serce w odcieniach szarości",
+        "caption": "Klasyczny rentgen klatki piersiowej — kości białe, płuca ciemne, serce jako jasny zarys. Badanie trwa kilka sekund i jest dostępne w każdej izbie przyjęć."
+      }
+    },
+    {
+      "title": "Tomografia komputerowa CT — kiedy potrzebny jest przekrój 3D ciała?",
+      "paragraphs_html": [
+        "<p>Tomografia komputerowa (CT) to rentgen wykonywany z wielu kątów wokół pacjenta. Komputer składa ekspozycje w przekroje poprzeczne i modele 3D. Dlatego CT dużo lepiej pokazuje narządy i naczynia niż klasyczne RTG, szczególnie w diagnostyce nagłej i onkologicznej.</p>",
+        "<p>CT jest badaniem z wyboru w nagłych przypadkach: udar mózgu (odróżnienie udaru niedokrwiennego od krwotocznego decyduje o leczeniu i musi nastąpić w minutach), urazy wielonarządowe, podejrzenie tętniaka aorty, zatorowość płucna. Doskonale pokazuje narządy jamy brzusznej, naczynia krwionośne po podaniu kontrastu, nowotwory i przerzuty. Badanie trwa 2–10 minut.</p> <p>Powiązany temat: <a href=\"https://fitpo50.pl/apob-apoa-badania-cholesterol.html\">ApoB i ApoA</a>.</p>",
+        "<p>Cena za tę dokładność to wyższa dawka promieniowania niż przy RTG: badanie CT klatki piersiowej to ok. 7 mSv, CT jamy brzusznej ok. 8–10 mSv. Według raportu UNSCEAR z 2020 roku CT odpowiada za ok. 50% całkowitej medycznej dawki promieniowania przy zaledwie 5–10% wykonywanych badań obrazowych. To nie jest powód do paniki — ale powód, żeby CT zlecał lekarz, a nie pacjent na żądanie.</p>"
+      ],
+      "list_items": [
+        "Wskazania: udar, urazy, nowotwory, naczynia, jama brzuszna, płuca",
+        "Dawka promieniowania: CT klatki 7 mSv, CT brzucha 8–10 mSv",
+        "Czas badania: 2–10 minut, wynik do kilku godzin",
+        "Przewaga nad RTG: obraz 3D, rozróżnianie tkanek miękkich, brak nakładania się struktur"
+      ],
+      "info_box": {
+        "style": "accent",
+        "title": "Ważne: Tomografia komputerowa CT — kiedy potrzebny jest przekrój 3D ciała?",
+        "content_html": "<p>Tomografia komputerowa (CT) to rentgen wykonywany z wielu kątów wokół pacjenta. Komputer składa ekspozycje w przekroje poprzeczne i modele 3D. Dlatego CT dużo lepiej pokazuje narządy i naczynia niż klasyczne RTG, szczególnie w diagnostyce nagłej i onkologicznej.</p>"
+      },
+      "image": {
+        "src": "./assets/tomografia-ct-przekroj-3d-glowa-mozg-skan.webp",
+        "alt": "Przekrój tomografii komputerowej CT głowy pokazujący struktury mózgu, kości czaszki i naczynia w szarościach",
+        "caption": "Przekrój CT głowy — widoczne struktury mózgu, kości czaszki i komory mózgowe. Badanie trwa kilka minut i jest kluczowe przy podejrzeniu udaru."
+      }
+    },
+    {
+      "title": "Rezonans magnetyczny MRI — badanie bez promieniowania jonizującego",
+      "paragraphs_html": [
+        "<p>Rezonans MRI nie używa promieniowania jonizującego. Silne pole magnetyczne i fale radiowe tworzą bardzo szczegółowy obraz tkanek miękkich, dlatego badanie świetnie sprawdza się w diagnostyce mózgu, rdzenia, stawów i więzadeł. To kluczowa metoda, gdy potrzebna jest wysoka dokładność bez dawki promieniowania.</p>",
+        "<p>MRI jest niezastąpiony w obrazowaniu mózgu i rdzenia kręgowego (stwardnienie rozsiane, guzy, udary — po kilku godzinach, gdy CT jest niejednoznaczne), chrząstek i więzadeł (uszkodzenia kolan, kręgosłupa), narządów miednicy (prostata, macica, jajniki) i serca. Nie nadaje się do badań nagłych — trwa 20–60 minut, a pacjent musi leżeć nieruchomo w głośnym tunelu.</p>",
+        "<p>Przeciwwskazania do MRI to metalowe implanty ferromagnetyczne: niektóre rozruszniki serca, stare klipy naczyniowe, odłamki metalowe w oczodole. Nowoczesne rozruszniki i endoprotezy stawów są zazwyczaj kompatybilne z MRI — warto mieć dokumentację implantu. Klaustrofobia to problem dla ok. 5–10% pacjentów — dostępne są aparaty otwarte i sedacja.</p>"
+      ],
+      "list_items": [
+        "Wskazania: mózg, rdzeń, chrząstki, więzadła, prostata, macica, serce",
+        "Promieniowanie: zero — pełne bezpieczeństwo przy wielokrotnych badaniach",
+        "Czas badania: 20–60 minut, wymaga bezruchu",
+        "Przeciwwskazania: metalowe implanty ferromagnetyczne, rozruszniki (starszego typu)"
+      ],
+      "info_box": {
+        "style": "accent",
+        "title": "Ważne: Rezonans magnetyczny MRI — badanie bez promieniowania jonizującego",
+        "content_html": "<p>Rezonans MRI nie używa promieniowania jonizującego. Silne pole magnetyczne i fale radiowe tworzą bardzo szczegółowy obraz tkanek miękkich, dlatego badanie świetnie sprawdza się w diagnostyce mózgu, rdzenia, stawów i więzadeł. To kluczowa metoda, gdy potrzebna jest wysoka dokładność bez dawki promieniowania.</p>"
+      },
+      "image": {
+        "src": "./assets/rezonans-mri-mozg-przekroj-strzalkowy-skan.webp",
+        "alt": "Przekrój rezonansu magnetycznego MRI mózgu w płaszczyźnie strzałkowej pokazujący szczegółowe struktury tkanki mózgowej",
+        "caption": "MRI mózgu w przekroju strzałkowym — widoczne struktury niemożliwe do uwidocznienia na RTG ani CT: kora mózgowa, ciało modzelowate, móżdżek. Zero promieniowania."
+      }
+    },
+    {
+      "title": "Które badanie obrazowe jest najbezpieczniejsze? Dawki promieniowania w liczbach",
+      "paragraphs_html": [
+        "<p>Bezpieczeństwo badań obrazowych to temat, wokół którego krąży wiele mitów. Fakty są następujące: MRI nie emituje promieniowania jonizującego w ogóle — jest bezpieczny nawet przy wielokrotnym powtarzaniu. Rentgen RTG emituje bardzo małe dawki. Tomografia CT emituje dawki istotnie wyższe niż RTG, ale wciąż w zakresie uznanym za bezpieczny przy uzasadnionym wskazaniu medycznym.</p>",
+        "<p>Dla porównania: naturalne tło promieniowania, któremu każdy z nas jest poddany przez całe życie, wynosi ok. 2,4 mSv rocznie (więcej na wysokościach i w rejonach granitowych). Lot transatlantycki to ok. 0,08 mSv. Zdjęcie RTG klatki piersiowej to 0,1 mSv. CT klatki piersiowej to 7 mSv — czyli tyle co 3 lata naturalnego tła. Według wytycznych Europejskiego Towarzystwa Radiologii (ESR) z 2019 roku ryzyko nowotworowe związane z jednorazowym CT brzucha szacuje się na ok. 1:2000 — marginalnie małe, ale niezerowe, dlatego CT powinno mieć uzasadnienie kliniczne.</p> <p>Zobacz też: <a href=\"https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html\">markery krwi a profil ryzyka</a>.</p>",
+        "<p>Szczególna ostrożność dotyczy dzieci i kobiet w ciąży — u nich wskazania do CT są węższe, a MRI jest badaniem preferowanym gdy to możliwe. Po 50. roku życia, gdy ryzyko nowotworowe rośnie z innych przyczyn, relacja ryzyko/korzyść z CT jest zazwyczaj bardzo korzystna — jedno właściwie wskazane CT może uratować życie, wykrywając nowotwór we wczesnym stadium.</p>"
+      ],
+      "list_items": [
+        "MRI: 0 mSv — brak promieniowania jonizującego",
+        "RTG klatki piersiowej: 0,1 mSv — 10 dni naturalnego tła",
+        "RTG kręgosłupa lędźwiowego: 1,8 mSv — ok. 9 miesięcy naturalnego tła",
+        "CT klatki piersiowej: 7 mSv — ok. 3 lata naturalnego tła",
+        "CT jamy brzusznej: 8–10 mSv — ok. 4 lata naturalnego tła"
+      ],
+      "info_box": {
+        "style": "accent",
+        "title": "Ważne: Które badanie obrazowe jest najbezpieczniejsze? Dawki promieniowania w liczbach",
+        "content_html": "<p>Bezpieczeństwo badań obrazowych to temat, wokół którego krąży wiele mitów. Fakty są następujące: MRI nie emituje promieniowania jonizującego w ogóle — jest bezpieczny nawet przy wielokrotnym powtarzaniu. Rentgen RTG emituje bardzo małe dawki. Tomografia CT emituje dawki istotnie wyższe niż RTG, ale wciąż w zakresie uznanym za bezpieczny przy uzasadnionym wskazaniu medycznym.</p>"
+      },
+      "image": {
+        "src": "./assets/promieniowanie-dawki-porownanie-rtg-ct-mri-infografika.webp",
+        "alt": "Infografika porównująca dawki promieniowania RTG CT i MRI w milisiwertach z odniesieniem do naturalnego tła radiacyjnego",
+        "caption": "Dawki promieniowania w perspektywie. CT jest wyższe niż RTG, ale przy właściwym wskazaniu medycznym korzyść diagnostyczna wielokrotnie przeważa nad ryzykiem."
+      }
+    },
+    {
+      "title": "Kiedy lekarz wybiera rentgen, a kiedy CT lub MRI?",
+      "paragraphs_html": [
+        "<p>Wybór badania obrazowego zależy od trzech czynników: co chcemy zobaczyć, jak pilna jest sytuacja i jakie są przeciwwskazania pacjenta. Istnieją sprawdzone algorytmy decyzyjne — np. wytyczne American College of Radiology (ACR Appropriateness Criteria) — które pomagają lekarzom wybierać właściwe badanie dla konkretnego problemu klinicznego.</p>",
+        "<p>Złamanie kości, zapalenie płuc, ciało obce — rentgen, bo szybko, tanio, wystarczająco. Udar mózgu w pierwszych minutach — CT bez kontrastu, bo wyklucza krwotok i jest dostępne całą dobę; MRI jest dokładniejsze, ale trwa za długo w nagłych przypadkach. Ból kolana, podejrzenie uszkodzenia łąkotki — MRI, bo tylko ono pokaże chrząstki i więzadła. Podejrzenie nowotworu jamy brzusznej — CT z kontrastem jako badanie pierwszego rzutu, MRI jako uzupełnienie przy wątpliwościach. Ból głowy bez objawów neurologicznych — często nie wymaga żadnego badania obrazowego.</p> <p>Przeczytaj też: <a href=\"https://fitpo50.pl/badania-po-50.html\">Badania po 50-tce</a>.</p>",
+        "<p>Po 50. roku życia warto wiedzieć, że profilaktyczne CT klatki piersiowej low-dose (niskodawkowe) jest rekomendowane przez NLST (National Lung Screening Trial, 2011) dla palaczy i byłych palaczy w wieku 50–80 lat z wywiadem palenia — redukuje śmiertelność z powodu raka płuca o 20%. To jedna z niewielu sytuacji, gdzie CT bez konkretnego symptomu ma udowodnione korzyści.</p>"
+      ],
+      "list_items": [
+        "RTG: złamania, płuca, stawy, szybka diagnostyka nagła",
+        "CT: udar (pilny), urazy wielonarządowe, nowotwory, naczynia, jama brzuszna",
+        "MRI: mózg (nienagły), kręgosłup, stawy, chrząstki, prostata, macica",
+        "CT low-dose płuc: skrining u palaczy 50–80 lat — rekomendacja NLST 2011"
+      ],
+      "info_box": {
+        "style": "accent",
+        "title": "Ważne: Kiedy lekarz wybiera rentgen, a kiedy CT lub MRI?",
+        "content_html": "<p>Wybór badania obrazowego zależy od trzech czynników: co chcemy zobaczyć, jak pilna jest sytuacja i jakie są przeciwwskazania pacjenta. Istnieją sprawdzone algorytmy decyzyjne — np. wytyczne American College of Radiology (ACR Appropriateness Criteria) — które pomagają lekarzom wybierać właściwe badanie dla konkretnego problemu klinicznego.</p>"
+      },
+      "image": {
+        "src": "./assets/lekarz-radiolog-ogladajacy-skany-ct-mri-na-ekranie.webp",
+        "alt": "Radiolog oglądający skany CT i MRI na ekranie diagnostycznym w ciemnej pracowni radiologicznej",
+        "caption": "Radiolog ocenia skany CT i MRI na dedykowanym monitorze diagnostycznym. Wybór badania to decyzja kliniczna — nie każdy ból wymaga CT."
+      }
+    },
+    {
+      "title": "Co widać na rentgenie, CT i MRI — a czego nie? Praktyczny przewodnik",
+      "paragraphs_html": [
+        "<p>Każda z trzech technik ma swoje mocne strony i ślepe plamy. Zrozumienie tego pozwala lepiej rozmawiać z lekarzem i nie dziwić się, gdy po rentgenie z wynikiem prawidłowym okazuje się, że potrzebne jest jednak MRI. To nie oznacza błędu — oznacza, że badanie pokazało to, co mogło pokazać, i nie więcej.</p>",
+        "<p>Rentgen RTG doskonale pokazuje: złamania, zwichnięcia, zmiany struktury kości, pola powietrzne płuc, powiększone serce, duże guzy w płucach, ciała obce metaliczne. Słabo lub wcale nie pokazuje: mózgu i rdzenia kręgowego, chrząstek i więzadeł, wczesnych zmian nowotworowych w tkankach miękkich, zmian zapalnych w jelitach, wczesnego zawału serca.</p>",
+        "<p>CT pokazuje doskonale: przekroje wszystkich narządów jamy brzusznej i klatki piersiowej, naczynia krwionośne (z kontrastem), krwawienia wewnątrzczaszkowe, kamicę nerkową i żółciową, zmiany nowotworowe powyżej 5–10 mm. MRI pokazuje doskonale: demielinizację w stwardnieniu rozsianym, guzy mózgu i rdzenia, uszkodzenia chrząstek i więzadeł (kolano, kręgosłup), choroby prostaty, zmiany w macicy i jajnikach, wczesne niedokrwienie mózgu po kilku godzinach od udaru.</p>"
+      ],
+      "list_items": [
+        "Kości i płuca: RTG wystarczy w większości przypadków",
+        "Mózg nagły (udar, uraz): CT bez kontrastu — szybko, całą dobę",
+        "Mózg i rdzeń (planowy): MRI — największa szczegółowość",
+        "Jama brzuszna, nowotwory: CT z kontrastem jako standard",
+        "Stawy, chrząstki, więzadła: MRI — jedyna technika pokazująca te struktury"
+      ],
+      "info_box": {
+        "style": "accent",
+        "title": "Ważne: Co widać na rentgenie, CT i MRI — a czego nie? Praktyczny przewodnik",
+        "content_html": "<p>Każda z trzech technik ma swoje mocne strony i ślepe plamy. Zrozumienie tego pozwala lepiej rozmawiać z lekarzem i nie dziwić się, gdy po rentgenie z wynikiem prawidłowym okazuje się, że potrzebne jest jednak MRI. To nie oznacza błędu — oznacza, że badanie pokazało to, co mogło pokazać, i nie więcej.</p>"
+      },
+      "image": {
+        "src": "./assets/porownanie-rtg-ct-mri-tego-samego-stawu-kolanowego.webp",
+        "alt": "Porównanie obrazów kolana na rentgenie RTG, tomografii CT i rezonansie MRI pokazujące różny poziom szczegółowości",
+        "caption": "Ten sam staw kolanowy w trzech technikach. RTG pokazuje kości. CT dodaje trójwymiar. MRI ujawnia chrząstki i więzadła — niewidoczne na pozostałych badaniach."
+      }
+    },
+    {
+      "title": "Diagnostyka obrazowa po 50. roku życia — co warto wiedzieć i na co uważać?",
+      "paragraphs_html": [
+        "<p>Po pięćdziesiątce badania obrazowe stają się częstszym elementem życia — i dobrze. Wczesne wykrycie zmiany nowotworowej, tętniaka aorty czy demielinizacji w rezonansie ratuje życie i zdrowie. Jednocześnie warto rozumieć, co lekarz zleca i dlaczego, żeby być świadomym uczestnikiem procesu diagnostycznego, a nie tylko biernym obserwatorem.</p> <p>Sprawdź również: <a href=\"https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html\">jak czytać markery krwi</a>.</p>",
+        "<p>Kilka konkretnych faktów dla osób po 50.: Tętniak aorty brzusznej dotyka ok. 5% mężczyzn po 65. roku życia — jednorazowe USG skriningowe rekomenduje się wszystkim palącym mężczyznom między 65. a 75. rokiem życia (wytyczne US Preventive Services Task Force 2019). Rak płuca: CT low-dose skriningowe dla palaczy i byłych palaczy 50–80 lat zmniejsza śmiertelność o 20% (badanie NLST 2011, 53 000 uczestników). Gęstość kości: densytometria DXA to osobna technika (nie RTG/CT/MRI) — rekomendowana kobietom po menopauzie i mężczyznom po 70. roku życia.</p>",
+        "<p><strong>Zastrzeżenie medyczne:</strong> Ten artykuł ma charakter edukacyjny. Decyzja o wykonaniu badania obrazowego należy wyłącznie do lekarza na podstawie objawów i historii choroby. Nie zlecaj sobie badań CT na własną rękę — poza uzasadnionym wskazaniem medycznym dawka promieniowania przynosi więcej szkody niż pożytku. Przy niepokojących objawach — konsultacja lekarska, nie samodzielna diagnostyka.</p>"
+      ],
+      "list_items": [
+        "USG aorty skriningowe: palący mężczyźni 65–75 lat — jednorazowo",
+        "CT płuc low-dose: palacze i byli palacze 50–80 lat — co rok",
+        "Densytometria DXA: kobiety po menopauzie, mężczyźni po 70. roku życia",
+        "Kolonoskopia: od 45. roku życia co 10 lat — wykrywa raka jelita grubego"
+      ],
+      "info_box": {
+        "style": "accent",
+        "title": "Ważne: Diagnostyka obrazowa po 50. roku życia — co warto wiedzieć i na co uważać?",
+        "content_html": "<p>Po pięćdziesiątce badania obrazowe stają się częstszym elementem życia — i dobrze. Wczesne wykrycie zmiany nowotworowej, tętniaka aorty czy demielinizacji w rezonansie ratuje życie i zdrowie. Jednocześnie warto rozumieć, co lekarz zleca i dlaczego, żeby być świadomym uczestnikiem procesu diagnostycznego, a nie tylko biernym obserwatorem.</p> <p>Sprawdź również: <a href=\"https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html\">jak czytać markery krwi</a>.</p>"
+      },
+      "image": {
+        "src": "./assets/pacjent-po-50-rezonans-mri-tunel-badanie-szpital.webp",
+        "alt": "Pacjent w wieku 50 plus leżący przed tunelem aparatu do rezonansu magnetycznego MRI w nowoczesnym szpitalu",
+        "caption": "Rezonans MRI jest badaniem z wyboru przy planowej diagnostyce neurologicznej i ortopedycznej po 50-tce — zero promieniowania, maksymalna szczegółowość."
+      }
+    }
+  ],
+  "answer_blocks": [
+    {
+      "question": "Czym różni się rentgen od tomografii CT?",
+      "answer_html": "<p>Rentgen RTG to pojedyncze prześwietlenie dające płaski obraz 2D — najlepszy do kości i płuc, dawka ok. 0,1 mSv. Tomografia CT to setki rentgenów wykonanych wokół ciała, z których komputer buduje przekroje 3D — lepsza do narządów miękkich i naczyń, ale dawka 7–10 mSv. CT jest dokładniejsza, rentgen szybszy i z niższą dawką promieniowania.</p>",
+      "answer": "RTG daje szybki obraz 2D i najlepiej ocenia kości oraz płuca. CT wykonuje serię ekspozycji i składa przekroje 3D, dlatego dokładniej pokazuje narządy i naczynia. CT bywa kluczowe w stanach nagłych, ale ma większą dawkę promieniowania niż RTG."
+    },
+    {
+      "question": "Czy rezonans MRI jest bezpieczniejszy niż CT?",
+      "answer_html": "<p>Tak, pod względem promieniowania MRI jest całkowicie bezpieczny — nie emituje promieniowania jonizującego w ogóle. CT wiąże się z dawką 7–10 mSv na badanie. MRI jest preferowany wszędzie tam, gdzie nie ma potrzeby pilności, szczególnie u dzieci, kobiet w ciąży i przy wielokrotnych badaniach. Przeciwwskazaniem do MRI są niektóre metalowe implanty ferromagnetyczne.</p>"
+    },
+    {
+      "question": "Kiedy lekarz zleca MRI zamiast CT?",
+      "answer_html": "<p>MRI jest badaniem z wyboru przy problemach z mózgiem i rdzeniem kręgowym (stwardnienie rozsiane, guzy, nieostre zmiany po udarze), uszkodzeniach chrząstek i więzadeł (kolano, kręgosłup), diagnostyce prostaty, macicy i jajników. CT jest preferowane w nagłych przypadkach, przy urazach i podejrzeniu nowotworów jamy brzusznej, bo jest szybsze i dostępne całą dobę.</p>"
+    },
+    {
+      "question": "Jak duże jest ryzyko promieniowania przy tomografii CT?",
+      "answer_html": "<p>CT klatki piersiowej to ok. 7 mSv — równowartość ok. 3 lat naturalnego tła promieniowania. Według ESR ryzyko nowotworowe po jednorazowym CT brzucha szacuje się na ok. 1:2000. Przy uzasadnionym wskazaniu medycznym korzyść diagnostyczna wielokrotnie przeważa to ryzyko. Nie należy jednak wykonywać CT profilaktycznie bez wskazania lekarskiego.</p>"
+    },
+    {
+      "question": "Czy można mieć MRI z endoprotezą stawu?",
+      "answer_html": "<p>Zazwyczaj tak. Nowoczesne endoprotezy stawów biodrowych i kolanowych są wykonane z materiałów kompatybilnych z MRI. Warto mieć przy sobie dokumentację implantu (kartę wszczepienia) — zawiera informację o kompatybilności z polem magnetycznym. Stare metalowe implanty ferromagnetyczne oraz niektóre rozruszniki serca mogą być przeciwwskazaniem — decyzja należy do radiologa.</p>"
+    },
+    {
+      "question": "Ile trwa badanie CT i MRI?",
+      "answer_html": "<p>Badanie CT trwa zwykle 2–10 minut — sam skan to często kilkadziesiąt sekund, reszta to przygotowanie i ewentualne podanie kontrastu. MRI trwa znacznie dłużej: od 20 do 60 minut w zależności od badanej okolicy i protokołu. W czasie MRI pacjent musi leżeć nieruchomo w głośnym tunelu — to bywa trudne przy klaustrofobii lub bólu.</p>"
+    }
+  ],
+  "sources": [
+    {
+      "label": "Radiological Society of North America. (2023). Radiation Dose in X-Ray and CT Examinations. RadiologyInfo.org.",
+      "url": "https://www.radiologyinfo.org/en/info/safety-xray"
+    },
+    {
+      "label": "American College of Radiology. (2024). ACR Appropriateness Criteria. American College of Radiology.",
+      "url": "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria"
+    },
+    {
+      "label": "National Lung Screening Trial Research Team. (2011). Reduced lung-cancer mortality with low-dose computed tomographic screening. New England Journal of Medicine, 365(5), 395–409.",
+      "url": "https://doi.org/10.1056/NEJMoa1102873"
+    },
+    {
+      "label": "European Society of Radiology. (2019). Patient radiation exposure monitoring: a booklet for patients. ESR.",
+      "url": "https://www.myesr.org/patients/patient-radiation-exposure-monitoring"
+    },
+    {
+      "label": "United Nations Scientific Committee on the Effects of Atomic Radiation. (2020). UNSCEAR 2020/2021 Report. Sources, Effects and Risks of Ionizing Radiation.",
+      "url": "https://www.unscear.org/unscear/en/publications/2020_2021_1.html"
+    },
+    {
+      "label": "US Preventive Services Task Force. (2019). Abdominal Aortic Aneurysm: Screening. USPSTF Recommendation Statement.",
+      "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/abdominal-aortic-aneurysm-screening"
+    },
+    {
+      "label": "Bushberg J.T., Seibert J.A., Leidholdt E.M., Boone J.M. (2020). The Essential Physics of Medical Imaging (4th ed.). Wolters Kluwer.",
+      "url": "https://www.wolterskluwer.com/en/solutions/ovid/the-essential-physics-of-medical-imaging-3945"
+    },
+    {
+      "label": "Kanal E., Barkovich A.J., Bell C. et al. (2013). ACR guidance document on MR safe practices. Journal of Magnetic Resonance Imaging, 37(3), 501–530.",
+      "url": "https://doi.org/10.1002/jmri.24011"
+    },
+    {
+      "label": "Brenner D.J., Hall E.J. (2007). Computed Tomography — An Increasing Source of Radiation Exposure. New England Journal of Medicine, 357, 2277–2284.",
+      "url": "https://doi.org/10.1056/NEJMra072149"
+    }
+  ],
+  "image_prompts": [
+    {
+      "section_ref": "hero",
+      "filename_base": "rtg-mri-ct-badania-obrazowe-porownanie-hero",
+      "prompt": "Four-panel medical imaging comparison: photo, X-ray, MRI, CT scan of same subject, dark clinical background, photorealistic",
+      "purpose": "explain",
+      "nano_banana_prompt": "",
+      "alt_pl": "",
+      "overlay_text_pl": "",
+      "negative_prompt": "brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków"
+    },
+    {
+      "section_ref": "sekcja-1",
+      "filename_base": "rtg-mri-ct-schemat-porownanie-trzech-technologii",
+      "prompt": "Scientific diagram comparing X-ray RTG, CT scanner, MRI machine side by side, dark editorial background, medical style",
+      "purpose": "explain",
+      "nano_banana_prompt": "",
+      "alt_pl": "",
+      "overlay_text_pl": "",
+      "negative_prompt": "brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków"
+    },
+    {
+      "section_ref": "sekcja-2",
+      "filename_base": "rentgen-rtg-klatka-piersiowa-prawdziwy-skan",
+      "prompt": "Real photorealistic chest X-ray radiograph showing ribs lungs heart on black lightbox background",
+      "purpose": "explain",
+      "nano_banana_prompt": "",
+      "alt_pl": "",
+      "overlay_text_pl": "",
+      "negative_prompt": "brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków"
+    },
+    {
+      "section_ref": "sekcja-3",
+      "filename_base": "tomografia-ct-przekroj-3d-glowa-mozg-skan",
+      "prompt": "Photorealistic CT scan axial cross-section of human head brain showing grey matter structures on black background",
+      "purpose": "explain",
+      "nano_banana_prompt": "",
+      "alt_pl": "",
+      "overlay_text_pl": "",
+      "negative_prompt": "brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków"
+    },
+    {
+      "section_ref": "sekcja-4",
+      "filename_base": "rezonans-mri-mozg-przekroj-strzalkowy-skan",
+      "prompt": "Photorealistic MRI sagittal brain scan showing detailed cortex cerebellum brainstem on black background",
+      "purpose": "explain",
+      "nano_banana_prompt": "",
+      "alt_pl": "",
+      "overlay_text_pl": "",
+      "negative_prompt": "brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków"
+    },
+    {
+      "section_ref": "sekcja-5",
+      "filename_base": "promieniowanie-dawki-porownanie-rtg-ct-mri-infografika",
+      "prompt": "Dark background infographic comparing radiation doses mSv: MRI zero, chest X-ray 0.1, CT chest 7, CT abdomen 10, clean bars",
+      "purpose": "explain",
+      "nano_banana_prompt": "",
+      "alt_pl": "",
+      "overlay_text_pl": "",
+      "negative_prompt": "brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków"
+    },
+    {
+      "section_ref": "sekcja-6",
+      "filename_base": "lekarz-radiolog-ogladajacy-skany-ct-mri-na-ekranie",
+      "prompt": "Radiologist doctor examining CT MRI scans on diagnostic monitor in dark radiology room, photorealistic",
+      "purpose": "explain",
+      "nano_banana_prompt": "",
+      "alt_pl": "",
+      "overlay_text_pl": "",
+      "negative_prompt": "brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków"
+    },
+    {
+      "section_ref": "sekcja-7",
+      "filename_base": "porownanie-rtg-ct-mri-tego-samego-stawu-kolanowego",
+      "prompt": "Three-panel comparison of knee joint: X-ray RTG, CT scan, MRI scan side by side on black background, photorealistic medical",
+      "purpose": "explain",
+      "nano_banana_prompt": "",
+      "alt_pl": "",
+      "overlay_text_pl": "",
+      "negative_prompt": "brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków"
+    },
+    {
+      "section_ref": "sekcja-8",
+      "filename_base": "pacjent-po-50-rezonans-mri-tunel-badanie-szpital",
+      "prompt": "Patient over 50 lying before MRI scanner tunnel in modern hospital, calm atmosphere, photorealistic, warm light",
+      "purpose": "explain",
+      "nano_banana_prompt": "",
+      "alt_pl": "",
+      "overlay_text_pl": "",
+      "negative_prompt": "brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków"
+    }
+  ],
+  "faq_research": [
+    {
+      "question": "Czym różni się rentgen od tomografii CT?",
+      "source_label": "Radiological Society of North America. (2023). Radiation Dose in X-Ray and CT Examinations. RadiologyInfo.org.",
+      "source_url": "https://www.radiologyinfo.org/en/info/safety-xray"
+    },
+    {
+      "question": "Czy rezonans MRI jest bezpieczniejszy niż CT?",
+      "source_label": "American College of Radiology. (2024). ACR Appropriateness Criteria. American College of Radiology.",
+      "source_url": "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria"
+    },
+    {
+      "question": "Kiedy lekarz zleca MRI zamiast CT?",
+      "source_label": "National Lung Screening Trial Research Team. (2011). Reduced lung-cancer mortality with low-dose computed tomographic screening. New England Journal of Medicine, 365(5), 395–409.",
+      "source_url": "https://doi.org/10.1056/NEJMoa1102873"
+    },
+    {
+      "question": "Jak duże jest ryzyko promieniowania przy tomografii CT?",
+      "source_label": "European Society of Radiology. (2019). Patient radiation exposure monitoring: a booklet for patients. ESR.",
+      "source_url": "https://www.myesr.org/patients/patient-radiation-exposure-monitoring"
+    }
+  ]
+}

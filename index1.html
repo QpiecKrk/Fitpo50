@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+  <title>FitPo50 | Trening i dieta po 50-tce</title>
+  <meta name="description" content="FitPo50 to praktyczna wiedza o treningu, diecie, zdrowiu i sprawności po 50-tce. Bez chaosu i marketingowej ściemy.">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="FitPo50">
+  <link rel="canonical" href="https://fitpo50.pl/">
+
+  <meta property="og:title" content="FitPo50 | Trening i dieta po 50-tce">
+  <meta property="og:description" content="Praktyczne porady o ruchu, jedzeniu i zdrowiu po 50-tce. Konkret, regularność i rzetelne źródła.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fitpo50.pl/">
+  <meta property="og:image" content="https://fitpo50.pl/assets/hero-og.jpg">
+  <meta property="og:locale" content="pl_PL">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FitPo50 | Trening i dieta po 50-tce">
+  <meta name="twitter:description" content="Praktyczne porady o ruchu, jedzeniu i zdrowiu po 50-tce. Konkret, regularność i rzetelne źródła.">
+  <meta name="twitter:image" content="https://fitpo50.pl/assets/hero-og.jpg">
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+  <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+  <link rel="preload" as="image" href="./assets/hero-main-mountains.avif" type="image/avif" fetchpriority="high">
+
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "FitPo50",
+      "url": "https://fitpo50.pl/",
+      "inLanguage": "pl-PL",
+      "description": "Serwis o treningu, diecie i zdrowiu po 50-tce.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://fitpo50.pl/index.html?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FitPo50",
+      "url": "https://fitpo50.pl/",
+      "logo": "https://fitpo50.pl/assets/logo.jpg",
+      "sameAs": [
+        "https://www.instagram.com/fitpo50"
+      ]
+    }
+  ]
+  </script>
+  <script>
+    (function () {
+      try {
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+        var h = new Date().getHours();
+        var isNight = (h >= 19 || h < 7);
+        if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+      } catch (_) {}
+    })();
+  </script>
+  <style>
+    :root {
+      --bg-sand: #edf7f6;
+      --bg-cream: #f8fcfb;
+      --sage: #6eb7ad;
+      --sage-deep: #4d9d95;
+      --terracotta: #ef8d3d;
+      --terracotta-deep: #cf7329;
+      --ink: #1f4f6f;
+      --ink-soft: #346783;
+      --line: #c5e1de;
+      --white: #ffffff;
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+      --shadow: 0 10px 24px rgba(31, 90, 117, 0.14);
+    }
+    @media (max-width: 820px) and (prefers-color-scheme: dark) {
+      .shell {
+        background: #0f1623;
+        border-color: #2b3950;
+        box-shadow: 0 18px 38px rgba(6, 10, 18, 0.55);
+      }
+    }
+    html.night-shell .shell {
+      background: #0f1623;
+      border-color: #2b3950;
+      box-shadow: 0 18px 38px rgba(6, 10, 18, 0.55);
+    }
+    html.night-shell .brand,
+    html.night-shell .menu,
+    html.night-shell .searchbar {
+      background: #182235;
+      border-color: #2a3a55;
+    }
+    html.night-shell .menu { color: #c8d4ec; }
+    html.night-shell .brand__tagline,
+    html.night-shell .searchbar input { color: #d9e3f7; }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Work Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #dff2ef 0%, var(--bg-sand) 100%);
+      overflow-x: hidden;
+    }
+    html.night-shell body {
+      background: linear-gradient(180deg, #080d16 0%, #121b2a 100%);
+    }
+
+    .shell {
+      width: min(1260px, calc(100% - 28px));
+      margin: 18px auto 30px;
+      background: var(--bg-cream);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr) 220px;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .stats-bento-strip {
+      position: relative;
+      margin: -2px 0 12px;
+      border-radius: 12px;
+      border: 1px solid #164056;
+      background:
+        radial-gradient(120% 240% at 90% 0%, rgba(255, 214, 102, 0.2) 0%, rgba(255, 214, 102, 0) 42%),
+        linear-gradient(90deg, #0a2d44 0%, #0e415f 52%, #0a2d44 100%);
+      box-shadow: 0 8px 22px rgba(8, 31, 50, 0.28);
+      overflow: hidden;
+    }
+    .stats-bento-strip::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.18) 48%, transparent 66%);
+      transform: translateX(-120%);
+      animation: statsShine 5.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .stats-bento-strip__track {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      min-height: 44px;
+      padding: 7px 8px;
+    }
+    .stats-bento-card {
+      position: relative;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.09);
+      color: #f6fbff;
+      padding: 5px 8px;
+      min-height: 30px;
+      overflow: hidden;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: statsPop 0.65s cubic-bezier(.17,.84,.44,1) forwards;
+    }
+    .stats-bento-card:nth-child(1) { animation-delay: 0.08s; }
+    .stats-bento-card:nth-child(2) { animation-delay: 0.16s; }
+    .stats-bento-card:nth-child(3) { animation-delay: 0.24s; }
+    .stats-bento-card__kicker {
+      display: block;
+      color: #c9e3f1;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      line-height: 1.1;
+    }
+    .stats-bento-card__value {
+      display: block;
+      color: #ffd461;
+      font-size: 0.92rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+    }
+    .stats-bento-card__meta {
+      display: block;
+      color: #edf6fc;
+      font-size: 0.68rem;
+      font-weight: 600;
+      line-height: 1.2;
+      opacity: 0.92;
+      margin-top: 2px;
+    }
+    @keyframes statsPop {
+      from { transform: translateY(10px) scale(0.98); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    @keyframes statsShine {
+      0% { transform: translateX(-120%); }
+      28% { transform: translateX(130%); }
+      100% { transform: translateX(130%); }
+    }
+
+    .brand,
+    .menu,
+    .searchbar {
+      background: #f7f1e7;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand {
+      padding: 0 16px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      font-size: 1.02rem;
+      gap: 10px;
+      justify-content: flex-start;
+    }
+    .brand__logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      object-fit: contain;
+      object-position: center;
+      border: 0;
+      background: transparent;
+      transform: none;
+      flex: 0 0 auto;
+    }
+    .brand__text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1.02;
+    }
+    .brand__name {
+      color: #d57a4e;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 1.02rem;
+    }
+    .brand__tagline {
+      color: var(--ink);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.76rem;
+      letter-spacing: 0.02em;
+    }
+
+    .menu {
+      padding: 0 16px;
+      gap: 18px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      overflow-x: auto;
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    .menu a {
+      color: inherit;
+      text-decoration: none;
+      padding: 6px 2px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .menu a:hover,
+    .menu a.is-active {
+      color: var(--ink);
+      border-bottom-color: var(--terracotta);
+    }
+
+    .searchbar {
+      padding: 0 12px;
+      gap: 8px;
+    }
+
+    .searchbar input {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      outline: none;
+      font-size: 0.98rem;
+      color: var(--ink);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 12px;
+      --hero-card-height: 360px;
+      --latest-card-height: 340px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--white);
+      min-height: 130px;
+      position: relative;
+    }
+
+    .card.sage { background: linear-gradient(180deg, #d8efea 0%, #c6e5df 100%); }
+    .card.sage.news-feed {
+      background:
+        radial-gradient(120% 120% at 10% 0%, rgba(170, 234, 224, 0.42) 0%, rgba(170, 234, 224, 0) 55%),
+        linear-gradient(145deg, #58b8ae 0%, #3ea7b4 48%, #2d8198 100%);
+      border: 1px solid rgba(33, 113, 127, 0.36);
+    }
+    .card.sand { background: #f2f9f7; }
+    .card.terracotta { background: linear-gradient(160deg, #f2a24f 0%, #e18234 100%); color: #fff; }
+    .card.ink { background: linear-gradient(160deg, #2d698c 0%, #1f4f6f 100%); color: #fff; }
+
+    .hero {
+      grid-column: 1 / span 6;
+      grid-row: 1;
+      min-height: 250px;
+      height: var(--hero-card-height);
+      border-radius: var(--radius-xl);
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center calc(50% - 20px);
+      filter: brightness(1.08) saturate(1.03);
+      display: block;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.02) 28%, rgba(22,30,43,0.72) 100%);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.9);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.72rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.7rem, 2.6vw, 2.45rem);
+      line-height: 1.05;
+      color: #fff;
+    }
+
+    .hero p {
+      margin: 10px 0 0;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 55ch;
+    }
+
+    .btn {
+      margin-top: 14px;
+      background: var(--terracotta);
+      color: #fff;
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 700;
+      text-decoration: none;
+      width: fit-content;
+      display: inline-flex;
+    }
+
+    .quick { grid-column: span 3; }
+    .faq-box { grid-column: span 3; }
+    .card.sand.quick {
+      background: linear-gradient(155deg, #fff1c9 0%, #ffd98c 100%);
+      border: 1px solid rgba(201, 150, 64, 0.35);
+    }
+    .card.sand.faq-box {
+      background: linear-gradient(155deg, #ffe8b6 0%, #ffc870 100%);
+      border: 1px solid rgba(188, 128, 44, 0.33);
+    }
+    .quick .muted,
+    .faq-box .muted,
+    .quick .faq-card__answer,
+    .faq-box .faq-card__answer {
+      color: #3f4250;
+    }
+
+    .card-body { padding: 14px; }
+    .card h2, .card h3 { margin: 0; line-height: 1.15; }
+    .card h2 { font-size: 1.45rem; }
+    .card h3 { font-size: 1.12rem; }
+    .muted { color: #59657f; font-size: 0.94rem; }
+    .title-with-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .title-icon {
+      width: 18px;
+      height: 18px;
+      color: #1f2b45;
+      flex: 0 0 18px;
+      opacity: 0.9;
+    }
+    .title-icon path,
+    .title-icon rect,
+    .title-icon circle,
+    .title-icon polyline,
+    .title-icon line {
+      vector-effect: non-scaling-stroke;
+    }
+
+    .tips-list { margin: 12px 0 0; padding-left: 18px; }
+    .tips-list li { margin-bottom: 6px; font-weight: 600; }
+    .faq-card__question {
+      margin: 10px 0 8px;
+      font-size: 1rem;
+      line-height: 1.32;
+    }
+    .faq-card__answer {
+      margin: 0;
+      font-size: 0.92rem;
+      color: #3f4d66;
+      line-height: 1.48;
+    }
+    .faq-card__meta {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .faq-card__source {
+      font-size: 0.8rem;
+      color: #59657f;
+      font-weight: 600;
+    }
+    .faq-card__link {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--ink);
+      border-bottom: 1px solid rgba(31, 43, 69, 0.35);
+      font-size: 0.84rem;
+    }
+    .bento-links {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .bento-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(39, 111, 128, 0.28);
+      background: rgba(255, 255, 255, 0.62);
+      color: #1e5873;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1;
+      transition: transform .16s ease, border-color .16s ease, background-color .16s ease;
+    }
+    .bento-link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(39, 111, 128, 0.5);
+      background: rgba(255, 255, 255, 0.86);
+    }
+    .bento-link svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.92;
+    }
+
+    .categories {
+      grid-column: span 6;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .cat {
+      min-height: 150px;
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      z-index: 0;
+      background: #e8ddcb;
+    }
+
+    .cat::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(24, 34, 52, 0.08) 30%, rgba(24, 34, 52, 0.78) 100%);
+      z-index: 1;
+    }
+    .cat strong,
+    .cat span {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
+    .cat strong { font-size: 1.18rem; }
+    .cat span { font-size: 0.92rem; opacity: 0.92; }
+
+    .news-feed { grid-column: span 6; grid-row: span 2; }
+
+    .latest-article {
+      grid-column: 1 / span 6;
+      grid-row: 2;
+      min-height: 170px;
+      height: var(--latest-card-height);
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: #e8ddcb;
+    }
+    .latest-article__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      z-index: 0;
+      background: #d8d2c8;
+    }
+    .latest-article::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(24, 34, 52, 0.1) 0%, rgba(24, 34, 52, 0.5) 100%);
+      z-index: 1;
+    }
+    .latest-article .card-body {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+    }
+    .news-feed {
+      grid-column: 7 / span 6;
+      grid-row: 1 / span 2;
+      height: calc(var(--hero-card-height) + var(--latest-card-height) + 12px);
+      max-height: calc(var(--hero-card-height) + var(--latest-card-height) + 12px);
+      overflow: hidden;
+    }
+    .latest-article__wrap {
+      position: relative;
+      z-index: 1;
+      width: min(64%, 360px);
+      margin: 10px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.56);
+      background: linear-gradient(120deg, rgba(246, 242, 235, 0.88) 0%, rgba(231, 224, 214, 0.68) 50%, rgba(223, 229, 237, 0.32) 100%);
+      box-shadow: 0 16px 30px rgba(20, 29, 44, 0.28);
+      padding: 12px 14px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .latest-article__eyebrow {
+      display: inline-flex;
+      padding: 5px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 0.68rem;
+      font-weight: 800;
+      background: #e2a34d;
+      color: #fff;
+      margin-bottom: 7px;
+    }
+    .latest-article__title {
+      margin: 0 0 7px;
+      font-size: clamp(1.2rem, 2.1vw, 1.7rem);
+      line-height: 1.02;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      color: #1e3764;
+    }
+    .latest-article__excerpt {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #243650;
+      line-height: 1.43;
+      max-width: 34ch;
+    }
+    .latest-article__cta {
+      display: inline-flex;
+      margin-top: 10px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      background: linear-gradient(180deg, #3f86b6 0%, #2f6d9b 100%);
+      padding: 8px 14px;
+      font-size: 0.86rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.26);
+    }
+    .news-feed .card-body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .news-feed__title {
+      margin: 0;
+      font-size: 1.34rem;
+      line-height: 1.2;
+    }
+    .news-feed__intro {
+      margin: 8px 0 0;
+      font-size: 0.9rem;
+      color: #3d4d67;
+      line-height: 1.42;
+      max-width: 52ch;
+    }
+    .news-feed__intro-line {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 7px;
+    }
+    .news-feed__intro-line .title-icon {
+      width: 15px;
+      height: 15px;
+      flex-basis: 15px;
+      margin-top: 2px;
+      opacity: 0.78;
+    }
+    .news-ticker {
+      margin-top: 12px;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      border: 1px solid rgba(31, 43, 69, 0.16);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.55);
+      padding: 10px;
+      scrollbar-width: thin;
+    }
+    .ticker-item {
+      display: block;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(31, 43, 69, 0.12);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 0 0 10px;
+      min-height: 174px;
+    }
+    .ticker-item:last-child { margin-bottom: 0; }
+    .ticker-item::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    .ticker-thumb {
+      float: left;
+      width: 210px;
+      height: 150px;
+      aspect-ratio: 210 / 150;
+      display: block;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(31, 43, 69, 0.12);
+      background: #e8ddcb;
+      margin: 0 14px 8px 0;
+    }
+    .ticker-item h4 {
+      margin: 2px 0 8px;
+      font-size: 1.04rem;
+      line-height: 1.24;
+    }
+    .ticker-item p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: #3f4d66;
+      line-height: 1.52;
+    }
+    .ticker-body {
+      min-width: 0;
+      min-height: 150px;
+    }
+    .ticker-item--skeleton {
+      pointer-events: none;
+    }
+    .ticker-item--skeleton .ticker-thumb,
+    .ticker-item--skeleton .sk-line {
+      animation: tickerPulse 1.25s ease-in-out infinite;
+    }
+    .ticker-item--skeleton .sk-line {
+      height: 12px;
+      border-radius: 8px;
+      background: rgba(31, 43, 69, 0.12);
+      margin-bottom: 10px;
+    }
+    .ticker-item--skeleton .sk-line:last-child {
+      margin-bottom: 0;
+    }
+    .ticker-item--skeleton .sk-line--lg { width: 82%; height: 15px; }
+    .ticker-item--skeleton .sk-line--md { width: 100%; }
+    .ticker-item--skeleton .sk-line--sm { width: 72%; }
+    @keyframes tickerPulse {
+      0%, 100% { opacity: 0.52; }
+      50% { opacity: 1; }
+    }
+    .ticker-content {
+      color: #3f4d66;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .ticker-content p {
+      margin: 0 0 0.64rem;
+    }
+    .ticker-content p:last-child {
+      margin-bottom: 0;
+    }
+    .ticker-content ul,
+    .ticker-content ol {
+      margin: 0.2rem 0 0.7rem 1.15rem;
+      padding: 0;
+    }
+    .ticker-content li {
+      margin-bottom: 0.34rem;
+    }
+    .ticker-content a {
+      color: #1e5b85;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .ticker-content strong {
+      color: #1f2b45;
+    }
+    .ticker-content .news-text-tone--1,
+    .ticker-content .news-text-tone--1 span,
+    .ticker-content a.news-text-tone--1 {
+      color: #2f6d9b !important;
+      font-weight: 700;
+    }
+    .ticker-content .news-text-tone--2,
+    .ticker-content .news-text-tone--2 span,
+    .ticker-content a.news-text-tone--2 {
+      color: #2f8b57 !important;
+      font-weight: 700;
+    }
+    .ticker-content .news-text-tone--3,
+    .ticker-content .news-text-tone--3 span,
+    .ticker-content a.news-text-tone--3 {
+      color: #cc7a2d !important;
+      font-weight: 700;
+    }
+    .ticker-content .news-text-tone--4,
+    .ticker-content .news-text-tone--4 span,
+    .ticker-content a.news-text-tone--4 {
+      color: #7b57c2 !important;
+      font-weight: 700;
+    }
+    .ticker-content .news-text-strong-black,
+    .ticker-content strong.news-text-strong-black {
+      color: #17233f !important;
+      font-weight: 800;
+    }
+    .ticker-sources {
+      margin-top: 0.52rem;
+      padding-top: 0.52rem;
+      border-top: 1px solid rgba(31, 43, 69, 0.12);
+    }
+    .ticker-sources details {
+      font-size: 0.82rem;
+      color: #425474;
+    }
+    .ticker-sources summary {
+      font-weight: 800;
+      cursor: pointer;
+      color: #223452;
+      list-style-position: inside;
+    }
+    .ticker-sources ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.05rem;
+    }
+    .ticker-sources li {
+      margin-bottom: 0.35rem;
+      line-height: 1.4;
+    }
+    .ticker-sources a {
+      color: #1e5b85;
+      font-weight: 700;
+    }
+    .ticker-source-note {
+      display: inline;
+      margin-left: 0.28rem;
+      color: #51617f;
+      font-size: 0.8rem;
+    }
+    .news-feed-loader {
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%);
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      color: #465777;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(31, 43, 69, 0.12);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+    .news-feed-loader.is-visible { opacity: 1; }
+    .news-feed-sentinel {
+      width: 100%;
+      height: 2px;
+      margin-top: 4px;
+    }
+
+    .contact-wide {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      padding: 14px;
+    }
+    .reading-room {
+      margin-top: 12px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: linear-gradient(155deg, #eaf7f3 0%, #d8ece6 100%);
+      padding: 16px;
+    }
+    .reading-room__head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px 12px;
+      margin-bottom: 12px;
+    }
+    .reading-room__head h3 {
+      margin: 0;
+      font-size: clamp(1.22rem, 2vw, 1.58rem);
+      color: var(--ink);
+    }
+    .reading-room__head p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-weight: 600;
+      max-width: 720px;
+    }
+    .reading-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .read-card {
+      background: #fff;
+      border: 1px solid rgba(31, 43, 69, 0.12);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 360px;
+      box-shadow: 0 8px 24px rgba(31, 43, 69, 0.08);
+    }
+    .read-card__media {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #d9d9d9;
+    }
+    .read-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.001);
+      transition: transform 220ms ease;
+    }
+    .read-card:hover .read-card__media img {
+      transform: scale(1.03);
+    }
+    .read-card__badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+      background: rgba(19, 39, 89, 0.9);
+      color: #fff;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding: 5px 8px;
+      border-radius: 999px;
+    }
+    .read-card__badge--ruch { background: #2f6f99; color: #ffffff; }
+    .read-card__badge--jedzenie { background: rgba(201, 109, 49, 0.94); }
+    .read-card__badge--zdrowie { background: rgba(228, 188, 74, 0.96); color: #4e3a04; }
+    .read-card__badge--ciekawe { background: rgba(67, 149, 84, 0.94); }
+    .read-card__body {
+      padding: 12px 13px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      flex: 1;
+    }
+    .read-card h4 {
+      margin: 0;
+      font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+      line-height: 1.15;
+      color: var(--ink);
+      text-wrap: balance;
+    }
+    .read-card p {
+      margin: 0;
+      color: #34425f;
+      line-height: 1.34;
+      font-size: 0.95rem;
+    }
+    .read-card__cta {
+      margin-top: auto;
+      align-self: flex-start;
+      text-decoration: none;
+      font-weight: 800;
+      color: #fff;
+      background: #2f6f99;
+      border-radius: 999px;
+      padding: 8px 13px;
+      line-height: 1;
+      transition: background 150ms ease, transform 150ms ease;
+    }
+    .read-card__cta:hover {
+      background: #24597b;
+      transform: translateY(-1px);
+    }
+    .read-card--loading {
+      border-style: dashed;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 16px;
+      color: var(--ink-soft);
+      font-weight: 700;
+      min-height: 220px;
+    }
+    .bottom-row {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .card.sage.knowledge-box {
+      height: 420px;
+      background:
+        radial-gradient(120% 120% at 10% 0%, rgba(170, 234, 224, 0.42) 0%, rgba(170, 234, 224, 0) 55%),
+        linear-gradient(145deg, #58b8ae 0%, #3ea7b4 48%, #2d8198 100%);
+      border: 1px solid rgba(33, 113, 127, 0.36);
+    }
+    .knowledge-box .card-body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 0;
+    }
+    .truth-grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+      flex: 1;
+      min-height: 0;
+    }
+    .truth-tile {
+      border-radius: 10px;
+      border: 1px solid rgba(31, 43, 69, 0.1);
+      padding: 9px 10px 8px;
+      line-height: 1.08;
+      color: #1f2b45;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+      gap: 4px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+    .truth-tile:hover {
+      transform: translateY(-1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 8px 18px rgba(31, 43, 69, 0.12);
+    }
+    .truth-kicker {
+      display: block;
+      width: 100%;
+      font-weight: 900;
+      font-size: 0.54em;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.78;
+      text-wrap: balance;
+    }
+    .truth-main {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      text-wrap: balance;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-size: clamp(0.84rem, 1.08vw, 0.98rem);
+    }
+    .truth-tile--works .truth-main::before,
+    .truth-tile--works-alt .truth-main::before,
+    .truth-tile--caution .truth-main::before,
+    .truth-tile--myth .truth-main::before {
+      display: inline-block;
+      margin-right: 0.3em;
+      font-size: 0.72em;
+      line-height: 1;
+      vertical-align: 0.08em;
+      font-weight: 900;
+    }
+    .truth-tile--works .truth-main::before,
+    .truth-tile--works-alt .truth-main::before { content: "✓"; }
+    .truth-tile--caution .truth-main::before { content: "⚠"; }
+    .truth-tile--myth .truth-main::before { content: "✕"; }
+    .truth-sub,
+    .truth-desc {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      overflow: hidden;
+    }
+    .truth-sub {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .truth-desc {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+    .truth-kicker {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .truth-main {
+      width: 100%;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      line-height: 0.95;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .truth-sub {
+      width: 100%;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-weight: 700;
+      opacity: 0.92;
+      line-height: 1.04;
+      text-align: center;
+      font-size: 0.7em;
+    }
+    .truth-desc {
+      width: 100%;
+      margin-top: 0;
+      font-weight: 800;
+      font-size: 0.64em;
+      line-height: 1.05;
+      opacity: 0.95;
+      text-align: center;
+      letter-spacing: 0.004em;
+    }
+    .truth-tile--works {
+      background: linear-gradient(160deg, #d9f1ec 0%, #bfe6de 100%);
+      font-size: clamp(0.76rem, 0.86vw, 0.86rem);
+    }
+    .truth-tile--works-alt {
+      background: linear-gradient(160deg, #d6ebf6 0%, #c2dff0 100%);
+      font-size: clamp(0.75rem, 0.84vw, 0.82rem);
+    }
+    .truth-tile--caution {
+      background: linear-gradient(160deg, #fff0c5 0%, #ffdf98 100%);
+      font-size: clamp(0.74rem, 0.82vw, 0.8rem);
+    }
+    .truth-tile--myth {
+      background: linear-gradient(160deg, #ffe2cf 0%, #f8c4a5 100%);
+      font-size: clamp(0.73rem, 0.8vw, 0.78rem);
+    }
+    .truth-grid .truth-tile:nth-child(3n + 1) .truth-main {
+      font-family: "Arial Black", "Impact", sans-serif;
+      letter-spacing: 0.01em;
+      font-size: clamp(0.9rem, 1.18vw, 1.04rem);
+    }
+    .truth-grid .truth-tile:nth-child(3n + 2) .truth-main {
+      font-size: clamp(0.86rem, 1.05vw, 0.98rem);
+      letter-spacing: 0.025em;
+    }
+    .truth-grid .truth-tile:nth-child(3n) .truth-main {
+      font-size: clamp(0.84rem, 0.98vw, 0.94rem);
+      text-transform: none;
+    }
+    .truth-grid .truth-tile:nth-child(2n) .truth-sub {
+      font-size: 0.66em;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .truth-grid .truth-tile:nth-child(2n + 1) .truth-sub {
+      font-size: 0.7em;
+    }
+    .truth-grid .truth-tile:nth-child(4n + 1) .truth-desc {
+      font-size: 0.66em;
+    }
+    .truth-grid .truth-tile:nth-child(4n + 3) .truth-desc {
+      font-size: 0.62em;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+    .knowledge-hub {
+      height: 420px;
+      background: linear-gradient(155deg, #2fa7b6 0%, #1f6d8d 100%);
+      color: #fff;
+      overflow: hidden;
+    }
+    .knowledge-hub .card-body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 0;
+    }
+    .knowledge-hub h3 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+    .knowledge-hub .muted {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 10px;
+    }
+    .knowledge-hub .title-icon {
+      color: #fff;
+      opacity: 0.96;
+    }
+    .hub-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 4px;
+      align-items: stretch;
+    }
+    .hub-item {
+      position: relative;
+      z-index: 1;
+      display: block;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.09) 100%);
+      box-shadow: 0 10px 22px rgba(56, 29, 18, 0.12);
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .hub-item:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.42);
+      box-shadow: 0 14px 30px rgba(56, 29, 18, 0.18);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.12) 100%);
+    }
+    .hub-item + .hub-item { margin-top: 0; }
+    .hub-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 6px;
+      padding-right: 8px;
+    }
+    .hub-trigger {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      padding: 10px 11px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      text-align: left;
+      font: inherit;
+      min-height: 62px;
+      position: relative;
+      z-index: 2;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+    .hub-jump {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      transition: transform .16s ease, border-color .16s ease, background-color .16s ease;
+    }
+    .hub-jump:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.58);
+      background: rgba(255, 255, 255, 0.22);
+    }
+    .hub-jump svg {
+      width: 13px;
+      height: 13px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .hub-item:not(.is-open) .hub-trigger {
+      justify-content: center;
+    }
+    .hub-item:not(.is-open) .hub-head {
+      padding-right: 0;
+      grid-template-columns: 1fr;
+    }
+    .hub-item:not(.is-open) .hub-jump {
+      display: none;
+    }
+    .hub-item:not(.is-open) .hub-no,
+    .hub-item:not(.is-open) .hub-chevron {
+      display: none;
+    }
+    .hub-item:not(.is-open) .hub-title {
+      text-align: center;
+      line-height: 1.28;
+    }
+    .hub-no {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.22);
+    }
+    .hub-title {
+      flex: 1;
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 700;
+      line-height: 1.28;
+      color: #fff;
+    }
+    .hub-chevron {
+      font-size: 0.86rem;
+      opacity: 0.9;
+      transition: transform 0.2s ease;
+    }
+    .hub-item.is-open .hub-chevron { transform: rotate(180deg); }
+    .hub-body {
+      display: none;
+      padding: 0 12px 14px;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.94);
+      overflow-wrap: anywhere;
+      max-height: 620px;
+      overflow-y: auto;
+    }
+    .hub-body p { margin: 0 0 8px; }
+    .hub-body ul {
+      margin: 0 0 8px;
+      padding-left: 18px;
+    }
+    .hub-body li { margin-bottom: 6px; }
+    .hub-body .article-card__subheading {
+      margin: 8px 0 6px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .hub-item.is-open .hub-body {
+      display: block;
+    }
+
+    .contact-wide form { display: grid; gap: 8px; margin-top: 10px; }
+
+    .contact-wide input,
+    .contact-wide textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.16);
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 11px;
+      font: inherit;
+      outline: none;
+    }
+
+    .contact-wide input::placeholder,
+    .contact-wide textarea::placeholder { color: rgba(255,255,255,0.84); }
+
+    .contact-wide button {
+      border: 0;
+      background: #f5d5c8;
+      color: #52281a;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .small { font-size: 0.84rem; }
+
+    @media (hover: none) and (pointer: coarse) {
+      .shell {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: 10px;
+      }
+      .topbar { grid-template-columns: 1fr; }
+      .hero, .latest-article, .quick, .faq-box, .categories, .news-feed { grid-column: 1 / -1; }
+      .latest-article, .news-feed { grid-row: auto; }
+      .bottom-row { grid-template-columns: 1fr; }
+      .reading-grid { grid-template-columns: 1fr; }
+      .news-feed {
+        height: auto;
+        max-height: none;
+        overflow: hidden;
+      }
+      .hero,
+      .latest-article {
+        height: auto;
+      }
+      .news-feed .card-body { min-height: 0; }
+      .news-ticker {
+        max-height: min(62vh, 560px);
+        overflow-y: auto;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .topbar { grid-template-columns: 1fr; }
+      .hero, .latest-article, .quick, .faq-box, .categories, .news-feed { grid-column: 1 / -1; }
+      .latest-article, .news-feed { grid-row: auto; }
+      .news-feed {
+        height: auto;
+        max-height: none;
+        overflow: hidden;
+      }
+      .hero,
+      .latest-article {
+        height: auto;
+      }
+      .news-feed .card-body {
+        min-height: 0;
+      }
+      .news-ticker {
+        max-height: min(62vh, 560px);
+        overflow-y: auto;
+      }
+      .knowledge-box,
+      .knowledge-hub {
+        height: auto;
+      }
+      .categories { grid-template-columns: 1fr 1fr; }
+      .bottom-row { grid-template-columns: 1fr; }
+      .reading-grid { grid-template-columns: 1fr; }
+      .stats-bento-strip {
+        margin-top: -4px;
+        margin-bottom: 10px;
+      }
+      .stats-bento-strip__track {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+      .stats-bento-card {
+        min-height: 42px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .categories { grid-template-columns: 1fr; }
+      .knowledge-box { display: none; }
+      .hero { min-height: 360px; }
+      .latest-article { min-height: 240px; }
+      .latest-article__wrap {
+        width: calc(100% - 24px);
+        margin: 12px;
+        padding: 14px;
+      }
+      .ticker-thumb {
+        float: none;
+        width: 100%;
+        height: 166px;
+        aspect-ratio: auto;
+        margin: 0 0 10px;
+      }
+      .ticker-item {
+        display: block;
+        min-height: 0;
+      }
+      .ticker-item--skeleton .ticker-thumb {
+        margin-bottom: 10px;
+      }
+      .hub-grid { grid-template-columns: 1fr; }
+      .truth-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(6, minmax(0, 1fr));
+      }
+    }
+  </style>
+<link rel="stylesheet" href="./assets/footer.css?v=1">
+  <meta name="google-adsense-account" content="ca-pub-4993821807276758">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="112" height="112" loading="eager" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
+        <div class="brand__text">
+          <span class="brand__name">FitPo50</span>
+          <span class="brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Menu prototypu">
+        <a href="#" class="is-active">Home</a>
+        <a href="porady.html">Porady</a>
+        <a href="index.html#newsy">News</a>
+        <a href="rusz-sie.html">Ruch</a>
+        <a href="jedzenie.html">Jedzenie</a>
+        <a href="zdrowie.html">Zdrowie</a>
+        <a href="ciekawe.html">Ciekawe</a>
+        <a href="dziennik.html">Dziennik</a>
+        <a href="o-mnie.html">O mnie</a>
+      </nav>
+      <div class="searchbar">
+        <span aria-hidden="true">🔎</span>
+        <input id="searchInput" type="search" placeholder="Szukaj sekcji w tym prototypie...">
+      </div>
+    </header>
+
+    <section class="stats-bento-strip" aria-label="Szybkie statystyki zdrowia 50+">
+      <div class="stats-bento-strip__track">
+        <article class="stats-bento-card" id="liveWeatherAqCard">
+          <span class="stats-bento-card__kicker">Pogoda + jakość powietrza</span>
+          <span class="stats-bento-card__value" id="liveWeatherAqValue">Ładowanie danych…</span>
+          <span class="stats-bento-card__meta" id="liveWeatherAqMeta">Kraków • aktualizacja live</span>
+        </article>
+        <article class="stats-bento-card" id="livePopulationCard">
+          <span class="stats-bento-card__kicker">Aktywność / zdrowie populacji</span>
+          <span class="stats-bento-card__value" id="livePopulationValue">Ładowanie danych…</span>
+          <span class="stats-bento-card__meta" id="livePopulationMeta">Wskaźnik populacyjny</span>
+        </article>
+        <article class="stats-bento-card" id="liveAlertsCard">
+          <span class="stats-bento-card__kicker">Zdarzenia globalne</span>
+          <span class="stats-bento-card__value" id="liveAlertsValue">Ładowanie danych…</span>
+          <span class="stats-bento-card__meta" id="liveAlertsMeta">Status monitoringu</span>
+        </article>
+      </div>
+    </section>
+
+    <main class="grid" id="gridRoot">
+      <section id="o-mnie" class="card hero" data-title="o mnie misja fitpo50">
+        <picture>
+          <source srcset="./assets/hero-main-mountains.avif" type="image/avif">
+          <source srcset="./assets/hero-main-mountains.webp" type="image/webp">
+          <img src="./assets/hero-main-mountains.jpg" alt="Główne hero FitPo50 - krajobraz górski" width="1600" height="900" loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+        <div class="hero-overlay">
+          <span class="eyebrow">AKTYWNOŚĆ, DIETA, FAKTY</span>
+          <h1>Wróć do formy po 50-tce</h1>
+          <p>Siła nie ma daty ważności.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:10px;">
+            <a class="btn" href="o-mnie.html">Przejdź do „O mnie”</a>
+            <a class="btn" href="powrot-do-formy-po-50-kompletny-przewodnik.html">Jak zacząć? Zacznij tutaj</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
+        <picture aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/trening-silowy-hormony-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+        </picture>
+        <div class="card-body">
+          <div class="latest-article__wrap">
+            <span class="latest-article__eyebrow">Nowy artykuł</span>
+            <h4 class="latest-article__title" id="latestArticleTitle">Trening siłowy jako eliksir młodości po 50-tce – praktyczny</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="trening-silowy-eliksir-mlodosci-po-50.html">Przeczytaj pełny przewodnik →</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="newsy" class="card sage news-feed" data-title="szybkie newsy i ciekawostki">
+        <div class="card-body">
+          <h3 class="news-feed__title">
+            <span class="title-with-icon">
+              <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                <path d="M7 8h6M7 12h10M7 16h10"></path>
+                <rect x="14.5" y="7.5" width="4" height="3.5" rx=".4"></rect>
+              </svg>
+              Newsy i ciekawostki
+            </span>
+          </h3>
+          <p class="news-feed__intro">
+            <span class="news-feed__intro-line">
+              <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                <path d="M7 8h6M7 12h10M7 16h10"></path>
+                <rect x="14.5" y="7.5" width="4" height="3.5" rx=".4"></rect>
+              </svg>
+              Krótki przegląd informacji opartych na aktualnych publikacjach naukowych i rzetelnie zweryfikowanych źródłach.
+            </span>
+          </p>
+          <div class="news-ticker" id="newsTickerList">
+            <article class="ticker-item ticker-item--skeleton" aria-hidden="true">
+              <div class="ticker-thumb"></div>
+              <div class="ticker-body">
+                <div class="sk-line sk-line--lg"></div>
+                <div class="sk-line sk-line--md"></div>
+                <div class="sk-line sk-line--sm"></div>
+              </div>
+            </article>
+            <article class="ticker-item ticker-item--skeleton" aria-hidden="true">
+              <div class="ticker-thumb"></div>
+              <div class="ticker-body">
+                <div class="sk-line sk-line--lg"></div>
+                <div class="sk-line sk-line--md"></div>
+                <div class="sk-line sk-line--sm"></div>
+              </div>
+            </article>
+            <div class="news-feed-sentinel" id="newsFeedSentinel" aria-hidden="true"></div>
+          </div>
+          <div class="news-feed-loader" id="newsFeedLoader">Ładowanie kolejnych newsów...</div>
+        </div>
+      </section>
+
+      <section id="quick-tips" class="card sand quick" data-title="quick tips porady dnia">
+        <div class="card-body">
+          <h3>
+            <span class="title-with-icon">
+              <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.7 10.7c.6.5 1.2 1.5 1.3 2.3h4.8c.1-.8.7-1.8 1.3-2.3A6 6 0 0 0 12 3Z"></path>
+              </svg>
+              Quick Tips
+            </span>
+          </h3>
+          <p class="muted" id="tipsTitle">Dzisiaj: fundamenty zdrowia</p>
+          <ul class="tips-list" id="tipsList"></ul>
+          <p class="small muted">W prototypie tipy rotują lokalnie co kilka sekund. Docelowo możemy je brać z JSON.</p>
+          <div class="bento-links" aria-label="Powiązane tematy Quick Tips">
+            <a class="bento-link" href="zdrowie.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.6-7 10-7 10z"/></svg>Zdrowie</a>
+            <a class="bento-link" href="rusz-sie.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5a2 2 0 1 0-2 0"/><path d="M12 7l2.5 2.5"/><path d="M9.5 21l1-4 2-2 1 6"/><path d="M7 13l3-2 2.5.5"/></svg>Ruch</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq-dnia" class="card sand faq-box" data-title="faq dnia pytanie odpowiedz">
+        <div class="card-body faq-card">
+          <h3>
+            <span class="title-with-icon">
+              <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v7A2.5 2.5 0 0 1 16.5 16H11l-4 4v-4H7.5A2.5 2.5 0 0 1 5 13.5Z"></path>
+                <path d="M12 8.2a1.8 1.8 0 0 1 1.7 2.4c-.2.5-.7.8-1.2 1.1-.5.3-.8.6-.8 1.3M12 15.8h.01"></path>
+              </svg>
+              FAQ Dnia
+            </span>
+          </h3>
+          <p class="muted">Codziennie inny fragment z FAQ artykułów.</p>
+          <h4 class="faq-card__question" id="faqQuestion">Ładowanie pytania dnia…</h4>
+          <p class="faq-card__answer" id="faqAnswer">Pobieram fragment z bazy artykułów i FAQ.</p>
+          <div class="faq-card__meta">
+            <span class="faq-card__source" id="faqSource">Źródło: FitPo50</span>
+            <a class="faq-card__link" id="faqLink" href="porady.html">Przejdź do artykułu</a>
+          </div>
+          <div class="bento-links" aria-label="Powiązane tematy FAQ">
+            <a class="bento-link" href="jedzenie.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v7a2 2 0 0 0 2 2h2V3"/><path d="M10 3v18"/><path d="M16 3c0 4-2 6-2 9v9"/><path d="M20 3v18"/></svg>Jedzenie</a>
+            <a class="bento-link" href="ciekawe.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18"/><path d="M3 12h18"/></svg>Ciekawe</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="kategorie" class="categories" aria-label="4 kategorie">
+        <a class="cat" href="rusz-sie.html" data-title="kategoria ruch">
+          <picture aria-hidden="true">
+            <source srcset="./assets/silka-hero.avif" type="image/avif">
+            <img class="cat__bg" src="./assets/silka-hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          </picture>
+          <strong>Ruch</strong>
+          <span>Trening, mobilność, sprawność</span>
+        </a>
+        <a class="cat" href="jedzenie.html" data-title="kategoria jedzenie">
+          <picture aria-hidden="true">
+            <source srcset="./assets/Hero_Upo.avif" type="image/avif">
+            <img class="cat__bg" src="./assets/Hero_Upo.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          </picture>
+          <strong>Jedzenie</strong>
+          <span>Dieta, nawyki, praktyczne wybory</span>
+        </a>
+        <a class="cat" href="zdrowie.html" data-title="kategoria zdrowie">
+          <picture aria-hidden="true">
+            <source srcset="./assets/apob-apoa-hero.avif" type="image/avif">
+            <img class="cat__bg" src="./assets/apob-apoa-hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          </picture>
+          <strong>Zdrowie</strong>
+          <span>Profilaktyka i badania</span>
+        </a>
+        <a class="cat" href="ciekawe.html" data-title="kategoria ciekawe">
+          <picture aria-hidden="true">
+            <source srcset="./assets/wino_miesnie_hero.avif" type="image/avif">
+            <img class="cat__bg" src="./assets/wino_miesnie_hero.webp" alt="" width="960" height="540" loading="lazy" decoding="async" aria-hidden="true">
+          </picture>
+          <strong>Ciekawe</strong>
+          <span>Tematy, które zmieniają perspektywę</span>
+        </a>
+      </section>
+
+    </main>
+
+    <section class="bottom-row" data-title="baza wiedzy i kontakt">
+      <section class="card sage knowledge-box">
+        <div class="card-body">
+          <h3>
+            <span class="title-with-icon">
+              <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="8"></circle>
+                <path d="M8.8 12.3l2 2.1 4.4-4.7"></path>
+                <line x1="4" y1="12" x2="6" y2="12"></line>
+                <line x1="18" y1="12" x2="20" y2="12"></line>
+              </svg>
+              Co działa / Co nie działa
+            </span>
+          </h3>
+          <p class="muted">Najważniejsze fakty i mity w pigułce.</p>
+          <div class="truth-grid">
+            <div class="truth-tile truth-tile--works">
+              <span class="truth-kicker">Co działa</span>
+              <span class="truth-main">Siła</span>
+              <span class="truth-sub">trening oporowy</span>
+              <span class="truth-desc">Mięśnie, kości, stabilność po 50-tce.</span>
+            </div>
+            <div class="truth-tile truth-tile--works-alt">
+              <span class="truth-kicker">Co działa</span>
+              <span class="truth-main">Recovery</span>
+              <span class="truth-sub">sen i przerwy</span>
+              <span class="truth-desc">Regeneracja daje progres.</span>
+            </div>
+            <div class="truth-tile truth-tile--works">
+              <span class="truth-kicker">Co działa</span>
+              <span class="truth-main">Longevity</span>
+              <span class="truth-sub">active aging</span>
+              <span class="truth-desc">Siła + mobilność + balans = niezależność.</span>
+            </div>
+            <div class="truth-tile truth-tile--caution">
+              <span class="truth-kicker">Uwaga</span>
+              <span class="truth-main">GLP-1</span>
+              <span class="truth-sub">pomaga, ale nie zastępuje ruchu</span>
+              <span class="truth-desc">Bez siły rośnie utrata mięśni.</span>
+            </div>
+            <div class="truth-tile truth-tile--caution">
+              <span class="truth-kicker">Uwaga</span>
+              <span class="truth-main">Wearables</span>
+              <span class="truth-sub">dane wspierają decyzje</span>
+              <span class="truth-desc">Narzędzie, nie cel.</span>
+            </div>
+            <div class="truth-tile truth-tile--works-alt">
+              <span class="truth-kicker">Co działa</span>
+              <span class="truth-main">IF / Autofagia</span>
+              <span class="truth-sub">działa przy planie</span>
+              <span class="truth-desc">Białko i rytm to podstawa.</span>
+            </div>
+            <div class="truth-tile truth-tile--myth">
+              <span class="truth-kicker">Co nie działa</span>
+              <span class="truth-main">Spot reduction</span>
+              <span class="truth-sub">brzuch nie spala się lokalnie</span>
+              <span class="truth-desc">Ciało samo wybiera źródło energii.</span>
+            </div>
+            <div class="truth-tile truth-tile--myth">
+              <span class="truth-kicker">Co nie działa</span>
+              <span class="truth-main">Detoksy</span>
+              <span class="truth-sub">marketing ponad nauką</span>
+              <span class="truth-desc">Wątroba i nerki robią detoks 24/7.</span>
+            </div>
+            <div class="truth-tile truth-tile--myth">
+              <span class="truth-kicker">Co nie działa</span>
+              <span class="truth-main">Statyczne przed</span>
+              <span class="truth-sub">przed treningiem: dynamicznie</span>
+              <span class="truth-desc">Statyczne zostaw na koniec.</span>
+            </div>
+            <div class="truth-tile truth-tile--myth">
+              <span class="truth-kicker">Co nie działa</span>
+              <span class="truth-main">No pain, no gain</span>
+              <span class="truth-sub">ból nie jest celem</span>
+              <span class="truth-desc">Liczy się technika i regularność.</span>
+            </div>
+            <div class="truth-tile truth-tile--myth">
+              <span class="truth-kicker">Co nie działa</span>
+              <span class="truth-main">Mięśnie → tłuszcz</span>
+              <span class="truth-sub">to biologicznie niemożliwe</span>
+              <span class="truth-desc">To dwie różne tkanki.</span>
+            </div>
+            <div class="truth-tile truth-tile--myth">
+              <span class="truth-kicker">Co nie działa</span>
+              <span class="truth-main">Więcej potu</span>
+              <span class="truth-sub">pot ≠ więcej spalania</span>
+              <span class="truth-desc">Pocenie chłodzi ciało.</span>
+            </div>
+          </div>
+          <div class="bento-links" id="truthLinks" aria-label="Powiązane tematy: Co działa i co nie działa"></div>
+        </div>
+      </section>
+
+      <section class="card knowledge-hub" data-title="wiedza ze strony glownej">
+        <div class="card-body">
+          <h3>
+            <span class="title-with-icon">
+              <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 6v12"></path>
+                <path d="M12 6c-2-1.4-5-2-8-1.3v11.6c3-.8 6-.2 8 1.2"></path>
+                <path d="M12 6c2-1.4 5-2 8-1.3v11.6c-3-.8-6-.2-8 1.2"></path>
+              </svg>
+              Wszystko, co musisz wiedzieć
+            </span>
+          </h3>
+          <p class="muted">Dobre na start</p>
+          <div class="hub-grid">
+            <article class="hub-item" data-source-id="article-1-body">
+              <div class="hub-head">
+                <button class="hub-trigger" type="button">
+                  <span class="hub-no">01</span>
+                  <span class="hub-title">Jak zacząć na siłowni po 50-tce</span>
+                  <span class="hub-chevron">▾</span>
+                </button>
+                <a class="hub-jump" href="jak-zaczac-na-silowni-po-50.html" aria-label="Przejdź do artykułu: Jak zacząć na siłowni po 50-tce">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                </a>
+              </div>
+              <div class="hub-body">Ładowanie treści…</div>
+            </article>
+            <article class="hub-item" data-source-id="article-2-body">
+              <div class="hub-head">
+                <button class="hub-trigger" type="button">
+                  <span class="hub-no">02</span>
+                  <span class="hub-title">7 mitów o treningu po 50-tce</span>
+                  <span class="hub-chevron">▾</span>
+                </button>
+                <a class="hub-jump" href="siedem-bledow-silownia-po-50.html" aria-label="Przejdź do artykułu: 7 mitów o treningu po 50-tce">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                </a>
+              </div>
+              <div class="hub-body">Ładowanie treści…</div>
+            </article>
+            <article class="hub-item" data-source-id="article-3-body">
+              <div class="hub-head">
+                <button class="hub-trigger" type="button">
+                  <span class="hub-no">03</span>
+                  <span class="hub-title">Białko i dieta po 50-tce</span>
+                  <span class="hub-chevron">▾</span>
+                </button>
+                <a class="hub-jump" href="jedz-wiecej-po-50.html" aria-label="Przejdź do artykułu: Białko i dieta po 50-tce">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                </a>
+              </div>
+              <div class="hub-body">Ładowanie treści…</div>
+            </article>
+            <article class="hub-item" data-source-id="article-4-body">
+              <div class="hub-head">
+                <button class="hub-trigger" type="button">
+                  <span class="hub-no">04</span>
+                  <span class="hub-title">Plan tygodnia: od zera do bohatera</span>
+                  <span class="hub-chevron">▾</span>
+                </button>
+                <a class="hub-jump" href="powrot-do-formy-po-50-kompletny-przewodnik.html" aria-label="Przejdź do artykułu: Plan tygodnia od zera do bohatera">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                </a>
+              </div>
+              <div class="hub-body">Ładowanie treści…</div>
+            </article>
+            <article class="hub-item" data-source-id="article-5-body">
+              <div class="hub-head">
+                <button class="hub-trigger" type="button">
+                  <span class="hub-no">05</span>
+                  <span class="hub-title">Trendy: co działa, a co ściema</span>
+                  <span class="hub-chevron">▾</span>
+                </button>
+                <a class="hub-jump" href="ciekawe.html" aria-label="Przejdź do działu Ciekawe">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                </a>
+              </div>
+              <div class="hub-body">Ładowanie treści…</div>
+            </article>
+            <article class="hub-item" data-source-id="article-6-body">
+              <div class="hub-head">
+                <button class="hub-trigger" type="button">
+                  <span class="hub-no">06</span>
+                  <span class="hub-title">Sen i regeneracja</span>
+                  <span class="hub-chevron">▾</span>
+                </button>
+                <a class="hub-jump" href="sen-po-50.html" aria-label="Przejdź do artykułu: Sen i regeneracja">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                </a>
+              </div>
+              <div class="hub-body">Ładowanie treści…</div>
+            </article>
+            <article class="hub-item" data-source-id="article-7-body">
+              <div class="hub-head">
+                <button class="hub-trigger" type="button">
+                  <span class="hub-no">07</span>
+                  <span class="hub-title">Równowaga i mobilność</span>
+                  <span class="hub-chevron">▾</span>
+                </button>
+                <a class="hub-jump" href="rusz-sie.html" aria-label="Przejdź do działu Ruch i mobilność">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                </a>
+              </div>
+              <div class="hub-body">Ładowanie treści…</div>
+            </article>
+            <article class="hub-item" data-source-id="article-8-body">
+              <div class="hub-head">
+                <button class="hub-trigger" type="button">
+                  <span class="hub-no">08</span>
+                  <span class="hub-title">Suplementy po 50-tce</span>
+                  <span class="hub-chevron">▾</span>
+                </button>
+                <a class="hub-jump" href="suplementacja-po-50.html" aria-label="Przejdź do artykułu: Suplementy po 50-tce">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                </a>
+              </div>
+              <div class="hub-body">Ładowanie treści…</div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="czytelnia" class="reading-room" data-title="czytelnia trzy ostatnie artykuly">
+      <div class="reading-room__head">
+        <h3>
+          <span class="title-with-icon">
+            <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18v16H6.5A2.5 2.5 0 0 0 4 21Z"></path>
+              <path d="M7 7h8M7 11h8M7 15h5"></path>
+            </svg>
+            Czytelnia
+          </span>
+        </h3>
+        <p>Duża garść wiedzy podana prosto, konkretnie i po ludzku.</p>
+      </div>
+      <div class="reading-grid" id="readingRoomGrid">
+        <article class="read-card read-card--loading">Ładowanie najnowszych artykułów...</article>
+        <article class="read-card read-card--loading">Ładowanie najnowszych artykułów...</article>
+        <article class="read-card read-card--loading">Ładowanie najnowszych artykułów...</article>
+      </div>
+    </section>
+
+    <section id="knowledge-source-cache" hidden aria-hidden="true">
+      <div class="article-card__body" id="article-1-body">
+        <div class="article-card__content">
+          <h4>Pierwszy krok jest najtrudniejszy</h4>
+          <p>Wejście na siłownię po 50-tce może onieśmielać — młodzi ludzie wokół, niezrozumiały sprzęt, obawy o zdrowie. Ale prawda jest taka: <strong>dorośli 65+ odwiedzają siłownie częściej niż jakakolwiek inna grupa wiekowa</strong> (raport IHRSA 2023). Nie jesteś wyjątkiem — jesteś częścią rosnącego trendu.</p>
+
+          <h4>Od czego zacząć?</h4>
+          <ul>
+            <li><strong>Zbadaj się.</strong> Wizyta u lekarza to nie formalność — to twój punkt startowy. Powiedz lekarzowi, że planujesz trening siłowy.</li>
+            <li><strong>Wybierz ćwiczenia wielostawowe.</strong> Przysiady, wiosłowanie, wyciskanie, podciąganie (z asystą) — to fundamenty. Angażują wiele grup mięśniowych jednocześnie.</li>
+            <li><strong>Zacznij od 2–3 sesji tygodniowo, po 30 minut.</strong> To wystarczy. CDC zaleca 150 minut umiarkowanego cardio + 2 dni siły + ćwiczenia równowagi tygodniowo.</li>
+            <li><strong>Forma ważniejsza niż ciężar.</strong> Naucz się wzorców ruchowych ZANIM zwiększysz obciążenie. Progressive overload — stopniowe zwiększanie — to klucz.</li>
+            <li><strong>Rozgrzewka jest obowiązkowa.</strong> 10 minut na orbitreku lub rowerze + mobilność stawów. Nie bierz tego na luz.</li>
+          </ul>
+
+          <h4>Czego unikać?</h4>
+          <p>Najczęstszy błąd początkujących po 50-tce: <strong>trenowanie jak za 20 lat</strong>. Twoje ciało się zmieniło — i to jest OK. Nie musisz bić rekordów. Musisz być konsekwentny i mądry. Minimum <strong>48 godzin przerwy</strong> przed ponownym treningiem tej samej grupy mięśniowej.</p>
+
+          <p>Pamiętaj: regularna aktywność fizyczna <strong>zmniejsza ryzyko upadków o 30%</strong> (CDC). Ćwiczenia nie zwiększają ryzyka kontuzji — wręcz je zmniejszają.</p>
+          <p class="source">Źródła: CDC, IHRSA, Gold's Gym Trends</p>
+        </div>
+      </div>
+
+      <div class="article-card__body" id="article-2-body">
+        <div class="article-card__content">
+          <p>Internet pełen jest porad fitness dla „seniorów" — niestety wiele z nich to bzdury. Oto siedem najczęstszych mitów i&nbsp;naukowa prawda.</p>
+
+          <h4>Mit 1: „Ćwiczenia po 50 są niebezpieczne"</h4>
+          <p>❌ <strong>Fakt:</strong> Regularna aktywność zmniejsza ryzyko upadków o 30% (CDC). Ćwiczenia ZMNIEJSZAJĄ ryzyko kontuzji, nie zwiększają.</p>
+
+          <h4>Mit 2: „Tracę mięśnie, więc po co ćwiczyć?"</h4>
+          <p>❌ <strong>Fakt:</strong> Osoby 60+ mogą zyskać do <strong>20% siły mięśniowej</strong> przy regularnym treningu oporowym (American Journal of Clinical Nutrition). Sarkopenię MOŻNA spowolnić w każdym wieku.</p>
+
+          <h4>Mit 3: „Za późno, żeby zacząć"</h4>
+          <p>❌ <strong>Fakt:</strong> Ciało adaptuje się w KAŻDYM wieku — nawet 70+, 80+. Badanie BMJ potwierdza korzyści z rozpoczęcia ćwiczeń nawet w późnym wieku.</p>
+
+          <h4>Mit 4: „Cardio wystarczy"</h4>
+          <p>❌ <strong>Fakt:</strong> Cardio NIE buduje gęstości kości, nie zachowuje masy mięśniowej. Trening siłowy to fundament — cardio to ważny, ale DODATKOWY element.</p>
+
+          <h4>Mit 5: „Nie chcę być za muskularny/a"</h4>
+          <p>❌ <strong>Fakt:</strong> Po 50-tce hormonalnie nie da się „przypadkiem" zbudować ogromnych mięśni. Efekt: szczupła sylwetka, lepsza postawa, szybszy metabolizm.</p>
+
+          <h4>Mit 6: „Im więcej, tym lepiej"</h4>
+          <p>❌ <strong>Fakt:</strong> 2–3 sesje siłowe tygodniowo po 30 minut to optymalny zakres. Recovery jest CZĘŚCIĄ treningu — nie luksusem.</p>
+
+          <h4>Mit 7: „Trening siłowy nie jest dla kobiet"</h4>
+          <p>❌ <strong>Fakt:</strong> Kluczowy szczególnie w perimenopauzie i menopauzie. Buduje kości, chroni stawy, poprawia równowagę. NASM podkreśla wagę treningu dostosowanego do etapu życia.</p>
+
+          <p class="source">Źródła: CDC, AJCN, BMJ, NASM Trends</p>
+        </div>
+      </div>
+
+      <div class="article-card__body" id="article-3-body">
+        <div class="article-card__content">
+          <h4>Białko — fundament po 50-tce</h4>
+          <p>Z wiekiem nasze ciało gorzej przyswaja białko. Dlatego po 50-tce potrzebujemy go WIĘCEJ, nie mniej. Zalecane spożycie to <strong>1.0–1.6 g białka na kg masy ciała dziennie</strong> (vs. 0.8 g dla młodszych osób).</p>
+          <p>Alarmujący fakt: <strong>~46% osób powyżej 51 roku życia NIE spełnia dziennego zapotrzebowania na białko</strong> (UCLA Health). To oznacza przyspieszoną utratę masy mięśniowej, osłabione kości i wolniejszą regenerację.</p>
+
+          <h4>Jak jeść białko?</h4>
+          <ul>
+            <li><strong>Rozłóż równomiernie w ciągu dnia.</strong> 25–30 g białka w każdym posiłku jest lepsze niż 80 g na kolację.</li>
+            <li><strong>Łącz z treningiem siłowym.</strong> Trening + białko = najlepszy efekt na masę mięśniową. Jedno bez drugiego to połowa potencjału.</li>
+            <li><strong>Wybieraj różnorodne źródła:</strong> drób, ryby, jaja, nabiał, rośliny strączkowe, orzechy.</li>
+          </ul>
+
+          <h4>Ogólne zasady diety po 50-tce</h4>
+          <p>30-letnie badanie opublikowane w <strong>Nature Medicine (2025)</strong> wykazało, że dieta AHEI daje <strong>86% większe szanse na zdrowe starzenie się</strong>. Co to oznacza w praktyce?</p>
+          <ul>
+            <li><strong>Więcej:</strong> owoce, warzywa, pełne ziarna, nienasycone tłuszcze, orzechy, nasiona, rośliny strączkowe</li>
+            <li><strong>Mniej:</strong> tłuszcze trans, sód, napoje słodzone, czerwone i przetworzone mięso</li>
+            <li><strong>Ultra-przetworzona żywność (UPF)</strong> odwrotnie koreluje ze zdrowym starzeniem się — ograniczaj do minimum</li>
+          </ul>
+          <p>I nie zapominaj o <strong>nawodnieniu</strong> — po 50-tce mechanizm pragnienia słabnie, więc pij regularnie, nawet gdy nie czujesz pragnienia.</p>
+
+          <p class="source">Źródła: UCLA Health, Harvard Health, Nature Medicine 2025, NCOA, NIA</p>
+        </div>
+      </div>
+
+      <div class="article-card__body" id="article-4-body">
+        <div class="article-card__content">
+          <p>Oto przykładowy plan tygodniowy dla osoby 50+ zaczynającej przygodę z regularnym treningiem. Plan jest zgodny z zaleceniami CDC: 150 min umiarkowanego cardio + 2 dni siły + ćwiczenia równowagi.</p>
+
+          <h4>Poniedziałek — Siłownia (30 min)</h4>
+          <ul>
+            <li>Rozgrzewka: 10 min orbitrek/rower</li>
+            <li>Przysiady (goblet squat) — 3×10</li>
+            <li>Wiosłowanie hantlem — 3×10 na stronę</li>
+            <li>Wyciskanie hantli na ławce — 3×10</li>
+            <li>Deska (plank) — 3×20 sek</li>
+          </ul>
+
+          <h4>Wtorek — Cardio + mobilność (40 min)</h4>
+          <ul>
+            <li>30 min marsz/rower w umiarkowanym tempie</li>
+            <li>10 min stretching i mobilność stawów</li>
+          </ul>
+
+          <h4>Środa — Odpoczynek aktywny</h4>
+          <p>Lekki spacer, basen, joga. Regeneracja jest CZĘŚCIĄ treningu.</p>
+
+          <h4>Czwartek — Siłownia (30 min)</h4>
+          <ul>
+            <li>Rozgrzewka: 10 min</li>
+            <li>Wykroki (lunges) — 3×8 na nogę</li>
+            <li>Ściąganie drążka (lat pulldown) — 3×10</li>
+            <li>Wyciskanie stojąc (shoulder press) — 3×10</li>
+            <li>Martwy ciąg rumuński — 3×10</li>
+          </ul>
+
+          <h4>Piątek — Cardio (30 min)</h4>
+          <ul>
+            <li>Rower stacjonarny lub orbitrek, tempo umiarkowane</li>
+            <li>Opcjonalnie: 10 min ćwiczeń równowagi (stanie na jednej nodze, tandem walk)</li>
+          </ul>
+
+          <h4>Sobota — Aktywność rekreacyjna</h4>
+          <p>Dłuższy spacer, wycieczka rowerowa, pływanie. Baw się ruchem!</p>
+
+          <h4>Niedziela — Odpoczynek</h4>
+          <p>Pełna regeneracja. Sen 7–8 godzin to fundament — nie luksus.</p>
+
+          <p><strong>Progressive overload:</strong> Co 1–2 tygodnie dodaj powtórzenie, serię lub niewielkie obciążenie. Postęp ma być powolny i stały.</p>
+          <p class="source">Źródła: CDC, ACSM, Gold's Gym Trends</p>
+        </div>
+      </div>
+
+      <div class="article-card__body" id="article-5-body">
+        <div class="article-card__content">
+          <p>Każdy rok przynosi nowe buzzwordy w fitness. Przeanalizowałem raporty ACSM, NASM, Gold's Gym i Les Mills. Oto co naprawdę ma znaczenie, a co jest chwilową modą.</p>
+
+          <h4>✅ Trening siłowy — niekwestionowany lider</h4>
+          <p>Wszystkie raporty są zgodne: <strong>trening siłowy to #1 trend dla osób 50+</strong>. ACSM umieścił „programy fitness dla starszych dorosłych" na 2. miejscu swojego rankingu trendów. Les Mills podkreśla, że siła w różnych formach (joga, pilates, obwodówki) jest kluczowa dla KAŻDEGO wieku.</p>
+
+          <h4>✅ Recovery jako strategia postępu</h4>
+          <p>Gold's Gym stawia recovery na piedestale: <strong>cold plunges, sauny infrared, terapia perkusyjna, optymalizacja snu</strong>. To nie luksus — to narzędzia, które przyspieszają regenerację i pozwalają trenować konsekwentniej.</p>
+
+          <h4>✅ Active aging / longevity</h4>
+          <p>Les Mills nazywa „longevity" następną wielką granicą fitness. Połączenie siły, mobilności i równowagi — to jest recepta na niezależne i aktywne życie po 60, 70, 80+.</p>
+
+          <h4>⚠️ GLP-1 / leki odchudzające (Ozempic, Wegovy)</h4>
+          <p>Trend GLP-1 jest ogromny, ale NASM ostrzega: <strong>bez treningu siłowego tracisz mięśnie, nie tylko tłuszcz</strong>. Jeśli bierzesz GLP-1, trening oporowy jest KONIECZNY. Leki nie zastąpią aktywności fizycznej.</p>
+
+          <h4>⚠️ Wearables i tracking</h4>
+          <p>Smartwatche i ringi fitness mogą być pomocne — ale obsesja na punkcie danych bywa kontrproduktywna. Słuchaj ciała, nie tylko algorytmu.</p>
+
+          <p class="source">Źródła: ACSM Top Trends, NASM Trends, Gold's Gym Trends, Les Mills</p>
+        </div>
+      </div>
+
+      <div class="article-card__body" id="article-6-body">
+        <div class="article-card__content">
+          <h4>Trening łamie — sen naprawia</h4>
+          <p>Każdy trening siłowy to kontrolowane uszkodzenie włókien mięśniowych. Prawdziwy wzrost siły i masy mięśniowej nie odbywa się na siłowni — <strong>odbywa się w nocy, podczas snu</strong>. Badanie opublikowane w&nbsp;<strong>Cell (UC Berkeley, 2025)</strong> pokazało, że głęboki sen non-REM uruchamia uwalnianie hormonu wzrostu, który bezpośrednio buduje mięśnie, wzmacnia kości i redukuje tkankę tłuszczową.</p>
+
+          <h4>Ile snu potrzebujesz?</h4>
+          <p>Minimum <strong>7–8 godzin</strong> nieprzerwanego snu. Badanie z&nbsp;<strong>BMC Geriatrics (2025)</strong> na osobach 50+ wykazało, że optymalny czas snu (6–9h) jest silnie powiązany z zachowaniem masy mięśniowej, sprawnością poznawczą i brakiem depresji. Za krótki sen przyspiesza sarkopenię — utratę mięśni związaną z wiekiem.</p>
+          <p>Badanie z&nbsp;<strong>Physiological Reports</strong> potwierdziło: nawet <strong>jedna noc niedoboru snu</strong> podnosi kortyzol i obniża syntezę białek mięśniowych — czyli cofasz efekty treningu.</p>
+
+          <h4>Dni odpoczynku to nie lenistwo</h4>
+          <ul>
+            <li><strong>Min. 48h przerwy</strong> przed treningiem tej samej grupy mięśniowej — to nie opinia, to fizjologia.</li>
+            <li><strong>1–2 dni pełnego odpoczynku w tygodniu</strong> — ACSM zaleca to nawet zaawansowanym.</li>
+            <li><strong>Aktywna regeneracja:</strong> lekki spacer, basen, joga, stretching — to przyspiesza regenerację, nie spowalnia.</li>
+          </ul>
+
+          <h4>Praktyczne tipy na lepszy sen</h4>
+          <ul>
+            <li>Stała pora zasypiania i budzenia — również w weekendy</li>
+            <li>Ostatni posiłek 3–4h przed snem (jelita potrzebują ~5h na trawienie)</li>
+            <li>Brak ekranów 60 min przed snem</li>
+            <li>Chłodna sypialnia (18–20°C)</li>
+            <li>Trening rano wspomaga zegar biologiczny i głęboki sen w&nbsp;nocy</li>
+          </ul>
+
+          <p class="source">Źródła: UC Berkeley / Cell (2025), BMC Geriatrics (2025), Frontiers in Neuroscience (2025), CNN Health (2025), ACSM</p>
+        </div>
+      </div>
+
+      <div class="article-card__body" id="article-7-body">
+        <div class="article-card__content">
+          <h4>Upadki to nie „chłopskie sprawy” — to problem #1 po 60-tce</h4>
+          <p>Każdego roku w&nbsp;USA dochodzi do <strong>ponad miliona hospitalizacji związanych z upadkami</strong> osób starszych (CDC). Najczęstsza przyczyna? Nie śliskość podłogi — <strong>słabe mięśnie, ograniczona mobilność stawów i zaburzona równowaga</strong>. Każdy z&nbsp;tych elementów można trenować.</p>
+
+          <h4>Co mówi nauka?</h4>
+          <p>Przegląd <strong>27 badań klinicznych (Life, 2025)</strong> pokazał skuteczność różnych programów:</p>
+          <ul>
+            <li><strong>Tai Chi:</strong> redukcja upadków o 31–58%</li>
+            <li><strong>Program Otago</strong> (siła + równowaga w domu): redukcja o 23–40%</li>
+            <li><strong>Trening równowagi reaktywnej:</strong> redukcja upadków w laboratorium o 50–75%</li>
+            <li><strong>Trening wieloskładnikowy</strong> (siła + równowaga + mobilność): redukcja o 20–45%</li>
+          </ul>
+          <p>Najlepsze efekty dają programy trwające <strong>12–24 miesiące</strong> — równowaga wymaga systematyczności.</p>
+
+          <h4>Proste ćwiczenia do wykonania w domu</h4>
+          <ul>
+            <li><strong>Stanie na jednej nodze</strong> — 30 sek na stronę, trzymając się krzesła (stopniowo puszczaj)</li>
+            <li><strong>Tandem walk</strong> — marsz stopa za stopą, pięta do palców, 10 kroków</li>
+            <li><strong>Wstawanie z krzesła bez rąk</strong> — świetny test siły nóg i równowagi</li>
+            <li><strong>Krążenia kostek</strong> — poprawia stabilność stawu skokowego</li>
+            <li><strong>Rozciąganie biodra i łydki</strong> — poprawa długości kroku i chodu (badanie: po 4 tyg. rozciągania parametry chodu wracają do poziomu młodych dorosłych)</li>
+          </ul>
+
+          <h4>Elastyczność = dłuższe życie</h4>
+          <p>Nowe badania pokazują, że <strong>osoby z gorszą elastycznością mają sztywniejsze tętnice</strong> — co jest czynnikiem ryzyka chorób serca. Regularne rozciąganie może zmniejszać sztywność tętnic, szczególnie u mężczyzn w średnim wieku (BBC Science Focus, 2025).</p>
+
+          <p class="source">Źródła: CDC, Life — systematic review (2025), PeerJ (2025), Journal of Aging Research, BBC Science Focus (2025), Rochester Athletic Club / Mayo Clinic</p>
+        </div>
+      </div>
+
+      <div class="article-card__body" id="article-8-body">
+        <div class="article-card__content">
+          <h4>Najpierw dieta, potem suplementy</h4>
+          <p>Suplementy NIE zastąpią zdrowego jedzenia — ale po 50-tce niektóre składniki trudniej dostarczyć z&nbsp;samej diety. Dr Eric Verdin, badacz biologii starzenia, codziennie bierze cztery suplementy. Eksperci z <strong>New York Times (2025)</strong> potwierdzają: witamina D, B12 i omega-3 to trójka, którą najczęściej zalecają osobom 50+.</p>
+
+          <h4>✅ Witamina D</h4>
+          <p><strong>~35% dorosłych ma niedobory</strong> (Cleveland Clinic). Po 50-tce skóra produkuje ją mniej efektywnie. Kluczowa dla kości, mięśni i odporności. Zalecenie: <strong>zrób badanie krwi</strong> — dawka zależy od poziomu. Przeciętnie 1000–2000 IU dziennie.</p>
+
+          <h4>✅ Witamina B12</h4>
+          <p>Z wiekiem wchłanianie B12 z pożywienia spada. Niedobory prowadzą do zmęczenia, uszkodzeń nerwów i problemów z pamięcią. Szczególnie ważna jeśli ograniczasz mięso.</p>
+
+          <h4>✅ Omega-3 (kwasy tłuszczowe)</h4>
+          <p>Wspierają serce i mózg. Harvard T.H. Chan potwierdza: zmniejszają ryzyko chorób sercowo-naczyniowych, obniżają ciśnienie i poprawiają funkcje naczyń krwionośnych. Najlepiej z ryb (2–3 porcje/tydzień), ale suplement jest sensowny jeśli ryb nie jesz regularnie.</p>
+
+          <h4>✅ Kreatyna — nie tylko dla kulturystów</h4>
+          <p>Zaskakujące? Metaanaliza z <strong>American Journal of Lifestyle Medicine (2024)</strong> pokazała: kreatyna u osób 48–84 lat zwiększyła siłę w wyciskaniu na ławce i prasie nóg. W jednym badaniu mężczyźni 50–71 lat po 32 tyg. treningu z kreatyną zyskali <strong>+30 kg w prasie nóg i +14 kg w klatce</strong>. Poza mięśniami — wstępne badania sugerują korzyści poznawcze. Dawka: min. 5g dziennie.</p>
+
+          <h4>❌ Co raczej NIE działa?</h4>
+          <ul>
+            <li><strong>Kolagen w proszku</strong> — brak solidnych dowodów na skuteczność doustnego kolagenu na stawy u osób zdrowych</li>
+            <li><strong>„Spalacze tłuszczu”</strong> — marketing. Żaden suplement nie „spala" tłuszczu bez deficytu kalorycznego</li>
+            <li><strong>Mega-dawki witamin</strong> — więcej ≠ lepiej. Nadmiar witaminy A, E czy żelaza może szkodzić</li>
+          </ul>
+          <p>❗ Zawsze skonsultuj suplementację z lekarzem — interakcje z lekami są realne, szczególnie po 50-tce.</p>
+
+          <p class="source">Źródła: Business Insider / Dr Eric Verdin (2025), NYT (2025), Cleveland Clinic, Harvard T.H. Chan, American Journal of Lifestyle Medicine (2024)</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const quickTipsPool = [
+      {
+        title: 'Dzisiaj: fundamenty zdrowia',
+        tips: ['10 minut spaceru po posiłku', 'szklanka wody po przebudzeniu', '2 serie prostych ćwiczeń siłowych', 'minimum 7 h snu']
+      },
+      {
+        title: 'Dzisiaj: energia i regeneracja',
+        tips: ['białko w każdym głównym posiłku', '15 min ruchu przed południem', 'krótka przerwa od siedzenia co 45 min', 'wieczorem mniej ekranu']
+      },
+      {
+        title: 'Dzisiaj: serce i metabolizm',
+        tips: ['monitoruj ciśnienie 2x w tygodniu', 'więcej warzyw niż dodatków', '2 l wody dziennie', 'lekki spacer po kolacji']
+      }
+    ];
+
+    const tipsTitle = document.getElementById('tipsTitle');
+    const tipsList = document.getElementById('tipsList');
+    const latestArticleTitle = document.getElementById('latestArticleTitle');
+    const latestArticleExcerpt = document.getElementById('latestArticleExcerpt');
+    const latestArticleLink = document.getElementById('latestArticleLink');
+    const latestArticleImage = document.getElementById('latestArticleImage');
+    const faqQuestion = document.getElementById('faqQuestion');
+    const faqAnswer = document.getElementById('faqAnswer');
+    const faqSource = document.getElementById('faqSource');
+    const faqLink = document.getElementById('faqLink');
+    const readingRoomGrid = document.getElementById('readingRoomGrid');
+    const newsTickerList = document.getElementById('newsTickerList');
+    const newsFeedLoader = document.getElementById('newsFeedLoader');
+    let newsFeedSentinel = document.getElementById('newsFeedSentinel');
+    const NEWS_BATCH_SIZE = 5;
+    let allNewsItems = [];
+    let renderedNewsCount = 0;
+    let isNewsBatchLoading = false;
+    let newsObserver = null;
+
+    function resetNewsTicker() {
+      if (!newsTickerList) return;
+      newsTickerList.querySelectorAll('.ticker-item').forEach((node) => node.remove());
+      newsFeedSentinel = newsTickerList.querySelector('#newsFeedSentinel');
+      if (!newsFeedSentinel) {
+        newsFeedSentinel = document.createElement('div');
+        newsFeedSentinel.id = 'newsFeedSentinel';
+        newsFeedSentinel.className = 'news-feed-sentinel';
+        newsFeedSentinel.setAttribute('aria-hidden', 'true');
+        newsTickerList.appendChild(newsFeedSentinel);
+      }
+    }
+
+    function renderTips(index) {
+      const item = quickTipsPool[index % quickTipsPool.length];
+      tipsTitle.textContent = item.title;
+      tipsList.innerHTML = item.tips.map(t => `<li>${t}</li>`).join('');
+    }
+
+    function stripHtml(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html || '';
+      return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      const tmp = document.createElement('div');
+      tmp.textContent = str;
+      return tmp.innerHTML;
+    }
+
+    function truncate(text, maxLen) {
+      if (!text) return '';
+      if (text.length <= maxLen) return text;
+      return `${text.slice(0, maxLen).trimEnd()}...`;
+    }
+
+    function toAvifIfPossible(imagePath) {
+      if (!imagePath || typeof imagePath !== 'string') return '';
+      if (/\.webp$/i.test(imagePath)) return imagePath.replace(/\.webp$/i, '.avif');
+      return imagePath;
+    }
+
+    function setLatestArticleImage(imagePath) {
+      if (!latestArticleImage) return;
+      const nextImage = imagePath || './assets/keto-cholesterol-hero.jpg';
+      const avifSource = document.getElementById('latestArticleImageAvifSource');
+      if (avifSource) avifSource.setAttribute('srcset', toAvifIfPossible(nextImage));
+      latestArticleImage.src = nextImage;
+    }
+
+    window.__fitpoImageFallback = function (img) {
+      if (!img) return;
+      const alt = img.dataset.fallbackSrc;
+      if (alt && img.src !== alt) {
+        img.src = alt;
+        img.dataset.fallbackSrc = '';
+        return;
+      }
+      img.onerror = null;
+      img.src = './assets/keto-cholesterol-hero.jpg';
+    };
+
+    function getDayKey() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const diff = now - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      return Math.floor(diff / oneDay);
+    }
+
+    function renderDailyFaq(item) {
+      if (!faqQuestion || !faqAnswer || !faqSource || !faqLink) return;
+      faqQuestion.textContent = item.question || 'Brak pytania FAQ na dziś';
+      faqAnswer.textContent = truncate(item.answer || 'Brak odpowiedzi.', 260);
+      faqSource.textContent = `Źródło: ${item.sourceLabel || 'FitPo50'}`;
+      faqLink.href = item.url || 'porady.html';
+    }
+
+    async function loadDailyFaq() {
+      const fallbackFaqPool = [
+        {
+          question: 'Czy po 50-tce da się poprawić wyniki lipidogramu bez skrajnej diety?',
+          answer: 'Tak, u wielu osób realną różnicę robi regularny ruch, redukcja cukrów prostych i konsekwentny monitoring badań.',
+          url: 'apob-apoa-badania-cholesterol.html',
+          sourceLabel: 'ApoB i ApoA'
+        },
+        {
+          question: 'Czy trening siłowy po 50-tce trzeba robić codziennie?',
+          answer: 'Nie. Dla większości osób wystarczą 2-3 sensowne sesje tygodniowo, jeśli są regularne i dopasowane do możliwości.',
+          url: 'trening-3x30-dla-50-plus.html',
+          sourceLabel: 'Trening 3x30'
+        },
+        {
+          question: 'Czy keto zawsze podnosi ryzyko sercowe?',
+          answer: 'Nie u każdego ten sam model żywienia działa identycznie, dlatego kluczowe są indywidualne wyniki i regularna kontrola lipidogramu.',
+          url: 'dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html',
+          sourceLabel: 'Dieta keto i cholesterol'
+        }
+      ];
+
+      const dailyIndex = getDayKey() % fallbackFaqPool.length;
+      renderDailyFaq(fallbackFaqPool[dailyIndex]);
+    }
+
+    async function loadLatestArticle() {
+      const fallback = {
+        title: 'Trening siłowy jako eliksir młodości po 50-tce – praktyczny',
+        excerpt: 'Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo.',
+        image: './assets/trening-silowy-hormony-50-hero.webp',
+        url: 'trening-silowy-eliksir-mlodosci-po-50.html'
+      };
+      latestArticleTitle.textContent = fallback.title;
+      latestArticleExcerpt.textContent = fallback.excerpt;
+      latestArticleLink.href = fallback.url;
+      setLatestArticleImage(fallback.image);
+    }
+
+    function createReadingCard(item) {
+      const categoryClass = `read-card__badge--${(item.category || '').toLowerCase()}`;
+      const fallbackAttr = item.imageFallback ? ` data-fallback-src="${item.imageFallback}"` : '';
+      return `
+        <article class="read-card">
+          <a class="read-card__media" href="${item.url}">
+            <span class="read-card__badge ${categoryClass}">${item.category}</span>
+            <img src="${item.image}" alt="${item.title}" loading="lazy"${fallbackAttr} onerror="window.__fitpoImageFallback(this)">
+          </a>
+          <div class="read-card__body">
+            <h4>${item.title}</h4>
+            <p>${item.excerpt}</p>
+            <a class="read-card__cta" href="${item.url}">Czytaj</a>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderReadingFallback() {
+      if (!readingRoomGrid) return;
+      const fallback = [
+        {
+          category: 'Ruch',
+          title: 'Trening siłowy jako eliksir młodości po 50-tce – praktyczny',
+          excerpt: 'Hormony, metabolizm i mięśnie reagują na ciężary po 50. roku życia. Dowiedz się, jak trening siłowy poprawia insulinowrażliwość i działa przeciwstarzeniowo.',
+          image: './assets/trening-silowy-hormony-50-hero.webp',
+          url: 'trening-silowy-eliksir-mlodosci-po-50.html'
+        },
+        {
+          category: 'Ciekawe',
+          title: 'Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda?',
+          excerpt: 'Peptydy to biologiczne SMS-y do Twoich komórek. Od kolagenu po semaglutyd – sprawdzamy co działa, co jest bezpieczne, a co pozostaje niebezpiecznym',
+          image: './assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp',
+          url: 'peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html'
+        },
+        {
+          category: 'Ciekawe',
+          title: 'Trening siłowy po 50: Jak odmłodzić swoje komórki i DNA?',
+          excerpt: 'Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń',
+          image: './assets/trening-silowy-dna-hero.webp',
+          url: 'trening-silowy-starzenie-komorkowe-dna.html'
+        }
+      ];
+      readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
+    }
+
+    async function loadReadingRoom() {
+      if (!readingRoomGrid) return;
+      renderReadingFallback();
+    }
+
+    function getItemImage(item) {
+      if (item?.image?.webp || item?.image?.jpg) {
+        return item.image.webp || item.image.jpg;
+      }
+      if (item?.image_base) {
+        return `./assets/news/${item.image_base}.webp`;
+      }
+      return './assets/keto-cholesterol-hero.jpg';
+    }
+
+    function buildTickerSourcesHtml(item) {
+      if (!Array.isArray(item?.sources) || item.sources.length === 0) return '';
+      return `
+        <div class="ticker-sources">
+          <details>
+            <summary>Źródła i kontekst</summary>
+            <ul>
+              ${item.sources.map((src) => `
+                <li>
+                  <a href="${src.url || '#'}" target="_blank" rel="noopener noreferrer">${escapeHtml(src.label || 'Źródło')}</a>
+                  ${src.note ? `<span class="ticker-source-note">${escapeHtml(src.note)}</span>` : ''}
+                </li>
+              `).join('')}
+            </ul>
+          </details>
+        </div>
+      `;
+    }
+
+    function ensureTickerContentLinks(scope) {
+      const links = scope.querySelectorAll('.ticker-content a[href]');
+      links.forEach((anchor) => {
+        const href = anchor.getAttribute('href') || '';
+        if (/^https?:\/\//i.test(href)) {
+          anchor.setAttribute('target', '_blank');
+          anchor.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
+    }
+
+    function createTickerItem(item, options = {}) {
+      const eager = options.eager === true;
+      const highPriority = options.highPriority === true;
+      const imageSrc = getItemImage(item);
+      const imageAlt = item?.image?.alt || item?.image_alt || (item.title || 'Miniatura newsa');
+      const contentHtml = (item?.content_html || '').trim();
+      const fallbackExcerpt = escapeHtml(stripHtml(item?.excerpt || '').trim());
+      const bodyHtml = contentHtml || `<p>${fallbackExcerpt || 'Brak opisu.'}</p>`;
+      const loadingAttr = eager ? 'eager' : 'lazy';
+      const fetchPriorityAttr = highPriority ? 'high' : 'auto';
+      return `
+        <article class="ticker-item">
+          <img class="ticker-thumb" src="${imageSrc}" alt="${imageAlt}" width="210" height="150" loading="${loadingAttr}" fetchpriority="${fetchPriorityAttr}" decoding="async" onerror="this.src='./assets/keto-cholesterol-hero.jpg'">
+          <div class="ticker-body">
+            <h4>${escapeHtml(item?.title || 'Aktualność')}</h4>
+            <div class="ticker-content">${bodyHtml}</div>
+            ${buildTickerSourcesHtml(item)}
+          </div>
+        </article>
+      `;
+    }
+
+    async function renderNextNewsBatch() {
+      if (!newsTickerList) return;
+      if (isNewsBatchLoading) return;
+      const nextItems = allNewsItems.slice(renderedNewsCount, renderedNewsCount + NEWS_BATCH_SIZE);
+      if (!nextItems.length) return;
+      isNewsBatchLoading = true;
+      if (newsFeedLoader) {
+        newsFeedLoader.textContent = 'Ładowanie kolejnych newsów...';
+        newsFeedLoader.classList.add('is-visible');
+      }
+      const isFirstBatch = renderedNewsCount === 0;
+      const batchHtml = nextItems.map((item, idx) => createTickerItem(item, {
+        eager: isFirstBatch,
+        highPriority: isFirstBatch && idx < 2
+      })).join('');
+      if (newsFeedSentinel) {
+        newsFeedSentinel.insertAdjacentHTML('beforebegin', batchHtml);
+      } else {
+        newsTickerList.insertAdjacentHTML('beforeend', batchHtml);
+      }
+      ensureTickerContentLinks(newsTickerList);
+      renderedNewsCount += nextItems.length;
+      if (newsFeedLoader) {
+        newsFeedLoader.classList.remove('is-visible');
+      }
+      isNewsBatchLoading = false;
+      if (renderedNewsCount >= allNewsItems.length && newsObserver) {
+        newsObserver.disconnect();
+      }
+    }
+
+    function enableAutoNewsBatching() {
+      if (!newsTickerList) return;
+      newsFeedSentinel = newsTickerList.querySelector('#newsFeedSentinel');
+      if (!newsFeedSentinel) return;
+      if (!('IntersectionObserver' in window)) return;
+      if (newsObserver) newsObserver.disconnect();
+
+      newsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            renderNextNewsBatch();
+          }
+        });
+      }, {
+        root: newsTickerList,
+        threshold: 0.1,
+        rootMargin: '0px 0px 150px 0px'
+      });
+
+      newsObserver.observe(newsFeedSentinel);
+    }
+
+    async function fetchJsonWithTimeout(url, timeoutMs) {
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const res = await fetch(url, { signal: controller.signal });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (_) {
+        return null;
+      } finally {
+        window.clearTimeout(timer);
+      }
+    }
+
+    async function firstValidNewsData(endpoints, timeoutMs, options = {}) {
+      const firstEndpointRetries = Number.isInteger(options.firstEndpointRetries)
+        ? Math.max(0, options.firstEndpointRetries)
+        : 0;
+
+      for (let idx = 0; idx < endpoints.length; idx += 1) {
+        const url = endpoints[idx];
+        const maxAttempts = idx === 0 ? firstEndpointRetries + 1 : 1;
+        for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+          const payload = await fetchJsonWithTimeout(url, timeoutMs);
+          const items = Array.isArray(payload?.items) ? payload.items : [];
+          if (items.length > 0) return items;
+        }
+      }
+      return [];
+    }
+
+    function filterPublishedNews(items) {
+      if (!Array.isArray(items)) return [];
+      return items.filter((item) => {
+        if (!item || typeof item !== 'object') return false;
+        const status = typeof item.status === 'string' ? item.status.toLowerCase() : '';
+        // API public payload nie zawiera statusu, ale lokalny news-live.json go zawiera.
+        // Jeśli status istnieje, wpuszczamy wyłącznie "published".
+        if (status && status !== 'published') return false;
+        return true;
+      });
+    }
+
+    async function loadNewsFeed() {
+      const host = String(window.location.hostname || '').toLowerCase();
+      const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
+
+      // API-first: panel redakcyjny jest źródłem prawdy dla statusów draft/published.
+      const remoteItemsRaw = isLocalHost ? [] : await firstValidNewsData([
+        './admin/api/news-feed.php',
+        'https://admin.fitpo50.pl/api/news-feed.php'
+      ], 2200);
+
+      const remoteItems = filterPublishedNews(remoteItemsRaw);
+
+      const localItemsRaw = remoteItems.length ? [] : await firstValidNewsData([
+        './data/news-live.json',
+        './assets/data/news-fallback.json'
+      ], 3000, { firstEndpointRetries: 1 });
+
+      const localItems = filterPublishedNews(localItemsRaw);
+      const itemsToRender = remoteItems.length ? remoteItems : localItems;
+      if (itemsToRender.length > 0) {
+        allNewsItems = itemsToRender;
+        renderedNewsCount = 0;
+        resetNewsTicker();
+        renderNextNewsBatch().then(enableAutoNewsBatching);
+        return;
+      }
+
+      allNewsItems = [
+        {
+          title: 'Brak danych newsowych',
+          content_html: '<p>Nie udało się wczytać plików z newsami. To tylko prototyp lokalny.</p>'
+        }
+      ];
+      renderedNewsCount = 0;
+      resetNewsTicker();
+      renderNextNewsBatch().then(enableAutoNewsBatching);
+    }
+
+    const truthLinks = document.getElementById('truthLinks');
+    const truthLinkPool = [
+      { href: 'jak-zaczac-na-silowni-po-50.html', label: 'Start na siłowni', icon: 'move' },
+      { href: 'powrot-do-formy-po-50-kompletny-przewodnik.html', label: 'Plan startowy po 50', icon: 'arrow' },
+      { href: 'jedz-wiecej-po-50.html', label: 'Białko i dieta', icon: 'food' },
+      { href: 'sen-po-50.html', label: 'Sen i regeneracja', icon: 'heart' },
+      { href: 'siedem-bledow-silownia-po-50.html', label: 'Najczęstsze błędy', icon: 'arrow' },
+      { href: 'rusz-sie.html', label: 'Ruch i mobilność', icon: 'move' },
+      { href: 'jedzenie.html', label: 'Dieta po 50', icon: 'food' },
+      { href: 'zdrowie.html', label: 'Markery zdrowia', icon: 'heart' },
+      { href: 'ciekawe.html', label: 'Mity i fakty', icon: 'arrow' }
+    ];
+
+    function hashString(value) {
+      let hash = 0;
+      for (let i = 0; i < value.length; i += 1) {
+        hash = ((hash << 5) - hash) + value.charCodeAt(i);
+        hash |= 0;
+      }
+      return Math.abs(hash);
+    }
+
+    function mulberry32(seedNumber) {
+      let t = seedNumber >>> 0;
+      return function () {
+        t += 0x6D2B79F5;
+        let r = Math.imul(t ^ (t >>> 15), t | 1);
+        r ^= r + Math.imul(r ^ (r >>> 7), r | 61);
+        return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function getBentoIcon(iconType) {
+      if (iconType === 'move') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5a2 2 0 1 0-2 0"/><path d="M12 7l2.5 2.5"/><path d="M9.5 21l1-4 2-2 1 6"/><path d="M7 13l3-2 2.5.5"/></svg>';
+      if (iconType === 'food') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v7a2 2 0 0 0 2 2h2V3"/><path d="M10 3v18"/><path d="M16 3c0 4-2 6-2 9v9"/><path d="M20 3v18"/></svg>';
+      if (iconType === 'heart') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.6-7 10-7 10z"/></svg>';
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
+    }
+
+    function renderDailyTruthLinks() {
+      if (!truthLinks) return;
+      const dayKey = new Date().toISOString().slice(0, 10);
+      const random = mulberry32(hashString(`truth-links-${dayKey}`));
+      const shuffled = [...truthLinkPool].sort(() => random() - 0.5);
+      const chosen = shuffled.slice(0, 4);
+      truthLinks.innerHTML = chosen
+        .map((item) => `<a class="bento-link" href="${item.href}">${getBentoIcon(item.icon)}${item.label}</a>`)
+        .join('');
+    }
+
+    function setText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    function pm25QualityLabel(pm25) {
+      if (!Number.isFinite(pm25)) return 'brak';
+      if (pm25 <= 12) return 'dobra';
+      if (pm25 <= 35) return 'umiarkowana';
+      if (pm25 <= 55) return 'słaba';
+      return 'zła';
+    }
+
+    async function loadLiveWeatherAq() {
+      const lat = 50.0614;
+      const lon = 19.9366;
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m&hourly=pm2_5,uv_index&timezone=auto&forecast_days=1`;
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const temp = data?.current?.temperature_2m;
+        const wind = data?.current?.wind_speed_10m;
+        const pm25 = data?.hourly?.pm2_5?.[0];
+        const uv = data?.hourly?.uv_index?.[0];
+        const quality = pm25QualityLabel(pm25);
+
+        setText('liveWeatherAqValue', `Kraków: ${Math.round(temp)}°C • PM2.5 ${Math.round(pm25)} µg/m3`);
+        setText('liveWeatherAqMeta', `AQ ${quality} • wiatr ${Math.round(wind)} km/h • UV ${Number.isFinite(uv) ? uv.toFixed(1) : 'n/a'}`);
+      } catch (_) {
+        setText('liveWeatherAqValue', 'Kraków: 17°C • PM2.5 21 µg/m3 (demo fallback)');
+        setText('liveWeatherAqMeta', 'Fallback: dane tymczasowe');
+      }
+    }
+
+    async function loadLivePopulationHealth() {
+      const eurostatUrl = 'https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/HLTH_EHIS_PA1E?lang=EN&geo=PL&sex=T&age=TOTAL&unit=PC';
+      try {
+        const res = await fetch(eurostatUrl, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const values = Object.values(data?.value || {}).map(Number).filter(Number.isFinite);
+        const latest = values.length ? values[values.length - 1] : null;
+        if (!Number.isFinite(latest)) throw new Error('no value');
+        setText('livePopulationValue', `Aktywność rekreacyjna (PL): ${latest.toFixed(1)}%`);
+        setText('livePopulationMeta', 'Publiczny wskaźnik krajowy');
+      } catch (_) {
+        setText('livePopulationValue', 'Dorośli bez normy ruchu WHO: ~35% (UE, przybliż.)');
+        setText('livePopulationMeta', 'Fallback: wskaźnik poglądowy');
+      }
+    }
+
+    async function loadLiveAlerts() {
+      try {
+        const res = await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const total = Array.isArray(data?.features) ? data.features.length : 0;
+        const top = (data?.features || [])
+          .map((f) => Number(f?.properties?.mag))
+          .filter(Number.isFinite)
+          .sort((a, b) => b - a)[0];
+        setText('liveAlertsValue', `USGS 24h: ${total} zdarzeń • max M${Number.isFinite(top) ? top.toFixed(1) : 'n/a'}`);
+        setText('liveAlertsMeta', 'Globalny monitoring sejsmiczny');
+      } catch (_) {
+        setText('liveAlertsValue', 'USGS 24h: 120 zdarzeń • max M5.4 (demo fallback)');
+        setText('liveAlertsMeta', 'Fallback: dane tymczasowe');
+      }
+    }
+
+    const seed = new Date().getDate();
+    let tipsIdx = seed;
+    renderTips(tipsIdx);
+    renderDailyTruthLinks();
+    loadLiveWeatherAq();
+    loadLivePopulationHealth();
+    loadLiveAlerts();
+    loadLatestArticle();
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => loadNewsFeed(), { timeout: 1600 });
+      window.requestIdleCallback(() => loadDailyFaq(), { timeout: 1800 });
+      window.requestIdleCallback(() => loadReadingRoom(), { timeout: 2200 });
+    } else {
+      setTimeout(() => loadNewsFeed(), 300);
+      setTimeout(() => loadDailyFaq(), 800);
+      setTimeout(() => loadReadingRoom(), 1100);
+    }
+    setInterval(() => {
+      tipsIdx += 1;
+      renderTips(tipsIdx);
+    }, 9000);
+
+    const searchInputEl = document.getElementById('searchInput');
+    if (searchInputEl) {
+      searchInputEl.addEventListener('input', function () {
+        const q = this.value.toLowerCase().trim();
+        const cards = document.querySelectorAll('[data-title]');
+        cards.forEach(card => {
+          const hit = !q || card.dataset.title.includes(q);
+          card.style.outline = hit && q ? '2px solid rgba(184,107,79,.45)' : 'none';
+          card.style.outlineOffset = '2px';
+        });
+      });
+    }
+
+    let knowledgeDoc = null;
+    const knowledgeHtmlCache = new Map();
+    const knowledgeFallbackContent = {
+      'article-1-body': '<p><strong>Start po 50-tce nie wymaga heroizmu.</strong> Wystarczy prosty plan: 2 treningi siłowe tygodniowo, krótki spacer po posiłku i sen jako priorytet.</p><p><a href="jak-zaczac-na-silowni-po-50.html">Przejdź do pełnego materiału</a></p>',
+      'article-2-body': '<p><strong>Najczęstsze mity:</strong> „za późno”, „trzeba codziennie”, „ból = progres”. W praktyce działa regularność, technika i regeneracja.</p><p><a href="siedem-bledow-silownia-po-50.html">Zobacz 7 mitów i ich korektę</a></p>',
+      'article-3-body': '<p><strong>Białko po 50-tce</strong> pomaga chronić mięśnie i utrzymać sprawność. Klucz to rozłożenie podaży w ciągu dnia, nie jeden „idealny” posiłek.</p><p><a href="jedz-wiecej-po-50.html">Czytaj o białku i diecie</a></p>',
+      'article-4-body': '<p><strong>Plan tygodnia:</strong> minimum, które działa: 2 sesje oporowe + 2-3 krótkie spacery + 1 dzień aktywnej regeneracji.</p><p><a href="powrot-do-formy-po-50-kompletny-przewodnik.html">Otwórz plan krok po kroku</a></p>',
+      'article-5-body': '<p><strong>Trendy warto filtrować.</strong> Nie wszystko, co głośne, jest skuteczne. Na FitPo50 oddzielamy marketing od wyników badań.</p><p><a href="ciekawe.html">Przejdź do działu Ciekawe</a></p>',
+      'article-6-body': '<p><strong>Sen to fundament regeneracji.</strong> Bez niego rośnie apetyt, spada energia i trudniej o progres treningowy.</p><p><a href="sen-po-50.html">Sprawdź zasady regeneracji</a></p>',
+      'article-7-body': '<p><strong>Mobilność i równowaga</strong> są równie ważne jak siła. To one decydują o sprawności na co dzień i mniejszym ryzyku urazów.</p><p><a href="rusz-sie.html">Zobacz praktyczne wskazówki</a></p>',
+      'article-8-body': '<p><strong>Suplementy to dodatek, nie baza.</strong> Najpierw ruch, jedzenie, sen i badania. Dopiero potem precyzyjne wsparcie.</p><p><a href="suplementacja-po-50.html">Czytaj o suplementacji po 50-tce</a></p>'
+    };
+
+    async function getKnowledgeDoc() {
+      if (knowledgeDoc) return knowledgeDoc;
+      knowledgeDoc = document;
+      return knowledgeDoc;
+    }
+
+    async function hydrateHubItem(item) {
+      const sourceId = item?.dataset?.sourceId;
+      const body = item?.querySelector('.hub-body');
+      if (!sourceId || !body || body.dataset.loaded === '1') return;
+      body.textContent = 'Ładowanie treści…';
+      try {
+        let contentHtml = knowledgeHtmlCache.get(sourceId);
+        if (!contentHtml) {
+          const doc = await getKnowledgeDoc();
+          const sourceNode = doc.getElementById(sourceId);
+          const contentNode = sourceNode?.querySelector('.article-card__content');
+          contentHtml = contentNode ? contentNode.innerHTML : (knowledgeFallbackContent[sourceId] || '');
+          knowledgeHtmlCache.set(sourceId, contentHtml || '<p>Brak treści dla tej karty.</p>');
+        }
+        body.innerHTML = contentHtml || '<p>Brak treści dla tej karty.</p>';
+      } catch (_) {
+        body.innerHTML = knowledgeFallbackContent[sourceId] || '<p>Nie udało się wczytać pełnej treści. Spróbuj odświeżyć stronę.</p>';
+      }
+      body.dataset.loaded = '1';
+    }
+
+    // Keep one knowledge card open at a time (delegated handler).
+    const hubGrid = document.querySelector('.hub-grid');
+    if (hubGrid) {
+      hubGrid.addEventListener('click', (event) => {
+        const trigger = event.target.closest('.hub-trigger');
+        if (!trigger) return;
+        const item = trigger.closest('.hub-item');
+        if (!item) return;
+        const willOpen = !item.classList.contains('is-open');
+        hubGrid.querySelectorAll('.hub-item').forEach((other) => other.classList.remove('is-open'));
+        if (willOpen) {
+          item.classList.add('is-open');
+          hydrateHubItem(item).then(() => {
+            const body = item.querySelector('.hub-body');
+            if (body) body.scrollTop = 0;
+          });
+        }
+      });
+
+      // Start with all cards collapsed.
+    }
+  </script><script src="./dist/cmp.js?v=1.1" defer></script>
+<footer class="site-footer-bento" aria-label="Stopka FitPo50">
+  <div class="site-footer-bento__grid">
+    <section class="site-footer-bento__card" aria-label="O serwisie FitPo50">
+      <div class="site-footer-bento__brand">
+        <img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'">
+        <div>
+          <h2 class="site-footer-bento__title">FitPo50.pl</h2>
+          <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej ściemy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-footer-bento__card" aria-label="Linki serwisu">
+      <h3 class="site-footer-bento__links-title">Nawigacja</h3>
+      <ul class="site-footer-bento__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="porady.html">Porady</a></li>
+        <li><a href="rusz-sie.html">Ruch</a></li>
+        <li><a href="jedzenie.html">Jedzenie</a></li>
+        <li><a href="zdrowie.html">Zdrowie</a></li>
+        <li><a href="ciekawe.html">Ciekawe</a></li>
+        <li><a href="dziennik.html">Dziennik</a></li>
+        <li><a href="o-mnie.html">O mnie</a></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="site-footer-bento__bottom">
+    <p class="site-footer-bento__copy">© 2026 FitPo50 | <a href="polityka-prywatnosci.html">Polityka Prywatności i Cookies</a></p>
+    <p class="site-footer-bento__note">Ważna informacja: nie jestem lekarzem. Treści na stronie mają charakter edukacyjny i informacyjny, nie zastępują konsultacji medycznej ani indywidualnych zaleceń specjalisty.</p>
+  </div>
+</footer>
+</body>
+</html>
