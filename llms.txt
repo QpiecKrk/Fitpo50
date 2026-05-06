@@ -228,4 +228,8 @@ articles:
   title: "Rentgen, tomografia CT i rezonans MRI — czym się różnią? | FitPo50"
   section: "Ciekawe"
   summary: "Rentgen, tomografia CT i rezonans MRI to trzy różne technologie. Dowiedz się czym się różnią, kiedy stosować każde z nich i co zmienia się po 50-tce."
+- url: https://fitpo50.pl/kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html
+  title: "Kriokomory i komory hiperbaryczne – czy to bezpieczne po 50.? | FitPo50"
+  section: "Zdrowie"
+  summary: "Biohacking po 50. roku życia: kriokomory i tlenoterapia hiperbaryczna. Poznaj twarde dowody naukowe, realne ryzyka i zasady bezpiecznego korzystania."
 

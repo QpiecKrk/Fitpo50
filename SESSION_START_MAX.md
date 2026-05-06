@@ -23,6 +23,10 @@ START TECHNICZNY (zawsze na poczatku sesji):
    git pull --ff-only origin main
    git status --short
 3) Pokaz mi wynik i dopiero potem przejdz do pracy.
+4) Po starcie technicznym uruchom szybka kontrole mirroru NEWS (zanim uznasz zadanie za "gotowe"):
+   npm run assets:mirror:sync
+   npm run predeploy:check
+   Zasada: jesli gate pokazuje warning o brakujacych miniaturach NEWS w `_site/assets/news/`, najpierw wykonaj mirror i ponow gate.
 
 Przed rozpoczeciem pracy zawsze najpierw przeczytaj `PROJECT_MEMORY.md`.
 Nastepnie:
@@ -58,6 +62,7 @@ Publikacja artykulow:
 - `article-pipeline` automatycznie tworzy kopie robocza w `/tmp/fitpo50-import-*/<slug>.fitpo50.json`, pracuje tylko na niej i usuwa ja po zakonczeniu (takze po bledzie),
 - brak tolerancji na bledy: jesli ktorykolwiek krok gate/validator zwroci FAIL, publikacja i push sa zatrzymane,
 - przed ogloszeniem statusu "gotowe" obowiazkowo uruchom `npm run json:gate:diff`; ma byc PASS (brak blokujacych bledow w `.fitpo50.json`),
+- przed ogloszeniem statusu "gotowe" obowiazkowo uruchom `npm run assets:mirror:sync`, a nastepnie `npm run predeploy:check`; oba kroki maja byc PASS,
 - przed ogloszeniem statusu "gotowe" obowiazkowo sprawdz, czy `data/import/*.fitpo50.json` nie zostawia blockerow push; jesli zostawia, popraw albo usun/przenies plik roboczy z repo i ponow gate, dopiero potem wolno oglosic "gotowe",
 - przed `prepush` zawsze uruchamiaj mirror zasobow: `npm run assets:mirror:sync` (PDF + miniatury NEWS + JSON mirror do `_site`),
 - obowiazkowo uruchom walidator standardu: `node scripts/validate-article-standard.js <plik.html>`,
