@@ -232,4 +232,8 @@ articles:
   title: "Kriokomory i komory hiperbaryczne – czy to bezpieczne po 50.? | FitPo50"
   section: "Zdrowie"
   summary: "Biohacking po 50. roku życia: kriokomory i tlenoterapia hiperbaryczna. Poznaj twarde dowody naukowe, realne ryzyka i zasady bezpiecznego korzystania."
+- url: https://fitpo50.pl/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html
+  title: "Lektyny, szczawiany i fityniany. Czy rośliny nam szkodzą? | FitPo50"
+  section: "Jedzenie"
+  summary: "Lektyny, szczawiany i fityniany budzą lęk, ale nauka 2026 uspokaja. Dowiedz się, jak gotowanie i moczenie neutralizuje antyodżywce i dlaczego warto jeść"
 

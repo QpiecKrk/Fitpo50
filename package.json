@@ -27,6 +27,7 @@
     "json:fix": "node scripts/fix-fitpo50-json.js",
     "article:pipeline": "node scripts/article-pipeline.js",
     "article:import:safe": "node scripts/fix-fitpo50-json.js --file \"$npm_config_file\" --write true && node scripts/import-article.js --file \"$npm_config_file\" --publish true --run-internal-links false --validate true",
+    "article:social": "node scripts/post-article-social.js",
     "prepush:diff-guard": "node scripts/prepush-diff-guard.js",
     "smoke:static": "node scripts/static-smoke-check.js /tmp/fitpo50-export-check",
     "broken-links:crawl": "node scripts/broken-links-crawler.js /tmp/fitpo50-export-check",
