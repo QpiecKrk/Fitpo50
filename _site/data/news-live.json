@@ -1,7 +1,29 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-03T09:44:42+00:00",
+    "updatedAt": "2026-05-06T12:10:03+00:00",
     "items": [
+        {
+            "id": "news_566a85ef707f",
+            "title": "„Zastrzyk z tlenem”, który pozwala żyć bez oddychania?",
+            "content_html": "<p><span>To viralowe hasło ma <span class=\"news-text-tone--1\">prawdziwe naukowe źródło</span>, ale jest mocno przesadzone. Naukowcy rzeczywiście opracowali </span><span><strong><span></span><span>mikrocząsteczki wypełnione tlenem</span></strong>, które można podawać dożylnie, aby szybko dostarczyć tlen do krwi, gdy płuca nie <a href=\"dieta-po-50.html\">działają</a> albo drogi oddechowe są zablokowane.</span></p><p><span>Kluczowe badanie opublikowano w </span><span><strong><span></span><span>Science Translational Medicine</span></strong> w 2012 roku. Zespół z <span class=\"news-text-tone--4\">Boston Children’s Hospital</span> testował mikroskopijne pęcherzyki tlenu zamknięte w lipidowej otoczce. W badaniach na królikach z ostrą hipoksemią podanie takich <span class=\"news-text-tone--3\">cząsteczek szybko zwiększało</span> poziom tlenu we krwi i zmniejszało ryzyko zatrzymania krążenia oraz uszkodzenia narządów.  </span><br><span></span></p><p><span>Ale tu jest najważniejsze: </span><span><strong><span></span><span>to nie oznacza, że człowiek może normalnie żyć bez oddychania</span><span>. </span></strong>To rozwiązanie miało być awaryjnym pomostem — na minuty, w sytuacjach krytycznych, np. przy niedrożności dróg oddechowych, ostrej <span class=\"news-text-tone--2\">niewydolności oddechowej albo zatrzymaniu krążenia</span>. <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">Organizm</a> nadal musi usuwać dwutlenek węgla, regulować pH krwi i utrzymywać krążenie. </span><strong>Sam tlen we krwi nie załatwia całej fizjologii oddychania.</strong><br><span></span></p><p><span>Sama technologia też nie jest jeszcze standardowym leczeniem. </span><span class=\"news-text-tone--4\">W nowszych pracach rozwijano kolejne wersje mikrocząsteczek, bezpieczniejsze mikrobańki</span><span>, które mają zmniejszać ryzyko zatorów i lepiej kontrolować uwalnianie tlenu. </span><span class=\"news-text-tone--3\">Boston Children’s Hospital</span><span> pisał w 2024 roku, że to nadal etap przedkliniczny i droga do przyszłych badań klinicznych, a nie gotowy „</span><span class=\"news-text-tone--1\">zastrzyk na życie bez powietrza</span><span>”. </span><span> </span><br><span></span></p><p><strong><span>N</span><span>auka jest prawdziwa i bardzo ciekawa, ale internet zrobił z niej bajkę science fiction. To potencjalna metoda ratunkowego natlenienia krwi w nagłych przypadkach, a nie sposób na życie bez oddychania. Czyli: bardziej „kupujemy kilka minut dla lekarzy” niż „człowiek-amfibia po zastrzyku”.</span></strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260506_120956_6d1e8719",
+            "image_alt": "Tlen w krwi",
+            "sources": [
+                {
+                    "label": "Boston Children’s Hospital — Injecting oxygen microbubbles",
+                    "url": "https://answers.childrenshospital.org/injected-microbubbles-could-be-a-safe-way-to-deliver-emergency-oxygen/"
+                },
+                {
+                    "label": "Science Translational Medicine — “Oxygen Gas–Filled Microparticles Provide Intravenous Oxygen Delivery”",
+                    "url": "https://www.science.org/doi/10.1126/scitranslmed.3003679"
+                }
+            ],
+            "created_at": "2026-05-06T12:09:56+00:00",
+            "updated_at": "2026-05-06T12:09:56+00:00",
+            "published_at": ""
+        },
         {
             "id": "news_24b1585d5429",
             "title": "Schłodzony ryż a cukier we krwi: czy to naprawdę działa?",
@@ -72,7 +94,7 @@
             "id": "news_5ddd305c596f",
             "title": "Zastrzyk na tłuszcz z brzucha? Brzmi efektownie, ale spokojnie. To nie rewolucja",
             "content_html": "<p><span>Naukowcy z Columbia University opisali materiał o nazwie </span><span><strong><span></span><span>P-G3</span></strong>, który ma trafiać do tkanki tłuszczowej i ograniczać nieprawidłowe <span class=\"news-text-tone--4\">magazynowanie tłuszczu</span> w powiększonych komórkach. W badaniu chodziło głównie o </span><span><strong><span></span><span>tłuszcz trzewny</span></strong>, czyli ten <a href=\"post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html\">metabolicznie</a> najbardziej problematyczny. To ważne, bo właśnie on najmocniej wiąże się z <span class=\"news-text-tone--3\">insulinoopornością</span>, stanem zapalnym i chorobami sercowo-naczyniowymi.  </span></p><p><span>Brzmi jak „<span class=\"news-text-tone--4\">odchudzanie bez szkody dla organizmu</span>”, ale tu trzeba przyhamować entuzjazm. Najważniejsze: </span><span><strong><span></span><span>to nie jest potwierdzona terapia dla ludzi</span><span>.</span></strong> Główne wyniki pochodzą z badań na otyłych myszach oraz z analiz ludzkiej tkanki tłuszczowej poza organizmem. <span class=\"news-text-tone--4\">U myszy P-G3 zmniejszał tłuszcz trzewny</span>, zwiększał wydatek energetyczny i poprawiał niektóre parametry metaboliczne. To obiecujące, ale nadal jest to etap przedkliniczny, a nie gotowy zabieg z gabinetu medycyny estetycznej.  </span><br><span></span></p><p><span>Największa różnica względem liposukcji jest taka, że ta technologia </span><span><strong><span></span><span>nie ma fizycznie „wycinać” tłuszczu</span></strong>, tylko wpływać na zachowanie komórek tłuszczowych. <span class=\"news-text-tone--1\">Problem w tym, że między dobrym wynikiem u myszy a bezpiecznym leczeniem człowieka jest długa droga</span>: trzeba potwierdzić skuteczność, bezpieczeństwo, <a href=\"kawa-jako-preworkout-po-50.html\">dawkowanie</a>, możliwe działania niepożądane i trwałość efektu. Nowsze przeglądy badań nad celowanym dostarczaniem leków do <strong>tkanki tłuszczowej</strong> pokazują, że kierunek jest ciekawy, ale wciąż ograniczają go problemy translacyjne, m.in. toksyczność, precyzja dostarczania i produkcja takich terapii na większą skalę.  </span><br><span></span></p><p><strong><span>T</span><span>o interesująca technologia i sensowny kierunek badań nad otyłością, ale na dziś bardziej przypomina </span><span>obietnicę laboratoriów niż gotowe rozwiązanie dla pacjenta</span><span>. Czyli: ciekawie, ale jeszcze bez fanfar i bez hasła „żegnaj brzuchu do wakacji”.</span></strong><br><span></span></p>",
-            "status": "draft",
+            "status": "published",
             "sort_order": 1,
             "image_base": "news_20260502_110358_b3fe38aa",
             "image_alt": "Lek na tłuszcz na brzuchu",
@@ -87,8 +109,8 @@
                 }
             ],
             "created_at": "2026-05-02T11:03:57+00:00",
-            "updated_at": "2026-05-02T11:03:57+00:00",
-            "published_at": ""
+            "updated_at": "2026-05-06T12:10:03+00:00",
+            "published_at": "2026-05-06T12:10:03+00:00"
         },
         {
             "id": "news_4e7b91f5bf86",
