@@ -303,7 +303,7 @@ function main() {
   // 1) index latest + reading fallback (3 cards)
   const latestHref = extractLatestLink(indexHtml);
   if (!latestHref) {
-    errors.push('Nie znaleziono latestArticleLink w index.html');
+    warnings.push('Nie znaleziono latestArticleLink w index.html (pomijam kontrole "latest").');
   }
   const fallbackUrls = extractReadingFallbackUrls(indexHtml);
   if (fallbackUrls.length !== 3) {

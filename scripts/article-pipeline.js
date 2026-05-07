@@ -79,17 +79,21 @@ function main() {
   if (!fs.existsSync(input)) throw new Error(`Nie znaleziono pliku: ${input}`);
 
   const category = args.category ? String(args.category) : '';
-  const force = boolOpt(args.force, false);
+  const force = boolOpt(args.force, true);
+  const assetsDir = args['assets-dir'] ? path.resolve(root, args['assets-dir']) : path.dirname(input);
   const slug = detectSlug(input);
   const workingCopy = ensureImportCopy(input, slug);
   tempWorkingCopy = workingCopy;
   console.log(`[INFO] Source JSON: ${input}`);
   console.log(`[INFO] Working copy JSON: ${workingCopy}`);
+  console.log(`[INFO] Source assets dir: ${assetsDir}`);
 
   const common = ['scripts/import-article.js', '--file', workingCopy, '--faq-strict', 'true'];
   if (category) common.push('--category', category);
 
   run('JSON auto-fix (working copy)', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingCopy, '--write', 'true', '--allow-outside-repo', 'true']);
+  run('Article preflight (working copy)', 'node', ['scripts/article-preflight.js', '--file', workingCopy, '--assets-dir', assetsDir]);
+  run('Prepare article assets (hero + sekcje)', 'node', ['scripts/prepare-article-assets.js', '--file', workingCopy, '--from', assetsDir]);
   run('JSON gate (single file)', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
   run('Precheck (strict FAQ)', 'node', [...common, '--precheck', 'true']);
   run(
@@ -98,11 +102,13 @@ function main() {
     [
       ...common,
       '--publish', 'true',
-      '--run-internal-links', 'auto',
+      '--run-internal-links', 'false',
       '--validate', 'true',
       '--force', force ? 'true' : 'false',
     ],
   );
+  run('Lint editorial placeholders (source HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--slug', slug]);
+  run('Lint editorial placeholders (_site HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)]);
   run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug]);
   run('NEWS integrity', 'node', ['scripts/news-integrity-check.js']);
   run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);

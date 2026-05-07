@@ -236,4 +236,11 @@ articles:
   title: "Lektyny, szczawiany i fityniany. Czy rośliny nam szkodzą? | FitPo50"
   section: "Jedzenie"
   summary: "Lektyny, szczawiany i fityniany budzą lęk, ale nauka 2026 uspokaja. Dowiedz się, jak gotowanie i moczenie neutralizuje antyodżywce i dlaczego warto jeść"
+title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo50"
+  section: "Zdrowie"
+  summary: "VO2 max to najdokładniejszy marker Twojej długowieczności. Dowiedz się, dlaczego wydolność tlenowa chroni Cię bardziej niż niska waga i jak ją poprawić po"
+- url: https://fitpo50.pl/okulary-do-czytania-trening-akomodacji-oka.html
+  title: "Okulary do czytania to nie wyrok: jak trenować akomodację oka | FitPo50"
+  section: "Zdrowie"
+  summary: "Czy ćwiczenia wzroku mogą opóźnić okulary do czytania? Poznaj naukowe fakty o neuroplastyczności, metodzie łatek Gabora i plan treningu akomodacji dla osób 50+."
 

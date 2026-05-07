@@ -1443,14 +1443,15 @@
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
           <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/antyodzywcze-skladniki-warzywa-straczki.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Lektyny, szczawiany i fityniany. Czy rośliny nam szkodzą?</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Lektyny, szczawiany i fityniany budzą lęk, ale nauka 2026 uspokaja. Dowiedz się, jak gotowanie i moczenie neutralizuje antyodżywce i dlaczego warto jeść</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Okulary do czytania to nie wyrok: jak trenować akomodację oka</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy ćwiczenia wzroku mogą opóźnić okulary do czytania? Poznaj naukowe fakty o neuroplastyczności, metodzie łatek Gabora i plan treningu akomodacji dla osób 50+.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="okulary-do-czytania-trening-akomodacji-oka.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2202,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Lektyny, szczawiany i fityniany. Czy rośliny nam szkodzą?',
-        excerpt: 'Lektyny, szczawiany i fityniany budzą lęk, ale nauka 2026 uspokaja. Dowiedz się, jak gotowanie i moczenie neutralizuje antyodżywce i dlaczego warto jeść',
-        image: './assets/antyodzywcze-skladniki-warzywa-straczki.webp',
-        url: 'lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html'
+        title: 'Okulary do czytania to nie wyrok: jak trenować akomodację oka',
+        excerpt: 'Czy ćwiczenia wzroku mogą opóźnić okulary do czytania? Poznaj naukowe fakty o neuroplastyczności, metodzie łatek Gabora i plan treningu akomodacji dla osób 50+.',
+        image: './assets/okulary-do-czytania-hero.webp',
+        url: 'okulary-do-czytania-trening-akomodacji-oka.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2235,7 +2236,14 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Jedzenie',
+          category: 'Zdrowie',
+          title: 'Okulary do czytania to nie wyrok: jak trenować akomodację oka',
+          excerpt: 'Czy ćwiczenia wzroku mogą opóźnić okulary do czytania? Poznaj naukowe fakty o neuroplastyczności, metodzie łatek Gabora i plan treningu akomodacji dla osób 50+.',
+          image: './assets/okulary-do-czytania-hero.webp',
+          url: 'okulary-do-czytania-trening-akomodacji-oka.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Lektyny, szczawiany i fityniany. Czy rośliny nam szkodzą?',
           excerpt: 'Lektyny, szczawiany i fityniany budzą lęk, ale nauka 2026 uspokaja. Dowiedz się, jak gotowanie i moczenie neutralizuje antyodżywce i dlaczego warto jeść',
           image: './assets/antyodzywcze-skladniki-warzywa-straczki.webp',
@@ -2247,13 +2255,6 @@
           excerpt: 'Biohacking po 50. roku życia: kriokomory i tlenoterapia hiperbaryczna. Poznaj twarde dowody naukowe, realne ryzyka i zasady bezpiecznego korzystania.',
           image: './assets/biohacking-kriokomory-hiperbaryczne-hero.webp',
           url: 'kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Rentgen, tomografia CT i rezonans MRI — czym się różnią?',
-          excerpt: 'Rentgen, tomografia CT i rezonans MRI to trzy różne technologie. Dowiedz się czym się różnią, kiedy stosować każde z nich i co zmienia się po 50-tce.',
-          image: './assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.webp',
-          url: 'rentgen-tomografia-ct-rezonans-mri-roznice-badania.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

@@ -295,13 +295,42 @@ function countWordsUtf8(text) {
   return m ? m.length : 0;
 }
 
+function decodeHtmlEntities(input) {
+  const named = {
+    nbsp: ' ',
+    amp: '&',
+    lt: '<',
+    gt: '>',
+    quot: '"',
+    apos: "'",
+    ndash: '-',
+    mdash: '-',
+    hellip: '...',
+    bdquo: '"',
+    ldquo: '"',
+    rdquo: '"',
+    rsquo: "'",
+    lsquo: "'",
+  };
+  return String(input || '')
+    .replace(/&#x([0-9a-f]+);/gi, (_m, hex) => {
+      const cp = Number.parseInt(hex, 16);
+      return Number.isFinite(cp) ? String.fromCodePoint(cp) : _m;
+    })
+    .replace(/&#(\d+);/g, (_m, dec) => {
+      const cp = Number.parseInt(dec, 10);
+      return Number.isFinite(cp) ? String.fromCodePoint(cp) : _m;
+    })
+    .replace(/&([a-z]+);/gi, (m, key) => named[key.toLowerCase()] ?? m);
+}
+
 function truncateParagraphToWordLimit(html, maxWords) {
-  const plain = stripTags(String(html || ''))
+  const plain = decodeHtmlEntities(stripTags(String(html || '')))
     .replace(/\s+/g, ' ')
     .trim();
   if (!plain) return ensureParagraphHtml(html);
-  const words = plain.split(' ');
-  if (words.length <= maxWords) return ensureParagraphHtml(html);
+  const words = plain.match(/[\p{L}\p{N}'’-]+/gu) || [];
+  if (words.length <= maxWords) return `<p>${escapeHtml(plain)}</p>`;
   const clipped = words.slice(0, maxWords).join(' ').replace(/[,:;.\s]+$/g, '').trim();
   return `<p>${escapeHtml(`${clipped}.`)}</p>`;
 }
@@ -530,6 +559,50 @@ function countInternalHtmlLinks(htmlChunks) {
     }
   }
   return unique.size;
+}
+
+function listCandidateInternalArticles(currentSlug) {
+  const files = fs.readdirSync(ROOT)
+    .filter((name) => name.endsWith('.html'))
+    .filter((name) => !CATEGORY_LANDING_URLS.has(name.toLowerCase()))
+    .filter((name) => name !== 'index.html' && name !== 'article-template-bento.html')
+    .filter((name) => name !== `${currentSlug}.html`)
+    .sort();
+  return files;
+}
+
+function ensureMinimumInternalLinks(slug, dryRun, syncSite, minimum = 4) {
+  const targetPaths = [path.join(ROOT, `${slug}.html`)];
+  if (syncSite) targetPaths.push(path.join(ROOT, '_site', `${slug}.html`));
+
+  for (const targetPath of targetPaths) {
+    if (!fs.existsSync(targetPath)) continue;
+    const raw = fs.readFileSync(targetPath, 'utf8');
+    const articleMatch = raw.match(/<article class="article-content">[\s\S]*?<\/article>/i);
+    if (!articleMatch) continue;
+    const articleHtml = articleMatch[0];
+    const existingCount = countInternalHtmlLinks([articleHtml]);
+    if (existingCount >= minimum) continue;
+
+    const needed = minimum - existingCount;
+    const existingLinks = new Set(
+      [...articleHtml.matchAll(/<a\b[^>]*href="([^"]+)"/gi)]
+        .map((m) => String(m[1] || '').replace(/^\.\//, '').trim().toLowerCase())
+    );
+    const candidates = listCandidateInternalArticles(slug)
+      .filter((href) => !existingLinks.has(href.toLowerCase()))
+      .slice(0, needed);
+    if (!candidates.length) continue;
+
+    const links = candidates
+      .map((href) => `<a href="./${href}">${escapeHtml(href.replace(/\.html$/i, '').replace(/-/g, ' '))}</a>`)
+      .join(', ');
+    const addon = `<p class="article-crosslinks-auto"><strong>Zobacz też:</strong> ${links}.</p>`;
+    const updatedArticle = articleHtml.replace(/<\/article>$/i, `${addon}\n</article>`);
+    const next = raw.replace(articleHtml, updatedArticle);
+    if (!dryRun) fs.writeFileSync(targetPath, next, 'utf8');
+    console.log(`[AUTO] Uzupełniono linki kontekstowe w ${path.basename(targetPath)} (+${candidates.length}).`);
+  }
 }
 
 function toInlinePictureHtml(imgSrc, imgAlt, imgCaption) {
@@ -1461,6 +1534,14 @@ function replaceFirstOrThrow(text, rx, replacer, label) {
   return text.replace(rx, replacer);
 }
 
+function replaceFirstOrWarn(text, rx, replacer, label) {
+  if (!rx.test(text)) {
+    console.warn(`[WARN] Pominięto aktualizację sekcji: ${label}`);
+    return text;
+  }
+  return text.replace(rx, replacer);
+}
+
 function upsertPoradyListing(html, ctx) {
   let out = html;
   const hrefNeedle = `href="${ctx.href}"`;
@@ -1602,10 +1683,10 @@ function upsertIndexListing(html, ctx) {
   const previousLatest = extractCurrentLatestFromIndex(out);
   const previousFallback = extractReadingFallbackCardsFromIndex(out);
 
-  out = replaceFirstOrThrow(out, /(<img class="latest-article__bg" id="latestArticleImage"[^>]*src=")[^"]+(")/, `$1${ctx.heroImageWebp}$2`, 'latestArticleImage.src');
-  out = replaceFirstOrThrow(out, /(<h4 class="latest-article__title" id="latestArticleTitle">)([\s\S]*?)(<\/h4>)/, `$1${escapeHtml(ctx.title)}$3`, 'latestArticleTitle');
-  out = replaceFirstOrThrow(out, /(<p class="latest-article__excerpt" id="latestArticleExcerpt">)([\s\S]*?)(<\/p>)/, `$1${escapeHtml(ctx.excerpt)}$3`, 'latestArticleExcerpt');
-  out = replaceFirstOrThrow(out, /(<a class="latest-article__cta" id="latestArticleLink" href=")[^"]+(">([\s\S]*?)<\/a>)/, `$1${ctx.href}$2`, 'latestArticleLink');
+  out = replaceFirstOrWarn(out, /(<img class="latest-article__bg" id="latestArticleImage"[^>]*src=")[^"]+(")/, `$1${ctx.heroImageWebp}$2`, 'latestArticleImage.src');
+  out = replaceFirstOrWarn(out, /(<h4 class="latest-article__title" id="latestArticleTitle">)([\s\S]*?)(<\/h4>)/, `$1${escapeHtml(ctx.title)}$3`, 'latestArticleTitle');
+  out = replaceFirstOrWarn(out, /(<p class="latest-article__excerpt" id="latestArticleExcerpt">)([\s\S]*?)(<\/p>)/, `$1${escapeHtml(ctx.excerpt)}$3`, 'latestArticleExcerpt');
+  out = replaceFirstOrWarn(out, /(<a class="latest-article__cta" id="latestArticleLink" href=")[^"]+(">([\s\S]*?)<\/a>)/, `$1${ctx.href}$2`, 'latestArticleLink');
 
   const fallbackBlock = [
     'const fallback = {',
@@ -2166,6 +2247,8 @@ function main() {
     console.warn('\nUwaga: auto-linking wewnętrzny włączony (helper może przebudować HTML).');
     internalLinksResult = runInternalLinks(payload.slug, dryRun);
   }
+
+  ensureMinimumInternalLinks(payload.slug, dryRun, syncSite, 4);
 
   if (runValidate) {
     runValidator(payload.slug, dryRun);
