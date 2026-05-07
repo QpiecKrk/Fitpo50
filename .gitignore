@@ -94,8 +94,12 @@ _site/clean.js
 _site/copy_pngs.sh
 _site/SESSION_START_MAX.md
 
-# NEWS thumbs are production assets and must be tracked in git.
-# Mirror thumbnails in _site are build artifacts and stay ignored.
+# NEWS thumbs generated runtime on server should NOT block git/deploy.
+# Keep existing tracked files in git; new server-generated news_20* files are ignored.
+assets/news/news_20*.avif
+assets/news/news_20*.jpg
+assets/news/news_20*.webp
+assets/news/news_20*
 _site/assets/news/news_20*.avif
 _site/assets/news/news_20*.jpg
 _site/assets/news/news_20*.webp
