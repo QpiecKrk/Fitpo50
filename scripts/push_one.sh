@@ -21,4 +21,8 @@ git commit -m "Aktualizacja strony"
 git pull --rebase --autostash origin main
 git push
 
-echo "OK: Git gotowy. Teraz kliknij 'Wdróż' w Hostingerze."
+echo "OK: Git gotowy."
+echo "Przed kliknieciem 'Wdróż' na serwerze wykonaj:"
+echo "  cd <repo-na-serwerze>"
+echo "  npm run hostinger:clean-repo"
+echo "Dopiero potem uruchom deployment w Hostingerze."

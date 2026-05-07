@@ -46,6 +46,10 @@ Zasady:
 - Gdy wydaje komenda `git push`, najpierw uruchamiasz gate i raport:
   - `npm run predeploy:check`
   - jesli PASS: wykonaj `git add -A` -> `git commit` (automatyczny komunikat) -> `git push`,
+  - po udanym push ZAWSZE podaj krok serwerowy (Hostinger), aby uniknac "dirty repo":
+    - `cd <repo-na-serwerze>`
+    - `npm run hostinger:clean-repo`
+    - dopiero potem uruchom deployment,
   - jesli FAIL: STOP, raport bledow i brak push.
   - bezpiecznik: jesli commit obejmuje nienaturalnie duzy zakres (duzo plikow niezwiazanych z biezacym taskiem), STOP i krotkie pytanie o zgode.
 
