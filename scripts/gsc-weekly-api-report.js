@@ -289,6 +289,19 @@ function emptyReport(property) {
   };
 }
 
+function authFailedReport(property, errorMessage) {
+  return {
+    ...emptyReport(property),
+    status: 'auth_failed',
+    error: String(errorMessage || '').trim(),
+    weekly_plan: [
+      'Tryb service account nie przeszedł autoryzacji w GSC.',
+      'Dodaj OAuth secrets (client_id, client_secret, refresh_token) albo używaj trybu CSV.',
+      'Po konfiguracji uruchom workflow ponownie.',
+    ],
+  };
+}
+
 function aggregateSummary(rows) {
   const totalClicks = rows.reduce((s, r) => s + r.clicks, 0);
   const totalImpressions = rows.reduce((s, r) => s + r.impressions, 0);
@@ -314,10 +327,6 @@ async function main() {
   }
 
   const ranges = currentAndPreviousRanges();
-  const token = sa
-    ? await getAccessToken(sa)
-    : await getAccessTokenByRefreshToken(oauth);
-
   const makeBody = (range, dimensions) => ({
     startDate: range.start,
     endDate: range.end,
@@ -326,121 +335,154 @@ async function main() {
     aggregationType: dimensions.includes('page') ? 'byPage' : 'auto',
   });
 
-  const [qCurrentRaw, qPrevRaw, pCurrentRaw, qpCurrentRaw] = await Promise.all([
-    gscQueryAllRows(token, property, makeBody(ranges.current, ['query'])),
-    gscQueryAllRows(token, property, makeBody(ranges.previous, ['query'])),
-    gscQueryAllRows(token, property, makeBody(ranges.current, ['page'])),
-    gscQueryAllRows(token, property, makeBody(ranges.current, ['query', 'page'])),
-  ]);
+  async function generateForAccessToken(token, authMode) {
+    const [qCurrentRaw, qPrevRaw, pCurrentRaw, qpCurrentRaw] = await Promise.all([
+      gscQueryAllRows(token, property, makeBody(ranges.current, ['query'])),
+      gscQueryAllRows(token, property, makeBody(ranges.previous, ['query'])),
+      gscQueryAllRows(token, property, makeBody(ranges.current, ['page'])),
+      gscQueryAllRows(token, property, makeBody(ranges.current, ['query', 'page'])),
+    ]);
 
-  const queriesCurrent = qCurrentRaw.map((r) => ({
-    query: String((r.keys || [])[0] || '').trim(),
-    ...metricFromRow(r),
-  })).filter((r) => r.query);
-  const queriesPrev = qPrevRaw.map((r) => ({
-    query: String((r.keys || [])[0] || '').trim(),
-    ...metricFromRow(r),
-  })).filter((r) => r.query);
-  const pagesCurrent = pCurrentRaw.map((r) => ({
-    page: String((r.keys || [])[0] || '').trim(),
-    ...metricFromRow(r),
-  })).filter((r) => r.page);
-  const qpCurrent = qpCurrentRaw.map((r) => ({
-    query: String((r.keys || [])[0] || '').trim(),
-    page: String((r.keys || [])[1] || '').trim(),
-    ...metricFromRow(r),
-  })).filter((r) => r.query && r.page);
+    const queriesCurrent = qCurrentRaw.map((r) => ({
+      query: String((r.keys || [])[0] || '').trim(),
+      ...metricFromRow(r),
+    })).filter((r) => r.query);
+    const queriesPrev = qPrevRaw.map((r) => ({
+      query: String((r.keys || [])[0] || '').trim(),
+      ...metricFromRow(r),
+    })).filter((r) => r.query);
+    const pagesCurrent = pCurrentRaw.map((r) => ({
+      page: String((r.keys || [])[0] || '').trim(),
+      ...metricFromRow(r),
+    })).filter((r) => r.page);
+    const qpCurrent = qpCurrentRaw.map((r) => ({
+      query: String((r.keys || [])[0] || '').trim(),
+      page: String((r.keys || [])[1] || '').trim(),
+      ...metricFromRow(r),
+    })).filter((r) => r.query && r.page);
 
-  const summaryCurrent = aggregateSummary(queriesCurrent);
-  const summaryPrevious = aggregateSummary(queriesPrev);
+    const summaryCurrent = aggregateSummary(queriesCurrent);
+    const summaryPrevious = aggregateSummary(queriesPrev);
 
-  const top3Zero = queriesCurrent
-    .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions >= 20)
-    .sort((a, b) => b.impressions - a.impressions)
-    .slice(0, 20);
+    const top3Zero = queriesCurrent
+      .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions >= 20)
+      .sort((a, b) => b.impressions - a.impressions)
+      .slice(0, 20);
 
-  const pool = queriesCurrent.filter((r) => r.position > 0 && r.position <= 10 && r.impressions >= 80);
-  const ctrMedian = median(pool.map((r) => r.ctr));
-  const ctrProblems = pool
-    .filter((r) => r.ctr <= Math.max(1.0, ctrMedian * 0.6))
-    .sort((a, b) => b.impressions - a.impressions)
-    .slice(0, 30);
+    const pool = queriesCurrent.filter((r) => r.position > 0 && r.position <= 10 && r.impressions >= 80);
+    const ctrMedian = median(pool.map((r) => r.ctr));
+    const ctrProblems = pool
+      .filter((r) => r.ctr <= Math.max(1.0, ctrMedian * 0.6))
+      .sort((a, b) => b.impressions - a.impressions)
+      .slice(0, 30);
 
-  const byQueryPage = new Map();
-  for (const row of qpCurrent) {
-    const key = row.query.toLowerCase();
-    if (!byQueryPage.has(key)) byQueryPage.set(key, []);
-    byQueryPage.get(key).push(row);
-  }
-  const cannibalization = [];
-  for (const [query, rows] of byQueryPage.entries()) {
-    const pagesMap = new Map();
-    for (const r of rows) {
-      const p = pagesMap.get(r.page) || { page: r.page, clicks: 0, impressions: 0, posWeighted: 0 };
-      p.clicks += r.clicks;
-      p.impressions += r.impressions;
-      p.posWeighted += r.position * r.impressions;
-      pagesMap.set(r.page, p);
+    const byQueryPage = new Map();
+    for (const row of qpCurrent) {
+      const key = row.query.toLowerCase();
+      if (!byQueryPage.has(key)) byQueryPage.set(key, []);
+      byQueryPage.get(key).push(row);
     }
-    if (pagesMap.size < 2) continue;
-    const pages = [...pagesMap.values()].map((p) => ({
-      page: p.page,
-      clicks: p.clicks,
-      impressions: p.impressions,
-      position: p.impressions > 0 ? p.posWeighted / p.impressions : 0,
-      ctr: p.impressions > 0 ? (p.clicks / p.impressions) * 100 : 0,
-    }));
-    const totalImpressions = pages.reduce((s, p) => s + p.impressions, 0);
-    if (totalImpressions < 30) continue;
-    cannibalization.push({
-      query,
-      total_impressions: totalImpressions,
-      pages: pages.sort((a, b) => b.impressions - a.impressions).slice(0, 4),
-    });
+    const cannibalization = [];
+    for (const [query, rows] of byQueryPage.entries()) {
+      const pagesMap = new Map();
+      for (const r of rows) {
+        const p = pagesMap.get(r.page) || { page: r.page, clicks: 0, impressions: 0, posWeighted: 0 };
+        p.clicks += r.clicks;
+        p.impressions += r.impressions;
+        p.posWeighted += r.position * r.impressions;
+        pagesMap.set(r.page, p);
+      }
+      if (pagesMap.size < 2) continue;
+      const pages = [...pagesMap.values()].map((p) => ({
+        page: p.page,
+        clicks: p.clicks,
+        impressions: p.impressions,
+        position: p.impressions > 0 ? p.posWeighted / p.impressions : 0,
+        ctr: p.impressions > 0 ? (p.clicks / p.impressions) * 100 : 0,
+      }));
+      const totalImpressions = pages.reduce((s, p) => s + p.impressions, 0);
+      if (totalImpressions < 30) continue;
+      cannibalization.push({
+        query,
+        total_impressions: totalImpressions,
+        pages: pages.sort((a, b) => b.impressions - a.impressions).slice(0, 4),
+      });
+    }
+    cannibalization.sort((a, b) => b.total_impressions - a.total_impressions);
+
+    const pageOpportunities = pagesCurrent
+      .filter((r) => r.position > 0 && r.position <= 20 && r.impressions >= 80)
+      .sort((a, b) => b.impressions - a.impressions)
+      .slice(0, 20);
+
+    const topA = top3Zero[0];
+    const topB = ctrProblems[0];
+    const topC = cannibalization[0];
+    const topP = pageOpportunities[0];
+
+    return {
+      generated_at: new Date().toISOString(),
+      status: 'ok',
+      property,
+      auth_mode: authMode,
+      ranges,
+      summary: {
+        current: summaryCurrent,
+        previous: summaryPrevious,
+      },
+      opportunities: {
+        top3_zero_click: top3Zero,
+        ctr_problems: ctrProblems,
+        cannibalization: cannibalization.slice(0, 20),
+        page_opportunities: pageOpportunities,
+      },
+      weekly_plan: [
+        topA
+          ? `Zoptymalizuj URL pod "${topA.query}" (P1-3 i 0 klików).`
+          : 'Brak P1-3 i 0 klików: skup się na CTR w top10.',
+        topB
+          ? `Popraw title/meta + quick-answer dla "${topB.query}" (niski CTR).`
+          : 'Brak krytycznych CTR problemów: wzmacniaj top strony po impresjach.',
+        topC
+          ? `Rozwiąż kanibalizację dla "${topC.query}" (1 intencja = 1 główny URL).`
+          : 'Brak silnej kanibalizacji: utrzymuj mapowanie intencji.',
+        topP
+          ? `Dołóż 2-3 linki wewnętrzne do ${topP.page}.`
+          : 'Dołóż linki do niedolinkowanych artykułów.',
+        'Po wdrożeniu: request indexing + pomiar po 7 dniach.',
+      ],
+    };
   }
-  cannibalization.sort((a, b) => b.total_impressions - a.total_impressions);
 
-  const pageOpportunities = pagesCurrent
-    .filter((r) => r.position > 0 && r.position <= 20 && r.impressions >= 80)
-    .sort((a, b) => b.impressions - a.impressions)
-    .slice(0, 20);
-
-  const topA = top3Zero[0];
-  const topB = ctrProblems[0];
-  const topC = cannibalization[0];
-  const topP = pageOpportunities[0];
-
-  const report = {
-    generated_at: new Date().toISOString(),
-    status: 'ok',
-    property,
-    ranges,
-    summary: {
-      current: summaryCurrent,
-      previous: summaryPrevious,
-    },
-    opportunities: {
-      top3_zero_click: top3Zero,
-      ctr_problems: ctrProblems,
-      cannibalization: cannibalization.slice(0, 20),
-      page_opportunities: pageOpportunities,
-    },
-    weekly_plan: [
-      topA
-        ? `Zoptymalizuj URL pod "${topA.query}" (P1-3 i 0 klików).`
-        : 'Brak P1-3 i 0 klików: skup się na CTR w top10.',
-      topB
-        ? `Popraw title/meta + quick-answer dla "${topB.query}" (niski CTR).`
-        : 'Brak krytycznych CTR problemów: wzmacniaj top strony po impresjach.',
-      topC
-        ? `Rozwiąż kanibalizację dla "${topC.query}" (1 intencja = 1 główny URL).`
-        : 'Brak silnej kanibalizacji: utrzymuj mapowanie intencji.',
-      topP
-        ? `Dołóż 2-3 linki wewnętrzne do ${topP.page}.`
-        : 'Dołóż linki do niedolinkowanych artykułów.',
-      'Po wdrożeniu: request indexing + pomiar po 7 dniach.',
-    ],
-  };
+  const authErrors = [];
+  let report = null;
+  if (sa) {
+    try {
+      const token = await getAccessToken(sa);
+      report = await generateForAccessToken(token, 'service_account');
+    } catch (err) {
+      authErrors.push(`service_account: ${err.message || err}`);
+    }
+  }
+  if (!report && oauth) {
+    try {
+      const token = await getAccessTokenByRefreshToken(oauth);
+      report = await generateForAccessToken(token, 'oauth_refresh_token');
+    } catch (err) {
+      authErrors.push(`oauth_refresh_token: ${err.message || err}`);
+    }
+  }
+  if (!report) {
+    report = authFailedReport(property, authErrors.join(' | '));
+    writeReport(report, args.outputJson, args.outputMd);
+    console.log('[WARN] GSC API auth failed. Generated fallback reminder report.');
+    if (report.error) {
+      console.log(`- error: ${report.error}`);
+    }
+    console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
+    console.log(`- MD: ${path.relative(ROOT, args.outputMd)}`);
+    return;
+  }
 
   writeReport(report, args.outputJson, args.outputMd);
   console.log('[PASS] GSC API weekly report generated.');
@@ -450,6 +492,12 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(`[FAIL] gsc-weekly-api-report: ${err.message || err}`);
-  process.exit(1);
+  const args = parseArgs(process.argv.slice(2));
+  const property = normalizeSiteUrl(process.env.GSC_SITE_URL || 'https://fitpo50.pl/');
+  const report = authFailedReport(property, err.message || String(err));
+  writeReport(report, args.outputJson, args.outputMd);
+  console.error(`[WARN] gsc-weekly-api-report fallback: ${err.message || err}`);
+  console.error(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
+  console.error(`- MD: ${path.relative(ROOT, args.outputMd)}`);
+  process.exit(0);
 });
