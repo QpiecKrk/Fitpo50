@@ -83,3 +83,102 @@ jobs:
                 labels: [label],
               });
             }
+
+      - name: Open or update weekly TODO issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const title = 'SEO/AEO: TODO tygodnia (auto)';
+            const label = 'seo-gsc-todo';
+            const reportPath = 'data/reports/gsc-weekly-report.json';
+
+            const labelsResp = await github.rest.issues.listLabelsForRepo({ owner, repo, per_page: 100 });
+            const hasLabel = labelsResp.data.some((l) => l.name === label);
+            if (!hasLabel) {
+              await github.rest.issues.createLabel({
+                owner,
+                repo,
+                name: label,
+                color: '0E8A16',
+                description: 'Automatyczna tygodniowa checklista SEO/AEO',
+              });
+            }
+
+            const openIssues = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'open',
+              labels: label,
+              per_page: 50,
+            });
+
+            let report = null;
+            if (fs.existsSync(reportPath)) {
+              report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+            }
+
+            const safe = (v) => String(v || '').trim();
+            const opportunities = report?.opportunities || {};
+            const top3 = Array.isArray(opportunities.top3_zero_click) ? opportunities.top3_zero_click : [];
+            const ctr = Array.isArray(opportunities.ctr_problems) ? opportunities.ctr_problems : [];
+            const cannibal = Array.isArray(opportunities.cannibalization) ? opportunities.cannibalization : [];
+            const pages = Array.isArray(opportunities.page_opportunities) ? opportunities.page_opportunities : [];
+
+            const tasks = [];
+            if (top3[0]?.query) {
+              tasks.push(`- [ ] Query \`${safe(top3[0].query)}\`: dopisz mocny Quick Answer + popraw title/meta.`);
+            }
+            if (ctr[0]?.query) {
+              tasks.push(`- [ ] Query \`${safe(ctr[0].query)}\`: popraw CTR (title, description, pierwsze 120 znaków intro).`);
+            }
+            if (cannibal[0]?.query) {
+              tasks.push(`- [ ] Kanibalizacja \`${safe(cannibal[0].query)}\`: wybierz 1 URL kanoniczny i wzmocnij linkowanie.`);
+            } else if (pages[0]?.page) {
+              tasks.push(`- [ ] Strona \`${safe(pages[0].page)}\`: dołóż 2-3 linki wewnętrzne z mocnych podstron.`);
+            }
+            while (tasks.length < 3) {
+              tasks.push('- [ ] Brak mocnych kandydatów: opublikuj 1 nowy artykuł Q&A pod niszowe zapytanie z GSC.');
+            }
+
+            const generated = safe(report?.generated_at) || new Date().toISOString();
+            const property = safe(report?.property) || 'sc-domain:fitpo50.pl';
+            const status = safe(report?.status) || 'unknown';
+
+            const body = [
+              '# TODO tygodnia SEO/AEO (auto)',
+              '',
+              `Wygenerowano: ${generated}`,
+              `Status raportu: ${status}`,
+              `Property: ${property}`,
+              '',
+              '## TOP 3 zadania',
+              ...tasks.slice(0, 3),
+              '',
+              '## Zamknięcie tygodnia',
+              '- [ ] Zgłoś indeksację zmienionych URL w GSC.',
+              '- [ ] Po 7 dniach porównaj CTR/pozycję w kolejnym raporcie.',
+            ].join('\n');
+
+            const existing = openIssues.data.find((i) => i.title === title);
+            if (existing) {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: existing.number,
+                title,
+                body,
+                labels: [label],
+              });
+            } else {
+              await github.rest.issues.create({
+                owner,
+                repo,
+                title,
+                body,
+                labels: [label],
+              });
+            }
