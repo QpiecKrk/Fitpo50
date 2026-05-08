@@ -498,7 +498,10 @@ async function main() {
   console.log('[PASS] GSC API weekly report generated.');
   console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
   console.log(`- MD: ${path.relative(ROOT, args.outputMd)}`);
-  console.log(`- opportunities: top3_zero=${top3Zero.length}, ctr=${ctrProblems.length}, cannibalization=${cannibalization.length}`);
+  const top3Count = Array.isArray(report?.opportunities?.top3_zero_click) ? report.opportunities.top3_zero_click.length : 0;
+  const ctrCount = Array.isArray(report?.opportunities?.ctr_problems) ? report.opportunities.ctr_problems.length : 0;
+  const cannibalCount = Array.isArray(report?.opportunities?.cannibalization) ? report.opportunities.cannibalization.length : 0;
+  console.log(`- opportunities: top3_zero=${top3Count}, ctr=${ctrCount}, cannibalization=${cannibalCount}`);
 }
 
 main().catch((err) => {
