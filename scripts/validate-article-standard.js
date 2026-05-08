@@ -45,14 +45,29 @@ function countInternalContextLinks(articleContentHtml) {
   return unique.size;
 }
 
+function normalizeTextForCompare(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function stripFaqBlock(articleContentHtml) {
+  return String(articleContentHtml || '').split(/<section\s+class="faq-list\b/i)[0];
+}
+
 function extractArticleContentHtml(raw) {
   const startMatch = raw.match(/<article\s+class="article-content">/i);
   if (!startMatch || startMatch.index === undefined) return '';
   const start = startMatch.index + startMatch[0].length;
   const endBySources = raw.search(/<h2\s+id="zrodla">/i);
+  const endByFaq = raw.search(/<section\s+class="faq-list\b/i);
   const endByMain = raw.search(/<\/main>/i);
   let end = -1;
+  if (endByFaq > start) end = endByFaq;
   if (endBySources > start) end = endBySources;
+  if (endByFaq > start && endBySources > start) end = Math.min(endByFaq, endBySources);
   if (end === -1 && endByMain > start) end = endByMain;
   if (end === -1) end = raw.length;
   return raw.slice(start, end);
@@ -111,6 +126,15 @@ function validateQuickAnswerBlock(articleContentHtml, errors) {
   if (wc < 40 || wc > 60) {
     errors.push(`Szybka odpowiedź: wymagane 40-60 słów (jest ${wc}).`);
   }
+
+  const leadMatch = articleContentHtml.match(/<p class="drop-cap">([\s\S]*?)<\/p>/i);
+  if (leadMatch) {
+    const leadNorm = normalizeTextForCompare(stripTags(leadMatch[1]));
+    const quickNorm = normalizeTextForCompare(stripTags(paragraphMatch[1]));
+    if (leadNorm && quickNorm && leadNorm === quickNorm) {
+      errors.push('Szybka odpowiedź nie może być kopią 1:1 pierwszego akapitu.');
+    }
+  }
 }
 
 function validateQuestionHeadings(articleContentHtml, errors) {
@@ -154,6 +178,99 @@ function validateInlineFiguresUsePicture(articleContentHtml, errors) {
       errors.push(`Inline figure #${idx}: brak fallback <img>.`);
     }
   }
+}
+
+function validateNoAbsoluteInternalLinksInNarrative(articleContentHtml, errors) {
+  const narrative = stripFaqBlock(articleContentHtml);
+  const absInternalLinks = [...narrative.matchAll(/<a\b[^>]*href="https?:\/\/(?:www\.)?fitpo50\.pl\/([^"]+\.html(?:[?#][^"]*)?)"/gi)];
+  if (absInternalLinks.length) {
+    errors.push(`Wykryto linki absolutne do fitpo50.pl w treści (${absInternalLinks.length}). Użyj ścieżek względnych ./...`);
+  }
+}
+
+function validateBrokenSentenceArtifacts(articleContentHtml, errors) {
+  if (/,\s*czyli\.\s*(<\/p>|$)/i.test(articleContentHtml)) {
+    errors.push('Wykryto urwane zdanie (wzorzec ", czyli.").');
+  }
+}
+
+function validateNoXmlProlog(raw, errors) {
+  if (/^\s*<\?xml\b/i.test(raw)) {
+    errors.push('Wykryto deklarację XML na początku pliku HTML5 (<?xml ...?>). Usuń ją.');
+  }
+}
+
+function validateNoInvalidSourceClosingTags(raw, errors) {
+  const bad = raw.match(/<\/source>/gi);
+  if (bad && bad.length) {
+    errors.push(`Wykryto niedozwolone zamknięcia </source> (${bad.length}x).`);
+  }
+}
+
+function validateAsideTitlesNotDuplicated(articleContentHtml, errors) {
+  const h2Titles = [...articleContentHtml.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)]
+    .map((m) => normalizeTextForCompare(stripTags(m[1])))
+    .filter(Boolean);
+  const h2Set = new Set(h2Titles);
+
+  const asides = [...articleContentHtml.matchAll(/<aside\b[^>]*class="[^"]*\bhighlight-box\b[^"]*"[^>]*>[\s\S]*?<h3[^>]*>([\s\S]*?)<\/h3>/gi)];
+  for (const a of asides) {
+    let title = normalizeTextForCompare(stripTags(a[1]));
+    title = title.replace(/^wazne:\s*/i, '');
+    if (!title) continue;
+    if (h2Set.has(title)) {
+      errors.push(`Boks aside dubluje nagłówek H2: "${stripTags(a[1]).trim()}".`);
+      break;
+    }
+  }
+}
+
+function validateRepeatedLongSentences(articleContentHtml, errors) {
+  const plain = stripTags(articleContentHtml);
+  const sentences = plain
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  const map = new Map();
+  for (const sentence of sentences) {
+    const norm = normalizeTextForCompare(sentence);
+    if (!norm) continue;
+    if (countWords(norm) < 8) continue;
+    if (norm.length < 45) continue;
+    map.set(norm, (map.get(norm) || 0) + 1);
+  }
+  for (const [sentence, count] of map.entries()) {
+    if (count >= 3) {
+      errors.push(`Wykryto zdanie powtórzone ${count}x: "${sentence.slice(0, 90)}..."`);
+      break;
+    }
+  }
+}
+
+function validateFaqResearchInBlogPosting(raw, errors) {
+  const scripts = [...raw.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+  for (const scriptMatch of scripts) {
+    const body = String(scriptMatch[1] || '').trim();
+    let parsed;
+    try {
+      parsed = JSON.parse(body);
+    } catch (_err) {
+      continue;
+    }
+    const nodes = Array.isArray(parsed) ? parsed : [parsed];
+    for (const node of nodes) {
+      if (!node || typeof node !== 'object') continue;
+      const type = node['@type'];
+      const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
+      if (!isBlogPosting) continue;
+      const arr = Array.isArray(node.faq_research) ? node.faq_research : [];
+      if (arr.length < 4) {
+        errors.push(`BlogPosting.faq_research: wymagane minimum 4 wpisy (jest ${arr.length}).`);
+      }
+      return;
+    }
+  }
+  errors.push('Brak schema BlogPosting do walidacji faq_research.');
 }
 
 function validateFile(filePath) {
@@ -302,12 +419,17 @@ function validateFile(filePath) {
     validateQuickAnswerBlock(articleContentHtml, errors);
     validateQuestionHeadings(articleContentHtml, errors);
     validateInlineFiguresUsePicture(articleContentHtml, errors);
-    const internalLinks = countInternalContextLinks(articleContentHtml);
+    validateNoAbsoluteInternalLinksInNarrative(articleContentHtml, errors);
+    validateBrokenSentenceArtifacts(articleContentHtml, errors);
+    validateAsideTitlesNotDuplicated(articleContentHtml, errors);
+    validateRepeatedLongSentences(articleContentHtml, errors);
+    const internalLinks = countInternalContextLinks(stripFaqBlock(articleContentHtml));
     if (internalLinks < 4) {
       errors.push(`Za mało linków kontekstowych w treści: ${internalLinks}/4.`);
     }
     validateAnswerFirstParagraphs(articleContentHtml, errors);
   }
+  validateFaqResearchInBlogPosting(raw, errors);
 
   return errors;
 }

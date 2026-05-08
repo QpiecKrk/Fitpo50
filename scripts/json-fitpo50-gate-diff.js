@@ -46,6 +46,32 @@ function countWords(text) {
   return m ? m.length : 0;
 }
 
+function normalizeTextForCompare(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function collectRepeatedLongSentences(chunks) {
+  const source = chunks.map((x) => String(x || '')).join(' ');
+  const plain = source.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const sentences = plain
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  const map = new Map();
+  for (const sentence of sentences) {
+    const norm = normalizeTextForCompare(sentence);
+    if (!norm) continue;
+    if (countWords(norm) < 8) continue;
+    if (norm.length < 45) continue;
+    map.set(norm, (map.get(norm) || 0) + 1);
+  }
+  return [...map.entries()].filter(([, c]) => c >= 3);
+}
+
 function isQuestionHeading(text) {
   return String(text || '').trim().endsWith('?');
 }
@@ -136,6 +162,10 @@ function validateFile(file) {
   if (faq.length < 4) {
     warnings.push(`${file}: answer_blocks < 4 (uzupełni importer).`);
   }
+  const faqResearch = Array.isArray(json.faq_research) ? json.faq_research : [];
+  if (faqResearch.length < 4) {
+    errors.push(`${file}: faq_research musi mieć minimum 4 wpisy (jest ${faqResearch.length}).`);
+  }
   for (let i = 0; i < faq.length; i += 1) {
     checkNoLocalHtmlLinks(faq[i]?.answer_html || '', `${file}: answer_blocks[${i}].answer_html`);
   }
@@ -143,6 +173,15 @@ function validateFile(file) {
   const sources = Array.isArray(json.sources) ? json.sources : [];
   if (sources.length < 6) {
     errors.push(`${file}: sources musi mieć minimum 6 pozycji (jest ${sources.length}).`);
+  }
+
+  const repeated = collectRepeatedLongSentences([
+    json.lead || '',
+    json.quick_answer || json.quickAnswer || '',
+    ...sections.flatMap((s) => Array.isArray(s.paragraphs_html) ? s.paragraphs_html : []),
+  ]);
+  if (repeated.length) {
+    errors.push(`${file}: wykryto powtarzalne zdania (${repeated[0][1]}x): "${repeated[0][0].slice(0, 90)}..."`);
   }
 }
 

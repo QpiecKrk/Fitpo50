@@ -196,6 +196,12 @@ function firstMeaningfulSentenceFromParagraph(paragraphHtml) {
   return base.length > 220 ? `${base.slice(0, 217).trimEnd()}...` : base;
 }
 
+function buildInfoBoxTitle(sectionTitle) {
+  const clean = stripTags(String(sectionTitle || '')).replace(/\s+/g, ' ').trim();
+  if (!clean) return 'Co to znaczy w praktyce';
+  return 'Co to znaczy w praktyce';
+}
+
 function ensureQuestionHeading(title) {
   const clean = stripTags(String(title || '')).replace(/\s+/g, ' ').trim();
   if (!clean) return '';
@@ -207,6 +213,7 @@ function buildQuickAnswer(json) {
   const fromJson = stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
   const lead = stripTags(String(json.lead || '')).replace(/\s+/g, ' ').trim();
   const firstSection = stripTags(String(json.sections?.[0]?.paragraphs_html?.[0] || '')).replace(/\s+/g, ' ').trim();
+  const explicitProvided = !!fromJson;
 
   let base = fromJson || lead || firstSection || '';
   if (!base) {
@@ -223,6 +230,15 @@ function buildQuickAnswer(json) {
       .trim();
     const limited = base.split(/\s+/).filter(Boolean).slice(0, 60).join(' ').trim();
     base = /[.!?]$/.test(limited) ? limited : `${limited}.`;
+  }
+  if (!explicitProvided && lead) {
+    const normalize = (v) => String(v || '').toLowerCase().replace(/[^\p{L}\p{N}\s]+/gu, '').replace(/\s+/g, ' ').trim();
+    if (normalize(base) === normalize(lead)) {
+      const candidate = `Najkrócej: ${base}`;
+      const words2 = candidate.split(/\s+/).filter(Boolean).slice(0, 60);
+      base = words2.join(' ').trim();
+      if (!/[.!?]$/.test(base)) base += '.';
+    }
   }
   return base.replace(/\s+/g, ' ').trim();
 }
@@ -373,7 +389,7 @@ function main() {
       list_items: listItems.map((x) => stripTags(String(x || '')).trim()).filter(Boolean),
       info_box: {
         style: 'accent',
-        title: stripTags(String(infoBox.title || `Ważne: ${title}`)).trim(),
+        title: stripTags(String(infoBox.title || buildInfoBoxTitle(title))).trim(),
         content_html: removeLocalHtmlLinks(ensureParagraphWrapper(infoBox.content_html || fallbackInfoContent)),
       },
       image: {

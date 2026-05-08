@@ -490,8 +490,10 @@ function ensureQuestionHeading(title) {
 
 function normalizeQuickAnswer(raw, leadRaw) {
   let text = stripTags(String(raw || '')).replace(/\s+/g, ' ').trim();
+  const leadText = stripTags(String(leadRaw || '')).replace(/\s+/g, ' ').trim();
+  const rawProvided = String(raw || '').trim().length > 0;
   if (!text) {
-    text = stripTags(String(leadRaw || '')).replace(/\s+/g, ' ').trim();
+    text = leadText;
   }
   if (!text) return '';
   let words = text.split(/\s+/).filter(Boolean);
@@ -509,7 +511,51 @@ function normalizeQuickAnswer(raw, leadRaw) {
     if (!/[.!?]$/.test(text)) text += '.';
     words = text.split(/\s+/).filter(Boolean);
   }
+  // Guard against 1:1 duplicate with lead when quick_answer was auto-derived.
+  if (!rawProvided && leadText) {
+    const normalize = (v) => String(v || '').toLowerCase().replace(/[^\p{L}\p{N}\s]+/gu, '').replace(/\s+/g, ' ').trim();
+    if (normalize(text) === normalize(leadText)) {
+      text = `Najkrócej: ${text}`;
+      const trimWords = text.split(/\s+/).filter(Boolean).slice(0, 60);
+      text = trimWords.join(' ').trim();
+      if (!/[.!?]$/.test(text)) text += '.';
+    }
+  }
   return text;
+}
+
+function normalizeInternalSiteLinks(html) {
+  return String(html || '').replace(
+    /href="https?:\/\/(?:www\.)?fitpo50\.pl\/([^"#?]+\.html(?:[?#][^"]*)?)"/gi,
+    (_m, pathWithQuery) => `href="./${String(pathWithQuery || '').replace(/^\/+/, '')}"`,
+  );
+}
+
+function collectRepeatedLongSentences(chunks) {
+  const source = normalizeArray(chunks).map((x) => stripTags(x)).join(' ');
+  const sentences = source
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+
+  const seen = new Map();
+  for (const sentence of sentences) {
+    const norm = sentence
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}\s]+/gu, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (!norm) continue;
+    if (countWordsUtf8(norm) < 8) continue;
+    if (norm.length < 45) continue;
+    seen.set(norm, (seen.get(norm) || 0) + 1);
+  }
+
+  const repeated = [];
+  for (const [sentence, count] of seen.entries()) {
+    if (count >= 3) repeated.push({ sentence, count });
+  }
+  return repeated;
 }
 
 function normalizeSections(rawSections) {
@@ -521,11 +567,11 @@ function normalizeSections(rawSections) {
     const blocks = [];
 
     if (entry.content_html) {
-      blocks.push({ type: 'html', html: String(entry.content_html) });
+      blocks.push({ type: 'html', html: normalizeInternalSiteLinks(String(entry.content_html)) });
     }
 
     for (const paragraph of normalizeArray(entry.paragraphs_html || entry.paragraphs || [])) {
-      blocks.push({ type: 'paragraph', html: ensureParagraphHtml(paragraph) });
+      blocks.push({ type: 'paragraph', html: normalizeInternalSiteLinks(ensureParagraphHtml(paragraph)) });
     }
 
     if (Array.isArray(entry.list_items) && entry.list_items.length) {
@@ -541,12 +587,17 @@ function normalizeSections(rawSections) {
       const style = String(entry.info_box.style || 'primary').toLowerCase() === 'accent'
         ? 'highlight-box highlight-box--accent'
         : 'highlight-box';
-      const boxTitle = String(entry.info_box.title || '').trim();
+      let boxTitle = String(entry.info_box.title || '').trim();
+      const normalizedSectionTitle = String(title || '').trim().toLowerCase();
+      const normalizedBoxTitle = String(boxTitle || '').trim().toLowerCase().replace(/^ważne:\s*/i, '');
+      if (!boxTitle || (normalizedSectionTitle && normalizedBoxTitle === normalizedSectionTitle)) {
+        boxTitle = 'Co to znaczy w praktyce';
+      }
       const boxHtml = String(entry.info_box.content_html || entry.info_box.html || entry.info_box.content || '').trim();
       if (boxTitle || boxHtml) {
         blocks.push({
           type: 'html',
-          html: `<aside class="${style}">${boxTitle ? `<h3>${escapeHtml(boxTitle)}</h3>` : ''}${boxHtml ? ensureParagraphHtml(boxHtml) : ''}</aside>`,
+          html: `<aside class="${style}">${boxTitle ? `<h3>${escapeHtml(boxTitle)}</h3>` : ''}${boxHtml ? normalizeInternalSiteLinks(ensureParagraphHtml(boxHtml)) : ''}</aside>`,
         });
       }
     }
@@ -612,7 +663,8 @@ function ensureMinimumInternalLinks(slug, dryRun, syncSite, minimum = 4) {
     const articleMatch = raw.match(/<article class="article-content">[\s\S]*?<\/article>/i);
     if (!articleMatch) continue;
     const articleHtml = articleMatch[0];
-    const existingCount = countInternalHtmlLinks([articleHtml]);
+    const narrativeHtml = articleHtml.split(/<section\s+class="faq-list\b/i)[0];
+    const existingCount = countInternalHtmlLinks([narrativeHtml]);
     if (existingCount >= minimum) continue;
 
     const needed = minimum - existingCount;
@@ -629,7 +681,10 @@ function ensureMinimumInternalLinks(slug, dryRun, syncSite, minimum = 4) {
       .map((href) => `<a href="./${href}">${escapeHtml(href.replace(/\.html$/i, '').replace(/-/g, ' '))}</a>`)
       .join(', ');
     const addon = `<p class="article-crosslinks-auto"><strong>Zobacz też:</strong> ${links}.</p>`;
-    const updatedArticle = articleHtml.replace(/<\/article>$/i, `${addon}\n</article>`);
+    const faqStart = articleHtml.search(/<section\s+class="faq-list\b/i);
+    const updatedArticle = faqStart >= 0
+      ? `${articleHtml.slice(0, faqStart)}${addon}\n${articleHtml.slice(faqStart)}`
+      : articleHtml.replace(/<\/article>$/i, `${addon}\n</article>`);
     const next = raw.replace(articleHtml, updatedArticle);
     if (!dryRun) fs.writeFileSync(targetPath, next, 'utf8');
     console.log(`[AUTO] Uzupełniono linki kontekstowe w ${path.basename(targetPath)} (+${candidates.length}).`);
@@ -1003,6 +1058,10 @@ function validateInput(data, opts = {}) {
   } else if (quickAnswerWords < 40 || quickAnswerWords > 60) {
     errors.push(`quick_answer: wymagane 40-60 słów (jest ${quickAnswerWords}).`);
   }
+  const normalizeCmp = (v) => String(v || '').toLowerCase().replace(/[^\p{L}\p{N}\s]+/gu, ' ').replace(/\s+/g, ' ').trim();
+  if (lead && quickAnswer && normalizeCmp(lead) === normalizeCmp(quickAnswer)) {
+    errors.push('quick_answer nie może być kopią 1:1 leadu.');
+  }
 
   const sections = normalizeSections(data.sections || []);
   if (!sections.length) errors.push('Brak sekcji: sections[].');
@@ -1033,6 +1092,10 @@ function validateInput(data, opts = {}) {
           sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": wykryto placeholder w treści/boxie.`);
           break;
         }
+        if (/,\s*czyli\.\s*(<\/p>|$)/i.test(String(block.html || ''))) {
+          sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": wykryto urwane zdanie (", czyli.").`);
+          break;
+        }
       }
     }
     errors.push(...sectionParagraphErrors);
@@ -1052,6 +1115,15 @@ function validateInput(data, opts = {}) {
         'Crosslinki wewnętrzne uzupełniamy ręcznie po imporcie (kontrola redakcyjna).'
       );
     }
+  }
+  const repeatedSentences = collectRepeatedLongSentences([
+    lead,
+    quickAnswer,
+    ...sections.map((s) => s.blocks.map((b) => b.html || '').join(' ')),
+  ]);
+  if (repeatedSentences.length) {
+    const sample = repeatedSentences[0];
+    errors.push(`Treść: wykryto powtarzalne zdania (${sample.count}x): "${sample.sentence.slice(0, 90)}..."`);
   }
   const keyTakeaways = normalizeKeyTakeaways(data.key_takeaways || data.takeaways || []);
   if (keyTakeaways.length < 3) {
@@ -1454,6 +1526,14 @@ function upsertBlogPostingSchema(html, opts) {
 
       if (opts.mentions.length) {
         node.mentions = opts.mentions.map((name) => ({ '@type': 'Thing', name }));
+      }
+
+      if (Array.isArray(opts.faqResearch) && opts.faqResearch.length) {
+        node.faq_research = opts.faqResearch.slice(0, 8).map((item) => ({
+          question: item.question,
+          source_label: item.sourceLabel,
+          source_url: item.sourceUrl,
+        }));
       }
 
       touched = true;
@@ -2041,6 +2121,7 @@ function normalizePayload(data, cliCategory, options = {}) {
   const keyTakeaways = normalizeKeyTakeaways(data.key_takeaways || data.takeaways || []);
   const sections = normalizeSections(data.sections || []);
   const faqNormalized = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
+  const faqResearch = normalizeFaqResearch(data.faq_research || data.faq_sources || []);
   const faqAuto = faqStrict
     ? { faq: faqNormalized, notes: [] }
     : ensureMinFaqFromNetworkSeeds(faqNormalized, category.key, title || slug || 'artykuł');
@@ -2087,6 +2168,7 @@ function normalizePayload(data, cliCategory, options = {}) {
     keyTakeaways,
     sections,
     faqItems,
+    faqResearch,
     faqAutoNotes: faqAuto.notes,
     sources,
     relatedDefaults,
@@ -2170,6 +2252,7 @@ function buildHtmlFromTemplate(template, payload) {
     about: payload.about,
     mentions: payload.mentions,
     hasKeyTakeaways: payload.keyTakeaways.length > 0,
+    faqResearch: payload.faqResearch,
   });
 
   if (payload.faqItems.length) {

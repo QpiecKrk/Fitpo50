@@ -36,6 +36,32 @@ function wordCount(text) {
   return m ? m.length : 0;
 }
 
+function normalizeTextForCompare(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function collectRepeatedLongSentences(chunks) {
+  const source = chunks.map((x) => String(x || '')).join(' ');
+  const plain = stripTags(source);
+  const sentences = plain
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  const map = new Map();
+  for (const sentence of sentences) {
+    const norm = normalizeTextForCompare(sentence);
+    if (!norm) continue;
+    if (wordCount(norm) < 8) continue;
+    if (norm.length < 45) continue;
+    map.set(norm, (map.get(norm) || 0) + 1);
+  }
+  return [...map.entries()].filter(([, c]) => c >= 3);
+}
+
 function isQuestionHeading(text) {
   return String(text || '').trim().endsWith('?');
 }
@@ -174,6 +200,18 @@ function main() {
 
   if (!Array.isArray(json.answer_blocks) || json.answer_blocks.length < 4) {
     errors.push(`FAQ answer_blocks: wymagane >=4, jest ${Array.isArray(json.answer_blocks) ? json.answer_blocks.length : 0}.`);
+  }
+  const faqResearch = Array.isArray(json.faq_research) ? json.faq_research : [];
+  if (faqResearch.length < 4) {
+    errors.push(`faq_research: wymagane >=4, jest ${faqResearch.length}.`);
+  }
+  const repeatedSentences = collectRepeatedLongSentences([
+    json.lead || '',
+    json.quick_answer || json.quickAnswer || '',
+    ...sections.flatMap((s) => Array.isArray(s.paragraphs_html) ? s.paragraphs_html : []),
+  ]);
+  if (repeatedSentences.length) {
+    errors.push(`Wykryto powtarzalne zdania w JSON (${repeatedSentences[0][1]}x): "${repeatedSentences[0][0].slice(0, 90)}..."`);
   }
 
   const hero = String(json.hero_image || '').trim();
