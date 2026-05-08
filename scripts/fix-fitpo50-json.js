@@ -196,6 +196,37 @@ function firstMeaningfulSentenceFromParagraph(paragraphHtml) {
   return base.length > 220 ? `${base.slice(0, 217).trimEnd()}...` : base;
 }
 
+function ensureQuestionHeading(title) {
+  const clean = stripTags(String(title || '')).replace(/\s+/g, ' ').trim();
+  if (!clean) return '';
+  if (/[?]$/.test(clean)) return clean;
+  return `${clean}?`;
+}
+
+function buildQuickAnswer(json) {
+  const fromJson = stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
+  const lead = stripTags(String(json.lead || '')).replace(/\s+/g, ' ').trim();
+  const firstSection = stripTags(String(json.sections?.[0]?.paragraphs_html?.[0] || '')).replace(/\s+/g, ' ').trim();
+
+  let base = fromJson || lead || firstSection || '';
+  if (!base) {
+    base = 'Najważniejsze: zacznij od małych, regularnych kroków i monitoruj efekty przez 2-4 tygodnie, aby bezpiecznie poprawiać zdrowie i sprawność po 50. roku życia.';
+  }
+  const words = base.split(/\s+/).filter(Boolean);
+  if (words.length > 60) {
+    base = words.slice(0, 60).join(' ').replace(/[,:;\s]+$/g, '').trim();
+    if (!/[.!?]$/.test(base)) base += '.';
+  }
+  while (wordCount(base) < 40) {
+    base = `${base} To praktyczne podejście pomaga utrzymać regularność, zmniejsza ryzyko przeciążenia i daje mierzalne korzyści zdrowotne.`
+      .replace(/\s+/g, ' ')
+      .trim();
+    const limited = base.split(/\s+/).filter(Boolean).slice(0, 60).join(' ').trim();
+    base = /[.!?]$/.test(limited) ? limited : `${limited}.`;
+  }
+  return base.replace(/\s+/g, ' ').trim();
+}
+
 function validate(json) {
   const errors = [];
   if (!json.title || json.title.length < 55 || json.title.length > 65) {
@@ -215,6 +246,18 @@ function validate(json) {
   }
   if (!Array.isArray(json.sections) || json.sections.length < 6) {
     errors.push(`sections < 6 (jest ${Array.isArray(json.sections) ? json.sections.length : 0})`);
+  }
+  const qaWords = wordCount(stripTags(String(json.quick_answer || '')));
+  if (qaWords < 40 || qaWords > 60) {
+    errors.push(`quick_answer poza zakresem 40-60 słów (jest ${qaWords})`);
+  }
+  if (Array.isArray(json.sections)) {
+    for (let i = 0; i < json.sections.length; i += 1) {
+      const title = String(json.sections[i]?.title || '').trim();
+      if (!title.endsWith('?')) {
+        errors.push(`sections[${i}].title musi być pytaniem zakończonym "?".`);
+      }
+    }
   }
   if (!Array.isArray(json.sources) || json.sources.length < 6) {
     errors.push(`sources < 6 (jest ${Array.isArray(json.sources) ? json.sources.length : 0})`);
@@ -310,7 +353,7 @@ function main() {
   const sections = Array.isArray(json.sections) ? json.sections : [];
   json.sections = sections.map((s, idx) => {
     const section = (s && typeof s === 'object') ? s : {};
-    const title = stripTags(String(section.title || section.heading || `Sekcja ${idx + 1}`)).trim();
+    const title = ensureQuestionHeading(stripTags(String(section.title || section.heading || `Jak wdrożyć krok ${idx + 1} w praktyce`)).trim());
     const paragraphsRaw = Array.isArray(section.paragraphs_html)
       ? section.paragraphs_html
       : htmlToParagraphs(section.content_html || '');
@@ -353,6 +396,8 @@ function main() {
       answer_html: '<p>Najlepiej zacząć od małej zmiany, monitorować efekty przez 2-4 tygodnie i dopiero potem zwiększać zakres działania.</p>',
     });
   }
+
+  json.quick_answer = buildQuickAnswer(json);
 
   json.sources = dedupeSources(Array.isArray(json.sources) ? json.sources : []);
   if (json.sources.length < 6) {

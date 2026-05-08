@@ -96,6 +96,44 @@ function validateAnswerFirstParagraphs(raw, errors) {
   }
 }
 
+function validateQuickAnswerBlock(articleContentHtml, errors) {
+  const blockMatch = articleContentHtml.match(/<section\s+class="quick-answer[^"]*"[\s\S]*?<\/section>/i);
+  if (!blockMatch) {
+    errors.push('Brak sekcji .quick-answer (Szybka odpowiedź).');
+    return;
+  }
+  const paragraphMatch = blockMatch[0].match(/<p\b[^>]*>([\s\S]*?)<\/p>/i);
+  if (!paragraphMatch) {
+    errors.push('Sekcja .quick-answer nie zawiera akapitu <p>.');
+    return;
+  }
+  const wc = countWords(stripTags(paragraphMatch[1]));
+  if (wc < 40 || wc > 60) {
+    errors.push(`Szybka odpowiedź: wymagane 40-60 słów (jest ${wc}).`);
+  }
+}
+
+function validateQuestionHeadings(articleContentHtml, errors) {
+  const h2Rx = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
+  const skippedTitles = new Set([
+    'kluczowe wnioski',
+    'najczęściej zadawane pytania',
+    'zrodla',
+    'źródła',
+    'szybka odpowiedź',
+    'szybka odpowiedz',
+  ]);
+  for (const m of articleContentHtml.matchAll(h2Rx)) {
+    const titleRaw = stripTags(m[1]);
+    const title = titleRaw.toLowerCase().trim();
+    if (skippedTitles.has(title)) continue;
+    if (title.includes('źródła') || title.includes('zrodla')) continue;
+    if (!titleRaw.trim().endsWith('?')) {
+      errors.push(`H2 "${titleRaw.trim()}" powinien być pytaniem zakończonym "?".`);
+    }
+  }
+}
+
 function validateInlineFiguresUsePicture(articleContentHtml, errors) {
   const figureRx = /<figure\b[^>]*class="[^"]*\binline-figure\b[^"]*"[^>]*>([\s\S]*?)<\/figure>/gi;
   let idx = 0;
@@ -261,6 +299,8 @@ function validateFile(filePath) {
   if (!articleContentHtml) {
     errors.push('Brak <article class="article-content"> do walidacji AEO/GEO.');
   } else {
+    validateQuickAnswerBlock(articleContentHtml, errors);
+    validateQuestionHeadings(articleContentHtml, errors);
     validateInlineFiguresUsePicture(articleContentHtml, errors);
     const internalLinks = countInternalContextLinks(articleContentHtml);
     if (internalLinks < 4) {

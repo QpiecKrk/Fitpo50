@@ -1444,14 +1444,14 @@
         <picture aria-hidden="true">
           <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
           <source srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/silownia-serce-ochrona-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Okulary do czytania to nie wyrok: jak trenować akomodację oka</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy ćwiczenia wzroku mogą opóźnić okulary do czytania? Poznaj naukowe fakty o neuroplastyczności, metodzie łatek Gabora i plan treningu akomodacji dla osób 50+.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="okulary-do-czytania-trening-akomodacji-oka.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Jak siłownia chroni serce przed zawałem? Proste wyjaśnienie</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Dowiedz się, jak trening siłowy realnie chroni Twoje serce przed zawałem. Proste wyjaśnienie procesów biologicznych, najnowsze badania i plan dla osób po</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="silownia-chroni-serce-przed-zawalem.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Okulary do czytania to nie wyrok: jak trenować akomodację oka',
-        excerpt: 'Czy ćwiczenia wzroku mogą opóźnić okulary do czytania? Poznaj naukowe fakty o neuroplastyczności, metodzie łatek Gabora i plan treningu akomodacji dla osób 50+.',
-        image: './assets/okulary-do-czytania-hero.webp',
-        url: 'okulary-do-czytania-trening-akomodacji-oka.html'
+        title: 'Jak siłownia chroni serce przed zawałem? Proste wyjaśnienie',
+        excerpt: 'Dowiedz się, jak trening siłowy realnie chroni Twoje serce przed zawałem. Proste wyjaśnienie procesów biologicznych, najnowsze badania i plan dla osób po',
+        image: './assets/silownia-serce-ochrona-hero.webp',
+        url: 'silownia-chroni-serce-przed-zawalem.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,10 +2236,17 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Zdrowie',
+          category: 'Ciekawe',
+          title: 'Jak siłownia chroni serce przed zawałem? Proste wyjaśnienie',
+          excerpt: 'Dowiedz się, jak trening siłowy realnie chroni Twoje serce przed zawałem. Proste wyjaśnienie procesów biologicznych, najnowsze badania i plan dla osób po',
+          image: './assets/silownia-serce-ochrona-hero.webp',
+          url: 'silownia-chroni-serce-przed-zawalem.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Okulary do czytania to nie wyrok: jak trenować akomodację oka',
           excerpt: 'Czy ćwiczenia wzroku mogą opóźnić okulary do czytania? Poznaj naukowe fakty o neuroplastyczności, metodzie łatek Gabora i plan treningu akomodacji dla osób 50+.',
-          image: './assets/okulary-do-czytania-hero.webp',
+          image: './assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp',
           url: 'okulary-do-czytania-trening-akomodacji-oka.html'
         },
         {
@@ -2248,13 +2255,6 @@
           excerpt: 'Lektyny, szczawiany i fityniany budzą lęk, ale nauka 2026 uspokaja. Dowiedz się, jak gotowanie i moczenie neutralizuje antyodżywce i dlaczego warto jeść',
           image: './assets/antyodzywcze-skladniki-warzywa-straczki.webp',
           url: 'lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Kriokomory i komory hiperbaryczne – czy to bezpieczne po 50.?',
-          excerpt: 'Biohacking po 50. roku życia: kriokomory i tlenoterapia hiperbaryczna. Poznaj twarde dowody naukowe, realne ryzyka i zasady bezpiecznego korzystania.',
-          image: './assets/biohacking-kriokomory-hiperbaryczne-hero.webp',
-          url: 'kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

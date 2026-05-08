@@ -481,12 +481,43 @@ function normalizeKeyTakeaways(raw) {
   return out;
 }
 
+function ensureQuestionHeading(title) {
+  const clean = stripTags(String(title || '')).replace(/\s+/g, ' ').trim();
+  if (!clean) return '';
+  if (clean.endsWith('?')) return clean;
+  return `${clean}?`;
+}
+
+function normalizeQuickAnswer(raw, leadRaw) {
+  let text = stripTags(String(raw || '')).replace(/\s+/g, ' ').trim();
+  if (!text) {
+    text = stripTags(String(leadRaw || '')).replace(/\s+/g, ' ').trim();
+  }
+  if (!text) return '';
+  let words = text.split(/\s+/).filter(Boolean);
+  if (words.length > 60) {
+    text = words.slice(0, 60).join(' ').replace(/[,:;\s]+$/g, '').trim();
+    if (!/[.!?]$/.test(text)) text += '.';
+    words = text.split(/\s+/).filter(Boolean);
+  }
+  while (words.length < 40) {
+    text = `${text} To konkretna odpowiedź dla osób 50+, którą można od razu przełożyć na praktyczne działanie.`
+      .replace(/\s+/g, ' ')
+      .trim();
+    words = text.split(/\s+/).filter(Boolean).slice(0, 60);
+    text = words.join(' ').trim();
+    if (!/[.!?]$/.test(text)) text += '.';
+    words = text.split(/\s+/).filter(Boolean);
+  }
+  return text;
+}
+
 function normalizeSections(rawSections) {
   const sections = [];
   for (const entry of normalizeArray(rawSections)) {
     if (!entry || typeof entry !== 'object') continue;
 
-    const title = String(entry.title || entry.heading || '').trim();
+    const title = ensureQuestionHeading(String(entry.title || entry.heading || '').trim());
     const blocks = [];
 
     if (entry.content_html) {
@@ -965,11 +996,22 @@ function validateInput(data, opts = {}) {
     errors.push('Lead: wykryto placeholder redakcyjny.');
   }
 
+  const quickAnswer = normalizeQuickAnswer(data.quick_answer || data.quickAnswer || '', lead);
+  const quickAnswerWords = countWordsUtf8(quickAnswer);
+  if (!quickAnswer) {
+    errors.push('Brak quick_answer (wymagane 40-60 słów).');
+  } else if (quickAnswerWords < 40 || quickAnswerWords > 60) {
+    errors.push(`quick_answer: wymagane 40-60 słów (jest ${quickAnswerWords}).`);
+  }
+
   const sections = normalizeSections(data.sections || []);
   if (!sections.length) errors.push('Brak sekcji: sections[].');
   if (sections.length > 0) {
     const sectionParagraphErrors = [];
     for (const section of sections) {
+      if (!String(section.title || '').trim().endsWith('?')) {
+        sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": tytuł musi być pytaniem zakończonym "?".`);
+      }
       if (containsEditorialPlaceholder(section.title)) {
         sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": wykryto placeholder w tytule.`);
       }
@@ -1250,6 +1292,17 @@ function renderKeyTakeawaysBlock(items) {
     '<section class="key-takeaways reveal" data-ai-summary="auto" aria-label="Kluczowe wnioski">',
     '  <h2>Kluczowe wnioski</h2>',
     `  <ul>${list}</ul>`,
+    '</section>',
+  ].join('\n');
+}
+
+function renderQuickAnswerBlock(text) {
+  const clean = String(text || '').trim();
+  if (!clean) return '';
+  return [
+    '<section class="quick-answer reveal" aria-label="Szybka odpowiedź">',
+    '  <h2>Szybka odpowiedź</h2>',
+    `  <p>${escapeHtml(clean)}</p>`,
     '</section>',
   ].join('\n');
 }
@@ -1973,6 +2026,7 @@ function normalizePayload(data, cliCategory, options = {}) {
   const category = normalizeCategory(cliCategory || data.category || data.section || 'ciekawe');
 
   const leadRaw = String(data.lead || data.lead_paragraph || data.excerpt || '').trim();
+  const quickAnswer = normalizeQuickAnswer(data.quick_answer || data.quickAnswer || '', leadRaw);
   const metaDescription = normalizeMetaDescription(data.meta_description || data.description || data.excerpt || leadRaw);
 
   const datePublished = toIsoDateTimeWithTimezone(data.date_published || data.published_at || fallbackDate, '08:00:00');
@@ -2021,6 +2075,7 @@ function normalizePayload(data, cliCategory, options = {}) {
     seoTitleBase,
     category,
     leadRaw,
+    quickAnswer,
     metaDescription,
     datePublished,
     dateModified,
@@ -2098,6 +2153,7 @@ function buildHtmlFromTemplate(template, payload) {
   html = html.replace(/<p class="drop-cap">[\s\S]*?<\/p>/i, leadReplacement);
 
   const dynamicContent = [
+    renderQuickAnswerBlock(payload.quickAnswer),
     renderKeyTakeawaysBlock(payload.keyTakeaways),
     renderSectionsHtml(payload.sections),
     renderFaqList(payload.faqItems),

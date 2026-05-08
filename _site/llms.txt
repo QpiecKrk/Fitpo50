@@ -243,4 +243,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Okulary do czytania to nie wyrok: jak trenować akomodację oka | FitPo50"
   section: "Zdrowie"
   summary: "Czy ćwiczenia wzroku mogą opóźnić okulary do czytania? Poznaj naukowe fakty o neuroplastyczności, metodzie łatek Gabora i plan treningu akomodacji dla osób 50+."
+- url: https://fitpo50.pl/silownia-chroni-serce-przed-zawalem.html
+  title: "Jak siłownia chroni serce przed zawałem? Proste wyjaśnienie | FitPo50"
+  section: "Ciekawe"
+  summary: "Dowiedz się, jak trening siłowy realnie chroni Twoje serce przed zawałem. Proste wyjaśnienie procesów biologicznych, najnowsze badania i plan dla osób po"
 

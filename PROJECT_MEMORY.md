@@ -318,7 +318,6 @@
 
 ## Open questions
 - Czy utrzymujemy dodatkowe domeny/staging w CORS dla API kalendarza?
-- Czy rozszerzamy automatyczne testy synchronizacji (rollback + spojnosc JSON/sitemap)?
 
 ## Definition of done
 Zmiana jest gotowa dopiero, gdy:

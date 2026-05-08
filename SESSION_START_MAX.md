@@ -94,25 +94,6 @@ Publikacja artykulow:
 - AEO guardrails: w `BlogPosting` dodawaj `speakable`, a sekcje `.key-takeaways` umieszczaj po wstepie (nie na samym dole),
 - interlinking w tresci: minimum 4 linki kontekstowe w akapitach (nie tylko sekcja Czytelnia).
 - jesli JSON wejsciowy nie ma linkow kontekstowych, uruchamiaj import z `--run-internal-links auto` (auto-linking przed walidacja), aby domknac wymaganie minimum 4 linkow.
-- po zakonczeniu publikacji nowego artykulu (gdy wszystko jest PASS) zawsze zapytaj uzytkownika: "Czy artykul jest OK i generujemy Reels, Karuzele, czy oba formaty?",
-- jesli wybrano generowanie, zapytaj o dominante kolorystyczna i wykonaj workflow social bezposrednio w tym repo (bez Remotion/video-factory),
-- gotowe reels zapisuj do `/Users/grzegorzkupiec/Downloads/Reels/` (tylko 5 PNG + `podpis_reels.txt`, bez MP4),
-- gotowa karuzele zapisuj do `/Users/grzegorzkupiec/Downloads/Karuzela/` (5 PNG 1080x1350 + `podpis_karuzela.txt`),
-- jesli generowane sa oba formaty, tresci karuzeli i reels musza byc rozne (ten sam temat artykulu, inny copy/layout).
-- po wyborze formatu i dominanty wykonuj proces w pelnym automacie do konca (bez dodatkowych pytan technicznych): generowanie -> QA -> zapis do Downloads.
-- reels zawsze projektuj w formacie 1080x1920 (9:16) z bezpiecznymi strefami:
-  - minimum 90 px marginesu z lewej i prawej dla kluczowych elementow,
-  - minimum 220 px od gory dla kluczowych elementow,
-  - minimum 260 px od dolu dla kluczowych elementow i CTA.
-- temat reels zawsze ma dotyczyc ostatnio opublikowanego artykulu (zgodnosc slug i tytulu),
-- po pytaniu o dominante kolorystyczna dopuszczaj dynamiczny sklad tekstu (nie tylko punkty): podkreslenia, boldy, kolorowe akcenty i tekst wkomponowany w obraz,
-- hook moze byc dluzszy, jesli jest mocny i czytelny,
-- slajdy 2-4 moga prowadzic jeden przekaz rozwijany przez 3 slajdy albo 3 osobne mikro-przekazy,
-- ikony projektuj jako autorskie i spojne dla serii,
-- dodatkowe ciekawostki/fakty wolno dodawac tylko po weryfikacji; brak tolerancji dla niesprawdzonych claimow,
-- na slajdzie CTA mozna dodac jedna glowna etykiete zrodla (nazwa), jesli uzyto ciekawostki/faktu,
-- przed oddaniem reels obowiazkowy QA: literowki, kontrast, safe area, kolejnosc 1-5, nazwy plikow, zgodnosc z ostatnim artykulem.
-- reels/karuzele nie sa artefaktem repo: po poprawnym zapisie do `/Users/grzegorzkupiec/Downloads/Reels/` i `/Users/grzegorzkupiec/Downloads/Karuzela/` nie tworz dodatkowych artefaktow w repo.
 
 Modul NEWS:
 - traktuj `MEMORY_NEWSY.md` jako zrodlo zasad,

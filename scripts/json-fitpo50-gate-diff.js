@@ -46,6 +46,10 @@ function countWords(text) {
   return m ? m.length : 0;
 }
 
+function isQuestionHeading(text) {
+  return String(text || '').trim().endsWith('?');
+}
+
 function checkNoLocalHtmlLinks(value, label) {
   const rx = /href\s*=\s*"([^"]+)"/gi;
   const text = String(value || '');
@@ -91,10 +95,21 @@ function validateFile(file) {
     errors.push(`${file}: key_takeaways musi mieć dokładnie 4 elementy (jest ${keyTakeaways.length}).`);
   }
 
+  const quickAnswer = String(json.quick_answer || json.quickAnswer || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const quickAnswerWords = countWords(quickAnswer);
+  if (!quickAnswer) {
+    errors.push(`${file}: brak quick_answer (wymagane 40-60 słów).`);
+  } else if (quickAnswerWords < 40 || quickAnswerWords > 60) {
+    errors.push(`${file}: quick_answer poza limitem 40-60 słów (jest ${quickAnswerWords}).`);
+  }
+
   const sections = Array.isArray(json.sections) ? json.sections : [];
   if (sections.length < 6) errors.push(`${file}: sections musi mieć minimum 6 elementów (jest ${sections.length}).`);
   for (let i = 0; i < sections.length; i += 1) {
     const s = sections[i] || {};
+    if (!isQuestionHeading(String(s.title || s.heading || '').trim())) {
+      errors.push(`${file}: sections[${i}].title musi być pytaniem zakończonym "?".`);
+    }
     const paragraphs = Array.isArray(s.paragraphs_html) ? s.paragraphs_html : [];
     if (paragraphs.length < 2) {
       errors.push(`${file}: sections[${i}] ma mniej niż 2 akapity.`);

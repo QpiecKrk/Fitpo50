@@ -36,6 +36,10 @@ function wordCount(text) {
   return m ? m.length : 0;
 }
 
+function isQuestionHeading(text) {
+  return String(text || '').trim().endsWith('?');
+}
+
 function findSourceImage(baseName, assetsDir) {
   const cleanBase = String(baseName || '')
     .trim()
@@ -145,7 +149,17 @@ function main() {
   }
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
+  const quickAnswer = stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
+  const quickAnswerWords = wordCount(quickAnswer);
+  if (!quickAnswer) {
+    errors.push('Brak quick_answer (wymagane 40-60 słów).');
+  } else if (quickAnswerWords < 40 || quickAnswerWords > 60) {
+    errors.push(`quick_answer poza zakresem 40-60 słów (jest ${quickAnswerWords}).`);
+  }
   sections.forEach((section, idx) => {
+    if (!isQuestionHeading(String(section.title || section.heading || '').trim())) {
+      errors.push(`sections[${idx + 1}].title musi być pytaniem zakończonym "?".`);
+    }
     const p = Array.isArray(section.paragraphs_html) ? section.paragraphs_html[0] || '' : '';
     const wc = wordCount(stripTags(p));
     if (wc < 35 || wc > 80) {
