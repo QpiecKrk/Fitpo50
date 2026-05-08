@@ -30,7 +30,14 @@ npm run gsc:weekly:api
 
 Wymagane zmienne srodowiskowe / sekrety:
 - `GSC_SITE_URL` - np. `sc-domain:fitpo50.pl` lub `https://fitpo50.pl/`
+
+Tryb A (service account):
 - `GSC_SERVICE_ACCOUNT_JSON_B64` - caly JSON klucza service account zakodowany base64
+
+Tryb B (OAuth refresh token, gdy GSC nie przyjmuje service account):
+- `GSC_OAUTH_CLIENT_ID`
+- `GSC_OAUTH_CLIENT_SECRET`
+- `GSC_OAUTH_REFRESH_TOKEN`
 
 W GitHub Actions:
 - workflow: `.github/workflows/gsc-weekly-reminder.yml`
@@ -38,4 +45,5 @@ W GitHub Actions:
 - output: aktualizacja issue `SEO/AEO: Poniedzialkowy raport GSC`
 
 Wazne:
-- service account musi byc dodany w Google Search Console jako uzytkownik z uprawnieniem `Read`.
+- dla Trybu A: service account musi byc dodany w Google Search Console jako uzytkownik z uprawnieniem `Read`.
+- dla Trybu B: konto Google, ktore wygenerowalo refresh token, musi miec co najmniej `Read` w GSC.

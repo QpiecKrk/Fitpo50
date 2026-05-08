@@ -53,6 +53,14 @@ function parseServiceAccountFromEnv() {
   }
 }
 
+function parseOauthRefreshFromEnv() {
+  const clientId = String(process.env.GSC_OAUTH_CLIENT_ID || '').trim();
+  const clientSecret = String(process.env.GSC_OAUTH_CLIENT_SECRET || '').trim();
+  const refreshToken = String(process.env.GSC_OAUTH_REFRESH_TOKEN || '').trim();
+  if (!clientId || !clientSecret || !refreshToken) return null;
+  return { clientId, clientSecret, refreshToken };
+}
+
 function dateIso(dayOffset) {
   const d = new Date();
   d.setUTCHours(0, 0, 0, 0);
@@ -112,6 +120,26 @@ async function getAccessToken(sa) {
   if (!res.ok || !json.access_token) {
     const msg = json.error_description || json.error || JSON.stringify(json);
     throw new Error(`OAuth token error: ${msg}`);
+  }
+  return json.access_token;
+}
+
+async function getAccessTokenByRefreshToken(oauth) {
+  const body = new URLSearchParams({
+    client_id: oauth.clientId,
+    client_secret: oauth.clientSecret,
+    refresh_token: oauth.refreshToken,
+    grant_type: 'refresh_token',
+  });
+  const res = await fetch(TOKEN_URL, {
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    body,
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || !json.access_token) {
+    const msg = json.error_description || json.error || JSON.stringify(json);
+    throw new Error(`OAuth refresh token error: ${msg}`);
   }
   return json.access_token;
 }
@@ -185,9 +213,10 @@ function writeReport(report, outputJson, outputMd) {
 
   if (report.status !== 'ok') {
     lines.push('## Brak konfiguracji API');
-    lines.push('- Ustaw secret `GSC_SERVICE_ACCOUNT_JSON_B64` (service account JSON w base64).');
-    lines.push('- Ustaw secret `GSC_SITE_URL` (np. `sc-domain:fitpo50.pl` lub `https://fitpo50.pl/`).');
-    lines.push('- Dodaj service account jako użytkownika z uprawnieniem Read w Google Search Console.');
+    lines.push('- Ustaw `GSC_SITE_URL` (np. `sc-domain:fitpo50.pl` lub `https://fitpo50.pl/`).');
+    lines.push('- Tryb 1 (service account): `GSC_SERVICE_ACCOUNT_JSON_B64`.');
+    lines.push('- Tryb 2 (OAuth refresh token): `GSC_OAUTH_CLIENT_ID`, `GSC_OAUTH_CLIENT_SECRET`, `GSC_OAUTH_REFRESH_TOKEN`.');
+    lines.push('- Wymagane uprawnienie w GSC: konto użyte do odczytu musi mieć minimum Read.');
   } else {
     lines.push('## Zakres dat');
     lines.push(`- Bieżący: ${report.ranges.current.start} -> ${report.ranges.current.end}`);
@@ -254,7 +283,7 @@ function emptyReport(property) {
       page_opportunities: [],
     },
     weekly_plan: [
-      'Skonfiguruj GSC API secrets i uruchom workflow ponownie.',
+      'Skonfiguruj GSC API secrets (service account albo OAuth refresh token) i uruchom workflow ponownie.',
       'Po konfiguracji raport sam wygeneruje priorytety tygodnia.',
     ],
   };
@@ -273,8 +302,9 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const property = normalizeSiteUrl(process.env.GSC_SITE_URL || 'https://fitpo50.pl/');
   const sa = parseServiceAccountFromEnv();
+  const oauth = parseOauthRefreshFromEnv();
 
-  if (!sa || !property) {
+  if ((!sa && !oauth) || !property) {
     const report = emptyReport(property);
     writeReport(report, args.outputJson, args.outputMd);
     console.log('[WARN] GSC API config missing. Generated reminder report.');
@@ -284,7 +314,9 @@ async function main() {
   }
 
   const ranges = currentAndPreviousRanges();
-  const token = await getAccessToken(sa);
+  const token = sa
+    ? await getAccessToken(sa)
+    : await getAccessTokenByRefreshToken(oauth);
 
   const makeBody = (range, dimensions) => ({
     startDate: range.start,
@@ -421,4 +453,3 @@ main().catch((err) => {
   console.error(`[FAIL] gsc-weekly-api-report: ${err.message || err}`);
   process.exit(1);
 });
-
