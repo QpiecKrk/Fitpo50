@@ -217,6 +217,11 @@ function writeReport(report, outputJson, outputMd) {
     lines.push('- Tryb 1 (service account): `GSC_SERVICE_ACCOUNT_JSON_B64`.');
     lines.push('- Tryb 2 (OAuth refresh token): `GSC_OAUTH_CLIENT_ID`, `GSC_OAUTH_CLIENT_SECRET`, `GSC_OAUTH_REFRESH_TOKEN`.');
     lines.push('- Wymagane uprawnienie w GSC: konto użyte do odczytu musi mieć minimum Read.');
+    if (report.error) {
+      lines.push('');
+      lines.push('### Debug');
+      lines.push(`- ${report.error}`);
+    }
   } else {
     lines.push('## Zakres dat');
     lines.push(`- Bieżący: ${report.ranges.current.start} -> ${report.ranges.current.end}`);
@@ -314,7 +319,13 @@ function aggregateSummary(rows) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const property = normalizeSiteUrl(process.env.GSC_SITE_URL || 'https://fitpo50.pl/');
-  const sa = parseServiceAccountFromEnv();
+  let sa = null;
+  const authErrors = [];
+  try {
+    sa = parseServiceAccountFromEnv();
+  } catch (err) {
+    authErrors.push(`service_account_parse: ${err.message || err}`);
+  }
   const oauth = parseOauthRefreshFromEnv();
 
   if ((!sa && !oauth) || !property) {
@@ -454,7 +465,6 @@ async function main() {
     };
   }
 
-  const authErrors = [];
   let report = null;
   if (sa) {
     try {
