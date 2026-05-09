@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-06T12:10:03+00:00",
+    "updatedAt": "2026-05-09T09:49:25+00:00",
     "items": [
+        {
+            "id": "news_ec4403abe0f3",
+            "title": "Pomidory + awokado: czy naprawdę zwiększają wchłanianie likopenu?",
+            "content_html": "<p><span>To <span class=\"news-text-tone--4\">viralowe hasło</span> ma sens, ale wymaga doprecyzowania. <span class=\"news-text-tone--4\">Likopen</span>, czyli czerwony barwnik obecny m.in. w pomidorach, należy do <span class=\"news-text-tone--1\">karotenoidów</span>. Jest związkiem rozpuszczalnym w tłuszczach, więc <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">organizm</a> lepiej go wchłania, gdy w posiłku pojawi się źródło tłuszczu — na przykład <strong>awokado, oliwa albo orzechy</strong>.</span></p><p><span>Najczęściej cytowane badanie pochodzi z 2005 roku. Sprawdzano w nim, jak dodanie <span class=\"news-text-tone--3\">awokado do salsy pomidorowej</span> wpływa na wchłanianie karotenoidów u ludzi. Wynik: dodanie awokado zwiększyło wchłanianie <span class=\"news-text-tone--2\">likopenu</span> </span><span><strong><span></span><span>4,4 raza</span></strong>, czyli mniej więcej o </span><span><strong><span></span><span>440%</span></strong>, oraz beta-karotenu </span><span><strong><span></span><span>2,6 raza</span></strong>. Czyli liczba z grafiki nie jest wzięta z sufitu.  </span><br><span></span></p><p><span>Ale jest haczyk. To było małe badanie żywieniowe, a nie dowód, że <a href=\"upf-jedzenie-ultra-przetworzone-uzaleznienie.html\">jedzenie</a> pomidorów z awokado „</span><span class=\"news-text-tone--4\">zwalcza raka</span><span>”. </span><strong>Likopen</strong><span> ma właściwości antyoksydacyjne i jest badany pod kątem zdrowia serca, skóry i profilaktyki </span><span class=\"news-text-tone--3\">chorób przewlekłych</span><span>, ale sama większa absorpcja nie oznacza automatycznie mniejszego ryzyka nowotworu. To częsty internetowy skrót: prawdziwy mechanizm, za mocny wniosek.</span><br><span></span></p><p><span>Warto też pamiętać, że </span><span class=\"news-text-tone--1\">likopen</span><span> często lepiej przyswaja się z przetworzonych pomidorów, np. sosu, passaty czy przecieru, zwłaszcza gdy są podane z </span><span class=\"news-text-tone--1\">tłuszczem</span><span>. Surowy pomidor z awokado też ma sens, ale </span><span class=\"news-text-tone--1\">sos pomidorowy</span><span> z oliwą może być równie dobrym, a czasem lepszym rozwiązaniem.</span><br><span></span></p><p><strong><span>P</span><span>omidory z awokado to dobre połączenie. Nie dlatego, że jest magiczne, tylko dlatego, że tłuszcz pomaga wchłaniać karotenoidy. Jedz spokojnie — tylko bez bajki, że jedna sałatka robi za onkologa.</span></strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260502_110840_fa74589b.avif",
+                "webp": "./assets/news/news_20260502_110840_fa74589b.webp",
+                "jpg": "./assets/news/news_20260502_110840_fa74589b.jpg",
+                "alt": "Avocado i pomidory",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Carotenoid absorption from salad and salsa by humans is enhanced by the addition of avocado or avocado oil",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/15735074/"
+                },
+                {
+                    "label": "Journal of Nutrition / ScienceDirect — Carotenoid Absorption from Salad and Salsa by Humans…",
+                    "url": "https://www.sciencedirect.com/science/article/pii/S0022316622100763"
+                }
+            ],
+            "updated_at": "2026-05-09T09:49:25+00:00",
+            "published_at": "2026-05-09T09:49:25+00:00",
+            "excerpt": "To viralowe hasło ma sens, ale wymaga doprecyzowania. Likopen, czyli czerwony barwnik obecny m.in. w pomidorach, należy do karotenoidów. Jest związkiem rozpuszczalnym w tłuszczach, więc organizm lepiej go wchłania, gdy…"
+        },
         {
             "id": "news_5ddd305c596f",
             "title": "Zastrzyk na tłuszcz z brzucha? Brzmi efektownie, ale spokojnie. To nie rewolucja",

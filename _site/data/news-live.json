@@ -1,7 +1,29 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-06T12:10:03+00:00",
+    "updatedAt": "2026-05-09T09:49:25+00:00",
     "items": [
+        {
+            "id": "news_f112777e9931",
+            "title": "Siła to nie tylko większe mięśnie. Układ nerwowy też robi ważny",
+            "content_html": "<p><span>To prawda: </span><span><strong><span></span><span>siła nie zależy wyłącznie od rozmiaru mięśni</span></strong>. Dużą rolę odgrywa układ nerwowy, czyli to, jak skutecznie mózg i rdzeń kręgowy potrafią „<span class=\"news-text-tone--4\">włączyć</span>” mięśnie do pracy. Dlatego dwie osoby o podobnej masie mięśniowej mogą mieć zupełnie inną siłę, technikę i dynamikę ruchu.</span></p><p><span>W </span><strong>treningu siłowym</strong><span> <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">organizm</a> uczy się lepiej rekrutować jednostki motoryczne, czyli grupy włókien mięśniowych sterowane przez nerwy. Poprawia się też </span><span class=\"news-text-tone--4\">częstotliwość pobudzeń nerwowych</span><span>, koordynacja między mięśniami oraz tempo generowania siły. To szczególnie ważne na początku treningu, kiedy </span><span class=\"news-text-tone--4\">siła</span><span> często rośnie szybciej niż widoczna masa mięśniowa. Badania pokazują, że </span><strong><a href=\"syndrom-pierwszego-poniedzialku.html\">pierwsze</a> przyrosty siły</strong><span> są w dużej mierze związane właśnie z adaptacjami nerwowymi. </span><span> </span><br><span></span></p><p><span>To dlatego ciężkie serie, ćwiczenia eksplozywne i regularne powtarzanie techniki mogą </span><span class=\"news-text-tone--2\">poprawiać</span><span> wynik nawet bez dużej hipertrofii. Ciało staje się po prostu sprawniejsze w używaniu tego, co już ma. Nie chodzi tylko o „</span><span class=\"news-text-tone--1\">większy biceps</span><span>”, ale o lepszy sygnał z układu nerwowego, </span><strong>lepszą synchronizację</strong><span> i mniejsze marnowanie energii w ruchu. </span><span> </span><br><span></span></p><p><span>W praktyce dla osoby po 50-tce to dobra wiadomość. </span><strong>Nie trzeba od razu budować ogromnych mięśni</strong><span>, żeby realnie poprawić siłę. Regularny trening siłowy, poprawna technika, spokojna progresja obciążenia i ćwiczenia uczące kontroli ruchu mogą szybko przełożyć się na </span><span class=\"news-text-tone--1\">sprawniejsze wstawanie, noszenie zakupów, stabilniejszy chód i mniejsze ryzyko upadków</span><span>.</span><br><span></span></p><p><strong><span>M</span><span>ięśnie są silnikiem, ale układ nerwowy jest kierowcą. Jeśli kierowca śpi, nawet duży silnik jedzie jak maluch pod górkę.</span></strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260509_094919_3f15acd7",
+            "image_alt": "Siła i system nerwowy",
+            "sources": [
+                {
+                    "label": "Del Vecchio et al., “The increase in muscle force after 4 weeks of strength training…”",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/"
+                },
+                {
+                    "label": "Gabriel et al., “Neural adaptations to resistive exercise: mechanisms and recommendations for training practices”",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/16464122/"
+                }
+            ],
+            "created_at": "2026-05-09T09:49:19+00:00",
+            "updated_at": "2026-05-09T09:49:19+00:00",
+            "published_at": ""
+        },
         {
             "id": "news_566a85ef707f",
             "title": "„Zastrzyk z tlenem”, który pozwala żyć bez oddychania?",
@@ -72,7 +94,7 @@
             "id": "news_ec4403abe0f3",
             "title": "Pomidory + awokado: czy naprawdę zwiększają wchłanianie likopenu?",
             "content_html": "<p><span>To <span class=\"news-text-tone--4\">viralowe hasło</span> ma sens, ale wymaga doprecyzowania. <span class=\"news-text-tone--4\">Likopen</span>, czyli czerwony barwnik obecny m.in. w pomidorach, należy do <span class=\"news-text-tone--1\">karotenoidów</span>. Jest związkiem rozpuszczalnym w tłuszczach, więc <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">organizm</a> lepiej go wchłania, gdy w posiłku pojawi się źródło tłuszczu — na przykład <strong>awokado, oliwa albo orzechy</strong>.</span></p><p><span>Najczęściej cytowane badanie pochodzi z 2005 roku. Sprawdzano w nim, jak dodanie <span class=\"news-text-tone--3\">awokado do salsy pomidorowej</span> wpływa na wchłanianie karotenoidów u ludzi. Wynik: dodanie awokado zwiększyło wchłanianie <span class=\"news-text-tone--2\">likopenu</span> </span><span><strong><span></span><span>4,4 raza</span></strong>, czyli mniej więcej o </span><span><strong><span></span><span>440%</span></strong>, oraz beta-karotenu </span><span><strong><span></span><span>2,6 raza</span></strong>. Czyli liczba z grafiki nie jest wzięta z sufitu.  </span><br><span></span></p><p><span>Ale jest haczyk. To było małe badanie żywieniowe, a nie dowód, że <a href=\"upf-jedzenie-ultra-przetworzone-uzaleznienie.html\">jedzenie</a> pomidorów z awokado „</span><span class=\"news-text-tone--4\">zwalcza raka</span><span>”. </span><strong>Likopen</strong><span> ma właściwości antyoksydacyjne i jest badany pod kątem zdrowia serca, skóry i profilaktyki </span><span class=\"news-text-tone--3\">chorób przewlekłych</span><span>, ale sama większa absorpcja nie oznacza automatycznie mniejszego ryzyka nowotworu. To częsty internetowy skrót: prawdziwy mechanizm, za mocny wniosek.</span><br><span></span></p><p><span>Warto też pamiętać, że </span><span class=\"news-text-tone--1\">likopen</span><span> często lepiej przyswaja się z przetworzonych pomidorów, np. sosu, passaty czy przecieru, zwłaszcza gdy są podane z </span><span class=\"news-text-tone--1\">tłuszczem</span><span>. Surowy pomidor z awokado też ma sens, ale </span><span class=\"news-text-tone--1\">sos pomidorowy</span><span> z oliwą może być równie dobrym, a czasem lepszym rozwiązaniem.</span><br><span></span></p><p><strong><span>P</span><span>omidory z awokado to dobre połączenie. Nie dlatego, że jest magiczne, tylko dlatego, że tłuszcz pomaga wchłaniać karotenoidy. Jedz spokojnie — tylko bez bajki, że jedna sałatka robi za onkologa.</span></strong><br><span></span></p>",
-            "status": "draft",
+            "status": "published",
             "sort_order": 1,
             "image_base": "news_20260502_110840_fa74589b",
             "image_alt": "Avocado i pomidory",
@@ -87,8 +109,8 @@
                 }
             ],
             "created_at": "2026-05-02T11:08:40+00:00",
-            "updated_at": "2026-05-02T11:08:40+00:00",
-            "published_at": ""
+            "updated_at": "2026-05-09T09:49:25+00:00",
+            "published_at": "2026-05-09T09:49:25+00:00"
         },
         {
             "id": "news_5ddd305c596f",
