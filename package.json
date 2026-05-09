@@ -47,10 +47,11 @@
     "check:build-export": "node scripts/check-build-export.js",
     "check:build-export:fast": "node scripts/check-build-export.js --skip-broken-links",
     "check:site:fast": "npm run build && node scripts/static-smoke-check.js _site",
+    "prepush:parallel:checks": "node scripts/prepush-parallel-checks.js",
     "tmp:cleanup": "node scripts/tmp-cleanup.js",
     "tmp:cleanup:dry": "node scripts/tmp-cleanup.js --dry-run",
-    "prepush:strict": "npm run prepush:diff-guard && npm run assets:mirror:check && npm run predeploy:check && npm run news:integrity && npm run article:guard:diff && npm run schema:validate && npm run adsense:readiness && npm run json:gate:diff && npm run check:build-export && npm run tmp:cleanup",
-    "prepush:local": "npm run prepush:diff-guard && npm run assets:mirror:check && npm run predeploy:check && npm run news:integrity && npm run article:guard:diff && npm run schema:validate && npm run adsense:readiness && npm run json:gate:diff && npm run check:site:fast && npm run tmp:cleanup",
+    "prepush:strict": "npm run prepush:diff-guard && npm run prepush:parallel:checks && npm run check:build-export && npm run tmp:cleanup",
+    "prepush:local": "npm run prepush:diff-guard && npm run prepush:parallel:checks && npm run check:site:fast && npm run tmp:cleanup",
     "hooks:install": "bash scripts/install-git-hooks.sh"
   },
   "devDependencies": {
