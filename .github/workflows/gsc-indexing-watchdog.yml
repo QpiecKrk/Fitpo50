@@ -1,0 +1,105 @@
+name: GSC Indexing Watchdog
+
+on:
+  schedule:
+    - cron: "30 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  indexing_watchdog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Generate indexing watchdog report
+        env:
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+          GSC_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON_B64 }}
+          GSC_OAUTH_CLIENT_ID: ${{ secrets.GSC_OAUTH_CLIENT_ID }}
+          GSC_OAUTH_CLIENT_SECRET: ${{ secrets.GSC_OAUTH_CLIENT_SECRET }}
+          GSC_OAUTH_REFRESH_TOKEN: ${{ secrets.GSC_OAUTH_REFRESH_TOKEN }}
+        run: npm run gsc:indexing:watchdog
+
+      - name: Open/update/close indexing alert issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const title = 'SEO/AEO: Alert indeksacji >72h (auto)';
+            const label = 'seo-indexing-alert';
+            const reportJsonPath = 'data/reports/gsc-indexing-watchdog.json';
+            const reportMdPath = 'data/reports/gsc-indexing-watchdog.md';
+
+            let report = null;
+            if (fs.existsSync(reportJsonPath)) {
+              report = JSON.parse(fs.readFileSync(reportJsonPath, 'utf8'));
+            }
+            const body = fs.existsSync(reportMdPath)
+              ? fs.readFileSync(reportMdPath, 'utf8')
+              : '# GSC Indexing Watchdog\n\nBrak raportu MD.';
+
+            const labelsResp = await github.rest.issues.listLabelsForRepo({ owner, repo, per_page: 100 });
+            const hasLabel = labelsResp.data.some((l) => l.name === label);
+            if (!hasLabel) {
+              await github.rest.issues.createLabel({
+                owner,
+                repo,
+                name: label,
+                color: 'B60205',
+                description: 'Alert: URL bez crawla >72h od publikacji',
+              });
+            }
+
+            const openIssues = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'open',
+              labels: label,
+              per_page: 50,
+            });
+            const existing = openIssues.data.find((i) => i.title === title);
+            const alertCount = Number(report?.pending_older_72h || 0);
+
+            if (alertCount > 0) {
+              if (existing) {
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: existing.number,
+                  title,
+                  body,
+                  labels: [label],
+                });
+              } else {
+                await github.rest.issues.create({
+                  owner,
+                  repo,
+                  title,
+                  body,
+                  labels: [label],
+                });
+              }
+              return;
+            }
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: existing.number,
+                state: 'closed',
+                state_reason: 'completed',
+              });
+            }
+

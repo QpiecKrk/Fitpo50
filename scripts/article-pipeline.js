@@ -6,6 +6,7 @@ const fs = require('fs');
 const os = require('os');
 
 let tempWorkingCopy = '';
+const PUBLISHED_LOG_PATH = path.join(process.cwd(), 'data', 'reports', 'published-articles-log.json');
 
 function parseArgs(argv) {
   const out = {};
@@ -68,6 +69,55 @@ function runTempCleanup() {
   if (res.status !== 0) {
     console.warn('[WARN] tmp-cleanup exited with non-zero status.');
   }
+}
+
+function registerPublishedArticle(slug) {
+  const normalizedSlug = safeSlug(slug);
+  if (!normalizedSlug) return;
+  const nowIso = new Date().toISOString();
+  const url = `https://fitpo50.pl/${normalizedSlug}.html`;
+  const emptyState = {
+    version: 1,
+    updated_at: nowIso,
+    items: [],
+  };
+  let state = emptyState;
+  if (fs.existsSync(PUBLISHED_LOG_PATH)) {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(PUBLISHED_LOG_PATH, 'utf8'));
+      if (parsed && typeof parsed === 'object') {
+        state = {
+          version: 1,
+          updated_at: String(parsed.updated_at || nowIso),
+          items: Array.isArray(parsed.items) ? parsed.items : [],
+        };
+      }
+    } catch (_err) {
+      state = emptyState;
+    }
+  }
+  const bySlug = new Map();
+  for (const it of state.items) {
+    const key = safeSlug(String(it.slug || ''));
+    if (!key) continue;
+    bySlug.set(key, it);
+  }
+  const prev = bySlug.get(normalizedSlug);
+  bySlug.set(normalizedSlug, {
+    slug: normalizedSlug,
+    url,
+    first_published_at: prev?.first_published_at || nowIso,
+    last_published_at: nowIso,
+    status: 'pending',
+    last_checked_at: prev?.last_checked_at || '',
+    last_crawl_time: prev?.last_crawl_time || '',
+    notes: prev?.notes || '',
+  });
+  state.items = [...bySlug.values()].sort((a, b) => String(b.last_published_at || '').localeCompare(String(a.last_published_at || '')));
+  state.updated_at = nowIso;
+  fs.mkdirSync(path.dirname(PUBLISHED_LOG_PATH), { recursive: true });
+  fs.writeFileSync(PUBLISHED_LOG_PATH, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
+  console.log(`[INFO] Published log updated: ${path.relative(process.cwd(), PUBLISHED_LOG_PATH)}`);
 }
 
 function parseJsonWithDiagnostics(filePath) {
@@ -169,6 +219,7 @@ async function main() {
     run('NEWS integrity', 'node', ['scripts/news-integrity-check.js']);
   }
   run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
+  registerPublishedArticle(slug);
 
   console.log('\n[PASS] Article pipeline completed.');
   return { workingCopy };

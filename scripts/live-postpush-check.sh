@@ -53,4 +53,6 @@ check_contains "${BASE_URL}/ads.txt" "google.com, pub-4993821807276758, DIRECT"
 check_contains "${BASE_URL}/sitemap.xml" "https://fitpo50.pl/"
 check_contains "${BASE_URL}/porady.html" "data-article-item"
 
+node scripts/live-latest-article-check.js --base-url "${BASE_URL}"
+
 echo "Live post-push check: PASS"
