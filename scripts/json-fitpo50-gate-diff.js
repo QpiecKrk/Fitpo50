@@ -76,17 +76,65 @@ function isQuestionHeading(text) {
   return String(text || '').trim().endsWith('?');
 }
 
-function checkNoLocalHtmlLinks(value, label) {
+function normalizeLocalHtmlHref(href) {
+  const raw = String(href || '').trim();
+  if (!raw) return '';
+  if (/^https?:\/\/(www\.)?fitpo50\.pl\//i.test(raw)) {
+    return raw
+      .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
+      .replace(/^[./]+/, '')
+      .replace(/[?#].*$/, '');
+  }
+  return raw.replace(/^[./]+/, '').replace(/[?#].*$/, '');
+}
+
+function checkInternalHtmlLinks(value, label) {
   const rx = /href\s*=\s*"([^"]+)"/gi;
   const text = String(value || '');
   for (const m of text.matchAll(rx)) {
     const href = String(m[1] || '').trim();
     if (!href) continue;
-    if (/^(https?:|mailto:|tel:|#|javascript:)/i.test(href)) continue;
-    if (/\.html(?:[?#].*)?$/i.test(href)) {
-      errors.push(`${label}: wykryto lokalny link *.html (${href})`);
+    const isAbsInternal = /^https?:\/\/(www\.)?fitpo50\.pl\/[^"\s]+\.html(?:[?#].*)?$/i.test(href);
+    const isRelInternal = !/^(https?:|mailto:|tel:|#|javascript:)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
+    if (!isAbsInternal && !isRelInternal) continue;
+    const local = normalizeLocalHtmlHref(href);
+    const target = local ? local : href;
+    if (!fs.existsSync(target)) {
+      errors.push(`${label}: link wewnętrzny wskazuje na nieistniejący plik (${href}).`);
     }
   }
+}
+
+function countInternalHtmlLinks(chunks) {
+  const unique = new Set();
+  const rx = /href\s*=\s*"([^"]+)"/gi;
+  for (const chunk of chunks) {
+    const text = String(chunk || '');
+    for (const m of text.matchAll(rx)) {
+      const href = String(m[1] || '').trim();
+      if (!href) continue;
+      const isAbsInternal = /^https?:\/\/(www\.)?fitpo50\.pl\/[^"\s]+\.html(?:[?#].*)?$/i.test(href);
+      const isRelInternal = !/^(https?:|mailto:|tel:|#|javascript:)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
+      if (!isAbsInternal && !isRelInternal) continue;
+      unique.add(normalizeLocalHtmlHref(href));
+    }
+  }
+  return unique.size;
+}
+
+function collectCodeNonAscii(chunks) {
+  const offending = [];
+  for (const chunk of chunks) {
+    const html = String(chunk || '');
+    for (const codeMatch of html.matchAll(/<code\b[^>]*>([\s\S]*?)<\/code>/gi)) {
+      const code = String(codeMatch[1] || '');
+      const bad = [...code].filter((ch) => ch.charCodeAt(0) > 127);
+      if (bad.length) {
+        offending.push([...new Set(bad)].join(''));
+      }
+    }
+  }
+  return offending;
 }
 
 function validateFile(file) {
@@ -131,6 +179,8 @@ function validateFile(file) {
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
   if (sections.length < 6) errors.push(`${file}: sections musi mieć minimum 6 elementów (jest ${sections.length}).`);
+  const sectionChunksForLinks = [];
+  const sectionChunksForCode = [];
   for (let i = 0; i < sections.length; i += 1) {
     const s = sections[i] || {};
     if (!isQuestionHeading(String(s.title || s.heading || '').trim())) {
@@ -155,19 +205,51 @@ function validateFile(file) {
       if (!String(s.image.caption || '').trim()) errors.push(`${file}: sections[${i}].image.caption puste.`);
     }
 
-    for (const p of paragraphs) checkNoLocalHtmlLinks(p, `${file}: sections[${i}].paragraphs_html`);
+    for (const p of paragraphs) {
+      checkInternalHtmlLinks(p, `${file}: sections[${i}].paragraphs_html`);
+      sectionChunksForLinks.push(p);
+      sectionChunksForCode.push(p);
+    }
+    if (s.info_box && typeof s.info_box === 'object') {
+      const infoContent = String(s.info_box.content_html || '');
+      checkInternalHtmlLinks(infoContent, `${file}: sections[${i}].info_box.content_html`);
+      sectionChunksForCode.push(infoContent);
+    }
+  }
+  const internalLinkCount = countInternalHtmlLinks(sectionChunksForLinks);
+  if (internalLinkCount < 4) {
+    errors.push(`${file}: za mało linków kontekstowych w sekcjach (${internalLinkCount}/4).`);
   }
 
   const faq = Array.isArray(json.answer_blocks) ? json.answer_blocks : [];
   if (faq.length < 4) {
-    warnings.push(`${file}: answer_blocks < 4 (uzupełni importer).`);
+    errors.push(`${file}: answer_blocks < 4 (jest ${faq.length}).`);
   }
   const faqResearch = Array.isArray(json.faq_research) ? json.faq_research : [];
   if (faqResearch.length < 4) {
     errors.push(`${file}: faq_research musi mieć minimum 4 wpisy (jest ${faqResearch.length}).`);
   }
+  const normalizeQuestion = (value) => String(value || '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const faqResearchSet = new Set(faqResearch.map((item) => normalizeQuestion(item && item.question)));
   for (let i = 0; i < faq.length; i += 1) {
-    checkNoLocalHtmlLinks(faq[i]?.answer_html || '', `${file}: answer_blocks[${i}].answer_html`);
+    const q = normalizeQuestion(faq[i] && faq[i].question);
+    if (q && !faqResearchSet.has(q)) {
+      errors.push(`${file}: FAQ #${i + 1} nie ma dopasowania 1:1 w faq_research.question.`);
+    }
+  }
+  for (let i = 0; i < faq.length; i += 1) {
+    const answerHtml = faq[i]?.answer_html || '';
+    checkInternalHtmlLinks(answerHtml, `${file}: answer_blocks[${i}].answer_html`);
+    sectionChunksForCode.push(answerHtml);
+  }
+
+  const codeOffending = collectCodeNonAscii(sectionChunksForCode);
+  if (codeOffending.length) {
+    errors.push(`${file}: w <code> wykryto znaki spoza ASCII (np. "${codeOffending[0]}"), co może wywalić generator PDF.`);
   }
 
   const sources = Array.isArray(json.sources) ? json.sources : [];

@@ -3,7 +3,14 @@
 const fs = require('fs');
 const path = require('path');
 
-const TODAY = '2026-04-27';
+function toLocalIsoDate(date = new Date()) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+const TODAY = toLocalIsoDate();
 const ALLOWED_CATEGORIES = new Set(['zdrowie', 'ciekawe', 'jedzenie', 'ruch']);
 const CATEGORY_LANDING_PAGES = new Set([
   'index.html',
@@ -25,7 +32,7 @@ const FALLBACK_SOURCES = [
 ];
 
 function parseArgs(argv) {
-  const out = { write: false, allowOutsideRepo: false };
+  const out = { write: false, allowOutsideRepo: false, check: false };
   for (let i = 0; i < argv.length; i += 1) {
     const t = argv[i];
     if (t === '--file') {
@@ -40,6 +47,11 @@ function parseArgs(argv) {
     }
     if (t === '--allow-outside-repo') {
       out.allowOutsideRepo = String(argv[i + 1] || 'true').trim().toLowerCase() !== 'false';
+      i += 1;
+      continue;
+    }
+    if (t === '--check') {
+      out.check = String(argv[i + 1] || 'true').trim().toLowerCase() !== 'false';
       i += 1;
       continue;
     }
@@ -112,20 +124,115 @@ function ensureParagraphWrapper(html) {
   return `<p>${raw}</p>`;
 }
 
-function removeLocalHtmlLinks(html) {
+function normalizeInternalHtmlLinks(html) {
   return String(html || '').replace(
     /<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi,
-    (_full, href, text) => {
+    (full, href) => {
       const h = String(href || '').trim();
-      if (/^(https?:|mailto:|tel:|#|javascript:)/i.test(h)) return _full;
-      if (/\.html(?:[?#].*)?$/i.test(h)) {
-        // JSON gate blokuje lokalne linki *.html na etapie importu.
-        // Zostawiamy sam tekst, a linki kontekstowe uzupełniamy po imporcie na finalnym HTML.
-        return String(text || '');
+      if (!h) return full;
+      if (/^https?:\/\/(www\.)?fitpo50\.pl\/[^"\s]+\.html(?:[?#].*)?$/i.test(h)) {
+        const rel = h
+          .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, './');
+        return full.replace(href, rel);
       }
-      return _full;
+      if (!/^(https?:|mailto:|tel:|#|javascript:)/i.test(h) && /\.html(?:[?#].*)?$/i.test(h) && !h.startsWith('./')) {
+        return full.replace(href, `./${h.replace(/^\//, '')}`);
+      }
+      return full;
     }
   );
+}
+
+function sanitizeCodeGlyphs(html) {
+  const map = new Map([
+    ['κ', 'kappa'],
+    ['Κ', 'Kappa'],
+    ['α', 'alpha'],
+    ['Α', 'Alpha'],
+    ['β', 'beta'],
+    ['Β', 'Beta'],
+    ['γ', 'gamma'],
+    ['Γ', 'Gamma'],
+    ['δ', 'delta'],
+    ['Δ', 'Delta'],
+    ['θ', 'theta'],
+    ['Θ', 'Theta'],
+    ['λ', 'lambda'],
+    ['Λ', 'Lambda'],
+    ['μ', 'mu'],
+    ['Μ', 'Mu'],
+    ['π', 'pi'],
+    ['Π', 'Pi'],
+    ['σ', 'sigma'],
+    ['Σ', 'Sigma'],
+    ['ω', 'omega'],
+    ['Ω', 'Omega'],
+    ['×', 'x'],
+    ['·', '.'],
+    ['−', '-'],
+    ['≤', '<='],
+    ['≥', '>='],
+    ['≈', '~'],
+    ['²', '^2'],
+    ['³', '^3'],
+  ]);
+  return String(html || '').replace(/<code\b[^>]*>([\s\S]*?)<\/code>/gi, (full, code) => {
+    let normalized = String(code || '');
+    for (const [from, to] of map.entries()) {
+      normalized = normalized.split(from).join(to);
+    }
+    return full.replace(code, normalized);
+  });
+}
+
+function patchCommonQuoteMismatches(raw) {
+  let out = String(raw || '');
+  out = out.replace(/„([^”"\n]*?)",/g, '„$1”,');
+  out = out.replace(/„([^”"\n]*?)"\./g, '„$1”.');
+  out = out.replace(/„([^”"\n]*?)";/g, '„$1”;');
+  out = out.replace(/„([^”"\n]*?)":/g, '„$1”:');
+  out = out.replace(/„([^”"\n]*?)"\)/g, '„$1”)');
+  return out;
+}
+
+function extractLikelyJsonObject(raw) {
+  const text = String(raw || '').trim();
+  if (!text) return text;
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+  const candidate = fenced ? String(fenced[1] || '').trim() : text;
+  const first = candidate.indexOf('{');
+  const last = candidate.lastIndexOf('}');
+  if (first >= 0 && last > first) {
+    return candidate.slice(first, last + 1).trim();
+  }
+  return candidate;
+}
+
+function parseJsonWithDiagnostics(raw) {
+  const stripped = extractLikelyJsonObject(raw);
+  try {
+    return { json: JSON.parse(stripped), patched: false };
+  } catch (err) {
+    const patchedRaw = patchCommonQuoteMismatches(stripped);
+    if (patchedRaw !== stripped) {
+      try {
+        return { json: JSON.parse(patchedRaw), patched: true, patchedRaw };
+      } catch (_ignore) {
+        // continue with original error diagnostics
+      }
+    }
+    const message = String(err && err.message ? err.message : err);
+    const posMatch = message.match(/position (\d+)/i);
+    if (!posMatch) {
+      throw new Error(message);
+    }
+    const pos = Number(posMatch[1]);
+    const head = stripped.slice(0, pos);
+    const line = head.split('\n').length;
+    const col = pos - head.lastIndexOf('\n');
+    const lineText = stripped.split('\n')[line - 1] || '';
+    throw new Error(`${message} (line ${line}, col ${col}): ${lineText.trim()}`);
+  }
 }
 
 
@@ -306,8 +413,14 @@ function main() {
   }
 
   let json;
+  let patchedRaw = null;
   try {
-    json = JSON.parse(fs.readFileSync(file, 'utf8'));
+    const rawText = fs.readFileSync(file, 'utf8');
+    const parsed = parseJsonWithDiagnostics(rawText);
+    json = parsed.json;
+    if (parsed.patched && parsed.patchedRaw) {
+      patchedRaw = parsed.patchedRaw;
+    }
   } catch (err) {
     console.error(`[FAIL] JSON parse error: ${err.message}`);
     process.exit(1);
@@ -373,7 +486,7 @@ function main() {
     const paragraphsRaw = Array.isArray(section.paragraphs_html)
       ? section.paragraphs_html
       : htmlToParagraphs(section.content_html || '');
-    const paragraphs = paragraphsRaw.map((p) => removeLocalHtmlLinks(ensureParagraphWrapper(p))).filter(Boolean);
+    const paragraphs = paragraphsRaw.map((p) => sanitizeCodeGlyphs(normalizeInternalHtmlLinks(ensureParagraphWrapper(p)))).filter(Boolean);
     while (paragraphs.length < 2) {
       paragraphs.push('<p>W praktyce kluczowe jest dopasowanie zaleceń do codziennego rytmu dnia i regularna kontrola efektów.</p>');
     }
@@ -390,7 +503,7 @@ function main() {
       info_box: {
         style: 'accent',
         title: stripTags(String(infoBox.title || buildInfoBoxTitle(title))).trim(),
-        content_html: removeLocalHtmlLinks(ensureParagraphWrapper(infoBox.content_html || fallbackInfoContent)),
+        content_html: sanitizeCodeGlyphs(normalizeInternalHtmlLinks(ensureParagraphWrapper(infoBox.content_html || fallbackInfoContent))),
       },
       image: {
         src: String(image.src || `./assets/${json.slug}-sekcja-${idx + 1}.webp`).trim(),
@@ -403,7 +516,7 @@ function main() {
   const faq = Array.isArray(json.answer_blocks) ? json.answer_blocks : [];
   json.answer_blocks = faq.map((f) => ({
     question: stripTags(String((f && f.question) || '')).trim(),
-    answer_html: removeLocalHtmlLinks(ensureParagraphWrapper((f && (f.answer_html || f.answer)) || '')),
+    answer_html: sanitizeCodeGlyphs(normalizeInternalHtmlLinks(ensureParagraphWrapper((f && (f.answer_html || f.answer)) || ''))),
   })).filter((f) => f.question && f.answer_html);
 
   while (json.answer_blocks.length < 4) {
@@ -515,7 +628,10 @@ function main() {
     fs.copyFileSync(file, backupPath);
     fs.writeFileSync(file, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
     console.log(`[OK] Backup zapisany: ${path.relative(repoRoot, backupPath)}`);
-  } else {
+    if (patchedRaw !== null) {
+      console.log('[OK] Zastosowano automatyczną naprawę niedomkniętych cudzysłowów w surowym JSON.');
+    }
+  } else if (!args.check) {
     process.stdout.write(`${JSON.stringify(json, null, 2)}\n`);
   }
 

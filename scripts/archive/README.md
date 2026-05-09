@@ -12,3 +12,7 @@ Aktualny pipeline publikacji opiera się na:
 - `scripts/article-preflight.js`
 - `scripts/article-pipeline.js`
 - `scripts/validate-article-standard.js`
+
+## Ostatnio zarchiwizowane
+- `standardize-articles.js` (jednorazowa standaryzacja historyczna)
+- `tune_faq_top5.mjs` (jednorazowe strojenie FAQ)

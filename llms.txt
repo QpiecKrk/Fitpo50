@@ -247,4 +247,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Jak siłownia chroni serce przed zawałem? Proste wyjaśnienie | FitPo50"
   section: "Ciekawe"
   summary: "Dowiedz się, jak trening siłowy realnie chroni Twoje serce przed zawałem. Proste wyjaśnienie procesów biologicznych, najnowsze badania i plan dla osób po"
+- url: https://fitpo50.pl/badania-krwi-po-50-jak-czesto.html
+  title: "Badania krwi po 50: co robić co 3 miesiące, a co raz w roku? | FitPo50"
+  section: "Zdrowie"
+  summary: "Które badania krwi po 50. roku życia wymagają kontroli co 3 miesiące, a które wystarczy robić raz w roku? Sprawdź konkretny harmonogram dla zdrowia 50+."
 

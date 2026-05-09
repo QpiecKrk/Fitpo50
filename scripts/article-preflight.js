@@ -67,6 +67,7 @@ function isQuestionHeading(text) {
 }
 
 function findSourceImage(baseName, assetsDir) {
+  if (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory()) return null;
   const cleanBase = String(baseName || '')
     .trim()
     .normalize('NFKC')
@@ -147,6 +148,31 @@ function countInternalLinksInSections(sections) {
   return unique.size;
 }
 
+function collectInternalLinksFromHtml(html) {
+  const out = [];
+  const rx = /<a\b[^>]*href="([^"]+)"/gi;
+  for (const m of String(html || '').matchAll(rx)) {
+    const href = String(m[1] || '').trim();
+    if (!href) continue;
+    const isAbsInternal = /^https?:\/\/(www\.)?fitpo50\.pl\/[^"\s]+\.html(?:[?#].*)?$/i.test(href);
+    const isRelInternal = !/^(https?:|mailto:|tel:|javascript:|#)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
+    if (!isAbsInternal && !isRelInternal) continue;
+    out.push(href);
+  }
+  return out;
+}
+
+function normalizeLocalHrefToPath(href) {
+  const raw = String(href || '').trim();
+  if (/^https?:\/\/(www\.)?fitpo50\.pl\//i.test(raw)) {
+    return raw
+      .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
+      .replace(/^[./]+/, '')
+      .replace(/[?#].*$/, '');
+  }
+  return raw.replace(/^[./]+/, '').replace(/[?#].*$/, '');
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const file = args.file ? path.resolve(args.file) : '';
@@ -159,6 +185,10 @@ function main() {
   const json = JSON.parse(raw);
   const errors = [];
   const warnings = [];
+
+  if (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory()) {
+    errors.push(`Nie znaleziono katalogu assets-dir: ${assetsDir}`);
+  }
 
   if (PLACEHOLDER_RX.test(raw)) {
     errors.push('Wykryto placeholder redakcyjny w JSON (np. "do doprecyzowania" / "{{...}}").');
@@ -195,7 +225,7 @@ function main() {
 
   const internalLinks = countInternalLinksInSections(sections);
   if (internalLinks < 4) {
-    warnings.push(`Za mało linków kontekstowych w sekcjach JSON: ${internalLinks}/4 (uzupełnij po imporcie w HTML).`);
+    errors.push(`Za mało linków kontekstowych w sekcjach JSON: ${internalLinks}/4 (wymagane minimum 4).`);
   }
 
   if (!Array.isArray(json.answer_blocks) || json.answer_blocks.length < 4) {
@@ -204,6 +234,54 @@ function main() {
   const faqResearch = Array.isArray(json.faq_research) ? json.faq_research : [];
   if (faqResearch.length < 4) {
     errors.push(`faq_research: wymagane >=4, jest ${faqResearch.length}.`);
+  }
+  const normalizeQuestion = (value) => String(value || '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const answerBlocks = Array.isArray(json.answer_blocks) ? json.answer_blocks : [];
+  const faqResearchSet = new Set(faqResearch.map((item) => normalizeQuestion(item && item.question)));
+  answerBlocks.forEach((item, idx) => {
+    const q = normalizeQuestion(item && item.question);
+    if (q && !faqResearchSet.has(q)) {
+      errors.push(`FAQ #${idx + 1}: pytanie nie ma dopasowania 1:1 w faq_research.question.`);
+    }
+  });
+
+  const htmlChunks = [];
+  sections.forEach((section) => {
+    const arr = Array.isArray(section.paragraphs_html) ? section.paragraphs_html : [];
+    htmlChunks.push(...arr);
+    if (section.info_box && typeof section.info_box === 'object') {
+      htmlChunks.push(String(section.info_box.content_html || ''));
+    }
+  });
+  answerBlocks.forEach((item) => htmlChunks.push(String(item?.answer_html || '')));
+
+  const missingLinks = [];
+  htmlChunks.forEach((chunk) => {
+    for (const href of collectInternalLinksFromHtml(chunk)) {
+      const localPath = normalizeLocalHrefToPath(href);
+      if (!localPath) continue;
+      if (!fs.existsSync(localPath)) {
+        missingLinks.push(href);
+      }
+    }
+  });
+  if (missingLinks.length) {
+    errors.push(`Wykryto nieistniejące linki wewnętrzne: ${[...new Set(missingLinks)].slice(0, 6).join(', ')}`);
+  }
+
+  for (const chunk of htmlChunks) {
+    for (const codeMatch of String(chunk || '').matchAll(/<code\b[^>]*>([\s\S]*?)<\/code>/gi)) {
+      const code = String(codeMatch[1] || '');
+      const bad = [...code].filter((ch) => ch.charCodeAt(0) > 127);
+      if (bad.length) {
+        errors.push(`W <code> wykryto znaki spoza ASCII ("${[...new Set(bad)].join('')}"), co blokuje generator PDF.`);
+        break;
+      }
+    }
   }
   const repeatedSentences = collectRepeatedLongSentences([
     json.lead || '',

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { spawnSync } = require('child_process');
+const { spawnSync, spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -41,12 +41,51 @@ function run(label, cmd, args) {
   }
 }
 
-function detectSlug(jsonPath) {
-  const raw = fs.readFileSync(jsonPath, 'utf8');
-  const parsed = JSON.parse(raw);
-  const slug = String(parsed.slug || '').trim();
-  if (!slug) throw new Error('Brak slug w JSON.');
-  return slug;
+function runParallel(label, jobs) {
+  console.log(`\n[STEP] ${label}`);
+  jobs.forEach((job) => {
+    console.log(`$ ${job.cmd} ${job.args.join(' ')}`);
+  });
+  return Promise.all(
+    jobs.map((job) => new Promise((resolve, reject) => {
+      const child = spawn(job.cmd, job.args, { stdio: 'inherit' });
+      child.on('error', (err) => {
+        reject(new Error(`${job.label} failed to start: ${err.message || err}`));
+      });
+      child.on('exit', (code) => {
+        if (code !== 0) {
+          reject(new Error(`${job.label} failed (exit ${code ?? 'unknown'})`));
+          return;
+        }
+        resolve();
+      });
+    })),
+  );
+}
+
+function parseJsonWithDiagnostics(filePath) {
+  const raw = fs.readFileSync(filePath, 'utf8');
+  try {
+    return JSON.parse(raw);
+  } catch (err) {
+    const message = String(err && err.message ? err.message : err);
+    const posMatch = message.match(/position (\d+)/i);
+    if (!posMatch) throw new Error(`JSON parse error: ${message}`);
+    const pos = Number(posMatch[1]);
+    const head = raw.slice(0, pos);
+    const line = head.split('\n').length;
+    const col = pos - head.lastIndexOf('\n');
+    const lineText = raw.split('\n')[line - 1] || '';
+    throw new Error(`JSON parse error: ${message} (line ${line}, col ${col}): ${lineText.trim()}`);
+  }
+}
+
+function detectSlug(parsed, inputPath) {
+  const fromJson = parsed && typeof parsed === 'object' ? String(parsed.slug || '').trim() : '';
+  if (fromJson) return fromJson;
+  const fallback = path.basename(inputPath).replace(/\.fitpo50\.json$/i, '').replace(/\.json$/i, '');
+  if (!fallback) throw new Error('Brak slug w JSON i brak nazwy pliku do fallbacku.');
+  return fallback;
 }
 
 function safeSlug(value) {
@@ -67,7 +106,7 @@ function ensureImportCopy(sourcePath, slug) {
   return target;
 }
 
-function main() {
+async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
     console.log('Usage: node scripts/article-pipeline.js --file <path.fitpo50.json> [--category ciekawe] [--force true]');
@@ -77,11 +116,13 @@ function main() {
   const root = process.cwd();
   const input = path.resolve(root, args.file);
   if (!fs.existsSync(input)) throw new Error(`Nie znaleziono pliku: ${input}`);
+  const parsedInput = parseJsonWithDiagnostics(input);
 
   const category = args.category ? String(args.category) : '';
   const force = boolOpt(args.force, true);
+  const parallelTails = boolOpt(args['parallel-tails'], true);
   const assetsDir = args['assets-dir'] ? path.resolve(root, args['assets-dir']) : path.dirname(input);
-  const slug = detectSlug(input);
+  const slug = detectSlug(parsedInput, input);
   const workingCopy = ensureImportCopy(input, slug);
   tempWorkingCopy = workingCopy;
   console.log(`[INFO] Source JSON: ${input}`);
@@ -91,10 +132,11 @@ function main() {
   const common = ['scripts/import-article.js', '--file', workingCopy, '--faq-strict', 'true'];
   if (category) common.push('--category', category);
 
+  run('Raw JSON parse gate (input)', 'node', ['scripts/fix-fitpo50-json.js', '--file', input, '--write', 'false', '--check', 'true', '--allow-outside-repo', 'true']);
   run('JSON auto-fix (working copy)', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingCopy, '--write', 'true', '--allow-outside-repo', 'true']);
+  run('JSON gate (single file)', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
   run('Article preflight (working copy)', 'node', ['scripts/article-preflight.js', '--file', workingCopy, '--assets-dir', assetsDir]);
   run('Prepare article assets (hero + sekcje)', 'node', ['scripts/prepare-article-assets.js', '--file', workingCopy, '--from', assetsDir]);
-  run('JSON gate (single file)', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
   run('Precheck (strict FAQ)', 'node', [...common, '--precheck', 'true']);
   run(
     'Import + walidacja + PDF + sync',
@@ -107,36 +149,45 @@ function main() {
       '--force', force ? 'true' : 'false',
     ],
   );
-  run('Lint editorial placeholders (source HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--slug', slug]);
-  run('Lint editorial placeholders (_site HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)]);
   run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug]);
-  run('NEWS integrity', 'node', ['scripts/news-integrity-check.js']);
+  if (parallelTails) {
+    await runParallel('Post-import parallel checks', [
+      { label: 'Lint editorial placeholders (source HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--slug', slug] },
+      { label: 'Lint editorial placeholders (_site HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)] },
+      { label: 'NEWS integrity', cmd: 'node', args: ['scripts/news-integrity-check.js'] },
+    ]);
+  } else {
+    run('Lint editorial placeholders (source HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--slug', slug]);
+    run('Lint editorial placeholders (_site HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)]);
+    run('NEWS integrity', 'node', ['scripts/news-integrity-check.js']);
+  }
   run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
 
   console.log('\n[PASS] Article pipeline completed.');
   return { workingCopy };
 }
 
-try {
-  const result = main();
-  tempWorkingCopy = result?.workingCopy || '';
-  if (tempWorkingCopy) {
-    try {
-      fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });
-      console.log('[CLEANUP] Removed temporary working JSON directory.');
-    } catch (_err) {
-      console.warn('[WARN] Could not remove temporary working JSON directory.');
+main()
+  .then((result) => {
+    tempWorkingCopy = result?.workingCopy || '';
+    if (tempWorkingCopy) {
+      try {
+        fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });
+        console.log('[CLEANUP] Removed temporary working JSON directory.');
+      } catch (_err) {
+        console.warn('[WARN] Could not remove temporary working JSON directory.');
+      }
     }
-  }
-} catch (err) {
-  console.error(`\n[FAIL] ${err.message || err}`);
-  if (tempWorkingCopy) {
-    try {
-      fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });
-      console.log('[CLEANUP] Removed temporary working JSON directory after failure.');
-    } catch (_err) {
-      // no-op
+  })
+  .catch((err) => {
+    console.error(`\n[FAIL] ${err.message || err}`);
+    if (tempWorkingCopy) {
+      try {
+        fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });
+        console.log('[CLEANUP] Removed temporary working JSON directory after failure.');
+      } catch (_err) {
+        // no-op
+      }
     }
-  }
-  process.exit(1);
-}
+    process.exit(1);
+  });
