@@ -1,6 +1,10 @@
 name: Broken Links Nightly
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/broken-links-nightly.yml
   workflow_dispatch:
   schedule:
     - cron: "0 1 * * *"
