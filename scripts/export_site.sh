@@ -72,19 +72,19 @@ run_minification() {
 echo "Uruchamiam walidację SEO hardening (Sprint 1)..."
 (
   cd "$ROOT_DIR"
-  "$NODE_BIN" scripts/check_sprint1_hardening.mjs
+  "$NODE_BIN" scripts/archive/check_sprint1_hardening.mjs
 )
 
 echo "Uruchamiam walidację AEO/GEO hardening (Sprint 2)..."
 (
   cd "$ROOT_DIR"
-  "$NODE_BIN" scripts/check_sprint2_aeo_geo.mjs
+  "$NODE_BIN" scripts/archive/check_sprint2_aeo_geo.mjs
 )
 
 echo "Uruchamiam walidację AIO/GEO hardening (Sprint 3)..."
 (
   cd "$ROOT_DIR"
-  "$NODE_BIN" scripts/check_sprint3_aio_geo.mjs
+  "$NODE_BIN" scripts/archive/check_sprint3_aio_geo.mjs
 )
 
 rm -rf "$OUTPUT_DIR"
