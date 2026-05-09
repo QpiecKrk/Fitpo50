@@ -4,14 +4,17 @@ set -euo pipefail
 BASE_URL="${1:-https://fitpo50.pl}"
 RETRIES="${RETRIES:-4}"
 DELAY="${DELAY:-2}"
-TIMEOUT="${TIMEOUT:-20}"
+TIMEOUT="${TIMEOUT:-30}"
+# GitHub-hosted runners miewają problemy z trasą IPv6 do hostingu.
+# Domyślnie wymuszamy IPv4, ale można nadpisać envem: CURL_IP_MODE=""
+CURL_IP_MODE="${CURL_IP_MODE:---ipv4}"
 
 echo "Live post-push check: ${BASE_URL}"
 
 check_200() {
   local url="$1"
   local code
-  code="$(curl -sS --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors -o /dev/null -w "%{http_code}" "$url")"
+  code="$(curl -sS $CURL_IP_MODE --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors -o /dev/null -w "%{http_code}" "$url")"
   if [[ "$code" != "200" ]]; then
     echo "[FAIL] ${url} -> HTTP ${code}"
     return 1
@@ -26,7 +29,7 @@ check_contains() {
   local attempt
   local body
   for attempt in $(seq 1 $((RETRIES + 1))); do
-    body="$(curl -sSL --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors "$url" || true)"
+    body="$(curl -sSL $CURL_IP_MODE --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors "$url" || true)"
     if grep -q "$needle" <<<"$body"; then
       ok="1"
       break
