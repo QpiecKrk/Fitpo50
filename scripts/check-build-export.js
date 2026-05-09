@@ -32,7 +32,7 @@ function main() {
   const args = parseArgs(process.argv.slice(2));
   const exportDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-export-check-'));
   try {
-    run('TypeScript build', 'npm', ['run', 'build']);
+    run('Strict build (typecheck + esbuild)', 'npm', ['run', 'build:strict']);
     run('Static export', 'bash', ['./scripts/export_site.sh', exportDir], {
       env: { ...process.env, SKIP_TS_BUILD: '1' },
     });

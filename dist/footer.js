@@ -1,11 +1,12 @@
 "use strict";
 (() => {
-    const styleId = 'fitpo50-unified-footer-style';
-    const footerId = 'fitpo50-unified-footer';
+  (() => {
+    const styleId = "fitpo50-unified-footer-style";
+    const footerId = "fitpo50-unified-footer";
     if (!document.getElementById(styleId)) {
-        const style = document.createElement('style');
-        style.id = styleId;
-        style.textContent = `
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.textContent = `
       :root {
         --fp-footer-bg: #262f41;
         --fp-footer-bg-2: #202837;
@@ -168,31 +169,29 @@
         }
       }
     `;
-        document.head.appendChild(style);
+      document.head.appendChild(style);
     }
-    const oldFooters = Array.from(document.querySelectorAll('footer'));
-    oldFooters.forEach((footer) => footer.remove());
-    // Normalize top navigation spacing to match index.html exactly.
-    document.querySelectorAll('.menu').forEach((menu) => {
-        menu.style.padding = '0 16px';
-        menu.style.gap = '18px';
-        menu.style.fontWeight = '600';
-        menu.style.whiteSpace = 'nowrap';
-        menu.style.letterSpacing = 'normal';
-        menu.style.wordSpacing = 'normal';
-        menu.style.fontKerning = 'normal';
+    const oldFooters = Array.from(document.querySelectorAll("footer"));
+    oldFooters.forEach((footer2) => footer2.remove());
+    document.querySelectorAll(".menu").forEach((menu) => {
+      menu.style.padding = "0 16px";
+      menu.style.gap = "18px";
+      menu.style.fontWeight = "600";
+      menu.style.whiteSpace = "nowrap";
+      menu.style.letterSpacing = "normal";
+      menu.style.wordSpacing = "normal";
+      menu.style.fontKerning = "normal";
     });
-    document.querySelectorAll('.menu a').forEach((link) => {
-        link.style.padding = '6px 2px';
-        link.style.letterSpacing = 'normal';
-        link.style.wordSpacing = 'normal';
-        link.style.fontKerning = 'normal';
+    document.querySelectorAll(".menu a").forEach((link) => {
+      link.style.padding = "6px 2px";
+      link.style.letterSpacing = "normal";
+      link.style.wordSpacing = "normal";
+      link.style.fontKerning = "normal";
     });
-    if (document.getElementById(footerId))
-        return;
-    const footer = document.createElement('footer');
+    if (document.getElementById(footerId)) return;
+    const footer = document.createElement("footer");
     footer.id = footerId;
-    footer.className = 'site-footer-bento';
+    footer.className = "site-footer-bento";
     footer.innerHTML = `
     <div class="site-footer-bento__grid">
       <section class="site-footer-bento__card" aria-label="O serwisie FitPo50">
@@ -200,7 +199,7 @@
           <img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'">
           <div>
             <h2 class="site-footer-bento__title">FitPo50.pl</h2>
-            <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej ściemy.</p>
+            <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej \u015Bciemy.</p>
           </div>
         </div>
       </section>
@@ -221,15 +220,15 @@
     </div>
 
     <div class="site-footer-bento__bottom">
-      <p class="site-footer-bento__copy">© 2026 FitPo50 | <a href="polityka-prywatnosci.html">Polityka Prywatności i Cookies</a></p>
-      <p class="site-footer-bento__note">Ważna informacja: nie jestem lekarzem. Treści na stronie mają charakter edukacyjny i informacyjny, nie zastępują konsultacji medycznej ani indywidualnych zaleceń specjalisty.</p>
+      <p class="site-footer-bento__copy">\xA9 2026 FitPo50 | <a href="polityka-prywatnosci.html">Polityka Prywatno\u015Bci i Cookies</a></p>
+      <p class="site-footer-bento__note">Wa\u017Cna informacja: nie jestem lekarzem. Tre\u015Bci na stronie maj\u0105 charakter edukacyjny i informacyjny, nie zast\u0119puj\u0105 konsultacji medycznej ani indywidualnych zalece\u0144 specjalisty.</p>
     </div>
   `;
-    const shell = document.querySelector('.shell');
+    const shell = document.querySelector(".shell");
     if (shell) {
-        shell.appendChild(footer);
+      shell.appendChild(footer);
+    } else {
+      document.body.appendChild(footer);
     }
-    else {
-        document.body.appendChild(footer);
-    }
+  })();
 })();

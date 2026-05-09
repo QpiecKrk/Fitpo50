@@ -1,25 +1,23 @@
 "use strict";
 (() => {
-    const STORAGE_KEY = 'fitpo50_cookie_consent_v1';
-    const GA_ID = 'G-S21SKTVM7K';
-    const ADS_ID = 'AW-18108612630';
+  (() => {
+    const STORAGE_KEY = "fitpo50_cookie_consent_v1";
+    const GA_ID = "G-S21SKTVM7K";
+    const ADS_ID = "AW-18108612630";
     const GA_SRC = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
     const host = window.location.hostname.toLowerCase();
-    const isLocal = (host === 'localhost' ||
-        host === '127.0.0.1' ||
-        host === '::1' ||
-        host.endsWith('.local'));
+    const isLocal = host === "localhost" || host === "127.0.0.1" || host === "::1" || host.endsWith(".local");
     if (isLocal) {
-        window[`ga-disable-${GA_ID}`] = true;
-        window[`ga-disable-${ADS_ID}`] = true;
-        console.log('FitPo50: Środowisko lokalne wykryte. Śledzenie Google Analytics zostało zablokowane.');
+      window[`ga-disable-${GA_ID}`] = true;
+      window[`ga-disable-${ADS_ID}`] = true;
+      console.log("FitPo50: \u015Arodowisko lokalne wykryte. \u015Aledzenie Google Analytics zosta\u0142o zablokowane.");
     }
     const win = window;
-    const styleId = 'fitpo50-cmp-style';
+    const styleId = "fitpo50-cmp-style";
     if (!document.getElementById(styleId)) {
-        const style = document.createElement('style');
-        style.id = styleId;
-        style.textContent = `
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.textContent = `
       :root {
         --cmp-bg: #fbf7f0;
         --cmp-border: #d7cebf;
@@ -220,176 +218,166 @@
         }
       }
     `;
-        document.head.appendChild(style);
+      document.head.appendChild(style);
     }
     const safeParse = (raw) => {
-        if (!raw)
-            return null;
-        try {
-            const parsed = JSON.parse(raw);
-            if (typeof parsed.analytics !== 'boolean' || typeof parsed.marketing !== 'boolean')
-                return null;
-            return {
-                necessary: true,
-                analytics: parsed.analytics,
-                marketing: parsed.marketing,
-                updatedAt: typeof parsed.updatedAt === 'string' ? parsed.updatedAt : ''
-            };
-        }
-        catch (_) {
-            return null;
-        }
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw);
+        if (typeof parsed.analytics !== "boolean" || typeof parsed.marketing !== "boolean") return null;
+        return {
+          necessary: true,
+          analytics: parsed.analytics,
+          marketing: parsed.marketing,
+          updatedAt: typeof parsed.updatedAt === "string" ? parsed.updatedAt : ""
+        };
+      } catch (_) {
+        return null;
+      }
     };
     let consentState = safeParse(localStorage.getItem(STORAGE_KEY));
-    const hasAnalyticsConsent = () => Boolean(consentState === null || consentState === void 0 ? void 0 : consentState.analytics);
-    const hasMarketingConsent = () => Boolean(consentState === null || consentState === void 0 ? void 0 : consentState.marketing);
+    const hasAnalyticsConsent = () => Boolean(consentState == null ? void 0 : consentState.analytics);
+    const hasMarketingConsent = () => Boolean(consentState == null ? void 0 : consentState.marketing);
     const hasAnyTagConsent = () => hasAnalyticsConsent() || hasMarketingConsent();
     const initGtagBridge = () => {
-        window.dataLayer = window.dataLayer || [];
-        if (typeof win.gtag !== 'function') {
-            win.gtag = function gtag(...args) {
-                var _a;
-                (_a = window.dataLayer) === null || _a === void 0 ? void 0 : _a.push(args);
-            };
-        }
+      window.dataLayer = window.dataLayer || [];
+      if (typeof win.gtag !== "function") {
+        win.gtag = function gtag(...args) {
+          var _a;
+          (_a = window.dataLayer) == null ? void 0 : _a.push(args);
+        };
+      }
     };
     const applyGtagConfig = () => {
-        if (typeof win.gtag !== 'function')
-            return;
-        if (hasAnalyticsConsent()) {
-            win.gtag('config', GA_ID);
-        }
-        if (hasMarketingConsent()) {
-            win.gtag('config', ADS_ID);
-        }
+      if (typeof win.gtag !== "function") return;
+      if (hasAnalyticsConsent()) {
+        win.gtag("config", GA_ID);
+      }
+      if (hasMarketingConsent()) {
+        win.gtag("config", ADS_ID);
+      }
     };
     const ensureAnalyticsLoaded = () => {
-        if (isLocal)
-            return;
-        if (!hasAnyTagConsent())
-            return;
-        initGtagBridge();
-        if (!win.__fitpo50GtagBootstrapped && typeof win.gtag === 'function') {
-            win.gtag('js', new Date());
-            win.__fitpo50GtagBootstrapped = true;
-        }
-        if (win.__fitpo50AnalyticsInjected) {
-            applyGtagConfig();
-            return;
-        }
-        win.__fitpo50AnalyticsInjected = true;
-        const existing = document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_ID}"]`);
-        if (existing) {
-            applyGtagConfig();
-            return;
-        }
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = GA_SRC;
-        script.onload = () => {
-            applyGtagConfig();
-        };
-        document.head.appendChild(script);
+      if (isLocal) return;
+      if (!hasAnyTagConsent()) return;
+      initGtagBridge();
+      if (!win.__fitpo50GtagBootstrapped && typeof win.gtag === "function") {
+        win.gtag("js", /* @__PURE__ */ new Date());
+        win.__fitpo50GtagBootstrapped = true;
+      }
+      if (win.__fitpo50AnalyticsInjected) {
+        applyGtagConfig();
+        return;
+      }
+      win.__fitpo50AnalyticsInjected = true;
+      const existing = document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_ID}"]`);
+      if (existing) {
+        applyGtagConfig();
+        return;
+      }
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = GA_SRC;
+      script.onload = () => {
+        applyGtagConfig();
+      };
+      document.head.appendChild(script);
     };
     if (!win.__fitpo50CmpPatched) {
-        win.__fitpo50CmpPatched = true;
-        const originalAppendChild = Node.prototype.appendChild;
-        Node.prototype.appendChild = function patchedAppendChild(node) {
-            if (node instanceof HTMLScriptElement &&
-                typeof node.src === 'string' &&
-                node.src.includes('googletagmanager.com/gtag/js') &&
-                (isLocal || !hasAnyTagConsent())) {
-                return node;
-            }
-            return originalAppendChild.call(this, node);
-        };
+      win.__fitpo50CmpPatched = true;
+      const originalAppendChild = Node.prototype.appendChild;
+      Node.prototype.appendChild = function patchedAppendChild(node) {
+        if (node instanceof HTMLScriptElement && typeof node.src === "string" && node.src.includes("googletagmanager.com/gtag/js") && (isLocal || !hasAnyTagConsent())) {
+          return node;
+        }
+        return originalAppendChild.call(this, node);
+      };
     }
     const persist = (state) => {
-        consentState = state;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        win.FitPo50Consent = state;
-        window.dispatchEvent(new CustomEvent('fitpo50:consent-updated', { detail: state }));
-        ensureAnalyticsLoaded();
+      consentState = state;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      win.FitPo50Consent = state;
+      window.dispatchEvent(new CustomEvent("fitpo50:consent-updated", { detail: state }));
+      ensureAnalyticsLoaded();
     };
     if (consentState) {
-        win.FitPo50Consent = consentState;
-        ensureAnalyticsLoaded();
-        return;
+      win.FitPo50Consent = consentState;
+      ensureAnalyticsLoaded();
+      return;
     }
-    const banner = document.createElement('aside');
-    banner.className = 'cmp-banner';
-    banner.setAttribute('role', 'dialog');
-    banner.setAttribute('aria-label', 'Ustawienia plików cookies');
+    const banner = document.createElement("aside");
+    banner.className = "cmp-banner";
+    banner.setAttribute("role", "dialog");
+    banner.setAttribute("aria-label", "Ustawienia plik\xF3w cookies");
     banner.innerHTML = `
     <div class="cmp-row">
-      <p class="cmp-text"><strong>Cookies</strong>: używamy ich do działania strony, analityki i treści dopasowanych do Ciebie.</p>
+      <p class="cmp-text"><strong>Cookies</strong>: u\u017Cywamy ich do dzia\u0142ania strony, analityki i tre\u015Bci dopasowanych do Ciebie.</p>
       <div class="cmp-actions">
-        <button type="button" class="cmp-btn cmp-btn--accept" data-cmp-action="accept">Akceptuję</button>
+        <button type="button" class="cmp-btn cmp-btn--accept" data-cmp-action="accept">Akceptuj\u0119</button>
         <button type="button" class="cmp-btn cmp-btn--reject" data-cmp-action="reject">Odrzucam</button>
         <button type="button" class="cmp-btn cmp-btn--settings" data-cmp-action="toggle-settings" aria-expanded="false">Ustawienia</button>
       </div>
     </div>
     <div class="cmp-panel" data-cmp-panel hidden>
       <div class="cmp-option">
-        <p class="cmp-option__label"><strong>Niezbędne</strong>Zawsze aktywne - wymagane do działania strony.</p>
-        <input class="cmp-toggle" type="checkbox" checked disabled aria-label="Niezbędne cookies">
+        <p class="cmp-option__label"><strong>Niezb\u0119dne</strong>Zawsze aktywne - wymagane do dzia\u0142ania strony.</p>
+        <input class="cmp-toggle" type="checkbox" checked disabled aria-label="Niezb\u0119dne cookies">
       </div>
       <div class="cmp-option">
-        <p class="cmp-option__label"><strong>Analityczne</strong>Pomagają mierzyć użycie strony i poprawiać wygodę.</p>
+        <p class="cmp-option__label"><strong>Analityczne</strong>Pomagaj\u0105 mierzy\u0107 u\u017Cycie strony i poprawia\u0107 wygod\u0119.</p>
         <input class="cmp-toggle" type="checkbox" data-cmp-consent="analytics" aria-label="Analityczne cookies">
       </div>
       <div class="cmp-option">
-        <p class="cmp-option__label"><strong>Marketingowe</strong>Pozwalają dopasować komunikację i kampanie.</p>
+        <p class="cmp-option__label"><strong>Marketingowe</strong>Pozwalaj\u0105 dopasowa\u0107 komunikacj\u0119 i kampanie.</p>
         <input class="cmp-toggle" type="checkbox" data-cmp-consent="marketing" aria-label="Marketingowe cookies">
       </div>
       <div class="cmp-panel__footer">
-        <button type="button" class="cmp-btn cmp-btn--accept" data-cmp-action="save-selected">Zapisz wybór</button>
+        <button type="button" class="cmp-btn cmp-btn--accept" data-cmp-action="save-selected">Zapisz wyb\xF3r</button>
       </div>
     </div>
   `;
     const closeBanner = () => {
-        banner.hidden = true;
-        banner.remove();
+      banner.hidden = true;
+      banner.remove();
     };
-    const panel = banner.querySelector('[data-cmp-panel]');
+    const panel = banner.querySelector("[data-cmp-panel]");
     const settingsBtn = banner.querySelector('[data-cmp-action="toggle-settings"]');
     const analyticsInput = banner.querySelector('[data-cmp-consent="analytics"]');
     const marketingInput = banner.querySelector('[data-cmp-consent="marketing"]');
     const saveState = (analytics, marketing) => {
-        const state = {
-            necessary: true,
-            analytics,
-            marketing,
-            updatedAt: new Date().toISOString()
-        };
-        persist(state);
-        closeBanner();
+      const state = {
+        necessary: true,
+        analytics,
+        marketing,
+        updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+      };
+      persist(state);
+      closeBanner();
     };
-    banner.addEventListener('click', (event) => {
-        var _a;
-        const target = event.target;
-        const action = (_a = target === null || target === void 0 ? void 0 : target.closest('[data-cmp-action]')) === null || _a === void 0 ? void 0 : _a.dataset.cmpAction;
-        if (!action)
-            return;
-        if (action === 'accept') {
-            saveState(true, true);
-            return;
-        }
-        if (action === 'reject') {
-            saveState(false, false);
-            return;
-        }
-        if (action === 'toggle-settings') {
-            if (!panel || !settingsBtn)
-                return;
-            const expanded = settingsBtn.getAttribute('aria-expanded') === 'true';
-            settingsBtn.setAttribute('aria-expanded', String(!expanded));
-            panel.hidden = expanded;
-            return;
-        }
-        if (action === 'save-selected') {
-            saveState(Boolean(analyticsInput === null || analyticsInput === void 0 ? void 0 : analyticsInput.checked), Boolean(marketingInput === null || marketingInput === void 0 ? void 0 : marketingInput.checked));
-        }
+    banner.addEventListener("click", (event) => {
+      var _a;
+      const target = event.target;
+      const action = (_a = target == null ? void 0 : target.closest("[data-cmp-action]")) == null ? void 0 : _a.dataset.cmpAction;
+      if (!action) return;
+      if (action === "accept") {
+        saveState(true, true);
+        return;
+      }
+      if (action === "reject") {
+        saveState(false, false);
+        return;
+      }
+      if (action === "toggle-settings") {
+        if (!panel || !settingsBtn) return;
+        const expanded = settingsBtn.getAttribute("aria-expanded") === "true";
+        settingsBtn.setAttribute("aria-expanded", String(!expanded));
+        panel.hidden = expanded;
+        return;
+      }
+      if (action === "save-selected") {
+        saveState(Boolean(analyticsInput == null ? void 0 : analyticsInput.checked), Boolean(marketingInput == null ? void 0 : marketingInput.checked));
+      }
     });
     document.body.appendChild(banner);
+  })();
 })();
