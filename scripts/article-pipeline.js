@@ -63,6 +63,13 @@ function runParallel(label, jobs) {
   );
 }
 
+function runTempCleanup() {
+  const res = spawnSync('node', ['scripts/tmp-cleanup.js'], { stdio: 'inherit' });
+  if (res.status !== 0) {
+    console.warn('[WARN] tmp-cleanup exited with non-zero status.');
+  }
+}
+
 function parseJsonWithDiagnostics(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   try {
@@ -178,6 +185,7 @@ main()
         console.warn('[WARN] Could not remove temporary working JSON directory.');
       }
     }
+    runTempCleanup();
   })
   .catch((err) => {
     console.error(`\n[FAIL] ${err.message || err}`);
@@ -189,5 +197,6 @@ main()
         // no-op
       }
     }
+    runTempCleanup();
     process.exit(1);
   });

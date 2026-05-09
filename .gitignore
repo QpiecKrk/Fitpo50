@@ -114,3 +114,4 @@ _site/assets/news/news_20*
 # local generated GSC weekly outputs
 data/reports/gsc-weekly-report.json
 data/reports/gsc-weekly-report.md
+data/reports/assets-audit.json

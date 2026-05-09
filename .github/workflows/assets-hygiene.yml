@@ -1,0 +1,55 @@
+name: Assets Hygiene
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Retention in days for assets/trash"
+        required: false
+        default: "14"
+      dry_run:
+        description: "Dry run only"
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    - cron: "20 3 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Cleanup temp files
+        run: npm run tmp:cleanup
+
+      - name: Prune assets/trash (manual dry-run)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run == true }}
+        run: node scripts/assets-trash-retention.js --days "${{ inputs.days }}" --dry-run --verbose
+
+      - name: Prune assets/trash (apply)
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.dry_run != true }}
+        run: node scripts/assets-trash-retention.js --days "${{ github.event_name == 'workflow_dispatch' && inputs.days || '14' }}"
+
+      - name: Commit cleanup changes
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.dry_run != true }}
+        run: |
+          if git diff --quiet; then
+            echo "No cleanup changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(assets): prune expired files from assets trash"
+          git push
