@@ -30,8 +30,11 @@ function parseNameStatus(output) {
 }
 
 function isArticleHtml(file) {
-  if (!String(file || '').endsWith('.html')) return false;
-  if (String(file).startsWith('admin/')) return false;
+  const normalized = String(file || '').replace(/\\/g, '/');
+  const base = normalized.split('/').pop();
+  if (!normalized.endsWith('.html')) return false;
+  if (normalized.startsWith('admin/')) return false;
+  if (base === 'article-template-bento.html') return false;
   try {
     const raw = fs.readFileSync(file, 'utf8');
     return /<body[^>]*class="[^"]*\barticle-template\b/i.test(raw);

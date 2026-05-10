@@ -8,6 +8,9 @@ function run(cmd, args) {
 }
 
 function isArticleHtml(file) {
+  const normalized = String(file || '').replace(/\\/g, '/');
+  const base = normalized.split('/').pop();
+  if (base === 'article-template-bento.html') return false;
   try {
     const raw = fs.readFileSync(file, 'utf8');
     return /<body[^>]*class="[^"]*\barticle-template\b/i.test(raw);

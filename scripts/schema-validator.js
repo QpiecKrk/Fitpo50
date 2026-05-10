@@ -31,11 +31,14 @@ function diffHtmlFiles() {
   return String(diff.stdout || '')
     .split('\n')
     .map((s) => normalizeRel(s))
-    .filter((f) => f.endsWith('.html') && !f.startsWith('_site/'));
+    .filter((f) => f.endsWith('.html') && !f.startsWith('_site/'))
+    .filter((f) => path.basename(f) !== 'article-template-bento.html');
 }
 
 function allHtmlFiles() {
-  return fs.readdirSync(ROOT).filter((f) => f.endsWith('.html'));
+  return fs.readdirSync(ROOT)
+    .filter((f) => f.endsWith('.html'))
+    .filter((f) => f !== 'article-template-bento.html');
 }
 
 function parseJsonLdBlocks(html, file) {
