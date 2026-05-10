@@ -75,8 +75,12 @@ function firstArticleHrefFromPorady(html) {
 
 function normalizeAbsolute(baseUrl, href) {
   if (!href) return '';
-  if (/^https?:\/\//i.test(href)) return href;
-  return `${baseUrl}/${String(href).replace(/^\/+/, '')}`;
+  try {
+    return new URL(String(href).trim(), `${String(baseUrl).replace(/\/+$/, '')}/`).toString();
+  } catch (_err) {
+    if (/^https?:\/\//i.test(href)) return href;
+    return `${baseUrl}/${String(href).replace(/^\/+/, '')}`;
+  }
 }
 
 function ensureCanonical(articleHtml, expectedUrl) {
