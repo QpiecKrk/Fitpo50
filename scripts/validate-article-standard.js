@@ -273,6 +273,51 @@ function validateFaqResearchInBlogPosting(raw, errors) {
   errors.push('Brak schema BlogPosting do walidacji faq_research.');
 }
 
+function firstMatch(raw, regex) {
+  const m = String(raw || '').match(regex);
+  return m ? String(m[1] || '').trim() : '';
+}
+
+function validateHeadSeoConsistency(raw, errors) {
+  const title = firstMatch(raw, /<title>([^<]+)<\/title>/i);
+  if (!title) {
+    errors.push('Brak tagu <title>.');
+  } else {
+    if (title.length > 65) {
+      errors.push(`<title> przekracza 65 znaków (jest ${title.length}).`);
+    }
+    if (/\s[–-]\s*\|\s*fitpo50\s*$/i.test(title)) {
+      errors.push('<title> ma podwójny separator przed "| FitPo50" (np. "– |").');
+    }
+  }
+
+  const metaDescription = firstMatch(raw, /<meta\s+name="description"\s+content="([^"]*)"/i);
+  const ogDescription = firstMatch(raw, /<meta\s+property="og:description"\s+content="([^"]*)"/i);
+  const twitterDescription = firstMatch(raw, /<meta\s+name="twitter:description"\s+content="([^"]*)"/i);
+  const schemaDescription = firstMatch(raw, /"description"\s*:\s*"([^"]+)"/i);
+
+  if (!metaDescription) {
+    errors.push('Brak <meta name="description">.');
+  } else {
+    if (metaDescription.length < 145 || metaDescription.length > 160) {
+      errors.push(`meta description poza zakresem 145-160 znaków (jest ${metaDescription.length}).`);
+    }
+    if (!/[.!?]$/.test(metaDescription)) {
+      errors.push('meta description wygląda na urwany: powinien kończyć się ".", "!" lub "?".');
+    }
+  }
+
+  if (metaDescription && ogDescription && metaDescription !== ogDescription) {
+    errors.push('Niespójny opis: meta description != og:description.');
+  }
+  if (metaDescription && twitterDescription && metaDescription !== twitterDescription) {
+    errors.push('Niespójny opis: meta description != twitter:description.');
+  }
+  if (metaDescription && schemaDescription && metaDescription !== schemaDescription) {
+    errors.push('Niespójny opis: meta description != BlogPosting.description.');
+  }
+}
+
 function validateFile(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
@@ -297,6 +342,10 @@ function validateFile(filePath) {
   for (const rule of requiredPatterns) {
     if (!rule.regex.test(raw)) errors.push(`Brak: ${rule.label}`);
   }
+
+  validateNoXmlProlog(raw, errors);
+  validateNoInvalidSourceClosingTags(raw, errors);
+  validateHeadSeoConsistency(raw, errors);
 
   if (/\sstyle\s*=\s*['"]/i.test(raw)) {
     errors.push('Wykryto inline CSS (style="...")');
