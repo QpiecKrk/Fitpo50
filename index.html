@@ -1444,14 +1444,14 @@
         <picture aria-hidden="true">
           <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
           <source srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/badania-krwi-po-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/trening-silowy-cisnienie-po-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Badania krwi po 50: co robić co 3 miesiące, a co raz w roku?</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Które badania krwi po 50. roku życia wymagają kontroli co 3 miesiące, a które wystarczy robić raz w roku? Sprawdź konkretny harmonogram dla zdrowia 50+.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="badania-krwi-po-50-jak-czesto.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Trening siłowy po 50 a ciśnienie: plan na 8 tygodni – praktyczny</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy trening siłowy po 50 obniża ciśnienie? Tak – o 4–8 mmHg. Sprawdź bezpieczne zakresy intensywności i gotowy plan na 8 tygodni dla osób 50+. Konkretne</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="trening-silowy-po-50-cisnienie-plan-8-tygodni.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Badania krwi po 50: co robić co 3 miesiące, a co raz w roku?',
-        excerpt: 'Które badania krwi po 50. roku życia wymagają kontroli co 3 miesiące, a które wystarczy robić raz w roku? Sprawdź konkretny harmonogram dla zdrowia 50+.',
-        image: './assets/badania-krwi-po-50-hero.webp',
-        url: 'badania-krwi-po-50-jak-czesto.html'
+        title: 'Trening siłowy po 50 a ciśnienie: plan na 8 tygodni – praktyczny',
+        excerpt: 'Czy trening siłowy po 50 obniża ciśnienie? Tak – o 4–8 mmHg. Sprawdź bezpieczne zakresy intensywności i gotowy plan na 8 tygodni dla osób 50+. Konkretne',
+        image: './assets/trening-silowy-cisnienie-po-50-hero.webp',
+        url: 'trening-silowy-po-50-cisnienie-plan-8-tygodni.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,7 +2236,14 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Zdrowie',
+          category: 'Ruch',
+          title: 'Trening siłowy po 50 a ciśnienie: plan na 8 tygodni – praktyczny',
+          excerpt: 'Czy trening siłowy po 50 obniża ciśnienie? Tak – o 4–8 mmHg. Sprawdź bezpieczne zakresy intensywności i gotowy plan na 8 tygodni dla osób 50+. Konkretne',
+          image: './assets/trening-silowy-cisnienie-po-50-hero.webp',
+          url: 'trening-silowy-po-50-cisnienie-plan-8-tygodni.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Badania krwi po 50: co robić co 3 miesiące, a co raz w roku?',
           excerpt: 'Które badania krwi po 50. roku życia wymagają kontroli co 3 miesiące, a które wystarczy robić raz w roku? Sprawdź konkretny harmonogram dla zdrowia 50+.',
           image: './assets/badania-krwi-po-50-hero.webp',
@@ -2248,13 +2255,6 @@
           excerpt: 'Dowiedz się, jak trening siłowy realnie chroni Twoje serce przed zawałem. Proste wyjaśnienie procesów biologicznych, najnowsze badania i plan dla osób po',
           image: './assets/silownia-serce-ochrona-hero.webp',
           url: 'silownia-chroni-serce-przed-zawalem.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Okulary do czytania to nie wyrok: jak trenować akomodację oka',
-          excerpt: 'Czy ćwiczenia wzroku mogą opóźnić okulary do czytania? Poznaj naukowe fakty o neuroplastyczności, metodzie łatek Gabora i plan treningu akomodacji dla osób 50+.',
-          image: './assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp',
-          url: 'okulary-do-czytania-trening-akomodacji-oka.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

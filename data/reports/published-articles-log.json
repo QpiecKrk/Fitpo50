@@ -1,5 +1,16 @@
 {
   "version": 1,
-  "updated_at": "2026-05-09T00:00:00.000Z",
-  "items": []
+  "updated_at": "2026-05-10T05:53:21.866Z",
+  "items": [
+    {
+      "slug": "trening-silowy-po-50-cisnienie-plan-8-tygodni",
+      "url": "https://fitpo50.pl/trening-silowy-po-50-cisnienie-plan-8-tygodni.html",
+      "first_published_at": "2026-05-10T05:53:21.866Z",
+      "last_published_at": "2026-05-10T05:53:21.866Z",
+      "status": "pending",
+      "last_checked_at": "",
+      "last_crawl_time": "",
+      "notes": ""
+    }
+  ]
 }

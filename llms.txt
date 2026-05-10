@@ -251,4 +251,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Badania krwi po 50: co robić co 3 miesiące, a co raz w roku? | FitPo50"
   section: "Zdrowie"
   summary: "Które badania krwi po 50. roku życia wymagają kontroli co 3 miesiące, a które wystarczy robić raz w roku? Sprawdź konkretny harmonogram dla zdrowia 50+."
+- url: https://fitpo50.pl/trening-silowy-po-50-cisnienie-plan-8-tygodni.html
+  title: "Trening siłowy po 50 a ciśnienie: plan na 8 tygodni – praktyczny | FitPo50"
+  section: "Ruch"
+  summary: "Czy trening siłowy po 50 obniża ciśnienie? Tak – o 4–8 mmHg. Sprawdź bezpieczne zakresy intensywności i gotowy plan na 8 tygodni dla osób 50+. Konkretne"
 
