@@ -274,6 +274,39 @@ function validateFaqResearchInBlogPosting(raw, errors) {
   errors.push('Brak schema BlogPosting do walidacji faq_research.');
 }
 
+function validateSpeakableTargetsQuickAnswer(raw, errors) {
+  const scripts = [...raw.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+  for (const scriptMatch of scripts) {
+    const body = String(scriptMatch[1] || '').trim();
+    let parsed;
+    try {
+      parsed = JSON.parse(body);
+    } catch (_err) {
+      continue;
+    }
+    const nodes = Array.isArray(parsed) ? parsed : [parsed];
+    for (const node of nodes) {
+      if (!node || typeof node !== 'object') continue;
+      const type = node['@type'];
+      const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
+      if (!isBlogPosting) continue;
+
+      const speakable = node.speakable && typeof node.speakable === 'object' ? node.speakable : {};
+      const selectors = Array.isArray(speakable.cssSelector)
+        ? speakable.cssSelector.map((x) => String(x || '').trim())
+        : [];
+      const hasQuickAnswerSelector = selectors.includes('#quick-answer')
+        || selectors.includes('#quick-answer p')
+        || selectors.includes('.quick-answer');
+      if (!hasQuickAnswerSelector) {
+        errors.push('BlogPosting.speakable musi wskazywać sekcję quick-answer (#quick-answer lub #quick-answer p).');
+      }
+      return;
+    }
+  }
+  errors.push('Brak schema BlogPosting do walidacji speakable.');
+}
+
 function validateHeadSeoConsistency(raw, errors) {
   const res = validateArticleHeadContract(raw);
   errors.push(...res.errors);
@@ -440,6 +473,7 @@ function validateFile(filePath) {
     validateAnswerFirstParagraphs(articleContentHtml, errors);
   }
   validateFaqResearchInBlogPosting(raw, errors);
+  validateSpeakableTargetsQuickAnswer(raw, errors);
 
   return errors;
 }

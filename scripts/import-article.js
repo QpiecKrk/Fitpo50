@@ -283,7 +283,7 @@ function normalizeMetaDescription(rawDescription) {
 }
 
 function buildSpeakableSelectors(hasKeyTakeaways) {
-  const selectors = ['.article-header__title', '.article-content p'];
+  const selectors = ['.article-header__title', '#quick-answer', '#quick-answer p', '.article-content p'];
   if (hasKeyTakeaways) {
     selectors.push('.key-takeaways h2', '.key-takeaways li');
   }
@@ -1372,7 +1372,7 @@ function renderQuickAnswerBlock(text) {
   const clean = String(text || '').trim();
   if (!clean) return '';
   return [
-    '<section class="quick-answer reveal" aria-label="Szybka odpowiedź">',
+    '<section class="quick-answer reveal" id="quick-answer" aria-label="Szybka odpowiedź">',
     '  <h2>Szybka odpowiedź</h2>',
     `  <p>${escapeHtml(clean)}</p>`,
     '</section>',
@@ -1534,6 +1534,10 @@ function upsertBlogPostingSchema(html, opts) {
           source_label: item.sourceLabel,
           source_url: item.sourceUrl,
         }));
+      }
+
+      if (Array.isArray(opts.citations) && opts.citations.length) {
+        node.citation = opts.citations.slice(0, 12);
       }
 
       touched = true;
@@ -2253,6 +2257,11 @@ function buildHtmlFromTemplate(template, payload) {
     mentions: payload.mentions,
     hasKeyTakeaways: payload.keyTakeaways.length > 0,
     faqResearch: payload.faqResearch,
+    citations: [...new Set(
+      (payload.sources || [])
+        .map((s) => String(s && s.url ? s.url : '').trim())
+        .filter((u) => /^https?:\/\//i.test(u))
+    )],
   });
 
   if (payload.faqItems.length) {
