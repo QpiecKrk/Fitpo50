@@ -38,6 +38,8 @@ function exists(rel) {
 }
 
 function isArticleHtml(rel) {
+  const base = path.basename(rel);
+  if (base === 'article-template-bento.html') return false;
   if (!rel.endsWith('.html')) return false;
   if (!exists(rel)) return false;
   const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
