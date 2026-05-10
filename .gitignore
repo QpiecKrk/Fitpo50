@@ -115,3 +115,4 @@ _site/assets/news/news_20*
 data/reports/gsc-weekly-report.json
 data/reports/gsc-weekly-report.md
 data/reports/assets-audit.json
+data/cache/internal-link-corpus.json
