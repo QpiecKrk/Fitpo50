@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "updated_at": "2026-05-10T07:44:45.142Z",
+  "records": [
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-10T07:44:45.142Z",
+      "total_ms": 510,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 102
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 287
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 35
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 93
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 120
+        }
+      ]
+    }
+  ]
+}

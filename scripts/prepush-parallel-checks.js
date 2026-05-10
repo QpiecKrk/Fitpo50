@@ -8,6 +8,7 @@ const TASKS = {
   'predeploy:check': { cmd: 'node', args: ['scripts/predeploy-gate.js'], always: true },
   'news:integrity': { cmd: 'node', args: ['scripts/news-integrity-check.js'], match: [/^data\/news-live\.json$/, /^assets\/data\/news-fallback\.json$/, /^admin\/news/i] },
   'article:guard:diff': { cmd: 'node', args: ['scripts/run-article-guard-diff.js'], match: [/\.html$/i] },
+  'article:contract:diff': { cmd: 'node', args: ['scripts/run-article-contract-diff.js'], match: [/\.html$/i] },
   'schema:validate': { cmd: 'node', args: ['scripts/schema-validator.js', '--diff'], match: [/\.html$/i] },
   'adsense:readiness': { cmd: 'node', args: ['scripts/adsense-readiness-check.js'], always: true },
   'json:gate:diff': { cmd: 'node', args: ['scripts/json-fitpo50-gate-diff.js'], match: [/\.fitpo50\.json$/i] },

@@ -11,6 +11,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { validateArticleHeadFile } = require('./lib/article-head-contract');
 
 const ROOT = process.cwd();
 
@@ -247,6 +248,12 @@ function main() {
     if (!poradyHtml.includes(slugNeedle)) errors.push(`porady.html nie zawiera "${slugNeedle}"`);
     if (!hasInSitemap(sitemapXml, slugNeedle)) errors.push(`sitemap.xml nie zawiera "${slugNeedle}"`);
     if (!llmsTxt.includes(`https://fitpo50.pl/${slugNeedle}`)) warnings.push(`llms.txt nie zawiera "${slugNeedle}"`);
+
+    if (exists(slugFile)) {
+      const contract = validateArticleHeadFile(path.join(ROOT, slugFile));
+      contract.errors.forEach((e) => errors.push(`${slugFile}: ${e}`));
+      contract.warnings.forEach((w) => warnings.push(`${slugFile}: ${w}`));
+    }
   }
 
   for (const rel of args.assets) {

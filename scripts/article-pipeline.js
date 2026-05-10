@@ -7,6 +7,8 @@ const os = require('os');
 
 let tempWorkingCopy = '';
 const PUBLISHED_LOG_PATH = path.join(process.cwd(), 'data', 'reports', 'published-articles-log.json');
+const TIMINGS_PATH = path.join(process.cwd(), 'data', 'reports', 'pipeline-timings.json');
+const stepTimings = [];
 
 function parseArgs(argv) {
   const out = {};
@@ -36,7 +38,9 @@ function boolOpt(v, fallback) {
 function run(label, cmd, args) {
   console.log(`\n[STEP] ${label}`);
   console.log(`$ ${cmd} ${args.join(' ')}`);
+  const started = Date.now();
   const res = spawnSync(cmd, args, { stdio: 'inherit' });
+  stepTimings.push({ tag: label, durationMs: Date.now() - started });
   if (res.status !== 0) {
     throw new Error(`${label} failed (exit ${res.status ?? 'unknown'})`);
   }
@@ -49,11 +53,13 @@ function runParallel(label, jobs) {
   });
   return Promise.all(
     jobs.map((job) => new Promise((resolve, reject) => {
+      const started = Date.now();
       const child = spawn(job.cmd, job.args, { stdio: 'inherit' });
       child.on('error', (err) => {
         reject(new Error(`${job.label} failed to start: ${err.message || err}`));
       });
       child.on('exit', (code) => {
+        stepTimings.push({ tag: job.label, durationMs: Date.now() - started });
         if (code !== 0) {
           reject(new Error(`${job.label} failed (exit ${code ?? 'unknown'})`));
           return;
@@ -62,6 +68,29 @@ function runParallel(label, jobs) {
       });
     })),
   );
+}
+
+function appendTimingReport(scope, steps) {
+  try {
+    const nowIso = new Date().toISOString();
+    const totalMs = steps.reduce((acc, s) => acc + Number(s.durationMs || 0), 0);
+    const payload = fs.existsSync(TIMINGS_PATH)
+      ? JSON.parse(fs.readFileSync(TIMINGS_PATH, 'utf8'))
+      : { version: 1, updated_at: nowIso, records: [] };
+    const records = Array.isArray(payload.records) ? payload.records : [];
+    records.push({
+      scope,
+      at: nowIso,
+      total_ms: totalMs,
+      steps,
+    });
+    payload.records = records.slice(-120);
+    payload.updated_at = nowIso;
+    fs.mkdirSync(path.dirname(TIMINGS_PATH), { recursive: true });
+    fs.writeFileSync(TIMINGS_PATH, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  } catch (_err) {
+    // best effort
+  }
 }
 
 function runTempCleanup() {
@@ -206,6 +235,8 @@ async function main() {
       '--force', force ? 'true' : 'false',
     ],
   );
+  run('Sync meta description across head/schema', 'node', ['scripts/sync-article-head-descriptions.js', '--slug', slug]);
+  run('Article contract check (source/_site)', 'node', ['scripts/article-contract-check.js', `${slug}.html`, path.join('_site', `${slug}.html`)]);
   run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug]);
   if (parallelTails) {
     await runParallel('Post-import parallel checks', [
@@ -222,6 +253,7 @@ async function main() {
   registerPublishedArticle(slug);
 
   console.log('\n[PASS] Article pipeline completed.');
+  appendTimingReport('article-pipeline', stepTimings);
   return { workingCopy };
 }
 
@@ -240,6 +272,7 @@ main()
   })
   .catch((err) => {
     console.error(`\n[FAIL] ${err.message || err}`);
+    appendTimingReport('article-pipeline-fail', stepTimings);
     if (tempWorkingCopy) {
       try {
         fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });

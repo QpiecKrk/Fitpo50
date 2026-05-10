@@ -909,3 +909,30 @@ Jesli artykul ma obrazy:
   - separatorow i grupowania 2+ obrazow pod rzad (`.figure-stack`),
   - co najmniej 2 calloutow + mocnego cytatu koncowego.
 - Zakaz "minimalnej surowej sciany tekstu" przy publikacjach poradnikowych: artykul ma byc merytoryczny i jednoczesnie wizualnie prowadzic czytelnika.
+
+## Ustalenia operacyjne 2026-05-10 (Spójność head + niezawodność pipeline)
+
+- Wprowadzony został centralny kontrakt `head` dla artykułów: `scripts/lib/article-head-contract.js`.
+  - Reguły twarde:
+    - `<title>` max 65 znaków,
+    - blokada wzorca podwójnego separatora typu `– | FitPo50`,
+    - `meta description` w zakresie 145-160 znaków,
+    - `meta description` musi kończyć się pełnym znakiem końca zdania (`.`, `!`, `?`),
+    - pełna spójność opisu: `meta description` == `og:description` == `twitter:description` == `BlogPosting.description`.
+- Kontrakt `head` jest egzekwowany w:
+  - `scripts/validate-article-standard.js`,
+  - `scripts/predeploy-gate.js` (dla publikowanego `--slug`).
+- Pipeline publikacji artykułu po imporcie uruchamia automatyczny sync opisów:
+  - `scripts/sync-article-head-descriptions.js --slug <slug>`
+  - cel: domknięcie spójności `meta/og/twitter/schema` bez ręcznych poprawek.
+- Dodany został regression check artykułu:
+  - `scripts/article-contract-check.js` (kontrakt jakościowy),
+  - `scripts/run-article-contract-diff.js` (uruchamiany tylko dla zmienionych `.html`),
+  - `prepush:parallel:checks` obejmuje teraz `article:contract:diff`.
+- Dodana telemetria czasu wykonania automatyzacji:
+  - raport: `data/reports/pipeline-timings.json`,
+  - źródła wpisów: `scripts/run-all-prepush.js` i `scripts/article-pipeline.js`,
+  - cel: monitorowanie czasu kroków i dalsze skracanie cyklu publikacji.
+- Utrzymujemy kierunek upraszczania operacyjnego:
+  - usunięte aliasy `legacy:*` z `package.json`,
+  - preferowane komendy bieżące: `article:pipeline`, `article:contract:diff`, `prepush:local`.
