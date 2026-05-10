@@ -1,40 +1,23 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+/**
+ * Legacy compatibility wrapper.
+ *
+ * `seo:aeo:guard` zostaje jako alias historyczny, ale cała walidacja HTML
+ * przechodzi przez jeden silnik: `validate-article-standard.js`.
+ */
+
 const { spawnSync } = require('child_process');
 
-const ROOT = process.cwd();
-
-function listArticleFiles() {
-  return fs.readdirSync(ROOT)
-    .filter((f) => f.endsWith('.html'))
-    .filter((f) => f !== 'article-template-bento.html')
-    .filter((f) => {
-      const full = path.join(ROOT, f);
-      const html = fs.readFileSync(full, 'utf8');
-      return /<article\s+class="article-content">/i.test(html);
-    })
-    .sort();
-}
-
 function main() {
-  const files = listArticleFiles();
-  if (!files.length) {
-    console.log('[PASS] seo-aeo-guard - brak artykułów do walidacji.');
-    return;
-  }
-
-  const res = spawnSync('node', ['scripts/validate-article-standard.js', ...files], {
-    cwd: ROOT,
+  const passthrough = process.argv.slice(2);
+  const res = spawnSync('node', ['scripts/validate-article-standard.js', ...passthrough], {
+    cwd: process.cwd(),
     encoding: 'utf8',
-    stdio: 'inherit',
   });
-
-  if (res.status !== 0) {
-    process.exit(res.status || 1);
-  }
-  console.log(`[PASS] seo-aeo-guard OK (pliki: ${files.length}).`);
+  if (res.stdout) process.stdout.write(res.stdout);
+  if (res.stderr) process.stderr.write(res.stderr);
+  process.exit(Number(res.status || 0));
 }
 
 main();

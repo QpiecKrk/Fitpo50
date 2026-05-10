@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+/**
+ * Wrapper: zbiera diff i deleguje walidację do `article-publish-guard.js`.
+ * Guard sam jest wrapperem na `validate-article-standard.js`.
+ */
+
 const { spawnSync } = require('child_process');
 
 function run(cmd, args) {
@@ -25,16 +30,9 @@ function parseNameStatus(output) {
 
 function readChangedFiles() {
   const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
-  if (primary.status === 0) {
-    return parseNameStatus(primary.stdout);
-  }
-
-  // CI fallback: shallow/detached checkout often lacks origin/main.
+  if (primary.status === 0) return parseNameStatus(primary.stdout);
   const fallback = run('git', ['diff', '--name-status', 'HEAD~1..HEAD']);
-  if (fallback.status === 0) {
-    return parseNameStatus(fallback.stdout);
-  }
-
+  if (fallback.status === 0) return parseNameStatus(fallback.stdout);
   const msg = String(primary.stderr || primary.stdout || fallback.stderr || fallback.stdout || '').trim();
   throw new Error(`Nie udało się odczytać diff (origin/main...HEAD ani HEAD~1..HEAD): ${msg}`);
 }
@@ -42,14 +40,11 @@ function readChangedFiles() {
 function main() {
   const changed = readChangedFiles();
   const args = ['scripts/article-publish-guard.js'];
-  for (const f of changed) {
-    args.push('--changed', f);
-  }
-
+  changed.forEach((f) => args.push('--changed', f));
   const res = run('node', args);
   if (res.stdout) process.stdout.write(res.stdout);
   if (res.stderr) process.stderr.write(res.stderr);
-  process.exit(res.status || 0);
+  process.exit(Number(res.status || 0));
 }
 
 try {
