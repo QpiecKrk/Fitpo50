@@ -6,5 +6,5 @@ ROOT_DIR="$(git rev-parse --show-toplevel)"
 cd "$ROOT_DIR"
 
 echo "Pre-push: uruchamiam predeploy gate + build/export..."
-npm run prepush:local
+node scripts/run-all-prepush.js
 echo "Pre-push: OK."

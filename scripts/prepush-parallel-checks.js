@@ -1,28 +1,79 @@
 #!/usr/bin/env node
 
-const { spawn } = require('child_process');
+const { spawn, spawnSync } = require('child_process');
 const readline = require('readline');
 
-const DEFAULT_TASKS = [
-  'assets:mirror:check',
-  'predeploy:check',
-  'news:integrity',
-  'article:guard:diff',
-  'schema:validate',
-  'adsense:readiness',
-  'json:gate:diff',
-];
+const TASKS = {
+  'assets:mirror:check': { cmd: 'node', args: ['scripts/sync-site-assets-mirror.js', '--check'], always: true },
+  'predeploy:check': { cmd: 'node', args: ['scripts/predeploy-gate.js'], always: true },
+  'news:integrity': { cmd: 'node', args: ['scripts/news-integrity-check.js'], match: [/^data\/news-live\.json$/, /^assets\/data\/news-fallback\.json$/, /^admin\/news/i] },
+  'article:guard:diff': { cmd: 'node', args: ['scripts/run-article-guard-diff.js'], match: [/\.html$/i] },
+  'schema:validate': { cmd: 'node', args: ['scripts/schema-validator.js', '--diff'], match: [/\.html$/i] },
+  'adsense:readiness': { cmd: 'node', args: ['scripts/adsense-readiness-check.js'], always: true },
+  'json:gate:diff': { cmd: 'node', args: ['scripts/json-fitpo50-gate-diff.js'], match: [/\.fitpo50\.json$/i] },
+};
+const DEFAULT_TASKS = Object.keys(TASKS);
 
 function parseArgs(argv) {
   const tasks = [];
+  let all = false;
   for (let i = 0; i < argv.length; i += 1) {
     if (argv[i] === '--task') {
       const v = String(argv[i + 1] || '').trim();
       if (v) tasks.push(v);
       i += 1;
+      continue;
+    }
+    if (argv[i] === '--all') {
+      all = true;
     }
   }
-  return { tasks: tasks.length ? tasks : DEFAULT_TASKS };
+  return { tasks: tasks.length ? tasks : DEFAULT_TASKS, all };
+}
+
+function run(cmd, args) {
+  return spawnSync(cmd, args, { encoding: 'utf8' });
+}
+
+function changedFiles() {
+  const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
+  const parse = (out) => String(out || '')
+    .split('\n')
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const parts = line.split('\t');
+      const status = String(parts[0] || '').trim();
+      const file = status.startsWith('R') || status.startsWith('C') ? (parts[2] || '') : (parts[1] || '');
+      return { status, file };
+    })
+    .filter((x) => x.file && !x.status.startsWith('D'))
+    .map((x) => x.file);
+
+  if (primary.status === 0) return parse(primary.stdout);
+  const fallback = run('git', ['diff', '--name-status', 'HEAD~1..HEAD']);
+  if (fallback.status === 0) return parse(fallback.stdout);
+  const msg = String(primary.stderr || primary.stdout || fallback.stderr || fallback.stdout || '').trim();
+  throw new Error(`Nie udało się odczytać diff: ${msg}`);
+}
+
+function shouldRunTask(taskName, changed, forceAll) {
+  const task = TASKS[taskName];
+  if (!task) return true;
+  if (forceAll || task.always) return true;
+  const matchers = Array.isArray(task.match) ? task.match : [];
+  if (!matchers.length) return true;
+  return changed.some((file) => matchers.some((rx) => rx.test(file)));
+}
+
+function resolveRunnableTasks(tasks, changed, forceAll) {
+  const runnables = [];
+  const skipped = [];
+  for (const t of tasks) {
+    if (shouldRunTask(t, changed, forceAll)) runnables.push(t);
+    else skipped.push(t);
+  }
+  return { runnables, skipped };
 }
 
 function prefixOutput(task, stream, logger) {
@@ -33,7 +84,13 @@ function prefixOutput(task, stream, logger) {
 
 function runTask(task) {
   return new Promise((resolve) => {
-    const child = spawn('npm', ['run', task], {
+    const spec = TASKS[task];
+    if (!spec) {
+      resolve({ task, code: 1, error: `Nieznane zadanie: ${task}` });
+      return;
+    }
+
+    const child = spawn(spec.cmd, spec.args, {
       cwd: process.cwd(),
       env: process.env,
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -53,11 +110,16 @@ function runTask(task) {
 }
 
 async function main() {
-  const { tasks } = parseArgs(process.argv.slice(2));
-  console.log(`[PREPUSH-PARALLEL] start tasks=${tasks.length}`);
+  const { tasks, all } = parseArgs(process.argv.slice(2));
+  const changed = changedFiles();
+  const { runnables, skipped } = resolveRunnableTasks(tasks, changed, all);
+  console.log(`[PREPUSH-PARALLEL] start tasks=${runnables.length}/${tasks.length}`);
+  if (skipped.length) {
+    console.log(`[PREPUSH-PARALLEL] skipped: ${skipped.join(', ')}`);
+  }
   const startedAt = Date.now();
 
-  const results = await Promise.all(tasks.map((task) => runTask(task)));
+  const results = await Promise.all(runnables.map((task) => runTask(task)));
   const failed = results.filter((r) => r.code !== 0);
   const seconds = ((Date.now() - startedAt) / 1000).toFixed(2);
 
