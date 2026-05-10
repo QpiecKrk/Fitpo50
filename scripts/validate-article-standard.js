@@ -248,7 +248,7 @@ function validateRepeatedLongSentences(articleContentHtml, errors) {
   }
 }
 
-function validateFaqResearchInBlogPosting(raw, errors) {
+function validateCitationsInBlogPosting(raw, errors) {
   const scripts = [...raw.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
   for (const scriptMatch of scripts) {
     const body = String(scriptMatch[1] || '').trim();
@@ -264,14 +264,15 @@ function validateFaqResearchInBlogPosting(raw, errors) {
       const type = node['@type'];
       const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
       if (!isBlogPosting) continue;
-      const arr = Array.isArray(node.faq_research) ? node.faq_research : [];
-      if (arr.length < 4) {
-        errors.push(`BlogPosting.faq_research: wymagane minimum 4 wpisy (jest ${arr.length}).`);
+      const arr = Array.isArray(node.citation) ? node.citation : [];
+      const valid = arr.filter((url) => /^https?:\/\//i.test(String(url || '').trim()));
+      if (valid.length < 4) {
+        errors.push(`BlogPosting.citation: wymagane minimum 4 poprawne URL-e (jest ${valid.length}).`);
       }
       return;
     }
   }
-  errors.push('Brak schema BlogPosting do walidacji faq_research.');
+  errors.push('Brak schema BlogPosting do walidacji citation.');
 }
 
 function validateSpeakableTargetsQuickAnswer(raw, errors) {
@@ -472,7 +473,7 @@ function validateFile(filePath) {
     }
     validateAnswerFirstParagraphs(articleContentHtml, errors);
   }
-  validateFaqResearchInBlogPosting(raw, errors);
+  validateCitationsInBlogPosting(raw, errors);
   validateSpeakableTargetsQuickAnswer(raw, errors);
 
   return errors;

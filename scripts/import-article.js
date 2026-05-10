@@ -15,6 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 const { spawnSync } = require('child_process');
 
 const ROOT = process.cwd();
@@ -24,6 +25,21 @@ const LLMS_PATH = path.join(ROOT, 'llms.txt');
 const REQUIRED_ARTICLE_IMAGE_EXT = ['avif', 'webp', 'jpg'];
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const MIN_FAQ_ITEMS = 4;
+const DEFAULT_AUTHOR_PERSON = {
+  '@type': 'Person',
+  name: 'Grzegorz Kupiec',
+  url: 'https://fitpo50.pl/o-mnie.html',
+  sameAs: ['https://fitpo50.pl/o-mnie.html'],
+};
+const DEFAULT_PUBLISHER_ORG = {
+  '@type': 'Organization',
+  name: 'FitPo50',
+  url: 'https://fitpo50.pl/',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://fitpo50.pl/assets/logo.jpg',
+  },
+};
 const NETWORK_FAQ_BANK = {
   zdrowie: [
     {
@@ -152,6 +168,7 @@ function printUsage() {
     '  --precheck true|false           only validate input (default: false)',
     '  --dry-run true|false            do not write files (default: false)',
     '  --publish true|false            update listings/sitemap/llms (default: true)',
+    '  --indexnow true|false           submit URL to IndexNow after publish (default: true)',
     '  --sync-site true|false          mirror changes to _site (default: true)',
     '  --run-internal-links true|false|auto run PHP internal-link helper (default: auto)',
     '  --validate true|false           run article validator (default: true)',
@@ -159,6 +176,9 @@ function printUsage() {
     '  --force true|false              overwrite existing article HTML (default: false)',
     '  --category <key>                override JSON category',
     '  --help                          show this help',
+    'Env:',
+    '  INDEXNOW_KEY                    required for IndexNow submission',
+    '  INDEXNOW_KEY_LOCATION           optional full URL to hosted key file',
     '',
     'Recommended publish command:',
     '  node scripts/import-article.js --file "...fitpo50.json" --publish true --run-internal-links auto --validate true',
@@ -283,7 +303,7 @@ function normalizeMetaDescription(rawDescription) {
 }
 
 function buildSpeakableSelectors(hasKeyTakeaways) {
-  const selectors = ['.article-header__title', '#quick-answer', '#quick-answer p', '.article-content p'];
+  const selectors = ['.article-header__title', '#quick-answer', '#quick-answer p', '.drop-cap'];
   if (hasKeyTakeaways) {
     selectors.push('.key-takeaways h2', '.key-takeaways li');
   }
@@ -377,6 +397,33 @@ function normalizeSources(rawSources) {
     out.push({ label, url });
   }
   return out;
+}
+
+function extractYearFromText(value) {
+  const m = String(value || '').match(/\b(19|20)\d{2}\b/);
+  return m ? m[0] : '';
+}
+
+function buildScholarlyMentions(sources) {
+  const out = [];
+  for (const source of normalizeArray(sources)) {
+    if (!source || typeof source !== 'object') continue;
+    const name = String(source.label || '').trim();
+    const url = String(source.url || '').trim();
+    if (!name || !/^https?:\/\//i.test(url)) continue;
+    const year = extractYearFromText(name);
+    out.push({
+      '@type': 'ScholarlyArticle',
+      name,
+      url,
+      ...(year ? { datePublished: `${year}-01-01T00:00:00+00:00` } : {}),
+      author: {
+        '@type': 'Organization',
+        name: 'Autorzy badania',
+      },
+    });
+  }
+  return out.slice(0, 6);
 }
 
 function isGenericSourceLabel(label) {
@@ -1514,6 +1561,8 @@ function upsertBlogPostingSchema(html, opts) {
 
       node.wordCount = opts.wordCount;
       node.timeRequired = opts.timeRequired;
+      node.author = opts.author || DEFAULT_AUTHOR_PERSON;
+      node.publisher = opts.publisher || DEFAULT_PUBLISHER_ORG;
       const cssSelector = buildSpeakableSelectors(opts.hasKeyTakeaways);
       node.speakable = {
         '@type': 'SpeakableSpecification',
@@ -1525,14 +1574,12 @@ function upsertBlogPostingSchema(html, opts) {
       }
 
       if (opts.mentions.length) {
-        node.mentions = opts.mentions.map((name) => ({ '@type': 'Thing', name }));
-      }
-
-      if (Array.isArray(opts.faqResearch) && opts.faqResearch.length) {
-        node.faq_research = opts.faqResearch.slice(0, 8).map((item) => ({
-          question: item.question,
-          source_label: item.sourceLabel,
-          source_url: item.sourceUrl,
+        node.mentions = opts.mentions.map((item) => ({
+          '@type': 'ScholarlyArticle',
+          name: String(item.name || '').trim(),
+          url: String(item.url || '').trim(),
+          ...(item.datePublished ? { datePublished: String(item.datePublished).trim() } : {}),
+          author: item.author || { '@type': 'Organization', name: 'Autorzy badania' },
         }));
       }
 
@@ -2152,7 +2199,7 @@ function normalizePayload(data, cliCategory, options = {}) {
   ].join(' ');
 
   const about = keyTakeaways.slice(0, 4);
-  const mentions = sources.map((s) => s.label).slice(0, 6);
+  const mentions = buildScholarlyMentions(sources);
 
   return {
     slug,
@@ -2253,10 +2300,11 @@ function buildHtmlFromTemplate(template, payload) {
   html = upsertBlogPostingSchema(html, {
     wordCount: payload.wordCount,
     timeRequired: payload.timeRequiredIso,
+    author: DEFAULT_AUTHOR_PERSON,
+    publisher: DEFAULT_PUBLISHER_ORG,
     about: payload.about,
     mentions: payload.mentions,
     hasKeyTakeaways: payload.keyTakeaways.length > 0,
-    faqResearch: payload.faqResearch,
     citations: [...new Set(
       (payload.sources || [])
         .map((s) => String(s && s.url ? s.url : '').trim())
@@ -2295,11 +2343,50 @@ function printSummary(report) {
     console.log(`Zaktualizowane pliki: ${report.updatedFiles.join(', ')}`);
   }
   console.log(`Publikacja w listingach: ${report.listingsUpdated ? 'TAK' : 'NIE'}`);
+  if (report.indexNowStatus) {
+    console.log(`IndexNow: ${report.indexNowStatus}`);
+  }
   console.log('PDF + przycisk pobierania: wymagane i wykonane.');
   console.log('Brak modyfikacji Newsów/miniatur: potwierdzone przez projekt importera.');
 }
 
-function main() {
+function submitIndexNow({ host, key, keyLocation, urlList }) {
+  const payload = JSON.stringify({ host, key, keyLocation, urlList });
+  return new Promise((resolve) => {
+    const req = https.request(
+      'https://api.indexnow.org/indexnow',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(payload),
+        },
+        timeout: 5000,
+      },
+      (res) => {
+        const chunks = [];
+        res.on('data', (chunk) => chunks.push(chunk));
+        res.on('end', () => {
+          const body = Buffer.concat(chunks).toString('utf8').trim();
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            resolve({ ok: true, status: res.statusCode, body });
+          } else {
+            resolve({ ok: false, status: res.statusCode, body });
+          }
+        });
+      },
+    );
+    req.on('error', (err) => resolve({ ok: false, error: err.message || String(err) }));
+    req.on('timeout', () => {
+      req.destroy(new Error('timeout'));
+      resolve({ ok: false, error: 'timeout' });
+    });
+    req.write(payload);
+    req.end();
+  });
+}
+
+async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (boolOpt(args.help, false) || boolOpt(args.h, false)) {
     printUsage();
@@ -2317,6 +2404,7 @@ function main() {
   const syncSite = boolOpt(args['sync-site'], true);
   const runInternalMode = String(args['run-internal-links'] ?? 'auto').trim().toLowerCase();
   const runValidate = boolOpt(args.validate, true);
+  const indexNowEnabled = boolOpt(args.indexnow, true);
   const faqStrict = boolOpt(args['faq-strict'], true);
   const precheckOnly = boolOpt(args.precheck, false) || boolOpt(args['check-only'], false);
   const force = boolOpt(args.force, false);
@@ -2365,6 +2453,7 @@ function main() {
 
   const written = writeArticleFiles(payload.slug, html, syncSite, dryRun, force);
 
+  let indexNowStatus = '';
   const updatedFiles = [];
   if (publish) {
     const listingFiles = updateListings(payload, dryRun, syncSite);
@@ -2381,6 +2470,31 @@ function main() {
       dryRun,
     );
     if (llmsResult.changed) updatedFiles.push(llmsResult.file);
+
+    if (indexNowEnabled) {
+      const indexNowKey = String(process.env.INDEXNOW_KEY || '').trim();
+      const indexNowKeyLocation = String(process.env.INDEXNOW_KEY_LOCATION || '').trim();
+      if (!indexNowKey) {
+        indexNowStatus = 'pominieto (brak INDEXNOW_KEY)';
+      } else if (dryRun) {
+        indexNowStatus = 'dry-run (bez wysylki)';
+      } else {
+        const articleUrl = `https://fitpo50.pl/${payload.slug}.html`;
+        const result = await submitIndexNow({
+          host: 'fitpo50.pl',
+          key: indexNowKey,
+          keyLocation: indexNowKeyLocation || undefined,
+          urlList: [articleUrl],
+        });
+        if (result.ok) {
+          indexNowStatus = `OK (${result.status || 200})`;
+        } else {
+          indexNowStatus = `blad (${result.status || 'network'}${result.error ? `: ${result.error}` : ''})`;
+        }
+      }
+    } else {
+      indexNowStatus = 'wylaczone (--indexnow false)';
+    }
   }
 
   let internalLinksResult = null;
@@ -2420,13 +2534,12 @@ function main() {
     sources: payload.sources.length,
     internalLinks: internalLinksResult,
     updatedFiles,
+    indexNowStatus,
     listingsUpdated: updatedFiles.some((file) => file.includes('porady.html') || file.includes('index.html') || file.endsWith('.html')),
   });
 }
 
-try {
-  main();
-} catch (err) {
+main().catch((err) => {
   console.error(`\nBłąd importera: ${err.message || err}`);
   process.exit(1);
-}
+});

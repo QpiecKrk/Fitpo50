@@ -220,6 +220,7 @@ async function main() {
 
   run('Raw JSON parse gate (input)', 'node', ['scripts/fix-fitpo50-json.js', '--file', input, '--write', 'false', '--check', 'true', '--allow-outside-repo', 'true']);
   run('JSON auto-fix (working copy)', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingCopy, '--write', 'true', '--allow-outside-repo', 'true']);
+  run('JSON strict autofix (links/FAQ/QA/title)', 'node', ['scripts/json-autofix-strict.js', '--file', workingCopy, '--map', 'data/internal-link-map.json']);
   run('JSON gate (single file)', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
   run('Article preflight (working copy)', 'node', ['scripts/article-preflight.js', '--file', workingCopy, '--assets-dir', assetsDir]);
   run('Prepare article assets (hero + sekcje)', 'node', ['scripts/prepare-article-assets.js', '--file', workingCopy, '--from', assetsDir]);

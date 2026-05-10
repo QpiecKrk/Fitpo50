@@ -936,3 +936,84 @@ Jesli artykul ma obrazy:
 - Utrzymujemy kierunek upraszczania operacyjnego:
   - usunięte aliasy `legacy:*` z `package.json`,
   - preferowane komendy bieżące: `article:pipeline`, `article:contract:diff`, `prepush:local`.
+
+## Ustalenia operacyjne 2026-05-10 (Komendy szybkie do publikacji artykułu)
+
+- Wprowadzony krok przyspieszający naprawę wejściowego JSON:
+  - `node scripts/json-autofix-strict.js --file "<plik.fitpo50.json>" --map data/internal-link-map.json`
+  - Cel: jednorazowo naprawić typowe blokery (martwe linki wewnętrzne, sync `faq_research`, `quick_answer` 40-60 słów, porządek `seo_title`, limit `key_takeaways`).
+
+- Zalecana sekwencja „FAST PRECHECK” (przed pełnym pipeline):
+  1. `node scripts/fix-fitpo50-json.js --file "<plik.fitpo50.json>" --write false --check true --allow-outside-repo true`
+  2. `node scripts/json-autofix-strict.js --file "<plik.fitpo50.json>" --map data/internal-link-map.json`
+  3. `node scripts/json-fitpo50-gate-diff.js --file "<plik.fitpo50.json>"`
+  4. `node scripts/article-preflight.js --file "<plik.fitpo50.json>" --assets-dir "<folder-z-grafikami>"`
+
+- Zalecana komenda publikacyjna (jedna komenda):
+  - `node scripts/article-pipeline.js --file "<plik.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --assets-dir "<folder-z-grafikami>" --force true`
+
+- Uwaga operacyjna:
+  - `article-pipeline.js` uruchamia już automatycznie `json-autofix-strict` na kopii roboczej przed `json:gate`.
+  - Słownik mapowania linków utrzymujemy w `data/internal-link-map.json` i rozszerzamy, gdy pojawiają się nowe nieistniejące slugi z draftów.
+
+- Komendy walidacji po publikacji:
+  - `node scripts/article-contract-check.js <slug>.html _site/<slug>.html`
+  - `npm run predeploy:check`
+
+- Komendy repo (przed push):
+  - `npm run prepush:local`
+  - dopiero potem `git push`.
+
+## Ustalenia operacyjne 2026-05-10 (AEO/GEO/E-E-A-T + IndexNow)
+
+- `speakable` w artykulach i generatorze musi byc zawężony (bez szerokiego `.article-content p`):
+  - dozwolony zestaw bazowy:
+    - `.article-header__title`
+    - `#quick-answer`
+    - `#quick-answer p`
+    - `.drop-cap`
+    - opcjonalnie przy obecnym bloku: `.key-takeaways h2`, `.key-takeaways li`
+  - źródło prawdy: `buildSpeakableSelectors()` w `scripts/import-article.js`.
+
+- GEO: odchodzimy od niestandardowego `faq_research` w `BlogPosting` JSON-LD.
+  - `faq_research` NIE jest publikowane do schema `BlogPosting`.
+  - dowody naukowe publikujemy przez standardowe `citation` (lista URL) + `mentions`.
+  - walidator `scripts/validate-article-standard.js` sprawdza teraz:
+    - `BlogPosting.citation` min. 4 poprawne URL-e.
+
+- GEO: `mentions` dla źródeł naukowych mają typ:
+  - `@type: "ScholarlyArticle"` (zamiast `Thing`),
+  - pola: `name`, `url`, opcjonalnie `datePublished` (pelny ISO), `author`.
+
+- E-E-A-T: autor artykułu w `BlogPosting` jest osobą:
+  - `author` = `Person` (`Grzegorz Kupiec`, `https://fitpo50.pl/o-mnie.html`, `sameAs`),
+  - `publisher` pozostaje `Organization` (`FitPo50`).
+  - w `head` utrzymujemy spójność:
+    - `<meta name="author" content="Grzegorz Kupiec">`
+    - `<meta property="article:author" content="Grzegorz Kupiec">`
+  - szablon zaktualizowany: `article-template-bento.html`.
+
+- Semantyka i jakość treści artykułu:
+  - alt-y obrazów inline opisują scenę/grafikę (nie są kopią H2),
+  - `aside.highlight-box` nie powtarza 1:1 zdań z akapitów; ma wnosić nową wartość praktyczną,
+  - dodajemy `BreadcrumbList` JSON-LD dla artykułów działowych.
+
+- FAQ edge-case:
+  - kontrakt FAQ obsługuje zarówno `<details class="faq-item">`, jak i `<article class="faq-item">`
+    (naprawiony przypadek regresji dla artykulow z FAQ jako `article`).
+
+- IndexNow:
+  - `scripts/import-article.js` wysyla ping po publikacji (`--publish true`) domyslnie z `--indexnow true`.
+  - konfiguracja:
+    - `INDEXNOW_KEY` (wymagane),
+    - `INDEXNOW_KEY_LOCATION` (opcjonalne).
+  - wymaganie produkcyjne: plik klucza musi byc publicznie dostępny pod:
+    - `https://fitpo50.pl/<INDEXNOW_KEY>.txt`
+  - bez `INDEXNOW_KEY` importer nie blokuje publikacji (status: pominieto).
+
+- Komendy operacyjne (publikacja + IndexNow):
+  1. `node scripts/import-article.js --file "<plik.fitpo50.json>" --publish true --run-internal-links auto --validate true`
+  2. (opcjonalnie) wylaczenie pingu:
+     - `node scripts/import-article.js --file "<plik.fitpo50.json>" --publish true --indexnow false`
+  3. test lokalny z ENV:
+     - `INDEXNOW_KEY="<key>" INDEXNOW_KEY_LOCATION="https://fitpo50.pl/<key>.txt" node scripts/import-article.js --file "<plik.fitpo50.json>" --publish true`

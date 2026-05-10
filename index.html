@@ -1444,14 +1444,14 @@
         <picture aria-hidden="true">
           <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
           <source srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/trening-silowy-cisnienie-po-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/hfpef-cicha-epidemia-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Trening siłowy po 50 a ciśnienie: plan na 8 tygodni – praktyczny</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy trening siłowy po 50 obniża ciśnienie? Tak – o 4–8 mmHg. Sprawdź bezpieczne zakresy intensywności i gotowy plan na 8 tygodni dla osób 50+. Konkretne</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="trening-silowy-po-50-cisnienie-plan-8-tygodni.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">HFpEF – cicha epidemia serca po pięćdziesiątce. Jak ją rozpoznać?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">HFpEF to niewydolność serca, gdy echo wygląda dobrze. Dowiedz się, jak ją rozpoznać po 50. roku życia i co zrobić, zanim pojawią się poważne objawy.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -1513,7 +1513,7 @@
           </h3>
           <p class="muted" id="tipsTitle">Dzisiaj: fundamenty zdrowia</p>
           <ul class="tips-list" id="tipsList"></ul>
-          <p class="small muted">W prototypie tipy rotują lokalnie co kilka sekund. Docelowo możemy je brać z JSON.</p>
+          <p class="small muted">Małe kroki robione regularnie dają największy efekt: stabilniejsze ciśnienie, lepszą glikemię i więcej energii na co dzień.</p>
           <div class="bento-links" aria-label="Powiązane tematy Quick Tips">
             <a class="bento-link" href="zdrowie.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.6-7 10-7 10z"/></svg>Zdrowie</a>
             <a class="bento-link" href="rusz-sie.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5a2 2 0 1 0-2 0"/><path d="M12 7l2.5 2.5"/><path d="M9.5 21l1-4 2-2 1 6"/><path d="M7 13l3-2 2.5.5"/></svg>Ruch</a>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Trening siłowy po 50 a ciśnienie: plan na 8 tygodni – praktyczny',
-        excerpt: 'Czy trening siłowy po 50 obniża ciśnienie? Tak – o 4–8 mmHg. Sprawdź bezpieczne zakresy intensywności i gotowy plan na 8 tygodni dla osób 50+. Konkretne',
-        image: './assets/trening-silowy-cisnienie-po-50-hero.webp',
-        url: 'trening-silowy-po-50-cisnienie-plan-8-tygodni.html'
+        title: 'HFpEF – cicha epidemia serca po pięćdziesiątce. Jak ją rozpoznać?',
+        excerpt: 'HFpEF to niewydolność serca, gdy echo wygląda dobrze. Dowiedz się, jak ją rozpoznać po 50. roku życia i co zrobić, zanim pojawią się poważne objawy.',
+        image: './assets/hfpef-cicha-epidemia-hero.webp',
+        url: 'hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,25 +2236,25 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Ruch',
+          category: 'Zdrowie',
+          title: 'HFpEF – cicha epidemia serca po pięćdziesiątce. Jak ją rozpoznać?',
+          excerpt: 'HFpEF to niewydolność serca, gdy echo wygląda dobrze. Dowiedz się, jak ją rozpoznać po 50. roku życia i co zrobić, zanim pojawią się poważne objawy.',
+          image: './assets/hfpef-cicha-epidemia-hero.webp',
+          url: 'hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html'
+        },
+        {
+          category: 'Ciekawe',
+          title: 'Terapia swiatlem czerwonym: gadget czy nauka? – praktyczny',
+          excerpt: 'Terapia swiatlem czerwonym (RLT) to nie tylko modny trend - sprawdzamy, co mowi nauka o jej wplywie na mitochondria, skore i regeneracje po 50-tce.',
+          image: './assets/rlt-hero-swiatlo-czerwone-kobieta.webp',
+          url: 'terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Trening siłowy po 50 a ciśnienie: plan na 8 tygodni – praktyczny',
           excerpt: 'Czy trening siłowy po 50 obniża ciśnienie? Tak – o 4–8 mmHg. Sprawdź bezpieczne zakresy intensywności i gotowy plan na 8 tygodni dla osób 50+. Konkretne',
           image: './assets/trening-silowy-cisnienie-po-50-hero.webp',
           url: 'trening-silowy-po-50-cisnienie-plan-8-tygodni.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Badania krwi po 50: co robić co 3 miesiące, a co raz w roku?',
-          excerpt: 'Które badania krwi po 50. roku życia wymagają kontroli co 3 miesiące, a które wystarczy robić raz w roku? Sprawdź konkretny harmonogram dla zdrowia 50+.',
-          image: './assets/badania-krwi-po-50-hero.webp',
-          url: 'badania-krwi-po-50-jak-czesto.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Jak siłownia chroni serce przed zawałem? Proste wyjaśnienie',
-          excerpt: 'Dowiedz się, jak trening siłowy realnie chroni Twoje serce przed zawałem. Proste wyjaśnienie procesów biologicznych, najnowsze badania i plan dla osób po',
-          image: './assets/silownia-serce-ochrona-hero.webp',
-          url: 'silownia-chroni-serce-przed-zawalem.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

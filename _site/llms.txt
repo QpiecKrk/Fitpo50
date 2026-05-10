@@ -255,4 +255,12 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Trening siłowy po 50 a ciśnienie: plan na 8 tygodni – praktyczny | FitPo50"
   section: "Ruch"
   summary: "Czy trening siłowy po 50 obniża ciśnienie? Tak – o 4–8 mmHg. Sprawdź bezpieczne zakresy intensywności i gotowy plan na 8 tygodni dla osób 50+. Konkretne"
+- url: https://fitpo50.pl/terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html
+  title: "Terapia swiatlem czerwonym: gadget czy nauka? – praktyczny | FitPo50"
+  section: "Ciekawe"
+  summary: "Terapia swiatlem czerwonym (RLT) to nie tylko modny trend - sprawdzamy, co mowi nauka o jej wplywie na mitochondria, skore i regeneracje po 50-tce."
+- url: https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html
+  title: "HFpEF – cicha epidemia serca po pięćdziesiątce. Jak ją rozpoznać? | FitPo50"
+  section: "Zdrowie"
+  summary: "HFpEF to niewydolność serca, gdy echo wygląda dobrze. Dowiedz się, jak ją rozpoznać po 50. roku życia i co zrobić, zanim pojawią się poważne objawy."
 

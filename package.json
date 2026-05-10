@@ -38,6 +38,7 @@
     "json:gate:diff": "node scripts/json-fitpo50-gate-diff.js",
     "json:gate:file": "node scripts/json-fitpo50-gate-diff.js --file \"$npm_config_file\"",
     "json:fix": "node scripts/fix-fitpo50-json.js",
+    "json:autofix:strict": "node scripts/json-autofix-strict.js",
     "article:fast-gate": "node scripts/article-fast-gate.js",
     "article:paste": "node scripts/article-paste.js",
     "article:preflight": "node scripts/article-preflight.js",
