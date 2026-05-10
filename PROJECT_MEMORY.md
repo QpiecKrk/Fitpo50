@@ -258,6 +258,29 @@
     - `Do uzupełnienia redakcyjnego`
     - `Pytanie do doprecyzowania`
     - `Odpowiedź do uzupełnienia`
+
+## Ustalenia operacyjne (2026-05-10) - semantic internal linker + szybkosc
+
+- **Auto-linking semantyczny w imporcie artykulu:**
+  - `scripts/article-pipeline.js` uruchamia import z `--run-internal-links auto` (nie `false`).
+  - Celem jest automatyczne osadzanie linkow wewnetrznych podczas publikacji, bez recznego dosztukowywania.
+
+- **Nowa warstwa semantyczna w `admin/helpers/internal-links.php`:**
+  - Dobor kandydatow do linkow bierze pod uwage nie tylko slug/tytul, ale tez:
+    - `meta description`,
+    - naglowki `h1/h2/h3`,
+    - fragment tresci artykulu.
+  - Wprowadzony scoring semantyczny (dopasowanie tokenow + frazy wielowyrazowe + kara za tokeny zbyt czeste).
+
+- **Filtr jakosci anchorow (anty-generyczne linkowanie):**
+  - Odrzucane sa slabe/generyczne anchory (np. bardzo ogolne slowa i ich odmiany).
+  - Priorytet maja anchory frazowe i bardziej specyficzne tematycznie.
+
+- **Cache korpusu dla szybkosci:**
+  - Wprowadzony cache: `data/cache/internal-link-corpus.json`.
+  - Cache odswieza sie automatycznie, gdy zmieniaja sie artykuly (fingerprint po `filemtime`).
+  - Efekt: szybsze kolejne importy (brak pelnego skanowania semantyki przy kazdym uruchomieniu).
+  - Plik cache jest lokalny i ignorowany przez Git (`.gitignore`).
     - nierozwiązane znaczniki `{{...}}`
   - Dodatkowy bezpiecznik SEO: tytuły urwane (np. kończące się na `i cofnąć`) są traktowane jako błąd blokujący.
 
