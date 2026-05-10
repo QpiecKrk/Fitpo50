@@ -6,6 +6,7 @@
  */
 
 const { spawnSync } = require('child_process');
+const fs = require('fs');
 
 function run(cmd, args) {
   return spawnSync(cmd, args, { encoding: 'utf8' });
@@ -28,6 +29,17 @@ function parseNameStatus(output) {
     .map((x) => x.file);
 }
 
+function isArticleHtml(file) {
+  if (!String(file || '').endsWith('.html')) return false;
+  if (String(file).startsWith('admin/')) return false;
+  try {
+    const raw = fs.readFileSync(file, 'utf8');
+    return /<body[^>]*class="[^"]*\barticle-template\b/i.test(raw);
+  } catch (_err) {
+    return false;
+  }
+}
+
 function readChangedFiles() {
   const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
   if (primary.status === 0) return parseNameStatus(primary.stdout);
@@ -38,7 +50,7 @@ function readChangedFiles() {
 }
 
 function main() {
-  const changed = readChangedFiles();
+  const changed = readChangedFiles().filter((f) => isArticleHtml(f));
   const args = ['scripts/article-publish-guard.js'];
   changed.forEach((f) => args.push('--changed', f));
   const res = run('node', args);

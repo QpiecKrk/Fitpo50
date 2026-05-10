@@ -1,9 +1,19 @@
 #!/usr/bin/env node
 
 const { spawnSync } = require('child_process');
+const fs = require('fs');
 
 function run(cmd, args) {
   return spawnSync(cmd, args, { encoding: 'utf8' });
+}
+
+function isArticleHtml(file) {
+  try {
+    const raw = fs.readFileSync(file, 'utf8');
+    return /<body[^>]*class="[^"]*\barticle-template\b/i.test(raw);
+  } catch (_err) {
+    return false;
+  }
 }
 
 function changedHtmlFiles() {
@@ -21,7 +31,8 @@ function changedHtmlFiles() {
     })
     .filter((x) => x.file && !String(x.status).startsWith('D'))
     .map((x) => x.file)
-    .filter((f) => f.endsWith('.html') && !f.startsWith('admin/'));
+    .filter((f) => f.endsWith('.html') && !f.startsWith('admin/'))
+    .filter((f) => isArticleHtml(f));
   return [...new Set(files)];
 }
 
