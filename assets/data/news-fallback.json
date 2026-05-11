@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-09T09:49:25+00:00",
+    "updatedAt": "2026-05-11T07:34:02+00:00",
     "items": [
+        {
+            "id": "news_075855833e61",
+            "title": "Markery nowotworowe z krwi: dlaczego trzeba uważać",
+            "content_html": "<p><span>Nie ma jednego prostego <a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">badania</a> krwi, które </span><span><strong><span></span><span>wyklucza raka</span></strong>. To ważne, bo hasła typu „<span class=\"news-text-tone--2\">zrób pakiet markerów i sprawdź, czy masz nowotwór</span>” brzmią dobrze marketingowo, ale medycznie są ryzykowne.</span></p><p><span>Klasyczne <span class=\"news-text-tone--3\">markery nowotworowe</span> mają ograniczoną </span><span><strong><span></span><span><strong><span></span><span>czułość i swoistość</span></strong></span></strong>. Mogą wyjść podwyższone u osoby bez raka, np. przy stanie zapalnym, chorobach <span class=\"news-text-tone--3\">wątroby, endometriozie czy łagodnych zmianach</span>. Mogą też być prawidłowe mimo rozwijającego się <span class=\"news-text-tone--3\">nowotworu</span>. To daje albo <strong>fałszywy alarm</strong>, albo fałszywe poczucie bezpieczeństwa.</span><br><span></span></p><p><span>W praktyce markery częściej służą do </span><span><strong><span></span><span>monitorowania leczenia</span></strong>, kontroli nawrotu albo oceny przebiegu choroby u osoby już diagnozowanej. Nie są dobrym <span class=\"news-text-tone--4\">narzędziem do przesiewowego</span> szukania raka u zdrowych ludzi. Wyjątkiem bywa </span><span><strong><span></span><span>PSA</span></strong>, stosowane w ocenie ryzyka <span class=\"news-text-tone--4\">raka prostaty,</span> ale ono też nie jest idealne — może dawać wyniki fałszywie dodatnie i prowadzić do niepotrzebnych badań.</span><br><span></span></p><p><strong><span>J</span><span>eśli chcesz robić profilaktykę raka, lepiej wybierać badania zgodne z wiekiem, płcią, objawami i historią rodzinną: kolonoskopia, cytologia/HPV, mammografia, badanie skóry, USG lub inne badania zalecone przez lekarza. Pakiet markerów „na wszelki wypadek” to często więcej stresu niż realnej ochrony.</span></strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260502_111329_938f9699.avif",
+                "webp": "./assets/news/news_20260502_111329_938f9699.webp",
+                "jpg": "./assets/news/news_20260502_111329_938f9699.jpg",
+                "alt": "Markery nowotworowe",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "National Cancer Institute — PSA Test",
+                    "url": "https://www.cancer.gov/types/prostate/psa-fact-sheet"
+                },
+                {
+                    "label": "Zwrotnik Raka — Profilaktyka nowotworów",
+                    "url": "https://www.zwrotnikraka.pl/profilaktyka-nowotworow-wszystko-co-musisz-wiedziec/"
+                }
+            ],
+            "updated_at": "2026-05-11T07:34:02+00:00",
+            "published_at": "2026-05-11T07:34:02+00:00",
+            "excerpt": "Nie ma jednego prostego badania krwi, które wyklucza raka. To ważne, bo hasła typu „zrób pakiet markerów i sprawdź, czy masz nowotwór” brzmią dobrze marketingowo, ale medycznie są ryzykowne.Klasyczne markery nowotworowe…"
+        },
         {
             "id": "news_ec4403abe0f3",
             "title": "Pomidory + awokado: czy naprawdę zwiększają wchłanianie likopenu?",
