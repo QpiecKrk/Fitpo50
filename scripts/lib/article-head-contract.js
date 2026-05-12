@@ -16,6 +16,10 @@ function validateArticleHeadContract(raw, opts = {}) {
   };
 
   const title = firstMatch(raw, /<title>([^<]+)<\/title>/i);
+  const ogTitle = firstMatch(raw, /<meta\s+property="og:title"\s+content="([^"]*)"/i);
+  const twitterTitle = firstMatch(raw, /<meta\s+name="twitter:title"\s+content="([^"]*)"/i);
+  const ogImage = firstMatch(raw, /<meta\s+property="og:image"\s+content="([^"]*)"/i);
+  const twitterImage = firstMatch(raw, /<meta\s+name="twitter:image"\s+content="([^"]*)"/i);
   if (!title) {
     errors.push('Brak tagu <title>.');
   } else {
@@ -25,6 +29,28 @@ function validateArticleHeadContract(raw, opts = {}) {
     if (/\s[–-]\s*\|\s*fitpo50\s*$/i.test(title)) {
       errors.push('<title> ma podwójny separator przed "| FitPo50" (np. "– |").');
     }
+  }
+
+  if (ogTitle && /przewodnik\s*[–-]\s*praktyczny\s+przewodnik/i.test(ogTitle)) {
+    warnings.push('Duplikacja frazy w tytule (np. "przewodnik – praktyczny przewodnik").');
+  }
+  if (twitterTitle && /przewodnik\s*[–-]\s*praktyczny\s+przewodnik/i.test(twitterTitle)) {
+    warnings.push('Duplikacja frazy w twitter:title (np. "przewodnik – praktyczny przewodnik").');
+  }
+
+  const titleBase = title.replace(/\s*\|\s*FitPo50\s*$/i, '').trim();
+  if (titleBase && ogTitle && titleBase !== ogTitle) {
+    warnings.push('Niespójny tytuł: <title> (bez "| FitPo50") != og:title.');
+  }
+  if (titleBase && twitterTitle && titleBase !== twitterTitle) {
+    warnings.push('Niespójny tytuł: <title> (bez "| FitPo50") != twitter:title.');
+  }
+
+  if (ogImage && !/\.jpg(?:\?|#|$)/i.test(ogImage)) {
+    warnings.push('og:image powinno wskazywać plik .jpg (kompatybilność social scraperów).');
+  }
+  if (twitterImage && !/\.jpg(?:\?|#|$)/i.test(twitterImage)) {
+    warnings.push('twitter:image powinno wskazywać plik .jpg (kompatybilność social scraperów).');
   }
 
   const metaDescription = firstMatch(raw, /<meta\s+name="description"\s+content="([^"]*)"/i);

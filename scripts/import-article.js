@@ -1678,6 +1678,13 @@ function shortText(value, max = 170) {
   return `${clean.slice(0, Math.max(0, max - 1)).trim()}…`;
 }
 
+function normalizeReadingTimeLabel(value, fallback = '11 min czytania') {
+  const raw = String(value || '').trim();
+  if (!raw) return fallback;
+  if (/^\d+$/.test(raw)) return `${raw} min`;
+  return raw;
+}
+
 function searchTextFromPayload(payload) {
   const base = [
     payload.title,
@@ -1688,7 +1695,7 @@ function searchTextFromPayload(payload) {
 }
 
 function buildListingContext(payload) {
-  const readTime = String(payload.readingTime || '11 min czytania').trim();
+  const readTime = normalizeReadingTimeLabel(payload.readingTime, '11 min czytania');
   const readTimeShort = readTime.replace(/\s*czytania/i, '').trim();
   const title = shortText(payload.title, 120);
   const excerpt = shortText(stripTags(payload.metaDescription || payload.leadRaw), 185);
@@ -2163,7 +2170,7 @@ function normalizePayload(data, cliCategory, options = {}) {
   const datePublished = toIsoDateTimeWithTimezone(data.date_published || data.published_at || fallbackDate, '08:00:00');
   const dateModified = toIsoDateTimeWithTimezone(data.date_modified || data.updated_at || datePublished, '09:30:00');
 
-  const readingTime = String(data.reading_time || data.readingTime || '11 min czytania').trim();
+  const readingTime = normalizeReadingTimeLabel(data.reading_time || data.readingTime, '11 min czytania');
 
   const heroImage = String(data.hero_image || data.heroImage || slug).trim();
   const heroAlt = String(data.hero_alt || data.heroAlt || title).trim();

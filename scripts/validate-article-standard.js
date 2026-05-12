@@ -248,6 +248,18 @@ function validateRepeatedLongSentences(articleContentHtml, errors) {
   }
 }
 
+function validateAsidePracticalValue(articleContentHtml, errors) {
+  const asides = [...articleContentHtml.matchAll(/<aside\b[^>]*class="[^"]*\bhighlight-box\b[^"]*"[^>]*>[\s\S]*?<p[^>]*>([\s\S]*?)<\/p>[\s\S]*?<\/aside>/gi)];
+  for (const aside of asides) {
+    const text = stripTags(aside[1]);
+    const words = countWords(text);
+    if (words < 7) {
+      errors.push(`Boks aside ma zbyt mało treści praktycznej (${words} słów).`);
+      return;
+    }
+  }
+}
+
 function validateCitationsInBlogPosting(raw, errors) {
   const scripts = [...raw.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
   for (const scriptMatch of scripts) {
@@ -306,6 +318,32 @@ function validateSpeakableTargetsQuickAnswer(raw, errors) {
     }
   }
   errors.push('Brak schema BlogPosting do walidacji speakable.');
+}
+
+function validateBreadcrumbList(raw, errors) {
+  const scripts = [...raw.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+  for (const scriptMatch of scripts) {
+    const body = String(scriptMatch[1] || '').trim();
+    let parsed;
+    try {
+      parsed = JSON.parse(body);
+    } catch (_err) {
+      continue;
+    }
+    const nodes = Array.isArray(parsed) ? parsed : [parsed];
+    for (const node of nodes) {
+      if (!node || typeof node !== 'object') continue;
+      const type = node['@type'];
+      const isBreadcrumb = type === 'BreadcrumbList' || (Array.isArray(type) && type.includes('BreadcrumbList'));
+      if (!isBreadcrumb) continue;
+      const items = Array.isArray(node.itemListElement) ? node.itemListElement : [];
+      if (items.length < 3) {
+        errors.push(`BreadcrumbList: wymagane minimum 3 pozycje (jest ${items.length}).`);
+      }
+      return;
+    }
+  }
+  errors.push('Brak schema BreadcrumbList.');
 }
 
 function validateHeadSeoConsistency(raw, errors) {

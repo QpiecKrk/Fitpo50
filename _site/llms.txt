@@ -263,4 +263,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "HFpEF – cicha epidemia serca po pięćdziesiątce. Jak ją rozpoznać? | FitPo50"
   section: "Zdrowie"
   summary: "HFpEF to niewydolność serca, gdy echo wygląda dobrze. Dowiedz się, jak ją rozpoznać po 50. roku życia i co zrobić, zanim pojawią się poważne objawy."
+- url: https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html
+  title: "Kreatyna po 50-tce: kompletny przewodnik – praktyczny przewodnik | FitPo50"
+  section: "Zdrowie"
+  summary: "Kreatyna po 50-tce: jak dziala na miesnie, kosci i mozg? Dawkowanie, bezpieczenstwo i najnowsze badania naukowe w jednym przewodniku. Konkretne wskazówki, co"
 

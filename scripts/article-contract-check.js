@@ -29,6 +29,9 @@ function validateArticleContract(filePath) {
   const faqQuestions = countMatches(raw, /<(?:details|article)\s+class="faq-item"/gi);
   if (faqQuestions < 4) errors.push(`FAQ: za mało pytań (jest ${faqQuestions}, min 4).`);
 
+  const hasBreadcrumbList = /"@type"\s*:\s*"BreadcrumbList"/i.test(raw);
+  if (!hasBreadcrumbList) warnings.push('Brak schema BreadcrumbList.');
+
   const isoDate = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(Z|[+-]\d{2}:\d{2})$/;
   const pub = (raw.match(/article:published_time"\s+content="([^"]+)"/i) || [])[1] || '';
   const mod = (raw.match(/article:modified_time"\s+content="([^"]+)"/i) || [])[1] || '';
