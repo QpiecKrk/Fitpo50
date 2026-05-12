@@ -69,22 +69,10 @@ run_minification() {
   fi
 }
 
-echo "Uruchamiam walidację SEO hardening (Sprint 1)..."
+echo "Uruchamiam aktualną walidację predeploy..."
 (
   cd "$ROOT_DIR"
-  "$NODE_BIN" scripts/archive/check_sprint1_hardening.mjs
-)
-
-echo "Uruchamiam walidację AEO/GEO hardening (Sprint 2)..."
-(
-  cd "$ROOT_DIR"
-  "$NODE_BIN" scripts/archive/check_sprint2_aeo_geo.mjs
-)
-
-echo "Uruchamiam walidację AIO/GEO hardening (Sprint 3)..."
-(
-  cd "$ROOT_DIR"
-  "$NODE_BIN" scripts/archive/check_sprint3_aio_geo.mjs
+  "$NODE_BIN" scripts/predeploy-gate.js
 )
 
 rm -rf "$OUTPUT_DIR"
