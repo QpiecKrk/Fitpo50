@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-11T07:34:02+00:00",
+    "updatedAt": "2026-05-12T09:32:46+00:00",
     "items": [
+        {
+            "id": "news_24b1585d5429",
+            "title": "Schłodzony ryż a cukier we krwi: czy to naprawdę działa?",
+            "content_html": "<p><span>Tak, w tym haśle jest sporo prawdy, ale z kilkoma ważnymi <span class=\"news-text-tone--3\">zastrzeżeniami</span>. Gdy ugotowany ryż zostanie schłodzony, część skrobi zmienia strukturę w tzw. </span><span><strong><span></span><span>skrobię oporną</span></strong>. <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">Organizm</a> trawi ją wolniej, trochę bardziej jak <span class=\"news-text-tone--3\">błonnik</span>, więc po takim ryżu wzrost glukozy we krwi może być mniejszy niż po świeżo ugotowanym.</span></p><p><span>W <a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">badaniu</a> z 2015 roku porównano świeżo ugotowany biały ryż z ryżem schłodzonym przez </span><span><strong><span></span><span>24 godziny w 4°C</span></strong>, a potem podgrzanym. Ten schłodzony i odgrzany miał więcej <span class=\"news-text-tone--4\">skrobi opornej </span>i powodował niższą odpowiedź <span class=\"news-text-tone--2\">glikemiczną niż świeży ryż</span>. Podobne wnioski pojawiły się w badaniu u osób z cukrzycą typu 1: <strong>ryż po chłodzeniu dawał niższy wzrost glukozy po posiłku.</strong> <span class=\"news-text-tone--2\">Tu jednak ważny haczyk</span> — przy standardowej dawce insuliny zwiększał też ryzyko hipoglikemii.  </span><br><span></span></p><p><span>Czy trzeba chłodzić dokładnie 12–24 godziny? Najlepiej bazować na badaniach, w których często używano </span><span><strong><span></span><span>24 godzin w lodówce przy ok. 4°C</span><span>.</span></strong> Krótsze <span class=\"news-text-tone--1\">chłodzenie</span> też może coś zmieniać, ale efekt może być słabszy.</span><br><span></span></p><p><strong>Co z olejem kokosowym?</strong><span> Tu internet trochę odleciał. Były doniesienia, że gotowanie ryżu z olejem kokosowym i późniejsze chłodzenie może mocno zwiększyć ilość skrobi opornej, ale te dane były głównie wstępne i mocno medialne. </span><span class=\"news-text-tone--1\">Nie traktowałbym tego jako pewnej metody na „obcięcie kalorii o połowę”.</span><span> </span><span> </span><br><span></span></p><p><strong><span>U</span><span>gotowanie ryżu, szybkie schłodzenie go w lodówce i zjedzenie następnego dnia po podgrzaniu może być prostym sposobem na łagodniejszy skok cukru. Ale to nie robi z ryżu produktu „bez kalorii” i nie zastępuje kontroli porcji.</span></strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260503_094436_a98bfc4a.avif",
+                "webp": "./assets/news/news_20260503_094436_a98bfc4a.webp",
+                "jpg": "./assets/news/news_20260503_094436_a98bfc4a.jpg",
+                "alt": "Ryż a cukier w organiźmie",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Effect of cooling of cooked white rice on resistant starch content and glycemic response",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/26693746/"
+                },
+                {
+                    "label": "Influence of resistant starch resulting from the cooling of rice on postprandial glycemia in type 1 diabetes",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/35429987/"
+                }
+            ],
+            "updated_at": "2026-05-12T09:32:46+00:00",
+            "published_at": "2026-05-12T09:32:46+00:00",
+            "excerpt": "Tak, w tym haśle jest sporo prawdy, ale z kilkoma ważnymi zastrzeżeniami. Gdy ugotowany ryż zostanie schłodzony, część skrobi zmienia strukturę w tzw. skrobię oporną. Organizm trawi ją wolniej, trochę bardziej jak błonn…"
+        },
         {
             "id": "news_075855833e61",
             "title": "Markery nowotworowe z krwi: dlaczego trzeba uważać",
