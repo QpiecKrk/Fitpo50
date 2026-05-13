@@ -19,10 +19,11 @@ Kolejność elementów jest stała:
 1. `.shell`
 2. `.topbar`
 3. `.article-intro-grid` (małe bento + hero)
-4. `.article-content`
-5. `.reading-room.porady-preview.section-padding` (jak na `index.html`)
-6. `.bottom-nav`
-7. `.site-footer-bento` (wewnątrz `body`)
+4. `#quick-answer.quick-answer.reveal` (sekcja "Szybka odpowiedź")
+5. `.article-content`
+6. `.reading-room.porady-preview.section-padding` (jak na `index.html`)
+7. `.bottom-nav`
+8. `.site-footer-bento` (wewnątrz `body`)
 
 ## 4. Wymagane klasy i znaczniki
 - `body` musi mieć klasy: `article-template` + `article--{kategoria}`
@@ -79,6 +80,17 @@ Artykuł nie przechodzi, jeśli:
 - footer jest poza `body`,
 - nagłówek czytelni nie jest index-style,
 - nie ma prawidłowej klasy kategorii.
+
+## 8a. Quick Answer Contract (obowiązkowe)
+- Sekcja ma istnieć dokładnie raz:
+  - `<section id="quick-answer" class="quick-answer reveal" aria-label="Szybka odpowiedź">`
+- Wymagana zawartość:
+  - jedno `h2` o treści `Szybka odpowiedź`,
+  - jeden krótki akapit podsumowania (`p`).
+- Pozycja kanoniczna:
+  - po bloku PDF (`.pdf-hero-download`) i przed główną treścią.
+- Reguła anty-regresji layoutu:
+  - jeśli w starszym artykule `quick-answer` jest poza `.article-content`, musi być wyrównany do tej samej szerokości i paddingu co `.article-content` (obsługiwane przez `article.css`).
 
 ## 9. Guardrails SEO/AEO (obowiązkowe)
 - `<title>`: celuj w 55-65 znaków (max 65).

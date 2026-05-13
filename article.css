@@ -477,6 +477,29 @@ body.article-template .article-content h2 + p {
   color: #223040;
 }
 
+/* Quick Answer guard:
+   legacy articles may have .quick-answer outside .article-content.
+   Keep it aligned to article content width and rhythm. */
+body.article-template .article-main-bento > .quick-answer {
+  max-width: 800px;
+  margin: 0 auto var(--space-8);
+  padding: 0 var(--space-6);
+}
+
+body.article-template .article-main-bento > .quick-answer h2 {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  color: var(--color-text);
+}
+
+body.article-template .article-main-bento > .quick-answer p {
+  margin: 0;
+  font-family: var(--font-body);
+  color: #2b3038;
+  line-height: 1.72;
+}
+
 body.article-template .figure-stack {
   margin: var(--space-8) 0 var(--space-10);
   padding-top: var(--space-4);
@@ -644,6 +667,10 @@ body.article-template .medical-disclaimer {
 
   body.article-template .article-content {
     font-size: 1rem;
+    padding: 0 var(--space-4);
+  }
+
+  body.article-template .article-main-bento > .quick-answer {
     padding: 0 var(--space-4);
   }
 
