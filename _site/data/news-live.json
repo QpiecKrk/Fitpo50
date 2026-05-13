@@ -1,7 +1,25 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-12T09:32:46+00:00",
+    "updatedAt": "2026-05-13T13:37:57+00:00",
     "items": [
+        {
+            "id": "news_89bf7f7c70ec",
+            "title": "Enzym, który „czyści tętnice”?",
+            "content_html": "<p><span>Post sugeruje, że włoscy naukowcy znaleźli enzym, który usuwa blaszkę miażdżycową i może odwracać chorobę serca. </span><span><strong><span></span><span>Na dziś nie ma wiarygodnego dowodu klinicznego, że istnieje taki enzym dostępny jako leczenie, który bez operacji „rozpuszcza” blaszki w tętnicach u ludzi.</span></strong> To hasło jest mocno podkręcone.</span></p><p><span></span><br></p><p><span>W sieci najczęściej przewijają się dwa wątki. Pierwszy to </span><span><strong><span></span><span>PLTP</span></strong> — białko/enzym związane z transportem lipidów i <span class=\"news-text-tone--4\">HDL</span>. Drugi to </span><span><strong><span></span><span>CD39</span></strong>, enzym badany w kontekście zapalenia, płytek krwi i miażdżycy. Rzeczywiście istnieją prace pokazujące, że takie mechanizmy mogą wpływać na rozwój blaszki miażdżycowej. <strong>Na przykład badania nad CD39</strong> wskazują, że ten enzym może mieć działanie ochronne w naczyniach i wpływać na procesy związane z powstawaniem blaszki. Ale to nie znaczy, że mamy lek, który „<span class=\"news-text-tone--4\">czyści tętnice</span>” jak Kret rurę po świętach.  </span></p><p><span><strong>Miażdżyca</strong> jest bardziej skomplikowana. Blaszka to nie tylko „<span class=\"news-text-tone--2\">tłuszcz do rozpuszczenia</span>”, ale mieszanina cholesterolu, komórek zapalnych, tkanki włóknistej i często wapnia. Dlatego medycyna skupia się głównie na </span><span><strong><span></span><span>obniżaniu LDL, stabilizacji blaszki i zmniejszaniu ryzyka <a href=\"silownia-chroni-serce-przed-zawalem.html\">zawału</a> oraz udaru</span></strong>, a nie na prostym mechanicznym „zmywaniu” złogów. <span class=\"news-text-tone--1\">Europejskie Towarzystwo Kardiologiczne</span> podkreśla, że częściowa regresja blaszki jest możliwa, ale zwykle jest </span><span><strong><span></span><span>umiarkowana i zależna od leczenia</span></strong>, głównie intensywnego obniżania <span class=\"news-text-tone--3\">LDL</span> statynami i lekami takimi jak inhibitory <span class=\"news-text-tone--3\">PCSK9</span>.  </span><br><span></span></p><p><span>W praktyce najbardziej udowodnione metody to nadal: </span><span class=\"news-text-tone--4\">statyny, ezetymib, inhibitory PCSK9, kontrola ciśnienia, rzucenie palenia, aktywność fizyczna, dieta i leczenie cukrzycy</span><span>. To mniej sexy niż „enzym odkryty przez Włochów”, ale za to działa w badaniach klinicznych.</span><br><span></span></p><p><strong><span>N</span><span>auka bada enzymy i szlaki biologiczne związane z miażdżycą, ale viralowe twierdzenie jest przesadzone. Nie ma dziś potwierdzonej <a href=\"terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html\">terapii</a> enzymatycznej, która u ludzi bezpiecznie usuwa blaszki miażdżycowe i odwraca chorobę serca. Najuczciwsza wersja brzmi: trwają badania nad mechanizmami, które kiedyś mogą pomóc w leczeniu miażdżycy. Na razie podstawą pozostaje klasyczne, nudne, ale skuteczne obniżanie ryzyka.</span></strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260513_133745_d19518ac",
+            "image_alt": "Enzym czyszczący tętnice",
+            "sources": [
+                {
+                    "label": "Journal of Clinical Investigation — CD39 i miażdżyca",
+                    "url": "https://www.jci.org/articles/view/79514"
+                }
+            ],
+            "created_at": "2026-05-13T13:37:45+00:00",
+            "updated_at": "2026-05-13T13:37:45+00:00",
+            "published_at": ""
+        },
         {
             "id": "news_b3a02cb6a066",
             "title": "Wodór i długowieczność: ciekawy trop, ale jeszcze nie eliksir młodości",
@@ -94,7 +112,7 @@
             "id": "news_566a85ef707f",
             "title": "„Zastrzyk z tlenem”, który pozwala żyć bez oddychania?",
             "content_html": "<p><span>To viralowe hasło ma <span class=\"news-text-tone--1\">prawdziwe naukowe źródło</span>, ale jest mocno przesadzone. Naukowcy rzeczywiście opracowali </span><span><strong><span></span><span>mikrocząsteczki wypełnione tlenem</span></strong>, które można podawać dożylnie, aby szybko dostarczyć tlen do krwi, gdy płuca nie <a href=\"dieta-po-50.html\">działają</a> albo drogi oddechowe są zablokowane.</span></p><p><span>Kluczowe badanie opublikowano w </span><span><strong><span></span><span>Science Translational Medicine</span></strong> w 2012 roku. Zespół z <span class=\"news-text-tone--4\">Boston Children’s Hospital</span> testował mikroskopijne pęcherzyki tlenu zamknięte w lipidowej otoczce. W badaniach na królikach z ostrą hipoksemią podanie takich <span class=\"news-text-tone--3\">cząsteczek szybko zwiększało</span> poziom tlenu we krwi i zmniejszało ryzyko zatrzymania krążenia oraz uszkodzenia narządów.  </span><br><span></span></p><p><span>Ale tu jest najważniejsze: </span><span><strong><span></span><span>to nie oznacza, że człowiek może normalnie żyć bez oddychania</span><span>. </span></strong>To rozwiązanie miało być awaryjnym pomostem — na minuty, w sytuacjach krytycznych, np. przy niedrożności dróg oddechowych, ostrej <span class=\"news-text-tone--2\">niewydolności oddechowej albo zatrzymaniu krążenia</span>. <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">Organizm</a> nadal musi usuwać dwutlenek węgla, regulować pH krwi i utrzymywać krążenie. </span><strong>Sam tlen we krwi nie załatwia całej fizjologii oddychania.</strong><br><span></span></p><p><span>Sama technologia też nie jest jeszcze standardowym leczeniem. </span><span class=\"news-text-tone--4\">W nowszych pracach rozwijano kolejne wersje mikrocząsteczek, bezpieczniejsze mikrobańki</span><span>, które mają zmniejszać ryzyko zatorów i lepiej kontrolować uwalnianie tlenu. </span><span class=\"news-text-tone--3\">Boston Children’s Hospital</span><span> pisał w 2024 roku, że to nadal etap przedkliniczny i droga do przyszłych badań klinicznych, a nie gotowy „</span><span class=\"news-text-tone--1\">zastrzyk na życie bez powietrza</span><span>”. </span><span> </span><br><span></span></p><p><strong><span>N</span><span>auka jest prawdziwa i bardzo ciekawa, ale internet zrobił z niej bajkę science fiction. To potencjalna metoda ratunkowego natlenienia krwi w nagłych przypadkach, a nie sposób na życie bez oddychania. Czyli: bardziej „kupujemy kilka minut dla lekarzy” niż „człowiek-amfibia po zastrzyku”.</span></strong><br><span></span></p>",
-            "status": "draft",
+            "status": "published",
             "sort_order": 1,
             "image_base": "news_20260506_120956_6d1e8719",
             "image_alt": "Tlen w krwi",
@@ -109,8 +127,8 @@
                 }
             ],
             "created_at": "2026-05-06T12:09:56+00:00",
-            "updated_at": "2026-05-06T12:09:56+00:00",
-            "published_at": ""
+            "updated_at": "2026-05-13T13:37:57+00:00",
+            "published_at": "2026-05-13T13:37:57+00:00"
         },
         {
             "id": "news_24b1585d5429",

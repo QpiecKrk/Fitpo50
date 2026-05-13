@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-12T09:32:46+00:00",
+    "updatedAt": "2026-05-13T13:37:57+00:00",
     "items": [
+        {
+            "id": "news_566a85ef707f",
+            "title": "„Zastrzyk z tlenem”, który pozwala żyć bez oddychania?",
+            "content_html": "<p><span>To viralowe hasło ma <span class=\"news-text-tone--1\">prawdziwe naukowe źródło</span>, ale jest mocno przesadzone. Naukowcy rzeczywiście opracowali </span><span><strong><span></span><span>mikrocząsteczki wypełnione tlenem</span></strong>, które można podawać dożylnie, aby szybko dostarczyć tlen do krwi, gdy płuca nie <a href=\"dieta-po-50.html\">działają</a> albo drogi oddechowe są zablokowane.</span></p><p><span>Kluczowe badanie opublikowano w </span><span><strong><span></span><span>Science Translational Medicine</span></strong> w 2012 roku. Zespół z <span class=\"news-text-tone--4\">Boston Children’s Hospital</span> testował mikroskopijne pęcherzyki tlenu zamknięte w lipidowej otoczce. W badaniach na królikach z ostrą hipoksemią podanie takich <span class=\"news-text-tone--3\">cząsteczek szybko zwiększało</span> poziom tlenu we krwi i zmniejszało ryzyko zatrzymania krążenia oraz uszkodzenia narządów.  </span><br><span></span></p><p><span>Ale tu jest najważniejsze: </span><span><strong><span></span><span>to nie oznacza, że człowiek może normalnie żyć bez oddychania</span><span>. </span></strong>To rozwiązanie miało być awaryjnym pomostem — na minuty, w sytuacjach krytycznych, np. przy niedrożności dróg oddechowych, ostrej <span class=\"news-text-tone--2\">niewydolności oddechowej albo zatrzymaniu krążenia</span>. <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">Organizm</a> nadal musi usuwać dwutlenek węgla, regulować pH krwi i utrzymywać krążenie. </span><strong>Sam tlen we krwi nie załatwia całej fizjologii oddychania.</strong><br><span></span></p><p><span>Sama technologia też nie jest jeszcze standardowym leczeniem. </span><span class=\"news-text-tone--4\">W nowszych pracach rozwijano kolejne wersje mikrocząsteczek, bezpieczniejsze mikrobańki</span><span>, które mają zmniejszać ryzyko zatorów i lepiej kontrolować uwalnianie tlenu. </span><span class=\"news-text-tone--3\">Boston Children’s Hospital</span><span> pisał w 2024 roku, że to nadal etap przedkliniczny i droga do przyszłych badań klinicznych, a nie gotowy „</span><span class=\"news-text-tone--1\">zastrzyk na życie bez powietrza</span><span>”. </span><span> </span><br><span></span></p><p><strong><span>N</span><span>auka jest prawdziwa i bardzo ciekawa, ale internet zrobił z niej bajkę science fiction. To potencjalna metoda ratunkowego natlenienia krwi w nagłych przypadkach, a nie sposób na życie bez oddychania. Czyli: bardziej „kupujemy kilka minut dla lekarzy” niż „człowiek-amfibia po zastrzyku”.</span></strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260506_120956_6d1e8719.avif",
+                "webp": "./assets/news/news_20260506_120956_6d1e8719.webp",
+                "jpg": "./assets/news/news_20260506_120956_6d1e8719.jpg",
+                "alt": "Tlen w krwi",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Boston Children’s Hospital — Injecting oxygen microbubbles",
+                    "url": "https://answers.childrenshospital.org/injected-microbubbles-could-be-a-safe-way-to-deliver-emergency-oxygen/"
+                },
+                {
+                    "label": "Science Translational Medicine — “Oxygen Gas–Filled Microparticles Provide Intravenous Oxygen Delivery”",
+                    "url": "https://www.science.org/doi/10.1126/scitranslmed.3003679"
+                }
+            ],
+            "updated_at": "2026-05-13T13:37:57+00:00",
+            "published_at": "2026-05-13T13:37:57+00:00",
+            "excerpt": "To viralowe hasło ma prawdziwe naukowe źródło, ale jest mocno przesadzone. Naukowcy rzeczywiście opracowali mikrocząsteczki wypełnione tlenem, które można podawać dożylnie, aby szybko dostarczyć tlen do krwi, gdy płuca…"
+        },
         {
             "id": "news_24b1585d5429",
             "title": "Schłodzony ryż a cukier we krwi: czy to naprawdę działa?",
