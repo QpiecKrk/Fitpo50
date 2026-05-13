@@ -91,6 +91,10 @@ Artykuł nie przechodzi, jeśli:
   - po bloku PDF (`.pdf-hero-download`) i przed główną treścią.
 - Reguła anty-regresji layoutu:
   - jeśli w starszym artykule `quick-answer` jest poza `.article-content`, musi być wyrównany do tej samej szerokości i paddingu co `.article-content` (obsługiwane przez `article.css`).
+- Reguła wizualna (obowiązkowa):
+  - akapit `quick-answer` ma być zawsze wyróżniony jako box (jasne tło, lewa belka akcentu, obramowanie, zaokrąglenie),
+  - nagłówek `Szybka odpowiedź` ma mieć dolny akcent (krótka linia),
+  - niedozwolony jest wariant „zwykły paragraf bez wyróżnienia”.
 
 ## 9. Guardrails SEO/AEO (obowiązkowe)
 - `<title>`: celuj w 55-65 znaków (max 65).

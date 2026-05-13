@@ -975,6 +975,12 @@ Jesli artykul ma obrazy:
     - opcjonalnie przy obecnym bloku: `.key-takeaways h2`, `.key-takeaways li`
   - źródło prawdy: `buildSpeakableSelectors()` w `scripts/import-article.js`.
 
+- Quick Answer (standard wizualny, takze dla starych artykulow):
+  - sekcja `#quick-answer` jest obowiazkowa i ma byc wyraznie wyrozniona (nie zwykly paragraf),
+  - naglowek `Szybka odpowiedz` musi miec dolny akcent (krotka linia),
+  - akapit podsumowania ma byc renderowany jako box (jasne tlo + obramowanie + lewy akcent + zaokraglenie),
+  - przy retrofittingu starszych artykulow (gdy `quick-answer` jest poza `.article-content`) styl ma pozostac identyczny jak w nowych artykulach; źródło prawdy: `article.css` + `ARTICLE_STANDARD.md`.
+
 - GEO: odchodzimy od niestandardowego `faq_research` w `BlogPosting` JSON-LD.
   - `faq_research` NIE jest publikowane do schema `BlogPosting`.
   - dowody naukowe publikujemy przez standardowe `citation` (lista URL) + `mentions`.
