@@ -138,6 +138,51 @@ function validateQuickAnswerBlock(articleContentHtml, errors) {
   }
 }
 
+function validateHeroShareContract(raw, errors) {
+  if (!/class="hero-motto"/i.test(raw)) {
+    errors.push('Brak .hero-motto pod hero.');
+  }
+
+  const hasActionsWrap = /class="[^"]*\barticle-primary-actions\b[^"]*"/i.test(raw);
+  if (!hasActionsWrap) {
+    errors.push('Brak wrappera .article-primary-actions pod hero.');
+  }
+
+  const hasShareTopButton = /<button[^>]*id="share-article-top"[^>]*class="[^"]*\bpdf-hero-download--share\b[^"]*"[^>]*>/i.test(raw)
+    || /<button[^>]*class="[^"]*\bpdf-hero-download--share\b[^"]*"[^>]*id="share-article-top"[^>]*>/i.test(raw);
+  if (!hasShareTopButton) {
+    errors.push('Brak przycisku "Udostępnij" pod hero (#share-article-top).');
+  }
+
+  if (!/class="[^"]*\bpdf-hero-download__badge--share\b[^"]*"/i.test(raw)) {
+    errors.push('Brak badge SHARE w przycisku udostępniania pod hero.');
+  }
+
+  const shareSectionMatch = raw.match(/<section[^>]*class="[^"]*\bshare-article-section\b[^"]*"[\s\S]*?<\/section>/i);
+  if (!shareSectionMatch) {
+    errors.push('Brak sekcji .share-article-section przed Źródłami.');
+    return;
+  }
+
+  if (!/<h[23][^>]*>\s*Udostępnij artykuł\s*<\/h[23]>/i.test(shareSectionMatch[0])) {
+    errors.push('Sekcja share musi zawierać nagłówek "Udostępnij artykuł".');
+  }
+
+  const requiredNetworks = ['facebook', 'linkedin', 'whatsapp', 'mail', 'copy'];
+  for (const network of requiredNetworks) {
+    const networkRx = new RegExp(`data-share-network="${network}"`, 'i');
+    if (!networkRx.test(shareSectionMatch[0])) {
+      errors.push(`Sekcja share: brak kanału ${network}.`);
+    }
+  }
+
+  const shareIndex = raw.search(/<section[^>]*class="[^"]*\bshare-article-section\b[^"]*"/i);
+  const sourcesIndex = raw.search(/<(h2|h3)\s+id="zrodla">/i);
+  if (shareIndex !== -1 && sourcesIndex !== -1 && shareIndex > sourcesIndex) {
+    errors.push('Sekcja "Udostępnij artykuł" musi być przed sekcją Źródła.');
+  }
+}
+
 function validateQuestionHeadings(articleContentHtml, errors) {
   const h2Rx = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
   const skippedTitles = new Set([
@@ -511,6 +556,7 @@ function validateFile(filePath) {
     }
     validateAnswerFirstParagraphs(articleContentHtml, errors);
   }
+  validateHeroShareContract(raw, errors);
   validateCitationsInBlogPosting(raw, errors);
   validateSpeakableTargetsQuickAnswer(raw, errors);
 

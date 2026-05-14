@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-12T21:33:02.530Z",
+  "updated_at": "2026-05-13T06:00:48.642Z",
   "records": [
     {
       "scope": "prepush-local",
@@ -860,6 +860,195 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 222
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-13T02:32:51.117Z",
+      "total_ms": 815,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 188
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 493
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 37
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 96
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 132
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-13T02:38:53.192Z",
+      "total_ms": 970,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 183
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 510
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 93
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 127
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 275
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-13T02:47:00.115Z",
+      "total_ms": 1098,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 152
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 683
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 68
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 179
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 261
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-13T03:04:23.893Z",
+      "total_ms": 1387,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 323
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 734
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 279
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 347
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 324
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-13T03:31:43.847Z",
+      "total_ms": 1855,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 207
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 1387
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 176
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 463
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 256
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-13T03:32:31.837Z",
+      "total_ms": 578,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 108
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 300
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 15
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 101
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 168
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-13T06:00:48.642Z",
+      "total_ms": 548,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 104
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 315
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 150
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 97
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 127
         }
       ]
     }

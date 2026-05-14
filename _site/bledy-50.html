@@ -293,6 +293,7 @@
       </div>
     </section>
 
+      <div class="article-primary-actions" aria-label="Akcje artykułu">
       <!-- PDF_DOWNLOAD_BUTTON_START -->
       <a class="pdf-hero-download" href="./assets/pdf/bledy-50.pdf" download aria-label="Pobierz artykuł w PDF (153 KB)">
         <span class="pdf-hero-download__eyebrow">Chcesz przeczytać na spokojnie? Pobierz PDF</span>
@@ -302,7 +303,15 @@
       </a>
       <!-- PDF_DOWNLOAD_BUTTON_END -->
 
-    <article class="article-content">
+        <button class="pdf-hero-download pdf-hero-download--share" type="button" id="share-article-top" aria-label="Udostępnij artykuł">
+          <span class="pdf-hero-download__eyebrow">Wyślij przyjacielowi albo opublikuj u siebie</span>
+          <span class="pdf-hero-download__title">Udostępnij artykuł</span>
+          <span class="pdf-hero-download__meta">Facebook, LinkedIn, WhatsApp, mail lub kopiowanie linku</span>
+          <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">UDOSTĘPNIJ</span>
+        </button>
+      </div>
+
+<article class="article-content">
 <p>Wchodzisz na siłownię z dobrymi chęciami. I to jest już połowa sukcesu. Ale jest kilka błędów, które popełnia prawie każdy po pięćdziesiątce — i które potrafią zniszczyć cały wysiłek zanim cokolwiek się zacznie. Jeśli dopiero startujesz, zacznij też od tekstu <a href="jak-zaczac-na-silowni-po-50.html">jak zacząć na siłowni po 50-tce</a>. A jeśli problemem jest już sam opór przed wyjściem z domu, przeczytaj również <a href="motywacja-po-50.html">jak zbudować motywację do ćwiczeń po 50-tce</a>. Oto one.</p>
 
       <section class="key-takeaways reveal" data-ai-summary="auto" aria-label="Kluczowe wnioski">
@@ -396,6 +405,18 @@
       <div class="article-quote">
         "Twoje ciało w tym wieku jest w stanie zrobić więcej niż myślisz. Tylko że na swoich warunkach, nie na warunkach z dwudziestki."
       </div>
+      <section class="share-article-section reveal" aria-labelledby="share-article-title">
+        <h3 id="share-article-title">Udostępnij artykuł</h3>
+        <p class="share-article-section__lead">Wyślij ten materiał przyjacielowi albo opublikuj u siebie. Jednym kliknięciem podasz aktualny link i tytuł artykułu.</p>
+        <div class="share-article-section__actions" role="group" aria-label="Opcje udostępniania">
+          <a class="share-pill share-pill--facebook" href="#" data-share-network="facebook" rel="noopener noreferrer" target="_blank">Facebook</a>
+          <a class="share-pill share-pill--linkedin" href="#" data-share-network="linkedin" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+          <a class="share-pill share-pill--whatsapp" href="#" data-share-network="whatsapp" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+          <a class="share-pill share-pill--mail" href="#" data-share-network="mail">Mail</a>
+          <button class="share-pill share-pill--copy" type="button" data-share-network="copy">Kopiuj link</button>
+        </div>
+        <p class="share-article-section__status" id="share-status" role="status" aria-live="polite"></p>
+      </section>
 
       <div class="sources-list">
         <h3 id="zrodla">Źródła i bibliografia</h3>
@@ -551,5 +572,95 @@
 
 <script src="./dist/cmp.js?v=1.1" defer></script>
 <script src="./dist/app.js?v=1.2" defer></script>
+<script>
+  (function () {
+    const topShareBtn = document.getElementById('share-article-top');
+    const shareStatus = document.getElementById('share-status');
+    const shareLinks = document.querySelectorAll('[data-share-network]');
+    const pageUrl = window.location.href;
+    const pageTitle = document.title;
+
+    const encodedUrl = encodeURIComponent(pageUrl);
+    const encodedTitle = encodeURIComponent(pageTitle);
+    const shareMap = {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+      whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
+      mail: `mailto:?subject=${encodedTitle}&body=${encodedTitle}%0A%0A${encodedUrl}`
+    };
+
+    function setStatus(message) {
+      if (shareStatus) shareStatus.textContent = message;
+    }
+
+    async function copyShareLink() {
+      const textToCopy = `${pageTitle} - ${pageUrl}`;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(textToCopy);
+          setStatus('Skopiowano link do schowka.');
+          return;
+        }
+      } catch (_) {}
+
+      const helper = document.createElement('textarea');
+      helper.value = textToCopy;
+      helper.setAttribute('readonly', '');
+      helper.style.position = 'absolute';
+      helper.style.left = '-9999px';
+      document.body.appendChild(helper);
+      helper.select();
+      const copied = document.execCommand('copy');
+      document.body.removeChild(helper);
+      setStatus(copied ? 'Skopiowano link do schowka.' : 'Nie udało się skopiować automatycznie. Skopiuj ręcznie z paska adresu.');
+    }
+
+    function openShare(network) {
+      if (network === 'copy') {
+        copyShareLink();
+        return;
+      }
+      const href = shareMap[network];
+      if (!href) return;
+      if (network === 'mail') {
+        window.location.href = href;
+      } else {
+        window.open(href, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    if (topShareBtn) {
+      topShareBtn.addEventListener('click', async function () {
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: pageTitle, text: pageTitle, url: pageUrl });
+            setStatus('Dziękuję. Artykuł został udostępniony.');
+            return;
+          } catch (_) {}
+        }
+        const section = document.getElementById('share-article-title');
+        if (section) section.scrollIntoView({ behavior: "smooth", block: "center" });
+        setStatus('Wybierz kanał udostępniania poniżej.');
+      });
+    }
+
+    shareLinks.forEach(function (item) {
+      const network = item.getAttribute('data-share-network');
+      if (network && shareMap[network]) item.setAttribute("href", shareMap[network]);
+      item.addEventListener("click", function (event) {
+        if (!network) return;
+        if (network === 'copy') {
+          event.preventDefault();
+          openShare(network);
+          return;
+        }
+        if (network !== 'mail') {
+          event.preventDefault();
+          openShare(network);
+        }
+      });
+    });
+  })();
+</script>
 </body>
 </html>

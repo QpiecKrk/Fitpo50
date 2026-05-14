@@ -96,6 +96,23 @@ Artykuł nie przechodzi, jeśli:
   - nagłówek `Szybka odpowiedź` ma mieć dolny akcent (krótka linia),
   - niedozwolony jest wariant „zwykły paragraf bez wyróżnienia”.
 
+## 8b. Hero + Share Contract (obowiązkowe)
+- Motto pod hero (`.hero-motto`):
+  - styl ma być czytelny i elegancki, bez fontu odręcznego,
+  - obowiązuje wariant display italic z `article.css` (bez lokalnych nadpisań inline).
+- Akcje pod hero:
+  - wymagany wrapper `.article-primary-actions`,
+  - wymagane dwa elementy obok siebie (desktop) / jeden pod drugim (mobile):
+    - `a.pdf-hero-download` (Pobierz PDF),
+    - `button#share-article-top.pdf-hero-download.pdf-hero-download--share` (Udostępnij).
+- Badge przycisku „Udostępnij”:
+  - ma mieć ten sam styl i czytelność co badge `PDF`,
+  - różni się wyłącznie etykietą `SHARE` (bez zmiany kolorystyki badge).
+- Sekcja udostępniania przed źródłami:
+  - obowiązkowa sekcja `section.share-article-section` z nagłówkiem `Udostępnij artykuł`,
+  - musi znajdować się przed sekcją `Źródła`,
+  - ma zawierać kanały: Facebook, LinkedIn, WhatsApp, mail, kopiowanie linku.
+
 ## 9. Guardrails SEO/AEO (obowiązkowe)
 - `<title>`: celuj w 55-65 znaków (max 65).
 - `meta name="description"`: celuj w 140-160 znaków (max 160).

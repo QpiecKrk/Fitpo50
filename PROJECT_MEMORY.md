@@ -981,6 +981,15 @@ Jesli artykul ma obrazy:
   - akapit podsumowania ma byc renderowany jako box (jasne tlo + obramowanie + lewy akcent + zaokraglenie),
   - przy retrofittingu starszych artykulow (gdy `quick-answer` jest poza `.article-content`) styl ma pozostac identyczny jak w nowych artykulach; źródło prawdy: `article.css` + `ARTICLE_STANDARD.md`.
 
+- Hero + Share (standard wizualny, obowiazkowy dla nowych artykulow):
+  - motto pod hero (`.hero-motto`) ma byc czytelne i eleganckie; bez fontu odrecznego,
+  - pod hero obowiazkowy wrapper `.article-primary-actions` z 2 kaflami:
+    - `Pobierz PDF` (`.pdf-hero-download`),
+    - `Udostepnij` (`button#share-article-top.pdf-hero-download.pdf-hero-download--share`),
+  - badge przy `Udostepnij` ma miec wyglad jak badge `PDF`, ale etykiete `SHARE`,
+  - przed zrodlami obowiazkowa sekcja `section.share-article-section` z naglowkiem `Udostepnij artykul`,
+  - sekcja share musi zawierac: Facebook, LinkedIn, WhatsApp, mail, kopiowanie linku.
+
 - GEO: odchodzimy od niestandardowego `faq_research` w `BlogPosting` JSON-LD.
   - `faq_research` NIE jest publikowane do schema `BlogPosting`.
   - dowody naukowe publikujemy przez standardowe `citation` (lista URL) + `mentions`.

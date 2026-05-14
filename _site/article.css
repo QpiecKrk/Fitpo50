@@ -322,6 +322,32 @@ body.article-template .pdf-hero-download {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+body.article-template .article-primary-actions {
+  width: min(980px, calc(100% - 48px));
+  margin: 0 auto var(--space-8);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+body.article-template .article-primary-actions .pdf-hero-download {
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}
+
+body.article-template .pdf-hero-download--share {
+  cursor: pointer;
+}
+
+body.article-template .pdf-hero-download__badge.pdf-hero-download__badge--share::after {
+  content: "SHARE";
+  background: rgba(205, 229, 246, 0.96);
+  color: #305368;
+  padding: 1px 3px;
+  font-size: 0.4rem;
+}
+
 body.article-template .pdf-hero-download:hover {
   transform: translateY(-2px);
   border-color: #ffffff;
@@ -411,10 +437,12 @@ body.article-template .hero-motto {
   color: #ffffff;
   padding: var(--space-4) var(--space-6);
   border-left: 5px solid #f59f00;
-  font-family: "Caveat", cursive;
-  font-size: clamp(1rem, 2.2vw, 1.45rem);
-  font-weight: 700;
-  line-height: 1.25;
+  font-family: var(--font-display);
+  font-size: clamp(1.02rem, 1.8vw, 1.28rem);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
   max-width: none;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
@@ -609,6 +637,61 @@ body.article-template .sources-list {
   margin-left: 1.2rem;
 }
 
+body.article-template .share-article-section {
+  margin: var(--space-8) 0;
+  padding: var(--space-6);
+  border-radius: 18px;
+  border: 1px solid #d5e4f6;
+  background: linear-gradient(140deg, #f5f9ff 0%, #eef4ff 100%);
+  box-shadow: 0 10px 24px rgba(23, 55, 87, 0.08);
+}
+
+body.article-template .share-article-section h3 {
+  margin-top: 0;
+}
+
+body.article-template .share-article-section__lead {
+  margin-bottom: var(--space-4);
+}
+
+body.article-template .share-article-section__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+body.article-template .share-pill {
+  border: 1px solid #c7d9f0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: #ffffff;
+  color: #27435a;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.article-template .share-pill:hover,
+body.article-template .share-pill:focus-visible {
+  transform: translateY(-1px);
+  border-color: #98b9e1;
+  box-shadow: 0 6px 14px rgba(30, 63, 96, 0.15);
+}
+
+body.article-template .share-pill--copy {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+}
+
+body.article-template .share-article-section__status {
+  min-height: 1.4em;
+  margin: var(--space-3) 0 0 0;
+  color: #305a7b;
+  font-size: 0.92rem;
+}
+
 body.article-template .sources-list li {
   margin-bottom: var(--space-2);
 }
@@ -638,6 +721,13 @@ body.article-template .medical-disclaimer {
     padding: 12px 14px;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+
+  body.article-template .article-primary-actions {
+    width: auto;
+    margin: var(--space-3);
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   body.article-template .pdf-hero-download__eyebrow {
@@ -687,6 +777,20 @@ body.article-template .medical-disclaimer {
   body.article-template .article-content {
     font-size: 1rem;
     padding: 0 var(--space-4);
+  }
+
+  body.article-template .share-article-section {
+    margin: var(--space-6) 0;
+    padding: var(--space-4);
+  }
+
+  body.article-template .share-article-section__actions {
+    gap: 8px;
+  }
+
+  body.article-template .share-pill {
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 
   body.article-template .article-main-bento > .quick-answer {
