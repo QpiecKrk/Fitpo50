@@ -108,9 +108,6 @@ rsync -a \
   --exclude="tsconfig.json" \
   --exclude="src/" \
   --exclude="scripts/" \
-  --exclude="check.js" \
-  --exclude="clean.js" \
-  --exclude="copy_pngs.sh" \
   --exclude="_site/" \
   "$ROOT_DIR/" "$OUTPUT_DIR/"
 

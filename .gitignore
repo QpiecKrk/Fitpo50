@@ -1,8 +1,31 @@
 
+# System
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.swp
+*.swo
+*~
+*.bak
+*.backup
+*.old
+
+# Editors
+.idea/
+.vscode/
+.project
+*.sublime-*
+
+# Local caches and logs
+logs/
+cache/
+.cache/
+.agent-mem/
+
+# Local assistant notes
 AGENT.md
 CLAUDE.md
-.agent-mem/
-.DS_Store
 
 # Auto-generated agent rules (personalized per developer)
 .brainsync/agent-rules.md
@@ -66,7 +89,6 @@ _site/data/git-sync.lock
 .agent/lessons.md
 .brainsync/ip_rules.md
 .cursor/
-.vscode/
 
 # tool-generated artifacts (never track in repo)
 .agent/
@@ -79,19 +101,22 @@ _site/data/git-sync.lock
 2026-03-31-dupa.html
 testtest.txt
 test-tts.mp3
+test-*.html
+draft-*.css
+Screenshot*.png
 audit_*.md
 _site/2026-03-30-mdlsdmslds.html
 _site/2026-03-31-dupa.html
 _site/testtest.txt
 _site/test-tts.mp3
+_site/test-*.html
+_site/draft-*.css
+_site/Screenshot*.png
 _site/audit_*.md
 
 # export artifacts that should never be tracked
 _site/MEMORY_MOJE_SUKCESY.md
 _site/MEMORY_PORADY.md
-_site/check.js
-_site/clean.js
-_site/copy_pngs.sh
 _site/SESSION_START_MAX.md
 
 # NEWS thumbs generated runtime on server should NOT block git/deploy.
