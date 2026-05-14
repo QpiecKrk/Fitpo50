@@ -1,75 +1,12 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
-<!-- Google tag (gtag.js) -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag("js", new Date());
-  // Delay analytics load to keep critical rendering path clean on mobile.
-  window.addEventListener("load", () => {
-    const loadAnalytics = () => {
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
-      script.onload = () => {
-        gtag("config", "G-S21SKTVM7K");
-        gtag("config", "AW-18108612630");
-      };
-      document.head.appendChild(script);
-    };
-
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
-    } else {
-      window.setTimeout(loadAnalytics, 2000);
-    }
-  }, { once: true });
-</script>
-<script>
-  (function () {
-    try {
-      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
-      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var h = new Date().getHours();
-      var isNight = (h >= 19 || h < 7);
-      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
-    } catch (_) {}
-  })();
-</script>
-<title>Jak czyta&#263; etykiety? Przewodnik po sk&#322;adach i | FitPo50</title>
-<meta name="description" content="Etykieta to prawda o produkcie, ale napisana ma&#322;&#261; czcionk&#261; i j&#281;zykiem marketingu. T&#322;umaczymy jak czyta&#263; sk&#322;ady, co">
-<meta name="robots" content="index,follow">
-<meta name="author" content="FitPo50">
-<meta property="og:title" content="Jak czyta&#263; etykiety? Przewodnik po sk&#322;adach i E-numerach">
-<meta property="og:description" content="Etykieta to prawda o produkcie, ale napisana ma&#322;&#261; czcionk&#261; i j&#281;zykiem marketingu. T&#322;umaczymy jak czyta&#263; sk&#322;ady, co oznaczaj&#261; E-numery i gdzie chowa si&#281; cukier.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://fitpo50.pl/jak-czytac-etykiety-sklad-produktow-e-numery-inci.html">
-<meta property="og:image" content="https://fitpo50.pl/assets/etykiety-sklad-produktow-lupa-hero.webp">
-<meta property="og:locale" content="pl_PL">
-<meta property="article:published_time" content="2026-04-26T08:00:00+02:00">
-<meta property="article:modified_time" content="2026-04-26T08:00:00+02:00">
-<meta property="article:author" content="FitPo50">
-<meta property="article:section" content="Ciekawe">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Jak czyta&#263; etykiety? Przewodnik po sk&#322;adach i E-numerach">
-<meta name="twitter:description" content="Etykieta to prawda o produkcie, ale napisana ma&#322;&#261; czcionk&#261; i j&#281;zykiem marketingu. T&#322;umaczymy jak czyta&#263; sk&#322;ady, co oznaczaj&#261; E-numery i gdzie chowa si&#281; cukier.">
-<meta name="twitter:image" content="https://fitpo50.pl/assets/etykiety-sklad-produktow-lupa-hero.webp">
-<link rel="canonical" href="https://fitpo50.pl/jak-czytac-etykiety-sklad-produktow-e-numery-inci.html">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Jak czyta&#263; etykiety? Przewodnik po sk&#322;adach i E-numerach",
-  "description": "Etykieta to prawda o produkcie, ale napisana ma&#322;&#261; czcionk&#261; i j&#281;zykiem marketingu. T&#322;umaczymy jak czyta&#263; sk&#322;ady, co oznaczaj&#261; E-numery i gdzie chowa si&#281; cukier.",
-  "inLanguage": "pl-PL",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://fitpo50.pl/jak-czytac-etykiety-sklad-produktow-e-numery-inci.html"
-  },
+  "description": "Naucz się czytać etykiety produktów spożywczych i unikaj pułapek producentów. Dowiedz się, co oznaczają numery E i jak wybierać najzdrowsze jedzenie po 50-tce.",
   "url": "https://fitpo50.pl/jak-czytac-etykiety-sklad-produktow-e-numery-inci.html",
   "image": "https://fitpo50.pl/assets/etykiety-sklad-produktow-lupa-hero.webp",
   "datePublished": "2026-04-26T08:00:00+02:00",
@@ -94,7 +31,8 @@
     "@type": "SpeakableSpecification",
     "cssSelector": [
       ".article-header__title",
-      ".article-content p",
+      "#quick-answer",
+      "#quick-answer p",
       ".key-takeaways h2",
       ".key-takeaways li"
     ]
@@ -150,24 +88,18 @@
     "contentUrl": "https://fitpo50.pl/assets/pdf/jak-czytac-etykiety-sklad-produktow-e-numery-inci.pdf",
     "encodingFormat": "application/pdf",
     "inLanguage": "pl-PL"
-  }
+  },
+  "citation": [
+    "https://www.alab.pl/centrum-wiedzy/jak-czytac-sklady-na-etykietach-produktow-spozywczych/",
+    "https://www.doz.pl/czytelnia/a1454-Dodatki_do_zywnosci_-_lista_E",
+    "https://pacjent.gov.pl/aktualnosc/cukier-w-produktach-spozywczych",
+    "https://polmed.pl/zdrowie/jak-czytac-etykiety-produktow-spozywczych/",
+    "https://czytamyetykiety.pl/blog/jak-czytac-etykiety-kosmetykow/",
+    "https://www.gov.pl/web/psse-pyrzyce/jak-czytac-etykiety-zywnosciowe-praktyczny-przewodnik-dla-swiadomego-konsumenta"
+  ]
 }
 </script>
-
-<link href="https://api.fontshare.com/v2/css?f%5B%5D=zodiak@400,500,600,700&amp;display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&amp;display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="image" href="./assets/etykiety-sklad-produktow-lupa-hero.webp" fetchpriority="high">
-<link rel="stylesheet" href="./base.css">
-<link rel="stylesheet" href="./style.css?v=1.5">
-<link rel="stylesheet" href="./article.css?v=1.5">
-<link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
-<link rel="stylesheet" href="./assets/footer.css?v=2">
-<meta name="google-adsense-account" content="ca-pub-4993821807276758">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758" crossorigin="anonymous"></script>
-<script type="application/ld+json" id="faqpage-schema-auto">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -207,22 +139,79 @@
   ]
 }
 </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+        gtag("config", "AW-18108612630");
+      };
+      document.head.appendChild(script);
+    };
 
-<script type="application/ld+json" id="speakable-schema-auto">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [
-      ".article-header__title",
-      ".drop-cap",
-      ".key-takeaways h2",
-      ".key-takeaways li"
-    ]
-  }
-}
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
 </script>
+<script>
+  (function () {
+    try {
+      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var h = new Date().getHours();
+      var isNight = (h >= 19 || h < 7);
+      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+    } catch (_) {}
+  })();
+</script>
+<title>Jak czyta&#263; etykiety? Przewodnik po sk&#322;adach i | FitPo50</title>
+<meta name="description" content="Naucz się czytać etykiety produktów spożywczych i unikaj pułapek producentów. Dowiedz się, co oznaczają numery E i jak wybierać najzdrowsze jedzenie po 50-tce.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
+<meta property="og:title" content="Jak czyta&#263; etykiety? Przewodnik po sk&#322;adach i E-numerach">
+<meta property="og:description" content="Naucz się czytać etykiety produktów spożywczych i unikaj pułapek producentów. Dowiedz się, co oznaczają numery E i jak wybierać najzdrowsze jedzenie po 50-tce.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fitpo50.pl/jak-czytac-etykiety-sklad-produktow-e-numery-inci.html">
+<meta property="og:image" content="https://fitpo50.pl/assets/etykiety-sklad-produktow-lupa-hero.webp">
+<meta property="og:locale" content="pl_PL">
+<meta property="article:published_time" content="2026-04-26T08:00:00+02:00">
+<meta property="article:modified_time" content="2026-04-26T08:00:00+02:00">
+<meta property="article:author" content="FitPo50">
+<meta property="article:section" content="Ciekawe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jak czyta&#263; etykiety? Przewodnik po sk&#322;adach i E-numerach">
+<meta name="twitter:description" content="Naucz się czytać etykiety produktów spożywczych i unikaj pułapek producentów. Dowiedz się, co oznaczają numery E i jak wybierać najzdrowsze jedzenie po 50-tce.">
+<meta name="twitter:image" content="https://fitpo50.pl/assets/etykiety-sklad-produktow-lupa-hero.webp">
+<link rel="canonical" href="https://fitpo50.pl/jak-czytac-etykiety-sklad-produktow-e-numery-inci.html">
+
+
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=zodiak@400,500,600,700&amp;display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&amp;display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="image" href="./assets/etykiety-sklad-produktow-lupa-hero.webp" fetchpriority="high">
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css?v=1.5">
+<link rel="stylesheet" href="./article.css?v=1.5">
+<link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
+<link rel="stylesheet" href="./assets/footer.css?v=2">
+<meta name="google-adsense-account" content="ca-pub-4993821807276758">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758" crossorigin="anonymous"></script>
+
 
 </head>
 <body class="article-template article--ciekawe">
@@ -265,7 +254,7 @@
         <source srcset="./assets/etykiety-sklad-produktow-lupa-hero.avif" type="image/avif">
         <source srcset="./assets/etykiety-sklad-produktow-lupa-hero.webp" type="image/webp">
         <img src="./assets/etykiety-sklad-produktow-lupa-hero.jpg" alt="Jak czyta&#263; etykiety? Przewodnik po sk&#322;adach i E-numerach" loading="eager" width="1080" height="603">
-      </source></source></picture>
+      </picture>
       <div class="hero-motto"><span>Wszystko co trafia na Tw&oacute;j talerz</span><br>jest napisane na opakowaniu.<br><em>Tylko producent zrobi&#322; co m&oacute;g&#322;,<br>&#380;eby&#347; tego nie zrozumia&#322;.</em></div>
       </div>
     </section>
@@ -284,15 +273,21 @@
           <span class="pdf-hero-download__eyebrow">Wyślij przyjacielowi albo opublikuj u siebie</span>
           <span class="pdf-hero-download__title">Udostępnij artykuł</span>
           <span class="pdf-hero-download__meta">Facebook, LinkedIn, WhatsApp, mail lub kopiowanie linku</span>
-          <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">UDOSTĘPNIJ</span>
+          <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">SHARE</span>
         </button>
       </div>
 
 <article class="article-content">
       <p class="drop-cap">Etykieta to prawda o produkcie, ale napisana ma&#322;&#261; czcionk&#261; i j&#281;zykiem marketingu. T&#322;umaczymy jak czyta&#263; sk&#322;ady, co oznaczaj&#261; E-numery i gdzie chowa si&#281; cukier.</p>
 
+      <section class="quick-answer reveal" id="quick-answer" aria-label="Szybka odpowiedź">
+        <h2>Szybka odpowiedź</h2>
+        <p>Zasady s&#261; proste, ale trzeba je zna&#263;. Ka&#380;da etykieta w Polsce musi zawiera&#263; konkretne informacje, kt&oacute;re reguluje prawo unijne. Najwa&#380;niejsza rzecz, o kt&oacute;rej musisz pami&#281;ta&#263;, to **kolejno&#347;&#263; sk&#322;adnik&oacute;w**. S&#261; one wymieniane od tego, kt&oacute;rego jest najwi&#281;cej, do tego, kt&oacute;rego jest najmniej.</p>
+      </section>
+
 <section class="key-takeaways reveal" data-ai-summary="auto" aria-label="Kluczowe wnioski">
   <h2>Kluczowe wnioski</h2>
+      <p>Kluczowe wnioski po 50-tce warto rozłożyć na praktyczne kroki i odnieść do codziennych decyzji. Takie podejście pomaga bezpiecznie działać, lepiej rozumieć sygnały z organizmu oraz wdrażać nawyki, które realnie poprawiają zdrowie i sprawność.</p>
   <ul><li>Sk&#322;adniki s&#261; wymieniane od najwi&#281;kszej do najmniejszej ilo&#347;ci &ndash; pierwsze trzy to baza produktu.</li>
 <li>E-numery nie zawsze s&#261; szkodliwe (np. E300 to witamina C), ale warto unika&#263; barwnik&oacute;w i azotyn&oacute;w.</li>
 <li>Cukier ukrywa si&#281; pod 50 nazwami &ndash; szukaj syropu glukozowego i maltodekstryny.</li>
@@ -301,8 +296,7 @@
 </section>
 
 <h2>Etykieta na talerzu &ndash; jak wyczyta&#263; z niej prawd&#281;?</h2>
-
-<p>Zasady s&#261; proste, ale trzeba je zna&#263;. Ka&#380;da etykieta w Polsce musi zawiera&#263; konkretne informacje, kt&oacute;re reguluje prawo unijne. Najwa&#380;niejsza rzecz, o kt&oacute;rej musisz pami&#281;ta&#263;, to **kolejno&#347;&#263; sk&#322;adnik&oacute;w**. S&#261; one wymieniane od tego, kt&oacute;rego jest najwi&#281;cej, do tego, kt&oacute;rego jest najmniej. Je&#347;li cukier stoi na pierwszym lub drugim miejscu &ndash; od&#322;&oacute;&#380; produkt na p&oacute;&#322;k&#281;. To nie jest &bdquo;zdrowy wyb&oacute;r&rdquo;, to deser w przebraniu.</p>
+      <p>Zasady s&#261; proste, ale trzeba je zna&#263;. Ka&#380;da etykieta w Polsce musi zawiera&#263; konkretne informacje, kt&oacute;re reguluje prawo unijne. Najwa&#380;niejsza rzecz, o kt&oacute;rej musisz pami&#281;ta&#263;, to **kolejno&#347;&#263; sk&#322;adnik&oacute;w**. S&#261; one wymieniane od tego, kt&oacute;rego jest najwi&#281;cej, do tego, kt&oacute;rego jest najmniej. Je&#347;li cukier stoi na pierwszym lub drugim miejscu &ndash; od&#322;&oacute;&#380; produkt na p&oacute;&#322;k&#281;. To nie jest &bdquo;zdrowy wyb&oacute;r&rdquo;, to deser w przebraniu.</p>
 
 <p>Pami&#281;taj te&#380; o nazwie. &bdquo;Nap&oacute;j o smaku mleka&rdquo; to nie mleko, a &bdquo;wyr&oacute;b seropodobny&rdquo; nigdy nie sta&#322; obok prawdziwego sera. Prawo zmusza producent&oacute;w do precyzji, wi&#281;c szukaj konkret&oacute;w. Kolejn&#261; wa&#380;n&#261; spraw&#261; jest **warto&#347;&#263; od&#380;ywcza**. Obowi&#261;zkowa tabela m&oacute;wi Ci wszystko o kaloriach, t&#322;uszczach, cukrach i soli. Standardem jest podawanie warto&#347;ci na 100 g produktu &ndash; i to na te liczby patrz, gdy por&oacute;wnujesz dwa r&oacute;&#380;ne produkty. Porcje sugerowane przez producenta s&#261; cz&#281;sto nierealistycznie ma&#322;e.</p>
 
@@ -310,11 +304,14 @@
 
 <aside class="highlight-box"><h3>Warto wiedzie&#263;</h3><p><strong>Z&#322;ota zasada:</strong> Pierwszy sk&#322;adnik na li&#347;cie to g&#322;&oacute;wna baza produktu. Je&#347;li lista zaczyna si&#281; od cukru, syropu albo bia&#322;ej m&#261;ki, marketingowe has&#322;a o &bdquo;zdrowiu&rdquo; na froncie opakowania mo&#380;esz w&#322;o&#380;y&#263; mi&#281;dzy bajki.</p></aside>
 
-<figure class="inline-figure"><img src="./assets/etykieta-zywnosci-anatomia-schemat-infografika.jpg" alt="Infografika po polsku: anatomia etykiety &#380;ywno&#347;ciowej &ndash; schemat opakowania z zaznaczonymi wszystkimi obowi&#261;zkowymi elementami i polskimi opisami" loading="lazy"></figure>
+<figure class="inline-figure"><picture>
+          <source srcset="./assets/etykieta-zywnosci-anatomia-schemat-infografika.jpg" type="image/avif">
+          <source srcset="./assets/etykieta-zywnosci-anatomia-schemat-infografika.jpg" type="image/webp">
+          <img src="./assets/etykieta-zywnosci-anatomia-schemat-infografika.jpg" alt="Infografika po polsku: anatomia etykiety &#380;ywno&#347;ciowej &ndash; schemat opakowania z zaznaczonymi wszystkimi obowi&#261;zkowymi elementami i polskimi opisami" loading="lazy">
+        </picture></figure>
 
 <h2>Tabela warto&#347;ci od&#380;ywczej &ndash; nie daj si&#281; oszuka&#263; ma&#322;ym porcjom</h2>
-
-<p>Tabela na opakowaniu to Twoja najlepsza przyjaci&oacute;&#322;ka, je&#347;li wiesz, na co patrze&#263;. Najwi&#281;ksz&#261; pu&#322;apk&#261; jest rubryka &bdquo;na porcj&#281;&rdquo;. Producent mo&#380;e napisa&#263;, &#380;e ciastko ma tylko 50 kalorii, zak&#322;adaj&#261;c, &#380;e porcja to... &#263;wiartka ciastka. Dlatego zawsze sprawdzaj kolumn&#281; **na 100 g**. To jedyny sprawiedliwy spos&oacute;b na por&oacute;wnanie produkt&oacute;w.</p>
+      <p>Tabela na opakowaniu to Twoja najlepsza przyjaci&oacute;&#322;ka, je&#347;li wiesz, na co patrze&#263;. Najwi&#281;ksz&#261; pu&#322;apk&#261; jest rubryka &bdquo;na porcj&#281;&rdquo;. Producent mo&#380;e napisa&#263;, &#380;e ciastko ma tylko 50 kalorii, zak&#322;adaj&#261;c, &#380;e porcja to... &#263;wiartka ciastka. Dlatego zawsze sprawdzaj kolumn&#281; **na 100 g**. To jedyny sprawiedliwy spos&oacute;b na por&oacute;wnanie produkt&oacute;w.</p>
 
 <p>Na co zwr&oacute;ci&#263; szczeg&oacute;ln&#261; uwag&#281; po 50-tce? Po pierwsze: **t&#322;uszcze nasycone**. Je&#347;li jest ich wi&#281;cej ni&#380; 5 g na 100 g produktu, to sygna&#322; ostrzegawczy. Po drugie: **cukry**. Odr&oacute;&#380;nij w&#281;glowodany og&oacute;&#322;em od cukr&oacute;w prostych. Te drugie powinni&#347;my ogranicza&#263; do minimum. Po trzecie: **s&oacute;l**. Przetworzone w&#281;dliny, gotowe sosy i pieczywo to kopalnie soli, kt&oacute;ra podnosi ci&#347;nienie. Je&#347;li produkt ma ponad 1,5 g soli na 100 g, uznaje si&#281; go za mocno s&#322;ony.</p>
 
@@ -322,11 +319,14 @@
 
 <aside class="highlight-box highlight-box--accent"><h3>Warto wiedzie&#263;</h3><p><strong>Uwaga na t&#322;uszcze trans:</strong> Znajdziesz je w wielu tanich s&#322;odyczach, twardych margarynach i gotowych ciastach. Wyrz&#261;dzaj&#261; ogromne szkody w naczyniach krwiono&#347;nych, sprzyjaj&#261;c mia&#380;d&#380;ycy. Unikaj ich jak ognia.</p></aside>
 
-<figure class="inline-figure"><img src="./assets/tabela-wartosci-odzywczej-jak-czytac-infografika.jpg" alt="Infografika po polsku: tabela warto&#347;ci od&#380;ywczej z obja&#347;nieniami ka&#380;dej pozycji &ndash; energia, t&#322;uszcze nasycone, cukry, bia&#322;ko, s&oacute;l &ndash; z polskimi opisami i kolorowymi znacznikami" loading="lazy"></figure>
+<figure class="inline-figure"><picture>
+          <source srcset="./assets/tabela-wartosci-odzywczej-jak-czytac-infografika.jpg" type="image/avif">
+          <source srcset="./assets/tabela-wartosci-odzywczej-jak-czytac-infografika.jpg" type="image/webp">
+          <img src="./assets/tabela-wartosci-odzywczej-jak-czytac-infografika.jpg" alt="Infografika po polsku: tabela warto&#347;ci od&#380;ywczej z obja&#347;nieniami ka&#380;dej pozycji &ndash; energia, t&#322;uszcze nasycone, cukry, bia&#322;ko, s&oacute;l &ndash; z polskimi opisami i kolorowymi znacznikami" loading="lazy">
+        </picture></figure>
 
 <h2>E-numery &ndash; czy naprawd&#281; trzeba si&#281; ich ba&#263;?</h2>
-
-<p>Dla wielu z nas litera &bdquo;E&rdquo; na etykiecie to synonim trucizny. Prawda jest jednak bardziej z&#322;o&#380;ona. System E-numer&oacute;w to po prostu europejska lista dodatk&oacute;w, kt&oacute;re zosta&#322;y przebadane i dopuszczone do u&#380;ytku. Niekt&oacute;re z nich to substancje zupe&#322;nie naturalne, kt&oacute;re po prostu dosta&#322;y sw&oacute;j &bdquo;kod&rdquo;.</p>
+      <p>Dla wielu z nas litera &bdquo;E&rdquo; na etykiecie to synonim trucizny. Prawda jest jednak bardziej z&#322;o&#380;ona. System E-numer&oacute;w to po prostu europejska lista dodatk&oacute;w, kt&oacute;re zosta&#322;y przebadane i dopuszczone do u&#380;ytku. Niekt&oacute;re z nich to substancje zupe&#322;nie naturalne, kt&oacute;re po prostu dosta&#322;y sw&oacute;j &bdquo;kod&rdquo;.</p>
 
 <p>Dla przyk&#322;adu: E300 to zwyk&#322;a witamina C, E330 to kwas cytrynowy, a E322 to lecytyna, kt&oacute;r&#261; znajdziesz w jajkach. Nie ka&#380;da litera E oznacza chemiczny &#347;ciek. Warto jednak wiedzie&#263;, kt&oacute;rych dodatk&oacute;w faktycznie unika&#263;. Do najbardziej kontrowersyjnych nale&#380;&#261; syntetyczne barwniki (tzw. sz&oacute;stka z Southampton), kt&oacute;re mog&#261; wp&#322;ywa&#263; na koncentracj&#281;, oraz benzoesan sodu (E211) czy azotyn sodu (E250) dodawany do w&#281;dlin.</p>
 
@@ -334,11 +334,14 @@
 
 <aside class="highlight-box"><h3>Warto wiedzie&#263;</h3><p><strong>E-numer to nie zawsze chemia:</strong> Wiele z nich to ekstrakty z ro&#347;lin lub naturalne zwi&#261;zki. Kluczem jest dawka i rodzaj substancji. Je&#347;li chcesz mie&#263; pewno&#347;&#263;, u&#380;yj darmowej aplikacji do skanowania sk&#322;ad&oacute;w przed w&#322;o&#380;eniem produktu do koszyka.</p></aside>
 
-<figure class="inline-figure"><img src="./assets/e-numery-kategorie-mapa-infografika.jpg" alt="Infografika po polsku: mapa E-numer&oacute;w &ndash; kolorowy diagram kategorii E100-E999 z przyk&#322;adami i oznaczeniami bezpieczny/kontrowersyjny/unika&#263;" loading="lazy"></figure>
+<figure class="inline-figure"><picture>
+          <source srcset="./assets/e-numery-kategorie-mapa-infografika.jpg" type="image/avif">
+          <source srcset="./assets/e-numery-kategorie-mapa-infografika.jpg" type="image/webp">
+          <img src="./assets/e-numery-kategorie-mapa-infografika.jpg" alt="Infografika po polsku: mapa E-numer&oacute;w &ndash; kolorowy diagram kategorii E100-E999 z przyk&#322;adami i oznaczeniami bezpieczny/kontrowersyjny/unika&#263;" loading="lazy">
+        </picture></figure>
 
 <h2>Ukryty cukier &ndash; producent wie, jak Ci&#281; oszuka&#263;</h2>
-
-<p>To jeden z najcz&#281;stszych trik&oacute;w: producent nie chce, &#380;eby cukier by&#322; na pierwszym miejscu sk&#322;adu, wi&#281;c... rozbija go na kilka r&oacute;&#380;nych rodzaj&oacute;w. Zamiast 30 g cukru, dodaje 10 g fruktozy, 10 g maltodekstryny i 10 g syropu glukozowego. Ka&#380;dy z nich l&#261;duje ni&#380;ej na li&#347;cie, a produkt udaje &bdquo;mniej s&#322;odki&rdquo;. To tak zwany *sugar stacking*.</p>
+      <p>To jeden z najcz&#281;stszych trik&oacute;w: producent nie chce, &#380;eby cukier by&#322; na pierwszym miejscu sk&#322;adu, wi&#281;c... rozbija go na kilka r&oacute;&#380;nych rodzaj&oacute;w. Zamiast 30 g cukru, dodaje 10 g fruktozy, 10 g maltodekstryny i 10 g syropu glukozowego. Ka&#380;dy z nich l&#261;duje ni&#380;ej na li&#347;cie, a produkt udaje &bdquo;mniej s&#322;odki&rdquo;. To tak zwany *sugar stacking*.</p>
 
 <p>Cukier ma ponad 50 imion. Syrop z agawy, zag&#281;szczony sok owocowy, maltoza, dekstroza, melasa &ndash; to wszystko to samo paliwo dla Twoich kom&oacute;rek t&#322;uszczowych. Szczeg&oacute;lnie uwa&#380;aj na **syrop glukozowo-fruktozowy**. Jest tani, bardzo s&#322;odki i metabolizowany przez w&#261;trob&#281; w spos&oacute;b, kt&oacute;ry sprzyja jej ot&#322;uszczeniu.</p>
 
@@ -346,40 +349,56 @@
 
 <aside class="highlight-box highlight-box--accent"><h3>Warto wiedzie&#263;</h3><p><strong>Trik na etykiecie:</strong> Policz ile nazw cukru widzisz w sk&#322;adzie. Je&#347;li s&#261; 3 lub wi&#281;cej, to znak, &#380;e produkt jest bardzo mocno dos&#322;odzony, mimo &#380;e na pierwszy rzut oka tego nie wida&#263;.</p></aside>
 
-<figure class="inline-figure"><img src="./assets/ukryty-cukier-nazwy-etykiety-infografika.jpg" alt="Infografika po polsku: 20 najcz&#281;stszych ukrytych nazw cukru na etykietach &ndash; z kolorowymi tagami i przyk&#322;adami produkt&oacute;w, w kt&oacute;rych je znajdziesz" loading="lazy"></figure>
+<figure class="inline-figure"><picture>
+          <source srcset="./assets/ukryty-cukier-nazwy-etykiety-infografika.avif" type="image/avif">
+          <source srcset="./assets/ukryty-cukier-nazwy-etykiety-infografika.webp" type="image/webp">
+          <img src="./assets/ukryty-cukier-nazwy-etykiety-infografika.jpg" alt="Infografika po polsku: 20 najcz&#281;stszych ukrytych nazw cukru na etykietach &ndash; z kolorowymi tagami i przyk&#322;adami produkt&oacute;w, w kt&oacute;rych je znajdziesz" loading="lazy">
+        </picture></figure>
 
 <h2>Etykiety kosmetyk&oacute;w &ndash; czy Tw&oacute;j krem to sama woda?</h2>
+      <p>W kosmetykach obowi&#261;zuje system **INCI**. Nazwy sk&#322;adnik&oacute;w s&#261; tu po &#322;acinie (ro&#347;liny) lub po angielsku (chemia). Zasada jest ta sama: im wy&#380;ej na li&#347;cie, tym wi&#281;cej sk&#322;adnika w &#347;rodku. Je&#347;li Tw&oacute;j krem reklamuje si&#281; &bdquo;drogocennym olejem z awokado&rdquo;, a ten olej jest wymieniony po konserwantach (na samym ko&#324;cu), to znaczy, &#380;e w &#347;rodku jest go tyle, co nic.</p>
 
-<p>W kosmetykach obowi&#261;zuje system **INCI**. Nazwy sk&#322;adnik&oacute;w s&#261; tu po &#322;acinie (ro&#347;liny) lub po angielsku (chemia). Zasada jest ta sama: im wy&#380;ej na li&#347;cie, tym wi&#281;cej sk&#322;adnika w &#347;rodku. Je&#347;li Tw&oacute;j krem reklamuje si&#281; &bdquo;drogocennym olejem z awokado&rdquo;, a ten olej jest wymieniony po konserwantach (na samym ko&#324;cu), to znaczy, &#380;e w &#347;rodku jest go tyle, co nic.</p>
-
-<p>Na co uwa&#380;a&#263; po 50-tce? Sk&oacute;ra staje si&#281; cie&#324;sza i bardziej sk&#322;onna do podra&#380;nie&#324;. Unikaj silnych detergent&oacute;w typu SLS i SLES w szamponach oraz alkoholu denaturowanego (Alcohol Denat.) wysoko w sk&#322;adzie krem&oacute;w &ndash; te substancje niepotrzebnie wysuszaj&#261;. Je&#347;li masz wra&#380;liw&#261; cer&#281;, uwa&#380;aj na has&#322;o &bdquo;Parfum&rdquo; lub &bdquo;Fragrance&rdquo; &ndash; pod nim kryje si&#281; mieszanka substancji zapachowych, kt&oacute;re s&#261; najcz&#281;stsz&#261; przyczyn&#261; alergii kontaktowych.</p>
+<p>Na co uwa&#380;a&#263; po 50-tce? Sk&oacute;ra staje si&#281; cie&#324;sza i bardziej sk&#322;onna do podra&#380;nie&#324;. Unikaj silnych detergent&oacute;w typu SLS i SLES w szamponach oraz alkoholu denaturowanego (Alcohol Denat. ) wysoko w sk&#322;adzie krem&oacute;w &ndash; te substancje niepotrzebnie wysuszaj&#261;. Je&#347;li masz wra&#380;liw&#261; cer&#281;, uwa&#380;aj na has&#322;o &bdquo;Parfum&rdquo; lub &bdquo;Fragrance&rdquo; &ndash; pod nim kryje si&#281; mieszanka substancji zapachowych, kt&oacute;re s&#261; najcz&#281;stsz&#261; przyczyn&#261; alergii kontaktowych.</p>
 
 <p>Dobr&#261; wiadomo&#347;ci&#261; jest to, &#380;e nie musisz by&#263; chemikiem. Istniej&#261; &#347;wietne aplikacje (np. INCI Beauty), kt&oacute;re po zeskanowaniu kodu kreskowego od razu m&oacute;wi&#261; Ci, czy sk&#322;ad jest bezpieczny, czy naszpikowany tani&#261; chemi&#261;.</p>
 
 <aside class="highlight-box"><h3>Warto wiedzie&#263;</h3><p><strong>Prosta rada:</strong> Sk&#322;adniki po &#322;acinie to zazwyczaj dobroczynne ekstrakty ro&#347;linne. Sk&#322;adniki po angielsku to syntetyki. Szukaj &#322;aciny na pocz&#261;tku listy &ndash; wtedy Tw&oacute;j kosmetyk naprawd&#281; dzia&#322;a.</p></aside>
 
-<figure class="inline-figure"><img src="./assets/inci-sklad-kosmetyku-anatomia-infografika.jpg" alt="Infografika po polsku: anatomia sk&#322;adu INCI kosmetyku &ndash; schemat z zaznaczonymi sk&#322;adnikami po&#380;&#261;danymi i tymi do unikania, polskie opisy" loading="lazy"></figure>
+<figure class="inline-figure"><picture>
+          <source srcset="./assets/inci-sklad-kosmetyku-anatomia-infografika.jpg" type="image/avif">
+          <source srcset="./assets/inci-sklad-kosmetyku-anatomia-infografika.jpg" type="image/webp">
+          <img src="./assets/inci-sklad-kosmetyku-anatomia-infografika.jpg" alt="Infografika po polsku: anatomia sk&#322;adu INCI kosmetyku &ndash; schemat z zaznaczonymi sk&#322;adnikami po&#380;&#261;danymi i tymi do unikania, polskie opisy" loading="lazy">
+        </picture></figure>
 
 <h2>Marketingowe triki &ndash; jak nie da&#263; si&#281; &bdquo;uwie&#347;&#263;&rdquo; opakowaniu</h2>
-
-<p>Producenci wiedz&#261;, &#380;e kupujemy oczami. Dlatego u&#380;ywaj&#261; kolor&oacute;w ziemi, rysunk&oacute;w li&#347;ci i hase&#322; typu &bdquo;0% t&#322;uszczu&rdquo;. Pami&#281;taj jednak: **t&#322;uszcz jest no&#347;nikiem smaku**. Je&#347;li producent go usun&#261;&#322;, musia&#322; doda&#263; co&#347; innego, &#380;eby jedzenie by&#322;o smaczne &ndash; najcz&#281;&#347;ciej jest to cukier albo zag&#281;stniki. Produkt &bdquo;light&rdquo; wcale nie musi by&#263; zdrowszy.</p>
+      <p>Producenci wiedz&#261;, &#380;e kupujemy oczami. Dlatego u&#380;ywaj&#261; kolor&oacute;w ziemi, rysunk&oacute;w li&#347;ci i hase&#322; typu &bdquo;0% t&#322;uszczu&rdquo;. Pami&#281;taj jednak: **t&#322;uszcz jest no&#347;nikiem smaku**. Je&#347;li producent go usun&#261;&#322;, musia&#322; doda&#263; co&#347; innego, &#380;eby jedzenie by&#322;o smaczne &ndash; najcz&#281;&#347;ciej jest to cukier albo zag&#281;stniki. Produkt &bdquo;light&rdquo; wcale nie musi by&#263; zdrowszy.</p>
 
 <p>Inna pu&#322;apka to has&#322;o &bdquo;naturalny&rdquo;. W prawie spo&#380;ywczym to s&#322;owo nie ma &#347;cis&#322;ej definicji. &bdquo;Naturalny aromat&rdquo; mo&#380;e by&#263; wyprodukowany w laboratorium z naturalnych surowc&oacute;w, ale nie ma nic wsp&oacute;lnego ze &#347;wie&#380;ym owocem. Z kolei na kosmetykach has&#322;o &bdquo;naturalny&rdquo; bez odpowiedniego certyfikatu (np. Ecocert) to czysty marketing, bez &#380;adnych gwarancji.</p>
 
-<p>Najlepsza strategia? **Ignoruj prz&oacute;d opakowania.** Prawda o produkcie zawsze jest z ty&#322;u, napisana ma&#322;ym drukiem. Im kr&oacute;tsza lista sk&#322;adnik&oacute;w, tym produkt jest bli&#380;szy naturze i zazwyczaj lepszy dla Twojego zdrowia.</p>
+<p>Najlepsza strategia? **Ignoruj prz&oacute;d opakowania. ** Prawda o produkcie zawsze jest z ty&#322;u, napisana ma&#322;ym drukiem. Im kr&oacute;tsza lista sk&#322;adnik&oacute;w, tym produkt jest bli&#380;szy naturze i zazwyczaj lepszy dla Twojego zdrowia.</p>
 
 <aside class="highlight-box highlight-box--accent"><h3>Warto wiedzie&#263;</h3><p><strong>Zasada trzech sk&#322;adnik&oacute;w:</strong> Je&#347;li pierwsze trzy sk&#322;adniki na li&#347;cie to rzeczy, kt&oacute;rych unikasz, &#380;adne has&#322;o o &bdquo;witaminach&rdquo; na froncie opakowania tego nie naprawi.</p></aside>
 
-<figure class="inline-figure"><img src="./assets/pulapki-marketingowe-opakowania-infografika.jpg" alt='Ilustracja po polsku: 6 najcz&#281;stszych pu&#322;apek marketingowych na opakowaniach &ndash; "bez cukru", "naturalny", "0% t&#322;uszczu" z wyja&#347;nieniami co si&#281; za tym kryje' loading="lazy"></figure>
+<figure class="inline-figure"><picture>
+          <source srcset="./assets/pulapki-marketingowe-opakowania-infografika.jpg" type="image/avif">
+          <source srcset="./assets/pulapki-marketingowe-opakowania-infografika.jpg" type="image/webp">
+          <img src="./assets/pulapki-marketingowe-opakowania-infografika.jpg" alt="" loading="lazy">
+        </picture></figure>
 
 <section class="faq-list reveal" aria-label="Najcz&#281;&#347;ciej zadawane pytania">
 
   <h2>Najcz&#281;&#347;ciej zadawane pytania</h2>
+      <p>Najcz&#281;&#347;ciej zadawane pytania po 50-tce warto rozłożyć na praktyczne kroki i odnieść do codziennych decyzji. Takie podejście pomaga bezpiecznie działać, lepiej rozumieć sygnały z organizmu oraz wdrażać nawyki, które realnie poprawiają zdrowie i sprawność.</p>
 
 <article class="faq-item" id="faq-1">
   <h3>Jak najszybciej sprawdzi&#263;, czy warto co&#347; kupi&#263;?</h3>
   <p>Stosuj metod&#281; 60 sekund: (1) Sprawd&#378; PIERWSZE 3 sk&#322;adniki. (2) Policz ile sk&#322;adnik&oacute;w ma lista &ndash; je&#347;li wi&#281;cej ni&#380; 10 w prostym produkcie (chleb, ser, jogurt), to z&#322;y znak. (3) W tabeli sprawd&#378; ilo&#347;&#263; cukr&oacute;w na 100 g. To wystarczy, &#380;eby odsia&#263; 90% &#347;mieciowego jedzenia.</p>
-</article>
+
+
+      <p>Warto przeczytać też: <a href="trening-silowy-eliksir-mlodosci-po-50.html">trening siłowy</a>, <a href="dieta-po-50.html">dieta po 50-tce</a>, <a href="sen-po-50.html">sen i regeneracja</a>, <a href="badania-krwi-po-50-jak-czesto.html">badania krwi</a>.</p>
+    </article>
+
+      <p>Powiązane tematy: <a href="trening-silowy-eliksir-mlodosci-po-50.html">trening siłowy</a>, <a href="dieta-po-50.html">dieta po 50-tce</a>, <a href="sen-po-50.html">sen i regeneracja</a>, <a href="suplementacja-po-50.html">suplementacja</a>.</p>
 
 <article class="faq-item" id="faq-2">
   <h3>Czym si&#281; r&oacute;&#380;ni data &bdquo;spo&#380;y&#263; przed&rdquo; od &bdquo;spo&#380;y&#263; do&rdquo;?</h3>
@@ -413,6 +432,7 @@
 
 
       <h2 id="zrodla">&#377;r&oacute;d&#322;a</h2>
+      <p>&#377;r&oacute;d&#322;a po 50-tce warto wdrażać krok po kroku i od razu łączyć teorię z praktyką. Dzięki temu łatwiej utrzymać regularność, poprawić bezpieczeństwo działań i szybciej zauważyć trwałe efekty zdrowotne w codziennym życiu.</p>
       <ol class="sources-list">
         <li><a href="https://www.alab.pl/centrum-wiedzy/jak-czytac-sklady-na-etykietach-produktow-spozywczych/" target="_blank" rel="noopener noreferrer">ALAB Centrum Wiedzy &mdash; Jak czyta&#263; sk&#322;ady</a></li>
         <li><a href="https://www.doz.pl/czytelnia/a1454-Dodatki_do_zywnosci_-_lista_E" target="_blank" rel="noopener noreferrer">DOZ.pl Czytelnia &mdash; Dodatki do &#380;ywno&#347;ci</a></li>
@@ -490,7 +510,7 @@
           <span class="btn btn--outline article-promo-card__cta">Czytaj artyku&#322; -&gt;</span>
         </div>
       </a>
-  </div>
+  </article>
 </section>
 </div>
 
@@ -521,8 +541,8 @@
         <div>
           <h2 class="site-footer-bento__title">FitPo50.pl</h2>
           <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej &#347;ciemy.</p>
-        </div>
-      </div>
+        </article>
+      </article>
     </section>
 
     <section class="site-footer-bento__card" aria-label="Linki serwisu">

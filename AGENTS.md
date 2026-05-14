@@ -43,6 +43,16 @@ Example:
 - Make layouts responsive from the start — mobile-first approach
 - Disable submit button during form submission — prevent double-submit
 
+## ✅ FitPo50 Quality Gate v2.0 (Article Pages)
+- SEO description contract: `meta description`, `og:description`, `twitter:description` i `BlogPosting.description` muszą być identyczne 1:1.
+- Długość każdego opisu SEO: 145-160 znaków; opis musi kończyć się pełnym znakiem końca zdania (`.`, `!`, `?`).
+- H2 pytające muszą kończyć się `?`.
+- Pierwszy akapit pod każdym H2: 30-70 słów.
+- Każdy artykuł: min. 4 linki wewnętrzne i tylko ścieżki względne (`href="*.html"`).
+- Standard mediów: `<picture>` z AVIF/WebP + fallback `<img alt ... loading="lazy">`.
+- Zakaz `</source>` i `<?xml ... ?>` w HTML.
+- `BlogPosting.citation` musi być zgodne z listą źródeł w HTML (docelowo min. 4 realne URL-e, bez halucynacji).
+
 ## ⚡ Available Tools (ON-DEMAND only)
 - `sys_core_02(title, content, category)` — Save a note + auto-detect conflicts
 - `sys_core_03(items[])` — Save multiple notes in 1 call

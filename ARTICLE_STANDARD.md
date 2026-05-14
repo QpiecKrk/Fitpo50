@@ -115,7 +115,12 @@ Artykuł nie przechodzi, jeśli:
 
 ## 9. Guardrails SEO/AEO (obowiązkowe)
 - `<title>`: celuj w 55-65 znaków (max 65).
-- `meta name="description"`: celuj w 140-160 znaków (max 160).
+- `meta name="description"`: wymagane 145-160 znaków, pełne zdanie zakończone `.`, `!` lub `?`.
+- Opis SEO musi być identyczny 1:1 w 4 polach:
+  - `<meta name="description">`
+  - `<meta property="og:description">`
+  - `<meta name="twitter:description">`
+  - `BlogPosting.description` w JSON-LD
 - W `BlogPosting` dodawaj `speakable` (`SpeakableSpecification`) ze wskazaniem:
   - `.article-header__title`
   - `.article-content > p:first-of-type`
@@ -123,3 +128,20 @@ Artykuł nie przechodzi, jeśli:
   - `.key-takeaways li`
 - Sekcja `.key-takeaways` ma być wysoko w treści:
   - po leadzie/wstępie, przed pierwszym głównym blokiem sekcji.
+
+## 10. Content + Linking Contract v2.0 (obowiązkowe)
+- Pytające nagłówki H2 (np. zaczynające się od `Czy`, `Jak`, `Dlaczego`, `Ile`, `Kiedy`) muszą kończyć się `?`.
+- Pierwszy akapit pod każdym H2 (lead sekcji) musi mieć 30-70 słów.
+- Każdy artykuł musi mieć min. 4 sensowne linki wewnętrzne do istniejących artykułów.
+- Linki wewnętrzne w treści mają być wyłącznie względne (`href="slug-artykulu.html"`), bez `https://fitpo50.pl/...`.
+
+## 11. Media + Syntax Contract v2.0 (obowiązkowe)
+- Obrazy w treści artykułu mają korzystać ze standardu:
+  - `<picture>` + `<source type="image/avif">` + `<source type="image/webp">` + fallback `<img>`.
+- W fallback `<img>` wymagane: poprawny `alt` oraz `loading="lazy"`.
+- Zakaz używania tagu `</source>` i deklaracji `<?xml ... ?>` w plikach HTML.
+
+## 12. Schema Citation Contract v2.0 (obowiązkowe)
+- `BlogPosting.citation` musi być zsynchronizowane z listą źródeł w HTML.
+- Wymagane minimum 4 URL-e w citation, jeśli faktycznie istnieją w materiale źródłowym.
+- Kategoryczny zakaz dopisywania zmyślonych źródeł tylko po to, by dobić do minimum.

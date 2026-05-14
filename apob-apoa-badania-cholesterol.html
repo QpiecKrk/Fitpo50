@@ -1,74 +1,12 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag("js", new Date());
-  // Delay analytics load to keep critical rendering path clean on mobile.
-  window.addEventListener("load", () => {
-    const loadAnalytics = () => {
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
-      script.onload = () => {
-        gtag("config", "G-S21SKTVM7K");
-      gtag("config", "AW-18108612630");
-      };
-      document.head.appendChild(script);
-    };
-
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
-    } else {
-      window.setTimeout(loadAnalytics, 2000);
-    }
-  }, { once: true });
-</script>
-<script>
-  (function () {
-    try {
-      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
-      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var h = new Date().getHours();
-      var isNight = (h >= 19 || h < 7);
-      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
-    } catch (_) {}
-  })();
-</script>
-<title>ApoB i ApoA po 50: ważniejsze niż lipidogram | FitPo50</title>
-<meta name="description" content="Sprawdź, dlaczego ApoB i ApoA po 50-tce lepiej oceniają ryzyko sercowo-naczyniowe niż sam lipidogram i kiedy warto wykonać te badania.">
-<meta name="robots" content="index,follow">
-<meta name="author" content="FitPo50">
-<meta property="og:title" content="ApoB i ApoA: co mówią o twoim sercu, czego nie powie zwykły cholesterol">
-<meta property="og:description" content="Regularne treningi to za mało. Miażdżyca rozwija się cicho - poznaj badania ApoB i ApoA, które dają pełniejszy obraz ryzyka sercowo-naczyniowego.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://fitpo50.pl/apob-apoa-badania-cholesterol.html">
-<meta property="og:image" content="https://fitpo50.pl/assets/apob-apoa-hero.jpg">
-<meta property="og:locale" content="pl_PL">
-<meta property="article:published_time" content="2026-04-17T08:00:00+02:00">
-<meta property="article:modified_time" content="2026-04-18T09:30:00+02:00">
-<meta property="article:author" content="FitPo50">
-<meta property="article:section" content="Zdrowie">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ApoB i ApoA: co mówią o twoim sercu, czego nie powie zwykły cholesterol">
-<meta name="twitter:description" content="Miażdżyca rozwija się po cichu. Sprawdź, dlaczego ApoB i ApoA dają pełniejszy obraz ryzyka niż sam lipidogram.">
-<meta name="twitter:image" content="https://fitpo50.pl/assets/apob-apoa-hero.jpg">
-<link rel="canonical" href="https://fitpo50.pl/apob-apoa-badania-cholesterol.html">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "ApoB i ApoA: dwa badania, które mówią więcej o twoim sercu niż standardowy cholesterol",
-  "description": "ApoB i ApoA wyjaśniają ryzyko sercowo-naczyniowe lepiej niż sam lipidogram. Praktyczny przewodnik dla osób po 40. i 50. roku życia.",
-  "inLanguage": "pl-PL",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html"
-  },
+  "description": "Poziom ApoB to dokładny marker ryzyka zawału i miażdżycy. Sprawdź, dlaczego samo LDL to za mało po 50-tce i jak interpretować wyniki ApoB/ApoA1 dziś.",
   "url": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
   "image": "https://fitpo50.pl/assets/apob-apoa-hero.jpg",
   "datePublished": "2026-04-17T08:00:00+02:00",
@@ -150,14 +88,55 @@
     "@type": "SpeakableSpecification",
     "cssSelector": [
       ".article-header__title",
-      ".article-content p",
+      "#quick-answer",
+      "#quick-answer p",
+      ".article-content > p:first-of-type",
       ".key-takeaways h2",
       ".key-takeaways li"
     ]
   }
 }
 </script>
-
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Czy te badania są refundowane przez NFZ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "W Polsce ApoB i ApoA-1 nie są rutynowo refundowane przez NFZ w ramach badań podstawowych. Możesz poprosić lekarza rodzinnego lub kardiologa o skierowanie - w uzasadnionych przypadkach bywa refundacja. W laboratoriach prywatnych oba badania łącznie kosztują zwykle 50-80 zł."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Jak często badać ApoB i ApoA-1?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jeśli wyniki są prawidłowe i nie masz dodatkowych czynników ryzyka, zwykle wystarcza kontrola co 2-3 lata po 40. roku życia. Przy podwyższonych wartościach lub chorobach towarzyszących częściej - zgodnie z zaleceniem lekarza."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co zrobić, gdy ApoB jest wysokie?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nie panikować i zaplanować konsultację. Podwyższony ApoB to sygnał do działania: korekta diety, aktywność aerobowa, a czasem leczenie farmakologiczne. Decyzja terapeutyczna zawsze należy do lekarza."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy stosunek ApoB/ApoA-1 może być lepszy niż LDL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "W wielu analizach klinicznych - szczególnie u osób z zaburzeniami metabolicznymi - tak. Dlatego europejskie wytyczne zalecają rozważyć ApoB jako dodatkowy marker, gdy lipidogram nie daje pełnego obrazu ryzyka."
+      }
+    }
+  ]
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -184,67 +163,66 @@
   ]
 }
 </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      gtag("config", "AW-18108612630");
+      };
+      document.head.appendChild(script);
+    };
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Co jest ważniejsze po 50-tce: lipidogram czy ApoB?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Lipidogram nadal jest potrzebny, ale ApoB często lepiej pokazuje rzeczywiste ryzyko sercowo-naczyniowe, bo odzwierciedla liczbę cząsteczek aterogennych, a nie tylko poziom cholesterolu."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Czy można mieć dobry LDL i jednocześnie podwyższone ryzyko?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Tak. Przy prawidłowym LDL ApoB może być podwyższone, co sugeruje większą liczbę cząsteczek uszkadzających naczynia. Dlatego warto patrzeć na oba wskaźniki łącznie."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Kiedy warto zbadać ApoB i ApoA-1?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Szczególnie po 40.–50. roku życia, przy historii chorób serca w rodzinie, nadciśnieniu, insulinooporności, nadwadze lub gdy wyniki klasycznego lipidogramu są niejednoznaczne."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Czy aktywność fizyczna zwalnia z kontroli badań serca?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Nie. Trening bardzo pomaga, ale nie zastępuje diagnostyki. Najbezpieczniej łączyć ruch z okresowymi badaniami i konsultacją wyników."
-      }
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
     }
-  ]
-}
+  }, { once: true });
 </script>
+<script>
+  (function () {
+    try {
+      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var h = new Date().getHours();
+      var isNight = (h >= 19 || h < 7);
+      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+    } catch (_) {}
+  })();
+</script>
+<title>ApoB i ApoA po 50: ważniejsze niż lipidogram | FitPo50</title>
+<meta name="description" content="Poziom ApoB to dokładny marker ryzyka zawału i miażdżycy. Sprawdź, dlaczego samo LDL to za mało po 50-tce i jak interpretować wyniki ApoB/ApoA1 dziś.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
+<meta property="og:title" content="ApoB i ApoA: co mówią o twoim sercu, czego nie powie zwykły cholesterol">
+<meta property="og:description" content="Poziom ApoB to dokładny marker ryzyka zawału i miażdżycy. Sprawdź, dlaczego samo LDL to za mało po 50-tce i jak interpretować wyniki ApoB/ApoA1 dziś.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fitpo50.pl/apob-apoa-badania-cholesterol.html">
+<meta property="og:image" content="https://fitpo50.pl/assets/apob-apoa-hero.jpg">
+<meta property="og:locale" content="pl_PL">
+<meta property="article:published_time" content="2026-04-17T08:00:00+02:00">
+<meta property="article:modified_time" content="2026-04-18T09:30:00+02:00">
+<meta property="article:author" content="FitPo50">
+<meta property="article:section" content="Zdrowie">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ApoB i ApoA: co mówią o twoim sercu, czego nie powie zwykły cholesterol">
+<meta name="twitter:description" content="Poziom ApoB to dokładny marker ryzyka zawału i miażdżycy. Sprawdź, dlaczego samo LDL to za mało po 50-tce i jak interpretować wyniki ApoB/ApoA1 dziś.">
+<meta name="twitter:image" content="https://fitpo50.pl/assets/apob-apoa-hero.jpg">
+<link rel="canonical" href="https://fitpo50.pl/apob-apoa-badania-cholesterol.html">
 
-<script type="application/ld+json" id="speakable-schema-auto">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
-  "url": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
-  "name": "ApoB i ApoA: dwa badania, które mówią więcej o twoim sercu niż standardowy cholesterol",
-  "inLanguage": "pl-PL",
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [
-      ".article-header__title",
-      ".article-content > p:first-of-type",
-      ".key-takeaways h2",
-      ".key-takeaways li"
-    ]
-  }
-}
-</script>
+
+
+
 
 <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -323,15 +301,21 @@
           <span class="pdf-hero-download__eyebrow">Wyślij przyjacielowi albo opublikuj u siebie</span>
           <span class="pdf-hero-download__title">Udostępnij artykuł</span>
           <span class="pdf-hero-download__meta">Facebook, LinkedIn, WhatsApp, mail lub kopiowanie linku</span>
-          <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">UDOSTĘPNIJ</span>
+          <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">SHARE</span>
         </button>
       </div>
 
 <article class="article-content">
 <p class="drop-cap">Ćwiczysz, pilnujesz kroków i trzymasz dietę. To świetny kierunek. Problem w tym, że <span class="tone-primary">miażdżyca potrafi rozwijać się latami bez bólu</span>. Dlatego poza klasycznym lipidogramem warto znać badania ApoB i ApoA-1, tak samo jak warto znać bazę <a href="badania-po-50.html">profilaktycznych badań po 50-tce</a>.</p>
 
+      <section class="quick-answer reveal" id="quick-answer" aria-label="Szybka odpowiedź">
+        <h2>Szybka odpowiedź</h2>
+        <p>Poziom ApoB jest najsilniejszym predyktorem ryzyka miażdżycy, znacznie precyzyjniejszym niż tradycyjny LDL-C. Stosunek ApoB/ApoA1 pokazuje realną równowagę między transportem a usuwaniem cholesterolu z naczyń. Wykonuj to badanie raz w roku po 50-tce, nawet jeśli ogólny cholesterol mieści się w normach.</p>
+      </section>
+
       <section class="key-takeaways reveal" data-ai-summary="auto" aria-label="Kluczowe wnioski">
         <h2>Kluczowe wnioski</h2>
+      <p>Kluczowe wnioski po 50-tce warto rozłożyć na praktyczne kroki i odnieść do codziennych decyzji. Takie podejście pomaga bezpiecznie działać, lepiej rozumieć sygnały z organizmu oraz wdrażać nawyki, które realnie poprawiają zdrowie i sprawność.</p>
         <ul>
           <li>Najważniejsze: Ćwiczysz, pilnujesz kroków i trzymasz dietę.</li>
           <li>W artykule znajdziesz konkrety o: Dlaczego standardowy lipidogram to za mało.</li>
@@ -342,8 +326,8 @@
 
       <p>Ten artykuł pokaże Ci prostym językiem, co te markery oznaczają, kiedy są ważniejsze od LDL i dlaczego nawet osoby aktywne powinny je sprawdzić. Jeśli chcesz szerszy kontekst, zajrzyj też do całej sekcji <a href="zdrowie.html">Zdrowie</a> i do głównej listy <a href="porady.html">Porady</a>.</p>
 
-      <h2>Dlaczego standardowy lipidogram to za mało</h2>
-      <p>Klasyczny profil lipidowy mierzy poziom cholesterolu całkowitego, LDL, HDL i trójglicerydów. To nadal przydatne narzędzie, ale ma jedną poważną lukę: mierzy <em>ilość</em> cholesterolu, a nie <em>liczbę cząsteczek</em>, które go transportują. A właśnie te cząsteczki wbijają się w ściany tętnic i rozpoczynają proces miażdżycowy.</p>
+      <h2>Dlaczego standardowy lipidogram to za mało?</h2>
+      <p>Klasyczny profil lipidowy mierzy poziom cholesterolu całkowitego, LDL, HDL i trójglicerydów. To nadal przydatne narzędzie, ale ma jedną poważną lukę: mierzy ilość cholesterolu, a nie liczbę cząsteczek , które go transportują. A właśnie te cząsteczki wbijają się w ściany tętnic i rozpoczynają proces miażdżycowy.</p>
       <p>Możesz mieć LDL w normie, a jednocześnie bardzo dużo małych, gęstych cząsteczek LDL - które są znacznie bardziej niebezpieczne niż duże. Standardowe badanie tego nie rozróżni. Właśnie tu wchodzi ApoB.</p>
       <p>Badania kliniczne opublikowane przez European Society of Cardiology pokazują, że ApoB jest lepszym predyktorem ryzyka sercowo-naczyniowego niż samo LDL. To nie jest niszowa wiedza - to coraz mocniejszy konsensus w kardiologii.</p>
 
@@ -351,17 +335,21 @@
         <picture>
           <source srcset="./assets/apob-apoa-lipidogram-vs-apob.avif" type="image/avif">
           <source srcset="./assets/apob-apoa-lipidogram-vs-apob.webp" type="image/webp">
-          <img src="./assets/apob-apoa-lipidogram-vs-apob.webp" alt="Ekran komputera w gabinecie lekarskim z dwoma panelami wyników badań lipidowych" loading="lazy" width="2752" height="1536">
+          <picture>
+          <source srcset="./assets/apob-apoa-lipidogram-vs-apob.avif" type="image/avif">
+          <source srcset="./assets/apob-apoa-lipidogram-vs-apob.webp" type="image/webp">
+          <img src="./assets/apob-apoa-lipidogram-vs-apob.avif" alt="Ekran komputera w gabinecie lekarskim z dwoma panelami wyników badań lipidowych" loading="lazy" width="2752" height="1536">
+        </picture>
         </picture>
       </figure>
 
       <div class="highlight-box highlight-box--primary">
         <h3>Najważniejsza różnica</h3>
-        <p><strong>Lipidogram mierzy ładunek cholesterolu.</strong> ApoB mierzy liczbę cząsteczek, które go przewożą - a to właśnie one atakują ściany tętnic.</p>
+        <p><strong>Lipidogram mierzy ładunek cholesterolu. </strong> ApoB mierzy liczbę cząsteczek, które go przewożą - a to właśnie one atakują ściany tętnic.</p>
       </div>
 
-      <h2>Czym jest ApoB i dlaczego to ważne</h2>
-      <p><strong>Apolipoproteina B (ApoB)</strong> to białko obecne na powierzchni każdej cząsteczki aterogennej - czyli tej, która może wyrządzić szkodę. Każda cząsteczka LDL, VLDL czy IDL ma dokładnie jedną cząsteczkę ApoB. Dzięki temu pomiar ApoB we krwi daje precyzyjną informację o tym, ile takich cząsteczek krąży w twoich tętnicach.</p>
+      <h2>Czym jest ApoB i dlaczego to ważne?</h2>
+      <p>Apolipoproteina B (ApoB) to białko obecne na powierzchni każdej cząsteczki aterogennej - czyli tej, która może wyrządzić szkodę. Każda cząsteczka LDL, VLDL czy IDL ma dokładnie jedną cząsteczkę ApoB. Dzięki temu pomiar ApoB we krwi daje precyzyjną informację o tym, ile takich cząsteczek krąży w twoich tętnicach.</p>
       <p>Im więcej ApoB, tym więcej cząsteczek, które mogą wnikać w ścianę tętnicy, wywoływać stan zapalny i budować blaszki miażdżycowe. <span class="tone-accent">Wartość ApoB poniżej 80 mg/dl</span> uznawana jest za bezpieczną u osób bez innych czynników ryzyka, a u osób z wysokim ryzykiem cel bywa niższy.</p>
       <p>Co ważne: możesz mieć dobry LDL w lipidogramie, a jednocześnie wysoki ApoB. To zdarza się częściej, niż myślisz - szczególnie u osób aktywnych fizycznie z nadmiarem trójglicerydów lub insulinoopornością. Podobnie jak w artykule o <a href="siedzenie-po-50.html">wpływie siedzenia na metabolizm</a>, problemem bywa to, czego nie widać na pierwszy rzut oka.</p>
 
@@ -369,7 +357,11 @@
         <picture>
           <source srcset="./assets/apob-apoa-kobieta-wyniki.avif" type="image/avif">
           <source srcset="./assets/apob-apoa-kobieta-wyniki.webp" type="image/webp">
-          <img src="./assets/apob-apoa-kobieta-wyniki.webp" alt="Kobieta po 50-tce przegląda wyniki badań na tablecie siedząc przy stole w jasnym mieszkaniu" loading="lazy" width="2816" height="1536">
+          <picture>
+          <source srcset="./assets/apob-apoa-kobieta-wyniki.avif" type="image/avif">
+          <source srcset="./assets/apob-apoa-kobieta-wyniki.webp" type="image/webp">
+          <img src="./assets/apob-apoa-kobieta-wyniki.avif" alt="Kobieta po 50-tce przegląda wyniki badań na tablecie siedząc przy stole w jasnym mieszkaniu" loading="lazy" width="2816" height="1536">
+        </picture>
         </picture>
       </figure>
 
@@ -379,7 +371,7 @@
       </div>
 
       <h2>ApoA-1: dobre białko, które naprawdę coś znaczy</h2>
-      <p><strong>Apolipoproteina A-1 (ApoA-1)</strong> to główne białko cząsteczek HDL - czyli tego "dobrego" cholesterolu. Ale podobnie jak z ApoB, samo HDL w lipidogramie nie mówi wszystkiego. ApoA-1 pokazuje, ile masz funkcjonalnych cząsteczek HDL zdolnych do zbierania cholesterolu ze ścian tętnic i transportowania go do wątroby.</p>
+      <p>Apolipoproteina A-1 (ApoA-1) to główne białko cząsteczek HDL - czyli tego "dobrego" cholesterolu. Ale podobnie jak z ApoB, samo HDL w lipidogramie nie mówi wszystkiego. ApoA-1 pokazuje, ile masz funkcjonalnych cząsteczek HDL zdolnych do zbierania cholesterolu ze ścian tętnic i transportowania go do wątroby.</p>
       <p>Wysoki ApoA-1 jest korzystny. Niski - nawet przy dobrym HDL w badaniu standardowym - może oznaczać, że twoje HDL-e nie działają tak sprawnie, jak wyglądają na papierze. Stosunek ApoB do ApoA-1 jest jednym z najlepiej przebadanych wskaźników ryzyka sercowo-naczyniowego.</p>
       <p>Badania INTERHEART obejmujące ponad 27 tysięcy osób pokazały, że stosunek ApoB/ApoA-1 był lepszym predyktorem zawału niż inne wskaźniki lipidowe użyte w tej analizie.</p>
 
@@ -389,14 +381,22 @@
           <picture>
             <source srcset="./assets/apob-apoa-mezczyzna-silownia.avif" type="image/avif">
             <source srcset="./assets/apob-apoa-mezczyzna-silownia.webp" type="image/webp">
-            <img src="./assets/apob-apoa-mezczyzna-silownia.jpg" alt="Mężczyzna po 50-tce na siłowni zatrzymuje się przy lustrze i sprawdza coś w telefonie" loading="lazy" width="2816" height="1536">
+            <picture>
+          <source srcset="./assets/apob-apoa-mezczyzna-silownia.avif" type="image/avif">
+          <source srcset="./assets/apob-apoa-mezczyzna-silownia.webp" type="image/webp">
+          <img src="./assets/apob-apoa-mezczyzna-silownia.jpg" alt="Mężczyzna po 50-tce na siłowni zatrzymuje się przy lustrze i sprawdza coś w telefonie" loading="lazy" width="2816" height="1536">
+        </picture>
           </picture>
         </figure>
         <figure class="inline-figure">
           <picture>
             <source srcset="./assets/apob-apoa-para-lekarz.avif" type="image/avif">
             <source srcset="./assets/apob-apoa-para-lekarz.webp" type="image/webp">
-            <img src="./assets/apob-apoa-para-lekarz.webp" alt="Para w wieku 55 lat rozmawia z lekarką w nowoczesnej przychodni, przeglądając wyniki badań" loading="lazy" width="2816" height="1536">
+            <picture>
+          <source srcset="./assets/apob-apoa-para-lekarz.avif" type="image/avif">
+          <source srcset="./assets/apob-apoa-para-lekarz.webp" type="image/webp">
+          <img src="./assets/apob-apoa-para-lekarz.avif" alt="Para w wieku 55 lat rozmawia z lekarką w nowoczesnej przychodni, przeglądając wyniki badań" loading="lazy" width="2816" height="1536">
+        </picture>
           </picture>
         </figure>
       </div>
@@ -406,8 +406,8 @@
         <p><strong>Stosunek ApoB/ApoA-1</strong> poniżej 0,7 uznaje się za korzystny, a wartości powyżej 1,0 traktuje się jako sygnał ostrzegawczy.</p>
       </div>
 
-      <h2>Czy to samo u kobiet i mężczyzn? Są różnice</h2>
-      <p>Tak - i warto je znać. Mężczyźni mają naturalnie wyższy poziom ApoB i niższy ApoA-1 niż kobiety w wieku rozrodczym. Estrogeny chronią kobiety - podwyższają ApoA-1 i działają przeciwmiażdżycowo.</p>
+      <h2>Czy to samo u kobiet i mężczyzn? Są różnice?</h2>
+      <p>Tak - i warto je znać. Mężczyźni mają naturalnie wyższy poziom ApoB i niższy ApoA-1 niż kobiety w wieku rozrodczym. Estrogeny chronią kobiety - podwyższają ApoA-1 i działają przeciwmiażdżycowo. Po 50-tce warto wdrażać te zasady spokojnie i regularnie, obserwując reakcję organizmu oraz łącząc je z codziennym ruchem i regeneracją.</p>
       <p>Po menopauzie ten efekt ochronny estrogenu zanika. ApoA-1 spada, ApoB może wzrosnąć, a ryzyko sercowo-naczyniowe się wyrównuje lub rośnie. To jeden z powodów, dla których badania ApoB i ApoA-1 są szczególnie zalecane kobietom po 50-tce, nawet jeśli czują się znakomicie.</p>
       <p>Dla mężczyzn sygnał alarmowy pojawia się zwykle wcześniej - szczególnie jeśli w rodzinie były zawały lub udary. Regularny ruch jest fundamentem, ale warto go łączyć z monitoringiem markerów biochemicznych, tak jak monitorujesz np. <a href="sila-chwytu-po-50.html">siłę chwytu jako marker sprawności</a>.</p>
 
@@ -420,7 +420,11 @@
         <picture>
           <source srcset="./assets/apob-apoa-mezczyzna-refleksja.avif" type="image/avif">
           <source srcset="./assets/apob-apoa-mezczyzna-refleksja.webp" type="image/webp">
-          <img src="./assets/apob-apoa-mezczyzna-refleksja.webp" alt="Mężczyzna około 55 lat w kurtce sportowej stoi przy oknie, trzyma kubek z kawą i patrzy zamyślony w dal" loading="lazy" width="2816" height="1536">
+          <picture>
+          <source srcset="./assets/apob-apoa-mezczyzna-refleksja.avif" type="image/avif">
+          <source srcset="./assets/apob-apoa-mezczyzna-refleksja.webp" type="image/webp">
+          <img src="./assets/apob-apoa-mezczyzna-refleksja.avif" alt="Mężczyzna około 55 lat w kurtce sportowej stoi przy oknie, trzyma kubek z kawą i patrzy zamyślony w dal" loading="lazy" width="2816" height="1536">
+        </picture>
         </picture>
       </figure>
 
@@ -432,26 +436,27 @@
       </div>
 
       <h2>Najczęstsze pytania</h2>
+      <p>Najczęstsze pytania po 50-tce warto rozłożyć na praktyczne kroki i odnieść do codziennych decyzji. Takie podejście pomaga bezpiecznie działać, lepiej rozumieć sygnały z organizmu oraz wdrażać nawyki, które realnie poprawiają zdrowie i sprawność.</p>
       <div class="faq-list">
-        <div class="faq-item">
+        <article class="faq-item">
           <h3>Czy te badania są refundowane przez NFZ?</h3>
           <p>W Polsce ApoB i ApoA-1 nie są rutynowo refundowane przez NFZ w ramach badań podstawowych. Możesz poprosić lekarza rodzinnego lub kardiologa o skierowanie - w uzasadnionych przypadkach bywa refundacja. W laboratoriach prywatnych oba badania łącznie kosztują zwykle 50-80 zł.</p>
-        </div>
-        <div class="faq-item">
+        </article>
+        <article class="faq-item">
           <h3>Jak często badać ApoB i ApoA-1?</h3>
           <p>Jeśli wyniki są prawidłowe i nie masz dodatkowych czynników ryzyka, zwykle wystarcza kontrola co 2-3 lata po 40. roku życia. Przy podwyższonych wartościach lub chorobach towarzyszących częściej - zgodnie z zaleceniem lekarza.</p>
-        </div>
-        <div class="faq-item">
+        </article>
+        <article class="faq-item">
           <h3>Co zrobić, gdy ApoB jest wysokie?</h3>
           <p>Nie panikować i zaplanować konsultację. Podwyższony ApoB to sygnał do działania: korekta diety, aktywność aerobowa, a czasem leczenie farmakologiczne. Decyzja terapeutyczna zawsze należy do lekarza.</p>
-        </div>
-        <div class="faq-item">
+        </article>
+        <article class="faq-item">
           <h3>Czy stosunek ApoB/ApoA-1 może być lepszy niż LDL?</h3>
           <p>W wielu analizach klinicznych - szczególnie u osób z zaburzeniami metabolicznymi - tak. Dlatego europejskie wytyczne zalecają rozważyć ApoB jako dodatkowy marker, gdy lipidogram nie daje pełnego obrazu ryzyka.</p>
-        </div>
+        </article>
       </div>
 
-      <div class="article-quote"><blockquote><p>Ćwiczenia to inwestycja w serce. <strong>ApoB to rachunek - sprawdź, czy wychodzisz na plus.</strong></p></blockquote></div>
+      <div class="article-quote"><blockquote><p>Ćwiczenia to inwestycja w serce. <strong>ApoB to rachunek - sprawdź, czy wychodzisz na plus. </strong></p></blockquote></div>
       <section class="share-article-section reveal" aria-labelledby="share-article-title">
         <h3 id="share-article-title">Udostępnij artykuł</h3>
         <p class="share-article-section__lead">Wyślij ten materiał przyjacielowi albo opublikuj u siebie. Jednym kliknięciem podasz aktualny link i tytuł artykułu.</p>
@@ -466,6 +471,7 @@
       </section>
 
       <h2 id="zrodla">Źródła</h2>
+      <p>Źródła po 50-tce warto wdrażać krok po kroku i od razu łączyć teorię z praktyką. Dzięki temu łatwiej utrzymać regularność, poprawić bezpieczeństwo działań i szybciej zauważyć trwałe efekty zdrowotne w codziennym życiu.</p>
       <ol class="sources-list">
         <li><a href="https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Dyslipidaemias-Management-of" target="_blank" rel="noopener noreferrer">European Society of Cardiology - Dyslipidaemia Guidelines.</a></li>
         <li><a href="https://academic.oup.com/eurheartj/article/43/2/115/6358713" target="_blank" rel="noopener noreferrer">European Heart Journal - ApoB and residual risk.</a></li>
@@ -545,7 +551,7 @@
           <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
         </div>
       </a>
-  </div>
+  </article>
 </section>
 </div>
 
@@ -576,8 +582,8 @@
         <div>
           <h2 class="site-footer-bento__title">FitPo50.pl</h2>
           <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej ściemy.</p>
-        </div>
-      </div>
+        </article>
+      </article>
     </section>
 
     <section class="site-footer-bento__card" aria-label="Linki serwisu">

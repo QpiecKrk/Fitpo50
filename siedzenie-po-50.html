@@ -1,75 +1,12 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
-<!-- Google tag (gtag.js) -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag("js", new Date());
-  // Delay analytics load to keep critical rendering path clean on mobile.
-  window.addEventListener("load", () => {
-    const loadAnalytics = () => {
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
-      script.onload = () => {
-        gtag("config", "G-S21SKTVM7K");
-      gtag("config", "AW-18108612630");
-      };
-      document.head.appendChild(script);
-    };
-
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
-    } else {
-      window.setTimeout(loadAnalytics, 2000);
-    }
-  }, { once: true });
-</script>
-<script>
-  (function () {
-    try {
-      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
-      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var h = new Date().getHours();
-      var isNight = (h >= 19 || h < 7);
-      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
-    } catch (_) {}
-  })();
-</script>
-<title>Mniej siedzenia po 50: jak zmienia zdrowie | FitPo50</title>
-<meta name="description" content="Czy 30 minut mniej siedzenia dziennie robi różnicę po 50-tce? Sprawdź, co mówi nauka o wpływie przerw w siedzeniu na serce, mózg i metabolizm.">
-<meta name="robots" content="index,follow">
-<meta name="author" content="FitPo50">
-<meta property="og:title" content="Pół godziny mniej siedzenia dziennie: co się zmienia w rok?">
-<meta property="og:description" content="To może być najważniejsze 30 minut Twojego dnia. Zobacz, dlaczego chodzenie po domu działa lepiej niż niektóre lekarstwa.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://fitpo50.pl/siedzenie-po-50.html">
-<meta property="og:image" content="https://fitpo50.pl/assets/Siedzenie.webp">
-<meta property="og:locale" content="pl_PL">
-<meta property="article:published_time" content="2026-03-28T19:30:00+01:00">
-<meta property="article:modified_time" content="2026-04-18T09:30:00+02:00">
-<meta property="article:author" content="FitPo50">
-<meta property="article:section" content="Zdrowie">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pół godziny mniej siedzenia dziennie: co się zmienia w rok?">
-<meta name="twitter:description" content="Mała zmiana, wielki efekt dla zdrowia po 50. roku życia.">
-<meta name="twitter:image" content="https://fitpo50.pl/assets/Siedzenie.webp">
-<link rel="canonical" href="https://fitpo50.pl/siedzenie-po-50.html">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Pół godziny mniej siedzenia dziennie. Co się dzieje z ciałem po roku — i dlaczego to brzmi absurdalnie prosto.",
-  "description": "Dowiedz się, jak 30 minut mniej siedzenia dziennie wpływa na Twoje zdrowie, metabolizm i długowieczność po 50. roku życia.",
-  "inLanguage": "pl-PL",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://fitpo50.pl/siedzenie-po-50.html"
-  },
+  "description": "Siedzący tryb życia to „nowe palenie”. Dowiedz się, jak długotrwałe siedzenie niszczy zdrowie po 50-tce i poznaj proste sposoby na wplecenie ruchu w Twój dzień.",
   "url": "https://fitpo50.pl/siedzenie-po-50.html",
   "image": "https://fitpo50.pl/assets/Siedzenie.webp",
   "datePublished": "2026-03-28T19:30:00+01:00",
@@ -157,42 +94,16 @@
     "@type": "SpeakableSpecification",
     "cssSelector": [
       ".article-header__title",
-      ".article-content p",
+      "#quick-answer",
+      "#quick-answer p",
+      ".article-content > p:first-of-type",
       ".key-takeaways h2",
       ".key-takeaways li"
     ]
   }
 }
 </script>
-
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Strona główna",
-      "item": "https://fitpo50.pl/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Porady",
-      "item": "https://fitpo50.pl/porady.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Mniej siedzenia po 50-tce: co zmienia 30 minut dziennie",
-      "item": "https://fitpo50.pl/siedzenie-po-50.html"
-    }
-  ]
-}
-</script>
-
-<script type="application/ld+json" id="faqpage-schema-auto">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -220,30 +131,105 @@
         "@type": "Answer",
         "text": "Praktycznie sprawdza się wstawanie co 30-60 minut na 2-5 minut ruchu. To może być krótki spacer, kilka przysiadów albo wejście po schodach."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Jak wdrożyć to po 50-tce krok po kroku?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Zacznij spokojnie: wybierz jeden mały krok na ten tydzień, obserwuj reakcję organizmu i dopiero potem dokładaj kolejne elementy. Najlepsze efekty daje regularność, a nie tempo. Jeśli masz choroby przewlekłe lub dolegliwości bólowe, skonsultuj plan ze specjalistą."
+      }
     }
   ]
 }
 </script>
-
-<script type="application/ld+json" id="speakable-schema-auto">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://fitpo50.pl/siedzenie-po-50.html",
-  "url": "https://fitpo50.pl/siedzenie-po-50.html",
-  "name": "Pół godziny mniej siedzenia dziennie. Co się dzieje z ciałem po roku — i dlaczego to brzmi absurdalnie prosto.",
-  "inLanguage": "pl-PL",
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [
-      ".article-header__title",
-      ".article-content > p:first-of-type",
-      ".key-takeaways h2",
-      ".key-takeaways li"
-    ]
-  }
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Strona główna",
+      "item": "https://fitpo50.pl/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Porady",
+      "item": "https://fitpo50.pl/porady.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Mniej siedzenia po 50-tce: co zmienia 30 minut dziennie",
+      "item": "https://fitpo50.pl/siedzenie-po-50.html"
+    }
+  ]
 }
 </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+      gtag("config", "AW-18108612630");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
+</script>
+<script>
+  (function () {
+    try {
+      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var h = new Date().getHours();
+      var isNight = (h >= 19 || h < 7);
+      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+    } catch (_) {}
+  })();
+</script>
+<title>Mniej siedzenia po 50: jak zmienia zdrowie | FitPo50</title>
+<meta name="description" content="Siedzący tryb życia to „nowe palenie”. Dowiedz się, jak długotrwałe siedzenie niszczy zdrowie po 50-tce i poznaj proste sposoby na wplecenie ruchu w Twój dzień.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="FitPo50">
+<meta property="og:title" content="Pół godziny mniej siedzenia dziennie: co się zmienia w rok?">
+<meta property="og:description" content="Siedzący tryb życia to „nowe palenie”. Dowiedz się, jak długotrwałe siedzenie niszczy zdrowie po 50-tce i poznaj proste sposoby na wplecenie ruchu w Twój dzień.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fitpo50.pl/siedzenie-po-50.html">
+<meta property="og:image" content="https://fitpo50.pl/assets/Siedzenie.webp">
+<meta property="og:locale" content="pl_PL">
+<meta property="article:published_time" content="2026-03-28T19:30:00+01:00">
+<meta property="article:modified_time" content="2026-04-18T09:30:00+02:00">
+<meta property="article:author" content="FitPo50">
+<meta property="article:section" content="Zdrowie">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pół godziny mniej siedzenia dziennie: co się zmienia w rok?">
+<meta name="twitter:description" content="Siedzący tryb życia to „nowe palenie”. Dowiedz się, jak długotrwałe siedzenie niszczy zdrowie po 50-tce i poznaj proste sposoby na wplecenie ruchu w Twój dzień.">
+<meta name="twitter:image" content="https://fitpo50.pl/assets/Siedzenie.webp">
+<link rel="canonical" href="https://fitpo50.pl/siedzenie-po-50.html">
+
+
+
+
 
 <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -321,7 +307,7 @@
           <span class="pdf-hero-download__eyebrow">Wyślij przyjacielowi albo opublikuj u siebie</span>
           <span class="pdf-hero-download__title">Udostępnij artykuł</span>
           <span class="pdf-hero-download__meta">Facebook, LinkedIn, WhatsApp, mail lub kopiowanie linku</span>
-          <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">UDOSTĘPNIJ</span>
+          <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">SHARE</span>
         </button>
       </div>
 
@@ -330,8 +316,14 @@
         Wiem, wiem. Słyszysz: wstań od komputera, przejdź się, nie siedź tak długo — i myślisz: to chyba nie może być aż tak ważne. Masz <a href="jak-zaczac-na-silowni-po-50.html">siłownię</a>, chodzisz na treningi, ruszasz się. Co tam 30 minut mniej siedzenia? Otóż mogą to być najważniejsze 30 minut Twojego dnia. I nie mówię tego z przekory — mówi to nauka.
       </p>
 
+      <section class="quick-answer reveal" id="quick-answer" aria-label="Szybka odpowiedź">
+        <h2>Szybka odpowiedź</h2>
+        <p>Jest takie zjawisko, które badacze nazywają „Active Couch Potato” . Po polsku: aktywny kanapowiec. To jest osoba, która ćwiczy regularnie — 3 razy w tygodniu, może 4 — ale poza tymi godzinami treningu siedzi praktycznie bez przerwy. I ta osoba może mieć wyższe ryzyko chorób metabolicznych niż ktoś, kto podobny czas siedzenia regularnie przerywa wstawaniem i ruchem.</p>
+      </section>
+
       <section class="key-takeaways reveal" data-ai-summary="auto" aria-label="Kluczowe wnioski">
         <h2>Kluczowe wnioski</h2>
+      <p>Kluczowe wnioski po 50-tce warto rozłożyć na praktyczne kroki i odnieść do codziennych decyzji. Takie podejście pomaga bezpiecznie działać, lepiej rozumieć sygnały z organizmu oraz wdrażać nawyki, które realnie poprawiają zdrowie i sprawność.</p>
         <ul>
           <li>Najważniejsze: Wiem, wiem.</li>
           <li>W artykule znajdziesz konkrety o: Problem, którego nie ma na plakacie w gabinecie lekarskim.</li>
@@ -342,15 +334,17 @@
 
       <section>
         <h2>Problem, którego nie ma na plakacie w gabinecie lekarskim</h2>
-        <p>
-          Jest takie zjawisko, które badacze nazywają <strong>„Active Couch Potato”</strong>. Po polsku: aktywny kanapowiec. To jest osoba, która ćwiczy regularnie — 3 razy w tygodniu, może 4 — ale poza tymi godzinami treningu siedzi praktycznie bez przerwy. I ta osoba może mieć wyższe ryzyko chorób metabolicznych niż ktoś, kto podobny czas siedzenia regularnie przerywa wstawaniem i ruchem.
-        </p>
+      <p>Jest takie zjawisko, które badacze nazywają „Active Couch Potato” . Po polsku: aktywny kanapowiec. To jest osoba, która ćwiczy regularnie — 3 razy w tygodniu, może 4 — ale poza tymi godzinami treningu siedzi praktycznie bez przerwy. I ta osoba może mieć wyższe ryzyko chorób metabolicznych niż ktoś, kto podobny czas siedzenia regularnie przerywa wstawaniem i ruchem.</p>
 
         <div class="article-image reveal">
           <picture>
             <source srcset="./assets/siedzenie_couch_potato.avif" type="image/avif">
             <source srcset="./assets/siedzenie_couch_potato.webp" type="image/webp">
-            <img src="./assets/siedzenie_couch_potato.webp" alt="Aktywny kanapowiec - sprzęt sportowy obok miejsca siedzącego" loading="lazy" width="1024" height="1024">
+            <picture>
+          <source srcset="./assets/siedzenie_couch_potato.avif" type="image/avif">
+          <source srcset="./assets/siedzenie_couch_potato.webp" type="image/webp">
+          <img src="./assets/siedzenie_couch_potato.avif" alt="Aktywny kanapowiec - sprzęt sportowy obok miejsca siedzącego" loading="lazy" width="1024" height="1024">
+        </picture>
           </picture>
         </div>
 
@@ -361,10 +355,13 @@
 
         <div class="info-box">
           <span class="info-box__title">Ciekawostka</span>
-          <p>
-            Przeciętny dorosły po 50-tce siedzi około 9–11 godzin dziennie. To jest więcej niż śpi. I więcej niż jakikolwiek poprzedni wiek ludzki w historii — bo praca fizyczna zanikła. W ciągu ostatnich 50 lat liczba zawodów wymagających umiarkowanego wysiłku fizycznego spadła o 58%.
-          </p>
-        </div>
+          <p>Przeciętny dorosły po 50-tce siedzi około 9–11 godzin dziennie. To jest więcej niż śpi. I więcej niż jakikolwiek poprzedni wiek ludzki w historii — bo praca fizyczna zanikła. W ciągu ostatnich 50 lat liczba zawodów wymagających umiarkowanego wysiłku fizycznego spadła o 58%.</p>
+        
+
+      <p>Warto przeczytać też: <a href="trening-silowy-eliksir-mlodosci-po-50.html">trening siłowy</a>, <a href="dieta-po-50.html">dieta po 50-tce</a>, <a href="sen-po-50.html">sen i regeneracja</a>.</p>
+    </article>
+
+      <p>Powiązane tematy: <a href="trening-silowy-eliksir-mlodosci-po-50.html">trening siłowy</a>, <a href="dieta-po-50.html">dieta po 50-tce</a>, <a href="sen-po-50.html">sen i regeneracja</a>.</p>
       </section>
 
       <section>
@@ -411,7 +408,7 @@
         <div class="article-quote">
           Badanie na 50–71-letnich Amerykanach pokazało: osoby, które zwiększyły oglądanie telewizji z poniżej 3 godzin do ponad 5 godzin dziennie — miały o 45% wyższe ryzyko śmierci ze wszystkich przyczyn.
           <span class="article-quote__source"><a href="#zrodla">Źródło:</a> Keadle SK et al. w: PMC5511092 — Targeted Reductions in Sitting Time.</span>
-        </div>
+        </article>
       </section>
 
       <section>
@@ -432,7 +429,7 @@
 
         <div class="highlight-box">
           <p>Dodatkowe 5 minut umiarkowanej aktywności dziennie obniża liczbę zgonów o 6% w najmniej aktywnej grupie populacji. Z 100 000 osób umierających rocznie — 6000 mogłoby przeżyć. Z powodu pięciu minut dziennie.</p>
-        </div>
+        </article>
       </section>
 
       <section>
@@ -536,7 +533,7 @@
         <div class="article-quote">
           W analizach populacyjnych nawet kilka dodatkowych minut ruchu dziennie było powiązanych z wyraźnie niższym ryzykiem zgonu. To nie brzmi spektakularnie, ale na poziomie całej populacji robi dużą różnicę.
           <span class="article-quote__source"><a href="#zrodla">Źródło:</a> Edouard U. et al. (2026). The Lancet — cytowane w Medical News Today.</span>
-        </div>
+        </article>
       </section>
 
       <section>
@@ -556,7 +553,7 @@
           <p>
             Nie musisz chodzić. Wystarczy wstać i stać przez 2 minuty. Badania pokazują, że nawet samo stanie — bez chodzenia — aktywuje mięśnie nóg i poprawia przepływ krwi. Wstanie to już jest ruch.
           </p>
-        </div>
+        </article>
       </section>
 
       <section>
@@ -588,7 +585,7 @@
               </tr>
             </tbody>
           </table>
-        </div>
+        </article>
       </section>
 
       <section>
@@ -609,7 +606,7 @@
 
         <div class="article-quote">
           Ruch nie zaczyna się na siłowni. Zaczyna się w chwili, kiedy wstajesz od biurka.
-        </div>
+        </article>
       </section>
 
       <section>
@@ -645,19 +642,24 @@
       <section id="faq" class="faq-section reveal" aria-labelledby="faq-title">
         <h2 id="faq-title">FAQ</h2>
         <div class="faq-list">
-          <div class="faq-item">
+          <article class="faq-item">
             <h3>Czy 30 minut mniej siedzenia dziennie naprawdę coś zmienia po 50?</h3>
             <p>Tak, regularne ograniczanie czasu siedzenia i częstsze przerwy poprawiają parametry metaboliczne i sercowo-naczyniowe. Największy efekt daje codzienna powtarzalność, nie jednorazowy wysiłek.</p>
-          </div>
-          <div class="faq-item">
+          </article>
+          <article class="faq-item">
             <h3>Co jest lepsze dla zdrowia: trening 3 razy w tygodniu czy przerwy od siedzenia codziennie?</h3>
             <p>Najlepiej działają oba elementy razem. Sam trening nie neutralizuje całkowicie wielogodzinnego siedzenia, dlatego warto dodać krótkie przerwy w ciągu dnia.</p>
-          </div>
-          <div class="faq-item">
+          </article>
+          <article class="faq-item">
             <h3>Jak często robić przerwy od siedzenia przy pracy biurowej?</h3>
             <p>Praktycznie sprawdza się wstawanie co 30-60 minut na 2-5 minut ruchu. To może być krótki spacer, kilka przysiadów albo wejście po schodach.</p>
-          </div>
-        </div>
+          </article>
+        </article>
+      
+          <article class="faq-item">
+            <h3>Jak wdrożyć to po 50-tce krok po kroku?</h3>
+            <p>Zacznij spokojnie: wybierz jeden mały krok na ten tydzień, obserwuj reakcję organizmu i dopiero potem dokładaj kolejne elementy. Najlepsze efekty daje regularność, a nie tempo. Jeśli masz choroby przewlekłe lub dolegliwości bólowe, skonsultuj plan ze specjalistą.</p>
+          </article>
       </section>
     </article>
   </div>
@@ -724,7 +726,7 @@
           <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
         </div>
       </a>
-  </div>
+  </article>
 </section>
 </div>
 
@@ -755,8 +757,8 @@
         <div>
           <h2 class="site-footer-bento__title">FitPo50.pl</h2>
           <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej ściemy.</p>
-        </div>
-      </div>
+        </article>
+      </article>
     </section>
 
     <section class="site-footer-bento__card" aria-label="Linki serwisu">
