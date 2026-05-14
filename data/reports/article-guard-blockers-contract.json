@@ -1,0 +1,60 @@
+[
+  {
+    "type": "Brak sekcji quick-answer.",
+    "occurrences": 48,
+    "files": 48,
+    "samples": [
+      "Brak sekcji quick-answer."
+    ]
+  },
+  {
+    "type": "Niespójny opis: meta description != og:description.",
+    "occurrences": 40,
+    "files": 40,
+    "samples": [
+      "Niespójny opis: meta description != og:description."
+    ]
+  },
+  {
+    "type": "Niespójny opis: meta description != twitter:description.",
+    "occurrences": 38,
+    "files": 38,
+    "samples": [
+      "Niespójny opis: meta description != twitter:description."
+    ]
+  },
+  {
+    "type": "FAQ: za mało pytań (jest N, min N).",
+    "occurrences": 37,
+    "files": 37,
+    "samples": [
+      "FAQ: za mało pytań (jest 0, min 4)."
+    ]
+  },
+  {
+    "type": "Niespójny opis: meta description != BlogPosting.description.",
+    "occurrences": 32,
+    "files": 32,
+    "samples": [
+      "Niespójny opis: meta description != BlogPosting.description."
+    ]
+  },
+  {
+    "type": "meta description poza zakresem N-N znaków (jest N).",
+    "occurrences": 24,
+    "files": 24,
+    "samples": [
+      "meta description poza zakresem 145-160 znaków (jest 134).",
+      "meta description poza zakresem 145-160 znaków (jest 126).",
+      "meta description poza zakresem 145-160 znaków (jest 120)."
+    ]
+  },
+  {
+    "type": "meta description wygląda na urwany: powinien kończyć się \"<tekst>\", \"<tekst>\" lub \"<tekst>\".",
+    "occurrences": 5,
+    "files": 5,
+    "samples": [
+      "meta description wygląda na urwany: powinien kończyć się \".\", \"!\" lub \"?\"."
+    ]
+  }
+]
