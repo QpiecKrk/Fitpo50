@@ -44,7 +44,6 @@ _site/sukcesy/*.html
 # Local-only files (do not commit)
 node_modules/
 _site/node_modules/
-package-lock.json
 _site/package-lock.json
 admin/database.sqlite
 _site/admin/database.sqlite
