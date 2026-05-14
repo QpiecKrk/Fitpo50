@@ -43,8 +43,11 @@ Zasady:
 - sygnalizuj ryzyka, zalozenia i wplyw zmian na reszte systemu,
 - nie wykonuj `git commit` ani `git push` bez mojej wyraznej komendy,
 - nie uzywaj polecen destrukcyjnych bez mojej wyraznej zgody.
-- Gdy wydaje komenda `git push`, najpierw uruchamiasz gate i raport:
+- Gdy wydaje komenda `git push`, traktuj to jako komendę złożoną i uruchamiasz pełny pipeline push:
+  - `./scripts/export_site.sh`
+  - `npm run assets:mirror:sync`
   - `npm run predeploy:check`
+  - raport wynikow (PASS/FAIL + kluczowe bledy),
   - jesli PASS: wykonaj `git add -A` -> `git commit` (automatyczny komunikat) -> `git push`,
   - po udanym push ZAWSZE podaj krok serwerowy (Hostinger), aby uniknac "dirty repo":
     - `cd <repo-na-serwerze>`

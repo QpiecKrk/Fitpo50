@@ -12,7 +12,15 @@ $status_filter = $_GET['status'] ?? 'all';
 $where = $status_filter !== 'all' ? "WHERE status = ?" : '';
 $params = $status_filter !== 'all' ? [$status_filter] : [];
 
-$stmt = $db->prepare("SELECT * FROM entries $where ORDER BY entry_date DESC, created_at DESC");
+$stmt = $db->prepare("SELECT * FROM entries $where ORDER BY
+    CASE
+      WHEN status = 'draft' THEN 0
+      WHEN status = 'hidden' THEN 1
+      ELSE 2
+    END,
+    entry_date DESC,
+    updated_at DESC,
+    created_at DESC");
 $stmt->execute($params);
 $entries = $stmt->fetchAll();
 

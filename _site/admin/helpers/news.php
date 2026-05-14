@@ -670,8 +670,25 @@ function sortNewsItems(array $items): array {
         $aNorm = normalizeNewsItem($a);
         $bNorm = normalizeNewsItem($b);
 
-        if ($aNorm['sort_order'] === $bNorm['sort_order']) {
+        // W panelu redakcyjnym robocze mają być zawsze na górze listy.
+        if ($aNorm['status'] !== $bNorm['status']) {
+            if ($aNorm['status'] === 'draft') {
+                return -1;
+            }
+            if ($bNorm['status'] === 'draft') {
+                return 1;
+            }
+        }
+
+        // Wewnatrz draftow: najnowszy zapis ma byc zawsze na gorze.
+        if ($aNorm['status'] === 'draft' && $bNorm['status'] === 'draft') {
             return strcmp($bNorm['updated_at'], $aNorm['updated_at']);
+        }
+
+        if ($aNorm['sort_order'] === $bNorm['sort_order']) {
+            $aDate = $aNorm['published_at'] ?: $aNorm['updated_at'];
+            $bDate = $bNorm['published_at'] ?: $bNorm['updated_at'];
+            return strcmp($bDate, $aDate);
         }
 
         return $aNorm['sort_order'] <=> $bNorm['sort_order'];

@@ -2,6 +2,8 @@
 set -euo pipefail
 
 ./scripts/export_site.sh
+npm run assets:mirror:sync
+npm run predeploy:check
 
 # Dodaj tylko zmiany w już śledzonych plikach
 git add -u

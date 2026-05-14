@@ -94,7 +94,12 @@ rsync -a \
   --exclude=".cursorrules" \
   --exclude=".windsurfrules" \
   --exclude=".DS_Store" \
+  --exclude=".editorconfig" \
   --exclude="AGENT.md" \
+  --exclude="AGENTS.md" \
+  --exclude="README.md" \
+  --exclude="ARTICLE_STANDARD.md" \
+  --exclude="ARTICLE_TEMPLATE_GUIDE.md" \
   --exclude="CLAUDE.md" \
   --exclude="DEPLOY.md" \
   --exclude="PROJECT_MEMORY.md" \
@@ -102,12 +107,21 @@ rsync -a \
   --exclude="MEMORY_MOJE_SUKCESY.md" \
   --exclude="MEMORY_NEWSY.md" \
   --exclude="SESSION_START_MAX.md" \
+  --exclude="SEO_AIO_PLAYBOOK.md" \
   --exclude="audit_*.md" \
   --exclude="test-tts.mp3" \
   --exclude="package.json" \
+  --exclude="package-lock.json" \
   --exclude="tsconfig.json" \
   --exclude="src/" \
   --exclude="scripts/" \
+  --exclude="/templates/" \
+  --exclude="assets/trash/" \
+  --exclude="data/cache/" \
+  --exclude="data/gsc/" \
+  --exclude="data/reports/" \
+  --exclude="data/*.fitpo50.json" \
+  --exclude="data/internal-link-map.json" \
   --exclude="_site/" \
   "$ROOT_DIR/" "$OUTPUT_DIR/"
 

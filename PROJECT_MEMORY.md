@@ -333,7 +333,10 @@
   - `git push` nie oznacza automatycznego wdrozenia na Hostinger; po pushu trzeba potwierdzic stan live na `https://fitpo50.pl`.
   - fallback 3 kafelkow na `index.html` (`renderReadingFallback`) nie moze miec na stale zaszytych "historycznych" wpisow; po imporcie ma odzwierciedlac 3 najnowsze artykuly (nowy + poprzedni latest + kolejny aktualny).
   - Automatyczny workflow przy komendzie usera `git push`:
-    - najpierw `npm run predeploy:check`,
+    - traktuj `git push` jako skrot do pelnego pipeline push,
+    - najpierw `./scripts/export_site.sh`,
+    - potem `npm run assets:mirror:sync`,
+    - potem `npm run predeploy:check`,
     - raport wynikow (PASS/FAIL + kluczowe bledy),
     - przy PASS: `git add -A` -> `git commit` (automatyczny komunikat) -> `git push`,
     - przy FAIL (hook/gate): STOP tylko na czas naprawy; naprawic wszystkie blokery push, ponowic gate i dopiero po PASS wykonac push zgodnie z komenda usera,
@@ -961,7 +964,10 @@ Jesli artykul ma obrazy:
   - `npm run predeploy:check`
 
 - Komendy repo (przed push):
-  - `npm run prepush:local`
+  - `./scripts/export_site.sh`
+  - `npm run assets:mirror:sync`
+  - `npm run predeploy:check`
+  - alternatywnie: `npm run prepush:local`, jesli obejmuje ten sam zakres walidacji
   - dopiero potem `git push`.
 
 ## Ustalenia operacyjne 2026-05-10 (AEO/GEO/E-E-A-T + IndexNow)
