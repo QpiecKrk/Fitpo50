@@ -267,4 +267,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Kreatyna po 50-tce: kompletny przewodnik – praktyczny przewodnik | FitPo50"
   section: "Zdrowie"
   summary: "Kreatyna po 50-tce: jak dziala na miesnie, kosci i mozg? Dawkowanie, bezpieczenstwo i najnowsze badania naukowe w jednym przewodniku. Konkretne wskazówki, co"
+- url: https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html
+  title: "Kreatyna i białko po 50-tce: jak łączyć dla efektów? – praktyczny | FitPo50"
+  section: "Jedzenie"
+  summary: "Kreatyna i białko po 50-tce: ile brać, kiedy i jak je łączyć? Najnowsze badania 2024–2025, obalone mity i konkretny protokół dla aktywnych po pięćdziesiątce."
 

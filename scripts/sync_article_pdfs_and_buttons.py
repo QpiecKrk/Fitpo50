@@ -162,19 +162,43 @@ def upsert_button(html_path: Path, slug: str, size_kb: int) -> bool:
     html = html_path.read_text(encoding="utf-8")
     block = build_button_block(slug=slug, size_kb=size_kb)
 
-    # Always keep a single marker block and place it directly above article content.
+    # Always keep a single marker block inside the shared hero-actions wrapper.
     marker_pattern = re.compile(
         r"[ \t]*<!-- PDF_DOWNLOAD_BUTTON_START -->.*?<!-- PDF_DOWNLOAD_BUTTON_END -->\n?",
         flags=re.DOTALL,
     )
     html_without_marker = marker_pattern.sub("", html)
 
-    article_match = re.search(r"^[ \t]*<article class=\"article-content\">", html_without_marker, flags=re.MULTILINE)
-    if not article_match:
-        raise RuntimeError(f"Nie znaleziono <article class=\"article-content\"> w: {html_path.name}")
+    wrapper_pattern = re.compile(
+        r"(?P<indent>^[ \t]*)<div class=\"article-primary-actions\"[^>]*>\n(?P<body>[\s\S]*?)(?P=indent)</div>",
+        flags=re.MULTILINE,
+    )
+    wrapper_match = wrapper_pattern.search(html_without_marker)
+    if not wrapper_match:
+        raise RuntimeError(f"Nie znaleziono wrappera .article-primary-actions w: {html_path.name}")
 
-    insert_at = article_match.start()
-    updated = html_without_marker[:insert_at] + block + "\n" + html_without_marker[insert_at:]
+    wrapper_indent = wrapper_match.group("indent")
+    wrapper_body = wrapper_match.group("body")
+    share_match = re.search(
+        r"[ \t]*<button class=\"pdf-hero-download pdf-hero-download--share\"[\s\S]*?</button>\n?",
+        wrapper_body,
+        flags=re.DOTALL,
+    )
+    if not share_match:
+        raise RuntimeError(f"Nie znaleziono przycisku share w wrapperze akcji: {html_path.name}")
+
+    share_block = share_match.group(0).rstrip()
+    rebuilt_wrapper = (
+        f'{wrapper_indent}<div class="article-primary-actions" aria-label="Akcje artykułu">\n'
+        f'{block}'
+        f'\n{share_block}\n'
+        f'{wrapper_indent}</div>'
+    )
+    updated = (
+        html_without_marker[:wrapper_match.start()]
+        + rebuilt_wrapper
+        + html_without_marker[wrapper_match.end():]
+    )
 
     if updated != html:
         html_path.write_text(updated, encoding="utf-8")

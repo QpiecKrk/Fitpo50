@@ -1444,14 +1444,14 @@
         <picture aria-hidden="true">
           <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
           <source srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/kreatyna-po-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/kreatyna-bialko-po-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Kreatyna po 50-tce: kompletny przewodnik – praktyczny przewodnik</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Kreatyna po 50-tce: dawkowanie 3-5 g, bezpieczeństwo nerek i realne efekty dla mięśni, kości oraz mózgu. Praktyczny przewodnik oparty na badaniach.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="kreatyna-po-50-tce-kompletny-przewodnik.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Kreatyna i białko po 50-tce: jak łączyć dla efektów? – praktyczny</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Kreatyna i białko po 50-tce: ile brać, kiedy i jak je łączyć? Najnowsze badania 2024–2025, obalone mity i konkretny protokół dla aktywnych po pięćdziesiątce.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="kreatyna-i-bialko-po-50-tce-jak-laczyc.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Kreatyna po 50-tce: kompletny przewodnik – praktyczny przewodnik',
-        excerpt: 'Kreatyna po 50-tce: dawkowanie 3-5 g, bezpieczeństwo nerek i realne efekty dla mięśni, kości oraz mózgu. Praktyczny przewodnik oparty na badaniach.',
-        image: './assets/kreatyna-po-50-hero.webp',
-        url: 'kreatyna-po-50-tce-kompletny-przewodnik.html'
+        title: 'Kreatyna i białko po 50-tce: jak łączyć dla efektów? – praktyczny',
+        excerpt: 'Kreatyna i białko po 50-tce: ile brać, kiedy i jak je łączyć? Najnowsze badania 2024–2025, obalone mity i konkretny protokół dla aktywnych po pięćdziesiątce.',
+        image: './assets/kreatyna-bialko-po-50-hero.webp',
+        url: 'kreatyna-i-bialko-po-50-tce-jak-laczyc.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,7 +2236,14 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Zdrowie',
+          category: 'Jedzenie',
+          title: 'Kreatyna i białko po 50-tce: jak łączyć dla efektów? – praktyczny',
+          excerpt: 'Kreatyna i białko po 50-tce: ile brać, kiedy i jak je łączyć? Najnowsze badania 2024–2025, obalone mity i konkretny protokół dla aktywnych po pięćdziesiątce.',
+          image: './assets/kreatyna-bialko-po-50-hero.webp',
+          url: 'kreatyna-i-bialko-po-50-tce-jak-laczyc.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Kreatyna po 50-tce: kompletny przewodnik – praktyczny przewodnik',
           excerpt: 'Kreatyna po 50-tce: dawkowanie 3-5 g, bezpieczeństwo nerek i realne efekty dla mięśni, kości oraz mózgu. Praktyczny przewodnik oparty na badaniach.',
           image: './assets/kreatyna-po-50-hero.webp',
@@ -2248,13 +2255,6 @@
           excerpt: 'HFpEF to niewydolność serca, gdy echo wygląda dobrze. Dowiedz się, jak ją rozpoznać po 50. roku życia i co zrobić, zanim pojawią się poważne objawy.',
           image: './assets/hfpef-cicha-epidemia-hero.webp',
           url: 'hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Terapia swiatlem czerwonym: gadget czy nauka? – praktyczny',
-          excerpt: 'Terapia swiatlem czerwonym (RLT) to nie tylko modny trend - sprawdzamy, co mowi nauka o jej wplywie na mitochondria, skore i regeneracje po 50-tce.',
-          image: './assets/rlt-hero-swiatlo-czerwone-kobieta.webp',
-          url: 'terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

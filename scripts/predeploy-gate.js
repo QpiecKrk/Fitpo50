@@ -108,6 +108,46 @@ function assertFileMirror(relPath, errors) {
   }
 }
 
+function validateReadingTimeLabels(errors) {
+  const targets = [];
+  for (const dir of ['.', '_site']) {
+    const absDir = path.join(ROOT, dir);
+    if (!fs.existsSync(absDir)) continue;
+    for (const file of fs.readdirSync(absDir)) {
+      if (!file.endsWith('.html')) continue;
+      targets.push(path.join(absDir, file));
+    }
+  }
+
+  const validLabel = /^\d+\s+min\s+czytania$/i;
+  for (const filePath of targets) {
+    const rel = path.relative(ROOT, filePath);
+    if (path.basename(rel) === 'article-template-bento.html') continue;
+    const raw = fs.readFileSync(filePath, 'utf8');
+
+    for (const match of raw.matchAll(/<span class="article-index-card__meta">([^<]+)<\/span>/g)) {
+      const label = String(match[1] || '').replace(/\s+/g, ' ').trim();
+      if (!validLabel.test(label)) {
+        errors.push(`${rel}: niepoprawny label czasu na karcie listingu: "${label}" (oczekiwane: "X min czytania").`);
+      }
+    }
+
+    for (const match of raw.matchAll(/data-read-time="([^"]+)"/g)) {
+      const label = String(match[1] || '').replace(/\s+/g, ' ').trim();
+      if (!validLabel.test(label)) {
+        errors.push(`${rel}: niepoprawny data-read-time="${label}" (oczekiwane: "X min czytania").`);
+      }
+    }
+
+    for (const match of raw.matchAll(/<p class="article-kicker-card__meta">[\s\S]*?<span class="article-kicker-card__category-pill">[\s\S]*?<\/span><span>([^<]+)<\/span><\/p>/g)) {
+      const label = String(match[1] || '').replace(/\s+/g, ' ').trim();
+      if (!validLabel.test(label)) {
+        errors.push(`${rel}: niepoprawny czas czytania w hero meta: "${label}" (oczekiwane: "X min czytania").`);
+      }
+    }
+  }
+}
+
 function validatePublishedNewsImages(errors, warnings) {
   const candidates = ['data/news-live.json', '_site/data/news-live.json'];
   for (const rel of candidates) {
@@ -261,6 +301,7 @@ function main() {
   }
 
   validatePublishedNewsImages(errors, warnings);
+  validateReadingTimeLabels(errors);
   printAndExit(errors, warnings);
 }
 

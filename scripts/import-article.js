@@ -1475,7 +1475,7 @@ function renderSourcesList(sources) {
 }
 
 function upsertContentBlock(html, renderedMain) {
-  const rx = /(<p class="drop-cap">[\s\S]*?<\/p>)([\s\S]*?)(\s*<h2 id="zrodla">Źródła<\/h2>)/i;
+  const rx = /(<p class="drop-cap">[\s\S]*?<\/p>)([\s\S]*?)(\s*(?:<section[^>]*class="[^"]*\bshare-article-section\b[^"]*"[\s\S]*?<\/section>\s*)?<h2 id="zrodla">Źródła<\/h2>)/i;
   if (!rx.test(html)) {
     throw new Error('Nie znaleziono bloku treści pomiędzy leadem i sekcją Źródła w szablonie.');
   }
@@ -1681,8 +1681,12 @@ function shortText(value, max = 170) {
 function normalizeReadingTimeLabel(value, fallback = '11 min czytania') {
   const raw = String(value || '').trim();
   if (!raw) return fallback;
-  if (/^\d+$/.test(raw)) return `${raw} min`;
-  return raw;
+  const compact = raw.replace(/\s+/g, ' ').trim();
+  const digitsOnly = compact.match(/^(\d+)$/);
+  if (digitsOnly) return `${digitsOnly[1]} min czytania`;
+  const shortLabel = compact.match(/^(\d+)\s*min$/i);
+  if (shortLabel) return `${shortLabel[1]} min czytania`;
+  return compact;
 }
 
 function searchTextFromPayload(payload) {
@@ -2519,12 +2523,13 @@ async function main() {
 
   ensureMinimumInternalLinks(payload.slug, dryRun, syncSite, 4);
 
+  runPdfSync(payload.slug, dryRun);
+  updatedFiles.push('assets/pdf/<slug>.pdf + przycisk PDF + schema encoding');
+
   if (runValidate) {
     runValidator(payload.slug, dryRun);
   }
 
-  runPdfSync(payload.slug, dryRun);
-  updatedFiles.push('assets/pdf/<slug>.pdf + przycisk PDF + schema encoding');
   const crosslinkSuggestionsPath = writeCrosslinkSuggestions(payload, dryRun);
   if (crosslinkSuggestionsPath) {
     updatedFiles.push(`data/crosslink-suggestions/${payload.slug}.json`);

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-13T06:00:48.642Z",
+  "updated_at": "2026-05-14T19:42:18.193Z",
   "records": [
     {
       "scope": "prepush-local",
@@ -1049,6 +1049,218 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 127
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline-fail",
+      "at": "2026-05-14T19:33:10.253Z",
+      "total_ms": 3634,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 52
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 58
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 60
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 47
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 49
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 3125
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 92
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 151
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline-fail",
+      "at": "2026-05-14T19:34:43.282Z",
+      "total_ms": 2929,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 42
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 43
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 45
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 45
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 2462
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 86
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 162
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline",
+      "at": "2026-05-14T19:36:10.781Z",
+      "total_ms": 4491,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 43
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 43
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 45
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 49
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 2530
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 89
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 1314
+        },
+        {
+          "tag": "Sync meta description across head/schema",
+          "durationMs": 43
+        },
+        {
+          "tag": "Article contract check (source/_site)",
+          "durationMs": 40
+        },
+        {
+          "tag": "Sync assets mirror (_site)",
+          "durationMs": 76
+        },
+        {
+          "tag": "Lint editorial placeholders (source HTML)",
+          "durationMs": 43
+        },
+        {
+          "tag": "Lint editorial placeholders (_site HTML)",
+          "durationMs": 43
+        },
+        {
+          "tag": "NEWS integrity",
+          "durationMs": 45
+        },
+        {
+          "tag": "Predeploy gate (slug)",
+          "durationMs": 44
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline",
+      "at": "2026-05-14T19:42:18.193Z",
+      "total_ms": 4598,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 50
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 41
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 44
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 47
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 2768
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 87
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 830
+        },
+        {
+          "tag": "Sync meta description across head/schema",
+          "durationMs": 107
+        },
+        {
+          "tag": "Article contract check (source/_site)",
+          "durationMs": 51
+        },
+        {
+          "tag": "Sync assets mirror (_site)",
+          "durationMs": 178
+        },
+        {
+          "tag": "Lint editorial placeholders (_site HTML)",
+          "durationMs": 88
+        },
+        {
+          "tag": "Lint editorial placeholders (source HTML)",
+          "durationMs": 92
+        },
+        {
+          "tag": "NEWS integrity",
+          "durationMs": 91
+        },
+        {
+          "tag": "Predeploy gate (slug)",
+          "durationMs": 80
         }
       ]
     }

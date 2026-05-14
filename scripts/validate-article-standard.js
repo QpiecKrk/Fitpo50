@@ -143,9 +143,22 @@ function validateHeroShareContract(raw, errors) {
     errors.push('Brak .hero-motto pod hero.');
   }
 
-  const hasActionsWrap = /class="[^"]*\barticle-primary-actions\b[^"]*"/i.test(raw);
-  if (!hasActionsWrap) {
+  const actionsWrapMatch = raw.match(/<div[^>]*class="[^"]*\barticle-primary-actions\b[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+  if (!actionsWrapMatch) {
     errors.push('Brak wrappera .article-primary-actions pod hero.');
+  } else {
+    const actionsHtml = actionsWrapMatch[1];
+    const hasPdfInsideActions = /<a[^>]*class="[^"]*\bpdf-hero-download\b[^"]*"[^>]*href="\.\/assets\/pdf\/[^"]+\.pdf"[^>]*>/i.test(actionsHtml)
+      || /<a[^>]*href="\.\/assets\/pdf\/[^"]+\.pdf"[^>]*class="[^"]*\bpdf-hero-download\b[^"]*"[^>]*>/i.test(actionsHtml);
+    if (!hasPdfInsideActions) {
+      errors.push('Brak przycisku PDF wewnątrz .article-primary-actions.');
+    }
+
+    const hasShareInsideActions = /<button[^>]*id="share-article-top"[^>]*class="[^"]*\bpdf-hero-download--share\b[^"]*"[^>]*>/i.test(actionsHtml)
+      || /<button[^>]*class="[^"]*\bpdf-hero-download--share\b[^"]*"[^>]*id="share-article-top"[^>]*>/i.test(actionsHtml);
+    if (!hasShareInsideActions) {
+      errors.push('Brak przycisku share wewnątrz .article-primary-actions.');
+    }
   }
 
   const hasShareTopButton = /<button[^>]*id="share-article-top"[^>]*class="[^"]*\bpdf-hero-download--share\b[^"]*"[^>]*>/i.test(raw)
