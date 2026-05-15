@@ -129,24 +129,37 @@ jobs:
             const pages = Array.isArray(opportunities.page_opportunities) ? opportunities.page_opportunities : [];
 
             const tasks = [];
-            if (top3[0]?.query) {
-              tasks.push(`- [ ] Query \`${safe(top3[0].query)}\`: dopisz mocny Quick Answer + popraw title/meta.`);
-            }
-            if (ctr[0]?.query) {
-              tasks.push(`- [ ] Query \`${safe(ctr[0].query)}\`: popraw CTR (title, description, pierwsze 120 znaków intro).`);
-            }
-            if (cannibal[0]?.query) {
-              tasks.push(`- [ ] Kanibalizacja \`${safe(cannibal[0].query)}\`: wybierz 1 URL kanoniczny i wzmocnij linkowanie.`);
-            } else if (pages[0]?.page) {
-              tasks.push(`- [ ] Strona \`${safe(pages[0].page)}\`: dołóż 2-3 linki wewnętrzne z mocnych podstron.`);
-            }
-            while (tasks.length < 3) {
-              tasks.push('- [ ] Brak mocnych kandydatów: opublikuj 1 nowy artykuł Q&A pod niszowe zapytanie z GSC.');
+            const status = safe(report?.status) || 'unknown';
+            const missingConfig = Array.isArray(report?.missing_config) ? report.missing_config : [];
+
+            if (status !== 'ok') {
+              if (missingConfig.length) {
+                missingConfig.slice(0, 3).forEach((item) => {
+                  tasks.push(`- [ ] ${safe(item)}`);
+                });
+              }
+              while (tasks.length < 3) {
+                tasks.push('- [ ] Uruchom workflow GSC ponownie po uzupełnieniu konfiguracji.');
+              }
+            } else {
+              if (top3[0]?.query) {
+                tasks.push(`- [ ] Query \`${safe(top3[0].query)}\`: dopisz mocny Quick Answer + popraw title/meta.`);
+              }
+              if (ctr[0]?.query) {
+                tasks.push(`- [ ] Query \`${safe(ctr[0].query)}\`: popraw CTR (title, description, pierwsze 120 znaków intro).`);
+              }
+              if (cannibal[0]?.query) {
+                tasks.push(`- [ ] Kanibalizacja \`${safe(cannibal[0].query)}\`: wybierz 1 URL kanoniczny i wzmocnij linkowanie.`);
+              } else if (pages[0]?.page) {
+                tasks.push(`- [ ] Strona \`${safe(pages[0].page)}\`: dołóż 2-3 linki wewnętrzne z mocnych podstron.`);
+              }
+              while (tasks.length < 3) {
+                tasks.push('- [ ] Brak mocnych kandydatów: opublikuj 1 nowy artykuł Q&A pod niszowe zapytanie z GSC.');
+              }
             }
 
             const generated = safe(report?.generated_at) || new Date().toISOString();
             const property = safe(report?.property) || 'sc-domain:fitpo50.pl';
-            const status = safe(report?.status) || 'unknown';
 
             const body = [
               '# TODO tygodnia SEO/AEO (auto)',

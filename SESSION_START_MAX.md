@@ -115,6 +115,11 @@ Tryb pracy:
 - Twoja rola: reviewer i krytyk,
 - masz szukac bledow, konfliktow i brakow,
 - gdy wykryjesz konflikt z dokumentem albo ryzyko utraty danych: zatrzymaj sie, zadaj jedno krotkie pytanie i czekaj na decyzje.
+- skrot `GSC` w rozmowie oznacza domyslnie:
+  - sprawdz ostatni issue z raportem GSC na GitHub,
+  - przeczytaj issue `SEO/AEO: Poniedziałkowy raport GSC`,
+  - przeczytaj issue `SEO/AEO: TODO tygodnia (auto)` jesli istnieje,
+  - podaj po polsku krotki raport: co sie zmienilo, co wymaga poprawy, jakie ulepszenia wdrozyc.
 
 Raport koncowy po zadaniu:
 1. co zmieniono,

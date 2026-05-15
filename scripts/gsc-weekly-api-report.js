@@ -217,6 +217,13 @@ function writeReport(report, outputJson, outputMd) {
     lines.push('- Tryb 1 (service account): `GSC_SERVICE_ACCOUNT_JSON_B64`.');
     lines.push('- Tryb 2 (OAuth refresh token): `GSC_OAUTH_CLIENT_ID`, `GSC_OAUTH_CLIENT_SECRET`, `GSC_OAUTH_REFRESH_TOKEN`.');
     lines.push('- Wymagane uprawnienie w GSC: konto użyte do odczytu musi mieć minimum Read.');
+    if (Array.isArray(report.missing_config) && report.missing_config.length) {
+      lines.push('');
+      lines.push('### Brakujące elementy');
+      report.missing_config.forEach((item) => {
+        lines.push(`- ${item}`);
+      });
+    }
     if (report.error) {
       lines.push('');
       lines.push('### Debug');
@@ -271,11 +278,12 @@ function writeReport(report, outputJson, outputMd) {
   fs.writeFileSync(outputMd, `${lines.join('\n')}\n`, 'utf8');
 }
 
-function emptyReport(property) {
+function emptyReport(property, missingConfig = []) {
   return {
     generated_at: new Date().toISOString(),
     status: 'missing_api_config',
     property,
+    missing_config: missingConfig,
     ranges: {},
     summary: {
       current: { total_clicks: 0, total_impressions: 0, avg_ctr: 0, avg_position: 0 },
@@ -288,7 +296,7 @@ function emptyReport(property) {
       page_opportunities: [],
     },
     weekly_plan: [
-      'Skonfiguruj GSC API secrets (service account albo OAuth refresh token) i uruchom workflow ponownie.',
+      'Uzupełnij brakujące sekrety GSC i uruchom workflow ponownie.',
       'Po konfiguracji raport sam wygeneruje priorytety tygodnia.',
     ],
   };
@@ -316,9 +324,22 @@ function aggregateSummary(rows) {
   return { total_clicks: totalClicks, total_impressions: totalImpressions, avg_ctr: avgCtr, avg_position: avgPosition };
 }
 
+function collectMissingConfig(rawSiteUrl, hasServiceAccount, oauth) {
+  const missing = [];
+  if (!String(rawSiteUrl || '').trim()) {
+    missing.push('Brak `GSC_SITE_URL` w secrets/env.');
+  }
+  if (!hasServiceAccount && !oauth) {
+    missing.push('Brak pełnej konfiguracji service account: ustaw `GSC_SERVICE_ACCOUNT_JSON_B64` albo `GSC_SERVICE_ACCOUNT_JSON`.');
+    missing.push('Brak pełnej konfiguracji OAuth: ustaw komplet `GSC_OAUTH_CLIENT_ID`, `GSC_OAUTH_CLIENT_SECRET`, `GSC_OAUTH_REFRESH_TOKEN`.');
+  }
+  return missing;
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  const property = normalizeSiteUrl(process.env.GSC_SITE_URL || 'https://fitpo50.pl/');
+  const rawSiteUrl = String(process.env.GSC_SITE_URL || '').trim();
+  const property = normalizeSiteUrl(rawSiteUrl || 'https://fitpo50.pl/');
   let sa = null;
   const authErrors = [];
   try {
@@ -327,9 +348,10 @@ async function main() {
     authErrors.push(`service_account_parse: ${err.message || err}`);
   }
   const oauth = parseOauthRefreshFromEnv();
+  const missingConfig = collectMissingConfig(rawSiteUrl, Boolean(sa), oauth);
 
   if ((!sa && !oauth) || !property) {
-    const report = emptyReport(property);
+    const report = emptyReport(property, missingConfig);
     writeReport(report, args.outputJson, args.outputMd);
     console.log('[WARN] GSC API config missing. Generated reminder report.');
     console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);

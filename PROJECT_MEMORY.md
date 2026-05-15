@@ -31,6 +31,11 @@
 - Zmiany maja byc lokalne, minimalne i zgodne z istniejaca architektura.
 - Jesli zadanie koliduje z tym dokumentem, najpierw wskaz konflikt, a nie wprowadzaj zmian w ciemno.
 - Standard językowy: nagłówki techniczne są po angielsku, treść dokumentacji po polsku, a taski, review i rozmowy z agentami prowadzimy po polsku. Nazwy plików, ścieżek, komend, kluczy konfiguracyjnych i elementów technicznych zostają w oryginalnym brzmieniu.
+- Skrót `GSC` w poleceniach użytkownika oznacza domyślnie workflow analityczny:
+  - sprawdź najnowszy issue z raportem GSC na GitHub,
+  - przeczytaj issue `SEO/AEO: Poniedziałkowy raport GSC`,
+  - przeczytaj issue `SEO/AEO: TODO tygodnia (auto)` jeśli istnieje,
+  - przygotuj po polsku raport zmian, ryzyk, braków i proponowanych ulepszeń.
 
 ## Critical files / areas
 - `_site/` - publiczny output do deployu

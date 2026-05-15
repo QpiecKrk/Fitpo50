@@ -482,6 +482,118 @@ main .container {
   text-underline-offset: 2px;
 }
 
+.slim-bento-path {
+  margin: 0 0 16px;
+  width: 100%;
+  border: 1px solid rgba(63, 107, 150, 0.34);
+  border-radius: 20px;
+  background: linear-gradient(155deg, #d6e6f7 0%, #b7d1ee 100%);
+  box-shadow: 0 8px 24px rgba(31, 43, 69, 0.08);
+  padding: 14px;
+}
+
+.slim-bento-path__intro {
+  margin: 0 0 12px;
+  max-width: none;
+  color: #2c4867;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.slim-bento-path__intro .mix-word-wide {
+  color: #b22222;
+  font-size: 0.9em;
+  text-shadow: 0 1px 2px rgba(31, 43, 69, 0.18);
+}
+
+.slim-bento-path__intro .mix-word-pop {
+  color: #18314f;
+  text-decoration-color: rgba(24, 49, 79, 0.26);
+}
+
+.slim-bento-path__intro .mix-word-classic {
+  color: #96533c;
+}
+
+.slim-bento-path__intro .mix-accent-motion {
+  color: #2f6f99;
+  font-weight: 800;
+}
+
+.slim-bento-path__intro .mix-accent-energy {
+  color: #2f7a54;
+  font-weight: 800;
+}
+
+.slim-bento-path__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.slim-bento-path__step {
+  min-width: 0;
+  border: 1px solid rgba(31, 43, 69, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.76);
+  padding: 14px 14px 15px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.slim-bento-path__step:hover,
+.slim-bento-path__step:focus-within {
+  transform: translateY(-1px);
+  border-color: rgba(47, 111, 153, 0.36);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 18px rgba(31, 43, 69, 0.08);
+}
+
+.slim-bento-path__label {
+  display: inline-flex;
+  margin-bottom: 9px;
+  color: #4e6e93;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.slim-bento-path__title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.slim-bento-path__title a {
+  color: #1f2b45;
+  text-decoration: none;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.16em;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.slim-bento-path__title a:hover,
+.slim-bento-path__title a:focus-visible {
+  color: #2f6f99;
+  text-decoration: underline;
+  text-decoration-color: rgba(47, 111, 153, 0.42);
+  outline: none;
+}
+
+.slim-bento-path__desc {
+  margin: 0;
+  color: #495773;
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
 .carousel-bento {
   border: 1px solid rgba(63, 107, 150, 0.36);
   border-radius: var(--radius-lg);
@@ -662,7 +774,22 @@ main .container {
   .intro-row {
     grid-template-columns: 1fr;
   }
+  .slim-bento-path {
+    padding: 12px;
+  }
+  .slim-bento-path__intro {
+    white-space: normal;
+  }
+  .slim-bento-path__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .reading-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .slim-bento-path__grid {
     grid-template-columns: 1fr;
   }
 }
@@ -730,7 +857,32 @@ main .container {
           <p>Bez <span class="mix-word-pop">szaleńczych planów</span> i bez kultu bólu. Tylko <span class="mix-word-serif"><strong>praktyczne</strong></span> podejście, które da się utrzymać i które naprawdę działa po <span class="mix-word-classic"><strong>pięćdziesiątce</strong></span>.</p>
         </article>
       </div>
-      <p style="margin:0 0 14px;">Szybki start: jeśli wracasz po przerwie, zacznij od <a href="powrot-do-formy-po-50-kompletny-przewodnik.html">powrotu do formy po 50</a>, potem ułóż tydzień na bazie <a href="trening-3x30-dla-50-plus.html">planu 3×30</a>, dopracuj technikę w tekście <a href="jak-zaczac-na-silowni-po-50.html">jak zacząć na siłowni po 50</a> i zabezpiecz stawy przez <a href="mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html">program mobilności</a>.</p>
+      <section class="slim-bento-path" aria-labelledby="guided-reading-title">
+        <p id="guided-reading-title" class="slim-bento-path__intro"><span class="mix-word-wide">Metoda</span> <span class="mix-word-pop">4 kroków</span>, które <span class="mix-word-classic">realnie</span> wpłyną na Twoją <span class="mix-accent-motion">sprawność</span> i codzienną <span class="mix-accent-energy">energię</span>.</p>
+        <!-- TU AKTUALIZUJ LINKI ŚCIEŻKI CZYTANIA: href, tytuły i opisy czterech kroków -->
+        <div class="slim-bento-path__grid">
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 1</span>
+            <h2 class="slim-bento-path__title"><a href="powrot-do-formy-po-50-kompletny-przewodnik.html">Powrót do formy po 50</a></h2>
+            <p class="slim-bento-path__desc">Jeśli wracasz po przerwie, zacznij od spokojnego fundamentu, który odbudowuje pewność ruchu i regularność.</p>
+          </article>
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 2</span>
+            <h2 class="slim-bento-path__title"><a href="trening-3x30-dla-50-plus.html">Plan 3×30</a></h2>
+            <p class="slim-bento-path__desc">Ułóż tydzień na prostym planie, który da się realnie zrobić bez chaosu i bez poczucia ciągłego nadrabiania.</p>
+          </article>
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 3</span>
+            <h2 class="slim-bento-path__title"><a href="jak-zaczac-na-silowni-po-50.html">Jak zacząć na siłowni po 50</a></h2>
+            <p class="slim-bento-path__desc">Dopracuj technikę i pierwszy kontakt z siłownią tak, żeby budować siłę bez niepotrzebnego przeciążenia.</p>
+          </article>
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 4</span>
+            <h2 class="slim-bento-path__title"><a href="mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html">Program mobilności</a></h2>
+            <p class="slim-bento-path__desc">Domknij plan mobilnością, która pomaga chronić stawy, poprawia zakres ruchu i ułatwia codzienne funkcjonowanie.</p>
+          </article>
+        </div>
+      </section>
 
       <div class="carousel-bento">
       <div class="carousel-viewport" data-simple-carousel="ruch">

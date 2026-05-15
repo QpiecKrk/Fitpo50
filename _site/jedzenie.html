@@ -566,6 +566,121 @@ main .container {
   padding: 16px;
 }
 
+.slim-bento-path {
+  margin: 0 0 16px;
+  width: 100%;
+  border: 1px solid rgba(190, 110, 72, 0.36);
+  border-radius: 20px;
+  background:
+    radial-gradient(120% 120% at 10% 0%, rgba(252, 223, 190, 0.44) 0%, rgba(252, 223, 190, 0) 55%),
+    linear-gradient(145deg, #efb184 0%, #d88d64 48%, #bf7452 100%);
+  box-shadow: 0 8px 24px rgba(31, 43, 69, 0.08);
+  padding: 14px;
+}
+
+.slim-bento-path__intro {
+  margin: 0 0 12px;
+  max-width: none;
+  color: #34415d;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.slim-bento-path__intro .mix-word-pop,
+.slim-bento-path__intro .mix-word-wide,
+.slim-bento-path__intro .mix-word-classic,
+.slim-bento-path__intro .mix-accent-ink {
+  color: #1f2b45;
+}
+
+.slim-bento-path__intro .mix-word-wide {
+  font-size: 0.9em;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(31, 43, 69, 0.22);
+}
+
+.slim-bento-path__intro .mix-word-classic {
+  color: #0f4c81;
+}
+
+.slim-bento-path__intro .mix-word-pop {
+  color: #1f2b45;
+}
+
+.slim-bento-path__intro .mix-accent-gold {
+  color: #1f7a45;
+  font-weight: 800;
+}
+
+.slim-bento-path__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.slim-bento-path__step {
+  min-width: 0;
+  border: 1px solid rgba(31, 43, 69, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 14px 14px 15px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.slim-bento-path__step:hover,
+.slim-bento-path__step:focus-within {
+  transform: translateY(-1px);
+  border-color: rgba(186, 116, 62, 0.38);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 18px rgba(31, 43, 69, 0.08);
+}
+
+.slim-bento-path__label {
+  display: inline-flex;
+  margin-bottom: 9px;
+  color: #9a5c35;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.slim-bento-path__title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.slim-bento-path__title a {
+  color: #1f2b45;
+  text-decoration: none;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.16em;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.slim-bento-path__title a:hover,
+.slim-bento-path__title a:focus-visible {
+  color: #9a5c35;
+  text-decoration: underline;
+  text-decoration-color: rgba(154, 92, 53, 0.5);
+  outline: none;
+}
+
+.slim-bento-path__desc {
+  margin: 0;
+  color: #495773;
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
 .carousel-bento .carousel-viewport {
   overflow: hidden;
   width: 100%;
@@ -735,6 +850,12 @@ main .container {
   .intro-row {
     grid-template-columns: 1fr;
   }
+  .slim-bento-path {
+    padding: 12px;
+  }
+  .slim-bento-path__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .reading-grid {
     grid-template-columns: 1fr;
   }
@@ -749,6 +870,16 @@ main .container {
     left: -56px;
     bottom: -64px;
   }
+}
+
+@media (max-width: 640px) {
+  .slim-bento-path__intro {
+    white-space: normal;
+  }
+  .slim-bento-path__grid {
+    grid-template-columns: 1fr;
+  }
+}
 }
 </style>
 <link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
@@ -813,7 +944,32 @@ main .container {
           <p><span class="mix-word-script">Praktyczne</span> wybory, które da się utrzymać przez lata i które realnie wspierają <span class="mix-word-pop mix-accent-gold">formę</span>. <span class="mix-accent-gold">Codzienna decyzja</span> buduje energię.</p>
         </article>
       </div>
-      <p style="margin:0 0 14px;">Najlepiej wejść etapami: najpierw sprawdź <a href="jedz-wiecej-po-50.html">dlaczego niedojadanie po 50 szkodzi efektom</a>, potem ułóż bazę białka i kalorii w <a href="dieta-po-50.html">dieta po 50 kontra nawyki</a>, usuń sabotaż w tekście <a href="ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html">ukryty cukier po 50</a> i domknij plan przez <a href="nawodnienie-na-treningu-po-50.html">nawodnienie na treningu</a>.</p>
+      <section class="slim-bento-path" aria-labelledby="guided-reading-title">
+        <p id="guided-reading-title" class="slim-bento-path__intro"><span class="mix-word-wide">Metoda</span> <span class="mix-word-pop">4 kroków</span>, które <span class="mix-word-classic">realnie</span> wpłyną na Twój <span class="mix-accent-ink">metabolizm</span> i codzienne <span class="mix-accent-gold">samopoczucie</span>.</p>
+        <!-- TU AKTUALIZUJ LINKI ŚCIEŻKI CZYTANIA: href, tytuły i opisy czterech kroków -->
+        <div class="slim-bento-path__grid">
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 1</span>
+            <h2 class="slim-bento-path__title"><a href="jedz-wiecej-po-50.html">Dlaczego niedojadanie szkodzi efektom</a></h2>
+            <p class="slim-bento-path__desc">Za mało jedzenia może spowalniać progres, osłabiać regenerację i utrudniać zachowanie mięśni.</p>
+          </article>
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 2</span>
+            <h2 class="slim-bento-path__title"><a href="dieta-po-50.html">Dieta po 50 kontra nawyki</a></h2>
+            <p class="slim-bento-path__desc">Po 50-tce liczy się stała baza białka i kalorii, a nie przypadkowe zrywy i szybkie resety.</p>
+          </article>
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 3</span>
+            <h2 class="slim-bento-path__title"><a href="ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html">Ukryty cukier po 50</a></h2>
+            <p class="slim-bento-path__desc">Ukryty cukier i produkty wysoko przetworzone często psują efekty mimo pozornie zdrowej diety.</p>
+          </article>
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 4</span>
+            <h2 class="slim-bento-path__title"><a href="nawodnienie-na-treningu-po-50.html">Nawodnienie na treningu</a></h2>
+            <p class="slim-bento-path__desc">Nawodnienie domyka plan, poprawia trening i wspiera lepsze samopoczucie na co dzień.</p>
+          </article>
+        </div>
+      </section>
 
       <div class="carousel-bento">
       <div class="carousel-viewport" data-simple-carousel="jedzenie">

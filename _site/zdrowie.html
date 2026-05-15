@@ -493,6 +493,118 @@ main .container {
   text-underline-offset: 2px;
 }
 
+.slim-bento-path {
+  margin: 0 0 16px;
+  width: 100%;
+  border: 1px solid rgba(168, 125, 62, 0.32);
+  border-radius: 20px;
+  background: linear-gradient(155deg, #f3e2bd 0%, #e8cc95 100%);
+  box-shadow: 0 8px 24px rgba(31, 43, 69, 0.08);
+  padding: 14px;
+}
+
+.slim-bento-path__intro {
+  margin: 0 0 12px;
+  max-width: none;
+  color: #3f4250;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.slim-bento-path__intro .mix-word-wide {
+  color: #ffffff;
+  font-size: 0.9em;
+  text-shadow: 0 1px 2px rgba(31, 43, 69, 0.22);
+}
+
+.slim-bento-path__intro .mix-word-pop {
+  color: #1f2b45;
+  text-decoration-color: rgba(31, 43, 69, 0.28);
+}
+
+.slim-bento-path__intro .mix-word-classic {
+  color: #96533c;
+}
+
+.slim-bento-path__intro .mix-accent-health {
+  color: #2f6f99;
+  font-weight: 800;
+}
+
+.slim-bento-path__intro .mix-accent-wellbeing {
+  color: #2f7a54;
+  font-weight: 800;
+}
+
+.slim-bento-path__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.slim-bento-path__step {
+  min-width: 0;
+  border: 1px solid rgba(31, 43, 69, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.76);
+  padding: 14px 14px 15px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.slim-bento-path__step:hover,
+.slim-bento-path__step:focus-within {
+  transform: translateY(-1px);
+  border-color: rgba(47, 111, 153, 0.38);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 18px rgba(31, 43, 69, 0.08);
+}
+
+.slim-bento-path__label {
+  display: inline-flex;
+  margin-bottom: 9px;
+  color: #8d5a28;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.slim-bento-path__title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.slim-bento-path__title a {
+  color: #1f2b45;
+  text-decoration: none;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.16em;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.slim-bento-path__title a:hover,
+.slim-bento-path__title a:focus-visible {
+  color: #2f6f99;
+  text-decoration: underline;
+  text-decoration-color: rgba(47, 111, 153, 0.42);
+  outline: none;
+}
+
+.slim-bento-path__desc {
+  margin: 0;
+  color: #495773;
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
 .carousel-bento {
   border: 1px solid rgba(168, 125, 62, 0.32);
   border-radius: var(--radius-lg);
@@ -667,7 +779,22 @@ main .container {
 }
 
 @media (max-width: 820px) {
+  .slim-bento-path {
+    padding: 12px;
+  }
+  .slim-bento-path__intro {
+    white-space: normal;
+  }
+  .slim-bento-path__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .reading-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .slim-bento-path__grid {
     grid-template-columns: 1fr;
   }
 }
@@ -730,7 +857,32 @@ main .container {
           <p>Po 50-tce ciało <span class="mix-word-classic"><strong>częściej milczy niż krzyczy</strong></span> i właśnie to bywa zdradliwe. Tu znajdziesz <span class="mix-word-wide">konkretne</span> artykuły o badaniach, wynikach i sygnałach, których <span class="mix-word-pop" style="color:#96533c;">nie wolno ignorować</span>. Bo zdrowie po pięćdziesiątce to nie loteria, tylko <span class="mix-word-serif"><strong>decyzja</strong></span>.</p>
         </article>
       </div>
-      <p style="margin:0 0 14px;">Jeśli chcesz zacząć od podstaw, najpierw zobacz <a href="badania-krwi-po-50-jak-czesto.html">harmonogram badań krwi po 50</a>, potem rozszerz diagnostykę przez <a href="apob-apoa-badania-cholesterol.html">ApoB i ApoA</a>, sprawdź ryzyko sercowe w tekście <a href="hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html">HFpEF po pięćdziesiątce</a> i domknij profilaktykę przez <a href="sen-po-50.html">sen i regenerację</a>.</p>
+      <section class="slim-bento-path" aria-labelledby="guided-reading-title">
+        <p id="guided-reading-title" class="slim-bento-path__intro"><span class="mix-word-wide">Metoda</span> <span class="mix-word-pop">4 kroków</span>, które <span class="mix-word-classic">realnie</span> wpłyną na Twoją <span class="mix-accent-health">profilaktykę</span> i codzienne <span class="mix-accent-wellbeing">samopoczucie</span>.</p>
+        <!-- TU AKTUALIZUJ LINKI ŚCIEŻKI CZYTANIA: href, tytuły i opisy czterech kroków -->
+        <div class="slim-bento-path__grid">
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 1</span>
+            <h2 class="slim-bento-path__title"><a href="badania-krwi-po-50-jak-czesto.html">Harmonogram badań krwi po 50</a></h2>
+            <p class="slim-bento-path__desc">Zobacz, które badania warto robić regularnie, żeby szybciej wychwycić zmiany i nie działać po omacku.</p>
+          </article>
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 2</span>
+            <h2 class="slim-bento-path__title"><a href="apob-apoa-badania-cholesterol.html">ApoB i ApoA</a></h2>
+            <p class="slim-bento-path__desc">Rozszerz diagnostykę serca o wskaźniki, które potrafią powiedzieć więcej niż standardowy lipidogram.</p>
+          </article>
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 3</span>
+            <h2 class="slim-bento-path__title"><a href="hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html">HFpEF po pięćdziesiątce</a></h2>
+            <p class="slim-bento-path__desc">Sprawdź, jak rozpoznać cichsze sygnały ryzyka sercowego, zanim zadyszka i zmęczenie staną się normą.</p>
+          </article>
+          <article class="slim-bento-path__step">
+            <span class="slim-bento-path__label">KROK 4</span>
+            <h2 class="slim-bento-path__title"><a href="sen-po-50.html">Sen i regeneracja</a></h2>
+            <p class="slim-bento-path__desc">Domknij profilaktykę snem, który wspiera układ nerwowy, odporność i codzienną energię.</p>
+          </article>
+        </div>
+      </section>
 
       <div class="carousel-bento">
       <div class="carousel-viewport" data-simple-carousel="zdrowie">
