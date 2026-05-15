@@ -230,29 +230,29 @@
   ],
   "faq_research": [
     {
-      "question": "Co jeść po 36-godzinnym poście, żeby nie zniszczyć efektów?",
-      "source_label": "Borer et al. 2024 – Twice-Weekly 36-Hour Fasting 82 tygodnie obserwacji (PMC)",
-      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11085973/"
+      "question": "Po ilu godzinach postu zaczyna się autofagia u ludzi?",
+      "source_label": "Bensalem et al. 2025 – Autophagic Flux w iTRE (Journal of Physiology)",
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/40345145/"
     },
     {
-      "question": "Czy post 36-godzinny jest lepszy niż 16:8?",
-      "source_label": "Endocrine Reviews 2025 – Critical Assessment of Fasting (Oxford Academic)",
-      "source_url": "https://academic.oup.com/edrv/article/46/6/856/8211151"
+      "question": "Czy post 36-godzinny jest bezpieczny dla osoby po 50-tce?",
+      "source_label": "Stekovic et al. 2019 – Alternate Day Fasting u zdrowych dorosłych (Cell Metabolism)",
+      "source_url": "https://www.cell.com/cell-metabolism/fulltext/S1550-4131(19)30429-2"
     },
     {
-      "question": "Czy przerywany post pomaga na insulinooporność bez odchudzania?",
-      "source_label": "Horne et al. 2024 – Insulin Resistance Reduction and IF (NPJ Metabolic Health and Disease)",
-      "source_url": "https://www.nature.com/articles/s44324-024-00025-2"
+      "question": "Czy podczas 36-godzinnego postu mogę ćwiczyć?",
+      "source_label": "Deru et al. 2021 – Exercise and Ketone Response During 36h Fasting (Medicine and Science in Sports and Exercise)",
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/33278230/"
     },
     {
-      "question": "Kiedy podczas postu zaczynają rosnąć ketony?",
+      "question": "Ile razy w tygodniu robić 36-godzinny post dla zdrowia?",
       "source_label": "Borer et al. 2024 – Twice-Weekly 36-Hour Fasting Quadruples Beta-HB (PMC)",
       "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11085973/"
     },
     {
-      "question": "Czy post przerywany spowalnia starzenie się komórek?",
-      "source_label": "Bensalem et al. 2025 – Autophagic Flux w iTRE (Journal of Physiology)",
-      "source_url": "https://pubmed.ncbi.nlm.nih.gov/40345145/"
+      "question": "Czy post 36-godzinny pomaga na wysoki cholesterol?",
+      "source_label": "Stekovic et al. 2019 – LDL i sICAM-1 po ADF (Cell Metabolism)",
+      "source_url": "https://www.cell.com/cell-metabolism/fulltext/S1550-4131(19)30429-2"
     }
   ],
   "image_prompts": [
