@@ -271,4 +271,12 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Kreatyna i białko po 50-tce: jak łączyć dla efektów? – praktyczny | FitPo50"
   section: "Jedzenie"
   summary: "Kreatyna i białko po 50-tce: ile brać, kiedy i jak je łączyć? Najnowsze badania 2024–2025, obalone mity i konkretny protokół dla aktywnych po pięćdziesiątce."
+- url: https://fitpo50.pl/post-36-godzinny-co-sie-dzieje-z-cialem.html
+  title: "Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny | FitPo50"
+  section: "Zdrowie"
+  summary: "Co naprawdę dzieje się z ciałem podczas 36-godzinnego postu? Sprawdzamy najnowsze badania (2024–2025) i obalamy lub potwierdzamy popularne twierdzenia."
+- url: https://fitpo50.pl/post-36-godzinny-cud-czy-mit-badania-vs-hype.html
+  title: "Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny | FitPo50"
+  section: "Zdrowie"
+  summary: "Co naprawdę dzieje się z ciałem podczas 36-godzinnego postu? Sprawdzamy najnowsze badania (2024–2025) i obalamy lub potwierdzamy popularne twierdzenia."
 

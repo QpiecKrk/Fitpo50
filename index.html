@@ -1444,14 +1444,14 @@
         <picture aria-hidden="true">
           <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
           <source srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/kreatyna-bialko-po-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/post-36h-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Kreatyna i białko po 50-tce: jak łączyć dla efektów? – praktyczny</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Kreatyna i białko po 50-tce: ile brać, kiedy i jak je łączyć? Najnowsze badania 2024–2025, obalone mity i konkretny protokół dla aktywnych po pięćdziesiątce.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="kreatyna-i-bialko-po-50-tce-jak-laczyc.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Co naprawdę dzieje się z ciałem podczas 36-godzinnego postu? Sprawdzamy najnowsze badania (2024–2025) i obalamy lub potwierdzamy popularne twierdzenia.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="post-36-godzinny-cud-czy-mit-badania-vs-hype.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Kreatyna i białko po 50-tce: jak łączyć dla efektów? – praktyczny',
-        excerpt: 'Kreatyna i białko po 50-tce: ile brać, kiedy i jak je łączyć? Najnowsze badania 2024–2025, obalone mity i konkretny protokół dla aktywnych po pięćdziesiątce.',
-        image: './assets/kreatyna-bialko-po-50-hero.webp',
-        url: 'kreatyna-i-bialko-po-50-tce-jak-laczyc.html'
+        title: 'Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny',
+        excerpt: 'Co naprawdę dzieje się z ciałem podczas 36-godzinnego postu? Sprawdzamy najnowsze badania (2024–2025) i obalamy lub potwierdzamy popularne twierdzenia.',
+        image: './assets/post-36h-hero.webp',
+        url: 'post-36-godzinny-cud-czy-mit-badania-vs-hype.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,25 +2236,25 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Jedzenie',
+          category: 'Zdrowie',
+          title: 'Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny',
+          excerpt: 'Co naprawdę dzieje się z ciałem podczas 36-godzinnego postu? Sprawdzamy najnowsze badania (2024–2025) i obalamy lub potwierdzamy popularne twierdzenia.',
+          image: './assets/post-36h-hero.webp',
+          url: 'post-36-godzinny-cud-czy-mit-badania-vs-hype.html'
+        },
+        {
+          category: 'Ciekawe',
+          title: 'AI w medycynie: czy naprawdę pomaga pacjentom? Fakty i badania',
+          excerpt: 'AI już działa w gabinetach i szpitalach. Sprawdzamy, co mówią badania o realnym wpływie na zdrowie pacjentów.',
+          image: './assets/ai-medycyna-lekarz-monitor-rtg-hero.webp',
+          url: 'ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html'
+        },
+        {
+          category: 'Zdrowie',
           title: 'Kreatyna i białko po 50-tce: jak łączyć dla efektów? – praktyczny',
           excerpt: 'Kreatyna i białko po 50-tce: ile brać, kiedy i jak je łączyć? Najnowsze badania 2024–2025, obalone mity i konkretny protokół dla aktywnych po pięćdziesiątce.',
           image: './assets/kreatyna-bialko-po-50-hero.webp',
           url: 'kreatyna-i-bialko-po-50-tce-jak-laczyc.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Kreatyna po 50-tce: kompletny przewodnik – praktyczny przewodnik',
-          excerpt: 'Kreatyna po 50-tce: dawkowanie 3-5 g, bezpieczeństwo nerek i realne efekty dla mięśni, kości oraz mózgu. Praktyczny przewodnik oparty na badaniach.',
-          image: './assets/kreatyna-po-50-hero.webp',
-          url: 'kreatyna-po-50-tce-kompletny-przewodnik.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'HFpEF – cicha epidemia serca po pięćdziesiątce. Jak ją rozpoznać?',
-          excerpt: 'HFpEF to niewydolność serca, gdy echo wygląda dobrze. Dowiedz się, jak ją rozpoznać po 50. roku życia i co zrobić, zanim pojawią się poważne objawy.',
-          image: './assets/hfpef-cicha-epidemia-hero.webp',
-          url: 'hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
