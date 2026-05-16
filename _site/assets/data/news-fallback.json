@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-13T13:37:57+00:00",
+    "updatedAt": "2026-05-16T06:35:05+00:00",
     "items": [
+        {
+            "id": "news_f112777e9931",
+            "title": "Siła to nie tylko większe mięśnie. Układ nerwowy też robi ważny",
+            "content_html": "<p><span>To prawda: </span><span><strong><span></span><span>siła nie zależy wyłącznie od rozmiaru mięśni</span></strong>. Dużą rolę odgrywa układ nerwowy, czyli to, jak skutecznie mózg i rdzeń kręgowy potrafią „<span class=\"news-text-tone--4\">włączyć</span>” mięśnie do pracy. Dlatego dwie osoby o podobnej masie mięśniowej mogą mieć zupełnie inną siłę, technikę i dynamikę ruchu.</span></p><p><span>W </span><strong>treningu siłowym</strong><span> <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">organizm</a> uczy się lepiej rekrutować jednostki motoryczne, czyli grupy włókien mięśniowych sterowane przez nerwy. Poprawia się też </span><span class=\"news-text-tone--4\">częstotliwość pobudzeń nerwowych</span><span>, koordynacja między mięśniami oraz tempo generowania siły. To szczególnie ważne na początku treningu, kiedy </span><span class=\"news-text-tone--4\">siła</span><span> często rośnie szybciej niż widoczna masa mięśniowa. Badania pokazują, że </span><strong><a href=\"syndrom-pierwszego-poniedzialku.html\">pierwsze</a> przyrosty siły</strong><span> są w dużej mierze związane właśnie z adaptacjami nerwowymi. </span><span> </span><br><span></span></p><p><span>To dlatego ciężkie serie, ćwiczenia eksplozywne i regularne powtarzanie techniki mogą </span><span class=\"news-text-tone--2\">poprawiać</span><span> wynik nawet bez dużej hipertrofii. Ciało staje się po prostu sprawniejsze w używaniu tego, co już ma. Nie chodzi tylko o „</span><span class=\"news-text-tone--1\">większy biceps</span><span>”, ale o lepszy sygnał z układu nerwowego, </span><strong>lepszą synchronizację</strong><span> i mniejsze marnowanie energii w ruchu. </span><span> </span><br><span></span></p><p><span>W praktyce dla osoby po 50-tce to dobra wiadomość. </span><strong>Nie trzeba od razu budować ogromnych mięśni</strong><span>, żeby realnie poprawić siłę. Regularny trening siłowy, poprawna technika, spokojna progresja obciążenia i ćwiczenia uczące kontroli ruchu mogą szybko przełożyć się na </span><span class=\"news-text-tone--1\">sprawniejsze wstawanie, noszenie zakupów, stabilniejszy chód i mniejsze ryzyko upadków</span><span>.</span><br><span></span></p><p><strong><span>M</span><span>ięśnie są silnikiem, ale układ nerwowy jest kierowcą. Jeśli kierowca śpi, nawet duży silnik jedzie jak maluch pod górkę.</span></strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260509_094919_3f15acd7.avif",
+                "webp": "./assets/news/news_20260509_094919_3f15acd7.webp",
+                "jpg": "./assets/news/news_20260509_094919_3f15acd7.jpg",
+                "alt": "Siła i system nerwowy",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Del Vecchio et al., “The increase in muscle force after 4 weeks of strength training…”",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/"
+                },
+                {
+                    "label": "Gabriel et al., “Neural adaptations to resistive exercise: mechanisms and recommendations for training practices”",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/16464122/"
+                }
+            ],
+            "updated_at": "2026-05-16T06:35:05+00:00",
+            "published_at": "2026-05-16T06:35:05+00:00",
+            "excerpt": "To prawda: siła nie zależy wyłącznie od rozmiaru mięśni. Dużą rolę odgrywa układ nerwowy, czyli to, jak skutecznie mózg i rdzeń kręgowy potrafią „włączyć” mięśnie do pracy. Dlatego dwie osoby o podobnej masie mięśniowej…"
+        },
         {
             "id": "news_566a85ef707f",
             "title": "„Zastrzyk z tlenem”, który pozwala żyć bez oddychania?",

@@ -1,7 +1,29 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-13T13:37:57+00:00",
+    "updatedAt": "2026-05-16T06:35:05+00:00",
     "items": [
+        {
+            "id": "news_ef8cc226bfcc",
+            "title": "Lp(a): cichy, genetyczny czynnik ryzyka serca, którego zwykły lipidogram często nie pokazuje",
+            "content_html": "<p><span>To twierdzenie jest w dużej mierze prawdziwe. </span><span><strong><span></span><span>Lipoproteina(a), czyli Lp(a), jest niezależnym czynnikiem ryzyka chorób sercowo-naczyniowych</span><span>:</span></strong> <a href=\"silownia-chroni-serce-przed-zawalem.html\">zawału</a>, udaru, miażdżycy, choroby tętnic obwodowych i zwężenia zastawki aortalnej. <span class=\"news-text-tone--4\">American Heart Association</span> podaje, że wysoki poziom <strong>Lp(a)</strong> może sprzyjać odkładaniu blaszki, zapaleniu i krzepnięciu w tętnicach.  </span></p><p><span>Najważniejsze: </span><span><strong><span></span><span>Lp(a) jest głównie uwarunkowana genetycznie</span></strong>. Dieta, ćwiczenia i styl życia są świetne dla ogólnego ryzyka <span class=\"news-text-tone--4\">sercowo-naczyniowego</span>, ale zwykle nie obniżają istotnie samej <strong>Lp(a)</strong>. Dlatego ktoś może mieć przyzwoity cholesterol <strong>LDL</strong>, dobre <span class=\"news-text-tone--2\">trójglicerydy, trenować i nadal mieć</span> podwyższone ryzyko przez Lp(a). <span class=\"news-text-tone--3\">Standardowy lipidogram</span> najczęściej jej nie zawiera, więc trzeba poprosić o osobne badanie.  </span><br><span></span></p><p><span>Czy „<span class=\"news-text-tone--4\">co piąta osoba</span>” ma wysokie Lp(a)? Tak, to często podawana skala: około </span><span>1 na 5 osób na świecie</span><span> ma podwyższone <strong>Lp(a). AHA</strong> jako wysoki poziom podaje zwykle </span><span><strong><span></span><span>≥125 nmol/L lub ≥50 mg/dL</span></strong>. Przy bardzo wysokich wartościach ryzyko może być znacząco większe, ale nie należy traktować tego jako <span class=\"news-text-tone--3\">automatycznego wyroku</span> — całkowite ryzyko zależy też od wieku, ciśnienia, <strong><a href=\"apob-apoa-badania-cholesterol.html\">ApoB</a>/LDL</strong>, palenia, cukrzycy, historii rodzinnej i obecności miażdżycy.  </span><br><span></span></p><p><span>Co z leczeniem?</span><span> Na dziś nie ma powszechnie dostępnej terapii stworzonej wyłącznie do obniżania </span><strong>Lp(a)</strong><span>, choć trwają badania nad nowymi lekami. W praktyce, gdy </span><strong>Lp(a)</strong><span> jest wysokie, lekarze zwykle agresywniej kontrolują inne czynniki ryzyka: </span><strong>LDL/ApoB</strong><span>, ciśnienie, glikemię, masę ciała, sen, palenie i aktywność. To mniej efektowne niż „</span><span class=\"news-text-tone--4\">naprawienie genu</span><span>”, ale obecnie ma największy sens kliniczny.</span><br><span></span></p><p><strong><span>L</span><span>p(a) warto oznaczyć przynajmniej raz w życiu, szczególnie jeśli w rodzinie były wczesne zawały, udary, miażdżyca albo wysokie ryzyko mimo „normalnego cholesterolu”. Normalny lipidogram nie oznacza automatycznie normalnego Lp(a).</span></strong><br><span></span></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260516_063344_172eab6e",
+            "image_alt": "Lp(a)",
+            "sources": [
+                {
+                    "label": "American Heart Association — Lipoprotein(a)",
+                    "url": "https://www.heart.org/en/health-topics/cholesterol/genetic-conditions/lipoprotein-a"
+                },
+                {
+                    "label": "American Heart Association — What is Lipoprotein(a) and how does it impact heart health?",
+                    "url": "https://www.heart.org/en/health-topics/cholesterol/genetic-conditions/lipoprotein-a-risks"
+                }
+            ],
+            "created_at": "2026-05-16T06:33:44+00:00",
+            "updated_at": "2026-05-16T06:33:44+00:00",
+            "published_at": ""
+        },
         {
             "id": "news_89bf7f7c70ec",
             "title": "Enzym, który „czyści tętnice”?",
@@ -90,7 +112,7 @@
             "id": "news_f112777e9931",
             "title": "Siła to nie tylko większe mięśnie. Układ nerwowy też robi ważny",
             "content_html": "<p><span>To prawda: </span><span><strong><span></span><span>siła nie zależy wyłącznie od rozmiaru mięśni</span></strong>. Dużą rolę odgrywa układ nerwowy, czyli to, jak skutecznie mózg i rdzeń kręgowy potrafią „<span class=\"news-text-tone--4\">włączyć</span>” mięśnie do pracy. Dlatego dwie osoby o podobnej masie mięśniowej mogą mieć zupełnie inną siłę, technikę i dynamikę ruchu.</span></p><p><span>W </span><strong>treningu siłowym</strong><span> <a href=\"jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html\">organizm</a> uczy się lepiej rekrutować jednostki motoryczne, czyli grupy włókien mięśniowych sterowane przez nerwy. Poprawia się też </span><span class=\"news-text-tone--4\">częstotliwość pobudzeń nerwowych</span><span>, koordynacja między mięśniami oraz tempo generowania siły. To szczególnie ważne na początku treningu, kiedy </span><span class=\"news-text-tone--4\">siła</span><span> często rośnie szybciej niż widoczna masa mięśniowa. Badania pokazują, że </span><strong><a href=\"syndrom-pierwszego-poniedzialku.html\">pierwsze</a> przyrosty siły</strong><span> są w dużej mierze związane właśnie z adaptacjami nerwowymi. </span><span> </span><br><span></span></p><p><span>To dlatego ciężkie serie, ćwiczenia eksplozywne i regularne powtarzanie techniki mogą </span><span class=\"news-text-tone--2\">poprawiać</span><span> wynik nawet bez dużej hipertrofii. Ciało staje się po prostu sprawniejsze w używaniu tego, co już ma. Nie chodzi tylko o „</span><span class=\"news-text-tone--1\">większy biceps</span><span>”, ale o lepszy sygnał z układu nerwowego, </span><strong>lepszą synchronizację</strong><span> i mniejsze marnowanie energii w ruchu. </span><span> </span><br><span></span></p><p><span>W praktyce dla osoby po 50-tce to dobra wiadomość. </span><strong>Nie trzeba od razu budować ogromnych mięśni</strong><span>, żeby realnie poprawić siłę. Regularny trening siłowy, poprawna technika, spokojna progresja obciążenia i ćwiczenia uczące kontroli ruchu mogą szybko przełożyć się na </span><span class=\"news-text-tone--1\">sprawniejsze wstawanie, noszenie zakupów, stabilniejszy chód i mniejsze ryzyko upadków</span><span>.</span><br><span></span></p><p><strong><span>M</span><span>ięśnie są silnikiem, ale układ nerwowy jest kierowcą. Jeśli kierowca śpi, nawet duży silnik jedzie jak maluch pod górkę.</span></strong><br><span></span></p>",
-            "status": "draft",
+            "status": "published",
             "sort_order": 1,
             "image_base": "news_20260509_094919_3f15acd7",
             "image_alt": "Siła i system nerwowy",
@@ -105,8 +127,8 @@
                 }
             ],
             "created_at": "2026-05-09T09:49:19+00:00",
-            "updated_at": "2026-05-09T09:49:19+00:00",
-            "published_at": ""
+            "updated_at": "2026-05-16T06:35:05+00:00",
+            "published_at": "2026-05-16T06:35:05+00:00"
         },
         {
             "id": "news_566a85ef707f",
