@@ -15,6 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { POLICY, utils, enforcers } = require('./lib/article-policy');
 const https = require('https');
 const { spawnSync } = require('child_process');
 
@@ -222,12 +223,7 @@ function ensureParagraphHtml(value) {
 }
 
 function stripTags(html) {
-  return String(html || '')
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  return utils.stripTags(html);
 }
 
 function getWarsawOffset(dateStr) {
@@ -311,8 +307,7 @@ function buildSpeakableSelectors(hasKeyTakeaways) {
 }
 
 function countWordsUtf8(text) {
-  const m = String(text || '').match(/[\p{L}\p{N}]+/gu);
-  return m ? m.length : 0;
+  return utils.countWords(text);
 }
 
 function decodeHtmlEntities(input) {
@@ -529,10 +524,7 @@ function normalizeKeyTakeaways(raw) {
 }
 
 function ensureQuestionHeading(title) {
-  const clean = stripTags(String(title || '')).replace(/\s+/g, ' ').trim();
-  if (!clean) return '';
-  if (clean.endsWith('?')) return clean;
-  return `${clean}?`;
+  return enforcers.forceQuestion(title);
 }
 
 function normalizeQuickAnswer(raw, leadRaw) {
@@ -543,20 +535,22 @@ function normalizeQuickAnswer(raw, leadRaw) {
     text = leadText;
   }
   if (!text) return '';
-  let words = text.split(/\s+/).filter(Boolean);
-  if (words.length > 60) {
-    text = words.slice(0, 60).join(' ').replace(/[,:;\s]+$/g, '').trim();
+  let words = utils.countWords(text);
+  if (words > POLICY.WORDS.QUICK_ANSWER_MAX) {
+    const allWords = text.match(/[\p{L}\p{N}'’-]+/gu) || [];
+    text = allWords.slice(0, POLICY.WORDS.QUICK_ANSWER_MAX).join(' ').replace(/[,:;\s]+$/g, '').trim();
     if (!/[.!?]$/.test(text)) text += '.';
-    words = text.split(/\s+/).filter(Boolean);
+    words = utils.countWords(text);
   }
-  while (words.length < 40) {
+  while (words < POLICY.WORDS.QUICK_ANSWER_MIN) {
     text = `${text} To konkretna odpowiedź dla osób 50+, którą można od razu przełożyć na praktyczne działanie.`
       .replace(/\s+/g, ' ')
       .trim();
-    words = text.split(/\s+/).filter(Boolean).slice(0, 60);
-    text = words.join(' ').trim();
+    const allWords = text.match(/[\p{L}\p{N}'’-]+/gu) || [];
+    words = Math.min(POLICY.WORDS.QUICK_ANSWER_MAX, allWords.length);
+    text = allWords.slice(0, words).join(' ').trim();
     if (!/[.!?]$/.test(text)) text += '.';
-    words = text.split(/\s+/).filter(Boolean);
+    words = utils.countWords(text);
   }
   // Guard against 1:1 duplicate with lead when quick_answer was auto-derived.
   if (!rawProvided && leadText) {
@@ -662,10 +656,10 @@ function normalizeSections(rawSections) {
     }
 
     // Automatyczna stabilizacja "answer-first":
-    // pierwszy akapit sekcji przycinamy do 80 słów, żeby nie blokować publikacji.
+    // pierwszy akapit sekcji przycinamy do limitu z polisy, żeby importer i walidator miały ten sam kontrakt.
     const firstParagraph = blocks.find((b) => b.type === 'paragraph' && String(b.html || '').trim());
     if (firstParagraph) {
-      firstParagraph.html = truncateParagraphToWordLimit(firstParagraph.html, 80);
+      firstParagraph.html = truncateParagraphToWordLimit(firstParagraph.html, POLICY.WORDS.H2_INTRO_MAX);
     }
 
     sections.push({ title, blocks });

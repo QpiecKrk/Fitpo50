@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { validateArticleHeadContract } = require('./lib/article-head-contract');
+const { utils, validators, POLICY } = require('./lib/article-policy');
 
 function getHtmlFiles() {
   return fs.readdirSync(process.cwd())
@@ -14,19 +15,7 @@ function isArticleHtml(content) {
   return /<body[^>]*class="[^"]*article-template[^"]*"/i.test(content);
 }
 
-function stripTags(html) {
-  return String(html || '')
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function countWords(text) {
-  const m = String(text || '').match(/[\p{L}\p{N}]+/gu);
-  return m ? m.length : 0;
-}
+// Narzędzia stripTags, countWords i normalizeText przeniesione do scripts/lib/article-policy.js
 
 function countInternalContextLinks(articleContentHtml) {
   const rx = /<a\b[^>]*href="([^"]+)"/gi;
@@ -46,13 +35,7 @@ function countInternalContextLinks(articleContentHtml) {
   return unique.size;
 }
 
-function normalizeTextForCompare(text) {
-  return String(text || '')
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
+// Funkcja normalizeTextForCompare zastąpiona przez utils.fuzzyNormalize
 
 function stripFaqBlock(articleContentHtml) {
   return String(articleContentHtml || '').split(/<section\s+class="faq-list\b/i)[0];
@@ -77,33 +60,25 @@ function extractArticleContentHtml(raw) {
 function validateAnswerFirstParagraphs(raw, errors) {
   const h2Rx = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
   const h2s = [...raw.matchAll(h2Rx)];
-  const skippedTitles = new Set([
-    'kluczowe wnioski',
-    'najczęściej zadawane pytania',
-    'zrodla',
-    'źródła',
-  ]);
 
   let checked = 0;
   for (let i = 0; i < h2s.length; i += 1) {
     const current = h2s[i];
     const next = h2s[i + 1];
-    const title = stripTags(current[1]).toLowerCase();
-    if (skippedTitles.has(title)) continue;
-    if (title.includes('źródła') || title.includes('zrodla')) continue;
+    if (validators.isSkippedH2Title(current[1])) continue;
 
     const sectionStart = current.index + current[0].length;
     const sectionEnd = next ? next.index : raw.length;
     const sectionHtml = raw.slice(sectionStart, sectionEnd);
     const pMatch = sectionHtml.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i);
     if (!pMatch) {
-      errors.push(`Sekcja "${stripTags(current[1])}" nie zawiera akapitu otwierającego <p>.`);
+      errors.push(`Sekcja "${utils.stripTags(current[1])}" nie zawiera akapitu otwierającego <p>.`);
       continue;
     }
     checked += 1;
-    const words = countWords(stripTags(pMatch[1]));
-    if (words < 35 || words > 80) {
-      errors.push(`Sekcja "${stripTags(current[1])}": pierwszy akapit powinien mieć 35-80 słów (ma ${words}).`);
+    const res = validators.validateIntroParagraph(pMatch[1]);
+    if (!res.ok) {
+      errors.push(`Sekcja "${utils.stripTags(current[1])}": ${res.error}`);
     }
   }
 
@@ -123,15 +98,15 @@ function validateQuickAnswerBlock(articleContentHtml, errors) {
     errors.push('Sekcja .quick-answer nie zawiera akapitu <p>.');
     return;
   }
-  const wc = countWords(stripTags(paragraphMatch[1]));
-  if (wc < 40 || wc > 60) {
-    errors.push(`Szybka odpowiedź: wymagane 40-60 słów (jest ${wc}).`);
+  const wc = utils.countWords(utils.stripTags(paragraphMatch[1]));
+  if (wc < POLICY.WORDS.QUICK_ANSWER_MIN || wc > POLICY.WORDS.QUICK_ANSWER_MAX) {
+    errors.push(`Szybka odpowiedź: wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${wc}).`);
   }
 
   const leadMatch = articleContentHtml.match(/<p class="drop-cap">([\s\S]*?)<\/p>/i);
   if (leadMatch) {
-    const leadNorm = normalizeTextForCompare(stripTags(leadMatch[1]));
-    const quickNorm = normalizeTextForCompare(stripTags(paragraphMatch[1]));
+    const leadNorm = utils.fuzzyNormalize(utils.stripTags(leadMatch[1]));
+    const quickNorm = utils.fuzzyNormalize(utils.stripTags(paragraphMatch[1]));
     if (leadNorm && quickNorm && leadNorm === quickNorm) {
       errors.push('Szybka odpowiedź nie może być kopią 1:1 pierwszego akapitu.');
     }
@@ -198,21 +173,11 @@ function validateHeroShareContract(raw, errors) {
 
 function validateQuestionHeadings(articleContentHtml, errors) {
   const h2Rx = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
-  const skippedTitles = new Set([
-    'kluczowe wnioski',
-    'najczęściej zadawane pytania',
-    'zrodla',
-    'źródła',
-    'szybka odpowiedź',
-    'szybka odpowiedz',
-  ]);
   for (const m of articleContentHtml.matchAll(h2Rx)) {
-    const titleRaw = stripTags(m[1]);
-    const title = titleRaw.toLowerCase().trim();
-    if (skippedTitles.has(title)) continue;
-    if (title.includes('źródła') || title.includes('zrodla')) continue;
-    if (!titleRaw.trim().endsWith('?')) {
-      errors.push(`H2 "${titleRaw.trim()}" powinien być pytaniem zakończonym "?".`);
+    const titleRaw = utils.stripTags(m[1]);
+    const res = validators.validateH2Title(titleRaw);
+    if (!res.ok) {
+      errors.push(res.error);
     }
   }
 }
@@ -268,33 +233,33 @@ function validateNoInvalidSourceClosingTags(raw, errors) {
 
 function validateAsideTitlesNotDuplicated(articleContentHtml, errors) {
   const h2Titles = [...articleContentHtml.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)]
-    .map((m) => normalizeTextForCompare(stripTags(m[1])))
+    .map((m) => utils.fuzzyNormalize(utils.stripTags(m[1])))
     .filter(Boolean);
   const h2Set = new Set(h2Titles);
 
   const asides = [...articleContentHtml.matchAll(/<aside\b[^>]*class="[^"]*\bhighlight-box\b[^"]*"[^>]*>[\s\S]*?<h3[^>]*>([\s\S]*?)<\/h3>/gi)];
   for (const a of asides) {
-    let title = normalizeTextForCompare(stripTags(a[1]));
+    let title = utils.fuzzyNormalize(utils.stripTags(a[1]));
     title = title.replace(/^wazne:\s*/i, '');
     if (!title) continue;
     if (h2Set.has(title)) {
-      errors.push(`Boks aside dubluje nagłówek H2: "${stripTags(a[1]).trim()}".`);
+      errors.push(`Boks aside dubluje nagłówek H2: "${utils.stripTags(a[1]).trim()}".`);
       break;
     }
   }
 }
 
 function validateRepeatedLongSentences(articleContentHtml, errors) {
-  const plain = stripTags(articleContentHtml);
+  const plain = utils.stripTags(articleContentHtml);
   const sentences = plain
     .split(/(?<=[.!?])\s+/)
     .map((s) => s.replace(/\s+/g, ' ').trim())
     .filter(Boolean);
   const map = new Map();
   for (const sentence of sentences) {
-    const norm = normalizeTextForCompare(sentence);
+    const norm = utils.fuzzyNormalize(sentence);
     if (!norm) continue;
-    if (countWords(norm) < 8) continue;
+    if (utils.countWords(norm) < 8) continue;
     if (norm.length < 45) continue;
     map.set(norm, (map.get(norm) || 0) + 1);
   }
@@ -309,8 +274,8 @@ function validateRepeatedLongSentences(articleContentHtml, errors) {
 function validateAsidePracticalValue(articleContentHtml, errors) {
   const asides = [...articleContentHtml.matchAll(/<aside\b[^>]*class="[^"]*\bhighlight-box\b[^"]*"[^>]*>[\s\S]*?<p[^>]*>([\s\S]*?)<\/p>[\s\S]*?<\/aside>/gi)];
   for (const aside of asides) {
-    const text = stripTags(aside[1]);
-    const words = countWords(text);
+    const text = utils.stripTags(aside[1]);
+    const words = utils.countWords(text);
     if (words < 7) {
       errors.push(`Boks aside ma zbyt mało treści praktycznej (${words} słów).`);
       return;

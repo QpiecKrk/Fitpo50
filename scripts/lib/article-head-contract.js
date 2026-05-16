@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { POLICY, utils } = require('./article-policy');
 
 function firstMatch(raw, regex) {
   const m = String(raw || '').match(regex);
@@ -9,9 +10,9 @@ function validateArticleHeadContract(raw, opts = {}) {
   const errors = [];
   const warnings = [];
   const limits = {
-    titleMax: 65,
-    descriptionMin: 145,
-    descriptionMax: 160,
+    titleMax: POLICY.TITLE.MAX,
+    descriptionMin: POLICY.WORDS.SEO_DESCRIPTION_MIN,
+    descriptionMax: POLICY.WORDS.SEO_DESCRIPTION_MAX,
     ...opts,
   };
 
@@ -92,13 +93,18 @@ function validateArticleHeadContract(raw, opts = {}) {
   if (!twitterDescription) warnings.push('Brak twitter:description.');
   if (!schemaDescription) warnings.push('Brak BlogPosting.description w schema JSON-LD.');
 
-  if (metaDescription && ogDescription && metaDescription !== ogDescription) {
+  const normMeta = utils.strictNormalize(metaDescription);
+  const normOg = utils.strictNormalize(ogDescription);
+  const normTwitter = utils.strictNormalize(twitterDescription);
+  const normSchema = utils.strictNormalize(schemaDescription);
+
+  if (normMeta && normOg && normMeta !== normOg) {
     errors.push('Niespójny opis: meta description != og:description.');
   }
-  if (metaDescription && twitterDescription && metaDescription !== twitterDescription) {
+  if (normMeta && normTwitter && normMeta !== normTwitter) {
     errors.push('Niespójny opis: meta description != twitter:description.');
   }
-  if (metaDescription && schemaDescription && metaDescription !== schemaDescription) {
+  if (normMeta && normSchema && normMeta !== normSchema) {
     errors.push('Niespójny opis: meta description != BlogPosting.description.');
   }
 

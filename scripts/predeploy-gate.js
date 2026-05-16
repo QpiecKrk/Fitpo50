@@ -12,6 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 const { validateArticleHeadFile } = require('./lib/article-head-contract');
+const { validators } = require('./lib/article-policy');
 
 const ROOT = process.cwd();
 
@@ -119,7 +120,6 @@ function validateReadingTimeLabels(errors) {
     }
   }
 
-  const validLabel = /^\d+\s+min\s+czytania$/i;
   for (const filePath of targets) {
     const rel = path.relative(ROOT, filePath);
     if (path.basename(rel) === 'article-template-bento.html') continue;
@@ -127,22 +127,25 @@ function validateReadingTimeLabels(errors) {
 
     for (const match of raw.matchAll(/<span class="article-index-card__meta">([^<]+)<\/span>/g)) {
       const label = String(match[1] || '').replace(/\s+/g, ' ').trim();
-      if (!validLabel.test(label)) {
-        errors.push(`${rel}: niepoprawny label czasu na karcie listingu: "${label}" (oczekiwane: "X min czytania").`);
+      const res = validators.validateReadTimeLabel(label);
+      if (!res.ok) {
+        errors.push(`${rel}: ${res.error} (na karcie listingu)`);
       }
     }
 
     for (const match of raw.matchAll(/data-read-time="([^"]+)"/g)) {
       const label = String(match[1] || '').replace(/\s+/g, ' ').trim();
-      if (!validLabel.test(label)) {
-        errors.push(`${rel}: niepoprawny data-read-time="${label}" (oczekiwane: "X min czytania").`);
+      const res = validators.validateReadTimeLabel(label);
+      if (!res.ok) {
+        errors.push(`${rel}: ${res.error} (w data-read-time)`);
       }
     }
 
     for (const match of raw.matchAll(/<p class="article-kicker-card__meta">[\s\S]*?<span class="article-kicker-card__category-pill">[\s\S]*?<\/span><span>([^<]+)<\/span><\/p>/g)) {
       const label = String(match[1] || '').replace(/\s+/g, ' ').trim();
-      if (!validLabel.test(label)) {
-        errors.push(`${rel}: niepoprawny czas czytania w hero meta: "${label}" (oczekiwane: "X min czytania").`);
+      const res = validators.validateReadTimeLabel(label);
+      if (!res.ok) {
+        errors.push(`${rel}: ${res.error} (w hero meta)`);
       }
     }
   }

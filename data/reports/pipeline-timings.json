@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-15T19:00:31.588Z",
+  "updated_at": "2026-05-15T20:30:56.841Z",
   "records": [
     {
       "scope": "prepush-local",
@@ -1537,6 +1537,100 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 50
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-15T19:21:56.808Z",
+      "total_ms": 418,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 61
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 302
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 23
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 44
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 53
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline-fail",
+      "at": "2026-05-15T20:30:56.841Z",
+      "total_ms": 3255,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 45
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 41
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 51
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 54
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 1915
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 94
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 626
+        },
+        {
+          "tag": "Sync meta description across head/schema",
+          "durationMs": 46
+        },
+        {
+          "tag": "Article contract check (source/_site)",
+          "durationMs": 48
+        },
+        {
+          "tag": "Sync assets mirror (_site)",
+          "durationMs": 77
+        },
+        {
+          "tag": "Lint editorial placeholders (_site HTML)",
+          "durationMs": 44
+        },
+        {
+          "tag": "Lint editorial placeholders (source HTML)",
+          "durationMs": 46
+        },
+        {
+          "tag": "NEWS integrity",
+          "durationMs": 50
+        },
+        {
+          "tag": "Predeploy gate (slug)",
+          "durationMs": 74
         }
       ]
     }

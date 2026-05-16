@@ -279,4 +279,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny | FitPo50"
   section: "Zdrowie"
   summary: "Co naprawdę dzieje się z ciałem podczas 36-godzinnego postu? Sprawdzamy najnowsze badania (2024–2025) i obalamy lub potwierdzamy popularne twierdzenia."
+- url: https://fitpo50.pl/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier.html
+  title: "Śniadanie białkowo-tłuszczowe: jak odciąć cukrowe zachcianki? | FitPo50"
+  section: "Jedzenie"
+  summary: "Śniadanie bogate w białko i tłuszcz stabilizuje poziom cukru we krwi i redukuje popołudniowe zjazdy energii. Sprawdź, co jeść rano i dlaczego to działa."
 

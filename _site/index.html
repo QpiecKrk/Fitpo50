@@ -1444,14 +1444,14 @@
         <picture aria-hidden="true">
           <source id="latestArticleImageAvifSource" srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif" type="image/avif">
           <source srcset="./assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/post-36h-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/sniadanie-bialkowo-tluszczowe-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Co naprawdę dzieje się z ciałem podczas 36-godzinnego postu? Sprawdzamy najnowsze badania (2024–2025) i obalamy lub potwierdzamy popularne twierdzenia.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="post-36-godzinny-cud-czy-mit-badania-vs-hype.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Śniadanie białkowo-tłuszczowe: jak odciąć cukrowe zachcianki?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Śniadanie bogate w białko i tłuszcz stabilizuje poziom cukru we krwi i redukuje popołudniowe zjazdy energii. Sprawdź, co jeść rano i dlaczego to działa.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny',
-        excerpt: 'Co naprawdę dzieje się z ciałem podczas 36-godzinnego postu? Sprawdzamy najnowsze badania (2024–2025) i obalamy lub potwierdzamy popularne twierdzenia.',
-        image: './assets/post-36h-hero.webp',
-        url: 'post-36-godzinny-cud-czy-mit-badania-vs-hype.html'
+        title: 'Śniadanie białkowo-tłuszczowe: jak odciąć cukrowe zachcianki?',
+        excerpt: 'Śniadanie bogate w białko i tłuszcz stabilizuje poziom cukru we krwi i redukuje popołudniowe zjazdy energii. Sprawdź, co jeść rano i dlaczego to działa.',
+        image: './assets/sniadanie-bialkowo-tluszczowe-hero.webp',
+        url: 'sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,7 +2236,14 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
-          category: 'Zdrowie',
+          category: 'Jedzenie',
+          title: 'Śniadanie białkowo-tłuszczowe: jak odciąć cukrowe zachcianki?',
+          excerpt: 'Śniadanie bogate w białko i tłuszcz stabilizuje poziom cukru we krwi i redukuje popołudniowe zjazdy energii. Sprawdź, co jeść rano i dlaczego to działa.',
+          image: './assets/sniadanie-bialkowo-tluszczowe-hero.webp',
+          url: 'sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier.html'
+        },
+        {
+          category: 'Ciekawe',
           title: 'Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny',
           excerpt: 'Co naprawdę dzieje się z ciałem podczas 36-godzinnego postu? Sprawdzamy najnowsze badania (2024–2025) i obalamy lub potwierdzamy popularne twierdzenia.',
           image: './assets/post-36h-hero.webp',
@@ -2248,13 +2255,6 @@
           excerpt: 'AI już działa w gabinetach i szpitalach. Sprawdzamy, co mówią badania o realnym wpływie na zdrowie pacjentów.',
           image: './assets/ai-medycyna-lekarz-monitor-rtg-hero.webp',
           url: 'ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Kreatyna i białko po 50-tce: jak łączyć dla efektów? – praktyczny',
-          excerpt: 'Kreatyna i białko po 50-tce: ile brać, kiedy i jak je łączyć? Najnowsze badania 2024–2025, obalone mity i konkretny protokół dla aktywnych po pięćdziesiątce.',
-          image: './assets/kreatyna-bialko-po-50-hero.webp',
-          url: 'kreatyna-i-bialko-po-50-tce-jak-laczyc.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
