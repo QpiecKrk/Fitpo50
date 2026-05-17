@@ -81,6 +81,7 @@ mkdir -p "$OUTPUT_DIR"
 rsync -a \
   --delete \
   --exclude=".git/" \
+  --exclude="node_modules/" \
   --exclude=".gitignore" \
   --exclude=".agent/" \
   --exclude=".agent-mem/" \

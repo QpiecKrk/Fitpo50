@@ -8,6 +8,7 @@ on:
 
 jobs:
   gate:
+    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, '[auto-sync] news status ') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,4 +21,3 @@ jobs:
 
       - name: Run predeploy gate
         run: node scripts/predeploy-gate.js
-

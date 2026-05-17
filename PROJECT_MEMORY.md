@@ -975,6 +975,22 @@ Jesli artykul ma obrazy:
   - alternatywnie: `npm run prepush:local`, jesli obejmuje ten sam zakres walidacji
   - dopiero potem `git push`.
 
+## Ustalenia operacyjne 2026-05-17 (SEO sync + workflow hygiene)
+
+- Rozdzielenie tytułów SEO vs social jest świadome i docelowe:
+  - `<title>` mapujemy z `seo_title`,
+  - `og:title`, `twitter:title` oraz `h1` mapujemy z `title`,
+  - warning gate o różnicy między `<title>` a `og:title` / `twitter:title` traktujemy jako celowy kompromis SEO/social, a nie błąd do "naprawienia".
+
+- `scripts/article-sync-pro.js` jest nowym narzędziem kanonicznym do synchronizacji SEO i listingów:
+  - źródłem prawdy są pola w `data/import/*.json`,
+  - zalecany workflow: najpierw `--dry-run`, potem właściwy zapis,
+  - unikamy ręcznej edycji tytułów, meta description, JSON-LD headline/description i tekstów kart listingowych bezpośrednio w HTML, jeśli zmiana może zostać wykonana przez ten skrypt.
+
+- Higiena workflow i eksportu:
+  - eksport statyczny nie może kopiować `node_modules/` do katalogu wynikowego,
+  - techniczne commity `[auto-sync] news status ...` z panelu NEWS nie powinny uruchamiać pełnych gate'ów publikacyjnych, bo są stanem pomocniczym procesu redakcyjnego, a nie docelowym publishem treści.
+
 ## Ustalenia operacyjne 2026-05-10 (AEO/GEO/E-E-A-T + IndexNow)
 
 - `speakable` w artykulach i generatorze musi byc zawężony (bez szerokiego `.article-content p`):

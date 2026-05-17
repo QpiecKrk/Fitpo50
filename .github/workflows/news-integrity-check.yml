@@ -27,6 +27,7 @@ on:
 
 jobs:
   news_integrity:
+    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, '[auto-sync] news status ') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
