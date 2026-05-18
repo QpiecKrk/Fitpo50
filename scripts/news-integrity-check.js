@@ -36,6 +36,10 @@ function hasAnyVariant(dirRel, imageBase) {
   return IMAGE_EXTS.some((ext) => exists(`${dirRel}/${imageBase}.${ext}`));
 }
 
+function isRuntimeNewsThumb(imageBase) {
+  return /^news_20/i.test(String(imageBase || '').trim());
+}
+
 function validateFilesPresence() {
   for (const rel of REQUIRED_FILES) {
     if (!exists(rel)) errors.push(`Brak pliku: ${rel}`);
@@ -87,7 +91,11 @@ function validatePublishedImagesAndFallback() {
     }
 
     if (!hasAnyVariant('assets/news', imageBase)) {
-      errors.push(`Brak miniatur dla "${title}" w assets/news (image_base="${imageBase}").`);
+      if (isRuntimeNewsThumb(imageBase)) {
+        warnings.push(`Brak runtime miniatur dla "${title}" w assets/news (image_base="${imageBase}") — pomijam jako asset serwerowy.`);
+      } else {
+        errors.push(`Brak miniatur dla "${title}" w assets/news (image_base="${imageBase}").`);
+      }
     }
     if (!hasAnyVariant('_site/assets/news', imageBase)) {
       warnings.push(`Brak miniatur dla "${title}" w _site/assets/news (image_base="${imageBase}").`);

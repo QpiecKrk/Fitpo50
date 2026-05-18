@@ -45,6 +45,10 @@ function readJson(relPath) {
   return JSON.parse(readUtf8(relPath));
 }
 
+function isRuntimeNewsThumb(imageBase) {
+  return /^news_20/i.test(String(imageBase || '').trim());
+}
+
 function normalizeSlug(input) {
   const s = String(input || '').trim();
   if (!s) return '';
@@ -179,7 +183,11 @@ function validatePublishedNewsImages(errors, warnings) {
       if (rel.startsWith('_site/')) {
         if (!hasSiteVariant && !hasSourceVariant) {
           const title = String(item.title || item.id || '(bez tytułu)');
-          errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${siteDir}/ oraz ${sourceDir}/`);
+          if (isRuntimeNewsThumb(imageBase)) {
+            warnings.push(`${rel}: opublikowany news "${title}" ma runtime image_base="${imageBase}", ale brak miniatur w ${siteDir}/ oraz ${sourceDir}/ w repo.`);
+          } else {
+            errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${siteDir}/ oraz ${sourceDir}/`);
+          }
         } else if (!hasSiteVariant && hasSourceVariant) {
           const title = String(item.title || item.id || '(bez tytułu)');
           warnings.push(`${rel}: opublikowany news "${title}" ma miniatury tylko w ${sourceDir}/ (brak mirroru w ${siteDir}/).`);
@@ -189,7 +197,11 @@ function validatePublishedNewsImages(errors, warnings) {
 
       if (!hasSourceVariant) {
         const title = String(item.title || item.id || '(bez tytułu)');
-        errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${sourceDir}/`);
+        if (isRuntimeNewsThumb(imageBase)) {
+          warnings.push(`${rel}: opublikowany news "${title}" ma runtime image_base="${imageBase}", ale brak miniatur w ${sourceDir}/ w repo.`);
+        } else {
+          errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${sourceDir}/`);
+        }
       }
     }
   }
