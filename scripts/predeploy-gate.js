@@ -61,6 +61,10 @@ function extractLatestLink(indexHtml) {
 }
 
 function extractReadingFallbackUrls(indexHtml) {
+  return extractReadingFallbackCards(indexHtml).map((item) => item.url);
+}
+
+function extractReadingFallbackCards(indexHtml) {
   const start = indexHtml.indexOf('function renderReadingFallback()');
   if (start === -1) return [];
   const end = indexHtml.indexOf('readingRoomGrid.innerHTML', start);
@@ -69,12 +73,19 @@ function extractReadingFallbackUrls(indexHtml) {
   const arrayMatch = body.match(/const fallback = \[([\s\S]*?)\]\s*;/i);
   if (!arrayMatch) return [];
   const block = arrayMatch[1];
-  const urls = [];
-  const rx = /url:\s*'((?:\\'|[^'])*)'/g;
+
+  const cards = [];
+  const rx = /\{\s*category:\s*'((?:\\'|[^'])*)',\s*title:\s*'((?:\\'|[^'])*)',\s*excerpt:\s*'((?:\\'|[^'])*)',\s*image:\s*'((?:\\'|[^'])*)',\s*url:\s*'((?:\\'|[^'])*)'\s*\}/gms;
   for (const m of block.matchAll(rx)) {
-    urls.push(m[1].replace(/\\'/g, "'"));
+    cards.push({
+      category: m[1].replace(/\\'/g, "'"),
+      title: m[2].replace(/\\'/g, "'"),
+      excerpt: m[3].replace(/\\'/g, "'"),
+      image: m[4].replace(/\\'/g, "'"),
+      url: m[5].replace(/\\'/g, "'"),
+    });
   }
-  return urls;
+  return cards;
 }
 
 function extractPoradyCardCount(poradyHtml) {
@@ -96,6 +107,174 @@ function hasInSitemap(sitemapXml, hrefOrUrl) {
   if (!localHref) return false;
   if (/^https?:\/\//i.test(localHref)) return sitemapXml.includes(localHref);
   return sitemapXml.includes(`https://fitpo50.pl/${localHref}`);
+}
+
+function normalizeArticleHref(href) {
+  return String(href || '')
+    .trim()
+    .replace(/^\.\//, '')
+    .replace(/[?#].*$/, '');
+}
+
+function readImportJsonBySlug(slug) {
+  const normalizedSlug = normalizeSlug(slug);
+  if (!normalizedSlug) return null;
+  const importDir = path.join(ROOT, 'data', 'import');
+  if (!fs.existsSync(importDir)) return null;
+  const files = fs.readdirSync(importDir).filter((name) => name.endsWith('.json'));
+  for (const file of files) {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(path.join(importDir, file), 'utf8'));
+      if (String(parsed?.slug || '').trim() === normalizedSlug) return parsed;
+    } catch (_) {
+      continue;
+    }
+  }
+  return null;
+}
+
+function categoryPageFromImportCategory(category) {
+  switch (String(category || '').trim().toLowerCase()) {
+    case 'zdrowie':
+      return 'zdrowie.html';
+    case 'jedzenie':
+      return 'jedzenie.html';
+    case 'ruch':
+    case 'rusz-sie':
+      return 'rusz-sie.html';
+    case 'ciekawe':
+      return 'ciekawe.html';
+    default:
+      return '';
+  }
+}
+
+function inferHomepageCategoryFromListings(href) {
+  const normalizedHref = normalizeArticleHref(href);
+  if (!normalizedHref) return '';
+
+  const categoryPages = [
+    { file: 'zdrowie.html', label: 'Zdrowie' },
+    { file: 'jedzenie.html', label: 'Jedzenie' },
+    { file: 'rusz-sie.html', label: 'Ruch' },
+    { file: 'ciekawe.html', label: 'Ciekawe' },
+  ];
+
+  for (const page of categoryPages) {
+    if (!exists(page.file)) continue;
+    const html = readUtf8(page.file);
+    const rx = new RegExp(`href=["'](?:\\.\\/)?${normalizedHref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["']`, 'i');
+    if (rx.test(html)) return page.label;
+  }
+
+  return '';
+}
+
+function normalizeImageBase(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  const withoutQuery = raw.replace(/[?#].*$/, '');
+  const file = path.basename(withoutQuery);
+  return file.replace(/\.(avif|webp|png|jpe?g)$/i, '');
+}
+
+function extractLatestArticleImage(indexHtml) {
+  const match = indexHtml.match(/<img class="latest-article__bg" id="latestArticleImage"[^>]*src="([^"]+)"/i);
+  return match ? String(match[1] || '').trim() : '';
+}
+
+function validateReadingFallbackCategories(indexHtml, errors, warnings) {
+  const cards = extractReadingFallbackCards(indexHtml);
+  cards.forEach((card, idx) => {
+    const expected = inferHomepageCategoryFromListings(card.url);
+    if (!expected) {
+      warnings.push(`index.html: nie udało się ustalić kategorii dla kafelka Czytelni #${idx + 1} (${card.url}).`);
+      return;
+    }
+    if (String(card.category || '').trim() !== expected) {
+      errors.push(`index.html: kafelek Czytelni #${idx + 1} ma kategorię "${card.category}", ale ${card.url} należy do "${expected}".`);
+    }
+  });
+}
+
+function validateReadingFallbackImages(indexHtml, errors, warnings) {
+  const cards = extractReadingFallbackCards(indexHtml);
+  cards.forEach((card, idx) => {
+    const normalizedHref = normalizeArticleHref(card.url);
+    if (!normalizedHref || !exists(normalizedHref)) return;
+    const articleHtml = readUtf8(normalizedHref);
+    const articleHeroBase = normalizeImageBase(articleHtml.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i)?.[1] || '');
+    const cardImageBase = normalizeImageBase(card.image);
+    if (!articleHeroBase) {
+      warnings.push(`index.html: nie udało się ustalić hero artykułu dla kafelka Czytelni #${idx + 1} (${card.url}).`);
+      return;
+    }
+    if (!cardImageBase) {
+      errors.push(`index.html: kafelek Czytelni #${idx + 1} (${card.url}) nie ma poprawnego image.`);
+      return;
+    }
+    if (articleHeroBase !== cardImageBase) {
+      errors.push(`index.html: kafelek Czytelni #${idx + 1} ma obraz "${cardImageBase}", ale artykuł ${card.url} ma hero "${articleHeroBase}".`);
+    }
+  });
+}
+
+function validateArticleHeroConsistency(relPath, errors, warnings) {
+  if (!exists(relPath)) return;
+  const html = readUtf8(relPath);
+
+  const preloadMatch = html.match(/<link\s+rel="preload"[^>]*as="image"[^>]*href="([^"]+)"/i);
+  const heroBlockMatch = html.match(/<div class="article-hero[^"]*"[\s\S]*?<picture>([\s\S]*?)<\/picture>/i);
+  const avifMatch = heroBlockMatch ? heroBlockMatch[1].match(/<source[^>]*srcset="([^"]+\.avif[^"]*)"/i) : null;
+  const webpMatch = heroBlockMatch ? heroBlockMatch[1].match(/<source[^>]*srcset="([^"]+\.webp[^"]*)"/i) : null;
+  const imgMatch = heroBlockMatch ? heroBlockMatch[1].match(/<img[^>]*src="([^"]+)"/i) : null;
+  const ogMatch = html.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i);
+  const twitterMatch = html.match(/<meta\s+name="twitter:image"\s+content="([^"]+)"/i);
+  const schemaMatch = html.match(/"image"\s*:\s*"([^"]+)"/i);
+
+  const bases = [
+    { label: 'preload hero', value: normalizeImageBase(preloadMatch ? preloadMatch[1] : '') },
+    { label: 'hero source avif', value: normalizeImageBase(avifMatch ? avifMatch[1] : '') },
+    { label: 'hero source webp', value: normalizeImageBase(webpMatch ? webpMatch[1] : '') },
+    { label: 'hero img jpg', value: normalizeImageBase(imgMatch ? imgMatch[1] : '') },
+    { label: 'og:image', value: normalizeImageBase(ogMatch ? ogMatch[1] : '') },
+    { label: 'twitter:image', value: normalizeImageBase(twitterMatch ? twitterMatch[1] : '') },
+    { label: 'BlogPosting.image', value: normalizeImageBase(schemaMatch ? schemaMatch[1] : '') },
+  ];
+
+  const missing = bases.filter((item) => !item.value);
+  missing.forEach((item) => {
+    errors.push(`${relPath}: brak pola hero w kontrakcie "${item.label}".`);
+  });
+  if (missing.length) return;
+
+  const uniqueBases = Array.from(new Set(bases.map((item) => item.value)));
+  if (uniqueBases.length > 1) {
+    errors.push(`${relPath}: niespójny hero image między preload/source/img/social/schema (${bases.map((item) => `${item.label}=${item.value}`).join(', ')}).`);
+  }
+
+  if (!heroBlockMatch) {
+    warnings.push(`${relPath}: nie znaleziono bloku .article-hero do kontroli spójności hero.`);
+  }
+}
+
+function validateLatestArticleImage(indexHtml, latestHref, errors, warnings) {
+  const normalizedHref = normalizeArticleHref(latestHref);
+  if (!normalizedHref || !exists(normalizedHref)) return;
+  const articleHtml = readUtf8(normalizedHref);
+  const articleHeroBase = normalizeImageBase(articleHtml.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i)?.[1] || '');
+  const latestImageBase = normalizeImageBase(extractLatestArticleImage(indexHtml));
+  if (!articleHeroBase) {
+    warnings.push(`index.html: nie udało się ustalić hero artykułu dla latestArticle (${latestHref}).`);
+    return;
+  }
+  if (!latestImageBase) {
+    errors.push(`index.html: latestArticleImage nie ma poprawnego src dla ${latestHref}.`);
+    return;
+  }
+  if (articleHeroBase !== latestImageBase) {
+    errors.push(`index.html: latestArticleImage używa "${latestImageBase}", ale artykuł ${latestHref} ma hero "${articleHeroBase}".`);
+  }
 }
 
 function assertFileMirror(relPath, errors) {
@@ -264,6 +443,11 @@ function main() {
       errors.push('Pierwszy kafelek fallbacku na index.html nie zgadza się z latestArticleLink.');
     }
   }
+  validateReadingFallbackCategories(indexHtml, errors, warnings);
+  validateReadingFallbackImages(indexHtml, errors, warnings);
+  if (latestHref) {
+    validateLatestArticleImage(indexHtml, latestHref, errors, warnings);
+  }
 
   const cardCount = extractPoradyCardCount(poradyHtml);
   const badgeCount = extractPoradyBadgeCount(poradyHtml);
@@ -299,8 +483,25 @@ function main() {
     if (!exists(slugMirror)) errors.push(`Brak pliku artykulu w _site: ${slugMirror}`);
 
     const slugNeedle = `${slug}.html`;
+    const importJson = readImportJsonBySlug(slug);
+    const categoryPage = categoryPageFromImportCategory(importJson?.category);
     if (!indexHtml.includes(slugNeedle)) warnings.push(`index.html nie zawiera "${slugNeedle}"`);
     if (!poradyHtml.includes(slugNeedle)) errors.push(`porady.html nie zawiera "${slugNeedle}"`);
+    if (categoryPage) {
+      if (!exists(categoryPage)) {
+        errors.push(`Brak strony kategorii dla artykułu: ${categoryPage}`);
+      } else if (!readUtf8(categoryPage).includes(slugNeedle)) {
+        errors.push(`${categoryPage} nie zawiera "${slugNeedle}"`);
+      }
+      const categoryMirror = categoryPage ? `_site/${categoryPage}` : '';
+      if (categoryMirror && !exists(categoryMirror)) {
+        errors.push(`Brak mirroru strony kategorii: ${categoryMirror}`);
+      } else if (categoryMirror && !readUtf8(categoryMirror).includes(slugNeedle)) {
+        errors.push(`${categoryMirror} nie zawiera "${slugNeedle}"`);
+      }
+    } else {
+      warnings.push(`Nie udało się ustalić strony kategorii dla sluga "${slug}" z data/import.`);
+    }
     if (!hasInSitemap(sitemapXml, slugNeedle)) errors.push(`sitemap.xml nie zawiera "${slugNeedle}"`);
     if (!llmsTxt.includes(`https://fitpo50.pl/${slugNeedle}`)) warnings.push(`llms.txt nie zawiera "${slugNeedle}"`);
 
@@ -308,6 +509,7 @@ function main() {
       const contract = validateArticleHeadFile(path.join(ROOT, slugFile));
       contract.errors.forEach((e) => errors.push(`${slugFile}: ${e}`));
       contract.warnings.forEach((w) => warnings.push(`${slugFile}: ${w}`));
+      validateArticleHeroConsistency(slugFile, errors, warnings);
     }
   }
 

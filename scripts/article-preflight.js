@@ -150,6 +150,10 @@ function main() {
   const sections = Array.isArray(json.sections) ? json.sections : [];
   const quickAnswer = utils.stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
   const quickAnswerWords = utils.countWords(quickAnswer);
+  const rawSeoTitle = String(json.seo_title || '').replace(/\s+/g, ' ').trim();
+  if (/\|\s*fitpo50\s*$/i.test(rawSeoTitle)) {
+    warnings.push('seo_title zawiera już suffix "| FitPo50" — importer go znormalizuje, ale lepiej traktować seo_title jako bazę bez suffixu.');
+  }
   if (!quickAnswer) {
     errors.push(`Brak quick_answer (wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów).`);
   } else if (quickAnswerWords < POLICY.WORDS.QUICK_ANSWER_MIN || quickAnswerWords > POLICY.WORDS.QUICK_ANSWER_MAX) {

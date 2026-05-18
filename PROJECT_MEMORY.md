@@ -1038,6 +1038,42 @@ Jesli artykul ma obrazy:
     - `validateBreadcrumbList()`
   - nie przywracamy ich bez realnego podpięcia do aktywnej ścieżki walidacyjnej.
 
+- Domyślna kolejność pracy przy nowych artykułach i dużych poprawkach:
+  - najpierw poprawiamy `data/import/*.json`,
+  - potem uruchamiamy `article-preflight`,
+  - dopiero później `import-article` / `article-pipeline`,
+  - HTML, PDF, schema, listingi i `_site` traktujemy jako wynik,
+  - ręczne poprawki HTML robimy dopiero na końcu i tylko wtedy, gdy problem dotyczy layoutu, osadzenia mediów albo finalnego szlifu redakcyjnego.
+
+- JSON od modeli zewnętrznych (np. Claude) traktujemy jako draft wymagający normalizacji:
+  - poprawki jakościowe, SEO, linkowanie, FAQ, Quick Answer, H2, źródła i copy wykonujemy najpierw w JSON,
+  - celem jest, żeby większość pracy redakcyjnej była wykonana przed generowaniem HTML.
+
+- Ostatni refaktor silnika publikacji został zrobiony właśnie pod tę kolejność:
+  - `article-preflight.js` sprawdza JSON i assety wejściowe,
+  - `import-article.js` generuje HTML/PDF/schema według tej samej polityki,
+  - `validate-article-standard.js` i `predeploy-gate.js` weryfikują finalny output,
+  - `article-sync-pro.js` służy do późniejszych, kontrolowanych synców SEO/listingów bez ręcznego przeklejania zmian po HTML-ach.
+
+- Kontrakty anty-regresyjne po case `apob-norma-cena-jak-czytac-wynik`:
+  - Hero consistency contract:
+    - dla artykułu ten sam `hero_image` musi być użyty spójnie w:
+      - preload hero,
+      - `<picture><source ... .avif>`,
+      - `<picture><source ... .webp>`,
+      - fallback `<img ... .jpg>`,
+      - `og:image`,
+      - `twitter:image`,
+      - `BlogPosting.image`.
+    - `article-template-bento.html` NIE może mieć hardkodowanych `source srcset` typu `Hero_Porady1.*`; zawsze używa `{{HERO_IMAGE}}.*`.
+    - `predeploy-gate.js` ma to sprawdzać dla artykułu po `--slug`.
+  - Homepage Reading Room contract:
+    - badge kategorii w `index.html -> renderReadingFallback()` musi zgadzać się z realną kategorią artykułu wynikającą z listingów kategorii / JSON-a źródłowego.
+    - importer NIE może zgadywać `Ciekawe` dla „przesuwanego” kafelka; kategorię trzeba wyliczać po URL-u artykułu.
+  - Listing read-time contract:
+    - wszędzie w listingach i atrybutach pomocniczych używamy pełnego formatu `X min czytania`,
+    - skrót `X min` jest błędem generatora i ma być łapany przez gate.
+
 ## Ustalenia operacyjne 2026-05-10 (AEO/GEO/E-E-A-T + IndexNow)
 
 - `speakable` w artykulach i generatorze musi byc zawężony (bez szerokiego `.article-content p`):

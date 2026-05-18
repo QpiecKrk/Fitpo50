@@ -286,7 +286,10 @@ function truncateAtWordBoundary(text, maxChars) {
 }
 
 function normalizeSeoTitleBase(rawTitle) {
-  const clean = String(rawTitle || '').replace(/\s+/g, ' ').trim();
+  const clean = String(rawTitle || '')
+    .replace(/\s+\|\s*FitPo50$/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
   return truncateAtWordBoundary(clean, POLICY.TITLE.MAX);
 }
 
@@ -1662,6 +1665,8 @@ function buildListingContext(payload) {
     categoryLabel: payload.category.label,
     readTime,
     readTimeShort,
+    heroImageBase: payload.heroImage,
+    heroImageAvif: `./assets/${payload.heroImage}.avif`,
     heroImageWebp: `./assets/${payload.heroImage}.webp`,
     searchText: searchTextFromPayload(payload),
   };
@@ -1697,7 +1702,7 @@ function upsertPoradyListing(html, ctx) {
 
   if (!hasCard) {
     const card = [
-      `          <a href="${ctx.href}" class="article-index-card reveal" data-article-item data-category="${ctx.categoryKey}" data-order="${nextOrder}" data-article-title="${escapeHtmlAttr(ctx.title)}" data-read-time="${escapeHtmlAttr(ctx.readTimeShort)}" data-search-text="${escapeHtmlAttr(ctx.searchText)}">`,
+      `          <a href="${ctx.href}" class="article-index-card reveal" data-article-item data-category="${ctx.categoryKey}" data-order="${nextOrder}" data-article-title="${escapeHtmlAttr(ctx.title)}" data-read-time="${escapeHtmlAttr(ctx.readTime)}" data-search-text="${escapeHtmlAttr(ctx.searchText)}">`,
       '            <div class="article-index-card__top">',
       `              <span class="article-index-card__label">${escapeHtml(ctx.categoryLabel)}</span>`,
       `              <span class="article-index-card__meta">${escapeHtml(ctx.readTime)}</span>`,
@@ -1782,6 +1787,82 @@ function unescapeJsSingleQuoted(value) {
     .replace(/\\'/g, "'");
 }
 
+function categoryLabelFromKey(key) {
+  switch (String(key || '').trim().toLowerCase()) {
+    case 'zdrowie':
+      return 'Zdrowie';
+    case 'jedzenie':
+      return 'Jedzenie';
+    case 'ruch':
+    case 'rusz-sie':
+      return 'Ruch';
+    case 'ciekawe':
+      return 'Ciekawe';
+    default:
+      return '';
+  }
+}
+
+function inferCategoryLabelFromHref(href) {
+  const normalizedHref = String(href || '')
+    .trim()
+    .replace(/^\.\//, '')
+    .replace(/[?#].*$/, '');
+  if (!normalizedHref) return 'Ciekawe';
+
+  const categoryPages = [
+    { file: 'zdrowie.html', label: 'Zdrowie' },
+    { file: 'jedzenie.html', label: 'Jedzenie' },
+    { file: 'rusz-sie.html', label: 'Ruch' },
+    { file: 'ciekawe.html', label: 'Ciekawe' },
+  ];
+
+  for (const page of categoryPages) {
+    const pagePath = path.join(ROOT, page.file);
+    if (!fs.existsSync(pagePath)) continue;
+    const html = fs.readFileSync(pagePath, 'utf8');
+    const rx = new RegExp(`href=["'](?:\\.\\/)?${escapeRegex(normalizedHref)}["']`, 'i');
+    if (rx.test(html)) return page.label;
+  }
+
+  const slug = normalizedHref.replace(/\.html$/i, '');
+  const importDir = path.join(ROOT, 'data', 'import');
+  if (fs.existsSync(importDir)) {
+    const files = fs.readdirSync(importDir).filter((name) => name.endsWith('.json'));
+    for (const file of files) {
+      try {
+        const json = JSON.parse(fs.readFileSync(path.join(importDir, file), 'utf8'));
+        if (String(json?.slug || '').trim() !== slug) continue;
+        const label = categoryLabelFromKey(json?.category);
+        if (label) return label;
+      } catch (_) {
+        continue;
+      }
+    }
+  }
+
+  return 'Ciekawe';
+}
+
+function inferHeroImageBaseFromHref(href) {
+  const normalizedHref = String(href || '')
+    .trim()
+    .replace(/^\.\//, '')
+    .replace(/[?#].*$/, '');
+  if (!normalizedHref || !fs.existsSync(path.join(ROOT, normalizedHref))) return '';
+  const html = fs.readFileSync(path.join(ROOT, normalizedHref), 'utf8');
+  const ogMatch = html.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i);
+  const preloadMatch = html.match(/<link\s+rel="preload"[^>]*as="image"[^>]*href="([^"]+)"/i);
+  const heroImgMatch = html.match(/<img class="article-hero[^"]*"[^>]*src="([^"]+)"/i);
+  return normalizeImageBase((ogMatch && ogMatch[1]) || (preloadMatch && preloadMatch[1]) || (heroImgMatch && heroImgMatch[1]) || '');
+}
+
+function inferHeroImageWebpFromHref(href, fallbackImage) {
+  const base = inferHeroImageBaseFromHref(href);
+  if (base) return `./assets/${base}.webp`;
+  return fallbackImage || '';
+}
+
 function extractCurrentLatestFromIndex(html) {
   const imageMatch = html.match(/<img class="latest-article__bg" id="latestArticleImage"[^>]*src="([^"]+)"/i);
   const titleMatch = html.match(/<h4 class="latest-article__title" id="latestArticleTitle">([\s\S]*?)<\/h4>/i);
@@ -1792,10 +1873,10 @@ function extractCurrentLatestFromIndex(html) {
   if (!url) return null;
 
   return {
-    category: 'Ciekawe',
+    category: inferCategoryLabelFromHref(url),
     title: stripTags(titleMatch ? titleMatch[1] : '').trim(),
     excerpt: stripTags(excerptMatch ? excerptMatch[1] : '').trim(),
-    image: imageMatch ? String(imageMatch[1] || '').trim() : '',
+    image: inferHeroImageWebpFromHref(url, imageMatch ? String(imageMatch[1] || '').trim() : ''),
     url,
   };
 }
@@ -1828,6 +1909,8 @@ function upsertIndexListing(html, ctx) {
   const previousLatest = extractCurrentLatestFromIndex(out);
   const previousFallback = extractReadingFallbackCardsFromIndex(out);
 
+  out = replaceFirstOrWarn(out, /(<source id="latestArticleImageAvifSource" srcset=")[^"]+(" type="image\/avif">)/, `$1${ctx.heroImageAvif}$2`, 'latestArticleImageAvifSource.srcset');
+  out = replaceFirstOrWarn(out, /(<source srcset=")[^"]+(" type="image\/webp">\s*<img class="latest-article__bg" id="latestArticleImage")/, `$1${ctx.heroImageWebp}$2`, 'latestArticleImageWebpSource.srcset');
   out = replaceFirstOrWarn(out, /(<img class="latest-article__bg" id="latestArticleImage"[^>]*src=")[^"]+(")/, `$1${ctx.heroImageWebp}$2`, 'latestArticleImage.src');
   out = replaceFirstOrWarn(out, /(<h4 class="latest-article__title" id="latestArticleTitle">)([\s\S]*?)(<\/h4>)/, `$1${escapeHtml(ctx.title)}$3`, 'latestArticleTitle');
   out = replaceFirstOrWarn(out, /(<p class="latest-article__excerpt" id="latestArticleExcerpt">)([\s\S]*?)(<\/p>)/, `$1${escapeHtml(ctx.excerpt)}$3`, 'latestArticleExcerpt');
@@ -1854,12 +1937,20 @@ function upsertIndexListing(html, ctx) {
   ];
 
   if (previousLatest && previousLatest.url !== ctx.href) {
-    composed.push(previousLatest);
+    composed.push({
+      ...previousLatest,
+      category: inferCategoryLabelFromHref(previousLatest.url) || previousLatest.category,
+      image: inferHeroImageWebpFromHref(previousLatest.url, previousLatest.image),
+    });
   }
 
   for (const item of previousFallback) {
     if (composed.find((x) => x.url === item.url)) continue;
-    composed.push(item);
+    composed.push({
+      ...item,
+      category: inferCategoryLabelFromHref(item.url) || item.category,
+      image: inferHeroImageWebpFromHref(item.url, item.image),
+    });
     if (composed.length >= 3) break;
   }
 

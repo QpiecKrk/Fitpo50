@@ -1,0 +1,288 @@
+{
+  "title": "Badanie ApoB: norma, cena i jak czytać wynik",
+  "slug": "apob-norma-cena-jak-czytac-wynik",
+  "meta_description": "ApoB to dokładniejszy wskaźnik ryzyka serca niż LDL. Sprawdź normy, ceny badania w Polsce i naucz się czytać wynik – szczególnie po pięćdziesiątce.",
+  "seo_title": "ApoB: norma, cena i interpretacja wyniku | FitPo50",
+  "listing_title": "Badanie ApoB: norma, cena i jak czytać wynik",
+  "listing_desc": "ApoB pokazuje liczbę aterogennych cząsteczek we krwi, dlatego lepiej niż LDL pomaga ocenić ryzyko sercowe po 50-tce.",
+  "category": "zdrowie",
+  "lead": "LDL masz w normie, a lekarz i tak kręci głową. Albo odwrotnie – LDL trochę za wysoki, ale ogólne ryzyko ma być niskie. Skąd ta sprzeczność? Badanie ApoB mierzy nie masę cholesterolu, lecz liczbę cząsteczek, które realnie atakują ściany tętnic. To różnica jak między ważeniem ciężarówek a liczeniem ich – i właśnie dlatego ApoB coraz częściej uzupełnia samo LDL w ocenie ryzyka sercowo-naczyniowego.",
+  "reading_time": 9,
+  "date_published": "2025-05-16",
+  "hero_image": "apob-hero",
+  "hero_alt": "Mężczyzna po pięćdziesiątce przegląda wyniki badań laboratoryjnych przy kawie",
+  "pdf_title": "Badanie ApoB po 50-tce – norma, cena i interpretacja wyniku",
+  "pdf_label": "Pobierz PDF – Badanie ApoB: norma, cena i jak czytać wynik",
+  "hero_motto_html": "<p>LDL jest w normie – zdanie, które może dawać fałszywe poczucie bezpieczeństwa. ApoB mówi więcej.</p>",
+  "key_takeaways": [
+    "ApoB mierzy liczbę aterogennych cząsteczek lipoprotein, nie ich masę – dlatego jest czulszym wskaźnikiem ryzyka niż samo LDL-C.",
+    "Norma laboratoryjna (55–140 mg/dL) to nie to samo co optymalny cel: osoby z wysokim ryzykiem sercowym powinny dążyć do ApoB poniżej 80 mg/dL.",
+    "Badanie kosztuje 60–100 zł, nie wymaga skierowania i trwa tyle co zwykłe pobranie krwi – wynik jest gotowy w 1–2 dni.",
+    "Szczególnie warto badać ApoB, gdy masz cukrzycę, nadwagę, wysokie trójglicerydy lub podejrzenie hipercholesterolemii rodzinnej – właśnie wtedy LDL może niedoszacowywać ryzyka."
+  ],
+  "sections": [
+    {
+      "title": "Czym właściwie jest ApoB i co tak naprawdę mierzy?",
+      "paragraphs_html": [
+        "<p>Apolipoproteina B (ApoB) to białko strukturalne lipoprotein aterogennych – cząsteczek, które pchają cholesterol w ściany tętnic. Kluczowa właściwość: <strong>każda cząsteczka lipoprotein aterogennych – LDL, VLDL, IDL czy lipoproteina(a) – niesie dokładnie jeden egzemplarz ApoB</strong>. Dzięki temu stężenie ApoB we krwi jest bezpośrednim pomiarem liczby cząsteczek mogących wywołać miażdżycę, niezależnie od tego, ile cholesterolu każda aktualnie transportuje.</p>",
+        "<p>Standardowy lipidogram mierzy masę cholesterolu – ile miligramów substancji tłuszczowej krąży we krwi. ApoB mierzy coś innego: ile ciężarówek jeździ po twoich tętnicach. Dwie osoby z identycznym LDL-C mogą mieć zupełnie różną liczbę cząsteczek LDL – jedne większe i mniej aktywne, drugie małe, gęste i bardziej aterogenne. Tylko ApoB pokaże tę różnicę. Jeśli chcesz pogłębić temat standardowego <a href=\"dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html\">lipidogramu i interpretacji jego wyników</a>, mamy oddzielny artykuł na ten temat. <a href=\"./zdrowie.html\">Więcej porad zdrowotnych po 50</a>.</p>"
+      ],
+      "image": {
+        "src": "./assets/apob-lipoproteiny-schemat.webp",
+        "alt": "Schemat cząsteczki LDL z zaznaczonym białkiem ApoB na powierzchni",
+        "caption": "Każda cząsteczka LDL ma jedną cząsteczkę ApoB – stąd ApoB = licznik cząsteczek aterogennych"
+      }
+    },
+    {
+      "title": "Czy ApoB naprawdę przewiduje ryzyko lepiej niż LDL-cholesterol?",
+      "paragraphs_html": [
+        "<p>To nie jest pytanie retoryczne – jest na nie konkretna odpowiedź z badań. Duża metaanaliza z <em>Circulation</em> wykazała, że ApoB jest znacznie silniejszym predyktorem ryzyka niż LDL-C. Z tego powodu Europejskie Towarzystwo Kardiologiczne już w 2019 roku uznało w wytycznych ApoB za najdokładniejszy wskaźnik adekwatności leczenia u pacjentów podwyższonego ryzyka.</p>",
+        "<p>Skąd ta rozbieżność między LDL a ApoB w praktyce? Najczęściej pojawia się u osób z <strong>podwyższonymi trójglicerydami, cukrzycą, otyłością lub insulinoopornością</strong>. W tych przypadkach we krwi krąży wiele małych, gęstych cząsteczek LDL bogatych w ApoB, ale ubogich w cholesterol – więc LDL-C wychodzi w granicach normy, a prawdziwa liczba aterogennych pocisków jest wysoka. ApoB to właśnie demaskuje. Więcej o tym, dlaczego samo LDL może nie wystarczyć, znajdziesz w artykule o <a href=\"dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html\">cholesterolu LDL po pięćdziesiątce</a>.</p>"
+      ],
+      "image": {
+        "src": "./assets/pob-vs-ldl-porownanie.webp",
+        "alt": "Porównanie graficzne pomiaru LDL-cholesterol vs ApoB – masa kontra liczba cząsteczek",
+        "caption": "LDL-C mierzy masę, ApoB mierzy liczbę – dlatego mogą dawać sprzeczne informacje"
+      }
+    },
+    {
+      "title": "Jakie normy ApoB obowiązują i skąd je wziąć?",
+      "paragraphs_html": [
+        "<p>Tu zaczyna się zamieszanie, bo wynik z laboratorium podaje zakres referencyjny, a kardiolodzy posługują się <em>celami terapeutycznymi</em> – i to są dwie różne rzeczy. Zakres referencyjny laboratoryjny (oparty na populacji ogólnej) wynosi zazwyczaj <strong>55–140 mg/dL dla mężczyzn i 55–125 mg/dL dla kobiet</strong>. Tyle że mieszczenie się w normie laboratoryjnej nie oznacza automatycznie małego ryzyka sercowego.</p>",
+        "<p>Wytyczne towarzystw naukowych definiują cele terapeutyczne zależne od profilu ryzyka. National Lipid Association (2025) rekomenduje: poniżej 90 mg/dL dla ryzyka pośredniego, poniżej 70 mg/dL dla ryzyka wysokiego i poniżej 60 mg/dL dla ryzyka bardzo wysokiego. ESC/EAS wskazuje cel poniżej 80 mg/dL dla ryzyka wysokiego i poniżej 70 mg/dL dla bardzo wysokiego. AHA/ACC traktuje wartość powyżej 130 mg/dL jako czynnik zaostrzający ryzyko. Przelicznik jest prosty: jeśli wynik jest podany w g/L (jak często w polskich laboratoriach), pomnóż przez 100, żeby uzyskać mg/dL – czyli 0,98 g/L to 98 mg/dL.</p>",
+        "<p>Zestawienie celów terapeutycznych według grup ryzyka:</p>"
+      ],
+      "list_items": [
+        "Ryzyko niskie / brak czynników ryzyka: cel poniżej 100 mg/dL (1,0 g/L)",
+        "Ryzyko pośrednie (np. 1–2 czynniki ryzyka): cel poniżej 90 mg/dL (0,90 g/L) – wg NLA 2025",
+        "Ryzyko wysokie (np. cukrzyca, nadciśnienie + inne czynniki): cel poniżej 80 mg/dL (0,80 g/L)",
+        "Ryzyko bardzo wysokie (przebyty zawał, udar, hipercholesterolemia rodzinna): cel poniżej 70 mg/dL (0,70 g/L) lub nawet poniżej 60 mg/dL"
+      ],
+      "image": {
+        "src": "./assets/apob-normy-infografika.webp",
+        "alt": "Infografika z normami ApoB według poziomu ryzyka sercowo-naczyniowego",
+        "caption": "Norma laboratoryjna to nie cel – ważne jest, do jakiej grupy ryzyka należysz"
+      }
+    },
+    {
+      "title": "Jak przygotować się do badania ApoB i jak wygląda pobranie?",
+      "paragraphs_html": [
+        "<p>Badanie jest proste i niczym nie różni się od zwykłego pobrania krwi. Kilka zasad, żeby wynik był wiarygodny: przychodzisz na czczo, czyli ostatni posiłek najdalej 8–12 godzin wcześniej. Poprzedniego dnia unikasz tłustych potraw i alkoholu – obydwa mogą tymczasowo zaburzyć profil lipidowy. Najlepiej rano, nie później niż do godziny 10. Przed pobraniem chwila siedzenia w poczekalni i dwie szklanki wody – to tyle.</p>",
+        "<p>Wynik jest gotowy zazwyczaj w ciągu 1–2 dni roboczych. Badanie możesz zlecić sobie samodzielnie bez skierowania w każdym komercyjnym laboratorium diagnostycznym. Skierowanie od lekarza otwiera możliwość refundacji z NFZ, ale w praktyce jest rzadko wystawiane, bo ApoB nie jest badaniem rutynowym w polskim systemie. Warto łączyć je z pełnym <a href=\"dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html\">lipidogramem</a>, żeby interpretacja miała sens.</p>"
+      ],
+      "image": {
+        "src": "./assets/apob-pobranie-krwi.webp",
+        "alt": "Mężczyzna po pięćdziesiątce podczas pobrania krwi w laboratorium",
+        "caption": "Pobranie krwi na ApoB – na czczo, rano, bez stresu"
+      }
+    },
+    {
+      "title": "Ile kosztuje badanie ApoB w Polsce i gdzie je wykonać?",
+      "paragraphs_html": [
+        "<p>Cena badania ApoB w polskich laboratoriach komercyjnych waha się w granicach <strong>60–100 zł</strong>. Synevo wycenia je od 71 zł, prywatne sieci takie jak ALAB, Diagnostyka czy Medicover oferują podobne stawki. Nie potrzebujesz skierowania – po prostu zamawiasz test online lub w punkcie pobrań i gotowe. W ramach NFZ badanie jest co do zasady możliwe, ale wymaga skierowania i konkretnego wskazania medycznego; w praktyce lekarze POZ rzadko je wystawiają.</p>",
+        "<p>Finansowo najbardziej opłaca się łączyć ApoB z lipidogramem przy jednym pobraniu – oszczędzasz czas i nieraz dostaniesz niższą cenę za pakiet. Jeśli interesujesz się prewencją chorób sercowo-naczyniowych, o czym piszemy szerzej w artykule o <a href=\"hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html\">ryzyku sercowym po 50-tce</a>, dorzucenie ApoB do corocznego przeglądu krwi to 70–80 zł dobrze wydanych.</p>"
+      ],
+      "image": {
+        "src": "./assets/apob-laboratorium-wyniki.webp",
+        "alt": "Wydruk wyników badań laboratoryjnych z zaznaczonym wynikiem ApoB",
+        "caption": "ApoB: jedno pobranie, 60–100 zł, wynik gotowy w 2 dni"
+      }
+    },
+    {
+      "title": "Jak czytać wynik ApoB i co robić, gdy jest poza normą?",
+      "paragraphs_html": [
+        "<p>Wynik ApoB nigdy nie istnieje w próżni – liczy się razem z lipidogramem, profilem ryzyka i ewentualną Lp(a). Wysoki ApoB przy prawidłowym LDL-C oznacza zwykle dużo małych, gęstych cząsteczek LDL, bardziej aterogennych niż duże. Odwrotna sytuacja – wyższe LDL-C przy niskim ApoB – sugeruje większe, mniej aktywne cząstki. Dlatego oba pomiary razem dają obraz, którego żaden z nich osobno nie pokaże.</p>",
+        "<p>Co robić przy podwyższonym ApoB? Nie ma jednej odpowiedzi, bo zależy od profilu ryzyka. Lekarz ocenia, czy poziom wynika ze stylu życia (dieta bogata w nasycone tłuszcze, siedzący tryb życia, otyłość) czy z genetyki (np. hipercholesterolemia rodzinna). Interwencje obniżające ApoB to przede wszystkim statyny – obniżają zarówno LDL-C, jak i ApoB – a w cięższych przypadkach inhibitory PCSK9. Dla osób z bólem mięśni po statynach dostępne są alternatywy, o których piszemy w artykule o <a href=\"silownia-chroni-serce-przed-zawalem.html\">skutkach ubocznych statyn i alternatywach</a>.</p>",
+        "<p>Niskie ApoB poniżej dolnej granicy normy laboratoryjnej (poniżej 55 mg/dL) też wymaga diagnostyki – może towarzyszyć niedożywieniu, chorobom wątroby lub rzadkim schorzeniom genetycznym. To jednak zdecydowanie rzadszy problem niż wartości zbyt wysokie.</p>"
+      ],
+      "image": {
+        "src": "./assets/apob-interpretacja-wynikow.webp",
+        "alt": "Lekarz omawiający wyniki badań z pacjentem po pięćdziesiątce",
+        "caption": "Wysoki ApoB, normalne LDL – tę sytuację samo LDL nie wykryje"
+      }
+    },
+    {
+      "title": "Kto szczególnie powinien zbadać ApoB po pięćdziesiątce?",
+      "paragraphs_html": [
+        "<p>Po pięćdziesiątce ryzyko sercowo-naczyniowe z definicji rośnie – i to jest moment, kiedy warto wyjść poza minimum, jakim jest sam lipidogram. ApoB szczególnie przydaje się w sytuacjach, gdzie LDL-C może wprowadzać w błąd: u osób z podwyższonymi trójglicerydami (powyżej 1,7 mmol/L), cukrzycą typu 2 lub insulinoopornością, nadwagą lub otyłością brzuszną, a także u tych, w których rodzinie zdarzały się zawały i udary mimo normalnego cholesterolu.</p>",
+        "<p>Warto też zbadać ApoB, gdy LDL-C jest niskie po leczeniu statynami – właśnie wtedy ApoB może ujawnić, że mimo niskiej masy cholesterolu ciągle krąży zbyt wiele aterogennych cząsteczek. I odwrotnie: jeśli LDL-C wychodzi trochę za wysokie, ale ApoB jest w porządku, obraz ryzyka może być mniej dramatyczny niż wskazuje jedna liczba. To narzędzie do precyzyjnego kadrowania – nie zamiast lipidogramu, ale razem z nim.</p>"
+      ],
+      "image": {
+        "src": "./assets/apob-kto-powinien-badac.webp",
+        "alt": "Aktywny mężczyzna po pięćdziesiątce biegający w polskim mieście z zegarkiem sportowym",
+        "caption": "Po 50-tce ApoB daje pełniejszy obraz ryzyka niż samo LDL"
+      }
+    }
+  ],
+  "answer_blocks": [
+    {
+      "question": "Jaka jest prawidłowa norma ApoB?",
+      "answer": "Laboratoryjna norma referencyjna to zazwyczaj 55–140 mg/dL (mężczyźni) i 55–125 mg/dL (kobiety). Jednak cel terapeutyczny zależy od ryzyka: dla osób z ryzykiem wysokim poniżej 80 mg/dL, dla bardzo wysokiego poniżej 70 mg/dL. Uwaga: jednostki w Polsce to często g/L – przelicz razy 100, żeby mieć mg/dL."
+    },
+    {
+      "question": "Ile kosztuje badanie ApoB?",
+      "answer": "W polskich laboratoriach komercyjnych (Synevo, ALAB, Diagnostyka) badanie ApoB kosztuje od 60 do 100 zł. Nie potrzebujesz skierowania. Wynik jest gotowy w 1–2 dni robocze."
+    },
+    {
+      "question": "Czy ApoB jest lepsze niż LDL?",
+      "answer": "Na ogół dokładniejsze jako predyktor ryzyka sercowo-naczyniowego – szczególnie u osób z cukrzycą, otyłością, wysokimi trójglicerydami. Nie zastępuje lipidogramu, ale go uzupełnia. Razem dają obraz, którego żadne badanie osobno nie daje."
+    },
+    {
+      "question": "Jak przygotować się do badania ApoB?",
+      "answer": "Na czczo (8–12 h przerwa od posiłku), rano, najlepiej do 10:00. Poprzedniego dnia bez tłustych posiłków i alkoholu. Przed pobraniem 15 minut odpoczynku i 1–2 szklanki wody. Standardowe pobranie krwi z żyły."
+    },
+    {
+      "question": "Co oznacza wysokie ApoB przy normalnym LDL-C?",
+      "answer": "Oznacza, że we krwi krąży dużo małych, gęstych cząsteczek LDL bogatych w ApoB, ale ubogich w cholesterol. Samo LDL-C ich nie widzi. To częste przy insulinooporności, cukrzycy i wysokich trójglicerydach. Taka rozbieżność to sygnał do konsultacji z kardiologiem lub lipidologiem."
+    },
+    {
+      "question": "Czy badanie ApoB jest dostępne na NFZ?",
+      "answer": "Teoretycznie tak – przy skierowaniu od lekarza z uzasadnionym wskazaniem klinicznym. W praktyce lekarze POZ wystawiają je rzadko. Najprościej wykonać je prywatnie za 60–100 zł bez skierowania."
+    }
+  ],
+  "sources": [
+    {
+      "label": "National Lipid Association Expert Clinical Consensus on ApoB (2025) – PMC",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11734832/"
+    },
+    {
+      "label": "Meta-analiza: ApoB, LDL-C i non-HDL-C jako markery ryzyka CV – AHA Journals",
+      "url": "https://www.ahajournals.org/doi/10.1161/circoutcomes.110.959247"
+    },
+    {
+      "label": "Non-HDL cholesterol i ApoB w chorobach sercowo-naczyniowych – PMC (2025)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12295744/"
+    },
+    {
+      "label": "ApoB i ryzyko sercowo-naczyniowe – biomarker i cel terapeutyczny – PMC",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8540246/"
+    },
+    {
+      "label": "ApoB w ocenie ryzyka, diagnostyce i leczeniu chorób kardiometabolicznych – PMC (2025)",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12674602/"
+    },
+    {
+      "label": "Quest Diagnostics: ApoB i ryzyko sercowo-naczyniowe – wytyczne AHA/ACC i ESC",
+      "url": "https://www.questdiagnostics.com/healthcare-professionals/diagnostic-insights/articles/2022/apolipoprotein-b-and-cardiovascular-risk"
+    },
+    {
+      "label": "Synevo – badanie Apolipoproteina B, cena i normy",
+      "url": "https://www.synevo.pl/badanie/apolipoproteina-b/"
+    },
+    {
+      "label": "LekarzeBezKolejki – Apolipoproteina B: normy, kiedy badać, interpretacja",
+      "url": "https://lekarzebezkolejki.pl/blog/apolipoproteina-b-apob-kiedy-warto-zbadac-jej-stezenie-normy-niski-i-wysoki-poziom-apob/w-4500"
+    },
+    {
+      "label": "Future Cardiology (2025): rola ApoB w zarządzaniu ryzykiem sercowo-naczyniowym",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/14796678.2025.2535184"
+    }
+  ],
+  "faq_research": [
+    {
+      "question": "Jaka jest prawidłowa norma ApoB?",
+      "source_label": "NLA Expert Clinical Consensus on ApoB – PMC",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11734832/"
+    },
+    {
+      "question": "Ile kosztuje badanie ApoB?",
+      "source_label": "Synevo – badanie Apolipoproteina B, cena",
+      "source_url": "https://www.synevo.pl/badanie/apolipoproteina-b/"
+    },
+    {
+      "question": "Czy ApoB jest lepsze niż LDL?",
+      "source_label": "Meta-analiza ApoB vs LDL-C vs non-HDL-C – AHA Journals",
+      "source_url": "https://www.ahajournals.org/doi/10.1161/circoutcomes.110.959247"
+    },
+    {
+      "question": "Jak przygotować się do badania ApoB?",
+      "source_label": "LekarzeBezKolejki – Apolipoproteina B: przygotowanie do badania",
+      "source_url": "https://lekarzebezkolejki.pl/blog/apolipoproteina-b-apob-kiedy-warto-zbadac-jej-stezenie-normy-niski-i-wysoki-poziom-apob/w-4500"
+    },
+    {
+      "question": "Co oznacza wysokie ApoB przy normalnym LDL-C?",
+      "source_label": "Non-HDL i ApoB – rola w ocenie ryzyka przy cukrzycy i otyłości – PMC",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12295744/"
+    },
+    {
+      "question": "Czy badanie ApoB jest dostępne na NFZ?",
+      "source_label": "ApoB w diagnostyce chorób kardiometabolicznych – PMC (2025)",
+      "source_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12674602/"
+    }
+  ],
+  "image_prompts": [
+    {
+      "filename_base": "apob-hero",
+      "section_ref": "hero",
+      "purpose": "hook",
+      "nano_banana_prompt": "A fit Polish man in his mid-50s sitting at a modern kitchen table in Krakow, holding blood test results paper and looking thoughtful, morning light, coffee cup nearby, clean editorial style, photorealistic, Polish text only, no English text, no gibberish text, no watermark",
+      "alt_pl": "Mężczyzna po pięćdziesiątce przeglądający wyniki badań krwi przy porannej kawie",
+      "overlay_text_pl": "ApoB: co naprawdę mierzy?",
+      "negative_prompt": "english text, watermark, logo, distorted hands, extra fingers, artifacts, misspelled text, elderly frail person, sad expression, hospital bed"
+    },
+    {
+      "filename_base": "apob-lipoproteiny-schemat",
+      "section_ref": "sekcja-1",
+      "purpose": "explain",
+      "nano_banana_prompt": "Clean medical infographic illustration showing LDL lipoprotein particle with one ApoB protein highlighted on its surface, minimalist style, white background, Polish text labels only, no English text, no gibberish text, no watermark",
+      "alt_pl": "Schemat cząsteczki LDL z zaznaczonym białkiem ApoB",
+      "overlay_text_pl": "Jedna cząsteczka, jeden ApoB",
+      "negative_prompt": "english text, watermark, logo, distorted hands, extra fingers, artifacts, misspelled text, blurry"
+    },
+    {
+      "filename_base": "pob-vs-ldl-porownanie",
+      "section_ref": "sekcja-2",
+      "purpose": "infographic",
+      "nano_banana_prompt": "Infographic comparing two scenarios: left side shows few large LDL particles low ApoB high LDL-C mass, right side shows many small dense LDL particles high ApoB same LDL-C mass, clean editorial design, Polish labels only, no English text, no gibberish text, no watermark",
+      "alt_pl": "Porównanie dużych i małych cząsteczek LDL – masa cholesterolu vs liczba cząsteczek ApoB",
+      "overlay_text_pl": "Masa kontra liczba cząsteczek",
+      "negative_prompt": "english text, watermark, logo, distorted hands, extra fingers, artifacts, misspelled text"
+    },
+    {
+      "filename_base": "apob-normy-infografika",
+      "section_ref": "sekcja-3",
+      "purpose": "infographic",
+      "nano_banana_prompt": "Clean vertical infographic showing ApoB target ranges by cardiovascular risk level, color-coded green to red gradient, minimalist Polish medical design, Polish text only, no English text, no gibberish text, no watermark",
+      "alt_pl": "Infografika z celami terapeutycznymi ApoB według poziomu ryzyka sercowego",
+      "overlay_text_pl": "Twój cel ApoB",
+      "negative_prompt": "english text, watermark, logo, distorted hands, extra fingers, artifacts, misspelled text"
+    },
+    {
+      "filename_base": "apob-pobranie-krwi",
+      "section_ref": "sekcja-4",
+      "purpose": "explain",
+      "nano_banana_prompt": "Polish man in his 50s sitting calmly during blood draw at a modern lab in Poland, nurse in background, bright clean medical setting, natural morning light, editorial photography style, Polish text only, no English text, no gibberish text, no watermark",
+      "alt_pl": "Mężczyzna po pięćdziesiątce spokojnie podczas pobrania krwi w laboratorium",
+      "overlay_text_pl": "Czczo, rano, gotowe",
+      "negative_prompt": "english text, watermark, logo, distorted hands, extra fingers, artifacts, misspelled text, scared expression, old equipment"
+    },
+    {
+      "filename_base": "apob-laboratorium-wyniki",
+      "section_ref": "sekcja-5",
+      "purpose": "explain",
+      "nano_banana_prompt": "Close-up of Polish blood test results printout showing lipid panel with ApoB value highlighted with pen, modern laboratory aesthetic, natural light, photorealistic editorial, Polish text only, no English text, no gibberish text, no watermark",
+      "alt_pl": "Wydruk wyników badań laboratoryjnych z zaznaczonym wynikiem ApoB",
+      "overlay_text_pl": "60–100 zł, wynik w 2 dni",
+      "negative_prompt": "english text, watermark, logo, distorted hands, extra fingers, artifacts, misspelled text, blurry document"
+    },
+    {
+      "filename_base": "apob-interpretacja-wynikow",
+      "section_ref": "sekcja-6",
+      "purpose": "explain",
+      "nano_banana_prompt": "Polish doctor and fit male patient in his 50s sitting at desk in modern clinic, doctor pointing at lab results on tablet screen, engaged conversation, bright professional interior, editorial photography, Polish text only, no English text, no gibberish text, no watermark",
+      "alt_pl": "Lekarz omawiający wyniki ApoB z pacjentem po pięćdziesiątce",
+      "overlay_text_pl": "Wysoki ApoB, normalne LDL",
+      "negative_prompt": "english text, watermark, logo, distorted hands, extra fingers, artifacts, misspelled text, old doctor, dark room"
+    },
+    {
+      "filename_base": "apob-kto-powinien-badac",
+      "section_ref": "sekcja-7",
+      "purpose": "hook",
+      "nano_banana_prompt": "Active fit Polish man in his 50s jogging in a colorful modern Polish city street, wearing sport watch, confident smile, GoPro angle, bright optimistic colors, photorealistic editorial style, Polish text only, no English text, no gibberish text, no watermark",
+      "alt_pl": "Aktywny mężczyzna po pięćdziesiątce biegnący w polskim mieście",
+      "overlay_text_pl": "Po 50-tce ApoB ma sens",
+      "negative_prompt": "english text, watermark, logo, distorted hands, extra fingers, artifacts, misspelled text, elderly, frail, grey depressing weather"
+    }
+  ],
+  "quick_answer": "ApoB to kluczowe badanie po pięćdziesiątce, które mierzy rzeczywistą liczbę szkodliwych cząsteczek we krwi, a nie ich masę jak klasyczny LDL. Docelowo wynik powinien wynosić poniżej 80 mg/dL dla wysokiego ryzyka. Badanie wykonasz w każdym laboratorium za około 60-100 zł bez skierowania, a wynik dostaniesz w dwa dni."
+}
