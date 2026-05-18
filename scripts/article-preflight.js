@@ -113,7 +113,7 @@ function normalizeLocalHrefToPath(href) {
       .replace(/^[./]+/, '')
       .replace(/[?#].*$/, '');
   }
-  return raw.replace(/^[./]+/, '').replace(/[?#].*$/, '');
+  return utils.normalizeInternalHtmlHref(raw);
 }
 
 function main() {

@@ -3,20 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { POLICY, utils, validators } = require('./lib/article-policy');
 
 const ROOT = process.cwd();
-
-let articlePolicy = null;
-try {
-  // Optional dependency: use centralized policy when available.
-  articlePolicy = require('./lib/article-policy');
-} catch (_) {
-  articlePolicy = null;
-}
-
-const POLICY = articlePolicy ? articlePolicy.POLICY : null;
-const utils = articlePolicy ? articlePolicy.utils : null;
-const validators = articlePolicy ? articlePolicy.validators : null;
 
 const CATEGORY_LISTINGS = {
   jedzenie: 'jedzenie.html',
@@ -87,19 +76,11 @@ function escapeAttr(text) {
 }
 
 function normalizeStrict(text) {
-  if (utils && typeof utils.strictNormalize === 'function') {
-    return utils.strictNormalize(text);
-  }
-  return String(text || '').replace(/\s+/g, ' ').trim();
+  return utils.strictNormalize(text);
 }
 
 function validateMetaDescription(metaDescription) {
-  if (validators && typeof validators.validateSeoDescriptionLength === 'function') {
-    return validators.validateSeoDescriptionLength(metaDescription);
-  }
-  const len = String(metaDescription || '').trim().length;
-  const ok = len >= 145 && len <= 160 && /[.!?]$/.test(String(metaDescription || '').trim());
-  return { ok, error: ok ? null : `Opis ma ${len} znaków albo nie kończy się poprawnym znakiem końca zdania.` };
+  return validators.validateSeoDescriptionLength(metaDescription);
 }
 
 function getJsonFiles() {
