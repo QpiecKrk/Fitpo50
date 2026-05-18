@@ -991,6 +991,53 @@ Jesli artykul ma obrazy:
   - eksport statyczny nie może kopiować `node_modules/` do katalogu wynikowego,
   - techniczne commity `[auto-sync] news status ...` z panelu NEWS nie powinny uruchamiać pełnych gate'ów publikacyjnych, bo są stanem pomocniczym procesu redakcyjnego, a nie docelowym publishem treści.
 
+## Ustalenia operacyjne 2026-05-18 (Publishing Policy Engine - domknięcie refaktoru)
+
+- Centralny silnik publikacji jest już spięty wokół `scripts/lib/article-policy.js` jako Single Source of Truth:
+  - `scripts/article-preflight.js`,
+  - `scripts/import-article.js`,
+  - `scripts/validate-article-standard.js`,
+  - `scripts/predeploy-gate.js`,
+  - `scripts/article-sync-pro.js`
+  mają korzystać z reguł, parserów i walidatorów z `article-policy.js`, a nie z lokalnych hardkodów.
+
+- `scripts/article-sync-pro.js` działa w trybie `fail-fast`:
+  - import `./lib/article-policy` jest wymagany twardo,
+  - brak polityki lub błąd jej ładowania ma zatrzymywać skrypt,
+  - nie utrzymujemy już miękkich fallbacków typu własne limity `145-160` dla meta description poza `article-policy.js`.
+
+- Reguły parserów i liczników pomocniczych też są scentralizowane:
+  - `utils.normalizeInternalHtmlHref(...)`,
+  - `utils.countInternalHtmlLinks(...)`,
+  - `utils.collectRepeatedLongSentences(...)`
+  są kanoniczne i mają być współdzielone przez preflight, importer i validator.
+
+- Normalizacja linków wewnętrznych:
+  - linki z `#hash` lub `?query` nie mogą być liczone jako osobne unikalne linki,
+  - `porady.html` nadal jest pomijane w liczniku linków kontekstowych tam, gdzie logika SEO tego wymaga.
+
+- `scripts/validate-article-standard.js` nie powinien trzymać własnych regexów dla dat ISO:
+  - źródło prawdy to `POLICY.PATTERNS.ISO_DATE_TZ`.
+
+- Minimalne testy regresyjne dla silnika publikacji są obowiązkowym szybkim checkiem po zmianach architektonicznych:
+  - komenda: `npm run test:publishing-engine`
+  - obecny pakiet testuje:
+    - `validators.validateSeoDescriptionLength(...)`,
+    - `utils.countInternalHtmlLinks(...)`,
+    - `utils.collectRepeatedLongSentences(...)`,
+    - dry-run `scripts/article-sync-pro.js`.
+
+- Dokumentacja operacyjna:
+  - `README.md` zawiera sekcję `Publishing Policy Engine` i opis przepływu:
+    - `data/import/*.json -> article-preflight -> import-article -> validate-article-standard -> predeploy-gate -> publish`
+  - jeśli zmieniamy architekturę tego łańcucha, aktualizujemy równolegle kod i README.
+
+- Cleanup legacy:
+  - usunięte martwe helpery w `scripts/validate-article-standard.js`:
+    - `validateAsidePracticalValue()`
+    - `validateBreadcrumbList()`
+  - nie przywracamy ich bez realnego podpięcia do aktywnej ścieżki walidacyjnej.
+
 ## Ustalenia operacyjne 2026-05-10 (AEO/GEO/E-E-A-T + IndexNow)
 
 - `speakable` w artykulach i generatorze musi byc zawężony (bez szerokiego `.article-content p`):
