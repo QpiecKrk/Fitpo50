@@ -6,6 +6,7 @@ const { POLICY, utils, validators } = require('./lib/article-policy');
 
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const PLACEHOLDER_RX = /(do doprecyzowania|do uzupelnienia|placeholder|\{\{.+?\}\})/i;
+const SUPPORTED_CATEGORY_KEYS = new Set(['zdrowie', 'jedzenie', 'ruch', 'rusz-sie', 'ciekawe']);
 
 function parseArgs(argv) {
   const out = {};
@@ -82,6 +83,17 @@ function findSourceImage(baseName, assetsDir) {
   return null;
 }
 
+function suggestSourceImageLocation(baseName, assetsDir) {
+  if (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory()) return '';
+  const entries = fs.readdirSync(assetsDir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    const nested = findSourceImage(baseName, path.join(assetsDir, entry.name));
+    if (nested) return nested;
+  }
+  return '';
+}
+
 function countInternalLinksInSections(sections) {
   const chunks = [];
   for (const section of sections) {
@@ -116,6 +128,10 @@ function normalizeLocalHrefToPath(href) {
   return utils.normalizeInternalHtmlHref(raw);
 }
 
+function hasKnownImageExtension(value) {
+  return /\.(png|jpe?g|webp|avif)$/i.test(String(value || '').trim());
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const file = args.file ? path.resolve(args.file) : '';
@@ -131,6 +147,13 @@ function main() {
 
   if (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory()) {
     errors.push(`Nie znaleziono katalogu assets-dir: ${assetsDir}`);
+  }
+
+  const categoryRaw = String(json.category || json.section || '').trim().toLowerCase();
+  if (!categoryRaw) {
+    errors.push('Brak category w JSON. Artykuł musi mieć kategorię: zdrowie, jedzenie, ruch/rusz-sie albo ciekawe.');
+  } else if (!SUPPORTED_CATEGORY_KEYS.has(categoryRaw)) {
+    errors.push(`Nieobsługiwana category: "${json.category || json.section}". Dozwolone: zdrowie, jedzenie, ruch/rusz-sie, ciekawe.`);
   }
 
   if (PLACEHOLDER_RX.test(raw)) {
@@ -151,8 +174,19 @@ function main() {
   const quickAnswer = utils.stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
   const quickAnswerWords = utils.countWords(quickAnswer);
   const rawSeoTitle = String(json.seo_title || '').replace(/\s+/g, ' ').trim();
+  const listingTitle = String(json.listing_title || '').replace(/\s+/g, ' ').trim();
+  const listingDesc = String(json.listing_desc || '').replace(/\s+/g, ' ').trim();
   if (/\|\s*fitpo50\s*$/i.test(rawSeoTitle)) {
     warnings.push('seo_title zawiera już suffix "| FitPo50" — importer go znormalizuje, ale lepiej traktować seo_title jako bazę bez suffixu.');
+  }
+  if (!rawSeoTitle) {
+    warnings.push('Brak seo_title — importer użyje title, ale dla kontroli snippetów lepiej podać seo_title jawnie.');
+  }
+  if (!listingTitle) {
+    warnings.push('Brak listing_title — importer użyje title, ale homepage i listingi lepiej kontrolować osobnym listing_title.');
+  }
+  if (!listingDesc) {
+    warnings.push('Brak listing_desc — importer użyje fallback tekstowy, ale listingi lepiej kontrolować osobnym listing_desc.');
   }
   if (!quickAnswer) {
     errors.push(`Brak quick_answer (wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów).`);
@@ -242,8 +276,13 @@ function main() {
 
   const hero = String(json.hero_image || '').trim();
   if (!hero) errors.push('Brak hero_image.');
+  else if (hasKnownImageExtension(hero)) {
+    warnings.push('hero_image zawiera rozszerzenie pliku. Standard źródłowy to sama baza nazwy, np. "apob-hero", bez .png/.jpg.');
+  }
   else if (!findSourceImage(hero, assetsDir)) {
-    errors.push(`Brak źródłowego pliku hero_image w ${assetsDir} dla: ${hero}.{png|jpg|jpeg|webp|avif}`);
+    const suggestion = suggestSourceImageLocation(hero, assetsDir);
+    const suffix = suggestion ? ` (podpowiedź: znaleziono w ${path.dirname(suggestion)} — użyj tego folderu jako --assets-dir)` : '';
+    errors.push(`Brak źródłowego pliku hero_image w ${assetsDir} dla: ${hero}.{png|jpg|jpeg|webp|avif}${suffix}`);
   }
 
   // section source images by image_prompts_v4 filename_base
@@ -263,7 +302,9 @@ function main() {
       return;
     }
     if (!findSourceImage(base, assetsDir)) {
-      errors.push(`Brak źródłowego obrazu sekcji: ${base}.{png|jpg|jpeg|webp|avif} w ${assetsDir}`);
+      const suggestion = suggestSourceImageLocation(base, assetsDir);
+      const suffix = suggestion ? ` (podpowiedź: znaleziono w ${path.dirname(suggestion)} — użyj tego folderu jako --assets-dir)` : '';
+      errors.push(`Brak źródłowego obrazu sekcji: ${base}.{png|jpg|jpeg|webp|avif} w ${assetsDir}${suffix}`);
     }
   });
 

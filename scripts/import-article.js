@@ -285,6 +285,10 @@ function truncateAtWordBoundary(text, maxChars) {
   return value.slice(0, maxChars).trim();
 }
 
+function escapeRegex(value) {
+  return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function normalizeSeoTitleBase(rawTitle) {
   const clean = String(rawTitle || '')
     .replace(/\s+\|\s*FitPo50$/i, '')

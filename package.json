@@ -43,6 +43,7 @@
     "article:fast-gate": "node scripts/article-fast-gate.js",
     "article:paste": "node scripts/article-paste.js",
     "article:preflight": "node scripts/article-preflight.js",
+    "article:final-check": "node scripts/article-final-check.js",
     "article:assets:prepare": "node scripts/prepare-article-assets.js",
     "article:lint:placeholders": "node scripts/lint-editorial-placeholders.js",
     "article:pipeline": "node scripts/article-pipeline.js",

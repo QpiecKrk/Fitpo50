@@ -1048,12 +1048,30 @@ Jesli artykul ma obrazy:
 - JSON od modeli zewnętrznych (np. Claude) traktujemy jako draft wymagający normalizacji:
   - poprawki jakościowe, SEO, linkowanie, FAQ, Quick Answer, H2, źródła i copy wykonujemy najpierw w JSON,
   - celem jest, żeby większość pracy redakcyjnej była wykonana przed generowaniem HTML.
+  - `article-preflight.js` ma jak najwcześniej łapać typowe pułapki z case`ów` wdrożeniowych:
+    - brak / zła `category`,
+    - `hero_image` podane z rozszerzeniem zamiast jako baza nazwy,
+    - `seo_title` już zawierające `| FitPo50`,
+    - brak jawnych pól `listing_title` / `listing_desc` (co najmniej jako warning operacyjny).
+    - jeśli `--assets-dir` wskazuje zbyt szeroki katalog (np. całe `Downloads`), preflight ma podpowiadać właściwy podfolder z grafikami, jeśli znajdzie pliki poziom niżej.
 
 - Ostatni refaktor silnika publikacji został zrobiony właśnie pod tę kolejność:
   - `article-preflight.js` sprawdza JSON i assety wejściowe,
   - `import-article.js` generuje HTML/PDF/schema według tej samej polityki,
   - `validate-article-standard.js` i `predeploy-gate.js` weryfikują finalny output,
   - `article-sync-pro.js` służy do późniejszych, kontrolowanych synców SEO/listingów bez ręcznego przeklejania zmian po HTML-ach.
+  - dla nowych artykułów przed `git push` uruchamiamy pełny lokalny check:
+    - `npm run article:final-check -- --file data/import/<slug>.fitpo50.json --assets-dir <folder-z-grafikami>`
+    - ten skrypt ma wykrywać problemy wcześniej niż hook `pre-push`, bo odpala kolejno:
+      - parse/fix JSON,
+      - `json-autofix-strict`,
+      - `json-fitpo50-gate-diff`,
+      - `article-preflight`,
+      - `prepare-article-assets`,
+      - lokalny import z aktualizacją listingów,
+      - `article-contract-check`,
+      - `sync-site-assets-mirror`,
+      - `predeploy-gate --slug`.
 
 - Kontrakty anty-regresyjne po case `apob-norma-cena-jak-czytac-wynik`:
   - Hero consistency contract:
