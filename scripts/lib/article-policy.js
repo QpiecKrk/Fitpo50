@@ -106,6 +106,66 @@ const utils = {
       .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
       .replace(/\s+/g, ' ')
       .trim();
+  },
+
+  normalizeInternalHtmlHref: (href) => {
+    const raw = String(href || '').trim();
+    if (!raw) return '';
+    if (/^(https?:|mailto:|tel:|javascript:|#)/i.test(raw)) return '';
+    const clean = raw.split('#')[0].split('?')[0].trim();
+    if (!clean || !/\.html$/i.test(clean)) return '';
+    return clean.replace(/^\.\//, '').replace(/^\/+/, '');
+  },
+
+  countInternalHtmlLinks: (htmlChunks, options = {}) => {
+    const exclude = new Set(
+      (options.exclude || ['porady.html']).map((item) => String(item || '').toLowerCase())
+    );
+    const unique = new Set();
+    const rx = /<a\b[^>]*href="([^"]+)"/gi;
+
+    const items = Array.isArray(htmlChunks) ? htmlChunks : [htmlChunks];
+    for (const chunk of items) {
+      const html = String(chunk || '');
+      for (const match of html.matchAll(rx)) {
+        const href = String(match[1] || '').trim();
+        if (!href) continue;
+        const isAbsInternal = /^https?:\/\/(www\.)?fitpo50\.pl\/[^"\s]+\.html(?:[?#].*)?$/i.test(href);
+        const isRelInternal = !/^(https?:|mailto:|tel:|javascript:|#)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
+        if (!isAbsInternal && !isRelInternal) continue;
+
+        const normalized = href
+          .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
+          .replace(/^\.\//, '')
+          .toLowerCase();
+
+        if (exclude.has(normalized)) continue;
+        unique.add(normalized);
+      }
+    }
+    return unique.size;
+  },
+
+  collectRepeatedLongSentences: (chunks) => {
+    const source = (Array.isArray(chunks) ? chunks : [chunks]).map((item) => String(item || '')).join(' ');
+    const plain = utils.stripTags(source);
+    const sentences = plain
+      .split(/(?<=[.!?])\s+/)
+      .map((sentence) => sentence.replace(/\s+/g, ' ').trim())
+      .filter(Boolean);
+    const map = new Map();
+
+    for (const sentence of sentences) {
+      const norm = utils.fuzzyNormalize(sentence);
+      if (!norm) continue;
+      if (utils.countWords(norm) < POLICY.REPEATED_SENTENCES.MIN_WORDS) continue;
+      if (norm.length < POLICY.REPEATED_SENTENCES.MIN_CHARS) continue;
+      map.set(norm, (map.get(norm) || 0) + 1);
+    }
+
+    return [...map.entries()]
+      .filter(([, count]) => count >= POLICY.REPEATED_SENTENCES.MIN_REPEATS)
+      .map(([sentence, count]) => ({ sentence, count }));
   }
 };
 

@@ -571,33 +571,6 @@ function normalizeInternalSiteLinks(html) {
   );
 }
 
-function collectRepeatedLongSentences(chunks) {
-  const source = normalizeArray(chunks).map((x) => stripTags(x)).join(' ');
-  const sentences = source
-    .split(/(?<=[.!?])\s+/)
-    .map((s) => s.replace(/\s+/g, ' ').trim())
-    .filter(Boolean);
-
-  const seen = new Map();
-  for (const sentence of sentences) {
-    const norm = sentence
-      .toLowerCase()
-      .replace(/[^\p{L}\p{N}\s]+/gu, '')
-      .replace(/\s+/g, ' ')
-      .trim();
-    if (!norm) continue;
-    if (countWordsUtf8(norm) < POLICY.REPEATED_SENTENCES.MIN_WORDS) continue;
-    if (norm.length < POLICY.REPEATED_SENTENCES.MIN_CHARS) continue;
-    seen.set(norm, (seen.get(norm) || 0) + 1);
-  }
-
-  const repeated = [];
-  for (const [sentence, count] of seen.entries()) {
-    if (count >= POLICY.REPEATED_SENTENCES.MIN_REPEATS) repeated.push({ sentence, count });
-  }
-  return repeated;
-}
-
 function normalizeSections(rawSections) {
   const sections = [];
   for (const entry of normalizeArray(rawSections)) {
@@ -666,23 +639,6 @@ function normalizeSections(rawSections) {
   return sections;
 }
 
-function countInternalHtmlLinks(htmlChunks) {
-  const unique = new Set();
-  const rx = /<a\b[^>]*href="([^"]+)"/gi;
-  for (const chunk of normalizeArray(htmlChunks)) {
-    const html = String(chunk || '');
-    for (const m of html.matchAll(rx)) {
-      const href = String(m[1] || '').trim();
-      if (!href) continue;
-      if (/^(https?:|mailto:|tel:|javascript:|#)/i.test(href)) continue;
-      if (!/\.html(?:[?#].*)?$/i.test(href)) continue;
-      if (/^\.?\/?porady\.html(?:[?#].*)?$/i.test(href)) continue;
-      unique.add(href.replace(/^\.\//, ''));
-    }
-  }
-  return unique.size;
-}
-
 function listCandidateInternalArticles(currentSlug) {
   const files = fs.readdirSync(ROOT)
     .filter((name) => name.endsWith('.html'))
@@ -704,7 +660,7 @@ function ensureMinimumInternalLinks(slug, dryRun, syncSite, minimum = POLICY.WOR
     if (!articleMatch) continue;
     const articleHtml = articleMatch[0];
     const narrativeHtml = articleHtml.split(/<section\s+class="faq-list\b/i)[0];
-    const existingCount = countInternalHtmlLinks([narrativeHtml]);
+    const existingCount = utils.countInternalHtmlLinks([narrativeHtml]);
     if (existingCount >= minimum) continue;
 
     const needed = minimum - existingCount;
@@ -1149,7 +1105,7 @@ function validateInput(data, opts = {}) {
         }
       }
     }
-    const internalLinks = countInternalHtmlLinks(linkSource);
+    const internalLinks = utils.countInternalHtmlLinks(linkSource);
     if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_MIN) {
       autoFixes.push(
         `AEO/GEO: wykryto ${internalLinks}/${POLICY.WORDS.INTERNAL_LINKS_MIN} linków wewnętrznych w treści. ` +
@@ -1157,7 +1113,7 @@ function validateInput(data, opts = {}) {
       );
     }
   }
-  const repeatedSentences = collectRepeatedLongSentences([
+  const repeatedSentences = utils.collectRepeatedLongSentences([
     lead,
     quickAnswer,
     ...sections.map((s) => s.blocks.map((b) => b.html || '').join(' ')),
@@ -2504,7 +2460,7 @@ async function main() {
 
   let internalLinksResult = null;
   const sectionHtmlForAuto = payload.sections.flatMap((section) => section.blocks.map((b) => b.html || ''));
-  const sectionInternalLinks = countInternalHtmlLinks(sectionHtmlForAuto);
+  const sectionInternalLinks = utils.countInternalHtmlLinks(sectionHtmlForAuto);
   const runInternal = runInternalMode === 'true'
     || runInternalMode === '1'
     || runInternalMode === 'yes'

@@ -17,24 +17,6 @@ function isArticleHtml(content) {
 
 // Narzędzia stripTags, countWords i normalizeText przeniesione do scripts/lib/article-policy.js
 
-function countInternalContextLinks(articleContentHtml) {
-  const rx = /<a\b[^>]*href="([^"]+)"/gi;
-  const unique = new Set();
-  for (const m of articleContentHtml.matchAll(rx)) {
-    const href = String(m[1] || '').trim();
-    if (!href) continue;
-    const isAbsInternal = /^https?:\/\/(www\.)?fitpo50\.pl\/[^"\s]+\.html(?:[?#].*)?$/i.test(href);
-    const isRelInternal = !/^(https?:|mailto:|tel:|javascript:|#)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
-    if (!isAbsInternal && !isRelInternal) continue;
-    const normalized = href
-      .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
-      .replace(/^\.\//, '');
-    if (/^porady\.html(?:[?#].*)?$/i.test(normalized)) continue;
-    unique.add(normalized);
-  }
-  return unique.size;
-}
-
 // Funkcja normalizeTextForCompare zastąpiona przez utils.fuzzyNormalize
 
 function stripFaqBlock(articleContentHtml) {
@@ -250,24 +232,9 @@ function validateAsideTitlesNotDuplicated(articleContentHtml, errors) {
 }
 
 function validateRepeatedLongSentences(articleContentHtml, errors) {
-  const plain = utils.stripTags(articleContentHtml);
-  const sentences = plain
-    .split(/(?<=[.!?])\s+/)
-    .map((s) => s.replace(/\s+/g, ' ').trim())
-    .filter(Boolean);
-  const map = new Map();
-  for (const sentence of sentences) {
-    const norm = utils.fuzzyNormalize(sentence);
-    if (!norm) continue;
-    if (utils.countWords(norm) < POLICY.REPEATED_SENTENCES.MIN_WORDS) continue;
-    if (norm.length < POLICY.REPEATED_SENTENCES.MIN_CHARS) continue;
-    map.set(norm, (map.get(norm) || 0) + 1);
-  }
-  for (const [sentence, count] of map.entries()) {
-    if (count >= POLICY.REPEATED_SENTENCES.MIN_REPEATS) {
-      errors.push(`Wykryto zdanie powtórzone ${count}x: "${sentence.slice(0, 90)}..."`);
-      break;
-    }
+  const repeated = utils.collectRepeatedLongSentences(articleContentHtml);
+  if (repeated.length) {
+    errors.push(`Wykryto zdanie powtórzone ${repeated[0].count}x: "${repeated[0].sentence.slice(0, 90)}..."`);
   }
 }
 
@@ -528,7 +495,7 @@ function validateFile(filePath) {
     validateBrokenSentenceArtifacts(articleContentHtml, errors);
     validateAsideTitlesNotDuplicated(articleContentHtml, errors);
     validateRepeatedLongSentences(articleContentHtml, errors);
-    const internalLinks = countInternalContextLinks(stripFaqBlock(articleContentHtml));
+    const internalLinks = utils.countInternalHtmlLinks(stripFaqBlock(articleContentHtml));
     if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_MIN) {
       errors.push(`Za mało linków kontekstowych w treści: ${internalLinks}/${POLICY.WORDS.INTERNAL_LINKS_MIN}.`);
     }

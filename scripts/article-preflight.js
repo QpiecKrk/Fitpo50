@@ -6,9 +6,6 @@ const { POLICY, utils, validators } = require('./lib/article-policy');
 
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const PLACEHOLDER_RX = /(do doprecyzowania|do uzupelnienia|placeholder|\{\{.+?\}\})/i;
-const REPEATED_SENTENCE_MIN_WORDS = 8;
-const REPEATED_SENTENCE_MIN_CHARS = 45;
-const REPEATED_SENTENCE_MIN_REPEATS = 3;
 
 function parseArgs(argv) {
   const out = {};
@@ -24,24 +21,6 @@ function parseArgs(argv) {
     }
   }
   return out;
-}
-
-function collectRepeatedLongSentences(chunks) {
-  const source = chunks.map((x) => String(x || '')).join(' ');
-  const plain = utils.stripTags(source);
-  const sentences = plain
-    .split(/(?<=[.!?])\s+/)
-    .map((s) => s.replace(/\s+/g, ' ').trim())
-    .filter(Boolean);
-  const map = new Map();
-  for (const sentence of sentences) {
-    const norm = utils.fuzzyNormalize(sentence);
-    if (!norm) continue;
-    if (utils.countWords(norm) < REPEATED_SENTENCE_MIN_WORDS) continue;
-    if (norm.length < REPEATED_SENTENCE_MIN_CHARS) continue;
-    map.set(norm, (map.get(norm) || 0) + 1);
-  }
-  return [...map.entries()].filter(([, c]) => c >= REPEATED_SENTENCE_MIN_REPEATS);
 }
 
 function findSourceImage(baseName, assetsDir) {
@@ -104,26 +83,12 @@ function findSourceImage(baseName, assetsDir) {
 }
 
 function countInternalLinksInSections(sections) {
-  const unique = new Set();
-  const rx = /<a\b[^>]*href="([^"]+)"/gi;
+  const chunks = [];
   for (const section of sections) {
     const arr = Array.isArray(section.paragraphs_html) ? section.paragraphs_html : [];
-    for (const p of arr) {
-      for (const m of String(p || '').matchAll(rx)) {
-        const href = String(m[1] || '').trim();
-        if (!href) continue;
-        const isAbsInternal = /^https?:\/\/(www\.)?fitpo50\.pl\/[^"\s]+\.html(?:[?#].*)?$/i.test(href);
-        const isRelInternal = !/^(https?:|mailto:|tel:|javascript:|#)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
-        if (!isAbsInternal && !isRelInternal) continue;
-        const normalized = href
-          .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
-          .replace(/^\.\//, '');
-        if (/^porady\.html(?:[?#].*)?$/i.test(normalized)) continue;
-        unique.add(normalized);
-      }
-    }
+    chunks.push(...arr);
   }
-  return unique.size;
+  return utils.countInternalHtmlLinks(chunks);
 }
 
 function collectInternalLinksFromHtml(html) {
@@ -262,13 +227,13 @@ function main() {
       }
     }
   }
-  const repeatedSentences = collectRepeatedLongSentences([
+  const repeatedSentences = utils.collectRepeatedLongSentences([
     json.lead || '',
     json.quick_answer || json.quickAnswer || '',
     ...sections.flatMap((s) => Array.isArray(s.paragraphs_html) ? s.paragraphs_html : []),
   ]);
   if (repeatedSentences.length) {
-    errors.push(`Wykryto powtarzalne zdania w JSON (${repeatedSentences[0][1]}x): "${repeatedSentences[0][0].slice(0, 90)}..."`);
+    errors.push(`Wykryto powtarzalne zdania w JSON (${repeatedSentences[0].count}x): "${repeatedSentences[0].sentence.slice(0, 90)}..."`);
   }
 
   const hero = String(json.hero_image || '').trim();
