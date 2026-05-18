@@ -134,10 +134,11 @@ const utils = {
         const isRelInternal = !/^(https?:|mailto:|tel:|javascript:|#)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
         if (!isAbsInternal && !isRelInternal) continue;
 
-        const normalized = href
-          .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
-          .replace(/^\.\//, '')
-          .toLowerCase();
+        const normalized = utils.normalizeInternalHtmlHref(
+          href.replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
+        ).toLowerCase();
+
+        if (!normalized) continue;
 
         if (exclude.has(normalized)) continue;
         unique.add(normalized);

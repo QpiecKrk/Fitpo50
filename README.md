@@ -87,6 +87,45 @@ npm run assets:mirror:sync
 npm run predeploy:check
 ```
 
+## Publishing Policy Engine
+
+System publikacyjny FitPo50 działa dziś wokół centralnego silnika reguł:
+
+- `scripts/lib/article-policy.js` jest kanonicznym źródłem limitów, regexów i walidatorów,
+- `scripts/article-preflight.js` sprawdza JSON wejściowy przed importem,
+- `scripts/import-article.js` generuje HTML według tych samych reguł,
+- `scripts/validate-article-standard.js` weryfikuje gotowy artykuł,
+- `scripts/predeploy-gate.js` jest końcową bramką przed publikacją,
+- `scripts/article-sync-pro.js` synchronizuje SEO i listingi na podstawie `data/import/*.json`.
+
+Docelowy przepływ to:
+
+```text
+data/import/*.json
+  -> article-preflight
+  -> import-article
+  -> validate-article-standard
+  -> predeploy-gate
+  -> publish
+```
+
+Ważne zasady operacyjne:
+
+- `article-policy.js` traktujemy jako Single Source of Truth dla reguł publikacji,
+- `article-sync-pro.js` działa w trybie fail-fast i nie ma miękkich fallbacków dla polityki,
+- przy zmianach SEO i listingów preferowany workflow to najpierw `--dry-run`, a dopiero potem zapis:
+
+```bash
+node scripts/article-sync-pro.js --slug <slug> --sync-seo --sync-listings --dry-run
+node scripts/article-sync-pro.js --slug <slug> --sync-seo --sync-listings
+```
+
+Minimalny pakiet testów regresyjnych dla tego obszaru:
+
+```bash
+npm run test:publishing-engine
+```
+
 ## Dodatkowe uwagi
 
 - część plików dokumentacyjnych w repo opisuje wewnętrzne standardy redakcyjne i workflow publikacyjny,
