@@ -259,12 +259,12 @@ function validateRepeatedLongSentences(articleContentHtml, errors) {
   for (const sentence of sentences) {
     const norm = utils.fuzzyNormalize(sentence);
     if (!norm) continue;
-    if (utils.countWords(norm) < 8) continue;
-    if (norm.length < 45) continue;
+    if (utils.countWords(norm) < POLICY.REPEATED_SENTENCES.MIN_WORDS) continue;
+    if (norm.length < POLICY.REPEATED_SENTENCES.MIN_CHARS) continue;
     map.set(norm, (map.get(norm) || 0) + 1);
   }
   for (const [sentence, count] of map.entries()) {
-    if (count >= 3) {
+    if (count >= POLICY.REPEATED_SENTENCES.MIN_REPEATS) {
       errors.push(`Wykryto zdanie powtórzone ${count}x: "${sentence.slice(0, 90)}..."`);
       break;
     }
@@ -301,8 +301,8 @@ function validateCitationsInBlogPosting(raw, errors) {
       if (!isBlogPosting) continue;
       const arr = Array.isArray(node.citation) ? node.citation : [];
       const valid = arr.filter((url) => /^https?:\/\//i.test(String(url || '').trim()));
-      if (valid.length < 4) {
-        errors.push(`BlogPosting.citation: wymagane minimum 4 poprawne URL-e (jest ${valid.length}).`);
+      if (valid.length < POLICY.WORDS.CITATION_MIN_URLS) {
+        errors.push(`BlogPosting.citation: wymagane minimum ${POLICY.WORDS.CITATION_MIN_URLS} poprawne URL-e (jest ${valid.length}).`);
       }
       return;
     }
@@ -529,8 +529,8 @@ function validateFile(filePath) {
     validateAsideTitlesNotDuplicated(articleContentHtml, errors);
     validateRepeatedLongSentences(articleContentHtml, errors);
     const internalLinks = countInternalContextLinks(stripFaqBlock(articleContentHtml));
-    if (internalLinks < 4) {
-      errors.push(`Za mało linków kontekstowych w treści: ${internalLinks}/4.`);
+    if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_MIN) {
+      errors.push(`Za mało linków kontekstowych w treści: ${internalLinks}/${POLICY.WORDS.INTERNAL_LINKS_MIN}.`);
     }
     validateAnswerFirstParagraphs(articleContentHtml, errors);
   }

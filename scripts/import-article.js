@@ -15,7 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { POLICY, utils, enforcers } = require('./lib/article-policy');
+const { POLICY, utils, validators, enforcers } = require('./lib/article-policy');
 const https = require('https');
 const { spawnSync } = require('child_process');
 
@@ -25,7 +25,6 @@ const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const LLMS_PATH = path.join(ROOT, 'llms.txt');
 const REQUIRED_ARTICLE_IMAGE_EXT = ['avif', 'webp', 'jpg'];
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
-const MIN_FAQ_ITEMS = 4;
 const DEFAULT_AUTHOR_PERSON = {
   '@type': 'Person',
   name: 'Grzegorz Kupiec',
@@ -288,14 +287,14 @@ function truncateAtWordBoundary(text, maxChars) {
 
 function normalizeSeoTitleBase(rawTitle) {
   const clean = String(rawTitle || '').replace(/\s+/g, ' ').trim();
-  return truncateAtWordBoundary(clean, 53);
+  return truncateAtWordBoundary(clean, POLICY.TITLE.MAX);
 }
 
 function normalizeMetaDescription(rawDescription) {
   const clean = stripTags(String(rawDescription || ''))
     .replace(/\s+/g, ' ')
     .trim();
-  return truncateAtWordBoundary(clean, 160);
+  return truncateAtWordBoundary(clean, POLICY.WORDS.SEO_DESCRIPTION_MAX);
 }
 
 function buildSpeakableSelectors(hasKeyTakeaways) {
@@ -483,7 +482,7 @@ function ensureMinFaqFromNetworkSeeds(faqItems, categoryKey, contextTitle) {
   const usedQuestions = new Set(
     out.map((f) => String(f?.question || '').trim().toLowerCase()).filter(Boolean)
   );
-  if (out.length >= MIN_FAQ_ITEMS) {
+  if (out.length >= POLICY.WORDS.FAQ_MIN_ITEMS) {
     return { faq: out, notes };
   }
 
@@ -493,7 +492,7 @@ function ensureMinFaqFromNetworkSeeds(faqItems, categoryKey, contextTitle) {
   ];
 
   for (const item of pool) {
-    if (out.length >= MIN_FAQ_ITEMS) break;
+    if (out.length >= POLICY.WORDS.FAQ_MIN_ITEMS) break;
     const question = String(item.question || '').trim();
     const answer = String(item.answer || '').trim();
     if (!question || !answer) continue;
@@ -508,7 +507,7 @@ function ensureMinFaqFromNetworkSeeds(faqItems, categoryKey, contextTitle) {
 
   if (out.length > normalizedFaq.length) {
     notes.push(
-      `FAQ: brakujące pytania uzupełniono automatycznie (${out.length}/${MIN_FAQ_ITEMS}) na bazie banku pytań sieciowych (autocomplete/PAA) dla tematu "${contextTitle}".`
+      `FAQ: brakujące pytania uzupełniono automatycznie (${out.length}/${POLICY.WORDS.FAQ_MIN_ITEMS}) na bazie banku pytań sieciowych (autocomplete/PAA) dla tematu "${contextTitle}".`
     );
   }
   return { faq: out, notes };
@@ -557,7 +556,7 @@ function normalizeQuickAnswer(raw, leadRaw) {
     const normalize = (v) => String(v || '').toLowerCase().replace(/[^\p{L}\p{N}\s]+/gu, '').replace(/\s+/g, ' ').trim();
     if (normalize(text) === normalize(leadText)) {
       text = `Najkrócej: ${text}`;
-      const trimWords = text.split(/\s+/).filter(Boolean).slice(0, 60);
+      const trimWords = text.split(/\s+/).filter(Boolean).slice(0, POLICY.WORDS.QUICK_ANSWER_MAX);
       text = trimWords.join(' ').trim();
       if (!/[.!?]$/.test(text)) text += '.';
     }
@@ -587,14 +586,14 @@ function collectRepeatedLongSentences(chunks) {
       .replace(/\s+/g, ' ')
       .trim();
     if (!norm) continue;
-    if (countWordsUtf8(norm) < 8) continue;
-    if (norm.length < 45) continue;
+    if (countWordsUtf8(norm) < POLICY.REPEATED_SENTENCES.MIN_WORDS) continue;
+    if (norm.length < POLICY.REPEATED_SENTENCES.MIN_CHARS) continue;
     seen.set(norm, (seen.get(norm) || 0) + 1);
   }
 
   const repeated = [];
   for (const [sentence, count] of seen.entries()) {
-    if (count >= 3) repeated.push({ sentence, count });
+    if (count >= POLICY.REPEATED_SENTENCES.MIN_REPEATS) repeated.push({ sentence, count });
   }
   return repeated;
 }
@@ -694,7 +693,7 @@ function listCandidateInternalArticles(currentSlug) {
   return files;
 }
 
-function ensureMinimumInternalLinks(slug, dryRun, syncSite, minimum = 4) {
+function ensureMinimumInternalLinks(slug, dryRun, syncSite, minimum = POLICY.WORDS.INTERNAL_LINKS_MIN) {
   const targetPaths = [path.join(ROOT, `${slug}.html`)];
   if (syncSite) targetPaths.push(path.join(ROOT, '_site', `${slug}.html`));
 
@@ -1095,9 +1094,9 @@ function validateInput(data, opts = {}) {
   const quickAnswer = normalizeQuickAnswer(data.quick_answer || data.quickAnswer || '', lead);
   const quickAnswerWords = countWordsUtf8(quickAnswer);
   if (!quickAnswer) {
-    errors.push('Brak quick_answer (wymagane 40-60 słów).');
-  } else if (quickAnswerWords < 40 || quickAnswerWords > 60) {
-    errors.push(`quick_answer: wymagane 40-60 słów (jest ${quickAnswerWords}).`);
+    errors.push(`Brak quick_answer (wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów).`);
+  } else if (quickAnswerWords < POLICY.WORDS.QUICK_ANSWER_MIN || quickAnswerWords > POLICY.WORDS.QUICK_ANSWER_MAX) {
+    errors.push(`quick_answer: wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${quickAnswerWords}).`);
   }
   const normalizeCmp = (v) => String(v || '').toLowerCase().replace(/[^\p{L}\p{N}\s]+/gu, ' ').replace(/\s+/g, ' ').trim();
   if (lead && quickAnswer && normalizeCmp(lead) === normalizeCmp(quickAnswer)) {
@@ -1109,8 +1108,9 @@ function validateInput(data, opts = {}) {
   if (sections.length > 0) {
     const sectionParagraphErrors = [];
     for (const section of sections) {
-      if (!String(section.title || '').trim().endsWith('?')) {
-        sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": tytuł musi być pytaniem zakończonym "?".`);
+      const headingRes = validators.validateH2Title(String(section.title || '').trim());
+      if (!headingRes.ok) {
+        sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": ${headingRes.error}`);
       }
       if (containsEditorialPlaceholder(section.title)) {
         sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": wykryto placeholder w tytule.`);
@@ -1120,11 +1120,11 @@ function validateInput(data, opts = {}) {
         sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}" nie ma akapitu otwierającego.`);
         continue;
       }
-      const words = countWordsUtf8(stripTags(firstParagraph.html));
-      if (words < 35) {
+      const introRes = validators.validateIntroParagraph(stripTags(firstParagraph.html));
+      if (!introRes.ok) {
         autoFixes.push(
-          `Sekcja "${section.title || '(bez tytułu)'}": pierwszy akapit ma ${words} słów (<35). ` +
-          'Import przejdzie, ale warto ręcznie rozwinąć odpowiedź na pytanie sekcji.'
+          `Sekcja "${section.title || '(bez tytułu)'}": ${introRes.error} ` +
+          'Importer ustabilizuje pierwszy akapit, ale warto ręcznie dopracować odpowiedź do standardu.'
         );
       }
 
@@ -1150,9 +1150,9 @@ function validateInput(data, opts = {}) {
       }
     }
     const internalLinks = countInternalHtmlLinks(linkSource);
-    if (internalLinks < 4) {
+    if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_MIN) {
       autoFixes.push(
-        `AEO/GEO: wykryto ${internalLinks}/4 linków wewnętrznych w treści. ` +
+        `AEO/GEO: wykryto ${internalLinks}/${POLICY.WORDS.INTERNAL_LINKS_MIN} linków wewnętrznych w treści. ` +
         'Crosslinki wewnętrzne uzupełniamy ręcznie po imporcie (kontrola redakcyjna).'
       );
     }
@@ -1198,8 +1198,8 @@ function validateInput(data, opts = {}) {
   const faqItems = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
   if (faqStrict) {
     const faqResearch = normalizeFaqResearch(data.faq_research || data.faq_sources || []);
-    if (faqItems.length < MIN_FAQ_ITEMS) {
-      errors.push(`FAQ: wymagane minimum ${MIN_FAQ_ITEMS} pytań (bez auto-dopisywania).`);
+    if (faqItems.length < POLICY.WORDS.FAQ_MIN_ITEMS) {
+      errors.push(`FAQ: wymagane minimum ${POLICY.WORDS.FAQ_MIN_ITEMS} pytań (bez auto-dopisywania).`);
     }
     const placeholderIdx = faqItems.findIndex((it) => isFaqPlaceholder(it.question, it.answerHtml));
     if (placeholderIdx >= 0) {
@@ -1209,13 +1209,13 @@ function validateInput(data, opts = {}) {
     if (faqPlaceholderAny >= 0) {
       errors.push(`FAQ #${faqPlaceholderAny + 1}: wykryto placeholder redakcyjny.`);
     }
-    if (faqResearch.length < MIN_FAQ_ITEMS) {
+    if (faqResearch.length < POLICY.WORDS.FAQ_MIN_ITEMS) {
       errors.push(
-        `FAQ research: dodaj minimum ${MIN_FAQ_ITEMS} wpisy w faq_research[] z polami question + source_label + source_url (pytania z sieci: autocomplete/PAA).`
+        `FAQ research: dodaj minimum ${POLICY.WORDS.FAQ_MIN_ITEMS} wpisy w faq_research[] z polami question + source_label + source_url (pytania z sieci: autocomplete/PAA).`
       );
     }
     const researchQuestions = new Set(faqResearch.map((x) => x.question.toLowerCase()));
-    for (let i = 0; i < Math.min(faqItems.length, MIN_FAQ_ITEMS); i += 1) {
+    for (let i = 0; i < Math.min(faqItems.length, POLICY.WORDS.FAQ_MIN_ITEMS); i += 1) {
       const q = String(faqItems[i].question || '').trim().toLowerCase();
       if (!researchQuestions.has(q)) {
         errors.push(`FAQ #${i + 1}: pytanie nie ma potwierdzenia w faq_research[].`);
@@ -1307,7 +1307,7 @@ function buildPrecheckReport({ inputPath, json, payload, validation, syncSite, a
   }
   const rawSeoBase = String(json.seo_title || json.title || '').replace(/\s+/g, ' ').trim();
   if (rawSeoBase && rawSeoBase !== payload.seoTitleBase) {
-    autoFixes.push(`Skrócę seo_title do bezpiecznej długości (<=53 znaki): "${payload.seoTitleBase}"`);
+    autoFixes.push(`Skrócę seo_title do bezpiecznej długości (<=${POLICY.TITLE.MAX} znaków): "${payload.seoTitleBase}"`);
   }
 
   for (const err of validation.errors) {
@@ -2032,9 +2032,9 @@ function runInternalLinks(slug, dryRun) {
     '$html = file_get_contents($file);',
     'if ($html === false) { fwrite(STDERR, "Nie udało się odczytać HTML."); exit(2); }',
     '$result = autoLinkInternalArticlesInHtml($html, [',
-    '  "min_words" => 40,',
-    '  "min_links" => 4,',
-    '  "max_links" => 6,',
+    `  "min_words" => ${POLICY.AUTO_LINK.MIN_WORDS},`,
+    `  "min_links" => ${POLICY.AUTO_LINK.MIN_LINKS},`,
+    `  "max_links" => ${POLICY.AUTO_LINK.MAX_LINKS},`,
     '  "current_href" => basename($file),',
     ']);',
     'file_put_contents($file, $result["html"]);',
@@ -2515,7 +2515,7 @@ async function main() {
     internalLinksResult = runInternalLinks(payload.slug, dryRun);
   }
 
-  ensureMinimumInternalLinks(payload.slug, dryRun, syncSite, 4);
+  ensureMinimumInternalLinks(payload.slug, dryRun, syncSite, POLICY.WORDS.INTERNAL_LINKS_MIN);
 
   runPdfSync(payload.slug, dryRun);
   updatedFiles.push('assets/pdf/<slug>.pdf + przycisk PDF + schema encoding');

@@ -15,11 +15,24 @@ const POLICY = {
     SEO_DESCRIPTION_MIN: 145,
     SEO_DESCRIPTION_MAX: 160,
     INTERNAL_LINKS_MIN: 4,
-    FAQ_MIN_ITEMS: 4 
+    FAQ_MIN_ITEMS: 4,
+    CITATION_MIN_URLS: 4
   },
 
   TITLE: {
     MAX: 65
+  },
+
+  REPEATED_SENTENCES: {
+    MIN_WORDS: 8,
+    MIN_CHARS: 45,
+    MIN_REPEATS: 3
+  },
+
+  AUTO_LINK: {
+    MIN_WORDS: 40,
+    MIN_LINKS: 4,
+    MAX_LINKS: 6
   },
 
   // Required patterns
