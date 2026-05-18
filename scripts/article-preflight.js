@@ -2,9 +2,13 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
+const { POLICY, utils, validators } = require('./lib/article-policy');
 
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const PLACEHOLDER_RX = /(do doprecyzowania|do uzupelnienia|placeholder|\{\{.+?\}\})/i;
+const REPEATED_SENTENCE_MIN_WORDS = 8;
+const REPEATED_SENTENCE_MIN_CHARS = 45;
+const REPEATED_SENTENCE_MIN_REPEATS = 3;
 
 function parseArgs(argv) {
   const out = {};
@@ -22,48 +26,22 @@ function parseArgs(argv) {
   return out;
 }
 
-function stripTags(html) {
-  return String(html || '')
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function wordCount(text) {
-  const m = String(text || '').match(/[\p{L}\p{N}]+/gu);
-  return m ? m.length : 0;
-}
-
-function normalizeTextForCompare(text) {
-  return String(text || '')
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
 function collectRepeatedLongSentences(chunks) {
   const source = chunks.map((x) => String(x || '')).join(' ');
-  const plain = stripTags(source);
+  const plain = utils.stripTags(source);
   const sentences = plain
     .split(/(?<=[.!?])\s+/)
     .map((s) => s.replace(/\s+/g, ' ').trim())
     .filter(Boolean);
   const map = new Map();
   for (const sentence of sentences) {
-    const norm = normalizeTextForCompare(sentence);
+    const norm = utils.fuzzyNormalize(sentence);
     if (!norm) continue;
-    if (wordCount(norm) < 8) continue;
-    if (norm.length < 45) continue;
+    if (utils.countWords(norm) < REPEATED_SENTENCE_MIN_WORDS) continue;
+    if (norm.length < REPEATED_SENTENCE_MIN_CHARS) continue;
     map.set(norm, (map.get(norm) || 0) + 1);
   }
-  return [...map.entries()].filter(([, c]) => c >= 3);
-}
-
-function isQuestionHeading(text) {
-  return String(text || '').trim().endsWith('?');
+  return [...map.entries()].filter(([, c]) => c >= REPEATED_SENTENCE_MIN_REPEATS);
 }
 
 function findSourceImage(baseName, assetsDir) {
@@ -205,35 +183,36 @@ function main() {
   }
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
-  const quickAnswer = stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
-  const quickAnswerWords = wordCount(quickAnswer);
+  const quickAnswer = utils.stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
+  const quickAnswerWords = utils.countWords(quickAnswer);
   if (!quickAnswer) {
-    errors.push('Brak quick_answer (wymagane 40-60 słów).');
-  } else if (quickAnswerWords < 40 || quickAnswerWords > 60) {
-    errors.push(`quick_answer poza zakresem 40-60 słów (jest ${quickAnswerWords}).`);
+    errors.push(`Brak quick_answer (wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów).`);
+  } else if (quickAnswerWords < POLICY.WORDS.QUICK_ANSWER_MIN || quickAnswerWords > POLICY.WORDS.QUICK_ANSWER_MAX) {
+    errors.push(`quick_answer poza zakresem ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${quickAnswerWords}).`);
   }
   sections.forEach((section, idx) => {
-    if (!isQuestionHeading(String(section.title || section.heading || '').trim())) {
-      errors.push(`sections[${idx + 1}].title musi być pytaniem zakończonym "?".`);
+    const headingRes = validators.validateH2Title(String(section.title || section.heading || '').trim());
+    if (!headingRes.ok) {
+      errors.push(`sections[${idx + 1}].title: ${headingRes.error}`);
     }
     const p = Array.isArray(section.paragraphs_html) ? section.paragraphs_html[0] || '' : '';
-    const wc = wordCount(stripTags(p));
-    if (wc < 35 || wc > 80) {
-      errors.push(`sections[${idx + 1}] pierwszy akapit poza zakresem 35-80 słów (jest ${wc}).`);
+    const introRes = validators.validateIntroParagraph(utils.stripTags(p));
+    if (!introRes.ok) {
+      errors.push(`sections[${idx + 1}] pierwszy akapit: ${introRes.error}`);
     }
   });
 
   const internalLinks = countInternalLinksInSections(sections);
-  if (internalLinks < 4) {
-    errors.push(`Za mało linków kontekstowych w sekcjach JSON: ${internalLinks}/4 (wymagane minimum 4).`);
+  if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_MIN) {
+    errors.push(`Za mało linków kontekstowych w sekcjach JSON: ${internalLinks}/${POLICY.WORDS.INTERNAL_LINKS_MIN} (wymagane minimum ${POLICY.WORDS.INTERNAL_LINKS_MIN}).`);
   }
 
-  if (!Array.isArray(json.answer_blocks) || json.answer_blocks.length < 4) {
-    errors.push(`FAQ answer_blocks: wymagane >=4, jest ${Array.isArray(json.answer_blocks) ? json.answer_blocks.length : 0}.`);
+  if (!Array.isArray(json.answer_blocks) || json.answer_blocks.length < POLICY.WORDS.FAQ_MIN_ITEMS) {
+    errors.push(`FAQ answer_blocks: wymagane >=${POLICY.WORDS.FAQ_MIN_ITEMS}, jest ${Array.isArray(json.answer_blocks) ? json.answer_blocks.length : 0}.`);
   }
   const faqResearch = Array.isArray(json.faq_research) ? json.faq_research : [];
-  if (faqResearch.length < 4) {
-    errors.push(`faq_research: wymagane >=4, jest ${faqResearch.length}.`);
+  if (faqResearch.length < POLICY.WORDS.FAQ_MIN_ITEMS) {
+    errors.push(`faq_research: wymagane >=${POLICY.WORDS.FAQ_MIN_ITEMS}, jest ${faqResearch.length}.`);
   }
   const normalizeQuestion = (value) => String(value || '')
     .toLowerCase()
