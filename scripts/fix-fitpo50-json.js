@@ -433,9 +433,16 @@ function main() {
   delete json.related;
   delete json.related_articles;
 
-  json.title = truncateAtWordBoundary(String(json.title || '').replace(/\s+/g, ' ').trim(), 65);
+  const rawTitleInput = String(json.title || '').replace(/\s+/g, ' ').trim();
+  const rawSeoTitleInput = String(json.seo_title || '').replace(/\s+/g, ' ').trim();
+  json.title = truncateAtWordBoundary(rawTitleInput, 65);
   if (json.title.length < 55) {
     json.title = truncateAtWordBoundary(`${json.title} – praktyczny przewodnik dla osób po 50. roku życia`, 65);
+  }
+  if (!rawSeoTitleInput || rawSeoTitleInput === rawTitleInput) {
+    json.seo_title = truncateAtWordBoundary(json.title, 65);
+  } else {
+    json.seo_title = truncateAtWordBoundary(rawSeoTitleInput, 65);
   }
   json.slug = String(json.slug || '')
     .toLowerCase()

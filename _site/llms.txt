@@ -287,4 +287,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Badanie ApoB: norma, cena i jak czytać wynik – praktyczny | FitPo50"
   section: "Zdrowie"
   summary: "ApoB to dokładniejszy wskaźnik ryzyka serca niż LDL. Sprawdź normy, ceny badania w Polsce i naucz się czytać wynik – szczególnie po pięćdziesiątce."
+- url: https://fitpo50.pl/suplementy-po-50-tce-kompletny-przewodnik.html
+  title: "Suplementy po 50-tce: kompletny przewodnik – praktyczny | FitPo50"
+  section: "Zdrowie"
+  summary: "Które suplementy po 50-tce naprawdę działają? Witamina D3, omega-3, magnez, B12 i kreatyna. Sprawdź, co mówią badania i czego unikać dziś w praktyce."
 

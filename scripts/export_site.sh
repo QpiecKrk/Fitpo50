@@ -100,6 +100,7 @@ rsync -a \
   --exclude="AGENTS.md" \
   --exclude="README.md" \
   --exclude="ARTICLE_STANDARD.md" \
+  --exclude="article-template-bento.html" \
   --exclude="ARTICLE_TEMPLATE_GUIDE.md" \
   --exclude="CLAUDE.md" \
   --exclude="DEPLOY.md" \
@@ -120,9 +121,16 @@ rsync -a \
   --exclude="assets/trash/" \
   --exclude="data/cache/" \
   --exclude="data/gsc/" \
+  --exclude="data/import/" \
   --exclude="data/reports/" \
   --exclude="data/*.fitpo50.json" \
   --exclude="data/internal-link-map.json" \
+  --exclude="tests/" \
+  --exclude="/edit-kortyzol.js" \
+  --exclude="/fix-kortyzol.js" \
+  --exclude="/fix-kortyzol-2.js" \
+  --exclude="/fix-kortyzol-3.js" \
+  --exclude="/fix-kortyzol-4.js" \
   --exclude="_site/" \
   "$ROOT_DIR/" "$OUTPUT_DIR/"
 
