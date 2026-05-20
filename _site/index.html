@@ -1442,16 +1442,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/suplementy-po-50-hero.avif" type="image/avif">
-          <source srcset="./assets/suplementy-po-50-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/suplementy-po-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/hero-dno-miednicy-fitpo50.avif" type="image/avif">
+          <source srcset="./assets/hero-dno-miednicy-fitpo50.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/hero-dno-miednicy-fitpo50.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Suplementy po 50-tce: kompletny przewodnik – praktyczny</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Które suplementy po 50-tce naprawdę działają? Witamina D3, omega-3, magnez, B12 i kreatyna. Sprawdź, co mówią badania i czego unikać dziś w praktyce.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="suplementy-po-50-tce-kompletny-przewodnik.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Mięśnie dna miednicy po 50: jak bezpiecznie trenować?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Jak trenować mięśnie dna miednicy po 50. roku życia? Poznaj rolę oddechu przeponowego, głębokiego core i bezpiecznego treningu siłowego po menopauzie.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="miesnie-dna-miednicy-trening-core-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Suplementy po 50-tce: kompletny przewodnik – praktyczny',
-        excerpt: 'Które suplementy po 50-tce naprawdę działają? Witamina D3, omega-3, magnez, B12 i kreatyna. Sprawdź, co mówią badania i czego unikać dziś w praktyce.',
-        image: './assets/suplementy-po-50-hero.webp',
-        url: 'suplementy-po-50-tce-kompletny-przewodnik.html'
+        title: 'Mięśnie dna miednicy po 50: jak bezpiecznie trenować?',
+        excerpt: 'Jak trenować mięśnie dna miednicy po 50. roku życia? Poznaj rolę oddechu przeponowego, głębokiego core i bezpiecznego treningu siłowego po menopauzie.',
+        image: './assets/hero-dno-miednicy-fitpo50.webp',
+        url: 'miesnie-dna-miednicy-trening-core-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,6 +2236,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Ruch',
+          title: 'Mięśnie dna miednicy po 50: jak bezpiecznie trenować?',
+          excerpt: 'Jak trenować mięśnie dna miednicy po 50. roku życia? Poznaj rolę oddechu przeponowego, głębokiego core i bezpiecznego treningu siłowego po menopauzie.',
+          image: './assets/hero-dno-miednicy-fitpo50.webp',
+          url: 'miesnie-dna-miednicy-trening-core-po-50.html'
+        },
+        {
           category: 'Zdrowie',
           title: 'Suplementy po 50-tce: kompletny przewodnik – praktyczny',
           excerpt: 'Które suplementy po 50-tce naprawdę działają? Witamina D3, omega-3, magnez, B12 i kreatyna. Sprawdź, co mówią badania i czego unikać dziś w praktyce.',
@@ -2248,13 +2255,6 @@
           excerpt: 'ApoB pokazuje liczbę aterogennych cząsteczek we krwi, dlatego lepiej niż LDL pomaga ocenić ryzyko sercowe po 50-tce.',
           image: './assets/apob-hero.webp',
           url: 'apob-norma-cena-jak-czytac-wynik.html'
-        },
-        {
-          category: 'Jedzenie',
-          title: 'Śniadanie białkowo-tłuszczowe: jak odciąć cukrowe zachcianki?',
-          excerpt: 'Śniadanie bogate w białko i tłuszcz stabilizuje poziom cukru we krwi i redukuje popołudniowe zjazdy energii. Sprawdź, co jeść rano i dlaczego to działa.',
-          image: './assets/sniadanie-bialkowo-tluszczowe-hero.webp',
-          url: 'sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

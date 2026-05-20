@@ -291,4 +291,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Suplementy po 50-tce: kompletny przewodnik – praktyczny | FitPo50"
   section: "Zdrowie"
   summary: "Które suplementy po 50-tce naprawdę działają? Witamina D3, omega-3, magnez, B12 i kreatyna. Sprawdź, co mówią badania i czego unikać dziś w praktyce."
+- url: https://fitpo50.pl/miesnie-dna-miednicy-trening-core-po-50.html
+  title: "Mięśnie dna miednicy po 50: jak bezpiecznie trenować? – | FitPo50"
+  section: "Ciekawe"
+  summary: "Jak trenować mięśnie dna miednicy po 50. roku życia? Poznaj rolę oddechu przeponowego, głębokiego core i bezpiecznego treningu siłowego po menopauzie."
 
