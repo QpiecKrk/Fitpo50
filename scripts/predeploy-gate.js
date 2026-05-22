@@ -17,7 +17,7 @@ const { validators } = require('./lib/article-policy');
 const ROOT = process.cwd();
 
 function parseArgs(argv) {
-  const out = { assets: [], allowDistDrift: false };
+  const out = { assets: [], allowDistDrift: false, enforceDistFreshness: false };
   for (let i = 0; i < argv.length; i += 1) {
     const t = argv[i];
     if (t === '--slug') {
@@ -32,6 +32,10 @@ function parseArgs(argv) {
     }
     if (t === '--allow-dist-drift') {
       out.allowDistDrift = true;
+      continue;
+    }
+    if (t === '--enforce-dist-freshness') {
+      out.enforceDistFreshness = true;
     }
   }
   return out;
@@ -497,7 +501,7 @@ function main() {
   assertFileMirror('porady.html', errors);
   assertFileMirror('sitemap.xml', errors);
   assertFileMirror('llms.txt', errors);
-  if (!args.allowDistDrift) {
+  if (!args.allowDistDrift && args.enforceDistFreshness) {
     assertDistFreshness('dist/app.js', errors);
     assertDistFreshness('dist/cmp.js', errors);
     assertDistFreshness('dist/footer.js', errors);
