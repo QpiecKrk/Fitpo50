@@ -12,6 +12,7 @@ function parseArgs(argv) {
   const out = {
     outputJson: path.join(ROOT, 'data', 'reports', 'gsc-weekly-report.json'),
     outputMd: path.join(ROOT, 'data', 'reports', 'gsc-weekly-report.md'),
+    outputCsvDir: path.join(ROOT, 'data', 'gsc'),
   };
   for (let i = 0; i < argv.length; i += 1) {
     const t = String(argv[i] || '').trim();
@@ -22,6 +23,11 @@ function parseArgs(argv) {
     }
     if (t === '--output-md') {
       out.outputMd = path.resolve(ROOT, String(argv[i + 1] || '').trim());
+      i += 1;
+      continue;
+    }
+    if (t === '--output-csv-dir') {
+      out.outputCsvDir = path.resolve(ROOT, String(argv[i + 1] || '').trim());
       i += 1;
     }
   }
@@ -199,6 +205,68 @@ function ensureDir(filePath) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 }
 
+function csvEscape(value) {
+  const v = String(value ?? '');
+  if (/[",\n]/.test(v)) return `"${v.replace(/"/g, '""')}"`;
+  return v;
+}
+
+function writeCsv(filePath, headers, rows) {
+  ensureDir(filePath);
+  const lines = [headers.join(',')];
+  rows.forEach((row) => {
+    const line = headers.map((h) => csvEscape(row[h])).join(',');
+    lines.push(line);
+  });
+  fs.writeFileSync(filePath, `${lines.join('\n')}\n`, 'utf8');
+}
+
+function writeCanonicalCsvTriplet(outputCsvDir, data) {
+  const baseDir = path.resolve(ROOT, outputCsvDir);
+  fs.mkdirSync(baseDir, { recursive: true });
+
+  const queries = Array.isArray(data?.queries) ? data.queries : [];
+  const pages = Array.isArray(data?.pages) ? data.pages : [];
+  const queryPages = Array.isArray(data?.queryPages) ? data.queryPages : [];
+
+  writeCsv(
+    path.join(baseDir, 'queries.csv'),
+    ['query', 'clicks', 'impressions', 'ctr', 'position'],
+    queries.map((r) => ({
+      query: r.query,
+      clicks: Number(r.clicks || 0),
+      impressions: Number(r.impressions || 0),
+      ctr: Number(r.ctr || 0),
+      position: Number(r.position || 0),
+    })),
+  );
+
+  writeCsv(
+    path.join(baseDir, 'pages.csv'),
+    ['page', 'clicks', 'impressions', 'ctr', 'position'],
+    pages.map((r) => ({
+      page: r.page,
+      clicks: Number(r.clicks || 0),
+      impressions: Number(r.impressions || 0),
+      ctr: Number(r.ctr || 0),
+      position: Number(r.position || 0),
+    })),
+  );
+
+  writeCsv(
+    path.join(baseDir, 'query-pages.csv'),
+    ['query', 'page', 'clicks', 'impressions', 'ctr', 'position'],
+    queryPages.map((r) => ({
+      query: r.query,
+      page: r.page,
+      clicks: Number(r.clicks || 0),
+      impressions: Number(r.impressions || 0),
+      ctr: Number(r.ctr || 0),
+      position: Number(r.position || 0),
+    })),
+  );
+}
+
 function writeReport(report, outputJson, outputMd) {
   ensureDir(outputJson);
   ensureDir(outputMd);
@@ -352,6 +420,7 @@ async function main() {
 
   if ((!sa && !oauth) || !property) {
     const report = emptyReport(property, missingConfig);
+    writeCanonicalCsvTriplet(args.outputCsvDir, { queries: [], pages: [], queryPages: [] });
     writeReport(report, args.outputJson, args.outputMd);
     console.log('[WARN] GSC API config missing. Generated reminder report.');
     console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
@@ -458,6 +527,11 @@ async function main() {
       status: 'ok',
       property,
       auth_mode: authMode,
+      raw_csv_rows: {
+        queries: queriesCurrent,
+        pages: pagesCurrent,
+        query_pages: qpCurrent,
+      },
       ranges,
       summary: {
         current: summaryCurrent,
@@ -506,6 +580,7 @@ async function main() {
   }
   if (!report) {
     report = authFailedReport(property, authErrors.join(' | '));
+    writeCanonicalCsvTriplet(args.outputCsvDir, { queries: [], pages: [], queryPages: [] });
     writeReport(report, args.outputJson, args.outputMd);
     console.log('[WARN] GSC API auth failed. Generated fallback reminder report.');
     if (report.error) {
@@ -516,6 +591,12 @@ async function main() {
     return;
   }
 
+  writeCanonicalCsvTriplet(args.outputCsvDir, {
+    queries: report.raw_csv_rows?.queries || [],
+    pages: report.raw_csv_rows?.pages || [],
+    queryPages: report.raw_csv_rows?.query_pages || [],
+  });
+  delete report.raw_csv_rows;
   writeReport(report, args.outputJson, args.outputMd);
   console.log('[PASS] GSC API weekly report generated.');
   console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);

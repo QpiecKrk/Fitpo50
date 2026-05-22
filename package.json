@@ -22,6 +22,7 @@
     "content:freshness:report": "node scripts/content-freshness-bot.js",
     "gsc:weekly:api": "node scripts/gsc-weekly-api-report.js",
     "gsc:weekly:report": "node scripts/gsc-weekly-csv-report.js",
+    "gsc:auto": "node scripts/gsc-auto-report.js",
     "gsc:indexing:watchdog": "node scripts/gsc-indexing-watchdog.js",
     "live:postpush:check": "bash scripts/live-postpush-check.sh https://fitpo50.pl",
     "live:latest:check": "node scripts/live-latest-article-check.js --base-url https://fitpo50.pl",
