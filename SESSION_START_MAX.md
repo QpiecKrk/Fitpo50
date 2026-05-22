@@ -121,6 +121,7 @@ Tryb pracy:
   - przeczytaj issue `SEO/AEO: TODO tygodnia (auto)` jesli istnieje,
   - uruchom technicznie `npm run gsc:auto` (najpierw pozyskaj/synchronizuj `queries`, `pages`, `query-pages`),
   - pracuj na danych poza repo: domyslny katalog roboczy `~/Downloads/gsc-auto-input` (CSV + raporty GSC),
+  - brak `queries.csv` lub `pages.csv` lub `query-pages.csv` w `~/Downloads/gsc-auto-input` oznacza twardy `INSUFFICIENT_DATA` (bez fallbacku do `data/gsc`),
   - podaj po polsku raport premium wg `.agent/skills/gsc-content-strategy/SKILL.md`: Data Quality Gate, Top Queries/Pages, Opportunity Score, CTR Gap, Quick Wins, Content Gaps, Action Cards oraz plan 7/14/28 dni.
 
 Raport koncowy po zadaniu:

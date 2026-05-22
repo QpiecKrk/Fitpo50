@@ -2,11 +2,13 @@
 
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 const ROOT = process.cwd();
-const DEFAULT_INPUT_DIR = path.join(ROOT, 'data', 'gsc');
-const DEFAULT_OUTPUT_JSON = path.join(ROOT, 'data', 'reports', 'gsc-weekly-report.json');
-const DEFAULT_OUTPUT_MD = path.join(ROOT, 'data', 'reports', 'gsc-weekly-report.md');
+const DEFAULT_WORK_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+const DEFAULT_INPUT_DIR = DEFAULT_WORK_DIR;
+const DEFAULT_OUTPUT_JSON = path.join(DEFAULT_WORK_DIR, 'gsc-weekly-report.json');
+const DEFAULT_OUTPUT_MD = path.join(DEFAULT_WORK_DIR, 'gsc-weekly-report.md');
 
 function parseArgs(argv) {
   const out = {
@@ -167,6 +169,30 @@ function median(values) {
   return (arr[mid - 1] + arr[mid]) / 2;
 }
 
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function opportunityScore(row, ctrMedian) {
+  const positionScore = row.position > 0 ? clamp((20 - row.position) / 20, 0, 1) : 0;
+  const impressionsScore = clamp(Math.log10(Math.max(1, row.impressions)) / 4, 0, 1);
+  const ctrGap = clamp((Math.max(ctrMedian, 1) - row.ctr) / Math.max(ctrMedian, 1), 0, 1);
+  const clickDeficit = clamp((row.impressions - row.clicks) / Math.max(1, row.impressions), 0, 1);
+  return Math.round((0.35 * positionScore + 0.3 * impressionsScore + 0.25 * ctrGap + 0.1 * clickDeficit) * 100);
+}
+
+function inferCategoryAndTitle(query) {
+  const q = String(query || '').toLowerCase();
+  const rules = [
+    { category: 'jedzenie', re: /(dieta|bialko|białko|kreatyn|cholesterol|apob|apoa|glukoza|insulina|jedzen|odzyw|odżyw)/, title: `Co jeść po 50? ${query}` },
+    { category: 'ruch', re: /(trening|podciagn|podciąg|spacer|bieg|cwic|ćwic|silow|siła|mobiln)/, title: `Ruch po 50: ${query} — plan krok po kroku` },
+    { category: 'zdrowie', re: /(kortyzol|rtg|usg|badanie|cisnienie|ciśnienie|serce|horm|sen|stres|oponka)/, title: `Zdrowie po 50: ${query} — kiedy działa i dla kogo` },
+    { category: 'ciekawe', re: /(wiek biologic|epigen|sakad|longevity|mit|fakt|nauk|biohack)/, title: `${query}: co mówi nauka po 50?` },
+  ];
+  const matched = rules.find((r) => r.re.test(q));
+  return matched || { category: 'ciekawe', title: `${query}: praktyczne wyjaśnienie po 50` };
+}
+
 function pickLatestByType(filesMeta, type) {
   const set = filesMeta.filter((f) => f.type === type);
   if (!set.length) return null;
@@ -201,6 +227,12 @@ function writeOutputs(report, outputJson, outputMd) {
     lines.push('');
     lines.push('Następnie uruchom: `npm run gsc:weekly:report`');
   } else {
+    lines.push('## Data Quality Gate');
+    lines.push(`- status: **${report.data_quality.status}**`);
+    lines.push(`- rows: queries=${report.data_quality.rows_queries}, pages=${report.data_quality.rows_pages}, query_pages=${report.data_quality.rows_query_pages}`);
+    lines.push(`- duplicates (query+page): ${report.data_quality.duplicate_query_page_pairs}`);
+    lines.push(`- anomalies: ctr>100=${report.data_quality.anomalies_ctr_over_100}, position<=0=${report.data_quality.anomalies_position_non_positive}`);
+    lines.push('');
     lines.push('## Podsumowanie');
     lines.push(`- Kliknięcia: **${Math.round(report.summary.total_clicks)}**`);
     lines.push(`- Wyświetlenia: **${Math.round(report.summary.total_impressions)}**`);
@@ -238,6 +270,15 @@ function writeOutputs(report, outputJson, outputMd) {
     report.weekly_plan.forEach((step, idx) => {
       lines.push(`${idx + 1}. ${step}`);
     });
+    lines.push('');
+    lines.push('## Propozycje nowych artykułów (1/kategoria)');
+    Object.entries(report.content_gaps || {}).forEach(([cat, item]) => {
+      if (!item || item.status === 'INSUFFICIENT_DATA') {
+        lines.push(`- ${cat}: INSUFFICIENT_DATA`);
+      } else {
+        lines.push(`- ${cat}: ${item.title} (query: "${item.query}", score: ${item.score})`);
+      }
+    });
   }
 
   lines.push('');
@@ -259,6 +300,31 @@ function main() {
     fs.mkdirSync(args.inputDir, { recursive: true });
   }
 
+  const requiredNames = ['queries.csv', 'pages.csv', 'query-pages.csv'];
+  const missingRequired = requiredNames.filter((n) => !fs.existsSync(path.join(args.inputDir, n)));
+  if (missingRequired.length) {
+    const report = {
+      generated_at: new Date().toISOString(),
+      status: 'INSUFFICIENT_DATA',
+      reason: `Brak wymaganych plików: ${missingRequired.join(', ')}`,
+      inputs: {
+        input_dir: args.inputDir,
+        queries: fs.existsSync(path.join(args.inputDir, 'queries.csv')) ? path.join(args.inputDir, 'queries.csv') : '',
+        pages: fs.existsSync(path.join(args.inputDir, 'pages.csv')) ? path.join(args.inputDir, 'pages.csv') : '',
+        query_pages: fs.existsSync(path.join(args.inputDir, 'query-pages.csv')) ? path.join(args.inputDir, 'query-pages.csv') : '',
+      },
+      summary: { total_clicks: 0, total_impressions: 0, avg_ctr: 0, avg_position: 0 },
+      data_quality: { status: 'FAIL', rows_queries: 0, rows_pages: 0, rows_query_pages: 0, duplicate_query_page_pairs: 0, anomalies_ctr_over_100: 0, anomalies_position_non_positive: 0 },
+      opportunities: { top3_zero_click: [], top10_zero_click: [], ctr_problems: [], cannibalization: [], page_opportunities: [] },
+      weekly_plan: ['Dostarcz 3 pliki CSV do ~/Downloads/gsc-auto-input i uruchom ponownie.'],
+      content_gaps: {},
+    };
+    writeOutputs(report, args.outputJson, args.outputMd);
+    console.log(`[FAIL] ${report.reason}`);
+    process.exitCode = 2;
+    return;
+  }
+
   const files = fs.readdirSync(args.inputDir).filter((f) => f.toLowerCase().endsWith('.csv'));
   for (const file of files) {
     const abs = path.join(args.inputDir, file);
@@ -275,23 +341,32 @@ function main() {
     });
   }
 
-  const latestQueries = pickLatestByType(filesMeta, 'queries');
-  const latestPages = pickLatestByType(filesMeta, 'pages');
-  const latestQueryPages = pickLatestByType(filesMeta, 'query_pages');
+  const latestQueries = filesMeta.find((f) => f.name === 'queries.csv') || pickLatestByType(filesMeta, 'queries');
+  const latestPages = filesMeta.find((f) => f.name === 'pages.csv') || pickLatestByType(filesMeta, 'pages');
+  const latestQueryPages = filesMeta.find((f) => f.name === 'query-pages.csv') || pickLatestByType(filesMeta, 'query_pages');
 
   const report = {
     generated_at: new Date().toISOString(),
     status: 'missing_data',
     inputs: {
-      queries: latestQueries ? path.relative(ROOT, latestQueries.abs) : '',
-      pages: latestPages ? path.relative(ROOT, latestPages.abs) : '',
-      query_pages: latestQueryPages ? path.relative(ROOT, latestQueryPages.abs) : '',
+      queries: latestQueries ? latestQueries.abs : '',
+      pages: latestPages ? latestPages.abs : '',
+      query_pages: latestQueryPages ? latestQueryPages.abs : '',
     },
     summary: {
       total_clicks: 0,
       total_impressions: 0,
       avg_ctr: 0,
       avg_position: 0,
+    },
+    data_quality: {
+      status: 'FAIL',
+      rows_queries: 0,
+      rows_pages: 0,
+      rows_query_pages: 0,
+      duplicate_query_page_pairs: 0,
+      anomalies_ctr_over_100: 0,
+      anomalies_position_non_positive: 0,
     },
     opportunities: {
       top3_zero_click: [],
@@ -306,8 +381,8 @@ function main() {
   if (!latestQueries || !latestPages) {
     report.weekly_plan = [
       'Wyeksportuj z GSC CSV: Queries, Pages i Query+Page (zakres 28 dni).',
-      'Skopiuj CSV do katalogu data/gsc.',
-      'Uruchom npm run gsc:weekly:report.',
+      'Skopiuj CSV do katalogu ~/Downloads/gsc-auto-input.',
+      'Uruchom npm run gsc:auto.',
       'Wybierz 3-5 okazji i popraw 2-3 artykuły.',
       'Po publikacji poproś o indeksację w GSC.',
     ];
@@ -315,6 +390,7 @@ function main() {
     console.log(`[WARN] Brak kompletu CSV w ${args.inputDir}. Wygenerowano tylko checklistę przypominającą.`);
     console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
     console.log(`- MD: ${path.relative(ROOT, args.outputMd)}`);
+    process.exitCode = 2;
     return;
   }
 
@@ -392,7 +468,21 @@ function main() {
     }))
     .sort((a, b) => b.impressions - a.impressions);
 
+  const dupPairs = new Set();
+  qpRows.forEach((r) => dupPairs.add(`${r.query.toLowerCase()}||${r.page.toLowerCase()}`));
+  const anomaliesCtr = queryRows.filter((r) => r.ctr > 100).length + pageRows.filter((r) => r.ctr > 100).length;
+  const anomaliesPos = queryRows.filter((r) => r.position <= 0).length + pageRows.filter((r) => r.position <= 0).length;
+
   report.status = 'ok';
+  report.data_quality = {
+    status: anomaliesCtr === 0 && anomaliesPos === 0 ? 'PASS' : 'WARN',
+    rows_queries: queryRows.length,
+    rows_pages: pageRows.length,
+    rows_query_pages: qpRows.length,
+    duplicate_query_page_pairs: qpRows.length - dupPairs.size,
+    anomalies_ctr_over_100: anomaliesCtr,
+    anomalies_position_non_positive: anomaliesPos,
+  };
   report.summary = {
     total_clicks: totalClicks,
     total_impressions: totalImpressions,
@@ -400,10 +490,14 @@ function main() {
     avg_position: avgPosition,
     ctr_pool_median: poolMedianCtr,
   };
+  const enrichedTop10 = top10Zero.map((r) => ({ ...r, opportunity_score: opportunityScore(r, poolMedianCtr) }))
+    .sort((a, b) => b.opportunity_score - a.opportunity_score);
+  const enrichedCtrProblems = ctrProblems.map((r) => ({ ...r, opportunity_score: opportunityScore(r, poolMedianCtr) }))
+    .sort((a, b) => b.opportunity_score - a.opportunity_score);
   report.opportunities = {
     top3_zero_click: top3Zero.slice(0, 20),
-    top10_zero_click: top10Zero.slice(0, 30),
-    ctr_problems: ctrProblems.slice(0, 30),
+    top10_zero_click: enrichedTop10.slice(0, 30),
+    ctr_problems: enrichedCtrProblems.slice(0, 30),
     cannibalization: cannibalization.slice(0, 20),
     page_opportunities: pageOpp.slice(0, 20),
   };
@@ -429,6 +523,35 @@ function main() {
     'Po zmianach: request indexing w GSC i weryfikacja efektu po 7 dniach.',
   ];
 
+  const categoryOrder = ['jedzenie', 'ruch', 'zdrowie', 'ciekawe'];
+  const usedQueries = new Set();
+  const candidates = [...enrichedTop10, ...enrichedCtrProblems]
+    .filter((r) => r.impressions >= 10 && r.position >= 3 && r.position <= 90)
+    .sort((a, b) => b.opportunity_score - a.opportunity_score);
+  const contentGaps = {};
+  categoryOrder.forEach((cat) => {
+    const hit = candidates.find((r) => {
+      if (usedQueries.has(r.query)) return false;
+      const inferred = inferCategoryAndTitle(r.query);
+      return inferred.category === cat;
+    });
+    if (!hit) {
+      contentGaps[cat] = { status: 'INSUFFICIENT_DATA' };
+      return;
+    }
+    usedQueries.add(hit.query);
+    const inferred = inferCategoryAndTitle(hit.query);
+    contentGaps[cat] = {
+      status: 'OK',
+      title: inferred.title,
+      query: hit.query,
+      score: hit.opportunity_score,
+      position: Number(hit.position.toFixed(2)),
+      impressions: Math.round(hit.impressions),
+    };
+  });
+  report.content_gaps = contentGaps;
+
   writeOutputs(report, args.outputJson, args.outputMd);
   console.log(`[PASS] GSC weekly CSV report generated.`);
   console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
@@ -437,4 +560,3 @@ function main() {
 }
 
 main();
-

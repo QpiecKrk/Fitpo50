@@ -42,6 +42,7 @@
   - tryb danych GSC: surowe CSV i raporty zapisuj domyślnie poza repo w `~/Downloads/gsc-auto-input`:
     - `queries.csv`, `pages.csv`, `query-pages.csv`
     - `gsc-weekly-report.json`, `gsc-weekly-report.md`
+  - zasada jakości wejścia: brak któregokolwiek z 3 plików w `~/Downloads/gsc-auto-input` = twardy `INSUFFICIENT_DATA` (bez analizy i bez fallbacku do `data/gsc`).
 
 ## Critical files / areas
 - `_site/` - publiczny output do deployu
