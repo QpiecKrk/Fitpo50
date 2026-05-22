@@ -35,7 +35,13 @@
   - sprawdź najnowszy issue z raportem GSC na GitHub,
   - przeczytaj issue `SEO/AEO: Poniedziałkowy raport GSC`,
   - przeczytaj issue `SEO/AEO: TODO tygodnia (auto)` jeśli istnieje,
-  - przygotuj po polsku raport zmian, ryzyk, braków i proponowanych ulepszeń.
+  - przygotuj po polsku raport zmian, ryzyk, braków i proponowanych ulepszeń,
+  - raport ma być generowany według aktualnego skilla `.agent/skills/gsc-content-strategy/SKILL.md` (wersja premium: Data Quality Gate, Opportunity Score, CTR Gap, Action Cards, plan 7/14/28 dni),
+  - raport GSC ma zawierać propozycje nowych artykułów po 1 dla każdej kategorii (`jedzenie`, `ciekawe`, `ruch`, `zdrowie`) wyłącznie na podstawie danych CSV; przy brakach danych agent ma oznaczyć `INSUFFICIENT_DATA` i zadać krótkie pytanie doprecyzowujące.
+  - krok techniczny przed analizą: uruchom `npm run gsc:auto` (auto-pobranie/sync `queries.csv`, `pages.csv`, `query-pages.csv`), dopiero potem generuj raport premium.
+  - tryb danych GSC: surowe CSV i raporty zapisuj domyślnie poza repo w `~/Downloads/gsc-auto-input`:
+    - `queries.csv`, `pages.csv`, `query-pages.csv`
+    - `gsc-weekly-report.json`, `gsc-weekly-report.md`
 
 ## Critical files / areas
 - `_site/` - publiczny output do deployu
