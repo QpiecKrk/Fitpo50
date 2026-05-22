@@ -2128,6 +2128,12 @@ function runPdfSync(slug, dryRun) {
   return { ok: true };
 }
 
+function runTitleBreadcrumbSync(slug, dryRun) {
+  if (dryRun) return { skipped: true };
+  runCommand('Sync social title + BreadcrumbList', 'node', ['scripts/sync-article-title-breadcrumb.js', '--slug', slug]);
+  return { ok: true };
+}
+
 function writeArticleFiles(slug, html, syncSite, dryRun, force) {
   const outPath = path.join(ROOT, `${slug}.html`);
   if (fs.existsSync(outPath) && !force) {
@@ -2570,6 +2576,8 @@ async function main() {
 
   runPdfSync(payload.slug, dryRun);
   updatedFiles.push('assets/pdf/<slug>.pdf + przycisk PDF + schema encoding');
+  runTitleBreadcrumbSync(payload.slug, dryRun);
+  updatedFiles.push('social title + BreadcrumbList (source/_site)');
 
   if (runValidate) {
     runValidator(payload.slug, dryRun);

@@ -977,19 +977,28 @@ Jesli artykul ma obrazy:
 
 ## Ustalenia operacyjne 2026-05-17 (SEO sync + workflow hygiene)
 
-- Rozdzielenie tytułów SEO vs social jest świadome i docelowe:
-  - `<title>` mapujemy z `seo_title`,
-  - `og:title`, `twitter:title` oraz `h1` mapujemy z `title`,
-  - warning gate o różnicy między `<title>` a `og:title` / `twitter:title` traktujemy jako celowy kompromis SEO/social, a nie błąd do "naprawienia".
+- Tytuly w head i social maja byc spojne po imporcie:
+  - `og:title` i `twitter:title` synchronizujemy do bazowego tytulu z `<title>` (bez suffixu `| FitPo50`),
+  - warning gate o roznicy miedzy `<title>` a `og:title` / `twitter:title` traktujemy jako blad do natychmiastowej naprawy.
 
 - `scripts/article-sync-pro.js` jest nowym narzędziem kanonicznym do synchronizacji SEO i listingów:
   - źródłem prawdy są pola w `data/import/*.json`,
   - zalecany workflow: najpierw `--dry-run`, potem właściwy zapis,
   - unikamy ręcznej edycji tytułów, meta description, JSON-LD headline/description i tekstów kart listingowych bezpośrednio w HTML, jeśli zmiana może zostać wykonana przez ten skrypt.
 
-- Higiena workflow i eksportu:
+  - Higiena workflow i eksportu:
   - eksport statyczny nie może kopiować `node_modules/` do katalogu wynikowego,
   - techniczne commity `[auto-sync] news status ...` z panelu NEWS nie powinny uruchamiać pełnych gate'ów publikacyjnych, bo są stanem pomocniczym procesu redakcyjnego, a nie docelowym publishem treści.
+
+## Ustalenia operacyjne 2026-05-22 (auto-fix social title + BreadcrumbList)
+
+- W `scripts/article-pipeline.js` po kroku importu uruchamiamy automatyczny krok:
+  - `node scripts/sync-article-title-breadcrumb.js --slug <slug>`
+- Krok jest obowiazkowy przed `article-contract-check` i ma zapewnic:
+  - spojnosc `og:title` i `twitter:title` z `<title>` (porownanie do wersji bez `| FitPo50`),
+  - obecne schema `BreadcrumbList` w source i `_site`.
+- `BreadcrumbList` traktujemy jako element wymagany kontraktu artykulu:
+  - brak = warning kontraktu, do poprawy przed statusem "gotowe".
 
 ## Ustalenia operacyjne 2026-05-18 (Publishing Policy Engine - domknięcie refaktoru)
 

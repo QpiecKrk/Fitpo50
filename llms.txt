@@ -295,4 +295,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Mięśnie dna miednicy po 50: jak bezpiecznie trenować? – | FitPo50"
   section: "Ciekawe"
   summary: "Jak trenować mięśnie dna miednicy po 50. roku życia? Poznaj rolę oddechu przeponowego, głębokiego core i bezpiecznego treningu siłowego po menopauzie."
+- url: https://fitpo50.pl/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html
+  title: "Jak obniżyć kortyzol po 50-tce? Stres i oponka brzuszna | FitPo50"
+  section: "Zdrowie"
+  summary: "Wysoki kortyzol po 50-tce odkłada tłuszcz trzewny i skraca telomery. Sprawdź, jak go zbadać i obniżyć – bez ekstremów, za to z nauką po swojej stronie."
 
