@@ -7,13 +7,15 @@ const { spawnSync } = require('child_process');
 const https = require('https');
 
 const ROOT = process.cwd();
-const INPUT_DIR = path.join(ROOT, 'data', 'gsc');
+const DEFAULT_DOWNLOADS_DIR = process.env.GSC_DOWNLOADS_DIR || path.join(os.homedir(), 'Downloads');
+const DEFAULT_WORK_DIR = process.env.GSC_WORK_DIR || path.join(DEFAULT_DOWNLOADS_DIR, 'gsc-auto-input');
 
 function parseArgs(argv) {
   const out = {
     repo: process.env.GSC_GH_REPO || 'QpiecKrk/Fitpo50',
     artifact: process.env.GSC_GH_ARTIFACT_NAME || 'gsc-csv',
-    downloadsDir: process.env.GSC_DOWNLOADS_DIR || path.join(os.homedir(), 'Downloads'),
+    downloadsDir: DEFAULT_DOWNLOADS_DIR,
+    workDir: DEFAULT_WORK_DIR,
     preferGithub: true,
   };
   for (let i = 0; i < argv.length; i += 1) {
@@ -30,6 +32,11 @@ function parseArgs(argv) {
     }
     if (t === '--downloads-dir') {
       out.downloadsDir = path.resolve(ROOT, String(argv[i + 1] || '').trim());
+      i += 1;
+      continue;
+    }
+    if (t === '--work-dir') {
+      out.workDir = path.resolve(ROOT, String(argv[i + 1] || '').trim());
       i += 1;
       continue;
     }
@@ -173,25 +180,18 @@ function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-function timestampLabel() {
-  const d = new Date();
-  const pad = (n) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
-}
-
-function copyTypedCsvToInput(byType) {
-  ensureDir(INPUT_DIR);
-  const stamp = timestampLabel();
+function copyTypedCsvToInput(byType, inputDir) {
+  ensureDir(inputDir);
   const mapping = {
-    queries: `queries-${stamp}.csv`,
-    pages: `pages-${stamp}.csv`,
-    query_pages: `query-pages-${stamp}.csv`,
+    queries: 'queries.csv',
+    pages: 'pages.csv',
+    query_pages: 'query-pages.csv',
   };
   const copied = {};
   for (const [type, filename] of Object.entries(mapping)) {
     if (!byType[type] || !byType[type][0]) continue;
     const src = byType[type][0].file;
-    const dst = path.join(INPUT_DIR, filename);
+    const dst = path.join(inputDir, filename);
     fs.copyFileSync(src, dst);
     copied[type] = dst;
   }
@@ -294,8 +294,14 @@ function tryExtractZipFromDownloads(downloadsDir, tempDir) {
   return { ok: true, zip: latest };
 }
 
-function runWeeklyReport() {
-  const res = run('node', ['scripts/gsc-weekly-csv-report.js', '--input-dir', INPUT_DIR], { stdio: 'inherit' });
+function runWeeklyReport(inputDir, workDir) {
+  const outputJson = path.join(workDir, 'gsc-weekly-report.json');
+  const outputMd = path.join(workDir, 'gsc-weekly-report.md');
+  const res = run(
+    'node',
+    ['scripts/gsc-weekly-csv-report.js', '--input-dir', inputDir, '--output-json', outputJson, '--output-md', outputMd],
+    { stdio: 'inherit' },
+  );
   if (res.status !== 0) {
     throw new Error('gsc-weekly-csv-report failed.');
   }
@@ -303,13 +309,14 @@ function runWeeklyReport() {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  ensureDir(INPUT_DIR);
+  const inputDir = path.resolve(args.workDir);
+  ensureDir(inputDir);
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gsc-auto-'));
 
-  const localCsv = collectCsvByType(walkFiles(INPUT_DIR));
+  const localCsv = collectCsvByType(walkFiles(inputDir));
   if (haveAllThree(localCsv)) {
-    console.log('[GSC-AUTO] Używam CSV już obecnych w data/gsc.');
-    runWeeklyReport();
+    console.log(`[GSC-AUTO] Używam CSV już obecnych w ${inputDir}.`);
+    runWeeklyReport(inputDir, inputDir);
     return;
   }
 
@@ -348,13 +355,13 @@ async function main() {
     throw new Error('Brak kompletu CSV (queries/pages/query_pages). Dostarcz eksport GSC lub działający artifact GitHub.');
   }
 
-  const copied = copyTypedCsvToInput(typed);
-  console.log('[GSC-AUTO] Skopiowano CSV do data/gsc:', copied);
+  const copied = copyTypedCsvToInput(typed, inputDir);
+  console.log(`[GSC-AUTO] Skopiowano CSV do ${inputDir}:`, copied);
   if (sourceLabel) {
     console.log(`[GSC-AUTO] Źródło: ${sourceLabel}`);
   }
 
-  runWeeklyReport();
+  runWeeklyReport(inputDir, inputDir);
 }
 
 main().catch((err) => {
