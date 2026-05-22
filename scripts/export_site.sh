@@ -72,7 +72,7 @@ run_minification() {
 echo "Uruchamiam aktualną walidację predeploy..."
 (
   cd "$ROOT_DIR"
-  "$NODE_BIN" scripts/predeploy-gate.js
+  "$NODE_BIN" scripts/predeploy-gate.js --allow-dist-drift
 )
 
 rm -rf "$OUTPUT_DIR"

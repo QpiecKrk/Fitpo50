@@ -689,4 +689,80 @@
     schedulePrefetch(anchor);
   }, { passive: true });
 
+  // ----------------------------------------------------------
+  // ARTICLE SHARE ACTIONS (global fallback)
+  // ----------------------------------------------------------
+  const topShareBtn = document.getElementById('share-article-top') as HTMLButtonElement | null;
+  const shareStatus = document.getElementById('share-status') as HTMLElement | null;
+  const shareLinks = Array.from(document.querySelectorAll<HTMLElement>('[data-share-network]'));
+
+  if (topShareBtn && shareLinks.length > 0) {
+    const pageUrl = window.location.href;
+    const pageTitle = document.title.replace(/\s*\|\s*FitPo50\s*$/i, '').trim();
+    const encodedUrl = encodeURIComponent(pageUrl);
+    const encodedTitle = encodeURIComponent(pageTitle);
+
+    const setShareStatus = (message: string) => {
+      if (!shareStatus) return;
+      shareStatus.textContent = message;
+    };
+
+    const shareUrls: Record<string, string> = {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+      whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
+      mail: `mailto:?subject=${encodedTitle}&body=${encodedTitle}%0A%0A${encodedUrl}`
+    };
+
+    shareLinks.forEach((item) => {
+      const network = item.getAttribute('data-share-network');
+      if (!network) return;
+
+      if (network in shareUrls && item instanceof HTMLAnchorElement) {
+        item.href = shareUrls[network];
+      }
+
+      item.addEventListener('click', async (event) => {
+        const currentNetwork = item.getAttribute('data-share-network');
+        if (!currentNetwork) return;
+
+        if (currentNetwork === 'copy') {
+          event.preventDefault();
+          try {
+            await navigator.clipboard.writeText(pageUrl);
+            setShareStatus('Link skopiowany do schowka.');
+          } catch {
+            setShareStatus('Nie udało się skopiować linku.');
+          }
+          return;
+        }
+
+        if (currentNetwork === 'mail') {
+          setShareStatus('Otwieram klienta poczty.');
+          return;
+        }
+
+        setShareStatus('Otwieram okno udostępniania.');
+      });
+    });
+
+    topShareBtn.addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: pageTitle, text: pageTitle, url: pageUrl });
+          setShareStatus('Udostępniono.');
+          return;
+        } catch {
+          // fallback below
+        }
+      }
+
+      const shareSection = document.querySelector<HTMLElement>('.share-article-section');
+      if (shareSection) {
+        shareSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      setShareStatus('Wybierz kanał udostępniania poniżej.');
+    });
+  }
+
 })();

@@ -17,7 +17,7 @@ const { validators } = require('./lib/article-policy');
 const ROOT = process.cwd();
 
 function parseArgs(argv) {
-  const out = { assets: [] };
+  const out = { assets: [], allowDistDrift: false };
   for (let i = 0; i < argv.length; i += 1) {
     const t = argv[i];
     if (t === '--slug') {
@@ -28,6 +28,10 @@ function parseArgs(argv) {
     if (t === '--asset') {
       out.assets.push(String(argv[i + 1] || '').trim());
       i += 1;
+      continue;
+    }
+    if (t === '--allow-dist-drift') {
+      out.allowDistDrift = true;
     }
   }
   return out;
@@ -292,6 +296,25 @@ function assertFileMirror(relPath, errors) {
   }
 }
 
+function assertDistFreshness(relPath, errors) {
+  const mirror = `_site/${relPath}`;
+  const srcAbs = path.join(ROOT, relPath);
+  const mirrorAbs = path.join(ROOT, mirror);
+  if (!fs.existsSync(srcAbs)) {
+    errors.push(`Brak pliku source: ${relPath}`);
+    return;
+  }
+  if (!fs.existsSync(mirrorAbs)) {
+    errors.push(`Brak pliku mirror: ${mirror}`);
+    return;
+  }
+  const srcMtime = fs.statSync(srcAbs).mtimeMs;
+  const mirrorMtime = fs.statSync(mirrorAbs).mtimeMs;
+  if (mirrorMtime + 1 < srcMtime) {
+    errors.push(`Stary bundle w _site: ${mirror} jest starszy niz ${relPath} (uruchom export_site.sh).`);
+  }
+}
+
 function validateReadingTimeLabels(errors) {
   const targets = [];
   for (const dir of ['.', '_site']) {
@@ -474,6 +497,11 @@ function main() {
   assertFileMirror('porady.html', errors);
   assertFileMirror('sitemap.xml', errors);
   assertFileMirror('llms.txt', errors);
+  if (!args.allowDistDrift) {
+    assertDistFreshness('dist/app.js', errors);
+    assertDistFreshness('dist/cmp.js', errors);
+    assertDistFreshness('dist/footer.js', errors);
+  }
 
   const slug = normalizeSlug(args.slug);
   if (slug) {

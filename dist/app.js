@@ -527,5 +527,65 @@
       if (!anchor) return;
       schedulePrefetch(anchor);
     }, { passive: true });
+    const topShareBtn = document.getElementById("share-article-top");
+    const shareStatus = document.getElementById("share-status");
+    const shareLinks = Array.from(document.querySelectorAll("[data-share-network]"));
+    if (topShareBtn && shareLinks.length > 0) {
+      const pageUrl = window.location.href;
+      const pageTitle = document.title.replace(/\s*\|\s*FitPo50\s*$/i, "").trim();
+      const encodedUrl = encodeURIComponent(pageUrl);
+      const encodedTitle = encodeURIComponent(pageTitle);
+      const setShareStatus = (message) => {
+        if (!shareStatus) return;
+        shareStatus.textContent = message;
+      };
+      const shareUrls = {
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+        linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+        whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
+        mail: `mailto:?subject=${encodedTitle}&body=${encodedTitle}%0A%0A${encodedUrl}`
+      };
+      shareLinks.forEach((item) => {
+        const network = item.getAttribute("data-share-network");
+        if (!network) return;
+        if (network in shareUrls && item instanceof HTMLAnchorElement) {
+          item.href = shareUrls[network];
+        }
+        item.addEventListener("click", async (event) => {
+          const currentNetwork = item.getAttribute("data-share-network");
+          if (!currentNetwork) return;
+          if (currentNetwork === "copy") {
+            event.preventDefault();
+            try {
+              await navigator.clipboard.writeText(pageUrl);
+              setShareStatus("Link skopiowany do schowka.");
+            } catch (e) {
+              setShareStatus("Nie uda\u0142o si\u0119 skopiowa\u0107 linku.");
+            }
+            return;
+          }
+          if (currentNetwork === "mail") {
+            setShareStatus("Otwieram klienta poczty.");
+            return;
+          }
+          setShareStatus("Otwieram okno udost\u0119pniania.");
+        });
+      });
+      topShareBtn.addEventListener("click", async () => {
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: pageTitle, text: pageTitle, url: pageUrl });
+            setShareStatus("Udost\u0119pniono.");
+            return;
+          } catch (e) {
+          }
+        }
+        const shareSection = document.querySelector(".share-article-section");
+        if (shareSection) {
+          shareSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        setShareStatus("Wybierz kana\u0142 udost\u0119pniania poni\u017Cej.");
+      });
+    }
   })();
 })();
