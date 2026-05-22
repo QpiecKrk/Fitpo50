@@ -20,14 +20,22 @@ jobs:
         with:
           node-version: "24"
 
-      - name: Generate weekly GSC API report 
+          - name: Generate weekly GSC API report
         env:
           GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
           GSC_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON_B64 }}
           GSC_OAUTH_CLIENT_ID: ${{ secrets.GSC_OAUTH_CLIENT_ID }}
           GSC_OAUTH_CLIENT_SECRET: ${{ secrets.GSC_OAUTH_CLIENT_SECRET }}
           GSC_OAUTH_REFRESH_TOKEN: ${{ secrets.GSC_OAUTH_REFRESH_TOKEN }}
-        run: npm run gsc:weekly:api 
+        run: npm run gsc:weekly:api
+
+      - name: Normalize GSC CSV names
+        run: |
+          mkdir -p data/gsc
+          [ -f data/gsc/Zapytania.csv ] && cp data/gsc/Zapytania.csv data/gsc/queries.csv || true
+          [ -f data/gsc/Strony.csv ] && cp data/gsc/Strony.csv data/gsc/pages.csv || true
+          [ -f data/gsc/Strony.csv ] && cp data/gsc/Strony.csv data/gsc/query-pages.csv || true
+
       - name: Ensure GSC CSV files exist
         run: |
           ls -la data/gsc
