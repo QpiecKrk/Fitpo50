@@ -10,6 +10,29 @@ const ROOT = process.cwd();
 const DEFAULT_DOWNLOADS_DIR = process.env.GSC_DOWNLOADS_DIR || path.join(os.homedir(), 'Downloads');
 const DEFAULT_WORK_DIR = process.env.GSC_WORK_DIR || path.join(DEFAULT_DOWNLOADS_DIR, 'gsc-auto-input');
 
+function loadLocalEnvFromHome() {
+  const envFile = path.join(os.homedir(), '.fitpo50-gsc.env');
+  if (!fs.existsSync(envFile)) return false;
+  const raw = fs.readFileSync(envFile, 'utf8');
+  const lines = String(raw || '').split(/\r?\n/);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const match = trimmed.match(/^export\s+([A-Za-z_][A-Za-z0-9_]*)=(.*)$/);
+    if (!match) continue;
+    const key = String(match[1] || '').trim();
+    let value = String(match[2] || '').trim();
+    if (!key) continue;
+    if ((value.startsWith("'") && value.endsWith("'")) || (value.startsWith('"') && value.endsWith('"'))) {
+      value = value.slice(1, -1);
+    }
+    if (!process.env[key]) {
+      process.env[key] = value;
+    }
+  }
+  return true;
+}
+
 function parseArgs(argv) {
   const out = {
     repo: process.env.GSC_GH_REPO || 'QpiecKrk/Fitpo50',
@@ -165,7 +188,10 @@ function collectCsvByType(files) {
       const type = detectTypeFromHeaders(headers);
       if (!byType[type]) continue;
       const st = fs.statSync(file);
-      byType[type].push({ file, mtimeMs: st.mtimeMs });
+      const lines = String(raw || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+      const nonEmpty = lines.filter((line) => line.trim() !== '').length;
+      const dataRows = Math.max(0, nonEmpty - 1);
+      byType[type].push({ file, mtimeMs: st.mtimeMs, dataRows });
     } catch (_) {
       // ignore unreadable
     }
@@ -194,12 +220,76 @@ function copyTypedCsvToInput(byType, inputDir) {
     const dst = path.join(inputDir, filename);
     fs.copyFileSync(src, dst);
     copied[type] = dst;
+    // Keep both naming variants to avoid future pipeline breaks.
+    if (type === 'query_pages') {
+      const aliasDst = path.join(inputDir, 'query_pages.csv');
+      fs.copyFileSync(src, aliasDst);
+      copied.query_pages_alias = aliasDst;
+    }
   }
   return copied;
 }
 
 function haveAllThree(byType) {
-  return Boolean(byType.queries?.length && byType.pages?.length && byType.query_pages?.length);
+  const hasQueries = Boolean(byType.queries?.some((entry) => Number(entry.dataRows || 0) > 0));
+  const hasPages = Boolean(byType.pages?.some((entry) => Number(entry.dataRows || 0) > 0));
+  const hasQueryPages = Boolean(byType.query_pages?.some((entry) => Number(entry.dataRows || 0) > 0));
+  return hasQueries && hasPages && hasQueryPages;
+}
+
+function tryGenerateCsvFromApi(workDir) {
+  const outputJson = path.join(workDir, 'gsc-weekly-report-api.json');
+  const outputMd = path.join(workDir, 'gsc-weekly-report-api.md');
+  const res = run(
+    'node',
+    [
+      'scripts/gsc-weekly-api-report.js',
+      '--output-json',
+      outputJson,
+      '--output-md',
+      outputMd,
+      '--output-csv-dir',
+      workDir,
+    ],
+    { cwd: ROOT },
+  );
+  if (res.status !== 0) {
+    return { ok: false, reason: 'gsc-weekly-api-report exited with non-zero status.' };
+  }
+
+  let apiReport = null;
+  if (fs.existsSync(outputJson)) {
+    try {
+      apiReport = JSON.parse(fs.readFileSync(outputJson, 'utf8'));
+    } catch (_) {
+      apiReport = null;
+    }
+  }
+
+  const typed = collectCsvByType(walkFiles(workDir));
+  if (!haveAllThree(typed)) {
+    if (apiReport && apiReport.status === 'auth_failed') {
+      const err = String(apiReport.error || '').toLowerCase();
+      if (err.includes('invalid_grant') || err.includes('token has been expired') || err.includes('token has been expired or revoked')) {
+        return {
+          ok: false,
+          reason: 'TOKEN_EXPIRED: token OAuth jest niewazny/wygasl. Odnow GSC_OAUTH_REFRESH_TOKEN i uruchom ponownie `npm run gsc:auto`.',
+        };
+      }
+      return {
+        ok: false,
+        reason: `AUTH_FAILED: brak autoryzacji GSC API (${String(apiReport.error || 'brak szczegolow')}).`,
+      };
+    }
+    if (apiReport && apiReport.status === 'missing_api_config') {
+      return {
+        ok: false,
+        reason: 'MISSING_API_CONFIG: brak konfiguracji OAuth (GSC_OAUTH_CLIENT_ID / GSC_OAUTH_CLIENT_SECRET / GSC_OAUTH_REFRESH_TOKEN / GSC_SITE_URL).',
+      };
+    }
+    return { ok: false, reason: 'GSC API nie dostarczylo kompletu niepustych CSV.' };
+  }
+  return { ok: true };
 }
 
 function tryGithubArtifact(repo, artifactName, tempDir) {
@@ -308,6 +398,7 @@ function runWeeklyReport(inputDir, workDir) {
 }
 
 async function main() {
+  loadLocalEnvFromHome();
   const args = parseArgs(process.argv.slice(2));
   const inputDir = path.resolve(args.workDir);
   ensureDir(inputDir);
@@ -319,6 +410,14 @@ async function main() {
     runWeeklyReport(inputDir, inputDir);
     return;
   }
+
+  const apiRes = tryGenerateCsvFromApi(inputDir);
+  if (apiRes.ok) {
+    console.log('[GSC-AUTO] Źródło: GSC API -> ~/Downloads/gsc-auto-input');
+    runWeeklyReport(inputDir, inputDir);
+    return;
+  }
+  console.log(`[GSC-AUTO] GSC API pominięte: ${apiRes.reason}`);
 
   let sourceLabel = '';
   if (args.preferGithub) {

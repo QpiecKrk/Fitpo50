@@ -420,7 +420,6 @@ async function main() {
 
   if ((!sa && !oauth) || !property) {
     const report = emptyReport(property, missingConfig);
-    writeCanonicalCsvTriplet(args.outputCsvDir, { queries: [], pages: [], queryPages: [] });
     writeReport(report, args.outputJson, args.outputMd);
     console.log('[WARN] GSC API config missing. Generated reminder report.');
     console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
@@ -580,7 +579,6 @@ async function main() {
   }
   if (!report) {
     report = authFailedReport(property, authErrors.join(' | '));
-    writeCanonicalCsvTriplet(args.outputCsvDir, { queries: [], pages: [], queryPages: [] });
     writeReport(report, args.outputJson, args.outputMd);
     console.log('[WARN] GSC API auth failed. Generated fallback reminder report.');
     if (report.error) {

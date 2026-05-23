@@ -1176,3 +1176,25 @@ Jesli artykul ma obrazy:
      - `node scripts/import-article.js --file "<plik.fitpo50.json>" --publish true --indexnow false`
   3. test lokalny z ENV:
      - `INDEXNOW_KEY="<key>" INDEXNOW_KEY_LOCATION="https://fitpo50.pl/<key>.txt" node scripts/import-article.js --file "<plik.fitpo50.json>" --publish true`
+
+## Ustalenia operacyjne 2026-05-23 (GSC OAuth produkcyjne + workflow Downloads)
+
+- Domyslna sciezka `GSC` zostaje utrzymana poza repo:
+  - dane wejsciowe i raporty zapisywane do `~/Downloads/gsc-auto-input`,
+  - bez fallbacku do `data/gsc` jako zrodla analizy.
+- `scripts/gsc-auto-report.js` wykonuje teraz kolejnosc:
+  1. probuje pobrac dane bezposrednio z GSC API,
+  2. zapisuje CSV do `~/Downloads/gsc-auto-input`,
+  3. uruchamia raport CSV,
+  4. dopiero potem (awaryjnie) probuje artifact/ZIP.
+- Walidacja CSV zostala uszczelniona:
+  - wymagane sa 3 niepuste pliki (`queries.csv`, `pages.csv`, `query-pages.csv|query_pages.csv`),
+  - same naglowki bez danych nie przechodza gate.
+- `scripts/gsc-weekly-api-report.js` nie tworzy juz pustych CSV przy `missing_api_config`/`auth_failed`.
+- OAuth app dla GSC jest ustawiona na `W wersji produkcyjnej` (typ uzytkownikow: `Z zewnatrz`),
+  co eliminuje 7-dniowe zachowanie testowe dla nowych tokenow odswiezania.
+- Operacyjnie: po wygasnieciu lub cofnieciu tokenu odswiezania odnawiamy tylko `GSC_OAUTH_REFRESH_TOKEN`
+  (Client ID/Client Secret pozostaja stale, chyba ze wykonano ich rotacje).
+- Test referencyjny po konfiguracji: `npm run gsc:auto` => PASS, zrodlo `GSC API`, output w `~/Downloads/gsc-auto-input`.
+- `gsc:auto` automatycznie probuje wczytac lokalny plik `~/.fitpo50-gsc.env` (format `export KEY='value'`),
+  dzieki czemu agent moze uruchamiac workflow `GSC` bez recznego `source` i bez przekazywania sekretow w rozmowie.

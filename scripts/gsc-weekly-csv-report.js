@@ -220,12 +220,12 @@ function writeOutputs(report, outputJson, outputMd) {
 
   if (report.status !== 'ok') {
     lines.push('## Brak danych wejściowych');
-    lines.push('Wrzuć eksporty CSV z Google Search Console do `data/gsc/`:');
+    lines.push('Potrzebny jest komplet niepustych CSV w `~/Downloads/gsc-auto-input`:');
     lines.push('- zapytania (queries)');
     lines.push('- strony (pages)');
     lines.push('- zapytania + strony (query pages)');
     lines.push('');
-    lines.push('Następnie uruchom: `npm run gsc:weekly:report`');
+    lines.push('Następnie uruchom: `npm run gsc:auto`');
   } else {
     lines.push('## Data Quality Gate');
     lines.push(`- status: **${report.data_quality.status}**`);
@@ -292,6 +292,22 @@ function writeOutputs(report, outputJson, outputMd) {
   fs.writeFileSync(outputMd, `${lines.join('\n')}\n`, 'utf8');
 }
 
+function pickQueryPagesInput(inputDir) {
+  const dash = path.join(inputDir, 'query-pages.csv');
+  const underscore = path.join(inputDir, 'query_pages.csv');
+  if (fs.existsSync(dash)) return dash;
+  if (fs.existsSync(underscore)) return underscore;
+  return '';
+}
+
+function countCsvDataRows(filePath) {
+  if (!filePath || !fs.existsSync(filePath)) return 0;
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const lines = String(raw || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+  const nonEmpty = lines.filter((line) => line.trim() !== '').length;
+  return Math.max(0, nonEmpty - 1);
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const filesMeta = [];
@@ -300,8 +316,15 @@ function main() {
     fs.mkdirSync(args.inputDir, { recursive: true });
   }
 
-  const requiredNames = ['queries.csv', 'pages.csv', 'query-pages.csv'];
-  const missingRequired = requiredNames.filter((n) => !fs.existsSync(path.join(args.inputDir, n)));
+  const queryPagesInput = pickQueryPagesInput(args.inputDir);
+  const queriesPath = path.join(args.inputDir, 'queries.csv');
+  const pagesPath = path.join(args.inputDir, 'pages.csv');
+  const required = [
+    { name: 'queries.csv', ok: fs.existsSync(queriesPath) && countCsvDataRows(queriesPath) > 0 },
+    { name: 'pages.csv', ok: fs.existsSync(pagesPath) && countCsvDataRows(pagesPath) > 0 },
+    { name: 'query-pages.csv|query_pages.csv', ok: Boolean(queryPagesInput) && countCsvDataRows(queryPagesInput) > 0 },
+  ];
+  const missingRequired = required.filter((r) => !r.ok).map((r) => r.name);
   if (missingRequired.length) {
     const report = {
       generated_at: new Date().toISOString(),
@@ -309,9 +332,9 @@ function main() {
       reason: `Brak wymaganych plików: ${missingRequired.join(', ')}`,
       inputs: {
         input_dir: args.inputDir,
-        queries: fs.existsSync(path.join(args.inputDir, 'queries.csv')) ? path.join(args.inputDir, 'queries.csv') : '',
-        pages: fs.existsSync(path.join(args.inputDir, 'pages.csv')) ? path.join(args.inputDir, 'pages.csv') : '',
-        query_pages: fs.existsSync(path.join(args.inputDir, 'query-pages.csv')) ? path.join(args.inputDir, 'query-pages.csv') : '',
+        queries: fs.existsSync(queriesPath) ? queriesPath : '',
+        pages: fs.existsSync(pagesPath) ? pagesPath : '',
+        query_pages: queryPagesInput,
       },
       summary: { total_clicks: 0, total_impressions: 0, avg_ctr: 0, avg_position: 0 },
       data_quality: { status: 'FAIL', rows_queries: 0, rows_pages: 0, rows_query_pages: 0, duplicate_query_page_pairs: 0, anomalies_ctr_over_100: 0, anomalies_position_non_positive: 0 },
@@ -343,7 +366,9 @@ function main() {
 
   const latestQueries = filesMeta.find((f) => f.name === 'queries.csv') || pickLatestByType(filesMeta, 'queries');
   const latestPages = filesMeta.find((f) => f.name === 'pages.csv') || pickLatestByType(filesMeta, 'pages');
-  const latestQueryPages = filesMeta.find((f) => f.name === 'query-pages.csv') || pickLatestByType(filesMeta, 'query_pages');
+  const latestQueryPages = filesMeta.find((f) => f.name === 'query-pages.csv')
+    || filesMeta.find((f) => f.name === 'query_pages.csv')
+    || pickLatestByType(filesMeta, 'query_pages');
 
   const report = {
     generated_at: new Date().toISOString(),
