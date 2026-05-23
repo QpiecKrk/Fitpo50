@@ -1442,16 +1442,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/kortyzol-po-50-stres-oponka-hero.avif" type="image/avif">
-          <source srcset="./assets/kortyzol-po-50-stres-oponka-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/kortyzol-po-50-stres-oponka-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/ukryte-skladniki-hero.avif" type="image/avif">
+          <source srcset="./assets/ukryte-skladniki-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/ukryte-skladniki-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Jak obniżyć kortyzol po 50-tce? Stres i oponka brzuszna</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Wysoki kortyzol po 50-tce odkłada tłuszcz trzewny i skraca telomery. Sprawdź, jak go zbadać i obniżyć – bez ekstremów, za to z nauką po swojej stronie.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Jak producenci żywności ukrywają niezdrowe składniki po 50?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Cukier pod 50 nazwami, zaniżane porcje i fałszywe etykiety light. Sprawdź, jak producenci ukrywają składniki żywności i jak nie dać się oszukać po 50-tce.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Jak obniżyć kortyzol po 50-tce? Stres i oponka brzuszna',
-        excerpt: 'Wysoki kortyzol po 50-tce odkłada tłuszcz trzewny i skraca telomery. Sprawdź, jak go zbadać i obniżyć – bez ekstremów, za to z nauką po swojej stronie.',
-        image: './assets/kortyzol-po-50-stres-oponka-hero.webp',
-        url: 'jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html'
+        title: 'Jak producenci żywności ukrywają niezdrowe składniki po 50?',
+        excerpt: 'Cukier pod 50 nazwami, zaniżane porcje i fałszywe etykiety light. Sprawdź, jak producenci ukrywają składniki żywności i jak nie dać się oszukać po 50-tce.',
+        image: './assets/ukryte-skladniki-hero.webp',
+        url: 'jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,6 +2236,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Jedzenie',
+          title: 'Jak producenci żywności ukrywają niezdrowe składniki po 50?',
+          excerpt: 'Cukier pod 50 nazwami, zaniżane porcje i fałszywe etykiety light. Sprawdź, jak producenci ukrywają składniki żywności i jak nie dać się oszukać po 50-tce.',
+          image: './assets/ukryte-skladniki-hero.webp',
+          url: 'jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci.html'
+        },
+        {
           category: 'Zdrowie',
           title: 'Jak obniżyć kortyzol po 50-tce? Stres i oponka brzuszna',
           excerpt: 'Wysoki kortyzol po 50-tce odkłada tłuszcz trzewny i skraca telomery. Sprawdź, jak go zbadać i obniżyć – bez ekstremów, za to z nauką po swojej stronie.',
@@ -2248,13 +2255,6 @@
           excerpt: 'Jak trenować mięśnie dna miednicy po 50. roku życia? Poznaj rolę oddechu przeponowego, głębokiego core i bezpiecznego treningu siłowego po menopauzie.',
           image: './assets/hero-dno-miednicy-fitpo50.webp',
           url: 'miesnie-dna-miednicy-trening-core-po-50.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Suplementy po 50-tce: kompletny przewodnik – praktyczny',
-          excerpt: 'Które suplementy po 50-tce naprawdę działają? Witamina D3, omega-3, magnez, B12 i kreatyna. Sprawdź, co mówią badania i czego unikać dziś w praktyce.',
-          image: './assets/suplementy-po-50-hero.webp',
-          url: 'suplementy-po-50-tce-kompletny-przewodnik.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

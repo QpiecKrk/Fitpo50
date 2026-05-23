@@ -1200,3 +1200,23 @@ Jesli artykul ma obrazy:
   dzieki czemu agent moze uruchamiac workflow `GSC` bez recznego `source` i bez przekazywania sekretow w rozmowie.
 - `gsc:auto` po kazdym uruchomieniu wykonuje cleanup artefaktow roboczych w repo (`.tmp-gsc-auto-input`, `_site/.tmp-gsc-auto-input`, `data/gsc/pages.csv`, `data/gsc/queries.csv`, `data/gsc/query-pages.csv`, `data/gsc/query_pages.csv`), aby nie brudzic statusu Git.
 - Przy niewaznym/wygaslym tokenie OAuth `gsc:auto` zwraca jasny komunikat `TOKEN_EXPIRED` z instrukcja odswiezenia `GSC_OAUTH_REFRESH_TOKEN`.
+
+## Ustalenia operacyjne 2026-05-23 (GSC tylko raport, bez napraw)
+
+- Komenda `GSC` działa w trybie twardym `READ-ONLY REPORT MODE`.
+- Cel `GSC`: wyłącznie raport i plan działań w `~/Downloads`, bez zmian w repo.
+- Dla `GSC` agent ma zakaz:
+  - edycji plików projektu,
+  - uruchamiania importerów/pipeline publikacyjnych,
+  - commit/push.
+- Obowiązkowa kolejność analizy:
+  1. globalna Skuteczność (kliknięcia/wyświetlenia/CTR/pozycja + porównania okresów),
+  2. zapytania,
+  3. strony,
+  4. indexacja,
+  5. experience (CWV/mobile/HTTPS),
+  6. linki,
+  7. lista TO DO z priorytetami.
+- Przed rekomendacjami agent musi przeczytać aktualny stan treści w repo (`*.html`, `porady.html`, kategorie, `sitemap.xml`) i mapować query do realnych URL-i.
+- `scripts/gsc-auto-report.js` domyślnie nie wykonuje cleanupu repo (brak modyfikacji repo w trybie raportowym).
+  Cleanup artefaktów repo jest tylko opcjonalny przez `--cleanup-repo-artifacts` lub `GSC_CLEAN_REPO_ARTIFACTS=true`.

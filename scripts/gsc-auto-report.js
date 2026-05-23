@@ -40,6 +40,7 @@ function parseArgs(argv) {
     downloadsDir: DEFAULT_DOWNLOADS_DIR,
     workDir: DEFAULT_WORK_DIR,
     preferGithub: true,
+    cleanupRepoArtifacts: String(process.env.GSC_CLEAN_REPO_ARTIFACTS || '').toLowerCase() === 'true',
   };
   for (let i = 0; i < argv.length; i += 1) {
     const t = String(argv[i] || '').trim();
@@ -65,6 +66,9 @@ function parseArgs(argv) {
     }
     if (t === '--no-github') {
       out.preferGithub = false;
+    }
+    if (t === '--cleanup-repo-artifacts') {
+      out.cleanupRepoArtifacts = true;
     }
   }
   return out;
@@ -414,8 +418,8 @@ function runWeeklyReport(inputDir, workDir) {
 
 async function main() {
   loadLocalEnvFromHome();
+  const args = parseArgs(process.argv.slice(2));
   try {
-    const args = parseArgs(process.argv.slice(2));
     const inputDir = path.resolve(args.workDir);
     ensureDir(inputDir);
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gsc-auto-'));
@@ -478,8 +482,10 @@ async function main() {
 
     runWeeklyReport(inputDir, inputDir);
   } finally {
-    // Keep workspace clean; canonical GSC artifacts live in ~/Downloads/gsc-auto-input.
-    cleanupRepoGscArtifacts();
+    // Optional only: default GSC mode is read-only report generation outside repo.
+    if (args.cleanupRepoArtifacts) {
+      cleanupRepoGscArtifacts();
+    }
   }
 }
 
