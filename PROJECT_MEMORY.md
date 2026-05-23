@@ -1198,3 +1198,5 @@ Jesli artykul ma obrazy:
 - Test referencyjny po konfiguracji: `npm run gsc:auto` => PASS, zrodlo `GSC API`, output w `~/Downloads/gsc-auto-input`.
 - `gsc:auto` automatycznie probuje wczytac lokalny plik `~/.fitpo50-gsc.env` (format `export KEY='value'`),
   dzieki czemu agent moze uruchamiac workflow `GSC` bez recznego `source` i bez przekazywania sekretow w rozmowie.
+- `gsc:auto` po kazdym uruchomieniu wykonuje cleanup artefaktow roboczych w repo (`.tmp-gsc-auto-input`, `_site/.tmp-gsc-auto-input`, `data/gsc/pages.csv`, `data/gsc/queries.csv`, `data/gsc/query-pages.csv`, `data/gsc/query_pages.csv`), aby nie brudzic statusu Git.
+- Przy niewaznym/wygaslym tokenie OAuth `gsc:auto` zwraca jasny komunikat `TOKEN_EXPIRED` z instrukcja odswiezenia `GSC_OAUTH_REFRESH_TOKEN`.

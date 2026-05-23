@@ -206,6 +206,21 @@ function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
+function cleanupRepoGscArtifacts() {
+  const targets = [
+    path.join(ROOT, '.tmp-gsc-auto-input'),
+    path.join(ROOT, '_site', '.tmp-gsc-auto-input'),
+    path.join(ROOT, 'data', 'gsc', 'pages.csv'),
+    path.join(ROOT, 'data', 'gsc', 'queries.csv'),
+    path.join(ROOT, 'data', 'gsc', 'query-pages.csv'),
+    path.join(ROOT, 'data', 'gsc', 'query_pages.csv'),
+  ];
+  for (const target of targets) {
+    if (!fs.existsSync(target)) continue;
+    fs.rmSync(target, { recursive: true, force: true });
+  }
+}
+
 function copyTypedCsvToInput(byType, inputDir) {
   ensureDir(inputDir);
   const mapping = {
@@ -399,68 +414,73 @@ function runWeeklyReport(inputDir, workDir) {
 
 async function main() {
   loadLocalEnvFromHome();
-  const args = parseArgs(process.argv.slice(2));
-  const inputDir = path.resolve(args.workDir);
-  ensureDir(inputDir);
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gsc-auto-'));
+  try {
+    const args = parseArgs(process.argv.slice(2));
+    const inputDir = path.resolve(args.workDir);
+    ensureDir(inputDir);
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gsc-auto-'));
 
-  const localCsv = collectCsvByType(walkFiles(inputDir));
-  if (haveAllThree(localCsv)) {
-    console.log(`[GSC-AUTO] Używam CSV już obecnych w ${inputDir}.`);
-    runWeeklyReport(inputDir, inputDir);
-    return;
-  }
+    const localCsv = collectCsvByType(walkFiles(inputDir));
+    if (haveAllThree(localCsv)) {
+      console.log(`[GSC-AUTO] Używam CSV już obecnych w ${inputDir}.`);
+      runWeeklyReport(inputDir, inputDir);
+      return;
+    }
 
-  const apiRes = tryGenerateCsvFromApi(inputDir);
-  if (apiRes.ok) {
-    console.log('[GSC-AUTO] Źródło: GSC API -> ~/Downloads/gsc-auto-input');
-    runWeeklyReport(inputDir, inputDir);
-    return;
-  }
-  console.log(`[GSC-AUTO] GSC API pominięte: ${apiRes.reason}`);
+    const apiRes = tryGenerateCsvFromApi(inputDir);
+    if (apiRes.ok) {
+      console.log('[GSC-AUTO] Źródło: GSC API -> ~/Downloads/gsc-auto-input');
+      runWeeklyReport(inputDir, inputDir);
+      return;
+    }
+    console.log(`[GSC-AUTO] GSC API pominięte: ${apiRes.reason}`);
 
-  let sourceLabel = '';
-  if (args.preferGithub) {
-    const ghRes = tryGithubArtifact(args.repo, args.artifact, tmp);
-    if (ghRes.ok) {
-      sourceLabel = `github-artifact:${args.repo}:${args.artifact}`;
-    } else {
-      console.log(`[GSC-AUTO] GitHub artifact (gh CLI) pominięty: ${ghRes.reason}`);
-      try {
-        const apiRes = await tryGithubArtifactViaApi(args.repo, args.artifact, tmp);
-        if (apiRes.ok) {
-          sourceLabel = `github-artifact-api:${args.repo}:${args.artifact}:run-${apiRes.runId}`;
-        } else {
-          console.log(`[GSC-AUTO] GitHub artifact (API) pominięty: ${apiRes.reason}`);
+    let sourceLabel = '';
+    if (args.preferGithub) {
+      const ghRes = tryGithubArtifact(args.repo, args.artifact, tmp);
+      if (ghRes.ok) {
+        sourceLabel = `github-artifact:${args.repo}:${args.artifact}`;
+      } else {
+        console.log(`[GSC-AUTO] GitHub artifact (gh CLI) pominięty: ${ghRes.reason}`);
+        try {
+          const apiRes = await tryGithubArtifactViaApi(args.repo, args.artifact, tmp);
+          if (apiRes.ok) {
+            sourceLabel = `github-artifact-api:${args.repo}:${args.artifact}:run-${apiRes.runId}`;
+          } else {
+            console.log(`[GSC-AUTO] GitHub artifact (API) pominięty: ${apiRes.reason}`);
+          }
+        } catch (err) {
+          console.log(`[GSC-AUTO] GitHub artifact (API) błąd: ${err.message || err}`);
         }
-      } catch (err) {
-        console.log(`[GSC-AUTO] GitHub artifact (API) błąd: ${err.message || err}`);
       }
     }
-  }
 
-  let typed = collectCsvByType(walkFiles(tmp));
-  if (!haveAllThree(typed)) {
-    const zipRes = tryExtractZipFromDownloads(args.downloadsDir, tmp);
-    if (zipRes.ok) {
-      sourceLabel = sourceLabel || `downloads-zip:${zipRes.zip}`;
-      typed = collectCsvByType(walkFiles(tmp));
-    } else {
-      console.log(`[GSC-AUTO] Downloads ZIP pominięty: ${zipRes.reason}`);
+    let typed = collectCsvByType(walkFiles(tmp));
+    if (!haveAllThree(typed)) {
+      const zipRes = tryExtractZipFromDownloads(args.downloadsDir, tmp);
+      if (zipRes.ok) {
+        sourceLabel = sourceLabel || `downloads-zip:${zipRes.zip}`;
+        typed = collectCsvByType(walkFiles(tmp));
+      } else {
+        console.log(`[GSC-AUTO] Downloads ZIP pominięty: ${zipRes.reason}`);
+      }
     }
-  }
 
-  if (!haveAllThree(typed)) {
-    throw new Error('Brak kompletu CSV (queries/pages/query_pages). Dostarcz eksport GSC lub działający artifact GitHub.');
-  }
+    if (!haveAllThree(typed)) {
+      throw new Error('Brak kompletu CSV (queries/pages/query_pages). Dostarcz eksport GSC lub działający artifact GitHub.');
+    }
 
-  const copied = copyTypedCsvToInput(typed, inputDir);
-  console.log(`[GSC-AUTO] Skopiowano CSV do ${inputDir}:`, copied);
-  if (sourceLabel) {
-    console.log(`[GSC-AUTO] Źródło: ${sourceLabel}`);
-  }
+    const copied = copyTypedCsvToInput(typed, inputDir);
+    console.log(`[GSC-AUTO] Skopiowano CSV do ${inputDir}:`, copied);
+    if (sourceLabel) {
+      console.log(`[GSC-AUTO] Źródło: ${sourceLabel}`);
+    }
 
-  runWeeklyReport(inputDir, inputDir);
+    runWeeklyReport(inputDir, inputDir);
+  } finally {
+    // Keep workspace clean; canonical GSC artifacts live in ~/Downloads/gsc-auto-input.
+    cleanupRepoGscArtifacts();
+  }
 }
 
 main().catch((err) => {
