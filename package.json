@@ -14,6 +14,7 @@
     "article:guard:diff": "node scripts/run-article-guard-diff.js",
     "article:contract": "node scripts/article-contract-check.js",
     "article:contract:diff": "node scripts/run-article-contract-diff.js",
+    "article:meta:set": "node scripts/article-meta-set.js",
     "article:head:sync": "node scripts/sync-article-head-descriptions.js",
     "reading-room:verify": "node scripts/reading-room-link-verifier.js --diff",
     "schema:validate": "node scripts/schema-validator.js --diff",

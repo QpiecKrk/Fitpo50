@@ -11,6 +11,9 @@ if [[ ! -d "$HOOKS_DIR" ]]; then
 fi
 
 chmod +x "$HOOKS_DIR/pre-push"
+if [[ -f "$HOOKS_DIR/pre-commit" ]]; then
+  chmod +x "$HOOKS_DIR/pre-commit"
+fi
 git -C "$ROOT_DIR" config core.hooksPath .githooks
 
 echo "Git hooks aktywowane (core.hooksPath=.githooks)."

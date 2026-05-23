@@ -238,6 +238,26 @@
   7. `node scripts/predeploy-gate.js --slug <slug>`
 
 - Cel: lapac bledy JSON (lokalne linki `.html`, meta_description poza limitem, placeholdery, niedozwolone pola `related*`) na poczatku, a nie dopiero przy `git push`.
+
+## Ustalenia operacyjne (2026-05-23) - bezpieczna edycja meta SEO
+
+- Dla zmian snippetu SEO artykulow (title/description) uzywamy kanonicznej komendy:
+  - `npm run article:meta:set -- --slug <slug> --title "<tytul>" --description "<opis 145-160 znakow>"`
+  - alternatywnie: `--file <plik.html>` zamiast `--slug`.
+- Skrypt `article:meta:set` automatycznie synchronizuje:
+  - `<title>`, `meta description`, `og:title`, `og:description`, `twitter:title`, `twitter:description`,
+  - `BlogPosting.description` (JSON-LD),
+  - `BlogPosting.headline`/`name` i `BreadcrumbList` (pozycja 3) do nowego tytulu.
+- Twarde blokady wejsciowe:
+  - `<title>` max 65 znakow (z `| FitPo50`),
+  - opis SEO 145-160 znakow,
+  - opis musi konczyc sie pelnym znakiem konca zdania (`.`, `!`, `?`).
+- Po kazdej zmianie meta obowiazkowo:
+  - `node scripts/validate-article-standard.js <plik.html>`,
+  - `npm run assets:mirror:sync`,
+  - `npm run predeploy:check`.
+- Hook lokalny:
+  - `.githooks/pre-commit` uruchamia `validate-article-standard.js` dla zmienionych, stage'owanych plikow `*.html` (z pominieciem `_site/` i szablonu), aby blokowac commit przy bledach SEO head contract.
 - Dodatkowy sync mirror:
   - `assets/pdf/*` -> `_site/assets/pdf/*`,
   - opublikowane miniatury NEWS z `assets/news/*` -> `_site/assets/news/*`,

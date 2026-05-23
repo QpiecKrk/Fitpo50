@@ -75,10 +75,11 @@ function dateIso(dayOffset) {
 }
 
 function currentAndPreviousRanges() {
+  const LOOKBACK_DAYS = 90;
   const endCurrent = dateIso(-1);
-  const startCurrent = dateIso(-28);
-  const endPrev = dateIso(-29);
-  const startPrev = dateIso(-56);
+  const startCurrent = dateIso(-LOOKBACK_DAYS);
+  const endPrev = dateIso(-(LOOKBACK_DAYS + 1));
+  const startPrev = dateIso(-(LOOKBACK_DAYS * 2));
   return {
     current: { start: startCurrent, end: endCurrent },
     previous: { start: startPrev, end: endPrev },

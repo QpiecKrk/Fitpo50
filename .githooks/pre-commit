@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT_DIR"
+
+echo "Pre-commit: walidacja zmienionych artykułów HTML..."
+
+staged_files=()
+while IFS= read -r line; do
+  staged_files+=("$line")
+done < <(git diff --cached --name-only --diff-filter=ACM)
+
+html_files=()
+for file in "${staged_files[@]}"; do
+  [[ "$file" == *.html ]] || continue
+  [[ "$file" == "_site/"* ]] && continue
+  [[ "$file" == "article-template-bento.html" ]] && continue
+  [[ -f "$file" ]] || continue
+  html_files+=("$file")
+done
+
+if [[ ${#html_files[@]} -eq 0 ]]; then
+  echo "Pre-commit: brak zmienionych plików artykułów HTML — pomijam."
+  exit 0
+fi
+
+echo "Pre-commit: sprawdzam ${#html_files[@]} plik(ów)."
+node scripts/validate-article-standard.js "${html_files[@]}"
+
+echo "Pre-commit: PASS"

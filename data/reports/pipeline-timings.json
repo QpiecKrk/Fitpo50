@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-23T03:47:10.787Z",
+  "updated_at": "2026-05-23T04:07:10.165Z",
   "records": [
     {
       "scope": "prepush-local",
@@ -2635,6 +2635,33 @@
         {
           "tag": "Predeploy gate (slug)",
           "durationMs": 127
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-23T04:07:10.165Z",
+      "total_ms": 342,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 53
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 229
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 25
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 45
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 59
         }
       ]
     }

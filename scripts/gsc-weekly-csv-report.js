@@ -405,7 +405,7 @@ function main() {
 
   if (!latestQueries || !latestPages) {
     report.weekly_plan = [
-      'Wyeksportuj z GSC CSV: Queries, Pages i Query+Page (zakres 28 dni).',
+      'Wyeksportuj z GSC CSV: Queries, Pages i Query+Page (zakres ostatnich 3 miesięcy).',
       'Skopiuj CSV do katalogu ~/Downloads/gsc-auto-input.',
       'Uruchom npm run gsc:auto.',
       'Wybierz 3-5 okazji i popraw 2-3 artykuły.',
