@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-16T06:38:02+00:00",
+    "updatedAt": "2026-05-24T06:48:39+00:00",
     "items": [
         {
             "id": "news_ef8cc226bfcc",
@@ -90,7 +90,7 @@
             "id": "news_70c119c8bcb6",
             "title": "Cukier w pierwszych latach życia: czy naprawdę może wpływać na zdrowie po latach?",
             "content_html": "<p><span>To twierdzenie jest zasadniczo prawdziwe, ale wymaga spokojnego <span class=\"news-text-tone--1\">doprecyzowania</span>. Najmocniejsze świeże dane pochodzą z badania opublikowanego w </span><span><strong><span></span><span>Science</span></strong> w 2024 roku. Naukowcy wykorzystali historyczny „<span class=\"news-text-tone--4\">naturalny eksperyment</span>”: reglamentację cukru w Wielkiej Brytanii po II wojnie światowej. Porównali osoby, które w życiu płodowym i w pierwszych latach życia miały ograniczony <span class=\"news-text-tone--3\">dostęp do cukru</span>, z osobami urodzonymi po zakończeniu reglamentacji.  </span></p><p><span>Wynik był wyraźny: ekspozycja na mniejszą ilość cukru w pierwszych </span><span><strong><span></span><span>1000 dniach życia</span></strong> wiązała się z ok. </span><span><strong><span></span><span>35% niższym ryzykiem cukrzycy typu 2</span><span> i ok. </span><span>20% niższym ryzykiem</span></strong> </span><span><strong>nadciśnienia</strong> w dorosłości. Choroby pojawiały się też później — <span class=\"news-text-tone--4\">cukrzyca</span> średnio o 4 lata, a nadciśnienie o 2 lata.  </span><br><span></span></p><p><span>Nie oznacza to jednak, że jedno ciastko „</span><span class=\"news-text-tone--4\">programuje dziecko na otyłość</span><span>”. Badanie pokazuje związek między wczesną ekspozycją na cukier a późniejszym ryzykiem </span><span class=\"news-text-tone--3\">chorób metabolicznych</span><span>, ale nie dowodzi prostego mechanizmu typu: cukier w dzieciństwie </span><strong><strong>=</strong></strong><span> automatyczna choroba. Wpływ mają też geny, dieta rodziny, aktywność, sen, masa ciała i środowisko.</span><br><span></span></p><p><span>Warto jednak potraktować temat serio. Oficjalne wytyczne żywieniowe dla <span class=\"news-text-tone--4\">USA</span> zalecają, aby <a href=\"dzieci-patrza-na-ciebie.html\">dzieci</a> </span><span><strong><span></span><span>poniżej 2. roku życia unikały dodanych cukrów</span></strong>, a od 2. roku życia cukry dodane powinny stanowić mniej niż <span class=\"news-text-tone--4\">10%</span> dziennych kalorii.  </span><br><span></span></p><p><strong>V</strong><strong><span>iralowy <a href=\"post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html\">post</a> nie jest kompletną bzdurą. Wczesne ograniczanie dodanego cukru ma sens. Nie chodzi o panikę, tylko o prostą zasadę: dziecko nie musi uczyć się słodkiego smaku od jogurciku-deseru, soczku i ciasteczka „bo przecież małe”.</span></strong><br><span></span></p>",
-            "status": "draft",
+            "status": "published",
             "sort_order": 1,
             "image_base": "news_20260511_073350_ea8a3a74",
             "image_alt": "Cukier w dzieciństwie",
@@ -105,8 +105,8 @@
                 }
             ],
             "created_at": "2026-05-11T07:32:25+00:00",
-            "updated_at": "2026-05-11T07:33:50+00:00",
-            "published_at": ""
+            "updated_at": "2026-05-24T06:48:39+00:00",
+            "published_at": "2026-05-24T06:48:39+00:00"
         },
         {
             "id": "news_f112777e9931",
