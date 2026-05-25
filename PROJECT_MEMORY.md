@@ -37,6 +37,17 @@
   - przeczytaj issue `SEO/AEO: TODO tygodnia (auto)` jeśli istnieje,
   - przygotuj po polsku raport zmian, ryzyk, braków i proponowanych ulepszeń,
   - raport ma być generowany według aktualnego skilla `.agent/skills/gsc-content-strategy/SKILL.md` (wersja premium: Data Quality Gate, Opportunity Score, CTR Gap, Action Cards, plan 7/14/28 dni),
+  - raport ma być ukierunkowany na AEO pod Google/Gemini (AI Overviews), przy zachowaniu nadrzędnej kolejności `SEO -> AEO -> GEO -> AIO`,
+  - obowiązkowo policz `Opportunity Score` dla URL-i (priorytet: wysokie wyświetlenia + niski CTR + pozycje 4-20),
+  - obowiązkowo dostarcz `TOP 10 AEO opportunities` (URL + klaster intencji + rekomendacja quick_answer/FAQ/H2/citation),
+  - obowiązkowo uruchom `AEO Opportunity Bot` (tygodniowy raport TOP 10 URL-i z CTR gap) i dołącz wynik do raportu GSC,
+  - wynik `AEO Opportunity Bot` zapisuj poza repo w `~/Downloads/gsc-auto-input` jako:
+    - `aeo-opportunities.md`
+    - `aeo-opportunities.json`
+  - obowiązkowo mapuj query do intencji (`how-to`, `czy warto`, `objawy`, `normy`, `bezpieczeństwo`) i do realnych URL-i istniejących w repo,
+  - obowiązkowo dodaj sekcję `AI Referrer Monitor` (ChatGPT/Gemini/Perplexity, trend 7/28 dni) jeśli dane są dostępne; przy braku danych oznacz `INSUFFICIENT_DATA`,
+  - obowiązkowo dodaj sekcję `FAQ Intent Refresh` opartą o dane (autocomplete/PAA/GSC), bez pytań generycznych,
+  - decyzje i priorytety opieraj na danych projektu (GSC + GA4/referrer), nie wyłącznie na trendach globalnych,
   - raport GSC ma zawierać propozycje nowych artykułów po 1 dla każdej kategorii (`jedzenie`, `ciekawe`, `ruch`, `zdrowie`) wyłącznie na podstawie danych CSV; przy brakach danych agent ma oznaczyć `INSUFFICIENT_DATA` i zadać krótkie pytanie doprecyzowujące.
   - krok techniczny przed analizą: uruchom `npm run gsc:auto` (auto-pobranie/sync `queries.csv`, `pages.csv`, `query-pages.csv`), dopiero potem generuj raport premium.
   - tryb danych GSC: surowe CSV i raporty zapisuj domyślnie poza repo w `~/Downloads/gsc-auto-input`:
@@ -1240,3 +1251,20 @@ Jesli artykul ma obrazy:
 - Przed rekomendacjami agent musi przeczytać aktualny stan treści w repo (`*.html`, `porady.html`, kategorie, `sitemap.xml`) i mapować query do realnych URL-i.
 - `scripts/gsc-auto-report.js` domyślnie nie wykonuje cleanupu repo (brak modyfikacji repo w trybie raportowym).
   Cleanup artefaktów repo jest tylko opcjonalny przez `--cleanup-repo-artifacts` lub `GSC_CLEAN_REPO_ARTIFACTS=true`.
+
+## Ustalenia operacyjne 2026-05-25 (AEO pod Google/Gemini)
+
+- Priorytet AEO dla nowych artykułów: optymalizujemy głównie pod ekosystem Google (`Gemini` + `AI Overviews`), bez rezygnacji z jakości pod inne źródła AI.
+- Na poziomie JSON (`.fitpo50.json`) obowiązkowo:
+  - `quick_answer` jako jasna, konkretna odpowiedź na początku (2-4 zdania, z zachowaniem limitów z `article-policy.js`),
+  - krótkie i konkretne pierwsze akapity pod H2 (bez „lania wody”),
+  - FAQ oparte o realne intencje użytkowników (autocomplete/PAA/GSC), nie generyczne pytania.
+- Dane strukturalne utrzymujemy bez wyjątków:
+  - `BlogPosting`, `FAQPage`, `BreadcrumbList`, `speakable`,
+  - pełne daty ISO 8601 (`datePublished`, `dateModified`, `article:published_time`, `article:modified_time`),
+  - kontrakt spójności opisu SEO 1:1.
+- E-E-A-T:
+  - minimum 4 realne URL-e źródeł medycznych/naukowych w `citation`,
+  - czytelny autor (`Person`) i aktualizacja `dateModified` przy każdej istotnej zmianie merytorycznej.
+- Monitoring wejść AI:
+  - decyzje contentowe opieramy na realnym trendzie ruchu źródeł (ChatGPT/Gemini/Perplexity) w GA4/referrer, a nie wyłącznie na trendach globalnych.

@@ -122,6 +122,17 @@ Tryb pracy:
   - uruchom technicznie `npm run gsc:auto` (najpierw pozyskaj/synchronizuj `queries`, `pages`, `query-pages`),
   - pracuj na danych poza repo: domyslny katalog roboczy `~/Downloads/gsc-auto-input` (CSV + raporty GSC),
   - brak `queries.csv` lub `pages.csv` lub `query-pages.csv` w `~/Downloads/gsc-auto-input` oznacza twardy `INSUFFICIENT_DATA` (bez fallbacku do `data/gsc`),
+  - raport ma byc ukierunkowany na AEO pod Google/Gemini (AI Overviews) z zachowaniem priorytetu `SEO -> AEO -> GEO -> AIO`,
+  - obowiazkowo policz i pokaz `Opportunity Score` dla URL-i (priorytet: wysokie wyswietlenia + niski CTR + pozycje 4-20),
+  - obowiazkowo wylistuj `TOP 10 AEO opportunities` (URL + query cluster + szybka rekomendacja: quick_answer/FAQ/H2/citation),
+  - obowiazkowo uruchom `AEO Opportunity Bot` (tygodniowy raport TOP 10 URL-i z CTR gap) i dolacz wynik do raportu GSC,
+  - wynik `AEO Opportunity Bot` zapisz poza repo w `~/Downloads/gsc-auto-input` jako:
+    - `aeo-opportunities.md`
+    - `aeo-opportunities.json`
+  - obowiazkowo mapuj query do intencji (`how-to`, `czy warto`, `objawy`, `normy`, `bezpieczenstwo`) i do realnych URL-i w repo,
+  - obowiazkowo dodaj sekcje `AI Referrer Monitor`: ChatGPT vs Gemini vs Perplexity (trend 7/28 dni) jesli dane sa dostepne; gdy brak danych, oznacz `INSUFFICIENT_DATA`,
+  - obowiazkowo dodaj sekcje `FAQ Intent Refresh`: propozycje pytan FAQ z danych (autocomplete/PAA/GSC), bez pytan generycznych,
+  - decyzje i priorytety opieraj na danych projektu (GA4/referrer/GSC), nie na trendach globalnych,
   - podaj po polsku raport premium wg `.agent/skills/gsc-content-strategy/SKILL.md`: Data Quality Gate, Top Queries/Pages, Opportunity Score, CTR Gap, Quick Wins, Content Gaps, Action Cards oraz plan 7/14/28 dni.
 
 Raport koncowy po zadaniu:

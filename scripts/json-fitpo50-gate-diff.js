@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const { spawnSync } = require('child_process');
+const { POLICY, utils } = require('./lib/article-policy');
 
 const errors = [];
 const warnings = [];
@@ -42,8 +43,7 @@ function isFitpoJson(file) {
 }
 
 function countWords(text) {
-  const m = String(text || '').match(/[\p{L}\p{N}]+/gu);
-  return m ? m.length : 0;
+  return utils.countWords(text);
 }
 
 function normalizeTextForCompare(text) {
@@ -55,21 +55,8 @@ function normalizeTextForCompare(text) {
 }
 
 function collectRepeatedLongSentences(chunks) {
-  const source = chunks.map((x) => String(x || '')).join(' ');
-  const plain = source.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  const sentences = plain
-    .split(/(?<=[.!?])\s+/)
-    .map((s) => s.replace(/\s+/g, ' ').trim())
-    .filter(Boolean);
-  const map = new Map();
-  for (const sentence of sentences) {
-    const norm = normalizeTextForCompare(sentence);
-    if (!norm) continue;
-    if (countWords(norm) < 8) continue;
-    if (norm.length < 45) continue;
-    map.set(norm, (map.get(norm) || 0) + 1);
-  }
-  return [...map.entries()].filter(([, c]) => c >= 3);
+  const repeated = utils.collectRepeatedLongSentences(chunks);
+  return repeated.map((item) => [item.sentence, item.count]);
 }
 
 function isQuestionHeading(text) {
@@ -106,20 +93,63 @@ function checkInternalHtmlLinks(value, label) {
 }
 
 function countInternalHtmlLinks(chunks) {
-  const unique = new Set();
-  const rx = /href\s*=\s*"([^"]+)"/gi;
-  for (const chunk of chunks) {
-    const text = String(chunk || '');
-    for (const m of text.matchAll(rx)) {
-      const href = String(m[1] || '').trim();
-      if (!href) continue;
-      const isAbsInternal = /^https?:\/\/(www\.)?fitpo50\.pl\/[^"\s]+\.html(?:[?#].*)?$/i.test(href);
-      const isRelInternal = !/^(https?:|mailto:|tel:|#|javascript:)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
-      if (!isAbsInternal && !isRelInternal) continue;
-      unique.add(normalizeLocalHtmlHref(href));
-    }
+  return utils.countInternalHtmlLinks(chunks);
+}
+
+function isGenericAnchor(text) {
+  const clean = String(text || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+  if (!clean) return false;
+  const generic = new Set([
+    'tutaj', 'tu', 'kliknij tutaj', 'kliknij', 'sprawdź tutaj', 'sprawdz tutaj',
+    'zobacz', 'czytaj więcej', 'czytaj wiecej', 'więcej', 'wiecej'
+  ]);
+  return generic.has(clean);
+}
+
+function calculateAeoScore(ctx) {
+  let quickAnswer = 0;
+  let faqIntent = 0;
+  let sources = 0;
+  let links = 0;
+  const notes = [];
+
+  if (ctx.quickAnswerWords >= POLICY.WORDS.QUICK_ANSWER_MIN && ctx.quickAnswerWords <= POLICY.WORDS.QUICK_ANSWER_MAX) {
+    quickAnswer += 15;
+  } else if (ctx.quickAnswerWords >= 30 && ctx.quickAnswerWords <= 80) {
+    quickAnswer += 8;
+    notes.push('quick_answer: poza limitem polityki, ale nadal czytelny.');
+  } else {
+    notes.push('quick_answer: zbyt krótki lub zbyt długi.');
   }
-  return unique.size;
+  if (/^[A-ZĄĆĘŁŃÓŚŹŻ][^?!.]{15,}[.?!]$/u.test(ctx.quickAnswerPlain)) quickAnswer += 10;
+  else notes.push('quick_answer: słaba forma odpowiedzi bez klarownego domknięcia zdania.');
+
+  const intentPattern = /\b(jak|czy|ile|kiedy|dlaczego|objawy|norma|wynik|warto|bezpiecz|dawk|skutek)\b/iu;
+  const matchedFaq = ctx.faqQuestions.filter((q) => intentPattern.test(q)).length;
+  const faqCoverage = ctx.faqQuestions.length ? matchedFaq / ctx.faqQuestions.length : 0;
+  if (ctx.faqQuestions.length >= POLICY.WORDS.FAQ_MIN_ITEMS) faqIntent += 10;
+  if (faqCoverage >= 0.75) faqIntent += 10;
+  else if (faqCoverage >= 0.5) faqIntent += 5;
+  else notes.push('FAQ: słabe pokrycie intencji pytań użytkowników.');
+  if (ctx.faqAnswerWordCounts.every((n) => n >= 30 && n <= 60)) faqIntent += 5;
+  else notes.push('FAQ: część odpowiedzi wypada poza 30-60 słów.');
+
+  const strongDomains = /(pubmed|nih\.gov|who\.int|cdc\.gov|ema\.europa\.eu|ncbi\.nlm\.nih\.gov|gov\.pl|gov|ptkardio|esmo|escardio|aafp|nhs\.uk|cochrane)/i;
+  const validUrls = ctx.sourceUrls.filter((u) => /^https?:\/\//i.test(u));
+  const strongCount = validUrls.filter((u) => strongDomains.test(u)).length;
+  const strongRatio = validUrls.length ? strongCount / validUrls.length : 0;
+  if (validUrls.length >= POLICY.WORDS.CITATION_MIN_URLS) sources += 10;
+  if (strongRatio >= 0.8) sources += 15;
+  else if (strongRatio >= 0.5) sources += 8;
+  else notes.push('Źródła: niski udział domen medyczno-naukowych.');
+
+  if (ctx.internalLinkCount >= POLICY.WORDS.INTERNAL_LINKS_MIN) links += 15;
+  const genericAnchors = ctx.internalAnchorTexts.filter((a) => isGenericAnchor(a)).length;
+  if (ctx.internalAnchorTexts.length && genericAnchors === 0) links += 10;
+  else if (genericAnchors > 0) notes.push(`Linki: wykryto generyczne anchory (${genericAnchors}).`);
+
+  const total = quickAnswer + faqIntent + sources + links;
+  return { total, breakdown: { quickAnswer, faqIntent, sources, links }, notes };
 }
 
 function collectCodeNonAscii(chunks) {
@@ -163,6 +193,9 @@ function validateFile(file) {
   if (metaDescription && (metaDescription.length < 145 || metaDescription.length > 160)) {
     errors.push(`${file}: meta_description poza limitem 145-160 (jest ${metaDescription.length}).`);
   }
+  if (metaDescription && !/[.!?]$/.test(metaDescription)) {
+    errors.push(`${file}: meta_description musi kończyć się ".", "!" lub "?".`);
+  }
 
   const keyTakeaways = Array.isArray(json.key_takeaways) ? json.key_takeaways.filter(Boolean) : [];
   if (keyTakeaways.length !== 4) {
@@ -193,8 +226,8 @@ function validateFile(file) {
     }
     const first = String(paragraphs[0] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
     const wc = countWords(first);
-    if (wc < 35 || wc > 80) {
-      errors.push(`${file}: sections[${i}] pierwszy akapit poza limitem 35-80 słów (jest ${wc}).`);
+    if (wc < POLICY.WORDS.H2_INTRO_MIN || wc > POLICY.WORDS.H2_INTRO_MAX) {
+      errors.push(`${file}: sections[${i}] pierwszy akapit poza limitem ${POLICY.WORDS.H2_INTRO_MIN}-${POLICY.WORDS.H2_INTRO_MAX} słów (jest ${wc}).`);
     }
 
     if (!s.image || typeof s.image !== 'object') {
@@ -241,8 +274,14 @@ function validateFile(file) {
       errors.push(`${file}: FAQ #${i + 1} nie ma dopasowania 1:1 w faq_research.question.`);
     }
   }
+  const faqAnswerWordCounts = [];
+  const faqQuestions = [];
   for (let i = 0; i < faq.length; i += 1) {
+    const question = String(faq[i]?.question || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    if (question) faqQuestions.push(question);
     const answerHtml = faq[i]?.answer_html || '';
+    const answerWords = countWords(String(answerHtml).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+    faqAnswerWordCounts.push(answerWords);
     checkInternalHtmlLinks(answerHtml, `${file}: answer_blocks[${i}].answer_html`);
     sectionChunksForCode.push(answerHtml);
   }
@@ -256,6 +295,9 @@ function validateFile(file) {
   if (sources.length < 6) {
     errors.push(`${file}: sources musi mieć minimum 6 pozycji (jest ${sources.length}).`);
   }
+  const sourceUrls = sources
+    .map((s) => String((s && (s.url || s.href)) || '').trim())
+    .filter(Boolean);
 
   const repeated = collectRepeatedLongSentences([
     json.lead || '',
@@ -264,6 +306,30 @@ function validateFile(file) {
   ]);
   if (repeated.length) {
     errors.push(`${file}: wykryto powtarzalne zdania (${repeated[0][1]}x): "${repeated[0][0].slice(0, 90)}..."`);
+  }
+
+  const quickAnswerPlain = String(json.quick_answer || json.quickAnswer || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const internalAnchorTexts = [];
+  for (const chunk of sectionChunksForLinks) {
+    const rx = /<a\b[^>]*>([\s\S]*?)<\/a>/gi;
+    for (const match of String(chunk || '').matchAll(rx)) {
+      internalAnchorTexts.push(String(match[1] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+    }
+  }
+  const aeo = calculateAeoScore({
+    quickAnswerWords,
+    quickAnswerPlain,
+    faqQuestions,
+    faqAnswerWordCounts,
+    sourceUrls,
+    internalLinkCount,
+    internalAnchorTexts,
+  });
+  const threshold = 70;
+  warnings.push(`${file}: AEO score ${aeo.total}/100 (quick_answer=${aeo.breakdown.quickAnswer}, faq_intent=${aeo.breakdown.faqIntent}, sources=${aeo.breakdown.sources}, links=${aeo.breakdown.links}).`);
+  for (const note of aeo.notes) warnings.push(`${file}: AEO note: ${note}`);
+  if (aeo.total < threshold) {
+    errors.push(`${file}: AEO score poniżej progu ${threshold}/100 (jest ${aeo.total}) - popraw quick_answer/FAQ/źródła/linki przed publikacją.`);
   }
 }
 

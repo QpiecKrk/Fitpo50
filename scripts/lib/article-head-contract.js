@@ -59,6 +59,8 @@ function validateArticleHeadContract(raw, opts = {}) {
   const twitterDescription = firstMatch(raw, /<meta\s+name="twitter:description"\s+content="([^"]*)"/i);
 
   let schemaDescription = '';
+  let blogPostingNode = null;
+  let hasBreadcrumbList = false;
   const scripts = [...String(raw || '').matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
   for (const scriptMatch of scripts) {
     try {
@@ -67,12 +69,13 @@ function validateArticleHeadContract(raw, opts = {}) {
       for (const node of nodes) {
         if (!node || typeof node !== 'object') continue;
         const type = node['@type'];
+        const isBreadcrumb = type === 'BreadcrumbList' || (Array.isArray(type) && type.includes('BreadcrumbList'));
+        if (isBreadcrumb) hasBreadcrumbList = true;
         const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
         if (!isBlogPosting) continue;
-        schemaDescription = String(node.description || '').trim();
-        break;
+        if (!blogPostingNode) blogPostingNode = node;
+        if (!schemaDescription) schemaDescription = String(node.description || '').trim();
       }
-      if (schemaDescription) break;
     } catch (_err) {
       // ignore invalid json-ld here; other validators handle it
     }
@@ -92,6 +95,44 @@ function validateArticleHeadContract(raw, opts = {}) {
   if (!ogDescription) warnings.push('Brak og:description.');
   if (!twitterDescription) warnings.push('Brak twitter:description.');
   if (!schemaDescription) warnings.push('Brak BlogPosting.description w schema JSON-LD.');
+
+  const articlePublishedTime = firstMatch(raw, /<meta\s+property="article:published_time"\s+content="([^"]*)"/i);
+  const articleModifiedTime = firstMatch(raw, /<meta\s+property="article:modified_time"\s+content="([^"]*)"/i);
+  if (!articlePublishedTime || !POLICY.PATTERNS.ISO_DATE_TZ.test(articlePublishedTime)) {
+    errors.push('Brak lub niepoprawne article:published_time (wymagane pełne ISO 8601 z TZ).');
+  }
+  if (!articleModifiedTime || !POLICY.PATTERNS.ISO_DATE_TZ.test(articleModifiedTime)) {
+    errors.push('Brak lub niepoprawne article:modified_time (wymagane pełne ISO 8601 z TZ).');
+  }
+
+  if (!blogPostingNode) {
+    errors.push('Brak schema BlogPosting.');
+  } else {
+    const datePublished = String(blogPostingNode.datePublished || '').trim();
+    const dateModified = String(blogPostingNode.dateModified || '').trim();
+    if (!datePublished || !POLICY.PATTERNS.ISO_DATE_TZ.test(datePublished)) {
+      errors.push('Brak lub niepoprawne BlogPosting.datePublished (wymagane pełne ISO 8601 z TZ).');
+    }
+    if (!dateModified || !POLICY.PATTERNS.ISO_DATE_TZ.test(dateModified)) {
+      errors.push('Brak lub niepoprawne BlogPosting.dateModified (wymagane pełne ISO 8601 z TZ).');
+    }
+    const speakable = blogPostingNode.speakable && typeof blogPostingNode.speakable === 'object'
+      ? blogPostingNode.speakable
+      : null;
+    const selectors = speakable
+      ? (Array.isArray(speakable.cssSelector) ? speakable.cssSelector : [speakable.cssSelector]).filter(Boolean).map((s) => String(s).trim())
+      : [];
+    if (!selectors.length) {
+      errors.push('Brak BlogPosting.speakable.cssSelector.');
+    } else {
+      const hasQuickAnswer = selectors.includes('#quick-answer') || selectors.includes('#quick-answer p');
+      if (!hasQuickAnswer) errors.push('BlogPosting.speakable musi wskazywać #quick-answer lub #quick-answer p.');
+    }
+  }
+
+  if (!hasBreadcrumbList) {
+    errors.push('Brak schema BreadcrumbList.');
+  }
 
   const normMeta = utils.strictNormalize(metaDescription);
   const normOg = utils.strictNormalize(ogDescription);

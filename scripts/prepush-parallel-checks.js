@@ -12,6 +12,7 @@ const TASKS = {
   'schema:validate': { cmd: 'node', args: ['scripts/schema-validator.js', '--diff'], match: [/\.html$/i] },
   'adsense:readiness': { cmd: 'node', args: ['scripts/adsense-readiness-check.js'], always: true },
   'json:gate:diff': { cmd: 'node', args: ['scripts/json-fitpo50-gate-diff.js'], match: [/\.fitpo50\.json$/i] },
+  'date:modified:guard': { cmd: 'node', args: ['scripts/date-modified-guard.js'], match: [/\.html$/i] },
 };
 const DEFAULT_TASKS = Object.keys(TASKS);
 
