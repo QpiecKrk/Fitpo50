@@ -33,8 +33,12 @@ try {
 
     if ($status === 'published') {
         $imageBase = trim((string)($item['image_base'] ?? ''));
-        if ($imageBase !== '' && !newsImageVariantsExist($imageBase)) {
-            throw new RuntimeException('Nie można opublikować: miniatura newsa nie istnieje w assets/news. Dodaj miniaturę ponownie i zapisz.');
+        $imageHashes = normalizeNewsImageHashes($item['image_hashes'] ?? null);
+        if ($imageBase !== '' && !newsImageVariantsExistStrict($imageBase)) {
+            throw new RuntimeException('Nie można opublikować: miniatura newsa jest niepełna lub nie istnieje w assets/news (.jpg/.webp/.avif). Dodaj miniaturę ponownie i zapisz.');
+        }
+        if ($imageBase !== '' && !newsImageHashesMatch($imageBase, $imageHashes)) {
+            throw new RuntimeException('Nie można opublikować: wykryto podmianę miniatury względem zapisanego wzorca. Wgraj miniaturę ponownie i zapisz.');
         }
     }
 

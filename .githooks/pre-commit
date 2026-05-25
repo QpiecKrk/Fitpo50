@@ -18,11 +18,14 @@ for file in "${staged_files[@]}"; do
   [[ "$file" == "_site/"* ]] && continue
   [[ "$file" == "article-template-bento.html" ]] && continue
   [[ -f "$file" ]] || continue
-  html_files+=("$file")
+  # Walidator standardu dotyczy tylko stron artykułów.
+  if grep -qi '<article[[:space:]][^>]*class="[^"]*article-content[^"]*"' "$file"; then
+    html_files+=("$file")
+  fi
 done
 
 if [[ ${#html_files[@]} -eq 0 ]]; then
-  echo "Pre-commit: brak zmienionych plików artykułów HTML — pomijam."
+  echo "Pre-commit: brak zmienionych stron artykułów HTML — pomijam."
   exit 0
 fi
 

@@ -90,20 +90,29 @@ try {
     $itemId = $existing['id'] ?? ('news_' . bin2hex(random_bytes(6)));
 
     $imageBase = $existing['image_base'] ?? '';
+    $imageHashes = normalizeNewsImageHashes($existing['image_hashes'] ?? null);
     $previousImageBase = $imageBase !== '' ? $imageBase : null;
     $hasNewUpload = isset($_FILES['news_image']) && (int)($_FILES['news_image']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
 
     if ($hasNewUpload) {
         $processed = processNewsImageUpload($_FILES['news_image']);
         $imageBase = $processed['image_base'];
+        $imageHashes = normalizeNewsImageHashes($processed['image_hashes'] ?? null);
         $newUploadedImageBase = $imageBase;
     } elseif ($deleteImage && $imageBase !== '') {
         deleteNewsImageVariants($imageBase);
         $imageBase = '';
+        $imageHashes = normalizeNewsImageHashes(null);
     }
 
-    if ($imageBase !== '' && !newsImageVariantsExist($imageBase)) {
-        throw new RuntimeException('Miniatura została utracona (brak plików w assets/news). Wgraj miniaturę ponownie przed zapisem.');
+    if ($imageBase !== '' && !newsImageVariantsExistStrict($imageBase)) {
+        throw new RuntimeException('Miniatura została utracona lub jest niepełna (wymagane .jpg/.webp/.avif w assets/news). Wgraj miniaturę ponownie przed zapisem.');
+    }
+    if ($imageBase !== '' && !newsImageHashesMatch($imageBase, $imageHashes)) {
+        throw new RuntimeException('Wykryto podmianę miniatury newsa względem zapisanego wzorca. Wgraj miniaturę ponownie i zapisz.');
+    }
+    if ($imageBase !== '') {
+        $imageHashes = newsImageVariantHashes($imageBase);
     }
 
     $imageAltFinal = $imageAlt;
@@ -123,6 +132,7 @@ try {
         'sort_order' => $sortOrder,
         'image_base' => $imageBase,
         'image_alt' => $imageAltFinal,
+        'image_hashes' => $imageHashes,
         'sources' => $sources,
         'created_at' => $existing['created_at'] ?? $now,
         'updated_at' => $now,

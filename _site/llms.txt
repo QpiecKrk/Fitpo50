@@ -303,4 +303,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Jak producenci żywności ukrywają niezdrowe składniki po 50? | FitPo50"
   section: "Jedzenie"
   summary: "Cukier pod 50 nazwami, zaniżane porcje i fałszywe etykiety light. Sprawdź, jak producenci ukrywają składniki żywności i jak nie dać się oszukać po 50-tce."
+- url: https://fitpo50.pl/kolagen-suplementacja-po-50.html
+  title: "Kolagen po 50-tce: czy suplementacja naprawdę działa? – | FitPo50"
+  section: "Zdrowie"
+  summary: "Kolagen zaczyna spadać już od 25. roku życia. Co mówią badania o suplementacji peptydów kolagenowych, jakie dawki działają i czy warto inwestować po 50-tce?"
 

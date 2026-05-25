@@ -107,11 +107,26 @@ function normalizeNewsItem(array $item): array {
         'sort_order' => $sortOrder,
         'image_base' => trim((string)($item['image_base'] ?? '')),
         'image_alt' => trim((string)($item['image_alt'] ?? '')),
+        'image_hashes' => normalizeNewsImageHashes($item['image_hashes'] ?? null),
         'sources' => $sources,
         'created_at' => (string)($item['created_at'] ?? date('c')),
         'updated_at' => (string)($item['updated_at'] ?? date('c')),
         'published_at' => (string)($item['published_at'] ?? ''),
     ];
+}
+
+function normalizeNewsImageHashes($raw): array {
+    $out = ['jpg' => '', 'webp' => '', 'avif' => ''];
+    if (!is_array($raw)) {
+        return $out;
+    }
+    foreach (['jpg', 'webp', 'avif'] as $ext) {
+        $value = trim((string)($raw[$ext] ?? ''));
+        if ($value !== '' && preg_match('/^[a-f0-9]{40}$/i', $value)) {
+            $out[$ext] = strtolower($value);
+        }
+    }
+    return $out;
 }
 
 function saveNewsStore(array $store, bool $withBackup = true): void {
@@ -224,7 +239,7 @@ function buildPublicImageData(array $item): ?array {
     if ($base === '') {
         return null;
     }
-    if (!newsImageVariantsExist($base)) {
+    if (!newsImageVariantsExistStrict($base)) {
         return null;
     }
 
@@ -585,6 +600,7 @@ function processNewsImageUpload(array $file): array {
 
     return [
         'image_base' => $base,
+        'image_hashes' => newsImageVariantHashes($base),
     ];
 }
 
@@ -627,6 +643,65 @@ function newsImageVariantsExist(?string $base): bool {
     }
 
     return false;
+}
+
+function newsImageVariantsExistStrict(?string $base): bool {
+    $base = trim((string)$base);
+    if ($base === '') {
+        return false;
+    }
+
+    $dir = newsAssetsDirPath();
+    foreach (['jpg', 'webp', 'avif'] as $ext) {
+        if (!is_file($dir . $base . '.' . $ext)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function newsImageVariantHashes(?string $base): array {
+    $base = trim((string)$base);
+    $out = ['jpg' => '', 'webp' => '', 'avif' => ''];
+    if ($base === '') {
+        return $out;
+    }
+    $dir = newsAssetsDirPath();
+    foreach (['jpg', 'webp', 'avif'] as $ext) {
+        $path = $dir . $base . '.' . $ext;
+        if (!is_file($path)) {
+            continue;
+        }
+        $hash = @sha1_file($path);
+        if (is_string($hash) && $hash !== '') {
+            $out[$ext] = strtolower($hash);
+        }
+    }
+    return $out;
+}
+
+function newsImageHashesMatch(?string $base, ?array $expectedHashes): bool {
+    $expected = normalizeNewsImageHashes($expectedHashes);
+    if (trim((string)$base) === '') {
+        return true;
+    }
+    if (!newsImageVariantsExistStrict($base)) {
+        return false;
+    }
+    if ($expected['jpg'] === '' && $expected['webp'] === '' && $expected['avif'] === '') {
+        return true;
+    }
+
+    $current = newsImageVariantHashes($base);
+    foreach (['jpg', 'webp', 'avif'] as $ext) {
+        if ($expected[$ext] === '') {
+            continue;
+        }
+        if ($current[$ext] !== $expected[$ext]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 function upsertNewsItem(array $store, array $item): array {

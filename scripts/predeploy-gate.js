@@ -383,31 +383,21 @@ function validatePublishedNewsImages(errors, warnings) {
       if (!imageBase) continue;
       const sourceDir = 'assets/news';
       const siteDir = '_site/assets/news';
-      const hasSourceVariant = ['jpg', 'webp', 'avif'].some((ext) => exists(`${sourceDir}/${imageBase}.${ext}`));
-      const hasSiteVariant = ['jpg', 'webp', 'avif'].some((ext) => exists(`${siteDir}/${imageBase}.${ext}`));
+      const hasSourceVariant = ['jpg', 'webp', 'avif'].every((ext) => exists(`${sourceDir}/${imageBase}.${ext}`));
+      const hasSiteVariant = ['jpg', 'webp', 'avif'].every((ext) => exists(`${siteDir}/${imageBase}.${ext}`));
 
+      const title = String(item.title || item.id || '(bez tytułu)');
       if (rel.startsWith('_site/')) {
         if (!hasSiteVariant && !hasSourceVariant) {
-          const title = String(item.title || item.id || '(bez tytułu)');
-          if (isRuntimeNewsThumb(imageBase)) {
-            warnings.push(`${rel}: opublikowany news "${title}" ma runtime image_base="${imageBase}", ale brak miniatur w ${siteDir}/ oraz ${sourceDir}/ w repo.`);
-          } else {
-            errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${siteDir}/ oraz ${sourceDir}/`);
-          }
+          errors.push(`${rel}: BLOKER NEWS: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${siteDir}/ oraz ${sourceDir}/.`);
         } else if (!hasSiteVariant && hasSourceVariant) {
-          const title = String(item.title || item.id || '(bez tytułu)');
-          warnings.push(`${rel}: opublikowany news "${title}" ma miniatury tylko w ${sourceDir}/ (brak mirroru w ${siteDir}/).`);
+          errors.push(`${rel}: BLOKER NEWS: opublikowany news "${title}" ma miniatury tylko w ${sourceDir}/ (brak mirroru w ${siteDir}/).`);
         }
         continue;
       }
 
       if (!hasSourceVariant) {
-        const title = String(item.title || item.id || '(bez tytułu)');
-        if (isRuntimeNewsThumb(imageBase)) {
-          warnings.push(`${rel}: opublikowany news "${title}" ma runtime image_base="${imageBase}", ale brak miniatur w ${sourceDir}/ w repo.`);
-        } else {
-          errors.push(`${rel}: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${sourceDir}/`);
-        }
+        errors.push(`${rel}: BLOKER NEWS: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${sourceDir}/.`);
       }
     }
   }

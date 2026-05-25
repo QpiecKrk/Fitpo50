@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-23T07:26:25.241Z",
+  "updated_at": "2026-05-25T08:26:18.322Z",
   "records": [
     {
       "scope": "prepush-local",
@@ -2689,6 +2689,77 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 59
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline",
+      "at": "2026-05-25T08:26:18.322Z",
+      "total_ms": 4099,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 42
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 43
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 45
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 97
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 2282
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 101
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 850
+        },
+        {
+          "tag": "Sync social title + BreadcrumbList (source/_site)",
+          "durationMs": 59
+        },
+        {
+          "tag": "Sync meta description across head/schema",
+          "durationMs": 48
+        },
+        {
+          "tag": "Article contract check (source/_site)",
+          "durationMs": 65
+        },
+        {
+          "tag": "Sync assets mirror (_site)",
+          "durationMs": 90
+        },
+        {
+          "tag": "Lint editorial placeholders (_site HTML)",
+          "durationMs": 58
+        },
+        {
+          "tag": "Lint editorial placeholders (source HTML)",
+          "durationMs": 60
+        },
+        {
+          "tag": "NEWS integrity",
+          "durationMs": 61
+        },
+        {
+          "tag": "Predeploy gate (slug)",
+          "durationMs": 154
         }
       ]
     }

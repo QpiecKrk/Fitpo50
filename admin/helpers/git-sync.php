@@ -69,6 +69,12 @@ function runGitAutoSync(array $groups, string $actionLabel): array {
         if ($addResult['exit_code'] !== 0) {
             return ['status' => 'error', 'message' => 'Błąd git add: ' . shortenGitError($addResult['stderr'])];
         }
+        if (in_array('news', $groups, true)) {
+            $forceNewsAdd = forceAddPublishedNewsRuntimeImages($repoRoot);
+            if (($forceNewsAdd['status'] ?? 'error') !== 'ok') {
+                return ['status' => 'error', 'message' => (string)($forceNewsAdd['message'] ?? 'Błąd git add -f miniatur NEWS.')];
+            }
+        }
 
         $diffResult = runGitCommand(array_merge(['git', 'diff', '--cached', '--quiet', '--'], $paths), $repoRoot);
         if ($diffResult['exit_code'] === 0) {
@@ -173,6 +179,66 @@ function runGitAutoSync(array $groups, string $actionLabel): array {
         fclose($lockHandle);
         @unlink($lockPath);
     }
+}
+
+/**
+ * Wymusza dodanie miniatur NEWS (ignorowanych przez .gitignore) dla opublikowanych wpisów.
+ * Dzięki temu push nie traci runtime obrazów news_20*.
+ *
+ * @return array{status:string,message?:string}
+ */
+function forceAddPublishedNewsRuntimeImages(string $repoRoot): array {
+    $livePath = $repoRoot . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'news-live.json';
+    if (!is_file($livePath)) {
+        return ['status' => 'ok'];
+    }
+
+    $raw = @file_get_contents($livePath);
+    if (!is_string($raw) || trim($raw) === '') {
+        return ['status' => 'error', 'message' => 'Brak danych w data/news-live.json podczas dodawania miniatur NEWS.'];
+    }
+
+    $parsed = json_decode($raw, true);
+    if (!is_array($parsed)) {
+        return ['status' => 'error', 'message' => 'Niepoprawny JSON w data/news-live.json podczas dodawania miniatur NEWS.'];
+    }
+
+    $items = is_array($parsed['items'] ?? null) ? $parsed['items'] : [];
+    $targets = [];
+    foreach ($items as $item) {
+        if (!is_array($item)) {
+            continue;
+        }
+        if (trim((string)($item['status'] ?? '')) !== 'published') {
+            continue;
+        }
+        $base = trim((string)($item['image_base'] ?? ''));
+        if ($base === '') {
+            continue;
+        }
+        foreach (['jpg', 'webp', 'avif'] as $ext) {
+            $src = 'assets/news/' . $base . '.' . $ext;
+            $mirror = '_site/assets/news/' . $base . '.' . $ext;
+            if (is_file($repoRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $src))) {
+                $targets[] = $src;
+            }
+            if (is_file($repoRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $mirror))) {
+                $targets[] = $mirror;
+            }
+        }
+    }
+
+    $targets = array_values(array_unique($targets));
+    if (empty($targets)) {
+        return ['status' => 'ok'];
+    }
+
+    $add = runGitCommand(array_merge(['git', 'add', '-f', '--'], $targets), $repoRoot);
+    if ($add['exit_code'] !== 0) {
+        return ['status' => 'error', 'message' => 'Błąd git add -f miniatur NEWS: ' . shortenGitError($add['stderr'])];
+    }
+
+    return ['status' => 'ok'];
 }
 
 /**
