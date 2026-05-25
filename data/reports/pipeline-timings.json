@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-25T08:31:26.066Z",
+  "updated_at": "2026-05-25T09:11:14.414Z",
   "records": [
     {
       "scope": "prepush-local",
@@ -2787,6 +2787,141 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 57
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-25T09:00:16.436Z",
+      "total_ms": 820,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 49
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 688
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 25
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 48
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 82
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-25T09:03:58.483Z",
+      "total_ms": 365,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 49
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 258
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 27
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 45
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 57
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-25T09:04:34.995Z",
+      "total_ms": 382,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 50
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 272
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 26
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 46
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 59
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-25T09:07:38.192Z",
+      "total_ms": 389,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 59
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 272
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 26
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 49
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 57
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-25T09:11:14.414Z",
+      "total_ms": 371,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 48
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 267
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 25
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 44
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 55
         }
       ]
     }

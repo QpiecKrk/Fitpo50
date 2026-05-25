@@ -219,6 +219,16 @@
   - aktualizuje `sitemap.xml` i `llms.txt`,
   - **zawsze** generuje PDF + duzy przycisk "Pobierz PDF" (`sync_article_pdfs_and_buttons.py`).
 
+## Ustalenia operacyjne (2026-05-25) - anty-spam i E-E-A-T hard gate
+
+- **Blokada fraz szablonowych (Helpful Content):**
+  - Frazy generyczne/wypełniacze (np. "warto rozłożyć na praktyczne kroki i odnieść do codziennych decyzji") są traktowane jako błąd blokujący.
+  - Walidatory (`validate-article-standard.js`, `article-contract-check.js`) mają zatrzymać publikację przy wykryciu tych wzorców.
+
+- **Autor w schema BlogPosting (YMYL / E-E-A-T):**
+  - `BlogPosting.author` musi być `Person`, nie `Organization`.
+  - Wymagany jest realny autor (`Grzegorz Kupiec`) z profilem `sameAs`.
+
 - **Bezpieczenstwo i znane ograniczenie:**
   - Do czasu naprawy helpera PHP, uruchamiaj import z:
     - `--run-internal-links auto`

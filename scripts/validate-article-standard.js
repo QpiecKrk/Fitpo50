@@ -238,6 +238,17 @@ function validateRepeatedLongSentences(articleContentHtml, errors) {
   }
 }
 
+function validateBannedEditorialPhrases(articleContentHtml, errors) {
+  const normalized = utils.fuzzyNormalize(utils.stripTags(articleContentHtml));
+  for (const phrase of POLICY.BANNED_EDITORIAL_PHRASES || []) {
+    const needle = utils.fuzzyNormalize(phrase);
+    if (needle && normalized.includes(needle)) {
+      errors.push(`Wykryto niedozwoloną frazę szablonową: "${phrase}".`);
+      break;
+    }
+  }
+}
+
 
 function validateCitationsInBlogPosting(raw, errors) {
   const scripts = [...raw.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
@@ -297,6 +308,42 @@ function validateSpeakableTargetsQuickAnswer(raw, errors) {
     }
   }
   errors.push('Brak schema BlogPosting do walidacji speakable.');
+}
+
+function validateBlogPostingAuthorIsPerson(raw, errors) {
+  const scripts = [...raw.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+  for (const scriptMatch of scripts) {
+    const body = String(scriptMatch[1] || '').trim();
+    let parsed;
+    try {
+      parsed = JSON.parse(body);
+    } catch (_err) {
+      continue;
+    }
+    const nodes = Array.isArray(parsed) ? parsed : [parsed];
+    for (const node of nodes) {
+      if (!node || typeof node !== 'object') continue;
+      const type = node['@type'];
+      const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
+      if (!isBlogPosting) continue;
+
+      const author = node.author;
+      if (!author || typeof author !== 'object' || Array.isArray(author)) {
+        errors.push('BlogPosting.author musi być obiektem Person.');
+        return;
+      }
+      const authorType = String(author['@type'] || '').trim();
+      const authorName = String(author.name || '').trim();
+      if (authorType !== 'Person') {
+        errors.push(`BlogPosting.author ma niedozwolony typ "${authorType}" (wymagane Person).`);
+      }
+      if (!authorName || /fitpo50/i.test(authorName)) {
+        errors.push('BlogPosting.author musi wskazywać realnego autora (Person), nie nazwę serwisu.');
+      }
+      return;
+    }
+  }
+  errors.push('Brak schema BlogPosting do walidacji autora.');
 }
 
 
@@ -457,6 +504,7 @@ function validateFile(filePath) {
     validateBrokenSentenceArtifacts(articleContentHtml, errors);
     validateAsideTitlesNotDuplicated(articleContentHtml, errors);
     validateRepeatedLongSentences(articleContentHtml, errors);
+    validateBannedEditorialPhrases(articleContentHtml, errors);
     const internalLinks = utils.countInternalHtmlLinks(stripFaqBlock(articleContentHtml));
     if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_MIN) {
       errors.push(`Za mało linków kontekstowych w treści: ${internalLinks}/${POLICY.WORDS.INTERNAL_LINKS_MIN}.`);
@@ -466,6 +514,7 @@ function validateFile(filePath) {
   validateHeroShareContract(raw, errors);
   validateCitationsInBlogPosting(raw, errors);
   validateSpeakableTargetsQuickAnswer(raw, errors);
+  validateBlogPostingAuthorIsPerson(raw, errors);
 
   return errors;
 }

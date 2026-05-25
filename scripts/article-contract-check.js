@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { validateArticleHeadContract } = require('./lib/article-head-contract');
+const { POLICY, utils } = require('./lib/article-policy');
 
 function countMatches(raw, regex) {
   return [...String(raw || '').matchAll(regex)].length;
@@ -22,6 +23,20 @@ function validateArticleContract(filePath) {
 
   const keyTakeaways = /<section\s+class="key-takeaways/.test(raw);
   if (!keyTakeaways) errors.push('Brak sekcji key-takeaways.');
+
+  const normalized = utils.fuzzyNormalize(utils.stripTags(raw));
+  for (const phrase of POLICY.BANNED_EDITORIAL_PHRASES || []) {
+    const needle = utils.fuzzyNormalize(phrase);
+    if (needle && normalized.includes(needle)) {
+      errors.push(`Wykryto niedozwoloną frazę szablonową: "${phrase}".`);
+      break;
+    }
+  }
+
+  const hasOrgAuthorInBlogPosting = /"@type"\s*:\s*"BlogPosting"[\s\S]*?"author"\s*:\s*\{[\s\S]*?"@type"\s*:\s*"Organization"/i.test(raw);
+  if (hasOrgAuthorInBlogPosting) {
+    errors.push('BlogPosting.author ma typ Organization (wymagane Person).');
+  }
 
   const contextualLinks = countMatches(raw, /<a\b[^>]*href="(\.\/)?[a-z0-9-]+\.html(?:[?#][^\"]*)?"/gi);
   if (contextualLinks < 4) errors.push(`Za mało linków wewnętrznych .html (jest ${contextualLinks}, min 4).`);

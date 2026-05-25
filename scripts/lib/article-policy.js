@@ -26,8 +26,22 @@ const POLICY = {
   REPEATED_SENTENCES: {
     MIN_WORDS: 8,
     MIN_CHARS: 45,
-    MIN_REPEATS: 3
+    MIN_REPEATS: 4
   },
+
+  BANNED_EDITORIAL_PHRASES: [
+    'warto rozłożyć na praktyczne kroki i odnieść do codziennych decyzji',
+    'po 50-tce najwięcej daje spokojne tempo, zrozumienie mechanizmu i regularne obserwowanie reakcji organizmu',
+    'to właśnie ten szczegół często decyduje o tym, czy plan będzie bezpieczny i możliwy do utrzymania',
+    'to właśnie ten element często rozstrzyga, czy cały plan okaże się rozsądny i wykonalny',
+    'w praktyce właśnie tutaj najłatwiej oddzielić modne hasła od wskazówek, które naprawdę działają',
+    'tutaj najlepiej widać, które porady są tylko głośne, a które realnie pomagają',
+    'dzięki temu łatwiej przełożyć teorię na praktykę i uniknąć chaosu już na starcie',
+    'właśnie to pomaga szybciej zamienić wiedzę w działanie i nie pogubić się od pierwszych dni',
+    'najwięcej zyskujesz wtedy, gdy działasz spokojnie, rozumiesz proces i uważnie patrzysz na reakcje organizmu',
+    'po pięćdziesiątce najlepiej działa cierpliwe tempo, dobra obserwacja ciała i rozumienie, po co robisz kolejne kroki',
+    'taki układ ułatwia spokojne wdrożenie zmian i ogranicza chaos na początku drogi'
+  ],
 
   AUTO_LINK: {
     MIN_WORDS: 40,
