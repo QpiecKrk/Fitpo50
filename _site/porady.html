@@ -2301,9 +2301,9 @@ main .container {
       <article class="read-card">
         <a class="read-card__media" href="${item.href}" aria-label="${item.title}">
           <picture>
-            <source srcset="./assets/${item.img}.avif" type="image/avif">
-            <source srcset="./assets/${item.img}.webp" type="image/webp">
-            <img src="./assets/${item.img}.webp" alt="${item.alt}" loading="lazy" width="${item.width}" height="${item.height}">
+            <source srcset="${'./assets/' + item.img + '.avif'}" type="image/avif">
+            <source srcset="${'./assets/' + item.img + '.webp'}" type="image/webp">
+            <img src="${'./assets/' + item.img + '.webp'}" alt="${item.alt}" loading="lazy" width="${item.width}" height="${item.height}">
           </picture>
           <span class="read-card__badge ${toBadgeClass(item.category)}">${item.category}</span>
         </a>

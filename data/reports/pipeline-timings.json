@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-25T09:11:14.414Z",
+  "updated_at": "2026-05-25T16:13:02.499Z",
   "records": [
     {
       "scope": "prepush-local",
@@ -2922,6 +2922,33 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 55
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-05-25T16:13:02.499Z",
+      "total_ms": 1051,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 50
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 942
+        },
+        {
+          "tag": "build:esbuild",
+          "durationMs": 23
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 45
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 58
         }
       ]
     }
