@@ -33,9 +33,28 @@ function validateArticleContract(filePath) {
     }
   }
 
-  const hasOrgAuthorInBlogPosting = /"@type"\s*:\s*"BlogPosting"[\s\S]*?"author"\s*:\s*\{[\s\S]*?"@type"\s*:\s*"Organization"/i.test(raw);
-  if (hasOrgAuthorInBlogPosting) {
-    errors.push('BlogPosting.author ma typ Organization (wymagane Person).');
+  for (const m of String(raw).matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
+    let parsed;
+    try {
+      parsed = JSON.parse(String(m[1] || '').trim());
+    } catch (_err) {
+      continue;
+    }
+    const nodes = Array.isArray(parsed) ? parsed : [parsed];
+    for (const node of nodes) {
+      if (!node || typeof node !== 'object') continue;
+      const type = node['@type'];
+      const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
+      if (!isBlogPosting) continue;
+      const author = node.author;
+      if (!author || typeof author !== 'object' || Array.isArray(author)) {
+        errors.push('BlogPosting.author musi być obiektem Person.');
+        continue;
+      }
+      if (String(author['@type'] || '').trim() !== 'Person') {
+        errors.push('BlogPosting.author ma typ Organization (wymagane Person).');
+      }
+    }
   }
 
   const contextualLinks = countMatches(raw, /<a\b[^>]*href="(\.\/)?[a-z0-9-]+\.html(?:[?#][^\"]*)?"/gi);
