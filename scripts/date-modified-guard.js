@@ -23,6 +23,7 @@ function isArticleHtml(file) {
   if (!normalized.endsWith('.html')) return false;
   if (normalized.startsWith('_site/')) return false;
   const blocked = new Set([
+    'article-template-bento.html',
     'index.html',
     'porady.html',
     'jedzenie.html',
@@ -127,4 +128,3 @@ try {
   console.error(`[FAIL] date-modified-guard -> ${err.message || err}`);
   process.exit(1);
 }
-
