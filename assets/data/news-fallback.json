@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-24T06:48:39+00:00",
+    "updatedAt": "2026-05-26T13:14:57+00:00",
     "items": [
+        {
+            "id": "news_b190c220cf83",
+            "title": "Medycyna regeneracyjna",
+            "content_html": "<p><span>Post z Instagrama opisuje realny kierunek badań, ale mocno go upraszcza. </span><span><strong><span></span><span><a href=\"ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html\">Medycyna</a> regeneracyjna naprawdę próbuje uruchamiać naturalne mechanizmy naprawy tkanek</span></strong>, zamiast tylko łagodzić objawy albo czekać na przeszczep. Badane są komórki macierzyste, <span class=\"news-text-tone--3\"><a href=\"terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html\">terapie</a> RNA</span>, inżynieria tkankowa, <strong>bioimplanty</strong> oraz małe cząsteczki — czyli potencjalnie leki, które można byłoby podawać podobnie jak klasyczne <span class=\"news-text-tone--2\">farmaceutyki</span>.  </span></p><p><span>Najbliżej viralowego hasła są prace nad </span><span><strong><span></span><span>small molecules</span></strong>, czyli małymi cząsteczkami zdolnymi wpływać na szlaki biologiczne odpowiedzialne za naprawę tkanek. <span class=\"news-text-tone--3\">Scripts Research</span> informowało w 2024 roku o rozwoju takich związków dla uszkodzeń <span class=\"news-text-tone--3\">serca, płuc, stawów i innych tkanek</span>. To brzmi obiecująco, ale nadal jest to obszar badań, a nie gotowa „pigułka na odrośnięcie wątroby albo serca”.  </span><br><span></span></p><p><span>Są też konkretne przykłady kliniczne. <span class=\"news-text-tone--3\">UCLA</span> ogłosiło w 2025 roku zgodę <span class=\"news-text-tone--3\">FDA</span> na rozpoczęcie badań klinicznych nad eksperymentalnym lekiem </span><span><strong><span></span><span>AD-NP1</span></strong>, który ma wspierać regenerację tkanki serca po uszkodzeniu. To ważny krok, ale „<span class=\"news-text-tone--3\">zgoda na badania</span>” nie oznacza jeszcze, że lek działa u pacjentów i trafi do aptek.  </span><br><span></span></p><p><span>Największy problem: ludzkie narządy nie regenerują się tak łatwo jak ogon jaszczurki. <span class=\"news-text-tone--4\">Serce, płuca czy nerki</span> mają bardzo ograniczoną zdolność odbudowy. Nawet wątroba, która regeneruje się najlepiej, nie zawsze potrafi naprawić przewlekłe uszkodzenia. Dlatego obecne badania są raczej próbą </span><span><strong><span></span><span>wspierania naprawy, ograniczania bliznowacenia i poprawy funkcji narządów</span></strong>, a nie magicznego „odrastania” całego organu. <span class=\"news-text-tone--4\">Przeglądy naukowe podkreślają</span>, że medycyna regeneracyjna rozwija się szybko, ale nadal ma poważne bariery: bezpieczeństwo, kontrolę różnicowania komórek, ryzyko nieprawidłowego wzrostu tkanek, skuteczność dostarczania terapii i koszty.  </span><br><span></span></p><p><strong><span>P</span><span>ost nie jest całkowitą bzdurą, bo leki regeneracyjne naprawdę są rozwijane. Ale hasło o tabletkach, które „odrastają uszkodzone narządy”, jest mocno podkręcone. Prawdziwsza wersja brzmi: naukowcy testują terapie, które mogą pomagać tkankom lepiej się naprawiać. Do pigułki „napraw mi serce, płuca i wątrobę” droga jest jeszcze długa.</span></strong><br><span></span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20260512_092535_b4c948bb.avif",
+                "webp": "./assets/news/news_20260512_092535_b4c948bb.webp",
+                "jpg": "./assets/news/news_20260512_092535_b4c948bb.jpg",
+                "alt": "Nedycyna regeneracyjna",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Scripps Research — “Scripps Research advances breakthrough regenerative medicines”",
+                    "url": "https://www.scripps.edu/news-and-events/press-room/2024/20241030-regenerative-medicine-overview.html?utm_source=chatgpt.com"
+                },
+                {
+                    "label": "UCLA — FDA clears UCLA heart tissue regeneration drug for clinical trials   3. BMC Medicine — “Cell therapy strategies for organ regeneration”",
+                    "url": "https://link.springer.com/article/10.1186/s12916-026-04707-0?utm_source=chatgpt.com"
+                }
+            ],
+            "updated_at": "2026-05-26T13:14:57+00:00",
+            "published_at": "2026-05-26T13:14:57+00:00",
+            "excerpt": "Post z Instagrama opisuje realny kierunek badań, ale mocno go upraszcza. Medycyna regeneracyjna naprawdę próbuje uruchamiać naturalne mechanizmy naprawy tkanek, zamiast tylko łagodzić objawy albo czekać na przeszczep. B…"
+        },
         {
             "id": "news_70c119c8bcb6",
             "title": "Cukier w pierwszych latach życia: czy naprawdę może wpływać na zdrowie po latach?",
