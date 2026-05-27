@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "build": "npm run build:esbuild",
-    "build:esbuild": "esbuild src/app.ts src/cmp.ts src/footer.ts --outdir=dist --target=es2018 --format=iife --log-level=error",
+    "build:esbuild": "esbuild src/app.ts src/cmp.ts src/footer.ts src/search.ts --outdir=dist --target=es2018 --format=iife --log-level=error",
     "typecheck": "tsc --noEmit --pretty false",
     "build:strict": "npm run typecheck && npm run build:esbuild",
     "article:new": "node scripts/create-article-from-template.js",
@@ -36,6 +36,7 @@
     "assets:mirror:check": "node scripts/sync-site-assets-mirror.js --check",
     "assets:audit": "node scripts/assets-audit.js --report data/reports/assets-audit.json",
     "assets:audit:apply": "node scripts/assets-audit.js --apply --report data/reports/assets-audit.json",
+    "search:index": "node scripts/generate-search-index.js",
     "assets:trash:prune": "node scripts/assets-trash-retention.js --days 14",
     "assets:trash:prune:dry": "node scripts/assets-trash-retention.js --days 14 --dry-run",
     "json:gate:diff": "node scripts/json-fitpo50-gate-diff.js",

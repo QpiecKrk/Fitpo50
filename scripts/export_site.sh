@@ -134,6 +134,12 @@ rsync -a \
   --exclude="_site/" \
   "$ROOT_DIR/" "$OUTPUT_DIR/"
 
+echo "Generuję indeks wyszukiwarki kontekstowej..."
+(
+  cd "$ROOT_DIR"
+  "$NODE_BIN" scripts/generate-search-index.js --output "$OUTPUT_DIR/assets/data/search-index.json"
+)
+
 run_minification
 
 echo "Exported clean site to: $OUTPUT_DIR"

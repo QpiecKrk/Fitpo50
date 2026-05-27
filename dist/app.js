@@ -587,5 +587,21 @@
         setShareStatus("Wybierz kana\u0142 udost\u0119pniania poni\u017Cej.");
       });
     }
+    const headerSearchInputs = Array.from(document.querySelectorAll('.searchbar input[type="search"]'));
+    const isSearchPage = window.location.pathname.endsWith("/search.html") || window.location.pathname === "/search.html";
+    const redirectToSearchPage = (query) => {
+      const trimmedQuery = query.trim();
+      if (!trimmedQuery) return;
+      const target = `search.html?q=${encodeURIComponent(trimmedQuery)}`;
+      window.location.href = target;
+    };
+    headerSearchInputs.forEach((searchInput) => {
+      searchInput.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter") return;
+        if (isSearchPage) return;
+        event.preventDefault();
+        redirectToSearchPage(searchInput.value);
+      });
+    });
   })();
 })();

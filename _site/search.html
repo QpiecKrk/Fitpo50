@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wyszukiwarka kontekstowa | FitPo50</title>
+  <meta name="description" content="Wyszukiwarka kontekstowa FitPo50. Szybko znajdź artykuły i fragmenty odpowiedzi dopasowane do Twojego zapytania.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://fitpo50.pl/search.html">
+  <script>
+    (function () {
+      try {
+        var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var h = new Date().getHours();
+        var isNight = (h >= 19 || h < 7);
+        if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css?v=1.4">
+  <link rel="stylesheet" href="./assets/search.css?v=1">
+  <link rel="stylesheet" href="./assets/footer.css?v=1">
+  <link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #efe7da 0%, #f4efe6 100%);
+    }
+    .shell {
+      box-sizing: border-box;
+      width: min(1260px, calc(100% - 28px));
+      margin: 18px auto 30px;
+      background: #fbf7f0;
+      border: 1px solid #d7cebf;
+      border-radius: 24px;
+      box-shadow: 0 10px 24px rgba(31, 43, 69, 0.12);
+      padding: 14px;
+    }
+    html.night-shell body {
+      background: linear-gradient(180deg, #080d16 0%, #121b2a 100%);
+    }
+    html.night-shell .shell {
+      background: #0f1623;
+      border-color: #2b3950;
+      box-shadow: 0 18px 38px rgba(6, 10, 18, 0.55);
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a href="index.html" class="brand" aria-label="FitPo50 — strona główna">
+        <img class="brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" onerror="this.style.display='none'">
+        <span class="brand__text">
+          <span class="brand__name">FitPo50</span>
+          <span class="brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span>
+        </span>
+      </a>
+      <nav class="menu" aria-label="Menu główne">
+        <a href="index.html">Home</a>
+        <a href="porady.html">Porady</a>
+        <a href="index.html#news">News</a>
+        <a href="rusz-sie.html">Ruch</a>
+        <a href="jedzenie.html">Jedzenie</a>
+        <a href="zdrowie.html">Zdrowie</a>
+        <a href="ciekawe.html">Ciekawe</a>
+        <a href="dziennik.html">Dziennik</a>
+        <a href="o-mnie.html">O mnie</a>
+      </nav>
+      <label class="searchbar" aria-label="Szukaj artykułów">
+        <span aria-hidden="true">🔎</span>
+        <input type="search" placeholder="Szukaj artykułów...">
+      </label>
+    </header>
+
+    <main class="search-page">
+      <section class="search-hero" aria-labelledby="search-page-title">
+        <p class="search-hero__eyebrow">Wyszukiwarka kontekstowa</p>
+        <h1 id="search-page-title">Znajdź odpowiedź w treści artykułów</h1>
+        <p>Szukaj po tytule, nagłówkach i treści. Poniżej zobaczysz jeden najlepszy fragment z każdego wyniku.</p>
+        <div class="search-controls">
+          <label class="search-input-wrap" for="context-search-input">
+            <span aria-hidden="true">🔎</span>
+            <input id="context-search-input" data-search-input type="search" placeholder="Np. kreatyna po 50, kortyzol, ból kolan">
+          </label>
+          <button class="search-clear" type="button" data-search-clear>Wyczyść</button>
+        </div>
+        <div class="search-chips" role="group" aria-label="Filtr kategorii">
+          <button type="button" class="search-chip is-active" data-search-chip="all" aria-pressed="true">Wszystkie</button>
+          <button type="button" class="search-chip" data-search-chip="Ruch" aria-pressed="false">Ruch</button>
+          <button type="button" class="search-chip" data-search-chip="Jedzenie" aria-pressed="false">Jedzenie</button>
+          <button type="button" class="search-chip" data-search-chip="Zdrowie" aria-pressed="false">Zdrowie</button>
+          <button type="button" class="search-chip" data-search-chip="Ciekawe" aria-pressed="false">Ciekawe</button>
+        </div>
+        <div class="search-quick-tags" aria-label="Szybkie tagi">
+          <button type="button" class="quick-tag" data-search-chip="all" data-quick-query="kreatyna">kreatyna</button>
+          <button type="button" class="quick-tag" data-search-chip="all" data-quick-query="kortyzol">kortyzol</button>
+          <button type="button" class="quick-tag" data-search-chip="all" data-quick-query="siłownia po 50">siłownia po 50</button>
+          <button type="button" class="quick-tag" data-search-chip="all" data-quick-query="ból kolan">ból kolan</button>
+          <button type="button" class="quick-tag" data-search-chip="all" data-quick-query="odchudzanie po 50">odchudzanie po 50</button>
+        </div>
+      </section>
+
+      <section class="search-results-wrap" aria-live="polite">
+        <p class="search-count" data-search-count>Wpisz frazę, aby przeszukać artykuły.</p>
+        <div class="search-results" data-search-results></div>
+        <div class="search-empty" data-search-empty hidden>
+          Brak wyników. Spróbuj krótszej frazy albo wybierz inny temat.
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Nawigacja dolna">
+      <a href="index.html" class="bottom-nav__item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Dom</span>
+      </a>
+      <a href="porady.html" class="bottom-nav__item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span>Porady</span>
+      </a>
+      <a href="index.html#baza-wiedzy" class="bottom-nav__item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Wiedza</span>
+      </a>
+      <a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer" class="bottom-nav__item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <span>Instagram</span>
+      </a>
+    </nav>
+
+    <footer class="site-footer-bento" aria-label="Stopka FitPo50">
+      <div class="site-footer-bento__grid">
+        <section class="site-footer-bento__card" aria-label="O serwisie FitPo50">
+          <div class="site-footer-bento__brand">
+            <img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'">
+            <div>
+              <h2 class="site-footer-bento__title">FitPo50.pl</h2>
+              <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej ściemy.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="site-footer-bento__card" aria-label="Linki serwisu">
+          <h3 class="site-footer-bento__links-title">Nawigacja</h3>
+          <ul class="site-footer-bento__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="porady.html">Porady</a></li>
+            <li><a href="rusz-sie.html">Ruch</a></li>
+            <li><a href="jedzenie.html">Jedzenie</a></li>
+            <li><a href="zdrowie.html">Zdrowie</a></li>
+            <li><a href="ciekawe.html">Ciekawe</a></li>
+            <li><a href="dziennik.html">Dziennik</a></li>
+            <li><a href="o-mnie.html">O mnie</a></li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="site-footer-bento__bottom">
+        <p class="site-footer-bento__copy">© 2026 FitPo50 | <a href="polityka-prywatnosci.html">Polityka Prywatności i Cookies</a></p>
+        <p class="site-footer-bento__note">Ważna informacja: nie jestem lekarzem. Treści na stronie mają charakter edukacyjny i informacyjny, nie zastępują konsultacji medycznej ani indywidualnych zaleceń specjalisty.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="./dist/app.js?v=1.2" defer></script>
+  <script src="./dist/search.js?v=1" defer></script>
+  <script>
+    (function () {
+      const quickTags = Array.from(document.querySelectorAll('[data-quick-query]'));
+      const input = document.querySelector('[data-search-input]');
+      if (!input) return;
+
+      quickTags.forEach((tag) => {
+        tag.addEventListener('click', () => {
+          const query = tag.getAttribute('data-quick-query') || '';
+          input.value = query;
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.focus();
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

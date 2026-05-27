@@ -1,0 +1,368 @@
+.search-page {
+  padding: 18px 0 32px;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr) 220px;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.brand,
+.menu,
+.searchbar {
+  background: #f7f1e7;
+  border: 1px solid #d7cebf;
+  border-radius: 14px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  padding: 0 16px;
+  gap: 10px;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
+.brand__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  object-fit: contain;
+  object-position: center;
+  border: 0;
+  background: transparent;
+  flex: 0 0 auto;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.02;
+}
+
+.brand__name {
+  color: #d57a4e;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 1.02rem;
+}
+
+.brand__tagline {
+  color: #1f4f6f;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
+
+.menu {
+  padding: 0 16px;
+  gap: 18px;
+  font-weight: 600;
+  color: #346783;
+  overflow-x: auto;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.menu a {
+  color: inherit;
+  text-decoration: none;
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.menu a:hover,
+.menu a.is-active {
+  color: #1f4f6f;
+  border-bottom-color: #ef8d3d;
+}
+
+.searchbar {
+  padding: 0 12px;
+  gap: 8px;
+}
+
+.searchbar input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: 0.98rem;
+  color: #1f4f6f;
+}
+
+.search-hero,
+.search-results-wrap {
+  background: #fff;
+  border: 1px solid #dce9e6;
+  border-radius: 22px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+
+.search-hero__eyebrow {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #517f79;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.search-hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  color: #123f5d;
+}
+
+.search-hero p {
+  margin: 0;
+  color: #375266;
+}
+
+.search-controls {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.search-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  background: #f5faf8;
+  border: 1px solid #c8dcd8;
+  border-radius: 14px;
+}
+
+.search-input-wrap input {
+  width: 100%;
+  height: 46px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: #1d3447;
+}
+
+.search-input-wrap input:focus {
+  outline: none;
+}
+
+.search-clear {
+  border: 0;
+  border-radius: 14px;
+  background: #113f5f;
+  color: #fff;
+  padding: 0 16px;
+  font-weight: 700;
+  min-height: 46px;
+  cursor: pointer;
+}
+
+.search-chips,
+.search-quick-tags {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.search-chip,
+.quick-tag {
+  border: 1px solid #c8dcd8;
+  background: #f7fbfa;
+  color: #1f4157;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.search-chip.is-active {
+  background: #143f5f;
+  color: #fff;
+  border-color: #143f5f;
+}
+
+.search-count {
+  margin: 0 0 12px;
+  color: #2d4b63;
+  font-weight: 600;
+}
+
+.search-results {
+  display: grid;
+  gap: 10px;
+}
+
+.search-result {
+  border: 1px solid #dbe8e5;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fff;
+}
+
+.search-result__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.search-result__badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-weight: 700;
+  font-size: 0.79rem;
+}
+
+.search-result__badge--ruch { background: #e5f3ff; color: #1e4f75; }
+.search-result__badge--jedzenie { background: #ecf8e8; color: #2f6130; }
+.search-result__badge--zdrowie { background: #fff0e4; color: #7c4a20; }
+.search-result__badge--ciekawe { background: #ede9ff; color: #4c3f88; }
+.search-result__badge--porady { background: #eaf5f4; color: #2f5d57; }
+
+.search-result__meta {
+  font-size: 0.82rem;
+  color: #587082;
+}
+
+.search-result__title {
+  margin: 8px 0 8px;
+  font-size: 1.07rem;
+}
+
+.search-result__title a {
+  color: #103f5d;
+  text-decoration: none;
+}
+
+.search-result__title a:hover {
+  text-decoration: underline;
+}
+
+.search-result__snippet {
+  margin: 0;
+  color: #29465d;
+  line-height: 1.55;
+}
+
+.search-highlight {
+  background: rgba(228, 188, 74, 0.35);
+  color: inherit;
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.search-empty {
+  border: 1px dashed #bfd2cf;
+  border-radius: 14px;
+  padding: 14px;
+  background: #f8fbfb;
+  color: #3a586d;
+}
+
+@media (max-width: 740px) {
+  .topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .menu {
+    overflow-x: auto;
+  }
+
+  .search-controls {
+    flex-direction: column;
+  }
+
+  .search-clear {
+    width: 100%;
+  }
+}
+
+/* Wsparcie dla Trybu Nocnego w Wyszukiwarce */
+html.night-shell .brand,
+html.night-shell .menu,
+html.night-shell .searchbar {
+  background: #162235;
+  border-color: #2b3950;
+  color: #a5c0d0;
+}
+
+html.night-shell .brand__name {
+  color: #e28e62;
+}
+
+html.night-shell .brand__tagline {
+  color: #7aa7c7;
+}
+
+html.night-shell .menu a {
+  color: #a5c0d0;
+}
+
+html.night-shell .menu a:hover,
+html.night-shell .menu a.is-active {
+  color: #e28e62;
+  border-bottom-color: #e28e62;
+}
+
+html.night-shell .searchbar input,
+html.night-shell .search-input-wrap input {
+  color: #e2f0fd;
+}
+
+html.night-shell .search-hero,
+html.night-shell .search-results-wrap,
+html.night-shell .search-result {
+  background: #111a28;
+  border-color: #24354f;
+  color: #cbdce7;
+}
+
+html.night-shell .search-hero h1,
+html.night-shell .search-result__title a {
+  color: #e2f0fd;
+}
+
+html.night-shell .search-hero p,
+html.night-shell .search-result__snippet {
+  color: #9cb5c9;
+}
+
+html.night-shell .search-input-wrap {
+  background: #162235;
+  border-color: #2b3950;
+}
+
+html.night-shell .search-chip,
+html.night-shell .quick-tag {
+  background: #162235;
+  border-color: #2b3950;
+  color: #cbdce7;
+}
+
+html.night-shell .search-chip.is-active {
+  background: #d57a4e;
+  border-color: #d57a4e;
+  color: #fff;
+}
+
+html.night-shell .search-empty {
+  background: #131d2d;
+  border-color: #24354f;
+  color: #9cb5c9;
+}
