@@ -31,6 +31,11 @@
     return;
   }
 
+  const searchInput = input;
+  const searchResultsNode = resultsNode;
+  const searchCountNode = countNode;
+  const searchEmptyNode = emptyNode;
+
   let indexCache: SearchEntry[] | null = null;
   let activeCategory: SearchCategory = 'all';
   let debounceTimer = 0;
@@ -185,14 +190,14 @@
 
   function renderResults(results: SearchResult[]): void {
     if (results.length === 0) {
-      resultsNode.innerHTML = '';
-      emptyNode.hidden = false;
+      searchResultsNode.innerHTML = '';
+      searchEmptyNode.hidden = false;
       return;
     }
 
-    emptyNode.hidden = true;
+    searchEmptyNode.hidden = true;
 
-    resultsNode.innerHTML = results
+    searchResultsNode.innerHTML = results
       .map(({ entry, snippet }) => {
         const categoryClass = `search-result__badge--${normalizeText(entry.category)}`;
         const readTime = entry.readTime ? `<span class="search-result__meta">${escapeHtml(entry.readTime)}</span>` : '';
@@ -212,13 +217,13 @@
   }
 
   async function runSearch(): Promise<void> {
-    const query = input.value.trim();
+    const query = searchInput.value.trim();
     const tokens = tokenize(query);
 
     if (tokens.length === 0) {
-      countNode.textContent = `Wpisz frazę (minimum ${MIN_TOKEN_LENGTH} znaki), aby przeszukać artykuły.`;
-      resultsNode.innerHTML = '';
-      emptyNode.hidden = true;
+      searchCountNode.textContent = `Wpisz frazę (minimum ${MIN_TOKEN_LENGTH} znaki), aby przeszukać artykuły.`;
+      searchResultsNode.innerHTML = '';
+      searchEmptyNode.hidden = true;
       return;
     }
 
@@ -245,7 +250,7 @@
     }
 
     const uniqueArticles = new Set(scored.map((item) => item.entry.url)).size;
-    countNode.textContent = fallbackNoticeShown
+    searchCountNode.textContent = fallbackNoticeShown
       ? `Brak wyników w kategorii ${activeCategory}. Pokazuję ${scored.length} wyników globalnie (${uniqueArticles} artykułów).`
       : `Znaleziono ${scored.length} wyników w ${uniqueArticles} artykułach.`;
 
@@ -261,8 +266,8 @@
 
   function syncUrl(): void {
     const params = new URLSearchParams(window.location.search);
-    if (input.value.trim()) {
-      params.set('q', input.value.trim());
+    if (searchInput.value.trim()) {
+      params.set('q', searchInput.value.trim());
     } else {
       params.delete('q');
     }
@@ -285,12 +290,12 @@
     });
   }
 
-  input.addEventListener('input', () => {
+  searchInput.addEventListener('input', () => {
     syncUrl();
     scheduleSearch();
   });
 
-  input.addEventListener('keydown', (event) => {
+  searchInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       syncUrl();
@@ -300,10 +305,10 @@
 
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
-      input.value = '';
+      searchInput.value = '';
       syncUrl();
       void runSearch();
-      input.focus();
+      searchInput.focus();
     });
   }
 
@@ -320,13 +325,13 @@
   const initialQuery = initialParams.get('q') || '';
   const initialCategory = initialParams.get('cat') as SearchCategory | null;
 
-  if (initialCategory && ['all', 'Ruch', 'Jedzenie', 'Zdrowie', 'Ciekawe', 'Porady'].includes(initialCategory)) {
+  if (initialCategory && ['all', 'Ruch', 'Jedzenie', 'Zdrowie', 'Ciekawe', 'Porady'].indexOf(initialCategory) >= 0) {
     setActiveChip(initialCategory);
   } else {
     setActiveChip('all');
   }
 
-  input.value = initialQuery;
+  searchInput.value = initialQuery;
 
   void runSearch();
 })();
