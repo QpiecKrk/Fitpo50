@@ -391,7 +391,7 @@ function validatePublishedNewsImages(errors, warnings) {
         if (!hasSiteVariant && !hasSourceVariant) {
           errors.push(`${rel}: BLOKER NEWS: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${siteDir}/ oraz ${sourceDir}/.`);
         } else if (!hasSiteVariant && hasSourceVariant) {
-          errors.push(`${rel}: BLOKER NEWS: opublikowany news "${title}" ma miniatury tylko w ${sourceDir}/ (brak mirroru w ${siteDir}/).`);
+          warnings.push(`${rel}: WARN NEWS: opublikowany news "${title}" ma miniatury tylko w ${sourceDir}/ (brak mirroru w ${siteDir}/, akceptowane w CI/gitignore).`);
         }
         continue;
       }
