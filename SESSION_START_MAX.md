@@ -60,6 +60,7 @@ Publikacja artykulow:
 - kanoniczny flow publikacji artykulow: `scripts/import-article.js` (`.fitpo50.json` + precheck); `article-template-bento.html` / `create-article-from-template.js` tylko do recznych szkicow,
 - preferuj szybki pipeline jednej komendy: `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --force <true|false>`,
 - pipeline publikacyjny musi wykonywac kolejnosc: `fix-fitpo50-json` -> `json-fitpo50-gate --file` -> `import-article --precheck` -> `import-article --publish` -> `sync-article-title-breadcrumb` (spojnosc `<title>`/`og:title`/`twitter:title` + `BreadcrumbList`) -> `sync-site-assets-mirror` -> `news-integrity` -> `predeploy-gate --slug`,
+- po imporcie artykulu pipeline ma obowiazkowo zregenerowac `llms-full.txt` automatycznie (`scripts/generate-llms-full.js`) i nie czekamy na reczne uzupelnianie JSON/Claude,
 - na etapie `json-fitpo50-gate --file` traktuj `meta_description` poza limitem (145-160 znakow) jako twardy blokujacy FAIL i nie przechodz dalej do importu/publikacji,
 - `fix-fitpo50-json` dziala w trybie bezpiecznym:
   - domyslnie `--write false` (tylko check/stdout),

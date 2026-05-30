@@ -238,6 +238,7 @@ async function main() {
   );
   run('Sync social title + BreadcrumbList (source/_site)', 'node', ['scripts/sync-article-title-breadcrumb.js', '--slug', slug]);
   run('Sync meta description across head/schema', 'node', ['scripts/sync-article-head-descriptions.js', '--slug', slug]);
+  run('Generate llms-full (auto-refresh)', 'node', ['scripts/generate-llms-full.js']);
   run('Article contract check (source/_site)', 'node', ['scripts/article-contract-check.js', `${slug}.html`, path.join('_site', `${slug}.html`)]);
   run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug]);
   if (parallelTails) {

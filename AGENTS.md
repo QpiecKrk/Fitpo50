@@ -53,6 +53,13 @@ Example:
 - Zakaz `</source>` i `<?xml ... ?>` w HTML.
 - `BlogPosting.citation` musi być zgodne z listą źródeł w HTML (docelowo min. 4 realne URL-e, bez halucynacji).
 
+## 🧩 Auto-rules dla importu JSON (obowiązkowe)
+- Nowe artykuły importowane z „gołego JSON” muszą być automatycznie wzmacniane przez importer (bez ręcznego dopisywania pól przez autora JSON).
+- Importer ma zawsze wymusić spójność opisu SEO 1:1 (`meta description` = `og:description` = `twitter:description` = `BlogPosting.description`).
+- Jeśli w treści sekcji pojawi się `<table>` bez `<caption>`, importer ma automatycznie dodać `<caption>`.
+- `BlogPosting.about` ma być budowane automatycznie; jeśli JSON nie ma encji, importer ma użyć fallbacku encji Wikidata na podstawie treści artykułu.
+- Brak pól GEO/AIO w JSON (np. encje) nie może zatrzymać importu, jeśli importer potrafi je bezpiecznie wyprowadzić automatycznie.
+
 ## ⚡ Available Tools (ON-DEMAND only)
 - `sys_core_02(title, content, category)` — Save a note + auto-detect conflicts
 - `sys_core_03(items[])` — Save multiple notes in 1 call

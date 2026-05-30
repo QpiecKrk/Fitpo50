@@ -135,6 +135,24 @@ const CATEGORY_LANDING_URLS = new Set([
   'dziennik.html',
   'o-mnie.html',
 ]);
+const WIKIDATA_ENTITY_MAP = [
+  { key: 'apob', name: 'Apolipoprotein B', sameAs: 'https://www.wikidata.org/wiki/Q420633' },
+  { key: 'apolipoproteina b', name: 'Apolipoprotein B', sameAs: 'https://www.wikidata.org/wiki/Q420633' },
+  { key: 'ldl', name: 'Low-density lipoprotein', sameAs: 'https://www.wikidata.org/wiki/Q159472' },
+  { key: 'hdl', name: 'High-density lipoprotein', sameAs: 'https://www.wikidata.org/wiki/Q181503' },
+  { key: 'cholesterol', name: 'Cholesterol', sameAs: 'https://www.wikidata.org/wiki/Q43656' },
+  { key: 'miazdzyca', name: 'Atherosclerosis', sameAs: 'https://www.wikidata.org/wiki/Q133212' },
+  { key: 'miażdżyca', name: 'Atherosclerosis', sameAs: 'https://www.wikidata.org/wiki/Q133212' },
+  { key: 'metylacja dna', name: 'DNA methylation', sameAs: 'https://www.wikidata.org/wiki/Q29197' },
+  { key: 'epigenetyczny', name: 'Epigenetics', sameAs: 'https://www.wikidata.org/wiki/Q29181' },
+  { key: 'zegar horvatha', name: 'Epigenetic clock', sameAs: 'https://www.wikidata.org/wiki/Q109345510' },
+  { key: 'sakady', name: 'Saccade', sameAs: 'https://www.wikidata.org/wiki/Q270190' },
+  { key: 'saccade', name: 'Saccade', sameAs: 'https://www.wikidata.org/wiki/Q270190' },
+  { key: 'supresja sakadyczna', name: 'Saccadic suppression', sameAs: 'https://www.wikidata.org/wiki/Q7394493' },
+  { key: 'insulinoopornosc', name: 'Insulin resistance', sameAs: 'https://www.wikidata.org/wiki/Q541507' },
+  { key: 'insulinooporność', name: 'Insulin resistance', sameAs: 'https://www.wikidata.org/wiki/Q541507' },
+  { key: 'cukrzyca', name: 'Diabetes', sameAs: 'https://www.wikidata.org/wiki/Q12204' },
+];
 
 function parseArgs(argv) {
   const out = {};
@@ -578,6 +596,75 @@ function normalizeInternalSiteLinks(html) {
   );
 }
 
+function ensureCaptionedTables(html, sectionTitle) {
+  const source = String(html || '');
+  if (!/<table\b/i.test(source)) return source;
+  const cleanSectionTitle = stripTags(String(sectionTitle || ''))
+    .replace(/[?!.]+$/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const fallbackCaption = cleanSectionTitle
+    ? `Tabela: ${cleanSectionTitle}.`
+    : 'Tabela z danymi i interpretacją.';
+
+  return source.replace(/<table\b([^>]*)>([\s\S]*?)<\/table>/gi, (full, attrs, inner) => {
+    if (/<caption\b/i.test(inner)) return full;
+    return `<table${attrs}><caption>${escapeHtml(fallbackCaption)}</caption>${inner}</table>`;
+  });
+}
+
+function normalizeEntities(rawEntities) {
+  const out = [];
+  for (const item of normalizeArray(rawEntities)) {
+    if (!item) continue;
+    if (typeof item === 'string') {
+      const name = item.trim();
+      if (!name) continue;
+      out.push({ '@type': 'Thing', name });
+      continue;
+    }
+    if (typeof item !== 'object') continue;
+    const name = String(item.name || item.label || '').trim();
+    const sameAs = String(item.sameAs || item.wikidata || item.wikidata_url || '').trim();
+    if (!name) continue;
+    const node = { '@type': 'Thing', name };
+    if (sameAs && /^https?:\/\//i.test(sameAs)) node.sameAs = sameAs;
+    out.push(node);
+  }
+  return out;
+}
+
+function buildAboutEntities({ data, title, category, keyTakeaways, sources }) {
+  const manual = normalizeEntities(data.entities || data.schema_entities || data.wikidata_entities);
+  if (manual.length) return manual.slice(0, 6);
+
+  const haystack = [
+    title,
+    category?.label || '',
+    ...keyTakeaways,
+    ...normalizeArray(sources).map((s) => `${s?.label || ''} ${s?.url || ''}`),
+  ].join(' ');
+  const normalized = String(haystack)
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, ' ')
+    .replace(/\s+/g, ' ');
+
+  const hits = [];
+  for (const candidate of WIKIDATA_ENTITY_MAP) {
+    if (!normalized.includes(candidate.key)) continue;
+    if (hits.some((x) => x.sameAs === candidate.sameAs)) continue;
+    hits.push({
+      '@type': 'Thing',
+      name: candidate.name,
+      sameAs: candidate.sameAs,
+    });
+  }
+
+  if (hits.length) return hits.slice(0, 6);
+  return keyTakeaways.slice(0, 4).map((name) => ({ '@type': 'Thing', name }));
+}
+
 function normalizeSections(rawSections) {
   const sections = [];
   for (const entry of normalizeArray(rawSections)) {
@@ -587,11 +674,11 @@ function normalizeSections(rawSections) {
     const blocks = [];
 
     if (entry.content_html) {
-      blocks.push({ type: 'html', html: normalizeInternalSiteLinks(String(entry.content_html)) });
+      blocks.push({ type: 'html', html: ensureCaptionedTables(normalizeInternalSiteLinks(String(entry.content_html)), title) });
     }
 
     for (const paragraph of normalizeArray(entry.paragraphs_html || entry.paragraphs || [])) {
-      blocks.push({ type: 'paragraph', html: normalizeInternalSiteLinks(ensureParagraphHtml(paragraph)) });
+      blocks.push({ type: 'paragraph', html: ensureCaptionedTables(normalizeInternalSiteLinks(ensureParagraphHtml(paragraph)), title) });
     }
 
     if (Array.isArray(entry.list_items) && entry.list_items.length) {
@@ -1527,7 +1614,15 @@ function upsertBlogPostingSchema(html, opts) {
       };
 
       if (opts.about.length) {
-        node.about = opts.about.map((name) => ({ '@type': 'Thing', name }));
+        node.about = opts.about.map((item) => {
+          if (item && typeof item === 'object') {
+            const name = String(item.name || '').trim();
+            const sameAs = String(item.sameAs || '').trim();
+            if (name && sameAs) return { '@type': 'Thing', name, sameAs };
+            if (name) return { '@type': 'Thing', name };
+          }
+          return { '@type': 'Thing', name: String(item || '').trim() };
+        }).filter((entry) => entry.name);
       }
 
       if (opts.mentions.length) {
@@ -2260,7 +2355,13 @@ function normalizePayload(data, cliCategory, options = {}) {
     ...faqItems.map((f) => `${f.question} ${stripTags(f.answerHtml)}`),
   ].join(' ');
 
-  const about = keyTakeaways.slice(0, 4);
+  const about = buildAboutEntities({
+    data,
+    title,
+    category,
+    keyTakeaways,
+    sources,
+  });
   const mentions = buildScholarlyMentions(sources);
 
   return {

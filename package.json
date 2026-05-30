@@ -37,6 +37,7 @@
     "assets:audit": "node scripts/assets-audit.js --report data/reports/assets-audit.json",
     "assets:audit:apply": "node scripts/assets-audit.js --apply --report data/reports/assets-audit.json",
     "search:index": "node scripts/generate-search-index.js",
+    "llms:full": "node scripts/generate-llms-full.js",
     "assets:trash:prune": "node scripts/assets-trash-retention.js --days 14",
     "assets:trash:prune:dry": "node scripts/assets-trash-retention.js --days 14 --dry-run",
     "json:gate:diff": "node scripts/json-fitpo50-gate-diff.js",

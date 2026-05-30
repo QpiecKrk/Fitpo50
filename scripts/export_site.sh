@@ -140,6 +140,12 @@ echo "Generuję indeks wyszukiwarki kontekstowej..."
   "$NODE_BIN" scripts/generate-search-index.js --output "$OUTPUT_DIR/assets/data/search-index.json"
 )
 
+echo "Generuję llms-full.txt (source + export)..."
+(
+  cd "$ROOT_DIR"
+  "$NODE_BIN" scripts/generate-llms-full.js --output "$OUTPUT_DIR/llms-full.txt"
+)
+
 run_minification
 
 echo "Exported clean site to: $OUTPUT_DIR"

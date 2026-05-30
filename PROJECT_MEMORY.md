@@ -981,6 +981,9 @@ Jesli artykul ma obrazy:
 - Pipeline publikacji artykułu po imporcie uruchamia automatyczny sync opisów:
   - `scripts/sync-article-head-descriptions.js --slug <slug>`
   - cel: domknięcie spójności `meta/og/twitter/schema` bez ręcznych poprawek.
+- Pipeline publikacji artykułu po imporcie uruchamia automatyczną regenerację:
+  - `scripts/generate-llms-full.js`
+  - cel: `llms-full.txt` jest zawsze aktualny po każdym nowym artykule z JSON, bez ręcznej kontroli.
 - Dodany został regression check artykułu:
   - `scripts/article-contract-check.js` (kontrakt jakościowy),
   - `scripts/run-article-contract-diff.js` (uruchamiany tylko dla zmienionych `.html`),
@@ -1022,6 +1025,18 @@ Jesli artykul ma obrazy:
   - `npm run predeploy:check`
   - alternatywnie: `npm run prepush:local`, jesli obejmuje ten sam zakres walidacji
   - dopiero potem `git push`.
+
+## Ustalenia operacyjne 2026-05-30 (AIO / llms-full hard rule)
+
+- `llms-full.txt` jest plikiem obowiązkowym i utrzymywanym automatycznie przez pipeline.
+- Nie czekamy na ręczne dopisywanie treści przez redakcję ani Claude.
+- Każdy nowy artykuł dodany przez JSON ma być automatycznie uwzględniony w `llms-full.txt`:
+  - krok w `scripts/article-pipeline.js`: `Generate llms-full (auto-refresh)`,
+  - krok w `scripts/export_site.sh`: `generate-llms-full.js --output _site/llms-full.txt`.
+- Źródłem listy URL-i dla `llms-full.txt` jest `llms.txt` (sekcja `articles`), a treść jest pobierana z lokalnych plików `.html`.
+- Standard operacyjny:
+  - po imporcie artykułu nie robimy ręcznego sprawdzania JSON pod kątem `llms-full`,
+  - pipeline ma wygenerować plik sam i nadpisać go deterministycznie.
 
 ## Ustalenia operacyjne 2026-05-17 (SEO sync + workflow hygiene)
 
