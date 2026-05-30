@@ -308,7 +308,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   section: "Zdrowie"
   summary: "Kolagen zaczyna spadać już od 25. roku życia. Co mówią badania o suplementacji peptydów kolagenowych, jakie dawki działają i czy warto inwestować po 50-tce?"
 - url: https://fitpo50.pl/dieta-50-50-po-piecdziesiatce.html
-  title: "Dieta 50/50 po pięćdziesiątce: efekty, opinie i nauka – | FitPo50"
+  title: "Dieta 50/50 po pięćdziesiątce: efekty, opinie i nauka | FitPo50"
   section: "Jedzenie"
   summary: "Dieta 50/50 to post naprzemienny: jeden dzień jesz normalnie, drugi prawie nic. Sprawdź efekty, opinie i to, co badania mówią o utracie mięśni po 50-tce."
 
