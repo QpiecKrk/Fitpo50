@@ -1,7 +1,17 @@
 {
   "version": 1,
-  "updated_at": "2026-05-25T08:26:18.315Z",
+  "updated_at": "2026-05-30T19:22:07.279Z",
   "items": [
+    {
+      "slug": "dieta-50-50-po-piecdziesiatce",
+      "url": "https://fitpo50.pl/dieta-50-50-po-piecdziesiatce.html",
+      "first_published_at": "2026-05-30T19:22:07.279Z",
+      "last_published_at": "2026-05-30T19:22:07.279Z",
+      "status": "pending",
+      "last_checked_at": "",
+      "last_crawl_time": "",
+      "notes": ""
+    },
     {
       "slug": "kolagen-suplementacja-po-50",
       "url": "https://fitpo50.pl/kolagen-suplementacja-po-50.html",
