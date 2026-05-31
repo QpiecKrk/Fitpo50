@@ -9,6 +9,8 @@ const DEFAULT_WORK_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Do
 const DEFAULT_INPUT_DIR = DEFAULT_WORK_DIR;
 const DEFAULT_OUTPUT_JSON = path.join(DEFAULT_WORK_DIR, 'gsc-weekly-report.json');
 const DEFAULT_OUTPUT_MD = path.join(DEFAULT_WORK_DIR, 'gsc-weekly-report.md');
+const DEFAULT_AEO_OUTPUT_JSON = path.join(DEFAULT_WORK_DIR, 'aeo-opportunities.json');
+const DEFAULT_AEO_OUTPUT_MD = path.join(DEFAULT_WORK_DIR, 'aeo-opportunities.md');
 
 function parseArgs(argv) {
   const out = {
@@ -205,6 +207,200 @@ function toDateLabel(iso) {
   return d.toISOString().slice(0, 10);
 }
 
+function ensureTitleLimit(title) {
+  const max = 65;
+  if (title.length <= max) return title;
+  return `${title.slice(0, max - 1).trim()}…`;
+}
+
+function ensureDescLimit(desc) {
+  const max = 160;
+  if (desc.length <= max) return desc;
+  return `${desc.slice(0, max - 1).trim()}…`;
+}
+
+function safeUrlToPath(url) {
+  const raw = String(url || '').trim();
+  if (!raw) return '';
+  const withoutDomain = raw.replace(/^https?:\/\/[^/]+/i, '');
+  if (!withoutDomain || withoutDomain === '/') return '';
+  return withoutDomain.startsWith('/') ? withoutDomain.slice(1) : withoutDomain;
+}
+
+function buildArticleDeltaPlan(report, qpRows) {
+  const ctr = Array.isArray(report?.opportunities?.ctr_problems) ? report.opportunities.ctr_problems : [];
+  const topZero = Array.isArray(report?.opportunities?.top10_zero_click) ? report.opportunities.top10_zero_click : [];
+  const pageOpp = Array.isArray(report?.opportunities?.page_opportunities) ? report.opportunities.page_opportunities : [];
+  const seed = [...ctr, ...topZero].slice(0, 25);
+  const byQueryPages = new Map();
+  qpRows.forEach((row) => {
+    const q = String(row.query || '').trim().toLowerCase();
+    if (!q) return;
+    if (!byQueryPages.has(q)) byQueryPages.set(q, []);
+    byQueryPages.get(q).push(row);
+  });
+
+  const plans = [];
+  const usedUrls = new Set();
+  seed.forEach((item) => {
+    const query = String(item.query || '').trim();
+    if (!query) return;
+    const pagesForQuery = (byQueryPages.get(query.toLowerCase()) || [])
+      .sort((a, b) => Number(b.impressions || 0) - Number(a.impressions || 0));
+    const targetUrl = pagesForQuery[0]?.page || '';
+    if (!targetUrl || usedUrls.has(targetUrl)) return;
+    usedUrls.add(targetUrl);
+
+    const pageStats = pageOpp.find((p) => p.page === targetUrl);
+    const score = Number(item.opportunity_score || 0);
+    const title = ensureTitleLimit(`${query} po 50: co działa i jak zacząć | FitPo50`);
+    const meta = ensureDescLimit(`Sprawdź ${query} po 50. Konkretne kroki, najczęstsze błędy i praktyczny plan wdrożenia oparty na danych oraz realnej intencji użytkownika.`);
+    const filePath = safeUrlToPath(targetUrl);
+
+    plans.push({
+      url: targetUrl,
+      file_path: filePath || '(nieustalony)',
+      main_query: query,
+      opportunity_score: score,
+      current_metrics: {
+        impressions: Math.round(Number(pageStats?.impressions || item.impressions || 0)),
+        clicks: Math.round(Number(pageStats?.clicks || item.clicks || 0)),
+        ctr: Number(Number(pageStats?.ctr || item.ctr || 0).toFixed(2)),
+        position: Number(Number(pageStats?.position || item.position || 0).toFixed(2)),
+      },
+      delta: {
+        new_title: title,
+        new_meta_description: meta,
+        h2_suggestions: [
+          `Co dokładnie oznacza "${query}" po 50?`,
+          `Jak zacząć krok po kroku bez błędów?`,
+          `Najczęstsze pytania: ${query} a bezpieczeństwo`,
+        ],
+        faq_suggestions: [
+          `Czy ${query} po 50 jest bezpieczne?`,
+          `Ile czasu potrzeba, żeby zobaczyć efekty?`,
+          `Jakich błędów unikać na początku?`,
+          `Kiedy skonsultować temat z lekarzem?`,
+        ],
+        internal_links_plan: [
+          { from: 'porady.html', anchor: `${query} po 50` },
+          { from: 'zdrowie.html', anchor: `praktyczny przewodnik: ${query}` },
+          { from: 'index.html', anchor: `nowy poradnik: ${query}` },
+        ],
+      },
+      qa_gate: {
+        title_max_65: 'REQUIRED',
+        description_max_160: 'REQUIRED',
+        min_4_internal_links: 'REQUIRED',
+        faq_real_intent: 'REQUIRED',
+        dates_iso8601: 'REQUIRED',
+      },
+      tracking_plan: {
+        day_7: 'Sprawdź CTR i pozycję dla query głównej.',
+        day_14: 'Porównaj kliknięcia vs baseline oraz widoczność long-tail.',
+        day_28: 'Decyzja: skalować, iterować snippet, albo zmienić kąt treści.',
+      },
+    });
+  });
+
+  return plans.slice(0, 10);
+}
+
+function buildAeoOpportunities(report) {
+  const byUrl = new Map();
+  const urlRows = Array.isArray(report?.opportunities?.page_opportunities) ? report.opportunities.page_opportunities : [];
+  const ctrRows = Array.isArray(report?.opportunities?.ctr_problems) ? report.opportunities.ctr_problems : [];
+  const queryRows = Array.isArray(report?.opportunities?.top10_zero_click) ? report.opportunities.top10_zero_click : [];
+
+  for (const row of urlRows) {
+    const url = String(row.page || '').trim();
+    if (!url) continue;
+    byUrl.set(url, {
+      url,
+      impressions: Number(row.impressions || 0),
+      clicks: Number(row.clicks || 0),
+      ctr: Number(row.ctr || 0),
+      position: Number(row.position || 0),
+      opportunity_score: 0,
+      reasons: ['page_opportunity'],
+      supporting_queries: [],
+    });
+  }
+
+  for (const row of ctrRows) {
+    const q = String(row.query || '').trim();
+    if (!q) continue;
+    const candidate = [...byUrl.values()].find((u) => u.supporting_queries.length < 6);
+    if (!candidate) continue;
+    candidate.supporting_queries.push(q);
+    candidate.opportunity_score = Math.max(candidate.opportunity_score, Number(row.opportunity_score || 0));
+    if (!candidate.reasons.includes('ctr_gap')) candidate.reasons.push('ctr_gap');
+  }
+
+  for (const row of queryRows) {
+    const q = String(row.query || '').trim();
+    if (!q) continue;
+    const candidate = [...byUrl.values()].find((u) => u.supporting_queries.length < 6);
+    if (!candidate) continue;
+    candidate.supporting_queries.push(q);
+    candidate.opportunity_score = Math.max(candidate.opportunity_score, Number(row.opportunity_score || 0));
+    if (!candidate.reasons.includes('zero_click')) candidate.reasons.push('zero_click');
+  }
+
+  const top10 = [...byUrl.values()]
+    .map((item) => {
+      const ctrGapEstimate = Math.max(0, Number((report?.summary?.ctr_pool_median || 0) - (item.ctr || 0)));
+      return {
+        ...item,
+        ctr_gap_estimate: Number(ctrGapEstimate.toFixed(2)),
+      };
+    })
+    .sort((a, b) => {
+      if (b.opportunity_score !== a.opportunity_score) return b.opportunity_score - a.opportunity_score;
+      return b.impressions - a.impressions;
+    })
+    .slice(0, 10);
+
+  return {
+    generated_at: report.generated_at,
+    status: top10.length ? 'ok' : 'INSUFFICIENT_DATA',
+    strategic_priority: 'SEO -> AEO -> GEO -> AIO',
+    top10_urls: top10,
+  };
+}
+
+function writeAeoOutputs(aeoReport, outputJsonPath, outputMdPath) {
+  fs.mkdirSync(path.dirname(outputJsonPath), { recursive: true });
+  fs.mkdirSync(path.dirname(outputMdPath), { recursive: true });
+  fs.writeFileSync(outputJsonPath, `${JSON.stringify(aeoReport, null, 2)}\n`, 'utf8');
+
+  const lines = [];
+  lines.push('# AEO Opportunity Bot');
+  lines.push('');
+  lines.push(`Wygenerowano: ${aeoReport.generated_at}`);
+  lines.push(`Status: ${aeoReport.status}`);
+  lines.push(`Priorytet: ${aeoReport.strategic_priority}`);
+  lines.push('');
+  lines.push('## TOP 10 URL-i z CTR gap');
+  if (!aeoReport.top10_urls.length) {
+    lines.push('- INSUFFICIENT_DATA');
+  } else {
+    aeoReport.top10_urls.forEach((row, idx) => {
+      lines.push(`${idx + 1}. ${row.url}`);
+      lines.push(`   - impressions: ${Math.round(row.impressions)}`);
+      lines.push(`   - clicks: ${Math.round(row.clicks)}`);
+      lines.push(`   - ctr: ${Number(row.ctr || 0).toFixed(2)}%`);
+      lines.push(`   - position: ${Number(row.position || 0).toFixed(2)}`);
+      lines.push(`   - ctr_gap_estimate: ${Number(row.ctr_gap_estimate || 0).toFixed(2)} pp`);
+      lines.push(`   - opportunity_score: ${Math.round(row.opportunity_score || 0)}`);
+      if (row.supporting_queries?.length) {
+        lines.push(`   - supporting_queries: ${row.supporting_queries.slice(0, 6).join(' | ')}`);
+      }
+    });
+  }
+  fs.writeFileSync(outputMdPath, `${lines.join('\n')}\n`, 'utf8');
+}
+
 function writeOutputs(report, outputJson, outputMd) {
   fs.mkdirSync(path.dirname(outputJson), { recursive: true });
   fs.mkdirSync(path.dirname(outputMd), { recursive: true });
@@ -279,6 +475,45 @@ function writeOutputs(report, outputJson, outputMd) {
         lines.push(`- ${cat}: ${item.title} (query: "${item.query}", score: ${item.score})`);
       }
     });
+    lines.push('');
+    lines.push('## GLOBAL Discovery (Nowe Tematy)');
+    lines.push('- Tryb: GLOBAL_EXTRA (Autocomplete/PAA/Trends) do doboru nowych artykułów.');
+    if (!report.global_discovery || report.global_discovery.status !== 'ok') {
+      lines.push('- INSUFFICIENT_DATA_GLOBAL');
+      lines.push('- Uwaga: sekcja LOCAL (GSC CSV) służy głównie do optymalizacji istniejących URL-i.');
+    } else {
+      for (const item of report.global_discovery.topics || []) {
+        lines.push(`- ${item.category}: ${item.title} (${item.intent})`);
+      }
+    }
+    lines.push('');
+    lines.push('## AEO Opportunity Bot');
+    if (!report.aeo_opportunity_bot || report.aeo_opportunity_bot.status !== 'ok') {
+      lines.push('- INSUFFICIENT_DATA');
+    } else {
+      lines.push('- TOP 10 URL-i z CTR gap: zapisano do:');
+      lines.push(`  - ${report.aeo_opportunity_bot.output_md}`);
+      lines.push(`  - ${report.aeo_opportunity_bot.output_json}`);
+    }
+    lines.push('');
+    lines.push('## Priorytet strategiczny');
+    lines.push(`- ${report.strategic_priority || 'SEO -> AEO -> GEO -> AIO'}`);
+    lines.push('');
+    lines.push('## Article Delta Plan (po CSV)');
+    if (!Array.isArray(report.article_delta_plan) || !report.article_delta_plan.length) {
+      lines.push('- INSUFFICIENT_DATA');
+    } else {
+      report.article_delta_plan.forEach((plan, idx) => {
+        lines.push(`${idx + 1}. URL: ${plan.url}`);
+        lines.push(`   - query: ${plan.main_query}`);
+        lines.push(`   - score: ${plan.opportunity_score}`);
+        lines.push(`   - file: ${plan.file_path}`);
+        lines.push(`   - title: ${plan.delta.new_title}`);
+        lines.push(`   - meta: ${plan.delta.new_meta_description}`);
+        lines.push(`   - H2: ${plan.delta.h2_suggestions.join(' | ')}`);
+        lines.push(`   - FAQ: ${plan.delta.faq_suggestions.join(' | ')}`);
+      });
+    }
   }
 
   lines.push('');
@@ -326,6 +561,13 @@ function main() {
   ];
   const missingRequired = required.filter((r) => !r.ok).map((r) => r.name);
   if (missingRequired.length) {
+    const aeoReport = {
+      generated_at: new Date().toISOString(),
+      status: 'INSUFFICIENT_DATA',
+      strategic_priority: 'SEO -> AEO -> GEO -> AIO',
+      top10_urls: [],
+    };
+    writeAeoOutputs(aeoReport, DEFAULT_AEO_OUTPUT_JSON, DEFAULT_AEO_OUTPUT_MD);
     const report = {
       generated_at: new Date().toISOString(),
       status: 'INSUFFICIENT_DATA',
@@ -341,6 +583,13 @@ function main() {
       opportunities: { top3_zero_click: [], top10_zero_click: [], ctr_problems: [], cannibalization: [], page_opportunities: [] },
       weekly_plan: ['Dostarcz 3 pliki CSV do ~/Downloads/gsc-auto-input i uruchom ponownie.'],
       content_gaps: {},
+      strategic_priority: 'SEO -> AEO -> GEO -> AIO',
+      aeo_opportunity_bot: {
+        status: 'INSUFFICIENT_DATA',
+        output_json: DEFAULT_AEO_OUTPUT_JSON,
+        output_md: DEFAULT_AEO_OUTPUT_MD,
+        top10_count: 0,
+      },
     };
     writeOutputs(report, args.outputJson, args.outputMd);
     console.log(`[FAIL] ${report.reason}`);
@@ -401,9 +650,28 @@ function main() {
       page_opportunities: [],
     },
     weekly_plan: [],
+    strategic_priority: 'SEO -> AEO -> GEO -> AIO',
+    global_discovery: {
+      status: 'INSUFFICIENT_DATA_GLOBAL',
+      mode: 'GLOBAL_EXTRA',
+      topics: [],
+    },
   };
 
   if (!latestQueries || !latestPages) {
+    const aeoReport = {
+      generated_at: new Date().toISOString(),
+      status: 'INSUFFICIENT_DATA',
+      strategic_priority: 'SEO -> AEO -> GEO -> AIO',
+      top10_urls: [],
+    };
+    writeAeoOutputs(aeoReport, DEFAULT_AEO_OUTPUT_JSON, DEFAULT_AEO_OUTPUT_MD);
+    report.aeo_opportunity_bot = {
+      status: 'INSUFFICIENT_DATA',
+      output_json: DEFAULT_AEO_OUTPUT_JSON,
+      output_md: DEFAULT_AEO_OUTPUT_MD,
+      top10_count: 0,
+    };
     report.weekly_plan = [
       'Wyeksportuj z GSC CSV: Queries, Pages i Query+Page (zakres ostatnich 3 miesięcy).',
       'Skopiuj CSV do katalogu ~/Downloads/gsc-auto-input.',
@@ -576,11 +844,23 @@ function main() {
     };
   });
   report.content_gaps = contentGaps;
+  report.article_delta_plan = buildArticleDeltaPlan(report, qpRows);
+
+  const aeoReport = buildAeoOpportunities(report);
+  writeAeoOutputs(aeoReport, DEFAULT_AEO_OUTPUT_JSON, DEFAULT_AEO_OUTPUT_MD);
+  report.aeo_opportunity_bot = {
+    status: aeoReport.status,
+    output_json: DEFAULT_AEO_OUTPUT_JSON,
+    output_md: DEFAULT_AEO_OUTPUT_MD,
+    top10_count: Array.isArray(aeoReport.top10_urls) ? aeoReport.top10_urls.length : 0,
+  };
 
   writeOutputs(report, args.outputJson, args.outputMd);
   console.log(`[PASS] GSC weekly CSV report generated.`);
   console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
   console.log(`- MD: ${path.relative(ROOT, args.outputMd)}`);
+  console.log(`- AEO JSON: ${DEFAULT_AEO_OUTPUT_JSON}`);
+  console.log(`- AEO MD: ${DEFAULT_AEO_OUTPUT_MD}`);
   console.log(`- opportunities: top3_zero=${report.opportunities.top3_zero_click.length}, ctr=${report.opportunities.ctr_problems.length}, cannibalization=${report.opportunities.cannibalization.length}`);
 }
 

@@ -1293,3 +1293,45 @@ Jesli artykul ma obrazy:
   - czytelny autor (`Person`) i aktualizacja `dateModified` przy każdej istotnej zmianie merytorycznej.
 - Monitoring wejść AI:
   - decyzje contentowe opieramy na realnym trendzie ruchu źródeł (ChatGPT/Gemini/Perplexity) w GA4/referrer, a nie wyłącznie na trendach globalnych.
+
+## Ustalenia operacyjne (2026-05-31) - GSC, klikalnosc i popraw-json
+
+- **Komenda `GSC` (domyslny workflow):**
+  - Traktuj polecenie `GSC` jako uruchomienie pelnego workflow raportowego, nie tylko pojedynczy skrypt pomocniczy.
+  - Start od kroku technicznego i aktualizacji danych.
+  - Preferuj auto-pobranie danych; gdy auto-pobranie sie nie uda, popros uzytkownika o reczne zapisanie CSV do katalogu roboczego i kontynuuj po dostarczeniu plikow.
+
+- **Dane do raportu GSC - rozdzielenie celu:**
+  - Optymalizacja istniejacych artykulow: opieraj decyzje o priorytetach glownie na danych projektowych (GSC/GA4/referrer).
+  - Propozycje nowych artykulow: nie ograniczaj sie do lokalnych CSV; stosuj tryb globalny i tematyczny (intencje realnych zapytan z sieci).
+  - Dla nowych artykulow lokalne CSV nie sa jedynym ani nadrzednym zrodlem idei.
+
+- **Nowy standard propozycji tresci (dual mode):**
+  - W raporcie podawaj dwa strumienie rekomendacji:
+    - `Na bazie danych projektu` (istniejace URL-e, CTR gap, pozycje 4-20),
+    - `Na bazie sygnalow globalnych` (tematyczne intencje: jedzenie/ruch/zdrowie/ciekawe).
+  - Rozdzielaj wyraznie oba strumienie, zeby nie mieszac priorytetow.
+
+- **Anty-regresja klikalnosci (globalne reguly redakcyjne):**
+  - Zakazane generyczne leady typu „Szybka odpowiedz” bez konkretu.
+  - Zakazane powtarzalne, puste FAQ i duplikaty pytan.
+  - Tytuly i opisy maja byc konkretne, intencyjne i niegeneryczne.
+  - FAQ ma byc budowane z realnych zapytan i intencji, nie z placeholderow.
+
+- **FAQ oparty o realne dane - zasada twarda:**
+  - FAQ ma odzwierciedlac pytania, ktore ludzie faktycznie wpisuja (autocomplete/PAA/GSC w trybie hybrydowym).
+  - Dla nowych artykulow domyslnie stosuj tryb globalny (`global_only`) z opcja `hybrid`.
+
+- **`popraw-json` - zakres obowiazkowy przy nowym JSON:**
+  - Uruchamiaj autofix + gate przed uznaniem pliku za gotowy.
+  - Pilnuj: `quick_answer` (jakosc i limit), FAQ 1:1 z `faq_research`, odpowiedzi FAQ w zakresie polityki, linkowanie kontekstowe, jakosc zrodel.
+  - Dla `faq_research` odrzucaj zrodla generyczne i nietematyczne.
+
+- **Porzadek artefaktow tymczasowych:**
+  - Pliki tymczasowe i jednorazowe wyniki nie powinny byc stale gromadzone.
+  - Zachowuj tylko finalne artefakty wymagane biznesowo; reszte usuwaj po zakonczeniu zadania.
+
+- **Status wdrozenia (zrobione):**
+  - Zaostrzone walidacje i autofix JSON pod AEO/CTR.
+  - Wzmocniony skill `popraw-json` o global-first FAQ i zasady quality gate.
+  - Dodane reguly anty-generyczne dla quick answer / FAQ / tytulow.

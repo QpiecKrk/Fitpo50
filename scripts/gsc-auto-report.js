@@ -424,13 +424,6 @@ async function main() {
     ensureDir(inputDir);
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gsc-auto-'));
 
-    const localCsv = collectCsvByType(walkFiles(inputDir));
-    if (haveAllThree(localCsv)) {
-      console.log(`[GSC-AUTO] Używam CSV już obecnych w ${inputDir}.`);
-      runWeeklyReport(inputDir, inputDir);
-      return;
-    }
-
     const apiRes = tryGenerateCsvFromApi(inputDir);
     if (apiRes.ok) {
       console.log('[GSC-AUTO] Źródło: GSC API -> ~/Downloads/gsc-auto-input');
@@ -481,6 +474,20 @@ async function main() {
     }
 
     runWeeklyReport(inputDir, inputDir);
+    return;
+  } catch (freshErr) {
+    const inputDir = path.resolve(args.workDir);
+    ensureDir(inputDir);
+    const manualMsg = [
+      'AUTO_FETCH_FAILED: nie udalo sie automatycznie pobrac swiezych danych GSC.',
+      `Zapisz recznie 3 pliki CSV w katalogu: ${inputDir}`,
+      '- queries.csv',
+      '- pages.csv',
+      '- query-pages.csv (lub query_pages.csv)',
+      'Nastepnie uruchom ponownie: npm run gsc:auto',
+      `Szczegoly bledu auto-fetch: ${freshErr && freshErr.message ? freshErr.message : String(freshErr)}`,
+    ].join('\n');
+    throw new Error(manualMsg);
   } finally {
     // Optional only: default GSC mode is read-only report generation outside repo.
     if (args.cleanupRepoArtifacts) {

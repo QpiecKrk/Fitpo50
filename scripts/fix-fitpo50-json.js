@@ -305,8 +305,9 @@ function firstMeaningfulSentenceFromParagraph(paragraphHtml) {
 
 function buildInfoBoxTitle(sectionTitle) {
   const clean = stripTags(String(sectionTitle || '')).replace(/\s+/g, ' ').trim();
-  if (!clean) return 'Co to znaczy w praktyce';
-  return 'Co to znaczy w praktyce';
+  if (!clean) return 'Najważniejszy wniosek';
+  const base = clean.replace(/[?]\s*$/, '').trim();
+  return base ? `Najważniejsze: ${base}` : 'Najważniejszy wniosek';
 }
 
 function ensureQuestionHeading(title) {

@@ -148,3 +148,20 @@ Raport koncowy po zadaniu:
 W nowej sesji mozesz napisac:
 
 - "Stosuj instrukcje z `SESSION_START_MAX.md` i zacznij od startu technicznego."
+
+## DOPRECYZOWANIE: GSC + NOWE ARTYKULY (2026-05-31)
+
+- Komenda `GSC` ma uruchamiac pelny workflow raportowy (techniczny start + pozyskanie danych + raport), a nie tylko pojedynczy krok.
+- Gdy auto-pobranie CSV nie zadziala, agent ma od razu poprosic o reczne zapisanie plikow do katalogu roboczego i po dostarczeniu kontynuowac bez zgadywania.
+- Raport GSC ma zawsze miec 2 wyraznie oddzielone czesci:
+  - `Optymalizacja istniejacych URL-i` (na danych projektu),
+  - `Nowe artykuly - globalnie` (na realnych trendach/intencjach globalnych, tematycznie do kategorii).
+- Dla nowych artykulow nie opieraj propozycji tylko na lokalnym CSV; domyslnie stosuj tryb globalny i tematyczny.
+- FAQ dla nowych artykulow ma byc oparte o realne pytania (autocomplete/PAA; ewentualnie hybryda z GSC), bez pytan generycznych.
+- W poprawie JSON traktuj jako blokery:
+  - generyczny `quick_answer`,
+  - duplikaty/generyczne pytania FAQ,
+  - niejakosciowe `faq_research`,
+  - brak wymaganych linkow kontekstowych,
+  - odpowiedzi FAQ poza zakresem polityki.
+- Nie gromadz plikow jednorazowych: tymczasowe artefakty po zadaniu usuwaj, zostawiaj tylko finalne wyniki.

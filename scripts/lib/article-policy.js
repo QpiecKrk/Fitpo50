@@ -20,7 +20,8 @@ const POLICY = {
   },
 
   TITLE: {
-    MAX: 65
+    MAX: 65,
+    MIN: 35
   },
 
   REPEATED_SENTENCES: {
@@ -42,6 +43,51 @@ const POLICY = {
     'po pięćdziesiątce najlepiej działa cierpliwe tempo, dobra obserwacja ciała i rozumienie, po co robisz kolejne kroki',
     'taki układ ułatwia spokojne wdrożenie zmian i ogranicza chaos na początku drogi'
   ],
+
+  GENERIC_QUICK_ANSWER_PATTERNS: [
+    'po 50-tce warto patrzeć na zdrowie szerzej',
+    'po 50-tce nawet złożone tematy warto rozbierać na proste elementy',
+    'po 50-tce najlepsze efekty daje prosty plan',
+    'po 50-tce najwięcej daje spokojny start',
+    'ten artykuł porządkuje najważniejsze fakty'
+  ],
+
+  GENERIC_FAQ_QUESTIONS: [
+    'najważniejsze z tej sekcji',
+    'co to znaczy w praktyce',
+    'co to oznacza w praktyce',
+    'najważniejsza różnica',
+    'praktyczny cel',
+    'wskaźnik który warto znać',
+    'jak wdrożyć to praktycznie'
+  ],
+
+  TITLE_INTENT_TOKENS: [
+    'jak', 'czy', 'co', 'ile', 'kiedy', 'dlaczego', 'norma', 'wynik', 'objawy', 'bezpiecz', 'cena'
+  ],
+  FAQ_INTENT_TOKENS: [
+    'jak', 'czy', 'co', 'ile', 'kiedy', 'dlaczego', 'objawy', 'norma', 'wynik', 'bezpiecz', 'dawka', 'koszt'
+  ],
+
+  BANNED_CTR_TITLE_PATTERNS: [
+    'kompletny przewodnik',
+    'praktyczny przewodnik',
+    'wszystko co musisz wiedzieć'
+  ],
+
+  BANNED_CTR_META_PATTERNS: [
+    'ten artykuł porządkuje najważniejsze fakty',
+    'po 50-tce warto patrzeć na zdrowie szerzej',
+    'po 50-tce najlepsze efekty daje prosty plan'
+  ],
+
+  BANNED_FAQ_RESEARCH_SOURCE_URL_PATTERNS: [
+    'google.com/search',
+    'example.com',
+    'localhost'
+  ],
+
+  FAQ_RESEARCH_SOURCE_LABEL_MIN_CHARS: 8,
 
   AUTO_LINK: {
     MIN_WORDS: 40,

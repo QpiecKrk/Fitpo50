@@ -93,6 +93,51 @@ function validateQuickAnswerBlock(articleContentHtml, errors) {
       errors.push('Szybka odpowiedź nie może być kopią 1:1 pierwszego akapitu.');
     }
   }
+
+  const quickNorm = utils.fuzzyNormalize(utils.stripTags(paragraphMatch[1]));
+  for (const phrase of POLICY.GENERIC_QUICK_ANSWER_PATTERNS || []) {
+    const needle = utils.fuzzyNormalize(phrase);
+    if (needle && quickNorm.includes(needle)) {
+      errors.push(`Szybka odpowiedź jest zbyt generyczna (fraza: "${phrase}").`);
+      break;
+    }
+  }
+}
+
+function validateFaqQuestionsQuality(raw, errors) {
+  const faqMatch = raw.match(/<section\s+class="faq-list\b[\s\S]*?<\/section>/i);
+  if (!faqMatch) return;
+
+  const questions = [...faqMatch[0].matchAll(/<article\s+class="faq-item"[\s\S]*?<h3[^>]*>([\s\S]*?)<\/h3>/gi)]
+    .map((m) => utils.stripTags(m[1]))
+    .map((q) => q.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+
+  if (!questions.length) return;
+
+  const seen = new Map();
+  for (const q of questions) {
+    const norm = utils.fuzzyNormalize(q);
+    if (!norm) continue;
+    seen.set(norm, (seen.get(norm) || 0) + 1);
+  }
+
+  for (const [norm, count] of seen.entries()) {
+    if (count > 1) {
+      errors.push(`FAQ: wykryto powtarzalne pytanie (${count}x): "${norm.slice(0, 80)}".`);
+      break;
+    }
+  }
+
+  for (const q of questions) {
+    const norm = utils.fuzzyNormalize(q);
+    for (const generic of POLICY.GENERIC_FAQ_QUESTIONS || []) {
+      if (norm === utils.fuzzyNormalize(generic)) {
+        errors.push(`FAQ: generyczny nagłówek pytania "${q}" jest niedozwolony.`);
+        return;
+      }
+    }
+  }
 }
 
 function validateHeroShareContract(raw, errors) {
@@ -498,6 +543,7 @@ function validateFile(filePath) {
     errors.push('Brak <article class="article-content"> do walidacji AEO/GEO.');
   } else {
     validateQuickAnswerBlock(articleContentHtml, errors);
+    validateFaqQuestionsQuality(raw, errors);
     validateQuestionHeadings(articleContentHtml, errors);
     validateInlineFiguresUsePicture(articleContentHtml, errors);
     validateNoAbsoluteInternalLinksInNarrative(articleContentHtml, errors);

@@ -698,7 +698,8 @@ function normalizeSections(rawSections) {
       const normalizedSectionTitle = String(title || '').trim().toLowerCase();
       const normalizedBoxTitle = String(boxTitle || '').trim().toLowerCase().replace(/^ważne:\s*/i, '');
       if (!boxTitle || (normalizedSectionTitle && normalizedBoxTitle === normalizedSectionTitle)) {
-        boxTitle = 'Co to znaczy w praktyce';
+        const baseTitle = String(title || '').replace(/[?]\s*$/, '').trim();
+        boxTitle = baseTitle ? `Najważniejsze: ${baseTitle}` : 'Najważniejszy wniosek';
       }
       const boxHtml = String(entry.info_box.content_html || entry.info_box.html || entry.info_box.content || '').trim();
       if (boxTitle || boxHtml) {
@@ -1134,11 +1135,56 @@ function validateInput(data, opts = {}) {
   if (seoTitleRaw && /\bi\s+cofnąć\s*$/i.test(seoTitleRaw)) {
     errors.push('SEO title: wygląda na urwany (kończy się na "i cofnąć"). Uzupełnij pełny sens.');
   }
+  const seoTitleForLint = String(data.seo_title || data.meta_title || data.title || '').trim();
+  if (seoTitleForLint.length > POLICY.TITLE.MAX) {
+    errors.push(`SEO title: przekracza ${POLICY.TITLE.MAX} znaków (jest ${seoTitleForLint.length}).`);
+  }
+  if (seoTitleForLint.length < POLICY.TITLE.MIN) {
+    errors.push(`SEO title: jest zbyt krótki (min ${POLICY.TITLE.MIN}, jest ${seoTitleForLint.length}).`);
+  }
+  const normalizeCmp = (v) => String(v || '').toLowerCase().replace(/[^\p{L}\p{N}\s]+/gu, ' ').replace(/\s+/g, ' ').trim();
+  const seoNorm = normalizeCmp(seoTitleForLint);
+  for (const phrase of POLICY.BANNED_CTR_TITLE_PATTERNS || []) {
+    if (seoNorm.includes(normalizeCmp(phrase))) {
+      errors.push(`SEO title: mało-klikalna fraza szablonowa ("${phrase}").`);
+      break;
+    }
+  }
+  const ogTitle = String(data.og_title || data.ogTitle || '').trim();
+  const twitterTitle = String(data.twitter_title || data.twitterTitle || '').trim();
+  if (ogTitle && normalizeCmp(ogTitle) !== seoNorm) {
+    errors.push('SEO title contract: og_title musi być spójny 1:1 z seo_title.');
+  }
+  if (twitterTitle && normalizeCmp(twitterTitle) !== seoNorm) {
+    errors.push('SEO title contract: twitter_title musi być spójny 1:1 z seo_title.');
+  }
 
   const lead = String(data.lead || data.lead_paragraph || '').trim();
   if (!lead) errors.push('Brak pola lead / lead_paragraph.');
   if (containsEditorialPlaceholder(lead)) {
     errors.push('Lead: wykryto placeholder redakcyjny.');
+  }
+
+  const metaDescriptionRaw = String(data.meta_description || data.description || '').trim();
+  if (!metaDescriptionRaw) {
+    errors.push('Brak meta_description/description w JSON wejściowym.');
+  } else {
+    const metaNorm = normalizeCmp(metaDescriptionRaw);
+    const hasMetaIntent = (POLICY.TITLE_INTENT_TOKENS || []).some((token) => metaNorm.includes(normalizeCmp(token)));
+    if (!hasMetaIntent) {
+      errors.push('meta_description: brak wyraźnego tokenu intencji (jak/czy/co/kiedy/ile/norma/wynik).');
+    }
+    const first120 = metaDescriptionRaw.slice(0, 120);
+    const hasMetaIntentEarly = (POLICY.TITLE_INTENT_TOKENS || []).some((token) => normalizeCmp(first120).includes(normalizeCmp(token)));
+    if (!hasMetaIntentEarly) {
+      errors.push('meta_description: intencja użytkownika musi pojawić się w pierwszych 120 znakach.');
+    }
+    for (const phrase of POLICY.BANNED_CTR_META_PATTERNS || []) {
+      if (metaNorm.includes(normalizeCmp(phrase))) {
+        errors.push(`meta_description: mało-klikalna fraza szablonowa ("${phrase}").`);
+        break;
+      }
+    }
   }
 
   const quickAnswer = normalizeQuickAnswer(data.quick_answer || data.quickAnswer || '', lead);
@@ -1148,9 +1194,15 @@ function validateInput(data, opts = {}) {
   } else if (quickAnswerWords < POLICY.WORDS.QUICK_ANSWER_MIN || quickAnswerWords > POLICY.WORDS.QUICK_ANSWER_MAX) {
     errors.push(`quick_answer: wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${quickAnswerWords}).`);
   }
-  const normalizeCmp = (v) => String(v || '').toLowerCase().replace(/[^\p{L}\p{N}\s]+/gu, ' ').replace(/\s+/g, ' ').trim();
   if (lead && quickAnswer && normalizeCmp(lead) === normalizeCmp(quickAnswer)) {
     errors.push('quick_answer nie może być kopią 1:1 leadu.');
+  }
+  const quickNorm = normalizeCmp(quickAnswer);
+  for (const phrase of POLICY.GENERIC_QUICK_ANSWER_PATTERNS || []) {
+    if (quickNorm.includes(normalizeCmp(phrase))) {
+      errors.push(`quick_answer: treść jest zbyt generyczna (fraza: "${phrase}").`);
+      break;
+    }
   }
 
   const sections = normalizeSections(data.sections || []);
@@ -1259,10 +1311,43 @@ function validateInput(data, opts = {}) {
     if (faqPlaceholderAny >= 0) {
       errors.push(`FAQ #${faqPlaceholderAny + 1}: wykryto placeholder redakcyjny.`);
     }
+    const genericFaqIdx = faqItems.findIndex((it) => {
+      const q = utils.fuzzyNormalize(String(it.question || ''));
+      return (POLICY.GENERIC_FAQ_QUESTIONS || []).some((generic) => q === utils.fuzzyNormalize(generic));
+    });
+    if (genericFaqIdx >= 0) {
+      errors.push(`FAQ #${genericFaqIdx + 1}: generyczny nagłówek pytania. Użyj pytania użytkownika z intencją (autocomplete/PAA/GSC).`);
+    }
+    const faqSeen = new Set();
+    const duplicateFaqIdx = faqItems.findIndex((it) => {
+      const q = utils.fuzzyNormalize(String(it.question || ''));
+      if (!q) return false;
+      if (faqSeen.has(q)) return true;
+      faqSeen.add(q);
+      return false;
+    });
+    if (duplicateFaqIdx >= 0) {
+      errors.push(`FAQ #${duplicateFaqIdx + 1}: duplikat pytania FAQ. Każde pytanie musi być unikalne.`);
+    }
     if (faqResearch.length < POLICY.WORDS.FAQ_MIN_ITEMS) {
       errors.push(
         `FAQ research: dodaj minimum ${POLICY.WORDS.FAQ_MIN_ITEMS} wpisy w faq_research[] z polami question + source_label + source_url (pytania z sieci: autocomplete/PAA).`
       );
+    }
+    for (let i = 0; i < faqResearch.length; i += 1) {
+      const item = faqResearch[i] || {};
+      const sourceLabel = String(item.source_label || item.label || '').trim();
+      const sourceUrl = String(item.source_url || item.url || '').trim();
+      if (!sourceLabel || sourceLabel.length < POLICY.FAQ_RESEARCH_SOURCE_LABEL_MIN_CHARS) {
+        errors.push(`FAQ research #${i + 1}: source_label jest zbyt ogólny.`);
+      }
+      if (!/^https?:\/\//i.test(sourceUrl)) {
+        errors.push(`FAQ research #${i + 1}: source_url musi zaczynać się od http/https.`);
+      }
+      const sourceNorm = normalizeCmp(sourceUrl);
+      if ((POLICY.BANNED_FAQ_RESEARCH_SOURCE_URL_PATTERNS || []).some((bad) => sourceNorm.includes(normalizeCmp(bad)))) {
+        errors.push(`FAQ research #${i + 1}: source_url wygląda na placeholder lub link do wyszukiwarki.`);
+      }
     }
     const researchQuestions = new Set(faqResearch.map((x) => x.question.toLowerCase()));
     for (let i = 0; i < Math.min(faqItems.length, POLICY.WORDS.FAQ_MIN_ITEMS); i += 1) {

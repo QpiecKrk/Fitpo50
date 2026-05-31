@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
+const { POLICY } = require('./lib/article-policy');
 
 function parseArgs(argv) {
   const out = {};
@@ -9,6 +11,7 @@ function parseArgs(argv) {
     const t = argv[i];
     if (t === '--file') out.file = String(argv[i + 1] || '').trim(), i += 1;
     else if (t === '--map') out.map = String(argv[i + 1] || '').trim(), i += 1;
+    else if (t === '--faq-source-mode') out.faqSourceMode = String(argv[i + 1] || '').trim(), i += 1;
   }
   return out;
 }
@@ -32,11 +35,44 @@ function ensureQuickAnswer(raw) {
   return qa;
 }
 
+function normalizeTextForCompare(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function ensureQuickAnswerNotGeneric(qa, title) {
+  const normalized = normalizeTextForCompare(qa);
+  for (const phrase of POLICY.GENERIC_QUICK_ANSWER_PATTERNS || []) {
+    if (normalized.includes(normalizeTextForCompare(phrase))) {
+      const topic = String(title || 'ten temat po 50').replace(/\s+/g, ' ').trim();
+      const fallback = `W skrócie: ${topic} może dawać korzyści, ale decyzję warto oprzeć na wyniku badań, objawach i realnym ryzyku. Zacznij od bezpiecznego minimum, monitoruj reakcję organizmu i po 6-8 tygodniach oceń efekty z lekarzem lub diagnostą.`;
+      return ensureQuickAnswer(fallback);
+    }
+  }
+  return qa;
+}
+
 function cleanupSeoTitle(raw) {
   return String(raw || '')
     .replace(/\s+/g, ' ')
     .replace(/[–-]\s*$/g, '')
     .trim();
+}
+
+function ensureSeoTitleClickable(seoTitle, fallbackTitle) {
+  let title = cleanupSeoTitle(seoTitle || fallbackTitle || '');
+  if (!title) return title;
+  const normalized = normalizeTextForCompare(title);
+  for (const phrase of POLICY.BANNED_CTR_TITLE_PATTERNS || []) {
+    if (normalized.includes(normalizeTextForCompare(phrase))) {
+      title = cleanupSeoTitle(String(fallbackTitle || '').trim() || title);
+      break;
+    }
+  }
+  return title;
 }
 
 function applyLinkMapToHtml(html, mapObj) {
@@ -53,6 +89,35 @@ function applyLinkMapToHtml(html, mapObj) {
     }
   }
   return out;
+}
+
+function sanitizeFaqQuestion(question, idx, title) {
+  const q = String(question || '').replace(/\s+/g, ' ').trim();
+  if (!q) return `Jak zacząć bezpiecznie temat ${idx + 1} po 50?`;
+  const normalized = normalizeTextForCompare(q);
+  const isGeneric = (POLICY.GENERIC_FAQ_QUESTIONS || []).some((generic) => normalized === normalizeTextForCompare(generic));
+  if (!isGeneric) return q;
+  const topic = String(title || 'ten temat').replace(/\s+/g, ' ').trim();
+  const fallbackPool = [
+    `Czy ${topic} po 50 jest bezpieczne?`,
+    `Jak zacząć ${topic} krok po kroku po 50?`,
+    `Jakie badania wykonać przed wdrożeniem ${topic}?`,
+    `Kiedy skonsultować ${topic} z lekarzem?`,
+  ];
+  return fallbackPool[idx % fallbackPool.length];
+}
+
+function buildGlobalAutocompleteUrl(query) {
+  const q = encodeURIComponent(String(query || '').trim());
+  return `https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=${q}`;
+}
+
+function buildGlobalFaqSource(question) {
+  const q = String(question || '').trim();
+  return {
+    source_label: 'Google Autocomplete (global, pl-PL)',
+    source_url: buildGlobalAutocompleteUrl(q),
+  };
 }
 
 function countInternalLinksInSections(sections) {
@@ -72,6 +137,69 @@ function countInternalLinksInSections(sections) {
   return count;
 }
 
+function parseCsv(text) {
+  const src = String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  const lines = src.split('\n').filter((line) => line.trim() !== '');
+  if (lines.length < 2) return [];
+  const header = lines[0].split(',').map((h) => h.trim());
+  const out = [];
+  for (let i = 1; i < lines.length; i += 1) {
+    const cols = lines[i].split(',');
+    const row = {};
+    header.forEach((h, idx) => { row[h] = String(cols[idx] || '').trim(); });
+    out.push(row);
+  }
+  return out;
+}
+
+function loadGscFaqHints() {
+  const baseDir = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+  const qpPath = path.join(baseDir, 'query-pages.csv');
+  const qpAltPath = path.join(baseDir, 'query_pages.csv');
+  const target = fs.existsSync(qpPath) ? qpPath : (fs.existsSync(qpAltPath) ? qpAltPath : '');
+  if (!target) return [];
+  try {
+    const rows = parseCsv(fs.readFileSync(target, 'utf8'));
+    return rows
+      .map((r) => ({
+        query: String(r.query || r.zapytanie || '').trim(),
+        page: String(r.page || r.strona || '').trim(),
+        impressions: Number(String(r.impressions || r['wyświetlenia'] || '0').replace(',', '.')) || 0,
+      }))
+      .filter((r) => r.query && /^https?:\/\//i.test(r.page))
+      .sort((a, b) => b.impressions - a.impressions)
+      .slice(0, 500);
+  } catch (_err) {
+    return [];
+  }
+}
+
+function pickGscSourceForQuestion(question, gscHints) {
+  const qNorm = normalizeTextForCompare(question);
+  if (!qNorm) return null;
+  let best = null;
+  let bestScore = 0;
+  for (const hint of gscHints) {
+    const hNorm = normalizeTextForCompare(hint.query);
+    if (!hNorm) continue;
+    let score = 0;
+    const qTokens = qNorm.split(' ').filter(Boolean);
+    for (const token of qTokens) {
+      if (token.length < 3) continue;
+      if (hNorm.includes(token)) score += 1;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = hint;
+    }
+  }
+  if (!best || bestScore < 2) return null;
+  return {
+    source_label: `Google Search Console (query: ${best.query})`,
+    source_url: best.page,
+  };
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
@@ -84,6 +212,7 @@ function main() {
     process.exit(1);
   }
   const mapPath = path.resolve(process.cwd(), args.map || 'data/internal-link-map.json');
+  const faqSourceMode = String(args.faqSourceMode || process.env.FITPO50_FAQ_SOURCE_MODE || 'global_only').trim().toLowerCase();
   const mapObj = fs.existsSync(mapPath) ? JSON.parse(fs.readFileSync(mapPath, 'utf8')) : {};
 
   const json = JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -95,15 +224,21 @@ function main() {
   }
 
   const nextQa = ensureQuickAnswer(json.quick_answer);
-  if (String(json.quick_answer || '').trim() !== nextQa) {
-    json.quick_answer = nextQa;
+  const nonGenericQa = ensureQuickAnswerNotGeneric(nextQa, json.title || json.seo_title || '');
+  if (String(json.quick_answer || '').trim() !== nonGenericQa) {
+    json.quick_answer = nonGenericQa;
     changes.push('quick_answer -> naprawiono zakres 40-60 słów');
   }
 
-  const nextSeo = cleanupSeoTitle(json.seo_title || json.meta_title || '');
+  const nextSeo = ensureSeoTitleClickable(json.seo_title || json.meta_title || '', json.title || '');
   if (nextSeo && nextSeo !== String(json.seo_title || '')) {
     json.seo_title = nextSeo;
     changes.push('seo_title -> usunięto urwaną końcówkę');
+  }
+  if (json.seo_title) {
+    json.og_title = String(json.seo_title).trim();
+    json.twitter_title = String(json.seo_title).trim();
+    changes.push('og_title/twitter_title -> zsynchronizowano z seo_title');
   }
 
   if (Array.isArray(json.sections)) {
@@ -134,17 +269,54 @@ function main() {
 
   const faq = Array.isArray(json.answer_blocks) ? json.answer_blocks : [];
   if (faq.length >= 4) {
-    const prev = Array.isArray(json.faq_research) ? json.faq_research : [];
-    json.faq_research = faq.map((f, idx) => {
-      const q = String(f && f.question ? f.question : '').trim();
-      const p = prev[idx] || prev.find((x) => String(x && x.question ? x.question : '').trim().toLowerCase() === q.toLowerCase()) || {};
+    const gscHints = faqSourceMode === 'hybrid' ? loadGscFaqHints() : [];
+    const seenFaq = new Set();
+    json.answer_blocks = faq.map((f, idx) => {
+      const question = sanitizeFaqQuestion(f && f.question, idx, json.title || json.seo_title || '');
+      let uniqueQuestion = question;
+      const baseNorm = normalizeTextForCompare(question);
+      if (seenFaq.has(baseNorm)) {
+        uniqueQuestion = `${question.replace(/[?]$/, '')} (wariant ${idx + 1})?`;
+      }
+      seenFaq.add(normalizeTextForCompare(uniqueQuestion));
       return {
-        question: q,
-        source_label: String(p.source_label || p.label || 'Google PAA / Autocomplete + źródła artykułu').trim(),
-        source_url: String(p.source_url || p.url || 'https://www.google.com/search').trim(),
+        question: uniqueQuestion,
+        answer_html: String((f && f.answer_html) || '').trim(),
       };
     });
-    changes.push('faq_research -> zsynchronizowano 1:1 z answer_blocks');
+
+    const prev = Array.isArray(json.faq_research) ? json.faq_research : [];
+    const firstSource = Array.isArray(json.sources) && json.sources[0] && typeof json.sources[0] === 'object'
+      ? json.sources[0]
+      : {};
+    const fallbackSourceLabel = String(firstSource.label || firstSource.citation || firstSource.title || '').trim();
+    const fallbackSourceUrl = String(firstSource.url || '').trim();
+    json.faq_research = json.answer_blocks.map((f, idx) => {
+      const q = String(f && f.question ? f.question : '').trim();
+      const p = prev[idx] || prev.find((x) => String(x && x.question ? x.question : '').trim().toLowerCase() === q.toLowerCase()) || {};
+      const gscSource = faqSourceMode === 'hybrid' ? pickGscSourceForQuestion(q, gscHints) : null;
+      const globalSource = buildGlobalFaqSource(q);
+      const prevLabel = String(p.source_label || p.label || '').trim();
+      const prevUrl = String(p.source_url || p.url || '').trim();
+      const prevLooksValid = /^https?:\/\//i.test(prevUrl) && prevLabel.length >= 8;
+      return {
+        question: q,
+        // Domyślnie: global_only (Autocomplete). Tryb hybrid: global + lokalne GSC jako sygnał pomocniczy.
+        source_label: String(
+          globalSource.source_label
+          || (gscSource && gscSource.source_label)
+          || (prevLooksValid ? prevLabel : '')
+          || fallbackSourceLabel
+        ).trim(),
+        source_url: String(
+          globalSource.source_url
+          || (gscSource && gscSource.source_url)
+          || (prevLooksValid ? prevUrl : '')
+          || fallbackSourceUrl
+        ).trim(),
+      };
+    });
+    changes.push(`faq/faq_research -> tryb ${faqSourceMode}: globalne źródła Autocomplete + sync 1:1 z answer_blocks`);
   }
 
   fs.writeFileSync(filePath, `${JSON.stringify(json, null, 2)}\n`, 'utf8');

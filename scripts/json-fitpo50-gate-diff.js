@@ -152,6 +152,11 @@ function calculateAeoScore(ctx) {
   return { total, breakdown: { quickAnswer, faqIntent, sources, links }, notes };
 }
 
+function hasIntentToken(text) {
+  const normalized = normalizeTextForCompare(text);
+  return (POLICY.FAQ_INTENT_TOKENS || []).some((token) => normalized.includes(normalizeTextForCompare(token)));
+}
+
 function collectCodeNonAscii(chunks) {
   const offending = [];
   for (const chunk of chunks) {
@@ -196,6 +201,13 @@ function validateFile(file) {
   if (metaDescription && !/[.!?]$/.test(metaDescription)) {
     errors.push(`${file}: meta_description musi kończyć się ".", "!" lub "?".`);
   }
+  const metaNorm = normalizeTextForCompare(metaDescription);
+  for (const phrase of POLICY.BANNED_CTR_META_PATTERNS || []) {
+    if (metaNorm.includes(normalizeTextForCompare(phrase))) {
+      errors.push(`${file}: meta_description zawiera mało-klikalny szablon ("${phrase}").`);
+      break;
+    }
+  }
 
   const keyTakeaways = Array.isArray(json.key_takeaways) ? json.key_takeaways.filter(Boolean) : [];
   if (keyTakeaways.length !== 4) {
@@ -208,6 +220,46 @@ function validateFile(file) {
     errors.push(`${file}: brak quick_answer (wymagane 40-60 słów).`);
   } else if (quickAnswerWords < 40 || quickAnswerWords > 60) {
     errors.push(`${file}: quick_answer poza limitem 40-60 słów (jest ${quickAnswerWords}).`);
+  }
+  const quickNorm = normalizeTextForCompare(quickAnswer);
+  for (const phrase of POLICY.GENERIC_QUICK_ANSWER_PATTERNS || []) {
+    const needle = normalizeTextForCompare(phrase);
+    if (needle && quickNorm.includes(needle)) {
+      errors.push(`${file}: quick_answer jest zbyt generyczny (fraza: "${phrase}").`);
+      break;
+    }
+  }
+
+  const seoTitle = String(json.seo_title || json.meta_title || json.title || '').trim();
+  if (!seoTitle) {
+    errors.push(`${file}: brak seo_title/meta_title/title.`);
+  } else if (seoTitle.length < POLICY.TITLE.MIN) {
+    errors.push(`${file}: seo_title jest zbyt krótki (min ${POLICY.TITLE.MIN}, jest ${seoTitle.length}).`);
+  } else if (seoTitle.length > POLICY.TITLE.MAX) {
+    errors.push(`${file}: seo_title przekracza ${POLICY.TITLE.MAX} znaków (jest ${seoTitle.length}).`);
+  }
+  const titleNorm = normalizeTextForCompare(title);
+  const seoNorm = normalizeTextForCompare(seoTitle);
+  if (titleNorm && seoNorm && titleNorm !== seoNorm && !String(json.seo_title || '').trim()) {
+    errors.push(`${file}: gdy title != seo_title, podaj jawnie seo_title.`);
+  }
+  const ogTitle = String(json.og_title || json.ogTitle || '').trim();
+  const twitterTitle = String(json.twitter_title || json.twitterTitle || '').trim();
+  if (ogTitle && normalizeTextForCompare(ogTitle) !== seoNorm) {
+    errors.push(`${file}: og_title musi być spójny 1:1 z seo_title.`);
+  }
+  if (twitterTitle && normalizeTextForCompare(twitterTitle) !== seoNorm) {
+    errors.push(`${file}: twitter_title musi być spójny 1:1 z seo_title.`);
+  }
+  const hasTitleIntentToken = (POLICY.TITLE_INTENT_TOKENS || []).some((token) => seoNorm.includes(normalizeTextForCompare(token)));
+  if (!hasTitleIntentToken) {
+    warnings.push(`${file}: seo_title może mieć niską klikalność (brak tokenów intencji typu "jak/czy/co/norma/wynik").`);
+  }
+  for (const phrase of POLICY.BANNED_CTR_TITLE_PATTERNS || []) {
+    if (seoNorm.includes(normalizeTextForCompare(phrase))) {
+      errors.push(`${file}: seo_title zawiera mało-klikalny szablon ("${phrase}").`);
+      break;
+    }
   }
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
@@ -268,11 +320,44 @@ function validateFile(file) {
     .replace(/\s+/g, ' ')
     .trim();
   const faqResearchSet = new Set(faqResearch.map((item) => normalizeQuestion(item && item.question)));
+  const faqSeen = new Set();
   for (let i = 0; i < faq.length; i += 1) {
     const q = normalizeQuestion(faq[i] && faq[i].question);
+    if (q) {
+      if (faqSeen.has(q)) {
+        errors.push(`${file}: FAQ #${i + 1} duplikuje wcześniejsze pytanie.`);
+      }
+      faqSeen.add(q);
+      if ((POLICY.GENERIC_FAQ_QUESTIONS || []).some((generic) => q === normalizeQuestion(generic))) {
+        errors.push(`${file}: FAQ #${i + 1} ma generyczne pytanie ("${String(faq[i]?.question || '').trim()}").`);
+      }
+    }
     if (q && !faqResearchSet.has(q)) {
       errors.push(`${file}: FAQ #${i + 1} nie ma dopasowania 1:1 w faq_research.question.`);
     }
+  }
+  for (let i = 0; i < faqResearch.length; i += 1) {
+    const item = faqResearch[i] || {};
+    const label = String(item.source_label || item.label || '').trim();
+    const sourceUrl = String(item.source_url || item.url || '').trim();
+    if (!label || label.length < POLICY.FAQ_RESEARCH_SOURCE_LABEL_MIN_CHARS) {
+      errors.push(`${file}: faq_research #${i + 1} ma zbyt ogólny source_label.`);
+    }
+    if (!/^https?:\/\//i.test(sourceUrl)) {
+      errors.push(`${file}: faq_research #${i + 1} musi mieć source_url z http/https.`);
+    }
+    const sourceNorm = normalizeTextForCompare(sourceUrl);
+    if ((POLICY.BANNED_FAQ_RESEARCH_SOURCE_URL_PATTERNS || []).some((bad) => sourceNorm.includes(normalizeTextForCompare(bad)))) {
+      errors.push(`${file}: faq_research #${i + 1} ma niedozwolony source_url (placeholder lub wyszukiwarka bezpośrednia).`);
+    }
+  }
+  const globalFaqCount = faqResearch.filter((item) => {
+    const label = normalizeTextForCompare(String(item?.source_label || item?.label || ''));
+    const url = normalizeTextForCompare(String(item?.source_url || item?.url || ''));
+    return label.includes('autocomplete') || label.includes('global') || url.includes('suggestqueries.google.com');
+  }).length;
+  if (faq.length >= POLICY.WORDS.FAQ_MIN_ITEMS && globalFaqCount < 2) {
+    errors.push(`${file}: FAQ research musi zawierać min. 2 globalne źródła intencji (Autocomplete/PAA).`);
   }
   const faqAnswerWordCounts = [];
   const faqQuestions = [];
@@ -284,6 +369,10 @@ function validateFile(file) {
     faqAnswerWordCounts.push(answerWords);
     checkInternalHtmlLinks(answerHtml, `${file}: answer_blocks[${i}].answer_html`);
     sectionChunksForCode.push(answerHtml);
+  }
+  const weakFaqIntentCount = faqQuestions.filter((q) => !hasIntentToken(q)).length;
+  if (faqQuestions.length && weakFaqIntentCount > Math.max(1, faqQuestions.length - 2)) {
+    errors.push(`${file}: FAQ ma zbyt mało pytań intencyjnych użytkownika (jak/czy/kiedy/ile/objawy/norma/wynik).`);
   }
 
   const codeOffending = collectCodeNonAscii(sectionChunksForCode);
@@ -330,6 +419,19 @@ function validateFile(file) {
   for (const note of aeo.notes) warnings.push(`${file}: AEO note: ${note}`);
   if (aeo.total < threshold) {
     errors.push(`${file}: AEO score poniżej progu ${threshold}/100 (jest ${aeo.total}) - popraw quick_answer/FAQ/źródła/linki przed publikacją.`);
+  }
+  if (!/^[A-ZĄĆĘŁŃÓŚŹŻ][^?!.]{15,}[.?!]$/u.test(quickAnswerPlain)) {
+    errors.push(`${file}: quick_answer musi być jednym, klarownym zdaniem lub zwięzłym akapitem zakończonym interpunkcją.`);
+  }
+  const faqOutOfRange = faqAnswerWordCounts.filter((n) => n < 30 || n > 60).length;
+  if (faqOutOfRange > 0) {
+    errors.push(`${file}: ${faqOutOfRange} odpowiedzi FAQ wypada poza zakres 30-60 słów.`);
+  }
+  const strongDomains = /(pubmed|nih\.gov|who\.int|cdc\.gov|ema\.europa\.eu|ncbi\.nlm\.nih\.gov|gov\.pl|ptkardio|escardio|nhs\.uk|cochrane)/i;
+  const strongCount = sourceUrls.filter((u) => strongDomains.test(String(u || ''))).length;
+  const strongRatio = sourceUrls.length ? strongCount / sourceUrls.length : 0;
+  if (sourceUrls.length && strongRatio < 0.5) {
+    errors.push(`${file}: udział silnych źródeł medycznych jest zbyt niski (${Math.round(strongRatio * 100)}%, wymagane min 50%).`);
   }
 }
 
