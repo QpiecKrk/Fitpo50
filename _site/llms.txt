@@ -311,4 +311,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Dieta 50/50 po pięćdziesiątce: efekty, opinie i nauka | FitPo50"
   section: "Jedzenie"
   summary: "Dieta 50/50 to post naprzemienny: jeden dzień jesz normalnie, drugi prawie nic. Sprawdź efekty, opinie i to, co badania mówią o utracie mięśni po 50-tce."
+- url: https://fitpo50.pl/jak-zaczac-sie-podciagac-po-50.html
+  title: "Jak zacząć się podciągać po 50. roku życia? Bezpieczny plan i 50 | FitPo50"
+  section: "Ruch"
+  summary: "Podciąganie po 50-tce? To jest możliwe! Sprawdź bezpieczny plan progresji, ćwiczenia pomocnicze i jak krok po kroku dojść do 50 podciągnięć na sesję."
 

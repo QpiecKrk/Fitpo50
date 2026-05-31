@@ -468,11 +468,17 @@ function normalizeFaqResearch(raw) {
   for (const item of normalizeArray(raw)) {
     if (!item || typeof item !== 'object') continue;
     const question = String(item.question || item.q || '').trim();
-    const sourceLabel = String(item.source_label || item.label || '').trim();
-    const sourceUrl = String(item.source_url || item.url || '').trim();
+    const sourceLabel = String(item.source_label || item.sourceLabel || item.label || '').trim();
+    const sourceUrl = String(item.source_url || item.sourceUrl || item.url || '').trim();
     if (!question || !sourceLabel || !sourceUrl) continue;
     if (!/^https?:\/\//i.test(sourceUrl)) continue;
-    out.push({ question, sourceLabel, sourceUrl });
+    out.push({
+      question,
+      sourceLabel,
+      sourceUrl,
+      source_label: sourceLabel,
+      source_url: sourceUrl,
+    });
   }
   return out;
 }
@@ -1336,8 +1342,8 @@ function validateInput(data, opts = {}) {
     }
     for (let i = 0; i < faqResearch.length; i += 1) {
       const item = faqResearch[i] || {};
-      const sourceLabel = String(item.source_label || item.label || '').trim();
-      const sourceUrl = String(item.source_url || item.url || '').trim();
+      const sourceLabel = String(item.source_label || item.sourceLabel || item.label || '').trim();
+      const sourceUrl = String(item.source_url || item.sourceUrl || item.url || '').trim();
       if (!sourceLabel || sourceLabel.length < POLICY.FAQ_RESEARCH_SOURCE_LABEL_MIN_CHARS) {
         errors.push(`FAQ research #${i + 1}: source_label jest zbyt ogólny.`);
       }
