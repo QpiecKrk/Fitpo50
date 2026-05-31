@@ -220,6 +220,7 @@ async function main() {
 
   run('Raw JSON parse gate (input)', 'node', ['scripts/fix-fitpo50-json.js', '--file', input, '--write', 'false', '--check', 'true', '--allow-outside-repo', 'true']);
   run('JSON auto-fix (working copy)', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingCopy, '--write', 'true', '--allow-outside-repo', 'true']);
+  run('E-E-A-T citation enhancer (best effort)', 'node', ['scripts/eeat-citation-enhancer.js', '--file', workingCopy, '--write', 'true', '--strict', 'false']);
   run('JSON strict autofix (links/FAQ/QA/title)', 'node', ['scripts/json-autofix-strict.js', '--file', workingCopy, '--map', 'data/internal-link-map.json']);
   run('JSON gate (single file)', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
   run('Article preflight (working copy)', 'node', ['scripts/article-preflight.js', '--file', workingCopy, '--assets-dir', assetsDir]);
@@ -241,6 +242,7 @@ async function main() {
   run('Generate llms-full (auto-refresh)', 'node', ['scripts/generate-llms-full.js']);
   run('Article contract check (source/_site)', 'node', ['scripts/article-contract-check.js', `${slug}.html`, path.join('_site', `${slug}.html`)]);
   run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug]);
+  run('Global link topology report', 'node', ['scripts/global-link-topology-optimizer.js', '--min-inbound', '2']);
   if (parallelTails) {
     await runParallel('Post-import parallel checks', [
       { label: 'Lint editorial placeholders (source HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--slug', slug] },
