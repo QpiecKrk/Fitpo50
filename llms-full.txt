@@ -2,7 +2,7 @@
 
 source: https://fitpo50.pl/
 language: pl-PL
-generated_at: 2026-05-31T09:59:10.168Z
+generated_at: 2026-06-01T07:46:16.792Z
 articles_count: 71
 
 ## Otyłość sarkopeniczna po 50: ukryty problem zdrowia
@@ -352,7 +352,7 @@ Najczęstsze pytania. Przy "Najczęstsze pytania?" kluczowe jest dopasowanie pla
 
 ### Czy te badania są refundowane przez NFZ?
 
-W Polsce ApoB i ApoA-1 nie są rutynowo refundowane przez NFZ w ramach badań podstawowych. Możesz poprosić lekarza rodzinnego lub kardiologa o skierowanie - w uzasadnionych przypadkach bywa refundacja. W laboratoriach prywatnych oba badania łącznie kosztują zwykle 50-80 zł.
+W Polsce ApoB i ApoA-1 nie są rutynowo refundowane przez NFZ w ramach badań podstawowych. Możesz poprosić lekarza rodzinnego lub kardiologa o skierowanie - w uzasadnionych przypadkach bywa refundacja. W laboratoriach prywatnych oba badania łącznie kosztują zwykle 50-80 zł. Jeśli chcesz zobaczyć aktualne widełki i interpretację wyniku, sprawdź też cenę badania ApoB i normy.
 
 ---
 
@@ -5961,9 +5961,9 @@ Warto przeczytać też: trening siłowy, dieta po 50-tce, sen i regeneracja.
 
 ---
 
-## Sakady po 50: co to jest i jak poprawić koncentrację?
+## Sakady po 50: Co to jest i jak trenować wzrok?
 URL: https://fitpo50.pl/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html
-Opis: Sakady po 50: co to jest supresja sakadyczna i jak trenować wzrok, aby poprawić koncentrację, równowagę oraz czas reakcji. Praktyczny przewodnik.
+Opis: Co to są sakady i na czym polega supresja sakadyczna? Sprawdź, jak mózg ukrywa ruchy oczu i jak prosty trening wzroku poprawia koncentrację po 50.
 
 Twoje oczy wykonują od 40 000 do 150 000 sakad dziennie — błyskawicznych skoków szybszych niż mrugięcie, których nigdy nie widzisz. Mózg celowo je ukrywa, wyłączając obraz jeszcze zanim oko fizycznie ruszy. To zjawisko nazywa się supresją sakadyczną i jest jednym z najbardziej niedocenianych cudów neurobiologii. Po pięćdziesiątce ten mechanizm zaczyna działać nieco inaczej — i warto wiedzieć dlaczego.
 
@@ -6186,9 +6186,9 @@ Warto przeczytać też: trening siłowy, dieta po 50-tce, sen i regeneracja, bad
 
 ---
 
-## Trening siłowy po 50: czy odmładza DNA i telomery?
+## Wiek biologiczny: Jak go sprawdzić i obniżyć po 50?
 URL: https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html
-Opis: Czy trening siłowy po 50 odmładza komórki? Sprawdź wpływ na telomery, DNA i wiek biologiczny oraz poznaj prosty plan 2x30 minut tygodniowo regularnie.
+Opis: Czym jest wiek biologiczny i jak go skutecznie obniżyć? Poznaj rolę treningu siłowego, zasady metylacji DNA oraz praktyczne kroki na co dzień po 50.
 
 Trening siłowy to znacznie więcej niż budowanie mięśni czy poprawa sylwetki – to potężna interwencja biologiczna, która zmienia sposób, w jaki starzeje się Twoje ciała na poziomie komórkowym. Najnowsze badania wykazują, że regularny opór mięśniowy aktywuje enzymy naprawcze DNA, wydłuża telomery (ochronne końcówki chromosomów) i uwalnia miokininy, które działają jak naturalny nawóz dla Twojego mózgu. Dla osoby po 50. roku życia każda sesja z obciążeniem to sygnał wysyłany do organizmu: „nadal jesteśmy w fazie wzrostu i regeneracji”, co pozwala realnie obniżyć wiek biologiczny nawet o kilka lat.
 
@@ -8741,9 +8741,9 @@ Postaw na śniadanie z przynajmniej 25–30 g białka i zdrowych tłuszczów: ja
 
 ---
 
-## ApoB po 50: norma, cena i jak czytać wynik?
+## Badanie ApoB po 50: Cena, normy i interpretacja
 URL: https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html
-Opis: ApoB po 50: sprawdź aktualne normy, cenę badania i prostą interpretację wyniku krok po kroku. Dowiedz się, kiedy ApoB jest ważniejsze od LDL dziś.
+Opis: Ile kosztuje badanie ApoB prywatnie i na NFZ? Poznaj aktualne normy kardiologiczne (2026), przelicznik jednostek i dowiedz się, jak czytać swój wynik.
 
 LDL masz w normie, a lekarz i tak kręci głową. Albo odwrotnie – LDL trochę za wysoki, ale ogólne ryzyko ma być niskie. Skąd ta sprzeczność? Badanie ApoB mierzy nie masę cholesterolu, lecz liczbę cząsteczek, które realnie atakują ściany tętnic. To różnica jak między ważeniem ciężarówek a liczeniem ich – i właśnie dlatego ApoB coraz częściej uzupełnia samo LDL w ocenie ryzyka sercowo-naczyniowego.
 
