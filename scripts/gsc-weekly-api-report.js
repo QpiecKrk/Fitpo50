@@ -7,6 +7,24 @@ const crypto = require('crypto');
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const GSC_SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
+const AI_QUERY_PATTERNS = [
+  /\bchatgpt\b/i,
+  /\bgemini\b/i,
+  /\bperplexity\b/i,
+  /\bclaude\b/i,
+  /\bcopilot\b/i,
+  /\bbing ai\b/i,
+  /\bai search\b/i,
+  /\bai overview(s)?\b/i,
+];
+const AI_REFERRER_HOSTS = [
+  'chatgpt.com',
+  'gemini.google.com',
+  'perplexity.ai',
+  'claude.ai',
+  'copilot.microsoft.com',
+  'bing.com',
+];
 
 function parseArgs(argv) {
   const out = {
@@ -336,6 +354,28 @@ function writeReport(report, outputJson, outputMd) {
       });
     }
     lines.push('');
+    lines.push('## AI Referrer Monitor');
+    if (!report.ai_referrer_monitor || report.ai_referrer_monitor.status !== 'ok') {
+      lines.push('- INSUFFICIENT_DATA');
+      if (report.ai_referrer_monitor?.referrers_file_found === false) {
+        lines.push(`- Brak pliku: ${report.ai_referrer_monitor.referrers_file}`);
+      }
+    } else {
+      lines.push(`- referrers.csv: ${report.ai_referrer_monitor.referrers_file_found ? 'FOUND' : 'MISSING'}`);
+      if (report.ai_referrer_monitor.ai_referrers.length) {
+        lines.push('- AI hosty:');
+        report.ai_referrer_monitor.ai_referrers.slice(0, 10).forEach((row) => {
+          lines.push(`  - ${row.host}: ${row.visits}`);
+        });
+      }
+      if (report.ai_referrer_monitor.ai_queries.length) {
+        lines.push('- Zapytania AI brand:');
+        report.ai_referrer_monitor.ai_queries.slice(0, 10).forEach((row) => {
+          lines.push(`  - ${row.query} (impr: ${row.impressions}, clicks: ${row.clicks}, ctr: ${row.ctr}%)`);
+        });
+      }
+    }
+    lines.push('');
     lines.push('## Plan tygodnia (auto)');
     report.weekly_plan.forEach((step, idx) => {
       lines.push(`${idx + 1}. ${step}`);
@@ -403,6 +443,101 @@ function collectMissingConfig(rawSiteUrl, hasServiceAccount, oauth) {
     missing.push('Brak pełnej konfiguracji OAuth: ustaw komplet `GSC_OAUTH_CLIENT_ID`, `GSC_OAUTH_CLIENT_SECRET`, `GSC_OAUTH_REFRESH_TOKEN`.');
   }
   return missing;
+}
+
+function isAiQuery(query) {
+  const q = String(query || '').trim();
+  if (!q) return false;
+  return AI_QUERY_PATTERNS.some((re) => re.test(q));
+}
+
+function extractHostname(input) {
+  const raw = String(input || '').trim();
+  if (!raw) return '';
+  try {
+    if (/^https?:\/\//i.test(raw)) {
+      return String(new URL(raw).hostname || '').toLowerCase();
+    }
+  } catch (_) {
+    return '';
+  }
+  return raw.toLowerCase().replace(/^www\./, '').split('/')[0];
+}
+
+function isAiHost(host) {
+  const h = String(host || '').toLowerCase();
+  if (!h) return false;
+  return AI_REFERRER_HOSTS.some((base) => h === base || h.endsWith(`.${base}`));
+}
+
+function parseSimpleCsv(text) {
+  const src = String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  const lines = src.split('\n').filter((line) => line.trim() !== '');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map((h) => h.trim());
+  return lines.slice(1).map((line) => {
+    const cols = line.split(',');
+    const out = {};
+    headers.forEach((h, idx) => {
+      out[h] = String(cols[idx] || '').trim();
+    });
+    return out;
+  });
+}
+
+function parseNumberLike(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return 0;
+  const normalized = raw
+    .replace(/\s+/g, '')
+    .replace(/%/g, '')
+    .replace(/\.(?=\d{3}(?:\D|$))/g, '')
+    .replace(',', '.');
+  const n = Number(normalized);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function buildAiReferrerMonitor(queriesCurrent, outputCsvDir) {
+  const aiQueries = (Array.isArray(queriesCurrent) ? queriesCurrent : [])
+    .filter((r) => isAiQuery(r.query))
+    .sort((a, b) => Number(b.impressions || 0) - Number(a.impressions || 0))
+    .slice(0, 20)
+    .map((r) => ({
+      query: r.query,
+      clicks: Math.round(Number(r.clicks || 0)),
+      impressions: Math.round(Number(r.impressions || 0)),
+      ctr: Number(Number(r.ctr || 0).toFixed(2)),
+      position: Number(Number(r.position || 0).toFixed(2)),
+    }));
+
+  const fallbackPath = path.join(path.resolve(ROOT, outputCsvDir), 'referrers.csv');
+  const referrersPath = String(process.env.GSC_REFERRERS_CSV || fallbackPath).trim();
+  const found = fs.existsSync(referrersPath);
+  const aiRefByHost = new Map();
+  if (found) {
+    const rows = parseSimpleCsv(fs.readFileSync(referrersPath, 'utf8'));
+    rows.forEach((row) => {
+      const entries = Object.entries(row || {});
+      const hostEntry = entries.find(([k]) => /(host|hostname|source|referrer|domain)/i.test(String(k || '')));
+      const visitsEntry = entries.find(([k]) => /(users|sessions|visits|clicks|count|traffic)/i.test(String(k || '')));
+      const host = extractHostname(hostEntry ? hostEntry[1] : '');
+      if (!isAiHost(host)) return;
+      const visits = parseNumberLike(visitsEntry ? visitsEntry[1] : 0);
+      const prev = aiRefByHost.get(host) || 0;
+      aiRefByHost.set(host, prev + visits);
+    });
+  }
+  const aiReferrers = [...aiRefByHost.entries()]
+    .map(([host, visits]) => ({ host, visits: Math.round(visits) }))
+    .sort((a, b) => b.visits - a.visits);
+
+  return {
+    status: aiQueries.length || aiReferrers.length ? 'ok' : 'INSUFFICIENT_DATA',
+    referrers_file_found: found,
+    referrers_file: referrersPath,
+    ai_queries: aiQueries,
+    ai_referrers: aiReferrers,
+  };
 }
 
 async function main() {
@@ -558,6 +693,7 @@ async function main() {
           : 'Dołóż linki do niedolinkowanych artykułów.',
         'Po wdrożeniu: request indexing + pomiar po 7 dniach.',
       ],
+      ai_referrer_monitor: buildAiReferrerMonitor(queriesCurrent, args.outputCsvDir),
     };
   }
 

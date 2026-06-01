@@ -29,3 +29,12 @@ jobs:
 
       - name: Full build/export + broken links crawl
         run: npm run check:build-export
+
+      - name: Upload SEO crawl reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-crawl-report
+          path: |
+            data/reports/seo-crawl-report.json
+            data/reports/seo-crawl-report.md
+          if-no-files-found: warn

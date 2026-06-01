@@ -63,6 +63,8 @@
     "prepush:diff-guard": "node scripts/prepush-diff-guard.js",
     "smoke:static": "node scripts/static-smoke-check.js /tmp/fitpo50-export-check",
     "broken-links:crawl": "node scripts/broken-links-crawler.js /tmp/fitpo50-export-check",
+    "seo:crawl": "node scripts/broken-links-crawler.js _site",
+    "cwv:budget": "node scripts/cwv-performance-budget.js",
     "hostinger:clean-repo": "bash scripts/hostinger-clean-repo.sh",
     "workflow:maintenance": "node scripts/workflow-maintenance-check.js",
     "check:build-export": "node scripts/check-build-export.js",

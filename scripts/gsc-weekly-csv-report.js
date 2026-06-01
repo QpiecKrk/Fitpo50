@@ -11,6 +11,24 @@ const DEFAULT_OUTPUT_JSON = path.join(DEFAULT_WORK_DIR, 'gsc-weekly-report.json'
 const DEFAULT_OUTPUT_MD = path.join(DEFAULT_WORK_DIR, 'gsc-weekly-report.md');
 const DEFAULT_AEO_OUTPUT_JSON = path.join(DEFAULT_WORK_DIR, 'aeo-opportunities.json');
 const DEFAULT_AEO_OUTPUT_MD = path.join(DEFAULT_WORK_DIR, 'aeo-opportunities.md');
+const AI_QUERY_PATTERNS = [
+  /\bchatgpt\b/i,
+  /\bgemini\b/i,
+  /\bperplexity\b/i,
+  /\bclaude\b/i,
+  /\bcopilot\b/i,
+  /\bbing ai\b/i,
+  /\bai search\b/i,
+  /\bai overview(s)?\b/i,
+];
+const AI_REFERRER_HOSTS = [
+  'chatgpt.com',
+  'gemini.google.com',
+  'perplexity.ai',
+  'claude.ai',
+  'copilot.microsoft.com',
+  'bing.com',
+];
 
 function parseArgs(argv) {
   const out = {
@@ -36,6 +54,14 @@ function parseArgs(argv) {
     }
   }
   return out;
+}
+
+function resolveAeoOutputs(inputDir) {
+  const baseDir = path.resolve(ROOT, String(inputDir || DEFAULT_WORK_DIR));
+  return {
+    outputJson: path.join(baseDir, 'aeo-opportunities.json'),
+    outputMd: path.join(baseDir, 'aeo-opportunities.md'),
+  };
 }
 
 function normalizeKey(input) {
@@ -128,6 +154,82 @@ function parseCsv(text) {
     });
     return obj;
   });
+}
+
+function isAiQuery(query) {
+  const q = String(query || '').trim();
+  if (!q) return false;
+  return AI_QUERY_PATTERNS.some((re) => re.test(q));
+}
+
+function extractHostname(input) {
+  const raw = String(input || '').trim();
+  if (!raw) return '';
+  try {
+    if (/^https?:\/\//i.test(raw)) {
+      return String(new URL(raw).hostname || '').toLowerCase();
+    }
+  } catch (_) {
+    return '';
+  }
+  return raw.toLowerCase().replace(/^www\./, '').split('/')[0];
+}
+
+function isAiHost(host) {
+  const h = String(host || '').toLowerCase();
+  if (!h) return false;
+  return AI_REFERRER_HOSTS.some((base) => h === base || h.endsWith(`.${base}`));
+}
+
+function readAiReferrerRows(inputDir) {
+  const referrersPath = path.join(inputDir, 'referrers.csv');
+  if (!fs.existsSync(referrersPath)) {
+    return { found: false, path: referrersPath, rows: [] };
+  }
+  const rawRows = parseCsv(fs.readFileSync(referrersPath, 'utf8'));
+  const rows = rawRows.map((r) => {
+    const keys = Object.keys(r || {});
+    const hostKey = keys.find((k) => /(host|hostname|source|referrer|domain)/i.test(String(k || '')));
+    const valueKey = keys.find((k) => /(users|sessions|visits|clicks|count|traffic)/i.test(String(k || '')));
+    return {
+      host: extractHostname(hostKey ? r[hostKey] : ''),
+      visits: valueKey ? parseNumber(r[valueKey]) : 0,
+    };
+  }).filter((r) => r.host);
+  return { found: true, path: referrersPath, rows };
+}
+
+function buildAiReferrerMonitor(queryRows, inputDir) {
+  const aiQueries = queryRows
+    .filter((r) => isAiQuery(r.query))
+    .sort((a, b) => b.impressions - a.impressions)
+    .slice(0, 20)
+    .map((r) => ({
+      query: r.query,
+      clicks: Math.round(Number(r.clicks || 0)),
+      impressions: Math.round(Number(r.impressions || 0)),
+      ctr: Number(Number(r.ctr || 0).toFixed(2)),
+      position: Number(Number(r.position || 0).toFixed(2)),
+    }));
+
+  const ref = readAiReferrerRows(inputDir);
+  const aiRefByHost = new Map();
+  for (const row of ref.rows) {
+    if (!isAiHost(row.host)) continue;
+    const prev = aiRefByHost.get(row.host) || 0;
+    aiRefByHost.set(row.host, prev + Number(row.visits || 0));
+  }
+  const aiReferrers = [...aiRefByHost.entries()]
+    .map(([host, visits]) => ({ host, visits: Math.round(visits) }))
+    .sort((a, b) => b.visits - a.visits);
+
+  return {
+    status: aiQueries.length || aiReferrers.length ? 'ok' : 'INSUFFICIENT_DATA',
+    referrers_file_found: ref.found,
+    referrers_file: ref.path,
+    ai_queries: aiQueries,
+    ai_referrers: aiReferrers,
+  };
 }
 
 function headerType(sampleRow) {
@@ -487,6 +589,28 @@ function writeOutputs(report, outputJson, outputMd) {
       }
     }
     lines.push('');
+    lines.push('## AI Referrer Monitor');
+    if (!report.ai_referrer_monitor || report.ai_referrer_monitor.status !== 'ok') {
+      lines.push('- INSUFFICIENT_DATA');
+      if (report.ai_referrer_monitor?.referrers_file_found === false) {
+        lines.push(`- Brak pliku: ${report.ai_referrer_monitor.referrers_file}`);
+      }
+    } else {
+      lines.push(`- referrers.csv: ${report.ai_referrer_monitor.referrers_file_found ? 'FOUND' : 'MISSING'}`);
+      if (report.ai_referrer_monitor.ai_referrers.length) {
+        lines.push('- AI hosty:');
+        report.ai_referrer_monitor.ai_referrers.slice(0, 10).forEach((row) => {
+          lines.push(`  - ${row.host}: ${row.visits}`);
+        });
+      }
+      if (report.ai_referrer_monitor.ai_queries.length) {
+        lines.push('- Zapytania AI brand:');
+        report.ai_referrer_monitor.ai_queries.slice(0, 10).forEach((row) => {
+          lines.push(`  - ${row.query} (impr: ${row.impressions}, clicks: ${row.clicks}, ctr: ${row.ctr}%)`);
+        });
+      }
+    }
+    lines.push('');
     lines.push('## AEO Opportunity Bot');
     if (!report.aeo_opportunity_bot || report.aeo_opportunity_bot.status !== 'ok') {
       lines.push('- INSUFFICIENT_DATA');
@@ -545,6 +669,7 @@ function countCsvDataRows(filePath) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  const aeoOutputs = resolveAeoOutputs(args.inputDir);
   const filesMeta = [];
 
   if (!fs.existsSync(args.inputDir)) {
@@ -567,7 +692,7 @@ function main() {
       strategic_priority: 'SEO -> AEO -> GEO -> AIO',
       top10_urls: [],
     };
-    writeAeoOutputs(aeoReport, DEFAULT_AEO_OUTPUT_JSON, DEFAULT_AEO_OUTPUT_MD);
+    writeAeoOutputs(aeoReport, aeoOutputs.outputJson, aeoOutputs.outputMd);
     const report = {
       generated_at: new Date().toISOString(),
       status: 'INSUFFICIENT_DATA',
@@ -586,9 +711,16 @@ function main() {
       strategic_priority: 'SEO -> AEO -> GEO -> AIO',
       aeo_opportunity_bot: {
         status: 'INSUFFICIENT_DATA',
-        output_json: DEFAULT_AEO_OUTPUT_JSON,
-        output_md: DEFAULT_AEO_OUTPUT_MD,
+        output_json: aeoOutputs.outputJson,
+        output_md: aeoOutputs.outputMd,
         top10_count: 0,
+      },
+      ai_referrer_monitor: {
+        status: 'INSUFFICIENT_DATA',
+        referrers_file_found: false,
+        referrers_file: path.join(args.inputDir, 'referrers.csv'),
+        ai_queries: [],
+        ai_referrers: [],
       },
     };
     writeOutputs(report, args.outputJson, args.outputMd);
@@ -665,12 +797,19 @@ function main() {
       strategic_priority: 'SEO -> AEO -> GEO -> AIO',
       top10_urls: [],
     };
-    writeAeoOutputs(aeoReport, DEFAULT_AEO_OUTPUT_JSON, DEFAULT_AEO_OUTPUT_MD);
+    writeAeoOutputs(aeoReport, aeoOutputs.outputJson, aeoOutputs.outputMd);
     report.aeo_opportunity_bot = {
       status: 'INSUFFICIENT_DATA',
-      output_json: DEFAULT_AEO_OUTPUT_JSON,
-      output_md: DEFAULT_AEO_OUTPUT_MD,
+      output_json: aeoOutputs.outputJson,
+      output_md: aeoOutputs.outputMd,
       top10_count: 0,
+    };
+    report.ai_referrer_monitor = {
+      status: 'INSUFFICIENT_DATA',
+      referrers_file_found: false,
+      referrers_file: path.join(args.inputDir, 'referrers.csv'),
+      ai_queries: [],
+      ai_referrers: [],
     };
     report.weekly_plan = [
       'Wyeksportuj z GSC CSV: Queries, Pages i Query+Page (zakres ostatnich 3 miesięcy).',
@@ -845,13 +984,14 @@ function main() {
   });
   report.content_gaps = contentGaps;
   report.article_delta_plan = buildArticleDeltaPlan(report, qpRows);
+  report.ai_referrer_monitor = buildAiReferrerMonitor(queryRows, args.inputDir);
 
   const aeoReport = buildAeoOpportunities(report);
-  writeAeoOutputs(aeoReport, DEFAULT_AEO_OUTPUT_JSON, DEFAULT_AEO_OUTPUT_MD);
+  writeAeoOutputs(aeoReport, aeoOutputs.outputJson, aeoOutputs.outputMd);
   report.aeo_opportunity_bot = {
     status: aeoReport.status,
-    output_json: DEFAULT_AEO_OUTPUT_JSON,
-    output_md: DEFAULT_AEO_OUTPUT_MD,
+    output_json: aeoOutputs.outputJson,
+    output_md: aeoOutputs.outputMd,
     top10_count: Array.isArray(aeoReport.top10_urls) ? aeoReport.top10_urls.length : 0,
   };
 
@@ -859,8 +999,8 @@ function main() {
   console.log(`[PASS] GSC weekly CSV report generated.`);
   console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
   console.log(`- MD: ${path.relative(ROOT, args.outputMd)}`);
-  console.log(`- AEO JSON: ${DEFAULT_AEO_OUTPUT_JSON}`);
-  console.log(`- AEO MD: ${DEFAULT_AEO_OUTPUT_MD}`);
+  console.log(`- AEO JSON: ${aeoOutputs.outputJson}`);
+  console.log(`- AEO MD: ${aeoOutputs.outputMd}`);
   console.log(`- opportunities: top3_zero=${report.opportunities.top3_zero_click.length}, ctr=${report.opportunities.ctr_problems.length}, cannibalization=${report.opportunities.cannibalization.length}`);
 }
 

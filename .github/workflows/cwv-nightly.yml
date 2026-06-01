@@ -1,0 +1,36 @@
+name: CWV Nightly
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"
+
+jobs:
+  cwv:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build + export
+        run: ./scripts/export_site.sh
+
+      - name: Run CWV budget
+        run: npm run cwv:budget
+
+      - name: Upload CWV reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: cwv-budget-report
+          path: |
+            data/reports/cwv-budget.json
+            data/reports/cwv-budget.md
+          if-no-files-found: error
