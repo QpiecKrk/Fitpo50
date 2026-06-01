@@ -22,5 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Validate article standard (AEO gate)
+        run: npm run article:validate
+
       - name: Run predeploy gate
         run: node scripts/predeploy-gate.js

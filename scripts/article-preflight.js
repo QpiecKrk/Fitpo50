@@ -172,7 +172,6 @@ function main() {
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
   const quickAnswer = utils.stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
-  const quickAnswerWords = utils.countWords(quickAnswer);
   const rawSeoTitle = String(json.seo_title || '').replace(/\s+/g, ' ').trim();
   const listingTitle = String(json.listing_title || '').replace(/\s+/g, ' ').trim();
   const listingDesc = String(json.listing_desc || '').replace(/\s+/g, ' ').trim();
@@ -188,10 +187,20 @@ function main() {
   if (!listingDesc) {
     warnings.push('Brak listing_desc — importer użyje fallback tekstowy, ale listingi lepiej kontrolować osobnym listing_desc.');
   }
-  if (!quickAnswer) {
-    errors.push(`Brak quick_answer (wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów).`);
-  } else if (quickAnswerWords < POLICY.WORDS.QUICK_ANSWER_MIN || quickAnswerWords > POLICY.WORDS.QUICK_ANSWER_MAX) {
-    errors.push(`quick_answer poza zakresem ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${quickAnswerWords}).`);
+  const quickValidation = validators.validateQuickAnswer(quickAnswer, { mode: 'strict' });
+  quickValidation.errors.forEach((msg) => errors.push(msg));
+
+  const claim = String(json.quick_answer_claim || '').trim();
+  const limit = String(json.quick_answer_limit || '').trim();
+  const noGeneric = json.quick_answer_no_generic;
+  if (claim && claim.length < 10) {
+    warnings.push('quick_answer_claim jest bardzo krótki — zalecane min. 10 znaków.');
+  }
+  if (limit && limit.length < 4) {
+    warnings.push('quick_answer_limit wygląda na zbyt krótki — doprecyzuj warunek/liczbę.');
+  }
+  if (noGeneric !== undefined && noGeneric !== true) {
+    warnings.push('quick_answer_no_generic ustaw na true (pole opcjonalne checklisty redakcyjnej).');
   }
   sections.forEach((section, idx) => {
     const headingRes = validators.validateH2Title(String(section.title || section.heading || '').trim());

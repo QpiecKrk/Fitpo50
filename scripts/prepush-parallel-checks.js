@@ -5,6 +5,7 @@ const readline = require('readline');
 
 const TASKS = {
   'assets:mirror:check': { cmd: 'node', args: ['scripts/sync-site-assets-mirror.js', '--check'], always: true },
+  'article:validate': { cmd: 'node', args: ['scripts/validate-article-standard.js'], always: true },
   'predeploy:check': { cmd: 'node', args: ['scripts/predeploy-gate.js'], always: true },
   'news:integrity': { cmd: 'node', args: ['scripts/news-integrity-check.js'], match: [/^data\/news-live\.json$/, /^assets\/data\/news-fallback\.json$/, /^admin\/news/i] },
   'article:guard:diff': { cmd: 'node', args: ['scripts/run-article-guard-diff.js'], match: [/\.html$/i] },

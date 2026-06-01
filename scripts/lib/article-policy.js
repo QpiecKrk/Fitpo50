@@ -10,8 +10,8 @@ const POLICY = {
   WORDS: {
     H2_INTRO_MIN: 30,
     H2_INTRO_MAX: 70,
-    QUICK_ANSWER_MIN: 40,
-    QUICK_ANSWER_MAX: 60,
+    QUICK_ANSWER_MIN: 45,
+    QUICK_ANSWER_MAX: 70,
     SEO_DESCRIPTION_MIN: 145,
     SEO_DESCRIPTION_MAX: 160,
     INTERNAL_LINKS_MIN: 4,
@@ -49,8 +49,27 @@ const POLICY = {
     'po 50-tce nawet złożone tematy warto rozbierać na proste elementy',
     'po 50-tce najlepsze efekty daje prosty plan',
     'po 50-tce najwięcej daje spokojny start',
-    'ten artykuł porządkuje najważniejsze fakty'
+    'ten artykuł porządkuje najważniejsze fakty',
+    'warto patrzeć szerzej',
+    'najważniejsze to regularność',
+    'kluczowe jest indywidualne podejście',
+    'to zależy od wielu czynników',
+    'warto pamiętać o całościowym podejściu',
+    'istotne jest zrównoważone podejście',
+    'należy zawsze dostosować'
   ],
+
+  QUICK_ANSWER: {
+    LEGACY_CUTOFF: '2026-06-01',
+    CONDITION_PATTERNS: [
+      /\bjeśli\b/i,
+      /\bgdy\b/i,
+      /\bkiedy\b/i,
+      /\bu osób po 50\b/i,
+      /\bprzy wyniku\b/i
+    ],
+    NUMBER_PATTERN: /\b\d+(?:[.,]\d+)?(?:\s*[–-]\s*\d+(?:[.,]\d+)?)?\b/
+  },
 
   GENERIC_FAQ_QUESTIONS: [
     'najważniejsze z tej sekcji',
@@ -271,6 +290,50 @@ const validators = {
     const clean = String(label || '').trim();
     const ok = POLICY.PATTERNS.READ_TIME_LABEL.test(clean);
     return { ok, error: ok ? null : `Niepoprawny label czasu czytania: "${clean}" (oczekiwane: "X min czytania").` };
+  },
+
+  containsBannedPhrase: (text, bannedList = POLICY.GENERIC_QUICK_ANSWER_PATTERNS) => {
+    const normalized = utils.fuzzyNormalize(text);
+    for (const phrase of bannedList) {
+      const needle = utils.fuzzyNormalize(phrase);
+      if (needle && normalized.includes(needle)) {
+        return { found: true, phrase };
+      }
+    }
+    return { found: false, phrase: '' };
+  },
+
+  hasNumberOrCondition: (text) => {
+    const clean = String(text || '').trim();
+    if (!clean) return false;
+    if (POLICY.QUICK_ANSWER.NUMBER_PATTERN.test(clean)) return true;
+    return POLICY.QUICK_ANSWER.CONDITION_PATTERNS.some((rx) => rx.test(clean));
+  },
+
+  validateQuickAnswer: (text, options = {}) => {
+    const mode = String(options.mode || 'strict').toLowerCase();
+    const errors = [];
+    const warnings = [];
+    const clean = utils.stripTags(text).replace(/\s+/g, ' ').trim();
+    const words = utils.countWords(clean);
+    const push = mode === 'legacy' ? warnings : errors;
+
+    if (!clean) {
+      push.push('Brak treści "Szybka odpowiedź".');
+      return { valid: false, errors, warnings, words };
+    }
+    if (words < POLICY.WORDS.QUICK_ANSWER_MIN || words > POLICY.WORDS.QUICK_ANSWER_MAX) {
+      push.push(`Szybka odpowiedź poza zakresem ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${words}).`);
+    }
+    const banned = validators.containsBannedPhrase(clean);
+    if (banned.found) {
+      push.push(`Szybka odpowiedź jest zbyt generyczna (fraza: "${banned.phrase}").`);
+    }
+    if (!validators.hasNumberOrCondition(clean)) {
+      push.push('Szybka odpowiedź musi zawierać liczbę albo warunek (np. jeśli/gdy/kiedy/u osób po 50/przy wyniku).');
+    }
+
+    return { valid: errors.length === 0, errors, warnings, words };
   }
 };
 

@@ -69,7 +69,7 @@ function validateAnswerFirstParagraphs(raw, errors) {
   }
 }
 
-function validateQuickAnswerBlock(articleContentHtml, errors) {
+function validateQuickAnswerBlock(articleContentHtml, errors, warnings, quickAnswerMode = 'strict') {
   const blockMatch = articleContentHtml.match(/<section\s+class="quick-answer[^"]*"[\s\S]*?<\/section>/i);
   if (!blockMatch) {
     errors.push('Brak sekcji .quick-answer (Szybka odpowiedź).');
@@ -79,10 +79,6 @@ function validateQuickAnswerBlock(articleContentHtml, errors) {
   if (!paragraphMatch) {
     errors.push('Sekcja .quick-answer nie zawiera akapitu <p>.');
     return;
-  }
-  const wc = utils.countWords(utils.stripTags(paragraphMatch[1]));
-  if (wc < POLICY.WORDS.QUICK_ANSWER_MIN || wc > POLICY.WORDS.QUICK_ANSWER_MAX) {
-    errors.push(`Szybka odpowiedź: wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${wc}).`);
   }
 
   const leadMatch = articleContentHtml.match(/<p class="drop-cap">([\s\S]*?)<\/p>/i);
@@ -94,14 +90,9 @@ function validateQuickAnswerBlock(articleContentHtml, errors) {
     }
   }
 
-  const quickNorm = utils.fuzzyNormalize(utils.stripTags(paragraphMatch[1]));
-  for (const phrase of POLICY.GENERIC_QUICK_ANSWER_PATTERNS || []) {
-    const needle = utils.fuzzyNormalize(phrase);
-    if (needle && quickNorm.includes(needle)) {
-      errors.push(`Szybka odpowiedź jest zbyt generyczna (fraza: "${phrase}").`);
-      break;
-    }
-  }
+  const qaCheck = validators.validateQuickAnswer(paragraphMatch[1], { mode: quickAnswerMode });
+  qaCheck.errors.forEach((msg) => errors.push(msg));
+  qaCheck.warnings.forEach((msg) => warnings.push(`[LEGACY-BACKLOG] ${msg}`));
 }
 
 function validateFaqQuestionsQuality(raw, errors) {
@@ -397,9 +388,47 @@ function validateHeadSeoConsistency(raw, errors) {
   errors.push(...res.errors);
 }
 
+function extractPublishedDateFromLdJson(raw) {
+  const scripts = [...String(raw || '').matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+  for (const scriptMatch of scripts) {
+    const body = String(scriptMatch[1] || '').trim();
+    let parsed;
+    try {
+      parsed = JSON.parse(body);
+    } catch (_err) {
+      continue;
+    }
+    const nodes = Array.isArray(parsed) ? parsed : [parsed];
+    for (const node of nodes) {
+      if (!node || typeof node !== 'object') continue;
+      const type = node['@type'];
+      const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
+      if (!isBlogPosting) continue;
+      const datePublished = String(node.datePublished || '').trim();
+      if (datePublished) return datePublished;
+    }
+  }
+  return '';
+}
+
+function isLegacyArticle(raw) {
+  const cutoffRaw = String(POLICY.QUICK_ANSWER?.LEGACY_CUTOFF || '').trim();
+  const cutoff = cutoffRaw ? new Date(`${cutoffRaw}T00:00:00+02:00`) : null;
+  if (!cutoff || Number.isNaN(cutoff.getTime())) return false;
+  const publishedMeta = raw.match(/<meta\s+property="article:published_time"\s+content="([^"]+)"/i)?.[1] || '';
+  const publishedSchema = extractPublishedDateFromLdJson(raw);
+  const publishedRaw = String(publishedMeta || publishedSchema || '').trim();
+  if (!publishedRaw) return false;
+  const publishedAt = new Date(publishedRaw);
+  if (Number.isNaN(publishedAt.getTime())) return false;
+  return publishedAt < cutoff;
+}
+
 function validateFile(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
+  const warnings = [];
+  const quickAnswerMode = isLegacyArticle(raw) ? 'legacy' : 'strict';
   const requiredPatterns = [
     { label: 'body.article-template', regex: /<body[^>]*class="[^"]*article-template[^"]*"/i },
     { label: 'body.article--kategoria', regex: /<body[^>]*class="[^"]*article--(ruch|jedzenie|zdrowie|ciekawe)[^"]*"/i },
@@ -542,7 +571,7 @@ function validateFile(filePath) {
   if (!articleContentHtml) {
     errors.push('Brak <article class="article-content"> do walidacji AEO/GEO.');
   } else {
-    validateQuickAnswerBlock(articleContentHtml, errors);
+    validateQuickAnswerBlock(articleContentHtml, errors, warnings, quickAnswerMode);
     validateFaqQuestionsQuality(raw, errors);
     validateQuestionHeadings(articleContentHtml, errors);
     validateInlineFiguresUsePicture(articleContentHtml, errors);
@@ -562,7 +591,7 @@ function validateFile(filePath) {
   validateSpeakableTargetsQuickAnswer(raw, errors);
   validateBlogPostingAuthorIsPerson(raw, errors);
 
-  return errors;
+  return { errors, warnings };
 }
 
 function main() {
@@ -584,13 +613,17 @@ function main() {
 
   let hasErrors = false;
   for (const f of articleFiles) {
-    const errs = validateFile(path.resolve(process.cwd(), f));
+    const result = validateFile(path.resolve(process.cwd(), f));
+    const errs = result.errors;
+    const warns = result.warnings;
     if (errs.length) {
       hasErrors = true;
       console.log(`\n✖ ${f}`);
       errs.forEach((e) => console.log(`  - ${e}`));
+      warns.forEach((w) => console.log(`  - ${w}`));
     } else {
       console.log(`✔ ${f}`);
+      warns.forEach((w) => console.log(`  - ${w}`));
     }
   }
 

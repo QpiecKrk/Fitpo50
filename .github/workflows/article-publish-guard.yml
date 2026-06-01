@@ -43,6 +43,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Validate article standard (AEO gate)
+        run: npm run article:validate
+
       - name: Resolve changed files
         id: changed
         shell: bash

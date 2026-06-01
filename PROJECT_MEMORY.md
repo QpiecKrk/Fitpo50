@@ -85,9 +85,25 @@
    - `schema-validator` (BlogPosting/FAQPage/speakable + daty ISO),
    - `broken-links-crawler` po eksporcie (`/tmp/fitpo50-export-check`),
    - `adsense-readiness-check` (`ads.txt` + kod AdSense na kluczowych stronach).
- - Aktywne automatyzacje harmonogramowe:
-   - `FAQ Refresh Report` (raz w tygodniu, raport kandydatów do odświeżenia FAQ),
-   - `Live Post-Push Check` (workflow na push do `main`, szybki live-check kluczowych URL).
+- Aktywne automatyzacje harmonogramowe:
+  - `FAQ Refresh Report` (raz w tygodniu, raport kandydatów do odświeżenia FAQ),
+  - `Live Post-Push Check` (workflow na push do `main`, szybki live-check kluczowych URL).
+
+## Ustalenia operacyjne (2026-06-01) - start sesji, raporty i bezpieczne porzadki
+
+- **Raport startowy sesji (obowiazkowy):**
+  - Po starcie technicznym tworz raport: `data/reports/session-start-report.md`.
+  - Raport musi zawierac: timestamp, wynik `git pull --ff-only`, `git status --short`, `npm run assets:mirror:sync`, `npm run predeploy:check`.
+
+- **Kopia raportow do Downloads (obowiazkowa):**
+  - Katalog docelowy: `~/Downloads/FitPo50-reports`.
+  - Po wygenerowaniu raportu w repo kopiujemy go do katalogu Downloads.
+  - Dotyczy to co najmniej raportu startowego sesji i raportow koncowych uzgodnionych z userem.
+
+- **Usuwanie plikow - tryb bezpieczny (twarda zasada):**
+  - Sprzatamy tylko whitelistowane pliki tymczasowe (`tmp/`, `.tmp/`, cache raportow, artefakty jednorazowe po zadaniu).
+  - Nigdy automatycznie nie usuwamy plikow zrodlowych artykulow, assetow produkcyjnych, danych i konfiguracji.
+  - Przed usunieciem zawsze najpierw pokazujemy liste kandydatow do usuniecia i czekamy na jawna zgode usera.
 
 ## Ustalenia operacyjne (2026-04-17)
 
@@ -1335,3 +1351,24 @@ Jesli artykul ma obrazy:
   - Zaostrzone walidacje i autofix JSON pod AEO/CTR.
   - Wzmocniony skill `popraw-json` o global-first FAQ i zasady quality gate.
   - Dodane reguly anty-generyczne dla quick answer / FAQ / tytulow.
+
+## Ustalenia operacyjne (2026-06-01) - Quick Answer v2 + backlog legacy
+
+- **Quick Answer v2 (standard twardy dla nowych artykulow):**
+  - Obowiazuje zakres `45-70` slow.
+  - Quick Answer musi zawierac liczbe albo warunek (`jesli`, `gdy`, `kiedy`, `u osob po 50`, `przy wyniku`).
+  - Zakazane sa generyczne frazy (lista w `scripts/lib/article-policy.js`).
+  - Dla nowych publikacji naruszenie reguly Quick Answer = `FAIL` (blokada publikacji).
+
+- **Legacy backlog (stare artykuly):**
+  - Stare artykuly z niezgodna Quick Answer trafiaja do backlogu naprawczego, a nie do globalnej blokady deployu.
+  - Raport backlogu uruchamiaj przez: `npm run quick-answer:backlog`.
+  - Fale naprawcze utrzymujemy w modelu: `1/2/3` (priorytetyzacja URL-i).
+
+- **Kanoniczne punkty walidacji Quick Answer:**
+  - `scripts/article-preflight.js` (check na etapie JSON, przed importem HTML),
+  - `scripts/validate-article-standard.js` (check po stronie finalnego HTML, z trybem legacy backlog),
+  - `scripts/predeploy-gate.js` (ostatni gate przed publikacja).
+
+- **Status wdrozenia 2026-06-01:**
+  - Backlog Quick Answer wyczyszczony do `fail=0` (`fixed=74`) wedlug raportu `data/reports/quick-answer-backlog.json`.

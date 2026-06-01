@@ -12,7 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 const { validateArticleHeadFile } = require('./lib/article-head-contract');
-const { validators } = require('./lib/article-policy');
+const { validators, POLICY, utils } = require('./lib/article-policy');
 
 const ROOT = process.cwd();
 
@@ -403,6 +403,57 @@ function validatePublishedNewsImages(errors, warnings) {
   }
 }
 
+function extractPublishedDateFromLdJson(raw) {
+  const scripts = [...String(raw || '').matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+  for (const scriptMatch of scripts) {
+    const body = String(scriptMatch[1] || '').trim();
+    let parsed;
+    try {
+      parsed = JSON.parse(body);
+    } catch (_err) {
+      continue;
+    }
+    const nodes = Array.isArray(parsed) ? parsed : [parsed];
+    for (const node of nodes) {
+      if (!node || typeof node !== 'object') continue;
+      const type = node['@type'];
+      const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
+      if (!isBlogPosting) continue;
+      const datePublished = String(node.datePublished || '').trim();
+      if (datePublished) return datePublished;
+    }
+  }
+  return '';
+}
+
+function isLegacyByPublishedAt(raw) {
+  const cutoffRaw = String(POLICY.QUICK_ANSWER?.LEGACY_CUTOFF || '').trim();
+  const cutoff = cutoffRaw ? new Date(`${cutoffRaw}T00:00:00+02:00`) : null;
+  if (!cutoff || Number.isNaN(cutoff.getTime())) return false;
+  const publishedMeta = raw.match(/<meta\s+property="article:published_time"\s+content="([^"]+)"/i)?.[1] || '';
+  const publishedSchema = extractPublishedDateFromLdJson(raw);
+  const publishedRaw = String(publishedMeta || publishedSchema || '').trim();
+  if (!publishedRaw) return false;
+  const publishedAt = new Date(publishedRaw);
+  if (Number.isNaN(publishedAt.getTime())) return false;
+  return publishedAt < cutoff;
+}
+
+function validateQuickAnswerPolicyForSlug(slugFile, errors, warnings) {
+  if (!exists(slugFile)) return;
+  const raw = readUtf8(slugFile);
+  const articleHtml = raw.match(/<article\s+class="article-content">([\s\S]*?)<\/article>/i)?.[1] || '';
+  const qaText = articleHtml.match(/<section\s+class="quick-answer[^"]*"[\s\S]*?<p\b[^>]*>([\s\S]*?)<\/p>/i)?.[1] || '';
+  if (!qaText) {
+    errors.push(`${slugFile}: brak treści .quick-answer <p>.`);
+    return;
+  }
+  const mode = isLegacyByPublishedAt(raw) ? 'legacy' : 'strict';
+  const qaCheck = validators.validateQuickAnswer(utils.stripTags(qaText), { mode });
+  qaCheck.errors.forEach((msg) => errors.push(`${slugFile}: ${msg}`));
+  qaCheck.warnings.forEach((msg) => warnings.push(`${slugFile}: [LEGACY-BACKLOG] ${msg}`));
+}
+
 function printAndExit(errors, warnings) {
   if (warnings.length) {
     console.log('\n[WARN]');
@@ -532,6 +583,7 @@ function main() {
       contract.errors.forEach((e) => errors.push(`${slugFile}: ${e}`));
       contract.warnings.forEach((w) => warnings.push(`${slugFile}: ${w}`));
       validateArticleHeroConsistency(slugFile, errors, warnings);
+      validateQuickAnswerPolicyForSlug(slugFile, errors, warnings);
     }
   }
 

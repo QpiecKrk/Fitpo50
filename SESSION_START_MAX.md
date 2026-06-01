@@ -27,6 +27,11 @@ START TECHNICZNY (zawsze na poczatku sesji):
    npm run assets:mirror:sync
    npm run predeploy:check
    Zasada: jesli gate pokazuje warning o brakujacych miniaturach NEWS w `_site/assets/news/`, najpierw wykonaj mirror i ponow gate.
+5) Po starcie technicznym zapisz raport startowy i skopiuj go do katalogu pobran:
+   - raport zapisz w repo: `data/reports/session-start-report.md`,
+   - utworz katalog docelowy, jesli nie istnieje: `~/Downloads/FitPo50-reports`,
+   - skopiuj raport do: `~/Downloads/FitPo50-reports/`.
+   Raport startowy ma zawierac minimum: date/czas, wynik `git pull`, wynik `git status --short`, wynik `assets:mirror:sync`, wynik `predeploy:check`.
 
 Przed rozpoczeciem pracy zawsze najpierw przeczytaj `PROJECT_MEMORY.md`.
 Nastepnie:
@@ -43,6 +48,9 @@ Zasady:
 - sygnalizuj ryzyka, zalozenia i wplyw zmian na reszte systemu,
 - nie wykonuj `git commit` ani `git push` bez mojej wyraznej komendy,
 - nie uzywaj polecen destrukcyjnych bez mojej wyraznej zgody.
+- porzadki w repo rob tylko wg whitelisty plikow tymczasowych (np. `tmp/`, `.tmp/`, cache raportow, artefakty jednorazowe),
+- nie usuwaj automatycznie plikow zrodlowych artykulow, assetow produkcyjnych, danych ani konfiguracji,
+- przed kazdym usuwaniem pokaz liste plikow do usuniecia i czekaj na moja jednoznaczna zgode.
 - Gdy wydaje komenda `git push`, traktuj to jako komendę złożoną i uruchamiasz pełny pipeline push:
   - `./scripts/export_site.sh`
   - `npm run assets:mirror:sync`
