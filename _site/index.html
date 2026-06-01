@@ -1442,16 +1442,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/podciaganie-50-plus-hero.avif" type="image/avif">
-          <source srcset="./assets/podciaganie-50-plus-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/podciaganie-50-plus-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/komorki-zombie-skora-hero.avif" type="image/avif">
+          <source srcset="./assets/komorki-zombie-skora-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/komorki-zombie-skora-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Jak zacząć się podciągać po 50. roku życia? Bezpieczny plan i 50</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Podciąganie po 50-tce? To jest możliwe! Sprawdź bezpieczny plan progresji, ćwiczenia pomocnicze i jak krok po kroku dojść do 50 podciągnięć na sesję.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="jak-zaczac-sie-podciagac-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Komórki zombie niszczą Twoją skórę po 50-tce — nauka wie już jak</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Komórki zombie (senescencyjne) w skórze po 50-tce: jak niszczą kolagen, co odkryło badanie ABT-263 z 2024 roku i co możesz realnie zrobić już dziś.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Jak zacząć się podciągać po 50. roku życia? Bezpieczny plan i 50',
-        excerpt: 'Podciąganie po 50-tce? To jest możliwe! Sprawdź bezpieczny plan progresji, ćwiczenia pomocnicze i jak krok po kroku dojść do 50 podciągnięć na sesję.',
-        image: './assets/podciaganie-50-plus-hero.webp',
-        url: 'jak-zaczac-sie-podciagac-po-50.html'
+        title: 'Komórki zombie niszczą Twoją skórę po 50-tce — nauka wie już jak',
+        excerpt: 'Komórki zombie (senescencyjne) w skórze po 50-tce: jak niszczą kolagen, co odkryło badanie ABT-263 z 2024 roku i co możesz realnie zrobić już dziś.',
+        image: './assets/komorki-zombie-skora-hero.webp',
+        url: 'komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,6 +2236,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Zdrowie',
+          title: 'Komórki zombie niszczą Twoją skórę po 50-tce — nauka wie już jak',
+          excerpt: 'Komórki zombie (senescencyjne) w skórze po 50-tce: jak niszczą kolagen, co odkryło badanie ABT-263 z 2024 roku i co możesz realnie zrobić już dziś.',
+          image: './assets/komorki-zombie-skora-hero.webp',
+          url: 'komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html'
+        },
+        {
           category: 'Ruch',
           title: 'Jak zacząć się podciągać po 50. roku życia? Bezpieczny plan i 50',
           excerpt: 'Podciąganie po 50-tce? To jest możliwe! Sprawdź bezpieczny plan progresji, ćwiczenia pomocnicze i jak krok po kroku dojść do 50 podciągnięć na sesję.',
@@ -2248,13 +2255,6 @@
           excerpt: 'Dieta 50/50 to post naprzemienny: jeden dzień jesz normalnie, drugi prawie nic. Sprawdź efekty, opinie i to, co badania mówią o utracie mięśni po 50-tce.',
           image: './assets/hero-dieta-50-50.webp',
           url: 'dieta-50-50-po-piecdziesiatce.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Kolagen po 50-tce: czy suplementacja naprawdę działa? –',
-          excerpt: 'Kolagen zaczyna spadać już od 25. roku życia. Co mówią badania o suplementacji peptydów kolagenowych, jakie dawki działają i czy warto inwestować po 50-tce?',
-          image: './assets/kolagen-suplementacja-po-50-hero.webp',
-          url: 'kolagen-suplementacja-po-50.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

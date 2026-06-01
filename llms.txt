@@ -315,4 +315,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Jak zacząć się podciągać po 50. roku życia? Bezpieczny plan i 50 | FitPo50"
   section: "Ruch"
   summary: "Podciąganie po 50-tce? To jest możliwe! Sprawdź bezpieczny plan progresji, ćwiczenia pomocnicze i jak krok po kroku dojść do 50 podciągnięć na sesję."
+- url: https://fitpo50.pl/komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html
+  title: "Komórki zombie niszczą Twoją skórę po 50-tce — nauka wie już jak | FitPo50"
+  section: "Zdrowie"
+  summary: "Komórki zombie (senescencyjne) w skórze po 50-tce: jak niszczą kolagen, co odkryło badanie ABT-263 z 2024 roku i co możesz realnie zrobić już dziś."
 
