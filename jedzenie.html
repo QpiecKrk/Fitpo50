@@ -153,10 +153,10 @@
 </script>
 
 <!-- Fonts: Zodiak (display) + Work Sans (body) -->
-<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css?v=1.4">
@@ -753,7 +753,7 @@ main .container {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 360px;
+  min-height: 380px;
   box-shadow: 0 8px 24px rgba(31, 43, 69, 0.08);
 }
 
@@ -805,6 +805,10 @@ main .container {
   font-size: clamp(1.02rem, 1.35vw, 1.22rem);
   line-height: 1.15;
   color: #1f2b45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .read-card p {
@@ -812,6 +816,10 @@ main .container {
   color: #34425f;
   line-height: 1.34;
   font-size: 0.95rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .read-card__cta {
@@ -834,7 +842,7 @@ main .container {
   padding: 16px;
   color: #34415d;
   font-weight: 700;
-  min-height: 220px;
+  min-height: 380px;
 }
 
 @media (max-width: 980px) {
@@ -1154,9 +1162,51 @@ main .container {
           <p>Duża garść wiedzy podana prosto, konkretnie i po ludzku.</p>
         </div>
         <div class="reading-grid" id="readingRoomGrid" data-random-related-grid>
-          <article class="read-card read-card--loading">Ładowanie najnowszych artykułów...</article>
-          <article class="read-card read-card--loading">Ładowanie najnowszych artykułów...</article>
-          <article class="read-card read-card--loading">Ładowanie najnowszych artykułów...</article>
+          <article class="read-card">
+            <a class="read-card__media" href="nawodnienie-na-treningu-po-50.html" aria-label="Woda na siłowni po 50-tce">
+              <picture>
+                <source srcset="./assets/woda-na-silowni.avif" type="image/avif">
+                <source srcset="./assets/woda-na-silowni.webp" type="image/webp">
+                <img src="./assets/woda-na-silowni.webp" alt="Nawodnienie na treningu" loading="lazy" width="1080" height="603">
+              </picture>
+              <span class="read-card__badge read-card__badge--jedzenie">Jedzenie</span>
+            </a>
+            <div class="read-card__body">
+              <h4>Woda na siłowni po 50-tce</h4>
+              <p>Nawodnienie, które realnie poprawia wydolność i jakość treningu.</p>
+              <a class="read-card__cta" href="nawodnienie-na-treningu-po-50.html">Czytaj artykuł</a>
+            </div>
+          </article>
+          <article class="read-card">
+            <a class="read-card__media" href="dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html" aria-label="Dieta keto a cholesterol">
+              <picture>
+                <source srcset="./assets/keto-cholesterol-hero.avif" type="image/avif">
+                <source srcset="./assets/keto-cholesterol-hero.webp" type="image/webp">
+                <img src="./assets/keto-cholesterol-hero.webp" alt="Artykuł o diecie keto" loading="lazy" width="1080" height="607">
+              </picture>
+              <span class="read-card__badge read-card__badge--jedzenie">Jedzenie</span>
+            </a>
+            <div class="read-card__body">
+              <h4>Dieta keto a cholesterol: co naprawdę mówi nauka</h4>
+              <p>Rzetelne wnioski z badań bez uproszczeń i bez marketingowego szumu.</p>
+              <a class="read-card__cta" href="dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html">Czytaj artykuł</a>
+            </div>
+          </article>
+          <article class="read-card">
+            <a class="read-card__media" href="apob-apoa-badania-cholesterol.html" aria-label="ApoB i ApoA">
+              <picture>
+                <source srcset="./assets/apob-apoa-hero.avif" type="image/avif">
+                <source srcset="./assets/apob-apoa-hero.webp" type="image/webp">
+                <img src="./assets/apob-apoa-hero.webp" alt="Badania cholesterolowe" loading="lazy" width="1080" height="607">
+              </picture>
+              <span class="read-card__badge read-card__badge--zdrowie">Zdrowie</span>
+            </a>
+            <div class="read-card__body">
+              <h4>ApoB i ApoA: dwa badania ważniejsze niż sam LDL</h4>
+              <p>Nowoczesny obraz ryzyka sercowo-naczyniowego, którego nie daje sam lipidogram.</p>
+              <a class="read-card__cta" href="apob-apoa-badania-cholesterol.html">Czytaj artykuł</a>
+            </div>
+          </article>
         </div>
       </section>
     </div>
@@ -1167,102 +1217,6 @@ main .container {
 
 <script src="./dist/cmp.js?v=1.1" defer></script>
 <script src="./dist/app.js?v=1.2" defer></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const grid = document.querySelector('[data-random-related-grid]');
-    if (!grid) return;
-
-    const pool = [
-      {
-        href: 'dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html',
-        category: 'Jedzenie',
-        title: 'Dieta keto a cholesterol: co naprawdę mówi nauka',
-        desc: 'Rzetelne wnioski z badań bez uproszczeń i bez marketingowego szumu.',
-        img: 'keto-cholesterol-hero',
-        alt: 'Artykuł o diecie keto',
-        width: 1080,
-        height: 607
-      },
-      {
-        href: 'nawodnienie-na-treningu-po-50.html',
-        category: 'Jedzenie',
-        title: 'Woda na siłowni po 50-tce',
-        desc: 'Nawodnienie, które realnie poprawia wydolność i jakość treningu.',
-        img: 'woda-na-silowni',
-        alt: 'Nawodnienie na treningu',
-        width: 1080,
-        height: 603
-      },
-      {
-        href: 'wydolnosc-vo2max-starzenie-po-50.html',
-        category: 'Zdrowie',
-        title: 'Wydolność po 50: VO2 max mówi więcej niż obwód pasa',
-        desc: 'Jak prostym testem sprawdzić wydolność i poprawić ją bez ekstremalnych metod.',
-        img: 'vo2max-cardio-lake-couple',
-        alt: 'Spacer cardio nad wodą',
-        width: 1080,
-        height: 607
-      },
-      {
-        href: 'apob-apoa-badania-cholesterol.html',
-        category: 'Zdrowie',
-        title: 'ApoB i ApoA: dwa badania ważniejsze niż sam LDL',
-        desc: 'Nowoczesny obraz ryzyka sercowo-naczyniowego, którego nie daje sam lipidogram.',
-        img: 'apob-apoa-hero',
-        alt: 'Badania cholesterolowe',
-        width: 1080,
-        height: 607
-      },
-      {
-        href: 'healthspan-nie-lifespan-po-50.html',
-        category: 'Ciekawe',
-        title: 'Zapomnij o odchudzaniu. Zacznij myśleć o healthspan',
-        desc: 'Nie tylko długość życia, ale jakość i sprawność przez kolejne dekady.',
-        img: 'healthspan_zegar_hero',
-        alt: 'Healthspan po 50',
-        width: 1080,
-        height: 603
-      },
-      {
-        href: 'jak-zaczac-na-silowni-po-50.html',
-        category: 'Ruch',
-        title: 'Jak zacząć na siłowni po 50-tce?',
-        desc: 'Prosty plan startowy krok po kroku: technika, obciążenia i częstotliwość.',
-        img: 'poczatek-hero',
-        alt: 'Start na siłowni po 50',
-        width: 1080,
-        height: 603
-      }
-    ];
-
-    const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, 3);
-    const toBadgeClass = (category) => {
-      const value = category.toLowerCase();
-      if (value.includes('ruch')) return 'read-card__badge--ruch';
-      if (value.includes('jedzenie')) return 'read-card__badge--jedzenie';
-      if (value.includes('zdrowie')) return 'read-card__badge--zdrowie';
-      return 'read-card__badge--ciekawe';
-    };
-
-    grid.innerHTML = shuffled.map(item => `
-      <article class="read-card">
-        <a class="read-card__media" href="${item.href}" aria-label="${item.title}">
-          <picture>
-            <source srcset="${'./assets/' + item.img + '.avif'}" type="image/avif">
-            <source srcset="${'./assets/' + item.img + '.webp'}" type="image/webp">
-            <img src="${'./assets/' + item.img + '.webp'}" alt="${item.alt}" loading="lazy" width="${item.width}" height="${item.height}">
-          </picture>
-          <span class="read-card__badge ${toBadgeClass(item.category)}">${item.category}</span>
-        </a>
-        <div class="read-card__body">
-          <h4>${item.title}</h4>
-          <p>${item.desc}</p>
-          <a class="read-card__cta" href="${item.href}">Czytaj artykuł</a>
-        </div>
-      </article>
-    `).join('');
-  });
-</script>
 
 
 <nav class="bottom-nav" aria-label="Nawigacja dolna">

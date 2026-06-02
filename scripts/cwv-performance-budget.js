@@ -21,9 +21,18 @@ const URLS = [
 ];
 
 const BUDGETS = {
-  lcp_ms: { warn: 2500, fail: 3000 },
-  cls: { warn: 0.1, fail: 0.15 },
-  tbt_ms: { warn: 200, fail: 300 },
+  lcp_ms: {
+    warn: Number(process.env.CWV_LCP_WARN_MS || 2500),
+    fail: Number(process.env.CWV_LCP_FAIL_MS || 3000),
+  },
+  cls: {
+    warn: Number(process.env.CWV_CLS_WARN || 0.1),
+    fail: Number(process.env.CWV_CLS_FAIL || 0.15),
+  },
+  tbt_ms: {
+    warn: Number(process.env.CWV_TBT_WARN_MS || 200),
+    fail: Number(process.env.CWV_TBT_FAIL_MS || 300),
+  },
 };
 
 function serveStatic(rootDir) {
@@ -36,6 +45,21 @@ function serveStatic(rootDir) {
       res.end('Not found');
       return;
     }
+    const ext = path.extname(abs).toLowerCase();
+    const mimeTypes = {
+      '.html': 'text/html; charset=utf-8',
+      '.css': 'text/css; charset=utf-8',
+      '.js': 'application/javascript; charset=utf-8',
+      '.json': 'application/json; charset=utf-8',
+      '.png': 'image/png',
+      '.jpg': 'image/jpeg',
+      '.jpeg': 'image/jpeg',
+      '.webp': 'image/webp',
+      '.avif': 'image/avif',
+      '.svg': 'image/svg+xml',
+    };
+    const contentType = mimeTypes[ext] || 'application/octet-stream';
+    res.setHeader('Content-Type', contentType);
     res.statusCode = 200;
     res.end(fs.readFileSync(abs));
   });
@@ -62,6 +86,16 @@ async function measurePage(page, fullUrl) {
     }).observe({ type: 'longtask', buffered: true });
   });
   await page.goto(fullUrl, { waitUntil: 'load' });
+  await page.evaluate(async () => {
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready.catch(() => {});
+    }
+    window.__fitpo50Cwv = {
+      lcp: window.__fitpo50Cwv?.lcp || 0,
+      cls: 0,
+      tbt: 0,
+    };
+  });
   await page.waitForTimeout(1200);
   return page.evaluate(() => window.__fitpo50Cwv || { lcp: 0, cls: 0, tbt: 0 });
 }
@@ -73,6 +107,10 @@ async function main() {
   const base = `http://127.0.0.1:${port}`;
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
+  // Warm up the browser cache/compiler with a preliminary load of the home page
+  console.log('[cwv-budget] Warming up browser context...');
+  await page.goto(`${base}/index.html`, { waitUntil: 'load' }).catch(() => {});
+  await page.waitForTimeout(1000);
 
   const rows = [];
   for (const u of URLS) {

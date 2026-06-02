@@ -148,11 +148,23 @@ function main() {
     }
 
     const canonical = extractCanonical(html);
+    const isGoogleVerification = /^google[a-z0-9]+\.html$/i.test(relFile);
     if (!canonical) {
-      canonicalErrors.push(`${relFile}: brak canonical`);
+      if (!isGoogleVerification) {
+        canonicalErrors.push(`${relFile}: brak canonical`);
+      }
     } else {
-      const expected = `https://fitpo50.pl/${relFile}`;
-      if (canonical !== expected) canonicalErrors.push(`${relFile}: canonical=${canonical} (expected ${expected})`);
+      const isRedirect = /http-equiv="refresh"/i.test(html);
+      if (isRedirect) {
+        // Redirect pages can point to their target canonical
+      } else if (relFile === 'index.html') {
+        if (canonical !== 'https://fitpo50.pl/' && canonical !== 'https://fitpo50.pl/index.html') {
+          canonicalErrors.push(`${relFile}: canonical=${canonical} (expected https://fitpo50.pl/ or https://fitpo50.pl/index.html)`);
+        }
+      } else {
+        const expected = `https://fitpo50.pl/${relFile}`;
+        if (canonical !== expected) canonicalErrors.push(`${relFile}: canonical=${canonical} (expected ${expected})`);
+      }
     }
 
     const robots = extractRobots(html);

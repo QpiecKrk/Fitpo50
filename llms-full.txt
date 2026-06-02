@@ -2,7 +2,7 @@
 
 source: https://fitpo50.pl/
 language: pl-PL
-generated_at: 2026-06-01T19:09:06.008Z
+generated_at: 2026-06-02T10:00:43.307Z
 articles_count: 72
 
 ## Otyłość sarkopeniczna po 50: ukryty problem zdrowia
