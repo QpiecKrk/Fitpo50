@@ -319,4 +319,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Komórki zombie niszczą Twoją skórę po 50-tce — nauka wie już jak | FitPo50"
   section: "Zdrowie"
   summary: "Komórki zombie (senescencyjne) w skórze po 50-tce: jak niszczą kolagen, co odkryło badanie ABT-263 z 2024 roku i co możesz realnie zrobić już dziś."
-
+- url: https://fitpo50.pl/jak-pozbyc-sie-oponki-brzusznej-po-50.html
+  title: "Jak pozbyć się oponki brzusznej po 50-tce? | FitPo50"
+  section: "Zdrowie"
+  summary: "Jak pozbyć się oponki po 50? Poznaj dietę na tłuszcz trzewny, kortyzol i stan zapalny: produkty, post 16:8 oraz plan działania bez głodówek po 50-tce."
