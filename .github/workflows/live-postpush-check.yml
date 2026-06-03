@@ -8,10 +8,14 @@ on:
 jobs:
   live_check:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Run live smoke on production
+        env:
+          RETRIES: "1"
+          DELAY: "3"
+          TIMEOUT: "10"
         run: bash scripts/live-postpush-check.sh https://fitpo50.pl
-

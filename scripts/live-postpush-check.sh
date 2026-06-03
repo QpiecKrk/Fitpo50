@@ -5,6 +5,7 @@ BASE_URL="${1:-https://fitpo50.pl}"
 RETRIES="${RETRIES:-4}"
 DELAY="${DELAY:-2}"
 TIMEOUT="${TIMEOUT:-30}"
+CONNECT_TIMEOUT="${CONNECT_TIMEOUT:-8}"
 ALLOW_NET_FAILURES="${ALLOW_NET_FAILURES:-1}"
 # GitHub-hosted runners miewają problemy z trasą IPv6 do hostingu.
 # Domyślnie wymuszamy IPv4, ale można nadpisać envem: CURL_IP_MODE=""
@@ -13,6 +14,7 @@ CURL_IP_MODE="${CURL_IP_MODE:---ipv4}"
 SOFT_NET_ERROR=0
 
 echo "Live post-push check: ${BASE_URL}"
+echo "Live post-push config: retries=${RETRIES} delay=${DELAY}s timeout=${TIMEOUT}s connect-timeout=${CONNECT_TIMEOUT}s curl-ip-mode=${CURL_IP_MODE:-auto}"
 
 warn_net_error() {
   local url="$1"
@@ -25,8 +27,9 @@ check_200() {
   local url="$1"
   local code
   local curl_status=0
+  echo "[CHECK] ${url}"
   set +e
-  code="$(curl -sS $CURL_IP_MODE --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors -o /dev/null -w "%{http_code}" "$url")"
+  code="$(curl -sS $CURL_IP_MODE --connect-timeout "$CONNECT_TIMEOUT" --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors -o /dev/null -w "%{http_code}" "$url")"
   curl_status=$?
   set -e
   if [[ "$curl_status" -ne 0 ]]; then
@@ -53,8 +56,9 @@ check_contains() {
   local had_net_error="0"
   for attempt in $(seq 1 $((RETRIES + 1))); do
     local curl_status=0
+    echo "[CHECK] ${url} contains '${needle}' (attempt ${attempt}/$((RETRIES + 1)))"
     set +e
-    body="$(curl -sSL $CURL_IP_MODE --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors "$url")"
+    body="$(curl -sSL $CURL_IP_MODE --connect-timeout "$CONNECT_TIMEOUT" --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors "$url")"
     curl_status=$?
     set -e
     if [[ "$curl_status" -ne 0 ]]; then
@@ -93,7 +97,11 @@ check_contains "${BASE_URL}/ads.txt" "google.com, pub-4993821807276758, DIRECT"
 check_contains "${BASE_URL}/sitemap.xml" "https://fitpo50.pl/"
 check_contains "${BASE_URL}/porady.html" "data-article-item"
 
-node scripts/live-latest-article-check.js --base-url "${BASE_URL}"
+node scripts/live-latest-article-check.js \
+  --base-url "${BASE_URL}" \
+  --retries "${RETRIES}" \
+  --delay-ms "$((DELAY * 1000))" \
+  --timeout-ms "$((TIMEOUT * 1000))"
 
 if [[ "$SOFT_NET_ERROR" == "1" && "$ALLOW_NET_FAILURES" == "1" ]]; then
   echo "Live post-push check: SOFT-PASS (problemy sieci runnera)."
