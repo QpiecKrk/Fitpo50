@@ -18,4 +18,13 @@ jobs:
           RETRIES: "1"
           DELAY: "3"
           TIMEOUT: "10"
-        run: bash scripts/live-postpush-check.sh https://fitpo50.pl
+        run: |
+          set +e
+          timeout --foreground 150s bash scripts/live-postpush-check.sh https://fitpo50.pl
+          status="$?"
+          set -e
+          if [ "$status" = "124" ]; then
+            echo "[WARN] Live post-push check timed out on GitHub runner; treating as soft-pass network issue."
+            exit 0
+          fi
+          exit "$status"

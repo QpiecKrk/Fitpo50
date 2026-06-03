@@ -58,7 +58,7 @@ check_contains() {
     local curl_status=0
     echo "[CHECK] ${url} contains '${needle}' (attempt ${attempt}/$((RETRIES + 1)))"
     set +e
-    body="$(curl -sSL $CURL_IP_MODE --connect-timeout "$CONNECT_TIMEOUT" --max-time "$TIMEOUT" --retry "$RETRIES" --retry-delay "$DELAY" --retry-all-errors "$url")"
+    body="$(curl -sSL $CURL_IP_MODE --connect-timeout "$CONNECT_TIMEOUT" --max-time "$TIMEOUT" "$url")"
     curl_status=$?
     set -e
     if [[ "$curl_status" -ne 0 ]]; then
