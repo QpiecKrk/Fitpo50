@@ -323,3 +323,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Jak pozbyć się oponki brzusznej po 50-tce? | FitPo50"
   section: "Zdrowie"
   summary: "Jak pozbyć się oponki po 50? Poznaj dietę na tłuszcz trzewny, kortyzol i stan zapalny: produkty, post 16:8 oraz plan działania bez głodówek po 50-tce."
+- url: https://fitpo50.pl/dieta-przeciwzapalna-po-50-produkty-jadlospis.html
+  title: "Dieta przeciwzapalna po 50-tce: produkty i jadłospis | FitPo50"
+  section: "Jedzenie"
+  summary: "Co jeść po 50-tce, aby obniżyć stan zapalny? Sprawdź produkty z omega-3 i polifenolami oraz tygodniowy jadłospis przeciwzapalny oparty na badaniach."
+
