@@ -13,6 +13,7 @@ const STALE_DAYS = 180;
 function listArticleFiles() {
   return fs.readdirSync(ROOT)
     .filter((f) => f.endsWith('.html'))
+    .filter((f) => f !== 'article-template-bento.html')
     .filter((f) => fs.existsSync(path.join(ROOT, f)))
     .filter((f) => /<article\s+class="article-content">/i.test(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 }
@@ -176,4 +177,3 @@ function main() {
 }
 
 main();
-

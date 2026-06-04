@@ -1372,3 +1372,31 @@ Jesli artykul ma obrazy:
 
 - **Status wdrozenia 2026-06-01:**
   - Backlog Quick Answer wyczyszczony do `fail=0` (`fixed=74`) wedlug raportu `data/reports/quick-answer-backlog.json`.
+
+## Ustalenia operacyjne (2026-06-04) - GSC Priority Map + AI Visibility
+
+- Workflow `GSC` ma za kazdym razem generowac mape priorytetow dla wszystkich publicznych stron, nie tylko dla TOP kilku artykulow z raportu:
+  - komenda: `npm run gsc:priority-map`,
+  - raporty: `gsc-priority-map.md` i `gsc-priority-map.json`,
+  - domyslny katalog: `~/Downloads/gsc-auto-input`,
+  - zrodla danych: `sitemap.xml` + root HTML + `queries.csv` + `pages.csv` + `query-pages.csv`.
+- `gsc:auto` po tygodniowym raporcie CSV uruchamia tez `gsc-priority-map`, aby nowe artykuly bez danych GSC trafialy do kolejki `P1_NO_GSC_DATA_BUILD_DISCOVERY`.
+- Priorytetyzacja ma obejmowac:
+  - `P0_NEAR_PAGE_ONE` - URL-e z pozycja 4-20 i wyswietleniami; wzmacniamy linkami, snippetem, FAQ/AEO,
+  - `P1_GROWTH` - URL-e z pozycja 20-50; rozbudowa intencji i klastra linkow,
+  - `P1_NO_GSC_DATA_BUILD_DISCOVERY` - nowe/brak danych; linkowanie z klastrow i zgloszenie targetu + zrodel w GSC,
+  - `P2/P3` - utrzymanie i monitoring.
+- Raport musi wskazywac dla kazdego URL-a: fraze glowna, frazy wspierajace, intencje, sugerowane miejsca linkow, anchor i liste URL-i do zgloszenia w GSC po zmianie.
+- Badanie widocznosci AI jest czescia raportu:
+  - jesli istnieje `referrers.csv`, monitoruj wejscia z `chatgpt.com`, `gemini.google.com`, `perplexity.ai`, `claude.ai`, `copilot.microsoft.com`, `bing.com`,
+  - jesli istnieje `ai-visibility-checks.csv`, monitoruj reczne testy promptow: model, prompt, cytowany URL, wynik,
+  - przy braku danych oznacz `INSUFFICIENT_DATA`, bez zgadywania.
+- Jesli `GSC` lub `gsc:auto` zwroci `TOKEN_EXPIRED`, agent musi podac prosta instrukcje odswiezenia tokenu:
+  - otworz `https://developers.google.com/oauthplayground`,
+  - wlacz `Use your own OAuth credentials`,
+  - uzyj lokalnych `GSC_OAUTH_CLIENT_ID` i `GSC_OAUTH_CLIENT_SECRET` z `~/.fitpo50-gsc.env`,
+  - zakres: `https://www.googleapis.com/auth/webmasters.readonly`,
+  - wykonaj `Authorize APIs` i `Exchange authorization code for tokens`,
+  - podmien tylko `GSC_OAUTH_REFRESH_TOKEN` w `~/.fitpo50-gsc.env`,
+  - uruchom ponownie `npm run gsc:auto`,
+  - nie pros uzytkownika o wklejanie sekretow ani tokenow w rozmowie.

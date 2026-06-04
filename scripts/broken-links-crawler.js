@@ -120,6 +120,7 @@ function main() {
   const htmlFiles = htmlFilesAbs.map(relFromTarget);
   const htmlSet = new Set(htmlFiles);
   const incoming = new Map(htmlFiles.map((f) => [f, 0]));
+  const orphanExempt = new Set(ORPHAN_ALLOWLIST);
   const titleMap = new Map();
   const descMap = new Map();
 
@@ -149,6 +150,9 @@ function main() {
 
     const canonical = extractCanonical(html);
     const isGoogleVerification = /^google[a-z0-9]+\.html$/i.test(relFile);
+    if (isGoogleVerification || /http-equiv="refresh"/i.test(html) || /\bnoindex\b/i.test(extractRobots(html))) {
+      orphanExempt.add(relFile);
+    }
     if (!canonical) {
       if (!isGoogleVerification) {
         canonicalErrors.push(`${relFile}: brak canonical`);
@@ -198,7 +202,7 @@ function main() {
   dupTitles.forEach(([title, files]) => warnings.push(`duplicate <title>: "${title}" -> ${files.join(', ')}`));
   dupDescs.forEach(([desc, files]) => warnings.push(`duplicate meta description: "${desc}" -> ${files.join(', ')}`));
 
-  const orphans = htmlFiles.filter((f) => !ORPHAN_ALLOWLIST.has(f) && f !== 'index.html' && (incoming.get(f) || 0) === 0);
+  const orphans = htmlFiles.filter((f) => !orphanExempt.has(f) && f !== 'index.html' && (incoming.get(f) || 0) === 0);
   orphans.forEach((o) => warnings.push(`orphan page: ${o}`));
 
   if (broken.length) critical.push(...broken);

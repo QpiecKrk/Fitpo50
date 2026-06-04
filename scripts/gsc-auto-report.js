@@ -256,6 +256,26 @@ function haveAllThree(byType) {
   return hasQueries && hasPages && hasQueryPages;
 }
 
+function buildRefreshTokenInstructions() {
+  return [
+    'TOKEN_EXPIRED: token OAuth jest niewazny/wygasl.',
+    '',
+    'Jak odswiezyc GSC_OAUTH_REFRESH_TOKEN:',
+    '1) Otworz Google OAuth Playground: https://developers.google.com/oauthplayground',
+    '2) Kliknij ikone kola zebatego i wlacz "Use your own OAuth credentials".',
+    '3) Wklej GSC_OAUTH_CLIENT_ID oraz GSC_OAUTH_CLIENT_SECRET z lokalnego pliku ~/.fitpo50-gsc.env.',
+    '4) W polu zakresu wpisz: https://www.googleapis.com/auth/webmasters.readonly',
+    '5) Kliknij "Authorize APIs", zaloguj sie na konto z dostepem do Search Console i zaakceptuj zgode.',
+    '6) Kliknij "Exchange authorization code for tokens".',
+    '7) Skopiuj nowy refresh_token.',
+    '8) Otworz ~/.fitpo50-gsc.env i podmien tylko linie GSC_OAUTH_REFRESH_TOKEN na nowa wartosc.',
+    '9) Uruchom ponownie: npm run gsc:auto',
+    '',
+    'Uwaga: nie wklejaj tokenu w rozmowie z agentem. Trzymaj go tylko lokalnie w ~/.fitpo50-gsc.env.',
+    'Jesli OAuth Playground odrzuci klienta, w Google Cloud Console dodaj redirect URI: https://developers.google.com/oauthplayground',
+  ].join('\n');
+}
+
 function tryGenerateCsvFromApi(workDir) {
   const outputJson = path.join(workDir, 'gsc-weekly-report-api.json');
   const outputMd = path.join(workDir, 'gsc-weekly-report-api.md');
@@ -292,7 +312,7 @@ function tryGenerateCsvFromApi(workDir) {
       if (err.includes('invalid_grant') || err.includes('token has been expired') || err.includes('token has been expired or revoked')) {
         return {
           ok: false,
-          reason: 'TOKEN_EXPIRED: token OAuth jest niewazny/wygasl. Odnow GSC_OAUTH_REFRESH_TOKEN i uruchom ponownie `npm run gsc:auto`.',
+          reason: buildRefreshTokenInstructions(),
         };
       }
       return {
@@ -416,6 +436,17 @@ function runWeeklyReport(inputDir, workDir) {
   }
 }
 
+function runPriorityMap(inputDir, workDir) {
+  const res = run(
+    'node',
+    ['scripts/gsc-priority-map.js', '--input-dir', inputDir, '--output-dir', workDir],
+    { stdio: 'inherit' },
+  );
+  if (res.status !== 0) {
+    throw new Error('gsc-priority-map failed.');
+  }
+}
+
 async function main() {
   loadLocalEnvFromHome();
   const args = parseArgs(process.argv.slice(2));
@@ -428,6 +459,7 @@ async function main() {
     if (apiRes.ok) {
       console.log('[GSC-AUTO] Źródło: GSC API -> ~/Downloads/gsc-auto-input');
       runWeeklyReport(inputDir, inputDir);
+      runPriorityMap(inputDir, inputDir);
       return;
     }
     console.log(`[GSC-AUTO] GSC API pominięte: ${apiRes.reason}`);
@@ -474,6 +506,7 @@ async function main() {
     }
 
     runWeeklyReport(inputDir, inputDir);
+    runPriorityMap(inputDir, inputDir);
     return;
   } catch (freshErr) {
     const inputDir = path.resolve(args.workDir);
