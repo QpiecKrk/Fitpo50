@@ -1387,6 +1387,39 @@ Jesli artykul ma obrazy:
   - `P1_NO_GSC_DATA_BUILD_DISCOVERY` - nowe/brak danych; linkowanie z klastrow i zgloszenie targetu + zrodel w GSC,
   - `P2/P3` - utrzymanie i monitoring.
 - Raport musi wskazywac dla kazdego URL-a: fraze glowna, frazy wspierajace, intencje, sugerowane miejsca linkow, anchor i liste URL-i do zgloszenia w GSC po zmianie.
+- Raport `gsc-priority-map` ma zawierac pelne portfolio, a nie tylko TOP 20:
+  - `Full Coverage Table` - wszystkie publiczne URL-e z sitemap/root HTML,
+  - `All-Keyword Registry` - pelna lista query z GSC dla kazdego URL-a,
+  - `Dormant Articles` - URL-e bez danych GSC,
+  - `Low Visibility Articles` - URL-e z pozycjami long-tail/slaba widocznoscia,
+  - `Leaders / Winners` - URL-e z kliknieciami lub bardzo dobra pozycja,
+  - `Refresh Impact` - `dateModified`, baseline GSC i plan kontroli 7/14/28 dni,
+  - `Editorial Decision` - decyzja dla kazdego URL-a: promowac, odswiezyc i linkowac, zbudowac widocznosc, linkowac, monitorowac albo support.
+- Raport musi wyciagac wnioski z obecnego i poprzedniego okresu GSC:
+  - `gsc:auto` zapisuje obecne i poprzednie dane dla `queries`, `pages` oraz `query-pages` jako CSV w `~/Downloads/gsc-auto-input`,
+  - `Performance Delta 90d vs Previous 90d` porownuje obecne 90 dni z poprzednimi 90 dniami,
+  - wnioski operacyjne: `WINNER_SCALE`, `DECLINING_REFRESH`, `CTR_DROP`, `POSITION_GAIN_NO_CLICKS`, `NEW_VISIBILITY`, `DORMANT`, `STABLE_MONITOR`, `NO_PREVIOUS_URL_DATA`,
+  - dla kazdego URL-a raport pokazuje zmiany klikniec, wyswietlen, CTR, pozycji oraz najmocniejsze zmiany query.
+- Raport musi wskazywac miejsca promocji adresow po zmianach:
+  - `Google Search Console` - URL Inspection dla targetu i stron zrodlowych, z ktorych dodano linki,
+  - `Internal links` - kontekstowe linki z artykulow-klastrow, bez spamowania listingow,
+  - `Sitemap / deploy` - URL w sitemap.xml oraz aktualne `dateModified` po wdrozeniu,
+  - `llms.txt / llms-full.txt` - obecnosc tresci dla crawlerow AI i systemow AIO,
+  - `IndexNow / Bing` - dla nowych, dormant lub no-data URL-i, jesli konfiguracja jest aktywna.
+- Nad mapa priorytetow dziala `SEO -> AEO -> GEO -> AIO Command Center`:
+  - komenda: `npm run seo:aio:machine`,
+  - `gsc:auto` uruchamia ja automatycznie po `gsc-priority-map`,
+  - raporty: `seo-aio-command-center.md/json`, `gsc-change-queue.json`, `gsc-submit-queue.txt`,
+  - raport ma tworzyc rozlaczne fale pracy: szybkie wejscie na pierwsza strone, discovery dla nowych/usypionych URL-i, refresh GEO/AIO, skalowanie liderow i strony wspierajace,
+  - dla kazdej karty ma byc: score SEO/AEO/GEO/AIO, lista zadan redakcyjnych, sugerowane linki zrodlowe, kolejka GSC, komendy walidacji i plan pomiaru 7/14/28 dni,
+  - strony wspierajace (`index`, kategorie, `porady`, `polityka-prywatnosci`, `o-mnie`, `dziennik`, `search`) nie moga dostawac sztucznych zadan FAQ/GEO jak artykuly; ich rola to linkowanie, CTR i dystrybucja mocy do artykulow.
+- Po `GSC` dziala tez autopilot wdrozeniowy fal:
+  - komenda propozycji: `npm run seo:aio:apply-wave -- --wave 1 --limit 5`,
+  - `gsc:auto` uruchamia propozycje fali 1 automatycznie po Command Center,
+  - raporty: `seo-aio-wave-proposal.md/json` i `seo-aio-wave-gsc-submit.txt`,
+  - domyslnie autopilot nie edytuje artykulow; status ma byc `AWAITING_USER_APPROVAL`,
+  - wdrozenie wymaga osobnej, jawnej zgody i komendy z potwierdzeniem: `--apply true --mode safe-links --confirm APPLY_WAVE`,
+  - tryb `safe-links` moze dodawac tylko linki kontekstowe z raportu oraz aktualizowac `dateModified`; wieksze zmiany tresci, zrodel, FAQ i claimow medycznych wymagaja osobnej decyzji redakcyjnej.
 - Badanie widocznosci AI jest czescia raportu:
   - jesli istnieje `referrers.csv`, monitoruj wejscia z `chatgpt.com`, `gemini.google.com`, `perplexity.ai`, `claude.ai`, `copilot.microsoft.com`, `bing.com`,
   - jesli istnieje `ai-visibility-checks.csv`, monitoruj reczne testy promptow: model, prompt, cytowany URL, wynik,
@@ -1400,3 +1433,24 @@ Jesli artykul ma obrazy:
   - podmien tylko `GSC_OAUTH_REFRESH_TOKEN` w `~/.fitpo50-gsc.env`,
   - uruchom ponownie `npm run gsc:auto`,
   - nie pros uzytkownika o wklejanie sekretow ani tokenow w rozmowie.
+
+## Ustalenia operacyjne (2026-06-04) - Quality Gates SEO -> AEO -> GEO -> AIO
+
+- **Cel bramek:** nowe artykuly i duze fale zmian maja wzmacniac kolejnosc `SEO -> AEO -> GEO -> AIO`, bez obnizania standardu redakcyjnego FitPo50.
+- **Nowe artykuly - twarde wymagania (`FAIL` przy naruszeniu):**
+  - `Keyword Mapping Gate`: kazdy nowy artykul musi miec zdefiniowana fraze glowna, 3-8 fraz wspierajacych oraz intencje (`how-to`, `normy`, `bezpieczenstwo`, `objawy`, `definicja`, `porownanie` albo `informacyjna`).
+  - `AEO Answer Gate`: `quick_answer` musi odpowiadac na realna intencje uzytkownika, zawierac konkret/warunek/liczbe zgodnie z Quick Answer v2 i nie moze byc generyczna.
+  - `FAQ Data Gate`: FAQ musi wynikac z realnych pytan (`faq_research`, GSC, PAA/autocomplete albo udokumentowane manual research); pytania generyczne lub duplikaty blokuja publikacje.
+  - `Internal Link Intent Gate`: linki kontekstowe musza byc semantycznie zgodne z tematem artykulu i anchor ma opisywac intencje, nie tylko zawierac slowo kluczowe.
+  - `GEO Citation Gate`: zrodla/citation musza wspierac konkretne claimy, szczegolnie medyczne/liczbowe; lista zrodel nie moze byc dekoracyjna.
+  - `AIO Readiness Gate`: artykul musi miec komplet pod AI extraction: `BlogPosting`, `FAQPage` (jesli FAQ istnieje), `BreadcrumbList`, `speakable`, aktualne `llms-full.txt`, czytelny `quick_answer` i E-E-A-T autora.
+  - `Refresh Metadata Gate`: kazda istotna zmiana tresci wymaga aktualizacji `article:modified_time` i `BlogPosting.dateModified` w source oraz `_site`.
+- **Duze fale GSC - wymagania operacyjne:**
+  - Fala moze obejmowac wiele stron naraz, ale musi byc klastrowa: wspolny temat, wspolna intencja albo wspolny problem z GSC.
+  - Przed wdrozeniem fali agent ma przeczytac `gsc-priority-map.md/json` i wybrac targety + zrodla linkow z danych, nie z intuicji.
+  - Po wdrozeniu fali obowiazkowe sa: walidatory zmienionych artykulow, `npm run seo:crawl`, `npm run assets:mirror:sync`, `npm run predeploy:check`, aktualizacja `dateModified` i lista URL-i do GSC.
+  - Po kazdej fali agent ma zapisac/odswiezyc `gsc-priority-map` i wskazac plan kontroli efektow po 7/14/28 dniach.
+- **Stare artykuly / legacy - nie blokujemy calego deployu:**
+  - Braki w starych artykulach (np. brak pelnych danych GSC, slabsze FAQ, historyczne warningi social image/title) traktuj jako `WARN/ACTION`, chyba ze naruszaja twarde gate techniczne, medyczne lub kontrakt publikacyjny.
+  - Artykuly bez danych GSC nie sa pomijane: trafiaja do `P1_NO_GSC_DATA_BUILD_DISCOVERY` i dostaja propozycje slow kluczowych, linkowania oraz decyzje redakcyjna.
+- **Zasada decyzyjna dla agentow:** raport nie jest artefaktem koncowym. Po `GSC` agent ma przejsc od raportu do priorytetow, planu fali, wdrozenia, walidacji, listy URL-i do GSC i planu pomiaru efektow.

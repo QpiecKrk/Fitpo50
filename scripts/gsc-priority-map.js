@@ -211,16 +211,28 @@ function readGsc(inputDir) {
     ? path.join(inputDir, 'query-pages.csv')
     : path.join(inputDir, 'query_pages.csv');
   const queryPages = readCsvIfExists(queryPagesFile).map(mapGscRow);
+  const previousPages = readCsvIfExists(path.join(inputDir, 'previous-pages.csv')).map(mapGscRow);
+  const previousQueries = readCsvIfExists(path.join(inputDir, 'previous-queries.csv')).map(mapGscRow);
+  const previousQueryPagesFile = fs.existsSync(path.join(inputDir, 'previous-query-pages.csv'))
+    ? path.join(inputDir, 'previous-query-pages.csv')
+    : path.join(inputDir, 'previous_query_pages.csv');
+  const previousQueryPages = readCsvIfExists(previousQueryPagesFile).map(mapGscRow);
   return {
     status: pages.length && queries.length && queryPages.length ? 'ok' : 'INSUFFICIENT_DATA',
     files: {
       pages: path.join(inputDir, 'pages.csv'),
       queries: path.join(inputDir, 'queries.csv'),
       query_pages: queryPagesFile,
+      previous_pages: path.join(inputDir, 'previous-pages.csv'),
+      previous_queries: path.join(inputDir, 'previous-queries.csv'),
+      previous_query_pages: previousQueryPagesFile,
     },
     pages,
     queries,
     queryPages,
+    previousPages,
+    previousQueries,
+    previousQueryPages,
   };
 }
 
@@ -438,7 +450,25 @@ function aggregateGscByPage(gsc) {
     queryByUrl.get(row.page).push(row);
   }
 
-  return { byUrl, queryByUrl };
+  const previousByUrl = new Map();
+  for (const row of gsc.previousPages || []) {
+    if (!row.page) continue;
+    previousByUrl.set(row.page, {
+      clicks: row.clicks,
+      impressions: row.impressions,
+      ctr: row.ctr,
+      position: row.position,
+    });
+  }
+
+  const previousQueryByUrl = new Map();
+  for (const row of gsc.previousQueryPages || []) {
+    if (!row.page || !row.query) continue;
+    if (!previousQueryByUrl.has(row.page)) previousQueryByUrl.set(row.page, []);
+    previousQueryByUrl.get(row.page).push(row);
+  }
+
+  return { byUrl, queryByUrl, previousByUrl, previousQueryByUrl };
 }
 
 function clamp(value, min, max) {
@@ -500,6 +530,19 @@ function isUsefulQuery(query) {
 }
 
 function buildKeywordPlan(page, queryRows) {
+  const allQueries = [...queryRows]
+    .filter((row) => row.query)
+    .sort((a, b) => Number(b.impressions || 0) - Number(a.impressions || 0) || Number(a.position || 999) - Number(b.position || 999))
+    .map((row) => ({
+      query: cleanQuery(row.query),
+      raw_query: String(row.query || '').trim(),
+      impressions: Math.round(row.impressions),
+      clicks: Math.round(row.clicks),
+      ctr: Number(row.ctr.toFixed(2)),
+      position: Number(row.position.toFixed(2)),
+      intent: inferIntent(row.query),
+      useful_for_planning: isUsefulQuery(row.query),
+    }));
   const rows = [...queryRows]
     .filter((row) => isUsefulQuery(row.query))
     .filter((row) => row.query)
@@ -511,6 +554,7 @@ function buildKeywordPlan(page, queryRows) {
     primary,
     secondary,
     intents,
+    all_queries: allQueries,
     evidence: rows.slice(0, 8).map((row) => ({
       query: cleanQuery(row.query),
       impressions: Math.round(row.impressions),
@@ -595,6 +639,179 @@ function buildActionPlan(priority, page, keywordPlan, sources) {
   return unique(actions).slice(0, 8);
 }
 
+function visibilitySegment(metrics, page) {
+  const clicks = Number(metrics?.clicks || 0);
+  const impressions = Number(metrics?.impressions || 0);
+  const position = Number(metrics?.position || 0);
+  if (page.type === 'core' || page.type === 'redirect') return 'SITE_SUPPORT';
+  if (!impressions) return 'DORMANT_ZERO_VISIBILITY';
+  if (clicks > 0 || (position > 0 && position <= 3)) return 'LEADER_WINNER';
+  if (position > 0 && position <= 10) return 'CTR_GAP_TOP10';
+  if (position > 10 && position <= 90) return 'LOW_VISIBILITY_LONG_TAIL';
+  return 'LOW_DATA_MONITOR';
+}
+
+function editorialDecision(priority, segment, page, keywordPlan) {
+  if (page.type === 'core') return 'support';
+  if (page.type === 'redirect') return 'monitor';
+  if (priority === 'P0_NEAR_PAGE_ONE') return 'promować';
+  if (priority === 'P1_GROWTH') return 'odświeżyć_i_linkować';
+  if (priority === 'P1_NO_GSC_DATA_BUILD_DISCOVERY') return 'zbudować_widoczność';
+  if (priority === 'P2_INTERNAL_LINKING') return 'linkować';
+  if (segment === 'LEADER_WINNER') return 'monitorować_i_skalować';
+  if (!keywordPlan.all_queries.length) return 'sprawdzić_indeksację';
+  return 'monitorować';
+}
+
+function parseDate(input) {
+  const date = new Date(String(input || '').trim());
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function addDays(date, days) {
+  const next = new Date(date.getTime());
+  next.setUTCDate(next.getUTCDate() + days);
+  return next.toISOString().slice(0, 10);
+}
+
+function buildRefreshImpact(page, metrics, generatedAt) {
+  const generatedDate = parseDate(generatedAt) || new Date();
+  const modifiedDate = parseDate(page.date_modified);
+  const ageDays = modifiedDate ? Math.max(0, Math.floor((generatedDate.getTime() - modifiedDate.getTime()) / 86400000)) : null;
+  return {
+    date_modified: page.date_modified || 'MISSING',
+    age_days: ageDays,
+    status: modifiedDate ? 'BASELINE_ONLY_COMPARE_7_14_28' : 'MISSING_DATE_MODIFIED',
+    baseline: {
+      clicks: Math.round(Number(metrics?.clicks || 0)),
+      impressions: Math.round(Number(metrics?.impressions || 0)),
+      ctr: Number(Number(metrics?.ctr || 0).toFixed(2)),
+      position: Number(Number(metrics?.position || 0).toFixed(2)),
+    },
+    checkpoints: modifiedDate ? {
+      day_7: addDays(modifiedDate, 7),
+      day_14: addDays(modifiedDate, 14),
+      day_28: addDays(modifiedDate, 28),
+    } : null,
+    measurement: 'Porównaj query, CTR, pozycję i kliknięcia dla URL-a po 7/14/28 dniach od dateModified.',
+  };
+}
+
+function percentDelta(current, previous) {
+  const c = Number(current || 0);
+  const p = Number(previous || 0);
+  if (!p && !c) return 0;
+  if (!p && c) return 100;
+  return Number((((c - p) / p) * 100).toFixed(1));
+}
+
+function signedDelta(current, previous) {
+  return Number((Number(current || 0) - Number(previous || 0)).toFixed(2));
+}
+
+function buildPerformanceDelta(current, previous, currentQueries, previousQueries) {
+  const cur = current || { clicks: 0, impressions: 0, ctr: 0, position: 0 };
+  const prev = previous || { clicks: 0, impressions: 0, ctr: 0, position: 0 };
+  const positionDelta = signedDelta(cur.position, prev.position);
+  const positionImprovement = prev.position > 0 && cur.position > 0 ? Number((prev.position - cur.position).toFixed(2)) : 0;
+  const queryPrev = new Map((previousQueries || []).map((row) => [String(row.query || '').toLowerCase(), row]));
+  const queryChanges = (currentQueries || [])
+    .filter((row) => row.query)
+    .map((row) => {
+      const prevRow = queryPrev.get(String(row.query || '').toLowerCase()) || {};
+      return {
+        query: cleanQuery(row.query),
+        current: {
+          clicks: Math.round(row.clicks),
+          impressions: Math.round(row.impressions),
+          ctr: Number(row.ctr.toFixed(2)),
+          position: Number(row.position.toFixed(2)),
+        },
+        previous: {
+          clicks: Math.round(Number(prevRow.clicks || 0)),
+          impressions: Math.round(Number(prevRow.impressions || 0)),
+          ctr: Number(Number(prevRow.ctr || 0).toFixed(2)),
+          position: Number(Number(prevRow.position || 0).toFixed(2)),
+        },
+        impressions_delta: signedDelta(row.impressions, prevRow.impressions),
+        impressions_delta_pct: percentDelta(row.impressions, prevRow.impressions),
+        clicks_delta: signedDelta(row.clicks, prevRow.clicks),
+        position_improvement: prevRow.position > 0 && row.position > 0 ? Number((prevRow.position - row.position).toFixed(2)) : 0,
+      };
+    })
+    .sort((a, b) => Math.abs(b.impressions_delta) - Math.abs(a.impressions_delta))
+    .slice(0, 20);
+
+  let conclusion = 'STABLE_MONITOR';
+  if (!prev.impressions && cur.impressions > 0) conclusion = 'NEW_VISIBILITY';
+  else if (cur.clicks > prev.clicks && cur.impressions >= prev.impressions) conclusion = 'WINNER_SCALE';
+  else if (cur.impressions > prev.impressions && cur.clicks === 0) conclusion = 'POSITION_GAIN_NO_CLICKS';
+  else if (cur.ctr < prev.ctr && cur.impressions >= prev.impressions && prev.ctr > 0) conclusion = 'CTR_DROP';
+  else if (cur.impressions < prev.impressions * 0.7 && prev.impressions >= 10) conclusion = 'DECLINING_REFRESH';
+  else if (positionImprovement >= 3 && cur.clicks === 0) conclusion = 'POSITION_GAIN_NO_CLICKS';
+  else if (!cur.impressions && !prev.impressions) conclusion = 'DORMANT';
+
+  return {
+    status: previous ? 'ok' : 'NO_PREVIOUS_URL_DATA',
+    conclusion,
+    current_90d: {
+      clicks: Math.round(cur.clicks),
+      impressions: Math.round(cur.impressions),
+      ctr: Number(Number(cur.ctr || 0).toFixed(2)),
+      position: Number(Number(cur.position || 0).toFixed(2)),
+    },
+    previous_90d: {
+      clicks: Math.round(prev.clicks),
+      impressions: Math.round(prev.impressions),
+      ctr: Number(Number(prev.ctr || 0).toFixed(2)),
+      position: Number(Number(prev.position || 0).toFixed(2)),
+    },
+    delta: {
+      clicks: signedDelta(cur.clicks, prev.clicks),
+      impressions: signedDelta(cur.impressions, prev.impressions),
+      impressions_pct: percentDelta(cur.impressions, prev.impressions),
+      ctr_pp: signedDelta(cur.ctr, prev.ctr),
+      position_delta: positionDelta,
+      position_improvement: positionImprovement,
+    },
+    query_changes: queryChanges,
+  };
+}
+
+function buildPromotionPlaces(item, baseUrl) {
+  const sourceUrls = item.topology.suggested_sources.slice(0, 5).map((source) => pathToUrl(source.from, baseUrl));
+  const channels = [
+    {
+      channel: 'Google Search Console',
+      action: 'URL Inspection -> Poproś o zindeksowanie targetu i stron źródłowych po zmianach.',
+      urls: unique([item.url, ...sourceUrls]),
+    },
+    {
+      channel: 'Internal links',
+      action: 'Dodaj linki kontekstowe z artykułów-klastrów, nie z losowych listingów.',
+      urls: sourceUrls,
+    },
+    {
+      channel: 'Sitemap / deploy',
+      action: 'Upewnij się, że URL jest w sitemap.xml i został wdrożony z aktualnym dateModified.',
+      urls: [item.url],
+    },
+    {
+      channel: 'llms.txt / llms-full.txt',
+      action: 'Po eksporcie sprawdź, czy treść jest obecna w llms-full.txt dla crawlerów AI.',
+      urls: [item.url],
+    },
+  ];
+  if (item.priority === 'P1_NO_GSC_DATA_BUILD_DISCOVERY' || item.visibility_segment === 'DORMANT_ZERO_VISIBILITY') {
+    channels.push({
+      channel: 'IndexNow / Bing',
+      action: 'Jeśli konfiguracja IndexNow jest aktywna, pinguj nowy lub odświeżony URL po deployu.',
+      urls: [item.url],
+    });
+  }
+  return channels;
+}
+
 function readAiVisibility(inputDir) {
   const referrersPath = path.join(inputDir, 'referrers.csv');
   const checksPath = path.join(inputDir, 'ai-visibility-checks.csv');
@@ -642,8 +859,8 @@ function readAiVisibility(inputDir) {
   };
 }
 
-function buildPriorityMap(pages, gsc) {
-  const { byUrl, queryByUrl } = aggregateGscByPage(gsc);
+function buildPriorityMap(pages, gsc, generatedAt, baseUrl) {
+  const { byUrl, queryByUrl, previousByUrl, previousQueryByUrl } = aggregateGscByPage(gsc);
   return pages.map((page) => {
     const metrics = byUrl.get(page.url) || {
       clicks: 0,
@@ -652,9 +869,12 @@ function buildPriorityMap(pages, gsc) {
       position: 0,
     };
     const queryRows = queryByUrl.get(page.url) || [];
+    const previousMetrics = previousByUrl.get(page.url) || null;
+    const previousQueryRows = previousQueryByUrl.get(page.url) || [];
     const keywordPlan = buildKeywordPlan(page, queryRows);
     const score = opportunityScore(metrics, page);
     const priority = classifyPriority(metrics, page, score);
+    const segment = visibilitySegment(metrics, page);
     const sourceSuggestions = suggestSources(page, pages);
     const aiReadinessScore = Math.round(([
       page.has_quick_answer,
@@ -665,8 +885,10 @@ function buildPriorityMap(pages, gsc) {
       page.inbound_links >= 4,
     ].filter(Boolean).length / 6) * 100);
 
-    return {
+    const item = {
       priority,
+      visibility_segment: segment,
+      editorial_decision: editorialDecision(priority, segment, page, keywordPlan),
       opportunity_score: score,
       url: page.url,
       path: page.path,
@@ -689,6 +911,9 @@ function buildPriorityMap(pages, gsc) {
         suggested_sources: sourceSuggestions,
       },
       keywords: keywordPlan,
+      all_keyword_registry: keywordPlan.all_queries,
+      refresh_impact: buildRefreshImpact(page, metrics, generatedAt),
+      performance_delta: buildPerformanceDelta(metrics, previousMetrics, queryRows, previousQueryRows),
       aeo_geo_ai: {
         ai_readiness_score: aiReadinessScore,
         has_quick_answer: page.has_quick_answer,
@@ -699,8 +924,11 @@ function buildPriorityMap(pages, gsc) {
         citation_count: page.citation_count,
       },
       action_plan: buildActionPlan(priority, page, keywordPlan, sourceSuggestions),
-      gsc_submit_after_change: [page.url, ...sourceSuggestions.slice(0, 3).map((item) => pathToUrl(item.from, SITE_ORIGIN))],
+      gsc_submit_after_change: [page.url, ...sourceSuggestions.slice(0, 3).map((item) => pathToUrl(item.from, baseUrl))],
+      promotion_places: [],
     };
+    item.promotion_places = buildPromotionPlaces(item, baseUrl);
+    return item;
   }).sort((a, b) => {
     const rank = {
       P0_NEAR_PAGE_ONE: 0,
@@ -716,6 +944,57 @@ function buildPriorityMap(pages, gsc) {
   });
 }
 
+function buildPortfolioSections(priorityMap) {
+  return {
+    leaders_winners: priorityMap.filter((item) => item.visibility_segment === 'LEADER_WINNER'),
+    ctr_gap_top10: priorityMap.filter((item) => item.visibility_segment === 'CTR_GAP_TOP10'),
+    low_visibility_articles: priorityMap.filter((item) => item.visibility_segment === 'LOW_VISIBILITY_LONG_TAIL'),
+    dormant_articles: priorityMap.filter((item) => item.visibility_segment === 'DORMANT_ZERO_VISIBILITY'),
+    full_coverage_table: priorityMap.map((item) => ({
+      path: item.path,
+      url: item.url,
+      priority: item.priority,
+      segment: item.visibility_segment,
+      decision: item.editorial_decision,
+      primary_keyword: item.keywords.primary,
+      supporting_keywords: item.keywords.secondary,
+      query_count: item.all_keyword_registry.length,
+      clicks: item.gsc.clicks,
+      impressions: item.gsc.impressions,
+      ctr: item.gsc.ctr,
+      position: item.gsc.position,
+      performance_conclusion: item.performance_delta.conclusion,
+      impressions_delta: item.performance_delta.delta.impressions,
+      clicks_delta: item.performance_delta.delta.clicks,
+      ctr_delta_pp: item.performance_delta.delta.ctr_pp,
+      position_improvement: item.performance_delta.delta.position_improvement,
+      date_modified: item.date_modified,
+      refresh_status: item.refresh_impact.status,
+    })),
+    all_keyword_registry: priorityMap.map((item) => ({
+      path: item.path,
+      url: item.url,
+      primary_keyword: item.keywords.primary,
+      queries: item.all_keyword_registry,
+    })),
+    performance_delta: {
+      winners_scale: priorityMap.filter((item) => item.performance_delta.conclusion === 'WINNER_SCALE'),
+      declining_refresh: priorityMap.filter((item) => item.performance_delta.conclusion === 'DECLINING_REFRESH'),
+      ctr_drop: priorityMap.filter((item) => item.performance_delta.conclusion === 'CTR_DROP'),
+      position_gain_no_clicks: priorityMap.filter((item) => item.performance_delta.conclusion === 'POSITION_GAIN_NO_CLICKS'),
+      new_visibility: priorityMap.filter((item) => item.performance_delta.conclusion === 'NEW_VISIBILITY'),
+      dormant: priorityMap.filter((item) => item.performance_delta.conclusion === 'DORMANT'),
+    },
+    promotion_places: priorityMap.map((item) => ({
+      path: item.path,
+      url: item.url,
+      priority: item.priority,
+      decision: item.editorial_decision,
+      channels: item.promotion_places,
+    })),
+  };
+}
+
 function groupCounts(items, key) {
   const out = {};
   for (const item of items) {
@@ -723,6 +1002,43 @@ function groupCounts(items, key) {
     out[value] = (out[value] || 0) + 1;
   }
   return out;
+}
+
+function formatSigned(value) {
+  const number = Number(value || 0);
+  if (number > 0) return `+${number}`;
+  return String(number);
+}
+
+function pushDeltaList(lines, title, items, limit = 12) {
+  lines.push(`### ${title}`);
+  if (!items.length) {
+    lines.push('- Brak URL-i w tej grupie.');
+    return;
+  }
+  items.slice(0, limit).forEach((item) => {
+    const delta = item.performance_delta.delta;
+    lines.push(`- ${item.url} — ${item.performance_delta.conclusion}; impr ${item.gsc.impressions} (${formatSigned(delta.impressions)}), clicks ${item.gsc.clicks} (${formatSigned(delta.clicks)}), CTR ${item.gsc.ctr}% (${formatSigned(delta.ctr_pp)} pp), pos ${item.gsc.position}, poprawa pozycji ${formatSigned(delta.position_improvement)}; decyzja: ${item.editorial_decision}`);
+    const query = item.performance_delta.query_changes.find((row) => row.query);
+    if (query) {
+      lines.push(`  - najmocniejsza zmiana query: "${query.query}" — impr ${query.current.impressions} (${formatSigned(query.impressions_delta)}), clicks ${query.current.clicks} (${formatSigned(query.clicks_delta)}), pos ${query.current.position}`);
+    }
+  });
+}
+
+function pushPromotionList(lines, items, limit = 20) {
+  if (!items.length) {
+    lines.push('- Brak URL-i do promocji.');
+    return;
+  }
+  items.slice(0, limit).forEach((item) => {
+    const channelNames = item.promotion_places.map((channel) => channel.channel).join(' | ');
+    lines.push(`- ${item.url} — ${item.priority}, ${item.editorial_decision}; kanały: ${channelNames}`);
+    item.promotion_places.slice(0, 3).forEach((channel) => {
+      const urls = channel.urls.slice(0, 4).join(', ');
+      lines.push(`  - ${channel.channel}: ${channel.action} ${urls ? `URL-e: ${urls}` : ''}`);
+    });
+  });
 }
 
 function writeOutputs(report, outputDir) {
@@ -746,7 +1062,7 @@ function writeOutputs(report, outputDir) {
   lines.push('## TOP 20 — co pchać w pierwszej kolejności');
   report.priority_map.slice(0, 20).forEach((item, index) => {
     lines.push(`${index + 1}. ${item.url}`);
-    lines.push(`   - priority: ${item.priority}, score: ${item.opportunity_score}, category: ${item.category}`);
+    lines.push(`   - priority: ${item.priority}, segment: ${item.visibility_segment}, decision: ${item.editorial_decision}, score: ${item.opportunity_score}, category: ${item.category}`);
     lines.push(`   - GSC: impr ${item.gsc.impressions}, clicks ${item.gsc.clicks}, CTR ${item.gsc.ctr}%, pos ${item.gsc.position}`);
     lines.push(`   - fraza główna: ${item.keywords.primary || 'INSUFFICIENT_DATA'}`);
     if (item.keywords.secondary.length) {
@@ -757,7 +1073,79 @@ function writeOutputs(report, outputDir) {
       lines.push(`   - miejsca linków: ${sources.join(' ; ')}`);
     }
     lines.push(`   - akcja: ${item.action_plan.slice(0, 3).join(' ')}`);
+    lines.push(`   - kontrola: ${item.refresh_impact.measurement}`);
   });
+  lines.push('');
+  lines.push('## Performance Delta 90d vs Previous 90d');
+  lines.push('Ta sekcja porownuje obecne 90 dni GSC z poprzednimi 90 dniami dla URL-i i query, jesli dostepne sa `previous-pages.csv` oraz `previous-query-pages.csv`.');
+  lines.push('');
+  pushDeltaList(lines, 'Winners / Scale', report.portfolio.performance_delta.winners_scale);
+  lines.push('');
+  pushDeltaList(lines, 'New Visibility', report.portfolio.performance_delta.new_visibility);
+  lines.push('');
+  pushDeltaList(lines, 'Position Gain, No Clicks', report.portfolio.performance_delta.position_gain_no_clicks);
+  lines.push('');
+  pushDeltaList(lines, 'CTR Drop', report.portfolio.performance_delta.ctr_drop);
+  lines.push('');
+  pushDeltaList(lines, 'Declining / Refresh', report.portfolio.performance_delta.declining_refresh);
+  lines.push('');
+  pushDeltaList(lines, 'Dormant', report.portfolio.performance_delta.dormant);
+  lines.push('');
+  lines.push('## Promotion Places');
+  lines.push('Gdzie dodawac/promowac adresy po zmianach: GSC URL Inspection dla targetu i stron zrodlowych, linki kontekstowe z klastrow, sitemap/dateModified po deployu, `llms-full.txt` dla AI crawlerow oraz IndexNow/Bing dla URL-i bez widocznosci.');
+  lines.push('');
+  pushPromotionList(lines, report.priority_map.filter((item) => item.priority !== 'P3_MAINTAIN'));
+  lines.push('');
+  lines.push('## Leaders / Winners');
+  if (!report.portfolio.leaders_winners.length) {
+    lines.push('- Brak URL-i w tej grupie.');
+  } else {
+    report.portfolio.leaders_winners.slice(0, 20).forEach((item) => {
+      lines.push(`- ${item.url} — clicks ${item.gsc.clicks}, impr ${item.gsc.impressions}, pos ${item.gsc.position}, decyzja: ${item.editorial_decision}`);
+    });
+  }
+  lines.push('');
+  lines.push('## CTR Gap Top 10');
+  if (!report.portfolio.ctr_gap_top10.length) {
+    lines.push('- Brak URL-i w tej grupie.');
+  } else {
+    report.portfolio.ctr_gap_top10.slice(0, 20).forEach((item) => {
+      lines.push(`- ${item.url} — CTR ${item.gsc.ctr}%, impr ${item.gsc.impressions}, pos ${item.gsc.position}, fraza: ${item.keywords.primary}`);
+    });
+  }
+  lines.push('');
+  lines.push('## Low Visibility Articles');
+  if (!report.portfolio.low_visibility_articles.length) {
+    lines.push('- Brak URL-i w tej grupie.');
+  } else {
+    report.portfolio.low_visibility_articles.slice(0, 30).forEach((item) => {
+      lines.push(`- ${item.url} — pos ${item.gsc.position}, impr ${item.gsc.impressions}, decyzja: ${item.editorial_decision}, fraza: ${item.keywords.primary}`);
+    });
+  }
+  lines.push('');
+  lines.push('## Dormant Articles');
+  if (!report.portfolio.dormant_articles.length) {
+    lines.push('- Brak URL-i bez danych GSC.');
+  } else {
+    report.portfolio.dormant_articles.slice(0, 40).forEach((item) => {
+      lines.push(`- ${item.url} — inbound ${item.topology.inbound_links}, decyzja: ${item.editorial_decision}, fraza startowa: ${item.keywords.primary}`);
+    });
+  }
+  lines.push('');
+  lines.push('## Full Coverage Table');
+  lines.push('| URL | Status | Segment | Decyzja | Query | Impr | ΔImpr | Clicks | ΔClicks | CTR | ΔCTR pp | Pos | Pos+ | Wniosek | Modified |');
+  lines.push('|---|---:|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|');
+  report.portfolio.full_coverage_table.forEach((item) => {
+    const keyword = String(item.primary_keyword || '').replace(/\|/g, '/').slice(0, 72);
+    lines.push(`| ${item.url} | ${item.priority} | ${item.segment} | ${item.decision} | ${keyword} | ${item.impressions} | ${formatSigned(item.impressions_delta)} | ${item.clicks} | ${formatSigned(item.clicks_delta)} | ${item.ctr}% | ${formatSigned(item.ctr_delta_pp)} | ${item.position} | ${formatSigned(item.position_improvement)} | ${item.performance_conclusion} | ${item.date_modified || 'MISSING'} |`);
+  });
+  lines.push('');
+  lines.push('## All-Keyword Registry');
+  lines.push('Pełny rejestr query dla każdego URL-a jest zapisany w `gsc-priority-map.json` jako `portfolio.all_keyword_registry` oraz przy każdym elemencie jako `all_keyword_registry`.');
+  lines.push('');
+  lines.push('## Refresh Impact');
+  lines.push('- Każdy URL ma w JSON pole `refresh_impact`: `date_modified`, baseline GSC oraz plan kontroli po 7/14/28 dniach.');
+  lines.push('- Przy kolejnych raportach porownuj baseline z aktualnym GSC dla tych samych query i URL-i; jesli istnieja `previous-*.csv`, raport pokazuje tez delte 90d vs poprzednie 90d.');
   lines.push('');
   lines.push('## AI Visibility Monitor');
   lines.push(`- status: ${report.ai_visibility_monitor.status}`);
@@ -795,10 +1183,12 @@ function main() {
   const args = parseArgs(process.argv.slice(2));
   const gsc = readGsc(args.inputDir);
   const pages = collectPages(args.baseUrl);
-  const priorityMap = buildPriorityMap(pages, gsc);
+  const generatedAt = new Date().toISOString();
+  const priorityMap = buildPriorityMap(pages, gsc, generatedAt, args.baseUrl);
+  const portfolio = buildPortfolioSections(priorityMap);
   const aiVisibility = readAiVisibility(args.inputDir);
   const report = {
-    generated_at: new Date().toISOString(),
+    generated_at: generatedAt,
     data_quality: {
       gsc_status: gsc.status,
       gsc_files: gsc.files,
@@ -806,11 +1196,19 @@ function main() {
         pages: gsc.pages.length,
         queries: gsc.queries.length,
         query_pages: gsc.queryPages.length,
+        previous_pages: gsc.previousPages.length,
+        previous_queries: gsc.previousQueries.length,
+        previous_query_pages: gsc.previousQueryPages.length,
       },
       page_coverage: {
         all_pages: pages.length,
         pages_with_gsc_impressions: priorityMap.filter((item) => item.gsc.impressions > 0).length,
         pages_without_gsc_data: priorityMap.filter((item) => item.gsc.impressions === 0).length,
+        performance_delta_available: gsc.previousPages.length > 0 && gsc.previousQueryPages.length > 0,
+        leaders_winners: portfolio.leaders_winners.length,
+        ctr_gap_top10: portfolio.ctr_gap_top10.length,
+        low_visibility_articles: portfolio.low_visibility_articles.length,
+        dormant_articles: portfolio.dormant_articles.length,
       },
     },
     summary: {
@@ -820,6 +1218,7 @@ function main() {
       method: 'Sitemap/root HTML + GSC query-pages + link topology + AEO/GEO/AI readiness.',
     },
     priority_map: priorityMap,
+    portfolio,
     ai_visibility_monitor: aiVisibility,
   };
 

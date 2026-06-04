@@ -247,6 +247,9 @@ function writeCanonicalCsvTriplet(outputCsvDir, data) {
   const queries = Array.isArray(data?.queries) ? data.queries : [];
   const pages = Array.isArray(data?.pages) ? data.pages : [];
   const queryPages = Array.isArray(data?.queryPages) ? data.queryPages : [];
+  const previousQueries = Array.isArray(data?.previousQueries) ? data.previousQueries : [];
+  const previousPages = Array.isArray(data?.previousPages) ? data.previousPages : [];
+  const previousQueryPages = Array.isArray(data?.previousQueryPages) ? data.previousQueryPages : [];
 
   writeCsv(
     path.join(baseDir, 'queries.csv'),
@@ -276,6 +279,43 @@ function writeCanonicalCsvTriplet(outputCsvDir, data) {
     path.join(baseDir, 'query-pages.csv'),
     ['query', 'page', 'clicks', 'impressions', 'ctr', 'position'],
     queryPages.map((r) => ({
+      query: r.query,
+      page: r.page,
+      clicks: Number(r.clicks || 0),
+      impressions: Number(r.impressions || 0),
+      ctr: Number(r.ctr || 0),
+      position: Number(r.position || 0),
+    })),
+  );
+
+  writeCsv(
+    path.join(baseDir, 'previous-queries.csv'),
+    ['query', 'clicks', 'impressions', 'ctr', 'position'],
+    previousQueries.map((r) => ({
+      query: r.query,
+      clicks: Number(r.clicks || 0),
+      impressions: Number(r.impressions || 0),
+      ctr: Number(r.ctr || 0),
+      position: Number(r.position || 0),
+    })),
+  );
+
+  writeCsv(
+    path.join(baseDir, 'previous-pages.csv'),
+    ['page', 'clicks', 'impressions', 'ctr', 'position'],
+    previousPages.map((r) => ({
+      page: r.page,
+      clicks: Number(r.clicks || 0),
+      impressions: Number(r.impressions || 0),
+      ctr: Number(r.ctr || 0),
+      position: Number(r.position || 0),
+    })),
+  );
+
+  writeCsv(
+    path.join(baseDir, 'previous-query-pages.csv'),
+    ['query', 'page', 'clicks', 'impressions', 'ctr', 'position'],
+    previousQueryPages.map((r) => ({
       query: r.query,
       page: r.page,
       clicks: Number(r.clicks || 0),
@@ -573,11 +613,13 @@ async function main() {
   });
 
   async function generateForAccessToken(token, authMode) {
-    const [qCurrentRaw, qPrevRaw, pCurrentRaw, qpCurrentRaw] = await Promise.all([
+    const [qCurrentRaw, qPrevRaw, pCurrentRaw, pPrevRaw, qpCurrentRaw, qpPrevRaw] = await Promise.all([
       gscQueryAllRows(token, property, makeBody(ranges.current, ['query'])),
       gscQueryAllRows(token, property, makeBody(ranges.previous, ['query'])),
       gscQueryAllRows(token, property, makeBody(ranges.current, ['page'])),
+      gscQueryAllRows(token, property, makeBody(ranges.previous, ['page'])),
       gscQueryAllRows(token, property, makeBody(ranges.current, ['query', 'page'])),
+      gscQueryAllRows(token, property, makeBody(ranges.previous, ['query', 'page'])),
     ]);
 
     const queriesCurrent = qCurrentRaw.map((r) => ({
@@ -592,7 +634,16 @@ async function main() {
       page: String((r.keys || [])[0] || '').trim(),
       ...metricFromRow(r),
     })).filter((r) => r.page);
+    const pagesPrev = pPrevRaw.map((r) => ({
+      page: String((r.keys || [])[0] || '').trim(),
+      ...metricFromRow(r),
+    })).filter((r) => r.page);
     const qpCurrent = qpCurrentRaw.map((r) => ({
+      query: String((r.keys || [])[0] || '').trim(),
+      page: String((r.keys || [])[1] || '').trim(),
+      ...metricFromRow(r),
+    })).filter((r) => r.query && r.page);
+    const qpPrev = qpPrevRaw.map((r) => ({
       query: String((r.keys || [])[0] || '').trim(),
       page: String((r.keys || [])[1] || '').trim(),
       ...metricFromRow(r),
@@ -664,8 +715,11 @@ async function main() {
       auth_mode: authMode,
       raw_csv_rows: {
         queries: queriesCurrent,
+        previous_queries: queriesPrev,
         pages: pagesCurrent,
+        previous_pages: pagesPrev,
         query_pages: qpCurrent,
+        previous_query_pages: qpPrev,
       },
       ranges,
       summary: {
@@ -728,8 +782,11 @@ async function main() {
 
   writeCanonicalCsvTriplet(args.outputCsvDir, {
     queries: report.raw_csv_rows?.queries || [],
+    previousQueries: report.raw_csv_rows?.previous_queries || [],
     pages: report.raw_csv_rows?.pages || [],
+    previousPages: report.raw_csv_rows?.previous_pages || [],
     queryPages: report.raw_csv_rows?.query_pages || [],
+    previousQueryPages: report.raw_csv_rows?.previous_query_pages || [],
   });
   delete report.raw_csv_rows;
   writeReport(report, args.outputJson, args.outputMd);

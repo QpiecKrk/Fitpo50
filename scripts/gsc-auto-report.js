@@ -447,6 +447,38 @@ function runPriorityMap(inputDir, workDir) {
   }
 }
 
+function runSeoAioMachine(inputDir, workDir) {
+  const res = run(
+    'node',
+    ['scripts/seo-aio-command-center.js', '--input-dir', inputDir, '--output-dir', workDir],
+    { stdio: 'inherit' },
+  );
+  if (res.status !== 0) {
+    throw new Error('seo-aio-command-center failed.');
+  }
+}
+
+function runSeoAioWaveProposal(workDir) {
+  const res = run(
+    'node',
+    [
+      'scripts/seo-aio-wave-autopilot.js',
+      '--input',
+      path.join(workDir, 'seo-aio-command-center.json'),
+      '--output-dir',
+      workDir,
+      '--wave',
+      '1',
+      '--limit',
+      '5',
+    ],
+    { stdio: 'inherit' },
+  );
+  if (res.status !== 0) {
+    throw new Error('seo-aio-wave-autopilot failed.');
+  }
+}
+
 async function main() {
   loadLocalEnvFromHome();
   const args = parseArgs(process.argv.slice(2));
@@ -460,6 +492,8 @@ async function main() {
       console.log('[GSC-AUTO] Źródło: GSC API -> ~/Downloads/gsc-auto-input');
       runWeeklyReport(inputDir, inputDir);
       runPriorityMap(inputDir, inputDir);
+      runSeoAioMachine(inputDir, inputDir);
+      runSeoAioWaveProposal(inputDir);
       return;
     }
     console.log(`[GSC-AUTO] GSC API pominięte: ${apiRes.reason}`);
@@ -507,6 +541,8 @@ async function main() {
 
     runWeeklyReport(inputDir, inputDir);
     runPriorityMap(inputDir, inputDir);
+    runSeoAioMachine(inputDir, inputDir);
+    runSeoAioWaveProposal(inputDir);
     return;
   } catch (freshErr) {
     const inputDir = path.resolve(args.workDir);
