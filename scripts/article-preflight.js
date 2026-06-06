@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { POLICY, utils, validators } = require('./lib/article-policy');
 
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
@@ -53,33 +54,6 @@ function findSourceImage(baseName, assetsDir) {
     const fileBase = name.slice(0, -(ext.length + 1));
     if (norm(fileBase) === baseNorm) return path.join(assetsDir, name);
   }
-  const tokenize = (x) => x
-    .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[\u00A0\u2007\u202F]/g, ' ')
-    .toLowerCase()
-    .split(/[^a-z0-9]+/g)
-    .filter(Boolean);
-  const targetTokens = tokenize(cleanBase);
-  let best = null;
-  let bestScore = 0;
-  for (const name of files) {
-    const ext = path.extname(name).slice(1).toLowerCase();
-    if (!SOURCE_IMAGE_EXT.includes(ext)) continue;
-    const fileBase = name.slice(0, -(ext.length + 1));
-    const fileTokens = new Set(tokenize(fileBase));
-    let score = 0;
-    for (const t of targetTokens) {
-      if (fileTokens.has(t)) score += 1;
-      if (t === 'staircase' && (fileTokens.has('schody') || fileTokens.has('stairs'))) score += 1;
-      if (t === 'hero' && (fileTokens.has('lead') || fileTokens.has('hero'))) score += 1;
-    }
-    if (score > bestScore) {
-      bestScore = score;
-      best = name;
-    }
-  }
-  if (best && bestScore > 0) return path.join(assetsDir, best);
   return null;
 }
 
@@ -132,6 +106,10 @@ function hasKnownImageExtension(value) {
   return /\.(png|jpe?g|webp|avif)$/i.test(String(value || '').trim());
 }
 
+function hashFile(filePath) {
+  return crypto.createHash('sha1').update(fs.readFileSync(filePath)).digest('hex');
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const file = args.file ? path.resolve(args.file) : '';
@@ -172,9 +150,32 @@ function main() {
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
   const quickAnswer = utils.stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
+  const rawTitle = String(json.title || '').replace(/\s+/g, ' ').trim();
   const rawSeoTitle = String(json.seo_title || '').replace(/\s+/g, ' ').trim();
   const listingTitle = String(json.listing_title || '').replace(/\s+/g, ' ').trim();
   const listingDesc = String(json.listing_desc || '').replace(/\s+/g, ' ').trim();
+  const titleValidation = validators.validateTitleText(rawTitle, {
+    label: 'title',
+    min: POLICY.TITLE.JSON_MIN,
+    max: POLICY.TITLE.MAX
+  });
+  titleValidation.errors.forEach((msg) => errors.push(msg));
+  if (rawSeoTitle) {
+    const seoTitleValidation = validators.validateTitleText(rawSeoTitle, {
+      label: 'seo_title',
+      min: POLICY.TITLE.MIN,
+      max: POLICY.TITLE.MAX
+    });
+    seoTitleValidation.errors.forEach((msg) => errors.push(msg));
+  }
+  if (listingTitle) {
+    const listingTitleValidation = validators.validateTitleText(listingTitle, {
+      label: 'listing_title',
+      min: POLICY.TITLE.JSON_MIN,
+      max: 90
+    });
+    listingTitleValidation.errors.forEach((msg) => errors.push(msg));
+  }
   if (/\|\s*fitpo50\s*$/i.test(rawSeoTitle)) {
     warnings.push('seo_title zawiera już suffix "| FitPo50" — importer go znormalizuje, ale lepiej traktować seo_title jako bazę bez suffixu.');
   }
@@ -284,14 +285,18 @@ function main() {
   }
 
   const hero = String(json.hero_image || '').trim();
+  let heroSourceImage = '';
   if (!hero) errors.push('Brak hero_image.');
   else if (hasKnownImageExtension(hero)) {
     warnings.push('hero_image zawiera rozszerzenie pliku. Standard źródłowy to sama baza nazwy, np. "apob-hero", bez .png/.jpg.');
   }
-  else if (!findSourceImage(hero, assetsDir)) {
-    const suggestion = suggestSourceImageLocation(hero, assetsDir);
-    const suffix = suggestion ? ` (podpowiedź: znaleziono w ${path.dirname(suggestion)} — użyj tego folderu jako --assets-dir)` : '';
-    errors.push(`Brak źródłowego pliku hero_image w ${assetsDir} dla: ${hero}.{png|jpg|jpeg|webp|avif}${suffix}`);
+  else {
+    heroSourceImage = findSourceImage(hero, assetsDir) || '';
+    if (!heroSourceImage) {
+      const suggestion = suggestSourceImageLocation(hero, assetsDir);
+      const suffix = suggestion ? ` (podpowiedź: znaleziono w ${path.dirname(suggestion)} — użyj tego folderu jako --assets-dir)` : '';
+      errors.push(`Brak źródłowego pliku hero_image w ${assetsDir} dla: ${hero}.{png|jpg|jpeg|webp|avif}${suffix}`);
+    }
   }
 
   // section source images by image_prompts_v4 filename_base
@@ -310,10 +315,30 @@ function main() {
       errors.push(`image_prompts_v4 section #${i + 1}: brak filename_base.`);
       return;
     }
-    if (!findSourceImage(base, assetsDir)) {
+    const sourceImage = findSourceImage(base, assetsDir);
+    if (!sourceImage) {
       const suggestion = suggestSourceImageLocation(base, assetsDir);
       const suffix = suggestion ? ` (podpowiedź: znaleziono w ${path.dirname(suggestion)} — użyj tego folderu jako --assets-dir)` : '';
       errors.push(`Brak źródłowego obrazu sekcji: ${base}.{png|jpg|jpeg|webp|avif} w ${assetsDir}${suffix}`);
+    } else if (heroSourceImage && base !== hero) {
+      const sectionHash = hashFile(sourceImage);
+      const heroHash = hashFile(heroSourceImage);
+      if (sectionHash === heroHash) {
+        errors.push(`Obraz sekcji "${base}" jest identyczny z hero "${hero}". To wygląda na ukryty fallback zamiast właściwej grafiki.`);
+      }
+    }
+  });
+
+  sections.forEach((section, idx) => {
+    const src = String(section?.image?.src || section?.image?.path || '').trim();
+    if (!src) return;
+    const m = src.match(/(?:^|\/)([^/]+)\.(?:png|jpe?g|webp|avif)(?:[?#].*)?$/i);
+    if (!m) return;
+    const base = m[1];
+    if (!findSourceImage(base, assetsDir)) {
+      const suggestion = suggestSourceImageLocation(base, assetsDir);
+      const suffix = suggestion ? ` (podpowiedź: znaleziono w ${path.dirname(suggestion)} — użyj tego folderu jako --assets-dir)` : '';
+      errors.push(`sections[${idx + 1}].image.src wskazuje "${base}", ale brak źródłowego obrazu ${base}.{png|jpg|jpeg|webp|avif} w ${assetsDir}${suffix}`);
     }
   });
 

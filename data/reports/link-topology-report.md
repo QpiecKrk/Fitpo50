@@ -1,7 +1,7 @@
 # Link Topology Report
 
-- generated_at: 2026-06-01T08:59:10.936Z
-- pages_total: 89
+- generated_at: 2026-06-06T09:41:26.213Z
+- pages_total: 92
 - min_inbound: 2
 
 ## .agent/skills/auto/skill-creator/assets/eval_review.html (inbound: 0)

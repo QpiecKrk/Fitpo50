@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { POLICY, validators } = require('./lib/article-policy');
 
 function toLocalIsoDate(date = new Date()) {
   const y = date.getFullYear();
@@ -353,8 +354,13 @@ function buildQuickAnswer(json) {
 
 function validate(json) {
   const errors = [];
-  if (!json.title || json.title.length < 55 || json.title.length > 65) {
-    errors.push(`title poza zakresem 55-65 (jest ${String(json.title || '').length})`);
+  const titleValidation = validators.validateTitleText(json.title, {
+    label: 'title',
+    min: POLICY.TITLE.JSON_MIN,
+    max: POLICY.TITLE.MAX
+  });
+  if (!titleValidation.ok) {
+    errors.push(...titleValidation.errors);
   }
   if (!json.meta_description || json.meta_description.length < 145 || json.meta_description.length > 160) {
     errors.push(`meta_description poza zakresem 145-160 (jest ${String(json.meta_description || '').length})`);
@@ -437,9 +443,6 @@ function main() {
   const rawTitleInput = String(json.title || '').replace(/\s+/g, ' ').trim();
   const rawSeoTitleInput = String(json.seo_title || '').replace(/\s+/g, ' ').trim();
   json.title = truncateAtWordBoundary(rawTitleInput, 65);
-  if (json.title.length < 55) {
-    json.title = truncateAtWordBoundary(`${json.title} – praktyczny przewodnik dla osób po 50. roku życia`, 65);
-  }
   if (!rawSeoTitleInput || rawSeoTitleInput === rawTitleInput) {
     json.seo_title = truncateAtWordBoundary(json.title, 65);
   } else {

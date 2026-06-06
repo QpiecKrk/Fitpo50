@@ -388,7 +388,7 @@ function validateHeadSeoConsistency(raw, errors) {
   errors.push(...res.errors);
 }
 
-function extractPublishedDateFromLdJson(raw) {
+function extractBlogPostingNode(raw) {
   const scripts = [...String(raw || '').matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
   for (const scriptMatch of scripts) {
     const body = String(scriptMatch[1] || '').trim();
@@ -403,11 +403,38 @@ function extractPublishedDateFromLdJson(raw) {
       if (!node || typeof node !== 'object') continue;
       const type = node['@type'];
       const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
-      if (!isBlogPosting) continue;
-      const datePublished = String(node.datePublished || '').trim();
-      if (datePublished) return datePublished;
+      if (isBlogPosting) return node;
     }
   }
+  return null;
+}
+
+function validateArticleTitles(raw, errors) {
+  const h1 = utils.stripTags(raw.match(/<h1[^>]*class="[^"]*article-header__title[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '').trim();
+  const docTitle = utils.stripTags(raw.match(/<title>([\s\S]*?)<\/title>/i)?.[1] || '').replace(/\s*\|\s*FitPo50\s*$/i, '').trim();
+  const blogPosting = extractBlogPostingNode(raw);
+  const headline = String(blogPosting?.headline || '').replace(/\s+/g, ' ').trim();
+
+  const titleChecks = [
+    { label: 'H1 article title', value: h1, min: POLICY.TITLE.JSON_MIN, max: POLICY.TITLE.MAX },
+    { label: 'HTML title base', value: docTitle, min: POLICY.TITLE.MIN, max: POLICY.TITLE.MAX },
+    { label: 'BlogPosting.headline', value: headline, min: POLICY.TITLE.JSON_MIN, max: POLICY.TITLE.MAX }
+  ];
+
+  for (const item of titleChecks) {
+    const res = validators.validateTitleText(item.value, {
+      label: item.label,
+      min: item.min,
+      max: item.max
+    });
+    errors.push(...res.errors);
+  }
+}
+
+function extractPublishedDateFromLdJson(raw) {
+  const blogPosting = extractBlogPostingNode(raw);
+  const datePublished = String(blogPosting?.datePublished || '').trim();
+  if (datePublished) return datePublished;
   return '';
 }
 
@@ -452,6 +479,7 @@ function validateFile(filePath) {
   validateNoXmlProlog(raw, errors);
   validateNoInvalidSourceClosingTags(raw, errors);
   validateHeadSeoConsistency(raw, errors);
+  validateArticleTitles(raw, errors);
 
   if (/\sstyle\s*=\s*['"]/i.test(raw)) {
     errors.push('Wykryto inline CSS (style="...")');

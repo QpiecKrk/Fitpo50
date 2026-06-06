@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-06-01T19:33:10.175Z",
+  "updated_at": "2026-06-06T09:41:26.451Z",
   "records": [
     {
       "scope": "prepush-local",
@@ -3638,6 +3638,338 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 54
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline",
+      "at": "2026-06-06T09:24:10.805Z",
+      "total_ms": 4003,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 45
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 48
+        },
+        {
+          "tag": "E-E-A-T citation enhancer (best effort)",
+          "durationMs": 45
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 48
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 44
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 2329
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 74
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 666
+        },
+        {
+          "tag": "Sync social title + BreadcrumbList (source/_site)",
+          "durationMs": 43
+        },
+        {
+          "tag": "Sync meta description across head/schema",
+          "durationMs": 42
+        },
+        {
+          "tag": "Generate llms-full (auto-refresh)",
+          "durationMs": 109
+        },
+        {
+          "tag": "Article contract check (source/_site)",
+          "durationMs": 48
+        },
+        {
+          "tag": "Sync assets mirror (_site)",
+          "durationMs": 83
+        },
+        {
+          "tag": "Global link topology report",
+          "durationMs": 86
+        },
+        {
+          "tag": "Lint editorial placeholders (_site HTML)",
+          "durationMs": 46
+        },
+        {
+          "tag": "Lint editorial placeholders (source HTML)",
+          "durationMs": 47
+        },
+        {
+          "tag": "NEWS integrity",
+          "durationMs": 48
+        },
+        {
+          "tag": "Predeploy gate (slug)",
+          "durationMs": 108
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline",
+      "at": "2026-06-06T09:25:09.493Z",
+      "total_ms": 4564,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 44
+        },
+        {
+          "tag": "E-E-A-T citation enhancer (best effort)",
+          "durationMs": 40
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 43
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 46
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 45
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 2769
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 88
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 791
+        },
+        {
+          "tag": "Sync social title + BreadcrumbList (source/_site)",
+          "durationMs": 40
+        },
+        {
+          "tag": "Sync meta description across head/schema",
+          "durationMs": 41
+        },
+        {
+          "tag": "Generate llms-full (auto-refresh)",
+          "durationMs": 74
+        },
+        {
+          "tag": "Article contract check (source/_site)",
+          "durationMs": 46
+        },
+        {
+          "tag": "Sync assets mirror (_site)",
+          "durationMs": 97
+        },
+        {
+          "tag": "Global link topology report",
+          "durationMs": 67
+        },
+        {
+          "tag": "Lint editorial placeholders (_site HTML)",
+          "durationMs": 44
+        },
+        {
+          "tag": "Lint editorial placeholders (source HTML)",
+          "durationMs": 45
+        },
+        {
+          "tag": "NEWS integrity",
+          "durationMs": 50
+        },
+        {
+          "tag": "Predeploy gate (slug)",
+          "durationMs": 150
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline",
+      "at": "2026-06-06T09:32:30.139Z",
+      "total_ms": 4175,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 48
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 47
+        },
+        {
+          "tag": "E-E-A-T citation enhancer (best effort)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 48
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 48
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 47
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 2356
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 76
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 689
+        },
+        {
+          "tag": "Sync social title + BreadcrumbList (source/_site)",
+          "durationMs": 47
+        },
+        {
+          "tag": "Sync meta description across head/schema",
+          "durationMs": 48
+        },
+        {
+          "tag": "Generate llms-full (auto-refresh)",
+          "durationMs": 91
+        },
+        {
+          "tag": "Article contract check (source/_site)",
+          "durationMs": 52
+        },
+        {
+          "tag": "Sync assets mirror (_site)",
+          "durationMs": 79
+        },
+        {
+          "tag": "Global link topology report",
+          "durationMs": 70
+        },
+        {
+          "tag": "Lint editorial placeholders (_site HTML)",
+          "durationMs": 86
+        },
+        {
+          "tag": "Lint editorial placeholders (source HTML)",
+          "durationMs": 87
+        },
+        {
+          "tag": "NEWS integrity",
+          "durationMs": 88
+        },
+        {
+          "tag": "Predeploy gate (slug)",
+          "durationMs": 124
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline",
+      "at": "2026-06-06T09:41:26.451Z",
+      "total_ms": 3414,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 46
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 45
+        },
+        {
+          "tag": "E-E-A-T citation enhancer (best effort)",
+          "durationMs": 40
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 45
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 48
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 47
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 1235
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 73
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 809
+        },
+        {
+          "tag": "Sync social title + BreadcrumbList (source/_site)",
+          "durationMs": 93
+        },
+        {
+          "tag": "Sync meta description across head/schema",
+          "durationMs": 52
+        },
+        {
+          "tag": "Generate llms-full (auto-refresh)",
+          "durationMs": 117
+        },
+        {
+          "tag": "Article contract check (source/_site)",
+          "durationMs": 93
+        },
+        {
+          "tag": "Sync assets mirror (_site)",
+          "durationMs": 139
+        },
+        {
+          "tag": "Global link topology report",
+          "durationMs": 114
+        },
+        {
+          "tag": "Lint editorial placeholders (source HTML)",
+          "durationMs": 101
+        },
+        {
+          "tag": "Lint editorial placeholders (_site HTML)",
+          "durationMs": 103
+        },
+        {
+          "tag": "NEWS integrity",
+          "durationMs": 107
+        },
+        {
+          "tag": "Predeploy gate (slug)",
+          "durationMs": 107
         }
       ]
     }

@@ -21,8 +21,19 @@ const POLICY = {
 
   TITLE: {
     MAX: 65,
-    MIN: 35
+    MIN: 35,
+    JSON_MIN: 55
   },
+
+  BROKEN_TITLE_PATTERNS: [
+    /\s[–-]\s*praktyczny\s*$/iu,
+    /\s[–-]\s*praktyczny\s+przewodnik\s*$/iu,
+    /\s[–-]\s*praktyczny\s+przewodnik\s+dla\s*$/iu,
+    /\s[–-]\s*praktyczny\s+przewodnik\s+dla\s+osób\s*$/iu,
+    /\s[–-]\s*praktyczny\s+przewodnik\s+dla\s+os[oó]b\s+po\s*$/iu,
+    /\s[–-]\s*praktyczny\s+przewodnik\s+dla\s+os[oó]b\s+po\s+50\.?\s*$/iu,
+    /\s[–-]\s*praktyczny\s+przewodnik\s+dla\s+os[oó]b\s+po\s+50\.?\s+roku\s*$/iu
+  ],
 
   REPEATED_SENTENCES: {
     MIN_WORDS: 8,
@@ -290,6 +301,36 @@ const validators = {
     const clean = String(label || '').trim();
     const ok = POLICY.PATTERNS.READ_TIME_LABEL.test(clean);
     return { ok, error: ok ? null : `Niepoprawny label czasu czytania: "${clean}" (oczekiwane: "X min czytania").` };
+  },
+
+  validateTitleText: (title, options = {}) => {
+    const label = String(options.label || 'title');
+    const min = Number(options.min || POLICY.TITLE.MIN);
+    const max = Number(options.max || POLICY.TITLE.MAX);
+    const clean = utils.stripTags(title).replace(/\s+/g, ' ').trim();
+    const errors = [];
+
+    if (!clean) {
+      errors.push(`${label}: brak tekstu.`);
+      return { ok: false, errors, length: 0 };
+    }
+    if (clean.length < min) {
+      errors.push(`${label}: jest zbyt krótki (min ${min}, jest ${clean.length}).`);
+    }
+    if (clean.length > max) {
+      errors.push(`${label}: przekracza ${max} znaków (jest ${clean.length}).`);
+    }
+    if (!/[.!?…]$/.test(clean) && /[–-]\s*\p{L}+$/u.test(clean)) {
+      errors.push(`${label}: wygląda na urwany po myślniku ("${clean}").`);
+    }
+    for (const rx of POLICY.BROKEN_TITLE_PATTERNS) {
+      if (rx.test(clean)) {
+        errors.push(`${label}: wygląda na urwany przez automatyczne skrócenie ("${clean}").`);
+        break;
+      }
+    }
+
+    return { ok: errors.length === 0, errors, length: clean.length };
   },
 
   containsBannedPhrase: (text, bannedList = POLICY.GENERIC_QUICK_ANSWER_PATTERNS) => {

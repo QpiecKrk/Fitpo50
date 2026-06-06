@@ -1134,10 +1134,24 @@ function validateInput(data, opts = {}) {
   if (containsEditorialPlaceholder(title)) {
     errors.push('Title: wykryto placeholder redakcyjny.');
   }
+  const titleValidation = validators.validateTitleText(title, {
+    label: 'Title',
+    min: POLICY.TITLE.JSON_MIN,
+    max: POLICY.TITLE.MAX
+  });
+  titleValidation.errors.forEach((msg) => errors.push(msg));
   if (/\bi\s+cofnąć\s*$/i.test(title)) {
     errors.push('Title: wygląda na urwany (kończy się na "i cofnąć"). Uzupełnij pełny sens.');
   }
   const seoTitleRaw = String(data.seo_title || data.meta_title || '').trim();
+  if (seoTitleRaw) {
+    const seoTitleValidation = validators.validateTitleText(seoTitleRaw, {
+      label: 'SEO title',
+      min: POLICY.TITLE.MIN,
+      max: POLICY.TITLE.MAX
+    });
+    seoTitleValidation.errors.forEach((msg) => errors.push(msg));
+  }
   if (seoTitleRaw && /\bi\s+cofnąć\s*$/i.test(seoTitleRaw)) {
     errors.push('SEO title: wygląda na urwany (kończy się na "i cofnąć"). Uzupełnij pełny sens.');
   }

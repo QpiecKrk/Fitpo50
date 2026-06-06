@@ -327,4 +327,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Dieta przeciwzapalna po 50-tce: produkty i jadłospis | FitPo50"
   section: "Jedzenie"
   summary: "Co jeść po 50-tce, aby obniżyć stan zapalny? Sprawdź produkty z omega-3 i polifenolami oraz tygodniowy jadłospis przeciwzapalny oparty na badaniach."
+- url: https://fitpo50.pl/chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html
+  title: "Chleb na zakwasie: czy naprawdę mniej szkodzi? – praktyczny | FitPo50"
+  section: "Jedzenie"
+  summary: "Czy chleb na zakwasie ma niższy indeks glikemiczny? Sprawdź wpływ fermentacji na glukozę, insulinę, minerały i wybór prawdziwego bochenka po 50 roku życia."
 

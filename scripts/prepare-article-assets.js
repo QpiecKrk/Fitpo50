@@ -63,33 +63,6 @@ function findSourceImage(baseName, fromDir) {
     const b = name.slice(0, -(ext.length + 1));
     if (norm(b) === target) return path.join(fromDir, name);
   }
-  const tokenize = (x) => x
-    .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[\u00A0\u2007\u202F]/g, ' ')
-    .toLowerCase()
-    .split(/[^a-z0-9]+/g)
-    .filter(Boolean);
-  const targetTokens = tokenize(cleanBase);
-  let best = null;
-  let bestScore = 0;
-  for (const name of files) {
-    const ext = path.extname(name).slice(1).toLowerCase();
-    if (!SOURCE_IMAGE_EXT.includes(ext)) continue;
-    const fileBase = name.slice(0, -(ext.length + 1));
-    const fileTokens = new Set(tokenize(fileBase));
-    let score = 0;
-    for (const t of targetTokens) {
-      if (fileTokens.has(t)) score += 1;
-      if (t === 'staircase' && (fileTokens.has('schody') || fileTokens.has('stairs'))) score += 1;
-      if (t === 'hero' && (fileTokens.has('lead') || fileTokens.has('hero'))) score += 1;
-    }
-    if (score > bestScore) {
-      bestScore = score;
-      best = name;
-    }
-  }
-  if (best && bestScore > 0) return path.join(fromDir, best);
   return null;
 }
 
@@ -107,10 +80,6 @@ function convertOne(src, targetBaseName) {
   fs.copyFileSync(outAvif, path.join(SITE_ASSETS, path.basename(outAvif)));
 }
 
-function toSlugSectionBase(slug, index) {
-  return `${slug}-sekcja-${index + 1}`;
-}
-
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const file = args.file ? path.resolve(args.file) : '';
@@ -120,8 +89,6 @@ function main() {
   }
   const fromDir = path.resolve(args.from || path.dirname(file));
   const json = JSON.parse(fs.readFileSync(file, 'utf8'));
-  const slug = String(json.slug || '').trim();
-  if (!slug) throw new Error('Brak slug w JSON');
   const hero = String(json.hero_image || '').trim();
   if (!hero) throw new Error('Brak hero_image w JSON');
 
@@ -130,8 +97,6 @@ function main() {
 
   const heroSrc = findSourceImage(hero, fromDir);
   if (!heroSrc) throw new Error(`Brak hero source: ${hero}.* w ${fromDir}`);
-  convertOne(heroSrc, hero);
-  console.log(`[OK] hero prepared: ${hero}`);
 
   const promptsV4 = Array.isArray(json.image_prompts_v4) ? json.image_prompts_v4 : [];
   const promptsLegacy = Array.isArray(json.image_prompts) ? json.image_prompts : [];
@@ -155,15 +120,19 @@ function main() {
     return;
   }
 
-  sectionPrompts.forEach((p, idx) => {
+  const sectionJobs = sectionPrompts.map((p) => {
     const base = String(p.filename_base || '').trim();
     const src = findSourceImage(base, fromDir);
     if (!src) throw new Error(`Brak section source: ${base}.* w ${fromDir}`);
-    const outBases = new Set([toSlugSectionBase(slug, idx), base].filter(Boolean));
-    for (const outBase of outBases) {
-      convertOne(src, outBase);
-      console.log(`[OK] section prepared: ${outBase}`);
-    }
+    return { base, src };
+  });
+
+  convertOne(heroSrc, hero);
+  console.log(`[OK] hero prepared: ${hero}`);
+
+  sectionJobs.forEach(({ base, src }) => {
+    convertOne(src, base);
+    console.log(`[OK] section prepared: ${base}`);
   });
 
   console.log('[PASS] prepare-article-assets OK');

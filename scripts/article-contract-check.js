@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { validateArticleHeadContract } = require('./lib/article-head-contract');
-const { POLICY, utils } = require('./lib/article-policy');
+const { POLICY, utils, validators } = require('./lib/article-policy');
 
 function countMatches(raw, regex) {
   return [...String(raw || '').matchAll(regex)].length;
@@ -33,6 +33,13 @@ function validateArticleContract(filePath) {
     }
   }
 
+  const h1 = utils.stripTags(raw.match(/<h1[^>]*class="[^"]*article-header__title[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '').trim();
+  const docTitle = utils.stripTags(raw.match(/<title>([\s\S]*?)<\/title>/i)?.[1] || '').replace(/\s*\|\s*FitPo50\s*$/i, '').trim();
+  const titleChecks = [
+    { label: 'H1 article title', value: h1, min: POLICY.TITLE.JSON_MIN, max: POLICY.TITLE.MAX },
+    { label: 'HTML title base', value: docTitle, min: POLICY.TITLE.MIN, max: POLICY.TITLE.MAX }
+  ];
+
   for (const m of String(raw).matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
     let parsed;
     try {
@@ -46,6 +53,12 @@ function validateArticleContract(filePath) {
       const type = node['@type'];
       const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
       if (!isBlogPosting) continue;
+      titleChecks.push({
+        label: 'BlogPosting.headline',
+        value: String(node.headline || '').replace(/\s+/g, ' ').trim(),
+        min: POLICY.TITLE.JSON_MIN,
+        max: POLICY.TITLE.MAX
+      });
       const author = node.author;
       if (!author || typeof author !== 'object' || Array.isArray(author)) {
         errors.push('BlogPosting.author musi być obiektem Person.');
@@ -55,6 +68,15 @@ function validateArticleContract(filePath) {
         errors.push('BlogPosting.author ma typ Organization (wymagane Person).');
       }
     }
+  }
+
+  for (const item of titleChecks) {
+    const res = validators.validateTitleText(item.value, {
+      label: item.label,
+      min: item.min,
+      max: item.max
+    });
+    errors.push(...res.errors);
   }
 
   const contextualLinks = countMatches(raw, /<a\b[^>]*href="(\.\/)?[a-z0-9-]+\.html(?:[?#][^\"]*)?"/gi);
