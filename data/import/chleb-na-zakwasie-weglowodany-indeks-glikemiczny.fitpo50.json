@@ -213,13 +213,13 @@
   "faq_research": [
     {
       "question": "Czy chleb na zakwasie jest bezpieczny dla cukrzyków?",
-      "source_label": "Wien Klin Wochenschr (2023): Odpowiedź glikemiczna na pełnoziarnisty chleb na zakwasie vs biały chleb pszenny u pacjentek z cukrzycą ciążową",
-      "source_url": "https://pubmed.ncbi.nlm.nih.gov/37106088/"
+      "source_label": "Google Autocomplete (global, pl-PL)",
+      "source_url": "https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=Czy%20chleb%20na%20zakwasie%20jest%20bezpieczny%20dla%20cukrzyk%C3%B3w%3F"
     },
     {
       "question": "Czy chleb na zakwasie można jeść przy IBS?",
-      "source_label": "ResearchGate (2024): Wpływ mikrobioty zakwasu na zawartość FODMAP i ATI w pieczywie",
-      "source_url": "https://www.researchgate.net/publication/379876599_Impact_of_Sourdough_Microbiota_on_FODMAPs_and_ATI_Content_in_Bakery_Products"
+      "source_label": "Google Autocomplete (global, pl-PL)",
+      "source_url": "https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=Czy%20chleb%20na%20zakwasie%20mo%C5%BCna%20je%C5%9B%C4%87%20przy%20IBS%3F"
     },
     {
       "question": "Czy chleb na zakwasie zawiera probiotyki?",

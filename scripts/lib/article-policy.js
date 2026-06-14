@@ -22,7 +22,8 @@ const POLICY = {
   TITLE: {
     MAX: 65,
     MIN: 35,
-    JSON_MIN: 55
+    JSON_MIN: 55,
+    STRICT_CUTOFF: '2026-06-06'
   },
 
   BROKEN_TITLE_PATTERNS: [
@@ -319,9 +320,6 @@ const validators = {
     }
     if (clean.length > max) {
       errors.push(`${label}: przekracza ${max} znaków (jest ${clean.length}).`);
-    }
-    if (!/[.!?…]$/.test(clean) && /[–-]\s*\p{L}+$/u.test(clean)) {
-      errors.push(`${label}: wygląda na urwany po myślniku ("${clean}").`);
     }
     for (const rx of POLICY.BROKEN_TITLE_PATTERNS) {
       if (rx.test(clean)) {

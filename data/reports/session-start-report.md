@@ -1,6 +1,6 @@
 # Raport startowy sesji
 
-- Data/czas: 2026-06-06 11:15:35 CEST
+- Data/czas: 2026-06-14 19:06:35 CEST
 - Repo: `/Users/grzegorzkupiec/Projects/FitPo50-local`
 - Gałąź: `main`
 
@@ -28,10 +28,11 @@ error: pathspec '.windsurfrules' did not match any file(s) known to git
 
 ## `git status --short`
 
-PASS: brak zmian przed startem kontroli.
-
 ```txt
-
+ M data/import/chleb-na-zakwasie-weglowodany-indeks-glikemiczny.fitpo50.json
+ M data/reports/pipeline-timings.json
+ M scripts/lib/article-policy.js
+ M scripts/validate-article-standard.js
 ```
 
 ## `npm run assets:mirror:sync`
@@ -54,4 +55,4 @@ PASS: brak zmian przed startem kontroli.
 
 ## Status
 
-PASS: start techniczny zakończony poprawnie.
+PASS: start techniczny zakończony poprawnie. Repo jest aktualne względem `origin/main`, a mirror i predeploy gate przeszły poprawnie. Worktree zawiera istniejące zmiany robocze wymienione w sekcji `git status --short`.

@@ -382,7 +382,7 @@
     "type": "P2_CORE_SUPPORT_LINKING",
     "score": {
       "total": 60,
-      "seo": 31,
+      "seo": 32,
       "aeo": 0,
       "geo": 0,
       "aio": 11,
@@ -398,9 +398,9 @@
     "editorial_decision": "support",
     "gsc": {
       "clicks": 0,
-      "impressions": 6,
+      "impressions": 7,
       "ctr": 0,
-      "position": 49.67,
+      "position": 56.86,
       "status": "ok"
     },
     "performance_delta": {
@@ -408,9 +408,9 @@
       "conclusion": "NEW_VISIBILITY",
       "current_90d": {
         "clicks": 0,
-        "impressions": 6,
+        "impressions": 7,
         "ctr": 0,
-        "position": 49.67
+        "position": 56.86
       },
       "previous_90d": {
         "clicks": 0,
@@ -420,10 +420,10 @@
       },
       "delta": {
         "clicks": 0,
-        "impressions": 6,
+        "impressions": 7,
         "impressions_pct": 100,
         "ctr_pp": 0,
-        "position_delta": 49.67,
+        "position_delta": 56.86,
         "position_improvement": 0
       },
       "query_changes": [
@@ -431,9 +431,9 @@
           "query": "dieta 50 50",
           "current": {
             "clicks": 0,
-            "impressions": 3,
+            "impressions": 4,
             "ctr": 0,
-            "position": 94
+            "position": 95.5
           },
           "previous": {
             "clicks": 0,
@@ -441,7 +441,7 @@
             "ctr": 0,
             "position": 0
           },
-          "impressions_delta": 3,
+          "impressions_delta": 4,
           "impressions_delta_pct": 100,
           "clicks_delta": 0,
           "position_improvement": 0
@@ -458,9 +458,9 @@
         {
           "query": "dieta 50 50",
           "intent": "informacyjna",
-          "impressions": 3,
+          "impressions": 4,
           "clicks": 0,
-          "position": 94
+          "position": 95.5
         }
       ]
     },
@@ -485,9 +485,124 @@
     "measurement": {
       "baseline": {
         "clicks": 0,
-        "impressions": 6,
+        "impressions": 7,
         "ctr": 0,
-        "position": 49.67
+        "position": 56.86
+      },
+      "checkpoints": null,
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P2_CORE_SUPPORT_LINKING",
+    "score": {
+      "total": 59,
+      "seo": 20,
+      "aeo": 0,
+      "geo": 0,
+      "aio": 11,
+      "promotion": 70,
+      "speed": 28,
+      "ctr_opportunity": 35
+    },
+    "url": "https://fitpo50.pl/o-mnie.html",
+    "file": "o-mnie.html",
+    "title": "O mnie | FitPo50",
+    "priority": "P3_MAINTAIN",
+    "segment": "SITE_SUPPORT",
+    "editorial_decision": "support",
+    "gsc": {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 59,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 59
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 0,
+        "impressions": 1,
+        "impressions_pct": 100,
+        "ctr_pp": 0,
+        "position_delta": 59,
+        "position_improvement": 0
+      },
+      "query_changes": [
+        {
+          "query": "po 50",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 59
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        }
+      ]
+    },
+    "keyword_plan": {
+      "primary": "po 50",
+      "secondary": [],
+      "intents": [
+        "informacyjna"
+      ],
+      "useful_queries": [
+        {
+          "query": "po 50",
+          "intent": "informacyjna",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 59
+        }
+      ]
+    },
+    "tasks": [
+      "Popraw title/meta/lead strony wspierającej pod CTR i jasną intencję kategorii.",
+      "Sprawdź, czy strona wspierająca kieruje moc do najważniejszych artykułów z tej fali.",
+      "Po zmianach zgłoś w GSC stronę wspierającą oraz najważniejsze artykuły, do których linkuje.",
+      "Nie dodawaj sztucznego FAQ/cytowań do strony technicznej, jeśli nie pasuje do jej funkcji."
+    ],
+    "internal_link_sources": [],
+    "promotion_urls": [
+      "https://fitpo50.pl/o-mnie.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js o-mnie.html",
+      "node scripts/article-contract-check.js o-mnie.html _site/o-mnie.html",
+      "node scripts/predeploy-gate.js --slug o-mnie",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 59
       },
       "checkpoints": null,
       "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
@@ -673,90 +788,6 @@
       "speed": 10,
       "ctr_opportunity": 35
     },
-    "url": "https://fitpo50.pl/o-mnie.html",
-    "file": "o-mnie.html",
-    "title": "O mnie | FitPo50",
-    "priority": "P3_MAINTAIN",
-    "segment": "SITE_SUPPORT",
-    "editorial_decision": "support",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 0,
-      "ctr": 0,
-      "position": 0,
-      "status": "NO_GSC_QUERY_PAGE_DATA"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "DORMANT",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 0,
-        "impressions_pct": 0,
-        "ctr_pp": 0,
-        "position_delta": 0,
-        "position_improvement": 0
-      },
-      "query_changes": []
-    },
-    "keyword_plan": {
-      "primary": "Wróć do formy po 50-tce",
-      "secondary": [],
-      "intents": [],
-      "useful_queries": []
-    },
-    "tasks": [
-      "Sprawdź, czy strona wspierająca kieruje moc do najważniejszych artykułów z tej fali.",
-      "Po zmianach zgłoś w GSC stronę wspierającą oraz najważniejsze artykuły, do których linkuje.",
-      "Nie dodawaj sztucznego FAQ/cytowań do strony technicznej, jeśli nie pasuje do jej funkcji."
-    ],
-    "internal_link_sources": [],
-    "promotion_urls": [
-      "https://fitpo50.pl/o-mnie.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js o-mnie.html",
-      "node scripts/article-contract-check.js o-mnie.html _site/o-mnie.html",
-      "node scripts/predeploy-gate.js --slug o-mnie",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "checkpoints": null,
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P2_CORE_SUPPORT_LINKING",
-    "score": {
-      "total": 56,
-      "seo": 20,
-      "aeo": 0,
-      "geo": 0,
-      "aio": 11,
-      "promotion": 70,
-      "speed": 10,
-      "ctr_opportunity": 35
-    },
     "url": "https://fitpo50.pl/polityka-prywatnosci.html",
     "file": "polityka-prywatnosci.html",
     "title": "Polityka Prywatności i Plików Cookies | FitPo50",
@@ -832,755 +863,6 @@
   {
     "type": "P0_PUSH_TO_PAGE_ONE",
     "score": {
-      "total": 36,
-      "seo": 63,
-      "aeo": 100,
-      "geo": 100,
-      "aio": 89,
-      "promotion": 80,
-      "speed": 78,
-      "ctr_opportunity": 35
-    },
-    "url": "https://fitpo50.pl/pilates-po-50-nie-dla-kobiet.html",
-    "file": "pilates-po-50-nie-dla-kobiet.html",
-    "title": "Pilates po 50-tce: mocne ciało i stabilny chód | FitPo50",
-    "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "CTR_GAP_TOP10",
-    "editorial_decision": "promować",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 5,
-      "status": "ok"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "NEW_VISIBILITY",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 1,
-        "ctr": 0,
-        "position": 5
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 1,
-        "impressions_pct": 100,
-        "ctr_pp": 0,
-        "position_delta": 5,
-        "position_improvement": 0
-      },
-      "query_changes": []
-    },
-    "keyword_plan": {
-      "primary": "Pilates nie jest dla kobiet. Jest dla każdego, kto chce chodzić w wieku 75 lat bez laski.",
-      "secondary": [],
-      "intents": [],
-      "useful_queries": []
-    },
-    "tasks": [
-      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
-      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
-      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
-    ],
-    "internal_link_sources": [
-      {
-        "from": "healthspan-nie-lifespan-po-50.html",
-        "score": 16,
-        "inbound_strength": 11,
-        "anchor": "Pilates nie jest dla kobiet. Jest dla każdego, kto",
-        "placement": "Akapit z tematem: dowiedz, szybka, odpowiedz."
-      },
-      {
-        "from": "dlaczego-bieznia-to-za-malo.html",
-        "score": 15,
-        "inbound_strength": 11,
-        "anchor": "Pilates nie jest dla kobiet. Jest dla każdego, kto",
-        "placement": "Akapit z tematem: tylko, dowiedz, trening."
-      },
-      {
-        "from": "kawa-jako-preworkout-po-50.html",
-        "score": 14,
-        "inbound_strength": 6,
-        "anchor": "Pilates nie jest dla kobiet. Jest dla każdego, kto",
-        "placement": "Akapit z tematem: szybka, odpowiedz, kluczowe."
-      },
-      {
-        "from": "szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
-        "score": 14,
-        "inbound_strength": 2,
-        "anchor": "Pilates nie jest dla kobiet. Jest dla każdego, kto",
-        "placement": "Akapit z tematem: kobiet, tylko, dowiedz."
-      },
-      {
-        "from": "silownia-dla-ludzi.html",
-        "score": 13,
-        "inbound_strength": 9,
-        "anchor": "Pilates nie jest dla kobiet. Jest dla każdego, kto",
-        "placement": "Akapit z tematem: ludzi, siłownia, dowiedz."
-      }
-    ],
-    "promotion_urls": [
-      "https://fitpo50.pl/pilates-po-50-nie-dla-kobiet.html",
-      "https://fitpo50.pl/healthspan-nie-lifespan-po-50.html",
-      "https://fitpo50.pl/dlaczego-bieznia-to-za-malo.html",
-      "https://fitpo50.pl/kawa-jako-preworkout-po-50.html",
-      "https://fitpo50.pl/szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
-      "https://fitpo50.pl/silownia-dla-ludzi.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js pilates-po-50-nie-dla-kobiet.html",
-      "node scripts/article-contract-check.js pilates-po-50-nie-dla-kobiet.html _site/pilates-po-50-nie-dla-kobiet.html",
-      "node scripts/predeploy-gate.js --slug pilates-po-50-nie-dla-kobiet",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 1,
-        "ctr": 0,
-        "position": 5
-      },
-      "checkpoints": {
-        "day_7": "2026-06-11",
-        "day_14": "2026-06-18",
-        "day_28": "2026-07-02"
-      },
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P0_PUSH_TO_PAGE_ONE",
-    "score": {
-      "total": 34,
-      "seo": 69,
-      "aeo": 100,
-      "geo": 100,
-      "aio": 89,
-      "promotion": 80,
-      "speed": 78,
-      "ctr_opportunity": 35
-    },
-    "url": "https://fitpo50.pl/nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
-    "file": "nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
-    "title": "Nordic Walking po 50-tce: technika, kije i korzyści | FitPo50",
-    "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "LOW_VISIBILITY_LONG_TAIL",
-    "editorial_decision": "promować",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 3,
-      "ctr": 0,
-      "position": 11.33,
-      "status": "ok"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "NEW_VISIBILITY",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 3,
-        "ctr": 0,
-        "position": 11.33
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 3,
-        "impressions_pct": 100,
-        "ctr_pp": 0,
-        "position_delta": 11.33,
-        "position_improvement": 0
-      },
-      "query_changes": []
-    },
-    "keyword_plan": {
-      "primary": "Nordic Walking: kompletny przewodnik dla 50+. Technika, kije i jak zacząć bez kontuzji",
-      "secondary": [],
-      "intents": [],
-      "useful_queries": []
-    },
-    "tasks": [
-      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
-      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
-      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
-    ],
-    "internal_link_sources": [
-      {
-        "from": "jak-zaczac-na-silowni-po-50.html",
-        "score": 15,
-        "inbound_strength": 31,
-        "anchor": "Nordic Walking: kompletny przewodnik dla 50+. Techn",
-        "placement": "Akapit z tematem: zaczac, plan, przewodnik."
-      },
-      {
-        "from": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
-        "score": 15,
-        "inbound_strength": 5,
-        "anchor": "Nordic Walking: kompletny przewodnik dla 50+. Techn",
-        "placement": "Akapit z tematem: dowiedz, prawidłowa, zdrowie."
-      },
-      {
-        "from": "bledy-50.html",
-        "score": 13,
-        "inbound_strength": 13,
-        "anchor": "Nordic Walking: kompletny przewodnik dla 50+. Techn",
-        "placement": "Akapit z tematem: najczestsze, zdrowie, forme."
-      },
-      {
-        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
-        "score": 12,
-        "inbound_strength": 9,
-        "anchor": "Nordic Walking: kompletny przewodnik dla 50+. Techn",
-        "placement": "Akapit z tematem: kompletny, przewodnik, dowiedz."
-      },
-      {
-        "from": "trening-maszynowy-po-50.html",
-        "score": 11,
-        "inbound_strength": 14,
-        "anchor": "Nordic Walking: kompletny przewodnik dla 50+. Techn",
-        "placement": "Akapit z tematem: plan, dowiedz, pierwsze."
-      }
-    ],
-    "promotion_urls": [
-      "https://fitpo50.pl/nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
-      "https://fitpo50.pl/jak-zaczac-na-silowni-po-50.html",
-      "https://fitpo50.pl/sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
-      "https://fitpo50.pl/bledy-50.html",
-      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "https://fitpo50.pl/trening-maszynowy-po-50.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
-      "node scripts/article-contract-check.js nordic-walking-jak-zaczac-technika-kije-zdrowie.html _site/nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
-      "node scripts/predeploy-gate.js --slug nordic-walking-jak-zaczac-technika-kije-zdrowie",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 3,
-        "ctr": 0,
-        "position": 11.33
-      },
-      "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
-      },
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P0_PUSH_TO_PAGE_ONE",
-    "score": {
-      "total": 32,
-      "seo": 97,
-      "aeo": 100,
-      "geo": 100,
-      "aio": 100,
-      "promotion": 100,
-      "speed": 78,
-      "ctr_opportunity": 35
-    },
-    "url": "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
-    "file": "apob-norma-cena-jak-czytac-wynik.html",
-    "title": "Badanie ApoB po 50: Cena, normy i interpretacja | FitPo50",
-    "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "LOW_VISIBILITY_LONG_TAIL",
-    "editorial_decision": "promować",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 116,
-      "ctr": 0,
-      "position": 12.39,
-      "status": "ok"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "NEW_VISIBILITY",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 116,
-        "ctr": 0,
-        "position": 12.39
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 116,
-        "impressions_pct": 100,
-        "ctr_pp": 0,
-        "position_delta": 12.39,
-        "position_improvement": 0
-      },
-      "query_changes": [
-        {
-          "query": "apob badanie cena",
-          "current": {
-            "clicks": 0,
-            "impressions": 35,
-            "ctr": 0,
-            "position": 11.83
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 35,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "badanie apob cena",
-          "current": {
-            "clicks": 0,
-            "impressions": 14,
-            "ctr": 0,
-            "position": 12.57
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 14,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "apob cena badania",
-          "current": {
-            "clicks": 0,
-            "impressions": 6,
-            "ctr": 0,
-            "position": 13
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 6,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "apob cena",
-          "current": {
-            "clicks": 0,
-            "impressions": 5,
-            "ctr": 0,
-            "position": 13
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 5,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "apob norma",
-          "current": {
-            "clicks": 0,
-            "impressions": 4,
-            "ctr": 0,
-            "position": 12
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 4,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "ile kosztuje badanie apob",
-          "current": {
-            "clicks": 0,
-            "impressions": 4,
-            "ctr": 0,
-            "position": 13
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 4,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "badanie krwi apob cena",
-          "current": {
-            "clicks": 0,
-            "impressions": 2,
-            "ctr": 0,
-            "position": 13
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 2,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "apo b ile kosztuje",
-          "current": {
-            "clicks": 0,
-            "impressions": 1,
-            "ctr": 0,
-            "position": 13
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 1,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "apob alab cena",
-          "current": {
-            "clicks": 0,
-            "impressions": 1,
-            "ctr": 0,
-            "position": 7
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 1,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "apob co to",
-          "current": {
-            "clicks": 0,
-            "impressions": 1,
-            "ctr": 0,
-            "position": 7
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 1,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "apolipoproteina b normy",
-          "current": {
-            "clicks": 0,
-            "impressions": 1,
-            "ctr": 0,
-            "position": 25
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 1,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "diagnostyka apob cena",
-          "current": {
-            "clicks": 0,
-            "impressions": 1,
-            "ctr": 0,
-            "position": 10
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 1,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "ile kosztuje apob",
-          "current": {
-            "clicks": 0,
-            "impressions": 1,
-            "ctr": 0,
-            "position": 13
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 1,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "koszt badania apob",
-          "current": {
-            "clicks": 0,
-            "impressions": 1,
-            "ctr": 0,
-            "position": 13
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 1,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        }
-      ]
-    },
-    "keyword_plan": {
-      "primary": "apob badanie cena",
-      "secondary": [
-        "badanie apob cena",
-        "apob cena badania",
-        "apob cena",
-        "apob norma",
-        "ile kosztuje badanie apob",
-        "badanie krwi apob cena"
-      ],
-      "intents": [
-        "normy/wynik/cena",
-        "definicja"
-      ],
-      "useful_queries": [
-        {
-          "query": "apob badanie cena",
-          "intent": "normy/wynik/cena",
-          "impressions": 35,
-          "clicks": 0,
-          "position": 11.83
-        },
-        {
-          "query": "badanie apob cena",
-          "intent": "normy/wynik/cena",
-          "impressions": 14,
-          "clicks": 0,
-          "position": 12.57
-        },
-        {
-          "query": "apob cena badania",
-          "intent": "normy/wynik/cena",
-          "impressions": 6,
-          "clicks": 0,
-          "position": 13
-        },
-        {
-          "query": "apob cena",
-          "intent": "normy/wynik/cena",
-          "impressions": 5,
-          "clicks": 0,
-          "position": 13
-        },
-        {
-          "query": "apob norma",
-          "intent": "normy/wynik/cena",
-          "impressions": 4,
-          "clicks": 0,
-          "position": 12
-        },
-        {
-          "query": "ile kosztuje badanie apob",
-          "intent": "normy/wynik/cena",
-          "impressions": 4,
-          "clicks": 0,
-          "position": 13
-        },
-        {
-          "query": "badanie krwi apob cena",
-          "intent": "normy/wynik/cena",
-          "impressions": 2,
-          "clicks": 0,
-          "position": 13
-        },
-        {
-          "query": "apob alab cena",
-          "intent": "normy/wynik/cena",
-          "impressions": 1,
-          "clicks": 0,
-          "position": 7
-        },
-        {
-          "query": "apob co to",
-          "intent": "definicja",
-          "impressions": 1,
-          "clicks": 0,
-          "position": 7
-        },
-        {
-          "query": "diagnostyka apob cena",
-          "intent": "normy/wynik/cena",
-          "impressions": 1,
-          "clicks": 0,
-          "position": 10
-        },
-        {
-          "query": "apo b ile kosztuje",
-          "intent": "normy/wynik/cena",
-          "impressions": 1,
-          "clicks": 0,
-          "position": 13
-        },
-        {
-          "query": "ile kosztuje apob",
-          "intent": "normy/wynik/cena",
-          "impressions": 1,
-          "clicks": 0,
-          "position": 13
-        }
-      ]
-    },
-    "tasks": [
-      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
-      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
-      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
-    ],
-    "internal_link_sources": [
-      {
-        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-        "score": 20,
-        "inbound_strength": 10,
-        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
-        "placement": "Akapit z tematem: naprawde, dowiedz, kluczowe."
-      },
-      {
-        "from": "badania-krwi-po-50-jak-czesto.html",
-        "score": 19,
-        "inbound_strength": 29,
-        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
-        "placement": "Akapit z tematem: badania, robic, jakie."
-      },
-      {
-        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
-        "score": 19,
-        "inbound_strength": 9,
-        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
-        "placement": "Akapit z tematem: dowiedz, szybka, odpowiedz."
-      },
-      {
-        "from": "jedz-wiecej-po-50.html",
-        "score": 15,
-        "inbound_strength": 13,
-        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
-        "placement": "Akapit z tematem: dowiedz, niz, szybka."
-      },
-      {
-        "from": "hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
-        "score": 15,
-        "inbound_strength": 6,
-        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
-        "placement": "Akapit z tematem: piecdziesiatce, czym, tak."
-      }
-    ],
-    "promotion_urls": [
-      "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
-      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-      "https://fitpo50.pl/badania-krwi-po-50-jak-czesto.html",
-      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "https://fitpo50.pl/jedz-wiecej-po-50.html",
-      "https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js apob-norma-cena-jak-czytac-wynik.html",
-      "node scripts/article-contract-check.js apob-norma-cena-jak-czytac-wynik.html _site/apob-norma-cena-jak-czytac-wynik.html",
-      "node scripts/predeploy-gate.js --slug apob-norma-cena-jak-czytac-wynik",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 116,
-        "ctr": 0,
-        "position": 12.39
-      },
-      "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
-      },
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P0_PUSH_TO_PAGE_ONE",
-    "score": {
       "total": 32,
       "seo": 100,
       "aeo": 100,
@@ -1592,15 +874,15 @@
     },
     "url": "https://fitpo50.pl/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
     "file": "sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
-    "title": "Sakady po 50: Co to jest i jak trenować wzrok? | FitPo50",
+    "title": "Sakady po 50: czym są i jak trenować wzrok na co dzień? | FitPo50",
     "priority": "P0_NEAR_PAGE_ONE",
     "segment": "LOW_VISIBILITY_LONG_TAIL",
     "editorial_decision": "promować",
     "gsc": {
       "clicks": 0,
-      "impressions": 81,
+      "impressions": 108,
       "ctr": 0,
-      "position": 10.67,
+      "position": 10.99,
       "status": "ok"
     },
     "performance_delta": {
@@ -1608,9 +890,9 @@
       "conclusion": "NEW_VISIBILITY",
       "current_90d": {
         "clicks": 0,
-        "impressions": 81,
+        "impressions": 108,
         "ctr": 0,
-        "position": 10.67
+        "position": 10.99
       },
       "previous_90d": {
         "clicks": 0,
@@ -1620,10 +902,10 @@
       },
       "delta": {
         "clicks": 0,
-        "impressions": 81,
+        "impressions": 108,
         "impressions_pct": 100,
         "ctr_pp": 0,
-        "position_delta": 10.67,
+        "position_delta": 10.99,
         "position_improvement": 0
       },
       "query_changes": [
@@ -1631,9 +913,28 @@
           "query": "sakady",
           "current": {
             "clicks": 0,
+            "impressions": 30,
+            "ctr": 0,
+            "position": 10.03
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 30,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "supresja co to",
+          "current": {
+            "clicks": 0,
             "impressions": 21,
             "ctr": 0,
-            "position": 9.29
+            "position": 13
           },
           "previous": {
             "clicks": 0,
@@ -1647,29 +948,10 @@
           "position_improvement": 0
         },
         {
-          "query": "supresja co to",
-          "current": {
-            "clicks": 0,
-            "impressions": 17,
-            "ctr": 0,
-            "position": 13
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 17,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
           "query": "co to jest supresja",
           "current": {
             "clicks": 0,
-            "impressions": 10,
+            "impressions": 12,
             "ctr": 0,
             "position": 10.5
           },
@@ -1679,7 +961,7 @@
             "ctr": 0,
             "position": 0
           },
-          "impressions_delta": 10,
+          "impressions_delta": 12,
           "impressions_delta_pct": 100,
           "clicks_delta": 0,
           "position_improvement": 0
@@ -1688,9 +970,9 @@
           "query": "sakady co to",
           "current": {
             "clicks": 0,
-            "impressions": 8,
+            "impressions": 12,
             "ctr": 0,
-            "position": 13
+            "position": 12.83
           },
           "previous": {
             "clicks": 0,
@@ -1698,7 +980,26 @@
             "ctr": 0,
             "position": 0
           },
-          "impressions_delta": 8,
+          "impressions_delta": 12,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "sakkady",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 45
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
           "impressions_delta_pct": 100,
           "clicks_delta": 0,
           "position_improvement": 0
@@ -1710,7 +1011,8 @@
       "secondary": [
         "supresja co to",
         "co to jest supresja",
-        "sakady co to"
+        "sakady co to",
+        "sakkady"
       ],
       "intents": [
         "informacyjna",
@@ -1720,30 +1022,37 @@
         {
           "query": "sakady",
           "intent": "informacyjna",
-          "impressions": 21,
+          "impressions": 30,
           "clicks": 0,
-          "position": 9.29
+          "position": 10.03
         },
         {
           "query": "supresja co to",
           "intent": "definicja",
-          "impressions": 17,
+          "impressions": 21,
           "clicks": 0,
           "position": 13
         },
         {
           "query": "co to jest supresja",
           "intent": "definicja",
-          "impressions": 10,
+          "impressions": 12,
           "clicks": 0,
           "position": 10.5
         },
         {
           "query": "sakady co to",
           "intent": "definicja",
-          "impressions": 8,
+          "impressions": 12,
           "clicks": 0,
-          "position": 13
+          "position": 12.83
+        },
+        {
+          "query": "sakkady",
+          "intent": "informacyjna",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 45
         }
       ]
     },
@@ -1754,48 +1063,48 @@
     ],
     "internal_link_sources": [
       {
-        "from": "nawodnienie-na-treningu-po-50.html",
-        "score": 16,
-        "inbound_strength": 8,
-        "anchor": "Sakady — supresja sakadyczna i 40 000 ślepych chwil",
-        "placement": "Akapit z tematem: ile, podczas, zmienia."
-      },
-      {
-        "from": "jedz-wiecej-po-50.html",
-        "score": 14,
-        "inbound_strength": 13,
-        "anchor": "Sakady — supresja sakadyczna i 40 000 ślepych chwil",
-        "placement": "Akapit z tematem: działa, szybka, odpowiedz."
-      },
-      {
-        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
-        "score": 14,
-        "inbound_strength": 9,
-        "anchor": "Sakady — supresja sakadyczna i 40 000 ślepych chwil",
-        "placement": "Akapit z tematem: mozg, poprawia, zycia."
-      },
-      {
         "from": "siedzenie-po-50.html",
-        "score": 14,
+        "score": 15,
         "inbound_strength": 9,
-        "anchor": "Sakady — supresja sakadyczna i 40 000 ślepych chwil",
+        "anchor": "Sakady po 50: czym są i jak trenować wzrok na co dzień",
         "placement": "Akapit z tematem: zmienia, zycia, twoj."
       },
       {
         "from": "hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
         "score": 14,
         "inbound_strength": 6,
-        "anchor": "Sakady — supresja sakadyczna i 40 000 ślepych chwil",
+        "anchor": "Sakady po 50: czym są i jak trenować wzrok na co dzień",
         "placement": "Akapit z tematem: piecdziesiatce, czym, dbac."
+      },
+      {
+        "from": "komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html",
+        "score": 14,
+        "inbound_strength": 5,
+        "anchor": "Sakady po 50: czym są i jak trenować wzrok na co dzień",
+        "placement": "Akapit z tematem: twoja, wie, szybka."
+      },
+      {
+        "from": "motywacja-po-50.html",
+        "score": 13,
+        "inbound_strength": 12,
+        "anchor": "Sakady po 50: czym są i jak trenować wzrok na co dzień",
+        "placement": "Akapit z tematem: skad, zycia, szybka."
+      },
+      {
+        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
+        "score": 13,
+        "inbound_strength": 9,
+        "anchor": "Sakady po 50: czym są i jak trenować wzrok na co dzień",
+        "placement": "Akapit z tematem: mozg, zycia, szybka."
       }
     ],
     "promotion_urls": [
       "https://fitpo50.pl/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
-      "https://fitpo50.pl/nawodnienie-na-treningu-po-50.html",
-      "https://fitpo50.pl/jedz-wiecej-po-50.html",
-      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
       "https://fitpo50.pl/siedzenie-po-50.html",
-      "https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html"
+      "https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
+      "https://fitpo50.pl/komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html",
+      "https://fitpo50.pl/motywacja-po-50.html",
+      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html"
     ],
     "validation_commands": [
       "node scripts/validate-article-standard.js sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
@@ -1808,14 +1117,14 @@
     "measurement": {
       "baseline": {
         "clicks": 0,
-        "impressions": 81,
+        "impressions": 108,
         "ctr": 0,
-        "position": 10.67
+        "position": 10.99
       },
       "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
+        "day_7": "2026-06-21",
+        "day_14": "2026-06-28",
+        "day_28": "2026-07-12"
       },
       "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
     }
@@ -1834,7 +1143,7 @@
     },
     "url": "https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html",
     "file": "trening-silowy-starzenie-komorkowe-dna.html",
-    "title": "Wiek biologiczny: Jak go sprawdzić i obniżyć po 50? | FitPo50",
+    "title": "Wiek biologiczny po 50: siła, DNA i metylacja w komórce | FitPo50",
     "priority": "P0_NEAR_PAGE_ONE",
     "segment": "CTR_GAP_TOP10",
     "editorial_decision": "promować",
@@ -1910,7 +1219,7 @@
       ]
     },
     "keyword_plan": {
-      "primary": "Trening siłowy po 50: Jak odmłodzić swoje komórki i DNA?",
+      "primary": "Wiek biologiczny po 50: siła, DNA i metylacja w komórce",
       "secondary": [],
       "intents": [],
       "useful_queries": []
@@ -1922,48 +1231,48 @@
     ],
     "internal_link_sources": [
       {
-        "from": "mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html",
-        "score": 15,
-        "inbound_strength": 7,
-        "anchor": "Trening siłowy po 50: Jak odmłodzić swoje komórki i",
-        "placement": "Akapit z tematem: piecdziesiatce, poznaj, szybka."
+        "from": "jedz-wiecej-po-50.html",
+        "score": 14,
+        "inbound_strength": 13,
+        "anchor": "Wiek biologiczny po 50: siła, DNA i metylacja w kom",
+        "placement": "Akapit z tematem: wiecej, miesnie, treningu."
       },
       {
-        "from": "silownia-chroni-serce-przed-zawalem.html",
-        "score": 15,
+        "from": "trening-3x30-dla-50-plus.html",
+        "score": 13,
+        "inbound_strength": 18,
+        "anchor": "Wiek biologiczny po 50: siła, DNA i metylacja w kom",
+        "placement": "Akapit z tematem: trening, plan, szybka."
+      },
+      {
+        "from": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+        "score": 13,
+        "inbound_strength": 8,
+        "anchor": "Wiek biologiczny po 50: siła, DNA i metylacja w kom",
+        "placement": "Akapit z tematem: ile, piecdziesiatce, szybka."
+      },
+      {
+        "from": "jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html",
+        "score": 13,
         "inbound_strength": 6,
-        "anchor": "Trening siłowy po 50: Jak odmłodzić swoje komórki i",
-        "placement": "Akapit z tematem: chroni, trening, siłowy."
+        "anchor": "Wiek biologiczny po 50: siła, DNA i metylacja w kom",
+        "placement": "Akapit z tematem: telomery, sprawdz, szybka."
       },
       {
-        "from": "jak-zaczac-na-silowni-po-50.html",
-        "score": 14,
-        "inbound_strength": 31,
-        "anchor": "Trening siłowy po 50: Jak odmłodzić swoje komórki i",
-        "placement": "Akapit z tematem: plan, poznaj, zasady."
-      },
-      {
-        "from": "apob-norma-cena-jak-czytac-wynik.html",
-        "score": 14,
-        "inbound_strength": 10,
-        "anchor": "Trening siłowy po 50: Jak odmłodzić swoje komórki i",
-        "placement": "Akapit z tematem: ile, poznaj, szybka."
-      },
-      {
-        "from": "miesnie-dna-miednicy-trening-core-po-50.html",
-        "score": 14,
-        "inbound_strength": 5,
-        "anchor": "Trening siłowy po 50: Jak odmłodzić swoje komórki i",
-        "placement": "Akapit z tematem: dna, trening, poznaj."
+        "from": "suplementy-po-50-tce-kompletny-przewodnik.html",
+        "score": 13,
+        "inbound_strength": 6,
+        "anchor": "Wiek biologiczny po 50: siła, DNA i metylacja w kom",
+        "placement": "Akapit z tematem: naprawde, sprawdz, szybka."
       }
     ],
     "promotion_urls": [
       "https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html",
-      "https://fitpo50.pl/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html",
-      "https://fitpo50.pl/silownia-chroni-serce-przed-zawalem.html",
-      "https://fitpo50.pl/jak-zaczac-na-silowni-po-50.html",
-      "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
-      "https://fitpo50.pl/miesnie-dna-miednicy-trening-core-po-50.html"
+      "https://fitpo50.pl/jedz-wiecej-po-50.html",
+      "https://fitpo50.pl/trening-3x30-dla-50-plus.html",
+      "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+      "https://fitpo50.pl/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html",
+      "https://fitpo50.pl/suplementy-po-50-tce-kompletny-przewodnik.html"
     ],
     "validation_commands": [
       "node scripts/validate-article-standard.js trening-silowy-starzenie-komorkowe-dna.html",
@@ -1981,9 +1290,9 @@
         "position": 5.58
       },
       "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
+        "day_7": "2026-06-21",
+        "day_14": "2026-06-28",
+        "day_28": "2026-07-12"
       },
       "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
     }
@@ -1991,8 +1300,8 @@
   {
     "type": "P0_PUSH_TO_PAGE_ONE",
     "score": {
-      "total": 31,
-      "seo": 93,
+      "total": 32,
+      "seo": 71,
       "aeo": 100,
       "geo": 100,
       "aio": 100,
@@ -2000,17 +1309,17 @@
       "speed": 78,
       "ctr_opportunity": 35
     },
-    "url": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
-    "file": "apob-apoa-badania-cholesterol.html",
-    "title": "ApoB vs ApoA po 50: normy, ratio i interpretacja | FitPo50",
+    "url": "https://fitpo50.pl/pilates-po-50-nie-dla-kobiet.html",
+    "file": "pilates-po-50-nie-dla-kobiet.html",
+    "title": "Pilates po 50+: mocny brzuch, równowaga i stabilny krok | FitPo50",
     "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "LOW_VISIBILITY_LONG_TAIL",
+    "segment": "CTR_GAP_TOP10",
     "editorial_decision": "promować",
     "gsc": {
       "clicks": 0,
-      "impressions": 52,
+      "impressions": 1,
       "ctr": 0,
-      "position": 14.33,
+      "position": 5,
       "status": "ok"
     },
     "performance_delta": {
@@ -2018,9 +1327,9 @@
       "conclusion": "NEW_VISIBILITY",
       "current_90d": {
         "clicks": 0,
-        "impressions": 52,
+        "impressions": 1,
         "ctr": 0,
-        "position": 14.33
+        "position": 5
       },
       "previous_90d": {
         "clicks": 0,
@@ -2030,10 +1339,139 @@
       },
       "delta": {
         "clicks": 0,
-        "impressions": 52,
+        "impressions": 1,
         "impressions_pct": 100,
         "ctr_pp": 0,
-        "position_delta": 14.33,
+        "position_delta": 5,
+        "position_improvement": 0
+      },
+      "query_changes": []
+    },
+    "keyword_plan": {
+      "primary": "Pilates po 50+: mocny brzuch, równowaga i stabilny krok",
+      "secondary": [],
+      "intents": [],
+      "useful_queries": []
+    },
+    "tasks": [
+      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
+      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
+      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
+    ],
+    "internal_link_sources": [
+      {
+        "from": "kawa-jako-preworkout-po-50.html",
+        "score": 14,
+        "inbound_strength": 6,
+        "anchor": "Pilates po 50+: mocny brzuch, równowaga i stabilny",
+        "placement": "Akapit z tematem: sprawdz, szybka, odpowiedz."
+      },
+      {
+        "from": "silownia-dla-ludzi.html",
+        "score": 13,
+        "inbound_strength": 9,
+        "anchor": "Pilates po 50+: mocny brzuch, równowaga i stabilny",
+        "placement": "Akapit z tematem: ludzi, siłownia, zaczac."
+      },
+      {
+        "from": "ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
+        "score": 12,
+        "inbound_strength": 9,
+        "anchor": "Pilates po 50+: mocny brzuch, równowaga i stabilny",
+        "placement": "Akapit z tematem: chronic, szybka, odpowiedz."
+      },
+      {
+        "from": "hrt-mit-badanie-po-50.html",
+        "score": 12,
+        "inbound_strength": 8,
+        "anchor": "Pilates po 50+: mocny brzuch, równowaga i stabilny",
+        "placement": "Akapit z tematem: kobiet, szybka, odpowiedz."
+      },
+      {
+        "from": "jak-zaczac-sie-podciagac-po-50.html",
+        "score": 12,
+        "inbound_strength": 5,
+        "anchor": "Pilates po 50+: mocny brzuch, równowaga i stabilny",
+        "placement": "Akapit z tematem: zaczac, sprawdz, krok."
+      }
+    ],
+    "promotion_urls": [
+      "https://fitpo50.pl/pilates-po-50-nie-dla-kobiet.html",
+      "https://fitpo50.pl/kawa-jako-preworkout-po-50.html",
+      "https://fitpo50.pl/silownia-dla-ludzi.html",
+      "https://fitpo50.pl/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
+      "https://fitpo50.pl/hrt-mit-badanie-po-50.html",
+      "https://fitpo50.pl/jak-zaczac-sie-podciagac-po-50.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js pilates-po-50-nie-dla-kobiet.html",
+      "node scripts/article-contract-check.js pilates-po-50-nie-dla-kobiet.html _site/pilates-po-50-nie-dla-kobiet.html",
+      "node scripts/predeploy-gate.js --slug pilates-po-50-nie-dla-kobiet",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5
+      },
+      "checkpoints": {
+        "day_7": "2026-06-21",
+        "day_14": "2026-06-28",
+        "day_28": "2026-07-12"
+      },
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P0_PUSH_TO_PAGE_ONE",
+    "score": {
+      "total": 31,
+      "seo": 91,
+      "aeo": 100,
+      "geo": 100,
+      "aio": 100,
+      "promotion": 100,
+      "speed": 78,
+      "ctr_opportunity": 35
+    },
+    "url": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
+    "file": "apob-apoa-badania-cholesterol.html",
+    "title": "ApoB i ApoA1 po 50: normy, cena i interpretacja wyników | FitPo50",
+    "priority": "P0_NEAR_PAGE_ONE",
+    "segment": "LOW_VISIBILITY_LONG_TAIL",
+    "editorial_decision": "promować",
+    "gsc": {
+      "clicks": 0,
+      "impressions": 85,
+      "ctr": 0,
+      "position": 15.8,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 0,
+        "impressions": 85,
+        "ctr": 0,
+        "position": 15.8
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 0,
+        "impressions": 85,
+        "impressions_pct": 100,
+        "ctr_pp": 0,
+        "position_delta": 15.8,
         "position_improvement": 0
       },
       "query_changes": [
@@ -2041,7 +1479,7 @@
           "query": "apob cena",
           "current": {
             "clicks": 0,
-            "impressions": 5,
+            "impressions": 7,
             "ctr": 0,
             "position": 13
           },
@@ -2051,7 +1489,26 @@
             "ctr": 0,
             "position": 0
           },
-          "impressions_delta": 5,
+          "impressions_delta": 7,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "badanie apob cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 12
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 7,
           "impressions_delta_pct": 100,
           "clicks_delta": 0,
           "position_improvement": 0
@@ -2079,7 +1536,7 @@
           "query": "apoa1 badanie",
           "current": {
             "clicks": 0,
-            "impressions": 2,
+            "impressions": 3,
             "ctr": 0,
             "position": 13
           },
@@ -2089,7 +1546,7 @@
             "ctr": 0,
             "position": 0
           },
-          "impressions_delta": 2,
+          "impressions_delta": 3,
           "impressions_delta_pct": 100,
           "clicks_delta": 0,
           "position_improvement": 0
@@ -2114,6 +1571,82 @@
           "position_improvement": 0
         },
         {
+          "query": "apob badanie cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 12.5
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 2,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apolipoproteina b cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 38
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 2,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "badanie apo b",
+          "current": {
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 26.5
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 2,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apo a",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 94
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
           "query": "apo b badanie",
           "current": {
             "clicks": 0,
@@ -2133,12 +1666,12 @@
           "position_improvement": 0
         },
         {
-          "query": "apolipoproteina b cena",
+          "query": "apoa",
           "current": {
             "clicks": 0,
             "impressions": 1,
             "ctr": 0,
-            "position": 43
+            "position": 15
           },
           "previous": {
             "clicks": 0,
@@ -2152,12 +1685,50 @@
           "position_improvement": 0
         },
         {
-          "query": "badanie apob cena",
+          "query": "apob",
           "current": {
             "clicks": 0,
             "impressions": 1,
             "ctr": 0,
-            "position": 12
+            "position": 63
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apob cena badania",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "cena badania apob",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 13
           },
           "previous": {
             "clicks": 0,
@@ -2173,13 +1744,13 @@
       ]
     },
     "keyword_plan": {
-      "primary": "apob cena",
+      "primary": "badanie apob cena",
       "secondary": [
+        "apob cena",
         "badanie apoa",
         "apoa1 badanie",
-        "apob apoa1 ratio",
-        "badanie apob cena",
-        "apo b badanie",
+        "apob badanie cena",
+        "badanie apo b",
         "apolipoproteina b cena"
       ],
       "intents": [
@@ -2188,9 +1759,16 @@
       ],
       "useful_queries": [
         {
+          "query": "badanie apob cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 7,
+          "clicks": 0,
+          "position": 12
+        },
+        {
           "query": "apob cena",
           "intent": "normy/wynik/cena",
-          "impressions": 5,
+          "impressions": 7,
           "clicks": 0,
           "position": 13
         },
@@ -2204,9 +1782,30 @@
         {
           "query": "apoa1 badanie",
           "intent": "normy/wynik/cena",
-          "impressions": 2,
+          "impressions": 3,
           "clicks": 0,
           "position": 13
+        },
+        {
+          "query": "apob badanie cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 2,
+          "clicks": 0,
+          "position": 12.5
+        },
+        {
+          "query": "badanie apo b",
+          "intent": "normy/wynik/cena",
+          "impressions": 2,
+          "clicks": 0,
+          "position": 26.5
+        },
+        {
+          "query": "apolipoproteina b cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 2,
+          "clicks": 0,
+          "position": 38
         },
         {
           "query": "apob apoa1 ratio",
@@ -2216,11 +1815,25 @@
           "position": 70
         },
         {
-          "query": "badanie apob cena",
+          "query": "apob cena badania",
           "intent": "normy/wynik/cena",
           "impressions": 1,
           "clicks": 0,
-          "position": 12
+          "position": 13
+        },
+        {
+          "query": "cena badania apob",
+          "intent": "normy/wynik/cena",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 13
+        },
+        {
+          "query": "apoa",
+          "intent": "informacyjna",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 15
         },
         {
           "query": "apo b badanie",
@@ -2228,13 +1841,6 @@
           "impressions": 1,
           "clicks": 0,
           "position": 31
-        },
-        {
-          "query": "apolipoproteina b cena",
-          "intent": "normy/wynik/cena",
-          "impressions": 1,
-          "clicks": 0,
-          "position": 43
         }
       ]
     },
@@ -2245,48 +1851,48 @@
     ],
     "internal_link_sources": [
       {
-        "from": "apob-norma-cena-jak-czytac-wynik.html",
-        "score": 16,
-        "inbound_strength": 10,
-        "anchor": "Badanie ApoB i ApoA1: norma, cena i interpretacja w",
-        "placement": "Akapit z tematem: apob, norma, cena."
-      },
-      {
-        "from": "mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html",
-        "score": 12,
-        "inbound_strength": 7,
-        "anchor": "Badanie ApoB i ApoA1: norma, cena i interpretacja w",
-        "placement": "Akapit z tematem: samo, roznice, szybka."
-      },
-      {
         "from": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
-        "score": 10,
+        "score": 11,
         "inbound_strength": 8,
-        "anchor": "Badanie ApoB i ApoA1: norma, cena i interpretacja w",
+        "anchor": "ApoB i ApoA1 po 50: normy, cena i interpretacja wyn",
         "placement": "Akapit z tematem: białko, badania, szybka."
       },
       {
         "from": "ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html",
         "score": 10,
         "inbound_strength": 7,
-        "anchor": "Badanie ApoB i ApoA1: norma, cena i interpretacja w",
+        "anchor": "ApoB i ApoA1 po 50: normy, cena i interpretacja wyn",
         "placement": "Akapit z tematem: naprawde, badania, szybka."
       },
       {
         "from": "hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
         "score": 10,
         "inbound_strength": 6,
-        "anchor": "Badanie ApoB i ApoA1: norma, cena i interpretacja w",
+        "anchor": "ApoB i ApoA1 po 50: normy, cena i interpretacja wyn",
         "placement": "Akapit z tematem: czym, szybka, odpowiedz."
+      },
+      {
+        "from": "dieta-50-50-po-piecdziesiatce.html",
+        "score": 10,
+        "inbound_strength": 5,
+        "anchor": "ApoB i ApoA1 po 50: normy, cena i interpretacja wyn",
+        "placement": "Akapit z tematem: sprawdz, badania, szybka."
+      },
+      {
+        "from": "dieta-po-50.html",
+        "score": 9,
+        "inbound_strength": 56,
+        "anchor": "ApoB i ApoA1 po 50: normy, cena i interpretacja wyn",
+        "placement": "Akapit z tematem: naprawde, szybka, odpowiedz."
       }
     ],
     "promotion_urls": [
       "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
-      "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
-      "https://fitpo50.pl/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html",
       "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
       "https://fitpo50.pl/ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html",
-      "https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html"
+      "https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
+      "https://fitpo50.pl/dieta-50-50-po-piecdziesiatce.html",
+      "https://fitpo50.pl/dieta-po-50.html"
     ],
     "validation_commands": [
       "node scripts/validate-article-standard.js apob-apoa-badania-cholesterol.html",
@@ -2299,14 +1905,143 @@
     "measurement": {
       "baseline": {
         "clicks": 0,
-        "impressions": 52,
+        "impressions": 85,
         "ctr": 0,
-        "position": 14.33
+        "position": 15.8
       },
       "checkpoints": {
-        "day_7": "2026-06-11",
-        "day_14": "2026-06-18",
-        "day_28": "2026-07-02"
+        "day_7": "2026-06-21",
+        "day_14": "2026-06-28",
+        "day_28": "2026-07-12"
+      },
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P0_PUSH_TO_PAGE_ONE",
+    "score": {
+      "total": 31,
+      "seo": 87,
+      "aeo": 100,
+      "geo": 100,
+      "aio": 100,
+      "promotion": 100,
+      "speed": 78,
+      "ctr_opportunity": 35
+    },
+    "url": "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
+    "file": "trening-silowy-eliksir-mlodosci-po-50.html",
+    "title": "Trening siłowy po 50-tce: hormony i siła | FitPo50",
+    "priority": "P0_NEAR_PAGE_ONE",
+    "segment": "CTR_GAP_TOP10",
+    "editorial_decision": "promować",
+    "gsc": {
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 5.43,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 5.43
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 0,
+        "impressions": 7,
+        "impressions_pct": 100,
+        "ctr_pp": 0,
+        "position_delta": 5.43,
+        "position_improvement": 0
+      },
+      "query_changes": []
+    },
+    "keyword_plan": {
+      "primary": "Trening siłowy jako eliksir młodości po 50-tce &ndash; praktyczny",
+      "secondary": [],
+      "intents": [],
+      "useful_queries": []
+    },
+    "tasks": [
+      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
+      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
+      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
+    ],
+    "internal_link_sources": [
+      {
+        "from": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+        "score": 10,
+        "inbound_strength": 8,
+        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
+        "placement": "Akapit z tematem: ryzyko, bezpiecznie, szybka."
+      },
+      {
+        "from": "dieta-po-50.html",
+        "score": 9,
+        "inbound_strength": 56,
+        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
+        "placement": "Akapit z tematem: zmienia, metabolizm, szybka."
+      },
+      {
+        "from": "powrot-do-formy-po-50-kompletny-przewodnik.html",
+        "score": 9,
+        "inbound_strength": 8,
+        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
+        "placement": "Akapit z tematem: trening, zdrowie, szybka."
+      },
+      {
+        "from": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
+        "score": 9,
+        "inbound_strength": 5,
+        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
+        "placement": "Akapit z tematem: zdrowie, utrata, masy."
+      },
+      {
+        "from": "sen-po-50.html",
+        "score": 8,
+        "inbound_strength": 44,
+        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
+        "placement": "Akapit z tematem: szybka, odpowiedz, kluczowe."
+      }
+    ],
+    "promotion_urls": [
+      "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
+      "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "https://fitpo50.pl/dieta-po-50.html",
+      "https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html",
+      "https://fitpo50.pl/sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
+      "https://fitpo50.pl/sen-po-50.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js trening-silowy-eliksir-mlodosci-po-50.html",
+      "node scripts/article-contract-check.js trening-silowy-eliksir-mlodosci-po-50.html _site/trening-silowy-eliksir-mlodosci-po-50.html",
+      "node scripts/predeploy-gate.js --slug trening-silowy-eliksir-mlodosci-po-50",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 5.43
+      },
+      "checkpoints": {
+        "day_7": "2026-06-08",
+        "day_14": "2026-06-15",
+        "day_28": "2026-06-29"
       },
       "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
     }
@@ -2406,7 +2141,7 @@
       {
         "from": "lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html",
         "score": 18,
-        "inbound_strength": 6,
+        "inbound_strength": 7,
         "anchor": "Jak czytać etykiety? Przewodnik po składach i E-num",
         "placement": "Akapit z tematem: szybka, odpowiedz, kluczowe."
       },
@@ -2434,7 +2169,7 @@
       {
         "from": "ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
         "score": 12,
-        "inbound_strength": 8,
+        "inbound_strength": 9,
         "anchor": "Jak czytać etykiety? Przewodnik po składach i E-num",
         "placement": "Akapit z tematem: ukryty, cukier, pułapek."
       }
@@ -2466,6 +2201,135 @@
         "day_7": "2026-06-08",
         "day_14": "2026-06-15",
         "day_28": "2026-06-29"
+      },
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P0_PUSH_TO_PAGE_ONE",
+    "score": {
+      "total": 31,
+      "seo": 79,
+      "aeo": 100,
+      "geo": 100,
+      "aio": 100,
+      "promotion": 100,
+      "speed": 78,
+      "ctr_opportunity": 35
+    },
+    "url": "https://fitpo50.pl/nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+    "file": "nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+    "title": "Nordic walking po 50: technika, kije i bezpieczny start | FitPo50",
+    "priority": "P0_NEAR_PAGE_ONE",
+    "segment": "LOW_VISIBILITY_LONG_TAIL",
+    "editorial_decision": "promować",
+    "gsc": {
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 11,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 11
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 0,
+        "impressions": 4,
+        "impressions_pct": 100,
+        "ctr_pp": 0,
+        "position_delta": 11,
+        "position_improvement": 0
+      },
+      "query_changes": []
+    },
+    "keyword_plan": {
+      "primary": "Nordic walking po 50: technika, kije i bezpieczny start",
+      "secondary": [],
+      "intents": [],
+      "useful_queries": []
+    },
+    "tasks": [
+      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
+      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
+      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
+    ],
+    "internal_link_sources": [
+      {
+        "from": "bledy-50.html",
+        "score": 11,
+        "inbound_strength": 13,
+        "anchor": "Nordic walking po 50: technika, kije i bezpieczny s",
+        "placement": "Akapit z tematem: najczestsze, zdrowie, forme."
+      },
+      {
+        "from": "wydolnosc-vo2max-starzenie-po-50.html",
+        "score": 11,
+        "inbound_strength": 10,
+        "anchor": "Nordic walking po 50: technika, kije i bezpieczny s",
+        "placement": "Akapit z tematem: poznaj, szybka, odpowiedz."
+      },
+      {
+        "from": "dyskopatia-po-50.html",
+        "score": 11,
+        "inbound_strength": 6,
+        "anchor": "Nordic walking po 50: technika, kije i bezpieczny s",
+        "placement": "Akapit z tematem: poznaj, szybka, odpowiedz."
+      },
+      {
+        "from": "syndrom-pierwszego-poniedzialku.html",
+        "score": 11,
+        "inbound_strength": 4,
+        "anchor": "Nordic walking po 50: technika, kije i bezpieczny s",
+        "placement": "Akapit z tematem: zaczac, zdrowie, szybka."
+      },
+      {
+        "from": "suplementacja-po-50.html",
+        "score": 10,
+        "inbound_strength": 36,
+        "anchor": "Nordic walking po 50: technika, kije i bezpieczny s",
+        "placement": "Akapit z tematem: poznaj, zdrowie, szybka."
+      }
+    ],
+    "promotion_urls": [
+      "https://fitpo50.pl/nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+      "https://fitpo50.pl/bledy-50.html",
+      "https://fitpo50.pl/wydolnosc-vo2max-starzenie-po-50.html",
+      "https://fitpo50.pl/dyskopatia-po-50.html",
+      "https://fitpo50.pl/syndrom-pierwszego-poniedzialku.html",
+      "https://fitpo50.pl/suplementacja-po-50.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+      "node scripts/article-contract-check.js nordic-walking-jak-zaczac-technika-kije-zdrowie.html _site/nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+      "node scripts/predeploy-gate.js --slug nordic-walking-jak-zaczac-technika-kije-zdrowie",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 11
+      },
+      "checkpoints": {
+        "day_7": "2026-06-21",
+        "day_14": "2026-06-28",
+        "day_28": "2026-07-12"
       },
       "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
     }
@@ -2662,13 +2526,6 @@
     ],
     "internal_link_sources": [
       {
-        "from": "nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
-        "score": 13,
-        "inbound_strength": 2,
-        "anchor": "5 największych błędów początkujących po 50-tce",
-        "placement": "Akapit z tematem: zdrowie, dowiedz, uniknac."
-      },
-      {
         "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
         "score": 12,
         "inbound_strength": 9,
@@ -2695,15 +2552,22 @@
         "inbound_strength": 5,
         "anchor": "5 największych błędów początkujących po 50-tce",
         "placement": "Akapit z tematem: dowiedz, szybka, odpowiedz."
+      },
+      {
+        "from": "nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+        "score": 11,
+        "inbound_strength": 4,
+        "anchor": "5 największych błędów początkujących po 50-tce",
+        "placement": "Akapit z tematem: zdrowie, start, kontuzji."
       }
     ],
     "promotion_urls": [
       "https://fitpo50.pl/bledy-50.html",
-      "https://fitpo50.pl/nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
       "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
       "https://fitpo50.pl/sen-po-50.html",
       "https://fitpo50.pl/jak-zaczac-sie-podciagac-po-50.html",
-      "https://fitpo50.pl/terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html"
+      "https://fitpo50.pl/terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html",
+      "https://fitpo50.pl/nordic-walking-jak-zaczac-technika-kije-zdrowie.html"
     ],
     "validation_commands": [
       "node scripts/validate-article-standard.js bledy-50.html",
@@ -2793,9 +2657,9 @@
       {
         "from": "trening-silowy-starzenie-komorkowe-dna.html",
         "score": 13,
-        "inbound_strength": 11,
+        "inbound_strength": 13,
         "anchor": "Jak obniżyć kortyzol po 50-tce? Stres i oponka brzu",
-        "placement": "Akapit z tematem: trening, starzenie, obnizyc."
+        "placement": "Akapit z tematem: trening, starzenie, sprawdz."
       },
       {
         "from": "tluszcz-trzewny-choroby-jak-walczyc.html",
@@ -2853,6 +2717,572 @@
         "day_7": "2026-06-08",
         "day_14": "2026-06-15",
         "day_28": "2026-06-29"
+      },
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P0_PUSH_TO_PAGE_ONE",
+    "score": {
+      "total": 30,
+      "seo": 97,
+      "aeo": 100,
+      "geo": 100,
+      "aio": 100,
+      "promotion": 100,
+      "speed": 78,
+      "ctr_opportunity": 29
+    },
+    "url": "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
+    "file": "apob-norma-cena-jak-czytac-wynik.html",
+    "title": "Badanie ApoB po 50: Cena, normy i interpretacja | FitPo50",
+    "priority": "P0_NEAR_PAGE_ONE",
+    "segment": "LEADER_WINNER",
+    "editorial_decision": "promować",
+    "gsc": {
+      "clicks": 1,
+      "impressions": 174,
+      "ctr": 0.57,
+      "position": 12.39,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 1,
+        "impressions": 174,
+        "ctr": 0.57,
+        "position": 12.39
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 1,
+        "impressions": 174,
+        "impressions_pct": 100,
+        "ctr_pp": 0.57,
+        "position_delta": 12.39,
+        "position_improvement": 0
+      },
+      "query_changes": [
+        {
+          "query": "apob badanie cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 51,
+            "ctr": 0,
+            "position": 11.69
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 51,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "badanie apob cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 14,
+            "ctr": 0,
+            "position": 12.57
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 14,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apob norma",
+          "current": {
+            "clicks": 0,
+            "impressions": 11,
+            "ctr": 0,
+            "position": 8.55
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 11,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "ile kosztuje badanie apob",
+          "current": {
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 8,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apob cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 7,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apob cena badania",
+          "current": {
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 7,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "diagnostyka apob cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 11.33
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 3,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apob diagnostyka cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 10.5
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 2,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "badanie krwi apob cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 2,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apo b norma",
+          "current": {
+            "clicks": 1,
+            "impressions": 1,
+            "ctr": 100,
+            "position": 39
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 1,
+          "position_improvement": 0
+        },
+        {
+          "query": "apo b ile kosztuje",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apob alab cena",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 7
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apob co to",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 7
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apob ile kosztuje",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "apolipoproteina b normy",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 25
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "cena badania apob",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "ile kosztuje apob",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "koszt badania apob",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 13
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        }
+      ]
+    },
+    "keyword_plan": {
+      "primary": "apob badanie cena",
+      "secondary": [
+        "badanie apob cena",
+        "apob norma",
+        "ile kosztuje badanie apob",
+        "apob cena",
+        "apob cena badania",
+        "diagnostyka apob cena"
+      ],
+      "intents": [
+        "normy/wynik/cena"
+      ],
+      "useful_queries": [
+        {
+          "query": "apob badanie cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 51,
+          "clicks": 0,
+          "position": 11.69
+        },
+        {
+          "query": "badanie apob cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 14,
+          "clicks": 0,
+          "position": 12.57
+        },
+        {
+          "query": "apob norma",
+          "intent": "normy/wynik/cena",
+          "impressions": 11,
+          "clicks": 0,
+          "position": 8.55
+        },
+        {
+          "query": "ile kosztuje badanie apob",
+          "intent": "normy/wynik/cena",
+          "impressions": 8,
+          "clicks": 0,
+          "position": 13
+        },
+        {
+          "query": "apob cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 7,
+          "clicks": 0,
+          "position": 13
+        },
+        {
+          "query": "apob cena badania",
+          "intent": "normy/wynik/cena",
+          "impressions": 7,
+          "clicks": 0,
+          "position": 13
+        },
+        {
+          "query": "diagnostyka apob cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 3,
+          "clicks": 0,
+          "position": 11.33
+        },
+        {
+          "query": "apob diagnostyka cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 2,
+          "clicks": 0,
+          "position": 10.5
+        },
+        {
+          "query": "badanie krwi apob cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 2,
+          "clicks": 0,
+          "position": 13
+        },
+        {
+          "query": "apob alab cena",
+          "intent": "normy/wynik/cena",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 7
+        },
+        {
+          "query": "apob co to",
+          "intent": "definicja",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 7
+        },
+        {
+          "query": "apo b ile kosztuje",
+          "intent": "normy/wynik/cena",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 13
+        }
+      ]
+    },
+    "tasks": [
+      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
+      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
+      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
+    ],
+    "internal_link_sources": [
+      {
+        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+        "score": 20,
+        "inbound_strength": 10,
+        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
+        "placement": "Akapit z tematem: naprawde, dowiedz, kluczowe."
+      },
+      {
+        "from": "badania-krwi-po-50-jak-czesto.html",
+        "score": 19,
+        "inbound_strength": 29,
+        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
+        "placement": "Akapit z tematem: badania, robic, jakie."
+      },
+      {
+        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
+        "score": 19,
+        "inbound_strength": 9,
+        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
+        "placement": "Akapit z tematem: dowiedz, szybka, odpowiedz."
+      },
+      {
+        "from": "jedz-wiecej-po-50.html",
+        "score": 15,
+        "inbound_strength": 13,
+        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
+        "placement": "Akapit z tematem: dowiedz, niz, szybka."
+      },
+      {
+        "from": "hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
+        "score": 15,
+        "inbound_strength": 6,
+        "anchor": "Badanie ApoB: norma, cena i jak czytać wynik",
+        "placement": "Akapit z tematem: piecdziesiatce, czym, tak."
+      }
+    ],
+    "promotion_urls": [
+      "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
+      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+      "https://fitpo50.pl/badania-krwi-po-50-jak-czesto.html",
+      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
+      "https://fitpo50.pl/jedz-wiecej-po-50.html",
+      "https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js apob-norma-cena-jak-czytac-wynik.html",
+      "node scripts/article-contract-check.js apob-norma-cena-jak-czytac-wynik.html _site/apob-norma-cena-jak-czytac-wynik.html",
+      "node scripts/predeploy-gate.js --slug apob-norma-cena-jak-czytac-wynik",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 1,
+        "impressions": 174,
+        "ctr": 0.57,
+        "position": 12.39
+      },
+      "checkpoints": {
+        "day_7": "2026-06-21",
+        "day_14": "2026-06-28",
+        "day_28": "2026-07-12"
       },
       "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
     }
@@ -3075,6 +3505,517 @@
     "type": "P0_PUSH_TO_PAGE_ONE",
     "score": {
       "total": 30,
+      "seo": 90,
+      "aeo": 100,
+      "geo": 100,
+      "aio": 100,
+      "promotion": 100,
+      "speed": 78,
+      "ctr_opportunity": 35
+    },
+    "url": "https://fitpo50.pl/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+    "file": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+    "title": "Wiek biologiczny po 50: test z krwi i wynik | FitPo50",
+    "priority": "P0_NEAR_PAGE_ONE",
+    "segment": "LOW_VISIBILITY_LONG_TAIL",
+    "editorial_decision": "promować",
+    "gsc": {
+      "clicks": 0,
+      "impressions": 15,
+      "ctr": 0,
+      "position": 12,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 12
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 0,
+        "impressions": 15,
+        "impressions_pct": 100,
+        "ctr_pp": 0,
+        "position_delta": 12,
+        "position_improvement": 0
+      },
+      "query_changes": [
+        {
+          "query": "zegar horvatha",
+          "current": {
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 4
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 3,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "zegar epigenetyczny",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 29
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "zegary epigenetyczne",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 27
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        }
+      ]
+    },
+    "keyword_plan": {
+      "primary": "zegar horvatha",
+      "secondary": [
+        "zegary epigenetyczne",
+        "zegar epigenetyczny"
+      ],
+      "intents": [
+        "informacyjna"
+      ],
+      "useful_queries": [
+        {
+          "query": "zegar horvatha",
+          "intent": "informacyjna",
+          "impressions": 3,
+          "clicks": 0,
+          "position": 4
+        },
+        {
+          "query": "zegary epigenetyczne",
+          "intent": "informacyjna",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 27
+        },
+        {
+          "query": "zegar epigenetyczny",
+          "intent": "informacyjna",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 29
+        }
+      ]
+    },
+    "tasks": [
+      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
+      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
+      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
+    ],
+    "internal_link_sources": [
+      {
+        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+        "score": 15,
+        "inbound_strength": 10,
+        "anchor": "Wiek biologiczny: jak sprawdzić i cofnąć? Zegar Hor",
+        "placement": "Akapit z tematem: krwi, kluczowe, szybka."
+      },
+      {
+        "from": "kolagen-suplementacja-po-50.html",
+        "score": 15,
+        "inbound_strength": 7,
+        "anchor": "Wiek biologiczny: jak sprawdzić i cofnąć? Zegar Hor",
+        "placement": "Akapit z tematem: działa, zycia, szybka."
+      },
+      {
+        "from": "hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
+        "score": 13,
+        "inbound_strength": 6,
+        "anchor": "Wiek biologiczny: jak sprawdzić i cofnąć? Zegar Hor",
+        "placement": "Akapit z tematem: czym, zycia, szybka."
+      },
+      {
+        "from": "kawa-jako-preworkout-po-50.html",
+        "score": 13,
+        "inbound_strength": 6,
+        "anchor": "Wiek biologiczny: jak sprawdzić i cofnąć? Zegar Hor",
+        "placement": "Akapit z tematem: jako, fakty, sprawdz."
+      },
+      {
+        "from": "jak-zaczac-sie-podciagac-po-50.html",
+        "score": 13,
+        "inbound_strength": 5,
+        "anchor": "Wiek biologiczny: jak sprawdzić i cofnąć? Zegar Hor",
+        "placement": "Akapit z tematem: sprawdz, zycia, szybka."
+      }
+    ],
+    "promotion_urls": [
+      "https://fitpo50.pl/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+      "https://fitpo50.pl/kolagen-suplementacja-po-50.html",
+      "https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
+      "https://fitpo50.pl/kawa-jako-preworkout-po-50.html",
+      "https://fitpo50.pl/jak-zaczac-sie-podciagac-po-50.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+      "node scripts/article-contract-check.js zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html _site/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+      "node scripts/predeploy-gate.js --slug zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 12
+      },
+      "checkpoints": {
+        "day_7": "2026-06-11",
+        "day_14": "2026-06-18",
+        "day_28": "2026-07-02"
+      },
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P0_PUSH_TO_PAGE_ONE",
+    "score": {
+      "total": 30,
+      "seo": 89,
+      "aeo": 100,
+      "geo": 100,
+      "aio": 100,
+      "promotion": 100,
+      "speed": 78,
+      "ctr_opportunity": 35
+    },
+    "url": "https://fitpo50.pl/silownia-chroni-serce-przed-zawalem.html",
+    "file": "silownia-chroni-serce-przed-zawalem.html",
+    "title": "Jak siłownia chroni serce przed zawałem? Proste | FitPo50",
+    "priority": "P0_NEAR_PAGE_ONE",
+    "segment": "LOW_VISIBILITY_LONG_TAIL",
+    "editorial_decision": "promować",
+    "gsc": {
+      "clicks": 0,
+      "impressions": 14,
+      "ctr": 0,
+      "position": 12.07,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 0,
+        "impressions": 14,
+        "ctr": 0,
+        "position": 12.07
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 0,
+        "impressions": 14,
+        "impressions_pct": 100,
+        "ctr_pp": 0,
+        "position_delta": 12.07,
+        "position_improvement": 0
+      },
+      "query_changes": []
+    },
+    "keyword_plan": {
+      "primary": "Jak siłownia chroni serce przed zawałem? Proste wyjaśnienie",
+      "secondary": [],
+      "intents": [],
+      "useful_queries": []
+    },
+    "tasks": [
+      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
+      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
+      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
+    ],
+    "internal_link_sources": [
+      {
+        "from": "trening-silowy-eliksir-mlodosci-po-50.html",
+        "score": 14,
+        "inbound_strength": 44,
+        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
+        "placement": "Akapit z tematem: trening, siłowy, siła."
+      },
+      {
+        "from": "trening-silowy-starzenie-komorkowe-dna.html",
+        "score": 14,
+        "inbound_strength": 13,
+        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
+        "placement": "Akapit z tematem: trening, siła, siłowy."
+      },
+      {
+        "from": "silownia-dla-ludzi.html",
+        "score": 14,
+        "inbound_strength": 9,
+        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
+        "placement": "Akapit z tematem: silownia, siłownia, zaczac."
+      },
+      {
+        "from": "jak-pozbyc-sie-oponki-brzusznej-po-50.html",
+        "score": 14,
+        "inbound_strength": 4,
+        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
+        "placement": "Akapit z tematem: poznaj, tłuszcz, trzewny."
+      },
+      {
+        "from": "jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html",
+        "score": 13,
+        "inbound_strength": 6,
+        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
+        "placement": "Akapit z tematem: tłuszcz, trzewny, szybka."
+      }
+    ],
+    "promotion_urls": [
+      "https://fitpo50.pl/silownia-chroni-serce-przed-zawalem.html",
+      "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
+      "https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html",
+      "https://fitpo50.pl/silownia-dla-ludzi.html",
+      "https://fitpo50.pl/jak-pozbyc-sie-oponki-brzusznej-po-50.html",
+      "https://fitpo50.pl/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js silownia-chroni-serce-przed-zawalem.html",
+      "node scripts/article-contract-check.js silownia-chroni-serce-przed-zawalem.html _site/silownia-chroni-serce-przed-zawalem.html",
+      "node scripts/predeploy-gate.js --slug silownia-chroni-serce-przed-zawalem",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 0,
+        "impressions": 14,
+        "ctr": 0,
+        "position": 12.07
+      },
+      "checkpoints": {
+        "day_7": "2026-06-21",
+        "day_14": "2026-06-28",
+        "day_28": "2026-07-12"
+      },
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P0_PUSH_TO_PAGE_ONE",
+    "score": {
+      "total": 30,
+      "seo": 82,
+      "aeo": 100,
+      "geo": 100,
+      "aio": 100,
+      "promotion": 100,
+      "speed": 78,
+      "ctr_opportunity": 35
+    },
+    "url": "https://fitpo50.pl/kolagen-suplementacja-po-50.html",
+    "file": "kolagen-suplementacja-po-50.html",
+    "title": "Kolagen po 50-tce: czy suplementacja naprawdę działa? | FitPo50",
+    "priority": "P0_NEAR_PAGE_ONE",
+    "segment": "LOW_VISIBILITY_LONG_TAIL",
+    "editorial_decision": "promować",
+    "gsc": {
+      "clicks": 0,
+      "impressions": 13,
+      "ctr": 0,
+      "position": 15.54,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 0,
+        "impressions": 13,
+        "ctr": 0,
+        "position": 15.54
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 0,
+        "impressions": 13,
+        "impressions_pct": 100,
+        "ctr_pp": 0,
+        "position_delta": 15.54,
+        "position_improvement": 0
+      },
+      "query_changes": [
+        {
+          "query": "prywatnie zbadali",
+          "current": {
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 2125
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 8,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "kolagen",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 10
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        }
+      ]
+    },
+    "keyword_plan": {
+      "primary": "Kolagen po 50-tce: czy suplementacja naprawdę działa? –",
+      "secondary": [],
+      "intents": [],
+      "useful_queries": []
+    },
+    "tasks": [
+      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
+      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
+      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
+    ],
+    "internal_link_sources": [
+      {
+        "from": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+        "score": 15,
+        "inbound_strength": 8,
+        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
+        "placement": "Akapit z tematem: ile, brac, badania."
+      },
+      {
+        "from": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+        "score": 15,
+        "inbound_strength": 7,
+        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
+        "placement": "Akapit z tematem: krwi, działa, ile."
+      },
+      {
+        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+        "score": 14,
+        "inbound_strength": 10,
+        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
+        "placement": "Akapit z tematem: krwi, naprawde, mowia."
+      },
+      {
+        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
+        "score": 14,
+        "inbound_strength": 9,
+        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
+        "placement": "Akapit z tematem: zycia, szybka, odpowiedz."
+      },
+      {
+        "from": "chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html",
+        "score": 14,
+        "inbound_strength": 3,
+        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
+        "placement": "Akapit z tematem: zycia, warto, szybka."
+      }
+    ],
+    "promotion_urls": [
+      "https://fitpo50.pl/kolagen-suplementacja-po-50.html",
+      "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+      "https://fitpo50.pl/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
+      "https://fitpo50.pl/chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js kolagen-suplementacja-po-50.html",
+      "node scripts/article-contract-check.js kolagen-suplementacja-po-50.html _site/kolagen-suplementacja-po-50.html",
+      "node scripts/predeploy-gate.js --slug kolagen-suplementacja-po-50",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 0,
+        "impressions": 13,
+        "ctr": 0,
+        "position": 15.54
+      },
+      "checkpoints": {
+        "day_7": "2026-06-08",
+        "day_14": "2026-06-15",
+        "day_28": "2026-06-29"
+      },
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P0_PUSH_TO_PAGE_ONE",
+    "score": {
+      "total": 30,
       "seo": 70,
       "aeo": 100,
       "geo": 100,
@@ -3204,7 +4145,7 @@
     "type": "P0_PUSH_TO_PAGE_ONE",
     "score": {
       "total": 30,
-      "seo": 85,
+      "seo": 88,
       "aeo": 100,
       "geo": 100,
       "aio": 100,
@@ -3212,9 +4153,9 @@
       "speed": 78,
       "ctr_opportunity": 35
     },
-    "url": "https://fitpo50.pl/silownia-chroni-serce-przed-zawalem.html",
-    "file": "silownia-chroni-serce-przed-zawalem.html",
-    "title": "Jak siłownia chroni serce przed zawałem? Proste | FitPo50",
+    "url": "https://fitpo50.pl/trening-3x30-dla-50-plus.html",
+    "file": "trening-3x30-dla-50-plus.html",
+    "title": "Trening 3×30 po 50: prosty plan tygodnia | FitPo50",
     "priority": "P0_NEAR_PAGE_ONE",
     "segment": "LOW_VISIBILITY_LONG_TAIL",
     "editorial_decision": "promować",
@@ -3222,7 +4163,7 @@
       "clicks": 0,
       "impressions": 9,
       "ctr": 0,
-      "position": 12.56,
+      "position": 11.33,
       "status": "ok"
     },
     "performance_delta": {
@@ -3232,7 +4173,7 @@
         "clicks": 0,
         "impressions": 9,
         "ctr": 0,
-        "position": 12.56
+        "position": 11.33
       },
       "previous_90d": {
         "clicks": 0,
@@ -3245,13 +4186,13 @@
         "impressions": 9,
         "impressions_pct": 100,
         "ctr_pp": 0,
-        "position_delta": 12.56,
+        "position_delta": 11.33,
         "position_improvement": 0
       },
       "query_changes": []
     },
     "keyword_plan": {
-      "primary": "Jak siłownia chroni serce przed zawałem? Proste wyjaśnienie",
+      "primary": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
       "secondary": [],
       "intents": [],
       "useful_queries": []
@@ -3263,53 +4204,53 @@
     ],
     "internal_link_sources": [
       {
-        "from": "trening-silowy-starzenie-komorkowe-dna.html",
-        "score": 15,
-        "inbound_strength": 11,
-        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
-        "placement": "Akapit z tematem: trening, poznaj, siłowy."
+        "from": "trening-maszynowy-po-50.html",
+        "score": 17,
+        "inbound_strength": 14,
+        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
+        "placement": "Akapit z tematem: trening, plan, dowiedz."
       },
       {
-        "from": "trening-silowy-eliksir-mlodosci-po-50.html",
-        "score": 14,
-        "inbound_strength": 44,
-        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
-        "placement": "Akapit z tematem: trening, siłowy, siła."
+        "from": "syndrom-pierwszego-poniedzialku.html",
+        "score": 16,
+        "inbound_strength": 4,
+        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
+        "placement": "Akapit z tematem: działa, dowiedz, zdrowie."
       },
       {
-        "from": "silownia-dla-ludzi.html",
+        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
         "score": 14,
         "inbound_strength": 9,
-        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
-        "placement": "Akapit z tematem: silownia, siłownia, zaczac."
+        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
+        "placement": "Akapit z tematem: dowiedz, szybka, odpowiedz."
       },
       {
-        "from": "jak-pozbyc-sie-oponki-brzusznej-po-50.html",
+        "from": "sila-chwytu-po-50.html",
         "score": 14,
-        "inbound_strength": 3,
-        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
-        "placement": "Akapit z tematem: poznaj, tłuszcz, trzewny."
+        "inbound_strength": 8,
+        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
+        "placement": "Akapit z tematem: prosty, dowiedz, zdrowie."
       },
       {
-        "from": "jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html",
+        "from": "badania-po-50.html",
         "score": 13,
-        "inbound_strength": 6,
-        "anchor": "Jak siłownia chroni serce przed zawałem? Proste wyj",
-        "placement": "Akapit z tematem: tłuszcz, trzewny, szybka."
+        "inbound_strength": 31,
+        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
+        "placement": "Akapit z tematem: osob, moga, poprawic."
       }
     ],
     "promotion_urls": [
-      "https://fitpo50.pl/silownia-chroni-serce-przed-zawalem.html",
-      "https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html",
-      "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
-      "https://fitpo50.pl/silownia-dla-ludzi.html",
-      "https://fitpo50.pl/jak-pozbyc-sie-oponki-brzusznej-po-50.html",
-      "https://fitpo50.pl/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html"
+      "https://fitpo50.pl/trening-3x30-dla-50-plus.html",
+      "https://fitpo50.pl/trening-maszynowy-po-50.html",
+      "https://fitpo50.pl/syndrom-pierwszego-poniedzialku.html",
+      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
+      "https://fitpo50.pl/sila-chwytu-po-50.html",
+      "https://fitpo50.pl/badania-po-50.html"
     ],
     "validation_commands": [
-      "node scripts/validate-article-standard.js silownia-chroni-serce-przed-zawalem.html",
-      "node scripts/article-contract-check.js silownia-chroni-serce-przed-zawalem.html _site/silownia-chroni-serce-przed-zawalem.html",
-      "node scripts/predeploy-gate.js --slug silownia-chroni-serce-przed-zawalem",
+      "node scripts/validate-article-standard.js trening-3x30-dla-50-plus.html",
+      "node scripts/article-contract-check.js trening-3x30-dla-50-plus.html _site/trening-3x30-dla-50-plus.html",
+      "node scripts/predeploy-gate.js --slug trening-3x30-dla-50-plus",
       "npm run llms:full",
       "npm run assets:mirror:sync",
       "npm run predeploy:check"
@@ -3319,7 +4260,136 @@
         "clicks": 0,
         "impressions": 9,
         "ctr": 0,
-        "position": 12.56
+        "position": 11.33
+      },
+      "checkpoints": {
+        "day_7": "2026-06-08",
+        "day_14": "2026-06-15",
+        "day_28": "2026-06-29"
+      },
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P0_PUSH_TO_PAGE_ONE",
+    "score": {
+      "total": 30,
+      "seo": 87,
+      "aeo": 100,
+      "geo": 100,
+      "aio": 100,
+      "promotion": 100,
+      "speed": 78,
+      "ctr_opportunity": 35
+    },
+    "url": "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+    "file": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+    "title": "Post przerywany po 50-tce: korzyści i ryzyko dla | FitPo50",
+    "priority": "P0_NEAR_PAGE_ONE",
+    "segment": "CTR_GAP_TOP10",
+    "editorial_decision": "promować",
+    "gsc": {
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 8.86,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 8.86
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 0,
+        "impressions": 7,
+        "impressions_pct": 100,
+        "ctr_pp": 0,
+        "position_delta": 8.86,
+        "position_improvement": 0
+      },
+      "query_changes": []
+    },
+    "keyword_plan": {
+      "primary": "Post przerywany po 50-tce: korzyści i ryzyko dla mięśni",
+      "secondary": [],
+      "intents": [],
+      "useful_queries": []
+    },
+    "tasks": [
+      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
+      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
+      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
+    ],
+    "internal_link_sources": [
+      {
+        "from": "jedz-wiecej-po-50.html",
+        "score": 14,
+        "inbound_strength": 13,
+        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
+        "placement": "Akapit z tematem: moze, dowiedz, warto."
+      },
+      {
+        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+        "score": 13,
+        "inbound_strength": 10,
+        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
+        "placement": "Akapit z tematem: dowiedz, kluczowe, madrze."
+      },
+      {
+        "from": "kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
+        "score": 13,
+        "inbound_strength": 5,
+        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
+        "placement": "Akapit z tematem: korzysci, dowiedz, bezpiecznie."
+      },
+      {
+        "from": "apob-norma-cena-jak-czytac-wynik.html",
+        "score": 12,
+        "inbound_strength": 10,
+        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
+        "placement": "Akapit z tematem: ile, dowiedz, szybka."
+      },
+      {
+        "from": "silownia-dla-ludzi.html",
+        "score": 12,
+        "inbound_strength": 9,
+        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
+        "placement": "Akapit z tematem: korzysci, dowiedz, zaczac."
+      }
+    ],
+    "promotion_urls": [
+      "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "https://fitpo50.pl/jedz-wiecej-po-50.html",
+      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+      "https://fitpo50.pl/kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
+      "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
+      "https://fitpo50.pl/silownia-dla-ludzi.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "node scripts/article-contract-check.js post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html _site/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "node scripts/predeploy-gate.js --slug post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 8.86
       },
       "checkpoints": {
         "day_7": "2026-06-08",
@@ -3452,7 +4522,7 @@
       {
         "from": "ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
         "score": 12,
-        "inbound_strength": 8,
+        "inbound_strength": 9,
         "anchor": "Zapomnij o odchudzaniu. Zacznij myśleć o tym, jak u",
         "placement": "Akapit z tematem: trening, szybka, odpowiedz."
       }
@@ -3481,138 +4551,9 @@
         "position": 10.67
       },
       "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
-      },
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P0_PUSH_TO_PAGE_ONE",
-    "score": {
-      "total": 30,
-      "seo": 83,
-      "aeo": 100,
-      "geo": 100,
-      "aio": 100,
-      "promotion": 100,
-      "speed": 78,
-      "ctr_opportunity": 35
-    },
-    "url": "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
-    "file": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
-    "title": "Post przerywany po 50-tce: korzyści i ryzyko dla | FitPo50",
-    "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "CTR_GAP_TOP10",
-    "editorial_decision": "promować",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 4,
-      "ctr": 0,
-      "position": 9.75,
-      "status": "ok"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "NEW_VISIBILITY",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 4,
-        "ctr": 0,
-        "position": 9.75
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 4,
-        "impressions_pct": 100,
-        "ctr_pp": 0,
-        "position_delta": 9.75,
-        "position_improvement": 0
-      },
-      "query_changes": []
-    },
-    "keyword_plan": {
-      "primary": "Post przerywany po 50-tce: korzyści i ryzyko dla mięśni",
-      "secondary": [],
-      "intents": [],
-      "useful_queries": []
-    },
-    "tasks": [
-      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
-      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
-      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
-    ],
-    "internal_link_sources": [
-      {
-        "from": "jedz-wiecej-po-50.html",
-        "score": 14,
-        "inbound_strength": 13,
-        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
-        "placement": "Akapit z tematem: moze, dowiedz, warto."
-      },
-      {
-        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-        "score": 13,
-        "inbound_strength": 10,
-        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
-        "placement": "Akapit z tematem: dowiedz, kluczowe, madrze."
-      },
-      {
-        "from": "kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
-        "score": 13,
-        "inbound_strength": 5,
-        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
-        "placement": "Akapit z tematem: korzysci, dowiedz, bezpiecznie."
-      },
-      {
-        "from": "apob-norma-cena-jak-czytac-wynik.html",
-        "score": 12,
-        "inbound_strength": 10,
-        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
-        "placement": "Akapit z tematem: ile, dowiedz, szybka."
-      },
-      {
-        "from": "silownia-dla-ludzi.html",
-        "score": 12,
-        "inbound_strength": 9,
-        "anchor": "Post przerywany po 50-tce: korzyści i ryzyko dla mi",
-        "placement": "Akapit z tematem: korzysci, dowiedz, zaczac."
-      }
-    ],
-    "promotion_urls": [
-      "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
-      "https://fitpo50.pl/jedz-wiecej-po-50.html",
-      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-      "https://fitpo50.pl/kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
-      "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
-      "https://fitpo50.pl/silownia-dla-ludzi.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
-      "node scripts/article-contract-check.js post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html _site/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
-      "node scripts/predeploy-gate.js --slug post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 4,
-        "ctr": 0,
-        "position": 9.75
-      },
-      "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
+        "day_7": "2026-06-21",
+        "day_14": "2026-06-28",
+        "day_28": "2026-07-12"
       },
       "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
     }
@@ -3959,18 +4900,18 @@
         "placement": "Akapit z tematem: poznaj, dowiedz, szybka."
       },
       {
+        "from": "sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
+        "score": 15,
+        "inbound_strength": 11,
+        "anchor": "Pół godziny mniej siedzenia dziennie. Co się dzieje",
+        "placement": "Akapit z tematem: dzien, szybka, odpowiedz."
+      },
+      {
         "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
         "score": 15,
         "inbound_strength": 9,
         "anchor": "Pół godziny mniej siedzenia dziennie. Co się dzieje",
         "placement": "Akapit z tematem: dowiedz, zycia, szybka."
-      },
-      {
-        "from": "jedz-wiecej-po-50.html",
-        "score": 14,
-        "inbound_strength": 13,
-        "anchor": "Pół godziny mniej siedzenia dziennie. Co się dzieje",
-        "placement": "Akapit z tematem: dowiedz, niszczy, szybka."
       }
     ],
     "promotion_urls": [
@@ -3978,8 +4919,8 @@
       "https://fitpo50.pl/motywacja-zniknela-po-50.html",
       "https://fitpo50.pl/nawodnienie-na-treningu-po-50.html",
       "https://fitpo50.pl/media-spolecznosciowe-po-50.html",
-      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "https://fitpo50.pl/jedz-wiecej-po-50.html"
+      "https://fitpo50.pl/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
+      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html"
     ],
     "validation_commands": [
       "node scripts/validate-article-standard.js siedzenie-po-50.html",
@@ -4008,175 +4949,7 @@
     "type": "P0_PUSH_TO_PAGE_ONE",
     "score": {
       "total": 29,
-      "seo": 81,
-      "aeo": 100,
-      "geo": 100,
-      "aio": 100,
-      "promotion": 100,
-      "speed": 78,
-      "ctr_opportunity": 35
-    },
-    "url": "https://fitpo50.pl/kolagen-suplementacja-po-50.html",
-    "file": "kolagen-suplementacja-po-50.html",
-    "title": "Kolagen po 50-tce: czy suplementacja naprawdę działa? | FitPo50",
-    "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "LOW_VISIBILITY_LONG_TAIL",
-    "editorial_decision": "promować",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 12,
-      "ctr": 0,
-      "position": 15.83,
-      "status": "ok"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "NEW_VISIBILITY",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 12,
-        "ctr": 0,
-        "position": 15.83
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 12,
-        "impressions_pct": 100,
-        "ctr_pp": 0,
-        "position_delta": 15.83,
-        "position_improvement": 0
-      },
-      "query_changes": [
-        {
-          "query": "prywatnie zbadali",
-          "current": {
-            "clicks": 0,
-            "impressions": 8,
-            "ctr": 0,
-            "position": 2125
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 8,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        },
-        {
-          "query": "kolagen",
-          "current": {
-            "clicks": 0,
-            "impressions": 1,
-            "ctr": 0,
-            "position": 10
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 1,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        }
-      ]
-    },
-    "keyword_plan": {
-      "primary": "Kolagen po 50-tce: czy suplementacja naprawdę działa? –",
-      "secondary": [],
-      "intents": [],
-      "useful_queries": []
-    },
-    "tasks": [
-      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
-      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
-      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
-    ],
-    "internal_link_sources": [
-      {
-        "from": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
-        "score": 15,
-        "inbound_strength": 8,
-        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
-        "placement": "Akapit z tematem: ile, brac, badania."
-      },
-      {
-        "from": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
-        "score": 15,
-        "inbound_strength": 7,
-        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
-        "placement": "Akapit z tematem: krwi, działa, ile."
-      },
-      {
-        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-        "score": 14,
-        "inbound_strength": 10,
-        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
-        "placement": "Akapit z tematem: krwi, naprawde, mowia."
-      },
-      {
-        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
-        "score": 14,
-        "inbound_strength": 9,
-        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
-        "placement": "Akapit z tematem: zycia, szybka, odpowiedz."
-      },
-      {
-        "from": "badania-krwi-po-50-jak-czesto.html",
-        "score": 13,
-        "inbound_strength": 29,
-        "anchor": "Kolagen po 50-tce: czy suplementacja naprawdę dział",
-        "placement": "Akapit z tematem: badania, krwi, jakie."
-      }
-    ],
-    "promotion_urls": [
-      "https://fitpo50.pl/kolagen-suplementacja-po-50.html",
-      "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
-      "https://fitpo50.pl/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
-      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "https://fitpo50.pl/badania-krwi-po-50-jak-czesto.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js kolagen-suplementacja-po-50.html",
-      "node scripts/article-contract-check.js kolagen-suplementacja-po-50.html _site/kolagen-suplementacja-po-50.html",
-      "node scripts/predeploy-gate.js --slug kolagen-suplementacja-po-50",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 12,
-        "ctr": 0,
-        "position": 15.83
-      },
-      "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
-      },
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P0_PUSH_TO_PAGE_ONE",
-    "score": {
-      "total": 29,
-      "seo": 73,
+      "seo": 79,
       "aeo": 100,
       "geo": 100,
       "aio": 100,
@@ -4192,9 +4965,9 @@
     "editorial_decision": "promować",
     "gsc": {
       "clicks": 0,
-      "impressions": 9,
+      "impressions": 11,
       "ctr": 0,
-      "position": 18.89,
+      "position": 16.55,
       "status": "ok"
     },
     "performance_delta": {
@@ -4202,9 +4975,9 @@
       "conclusion": "NEW_VISIBILITY",
       "current_90d": {
         "clicks": 0,
-        "impressions": 9,
+        "impressions": 11,
         "ctr": 0,
-        "position": 18.89
+        "position": 16.55
       },
       "previous_90d": {
         "clicks": 0,
@@ -4214,10 +4987,10 @@
       },
       "delta": {
         "clicks": 0,
-        "impressions": 9,
+        "impressions": 11,
         "impressions_pct": 100,
         "ctr_pp": 0,
-        "position_delta": 18.89,
+        "position_delta": 16.55,
         "position_improvement": 0
       },
       "query_changes": [
@@ -4319,9 +5092,9 @@
     "measurement": {
       "baseline": {
         "clicks": 0,
-        "impressions": 9,
+        "impressions": 11,
         "ctr": 0,
-        "position": 18.89
+        "position": 16.55
       },
       "checkpoints": {
         "day_7": "2026-06-08",
@@ -4335,7 +5108,7 @@
     "type": "P0_PUSH_TO_PAGE_ONE",
     "score": {
       "total": 29,
-      "seo": 84,
+      "seo": 76,
       "aeo": 100,
       "geo": 100,
       "aio": 100,
@@ -4343,17 +5116,17 @@
       "speed": 78,
       "ctr_opportunity": 35
     },
-    "url": "https://fitpo50.pl/trening-3x30-dla-50-plus.html",
-    "file": "trening-3x30-dla-50-plus.html",
-    "title": "Trening 3×30 po 50: prosty plan tygodnia | FitPo50",
+    "url": "https://fitpo50.pl/jak-zaczac-sie-podciagac-po-50.html",
+    "file": "jak-zaczac-sie-podciagac-po-50.html",
+    "title": "Jak zacząć się podciągać po 50-tce? Plan i efekty | FitPo50",
     "priority": "P0_NEAR_PAGE_ONE",
     "segment": "LOW_VISIBILITY_LONG_TAIL",
     "editorial_decision": "promować",
     "gsc": {
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 9,
       "ctr": 0,
-      "position": 12.71,
+      "position": 17.33,
       "status": "ok"
     },
     "performance_delta": {
@@ -4361,9 +5134,9 @@
       "conclusion": "NEW_VISIBILITY",
       "current_90d": {
         "clicks": 0,
-        "impressions": 7,
+        "impressions": 9,
         "ctr": 0,
-        "position": 12.71
+        "position": 17.33
       },
       "previous_90d": {
         "clicks": 0,
@@ -4373,19 +5146,77 @@
       },
       "delta": {
         "clicks": 0,
-        "impressions": 7,
+        "impressions": 9,
         "impressions_pct": 100,
         "ctr_pp": 0,
-        "position_delta": 12.71,
+        "position_delta": 17.33,
         "position_improvement": 0
       },
-      "query_changes": []
+      "query_changes": [
+        {
+          "query": "podciaganie pl",
+          "current": {
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 37
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 2,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        },
+        {
+          "query": "50 podciągnięć",
+          "current": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 32
+          },
+          "previous": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "position": 0
+          },
+          "impressions_delta": 1,
+          "impressions_delta_pct": 100,
+          "clicks_delta": 0,
+          "position_improvement": 0
+        }
+      ]
     },
     "keyword_plan": {
-      "primary": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
-      "secondary": [],
-      "intents": [],
-      "useful_queries": []
+      "primary": "podciaganie pl",
+      "secondary": [
+        "50 podciągnięć"
+      ],
+      "intents": [
+        "informacyjna"
+      ],
+      "useful_queries": [
+        {
+          "query": "podciaganie pl",
+          "intent": "informacyjna",
+          "impressions": 2,
+          "clicks": 0,
+          "position": 37
+        },
+        {
+          "query": "50 podciągnięć",
+          "intent": "informacyjna",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 32
+        }
+      ]
     },
     "tasks": [
       "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
@@ -4394,53 +5225,53 @@
     ],
     "internal_link_sources": [
       {
-        "from": "trening-maszynowy-po-50.html",
+        "from": "trening-silowy-po-50-cisnienie-plan-8-tygodni.html",
         "score": 17,
-        "inbound_strength": 14,
-        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
-        "placement": "Akapit z tematem: trening, plan, dowiedz."
+        "inbound_strength": 7,
+        "anchor": "Jak zacząć się podciągać po 50. roku życia? Bezpiec",
+        "placement": "Akapit z tematem: plan, tygodni, szybka."
       },
       {
-        "from": "syndrom-pierwszego-poniedzialku.html",
-        "score": 16,
-        "inbound_strength": 4,
-        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
-        "placement": "Akapit z tematem: działa, dowiedz, zdrowie."
-      },
-      {
-        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
-        "score": 14,
-        "inbound_strength": 9,
-        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
-        "placement": "Akapit z tematem: dowiedz, szybka, odpowiedz."
-      },
-      {
-        "from": "sila-chwytu-po-50.html",
-        "score": 14,
-        "inbound_strength": 8,
-        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
-        "placement": "Akapit z tematem: prosty, dowiedz, zdrowie."
-      },
-      {
-        "from": "badania-po-50.html",
-        "score": 13,
+        "from": "jak-zaczac-na-silowni-po-50.html",
+        "score": 15,
         "inbound_strength": 31,
-        "anchor": "Trening 3×30 dla 50+: plan, który realnie zrobisz",
-        "placement": "Akapit z tematem: osob, moga, poprawic."
+        "anchor": "Jak zacząć się podciągać po 50. roku życia? Bezpiec",
+        "placement": "Akapit z tematem: zaczac, plan, krok."
+      },
+      {
+        "from": "kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
+        "score": 14,
+        "inbound_strength": 5,
+        "anchor": "Jak zacząć się podciągać po 50. roku życia? Bezpiec",
+        "placement": "Akapit z tematem: korzysci, bezpiecznie, szybka."
+      },
+      {
+        "from": "testosteron-po-50-naturalnie-bez-trt.html",
+        "score": 14,
+        "inbound_strength": 5,
+        "anchor": "Jak zacząć się podciągać po 50. roku życia? Bezpiec",
+        "placement": "Akapit z tematem: treningu, zanim, szybka."
+      },
+      {
+        "from": "trening-3x30-dla-50-plus.html",
+        "score": 13,
+        "inbound_strength": 18,
+        "anchor": "Jak zacząć się podciągać po 50. roku życia? Bezpiec",
+        "placement": "Akapit z tematem: plan, sesje, szybka."
       }
     ],
     "promotion_urls": [
-      "https://fitpo50.pl/trening-3x30-dla-50-plus.html",
-      "https://fitpo50.pl/trening-maszynowy-po-50.html",
-      "https://fitpo50.pl/syndrom-pierwszego-poniedzialku.html",
-      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "https://fitpo50.pl/sila-chwytu-po-50.html",
-      "https://fitpo50.pl/badania-po-50.html"
+      "https://fitpo50.pl/jak-zaczac-sie-podciagac-po-50.html",
+      "https://fitpo50.pl/trening-silowy-po-50-cisnienie-plan-8-tygodni.html",
+      "https://fitpo50.pl/jak-zaczac-na-silowni-po-50.html",
+      "https://fitpo50.pl/kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
+      "https://fitpo50.pl/testosteron-po-50-naturalnie-bez-trt.html",
+      "https://fitpo50.pl/trening-3x30-dla-50-plus.html"
     ],
     "validation_commands": [
-      "node scripts/validate-article-standard.js trening-3x30-dla-50-plus.html",
-      "node scripts/article-contract-check.js trening-3x30-dla-50-plus.html _site/trening-3x30-dla-50-plus.html",
-      "node scripts/predeploy-gate.js --slug trening-3x30-dla-50-plus",
+      "node scripts/validate-article-standard.js jak-zaczac-sie-podciagac-po-50.html",
+      "node scripts/article-contract-check.js jak-zaczac-sie-podciagac-po-50.html _site/jak-zaczac-sie-podciagac-po-50.html",
+      "node scripts/predeploy-gate.js --slug jak-zaczac-sie-podciagac-po-50",
       "npm run llms:full",
       "npm run assets:mirror:sync",
       "npm run predeploy:check"
@@ -4448,9 +5279,9 @@
     "measurement": {
       "baseline": {
         "clicks": 0,
-        "impressions": 7,
+        "impressions": 9,
         "ctr": 0,
-        "position": 12.71
+        "position": 17.33
       },
       "checkpoints": {
         "day_7": "2026-06-08",
@@ -4623,7 +5454,7 @@
     "type": "P0_PUSH_TO_PAGE_ONE",
     "score": {
       "total": 29,
-      "seo": 72,
+      "seo": 81,
       "aeo": 100,
       "geo": 100,
       "aio": 100,
@@ -4631,17 +5462,17 @@
       "speed": 78,
       "ctr_opportunity": 35
     },
-    "url": "https://fitpo50.pl/nawodnienie-na-treningu-po-50.html",
-    "file": "nawodnienie-na-treningu-po-50.html",
-    "title": "Nawodnienie na treningu po 50-tce: co i ile pić | FitPo50",
+    "url": "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
+    "file": "kreatyna-po-50-tce-kompletny-przewodnik.html",
+    "title": "Kreatyna po 50-tce: kompletny przewodnik | FitPo50",
     "priority": "P0_NEAR_PAGE_ONE",
     "segment": "LOW_VISIBILITY_LONG_TAIL",
     "editorial_decision": "promować",
     "gsc": {
       "clicks": 0,
-      "impressions": 5,
+      "impressions": 3,
       "ctr": 0,
-      "position": 18,
+      "position": 11.33,
       "status": "ok"
     },
     "performance_delta": {
@@ -4649,9 +5480,9 @@
       "conclusion": "NEW_VISIBILITY",
       "current_90d": {
         "clicks": 0,
-        "impressions": 5,
+        "impressions": 3,
         "ctr": 0,
-        "position": 18
+        "position": 11.33
       },
       "previous_90d": {
         "clicks": 0,
@@ -4661,20 +5492,20 @@
       },
       "delta": {
         "clicks": 0,
-        "impressions": 5,
+        "impressions": 3,
         "impressions_pct": 100,
         "ctr_pp": 0,
-        "position_delta": 18,
+        "position_delta": 11.33,
         "position_improvement": 0
       },
       "query_changes": [
         {
-          "query": "co pić na siłowni",
+          "query": "kreatyna po 50 tce",
           "current": {
             "clicks": 0,
-            "impressions": 1,
+            "impressions": 2,
             "ctr": 0,
-            "position": 64
+            "position": 11
           },
           "previous": {
             "clicks": 0,
@@ -4682,7 +5513,7 @@
             "ctr": 0,
             "position": 0
           },
-          "impressions_delta": 1,
+          "impressions_delta": 2,
           "impressions_delta_pct": 100,
           "clicks_delta": 0,
           "position_improvement": 0
@@ -4690,18 +5521,18 @@
       ]
     },
     "keyword_plan": {
-      "primary": "co pić na siłowni",
+      "primary": "kreatyna po 50 tce",
       "secondary": [],
       "intents": [
         "informacyjna"
       ],
       "useful_queries": [
         {
-          "query": "co pić na siłowni",
+          "query": "kreatyna po 50 tce",
           "intent": "informacyjna",
-          "impressions": 1,
+          "impressions": 2,
           "clicks": 0,
-          "position": 64
+          "position": 11
         }
       ]
     },
@@ -4712,53 +5543,53 @@
     ],
     "internal_link_sources": [
       {
-        "from": "sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
-        "score": 16,
-        "inbound_strength": 9,
-        "anchor": "Woda na siłowni. To nie nudny temat — to temat, któ",
-        "placement": "Akapit z tematem: mozg, szybka, odpowiedz."
+        "from": "terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html",
+        "score": 20,
+        "inbound_strength": 5,
+        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
+        "placement": "Akapit z tematem: dowiedz, wspiera, szybka."
       },
       {
-        "from": "siedzenie-po-50.html",
-        "score": 16,
-        "inbound_strength": 9,
-        "anchor": "Woda na siłowni. To nie nudny temat — to temat, któ",
-        "placement": "Akapit z tematem: zmienia, dowiedz, dzieje."
-      },
-      {
-        "from": "media-spolecznosciowe-po-50.html",
-        "score": 16,
-        "inbound_strength": 6,
-        "anchor": "Woda na siłowni. To nie nudny temat — to temat, któ",
+        "from": "apob-norma-cena-jak-czytac-wynik.html",
+        "score": 19,
+        "inbound_strength": 10,
+        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
         "placement": "Akapit z tematem: dowiedz, szybka, odpowiedz."
       },
       {
-        "from": "sila-chwytu-po-50.html",
-        "score": 15,
-        "inbound_strength": 8,
-        "anchor": "Woda na siłowni. To nie nudny temat — to temat, któ",
-        "placement": "Akapit z tematem: test, dowiedz, szybka."
+        "from": "trening-silowy-starzenie-komorkowe-dna.html",
+        "score": 16,
+        "inbound_strength": 13,
+        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
+        "placement": "Akapit z tematem: tylko, miesnie, szybka."
       },
       {
-        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
-        "score": 14,
-        "inbound_strength": 9,
-        "anchor": "Woda na siłowni. To nie nudny temat — to temat, któ",
-        "placement": "Akapit z tematem: dowiedz, mozg, jakosc."
+        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+        "score": 16,
+        "inbound_strength": 10,
+        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
+        "placement": "Akapit z tematem: naprawde, mowia, twojego."
+      },
+      {
+        "from": "powrot-do-formy-po-50-kompletny-przewodnik.html",
+        "score": 16,
+        "inbound_strength": 8,
+        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
+        "placement": "Akapit z tematem: formy, kompletny, przewodnik."
       }
     ],
     "promotion_urls": [
-      "https://fitpo50.pl/nawodnienie-na-treningu-po-50.html",
-      "https://fitpo50.pl/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
-      "https://fitpo50.pl/siedzenie-po-50.html",
-      "https://fitpo50.pl/media-spolecznosciowe-po-50.html",
-      "https://fitpo50.pl/sila-chwytu-po-50.html",
-      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html"
+      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
+      "https://fitpo50.pl/terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html",
+      "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
+      "https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html",
+      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+      "https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html"
     ],
     "validation_commands": [
-      "node scripts/validate-article-standard.js nawodnienie-na-treningu-po-50.html",
-      "node scripts/article-contract-check.js nawodnienie-na-treningu-po-50.html _site/nawodnienie-na-treningu-po-50.html",
-      "node scripts/predeploy-gate.js --slug nawodnienie-na-treningu-po-50",
+      "node scripts/validate-article-standard.js kreatyna-po-50-tce-kompletny-przewodnik.html",
+      "node scripts/article-contract-check.js kreatyna-po-50-tce-kompletny-przewodnik.html _site/kreatyna-po-50-tce-kompletny-przewodnik.html",
+      "node scripts/predeploy-gate.js --slug kreatyna-po-50-tce-kompletny-przewodnik",
       "npm run llms:full",
       "npm run assets:mirror:sync",
       "npm run predeploy:check"
@@ -4766,9 +5597,138 @@
     "measurement": {
       "baseline": {
         "clicks": 0,
-        "impressions": 5,
+        "impressions": 3,
         "ctr": 0,
-        "position": 18
+        "position": 11.33
+      },
+      "checkpoints": {
+        "day_7": "2026-06-08",
+        "day_14": "2026-06-15",
+        "day_28": "2026-06-29"
+      },
+      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
+    }
+  },
+  {
+    "type": "P0_PUSH_TO_PAGE_ONE",
+    "score": {
+      "total": 29,
+      "seo": 79,
+      "aeo": 100,
+      "geo": 100,
+      "aio": 100,
+      "promotion": 100,
+      "speed": 78,
+      "ctr_opportunity": 35
+    },
+    "url": "https://fitpo50.pl/waga-smart-pomiar-skladu-ciala-prawda.html",
+    "file": "waga-smart-pomiar-skladu-ciala-prawda.html",
+    "title": "Waga łazienkowa smart: Ile z 16 parametrów to prawda? | FitPo50",
+    "priority": "P0_NEAR_PAGE_ONE",
+    "segment": "LOW_VISIBILITY_LONG_TAIL",
+    "editorial_decision": "promować",
+    "gsc": {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 12.67,
+      "status": "ok"
+    },
+    "performance_delta": {
+      "status": "NO_PREVIOUS_URL_DATA",
+      "conclusion": "NEW_VISIBILITY",
+      "current_90d": {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 12.67
+      },
+      "previous_90d": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "delta": {
+        "clicks": 0,
+        "impressions": 3,
+        "impressions_pct": 100,
+        "ctr_pp": 0,
+        "position_delta": 12.67,
+        "position_improvement": 0
+      },
+      "query_changes": []
+    },
+    "keyword_plan": {
+      "primary": "Waga łazienkowa smart: Ile z 16 parametrów to prawda?",
+      "secondary": [],
+      "intents": [],
+      "useful_queries": []
+    },
+    "tasks": [
+      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
+      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
+      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
+    ],
+    "internal_link_sources": [
+      {
+        "from": "jedz-wiecej-po-50.html",
+        "score": 14,
+        "inbound_strength": 13,
+        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
+        "placement": "Akapit z tematem: działa, moze, warto."
+      },
+      {
+        "from": "tluszcz-trzewny-choroby-jak-walczyc.html",
+        "score": 14,
+        "inbound_strength": 8,
+        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
+        "placement": "Akapit z tematem: trzewny, tłuszcz, cichy."
+      },
+      {
+        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+        "score": 13,
+        "inbound_strength": 10,
+        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
+        "placement": "Akapit z tematem: naprawde, kluczowe, madrze."
+      },
+      {
+        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
+        "score": 13,
+        "inbound_strength": 9,
+        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
+        "placement": "Akapit z tematem: miesnie, szybka, odpowiedz."
+      },
+      {
+        "from": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+        "score": 13,
+        "inbound_strength": 8,
+        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
+        "placement": "Akapit z tematem: ile, szybka, odpowiedz."
+      }
+    ],
+    "promotion_urls": [
+      "https://fitpo50.pl/waga-smart-pomiar-skladu-ciala-prawda.html",
+      "https://fitpo50.pl/jedz-wiecej-po-50.html",
+      "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html",
+      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
+      "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html"
+    ],
+    "validation_commands": [
+      "node scripts/validate-article-standard.js waga-smart-pomiar-skladu-ciala-prawda.html",
+      "node scripts/article-contract-check.js waga-smart-pomiar-skladu-ciala-prawda.html _site/waga-smart-pomiar-skladu-ciala-prawda.html",
+      "node scripts/predeploy-gate.js --slug waga-smart-pomiar-skladu-ciala-prawda",
+      "npm run llms:full",
+      "npm run assets:mirror:sync",
+      "npm run predeploy:check"
+    ],
+    "measurement": {
+      "baseline": {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 12.67
       },
       "checkpoints": {
         "day_7": "2026-06-08",
@@ -5285,552 +6245,6 @@
         "impressions": 1,
         "ctr": 0,
         "position": 10
-      },
-      "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
-      },
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P0_PUSH_TO_PAGE_ONE",
-    "score": {
-      "total": 29,
-      "seo": 75,
-      "aeo": 100,
-      "geo": 100,
-      "aio": 100,
-      "promotion": 100,
-      "speed": 78,
-      "ctr_opportunity": 35
-    },
-    "url": "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
-    "file": "trening-silowy-eliksir-mlodosci-po-50.html",
-    "title": "Trening siłowy po 50-tce: hormony i siła | FitPo50",
-    "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "CTR_GAP_TOP10",
-    "editorial_decision": "promować",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 10,
-      "status": "ok"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "NEW_VISIBILITY",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 1,
-        "ctr": 0,
-        "position": 10
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 1,
-        "impressions_pct": 100,
-        "ctr_pp": 0,
-        "position_delta": 10,
-        "position_improvement": 0
-      },
-      "query_changes": []
-    },
-    "keyword_plan": {
-      "primary": "Trening siłowy jako eliksir młodości po 50-tce &ndash; praktyczny",
-      "secondary": [],
-      "intents": [],
-      "useful_queries": []
-    },
-    "tasks": [
-      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
-      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
-      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
-    ],
-    "internal_link_sources": [
-      {
-        "from": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
-        "score": 10,
-        "inbound_strength": 8,
-        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
-        "placement": "Akapit z tematem: ryzyko, bezpiecznie, szybka."
-      },
-      {
-        "from": "dieta-po-50.html",
-        "score": 9,
-        "inbound_strength": 55,
-        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
-        "placement": "Akapit z tematem: zmienia, metabolizm, szybka."
-      },
-      {
-        "from": "powrot-do-formy-po-50-kompletny-przewodnik.html",
-        "score": 9,
-        "inbound_strength": 8,
-        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
-        "placement": "Akapit z tematem: trening, zdrowie, szybka."
-      },
-      {
-        "from": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
-        "score": 9,
-        "inbound_strength": 5,
-        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
-        "placement": "Akapit z tematem: zdrowie, utrata, masy."
-      },
-      {
-        "from": "sen-po-50.html",
-        "score": 8,
-        "inbound_strength": 44,
-        "anchor": "Trening siłowy jako eliksir młodości po 50-tce &nda",
-        "placement": "Akapit z tematem: szybka, odpowiedz, kluczowe."
-      }
-    ],
-    "promotion_urls": [
-      "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
-      "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
-      "https://fitpo50.pl/dieta-po-50.html",
-      "https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html",
-      "https://fitpo50.pl/sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
-      "https://fitpo50.pl/sen-po-50.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js trening-silowy-eliksir-mlodosci-po-50.html",
-      "node scripts/article-contract-check.js trening-silowy-eliksir-mlodosci-po-50.html _site/trening-silowy-eliksir-mlodosci-po-50.html",
-      "node scripts/predeploy-gate.js --slug trening-silowy-eliksir-mlodosci-po-50",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 1,
-        "ctr": 0,
-        "position": 10
-      },
-      "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
-      },
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P0_PUSH_TO_PAGE_ONE",
-    "score": {
-      "total": 29,
-      "seo": 75,
-      "aeo": 100,
-      "geo": 100,
-      "aio": 100,
-      "promotion": 100,
-      "speed": 78,
-      "ctr_opportunity": 35
-    },
-    "url": "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
-    "file": "kreatyna-po-50-tce-kompletny-przewodnik.html",
-    "title": "Kreatyna po 50-tce: kompletny przewodnik | FitPo50",
-    "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "LOW_VISIBILITY_LONG_TAIL",
-    "editorial_decision": "promować",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 11,
-      "status": "ok"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "NEW_VISIBILITY",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 1,
-        "ctr": 0,
-        "position": 11
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 1,
-        "impressions_pct": 100,
-        "ctr_pp": 0,
-        "position_delta": 11,
-        "position_improvement": 0
-      },
-      "query_changes": [
-        {
-          "query": "kreatyna po 50 tce",
-          "current": {
-            "clicks": 0,
-            "impressions": 1,
-            "ctr": 0,
-            "position": 11
-          },
-          "previous": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "position": 0
-          },
-          "impressions_delta": 1,
-          "impressions_delta_pct": 100,
-          "clicks_delta": 0,
-          "position_improvement": 0
-        }
-      ]
-    },
-    "keyword_plan": {
-      "primary": "kreatyna po 50 tce",
-      "secondary": [],
-      "intents": [
-        "informacyjna"
-      ],
-      "useful_queries": [
-        {
-          "query": "kreatyna po 50 tce",
-          "intent": "informacyjna",
-          "impressions": 1,
-          "clicks": 0,
-          "position": 11
-        }
-      ]
-    },
-    "tasks": [
-      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
-      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
-      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
-    ],
-    "internal_link_sources": [
-      {
-        "from": "terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html",
-        "score": 20,
-        "inbound_strength": 5,
-        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
-        "placement": "Akapit z tematem: dowiedz, wspiera, szybka."
-      },
-      {
-        "from": "apob-norma-cena-jak-czytac-wynik.html",
-        "score": 19,
-        "inbound_strength": 10,
-        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
-        "placement": "Akapit z tematem: dowiedz, szybka, odpowiedz."
-      },
-      {
-        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-        "score": 16,
-        "inbound_strength": 10,
-        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
-        "placement": "Akapit z tematem: naprawde, mowia, twojego."
-      },
-      {
-        "from": "powrot-do-formy-po-50-kompletny-przewodnik.html",
-        "score": 16,
-        "inbound_strength": 8,
-        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
-        "placement": "Akapit z tematem: formy, kompletny, przewodnik."
-      },
-      {
-        "from": "hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
-        "score": 16,
-        "inbound_strength": 6,
-        "anchor": "Kreatyna po 50-tce: kompletny przewodnik",
-        "placement": "Akapit z tematem: piecdziesiatce, czym, tak."
-      }
-    ],
-    "promotion_urls": [
-      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "https://fitpo50.pl/terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html",
-      "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
-      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-      "https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html",
-      "https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "node scripts/article-contract-check.js kreatyna-po-50-tce-kompletny-przewodnik.html _site/kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "node scripts/predeploy-gate.js --slug kreatyna-po-50-tce-kompletny-przewodnik",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 1,
-        "ctr": 0,
-        "position": 11
-      },
-      "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
-      },
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P0_PUSH_TO_PAGE_ONE",
-    "score": {
-      "total": 28,
-      "seo": 71,
-      "aeo": 100,
-      "geo": 100,
-      "aio": 100,
-      "promotion": 100,
-      "speed": 78,
-      "ctr_opportunity": 35
-    },
-    "url": "https://fitpo50.pl/dlaczego-bieznia-to-za-malo.html",
-    "file": "dlaczego-bieznia-to-za-malo.html",
-    "title": "Bieżnia po 50 to za mało: czego brakuje? | FitPo50",
-    "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "LOW_VISIBILITY_LONG_TAIL",
-    "editorial_decision": "promować",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 2,
-      "ctr": 0,
-      "position": 15.5,
-      "status": "ok"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "NEW_VISIBILITY",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 2,
-        "ctr": 0,
-        "position": 15.5
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 2,
-        "impressions_pct": 100,
-        "ctr_pp": 0,
-        "position_delta": 15.5,
-        "position_improvement": 0
-      },
-      "query_changes": []
-    },
-    "keyword_plan": {
-      "primary": "Dlaczego bieżnia to za mało. Co Twoje ciało po 50-tce naprawdę potrzebuje.",
-      "secondary": [],
-      "intents": [],
-      "useful_queries": []
-    },
-    "tasks": [
-      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
-      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
-      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
-    ],
-    "internal_link_sources": [
-      {
-        "from": "szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
-        "score": 18,
-        "inbound_strength": 2,
-        "anchor": "Dlaczego bieżnia to za mało. Co Twoje ciało po 50-t",
-        "placement": "Akapit z tematem: tylko, dowiedz, szybka."
-      },
-      {
-        "from": "hrt-mit-badanie-po-50.html",
-        "score": 16,
-        "inbound_strength": 8,
-        "anchor": "Dlaczego bieżnia to za mało. Co Twoje ciało po 50-t",
-        "placement": "Akapit z tematem: naprawde, szybka, odpowiedz."
-      },
-      {
-        "from": "ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
-        "score": 16,
-        "inbound_strength": 8,
-        "anchor": "Dlaczego bieżnia to za mało. Co Twoje ciało po 50-t",
-        "placement": "Akapit z tematem: aby, metabolizm, trening."
-      },
-      {
-        "from": "syndrom-pierwszego-poniedzialku.html",
-        "score": 16,
-        "inbound_strength": 4,
-        "anchor": "Dlaczego bieżnia to za mało. Co Twoje ciało po 50-t",
-        "placement": "Akapit z tematem: dowiedz, szybka, odpowiedz."
-      },
-      {
-        "from": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
-        "score": 15,
-        "inbound_strength": 5,
-        "anchor": "Dlaczego bieżnia to za mało. Co Twoje ciało po 50-t",
-        "placement": "Akapit z tematem: ktorego, lustrze, cichy."
-      }
-    ],
-    "promotion_urls": [
-      "https://fitpo50.pl/dlaczego-bieznia-to-za-malo.html",
-      "https://fitpo50.pl/szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
-      "https://fitpo50.pl/hrt-mit-badanie-po-50.html",
-      "https://fitpo50.pl/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
-      "https://fitpo50.pl/syndrom-pierwszego-poniedzialku.html",
-      "https://fitpo50.pl/sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js dlaczego-bieznia-to-za-malo.html",
-      "node scripts/article-contract-check.js dlaczego-bieznia-to-za-malo.html _site/dlaczego-bieznia-to-za-malo.html",
-      "node scripts/predeploy-gate.js --slug dlaczego-bieznia-to-za-malo",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 2,
-        "ctr": 0,
-        "position": 15.5
-      },
-      "checkpoints": {
-        "day_7": "2026-06-08",
-        "day_14": "2026-06-15",
-        "day_28": "2026-06-29"
-      },
-      "rule": "Po deployu sprawdź GSC po 7/14/28 dniach: impressions, CTR, pozycja, kliknięcia i query_changes."
-    }
-  },
-  {
-    "type": "P0_PUSH_TO_PAGE_ONE",
-    "score": {
-      "total": 28,
-      "seo": 70,
-      "aeo": 100,
-      "geo": 100,
-      "aio": 100,
-      "promotion": 100,
-      "speed": 78,
-      "ctr_opportunity": 35
-    },
-    "url": "https://fitpo50.pl/waga-smart-pomiar-skladu-ciala-prawda.html",
-    "file": "waga-smart-pomiar-skladu-ciala-prawda.html",
-    "title": "Waga łazienkowa smart: Ile z 16 parametrów to prawda? | FitPo50",
-    "priority": "P0_NEAR_PAGE_ONE",
-    "segment": "LOW_VISIBILITY_LONG_TAIL",
-    "editorial_decision": "promować",
-    "gsc": {
-      "clicks": 0,
-      "impressions": 2,
-      "ctr": 0,
-      "position": 16,
-      "status": "ok"
-    },
-    "performance_delta": {
-      "status": "NO_PREVIOUS_URL_DATA",
-      "conclusion": "NEW_VISIBILITY",
-      "current_90d": {
-        "clicks": 0,
-        "impressions": 2,
-        "ctr": 0,
-        "position": 16
-      },
-      "previous_90d": {
-        "clicks": 0,
-        "impressions": 0,
-        "ctr": 0,
-        "position": 0
-      },
-      "delta": {
-        "clicks": 0,
-        "impressions": 2,
-        "impressions_pct": 100,
-        "ctr_pp": 0,
-        "position_delta": 16,
-        "position_improvement": 0
-      },
-      "query_changes": []
-    },
-    "keyword_plan": {
-      "primary": "Waga łazienkowa smart: Ile z 16 parametrów to prawda?",
-      "secondary": [],
-      "intents": [],
-      "useful_queries": []
-    },
-    "tasks": [
-      "Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.",
-      "Popraw title/meta/lead pod CTR: obietnica, konkret po 50-tce, bez clickbaitu.",
-      "Po zmianie zaktualizuj article:modified_time oraz BlogPosting.dateModified."
-    ],
-    "internal_link_sources": [
-      {
-        "from": "jedz-wiecej-po-50.html",
-        "score": 14,
-        "inbound_strength": 13,
-        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
-        "placement": "Akapit z tematem: działa, moze, warto."
-      },
-      {
-        "from": "tluszcz-trzewny-choroby-jak-walczyc.html",
-        "score": 14,
-        "inbound_strength": 8,
-        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
-        "placement": "Akapit z tematem: trzewny, tłuszcz, cichy."
-      },
-      {
-        "from": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-        "score": 13,
-        "inbound_strength": 10,
-        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
-        "placement": "Akapit z tematem: naprawde, kluczowe, madrze."
-      },
-      {
-        "from": "kreatyna-po-50-tce-kompletny-przewodnik.html",
-        "score": 13,
-        "inbound_strength": 9,
-        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
-        "placement": "Akapit z tematem: miesnie, szybka, odpowiedz."
-      },
-      {
-        "from": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
-        "score": 13,
-        "inbound_strength": 8,
-        "anchor": "Waga łazienkowa smart: Ile z 16 parametrów to prawda",
-        "placement": "Akapit z tematem: ile, szybka, odpowiedz."
-      }
-    ],
-    "promotion_urls": [
-      "https://fitpo50.pl/waga-smart-pomiar-skladu-ciala-prawda.html",
-      "https://fitpo50.pl/jedz-wiecej-po-50.html",
-      "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html",
-      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
-      "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html"
-    ],
-    "validation_commands": [
-      "node scripts/validate-article-standard.js waga-smart-pomiar-skladu-ciala-prawda.html",
-      "node scripts/article-contract-check.js waga-smart-pomiar-skladu-ciala-prawda.html _site/waga-smart-pomiar-skladu-ciala-prawda.html",
-      "node scripts/predeploy-gate.js --slug waga-smart-pomiar-skladu-ciala-prawda",
-      "npm run llms:full",
-      "npm run assets:mirror:sync",
-      "npm run predeploy:check"
-    ],
-    "measurement": {
-      "baseline": {
-        "clicks": 0,
-        "impressions": 2,
-        "ctr": 0,
-        "position": 16
       },
       "checkpoints": {
         "day_7": "2026-06-08",

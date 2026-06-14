@@ -409,7 +409,9 @@ function extractBlogPostingNode(raw) {
   return null;
 }
 
-function validateArticleTitles(raw, errors) {
+function validateArticleTitles(raw, errors, options = {}) {
+  const legacy = options.legacy === true;
+  if (legacy) return;
   const h1 = utils.stripTags(raw.match(/<h1[^>]*class="[^"]*article-header__title[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '').trim();
   const docTitle = utils.stripTags(raw.match(/<title>([\s\S]*?)<\/title>/i)?.[1] || '').replace(/\s*\|\s*FitPo50\s*$/i, '').trim();
   const blogPosting = extractBlogPostingNode(raw);
@@ -445,9 +447,22 @@ function isLegacyArticle(raw) {
   const publishedMeta = raw.match(/<meta\s+property="article:published_time"\s+content="([^"]+)"/i)?.[1] || '';
   const publishedSchema = extractPublishedDateFromLdJson(raw);
   const publishedRaw = String(publishedMeta || publishedSchema || '').trim();
-  if (!publishedRaw) return false;
+  if (!publishedRaw) return true;
   const publishedAt = new Date(publishedRaw);
   if (Number.isNaN(publishedAt.getTime())) return false;
+  return publishedAt < cutoff;
+}
+
+function isLegacyForTitleGate(raw) {
+  const cutoffRaw = String(POLICY.TITLE?.STRICT_CUTOFF || '').trim();
+  const cutoff = cutoffRaw ? new Date(`${cutoffRaw}T00:00:00+02:00`) : null;
+  if (!cutoff || Number.isNaN(cutoff.getTime())) return isLegacyArticle(raw);
+  const publishedMeta = raw.match(/<meta\s+property="article:published_time"\s+content="([^"]+)"/i)?.[1] || '';
+  const publishedSchema = extractPublishedDateFromLdJson(raw);
+  const publishedRaw = String(publishedMeta || publishedSchema || '').trim();
+  if (!publishedRaw) return true;
+  const publishedAt = new Date(publishedRaw);
+  if (Number.isNaN(publishedAt.getTime())) return true;
   return publishedAt < cutoff;
 }
 
@@ -479,7 +494,7 @@ function validateFile(filePath) {
   validateNoXmlProlog(raw, errors);
   validateNoInvalidSourceClosingTags(raw, errors);
   validateHeadSeoConsistency(raw, errors);
-  validateArticleTitles(raw, errors);
+  validateArticleTitles(raw, errors, { legacy: isLegacyForTitleGate(raw) });
 
   if (/\sstyle\s*=\s*['"]/i.test(raw)) {
     errors.push('Wykryto inline CSS (style="...")');
