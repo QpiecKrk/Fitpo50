@@ -59,6 +59,7 @@ async function main() {
   console.log('Pre-push: start');
 
   timings.push(await runStep('prepush:diff-guard', 'node', ['scripts/prepush-diff-guard.js']));
+  timings.push(await runStep('fitpo50:doctor', 'node', ['scripts/fitpo50-doctor.js']));
 
   const parallel = await Promise.all([
     runStep('prepush:parallel:checks', 'node', ['scripts/prepush-parallel-checks.js']),

@@ -52,6 +52,7 @@ Zasady:
 - nie usuwaj automatycznie plikow zrodlowych artykulow, assetow produkcyjnych, danych ani konfiguracji,
 - przed kazdym usuwaniem pokaz liste plikow do usuniecia i czekaj na moja jednoznaczna zgode.
 - Gdy wydaje komenda `git push`, traktuj to jako komendę złożoną i uruchamiasz pełny pipeline push:
+  - `npm run fitpo50:doctor` (jesli status RED, zatrzymaj push i pokaz blokery),
   - `./scripts/export_site.sh`
   - `npm run assets:mirror:sync`
   - `npm run predeploy:check`
@@ -124,6 +125,20 @@ Tryb pracy:
 - Twoja rola: reviewer i krytyk,
 - masz szukac bledow, konfliktow i brakow,
 - gdy wykryjesz konflikt z dokumentem albo ryzyko utraty danych: zatrzymaj sie, zadaj jedno krotkie pytanie i czekaj na decyzje.
+- `TRYB NADZORU` oznacza sesje tylko do analizy, review, planowania i wskazywania ryzyk:
+  - nie wykonuj edycji plikow ani `apply_patch`,
+  - nie wykonuj `git add`, `git commit`, `git push`, `git pull`, `git merge`, przelaczania branchy ani deployu,
+  - nie czysc plikow, backupow, konfiguracji globalnych ani danych,
+  - mozesz czytac wskazane pliki i uruchamiac lokalne komendy tylko-analityczne, jesli nie zmieniaja srodowiska,
+  - przed kazda komenda potencjalnie globalna lub zapisujaca: STOP i pytanie o zgode,
+  - jesli uzytkownik chce wdrozenia w tym trybie, musi napisac jawnie `edytuj`.
+- skroty operacyjne uzytkownika:
+  - `start`, `zacznij`, `start techniczny`, `nowa sesja` oznacza: uruchom `npm run session:start`, przeczytaj `data/reports/agent-context.md` i `data/reports/fitpo50-doctor.md`, a potem podsumuj status.
+  - `sprawdz system`, `zobacz czy porzadek`, `czy jest dobrze`, `porzadek` oznacza: uruchom `npm run fitpo50:doctor`; jesli trzeba, uzupelnij `npm run agent:context`.
+  - `git push` oznacza: najpierw sprawdz `npm run fitpo50:doctor`; jesli status nie jest czerwony, wykonaj standardowy commit/push workflow; jesli status jest czerwony, zatrzymaj push i pokaz blokery.
+  - `sprzatnij raporty`, `raporty porzadek` oznacza: najpierw `npm run reports:prune:dry`; dopiero po jawnej zgodzie uzytkownika uruchom `npm run reports:prune`.
+  - `admin` oznacza: tryb pracy nad panelem administracyjnym; zawsze pilnuj `admin/config.php` jako pliku prywatnego, nie przywracaj go do Git, nie publikuj `config*.php` ani `init-*.php` do `_site/admin`, sprawdzaj CSP/logowanie/rate limiting i po zmianach PHP uruchamiaj `php -l` dla zmienionych plikow.
+  - po kazdej wiekszej zmianie systemowej odswiez kontekst przez `npm run agent:context`, zeby kolejne sesje zaczynaly od aktualnej mapy projektu.
 - skrot `GSC` w rozmowie oznacza domyslnie:
   - sprawdz ostatni issue z raportem GSC na GitHub,
   - przeczytaj issue `SEO/AEO: Poniedziałkowy raport GSC`,

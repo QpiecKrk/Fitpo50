@@ -153,4 +153,10 @@ data/reports/seo-aio-wave-gsc-submit.txt
 data/reports/seo-aio-wave-proposal.json
 data/reports/seo-aio-wave-proposal.md
 data/reports/assets-audit.json
+data/reports/agent-context.json
+data/reports/agent-context.md
+data/reports/fitpo50-doctor.json
+data/reports/fitpo50-doctor.md
+data/reports/admin-doctor.json
+data/reports/admin-doctor.md
 data/cache/internal-link-corpus.json

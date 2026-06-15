@@ -13,6 +13,7 @@ mkdir -p "$REPORT_DIR"
 mkdir -p "$DOWNLOADS_DIR"
 
 timestamp="$(date '+%Y-%m-%d %H:%M:%S %z')"
+stamp_file="$(date '+%Y%m%d-%H%M%S')"
 
 git_pull_output="$(git pull --ff-only origin main 2>&1 || true)"
 git_status_output="$(git status --short 2>&1 || true)"
@@ -46,6 +47,8 @@ $predeploy_output
 EOF
 
 cp "$REPORT_FILE" "$DOWNLOADS_DIR/session-start-report.md"
+cp "$REPORT_FILE" "$DOWNLOADS_DIR/session-start-report-$stamp_file.md"
 
 echo "Raport zapisany: $REPORT_FILE"
 echo "Raport skopiowany: $DOWNLOADS_DIR/session-start-report.md"
+echo "Raport archiwalny: $DOWNLOADS_DIR/session-start-report-$stamp_file.md"
