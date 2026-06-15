@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npm run build:esbuild",
     "build:esbuild": "esbuild src/app.ts src/cmp.ts src/footer.ts src/search.ts --outdir=dist --target=es2018 --format=iife --log-level=error",
+    "postinstall": "bash scripts/install-git-hooks.sh || true",
     "typecheck": "tsc --noEmit --pretty false",
     "build:strict": "npm run typecheck && npm run build:esbuild",
     "article:new": "node scripts/create-article-from-template.js",

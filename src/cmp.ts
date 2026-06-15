@@ -11,9 +11,13 @@
     host === '::1' ||
     host.endsWith('.local')
   );
+  const setGoogleTrackingDisabled = (disabled: boolean) => {
+    const flags = window as unknown as Record<string, boolean>;
+    flags[`ga-disable-${GA_ID}`] = disabled;
+    flags[`ga-disable-${ADS_ID}`] = disabled;
+  };
   if (isLocal) {
-    (window as any)[`ga-disable-${GA_ID}`] = true;
-    (window as any)[`ga-disable-${ADS_ID}`] = true;
+    setGoogleTrackingDisabled(true);
     console.log('FitPo50: Środowisko lokalne wykryte. Śledzenie Google Analytics zostało zablokowane.');
   }
 
@@ -287,6 +291,7 @@
     if (isLocal) return;
     if (!hasAnyTagConsent()) return;
 
+    setGoogleTrackingDisabled(false);
     initGtagBridge();
 
     if (!win.__fitpo50GtagBootstrapped && typeof win.gtag === 'function') {
@@ -318,17 +323,25 @@
 
   if (!win.__fitpo50CmpPatched) {
     win.__fitpo50CmpPatched = true;
+    const shouldBlockTagScript = (node: Node) => (
+      node instanceof HTMLScriptElement &&
+      typeof node.src === 'string' &&
+      node.src.includes('googletagmanager.com/gtag/js') &&
+      (isLocal || !hasAnyTagConsent())
+    );
     const originalAppendChild = Node.prototype.appendChild;
     Node.prototype.appendChild = function patchedAppendChild<T extends Node>(node: T): T {
-      if (
-        node instanceof HTMLScriptElement &&
-        typeof node.src === 'string' &&
-        node.src.includes('googletagmanager.com/gtag/js') &&
-        (isLocal || !hasAnyTagConsent())
-      ) {
+      if (shouldBlockTagScript(node)) {
         return node;
       }
       return originalAppendChild.call(this, node) as T;
+    };
+    const originalInsertBefore = Node.prototype.insertBefore;
+    Node.prototype.insertBefore = function patchedInsertBefore<T extends Node>(node: T, child: Node | null): T {
+      if (shouldBlockTagScript(node)) {
+        return node;
+      }
+      return originalInsertBefore.call(this, node, child) as T;
     };
   }
 
@@ -336,6 +349,9 @@
     consentState = state;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     win.FitPo50Consent = state;
+    if (!hasAnyTagConsent()) {
+      setGoogleTrackingDisabled(true);
+    }
     window.dispatchEvent(new CustomEvent('fitpo50:consent-updated', { detail: state }));
     ensureAnalyticsLoaded();
   };

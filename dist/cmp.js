@@ -7,9 +7,13 @@
     const GA_SRC = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
     const host = window.location.hostname.toLowerCase();
     const isLocal = host === "localhost" || host === "127.0.0.1" || host === "::1" || host.endsWith(".local");
+    const setGoogleTrackingDisabled = (disabled) => {
+      const flags = window;
+      flags[`ga-disable-${GA_ID}`] = disabled;
+      flags[`ga-disable-${ADS_ID}`] = disabled;
+    };
     if (isLocal) {
-      window[`ga-disable-${GA_ID}`] = true;
-      window[`ga-disable-${ADS_ID}`] = true;
+      setGoogleTrackingDisabled(true);
       console.log("FitPo50: \u015Arodowisko lokalne wykryte. \u015Aledzenie Google Analytics zosta\u0142o zablokowane.");
     }
     const win = window;
@@ -260,6 +264,7 @@
     const ensureAnalyticsLoaded = () => {
       if (isLocal) return;
       if (!hasAnyTagConsent()) return;
+      setGoogleTrackingDisabled(false);
       initGtagBridge();
       if (!win.__fitpo50GtagBootstrapped && typeof win.gtag === "function") {
         win.gtag("js", /* @__PURE__ */ new Date());
@@ -285,18 +290,29 @@
     };
     if (!win.__fitpo50CmpPatched) {
       win.__fitpo50CmpPatched = true;
+      const shouldBlockTagScript = (node) => node instanceof HTMLScriptElement && typeof node.src === "string" && node.src.includes("googletagmanager.com/gtag/js") && (isLocal || !hasAnyTagConsent());
       const originalAppendChild = Node.prototype.appendChild;
       Node.prototype.appendChild = function patchedAppendChild(node) {
-        if (node instanceof HTMLScriptElement && typeof node.src === "string" && node.src.includes("googletagmanager.com/gtag/js") && (isLocal || !hasAnyTagConsent())) {
+        if (shouldBlockTagScript(node)) {
           return node;
         }
         return originalAppendChild.call(this, node);
+      };
+      const originalInsertBefore = Node.prototype.insertBefore;
+      Node.prototype.insertBefore = function patchedInsertBefore(node, child) {
+        if (shouldBlockTagScript(node)) {
+          return node;
+        }
+        return originalInsertBefore.call(this, node, child);
       };
     }
     const persist = (state) => {
       consentState = state;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       win.FitPo50Consent = state;
+      if (!hasAnyTagConsent()) {
+        setGoogleTrackingDisabled(true);
+      }
       window.dispatchEvent(new CustomEvent("fitpo50:consent-updated", { detail: state }));
       ensureAnalyticsLoaded();
     };

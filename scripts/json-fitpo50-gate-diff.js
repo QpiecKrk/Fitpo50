@@ -42,6 +42,10 @@ function isFitpoJson(file) {
   return /\.fitpo50\.json$/i.test(file) || /fitpo50\.json$/i.test(file);
 }
 
+function isArchivedImport(file) {
+  return String(file || '').replace(/\\/g, '/').startsWith('data/import/archive/');
+}
+
 function countWords(text) {
   return utils.countWords(text);
 }
@@ -442,7 +446,7 @@ function main() {
     targets = args.files;
   } else {
     const changed = readChangedFiles();
-    targets = changed.filter(isFitpoJson);
+    targets = changed.filter((file) => isFitpoJson(file) && !isArchivedImport(file));
   }
   if (!targets.length) {
     console.log('[PASS] json:gate:diff - brak zmienionych plików *.fitpo50.json');

@@ -22,6 +22,7 @@ const { spawnSync } = require('child_process');
 const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
+const SITEMAP_LOCK_DIR = path.join(ROOT, '.tmp', 'sitemap.lock');
 const LLMS_PATH = path.join(ROOT, 'llms.txt');
 const REQUIRED_ARTICLE_IMAGE_EXT = ['avif', 'webp', 'jpg'];
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
@@ -303,6 +304,18 @@ function truncateAtWordBoundary(text, maxChars) {
   return value.slice(0, maxChars).trim();
 }
 
+function ensureSentenceTerminator(text, maxChars) {
+  const clean = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!clean || /[.!?…]$/.test(clean)) return clean;
+  const withoutDangling = clean.replace(/[\s,;:–-]+$/u, '').trim();
+  if (!withoutDangling) return '';
+  if (withoutDangling.length < maxChars) return `${withoutDangling}.`;
+  const shortened = truncateAtWordBoundary(withoutDangling, Math.max(1, maxChars - 1))
+    .replace(/[\s,;:–-]+$/u, '')
+    .trim();
+  return shortened ? `${shortened}.` : '';
+}
+
 function escapeRegex(value) {
   return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -319,7 +332,10 @@ function normalizeMetaDescription(rawDescription) {
   const clean = stripTags(String(rawDescription || ''))
     .replace(/\s+/g, ' ')
     .trim();
-  return truncateAtWordBoundary(clean, POLICY.WORDS.SEO_DESCRIPTION_MAX);
+  return ensureSentenceTerminator(
+    truncateAtWordBoundary(clean, POLICY.WORDS.SEO_DESCRIPTION_MAX),
+    POLICY.WORDS.SEO_DESCRIPTION_MAX
+  );
 }
 
 function buildSpeakableSelectors(hasKeyTakeaways) {
@@ -1028,7 +1044,9 @@ function readArticleMetaByHref(href) {
   const title = firstMatch(html, /<meta\s+property="og:title"\s+content="([^"]+)"/i)
     || firstMatch(html, /<title>([^<]+)<\/title>/i)
     || '';
-  const description = firstMatch(html, /<meta\s+name="description"\s+content="([^"]+)"/i) || '';
+  const description = firstMatch(html, /<meta\s+name="description"\s+content="([^"]+)"/i)
+    || extractArticleLeadExcerpt(html)
+    || '';
   const readTime = firstMatch(html, /<span\s+class="article-meta__time">([^<]+)<\/span>/i) || '';
   const categoryKey = firstMatch(html, /\barticle--(ruch|jedzenie|zdrowie|ciekawe)\b/i, '').toLowerCase();
   const heroAlt = firstMatch(html, /<img[^>]*class="[^"]*hero-image[^"]*"[^>]*alt="([^"]+)"/i) || title;
@@ -1050,6 +1068,15 @@ function readArticleMetaByHref(href) {
   };
   articleMetaCache.set(normalized, meta);
   return meta;
+}
+
+function extractArticleLeadExcerpt(html) {
+  const lead = firstMatch(html, /<p\b[^>]*class="[^"]*\bdrop-cap\b[^"]*"[^>]*>([\s\S]*?)<\/p>/i)
+    || firstMatch(html, /<article\b[^>]*>[\s\S]*?<p\b[^>]*>([\s\S]*?)<\/p>/i)
+    || '';
+  const clean = stripTags(lead).replace(/\s+/g, ' ').trim();
+  if (!clean) return '';
+  return ensureSentenceTerminator(truncateAtWordBoundary(clean, 155), 155);
 }
 
 function getRelatedCandidatesFromPorady(currentSlug) {
@@ -1107,7 +1134,11 @@ function buildSafeRelatedDefaults({ currentSlug, currentCategory, readingTime, h
       || normalizeImageBase(fallback.image)
       || normalizeImageBase(heroImage);
     const cardTitle = String(meta?.title || fallback.title || title).trim();
-    const cardDesc = String(meta?.description || fallback.description || metaDescription).trim();
+    const cardDesc = String(
+      meta
+        ? (meta.description || `Czytaj więcej: ${cardTitle}.`)
+        : (fallback.description || metaDescription)
+    ).trim();
     const cardTime = String(meta?.readTime || fallback.time || readingTime).trim()
       .replace(/\s*czytania/i, '');
     const cardAlt = String(meta?.heroAlt || cardTitle || heroAlt).trim();
@@ -1758,37 +1789,76 @@ function upsertBlogPostingSchema(html, opts) {
   return changed ? output : html;
 }
 
-function updateSitemap(slug, dateIso, dryRun) {
-  if (!fs.existsSync(SITEMAP_PATH)) return { changed: false, file: 'sitemap.xml (brak)' };
+function sleepSync(ms) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+}
 
-  let xml = fs.readFileSync(SITEMAP_PATH, 'utf8');
-  const url = `https://fitpo50.pl/${slug}.html`;
-  if (xml.includes(`<loc>${url}</loc>`)) {
-    return { changed: false, file: 'sitemap.xml' };
-  }
-
-  const date = String(dateIso || '').split('T')[0] || new Date().toISOString().slice(0, 10);
-  const entry = [
-    '  <url>',
-    `    <loc>${url}</loc>`,
-    `    <lastmod>${date}</lastmod>`,
-    '    <changefreq>monthly</changefreq>',
-    '    <priority>0.8</priority>',
-    '  </url>',
-    '',
-  ].join('\n');
-
-  xml = xml.replace('</urlset>', `${entry}</urlset>`);
-
-  if (!dryRun) {
-    fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
-    const siteMirror = path.join(ROOT, '_site', 'sitemap.xml');
-    if (fs.existsSync(path.dirname(siteMirror))) {
-      fs.writeFileSync(siteMirror, xml, 'utf8');
+function withSitemapLock(callback) {
+  const parent = path.dirname(SITEMAP_LOCK_DIR);
+  if (!fs.existsSync(parent)) fs.mkdirSync(parent, { recursive: true });
+  const startedAt = Date.now();
+  while (true) {
+    try {
+      fs.mkdirSync(SITEMAP_LOCK_DIR);
+      break;
+    } catch (err) {
+      if (err && err.code === 'EEXIST' && Date.now() - startedAt < 5000) {
+        sleepSync(100);
+        continue;
+      }
+      throw err;
     }
   }
 
-  return { changed: true, file: 'sitemap.xml' };
+  try {
+    return callback();
+  } finally {
+    fs.rmSync(SITEMAP_LOCK_DIR, { recursive: true, force: true });
+  }
+}
+
+function writeFileAtomic(filePath, content) {
+  const tmpPath = `${filePath}.tmp-${process.pid}-${Date.now()}`;
+  fs.writeFileSync(tmpPath, content, 'utf8');
+  fs.renameSync(tmpPath, filePath);
+}
+
+function updateSitemap(slug, dateIso, dryRun) {
+  if (!fs.existsSync(SITEMAP_PATH)) return { changed: false, file: 'sitemap.xml (brak)' };
+
+  return withSitemapLock(() => {
+    let xml = fs.readFileSync(SITEMAP_PATH, 'utf8');
+    const url = `https://fitpo50.pl/${slug}.html`;
+    if (xml.includes(`<loc>${url}</loc>`)) {
+      return { changed: false, file: 'sitemap.xml' };
+    }
+
+    const date = String(dateIso || '').split('T')[0] || new Date().toISOString().slice(0, 10);
+    const entry = [
+      '  <url>',
+      `    <loc>${url}</loc>`,
+      `    <lastmod>${date}</lastmod>`,
+      '    <changefreq>monthly</changefreq>',
+      '    <priority>0.8</priority>',
+      '  </url>',
+      '',
+    ].join('\n');
+
+    if (!xml.includes('</urlset>')) {
+      throw new Error('sitemap.xml: brak znacznika </urlset>.');
+    }
+    xml = xml.replace(/<\/urlset>\s*$/u, `${entry}</urlset>\n`);
+
+    if (!dryRun) {
+      writeFileAtomic(SITEMAP_PATH, xml);
+      const siteMirror = path.join(ROOT, '_site', 'sitemap.xml');
+      if (fs.existsSync(path.dirname(siteMirror))) {
+        writeFileAtomic(siteMirror, xml);
+      }
+    }
+
+    return { changed: true, file: 'sitemap.xml' };
+  });
 }
 
 function updateLlms(slug, title, section, summary, dryRun) {
@@ -2423,7 +2493,7 @@ function normalizePayload(data, cliCategory, options = {}) {
   const metaDescription = normalizeMetaDescription(data.meta_description || data.description || data.excerpt || leadRaw);
 
   const datePublished = toIsoDateTimeWithTimezone(data.date_published || data.published_at || fallbackDate, '08:00:00');
-  const dateModified = toIsoDateTimeWithTimezone(data.date_modified || data.updated_at || datePublished, '09:30:00');
+  const dateModified = toIsoDateTimeWithTimezone(data.date_modified || data.updated_at || fallbackDate, '09:30:00');
 
   const readingTime = normalizeReadingTimeLabel(data.reading_time || data.readingTime, '11 min czytania');
 
@@ -2513,7 +2583,6 @@ function buildHtmlFromTemplate(template, payload) {
     HERO_IMAGE: payload.heroImage,
     HERO_ALT: payload.heroAlt,
     HERO_MOTTO: payload.heroMotto,
-    LEAD_PARAGRAPH: stripTags(payload.leadRaw),
     H2_1: 'Sekcja artykułu',
     P_1: 'Treść sekcji artykułu.',
     H2_2: 'Sekcja artykułu',

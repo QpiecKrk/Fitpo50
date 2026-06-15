@@ -4,13 +4,26 @@
     "use strict";
     const themeToggle = document.querySelector("[data-theme-toggle]");
     const root = document.documentElement;
-    let currentTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    const themeStorageKey = "fitpo50-theme";
+    const storedTheme = (() => {
+      try {
+        const value = window.localStorage.getItem(themeStorageKey);
+        return value === "dark" || value === "light" ? value : "";
+      } catch (_err) {
+        return "";
+      }
+    })();
+    let currentTheme = storedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     root.setAttribute("data-theme", currentTheme);
     updateThemeIcon();
     if (themeToggle) {
       themeToggle.addEventListener("click", () => {
         currentTheme = currentTheme === "dark" ? "light" : "dark";
         root.setAttribute("data-theme", currentTheme);
+        try {
+          window.localStorage.setItem(themeStorageKey, currentTheme);
+        } catch (_err) {
+        }
         updateThemeIcon();
       });
     }
@@ -154,12 +167,9 @@
       let activeSort = "newest";
       const categoryLabels = {
         all: "we wszystkich kategoriach",
-        start: "w kategorii Start",
-        motywacja: "w kategorii Motywacja",
-        odzywianie: "w kategorii Od\u017Cywianie",
-        suplementacja: "w kategorii Suplementacja",
+        ruch: "w kategorii Ruch",
+        jedzenie: "w kategorii Jedzenie",
         zdrowie: "w kategorii Zdrowie",
-        wiedza: "w kategorii Wiedza",
         ciekawe: "w kategorii Ciekawe"
       };
       const normalize = (value) => value.toLocaleLowerCase("pl-PL").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
@@ -596,8 +606,24 @@
       window.location.href = target;
     };
     headerSearchInputs.forEach((searchInput) => {
+      var _a;
       searchInput.addEventListener("keydown", (event) => {
         if (event.key !== "Enter") return;
+        if (isSearchPage) return;
+        event.preventDefault();
+        redirectToSearchPage(searchInput.value);
+      });
+      const searchIcon = (_a = searchInput.closest(".searchbar")) == null ? void 0 : _a.querySelector("span");
+      if (!searchIcon) return;
+      searchIcon.setAttribute("role", "button");
+      searchIcon.setAttribute("tabindex", "0");
+      searchIcon.setAttribute("aria-label", "Szukaj");
+      searchIcon.addEventListener("click", () => {
+        if (isSearchPage) return;
+        redirectToSearchPage(searchInput.value);
+      });
+      searchIcon.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
         if (isSearchPage) return;
         event.preventDefault();
         redirectToSearchPage(searchInput.value);

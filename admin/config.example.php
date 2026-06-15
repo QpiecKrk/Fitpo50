@@ -1,10 +1,15 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'u542460614_XiGkk');
-define('DB_USER', 'u542460614_jQQSu');
-define('DB_PASS', 'pK8rV7!mQ2xS4#nD6zT1');
+// Skopiuj ten plik jako admin/config.php na serwerze i uzupełnij wartości.
+// Nie commituj admin/config.php ani _site/admin/config.php.
 
-define('PASSWORD_HASH', '$2y$12$F..JZu2ZkyFLkLthndPEWewCTfGxeHsST.knX4vxwwg9g1D48tKca');
+define('APP_ENV', 'prod');
+
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'CHANGE_ME');
+define('DB_USER', 'CHANGE_ME');
+define('DB_PASS', 'CHANGE_ME');
+
+define('PASSWORD_HASH', 'CHANGE_ME_PASSWORD_HASH');
 
 define('SESSION_TIMEOUT', 7200);
 define('SESSION_NAME', 'fp50_admin');

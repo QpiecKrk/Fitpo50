@@ -1,3 +1,4 @@
+<?php
 // ============================================================
 // Jednorazowy skrypt do generowania hasha hasła — KASUJE SIĘ PO UŻYCIU
 // Uruchom RAZ: https://admin.fitpo50.pl/init-hash.php?token=TWOJ_TOKEN&pass=TwojeTajneHaslo
@@ -7,8 +8,8 @@
 
 require_once __DIR__ . '/config.php';
 
-// Hardening: Blokada na produkcji
-if (defined('APP_ENV') && APP_ENV !== 'dev') {
+// Hardening: skrypty instalacyjne działają wyłącznie po jawnym ustawieniu APP_ENV=dev.
+if (!defined('APP_ENV') || APP_ENV !== 'dev') {
     http_response_code(403);
     die('403 Forbidden — Skrypty instalacyjne są zablokowane na produkcji. Zmień APP_ENV na "dev" w config.php aby uruchomić.');
 }

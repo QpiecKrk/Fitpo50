@@ -10,19 +10,20 @@ cd "$ROOT_DIR"
 BACKUP_DIR="/tmp/fitpo50-deploy-backup-$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$BACKUP_DIR"
 
-echo "[1/4] Backup lokalnych plików NEWS do: $BACKUP_DIR"
+echo "[1/5] Backup lokalnych plików NEWS do: $BACKUP_DIR"
 cp -R \
   data/news-live.json \
+  data/news-backups \
   assets/data/news-fallback.json \
   _site/data/news-live.json \
   _site/assets/data/news-fallback.json \
   assets/news \
   "$BACKUP_DIR"/ 2>/dev/null || true
 
-echo "[2/4] Pobieram najnowszy stan origin/main"
+echo "[2/5] Pobieram najnowszy stan origin/main"
 git fetch origin
 
-echo "[3/4] Czyszczę working tree do origin/main"
+echo "[3/5] Czyszczę working tree do origin/main"
 git reset --hard origin/main
 git clean -fd
 
@@ -42,6 +43,30 @@ if [[ -f "$BACKUP_DIR/news-live.json" ]]; then
 
     $backupItems = is_array($backupData["items"] ?? null) ? $backupData["items"] : [];
     $liveItems = is_array($liveData["items"] ?? null) ? $liveData["items"] : [];
+
+    $backupDraftIds = [];
+    foreach ($backupItems as $item) {
+      if (!is_array($item)) { continue; }
+      if ((string)($item["status"] ?? "") !== "draft") { continue; }
+      $id = trim((string)($item["id"] ?? ""));
+      if ($id !== "") { $backupDraftIds[$id] = true; }
+    }
+
+    $filteredLiveItems = [];
+    foreach ($liveItems as $item) {
+      if (!is_array($item)) { continue; }
+      if ((string)($item["status"] ?? "") !== "draft") {
+        $filteredLiveItems[] = $item;
+        continue;
+      }
+      $id = trim((string)($item["id"] ?? ""));
+      if ($id !== "" && isset($backupDraftIds[$id])) {
+        $filteredLiveItems[] = $item;
+      } else {
+        $changed = true;
+      }
+    }
+    $liveItems = $filteredLiveItems;
 
     $indexById = [];
     foreach ($liveItems as $idx => $item) {
@@ -87,6 +112,11 @@ if [[ -d "$BACKUP_DIR/news" ]]; then
   mkdir -p assets/news _site/assets/news
   cp -n "$BACKUP_DIR"/news/* assets/news/ 2>/dev/null || true
   cp -n "$BACKUP_DIR"/news/* _site/assets/news/ 2>/dev/null || true
+fi
+
+if [[ -d "$BACKUP_DIR/news-backups" ]]; then
+  mkdir -p data/news-backups
+  cp -n "$BACKUP_DIR"/news-backups/* data/news-backups/ 2>/dev/null || true
 fi
 
 echo "[5/5] Aktualny status repo"

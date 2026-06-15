@@ -62,7 +62,7 @@ async function main() {
 
   const parallel = await Promise.all([
     runStep('prepush:parallel:checks', 'node', ['scripts/prepush-parallel-checks.js']),
-    runStep('build:esbuild', 'node_modules/.bin/esbuild', ['src/app.ts', 'src/cmp.ts', 'src/footer.ts', '--outdir=dist', '--target=es2018', '--format=iife', '--log-level=error']),
+    runStep('build', 'npm', ['run', 'build']),
     runStep('smoke:static(_site)', 'node', ['scripts/static-smoke-check.js', '_site']),
   ]);
   timings.push(...parallel);

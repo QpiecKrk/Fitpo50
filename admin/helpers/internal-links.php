@@ -216,7 +216,7 @@ function autoLinkInternalArticlesInHtml(string $html, array $options = []): arra
     if ($wordCount < $minWords) {
         libxml_clear_errors();
         libxml_use_internal_errors($prev);
-        return ['html' => $hasHtml ? $dom->saveHTML() : normalizeBodyHtml($dom, $body), 'added' => 0, 'skipped_short' => true];
+        return ['html' => serializeInternalLinksHtml($dom, $body, $hasHtml), 'added' => 0, 'skipped_short' => true];
     }
 
     $excludeHrefSet = [];
@@ -244,7 +244,7 @@ function autoLinkInternalArticlesInHtml(string $html, array $options = []): arra
     if ($articleOptions === []) {
         libxml_clear_errors();
         libxml_use_internal_errors($prev);
-        return ['html' => $hasHtml ? $dom->saveHTML() : normalizeBodyHtml($dom, $body), 'added' => 0, 'skipped_short' => false];
+        return ['html' => serializeInternalLinksHtml($dom, $body, $hasHtml), 'added' => 0, 'skipped_short' => false];
     }
 
     $internalHrefSet = [];
@@ -268,7 +268,7 @@ function autoLinkInternalArticlesInHtml(string $html, array $options = []): arra
     if ($needed === 0) {
         libxml_clear_errors();
         libxml_use_internal_errors($prev);
-        return ['html' => $hasHtml ? $dom->saveHTML() : normalizeBodyHtml($dom, $body), 'added' => 0, 'skipped_short' => false];
+        return ['html' => serializeInternalLinksHtml($dom, $body, $hasHtml), 'added' => 0, 'skipped_short' => false];
     }
 
     $toAdd = min($needed, $maxLinks);
@@ -278,7 +278,7 @@ function autoLinkInternalArticlesInHtml(string $html, array $options = []): arra
     if ($candidates === []) {
         libxml_clear_errors();
         libxml_use_internal_errors($prev);
-        return ['html' => $hasHtml ? $dom->saveHTML() : normalizeBodyHtml($dom, $body), 'added' => 0, 'skipped_short' => false];
+        return ['html' => serializeInternalLinksHtml($dom, $body, $hasHtml), 'added' => 0, 'skipped_short' => false];
     }
 
     $added = 0;
@@ -309,10 +309,19 @@ function autoLinkInternalArticlesInHtml(string $html, array $options = []): arra
     libxml_use_internal_errors($prev);
 
     return [
-        'html' => $hasHtml ? $dom->saveHTML() : normalizeBodyHtml($dom, $body),
+        'html' => serializeInternalLinksHtml($dom, $body, $hasHtml),
         'added' => $added,
         'skipped_short' => false,
     ];
+}
+
+function serializeInternalLinksHtml(DOMDocument $dom, DOMElement $body, bool $hasHtml): string {
+    $html = $hasHtml ? (string)$dom->saveHTML() : normalizeBodyHtml($dom, $body);
+    return stripXmlProcessingInstructionFromHtml($html);
+}
+
+function stripXmlProcessingInstructionFromHtml(string $html): string {
+    return preg_replace('/^\s*<\?xml[^>]*>\s*/i', '', $html) ?? $html;
 }
 
 function normalizeBodyHtml(DOMDocument $dom, DOMElement $body): string {

@@ -115,8 +115,13 @@ rsync -a \
   --exclude="package.json" \
   --exclude="package-lock.json" \
   --exclude="tsconfig.json" \
+  --exclude="admin/config.php" \
+  --exclude="admin/config.example.php" \
+  --exclude="admin/init-db.php" \
+  --exclude="admin/init-hash.php" \
   --exclude="src/" \
   --exclude="scripts/" \
+  --exclude="/docs/" \
   --exclude="/templates/" \
   --exclude="assets/trash/" \
   --exclude="data/cache/" \

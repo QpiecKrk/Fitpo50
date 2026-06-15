@@ -32,6 +32,9 @@ CLAUDE.md
 
 # === Admin panel — pliki prywatne (NIE commitować) ===
 admin/config.php
+_site/admin/config.php
+_site/admin/init-db.php
+_site/admin/init-hash.php
 admin/uploads/*
 !admin/uploads/.htaccess
 _site/admin/uploads/*
@@ -117,6 +120,8 @@ _site/audit_*.md
 _site/MEMORY_MOJE_SUKCESY.md
 _site/MEMORY_PORADY.md
 _site/SESSION_START_MAX.md
+llms-full.txt
+_site/llms-full.txt
 
 # NEWS thumbs generated runtime on server should NOT block git/deploy.
 # Keep existing tracked files in git; new server-generated news_20* files are ignored.

@@ -11,7 +11,16 @@
   // ----------------------------------------------------------
   const themeToggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
   const root = document.documentElement;
-  let currentTheme: 'dark' | 'light' = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const themeStorageKey = 'fitpo50-theme';
+  const storedTheme = (() => {
+    try {
+      const value = window.localStorage.getItem(themeStorageKey);
+      return value === 'dark' || value === 'light' ? value : '';
+    } catch (_err) {
+      return '';
+    }
+  })();
+  let currentTheme: 'dark' | 'light' = storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   root.setAttribute('data-theme', currentTheme);
   updateThemeIcon();
 
@@ -19,6 +28,11 @@
     themeToggle.addEventListener('click', () => {
       currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', currentTheme);
+      try {
+        window.localStorage.setItem(themeStorageKey, currentTheme);
+      } catch (_err) {
+        // Ignore localStorage failures (private mode etc.)
+      }
       updateThemeIcon();
     });
   }
@@ -199,12 +213,9 @@
     let activeSort = 'newest';
     const categoryLabels: Record<string, string> = {
       all: 'we wszystkich kategoriach',
-      start: 'w kategorii Start',
-      motywacja: 'w kategorii Motywacja',
-      odzywianie: 'w kategorii Odżywianie',
-      suplementacja: 'w kategorii Suplementacja',
+      ruch: 'w kategorii Ruch',
+      jedzenie: 'w kategorii Jedzenie',
       zdrowie: 'w kategorii Zdrowie',
-      wiedza: 'w kategorii Wiedza',
       ciekawe: 'w kategorii Ciekawe'
     };
 
@@ -781,6 +792,22 @@
   headerSearchInputs.forEach((searchInput) => {
     searchInput.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter') return;
+      if (isSearchPage) return;
+      event.preventDefault();
+      redirectToSearchPage(searchInput.value);
+    });
+
+    const searchIcon = searchInput.closest('.searchbar')?.querySelector<HTMLElement>('span');
+    if (!searchIcon) return;
+    searchIcon.setAttribute('role', 'button');
+    searchIcon.setAttribute('tabindex', '0');
+    searchIcon.setAttribute('aria-label', 'Szukaj');
+    searchIcon.addEventListener('click', () => {
+      if (isSearchPage) return;
+      redirectToSearchPage(searchInput.value);
+    });
+    searchIcon.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
       if (isSearchPage) return;
       event.preventDefault();
       redirectToSearchPage(searchInput.value);
