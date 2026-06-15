@@ -138,5 +138,14 @@ _site/assets/news/news_20*
 # local generated GSC weekly outputs
 data/reports/gsc-weekly-report.json
 data/reports/gsc-weekly-report.md
+data/reports/gsc-priority-map.json
+data/reports/gsc-priority-map.md
+data/reports/gsc-change-queue.json
+data/reports/gsc-submit-queue.txt
+data/reports/seo-aio-command-center.json
+data/reports/seo-aio-command-center.md
+data/reports/seo-aio-wave-gsc-submit.txt
+data/reports/seo-aio-wave-proposal.json
+data/reports/seo-aio-wave-proposal.md
 data/reports/assets-audit.json
 data/cache/internal-link-corpus.json
