@@ -335,4 +335,12 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Ile białka po 50-tce? Zapotrzebowanie, źródła i odżywki WPC | FitPo50"
   section: "Jedzenie"
   summary: "Ile białka dziennie po 50. roku życia naprawdę potrzebujesz? Poznaj normy geriatryczne, najlepsze źródła naturalne oraz fakty i mity o odżywkach serwatkowych."
+- url: https://fitpo50.pl/nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn.html
+  title: "Nadciśnienie tętnicze: jak odzyskać elastyczność naczyń? | FitPo50"
+  section: "Zdrowie"
+  summary: "Nadciśnienie po 50. roku życia usztywnia tętnice. Sprawdź, jak ruch, dieta DASH, mniej soli, pomiary domowe i leczenie pomagają chronić naczynia."
+- url: https://fitpo50.pl/optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html
+  title: "Optymalizacja snu po 50.: jak przestać budzić się o 3 w nocy | FitPo50"
+  section: "Zdrowie"
+  summary: "Budzisz się o 3 w nocy po 50. roku życia? Sprawdź melatoninę, CBT-I, temperaturę sypialni, stres, kofeinę i objawy bezdechu sennego krok po kroku."
 

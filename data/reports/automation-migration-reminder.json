@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "created_at": "2026-06-15",
+  "review_after": "2026-06-29",
+  "cleanup_after": "2026-07-06",
+  "required_successful_runs": {
+    "article_publications": 3,
+    "git_pushes": 3,
+    "gsc_runs": 2
+  },
+  "current_successful_runs": {
+    "article_publications": 2,
+    "git_pushes": 1,
+    "gsc_runs": 0
+  },
+  "cleanup_rule": "Po dacie review_after agent ma przypominac o przegladzie starych skryptow. Po cleanup_after i po spelnieniu licznikow sukcesu agent ma przygotowac PR/commit usuwajacy albo zamieniajacy stare skrypty na aliasy.",
+  "legacy_candidates": {
+    "validation": [
+      "scripts/seo-aeo-guard.js",
+      "scripts/article-publish-guard.js",
+      "scripts/article-fast-gate.js",
+      "scripts/article-final-check.js"
+    ],
+    "metadata": [
+      "scripts/sync-article-title-breadcrumb.js",
+      "scripts/sync-article-head-descriptions.js",
+      "scripts/article-meta-set.js",
+      "scripts/date-modified-guard.js"
+    ],
+    "import": [
+      "scripts/create-article-from-template.js",
+      "scripts/article-preflight.js",
+      "scripts/fix-fitpo50-json.js",
+      "scripts/json-autofix-strict.js"
+    ],
+    "pdf": [
+      "scripts/generate_article_pdf.py",
+      "scripts/sync_article_pdfs_and_buttons.py"
+    ],
+    "prepush": [
+      "scripts/run-all-prepush.js",
+      "scripts/prepush-parallel-checks.js",
+      "scripts/prepush-diff-guard.js",
+      "scripts/predeploy-gate.js"
+    ],
+    "gsc": [
+      "scripts/seo-aio-command-center.js",
+      "scripts/seo-aio-wave-autopilot.js",
+      "scripts/gsc-auto-report.js",
+      "scripts/gsc-indexing-watchdog.js",
+      "scripts/gsc-priority-map.js",
+      "scripts/gsc-weekly-api-report.js",
+      "scripts/gsc-weekly-csv-report.js"
+    ]
+  },
+  "migration_schedule": [
+    {
+      "date": "2026-06-15",
+      "priority": "P1",
+      "task": "Dodac wczesne reguly preflight: minimum 6 sekcji, minimum 7 image_prompts, reading_time w formacie X min czytania.",
+      "status": "done"
+    },
+    {
+      "date": "2026-06-16",
+      "priority": "P1",
+      "task": "Wydzielic wspolny modul walidacji JSON/preflight bez usuwania starych silnikow.",
+      "status": "planned"
+    },
+    {
+      "date": "2026-06-20",
+      "priority": "P2",
+      "task": "Wydzielic wspolny article-validation-engine dla HTML/SEO/AEO/schema.",
+      "status": "planned"
+    },
+    {
+      "date": "2026-06-24",
+      "priority": "P2",
+      "task": "Wydzielic article-json-engine i article-metadata-engine jako zrodla logiki dla nowych centrow.",
+      "status": "planned"
+    },
+    {
+      "date": "2026-06-29",
+      "priority": "P2",
+      "task": "Przeglad migracji po licznikach publikacji/pushy/GSC i decyzja, ktore skrypty zamienic na aliasy.",
+      "status": "planned"
+    },
+    {
+      "date": "2026-07-06",
+      "priority": "P3",
+      "task": "Sprzatanie starych skryptow albo zamiana na cienkie aliasy, jesli liczniki sukcesu sa spelnione.",
+      "status": "planned"
+    }
+  ]
+}

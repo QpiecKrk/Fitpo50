@@ -35,9 +35,64 @@ function countFiles(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).filter((entry) => entry.isFile()).length;
 }
 
+function readJsonSafe(filePath) {
+  try {
+    if (!fs.existsSync(filePath)) return null;
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch (_err) {
+    return null;
+  }
+}
+
+function daysUntil(dateText, now) {
+  const target = new Date(`${dateText}T00:00:00Z`);
+  if (Number.isNaN(target.getTime())) return null;
+  return Math.ceil((target.getTime() - now.getTime()) / 86400000);
+}
+
+function checkAutomationMigrationReminder(nowDate) {
+  const reminderPath = path.join(REPORT_DIR, 'automation-migration-reminder.json');
+  const reminder = readJsonSafe(reminderPath);
+  if (!reminder) {
+    return check('Automation cleanup reminder', 'warn', false, 'missing data/reports/automation-migration-reminder.json');
+  }
+
+  const reviewDays = daysUntil(reminder.review_after, nowDate);
+  const cleanupDays = daysUntil(reminder.cleanup_after, nowDate);
+  const required = reminder.required_successful_runs || {};
+  const current = reminder.current_successful_runs || {};
+  const missing = Object.keys(required)
+    .filter((key) => Number(current[key] || 0) < Number(required[key] || 0))
+    .map((key) => `${key}: ${Number(current[key] || 0)}/${Number(required[key] || 0)}`);
+
+  if (cleanupDays !== null && cleanupDays <= 0) {
+    const detail = missing.length
+      ? `cleanup date passed (${reminder.cleanup_after}), but counters missing: ${missing.join(', ')}`
+      : `cleanup date passed (${reminder.cleanup_after}); prepare legacy script removal/alias migration`;
+    return check('Automation cleanup reminder', 'warn', false, detail);
+  }
+
+  if (reviewDays !== null && reviewDays <= 0) {
+    return check(
+      'Automation cleanup reminder',
+      'warn',
+      false,
+      `review due since ${reminder.review_after}; cleanup target ${reminder.cleanup_after}; counters: ${missing.join(', ') || 'ready'}`
+    );
+  }
+
+  const details = [
+    `review in ${reviewDays} days (${reminder.review_after})`,
+    `cleanup in ${cleanupDays} days (${reminder.cleanup_after})`,
+    `counters: ${missing.join(', ') || 'ready'}`,
+  ].join('; ');
+  return check('Automation cleanup reminder', 'warn', true, details);
+}
+
 function main() {
   fs.mkdirSync(REPORT_DIR, { recursive: true });
   const now = new Date().toISOString();
+  const nowDate = new Date(now);
   const checks = [];
 
   const gitStatus = run('git', ['status', '--short']);
@@ -81,6 +136,8 @@ function main() {
     pruneDry.ok && pruneCandidates === 0,
     pruneDry.ok ? `${pruneCandidates} old safe-report files` : (pruneDry.stderr || pruneDry.stdout)
   ));
+
+  checks.push(checkAutomationMigrationReminder(nowDate));
 
   const red = checks.filter((item) => item.level === 'red' && !item.ok);
   const warn = checks.filter((item) => item.level === 'warn' && !item.ok);

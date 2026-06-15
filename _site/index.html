@@ -1442,16 +1442,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/hero-bialko-po-50-fitpo50.avif" type="image/avif">
-          <source srcset="./assets/hero-bialko-po-50-fitpo50.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/hero-bialko-po-50-fitpo50.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/optymalizacja-snu-po50-hero.avif" type="image/avif">
+          <source srcset="./assets/optymalizacja-snu-po50-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/optymalizacja-snu-po50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Ile białka po 50-tce? Zapotrzebowanie, źródła i odżywki WPC</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Ile białka dziennie po 50. roku życia naprawdę potrzebujesz? Poznaj normy geriatryczne, najlepsze źródła naturalne oraz fakty i mity o odżywkach serwatkowych.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Optymalizacja snu po 50.: jak przestać budzić się o 3 w nocy</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Budzisz się o 3 w nocy po 50. roku życia? Sprawdź melatoninę, CBT-I, temperaturę sypialni, stres, kofeinę i objawy bezdechu sennego krok po kroku.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2203,10 +2203,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Ile białka po 50-tce? Zapotrzebowanie, źródła i odżywki WPC',
-        excerpt: 'Ile białka dziennie po 50. roku życia naprawdę potrzebujesz? Poznaj normy geriatryczne, najlepsze źródła naturalne oraz fakty i mity o odżywkach serwatkowych.',
-        image: './assets/hero-bialko-po-50-fitpo50.webp',
-        url: 'ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html'
+        title: 'Optymalizacja snu po 50.: jak przestać budzić się o 3 w nocy',
+        excerpt: 'Budzisz się o 3 w nocy po 50. roku życia? Sprawdź melatoninę, CBT-I, temperaturę sypialni, stres, kofeinę i objawy bezdechu sennego krok po kroku.',
+        image: './assets/optymalizacja-snu-po50-hero.webp',
+        url: 'optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2236,25 +2236,25 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Zdrowie',
+          title: 'Optymalizacja snu po 50.: jak przestać budzić się o 3 w nocy',
+          excerpt: 'Budzisz się o 3 w nocy po 50. roku życia? Sprawdź melatoninę, CBT-I, temperaturę sypialni, stres, kofeinę i objawy bezdechu sennego krok po kroku.',
+          image: './assets/optymalizacja-snu-po50-hero.webp',
+          url: 'optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html'
+        },
+        {
+          category: 'Zdrowie',
+          title: 'Nadciśnienie tętnicze: jak odzyskać elastyczność naczyń?',
+          excerpt: 'Nadciśnienie po 50. roku życia usztywnia tętnice. Sprawdź, jak ruch, dieta DASH, mniej soli, pomiary domowe i leczenie pomagają chronić naczynia.',
+          image: './assets/nadcisnienie-elastycznosc-naczyn-hero.webp',
+          url: 'nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn.html'
+        },
+        {
           category: 'Jedzenie',
           title: 'Ile białka po 50-tce? Zapotrzebowanie, źródła i odżywki WPC',
           excerpt: 'Ile białka dziennie po 50. roku życia naprawdę potrzebujesz? Poznaj normy geriatryczne, najlepsze źródła naturalne oraz fakty i mity o odżywkach serwatkowych.',
           image: './assets/hero-bialko-po-50-fitpo50.webp',
           url: 'ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html'
-        },
-        {
-          category: 'Jedzenie',
-          title: 'Chleb na zakwasie i indeks glikemiczny: co warto wiedzieć?',
-          excerpt: 'Czy chleb na zakwasie ma niższy indeks glikemiczny? Sprawdź wpływ fermentacji na glukozę, insulinę, minerały i wybór prawdziwego bochenka po 50 roku życia.',
-          image: './assets/zakwas-chleb-hero.webp',
-          url: 'chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html'
-        },
-        {
-          category: 'Jedzenie',
-          title: 'Dieta przeciwzapalna po 50-tce: produkty i jadłospis',
-          excerpt: 'Co jeść po 50-tce, aby obniżyć stan zapalny? Sprawdź produkty z omega-3 i polifenolami oraz tygodniowy jadłospis przeciwzapalny oparty na badaniach.',
-          image: './assets/dieta-przeciwzapalna-hero.webp',
-          url: 'dieta-przeciwzapalna-po-50-produkty-jadlospis.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

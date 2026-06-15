@@ -66,6 +66,16 @@ Zasady:
   - bezpiecznik: jesli commit obejmuje nienaturalnie duzy zakres (duzo plikow niezwiazanych z biezacym taskiem), STOP i krotkie pytanie o zgode.
 
 Publikacja artykulow:
+- `dodaj artykul`, `dodaj artykuł`, `opublikuj artykul` oznacza workflow JSON-first:
+  1) najpierw uzyj skilla `popraw-json`,
+  2) doprowadz JSON do statusu `content-ready`,
+  3) dopiero potem przygotuj/przerob assety PNG -> AVIF/WebP/JPG i uruchom import HTML,
+  4) przed generowaniem HTML porownaj zalaczone obrazy z opisami/polami obrazow w JSON,
+  5) jesli obraz nie pasuje do opisu z JSON albo brakuje wymaganego ujecia, STOP: powiedz, ktorego obrazu brakuje, wyciagnij prompt/opis z JSON i popros uzytkownika o wygenerowanie oraz zalaczenie nowego pliku,
+  6) po dolaczeniu brakujacego obrazu kontynuuj pipeline od miejsca zatrzymania,
+  7) jesli blad wyjdzie dopiero po wygenerowaniu HTML, popraw generator/template/HTML albo dane w kopii roboczej pipeline; nie wracaj do edycji pliku JSON z Downloads, chyba ze uzytkownik wyraznie poprosi.
+- JSON-y dostarczane w `~/Downloads` sa traktowane jako wsad/draft; po publikacji uzytkownik moze je kasowac, wiec nie opieraj dalszych poprawek na trwalosci tych plikow i nie sprzataj ich automatycznie.
+- Najlepszy import to taki, w ktorym HTML przechodzi walidacje od razu, bo jakosc zostala naprawiona w JSON przed importem.
 - kanoniczny flow publikacji artykulow: `scripts/import-article.js` (`.fitpo50.json` + precheck); `article-template-bento.html` / `create-article-from-template.js` tylko do recznych szkicow,
 - preferuj szybki pipeline jednej komendy: `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --force <true|false>`,
 - pipeline publikacyjny musi wykonywac kolejnosc: `fix-fitpo50-json` -> `json-fitpo50-gate --file` -> `import-article --precheck` -> `import-article --publish` -> `sync-article-title-breadcrumb` (spojnosc `<title>`/`og:title`/`twitter:title` + `BreadcrumbList`) -> `sync-site-assets-mirror` -> `news-integrity` -> `predeploy-gate --slug`,
@@ -139,6 +149,14 @@ Tryb pracy:
   - `sprzatnij raporty`, `raporty porzadek` oznacza: najpierw `npm run reports:prune:dry`; dopiero po jawnej zgodzie uzytkownika uruchom `npm run reports:prune`.
   - `admin` oznacza: tryb pracy nad panelem administracyjnym; zawsze pilnuj `admin/config.php` jako pliku prywatnego, nie przywracaj go do Git, nie publikuj `config*.php` ani `init-*.php` do `_site/admin`, sprawdzaj CSP/logowanie/rate limiting i po zmianach PHP uruchamiaj `php -l` dla zmienionych plikow.
   - po kazdej wiekszej zmianie systemowej odswiez kontekst przez `npm run agent:context`, zeby kolejne sesje zaczynaly od aktualnej mapy projektu.
+- centra sterowania automatyzacja:
+  - artykuly/import: `npm run article:manager -- import --file "<plik.fitpo50.json>" --category <kategoria>`,
+  - walidacja artykulu: `npm run article:validate:center -- <tryb> ...`,
+  - metadata artykulu: `npm run article:meta:sync -- full --slug <slug>`,
+  - PDF artykulu: `npm run article:pdf:builder -- --slug <slug>`,
+  - prepush/predeploy: `npm run prepush:checks -- <local|parallel|diff|deploy|strict>`,
+  - GSC/SEO: `npm run gsc:tool -- <auto|api|csv|priority-map|watchdog|command-center|apply-wave>`,
+  - stare skrypty zostawiaj jako aliasy kompatybilnosci do czasu kilku poprawnych publikacji i pushy; po potwierdzeniu stabilnosci przygotuj ich usuniecie/zamiane na aliasy, zeby nie rosł balagan.
 - skrot `GSC` w rozmowie oznacza domyslnie:
   - sprawdz ostatni issue z raportem GSC na GitHub,
   - przeczytaj issue `SEO/AEO: Poniedziałkowy raport GSC`,

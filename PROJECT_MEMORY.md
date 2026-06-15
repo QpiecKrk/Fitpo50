@@ -1312,6 +1312,17 @@ Jesli artykul ma obrazy:
 
 ## Ustalenia operacyjne (2026-05-31) - GSC, klikalnosc i popraw-json
 
+- **`dodaj artykul` = workflow JSON-first (doprecyzowanie 2026-06-15):**
+  - Polecenia `dodaj artykul`, `dodaj artykuł` i `opublikuj artykul` oznaczaja najpierw prace skillem `popraw-json`.
+  - JSON z `~/Downloads` traktuj jako wsad/draft, a nie trwale zrodlo po publikacji.
+  - Najpierw doprowadz JSON do statusu `content-ready`: SEO, quick answer, FAQ/`faq_research` 1:1, linki, zrodla, sekcje i pola obrazow.
+  - Dopiero potem przygotuj/przerob assety PNG -> AVIF/WebP/JPG i generuj HTML.
+  - Przed generowaniem HTML porownaj zalaczone obrazy z opisami/polami obrazow w JSON; jesli obraz nie pasuje albo brakuje wymaganego ujecia, STOP.
+  - Przy STOP obrazowym powiedz, ktorego obrazu brakuje, wyciagnij prompt/opis z JSON i popros usera o wygenerowanie oraz zalaczenie nowego pliku; po dolaczeniu kontynuuj pipeline od miejsca zatrzymania.
+  - Jesli blad zostanie wykryty dopiero na etapie HTML, nie cofaj sie do edycji pliku JSON z Downloads, chyba ze user wyraznie poprosi; napraw generator/template/HTML albo kopie robocza pipeline.
+  - Celem jest brak bledow HTML dzieki dobremu JSON przed importem.
+  - Nie sprzataj automatycznie prywatnych JSON-ow usera z `~/Downloads`; user sam je usuwa po publikacji.
+
 - **Komenda `GSC` (domyslny workflow):**
   - Traktuj polecenie `GSC` jako uruchomienie pelnego workflow raportowego, nie tylko pojedynczy skrypt pomocniczy.
   - Start od kroku technicznego i aktualizacji danych.
@@ -1351,6 +1362,17 @@ Jesli artykul ma obrazy:
   - Zaostrzone walidacje i autofix JSON pod AEO/CTR.
   - Wzmocniony skill `popraw-json` o global-first FAQ i zasady quality gate.
   - Dodane reguly anty-generyczne dla quick answer / FAQ / tytulow.
+
+## Ustalenia operacyjne (2026-06-15) - centra sterowania automatyzacja
+
+- **Nowe centra sterowania sa preferowanymi entrypointami:**
+  - Artykuly/import: `npm run article:manager -- import --file "<plik.fitpo50.json>" --category <kategoria>`.
+  - Walidacja: `npm run article:validate:center -- <standard|contract|schema|reading-room|fast|final|publish-guard> ...`.
+  - Metadata: `npm run article:meta:sync -- full --slug <slug>`.
+  - PDF: `npm run article:pdf:builder -- --slug <slug>`.
+  - Prepush/predeploy: `npm run prepush:checks -- <local|parallel|diff|deploy|strict>`.
+  - GSC/SEO: `npm run gsc:tool -- <auto|api|csv|priority-map|watchdog|command-center|apply-wave>`.
+- **Zasada migracji:** stare skrypty zostaja tymczasowo jako aliasy kompatybilnosci. Po kilku poprawnych publikacjach/pushach przygotuj ich usuniecie albo zamiane na cienkie aliasy, zeby automatyzacja nie rozrosla sie w balagan.
 
 ## Ustalenia operacyjne (2026-06-01) - Quick Answer v2 + backlog legacy
 

@@ -8,6 +8,7 @@ const { POLICY, utils, validators } = require('./lib/article-policy');
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const PLACEHOLDER_RX = /(do doprecyzowania|do uzupelnienia|placeholder|\{\{.+?\}\})/i;
 const SUPPORTED_CATEGORY_KEYS = new Set(['zdrowie', 'jedzenie', 'ruch', 'rusz-sie', 'ciekawe']);
+const READ_TIME_RX = /^\d+\s+min\s+czytania$/i;
 
 function parseArgs(argv) {
   const out = {};
@@ -149,6 +150,15 @@ function main() {
   }
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
+  if (sections.length < 6) {
+    errors.push(`sections: wymagane >=6, jest ${sections.length}.`);
+  }
+
+  const readingTime = String(json.reading_time || json.readTime || '').replace(/\s+/g, ' ').trim();
+  if (!READ_TIME_RX.test(readingTime)) {
+    errors.push(`reading_time: niepoprawny format "${readingTime || '(brak)'}" (oczekiwane: "X min czytania").`);
+  }
+
   const quickAnswer = utils.stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
   const rawTitle = String(json.title || '').replace(/\s+/g, ' ').trim();
   const rawSeoTitle = String(json.seo_title || '').replace(/\s+/g, ' ').trim();
@@ -303,6 +313,9 @@ function main() {
   const promptsV4 = Array.isArray(json.image_prompts_v4) ? json.image_prompts_v4 : [];
   const promptsLegacy = Array.isArray(json.image_prompts) ? json.image_prompts : [];
   const prompts = promptsV4.length ? promptsV4 : promptsLegacy;
+  if (prompts.length < 7) {
+    errors.push(`image_prompts: wymagane >=7, jest ${prompts.length}.`);
+  }
   const sectionPrompts = prompts.filter((p) => {
     const t = String(p.type || '');
     const r = String(p.section_ref || '');
