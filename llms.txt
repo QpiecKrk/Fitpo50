@@ -331,4 +331,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Chleb na zakwasie: czy naprawdę mniej szkodzi? – praktyczny | FitPo50"
   section: "Jedzenie"
   summary: "Czy chleb na zakwasie ma niższy indeks glikemiczny? Sprawdź wpływ fermentacji na glukozę, insulinę, minerały i wybór prawdziwego bochenka po 50 roku życia."
+- url: https://fitpo50.pl/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html
+  title: "Ile białka po 50-tce? Zapotrzebowanie, źródła i odżywki WPC | FitPo50"
+  section: "Jedzenie"
+  summary: "Ile białka dziennie po 50. roku życia naprawdę potrzebujesz? Poznaj normy geriatryczne, najlepsze źródła naturalne oraz fakty i mity o odżywkach serwatkowych."
 
