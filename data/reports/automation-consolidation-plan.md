@@ -20,9 +20,14 @@ Nie usuwamy ich w tym samym kroku, zeby nie zerwac ukrytych zaleznosci w `packag
 
 - Plik przypomnienia: `data/reports/automation-migration-reminder.json`.
 - Data przegladu: 2026-06-29.
-- Data docelowego sprzatania: 2026-07-06.
+- Data startu fazy aliasow: 2026-07-06.
+- Najwczesniejsza data usuwania aliasow: 2026-07-20.
 - Warunek praktyczny przed usuwaniem: minimum 3 poprawne publikacje artykulu, 3 poprawne `git push` i 2 poprawne przebiegi GSC przez nowe centra sterowania.
 - `npm run fitpo50:doctor` ma przypominac o przegladzie po dacie `review_after` i o sprzataniu po dacie `cleanup_after`.
+- Migracja jest dwuetapowa:
+  1. Najpierw stare skrypty zamieniaj na cienkie aliasy do nowych centrow sterowania.
+  2. Dopiero po stabilizacji aliasow usuwaj aliasy, ktore nie sa juz uzywane.
+- Aliasow nie wolno kasowac, jesli odwoluje sie do nich `package.json`, hook, pipeline, dokumentacja, Hostinger albo instrukcje agentow.
 
 ## Kandydaci do pozniejszego usuniecia albo zamiany na aliasy
 

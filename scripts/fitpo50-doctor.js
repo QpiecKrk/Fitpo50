@@ -64,11 +64,16 @@ function checkAutomationMigrationReminder(nowDate) {
   const missing = Object.keys(required)
     .filter((key) => Number(current[key] || 0) < Number(required[key] || 0))
     .map((key) => `${key}: ${Number(current[key] || 0)}/${Number(required[key] || 0)}`);
+  const aliasPhase = reminder.alias_phase || {};
+  const aliasRemovalPhase = reminder.alias_removal_phase || {};
+  const aliasStart = aliasPhase.starts_after || 'not scheduled';
+  const aliasRemoval = aliasRemovalPhase.earliest_after || 'not scheduled';
+  const migrationMode = `alias phase after ${aliasStart}; alias removal no earlier than ${aliasRemoval}`;
 
   if (cleanupDays !== null && cleanupDays <= 0) {
     const detail = missing.length
-      ? `cleanup date passed (${reminder.cleanup_after}), but counters missing: ${missing.join(', ')}`
-      : `cleanup date passed (${reminder.cleanup_after}); prepare legacy script removal/alias migration`;
+      ? `cleanup date passed (${reminder.cleanup_after}), but counters missing: ${missing.join(', ')}; ${migrationMode}`
+      : `cleanup date passed (${reminder.cleanup_after}); start alias migration first, do not delete old engines directly; ${migrationMode}`;
     return check('Automation cleanup reminder', 'warn', false, detail);
   }
 
@@ -77,7 +82,7 @@ function checkAutomationMigrationReminder(nowDate) {
       'Automation cleanup reminder',
       'warn',
       false,
-      `review due since ${reminder.review_after}; cleanup target ${reminder.cleanup_after}; counters: ${missing.join(', ') || 'ready'}`
+      `review due since ${reminder.review_after}; cleanup target ${reminder.cleanup_after}; counters: ${missing.join(', ') || 'ready'}; ${migrationMode}`
     );
   }
 
@@ -85,6 +90,7 @@ function checkAutomationMigrationReminder(nowDate) {
     `review in ${reviewDays} days (${reminder.review_after})`,
     `cleanup in ${cleanupDays} days (${reminder.cleanup_after})`,
     `counters: ${missing.join(', ') || 'ready'}`,
+    migrationMode,
   ].join('; ');
   return check('Automation cleanup reminder', 'warn', true, details);
 }

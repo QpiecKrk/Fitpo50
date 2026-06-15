@@ -156,7 +156,15 @@ Tryb pracy:
   - PDF artykulu: `npm run article:pdf:builder -- --slug <slug>`,
   - prepush/predeploy: `npm run prepush:checks -- <local|parallel|diff|deploy|strict>`,
   - GSC/SEO: `npm run gsc:tool -- <auto|api|csv|priority-map|watchdog|command-center|apply-wave>`,
-  - stare skrypty zostawiaj jako aliasy kompatybilnosci do czasu kilku poprawnych publikacji i pushy; po potwierdzeniu stabilnosci przygotuj ich usuniecie/zamiane na aliasy, zeby nie rosł balagan.
+  - Growth SEO/AEO/GEO/AIO: `npm run growth:<report|audit-ai|gsc-refresh|evidence-plan|hubs|link-assets|autopilot|verify>`,
+  - `growth` jest osobnym centrum wzrostu widocznosci: raportuje priorytety, planuje huby, Evidence Boxy, assety do link earningu i refresh artykulow z GSC,
+  - raporty `growth` sa robocze i domyslnie ida poza repo do `~/Downloads/fitpo50-growth-reports`; jesli trzeba wymusic inne miejsce, uzyj `FITPO50_GROWTH_REPORT_DIR`,
+  - edytor growth domyslnie dziala jako dry-run: `npm run growth:apply:dry -- --file <plik.html> --evidence-box --doctor-box`; zapis wymaga jawnego `npm run growth:apply -- --file <plik.html> ...`,
+  - `growth:apply` moze dodawac tylko bezpieczne bloki zarzadzane (Evidence Box, Kiedy do lekarza, tabela cytowalna) i aktualizowac `dateModified`; nie wolno mu przepisywac calego artykulu ani usuwac sekcji,
+  - `popraw-seo` oznacza: uruchom `npm run popraw-seo`, wygeneruj wszystkie raporty growth i zatrzymaj sie na statusie `AWAITING_USER_APPROVAL`; nie edytuj artykulow bez zatwierdzenia konkretnych pozycji,
+  - `popraw-seo` obejmuje tez moduly AIO/GEO: `ai-visibility-test`, `entities`, `structured-score`, `quick-answer-score`, `topical-map`, `llms-check` i `perplexity-monitor`,
+  - stare skrypty zostawiaj jako aliasy kompatybilnosci do czasu kilku poprawnych publikacji i pushy; migracja jest dwuetapowa: najpierw aliasy do nowych centrow, dopiero po stabilizacji usuwanie aliasow,
+  - aliasow nie wolno usuwac, jesli odwoluje sie do nich `package.json`, hook, pipeline, dokumentacja, Hostinger albo instrukcje agentow; `doctor` ma pilnowac dat i licznikow migracji.
 - skrot `GSC` w rozmowie oznacza domyslnie:
   - sprawdz ostatni issue z raportem GSC na GitHub,
   - przeczytaj issue `SEO/AEO: Poniedziałkowy raport GSC`,

@@ -13,7 +13,7 @@
     "git_pushes": 1,
     "gsc_runs": 0
   },
-  "cleanup_rule": "Po dacie review_after agent ma przypominac o przegladzie starych skryptow. Po cleanup_after i po spelnieniu licznikow sukcesu agent ma przygotowac PR/commit usuwajacy albo zamieniajacy stare skrypty na aliasy.",
+  "cleanup_rule": "Migracja jest dwuetapowa: najpierw stare skrypty zamieniaj na cienkie aliasy do nowych centrow sterowania, a dopiero po okresie stabilizacji usuwaj aliasy. Nie wolno usuwac starego silnika, jesli nowe centrum nadal go wywoluje pod spodem.",
   "legacy_candidates": {
     "validation": [
       "scripts/seo-aeo-guard.js",
@@ -89,6 +89,39 @@
       "priority": "P3",
       "task": "Sprzatanie starych skryptow albo zamiana na cienkie aliasy, jesli liczniki sukcesu sa spelnione.",
       "status": "planned"
+    },
+    {
+      "date": "2026-07-06",
+      "priority": "P3",
+      "task": "Start fazy aliasow: zamienic bezpieczne stare entrypointy na cienkie aliasy do nowych centrow, bez usuwania nazw kompatybilnosci.",
+      "status": "planned"
+    },
+    {
+      "date": "2026-07-20",
+      "priority": "P3",
+      "task": "Najwczesniejszy przeglad usuwania aliasow po dodatkowej stabilizacji: +2 artykuly, +2 push, +1 GSC, +2 GREEN doctor od fazy aliasow.",
+      "status": "planned"
     }
-  ]
+  ],
+  "alias_phase": {
+    "starts_after": "2026-07-06",
+    "requires": {
+      "article_publications": 3,
+      "git_pushes": 3,
+      "gsc_runs": 2
+    },
+    "action": "Zamienic bezpieczne stare entrypointy na cienkie aliasy do nowych centrow sterowania, zostawic nazwy komend dla kompatybilnosci i uruchomic pelny prepush/deploy gate.",
+    "rule": "Alias zostaje, jesli moze go wolac hook, package.json, dokumentacja, Hostinger albo agent z poprzedniej sesji."
+  },
+  "alias_removal_phase": {
+    "earliest_after": "2026-07-20",
+    "requires_after_alias_phase": {
+      "article_publications": 2,
+      "git_pushes": 2,
+      "gsc_runs": 1,
+      "doctor_green_runs": 2
+    },
+    "action": "Dopiero po stabilizacji aliasow usunac aliasy, ktore nie sa juz uzywane przez package.json, hooki, pipeline, dokumentacje ani Hostinger.",
+    "safety_rule": "Przed usunieciem kazdego aliasu wykonac rg po repo, prepush:checks local, predeploy:check i doctor; jesli jest jakiekolwiek odwolanie, alias zostaje."
+  }
 }
