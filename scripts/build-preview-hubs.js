@@ -10,7 +10,7 @@ const hubs = [
     file: 'centrum-treningu-silowego-po-50.html',
     title: 'Trening siłowy po 50',
     description: 'Bezpieczny start, progresja, maszyny, siła chwytu, błędy, regeneracja i planowanie treningu po pięćdziesiątce.',
-    kicker: 'Centrum ruchu · podgląd',
+    kicker: 'Centrum ruchu',
     icon: '🏋️',
     accent: '#ef8d3d',
     accentSoft: '#fff1e6',
@@ -30,13 +30,13 @@ const hubs = [
       ['Trening 3x30 po 50', 'trening-3x30-dla-50-plus.html', 'minimum skuteczne'],
       ['Trening siłowy chroni serce', 'silownia-chroni-serce-przed-zawalem.html', 'serce'],
     ],
-    assets: ['plan startowy 4 tygodnie', 'tabela ćwiczeń: maszyna → mięśnie → błąd', 'grafika: kiedy zwiększyć obciążenie'],
+    assets: ['Plan startowy: od maszyn do wolnych ciężarów', 'Mapa błędów: ćwiczenie → sygnał ostrzegawczy → korekta', 'Prosty schemat: kiedy zwiększyć obciążenie'],
   },
   {
     file: 'centrum-bialka-po-50.html',
     title: 'Białko po 50',
     description: 'Ile białka jeść, jak rozłożyć porcje, kiedy WPC/WPI ma sens i jak chronić mięśnie bez dietetycznej paniki.',
-    kicker: 'Centrum mięśni · podgląd',
+    kicker: 'Centrum mięśni',
     icon: '🥚',
     accent: '#d98934',
     accentSoft: '#fff3df',
@@ -56,13 +56,13 @@ const hubs = [
       ['Jedz więcej po 50', 'jedz-wiecej-po-50.html', 'energia'],
       ['Suplementy po 50', 'suplementy-po-50-tce-kompletny-przewodnik.html', 'wybór'],
     ],
-    assets: ['tabela białka w produktach', 'kalkulator dawki według masy ciała', 'PDF: rozkład białka w ciągu dnia'],
+    assets: ['Translator porcji: produkty → gramy białka', 'Kalkulator dawki według masy ciała', 'Schemat rozłożenia białka w ciągu dnia'],
   },
   {
     file: 'centrum-snu-po-50.html',
     title: 'Sen po 50',
     description: 'Pobudki w nocy, melatonina, bezdech, stres, temperatura sypialni i regeneracja po treningu.',
-    kicker: 'Centrum regeneracji · podgląd',
+    kicker: 'Centrum regeneracji',
     icon: '🌙',
     accent: '#5577d8',
     accentSoft: '#edf1ff',
@@ -82,13 +82,13 @@ const hubs = [
       ['Kolagen po 50', 'kolagen-suplementacja-po-50.html', 'regeneracja'],
       ['Komórki zombie i senoliza', 'komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html', 'starzenie'],
     ],
-    assets: ['checklista higieny snu', 'tabela: objaw → możliwa przyczyna → co zrobić', 'PDF: plan 7 nocy'],
+    assets: ['Checklista wieczornej rutyny', 'Mapa pobudek nocnych: objaw → możliwa przyczyna → pierwszy krok', 'Plan 7 spokojniejszych nocy'],
   },
   {
     file: 'centrum-nadcisnienia-po-50.html',
     title: 'Nadciśnienie po 50',
     description: 'Ciśnienie, elastyczność naczyń, dieta DASH, marsz, trening siłowy i domowe pomiary bez straszenia.',
-    kicker: 'Centrum serca · podgląd',
+    kicker: 'Centrum serca',
     icon: '🫀',
     accent: '#d85d5d',
     accentSoft: '#fff0f0',
@@ -108,13 +108,13 @@ const hubs = [
       ['Tłuszcz trzewny', 'tluszcz-trzewny-choroby-jak-walczyc.html', 'ryzyko'],
       ['Badania po 50', 'badania-po-50.html', 'kontrola'],
     ],
-    assets: ['karta pomiaru ciśnienia', 'tabela: wynik → znaczenie → działanie', 'PDF: pytania na wizytę lekarską'],
+    assets: ['Karta domowych pomiarów ciśnienia', 'Tabela: wynik → znaczenie → następny krok', 'Lista pytań na wizytę lekarską'],
   },
   {
     file: 'centrum-cholesterolu-po-50.html',
     title: 'Cholesterol i badania po 50',
     description: 'ApoB, ApoA1, lipidogram, markery krwi i praktyczne pytania do omówienia z lekarzem.',
-    kicker: 'Centrum badań · podgląd',
+    kicker: 'Centrum badań',
     icon: '🧪',
     accent: '#6b9f58',
     accentSoft: '#eff8ea',
@@ -134,13 +134,13 @@ const hubs = [
       ['Badania krwi po 50', 'badania-krwi-po-50-jak-czesto.html', 'częstotliwość'],
       ['Dieta przeciwzapalna', 'dieta-przeciwzapalna-po-50-produkty-jadlospis.html', 'styl życia'],
     ],
-    assets: ['tabela interpretacji lipidogramu', 'ściąga ApoB/ApoA1', 'PDF: pytania do lekarza'],
+    assets: ['Tabela interpretacji lipidogramu', 'Ściąga: ApoB, ApoA1 i LDL bez chaosu', 'Lista pytań do omówienia z lekarzem'],
   },
   {
     file: 'centrum-metabolizmu-po-50.html',
     title: 'Metabolizm i brzuch po 50',
     description: 'Oponka, tłuszcz trzewny, kortyzol, cukier, post przerywany i realistyczne strategie bez karania się dietą.',
-    kicker: 'Centrum energii · podgląd',
+    kicker: 'Centrum energii',
     icon: '🔥',
     accent: '#c96c3f',
     accentSoft: '#fff0e8',
@@ -160,7 +160,7 @@ const hubs = [
       ['Post przerywany po 50', 'post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html', 'strategia'],
       ['Waga smart i skład ciała', 'waga-smart-pomiar-skladu-ciala-prawda.html', 'pomiar'],
     ],
-    assets: ['checklista obwodu pasa', 'tabela: przyczyna → test → działanie', 'PDF: 14 dni prostych nawyków'],
+    assets: ['Checklista obwodu pasa i prostych pomiarów', 'Mapa: przyczyna → co sprawdzić → co zmienić', 'Plan 14 dni prostych nawyków'],
   },
 ];
 
@@ -174,7 +174,7 @@ function escapeHtml(value) {
 
 function renderHeader() {
   return `    <header class="hub-topbar">
-      <a class="hub-brand" href="index1.html" aria-label="FitPo50 — centra tematyczne">
+      <a class="hub-brand" href="index.html" aria-label="FitPo50 — centra tematyczne">
         <img class="hub-brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="112" height="112" loading="eager" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
         <span class="hub-brand__text">
           <span class="hub-brand__name">FitPo50</span>
@@ -183,7 +183,7 @@ function renderHeader() {
       </a>
       <nav class="hub-nav" aria-label="Menu centrum tematycznego">
         <a href="index.html">Home</a>
-        <a href="index1.html#centra-tematyczne" class="is-active">Centra</a>
+        <a href="index.html#centra-tematyczne" class="is-active">Centra</a>
         <a href="porady.html">Porady</a>
         <a href="rusz-sie.html">Ruch</a>
         <a href="jedzenie.html">Jedzenie</a>
@@ -214,7 +214,7 @@ function renderFooter() {
           <h3 class="site-footer-bento__links-title">Nawigacja</h3>
           <ul class="site-footer-bento__links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="index1.html#centra-tematyczne">Centra</a></li>
+            <li><a href="index.html#centra-tematyczne">Centra</a></li>
             <li><a href="porady.html">Porady</a></li>
             <li><a href="rusz-sie.html">Ruch</a></li>
             <li><a href="jedzenie.html">Jedzenie</a></li>
@@ -248,9 +248,9 @@ function renderHub(hub) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
-  <title>${escapeHtml(hub.title)} | FitPo50 — podgląd</title>
-  <meta name="description" content="Robocze centrum tematyczne FitPo50: ${escapeHtml(hub.description)}">
-  <meta name="robots" content="noindex,nofollow">
+  <title>${escapeHtml(hub.title)} | FitPo50</title>
+  <meta name="description" content="${escapeHtml(hub.description)}">
+  <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://fitpo50.pl/${escapeHtml(hub.file)}">
   <link rel="stylesheet" href="./base.css">
   <link rel="stylesheet" href="./style.css?v=1.4">
@@ -275,14 +275,14 @@ ${renderHeader()}
     <main>
       <section class="hub-hero" aria-labelledby="hub-title">
         <div class="hub-hero__copy">
-          <div class="hub-breadcrumb"><a href="index1.html#centra-tematyczne">Centra tematyczne</a><span>›</span><span>${escapeHtml(hub.title)}</span></div>
+          <div class="hub-breadcrumb"><a href="index.html#centra-tematyczne">Centra tematyczne</a><span>›</span><span>${escapeHtml(hub.title)}</span></div>
           <span class="hub-kicker">${escapeHtml(hub.kicker)}</span>
           <h1 id="hub-title">${escapeHtml(hub.title)}</h1>
           <p class="hub-hero__lead">${escapeHtml(hub.description)}</p>
           <div class="hub-promise">${escapeHtml(hub.promise)}</div>
           <div class="hub-actions">
             <a class="hub-btn" href="#najwazniejsze-artykuly">Zobacz ścieżkę</a>
-            <a class="hub-btn hub-btn--secondary" href="index1.html#centra-tematyczne">Wróć do centrów</a>
+            <a class="hub-btn hub-btn--secondary" href="index.html#centra-tematyczne">Wróć do centrów</a>
           </div>
         </div>
         <aside class="hub-hero__panel" aria-label="Podsumowanie centrum">
@@ -293,7 +293,7 @@ ${renderHeader()}
           </div>
           <div class="hub-metrics">
             <div class="hub-metric"><strong>${hub.articles.length + 1}</strong><span>artykułów w ścieżce</span></div>
-            <div class="hub-metric"><strong>${hub.assets.length}</strong><span>materiały do dopracowania</span></div>
+            <div class="hub-metric"><strong>${hub.assets.length}</strong><span>praktyczne narzędzia</span></div>
           </div>
         </aside>
       </section>
@@ -320,20 +320,20 @@ ${articleLinks}
           </div>
         </div>
         <aside class="hub-side-card">
-          <h3>Materiały, które zwiększą wartość centrum</h3>
+          <h3>Praktyczne narzędzia</h3>
+          <p class="hub-side-card__lead">Krótkie ściągi i mapy decyzji, które pomagają przejść od czytania do działania.</p>
           <ul class="hub-asset-list">
 ${assets}
           </ul>
-          <div class="hub-note"><strong>Status:</strong> roboczy hub <code>noindex</code>. Po akceptacji dopracujemy treść, linkowanie wewnętrzne, sitemap i wejście z głównej strony.</div>
+          <div class="hub-note"><strong>Jak korzystać:</strong> zacznij od artykułu startowego, potem wybierz jeden problem z listy i przejdź do tekstu szczegółowego.</div>
           <div class="hub-actions">
-            <a class="hub-btn" href="index1.html#centra-tematyczne">Wróć do centrów</a>
+            <a class="hub-btn" href="index.html#centra-tematyczne">Wróć do centrów</a>
             <a class="hub-btn hub-btn--secondary" href="porady.html">Czytelnia</a>
           </div>
         </aside>
       </section>
     </main>
 ${renderFooter()}
-    <p class="hub-footer">Robocza wersja centrum tematycznego. Nie dodawać do sitemap przed akceptacją.</p>
   </div>
   <script src="./dist/app.js?v=1.2" defer></script>
 </body>
@@ -342,6 +342,13 @@ ${renderFooter()}
 }
 
 for (const hub of hubs) {
-  fs.writeFileSync(path.join(ROOT, hub.file), renderHub(hub), 'utf8');
+  const html = renderHub(hub);
+  fs.writeFileSync(path.join(ROOT, hub.file), html, 'utf8');
+  fs.mkdirSync(path.join(ROOT, '_site'), { recursive: true });
+  fs.writeFileSync(path.join(ROOT, '_site', hub.file), html, 'utf8');
   console.log(`updated ${hub.file}`);
 }
+
+fs.mkdirSync(path.join(ROOT, '_site', 'assets'), { recursive: true });
+fs.copyFileSync(path.join(ROOT, 'assets', 'topic-hub.css'), path.join(ROOT, '_site', 'assets', 'topic-hub.css'));
+console.log('updated _site/assets/topic-hub.css');

@@ -112,7 +112,8 @@
     "prepush:local": "node scripts/run-all-prepush.js",
     "prepush:checks": "node scripts/prepush-checks.js",
     "hooks:install": "bash scripts/install-git-hooks.sh",
-    "sync:local:safe": "bash scripts/local-sync-safe.sh"
+    "sync:local:safe": "bash scripts/local-sync-safe.sh",
+    "topic-centers:sync": "node scripts/sync-topic-centers.js"
   },
   "devDependencies": {
     "clean-css-cli": "^5.6.3",
