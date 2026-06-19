@@ -451,17 +451,22 @@ function buildGrowthData() {
   };
 }
 
+function shouldSkipShareableTable(article) {
+  return article.file === 'wino-i-miesnie-po-50.html';
+}
+
 function buildActions(article, gsc) {
   const actions = [];
-  if (!article.has_evidence_box) actions.push({ type: 'evidence-box', label: 'Dodaj Evidence Box: badania / dla kogo / kiedy do lekarza / wniosek.' });
-  if (!article.has_doctor_box) actions.push({ type: 'doctor-box', label: 'Dodaj blok bezpieczeństwa „Kiedy do lekarza”.' });
+  if (!article.has_evidence_box) actions.push({ type: 'manual-evidence-box', label: 'Przygotuj ręcznie Evidence Box dopasowany do artykułu i pokaż tekst do akceptacji.' });
+  if (!article.has_doctor_box) actions.push({ type: 'manual-safety-note', label: 'Jeśli temat tego wymaga, przygotuj ręcznie blok bezpieczeństwa bez generycznego straszenia lekarzem.' });
   if (article.faq_items < 4) actions.push({ type: 'faq', label: 'Rozbuduj FAQ do minimum 4 konkretnych pytań.' });
   if (article.citation_count < 4) actions.push({ type: 'citations', label: 'Uzupełnij źródła i przypisz je do konkretnych claimów.' });
-  if (article.inbound_link_count < 3) actions.push({ type: 'internal-links', label: 'Dodaj 2–3 linki kontekstowe z pokrewnych artykułów.' });
-  if (!article.pdf_links.length) actions.push({ type: 'pdf', label: 'Dodaj PDF/checklistę do link earningu.' });
-  if (!article.table_count) actions.push({ type: 'shareable-table', label: 'Dodaj jedną cytowalną tabelę HTML.' });
-  if (gsc && Number(gsc.position || 0) >= 4 && Number(gsc.position || 0) <= 20) actions.push({ type: 'gsc-refresh', label: 'Refresh pod query GSC: pozycja 4–20.' });
-  if (article.topic !== 'inne') actions.push({ type: 'hub-link', label: `Połącz z hubem: ${article.topic}.` });
+  if (article.inbound_link_count < 3) actions.push({ type: 'internal-links', label: 'Zaproponuj 2–3 linki kontekstowe i pokaż zdania do akceptacji.' });
+  if (!article.pdf_links.length) actions.push({ type: 'pdf', label: 'Zaproponuj PDF/checklistę do link earningu, jeśli pasuje do intencji artykułu.' });
+  if (!article.table_count && !shouldSkipShareableTable(article)) actions.push({ type: 'manual-shareable-table', label: 'Zaproponuj cytowalną tabelę HTML tylko jeśli realnie pomaga czytelnikowi.' });
+  if (!article.table_count && shouldSkipShareableTable(article)) actions.push({ type: 'no-table-by-intent', label: 'Nie dodawaj tabeli: dla tego artykułu lepszy jest krótki praktyczny blok bez moralizowania.' });
+  if (gsc && Number(gsc.position || 0) >= 4 && Number(gsc.position || 0) <= 20) actions.push({ type: 'gsc-refresh', label: 'Po zatwierdzonych zmianach zgłoś URL do GSC: pozycja 4–20.' });
+  if (article.topic !== 'inne') actions.push({ type: 'hub-link', label: `Zaproponuj naturalne zdanie linkujące do huba: ${article.topic}.` });
   return actions;
 }
 
@@ -487,7 +492,7 @@ function buildReport() {
       'npm run growth:evidence-plan',
       'npm run growth:hubs',
       'npm run growth:link-assets',
-      'npm run growth:apply:dry -- --file NAZWA.html --evidence-box --doctor-box',
+      'npm run popraw-seo',
       'npm run growth:verify',
     ],
   };
@@ -791,7 +796,6 @@ function buildEntityGraph() {
       },
     })),
   };
-  writeJson(path.join(ROOT, 'data', 'entities.json'), graph);
   writeJson(path.join(REPORT_DIR, 'entity-graph.json'), graph);
   writeEntityGraphMarkdown(graph, path.join(REPORT_DIR, 'entity-graph.md'));
   return graph;
@@ -1042,7 +1046,7 @@ function buildAutopilot() {
     mode: 'NO_WRITE_AUTOPILOT_PLAN',
     chosen_articles: report.priority_articles.slice(0, 3),
     required_manual_ok: true,
-    next_step: 'Uruchom growth:apply:dry dla wybranego pliku, potem dopiero --write.',
+    next_step: 'Przygotuj ręcznie propozycje tekstów w rozmowie; edytuj HTML dopiero po akceptacji użytkownika.',
     evidence_candidates: evidence.candidates.slice(0, 10),
     asset_candidates: assets.candidates.slice(0, 10),
     hubs: hubs.hubs,
@@ -1088,10 +1092,10 @@ function buildPoprawSeo() {
       'Zbudowano plan autopilota bez zapisu w artykułach.',
     ],
     chosen_articles: autopilot.chosen_articles,
-    approval_needed: 'Napisz: popraw 1, popraw 2 albo popraw 1 i 3. Wtedy najpierw zrobię dry-run konkretnych zmian.',
+    approval_needed: 'Napisz: przygotuj poprawki 1, 2 albo 1 i 3. Najpierw pokażę gotowe teksty do zatwierdzenia, bez edycji HTML.',
     safe_next_commands: [
-      'npm run growth:apply:dry -- --file <plik.html> --evidence-box --doctor-box',
-      'npm run growth:apply -- --file <plik.html> --evidence-box --doctor-box',
+      'npm run popraw-seo',
+      'Po akceptacji tekstów: ręczna edycja wskazanego HTML',
       'npm run growth:verify',
     ],
     reports: Object.fromEntries([
@@ -1146,7 +1150,8 @@ function writePoprawSeoMarkdown(command, file) {
   lines.push('## Co Teraz');
   lines.push(`- ${command.approval_needed}`);
   lines.push('- Realna edycja nie została wykonana.');
-  lines.push('- Po zatwierdzeniu najpierw wykonaj dry-run, potem dopiero zapis.');
+  lines.push('- Następny krok to przygotowanie ręcznych tekstów w rozmowie: Evidence Box, linki, ewentualna tabela/checklista i hub-link.');
+  lines.push('- HTML edytuj dopiero po akceptacji użytkownika.');
   lines.push('');
   lines.push('## Raporty');
   Object.values(command.reports).forEach((report) => lines.push(`- ${report}`));
@@ -1158,6 +1163,9 @@ function applyGrowth(flags) {
   if (!file || !file.endsWith('.html')) throw new Error('Podaj --file NAZWA.html');
   const abs = path.join(ROOT, file);
   if (!fs.existsSync(abs)) throw new Error(`Nie ma pliku: ${file}`);
+  if (flags.write && !flags['allow-generic']) {
+    throw new Error('growth:apply nie zapisuje już generycznych bloków. Użyj dry-run, a potem przygotuj ręcznie dopasowaną treść dla konkretnego artykułu.');
+  }
   const article = extractArticle(file);
   const blocks = [];
   if (flags['evidence-box']) blocks.push(buildEvidenceBox(article));
@@ -1229,7 +1237,8 @@ function buildShareableTable(article) {
     marker: 'fitpo50-growth-table',
     insertBefore: /<section class="share-article-section|<section[^>]+id="faq"|<footer/i,
     html: `<section class="article-section reveal fitpo50-growth-table" aria-labelledby="growth-table-title">
-  <h2 id="growth-table-title">Tabela do zapamiętania</h2>
+  <h2 id="growth-table-title">Co zapamiętać z tabeli?</h2>
+  <p>Ta tabela porządkuje najprostszy schemat decyzji po przeczytaniu artykułu: co obserwować, jak rozumieć sygnał z organizmu i kiedy nie przeciągać samodzielnych prób. Dzięki temu łatwiej przełożyć wiedzę na bezpieczny następny krok.</p>
   <table>
     <caption>Krótka tabela decyzyjna FitPo50 do wykorzystania przy planowaniu kolejnego kroku.</caption>
     <thead><tr><th>Sygnał</th><th>Co oznacza</th><th>Co zrobić</th></tr></thead>

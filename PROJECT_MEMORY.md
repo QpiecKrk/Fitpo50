@@ -89,6 +89,41 @@
   - `FAQ Refresh Report` (raz w tygodniu, raport kandydatów do odświeżenia FAQ),
   - `Live Post-Push Check` (workflow na push do `main`, szybki live-check kluczowych URL).
 
+## Ustalenia operacyjne (2026-06-18) - `popraw-seo`, huby i centra tematyczne
+
+- **`popraw-seo` nie może samodzielnie edytować artykułów.**
+  - Komenda generuje raporty i priorytety, ale zatrzymuje się na planie.
+  - Każda poprawka treściowa musi najpierw zostać pokazana użytkownikowi w rozmowie jako gotowy tekst do akceptacji.
+  - Dopiero po jednoznacznym zatwierdzeniu użytkownika wolno wkleić treść do HTML.
+
+- **Zakaz generycznych bloków growth/SEO.**
+  - Evidence Box, linki, tabela, blok bezpieczeństwa i hub-link muszą być dopasowane do konkretnego artykułu.
+  - Nie wolno dodawać tabel „bo raport tak mówi”, jeśli tabela nie ma sensu dla intencji artykułu.
+  - Przykład decyzji: artykuł `wino-i-miesnie-po-50.html` nie powinien dostawać tabeli; lepszy jest krótki, ludzki blok praktyczny bez moralizowania.
+
+- **Workflow zatwierdzania poprawek SEO/GEO/AIO:**
+  1. Uruchom `npm run popraw-seo`.
+  2. Pokaż TOP priorytety i wyjaśnij, dlaczego są wybrane.
+  3. Dla wskazanych artykułów przygotuj w rozmowie komplet propozycji: Evidence Box, linki, ewentualną tabelę/checklistę, hub-link i GSC refresh.
+  4. Czekaj na zatwierdzenie albo korektę tonu/zakresu.
+  5. Dopiero po akceptacji edytuj HTML.
+  6. Po edycji uruchom walidację i podaj listę URL-i do zgłoszenia w GSC.
+
+- **Huby i centra tematyczne wdrażamy najpierw testowo.**
+  - Blok `Centra tematyczne` najpierw powstaje na `index1.html`, a nie na produkcyjnym `index.html`.
+  - `index1.html` jest stroną roboczą do podglądu i ma mieć `noindex,nofollow`.
+  - Robocze strony hubów generuje `npm run preview:hubs` z `scripts/build-preview-hubs.js`.
+  - Wspólny wygląd hubów jest w `assets/topic-hub.css`; nie kopiować ręcznie dużych inline-styli do każdego huba.
+  - Po zatwierdzeniu wyglądu i działania blok zostanie przeniesiony na `index.html`.
+  - Po przeniesieniu `index1.html` należy trwale usunąć z repo.
+  - Docelowe adresy hubów:
+    - `centrum-treningu-silowego-po-50.html`
+    - `centrum-bialka-po-50.html`
+    - `centrum-snu-po-50.html`
+    - `centrum-nadcisnienia-po-50.html`
+    - `centrum-cholesterolu-po-50.html`
+    - `centrum-metabolizmu-po-50.html`
+
 ## Ustalenia operacyjne (2026-06-01) - start sesji, raporty i bezpieczne porzadki
 
 - **Raport startowy sesji (obowiazkowy):**

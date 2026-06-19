@@ -129,4 +129,10 @@ function main() {
   if (fail) process.exit(1);
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  validateArticleContract
+};

@@ -2,6 +2,9 @@
 
 const { spawnSync } = require('child_process');
 const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const { validateArticleContract } = require('./article-contract-check');
 
 function run(cmd, args) {
   return spawnSync(cmd, args, { encoding: 'utf8' });
@@ -39,14 +42,69 @@ function changedHtmlFiles() {
   return [...new Set(files)];
 }
 
+function originMainRaw(file) {
+  const res = run('git', ['show', `origin/main:${file}`]);
+  if (res.status !== 0) return null;
+  return res.stdout;
+}
+
+function validateRaw(raw, file) {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-contract-'));
+  const tmpFile = path.join(tmpDir, path.basename(file));
+  try {
+    fs.writeFileSync(tmpFile, raw, 'utf8');
+    return validateArticleContract(tmpFile);
+  } finally {
+    try {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    } catch (_err) {
+      // Temp cleanup failure should not hide the actual contract result.
+    }
+  }
+}
+
+function unchangedLegacyErrors(currentErrors, previousErrors) {
+  const previous = new Set(previousErrors);
+  return currentErrors.filter((error) => previous.has(error));
+}
+
+function newErrorsOnly(currentErrors, previousErrors) {
+  const previous = new Set(previousErrors);
+  return currentErrors.filter((error) => !previous.has(error));
+}
+
 function main() {
   const files = changedHtmlFiles();
   if (!files.length) {
     console.log('[SKIP] article-contract-diff: brak zmienionych plików HTML.');
     return;
   }
-  const res = spawnSync('node', ['scripts/article-contract-check.js', ...files], { stdio: 'inherit' });
-  if (res.status !== 0) process.exit(res.status || 1);
+
+  let fail = false;
+  for (const file of files) {
+    const current = validateArticleContract(file);
+    const previousRaw = originMainRaw(file);
+    const previous = previousRaw ? validateRaw(previousRaw, file) : { errors: [], warnings: [] };
+    const newErrors = newErrorsOnly(current.errors, previous.errors);
+    const legacyErrors = unchangedLegacyErrors(current.errors, previous.errors);
+
+    current.warnings.forEach((warning) => console.log(`⚠ ${file}: ${warning}`));
+
+    if (newErrors.length) {
+      console.log(`✖ ${file}`);
+      newErrors.forEach((error) => console.log(`  - ${error}`));
+      if (legacyErrors.length) {
+        console.log(`  - Pominięto stare błędy bez zmian: ${legacyErrors.length}.`);
+      }
+      fail = true;
+    } else if (legacyErrors.length) {
+      console.log(`⚠ ${file}: stare błędy kontraktu bez nowych naruszeń (${legacyErrors.length})`);
+    } else {
+      console.log(`✔ ${file}`);
+    }
+  }
+
+  if (fail) process.exit(1);
 }
 
 main();

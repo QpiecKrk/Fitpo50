@@ -1098,6 +1098,60 @@
       letter-spacing: 0.01em;
       text-transform: uppercase;
     }
+    .truth-tile {
+      justify-content: center;
+      padding: 7px 9px;
+      gap: 3px;
+      line-height: 1.12;
+    }
+    .truth-kicker {
+      font-size: 0.56rem;
+      line-height: 1.05;
+      letter-spacing: 0.1em;
+      white-space: normal;
+    }
+    .truth-main {
+      font-size: clamp(0.82rem, 0.88vw, 0.96rem);
+      line-height: 1.02;
+      letter-spacing: 0.005em;
+      text-transform: none;
+    }
+    .truth-sub {
+      font-size: 0.64rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .truth-desc {
+      font-size: 0.58rem;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    .truth-grid .truth-tile:nth-child(3n + 1) .truth-main {
+      font-size: clamp(0.9rem, 0.98vw, 1.04rem);
+      letter-spacing: 0.004em;
+    }
+    .truth-grid .truth-tile:nth-child(3n + 2) .truth-main {
+      font-size: clamp(0.84rem, 0.92vw, 0.98rem);
+      letter-spacing: 0.01em;
+    }
+    .truth-grid .truth-tile:nth-child(3n) .truth-main {
+      font-size: clamp(0.8rem, 0.86vw, 0.92rem);
+    }
+    .truth-grid .truth-tile:nth-child(2n) .truth-sub,
+    .truth-grid .truth-tile:nth-child(2n + 1) .truth-sub {
+      font-size: 0.62rem;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .truth-grid .truth-tile:nth-child(4n + 1) .truth-desc,
+    .truth-grid .truth-tile:nth-child(4n + 3) .truth-desc {
+      font-size: 0.57rem;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .truth-tile--myth .truth-main::before {
+      content: none;
+    }
     .knowledge-hub {
       height: 420px;
       background: linear-gradient(155deg, #2fa7b6 0%, #1f6d8d 100%);
@@ -1620,8 +1674,8 @@
             <div class="truth-tile truth-tile--caution">
               <span class="truth-kicker">Uwaga</span>
               <span class="truth-main">GLP-1</span>
-              <span class="truth-sub">pomaga, ale nie zastępuje ruchu</span>
-              <span class="truth-desc">Bez siły rośnie utrata mięśni.</span>
+              <span class="truth-sub">lek to nie ruch</span>
+              <span class="truth-desc">Chroń mięśnie siłą.</span>
             </div>
             <div class="truth-tile truth-tile--caution">
               <span class="truth-kicker">Uwaga</span>
@@ -1636,10 +1690,10 @@
               <span class="truth-desc">Białko i rytm to podstawa.</span>
             </div>
             <div class="truth-tile truth-tile--myth">
-              <span class="truth-kicker">Co nie działa</span>
-              <span class="truth-main">Spot reduction</span>
-              <span class="truth-sub">brzuch nie spala się lokalnie</span>
-              <span class="truth-desc">Ciało samo wybiera źródło energii.</span>
+              <span class="truth-kicker">Mit</span>
+              <span class="truth-main">Brzuch</span>
+              <span class="truth-sub">nie spala się lokalnie</span>
+              <span class="truth-desc">Tkanka schodzi całościowo.</span>
             </div>
             <div class="truth-tile truth-tile--myth">
               <span class="truth-kicker">Co nie działa</span>
@@ -1649,21 +1703,21 @@
             </div>
             <div class="truth-tile truth-tile--myth">
               <span class="truth-kicker">Co nie działa</span>
-              <span class="truth-main">Statyczne przed</span>
-              <span class="truth-sub">przed treningiem: dynamicznie</span>
-              <span class="truth-desc">Statyczne zostaw na koniec.</span>
+              <span class="truth-main">Statyczne</span>
+              <span class="truth-sub">nie na start</span>
+              <span class="truth-desc">Przed treningiem dynamicznie.</span>
             </div>
             <div class="truth-tile truth-tile--myth">
-              <span class="truth-kicker">Co nie działa</span>
-              <span class="truth-main">No pain, no gain</span>
-              <span class="truth-sub">ból nie jest celem</span>
-              <span class="truth-desc">Liczy się technika i regularność.</span>
+              <span class="truth-kicker">Mit</span>
+              <span class="truth-main">Ból</span>
+              <span class="truth-sub">to nie cel</span>
+              <span class="truth-desc">Liczy się technika.</span>
             </div>
             <div class="truth-tile truth-tile--myth">
-              <span class="truth-kicker">Co nie działa</span>
-              <span class="truth-main">Mięśnie → tłuszcz</span>
-              <span class="truth-sub">to biologicznie niemożliwe</span>
-              <span class="truth-desc">To dwie różne tkanki.</span>
+              <span class="truth-kicker">Mit</span>
+              <span class="truth-main">Mięśnie</span>
+              <span class="truth-sub">nie zmieniają się w tłuszcz</span>
+              <span class="truth-desc">To różne tkanki.</span>
             </div>
             <div class="truth-tile truth-tile--myth">
               <span class="truth-kicker">Co nie działa</span>

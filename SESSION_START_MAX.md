@@ -163,6 +163,10 @@ Tryb pracy:
   - `growth:apply` moze dodawac tylko bezpieczne bloki zarzadzane (Evidence Box, Kiedy do lekarza, tabela cytowalna) i aktualizowac `dateModified`; nie wolno mu przepisywac calego artykulu ani usuwac sekcji,
   - `popraw-seo` oznacza: uruchom `npm run popraw-seo`, wygeneruj wszystkie raporty growth i zatrzymaj sie na statusie `AWAITING_USER_APPROVAL`; nie edytuj artykulow bez zatwierdzenia konkretnych pozycji,
   - `popraw-seo` obejmuje tez moduly AIO/GEO: `ai-visibility-test`, `entities`, `structured-score`, `quick-answer-score`, `topical-map`, `llms-check` i `perplexity-monitor`,
+  - `popraw-seo` NIE moze samodzielnie wklejac generycznych blokow do artykulow: najpierw przygotuj w rozmowie gotowe teksty (Evidence Box, linki, ewentualna tabela/checklista, hub-link), poczekaj na akceptacje uzytkownika i dopiero wtedy edytuj HTML,
+  - tabele dodawaj tylko wtedy, gdy maja realny sens dla intencji artykulu; przyklad: `wino-i-miesnie-po-50.html` nie powinien dostawac tabeli tylko dlatego, ze raport sugeruje "shareable table",
+  - huby/centra tematyczne wdrazaj najpierw testowo na `index1.html` z `noindex,nofollow`; dopiero po zatwierdzeniu przenies blok na `index.html`, a `index1.html` trwale usun z repo,
+  - robocze huby regeneruj komenda `npm run preview:hubs`; generator to `scripts/build-preview-hubs.js`, a wspolny styl to `assets/topic-hub.css`,
   - stare skrypty zostawiaj jako aliasy kompatybilnosci do czasu kilku poprawnych publikacji i pushy; migracja jest dwuetapowa: najpierw aliasy do nowych centrow, dopiero po stabilizacji usuwanie aliasow,
   - aliasow nie wolno usuwac, jesli odwoluje sie do nich `package.json`, hook, pipeline, dokumentacja, Hostinger albo instrukcje agentow; `doctor` ma pilnowac dat i licznikow migracji.
 - skrot `GSC` w rozmowie oznacza domyslnie:

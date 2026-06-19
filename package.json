@@ -52,6 +52,7 @@
     "growth:gsc-refresh": "node scripts/growth-tool.js gsc-refresh",
     "growth:evidence-plan": "node scripts/growth-tool.js evidence-plan",
     "growth:hubs": "node scripts/growth-tool.js hubs",
+    "preview:hubs": "node scripts/build-preview-hubs.js",
     "growth:link-assets": "node scripts/growth-tool.js link-assets",
     "growth:autopilot": "node scripts/growth-tool.js autopilot",
     "popraw-seo": "node scripts/growth-tool.js popraw-seo",
