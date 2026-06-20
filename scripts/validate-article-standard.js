@@ -473,7 +473,7 @@ function validateFile(filePath) {
   const quickAnswerMode = isLegacyArticle(raw) ? 'legacy' : 'strict';
   const requiredPatterns = [
     { label: 'body.article-template', regex: /<body[^>]*class="[^"]*article-template[^"]*"/i },
-    { label: 'body.article--kategoria', regex: /<body[^>]*class="[^"]*article--(ruch|jedzenie|zdrowie|ciekawe)[^"]*"/i },
+    { label: 'body.article--kategoria', regex: /<body[^>]*class="[^"]*article--(ruch|jedzenie|zdrowie|ciekawe|mity)[^"]*"/i },
     { label: '.shell', regex: /class="shell"/i },
     { label: 'header.topbar', regex: /<header\s+class="topbar"/i },
     { label: 'article-intro-grid', regex: /class="[^"]*article-intro-grid[^"]*"/i },
@@ -514,7 +514,7 @@ function validateFile(filePath) {
   }
 
   const bodyClassMatch = raw.match(/<body[^>]*class="([^"]+)"/i);
-  const categoryMatch = bodyClassMatch ? bodyClassMatch[1].match(/article--(ruch|jedzenie|zdrowie|ciekawe)/i) : null;
+  const categoryMatch = bodyClassMatch ? bodyClassMatch[1].match(/article--(ruch|jedzenie|zdrowie|ciekawe|mity)/i) : null;
   if (categoryMatch) {
     const key = categoryMatch[1].toLowerCase();
     const kickerRegex = new RegExp(`article-kicker-card--${key}`, 'i');

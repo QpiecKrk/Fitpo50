@@ -7,7 +7,7 @@ const { POLICY, utils, validators } = require('./lib/article-policy');
 
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const PLACEHOLDER_RX = /(do doprecyzowania|do uzupelnienia|placeholder|\{\{.+?\}\})/i;
-const SUPPORTED_CATEGORY_KEYS = new Set(['zdrowie', 'jedzenie', 'ruch', 'rusz-sie', 'ciekawe']);
+const SUPPORTED_CATEGORY_KEYS = new Set(['zdrowie', 'jedzenie', 'ruch', 'rusz-sie', 'ciekawe', 'mity']);
 const READ_TIME_RX = /^\d+\s+min\s+czytania$/i;
 
 function parseArgs(argv) {
@@ -130,9 +130,9 @@ function main() {
 
   const categoryRaw = String(json.category || json.section || '').trim().toLowerCase();
   if (!categoryRaw) {
-    errors.push('Brak category w JSON. Artykuł musi mieć kategorię: zdrowie, jedzenie, ruch/rusz-sie albo ciekawe.');
+    errors.push('Brak category w JSON. Artykuł musi mieć kategorię: zdrowie, jedzenie, ruch/rusz-sie, ciekawe albo mity.');
   } else if (!SUPPORTED_CATEGORY_KEYS.has(categoryRaw)) {
-    errors.push(`Nieobsługiwana category: "${json.category || json.section}". Dozwolone: zdrowie, jedzenie, ruch/rusz-sie, ciekawe.`);
+    errors.push(`Nieobsługiwana category: "${json.category || json.section}". Dozwolone: zdrowie, jedzenie, ruch/rusz-sie, ciekawe, mity.`);
   }
 
   if (PLACEHOLDER_RX.test(raw)) {

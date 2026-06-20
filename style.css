@@ -1491,6 +1491,11 @@ a:hover {
   color: #fff;
 }
 
+.article-index-card[data-category="mity"] .article-index-card__label {
+  background: var(--category-mity-bg);
+  color: #fff;
+}
+
 .article-index-card__meta {
   font-size: 0.8rem;
   color: var(--color-text-muted);
@@ -3264,6 +3269,8 @@ html.night-shell body.article-template.reading-sanctuary-active .article-quote,
   --category-zdrowie-text: #4e3a04;
   --category-ciekawe-bg: rgba(67, 149, 84, 0.94);
   --category-ciekawe-text: #ffffff;
+  --category-mity-bg: #b4233a;
+  --category-mity-text: #ffffff;
 
   --article-shell-bg: #fbf7f0;
   --article-shell-border: #d7cebf;
@@ -3326,6 +3333,13 @@ body.article-template.article--ciekawe {
   --article-category-text: var(--category-ciekawe-text);
   --article-kicker-bg: linear-gradient(155deg, #e8f4ea 0%, #d4e8d8 100%);
   --article-kicker-border: rgba(67, 149, 84, 0.35);
+}
+
+body.article-template.article--mity {
+  --article-category-bg: var(--category-mity-bg);
+  --article-category-text: var(--category-mity-text);
+  --article-kicker-bg: linear-gradient(155deg, #fae1e6 0%, #f1bdc7 100%);
+  --article-kicker-border: rgba(180, 35, 58, 0.35);
 }
 
 body.article-template .shell {
@@ -3555,6 +3569,7 @@ body.article-template .article-promo-card__meta--ruch { color: var(--category-ru
 body.article-template .article-promo-card__meta--jedzenie { color: rgba(201, 109, 49, 0.94); }
 body.article-template .article-promo-card__meta--zdrowie { color: #6f5305; }
 body.article-template .article-promo-card__meta--ciekawe { color: rgba(67, 149, 84, 0.94); }
+body.article-template .article-promo-card__meta--mity { color: var(--category-mity-bg); }
 
 body.article-template .article-promo-card__title {
   font-family: var(--font-display);

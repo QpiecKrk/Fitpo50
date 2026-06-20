@@ -396,6 +396,7 @@ function normalizeCategory(input) {
   if (['jedzenie', 'dieta'].includes(v)) return { key: 'jedzenie', label: 'Jedzenie' };
   if (['zdrowie', 'zdrowie-po-50'].includes(v)) return { key: 'zdrowie', label: 'Zdrowie' };
   if (['ciekawe', 'lifestyle'].includes(v)) return { key: 'ciekawe', label: 'Ciekawe' };
+  if (['mity', 'mit', 'obnazamy-mity', 'sciema-czy-fakt', 'ściema-czy-fakt'].includes(v)) return { key: 'mity', label: 'Mity' };
   return { key: 'ciekawe', label: 'Ciekawe' };
 }
 
@@ -1048,7 +1049,7 @@ function readArticleMetaByHref(href) {
     || extractArticleLeadExcerpt(html)
     || '';
   const readTime = firstMatch(html, /<span\s+class="article-meta__time">([^<]+)<\/span>/i) || '';
-  const categoryKey = firstMatch(html, /\barticle--(ruch|jedzenie|zdrowie|ciekawe)\b/i, '').toLowerCase();
+  const categoryKey = firstMatch(html, /\barticle--(ruch|jedzenie|zdrowie|ciekawe|mity)\b/i, '').toLowerCase();
   const heroAlt = firstMatch(html, /<img[^>]*class="[^"]*hero-image[^"]*"[^>]*alt="([^"]+)"/i) || title;
 
   const ogImage = firstMatch(html, /<meta\s+property="og:image"\s+content="([^"]+)"/i);
@@ -1867,10 +1868,6 @@ function updateLlms(slug, title, section, summary, dryRun) {
   let content = fs.readFileSync(LLMS_PATH, 'utf8');
   const articleUrl = `https://fitpo50.pl/${slug}.html`;
 
-  if (content.includes(`- url: ${articleUrl}`)) {
-    return { changed: false, file: 'llms.txt' };
-  }
-
   const safeTitle = String(title || '').replace(/"/g, '\\"');
   const safeSummary = String(summary || '').replace(/"/g, '\\"');
   const block = [
@@ -1882,7 +1879,23 @@ function updateLlms(slug, title, section, summary, dryRun) {
     '',
   ].join('\n');
 
-  content = `${content.trimEnd()}${block}`;
+  let changed = false;
+  if (content.includes(`- url: ${articleUrl}`)) {
+    const existingBlockRx = new RegExp(
+      `- url: ${escapeRegex(articleUrl)}\\n  title: "[^"]*"\\n  section: "[^"]*"\\n  summary: "[^"]*"`,
+      'm',
+    );
+    const replacement = block.trim();
+    const nextContent = content.replace(existingBlockRx, replacement);
+    if (nextContent === content) {
+      return { changed: false, file: 'llms.txt' };
+    }
+    content = nextContent;
+    changed = true;
+  } else {
+    content = `${content.trimEnd()}${block}`;
+    changed = true;
+  }
 
   if (!dryRun) {
     fs.writeFileSync(LLMS_PATH, `${content}\n`, 'utf8');
@@ -1892,7 +1905,7 @@ function updateLlms(slug, title, section, summary, dryRun) {
     }
   }
 
-  return { changed: true, file: 'llms.txt' };
+  return { changed, file: 'llms.txt' };
 }
 
 function escapeHtmlAttr(value) {
@@ -2013,6 +2026,7 @@ function categoryFileFromKey(categoryKey) {
   if (categoryKey === 'ruch') return 'rusz-sie.html';
   if (categoryKey === 'jedzenie') return 'jedzenie.html';
   if (categoryKey === 'zdrowie') return 'zdrowie.html';
+  if (categoryKey === 'mity') return 'mity.html';
   return 'ciekawe.html';
 }
 
@@ -2044,10 +2058,14 @@ function upsertCategoryListing(html, ctx) {
       throw new Error('Nie znaleziono kontenera kart na stronie kategorii.');
     }
     const firstCardIdx = out.indexOf('<a href="', markerIdx);
-    if (firstCardIdx === -1) {
-      throw new Error('Nie znaleziono pierwszej karty na stronie kategorii.');
+    const trackEndIdx = out.indexOf('</div>', markerIdx + insertMarker.length);
+    const hasCardInsideTrack = firstCardIdx !== -1 && (trackEndIdx === -1 || firstCardIdx < trackEndIdx);
+    if (!hasCardInsideTrack) {
+      const insertIdx = markerIdx + insertMarker.length;
+      out = `${out.slice(0, insertIdx)}\n${card}${out.slice(insertIdx)}`;
+    } else {
+      out = `${out.slice(0, firstCardIdx)}${card}${out.slice(firstCardIdx)}`;
     }
-    out = `${out.slice(0, firstCardIdx)}${card}${out.slice(firstCardIdx)}`;
   }
 
   const cardCount = countMatches(out, /class="article-index-card reveal"/g);
@@ -2072,6 +2090,8 @@ function categoryLabelFromKey(key) {
       return 'Ruch';
     case 'ciekawe':
       return 'Ciekawe';
+    case 'mity':
+      return 'Mity';
     default:
       return '';
   }
@@ -2089,6 +2109,7 @@ function inferCategoryLabelFromHref(href) {
     { file: 'jedzenie.html', label: 'Jedzenie' },
     { file: 'rusz-sie.html', label: 'Ruch' },
     { file: 'ciekawe.html', label: 'Ciekawe' },
+    { file: 'mity.html', label: 'Mity' },
   ];
 
   for (const page of categoryPages) {

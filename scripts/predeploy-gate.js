@@ -152,6 +152,9 @@ function categoryPageFromImportCategory(category) {
       return 'rusz-sie.html';
     case 'ciekawe':
       return 'ciekawe.html';
+    case 'mity':
+    case 'mit':
+      return 'mity.html';
     default:
       return '';
   }
@@ -166,6 +169,7 @@ function inferHomepageCategoryFromListings(href) {
     { file: 'jedzenie.html', label: 'Jedzenie' },
     { file: 'rusz-sie.html', label: 'Ruch' },
     { file: 'ciekawe.html', label: 'Ciekawe' },
+    { file: 'mity.html', label: 'Mity' },
   ];
 
   for (const page of categoryPages) {
@@ -540,6 +544,7 @@ function main() {
 
   assertFileMirror('index.html', errors);
   assertFileMirror('porady.html', errors);
+  assertFileMirror('mity.html', errors);
   assertFileMirror('sitemap.xml', errors);
   assertFileMirror('llms.txt', errors);
   if (!args.allowDistDrift && args.enforceDistFreshness) {

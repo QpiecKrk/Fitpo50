@@ -869,6 +869,7 @@
     .read-card__badge--jedzenie { background: rgba(201, 109, 49, 0.94); }
     .read-card__badge--zdrowie { background: rgba(228, 188, 74, 0.96); color: #4e3a04; }
     .read-card__badge--ciekawe { background: rgba(67, 149, 84, 0.94); }
+    .read-card__badge--mity { background: #b4233a; color: #ffffff; }
     .read-card__body {
       padding: 12px 13px 14px;
       display: flex;
@@ -1669,7 +1670,7 @@
       <nav class="menu" aria-label="Menu prototypu">
         <a href="#" class="is-active">Home</a>
         <a href="porady.html">Porady</a>
-        <a href="index.html#newsy">News</a>
+        <a href="mity.html">Mity</a>
         <a href="rusz-sie.html">Ruch</a>
         <a href="jedzenie.html">Jedzenie</a>
         <a href="zdrowie.html">Zdrowie</a>
@@ -1703,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/optymalizacja-snu-po50-hero.avif" type="image/avif">
-          <source srcset="./assets/optymalizacja-snu-po50-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/optymalizacja-snu-po50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/oponka-zablokowana-powiez-hero.avif" type="image/avif">
+          <source srcset="./assets/oponka-zablokowana-powiez-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/oponka-zablokowana-powiez-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Optymalizacja snu po 50.: jak przestać budzić się o 3 w nocy</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Budzisz się o 3 w nocy po 50. roku życia? Sprawdź melatoninę, CBT-I, temperaturę sypialni, stres, kofeinę i objawy bezdechu sennego krok po kroku.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">MIT: Czy oponka brzuszna bierze się z zablokowanej powięzi?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy zablokowana powięź tworzy oponkę i blokuje spalanie tłuszczu z brzucha? Sprawdzamy twarde dowody i pokazujemy spokojnie, co naprawdę działa po 50-tce.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="oponka-zablokowana-powiez.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2509,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Optymalizacja snu po 50.: jak przestać budzić się o 3 w nocy',
-        excerpt: 'Budzisz się o 3 w nocy po 50. roku życia? Sprawdź melatoninę, CBT-I, temperaturę sypialni, stres, kofeinę i objawy bezdechu sennego krok po kroku.',
-        image: './assets/optymalizacja-snu-po50-hero.webp',
-        url: 'optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html'
+        title: 'MIT: Czy oponka brzuszna bierze się z zablokowanej powięzi?',
+        excerpt: 'Czy zablokowana powięź tworzy oponkę i blokuje spalanie tłuszczu z brzucha? Sprawdzamy twarde dowody i pokazujemy spokojnie, co naprawdę działa po 50-tce.',
+        image: './assets/oponka-zablokowana-powiez-hero.webp',
+        url: 'oponka-zablokowana-powiez.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2542,6 +2543,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Mity',
+          title: 'MIT: Czy oponka brzuszna bierze się z zablokowanej powięzi?',
+          excerpt: 'Czy zablokowana powięź tworzy oponkę i blokuje spalanie tłuszczu z brzucha? Sprawdzamy twarde dowody i pokazujemy spokojnie, co naprawdę działa po 50-tce.',
+          image: './assets/oponka-zablokowana-powiez-hero.webp',
+          url: 'oponka-zablokowana-powiez.html'
+        },
+        {
           category: 'Zdrowie',
           title: 'Optymalizacja snu po 50.: jak przestać budzić się o 3 w nocy',
           excerpt: 'Budzisz się o 3 w nocy po 50. roku życia? Sprawdź melatoninę, CBT-I, temperaturę sypialni, stres, kofeinę i objawy bezdechu sennego krok po kroku.',
@@ -2554,13 +2562,6 @@
           excerpt: 'Nadciśnienie po 50. roku życia usztywnia tętnice. Sprawdź, jak ruch, dieta DASH, mniej soli, pomiary domowe i leczenie pomagają chronić naczynia.',
           image: './assets/nadcisnienie-elastycznosc-naczyn-hero.webp',
           url: 'nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn.html'
-        },
-        {
-          category: 'Jedzenie',
-          title: 'Ile białka po 50-tce? Zapotrzebowanie, źródła i odżywki WPC',
-          excerpt: 'Ile białka dziennie po 50. roku życia naprawdę potrzebujesz? Poznaj normy geriatryczne, najlepsze źródła naturalne oraz fakty i mity o odżywkach serwatkowych.',
-          image: './assets/hero-bialko-po-50-fitpo50.webp',
-          url: 'ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
