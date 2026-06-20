@@ -3,21 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { CATEGORY_LANDING_PAGES } = require('./lib/categories');
 
 const ROOT = process.cwd();
 const errors = [];
 const warnings = [];
-const CATEGORY_LANDING = new Set([
-  'index.html',
-  'porady.html',
-  'rusz-sie.html',
-  'jedzenie.html',
-  'zdrowie.html',
-  'ciekawe.html',
-  'dziennik.html',
-  'o-mnie.html',
-]);
-
 function parseArgs(argv) {
   return {
     diff: argv.includes('--diff'),
@@ -81,12 +71,16 @@ function verifyImagePath(fromFile, rawPath) {
 }
 
 function verifyCard(fromFile, cardHtml) {
+  if (/\{\{[^}]+}}/.test(cardHtml)) {
+    warnings.push(`${fromFile}: pominięto placeholderową kartę Czytelni z szablonu.`);
+    return;
+  }
   const href = normalizeRel(extractAttr(cardHtml, 'href').split('#')[0].split('?')[0]);
   if (!href) {
     errors.push(`${fromFile}: karta Czytelni bez href.`);
   } else {
     if (!href.endsWith('.html')) errors.push(`${fromFile}: karta Czytelni ma nie-html href: ${href}`);
-    if (CATEGORY_LANDING.has(href.toLowerCase())) warnings.push(`${fromFile}: karta Czytelni wskazuje landing (${href}).`);
+    if (CATEGORY_LANDING_PAGES.has(href.toLowerCase())) warnings.push(`${fromFile}: karta Czytelni wskazuje landing (${href}).`);
     const target = path.join(ROOT, href);
     if (!fs.existsSync(target)) errors.push(`${fromFile}: karta Czytelni wskazuje nieistniejący plik: ${href}`);
     const mirror = path.join(ROOT, '_site', href);

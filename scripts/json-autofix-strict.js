@@ -26,9 +26,9 @@ function ensureQuickAnswer(raw) {
   if (!qa) {
     qa = 'To narzędzie może wspierać zdrowie i regenerację, ale nie zastępuje ruchu, snu i leczenia. Najlepsze efekty daje regularny protokół, właściwa dawka, bezpieczne parametry urządzenia oraz kontrola przeciwwskazań przed rozpoczęciem terapii.';
   }
-  while (countWords(qa) < 40) qa += ' Stosuj metodę rozsądnie i etapami.';
-  if (countWords(qa) > 60) {
-    const words = qa.split(/\s+/).filter(Boolean).slice(0, 60);
+  while (countWords(qa) < POLICY.WORDS.QUICK_ANSWER_MIN) qa += ' Stosuj metodę rozsądnie i etapami.';
+  if (countWords(qa) > POLICY.WORDS.QUICK_ANSWER_MAX) {
+    const words = qa.split(/\s+/).filter(Boolean).slice(0, POLICY.WORDS.QUICK_ANSWER_MAX);
     qa = words.join(' ').replace(/[,:;\s]+$/g, '').trim();
     if (!/[.!?]$/.test(qa)) qa += '.';
   }

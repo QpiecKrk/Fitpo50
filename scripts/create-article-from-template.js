@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { normalizeCategory } = require('./lib/categories');
 
 function parseArgs(argv) {
   const out = {};
@@ -18,15 +19,6 @@ function parseArgs(argv) {
     i += 1;
   }
   return out;
-}
-
-function normalizeCategory(input) {
-  const v = (input || '').toLowerCase().trim();
-  if (['ruch', 'rusz-sie', 'rusz_sie'].includes(v)) return { key: 'ruch', label: 'Ruch' };
-  if (['jedzenie', 'dieta'].includes(v)) return { key: 'jedzenie', label: 'Jedzenie' };
-  if (['zdrowie', 'zdrowie-po-50'].includes(v)) return { key: 'zdrowie', label: 'Zdrowie' };
-  if (['ciekawe', 'lifestyle'].includes(v)) return { key: 'ciekawe', label: 'Ciekawe' };
-  return null;
 }
 
 function nowDate() {
@@ -113,7 +105,7 @@ if (!slug || !title || !description || !categoryRaw) {
 }
 
 const category = normalizeCategory(categoryRaw);
-if (!category) {
+if (!category.inputMatched) {
   console.error(`Nieznana kategoria: ${categoryRaw}`);
   process.exit(1);
 }

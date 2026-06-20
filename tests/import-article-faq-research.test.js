@@ -7,11 +7,12 @@ const { spawnSync } = require('node:child_process');
 
 test('import-article precheck accepts faq_research in camelCase after normalization', () => {
   const repoRoot = path.resolve(__dirname, '..');
-  const source = path.join(repoRoot, 'data/import/apob-norma-cena-jak-czytac-wynik.fitpo50.json');
+  const source = path.join(repoRoot, 'data/import/archive/2026-06-15/apob-norma-cena-jak-czytac-wynik.fitpo50.json');
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-faq-regression-'));
   const workFile = path.join(tmpDir, 'article.fitpo50.json');
 
   const json = JSON.parse(fs.readFileSync(source, 'utf8'));
+  json.title = 'ApoB po 50: norma, cena i interpretacja wyniku krok po kroku';
   json.faq_research = (Array.isArray(json.faq_research) ? json.faq_research : []).map((item) => ({
     question: item.question,
     sourceLabel: item.source_label || item.sourceLabel || item.label || '',

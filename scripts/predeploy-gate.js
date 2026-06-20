@@ -13,6 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const { validateArticleHeadFile } = require('./lib/article-head-contract');
 const { validators, POLICY, utils } = require('./lib/article-policy');
+const { categoryPageFromImportCategory } = require('./lib/categories');
 
 const ROOT = process.cwd();
 
@@ -139,25 +140,6 @@ function readImportJsonBySlug(slug) {
     }
   }
   return null;
-}
-
-function categoryPageFromImportCategory(category) {
-  switch (String(category || '').trim().toLowerCase()) {
-    case 'zdrowie':
-      return 'zdrowie.html';
-    case 'jedzenie':
-      return 'jedzenie.html';
-    case 'ruch':
-    case 'rusz-sie':
-      return 'rusz-sie.html';
-    case 'ciekawe':
-      return 'ciekawe.html';
-    case 'mity':
-    case 'mit':
-      return 'mity.html';
-    default:
-      return '';
-  }
 }
 
 function inferHomepageCategoryFromListings(href) {

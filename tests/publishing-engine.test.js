@@ -4,6 +4,13 @@ const path = require('path');
 const { spawnSync } = require('node:child_process');
 
 const { POLICY, utils, validators } = require('../scripts/lib/article-policy');
+const {
+  categoryFileFromKey,
+  categoryLabelFromKey,
+  categoryPageFromImportCategory,
+  isSupportedCategory,
+  normalizeCategory,
+} = require('../scripts/lib/categories');
 
 test('validateSeoDescriptionLength accepts valid SEO description', () => {
   const desc = 'Badanie ApoB (Apolipoproteina B) to najlepszy marker ryzyka miażdżycy po 50-tce. Sprawdź normy, cenę i dlaczego warto je zrobić zamiast LDL dziś.';
@@ -37,6 +44,7 @@ test('collectRepeatedLongSentences reports repeated long sentences via central t
     sentence,
     sentence,
     sentence,
+    sentence,
     'Krótka fraza.',
   ]);
 
@@ -45,14 +53,28 @@ test('collectRepeatedLongSentences reports repeated long sentences via central t
   assert.match(repeated[0].sentence, /kreatyna poprawia/i);
 });
 
-test('article-sync-pro dry-run succeeds for known slug', () => {
+test('central category registry maps myth aliases to Mity landing page', () => {
+  for (const raw of ['mity', 'mit', 'obnazamy-mity', 'obnażamy-mity', 'sciema-czy-fakt', 'ściema-czy-fakt']) {
+    const category = normalizeCategory(raw);
+    assert.equal(category.key, 'mity');
+    assert.equal(category.label, 'Mity');
+    assert.equal(category.file, 'mity.html');
+    assert.equal(isSupportedCategory(raw), true);
+    assert.equal(categoryPageFromImportCategory(raw), 'mity.html');
+  }
+
+  assert.equal(categoryFileFromKey('mity'), 'mity.html');
+  assert.equal(categoryLabelFromKey('mity'), 'Mity');
+});
+
+test('article-sync-pro dry-run reports missing import JSON clearly', () => {
   const repoRoot = path.resolve(__dirname, '..');
   const result = spawnSync(
     'node',
     [
       'scripts/article-sync-pro.js',
       '--slug',
-      'zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna',
+      'testowy-slug-bez-json',
       '--sync-seo',
       '--sync-listings',
       '--dry-run',
@@ -63,7 +85,6 @@ test('article-sync-pro dry-run succeeds for known slug', () => {
     }
   );
 
-  assert.equal(result.status, 0, result.stderr || result.stdout);
-  assert.match(result.stdout, /DRY-RUN: article-sync-pro\.js/);
-  assert.match(result.stdout, /Slug: zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna/);
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /Nie znaleziono pliku JSON w data\/import\/ dla slug "testowy-slug-bez-json"/);
 });

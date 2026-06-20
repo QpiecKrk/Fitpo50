@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { POLICY, validators } = require('./lib/article-policy');
+const { CATEGORY_LANDING_PAGES, isSupportedCategory, normalizeCategory } = require('./lib/categories');
 
 function toLocalIsoDate(date = new Date()) {
   const y = date.getFullYear();
@@ -12,18 +13,6 @@ function toLocalIsoDate(date = new Date()) {
 }
 
 const TODAY = toLocalIsoDate();
-const ALLOWED_CATEGORIES = new Set(['zdrowie', 'ciekawe', 'jedzenie', 'ruch', 'mity']);
-const CATEGORY_LANDING_PAGES = new Set([
-  'index.html',
-  'porady.html',
-  'rusz-sie.html',
-  'jedzenie.html',
-  'zdrowie.html',
-  'ciekawe.html',
-  'mity.html',
-  'dziennik.html',
-  'o-mnie.html',
-]);
 const FALLBACK_SOURCES = [
   { label: 'World Health Organization: Physical activity guidelines', url: 'https://www.who.int/news-room/fact-sheets/detail/physical-activity' },
   { label: 'CDC: Benefits of physical activity', url: 'https://www.cdc.gov/physicalactivity/basics/pa-health/index.htm' },
@@ -366,7 +355,7 @@ function validate(json) {
   if (!json.meta_description || json.meta_description.length < 145 || json.meta_description.length > 160) {
     errors.push(`meta_description poza zakresem 145-160 (jest ${String(json.meta_description || '').length})`);
   }
-  if (!ALLOWED_CATEGORIES.has(String(json.category || ''))) {
+  if (!isSupportedCategory(json.category)) {
     errors.push(`category niepoprawne (${json.category})`);
   }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(json.date_published || '')) || String(json.date_published) > TODAY) {
@@ -466,9 +455,7 @@ function main() {
     );
   }
 
-  if (!ALLOWED_CATEGORIES.has(String(json.category || '').trim())) {
-    json.category = 'ciekawe';
-  }
+  json.category = normalizeCategory(json.category || json.section || 'ciekawe').key;
   json.lead = stripTags(String(json.lead || '')).replace(/\s+/g, ' ').trim();
   json.reading_time = String(json.reading_time || '12 minut').replace(/\s+/g, ' ').trim();
   json.date_published = normalizeDate(json.date_published);

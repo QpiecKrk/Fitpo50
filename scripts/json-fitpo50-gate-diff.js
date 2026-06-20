@@ -58,6 +58,14 @@ function normalizeTextForCompare(text) {
     .trim();
 }
 
+function normalizeQuickAnswerForSentenceGate(text) {
+  return String(text || '')
+    .replace(/\b(\d+)\.(?=\s*(?:roku|lat|r\.ż\.|rż|r\.|życia|tce|tką|tkę|i|oraz|a|ale|bo|,))/giu, '$1')
+    .replace(/\b([A-ZĄĆĘŁŃÓŚŹŻ])\.(?=\s+[A-ZĄĆĘŁŃÓŚŹŻ])/gu, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function collectRepeatedLongSentences(chunks) {
   const repeated = utils.collectRepeatedLongSentences(chunks);
   return repeated.map((item) => [item.sentence, item.count]);
@@ -125,7 +133,7 @@ function calculateAeoScore(ctx) {
   } else {
     notes.push('quick_answer: zbyt krótki lub zbyt długi.');
   }
-  if (/^[A-ZĄĆĘŁŃÓŚŹŻ][^?!.]{15,}[.?!]$/u.test(ctx.quickAnswerPlain)) quickAnswer += 10;
+  if (/^[A-ZĄĆĘŁŃÓŚŹŻ][^?!.]{15,}[.?!]$/u.test(normalizeQuickAnswerForSentenceGate(ctx.quickAnswerPlain))) quickAnswer += 10;
   else notes.push('quick_answer: słaba forma odpowiedzi bez klarownego domknięcia zdania.');
 
   const intentPattern = /\b(jak|czy|ile|kiedy|dlaczego|objawy|norma|wynik|warto|bezpiecz|dawk|skutek)\b/iu;
@@ -424,7 +432,7 @@ function validateFile(file) {
   if (aeo.total < threshold) {
     errors.push(`${file}: AEO score poniżej progu ${threshold}/100 (jest ${aeo.total}) - popraw quick_answer/FAQ/źródła/linki przed publikacją.`);
   }
-  if (!/^[A-ZĄĆĘŁŃÓŚŹŻ][^?!.]{15,}[.?!]$/u.test(quickAnswerPlain)) {
+  if (!/^[A-ZĄĆĘŁŃÓŚŹŻ][^?!.]{15,}[.?!]$/u.test(normalizeQuickAnswerForSentenceGate(quickAnswerPlain))) {
     errors.push(`${file}: quick_answer musi być jednym, klarownym zdaniem lub zwięzłym akapitem zakończonym interpunkcją.`);
   }
   const faqOutOfRange = faqAnswerWordCounts.filter((n) => n < 30 || n > 60).length;

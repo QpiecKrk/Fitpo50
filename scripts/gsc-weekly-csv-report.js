@@ -291,7 +291,8 @@ function inferCategoryAndTitle(query) {
     { category: 'jedzenie', re: /(dieta|bialko|białko|kreatyn|cholesterol|apob|apoa|glukoza|insulina|jedzen|odzyw|odżyw)/, title: `Co jeść po 50? ${query}` },
     { category: 'ruch', re: /(trening|podciagn|podciąg|spacer|bieg|cwic|ćwic|silow|siła|mobiln)/, title: `Ruch po 50: ${query} — plan krok po kroku` },
     { category: 'zdrowie', re: /(kortyzol|rtg|usg|badanie|cisnienie|ciśnienie|serce|horm|sen|stres|oponka)/, title: `Zdrowie po 50: ${query} — kiedy działa i dla kogo` },
-    { category: 'ciekawe', re: /(wiek biologic|epigen|sakad|longevity|mit|fakt|nauk|biohack)/, title: `${query}: co mówi nauka po 50?` },
+    { category: 'mity', re: /(mit|mity|fakt|ściema|sciema|nie działa|nie dziala|obal|obnaż|obnaz|prawda czy|czy to prawda)/, title: `Mit czy fakt po 50: ${query}` },
+    { category: 'ciekawe', re: /(wiek biologic|epigen|sakad|longevity|nauk|biohack)/, title: `${query}: co mówi nauka po 50?` },
   ];
   const matched = rules.find((r) => r.re.test(q));
   return matched || { category: 'ciekawe', title: `${query}: praktyczne wyjaśnienie po 50` };
@@ -955,7 +956,7 @@ function main() {
     'Po zmianach: request indexing w GSC i weryfikacja efektu po 7 dniach.',
   ];
 
-  const categoryOrder = ['jedzenie', 'ruch', 'zdrowie', 'ciekawe'];
+  const categoryOrder = ['jedzenie', 'ruch', 'zdrowie', 'mity', 'ciekawe'];
   const usedQueries = new Set();
   const candidates = [...enrichedTop10, ...enrichedCtrProblems]
     .filter((r) => r.impressions >= 10 && r.position >= 3 && r.position <= 90)

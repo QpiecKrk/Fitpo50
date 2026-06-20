@@ -16,6 +16,12 @@
 const fs = require('fs');
 const path = require('path');
 const { POLICY, utils, validators, enforcers } = require('./lib/article-policy');
+const {
+  CATEGORY_LANDING_URLS,
+  categoryFileFromKey,
+  categoryLabelFromKey,
+  normalizeCategory,
+} = require('./lib/categories');
 const https = require('https');
 const { spawnSync } = require('child_process');
 
@@ -126,16 +132,6 @@ const READING_ROOM_FALLBACKS = [
     description: 'Najważniejsze zasady odżywiania po 50-tce: co jeść, jak planować i czego nie komplikować.',
   },
 ];
-const CATEGORY_LANDING_URLS = new Set([
-  'index.html',
-  'porady.html',
-  'rusz-sie.html',
-  'jedzenie.html',
-  'zdrowie.html',
-  'ciekawe.html',
-  'dziennik.html',
-  'o-mnie.html',
-]);
 const WIKIDATA_ENTITY_MAP = [
   { key: 'apob', name: 'Apolipoprotein B', sameAs: 'https://www.wikidata.org/wiki/Q420633' },
   { key: 'apolipoproteina b', name: 'Apolipoprotein B', sameAs: 'https://www.wikidata.org/wiki/Q420633' },
@@ -388,16 +384,6 @@ function truncateParagraphToWordLimit(html, maxWords) {
   if (words.length <= maxWords) return `<p>${escapeHtml(plain)}</p>`;
   const clipped = words.slice(0, maxWords).join(' ').replace(/[,:;.\s]+$/g, '').trim();
   return `<p>${escapeHtml(`${clipped}.`)}</p>`;
-}
-
-function normalizeCategory(input) {
-  const v = String(input || '').toLowerCase().trim();
-  if (['ruch', 'rusz-sie', 'rusz_sie'].includes(v)) return { key: 'ruch', label: 'Ruch' };
-  if (['jedzenie', 'dieta'].includes(v)) return { key: 'jedzenie', label: 'Jedzenie' };
-  if (['zdrowie', 'zdrowie-po-50'].includes(v)) return { key: 'zdrowie', label: 'Zdrowie' };
-  if (['ciekawe', 'lifestyle'].includes(v)) return { key: 'ciekawe', label: 'Ciekawe' };
-  if (['mity', 'mit', 'obnazamy-mity', 'sciema-czy-fakt', 'ściema-czy-fakt'].includes(v)) return { key: 'mity', label: 'Mity' };
-  return { key: 'ciekawe', label: 'Ciekawe' };
 }
 
 function parseJsonFile(filePath) {
@@ -2022,14 +2008,6 @@ function upsertPoradyListing(html, ctx) {
   return out;
 }
 
-function categoryFileFromKey(categoryKey) {
-  if (categoryKey === 'ruch') return 'rusz-sie.html';
-  if (categoryKey === 'jedzenie') return 'jedzenie.html';
-  if (categoryKey === 'zdrowie') return 'zdrowie.html';
-  if (categoryKey === 'mity') return 'mity.html';
-  return 'ciekawe.html';
-}
-
 function upsertCategoryListing(html, ctx) {
   let out = html;
   const hrefNeedle = `href="${ctx.href}"`;
@@ -2077,24 +2055,6 @@ function unescapeJsSingleQuoted(value) {
   return String(value || '')
     .replace(/\\\\/g, '\\')
     .replace(/\\'/g, "'");
-}
-
-function categoryLabelFromKey(key) {
-  switch (String(key || '').trim().toLowerCase()) {
-    case 'zdrowie':
-      return 'Zdrowie';
-    case 'jedzenie':
-      return 'Jedzenie';
-    case 'ruch':
-    case 'rusz-sie':
-      return 'Ruch';
-    case 'ciekawe':
-      return 'Ciekawe';
-    case 'mity':
-      return 'Mity';
-    default:
-      return '';
-  }
 }
 
 function inferCategoryLabelFromHref(href) {
