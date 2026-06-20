@@ -4,6 +4,14 @@
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} ^www\.fitpo50\.pl$ [NC]
   RewriteRule ^ https://fitpo50.pl%{REQUEST_URI} [R=301,L]
+
+  # Redirect old/incorrect success directory references to root articles
+  RewriteRule ^sukcesy/motywacja-po-50\.html$ /motywacja-po-50.html [R=301,L]
+  RewriteRule ^sukcesy/silownia-dla-ludzi\.html$ /silownia-dla-ludzi.html [R=301,L]
+  RewriteRule ^sukcesy/kawa-jako-preworkout-po-50\.html$ /kawa-jako-preworkout-po-50.html [R=301,L]
+
+  # Remove malformed legacy template asset URL reported by GSC
+  RewriteRule ^assets/\$\{item\.img\}\.avif$ - [G,L]
 </IfModule>
 
 # === MIME types for modern image formats ===
