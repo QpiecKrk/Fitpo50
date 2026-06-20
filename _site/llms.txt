@@ -347,4 +347,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "MIT: Czy oponka brzuszna bierze się z zablokowanej powięzi? | FitPo50"
   section: "Mity"
   summary: "Czy zablokowana powięź tworzy oponkę i blokuje spalanie tłuszczu z brzucha? Sprawdzamy twarde dowody i pokazujemy spokojnie, co naprawdę działa po 50-tce."
-
+- url: https://fitpo50.pl/mit-metabolizm-po-50-zwalnia-tycie.html
+  title: "MIT: Po 50-tce metabolizm gwałtownie zwalnia i dlatego się tyje | FitPo50"
+  section: "Mity"
+  summary: "Czy metabolizm po 50-tce naprawdę gwałtownie zwalnia? Sprawdzamy badania naukowe i pokazujemy, dlaczego waga rośnie z zupełnie innego powodu niż wiek."

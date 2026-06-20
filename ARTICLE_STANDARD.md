@@ -39,6 +39,7 @@ Kolejność elementów jest stała:
 - `article--jedzenie`: `rgba(201, 109, 49, 0.94)` / `#ffffff`
 - `article--zdrowie`: `rgba(228, 188, 74, 0.96)` / `#4e3a04`
 - `article--ciekawe`: `rgba(67, 149, 84, 0.94)` / `#ffffff`
+- `article--mity`: `#b4233a` / `#ffffff`
 
 ## 6. Tokeny i globalna edycja
 Zmiany globalne robimy przez tokeny CSS w `style.css`:
@@ -51,7 +52,7 @@ Zasada: „zmień raz, zmień wszędzie”.
 
 ## 7. Procedura dodawania nowego artykułu
 1. Generator:
-`node scripts/create-article-from-template.js --slug <slug> --title "<tytuł>" --category <ruch|jedzenie|zdrowie|ciekawe> --description "<opis>"`
+`node scripts/create-article-from-template.js --slug <slug> --title "<tytuł>" --category <ruch|jedzenie|zdrowie|ciekawe|mity> --description "<opis>"`
 2. Uzupełnienie treści i SEO.
 3. Ustaw daty publikacji:
 `article:published_time` i `BlogPosting.datePublished` = faktyczna data publikacji.
@@ -71,6 +72,7 @@ albo hurtowo:
 8. Kontrola końcowa:
 - nowy wpis jest widoczny w `porady.html` i na stronie kategorii,
 - sekcja "Nowy artykuł" na `index.html` wskazuje ten wpis.
+- Po publikacji nie zostawiaj w repo roboczego JSON-a z `data/import/*.fitpo50.json`, jeśli finalny HTML jest gotowy i JSON nie jest potrzebny do produkcji.
 
 ## 8. Bramka jakości (fail conditions)
 Artykuł nie przechodzi, jeśli:
@@ -145,3 +147,18 @@ Artykuł nie przechodzi, jeśli:
 - `BlogPosting.citation` musi być zsynchronizowane z listą źródeł w HTML.
 - Wymagane minimum 4 URL-e w citation, jeśli faktycznie istnieją w materiale źródłowym.
 - Kategoryczny zakaz dopisywania zmyślonych źródeł tylko po to, by dobić do minimum.
+
+## 13. Myth Article Contract (`Mity`)
+- Kategoria `Mity` jest osobnym działem (`mity.html`), nie aliasem `Ciekawe`.
+- Wymagane oznaczenia techniczne:
+  - `body.article--mity`,
+  - `article:section` = `Mity`,
+  - karta w `porady.html` i `mity.html` z `data-category="mity"`,
+  - wpis w `llms.txt` z `section: "Mity"`.
+- Rytm treści:
+  1. nazwij mit bez atakowania ludzi,
+  2. daj krótki werdykt FitPo50,
+  3. pokaż fizjologię i jakość dowodów,
+  4. zakończ praktycznym "co działa zamiast tego".
+- Ton: spokojny, kumpelski, bez moralizowania i bez języka oskarżającego konkretne firmy/osoby.
+- Jeżeli artykuł obala konkretne popularne twierdzenie, dodaj `ClaimReview`.

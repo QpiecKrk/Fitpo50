@@ -9,6 +9,7 @@ Ten plik dotyczy tylko modulu "Moje Sukcesy" (kalendarz + strony dnia).
   - generowania `sukcesy/YYYY-MM-DD.html`,
   - logiki admina odpowiedzialnej za publikacje dnia i synchronizacje kalendarza.
 - Nie dotyczy klasycznych artykulow "Porady".
+- Nie dotyczy dzialu `Mity`; artykuly obalajace mity sa zwyklymi artykulami `Porady` w kategorii `mity.html`.
 
 ## Zasada produktu
 
@@ -85,3 +86,4 @@ Ten plik dotyczy tylko modulu "Moje Sukcesy" (kalendarz + strony dnia).
 
 - Nie mieszamy logiki `Porady` i `Moje Sukcesy`.
 - Zmiany w jednym module nie moga psuc drugiego.
+- Zmiany w kategorii `Mity` nie moga ingerowac w kalendarz, strony dnia ani dane `Moje Sukcesy`.

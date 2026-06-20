@@ -75,9 +75,11 @@ Publikacja artykulow:
   6) po dolaczeniu brakujacego obrazu kontynuuj pipeline od miejsca zatrzymania,
   7) jesli blad wyjdzie dopiero po wygenerowaniu HTML, popraw generator/template/HTML albo dane w kopii roboczej pipeline; nie wracaj do edycji pliku JSON z Downloads, chyba ze uzytkownik wyraznie poprosi.
 - JSON-y dostarczane w `~/Downloads` sa traktowane jako wsad/draft; po publikacji uzytkownik moze je kasowac, wiec nie opieraj dalszych poprawek na trwalosci tych plikow i nie sprzataj ich automatycznie.
+- Po udanej publikacji finalnym artefaktem jest HTML + assety + PDF + wpisy w indeksach; roboczy JSON nie jest trwalym zrodlem prawdy.
+- Nie commituj roboczych JSON-ow z `data/import/*.fitpo50.json`, jesli po imporcie blokuja `json:gate:diff` albo nie sa potrzebne do produkcji; przed `git push` usun/przenies taki JSON z repo, jesli finalny HTML jest gotowy.
 - Najlepszy import to taki, w ktorym HTML przechodzi walidacje od razu, bo jakosc zostala naprawiona w JSON przed importem.
 - kanoniczny flow publikacji artykulow: `scripts/import-article.js` (`.fitpo50.json` + precheck); `article-template-bento.html` / `create-article-from-template.js` tylko do recznych szkicow,
-- preferuj szybki pipeline jednej komendy: `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --force <true|false>`,
+- preferuj szybki pipeline jednej komendy: `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe|mity> --force <true|false>`,
 - pipeline publikacyjny musi wykonywac kolejnosc: `fix-fitpo50-json` -> `json-fitpo50-gate --file` -> `import-article --precheck` -> `import-article --publish` -> `sync-article-title-breadcrumb` (spojnosc `<title>`/`og:title`/`twitter:title` + `BreadcrumbList`) -> `sync-site-assets-mirror` -> `news-integrity` -> `predeploy-gate --slug`,
 - po imporcie artykulu pipeline ma obowiazkowo zregenerowac `llms-full.txt` automatycznie (`scripts/generate-llms-full.js`) i nie czekamy na reczne uzupelnianie JSON/Claude,
 - na etapie `json-fitpo50-gate --file` traktuj `meta_description` poza limitem (145-160 znakow) jako twardy blokujacy FAIL i nie przechodz dalej do importu/publikacji,
@@ -122,6 +124,14 @@ Publikacja artykulow:
 - AEO guardrails: w `BlogPosting` dodawaj `speakable`, a sekcje `.key-takeaways` umieszczaj po wstepie (nie na samym dole),
 - interlinking w tresci: minimum 4 linki kontekstowe w akapitach (nie tylko sekcja Czytelnia).
 - jesli JSON wejsciowy nie ma linkow kontekstowych, uruchamiaj import z `--run-internal-links auto` (auto-linking przed walidacja), aby domknac wymaganie minimum 4 linkow.
+
+Dzial `Mity`:
+- `Mity` to osobna kategoria: `mity.html`, `article--mity`, `data-category="mity"`, `section: "Mity"` w `llms.txt`.
+- Artykulu-mitu nie wrzucaj do `ciekawe.html`, chyba ze uzytkownik jawnie zmieni decyzje.
+- Kolor kategorii `Mity`: `#b4233a` + bialy tekst; przycisk `Czytaj` w kafelkach Czytelni zostaje wspolny jak w innych kategoriach.
+- Artykul typu mit ma rytm: `MIT` -> `werdykt FitPo50` -> `dowody/fizjologia` -> `co dziala zamiast tego`.
+- Ton: kumpelski i spokojny; obalamy bledna obietnice/mechanizm, nie ludzi.
+- Jesli artykul obala konkretne twierdzenie, dodaj `ClaimReview`.
 
 Modul NEWS:
 - traktuj `MEMORY_NEWSY.md` jako zrodlo zasad,

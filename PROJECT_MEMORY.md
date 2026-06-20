@@ -6,7 +6,8 @@
 - Jednym z kluczowych elementow projektu jest stabilny i przewidywalny modul "Moje Sukcesy".
 
 ## Architecture rules
-- 4 filary tresci: `rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`.
+- Filary/kategorie tresci: `rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`, `mity.html`.
+- `mity.html` to osobny dzial "Mity", a nie podkategoria `ciekawe.html`.
 - Strona zbiorcza artykulow to `porady.html`.
 - Logika "Moje Sukcesy" jest oddzielona od logiki "Porady".
 - Deploy publicznej strony idzie z katalogu `_site`.
@@ -30,6 +31,7 @@
 - Przy zmianach frontowych uwzglednij cache, wersjonowanie assetow i stan w `_site`.
 - Zmiany maja byc lokalne, minimalne i zgodne z istniejaca architektura.
 - Jesli zadanie koliduje z tym dokumentem, najpierw wskaz konflikt, a nie wprowadzaj zmian w ciemno.
+- Po publikacji artykulu z JSON plik `.fitpo50.json` jest wsadem roboczym i nie powinien zostawac w repo jako trwaly artefakt; finalnym zrodlem publikacji jest HTML + assety + PDF + wpisy w indeksach.
 - Standard językowy: nagłówki techniczne są po angielsku, treść dokumentacji po polsku, a taski, review i rozmowy z agentami prowadzimy po polsku. Nazwy plików, ścieżek, komend, kluczy konfiguracyjnych i elementów technicznych zostają w oryginalnym brzmieniu.
 - Skrót `GSC` w poleceniach użytkownika oznacza domyślnie workflow analityczny:
   - sprawdź najnowszy issue z raportem GSC na GitHub,
@@ -58,7 +60,7 @@
 ## Critical files / areas
 - `_site/` - publiczny output do deployu
 - `porady.html` - zbiorcza strona artykulow
-- `rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html` - 4 filary tresci
+- `rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`, `mity.html` - filary/kategorie tresci
 - modul "Moje Sukcesy" - logika oddzielona od "Porady"
 - `scripts/export_site.sh` - podstawowy export/deploy workflow
 
@@ -88,6 +90,32 @@
 - Aktywne automatyzacje harmonogramowe:
   - `FAQ Refresh Report` (raz w tygodniu, raport kandydatów do odświeżenia FAQ),
   - `Live Post-Push Check` (workflow na push do `main`, szybki live-check kluczowych URL).
+
+## Ustalenia operacyjne (2026-06-20) - dzial `Mity` i artykuly obalajace mity
+
+- **`Mity` to osobna kategoria publikacyjna.**
+  - Strona kategorii: `mity.html`.
+  - Artykuly z tej kategorii maja `body.article--mity`, `article:section = "Mity"` i wpis `section: "Mity"` w `llms.txt`.
+  - Karty w `porady.html`, `index.html` i `mity.html` maja uzywac `data-category="mity"` / klasy badge `--mity`.
+  - Nie wolno wrzucac artykulu-mitu do `ciekawe.html`, chyba ze uzytkownik jawnie zmieni decyzje architektoniczna.
+
+- **Kolor i styl `Mity`.**
+  - Kolor kategorii: burgund/czerwien `#b4233a` z bialym tekstem.
+  - Przycisk `Czytaj` w kafelkach Czytelni ma zostac wspolny dla wszystkich kategorii; nie kolorujemy go osobno dla `Mity`.
+  - `Mity` w menu gornym zastapilo `News`; NEWS pozostaje sekcja na `index.html`, nie osobny punkt glownego menu.
+
+- **Standard tresci dla artykulu typu mit.**
+  - Ton: kumpelski, spokojny, bez wysmiewania czytelnika.
+  - Atakujemy bledna obietnice/mechanizm, nie ludzi, firmy ani konkretne osoby.
+  - Bezpieczna rama prawna: opisuj wzorzec obietnicy i dowody, nie rzucaj oskarzen typu "oszustwo" wobec konkretnego podmiotu bez twardych podstaw prawnych.
+  - Obowiazkowy rytm redakcyjny: `MIT` -> `werdykt FitPo50` -> `co mowi fizjologia/badania` -> `co dziala zamiast tego`.
+  - Dla tresci "mit vs fakt" dodawaj `ClaimReview`, jesli artykul obala konkretne popularne twierdzenie.
+
+- **JSON po publikacji.**
+  - JSON z `~/Downloads` jest tylko wsadem/draftem do pipeline; uzytkownik moze go skasowac po publikacji.
+  - Nie poprawiaj juz pliku JSON w `~/Downloads`, jesli finalny HTML zostal naprawiony i przechodzi walidacje.
+  - Nie commituj roboczych JSON-ow w `data/import/*.fitpo50.json`, jesli po imporcie blokuja `json:gate:diff` albo nie sa potrzebne do produkcji.
+  - Przed `git push` sprawdz, czy `data/import/*.fitpo50.json` nie zostawia blockerow; jesli finalny HTML jest gotowy, usun/przenies roboczy JSON z repo i dopiero pushuj.
 
 ## Ustalenia operacyjne (2026-06-18) - `popraw-seo`, huby i centra tematyczne
 
@@ -291,7 +319,7 @@
 ## Ustalenia operacyjne (2026-05-01) - szybki pipeline + twarda kontrola FAQ (SEO/AEO/GEO/AIO)
 
 - **Jedna komenda publikacyjna (szybciej, bez pomijania kontroli):**
-  - `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --force <true|false>`
+  - `node scripts/article-pipeline.js --file "<sciezka/do/pliku.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe|mity> --force <true|false>`
   - Pipeline wykonuje sekwencję:
     1) precheck,
     2) import + walidacja + PDF + sync,
@@ -486,10 +514,10 @@ Przy review sprawdzaj w pierwszej kolejnosci:
     - nie dodajemy nadmiarowych stylow inline dla layoutu i kart "Czytelnia",
     - tabelki sa dopuszczone, ale musza byc czytelne mobilnie (responsywne) i miec lekkie, spojne tlo.
 - **Kafelki kategorii i karuzele:**
-  - strony kategorii (`rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`) maja byc wizualnie i funkcjonalnie zgodne z wzorcem z `porady.html`,
+  - strony kategorii (`rusz-sie.html`, `jedzenie.html`, `zdrowie.html`, `ciekawe.html`, `mity.html`) maja byc wizualnie i funkcjonalnie zgodne z wzorcem z `porady.html`,
   - ten sam standard meta czasu czytania, CTA i paginacji `WRÓĆ/DALEJ`,
   - po zmianach w CSS/HTML pilnujemy wersjonowania assetow (`?v=`), zeby cache nie maskowal efektu.
-  - na stronie glownej (`index.html`) 4 kafelki wejscia do kategorii (Ruch/Jedzenie/Zdrowie/Ciekawe) maja stale, recznie przypisane zdjecia ilustrujace kategorie; te obrazy nie sa rotowane ani podmieniane automatycznie przez zadne skrypty (news/faq/czytelnia).
+  - na stronie glownej (`index.html`) kafelki wejscia do kategorii maja stale, recznie przypisane zdjecia ilustrujace kategorie; te obrazy nie sa rotowane ani podmieniane automatycznie przez zadne skrypty (news/faq/czytelnia).
   - tryb nocny tla na mobile (telefon): utrzymujemy spojnie na `index.html`, `o-mnie.html` i wszystkich przyszlych stronach przebudowywanych na nowym wzorcu Bento; na desktopie domyslnie zostaje jasne tlo (chyba ze zapadnie osobna decyzja).
 - **Spojnosc kolorow etykiet kategorii:**
   - mapowanie kolorow etykiet jest stale na wszystkich listach/kafelkach,
@@ -498,7 +526,8 @@ Przy review sprawdzaj w pierwszej kolejnosci:
     - `Ruch` -> `#2f6f99` (niebieski), tekst `#ffffff`,
     - `Jedzenie` -> `rgba(201, 109, 49, 0.94)`, tekst `#ffffff`,
     - `Zdrowie` -> `rgba(228, 188, 74, 0.96)`, tekst `#4e3a04`,
-    - `Ciekawe` -> `rgba(67, 149, 84, 0.94)`, tekst `#ffffff`.
+    - `Ciekawe` -> `rgba(67, 149, 84, 0.94)`, tekst `#ffffff`,
+    - `Mity` -> `#b4233a`, tekst `#ffffff`.
   - etykieta `Ruch` ma byc zawsze niebieska; nie stosujemy alternatywnych odcieni dla tej kategorii.
 - **Tryb nocny tła (kluczowa zasada UI):**
   - Ciemne oba tła (`body` + `shell`) uruchamiamy **wylacznie na telefonach komorkowych**.
@@ -1060,7 +1089,7 @@ Jesli artykul ma obrazy:
   4. `node scripts/article-preflight.js --file "<plik.fitpo50.json>" --assets-dir "<folder-z-grafikami>"`
 
 - Zalecana komenda publikacyjna (jedna komenda):
-  - `node scripts/article-pipeline.js --file "<plik.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe> --assets-dir "<folder-z-grafikami>" --force true`
+  - `node scripts/article-pipeline.js --file "<plik.fitpo50.json>" --category <ruch|jedzenie|zdrowie|ciekawe|mity> --assets-dir "<folder-z-grafikami>" --force true`
 
 - Uwaga operacyjna:
   - `article-pipeline.js` uruchamia już automatycznie `json-autofix-strict` na kopii roboczej przed `json:gate`.
@@ -1096,7 +1125,8 @@ Jesli artykul ma obrazy:
   - warning gate o roznicy miedzy `<title>` a `og:title` / `twitter:title` traktujemy jako blad do natychmiastowej naprawy.
 
 - `scripts/article-sync-pro.js` jest nowym narzędziem kanonicznym do synchronizacji SEO i listingów:
-  - źródłem prawdy są pola w `data/import/*.json`,
+  - na etapie importu/synchronizacji źródłem prawdy są pola w roboczym `data/import/*.json`,
+  - po udanej publikacji źródłem prawdy jest finalny HTML + assety + PDF + indeksy; roboczy JSON można usunąć z repo, szczególnie jeśli blokuje gate/push,
   - zalecany workflow: najpierw `--dry-run`, potem właściwy zapis,
   - unikamy ręcznej edycji tytułów, meta description, JSON-LD headline/description i tekstów kart listingowych bezpośrednio w HTML, jeśli zmiana może zostać wykonana przez ten skrypt.
 

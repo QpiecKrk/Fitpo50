@@ -12,7 +12,7 @@ function toLocalIsoDate(date = new Date()) {
 }
 
 const TODAY = toLocalIsoDate();
-const ALLOWED_CATEGORIES = new Set(['zdrowie', 'ciekawe', 'jedzenie', 'ruch']);
+const ALLOWED_CATEGORIES = new Set(['zdrowie', 'ciekawe', 'jedzenie', 'ruch', 'mity']);
 const CATEGORY_LANDING_PAGES = new Set([
   'index.html',
   'porady.html',
@@ -20,6 +20,7 @@ const CATEGORY_LANDING_PAGES = new Set([
   'jedzenie.html',
   'zdrowie.html',
   'ciekawe.html',
+  'mity.html',
   'dziennik.html',
   'o-mnie.html',
 ]);

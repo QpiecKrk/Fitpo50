@@ -12,6 +12,8 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Artykul to pojedyncza strona docelowa.
 - Obowiazuje kanoniczny standard z `ARTICLE_STANDARD.md` (bez recznych wariantow layoutu).
 - Kanoniczny flow publikacji: `scripts/import-article.js` z plikow `.fitpo50.json` (zawsze z precheck).
+- Plik `.fitpo50.json` jest wsadem roboczym do importu; po udanej publikacji finalnym zrodlem jest HTML + assety + PDF + indeksy, a JSON nie musi zostawac w repo.
+- Roboczych JSON-ow w `data/import/*.fitpo50.json` nie commitujemy, jesli finalny HTML jest gotowy i JSON blokuje `json:gate:diff`.
 - Regula importera dla "Czytelni": linki z JSON (`related_articles` / `related`) sa ignorowane; importer dobiera 3 karty tylko z lokalnie istniejacych artykulow.
 - `article-template-bento.html` / `node scripts/create-article-from-template.js ...` stosujemy tylko do recznych szkicow i materialow roboczych.
 - Przed oddaniem artykulu uruchamiamy walidator:
@@ -124,6 +126,9 @@ Szybka checklista przed oddaniem artykulu:
 
 - Na `porady.html` utrzymujemy stabilny uklad karuzeli/paginacji.
 - Karty kategorii musza byc spojne wizualnie.
+- Kategorie artykulow na `porady.html`: `ruch`, `jedzenie`, `zdrowie`, `ciekawe`, `mity`.
+- `Mity` to osobna kategoria i osobna strona `mity.html`; nie publikujemy artykulow-mitow jako `ciekawe`, jesli intencja jest obalenie konkretnego twierdzenia.
+- Badge/kategoria `Mity` uzywa burgundu `#b4233a` z bialym tekstem; przycisk `Czytaj` zostaje wspolny wizualnie z innymi kategoriami.
 - Nie uzywamy `scrollIntoView()` pod nawigacja karuzeli.
 - Dla Safari pilnujemy `min-width: 0` na kluczowych kontenerach/gridach.
 - Przy przebudowie kolejnych stron kategorii na wzorzec nowego `index.html` utrzymujemy ta sama zasade nocnego tla:
@@ -140,7 +145,7 @@ Szybka checklista przed oddaniem artykulu:
 ## Aktualizacja przy nowym artykule
 
 - Aktualizacja przy nowym artykule:
-  - odpowiednia strona kategorii (Ruch/Jedzenie/Zdrowie/Ciekawe),
+  - odpowiednia strona kategorii (Ruch/Jedzenie/Zdrowie/Ciekawe/Mity),
   - `porady.html`,
   - PDF artykulu (`assets/pdf/<slug>.pdf`) + przycisk pobierania na hero z aktualnym rozmiarem pliku w KB,
   - `sitemap.xml`,
@@ -174,3 +179,11 @@ Szybka checklista przed oddaniem artykulu:
   - URL obecny w `sitemap.xml`,
   - nowy wpis wskakuje do sekcji "Nowy artykul" na `index.html`,
   - source i `_site` sa zsynchronizowane 1:1.
+
+## Artykuly z kategorii `Mity`
+
+- Artykul typu mit ma obalac konkretne twierdzenie lub mechanizm, nie osobe, firme ani czytelnika.
+- Obowiazkowy rytm: `MIT` -> krotki `werdykt FitPo50` -> dowody/fizjologia -> praktyczne `co dziala zamiast tego`.
+- Ton ma byc kumpelski: "sprawdzamy to spokojnie", bez zawstydzania i bez tabloidu.
+- Jesli tekst obala popularne twierdzenie, dodaj `ClaimReview` i trzymaj `reviewRating` spojnie z wzorcem mitu falszywego.
+- W `llms.txt` i schema artykul ma miec sekcje `Mity`, nie `Ciekawe`.

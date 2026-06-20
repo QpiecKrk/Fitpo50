@@ -154,6 +154,7 @@ const hubs = [
       text: 'Centralny przewodnik po brzuchu, który łączy dietę, ruch i stres.',
     },
     articles: [
+      ['MIT: metabolizm po 50', 'mit-metabolizm-po-50-zwalnia-tycie.html', 'mit/fakty'],
       ['Tłuszcz trzewny', 'tluszcz-trzewny-choroby-jak-walczyc.html', 'ryzyko'],
       ['Jak obniżyć kortyzol', 'jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html', 'stres'],
       ['Ukryty cukier po 50', 'ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html', 'jedzenie'],
