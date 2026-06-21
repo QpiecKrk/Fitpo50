@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/mit-metabolizm-po-50-hero.avif" type="image/avif">
-          <source srcset="./assets/mit-metabolizm-po-50-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/mit-metabolizm-po-50-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/detoks-sokowy-hero.avif" type="image/avif">
+          <source srcset="./assets/detoks-sokowy-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/detoks-sokowy-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">MIT: Po 50-tce metabolizm gwałtownie zwalnia i dlatego się tyje</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy metabolizm po 50-tce naprawdę gwałtownie zwalnia? Sprawdzamy badania naukowe i pokazujemy, dlaczego waga rośnie z zupełnie innego powodu niż wiek.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="mit-metabolizm-po-50-zwalnia-tycie.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">MIT: Detoks sokowy po 50-tce oczyszcza wątrobę i jelita</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Detoks sokowy nie oczyszcza wątroby ani jelit po 50-tce. Sprawdź, co robi organizm, co dzieje się z mięśniami i jak rozsądnie zadbać o wątrobę po 50.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="detoks-sokowy-po-50-mit.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'MIT: Po 50-tce metabolizm gwałtownie zwalnia i dlatego się tyje',
-        excerpt: 'Czy metabolizm po 50-tce naprawdę gwałtownie zwalnia? Sprawdzamy badania naukowe i pokazujemy, dlaczego waga rośnie z zupełnie innego powodu niż wiek.',
-        image: './assets/mit-metabolizm-po-50-hero.webp',
-        url: 'mit-metabolizm-po-50-zwalnia-tycie.html'
+        title: 'MIT: Detoks sokowy po 50-tce oczyszcza wątrobę i jelita',
+        excerpt: 'Detoks sokowy nie oczyszcza wątroby ani jelit po 50-tce. Sprawdź, co robi organizm, co dzieje się z mięśniami i jak rozsądnie zadbać o wątrobę po 50.',
+        image: './assets/detoks-sokowy-hero.webp',
+        url: 'detoks-sokowy-po-50-mit.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2544,6 +2544,13 @@
       const fallback = [
         {
           category: 'Mity',
+          title: 'MIT: Detoks sokowy po 50-tce oczyszcza wątrobę i jelita',
+          excerpt: 'Detoks sokowy nie oczyszcza wątroby ani jelit po 50-tce. Sprawdź, co robi organizm, co dzieje się z mięśniami i jak rozsądnie zadbać o wątrobę po 50.',
+          image: './assets/detoks-sokowy-hero.webp',
+          url: 'detoks-sokowy-po-50-mit.html'
+        },
+        {
+          category: 'Mity',
           title: 'MIT: Po 50-tce metabolizm gwałtownie zwalnia i dlatego się tyje',
           excerpt: 'Czy metabolizm po 50-tce naprawdę gwałtownie zwalnia? Sprawdzamy badania naukowe i pokazujemy, dlaczego waga rośnie z zupełnie innego powodu niż wiek.',
           image: './assets/mit-metabolizm-po-50-hero.webp',
@@ -2555,13 +2562,6 @@
           excerpt: 'Czy zablokowana powięź tworzy oponkę i blokuje spalanie tłuszczu z brzucha? Sprawdzamy twarde dowody i pokazujemy spokojnie, co naprawdę działa po 50-tce.',
           image: './assets/oponka-zablokowana-powiez-hero.webp',
           url: 'oponka-zablokowana-powiez.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Optymalizacja snu po 50.: jak przestać budzić się o 3 w nocy',
-          excerpt: 'Budzisz się o 3 w nocy po 50. roku życia? Sprawdź melatoninę, CBT-I, temperaturę sypialni, stres, kofeinę i objawy bezdechu sennego krok po kroku.',
-          image: './assets/optymalizacja-snu-po50-hero.webp',
-          url: 'optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

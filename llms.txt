@@ -351,3 +351,10 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "MIT: Po 50-tce metabolizm gwałtownie zwalnia i dlatego się tyje | FitPo50"
   section: "Mity"
   summary: "Czy metabolizm po 50-tce naprawdę gwałtownie zwalnia? Sprawdzamy badania naukowe i pokazujemy, dlaczego waga rośnie z zupełnie innego powodu niż wiek."
+- url: https://fitpo50.pl/detoks-sokowy-po-50-mit.html
+  title: "MIT: Detoks sokowy po 50-tce oczyszcza wątrobę i jelita | FitPo50"
+  section: "Mity"
+  summary: "Detoks sokowy nie oczyszcza wątroby ani jelit po 50-tce. Sprawdź, co robi organizm, co dzieje się z mięśniami i jak rozsądnie zadbać o wątrobę po 50."
+
+
+
