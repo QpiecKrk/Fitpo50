@@ -359,4 +359,11 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Czy kawa odwadnia i wypłukuje magnez? Fakty i mity po 50-tce | FitPo50"
   section: "Mity"
   summary: "Czy kawa odwadnia i wypłukuje magnez tak, że po 50-tce trzeba ją mocno ograniczyć? Sprawdzamy, co naprawdę mówią badania o nawodnieniu i mineralach."
-
+- url: https://fitpo50.pl/dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html
+  title: "Dieta keto po 50: cholesterol, LDL i bezpieczeństwo | FitPo50"
+  section: "Jedzenie"
+  summary: "Dieta keto może poprawiać część markerów metabolicznych, ale u niektórych osób podnosi LDL-C i ApoB. Sprawdź badania kontrolne i zasady bezpieczeństwa."
+- url: https://fitpo50.pl/wydolnosc-vo2max-starzenie-po-50.html
+  title: "Wydolność po 50: VO2 max mówi o Twoim starzeniu więcej niż obwód pasa | FitPo50"
+  section: "Zdrowie"
+  summary: "VO2 max pokazuje wydolność tlenową i pomaga oceniać sprawność po 50-tce. Sprawdź, jak go mierzyć i poprawiać dzięki rozsądnemu treningowi."
