@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-06-21T14:29:45.908Z",
+  "updated_at": "2026-06-21T15:05:37.210Z",
   "records": [
     {
       "scope": "prepush-local",
@@ -4028,6 +4028,37 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 78
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-21T15:05:37.210Z",
+      "total_ms": 2095,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 49
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1534
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 450
+        },
+        {
+          "tag": "build",
+          "durationMs": 327
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 46
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 62
         }
       ]
     }
