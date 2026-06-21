@@ -16,12 +16,12 @@ const hubs = [
     accentSoft: '#fff1e6',
     promise: 'Najpierw uczysz ciało ruchu, potem dokładamy obciążenie. Bez bohaterstwa, bez chaosu i bez gonienia planów z internetu.',
     focus: 'Od pierwszej wizyty do sensownej progresji',
-    focusLead: 'Ścieżka prowadzi od maszyn i prostych zasad do siły, postawy i regularności.',
+    focusLead: 'Zacznij od maszyn i prostych zasad, potem przejdź do siły, postawy i regularnej progresji.',
     steps: ['Start bez bólu', 'Maszyny i technika', 'Progresja ciężaru', 'Regeneracja'],
     featured: {
       title: 'Jak zacząć na siłowni po 50?',
       url: 'jak-zaczac-na-silowni-po-50.html',
-      text: 'Najlepszy punkt wejścia, jeśli ktoś wraca po latach albo zaczyna od zera.',
+      text: 'Zobacz, jak bezpiecznie wrócić do ćwiczeń po latach albo zacząć od zera.',
     },
     articles: [
       ['Trening maszynowy po 50', 'trening-maszynowy-po-50.html', 'plan 30 dni'],
@@ -30,7 +30,7 @@ const hubs = [
       ['Trening 3x30 po 50', 'trening-3x30-dla-50-plus.html', 'minimum skuteczne'],
       ['Trening siłowy chroni serce', 'silownia-chroni-serce-przed-zawalem.html', 'serce'],
     ],
-    assets: ['Plan startowy: od maszyn do wolnych ciężarów', 'Mapa błędów: ćwiczenie → sygnał ostrzegawczy → korekta', 'Prosty schemat: kiedy zwiększyć obciążenie'],
+    assets: ['Jak zacząć od maszyn i przejść do wolnych ciężarów', 'Jak rozpoznać sygnał ostrzegawczy i skorygować ćwiczenie', 'Kiedy zwiększyć obciążenie, a kiedy zostać przy obecnym'],
   },
   {
     file: 'centrum-bialka-po-50.html',
@@ -42,12 +42,12 @@ const hubs = [
     accentSoft: '#fff3df',
     promise: 'Nie chodzi o kult odżywki. Chodzi o proste porcje białka, które pomagają utrzymać mięśnie, sytość i siłę.',
     focus: 'Od dziennej dawki do talerza',
-    focusLead: 'Czytelnik ma szybko zrozumieć ile, kiedy i z czego zjeść białko.',
+    focusLead: 'Sprawdź, ile białka potrzebujesz, jak rozłożyć je w ciągu dnia i z jakich produktów najłatwiej je dostarczyć.',
     steps: ['Ile gramów?', 'Porcja na posiłek', 'Produkty', 'WPC czy WPI'],
     featured: {
       title: 'Ile białka po 50 roku życia?',
       url: 'ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html',
-      text: 'Główny przewodnik po dawkowaniu, talerzu i odżywkach bez przesady.',
+      text: 'Sprawdź dzienny zakres, porcje na talerzu i rozsądne zastosowanie odżywek.',
     },
     articles: [
       ['Kreatyna i białko po 50', 'kreatyna-i-bialko-po-50-tce-jak-laczyc.html', 'łączenie'],
@@ -56,7 +56,7 @@ const hubs = [
       ['Jedz więcej po 50', 'jedz-wiecej-po-50.html', 'energia'],
       ['Suplementy po 50', 'suplementy-po-50-tce-kompletny-przewodnik.html', 'wybór'],
     ],
-    assets: ['Translator porcji: produkty → gramy białka', 'Kalkulator dawki według masy ciała', 'Schemat rozłożenia białka w ciągu dnia'],
+    assets: ['Jak przeliczyć produkty na gramy białka', 'Jak oszacować dzienny zakres według masy ciała', 'Jak rozłożyć białko między posiłki'],
   },
   {
     file: 'centrum-snu-po-50.html',
@@ -68,7 +68,7 @@ const hubs = [
     accentSoft: '#edf1ff',
     promise: 'Najpierw ustalamy, dlaczego sen się sypie. Dopiero potem dobieramy spokojne, mierzalne zmiany.',
     focus: 'Od pobudek nocnych do regeneracji',
-    focusLead: 'Ścieżka pomaga odróżnić higienę snu od sygnałów, z którymi warto iść do lekarza.',
+    focusLead: 'Sprawdź, co możesz poprawić samodzielnie i które objawy warto omówić z lekarzem.',
     steps: ['Pobudki nocne', 'Rytm dobowy', 'Bezdech i sygnały', 'Regeneracja'],
     featured: {
       title: 'Optymalizacja snu po 50',
@@ -82,7 +82,7 @@ const hubs = [
       ['Kolagen po 50', 'kolagen-suplementacja-po-50.html', 'regeneracja'],
       ['Komórki zombie i senoliza', 'komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html', 'starzenie'],
     ],
-    assets: ['Checklista wieczornej rutyny', 'Mapa pobudek nocnych: objaw → możliwa przyczyna → pierwszy krok', 'Plan 7 spokojniejszych nocy'],
+    assets: ['Jak uporządkować wieczorną rutynę', 'Co może stać za nocnymi pobudkami', 'Od jakiej jednej zmiany zacząć poprawę snu'],
   },
   {
     file: 'centrum-nadcisnienia-po-50.html',
@@ -92,14 +92,14 @@ const hubs = [
     icon: '🫀',
     accent: '#d85d5d',
     accentSoft: '#fff0f0',
-    promise: 'To centrum ma porządkować decyzje: co mierzyć, co zmienić w stylu życia i kiedy nie zwlekać z lekarzem.',
+    promise: 'Uporządkuj domowe pomiary, zmiany stylu życia i sygnały, przy których nie warto zwlekać z lekarzem.',
     focus: 'Od pomiaru do planu działania',
-    focusLead: 'Czytelnik dostaje spokojną mapę: pomiar, żywienie, ruch, sygnały alarmowe.',
+    focusLead: 'Przejdź spokojnie od prawidłowego pomiaru przez żywienie i ruch do sygnałów alarmowych.',
     steps: ['Pomiar', 'Naczynia', 'DASH', 'Ruch'],
     featured: {
       title: 'Nadciśnienie i elastyczność naczyń',
       url: 'nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn.html',
-      text: 'Nowy przewodnik o tym, jak naczynia, dieta i ruch wpływają na ciśnienie po 50.',
+      text: 'Zobacz, jak stan naczyń, dieta i ruch wpływają na ciśnienie po 50-tce.',
     },
     articles: [
       ['Trening siłowy przy ciśnieniu', 'trening-silowy-po-50-cisnienie-plan-8-tygodni.html', 'plan'],
@@ -108,7 +108,7 @@ const hubs = [
       ['Tłuszcz trzewny', 'tluszcz-trzewny-choroby-jak-walczyc.html', 'ryzyko'],
       ['Badania po 50', 'badania-po-50.html', 'kontrola'],
     ],
-    assets: ['Karta domowych pomiarów ciśnienia', 'Tabela: wynik → znaczenie → następny krok', 'Lista pytań na wizytę lekarską'],
+    assets: ['Jak prawidłowo prowadzić domowe pomiary ciśnienia', 'Jak połączyć wynik z rozsądnym następnym krokiem', 'Jak przygotować pytania na wizytę lekarską'],
   },
   {
     file: 'centrum-cholesterolu-po-50.html',
@@ -120,12 +120,12 @@ const hubs = [
     accentSoft: '#eff8ea',
     promise: 'Nie gonimy jednego wyniku. Układamy badania w sensowny obraz ryzyka, pytań i kolejnych kroków.',
     focus: 'Od wyniku do dobrego pytania',
-    focusLead: 'Centrum ma pomóc czytelnikowi rozumieć lipidogram, ApoB i kontekst metaboliczny.',
+    focusLead: 'Zobacz, jak łączyć lipidogram, ApoB i kontekst metaboliczny w jeden czytelny obraz.',
     steps: ['Lipidogram', 'ApoB/ApoA1', 'Ryzyko', 'Pytania'],
     featured: {
       title: 'ApoB i ApoA1 po 50',
       url: 'apob-apoa-badania-cholesterol.html',
-      text: 'Najważniejszy tekst w klastrze: porządkuje markery, które często mówią więcej niż sam LDL.',
+      text: 'Ten przewodnik porządkuje markery, które często pokazują więcej niż sam wynik LDL-C.',
     },
     articles: [
       ['ApoB norma, cena i wynik', 'apob-norma-cena-jak-czytac-wynik.html', 'interpretacja'],
@@ -134,7 +134,7 @@ const hubs = [
       ['Badania krwi po 50', 'badania-krwi-po-50-jak-czesto.html', 'częstotliwość'],
       ['Dieta przeciwzapalna', 'dieta-przeciwzapalna-po-50-produkty-jadlospis.html', 'styl życia'],
     ],
-    assets: ['Tabela interpretacji lipidogramu', 'Ściąga: ApoB, ApoA1 i LDL bez chaosu', 'Lista pytań do omówienia z lekarzem'],
+    assets: ['Jak czytać lipidogram w szerszym kontekście', 'Jak odróżnić ApoB, ApoA1 i LDL-C', 'Jak przygotować pytania do omówienia z lekarzem'],
   },
   {
     file: 'centrum-metabolizmu-po-50.html',
@@ -146,12 +146,12 @@ const hubs = [
     accentSoft: '#fff0e8',
     promise: 'Tu nie chodzi o cudowny trik. Chodzi o rozpoznanie, czy problemem jest ruch, sen, stres, jedzenie czy ich miks.',
     focus: 'Od obwodu pasa do nawyków',
-    focusLead: 'Czytelnik ma dostać praktyczną mapę przyczyn, a nie kolejną listę zakazów.',
+    focusLead: 'Sprawdź możliwe przyczyny rosnącego obwodu pasa bez dokładania kolejnej listy zakazów.',
     steps: ['Tłuszcz trzewny', 'Kortyzol', 'Cukier', 'Nawyki'],
     featured: {
       title: 'Jak pozbyć się oponki po 50?',
       url: 'jak-pozbyc-sie-oponki-brzusznej-po-50.html',
-      text: 'Centralny przewodnik po brzuchu, który łączy dietę, ruch i stres.',
+      text: 'Zobacz, jak połączyć dietę, ruch i stres w rozsądny plan zmniejszania obwodu pasa.',
     },
     articles: [
       ['MIT: metabolizm po 50', 'mit-metabolizm-po-50-zwalnia-tycie.html', 'mit/fakty'],
@@ -161,7 +161,7 @@ const hubs = [
       ['Post przerywany po 50', 'post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html', 'strategia'],
       ['Waga smart i skład ciała', 'waga-smart-pomiar-skladu-ciala-prawda.html', 'pomiar'],
     ],
-    assets: ['Checklista obwodu pasa i prostych pomiarów', 'Mapa: przyczyna → co sprawdzić → co zmienić', 'Plan 14 dni prostych nawyków'],
+    assets: ['Jak prawidłowo mierzyć obwód pasa', 'Jak przejść od możliwej przyczyny do konkretnej zmiany', 'Jak wybrać prosty nawyk na najbliższe 14 dni'],
   },
 ];
 
@@ -282,7 +282,7 @@ ${renderHeader()}
           <p class="hub-hero__lead">${escapeHtml(hub.description)}</p>
           <div class="hub-promise">${escapeHtml(hub.promise)}</div>
           <div class="hub-actions">
-            <a class="hub-btn" href="#najwazniejsze-artykuly">Zobacz ścieżkę</a>
+            <a class="hub-btn" href="#najwazniejsze-artykuly">Przejdź do artykułów</a>
             <a class="hub-btn hub-btn--secondary" href="index.html#centra-tematyczne">Wróć do centrów</a>
           </div>
         </div>
@@ -293,16 +293,16 @@ ${renderHeader()}
             <span>${escapeHtml(hub.focusLead)}</span>
           </div>
           <div class="hub-metrics">
-            <div class="hub-metric"><strong>${hub.articles.length + 1}</strong><span>artykułów w ścieżce</span></div>
-            <div class="hub-metric"><strong>${hub.assets.length}</strong><span>praktyczne narzędzia</span></div>
+            <div class="hub-metric"><strong>${hub.articles.length + 1}</strong><span>artykułów w centrum</span></div>
+            <div class="hub-metric"><strong>${hub.assets.length}</strong><span>praktyczne pytania</span></div>
           </div>
         </aside>
       </section>
       <section class="hub-section" aria-labelledby="sciezka-title">
         <div class="hub-section__head">
           <div>
-            <h2 id="sciezka-title">Jak czytać to centrum?</h2>
-            <p>To nie jest przypadkowa lista linków. To kolejność, która pomaga wejść w temat od podstaw do decyzji praktycznych.</p>
+            <h2 id="sciezka-title">Od czego zacząć?</h2>
+            <p>Przejdź przez temat po kolei: od podstaw i pomiarów do praktycznych decyzji, które możesz zastosować w swoim życiu.</p>
           </div>
         </div>
         <div class="hub-path">
@@ -321,12 +321,12 @@ ${articleLinks}
           </div>
         </div>
         <aside class="hub-side-card">
-          <h3>Praktyczne narzędzia</h3>
-          <p class="hub-side-card__lead">Krótkie ściągi i mapy decyzji, które pomagają przejść od czytania do działania.</p>
+          <h3>W praktyce</h3>
+          <p class="hub-side-card__lead">Najważniejsze pytania, które uporządkujesz dzięki materiałom z tego centrum.</p>
           <ul class="hub-asset-list">
 ${assets}
           </ul>
-          <div class="hub-note"><strong>Jak korzystać:</strong> zacznij od artykułu startowego, potem wybierz jeden problem z listy i przejdź do tekstu szczegółowego.</div>
+          <div class="hub-note"><strong>Prosty start:</strong> najpierw przeczytaj materiał oznaczony „Start tutaj”. Potem wybierz z listy temat, który chcesz pogłębić.</div>
           <div class="hub-actions">
             <a class="hub-btn" href="index.html#centra-tematyczne">Wróć do centrów</a>
             <a class="hub-btn hub-btn--secondary" href="porady.html">Czytelnia</a>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+  <title>Kalkulator białka po 50-tce | Narzędzia FitPo50</title>
+  <meta name="description" content="Oblicz orientacyjny dzienny zakres białka po 50-tce oraz porcję na posiłek zależnie od masy ciała, aktywności i celu.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://fitpo50.pl/kalkulator-bialka-po-50.html">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css?v=1.4">
+  <link rel="stylesheet" href="./assets/footer.css?v=1">
+  <link rel="stylesheet" href="./assets/tools-hub.css?v=1">
+  <link rel="stylesheet" href="./assets/protein-calculator.css?v=1">
+  <link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
+  <script>
+    (function () {
+      try {
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var isPhone = window.matchMedia && (window.matchMedia("(max-width: 820px)").matches || window.matchMedia("(hover: none) and (pointer: coarse)").matches);
+        var hour = new Date().getHours();
+        var isNight = hour >= 19 || hour < 7;
+        if (prefersDark || (isPhone && isNight)) document.documentElement.classList.add("night-shell");
+      } catch (_) {}
+    })();
+  </script>
+</head>
+<body class="tools-page calculator-page">
+  <div class="tools-shell">
+    <header class="tools-topbar">
+      <a class="tools-brand" href="index.html" aria-label="FitPo50 — strona główna">
+        <img class="tools-brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="112" height="112" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
+        <span class="tools-brand__text"><span class="tools-brand__name">FitPo50</span><span class="tools-brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span></span>
+      </a>
+      <a class="calculator-back" href="narzedzia.html">← Wszystkie narzędzia</a>
+    </header>
+
+    <main>
+      <section class="calculator-hero" aria-labelledby="calculator-title">
+        <div class="calculator-hero__copy">
+          <span class="tools-kicker">Kalkulator · wersja robocza</span>
+          <h1 id="calculator-title">Ile białka potrzebujesz po 50-tce?</h1>
+          <p>Podaj masę ciała, poziom aktywności i cel. Otrzymasz orientacyjny zakres dzienny oraz prosty podział na posiłki — bez udawanej precyzji do jednego grama.</p>
+        </div>
+        <div class="calculator-hero__mark" aria-hidden="true"><span>🥚</span><strong>1,0–1,6</strong><small>g/kg masy ciała</small></div>
+      </section>
+
+      <section class="calculator-workspace" aria-label="Kalkulator zapotrzebowania na białko">
+        <form class="calculator-form" data-protein-form novalidate>
+          <div class="calculator-form__head">
+            <h2>Podaj swoje dane</h2>
+            <p>Obliczenie odbywa się lokalnie. Żadne dane nie opuszczają tej strony.</p>
+          </div>
+
+          <label class="calculator-field">
+            <span class="calculator-field__label"><i>1</i>Masa ciała używana do obliczeń</span>
+            <span class="calculator-input-wrap"><input type="number" name="weight" min="40" max="250" step="0.1" inputmode="decimal" placeholder="np. 78" required><b>kg</b></span>
+            <small>Przy znacznej niedowadze lub otyłości właściwa masa do obliczeń może wymagać ustalenia z dietetykiem.</small>
+          </label>
+
+          <label class="calculator-field">
+            <span class="calculator-field__label"><i>2</i>Aktywność w typowym tygodniu</span>
+            <select name="activity" required>
+              <option value="">Wybierz aktywność</option>
+              <option value="low">Mała — głównie siedzący tryb życia</option>
+              <option value="regular">Regularna — spacery lub lekki ruch 2–4 razy w tygodniu</option>
+              <option value="strength">Trening siłowy lub intensywniejszy ruch 2–4 razy w tygodniu</option>
+            </select>
+          </label>
+
+          <label class="calculator-field">
+            <span class="calculator-field__label"><i>3</i>Główny cel</span>
+            <select name="goal" required>
+              <option value="">Wybierz cel</option>
+              <option value="maintain">Utrzymanie zdrowia i sprawności</option>
+              <option value="muscle">Budowa lub odbudowa mięśni</option>
+              <option value="reduction">Redukcja masy z ochroną mięśni</option>
+            </select>
+          </label>
+
+          <label class="calculator-field">
+            <span class="calculator-field__label"><i>4</i>Liczba głównych posiłków</span>
+            <select name="meals" required>
+              <option value="3">3 posiłki</option>
+              <option value="4" selected>4 posiłki</option>
+              <option value="5">5 posiłków</option>
+            </select>
+          </label>
+
+          <label class="calculator-safety-check">
+            <input type="checkbox" name="kidney">
+            <span><strong>Mam przewlekłą chorobę nerek albo zalecono mi ograniczenie białka.</strong><small>W takim przypadku standardowy kalkulator nie powinien ustalać ilości białka.</small></span>
+          </label>
+
+          <p class="calculator-error" data-protein-error role="alert" hidden></p>
+          <button class="calculator-submit" type="submit">Oblicz mój zakres <span>→</span></button>
+        </form>
+
+        <section class="calculator-result" data-protein-result aria-live="polite" aria-labelledby="result-title">
+          <div class="calculator-result__empty" data-protein-empty>
+            <span aria-hidden="true">↗</span>
+            <h2 id="result-title">Tutaj pojawi się Twój wynik</h2>
+            <p>Nie pokazujemy jednej sztywnej liczby. Zakres lepiej oddaje różnice między dniami, produktami i odpowiedzią organizmu.</p>
+          </div>
+
+          <div class="calculator-result__content" data-protein-content hidden>
+            <span class="calculator-result__eyebrow">Twój orientacyjny zakres</span>
+            <div class="calculator-result__number"><strong data-daily-range>—</strong><span>g białka dziennie</span></div>
+            <div class="calculator-result__grid">
+              <div><small>Zakres na kilogram</small><strong data-factor-range>—</strong></div>
+              <div><small>Na jeden posiłek</small><strong data-meal-range>—</strong></div>
+            </div>
+            <div class="calculator-result__explanation">
+              <h3>Jak czytać wynik?</h3>
+              <p data-result-explanation></p>
+            </div>
+            <div class="calculator-result__next">
+              <h3>Najprostszy następny krok</h3>
+              <p data-result-next-step></p>
+            </div>
+          </div>
+
+          <div class="calculator-result__blocked" data-protein-blocked hidden>
+            <span aria-hidden="true">🛡️</span>
+            <h2>Potrzebujesz indywidualnego zakresu</h2>
+            <p>Przy przewlekłej chorobie nerek albo zaleconym ograniczeniu białka wynik zależy między innymi od funkcji nerek, leczenia i stanu odżywienia. Omów ilość białka z lekarzem lub dietetykiem klinicznym.</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="calculator-method" aria-labelledby="method-title">
+        <div><span class="tools-section-kicker">Jak to liczymy?</span><h2 id="method-title">Zakres, nie wyrok</h2></div>
+        <div class="calculator-method__content">
+          <p>Punktem wyjścia jest zakres 1,0–1,2 g/kg dla osoby po 50-tce. Regularny ruch, trening siłowy, redukcja masy albo budowanie mięśni przesuwają go do 1,2–1,6 g/kg. Wynik mnożymy przez podaną masę ciała, a następnie dzielimy przez liczbę posiłków.</p>
+          <p>Kalkulator nie uwzględnia wyników badań, chorób przewlekłych, niedowagi, znacznej otyłości ani zaleceń związanych z leczeniem.</p>
+        </div>
+      </section>
+
+      <section class="calculator-links" aria-labelledby="learn-title">
+        <div><span class="tools-section-kicker">Czytaj dalej</span><h2 id="learn-title">Od wyniku do talerza</h2></div>
+        <div class="calculator-links__grid">
+          <a href="ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html"><strong>Ile białka po 50-tce?</strong><span>Normy, produkty i odżywki WPC/WPI →</span></a>
+          <a href="centrum-bialka-po-50.html"><strong>Centrum Białka po 50</strong><span>Cała ścieżka tematyczna →</span></a>
+          <a href="kreatyna-i-bialko-po-50-tce-jak-laczyc.html"><strong>Kreatyna i białko</strong><span>Jak rozsądnie je łączyć →</span></a>
+        </div>
+      </section>
+
+      <section class="tools-safety" aria-labelledby="safety-title">
+        <div><span aria-hidden="true">🛡️</span></div>
+        <div><h2 id="safety-title">Wynik ma charakter edukacyjny</h2><p>Nie zastępuje konsultacji, diagnozy ani indywidualnego planu żywienia. Skonsultuj ilość białka przy chorobach nerek, wątroby, zaburzeniach odżywiania, znacznej niedowadze lub podczas leczenia wymagającego specjalnej diety.</p></div>
+      </section>
+    </main>
+
+    <footer class="site-footer-bento" aria-label="Stopka FitPo50">
+      <div class="site-footer-bento__grid">
+        <section class="site-footer-bento__card" aria-label="O serwisie FitPo50"><div class="site-footer-bento__brand"><img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'"><div><h2 class="site-footer-bento__title">FitPo50.pl</h2><p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce.</p></div></div></section>
+        <section class="site-footer-bento__card"><h3 class="site-footer-bento__links-title">Narzędzia FitPo50</h3><p class="site-footer-bento__lead"><a href="narzedzia.html">Wróć do katalogu narzędzi</a></p></section>
+      </div>
+      <div class="site-footer-bento__bottom"><p class="site-footer-bento__copy">© 2026 FitPo50</p><p class="site-footer-bento__note">Treści mają charakter edukacyjny i informacyjny.</p></div>
+    </footer>
+  </div>
+  <script src="./dist/protein-calculator.js?v=1" defer></script>
+</body>
+</html>
