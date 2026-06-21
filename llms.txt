@@ -355,6 +355,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "MIT: Detoks sokowy po 50-tce oczyszcza wątrobę i jelita | FitPo50"
   section: "Mity"
   summary: "Detoks sokowy nie oczyszcza wątroby ani jelit po 50-tce. Sprawdź, co robi organizm, co dzieje się z mięśniami i jak rozsądnie zadbać o wątrobę po 50."
-
-
+- url: https://fitpo50.pl/czy-kawa-odwadnia-i-wyplukuje-magnez.html
+  title: "Czy kawa odwadnia i wypłukuje magnez? Fakty i mity po 50-tce | FitPo50"
+  section: "Mity"
+  summary: "Czy kawa odwadnia i wypłukuje magnez tak, że po 50-tce trzeba ją mocno ograniczyć? Sprawdzamy, co naprawdę mówią badania o nawodnieniu i mineralach."
 
