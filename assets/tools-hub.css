@@ -239,6 +239,15 @@ body.tools-page {
   color: var(--tools-green);
 }
 
+.tools-jump a:nth-child(1) { border-left: 4px solid #6b9f58; }
+.tools-jump a:nth-child(2) { border-left: 4px solid #5577d8; }
+.tools-jump a:nth-child(3) { border-left: 4px solid #d98934; }
+.tools-jump a:nth-child(4) { border-left: 4px solid #c96c3f; }
+.tools-jump a:nth-child(1) span { color: #4f823d; }
+.tools-jump a:nth-child(2) span { color: #4966bd; }
+.tools-jump a:nth-child(3) span { color: #a86420; }
+.tools-jump a:nth-child(4) span { color: #a95631; }
+
 .tools-roadmap {
   display: grid;
   grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
@@ -295,6 +304,62 @@ body.tools-page {
   margin-top: 18px;
   padding: clamp(28px, 5vw, 58px);
   background: rgba(255,255,255,0.7);
+}
+
+#kalkulatory {
+  border-top: 5px solid #6b9f58;
+  background:
+    radial-gradient(circle at 96% 2%, rgba(107,159,88,0.16), transparent 22rem),
+    linear-gradient(145deg, rgba(247,252,244,0.96), rgba(238,247,233,0.88));
+}
+
+#tabele {
+  border-top: 5px solid #5577d8;
+  background:
+    radial-gradient(circle at 96% 2%, rgba(85,119,216,0.14), transparent 22rem),
+    linear-gradient(145deg, rgba(248,250,255,0.96), rgba(237,241,255,0.88));
+}
+
+#checklisty {
+  border-top: 5px solid #d98934;
+  background:
+    radial-gradient(circle at 96% 2%, rgba(217,137,52,0.14), transparent 22rem),
+    linear-gradient(145deg, rgba(255,252,245,0.96), rgba(255,243,223,0.9));
+}
+
+#pdf {
+  border-top: 5px solid #c96c3f;
+  background:
+    radial-gradient(circle at 96% 2%, rgba(201,108,63,0.14), transparent 22rem),
+    linear-gradient(145deg, rgba(255,250,247,0.96), rgba(255,240,232,0.9));
+}
+
+#kalkulatory .tools-section-kicker,
+#tabele .tools-section-kicker,
+#checklisty .tools-section-kicker,
+#pdf .tools-section-kicker {
+  padding: 7px 10px;
+  border-radius: 999px;
+}
+
+#kalkulatory .tools-section-kicker {
+  color: #3f7132;
+  background: rgba(107,159,88,0.14);
+}
+
+#tabele .tools-section-kicker {
+  color: #3d59aa;
+  background: rgba(85,119,216,0.13);
+}
+
+#checklisty .tools-section-kicker {
+  color: #9a5b19;
+  background: rgba(217,137,52,0.14);
+}
+
+#pdf .tools-section-kicker {
+  color: #934a28;
+  background: rgba(201,108,63,0.14);
 }
 
 .tools-section-head {
@@ -584,9 +649,15 @@ html.night-shell body.tools-page {
 
 html.night-shell .tools-topbar,
 html.night-shell .tools-hero__copy,
-html.night-shell .tools-collection,
 html.night-shell .tools-jump a {
   background: rgba(24, 34, 27, 0.88);
+}
+
+html.night-shell #kalkulatory,
+html.night-shell #tabele,
+html.night-shell #checklisty,
+html.night-shell #pdf {
+  background: rgba(24, 34, 27, 0.92);
 }
 
 html.night-shell .tools-roadmap {

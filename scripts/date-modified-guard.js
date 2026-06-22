@@ -32,6 +32,7 @@ function isArticleHtml(file) {
     'ciekawe.html',
     'o-mnie.html',
     'kontakt.html',
+    'narzedzia.html',
   ]);
   return !blocked.has(normalized);
 }

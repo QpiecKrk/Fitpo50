@@ -421,6 +421,170 @@
   font: 400 0.78rem/1.4 "Work Sans", sans-serif;
 }
 
+/* Premium protein calculator visual language */
+body.calculator-page {
+  --protein-navy: #162b38;
+  --protein-sage: #668477;
+  --protein-gold: #b58a43;
+  --protein-ivory: #f3f0e8;
+  background:
+    radial-gradient(circle at 5% 0, rgba(181,138,67,0.13), transparent 28rem),
+    radial-gradient(circle at 98% 25%, rgba(102,132,119,0.15), transparent 30rem),
+    var(--protein-ivory);
+}
+
+.calculator-page .tools-topbar {
+  border-radius: 22px;
+  background: rgba(251,250,246,0.84);
+}
+
+.calculator-page .calculator-back {
+  color: var(--protein-navy);
+  background: rgba(255,255,255,0.82);
+}
+
+.calculator-page .calculator-hero__copy {
+  border-top: 4px solid var(--protein-gold);
+  background: linear-gradient(145deg, rgba(251,250,246,0.97), rgba(245,244,237,0.94));
+}
+
+.calculator-page .tools-kicker {
+  color: #765723;
+  background: rgba(181,138,67,0.14);
+}
+
+.calculator-page .calculator-hero h1 {
+  color: var(--protein-navy);
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.calculator-page .calculator-hero h1 em {
+  position: relative;
+  color: var(--protein-sage);
+  font-weight: 500;
+}
+
+.calculator-page .calculator-hero h1 em::after {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 0;
+  bottom: -7px;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--protein-gold), rgba(181,138,67,0));
+  transform: rotate(-1deg);
+}
+
+.calculator-page .calculator-hero__mark {
+  align-content: end;
+  color: white;
+  background: linear-gradient(155deg, #1e3b48, var(--protein-navy));
+}
+
+.calculator-page .calculator-hero__mark span {
+  align-self: start;
+  color: rgba(255,255,255,0.1);
+  font: 550 clamp(6.5rem, 12vw, 10rem)/0.8 "Zodiak", Georgia, serif;
+  letter-spacing: -0.08em;
+}
+
+.calculator-page .calculator-hero__mark strong {
+  color: #ead6a7;
+  font-size: 2.2rem;
+}
+
+.calculator-page .calculator-hero__mark small {
+  color: rgba(255,255,255,0.62);
+}
+
+.calculator-page .calculator-form {
+  border-top: 4px solid var(--protein-gold);
+  background: linear-gradient(145deg, rgba(251,250,246,0.96), rgba(248,246,239,0.92));
+}
+
+.calculator-page .calculator-form__head::before {
+  content: "01 · DANE I CEL";
+  display: block;
+  margin-bottom: 9px;
+  color: var(--protein-gold);
+  font: 800 0.68rem/1 "Work Sans", sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.calculator-page .calculator-form__head h2 {
+  color: var(--protein-navy);
+}
+
+.calculator-page .calculator-field {
+  border-color: rgba(22,43,56,0.1);
+  background: rgba(255,255,255,0.76);
+}
+
+.calculator-page .calculator-field__label i {
+  color: white;
+  background: var(--protein-navy);
+}
+
+.calculator-page .calculator-field:focus-within {
+  border-color: rgba(181,138,67,0.48);
+  box-shadow: 0 0 0 3px rgba(181,138,67,0.09);
+}
+
+.calculator-page .calculator-field.is-complete {
+  border-color: rgba(102,132,119,0.38);
+  background: #eef4ef;
+}
+
+.calculator-page .calculator-field.is-complete .calculator-field__label,
+.calculator-page .calculator-field.is-complete input,
+.calculator-page .calculator-field.is-complete select {
+  color: #3e6c58;
+}
+
+.calculator-page .calculator-field.is-complete .calculator-field__label i {
+  background: var(--protein-sage);
+}
+
+.calculator-page .calculator-submit {
+  color: var(--protein-navy);
+  background: #e8d5a8;
+  box-shadow: 0 10px 22px rgba(181,138,67,0.16);
+}
+
+.calculator-page .calculator-result {
+  border-top: 5px solid var(--protein-gold);
+  background:
+    radial-gradient(circle at 92% 0, rgba(181,138,67,0.18), transparent 24rem),
+    linear-gradient(145deg, #244655, var(--protein-navy));
+}
+
+.calculator-page .calculator-result__eyebrow {
+  color: #e5c985;
+}
+
+.calculator-page .calculator-method {
+  border-top: 4px solid var(--protein-sage);
+  background: rgba(251,250,246,0.86);
+}
+
+.calculator-page .calculator-links {
+  border-top: 4px solid var(--protein-gold);
+  background: rgba(251,250,246,0.86);
+}
+
+.calculator-page .calculator-links__grid a {
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.calculator-page .calculator-links__grid a:hover {
+  transform: translateY(-2px);
+  border-color: rgba(181,138,67,0.4);
+  box-shadow: 0 10px 22px rgba(22,43,56,0.07);
+}
+
 html.night-shell .calculator-hero__copy,
 html.night-shell .calculator-form,
 html.night-shell .calculator-method,

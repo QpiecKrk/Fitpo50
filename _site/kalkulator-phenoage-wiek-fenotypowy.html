@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+  <title>Kalkulator PhenoAge | Narzędzia FitPo50</title>
+  <meta name="description" content="Oblicz kliniczny wiek fenotypowy PhenoAge na podstawie wieku i dziewięciu markerów krwi z automatyczną konwersją jednostek laboratoryjnych.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://fitpo50.pl/kalkulator-phenoage-wiek-fenotypowy.html">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css?v=1.4">
+  <link rel="stylesheet" href="./assets/footer.css?v=1">
+  <link rel="stylesheet" href="./assets/phenoage-calculator.css?v=1">
+  <link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
+</head>
+<body class="pheno-page">
+  <div class="pheno-shell">
+    <header class="pheno-topbar">
+      <a class="pheno-brand" href="index.html" aria-label="FitPo50 — strona główna">
+        <img src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="48" height="48" onerror="this.style.display='none'">
+        <span><strong>FitPo50</strong><small>NARZĘDZIA ZDROWIA</small></span>
+      </a>
+      <a class="pheno-back" href="narzedzia.html">← Wszystkie narzędzia</a>
+    </header>
+
+    <main>
+      <section class="pheno-hero" aria-labelledby="pheno-title">
+        <div class="pheno-hero__copy">
+          <span class="pheno-eyebrow">Kliniczny wiek fenotypowy</span>
+          <h1 id="pheno-title">PhenoAge.<br><em>Co mówi Twoja krew?</em></h1>
+          <p>Wprowadź wiek i dziewięć wyników laboratoryjnych. Model przeliczy je na statystyczny wiek fenotypowy związany z ogólnym stanem fizjologicznym.</p>
+          <div class="pheno-privacy"><span>●</span> Dane są liczone lokalnie i nie opuszczają urządzenia.</div>
+        </div>
+        <aside class="pheno-hero__monogram" aria-label="Informacja o modelu">
+          <span>PA</span>
+          <div><strong>10</strong><small>danych wejściowych</small></div>
+          <div><strong>2018</strong><small>rok publikacji modelu</small></div>
+        </aside>
+      </section>
+
+      <section class="pheno-progress" aria-label="Kompletność formularza">
+        <div><span>Kompletność danych</span><strong data-pheno-progress-label>0 / 10</strong></div>
+        <div class="pheno-progress__track"><span data-pheno-progress-bar></span></div>
+      </section>
+
+      <form class="pheno-form" data-pheno-form novalidate>
+        <section class="pheno-group pheno-group--identity">
+          <header><span>01</span><div><h2>Punkt odniesienia</h2><p>Wiek metrykalny pozwala porównać wynik modelu z kalendarzem.</p></div></header>
+          <label class="pheno-field pheno-field--wide">
+            <span class="pheno-field__name">Wiek</span>
+            <span class="pheno-field__control"><input type="number" name="age" min="18" max="120" step="1" inputmode="numeric" placeholder="np. 58" required><b>lat</b></span>
+          </label>
+        </section>
+
+        <section class="pheno-group pheno-group--metabolic">
+          <header><span>02</span><div><h2>Metabolizm i narządy</h2><p>Cztery parametry związane z wątrobą, nerkami i gospodarką glukozową.</p></div></header>
+          <div class="pheno-fields">
+            <label class="pheno-field"><span class="pheno-field__name">Albumina</span><span class="pheno-field__control"><input type="number" name="albumin" min="1" max="100" step="0.1" inputmode="decimal" placeholder="np. 43" required><select name="albuminUnit" aria-label="Jednostka albuminy"><option value="gL">g/L</option><option value="gdL">g/dL</option></select></span></label>
+            <label class="pheno-field"><span class="pheno-field__name">Kreatynina</span><span class="pheno-field__control"><input type="number" name="creatinine" min="0.1" max="2000" step="0.01" inputmode="decimal" placeholder="np. 82" required><select name="creatinineUnit" aria-label="Jednostka kreatyniny"><option value="umolL">µmol/L</option><option value="mgdL">mg/dL</option></select></span></label>
+            <label class="pheno-field"><span class="pheno-field__name">Glukoza</span><span class="pheno-field__control"><input type="number" name="glucose" min="0.1" max="1000" step="0.01" inputmode="decimal" placeholder="np. 5,2" required><select name="glucoseUnit" aria-label="Jednostka glukozy"><option value="mmolL">mmol/L</option><option value="mgdL">mg/dL</option></select></span></label>
+            <label class="pheno-field"><span class="pheno-field__name">Fosfataza alkaliczna</span><span class="pheno-field__control"><input type="number" name="alp" min="1" max="2500" step="0.1" inputmode="decimal" placeholder="np. 72" required><b>U/L</b></span></label>
+          </div>
+        </section>
+
+        <section class="pheno-group pheno-group--blood">
+          <header><span>03</span><div><h2>Stan zapalny i morfologia</h2><p>Pięć parametrów odporności oraz cech krwinek czerwonych i białych.</p></div></header>
+          <div class="pheno-fields pheno-fields--five">
+            <label class="pheno-field"><span class="pheno-field__name">CRP</span><span class="pheno-field__control"><input type="number" name="crp" min="0.01" max="1000" step="0.01" inputmode="decimal" placeholder="np. 1,2" required><select name="crpUnit" aria-label="Jednostka CRP"><option value="mgL">mg/L</option><option value="mgdL">mg/dL</option></select></span><small>Wartość musi być większa od zera.</small></label>
+            <label class="pheno-field"><span class="pheno-field__name">Limfocyty</span><span class="pheno-field__control"><input type="number" name="lymphocyte" min="0.1" max="100" step="0.1" inputmode="decimal" placeholder="np. 31" required><b>%</b></span></label>
+            <label class="pheno-field"><span class="pheno-field__name">MCV</span><span class="pheno-field__control"><input type="number" name="mcv" min="30" max="160" step="0.1" inputmode="decimal" placeholder="np. 91" required><b>fL</b></span></label>
+            <label class="pheno-field"><span class="pheno-field__name">RDW</span><span class="pheno-field__control"><input type="number" name="rdw" min="1" max="50" step="0.1" inputmode="decimal" placeholder="np. 13,1" required><b>%</b></span></label>
+            <label class="pheno-field"><span class="pheno-field__name">Leukocyty WBC</span><span class="pheno-field__control"><input type="number" name="wbc" min="0.1" max="150" step="0.01" inputmode="decimal" placeholder="np. 6,4" required><b>×10⁹/L</b></span></label>
+          </div>
+        </section>
+
+        <p class="pheno-error" data-pheno-error role="alert" hidden></p>
+        <div class="pheno-submit-row">
+          <div><strong>Masz wszystkie wyniki?</strong><span>Sprawdź jednostki przed obliczeniem.</span></div>
+          <button type="submit" data-pheno-submit>Oblicz PhenoAge <span>↗</span></button>
+        </div>
+      </form>
+
+      <section class="pheno-result" data-pheno-result aria-live="polite">
+        <div class="pheno-result__empty" data-pheno-empty>
+          <span>Raport</span><h2>Wynik pojawi się po uzupełnieniu formularza.</h2><p>Model nie diagnozuje chorób i nie mierzy metylacji DNA. To statystyczne podsumowanie dziewięciu markerów klinicznych oraz wieku.</p>
+        </div>
+        <div class="pheno-result__content" data-pheno-content hidden>
+          <div class="pheno-result__headline">
+            <span>Twój kliniczny PhenoAge</span>
+            <strong><b data-pheno-age>—</b><small>lat</small></strong>
+          </div>
+          <div class="pheno-result__comparison">
+            <div><span>Wiek metrykalny</span><strong data-chrono-age>—</strong></div>
+            <div><span>Różnica</span><strong data-age-difference>—</strong></div>
+            <div><span>Interpretacja</span><strong data-age-label>—</strong></div>
+          </div>
+          <div class="pheno-result__note"><h3>Co oznacza ten wynik?</h3><p data-pheno-explanation></p></div>
+          <div class="pheno-result__caution"><span>Ważne</span><p>Pojedynczy wynik może zmienić się podczas infekcji, stanu zapalnego lub po zmianie leczenia. Nie podejmuj decyzji medycznych wyłącznie na jego podstawie.</p></div>
+        </div>
+      </section>
+
+      <section class="pheno-method">
+        <div><span class="pheno-eyebrow">Metoda</span><h2>Co dokładnie obliczamy?</h2></div>
+        <div>
+          <p>To kalkulator <strong>klinicznego Phenotypic Age</strong>, z którego później opracowano epigenetyczny zegar DNAm PhenoAge. Wykorzystuje model Gompertza, wiek oraz dziewięć rutynowych markerów krwi.</p>
+          <p>Nie jest to zegar Horvatha ani badanie DNA. Wynik opisuje statystyczny profil fizjologiczny w odniesieniu do danych populacyjnych.</p>
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5940111/" target="_blank" rel="noopener noreferrer">Publikacja źródłowa Levine i wsp. →</a>
+        </div>
+      </section>
+
+      <section class="pheno-safety">
+        <strong>Narzędzie edukacyjne</strong><p>Wynik nie zastępuje interpretacji morfologii, CRP, glukozy, funkcji nerek ani wątroby przez lekarza. Nie służy do rozpoznawania chorób ani oceny pilności leczenia.</p>
+      </section>
+    </main>
+    <footer class="pheno-footer" aria-label="Stopka kalkulatora PhenoAge">
+      <div class="pheno-footer__brand"><strong>FitPo50</strong><span>Narzędzia zdrowia po 50-tce</span></div>
+      <nav aria-label="Linki stopki"><a href="narzedzia.html">Wróć do narzędzi</a><a href="polityka-prywatnosci.html">Polityka prywatności</a></nav>
+      <p>Treści i wyniki mają charakter edukacyjny. Nie zastępują konsultacji lekarskiej, diagnozy ani indywidualnych zaleceń.</p>
+    </footer>
+  </div>
+  <script src="./dist/phenoage-calculator.js?v=1" defer></script>
+</body>
+</html>
