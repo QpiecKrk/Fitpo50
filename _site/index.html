@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/czy-kawa-odwadnia-hero.avif" type="image/avif">
-          <source srcset="./assets/czy-kawa-odwadnia-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/czy-kawa-odwadnia-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/mira-ai-sor-agent-hero.avif" type="image/avif">
+          <source srcset="./assets/mira-ai-sor-agent-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/mira-ai-sor-agent-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Czy kawa odwadnia i wypłukuje magnez? Fakty i mity po 50-tce</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy kawa odwadnia i wypłukuje magnez tak, że po 50-tce trzeba ją mocno ograniczyć? Sprawdzamy, co naprawdę mówią badania o nawodnieniu i mineralach.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="czy-kawa-odwadnia-i-wyplukuje-magnez.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="mira-ai-agent-sor-lepszy-od-lekarzy.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Czy kawa odwadnia i wypłukuje magnez? Fakty i mity po 50-tce',
-        excerpt: 'Czy kawa odwadnia i wypłukuje magnez tak, że po 50-tce trzeba ją mocno ograniczyć? Sprawdzamy, co naprawdę mówią badania o nawodnieniu i mineralach.',
-        image: './assets/czy-kawa-odwadnia-hero.webp',
-        url: 'czy-kawa-odwadnia-i-wyplukuje-magnez.html'
+        title: 'MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie',
+        excerpt: 'MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.',
+        image: './assets/mira-ai-sor-agent-hero.webp',
+        url: 'mira-ai-agent-sor-lepszy-od-lekarzy.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2543,6 +2543,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Ciekawe',
+          title: 'MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie',
+          excerpt: 'MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.',
+          image: './assets/mira-ai-sor-agent-hero.webp',
+          url: 'mira-ai-agent-sor-lepszy-od-lekarzy.html'
+        },
+        {
           category: 'Mity',
           title: 'Czy kawa odwadnia i wypłukuje magnez? Fakty i mity po 50-tce',
           excerpt: 'Czy kawa odwadnia i wypłukuje magnez tak, że po 50-tce trzeba ją mocno ograniczyć? Sprawdzamy, co naprawdę mówią badania o nawodnieniu i mineralach.',
@@ -2555,13 +2562,6 @@
           excerpt: 'Detoks sokowy nie oczyszcza wątroby ani jelit po 50-tce. Sprawdź, co robi organizm, co dzieje się z mięśniami i jak rozsądnie zadbać o wątrobę po 50.',
           image: './assets/detoks-sokowy-hero.webp',
           url: 'detoks-sokowy-po-50-mit.html'
-        },
-        {
-          category: 'Mity',
-          title: 'MIT: Po 50-tce metabolizm gwałtownie zwalnia i dlatego się tyje',
-          excerpt: 'Czy metabolizm po 50-tce naprawdę gwałtownie zwalnia? Sprawdzamy badania naukowe i pokazujemy, dlaczego waga rośnie z zupełnie innego powodu niż wiek.',
-          image: './assets/mit-metabolizm-po-50-hero.webp',
-          url: 'mit-metabolizm-po-50-zwalnia-tycie.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

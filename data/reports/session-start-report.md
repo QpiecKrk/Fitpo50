@@ -1,6 +1,6 @@
 # Session Start Report
 
-- Timestamp: 2026-06-21 16:27:05 +0200
+- Timestamp: 2026-06-24 14:32:38 +0200
 
 ## git pull --ff-only origin main
 ```txt
@@ -11,8 +11,7 @@ Already up to date.
 
 ## git status --short
 ```txt
- M _site/assets/pdf/detoks-sokowy-po-50-mit.pdf
- M data/reports/session-start-report.md
+ M data/reports/pipeline-timings.json
 ```
 
 ## npm run assets:mirror:sync

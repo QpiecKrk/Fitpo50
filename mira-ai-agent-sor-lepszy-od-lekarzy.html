@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+        gtag("config", "AW-18108612630");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
+</script>
+<script>
+  (function () {
+    try {
+      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var h = new Date().getHours();
+      var isNight = (h >= 19 || h < 7);
+      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+    } catch (_) {}
+  })();
+</script>
+<title>MIRA AI lepsza od lekarzy? Wyniki badania | FitPo50</title>
+<meta name="description" content="MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Grzegorz Kupiec">
+<meta property="og:title" content="MIRA AI lepsza od lekarzy? Wyniki badania">
+<meta property="og:description" content="MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fitpo50.pl/mira-ai-agent-sor-lepszy-od-lekarzy.html">
+<meta property="og:image" content="https://fitpo50.pl/assets/mira-ai-sor-agent-hero.jpg">
+<meta property="og:locale" content="pl_PL">
+<meta property="article:published_time" content="2026-06-24T08:00:00+02:00">
+<meta property="article:modified_time" content="2026-06-24T14:40:00+02:00">
+<meta property="article:author" content="Grzegorz Kupiec">
+<meta property="article:section" content="Ciekawe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MIRA AI lepsza od lekarzy? Wyniki badania">
+<meta name="twitter:description" content="MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.">
+<meta name="twitter:image" content="https://fitpo50.pl/assets/mira-ai-sor-agent-hero.jpg">
+<link rel="canonical" href="https://fitpo50.pl/mira-ai-agent-sor-lepszy-od-lekarzy.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie",
+  "description": "MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.",
+  "inLanguage": "pl-PL",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://fitpo50.pl/mira-ai-agent-sor-lepszy-od-lekarzy.html"
+  },
+  "url": "https://fitpo50.pl/mira-ai-agent-sor-lepszy-od-lekarzy.html",
+  "image": "https://fitpo50.pl/assets/mira-ai-sor-agent-hero.jpg",
+  "datePublished": "2026-06-24T08:00:00+02:00",
+  "dateModified": "2026-06-24T14:40:00+02:00",
+  "author": {
+    "@type": "Person",
+    "name": "Grzegorz Kupiec",
+    "url": "https://fitpo50.pl/o-mnie.html",
+    "sameAs": [
+      "https://fitpo50.pl/o-mnie.html"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FitPo50",
+    "url": "https://fitpo50.pl/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://fitpo50.pl/assets/logo.jpg"
+    }
+  },
+  "timeRequired": "PT7M",
+  "wordCount": 1523,
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      ".article-header__title",
+      "#quick-answer",
+      "#quick-answer p",
+      ".drop-cap",
+      ".key-takeaways h2",
+      ".key-takeaways li"
+    ]
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "MIRA osiągnęła 88,9% trafności diagnostycznej na 574 archiwalnych przypadkach z ośmiu grup rozpoznań."
+    },
+    {
+      "@type": "Thing",
+      "name": "W bezpośrednim porównaniu na 311 przypadkach MIRA uzyskała 87,8%, a certyfikowani lekarze 78,1% trafności."
+    },
+    {
+      "@type": "Thing",
+      "name": "System działał w sandboxie EHR z symulowanym pacjentem; nie diagnozował ani nie leczył ludzi w czasie rzeczywistym."
+    },
+    {
+      "@type": "Thing",
+      "name": "MIRA zlecała wyraźnie więcej badań krwi, dlatego przed wdrożeniem potrzebne są prospektywne badania kliniczne i nadzór lekarza."
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Dyke Ferber et al., Towards autonomous medical artificial intelligence agents, Nature 2026",
+      "url": "https://www.nature.com/articles/s41586-026-10675-5",
+      "datePublished": "2026-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Science Media Centre: Expert reaction to MIRA and AMIE, 2026",
+      "url": "https://www.sciencemediacentre.org/expert-reaction-to-presentation-of-two-new-medical-ai-models-for-patient-management-mira-and-amie/",
+      "datePublished": "2026-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "PubMed: MIMIC-IV, a freely accessible electronic health record dataset",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36596836/",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "PubMed: Evaluation and mitigation of large language model limitations in clinical decision-making",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38965432/",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Liévin V. et al., Towards Conversational AI for Disease Management (AMIE), Nature 2026",
+      "url": "https://www.nature.com/articles/s41586-026-10764-5",
+      "datePublished": "2026-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "PubMed: When combinations of humans and AI are useful – systematic review and meta-analysis",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39468277/",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    }
+  ],
+  "citation": [
+    "https://www.nature.com/articles/s41586-026-10675-5",
+    "https://www.sciencemediacentre.org/expert-reaction-to-presentation-of-two-new-medical-ai-models-for-patient-management-mira-and-amie/",
+    "https://pubmed.ncbi.nlm.nih.gov/36596836/",
+    "https://pubmed.ncbi.nlm.nih.gov/38965432/",
+    "https://www.nature.com/articles/s41586-026-10764-5",
+    "https://pubmed.ncbi.nlm.nih.gov/39468277/",
+    "https://www.who.int/publications/i/item/9789240029200"
+  ],
+  "encoding": {
+    "@type": "MediaObject",
+    "@id": "https://fitpo50.pl/assets/pdf/mira-ai-agent-sor-lepszy-od-lekarzy.pdf#media",
+    "name": "MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie (PDF)",
+    "contentUrl": "https://fitpo50.pl/assets/pdf/mira-ai-agent-sor-lepszy-od-lekarzy.pdf",
+    "encodingFormat": "application/pdf",
+    "inLanguage": "pl-PL"
+  }
+}
+</script>
+
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="image" href="./assets/mira-ai-sor-agent-hero.webp" fetchpriority="high">
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css?v=1.5">
+<link rel="stylesheet" href="./article.css?v=1.5">
+<link rel="icon" href="./assets/logo.jpg" type="image/jpeg">
+<link rel="stylesheet" href="./assets/footer.css?v=2">
+<meta name="google-adsense-account" content="ca-pub-4993821807276758">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758" crossorigin="anonymous"></script>
+<script type="application/ld+json" id="faqpage-schema-auto">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Czy MIRA leczyła prawdziwych pacjentów?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nie. MIRA działała wyłącznie w sandboxie – wirtualnym środowisku dokumentacji medycznej. Testowano ją na archiwalnych danych z bazy MIMIC-IV, a rolę pacjenta odgrywał oddzielny agent AI. Żaden prawdziwy pacjent nie był diagnozowany przez system w tym badaniu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Jaką trafność diagnostyczną osiągnęła MIRA w porównaniu z lekarzami?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Na 574 archiwalnych przypadkach MIRA uzyskała 88,9% trafności. W bezpośrednim porównaniu z certyfikowanymi lekarzami na 311 przypadkach osiągnęła 87,8%, podczas gdy lekarze – 78,1%. Różnica wyniosła 9,7 punktu procentowego i była istotna statystycznie (p &lt; 0,001)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dlaczego MIRA zamawiała więcej badań niż lekarze?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MIRA obejmowała zleceniami około 51,1% badań krwi udokumentowanych w bazie, a certyfikowani lekarze 28,3%. Szersze zbieranie danych mogło częściowo wyjaśniać wyższą trafność, więc wynik nie musi być wyłącznie efektem lepszego rozumowania klinicznego."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Jakie są zagrożenia AI w medycynie?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Najważniejsze ryzyka to błędna rekomendacja, nadmierne zlecanie badań, stronniczość danych, brak przejrzystości decyzji oraz niejasna odpowiedzialność za błąd. Dochodzą do tego prywatność dokumentacji i możliwość nadmiernego zaufania do systemu. Dlatego potrzebne są badania prospektywne, audyty i kontrola lekarza."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy AI w medycynie zastąpi lekarzy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Obecne badanie wspiera rolę AI jako narzędzia pomagającego lekarzom, a nie dowód na możliwość ich zastąpienia. MIRA nie widziała pacjenta, nie słyszała jego oddechu i nie mogła wykonać badania fizykalnego. Samodzielne leczenie bez nadzoru nie zostało tu sprawdzone."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json" id="speakable-schema-auto">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      ".article-header__title",
+      "#quick-answer",
+      "#quick-answer p",
+      ".drop-cap",
+      ".key-takeaways h2",
+      ".key-takeaways li"
+    ]
+  }
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Strona główna",
+      "item": "https://fitpo50.pl/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ciekawe",
+      "item": "https://fitpo50.pl/ciekawe.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "MIRA AI lepsza od lekarzy? Wyniki badania",
+      "item": "https://fitpo50.pl/mira-ai-agent-sor-lepszy-od-lekarzy.html"
+    }
+  ]
+}
+</script>
+
+</head>
+<body class="article-template article--ciekawe">
+<div class="shell">
+<header class="topbar">
+  <a href="index.html" class="brand" aria-label="FitPo50 — strona główna">
+    <img class="brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" onerror="this.style.display='none'">
+    <span class="brand__text">
+      <span class="brand__name">FitPo50</span>
+      <span class="brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span>
+    </span>
+  </a>
+  <nav class="menu" aria-label="Menu główne">
+      <a href="index.html">Home</a>
+      <a href="porady.html" class="is-active">Porady</a>
+      <a href="mity.html">Mity</a>
+      <a href="rusz-sie.html">Ruch</a>
+      <a href="jedzenie.html">Jedzenie</a>
+      <a href="zdrowie.html">Zdrowie</a>
+      <a href="ciekawe.html">Ciekawe</a>
+      <a href="dziennik.html">Dziennik</a>
+      <a href="o-mnie.html">O mnie</a>
+  </nav>
+  <label class="searchbar" aria-label="Szukaj artykułów">
+    <span aria-hidden="true">🔎</span>
+    <input type="search" placeholder="Szukaj artykułów...">
+  </label>
+</header>
+
+<main class="article-page" id="main-article">
+  <div class="container article-main-bento">
+    <section class="article-intro-grid reveal" aria-label="Wstęp artykułu">
+      <div class="article-kicker-card article-kicker-card--ciekawe">
+        <p class="article-kicker-card__meta"><span class="article-kicker-card__category-pill">Ciekawe</span><span>7 min czytania</span></p>
+        <h1 class="article-header__title">MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie</h1>
+      </div>
+
+      <div class="article-hero reveal">
+      <picture>
+        <source srcset="./assets/mira-ai-sor-agent-hero.avif" type="image/avif">
+        <source srcset="./assets/mira-ai-sor-agent-hero.webp" type="image/webp">
+        <img src="./assets/mira-ai-sor-agent-hero.jpg" alt="Nocny szpitalny SOR z interfejsem agenta medycznego MIRA AI" loading="eager" width="1080" height="603">
+      </picture>
+      <div class="hero-motto"><em>Technologia nie zastąpi lekarza – ale może mu pomóc nie popełniać błędów.</em></div>
+      </div>
+    </section>
+
+    <div class="article-primary-actions" aria-label="Akcje artykułu">
+      <!-- PDF_DOWNLOAD_BUTTON_START -->
+      <a class="pdf-hero-download" href="./assets/pdf/mira-ai-agent-sor-lepszy-od-lekarzy.pdf" download aria-label="Pobierz artykuł w PDF (512 KB)">
+        <span class="pdf-hero-download__eyebrow">Chcesz przeczytać na spokojnie? Pobierz PDF</span>
+        <span class="pdf-hero-download__title">Pobierz artykuł (PDF)</span>
+        <span class="pdf-hero-download__meta">Rozmiar pliku: 512 KB</span>
+        <span class="pdf-hero-download__badge" aria-hidden="true">PDF</span>
+      </a>
+      <!-- PDF_DOWNLOAD_BUTTON_END -->
+
+      <button class="pdf-hero-download pdf-hero-download--share" type="button" id="share-article-top" aria-label="Udostępnij artykuł">
+        <span class="pdf-hero-download__eyebrow">Wyślij przyjacielowi albo opublikuj u siebie</span>
+        <span class="pdf-hero-download__title">Udostępnij artykuł</span>
+        <span class="pdf-hero-download__meta">Facebook, LinkedIn, WhatsApp, mail lub kopiowanie linku</span>
+        <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">SHARE</span>
+      </button>
+    </div>
+
+    <article class="article-content">
+      <p class="drop-cap">W czerwcu 2026 roku w Nature ukazało się badanie autonomicznego agenta AI o nazwie MIRA. System przeprowadzał symulowane wywiady, zamawiał badania i stawiał diagnozy na podstawie 574 archiwalnych przypadków z izby przyjęć – i w tym kontrolowanym teście wypadł lepiej niż doświadczeni lekarze. Co ten wynik naprawdę oznacza dla przyszłości medycyny i dla nas, pacjentów?</p>
+
+<section class="quick-answer reveal" id="quick-answer" aria-label="Szybka odpowiedź">
+  <h2>Szybka odpowiedź</h2>
+  <p>MIRA osiągnęła 88,9% trafności diagnostycznej w symulacji 574 archiwalnych przypadków, a w bezpośrednim porównaniu 87,8% wobec 78,1% u certyfikowanych lekarzy, ale nie oznacza to gotowości do samodzielnego leczenia na SOR-ze, ponieważ system pracował w sandboxie, nie badał prawdziwych pacjentów i zlecał wyraźnie więcej badań krwi; jeśli trafi do kliniki, najpierw wymaga badań prospektywnych oraz nadzoru lekarza.</p>
+</section>
+
+<section class="key-takeaways reveal" data-ai-summary="auto" aria-label="Kluczowe wnioski">
+  <h2>Kluczowe wnioski</h2>
+  <ul><li>MIRA osiągnęła 88,9% trafności diagnostycznej na 574 archiwalnych przypadkach z ośmiu grup rozpoznań.</li>
+<li>W bezpośrednim porównaniu na 311 przypadkach MIRA uzyskała 87,8%, a certyfikowani lekarze 78,1% trafności.</li>
+<li>System działał w sandboxie EHR z symulowanym pacjentem; nie diagnozował ani nie leczył ludzi w czasie rzeczywistym.</li>
+<li>MIRA zlecała wyraźnie więcej badań krwi, dlatego przed wdrożeniem potrzebne są prospektywne badania kliniczne i nadzór lekarza.</li></ul>
+</section>
+
+<h2>Czym jest MIRA i czym różni się od chatbota?</h2>
+
+<p>Kiedy słyszymy „AI w medycynie”, większość z nas wyobraża sobie chatbota odpowiadającego na pytania o objawy. MIRA to autonomiczny agent – system, który w symulacji prowadzi wywiad, analizuje wyniki badań, stawia diagnozę i układa plan leczenia , łącznie z decyzją o przyjęciu do szpitala lub wypisie. O tym, jak takie narzędzia mogą wspierać personel, pisaliśmy też w artykule o AI w medycynie i bezpieczeństwie pacjentów .</p>
+
+<p>Badacze uruchomili MIRĘ na 574 archiwalnych przypadkach klinicznych z bazy MIMIC-IV – anonimowych danych z rzeczywistej izby przyjęć. System miał do dyspozycji ponad 85 000 możliwych działań i 11 narzędzi cyfrowych. Mógł zamawiać badania, zlecać obrazowanie, przeglądać historię choroby i proponować leczenie – wszystko w kontrolowanym środowisku testowym.</p>
+
+<p>Najważniejsza różnica wobec prostych chatbotów: MIRA <strong>nie dostawała gotowej listy objawów</strong>. Musiała sama zadawać pytania symulowanemu pacjentowi, wydobywać informacje i podejmować kolejne decyzje na podstawie odpowiedzi oraz dokumentacji.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Czym jest MIMIC-IV?</h3><p>MIMIC-IV to duża publiczna baza zanonimizowanych danych klinicznych pacjentów leczonych w Beth Israel Deaconess Medical Center w Bostonie. Jest często wykorzystywana do badań nad analizą danych i AI w medycynie, ale nie odtwarza całego chaosu prawdziwej rozmowy oraz badania przy łóżku chorego.</p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/mira-ai-ehr-system.avif" type="image/avif"><source srcset="./assets/mira-ai-ehr-system.webp" type="image/webp"><img src="./assets/mira-ai-ehr-system.jpg" alt="System MIRA pracujący w elektronicznej dokumentacji medycznej" loading="lazy"></picture><figcaption>MIRA łączy wywiad, wyniki badań, diagnozę i propozycję leczenia w sandboxie EHR.</figcaption></figure>
+
+<h2>Jak MIRA wypadła w porównaniu z lekarzami?</h2>
+
+<p>Wyniki badania są bezprecedensowe – i warto je chwilę pooglądać, zanim zaczniemy interpretować. Na pełnym zbiorze 574 przypadków MIRA osiągnęła 88,9% trafności diagnostycznej . W bezpośrednim starciu z lekarzami – na identycznych 311 przypadkach – agent AI uzyskał 87,8%, podczas gdy certyfikowani specjaliści osiągnęli średnio 78,1% (p &lt; 0,001), a mieszana kohorta lekarzy różnych szczebli – 71,1%.</p>
+
+<p>W bezpośrednim porównaniu różnica wyniosła 9,7 punktu procentowego i była istotna statystycznie. System oceniano w ośmiu grupach rozpoznań: od zapalenia wyrostka, przez zapalenie płuc, po raka trzustki. Wyniki nie były jednak jednakowe dla każdej choroby, dlatego średnia nie opisuje całej jakości działania systemu.</p>
+
+<p>Jest też ważne zastrzeżenie: MIRA obejmowała zleceniami około 51,1% badań krwi udokumentowanych w bazie, a certyfikowani lekarze 28,3%. Szersze zbieranie danych mogło częściowo zwiększać trafność. Jeśli chcesz lepiej rozumieć znaczenie takich wyników, zobacz poradnik o tym, <a href="./badania-krwi-po-50-jak-czesto.html">jak często wykonywać badania krwi po 50-tce</a>.</p>
+
+<ul><li>88,9% trafności diagnostycznej MIRY na 574 przypadkach</li><li>87,8% vs. 78,1% lekarzy certyfikowanych na 311 przypadkach – różnica istotna statystycznie (p &lt; 0,001)</li><li>71,1% – trafność mieszanej grupy lekarzy różnych szczebli</li><li>85 000+ możliwych działań operacyjnych dostępnych dla agenta</li><li>8 kategorii diagnoz: od chirurgii, przez internę, po onkologię</li></ul>
+
+<aside class="highlight-box highlight-box--accent"><h3>Najważniejsze: Jak MIRA wypadła w porównaniu z lekarzami</h3><p>Wyniki badania są bezprecedensowe – i warto je chwilę pooglądać, zanim zaczniemy interpretować.</p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/mira-wyniki-porownanie-lekarze.avif" type="image/avif"><source srcset="./assets/mira-wyniki-porownanie-lekarze.webp" type="image/webp"><img src="./assets/mira-wyniki-porownanie-lekarze.jpg" alt="Wykres porównujący trafność MIRY i lekarzy" loading="lazy"></picture><figcaption>W symulacji MIRA osiągnęła 88,9% trafności, ale wynik wymaga ostrożnej interpretacji.</figcaption></figure>
+
+<h2>Jak działał eksperyment? Co było testem, a co rzeczywistością?</h2>
+
+<p>Zanim damy się ponieść entuzjazmowi, warto zrozumieć, jak wyglądał eksperyment. MIRA działała w sandboxie – izolowanym, wirtualnym środowisku dokumentacji medycznej zgodnym ze standardem HL7 FHIR. System miał dostęp do danych pacjentów, ale nie leczył żadnego prawdziwego człowieka w czasie rzeczywistym . Rolę pacjenta pełnił oddzielny agent AI, który odpowiadał na pytania MIRY wyłącznie na podstawie autentycznych historii klinicznych.</p>
+
+<p>Badacze wskazują kilka ważnych ograniczeń. Mowa symulowanego pacjenta jest bardziej ustrukturyzowana niż prawdziwa rozmowa na SOR-ze, gdzie pacjent bywa przestraszony lub przekazuje niepełne informacje. MIRA była też systemem tekstowym: nie widziała twarzy pacjenta, nie słyszała jego oddechu i nie mogła go zbadać. Także <a href="./rentgen-tomografia-ct-rezonans-mri-roznice-badania.html">badania obrazowe, takie jak RTG, TK i MRI</a>, w praktyce wymagają szerszego kontekstu klinicznego.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Ważne zastrzeżenie</h3><p>MIRA <strong>nie leczyła prawdziwych pacjentów</strong>. Badanie to retrospektywna symulacja na archiwalnych danych. Autorzy jednoznacznie podkreślają, że przed wdrożeniem klinicznym konieczne są prospektywne badania w warunkach rzeczywistych, z nadzorem lekarskim i odpowiednimi regulacjami.</p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/mira-sandbox-ehr-schemat.avif" type="image/avif"><source srcset="./assets/mira-sandbox-ehr-schemat.webp" type="image/webp"><img src="./assets/mira-sandbox-ehr-schemat.jpg" alt="Schemat działania środowiska sandbox EHR systemu MIRA" loading="lazy"></picture><figcaption>Oddzielny agent symulował pacjenta, a MIRA wykonywała dozwolone działania w izolowanym EHR.</figcaption></figure>
+
+<h2>Co to zmienia dla pacjenta po pięćdziesiątce?</h2>
+
+<p>Po pięćdziesiątce częściej współistnieje kilka chorób, a objawy takie jak ból w klatce piersiowej, duszność czy zawroty głowy mogą mieć różne przyczyny. Lekarz musi szybko odróżnić stany nagłe od mniej groźnych. Dodatkowe narzędzie porządkujące dane i sprawdzające decyzję może być pomocne, ale badanie MIRY nie dowodzi jeszcze poprawy wyników leczenia. Jedną z trudnych przyczyn duszności opisujemy w poradniku o niewydolności serca HFpEF .</p>
+
+<p>Nie chodzi o zastąpienie lekarza przy łóżku. System mógłby pełnić rolę dodatkowego narzędzia, które konsekwentnie przegląda dokumentację i podpowiada możliwości diagnostyczne. Wyniki MIRY uzasadniają dalsze badania takiego wsparcia, ale nie pozwalają jeszcze obiecać mniejszej liczby błędów ani krótszego oczekiwania na diagnozę.</p>
+
+<p>Wyniki różniły się zależnie od rozpoznania. MIRA osiągała najwyższą trafność w zapaleniu wyrostka, a niższą w zapaleniu płuc i zakażeniach dróg moczowych. To ważne przypomnienie, że jedna średnia nie mówi, jak system poradzi sobie z konkretnym pacjentem.</p>
+
+<ul><li>Możliwa rola: dodatkowe narzędzie wspierające decyzję lekarza, a nie samodzielny zastępca</li><li>Możliwa korzyść: systematyczne przeglądanie wyników i historii choroby</li><li>Warunek bezpieczeństwa: testy prospektywne na prawdziwych pacjentach</li><li>Niewiadoma: wpływ na liczbę błędów, czas diagnozy, koszty i wyniki leczenia</li></ul>
+
+<aside class="highlight-box highlight-box--accent"><h3>Najważniejsze: Co to zmienia dla pacjenta po pięćdziesiątce</h3><p>Po pięćdziesiątce częściej współistnieje kilka chorób, a objawy takie jak ból w klatce piersiowej, duszność czy zawroty głowy mogą mieć różne przyczyny.</p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/pacjent-50-plus-ai-medycyna.avif" type="image/avif"><source srcset="./assets/pacjent-50-plus-ai-medycyna.webp" type="image/webp"><img src="./assets/pacjent-50-plus-ai-medycyna.jpg" alt="Pacjent po 50. roku życia podczas konsultacji medycznej wspomaganej przez AI" loading="lazy"></picture><figcaption>Najbardziej realny kierunek rozwoju to AI wspierająca lekarza, nie zastępująca badanie pacjenta.</figcaption></figure>
+
+<h2>Co mówią eksperci o AI w medycynie?</h2>
+
+<p>Środowisko naukowe przyjęło wyniki MIRY z zainteresowaniem, ale także z ostrożnością. Niezależne komentarze do badania MIRA i równolegle opublikowanego systemu AMIE podkreślają, że są to wyniki wstępne, które nie odzwierciedlają całej złożoności codziennej praktyki klinicznej. Oba systemy pracowały głównie na tekście, a medycyna obejmuje również badanie fizykalne, obserwację i relację z pacjentem.</p>
+
+<p>Niezależni eksperci z Science Media Centre wskazali, że dla zapalenia płuc i zakażeń dróg moczowych różnica między AI a lekarzami była <strong>najmniejsza</strong>. Powróciła też kwestia liczby zlecanych badań. Czy lepsza trafność wynika z lepszego rozumowania, szerszego zbierania danych, czy obu tych elementów? To pytanie nadal wymaga badań.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Grzesiek komentuje</h3><p>Mam 55 lat i duży szacunek do lekarzy pracujących w nieludzkich warunkach. Wyniki MIRY nie mówią mi, że maszyny są lepsze od ludzi. Mówią mi, że <strong>maszyny mogą być pomocnym narzędziem</strong> w trudnych sytuacjach. I to mnie cieszy – bo oznacza, że gdy trafię na SOR, mój lekarz może mieć lepsze wsparcie niż dziś.</p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/eksperci-ai-medycyna-debata.avif" type="image/avif"><source srcset="./assets/eksperci-ai-medycyna-debata.webp" type="image/webp"><img src="./assets/eksperci-ai-medycyna-debata.jpg" alt="Panel ekspercki dyskutujący o zastosowaniu AI w medycynie" loading="lazy"></picture><figcaption>Eksperci podkreślają potencjał systemów agentowych, ale także ograniczenia symulacji tekstowej.</figcaption></figure>
+
+<h2>Co musi się wydarzyć, zanim AI trafi na prawdziwy SOR?</h2>
+
+<p>Autorzy badania są jednoznaczni: symulacja to dopiero pierwszy krok. Zanim MIRA lub podobny system trafi do prawdziwego szpitala, musi przejść przez prospektywne badania kliniczne – eksperymenty prowadzone w czasie rzeczywistym, na żywych pacjentach, z pełną kontrolą bezpieczeństwa. W medycynie taki proces trwa latami – i dobrze, że tak jest.</p>
+
+<p>Konieczne będą też ramy prawne i etyczne: kto odpowiada za błąd AI? Jak pacjent ma wiedzieć, że system uczestniczy w diagnozie? Jak ograniczyć ryzyko nierównego działania w grupach słabiej reprezentowanych w danych? To warunki, które trzeba spełnić przed wdrożeniem, podobnie jak zasady bezpiecznego używania danych i <a href="./markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html">właściwej interpretacji markerów krwi</a>.</p>
+
+<p>Kolejnym krokiem może być łączenie AI z obrazowaniem, danymi z urządzeń ubieralnych i obserwacją pacjenta. Więcej danych nie gwarantuje jednak lepszej decyzji: system musi umieć oceniać ich jakość, sygnalizować niepewność i pozostawiać lekarzowi możliwość kontroli oraz odrzucenia rekomendacji.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Najważniejsze: Co musi się wydarzyć, zanim AI trafi na prawdziwy SOR</h3><p>Autorzy badania są jednoznaczni: symulacja to dopiero pierwszy krok.</p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/ai-regulacje-kliniczne-droga.avif" type="image/avif"><source srcset="./assets/ai-regulacje-kliniczne-droga.webp" type="image/webp"><img src="./assets/ai-regulacje-kliniczne-droga.jpg" alt="Mapa drogowa wdrożenia AI w medycynie klinicznej – etapy i regulacje" loading="lazy"></picture><figcaption>Od symulacji do kliniki prowadzą badania prospektywne, regulacje, integracja i stały nadzór.</figcaption></figure>
+
+<p class="article-crosslinks-auto"><strong>Zobacz też:</strong> <a href="./ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html">ai w medycynie czy naprawde pomaga pacjentom fakty badania</a>.</p>
+<section class="faq-list reveal" aria-label="Najczęściej zadawane pytania">
+
+  <h2>Najczęściej zadawane pytania</h2>
+
+<article class="faq-item" id="faq-1">
+  <h3>Czy MIRA leczyła prawdziwych pacjentów?</h3>
+  <p>Nie. MIRA działała wyłącznie w sandboxie – wirtualnym środowisku dokumentacji medycznej. Testowano ją na archiwalnych danych z bazy MIMIC-IV, a rolę pacjenta odgrywał oddzielny agent AI. Żaden prawdziwy pacjent nie był diagnozowany przez system w tym badaniu.</p>
+</article>
+
+<article class="faq-item" id="faq-2">
+  <h3>Jaką trafność diagnostyczną osiągnęła MIRA w porównaniu z lekarzami?</h3>
+  <p>Na 574 archiwalnych przypadkach MIRA uzyskała 88,9% trafności. W bezpośrednim porównaniu z certyfikowanymi lekarzami na 311 przypadkach osiągnęła 87,8%, podczas gdy lekarze – 78,1%. Różnica wyniosła 9,7 punktu procentowego i była istotna statystycznie (p &lt; 0,001).</p>
+</article>
+
+<article class="faq-item" id="faq-3">
+  <h3>Dlaczego MIRA zamawiała więcej badań niż lekarze?</h3>
+  <p>MIRA obejmowała zleceniami około 51,1% badań krwi udokumentowanych w bazie, a certyfikowani lekarze 28,3%. Szersze zbieranie danych mogło częściowo wyjaśniać wyższą trafność, więc wynik nie musi być wyłącznie efektem lepszego rozumowania klinicznego.</p>
+</article>
+
+<article class="faq-item" id="faq-4">
+  <h3>Jakie są zagrożenia AI w medycynie?</h3>
+  <p>Najważniejsze ryzyka to błędna rekomendacja, nadmierne zlecanie badań, stronniczość danych, brak przejrzystości decyzji oraz niejasna odpowiedzialność za błąd. Dochodzą do tego prywatność dokumentacji i możliwość nadmiernego zaufania do systemu. Dlatego potrzebne są badania prospektywne, audyty i kontrola lekarza.</p>
+</article>
+
+<article class="faq-item" id="faq-5">
+  <h3>Czy AI w medycynie zastąpi lekarzy?</h3>
+  <p>Obecne badanie wspiera rolę AI jako narzędzia pomagającego lekarzom, a nie dowód na możliwość ich zastąpienia. MIRA nie widziała pacjenta, nie słyszała jego oddechu i nie mogła wykonać badania fizykalnego. Samodzielne leczenie bez nadzoru nie zostało tu sprawdzone.</p>
+</article>
+
+</section>
+
+
+
+      <section class="share-article-section reveal" aria-labelledby="share-article-title">
+        <h3 id="share-article-title">Udostępnij artykuł</h3>
+        <p class="share-article-section__lead">Wyślij ten materiał przyjacielowi albo opublikuj u siebie. Jednym kliknięciem podasz aktualny link i tytuł artykułu.</p>
+        <div class="share-article-section__actions" role="group" aria-label="Opcje udostępniania">
+          <a class="share-pill share-pill--facebook" href="#" data-share-network="facebook" rel="noopener noreferrer" target="_blank">Facebook</a>
+          <a class="share-pill share-pill--linkedin" href="#" data-share-network="linkedin" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+          <a class="share-pill share-pill--whatsapp" href="#" data-share-network="whatsapp" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+          <a class="share-pill share-pill--mail" href="#" data-share-network="mail">Mail</a>
+          <button class="share-pill share-pill--copy" type="button" data-share-network="copy">Kopiuj link</button>
+        </div>
+        <p class="share-article-section__status" id="share-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <h2 id="zrodla">Źródła</h2>
+      <ol class="sources-list">
+        <li><a href="https://www.nature.com/articles/s41586-026-10675-5" target="_blank" rel="noopener noreferrer">Dyke Ferber et al., Towards autonomous medical artificial intelligence agents, Nature 2026</a></li>
+        <li><a href="https://www.sciencemediacentre.org/expert-reaction-to-presentation-of-two-new-medical-ai-models-for-patient-management-mira-and-amie/" target="_blank" rel="noopener noreferrer">Science Media Centre: Expert reaction to MIRA and AMIE, 2026</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/36596836/" target="_blank" rel="noopener noreferrer">PubMed: MIMIC-IV, a freely accessible electronic health record dataset</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/38965432/" target="_blank" rel="noopener noreferrer">PubMed: Evaluation and mitigation of large language model limitations in clinical decision-making</a></li>
+        <li><a href="https://www.nature.com/articles/s41586-026-10764-5" target="_blank" rel="noopener noreferrer">Liévin V. et al., Towards Conversational AI for Disease Management (AMIE), Nature 2026</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/39468277/" target="_blank" rel="noopener noreferrer">PubMed: When combinations of humans and AI are useful – systematic review and meta-analysis</a></li>
+        <li><a href="https://www.who.int/publications/i/item/9789240029200" target="_blank" rel="noopener noreferrer">WHO: Ethics and governance of artificial intelligence for health</a></li>
+      </ol>
+
+      <div class="medical-disclaimer">
+        <p><strong>Uwaga:</strong> Artykuł ma charakter informacyjny i edukacyjny. Nie zastępuje konsultacji lekarskiej, diagnozy ani leczenia.</p>
+      </div>
+    </article>
+  </div>
+</main>
+
+<section class="reading-room porady-preview section-padding" id="porady-preview">
+  <div class="reading-room__head reveal">
+    <h3>
+      <span class="title-with-icon">
+        <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18v16H6.5A2.5 2.5 0 0 0 4 21Z"></path>
+          <path d="M7 7h8M7 11h8M7 15h5"></path>
+        </svg>
+        Czytelnia
+      </span>
+    </h3>
+    <p>Duża garść wiedzy podana prosto, konkretnie i po ludzku.</p>
+  </div>
+  <div class="articles-grid-preview">
+      <a href="czy-kawa-odwadnia-i-wyplukuje-magnez.html" class="article-promo-card reveal">
+        <div class="article-promo-card__media">
+          <picture>
+            <source srcset="./assets/czy-kawa-odwadnia-hero.avif" type="image/avif">
+            <source srcset="./assets/czy-kawa-odwadnia-hero.webp" type="image/webp">
+            <img src="./assets/czy-kawa-odwadnia-hero.jpg" alt="Czy kawa odwadnia i wypłukuje magnez?" class="article-promo-img article-promo-card__img" loading="lazy" width="1080" height="603">
+          </picture>
+        </div>
+        <div class="article-promo-card__content">
+          <span class="article-promo-card__meta article-promo-card__meta--mity">Mity • 12 min</span>
+          <h4 class="article-promo-card__title">Czy kawa odwadnia i wypłukuje magnez?</h4>
+          <p class="article-promo-card__desc">Czy kawa odwadnia i wypłukuje magnez tak, że po 50-tce trzeba ją mocno ograniczyć? Sprawdzamy, co naprawdę mówią badania o nawodnieniu i mineralach.</p>
+          <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
+        </div>
+      </a>
+
+      <a href="detoks-sokowy-po-50-mit.html" class="article-promo-card reveal">
+        <div class="article-promo-card__media">
+          <picture>
+            <source srcset="./assets/detoks-sokowy-hero.avif" type="image/avif">
+            <source srcset="./assets/detoks-sokowy-hero.webp" type="image/webp">
+            <img src="./assets/detoks-sokowy-hero.jpg" alt="Detoks sokowy po 50-tce: mit oczyszczania wątroby" class="article-promo-img article-promo-card__img" loading="lazy" width="1080" height="603">
+          </picture>
+        </div>
+        <div class="article-promo-card__content">
+          <span class="article-promo-card__meta article-promo-card__meta--mity">Mity • 10 min</span>
+          <h4 class="article-promo-card__title">Detoks sokowy po 50-tce: mit oczyszczania wątroby</h4>
+          <p class="article-promo-card__desc">Detoks sokowy nie oczyszcza wątroby ani jelit po 50-tce. Sprawdź, co robi organizm, co dzieje się z mięśniami i jak rozsądnie zadbać o wątrobę po 50.</p>
+          <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
+        </div>
+      </a>
+
+      <a href="mit-metabolizm-po-50-zwalnia-tycie.html" class="article-promo-card reveal">
+        <div class="article-promo-card__media">
+          <picture>
+            <source srcset="./assets/mit-metabolizm-po-50-hero.avif" type="image/avif">
+            <source srcset="./assets/mit-metabolizm-po-50-hero.webp" type="image/webp">
+            <img src="./assets/mit-metabolizm-po-50-hero.jpg" alt="Czy metabolizm po 50-tce naprawdę zwalnia?" class="article-promo-img article-promo-card__img" loading="lazy" width="1080" height="603">
+          </picture>
+        </div>
+        <div class="article-promo-card__content">
+          <span class="article-promo-card__meta article-promo-card__meta--mity">Mity • 11 min</span>
+          <h4 class="article-promo-card__title">Czy metabolizm po 50-tce naprawdę zwalnia?</h4>
+          <p class="article-promo-card__desc">Czy metabolizm po 50-tce naprawdę gwałtownie zwalnia? Sprawdzamy badania naukowe i pokazujemy, dlaczego waga rośnie z zupełnie innego powodu niż wiek.</p>
+          <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
+        </div>
+      </a>
+  </div>
+</section>
+</div>
+
+<nav class="bottom-nav" aria-label="Nawigacja dolna">
+  <a href="index.html" class="bottom-nav__item ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg>
+    <span>Dom</span>
+  </a>
+  <a href="porady.html" class="bottom-nav__item ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5V4.5A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+    <span>Porady</span>
+  </a>
+  <a href="index.html#baza-wiedzy" class="bottom-nav__item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    <span>Baza wiedzy</span>
+  </a>
+  <a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer" class="bottom-nav__item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><path d="M17.5 6.5h.01"></path></svg>
+    <span>Instagram</span>
+  </a>
+</nav>
+
+<footer class="site-footer-bento" aria-label="Stopka FitPo50">
+  <div class="site-footer-bento__grid">
+    <section class="site-footer-bento__card" aria-label="O serwisie FitPo50">
+      <div class="site-footer-bento__brand">
+        <img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'">
+        <div>
+          <h2 class="site-footer-bento__title">FitPo50.pl</h2>
+          <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej ściemy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-footer-bento__card" aria-label="Linki serwisu">
+      <h3 class="site-footer-bento__links-title">Nawigacja</h3>
+      <ul class="site-footer-bento__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="porady.html">Porady</a></li>
+        <li><a href="rusz-sie.html">Ruch</a></li>
+        <li><a href="jedzenie.html">Jedzenie</a></li>
+        <li><a href="zdrowie.html">Zdrowie</a></li>
+        <li><a href="ciekawe.html">Ciekawe</a></li>
+        <li><a href="dziennik.html">Dziennik</a></li>
+        <li><a href="o-mnie.html">O mnie</a></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="site-footer-bento__bottom">
+    <p class="site-footer-bento__copy">© 2026 FitPo50 | <a href="polityka-prywatnosci.html">Polityka Prywatności i Cookies</a></p>
+    <p class="site-footer-bento__note">Ważna informacja: nie jestem lekarzem. Treści na stronie mają charakter edukacyjny i informacyjny, nie zastępują konsultacji medycznej ani indywidualnych zaleceń specjalisty.</p>
+  </div>
+</footer>
+
+<script src="./dist/cmp.js?v=1.1" defer></script>
+<script src="./dist/app.js?v=1.2" defer></script>
+</body>
+</html>

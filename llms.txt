@@ -64,7 +64,7 @@ articles:
   summary: "Rezonans wykazał dyskopatię i przepuklinę? Zobacz, co mówi współczesna nauka o ćwiczeniach, odżywianiu krążka i leczeniu bólu kręgosłupa po 50-tce."
 - url: https://fitpo50.pl/dzieci-patrza-na-ciebie.html
   title: "Dzieci patrzą na Ciebie. Nie na to, co mówisz — na to, co robisz. | FitPo50"
-  section: "Ciekawe"
+section: "Ciekawe"
   summary: "Dzieci uczą się aktywności fizycznej głównie przez obserwację rodzica. Artykuł o nawykach, epigenetyce i wspólnym ruchu po 50-tce."
 - url: https://fitpo50.pl/healthspan-nie-lifespan-po-50.html
   title: "Healthspan po 50-tce: jak długo będziesz sprawny? | FitPo50"
@@ -367,3 +367,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Wydolność po 50: VO2 max mówi o Twoim starzeniu więcej niż obwód pasa | FitPo50"
   section: "Zdrowie"
   summary: "VO2 max pokazuje wydolność tlenową i pomaga oceniać sprawność po 50-tce. Sprawdź, jak go mierzyć i poprawiać dzięki rozsądnemu treningowi."
+- url: https://fitpo50.pl/mira-ai-agent-sor-lepszy-od-lekarzy.html
+  title: "MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie | FitPo50"
+  section: "Ciekawe"
+  summary: "MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów."
