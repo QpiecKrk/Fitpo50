@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/mira-ai-sor-agent-hero.avif" type="image/avif">
-          <source srcset="./assets/mira-ai-sor-agent-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/mira-ai-sor-agent-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/sarkopenia-test-plan-hero.avif" type="image/avif">
+          <source srcset="./assets/sarkopenia-test-plan-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/sarkopenia-test-plan-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="mira-ai-agent-sor-lepszy-od-lekarzy.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Otyłość sarkopeniczna po 50-tce: domowy test i plan 30 dni</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Jak rozpoznać otyłość sarkopeniczną po 50-tce? Sprawdź test z krzesła, znaczenie treningu siłowego i białka oraz bezpieczny plan działania na 30 dni.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="otylosc-sarkopeniczna-test-plan-30-dni-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie',
-        excerpt: 'MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.',
-        image: './assets/mira-ai-sor-agent-hero.webp',
-        url: 'mira-ai-agent-sor-lepszy-od-lekarzy.html'
+        title: 'Otyłość sarkopeniczna po 50-tce: domowy test i plan 30 dni',
+        excerpt: 'Jak rozpoznać otyłość sarkopeniczną po 50-tce? Sprawdź test z krzesła, znaczenie treningu siłowego i białka oraz bezpieczny plan działania na 30 dni.',
+        image: './assets/sarkopenia-test-plan-hero.webp',
+        url: 'otylosc-sarkopeniczna-test-plan-30-dni-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2543,6 +2543,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Zdrowie',
+          title: 'Otyłość sarkopeniczna po 50-tce: domowy test i plan 30 dni',
+          excerpt: 'Jak rozpoznać otyłość sarkopeniczną po 50-tce? Sprawdź test z krzesła, znaczenie treningu siłowego i białka oraz bezpieczny plan działania na 30 dni.',
+          image: './assets/sarkopenia-test-plan-hero.webp',
+          url: 'otylosc-sarkopeniczna-test-plan-30-dni-po-50.html'
+        },
+        {
           category: 'Ciekawe',
           title: 'MIRA AI lepsza od lekarzy na SOR-ze? Co pokazało badanie',
           excerpt: 'MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.',
@@ -2555,13 +2562,6 @@
           excerpt: 'Czy kawa odwadnia i wypłukuje magnez tak, że po 50-tce trzeba ją mocno ograniczyć? Sprawdzamy, co naprawdę mówią badania o nawodnieniu i mineralach.',
           image: './assets/czy-kawa-odwadnia-hero.webp',
           url: 'czy-kawa-odwadnia-i-wyplukuje-magnez.html'
-        },
-        {
-          category: 'Mity',
-          title: 'MIT: Detoks sokowy po 50-tce oczyszcza wątrobę i jelita',
-          excerpt: 'Detoks sokowy nie oczyszcza wątroby ani jelit po 50-tce. Sprawdź, co robi organizm, co dzieje się z mięśniami i jak rozsądnie zadbać o wątrobę po 50.',
-          image: './assets/detoks-sokowy-hero.webp',
-          url: 'detoks-sokowy-po-50-mit.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
