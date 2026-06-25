@@ -1,289 +1,7 @@
 {
   "version": 1,
-  "updated_at": "2026-06-21T15:05:37.210Z",
+  "updated_at": "2026-06-25T08:33:27.550Z",
   "records": [
-    {
-      "scope": "prepush-local",
-      "at": "2026-05-10T07:44:45.142Z",
-      "total_ms": 510,
-      "steps": [
-        {
-          "tag": "prepush:diff-guard",
-          "durationMs": 102
-        },
-        {
-          "tag": "prepush:parallel:checks",
-          "durationMs": 287
-        },
-        {
-          "tag": "build:esbuild",
-          "durationMs": 35
-        },
-        {
-          "tag": "smoke:static(_site)",
-          "durationMs": 93
-        },
-        {
-          "tag": "tmp:cleanup",
-          "durationMs": 120
-        }
-      ]
-    },
-    {
-      "scope": "prepush-local",
-      "at": "2026-05-10T07:51:48.093Z",
-      "total_ms": 429,
-      "steps": [
-        {
-          "tag": "prepush:diff-guard",
-          "durationMs": 85
-        },
-        {
-          "tag": "prepush:parallel:checks",
-          "durationMs": 237
-        },
-        {
-          "tag": "build:esbuild",
-          "durationMs": 33
-        },
-        {
-          "tag": "smoke:static(_site)",
-          "durationMs": 77
-        },
-        {
-          "tag": "tmp:cleanup",
-          "durationMs": 105
-        }
-      ]
-    },
-    {
-      "scope": "prepush-local",
-      "at": "2026-05-10T11:41:28.464Z",
-      "total_ms": 565,
-      "steps": [
-        {
-          "tag": "prepush:diff-guard",
-          "durationMs": 77
-        },
-        {
-          "tag": "prepush:parallel:checks",
-          "durationMs": 382
-        },
-        {
-          "tag": "build:esbuild",
-          "durationMs": 30
-        },
-        {
-          "tag": "smoke:static(_site)",
-          "durationMs": 76
-        },
-        {
-          "tag": "tmp:cleanup",
-          "durationMs": 105
-        }
-      ]
-    },
-    {
-      "scope": "article-pipeline-fail",
-      "at": "2026-05-10T18:33:26.321Z",
-      "total_ms": 201,
-      "steps": [
-        {
-          "tag": "Raw JSON parse gate (input)",
-          "durationMs": 64
-        },
-        {
-          "tag": "JSON auto-fix (working copy)",
-          "durationMs": 75
-        },
-        {
-          "tag": "JSON gate (single file)",
-          "durationMs": 62
-        }
-      ]
-    },
-    {
-      "scope": "article-pipeline-fail",
-      "at": "2026-05-10T18:34:48.829Z",
-      "total_ms": 194,
-      "steps": [
-        {
-          "tag": "Raw JSON parse gate (input)",
-          "durationMs": 60
-        },
-        {
-          "tag": "JSON auto-fix (working copy)",
-          "durationMs": 63
-        },
-        {
-          "tag": "JSON gate (single file)",
-          "durationMs": 71
-        }
-      ]
-    },
-    {
-      "scope": "article-pipeline-fail",
-      "at": "2026-05-10T18:36:35.653Z",
-      "total_ms": 209,
-      "steps": [
-        {
-          "tag": "Raw JSON parse gate (input)",
-          "durationMs": 60
-        },
-        {
-          "tag": "JSON auto-fix (working copy)",
-          "durationMs": 61
-        },
-        {
-          "tag": "JSON gate (single file)",
-          "durationMs": 88
-        }
-      ]
-    },
-    {
-      "scope": "article-pipeline-fail",
-      "at": "2026-05-10T18:40:37.044Z",
-      "total_ms": 4250,
-      "steps": [
-        {
-          "tag": "Raw JSON parse gate (input)",
-          "durationMs": 60
-        },
-        {
-          "tag": "JSON auto-fix (working copy)",
-          "durationMs": 58
-        },
-        {
-          "tag": "JSON gate (single file)",
-          "durationMs": 86
-        },
-        {
-          "tag": "Article preflight (working copy)",
-          "durationMs": 67
-        },
-        {
-          "tag": "Prepare article assets (hero + sekcje)",
-          "durationMs": 3629
-        },
-        {
-          "tag": "Precheck (strict FAQ)",
-          "durationMs": 115
-        },
-        {
-          "tag": "Import + walidacja + PDF + sync",
-          "durationMs": 235
-        }
-      ]
-    },
-    {
-      "scope": "article-pipeline",
-      "at": "2026-05-10T18:41:39.662Z",
-      "total_ms": 7537,
-      "steps": [
-        {
-          "tag": "Raw JSON parse gate (input)",
-          "durationMs": 72
-        },
-        {
-          "tag": "JSON auto-fix (working copy)",
-          "durationMs": 73
-        },
-        {
-          "tag": "JSON gate (single file)",
-          "durationMs": 69
-        },
-        {
-          "tag": "Article preflight (working copy)",
-          "durationMs": 76
-        },
-        {
-          "tag": "Prepare article assets (hero + sekcje)",
-          "durationMs": 5006
-        },
-        {
-          "tag": "Precheck (strict FAQ)",
-          "durationMs": 155
-        },
-        {
-          "tag": "Import + walidacja + PDF + sync",
-          "durationMs": 1326
-        },
-        {
-          "tag": "Sync meta description across head/schema",
-          "durationMs": 90
-        },
-        {
-          "tag": "Article contract check (source/_site)",
-          "durationMs": 87
-        },
-        {
-          "tag": "Sync assets mirror (_site)",
-          "durationMs": 135
-        },
-        {
-          "tag": "Lint editorial placeholders (_site HTML)",
-          "durationMs": 94
-        },
-        {
-          "tag": "Lint editorial placeholders (source HTML)",
-          "durationMs": 96
-        },
-        {
-          "tag": "NEWS integrity",
-          "durationMs": 98
-        },
-        {
-          "tag": "Predeploy gate (slug)",
-          "durationMs": 160
-        }
-      ]
-    },
-    {
-      "scope": "article-pipeline-fail",
-      "at": "2026-05-10T18:51:17.013Z",
-      "total_ms": 373,
-      "steps": [
-        {
-          "tag": "Raw JSON parse gate (input)",
-          "durationMs": 83
-        },
-        {
-          "tag": "JSON auto-fix (working copy)",
-          "durationMs": 114
-        },
-        {
-          "tag": "JSON strict autofix (links/FAQ/QA/title)",
-          "durationMs": 87
-        },
-        {
-          "tag": "JSON gate (single file)",
-          "durationMs": 89
-        }
-      ]
-    },
-    {
-      "scope": "article-pipeline-fail",
-      "at": "2026-05-10T18:52:38.820Z",
-      "total_ms": 323,
-      "steps": [
-        {
-          "tag": "Raw JSON parse gate (input)",
-          "durationMs": 87
-        },
-        {
-          "tag": "JSON auto-fix (working copy)",
-          "durationMs": 79
-        },
-        {
-          "tag": "JSON strict autofix (links/FAQ/QA/title)",
-          "durationMs": 74
-        },
-        {
-          "tag": "JSON gate (single file)",
-          "durationMs": 83
-        }
-      ]
-    },
     {
       "scope": "article-pipeline-fail",
       "at": "2026-05-10T18:56:04.378Z",
@@ -4059,6 +3777,468 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 62
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-21T15:18:14.770Z",
+      "total_ms": 2005,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 41
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1561
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 346
+        },
+        {
+          "tag": "build",
+          "durationMs": 249
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 45
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 56
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-21T17:51:26.069Z",
+      "total_ms": 2486,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 51
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1695
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 643
+        },
+        {
+          "tag": "build",
+          "durationMs": 422
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 56
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 96
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-21T18:15:58.094Z",
+      "total_ms": 2984,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 49
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1701
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 1158
+        },
+        {
+          "tag": "build",
+          "durationMs": 435
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 67
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 75
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-21T18:41:34.411Z",
+      "total_ms": 3100,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 79
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 2274
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 646
+        },
+        {
+          "tag": "build",
+          "durationMs": 445
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 74
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 100
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-21T19:00:25.954Z",
+      "total_ms": 2224,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 60
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1674
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 430
+        },
+        {
+          "tag": "build",
+          "durationMs": 313
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 46
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 59
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-21T20:09:53.724Z",
+      "total_ms": 2133,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 54
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1614
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 380
+        },
+        {
+          "tag": "build",
+          "durationMs": 275
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 48
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 84
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-22T15:14:38.055Z",
+      "total_ms": 2103,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 51
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1622
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 374
+        },
+        {
+          "tag": "build",
+          "durationMs": 279
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 45
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 55
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-24T13:12:43.675Z",
+      "total_ms": 2377,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 58
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1705
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 510
+        },
+        {
+          "tag": "build",
+          "durationMs": 319
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 43
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 103
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-25T07:53:04.780Z",
+      "total_ms": 2393,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 96
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1810
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 409
+        },
+        {
+          "tag": "build",
+          "durationMs": 291
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 48
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 77
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline-fail",
+      "at": "2026-06-25T08:26:05.717Z",
+      "total_ms": 44,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 44
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline-fail",
+      "at": "2026-06-25T08:26:32.212Z",
+      "total_ms": 218,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 45
+        },
+        {
+          "tag": "E-E-A-T citation enhancer (best effort)",
+          "durationMs": 41
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 43
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 45
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline-fail",
+      "at": "2026-06-25T08:30:36.333Z",
+      "total_ms": 287,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 47
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 46
+        },
+        {
+          "tag": "E-E-A-T citation enhancer (best effort)",
+          "durationMs": 41
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 45
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 46
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 62
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline-fail",
+      "at": "2026-06-25T08:33:02.936Z",
+      "total_ms": 305,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 50
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 48
+        },
+        {
+          "tag": "E-E-A-T citation enhancer (best effort)",
+          "durationMs": 44
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 45
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 56
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 62
+        }
+      ]
+    },
+    {
+      "scope": "article-pipeline",
+      "at": "2026-06-25T08:33:27.550Z",
+      "total_ms": 3518,
+      "steps": [
+        {
+          "tag": "Raw JSON parse gate (input)",
+          "durationMs": 46
+        },
+        {
+          "tag": "JSON auto-fix (working copy)",
+          "durationMs": 52
+        },
+        {
+          "tag": "E-E-A-T citation enhancer (best effort)",
+          "durationMs": 41
+        },
+        {
+          "tag": "JSON strict autofix (links/FAQ/QA/title)",
+          "durationMs": 46
+        },
+        {
+          "tag": "JSON gate (single file)",
+          "durationMs": 47
+        },
+        {
+          "tag": "Article preflight (working copy)",
+          "durationMs": 63
+        },
+        {
+          "tag": "Prepare article assets (hero + sekcje)",
+          "durationMs": 1403
+        },
+        {
+          "tag": "Precheck (strict FAQ)",
+          "durationMs": 87
+        },
+        {
+          "tag": "Import + walidacja + PDF + sync",
+          "durationMs": 931
+        },
+        {
+          "tag": "Sync social title + BreadcrumbList (source/_site)",
+          "durationMs": 55
+        },
+        {
+          "tag": "Sync meta description across head/schema",
+          "durationMs": 57
+        },
+        {
+          "tag": "Generate llms-full (auto-refresh)",
+          "durationMs": 129
+        },
+        {
+          "tag": "Article contract check (source/_site)",
+          "durationMs": 89
+        },
+        {
+          "tag": "Sync assets mirror (_site)",
+          "durationMs": 96
+        },
+        {
+          "tag": "Global link topology report",
+          "durationMs": 79
+        },
+        {
+          "tag": "Lint editorial placeholders (source HTML)",
+          "durationMs": 65
+        },
+        {
+          "tag": "Lint editorial placeholders (_site HTML)",
+          "durationMs": 64
+        },
+        {
+          "tag": "NEWS integrity",
+          "durationMs": 66
+        },
+        {
+          "tag": "Predeploy gate (slug)",
+          "durationMs": 102
         }
       ]
     }

@@ -375,3 +375,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Otyłość sarkopeniczna po 50-tce: domowy test i plan 30 dni | FitPo50"
   section: "Zdrowie"
   summary: "Jak rozpoznać otyłość sarkopeniczną po 50-tce? Sprawdź test z krzesła, znaczenie treningu siłowego i białka oraz bezpieczny plan działania na 30 dni."
+- url: https://fitpo50.pl/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html
+  title: "Zastrzyk, który cofa starzenie komórek oka — co już wiemy? | FitPo50"
+  section: "Zdrowie"
+  summary: "9 czerwca 2026 r. pierwszy człowiek otrzymał lek ER-100 cofający epigenetyczne starzenie komórek oka. Wyjaśniamy, co to oznacza dla nauki i dla nas."
+

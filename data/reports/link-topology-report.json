@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-06T09:41:26.213Z",
-  "pages_total": 92,
+  "generated_at": "2026-06-25T08:33:27.366Z",
+  "pages_total": 112,
   "min_inbound": 2,
   "weak_pages": [
     {
@@ -11,6 +11,11 @@
           "src": ".agent/skills/auto/skill-creator/eval-viewer/viewer.html",
           "score": 6,
           "inboundSrc": 0
+        },
+        {
+          "src": "mira-ai-agent-sor-lepszy-od-lekarzy.html",
+          "score": 1,
+          "inboundSrc": 4
         }
       ]
     },
@@ -22,6 +27,11 @@
           "src": ".agent/skills/auto/skill-creator/assets/eval_review.html",
           "score": 6,
           "inboundSrc": 0
+        },
+        {
+          "src": "mira-ai-agent-sor-lepszy-od-lekarzy.html",
+          "score": 1,
+          "inboundSrc": 4
         }
       ]
     },
@@ -44,6 +54,43 @@
       "target": "search.html",
       "inbound": 0,
       "suggested_sources": []
+    },
+    {
+      "target": "kalkulator-bialka-po-50.html",
+      "inbound": 1,
+      "suggested_sources": [
+        {
+          "src": "centrum-bialka-po-50.html",
+          "score": 1,
+          "inboundSrc": 13
+        },
+        {
+          "src": "ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html",
+          "score": 1,
+          "inboundSrc": 12
+        },
+        {
+          "src": "kalkulator-phenoage-wiek-fenotypowy.html",
+          "score": 1,
+          "inboundSrc": 1
+        }
+      ]
+    },
+    {
+      "target": "kalkulator-phenoage-wiek-fenotypowy.html",
+      "inbound": 1,
+      "suggested_sources": [
+        {
+          "src": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+          "score": 1,
+          "inboundSrc": 10
+        },
+        {
+          "src": "kalkulator-bialka-po-50.html",
+          "score": 1,
+          "inboundSrc": 1
+        }
+      ]
     }
   ]
 }

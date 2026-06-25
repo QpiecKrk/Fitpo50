@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/sarkopenia-test-plan-hero.avif" type="image/avif">
-          <source srcset="./assets/sarkopenia-test-plan-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/sarkopenia-test-plan-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/er-100-hero-oko-nadzieja.avif" type="image/avif">
+          <source srcset="./assets/er-100-hero-oko-nadzieja.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/er-100-hero-oko-nadzieja.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Otyłość sarkopeniczna po 50-tce: domowy test i plan 30 dni</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Jak rozpoznać otyłość sarkopeniczną po 50-tce? Sprawdź test z krzesła, znaczenie treningu siłowego i białka oraz bezpieczny plan działania na 30 dni.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="otylosc-sarkopeniczna-test-plan-30-dni-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Zastrzyk, który cofa starzenie komórek oka — co już wiemy?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">9 czerwca 2026 r. pierwszy człowiek otrzymał lek ER-100 cofający epigenetyczne starzenie komórek oka. Wyjaśniamy, co to oznacza dla nauki i dla nas.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Otyłość sarkopeniczna po 50-tce: domowy test i plan 30 dni',
-        excerpt: 'Jak rozpoznać otyłość sarkopeniczną po 50-tce? Sprawdź test z krzesła, znaczenie treningu siłowego i białka oraz bezpieczny plan działania na 30 dni.',
-        image: './assets/sarkopenia-test-plan-hero.webp',
-        url: 'otylosc-sarkopeniczna-test-plan-30-dni-po-50.html'
+        title: 'Zastrzyk, który cofa starzenie komórek oka — co już wiemy?',
+        excerpt: '9 czerwca 2026 r. pierwszy człowiek otrzymał lek ER-100 cofający epigenetyczne starzenie komórek oka. Wyjaśniamy, co to oznacza dla nauki i dla nas.',
+        image: './assets/er-100-hero-oko-nadzieja.webp',
+        url: 'zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2544,6 +2544,13 @@
       const fallback = [
         {
           category: 'Zdrowie',
+          title: 'Zastrzyk, który cofa starzenie komórek oka — co już wiemy?',
+          excerpt: '9 czerwca 2026 r. pierwszy człowiek otrzymał lek ER-100 cofający epigenetyczne starzenie komórek oka. Wyjaśniamy, co to oznacza dla nauki i dla nas.',
+          image: './assets/er-100-hero-oko-nadzieja.webp',
+          url: 'zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html'
+        },
+        {
+          category: 'Zdrowie',
           title: 'Otyłość sarkopeniczna po 50-tce: domowy test i plan 30 dni',
           excerpt: 'Jak rozpoznać otyłość sarkopeniczną po 50-tce? Sprawdź test z krzesła, znaczenie treningu siłowego i białka oraz bezpieczny plan działania na 30 dni.',
           image: './assets/sarkopenia-test-plan-hero.webp',
@@ -2555,13 +2562,6 @@
           excerpt: 'MIRA AI osiągnęła 88,9% trafności w symulacji przypadków z SOR. Sprawdź, jak wypadli lekarze, jakie są ograniczenia badania i co oznacza to dla pacjentów.',
           image: './assets/mira-ai-sor-agent-hero.webp',
           url: 'mira-ai-agent-sor-lepszy-od-lekarzy.html'
-        },
-        {
-          category: 'Mity',
-          title: 'Czy kawa odwadnia i wypłukuje magnez? Fakty i mity po 50-tce',
-          excerpt: 'Czy kawa odwadnia i wypłukuje magnez tak, że po 50-tce trzeba ją mocno ograniczyć? Sprawdzamy, co naprawdę mówią badania o nawodnieniu i mineralach.',
-          image: './assets/czy-kawa-odwadnia-hero.webp',
-          url: 'czy-kawa-odwadnia-i-wyplukuje-magnez.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
