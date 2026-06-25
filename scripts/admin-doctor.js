@@ -63,7 +63,13 @@ function main() {
   checks.push(check('Private files in _site/admin', 'red', sitePrivate.length === 0, sitePrivate.join('\n') || 'none'));
 
   checks.push(check('Config example exists', 'red', exists('admin/config.example.php'), exists('admin/config.example.php') ? 'admin/config.example.php' : 'missing'));
+  checks.push(check('Admin bootstrap exists', 'red', exists('admin/bootstrap.php'), exists('admin/bootstrap.php') ? 'admin/bootstrap.php' : 'missing'));
   checks.push(check('Local config ignored', 'warn', exists('admin/config.php'), exists('admin/config.php') ? 'local file exists and should stay ignored' : 'missing local admin/config.php'));
+
+  const directConfigRequires = collectPhpFiles(path.join(ROOT, 'admin'))
+    .filter((file) => !['admin/bootstrap.php', 'admin/config.example.php'].includes(file))
+    .filter((file) => /require(?:_once)?\s+__DIR__\s*\.\s*['"](?:\/|\.\.\/)config\.php['"]/.test(read(file)));
+  checks.push(check('Admin uses bootstrap guard', 'red', directConfigRequires.length === 0, directConfigRequires.join('\n') || 'OK'));
 
   const htaccess = read('admin/.htaccess');
   const cspDirectives = ['Content-Security-Policy', "default-src 'self'", "base-uri 'self'", "form-action 'self'", "frame-ancestors 'none'", "object-src 'none'"];

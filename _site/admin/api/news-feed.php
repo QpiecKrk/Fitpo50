@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../bootstrap.php';
 require_once __DIR__ . '/../helpers/news.php';
 
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';

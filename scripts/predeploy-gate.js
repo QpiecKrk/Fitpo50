@@ -54,6 +54,44 @@ function readJson(relPath) {
   return JSON.parse(readUtf8(relPath));
 }
 
+function collectPhpFiles(relDir) {
+  const dir = path.join(ROOT, relDir);
+  if (!fs.existsSync(dir)) return [];
+  const out = [];
+  const stack = [dir];
+  while (stack.length) {
+    const current = stack.pop();
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const abs = path.join(current, entry.name);
+      const rel = path.relative(ROOT, abs).replace(/\\/g, '/');
+      if (entry.isDirectory()) {
+        if (rel.startsWith('admin/uploads')) continue;
+        stack.push(abs);
+        continue;
+      }
+      if (entry.isFile() && entry.name.endsWith('.php') && rel !== 'admin/config.php') {
+        out.push(rel);
+      }
+    }
+  }
+  return out.sort();
+}
+
+function validateAdminBootstrapGuard(errors) {
+  if (!exists('admin/bootstrap.php')) {
+    errors.push('Brak admin/bootstrap.php — panel nie ma ochrony przed białym ekranem przy braku config.php.');
+    return;
+  }
+
+  const directConfigRequires = collectPhpFiles('admin')
+    .filter((file) => !['admin/bootstrap.php', 'admin/config.example.php'].includes(file))
+    .filter((file) => /require(?:_once)?\s+__DIR__\s*\.\s*['"](?:\/|\.\.\/)config\.php['"]/.test(readUtf8(file)));
+
+  if (directConfigRequires.length) {
+    errors.push(`Admin omija bootstrap i ładuje config.php bezpośrednio: ${directConfigRequires.join(', ')}`);
+  }
+}
+
 function isRuntimeNewsThumb(imageBase) {
   return /^news_20/i.test(String(imageBase || '').trim());
 }
@@ -580,6 +618,7 @@ function main() {
 
   validatePublishedNewsImages(errors, warnings);
   validateReadingTimeLabels(errors);
+  validateAdminBootstrapGuard(errors);
   printAndExit(errors, warnings);
 }
 

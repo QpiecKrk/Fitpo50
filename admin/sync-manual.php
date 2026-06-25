@@ -1,10 +1,11 @@
 <?php
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/helpers/calendar.php';
 
 // Wymagamy zalogowania, aby nie każdy mógł wywołać sync
 requireLogin();
+requireAdminTables(['entries', 'media', 'failed_logins']);
 
 $db = getDb();
 $errors = [];

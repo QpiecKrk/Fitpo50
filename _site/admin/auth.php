@@ -3,7 +3,7 @@
 // auth.php — middleware autoryzacji
 // Dołącz na początku każdej chronionej strony
 // ============================================================
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/bootstrap.php';
 
 function startSecureSession(): void {
     if (session_status() === PHP_SESSION_NONE) {
@@ -46,14 +46,44 @@ function requireLogin(): void {
 function getDb(): PDO {
     static $pdo = null;
     if ($pdo === null) {
-        $dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4';
-        $pdo = new PDO($dsn, DB_USER, DB_PASS, [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
-        ]);
+        try {
+            $dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4';
+            $pdo = new PDO($dsn, DB_USER, DB_PASS, [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES   => false,
+            ]);
+        } catch (PDOException $e) {
+            adminRenderSetupError('Błąd połączenia z bazą danych', [
+                'Panel nie może połączyć się z bazą zdefiniowaną w <code>admin/config.php</code>.',
+                'Sprawdź <code>DB_HOST</code>, <code>DB_NAME</code>, <code>DB_USER</code> i <code>DB_PASS</code> w Hostingerze.',
+            ]);
+        }
     }
     return $pdo;
+}
+
+function requireAdminTables(array $tables): void {
+    $db = getDb();
+    $missingTables = [];
+
+    foreach ($tables as $table) {
+        try {
+            $stmt = $db->query("SHOW TABLES LIKE " . $db->quote($table));
+            if (!$stmt || !$stmt->fetchColumn()) {
+                $missingTables[] = $table;
+            }
+        } catch (PDOException $e) {
+            $missingTables[] = $table;
+        }
+    }
+
+    if ($missingTables) {
+        adminRenderSetupError('Błąd konfiguracji bazy danych', [
+            'W bazie z <code>admin/config.php</code> brakuje tabel: <code>' . h(implode(', ', $missingTables)) . '</code>.',
+            'Uruchom jednorazową inicjalizację bazy według instrukcji z <code>admin/DEPLOY.md</code>.',
+        ]);
+    }
 }
 
 function csrfToken(): string {

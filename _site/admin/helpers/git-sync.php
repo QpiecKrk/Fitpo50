@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 function gitAutoSyncEnabled(): bool {
     $raw = getenv('FITPO50_AUTO_GIT_SYNC');

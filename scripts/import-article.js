@@ -2328,7 +2328,7 @@ function runInternalLinks(slug, dryRun) {
   if (dryRun) return { skipped: true };
 
   const phpCode = [
-    'require "admin/config.php";',
+    'require "admin/bootstrap.php";',
     'require "admin/helpers/internal-links.php";',
     '$file = $argv[1];',
     '$html = file_get_contents($file);',

@@ -5,7 +5,7 @@
 // PO UŻYCIU: Usuń ten plik rącznie z serwera dla bezpieczeństwa!
 // Kasuje się automatycznie po poprawnym wykonaniu.
 // ============================================================
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/auth.php';
 
 // Hardening: skrypty instalacyjne działają wyłącznie po jawnym ustawieniu APP_ENV=dev.

@@ -6,7 +6,7 @@
 // Skopiuj hash do config.php → plik zostanie automatycznie usunięty.
 // ============================================================
 
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/bootstrap.php';
 
 // Hardening: skrypty instalacyjne działają wyłącznie po jawnym ustawieniu APP_ENV=dev.
 if (!defined('APP_ENV') || APP_ENV !== 'dev') {

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../bootstrap.php';
 require_once __DIR__ . '/internal-links.php';
 
 const NEWS_CARD_IMAGE_WIDTH = 640;

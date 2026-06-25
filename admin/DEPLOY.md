@@ -9,6 +9,8 @@
 ## ⚠️ Przed deploymentem — Lista bezpieczeństwa
 
 - [ ] `admin/config.php` jest w `.gitignore` — **nigdy nie idzie do repo**  
+- [ ] `admin/bootstrap.php` jest wgrany — pokazuje czytelny błąd, gdy brakuje `config.php` lub tabel
+- [ ] Prywatna kopia `config.php` istnieje poza `public_html`, np. w katalogu domowym konta
 - [ ] `admin/uploads/*` jest w `.gitignore`  
 - [ ] `init-hash.php` i `init-db.php` **nie są linkowane nigdzie** w kodzie — tylko wywołujesz je raz ręcznie przez URL, po czym kasują się same  
 - [ ] Basic Auth (Directory Privacy) jest aktywne na Hostingerze dla `admin.fitpo50.pl`
@@ -24,7 +26,7 @@ Przez FTP lub menedżer plików Hostingera skopiuj zawartość lokalnego `admin/
 /home/u542460614/domains/fitpo50.pl/public_html/admin/
 ```
 
-**Nie wgrywaj** `admin/config.php` z repo — utwórz go ręcznie (krok 2).
+**Nie wgrywaj** prawdziwego `admin/config.php` z lokalnego komputera — utwórz go ręcznie na serwerze z `admin/config.example.php` (krok 2).
 
 ---
 
@@ -34,7 +36,7 @@ Przez FTP lub menedżer plików Hostingera skopiuj zawartość lokalnego `admin/
 /home/u542460614/domains/fitpo50.pl/public_html/admin/config.php
 ```
 
-Skopiuj zawartość z `admin/config.php` (wersja z repo ma placeholdery).  
+Skopiuj zawartość z `admin/config.example.php`.  
 Uzupełnij dane z panelu Hostinger → Bazy danych → MySQL:
 
 ```php
@@ -43,6 +45,13 @@ define('DB_NAME', 'u542460614_NAZWA');   // ← z Hostingera
 define('DB_USER', 'u542460614_USER');    // ← z Hostingera
 define('DB_PASS', 'TWOJE_HASLO_DB');     // ← z Hostingera
 define('PASSWORD_HASH', '');             // ← uzupełnisz w kroku 4
+```
+
+Zrób prywatną kopię poza katalogiem strony:
+
+```bash
+cp /home/u542460614/domains/fitpo50.pl/public_html/admin/config.php /home/u542460614/admin-config.fitpo50.php
+chmod 600 /home/u542460614/admin-config.fitpo50.php
 ```
 
 ---
@@ -98,7 +107,20 @@ chmod 600 /home/u542460614/domains/fitpo50.pl/public_html/admin/config.php
 
 ---
 
-### 7. Testuj panel
+### 7. Sprawdź konfigurację z SSH
+
+```bash
+cd /home/u542460614/domains/fitpo50.pl/public_html/admin
+php -l config.php
+php -r 'require "bootstrap.php"; echo "CONFIG OK\n";'
+php -r 'require "auth.php"; requireAdminTables(["entries","media","failed_logins"]); echo "DB TABLES OK\n";'
+```
+
+Jeśli brakuje `config.php`, danych bazy albo tabel, panel pokaże teraz konkretny komunikat zamiast białej strony.
+
+---
+
+### 8. Testuj panel
 
 Przejdź na `https://admin.fitpo50.pl` → Basic Auth → strona logowania PHP.
 
@@ -123,6 +145,7 @@ admin/
 ├── logout.php             ← wylogowanie
 ├── dashboard.php          ← lista wpisów
 ├── entry-form.php         ← formularz dodawania/edycji
+├── bootstrap.php          ← bezpieczne ładowanie configu i komunikaty awarii
 ├── config.php             ← ⚠️ NIE W REPO — tworzysz ręcznie na serwerze
 ├── auth.php               ← middleware: sesja, PDO, CSRF, rate limit
 ├── init-db.php            ← jednorazowy init DB — kasuje się sam
