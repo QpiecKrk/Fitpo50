@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-05-26T13:14:57+00:00",
+    "updatedAt": "2026-06-25T14:38:45+00:00",
     "items": [
+        {
+            "id": "news_5121ecb9f8c0",
+            "title": "AI znalazła ukryty sygnał w EKG. Czy może przewidzieć nagłą śmierć sercową?",
+            "content_html": "<p><span>To twierdzenie jest </span><span>prawdziwe, ale wymaga ostrożnego tonu</span><span>. Badanie prowadzone przez naukowców z </span><span>UC Berkeley</span><span> i opublikowane w </span><span>Nature</span><span> pokazało, że model głębokiego uczenia potrafi wyłapać w zapisie EKG wzorzec związany z wyższym ryzykiem </span><span>nagłej śmierci sercowej</span><span>. To ważne, bo klasyczne metody oceny ryzyka często zawodzą — wiele osób umiera nagle, mimo że wcześniej nie zostały uznane za szczególnie zagrożone.  </span></p><p><span>Naukowcy wykorzystali ponad </span><span>440 tys. zapisów EKG ze Szwecji</span><span>, połączonych z danymi z aktów zgonu. Model AI wyodrębnił grupę wysokiego ryzyka stanowiącą ok. </span><span>2,2% badanej populacji</span><span>. W tej grupie roczna częstość nagłej śmierci sercowej wynosiła </span><span>7%</span><span>, czyli więcej niż w grupie pacjentów z obniżoną frakcją wyrzutową lewej <a href=\"kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html\">komory</a> — <span class=\"news-text-tone--1\">tradycyjnym wskaźnikiem </span>stosowanym przy kwalifikacji do defibrylatora. Co istotne, </span><span>86,1% osób wskazanych przez AI nie zostałoby wychwyconych na podstawie samej frakcji wyrzutowej</span><span>.  </span></p><p><span>To nie znaczy jednak, że sztuczna inteligencja już „<span class=\"news-text-tone--1\">przewiduje zawał</span>” z telefonu czy smartwatcha. Badanie dotyczyło <strong>analizy klinicznych zapisów EKG</strong> i danych populacyjnych, a nie domowego gadżetu. Algorytm może wskazać osoby wymagające dalszej oceny, ale nie zastępuje kardiologa, <span class=\"news-text-tone--1\">echokardiografii</span>, rezonansu serca ani decyzji klinicznej. To narzędzie do lepszej selekcji ryzyka, nie wyrok z komputera.</span></p><p><span>Najciekawsze jest to, że <span class=\"news-text-tone--4\">AI</span> mogła wskazać sygnał powiązany z </span><span>włóknieniem serca</span><span>, czyli drobnymi zmianami bliznowatymi w mięśniu sercowym. Takie zmiany mogą zaburzać przewodzenie impulsów elektrycznych i sprzyjać groźnym arytmiom. To nadal wymaga dalszego potwierdzenia, ale kierunek jest mocny: <span class=\"news-text-tone--4\">EKG</span> może zawierać więcej informacji, niż człowiek potrafi zobaczyć gołym okiem.  </span></p><p><strong><b>P</b>ost jest zasadniczo zgodny z nauką. AI faktycznie znalazła w EKG ukryty sygnał związany z ryzykiem nagłej śmierci sercowej. Ale to nie jest jeszcze powszechny test przesiewowy dla każdego. To obiecujące narzędzie, które może pomóc <a href=\"mira-ai-agent-sor-lepszy-od-lekarzy.html\">lekarzom</a> lepiej wyłapywać pacjentów wysokiego ryzyka — szczególnie tych, których klasyczne metody dziś pomijają.</strong><br></p>",
+            "status": "draft",
+            "sort_order": 1,
+            "image_base": "news_20260625_143839_a3d5c266",
+            "image_alt": "Wkg serca",
+            "image_hashes": {
+                "jpg": "759df3b55148ce594cf814758150f370c2b10c3f",
+                "webp": "41470cc19d8b679809722d536a71f2093b74fa8f",
+                "avif": "5a3efab3c215d9a3753e4047512ca32d23ec3fa5"
+            },
+            "sources": [
+                {
+                    "label": "Nature — “An ECG biomarker for sudden cardiac death discovered via deep learning”",
+                    "url": "https://www.nature.com/articles/s41586-026-10674-6?utm_source=chatgpt.com"
+                },
+                {
+                    "label": "UC Berkeley — “With AI, researchers discover new way to detect sudden cardiac death risk”",
+                    "url": "https://news.berkeley.edu/2026/06/24/with-ai-researchers-discover-new-way-to-detect-sudden-cardiac-death-risk/?utm_source=chatgpt.com"
+                }
+            ],
+            "created_at": "2026-06-25T14:38:39+00:00",
+            "updated_at": "2026-06-25T14:38:39+00:00",
+            "published_at": ""
+        },
         {
             "id": "news_ef8cc226bfcc",
             "title": "Lp(a): cichy, genetyczny czynnik ryzyka serca, którego zwykły lipidogram często nie pokazuje",
@@ -78,6 +105,33 @@
             "created_at": "2026-05-12T09:32:30+00:00",
             "updated_at": "2026-05-12T09:32:30+00:00",
             "published_at": ""
+        },
+        {
+            "id": "news_5db2815d2283",
+            "title": "AI znalazła ukryty sygnał w EKG. Czy może przewidzieć nagłą śmierć sercową?",
+            "content_html": "<p><span>To twierdzenie jest </span><span>prawdziwe, ale wymaga ostrożnego tonu</span><span>. Badanie prowadzone przez naukowców z </span><span>UC Berkeley</span><span> i opublikowane w </span><span>Nature</span><span> pokazało, że model głębokiego uczenia potrafi wyłapać w zapisie EKG wzorzec związany z wyższym ryzykiem </span><span>nagłej śmierci sercowej</span><span>. To ważne, bo klasyczne metody oceny ryzyka często zawodzą — wiele osób umiera nagle, mimo że wcześniej nie zostały uznane za szczególnie zagrożone.  </span></p><p><span>Naukowcy wykorzystali ponad </span><span>440 tys. zapisów EKG ze Szwecji</span><span>, połączonych z danymi z aktów zgonu. Model AI wyodrębnił grupę wysokiego ryzyka stanowiącą ok. </span><span>2,2% badanej populacji</span><span>. W tej grupie roczna częstość nagłej śmierci sercowej wynosiła </span><span>7%</span><span>, czyli więcej niż w grupie pacjentów z obniżoną frakcją wyrzutową lewej <a href=\"kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html\">komory</a> — <span class=\"news-text-tone--1\">tradycyjnym wskaźnikiem </span>stosowanym przy kwalifikacji do defibrylatora. Co istotne, </span><span>86,1% osób wskazanych przez AI nie zostałoby wychwyconych na podstawie samej frakcji wyrzutowej</span><span>.  </span></p><p><span>To nie znaczy jednak, że sztuczna inteligencja już „<span class=\"news-text-tone--1\">przewiduje zawał</span>” z telefonu czy smartwatcha. Badanie dotyczyło <strong>analizy klinicznych zapisów EKG</strong> i danych populacyjnych, a nie domowego gadżetu. Algorytm może wskazać osoby wymagające dalszej oceny, ale nie zastępuje kardiologa, <span class=\"news-text-tone--1\">echokardiografii</span>, rezonansu serca ani decyzji klinicznej. To narzędzie do lepszej selekcji ryzyka, nie wyrok z komputera.</span></p><p><span>Najciekawsze jest to, że <span class=\"news-text-tone--4\">AI</span> mogła wskazać sygnał powiązany z </span><span>włóknieniem serca</span><span>, czyli drobnymi zmianami bliznowatymi w mięśniu sercowym. Takie zmiany mogą zaburzać przewodzenie impulsów elektrycznych i sprzyjać groźnym arytmiom. To nadal wymaga dalszego potwierdzenia, ale kierunek jest mocny: <span class=\"news-text-tone--4\">EKG</span> może zawierać więcej informacji, niż człowiek potrafi zobaczyć gołym okiem.  </span></p><p><strong><b>P</b>ost jest zasadniczo zgodny z nauką. AI faktycznie znalazła w EKG ukryty sygnał związany z ryzykiem nagłej śmierci sercowej. Ale to nie jest jeszcze powszechny test przesiewowy dla każdego. To obiecujące narzędzie, które może pomóc <a href=\"mira-ai-agent-sor-lepszy-od-lekarzy.html\">lekarzom</a> lepiej wyłapywać pacjentów wysokiego ryzyka — szczególnie tych, których klasyczne metody dziś pomijają.</strong><br></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20260625_143840_68617897",
+            "image_alt": "Wkg serca",
+            "image_hashes": {
+                "jpg": "759df3b55148ce594cf814758150f370c2b10c3f",
+                "webp": "41470cc19d8b679809722d536a71f2093b74fa8f",
+                "avif": "5a3efab3c215d9a3753e4047512ca32d23ec3fa5"
+            },
+            "sources": [
+                {
+                    "label": "Nature — “An ECG biomarker for sudden cardiac death discovered via deep learning”",
+                    "url": "https://www.nature.com/articles/s41586-026-10674-6?utm_source=chatgpt.com"
+                },
+                {
+                    "label": "UC Berkeley — “With AI, researchers discover new way to detect sudden cardiac death risk”",
+                    "url": "https://news.berkeley.edu/2026/06/24/with-ai-researchers-discover-new-way-to-detect-sudden-cardiac-death-risk/?utm_source=chatgpt.com"
+                }
+            ],
+            "created_at": "2026-06-25T14:38:40+00:00",
+            "updated_at": "2026-06-25T14:38:45+00:00",
+            "published_at": "2026-06-25T14:38:45+00:00"
         },
         {
             "id": "news_b190c220cf83",
