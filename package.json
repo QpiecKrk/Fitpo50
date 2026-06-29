@@ -71,6 +71,8 @@
     "news:integrity": "node scripts/news-integrity-check.js",
     "assets:mirror:sync": "node scripts/sync-site-assets-mirror.js",
     "assets:mirror:check": "node scripts/sync-site-assets-mirror.js --check",
+    "sitemap:lastmod:sync": "node scripts/sync-sitemap-lastmod.js",
+    "sitemap:lastmod:check": "node scripts/sync-sitemap-lastmod.js --check",
     "assets:audit": "node scripts/assets-audit.js --report data/reports/assets-audit.json",
     "assets:audit:apply": "node scripts/assets-audit.js --apply --report data/reports/assets-audit.json",
     "search:index": "node scripts/generate-search-index.js",

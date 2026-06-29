@@ -1,74 +1,7 @@
 {
   "version": 1,
-  "updated_at": "2026-06-29T14:02:58.746Z",
+  "updated_at": "2026-06-29T14:17:16.218Z",
   "records": [
-    {
-      "scope": "article-pipeline",
-      "at": "2026-05-10T18:59:14.670Z",
-      "total_ms": 8279,
-      "steps": [
-        {
-          "tag": "Raw JSON parse gate (input)",
-          "durationMs": 87
-        },
-        {
-          "tag": "JSON auto-fix (working copy)",
-          "durationMs": 81
-        },
-        {
-          "tag": "JSON strict autofix (links/FAQ/QA/title)",
-          "durationMs": 88
-        },
-        {
-          "tag": "JSON gate (single file)",
-          "durationMs": 155
-        },
-        {
-          "tag": "Article preflight (working copy)",
-          "durationMs": 100
-        },
-        {
-          "tag": "Prepare article assets (hero + sekcje)",
-          "durationMs": 5107
-        },
-        {
-          "tag": "Precheck (strict FAQ)",
-          "durationMs": 186
-        },
-        {
-          "tag": "Import + walidacja + PDF + sync",
-          "durationMs": 1612
-        },
-        {
-          "tag": "Sync meta description across head/schema",
-          "durationMs": 108
-        },
-        {
-          "tag": "Article contract check (source/_site)",
-          "durationMs": 98
-        },
-        {
-          "tag": "Sync assets mirror (_site)",
-          "durationMs": 177
-        },
-        {
-          "tag": "Lint editorial placeholders (source HTML)",
-          "durationMs": 108
-        },
-        {
-          "tag": "NEWS integrity",
-          "durationMs": 106
-        },
-        {
-          "tag": "Lint editorial placeholders (_site HTML)",
-          "durationMs": 107
-        },
-        {
-          "tag": "Predeploy gate (slug)",
-          "durationMs": 159
-        }
-      ]
-    },
     {
       "scope": "prepush-local",
       "at": "2026-05-10T20:19:34.243Z",
@@ -4247,6 +4180,37 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 58
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-29T14:17:16.218Z",
+      "total_ms": 4461,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 74
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 3297
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 925
+        },
+        {
+          "tag": "build",
+          "durationMs": 544
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 85
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 162
         }
       ]
     }

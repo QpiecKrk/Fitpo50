@@ -2777,7 +2777,7 @@ async function main() {
     const listingFiles = updateListings(payload, dryRun, syncSite);
     if (listingFiles.length) updatedFiles.push(...listingFiles);
 
-    const sitemapResult = updateSitemap(payload.slug, payload.datePublished, dryRun);
+    const sitemapResult = updateSitemap(payload.slug, payload.dateModified, dryRun);
     if (sitemapResult.changed) updatedFiles.push(sitemapResult.file);
 
     const llmsResult = updateLlms(

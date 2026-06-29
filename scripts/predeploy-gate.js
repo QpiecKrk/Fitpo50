@@ -11,6 +11,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { spawnSync } = require('child_process');
 const { validateArticleHeadFile } = require('./lib/article-head-contract');
 const { validators, POLICY, utils } = require('./lib/article-policy');
 const { categoryPageFromImportCategory } = require('./lib/categories');
@@ -48,6 +49,23 @@ function readUtf8(relPath) {
 
 function exists(relPath) {
   return fs.existsSync(path.join(ROOT, relPath));
+}
+
+function validateSitemapLastmodFreshness(errors) {
+  const scriptPath = path.join(ROOT, 'scripts', 'sync-sitemap-lastmod.js');
+  if (!fs.existsSync(scriptPath)) {
+    errors.push('Brak scripts/sync-sitemap-lastmod.js — nie można sprawdzić lastmod w sitemap.xml.');
+    return;
+  }
+
+  const result = spawnSync(process.execPath, [scriptPath, '--check'], {
+    cwd: ROOT,
+    encoding: 'utf8',
+  });
+  if (result.status !== 0) {
+    const output = `${result.stdout || ''}${result.stderr || ''}`.trim();
+    errors.push(output || 'sitemap.xml ma nieaktualne lastmod względem dateModified artykułów.');
+  }
 }
 
 function readJson(relPath) {
@@ -513,6 +531,7 @@ function main() {
     printAndExit(errors, warnings);
     return;
   }
+  validateSitemapLastmodFreshness(errors);
 
   const indexHtml = readUtf8('index.html');
   const poradyHtml = readUtf8('porady.html');

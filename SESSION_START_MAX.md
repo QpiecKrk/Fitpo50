@@ -111,6 +111,7 @@ Publikacja artykulow:
 - footer `site-footer-bento` musi byc wewnatrz `<body>`,
 - dla nowego artykulu `datePublished` i `article:published_time` ustawiaj na faktyczna date publikacji,
 - `dateModified` i `article:modified_time` aktualizuj przy kazdej istotnej zmianie merytorycznej,
+- po kazdej zmianie `dateModified` sitemap ma byc aktualizowana automatycznie: uruchom `npm run sitemap:lastmod:sync` albo `./scripts/export_site.sh`; `predeploy:check` ma blokowac nieaktualne `lastmod` w `sitemap.xml` i `_site/sitemap.xml`,
 - wszystkie 4 pola daty zapisuj jako pelny ISO 8601 z godzina i strefa (np. `2026-04-24T08:00:00+02:00`),
 - kazdy claim liczbowy (%, dni, ryzyko, wzrost/spadek) musi miec zrodlo z URL; bez zrodla nie podawaj liczby,
 - nowy artykul = obowiazkowa synchronizacja: strona kategorii + `porady.html` + `index.html` (`featured-article` i 3 kafelki) + `sitemap.xml` + eksport do `_site`,

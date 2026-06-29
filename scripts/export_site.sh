@@ -42,6 +42,12 @@ run_ts_build() {
 
 run_ts_build
 
+echo "Synchronizuję sitemap.xml z dateModified artykułów..."
+(
+  cd "$ROOT_DIR"
+  "$NODE_BIN" scripts/sync-sitemap-lastmod.js
+)
+
 run_minification() {
   local cleancss_bin="$ROOT_DIR/node_modules/.bin/cleancss"
   local terser_bin="$ROOT_DIR/node_modules/.bin/terser"
