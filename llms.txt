@@ -379,4 +379,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Zastrzyk, który cofa starzenie komórek oka — co już wiemy? | FitPo50"
   section: "Zdrowie"
   summary: "9 czerwca 2026 r. pierwszy człowiek otrzymał lek ER-100 cofający epigenetyczne starzenie komórek oka. Wyjaśniamy, co to oznacza dla nauki i dla nas."
+- url: https://fitpo50.pl/co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html
+  title: "Co się dzieje z ciałem, gdy nie trenujesz przez 2 tygodnie | FitPo50"
+  section: "Ruch"
+  summary: "Dwa tygodnie bez treningu nie kasują efektów, ale ciało zaczyna się zmieniać: spada wydolność, gęstnieje krew, rośnie cukier. Sprawdź, co realnie tracisz."
 
