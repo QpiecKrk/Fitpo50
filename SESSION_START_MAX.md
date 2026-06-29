@@ -27,11 +27,9 @@ START TECHNICZNY (zawsze na poczatku sesji):
    npm run assets:mirror:sync
    npm run predeploy:check
    Zasada: jesli gate pokazuje warning o brakujacych miniaturach NEWS w `_site/assets/news/`, najpierw wykonaj mirror i ponow gate.
-5) Po starcie technicznym zapisz raport startowy i skopiuj go do katalogu pobran:
-   - raport zapisz w repo: `data/reports/session-start-report.md`,
-   - utworz katalog docelowy, jesli nie istnieje: `~/Downloads/FitPo50-reports`,
-   - skopiuj raport do: `~/Downloads/FitPo50-reports/`.
-   Raport startowy ma zawierac minimum: date/czas, wynik `git pull`, wynik `git status --short`, wynik `assets:mirror:sync`, wynik `predeploy:check`.
+5) Po starcie technicznym nie generuj raportu startowego i nie kopiuj nic do `~/Downloads`.
+   Jesli dowolny krok startu technicznego zwroci blad albo wynik niejednoznaczny, przerwij start, pokaz mi konkretny komunikat i czekaj na decyzje.
+   Wyjatek: `git restore .agent .agents .brainsync .cursor .windsurfrules 2>/dev/null || true` jest nieblokujacy zgodnie z komenda.
 
 Przed rozpoczeciem pracy zawsze najpierw przeczytaj `PROJECT_MEMORY.md`.
 Nastepnie:

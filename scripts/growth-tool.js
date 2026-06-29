@@ -703,6 +703,17 @@ function extractQuickAnswerText(html) {
   return stripTags(section[2]);
 }
 
+function isGenericQuickAnswer(answer) {
+  const text = String(answer || '').replace(/\s+/g, ' ').trim();
+  return [
+    /Po 50-tce w temacie/i,
+    /najlepiej działa plan oparty na danych/i,
+    /najpierw sprawdź punkt wyjścia/i,
+    /wdrażaj zmiany krokami przez 4-8 tygodni/i,
+    /zmniejsz obciążenie i\s*$/i,
+  ].some((rx) => rx.test(text));
+}
+
 function extractSchemaTypes(html) {
   const types = new Set();
   for (const match of html.matchAll(/"@type"\s*:\s*(?:"([^"]+)"|\[([\s\S]*?)\])/gi)) {
@@ -858,12 +869,14 @@ function buildQuickAnswerScore() {
     const words = answer ? answer.split(/\s+/).length : 0;
     const hasNumber = /\d/.test(answer);
     const mentionsH1Term = tokenizeForScore(article.h1 || article.title).some((token) => answer.toLowerCase().includes(token));
+    const generic = isGenericQuickAnswer(answer);
     const score = Math.round(
       (answer ? 25 : 0)
       + (words >= 35 && words <= 80 ? 25 : 0)
       + (hasNumber ? 15 : 0)
       + (mentionsH1Term ? 20 : 0)
-      + (!/warto|może|zależy/i.test(answer.slice(0, 80)) ? 15 : 8),
+      + (!/warto|może|zależy/i.test(answer.slice(0, 80)) ? 15 : 8)
+      - (generic ? 60 : 0),
     );
     return {
       file: article.file,
@@ -873,6 +886,7 @@ function buildQuickAnswerScore() {
       words,
       has_number: hasNumber,
       mentions_h1_term: mentionsH1Term,
+      generic_template: generic,
       excerpt: answer.slice(0, 220),
     };
   }).sort((a, b) => a.score - b.score);

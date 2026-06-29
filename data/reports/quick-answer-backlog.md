@@ -1,9 +1,9 @@
 # Quick Answer Backlog
 
-- generated_at: 2026-06-04T08:53:30.021Z
-- total_articles: 76
+- generated_at: 2026-06-29T13:26:23.999Z
+- total_articles: 88
 - fail_count: 0
-- fixed_count: 76
+- fixed_count: 88
 
-| URL | Kategoria | Słowa | Banned phrase | Liczba/warunek | Fala | Status |
-|---|---:|---:|---:|---:|---:|---|
+| URL | Kategoria | Słowa | Banned phrase | Generyczny szablon | Liczba/warunek | Fala | Status |
+|---|---:|---:|---:|---:|---:|---:|---|

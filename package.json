@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run build:esbuild",
     "build:esbuild": "esbuild src/app.ts src/cmp.ts src/footer.ts src/search.ts src/protein-calculator.ts src/phenoage-calculator.ts --outdir=dist --target=es2018 --format=iife --log-level=error",
-    "session:start": "bash scripts/session-start-report.sh && node scripts/agent-context.js && node scripts/fitpo50-doctor.js",
+    "session:start": "node scripts/agent-context.js && node scripts/fitpo50-doctor.js",
     "fitpo50:doctor": "node scripts/fitpo50-doctor.js",
     "agent:context": "node scripts/agent-context.js",
     "admin:doctor": "node scripts/admin-doctor.js",

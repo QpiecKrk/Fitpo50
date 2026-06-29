@@ -170,7 +170,7 @@ def upsert_button(html_path: Path, slug: str, size_kb: int) -> bool:
     html_without_marker = marker_pattern.sub("", html)
 
     wrapper_pattern = re.compile(
-        r"(?P<indent>^[ \t]*)<div class=\"article-primary-actions\"[^>]*>\n(?P<body>[\s\S]*?)(?P=indent)</div>",
+        r"(?P<indent>[ \t]*)<div\b(?=[^>]*\bclass=\"[^\"]*\barticle-primary-actions\b[^\"]*\")[^>]*>\s*(?P<body>[\s\S]*?)</div>",
         flags=re.MULTILINE,
     )
     wrapper_match = wrapper_pattern.search(html_without_marker)
@@ -180,7 +180,7 @@ def upsert_button(html_path: Path, slug: str, size_kb: int) -> bool:
     wrapper_indent = wrapper_match.group("indent")
     wrapper_body = wrapper_match.group("body")
     share_match = re.search(
-        r"[ \t]*<button class=\"pdf-hero-download pdf-hero-download--share\"[\s\S]*?</button>\n?",
+        r"[ \t]*<button\b(?=[^>]*\bclass=\"[^\"]*\bpdf-hero-download\b[^\"]*\bpdf-hero-download--share\b[^\"]*\")[\s\S]*?</button>\n?",
         wrapper_body,
         flags=re.DOTALL,
     )

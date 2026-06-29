@@ -8,6 +8,13 @@ const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
 const JSON_OUT = path.join(REPORT_DIR, 'quick-answer-backlog.json');
 const MD_OUT = path.join(REPORT_DIR, 'quick-answer-backlog.md');
+const GENERIC_QUICK_ANSWER_PATTERNS = [
+  /Po 50-tce w temacie/i,
+  /najlepiej działa plan oparty na danych/i,
+  /najpierw sprawdź punkt wyjścia/i,
+  /wdrażaj zmiany krokami przez 4-8 tygodni/i,
+  /zmniejsz obciążenie i\s*$/i,
+];
 
 function listArticleFiles() {
   return fs.readdirSync(ROOT)
@@ -51,6 +58,12 @@ function waveForItem(url, category, topUrls) {
   return 3;
 }
 
+function findGenericQuickAnswerIssue(text) {
+  const normalized = String(text || '').replace(/\s+/g, ' ').trim();
+  const pattern = GENERIC_QUICK_ANSWER_PATTERNS.find((rx) => rx.test(normalized));
+  return pattern ? 'generyczny quick answer z szablonu' : '';
+}
+
 function main() {
   const topUrls = readTopPriorityUrls();
   const files = listArticleFiles();
@@ -64,9 +77,12 @@ function main() {
     const url = `https://fitpo50.pl/${file}`;
     const validation = validators.validateQuickAnswer(qaText, { mode: 'strict' });
     const hasBannedPhrase = validators.containsBannedPhrase(qaText).found;
+    const genericIssue = findGenericQuickAnswerIssue(qaText);
     const hasNumberOrCondition = validators.hasNumberOrCondition(qaText);
     const wave = waveForItem(url, category, topUrls);
-    const status = validation.errors.length ? 'DO_NAPRAWY' : 'NAPRAWIONO';
+    const errors = [...validation.errors];
+    if (genericIssue) errors.push(genericIssue);
+    const status = errors.length ? 'DO_NAPRAWY' : 'NAPRAWIONO';
 
     items.push({
       file,
@@ -74,10 +90,11 @@ function main() {
       category,
       quick_answer_words: validation.words,
       has_banned_phrase: hasBannedPhrase,
+      has_generic_template: Boolean(genericIssue),
       has_number_or_condition: hasNumberOrCondition,
       wave,
       status,
-      errors: validation.errors,
+      errors,
     });
   }
 
@@ -104,10 +121,10 @@ function main() {
   lines.push(`- fail_count: ${report.fail_count}`);
   lines.push(`- fixed_count: ${report.fixed_count}`);
   lines.push('');
-  lines.push('| URL | Kategoria | Słowa | Banned phrase | Liczba/warunek | Fala | Status |');
-  lines.push('|---|---:|---:|---:|---:|---:|---|');
+  lines.push('| URL | Kategoria | Słowa | Banned phrase | Generyczny szablon | Liczba/warunek | Fala | Status |');
+  lines.push('|---|---:|---:|---:|---:|---:|---:|---|');
   for (const item of backlog) {
-    lines.push(`| ${item.url} | ${item.category} | ${item.quick_answer_words} | ${item.has_banned_phrase ? 'tak' : 'nie'} | ${item.has_number_or_condition ? 'tak' : 'nie'} | ${item.wave} | ${item.status} |`);
+    lines.push(`| ${item.url} | ${item.category} | ${item.quick_answer_words} | ${item.has_banned_phrase ? 'tak' : 'nie'} | ${item.has_generic_template ? 'tak' : 'nie'} | ${item.has_number_or_condition ? 'tak' : 'nie'} | ${item.wave} | ${item.status} |`);
   }
   fs.writeFileSync(MD_OUT, `${lines.join('\n')}\n`, 'utf8');
 

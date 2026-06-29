@@ -30,6 +30,8 @@ _try_optional_path("/tmp/pdfdeps")
 
 from bs4 import BeautifulSoup, Tag  # type: ignore
 from fpdf import FPDF  # type: ignore
+from fpdf.fonts import FontFace  # type: ignore
+from fpdf.html import TextStyle  # type: ignore
 from PIL import Image  # type: ignore
 
 
@@ -37,6 +39,10 @@ BASE_URL = "https://fitpo50.pl/"
 
 TEXT_TAGS = {"p", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "blockquote"}
 CONTAINER_TAGS = {"section", "div", "article"}
+HTML_TAG_STYLES = {
+    "code": FontFace(family="Arial"),
+    "pre": TextStyle(font_family="Arial"),
+}
 
 
 def normalize_href(href: str, source_url: str) -> str:
@@ -123,10 +129,14 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
         if not fragment:
             return
         try:
-            pdf.write_html(fragment)
+            pdf.write_html(fragment, tag_styles=HTML_TAG_STYLES)
         except Exception:
             text = node.get_text(" ", strip=True)
             if text:
+                if pdf.page == 0:
+                    pdf.add_page()
+                pdf.set_font("Arial", size=11)
+                pdf.set_text_color(0, 0, 0)
                 pdf.multi_cell(0, 6, text)
         pdf.ln(2)
         return
@@ -139,6 +149,10 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
 
     text = node.get_text(" ", strip=True)
     if text:
+        if pdf.page == 0:
+            pdf.add_page()
+        pdf.set_font("Arial", size=11)
+        pdf.set_text_color(0, 0, 0)
         pdf.multi_cell(0, 6, text)
         pdf.ln(2)
 
