@@ -1,30 +1,7 @@
 {
   "version": 1,
-  "updated_at": "2026-06-25T08:33:27.550Z",
+  "updated_at": "2026-06-29T14:02:58.746Z",
   "records": [
-    {
-      "scope": "article-pipeline-fail",
-      "at": "2026-05-10T18:56:04.378Z",
-      "total_ms": 373,
-      "steps": [
-        {
-          "tag": "Raw JSON parse gate (input)",
-          "durationMs": 87
-        },
-        {
-          "tag": "JSON auto-fix (working copy)",
-          "durationMs": 119
-        },
-        {
-          "tag": "JSON strict autofix (links/FAQ/QA/title)",
-          "durationMs": 78
-        },
-        {
-          "tag": "JSON gate (single file)",
-          "durationMs": 89
-        }
-      ]
-    },
     {
       "scope": "article-pipeline",
       "at": "2026-05-10T18:59:14.670Z",
@@ -4239,6 +4216,37 @@
         {
           "tag": "Predeploy gate (slug)",
           "durationMs": 102
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-06-29T14:02:58.746Z",
+      "total_ms": 3221,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 49
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1696
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 1417
+        },
+        {
+          "tag": "build",
+          "durationMs": 340
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 46
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 58
         }
       ]
     }
