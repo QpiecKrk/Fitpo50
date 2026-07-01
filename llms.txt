@@ -383,4 +383,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Co się dzieje z ciałem, gdy nie trenujesz przez 2 tygodnie | FitPo50"
   section: "Ruch"
   summary: "Dwa tygodnie bez treningu nie kasują efektów, ale ciało zaczyna się zmieniać: spada wydolność, gęstnieje krew, rośnie cukier. Sprawdź, co realnie tracisz."
+- url: https://fitpo50.pl/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html
+  title: "MIT: jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól | FitPo50"
+  section: "Mity"
+  summary: "Czy jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól nie są wrogami; problemem jest nadmiar soków, słodyczy, fast foodu i gotowców w diecie."
 

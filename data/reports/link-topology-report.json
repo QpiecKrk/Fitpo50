@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-25T08:33:27.366Z",
-  "pages_total": 112,
+  "generated_at": "2026-07-01T10:59:09.720Z",
+  "pages_total": 114,
   "min_inbound": 2,
   "weak_pages": [
     {
@@ -15,7 +15,7 @@
         {
           "src": "mira-ai-agent-sor-lepszy-od-lekarzy.html",
           "score": 1,
-          "inboundSrc": 4
+          "inboundSrc": 5
         }
       ]
     },
@@ -31,7 +31,7 @@
         {
           "src": "mira-ai-agent-sor-lepszy-od-lekarzy.html",
           "score": 1,
-          "inboundSrc": 4
+          "inboundSrc": 5
         }
       ]
     },
@@ -62,12 +62,12 @@
         {
           "src": "centrum-bialka-po-50.html",
           "score": 1,
-          "inboundSrc": 13
+          "inboundSrc": 16
         },
         {
           "src": "ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html",
           "score": 1,
-          "inboundSrc": 12
+          "inboundSrc": 13
         },
         {
           "src": "kalkulator-phenoage-wiek-fenotypowy.html",

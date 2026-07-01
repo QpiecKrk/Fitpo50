@@ -815,7 +815,7 @@ Przy review sprawdzaj w pierwszej kolejnosci:
 - Motto na hero artykulu: `.hero-motto`
 - H2 to glowne sekcje
 - H3 to podsekcje
-- Tabele robimy standardowym `table` wewnatrz `.article-content`
+- Tabele w artykulach musza byc ladnie zaprojektowane, nie jako surowy HTML: uzywaj wrappera `.article-table-wrap`, klasy `.article-table` oraz w razie potrzeby modifiera `.article-table--compact`; kazda tabela ma miec sensowny `<caption>`, czytelne naglowki, krotkie komorki i nie moze byc zawinieta w `<p><table>`.
 - Na dole artykulu:
   - sekcja `Zrodla`
   - `.medical-disclaimer`

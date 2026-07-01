@@ -136,6 +136,7 @@ Artykuł nie przechodzi, jeśli:
 - Pierwszy akapit pod każdym H2 (lead sekcji) musi mieć 30-70 słów.
 - Każdy artykuł musi mieć min. 4 sensowne linki wewnętrzne do istniejących artykułów.
 - Linki wewnętrzne w treści mają być wyłącznie względne (`href="slug-artykulu.html"`), bez `https://fitpo50.pl/...`.
+- Tabele w artykułach mają być dopracowane wizualnie: wrapper `.article-table-wrap`, tabela `.article-table` oraz w razie potrzeby `.article-table--compact`; każda tabela wymaga konkretnego `<caption>`, krótkich komórek, czytelnych nagłówków i nie może być zawinięta w `<p><table>`.
 
 ## 11. Media + Syntax Contract v2.0 (obowiązkowe)
 - Obrazy w treści artykułu mają korzystać ze standardu:
