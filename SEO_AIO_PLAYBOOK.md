@@ -96,3 +96,104 @@ Uwaga: to kolejka startowa oparta o potencjal zapytan i szerokosc intencji. Po p
 - Sprawdzic FAQ (min. 4 Q/A) + schema `FAQPage` 1:1.
 - Podbic CTR: test 1 nowego title + 1 nowej meta description.
 - Dodac 2-3 mocne linki wewnetrzne z URL o wysokich impresjach.
+
+---
+
+## 4) Komenda `popraw-ai` - monitoring AI visibility
+
+`popraw-ai` oznacza: sprawdzamy, czy FitPo50 pojawia sie w odpowiedziach ChatGPT, Gemini, Perplexity i podobnych narzedzi dla najwazniejszych pytan uzytkownikow 50+.
+
+### Stala lista pytan startowych
+
+1. `Jak zacząć ćwiczyć po 50 roku życia?`
+2. `Jaki trening siłowy po 50 przy nadciśnieniu?`
+3. `Czy dieta keto po 50 podnosi cholesterol LDL i ApoB?`
+4. `Ile białka dziennie potrzebuje osoba po 50 roku życia?`
+5. `Dlaczego budzę się o 3 w nocy po 50 roku życia?`
+6. `Jakie badania krwi warto zrobić po 50?`
+7. `Jak bezpiecznie wrócić do formy po 50?`
+
+### Format zapisu wyniku
+
+Raport zapisujemy jako:
+
+- `data/reports/ai-visibility-monitor.md`
+- opcjonalnie `data/reports/ai-visibility-monitor.json`
+
+Kazdy test ma zawierac:
+
+- pytanie,
+- narzedzie AI (`ChatGPT`, `Gemini`, `Perplexity`, inne),
+- czy AI wymienilo `FitPo50` / `FitPo50.pl`,
+- czy AI podalo link do `fitpo50.pl`,
+- jakie inne zrodla lub marki podalo,
+- czy odpowiedz byla merytorycznie poprawna,
+- ktore nasze URL-e pokrywaja intencje,
+- rekomendowana akcja: hub, quick answer, FAQ, title/meta, internal linking, cytacje, brand entity.
+
+### Liczbowy wynik miesieczny
+
+Kazdy raport `popraw-ai` ma miec prosty wynik liczbowy:
+
+- `tested_prompts`: liczba sprawdzonych pytan,
+- `fitpo50_mentions`: ile odpowiedzi wymienilo FitPo50,
+- `fitpo50_links`: ile odpowiedzi linkowalo do fitpo50.pl,
+- `top_external_sources`: najczesciej cytowane zrodla/marki zamiast FitPo50,
+- `ai_brand_visibility_score`: np. `2/7 mentions`, `1/7 links`.
+
+Ten wynik pozwala porownac miesiac do miesiaca, czy widocznosc w AI rosnie, zamiast opierac sie na pojedynczych wrazeniach.
+
+### Jak interpretowac wynik
+
+- Dobra odpowiedz bez FitPo50 = wzmacniamy brand/source visibility, a nie piszemy od zera tego samego.
+- Konkurencja cytowana zamiast nas = wzmacniamy kanoniczny URL jako answer pack.
+- Bledna odpowiedz AI = dopisujemy jasna definicje, prog, warunek bezpieczenstwa albo FAQ.
+- FitPo50 cytowane = zapisujemy wygrana i wzmacniamy klaster linkami wewnetrznymi.
+
+### `popraw-ai + popraw`
+
+Ta komenda oznacza monitoring plus wdrozenie poprawek, ale tylko gdy mamy konkretne odpowiedzi AI albo uzytkownik zatwierdzil plan.
+
+Po wdrozeniu standard jest taki sam jak dla aktualizacji artykulow:
+
+- walidacja artykulow,
+- PDF sync dla zmienionych URL-i,
+- `npm run assets:mirror:sync`,
+- `npm run sitemap:lastmod:sync`,
+- `./scripts/export_site.sh`,
+- `npm run predeploy:check`,
+- oszczedna lista URL-i do GSC.
+
+### Limity GSC
+
+Ze wzgledu na limity recznego zglaszania w Google Search Console:
+
+- po poprawce zglaszamy przede wszystkim jeden URL kanoniczny, ktory realnie zmienil sie najmocniej,
+- dodatkowo zglaszamy `https://fitpo50.pl/sitemap.xml`,
+- URL-e wspierajace zglaszamy tylko wtedy, gdy byly mocno zmienione albo sa strategicznym hubem klastra,
+- nie zglaszamy hurtowo wszystkich stron podlinkowanych wewnetrznie.
+
+### Google AI Overviews vs LLM-y
+
+Nie mieszamy mechanizmow:
+
+- Google AI Overviews: indeksowalny HTML, sitemap, schema, Core Web Vitals, linkowanie wewnetrzne, brak `noindex` i blokad robots.
+- ChatGPT/Gemini/Perplexity: testy promptow, brand mentions, cytowalne answer-packi, dobre zrodla, zewnetrzne wzmianki i kontrola, czy AI nie podaje blednych danych o FitPo50.
+
+### Brand entity audit
+
+Przy wiekszych pracach AIO/GEO sprawdzamy spojność marki:
+
+- `FitPo50` / `FitPo50.pl` w widocznej tresci,
+- `Organization` schema,
+- `sameAs`,
+- `o-mnie.html`,
+- opis autora,
+- stopka,
+- profile zewnetrzne.
+
+Zapis `fitpo50.pl` traktujemy jako domene. Jako marke stosujemy `FitPo50` albo `FitPo50.pl`.
+
+### `llms-full.txt`
+
+`llms-full.txt` zostaje aktywnym elementem AIO i ma byc stale aktualizowany przy eksporcie. Nie traktujemy go jednak jako oficjalnego mechanizmu Google AI Overviews. Dla Google bazą sa indeksowalny HTML, sitemap, linkowanie wewnetrzne, schema i jakosc tresci.

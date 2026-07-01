@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2026-06-30",
+    "engine": "Claude",
+    "prompt": "Jakie badania krwi warto zrobic po 50?",
+    "fitpo50Mentioned": false,
+    "fitpo50Linked": false,
+    "sourcesProvided": false,
+    "answerQuality": "good",
+    "visibilityIssue": "FitPo50 has matching content, but was not mentioned as a source in the pasted answer.",
+    "canonicalUrl": "https://fitpo50.pl/badania-krwi-po-50-jak-czesto.html",
+    "supportingUrls": [
+      "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+      "https://fitpo50.pl/badania-po-50.html",
+      "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
+      "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html"
+    ],
+    "recommendedActions": [
+      "Strengthen the canonical answer-pack section in badania-krwi-po-50-jak-czesto.html.",
+      "Clarify annual, 1-2 year, and indication-based blood-test groups.",
+      "Improve internal links from badania-po-50.html and markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html.",
+      "Submit the canonical URL, supporting URLs, and sitemap in GSC after implementation."
+    ],
+    "priority": "high"
+  }
+]

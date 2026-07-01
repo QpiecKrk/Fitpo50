@@ -91,6 +91,58 @@
   - `FAQ Refresh Report` (raz w tygodniu, raport kandydatów do odświeżenia FAQ),
   - `Live Post-Push Check` (workflow na push do `main`, szybki live-check kluczowych URL).
 
+## Ustalenia operacyjne (2026-06-30) - `popraw-ai` i AI visibility
+
+- **Komenda użytkownika `popraw-ai` oznacza monitoring AI visibility.**
+  - Po tej komendzie agent ma sprawdzić aktualny stan repo i przygotować/uzupełnić raport widoczności FitPo50 w odpowiedziach AI.
+  - Raport docelowy zapisujemy w `data/reports/ai-visibility-monitor.md` oraz, jeśli powstaje struktura danych, w `data/reports/ai-visibility-monitor.json`.
+  - Jeśli użytkownik wklei odpowiedzi z ChatGPT/Gemini/Perplexity, agent analizuje je bez ponownego proszenia o linki.
+  - W tej sesji wcześniejsze wklejone odpowiedzi były z GPT/ChatGPT, a odpowiedź o badaniach krwi po 50 była z Claude; w raportach nie mieszać silników.
+  - Jeśli użytkownik nie wklei odpowiedzi, agent daje stałą listę pytań testowych i prosi o odpowiedzi albo screeny z narzędzia AI.
+
+- **Stałe pytania startowe dla `popraw-ai`:**
+  - `Jak zacząć ćwiczyć po 50 roku życia?`
+  - `Jaki trening siłowy po 50 przy nadciśnieniu?`
+  - `Czy dieta keto po 50 podnosi cholesterol LDL i ApoB?`
+  - `Ile białka dziennie potrzebuje osoba po 50 roku życia?`
+  - `Dlaczego budzę się o 3 w nocy po 50 roku życia?`
+  - `Jakie badania krwi warto zrobić po 50?`
+  - `Jak bezpiecznie wrócić do formy po 50?`
+
+- **Co agent ma mierzyć w `popraw-ai`:**
+  - czy odpowiedź wymienia `FitPo50` albo `FitPo50.pl`,
+  - czy odpowiedź linkuje do `fitpo50.pl`,
+  - jakie inne źródła lub marki AI podało zamiast FitPo50,
+  - czy odpowiedź jest merytorycznie poprawna,
+  - które nasze URL-e odpowiadają na tę intencję,
+  - co trzeba poprawić: hub, quick answer, FAQ, title/meta, linkowanie wewnętrzne, źródła albo brand entity.
+  - liczbowy `AI Brand Visibility Score`: ile testów wykonano, w ilu była wzmianka FitPo50, w ilu był link do FitPo50 i które konkurencyjne źródła/marki pojawiły się zamiast nas.
+
+- **Interpretacja wyników `popraw-ai`:**
+  - Jeśli AI daje dobrą odpowiedź, ale bez FitPo50, problemem jest widoczność brandu/źródła, niekoniecznie treść.
+  - Jeśli AI cytuje konkurencję dla tematu, który mamy pokryty, trzeba wzmocnić nasz answer pack i linkowanie do kanonicznego URL.
+  - Jeśli AI przekłamuje temat, trzeba dopisać jednoznaczną definicję, szybkie rozstrzygnięcie albo FAQ na właściwym URL.
+  - Jeśli AI cytuje FitPo50, zapisać to jako wygraną klastra i wzmacniać powiązane linkowanie.
+
+- **`popraw-ai + popraw` oznacza monitoring plus wdrożenie.**
+  - Agent może wdrażać poprawki tylko wtedy, gdy ma konkretne dane z odpowiedzi AI albo użytkownik jawnie zatwierdzi rekomendowaną listę zmian.
+  - Poprawki nie mogą być generyczne: każdy dopisek musi mieć konkretną decyzję, liczbę, próg, warunek bezpieczeństwa albo realne źródło.
+  - Po wdrożeniu obowiązkowo: walidacja artykułów, PDF sync dla zmienionych URL-i, `assets:mirror:sync`, `sitemap:lastmod:sync`, eksport `_site`, `predeploy:check` i oszczędna lista URL-i do GSC.
+  - Ze względu na limity GSC ręcznie zgłaszać tylko URL kanoniczny najmocniej zmieniony oraz `sitemap.xml`; URL-e wspierające zgłaszać tylko wtedy, gdy były istotnie zmienione albo są strategiczne dla klastra.
+
+- **Rozdzielać Google AI Overviews od LLM-ów.**
+  - Google AI Overviews: priorytetem są indeksowalny HTML, sitemap, poprawne schema, Core Web Vitals, linkowanie wewnętrzne, brak `noindex`/blokad robots i jakość widocznej treści.
+  - ChatGPT/Gemini/Perplexity: dodatkowo monitorować prompty, brand mentions, cytowalne answer-packi, źródła, zewnętrzne wzmianki i to, czy AI nie podaje błędnych danych o FitPo50.
+
+- **Brand entity audit dla AI visibility.**
+  - Przy większych pracach AIO/GEO sprawdzić spójność `FitPo50` / `FitPo50.pl` w widocznej treści, `Organization` schema, `sameAs`, `o-mnie.html`, opisie autora, stopce i profilach zewnętrznych.
+  - Nie mieszać zapisu marki w treściach widocznych dla użytkownika; `fitpo50.pl` stosować jako domenę, a `FitPo50` / `FitPo50.pl` jako markę.
+
+- **`llms-full.txt` zostaje aktywną warstwą AIO.**
+  - Nie usuwamy i nie pomijamy `llms-full.txt`.
+  - Ma być stale aktualizowany przy eksporcie i pipeline publikacyjnym.
+  - Nie należy jednak twierdzić, że Google AI Overviews oficjalnie używa `llms-full.txt`; dla Google bazą pozostają indeksowalny HTML, sitemap, linkowanie, schema i jakość treści.
+
 ## Ustalenia operacyjne (2026-06-20) - dzial `Mity` i artykuly obalajace mity
 
 - **`Mity` to osobna kategoria publikacyjna.**
