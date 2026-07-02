@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/mit-jedzenie-cie-truje-hero.avif" type="image/avif">
-          <source srcset="./assets/mit-jedzenie-cie-truje-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/mit-jedzenie-cie-truje-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/krew-pepowinowa-hero.avif" type="image/avif">
+          <source srcset="./assets/krew-pepowinowa-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/krew-pepowinowa-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">MIT: jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól nie są wrogami; problemem jest nadmiar soków, słodyczy, fast foodu i gotowców w diecie.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Krew pępowinowa: cudowny skarb czy sprytny marketing po porodzie?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy warto bankować krew pępowinową? Sprawdź, kiedy ratuje życie, kiedy to marketing, jakie są koszty, ograniczenia i realne szanse użycia próbki.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="krew-pepowinowa-skarb-czy-marketing.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'MIT: jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól',
-        excerpt: 'Czy jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól nie są wrogami; problemem jest nadmiar soków, słodyczy, fast foodu i gotowców w diecie.',
-        image: './assets/mit-jedzenie-cie-truje-hero.webp',
-        url: 'mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html'
+        title: 'Krew pępowinowa: cudowny skarb czy sprytny marketing po porodzie?',
+        excerpt: 'Czy warto bankować krew pępowinową? Sprawdź, kiedy ratuje życie, kiedy to marketing, jakie są koszty, ograniczenia i realne szanse użycia próbki.',
+        image: './assets/krew-pepowinowa-hero.webp',
+        url: 'krew-pepowinowa-skarb-czy-marketing.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2543,6 +2543,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Ciekawe',
+          title: 'Krew pępowinowa: cudowny skarb czy sprytny marketing po porodzie?',
+          excerpt: 'Czy warto bankować krew pępowinową? Sprawdź, kiedy ratuje życie, kiedy to marketing, jakie są koszty, ograniczenia i realne szanse użycia próbki.',
+          image: './assets/krew-pepowinowa-hero.webp',
+          url: 'krew-pepowinowa-skarb-czy-marketing.html'
+        },
+        {
           category: 'Mity',
           title: 'MIT: jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól',
           excerpt: 'Czy jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól nie są wrogami; problemem jest nadmiar soków, słodyczy, fast foodu i gotowców w diecie.',
@@ -2555,13 +2562,6 @@
           excerpt: 'Dwa tygodnie bez treningu nie kasują efektów, ale ciało zaczyna się zmieniać: spada wydolność, gęstnieje krew, rośnie cukier. Sprawdź, co realnie tracisz.',
           image: './assets/co-sie-dzieje-z-cialem-2-tygodnie-hero.webp',
           url: 'co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Zastrzyk, który cofa starzenie komórek oka — co już wiemy?',
-          excerpt: '9 czerwca 2026 r. pierwszy człowiek otrzymał lek ER-100 cofający epigenetyczne starzenie komórek oka. Wyjaśniamy, co to oznacza dla nauki i dla nas.',
-          image: './assets/er-100-hero-oko-nadzieja.webp',
-          url: 'zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

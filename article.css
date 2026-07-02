@@ -249,7 +249,13 @@ body.article-template .article-kicker-card__meta {
   font-weight: 600;
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
+}
+
+body.article-template .article-kicker-card__date {
+  color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
 body.article-template .article-kicker-card__category-pill {

@@ -387,4 +387,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "MIT: jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól | FitPo50"
   section: "Mity"
   summary: "Czy jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól nie są wrogami; problemem jest nadmiar soków, słodyczy, fast foodu i gotowców w diecie."
+- url: https://fitpo50.pl/krew-pepowinowa-skarb-czy-marketing.html
+  title: "Krew pępowinowa: cudowny skarb czy sprytny marketing po porodzie? | FitPo50"
+  section: "Ciekawe"
+  summary: "Czy warto bankować krew pępowinową? Sprawdź, kiedy ratuje życie, kiedy to marketing, jakie są koszty, ograniczenia i realne szanse użycia próbki."
 

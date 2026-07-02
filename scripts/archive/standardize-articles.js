@@ -101,7 +101,8 @@ function cleanupHead(headInner) {
     '<link rel="stylesheet" href="./base.css">',
     '<link rel="stylesheet" href="./style.css?v=1.4">',
     '<link rel="stylesheet" href="./article.css?v=1.4">',
-    '<link rel="icon" href="./assets/logo.jpg" type="image/jpeg">',
+    '<link rel="icon" href="./favicon.png" type="image/png">',
+    '<link rel="apple-touch-icon" href="./favicon.png">',
     '<link rel="stylesheet" href="./assets/footer.css?v=1">',
     '<meta name="google-adsense-account" content="ca-pub-4993821807276758">',
     '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758" crossorigin="anonymous"></script>'

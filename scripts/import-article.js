@@ -288,6 +288,13 @@ function toIsoDuration(readingTime) {
   return `PT${Math.max(1, mins)}M`;
 }
 
+function formatDateForDisplay(input) {
+  const raw = String(input || '').trim();
+  const m = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return raw;
+  return `${m[3]}.${m[2]}.${m[1]}`;
+}
+
 function truncateAtWordBoundary(text, maxChars) {
   const value = String(text || '').trim();
   if (!value) return '';
@@ -2556,6 +2563,7 @@ function buildHtmlFromTemplate(template, payload) {
     META_DESCRIPTION: payload.metaDescription,
     DATE_PUBLISHED: payload.datePublished,
     DATE_MODIFIED: payload.dateModified,
+    DATE_DISPLAY: formatDateForDisplay(payload.dateModified || payload.datePublished),
     READING_TIME: payload.readingTime,
     TIME_REQUIRED_ISO: payload.timeRequiredIso,
     CATEGORY_LABEL: payload.category.label,
