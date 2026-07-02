@@ -43,6 +43,10 @@ HTML_TAG_STYLES = {
     "code": FontFace(family="Arial"),
     "pre": TextStyle(font_family="Arial"),
 }
+HERO_IMAGE_WIDTH_RATIO = 0.92
+HERO_IMAGE_MAX_HEIGHT = 78
+INLINE_IMAGE_WIDTH_RATIO = 0.78
+INLINE_IMAGE_MAX_HEIGHT = 68
 
 
 def normalize_href(href: str, source_url: str) -> str:
@@ -97,16 +101,35 @@ def compress_image_to_jpg(src_path: Path, tmp_dir: Path, max_width: int = 1200, 
     return out_path
 
 
-def add_image(pdf: FPDF, image_path: Path) -> None:
+def add_image(
+    pdf: FPDF,
+    image_path: Path,
+    *,
+    width_ratio: float = INLINE_IMAGE_WIDTH_RATIO,
+    max_height: float = INLINE_IMAGE_MAX_HEIGHT,
+    caption: str = "",
+) -> None:
     with Image.open(image_path) as img:
         w_px, h_px = img.size
-    display_w = pdf.epw
+    display_w = pdf.epw * width_ratio
     display_h = display_w * (h_px / w_px)
+    if display_h > max_height:
+        display_h = max_height
+        display_w = display_h * (w_px / h_px)
 
-    if pdf.get_y() + display_h > pdf.h - pdf.b_margin:
+    caption_h = 8 if caption else 0
+    if pdf.get_y() + display_h + caption_h > pdf.h - pdf.b_margin:
         pdf.add_page()
-    pdf.image(str(image_path), w=display_w)
-    pdf.ln(3)
+    x = pdf.l_margin + max((pdf.epw - display_w) / 2, 0)
+    pdf.image(str(image_path), x=x, w=display_w, h=display_h)
+    pdf.ln(2)
+    if caption:
+        pdf.set_font("Arial", "I", 8)
+        pdf.set_text_color(90, 90, 90)
+        pdf.multi_cell(0, 4, caption, align="C")
+        pdf.set_font("Arial", size=11)
+        pdf.set_text_color(0, 0, 0)
+    pdf.ln(2)
 
 
 def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir: Path) -> None:
@@ -119,7 +142,9 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
             return
         try:
             compressed = compress_image_to_jpg(path, tmp_dir=tmp_dir)
-            add_image(pdf, compressed)
+            caption_node = node.find("figcaption")
+            caption = caption_node.get_text(" ", strip=True) if caption_node else ""
+            add_image(pdf, compressed, caption=caption)
         except Exception:
             return
         return
@@ -204,7 +229,12 @@ def generate_pdf(input_html: Path, output_pdf: Path, source_url: str) -> None:
             if hero_path and hero_path.exists():
                 try:
                     hero_compressed = compress_image_to_jpg(hero_path, tmp_dir=tmp_dir)
-                    add_image(pdf, hero_compressed)
+                    add_image(
+                        pdf,
+                        hero_compressed,
+                        width_ratio=HERO_IMAGE_WIDTH_RATIO,
+                        max_height=HERO_IMAGE_MAX_HEIGHT,
+                    )
                 except Exception:
                     pass
 
