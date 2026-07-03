@@ -1,34 +1,7 @@
 {
   "version": 1,
-  "updated_at": "2026-07-02T07:49:22.741Z",
+  "updated_at": "2026-07-02T19:15:09.450Z",
   "records": [
-    {
-      "scope": "prepush-local",
-      "at": "2026-05-12T21:17:59.723Z",
-      "total_ms": 3374,
-      "steps": [
-        {
-          "tag": "prepush:diff-guard",
-          "durationMs": 973
-        },
-        {
-          "tag": "prepush:parallel:checks",
-          "durationMs": 1713
-        },
-        {
-          "tag": "build:esbuild",
-          "durationMs": 76
-        },
-        {
-          "tag": "smoke:static(_site)",
-          "durationMs": 189
-        },
-        {
-          "tag": "tmp:cleanup",
-          "durationMs": 685
-        }
-      ]
-    },
     {
       "scope": "prepush-local",
       "at": "2026-05-12T21:33:02.530Z",
@@ -4347,6 +4320,37 @@
         {
           "tag": "Predeploy gate (slug)",
           "durationMs": 154
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-07-02T19:15:09.450Z",
+      "total_ms": 2613,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 53
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1958
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 520
+        },
+        {
+          "tag": "build",
+          "durationMs": 376
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 59
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 82
         }
       ]
     }
