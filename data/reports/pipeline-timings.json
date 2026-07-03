@@ -1,34 +1,7 @@
 {
   "version": 1,
-  "updated_at": "2026-07-02T19:15:09.450Z",
+  "updated_at": "2026-07-03T13:13:44.434Z",
   "records": [
-    {
-      "scope": "prepush-local",
-      "at": "2026-05-12T21:33:02.530Z",
-      "total_ms": 1113,
-      "steps": [
-        {
-          "tag": "prepush:diff-guard",
-          "durationMs": 386
-        },
-        {
-          "tag": "prepush:parallel:checks",
-          "durationMs": 467
-        },
-        {
-          "tag": "build:esbuild",
-          "durationMs": 63
-        },
-        {
-          "tag": "smoke:static(_site)",
-          "durationMs": 193
-        },
-        {
-          "tag": "tmp:cleanup",
-          "durationMs": 222
-        }
-      ]
-    },
     {
       "scope": "prepush-local",
       "at": "2026-05-13T02:32:51.117Z",
@@ -4351,6 +4324,37 @@
         {
           "tag": "tmp:cleanup",
           "durationMs": 82
+        }
+      ]
+    },
+    {
+      "scope": "prepush-local",
+      "at": "2026-07-03T13:13:44.434Z",
+      "total_ms": 2386,
+      "steps": [
+        {
+          "tag": "prepush:diff-guard",
+          "durationMs": 57
+        },
+        {
+          "tag": "fitpo50:doctor",
+          "durationMs": 1765
+        },
+        {
+          "tag": "prepush:parallel:checks",
+          "durationMs": 504
+        },
+        {
+          "tag": "build",
+          "durationMs": 413
+        },
+        {
+          "tag": "smoke:static(_site)",
+          "durationMs": 51
+        },
+        {
+          "tag": "tmp:cleanup",
+          "durationMs": 59
         }
       ]
     }
