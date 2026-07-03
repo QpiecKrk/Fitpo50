@@ -6,6 +6,11 @@ const os = require('os');
 const path = require('path');
 const { validateArticleContract } = require('./article-contract-check');
 
+const MUST_FIX_ON_TOUCH = [
+  /^Niespójny tytuł: <title> \(bez "\| FitPo50"\) != (?:og:title|twitter:title)\.$/,
+  /^(?:og:image|twitter:image) powinno wskazywać plik \.jpg \(kompatybilność social scraperów\)\.$/,
+];
+
 function run(cmd, args) {
   return spawnSync(cmd, args, { encoding: 'utf8' });
 }
@@ -73,6 +78,14 @@ function newErrorsOnly(currentErrors, previousErrors) {
   return currentErrors.filter((error) => !previous.has(error));
 }
 
+function mustFixOnTouchErrors(currentErrors) {
+  return currentErrors.filter((error) => MUST_FIX_ON_TOUCH.some((rx) => rx.test(error)));
+}
+
+function mustFixOnTouchWarnings(currentWarnings) {
+  return currentWarnings.filter((warning) => MUST_FIX_ON_TOUCH.some((rx) => rx.test(warning)));
+}
+
 function main() {
   const files = changedHtmlFiles();
   if (!files.length) {
@@ -86,13 +99,20 @@ function main() {
     const previousRaw = originMainRaw(file);
     const previous = previousRaw ? validateRaw(previousRaw, file) : { errors: [], warnings: [] };
     const newErrors = newErrorsOnly(current.errors, previous.errors);
-    const legacyErrors = unchangedLegacyErrors(current.errors, previous.errors);
+    const currentMustFix = mustFixOnTouchErrors(current.errors);
+    const currentMustFixWarnings = mustFixOnTouchWarnings(current.warnings);
+    const reportableErrors = [...new Set([...newErrors, ...currentMustFix, ...currentMustFixWarnings])];
+    const reportable = new Set(reportableErrors);
+    const legacyErrors = unchangedLegacyErrors(current.errors, previous.errors)
+      .filter((error) => !reportable.has(error));
 
-    current.warnings.forEach((warning) => console.log(`⚠ ${file}: ${warning}`));
+    current.warnings
+      .filter((warning) => !reportable.has(warning))
+      .forEach((warning) => console.log(`⚠ ${file}: ${warning}`));
 
-    if (newErrors.length) {
+    if (reportableErrors.length) {
       console.log(`✖ ${file}`);
-      newErrors.forEach((error) => console.log(`  - ${error}`));
+      reportableErrors.forEach((error) => console.log(`  - ${error}`));
       if (legacyErrors.length) {
         console.log(`  - Pominięto stare błędy bez zmian: ${legacyErrors.length}.`);
       }

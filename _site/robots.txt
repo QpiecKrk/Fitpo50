@@ -1,30 +1,84 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /assets/data/
+Disallow: /sukcesy/
+Disallow: /*.php$
+Disallow: /*.sqlite$
 
 # AI crawlers / answer engines
 User-agent: GPTBot
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /assets/data/
+Disallow: /sukcesy/
+Disallow: /*.php$
+Disallow: /*.sqlite$
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /assets/data/
+Disallow: /sukcesy/
+Disallow: /*.php$
+Disallow: /*.sqlite$
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /assets/data/
+Disallow: /sukcesy/
+Disallow: /*.php$
+Disallow: /*.sqlite$
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /assets/data/
+Disallow: /sukcesy/
+Disallow: /*.php$
+Disallow: /*.sqlite$
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /assets/data/
+Disallow: /sukcesy/
+Disallow: /*.php$
+Disallow: /*.sqlite$
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /assets/data/
+Disallow: /sukcesy/
+Disallow: /*.php$
+Disallow: /*.sqlite$
 
 User-agent: CCBot
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /assets/data/
+Disallow: /sukcesy/
+Disallow: /*.php$
+Disallow: /*.sqlite$
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /assets/data/
+Disallow: /sukcesy/
+Disallow: /*.php$
+Disallow: /*.sqlite$
 
 Sitemap: https://fitpo50.pl/sitemap.xml
 Host: fitpo50.pl

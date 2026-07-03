@@ -124,7 +124,7 @@ function validateArticleSchemas(file, html) {
     errors.push(`${file}: FAQPage ma puste mainEntity.`);
   }
   if (faqItems > 0 && faqSchema && Array.isArray(faqSchema.mainEntity) && faqSchema.mainEntity.length < faqItems) {
-    warnings.push(`${file}: FAQPage ma mniej pozycji (${faqSchema.mainEntity.length}) niż widoczne FAQ (${faqItems}).`);
+    errors.push(`${file}: FAQPage ma mniej pozycji (${faqSchema.mainEntity.length}) niż widoczne FAQ (${faqItems}).`);
   }
 }
 

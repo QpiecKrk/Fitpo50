@@ -68,6 +68,58 @@ function validateSitemapLastmodFreshness(errors) {
   }
 }
 
+function validateRobotsHygiene(errors) {
+  const requiredDisallows = [
+    'Disallow: /admin/',
+    'Disallow: /data/',
+    'Disallow: /assets/data/',
+    'Disallow: /sukcesy/',
+    'Disallow: /*.php$',
+    'Disallow: /*.sqlite$',
+  ];
+  for (const rel of ['robots.txt', '_site/robots.txt']) {
+    if (!exists(rel)) {
+      errors.push(`Brak pliku: ${rel}`);
+      continue;
+    }
+    const raw = readUtf8(rel);
+    const groups = raw
+      .split(/(?=^User-agent:)/m)
+      .map((group) => group.trim())
+      .filter((group) => /^User-agent:/m.test(group));
+    if (!groups.length) {
+      errors.push(`${rel}: brak grup User-agent.`);
+      continue;
+    }
+    groups.forEach((group) => {
+      const agent = group.match(/^User-agent:\s*(.+)$/m)?.[1]?.trim() || '(unknown)';
+      requiredDisallows.forEach((rule) => {
+        if (!group.includes(rule)) errors.push(`${rel}: grupa User-agent ${agent} nie zawiera "${rule}".`);
+      });
+    });
+  }
+}
+
+function validateHtaccessRobotsHygiene(errors) {
+  const requiredSnippets = [
+    'RewriteRule ^assets/?$ - [G,L]',
+    'RewriteRule ^sukcesy/?$ - [G,L]',
+    'SetEnvIf Request_URI "^/(admin|data|assets/data|assets/pdf|sukcesy)(/|$)" fitpo50_noindex=1',
+    'SetEnvIf Request_URI "\\.(json|pdf|sqlite)$" fitpo50_noindex=1',
+    'Header always set X-Robots-Tag "noindex, nofollow" env=fitpo50_noindex',
+  ];
+  for (const rel of ['.htaccess', '_site/.htaccess']) {
+    if (!exists(rel)) {
+      errors.push(`Brak pliku: ${rel}`);
+      continue;
+    }
+    const raw = readUtf8(rel);
+    requiredSnippets.forEach((snippet) => {
+      if (!raw.includes(snippet)) errors.push(`${rel}: brak zabezpieczenia robots hygiene: ${snippet}`);
+    });
+  }
+}
+
 function readJson(relPath) {
   return JSON.parse(readUtf8(relPath));
 }
@@ -532,6 +584,8 @@ function main() {
     return;
   }
   validateSitemapLastmodFreshness(errors);
+  validateRobotsHygiene(errors);
+  validateHtaccessRobotsHygiene(errors);
 
   const indexHtml = readUtf8('index.html');
   const poradyHtml = readUtf8('porady.html');
