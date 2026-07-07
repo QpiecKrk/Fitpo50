@@ -45,6 +45,9 @@ sukcesy/*.html
 _site/sukcesy/*.html
 
 # Local-only files (do not commit)
+.env
+.env.local
+.env.*.local
 node_modules/
 _site/node_modules/
 _site/package-lock.json
@@ -52,6 +55,7 @@ admin/database.sqlite
 _site/admin/database.sqlite
 calendar-entries.local.json
 _site/calendar-entries.local.json
+data/gsc/
 
 # runtime backups for NEWS autosave (keep only .gitkeep tracked)
 data/news-backups/*.json

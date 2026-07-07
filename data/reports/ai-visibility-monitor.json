@@ -22,5 +22,181 @@
       "Submit the canonical URL, supporting URLs, and sitemap in GSC after implementation."
     ],
     "priority": "high"
+  },
+  {
+    "date": "2026-07-03",
+    "engine": "Perplexity",
+    "prompt": "Jak zacząć ćwiczyć po 50 roku życia, jeśli mam słabą kondycję?",
+    "fitpo50Mentioned": false,
+    "fitpo50Linked": false,
+    "sourcesProvided": true,
+    "answerQuality": "unknown",
+    "visibilityIssue": "Perplexity did not cite any FitPo50 URL for a broad beginner fitness query that matches existing FitPo50 content.",
+    "canonicalUrl": "https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html",
+    "supportingUrls": [
+      "https://fitpo50.pl/jak-zaczac-na-silowni-po-50.html",
+      "https://fitpo50.pl/trening-3x30-dla-50-plus.html",
+      "https://fitpo50.pl/bledy-50.html",
+      "https://fitpo50.pl/badania-po-50.html"
+    ],
+    "recommendedActions": [
+      "Strengthen the canonical answer-pack section around starting exercise with poor conditioning after 50.",
+      "Add precise internal links from beginner training, mistakes, and medical-checkup articles to the canonical guide.",
+      "Make the first answer explicitly separate walking, strength training, balance, and warning symptoms.",
+      "Retest the same Perplexity prompt after indexing."
+    ],
+    "priority": "high"
+  },
+  {
+    "date": "2026-07-03",
+    "engine": "Perplexity",
+    "prompt": "Co jest ważniejsze po 50: trening siłowy czy cardio?",
+    "fitpo50Mentioned": false,
+    "fitpo50Linked": false,
+    "sourcesProvided": true,
+    "answerQuality": "unknown",
+    "visibilityIssue": "Perplexity did not cite FitPo50 for a comparison query where FitPo50 has a strong training cluster.",
+    "canonicalUrl": "https://fitpo50.pl/dlaczego-bieznia-to-za-malo.html",
+    "supportingUrls": [
+      "https://fitpo50.pl/centrum-treningu-silowego-po-50.html",
+      "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
+      "https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html",
+      "https://fitpo50.pl/wydolnosc-vo2max-starzenie-po-50.html"
+    ],
+    "recommendedActions": [
+      "Position dlaczego-bieznia-to-za-malo.html as the canonical answer to strength versus cardio after 50.",
+      "Add a direct answer that says cardio builds the engine, strength protects muscle, joints, glucose control, and independence.",
+      "Strengthen reciprocal links between the strength hub, VO2max article, and treadmill/cardio article.",
+      "Retest the same Perplexity prompt after indexing."
+    ],
+    "priority": "high"
+  },
+  {
+    "date": "2026-07-03",
+    "engine": "Perplexity",
+    "prompt": "Jak obniżyć kortyzol naturalnie po 50 roku życia?",
+    "fitpo50Mentioned": false,
+    "fitpo50Linked": false,
+    "sourcesProvided": true,
+    "answerQuality": "unknown",
+    "visibilityIssue": "Perplexity did not cite FitPo50 for a cortisol query that directly matches the cortisol/metabolism cluster.",
+    "canonicalUrl": "https://fitpo50.pl/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html",
+    "supportingUrls": [
+      "https://fitpo50.pl/centrum-metabolizmu-po-50.html",
+      "https://fitpo50.pl/sen-po-50.html",
+      "https://fitpo50.pl/optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html",
+      "https://fitpo50.pl/jak-pozbyc-sie-oponki-brzusznej-po-50.html"
+    ],
+    "recommendedActions": [
+      "Strengthen the cortisol article as the canonical source for natural cortisol reduction after 50.",
+      "Make the answer-pack specific: sleep timing, caffeine cutoff, strength volume, walking, protein, alcohol, and medical red flags.",
+      "Add contextual links from sleep and metabolism pages to the cortisol guide.",
+      "Retest the same Perplexity prompt after indexing."
+    ],
+    "priority": "high"
+  },
+  {
+    "date": "2026-07-04",
+    "engine": "ChatGPT",
+    "prompt": "Jak zacząć ćwiczyć po 50 roku życia, jeśli mam słabą kondycję?",
+    "fitpo50Mentioned": false,
+    "fitpo50Linked": false,
+    "sourcesProvided": true,
+    "competitorSources": [
+      "WHO",
+      "CDC",
+      "ODPHP / health.gov"
+    ],
+    "answerQuality": "unknown",
+    "visibilityIssue": "ChatGPT did not cite FitPo50 for the same beginner fitness prompt; cited institutional health sources instead.",
+    "canonicalUrl": "https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html",
+    "supportingUrls": [
+      "https://fitpo50.pl/jak-zaczac-na-silowni-po-50.html",
+      "https://fitpo50.pl/trening-3x30-dla-50-plus.html",
+      "https://fitpo50.pl/bledy-50.html",
+      "https://fitpo50.pl/badania-po-50.html"
+    ],
+    "recommendedActions": [
+      "Strengthen institutional-source alignment in the canonical guide without copying generic advice.",
+      "Place WHO/CDC-style activity targets next to FitPo50's practical staged plan for weak conditioning.",
+      "Add or verify citations to official physical activity guidelines in the article sources.",
+      "Retest ChatGPT and Perplexity after indexing."
+    ],
+    "priority": "critical"
+  },
+  {
+    "date": "2026-07-04",
+    "engine": "ChatGPT",
+    "prompt": "Co jest ważniejsze po 50: trening siłowy czy cardio?",
+    "fitpo50Mentioned": false,
+    "fitpo50Linked": false,
+    "sourcesProvided": true,
+    "competitorSources": [
+      "WHO",
+      "CDC",
+      "ODPHP / health.gov"
+    ],
+    "answerQuality": "unknown",
+    "visibilityIssue": "ChatGPT did not cite FitPo50 for the strength versus cardio prompt; it preferred official guideline sources.",
+    "canonicalUrl": "https://fitpo50.pl/dlaczego-bieznia-to-za-malo.html",
+    "supportingUrls": [
+      "https://fitpo50.pl/centrum-treningu-silowego-po-50.html",
+      "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
+      "https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html",
+      "https://fitpo50.pl/wydolnosc-vo2max-starzenie-po-50.html"
+    ],
+    "recommendedActions": [
+      "Make the article explicitly answer strength versus cardio in the first answer block.",
+      "Use official guideline targets as evidence, then add FitPo50's practical weekly model.",
+      "Strengthen internal links from the training hub and VO2max article.",
+      "Retest ChatGPT and Perplexity after indexing."
+    ],
+    "priority": "critical"
+  },
+  {
+    "date": "2026-07-04",
+    "engine": "ChatGPT",
+    "prompt": "Jak obniżyć kortyzol naturalnie po 50 roku życia?",
+    "fitpo50Mentioned": false,
+    "fitpo50Linked": false,
+    "sourcesProvided": true,
+    "competitorSources": [
+      "WHO",
+      "CDC",
+      "ODPHP / health.gov"
+    ],
+    "answerQuality": "unknown",
+    "visibilityIssue": "ChatGPT did not cite FitPo50 for the cortisol prompt; it relied on broad institutional lifestyle guidance.",
+    "canonicalUrl": "https://fitpo50.pl/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html",
+    "supportingUrls": [
+      "https://fitpo50.pl/centrum-metabolizmu-po-50.html",
+      "https://fitpo50.pl/sen-po-50.html",
+      "https://fitpo50.pl/optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html",
+      "https://fitpo50.pl/jak-pozbyc-sie-oponki-brzusznej-po-50.html"
+    ],
+    "recommendedActions": [
+      "Add stronger source-backed framing for stress, sleep, physical activity, alcohol, and caffeine.",
+      "Keep the answer practical and specific to adults 50+, not generic stress advice.",
+      "Use the sleep and metabolism pages as supporting pages pointing to the cortisol guide.",
+      "Retest ChatGPT and Perplexity after indexing."
+    ],
+    "priority": "critical"
+  },
+  {
+    "date": "2026-07-04",
+    "engine": "Gemini",
+    "prompt": "Pierwsze trzy pytania z testu AI visibility",
+    "fitpo50Mentioned": false,
+    "fitpo50Linked": false,
+    "sourcesProvided": false,
+    "answerQuality": "unknown",
+    "visibilityIssue": "Gemini answered from static model knowledge and stated it did not use live external sources, so this run is not a source-visibility test.",
+    "canonicalUrl": null,
+    "supportingUrls": [],
+    "recommendedActions": [
+      "For Gemini, repeat the test only in a mode that shows sources or asks explicitly for current sources.",
+      "Do not count this Gemini run as a citation failure; count it as non-measurable for source visibility."
+    ],
+    "priority": "medium"
   }
 ]

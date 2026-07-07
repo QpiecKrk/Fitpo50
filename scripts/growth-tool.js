@@ -8,8 +8,11 @@ const { spawnSync } = require('child_process');
 const ROOT = process.cwd();
 const REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
   ? path.resolve(process.env.FITPO50_GROWTH_REPORT_DIR)
-  : path.join(os.homedir(), 'Downloads', 'fitpo50-growth-reports');
+  : path.join(process.cwd(), 'data', 'reports', 'growth');
 const SITE_ORIGIN = 'https://fitpo50.pl';
+const TEMPORARILY_IGNORED_SEO_FILES = new Set([
+  'narzedzia.html',
+]);
 const SUPPORT_PAGES = new Set([
   'index.html',
   'porady.html',
@@ -585,6 +588,150 @@ function buildGscRefresh() {
   return report;
 }
 
+function normalizeReportFile(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  return raw.replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '').replace(/^\//, '');
+}
+
+function shouldIgnoreSeoFile(file) {
+  return TEMPORARILY_IGNORED_SEO_FILES.has(normalizeReportFile(file));
+}
+
+function actionCardsFromSeoAio(seoAio) {
+  const cards = Array.isArray(seoAio?.top_action_cards) ? seoAio.top_action_cards : [];
+  return cards.filter((card) => !shouldIgnoreSeoFile(card.file || card.url));
+}
+
+function firstCardsByType(cards, types, limit) {
+  const typeSet = new Set(types);
+  return cards
+    .filter((card) => typeSet.has(card.type))
+    .slice(0, limit)
+    .map((card) => ({
+      file: card.file,
+      url: card.url,
+      type: card.type,
+      priority: card.priority,
+      segment: card.segment,
+      decision: card.editorial_decision,
+      query: card.keyword_plan?.primary || '',
+      clicks: Number(card.gsc?.clicks || 0),
+      impressions: Number(card.gsc?.impressions || 0),
+      ctr: Number(card.gsc?.ctr || 0),
+      position: Number(card.gsc?.position || 0),
+      seo: Number(card.score?.seo || 0),
+      aeo: Number(card.score?.aeo || 0),
+      geo: Number(card.score?.geo || 0),
+      aio: Number(card.score?.aio || 0),
+      tasks: Array.isArray(card.tasks) ? card.tasks.slice(0, 4) : [],
+      source_links: Array.isArray(card.internal_link_sources)
+        ? card.internal_link_sources.slice(0, 4).map((item) => item.from).filter(Boolean)
+          .filter((file) => !shouldIgnoreSeoFile(file))
+        : [],
+      promotion_urls: Array.isArray(card.promotion_urls)
+        ? card.promotion_urls.filter((url) => !shouldIgnoreSeoFile(url)).slice(0, 6)
+        : [],
+    }));
+}
+
+function buildUnifiedInsights() {
+  const reportsDir = path.join(ROOT, 'data', 'reports');
+  const seoAio = readJsonIfExists(path.join(reportsDir, 'seo-aio-command-center.json'));
+  const quickAnswer = readJsonIfExists(path.join(reportsDir, 'quick-answer-backlog.json'));
+  const linkTopology = readJsonIfExists(path.join(reportsDir, 'link-topology-report.json'));
+  const cwv = readJsonIfExists(path.join(reportsDir, 'cwv-budget.json'));
+  const doctor = readJsonIfExists(path.join(reportsDir, 'fitpo50-doctor.json'));
+  const aiVisibility = readJsonIfExists(path.join(reportsDir, 'ai-visibility-monitor.json'));
+  const gscSubmitQueueText = readTextIfExists(path.join(reportsDir, 'gsc-submit-queue.txt'));
+
+  const cards = actionCardsFromSeoAio(seoAio);
+  const portfolio = seoAio?.portfolio || {};
+  const average = portfolio.average_scores || {};
+  const waves = seoAio?.waves || {};
+  const linkWeakPages = Array.isArray(linkTopology?.weak_pages)
+    ? linkTopology.weak_pages
+        .filter((item) => !String(item.target || '').startsWith('.agent/'))
+        .filter((item) => !shouldIgnoreSeoFile(item.target))
+        .filter((item) => !['article-template-bento.html', 'google4a31b58b207723ed.html', 'search.html'].includes(String(item.target || '')))
+        .slice(0, 8)
+    : [];
+  const aiVisibilityRows = Array.isArray(aiVisibility) ? aiVisibility : [];
+  const gscQueue = gscSubmitQueueText
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => /^https?:\/\//i.test(line))
+    .filter((line) => !shouldIgnoreSeoFile(line))
+    .slice(0, 40);
+  const doctorWarnings = Array.isArray(doctor?.checks)
+    ? doctor.checks.filter((item) => item && item.ok === false).map((item) => ({
+      label: item.label,
+      level: item.level,
+      details: item.details,
+    }))
+    : [];
+
+  const insights = [];
+  if (portfolio.total_urls) {
+    insights.push(`Portfel SEO/AIO obejmuje ${portfolio.total_urls} URL-i; średnie wyniki: SEO ${average.seo ?? 'brak'}, AEO ${average.aeo ?? 'brak'}, GEO ${average.geo ?? 'brak'}, AIO ${average.aio ?? 'brak'}.`);
+  }
+  if (Number(average.seo || 0) && Number(average.aeo || 0) && Number(average.seo) < Number(average.aeo)) {
+    insights.push('Największa luka nie jest w schema/AI, tylko w klasycznym SEO: CTR, linkowanie, widoczność i dojście do pierwszej strony.');
+  }
+  if (quickAnswer && Number(quickAnswer.fail_count || 0) === 0) {
+    insights.push(`Quick answers są domknięte: ${quickAnswer.fixed_count || 0}/${quickAnswer.total_articles || 0} artykułów spełnia kontrolę.`);
+  }
+  if (cwv?.summary && Number(cwv.summary.fail || 0) === 0 && Number(cwv.summary.warn || 0) === 0) {
+    insights.push(`CWV lokalnie bez ostrzeżeń: ${cwv.summary.urls} testowanych URL-i, fail=0, warn=0.`);
+  }
+  if (aiVisibilityRows.some((row) => row.fitpo50Mentioned === false || row.fitpo50Linked === false)) {
+    insights.push('AI visibility wymaga monitoringu: są tematy, gdzie odpowiedź AI jest dobra, ale FitPo50 nie pojawia się jako źródło.');
+  }
+  if (doctor?.status) {
+    insights.push(`Doctor: ${doctor.status}. RED blokuje pracę, YELLOW oznacza ostrzeżenia operacyjne do przeczytania.`);
+  }
+
+  return {
+    generated_at: nowWarsawIso(),
+    ignored_today: Array.from(TEMPORARILY_IGNORED_SEO_FILES),
+    source_reports: {
+      seo_aio_command_center: Boolean(seoAio && !seoAio.parse_error),
+      quick_answer_backlog: Boolean(quickAnswer && !quickAnswer.parse_error),
+      link_topology: Boolean(linkTopology && !linkTopology.parse_error),
+      cwv_budget: Boolean(cwv && !cwv.parse_error),
+      fitpo50_doctor: Boolean(doctor && !doctor.parse_error),
+      ai_visibility_monitor: Boolean(aiVisibility && !aiVisibility.parse_error),
+      gsc_submit_queue: gscQueue.length > 0,
+    },
+    portfolio,
+    waves: Object.fromEntries(Object.entries(waves).map(([key, value]) => [key, Array.isArray(value) ? value.length : 0])),
+    key_insights: insights,
+    gsc_priority: {
+      push_to_page_one: firstCardsByType(cards, ['P0_PUSH_TO_PAGE_ONE'], 12),
+      build_discovery: firstCardsByType(cards, ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'], 12),
+      scale_winners: firstCardsByType(cards, ['P2_SCALE_WINNER'], 8),
+      core_support: firstCardsByType(cards, ['P2_CORE_SUPPORT_LINKING'], 8),
+    },
+    link_topology_attention: linkWeakPages.map((item) => ({
+      file: item.target,
+      inbound: item.inbound,
+      suggested_sources: (item.suggested_sources || []).slice(0, 3).map((src) => src.src),
+    })),
+    ai_visibility_attention: aiVisibilityRows
+      .filter((row) => row.fitpo50Mentioned === false || row.fitpo50Linked === false)
+      .slice(0, 8)
+      .map((row) => ({
+        engine: row.engine,
+        prompt: row.prompt,
+        canonical_url: row.canonicalUrl,
+        priority: row.priority,
+        recommended_actions: row.recommendedActions || [],
+      })),
+    gsc_submit_queue: gscQueue,
+    operational_warnings: doctorWarnings,
+  };
+}
+
 function buildEvidencePlan() {
   const data = buildGrowthData();
   const candidates = data.articles
@@ -1085,6 +1232,7 @@ function buildPoprawSeo() {
   const llmsCheck = buildLlmsCheck();
   const perplexityMonitor = buildPerplexityMonitor();
   const autopilot = buildAutopilot();
+  const unifiedInsights = buildUnifiedInsights();
   const command = {
     generated_at: nowWarsawIso(),
     command: 'popraw-seo',
@@ -1104,7 +1252,9 @@ function buildPoprawSeo() {
       'Sprawdzono llms.txt i llms-full.txt.',
       'Zbudowano kolejkę Perplexity Monitor.',
       'Zbudowano plan autopilota bez zapisu w artykułach.',
+      'Połączono raporty GSC/SEO/AEO/GEO/AIO i wyciągnięto kluczowe wnioski.',
     ],
+    unified_insights: unifiedInsights,
     chosen_articles: autopilot.chosen_articles,
     approval_needed: 'Napisz: przygotuj poprawki 1, 2 albo 1 i 3. Najpierw pokażę gotowe teksty do zatwierdzenia, bez edycji HTML.',
     safe_next_commands: [
@@ -1127,6 +1277,7 @@ function buildPoprawSeo() {
       ['llms_check', 'llms-check.md'],
       ['perplexity_monitor', 'perplexity-monitor.md'],
       ['autopilot_plan', 'autopilot-plan.md'],
+      ['unified_insights', 'popraw-seo-insights.md'],
     ].map(([key, file]) => [key, path.join(REPORT_DIR, file)])),
     counters: {
       report_articles: report.priority_articles.length,
@@ -1144,6 +1295,8 @@ function buildPoprawSeo() {
       perplexity_prompts: perplexityMonitor.prompts.length,
     },
   };
+  writeJson(path.join(REPORT_DIR, 'popraw-seo-insights.json'), unifiedInsights);
+  writePoprawSeoInsightsMarkdown(unifiedInsights, path.join(REPORT_DIR, 'popraw-seo-insights.md'));
   writeJson(path.join(REPORT_DIR, 'popraw-seo.json'), command);
   writePoprawSeoMarkdown(command, path.join(REPORT_DIR, 'popraw-seo.md'));
   return command;
@@ -1151,6 +1304,36 @@ function buildPoprawSeo() {
 
 function writePoprawSeoMarkdown(command, file) {
   const lines = ['# Popraw SEO — Plan Do Zatwierdzenia', '', `Wygenerowano: ${command.generated_at}`, '', `Status: ${command.status}`, ''];
+  const insights = command.unified_insights || {};
+  if (Array.isArray(insights.ignored_today) && insights.ignored_today.length) {
+    lines.push(`Pominięte dziś: ${insights.ignored_today.join(', ')}`);
+    lines.push('');
+  }
+  if (Array.isArray(insights.key_insights) && insights.key_insights.length) {
+    lines.push('## Kluczowe Wnioski Z Raportów');
+    insights.key_insights.forEach((item) => lines.push(`- ${item}`));
+    lines.push('');
+  }
+  const push = insights.gsc_priority?.push_to_page_one || [];
+  if (push.length) {
+    lines.push('## GSC: Najbliżej Wzrostu');
+    push.slice(0, 8).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}`);
+      lines.push(`   - query: ${item.query || 'brak'}; impr ${item.impressions}; klik ${item.clicks}; CTR ${item.ctr}%; poz ${item.position}`);
+      if (item.tasks?.length) lines.push(`   - zadanie: ${item.tasks[0]}`);
+    });
+    lines.push('');
+  }
+  const discovery = insights.gsc_priority?.build_discovery || [];
+  if (discovery.length) {
+    lines.push('## GSC: Budowa Widoczności');
+    discovery.slice(0, 6).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}`);
+      lines.push(`   - decyzja: ${item.decision}; SEO/AEO/GEO/AIO ${item.seo}/${item.aeo}/${item.geo}/${item.aio}`);
+      if (item.tasks?.length) lines.push(`   - zadanie: ${item.tasks[0]}`);
+    });
+    lines.push('');
+  }
   lines.push('## Co się stało');
   command.what_happened.forEach((item) => lines.push(`- ${item}`));
   lines.push('');
@@ -1169,6 +1352,72 @@ function writePoprawSeoMarkdown(command, file) {
   lines.push('');
   lines.push('## Raporty');
   Object.values(command.reports).forEach((report) => lines.push(`- ${report}`));
+  writeText(file, lines.join('\n'));
+}
+
+function writePoprawSeoInsightsMarkdown(insights, file) {
+  const lines = ['# Popraw SEO — Wnioski Z GSC I Raportów', '', `Wygenerowano: ${insights.generated_at}`, ''];
+  if (insights.ignored_today?.length) {
+    lines.push(`Pominięte dziś: ${insights.ignored_today.join(', ')}`);
+    lines.push('');
+  }
+  lines.push('## Źródła');
+  Object.entries(insights.source_reports || {}).forEach(([key, ok]) => {
+    lines.push(`- ${key}: ${ok ? 'OK' : 'brak'}`);
+  });
+  lines.push('');
+  lines.push('## Wnioski');
+  (insights.key_insights || []).forEach((item) => lines.push(`- ${item}`));
+  lines.push('');
+
+  const groups = [
+    ['GSC: Szybkie Wejście Wyżej', insights.gsc_priority?.push_to_page_one || []],
+    ['GSC: Budowa Widoczności', insights.gsc_priority?.build_discovery || []],
+    ['GSC: Skalowanie Zwycięzców', insights.gsc_priority?.scale_winners || []],
+    ['Linkowanie Wspierające', insights.gsc_priority?.core_support || []],
+  ];
+  for (const [title, items] of groups) {
+    if (!items.length) continue;
+    lines.push(`## ${title}`);
+    items.slice(0, 12).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}`);
+      lines.push(`   - query: ${item.query || 'brak'}; impr ${item.impressions}; klik ${item.clicks}; CTR ${item.ctr}%; poz ${item.position}`);
+      lines.push(`   - SEO/AEO/GEO/AIO: ${item.seo}/${item.aeo}/${item.geo}/${item.aio}; decyzja: ${item.decision}`);
+      if (item.source_links?.length) lines.push(`   - linki źródłowe: ${item.source_links.join(', ')}`);
+      if (item.tasks?.length) lines.push(`   - pierwsze zadanie: ${item.tasks[0]}`);
+    });
+    lines.push('');
+  }
+
+  if (insights.link_topology_attention?.length) {
+    lines.push('## Link Topology Do Sprawdzenia');
+    insights.link_topology_attention.forEach((item) => {
+      lines.push(`- ${item.file}: inbound ${item.inbound}; kandydaci: ${item.suggested_sources.join(', ') || 'brak'}`);
+    });
+    lines.push('');
+  }
+
+  if (insights.ai_visibility_attention?.length) {
+    lines.push('## AI Visibility');
+    insights.ai_visibility_attention.forEach((item) => {
+      lines.push(`- ${item.engine}: ${item.prompt}`);
+      lines.push(`  canonical: ${item.canonical_url}; priorytet: ${item.priority}`);
+    });
+    lines.push('');
+  }
+
+  if (insights.gsc_submit_queue?.length) {
+    lines.push('## GSC Submit Queue');
+    insights.gsc_submit_queue.slice(0, 25).forEach((url) => lines.push(`- ${url}`));
+    lines.push('');
+  }
+
+  if (insights.operational_warnings?.length) {
+    lines.push('## Ostrzeżenia Operacyjne');
+    insights.operational_warnings.forEach((item) => lines.push(`- ${item.label}: ${item.details}`));
+    lines.push('');
+  }
+
   writeText(file, lines.join('\n'));
 }
 

@@ -102,6 +102,7 @@ rsync -a \
   --exclude=".windsurfrules" \
   --exclude=".DS_Store" \
   --exclude=".editorconfig" \
+  --exclude=".env*" \
   --exclude="AGENT.md" \
   --exclude="AGENTS.md" \
   --exclude="README.md" \
