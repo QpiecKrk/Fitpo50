@@ -183,11 +183,15 @@
 
 - **Workflow zatwierdzania poprawek SEO/GEO/AIO:**
   1. Uruchom `npm run popraw-seo`.
-  2. Pokaż TOP priorytety i wyjaśnij, dlaczego są wybrane.
-  3. Dla wskazanych artykułów przygotuj w rozmowie komplet propozycji: Evidence Box, linki, ewentualną tabelę/checklistę, hub-link i GSC refresh.
-  4. Czekaj na zatwierdzenie albo korektę tonu/zakresu.
-  5. Dopiero po akceptacji edytuj HTML.
-  6. Po edycji uruchom walidację i podaj listę URL-i do zgłoszenia w GSC.
+  2. Pokaż paczkę do zatwierdzenia z raportu `popraw-seo`: `BOOST` oraz `NAPRAWA`.
+  3. `BOOST` oznacza URL-e, które Google już pokazuje i które mogą urosnąć przez precyzyjny title/meta, mocniejszy lead, linkowanie wewnętrzne i oszczędne zgłoszenie GSC.
+  4. `NAPRAWA` oznacza słabe albo niewidoczne strony, które trzeba podnosić stopniowo przez quick answer, FAQ z realnych pytań, konkretne źródła i linkowanie z klastra.
+  5. Dla wskazanych ID (`BOOST 1`, `NAPRAWA 2` itd.) przygotuj w rozmowie komplet propozycji: gotowy title/meta/lead lub quick answer/FAQ, źródła, linki, ewentualną tabelę/checklistę, hub-link i GSC refresh.
+  6. Same numery typu `popraw 1 2 3` są dopuszczalne tylko wtedy, gdy nie ma ryzyka pomylenia koszyków; jeśli numeracja jest niejednoznaczna, agent musi dopytać o ID przed edycją.
+  7. Teksty muszą być konkretne dla danego URL-a, danych GSC i intencji użytkownika; zakaz placeholderów, uogólnień i bloków “na SEO”.
+  8. Czekaj na zatwierdzenie albo korektę tonu/zakresu.
+  9. Dopiero po akceptacji edytuj HTML.
+  10. Po edycji uruchom walidację i podaj listę URL-i do zgłoszenia w GSC.
 
 - **Huby i centra tematyczne wdrażamy najpierw testowo.**
   - Blok `Centra tematyczne` najpierw powstaje na `index1.html`, a nie na produkcyjnym `index.html`.
@@ -1569,7 +1573,8 @@ Jesli artykul ma obrazy:
   - assety do link earningu: `npm run growth:link-assets`,
   - autopilot planu bez zapisu: `npm run growth:autopilot`,
   - skrot uzytkownika do calej maszyny: `npm run popraw-seo`,
-  - `popraw-seo` uruchamia komplet raportow growth i konczy statusem `AWAITING_USER_APPROVAL`; agent ma czekac na decyzje typu `popraw 1`, `popraw 2` albo `popraw 1 i 3`,
+  - `popraw-seo` uruchamia komplet raportow growth i konczy statusem `AWAITING_USER_APPROVAL`; raport ma zawierac paczke `BOOST` (strony blisko wzrostu) i `NAPRAWA` (strony slabe/brak widocznosci),
+  - agent ma czekac na decyzje typu `popraw BOOST 1` albo `popraw BOOST 1 NAPRAWA 2`; przy samych numerach musi doprecyzowac ID, jesli istnieje ryzyko pomylenia koszykow,
   - walidacja wzrostowa: `npm run growth:verify`,
   - bezpieczny edytor domyslnie dry-run: `npm run growth:apply:dry -- --file <plik.html> --evidence-box --doctor-box`,
   - zapis wymaga jawnej komendy `npm run growth:apply -- --file <plik.html> ...`,

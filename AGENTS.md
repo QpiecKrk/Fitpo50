@@ -31,6 +31,7 @@ Example:
 - **Handle Promise rejections — always .catch() or try/catch with await** — Handle Promise rejections — always .catch() or try/catch with await
 - **Use === not == — strict equality prevents type coercion bugs** — Use === not == — strict equality prevents type coercion bugs
 - **Agent: follow existing project patterns — don't introduce a different style** — Agent: follow existing project patterns — don't introduce a different style
+- **FitPo50 content: zero generic text** — Przy poprawianiu stron, artykułów, SEO, FAQ, quick answers, leadów, title/meta i linkowania nie wolno dodawać generycznych dopisków. Każdy dodany tekst musi wynikać z danych GSC/PAA/autocomplete, treści artykułu, realnego źródła, konkretnej liczby/progu albo jasnego warunku bezpieczeństwa.
 
 ## 📐 Conventions
 
@@ -59,6 +60,14 @@ Example:
 - Jeśli w treści sekcji pojawi się `<table>` bez `<caption>`, importer ma automatycznie dodać `<caption>`.
 - `BlogPosting.about` ma być budowane automatycznie; jeśli JSON nie ma encji, importer ma użyć fallbacku encji Wikidata na podstawie treści artykułu.
 - Brak pól GEO/AIO w JSON (np. encje) nie może zatrzymać importu, jeśli importer potrafi je bezpiecznie wyprowadzić automatycznie.
+
+## 🔎 `popraw-seo` — obowiązkowy workflow akceptacji
+
+- `popraw-seo` uruchamia raporty GSC/SEO/AEO/GEO/AIO i kończy na `AWAITING_USER_APPROVAL`.
+- Raport musi zawierać paczkę `BOOST` dla stron blisko wzrostu oraz `NAPRAWA` dla stron słabych albo bez widoczności.
+- Agent nie edytuje HTML po samym raporcie. Użytkownik zatwierdza konkretne ID, np. `popraw BOOST 1` albo `popraw BOOST 1 NAPRAWA 2`.
+- Jeśli użytkownik poda same numery i istnieje ryzyko pomylenia koszyków, agent musi dopytać o ID przed edycją.
+- Przed edycją agent przygotowuje konkretny tekst dla danego URL-a; zakazane są placeholdery i generyczne bloki SEO.
 
 ## ⚡ Available Tools (ON-DEMAND only)
 - `sys_core_02(title, content, category)` — Save a note + auto-detect conflicts

@@ -635,6 +635,116 @@ function firstCardsByType(cards, types, limit) {
     }));
 }
 
+function sourceLinkSuggestions(card, limit = 4) {
+  if (!Array.isArray(card?.internal_link_sources)) return [];
+  return card.internal_link_sources
+    .filter((item) => item && item.from && !shouldIgnoreSeoFile(item.from))
+    .slice(0, limit)
+    .map((item) => ({
+      from: normalizeReportFile(item.from),
+      anchor: item.anchor || '',
+      placement: item.placement || '',
+      score: Number(item.score || 0),
+      inbound_strength: Number(item.inbound_strength || 0),
+    }));
+}
+
+function cardAbsoluteUrl(card) {
+  if (card?.url) return card.url;
+  const file = normalizeReportFile(card?.file);
+  return file ? `${SITE_ORIGIN}/${file}` : '';
+}
+
+function approvalGscSnapshot(card) {
+  const gsc = card?.gsc || {};
+  return {
+    query: card?.keyword_plan?.primary || '',
+    clicks: Number(gsc.clicks || 0),
+    impressions: Number(gsc.impressions || 0),
+    ctr: Number(gsc.ctr || 0),
+    position: Number(gsc.position || 0),
+  };
+}
+
+function approvalReason(card, kind) {
+  const gsc = approvalGscSnapshot(card);
+  if (kind === 'BOOST') {
+    return `Google już testuje ten URL: fraza "${gsc.query || 'brak frazy'}", ${gsc.impressions} wyświetleń, CTR ${gsc.ctr}%, pozycja ${gsc.position}. Priorytetem jest precyzyjny CTR i linkowanie wewnętrzne, nie przepisywanie całego artykułu.`;
+  }
+  const scores = card?.score || {};
+  return `Strona ma słabą lub zerową widoczność i wynik SEO/AEO/GEO/AIO ${Number(scores.seo || 0)}/${Number(scores.aeo || 0)}/${Number(scores.geo || 0)}/${Number(scores.aio || 0)}. Najpierw trzeba zbudować konkretną odpowiedź, źródła i linkowanie, a dopiero potem zgłaszać URL w GSC.`;
+}
+
+function approvalPreparationChecklist(kind, query) {
+  if (kind === 'BOOST') {
+    return [
+      `title i meta opis dopasowane do frazy "${query || 'fraza z GSC'}" oraz intencji czytelnika 50+`,
+      'krótki lead albo doprecyzowanie pierwszego akapitu: dla kogo jest tekst, co rozwiązuje i jaki jest warunek bezpieczeństwa',
+      '2-4 linki kontekstowe z podanych źródeł, z naturalnym anchorem w zdaniu',
+      'aktualizacja dateModified, sitemap, _site i llms-full.txt dopiero po zatwierdzeniu treści',
+    ];
+  }
+  return [
+    'quick answer 45-65 słów z konkretną odpowiedzią i warunkiem bezpieczeństwa, bez pustych obietnic',
+    'FAQ z realnych pytań użytkowników albo danych GSC/PAA/autocomplete; bez zmyślonych problemów',
+    'minimum 4 realne źródła URL do najważniejszych twierdzeń, bez halucynacji i bez źródeł dekoracyjnych',
+    '2-4 linki wewnętrzne z podanych źródeł oraz zgłoszenie URL w GSC po publikacji',
+  ];
+}
+
+function buildSeoApprovalItem(card, kind, index) {
+  const file = normalizeReportFile(card?.file || card?.url);
+  const links = sourceLinkSuggestions(card, 4);
+  const url = cardAbsoluteUrl(card);
+  return {
+    id: `${kind} ${index}`,
+    kind,
+    file,
+    url,
+    type: card?.type || '',
+    priority: card?.priority || '',
+    segment: card?.segment || '',
+    decision: card?.editorial_decision || '',
+    query: card?.keyword_plan?.primary || '',
+    reason: approvalReason(card, kind),
+    gsc: approvalGscSnapshot(card),
+    scores: {
+      seo: Number(card?.score?.seo || 0),
+      aeo: Number(card?.score?.aeo || 0),
+      geo: Number(card?.score?.geo || 0),
+      aio: Number(card?.score?.aio || 0),
+    },
+    prepare_before_edit: approvalPreparationChecklist(kind, card?.keyword_plan?.primary || ''),
+    report_tasks: Array.isArray(card?.tasks) ? card.tasks.slice(0, 5) : [],
+    internal_link_suggestions: links,
+    gsc_submit_after_change: [
+      url,
+      ...links.slice(0, 3).map((item) => `${SITE_ORIGIN}/${item.from}`),
+    ].filter(Boolean),
+  };
+}
+
+function buildSeoApprovalWave(cards) {
+  const boostCards = cards
+    .filter((card) => card.type === 'P0_PUSH_TO_PAGE_ONE')
+    .slice(0, 5);
+  const repairCards = cards
+    .filter((card) => ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'].includes(card.type))
+    .slice(0, 5);
+  return {
+    status: 'AWAITING_USER_APPROVAL',
+    rule: 'Jedna komenda popraw-seo pokazuje propozycje BOOST i NAPRAWA. Agent nie edytuje HTML, dopóki użytkownik nie zatwierdzi konkretnych ID.',
+    no_generic_text: true,
+    approval_examples: [
+      'popraw BOOST 1',
+      'popraw BOOST 1 NAPRAWA 2',
+      'popraw 1 2 3 - agent ma doprecyzować, które ID użytkownik wybiera, jeśli numeracja jest niejednoznaczna',
+    ],
+    boost: boostCards.map((card, index) => buildSeoApprovalItem(card, 'BOOST', index + 1)),
+    repair: repairCards.map((card, index) => buildSeoApprovalItem(card, 'NAPRAWA', index + 1)),
+  };
+}
+
 function buildUnifiedInsights() {
   const reportsDir = path.join(ROOT, 'data', 'reports');
   const seoAio = readJsonIfExists(path.join(reportsDir, 'seo-aio-command-center.json'));
@@ -712,6 +822,7 @@ function buildUnifiedInsights() {
       scale_winners: firstCardsByType(cards, ['P2_SCALE_WINNER'], 8),
       core_support: firstCardsByType(cards, ['P2_CORE_SUPPORT_LINKING'], 8),
     },
+    approval_wave: buildSeoApprovalWave(cards),
     link_topology_attention: linkWeakPages.map((item) => ({
       file: item.target,
       inbound: item.inbound,
@@ -1253,10 +1364,12 @@ function buildPoprawSeo() {
       'Zbudowano kolejkę Perplexity Monitor.',
       'Zbudowano plan autopilota bez zapisu w artykułach.',
       'Połączono raporty GSC/SEO/AEO/GEO/AIO i wyciągnięto kluczowe wnioski.',
+      'Zbudowano paczkę do zatwierdzenia: BOOST dla stron blisko wzrostu oraz NAPRAWA dla stron słabych lub bez widoczności.',
     ],
     unified_insights: unifiedInsights,
+    approval_wave: unifiedInsights.approval_wave,
     chosen_articles: autopilot.chosen_articles,
-    approval_needed: 'Napisz: przygotuj poprawki 1, 2 albo 1 i 3. Najpierw pokażę gotowe teksty do zatwierdzenia, bez edycji HTML.',
+    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1 albo popraw BOOST 1 NAPRAWA 2. Najpierw przygotuję konkretne teksty do akceptacji, bez edycji HTML.',
     safe_next_commands: [
       'npm run popraw-seo',
       'Po akceptacji tekstów: ręczna edycja wskazanego HTML',
@@ -1305,6 +1418,7 @@ function buildPoprawSeo() {
 function writePoprawSeoMarkdown(command, file) {
   const lines = ['# Popraw SEO — Plan Do Zatwierdzenia', '', `Wygenerowano: ${command.generated_at}`, '', `Status: ${command.status}`, ''];
   const insights = command.unified_insights || {};
+  const approval = command.approval_wave || insights.approval_wave || {};
   if (Array.isArray(insights.ignored_today) && insights.ignored_today.length) {
     lines.push(`Pominięte dziś: ${insights.ignored_today.join(', ')}`);
     lines.push('');
@@ -1314,6 +1428,45 @@ function writePoprawSeoMarkdown(command, file) {
     insights.key_insights.forEach((item) => lines.push(`- ${item}`));
     lines.push('');
   }
+  lines.push('## Paczka Do Zatwierdzenia');
+  lines.push('- `BOOST` = strony, które Google już pokazuje; poprawiamy CTR, doprecyzowanie leadu i linkowanie.');
+  lines.push('- `NAPRAWA` = strony słabe albo bez widoczności; najpierw budujemy konkretną odpowiedź, FAQ, źródła i linki.');
+  lines.push('- Zakaz generycznych dopisków: przed edycją HTML agent ma przygotować gotowy tekst w rozmowie i czekać na akceptację.');
+  lines.push('');
+  if (Array.isArray(approval.boost) && approval.boost.length) {
+    lines.push('### BOOST — Strony Blisko Wzrostu');
+    approval.boost.forEach((item) => {
+      lines.push(`${item.id}. ${item.file}`);
+      lines.push(`   - URL: ${item.url}`);
+      lines.push(`   - powód: ${item.reason}`);
+      lines.push(`   - GSC: query "${item.gsc.query || 'brak'}"; impr ${item.gsc.impressions}; klik ${item.gsc.clicks}; CTR ${item.gsc.ctr}%; poz ${item.gsc.position}`);
+      if (item.internal_link_suggestions?.length) {
+        lines.push(`   - linki do rozważenia: ${item.internal_link_suggestions.map((link) => `${link.from} -> "${link.anchor || 'anchor do przygotowania'}"`).join('; ')}`);
+      }
+      lines.push(`   - przed edycją przygotuj: ${item.prepare_before_edit.join('; ')}`);
+    });
+    lines.push('');
+  }
+  if (Array.isArray(approval.repair) && approval.repair.length) {
+    lines.push('### NAPRAWA — Słabe Strony Do Podnoszenia');
+    approval.repair.forEach((item) => {
+      lines.push(`${item.id}. ${item.file}`);
+      lines.push(`   - URL: ${item.url}`);
+      lines.push(`   - powód: ${item.reason}`);
+      lines.push(`   - wynik SEO/AEO/GEO/AIO: ${item.scores.seo}/${item.scores.aeo}/${item.scores.geo}/${item.scores.aio}`);
+      if (item.report_tasks?.length) lines.push(`   - zadania z raportu: ${item.report_tasks.join('; ')}`);
+      if (item.internal_link_suggestions?.length) {
+        lines.push(`   - linki do rozważenia: ${item.internal_link_suggestions.map((link) => `${link.from} -> "${link.anchor || 'anchor do przygotowania'}"`).join('; ')}`);
+      }
+      lines.push(`   - przed edycją przygotuj: ${item.prepare_before_edit.join('; ')}`);
+    });
+    lines.push('');
+  }
+  lines.push('## Zasada Akceptacji');
+  lines.push(`- ${command.approval_needed}`);
+  lines.push('- Jeśli użytkownik poda same numery, a numeracja jest niejednoznaczna, agent ma doprecyzować ID przed edycją.');
+  lines.push('- Po akceptacji konkretnego ID agent edytuje tylko wskazane strony i zgłasza tylko wynikające z nich URL-e do GSC.');
+  lines.push('');
   const push = insights.gsc_priority?.push_to_page_one || [];
   if (push.length) {
     lines.push('## GSC: Najbliżej Wzrostu');

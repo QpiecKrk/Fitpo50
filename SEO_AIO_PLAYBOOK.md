@@ -99,6 +99,19 @@ Uwaga: to kolejka startowa oparta o potencjal zapytan i szerokosc intencji. Po p
 
 ---
 
+## 3A) Komenda `popraw-seo` - jedna paczka decyzji
+
+`popraw-seo` nie jest autopilotem edycji. Komenda ma zebrac dane GSC/SEO/AEO/GEO/AIO i pokazac uzytkownikowi paczke do zatwierdzenia:
+
+- `BOOST` - strony, ktore Google juz pokazuje i ktore warto podbic przez precyzyjny title/meta, mocniejszy lead, linkowanie wewnetrzne i oszczedne zgloszenie GSC.
+- `NAPRAWA` - strony slabe albo bez widocznosci, ktore trzeba stopniowo podnosic przez quick answer, FAQ z realnych pytan, konkretne zrodla i linkowanie z klastra.
+
+Zasada: agent nie edytuje HTML po samym raporcie. Uzytkownik zatwierdza konkretne ID, np. `popraw BOOST 1` albo `popraw BOOST 1 NAPRAWA 2`. Jesli poda same numery i moze dojsc do pomylki, agent musi dopytac o ID.
+
+Przed edycja agent przygotowuje w rozmowie gotowy, konkretny tekst dla danego URL-a. Zakazane sa placeholdery, ogolne bloki "na SEO" i pytania FAQ, ktore nie wynikaja z GSC, PAA/autocomplete, tresci artykulu albo udokumentowanego researchu.
+
+---
+
 ## 4) Komenda `popraw-ai` - monitoring AI visibility
 
 `popraw-ai` oznacza: sprawdzamy, czy FitPo50 pojawia sie w odpowiedziach ChatGPT, Gemini, Perplexity i podobnych narzedzi dla najwazniejszych pytan uzytkownikow 50+.

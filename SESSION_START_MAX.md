@@ -171,6 +171,8 @@ Tryb pracy:
   - edytor growth domyslnie dziala jako dry-run: `npm run growth:apply:dry -- --file <plik.html> --evidence-box --doctor-box`; zapis wymaga jawnego `npm run growth:apply -- --file <plik.html> ...`,
   - `growth:apply` moze dodawac tylko bezpieczne bloki zarzadzane (Evidence Box, Kiedy do lekarza, tabela cytowalna) i aktualizowac `dateModified`; nie wolno mu przepisywac calego artykulu ani usuwac sekcji,
   - `popraw-seo` oznacza: uruchom `npm run popraw-seo`, wygeneruj wszystkie raporty growth i zatrzymaj sie na statusie `AWAITING_USER_APPROVAL`; nie edytuj artykulow bez zatwierdzenia konkretnych pozycji,
+  - `popraw-seo` ma laczyc w jednej paczce `BOOST` (URL-e blisko wzrostu w GSC: CTR/title/meta/lead/linkowanie) oraz `NAPRAWA` (slabe albo niewidoczne strony: quick answer/FAQ/zrodla/linkowanie),
+  - uzytkownik zatwierdza konkretne ID, np. `popraw BOOST 1` albo `popraw BOOST 1 NAPRAWA 2`; jesli poda tylko numery i istnieje ryzyko pomylenia koszykow, agent musi doprecyzowac przed edycja,
   - `popraw-seo` obejmuje tez moduly AIO/GEO: `ai-visibility-test`, `entities`, `structured-score`, `quick-answer-score`, `topical-map`, `llms-check` i `perplexity-monitor`,
   - `popraw-seo` NIE moze samodzielnie wklejac generycznych blokow do artykulow: najpierw przygotuj w rozmowie gotowe teksty (Evidence Box, linki, ewentualna tabela/checklista, hub-link), poczekaj na akceptacje uzytkownika i dopiero wtedy edytuj HTML,
   - tabele dodawaj tylko wtedy, gdy maja realny sens dla intencji artykulu; przyklad: `wino-i-miesnie-po-50.html` nie powinien dostawac tabeli tylko dlatego, ze raport sugeruje "shareable table",

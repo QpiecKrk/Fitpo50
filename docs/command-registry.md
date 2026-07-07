@@ -31,7 +31,7 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 - `npm run gsc:weekly:api:local` - pobiera dane z GSC API, uzywajac sekretow z lokalnego `.env.local`.
 - `npm run seo:aio:machine -- --input-dir ~/Downloads/gsc-auto-input --output-dir data/reports` - centrum decyzji SEO/AEO/GEO/AIO.
 - `npm run seo:aio:apply-wave` - autopilot zmian; uzywac tylko z jawnym zatwierdzeniem zakresu.
-- `npm run popraw-seo` - laczy GSC/SEO/AEO/GEO/AIO oraz raporty techniczne w jeden plan i jeden raport wnioskow. Nie edytuje HTML bez dalszej zgody.
+- `npm run popraw-seo` - laczy GSC/SEO/AEO/GEO/AIO oraz raporty techniczne w jeden plan. Generuje paczke do zatwierdzenia: `BOOST` dla stron blisko wzrostu i `NAPRAWA` dla stron slabych/brakujacych w wyszukiwarce. Nie edytuje HTML bez zatwierdzenia konkretnych ID.
 - `npm run popraw-seo:gsc-local` - pobiera GSC przez API z `.env.local`, przebudowuje priority-map, SEO/AIO command center i raport `popraw-seo`.
 - `npm run seo:aeo:guard` - kontrola szybkich odpowiedzi, FAQ i elementow AEO.
 - `npm run quick-answer:backlog` - raport brakow w szybkich odpowiedziach.
