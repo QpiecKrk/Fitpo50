@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-02T07:49:22.525Z",
-  "pages_total": 115,
+  "generated_at": "2026-07-10T19:10:26.929Z",
+  "pages_total": 117,
   "min_inbound": 2,
   "weak_pages": [
     {
@@ -15,7 +15,7 @@
         {
           "src": "mira-ai-agent-sor-lepszy-od-lekarzy.html",
           "score": 1,
-          "inboundSrc": 5
+          "inboundSrc": 7
         }
       ]
     },
@@ -31,7 +31,7 @@
         {
           "src": "mira-ai-agent-sor-lepszy-od-lekarzy.html",
           "score": 1,
-          "inboundSrc": 5
+          "inboundSrc": 7
         }
       ]
     },
@@ -83,7 +83,7 @@
         {
           "src": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
           "score": 1,
-          "inboundSrc": 10
+          "inboundSrc": 9
         },
         {
           "src": "kalkulator-bialka-po-50.html",

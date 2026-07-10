@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/hero-szczepionki-covid-fakty-mity.avif" type="image/avif">
-          <source srcset="./assets/hero-szczepionki-covid-fakty-mity.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/hero-szczepionki-covid-fakty-mity.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/brzuch-to-nie-woda-hero.avif" type="image/avif">
+          <source srcset="./assets/brzuch-to-nie-woda-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/brzuch-to-nie-woda-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Szczepionki COVID: skutki uboczne, mity i fakty z badań</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Sprawdź, które skutki uboczne szczepionek COVID są realne, kiedy pilnie reagować i które mity o białku kolczastym oraz VAERS nie mają podstaw w badaniach.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="szczepionki-covid-skutki-uboczne-mity-i-fakty.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">MIT: Twój brzuch to nie tłuszcz, tylko zatrzymana woda — i znika</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy brzuch to woda czy tłuszcz? Sprawdzamy mit detoksu limfy, tłuszcz trzewny i to, co naprawdę zmniejsza obwód po 50-tce bez cudownych zabiegów.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Szczepionki COVID: skutki uboczne, mity i fakty z badań',
-        excerpt: 'Sprawdź, które skutki uboczne szczepionek COVID są realne, kiedy pilnie reagować i które mity o białku kolczastym oraz VAERS nie mają podstaw w badaniach.',
-        image: './assets/hero-szczepionki-covid-fakty-mity.webp',
-        url: 'szczepionki-covid-skutki-uboczne-mity-i-fakty.html'
+        title: 'MIT: Twój brzuch to nie tłuszcz, tylko zatrzymana woda — i znika',
+        excerpt: 'Czy brzuch to woda czy tłuszcz? Sprawdzamy mit detoksu limfy, tłuszcz trzewny i to, co naprawdę zmniejsza obwód po 50-tce bez cudownych zabiegów.',
+        image: './assets/brzuch-to-nie-woda-hero.webp',
+        url: 'brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2544,6 +2544,13 @@
       const fallback = [
         {
           category: 'Mity',
+          title: 'MIT: Twój brzuch to nie tłuszcz, tylko zatrzymana woda — i znika',
+          excerpt: 'Czy brzuch to woda czy tłuszcz? Sprawdzamy mit detoksu limfy, tłuszcz trzewny i to, co naprawdę zmniejsza obwód po 50-tce bez cudownych zabiegów.',
+          image: './assets/brzuch-to-nie-woda-hero.webp',
+          url: 'brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html'
+        },
+        {
+          category: 'Mity',
           title: 'Szczepionki COVID: skutki uboczne, mity i fakty z badań',
           excerpt: 'Sprawdź, które skutki uboczne szczepionek COVID są realne, kiedy pilnie reagować i które mity o białku kolczastym oraz VAERS nie mają podstaw w badaniach.',
           image: './assets/hero-szczepionki-covid-fakty-mity.webp',
@@ -2555,13 +2562,6 @@
           excerpt: 'Czy warto bankować krew pępowinową? Sprawdź, kiedy ratuje życie, kiedy to marketing, jakie są koszty, ograniczenia i realne szanse użycia próbki.',
           image: './assets/krew-pepowinowa-hero.webp',
           url: 'krew-pepowinowa-skarb-czy-marketing.html'
-        },
-        {
-          category: 'Mity',
-          title: 'MIT: jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól',
-          excerpt: 'Czy jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól nie są wrogami; problemem jest nadmiar soków, słodyczy, fast foodu i gotowców w diecie.',
-          image: './assets/mit-jedzenie-cie-truje-hero.webp',
-          url: 'mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

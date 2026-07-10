@@ -40,6 +40,7 @@ Nastepnie:
 
 Zasady:
 - ZERO GENERYCZNYCH TEKSTOW: kazda zmiana w tresci artykulu, FAQ, quick answer, H2, title/meta, linkowaniu, Evidence Box, tabeli, opisie obrazka, poprawce SEO/AEO/GEO/AIO albo "technicznej" edycji tekstu musi byc konkretna, logiczna i oparta o tresc artykulu, dane GSC/PAA/autocomplete, sprawdzone zrodlo, konkretna liczbe/prog albo jasny warunek bezpieczenstwa. Nie wolno dodawac zapychaczy typu "warto pamietac", "kluczowe jest", "w dzisiejszych czasach", "to zalezy" bez konkretu. Jesli brakuje danych lub zrodel, zatrzymaj sie i oznacz `INSUFFICIENT_DATA` zamiast dopisywac ogolnik.
+- LOGIKA TEKSTU JEST BRAMKA BLOKUJACA: przy `popraw-json`, `dodaj artykul` i `Obal mit` traktuj JSON od Claude/modelu zewnetrznego jako draft. Przed importem sprawdz akapit po akapicie, czy kazde odniesienie ma jasny punkt odniesienia, a kazdy wniosek wynika z poprzedniego zdania, zrodla, liczby, warunku albo mechanizmu. Frazy typu "ta obietnica", "ta reklama", "taki przekaz", "to zdanie", "ten wniosek", "haczyk jest prosty" musza w tym samym fragmencie nazwac konkretna obietnice/twierdzenie; metafora musi byc domknieta mechanizmem. Jesli czytelnik moze zapytac "jaka obietnica?", "jaka reklama?", "dlaczego to wynika?", tekst ma FAIL i wymaga poprawy przed HTML/PDF.
 - nie zgaduj,
 - nie pomijaj konfliktow z dokumentem,
 - nie rozszerzaj zakresu bez potrzeby,
@@ -67,7 +68,7 @@ Zasady:
 Publikacja artykulow:
 - `dodaj artykul`, `dodaj artykuł`, `opublikuj artykul` oznacza workflow JSON-first:
   1) najpierw uzyj skilla `popraw-json`,
-  2) doprowadz JSON do statusu `content-ready`,
+  2) doprowadz JSON do statusu `content-ready`, w tym wykonaj logic gate: zero skrótów myślowych, jasne odniesienia, metafory domknięte mechanizmem, wnioski wynikające z treści/źródeł/liczb/warunków,
   3) dopiero potem przygotuj/przerob assety PNG -> AVIF/WebP/JPG i uruchom import HTML,
   4) przed generowaniem HTML porownaj zalaczone obrazy z opisami/polami obrazow w JSON,
   5) jesli obraz nie pasuje do opisu z JSON albo brakuje wymaganego ujecia, STOP: powiedz, ktorego obrazu brakuje, wyciagnij prompt/opis z JSON i popros uzytkownika o wygenerowanie oraz zalaczenie nowego pliku,

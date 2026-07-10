@@ -332,6 +332,35 @@ function main() {
     errors.push(`Wykryto powtarzalne zdania w JSON (${repeatedSentences[0].count}x): "${repeatedSentences[0].sentence.slice(0, 90)}..."`);
   }
 
+  const logicItems = [];
+  if (json.lead) logicItems.push({ label: 'lead', text: json.lead });
+  if (json.quick_answer || json.quickAnswer) logicItems.push({ label: 'quick_answer', text: json.quick_answer || json.quickAnswer });
+  sections.forEach((section, sectionIndex) => {
+    const sectionLabel = `sections[${sectionIndex + 1}]`;
+    if (Array.isArray(section.paragraphs_html)) {
+      section.paragraphs_html.forEach((paragraph, paragraphIndex) => {
+        logicItems.push({
+          label: `${sectionLabel}.paragraphs_html[${paragraphIndex + 1}]`,
+          text: paragraph
+        });
+      });
+    }
+    if (section.info_box && typeof section.info_box === 'object') {
+      logicItems.push({
+        label: `${sectionLabel}.info_box`,
+        text: `${section.info_box.title || ''} ${section.info_box.content_html || ''}`
+      });
+    }
+  });
+  answerBlocks.forEach((item, idx) => {
+    logicItems.push({
+      label: `answer_blocks[${idx + 1}]`,
+      text: `${item?.question || ''} ${item?.answer_html || ''}`
+    });
+  });
+  const logicValidation = validators.validateLogicalCoherence(logicItems);
+  logicValidation.errors.forEach((msg) => errors.push(msg));
+
   const hero = String(json.hero_image || '').trim();
   let heroSourceImage = '';
   if (!hero) errors.push('Brak hero_image.');

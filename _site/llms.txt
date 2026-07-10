@@ -395,4 +395,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Szczepionki COVID: skutki uboczne, mity i fakty z badań | FitPo50"
   section: "Mity"
   summary: "Sprawdź, które skutki uboczne szczepionek COVID są realne, kiedy pilnie reagować i które mity o białku kolczastym oraz VAERS nie mają podstaw w badaniach."
+- url: https://fitpo50.pl/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html
+  title: "MIT: Twój brzuch to nie tłuszcz, tylko zatrzymana woda — i znika | FitPo50"
+  section: "Mity"
+  summary: "Czy brzuch to woda czy tłuszcz? Sprawdzamy mit detoksu limfy, tłuszcz trzewny i to, co naprawdę zmniejsza obwód po 50-tce bez cudownych zabiegów."
 

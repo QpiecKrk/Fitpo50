@@ -8,6 +8,14 @@ Ten dokument definiuje kanoniczny standard artykułów. Obowiązuje dla wszystki
 - Nie wolno dopisywać ogólników, zapychaczy ani „ładnych” zdań, które nie wnoszą konkretnej informacji dla czytelnika.
 - Jeśli brakuje danych lub źródeł do poprawki, oznacz `INSUFFICIENT_DATA` i zatrzymaj edycję zamiast zgadywać.
 
+## 0A. Logic Gate
+- Tekst z JSON-a, Claude albo innego modelu zewnętrznego jest tylko draftem. Nie wolno uznać go za gotowy bez kontroli logicznej akapit po akapicie.
+- Każdy akapit musi być zrozumiały sam w miejscu, w którym stoi. Jeśli zaczyna się od „ta obietnica”, „ta reklama”, „taki przekaz”, „to zdanie”, „ten wniosek” albo „haczyk jest prosty”, musi w tym samym akapicie jasno nazwać konkretną obietnicę, twierdzenie, mechanizm lub liczbę, do której się odnosi.
+- Metafora lub analogia musi być domknięta mechanizmem. Nie wystarczy napisać, że coś „nie jest korkiem w zlewie”; ten sam fragment musi dopowiedzieć, co naprawdę robi limfa, tłuszcz, energia, deficyt albo inny opisywany mechanizm.
+- Wniosek musi wynikać z poprzedniego zdania, źródła, liczby, warunku bezpieczeństwa albo fizjologii opisanej w tekście. Niedopuszczalne są skoki typu: prawdziwe pojęcie -> fałszywy wniosek bez wyjaśnienia przejścia.
+- Blok „Najważniejsze”, tabela, podpis grafiki, FAQ i quick answer podlegają tej samej kontroli. Krótkie podsumowanie nie może ucinać logiki ani zostawiać czytelnika z pytaniem „jaka obietnica?”, „jaka reklama?”, „dlaczego?”.
+- `article-preflight` ma traktować wykryte skróty logiczne jako błąd blokujący dla nowych JSON-ów.
+
 ## 1. Golden template
 - Strona referencyjna (golden): `wydolnosc-vo2max-starzenie-po-50.html`
 - Szablon techniczny do tworzenia nowych artykułów: `article-template-bento.html`

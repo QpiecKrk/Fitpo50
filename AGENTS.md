@@ -32,6 +32,7 @@ Example:
 - **Use === not == — strict equality prevents type coercion bugs** — Use === not == — strict equality prevents type coercion bugs
 - **Agent: follow existing project patterns — don't introduce a different style** — Agent: follow existing project patterns — don't introduce a different style
 - **FitPo50 content: zero generic text** — Przy poprawianiu stron, artykułów, SEO, FAQ, quick answers, leadów, title/meta i linkowania nie wolno dodawać generycznych dopisków. Każdy dodany tekst musi wynikać z danych GSC/PAA/autocomplete, treści artykułu, realnego źródła, konkretnej liczby/progu albo jasnego warunku bezpieczeństwa.
+- **FitPo50 content: logic gate** — JSON od Claude/modelu zewnętrznego jest tylko draftem. Przed importem agent musi sprawdzić logikę akapit po akapicie: każde "ta obietnica", "ta reklama", "taki przekaz", "haczyk jest prosty" musi w tym samym fragmencie jasno nazwać obietnicę/twierdzenie; każda metafora musi być domknięta mechanizmem; każdy wniosek musi wynikać z poprzedniego zdania, źródła, liczby albo warunku. Skróty myślowe i niejasne odniesienia są błędem blokującym.
 
 ## 📐 Conventions
 

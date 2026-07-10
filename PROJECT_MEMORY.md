@@ -18,6 +18,7 @@
 - Przy publikacji, wycofaniu lub usunieciu wpisu w "Moje Sukcesy" zawsze trzeba wykonac pelna synchronizacje powiazanych danych (np. JSON, sitemap, kalendarz, fallback danych).
 - Do commita nie trafiaja pliki narzedziowe (`.agent`, `.brainsync`, `.cursor`, itp.).
 - ZERO GENERYCZNYCH TEKSTOW: kazda zmiana w artykule albo na stronie musi byc przemyslana, logiczna i wynikać z tresci, danych GSC/PAA/autocomplete, sprawdzonego zrodla, konkretnej liczby/progu albo jasnego warunku bezpieczenstwa. Dotyczy to rowniez "malych" edycji technicznych, SEO, AEO, GEO, AIO, title/meta, FAQ, quick answers, linkowania, anchorow, opisow grafik, tabel, Evidence Box i calloutow. Jesli nie ma danych lub zrodel, agent ma zatrzymac sie i napisac `INSUFFICIENT_DATA`, a nie dopisywac ogolniki.
+- LOGIKA TEKSTU JEST BRAMKA BLOKUJACA: JSON od Claude/modelu zewnetrznego to draft, nie gotowy artykul. Przy `popraw-json`, `dodaj artykul` i `Obal mit` agent musi sprawdzic akapit po akapicie, czy kazde zdanie wynika z poprzedniego, zrodla, liczby, warunku albo mechanizmu. Zabronione sa skróty typu "ta obietnica", "ta reklama", "taki przekaz", "haczyk jest prosty" bez nazwania w tym samym fragmencie konkretnej obietnicy/twierdzenia. Metafora musi byc domknieta mechanizmem. Takie bledy sa niedopuszczalne i maja zatrzymac import.
 
 ## Coding rules
 - Najpierw czytamy aktualny stan plikow, potem edytujemy.

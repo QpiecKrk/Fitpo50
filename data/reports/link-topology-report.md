@@ -1,16 +1,16 @@
 # Link Topology Report
 
-- generated_at: 2026-07-02T07:49:22.525Z
-- pages_total: 115
+- generated_at: 2026-07-10T19:10:26.929Z
+- pages_total: 117
 - min_inbound: 2
 
 ## .agent/skills/auto/skill-creator/assets/eval_review.html (inbound: 0)
 - .agent/skills/auto/skill-creator/eval-viewer/viewer.html (score=6, inbound_src=0)
-- mira-ai-agent-sor-lepszy-od-lekarzy.html (score=1, inbound_src=5)
+- mira-ai-agent-sor-lepszy-od-lekarzy.html (score=1, inbound_src=7)
 
 ## .agent/skills/auto/skill-creator/eval-viewer/viewer.html (inbound: 0)
 - .agent/skills/auto/skill-creator/assets/eval_review.html (score=6, inbound_src=0)
-- mira-ai-agent-sor-lepszy-od-lekarzy.html (score=1, inbound_src=5)
+- mira-ai-agent-sor-lepszy-od-lekarzy.html (score=1, inbound_src=7)
 
 ## article-template-bento.html (inbound: 0)
 - Brak mocnych kandydatów semantycznych.
@@ -30,6 +30,6 @@
 - kalkulator-phenoage-wiek-fenotypowy.html (score=1, inbound_src=1)
 
 ## kalkulator-phenoage-wiek-fenotypowy.html (inbound: 1)
-- zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html (score=1, inbound_src=10)
+- zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html (score=1, inbound_src=9)
 - kalkulator-bialka-po-50.html (score=1, inbound_src=1)
 

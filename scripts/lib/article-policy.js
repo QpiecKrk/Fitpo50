@@ -93,6 +93,38 @@ const POLICY = {
     'jak wdrożyć to praktycznie'
   ],
 
+  LOGIC_COHERENCE: {
+    VAGUE_REFERENCE_OPENERS: [
+      /^(ta|taka|ten|to|tego|tej)\s+(reklama|obietnica|obietnice|przekaz|has[lł]o|zdanie|wniosek)\b/iu,
+      /^haczyk\s+jest\s+prosty\b/iu
+    ],
+    VAGUE_REFERENCE_CONTEXT: [
+      /\b(chodzi\s+o|mowa\s+o|konkretnie|czyli)\b/iu,
+      /[„"][^”"]{12,}[”"]/u,
+      /\bobietnic[aeę]\s*:/iu,
+      /\bmit\s*:/iu,
+      /\bje[sś]li\s+kto[sś]\s+obiecuje\b/iu
+    ],
+    METAPHOR_PATTERNS: [
+      /\bkorek\s+w\s+zlewie\b/iu,
+      /\bodetka[cć]\b/iu,
+      /\bwyp[lł]ynie\b/iu,
+      /\bworek\b/iu
+    ],
+    METAPHOR_MECHANISM: [
+      /\blimfa\b/iu,
+      /\bt[lł]uszcz\b/iu,
+      /\benergia\b/iu,
+      /\bdeficyt\b/iu,
+      /\bspala\b/iu,
+      /\bmagazyn\b/iu
+    ],
+    ABSTRACT_PROOF_PHRASES: [
+      /im\s+bardziej\s+obietnica\s+usuwa\s+wysi[lł]ek\s+i\s+czas/iu,
+      /tym\s+mniej\s+zwykle\s+ma\s+za\s+sob[aą]\s+dowod[oó]w/iu
+    ]
+  },
+
   TITLE_INTENT_TOKENS: [
     'jak', 'czy', 'co', 'ile', 'kiedy', 'dlaczego', 'norma', 'wynik', 'objawy', 'bezpiecz', 'cena'
   ],
@@ -261,6 +293,14 @@ const utils = {
   }
 };
 
+function normalizeLogicChunk(text) {
+  return utils.stripTags(text)
+    .replace(/[“”]/g, '"')
+    .replace(/[‘’]/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 /**
  * Validators (Logic for Quality Gates)
  */
@@ -373,6 +413,41 @@ const validators = {
     }
 
     return { valid: errors.length === 0, errors, warnings, words };
+  },
+
+  validateLogicalCoherence: (items) => {
+    const errors = [];
+    const list = Array.isArray(items) ? items : [items];
+
+    list.forEach((item, index) => {
+      const label = typeof item === 'object' && item ? String(item.label || `fragment #${index + 1}`) : `fragment #${index + 1}`;
+      const text = normalizeLogicChunk(typeof item === 'object' && item ? item.text : item);
+      if (!text) return;
+
+      const firstSentence = (text.split(/(?<=[.!?])\s+/)[0] || text).trim();
+      const startsWithVagueReference = POLICY.LOGIC_COHERENCE.VAGUE_REFERENCE_OPENERS.some((rx) => rx.test(firstSentence));
+      if (startsWithVagueReference) {
+        const hasLocalContext = POLICY.LOGIC_COHERENCE.VAGUE_REFERENCE_CONTEXT.some((rx) => rx.test(text));
+        if (!hasLocalContext) {
+          errors.push(`${label}: skrót logiczny bez lokalnego kontekstu. Akapit zaczyna od ogólnego odniesienia ("${firstSentence.slice(0, 90)}..."), ale nie nazywa w tym samym fragmencie konkretnej obietnicy, mitu, reklamy albo twierdzenia.`);
+        }
+      }
+
+      const usesMetaphor = POLICY.LOGIC_COHERENCE.METAPHOR_PATTERNS.some((rx) => rx.test(text));
+      if (usesMetaphor) {
+        const mechanismHits = POLICY.LOGIC_COHERENCE.METAPHOR_MECHANISM.filter((rx) => rx.test(text)).length;
+        if (mechanismHits < 2) {
+          errors.push(`${label}: metafora bez domknięcia mechanizmem. Jeśli używasz obrazu typu "korek w zlewie", ten sam fragment musi dopowiedzieć, co naprawdę robi limfa/tłuszcz/energia/deficyt.`);
+        }
+      }
+
+      const hasAbstractProofPhrase = POLICY.LOGIC_COHERENCE.ABSTRACT_PROOF_PHRASES.some((rx) => rx.test(text));
+      if (hasAbstractProofPhrase && !/\b(bez\s+deficytu|bez\s+treningu|w\s+kilka\s+minut|badanie|metod[ayą]|kto\s+j[aą]\s+zmierzy[lł])\b/iu.test(text)) {
+        errors.push(`${label}: ogólna ocena dowodów bez konkretu. Wyjaśnij dokładnie, jaka obietnica wymaga dowodu i jaki dowód byłby potrzebny.`);
+      }
+    });
+
+    return { ok: errors.length === 0, errors };
   }
 };
 
