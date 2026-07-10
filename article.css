@@ -273,6 +273,11 @@ body.article-template .article-kicker-card__category-pill {
   color: var(--article-category-text);
 }
 
+body.article-template.article--mity .article-kicker-card__category-pill {
+  background: var(--category-mity-bg, #b4233a);
+  color: var(--category-mity-text, #fff);
+}
+
 body.article-template .article-header__title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4.5vw, 3.4rem);
