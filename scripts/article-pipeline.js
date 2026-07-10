@@ -7,7 +7,9 @@ const os = require('os');
 
 let tempWorkingCopy = '';
 const PUBLISHED_LOG_PATH = path.join(process.cwd(), 'data', 'reports', 'published-articles-log.json');
-const TIMINGS_PATH = path.join(process.cwd(), 'data', 'reports', 'pipeline-timings.json');
+const TIMINGS_PATH = process.env.FITPO50_PIPELINE_TIMINGS_PATH
+  ? path.resolve(process.env.FITPO50_PIPELINE_TIMINGS_PATH)
+  : path.join(process.cwd(), 'data', 'reports', 'local', 'pipeline-timings.json');
 const stepTimings = [];
 
 function parseArgs(argv) {

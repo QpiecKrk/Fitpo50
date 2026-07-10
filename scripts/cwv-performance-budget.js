@@ -63,7 +63,12 @@ function serveStatic(rootDir) {
     res.statusCode = 200;
     res.end(fs.readFileSync(abs));
   });
-  return new Promise((resolve) => server.listen(0, '127.0.0.1', () => resolve(server)));
+  return new Promise((resolve, reject) => {
+    server.once('error', (err) => {
+      reject(new Error(`Nie można uruchomić lokalnego serwera CWV na 127.0.0.1: ${err.message || err}`));
+    });
+    server.listen(0, '127.0.0.1', () => resolve(server));
+  });
 }
 
 function scoreStatus(v, budget) {

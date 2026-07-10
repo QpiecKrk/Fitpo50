@@ -1,6 +1,6 @@
 # SEO Crawl Report
 
-- HTML files: **112**
+- HTML files: **113**
 - Broken links: **0**
 - Canonical errors: **0**
 - Robots noindex critical: **0**

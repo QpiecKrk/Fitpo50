@@ -20,6 +20,7 @@ const DEFAULT_TASKS = Object.keys(TASKS);
 function parseArgs(argv) {
   const tasks = [];
   let all = false;
+  let worktree = false;
   for (let i = 0; i < argv.length; i += 1) {
     if (argv[i] === '--task') {
       const v = String(argv[i + 1] || '').trim();
@@ -30,17 +31,19 @@ function parseArgs(argv) {
     if (argv[i] === '--all') {
       all = true;
     }
+    if (argv[i] === '--worktree') {
+      worktree = true;
+    }
   }
-  return { tasks: tasks.length ? tasks : DEFAULT_TASKS, all };
+  return { tasks: tasks.length ? tasks : DEFAULT_TASKS, all, worktree };
 }
 
 function run(cmd, args) {
   return spawnSync(cmd, args, { encoding: 'utf8' });
 }
 
-function changedFiles() {
-  const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
-  const parse = (out) => String(out || '')
+function parseNameStatus(out) {
+  return String(out || '')
     .split('\n')
     .map((s) => s.trim())
     .filter(Boolean)
@@ -52,10 +55,27 @@ function changedFiles() {
     })
     .filter((x) => x.file && !x.status.startsWith('D'))
     .map((x) => x.file);
+}
 
-  if (primary.status === 0) return parse(primary.stdout);
+function uniqueFiles(files) {
+  return [...new Set(files.filter(Boolean))];
+}
+
+function changedFiles(includeWorktree = false) {
+  const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
+  if (primary.status === 0) {
+    const files = parseNameStatus(primary.stdout);
+    if (!includeWorktree) return files;
+    const staged = run('git', ['diff', '--cached', '--name-status']);
+    const unstaged = run('git', ['diff', '--name-status']);
+    return uniqueFiles([
+      ...files,
+      ...(staged.status === 0 ? parseNameStatus(staged.stdout) : []),
+      ...(unstaged.status === 0 ? parseNameStatus(unstaged.stdout) : []),
+    ]);
+  }
   const fallback = run('git', ['diff', '--name-status', 'HEAD~1..HEAD']);
-  if (fallback.status === 0) return parse(fallback.stdout);
+  if (fallback.status === 0) return parseNameStatus(fallback.stdout);
   const msg = String(primary.stderr || primary.stdout || fallback.stderr || fallback.stdout || '').trim();
   throw new Error(`Nie udało się odczytać diff: ${msg}`);
 }
@@ -113,10 +133,10 @@ function runTask(task) {
 }
 
 async function main() {
-  const { tasks, all } = parseArgs(process.argv.slice(2));
-  const changed = changedFiles();
+  const { tasks, all, worktree } = parseArgs(process.argv.slice(2));
+  const changed = changedFiles(worktree);
   const { runnables, skipped } = resolveRunnableTasks(tasks, changed, all);
-  console.log(`[PREPUSH-PARALLEL] start tasks=${runnables.length}/${tasks.length}`);
+  console.log(`[PREPUSH-PARALLEL] start tasks=${runnables.length}/${tasks.length} mode=${worktree ? 'worktree' : 'commits'}`);
   if (skipped.length) {
     console.log(`[PREPUSH-PARALLEL] skipped: ${skipped.join(', ')}`);
   }

@@ -9,7 +9,9 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 
 ## Publikacja i push
 
-- `npm run prepush:local` - glowna lokalna bramka przed pushem. Uzywa `_site`, mirroru, doctor, builda i smoke testu.
+- `npm run prepush:local` - glowna lokalna bramka przed pushem. Robi diff guard, doctor, build, gate'y rownolegle z trybem worktree, swiezy export do katalogu tymczasowego i smoke test tego exportu.
+- `npm run prepush:worktree` - szybka rownolegla bramka dla staged + unstaged zmian w lokalnym drzewie roboczym.
+- `npm run site:full-audit` - pelny audyt techniczny: build/export check, crawler linkow, workflow maintenance i audyt AIO.
 - `npm run predeploy:check` - bramka przed wdrozeniem, bez pelnego builda.
 - `npm run assets:mirror:sync` - synchronizuje aktywa zrodlowe do `_site`.
 - `npm run assets:mirror:check` - sprawdza, czy mirror jest spojny.
@@ -41,6 +43,7 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 
 - `npm run growth:verify` - sprawdza komplet elementow growth.
 - `npm run growth:llms-check` - kontrola warstwy AIO/LLMS.
+- `npm run aio:full-audit` - pelny raport SEO/AEO/GEO/AIO: encje, structured data, quick answers, topical map, llms-check, verify i growth report.
 - `npm run growth:perplexity-monitor` - kolejka monitoringu AI visibility; bez `PERPLEXITY_API_KEY` nie wykonuje zewnetrznych zapytan.
 - Raporty growth domyslnie trafiaja do `data/reports/growth/`. Ten katalog jest ignorowany przez git.
 - Dane CSV pobrane z GSC API trafiaja do `data/gsc/`. Ten katalog jest ignorowany przez git.

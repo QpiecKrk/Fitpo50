@@ -1705,6 +1705,44 @@ function verifyGrowth(flags) {
   return payload;
 }
 
+function buildFullAudit(flags) {
+  const steps = [
+    ['entities', () => buildEntityGraph()],
+    ['structured-score', () => buildStructuredScore()],
+    ['quick-answer-score', () => buildQuickAnswerScore()],
+    ['topical-map', () => buildTopicalMap()],
+    ['llms-check', () => buildLlmsCheck()],
+    ['verify', () => verifyGrowth(flags)],
+    ['report', () => buildReport()],
+  ];
+  const results = [];
+  for (const [name, fn] of steps) {
+    const started = Date.now();
+    console.log(`[GROWTH] full-audit step: ${name}`);
+    const result = fn();
+    results.push({
+      name,
+      duration_ms: Date.now() - started,
+      status: process.exitCode && process.exitCode !== 0 ? 'FAIL' : 'PASS',
+      generated_at: result && result.generated_at ? result.generated_at : '',
+    });
+  }
+  const payload = {
+    generated_at: nowWarsawIso(),
+    status: results.some((item) => item.status === 'FAIL') ? 'FAIL' : 'PASS',
+    steps: results,
+  };
+  writeJson(path.join(REPORT_DIR, 'full-audit.json'), payload);
+  writeSimpleListMarkdown('Growth Full Audit', results.map((item, index) => ({
+    nr: index + 1,
+    file: item.name,
+    status: item.status,
+    duration_ms: item.duration_ms,
+    generated_at: item.generated_at || 'n/a',
+  })), path.join(REPORT_DIR, 'full-audit.md'));
+  return payload;
+}
+
 function runCommand(command, flags) {
   if (command === 'report') return buildReport();
   if (command === 'audit-ai') return buildAiAudit();
@@ -1721,6 +1759,7 @@ function runCommand(command, flags) {
   if (command === 'link-assets') return buildLinkAssets();
   if (command === 'apply') return applyGrowth(flags);
   if (command === 'verify') return verifyGrowth(flags);
+  if (command === 'full-audit') return buildFullAudit(flags);
   if (command === 'autopilot') return buildAutopilot();
   if (command === 'popraw-seo') return buildPoprawSeo();
   if (command === 'doctor') {
@@ -1753,6 +1792,7 @@ Usage:
   node scripts/growth-tool.js link-assets
   node scripts/growth-tool.js autopilot
   node scripts/growth-tool.js popraw-seo
+  node scripts/growth-tool.js full-audit
   node scripts/growth-tool.js apply --file artykul.html --evidence-box --doctor-box [--write]
   node scripts/growth-tool.js verify [--file artykul.html]
 

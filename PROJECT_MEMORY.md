@@ -419,7 +419,10 @@
   - opublikowane miniatury NEWS z `assets/news/*` -> `_site/assets/news/*`,
   - `data/news-live.json` <-> `_site/data/news-live.json`,
   - `assets/data/news-fallback.json` <-> `_site/assets/data/news-fallback.json`.
-- `prepush:local` najpierw wykonuje `assets:mirror:check`, dopiero potem wszystkie gate/checki.
+- `prepush:local` wykonuje diff guard, doctor, rownolegle gate'y z trybem worktree, build, swiezy export do katalogu tymczasowego i smoke test tego exportu.
+- `prepush:worktree` uruchamia szybkie rownolegle gate'y dla staged + unstaged zmian w lokalnym drzewie roboczym.
+- `site:full-audit` uruchamia pelny audyt techniczny: build/export check, crawler linkow, workflow maintenance i `aio:full-audit`.
+- `aio:full-audit` generuje pelny raport SEO/AEO/GEO/AIO: encje, structured data, quick answers, topical map, llms-check, verify i growth report.
 - Zasada "nic z bledem nie przechodzi": FAIL ktoregokolwiek gate zatrzymuje pipeline i push.
 - Ochrona oryginalnych JSON:
   - `fix-fitpo50-json` domyslnie nie nadpisuje pliku (`--write false`),
@@ -1125,9 +1128,10 @@ Jesli artykul ma obrazy:
   - `scripts/run-article-contract-diff.js` (uruchamiany tylko dla zmienionych `.html`),
   - `prepush:parallel:checks` obejmuje teraz `article:contract:diff`.
 - Dodana telemetria czasu wykonania automatyzacji:
-  - raport: `data/reports/pipeline-timings.json`,
+  - raport lokalny: `data/reports/local/pipeline-timings.json` albo sciezka z `FITPO50_PIPELINE_TIMINGS_PATH`,
   - źródła wpisów: `scripts/run-all-prepush.js` i `scripts/article-pipeline.js`,
   - cel: monitorowanie czasu kroków i dalsze skracanie cyklu publikacji.
+  - raport timingow nie jest zrodlem prawdy dla SEO ani deployu i nie powinien brudzic statusu Git po poprawnym pushu.
 - Utrzymujemy kierunek upraszczania operacyjnego:
   - usunięte aliasy `legacy:*` z `package.json`,
   - preferowane komendy bieżące: `article:pipeline`, `article:contract:diff`, `prepush:local`.

@@ -3,6 +3,7 @@
 const { spawn } = require('child_process');
 const readline = require('readline');
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 
 function prefixOutput(tag, stream, logger) {
@@ -11,12 +12,12 @@ function prefixOutput(tag, stream, logger) {
   rl.on('line', (line) => logger(`[${tag}] ${line}`));
 }
 
-function runStep(tag, cmd, args) {
+function runStep(tag, cmd, args, options = {}) {
   return new Promise((resolve, reject) => {
     const started = Date.now();
     const child = spawn(cmd, args, {
       cwd: process.cwd(),
-      env: process.env,
+      env: { ...process.env, ...(options.env || {}) },
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     prefixOutput(tag, child.stdout, console.log);
@@ -32,7 +33,9 @@ function runStep(tag, cmd, args) {
 
 function appendTimingReport(scope, totalMs, steps) {
   try {
-    const reportPath = path.join(process.cwd(), 'data', 'reports', 'pipeline-timings.json');
+    const reportPath = process.env.FITPO50_PIPELINE_TIMINGS_PATH
+      ? path.resolve(process.env.FITPO50_PIPELINE_TIMINGS_PATH)
+      : path.join(process.cwd(), 'data', 'reports', 'local', 'pipeline-timings.json');
     const nowIso = new Date().toISOString();
     const payload = fs.existsSync(reportPath)
       ? JSON.parse(fs.readFileSync(reportPath, 'utf8'))
@@ -56,19 +59,31 @@ function appendTimingReport(scope, totalMs, steps) {
 async function main() {
   const started = Date.now();
   const timings = [];
+  let exportDir = '';
   console.log('Pre-push: start');
 
-  timings.push(await runStep('prepush:diff-guard', 'node', ['scripts/prepush-diff-guard.js']));
-  timings.push(await runStep('fitpo50:doctor', 'node', ['scripts/fitpo50-doctor.js']));
+  try {
+    timings.push(await runStep('prepush:diff-guard', 'node', ['scripts/prepush-diff-guard.js']));
+    timings.push(await runStep('fitpo50:doctor', 'node', ['scripts/fitpo50-doctor.js']));
 
-  const parallel = await Promise.all([
-    runStep('prepush:parallel:checks', 'node', ['scripts/prepush-parallel-checks.js']),
-    runStep('build', 'npm', ['run', 'build']),
-    runStep('smoke:static(_site)', 'node', ['scripts/static-smoke-check.js', '_site']),
-  ]);
-  timings.push(...parallel);
+    const parallel = await Promise.all([
+      runStep('prepush:parallel:checks', 'node', ['scripts/prepush-parallel-checks.js', '--worktree']),
+      runStep('build', 'npm', ['run', 'build']),
+    ]);
+    timings.push(...parallel);
 
-  timings.push(await runStep('tmp:cleanup', 'node', ['scripts/tmp-cleanup.js']));
+    exportDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-prepush-export-'));
+    timings.push(await runStep('export:fresh(tmp)', 'bash', ['./scripts/export_site.sh', exportDir], {
+      env: { SKIP_TS_BUILD: '1' },
+    }));
+    timings.push(await runStep('smoke:static(fresh-export)', 'node', ['scripts/static-smoke-check.js', exportDir]));
+
+    timings.push(await runStep('tmp:cleanup', 'node', ['scripts/tmp-cleanup.js']));
+  } finally {
+    if (exportDir) {
+      fs.rmSync(exportDir, { recursive: true, force: true });
+    }
+  }
 
   const totalMs = Date.now() - started;
   const sec = (totalMs / 1000).toFixed(2);

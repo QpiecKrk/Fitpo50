@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T19:32:52.196Z",
+  "generated_at": "2026-07-10T18:18:27.302Z",
   "budgets": {
     "lcp_ms": {
       "warn": 2500,
@@ -22,96 +22,6 @@
   "rows": [
     {
       "url": "/",
-      "lcp_ms": 36,
-      "cls": 0,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/index.html",
-      "lcp_ms": 56,
-      "cls": 0,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/porady.html",
-      "lcp_ms": 60,
-      "cls": 0.0512,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/rusz-sie.html",
-      "lcp_ms": 56,
-      "cls": 0,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/jedzenie.html",
-      "lcp_ms": 60,
-      "cls": 0,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/zdrowie.html",
-      "lcp_ms": 52,
-      "cls": 0,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/ciekawe.html",
-      "lcp_ms": 44,
-      "cls": 0,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/dlaczego-bieznia-to-za-malo.html",
-      "lcp_ms": 48,
-      "cls": 0,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/badania-po-50.html",
-      "lcp_ms": 64,
-      "cls": 0,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/dieta-po-50.html",
-      "lcp_ms": 48,
-      "cls": 0,
-      "tbt_ms": 0,
-      "status_lcp": "ok",
-      "status_cls": "ok",
-      "status_tbt": "ok"
-    },
-    {
-      "url": "/sen-po-50.html",
       "lcp_ms": 40,
       "cls": 0,
       "tbt_ms": 0,
@@ -120,8 +30,8 @@
       "status_tbt": "ok"
     },
     {
-      "url": "/trening-silowy-eliksir-mlodosci-po-50.html",
-      "lcp_ms": 104,
+      "url": "/index.html",
+      "lcp_ms": 24,
       "cls": 0,
       "tbt_ms": 0,
       "status_lcp": "ok",
@@ -129,8 +39,17 @@
       "status_tbt": "ok"
     },
     {
-      "url": "/motywacja-po-50.html",
-      "lcp_ms": 48,
+      "url": "/porady.html",
+      "lcp_ms": 52,
+      "cls": 0.02,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
+      "url": "/rusz-sie.html",
+      "lcp_ms": 32,
       "cls": 0,
       "tbt_ms": 0,
       "status_lcp": "ok",
@@ -138,7 +57,43 @@
       "status_tbt": "ok"
     },
     {
-      "url": "/siedzenie-po-50.html",
+      "url": "/jedzenie.html",
+      "lcp_ms": 40,
+      "cls": 0,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
+      "url": "/zdrowie.html",
+      "lcp_ms": 40,
+      "cls": 0,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
+      "url": "/ciekawe.html",
+      "lcp_ms": 32,
+      "cls": 0,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
+      "url": "/dlaczego-bieznia-to-za-malo.html",
+      "lcp_ms": 40,
+      "cls": 0,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
+      "url": "/badania-po-50.html",
       "lcp_ms": 36,
       "cls": 0,
       "tbt_ms": 0,
@@ -147,8 +102,53 @@
       "status_tbt": "ok"
     },
     {
+      "url": "/dieta-po-50.html",
+      "lcp_ms": 24,
+      "cls": 0,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
+      "url": "/sen-po-50.html",
+      "lcp_ms": 36,
+      "cls": 0,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
+      "url": "/trening-silowy-eliksir-mlodosci-po-50.html",
+      "lcp_ms": 76,
+      "cls": 0,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
+      "url": "/motywacja-po-50.html",
+      "lcp_ms": 28,
+      "cls": 0,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
+      "url": "/siedzenie-po-50.html",
+      "lcp_ms": 32,
+      "cls": 0,
+      "tbt_ms": 0,
+      "status_lcp": "ok",
+      "status_cls": "ok",
+      "status_tbt": "ok"
+    },
+    {
       "url": "/waga-smart-pomiar-skladu-ciala-prawda.html",
-      "lcp_ms": 60,
+      "lcp_ms": 44,
       "cls": 0,
       "tbt_ms": 0,
       "status_lcp": "ok",
@@ -166,7 +166,7 @@
     },
     {
       "url": "/kreatyna-po-50-tce-kompletny-przewodnik.html",
-      "lcp_ms": 52,
+      "lcp_ms": 20,
       "cls": 0,
       "tbt_ms": 0,
       "status_lcp": "ok",
@@ -175,7 +175,7 @@
     },
     {
       "url": "/apob-apoa-badania-cholesterol.html",
-      "lcp_ms": 52,
+      "lcp_ms": 40,
       "cls": 0,
       "tbt_ms": 0,
       "status_lcp": "ok",
@@ -184,7 +184,7 @@
     },
     {
       "url": "/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html",
-      "lcp_ms": 36,
+      "lcp_ms": 24,
       "cls": 0,
       "tbt_ms": 0,
       "status_lcp": "ok",
@@ -193,7 +193,7 @@
     },
     {
       "url": "/testosteron-po-50-naturalnie-bez-trt.html",
-      "lcp_ms": 36,
+      "lcp_ms": 24,
       "cls": 0,
       "tbt_ms": 0,
       "status_lcp": "ok",

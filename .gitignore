@@ -164,4 +164,6 @@ data/reports/fitpo50-doctor.md
 data/reports/admin-doctor.json
 data/reports/admin-doctor.md
 data/reports/growth/
+data/reports/local/
+data/reports/pipeline-timings.json
 data/cache/internal-link-corpus.json
