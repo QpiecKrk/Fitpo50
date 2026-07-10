@@ -39,6 +39,7 @@ Nastepnie:
 - jesli zadanie dotyczy artykulow, przeczytaj tez `ARTICLE_STANDARD.md`.
 
 Zasady:
+- ZERO GENERYCZNYCH TEKSTOW: kazda zmiana w tresci artykulu, FAQ, quick answer, H2, title/meta, linkowaniu, Evidence Box, tabeli, opisie obrazka, poprawce SEO/AEO/GEO/AIO albo "technicznej" edycji tekstu musi byc konkretna, logiczna i oparta o tresc artykulu, dane GSC/PAA/autocomplete, sprawdzone zrodlo, konkretna liczbe/prog albo jasny warunek bezpieczenstwa. Nie wolno dodawac zapychaczy typu "warto pamietac", "kluczowe jest", "w dzisiejszych czasach", "to zalezy" bez konkretu. Jesli brakuje danych lub zrodel, zatrzymaj sie i oznacz `INSUFFICIENT_DATA` zamiast dopisywac ogolnik.
 - nie zgaduj,
 - nie pomijaj konfliktow z dokumentem,
 - nie rozszerzaj zakresu bez potrzeby,
@@ -93,13 +94,13 @@ Publikacja artykulow:
 - przed ogloszeniem statusu "gotowe" obowiazkowo sprawdz, czy `data/import/*.fitpo50.json` nie zostawia blockerow push; jesli zostawia, popraw albo usun/przenies plik roboczy z repo i ponow gate, dopiero potem wolno oglosic "gotowe",
 - przed `prepush` zawsze uruchamiaj mirror zasobow: `npm run assets:mirror:sync` (PDF + miniatury NEWS + JSON mirror do `_site`),
 - obowiazkowo uruchom walidator standardu: `node scripts/validate-article-standard.js <plik.html>`,
-- obowiazkowo generuj PDF artykulu i podpinaj duzy przycisk w hero: `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>` (albo hurtowo: `npm run article:pdf:sync`),
+- obowiazkowo generuj PDF artykulu i podpinaj duzy przycisk w hero: `npm run article:pdf:builder -- --slug <slug>` (albo hurtowo: `npm run article:pdf:sync`),
 - dla nowych artykulow obowiazuje kontrakt HERO+SHARE:
   - motto pod hero (`.hero-motto`) ma byc czytelne, eleganckie, bez fontu odrecznego,
   - pod hero musza byc dwa kafle akcji: `Pobierz PDF` + `Udostepnij` (`#share-article-top`) we wrapperze `.article-primary-actions`,
   - sekcja `Udostepnij artykul` (`.share-article-section`) ma byc przed `Źródła` i miec: Facebook, LinkedIn, WhatsApp, mail, kopiowanie linku,
   - badge `Udostepnij` ma miec styl jak badge `PDF`, ale z etykieta `SHARE`,
-- BEZWZGLEDNIE: zanim napiszesz, ze zadanie/artykul jest "gotowe", najpierw wykonaj generowanie PDF (`python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>` lub `npm run article:pdf:sync`) i potwierdz obecność pliku PDF w obu lokalizacjach: `assets/pdf/` oraz `_site/assets/pdf/`; bez tego nie wolno oglaszac statusu "gotowe",
+- BEZWZGLEDNIE: zanim napiszesz, ze zadanie/artykul jest "gotowe", najpierw wykonaj generowanie PDF (`npm run article:pdf:builder -- --slug <slug>` lub `npm run article:pdf:sync`) i potwierdz obecność pliku PDF w obu lokalizacjach: `assets/pdf/` oraz `_site/assets/pdf/`; bez tego nie wolno oglaszac statusu "gotowe",
 - FAQ ma byc oparte o realne pytania z sieci (autocomplete/PAA), nie wymyslane; wymagane `faq_research[]` (min. 4 wpisy: `question`, `source_label`, `source_url`),
 - w imporcie trzymaj `--faq-strict true` (domyslnie), czyli brak `faq_research[]` lub placeholdery FAQ = twardy FAIL,
 - placeholdery redakcyjne (np. "Do uzupełnienia redakcyjnego", "Pytanie do doprecyzowania", "Odpowiedź do uzupełnienia", `{{...}}`) sa twardym FAIL importu w całym artykule (nie tylko FAQ),
@@ -130,7 +131,7 @@ Dzial `Mity`:
 - Kolor kategorii `Mity`: `#b4233a` + bialy tekst; przycisk `Czytaj` w kafelkach Czytelni zostaje wspolny jak w innych kategoriach.
 - Artykul typu mit ma rytm: `MIT` -> `werdykt FitPo50` -> `dowody/fizjologia` -> `co dziala zamiast tego`.
 - Ton: kumpelski i spokojny; obalamy bledna obietnice/mechanizm, nie ludzi.
-- Jesli artykul obala konkretne twierdzenie, dodaj `ClaimReview`.
+- `ClaimReview` dodawaj tylko wtedy, gdy artykul obala jedno precyzyjne twierdzenie i ma jasny werdykt oraz zrodla; nie dodawaj jednego sztucznego `ClaimReview` do tekstow zbiorczych.
 
 Modul NEWS:
 - traktuj `MEMORY_NEWSY.md` jako zrodlo zasad,

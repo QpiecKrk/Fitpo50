@@ -2,6 +2,12 @@
 
 Ten dokument definiuje kanoniczny standard artykułów. Obowiązuje dla wszystkich nowych publikacji.
 
+## 0. Zero Generic Text
+- Każda zmiana w tekście artykułu musi być konkretna, logiczna i oparta o treść artykułu, dane GSC/PAA/autocomplete, sprawdzone źródło, konkretną liczbę/próg albo jasny warunek bezpieczeństwa.
+- Zakaz dotyczy także drobnych edycji technicznych, SEO/AEO/GEO/AIO, title/meta, leadów, quick answers, FAQ, H2, linkowania, anchorów, opisów grafik, tabel, Evidence Box, calloutów i podpisów.
+- Nie wolno dopisywać ogólników, zapychaczy ani „ładnych” zdań, które nie wnoszą konkretnej informacji dla czytelnika.
+- Jeśli brakuje danych lub źródeł do poprawki, oznacz `INSUFFICIENT_DATA` i zatrzymaj edycję zamiast zgadywać.
+
 ## 1. Golden template
 - Strona referencyjna (golden): `wydolnosc-vo2max-starzenie-po-50.html`
 - Szablon techniczny do tworzenia nowych artykułów: `article-template-bento.html`
@@ -65,7 +71,7 @@ Format obowiązkowy: pełny ISO 8601 z godziną i strefą czasową (np. `2026-04
 5. Walidacja standardu:
 `node scripts/validate-article-standard.js <plik.html>`
 6. PDF + przycisk pobierania (obowiązkowe):
-`python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>`
+`npm run article:pdf:builder -- --slug <slug>`
 albo hurtowo:
 `npm run article:pdf:sync`
 7. Synchronizacja do `_site`.
@@ -162,4 +168,4 @@ Artykuł nie przechodzi, jeśli:
   3. pokaż fizjologię i jakość dowodów,
   4. zakończ praktycznym "co działa zamiast tego".
 - Ton: spokojny, kumpelski, bez moralizowania i bez języka oskarżającego konkretne firmy/osoby.
-- Jeżeli artykuł obala konkretne popularne twierdzenie, dodaj `ClaimReview`.
+- `ClaimReview` dodawaj tylko wtedy, gdy artykuł obala jedno precyzyjne, popularne twierdzenie i da się podać jasny werdykt oraz źródła. Przy artykułach zbiorczych typu "5 mitów" nie dodawaj jednego sztucznego `ClaimReview`.

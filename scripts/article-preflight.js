@@ -103,6 +103,15 @@ function normalizeLocalHrefToPath(href) {
   return utils.normalizeInternalHtmlHref(raw);
 }
 
+function normalizeForSearch(value) {
+  return utils.stripTags(String(value || ''))
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function hasKnownImageExtension(value) {
   return /\.(png|jpe?g|webp|avif)$/i.test(String(value || '').trim());
 }
@@ -250,6 +259,35 @@ function main() {
       errors.push(`FAQ #${idx + 1}: pytanie nie ma dopasowania 1:1 w faq_research.question.`);
     }
   });
+
+  if (isSupportedCategory(categoryRaw) && /^(mity|mit|obnazamy-mity|obnażamy-mity|sciema-czy-fakt|ściema-czy-fakt)$/i.test(categoryRaw)) {
+    const sectionText = normalizeForSearch(sections.map((section) => [
+      section.title || section.heading || '',
+      ...(Array.isArray(section.paragraphs_html) ? section.paragraphs_html : []),
+    ].join(' ')).join(' '));
+    const faqText = normalizeForSearch(answerBlocks.map((item) => `${item?.question || ''} ${item?.answer_html || ''}`).join(' '));
+    const hasMythSignal = /\bmit\b|\bmity\b|myth_claim/i.test(sectionText) || String(json.myth_claim || '').trim().length >= 12;
+    const hasVerdictSignal = /werdykt|fitpo50_verdict|polprawda|polfakt|brak dobrych dowodow|mocne dowody|umiarkowane dowody|slabe dowody/i.test(sectionText)
+      || String(json.fitpo50_verdict || '').trim().length >= 3;
+    const hasPracticalAlternative = /co (naprawde )?dziala|zamiast tego|co robic zamiast|praktyczn/i.test(sectionText);
+    const hasMythFactTable = /<table\b/i.test(raw) && /\bmit\b/i.test(sectionText) && /\b(fakt|fakty|prawda|dowod|dowody)\b/i.test(sectionText);
+    const hasMechanismFaq = /(mechanizm|fizjolog|dlaczego|jak to dziala|co mowi)/i.test(faqText);
+    if (!hasMythSignal) {
+      errors.push('Mity: JSON musi jasno nazwać obalany mit (np. myth_claim albo sekcja/akapit z frazą MIT).');
+    }
+    if (!hasVerdictSignal) {
+      errors.push('Mity: brak jasnego werdyktu FitPo50 albo oceny siły dowodów.');
+    }
+    if (!hasPracticalAlternative) {
+      errors.push('Mity: brak praktycznego domknięcia typu "co naprawdę działa" / "co robić zamiast".');
+    }
+    if (!hasMythFactTable) {
+      errors.push('Mity: wymagana jest tabela HTML porównująca MIT z faktem/prawdą/dowodami.');
+    }
+    if (!hasMechanismFaq) {
+      errors.push('Mity: answer_blocks powinny zawierać pytanie/odpowiedź o mechanizmie mitu, a nie tylko ogólne FAQ tematu.');
+    }
+  }
 
   const htmlChunks = [];
   sections.forEach((section) => {

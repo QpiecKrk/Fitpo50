@@ -17,6 +17,7 @@
 - Nie mieszamy logiki modulow `Porady` i `Moje Sukcesy`.
 - Przy publikacji, wycofaniu lub usunieciu wpisu w "Moje Sukcesy" zawsze trzeba wykonac pelna synchronizacje powiazanych danych (np. JSON, sitemap, kalendarz, fallback danych).
 - Do commita nie trafiaja pliki narzedziowe (`.agent`, `.brainsync`, `.cursor`, itp.).
+- ZERO GENERYCZNYCH TEKSTOW: kazda zmiana w artykule albo na stronie musi byc przemyslana, logiczna i wynikać z tresci, danych GSC/PAA/autocomplete, sprawdzonego zrodla, konkretnej liczby/progu albo jasnego warunku bezpieczenstwa. Dotyczy to rowniez "malych" edycji technicznych, SEO, AEO, GEO, AIO, title/meta, FAQ, quick answers, linkowania, anchorow, opisow grafik, tabel, Evidence Box i calloutow. Jesli nie ma danych lub zrodel, agent ma zatrzymac sie i napisac `INSUFFICIENT_DATA`, a nie dopisywac ogolniki.
 
 ## Coding rules
 - Najpierw czytamy aktualny stan plikow, potem edytujemy.
@@ -161,7 +162,7 @@
   - Atakujemy bledna obietnice/mechanizm, nie ludzi, firmy ani konkretne osoby.
   - Bezpieczna rama prawna: opisuj wzorzec obietnicy i dowody, nie rzucaj oskarzen typu "oszustwo" wobec konkretnego podmiotu bez twardych podstaw prawnych.
   - Obowiazkowy rytm redakcyjny: `MIT` -> `werdykt FitPo50` -> `co mowi fizjologia/badania` -> `co dziala zamiast tego`.
-  - Dla tresci "mit vs fakt" dodawaj `ClaimReview`, jesli artykul obala konkretne popularne twierdzenie.
+  - `ClaimReview` dodawaj tylko wtedy, gdy artykul obala jedno precyzyjne, popularne twierdzenie i da sie podac jasny werdykt oraz zrodla. Przy tekstach zbiorczych typu "5 mitow" nie dodawaj jednego sztucznego `ClaimReview`.
 
 - **JSON po publikacji.**
   - JSON z `~/Downloads` jest tylko wsadem/draftem do pipeline; uzytkownik moze go skasowac po publikacji.
@@ -273,9 +274,10 @@
   - **Pewnik operacyjny:** przy imporcie brakujace FAQ uzupelniamy automatycznie (zamiast wywalania bledu) na bazie banku pytan sieciowych autocomplete/PAA; minimum 4 pytania na artykul.
 
 - **ClaimReview dla tresci „mit vs fakt”:**
-  - Jesli artykul obala popularny mit lub ocenia kontrowersyjne twierdzenie zdrowotne, dodajemy schema `ClaimReview`.
-  - Minimalny standard: `url`, `claimReviewed`, `author`, `datePublished`, `dateModified`, `reviewRating`.
-  - `reviewRating` utrzymujemy spojnie z dotychczasowym wzorcem (`ratingValue: 1`, `alternateName: "Mit"`), gdy teza jest falszywa.
+  - Dodajemy schema `ClaimReview` tylko dla jednego precyzyjnego claimu, gdy artykul ma jasne `claimReviewed`, werdykt, daty i zrodla.
+  - Przy artykulach zbiorczych typu "5 mitow" nie dodajemy jednego ogolnego `ClaimReview`; jesli kiedys bedzie potrzebne, wymagalo by to osobnych claimow i osobnej decyzji redakcyjnej.
+  - Minimalny standard, gdy `ClaimReview` jest uzasadnione: `url`, `claimReviewed`, `author`, `datePublished`, `dateModified`, `reviewRating`.
+  - `reviewRating` utrzymujemy spojnie z faktycznym werdyktem artykulu; nie dopasowujemy ratingu na sile.
 
 - **Performance / frontend po ostatnich poprawkach:**
   - Export (`scripts/export_site.sh`) robi teraz automatyczna minifikacje:
@@ -352,7 +354,7 @@
     - strone kategorii (`rusz-sie.html` / `jedzenie.html` / `zdrowie.html` / `ciekawe.html`),
     - oraz odpowiedniki w `_site`,
   - aktualizuje `sitemap.xml` i `llms.txt`,
-  - **zawsze** generuje PDF + duzy przycisk "Pobierz PDF" (`sync_article_pdfs_and_buttons.py`).
+  - **zawsze** generuje PDF + duzy przycisk "Pobierz PDF" (kanonicznie: `npm run article:pdf:builder -- --slug <slug>`; hurtowo: `npm run article:pdf:sync`).
 
 ## Ustalenia operacyjne (2026-05-25) - anty-spam i E-E-A-T hard gate
 
@@ -423,6 +425,8 @@
 - `prepush:worktree` uruchamia szybkie rownolegle gate'y dla staged + unstaged zmian w lokalnym drzewie roboczym.
 - `site:full-audit` uruchamia pelny audyt techniczny: build/export check, crawler linkow, workflow maintenance i `aio:full-audit`.
 - `aio:full-audit` generuje pelny raport SEO/AEO/GEO/AIO: encje, structured data, quick answers, topical map, llms-check, verify i growth report.
+- `article:ready-check` sprawdza JSON i assety na kopii roboczej w `/tmp`, bez importu HTML/PDF i bez zmiany oryginalnego pliku.
+- `article:import:safe` jest tylko legacy aliasem kompatybilnosci i uruchamia pelny `article-pipeline`; nie uzywaj go jako glownej komendy publikacji.
 - Zasada "nic z bledem nie przechodzi": FAIL ktoregokolwiek gate zatrzymuje pipeline i push.
 - Ochrona oryginalnych JSON:
   - `fix-fitpo50-json` domyslnie nie nadpisuje pliku (`--write false`),
@@ -509,7 +513,7 @@
 
 - **PDF po zmianach w tresci artykulu:**
   - po recznej edycji tresci/obrazow artykulu zawsze uruchamiamy:
-    - `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>`
+    - `npm run article:pdf:builder -- --slug <slug>`
   - po generacji potwierdzamy, ze PDF istnieje w `assets/pdf/` i `_site/assets/pdf/`.
 
 - **Incydent anty-regresyjny (listingi + kafelki Czytelni):**
@@ -979,7 +983,7 @@ Przy dodawaniu nowego artykulu aktualizujemy:
 PDF workflow (obowiazkowy):
 
 1. wygeneruj PDF i zaktualizuj przycisk:
-   - `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>`
+   - `npm run article:pdf:builder -- --slug <slug>`
 2. hurtowo dla wszystkich artykulow:
    - `npm run article:pdf:sync`
 3. mapowanie ma byc 1:1: `slug.html` -> `assets/pdf/slug.pdf` (bez pomylek)

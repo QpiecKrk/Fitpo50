@@ -21,6 +21,7 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 ## Artykuly
 
 - `npm run article:preflight -- --file <plik.fitpo50.json> --assets-dir <katalog>` - kontrola JSON i obrazow przed importem.
+- `npm run article:ready-check -- --file <plik.fitpo50.json> --assets-dir <katalog>` - szybka kontrola JSON i assetow na kopii roboczej, bez importu HTML/PDF i bez zmiany oryginalnego pliku.
 - `npm run article:publish --file=<plik.fitpo50.json>` - pelny import/publikacja artykulu przez pipeline.
 - `npm run article:validate` - walidacja standardu artykulow.
 - `npm run article:contract:diff` - kontrakt tylko dla zmienionych HTML.
