@@ -391,4 +391,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Krew pępowinowa: cudowny skarb czy sprytny marketing po porodzie? | FitPo50"
   section: "Ciekawe"
   summary: "Czy warto bankować krew pępowinową? Sprawdź, kiedy ratuje życie, kiedy to marketing, jakie są koszty, ograniczenia i realne szanse użycia próbki."
+- url: https://fitpo50.pl/szczepionki-covid-skutki-uboczne-mity-i-fakty.html
+  title: "Szczepionki COVID: skutki uboczne, mity i fakty z badań | FitPo50"
+  section: "Mity"
+  summary: "Sprawdź, które skutki uboczne szczepionek COVID są realne, kiedy pilnie reagować i które mity o białku kolczastym oraz VAERS nie mają podstaw w badaniach."
 
