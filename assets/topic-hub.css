@@ -487,6 +487,124 @@ html.night-shell .hub-featured {
   letter-spacing: 0.08em;
 }
 
+.hub-answer {
+  border-color: color-mix(in srgb, var(--hub-accent) 28%, var(--hub-line));
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.72)),
+    linear-gradient(180deg, var(--hub-accent-soft), #ffffff);
+}
+
+.hub-answer .hub-section__head {
+  margin-bottom: 0;
+}
+
+.hub-answer p {
+  max-width: 920px;
+  font-size: 1.05rem;
+  line-height: 1.62;
+}
+
+.hub-decision-grid,
+.hub-faq-list,
+.hub-source-links {
+  display: grid;
+  gap: 10px;
+}
+
+.hub-decision-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hub-decision-grid a,
+.hub-faq-list article,
+.hub-source-links a {
+  border: 1px solid rgba(197, 225, 222, 0.9);
+  border-radius: 18px;
+  background: #f8fcfb;
+}
+
+.hub-decision-grid a {
+  min-height: 150px;
+  padding: 15px;
+  color: var(--hub-ink);
+  text-decoration: none;
+}
+
+.hub-decision-grid strong {
+  display: block;
+  color: var(--hub-accent);
+  font-size: 1.08rem;
+  font-weight: 950;
+}
+
+.hub-decision-grid span {
+  display: block;
+  margin-top: 10px;
+  color: var(--hub-ink-soft);
+  font-size: 0.92rem;
+  font-weight: 730;
+  line-height: 1.42;
+}
+
+.hub-faq-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hub-faq-list article {
+  padding: 16px;
+}
+
+.hub-faq-list h3 {
+  margin: 0 0 8px;
+  color: var(--hub-ink);
+  font-size: 1.04rem;
+  line-height: 1.22;
+}
+
+.hub-faq-list p {
+  margin: 0;
+  color: var(--hub-ink-soft);
+  font-weight: 720;
+  line-height: 1.48;
+}
+
+.hub-source-links {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hub-source-links a {
+  padding: 14px 16px;
+  color: var(--hub-ink);
+  font-weight: 850;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.hub-source-links a::after {
+  content: " →";
+  color: var(--hub-accent);
+  font-weight: 950;
+}
+
+html.night-shell .hub-answer,
+html.night-shell .hub-decision-grid a,
+html.night-shell .hub-faq-list article,
+html.night-shell .hub-source-links a {
+  background: var(--hub-night-card);
+  border-color: var(--hub-night-line);
+}
+
+html.night-shell .hub-decision-grid a,
+html.night-shell .hub-faq-list h3,
+html.night-shell .hub-source-links a {
+  color: var(--hub-night-text);
+}
+
+html.night-shell .hub-decision-grid span,
+html.night-shell .hub-faq-list p {
+  color: var(--hub-night-muted);
+}
+
 .hub-content-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.9fr);
@@ -663,6 +781,12 @@ html.night-shell .hub-side-card__lead {
 
   .hub-hero,
   .hub-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hub-decision-grid,
+  .hub-faq-list,
+  .hub-source-links {
     grid-template-columns: 1fr;
   }
 
