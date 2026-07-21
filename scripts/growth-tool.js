@@ -9,6 +9,7 @@ const ROOT = process.cwd();
 const REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
   ? path.resolve(process.env.FITPO50_GROWTH_REPORT_DIR)
   : path.join(process.cwd(), 'data', 'reports', 'growth');
+const GSC_INPUT_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
 const SITE_ORIGIN = 'https://fitpo50.pl';
 const TEMPORARILY_IGNORED_SEO_FILES = new Set([
   'narzedzia.html',
@@ -171,6 +172,17 @@ function nowWarsawIso() {
   const offsetRest = Math.abs(offsetMinutes) % 60;
   const sign = offsetMinutes >= 0 ? '+' : '-';
   return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}${sign}${String(offsetHours).padStart(2, '0')}:${String(offsetRest).padStart(2, '0')}`;
+}
+
+function parseDate(input) {
+  const date = new Date(String(input || '').trim());
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function addDays(date, days) {
+  const next = new Date(date.getTime());
+  next.setUTCDate(next.getUTCDate() + days);
+  return next.toISOString().slice(0, 10);
 }
 
 function extractJsonLdObjects(html) {
@@ -355,6 +367,25 @@ function parseCsvRows(file) {
   });
 }
 
+function normalizeHeaderKey(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+
+function rowValue(row, candidates) {
+  const lookup = new Map(Object.entries(row || {}).map(([key, value]) => [normalizeHeaderKey(key), value]));
+  for (const candidate of candidates) {
+    const value = lookup.get(normalizeHeaderKey(candidate));
+    if (value !== undefined && String(value).trim() !== '') return value;
+  }
+  return '';
+}
+
 function splitCsvLine(line, delimiter) {
   const cells = [];
   let current = '';
@@ -395,6 +426,33 @@ function readGscPages() {
     });
   }
   return map;
+}
+
+function findReportFiles(dirs, patterns) {
+  const out = [];
+  function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name === 'node_modules' || entry.name === '.git' || entry.name === '_site') continue;
+      const full = path.join(dir, entry.name);
+      if (full === REPORT_DIR || full.startsWith(`${REPORT_DIR}${path.sep}`)) continue;
+      if (entry.isDirectory()) {
+        walk(full);
+        continue;
+      }
+      out.push(full);
+    }
+  }
+  for (const dir of dirs) {
+    if (!dir || !fs.existsSync(dir)) continue;
+    const before = out.length;
+    walk(dir);
+    for (const file of out.slice(before)) {
+      const rel = path.relative(dir, file);
+      const name = rel.toLowerCase();
+      if (!patterns.some((rx) => rx.test(name))) continue;
+    }
+  }
+  return unique(out.filter((file) => patterns.some((rx) => rx.test(path.basename(file).toLowerCase())))).sort();
 }
 
 function pageToFile(page) {
@@ -682,12 +740,14 @@ function approvalPreparationChecklist(kind, query) {
       'krótki lead albo doprecyzowanie pierwszego akapitu: dla kogo jest tekst, co rozwiązuje i jaki jest warunek bezpieczeństwa',
       '2-4 linki kontekstowe z podanych źródeł, z naturalnym anchorem w zdaniu',
       'aktualizacja dateModified, sitemap, _site i llms-full.txt dopiero po zatwierdzeniu treści',
+      'sprawdzenie, czy tekst ma własny konkret FitPo50: liczba, przykład, próg, tabela albo obserwacja autora',
     ];
   }
   return [
     'quick answer 45-65 słów z konkretną odpowiedzią i warunkiem bezpieczeństwa, bez pustych obietnic',
     'FAQ z realnych pytań użytkowników albo danych GSC/PAA/autocomplete; bez zmyślonych problemów',
     'minimum 4 realne źródła URL do najważniejszych twierdzeń, bez halucynacji i bez źródeł dekoracyjnych',
+    'własny konkret: przykład osoby 50+, próg/liczba, tabela albo obserwacja FitPo50, jeśli temat na to pozwala',
     '2-4 linki wewnętrzne z podanych źródeł oraz zgłoszenie URL w GSC po publikacji',
   ];
 }
@@ -754,6 +814,9 @@ function buildUnifiedInsights() {
   const doctor = readJsonIfExists(path.join(reportsDir, 'fitpo50-doctor.json'));
   const aiVisibility = readJsonIfExists(path.join(reportsDir, 'ai-visibility-monitor.json'));
   const gscSubmitQueueText = readTextIfExists(path.join(reportsDir, 'gsc-submit-queue.txt'));
+  const generativeAi = readJsonIfExists(path.join(REPORT_DIR, 'gsc-generative-ai.json'));
+  const postDeployKpi = readJsonIfExists(path.join(REPORT_DIR, 'post-deploy-kpi-plan.json'));
+  const originality = readJsonIfExists(path.join(REPORT_DIR, 'originality-score.json'));
 
   const cards = actionCardsFromSeoAio(seoAio);
   const portfolio = seoAio?.portfolio || {};
@@ -797,6 +860,17 @@ function buildUnifiedInsights() {
   if (aiVisibilityRows.some((row) => row.fitpo50Mentioned === false || row.fitpo50Linked === false)) {
     insights.push('AI visibility wymaga monitoringu: są tematy, gdzie odpowiedź AI jest dobra, ale FitPo50 nie pojawia się jako źródło.');
   }
+  if (generativeAi?.status === 'OK') {
+    insights.push(`GSC Generative AI: wykryto ${generativeAi.summary?.pages || 0} URL-i z AI impressions; te strony trzeba mierzyć osobno od klasycznego CTR.`);
+  } else if (generativeAi && !generativeAi.parse_error) {
+    insights.push('GSC Generative AI: brak eksportu albo brak dostępu w rollout; popraw-seo będzie gotowe, gdy raport pojawi się w Search Console.');
+  }
+  if (postDeployKpi?.candidates?.length) {
+    insights.push(`KPI po wdrożeniu: ${postDeployKpi.candidates.length} URL-i ma plan kontroli 7/14/28 dni z Web GSC, AI impressions i zaangażowaniem.`);
+  }
+  if (originality?.average_score !== undefined) {
+    insights.push(`Originality score: średnio ${originality.average_score}%; niskie wyniki oznaczają brak własnych danych, przykładów, progów albo assetów cytowalnych.`);
+  }
   if (doctor?.status) {
     insights.push(`Doctor: ${doctor.status}. RED blokuje pracę, YELLOW oznacza ostrzeżenia operacyjne do przeczytania.`);
   }
@@ -812,6 +886,9 @@ function buildUnifiedInsights() {
       fitpo50_doctor: Boolean(doctor && !doctor.parse_error),
       ai_visibility_monitor: Boolean(aiVisibility && !aiVisibility.parse_error),
       gsc_submit_queue: gscQueue.length > 0,
+      gsc_generative_ai: Boolean(generativeAi && !generativeAi.parse_error),
+      post_deploy_kpi_plan: Boolean(postDeployKpi && !postDeployKpi.parse_error),
+      originality_score: Boolean(originality && !originality.parse_error),
     },
     portfolio,
     waves: Object.fromEntries(Object.entries(waves).map(([key, value]) => [key, Array.isArray(value) ? value.length : 0])),
@@ -838,6 +915,27 @@ function buildUnifiedInsights() {
         priority: row.priority,
         recommended_actions: row.recommendedActions || [],
       })),
+    generative_ai_visibility: generativeAi && !generativeAi.parse_error ? {
+      status: generativeAi.status,
+      summary: generativeAi.summary,
+      top_pages: (generativeAi.pages || []).slice(0, 10),
+      source_files: generativeAi.source_files || [],
+    } : null,
+    post_deploy_kpi: postDeployKpi && !postDeployKpi.parse_error ? {
+      status: postDeployKpi.status,
+      ai_report_status: postDeployKpi.ai_report_status,
+      candidates: (postDeployKpi.candidates || []).slice(0, 12),
+    } : null,
+    originality_attention: originality && !originality.parse_error ? (originality.articles || [])
+      .filter((item) => Number(item.score || 0) < 70)
+      .slice(0, 12)
+      .map((item) => ({
+        file: item.file,
+        topic: item.topic,
+        score: item.score,
+        gaps: item.gaps,
+        recommendation: item.recommendation,
+      })) : [],
     gsc_submit_queue: gscQueue,
     operational_warnings: doctorWarnings,
   };
@@ -1158,6 +1256,288 @@ function buildQuickAnswerScore() {
   return report;
 }
 
+function readGenerativeAiRows() {
+  const files = findReportFiles([
+    GSC_INPUT_DIR,
+    path.join(ROOT, 'data', 'gsc'),
+    path.join(ROOT, 'data', 'reports'),
+  ], [
+    /generative.*\.(csv|json)$/i,
+    /gen[-_ ]?ai.*\.(csv|json)$/i,
+    /ai[-_ ]?(overview|mode|search|discover|performance).*\.(csv|json)$/i,
+    /(overview|ai-mode|aio).*performance.*\.(csv|json)$/i,
+  ]);
+  const rows = [];
+  for (const file of files) {
+    const ext = path.extname(file).toLowerCase();
+    const rawRows = ext === '.json'
+      ? rowsFromGenerativeAiJson(readJsonIfExists(file))
+      : parseCsvRows(file);
+    rawRows.forEach((row) => {
+      const page = rowValue(row, ['page', 'strona', 'url', 'landing page', 'adres url', 'pages']);
+      const filePath = pageToFile(page);
+      const impressions = toNumber(rowValue(row, ['impressions', 'wyswietlenia', 'wyświetlenia', 'ai impressions', 'generative ai impressions']));
+      const clicks = toNumber(rowValue(row, ['clicks', 'klikniecia', 'kliknięcia']));
+      const country = rowValue(row, ['country', 'kraj']);
+      const device = rowValue(row, ['device', 'urzadzenie', 'urządzenie']);
+      const date = rowValue(row, ['date', 'data', 'day', 'dzien', 'dzień']);
+      const feature = rowValue(row, ['feature', 'search feature', 'typ', 'type']) || inferGenerativeAiFeature(file);
+      if (!filePath || (!impressions && !clicks)) return;
+      rows.push({
+        source_file: path.relative(ROOT, file).replace(/^\.\.\//, ''),
+        page,
+        file: filePath,
+        url: filePath.startsWith('http') ? filePath : `${SITE_ORIGIN}/${filePath}`,
+        feature,
+        impressions,
+        clicks,
+        country,
+        device,
+        date,
+      });
+    });
+  }
+  return { files, rows };
+}
+
+function rowsFromGenerativeAiJson(payload) {
+  if (!payload || payload.parse_error) return [];
+  if (Array.isArray(payload)) return payload;
+  for (const key of ['rows', 'data', 'items', 'pages', 'results']) {
+    if (Array.isArray(payload[key])) return payload[key];
+  }
+  return [];
+}
+
+function inferGenerativeAiFeature(file) {
+  const name = String(file || '').toLowerCase();
+  if (/discover/.test(name)) return 'Discover generative AI';
+  if (/ai[-_ ]?mode/.test(name)) return 'AI Mode';
+  if (/overview|aio/.test(name)) return 'AI Overviews';
+  return 'Search generative AI';
+}
+
+function buildGenerativeAiGscReport() {
+  const { files, rows } = readGenerativeAiRows();
+  const byUrl = new Map();
+  for (const row of rows) {
+    const current = byUrl.get(row.file) || {
+      file: row.file,
+      url: row.url,
+      impressions: 0,
+      clicks: 0,
+      features: new Set(),
+      countries: new Set(),
+      devices: new Set(),
+      latest_date: '',
+      source_files: new Set(),
+    };
+    current.impressions += Number(row.impressions || 0);
+    current.clicks += Number(row.clicks || 0);
+    if (row.feature) current.features.add(row.feature);
+    if (row.country) current.countries.add(row.country);
+    if (row.device) current.devices.add(row.device);
+    if (row.date && String(row.date) > String(current.latest_date || '')) current.latest_date = String(row.date);
+    if (row.source_file) current.source_files.add(row.source_file);
+    byUrl.set(row.file, current);
+  }
+  const pages = [...byUrl.values()]
+    .map((item) => ({
+      file: item.file,
+      url: item.url,
+      impressions: Math.round(item.impressions),
+      clicks: Math.round(item.clicks),
+      features: [...item.features].sort(),
+      countries: [...item.countries].sort(),
+      devices: [...item.devices].sort(),
+      latest_date: item.latest_date,
+      source_files: [...item.source_files].sort(),
+    }))
+    .sort((a, b) => b.impressions - a.impressions || a.file.localeCompare(b.file));
+  const report = {
+    generated_at: nowWarsawIso(),
+    status: pages.length ? 'OK' : 'NO_EXPORT_OR_ROLLOUT_NOT_AVAILABLE',
+    input_dir: GSC_INPUT_DIR,
+    source_files: files.map((file) => path.relative(ROOT, file).replace(/^\.\.\//, '')),
+    expected_export_hint: 'Wrzuć do gsc-auto-input eksport CSV/JSON z raportu Search Generative AI: pages + impressions, opcjonalnie country/device/date/feature.',
+    summary: {
+      pages: pages.length,
+      impressions: pages.reduce((sum, item) => sum + item.impressions, 0),
+      clicks: pages.reduce((sum, item) => sum + item.clicks, 0),
+    },
+    pages,
+    recommended_actions: pages.length
+      ? [
+        'Porównuj URL-e z AI impressions z klasycznym GSC: jeśli AI rośnie bez klików, wzmacniaj CTA i dalsze ścieżki na stronie.',
+        'Dla URL-i z AI impressions sprawdź, czy pierwsze 2-4 zdania nadają się do cytowania i czy schema zgadza się z widoczną treścią.',
+        'URL-e z AI impressions, ale słabym linkowaniem, wzmacniaj z centrów tematycznych i zwycięskich artykułów.',
+      ]
+      : [
+        'Brak eksportu lub brak dostępu w rollout. Sprawdzaj Search Console okresowo; brak raportu nie oznacza braku widoczności w AI.',
+        'Do czasu eksportu używaj AI Visibility Test i ręcznego monitoringu cytowań dla kluczowych pytań.',
+      ],
+  };
+  writeJson(path.join(REPORT_DIR, 'gsc-generative-ai.json'), report);
+  writeGenerativeAiGscMarkdown(report, path.join(REPORT_DIR, 'gsc-generative-ai.md'));
+  return report;
+}
+
+function writeGenerativeAiGscMarkdown(report, file) {
+  const lines = ['# GSC Generative AI Visibility', '', `Wygenerowano: ${report.generated_at}`, `Status: ${report.status}`, ''];
+  lines.push(`Katalog wejściowy: ${report.input_dir}`);
+  lines.push(`Źródła: ${report.source_files.join(', ') || 'brak eksportu'}`);
+  lines.push(`Podsumowanie: URL-e=${report.summary.pages}, AI impressions=${report.summary.impressions}, clicks=${report.summary.clicks}`);
+  lines.push('');
+  if (!report.pages.length) {
+    lines.push(`Brak danych: ${report.expected_export_hint}`);
+    lines.push('');
+  } else {
+    lines.push('## URL-e Z Widocznością W AI');
+    report.pages.slice(0, 30).forEach((item, index) => {
+      lines.push(`${index + 1}. ${item.file}`);
+      lines.push(`   - AI impressions: ${item.impressions}; clicks: ${item.clicks}; features: ${item.features.join(', ') || 'brak'}`);
+      if (item.countries.length || item.devices.length) lines.push(`   - kraje/urządzenia: ${item.countries.join(', ') || 'brak'} / ${item.devices.join(', ') || 'brak'}`);
+    });
+    lines.push('');
+  }
+  lines.push('## Co Robić');
+  report.recommended_actions.forEach((item) => lines.push(`- ${item}`));
+  writeText(file, lines.join('\n'));
+}
+
+function buildPostDeploymentKpiPlan() {
+  const data = buildGrowthData();
+  const generativeAi = readJsonIfExists(path.join(REPORT_DIR, 'gsc-generative-ai.json')) || buildGenerativeAiGscReport();
+  const aiByFile = new Map((generativeAi.pages || []).map((item) => [item.file, item]));
+  const candidates = data.articles
+    .filter((article) => shouldTrackPostDeployment(article, aiByFile.get(article.file)))
+    .slice(0, 40)
+    .map((article, index) => {
+      const ai = aiByFile.get(article.file) || null;
+      return {
+        nr: index + 1,
+        file: article.file,
+        url: article.url,
+        topic: article.topic,
+        date_modified: article.date_modified || 'MISSING',
+        baseline: {
+          clicks: Number(article.gsc?.clicks || 0),
+          impressions: Number(article.gsc?.impressions || 0),
+          ctr: Number(article.gsc?.ctr || 0),
+          position: Number(article.gsc?.position || 0),
+          ai_impressions: Number(ai?.impressions || 0),
+          ai_clicks: Number(ai?.clicks || 0),
+        },
+        checkpoints: buildKpiCheckpoints(article.date_modified),
+        metrics_to_collect: [
+          'GSC Web: clicks, impressions, CTR, average position, query changes',
+          'GSC Generative AI: impressions by page, country, device, feature, if report is available',
+          'GA/analytics: engaged time, scroll depth, outbound PDF clicks, CTA clicks, return visits',
+          'Internal: links added from centers and source pages, dateModified, sitemap lastmod',
+        ],
+        decision_after_28_days: 'Jeśli impressions rosną bez klików: popraw title/meta i pierwszą odpowiedź. Jeśli AI impressions rosną: wzmacniaj cytowalny fragment, źródła i CTA. Jeśli brak crawl/index: sprawdź URL Inspection.',
+      };
+    });
+  const report = {
+    generated_at: nowWarsawIso(),
+    status: 'TRACK_7_14_28',
+    ai_report_status: generativeAi.status,
+    candidates,
+  };
+  writeJson(path.join(REPORT_DIR, 'post-deploy-kpi-plan.json'), report);
+  writePostDeploymentKpiMarkdown(report, path.join(REPORT_DIR, 'post-deploy-kpi-plan.md'));
+  return report;
+}
+
+function shouldTrackPostDeployment(article, ai) {
+  if (ai && Number(ai.impressions || 0) > 0) return true;
+  if (Number(article.gsc?.impressions || 0) > 0) return true;
+  if (/^centrum-/.test(article.file)) return true;
+  return Number(article.growth_score || 0) >= 55;
+}
+
+function buildKpiCheckpoints(dateModified) {
+  const date = parseDate(dateModified);
+  if (!date) return null;
+  return {
+    day_7: addDays(date, 7),
+    day_14: addDays(date, 14),
+    day_28: addDays(date, 28),
+  };
+}
+
+function writePostDeploymentKpiMarkdown(report, file) {
+  const lines = ['# Post-Deploy KPI Plan', '', `Wygenerowano: ${report.generated_at}`, `Status: ${report.status}`, `GSC Generative AI: ${report.ai_report_status}`, ''];
+  report.candidates.slice(0, 30).forEach((item) => {
+    lines.push(`## ${item.nr}. ${item.file}`);
+    lines.push(`- baseline Web: impr ${item.baseline.impressions}, klik ${item.baseline.clicks}, CTR ${item.baseline.ctr}%, poz ${item.baseline.position}`);
+    lines.push(`- baseline AI: impressions ${item.baseline.ai_impressions}, clicks ${item.baseline.ai_clicks}`);
+    lines.push(`- checkpointy: ${item.checkpoints ? Object.values(item.checkpoints).join(' / ') : 'brak dateModified'}`);
+    lines.push(`- decyzja po 28 dniach: ${item.decision_after_28_days}`);
+    lines.push('');
+  });
+  writeText(file, lines.join('\n'));
+}
+
+function buildOriginalityScore() {
+  const articles = buildCorpus();
+  const rows = articles.map((article) => {
+    const html = readTextIfExists(path.join(ROOT, article.file));
+    const text = stripTags(html);
+    const checks = {
+      first_person_or_fitpo50_context: /\b(u mnie|w fitpo50|na fitpo50|moje|moja|sprawdziłem|sprawdzilem|widzę u|z praktyki|podopiecz|czytelnik)\b/i.test(text),
+      concrete_numbers_or_thresholds: /(\d+\s?(mg\/dl|mmhg|g|kg|dni|tygodni|powtórze|powtorze|serii|godzin|%|cm)|\bLDL-C\b|\bApoB\b|\bHbA1c\b|\bVO2max\b)/i.test(text),
+      case_or_example: /\b(przykład|przyklad|case|scenariusz|u osoby|jeśli masz|jesli masz|gdy masz|dla osoby)\b/i.test(text),
+      shareable_asset: article.table_count > 0 || article.pdf_links.length > 0 || article.image_sources.length >= 3,
+      safety_or_boundary: article.has_doctor_box || /\b(kiedy do lekarza|przerwij|pilnie|nie stosuj|skonsultuj|przeciwwskaz)\b/i.test(text),
+      sources_tied_to_claims: article.citation_count >= 4,
+    };
+    const score = Math.round((Object.values(checks).filter(Boolean).length / Object.keys(checks).length) * 100);
+    return {
+      file: article.file,
+      title: article.h1 || article.title,
+      topic: article.topic,
+      score,
+      checks,
+      gaps: Object.entries(checks).filter(([, ok]) => !ok).map(([key]) => key),
+      recommendation: originalityRecommendation(checks),
+    };
+  }).sort((a, b) => a.score - b.score);
+  const report = {
+    generated_at: nowWarsawIso(),
+    average_score: rows.length ? Math.round(rows.reduce((sum, row) => sum + row.score, 0) / rows.length) : 0,
+    articles: rows,
+  };
+  writeJson(path.join(REPORT_DIR, 'originality-score.json'), report);
+  writeOriginalityScoreMarkdown(report, path.join(REPORT_DIR, 'originality-score.md'));
+  return report;
+}
+
+function originalityRecommendation(checks) {
+  const missing = Object.entries(checks).filter(([, ok]) => !ok).map(([key]) => key);
+  if (!missing.length) return 'OK: treść ma konkret, źródła, granice bezpieczeństwa i element cytowalny.';
+  const map = {
+    first_person_or_fitpo50_context: 'Dodaj jedną własną obserwację FitPo50 albo konkretny kontekst osoby 50+.',
+    concrete_numbers_or_thresholds: 'Dodaj liczby, progi, zakresy albo mierzalną tabelę, jeśli temat na to pozwala.',
+    case_or_example: 'Dodaj krótki przykład sytuacji użytkownika zamiast ogólnej porady.',
+    shareable_asset: 'Dodaj tabelę HTML, grafikę albo PDF tylko wtedy, gdy pomaga podjąć decyzję.',
+    safety_or_boundary: 'Dopisz jasny warunek bezpieczeństwa: kiedy przerwać, skonsultować albo nie stosować.',
+    sources_tied_to_claims: 'Uzupełnij realne źródła przy mocnych twierdzeniach.',
+  };
+  return missing.slice(0, 2).map((key) => map[key]).join(' ');
+}
+
+function writeOriginalityScoreMarkdown(report, file) {
+  const lines = ['# Originality And Own Data Score', '', `Wygenerowano: ${report.generated_at}`, `Średni wynik: ${report.average_score}%`, ''];
+  report.articles.slice(0, 50).forEach((article, index) => {
+    lines.push(`${index + 1}. ${article.file}`);
+    lines.push(`   - score: ${article.score}%`);
+    lines.push(`   - braki: ${article.gaps.join(', ') || 'brak'}`);
+    lines.push(`   - rekomendacja: ${article.recommendation}`);
+  });
+  writeText(file, lines.join('\n'));
+}
+
 function tokenizeForScore(value) {
   return String(value || '')
     .toLowerCase()
@@ -1339,6 +1719,9 @@ function buildPoprawSeo() {
   const entities = buildEntityGraph();
   const structuredScore = buildStructuredScore();
   const quickAnswerScore = buildQuickAnswerScore();
+  const generativeAiGsc = buildGenerativeAiGscReport();
+  const originalityScore = buildOriginalityScore();
+  const postDeployKpi = buildPostDeploymentKpiPlan();
   const topicalMap = buildTopicalMap();
   const llmsCheck = buildLlmsCheck();
   const perplexityMonitor = buildPerplexityMonitor();
@@ -1359,6 +1742,9 @@ function buildPoprawSeo() {
       'Zbudowano Entity Graph.',
       'Policzono Structured Data Completeness Score.',
       'Policzono Quick Answer Quality Score.',
+      'Sprawdzono eksport GSC Generative AI dla AI Overviews / AI Mode / Discover, jeśli jest dostępny.',
+      'Zbudowano plan KPI po wdrożeniu: Web GSC, AI impressions i zaangażowanie.',
+      'Policzono Originality And Own Data Score: własne przykłady, progi, źródła, assety i warunki bezpieczeństwa.',
       'Zbudowano Topical Authority Map.',
       'Sprawdzono llms.txt i llms-full.txt.',
       'Zbudowano kolejkę Perplexity Monitor.',
@@ -1386,6 +1772,9 @@ function buildPoprawSeo() {
       ['entity_graph', 'entity-graph.md'],
       ['structured_data_score', 'structured-data-score.md'],
       ['quick_answer_score', 'quick-answer-score.md'],
+      ['gsc_generative_ai', 'gsc-generative-ai.md'],
+      ['post_deploy_kpi_plan', 'post-deploy-kpi-plan.md'],
+      ['originality_score', 'originality-score.md'],
       ['topical_authority_map', 'topical-authority-map.md'],
       ['llms_check', 'llms-check.md'],
       ['perplexity_monitor', 'perplexity-monitor.md'],
@@ -1403,6 +1792,10 @@ function buildPoprawSeo() {
       entities_articles: entities.articles.length,
       structured_average_score: structuredScore.average_score,
       quick_answer_average_score: quickAnswerScore.average_score,
+      gsc_generative_ai_status: generativeAiGsc.status,
+      gsc_generative_ai_pages: generativeAiGsc.summary.pages,
+      post_deploy_kpi_candidates: postDeployKpi.candidates.length,
+      originality_average_score: originalityScore.average_score,
       topical_clusters: topicalMap.topics.length,
       llms_missing: llmsCheck.missing_count,
       perplexity_prompts: perplexityMonitor.prompts.length,
@@ -1487,6 +1880,41 @@ function writePoprawSeoMarkdown(command, file) {
     });
     lines.push('');
   }
+  if (insights.generative_ai_visibility) {
+    const ai = insights.generative_ai_visibility;
+    lines.push('## GSC Generative AI');
+    lines.push(`- status: ${ai.status}`);
+    lines.push(`- podsumowanie: URL-e ${ai.summary?.pages || 0}, AI impressions ${ai.summary?.impressions || 0}, clicks ${ai.summary?.clicks || 0}`);
+    if (ai.source_files?.length) lines.push(`- źródła: ${ai.source_files.join(', ')}`);
+    if (ai.top_pages?.length) {
+      ai.top_pages.slice(0, 6).forEach((item, idx) => {
+        lines.push(`${idx + 1}. ${item.file} — AI impressions ${item.impressions}; features: ${(item.features || []).join(', ') || 'brak'}`);
+      });
+    } else {
+      lines.push('- brak eksportu: gdy raport pojawi się w Search Console, wrzuć CSV/JSON do `gsc-auto-input`.');
+    }
+    lines.push('');
+  }
+  if (insights.post_deploy_kpi?.candidates?.length) {
+    lines.push('## KPI Po Wdrożeniu');
+    lines.push(`- status: ${insights.post_deploy_kpi.status}; GSC Generative AI: ${insights.post_deploy_kpi.ai_report_status}`);
+    insights.post_deploy_kpi.candidates.slice(0, 8).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}`);
+      lines.push(`   - baseline Web: impr ${item.baseline.impressions}, klik ${item.baseline.clicks}, CTR ${item.baseline.ctr}%, poz ${item.baseline.position}`);
+      lines.push(`   - baseline AI: impressions ${item.baseline.ai_impressions}, clicks ${item.baseline.ai_clicks}`);
+      lines.push(`   - checkpointy: ${item.checkpoints ? Object.values(item.checkpoints).join(' / ') : 'brak dateModified'}`);
+    });
+    lines.push('');
+  }
+  if (insights.originality_attention?.length) {
+    lines.push('## Originality / Własne Dane Do Poprawy');
+    insights.originality_attention.slice(0, 10).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}`);
+      lines.push(`   - score: ${item.score}%; braki: ${item.gaps.join(', ') || 'brak'}`);
+      lines.push(`   - rekomendacja: ${item.recommendation}`);
+    });
+    lines.push('');
+  }
   lines.push('## Co się stało');
   command.what_happened.forEach((item) => lines.push(`- ${item}`));
   lines.push('');
@@ -1555,6 +1983,38 @@ function writePoprawSeoInsightsMarkdown(insights, file) {
     insights.ai_visibility_attention.forEach((item) => {
       lines.push(`- ${item.engine}: ${item.prompt}`);
       lines.push(`  canonical: ${item.canonical_url}; priorytet: ${item.priority}`);
+    });
+    lines.push('');
+  }
+
+  if (insights.generative_ai_visibility) {
+    const ai = insights.generative_ai_visibility;
+    lines.push('## GSC Generative AI');
+    lines.push(`- status: ${ai.status}`);
+    lines.push(`- summary: URL-e ${ai.summary?.pages || 0}, AI impressions ${ai.summary?.impressions || 0}, clicks ${ai.summary?.clicks || 0}`);
+    if (ai.source_files?.length) lines.push(`- źródła: ${ai.source_files.join(', ')}`);
+    (ai.top_pages || []).slice(0, 10).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}: AI impressions ${item.impressions}; features: ${(item.features || []).join(', ') || 'brak'}`);
+    });
+    if (!(ai.top_pages || []).length) lines.push('- Brak eksportu albo raport nie jest jeszcze dostępny w rollout.');
+    lines.push('');
+  }
+
+  if (insights.post_deploy_kpi?.candidates?.length) {
+    lines.push('## KPI Po Wdrożeniu 7/14/28');
+    insights.post_deploy_kpi.candidates.slice(0, 12).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}`);
+      lines.push(`   - Web: impr ${item.baseline.impressions}, klik ${item.baseline.clicks}, CTR ${item.baseline.ctr}%, poz ${item.baseline.position}`);
+      lines.push(`   - AI: impressions ${item.baseline.ai_impressions}, clicks ${item.baseline.ai_clicks}`);
+      lines.push(`   - checkpointy: ${item.checkpoints ? Object.values(item.checkpoints).join(' / ') : 'brak dateModified'}`);
+    });
+    lines.push('');
+  }
+
+  if (insights.originality_attention?.length) {
+    lines.push('## Originality / Własne Dane');
+    insights.originality_attention.forEach((item) => {
+      lines.push(`- ${item.file}: score ${item.score}%; braki: ${item.gaps.join(', ') || 'brak'}; ${item.recommendation}`);
     });
     lines.push('');
   }
@@ -1710,6 +2170,9 @@ function buildFullAudit(flags) {
     ['entities', () => buildEntityGraph()],
     ['structured-score', () => buildStructuredScore()],
     ['quick-answer-score', () => buildQuickAnswerScore()],
+    ['gsc-generative-ai', () => buildGenerativeAiGscReport()],
+    ['post-deploy-kpi', () => buildPostDeploymentKpiPlan()],
+    ['originality-score', () => buildOriginalityScore()],
     ['topical-map', () => buildTopicalMap()],
     ['llms-check', () => buildLlmsCheck()],
     ['verify', () => verifyGrowth(flags)],
@@ -1750,6 +2213,9 @@ function runCommand(command, flags) {
   if (command === 'entities') return buildEntityGraph();
   if (command === 'structured-score') return buildStructuredScore();
   if (command === 'quick-answer-score') return buildQuickAnswerScore();
+  if (command === 'gsc-generative-ai') return buildGenerativeAiGscReport();
+  if (command === 'post-deploy-kpi') return buildPostDeploymentKpiPlan();
+  if (command === 'originality-score') return buildOriginalityScore();
   if (command === 'topical-map') return buildTopicalMap();
   if (command === 'llms-check') return buildLlmsCheck();
   if (command === 'perplexity-monitor') return buildPerplexityMonitor();
@@ -1783,6 +2249,9 @@ Usage:
   node scripts/growth-tool.js entities
   node scripts/growth-tool.js structured-score
   node scripts/growth-tool.js quick-answer-score
+  node scripts/growth-tool.js gsc-generative-ai
+  node scripts/growth-tool.js post-deploy-kpi
+  node scripts/growth-tool.js originality-score
   node scripts/growth-tool.js topical-map
   node scripts/growth-tool.js llms-check
   node scripts/growth-tool.js perplexity-monitor

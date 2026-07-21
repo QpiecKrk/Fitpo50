@@ -195,6 +195,14 @@
   9. Dopiero po akceptacji edytuj HTML.
   10. Po edycji uruchom walidację i podaj listę URL-i do zgłoszenia w GSC.
 
+- **`popraw-seo` po aktualizacji AI/GSC 2026-07-21.**
+  - `popraw-seo` ma dodatkowo uruchamiać i raportować: `gsc-generative-ai`, `post-deploy-kpi` oraz `originality-score`.
+  - `gsc-generative-ai` czyta eksporty Search Generative AI z `~/Downloads/gsc-auto-input` (AI Overviews / AI Mode / Discover), jeśli Google udostępni raport w Search Console; brak eksportu ma być statusem operacyjnym `NO_EXPORT_OR_ROLLOUT_NOT_AVAILABLE`, a nie błędem.
+  - `post-deploy-kpi` ma planować pomiar 7/14/28 dni nie tylko po kliknięciach/CTR/pozycji, ale także po AI impressions/clicks, jeśli raport jest dostępny, oraz po jakości wizyty: engaged time, CTA, PDF clicks, przejścia do centrów i powroty użytkowników.
+  - `originality-score` ma flagować brak własnego konkretu: przykładu osoby 50+, liczby/progu, tabeli/PDF/grafiki, źródeł przy claimach, warunku bezpieczeństwa albo kontekstu FitPo50.
+  - Wynik `originality-score` nie oznacza automatycznego dopisywania tekstu. Agent ma używać go jako bramki jakości przed propozycją: jeśli brakuje własnego przykładu lub liczby, przygotuj konkretny fragment dla danego URL-a albo oznacz `INSUFFICIENT_DATA`.
+  - PDF-y i pliki techniczne w GSC traktuj jako wsparcie, nie jako główny cel indeksacji. Priorytetem zgłoszeń ręcznych są kanoniczne HTML-e i centra; PDF-y z `x-robots-tag: noindex` zostają dodatkiem do artykułu, chyba że użytkownik jawnie zmieni strategię.
+
 - **Huby i centra tematyczne wdrażamy najpierw testowo.**
   - Blok `Centra tematyczne` najpierw powstaje na `index1.html`, a nie na produkcyjnym `index.html`.
   - `index1.html` jest stroną roboczą do podglądu i ma mieć `noindex,nofollow`.
@@ -1576,6 +1584,9 @@ Jesli artykul ma obrazy:
   - topical authority map: `npm run growth:topical-map`,
   - llms check: `npm run growth:llms-check`,
   - Perplexity monitor: `npm run growth:perplexity-monitor`; bez `PERPLEXITY_API_KEY` generuje kolejke i status `INSUFFICIENT_API_KEY`, bez zgadywania wynikow,
+  - GSC Generative AI visibility: `npm run growth:gsc-generative-ai`; czyta eksporty z `~/Downloads/gsc-auto-input`, jesli raport AI Overviews / AI Mode / Discover jest dostepny,
+  - KPI po wdrozeniu: `npm run growth:post-deploy-kpi`; plan 7/14/28 dni obejmuje Web GSC, AI impressions/clicks i jakosc wizyty,
+  - originality / own data score: `npm run growth:originality-score`; flaga braku wlasnego przykladu, liczby/progu, assetu cytowalnego, zrodel albo warunku bezpieczenstwa,
   - sprint odswiezania z GSC: `npm run growth:gsc-refresh`,
   - Evidence Box / medyczne boxy bezpieczenstwa: `npm run growth:evidence-plan`,
   - huby tematyczne: `npm run growth:hubs`,
@@ -1583,6 +1594,7 @@ Jesli artykul ma obrazy:
   - autopilot planu bez zapisu: `npm run growth:autopilot`,
   - skrot uzytkownika do calej maszyny: `npm run popraw-seo`,
   - `popraw-seo` uruchamia komplet raportow growth i konczy statusem `AWAITING_USER_APPROVAL`; raport ma zawierac paczke `BOOST` (strony blisko wzrostu) i `NAPRAWA` (strony slabe/brak widocznosci),
+  - od 2026-07-21 `popraw-seo` musi w raporcie pokazywac sekcje `GSC Generative AI`, `KPI Po Wdrożeniu` i `Originality / Własne Dane`; brak eksportu generatywnego GSC to status rollout/brak danych, nie blad,
   - agent ma czekac na decyzje typu `popraw BOOST 1` albo `popraw BOOST 1 NAPRAWA 2`; przy samych numerach musi doprecyzowac ID, jesli istnieje ryzyko pomylenia koszykow,
   - walidacja wzrostowa: `npm run growth:verify`,
   - bezpieczny edytor domyslnie dry-run: `npm run growth:apply:dry -- --file <plik.html> --evidence-box --doctor-box`,
