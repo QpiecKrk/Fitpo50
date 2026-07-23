@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/brzuch-to-nie-woda-hero.avif" type="image/avif">
-          <source srcset="./assets/brzuch-to-nie-woda-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/brzuch-to-nie-woda-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/regeneracja-ukladu-nerwowego-hero.avif" type="image/avif">
+          <source srcset="./assets/regeneracja-ukladu-nerwowego-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/regeneracja-ukladu-nerwowego-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">MIT: Twój brzuch to nie tłuszcz, tylko zatrzymana woda — i znika</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy brzuch to woda czy tłuszcz? Sprawdzamy mit detoksu limfy, tłuszcz trzewny i to, co naprawdę zmniejsza obwód po 50-tce bez cudownych zabiegów.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Regeneracja układu nerwowego po 50: co naprawdę mówi nauka?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Sprawdź, jak realnie wygląda regeneracja układu nerwowego: co mówi nauka o neuroplastyczności, śnie, ruchu, stresie i diecie oraz ile trwa gojenie nerwów.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="regeneracja-ukladu-nerwowego-co-mowi-nauka.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'MIT: Twój brzuch to nie tłuszcz, tylko zatrzymana woda — i znika',
-        excerpt: 'Czy brzuch to woda czy tłuszcz? Sprawdzamy mit detoksu limfy, tłuszcz trzewny i to, co naprawdę zmniejsza obwód po 50-tce bez cudownych zabiegów.',
-        image: './assets/brzuch-to-nie-woda-hero.webp',
-        url: 'brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html'
+        title: 'Regeneracja układu nerwowego po 50: co naprawdę mówi nauka?',
+        excerpt: 'Sprawdź, jak realnie wygląda regeneracja układu nerwowego: co mówi nauka o neuroplastyczności, śnie, ruchu, stresie i diecie oraz ile trwa gojenie nerwów.',
+        image: './assets/regeneracja-ukladu-nerwowego-hero.webp',
+        url: 'regeneracja-ukladu-nerwowego-co-mowi-nauka.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2543,6 +2543,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Zdrowie',
+          title: 'Regeneracja układu nerwowego po 50: co naprawdę mówi nauka?',
+          excerpt: 'Sprawdź, jak realnie wygląda regeneracja układu nerwowego: co mówi nauka o neuroplastyczności, śnie, ruchu, stresie i diecie oraz ile trwa gojenie nerwów.',
+          image: './assets/regeneracja-ukladu-nerwowego-hero.webp',
+          url: 'regeneracja-ukladu-nerwowego-co-mowi-nauka.html'
+        },
+        {
           category: 'Mity',
           title: 'MIT: Twój brzuch to nie tłuszcz, tylko zatrzymana woda — i znika',
           excerpt: 'Czy brzuch to woda czy tłuszcz? Sprawdzamy mit detoksu limfy, tłuszcz trzewny i to, co naprawdę zmniejsza obwód po 50-tce bez cudownych zabiegów.',
@@ -2555,13 +2562,6 @@
           excerpt: 'Sprawdź, które skutki uboczne szczepionek COVID są realne, kiedy pilnie reagować i które mity o białku kolczastym oraz VAERS nie mają podstaw w badaniach.',
           image: './assets/hero-szczepionki-covid-fakty-mity.webp',
           url: 'szczepionki-covid-skutki-uboczne-mity-i-fakty.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Krew pępowinowa: cudowny skarb czy sprytny marketing po porodzie?',
-          excerpt: 'Czy warto bankować krew pępowinową? Sprawdź, kiedy ratuje życie, kiedy to marketing, jakie są koszty, ograniczenia i realne szanse użycia próbki.',
-          image: './assets/krew-pepowinowa-hero.webp',
-          url: 'krew-pepowinowa-skarb-czy-marketing.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

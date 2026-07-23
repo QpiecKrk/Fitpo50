@@ -399,4 +399,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "MIT: Twój brzuch to nie tłuszcz, tylko zatrzymana woda — i znika | FitPo50"
   section: "Mity"
   summary: "Czy brzuch to woda czy tłuszcz? Sprawdzamy mit detoksu limfy, tłuszcz trzewny i to, co naprawdę zmniejsza obwód po 50-tce bez cudownych zabiegów."
+- url: https://fitpo50.pl/regeneracja-ukladu-nerwowego-co-mowi-nauka.html
+  title: "Regeneracja układu nerwowego po 50: co naprawdę mówi nauka? | FitPo50"
+  section: "Zdrowie"
+  summary: "Sprawdź, jak realnie wygląda regeneracja układu nerwowego: co mówi nauka o neuroplastyczności, śnie, ruchu, stresie i diecie oraz ile trwa gojenie nerwów."
 
