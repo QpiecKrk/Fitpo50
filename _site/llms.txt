@@ -403,4 +403,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Regeneracja układu nerwowego po 50: co naprawdę mówi nauka? | FitPo50"
   section: "Zdrowie"
   summary: "Sprawdź, jak realnie wygląda regeneracja układu nerwowego: co mówi nauka o neuroplastyczności, śnie, ruchu, stresie i diecie oraz ile trwa gojenie nerwów."
+- url: https://fitpo50.pl/interleukina-6-il-6-badanie-normy-cena.html
+  title: "Interleukina 6 (IL-6): badanie, normy, cena i wynik krwi | FitPo50"
+  section: "Zdrowie"
+  summary: "Interleukina 6 badanie pokazuje aktywny stan zapalny. Sprawdź normy IL-6, cenę badania, przygotowanie i kiedy wynik omówić z lekarzem po 50. roku."
 

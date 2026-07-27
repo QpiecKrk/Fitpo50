@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/regeneracja-ukladu-nerwowego-hero.avif" type="image/avif">
-          <source srcset="./assets/regeneracja-ukladu-nerwowego-hero.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/regeneracja-ukladu-nerwowego-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/interleukina-6-hero.avif" type="image/avif">
+          <source srcset="./assets/interleukina-6-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/interleukina-6-hero.webp" alt="" width="1440" height="900" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Regeneracja układu nerwowego po 50: co naprawdę mówi nauka?</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Sprawdź, jak realnie wygląda regeneracja układu nerwowego: co mówi nauka o neuroplastyczności, śnie, ruchu, stresie i diecie oraz ile trwa gojenie nerwów.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="regeneracja-ukladu-nerwowego-co-mowi-nauka.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Interleukina 6 (IL-6): badanie, normy, cena i wynik krwi</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Interleukina 6 badanie pokazuje aktywny stan zapalny. Sprawdź normy IL-6, cenę badania, przygotowanie i kiedy wynik omówić z lekarzem po 50. roku.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="interleukina-6-il-6-badanie-normy-cena.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Regeneracja układu nerwowego po 50: co naprawdę mówi nauka?',
-        excerpt: 'Sprawdź, jak realnie wygląda regeneracja układu nerwowego: co mówi nauka o neuroplastyczności, śnie, ruchu, stresie i diecie oraz ile trwa gojenie nerwów.',
-        image: './assets/regeneracja-ukladu-nerwowego-hero.webp',
-        url: 'regeneracja-ukladu-nerwowego-co-mowi-nauka.html'
+        title: 'Interleukina 6 (IL-6): badanie, normy, cena i wynik krwi',
+        excerpt: 'Interleukina 6 badanie pokazuje aktywny stan zapalny. Sprawdź normy IL-6, cenę badania, przygotowanie i kiedy wynik omówić z lekarzem po 50. roku.',
+        image: './assets/interleukina-6-hero.webp',
+        url: 'interleukina-6-il-6-badanie-normy-cena.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2544,6 +2544,13 @@
       const fallback = [
         {
           category: 'Zdrowie',
+          title: 'Interleukina 6 (IL-6): badanie, normy, cena i wynik krwi',
+          excerpt: 'Interleukina 6 badanie pokazuje aktywny stan zapalny. Sprawdź normy IL-6, cenę badania, przygotowanie i kiedy wynik omówić z lekarzem po 50. roku.',
+          image: './assets/interleukina-6-hero.webp',
+          url: 'interleukina-6-il-6-badanie-normy-cena.html'
+        },
+        {
+          category: 'Zdrowie',
           title: 'Regeneracja układu nerwowego po 50: co naprawdę mówi nauka?',
           excerpt: 'Sprawdź, jak realnie wygląda regeneracja układu nerwowego: co mówi nauka o neuroplastyczności, śnie, ruchu, stresie i diecie oraz ile trwa gojenie nerwów.',
           image: './assets/regeneracja-ukladu-nerwowego-hero.webp',
@@ -2555,13 +2562,6 @@
           excerpt: 'Czy brzuch to woda czy tłuszcz? Sprawdzamy mit detoksu limfy, tłuszcz trzewny i to, co naprawdę zmniejsza obwód po 50-tce bez cudownych zabiegów.',
           image: './assets/brzuch-to-nie-woda-hero.webp',
           url: 'brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html'
-        },
-        {
-          category: 'Mity',
-          title: 'Szczepionki COVID: skutki uboczne, mity i fakty z badań',
-          excerpt: 'Sprawdź, które skutki uboczne szczepionek COVID są realne, kiedy pilnie reagować i które mity o białku kolczastym oraz VAERS nie mają podstaw w badaniach.',
-          image: './assets/hero-szczepionki-covid-fakty-mity.webp',
-          url: 'szczepionki-covid-skutki-uboczne-mity-i-fakty.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
