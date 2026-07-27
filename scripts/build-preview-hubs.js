@@ -129,6 +129,7 @@ const hubs = [
     },
     articles: [
       ['ApoB norma, cena i wynik', 'apob-norma-cena-jak-czytac-wynik.html', 'interpretacja'],
+      ['Lp(a): norma, cena i wynik krwi', 'lpa-lipoproteina-a-po-50-norma-cena-badania.html', 'marker genetyczny'],
       ['Dieta keto a cholesterol', 'dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html', 'dieta'],
       ['Markery krwi po 50', 'markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html', 'badania'],
       ['Badania krwi po 50', 'badania-krwi-po-50-jak-czesto.html', 'częstotliwość'],
