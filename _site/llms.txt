@@ -407,4 +407,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Interleukina 6 (IL-6): badanie, normy, cena i wynik krwi | FitPo50"
   section: "Zdrowie"
   summary: "Interleukina 6 badanie pokazuje aktywny stan zapalny. Sprawdź normy IL-6, cenę badania, przygotowanie i kiedy wynik omówić z lekarzem po 50. roku."
+- url: https://fitpo50.pl/lpa-lipoproteina-a-po-50-norma-cena-badania.html
+  title: "Lp(a) po 50-tce: norma, cena badania i wynik bez paniki | FitPo50"
+  section: "Zdrowie"
+  summary: "Lp(a) to genetyczny marker ryzyka zawału i udaru. Sprawdź normy, cenę badania w Polsce, kiedy zrobić je po 50-tce i jak czytać wynik razem z LDL i ApoB."
 
