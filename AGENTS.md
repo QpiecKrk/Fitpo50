@@ -65,8 +65,13 @@ Example:
 ## 🔎 `popraw-seo` — obowiązkowy workflow akceptacji
 
 - `popraw-seo` uruchamia raporty GSC/SEO/AEO/GEO/AIO i kończy na `AWAITING_USER_APPROVAL`.
-- Raport musi zawierać paczkę `BOOST` dla stron blisko wzrostu oraz `NAPRAWA` dla stron słabych albo bez widoczności.
-- Agent nie edytuje HTML po samym raporcie. Użytkownik zatwierdza konkretne ID, np. `popraw BOOST 1` albo `popraw BOOST 1 NAPRAWA 2`.
+- Raport musi zawierać paczkę `BOOST` dla stron blisko wzrostu, `NAPRAWA` dla stron słabych albo bez widoczności oraz drugi raport `ROKUJE` dla stron, które nie są liderami, ale mają sygnał GSC/strategiczny i mogą wejść do kolejnej fali wzrostu.
+- Po poprawkach liderów agent zawsze sprawdza `ROKUJE`; te strony też traktuje priorytetowo, bez generycznych dopisków, z konkretnymi zmianami i listą URL-i do zgłoszenia w GSC.
+- `ROKUJE` nie może wybierać stron na podstawie samego tytułu albo pojedynczej przypadkowej pozycji; wymagany jest sensowny sygnał: realna fraza/temat, wyświetlenia, pozycja albo kliknięcia oraz brak świeżego cooldown po ostatniej modyfikacji.
+- `popraw-seo` musi pokazywać pamięć poprawek: ostatnie `dateModified`, baseline GSC i checkpointy 7/14/28 dni, żeby nie poprawiać w kółko tych samych URL-i bez oceny efektu.
+- `popraw-seo` musi tworzyć osobną kolejkę `GSC po zmianach`: target i strony źródłowe zgłaszane dopiero po zaakceptowanej edycji, aktualizacji `dateModified`, sitemap, `_site` i walidacji.
+- `popraw-seo` musi wskazywać ryzyka kanibalizacji: który URL ma być główny dla danej intencji, które URL-e mają go wspierać linkiem i czego nie wzmacniać równolegle w title/meta.
+- Agent nie edytuje HTML po samym raporcie. Użytkownik zatwierdza konkretne ID, np. `popraw BOOST 1`, `popraw ROKUJE 1` albo `popraw BOOST 1 NAPRAWA 2`.
 - Jeśli użytkownik poda same numery i istnieje ryzyko pomylenia koszyków, agent musi dopytać o ID przed edycją.
 - Przed edycją agent przygotowuje konkretny tekst dla danego URL-a; zakazane są placeholdery i generyczne bloki SEO.
 

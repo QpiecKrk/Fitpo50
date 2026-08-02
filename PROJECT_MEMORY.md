@@ -185,15 +185,21 @@
 
 - **Workflow zatwierdzania poprawek SEO/GEO/AIO:**
   1. Uruchom `npm run popraw-seo`.
-  2. Pokaż paczkę do zatwierdzenia z raportu `popraw-seo`: `BOOST` oraz `NAPRAWA`.
+  2. Pokaż paczkę do zatwierdzenia z raportu `popraw-seo`: `BOOST`, `ROKUJE` oraz `NAPRAWA`.
   3. `BOOST` oznacza URL-e, które Google już pokazuje i które mogą urosnąć przez precyzyjny title/meta, mocniejszy lead, linkowanie wewnętrzne i oszczędne zgłoszenie GSC.
-  4. `NAPRAWA` oznacza słabe albo niewidoczne strony, które trzeba podnosić stopniowo przez quick answer, FAQ z realnych pytań, konkretne źródła i linkowanie z klastra.
-  5. Dla wskazanych ID (`BOOST 1`, `NAPRAWA 2` itd.) przygotuj w rozmowie komplet propozycji: gotowy title/meta/lead lub quick answer/FAQ, źródła, linki, ewentualną tabelę/checklistę, hub-link i GSC refresh.
-  6. Same numery typu `popraw 1 2 3` są dopuszczalne tylko wtedy, gdy nie ma ryzyka pomylenia koszyków; jeśli numeracja jest niejednoznaczna, agent musi dopytać o ID przed edycją.
-  7. Teksty muszą być konkretne dla danego URL-a, danych GSC i intencji użytkownika; zakaz placeholderów, uogólnień i bloków “na SEO”.
-  8. Czekaj na zatwierdzenie albo korektę tonu/zakresu.
-  9. Dopiero po akceptacji edytuj HTML.
-  10. Po edycji uruchom walidację i podaj listę URL-i do zgłoszenia w GSC.
+  4. `ROKUJE` oznacza drugi raport: strony, które nie są liderami, ale mają sygnał z GSC/raportu strategii i po pracy na liderach powinny dostać mocne, konkretne poprawki pod kolejną falę wzrostu.
+  5. `NAPRAWA` oznacza słabe albo niewidoczne strony, które trzeba podnosić stopniowo przez quick answer, FAQ z realnych pytań, konkretne źródła i linkowanie z klastra.
+  6. `ROKUJE` wymaga sensownego sygnału: realna fraza/temat, wyświetlenia, pozycja albo kliknięcia; nie wybieraj strony tylko dlatego, że tytuł wygląda jak query albo pojawiła się jedna przypadkowa pozycja.
+  7. Po poprawkach liderów zawsze przejrzyj `ROKUJE`; nie odkładaj tych stron jako “reszty serwisu”, jeśli mają wyświetlenia, pozycję, query albo jasną lukę strategiczną.
+  8. `popraw-seo` ma pokazywać historię/cooldown: ostatnie `dateModified`, baseline GSC i checkpointy 7/14/28 dni, żeby nie poprawiać w kółko tych samych URL-i bez oceny efektu.
+  9. `popraw-seo` ma tworzyć kolejkę `GSC po zmianach`: zgłaszamy target i sensowne strony źródłowe dopiero po zaakceptowanej edycji, aktualizacji `dateModified`, sitemap, `_site` i walidacji.
+  10. `popraw-seo` ma sprawdzać kanibalizację: wybierz główny URL dla intencji, pozostałe URL-e ustaw jako wspierające linkiem i nie wzmacniaj równolegle tego samego title/meta.
+  11. Dla wskazanych ID (`BOOST 1`, `ROKUJE 1`, `NAPRAWA 2` itd.) przygotuj w rozmowie komplet propozycji: gotowy title/meta/lead lub quick answer/FAQ, źródła, linki, ewentualną tabelę/checklistę, hub-link i GSC refresh.
+  12. Same numery typu `popraw 1 2 3` są dopuszczalne tylko wtedy, gdy nie ma ryzyka pomylenia koszyków; jeśli numeracja jest niejednoznaczna, agent musi dopytać o ID przed edycją.
+  13. Teksty muszą być konkretne dla danego URL-a, danych GSC i intencji użytkownika; zakaz placeholderów, uogólnień i bloków “na SEO”.
+  14. Czekaj na zatwierdzenie albo korektę tonu/zakresu.
+  15. Dopiero po akceptacji edytuj HTML.
+  16. Po edycji uruchom walidację i podaj listę URL-i do zgłoszenia w GSC.
 
 - **`popraw-seo` po aktualizacji AI/GSC 2026-07-21.**
   - `popraw-seo` ma dodatkowo uruchamiać i raportować: `gsc-generative-ai`, `post-deploy-kpi` oraz `originality-score`.
@@ -1593,9 +1599,11 @@ Jesli artykul ma obrazy:
   - assety do link earningu: `npm run growth:link-assets`,
   - autopilot planu bez zapisu: `npm run growth:autopilot`,
   - skrot uzytkownika do calej maszyny: `npm run popraw-seo`,
-  - `popraw-seo` uruchamia komplet raportow growth i konczy statusem `AWAITING_USER_APPROVAL`; raport ma zawierac paczke `BOOST` (strony blisko wzrostu) i `NAPRAWA` (strony slabe/brak widocznosci),
+  - `popraw-seo` uruchamia komplet raportow growth i konczy statusem `AWAITING_USER_APPROVAL`; raport ma zawierac paczke `BOOST` (strony blisko wzrostu), `ROKUJE` (drugi raport: strony z sygnalem GSC/strategicznym po liderach) i `NAPRAWA` (strony slabe/brak widocznosci),
+  - `ROKUJE` wymaga sensownego sygnalu, nie samego tytulu udajacego query; swiezo poprawione URL-e sa w cooldown do kontroli KPI,
+  - `popraw-seo` ma generowac: historie poprawek/cooldown, kolejke GSC po zaakceptowanych zmianach oraz mape kanibalizacji z decyzja glownego URL-a,
   - od 2026-07-21 `popraw-seo` musi w raporcie pokazywac sekcje `GSC Generative AI`, `KPI Po Wdrożeniu` i `Originality / Własne Dane`; brak eksportu generatywnego GSC to status rollout/brak danych, nie blad,
-  - agent ma czekac na decyzje typu `popraw BOOST 1` albo `popraw BOOST 1 NAPRAWA 2`; przy samych numerach musi doprecyzowac ID, jesli istnieje ryzyko pomylenia koszykow,
+  - agent ma czekac na decyzje typu `popraw BOOST 1`, `popraw ROKUJE 1` albo `popraw BOOST 1 NAPRAWA 2`; przy samych numerach musi doprecyzowac ID, jesli istnieje ryzyko pomylenia koszykow,
   - walidacja wzrostowa: `npm run growth:verify`,
   - bezpieczny edytor domyslnie dry-run: `npm run growth:apply:dry -- --file <plik.html> --evidence-box --doctor-box`,
   - zapis wymaga jawnej komendy `npm run growth:apply -- --file <plik.html> ...`,
