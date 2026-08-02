@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 
 const {
   estimatedTrafficGain,
+  isNoindexSeoFile,
   metricDelta,
   textContract,
 } = require('../scripts/growth-tool');
@@ -41,4 +42,9 @@ test('metricDelta treats a lower average position as an improvement', () => {
     ctr_percentage_points: 1.08,
     position_improvement: 0.71,
   });
+});
+
+test('noindex pages are excluded from SEO and GSC queues', () => {
+  assert.equal(isNoindexSeoFile('kalkulator-bialka-po-50.html'), true);
+  assert.equal(isNoindexSeoFile('centrum-bialka-po-50.html'), false);
 });

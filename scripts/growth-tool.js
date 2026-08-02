@@ -781,9 +781,21 @@ function shouldIgnoreSeoFile(file) {
   return TEMPORARILY_IGNORED_SEO_FILES.has(normalizeReportFile(file));
 }
 
+function isNoindexSeoFile(file) {
+  const normalized = normalizeReportFile(file);
+  if (!normalized || !normalized.endsWith('.html')) return false;
+  const html = readTextIfExists(path.join(ROOT, normalized));
+  const robots = html.match(/<meta\s+name=["']robots["'][^>]*content=["']([^"']*)["']/i);
+  return Boolean(robots && /\bnoindex\b/i.test(robots[1]));
+}
+
+function shouldExcludeSeoFile(file) {
+  return shouldIgnoreSeoFile(file) || isNoindexSeoFile(file);
+}
+
 function actionCardsFromSeoAio(seoAio) {
   const cards = Array.isArray(seoAio?.top_action_cards) ? seoAio.top_action_cards : [];
-  return cards.filter((card) => !shouldIgnoreSeoFile(card.file || card.url));
+  return cards.filter((card) => !shouldExcludeSeoFile(card.file || card.url));
 }
 
 function firstCardsByType(cards, types, limit) {
@@ -810,10 +822,10 @@ function firstCardsByType(cards, types, limit) {
       tasks: Array.isArray(card.tasks) ? card.tasks.slice(0, 4) : [],
       source_links: Array.isArray(card.internal_link_sources)
         ? card.internal_link_sources.slice(0, 4).map((item) => item.from).filter(Boolean)
-          .filter((file) => !shouldIgnoreSeoFile(file))
+          .filter((file) => !shouldExcludeSeoFile(file))
         : [],
       promotion_urls: Array.isArray(card.promotion_urls)
-        ? card.promotion_urls.filter((url) => !shouldIgnoreSeoFile(url)).slice(0, 6)
+        ? card.promotion_urls.filter((url) => !shouldExcludeSeoFile(url)).slice(0, 6)
         : [],
     }));
 }
@@ -1296,7 +1308,9 @@ function buildGscAfterChangeQueue(approvalWave) {
   const flat = [];
   for (const [kind, groupItems] of groups) {
     for (const item of groupItems) {
-      const urls = unique((item.gsc_submit_after_change || []).filter(Boolean));
+      const urls = unique((item.gsc_submit_after_change || [])
+        .filter(Boolean)
+        .filter((url) => !shouldExcludeSeoFile(url)));
       urls.forEach((url) => flat.push(url));
       items.push({
         id: item.id,
@@ -1435,9 +1449,9 @@ function buildUnifiedInsights() {
       .split(/\r?\n/)
       .map((line) => line.trim())
       .filter((line) => /^https?:\/\//i.test(line))
-      .filter((line) => !shouldIgnoreSeoFile(line)),
+      .filter((line) => !shouldExcludeSeoFile(line)),
     ...((contentStrategy.status === 'OK' ? contentStrategy.gsc_submit_queue : []) || []),
-  ]).slice(0, 40);
+  ].filter((url) => !shouldExcludeSeoFile(url))).slice(0, 40);
   const doctorWarnings = Array.isArray(doctor?.checks)
     ? doctor.checks.filter((item) => item && item.ok === false).map((item) => ({
       label: item.label,
@@ -3225,6 +3239,7 @@ if (require.main === module) {
 
 module.exports = {
   estimatedTrafficGain,
+  isNoindexSeoFile,
   metricDelta,
   textContract,
 };
