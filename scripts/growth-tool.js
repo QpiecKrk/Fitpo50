@@ -818,18 +818,71 @@ function firstCardsByType(cards, types, limit) {
     }));
 }
 
-function sourceLinkSuggestions(card, limit = 4) {
-  if (!Array.isArray(card?.internal_link_sources)) return [];
-  return card.internal_link_sources
-    .filter((item) => item && item.from && !shouldIgnoreSeoFile(item.from))
-    .slice(0, limit)
-    .map((item) => ({
+function normalizeText(value) {
+  return stripTags(String(value || ''))
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function inspectInternalLinkSuggestion(sourceFile, targetFile, anchor, placement) {
+  const source = normalizeReportFile(sourceFile);
+  const target = normalizeReportFile(targetFile);
+  const html = readTextIfExists(path.join(ROOT, source));
+  if (!html) {
+    return { source_exists: false, target_already_linked: false, duplicate_anchor_in_section: false };
+  }
+  const targetAlreadyLinked = extractLinks(html).includes(target);
+  const anchorNeedle = normalizeText(anchor);
+  const placementNeedle = normalizeText(placement);
+  let duplicateAnchorInSection = false;
+  if (anchorNeedle) {
+    const sections = [...html.matchAll(/<section\b[^>]*>[\s\S]*?<\/section>/gi)].map((match) => match[0]);
+    const relevantSections = sections.filter((section) => {
+      const text = normalizeText(section);
+      return (placementNeedle && text.includes(placementNeedle)) || text.includes(anchorNeedle);
+    });
+    duplicateAnchorInSection = relevantSections.some((section) => [...section.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)]
+      .some((match) => normalizeText(match[1]) === anchorNeedle));
+  }
+  return {
+    source_exists: true,
+    target_already_linked: targetAlreadyLinked,
+    duplicate_anchor_in_section: duplicateAnchorInSection,
+  };
+}
+
+function analyzeSourceLinkSuggestions(card, limit = 4) {
+  const targetFile = normalizeReportFile(card?.file || card?.url);
+  const candidates = Array.isArray(card?.internal_link_sources) ? card.internal_link_sources : [];
+  const accepted = [];
+  const rejected = [];
+  for (const item of candidates) {
+    if (!item?.from || shouldIgnoreSeoFile(item.from)) continue;
+    const suggestion = {
       from: normalizeReportFile(item.from),
       anchor: item.anchor || '',
       placement: item.placement || '',
       score: Number(item.score || 0),
       inbound_strength: Number(item.inbound_strength || 0),
-    }));
+    };
+    const inspection = inspectInternalLinkSuggestion(suggestion.from, targetFile, suggestion.anchor, suggestion.placement);
+    if (inspection.target_already_linked || inspection.duplicate_anchor_in_section) {
+      rejected.push({
+        ...suggestion,
+        reason: inspection.target_already_linked ? 'TARGET_ALREADY_LINKED' : 'ANCHOR_ALREADY_LINKED_IN_SECTION',
+      });
+      continue;
+    }
+    if (accepted.length < limit) accepted.push(suggestion);
+  }
+  return {
+    accepted,
+    rejected,
+    scanned: candidates.length,
+  };
 }
 
 function cardAbsoluteUrl(card) {
@@ -849,10 +902,70 @@ function approvalGscSnapshot(card) {
   };
 }
 
+function inclusiveDays(startValue, endValue) {
+  const start = parseDate(startValue);
+  const end = parseDate(endValue);
+  if (!start || !end || end < start) return null;
+  return Math.floor((end.getTime() - start.getTime()) / 86400000) + 1;
+}
+
+function estimatedTrafficGain(gsc, sourceWindowDays) {
+  const days = Number(sourceWindowDays || 30);
+  const scale = days > 0 ? 30 / days : 1;
+  const monthlyImpressions = Number(gsc.impressions || 0) * scale;
+  const monthlyClicks = Number(gsc.clicks || 0) * scale;
+  const rawGain = monthlyImpressions * 0.05 - monthlyClicks;
+  return {
+    target_ctr: 0.05,
+    source_window_days: days,
+    monthly_impressions: Number(monthlyImpressions.toFixed(1)),
+    current_monthly_clicks: Number(monthlyClicks.toFixed(1)),
+    estimated_monthly_click_gain: Number(Math.max(0, rawGain).toFixed(1)),
+    raw_monthly_click_gain: Number(rawGain.toFixed(1)),
+    formula: '(monthly_impressions * 0.05) - current_monthly_clicks',
+    note: Number(Math.max(0, rawGain).toFixed(1)) > 0 ? 'POTENCJAŁ_WZROSTU' : 'BRAK_ISTOTNEGO_UPSIDE_PRZY_CTR_5_PROC',
+  };
+}
+
+function textContract(value, min, max, requireSentenceEnd = false, emptyStatus = 'NOT_PROPOSED') {
+  const text = String(value || '').trim();
+  if (!text) return { status: emptyStatus, length: 0, min, max, ends_with_sentence_mark: null };
+  const endsWithSentenceMark = /[.!?]$/.test(text);
+  const valid = text.length >= min && text.length <= max && (!requireSentenceEnd || endsWithSentenceMark);
+  return {
+    status: valid ? 'PASS' : 'FIX_REQUIRED',
+    length: text.length,
+    min,
+    max,
+    ends_with_sentence_mark: requireSentenceEnd ? endsWithSentenceMark : null,
+  };
+}
+
+function proposalContentContract(card, article) {
+  const proposedHeadline = card?.proposed_h1 || card?.proposed_headline || '';
+  const proposedMeta = card?.proposed_meta_description || '';
+  return {
+    rule: 'Każda gotowa propozycja musi przejść walidację przed pokazaniem użytkownikowi.',
+    headline_required_range: '55-70',
+    meta_description_required_range: '145-160 i znak końca zdania',
+    current: {
+      headline: textContract(article?.h1 || '', 55, 70, false, 'MISSING'),
+      meta_description: textContract(article?.meta_description || '', 145, 160, true, 'MISSING'),
+    },
+    proposed: {
+      headline: textContract(proposedHeadline, 55, 70),
+      meta_description: textContract(proposedMeta, 145, 160, true),
+    },
+  };
+}
+
 function approvalReason(card, kind) {
   const gsc = approvalGscSnapshot(card);
   if (kind === 'BOOST') {
     return `Google już testuje ten URL: fraza "${gsc.query || 'brak frazy'}", ${gsc.impressions} wyświetleń, CTR ${gsc.ctr}%, pozycja ${gsc.position}. Priorytetem jest precyzyjny CTR i linkowanie wewnętrzne, nie przepisywanie całego artykułu.`;
+  }
+  if (kind === 'ROKUJE') {
+    return `To nie jest jeszcze lider, ale ma sygnał z GSC albo raportu strategii: fraza/temat "${gsc.query || 'brak danych'}", ${gsc.impressions} wyświetleń, pozycja ${gsc.position}. Po liderach trzeba wzmocnić konkretną odpowiedź, title/meta i linkowanie, żeby strona miała szansę wejść do głównej paczki wzrostu.`;
   }
   const scores = card?.score || {};
   return `Strona ma słabą lub zerową widoczność i wynik SEO/AEO/GEO/AIO ${Number(scores.seo || 0)}/${Number(scores.aeo || 0)}/${Number(scores.geo || 0)}/${Number(scores.aio || 0)}. Najpierw trzeba zbudować konkretną odpowiedź, źródła i linkowanie, a dopiero potem zgłaszać URL w GSC.`;
@@ -862,14 +975,26 @@ function approvalPreparationChecklist(kind, query) {
   if (kind === 'BOOST') {
     return [
       `title i meta opis dopasowane do frazy "${query || 'fraza z GSC'}" oraz intencji czytelnika 50+`,
+      'każda propozycja H1/headline: 55-70 znaków; meta description: 145-160 znaków i pełny znak końca zdania',
       'krótki lead albo doprecyzowanie pierwszego akapitu: dla kogo jest tekst, co rozwiązuje i jaki jest warunek bezpieczeństwa',
       '2-4 linki kontekstowe z podanych źródeł, z naturalnym anchorem w zdaniu',
       'aktualizacja dateModified, sitemap, _site i llms-full.txt dopiero po zatwierdzeniu treści',
       'sprawdzenie, czy tekst ma własny konkret FitPo50: liczba, przykład, próg, tabela albo obserwacja autora',
     ];
   }
+  if (kind === 'ROKUJE') {
+    return [
+      `sprawdzenie, dlaczego Google pokazał stronę na frazę/temat "${query || 'dane z GSC'}", ale jeszcze nie daje stałych kliknięć`,
+      'doprecyzowanie title/meta i pierwszej odpowiedzi tak, żeby użytkownik od razu widział konkretny wynik, próg, koszt, plan albo ryzyko',
+      'każda propozycja H1/headline: 55-70 znaków; meta description: 145-160 znaków i pełny znak końca zdania',
+      'dodanie 2-4 linków z liderów i centrów tematycznych, jeśli anchor naprawdę pasuje do zdania',
+      'uzupełnienie FAQ tylko o pytania wynikające z GSC/PAA/autocomplete albo treści artykułu',
+      'po zmianie dopisanie URL-a do kolejki GSC razem z najważniejszymi źródłami linkowania wewnętrznego',
+    ];
+  }
   return [
     'quick answer 45-65 słów z konkretną odpowiedzią i warunkiem bezpieczeństwa, bez pustych obietnic',
+    'każda propozycja H1/headline: 55-70 znaków; meta description: 145-160 znaków i pełny znak końca zdania',
     'FAQ z realnych pytań użytkowników albo danych GSC/PAA/autocomplete; bez zmyślonych problemów',
     'minimum 4 realne źródła URL do najważniejszych twierdzeń, bez halucynacji i bez źródeł dekoracyjnych',
     'własny konkret: przykład osoby 50+, próg/liczba, tabela albo obserwacja FitPo50, jeśli temat na to pozwala',
@@ -877,10 +1002,12 @@ function approvalPreparationChecklist(kind, query) {
   ];
 }
 
-function buildSeoApprovalItem(card, kind, index) {
+function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays) {
   const file = normalizeReportFile(card?.file || card?.url);
-  const links = sourceLinkSuggestions(card, 4);
+  const linkAnalysis = analyzeSourceLinkSuggestions(card, 4);
+  const links = linkAnalysis.accepted;
   const url = cardAbsoluteUrl(card);
+  const gsc = approvalGscSnapshot(card);
   return {
     id: `${kind} ${index}`,
     kind,
@@ -892,7 +1019,9 @@ function buildSeoApprovalItem(card, kind, index) {
     decision: card?.editorial_decision || '',
     query: card?.keyword_plan?.primary || '',
     reason: approvalReason(card, kind),
-    gsc: approvalGscSnapshot(card),
+    gsc,
+    estimated_traffic_gain: estimatedTrafficGain(gsc, sourceWindowDays),
+    content_contract: proposalContentContract(card, articleByFile?.get?.(file)),
     scores: {
       seo: Number(card?.score?.seo || 0),
       aeo: Number(card?.score?.aeo || 0),
@@ -902,6 +1031,12 @@ function buildSeoApprovalItem(card, kind, index) {
     prepare_before_edit: approvalPreparationChecklist(kind, card?.keyword_plan?.primary || ''),
     report_tasks: Array.isArray(card?.tasks) ? card.tasks.slice(0, 5) : [],
     internal_link_suggestions: links,
+    internal_link_guard: {
+      status: linkAnalysis.rejected.length ? 'DUPLICATES_REMOVED' : 'PASS',
+      scanned: linkAnalysis.scanned,
+      accepted: links.length,
+      rejected: linkAnalysis.rejected,
+    },
     gsc_submit_after_change: [
       url,
       ...links.slice(0, 3).map((item) => `${SITE_ORIGIN}/${item.from}`),
@@ -909,29 +1044,360 @@ function buildSeoApprovalItem(card, kind, index) {
   };
 }
 
-function buildSeoApprovalWave(cards) {
+function approvalCardKey(card) {
+  return normalizeReportFile(card?.file || card?.url);
+}
+
+function buildStrategyOpportunityCard(item, actionCardsByFile) {
+  const file = normalizeReportFile(item?.file);
+  const strategyAction = actionCardsByFile?.get?.(file) || {};
+  return {
+    type: 'P1_PROMISING_GSC',
+    score: {
+      total: Number(item?.score || 0),
+      seo: 0,
+      aeo: 0,
+      geo: 0,
+      aio: 0,
+    },
+    url: file ? `${SITE_ORIGIN}/${file}` : '',
+    file,
+    priority: item?.priority || 'P1_ROKUJE',
+    segment: 'GSC_OPPORTUNITY_NOT_LEADER',
+    editorial_decision: 'wzmocnić po liderach',
+    gsc: {
+      clicks: Number(item?.clicks || 0),
+      impressions: Number(item?.impressions || 0),
+      ctr: Number(item?.ctr || 0),
+      position: Number(item?.position || 0),
+      status: 'strategy_report',
+    },
+    keyword_plan: {
+      primary: item?.query || '',
+      secondary: [],
+      intents: [],
+      useful_queries: item?.query ? [item.query] : [],
+    },
+    tasks: [
+      'Nie przepisywać całego artykułu: najpierw doprecyzować odpowiedź pod frazę, która już ma wyświetlenia.',
+      'Sprawdzić title/meta/lead: użytkownik ma od razu zrozumieć, co dostaje i dla kogo jest tekst.',
+      'Dodać linki z centrum albo mocniejszych artykułów tylko wtedy, gdy anchor pasuje do kontekstu zdania.',
+      'Po publikacji zgłosić URL w GSC i wrócić do KPI po 7/14/28 dniach.',
+    ],
+    proposed_title: strategyAction.proposed_title || '',
+    proposed_meta_description: strategyAction.proposed_meta_description || '',
+    internal_link_sources: [],
+  };
+}
+
+function looksLikeArticleTitle(query) {
+  const value = String(query || '').trim();
+  if (!value) return true;
+  const words = value.split(/\s+/).filter(Boolean);
+  if (value.length > 70) return true;
+  if (value.includes('?') && words.length > 6) return true;
+  if (value.includes(':') && words.length > 5) return true;
+  if (words.length > 10) return true;
+  return false;
+}
+
+function articleAgeDays(file, articleByFile) {
+  const article = articleByFile?.get?.(normalizeReportFile(file));
+  const modified = parseDate(article?.date_modified);
+  if (!modified) return null;
+  return Math.max(0, Math.floor((Date.now() - modified.getTime()) / 86400000));
+}
+
+function isRecentlyTouched(file, articleByFile, days = 14) {
+  const age = articleAgeDays(file, articleByFile);
+  return age !== null && age <= days;
+}
+
+function hasPromisingSignal(card) {
+  const gsc = approvalGscSnapshot(card);
+  const query = gsc.query || '';
+  const impressions = Number(gsc.impressions || 0);
+  const clicks = Number(gsc.clicks || 0);
+  const position = Number(gsc.position || 0);
+  if (looksLikeArticleTitle(query)) return false;
+  if (clicks > 0 && position > 0 && position <= 40) return true;
+  if (impressions >= 20 && position > 3 && position <= 30) return true;
+  if (impressions >= 8 && position > 3 && position <= 12) return true;
+  return false;
+}
+
+function promisingScore(card) {
+  const gsc = approvalGscSnapshot(card);
+  const position = Number(gsc.position || 0);
+  const impressions = Number(gsc.impressions || 0);
+  const clicks = Number(gsc.clicks || 0);
+  const positionBoost = position > 0 && position <= 20 ? 60 - position : 0;
+  const typeBoost = card?.type === 'P0_PUSH_TO_PAGE_ONE' ? 30 : card?.type === 'P2_SCALE_WINNER' ? 20 : 10;
+  return impressions + clicks * 20 + positionBoost + typeBoost;
+}
+
+function buildPromisingSeoCards(cards, contentStrategy, excludedKeys, articleByFile) {
+  const candidates = [];
+  const seen = new Set(excludedKeys);
+  const actionCardsByFile = new Map((contentStrategy?.action_cards || [])
+    .map((item) => [normalizeReportFile(item.file), item])
+    .filter(([file]) => Boolean(file)));
+  const add = (card) => {
+    const key = approvalCardKey(card);
+    if (!key || seen.has(key) || shouldIgnoreSeoFile(key)) return;
+    if (isRecentlyTouched(key, articleByFile, 14)) return;
+    if (!hasPromisingSignal(card)) return;
+    seen.add(key);
+    candidates.push(card);
+  };
+
+  if (contentStrategy?.status === 'OK') {
+    (contentStrategy.opportunity_leaderboard || [])
+      .map((item) => buildStrategyOpportunityCard(item, actionCardsByFile))
+      .filter((card) => Number(card.gsc.impressions || 0) > 0 || Number(card.gsc.position || 0) > 0)
+      .forEach(add);
+  }
+
+  cards
+    .filter((card) => ['P0_PUSH_TO_PAGE_ONE', 'P1_GROWTH', 'P2_SCALE_WINNER', 'P2_CORE_SUPPORT_LINKING'].includes(card.type))
+    .filter((card) => Number(card.gsc?.impressions || 0) > 0 || Number(card.gsc?.position || 0) > 0)
+    .sort((a, b) => promisingScore(b) - promisingScore(a))
+    .forEach(add);
+
+  return candidates
+    .sort((a, b) => promisingScore(b) - promisingScore(a))
+    .slice(0, 8);
+}
+
+function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindowDays) {
   const boostCards = cards
     .filter((card) => card.type === 'P0_PUSH_TO_PAGE_ONE')
     .slice(0, 5);
   const repairCards = cards
     .filter((card) => ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'].includes(card.type))
     .slice(0, 5);
+  const excludedKeys = new Set([...boostCards, ...repairCards].map(approvalCardKey).filter(Boolean));
+  const promisingCards = buildPromisingSeoCards(cards, contentStrategy, excludedKeys, articleByFile);
   return {
     status: 'AWAITING_USER_APPROVAL',
-    rule: 'Jedna komenda popraw-seo pokazuje propozycje BOOST i NAPRAWA. Agent nie edytuje HTML, dopóki użytkownik nie zatwierdzi konkretnych ID.',
+    rule: 'Jedna komenda popraw-seo pokazuje raport liderów BOOST/NAPRAWA oraz drugi raport ROKUJE. Agent nie edytuje HTML, dopóki użytkownik nie zatwierdzi konkretnych ID.',
     no_generic_text: true,
     approval_examples: [
       'popraw BOOST 1',
+      'popraw ROKUJE 1',
       'popraw BOOST 1 NAPRAWA 2',
       'popraw 1 2 3 - agent ma doprecyzować, które ID użytkownik wybiera, jeśli numeracja jest niejednoznaczna',
     ],
-    boost: boostCards.map((card, index) => buildSeoApprovalItem(card, 'BOOST', index + 1)),
-    repair: repairCards.map((card, index) => buildSeoApprovalItem(card, 'NAPRAWA', index + 1)),
+    boost: boostCards.map((card, index) => buildSeoApprovalItem(card, 'BOOST', index + 1, articleByFile, sourceWindowDays)),
+    promising: promisingCards.map((card, index) => buildSeoApprovalItem(card, 'ROKUJE', index + 1, articleByFile, sourceWindowDays)),
+    repair: repairCards.map((card, index) => buildSeoApprovalItem(card, 'NAPRAWA', index + 1, articleByFile, sourceWindowDays)),
+  };
+}
+
+function ageDaysFrom(dateValue, generatedAt) {
+  const date = parseDate(dateValue);
+  const generatedDate = parseDate(generatedAt) || new Date();
+  if (!date) return null;
+  return Math.max(0, Math.floor((generatedDate.getTime() - date.getTime()) / 86400000));
+}
+
+function gscMetrics(article) {
+  return {
+    clicks: Number(article?.gsc?.clicks || 0),
+    impressions: Number(article?.gsc?.impressions || 0),
+    ctr: Number(article?.gsc?.ctr || 0),
+    position: Number(article?.gsc?.position || 0),
+  };
+}
+
+function metricDelta(baseline, current) {
+  return {
+    impressions: Number((Number(current.impressions || 0) - Number(baseline.impressions || 0)).toFixed(2)),
+    clicks: Number((Number(current.clicks || 0) - Number(baseline.clicks || 0)).toFixed(2)),
+    ctr_percentage_points: Number((Number(current.ctr || 0) - Number(baseline.ctr || 0)).toFixed(2)),
+    position_improvement: Number((Number(baseline.position || 0) - Number(current.position || 0)).toFixed(2)),
+  };
+}
+
+function buildDeltaCheckpoint(day, ageDays, checkpointDate, baseline, current) {
+  if (ageDays < day) return { status: 'WAITING', date: checkpointDate, delta: null };
+  return {
+    status: 'READY',
+    date: checkpointDate,
+    delta: metricDelta(baseline, current),
+  };
+}
+
+function buildSeoWorkHistory(articles, generatedAt, previousHistory, sourceWindowDays) {
+  const generatedDate = parseDate(generatedAt) || new Date();
+  const previousByFile = new Map((previousHistory?.recently_modified || []).map((item) => [item.file, item]));
+  const snapshotDay = generatedDate.toISOString().slice(0, 10);
+  const recent = (articles || [])
+    .map((article) => {
+      const ageDays = ageDaysFrom(article.date_modified, generatedAt);
+      const modified = parseDate(article.date_modified);
+      const previous = previousByFile.get(article.file);
+      const sameWave = previous?.date_modified === article.date_modified;
+      const current = gscMetrics(article);
+      const baseline = sameWave ? previous.baseline : current;
+      const previousSnapshots = sameWave
+        ? (Array.isArray(previous.snapshots) && previous.snapshots.length
+          ? previous.snapshots
+          : [{ generated_at: previousHistory?.generated_at || generatedAt, gsc: previous.baseline }])
+        : [];
+      const snapshots = previousSnapshots.filter((snapshot) => String(snapshot.generated_at || '').slice(0, 10) !== snapshotDay);
+      snapshots.push({ generated_at: generatedAt, source_window_days: sourceWindowDays, gsc: current });
+      const checkpoints = buildKpiCheckpoints(article.date_modified);
+      return {
+        file: article.file,
+        url: article.url,
+        date_modified: article.date_modified || 'MISSING',
+        age_days: ageDays,
+        baseline,
+        current,
+        snapshots: snapshots.slice(-12),
+        checkpoints,
+        delta_tracker: {
+          day_14: buildDeltaCheckpoint(14, ageDays, checkpoints?.day_14, baseline, current),
+          day_28: buildDeltaCheckpoint(28, ageDays, checkpoints?.day_28, baseline, current),
+        },
+        cooldown_until: modified ? addDays(modified, 14) : null,
+      };
+    })
+    .filter((item) => item.age_days !== null && item.age_days <= 45)
+    .sort((a, b) => a.age_days - b.age_days)
+    .slice(0, 30);
+
+  return {
+    generated_at: generatedAt,
+    purpose: 'Pamięć operacyjna dla popraw-seo: nie proponować w kółko świeżo poprawionych URL-i, tylko mierzyć efekt po 7/14/28 dniach.',
+    cooldown_days: 14,
+    source_window_days: sourceWindowDays,
+    recently_modified: recent.map((item) => {
+      const checkpoints = item.checkpoints || {};
+      const checkpointDates = Object.values(checkpoints).filter(Boolean);
+      const next = checkpointDates.find((date) => parseDate(date) >= generatedDate) || 'SPRAWDŹ_TERAZ';
+      return {
+        ...item,
+        next_review: next,
+        status: item.age_days <= 14 ? 'COOLDOWN_MONITORUJ' : 'MOŻNA_ROZWAŻYĆ_PO_KPI',
+      };
+    }),
+  };
+}
+
+function buildGscAfterChangeQueue(approvalWave) {
+  const groups = [
+    ['BOOST', approvalWave?.boost || []],
+    ['ROKUJE', approvalWave?.promising || []],
+    ['NAPRAWA', approvalWave?.repair || []],
+  ];
+  const items = [];
+  const flat = [];
+  for (const [kind, groupItems] of groups) {
+    for (const item of groupItems) {
+      const urls = unique((item.gsc_submit_after_change || []).filter(Boolean));
+      urls.forEach((url) => flat.push(url));
+      items.push({
+        id: item.id,
+        kind,
+        file: item.file,
+        target_url: item.url,
+        submit_after_accepted_edit: urls,
+        gsc_note: 'Zgłaszaj dopiero po zaakceptowanej edycji, aktualizacji dateModified, sitemap i _site.',
+        monitor_after: 'KPI 7/14/28 dni od nowego dateModified: impressions, clicks, CTR, position, AI impressions, engagement.',
+      });
+    }
+  }
+  return {
+    generated_at: nowWarsawIso(),
+    status: 'AFTER_ACCEPTED_EDIT_ONLY',
+    rule: 'To nie jest lista do natychmiastowego klikania w GSC. Zgłaszamy URL dopiero po realnej zmianie strony.',
+    submit_targets: unique(flat),
+    items,
+  };
+}
+
+function normalizeCannibalQuery(query) {
+  return String(query || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function cannibalWinnerScore(card) {
+  const gsc = approvalGscSnapshot(card);
+  const position = Number(gsc.position || 0);
+  return Number(gsc.clicks || 0) * 1000
+    + Number(gsc.impressions || 0)
+    + (position > 0 ? Math.max(0, 50 - position) : 0);
+}
+
+function buildCannibalizationMap(cards, contentStrategy) {
+  const byQuery = new Map();
+  for (const card of cards || []) {
+    const gsc = approvalGscSnapshot(card);
+    if (looksLikeArticleTitle(gsc.query)) continue;
+    const key = normalizeCannibalQuery(gsc.query);
+    if (!key || key.length < 4) continue;
+    if (!byQuery.has(key)) byQuery.set(key, []);
+    byQuery.get(key).push(card);
+  }
+
+  const conflicts = [];
+  for (const [query, group] of byQuery.entries()) {
+    const uniqueGroup = group.filter((card, index, arr) => arr.findIndex((other) => approvalCardKey(other) === approvalCardKey(card)) === index);
+    if (uniqueGroup.length < 2) continue;
+    const sorted = uniqueGroup.sort((a, b) => cannibalWinnerScore(b) - cannibalWinnerScore(a));
+    const winner = sorted[0];
+    const mainFile = normalizeReportFile(winner.file || winner.url);
+    const displayQuery = approvalGscSnapshot(winner).query || query;
+    const supportingPages = sorted.slice(1).map((card) => {
+      const file = normalizeReportFile(card.file || card.url);
+      const inspection = inspectInternalLinkSuggestion(file, mainFile, displayQuery, '');
+      return {
+        file,
+        anchor: displayQuery,
+        suggested_html: inspection.target_already_linked
+          ? ''
+          : `<a href="${escapeHtml(mainFile)}">${escapeHtml(displayQuery)}</a>`,
+        status: inspection.target_already_linked ? 'LINK_ALREADY_EXISTS' : 'READY_FOR_APPROVAL',
+      };
+    });
+    conflicts.push({
+      query: displayQuery,
+      main_url: cardAbsoluteUrl(winner),
+      main_file: mainFile,
+      supporting_files: supportingPages.map((item) => item.file),
+      supporting_pages: supportingPages,
+      recommendation_status: 'AWAITING_USER_APPROVAL',
+      action: 'Główny URL trzyma title/meta pod tę frazę. Strony wspierające linkują do niego i nie wzmacniają tego samego title pod identyczną intencję.',
+      canonical_note: 'To rekomendacja właściciela intencji, nie automatyczna zmiana rel=canonical.',
+      metrics: sorted.map((card) => ({
+        file: normalizeReportFile(card.file || card.url),
+        impressions: Number(card.gsc?.impressions || 0),
+        clicks: Number(card.gsc?.clicks || 0),
+        position: Number(card.gsc?.position || 0),
+      })),
+    });
+  }
+
+  return {
+    generated_at: nowWarsawIso(),
+    status: conflicts.length || contentStrategy?.cannibalization?.length ? 'CHECK' : 'NO_STRONG_CONFLICTS',
+    conflicts: conflicts.slice(0, 12),
+    strategy_notes: (contentStrategy?.cannibalization || []).slice(0, 14),
+    rule: 'Przy poprawkach nie wzmacniaj dwóch URL-i pod tę samą intencję. Wybierz stronę główną, a drugą potraktuj jako wsparcie linkiem.',
   };
 }
 
 function buildUnifiedInsights() {
   const reportsDir = path.join(ROOT, 'data', 'reports');
+  const growthData = buildGrowthData();
+  const articleByFile = new Map((growthData.articles || []).map((article) => [article.file, article]));
   const seoAio = readJsonIfExists(path.join(reportsDir, 'seo-aio-command-center.json'));
   const quickAnswer = readJsonIfExists(path.join(reportsDir, 'quick-answer-backlog.json'));
   const linkTopology = readJsonIfExists(path.join(reportsDir, 'link-topology-report.json'));
@@ -945,6 +1411,14 @@ function buildUnifiedInsights() {
   const contentStrategy = readGscContentStrategyReport();
 
   const cards = actionCardsFromSeoAio(seoAio);
+  const currentRange = seoAio?.data_quality?.weekly_api_ranges?.current || {};
+  const sourceWindowDays = inclusiveDays(currentRange.start, currentRange.end) || 30;
+  const previousHistory = readJsonIfExists(path.join(REPORT_DIR, 'popraw-seo-historia.json'));
+  const generatedAt = nowWarsawIso();
+  const approvalWave = buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindowDays);
+  const seoWorkHistory = buildSeoWorkHistory(growthData.articles || [], generatedAt, previousHistory, sourceWindowDays);
+  const afterChangeGscQueue = buildGscAfterChangeQueue(approvalWave);
+  const cannibalizationMap = buildCannibalizationMap(cards, contentStrategy);
   const portfolio = seoAio?.portfolio || {};
   const average = portfolio.average_scores || {};
   const waves = seoAio?.waves || {};
@@ -1009,6 +1483,12 @@ function buildUnifiedInsights() {
   if (doctor?.status) {
     insights.push(`Doctor: ${doctor.status}. RED blokuje pracę, YELLOW oznacza ostrzeżenia operacyjne do przeczytania.`);
   }
+  if (seoWorkHistory.recently_modified.length) {
+    insights.push(`Pamięć poprawek: ${seoWorkHistory.recently_modified.length} URL-i było zmienianych w ostatnich 45 dniach; świeże strony są w cooldown i najpierw mierzymy KPI.`);
+  }
+  if (cannibalizationMap.status === 'CHECK') {
+    insights.push(`Kanibalizacja: są sygnały do sprawdzenia (${cannibalizationMap.conflicts.length} grup z danych lokalnych, ${cannibalizationMap.strategy_notes.length} notatek z raportu strategii).`);
+  }
 
   return {
     generated_at: nowWarsawIso(),
@@ -1035,7 +1515,10 @@ function buildUnifiedInsights() {
       scale_winners: firstCardsByType(cards, ['P2_SCALE_WINNER'], 8),
       core_support: firstCardsByType(cards, ['P2_CORE_SUPPORT_LINKING'], 8),
     },
-    approval_wave: buildSeoApprovalWave(cards),
+    approval_wave: approvalWave,
+    seo_work_history: seoWorkHistory,
+    gsc_after_change_queue: afterChangeGscQueue,
+    cannibalization_map: cannibalizationMap,
     link_topology_attention: linkWeakPages.map((item) => ({
       file: item.target,
       inbound: item.inbound,
@@ -1888,12 +2371,12 @@ function buildPoprawSeo() {
       'Zbudowano plan autopilota bez zapisu w artykułach.',
       'Połączono raporty GSC/SEO/AEO/GEO/AIO i wyciągnięto kluczowe wnioski.',
       'Uwzględniono zewnętrzny raport GSC content strategy, jeśli istnieje w Downloads albo pod GSC_CONTENT_STRATEGY_REPORT.',
-      'Zbudowano paczkę do zatwierdzenia: BOOST dla stron blisko wzrostu oraz NAPRAWA dla stron słabych lub bez widoczności.',
+      'Zbudowano paczkę do zatwierdzenia: BOOST dla stron blisko wzrostu, NAPRAWA dla stron słabych lub bez widoczności oraz ROKUJE dla stron z potencjałem po liderach.',
     ],
     unified_insights: unifiedInsights,
     approval_wave: unifiedInsights.approval_wave,
     chosen_articles: autopilot.chosen_articles,
-    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1 albo popraw BOOST 1 NAPRAWA 2. Najpierw przygotuję konkretne teksty do akceptacji, bez edycji HTML.',
+    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Najpierw przygotuję konkretne teksty do akceptacji, bez edycji HTML.',
     safe_next_commands: [
       'npm run popraw-seo',
       'Po akceptacji tekstów: ręczna edycja wskazanego HTML',
@@ -1918,6 +2401,10 @@ function buildPoprawSeo() {
       ['perplexity_monitor', 'perplexity-monitor.md'],
       ['autopilot_plan', 'autopilot-plan.md'],
       ['unified_insights', 'popraw-seo-insights.md'],
+      ['promising_pages', 'popraw-seo-rokuje.md'],
+      ['seo_work_history', 'popraw-seo-historia.md'],
+      ['gsc_after_change_queue', 'popraw-seo-gsc-po-zmianach.md'],
+      ['cannibalization_map', 'popraw-seo-kanibalizacja.md'],
     ].map(([key, file]) => [key, path.join(REPORT_DIR, file)])),
     external_reports: {
       gsc_content_strategy: unifiedInsights.content_strategy?.path || 'MISSING',
@@ -1942,10 +2429,26 @@ function buildPoprawSeo() {
       perplexity_prompts: perplexityMonitor.prompts.length,
       gsc_content_strategy_status: unifiedInsights.content_strategy?.status || 'MISSING',
       gsc_content_strategy_opportunities: unifiedInsights.content_strategy?.opportunity_leaderboard?.length || 0,
+      seo_recently_modified: unifiedInsights.seo_work_history?.recently_modified?.length || 0,
+      gsc_after_change_targets: unifiedInsights.gsc_after_change_queue?.submit_targets?.length || 0,
+      cannibalization_conflicts: unifiedInsights.cannibalization_map?.conflicts?.length || 0,
     },
   };
   writeJson(path.join(REPORT_DIR, 'popraw-seo-insights.json'), unifiedInsights);
   writePoprawSeoInsightsMarkdown(unifiedInsights, path.join(REPORT_DIR, 'popraw-seo-insights.md'));
+  writeJson(path.join(REPORT_DIR, 'popraw-seo-rokuje.json'), {
+    generated_at: unifiedInsights.generated_at,
+    status: unifiedInsights.approval_wave.status,
+    no_generic_text: true,
+    promising: unifiedInsights.approval_wave.promising || [],
+  });
+  writePromisingPagesMarkdown(unifiedInsights, path.join(REPORT_DIR, 'popraw-seo-rokuje.md'));
+  writeJson(path.join(REPORT_DIR, 'popraw-seo-historia.json'), unifiedInsights.seo_work_history);
+  writeSeoWorkHistoryMarkdown(unifiedInsights.seo_work_history, path.join(REPORT_DIR, 'popraw-seo-historia.md'));
+  writeJson(path.join(REPORT_DIR, 'popraw-seo-gsc-po-zmianach.json'), unifiedInsights.gsc_after_change_queue);
+  writeGscAfterChangeMarkdown(unifiedInsights.gsc_after_change_queue, path.join(REPORT_DIR, 'popraw-seo-gsc-po-zmianach.md'));
+  writeJson(path.join(REPORT_DIR, 'popraw-seo-kanibalizacja.json'), unifiedInsights.cannibalization_map);
+  writeCannibalizationMarkdown(unifiedInsights.cannibalization_map, path.join(REPORT_DIR, 'popraw-seo-kanibalizacja.md'));
   writeJson(path.join(REPORT_DIR, 'popraw-seo.json'), command);
   writePoprawSeoMarkdown(command, path.join(REPORT_DIR, 'popraw-seo.md'));
   return command;
@@ -2004,6 +2507,21 @@ function appendContentStrategyMarkdown(lines, strategy) {
   lines.push('');
 }
 
+function appendApprovalAutomationMarkdown(lines, item) {
+  const gain = item.estimated_traffic_gain;
+  if (gain) {
+    lines.push(`   - szacowany zysk kliknięć/mc przy CTR 5%: +${gain.estimated_monthly_click_gain} (dane z ${gain.source_window_days} dni przeliczone na 30 dni; surowy wynik ${gain.raw_monthly_click_gain})`);
+  }
+  const contract = item.content_contract;
+  if (contract) {
+    lines.push(`   - kontrakt treści: obecny H1 ${contract.current.headline.status} (${contract.current.headline.length} zn.), meta ${contract.current.meta_description.status} (${contract.current.meta_description.length} zn.); propozycje muszą mieć H1 55-70 i meta 145-160 znaków zakończone . ! lub ?`);
+  }
+  const guard = item.internal_link_guard;
+  if (guard) {
+    lines.push(`   - strażnik linków: ${guard.status}; przeskanowano ${guard.scanned}, dopuszczono ${guard.accepted}, odrzucono ${guard.rejected.length}`);
+  }
+}
+
 function writePoprawSeoMarkdown(command, file) {
   const lines = ['# Popraw SEO — Plan Do Zatwierdzenia', '', `Wygenerowano: ${command.generated_at}`, '', `Status: ${command.status}`, ''];
   const insights = command.unified_insights || {};
@@ -2020,6 +2538,7 @@ function writePoprawSeoMarkdown(command, file) {
   appendContentStrategyMarkdown(lines, insights.content_strategy);
   lines.push('## Paczka Do Zatwierdzenia');
   lines.push('- `BOOST` = strony, które Google już pokazuje; poprawiamy CTR, doprecyzowanie leadu i linkowanie.');
+  lines.push('- `ROKUJE` = drugi raport: strony niebędące liderami, ale mające sygnał GSC albo miejsce w strategii; po liderach wzmacniamy je równie konkretnie.');
   lines.push('- `NAPRAWA` = strony słabe albo bez widoczności; najpierw budujemy konkretną odpowiedź, FAQ, źródła i linki.');
   lines.push('- Zakaz generycznych dopisków: przed edycją HTML agent ma przygotować gotowy tekst w rozmowie i czekać na akceptację.');
   lines.push('');
@@ -2030,6 +2549,22 @@ function writePoprawSeoMarkdown(command, file) {
       lines.push(`   - URL: ${item.url}`);
       lines.push(`   - powód: ${item.reason}`);
       lines.push(`   - GSC: query "${item.gsc.query || 'brak'}"; impr ${item.gsc.impressions}; klik ${item.gsc.clicks}; CTR ${item.gsc.ctr}%; poz ${item.gsc.position}`);
+      appendApprovalAutomationMarkdown(lines, item);
+      if (item.internal_link_suggestions?.length) {
+        lines.push(`   - linki do rozważenia: ${item.internal_link_suggestions.map((link) => `${link.from} -> "${link.anchor || 'anchor do przygotowania'}"`).join('; ')}`);
+      }
+      lines.push(`   - przed edycją przygotuj: ${item.prepare_before_edit.join('; ')}`);
+    });
+    lines.push('');
+  }
+  if (Array.isArray(approval.promising) && approval.promising.length) {
+    lines.push('### ROKUJE — Drugi Raport Stron Z Potencjałem');
+    approval.promising.forEach((item) => {
+      lines.push(`${item.id}. ${item.file}`);
+      lines.push(`   - URL: ${item.url}`);
+      lines.push(`   - powód: ${item.reason}`);
+      lines.push(`   - GSC/strategia: query "${item.gsc.query || 'brak'}"; impr ${item.gsc.impressions}; klik ${item.gsc.clicks}; CTR ${item.gsc.ctr}%; poz ${item.gsc.position}`);
+      appendApprovalAutomationMarkdown(lines, item);
       if (item.internal_link_suggestions?.length) {
         lines.push(`   - linki do rozważenia: ${item.internal_link_suggestions.map((link) => `${link.from} -> "${link.anchor || 'anchor do przygotowania'}"`).join('; ')}`);
       }
@@ -2044,6 +2579,7 @@ function writePoprawSeoMarkdown(command, file) {
       lines.push(`   - URL: ${item.url}`);
       lines.push(`   - powód: ${item.reason}`);
       lines.push(`   - wynik SEO/AEO/GEO/AIO: ${item.scores.seo}/${item.scores.aeo}/${item.scores.geo}/${item.scores.aio}`);
+      appendApprovalAutomationMarkdown(lines, item);
       if (item.report_tasks?.length) lines.push(`   - zadania z raportu: ${item.report_tasks.join('; ')}`);
       if (item.internal_link_suggestions?.length) {
         lines.push(`   - linki do rozważenia: ${item.internal_link_suggestions.map((link) => `${link.from} -> "${link.anchor || 'anchor do przygotowania'}"`).join('; ')}`);
@@ -2103,6 +2639,37 @@ function writePoprawSeoMarkdown(command, file) {
     });
     lines.push('');
   }
+  if (insights.seo_work_history?.recently_modified?.length) {
+    lines.push('## Historia Poprawek / Cooldown');
+    insights.seo_work_history.recently_modified.slice(0, 10).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}`);
+      lines.push(`   - dateModified: ${item.date_modified}; wiek ${item.age_days} dni; status ${item.status}; następna kontrola: ${item.next_review}`);
+      lines.push(`   - baseline: impr ${item.baseline.impressions}, klik ${item.baseline.clicks}, CTR ${item.baseline.ctr}%, poz ${item.baseline.position}`);
+    });
+    lines.push('');
+  }
+  if (insights.gsc_after_change_queue?.items?.length) {
+    lines.push('## GSC Po Zaakceptowanych Zmianach');
+    lines.push(`- status: ${insights.gsc_after_change_queue.status}; ${insights.gsc_after_change_queue.rule}`);
+    insights.gsc_after_change_queue.items.slice(0, 12).forEach((item) => {
+      lines.push(`- ${item.id}: ${item.submit_after_accepted_edit.join(', ') || item.target_url}`);
+    });
+    lines.push('');
+  }
+  if (insights.cannibalization_map) {
+    const map = insights.cannibalization_map;
+    lines.push('## Kanibalizacja / Decyzja Głównego URL-a');
+    lines.push(`- status: ${map.status}; ${map.rule}`);
+    if (map.conflicts?.length) {
+      map.conflicts.slice(0, 6).forEach((item, idx) => {
+        lines.push(`${idx + 1}. ${item.query}: główny ${item.main_file}; wspierające ${item.supporting_files.join(', ') || 'brak'}`);
+      });
+    }
+    if (map.strategy_notes?.length) {
+      lines.push(`- notatki z raportu strategii: ${map.strategy_notes.length}`);
+    }
+    lines.push('');
+  }
   if (insights.originality_attention?.length) {
     lines.push('## Originality / Własne Dane Do Poprawy');
     insights.originality_attention.slice(0, 10).forEach((item, idx) => {
@@ -2136,6 +2703,128 @@ function writePoprawSeoMarkdown(command, file) {
   writeText(file, lines.join('\n'));
 }
 
+function writePromisingPagesMarkdown(insights, file) {
+  const approval = insights.approval_wave || {};
+  const items = Array.isArray(approval.promising) ? approval.promising : [];
+  const lines = ['# Popraw SEO — ROKUJE', '', `Wygenerowano: ${insights.generated_at}`, '', `Status: ${approval.status || 'AWAITING_USER_APPROVAL'}`, ''];
+  lines.push('## Jak Czytać Ten Raport');
+  lines.push('- To jest drugi raport po liderach: strony nie są jeszcze głównymi zwycięzcami, ale mają realny sygnał z GSC albo raportu strategii.');
+  lines.push('- Pracujemy na nich po `BOOST`/najpilniejszych stronach, bo mogą wejść do kolejnej fali wzrostu.');
+  lines.push('- Nie wolno dodawać generycznych bloków. Każda zmiana musi wynikać z frazy, metryki, intencji, źródła, progu, liczby albo konkretnej luki w artykule.');
+  lines.push('- Po zaakceptowanej edycji zgłaszamy zmieniony URL w GSC oraz, jeśli ma sens, 1-3 strony źródłowe z nowymi linkami wewnętrznymi.');
+  lines.push('');
+  if (!items.length) {
+    lines.push('Brak kandydatów `ROKUJE` w obecnych danych.');
+    writeText(file, lines.join('\n'));
+    return;
+  }
+  lines.push('## Kandydaci Do Kolejnej Fali');
+  items.forEach((item) => {
+    lines.push(`${item.id}. ${item.file}`);
+    lines.push(`   - URL: ${item.url}`);
+    lines.push(`   - query: ${item.gsc.query || 'brak'}; impr ${item.gsc.impressions}; klik ${item.gsc.clicks}; CTR ${item.gsc.ctr}%; poz ${item.gsc.position}`);
+    appendApprovalAutomationMarkdown(lines, item);
+    lines.push(`   - dlaczego rokuje: ${item.reason}`);
+    lines.push(`   - przygotuj przed HTML: ${item.prepare_before_edit.join('; ')}`);
+    if (item.gsc_submit_after_change?.length) lines.push(`   - GSC po zmianie: ${item.gsc_submit_after_change.join(', ')}`);
+  });
+  lines.push('');
+  lines.push('## Zasada Akceptacji');
+  lines.push('- Użytkownik zatwierdza konkretne ID, np. `popraw ROKUJE 1`.');
+  lines.push('- Jeśli użytkownik poda same numery, agent musi dopytać, czy chodzi o `BOOST`, `ROKUJE` czy `NAPRAWA`.');
+  lines.push('- Najpierw pokazujemy gotowe teksty w rozmowie. HTML dopiero po akceptacji.');
+  writeText(file, lines.join('\n'));
+}
+
+function writeSeoWorkHistoryMarkdown(history, file) {
+  const lines = ['# Popraw SEO — Historia I Cooldown', '', `Wygenerowano: ${history?.generated_at || nowWarsawIso()}`, ''];
+  lines.push('## Zasada');
+  lines.push('- Jeśli URL był świeżo poprawiany, nie wciskamy go od razu do kolejnej fali zmian.');
+  lines.push('- Najpierw patrzymy na checkpointy 7/14/28 dni: wyświetlenia, kliknięcia, CTR, pozycję, AI impressions i jakość wizyty.');
+  lines.push('- Dopiero po KPI decydujemy, czy poprawiać title/meta, lead, FAQ, linkowanie czy zostawić stronę w spokoju.');
+  lines.push('');
+  const items = history?.recently_modified || [];
+  if (!items.length) {
+    lines.push('Brak świeżo modyfikowanych URL-i w ostatnich 45 dniach.');
+    writeText(file, lines.join('\n'));
+    return;
+  }
+  lines.push('## Ostatnio Zmienione URL-e');
+  items.forEach((item, index) => {
+    lines.push(`${index + 1}. ${item.file}`);
+    lines.push(`   - dataModified: ${item.date_modified}; wiek: ${item.age_days} dni; status: ${item.status}`);
+    lines.push(`   - baseline: impr ${item.baseline.impressions}; klik ${item.baseline.clicks}; CTR ${item.baseline.ctr}%; poz ${item.baseline.position}`);
+    lines.push(`   - obecnie: impr ${item.current.impressions}; klik ${item.current.clicks}; CTR ${item.current.ctr}%; poz ${item.current.position}`);
+    lines.push(`   - checkpointy: ${item.checkpoints ? Object.values(item.checkpoints).join(' / ') : 'brak dateModified'}`);
+    for (const [label, checkpoint] of Object.entries(item.delta_tracker || {})) {
+      if (checkpoint.status !== 'READY') {
+        lines.push(`   - delta ${label.replace('_', ' ')}: ${checkpoint.status} do ${checkpoint.date}`);
+        continue;
+      }
+      const delta = checkpoint.delta;
+      lines.push(`   - delta ${label.replace('_', ' ')}: impr ${delta.impressions >= 0 ? '+' : ''}${delta.impressions}; klik ${delta.clicks >= 0 ? '+' : ''}${delta.clicks}; CTR ${delta.ctr_percentage_points >= 0 ? '+' : ''}${delta.ctr_percentage_points} pp; poprawa pozycji ${delta.position_improvement >= 0 ? '+' : ''}${delta.position_improvement}`);
+    }
+    lines.push(`   - następna kontrola: ${item.next_review}`);
+  });
+  writeText(file, lines.join('\n'));
+}
+
+function writeGscAfterChangeMarkdown(queue, file) {
+  const lines = ['# Popraw SEO — GSC Po Zmianach', '', `Wygenerowano: ${queue?.generated_at || nowWarsawIso()}`, `Status: ${queue?.status || 'AFTER_ACCEPTED_EDIT_ONLY'}`, ''];
+  lines.push('## Zasada');
+  lines.push(`- ${queue?.rule || 'Zgłaszamy URL dopiero po realnej zmianie strony.'}`);
+  lines.push('- Najpierw akceptacja tekstu, potem HTML, dateModified, sitemap/_site, walidacja, dopiero potem GSC.');
+  lines.push('');
+  const items = queue?.items || [];
+  if (!items.length) {
+    lines.push('Brak URL-i w kolejce po zmianach.');
+    writeText(file, lines.join('\n'));
+    return;
+  }
+  lines.push('## Kolejka Według ID');
+  items.forEach((item) => {
+    lines.push(`${item.id}. ${item.file}`);
+    lines.push(`   - koszyk: ${item.kind}`);
+    lines.push(`   - zgłoś po edycji: ${item.submit_after_accepted_edit.join(', ') || item.target_url}`);
+    lines.push(`   - monitoruj: ${item.monitor_after}`);
+  });
+  lines.push('');
+  lines.push('## Płaska Lista URL-i');
+  (queue.submit_targets || []).forEach((url) => lines.push(`- ${url}`));
+  writeText(file, lines.join('\n'));
+}
+
+function writeCannibalizationMarkdown(map, file) {
+  const lines = ['# Popraw SEO — Kanibalizacja', '', `Wygenerowano: ${map?.generated_at || nowWarsawIso()}`, `Status: ${map?.status || 'NO_STRONG_CONFLICTS'}`, ''];
+  lines.push('## Zasada');
+  lines.push(`- ${map?.rule || 'Nie wzmacniaj dwóch URL-i pod tę samą intencję.'}`);
+  lines.push('');
+  if (map?.conflicts?.length) {
+    lines.push('## Konflikty Z Danych Lokalnych');
+    map.conflicts.forEach((item, index) => {
+      lines.push(`${index + 1}. Fraza/intencja: ${item.query}`);
+      lines.push(`   - główny URL: ${item.main_file}`);
+      lines.push(`   - wspierające: ${item.supporting_files.join(', ') || 'brak'}`);
+      lines.push(`   - decyzja: ${item.action}`);
+      lines.push(`   - status rekomendacji: ${item.recommendation_status}; ${item.canonical_note}`);
+      (item.supporting_pages || []).forEach((support) => {
+        lines.push(`   - ${support.file}: ${support.status}${support.suggested_html ? `; HTML: ${support.suggested_html}` : ''}`);
+      });
+      lines.push(`   - metryki: ${item.metrics.map((metric) => `${metric.file} impr ${metric.impressions}, klik ${metric.clicks}, poz ${metric.position}`).join('; ')}`);
+    });
+    lines.push('');
+  }
+  if (map?.strategy_notes?.length) {
+    lines.push('## Notatki Z Raportu Strategii');
+    map.strategy_notes.forEach((item) => lines.push(`- ${item}`));
+    lines.push('');
+  }
+  if (!map?.conflicts?.length && !map?.strategy_notes?.length) {
+    lines.push('Brak mocnych sygnałów kanibalizacji w obecnych danych.');
+  }
+  writeText(file, lines.join('\n'));
+}
+
 function writePoprawSeoInsightsMarkdown(insights, file) {
   const lines = ['# Popraw SEO — Wnioski Z GSC I Raportów', '', `Wygenerowano: ${insights.generated_at}`, ''];
   if (insights.ignored_today?.length) {
@@ -2154,6 +2843,21 @@ function writePoprawSeoInsightsMarkdown(insights, file) {
 
   const groups = [
     ['GSC: Szybkie Wejście Wyżej', insights.gsc_priority?.push_to_page_one || []],
+    ['ROKUJE: Kolejna Fala Po Liderach', (insights.approval_wave?.promising || []).map((item) => ({
+      file: item.file,
+      query: item.gsc?.query || '',
+      impressions: item.gsc?.impressions || 0,
+      clicks: item.gsc?.clicks || 0,
+      ctr: item.gsc?.ctr || 0,
+      position: item.gsc?.position || 0,
+      seo: item.scores?.seo || 0,
+      aeo: item.scores?.aeo || 0,
+      geo: item.scores?.geo || 0,
+      aio: item.scores?.aio || 0,
+      decision: item.decision || 'wzmocnić po liderach',
+      tasks: item.prepare_before_edit || [],
+      source_links: (item.internal_link_suggestions || []).map((link) => link.from),
+    }))],
     ['GSC: Budowa Widoczności', insights.gsc_priority?.build_discovery || []],
     ['GSC: Skalowanie Zwycięzców', insights.gsc_priority?.scale_winners || []],
     ['Linkowanie Wspierające', insights.gsc_priority?.core_support || []],
@@ -2209,6 +2913,35 @@ function writePoprawSeoInsightsMarkdown(insights, file) {
       lines.push(`   - AI: impressions ${item.baseline.ai_impressions}, clicks ${item.baseline.ai_clicks}`);
       lines.push(`   - checkpointy: ${item.checkpoints ? Object.values(item.checkpoints).join(' / ') : 'brak dateModified'}`);
     });
+    lines.push('');
+  }
+
+  if (insights.seo_work_history?.recently_modified?.length) {
+    lines.push('## Historia Poprawek / Cooldown');
+    insights.seo_work_history.recently_modified.slice(0, 12).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}`);
+      lines.push(`   - dateModified: ${item.date_modified}; wiek ${item.age_days} dni; status ${item.status}; następna kontrola: ${item.next_review}`);
+    });
+    lines.push('');
+  }
+
+  if (insights.gsc_after_change_queue?.items?.length) {
+    lines.push('## GSC Po Zaakceptowanych Zmianach');
+    lines.push(`- ${insights.gsc_after_change_queue.rule}`);
+    insights.gsc_after_change_queue.items.slice(0, 15).forEach((item) => {
+      lines.push(`- ${item.id}: ${item.submit_after_accepted_edit.join(', ') || item.target_url}`);
+    });
+    lines.push('');
+  }
+
+  if (insights.cannibalization_map) {
+    const map = insights.cannibalization_map;
+    lines.push('## Kanibalizacja');
+    lines.push(`- status: ${map.status}; ${map.rule}`);
+    (map.conflicts || []).slice(0, 8).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.query}: główny ${item.main_file}; wspierające ${item.supporting_files.join(', ') || 'brak'}`);
+    });
+    if (map.strategy_notes?.length) lines.push(`- notatki strategii: ${map.strategy_notes.length}`);
     lines.push('');
   }
 
@@ -2481,9 +3214,17 @@ function main() {
   }
 }
 
-try {
-  main();
-} catch (err) {
-  console.error(`[GROWTH][FAIL] ${err.message || err}`);
-  process.exit(1);
+if (require.main === module) {
+  try {
+    main();
+  } catch (err) {
+    console.error(`[GROWTH][FAIL] ${err.message || err}`);
+    process.exit(1);
+  }
 }
+
+module.exports = {
+  estimatedTrafficGain,
+  metricDelta,
+  textContract,
+};

@@ -77,7 +77,7 @@ function scoreStatus(v, budget) {
   return 'ok';
 }
 
-async function measurePage(page, fullUrl) {
+async function installPerformanceObservers(page) {
   await page.addInitScript(() => {
     window.__fitpo50Cwv = { lcp: 0, cls: 0, tbt: 0 };
     new PerformanceObserver((list) => {
@@ -90,6 +90,9 @@ async function measurePage(page, fullUrl) {
       for (const e of list.getEntries()) window.__fitpo50Cwv.tbt += Math.max(0, (e.duration || 0) - 50);
     }).observe({ type: 'longtask', buffered: true });
   });
+}
+
+async function measurePage(page, fullUrl) {
   await page.goto(fullUrl, { waitUntil: 'load' });
   await page.evaluate(async () => {
     if (document.fonts && document.fonts.ready) {
@@ -112,6 +115,7 @@ async function main() {
   const base = `http://127.0.0.1:${port}`;
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
+  await installPerformanceObservers(page);
   // Warm up the browser cache/compiler with a preliminary load of the home page
   console.log('[cwv-budget] Warming up browser context...');
   await page.goto(`${base}/index.html`, { waitUntil: 'load' }).catch(() => {});
@@ -159,7 +163,14 @@ async function main() {
   console.log(`[PASS] cwv-budget: fail=0, warn=${warnCount}`);
 }
 
-main().catch((err) => {
-  console.error(`[FAIL] cwv-budget -> ${err.message || err}`);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(`[FAIL] cwv-budget -> ${err.message || err}`);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  installPerformanceObservers,
+  measurePage,
+};
