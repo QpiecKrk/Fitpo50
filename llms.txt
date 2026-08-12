@@ -411,4 +411,9 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Lp(a) po 50-tce: norma, cena badania i wynik bez paniki | FitPo50"
   section: "Zdrowie"
   summary: "Lp(a) to genetyczny marker ryzyka zawału i udaru. Sprawdź normy, cenę badania w Polsce, kiedy zrobić je po 50-tce i jak czytać wynik razem z LDL i ApoB."
+- url: https://fitpo50.pl/gleboki-przysiad-asian-squat.html
+  title: "Głęboki przysiad (Asian squat): test mobilności po 50-tce | FitPo50"
+  section: "Ruch"
+  summary: "Głęboki przysiad po 50 pokazuje ruchomość kostek, bioder i kolan. Sprawdź test, bezpieczne warianty, klin pod pięty i plan 5 tygodni bez sprzętu."
+
 

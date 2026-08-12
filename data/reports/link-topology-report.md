@@ -1,16 +1,16 @@
 # Link Topology Report
 
-- generated_at: 2026-07-27T14:34:46.977Z
-- pages_total: 120
+- generated_at: 2026-08-12T14:24:21.341Z
+- pages_total: 121
 - min_inbound: 2
 
 ## .agent/skills/auto/skill-creator/assets/eval_review.html (inbound: 0)
 - .agent/skills/auto/skill-creator/eval-viewer/viewer.html (score=6, inbound_src=0)
-- mira-ai-agent-sor-lepszy-od-lekarzy.html (score=1, inbound_src=7)
+- mira-ai-agent-sor-lepszy-od-lekarzy.html (score=1, inbound_src=8)
 
 ## .agent/skills/auto/skill-creator/eval-viewer/viewer.html (inbound: 0)
 - .agent/skills/auto/skill-creator/assets/eval_review.html (score=6, inbound_src=0)
-- mira-ai-agent-sor-lepszy-od-lekarzy.html (score=1, inbound_src=7)
+- mira-ai-agent-sor-lepszy-od-lekarzy.html (score=1, inbound_src=8)
 
 ## article-template-bento.html (inbound: 0)
 - Brak mocnych kandydatów semantycznych.
