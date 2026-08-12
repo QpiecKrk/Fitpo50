@@ -48,6 +48,7 @@
     "growth:structured-score": "node scripts/growth-tool.js structured-score",
     "growth:quick-answer-score": "node scripts/growth-tool.js quick-answer-score",
     "growth:gsc-generative-ai": "node scripts/growth-tool.js gsc-generative-ai",
+    "growth:snippet-controls": "node scripts/growth-tool.js snippet-controls",
     "growth:post-deploy-kpi": "node scripts/growth-tool.js post-deploy-kpi",
     "growth:originality-score": "node scripts/growth-tool.js originality-score",
     "growth:topical-map": "node scripts/growth-tool.js topical-map",

@@ -8,7 +8,7 @@ const { spawnSync } = require('child_process');
 const ROOT = process.cwd();
 const DEFAULT_DAYS = 30;
 const SAFE_DATA_REPORT_RX = /^(gsc-|seo-|aeo-|quick-answer-|content-freshness-|cwv-|link-topology-|assets-audit|pipeline-timings|fitpo50-doctor|agent-context|session-start-report|article-guard-blockers|seo-crawl-report).+\.(json|md|txt)$/i;
-const SAFE_GROWTH_REPORT_RX = /^(growth-report|ai-visibility-audit|gsc-refresh|evidence-plan|hubs-report|link-assets|ai-visibility-test|entity-graph|structured-data-score|quick-answer-score|topical-authority-map|llms-check|perplexity-monitor|autopilot-plan|popraw-seo|apply-plan|verify)\.(json|md)$/i;
+const SAFE_GROWTH_REPORT_RX = /^(growth-report|ai-visibility-audit|gsc-refresh|evidence-plan|hubs-report|link-assets|ai-visibility-test|entity-graph|structured-data-score|quick-answer-score|gsc-generative-ai|snippet-controls-audit|post-deploy-kpi-plan|originality-score|topical-authority-map|llms-check|perplexity-monitor|autopilot-plan|popraw-seo|apply-plan|verify)\.(json|md)$|^popraw-seo-decyzje\.md$/i;
 const SAFE_GSC_RX = /^(gsc-|seo-|aeo-|previous-|queries\.csv|pages\.csv|query-pages\.csv|seo-aio-|gsc-submit-queue).+|^(queries|pages|query-pages)\.csv$/i;
 
 function parseArgs(argv) {

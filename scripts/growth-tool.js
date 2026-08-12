@@ -184,6 +184,30 @@ function cleanMarkdownValue(value) {
     .trim();
 }
 
+function strategyUrlToFile(value) {
+  const raw = cleanMarkdownValue(value)
+    .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
+    .replace(/^\/+/, '')
+    .replace(/[)#.,]+$/g, '')
+    .trim();
+  return raw.endsWith('.html') ? raw : raw;
+}
+
+function parsePercentValue(value) {
+  return toNumber(String(value || '').replace('%', ''));
+}
+
+function parseStrategyTableRows(markdown, headingPattern, mapper) {
+  const rows = [];
+  for (const line of extractMarkdownSection(markdown, headingPattern)) {
+    const cells = line.split('|').map(cleanMarkdownValue).filter(Boolean);
+    if (!cells.length || !/^\d+$/.test(cells[0])) continue;
+    const item = mapper(cells);
+    if (item && item.file) rows.push(item);
+  }
+  return rows;
+}
+
 function readGscContentStrategyReport() {
   const file = findLatestGscContentStrategyReport();
   if (!file) {
@@ -202,20 +226,37 @@ function readGscContentStrategyReport() {
     };
   }
   const markdown = readTextIfExists(file);
-  const opportunity = [];
-  for (const line of extractMarkdownSection(markdown, /^##\s+5\.\s+Opportunity Leaderboard/i)) {
-    const cells = line.split('|').map(cleanMarkdownValue).filter(Boolean);
-    if (cells.length < 7 || !/^\d+$/.test(cells[0])) continue;
-    opportunity.push({
+  const oldOpportunity = parseStrategyTableRows(markdown, /^##\s+5\.\s+Opportunity Leaderboard/i, (cells) => {
+    if (cells.length < 7) return null;
+    return {
       rank: Number(cells[0]),
-      file: cells[1].replace(/^\//, ''),
+      file: strategyUrlToFile(cells[1]),
       query: cells[2],
       impressions: toNumber(cells[3]),
+      clicks: 0,
+      ctr: 0,
       position: toNumber(cells[4]),
       score: toNumber(cells[5]),
       priority: cells[6],
-    });
-  }
+      source_section: 'Opportunity Leaderboard',
+    };
+  });
+  const aeoOpportunity = parseStrategyTableRows(markdown, /^##\s+4\.\s+AEO Opportunity Bot/i, (cells) => {
+    if (cells.length < 8) return null;
+    return {
+      rank: Number(cells[0]),
+      file: strategyUrlToFile(cells[1]),
+      query: cells[7],
+      impressions: toNumber(cells[2]),
+      clicks: toNumber(cells[3]),
+      ctr: parsePercentValue(cells[4]),
+      position: toNumber(cells[5]),
+      score: toNumber(cells[6]),
+      priority: 'AEO_CTR_GAP',
+      source_section: 'AEO Opportunity Bot',
+    };
+  });
+  const opportunity = oldOpportunity.length ? oldOpportunity : aeoOpportunity;
   const quickWins = [];
   const quickLines = extractMarkdownSection(markdown, /^##\s+6\.\s+Quick Wins/i);
   for (let i = 0; i < quickLines.length; i += 1) {
@@ -230,34 +271,44 @@ function readGscContentStrategyReport() {
   }
   const actionCards = [];
   for (const block of markdown.split(/\n###\s+/).slice(1)) {
-    if (!/Kart[ęa]\s+#\d+/i.test(block)) continue;
+    if (!/Kart[ęa]\s+#?\d+/i.test(block)) continue;
     const header = block.split(/\r?\n/)[0] || '';
-    const id = (header.match(/#(\d+)/) || [])[1] || String(actionCards.length + 1);
+    const id = (header.match(/#?(\d+)/) || [])[1] || String(actionCards.length + 1);
     const fileMatch = header.match(/\(`\/?([^)`]+)`\)/);
     const lines = block.split(/\r?\n/).map((line) => line.trim());
     const pick = (label) => {
-      const found = lines.find((line) => line.toLowerCase().includes(label.toLowerCase()));
-      return found ? cleanMarkdownValue(found.replace(/^-\s+\*\*[^:]+:\*\*\s*/, '')) : '';
+      const wanted = normalizeHeaderKey(label);
+      const found = lines.find((line) => normalizeHeaderKey(line).includes(wanted));
+      return found ? cleanMarkdownValue(found.replace(/^[-*]\s+\*\*[^:]+:\*\*\s*/, '')) : '';
     };
+    const urlLine = pick('URL');
+    const urlFile = strategyUrlToFile((urlLine.match(/https?:\/\/\S+/i) || [])[0] || urlLine);
     actionCards.push({
       id: `STRATEGIA ${id}`,
-      file: fileMatch ? fileMatch[1] : '',
-      metrics: pick('Metryki GSC'),
-      proposed_title: pick('Proponowany Title'),
-      proposed_meta_description: pick('Proponowany Meta Description'),
-      h2_faq: pick('Sugestie H2/FAQ'),
-      link_places: pick('Miejsca linków'),
+      file: fileMatch ? strategyUrlToFile(fileMatch[1]) : urlFile,
+      metrics: pick('Metryki GSC') || pick('Metryki'),
+      proposed_title: pick('Proponowany Title') || pick('Proponowany <title>'),
+      proposed_meta_description: pick('Proponowany Meta Description') || pick('Proponowany `meta description`'),
+      h2_faq: pick('Sugestie H2/FAQ') || pick('FAQ'),
+      link_places: pick('Miejsca linków') || pick('Anchor & Linkowanie'),
       priority_effect: pick('Priorytet & Efekt'),
     });
   }
-  const submitQueue = extractMarkdownSection(markdown, /^##\s+11\.\s+Co zgłosić do GSC/i)
+  const submitQueue = [
+    ...extractMarkdownSection(markdown, /^##\s+11\.\s+Co zgłosić do GSC/i),
+    ...extractMarkdownSection(markdown, /^##\s+9\.\s+Kolejka Zgłoszeń do GSC/i),
+  ]
     .map((line) => (line.match(/https?:\/\/\S+/i) || [])[0] || '')
     .map((url) => url.replace(/[)`.,]+$/g, ''))
     .filter(Boolean);
-  const globalExtra = extractMarkdownSection(markdown, /^##\s+13\.\s+Nowe Artykuły GLOBAL_EXTRA/i)
+  const globalExtra = [
+    ...extractMarkdownSection(markdown, /^##\s+13\.\s+Nowe Artykuły GLOBAL_EXTRA/i),
+    ...extractMarkdownSection(markdown, /^##\s+7\.\s+Propozycje Nowych Artykułów/i),
+  ]
     .filter((line) => /^[-*]\s+/.test(line))
     .map(cleanMarkdownValue);
-  const dateMatch = markdown.match(/^#\s+Raport GSC Premium \(FitPo50\)\s+—\s+(\d{4}-\d{2}-\d{2})/m);
+  const dateMatch = markdown.match(/^#\s+Raport GSC Premium \(FitPo50\)\s+—\s+(\d{4}-\d{2}-\d{2})/m)
+    || markdown.match(/\*\*Data wygenerowania:\*\*\s*(\d{4}-\d{2}-\d{2})/m);
   return {
     status: 'OK',
     path: file,
@@ -268,7 +319,10 @@ function readGscContentStrategyReport() {
     opportunity_leaderboard: opportunity.slice(0, 10),
     quick_wins: quickWins.slice(0, 8),
     action_cards: actionCards.slice(0, 8),
-    cannibalization: extractMarkdownSection(markdown, /^##\s+8\.\s+Cannibalization/i)
+    cannibalization: [
+      ...extractMarkdownSection(markdown, /^##\s+8\.\s+Cannibalization/i),
+      ...extractMarkdownSection(markdown, /^##\s+5\.\s+Wykryta Kanibalizacja/i),
+    ]
       .filter((line) => !/^---+$/.test(line))
       .slice(0, 14)
       .map(cleanMarkdownValue),
@@ -371,6 +425,25 @@ function findHtmlFiles(root) {
       if (entry.isFile() && entry.name.endsWith('.html')) {
         const rel = path.relative(root, abs).replace(/\\/g, '/');
         if (!SUPPORT_PAGES.has(rel)) files.push(rel);
+      }
+    }
+  }
+  walk(root);
+  return files.sort();
+}
+
+function findSeoHtmlFiles(root) {
+  const files = [];
+  const skip = new Set(['.git', 'node_modules', '_site', 'dist', 'admin', 'scripts', 'tests', 'templates']);
+  function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const abs = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (!skip.has(entry.name) && !entry.name.startsWith('.')) walk(abs);
+        continue;
+      }
+      if (entry.isFile() && entry.name.endsWith('.html')) {
+        files.push(path.relative(root, abs).replace(/\\/g, '/'));
       }
     }
   }
@@ -953,9 +1026,15 @@ function textContract(value, min, max, requireSentenceEnd = false, emptyStatus =
   };
 }
 
+function cleanStrategyDraftValue(value) {
+  return String(value || '')
+    .replace(/\s+\(\d+\s+znak(?:i|ów|ow)?\)\s*$/i, '')
+    .trim();
+}
+
 function proposalContentContract(card, article) {
-  const proposedHeadline = card?.proposed_h1 || card?.proposed_headline || '';
-  const proposedMeta = card?.proposed_meta_description || '';
+  const proposedHeadline = cleanStrategyDraftValue(card?.proposed_h1 || card?.proposed_headline || card?.proposed_title || '');
+  const proposedMeta = cleanStrategyDraftValue(card?.proposed_meta_description || '');
   return {
     rule: 'Każda gotowa propozycja musi przejść walidację przed pokazaniem użytkownikowi.',
     headline_required_range: '55-70',
@@ -1034,6 +1113,10 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     gsc,
     estimated_traffic_gain: estimatedTrafficGain(gsc, sourceWindowDays),
     content_contract: proposalContentContract(card, articleByFile?.get?.(file)),
+    current_title: articleByFile?.get?.(file)?.title || '',
+    current_meta_description: articleByFile?.get?.(file)?.meta_description || '',
+    proposed_title: cleanStrategyDraftValue(card?.proposed_title || ''),
+    proposed_meta_description: cleanStrategyDraftValue(card?.proposed_meta_description || ''),
     scores: {
       seo: Number(card?.score?.seo || 0),
       aeo: Number(card?.score?.aeo || 0),
@@ -1099,6 +1182,18 @@ function buildStrategyOpportunityCard(item, actionCardsByFile) {
     proposed_title: strategyAction.proposed_title || '',
     proposed_meta_description: strategyAction.proposed_meta_description || '',
     internal_link_sources: [],
+  };
+}
+
+function mergeStrategyActionDraft(card, actionCardsByFile) {
+  const file = normalizeReportFile(card?.file || card?.url);
+  const strategyAction = actionCardsByFile?.get?.(file);
+  if (!strategyAction) return card;
+  return {
+    ...card,
+    proposed_title: card.proposed_title || strategyAction.proposed_title || '',
+    proposed_meta_description: card.proposed_meta_description || strategyAction.proposed_meta_description || '',
+    strategy_action_card: strategyAction,
   };
 }
 
@@ -1182,14 +1277,18 @@ function buildPromisingSeoCards(cards, contentStrategy, excludedKeys, articleByF
 }
 
 function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindowDays) {
-  const boostCards = cards
+  const actionCardsByFile = new Map((contentStrategy?.action_cards || [])
+    .map((item) => [normalizeReportFile(item.file), item])
+    .filter(([file]) => Boolean(file)));
+  const enrichedCards = cards.map((card) => mergeStrategyActionDraft(card, actionCardsByFile));
+  const boostCards = enrichedCards
     .filter((card) => card.type === 'P0_PUSH_TO_PAGE_ONE')
     .slice(0, 5);
-  const repairCards = cards
+  const repairCards = enrichedCards
     .filter((card) => ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'].includes(card.type))
     .slice(0, 5);
   const excludedKeys = new Set([...boostCards, ...repairCards].map(approvalCardKey).filter(Boolean));
-  const promisingCards = buildPromisingSeoCards(cards, contentStrategy, excludedKeys, articleByFile);
+  const promisingCards = buildPromisingSeoCards(enrichedCards, contentStrategy, excludedKeys, articleByFile);
   return {
     status: 'AWAITING_USER_APPROVAL',
     rule: 'Jedna komenda popraw-seo pokazuje raport liderów BOOST/NAPRAWA oraz drugi raport ROKUJE. Agent nie edytuje HTML, dopóki użytkownik nie zatwierdzi konkretnych ID.',
@@ -1420,6 +1519,7 @@ function buildUnifiedInsights() {
   const aiVisibility = readJsonIfExists(path.join(reportsDir, 'ai-visibility-monitor.json'));
   const gscSubmitQueueText = readTextIfExists(path.join(reportsDir, 'gsc-submit-queue.txt'));
   const generativeAi = readJsonIfExists(path.join(REPORT_DIR, 'gsc-generative-ai.json'));
+  const snippetControls = readJsonIfExists(path.join(REPORT_DIR, 'snippet-controls-audit.json'));
   const postDeployKpi = readJsonIfExists(path.join(REPORT_DIR, 'post-deploy-kpi-plan.json'));
   const originality = readJsonIfExists(path.join(REPORT_DIR, 'originality-score.json'));
   const contentStrategy = readGscContentStrategyReport();
@@ -1480,6 +1580,13 @@ function buildUnifiedInsights() {
     insights.push(`GSC Generative AI: wykryto ${generativeAi.summary?.pages || 0} URL-i z AI impressions; te strony trzeba mierzyć osobno od klasycznego CTR.`);
   } else if (generativeAi && !generativeAi.parse_error) {
     insights.push('GSC Generative AI: brak eksportu albo brak dostępu w rollout; popraw-seo będzie gotowe, gdy raport pojawi się w Search Console.');
+  }
+  if (snippetControls && !snippetControls.parse_error) {
+    if (snippetControls.status === 'REVIEW') {
+      insights.push(`Snippet controls: ${snippetControls.summary?.review_count || 0} URL-i wymaga sprawdzenia pod noindex/nosnippet/max-snippet/data-nosnippet przed pracą AIO.`);
+    } else {
+      insights.push(`Snippet controls: PASS dla ${snippetControls.summary?.scanned_html || 0} plików HTML; brak restrykcji blokujących artykuły w snippetach.`);
+    }
   }
   if (postDeployKpi?.candidates?.length) {
     insights.push(`KPI po wdrożeniu: ${postDeployKpi.candidates.length} URL-i ma plan kontroli 7/14/28 dni z Web GSC, AI impressions i zaangażowaniem.`);
@@ -1553,6 +1660,12 @@ function buildUnifiedInsights() {
       summary: generativeAi.summary,
       top_pages: (generativeAi.pages || []).slice(0, 10),
       source_files: generativeAi.source_files || [],
+    } : null,
+    snippet_controls: snippetControls && !snippetControls.parse_error ? {
+      status: snippetControls.status,
+      summary: snippetControls.summary,
+      review: (snippetControls.review || []).slice(0, 12),
+      intentional_noindex: (snippetControls.intentional_noindex || []).slice(0, 12),
     } : null,
     post_deploy_kpi: postDeployKpi && !postDeployKpi.parse_error ? {
       status: postDeployKpi.status,
@@ -1752,6 +1865,140 @@ function writeAiVisibilityTestMarkdown(report, file) {
     lines.push('- zapisz: czy FitPo50 cytowane, URL, konkurenci, luka odpowiedzi.');
     lines.push('');
   });
+  writeText(file, lines.join('\n'));
+}
+
+function extractSnippetControls(html) {
+  const metaRules = [];
+  for (const match of html.matchAll(/<meta\b[^>]*(?:name=["'](robots|googlebot)["'][^>]*content=["']([^"']*)["']|content=["']([^"']*)["'][^>]*name=["'](robots|googlebot)["'])[^>]*>/gi)) {
+    metaRules.push({
+      name: String(match[1] || match[4] || '').toLowerCase(),
+      content: String(match[2] || match[3] || '').trim(),
+    });
+  }
+  const dataNosnippetCount = [...html.matchAll(/\bdata-nosnippet\b/gi)].length;
+  const maxSnippetRules = metaRules
+    .flatMap((rule) => [...rule.content.matchAll(/\bmax-snippet\s*:\s*(-?\d+)/gi)]
+      .map((item) => Number(item[1])));
+  return {
+    meta_rules: metaRules,
+    robots_content: metaRules.map((rule) => `${rule.name}:${rule.content}`),
+    has_noindex: metaRules.some((rule) => /\bnoindex\b/i.test(rule.content)),
+    has_nosnippet: metaRules.some((rule) => /\bnosnippet\b/i.test(rule.content)),
+    max_snippet_rules: maxSnippetRules,
+    restrictive_max_snippet_rules: maxSnippetRules.filter((value) => value !== -1),
+    data_nosnippet_count: dataNosnippetCount,
+  };
+}
+
+function classifySnippetControls(file, html, controls) {
+  const isArticle = /class=["'][^"']*article-page[^"']*["']|"@type"\s*:\s*"BlogPosting"/i.test(html);
+  const isSupport = SUPPORT_PAGES.has(file);
+  const intentionalNoindex = ['narzedzia.html', 'kalkulator-phenoage-wiek-fenotypowy.html', 'index1.html'].includes(file);
+  const issues = [];
+  if (controls.has_noindex && isArticle && !intentionalNoindex) {
+    issues.push('ARTICLE_NOINDEX');
+  }
+  if (controls.has_nosnippet && isArticle) {
+    issues.push('ARTICLE_NOSNIPPET_BLOCKS_AI_INPUT');
+  }
+  if (controls.restrictive_max_snippet_rules.length && isArticle) {
+    issues.push('ARTICLE_RESTRICTIVE_MAX_SNIPPET');
+  }
+  if (controls.data_nosnippet_count && isArticle) {
+    issues.push('ARTICLE_DATA_NOSNIPPET_REVIEW');
+  }
+  if (controls.has_noindex && !intentionalNoindex && !isArticle) {
+    issues.push('NON_ARTICLE_NOINDEX_REVIEW');
+  }
+  const status = issues.length ? 'REVIEW' : 'OK';
+  return {
+    file,
+    url: `${SITE_ORIGIN}/${file}`,
+    type: isArticle ? 'article' : (isSupport ? 'support' : 'other'),
+    status,
+    intentional_noindex: intentionalNoindex,
+    issues,
+    controls,
+    recommendation: issues.length
+      ? 'Sprawdź ręcznie przed edycją: dla AI Overviews / AI Mode strona musi być zaindeksowana i kwalifikować się do snippetu.'
+      : (intentionalNoindex ? 'Wygląda na celowy noindex strony technicznej; monitoruj, bez automatycznej zmiany.' : 'Brak restrykcyjnych kontroli snippetu wymagających reakcji.'),
+  };
+}
+
+function buildSnippetControlsAudit() {
+  const rows = findSeoHtmlFiles(ROOT)
+    .map((file) => {
+      const html = readTextIfExists(path.join(ROOT, file));
+      return classifySnippetControls(file, html, extractSnippetControls(html));
+    });
+  const review = rows.filter((row) => row.status === 'REVIEW');
+  const intentionalNoindex = rows.filter((row) => row.intentional_noindex && row.controls.has_noindex);
+  const report = {
+    generated_at: nowWarsawIso(),
+    status: review.length ? 'REVIEW' : 'PASS',
+    purpose: 'Automatyczny audyt oficjalnych kontroli podglądu Google: noindex, nosnippet, max-snippet i data-nosnippet.',
+    google_basis: [
+      'AI Overviews / AI Mode nie wymagają osobnej techniki GEO ani specjalnego schema.',
+      'Strona musi być zaindeksowana i kwalifikować się do snippetu, żeby mogła pojawić się jako supporting link.',
+      'nosnippet, data-nosnippet i restrykcyjny max-snippet mogą ograniczać użycie treści w AI Overviews / AI Mode.',
+    ],
+    summary: {
+      scanned_html: rows.length,
+      review_count: review.length,
+      intentional_noindex_count: intentionalNoindex.length,
+      article_noindex: review.filter((row) => row.issues.includes('ARTICLE_NOINDEX')).length,
+      article_nosnippet: review.filter((row) => row.issues.includes('ARTICLE_NOSNIPPET_BLOCKS_AI_INPUT')).length,
+      article_restrictive_max_snippet: review.filter((row) => row.issues.includes('ARTICLE_RESTRICTIVE_MAX_SNIPPET')).length,
+      article_data_nosnippet: review.filter((row) => row.issues.includes('ARTICLE_DATA_NOSNIPPET_REVIEW')).length,
+    },
+    review,
+    intentional_noindex: intentionalNoindex,
+    checked_files: rows.map((row) => ({
+      file: row.file,
+      type: row.type,
+      status: row.status,
+      controls: row.controls.robots_content,
+      data_nosnippet_count: row.controls.data_nosnippet_count,
+      max_snippet_rules: row.controls.max_snippet_rules,
+    })),
+    note: 'Audyt nie sprawdza nagłówków HTTP X-Robots-Tag z produkcji; to wymaga osobnej kontroli live/serwerowej.',
+  };
+  writeJson(path.join(REPORT_DIR, 'snippet-controls-audit.json'), report);
+  writeSnippetControlsMarkdown(report, path.join(REPORT_DIR, 'snippet-controls-audit.md'));
+  return report;
+}
+
+function writeSnippetControlsMarkdown(report, file) {
+  const lines = ['# Snippet Controls Audit', '', `Wygenerowano: ${report.generated_at}`, `Status: ${report.status}`, ''];
+  lines.push('## Podstawa Google');
+  report.google_basis.forEach((item) => lines.push(`- ${item}`));
+  lines.push('');
+  lines.push('## Podsumowanie');
+  Object.entries(report.summary).forEach(([key, value]) => lines.push(`- ${key}: ${value}`));
+  lines.push('');
+  if (report.review.length) {
+    lines.push('## Do Sprawdzenia');
+    report.review.forEach((item, index) => {
+      lines.push(`${index + 1}. ${item.file}`);
+      lines.push(`   - typ: ${item.type}`);
+      lines.push(`   - problemy: ${item.issues.join(', ')}`);
+      lines.push(`   - robots: ${item.controls.robots_content.join(' | ') || 'brak'}`);
+      lines.push(`   - max-snippet: ${item.controls.max_snippet_rules.join(', ') || 'brak'}; data-nosnippet: ${item.controls.data_nosnippet_count}`);
+      lines.push(`   - rekomendacja: ${item.recommendation}`);
+    });
+    lines.push('');
+  }
+  lines.push('## Celowe Noindex');
+  if (!report.intentional_noindex.length) {
+    lines.push('- brak');
+  } else {
+    report.intentional_noindex.forEach((item) => {
+      lines.push(`- ${item.file}: ${item.controls.robots_content.join(' | ')}`);
+    });
+  }
+  lines.push('');
+  lines.push(`Uwaga: ${report.note}`);
   writeText(file, lines.join('\n'));
 }
 
@@ -2354,6 +2601,7 @@ function buildPoprawSeo() {
   const structuredScore = buildStructuredScore();
   const quickAnswerScore = buildQuickAnswerScore();
   const generativeAiGsc = buildGenerativeAiGscReport();
+  const snippetControls = buildSnippetControlsAudit();
   const originalityScore = buildOriginalityScore();
   const postDeployKpi = buildPostDeploymentKpiPlan();
   const topicalMap = buildTopicalMap();
@@ -2377,6 +2625,7 @@ function buildPoprawSeo() {
       'Policzono Structured Data Completeness Score.',
       'Policzono Quick Answer Quality Score.',
       'Sprawdzono eksport GSC Generative AI dla AI Overviews / AI Mode / Discover, jeśli jest dostępny.',
+      'Sprawdzono snippet controls: noindex, nosnippet, max-snippet i data-nosnippet pod kwalifikację do snippetu Google.',
       'Zbudowano plan KPI po wdrożeniu: Web GSC, AI impressions i zaangażowanie.',
       'Policzono Originality And Own Data Score: własne przykłady, progi, źródła, assety i warunki bezpieczeństwa.',
       'Zbudowano Topical Authority Map.',
@@ -2408,12 +2657,14 @@ function buildPoprawSeo() {
       ['structured_data_score', 'structured-data-score.md'],
       ['quick_answer_score', 'quick-answer-score.md'],
       ['gsc_generative_ai', 'gsc-generative-ai.md'],
+      ['snippet_controls_audit', 'snippet-controls-audit.md'],
       ['post_deploy_kpi_plan', 'post-deploy-kpi-plan.md'],
       ['originality_score', 'originality-score.md'],
       ['topical_authority_map', 'topical-authority-map.md'],
       ['llms_check', 'llms-check.md'],
       ['perplexity_monitor', 'perplexity-monitor.md'],
       ['autopilot_plan', 'autopilot-plan.md'],
+      ['decision_sheet', 'popraw-seo-decyzje.md'],
       ['unified_insights', 'popraw-seo-insights.md'],
       ['promising_pages', 'popraw-seo-rokuje.md'],
       ['seo_work_history', 'popraw-seo-historia.md'],
@@ -2436,6 +2687,8 @@ function buildPoprawSeo() {
       quick_answer_average_score: quickAnswerScore.average_score,
       gsc_generative_ai_status: generativeAiGsc.status,
       gsc_generative_ai_pages: generativeAiGsc.summary.pages,
+      snippet_controls_status: snippetControls.status,
+      snippet_controls_review: snippetControls.summary.review_count,
       post_deploy_kpi_candidates: postDeployKpi.candidates.length,
       originality_average_score: originalityScore.average_score,
       topical_clusters: topicalMap.topics.length,
@@ -2465,6 +2718,7 @@ function buildPoprawSeo() {
   writeCannibalizationMarkdown(unifiedInsights.cannibalization_map, path.join(REPORT_DIR, 'popraw-seo-kanibalizacja.md'));
   writeJson(path.join(REPORT_DIR, 'popraw-seo.json'), command);
   writePoprawSeoMarkdown(command, path.join(REPORT_DIR, 'popraw-seo.md'));
+  writePoprawSeoDecisionMarkdown(command, path.join(REPORT_DIR, 'popraw-seo-decyzje.md'));
   return command;
 }
 
@@ -2534,6 +2788,65 @@ function appendApprovalAutomationMarkdown(lines, item) {
   if (guard) {
     lines.push(`   - strażnik linków: ${guard.status}; przeskanowano ${guard.scanned}, dopuszczono ${guard.accepted}, odrzucono ${guard.rejected.length}`);
   }
+}
+
+function formatDecisionDraftLines(item) {
+  const lines = [];
+  if (item.current_title || item.proposed_title) {
+    lines.push(`   - obecny title: ${item.current_title || 'MISSING'}`);
+    lines.push(`   - proponowany title: ${item.proposed_title || 'INSUFFICIENT_DATA'}`);
+  }
+  if (item.current_meta_description || item.proposed_meta_description) {
+    lines.push(`   - obecna meta: ${item.current_meta_description || 'MISSING'}`);
+    lines.push(`   - proponowana meta: ${item.proposed_meta_description || 'INSUFFICIENT_DATA'}`);
+  }
+  const link = (item.internal_link_suggestions || [])[0];
+  if (link) {
+    lines.push(`   - proponowany link: ${link.from} -> ${item.file}, anchor: "${link.anchor || 'INSUFFICIENT_DATA'}"`);
+  }
+  if (!lines.length) {
+    lines.push('   - draft: INSUFFICIENT_DATA; najpierw trzeba przygotować konkretny tekst w rozmowie.');
+  }
+  return lines;
+}
+
+function writePoprawSeoDecisionMarkdown(command, file) {
+  const approval = command.approval_wave || {};
+  const groups = [
+    ['BOOST', approval.boost || []],
+    ['ROKUJE', approval.promising || []],
+    ['NAPRAWA', approval.repair || []],
+  ];
+  const lines = ['# Popraw SEO — Decyzje', '', `Wygenerowano: ${command.generated_at}`, '', 'Status: AWAITING_USER_APPROVAL', ''];
+  lines.push('Wybierz konkretne ID. Agent może edytować HTML dopiero po Twojej akceptacji.');
+  lines.push('');
+  for (const [kind, items] of groups) {
+    lines.push(`## ${kind}`);
+    if (!items.length) {
+      lines.push('- brak kandydatów w tym koszyku');
+      lines.push('');
+      continue;
+    }
+    items.slice(0, 5).forEach((item) => {
+      lines.push(`### ${item.id}: ${item.file}`);
+      lines.push(`- URL: ${item.url}`);
+      lines.push(`- query: ${item.gsc?.query || 'brak'}; impr ${item.gsc?.impressions || 0}; klik ${item.gsc?.clicks || 0}; CTR ${item.gsc?.ctr || 0}%; poz ${item.gsc?.position || 0}`);
+      lines.push(`- powód: ${item.reason}`);
+      formatDecisionDraftLines(item).forEach((line) => lines.push(line));
+      lines.push(`- aby wdrożyć: \`popraw ${item.id}\``);
+      lines.push('');
+    });
+  }
+  const queue = command.unified_insights?.gsc_after_change_queue;
+  if (queue?.submit_targets?.length) {
+    lines.push('## GSC Po Zmianach');
+    queue.submit_targets.slice(0, 20).forEach((url) => lines.push(`- ${url}`));
+    lines.push('');
+  }
+  lines.push('## Zasady');
+  lines.push('- Brak draftu oznacza `INSUFFICIENT_DATA`, nie automatyczne dopisywanie ogólników.');
+  lines.push('- Po akceptacji ID agent aktualizuje tylko wskazane URL-e, dateModified, sitemap, PDF/mirror i walidację.');
+  writeText(file, lines.join('\n'));
 }
 
 function writePoprawSeoMarkdown(command, file) {
@@ -2919,6 +3232,20 @@ function writePoprawSeoInsightsMarkdown(insights, file) {
     lines.push('');
   }
 
+  if (insights.snippet_controls) {
+    const snippet = insights.snippet_controls;
+    lines.push('## Snippet Controls');
+    lines.push(`- status: ${snippet.status}`);
+    lines.push(`- przeskanowane HTML: ${snippet.summary?.scanned_html || 0}; do sprawdzenia: ${snippet.summary?.review_count || 0}; celowe noindex: ${snippet.summary?.intentional_noindex_count || 0}`);
+    (snippet.review || []).slice(0, 8).forEach((item, idx) => {
+      lines.push(`${idx + 1}. ${item.file}`);
+      lines.push(`   - problemy: ${item.issues.join(', ')}`);
+      lines.push(`   - robots: ${item.controls.robots_content.join(' | ') || 'brak'}`);
+    });
+    if (!(snippet.review || []).length) lines.push('- Brak restrykcyjnych kontroli snippetu wymagających reakcji na artykułach.');
+    lines.push('');
+  }
+
   if (insights.post_deploy_kpi?.candidates?.length) {
     lines.push('## KPI Po Wdrożeniu 7/14/28');
     insights.post_deploy_kpi.candidates.slice(0, 12).forEach((item, idx) => {
@@ -3119,6 +3446,7 @@ function buildFullAudit(flags) {
     ['structured-score', () => buildStructuredScore()],
     ['quick-answer-score', () => buildQuickAnswerScore()],
     ['gsc-generative-ai', () => buildGenerativeAiGscReport()],
+    ['snippet-controls', () => buildSnippetControlsAudit()],
     ['post-deploy-kpi', () => buildPostDeploymentKpiPlan()],
     ['originality-score', () => buildOriginalityScore()],
     ['topical-map', () => buildTopicalMap()],
@@ -3162,6 +3490,7 @@ function runCommand(command, flags) {
   if (command === 'structured-score') return buildStructuredScore();
   if (command === 'quick-answer-score') return buildQuickAnswerScore();
   if (command === 'gsc-generative-ai') return buildGenerativeAiGscReport();
+  if (command === 'snippet-controls') return buildSnippetControlsAudit();
   if (command === 'post-deploy-kpi') return buildPostDeploymentKpiPlan();
   if (command === 'originality-score') return buildOriginalityScore();
   if (command === 'topical-map') return buildTopicalMap();
@@ -3198,6 +3527,7 @@ Usage:
   node scripts/growth-tool.js structured-score
   node scripts/growth-tool.js quick-answer-score
   node scripts/growth-tool.js gsc-generative-ai
+  node scripts/growth-tool.js snippet-controls
   node scripts/growth-tool.js post-deploy-kpi
   node scripts/growth-tool.js originality-score
   node scripts/growth-tool.js topical-map
