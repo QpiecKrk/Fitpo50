@@ -7,9 +7,9 @@
   "quality_gate": "content_sources_seo_aeo_geo_aio_faq_schema_links_media_pdf_dates_sitemap_site_validators",
   "totals": {
     "article_inventory": 96,
-    "repaired_articles": 24,
-    "pending_articles": 72,
-    "pending_batches": 7,
+    "repaired_articles": 34,
+    "pending_articles": 62,
+    "pending_batches": 6,
     "separately_repaired_non_article_pages": 1
   },
   "separately_repaired_non_article_pages": [
@@ -39,7 +39,17 @@
     "szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
     "bledy-50.html",
     "dyskopatia-po-50.html",
-    "wino-i-miesnie-po-50.html"
+    "wino-i-miesnie-po-50.html",
+    "kreatyna-po-50-tce-kompletny-przewodnik.html",
+    "motywacja-po-50.html",
+    "silownia-dla-ludzi.html",
+    "healthspan-nie-lifespan-po-50.html",
+    "hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
+    "ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
+    "jedz-wiecej-po-50.html",
+    "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+    "mira-ai-agent-sor-lepszy-od-lekarzy.html",
+    "waty-apple-watch-moc-zdrowie-po-50.html"
   ],
   "batches": [
     {
@@ -420,7 +430,8 @@
     },
     {
       "id": 2,
-      "status": "PENDING",
+      "status": "COMPLETE",
+      "completed_at": "2026-08-23T18:30:00Z",
       "article_count": 10,
       "articles": [
         {

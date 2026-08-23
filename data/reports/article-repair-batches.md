@@ -1,9 +1,9 @@
 # Audyt naprawczy artykułów FitPo50 — paczki bez GSC
 
 - Właściwe artykuły w bibliotece: **96**
-- Artykuły już naprawione pełnym procesem: **24**
-- Artykuły oczekujące na naprawę: **72**
-- Paczki oczekujące: **7**
+- Artykuły już naprawione pełnym procesem: **34**
+- Artykuły oczekujące na naprawę: **62**
+- Paczki oczekujące: **6**
 - Osobno naprawiona strona centrum: `centrum-nadcisnienia-po-50.html`
 
 Komenda wykonawcza: `napraw paczkę N`. Numeracja jest stała i nie może być później przeliczana. Po ukończeniu paczki zmienia się jej status, ale skład pozostaje zapisany.
@@ -38,6 +38,16 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 - `bledy-50.html`
 - `dyskopatia-po-50.html`
 - `wino-i-miesnie-po-50.html`
+- `kreatyna-po-50-tce-kompletny-przewodnik.html`
+- `motywacja-po-50.html`
+- `silownia-dla-ludzi.html`
+- `healthspan-nie-lifespan-po-50.html`
+- `hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html`
+- `ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html`
+- `jedz-wiecej-po-50.html`
+- `post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html`
+- `mira-ai-agent-sor-lepszy-od-lekarzy.html`
+- `waty-apple-watch-moc-zdrowie-po-50.html`
 
 ## Paczka 1 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
@@ -54,7 +64,7 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 | 9 | `dyskopatia-po-50.html` | 78 | naprawić title/H1/headline i kontrakt metadanych; uzupełnić wymiary obrazów; dodać prawidłowe fallbacki JPG/PNG; zweryfikować obietnice leczenia lub odmładzania; sprawdzić sformułowania absolutne w kontekście źródeł |
 | 10 | `wino-i-miesnie-po-50.html` | 77 | uzupełnić i zweryfikować minimum 4 źródła; uzupełnić wymiary obrazów; dodać prawidłowe fallbacki JPG/PNG; sprawdzić sformułowania absolutne w kontekście źródeł; sprawdzić odsetki i terminy w badaniach źródłowych |
 
-## Paczka 2 — 10 artykułów
+## Paczka 2 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
 | # | Artykuł | Wynik audytu | Najważniejsze obszary naprawy |
 |---:|---|---:|---|

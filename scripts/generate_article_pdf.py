@@ -133,6 +133,11 @@ def add_image(
 
 
 def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir: Path) -> None:
+    # Przyciski i kanały udostępniania są użyteczne w HTML, ale w statycznym PDF
+    # tworzą długi, nieaktywny blok i wypychają źródła na kolejną stronę.
+    if "share-article-section" in (node.get("class") or []):
+        return
+
     if node.name == "figure":
         img = node.find("img")
         if not img:
