@@ -41,6 +41,7 @@ function parseArgs(argv) {
     workDir: DEFAULT_WORK_DIR,
     preferGithub: true,
     cleanupRepoArtifacts: String(process.env.GSC_CLEAN_REPO_ARTIFACTS || '').toLowerCase() === 'true',
+    skipPoprawSeo: false,
   };
   for (let i = 0; i < argv.length; i += 1) {
     const t = String(argv[i] || '').trim();
@@ -69,6 +70,9 @@ function parseArgs(argv) {
     }
     if (t === '--cleanup-repo-artifacts') {
       out.cleanupRepoArtifacts = true;
+    }
+    if (t === '--skip-popraw-seo') {
+      out.skipPoprawSeo = true;
     }
   }
   return out;
@@ -305,6 +309,20 @@ function tryGenerateCsvFromApi(workDir) {
     }
   }
 
+  if (apiReport && apiReport.status !== 'ok') {
+    if (apiReport.status === 'auth_failed') {
+      const err = String(apiReport.error || '').toLowerCase();
+      if (err.includes('invalid_grant') || err.includes('token has been expired') || err.includes('token has been expired or revoked')) {
+        return { ok: false, reason: buildRefreshTokenInstructions() };
+      }
+      return { ok: false, reason: `AUTH_FAILED: brak autoryzacji GSC API (${String(apiReport.error || 'brak szczegolow')}).` };
+    }
+    if (apiReport.status === 'missing_api_config') {
+      return { ok: false, reason: 'MISSING_API_CONFIG: brak konfiguracji OAuth (GSC_OAUTH_CLIENT_ID / GSC_OAUTH_CLIENT_SECRET / GSC_OAUTH_REFRESH_TOKEN / GSC_SITE_URL).' };
+    }
+    return { ok: false, reason: `GSC API status=${apiReport.status}; stare CSV nie zostały uznane za świeży wynik.` };
+  }
+
   const typed = collectCsvByType(walkFiles(workDir));
   if (!haveAllThree(typed)) {
     if (apiReport && apiReport.status === 'auth_failed') {
@@ -479,6 +497,20 @@ function runSeoAioWaveProposal(workDir) {
   }
 }
 
+function runPoprawSeo(workDir, downloadsDir) {
+  const reportDir = process.env.FITPO50_GROWTH_REPORT_DIR || path.join(downloadsDir, 'fitpo50-growth-reports');
+  const res = run('node', ['scripts/growth-tool.js', 'popraw-seo'], {
+    stdio: 'inherit',
+    env: {
+      ...process.env,
+      GSC_WORK_DIR: workDir,
+      FITPO50_GROWTH_REPORT_DIR: reportDir,
+    },
+  });
+  if (res.status !== 0) throw new Error('popraw-seo failed.');
+  console.log(`[GSC-AUTO] Wspólny raport popraw-seo: ${reportDir}`);
+}
+
 async function main() {
   loadLocalEnvFromHome();
   const args = parseArgs(process.argv.slice(2));
@@ -494,6 +526,7 @@ async function main() {
       runPriorityMap(inputDir, inputDir);
       runSeoAioMachine(inputDir, inputDir);
       runSeoAioWaveProposal(inputDir);
+      if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);
       return;
     }
     console.log(`[GSC-AUTO] GSC API pominięte: ${apiRes.reason}`);
@@ -543,6 +576,7 @@ async function main() {
     runPriorityMap(inputDir, inputDir);
     runSeoAioMachine(inputDir, inputDir);
     runSeoAioWaveProposal(inputDir);
+    if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);
     return;
   } catch (freshErr) {
     const inputDir = path.resolve(args.workDir);

@@ -79,7 +79,6 @@ function parseNumber(input) {
   const withoutPercent = raw.replace(/%/g, '').trim();
   const normalized = withoutPercent
     .replace(/\s+/g, '')
-    .replace(/\.(?=\d{3}(?:\D|$))/g, '')
     .replace(',', '.');
   const n = Number(normalized);
   if (!Number.isFinite(n)) return 0;
@@ -288,14 +287,14 @@ function opportunityScore(row, ctrMedian) {
 function inferCategoryAndTitle(query) {
   const q = String(query || '').toLowerCase();
   const rules = [
-    { category: 'jedzenie', re: /(dieta|bialko|białko|kreatyn|cholesterol|apob|apoa|glukoza|insulina|jedzen|odzyw|odżyw)/, title: `Co jeść po 50? ${query}` },
-    { category: 'ruch', re: /(trening|podciagn|podciąg|spacer|bieg|cwic|ćwic|silow|siła|mobiln)/, title: `Ruch po 50: ${query} — plan krok po kroku` },
-    { category: 'zdrowie', re: /(kortyzol|rtg|usg|badanie|cisnienie|ciśnienie|serce|horm|sen|stres|oponka)/, title: `Zdrowie po 50: ${query} — kiedy działa i dla kogo` },
-    { category: 'mity', re: /(mit|mity|fakt|ściema|sciema|nie działa|nie dziala|obal|obnaż|obnaz|prawda czy|czy to prawda)/, title: `Mit czy fakt po 50: ${query}` },
-    { category: 'ciekawe', re: /(wiek biologic|epigen|sakad|longevity|nauk|biohack)/, title: `${query}: co mówi nauka po 50?` },
+    { category: 'jedzenie', re: /(dieta|bialko|białko|kreatyn|cholesterol|apob|apoa|glukoza|insulina|jedzen|odzyw|odżyw)/ },
+    { category: 'ruch', re: /(trening|podciagn|podciąg|spacer|bieg|cwic|ćwic|silow|siła|mobiln)/ },
+    { category: 'zdrowie', re: /(kortyzol|rtg|usg|badanie|cisnienie|ciśnienie|serce|horm|sen|stres|oponka)/ },
+    { category: 'mity', re: /(mit|mity|fakt|ściema|sciema|nie działa|nie dziala|obal|obnaż|obnaz|prawda czy|czy to prawda)/ },
+    { category: 'ciekawe', re: /(wiek biologic|epigen|sakad|longevity|nauk|biohack)/ },
   ];
   const matched = rules.find((r) => r.re.test(q));
-  return matched || { category: 'ciekawe', title: `${query}: praktyczne wyjaśnienie po 50` };
+  return matched || { category: 'ciekawe' };
 }
 
 function pickLatestByType(filesMeta, type) {
@@ -308,18 +307,6 @@ function toDateLabel(iso) {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
   return d.toISOString().slice(0, 10);
-}
-
-function ensureTitleLimit(title) {
-  const max = 65;
-  if (title.length <= max) return title;
-  return `${title.slice(0, max - 1).trim()}…`;
-}
-
-function ensureDescLimit(desc) {
-  const max = 160;
-  if (desc.length <= max) return desc;
-  return `${desc.slice(0, max - 1).trim()}…`;
 }
 
 function safeUrlToPath(url) {
@@ -356,8 +343,6 @@ function buildArticleDeltaPlan(report, qpRows) {
 
     const pageStats = pageOpp.find((p) => p.page === targetUrl);
     const score = Number(item.opportunity_score || 0);
-    const title = ensureTitleLimit(`${query} po 50: co działa i jak zacząć | FitPo50`);
-    const meta = ensureDescLimit(`Sprawdź ${query} po 50. Konkretne kroki, najczęstsze błędy i praktyczny plan wdrożenia oparty na danych oraz realnej intencji użytkownika.`);
     const filePath = safeUrlToPath(targetUrl);
 
     plans.push({
@@ -371,26 +356,9 @@ function buildArticleDeltaPlan(report, qpRows) {
         ctr: Number(Number(pageStats?.ctr || item.ctr || 0).toFixed(2)),
         position: Number(Number(pageStats?.position || item.position || 0).toFixed(2)),
       },
-      delta: {
-        new_title: title,
-        new_meta_description: meta,
-        h2_suggestions: [
-          `Co dokładnie oznacza "${query}" po 50?`,
-          `Jak zacząć krok po kroku bez błędów?`,
-          `Najczęstsze pytania: ${query} a bezpieczeństwo`,
-        ],
-        faq_suggestions: [
-          `Czy ${query} po 50 jest bezpieczne?`,
-          `Ile czasu potrzeba, żeby zobaczyć efekty?`,
-          `Jakich błędów unikać na początku?`,
-          `Kiedy skonsultować temat z lekarzem?`,
-        ],
-        internal_links_plan: [
-          { from: 'porady.html', anchor: `${query} po 50` },
-          { from: 'zdrowie.html', anchor: `praktyczny przewodnik: ${query}` },
-          { from: 'index.html', anchor: `nowy poradnik: ${query}` },
-        ],
-      },
+      editorial_status: 'REQUIRES_MANUAL_ON_PAGE_REVIEW',
+      delta: null,
+      next_step: 'Przeczytaj docelowy artykuł i źródła, a następnie przygotuj konkretny title/meta/H2/FAQ dopiero po zatwierdzeniu ID w popraw-seo.',
       qa_gate: {
         title_max_65: 'REQUIRED',
         description_max_160: 'REQUIRED',
@@ -409,7 +377,7 @@ function buildArticleDeltaPlan(report, qpRows) {
   return plans.slice(0, 10);
 }
 
-function buildAeoOpportunities(report) {
+function buildAeoOpportunities(report, qpRows) {
   const byUrl = new Map();
   const urlRows = Array.isArray(report?.opportunities?.page_opportunities) ? report.opportunities.page_opportunities : [];
   const ctrRows = Array.isArray(report?.opportunities?.ctr_problems) ? report.opportunities.ctr_problems : [];
@@ -430,25 +398,29 @@ function buildAeoOpportunities(report) {
     });
   }
 
-  for (const row of ctrRows) {
-    const q = String(row.query || '').trim();
-    if (!q) continue;
-    const candidate = [...byUrl.values()].find((u) => u.supporting_queries.length < 6);
-    if (!candidate) continue;
-    candidate.supporting_queries.push(q);
-    candidate.opportunity_score = Math.max(candidate.opportunity_score, Number(row.opportunity_score || 0));
-    if (!candidate.reasons.includes('ctr_gap')) candidate.reasons.push('ctr_gap');
+  const queryTarget = new Map();
+  for (const row of qpRows || []) {
+    const query = String(row.query || '').trim().toLowerCase();
+    const page = String(row.page || '').trim();
+    if (!query || !page) continue;
+    const current = queryTarget.get(query);
+    if (!current || Number(row.impressions || 0) > Number(current.impressions || 0)) queryTarget.set(query, row);
   }
 
-  for (const row of queryRows) {
+  const attachQuery = (row, reason) => {
     const q = String(row.query || '').trim();
-    if (!q) continue;
-    const candidate = [...byUrl.values()].find((u) => u.supporting_queries.length < 6);
-    if (!candidate) continue;
+    if (!q) return;
+    const target = queryTarget.get(q.toLowerCase());
+    const candidate = target ? byUrl.get(String(target.page || '').trim()) : null;
+    if (!candidate || candidate.supporting_queries.length >= 6) return;
     candidate.supporting_queries.push(q);
     candidate.opportunity_score = Math.max(candidate.opportunity_score, Number(row.opportunity_score || 0));
-    if (!candidate.reasons.includes('zero_click')) candidate.reasons.push('zero_click');
-  }
+    if (!candidate.reasons.includes(reason)) candidate.reasons.push(reason);
+  };
+
+  for (const row of ctrRows) attachQuery(row, 'ctr_gap');
+
+  for (const row of queryRows) attachQuery(row, 'zero_click');
 
   const top10 = [...byUrl.values()]
     .map((item) => {
@@ -532,11 +504,17 @@ function writeOutputs(report, outputJson, outputMd) {
     lines.push(`- duplicates (query+page): ${report.data_quality.duplicate_query_page_pairs}`);
     lines.push(`- anomalies: ctr>100=${report.data_quality.anomalies_ctr_over_100}, position<=0=${report.data_quality.anomalies_position_non_positive}`);
     lines.push('');
-    lines.push('## Podsumowanie');
+    lines.push('## Podsumowanie — główna warstwa');
+    lines.push(`- Źródło głównego wyniku: **${report.summary.primary_layer === 'property' ? 'cała usługa GSC (bez wymiarów)' : 'suma stron (brak agregatu całej usługi)' }**`);
     lines.push(`- Kliknięcia: **${Math.round(report.summary.total_clicks)}**`);
     lines.push(`- Wyświetlenia: **${Math.round(report.summary.total_impressions)}**`);
     lines.push(`- Średni CTR: **${report.summary.avg_ctr.toFixed(2)}%**`);
     lines.push(`- Średnia pozycja: **${report.summary.avg_position.toFixed(2)}**`);
+    lines.push('');
+    lines.push('## Warstwy pomiaru GSC');
+    lines.push(`- Cała usługa: ${report.summary.layers.property.status === 'PRIMARY' ? `kliknięcia ${Math.round(report.summary.layers.property.current.total_clicks)}, wyświetlenia ${Math.round(report.summary.layers.property.current.total_impressions)}` : 'INSUFFICIENT_DATA'}.`);
+    lines.push(`- Strony: kliknięcia ${Math.round(report.summary.layers.pages.current.total_clicks)}, wyświetlenia ${Math.round(report.summary.layers.pages.current.total_impressions)}.`);
+    lines.push(`- Ujawnione zapytania: kliknięcia ${Math.round(report.summary.layers.disclosed_queries.current.total_clicks)}, wyświetlenia ${Math.round(report.summary.layers.disclosed_queries.current.total_impressions)} — niepełne z powodu anonimizacji zapytań.`);
     lines.push('');
     lines.push('## Priorytet A: P1-3 i 0 klików');
     if (!report.opportunities.top3_zero_click.length) {
@@ -572,8 +550,8 @@ function writeOutputs(report, outputJson, outputMd) {
     lines.push('');
     lines.push('## Propozycje nowych artykułów (1/kategoria)');
     Object.entries(report.content_gaps || {}).forEach(([cat, item]) => {
-      if (!item || item.status === 'INSUFFICIENT_DATA') {
-        lines.push(`- ${cat}: INSUFFICIENT_DATA`);
+      if (!item || item.status !== 'OK') {
+        lines.push(`- ${cat}: ${item?.status || 'INSUFFICIENT_DATA'}${item?.query ? ` — query "${item.query}", najpierw sprawdź istniejący URL ${item.target_url || '(brak mapowania)'}` : ''}`);
       } else {
         lines.push(`- ${cat}: ${item.title} (query: "${item.query}", score: ${item.score})`);
       }
@@ -633,10 +611,8 @@ function writeOutputs(report, outputJson, outputMd) {
         lines.push(`   - query: ${plan.main_query}`);
         lines.push(`   - score: ${plan.opportunity_score}`);
         lines.push(`   - file: ${plan.file_path}`);
-        lines.push(`   - title: ${plan.delta.new_title}`);
-        lines.push(`   - meta: ${plan.delta.new_meta_description}`);
-        lines.push(`   - H2: ${plan.delta.h2_suggestions.join(' | ')}`);
-        lines.push(`   - FAQ: ${plan.delta.faq_suggestions.join(' | ')}`);
+        lines.push(`   - status: ${plan.editorial_status}`);
+        lines.push(`   - następny krok: ${plan.next_step}`);
       });
     }
   }
@@ -831,11 +807,32 @@ function main() {
   const pageRows = latestPages.rawRows.map(mapRow).filter((r) => r.page);
   const qpRows = latestQueryPages ? latestQueryPages.rawRows.map(mapRow).filter((r) => r.query && r.page) : [];
 
-  const totalClicks = queryRows.reduce((s, r) => s + r.clicks, 0);
-  const totalImpressions = queryRows.reduce((s, r) => s + r.impressions, 0);
-  const avgCtr = totalImpressions > 0 ? (totalClicks / totalImpressions) * 100 : 0;
-  const weightedPosNum = queryRows.reduce((s, r) => s + (r.position * r.impressions), 0);
-  const avgPosition = totalImpressions > 0 ? weightedPosNum / totalImpressions : 0;
+  const summarize = (rows) => {
+    const totalClicks = rows.reduce((sum, row) => sum + row.clicks, 0);
+    const totalImpressions = rows.reduce((sum, row) => sum + row.impressions, 0);
+    const weightedPosition = rows.reduce((sum, row) => sum + (row.position * row.impressions), 0);
+    return {
+      total_clicks: totalClicks,
+      total_impressions: totalImpressions,
+      avg_ctr: totalImpressions > 0 ? (totalClicks / totalImpressions) * 100 : 0,
+      avg_position: totalImpressions > 0 ? weightedPosition / totalImpressions : 0,
+    };
+  };
+  const querySummary = summarize(queryRows);
+  const pageSummary = summarize(pageRows);
+  let apiProperty = null;
+  const apiReportPath = path.join(args.inputDir, 'gsc-weekly-report-api.json');
+  if (fs.existsSync(apiReportPath)) {
+    try {
+      const apiReport = JSON.parse(fs.readFileSync(apiReportPath, 'utf8'));
+      apiProperty = apiReport?.summary?.primary_layer === 'property'
+        ? apiReport?.summary?.layers?.property || null
+        : null;
+    } catch (err) {
+      apiProperty = null;
+    }
+  }
+  const primarySummary = apiProperty?.current || pageSummary;
 
   const top3Zero = queryRows
     .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions >= 20)
@@ -917,11 +914,17 @@ function main() {
     anomalies_position_non_positive: anomaliesPos,
   };
   report.summary = {
-    total_clicks: totalClicks,
-    total_impressions: totalImpressions,
-    avg_ctr: avgCtr,
-    avg_position: avgPosition,
+    total_clicks: primarySummary.total_clicks,
+    total_impressions: primarySummary.total_impressions,
+    avg_ctr: primarySummary.avg_ctr,
+    avg_position: primarySummary.avg_position,
     ctr_pool_median: poolMedianCtr,
+    primary_layer: apiProperty?.current ? 'property' : 'pages',
+    layers: {
+      property: apiProperty || { current: null, previous: null, status: 'INSUFFICIENT_DATA' },
+      pages: { current: pageSummary, status: 'GROUPED_BY_PAGE' },
+      disclosed_queries: { current: querySummary, status: 'PRIVACY_LIMITED', privacy_limited: true },
+    },
   };
   const enrichedTop10 = top10Zero.map((r) => ({ ...r, opportunity_score: opportunityScore(r, poolMedianCtr) }))
     .sort((a, b) => b.opportunity_score - a.opportunity_score);
@@ -973,11 +976,13 @@ function main() {
       return;
     }
     usedQueries.add(hit.query);
-    const inferred = inferCategoryAndTitle(hit.query);
+    const target = qpRows
+      .filter((row) => String(row.query || '').trim().toLowerCase() === String(hit.query || '').trim().toLowerCase())
+      .sort((a, b) => Number(b.impressions || 0) - Number(a.impressions || 0))[0];
     contentGaps[cat] = {
-      status: 'OK',
-      title: inferred.title,
+      status: 'EXISTING_URL_REVIEW_REQUIRED',
       query: hit.query,
+      target_url: target?.page || '',
       score: hit.opportunity_score,
       position: Number(hit.position.toFixed(2)),
       impressions: Math.round(hit.impressions),
@@ -987,7 +992,7 @@ function main() {
   report.article_delta_plan = buildArticleDeltaPlan(report, qpRows);
   report.ai_referrer_monitor = buildAiReferrerMonitor(queryRows, args.inputDir);
 
-  const aeoReport = buildAeoOpportunities(report);
+  const aeoReport = buildAeoOpportunities(report, qpRows);
   writeAeoOutputs(aeoReport, aeoOutputs.outputJson, aeoOutputs.outputMd);
   report.aeo_opportunity_bot = {
     status: aeoReport.status,

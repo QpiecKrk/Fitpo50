@@ -177,6 +177,8 @@
 }
 
 .medical-disclaimer {
+  break-inside: avoid;
+  page-break-inside: avoid;
   margin-top: var(--space-10);
   border-top: 1px solid var(--color-border);
   padding-top: var(--space-5);

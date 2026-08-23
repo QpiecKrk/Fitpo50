@@ -62,7 +62,7 @@
     "preview:hubs": "node scripts/build-preview-hubs.js",
     "growth:link-assets": "node scripts/growth-tool.js link-assets",
     "growth:autopilot": "node scripts/growth-tool.js autopilot",
-    "popraw-seo": "node scripts/growth-tool.js popraw-seo",
+    "popraw-seo": "node scripts/gsc-auto-report.js",
     "popraw-seo:gsc-local": "bash scripts/with-local-env.sh node scripts/gsc-weekly-api-report.js && npm run gsc:priority-map -- --input-dir data/gsc --output-dir data/reports && npm run seo:aio:machine -- --input-dir data/reports --output-dir data/reports && npm run popraw-seo",
     "growth:apply:dry": "node scripts/growth-tool.js apply",
     "growth:apply": "node scripts/growth-tool.js apply --write",

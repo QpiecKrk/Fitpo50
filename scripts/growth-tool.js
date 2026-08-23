@@ -226,7 +226,21 @@ function readGscContentStrategyReport() {
     };
   }
   const markdown = readTextIfExists(file);
-  const oldOpportunity = parseStrategyTableRows(markdown, /^##\s+5\.\s+Opportunity Leaderboard/i, (cells) => {
+  const oldOpportunity = parseStrategyTableRows(markdown, /^##\s+(?:\d+\.\s+)?Opportunity Leaderboard/i, (cells) => {
+    if (cells.length === 6) {
+      return {
+        rank: Number(cells[0]),
+        file: strategyUrlToFile(cells[1]),
+        query: '',
+        impressions: toNumber(cells[3]),
+        clicks: 0,
+        ctr: parsePercentValue(cells[4]),
+        position: toNumber(cells[5]),
+        score: toNumber(cells[2]),
+        priority: 'GSC_OPPORTUNITY',
+        source_section: 'Opportunity Leaderboard',
+      };
+    }
     if (cells.length < 7) return null;
     return {
       rank: Number(cells[0]),
@@ -241,7 +255,7 @@ function readGscContentStrategyReport() {
       source_section: 'Opportunity Leaderboard',
     };
   });
-  const aeoOpportunity = parseStrategyTableRows(markdown, /^##\s+4\.\s+AEO Opportunity Bot/i, (cells) => {
+  const aeoOpportunity = parseStrategyTableRows(markdown, /^##\s+(?:\d+\.\s+)?AEO Opportunity Bot/i, (cells) => {
     if (cells.length < 8) return null;
     return {
       rank: Number(cells[0]),
@@ -258,7 +272,7 @@ function readGscContentStrategyReport() {
   });
   const opportunity = oldOpportunity.length ? oldOpportunity : aeoOpportunity;
   const quickWins = [];
-  const quickLines = extractMarkdownSection(markdown, /^##\s+6\.\s+Quick Wins/i);
+  const quickLines = extractMarkdownSection(markdown, /^##\s+(?:\d+\.\s+)?Quick Wins/i);
   for (let i = 0; i < quickLines.length; i += 1) {
     const match = quickLines[i].match(/^\d+\.\s+\*\*`?\/?([^`*]+)`?\*\*\s+\(([^)]+)\)/);
     if (!match) continue;
@@ -271,7 +285,7 @@ function readGscContentStrategyReport() {
   }
   const actionCards = [];
   for (const block of markdown.split(/\n###\s+/).slice(1)) {
-    if (!/Kart[ęa]\s+#?\d+/i.test(block)) continue;
+    if (!/(?:Kart[ęa]|Action Card)\s+#?\d+/i.test(block)) continue;
     const header = block.split(/\r?\n/)[0] || '';
     const id = (header.match(/#?(\d+)/) || [])[1] || String(actionCards.length + 1);
     const fileMatch = header.match(/\(`\/?([^)`]+)`\)/);
@@ -295,15 +309,15 @@ function readGscContentStrategyReport() {
     });
   }
   const submitQueue = [
-    ...extractMarkdownSection(markdown, /^##\s+11\.\s+Co zgłosić do GSC/i),
-    ...extractMarkdownSection(markdown, /^##\s+9\.\s+Kolejka Zgłoszeń do GSC/i),
+    ...extractMarkdownSection(markdown, /^##\s+(?:\d+\.\s+)?Co zgłosić do GSC/i),
+    ...extractMarkdownSection(markdown, /^##\s+(?:\d+\.\s+)?Kolejka Zgłoszeń do GSC/i),
   ]
     .map((line) => (line.match(/https?:\/\/\S+/i) || [])[0] || '')
     .map((url) => url.replace(/[)`.,]+$/g, ''))
     .filter(Boolean);
   const globalExtra = [
-    ...extractMarkdownSection(markdown, /^##\s+13\.\s+Nowe Artykuły GLOBAL_EXTRA/i),
-    ...extractMarkdownSection(markdown, /^##\s+7\.\s+Propozycje Nowych Artykułów/i),
+    ...extractMarkdownSection(markdown, /^##\s+(?:\d+\.\s+)?Nowe Artykuły GLOBAL_EXTRA/i),
+    ...extractMarkdownSection(markdown, /^##\s+(?:\d+\.\s+)?Propozycje Nowych Artykułów/i),
   ]
     .filter((line) => /^[-*]\s+/.test(line))
     .map(cleanMarkdownValue);
@@ -313,15 +327,15 @@ function readGscContentStrategyReport() {
     status: 'OK',
     path: file,
     generated_date: dateMatch ? dateMatch[1] : '',
-    data_quality: extractMarkdownSection(markdown, /^##\s+2\.\s+Data Quality Gate/i)
+    data_quality: extractMarkdownSection(markdown, /^##\s+(?:\d+\.\s+)?Data Quality Gate/i)
       .filter((line) => /^[-*]\s+/.test(line))
       .map(cleanMarkdownValue),
     opportunity_leaderboard: opportunity.slice(0, 10),
     quick_wins: quickWins.slice(0, 8),
     action_cards: actionCards.slice(0, 8),
     cannibalization: [
-      ...extractMarkdownSection(markdown, /^##\s+8\.\s+Cannibalization/i),
-      ...extractMarkdownSection(markdown, /^##\s+5\.\s+Wykryta Kanibalizacja/i),
+      ...extractMarkdownSection(markdown, /^##\s+(?:\d+\.\s+)?Cannibalization/i),
+      ...extractMarkdownSection(markdown, /^##\s+(?:\d+\.\s+)?Wykryta Kanibalizacja/i),
     ]
       .filter((line) => !/^---+$/.test(line))
       .slice(0, 14)
@@ -1283,9 +1297,11 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
   const enrichedCards = cards.map((card) => mergeStrategyActionDraft(card, actionCardsByFile));
   const boostCards = enrichedCards
     .filter((card) => card.type === 'P0_PUSH_TO_PAGE_ONE')
+    .filter((card) => !isRecentlyTouched(approvalCardKey(card), articleByFile, 14))
     .slice(0, 5);
   const repairCards = enrichedCards
     .filter((card) => ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'].includes(card.type))
+    .filter((card) => !isRecentlyTouched(approvalCardKey(card), articleByFile, 14))
     .slice(0, 5);
   const excludedKeys = new Set([...boostCards, ...repairCards].map(approvalCardKey).filter(Boolean));
   const promisingCards = buildPromisingSeoCards(enrichedCards, contentStrategy, excludedKeys, articleByFile);
@@ -1523,6 +1539,7 @@ function buildUnifiedInsights() {
   const postDeployKpi = readJsonIfExists(path.join(REPORT_DIR, 'post-deploy-kpi-plan.json'));
   const originality = readJsonIfExists(path.join(REPORT_DIR, 'originality-score.json'));
   const contentStrategy = readGscContentStrategyReport();
+  const gscWeekly = readJsonIfExists(path.join(GSC_INPUT_DIR, 'gsc-weekly-report.json'));
 
   const cards = actionCardsFromSeoAio(seoAio);
   const currentRange = seoAio?.data_quality?.weekly_api_ranges?.current || {};
@@ -1561,6 +1578,12 @@ function buildUnifiedInsights() {
     : [];
 
   const insights = [];
+  const measurementLayers = gscWeekly?.summary?.layers || null;
+  if (measurementLayers?.pages?.current && measurementLayers?.disclosed_queries?.current) {
+    const propertyMetrics = measurementLayers.property?.current;
+    const primary = propertyMetrics || measurementLayers.pages.current;
+    insights.push(`GSC — główny wynik: kliknięcia ${Math.round(primary.total_clicks || 0)}, wyświetlenia ${Math.round(primary.total_impressions || 0)}; ujawnione zapytania: ${Math.round(measurementLayers.disclosed_queries.current.total_clicks || 0)} / ${Math.round(measurementLayers.disclosed_queries.current.total_impressions || 0)}. Różnica wynika m.in. z anonimizacji zapytań.`);
+  }
   if (portfolio.total_urls) {
     insights.push(`Portfel SEO/AIO obejmuje ${portfolio.total_urls} URL-i; średnie wyniki: SEO ${average.seo ?? 'brak'}, AEO ${average.aeo ?? 'brak'}, GEO ${average.geo ?? 'brak'}, AIO ${average.aio ?? 'brak'}.`);
   }
@@ -1626,6 +1649,7 @@ function buildUnifiedInsights() {
       post_deploy_kpi_plan: Boolean(postDeployKpi && !postDeployKpi.parse_error),
       originality_score: Boolean(originality && !originality.parse_error),
       gsc_content_strategy: contentStrategy.status === 'OK',
+      gsc_weekly_measurement: Boolean(gscWeekly && !gscWeekly.parse_error),
     },
     portfolio,
     waves: Object.fromEntries(Object.entries(waves).map(([key, value]) => [key, Array.isArray(value) ? value.length : 0])),
@@ -1684,6 +1708,7 @@ function buildUnifiedInsights() {
       })) : [],
     gsc_submit_queue: gscQueue,
     content_strategy: contentStrategy,
+    gsc_measurement_layers: measurementLayers,
     operational_warnings: doctorWarnings,
   };
 }
@@ -2860,6 +2885,18 @@ function writePoprawSeoMarkdown(command, file) {
   if (Array.isArray(insights.key_insights) && insights.key_insights.length) {
     lines.push('## Kluczowe Wnioski Z Raportów');
     insights.key_insights.forEach((item) => lines.push(`- ${item}`));
+    lines.push('');
+  }
+  const layers = insights.gsc_measurement_layers;
+  if (layers?.pages?.current && layers?.disclosed_queries?.current) {
+    lines.push('## GSC — Warstwy Pomiaru');
+    if (layers.property?.current) {
+      lines.push(`- Cała usługa (główny KPI): kliknięcia ${Math.round(layers.property.current.total_clicks || 0)}, wyświetlenia ${Math.round(layers.property.current.total_impressions || 0)}.`);
+    } else {
+      lines.push('- Cała usługa: INSUFFICIENT_DATA; głównym zastępczym wynikiem jest suma stron.');
+    }
+    lines.push(`- Strony: kliknięcia ${Math.round(layers.pages.current.total_clicks || 0)}, wyświetlenia ${Math.round(layers.pages.current.total_impressions || 0)}.`);
+    lines.push(`- Ujawnione zapytania: kliknięcia ${Math.round(layers.disclosed_queries.current.total_clicks || 0)}, wyświetlenia ${Math.round(layers.disclosed_queries.current.total_impressions || 0)}; tej warstwy nie wolno przedstawiać jako wyniku całej witryny.`);
     lines.push('');
   }
   appendContentStrategyMarkdown(lines, insights.content_strategy);

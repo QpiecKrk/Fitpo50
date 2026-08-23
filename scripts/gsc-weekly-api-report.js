@@ -361,11 +361,16 @@ function writeReport(report, outputJson, outputMd) {
     lines.push(`- Bieżący: ${report.ranges.current.start} -> ${report.ranges.current.end}`);
     lines.push(`- Poprzedni: ${report.ranges.previous.start} -> ${report.ranges.previous.end}`);
     lines.push('');
-    lines.push('## KPI');
+    lines.push('## KPI całej usługi (zapytanie GSC bez wymiarów)');
     lines.push(`- Kliknięcia: **${Math.round(report.summary.current.total_clicks)}** (prev: ${Math.round(report.summary.previous.total_clicks)})`);
     lines.push(`- Wyświetlenia: **${Math.round(report.summary.current.total_impressions)}** (prev: ${Math.round(report.summary.previous.total_impressions)})`);
     lines.push(`- CTR: **${report.summary.current.avg_ctr.toFixed(2)}%** (prev: ${report.summary.previous.avg_ctr.toFixed(2)}%)`);
     lines.push(`- Pozycja: **${report.summary.current.avg_position.toFixed(2)}** (prev: ${report.summary.previous.avg_position.toFixed(2)})`);
+    lines.push('');
+    lines.push('## Warstwy pomiaru GSC');
+    lines.push(`- Cała usługa — kliknięcia: ${Math.round(report.summary.layers.property.current.total_clicks)}, wyświetlenia: ${Math.round(report.summary.layers.property.current.total_impressions)}. To główny wynik witryny.`);
+    lines.push(`- Strony — kliknięcia: ${Math.round(report.summary.layers.pages.current.total_clicks)}, wyświetlenia: ${Math.round(report.summary.layers.pages.current.total_impressions)}. To suma wierszy grupowanych po URL-ach.`);
+    lines.push(`- Ujawnione zapytania — kliknięcia: ${Math.round(report.summary.layers.disclosed_queries.current.total_clicks)}, wyświetlenia: ${Math.round(report.summary.layers.disclosed_queries.current.total_impressions)}. Ta warstwa jest niepełna z powodu anonimizacji zapytań przez GSC.`);
     lines.push('');
     lines.push('## Priorytet A: P1-3 i 0 klików');
     if (!report.opportunities.top3_zero_click.length) {
@@ -613,7 +618,9 @@ async function main() {
   });
 
   async function generateForAccessToken(token, authMode) {
-    const [qCurrentRaw, qPrevRaw, pCurrentRaw, pPrevRaw, qpCurrentRaw, qpPrevRaw] = await Promise.all([
+    const [propertyCurrentRaw, propertyPrevRaw, qCurrentRaw, qPrevRaw, pCurrentRaw, pPrevRaw, qpCurrentRaw, qpPrevRaw] = await Promise.all([
+      gscQueryAllRows(token, property, makeBody(ranges.current, [])),
+      gscQueryAllRows(token, property, makeBody(ranges.previous, [])),
       gscQueryAllRows(token, property, makeBody(ranges.current, ['query'])),
       gscQueryAllRows(token, property, makeBody(ranges.previous, ['query'])),
       gscQueryAllRows(token, property, makeBody(ranges.current, ['page'])),
@@ -649,8 +656,12 @@ async function main() {
       ...metricFromRow(r),
     })).filter((r) => r.query && r.page);
 
-    const summaryCurrent = aggregateSummary(queriesCurrent);
-    const summaryPrevious = aggregateSummary(queriesPrev);
+    const propertyCurrent = propertyCurrentRaw[0] ? aggregateSummary([metricFromRow(propertyCurrentRaw[0])]) : aggregateSummary(pagesCurrent);
+    const propertyPrevious = propertyPrevRaw[0] ? aggregateSummary([metricFromRow(propertyPrevRaw[0])]) : aggregateSummary(pagesPrev);
+    const pagesSummaryCurrent = aggregateSummary(pagesCurrent);
+    const pagesSummaryPrevious = aggregateSummary(pagesPrev);
+    const queriesSummaryCurrent = aggregateSummary(queriesCurrent);
+    const queriesSummaryPrevious = aggregateSummary(queriesPrev);
 
     const top3Zero = queriesCurrent
       .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions >= 20)
@@ -723,8 +734,19 @@ async function main() {
       },
       ranges,
       summary: {
-        current: summaryCurrent,
-        previous: summaryPrevious,
+        current: propertyCurrent,
+        previous: propertyPrevious,
+        primary_layer: 'property',
+        layers: {
+          property: { current: propertyCurrent, previous: propertyPrevious, status: 'PRIMARY' },
+          pages: { current: pagesSummaryCurrent, previous: pagesSummaryPrevious, status: 'GROUPED_BY_PAGE' },
+          disclosed_queries: {
+            current: queriesSummaryCurrent,
+            previous: queriesSummaryPrevious,
+            status: 'PRIVACY_LIMITED',
+            privacy_limited: true,
+          },
+        },
       },
       opportunities: {
         top3_zero_click: top3Zero,
