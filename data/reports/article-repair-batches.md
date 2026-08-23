@@ -1,9 +1,9 @@
 # Audyt naprawczy artykułów FitPo50 — paczki bez GSC
 
 - Właściwe artykuły w bibliotece: **96**
-- Artykuły już naprawione pełnym procesem: **64**
-- Artykuły oczekujące na naprawę: **32**
-- Paczki oczekujące: **3**
+- Artykuły już naprawione pełnym procesem: **74**
+- Artykuły oczekujące na naprawę: **22**
+- Paczki oczekujące: **2**
 - Osobno naprawiona strona centrum: `centrum-nadcisnienia-po-50.html`
 
 Komenda wykonawcza: `napraw paczkę N`. Numeracja jest stała i nie może być później przeliczana. Po ukończeniu paczki zmienia się jej status, ale skład pozostaje zapisany.
@@ -78,6 +78,16 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 - `lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html`
 - `badania-krwi-po-50-jak-czesto.html`
 - `nawodnienie-na-treningu-po-50.html`
+- `badania-po-50.html`
+- `trening-3x30-dla-50-plus.html`
+- `dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html`
+- `jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html`
+- `jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci.html`
+- `pilates-po-50-nie-dla-kobiet.html`
+- `markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html`
+- `testosteron-po-50-naturalnie-bez-trt.html`
+- `zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html`
+- `mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html`
 
 ## Paczka 1 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
@@ -154,7 +164,7 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 | 9 | `badania-krwi-po-50-jak-czesto.html` | 48 | zsynchronizować widoczne FAQ z FAQPage 1:1; uzupełnić wymiary obrazów; sprawdzić sformułowania absolutne w kontekście źródeł; sprawdzić odsetki i terminy w badaniach źródłowych |
 | 10 | `nawodnienie-na-treningu-po-50.html` | 46 | uzupełnić wymiary obrazów; dodać prawidłowe fallbacki JPG/PNG; sprawdzić sformułowania absolutne w kontekście źródeł; sprawdzić odsetki i terminy w badaniach źródłowych |
 
-## Paczka 6 — 10 artykułów
+## Paczka 6 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
 | # | Artykuł | Wynik audytu | Najważniejsze obszary naprawy |
 |---:|---|---:|---|

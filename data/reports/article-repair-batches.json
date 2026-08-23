@@ -7,9 +7,9 @@
   "quality_gate": "content_sources_seo_aeo_geo_aio_faq_schema_links_media_pdf_dates_sitemap_site_validators",
   "totals": {
     "article_inventory": 96,
-    "repaired_articles": 64,
-    "pending_articles": 32,
-    "pending_batches": 3,
+    "repaired_articles": 74,
+    "pending_articles": 22,
+    "pending_batches": 2,
     "separately_repaired_non_article_pages": 1
   },
   "separately_repaired_non_article_pages": [
@@ -79,7 +79,17 @@
     "siedem-bledow-silownia-po-50.html",
     "lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html",
     "badania-krwi-po-50-jak-czesto.html",
-    "nawodnienie-na-treningu-po-50.html"
+    "nawodnienie-na-treningu-po-50.html",
+    "badania-po-50.html",
+    "trening-3x30-dla-50-plus.html",
+    "dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html",
+    "jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html",
+    "jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci.html",
+    "pilates-po-50-nie-dla-kobiet.html",
+    "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+    "testosteron-po-50-naturalnie-bez-trt.html",
+    "zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html",
+    "mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html"
   ],
   "batches": [
     {
@@ -1897,7 +1907,7 @@
     },
     {
       "id": 6,
-      "status": "PENDING",
+      "status": "COMPLETE",
       "article_count": 10,
       "articles": [
         {
@@ -2191,7 +2201,7 @@
           "file": "mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html",
           "url": "https://fitpo50.pl/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html",
           "title": "MIT: jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól",
-          "category": "unknown",
+          "category": "mity",
           "audit_score": 37,
           "issue_codes": [
             "IMAGE_DIMENSIONS",
