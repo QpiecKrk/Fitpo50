@@ -1,9 +1,9 @@
 # Audyt naprawczy artykułów FitPo50 — paczki bez GSC
 
 - Właściwe artykuły w bibliotece: **96**
-- Artykuły już naprawione pełnym procesem: **44**
-- Artykuły oczekujące na naprawę: **52**
-- Paczki oczekujące: **5**
+- Artykuły już naprawione pełnym procesem: **54**
+- Artykuły oczekujące na naprawę: **42**
+- Paczki oczekujące: **4**
 - Osobno naprawiona strona centrum: `centrum-nadcisnienia-po-50.html`
 
 Komenda wykonawcza: `napraw paczkę N`. Numeracja jest stała i nie może być później przeliczana. Po ukończeniu paczki zmienia się jej status, ale skład pozostaje zapisany.
@@ -58,6 +58,16 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 - `dieta-50-50-po-piecdziesiatce.html`
 - `jak-pozbyc-sie-oponki-brzusznej-po-50.html`
 - `kreatyna-i-bialko-po-50-tce-jak-laczyc.html`
+- `trening-maszynowy-po-50.html`
+- `peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html`
+- `tluszcz-trzewny-choroby-jak-walczyc.html`
+- `rentgen-tomografia-ct-rezonans-mri-roznice-badania.html`
+- `interleukina-6-il-6-badanie-normy-cena.html`
+- `jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html`
+- `lpa-lipoproteina-a-po-50-norma-cena-badania.html`
+- `ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html`
+- `terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html`
+- `kawa-jako-preworkout-po-50.html`
 
 ## Paczka 1 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
@@ -104,7 +114,7 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 | 9 | `jak-pozbyc-sie-oponki-brzusznej-po-50.html` | 62 | naprawić title/H1/headline i kontrakt metadanych; uzupełnić wymiary obrazów; sprawdzić sformułowania absolutne w kontekście źródeł; zweryfikować mechanizmy biomedyczne akapit po akapicie |
 | 10 | `kreatyna-i-bialko-po-50-tce-jak-laczyc.html` | 62 | zsynchronizować widoczne FAQ z FAQPage 1:1; uzupełnić wymiary obrazów; sprawdzić sformułowania absolutne w kontekście źródeł; sprawdzić odsetki i terminy w badaniach źródłowych |
 
-## Paczka 4 — 10 artykułów
+## Paczka 4 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
 | # | Artykuł | Wynik audytu | Najważniejsze obszary naprawy |
 |---:|---|---:|---|
