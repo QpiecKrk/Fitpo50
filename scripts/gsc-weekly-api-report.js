@@ -92,15 +92,22 @@ function dateIso(dayOffset) {
   return d.toISOString().slice(0, 10);
 }
 
-function currentAndPreviousRanges() {
-  const LOOKBACK_DAYS = 90;
+function rangePair(days) {
   const endCurrent = dateIso(-1);
-  const startCurrent = dateIso(-LOOKBACK_DAYS);
-  const endPrev = dateIso(-(LOOKBACK_DAYS + 1));
-  const startPrev = dateIso(-(LOOKBACK_DAYS * 2));
+  const startCurrent = dateIso(-days);
+  const endPrev = dateIso(-(days + 1));
+  const startPrev = dateIso(-(days * 2));
   return {
     current: { start: startCurrent, end: endCurrent },
     previous: { start: startPrev, end: endPrev },
+  };
+}
+
+function reportingRanges() {
+  return {
+    day_7: rangePair(7),
+    day_28: rangePair(28),
+    day_90: rangePair(90),
   };
 }
 
@@ -198,7 +205,6 @@ async function gscQueryAllRows(accessToken, siteUrl, baseBody) {
     all.push(...rows);
     if (rows.length < rowLimit) break;
     startRow += rowLimit;
-    if (startRow > 200000) break;
   }
   return all;
 }
@@ -326,6 +332,31 @@ function writeCanonicalCsvTriplet(outputCsvDir, data) {
   );
 }
 
+function writeExtendedSnapshots(outputCsvDir, report) {
+  const baseDir = path.resolve(outputCsvDir);
+  fs.mkdirSync(baseDir, { recursive: true });
+  const windows = report.reporting_windows || {};
+  for (const [windowName, dataset] of Object.entries(windows)) {
+    const prefix = `web-${windowName.replace('day_', '')}`;
+    for (const period of ['current', 'previous']) {
+      writeCsv(path.join(baseDir, `${prefix}-${period}-pages.csv`), ['page', 'clicks', 'impressions', 'ctr', 'position'], dataset.pages?.[period] || []);
+      writeCsv(path.join(baseDir, `${prefix}-${period}-queries.csv`), ['query', 'clicks', 'impressions', 'ctr', 'position'], dataset.queries?.[period] || []);
+      writeCsv(path.join(baseDir, `${prefix}-${period}-query-pages.csv`), ['query', 'page', 'clicks', 'impressions', 'ctr', 'position'], dataset.query_pages?.[period] || []);
+    }
+  }
+  for (const [type, dataset] of Object.entries(report.secondary_search_types_28d || {})) {
+    writeCsv(path.join(baseDir, `${type}-28d-current-pages.csv`), ['page', 'clicks', 'impressions', 'ctr', 'position'], dataset.current_pages || []);
+    writeCsv(path.join(baseDir, `${type}-28d-previous-pages.csv`), ['page', 'clicks', 'impressions', 'ctr', 'position'], dataset.previous_pages || []);
+  }
+  fs.writeFileSync(path.join(baseDir, 'gsc-raw-snapshot.json'), `${JSON.stringify({
+    generated_at: report.generated_at,
+    property: report.property,
+    api_limitations: report.api_limitations,
+    reporting_windows: report.reporting_windows,
+    secondary_search_types_28d: report.secondary_search_types_28d,
+  }, null, 2)}\n`, 'utf8');
+}
+
 function writeReport(report, outputJson, outputMd) {
   ensureDir(outputJson);
   ensureDir(outputMd);
@@ -371,6 +402,21 @@ function writeReport(report, outputJson, outputMd) {
     lines.push(`- Cała usługa — kliknięcia: ${Math.round(report.summary.layers.property.current.total_clicks)}, wyświetlenia: ${Math.round(report.summary.layers.property.current.total_impressions)}. To główny wynik witryny.`);
     lines.push(`- Strony — kliknięcia: ${Math.round(report.summary.layers.pages.current.total_clicks)}, wyświetlenia: ${Math.round(report.summary.layers.pages.current.total_impressions)}. To suma wierszy grupowanych po URL-ach.`);
     lines.push(`- Ujawnione zapytania — kliknięcia: ${Math.round(report.summary.layers.disclosed_queries.current.total_clicks)}, wyświetlenia: ${Math.round(report.summary.layers.disclosed_queries.current.total_impressions)}. Ta warstwa jest niepełna z powodu anonimizacji zapytań przez GSC.`);
+    lines.push('');
+    lines.push('## Okna 7/28/90 dni');
+    for (const [windowName, dataset] of Object.entries(report.reporting_windows || {})) {
+      const current = dataset.property?.current || {};
+      const previous = dataset.property?.previous || {};
+      lines.push(`- ${windowName.replace('day_', '')} dni: ${Math.round(current.total_clicks || 0)} kliknięć / ${Math.round(current.total_impressions || 0)} wyświetleń; poprzednio ${Math.round(previous.total_clicks || 0)} / ${Math.round(previous.total_impressions || 0)}.`);
+    }
+    lines.push('');
+    lines.push('## Inne typy wyszukiwania — 28 dni');
+    for (const [type, dataset] of Object.entries(report.secondary_search_types_28d || {})) {
+      const summary = aggregateSummary(dataset.current_pages || []);
+      lines.push(`- ${type}: status ${dataset.status}; URL-e ${dataset.current_pages?.length || 0}; kliknięcia ${Math.round(summary.total_clicks || 0)}; wyświetlenia ${Math.round(summary.total_impressions || 0)}.`);
+    }
+    lines.push('');
+    lines.push('- Ograniczenie API: zapytania anonimizowane pozostają poza tabelą query, dlatego warstwa stron/property jest nadrzędna dla wyniku witryny.');
     lines.push('');
     lines.push('## Priorytet A: P1-3 i 0 klików');
     if (!report.opportunities.top3_zero_click.length) {
@@ -608,26 +654,100 @@ async function main() {
     return;
   }
 
-  const ranges = currentAndPreviousRanges();
-  const makeBody = (range, dimensions) => ({
+  const reportingWindows = reportingRanges();
+  const ranges = reportingWindows.day_90;
+  const makeBody = (range, dimensions, type = 'web') => ({
     startDate: range.start,
     endDate: range.end,
     dimensions,
-    type: 'web',
+    type,
+    dataState: 'final',
     aggregationType: dimensions.includes('page') ? 'byPage' : 'auto',
   });
 
-  async function generateForAccessToken(token, authMode) {
+  async function fetchWebWindow(token, pair) {
     const [propertyCurrentRaw, propertyPrevRaw, qCurrentRaw, qPrevRaw, pCurrentRaw, pPrevRaw, qpCurrentRaw, qpPrevRaw] = await Promise.all([
-      gscQueryAllRows(token, property, makeBody(ranges.current, [])),
-      gscQueryAllRows(token, property, makeBody(ranges.previous, [])),
-      gscQueryAllRows(token, property, makeBody(ranges.current, ['query'])),
-      gscQueryAllRows(token, property, makeBody(ranges.previous, ['query'])),
-      gscQueryAllRows(token, property, makeBody(ranges.current, ['page'])),
-      gscQueryAllRows(token, property, makeBody(ranges.previous, ['page'])),
-      gscQueryAllRows(token, property, makeBody(ranges.current, ['query', 'page'])),
-      gscQueryAllRows(token, property, makeBody(ranges.previous, ['query', 'page'])),
+      gscQueryAllRows(token, property, makeBody(pair.current, [])),
+      gscQueryAllRows(token, property, makeBody(pair.previous, [])),
+      gscQueryAllRows(token, property, makeBody(pair.current, ['query'])),
+      gscQueryAllRows(token, property, makeBody(pair.previous, ['query'])),
+      gscQueryAllRows(token, property, makeBody(pair.current, ['page'])),
+      gscQueryAllRows(token, property, makeBody(pair.previous, ['page'])),
+      gscQueryAllRows(token, property, makeBody(pair.current, ['query', 'page'])),
+      gscQueryAllRows(token, property, makeBody(pair.previous, ['query', 'page'])),
     ]);
+    return { propertyCurrentRaw, propertyPrevRaw, qCurrentRaw, qPrevRaw, pCurrentRaw, pPrevRaw, qpCurrentRaw, qpPrevRaw };
+  }
+
+  async function fetchSecondarySearchTypes(token) {
+    const types = ['image', 'video', 'news', 'discover', 'googleNews'];
+    const pair = reportingWindows.day_28;
+    const entries = await Promise.all(types.map(async (type) => {
+      try {
+        const [current, previous] = await Promise.all([
+          gscQueryAllRows(token, property, makeBody(pair.current, ['page'], type)),
+          gscQueryAllRows(token, property, makeBody(pair.previous, ['page'], type)),
+        ]);
+        return [type, {
+          status: 'ok',
+          range: pair,
+          current_pages: current.map((row) => ({
+            page: String((row.keys || [])[0] || '').trim(),
+            ...metricFromRow(row),
+          })).filter((row) => row.page),
+          previous_pages: previous.map((row) => ({
+            page: String((row.keys || [])[0] || '').trim(),
+            ...metricFromRow(row),
+          })).filter((row) => row.page),
+        }];
+      } catch (err) {
+        return [type, { status: 'UNAVAILABLE_OR_NO_ACCESS', range: pair, error: String(err.message || err), current_pages: [], previous_pages: [] }];
+      }
+    }));
+    return Object.fromEntries(entries);
+  }
+
+  async function generateForAccessToken(token, authMode) {
+    const [web7, web28, web90, secondarySearchTypes] = await Promise.all([
+      fetchWebWindow(token, reportingWindows.day_7),
+      fetchWebWindow(token, reportingWindows.day_28),
+      fetchWebWindow(token, reportingWindows.day_90),
+      fetchSecondarySearchTypes(token),
+    ]);
+    const {
+      propertyCurrentRaw,
+      propertyPrevRaw,
+      qCurrentRaw,
+      qPrevRaw,
+      pCurrentRaw,
+      pPrevRaw,
+      qpCurrentRaw,
+      qpPrevRaw,
+    } = web90;
+
+    const serializeWebWindow = (raw) => ({
+      property: {
+        current: raw.propertyCurrentRaw[0] ? aggregateSummary([metricFromRow(raw.propertyCurrentRaw[0])]) : aggregateSummary([]),
+        previous: raw.propertyPrevRaw[0] ? aggregateSummary([metricFromRow(raw.propertyPrevRaw[0])]) : aggregateSummary([]),
+      },
+      pages: {
+        current: raw.pCurrentRaw.map((row) => ({ page: String((row.keys || [])[0] || '').trim(), ...metricFromRow(row) })).filter((row) => row.page),
+        previous: raw.pPrevRaw.map((row) => ({ page: String((row.keys || [])[0] || '').trim(), ...metricFromRow(row) })).filter((row) => row.page),
+      },
+      queries: {
+        current: raw.qCurrentRaw.map((row) => ({ query: String((row.keys || [])[0] || '').trim(), ...metricFromRow(row) })).filter((row) => row.query),
+        previous: raw.qPrevRaw.map((row) => ({ query: String((row.keys || [])[0] || '').trim(), ...metricFromRow(row) })).filter((row) => row.query),
+      },
+      query_pages: {
+        current: raw.qpCurrentRaw.map((row) => ({ query: String((row.keys || [])[0] || '').trim(), page: String((row.keys || [])[1] || '').trim(), ...metricFromRow(row) })).filter((row) => row.query && row.page),
+        previous: raw.qpPrevRaw.map((row) => ({ query: String((row.keys || [])[0] || '').trim(), page: String((row.keys || [])[1] || '').trim(), ...metricFromRow(row) })).filter((row) => row.query && row.page),
+      },
+    });
+    const webWindows = {
+      day_7: { range: reportingWindows.day_7, ...serializeWebWindow(web7) },
+      day_28: { range: reportingWindows.day_28, ...serializeWebWindow(web28) },
+      day_90: { range: reportingWindows.day_90, ...serializeWebWindow(web90) },
+    };
 
     const queriesCurrent = qCurrentRaw.map((r) => ({
       query: String((r.keys || [])[0] || '').trim(),
@@ -664,11 +784,11 @@ async function main() {
     const queriesSummaryPrevious = aggregateSummary(queriesPrev);
 
     const top3Zero = queriesCurrent
-      .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions >= 20)
+      .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions > 0)
       .sort((a, b) => b.impressions - a.impressions)
       .slice(0, 20);
 
-    const pool = queriesCurrent.filter((r) => r.position > 0 && r.position <= 10 && r.impressions >= 80);
+    const pool = queriesCurrent.filter((r) => r.position > 0 && r.position <= 10 && r.impressions > 0);
     const ctrMedian = median(pool.map((r) => r.ctr));
     const ctrProblems = pool
       .filter((r) => r.ctr <= Math.max(1.0, ctrMedian * 0.6))
@@ -710,7 +830,7 @@ async function main() {
     cannibalization.sort((a, b) => b.total_impressions - a.total_impressions);
 
     const pageOpportunities = pagesCurrent
-      .filter((r) => r.position > 0 && r.position <= 20 && r.impressions >= 80)
+      .filter((r) => r.position > 0 && r.position <= 30 && r.impressions > 0)
       .sort((a, b) => b.impressions - a.impressions)
       .slice(0, 20);
 
@@ -724,6 +844,14 @@ async function main() {
       status: 'ok',
       property,
       auth_mode: authMode,
+      api_limitations: {
+        top_rows_only: true,
+        anonymized_queries_excluded: true,
+        max_rows_per_day_per_search_type: 50000,
+        note: 'Warstwa stron i property jest nadrzędna dla wyniku całej witryny; query służą do rozpoznawania ujawnionych intencji.',
+      },
+      reporting_windows: webWindows,
+      secondary_search_types_28d: secondarySearchTypes,
       raw_csv_rows: {
         queries: queriesCurrent,
         previous_queries: queriesPrev,
@@ -810,6 +938,7 @@ async function main() {
     queryPages: report.raw_csv_rows?.query_pages || [],
     previousQueryPages: report.raw_csv_rows?.previous_query_pages || [],
   });
+  writeExtendedSnapshots(args.outputCsvDir, report);
   delete report.raw_csv_rows;
   writeReport(report, args.outputJson, args.outputMd);
   console.log('[PASS] GSC API weekly report generated.');
@@ -821,13 +950,20 @@ async function main() {
   console.log(`- opportunities: top3_zero=${top3Count}, ctr=${ctrCount}, cannibalization=${cannibalCount}`);
 }
 
-main().catch((err) => {
-  const args = parseArgs(process.argv.slice(2));
-  const property = normalizeSiteUrl(process.env.GSC_SITE_URL || 'https://fitpo50.pl/');
-  const report = authFailedReport(property, err.message || String(err));
-  writeReport(report, args.outputJson, args.outputMd);
-  console.error(`[WARN] gsc-weekly-api-report fallback: ${err.message || err}`);
-  console.error(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
-  console.error(`- MD: ${path.relative(ROOT, args.outputMd)}`);
-  process.exit(0);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    const args = parseArgs(process.argv.slice(2));
+    const property = normalizeSiteUrl(process.env.GSC_SITE_URL || 'https://fitpo50.pl/');
+    const report = authFailedReport(property, err.message || String(err));
+    writeReport(report, args.outputJson, args.outputMd);
+    console.error(`[WARN] gsc-weekly-api-report fallback: ${err.message || err}`);
+    console.error(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
+    console.error(`- MD: ${path.relative(ROOT, args.outputMd)}`);
+    process.exit(0);
+  });
+}
+
+module.exports = {
+  rangePair,
+  reportingRanges,
+};

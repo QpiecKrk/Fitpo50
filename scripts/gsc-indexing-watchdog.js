@@ -17,6 +17,8 @@ function parseArgs(argv) {
     logFile: path.join(ROOT, 'data', 'reports', 'published-articles-log.json'),
     thresholdHours: 72,
     maxAgeDays: 30,
+    inventoryFile: '',
+    zeroVisibilityOnly: false,
   };
   for (let i = 0; i < argv.length; i += 1) {
     const t = String(argv[i] || '').trim();
@@ -44,6 +46,15 @@ function parseArgs(argv) {
     if (t === '--max-age-days' && v) {
       out.maxAgeDays = Math.max(1, Number(v) || 30);
       i += 1;
+      continue;
+    }
+    if (t === '--inventory-file' && v) {
+      out.inventoryFile = path.resolve(ROOT, v);
+      i += 1;
+      continue;
+    }
+    if (t === '--zero-visibility-only') {
+      out.zeroVisibilityOnly = true;
     }
   }
   return out;
@@ -199,7 +210,7 @@ async function inspectUrl(accessToken, siteUrl, inspectionUrl) {
   const r = json.inspectionResult || json.urlInspectionResult || {};
   const idx = r.indexStatusResult || {};
   return {
-    verdict: String(r.verdict || '').trim(),
+    verdict: String(idx.verdict || r.verdict || '').trim(),
     coverageState: String(idx.coverageState || '').trim(),
     robotsTxtState: String(idx.robotsTxtState || '').trim(),
     indexingState: String(idx.indexingState || '').trim(),
@@ -208,7 +219,28 @@ async function inspectUrl(accessToken, siteUrl, inspectionUrl) {
     googleCanonical: String(idx.googleCanonical || '').trim(),
     userCanonical: String(idx.userCanonical || '').trim(),
     referrerUrls: Array.isArray(idx.referringUrls) ? idx.referringUrls : [],
+    sitemaps: Array.isArray(idx.sitemap) ? idx.sitemap : [],
   };
+}
+
+function loadInventoryCandidates(file, zeroVisibilityOnly) {
+  if (!file || !fs.existsSync(file)) return [];
+  try {
+    const report = JSON.parse(fs.readFileSync(file, 'utf8'));
+    return (Array.isArray(report.priority_map) ? report.priority_map : [])
+      .filter((item) => item.type === 'article')
+      .filter((item) => !zeroVisibilityOnly || Number(item?.gsc?.impressions || 0) === 0)
+      .filter((item) => /^https?:\/\//i.test(String(item.url || '')))
+      .map((item) => ({
+        slug: String(item.path || '').replace(/\.html$/i, ''),
+        url: String(item.url || ''),
+        path: String(item.path || ''),
+        gsc_impressions: Number(item?.gsc?.impressions || 0),
+        source: 'gsc-priority-map',
+      }));
+  } catch (err) {
+    throw new Error(`Nie można odczytać inventory URL Inspection: ${err.message || err}`);
+  }
 }
 
 function buildReportSkeleton(siteUrl, logFile, args) {
@@ -237,15 +269,17 @@ async function main() {
   const thresholdMs = args.thresholdHours * 60 * 60 * 1000;
   const maxAgeMs = args.maxAgeDays * 24 * 60 * 60 * 1000;
 
-  const candidates = (Array.isArray(log.items) ? log.items : [])
+  const inventoryCandidates = loadInventoryCandidates(args.inventoryFile, args.zeroVisibilityOnly);
+  const inventoryMode = Boolean(args.inventoryFile);
+  const candidates = inventoryMode ? inventoryCandidates : (Array.isArray(log.items) ? log.items : [])
     .filter((it) => String(it.status || 'pending') !== 'crawled')
     .filter((it) => /^https?:\/\//i.test(String(it.url || '')))
-    .filter((it) => {
+    .filter((it) => inventoryMode || (() => {
       const t = safeDateMs(it.last_published_at || it.first_published_at);
       if (!Number.isFinite(t)) return false;
       const age = now - t;
       return age >= thresholdMs && age <= maxAgeMs;
-    });
+    })());
 
   if (!siteUrl) {
     report.status = 'missing_site_url';
@@ -337,7 +371,11 @@ async function main() {
       update.last_checked_at = new Date().toISOString();
       update.last_crawl_time = inspection.lastCrawlTime || '';
       update.notes = inspection.coverageState || inspection.indexingState || '';
-      if (crawledAfterPublish) {
+      const indexed = String(inspection.verdict || '').toUpperCase() === 'PASS'
+        || /SUBMITTED_AND_INDEXED|INDEXED/i.test(`${inspection.indexingState} ${inspection.coverageState}`);
+      if (inventoryMode && indexed) {
+        update.status = 'indexed';
+      } else if (crawledAfterPublish) {
         update.status = 'crawled';
       } else {
         update.status = 'pending';
@@ -355,9 +393,20 @@ async function main() {
       report.checked.push({
         slug,
         url,
+        path: String(item.path || ''),
         published_at: publishedAt,
         last_crawl_time: inspection.lastCrawlTime || '',
         crawled_after_publish: crawledAfterPublish,
+        indexed,
+        verdict: inspection.verdict,
+        coverage_state: inspection.coverageState,
+        robots_txt_state: inspection.robotsTxtState,
+        indexing_state: inspection.indexingState,
+        page_fetch_state: inspection.pageFetchState,
+        google_canonical: inspection.googleCanonical,
+        user_canonical: inspection.userCanonical,
+        referring_urls: inspection.referrerUrls,
+        sitemaps: inspection.sitemaps,
       });
     } catch (err) {
       report.pending_older_72h += 1;
@@ -374,9 +423,11 @@ async function main() {
     }
   }
 
-  log.items = [...bySlug.values()].sort((a, b) => String(b.last_published_at || '').localeCompare(String(a.last_published_at || '')));
-  log.updated_at = new Date().toISOString();
-  writeJson(args.logFile, log);
+  if (!inventoryMode) {
+    log.items = [...bySlug.values()].sort((a, b) => String(b.last_published_at || '').localeCompare(String(a.last_published_at || '')));
+    log.updated_at = new Date().toISOString();
+    writeJson(args.logFile, log);
+  }
   writeJson(args.reportJson, report);
 
   const lines = [
@@ -413,4 +464,3 @@ main().catch((err) => {
   console.error(`[FAIL] ${err.message || err}`);
   process.exit(1);
 });
-

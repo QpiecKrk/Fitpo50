@@ -835,14 +835,14 @@ function main() {
   const primarySummary = apiProperty?.current || pageSummary;
 
   const top3Zero = queryRows
-    .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions >= 20)
+    .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions > 0)
     .sort((a, b) => b.impressions - a.impressions);
 
   const top10Zero = queryRows
-    .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 10 && r.impressions >= 40)
+    .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 10 && r.impressions > 0)
     .sort((a, b) => b.impressions - a.impressions);
 
-  const ctrPool = queryRows.filter((r) => r.impressions >= 80 && r.position > 0 && r.position <= 10);
+  const ctrPool = queryRows.filter((r) => r.impressions > 0 && r.position > 0 && r.position <= 10);
   const poolMedianCtr = median(ctrPool.map((r) => r.ctr));
   const ctrProblems = ctrPool
     .filter((r) => r.ctr <= Math.max(1.0, poolMedianCtr * 0.6))
@@ -888,7 +888,7 @@ function main() {
   }
 
   const pageOpp = pageRows
-    .filter((r) => r.impressions >= 80 && r.position > 0 && r.position <= 20)
+    .filter((r) => r.impressions > 0 && r.position > 0 && r.position <= 30)
     .map((r) => ({
       page: r.page,
       clicks: r.clicks,

@@ -65,6 +65,13 @@ Example:
 ## 🔎 `popraw-seo` — obowiązkowy workflow akceptacji
 
 - `popraw-seo` uruchamia raporty GSC/SEO/AEO/GEO/AIO i kończy na `AWAITING_USER_APPROVAL`.
+- Po akceptacji pozycji `popraw-seo` albo poleceniu naprawy artykułu agent wykonuje pełny Quality Gate strony: logika i wiarygodność twierdzeń, treść, SEO/QA/FAQ/schema, linki, media i wygląd, PDF, `dateModified`, sitemapę, `_site` oraz wszystkie walidatory. Sama zmiana title/meta albo dopisanie bloku nie oznacza ukończenia.
+- Nadrzędny cel `popraw-seo`: zwiększać liczbę artykułów widocznych w Google i liczbę kliknięć, a nie tylko poprawiać techniczne wyniki SEO.
+- Każde uruchomienie musi objąć wszystkie indeksowalne strony typu `BlogPosting`. Bramka kompletności: `article_inventory = diagnosed_articles = actions_assigned`, `omitted_articles = 0`. Nie wolno ograniczać portfela do TOP 3/5/10 ani usuwać URL-a z powodu braku ujawnionego query lub cooldownu.
+- Warstwa stron/property GSC jest nadrzędna dla wyniku witryny; ujawnione query są warstwą pomocniczą i niepełną z powodu anonimizacji. Raport ma porównywać 7/28/90 dni oraz uwzględniać dostępne Web/Images/Video/News/Discover/Google News.
+- URL-e bez wyświetleń muszą przejść URL Inspection i zostać rozdzielone na: zindeksowane bez widoczności, crawled/discovered not indexed, unknown to Google, canonical/robots problem. Brak wyświetleń nie jest automatycznie brakiem indeksacji.
+- Każde `popraw-seo` musi zakończyć się szerokimi wnioskami dla całej witryny i zapisać `popraw-seo-wnioski-globalne.md` oraz `.json`. Wnioski muszą obejmować: udział widocznych artykułów, problemy indeksacji, zindeksowane strony bez wyświetleń, CTR TOP 10, pozycje 11-30 i 31+, koncentrację kliknięć, kondycję kategorii/klastrów, trend 28 dni i dostępny potencjał Google Images.
+- Wnioski globalne mają wskazywać kolejność działań popartą bieżącymi liczbami. Zmiana priorytetu wymaga zmiany danych, nie opinii automatu.
 - Raport musi zawierać paczkę `BOOST` dla stron blisko wzrostu, `NAPRAWA` dla stron słabych albo bez widoczności oraz drugi raport `ROKUJE` dla stron, które nie są liderami, ale mają sygnał GSC/strategiczny i mogą wejść do kolejnej fali wzrostu.
 - Po poprawkach liderów agent zawsze sprawdza `ROKUJE`; te strony też traktuje priorytetowo, bez generycznych dopisków, z konkretnymi zmianami i listą URL-i do zgłoszenia w GSC.
 - `ROKUJE` nie może wybierać stron na podstawie samego tytułu albo pojedynczej przypadkowej pozycji; wymagany jest sensowny sygnał: realna fraza/temat, wyświetlenia, pozycja albo kliknięcia oraz brak świeżego cooldown po ostatniej modyfikacji.

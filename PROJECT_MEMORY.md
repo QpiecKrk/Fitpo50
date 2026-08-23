@@ -173,6 +173,19 @@
 
 ## Ustalenia operacyjne (2026-06-18) - `popraw-seo`, huby i centra tematyczne
 
+### Aktualizacja systemowa 2026-08-23 — pełne pokrycie i wnioski globalne
+
+- Zatwierdzona naprawa URL-a oznacza naprawę całej strony, nie tylko elementu wskazanego przez raport: kontrolę logiki i źródeł każdego zmienianego twierdzenia, treści, SEO/AEO/GEO/AIO, FAQ i schema 1:1, linków, mediów i wyglądu, PDF, dat, sitemap, `_site` i walidacji. URL jest gotowy dopiero po przejściu pełnego Quality Gate.
+- Nadrzędnym celem `popraw-seo` jest wzrost liczby artykułów widocznych w Google oraz liczby kliknięć. Wyniki techniczne SEO/AEO/GEO/AIO są środkami do tego celu.
+- Każde uruchomienie obejmuje pełny portfel indeksowalnych stron `BlogPosting`. Twarda bramka kompletności: `article_inventory = diagnosed_articles = actions_assigned` oraz `omitted_articles = 0`.
+- Nie wolno ograniczać końcowej kolejki do TOP 3/5/10. Brak ujawnionego query nie usuwa strony, ponieważ query są anonimizowane; cooldown przenosi URL do monitoringu, ale nie usuwa go z raportu.
+- Dane GSC są analizowane w oknach 7/28/90 dni. Warstwa property/stron jest nadrzędna, a query służą do rozpoznawania ujawnionych intencji. Uwzględniaj dostępne Web, Images, Video, News, Discover i Google News.
+- Wszystkie artykuły bez wyświetleń przechodzą URL Inspection. Raport rozdziela co najmniej: `INDEXED_ZERO_VISIBILITY`, `CRAWLED_NOT_INDEXED`, `DISCOVERED_NOT_INDEXED`, `UNKNOWN_TO_GOOGLE`, problemy canonical/robots oraz brak danych inspekcji.
+- Po każdym `popraw-seo` obowiązkowo powstają `popraw-seo-wnioski-globalne.md` i `popraw-seo-wnioski-globalne.json`. Raport opisuje całą witrynę, a nie tylko kandydatów do edycji.
+- Wnioski globalne muszą zawierać: udział widocznych artykułów, liczbę problemów indeksacji, zindeksowane strony bez wyświetleń, luki CTR w TOP 10, pozycje 11-30 i 31+, udział kliknięć liderów, kondycję kategorii/klastrów, trend 28 dni oraz potencjał Google Images, jeśli dane istnieją.
+- Wnioski kończą się kolejnością działań opartą na aktualnych liczbach. Nie wolno zmieniać globalnego priorytetu na podstawie generycznej rekomendacji automatu.
+- Kanoniczne pliki wykonawcze: `scripts/gsc-weekly-api-report.js`, `scripts/gsc-priority-map.js`, `scripts/gsc-indexing-watchdog.js`, `scripts/gsc-auto-report.js`, `scripts/growth-tool.js`. Test kontraktu: `tests/gsc-full-coverage.test.js`.
+
 - **`popraw-seo` nie może samodzielnie edytować artykułów.**
   - Komenda generuje raporty i priorytety, ale zatrzymuje się na planie.
   - Każda poprawka treściowa musi najpierw zostać pokazana użytkownikowi w rozmowie jako gotowy tekst do akceptacji.

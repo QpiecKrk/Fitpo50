@@ -465,6 +465,30 @@ function runPriorityMap(inputDir, workDir) {
   }
 }
 
+function runIndexCoverage(workDir) {
+  const inventoryFile = path.join(workDir, 'gsc-priority-map.json');
+  const res = run(
+    'node',
+    [
+      'scripts/gsc-indexing-watchdog.js',
+      '--inventory-file', inventoryFile,
+      '--zero-visibility-only',
+      '--report-json', path.join(workDir, 'gsc-indexing-coverage.json'),
+      '--report-md', path.join(workDir, 'gsc-indexing-coverage.md'),
+    ],
+    { stdio: 'inherit' },
+  );
+  if (res.status !== 0) {
+    throw new Error('gsc-indexing-watchdog coverage failed.');
+  }
+}
+
+function runFullCoverageMap(inputDir, workDir) {
+  runPriorityMap(inputDir, workDir);
+  runIndexCoverage(workDir);
+  runPriorityMap(inputDir, workDir);
+}
+
 function runSeoAioMachine(inputDir, workDir) {
   const res = run(
     'node',
@@ -523,7 +547,7 @@ async function main() {
     if (apiRes.ok) {
       console.log('[GSC-AUTO] Źródło: GSC API -> ~/Downloads/gsc-auto-input');
       runWeeklyReport(inputDir, inputDir);
-      runPriorityMap(inputDir, inputDir);
+      runFullCoverageMap(inputDir, inputDir);
       runSeoAioMachine(inputDir, inputDir);
       runSeoAioWaveProposal(inputDir);
       if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);
@@ -573,7 +597,7 @@ async function main() {
     }
 
     runWeeklyReport(inputDir, inputDir);
-    runPriorityMap(inputDir, inputDir);
+    runFullCoverageMap(inputDir, inputDir);
     runSeoAioMachine(inputDir, inputDir);
     runSeoAioWaveProposal(inputDir);
     if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);

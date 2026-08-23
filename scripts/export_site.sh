@@ -138,6 +138,7 @@ rsync -a \
   --exclude="data/*.fitpo50.json" \
   --exclude="data/internal-link-map.json" \
   --exclude="tests/" \
+  --exclude="/tmp/" \
   --exclude="/edit-kortyzol.js" \
   --exclude="/fix-kortyzol.js" \
   --exclude="/fix-kortyzol-2.js" \

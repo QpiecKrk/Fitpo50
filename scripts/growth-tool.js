@@ -1066,11 +1066,14 @@ function proposalContentContract(card, article) {
 
 function approvalReason(card, kind) {
   const gsc = approvalGscSnapshot(card);
+  const pageSignal = gsc.query
+    ? `fraza "${gsc.query}"`
+    : 'sygnał na poziomie URL-a (query nieujawnione lub zanonimizowane)';
   if (kind === 'BOOST') {
-    return `Google już testuje ten URL: fraza "${gsc.query || 'brak frazy'}", ${gsc.impressions} wyświetleń, CTR ${gsc.ctr}%, pozycja ${gsc.position}. Priorytetem jest precyzyjny CTR i linkowanie wewnętrzne, nie przepisywanie całego artykułu.`;
+    return `Google już testuje ten URL: ${pageSignal}, ${gsc.impressions} wyświetleń, CTR ${gsc.ctr}%, pozycja ${gsc.position}. Priorytetem jest precyzyjny CTR i linkowanie wewnętrzne, nie przepisywanie całego artykułu.`;
   }
   if (kind === 'ROKUJE') {
-    return `To nie jest jeszcze lider, ale ma sygnał z GSC albo raportu strategii: fraza/temat "${gsc.query || 'brak danych'}", ${gsc.impressions} wyświetleń, pozycja ${gsc.position}. Po liderach trzeba wzmocnić konkretną odpowiedź, title/meta i linkowanie, żeby strona miała szansę wejść do głównej paczki wzrostu.`;
+    return `URL ma ${pageSignal}: ${gsc.impressions} wyświetleń, ${gsc.clicks} kliknięć i pozycję ${gsc.position}. Działanie wynika z diagnozy ${card?.diagnosis || card?.type || 'GSC'}, a brak ujawnionego query nie usuwa strony z kolejki.`;
   }
   const scores = card?.score || {};
   return `Strona ma słabą lub zerową widoczność i wynik SEO/AEO/GEO/AIO ${Number(scores.seo || 0)}/${Number(scores.aeo || 0)}/${Number(scores.geo || 0)}/${Number(scores.aio || 0)}. Najpierw trzeba zbudować konkretną odpowiedź, źródła i linkowanie, a dopiero potem zgłaszać URL w GSC.`;
@@ -1107,6 +1110,26 @@ function approvalPreparationChecklist(kind, query) {
   ];
 }
 
+function approvalChecklistForCard(card, kind) {
+  const actionType = String(card?.required_action?.action_type || '');
+  if (actionType === 'PROTECT_AND_SCALE') {
+    return [
+      'nie zmieniać title, meta ani leadu działającego targetu bez sygnału spadku',
+      `zweryfikować wskazane źródła linków: ${(card?.required_action?.source_files || []).join(', ') || 'INSUFFICIENT_DATA'}`,
+      'przygotować wyłącznie naturalne zdania z linkiem na stronach źródłowych',
+      'mierzyć target w oknach 7/28/90 dni',
+    ];
+  }
+  if (actionType === 'URL_INSPECTION' || actionType === 'INDEXATION_REPAIR') {
+    return [
+      'odczytać verdict, coverageState, indexingState, canonical i lastCrawlTime z URL Inspection',
+      'najpierw usunąć wskazany problem techniczny; nie zmieniać treści bez rozpoznanej przyczyny',
+      'po walidacji sprawdzić sitemap i linki z konkretnych stron źródłowych',
+    ];
+  }
+  return approvalPreparationChecklist(kind, card?.keyword_plan?.primary || '');
+}
+
 function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays) {
   const file = normalizeReportFile(card?.file || card?.url);
   const linkAnalysis = analyzeSourceLinkSuggestions(card, 4);
@@ -1122,9 +1145,14 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     priority: card?.priority || '',
     segment: card?.segment || '',
     decision: card?.editorial_decision || '',
+    diagnosis: card?.diagnosis || card?.type || '',
+    required_action: card?.required_action || null,
+    execution_status: isRecentlyTouched(file, articleByFile, 14) ? 'COOLDOWN_MONITORUJ' : 'READY_FOR_APPROVAL',
     query: card?.keyword_plan?.primary || '',
     reason: approvalReason(card, kind),
     gsc,
+    gsc_windows: card?.gsc_windows || {},
+    index_inspection: card?.index_inspection || {},
     estimated_traffic_gain: estimatedTrafficGain(gsc, sourceWindowDays),
     content_contract: proposalContentContract(card, articleByFile?.get?.(file)),
     current_title: articleByFile?.get?.(file)?.title || '',
@@ -1137,7 +1165,7 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
       geo: Number(card?.score?.geo || 0),
       aio: Number(card?.score?.aio || 0),
     },
-    prepare_before_edit: approvalPreparationChecklist(kind, card?.keyword_plan?.primary || ''),
+    prepare_before_edit: approvalChecklistForCard(card, kind),
     report_tasks: Array.isArray(card?.tasks) ? card.tasks.slice(0, 5) : [],
     internal_link_suggestions: links,
     internal_link_guard: {
@@ -1199,6 +1227,39 @@ function buildStrategyOpportunityCard(item, actionCardsByFile) {
   };
 }
 
+function buildFullCoverageCard(item, actionCardsByFile) {
+  const file = normalizeReportFile(item?.path || item?.url);
+  const strategyAction = actionCardsByFile?.get?.(file) || {};
+  return {
+    type: 'FULL_COVERAGE_ARTICLE',
+    file,
+    url: item?.url || (file ? `${SITE_ORIGIN}/${file}` : ''),
+    priority: item?.priority || '',
+    segment: item?.visibility_segment || '',
+    diagnosis: item?.diagnosis || 'UNCLASSIFIED',
+    editorial_decision: item?.editorial_decision || '',
+    gsc: item?.gsc || {},
+    gsc_windows: item?.gsc_windows || {},
+    index_inspection: item?.index_inspection || {},
+    required_action: item?.required_action || {},
+    keyword_plan: {
+      primary: item?.keywords?.evidence?.[0]?.query || item?.keywords?.primary || '',
+      secondary: item?.keywords?.secondary || [],
+      intents: item?.keywords?.intents || [],
+      useful_queries: (item?.keywords?.evidence || []).map((row) => row.query).filter(Boolean),
+    },
+    tasks: item?.required_action?.required_change ? [item.required_action.required_change] : [],
+    internal_link_sources: (item?.topology?.suggested_sources || []).map((source) => ({
+      from: source.from,
+      anchor: source.anchor,
+      placement: source.placement,
+    })),
+    proposed_title: strategyAction.proposed_title || '',
+    proposed_meta_description: strategyAction.proposed_meta_description || '',
+    score: { total: Number(item?.opportunity_score || 0), seo: 0, aeo: 0, geo: 0, aio: 0 },
+  };
+}
+
 function mergeStrategyActionDraft(card, actionCardsByFile) {
   const file = normalizeReportFile(card?.file || card?.url);
   const strategyAction = actionCardsByFile?.get?.(file);
@@ -1213,7 +1274,7 @@ function mergeStrategyActionDraft(card, actionCardsByFile) {
 
 function looksLikeArticleTitle(query) {
   const value = String(query || '').trim();
-  if (!value) return true;
+  if (!value) return false;
   const words = value.split(/\s+/).filter(Boolean);
   if (value.length > 70) return true;
   if (value.includes('?') && words.length > 6) return true;
@@ -1240,7 +1301,8 @@ function hasPromisingSignal(card) {
   const impressions = Number(gsc.impressions || 0);
   const clicks = Number(gsc.clicks || 0);
   const position = Number(gsc.position || 0);
-  if (looksLikeArticleTitle(query)) return false;
+  if (query && looksLikeArticleTitle(query)) return false;
+  if (!query && (impressions > 0 || clicks > 0 || position > 0)) return true;
   if (clicks > 0 && position > 0 && position <= 40) return true;
   if (impressions >= 20 && position > 3 && position <= 30) return true;
   if (impressions >= 8 && position > 3 && position <= 12) return true;
@@ -1290,25 +1352,42 @@ function buildPromisingSeoCards(cards, contentStrategy, excludedKeys, articleByF
     .slice(0, 8);
 }
 
-function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindowDays) {
+function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindowDays, fullCoverageReport) {
   const actionCardsByFile = new Map((contentStrategy?.action_cards || [])
     .map((item) => [normalizeReportFile(item.file), item])
     .filter(([file]) => Boolean(file)));
-  const enrichedCards = cards.map((card) => mergeStrategyActionDraft(card, actionCardsByFile));
-  const boostCards = enrichedCards
-    .filter((card) => card.type === 'P0_PUSH_TO_PAGE_ONE')
-    .filter((card) => !isRecentlyTouched(approvalCardKey(card), articleByFile, 14))
-    .slice(0, 5);
-  const repairCards = enrichedCards
-    .filter((card) => ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'].includes(card.type))
-    .filter((card) => !isRecentlyTouched(approvalCardKey(card), articleByFile, 14))
-    .slice(0, 5);
+  const fullCoverageItems = (Array.isArray(fullCoverageReport?.priority_map) ? fullCoverageReport.priority_map : [])
+    .filter((item) => item?.type === 'article')
+    .filter((item) => !shouldIgnoreSeoFile(normalizeReportFile(item.path || item.url)))
+    .map((item) => buildFullCoverageCard(item, actionCardsByFile));
+  const enrichedCards = fullCoverageItems.length
+    ? fullCoverageItems
+    : cards.map((card) => mergeStrategyActionDraft(card, actionCardsByFile));
+  const boostCards = enrichedCards.filter((card) => {
+    if (fullCoverageItems.length) return card.diagnosis === 'CTR_GAP_TOP10';
+    return card.type === 'P0_PUSH_TO_PAGE_ONE';
+  });
+  const repairCards = enrichedCards.filter((card) => {
+    if (fullCoverageItems.length) return String(card.diagnosis || '').startsWith('ZERO_VISIBILITY_') || ['DEEP_31_100', 'DECLINING'].includes(card.diagnosis);
+    return ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'].includes(card.type);
+  });
   const excludedKeys = new Set([...boostCards, ...repairCards].map(approvalCardKey).filter(Boolean));
-  const promisingCards = buildPromisingSeoCards(enrichedCards, contentStrategy, excludedKeys, articleByFile);
+  const promisingCards = fullCoverageItems.length
+    ? enrichedCards.filter((card) => !excludedKeys.has(approvalCardKey(card)))
+    : buildPromisingSeoCards(enrichedCards, contentStrategy, excludedKeys, articleByFile);
+  const allCards = [...boostCards, ...promisingCards, ...repairCards];
+  const allKeys = new Set(allCards.map(approvalCardKey).filter(Boolean));
+  const inventoryCount = fullCoverageItems.length || allCards.length;
   return {
     status: 'AWAITING_USER_APPROVAL',
     rule: 'Jedna komenda popraw-seo pokazuje raport liderów BOOST/NAPRAWA oraz drugi raport ROKUJE. Agent nie edytuje HTML, dopóki użytkownik nie zatwierdzi konkretnych ID.',
     no_generic_text: true,
+    coverage_contract: {
+      status: inventoryCount === allKeys.size ? 'PASS' : 'FAIL',
+      article_inventory: inventoryCount,
+      assigned_actions: allKeys.size,
+      omitted_articles: fullCoverageItems.filter((card) => !allKeys.has(approvalCardKey(card))).map((card) => card.file),
+    },
     approval_examples: [
       'popraw BOOST 1',
       'popraw ROKUJE 1',
@@ -1318,6 +1397,12 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
     boost: boostCards.map((card, index) => buildSeoApprovalItem(card, 'BOOST', index + 1, articleByFile, sourceWindowDays)),
     promising: promisingCards.map((card, index) => buildSeoApprovalItem(card, 'ROKUJE', index + 1, articleByFile, sourceWindowDays)),
     repair: repairCards.map((card, index) => buildSeoApprovalItem(card, 'NAPRAWA', index + 1, articleByFile, sourceWindowDays)),
+    full_portfolio: allCards.map((card) => ({
+      file: approvalCardKey(card),
+      diagnosis: card.diagnosis || card.type,
+      required_action: card.required_action?.required_change || card.tasks?.[0] || 'INSUFFICIENT_DATA',
+      cooldown_status: isRecentlyTouched(approvalCardKey(card), articleByFile, 14) ? 'COOLDOWN_MONITORUJ' : 'READY_FOR_APPROVAL',
+    })),
   };
 }
 
@@ -1420,19 +1505,18 @@ function buildGscAfterChangeQueue(approvalWave) {
     ['NAPRAWA', approvalWave?.repair || []],
   ];
   const items = [];
-  const flat = [];
   for (const [kind, groupItems] of groups) {
     for (const item of groupItems) {
       const urls = unique((item.gsc_submit_after_change || [])
         .filter(Boolean)
         .filter((url) => !shouldExcludeSeoFile(url)));
-      urls.forEach((url) => flat.push(url));
       items.push({
         id: item.id,
         kind,
         file: item.file,
         target_url: item.url,
         submit_after_accepted_edit: urls,
+        status: 'WAITING_FOR_ACCEPTED_AND_APPLIED_EDIT',
         gsc_note: 'Zgłaszaj dopiero po zaakceptowanej edycji, aktualizacji dateModified, sitemap i _site.',
         monitor_after: 'KPI 7/14/28 dni od nowego dateModified: impressions, clicks, CTR, position, AI impressions, engagement.',
       });
@@ -1442,7 +1526,7 @@ function buildGscAfterChangeQueue(approvalWave) {
     generated_at: nowWarsawIso(),
     status: 'AFTER_ACCEPTED_EDIT_ONLY',
     rule: 'To nie jest lista do natychmiastowego klikania w GSC. Zgłaszamy URL dopiero po realnej zmianie strony.',
-    submit_targets: unique(flat),
+    submit_targets: [],
     items,
   };
 }
@@ -1523,6 +1607,142 @@ function buildCannibalizationMap(cards, contentStrategy) {
   };
 }
 
+function percentPart(value, total) {
+  if (!Number(total || 0)) return 0;
+  return Number(((Number(value || 0) / Number(total)) * 100).toFixed(1));
+}
+
+function percentChange(current, previous) {
+  if (!Number(previous || 0)) return Number(current || 0) > 0 ? 100 : 0;
+  return Number((((Number(current || 0) - Number(previous)) / Number(previous)) * 100).toFixed(1));
+}
+
+function formatSigned(value) {
+  const number = Number(value || 0);
+  return number > 0 ? `+${number}` : String(number);
+}
+
+function buildBroadSeoConclusions(fullCoverageReport, weeklyApi, indexCoverage) {
+  const articles = (Array.isArray(fullCoverageReport?.priority_map) ? fullCoverageReport.priority_map : [])
+    .filter((item) => item.type === 'article');
+  if (!articles.length) {
+    return { status: 'INSUFFICIENT_DATA', reason: 'Brak pełnej mapy artykułów GSC.', summary: {}, priorities: [] };
+  }
+  const countDiagnosis = (pattern) => articles.filter((item) => pattern.test(String(item.diagnosis || ''))).length;
+  const visible = articles.filter((item) => Number(item?.gsc?.impressions || 0) > 0);
+  const zeroVisibility = articles.filter((item) => Number(item?.gsc?.impressions || 0) === 0);
+  const indexedZero = zeroVisibility.filter((item) => item.diagnosis === 'ZERO_VISIBILITY_INDEXED');
+  const indexProblem = zeroVisibility.filter((item) => item.diagnosis !== 'ZERO_VISIBILITY_INDEXED');
+  const unknownToGoogle = zeroVisibility.filter((item) => item.diagnosis === 'ZERO_VISIBILITY_UNKNOWN_TO_GOOGLE');
+  const unknownInLocalSitemap = unknownToGoogle.filter((item) => item.in_sitemap === true).length;
+  const unknownWithInboundLinks = unknownToGoogle.filter((item) => Number(item?.topology?.inbound_links || 0) > 0).length;
+  const sortedByClicks = [...visible].sort((a, b) => Number(b.gsc.clicks || 0) - Number(a.gsc.clicks || 0) || Number(b.gsc.impressions || 0) - Number(a.gsc.impressions || 0));
+  const totalClicks = visible.reduce((sum, item) => sum + Number(item.gsc.clicks || 0), 0);
+  const top10Clicks = sortedByClicks.slice(0, 10).reduce((sum, item) => sum + Number(item.gsc.clicks || 0), 0);
+  const categories = {};
+  for (const item of articles) {
+    const category = String(item.category || 'other');
+    if (!categories[category]) categories[category] = { total: 0, visible: 0, zero: 0, clicks: 0, impressions: 0, ctr: 0 };
+    categories[category].total += 1;
+    categories[category].clicks += Number(item.gsc.clicks || 0);
+    categories[category].impressions += Number(item.gsc.impressions || 0);
+    if (Number(item.gsc.impressions || 0) > 0) categories[category].visible += 1;
+    else categories[category].zero += 1;
+  }
+  Object.values(categories).forEach((category) => {
+    category.ctr = category.impressions > 0 ? Number(((category.clicks / category.impressions) * 100).toFixed(2)) : 0;
+  });
+  const windows = weeklyApi?.reporting_windows || {};
+  const day28Current = windows.day_28?.property?.current || {};
+  const day28Previous = windows.day_28?.property?.previous || {};
+  const imageRows = weeklyApi?.secondary_search_types_28d?.image?.current_pages || [];
+  const imageClicks = imageRows.reduce((sum, item) => sum + Number(item.clicks || 0), 0);
+  const imageImpressions = imageRows.reduce((sum, item) => sum + Number(item.impressions || 0), 0);
+  const checked = Array.isArray(indexCoverage?.checked) ? indexCoverage.checked : [];
+  const inspectionBreakdown = checked.reduce((acc, item) => {
+    const key = String(item.coverage_state || 'UNKNOWN');
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+  const priorities = [
+    {
+      rank: 1,
+      area: 'ODZYSKANIE_INDEKSACJI',
+      evidence: `${indexProblem.length} artykułów ma 0 wyświetleń i nie ma potwierdzonej indeksacji: ${countDiagnosis(/CRAWLED_NOT_INDEXED/)} zeskanowanych, ${countDiagnosis(/UNKNOWN_TO_GOOGLE/)} nieznane Google, ${countDiagnosis(/DISCOVERED_NOT_INDEXED/)} wykryte bez indeksacji. Wśród stron nieznanych Google ${unknownInLocalSitemap}/${unknownToGoogle.length} jest w lokalnej sitemapie, a ${unknownWithInboundLinks}/${unknownToGoogle.length} ma linki wewnętrzne.`,
+      decision: 'Dla stron nieznanych sprawdzić publiczne HTTP 200, canonical i ostatni odczyt sitemap przez Google — same kolejne linki nie rozwiązują tej rozbieżności. Dla crawled/discovered ocenić unikalność intencji i jakość pierwszej odpowiedzi. Dopiero po naprawie zgłaszać URL.',
+      urls: indexProblem.map((item) => item.url),
+    },
+    {
+      rank: 2,
+      area: 'INDEKSOWANE_BEZ_WIDOCZNOSCI',
+      evidence: `${indexedZero.length} artykułów jest w indeksie, ale nie ma wyświetleń. To problem dopasowania do intencji lub konkurencyjności, a nie samego indeksowania.`,
+      decision: 'Dla każdego wykonać research query/PAA, wyznaczyć jedną główną intencję, dopasować title/H1/lead i dołożyć linki z właściwego klastra. Nie ponawiać samego zgłoszenia bez zmiany strony.',
+      urls: indexedZero.map((item) => item.url),
+    },
+    {
+      rank: 3,
+      area: 'NAJSZYBSZY_WZROST_KLIKNIEC',
+      evidence: `${countDiagnosis(/CTR_GAP_TOP10/)} artykuły mają lukę CTR w TOP 10, a ${countDiagnosis(/POSITION_11_30/)} są na pozycjach 11-30.`,
+      decision: 'Najpierw poprawiać snippet i zgodność leadu dla TOP 10, następnie odpowiedź oraz linkowanie dla pozycji 11-30. To największa obecna pula wzrostu bez tworzenia nowych artykułów.',
+      urls: articles.filter((item) => /CTR_GAP_TOP10|POSITION_11_30/.test(String(item.diagnosis || ''))).map((item) => item.url),
+    },
+    {
+      rank: 4,
+      area: 'DYWERSYFIKACJA_RUCHU',
+      evidence: `Dziesięć najlepszych artykułów daje ${percentPart(top10Clicks, totalClicks)}% kliknięć artykułowych.`,
+      decision: 'Chronić liderów, ale linkować z nich do stron 11-30 i indeksowanych bez widoczności. Celem jest wzrost liczby URL-i zdobywających kliknięcia, nie dalsza koncentracja na kilku liderach.',
+      urls: sortedByClicks.slice(0, 10).map((item) => item.url),
+    },
+  ];
+  if (categories.mity) {
+    priorities.push({
+      rank: 5,
+      area: 'KLASTER_MITY',
+      evidence: `Mity: widoczne ${categories.mity.visible}/${categories.mity.total}, kliknięcia ${categories.mity.clicks}, wyświetlenia ${categories.mity.impressions}.`,
+      decision: 'Potraktować Mity jako klaster naprawczy: sprawdzić indeksację pięciu niewidocznych tekstów, wzmacniać je z odpowiadających tematów zdrowie/jedzenie i dopasować nagłówki do pytań, które ludzie faktycznie wpisują.',
+      urls: articles.filter((item) => item.category === 'mity').map((item) => item.url),
+    });
+  }
+  if (imageImpressions > 0) {
+    priorities.push({
+      rank: 6,
+      area: 'GOOGLE_IMAGES',
+      evidence: `Google Images w 28 dni: ${Math.round(imageClicks)} kliknięcia i ${Math.round(imageImpressions)} wyświetleń na ${imageRows.length} URL-ach.`,
+      decision: 'W artykułach już widocznych w Images sprawdzić zgodność hero z intencją, opis alt, podpis i kontekst wokół obrazu. Nie generować nowych grafik bez wskazania URL-i z wyświetleniami i niskim CTR.',
+      urls: imageRows.sort((a, b) => Number(b.impressions || 0) - Number(a.impressions || 0)).slice(0, 20).map((item) => item.page),
+    });
+  }
+  return {
+    status: 'OK',
+    goal: 'Więcej zindeksowanych artykułów, więcej URL-i z wyświetleniami i większa liczba kliknięć z Google.',
+    summary: {
+      articles: articles.length,
+      visible_articles: visible.length,
+      visible_share_pct: percentPart(visible.length, articles.length),
+      zero_visibility_articles: zeroVisibility.length,
+      indexed_zero_visibility: indexedZero.length,
+      indexation_problem: indexProblem.length,
+      ctr_gap_top10: countDiagnosis(/CTR_GAP_TOP10/),
+      position_11_30: countDiagnosis(/POSITION_11_30/),
+      deep_31_100: countDiagnosis(/DEEP_31_100/),
+      clicking_articles: articles.filter((item) => Number(item?.gsc?.clicks || 0) > 0).length,
+      top10_click_share_pct: percentPart(top10Clicks, totalClicks),
+      day_28: {
+        clicks: Number(day28Current.total_clicks || 0),
+        clicks_change_pct: percentChange(day28Current.total_clicks, day28Previous.total_clicks),
+        impressions: Number(day28Current.total_impressions || 0),
+        impressions_change_pct: percentChange(day28Current.total_impressions, day28Previous.total_impressions),
+        position: Number(Number(day28Current.avg_position || 0).toFixed(2)),
+        previous_position: Number(Number(day28Previous.avg_position || 0).toFixed(2)),
+      },
+      categories,
+      inspection_breakdown: inspectionBreakdown,
+    },
+    priorities,
+    operating_rule: 'Każdy kolejny popraw-seo ma ponownie policzyć te wnioski. Zmiana globalnego priorytetu wymaga zmiany danych, nie opinii automatu.',
+  };
+}
+
 function buildUnifiedInsights() {
   const reportsDir = path.join(ROOT, 'data', 'reports');
   const growthData = buildGrowthData();
@@ -1540,16 +1760,20 @@ function buildUnifiedInsights() {
   const originality = readJsonIfExists(path.join(REPORT_DIR, 'originality-score.json'));
   const contentStrategy = readGscContentStrategyReport();
   const gscWeekly = readJsonIfExists(path.join(GSC_INPUT_DIR, 'gsc-weekly-report.json'));
+  const gscWeeklyApi = readJsonIfExists(path.join(GSC_INPUT_DIR, 'gsc-weekly-report-api.json'));
+  const fullCoverageReport = readJsonIfExists(path.join(GSC_INPUT_DIR, 'gsc-priority-map.json'));
+  const indexCoverage = readJsonIfExists(path.join(GSC_INPUT_DIR, 'gsc-indexing-coverage.json'));
 
   const cards = actionCardsFromSeoAio(seoAio);
   const currentRange = seoAio?.data_quality?.weekly_api_ranges?.current || {};
   const sourceWindowDays = inclusiveDays(currentRange.start, currentRange.end) || 30;
   const previousHistory = readJsonIfExists(path.join(REPORT_DIR, 'popraw-seo-historia.json'));
   const generatedAt = nowWarsawIso();
-  const approvalWave = buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindowDays);
+  const approvalWave = buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindowDays, fullCoverageReport);
   const seoWorkHistory = buildSeoWorkHistory(growthData.articles || [], generatedAt, previousHistory, sourceWindowDays);
   const afterChangeGscQueue = buildGscAfterChangeQueue(approvalWave);
   const cannibalizationMap = buildCannibalizationMap(cards, contentStrategy);
+  const broadSeoConclusions = buildBroadSeoConclusions(fullCoverageReport, gscWeeklyApi, indexCoverage);
   const portfolio = seoAio?.portfolio || {};
   const average = portfolio.average_scores || {};
   const waves = seoAio?.waves || {};
@@ -1650,6 +1874,8 @@ function buildUnifiedInsights() {
       originality_score: Boolean(originality && !originality.parse_error),
       gsc_content_strategy: contentStrategy.status === 'OK',
       gsc_weekly_measurement: Boolean(gscWeekly && !gscWeekly.parse_error),
+      gsc_full_coverage: Boolean(fullCoverageReport && !fullCoverageReport.parse_error),
+      gsc_index_coverage: Boolean(indexCoverage && !indexCoverage.parse_error),
     },
     portfolio,
     waves: Object.fromEntries(Object.entries(waves).map(([key, value]) => [key, Array.isArray(value) ? value.length : 0])),
@@ -1661,6 +1887,7 @@ function buildUnifiedInsights() {
       core_support: firstCardsByType(cards, ['P2_CORE_SUPPORT_LINKING'], 8),
     },
     approval_wave: approvalWave,
+    broad_seo_conclusions: broadSeoConclusions,
     seo_work_history: seoWorkHistory,
     gsc_after_change_queue: afterChangeGscQueue,
     cannibalization_map: cannibalizationMap,
@@ -2728,6 +2955,8 @@ function buildPoprawSeo() {
   };
   writeJson(path.join(REPORT_DIR, 'popraw-seo-insights.json'), unifiedInsights);
   writePoprawSeoInsightsMarkdown(unifiedInsights, path.join(REPORT_DIR, 'popraw-seo-insights.md'));
+  writeJson(path.join(REPORT_DIR, 'popraw-seo-wnioski-globalne.json'), unifiedInsights.broad_seo_conclusions);
+  writeBroadSeoConclusionsMarkdown(unifiedInsights.broad_seo_conclusions, path.join(REPORT_DIR, 'popraw-seo-wnioski-globalne.md'));
   writeJson(path.join(REPORT_DIR, 'popraw-seo-rokuje.json'), {
     generated_at: unifiedInsights.generated_at,
     status: unifiedInsights.approval_wave.status,
@@ -2798,6 +3027,42 @@ function appendContentStrategyMarkdown(lines, strategy) {
     strategy.gsc_submit_queue.forEach((url) => lines.push(`- ${url}`));
   }
   lines.push('');
+}
+
+function appendBroadSeoConclusionsMarkdown(lines, conclusions) {
+  if (!conclusions) return;
+  lines.push('## Wnioski Dla Całej Witryny');
+  lines.push(`- status: ${conclusions.status}`);
+  if (conclusions.status !== 'OK') {
+    lines.push(`- ${conclusions.reason || 'INSUFFICIENT_DATA'}`);
+    lines.push('');
+    return;
+  }
+  const summary = conclusions.summary || {};
+  lines.push(`- widoczność artykułów: ${summary.visible_articles}/${summary.articles} (${summary.visible_share_pct}%); bez widoczności: ${summary.zero_visibility_articles}.`);
+  lines.push(`- bez potwierdzonej indeksacji: ${summary.indexation_problem}; zindeksowane bez wyświetleń: ${summary.indexed_zero_visibility}.`);
+  lines.push(`- szybka pula wzrostu: CTR TOP 10 = ${summary.ctr_gap_top10}; pozycje 11-30 = ${summary.position_11_30}; pozycje 31+ = ${summary.deep_31_100}.`);
+  lines.push(`- koncentracja: TOP 10 artykułów daje ${summary.top10_click_share_pct}% kliknięć artykułowych.`);
+  if (summary.day_28) {
+    lines.push(`- trend 28 dni: kliknięcia ${summary.day_28.clicks} (${formatSigned(summary.day_28.clicks_change_pct)}%), wyświetlenia ${summary.day_28.impressions} (${formatSigned(summary.day_28.impressions_change_pct)}%), pozycja ${summary.day_28.position} wobec ${summary.day_28.previous_position}.`);
+  }
+  lines.push('');
+  lines.push('### Priorytety Systemowe');
+  (conclusions.priorities || []).forEach((item) => {
+    lines.push(`${item.rank}. ${item.area}`);
+    lines.push(`   - dane: ${item.evidence}`);
+    lines.push(`   - decyzja: ${item.decision}`);
+    lines.push(`   - URL-e: ${item.urls.length}`);
+  });
+  lines.push('');
+  lines.push(`- reguła: ${conclusions.operating_rule}`);
+  lines.push('');
+}
+
+function writeBroadSeoConclusionsMarkdown(conclusions, file) {
+  const lines = ['# Popraw SEO — Wnioski Dla Całej Witryny', '', `Wygenerowano: ${nowWarsawIso()}`, ''];
+  appendBroadSeoConclusionsMarkdown(lines, conclusions);
+  writeText(file, `${lines.join('\n')}\n`);
 }
 
 function appendApprovalAutomationMarkdown(lines, item) {
@@ -2887,6 +3152,7 @@ function writePoprawSeoMarkdown(command, file) {
     insights.key_insights.forEach((item) => lines.push(`- ${item}`));
     lines.push('');
   }
+  appendBroadSeoConclusionsMarkdown(lines, insights.broad_seo_conclusions);
   const layers = insights.gsc_measurement_layers;
   if (layers?.pages?.current && layers?.disclosed_queries?.current) {
     lines.push('## GSC — Warstwy Pomiaru');
@@ -2901,6 +3167,9 @@ function writePoprawSeoMarkdown(command, file) {
   }
   appendContentStrategyMarkdown(lines, insights.content_strategy);
   lines.push('## Paczka Do Zatwierdzenia');
+  if (approval.coverage_contract) {
+    lines.push(`- Pełne pokrycie: ${approval.coverage_contract.status}; artykuły ${approval.coverage_contract.article_inventory}; przypisane działania ${approval.coverage_contract.assigned_actions}; pominięte ${approval.coverage_contract.omitted_articles.length}.`);
+  }
   lines.push('- `BOOST` = strony, które Google już pokazuje; poprawiamy CTR, doprecyzowanie leadu i linkowanie.');
   lines.push('- `ROKUJE` = drugi raport: strony niebędące liderami, ale mające sygnał GSC albo miejsce w strategii; po liderach wzmacniamy je równie konkretnie.');
   lines.push('- `NAPRAWA` = strony słabe albo bez widoczności; najpierw budujemy konkretną odpowiedź, FAQ, źródła i linki.');
@@ -2949,6 +3218,14 @@ function writePoprawSeoMarkdown(command, file) {
         lines.push(`   - linki do rozważenia: ${item.internal_link_suggestions.map((link) => `${link.from} -> "${link.anchor || 'anchor do przygotowania'}"`).join('; ')}`);
       }
       lines.push(`   - przed edycją przygotuj: ${item.prepare_before_edit.join('; ')}`);
+    });
+    lines.push('');
+  }
+  if (Array.isArray(approval.full_portfolio) && approval.full_portfolio.length) {
+    lines.push('### Pełny Portfel — Każdy Artykuł Ma Działanie');
+    approval.full_portfolio.forEach((item, index) => {
+      lines.push(`${index + 1}. ${item.file} — ${item.diagnosis}; ${item.cooldown_status}`);
+      lines.push(`   - działanie: ${item.required_action}`);
     });
     lines.push('');
   }
@@ -3605,6 +3882,8 @@ if (require.main === module) {
 }
 
 module.exports = {
+  buildBroadSeoConclusions,
+  buildSeoApprovalWave,
   estimatedTrafficGain,
   isNoindexSeoFile,
   metricDelta,

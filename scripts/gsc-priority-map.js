@@ -103,7 +103,6 @@ function parseNumber(input) {
   const normalized = raw
     .replace(/%/g, '')
     .replace(/\s+/g, '')
-    .replace(/\.(?=\d{3}(?:\D|$))/g, '')
     .replace(',', '.');
   const value = Number(normalized);
   return Number.isFinite(value) ? value : 0;
@@ -217,6 +216,13 @@ function readGsc(inputDir) {
     ? path.join(inputDir, 'previous-query-pages.csv')
     : path.join(inputDir, 'previous_query_pages.csv');
   const previousQueryPages = readCsvIfExists(previousQueryPagesFile).map(mapGscRow);
+  const pageWindows = {};
+  for (const days of [7, 28, 90]) {
+    pageWindows[`day_${days}`] = {
+      current: readCsvIfExists(path.join(inputDir, `web-${days}d-current-pages.csv`)).map(mapGscRow),
+      previous: readCsvIfExists(path.join(inputDir, `web-${days}d-previous-pages.csv`)).map(mapGscRow),
+    };
+  }
   return {
     status: pages.length && queries.length && queryPages.length ? 'ok' : 'INSUFFICIENT_DATA',
     files: {
@@ -233,7 +239,24 @@ function readGsc(inputDir) {
     previousPages,
     previousQueries,
     previousQueryPages,
+    pageWindows,
   };
+}
+
+function readIndexInspection(outputDir) {
+  const file = path.join(outputDir, 'gsc-indexing-coverage.json');
+  if (!fs.existsSync(file)) return { status: 'NOT_RUN', file, byUrl: new Map() };
+  try {
+    const report = JSON.parse(fs.readFileSync(file, 'utf8'));
+    const rows = Array.isArray(report.checked) ? report.checked : [];
+    return {
+      status: String(report.status || 'UNKNOWN'),
+      file,
+      byUrl: new Map(rows.filter((row) => row.url).map((row) => [String(row.url), row])),
+    };
+  } catch (err) {
+    return { status: 'PARSE_ERROR', file, error: String(err.message || err), byUrl: new Map() };
+  }
 }
 
 function stripTags(html) {
@@ -372,7 +395,9 @@ function getBlogPosting(blocks) {
 }
 
 function collectPages(baseUrl) {
-  const paths = unique([...readSitemapPaths(), ...findRootHtmlPaths()])
+  const sitemapPaths = readSitemapPaths();
+  const sitemapPathSet = new Set(sitemapPaths);
+  const paths = unique([...sitemapPaths, ...findRootHtmlPaths()])
     .filter((pagePath) => pagePath.endsWith('.html'))
     .filter((pagePath) => fs.existsSync(path.join(ROOT, pagePath)))
     .sort((a, b) => a.localeCompare(b, 'pl'));
@@ -392,11 +417,20 @@ function collectPages(baseUrl) {
     const words = tokenize(`${pagePath} ${title} ${metaDescription} ${h1} ${h2.join(' ')}`);
     const dateModified = matchOne(html, /<meta\s+property="article:modified_time"\s+content="([^"]*)"/i)
       || String(blogPosting?.dateModified || '');
+    const robots = matchOne(html, /<meta\s+name="robots"\s+content="([^"]*)"/i).toLowerCase();
+    const pageType = CORE_PAGES.has(pagePath)
+      ? 'core'
+      : (/http-equiv=["']refresh/i.test(html)
+        ? 'redirect'
+        : (robots.includes('noindex')
+          ? 'excluded_noindex'
+          : (schemaTypes.includes('BlogPosting') ? 'article' : 'support_page')));
 
     return {
       path: pagePath,
       url: pathToUrl(pagePath, baseUrl),
-      type: CORE_PAGES.has(pagePath) ? 'core' : (/http-equiv=["']refresh/i.test(html) ? 'redirect' : 'article'),
+      in_sitemap: sitemapPathSet.has(pagePath),
+      type: pageType,
       category: inferCategory(pagePath, html),
       title,
       h1,
@@ -469,6 +503,93 @@ function aggregateGscByPage(gsc) {
   }
 
   return { byUrl, queryByUrl, previousByUrl, previousQueryByUrl };
+}
+
+function pageMetricMap(rows) {
+  return new Map((rows || []).filter((row) => row.page).map((row) => [row.page, {
+    clicks: Number(row.clicks || 0),
+    impressions: Number(row.impressions || 0),
+    ctr: Number(row.ctr || 0),
+    position: Number(row.position || 0),
+  }]));
+}
+
+function windowMetricsForUrl(gsc, url) {
+  const out = {};
+  for (const days of [7, 28, 90]) {
+    const window = gsc.pageWindows?.[`day_${days}`] || {};
+    const current = pageMetricMap(window.current).get(url) || null;
+    const previous = pageMetricMap(window.previous).get(url) || null;
+    out[`day_${days}`] = {
+      status: current || previous ? 'ok' : 'NO_PAGE_ROW',
+      current,
+      previous,
+    };
+  }
+  return out;
+}
+
+function inspectionDiagnosis(inspection) {
+  if (!inspection) return 'INSPECTION_REQUIRED';
+  if (inspection.error) return 'INSPECTION_ERROR';
+  const verdict = String(inspection.verdict || '').toUpperCase();
+  const indexing = String(inspection.indexing_state || inspection.indexingState || '').toUpperCase();
+  const coverage = String(inspection.coverage_state || inspection.coverageState || '').toUpperCase();
+  if (verdict === 'PASS' || /SUBMITTED_AND_INDEXED/.test(indexing) || /STRONA PRZESŁANA I ZINDEKSOWANA/.test(coverage)) return 'INDEXED';
+  if (/BLOCK|NOINDEX|ROBOTS/.test(`${indexing} ${coverage}`)) return 'BLOCKED';
+  if (/DUPLICATE|CANONICAL/.test(coverage)) return 'CANONICAL_CONFLICT';
+  if (/CRAWLED|ZESKANOWANA.*NIE ZINDEKSOWANA/.test(coverage)) return 'CRAWLED_NOT_INDEXED';
+  if (/DISCOVERED|WYKRYTA.*NIEZINDEKSOWANA/.test(coverage)) return 'DISCOVERED_NOT_INDEXED';
+  if (/GOOGLE NIEZNANY/.test(coverage)) return 'UNKNOWN_TO_GOOGLE';
+  return 'NOT_INDEXED_OR_UNKNOWN';
+}
+
+function visibilityDiagnosis(page, metrics, performance, inspection) {
+  if (page.type !== 'article') return 'SITE_SUPPORT';
+  const impressions = Number(metrics?.impressions || 0);
+  const clicks = Number(metrics?.clicks || 0);
+  const ctr = Number(metrics?.ctr || 0);
+  const position = Number(metrics?.position || 0);
+  if (!impressions) return `ZERO_VISIBILITY_${inspectionDiagnosis(inspection)}`;
+  if (performance?.conclusion === 'DECLINING_REFRESH' || performance?.conclusion === 'CTR_DROP') return 'DECLINING';
+  if (position > 0 && position <= 10 && (clicks === 0 || ctr < 1)) return 'CTR_GAP_TOP10';
+  if (position > 10 && position <= 30) return 'POSITION_11_30';
+  if (position > 30) return 'DEEP_31_100';
+  if (clicks > 0) return 'VISIBLE_CLICKING';
+  return 'VISIBLE_LOW_SIGNAL';
+}
+
+function concreteRequiredAction(page, metrics, keywordPlan, sources, diagnosis, inspection) {
+  const primary = keywordPlan.evidence[0]?.query || '';
+  const sourceFiles = sources.slice(0, 3).map((item) => item.from);
+  const evidence = {
+    clicks: Math.round(Number(metrics?.clicks || 0)),
+    impressions: Math.round(Number(metrics?.impressions || 0)),
+    ctr: Number(Number(metrics?.ctr || 0).toFixed(2)),
+    position: Number(Number(metrics?.position || 0).toFixed(2)),
+    disclosed_query: primary || null,
+    inbound_links: page.inbound_links,
+    inspection: inspection || null,
+  };
+  if (diagnosis.startsWith('ZERO_VISIBILITY_')) {
+    if (diagnosis === 'ZERO_VISIBILITY_INSPECTION_REQUIRED') {
+      return { action_type: 'URL_INSPECTION', target: page.path, evidence, required_change: `Najpierw sprawdź stan indeksacji ${page.path}; bez wyniku inspekcji nie wolno zgadywać zmiany treści.`, source_files: sourceFiles, content_status: 'INSUFFICIENT_DATA_UNTIL_INSPECTION' };
+    }
+    if (/BLOCKED|CANONICAL_CONFLICT|NOT_INDEXED|DISCOVERED|CRAWLED|UNKNOWN_TO_GOOGLE/.test(diagnosis)) {
+      return { action_type: 'INDEXATION_REPAIR', target: page.path, evidence, required_change: `Usuń konkretną przyczynę wskazaną przez URL Inspection (${inspectionDiagnosis(inspection)}), potwierdź canonical i obecność w sitemap, następnie wzmocnij odkrywanie z: ${sourceFiles.join(', ') || 'brak dopasowanych źródeł'}.`, source_files: sourceFiles, content_status: 'TECHNICAL_FIRST' };
+    }
+    return { action_type: 'INTENT_RESEARCH', target: page.path, evidence, required_change: `URL jest zindeksowany, ale ma 0 wyświetleń: wykonaj research autocomplete/PAA dla tematu „${page.h1 || page.title}”, następnie dopasuj title, lead i jedną odpowiedź do potwierdzonej intencji.`, source_files: sourceFiles, content_status: 'RESEARCH_REQUIRED_BEFORE_EDIT' };
+  }
+  if (diagnosis === 'CTR_GAP_TOP10') {
+    return { action_type: 'SNIPPET_CTR', target: page.path, evidence, required_change: `Przy pozycji ${evidence.position} i ${evidence.impressions} wyświetleniach przygotuj title/meta odpowiadające wprost na „${primary || page.h1}”; treść obietnicy musi być widoczna także w leadzie.`, source_files: sourceFiles, content_status: 'DRAFT_REQUIRED' };
+  }
+  if (diagnosis === 'POSITION_11_30' || diagnosis === 'DEEP_31_100') {
+    return { action_type: 'INTENT_AND_LINKING', target: page.path, evidence, required_change: `Dla „${primary || page.h1}” doprecyzuj pierwszą odpowiedź i brakującą sekcję wynikającą z query/PAA; dodaj linki kontekstowe z: ${sourceFiles.join(', ') || 'INSUFFICIENT_DATA — brak dopasowanych źródeł'}.`, source_files: sourceFiles, content_status: primary ? 'DRAFT_REQUIRED' : 'QUERY_RESEARCH_REQUIRED' };
+  }
+  if (diagnosis === 'DECLINING') {
+    return { action_type: 'DECLINE_RECOVERY', target: page.path, evidence, required_change: `Porównaj spadek dla tego URL-a i query „${primary || 'brak ujawnionego query'}”; zmieniaj snippet lub fragment odpowiedzi dopiero po wskazaniu utraconej intencji.`, source_files: sourceFiles, content_status: primary ? 'DRAFT_REQUIRED' : 'INSUFFICIENT_QUERY_DATA' };
+  }
+  return { action_type: 'PROTECT_AND_SCALE', target: page.path, evidence, required_change: `Nie przepisuj działającego targetu. Wzmocnij go linkami z: ${sourceFiles.join(', ') || 'najbliższego potwierdzonego klastra'} i monitoruj kliknięcia oraz CTR w oknach 7/28/90 dni.`, source_files: sourceFiles, content_status: 'TARGET_PROTECTED' };
 }
 
 function clamp(value, min, max) {
@@ -859,7 +980,7 @@ function readAiVisibility(inputDir) {
   };
 }
 
-function buildPriorityMap(pages, gsc, generatedAt, baseUrl) {
+function buildPriorityMap(pages, gsc, generatedAt, baseUrl, inspectionByUrl = new Map()) {
   const { byUrl, queryByUrl, previousByUrl, previousQueryByUrl } = aggregateGscByPage(gsc);
   return pages.map((page) => {
     const metrics = byUrl.get(page.url) || {
@@ -876,6 +997,10 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl) {
     const priority = classifyPriority(metrics, page, score);
     const segment = visibilitySegment(metrics, page);
     const sourceSuggestions = suggestSources(page, pages);
+    const performanceDelta = buildPerformanceDelta(metrics, previousMetrics, queryRows, previousQueryRows);
+    const inspection = inspectionByUrl.get(page.url) || null;
+    const diagnosis = visibilityDiagnosis(page, metrics, performanceDelta, inspection);
+    const requiredAction = concreteRequiredAction(page, metrics, keywordPlan, sourceSuggestions, diagnosis, inspection);
     const aiReadinessScore = Math.round(([
       page.has_quick_answer,
       page.has_faq_schema,
@@ -892,6 +1017,7 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl) {
       opportunity_score: score,
       url: page.url,
       path: page.path,
+      in_sitemap: page.in_sitemap,
       type: page.type,
       category: page.category,
       title: page.title,
@@ -903,7 +1029,12 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl) {
         ctr: Number(Number(metrics.ctr || 0).toFixed(2)),
         position: Number(Number(metrics.position || 0).toFixed(2)),
         status: queryRows.length || metrics.impressions ? 'ok' : 'NO_GSC_QUERY_PAGE_DATA',
+        query_privacy_note: metrics.impressions > 0 && queryRows.length === 0 ? 'PAGE_SIGNAL_VALID_QUERY_ANONYMIZED_OR_NOT_RETURNED' : null,
       },
+      gsc_windows: windowMetricsForUrl(gsc, page.url),
+      diagnosis,
+      required_action: requiredAction,
+      index_inspection: inspection || { status: metrics.impressions > 0 ? 'NOT_REQUIRED_FOR_VISIBLE_PAGE' : 'PENDING' },
       topology: {
         inbound_links: page.inbound_links,
         inbound_sources: page.inbound_sources.slice(0, 10),
@@ -913,7 +1044,7 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl) {
       keywords: keywordPlan,
       all_keyword_registry: keywordPlan.all_queries,
       refresh_impact: buildRefreshImpact(page, metrics, generatedAt),
-      performance_delta: buildPerformanceDelta(metrics, previousMetrics, queryRows, previousQueryRows),
+      performance_delta: performanceDelta,
       aeo_geo_ai: {
         ai_readiness_score: aiReadinessScore,
         has_quick_answer: page.has_quick_answer,
@@ -923,7 +1054,7 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl) {
         has_speakable: page.has_speakable,
         citation_count: page.citation_count,
       },
-      action_plan: buildActionPlan(priority, page, keywordPlan, sourceSuggestions),
+      action_plan: [requiredAction.required_change],
       gsc_submit_after_change: [page.url, ...sourceSuggestions.slice(0, 3).map((item) => pathToUrl(item.from, baseUrl))],
       promotion_places: [],
     };
@@ -956,6 +1087,8 @@ function buildPortfolioSections(priorityMap) {
       priority: item.priority,
       segment: item.visibility_segment,
       decision: item.editorial_decision,
+      diagnosis: item.diagnosis,
+      required_action: item.required_action.required_change,
       primary_keyword: item.keywords.primary,
       supporting_keywords: item.keywords.secondary,
       query_count: item.all_keyword_registry.length,
@@ -1054,6 +1187,14 @@ function writeOutputs(report, outputDir) {
   lines.push(`Status danych GSC: ${report.data_quality.gsc_status}`);
   lines.push(`Zakres: ${report.summary.pages_total} stron z sitemap/root HTML, w tym nowe bez danych GSC.`);
   lines.push('');
+  lines.push('## Bramka Pełnego Pokrycia Artykułów');
+  lines.push(`- status: ${report.coverage_contract.status}`);
+  lines.push(`- artykuły: ${report.coverage_contract.article_inventory}`);
+  lines.push(`- diagnozy: ${report.coverage_contract.diagnosed_articles}`);
+  lines.push(`- przypisane działania: ${report.coverage_contract.actions_assigned}`);
+  lines.push(`- pominięte: ${report.coverage_contract.omitted_articles.length}`);
+  lines.push(`- URL Inspection: ${report.data_quality.index_inspection.status}; sprawdzone URL-e: ${report.data_quality.index_inspection.checked_urls}`);
+  lines.push('');
   lines.push('## Podsumowanie');
   Object.entries(report.summary.priority_counts).forEach(([priority, count]) => {
     lines.push(`- ${priority}: ${count}`);
@@ -1133,11 +1274,19 @@ function writeOutputs(report, outputDir) {
   }
   lines.push('');
   lines.push('## Full Coverage Table');
-  lines.push('| URL | Status | Segment | Decyzja | Query | Impr | ΔImpr | Clicks | ΔClicks | CTR | ΔCTR pp | Pos | Pos+ | Wniosek | Modified |');
-  lines.push('|---|---:|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|');
+  lines.push('| URL | Diagnoza | Decyzja | Query | Impr | ΔImpr | Clicks | CTR | Pos | Wniosek | Modified |');
+  lines.push('|---|---|---|---|---:|---:|---:|---:|---:|---|---|');
   report.portfolio.full_coverage_table.forEach((item) => {
     const keyword = String(item.primary_keyword || '').replace(/\|/g, '/').slice(0, 72);
-    lines.push(`| ${item.url} | ${item.priority} | ${item.segment} | ${item.decision} | ${keyword} | ${item.impressions} | ${formatSigned(item.impressions_delta)} | ${item.clicks} | ${formatSigned(item.clicks_delta)} | ${item.ctr}% | ${formatSigned(item.ctr_delta_pp)} | ${item.position} | ${formatSigned(item.position_improvement)} | ${item.performance_conclusion} | ${item.date_modified || 'MISSING'} |`);
+    lines.push(`| ${item.url} | ${item.diagnosis} | ${item.decision} | ${keyword} | ${item.impressions} | ${formatSigned(item.impressions_delta)} | ${item.clicks} | ${item.ctr}% | ${item.position} | ${item.performance_conclusion} | ${item.date_modified || 'MISSING'} |`);
+  });
+  lines.push('');
+  lines.push('## Pełna Kolejka Działań — Bez Pominięć');
+  report.priority_map.filter((item) => item.type === 'article').forEach((item, index) => {
+    lines.push(`${index + 1}. ${item.url}`);
+    lines.push(`   - diagnoza: ${item.diagnosis}`);
+    lines.push(`   - działanie: ${item.required_action.required_change}`);
+    lines.push(`   - status treści: ${item.required_action.content_status}`);
   });
   lines.push('');
   lines.push('## All-Keyword Registry');
@@ -1183,10 +1332,14 @@ function main() {
   const args = parseArgs(process.argv.slice(2));
   const gsc = readGsc(args.inputDir);
   const pages = collectPages(args.baseUrl);
+  const inspection = readIndexInspection(args.outputDir);
   const generatedAt = new Date().toISOString();
-  const priorityMap = buildPriorityMap(pages, gsc, generatedAt, args.baseUrl);
+  const priorityMap = buildPriorityMap(pages, gsc, generatedAt, args.baseUrl, inspection.byUrl);
   const portfolio = buildPortfolioSections(priorityMap);
   const aiVisibility = readAiVisibility(args.inputDir);
+  const articleItems = priorityMap.filter((item) => item.type === 'article');
+  const diagnosedArticles = articleItems.filter((item) => item.diagnosis && item.required_action?.required_change);
+  const omittedArticles = articleItems.filter((item) => !item.diagnosis || !item.required_action?.required_change);
   const report = {
     generated_at: generatedAt,
     data_quality: {
@@ -1209,7 +1362,24 @@ function main() {
         ctr_gap_top10: portfolio.ctr_gap_top10.length,
         low_visibility_articles: portfolio.low_visibility_articles.length,
         dormant_articles: portfolio.dormant_articles.length,
+        article_inventory: articleItems.length,
+        diagnosed_articles: diagnosedArticles.length,
+        actions_assigned: diagnosedArticles.length,
+        omitted_articles: omittedArticles.length,
       },
+      index_inspection: {
+        status: inspection.status,
+        file: inspection.file,
+        checked_urls: inspection.byUrl.size,
+      },
+    },
+    coverage_contract: {
+      status: articleItems.length === diagnosedArticles.length && omittedArticles.length === 0 ? 'PASS' : 'FAIL',
+      invariant: 'article_inventory = diagnosed_articles = actions_assigned; omitted_articles = 0',
+      article_inventory: articleItems.length,
+      diagnosed_articles: diagnosedArticles.length,
+      actions_assigned: diagnosedArticles.length,
+      omitted_articles: omittedArticles.map((item) => item.path),
     },
     summary: {
       pages_total: pages.length,
@@ -1224,8 +1394,17 @@ function main() {
 
   const outputs = writeOutputs(report, args.outputDir);
   console.log(`[GSC-PRIORITY-MAP] pages=${pages.length} gsc=${gsc.status}`);
+  console.log(`[GSC-PRIORITY-MAP] coverage=${report.coverage_contract.status} articles=${articleItems.length} diagnosed=${diagnosedArticles.length} omitted=${omittedArticles.length}`);
   console.log(`[GSC-PRIORITY-MAP] report: ${outputs.mdPath}`);
   console.log(`[GSC-PRIORITY-MAP] report: ${outputs.jsonPath}`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = {
+  buildPriorityMap,
+  collectPages,
+  concreteRequiredAction,
+  parseNumber,
+  visibilityDiagnosis,
+};
