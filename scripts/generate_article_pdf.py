@@ -149,6 +149,47 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
             return
         return
 
+    if node.name == "table":
+        fragment_soup = BeautifulSoup(str(node), "html.parser")
+        table = fragment_soup.find("table")
+        if table is None:
+            return
+        caption = table.find("caption")
+        caption_text = caption.get_text(" ", strip=True) if caption else ""
+        if caption:
+            caption.decompose()
+        table.attrs = {"border": "1", "width": "100%"}
+        for element in table.find_all(True):
+            if element.name == "a":
+                href = normalize_href(element.get("href", ""), source_url)
+                element.attrs = {"href": href} if href else {}
+            elif element.name in {"td", "th"}:
+                columns = max(len(element.parent.find_all(["td", "th"], recursive=False)), 1)
+                first_row = table.find("tr")
+                element.attrs = {"width": f"{int(100 / columns)}%"} if element.parent is first_row else {}
+            elif element.name not in {"thead", "tbody", "tr", "caption"}:
+                element.attrs = {}
+        try:
+            previous_size = pdf.font_size_pt
+            if caption_text:
+                pdf.set_font("Arial", "B", 9)
+                pdf.multi_cell(0, 5, caption_text)
+            pdf.set_font("Arial", size=8)
+            pdf.write_html(str(table), tag_styles=HTML_TAG_STYLES)
+            pdf.set_font("Arial", size=previous_size)
+        except Exception:
+            if caption_text:
+                pdf.set_font("Arial", "B", 9)
+                pdf.multi_cell(0, 5, caption_text)
+            pdf.set_font("Arial", size=8)
+            for row in node.find_all("tr"):
+                cells = [cell.get_text(" ", strip=True) for cell in row.find_all(["th", "td"], recursive=False)]
+                if cells:
+                    pdf.multi_cell(0, 4, " | ".join(cells))
+        pdf.set_font("Arial", size=11)
+        pdf.ln(3)
+        return
+
     if node.name in TEXT_TAGS:
         fragment = sanitize_fragment(node, source_url=source_url)
         if not fragment:

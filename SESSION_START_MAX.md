@@ -174,6 +174,7 @@ Tryb pracy:
   - `growth:apply` moze dodawac tylko bezpieczne bloki zarzadzane (Evidence Box, Kiedy do lekarza, tabela cytowalna) i aktualizowac `dateModified`; nie wolno mu przepisywac calego artykulu ani usuwac sekcji,
   - `popraw-seo` oznacza: uruchom `npm run popraw-seo`, wygeneruj wszystkie raporty growth i zatrzymaj sie na statusie `AWAITING_USER_APPROVAL`; nie edytuj artykulow bez zatwierdzenia konkretnych pozycji,
   - po zatwierdzeniu pozycji lub poleceniu naprawy artykulu wykonaj pelny Quality Gate strony: logika i zrodla, cala tresc, SEO/QA/FAQ/schema, linki, media i wyglad, PDF, `dateModified`, sitemap, `_site` i wszystkie walidatory; nie uznawaj samej korekty title/meta za wykonanie,
+  - `napraw paczke N` to osobny proces bez GSC; zawsze odczytaj dokladny, staly sklad z `data/reports/article-repair-batches.json`, nie przeliczaj numeracji i po naprawie zmien tylko status; wersja czytelna listy jest w `data/reports/article-repair-batches.md`,
   - nadrzedny cel `popraw-seo`: wiecej artykulow widocznych w Google i wiecej klikniec; techniczne oceny SEO sa pomocnicze,
   - kazde `popraw-seo` obejmuje wszystkie indeksowalne strony `BlogPosting`; obowiazkowa bramka: `article_inventory = diagnosed_articles = actions_assigned`, `omitted_articles = 0`; zakaz ograniczania portfela do TOP 3/5/10,
   - brak ujawnionego query i cooldown nie moga usunac URL-a z raportu; query jest warstwa pomocnicza, a wynik calej witryny bierze sie z property/stron GSC,

@@ -82,6 +82,15 @@ Example:
 - Jeśli użytkownik poda same numery i istnieje ryzyko pomylenia koszyków, agent musi dopytać o ID przed edycją.
 - Przed edycją agent przygotowuje konkretny tekst dla danego URL-a; zakazane są placeholdery i generyczne bloki SEO.
 
+## 🧰 `napraw paczkę N` — audyt bez GSC
+
+- Kanoniczny rejestr techniczno-merytorycznych napraw znajduje się w `data/reports/article-repair-batches.json`; wersja czytelna jest w `data/reports/article-repair-batches.md`.
+- Polecenie `napraw paczkę N` nie uruchamia `popraw-seo` i nie zależy od danych GSC. Oznacza pełną naprawę dokładnie tych URL-i, które są zapisane w paczce `N`.
+- Numeracja i skład paczek są stałe. Po ukończeniu zmienia się status paczki i artykułów, ale nie wolno przeliczać ani przesuwać URL-i między numerami bez jawnej decyzji użytkownika.
+- Każdy artykuł przechodzi pełny Quality Gate: weryfikacja logiki i twierdzeń w realnych źródłach, treść, SEO/AEO/GEO/AIO, FAQ/schema 1:1, linki, media i wygląd, PDF, `dateModified`, sitemap, `_site` i walidatory.
+- Flaga audytu oznacza obowiązek sprawdzenia fragmentu w kontekście, a nie automatyczną zamianę tekstu. Zakazane są generyczne dopiski i hurtowe usuwanie słów bez oceny sensu.
+- Po ukończeniu paczki zaktualizuj rejestr, podaj listę naprawionych URL-i i wyniki wszystkich bramek jakości.
+
 ## ⚡ Available Tools (ON-DEMAND only)
 - `sys_core_02(title, content, category)` — Save a note + auto-detect conflicts
 - `sys_core_03(items[])` — Save multiple notes in 1 call

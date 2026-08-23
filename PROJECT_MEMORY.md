@@ -176,6 +176,7 @@
 ### Aktualizacja systemowa 2026-08-23 — pełne pokrycie i wnioski globalne
 
 - Zatwierdzona naprawa URL-a oznacza naprawę całej strony, nie tylko elementu wskazanego przez raport: kontrolę logiki i źródeł każdego zmienianego twierdzenia, treści, SEO/AEO/GEO/AIO, FAQ i schema 1:1, linków, mediów i wyglądu, PDF, dat, sitemap, `_site` i walidacji. URL jest gotowy dopiero po przejściu pełnego Quality Gate.
+- Osobny proces bez GSC ma stałą komendę `napraw paczkę N`. Kanoniczny skład paczek zapisano w `data/reports/article-repair-batches.json`, a raport czytelny w `data/reports/article-repair-batches.md`. Numerów nie wolno przeliczać; po naprawie zmienia się status, nie skład paczki. Proces zawsze obejmuje pełny Quality Gate i weryfikację flag treściowych w kontekście realnych źródeł, bez generycznych dopisków.
 - Nadrzędnym celem `popraw-seo` jest wzrost liczby artykułów widocznych w Google oraz liczby kliknięć. Wyniki techniczne SEO/AEO/GEO/AIO są środkami do tego celu.
 - Każde uruchomienie obejmuje pełny portfel indeksowalnych stron `BlogPosting`. Twarda bramka kompletności: `article_inventory = diagnosed_articles = actions_assigned` oraz `omitted_articles = 0`.
 - Nie wolno ograniczać końcowej kolejki do TOP 3/5/10. Brak ujawnionego query nie usuwa strony, ponieważ query są anonimizowane; cooldown przenosi URL do monitoringu, ale nie usuwa go z raportu.

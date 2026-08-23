@@ -1,0 +1,2867 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T14:18:57Z",
+  "audit_mode": "technical_editorial_without_gsc",
+  "command_contract": "napraw paczke N",
+  "immutable_numbering": true,
+  "quality_gate": "content_sources_seo_aeo_geo_aio_faq_schema_links_media_pdf_dates_sitemap_site_validators",
+  "totals": {
+    "article_inventory": 96,
+    "repaired_articles": 24,
+    "pending_articles": 72,
+    "pending_batches": 7,
+    "separately_repaired_non_article_pages": 1
+  },
+  "separately_repaired_non_article_pages": [
+    "centrum-nadcisnienia-po-50.html"
+  ],
+  "repaired_articles": [
+    "czy-kawa-odwadnia-i-wyplukuje-magnez.html",
+    "detoks-sokowy-po-50-mit.html",
+    "dieta-przeciwzapalna-po-50-produkty-jadlospis.html",
+    "jak-czytac-etykiety-sklad-produktow-e-numery-inci.html",
+    "jak-zaczac-na-silowni-po-50.html",
+    "kolagen-suplementacja-po-50.html",
+    "kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
+    "media-spolecznosciowe-po-50.html",
+    "miesnie-dna-miednicy-trening-core-po-50.html",
+    "mit-metabolizm-po-50-zwalnia-tycie.html",
+    "oponka-zablokowana-powiez.html",
+    "siedzenie-po-50.html",
+    "silownia-chroni-serce-przed-zawalem.html",
+    "trening-silowy-eliksir-mlodosci-po-50.html",
+    "suplementy-po-50-tce-kompletny-przewodnik.html",
+    "post-36-godzinny-co-sie-dzieje-z-cialem.html",
+    "post-36-godzinny-cud-czy-mit-badania-vs-hype.html",
+    "waga-smart-pomiar-skladu-ciala-prawda.html",
+    "hrt-mit-badanie-po-50.html",
+    "trening-silowy-po-50-cisnienie-plan-8-tygodni.html",
+    "szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
+    "bledy-50.html",
+    "dyskopatia-po-50.html",
+    "wino-i-miesnie-po-50.html"
+  ],
+  "batches": [
+    {
+      "id": 1,
+      "status": "COMPLETE",
+      "completed_at": "2026-08-23T14:18:57Z",
+      "article_count": 10,
+      "articles": [
+        {
+          "file": "suplementy-po-50-tce-kompletny-przewodnik.html",
+          "url": "https://fitpo50.pl/suplementy-po-50-tce-kompletny-przewodnik.html",
+          "title": "Suplementy po 50-tce: kompletny przewodnik – praktyczny",
+          "category": "zdrowie",
+          "audit_score": 107,
+          "issue_codes": [
+            "CONTRACT",
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 5,
+            "internalLinks": 34,
+            "imageCount": 16,
+            "pdfExists": true,
+            "risk": {
+              "promises": 3,
+              "absolutes": 10,
+              "protection": 0,
+              "precise": 26,
+              "medicalMechanism": 2
+            }
+          }
+        },
+        {
+          "file": "post-36-godzinny-co-sie-dzieje-z-cialem.html",
+          "url": "https://fitpo50.pl/post-36-godzinny-co-sie-dzieje-z-cialem.html",
+          "title": "Post 36-godzinny: co się dzieje z ciałem? Fazy 0-36h",
+          "category": "zdrowie",
+          "audit_score": 99,
+          "issue_codes": [
+            "CONTRACT",
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 4,
+            "internalLinks": 32,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 7,
+              "protection": 0,
+              "precise": 5,
+              "medicalMechanism": 24
+            }
+          }
+        },
+        {
+          "file": "post-36-godzinny-cud-czy-mit-badania-vs-hype.html",
+          "url": "https://fitpo50.pl/post-36-godzinny-cud-czy-mit-badania-vs-hype.html",
+          "title": "Post 36-godzinny: cud czy mit? Badania vs hype – praktyczny",
+          "category": "zdrowie",
+          "audit_score": 98,
+          "issue_codes": [
+            "CONTRACT",
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 4,
+            "internalLinks": 32,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 7,
+              "protection": 0,
+              "precise": 5,
+              "medicalMechanism": 23
+            }
+          }
+        },
+        {
+          "file": "waga-smart-pomiar-skladu-ciala-prawda.html",
+          "url": "https://fitpo50.pl/waga-smart-pomiar-skladu-ciala-prawda.html",
+          "title": "Waga łazienkowa smart: Ile z 16 parametrów to prawda?",
+          "category": "ciekawe",
+          "audit_score": 98,
+          "issue_codes": [
+            "CONTRACT",
+            "FAQ_SCHEMA",
+            "SCHEMA_ENTITIES",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "usunąć encje HTML zapisane w JSON-LD",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 3,
+            "internalLinks": 33,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 7,
+              "protection": 0,
+              "precise": 10,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "hrt-mit-badanie-po-50.html",
+          "url": "https://fitpo50.pl/hrt-mit-badanie-po-50.html",
+          "title": "HRT. Największy strach kobiet po 50-tce oparty na badaniu, które zostało źle przeprowadzone, źle zinterpretowane i źle podane mediom.",
+          "category": "ciekawe",
+          "audit_score": 94,
+          "issue_codes": [
+            "CONTRACT",
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 38,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 1,
+              "protection": 0,
+              "precise": 14,
+              "medicalMechanism": 12
+            }
+          }
+        },
+        {
+          "file": "trening-silowy-po-50-cisnienie-plan-8-tygodni.html",
+          "url": "https://fitpo50.pl/trening-silowy-po-50-cisnienie-plan-8-tygodni.html",
+          "title": "Trening siłowy po 50 a ciśnienie: plan na 8 tygodni",
+          "category": "ruch",
+          "audit_score": 86,
+          "issue_codes": [
+            "CONTRACT",
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 3,
+            "internalLinks": 42,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 27,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
+          "url": "https://fitpo50.pl/szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
+          "title": "Szczepionka HPV chroni też mężczyzn. Nowe badania mówią to wprost.",
+          "category": "zdrowie",
+          "audit_score": 84,
+          "issue_codes": [
+            "CONTRACT",
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 40,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 1,
+              "protection": 0,
+              "precise": 7,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "bledy-50.html",
+          "url": "https://fitpo50.pl/bledy-50.html",
+          "title": "5 największych błędów początkujących po 50-tce",
+          "category": "ruch",
+          "audit_score": 78,
+          "issue_codes": [
+            "CONTRACT",
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 36,
+            "imageCount": 10,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 2,
+              "protection": 0,
+              "precise": 4,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "dyskopatia-po-50.html",
+          "url": "https://fitpo50.pl/dyskopatia-po-50.html",
+          "title": "Rezonans cię nastraszył? Nauka mówi coś innego",
+          "category": "zdrowie",
+          "audit_score": 78,
+          "issue_codes": [
+            "CONTRACT",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 0,
+            "internalLinks": 33,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 2,
+              "absolutes": 6,
+              "protection": 0,
+              "precise": 5,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "wino-i-miesnie-po-50.html",
+          "url": "https://fitpo50.pl/wino-i-miesnie-po-50.html",
+          "title": "Alkohol po treningu po 50: wpływ na mięśnie, sen i regenerację",
+          "category": "jedzenie",
+          "audit_score": 77,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 43,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 6,
+              "protection": 0,
+              "precise": 9,
+              "medicalMechanism": 14
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "status": "PENDING",
+      "article_count": 10,
+      "articles": [
+        {
+          "file": "kreatyna-po-50-tce-kompletny-przewodnik.html",
+          "url": "https://fitpo50.pl/kreatyna-po-50-tce-kompletny-przewodnik.html",
+          "title": "Kreatyna po 50-tce: dawka, działanie i bezpieczeństwo stosowania",
+          "category": "zdrowie",
+          "audit_score": 75,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "CLAIM_PROTECTION",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 4,
+            "internalLinks": 42,
+            "imageCount": 18,
+            "pdfExists": true,
+            "risk": {
+              "promises": 3,
+              "absolutes": 5,
+              "protection": 1,
+              "precise": 18,
+              "medicalMechanism": 4
+            }
+          }
+        },
+        {
+          "file": "motywacja-po-50.html",
+          "url": "https://fitpo50.pl/motywacja-po-50.html",
+          "title": "Jak zmusić się do ćwiczenia po 50-tce? Prawdziwe odpowiedzi i kilka kłamstw, które możesz sobie darować",
+          "category": "ruch",
+          "audit_score": 74,
+          "issue_codes": [
+            "CONTRACT",
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 4,
+            "faqCount": 0,
+            "internalLinks": 33,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 11,
+              "protection": 0,
+              "precise": 2,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "silownia-dla-ludzi.html",
+          "url": "https://fitpo50.pl/silownia-dla-ludzi.html",
+          "title": "Siłownia po 50-tce nie jest dla mięśni. Jest dla ludzi.",
+          "category": "ciekawe",
+          "audit_score": 73,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 1,
+            "faqCount": 0,
+            "internalLinks": 38,
+            "imageCount": 10,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 3,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "healthspan-nie-lifespan-po-50.html",
+          "url": "https://fitpo50.pl/healthspan-nie-lifespan-po-50.html",
+          "title": "Zapomnij o odchudzaniu. Zacznij myśleć o tym, jak umrzesz.",
+          "category": "ciekawe",
+          "audit_score": 72,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROMISE",
+            "CLAIM_PROTECTION",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 41,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 2,
+              "absolutes": 2,
+              "protection": 1,
+              "precise": 17,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
+          "url": "https://fitpo50.pl/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html",
+          "title": "HFpEF – cicha epidemia serca po pięćdziesiątce. Jak ją rozpoznać?",
+          "category": "zdrowie",
+          "audit_score": 72,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 4,
+            "internalLinks": 42,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 2,
+              "absolutes": 8,
+              "protection": 0,
+              "precise": 10,
+              "medicalMechanism": 4
+            }
+          }
+        },
+        {
+          "file": "ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
+          "url": "https://fitpo50.pl/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html",
+          "title": "Ukryty cukier po 50: 5 pułapek zdrowego jedzenia i napojów",
+          "category": "jedzenie",
+          "audit_score": 72,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 39,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 6,
+              "medicalMechanism": 20
+            }
+          }
+        },
+        {
+          "file": "jedz-wiecej-po-50.html",
+          "url": "https://fitpo50.pl/jedz-wiecej-po-50.html",
+          "title": "Jedz więcej po 50: czemu niedojadanie psuje efekty treningu",
+          "category": "jedzenie",
+          "audit_score": 71,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 33,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 4,
+              "protection": 0,
+              "precise": 13,
+              "medicalMechanism": 2
+            }
+          }
+        },
+        {
+          "file": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+          "url": "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+          "title": "Post przerywany po 50-tce: korzyści i ryzyko dla mięśni",
+          "category": "jedzenie",
+          "audit_score": 71,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "HTML_NESTING",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "CLAIM_PROTECTION",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "naprawić nieprawidłowe zagnieżdżenie list w HTML",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 4,
+            "internalLinks": 35,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 9,
+              "protection": 2,
+              "precise": 2,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "mira-ai-agent-sor-lepszy-od-lekarzy.html",
+          "url": "https://fitpo50.pl/mira-ai-agent-sor-lepszy-od-lekarzy.html",
+          "title": "MIRA badanie na SOR: 88,9% trafności i granice wyniku AI",
+          "category": "ciekawe",
+          "audit_score": 70,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 7,
+            "internalLinks": 32,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 6,
+              "absolutes": 0,
+              "protection": 0,
+              "precise": 26,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "waty-apple-watch-moc-zdrowie-po-50.html",
+          "url": "https://fitpo50.pl/waty-apple-watch-moc-zdrowie-po-50.html",
+          "title": "Waty na Apple Watch: Dlaczego po 50-tce są ważniejsze niż tętno?",
+          "category": "ciekawe",
+          "audit_score": 70,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 3,
+            "internalLinks": 32,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 8,
+              "protection": 0,
+              "precise": 10,
+              "medicalMechanism": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "status": "PENDING",
+      "article_count": 10,
+      "articles": [
+        {
+          "file": "trening-silowy-starzenie-komorkowe-dna.html",
+          "url": "https://fitpo50.pl/trening-silowy-starzenie-komorkowe-dna.html",
+          "title": "Trening siłowy po 50+: DNA, telomery i wiek biologiczny",
+          "category": "ruch",
+          "audit_score": 69,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "SCHEMA_ENTITIES",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROTECTION",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "usunąć encje HTML zapisane w JSON-LD",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 3,
+            "internalLinks": 39,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 6,
+              "protection": 2,
+              "precise": 4,
+              "medicalMechanism": 11
+            }
+          }
+        },
+        {
+          "file": "dlaczego-bieznia-to-za-malo.html",
+          "url": "https://fitpo50.pl/dlaczego-bieznia-to-za-malo.html",
+          "title": "Bieżnia po 50 to za mało: czego naprawdę potrzebuje ciało",
+          "category": "ruch",
+          "audit_score": 68,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 40,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 8,
+              "protection": 0,
+              "precise": 6,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "powrot-do-formy-po-50-kompletny-przewodnik.html",
+          "url": "https://fitpo50.pl/powrot-do-formy-po-50-kompletny-przewodnik.html",
+          "title": "Powrót do formy po 50-tce: plan startu od zera bez bólu",
+          "category": "ruch",
+          "audit_score": 68,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROTECTION",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 34,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 26,
+              "protection": 1,
+              "precise": 4,
+              "medicalMechanism": 2
+            }
+          }
+        },
+        {
+          "file": "suplementacja-po-50.html",
+          "url": "https://fitpo50.pl/suplementacja-po-50.html",
+          "title": "Białko w proszku i kreatyna po 50-tce. Co mówi nauka i czy warto brać",
+          "category": "jedzenie",
+          "audit_score": 66,
+          "issue_codes": [
+            "CONTRACT",
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 5,
+            "faqCount": 0,
+            "internalLinks": 36,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 4,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "upf-jedzenie-ultra-przetworzone-uzaleznienie.html",
+          "url": "https://fitpo50.pl/upf-jedzenie-ultra-przetworzone-uzaleznienie.html",
+          "title": "Czy jedzenie uzależnia jak narkotyki? Prawda o UPF po 50-tce",
+          "category": "jedzenie",
+          "audit_score": 66,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "SCHEMA_ENTITIES",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "usunąć encje HTML zapisane w JSON-LD",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 2,
+            "internalLinks": 44,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 7,
+              "protection": 0,
+              "precise": 8,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html",
+          "url": "https://fitpo50.pl/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html",
+          "title": "Mobilność vs rozciąganie: program dla stawów po pięćdziesiątce",
+          "category": "ruch",
+          "audit_score": 64,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "HTML_NESTING",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROTECTION",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "naprawić nieprawidłowe zagnieżdżenie list w HTML",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 4,
+            "internalLinks": 41,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 5,
+              "protection": 3,
+              "precise": 1,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "dieta-po-50.html",
+          "url": "https://fitpo50.pl/dieta-po-50.html",
+          "title": "Dieta po 50-tce: nawyki zamiast diet, które nie działają",
+          "category": "jedzenie",
+          "audit_score": 63,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROMISE",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 2,
+            "faqCount": 0,
+            "internalLinks": 33,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 3,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "dieta-50-50-po-piecdziesiatce.html",
+          "url": "https://fitpo50.pl/dieta-50-50-po-piecdziesiatce.html",
+          "title": "Dieta 50/50 po pięćdziesiątce: efekty, opinie i nauka",
+          "category": "jedzenie",
+          "audit_score": 62,
+          "issue_codes": [
+            "CONTRACT",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 9,
+            "faqCount": 4,
+            "internalLinks": 32,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 4,
+              "protection": 0,
+              "precise": 8,
+              "medicalMechanism": 2
+            }
+          }
+        },
+        {
+          "file": "jak-pozbyc-sie-oponki-brzusznej-po-50.html",
+          "url": "https://fitpo50.pl/jak-pozbyc-sie-oponki-brzusznej-po-50.html",
+          "title": "Jak pozbyć się oponki brzusznej po 50-tce?",
+          "category": "zdrowie",
+          "audit_score": 62,
+          "issue_codes": [
+            "CONTRACT",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 6,
+            "internalLinks": 31,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 3,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 39
+            }
+          }
+        },
+        {
+          "file": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+          "url": "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+          "title": "Kreatyna i białko po 50: jak łączyć je bezpiecznie w planie",
+          "category": "jedzenie",
+          "audit_score": 62,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 5,
+            "internalLinks": 35,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 9,
+              "protection": 0,
+              "precise": 10,
+              "medicalMechanism": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "status": "PENDING",
+      "article_count": 10,
+      "articles": [
+        {
+          "file": "trening-maszynowy-po-50.html",
+          "url": "https://fitpo50.pl/trening-maszynowy-po-50.html",
+          "title": "Trening maszynowy po 50: plan startowy na pierwsze 30 dni",
+          "category": "ruch",
+          "audit_score": 62,
+          "issue_codes": [
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "PICTURE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "uzupełnić strukturę AVIF/WebP/fallback",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 0,
+            "internalLinks": 36,
+            "imageCount": 15,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 10,
+              "protection": 0,
+              "precise": 5,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html",
+          "url": "https://fitpo50.pl/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html",
+          "title": "Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda?",
+          "category": "zdrowie",
+          "audit_score": 59,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "SCHEMA_ENTITIES",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "usunąć encje HTML zapisane w JSON-LD",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 2,
+            "internalLinks": 42,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 4,
+              "medicalMechanism": 2
+            }
+          }
+        },
+        {
+          "file": "tluszcz-trzewny-choroby-jak-walczyc.html",
+          "url": "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html",
+          "title": "Tłuszcz trzewny: cichy sabotażysta, którego nie widać w lustrze",
+          "category": "zdrowie",
+          "audit_score": 59,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROTECTION",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 2,
+            "internalLinks": 40,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 1,
+              "protection": 1,
+              "precise": 5,
+              "medicalMechanism": 18
+            }
+          }
+        },
+        {
+          "file": "rentgen-tomografia-ct-rezonans-mri-roznice-badania.html",
+          "url": "https://fitpo50.pl/rentgen-tomografia-ct-rezonans-mri-roznice-badania.html",
+          "title": "RTG, CT i MRI po 50: czym się różnią i kiedy je wybrać?",
+          "category": "ciekawe",
+          "audit_score": 56,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "SCHEMA_ENTITIES",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "usunąć encje HTML zapisane w JSON-LD",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 9,
+            "faqCount": 6,
+            "internalLinks": 36,
+            "imageCount": 14,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 4,
+              "protection": 0,
+              "precise": 6,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "interleukina-6-il-6-badanie-normy-cena.html",
+          "url": "https://fitpo50.pl/interleukina-6-il-6-badanie-normy-cena.html",
+          "title": "Interleukina 6 (IL-6): badanie, normy, cena i wynik krwi",
+          "category": "zdrowie",
+          "audit_score": 55,
+          "issue_codes": [
+            "HTML_NESTING",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "naprawić nieprawidłowe zagnieżdżenie list w HTML",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 5,
+            "internalLinks": 31,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 1,
+              "medicalMechanism": 39
+            }
+          }
+        },
+        {
+          "file": "jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html",
+          "url": "https://fitpo50.pl/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50.html",
+          "title": "Jak organizm spala tłuszcz po 50-tce? Cykl krok po kroku",
+          "category": "zdrowie",
+          "audit_score": 54,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROMISE",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 3,
+            "internalLinks": 46,
+            "imageCount": 10,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 0,
+              "protection": 0,
+              "precise": 3,
+              "medicalMechanism": 15
+            }
+          }
+        },
+        {
+          "file": "lpa-lipoproteina-a-po-50-norma-cena-badania.html",
+          "url": "https://fitpo50.pl/lpa-lipoproteina-a-po-50-norma-cena-badania.html",
+          "title": "Lp(a) po 50-tce: norma, cena badania i wynik bez paniki",
+          "category": "zdrowie",
+          "audit_score": 54,
+          "issue_codes": [
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 11,
+            "faqCount": 6,
+            "internalLinks": 30,
+            "imageCount": 18,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 11,
+              "protection": 0,
+              "precise": 14,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html",
+          "url": "https://fitpo50.pl/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html",
+          "title": "Ile białka po 50-tce? Zapotrzebowanie, źródła i odżywki WPC",
+          "category": "jedzenie",
+          "audit_score": 53,
+          "issue_codes": [
+            "HTML_NESTING",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "naprawić nieprawidłowe zagnieżdżenie list w HTML",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 5,
+            "internalLinks": 33,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 9,
+              "protection": 0,
+              "precise": 5,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html",
+          "url": "https://fitpo50.pl/terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html",
+          "title": "Terapia światłem czerwonym po 50: nauka czy gadżet dla skóry?",
+          "category": "ciekawe",
+          "audit_score": 53,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 4,
+            "internalLinks": 44,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 3,
+              "protection": 0,
+              "precise": 7,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "kawa-jako-preworkout-po-50.html",
+          "url": "https://fitpo50.pl/kawa-jako-preworkout-po-50.html",
+          "title": "Kawa. Twój przedtreningowy suplement, który masz już w domu.",
+          "category": "jedzenie",
+          "audit_score": 52,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 34,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 2,
+              "protection": 0,
+              "precise": 6,
+              "medicalMechanism": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "status": "PENDING",
+      "article_count": 10,
+      "articles": [
+        {
+          "file": "motywacja-zniknela-po-50.html",
+          "url": "https://fitpo50.pl/motywacja-zniknela-po-50.html",
+          "title": "Motywacja zniknęła. To jest normalne — i jest na to nauka.",
+          "category": "ciekawe",
+          "audit_score": 52,
+          "issue_codes": [
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 0,
+            "internalLinks": 31,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 9,
+              "protection": 0,
+              "precise": 4,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
+          "url": "https://fitpo50.pl/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
+          "title": "Sakady i supresja sakadyczna: co to jest i kiedy do lekarza?",
+          "category": "ciekawe",
+          "audit_score": 52,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 9,
+            "faqCount": 7,
+            "internalLinks": 31,
+            "imageCount": 16,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 6,
+              "protection": 0,
+              "precise": 6,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "sila-chwytu-po-50.html",
+          "url": "https://fitpo50.pl/sila-chwytu-po-50.html",
+          "title": "Siła chwytu po 50: test sprawności, który warto powtarzać",
+          "category": "zdrowie",
+          "audit_score": 52,
+          "issue_codes": [
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 9,
+            "faqCount": 0,
+            "internalLinks": 37,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 4,
+              "protection": 0,
+              "precise": 8,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier.html",
+          "url": "https://fitpo50.pl/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier.html",
+          "title": "Śniadanie białkowo-tłuszczowe: jak odciąć cukrowe zachcianki?",
+          "category": "jedzenie",
+          "audit_score": 52,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROTECTION",
+            "ABSOLUTES",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 4,
+            "internalLinks": 32,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 8,
+              "protection": 1,
+              "precise": 2,
+              "medicalMechanism": 8
+            }
+          }
+        },
+        {
+          "file": "syndrom-pierwszego-poniedzialku.html",
+          "url": "https://fitpo50.pl/syndrom-pierwszego-poniedzialku.html",
+          "title": "Syndrom pierwszego poniedziałku. Dlaczego zaczynasz 40 razy i zatrzymujesz się zawsze w tym samym miejscu",
+          "category": "ciekawe",
+          "audit_score": 52,
+          "issue_codes": [
+            "CONTRACT",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 0,
+            "internalLinks": 36,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 3,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "dzieci-patrza-na-ciebie.html",
+          "url": "https://fitpo50.pl/dzieci-patrza-na-ciebie.html",
+          "title": "Dzieci patrzą na Ciebie. Nie na to, co mówisz — na to, co robisz.",
+          "category": "ciekawe",
+          "audit_score": 50,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 38,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 1,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "siedem-bledow-silownia-po-50.html",
+          "url": "https://fitpo50.pl/siedem-bledow-silownia-po-50.html",
+          "title": "7 błędów na siłowni po 50-tce: numer 4 robi prawie każdy",
+          "category": "ruch",
+          "audit_score": 50,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 33,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 2,
+              "protection": 0,
+              "precise": 5,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html",
+          "url": "https://fitpo50.pl/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html",
+          "title": "Lektyny, szczawiany i fityniany: czy szkodzą po 50-tce?",
+          "category": "jedzenie",
+          "audit_score": 49,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "SCHEMA_ENTITIES",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "usunąć encje HTML zapisane w JSON-LD",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 2,
+            "internalLinks": 43,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 4,
+              "protection": 0,
+              "precise": 2,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "badania-krwi-po-50-jak-czesto.html",
+          "url": "https://fitpo50.pl/badania-krwi-po-50-jak-czesto.html",
+          "title": "Badania krwi po 50: co robić co 3 miesiące, a co raz w roku?",
+          "category": "zdrowie",
+          "audit_score": 48,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 3,
+            "internalLinks": 45,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 7,
+              "protection": 0,
+              "precise": 3,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "nawodnienie-na-treningu-po-50.html",
+          "url": "https://fitpo50.pl/nawodnienie-na-treningu-po-50.html",
+          "title": "Nawodnienie na treningu po 50: ile pić i co wybrać dobrze",
+          "category": "jedzenie",
+          "audit_score": 46,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 0,
+            "internalLinks": 32,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 7,
+              "protection": 0,
+              "precise": 8,
+              "medicalMechanism": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "status": "PENDING",
+      "article_count": 10,
+      "articles": [
+        {
+          "file": "badania-po-50.html",
+          "url": "https://fitpo50.pl/badania-po-50.html",
+          "title": "Badania przed treningiem po 50-tce. Co naprawdę musisz sprawdzić?",
+          "category": "zdrowie",
+          "audit_score": 44,
+          "issue_codes": [
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 0,
+            "internalLinks": 35,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 9,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 2
+            }
+          }
+        },
+        {
+          "file": "trening-3x30-dla-50-plus.html",
+          "url": "https://fitpo50.pl/trening-3x30-dla-50-plus.html",
+          "title": "Plan 3×30 po 50: trzy krótkie treningi na siłę i sprawność",
+          "category": "ruch",
+          "audit_score": 44,
+          "issue_codes": [
+            "SOURCES_QUERY",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "zastąpić linki wyszukiwania bezpośrednimi źródłami",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 5,
+            "faqCount": 0,
+            "internalLinks": 35,
+            "imageCount": 15,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 9,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html",
+          "url": "https://fitpo50.pl/dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html",
+          "title": "Ketoza a cholesterol po 50: LDL, ApoB, badania 8-12 tyg",
+          "category": "jedzenie",
+          "audit_score": 42,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 0,
+            "internalLinks": 33,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 9,
+              "protection": 0,
+              "precise": 2,
+              "medicalMechanism": 11
+            }
+          }
+        },
+        {
+          "file": "jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html",
+          "url": "https://fitpo50.pl/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna.html",
+          "title": "Jak obniżyć kortyzol po 50-tce? Stres i oponka brzuszna",
+          "category": "zdrowie",
+          "audit_score": 41,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "ABSOLUTES",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 15,
+            "faqCount": 5,
+            "internalLinks": 35,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 38
+            }
+          }
+        },
+        {
+          "file": "jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci.html",
+          "url": "https://fitpo50.pl/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci.html",
+          "title": "Jak producenci żywności ukrywają niezdrowe składniki po 50?",
+          "category": "jedzenie",
+          "audit_score": 40,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 9,
+            "faqCount": 4,
+            "internalLinks": 32,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 6,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "pilates-po-50-nie-dla-kobiet.html",
+          "url": "https://fitpo50.pl/pilates-po-50-nie-dla-kobiet.html",
+          "title": "Pilates po 50+: mocny brzuch, równowaga i stabilny krok",
+          "category": "ruch",
+          "audit_score": 40,
+          "issue_codes": [
+            "SOURCES_LOW",
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK"
+          ],
+          "repairs": [
+            "uzupełnić i zweryfikować minimum 4 źródła",
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG"
+          ],
+          "metrics": {
+            "sourceCount": 0,
+            "faqCount": 0,
+            "internalLinks": 39,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 1,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+          "url": "https://fitpo50.pl/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
+          "title": "Markery krwi po 50: co wyniki mówią o zdrowiu i ryzyku?",
+          "category": "zdrowie",
+          "audit_score": 38,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 4,
+            "internalLinks": 36,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 2,
+              "medicalMechanism": 2
+            }
+          }
+        },
+        {
+          "file": "testosteron-po-50-naturalnie-bez-trt.html",
+          "url": "https://fitpo50.pl/testosteron-po-50-naturalnie-bez-trt.html",
+          "title": "Testosteron po 50: co realnie działa naturalnie, zanim pomyślisz o TRT",
+          "category": "zdrowie",
+          "audit_score": 38,
+          "issue_codes": [
+            "CONTRACT",
+            "IMAGE_DIMENSIONS"
+          ],
+          "repairs": [
+            "naprawić title/H1/headline i kontrakt metadanych",
+            "uzupełnić wymiary obrazów"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 0,
+            "internalLinks": 33,
+            "imageCount": 16,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 1,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 4
+            }
+          }
+        },
+        {
+          "file": "zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html",
+          "url": "https://fitpo50.pl/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html",
+          "title": "ER-100: terapia genowa oka w fazie 1, nie lek na ciało.",
+          "category": "zdrowie",
+          "audit_score": 38,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 6,
+            "internalLinks": 31,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 2,
+              "absolutes": 0,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html",
+          "url": "https://fitpo50.pl/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html",
+          "title": "MIT: jedzenie Cię truje po 50? Owoce, węgle, tłuszcz i sól",
+          "category": "unknown",
+          "audit_score": 37,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 14,
+            "faqCount": 5,
+            "internalLinks": 31,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 10,
+              "protection": 0,
+              "precise": 4,
+              "medicalMechanism": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "status": "PENDING",
+      "article_count": 10,
+      "articles": [
+        {
+          "file": "chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html",
+          "url": "https://fitpo50.pl/chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html",
+          "title": "Chleb na zakwasie i indeks glikemiczny: co warto wiedzieć?",
+          "category": "jedzenie",
+          "audit_score": 35,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 9,
+            "faqCount": 5,
+            "internalLinks": 31,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 5,
+              "medicalMechanism": 14
+            }
+          }
+        },
+        {
+          "file": "apob-norma-cena-jak-czytac-wynik.html",
+          "url": "https://fitpo50.pl/apob-norma-cena-jak-czytac-wynik.html",
+          "title": "ApoB po 50: cena 60-100 zł, norma mg/dl/g/l i wynik krwi",
+          "category": "zdrowie",
+          "audit_score": 34,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 9,
+            "faqCount": 9,
+            "internalLinks": 35,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 3,
+              "protection": 0,
+              "precise": 1,
+              "medicalMechanism": 4
+            }
+          }
+        },
+        {
+          "file": "bieganie-niszczy-kolana.html",
+          "url": "https://fitpo50.pl/bieganie-niszczy-kolana.html",
+          "title": "Bieganie niszczy kolana. (I inne kłamstwa, w które uwierzyłeś.)",
+          "category": "zdrowie",
+          "audit_score": 34,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 0,
+            "internalLinks": 38,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 4,
+              "protection": 0,
+              "precise": 5,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+          "url": "https://fitpo50.pl/nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+          "title": "Nordic walking po 50: technika, kije i bezpieczny start",
+          "category": "ruch",
+          "audit_score": 34,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 4,
+            "faqCount": 0,
+            "internalLinks": 36,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 8,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "okulary-do-czytania-trening-akomodacji-oka.html",
+          "url": "https://fitpo50.pl/okulary-do-czytania-trening-akomodacji-oka.html",
+          "title": "Okulary do czytania to nie wyrok: jak trenować akomodację oka",
+          "category": "zdrowie",
+          "audit_score": 33,
+          "issue_codes": [
+            "FAQ_SCHEMA",
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE"
+          ],
+          "repairs": [
+            "zsynchronizować widoczne FAQ z FAQPage 1:1",
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 2,
+            "internalLinks": 45,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 2,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html",
+          "url": "https://fitpo50.pl/komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html",
+          "title": "Komórki zombie niszczą Twoją skórę po 50-tce — nauka wie już jak",
+          "category": "zdrowie",
+          "audit_score": 31,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 5,
+            "internalLinks": 34,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 2,
+              "protection": 0,
+              "precise": 15,
+              "medicalMechanism": 4
+            }
+          }
+        },
+        {
+          "file": "optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html",
+          "url": "https://fitpo50.pl/optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html",
+          "title": "Optymalizacja snu po 50.: jak przestać budzić się o 3 w nocy",
+          "category": "zdrowie",
+          "audit_score": 29,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "PRECISE_CLAIMS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "sprawdzić odsetki i terminy w badaniach źródłowych",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 5,
+            "internalLinks": 32,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 1,
+              "protection": 0,
+              "precise": 11,
+              "medicalMechanism": 6
+            }
+          }
+        },
+        {
+          "file": "sen-po-50.html",
+          "url": "https://fitpo50.pl/sen-po-50.html",
+          "title": "Sen po 50-tce: regeneracja mięśni, hormony i forma rano",
+          "category": "zdrowie",
+          "audit_score": 29,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK",
+            "CLAIM_PROMISE",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 5,
+            "faqCount": 0,
+            "internalLinks": 33,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 2,
+              "absolutes": 1,
+              "protection": 0,
+              "precise": 1,
+              "medicalMechanism": 7
+            }
+          }
+        },
+        {
+          "file": "ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html",
+          "url": "https://fitpo50.pl/ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html",
+          "title": "AI w medycynie po 50: czy naprawdę pomaga pacjentom dzisiaj?",
+          "category": "ciekawe",
+          "audit_score": 28,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 0,
+            "internalLinks": 36,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 6,
+              "protection": 0,
+              "precise": 4,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "regeneracja-ukladu-nerwowego-co-mowi-nauka.html",
+          "url": "https://fitpo50.pl/regeneracja-ukladu-nerwowego-co-mowi-nauka.html",
+          "title": "Regeneracja układu nerwowego po 50: co naprawdę mówi nauka?",
+          "category": "zdrowie",
+          "audit_score": 28,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 11,
+            "faqCount": 4,
+            "internalLinks": 31,
+            "imageCount": 14,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 6,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 16
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "status": "PENDING",
+      "article_count": 12,
+      "articles": [
+        {
+          "file": "brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html",
+          "url": "https://fitpo50.pl/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html",
+          "title": "MIT: Twój brzuch to nie tłuszcz, tylko zatrzymana woda — i znika",
+          "category": "unknown",
+          "audit_score": 26,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROTECTION",
+            "PRECISE_CLAIMS"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić odsetki i terminy w badaniach źródłowych"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 4,
+            "internalLinks": 32,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 2,
+              "protection": 3,
+              "precise": 3,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
+          "url": "https://fitpo50.pl/sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
+          "title": "Sarkopeniczna otyłość – problem, którego nie widać w lustrze",
+          "category": "zdrowie",
+          "audit_score": 26,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "PICTURE",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "uzupełnić strukturę AVIF/WebP/fallback",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 5,
+            "faqCount": 0,
+            "internalLinks": 32,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 5,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 2
+            }
+          }
+        },
+        {
+          "file": "nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn.html",
+          "url": "https://fitpo50.pl/nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn.html",
+          "title": "Nadciśnienie tętnicze: jak odzyskać elastyczność naczyń?",
+          "category": "zdrowie",
+          "audit_score": 25,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE",
+            "CLAIM_PROTECTION",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania",
+            "zweryfikować kategoryczne twierdzenia ochronne/metaboliczne",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 4,
+            "internalLinks": 33,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 4,
+              "protection": 1,
+              "precise": 2,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "krew-pepowinowa-skarb-czy-marketing.html",
+          "url": "https://fitpo50.pl/krew-pepowinowa-skarb-czy-marketing.html",
+          "title": "Krew pępowinowa: czy warto bankować i ile to kosztuje dziś?",
+          "category": "ciekawe",
+          "audit_score": 23,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 4,
+            "internalLinks": 31,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 3,
+              "absolutes": 0,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "gleboki-przysiad-asian-squat.html",
+          "url": "https://fitpo50.pl/gleboki-przysiad-asian-squat.html",
+          "title": "Głęboki przysiad (Asian squat): test mobilności po 50-tce",
+          "category": "ruch",
+          "audit_score": 20,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 4,
+            "internalLinks": 30,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 6,
+              "protection": 0,
+              "precise": 1,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html",
+          "url": "https://fitpo50.pl/co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html",
+          "title": "Co się dzieje z ciałem, gdy nie trenujesz przez 2 tygodnie",
+          "category": "ruch",
+          "audit_score": 18,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 4,
+            "internalLinks": 34,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 3,
+              "protection": 0,
+              "precise": 2,
+              "medicalMechanism": 9
+            }
+          }
+        },
+        {
+          "file": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+          "url": "https://fitpo50.pl/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+          "title": "Zegar Horvatha: jak sprawdzić wiek biologiczny po 50-tce?",
+          "category": "ciekawe",
+          "audit_score": 17,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "MEDICAL_MECHANISM"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "zweryfikować mechanizmy biomedyczne akapit po akapicie"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 5,
+            "internalLinks": 33,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 1,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 19
+            }
+          }
+        },
+        {
+          "file": "apob-apoa-badania-cholesterol.html",
+          "url": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
+          "title": "ApoB/ApoA1 po 50: badanie ApoA1 i wskaźnik ryzyka serca",
+          "category": "zdrowie",
+          "audit_score": 16,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "IMAGE_FALLBACK"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "dodać prawidłowe fallbacki JPG/PNG"
+          ],
+          "metrics": {
+            "sourceCount": 8,
+            "faqCount": 0,
+            "internalLinks": 34,
+            "imageCount": 11,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 0,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 2
+            }
+          }
+        },
+        {
+          "file": "wydolnosc-vo2max-starzenie-po-50.html",
+          "url": "https://fitpo50.pl/wydolnosc-vo2max-starzenie-po-50.html",
+          "title": "Wydolność po 50: VO2max, starzenie i plan poprawy kondycji",
+          "category": "zdrowie",
+          "audit_score": 14,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "ABSOLUTES"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "sprawdzić sformułowania absolutne w kontekście źródeł"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 0,
+            "internalLinks": 37,
+            "imageCount": 14,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 3,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "otylosc-sarkopeniczna-test-plan-30-dni-po-50.html",
+          "url": "https://fitpo50.pl/otylosc-sarkopeniczna-test-plan-30-dni-po-50.html",
+          "title": "Otyłość sarkopeniczna po 50-tce: domowy test i plan 30 dni",
+          "category": "zdrowie",
+          "audit_score": 13,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS",
+            "CLAIM_PROMISE"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów",
+            "zweryfikować obietnice leczenia lub odmładzania"
+          ],
+          "metrics": {
+            "sourceCount": 6,
+            "faqCount": 4,
+            "internalLinks": 34,
+            "imageCount": 12,
+            "pdfExists": true,
+            "risk": {
+              "promises": 1,
+              "absolutes": 1,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 1
+            }
+          }
+        },
+        {
+          "file": "jak-zaczac-sie-podciagac-po-50.html",
+          "url": "https://fitpo50.pl/jak-zaczac-sie-podciagac-po-50.html",
+          "title": "Podciąganie po 50: pierwszy ruch i plan 12 tygodni bez bólu",
+          "category": "ruch",
+          "audit_score": 8,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów"
+          ],
+          "metrics": {
+            "sourceCount": 7,
+            "faqCount": 5,
+            "internalLinks": 32,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 2,
+              "protection": 0,
+              "precise": 2,
+              "medicalMechanism": 0
+            }
+          }
+        },
+        {
+          "file": "szczepionki-covid-skutki-uboczne-mity-i-fakty.html",
+          "url": "https://fitpo50.pl/szczepionki-covid-skutki-uboczne-mity-i-fakty.html",
+          "title": "Szczepionki COVID: skutki uboczne, mity i fakty z badań",
+          "category": "unknown",
+          "audit_score": 8,
+          "issue_codes": [
+            "IMAGE_DIMENSIONS"
+          ],
+          "repairs": [
+            "uzupełnić wymiary obrazów"
+          ],
+          "metrics": {
+            "sourceCount": 10,
+            "faqCount": 7,
+            "internalLinks": 33,
+            "imageCount": 13,
+            "pdfExists": true,
+            "risk": {
+              "promises": 0,
+              "absolutes": 2,
+              "protection": 0,
+              "precise": 0,
+              "medicalMechanism": 0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
