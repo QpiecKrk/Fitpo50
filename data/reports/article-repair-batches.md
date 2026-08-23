@@ -1,9 +1,9 @@
 # Audyt naprawczy artykułów FitPo50 — paczki bez GSC
 
 - Właściwe artykuły w bibliotece: **96**
-- Artykuły już naprawione pełnym procesem: **34**
-- Artykuły oczekujące na naprawę: **62**
-- Paczki oczekujące: **6**
+- Artykuły już naprawione pełnym procesem: **44**
+- Artykuły oczekujące na naprawę: **52**
+- Paczki oczekujące: **5**
 - Osobno naprawiona strona centrum: `centrum-nadcisnienia-po-50.html`
 
 Komenda wykonawcza: `napraw paczkę N`. Numeracja jest stała i nie może być później przeliczana. Po ukończeniu paczki zmienia się jej status, ale skład pozostaje zapisany.
@@ -48,6 +48,16 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 - `post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html`
 - `mira-ai-agent-sor-lepszy-od-lekarzy.html`
 - `waty-apple-watch-moc-zdrowie-po-50.html`
+- `trening-silowy-starzenie-komorkowe-dna.html`
+- `dlaczego-bieznia-to-za-malo.html`
+- `powrot-do-formy-po-50-kompletny-przewodnik.html`
+- `suplementacja-po-50.html`
+- `upf-jedzenie-ultra-przetworzone-uzaleznienie.html`
+- `mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce.html`
+- `dieta-po-50.html`
+- `dieta-50-50-po-piecdziesiatce.html`
+- `jak-pozbyc-sie-oponki-brzusznej-po-50.html`
+- `kreatyna-i-bialko-po-50-tce-jak-laczyc.html`
 
 ## Paczka 1 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
@@ -79,7 +89,7 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 | 9 | `mira-ai-agent-sor-lepszy-od-lekarzy.html` | 70 | zsynchronizować widoczne FAQ z FAQPage 1:1; uzupełnić wymiary obrazów; zweryfikować obietnice leczenia lub odmładzania; sprawdzić odsetki i terminy w badaniach źródłowych |
 | 10 | `waty-apple-watch-moc-zdrowie-po-50.html` | 70 | zsynchronizować widoczne FAQ z FAQPage 1:1; uzupełnić wymiary obrazów; dodać prawidłowe fallbacki JPG/PNG; sprawdzić sformułowania absolutne w kontekście źródeł; sprawdzić odsetki i terminy w badaniach źródłowych |
 
-## Paczka 3 — 10 artykułów
+## Paczka 3 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
 | # | Artykuł | Wynik audytu | Najważniejsze obszary naprawy |
 |---:|---|---:|---|

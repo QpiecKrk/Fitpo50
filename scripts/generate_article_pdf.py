@@ -196,6 +196,14 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
         return
 
     if node.name in TEXT_TAGS:
+        # FPDF can otherwise start a heading in the last lines of a page and
+        # continue it after the automatic break, clipping the first words.
+        # Reserve enough room for the complete heading and the opening lines
+        # of the paragraph that follows it.
+        if node.name in {"h2", "h3", "h4", "h5", "h6"}:
+            remaining_height = pdf.h - pdf.b_margin - pdf.get_y()
+            if remaining_height < 30:
+                pdf.add_page()
         fragment = sanitize_fragment(node, source_url=source_url)
         if not fragment:
             return
