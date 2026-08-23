@@ -1,9 +1,9 @@
 # Audyt naprawczy artykułów FitPo50 — paczki bez GSC
 
 - Właściwe artykuły w bibliotece: **96**
-- Artykuły już naprawione pełnym procesem: **54**
-- Artykuły oczekujące na naprawę: **42**
-- Paczki oczekujące: **4**
+- Artykuły już naprawione pełnym procesem: **64**
+- Artykuły oczekujące na naprawę: **32**
+- Paczki oczekujące: **3**
 - Osobno naprawiona strona centrum: `centrum-nadcisnienia-po-50.html`
 
 Komenda wykonawcza: `napraw paczkę N`. Numeracja jest stała i nie może być później przeliczana. Po ukończeniu paczki zmienia się jej status, ale skład pozostaje zapisany.
@@ -68,6 +68,16 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 - `ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html`
 - `terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html`
 - `kawa-jako-preworkout-po-50.html`
+- `motywacja-zniknela-po-50.html`
+- `sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html`
+- `sila-chwytu-po-50.html`
+- `sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier.html`
+- `syndrom-pierwszego-poniedzialku.html`
+- `dzieci-patrza-na-ciebie.html`
+- `siedem-bledow-silownia-po-50.html`
+- `lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html`
+- `badania-krwi-po-50-jak-czesto.html`
+- `nawodnienie-na-treningu-po-50.html`
 
 ## Paczka 1 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
@@ -129,7 +139,7 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 | 9 | `terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html` | 53 | zsynchronizować widoczne FAQ z FAQPage 1:1; uzupełnić wymiary obrazów; zweryfikować obietnice leczenia lub odmładzania; sprawdzić sformułowania absolutne w kontekście źródeł; sprawdzić odsetki i terminy w badaniach źródłowych |
 | 10 | `kawa-jako-preworkout-po-50.html` | 52 | uzupełnić i zweryfikować minimum 4 źródła; uzupełnić wymiary obrazów; dodać prawidłowe fallbacki JPG/PNG; sprawdzić odsetki i terminy w badaniach źródłowych |
 
-## Paczka 5 — 10 artykułów
+## Paczka 5 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
 | # | Artykuł | Wynik audytu | Najważniejsze obszary naprawy |
 |---:|---|---:|---|

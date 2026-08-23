@@ -7,9 +7,9 @@
   "quality_gate": "content_sources_seo_aeo_geo_aio_faq_schema_links_media_pdf_dates_sitemap_site_validators",
   "totals": {
     "article_inventory": 96,
-    "repaired_articles": 54,
-    "pending_articles": 42,
-    "pending_batches": 4,
+    "repaired_articles": 64,
+    "pending_articles": 32,
+    "pending_batches": 3,
     "separately_repaired_non_article_pages": 1
   },
   "separately_repaired_non_article_pages": [
@@ -69,7 +69,17 @@
     "lpa-lipoproteina-a-po-50-norma-cena-badania.html",
     "ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html",
     "terapia-swiatlem-czerwonym-rlt-starzenie-komorek.html",
-    "kawa-jako-preworkout-po-50.html"
+    "kawa-jako-preworkout-po-50.html",
+    "motywacja-zniknela-po-50.html",
+    "sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
+    "sila-chwytu-po-50.html",
+    "sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier.html",
+    "syndrom-pierwszego-poniedzialku.html",
+    "dzieci-patrza-na-ciebie.html",
+    "siedem-bledow-silownia-po-50.html",
+    "lektyny-szczawiany-fityniany-czy-sa-grozne-po-50.html",
+    "badania-krwi-po-50-jak-czesto.html",
+    "nawodnienie-na-treningu-po-50.html"
   ],
   "batches": [
     {
@@ -1542,7 +1552,7 @@
     },
     {
       "id": 5,
-      "status": "PENDING",
+      "status": "COMPLETE",
       "article_count": 10,
       "articles": [
         {
