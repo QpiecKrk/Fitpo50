@@ -2,13 +2,12 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
 const { POLICY, utils, validators } = require('./lib/article-policy');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
 const { isSupportedCategory } = require('./lib/categories');
+const { prepareArticleMedia } = require('./lib/article-media');
 
-const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const PLACEHOLDER_RX = /(do doprecyzowania|do uzupelnienia|placeholder|\{\{.+?\}\})/i;
 const READ_TIME_RX = /^\d+\s+min\s+czytania$/i;
 
@@ -28,48 +27,6 @@ function parseArgs(argv) {
   return out;
 }
 
-function findSourceImage(baseName, assetsDir) {
-  if (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory()) return null;
-  const cleanBase = String(baseName || '')
-    .trim()
-    .normalize('NFKC')
-    .replace(/[\u00A0\u2007\u202F]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .toLowerCase();
-  const files = fs.readdirSync(assetsDir);
-  const exact = files.find((name) => {
-    const lower = name.toLowerCase().normalize('NFKC').replace(/[\u00A0\u2007\u202F]/g, ' ');
-    return SOURCE_IMAGE_EXT.some((ext) => lower === `${cleanBase}.${ext}`);
-  });
-  if (exact) return path.join(assetsDir, exact);
-
-  // fallback fuzzy: compare base names ignoring spaces/diacritics
-  const norm = (x) => x
-    .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[\u00A0\u2007\u202F]/g, ' ')
-    .replace(/\s+/g, '')
-    .toLowerCase();
-  const baseNorm = norm(cleanBase);
-  for (const name of files) {
-    const ext = path.extname(name).slice(1).toLowerCase();
-    if (!SOURCE_IMAGE_EXT.includes(ext)) continue;
-    const fileBase = name.slice(0, -(ext.length + 1));
-    if (norm(fileBase) === baseNorm) return path.join(assetsDir, name);
-  }
-  return null;
-}
-
-function suggestSourceImageLocation(baseName, assetsDir) {
-  if (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory()) return '';
-  const entries = fs.readdirSync(assetsDir, { withFileTypes: true });
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-    const nested = findSourceImage(baseName, path.join(assetsDir, entry.name));
-    if (nested) return nested;
-  }
-  return '';
-}
 
 function countInternalLinksInSections(sections) {
   const chunks = [];
@@ -112,14 +69,6 @@ function normalizeForSearch(value) {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/\s+/g, ' ')
     .trim();
-}
-
-function hasKnownImageExtension(value) {
-  return /\.(png|jpe?g|webp|avif)$/i.test(String(value || '').trim());
-}
-
-function hashFile(filePath) {
-  return crypto.createHash('sha1').update(fs.readFileSync(filePath)).digest('hex');
 }
 
 function main() {
@@ -368,66 +317,13 @@ function main() {
   architectureValidation.errors.forEach((msg) => errors.push(`Architecture: ${msg}`));
   architectureValidation.warnings.forEach((msg) => warnings.push(`Architecture: ${msg}`));
 
-  const hero = String(json.hero_image || '').trim();
-  let heroSourceImage = '';
-  if (!hero) errors.push('Brak hero_image.');
-  else if (hasKnownImageExtension(hero)) {
-    warnings.push('hero_image zawiera rozszerzenie pliku. Standard źródłowy to sama baza nazwy, np. "apob-hero", bez .png/.jpg.');
-  }
-  else {
-    heroSourceImage = findSourceImage(hero, assetsDir) || '';
-    if (!heroSourceImage) {
-      const suggestion = suggestSourceImageLocation(hero, assetsDir);
-      const suffix = suggestion ? ` (podpowiedź: znaleziono w ${path.dirname(suggestion)} — użyj tego folderu jako --assets-dir)` : '';
-      errors.push(`Brak źródłowego pliku hero_image w ${assetsDir} dla: ${hero}.{png|jpg|jpeg|webp|avif}${suffix}`);
-    }
-  }
-
-  // section source images by image_prompts_v4 filename_base
-  const promptsV4 = Array.isArray(json.image_prompts_v4) ? json.image_prompts_v4 : [];
-  const promptsLegacy = Array.isArray(json.image_prompts) ? json.image_prompts : [];
-  const prompts = promptsV4.length ? promptsV4 : promptsLegacy;
-  if (prompts.length < 7) {
-    errors.push(`image_prompts: wymagane >=7, jest ${prompts.length}.`);
-  }
-  const sectionPrompts = prompts.filter((p) => {
-    const t = String(p.type || '');
-    const r = String(p.section_ref || '');
-    return /^section_/i.test(t) || /^sekcja-\d+/i.test(r);
+  const mediaValidation = prepareArticleMedia(json, {
+    assetsDir,
+    mutate: false,
+    ensureVariants: false,
   });
-  if (!sectionPrompts.length) warnings.push('Brak image_prompts_v4 section_* - mapowanie assetów sekcji może wymagać ręcznej kontroli.');
-  sectionPrompts.forEach((p, i) => {
-    const base = String(p.filename_base || '').trim();
-    if (!base) {
-      errors.push(`image_prompts_v4 section #${i + 1}: brak filename_base.`);
-      return;
-    }
-    const sourceImage = findSourceImage(base, assetsDir);
-    if (!sourceImage) {
-      const suggestion = suggestSourceImageLocation(base, assetsDir);
-      const suffix = suggestion ? ` (podpowiedź: znaleziono w ${path.dirname(suggestion)} — użyj tego folderu jako --assets-dir)` : '';
-      errors.push(`Brak źródłowego obrazu sekcji: ${base}.{png|jpg|jpeg|webp|avif} w ${assetsDir}${suffix}`);
-    } else if (heroSourceImage && base !== hero) {
-      const sectionHash = hashFile(sourceImage);
-      const heroHash = hashFile(heroSourceImage);
-      if (sectionHash === heroHash) {
-        errors.push(`Obraz sekcji "${base}" jest identyczny z hero "${hero}". To wygląda na ukryty fallback zamiast właściwej grafiki.`);
-      }
-    }
-  });
-
-  sections.forEach((section, idx) => {
-    const src = String(section?.image?.src || section?.image?.path || '').trim();
-    if (!src) return;
-    const m = src.match(/(?:^|\/)([^/]+)\.(?:png|jpe?g|webp|avif)(?:[?#].*)?$/i);
-    if (!m) return;
-    const base = m[1];
-    if (!findSourceImage(base, assetsDir)) {
-      const suggestion = suggestSourceImageLocation(base, assetsDir);
-      const suffix = suggestion ? ` (podpowiedź: znaleziono w ${path.dirname(suggestion)} — użyj tego folderu jako --assets-dir)` : '';
-      errors.push(`sections[${idx + 1}].image.src wskazuje "${base}", ale brak źródłowego obrazu ${base}.{png|jpg|jpeg|webp|avif} w ${assetsDir}${suffix}`);
-    }
-  });
+  mediaValidation.errors.forEach((message) => errors.push(`Media: ${message}`));
+  mediaValidation.warnings.forEach((message) => warnings.push(`Media: ${message}`));
 
   if (warnings.length) {
     console.log('[WARN]');

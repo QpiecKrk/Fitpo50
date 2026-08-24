@@ -94,6 +94,7 @@ System publikacyjny FitPo50 działa dziś wokół centralnego silnika reguł:
 
 - `scripts/lib/article-policy.js` jest kanonicznym źródłem limitów, regexów i walidatorów,
 - `scripts/lib/article-intent-links.js` buduje lokalne inventory `BlogPosting`, kontroluje właściciela intencji, naturalne linki i propozycję centrum,
+- `scripts/lib/article-media.js` egzekwuje jeden katalog pakietu, dokładne nazwy, manifest, warianty, jakość, zgodność i różnorodność obrazów,
 - `scripts/article-json-workbench.js` przygotowuje chroniony JSON bez tworzenia HTML,
 - `scripts/article-preflight.js` sprawdza JSON wejściowy przed importem,
 - `scripts/import-article.js` generuje HTML według tych samych reguł,
@@ -106,6 +107,7 @@ Docelowy przepływ to:
 ```text
 draft.fitpo50.json
   -> article-json-workbench
+  -> prepare-article-media (dokładne pliki + AVIF/WebP/JPG + media_manifest)
   -> prepare-article-architecture
   -> CONTENT_READY.fitpo50.json
   -> article-preflight

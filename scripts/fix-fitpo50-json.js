@@ -322,9 +322,11 @@ function validate(json) {
   if (!Array.isArray(json.answer_blocks) || json.answer_blocks.length < 4) {
     errors.push(`answer_blocks < 4 (jest ${Array.isArray(json.answer_blocks) ? json.answer_blocks.length : 0})`);
   }
-  if (!Array.isArray(json.image_prompts) || json.image_prompts.length < 7) {
-    errors.push(`image_prompts < 7 (jest ${Array.isArray(json.image_prompts) ? json.image_prompts.length : 0})`);
-  }
+  const prompts = Array.isArray(json.image_prompts_v4) && json.image_prompts_v4.length
+    ? json.image_prompts_v4
+    : (Array.isArray(json.image_prompts) ? json.image_prompts : []);
+  const expectedImages = (Array.isArray(json.sections) ? json.sections.length : 0) + 1;
+  if (prompts.length !== expectedImages) errors.push(`image_prompts musi zawierać dokładnie hero + obraz każdej sekcji (${expectedImages}); jest ${prompts.length}.`);
   return errors;
 }
 
@@ -422,6 +424,8 @@ function main() {
         src: String(image.src || '').trim(),
         alt: stripTags(String(image.alt || '')).trim(),
         caption: stripTags(String(image.caption || '')).trim(),
+        width: Number(image.width || 0) || 0,
+        height: Number(image.height || 0) || 0,
       },
     };
     if (String(infoBox.content_html || '').trim()) {
@@ -459,34 +463,45 @@ function main() {
 
   json.faq_research = faqResearch;
 
-  const imagePrompts = Array.isArray(json.image_prompts) ? json.image_prompts : [];
+  const promptKey = Array.isArray(json.image_prompts_v4) && json.image_prompts_v4.length ? 'image_prompts_v4' : 'image_prompts';
+  const imagePrompts = Array.isArray(json[promptKey]) ? json[promptKey] : [];
   const mapped = imagePrompts.map((p) => (p && typeof p === 'object' ? p : {}));
-  const used = new Set();
   for (const p of mapped) {
     const fb = String(p.filename_base || '').trim().replace(/[^a-zA-Z0-9_-]/g, '-');
-    p.filename_base = fb || `${json.slug}-${used.size + 1}`;
-    while (used.has(p.filename_base)) p.filename_base = `${p.filename_base}-x`;
-    used.add(p.filename_base);
+    p.filename_base = fb;
     p.section_ref = String(p.section_ref || '').trim();
-    p.purpose = String(p.purpose || 'explain').trim();
+    p.topic = String(p.topic || '').trim();
+    p.technique = String(p.technique || '').trim();
+    p.composition = String(p.composition || '').trim();
+    p.purpose = String(p.purpose || '').trim();
+    p.aspect_ratio = String(p.aspect_ratio || '').trim();
+    p.source_file = String(p.source_file || '').trim();
     p.nano_banana_prompt = String(p.nano_banana_prompt || '').trim();
     p.alt_pl = String(p.alt_pl || '').trim();
+    p.caption_pl = String(p.caption_pl || '').trim();
     p.overlay_text_pl = String(p.overlay_text_pl || '').trim();
-    p.negative_prompt = String(
-      p.negative_prompt || 'brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków'
-    ).trim();
+    p.negative_prompt = String(p.negative_prompt || '').trim();
+    if (p.visual_review && typeof p.visual_review === 'object') {
+      p.visual_review = {
+        status: String(p.visual_review.status || '').trim(),
+        matches_topic: p.visual_review.matches_topic === true,
+        reviewed_by: String(p.visual_review.reviewed_by || '').trim(),
+        reviewed_at: String(p.visual_review.reviewed_at || '').trim(),
+        note: String(p.visual_review.note || '').trim(),
+      };
+    }
   }
-  json.image_prompts = mapped;
+  json[promptKey] = mapped;
 
-  const hero = json.image_prompts.find((p) => p.section_ref === 'hero');
-  if (hero) {
+  const hero = mapped.find((p) => p.section_ref === 'hero');
+  if (hero?.filename_base) {
     json.hero_image = hero.filename_base;
   }
 
   for (let i = 0; i < json.sections.length; i += 1) {
     const ref = `sekcja-${i + 1}`;
-    const prompt = json.image_prompts.find((p) => p.section_ref === ref);
-    if (prompt && json.sections[i]?.image) json.sections[i].image.src = `./assets/${prompt.filename_base}.webp`;
+    const prompt = mapped.find((p) => p.section_ref === ref);
+    if (prompt?.filename_base && json.sections[i]?.image) json.sections[i].image.src = `./assets/${prompt.filename_base}.webp`;
   }
 
   const finalErrors = validate(json);

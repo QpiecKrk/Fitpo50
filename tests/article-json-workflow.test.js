@@ -12,7 +12,7 @@ const {
   reportPathForJson,
   sha256File,
 } = require('../scripts/lib/article-json-artifact');
-const { collectChanges } = require('../scripts/article-json-workbench');
+const { collectChanges, copyMediaPackage } = require('../scripts/article-json-workbench');
 const { resolve } = require('../scripts/article-manager');
 
 const REPO = path.resolve(__dirname, '..');
@@ -49,6 +49,17 @@ test('change report records additions, replacements and removals with JSON paths
     ['$.title', 'REPLACE'],
   ]);
 });
+
+test('ready package copies only exact media files named by the manifest', () => withTempDir((dir) => {
+  const source = path.join(dir, 'source');
+  const target = path.join(dir, 'ready');
+  fs.mkdirSync(source);
+  for (const name of ['hero.png', 'hero.jpg', 'hero.webp', 'hero.avif', 'unrelated.jpg']) fs.writeFileSync(path.join(source, name), name);
+  copyMediaPackage({ entries: [{ source_file: 'hero.png', variants: {
+    jpg: { file: 'hero.jpg' }, webp: { file: 'hero.webp' }, avif: { file: 'hero.avif' },
+  } }] }, source, target);
+  assert.deepEqual(fs.readdirSync(target).sort(), ['hero.avif', 'hero.jpg', 'hero.png', 'hero.webp']);
+}));
 
 test('prepared artifact is rejected after any post-review JSON change', () => withTempDir((dir) => {
   const file = path.join(dir, 'nowy-artykul.fitpo50.json');

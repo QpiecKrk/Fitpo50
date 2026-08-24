@@ -69,8 +69,8 @@ Publikacja artykulow:
 - `dodaj artykul`, `dodaj artykuł`, `opublikuj artykul` oznacza workflow JSON-first:
   1) najpierw uzyj skilla `popraw-json`,
   2) doprowadz JSON do statusu `content-ready`, w tym wykonaj logic gate: zero skrótów myślowych, jasne odniesienia, metafory domknięte mechanizmem, wnioski wynikające z treści/źródeł/liczb/warunków,
-  3) dopiero potem przygotuj/przerob assety PNG -> AVIF/WebP/JPG i uruchom import HTML,
-  4) przed generowaniem HTML porownaj zalaczone obrazy z opisami/polami obrazow w JSON,
+  3) przed `CONTENT_READY` uruchom twarda bramke pakietu mediow na jednym katalogu artykulu: dokladne nazwy, hero + obraz kazdej sekcji, realne wymiary/proporcje, AVIF/WebP/JPG, duplikaty, roznorodnosc, konkretne alt/podpis i lokalny manifest,
+  4) przed generowaniem HTML rzeczywiscie obejrzyj zalaczone obrazy, porownaj je z opisami/polami obrazow w JSON i dopiero wtedy oznacz `visual_review.status=VERIFIED`; model zewnetrzny nie moze sam zatwierdzic obrazu,
   5) jesli obraz nie pasuje do opisu z JSON albo brakuje wymaganego ujecia, STOP: powiedz, ktorego obrazu brakuje, wyciagnij prompt/opis z JSON i popros uzytkownika o wygenerowanie oraz zalaczenie nowego pliku,
   6) po dolaczeniu brakujacego obrazu kontynuuj pipeline od miejsca zatrzymania,
   7) jesli blad wyjdzie dopiero po wygenerowaniu HTML, popraw generator/template/HTML albo dane w kopii roboczej pipeline; nie wracaj do edycji pliku JSON z Downloads, chyba ze uzytkownik wyraznie poprosi.
@@ -90,6 +90,7 @@ Publikacja artykulow:
 - pliki JSON spoza repo (np. `~/Downloads`) sa blokowane przez fixer, ale `article-pipeline` obsluguje to przez bezpieczna kopie robocza,
 - `article-pipeline` automatycznie tworzy kopie robocza w `/tmp/fitpo50-import-*/<slug>.fitpo50.json`, pracuje tylko na niej i usuwa ja po zakonczeniu (takze po bledzie),
 - brak tolerancji na bledy: jesli ktorykolwiek krok gate/validator zwroci FAIL, publikacja i push sa zatrzymane,
+- importer nie dobiera obrazow, nie stosuje fuzzy matchingu i nie konwertuje brakujacego fallbacku po cichu. Kopiuje tylko dokladne warianty zatwierdzone w `media_manifest` z jednego katalogu artykulu,
 - przed ogloszeniem statusu "gotowe" obowiazkowo uruchom `npm run json:gate:diff`; ma byc PASS (brak blokujacych bledow w `.fitpo50.json`),
 - przed ogloszeniem statusu "gotowe" obowiazkowo uruchom `npm run assets:mirror:sync`, a nastepnie `npm run predeploy:check`; oba kroki maja byc PASS,
 - przed ogloszeniem statusu "gotowe" obowiazkowo sprawdz, czy `data/import/*.fitpo50.json` nie zostawia blockerow push; jesli zostawia, popraw albo usun/przenies plik roboczy z repo i ponow gate, dopiero potem wolno oglosic "gotowe",

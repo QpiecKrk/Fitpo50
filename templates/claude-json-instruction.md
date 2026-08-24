@@ -21,6 +21,10 @@ Wygeneruj WYŁĄCZNIE poprawny JSON zgodny ze schematem FitPo50 (bez markdown, b
 - Nie wymyślaj FAQ, nie przerabiaj duplikatu na „wariant 2” i nie przypinaj pytania do przypadkowego źródła naukowego.
 - Zero placeholderów i zero metatekstu typu: "w tym artykule omówimy".
 - Nie powtarzaj tych samych zdań.
+- Dodaj dokładnie jeden wpis `image_prompts` dla `hero` i po jednym dla każdej sekcji (`sekcja-1`, `sekcja-2` itd.). Każdy wpis wymaga: `section_ref`, `filename_base` w kebab-case, `topic`, `technique`, `composition`, `purpose`, `aspect_ratio`, `alt_pl`, `caption_pl`, `nano_banana_prompt` i `negative_prompt`.
+- Hero i każda sekcja muszą przedstawiać inne ujęcie. Dla pakietu co najmniej 3 obrazów użyj minimum 3 rzeczywiście różnych technik i 3 różnych kompozycji; żadna technika ani kompozycja nie może dominować w więcej niż połowie pakietu.
+- Obrazy mają być współczesne, jasne i estetyczne, pokazywać osoby 50+ w wiarygodnym otoczeniu oraz różnicować fotografię, ilustrację redakcyjną, infografikę lub inną technikę adekwatną do treści. Nie powtarzaj jednego kadru z kosmetycznie zmienionym tłem.
+- Nie wpisuj `visual_review`, wymiarów, hashy ani `media_manifest`. Te pola powstają lokalnie dopiero po obejrzeniu rzeczywistych plików. Jeśli znasz dokładną nazwę dostarczonego pliku źródłowego, wpisz ją jako `source_file`; inaczej pozostaw to pole puste.
 
 ## Styl i format
 - Język polski, konkretny, praktyczny, bez lania wody.
@@ -29,7 +33,7 @@ Wygeneruj WYŁĄCZNIE poprawny JSON zgodny ze schematem FitPo50 (bez markdown, b
 
 ## Ważne
 To jest DRAFT. Po wygenerowaniu uruchamiamy kanonicznie:
-1. `npm run article:prepare-json --file=<plik.fitpo50.json>`
+1. `npm run article:prepare-json --file=<plik.fitpo50.json> --assets-dir=<jeden_folder_json_i_obrazow>`
 2. dopiero dla otrzymanego `CONTENT_READY`: `npm run article:ready-check -- --file <gotowy.fitpo50.json> --assets-dir <folder_z_grafikami>`
 
 Podczas kroku 1 lokalny pipeline, korzystając z aktualnych HTML-i w repozytorium:
@@ -37,3 +41,4 @@ Podczas kroku 1 lokalny pipeline, korzystając z aktualnych HTML-i w repozytoriu
 - dobiera i weryfikuje linki wychodzące,
 - wskazuje istniejące strony, które powinny później linkować do nowego artykułu,
 - ocenia centrum tematyczne, ale niczego nie dopisuje do huba bez akceptacji.
+- sprawdza dokładne nazwy obrazów, ich temat, wymiary, proporcje, duplikaty, różnorodność i trzy warianty AVIF/WebP/JPG; bez lokalnego `visual_review: VERIFIED` materiał pozostaje `BLOCKED`.

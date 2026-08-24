@@ -46,6 +46,24 @@ function allocateOutput(outputDir, slug) {
   }
 }
 
+function copyMediaPackage(manifest, sourceDir, targetDir) {
+  const names = new Set();
+  for (const entry of Array.isArray(manifest?.entries) ? manifest.entries : []) {
+    if (entry.source_file) names.add(entry.source_file);
+    Object.values(entry.variants || {}).forEach((variant) => {
+      if (variant?.file) names.add(variant.file);
+    });
+  }
+  fs.mkdirSync(targetDir, { recursive: true });
+  for (const name of names) {
+    if (name !== path.basename(name)) throw new Error(`Niebezpieczna nazwa pliku w media_manifest: ${name}`);
+    const source = path.join(sourceDir, name);
+    const target = path.join(targetDir, name);
+    if (!fs.existsSync(source)) throw new Error(`Brak pliku wskazanego przez media_manifest: ${source}`);
+    if (path.resolve(source) !== path.resolve(target)) fs.copyFileSync(source, target);
+  }
+}
+
 function runStage(label, command, args) {
   const result = spawnSync(command, args, { cwd: ROOT, encoding: 'utf8' });
   return {
@@ -153,6 +171,14 @@ function writeReports(report, outputFile) {
       lines.push(`- Centrum tematyczne: bez propozycji (fit=${center?.fit || 'UNKNOWN'}).`);
     }
   }
+  if (report.media_package) {
+    lines.push('', '## Pakiet mediów');
+    lines.push(`- Katalog artykułu: ${report.media_package.package_directory || 'MISSING'}`);
+    lines.push(`- Obrazy: ${(report.media_package.entries || []).length}`);
+    (report.media_package.entries || []).forEach((item) => {
+      lines.push(`- ${item.placement}: ${item.filename_base} (${item.source?.width || '?'}×${item.source?.height || '?'}, ${item.technique}, ${item.composition})`);
+    });
+  }
   lines.push('', '## Następny krok');
   lines.push(report.status === STATUSES.CONTENT_READY
     ? `- Użyj przygotowanego pliku: \`npm run article:publish --file="${outputFile}"\``
@@ -164,20 +190,22 @@ function writeReports(report, outputFile) {
 function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
-    console.error('Użycie: node scripts/article-json-workbench.js --file <draft.fitpo50.json> [--output-dir <dir>] [--force true|false]');
+    console.error('Użycie: node scripts/article-json-workbench.js --file <draft.fitpo50.json> [--assets-dir <katalog-artykulu>] [--output-dir <dir>] [--force true|false]');
     process.exit(1);
   }
   const sourceFile = path.resolve(ROOT, args.file);
   if (!fs.existsSync(sourceFile)) throw new Error(`Brak pliku: ${sourceFile}`);
-  const outputDir = args['output-dir']
+  const outputBaseDir = args['output-dir']
     ? path.resolve(ROOT, args['output-dir'])
     : path.join(os.homedir(), 'Downloads', 'fitpo50-json-ready');
+  const assetsDir = path.resolve(args['assets-dir'] || path.dirname(sourceFile));
   const fallbackSlug = safeSlug(path.basename(sourceFile).replace(/\.fitpo50\.json$/i, '').replace(/\.json$/i, ''));
   let original = null;
   try {
     original = parseJson(sourceFile);
   } catch (err) {
     if (!fallbackSlug) throw new Error(`Niepoprawny JSON (${err.message || err}) i brak poprawnego slug w nazwie pliku.`);
+    const outputDir = args['output-dir'] ? outputBaseDir : path.join(outputBaseDir, fallbackSlug);
     const blockedOutput = allocateOutput(outputDir, fallbackSlug);
     fs.copyFileSync(sourceFile, blockedOutput);
     const generatedAt = new Date().toISOString();
@@ -212,6 +240,7 @@ function main() {
   }
   const slug = safeSlug(original.slug || fallbackSlug);
   if (!slug) throw new Error('Brak poprawnego slug w JSON-ie i nazwie pliku.');
+  const outputDir = args['output-dir'] ? outputBaseDir : path.join(outputBaseDir, slug);
   const outputFile = allocateOutput(outputDir, slug);
   const htmlPath = path.join(ROOT, `${slug}.html`);
   const generatedAt = new Date().toISOString();
@@ -227,6 +256,7 @@ function main() {
     } else {
       stages.push(runStage('Bezpieczny fixer JSON', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true']));
       stages.push(runStage('Normalizacja techniczna bez generowania treści', 'node', ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json']));
+      stages.push(runStage('Pakiet mediów: nazwy, warianty, jakość i różnorodność', 'node', ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'true']));
       stages.push(runStage('Lokalna intencja, kanibalizacja, linkowanie i centra', 'node', ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true']));
       stages.push(runStage('Weryfikacja źródeł, URL-i i pochodzenia FAQ', 'node', ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true']));
       stages.push(runStage('Bramka treści JSON', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile]));
@@ -242,8 +272,14 @@ function main() {
       blockers.push(`Narzędzie utworzyło niepoprawny JSON: ${err.message || err}. Zachowano bezpieczną kopię wejścia.`);
       fs.copyFileSync(sourceFile, workingFile);
     }
+    if (corrected.media_manifest && typeof corrected.media_manifest === 'object') {
+      corrected.media_manifest.source_package_directory = corrected.media_manifest.package_directory || path.basename(assetsDir);
+      corrected.media_manifest.package_directory = path.basename(path.dirname(outputFile));
+      fs.writeFileSync(workingFile, `${JSON.stringify(corrected, null, 2)}\n`, 'utf8');
+    }
     fs.copyFileSync(workingFile, outputFile);
     const status = blockers.length ? STATUSES.BLOCKED : STATUSES.CONTENT_READY;
+    if (status === STATUSES.CONTENT_READY) copyMediaPackage(corrected.media_manifest, assetsDir, path.dirname(outputFile));
     statusHistory.push({
       status,
       at: new Date().toISOString(),
@@ -277,6 +313,7 @@ function main() {
         incoming_links: Array.isArray(corrected.incoming_link_suggestions) ? corrected.incoming_link_suggestions : [],
         topic_center: corrected.topic_center_assessment || null,
       },
+      media_package: corrected.media_manifest || null,
     };
     const reports = writeReports(report, outputFile);
     console.log(`[ARTICLE-JSON] status=${status}`);
@@ -297,4 +334,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { allocateOutput, collectChanges, main, parseArgs };
+module.exports = { allocateOutput, collectChanges, copyMediaPackage, main, parseArgs };

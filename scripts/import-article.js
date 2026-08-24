@@ -27,14 +27,13 @@ const { spawnSync } = require('child_process');
 const { inspectPreparedArtifact } = require('./lib/article-json-artifact');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
+const { validateManifestStructure } = require('./lib/article-media');
 
 const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const SITEMAP_LOCK_DIR = path.join(ROOT, '.tmp', 'sitemap.lock');
 const LLMS_PATH = path.join(ROOT, 'llms.txt');
-const REQUIRED_ARTICLE_IMAGE_EXT = ['avif', 'webp', 'jpg'];
-const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const DEFAULT_AUTHOR_PERSON = {
   '@type': 'Person',
   name: 'Grzegorz Kupiec',
@@ -611,10 +610,12 @@ function normalizeSections(rawSections) {
       const imgSrc = String(entry.image.src || entry.image.path || '').trim();
       const imgAlt = String(entry.image.alt || title || 'Grafika artykułu').trim();
       const imgCaption = String(entry.image.caption || '').trim();
+      const imgWidth = Number(entry.image.width || 0);
+      const imgHeight = Number(entry.image.height || 0);
       if (imgSrc) {
         blocks.push({
           type: 'html',
-          html: toInlinePictureHtml(imgSrc, imgAlt, imgCaption),
+          html: toInlinePictureHtml(imgSrc, imgAlt, imgCaption, imgWidth, imgHeight),
         });
       }
     }
@@ -679,183 +680,19 @@ function ensureMinimumInternalLinks(slug, dryRun, syncSite, minimum = POLICY.WOR
   }
 }
 
-function toInlinePictureHtml(imgSrc, imgAlt, imgCaption) {
+function toInlinePictureHtml(imgSrc, imgAlt, imgCaption, imgWidth, imgHeight) {
   const normalizedSrc = String(imgSrc || '').trim();
   const escapedAlt = escapeHtml(String(imgAlt || 'Grafika artykułu').trim());
   const escapedCaption = escapeHtml(String(imgCaption || '').trim());
   const localSrcMatch = normalizedSrc.match(/^(.*)\.(avif|webp|jpe?g|png)$/i);
 
-  if (!localSrcMatch) {
-    return `<figure class="inline-figure"><img src="${escapeHtml(normalizedSrc)}" alt="${escapedAlt}" loading="lazy">${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
-  }
+  const dimensions = Number(imgWidth) > 0 && Number(imgHeight) > 0
+    ? ` width="${Number(imgWidth)}" height="${Number(imgHeight)}"`
+    : '';
+  if (!localSrcMatch) return `<figure class="inline-figure"><img src="${escapeHtml(normalizedSrc)}" alt="${escapedAlt}" loading="lazy"${dimensions}>${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
 
   const base = localSrcMatch[1];
-  return `<figure class="inline-figure"><picture><source srcset="${escapeHtml(`${base}.avif`)}" type="image/avif"><source srcset="${escapeHtml(`${base}.webp`)}" type="image/webp"><img src="${escapeHtml(`${base}.jpg`)}" alt="${escapedAlt}" loading="lazy"></picture>${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
-}
-
-function commandExists(bin) {
-  const res = spawnSync('which', [bin], { cwd: ROOT, stdio: 'ignore' });
-  return res.status === 0;
-}
-
-function assetPath(base, ext, inSite = false) {
-  const rootDir = inSite ? path.join(ROOT, '_site', 'assets') : path.join(ROOT, 'assets');
-  return path.join(rootDir, `${base}.${ext}`);
-}
-
-function ensureDirFor(filePath) {
-  const dir = path.dirname(filePath);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-}
-
-function firstExistingSourceImage(base, extraDirs = []) {
-  const scanDirs = [path.join(ROOT, 'assets'), ...normalizeArray(extraDirs).filter(Boolean)];
-  for (const ext of SOURCE_IMAGE_EXT) {
-    for (const dir of scanDirs) {
-      const p = path.join(dir, `${base}.${ext}`);
-      if (fs.existsSync(p)) {
-        return { ext, path: p };
-      }
-    }
-  }
-  return null;
-}
-
-function runConversion(cmd, args) {
-  const res = spawnSync(cmd, args, { cwd: ROOT, encoding: 'utf8' });
-  return {
-    ok: res.status === 0,
-    stderr: String(res.stderr || '').trim(),
-    stdout: String(res.stdout || '').trim(),
-  };
-}
-
-function generateMissingVariant(base, targetExt, source) {
-  const targetPath = assetPath(base, targetExt, false);
-  if (fs.existsSync(targetPath)) {
-    return { ok: true, created: false, targetPath };
-  }
-  ensureDirFor(targetPath);
-
-  const srcExt = String(source.ext || '').toLowerCase();
-  const srcPath = source.path;
-  const srcIsJpg = srcExt === 'jpg' || srcExt === 'jpeg';
-
-  if (targetExt === srcExt || (targetExt === 'jpg' && srcIsJpg)) {
-    fs.copyFileSync(srcPath, targetPath);
-    return { ok: true, created: true, targetPath };
-  }
-
-  if (targetExt === 'webp') {
-    if (!commandExists('cwebp')) {
-      return { ok: false, created: false, targetPath, error: 'Brak narzędzia cwebp (Homebrew webp).' };
-    }
-    const out = runConversion('cwebp', ['-quiet', '-q', '88', srcPath, '-o', targetPath]);
-    if (!out.ok) {
-      return { ok: false, created: false, targetPath, error: `cwebp failed: ${out.stderr || out.stdout}` };
-    }
-    return { ok: true, created: true, targetPath };
-  }
-
-  if (targetExt === 'avif') {
-    if (!commandExists('avifenc')) {
-      return { ok: false, created: false, targetPath, error: 'Brak narzędzia avifenc (Homebrew libavif).' };
-    }
-    const out = runConversion('avifenc', ['--speed', '6', '--min', '20', '--max', '32', srcPath, targetPath]);
-    if (!out.ok) {
-      return { ok: false, created: false, targetPath, error: `avifenc failed: ${out.stderr || out.stdout}` };
-    }
-    return { ok: true, created: true, targetPath };
-  }
-
-  if (targetExt === 'jpg') {
-    if (srcIsJpg) {
-      fs.copyFileSync(srcPath, targetPath);
-      return { ok: true, created: true, targetPath };
-    }
-    if (process.platform === 'darwin' && commandExists('sips')) {
-      const out = runConversion('sips', ['-s', 'format', 'jpeg', srcPath, '--out', targetPath]);
-      if (!out.ok) {
-        return { ok: false, created: false, targetPath, error: `sips failed: ${out.stderr || out.stdout}` };
-      }
-      return { ok: true, created: true, targetPath };
-    }
-    if (commandExists('magick')) {
-      const out = runConversion('magick', [srcPath, targetPath]);
-      if (!out.ok) {
-        return { ok: false, created: false, targetPath, error: `magick failed: ${out.stderr || out.stdout}` };
-      }
-      return { ok: true, created: true, targetPath };
-    }
-    return { ok: false, created: false, targetPath, error: 'Brak konwertera do JPG (sips/magick).' };
-  }
-
-  return { ok: false, created: false, targetPath, error: `Nieobsługiwany target ext: ${targetExt}` };
-}
-
-function mirrorAssetVariantToSite(base, ext) {
-  const sourcePath = assetPath(base, ext, false);
-  if (!fs.existsSync(sourcePath)) return false;
-  const siteAssetsDir = path.join(ROOT, '_site', 'assets');
-  if (!fs.existsSync(siteAssetsDir)) return false;
-  const sitePath = assetPath(base, ext, true);
-  ensureDirFor(sitePath);
-  fs.copyFileSync(sourcePath, sitePath);
-  return true;
-}
-
-function extractSectionImageBases(sections) {
-  const bases = new Set();
-  const rx = /<img\b[^>]*src="([^"]+)"/gi;
-  for (const section of normalizeArray(sections)) {
-    for (const block of normalizeArray(section?.blocks)) {
-      const html = String(block?.html || '');
-      for (const m of html.matchAll(rx)) {
-        const src = String(m[1] || '').trim();
-        if (!src) continue;
-        if (!/assets\//i.test(src)) continue;
-        const base = normalizeImageBase(src);
-        if (base) bases.add(base);
-      }
-    }
-  }
-  return [...bases];
-}
-
-function autoPrepareArticleAssets(payload, syncSite, extraImageDirs = []) {
-  const bases = new Set([
-    String(payload?.heroImage || '').trim(),
-    ...extractSectionImageBases(payload?.sections || []),
-  ]);
-  const notes = [];
-  const warnings = [];
-
-  for (const base of bases) {
-    if (!base) continue;
-    const source = firstExistingSourceImage(base, extraImageDirs);
-    if (!source) continue;
-
-    for (const ext of REQUIRED_ARTICLE_IMAGE_EXT) {
-      const result = generateMissingVariant(base, ext, source);
-      if (result.ok && result.created) {
-        notes.push(`assets/${base}.${ext}: utworzono automatycznie ze źródła .${source.ext}`);
-      } else if (!result.ok) {
-        warnings.push(`assets/${base}.${ext}: ${result.error}`);
-      }
-    }
-
-    if (syncSite) {
-      for (const ext of REQUIRED_ARTICLE_IMAGE_EXT) {
-        if (mirrorAssetVariantToSite(base, ext)) {
-          notes.push(`_site/assets/${base}.${ext}: zsynchronizowano`);
-        }
-      }
-    }
-  }
-
-  return { notes, warnings };
+  return `<figure class="inline-figure"><picture><source srcset="${escapeHtml(`${base}.avif`)}" type="image/avif"><source srcset="${escapeHtml(`${base}.webp`)}" type="image/webp"><img src="${escapeHtml(`${base}.jpg`)}" alt="${escapedAlt}" loading="lazy"${dimensions}></picture>${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
 }
 
 function normalizeLocalHtmlHref(href) {
@@ -1036,6 +873,9 @@ function validateInput(data, opts = {}) {
   const errors = [];
   const autoFixes = [];
   const title = String(data.title || '').trim();
+  if (!String(data.hero_image || '').trim()) errors.push('Brak hero_image; importer nie stosuje fallbacku ze slug.');
+  const mediaValidation = validateManifestStructure(data);
+  mediaValidation.errors.forEach((message) => errors.push(`Media: ${message}`));
   if (!title) errors.push('Brak pola title.');
   if (containsEditorialPlaceholder(title)) {
     errors.push('Title: wykryto placeholder redakcyjny.');
@@ -1367,9 +1207,6 @@ function buildPrecheckReport({ inputPath, json, payload, validation, syncSite, a
   }
   if (!String(json.reading_time || json.readingTime || '').trim()) {
     autoFixes.push(`Brak reading_time -> użyję domyślnego: "${payload.readingTime}"`);
-  }
-  if (!String(json.hero_image || json.heroImage || '').trim()) {
-    autoFixes.push(`Brak hero_image -> użyję fallback: "${payload.heroImage}"`);
   }
   const rawSeoBase = String(json.seo_title || json.title || '').replace(/\s+/g, ' ').trim();
   if (rawSeoBase && rawSeoBase !== payload.seoTitleBase) {
@@ -2367,8 +2204,10 @@ function normalizePayload(data, cliCategory, options = {}) {
 
   const readingTime = normalizeReadingTimeLabel(data.reading_time || data.readingTime, '11 min czytania');
 
-  const heroImage = String(data.hero_image || data.heroImage || slug).trim();
+  const heroImage = String(data.hero_image || data.heroImage || '').trim();
   const heroAlt = String(data.hero_alt || data.heroAlt || title).trim();
+  const heroWidth = Number(data.hero_width || data.media_manifest?.entries?.find((entry) => entry.placement === 'hero')?.source?.width || 0);
+  const heroHeight = Number(data.hero_height || data.media_manifest?.entries?.find((entry) => entry.placement === 'hero')?.source?.height || 0);
   const heroMotto = String(data.hero_motto_html || data.hero_motto || data.heroMotto || '').trim();
 
   const keyTakeaways = normalizeKeyTakeaways(data.key_takeaways || data.takeaways || []);
@@ -2386,6 +2225,8 @@ function normalizePayload(data, cliCategory, options = {}) {
     readingTime,
     heroImage,
     heroAlt,
+    heroWidth,
+    heroHeight,
     metaDescription,
     title,
   });
@@ -2449,6 +2290,8 @@ function buildHtmlFromTemplate(template, payload) {
     CATEGORY_CARD_CLASS: `article-kicker-card--${payload.category.key}`,
     HERO_IMAGE: payload.heroImage,
     HERO_ALT: payload.heroAlt,
+    HERO_WIDTH: payload.heroWidth,
+    HERO_HEIGHT: payload.heroHeight,
     HERO_MOTTO: payload.heroMotto,
     H2_1: 'Sekcja artykułu',
     P_1: 'Treść sekcji artykułu.',
@@ -2634,7 +2477,7 @@ async function main() {
 
   const json = parseJsonFile(resolvedInput);
   const payload = normalizePayload(json, args.category, { faqStrict });
-  const assetPrep = autoPrepareArticleAssets(payload, syncSite, [path.dirname(resolvedInput)]);
+  const assetPrep = { notes: [], warnings: [] };
   const check = validateInput(json, { faqStrict });
   const precheck = buildPrecheckReport({
     inputPath: resolvedInput,

@@ -174,9 +174,15 @@ Artykuł nie przechodzi, jeśli:
 - Link do `centrum-*.html` bez `topic_center_approval.status = APPROVED_BY_USER` jest błędem. Pipeline nigdy nie dodaje hub-linku tylko po to, by wypełnić limit czterech linków.
 
 ## 11. Media + Syntax Contract v2.0 (obowiązkowe)
+- JSON i wszystkie obrazy wejściowe tworzą jeden katalog artykułu. Pipeline nie szuka plików rekurencyjnie, nie normalizuje przybliżonych nazw i nie pobiera zastępstwa z globalnego `assets/`.
+- Wymagany jest dokładnie jeden obraz `hero` oraz jeden odrębny obraz dla każdej sekcji. `filename_base` jest dokładną nazwą kebab-case, a każdy wpis obrazu wymaga konkretnego tematu, techniki, kompozycji, celu, proporcji, altu i podpisu.
+- Przed `CONTENT_READY` lokalna kontrola rzeczywistych plików zapisuje `media_manifest`: placement, temat, technikę, cel, nazwę źródła, wymiary, SHA-256, warianty oraz udokumentowany `visual_review`. Manifestu nie generuje Claude.
+- Każdy obraz wymaga AVIF, WebP i fallbacku JPG o zgodnych wymiarach. Hero ma minimum 1080×600 px, obraz sekcji minimum 900×500 px, a proporcja krajobrazowa mieści się w zakresie 1.2-2.1 i zgadza z deklaracją.
+- Hash i sygnatura wizualna blokują duplikaty 1:1, niemal ten sam kadr oraz wariant przedstawiający inny obraz. Dla pakietu min. 3 obrazów wymagane są min. 3 techniki i 3 kompozycje; jedna nie może zajmować więcej niż połowy pakietu.
+- `alt` i `caption` muszą opisywać realną zawartość oraz mieć związek z konkretną sekcją. `visual_review.status=VERIFIED` wolno nadać dopiero po rzeczywistym obejrzeniu pliku i zapisaniu konkretnej notatki.
 - Obrazy w treści artykułu mają korzystać ze standardu:
   - `<picture>` + `<source type="image/avif">` + `<source type="image/webp">` + fallback `<img>`.
-- W fallback `<img>` wymagane: poprawny `alt` oraz `loading="lazy"`.
+- W fallback `<img>` wymagane: poprawny `alt`, `loading="lazy"` oraz prawdziwe `width` i `height` z manifestu.
 - Zakaz używania tagu `</source>` i deklaracji `<?xml ... ?>` w plikach HTML.
 
 ## 12. Schema Citation Contract v2.0 (obowiązkowe)

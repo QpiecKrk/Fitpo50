@@ -2,140 +2,62 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
-const { spawnSync } = require('child_process');
+const { prepareArticleMedia } = require('./lib/article-media');
 
 const ROOT = process.cwd();
-const ASSETS = path.join(ROOT, 'assets');
-const SITE_ASSETS = path.join(ROOT, '_site', 'assets');
-const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 
 function parseArgs(argv) {
   const out = {};
-  for (let i = 0; i < argv.length; i += 1) {
-    const t = argv[i];
-    if (!t.startsWith('--')) continue;
-    const key = t.slice(2);
-    const next = argv[i + 1];
-    if (!next || next.startsWith('--')) out[key] = 'true';
+  for (let index = 0; index < argv.length; index += 1) {
+    const token = String(argv[index] || '');
+    if (!token.startsWith('--')) continue;
+    const key = token.slice(2);
+    const next = argv[index + 1];
+    if (!next || String(next).startsWith('--')) out[key] = 'true';
     else {
       out[key] = next;
-      i += 1;
+      index += 1;
     }
   }
   return out;
 }
 
-function ensureDir(dir) {
-  fs.mkdirSync(dir, { recursive: true });
-}
-
-function must(cmd, args) {
-  const r = spawnSync(cmd, args, { stdio: 'inherit' });
-  if (r.status !== 0) {
-    throw new Error(`${cmd} ${args.join(' ')} failed`);
-  }
-}
-
-function findSourceImage(baseName, fromDir) {
-  const files = fs.readdirSync(fromDir);
-  const cleanBase = String(baseName || '')
-    .trim()
-    .normalize('NFKC')
-    .replace(/[\u00A0\u2007\u202F]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .toLowerCase();
-  const exact = files.find((name) => {
-    const lower = name.toLowerCase().normalize('NFKC').replace(/[\u00A0\u2007\u202F]/g, ' ');
-    return SOURCE_IMAGE_EXT.some((ext) => lower === `${cleanBase}.${ext}`);
-  });
-  if (exact) return path.join(fromDir, exact);
-
-  const norm = (x) => x
-    .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[\u00A0\u2007\u202F]/g, ' ')
-    .replace(/\s+/g, '')
-    .toLowerCase();
-  const target = norm(cleanBase);
-  for (const name of files) {
-    const ext = path.extname(name).slice(1).toLowerCase();
-    if (!SOURCE_IMAGE_EXT.includes(ext)) continue;
-    const b = name.slice(0, -(ext.length + 1));
-    if (norm(b) === target) return path.join(fromDir, name);
-  }
-  return null;
-}
-
-function convertOne(src, targetBaseName) {
-  const outJpg = path.join(ASSETS, `${targetBaseName}.jpg`);
-  const outWebp = path.join(ASSETS, `${targetBaseName}.webp`);
-  const outAvif = path.join(ASSETS, `${targetBaseName}.avif`);
-
-  must('magick', [src, '-quality', '88', outJpg]);
-  must('magick', [outJpg, '-quality', '82', outWebp]);
-  must('magick', [outJpg, '-quality', '50', outAvif]);
-
-  fs.copyFileSync(outJpg, path.join(SITE_ASSETS, path.basename(outJpg)));
-  fs.copyFileSync(outWebp, path.join(SITE_ASSETS, path.basename(outWebp)));
-  fs.copyFileSync(outAvif, path.join(SITE_ASSETS, path.basename(outAvif)));
+function copyExact(source, destination) {
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.copyFileSync(source, destination);
 }
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const file = args.file ? path.resolve(args.file) : '';
   if (!file || !fs.existsSync(file)) {
-    console.error('Usage: node scripts/prepare-article-assets.js --file <path.fitpo50.json> [--from <dir>]');
+    console.error('Użycie: node scripts/prepare-article-assets.js --file <path.fitpo50.json> [--from <katalog-artykulu>]');
     process.exit(1);
   }
-  const fromDir = path.resolve(args.from || path.dirname(file));
-  const json = JSON.parse(fs.readFileSync(file, 'utf8'));
-  const hero = String(json.hero_image || '').trim();
-  if (!hero) throw new Error('Brak hero_image w JSON');
-
-  ensureDir(ASSETS);
-  ensureDir(SITE_ASSETS);
-
-  const heroSrc = findSourceImage(hero, fromDir);
-  if (!heroSrc) throw new Error(`Brak hero source: ${hero}.* w ${fromDir}`);
-
-  const promptsV4 = Array.isArray(json.image_prompts_v4) ? json.image_prompts_v4 : [];
-  const promptsLegacy = Array.isArray(json.image_prompts) ? json.image_prompts : [];
-  const prompts = promptsV4.length ? promptsV4 : promptsLegacy;
-  const sectionPrompts = prompts
-    .filter((p) => {
-      const t = String(p.type || '');
-      const r = String(p.section_ref || '');
-      return /^section_/i.test(t) || /^sekcja-\d+/i.test(r);
-    })
-    .sort((a, b) => {
-      const pa = String(a.type || a.section_ref || '');
-      const pb = String(b.type || b.section_ref || '');
-      const ai = Number((pa.match(/(\d+)/) || [])[1] || 0);
-      const bi = Number((pb.match(/(\d+)/) || [])[1] || 0);
-      return ai - bi;
-    });
-
-  if (!sectionPrompts.length) {
-    console.log('[WARN] Brak section_* w image_prompts_v4. Pomijam sekcje.');
-    return;
+  const assetsDir = path.resolve(args.from || path.dirname(file));
+  const article = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const result = prepareArticleMedia(article, { assetsDir, mutate: false, ensureVariants: false });
+  if (!result.ok) {
+    result.errors.forEach((error) => console.error(`[FAIL] ${error}`));
+    process.exit(1);
   }
 
-  const sectionJobs = sectionPrompts.map((p) => {
-    const base = String(p.filename_base || '').trim();
-    const src = findSourceImage(base, fromDir);
-    if (!src) throw new Error(`Brak section source: ${base}.* w ${fromDir}`);
-    return { base, src };
-  });
-
-  convertOne(heroSrc, hero);
-  console.log(`[OK] hero prepared: ${hero}`);
-
-  sectionJobs.forEach(({ base, src }) => {
-    convertOne(src, base);
-    console.log(`[OK] section prepared: ${base}`);
-  });
-
-  console.log('[PASS] prepare-article-assets OK');
+  for (const entry of result.manifest.entries) {
+    for (const variant of Object.values(entry.variants)) {
+      const source = path.join(assetsDir, variant.file);
+      copyExact(source, path.join(ROOT, 'assets', variant.file));
+      if (fs.existsSync(path.join(ROOT, '_site'))) copyExact(source, path.join(ROOT, '_site', 'assets', variant.file));
+      console.log(`[OK] ${entry.placement}: ${variant.file}`);
+    }
+  }
+  console.log('[PASS] prepare-article-assets: skopiowano wyłącznie warianty zatwierdzone w manifeście.');
 }
 
-main();
+try {
+  main();
+} catch (error) {
+  console.error(`[FAIL] prepare-article-assets: ${error.message || error}`);
+  process.exit(1);
+}
+
+module.exports = { main, parseArgs };

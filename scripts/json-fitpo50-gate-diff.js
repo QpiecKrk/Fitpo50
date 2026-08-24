@@ -5,6 +5,7 @@ const { spawnSync } = require('child_process');
 const { POLICY, utils } = require('./lib/article-policy');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
+const { validateManifestStructure } = require('./lib/article-media');
 
 const errors = [];
 const warnings = [];
@@ -444,6 +445,8 @@ function validateFile(file) {
   const architecture = validateArticleArchitecture(json, { root: process.cwd() });
   architecture.errors.forEach((error) => errors.push(`${file}: Architecture: ${error}`));
   architecture.warnings.forEach((warning) => warnings.push(`${file}: Architecture: ${warning}`));
+  const media = validateManifestStructure(json);
+  media.errors.forEach((error) => errors.push(`${file}: Media: ${error}`));
 }
 
 function main() {
