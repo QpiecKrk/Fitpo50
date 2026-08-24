@@ -1,9 +1,9 @@
 # Audyt naprawczy artykułów FitPo50 — paczki bez GSC
 
 - Właściwe artykuły w bibliotece: **96**
-- Artykuły już naprawione pełnym procesem: **84**
-- Artykuły oczekujące na naprawę: **12**
-- Paczki oczekujące: **1**
+- Artykuły już naprawione pełnym procesem: **96**
+- Artykuły oczekujące na naprawę: **0**
+- Paczki oczekujące: **0**
 - Osobno naprawiona strona centrum: `centrum-nadcisnienia-po-50.html`
 
 Komenda wykonawcza: `napraw paczkę N`. Numeracja jest stała i nie może być później przeliczana. Po ukończeniu paczki zmienia się jej status, ale skład pozostaje zapisany.
@@ -98,6 +98,18 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 - `sen-po-50.html`
 - `ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html`
 - `regeneracja-ukladu-nerwowego-co-mowi-nauka.html`
+- `brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html`
+- `sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html`
+- `nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn.html`
+- `krew-pepowinowa-skarb-czy-marketing.html`
+- `gleboki-przysiad-asian-squat.html`
+- `co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html`
+- `zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html`
+- `apob-apoa-badania-cholesterol.html`
+- `wydolnosc-vo2max-starzenie-po-50.html`
+- `otylosc-sarkopeniczna-test-plan-30-dni-po-50.html`
+- `jak-zaczac-sie-podciagac-po-50.html`
+- `szczepionki-covid-skutki-uboczne-mity-i-fakty.html`
 
 ## Paczka 1 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
@@ -204,7 +216,7 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 | 9 | `ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html` | 28 | uzupełnić wymiary obrazów; sprawdzić sformułowania absolutne w kontekście źródeł; sprawdzić odsetki i terminy w badaniach źródłowych |
 | 10 | `regeneracja-ukladu-nerwowego-co-mowi-nauka.html` | 28 | uzupełnić wymiary obrazów; sprawdzić sformułowania absolutne w kontekście źródeł; zweryfikować mechanizmy biomedyczne akapit po akapicie |
 
-## Paczka 8 — 12 artykułów
+## Paczka 8 — UKOŃCZONA (12 artykułów, 24.08.2026)
 
 | # | Artykuł | Wynik audytu | Najważniejsze obszary naprawy |
 |---:|---|---:|---|

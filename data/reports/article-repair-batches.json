@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T10:00:00Z",
+  "generated_at": "2026-08-24T16:00:00Z",
   "audit_mode": "technical_editorial_without_gsc",
   "command_contract": "napraw paczke N",
   "immutable_numbering": true,
   "quality_gate": "content_sources_seo_aeo_geo_aio_faq_schema_links_media_pdf_dates_sitemap_site_validators",
   "totals": {
     "article_inventory": 96,
-    "repaired_articles": 84,
-    "pending_articles": 12,
-    "pending_batches": 1,
+    "repaired_articles": 96,
+    "pending_articles": 0,
+    "pending_batches": 0,
     "separately_repaired_non_article_pages": 1
   },
   "separately_repaired_non_article_pages": [
@@ -99,7 +99,19 @@
     "optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html",
     "sen-po-50.html",
     "ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html",
-    "regeneracja-ukladu-nerwowego-co-mowi-nauka.html"
+    "regeneracja-ukladu-nerwowego-co-mowi-nauka.html",
+    "brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit.html",
+    "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html",
+    "nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn.html",
+    "krew-pepowinowa-skarb-czy-marketing.html",
+    "gleboki-przysiad-asian-squat.html",
+    "co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html",
+    "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+    "apob-apoa-badania-cholesterol.html",
+    "wydolnosc-vo2max-starzenie-po-50.html",
+    "otylosc-sarkopeniczna-test-plan-30-dni-po-50.html",
+    "jak-zaczac-sie-podciagac-po-50.html",
+    "szczepionki-covid-skutki-uboczne-mity-i-fakty.html"
   ],
   "batches": [
     {
@@ -2568,7 +2580,7 @@
     },
     {
       "id": 8,
-      "status": "PENDING",
+      "status": "COMPLETE",
       "article_count": 12,
       "articles": [
         {
@@ -2925,7 +2937,8 @@
             }
           }
         }
-      ]
+      ],
+      "completed_at": "2026-08-24T16:00:00Z"
     }
   ]
 }
