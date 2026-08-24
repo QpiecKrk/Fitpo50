@@ -12,12 +12,15 @@ const {
   sha256File,
 } = require('./lib/article-json-artifact');
 const {
+  beginPromotionTransaction,
   createStagingWorkspace,
-  promoteStaging,
   promotionCandidates,
+  recoverInterruptedTransactions,
   runInStaging,
   runPreviewGate,
   snapshotCandidates,
+  validatePublicationSet,
+  writePublicationManifest,
 } = require('./lib/article-staging');
 const { submitIndexNow } = require('./import-article');
 
@@ -117,6 +120,29 @@ function runTempCleanup() {
   if (res.status !== 0) {
     console.warn('[WARN] tmp-cleanup exited with non-zero status.');
   }
+}
+
+function verifyMirrorPair(root, sourceRelative, mirrorRelative) {
+  const source = path.join(root, sourceRelative);
+  const mirror = path.join(root, mirrorRelative);
+  if (!fs.existsSync(source) || !fs.existsSync(mirror)) {
+    throw new Error(`Brak pary source/_site: ${sourceRelative} <-> ${mirrorRelative}`);
+  }
+  if (sha256File(source) !== sha256File(mirror)) {
+    throw new Error(`Niespójna para source/_site: ${sourceRelative} <-> ${mirrorRelative}`);
+  }
+}
+
+function runPostPromotionValidation(root, slug, article) {
+  run('Post-promotion article standard', 'node', ['scripts/validate-article-standard.js', `${slug}.html`]);
+  run('Post-promotion article contract', 'node', ['scripts/article-contract-check.js', `${slug}.html`, path.join('_site', `${slug}.html`)]);
+  run('Post-promotion mirror check', 'node', ['scripts/sync-site-assets-mirror.js', '--check', '--slug', slug]);
+  run('Post-promotion predeploy gate', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
+  verifyMirrorPair(root, `${slug}.html`, path.join('_site', `${slug}.html`));
+  verifyMirrorPair(root, path.join('assets', 'pdf', `${slug}.pdf`), path.join('_site', 'assets', 'pdf', `${slug}.pdf`));
+  verifyMirrorPair(root, 'llms-full.txt', path.join('_site', 'llms-full.txt'));
+  verifyMirrorPair(root, path.join('assets', 'data', 'search-index.json'), path.join('_site', 'assets', 'data', 'search-index.json'));
+  validatePublicationSet(root, article, { requireManifest: true });
 }
 
 function registerPublishedArticle(slug) {
@@ -246,25 +272,45 @@ async function main() {
   const assetsDir = args['assets-dir'] ? path.resolve(root, args['assets-dir']) : path.dirname(input);
   const slug = detectSlug(parsedInput, input);
   if (!stagingInternal) {
+    const recovered = recoverInterruptedTransactions(root);
+    recovered.forEach((transactionId) => console.log(`[RECOVERY] Cofnięto przerwaną publikację: ${transactionId}`));
+    const liveArticleExists = fs.existsSync(path.join(root, `${slug}.html`));
+    if (liveArticleExists && !force) {
+      throw new Error(`Slug ${slug} już istnieje. Aktualizacja wymaga jawnego --force true.`);
+    }
+    const operation = liveArticleExists ? 'UPDATE' : 'CREATE';
+    const transactionId = `article-${slug}-${Date.now()}-${process.pid}`;
     const candidates = promotionCandidates(parsedInput);
     const baseline = snapshotCandidates(root, candidates);
     const stageRoot = createStagingWorkspace(root, slug);
     console.log(`[STAGING] Izolowany katalog: ${stageRoot}`);
+    console.log(`[PUBLICATION] Tryb ${operation}; transakcja ${transactionId}.`);
     try {
       runInStaging(stageRoot, [...process.argv.slice(2), '--file', input, '--assets-dir', assetsDir]);
       runPreviewGate(stageRoot, slug);
-      const promoted = promoteStaging({ sourceRoot: root, stageRoot, candidates, baseline });
-      const liveHtml = path.join(root, `${slug}.html`);
-      const siteHtml = path.join(root, '_site', `${slug}.html`);
-      if (!fs.existsSync(liveHtml) || !fs.existsSync(siteHtml) || sha256File(liveHtml) !== sha256File(siteHtml)) {
-        throw new Error('Promocja zakończyła się niespójnym HTML source/_site.');
+      validatePublicationSet(stageRoot, parsedInput);
+      const manifest = writePublicationManifest({
+        stageRoot,
+        article: parsedInput,
+        candidates,
+        baseline,
+        transactionId,
+      });
+      console.log(`[MANIFEST] ${manifest.relative}: ${manifest.payload.operation}, ${manifest.payload.files_count} plików.`);
+      const transaction = beginPromotionTransaction({ sourceRoot: root, stageRoot, candidates, baseline, transactionId });
+      try {
+        runPostPromotionValidation(root, slug, parsedInput);
+        transaction.verify();
+        transaction.commit();
+      } catch (error) {
+        transaction.rollback(error.message || error);
+        throw new Error(`Publikacja cofnięta po błędzie walidacji: ${error.message || error}`);
       }
-      registerPublishedArticle(slug);
       const indexNowStatus = await submitIndexNowAfterPromotion(slug, boolOpt(args.indexnow, true));
       console.log(`[INDEXNOW] ${indexNowStatus} — wysyłka dopiero po PREVIEW_READY i promocji.`);
       const artifactCleanup = cleanupPreparedArtifact(input);
       artifactCleanup.removed.forEach((file) => console.log(`[CLEANUP] Usunięto opublikowany artefakt JSON: ${file}`));
-      console.log(`[PUBLISHED] Promowano ${promoted.length} plików dopiero po PREVIEW_READY.`);
+      console.log(`[PUBLISHED] ${operation}: zatwierdzono atomowo ${transaction.changed.length} plików po PREVIEW_READY i walidacji repo.`);
       appendTimingReport('article-pipeline-transactional', stepTimings);
       return { workingCopy: '', artifactCleanup };
     } finally {
@@ -301,7 +347,8 @@ async function main() {
   );
   run('Sync social title + BreadcrumbList (source/_site)', 'node', ['scripts/sync-article-title-breadcrumb.js', '--slug', slug]);
   run('Sync meta description across head/schema', 'node', ['scripts/sync-article-head-descriptions.js', '--slug', slug]);
-  run('Generate llms-full (auto-refresh)', 'node', ['scripts/generate-llms-full.js']);
+  run('Generate search index (source/_site)', 'node', ['scripts/generate-search-index.js', '--output', path.join('_site', 'assets', 'data', 'search-index.json')]);
+  run('Generate llms-full (source/_site)', 'node', ['scripts/generate-llms-full.js', '--output', path.join('_site', 'llms-full.txt')]);
   run('Article contract check (source/_site)', 'node', ['scripts/article-contract-check.js', `${slug}.html`, path.join('_site', `${slug}.html`)]);
   run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug]);
   run('Global link topology report', 'node', ['scripts/global-link-topology-optimizer.js', '--min-inbound', '2']);
@@ -317,6 +364,7 @@ async function main() {
     run('NEWS integrity', 'node', ['scripts/news-integrity-check.js']);
   }
   run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
+  registerPublishedArticle(slug);
   console.log('\n[PREVIEW BUILD PASS] Wewnętrzny pipeline stagingowy zakończony; repozytorium publiczne nie zostało zmienione.');
   appendTimingReport('article-pipeline-staging-internal', stepTimings);
   return { workingCopy, artifactCleanup: null };

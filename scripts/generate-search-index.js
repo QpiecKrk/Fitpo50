@@ -71,6 +71,7 @@ function deriveCategory(bodyClass, sectionMeta, articlePath) {
   if (source.includes('ruch')) return 'Ruch';
   if (source.includes('jedzenie')) return 'Jedzenie';
   if (source.includes('zdrowie')) return 'Zdrowie';
+  if (source.includes('mity')) return 'Mity';
   if (source.includes('ciekawe')) return 'Ciekawe';
   return 'Porady';
 }
@@ -151,4 +152,6 @@ function main() {
   }
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { deriveCategory };

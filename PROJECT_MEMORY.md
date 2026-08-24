@@ -173,6 +173,15 @@
 
 ## Ustalenia operacyjne (2026-06-18) - `popraw-seo`, huby i centra tematyczne
 
+### Aktualizacja systemowa 2026-08-24 — bezpieczna publikacja artykułu
+
+- `article:publish` działa jako jedna transakcja `CREATE` albo `UPDATE`; istniejący slug wymaga jawnego `--force true`.
+- Atomowy zestaw obejmuje artykuł, media, PDF, listingi, sitemap, `llms.txt`, `llms-full.txt`, indeks wyszukiwarki, raporty oraz odpowiedniki w `_site`.
+- Backup z hashami pozostaje aktywny do końca walidacji po promocji. Błąd cofa wszystkie nadpisane pliki i usuwa wszystkie pliki utworzone przez nieudaną publikację.
+- Dziennik w `.tmp/article-publication-transactions` umożliwia odzyskanie stanu po nagłym przerwaniu procesu; konflikt z niezależną zmianą zatrzymuje automatyczne cofanie.
+- Manifest `data/reports/article-publications/<slug>.json` zapisuje typ publikacji, identyfikator transakcji, listę plików, rozmiary i SHA-256 przed/po.
+- IndexNow oraz usunięcie artefaktu `CONTENT_READY` następują dopiero po `COMMITTED`. Brak wpisu w listingach, sitemapie, `llms`, indeksie, brak PDF/media albo rozjazd source/`_site` blokuje zakończenie.
+
 ### Aktualizacja systemowa 2026-08-23 — pełne pokrycie i wnioski globalne
 
 - Zatwierdzona naprawa URL-a oznacza naprawę całej strony, nie tylko elementu wskazanego przez raport: kontrolę logiki i źródeł każdego zmienianego twierdzenia, treści, SEO/AEO/GEO/AIO, FAQ i schema 1:1, linków, mediów i wyglądu, PDF, dat, sitemap, `_site` i walidacji. URL jest gotowy dopiero po przejściu pełnego Quality Gate.

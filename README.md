@@ -95,7 +95,7 @@ System publikacyjny FitPo50 działa dziś wokół centralnego silnika reguł:
 - `scripts/lib/article-policy.js` jest kanonicznym źródłem limitów, regexów i walidatorów,
 - `scripts/lib/article-intent-links.js` buduje lokalne inventory `BlogPosting`, kontroluje właściciela intencji, naturalne linki i propozycję centrum,
 - `scripts/lib/article-media.js` egzekwuje jeden katalog pakietu, dokładne nazwy, manifest, warianty, jakość, zgodność i różnorodność obrazów,
-- `scripts/lib/article-staging.js` tworzy izolowaną kopię witryny i promuje zatwierdzone artefakty transakcyjnie dopiero po wszystkich bramkach,
+- `scripts/lib/article-staging.js` tworzy izolowaną kopię witryny, utrzymuje backup do końca walidacji, odzyskuje przerwane transakcje i zapisuje manifest publikacji,
 - `scripts/article-preview-gate.js` renderuje desktop/mobile, kontroluje semantykę tabel oraz renderuje i porównuje każdą stronę PDF,
 - `scripts/article-json-workbench.js` przygotowuje chroniony JSON bez tworzenia HTML,
 - `scripts/article-preflight.js` sprawdza JSON wejściowy przed importem,
@@ -119,8 +119,10 @@ draft.fitpo50.json
   -> predeploy-gate
   -> render desktop/mobile + wszystkie strony PDF
   -> PREVIEW_READY
+  -> manifest CREATE/UPDATE + backup całego zestawu
   -> transakcyjna promocja do repo
-  -> publish
+  -> walidacja repo po promocji
+  -> COMMITTED albo pełny ROLLBACK
 ```
 
 Ważne zasady operacyjne:
@@ -128,6 +130,8 @@ Ważne zasady operacyjne:
 - `article-policy.js` traktujemy jako Single Source of Truth dla reguł publikacji,
 - model zewnętrzny deklaruje intencję i frazy, ale nie zgaduje linków FitPo50 ani członkostwa w centrum,
 - lokalny etap architektury wymaga 4 istniejących celów i naturalnych anchorów; propozycja centrum zawsze czeka na akceptację,
+- publikacja atomowo obejmuje artykuł, media, PDF, listingi, sitemap, `llms`, indeks wyszukiwarki i `_site`; jej wynik zapisuje `data/reports/article-publications/<slug>.json`,
+- `CREATE` nie wymaga `--force`, natomiast `UPDATE` istniejącego slugu jest dozwolone wyłącznie z jawnym `--force true`,
 - `article-sync-pro.js` działa w trybie fail-fast i nie ma miękkich fallbacków dla polityki,
 - przy zmianach SEO i listingów preferowany workflow to najpierw `--dry-run`, a dopiero potem zapis:
 

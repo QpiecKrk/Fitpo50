@@ -196,6 +196,16 @@ Artykuł nie przechodzi, jeśli:
 - HTML source i `_site` oraz PDF source i `_site` muszą być identyczne 1:1. Po pełnym PASS powstaje raport `data/reports/article-preview/<slug>.json|md` ze statusem `PREVIEW_READY`.
 - Promocja do repo jest transakcyjna: przed zapisem system sprawdza, czy żaden plik docelowy nie zmienił się podczas stagingu, kopiuje wyłącznie dozwolone artefakty i przy błędzie przywraca wcześniejsze wersje.
 
+## 11b. Safe Publication & Rollback Contract
+- Publikacja ma dwa jawne tryby: `CREATE` dla nowego slugu oraz `UPDATE` dla istniejącego slugu. `UPDATE` wymaga `--force true`; bez tego pipeline zatrzymuje się przed stagingiem.
+- Jedna transakcja obejmuje cały zestaw: HTML artykułu, media AVIF/WebP/JPG, PDF, `index.html`, `porady.html`, stronę kategorii, `sitemap.xml`, `llms.txt`, `llms-full.txt`, indeks wyszukiwarki, raport podglądu, log publikacji oraz odpowiadające pliki w `_site`.
+- Przed pierwszym zapisem powstaje backup wszystkich nadpisywanych plików wraz z SHA-256. Backup pozostaje aktywny aż do zakończenia walidacji już promowanego repozytorium.
+- Transakcja prowadzi dziennik w ignorowanym przez Git katalogu `.tmp/article-publication-transactions`. Po nagłym przerwaniu następne uruchomienie najpierw przywraca stan sprzed publikacji; niezależnie zmieniony plik blokuje automatyczne cofnięcie zamiast zostać nadpisany.
+- Po promocji ponownie przechodzą: standard artykułu, kontrakt source/`_site`, kontrola mirroru, gate `predeploy` i kompletność całego zestawu. Błąd któregokolwiek kroku wywołuje rollback wszystkich plików, w tym usunięcie plików utworzonych przez nieudaną publikację.
+- Udana transakcja zapisuje `data/reports/article-publications/<slug>.json`. Manifest podaje `CREATE`/`UPDATE`, identyfikator transakcji, wszystkie zmienione pliki, akcję `CREATE`/`UPDATE`, rozmiar oraz hashe przed i po publikacji.
+- Backup i dziennik są usuwane dopiero po statusie `COMMITTED`. IndexNow i usunięcie wykorzystanego artefaktu `CONTENT_READY` następują dopiero po zatwierdzeniu transakcji.
+- Półgotowy zestaw nie może być uznany za publikację: brak artykułu w listingu, sitemapie, `llms`, indeksie wyszukiwarki, brak PDF/media albo rozjazd wymaganej pary source/`_site` jest błędem blokującym.
+
 ## 12. Schema Citation Contract v2.0 (obowiązkowe)
 - `BlogPosting.citation` musi być zsynchronizowane z listą źródeł w HTML.
 - Wymagane minimum 4 URL-e w citation, jeśli faktycznie istnieją w materiale źródłowym.
