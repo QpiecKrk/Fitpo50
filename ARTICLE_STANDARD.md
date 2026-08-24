@@ -175,6 +175,30 @@ Artykuł nie przechodzi, jeśli:
 - Wymagane minimum 4 URL-e w citation, jeśli faktycznie istnieją w materiale źródłowym.
 - Kategoryczny zakaz dopisywania zmyślonych źródeł tylko po to, by dobić do minimum.
 
+## 12a. Logic, Evidence & FAQ Contract
+- Każdy akapit, quick answer, wniosek, FAQ, info box, takeaway i podpis grafiki przechodzi kontrolę logiczną.
+- Odniesienia typu „ta obietnica”, „ta reklama”, „taki przekaz”, „to zdanie” i „ten wniosek” muszą w tym samym fragmencie nazwać dokładne twierdzenie.
+- Metafora musi w tym samym fragmencie zostać domknięta rzeczywistym mechanizmem. Sam obraz „korka”, „silnika”, „resetu” albo „tarczy” jest błędem blokującym.
+- Każde twierdzenie medyczne, dotyczące bezpieczeństwa, liczby, ceny, mechanizmu lub statystyki wymaga wpisu w `evidence_claims[]`:
+```json
+{
+  "claim": "Badanie wykazało zmniejszenie ryzyka o 20%",
+  "location": "sections[0].paragraphs_html[0]",
+  "claim_type": "medical",
+  "source_urls": ["https://pubmed.ncbi.nlm.nih.gov/..."]
+}
+```
+- `claim` musi występować w dokładnie wskazanym fragmencie, a każdy URL musi istnieć również w `sources[]`.
+- Każde `sources[]` wymaga pól `label`, `url`, `evidence_level`, `checked_at`, `url_status`, `http_status`. `evidence_level` musi nazywać faktyczny rodzaj dowodu, np. `guideline`, `systematic_review`, `randomized_trial`, `cohort`, `official_statistics`, `price_list` albo `technical_documentation`. Kontrola adresu jest ważna maksymalnie 180 dni.
+- Jeśli wniosek wynika z wcześniejszych akapitów zamiast z bezpośredniego źródła, JSON wymaga `logic_links[]` z `conclusion_location`, listą `premise_locations` i konkretnym `reasoning` opisującym przejście od przesłanek do wniosku.
+- Każde źródło musi wspierać co najmniej jedno `evidence_claims`; niewykorzystana, dekoracyjna bibliografia blokuje publikację.
+- Twierdzenia `medical` i `safety` wymagają silnego źródła naukowego lub instytucjonalnego oraz jawnego `evidence_level`. Dla tematów medycznych minimum 67% źródeł i co najmniej dwa źródła muszą spełniać ten warunek.
+- FAQ nie jest nigdy generowane ani uzupełniane automatycznie. `answer_blocks[]` i `faq_research[]` muszą odpowiadać sobie 1:1.
+- Każdy wpis `faq_research[]` wymaga `source_type`: `autocomplete`, `paa`, `gsc` albo `manual_research`, a także `checked_at`, `url_status` i `http_status`.
+- `gsc` wymaga realnego `query` i `impressions >= 1`; `paa` wymaga `query` i opisu kontroli; `manual_research` wymaga konkretnego `research_note`; `autocomplete` wymaga rzeczywistego endpointu Google Suggest z pytaniem w parametrze `q`.
+- Pytania zawierające sztuczne oznaczenia typu „wariant 2” są błędem blokującym.
+- URL-e sprawdza polecenie: `npm run article:evidence:verify -- --file <plik.fitpo50.json> --write true`.
+
 ## 13. Myth Article Contract (`Mity`)
 - Kategoria `Mity` jest osobnym działem (`mity.html`), nie aliasem `Ciekawe`.
 - Wymagane oznaczenia techniczne:

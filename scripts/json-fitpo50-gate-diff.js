@@ -3,6 +3,7 @@
 const fs = require('fs');
 const { spawnSync } = require('child_process');
 const { POLICY, utils } = require('./lib/article-policy');
+const { validateArticleEvidence } = require('./lib/article-evidence');
 
 const errors = [];
 const warnings = [];
@@ -363,14 +364,6 @@ function validateFile(file) {
       errors.push(`${file}: faq_research #${i + 1} ma niedozwolony source_url (placeholder lub wyszukiwarka bezpośrednia).`);
     }
   }
-  const globalFaqCount = faqResearch.filter((item) => {
-    const label = normalizeTextForCompare(String(item?.source_label || item?.label || ''));
-    const url = normalizeTextForCompare(String(item?.source_url || item?.url || ''));
-    return label.includes('autocomplete') || label.includes('global') || url.includes('suggestqueries.google.com');
-  }).length;
-  if (faq.length >= POLICY.WORDS.FAQ_MIN_ITEMS && globalFaqCount < 2) {
-    errors.push(`${file}: FAQ research musi zawierać min. 2 globalne źródła intencji (Autocomplete/PAA).`);
-  }
   const faqAnswerWordCounts = [];
   const faqQuestions = [];
   for (let i = 0; i < faq.length; i += 1) {
@@ -445,6 +438,8 @@ function validateFile(file) {
   if (sourceUrls.length && strongRatio < 0.5) {
     errors.push(`${file}: udział silnych źródeł medycznych jest zbyt niski (${Math.round(strongRatio * 100)}%, wymagane min 50%).`);
   }
+  const evidence = validateArticleEvidence(json);
+  evidence.errors.forEach((error) => errors.push(`${file}: ${error}`));
 }
 
 function main() {

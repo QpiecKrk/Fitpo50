@@ -200,15 +200,9 @@ function main() {
       blockers.push(`Slug ${slug} już istnieje jako ${htmlPath}. Domyślne force=false blokuje przygotowanie aktualizacji.`);
     } else {
       stages.push(runStage('Bezpieczny fixer JSON', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true']));
-      if (stages.at(-1).status === 'PASS') {
-        stages.push(runStage('Wzmocnienie cytowań E-E-A-T', 'node', ['scripts/eeat-citation-enhancer.js', '--file', workingFile, '--write', 'true', '--strict', 'false']));
-      }
-      if (stages.every((item) => item.status === 'PASS')) {
-        stages.push(runStage('Ścisła normalizacja JSON', 'node', ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json']));
-      }
-      if (stages.every((item) => item.status === 'PASS')) {
-        stages.push(runStage('Bramka treści JSON', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile]));
-      }
+      stages.push(runStage('Normalizacja techniczna bez generowania treści', 'node', ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json']));
+      stages.push(runStage('Weryfikacja źródeł, URL-i i pochodzenia FAQ', 'node', ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true']));
+      stages.push(runStage('Bramka treści JSON', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile]));
       stages.filter((item) => item.status === 'FAIL').forEach((item) => {
         blockers.push(`${item.label}: ${item.stderr || item.stdout || `exit ${item.exit_code}`}`);
       });

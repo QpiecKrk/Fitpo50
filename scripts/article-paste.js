@@ -96,7 +96,7 @@ function main() {
   if (res.status !== 0) {
     throw new Error('Auto-fix JSON nie przeszedł.');
   }
-  console.log('[PASS] Clipboard -> draft -> fix-json');
+  console.log('[DRAFT] Wykonano wyłącznie korektę strukturalną. Do statusu CONTENT_READY użyj article:prepare-json.');
 }
 
 try {

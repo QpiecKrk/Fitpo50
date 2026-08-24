@@ -25,6 +25,7 @@ const {
 const https = require('https');
 const { spawnSync } = require('child_process');
 const { inspectPreparedArtifact } = require('./lib/article-json-artifact');
+const { validateArticleEvidence } = require('./lib/article-evidence');
 
 const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
@@ -47,62 +48,6 @@ const DEFAULT_PUBLISHER_ORG = {
     '@type': 'ImageObject',
     url: 'https://fitpo50.pl/assets/logo.jpg',
   },
-};
-const NETWORK_FAQ_BANK = {
-  zdrowie: [
-    {
-      question: 'Jak szybko można zauważyć pierwsze efekty po wdrożeniu zaleceń?',
-      answer: 'Pierwsze sygnały poprawy pojawiają się zwykle po kilku tygodniach regularnych zmian, ale tempo zależy od punktu wyjścia, leków i chorób towarzyszących. Najbezpieczniej monitorować postęp wspólnie z lekarzem na konkretnych wskaźnikach.',
-    },
-    {
-      question: 'Jakie badania kontrolne warto wykonać po 50. roku życia w tym temacie?',
-      answer: 'Zakres badań zależy od historii zdrowia i objawów. Najczęściej plan obejmuje pomiary domowe, podstawowe badania krwi oraz ocenę ryzyka sercowo-naczyniowego podczas wizyty lekarskiej.',
-    },
-    {
-      question: 'Kiedy zmiana stylu życia nie wystarcza i trzeba rozważyć leczenie?',
-      answer: 'Jeśli mimo konsekwentnych zmian parametry pozostają nieprawidłowe lub rośnie ryzyko powikłań, konieczna jest konsultacja lekarska i ewentualna modyfikacja terapii. Nie warto samodzielnie odstawiać ani zmieniać leków.',
-    },
-  ],
-  ruch: [
-    {
-      question: 'Ile treningów tygodniowo daje realny efekt po 50. roku życia?',
-      answer: 'Najlepiej działa regularność, a nie jednorazowe zrywy. U większości osób poprawę daje stały plan 2-4 jednostek tygodniowo, dopasowany do kondycji, regeneracji i ewentualnych ograniczeń zdrowotnych.',
-    },
-    {
-      question: 'Jak uniknąć przeciążenia i bólu przy powrocie do aktywności?',
-      answer: 'Kluczowe są stopniowanie obciążeń, technika i dni regeneracyjne. Gdy ból utrzymuje się dłużej niż kilka dni lub narasta, warto zmniejszyć intensywność i skonsultować plan z fizjoterapeutą lub lekarzem.',
-    },
-  ],
-  jedzenie: [
-    {
-      question: 'Czy trzeba liczyć każdą kalorię, żeby poprawić wyniki zdrowotne?',
-      answer: 'Nie zawsze. U wielu osób wystarczają powtarzalne nawyki: więcej białka i błonnika, mniej żywności wysokoprzetworzonej oraz regularne pory posiłków. Liczenie kalorii bywa pomocne okresowo, ale nie jest obowiązkowe dla każdego.',
-    },
-    {
-      question: 'Jakie błędy żywieniowe najczęściej blokują efekty po 50. roku życia?',
-      answer: 'Najczęściej to zbyt mała podaż białka, nieregularne posiłki, niedoszacowanie przekąsek i picia kalorii oraz zbyt mało warzyw. Małe, konsekwentne korekty zwykle działają lepiej niż restrykcyjna dieta na krótko.',
-    },
-  ],
-  ciekawe: [
-    {
-      question: 'Jak odróżnić medialną sensację od wiarygodnych danych naukowych?',
-      answer: 'Warto sprawdzić źródło, typ badania, liczebność próby i to, czy wynik potwierdzają inne publikacje. Pojedyncze doniesienie nie powinno być podstawą dużych decyzji zdrowotnych.',
-    },
-    {
-      question: 'Czy opisywane rozwiązanie ma sens dla każdej osoby po 50. roku życia?',
-      answer: 'Zwykle nie. Skuteczność zależy od stanu zdrowia, leków, celów i stylu życia. Najlepsze efekty daje dopasowanie zaleceń do własnej sytuacji, a nie kopiowanie planu 1:1.',
-    },
-  ],
-  default: [
-    {
-      question: 'Od czego zacząć, żeby wdrożyć temat bez chaosu i zniechęcenia?',
-      answer: 'Najlepiej od jednego małego kroku na 1-2 tygodnie i prostego monitorowania efektów. Dopiero po utrwaleniu nawyku dokładamy kolejne elementy.',
-    },
-    {
-      question: 'Po czym poznać, że obrany kierunek naprawdę działa?',
-      answer: 'Po trendzie, nie po pojedynczym dniu. Regularne pomiary i notatki tygodniowe pokazują, czy zmiany przekładają się na lepsze samopoczucie i wyniki.',
-    },
-  ],
 };
 const READING_ROOM_FALLBACKS = [
   {
@@ -188,7 +133,7 @@ function printUsage() {
     '  --sync-site true|false          mirror changes to _site (default: true)',
     '  --run-internal-links true|false|auto run PHP internal-link helper (default: auto)',
     '  --validate true|false           run article validator (default: true)',
-    '  --faq-strict true|false         require FAQ from real web research metadata (default: true)',
+    '  --faq-strict true               legacy flag; real FAQ research is always required',
     '  --force true|false              overwrite existing article HTML (default: false)',
     '  --category <key>                override JSON category',
     '  --help                          show this help',
@@ -424,7 +369,14 @@ function normalizeSources(rawSources) {
     const url = String(item.url || item.href || '').trim();
     if (!label || !url) continue;
     if (!/^https?:\/\//i.test(url)) continue;
-    out.push({ label, url });
+    out.push({
+      ...item,
+      label,
+      url,
+      checked_at: String(item.checked_at || item.checkedAt || '').trim(),
+      url_status: String(item.url_status || item.urlStatus || '').trim(),
+      http_status: Number(item.http_status || item.httpStatus || 0) || 0,
+    });
   }
   return out;
 }
@@ -489,6 +441,10 @@ function normalizeFaqResearch(raw) {
       sourceUrl,
       source_label: sourceLabel,
       source_url: sourceUrl,
+      source_type: String(item.source_type || item.sourceType || '').trim(),
+      checked_at: String(item.checked_at || item.checkedAt || '').trim(),
+      url_status: String(item.url_status || item.urlStatus || '').trim(),
+      http_status: Number(item.http_status || item.httpStatus || 0) || 0,
     });
   }
   return out;
@@ -517,44 +473,6 @@ function containsEditorialPlaceholder(text) {
   return patterns.some((rx) => rx.test(value));
 }
 
-function ensureMinFaqFromNetworkSeeds(faqItems, categoryKey, contextTitle) {
-  const normalizedFaq = normalizeArray(faqItems);
-  const out = [...normalizedFaq];
-  const notes = [];
-  const usedQuestions = new Set(
-    out.map((f) => String(f?.question || '').trim().toLowerCase()).filter(Boolean)
-  );
-  if (out.length >= POLICY.WORDS.FAQ_MIN_ITEMS) {
-    return { faq: out, notes };
-  }
-
-  const pool = [
-    ...(NETWORK_FAQ_BANK[categoryKey] || []),
-    ...NETWORK_FAQ_BANK.default,
-  ];
-
-  for (const item of pool) {
-    if (out.length >= POLICY.WORDS.FAQ_MIN_ITEMS) break;
-    const question = String(item.question || '').trim();
-    const answer = String(item.answer || '').trim();
-    if (!question || !answer) continue;
-    const qKey = question.toLowerCase();
-    if (usedQuestions.has(qKey)) continue;
-    usedQuestions.add(qKey);
-    out.push({
-      question,
-      answerHtml: ensureParagraphHtml(answer),
-    });
-  }
-
-  if (out.length > normalizedFaq.length) {
-    notes.push(
-      `FAQ: brakujące pytania uzupełniono automatycznie (${out.length}/${POLICY.WORDS.FAQ_MIN_ITEMS}) na bazie banku pytań sieciowych (autocomplete/PAA) dla tematu "${contextTitle}".`
-    );
-  }
-  return { faq: out, notes };
-}
-
 function normalizeKeyTakeaways(raw) {
   const out = [];
   for (const item of normalizeArray(raw)) {
@@ -569,41 +487,8 @@ function ensureQuestionHeading(title) {
 }
 
 function normalizeQuickAnswer(raw, leadRaw) {
-  let text = stripTags(String(raw || '')).replace(/\s+/g, ' ').trim();
-  const leadText = stripTags(String(leadRaw || '')).replace(/\s+/g, ' ').trim();
-  const rawProvided = String(raw || '').trim().length > 0;
-  if (!text) {
-    text = leadText;
-  }
-  if (!text) return '';
-  let words = utils.countWords(text);
-  if (words > POLICY.WORDS.QUICK_ANSWER_MAX) {
-    const allWords = text.match(/[\p{L}\p{N}'’-]+/gu) || [];
-    text = allWords.slice(0, POLICY.WORDS.QUICK_ANSWER_MAX).join(' ').replace(/[,:;\s]+$/g, '').trim();
-    if (!/[.!?]$/.test(text)) text += '.';
-    words = utils.countWords(text);
-  }
-  while (words < POLICY.WORDS.QUICK_ANSWER_MIN) {
-    text = `${text} To konkretna odpowiedź dla osób 50+, którą można od razu przełożyć na praktyczne działanie.`
-      .replace(/\s+/g, ' ')
-      .trim();
-    const allWords = text.match(/[\p{L}\p{N}'’-]+/gu) || [];
-    words = Math.min(POLICY.WORDS.QUICK_ANSWER_MAX, allWords.length);
-    text = allWords.slice(0, words).join(' ').trim();
-    if (!/[.!?]$/.test(text)) text += '.';
-    words = utils.countWords(text);
-  }
-  // Guard against 1:1 duplicate with lead when quick_answer was auto-derived.
-  if (!rawProvided && leadText) {
-    const normalize = (v) => String(v || '').toLowerCase().replace(/[^\p{L}\p{N}\s]+/gu, '').replace(/\s+/g, ' ').trim();
-    if (normalize(text) === normalize(leadText)) {
-      text = `Najkrócej: ${text}`;
-      const trimWords = text.split(/\s+/).filter(Boolean).slice(0, POLICY.WORDS.QUICK_ANSWER_MAX);
-      text = trimWords.join(' ').trim();
-      if (!/[.!?]$/.test(text)) text += '.';
-    }
-  }
-  return text;
+  void leadRaw;
+  return stripTags(String(raw || '')).replace(/\s+/g, ' ').trim();
 }
 
 function normalizeInternalSiteLinks(html) {
@@ -711,13 +596,7 @@ function normalizeSections(rawSections) {
       const style = String(entry.info_box.style || 'primary').toLowerCase() === 'accent'
         ? 'highlight-box highlight-box--accent'
         : 'highlight-box';
-      let boxTitle = String(entry.info_box.title || '').trim();
-      const normalizedSectionTitle = String(title || '').trim().toLowerCase();
-      const normalizedBoxTitle = String(boxTitle || '').trim().toLowerCase().replace(/^ważne:\s*/i, '');
-      if (!boxTitle || (normalizedSectionTitle && normalizedBoxTitle === normalizedSectionTitle)) {
-        const baseTitle = String(title || '').replace(/[?]\s*$/, '').trim();
-        boxTitle = baseTitle ? `Najważniejsze: ${baseTitle}` : 'Najważniejszy wniosek';
-      }
+      const boxTitle = String(entry.info_box.title || '').trim();
       const boxHtml = String(entry.info_box.content_html || entry.info_box.html || entry.info_box.content || '').trim();
       if (boxTitle || boxHtml) {
         blocks.push({
@@ -1152,7 +1031,7 @@ function buildSafeRelatedDefaults({ currentSlug, currentCategory, readingTime, h
 }
 
 function validateInput(data, opts = {}) {
-  const faqStrict = opts.faqStrict !== false;
+  const faqStrict = true;
   const errors = [];
   const autoFixes = [];
   const title = String(data.title || '').trim();
@@ -1342,6 +1221,8 @@ function validateInput(data, opts = {}) {
       errors.push(`Źródło #${idx}: label "${label}" jest zbyt ogólny. Podaj pełną nazwę źródła.`);
     }
   }
+  const evidenceValidation = validateArticleEvidence(data);
+  evidenceValidation.errors.forEach((error) => errors.push(`Evidence: ${error}`));
 
   const faqItems = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
   if (faqStrict) {
@@ -1502,9 +1383,6 @@ function buildPrecheckReport({ inputPath, json, payload, validation, syncSite, a
   }
   for (const warn of assetPrep?.warnings || []) {
     autoFixes.push(`Auto-konwersja grafiki: ${warn}`);
-  }
-  for (const note of payload?.faqAutoNotes || []) {
-    autoFixes.push(note);
   }
 
   if (!payload.slug) {
@@ -2468,7 +2346,6 @@ function writeCrosslinkSuggestions(payload, dryRun) {
 }
 
 function normalizePayload(data, cliCategory, options = {}) {
-  const faqStrict = options.faqStrict !== false;
   const now = new Date();
   const fallbackDate = now.toISOString().slice(0, 10);
 
@@ -2494,10 +2371,7 @@ function normalizePayload(data, cliCategory, options = {}) {
   const sections = normalizeSections(data.sections || []);
   const faqNormalized = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
   const faqResearch = normalizeFaqResearch(data.faq_research || data.faq_sources || []);
-  const faqAuto = faqStrict
-    ? { faq: faqNormalized, notes: [] }
-    : ensureMinFaqFromNetworkSeeds(faqNormalized, category.key, title || slug || 'artykuł');
-  const faqItems = faqAuto.faq;
+  const faqItems = faqNormalized;
   const sources = normalizeSources(data.sources || []);
 
   // Uwaga: related_articles / related z JSON służy tylko do walidacji komunikatów.
@@ -2547,7 +2421,6 @@ function normalizePayload(data, cliCategory, options = {}) {
     sections,
     faqItems,
     faqResearch,
-    faqAutoNotes: faqAuto.notes,
     sources,
     relatedDefaults,
     wordCount: countWordsUtf8(plainForWordCount),

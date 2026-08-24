@@ -31,5 +31,6 @@ test('import-article precheck accepts faq_research in camelCase after normalizat
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.doesNotMatch(result.stdout, /FAQ research #\d+: source_label jest zbyt ogólny\./);
   assert.doesNotMatch(result.stdout, /FAQ research #\d+: source_url musi zaczynać się od http\/https\./);
-  assert.match(result.stdout, /Czy mogę użyć importera teraz: TAK/);
+  assert.match(result.stdout, /Czy mogę użyć importera teraz: NIE/);
+  assert.match(result.stdout, /Brak evidence_claims/);
 });

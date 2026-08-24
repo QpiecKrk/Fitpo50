@@ -159,3 +159,13 @@ test('direct importer cannot bypass CONTENT_READY protection', () => withTempDir
   assert.match(`${result.stdout}\n${result.stderr}`, /CONTENT_READY/);
   assert.equal(fs.existsSync(html), false);
 }));
+
+test('ready-check and fast-gate reject raw JSON without protected artifact metadata', () => withTempDir((dir) => {
+  const source = path.join(dir, 'raw.fitpo50.json');
+  fs.writeFileSync(source, '{"slug":"raw-ready-check"}\n');
+  for (const script of ['scripts/article-ready-check.js', 'scripts/article-fast-gate.js']) {
+    const result = spawnSync('node', [script, '--file', source], { cwd: REPO, encoding: 'utf8' });
+    assert.equal(result.status, 1, `${script} should reject raw JSON`);
+    assert.match(`${result.stdout}\n${result.stderr}`, /CONTENT_READY/);
+  }
+}));

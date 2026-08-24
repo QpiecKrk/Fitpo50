@@ -13,15 +13,6 @@ function toLocalIsoDate(date = new Date()) {
 }
 
 const TODAY = toLocalIsoDate();
-const FALLBACK_SOURCES = [
-  { label: 'World Health Organization: Physical activity guidelines', url: 'https://www.who.int/news-room/fact-sheets/detail/physical-activity' },
-  { label: 'CDC: Benefits of physical activity', url: 'https://www.cdc.gov/physicalactivity/basics/pa-health/index.htm' },
-  { label: 'American Heart Association: Physical activity recommendations', url: 'https://www.heart.org/en/healthy-living/fitness/fitness-basics/aha-recs-for-physical-activity-in-adults' },
-  { label: 'NIH: Exercise and physical activity', url: 'https://www.nia.nih.gov/health/exercise-and-physical-activity' },
-  { label: 'Mayo Clinic: Exercise and fitness', url: 'https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/exercise/art-20048389' },
-  { label: 'PubMed: Cardiorespiratory fitness and mortality', url: 'https://pubmed.ncbi.nlm.nih.gov/29971482/' },
-];
-
 function parseArgs(argv) {
   const out = { write: false, allowOutsideRepo: false, check: false };
   for (let i = 0; i < argv.length; i += 1) {
@@ -110,7 +101,7 @@ function truncateAtWordBoundary(text, maxChars) {
 
 function ensureParagraphWrapper(html) {
   const raw = String(html || '').trim();
-  if (!raw) return '<p>Ta część artykułu porządkuje najważniejsze fakty i praktyczne wskazówki dla osób po 50. roku życia.</p>';
+  if (!raw) return '';
   if (/^<p[\s>]/i.test(raw)) return raw;
   return `<p>${raw}</p>`;
 }
@@ -234,23 +225,6 @@ function normalizeDate(input) {
   return raw;
 }
 
-function padFirstParagraphToRange(html, minWords = 35, maxWords = 80) {
-  const raw = ensureParagraphWrapper(html);
-  const plain = stripTags(raw);
-  let words = plain.split(/\s+/).filter(Boolean);
-  if (words.length > maxWords) {
-    const clipped = words.slice(0, maxWords).join(' ').replace(/[,:;\s]+$/g, '').trim();
-    return `<p>${clipped}.</p>`;
-  }
-  if (words.length >= minWords) return raw;
-  const addon = ' To ważny element planu zdrowia i sprawności po 50. roku życia.';
-  let next = plain;
-  while (wordCount(next) < minWords) {
-    next = `${next}${addon}`;
-  }
-  return `<p>${next.trim()}</p>`;
-}
-
 function dedupeSources(sources) {
   const seen = new Set();
   const out = [];
@@ -262,7 +236,14 @@ function dedupeSources(sources) {
     const key = url.toLowerCase();
     if (seen.has(key)) continue;
     seen.add(key);
-    out.push({ label, url });
+    out.push({
+      ...s,
+      label,
+      url,
+      checked_at: String(s.checked_at || s.checkedAt || '').trim(),
+      url_status: String(s.url_status || s.urlStatus || '').trim(),
+      http_status: Number(s.http_status || s.httpStatus || 0) || 0,
+    });
   }
   return out;
 }
@@ -286,21 +267,6 @@ function htmlToListItems(contentHtml) {
   return out;
 }
 
-function firstMeaningfulSentenceFromParagraph(paragraphHtml) {
-  const plain = stripTags(String(paragraphHtml || '')).replace(/\s+/g, ' ').trim();
-  if (!plain) return 'Najważniejsze: świadome nawyki i regularna praktyka pomagają utrzymać sprawność po 50. roku życia.';
-  const sentence = plain.match(/^[^.!?]+[.!?]?/);
-  const base = sentence ? sentence[0].trim() : plain;
-  return base.length > 220 ? `${base.slice(0, 217).trimEnd()}...` : base;
-}
-
-function buildInfoBoxTitle(sectionTitle) {
-  const clean = stripTags(String(sectionTitle || '')).replace(/\s+/g, ' ').trim();
-  if (!clean) return 'Najważniejszy wniosek';
-  const base = clean.replace(/[?]\s*$/, '').trim();
-  return base ? `Najważniejsze: ${base}` : 'Najważniejszy wniosek';
-}
-
 function ensureQuestionHeading(title) {
   const clean = stripTags(String(title || '')).replace(/\s+/g, ' ').trim();
   if (!clean) return '';
@@ -310,36 +276,7 @@ function ensureQuestionHeading(title) {
 
 function buildQuickAnswer(json) {
   const fromJson = stripTags(String(json.quick_answer || json.quickAnswer || '')).replace(/\s+/g, ' ').trim();
-  const lead = stripTags(String(json.lead || '')).replace(/\s+/g, ' ').trim();
-  const firstSection = stripTags(String(json.sections?.[0]?.paragraphs_html?.[0] || '')).replace(/\s+/g, ' ').trim();
-  const explicitProvided = !!fromJson;
-
-  let base = fromJson || lead || firstSection || '';
-  if (!base) {
-    base = 'Najważniejsze: zacznij od małych, regularnych kroków i monitoruj efekty przez 2-4 tygodnie, aby bezpiecznie poprawiać zdrowie i sprawność po 50. roku życia.';
-  }
-  const words = base.split(/\s+/).filter(Boolean);
-  if (words.length > 60) {
-    base = words.slice(0, 60).join(' ').replace(/[,:;\s]+$/g, '').trim();
-    if (!/[.!?]$/.test(base)) base += '.';
-  }
-  while (wordCount(base) < 40) {
-    base = `${base} To praktyczne podejście pomaga utrzymać regularność, zmniejsza ryzyko przeciążenia i daje mierzalne korzyści zdrowotne.`
-      .replace(/\s+/g, ' ')
-      .trim();
-    const limited = base.split(/\s+/).filter(Boolean).slice(0, 60).join(' ').trim();
-    base = /[.!?]$/.test(limited) ? limited : `${limited}.`;
-  }
-  if (!explicitProvided && lead) {
-    const normalize = (v) => String(v || '').toLowerCase().replace(/[^\p{L}\p{N}\s]+/gu, '').replace(/\s+/g, ' ').trim();
-    if (normalize(base) === normalize(lead)) {
-      const candidate = `Najkrócej: ${base}`;
-      const words2 = candidate.split(/\s+/).filter(Boolean).slice(0, 60);
-      base = words2.join(' ').trim();
-      if (!/[.!?]$/.test(base)) base += '.';
-    }
-  }
-  return base.replace(/\s+/g, ' ').trim();
+  return fromJson;
 }
 
 function validate(json) {
@@ -448,68 +385,53 @@ function main() {
     .replace(/^-|-$/g, '');
 
   json.meta_description = truncateAtWordBoundary(String(json.meta_description || '').replace(/\s+/g, ' ').trim(), 160);
-  if (json.meta_description.length < 145) {
-    json.meta_description = truncateAtWordBoundary(
-      `${json.meta_description} Konkretne wskazówki, co robić krok po kroku, oparte na wiarygodnych źródłach naukowych.`,
-      160
-    );
-  }
 
   json.category = normalizeCategory(json.category || json.section || 'ciekawe').key;
   json.lead = stripTags(String(json.lead || '')).replace(/\s+/g, ' ').trim();
   json.reading_time = String(json.reading_time || '12 minut').replace(/\s+/g, ' ').trim();
   json.date_published = normalizeDate(json.date_published);
-  json.hero_image = String(json.hero_image || json.slug || 'artykul-hero')
+  json.hero_image = String(json.hero_image || '')
     .replace(/\.[a-z0-9]+$/i, '')
     .replace(/[^a-zA-Z0-9_-]/g, '-');
   json.hero_alt = String(json.hero_alt || json.title || '').replace(/\s+/g, ' ').trim();
-  json.hero_motto_html = String(json.hero_motto_html || '<em>Małe kroki dają trwałe efekty.</em>').trim();
-  if (!/^<em>[\s\S]*<\/em>$/.test(json.hero_motto_html)) {
+  json.hero_motto_html = String(json.hero_motto_html || '').trim();
+  if (json.hero_motto_html && !/^<em>[\s\S]*<\/em>$/.test(json.hero_motto_html)) {
     json.hero_motto_html = `<em>${stripTags(json.hero_motto_html)}</em>`;
   }
 
   const takeaways = Array.isArray(json.key_takeaways) ? json.key_takeaways : [];
   json.key_takeaways = takeaways.map((x) => stripTags(String(x || '')).trim()).filter(Boolean).slice(0, 4);
-  while (json.key_takeaways.length < 4) {
-    const sec = json.sections?.[json.key_takeaways.length];
-    const fallback = sec && sec.title
-      ? `Najważniejsze: ${stripTags(String(sec.title)).replace(/\s+/g, ' ').trim()}.`
-      : 'Najważniejsze: regularny ruch i świadome nawyki poprawiają zdrowie po 50-tce.';
-    json.key_takeaways.push(fallback);
-  }
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
-  json.sections = sections.map((s, idx) => {
+  json.sections = sections.map((s) => {
     const section = (s && typeof s === 'object') ? s : {};
-    const title = ensureQuestionHeading(stripTags(String(section.title || section.heading || `Jak wdrożyć krok ${idx + 1} w praktyce`)).trim());
+    const title = ensureQuestionHeading(stripTags(String(section.title || section.heading || '')).trim());
     const paragraphsRaw = Array.isArray(section.paragraphs_html)
       ? section.paragraphs_html
       : htmlToParagraphs(section.content_html || '');
     const paragraphs = paragraphsRaw.map((p) => sanitizeCodeGlyphs(normalizeInternalHtmlLinks(ensureParagraphWrapper(p)))).filter(Boolean);
-    while (paragraphs.length < 2) {
-      paragraphs.push('<p>W praktyce kluczowe jest dopasowanie zaleceń do codziennego rytmu dnia i regularna kontrola efektów.</p>');
-    }
-    paragraphs[0] = padFirstParagraphToRange(paragraphs[0], 35, 72);
 
     const listItems = Array.isArray(section.list_items) ? section.list_items : htmlToListItems(section.content_html || '');
     const infoBox = section.info_box && typeof section.info_box === 'object' ? section.info_box : {};
-    const fallbackInfoContent = `<p>${firstMeaningfulSentenceFromParagraph(paragraphs[0])}</p>`;
     const image = section.image && typeof section.image === 'object' ? section.image : {};
-    return {
+    const normalizedSection = {
       title,
       paragraphs_html: paragraphs,
       list_items: listItems.map((x) => stripTags(String(x || '')).trim()).filter(Boolean),
-      info_box: {
-        style: 'accent',
-        title: stripTags(String(infoBox.title || buildInfoBoxTitle(title))).trim(),
-        content_html: sanitizeCodeGlyphs(normalizeInternalHtmlLinks(ensureParagraphWrapper(infoBox.content_html || fallbackInfoContent))),
-      },
       image: {
-        src: String(image.src || `./assets/${json.slug}-sekcja-${idx + 1}.webp`).trim(),
-        alt: stripTags(String(image.alt || title)).trim(),
-        caption: stripTags(String(image.caption || 'Grafika ilustrująca sekcję artykułu.')).trim(),
+        src: String(image.src || '').trim(),
+        alt: stripTags(String(image.alt || '')).trim(),
+        caption: stripTags(String(image.caption || '')).trim(),
       },
     };
+    if (String(infoBox.content_html || '').trim()) {
+      normalizedSection.info_box = {
+        style: String(infoBox.style || 'accent').trim(),
+        title: stripTags(String(infoBox.title || '')).trim(),
+        content_html: sanitizeCodeGlyphs(normalizeInternalHtmlLinks(ensureParagraphWrapper(infoBox.content_html))),
+      };
+    }
+    return normalizedSection;
   });
 
   const faq = Array.isArray(json.answer_blocks) ? json.answer_blocks : [];
@@ -518,26 +440,9 @@ function main() {
     answer_html: sanitizeCodeGlyphs(normalizeInternalHtmlLinks(ensureParagraphWrapper((f && (f.answer_html || f.answer)) || ''))),
   })).filter((f) => f.question && f.answer_html);
 
-  while (json.answer_blocks.length < 4) {
-    json.answer_blocks.push({
-      question: 'Jak wprowadzić te zalecenia krok po kroku?',
-      answer_html: '<p>Najlepiej zacząć od małej zmiany, monitorować efekty przez 2-4 tygodnie i dopiero potem zwiększać zakres działania.</p>',
-    });
-  }
-
   json.quick_answer = buildQuickAnswer(json);
 
   json.sources = dedupeSources(Array.isArray(json.sources) ? json.sources : []);
-  if (json.sources.length < 6) {
-    const seen = new Set(json.sources.map((s) => String(s.url || '').toLowerCase()));
-    for (const s of FALLBACK_SOURCES) {
-      if (json.sources.length >= 6) break;
-      const url = String(s.url || '').toLowerCase();
-      if (seen.has(url)) continue;
-      seen.add(url);
-      json.sources.push({ label: s.label, url: s.url });
-    }
-  }
 
   const faqResearchRaw = Array.isArray(json.faq_research) ? json.faq_research : [];
   const faqResearch = faqResearchRaw
@@ -545,26 +450,14 @@ function main() {
       question: stripTags(String((r && r.question) || '')).replace(/\s+/g, ' ').trim(),
       source_label: stripTags(String((r && (r.source_label || r.label || r.citation || r.title)) || '')).replace(/\s+/g, ' ').trim(),
       source_url: String((r && (r.source_url || r.url)) || '').trim(),
+      source_type: String((r && (r.source_type || r.sourceType)) || '').trim(),
+      checked_at: String((r && (r.checked_at || r.checkedAt)) || '').trim(),
+      url_status: String((r && (r.url_status || r.urlStatus)) || '').trim(),
+      http_status: Number((r && (r.http_status || r.httpStatus)) || 0) || 0,
     }))
     .filter((r) => r.question && r.source_label && /^https:\/\//i.test(r.source_url));
 
-  if (faqResearch.length >= 4) {
-    json.faq_research = faqResearch;
-  } else {
-    const auto = [];
-    const sourcePool = json.sources.slice(0, Math.max(4, json.sources.length));
-    for (let i = 0; i < Math.min(4, json.answer_blocks.length); i += 1) {
-      const q = json.answer_blocks[i];
-      const s = sourcePool[i] || sourcePool[0];
-      if (!q || !s) continue;
-      auto.push({
-        question: q.question,
-        source_label: s.label,
-        source_url: s.url,
-      });
-    }
-    json.faq_research = auto;
-  }
+  json.faq_research = faqResearch;
 
   const imagePrompts = Array.isArray(json.image_prompts) ? json.image_prompts : [];
   const mapped = imagePrompts.map((p) => (p && typeof p === 'object' ? p : {}));
@@ -588,36 +481,12 @@ function main() {
   const hero = json.image_prompts.find((p) => p.section_ref === 'hero');
   if (hero) {
     json.hero_image = hero.filename_base;
-  } else {
-    json.image_prompts.unshift({
-      filename_base: json.hero_image,
-      section_ref: 'hero',
-      purpose: 'hook',
-      nano_banana_prompt: 'Naturalne zdjęcie hero dla artykułu FitPo50, osoby 50+, jasne światło, realistyczna scena.',
-      alt_pl: json.hero_alt,
-      overlay_text_pl: '',
-      negative_prompt: 'brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków',
-    });
   }
 
   for (let i = 0; i < json.sections.length; i += 1) {
     const ref = `sekcja-${i + 1}`;
-    let prompt = json.image_prompts.find((p) => p.section_ref === ref);
-    if (!prompt) {
-      const fromSrc = String(json.sections[i].image.src || '').match(/\.\/assets\/(.+)\.webp$/i);
-      const base = fromSrc ? fromSrc[1] : `${json.slug}-sekcja-${i + 1}`;
-      prompt = {
-        filename_base: base,
-        section_ref: ref,
-        purpose: 'explain',
-        nano_banana_prompt: `Ilustracja sekcji ${i + 1} artykułu FitPo50, realistyczna, czytelna, bez napisów.`,
-        alt_pl: json.sections[i].image.alt,
-        overlay_text_pl: '',
-        negative_prompt: 'brak angielskich napisów, brak literówek, brak zniekształconych dłoni, brak watermarków, brak losowych znaków',
-      };
-      json.image_prompts.push(prompt);
-    }
-    json.sections[i].image.src = `./assets/${prompt.filename_base}.webp`;
+    const prompt = json.image_prompts.find((p) => p.section_ref === ref);
+    if (prompt && json.sections[i]?.image) json.sections[i].image.src = `./assets/${prompt.filename_base}.webp`;
   }
 
   const finalErrors = validate(json);

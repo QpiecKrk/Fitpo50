@@ -105,11 +105,17 @@ const POLICY = {
       /\bmit\s*:/iu,
       /\bje[sś]li\s+kto[sś]\s+obiecuje\b/iu
     ],
+    VAGUE_REFERENCE_ANYWHERE: /\b(ta\s+obietnica|ta\s+reklama|taki\s+przekaz|to\s+zdanie|ten\s+wniosek|ten\s+haczyk)\b/iu,
     METAPHOR_PATTERNS: [
       /\bkorek\s+w\s+zlewie\b/iu,
       /\bodetka[cć]\b/iu,
       /\bwyp[lł]ynie\b/iu,
-      /\bworek\b/iu
+      /\bworek\b/iu,
+      /\bsilnik(?:iem|a|u)?\s+metabolizmu\b/iu,
+      /\bhamul(?:ec|cem|ca)\s+metabolizmu\b/iu,
+      /\breset\s+organizmu\b/iu,
+      /\btarcza\s+ochronna\b/iu,
+      /\bpaliwo\s+dla\s+(mi[eę][sś]ni|m[oó]zgu|organizmu)\b/iu
     ],
     METAPHOR_MECHANISM: [
       /\blimfa\b/iu,
@@ -117,7 +123,14 @@ const POLICY = {
       /\benergia\b/iu,
       /\bdeficyt\b/iu,
       /\bspala\b/iu,
-      /\bmagazyn\b/iu
+      /\bmagazyn\b/iu,
+      /\bglukoz\b/iu,
+      /\binsulin\b/iu,
+      /\bmitochondri\b/iu,
+      /\bbia[lł]k\b/iu,
+      /\bsyntez\b/iu,
+      /\bhormon\b/iu,
+      /\breceptor\b/iu
     ],
     ABSTRACT_PROOF_PHRASES: [
       /im\s+bardziej\s+obietnica\s+usuwa\s+wysi[lł]ek\s+i\s+czas/iu,
@@ -426,7 +439,8 @@ const validators = {
 
       const firstSentence = (text.split(/(?<=[.!?])\s+/)[0] || text).trim();
       const startsWithVagueReference = POLICY.LOGIC_COHERENCE.VAGUE_REFERENCE_OPENERS.some((rx) => rx.test(firstSentence));
-      if (startsWithVagueReference) {
+      const containsVagueReference = POLICY.LOGIC_COHERENCE.VAGUE_REFERENCE_ANYWHERE.test(text);
+      if (startsWithVagueReference || containsVagueReference) {
         const hasLocalContext = POLICY.LOGIC_COHERENCE.VAGUE_REFERENCE_CONTEXT.some((rx) => rx.test(text));
         if (!hasLocalContext) {
           errors.push(`${label}: skrót logiczny bez lokalnego kontekstu. Akapit zaczyna od ogólnego odniesienia ("${firstSentence.slice(0, 90)}..."), ale nie nazywa w tym samym fragmencie konkretnej obietnicy, mitu, reklamy albo twierdzenia.`);
