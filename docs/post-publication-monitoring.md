@@ -48,4 +48,6 @@ Fixture w `tests/fixtures/pipeline-invalid/` sprawdzają osiem błędów obowią
 7. pusty lub uszkodzony PDF,
 8. kolizja slugu przy domyślnym `force=false`.
 
+Globalny `json:gate:diff` pomija wyłącznie ten katalog celowo błędnych danych; ich oczekiwane odrzucenie weryfikuje `npm run test:pipeline-blockers`. Jawne uruchomienie walidatora z `--file` nadal może służyć do diagnostyki pojedynczego fixture.
+
 Stare raporty nie są usuwane automatycznie. `npm run reports:prune:dry` najpierw pokazuje bezpiecznych, nieśledzonych kandydatów; usunięcie wymaga osobnej świadomej decyzji.

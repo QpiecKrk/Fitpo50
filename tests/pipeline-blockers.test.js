@@ -29,6 +29,12 @@ test('końcowa macierz błędnych JSON-ów zawiera wszystkie osiem wymaganych bl
   assert.deepEqual(actual, expected);
 });
 
+test('globalny diff gate nie traktuje celowo błędnych fixture jako draftów publikacyjnych', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts', 'json-fitpo50-gate-diff.js'), 'utf8');
+  assert.match(source, /tests\/fixtures\/pipeline-invalid\//);
+  assert.match(source, /!isIntentionalInvalidFixture\(file\)/);
+});
+
 test('pipeline blokuje fałszywe albo niedziałające źródło', () => {
   const result = validateArticleEvidence(fixture('fake-source'), { today: '2026-08-24' });
   assert.equal(result.ok, false);

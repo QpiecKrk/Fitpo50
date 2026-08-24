@@ -49,6 +49,10 @@ function isArchivedImport(file) {
   return String(file || '').replace(/\\/g, '/').startsWith('data/import/archive/');
 }
 
+function isIntentionalInvalidFixture(file) {
+  return String(file || '').replace(/\\/g, '/').startsWith('tests/fixtures/pipeline-invalid/');
+}
+
 function countWords(text) {
   return utils.countWords(text);
 }
@@ -456,7 +460,7 @@ function main() {
     targets = args.files;
   } else {
     const changed = readChangedFiles();
-    targets = changed.filter((file) => isFitpoJson(file) && !isArchivedImport(file));
+    targets = changed.filter((file) => isFitpoJson(file) && !isArchivedImport(file) && !isIntentionalInvalidFixture(file));
   }
   if (!targets.length) {
     console.log('[PASS] json:gate:diff - brak zmienionych plików *.fitpo50.json');
