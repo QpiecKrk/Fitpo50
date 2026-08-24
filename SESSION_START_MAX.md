@@ -103,6 +103,8 @@ Publikacja artykulow:
   - badge `Udostepnij` ma miec styl jak badge `PDF`, ale z etykieta `SHARE`,
 - BEZWZGLEDNIE: zanim napiszesz, ze zadanie/artykul jest "gotowe", najpierw wykonaj generowanie PDF (`npm run article:pdf:builder -- --slug <slug>` lub `npm run article:pdf:sync`) i potwierdz obecność pliku PDF w obu lokalizacjach: `assets/pdf/` oraz `_site/assets/pdf/`; bez tego nie wolno oglaszac statusu "gotowe",
 - FAQ ma być oparte wyłącznie o realne autocomplete/PAA/GSC/udokumentowany research, nigdy wymyślane; `faq_research[]` wymaga min. 4 wpisów 1:1 z FAQ oraz pól `source_type`, `checked_at`, `url_status`, `http_status` i właściwej dokumentacji sygnału,
+- nowy JSON musi deklarować `search_intent`, `primary_keyword` i 3-8 `supporting_keywords`, ale nie może zgadywać linków FitPo50. `article:prepare-json` lokalnie skanuje prawdziwe artykuły `BlogPosting`, kontroluje kanibalizację, osadza minimum 4 naturalne linki do istniejących celów i zapisuje późniejsze źródła linków przychodzących,
+- ocena centrum tematycznego jest lokalna i tylko propozycyjna. Mocne dopasowanie dostaje `AWAITING_USER_APPROVAL`; bez jawnej akceptacji nie wolno zmieniać konfiguracji centrum ani dodawać hub-linku,
 - każda liczba, próg, cena, ryzyko, mechanizm i teza medyczna wymaga `evidence_claims[]` wskazującego dokładne miejsce i URL-e z `sources[]`; niewykorzystane źródła dekoracyjne blokują publikację,
 - w imporcie trzymaj `--faq-strict true` (domyslnie), czyli brak `faq_research[]` lub placeholdery FAQ = twardy FAIL,
 - placeholdery redakcyjne (np. "Do uzupełnienia redakcyjnego", "Pytanie do doprecyzowania", "Odpowiedź do uzupełnienia", `{{...}}`) sa twardym FAIL importu w całym artykule (nie tylko FAQ),

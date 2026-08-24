@@ -74,10 +74,11 @@ SKIP_TS_BUILD=1 ./scripts/export_site.sh
 
 ## Dodawanie lub aktualizacja artykułu
 
-Najbezpieczniejsza ścieżka publikacyjna przebiega przez skrypty z `scripts/`. W praktyce workflow opiera się na:
+Najbezpieczniejsza ścieżka jest dwustopniowa: najpierw powstaje chroniony artefakt `CONTENT_READY`, a dopiero potem HTML:
 
 ```bash
-node scripts/import-article.js --file "<plik.fitpo50.json>" --publish true --run-internal-links auto --validate true
+npm run article:prepare-json --file="<draft.fitpo50.json>"
+npm run article:publish --file="<CONTENT_READY.fitpo50.json>"
 ```
 
 Po zmianach artykułów warto uruchomić:
@@ -92,6 +93,8 @@ npm run predeploy:check
 System publikacyjny FitPo50 działa dziś wokół centralnego silnika reguł:
 
 - `scripts/lib/article-policy.js` jest kanonicznym źródłem limitów, regexów i walidatorów,
+- `scripts/lib/article-intent-links.js` buduje lokalne inventory `BlogPosting`, kontroluje właściciela intencji, naturalne linki i propozycję centrum,
+- `scripts/article-json-workbench.js` przygotowuje chroniony JSON bez tworzenia HTML,
 - `scripts/article-preflight.js` sprawdza JSON wejściowy przed importem,
 - `scripts/import-article.js` generuje HTML według tych samych reguł,
 - `scripts/validate-article-standard.js` weryfikuje gotowy artykuł,
@@ -101,7 +104,10 @@ System publikacyjny FitPo50 działa dziś wokół centralnego silnika reguł:
 Docelowy przepływ to:
 
 ```text
-data/import/*.json
+draft.fitpo50.json
+  -> article-json-workbench
+  -> prepare-article-architecture
+  -> CONTENT_READY.fitpo50.json
   -> article-preflight
   -> import-article
   -> validate-article-standard
@@ -112,6 +118,8 @@ data/import/*.json
 Ważne zasady operacyjne:
 
 - `article-policy.js` traktujemy jako Single Source of Truth dla reguł publikacji,
+- model zewnętrzny deklaruje intencję i frazy, ale nie zgaduje linków FitPo50 ani członkostwa w centrum,
+- lokalny etap architektury wymaga 4 istniejących celów i naturalnych anchorów; propozycja centrum zawsze czeka na akceptację,
 - `article-sync-pro.js` działa w trybie fail-fast i nie ma miękkich fallbacków dla polityki,
 - przy zmianach SEO i listingów preferowany workflow to najpierw `--dry-run`, a dopiero potem zapis:
 

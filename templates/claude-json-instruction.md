@@ -6,9 +6,12 @@ Wygeneruj WYŁĄCZNIE poprawny JSON zgodny ze schematem FitPo50 (bez markdown, b
 - `title` 45-65 znaków.
 - `description` 145-160 znaków.
 - `quick_answer` 40-60 słów, konkretnie odpowiada na pytanie artykułu.
+- Podaj `search_intent`: `how-to`, `czy-warto`, `objawy`, `normy`, `bezpieczenstwo`, `definicja`, `porownanie`, `informacyjna`, `plan`, `koszt` albo `dawkowanie`.
+- Podaj `primary_keyword` jako jedną konkretną frazę główną długości 2-8 słów oraz `supporting_keywords` jako 3-8 odrębnych fraz wspierających.
 - Każdy nagłówek sekcji (`sections[].title`) musi być pytaniem i kończyć się `?`.
 - Pierwszy akapit każdej sekcji ma 35-80 słów.
-- Minimum 4 linki wewnętrzne kontekstowe w `sections[].paragraphs_html` (linki do innych stron `.html` fitpo50).
+- Nie dodawaj żadnych linków wewnętrznych FitPo50 i nie wymyślaj slugów. Claude nie zna aktualnego repozytorium. Lokalny pipeline po przyjęciu draftu dobierze minimum 4 istniejące artykuły i osadzi link wyłącznie na naturalnej frazie już obecnej w akapicie.
+- Nie dodawaj linków do centrów tematycznych. Lokalny pipeline tylko oceni dopasowanie i przedstawi mocną propozycję do akceptacji użytkownika.
 - `answer_blocks` minimum 4.
 - `sources` minimum 6 pozycji. Każda wymaga: `label`, `url` https oraz prawdziwy `evidence_level`; nie dodawaj źródła, którego nie używa konkretne twierdzenie.
 - Dodaj `evidence_claims`: `claim`, dokładne `location` w JSON, `claim_type` i `source_urls`. Każda liczba, próg, cena, ryzyko, mechanizm oraz twierdzenie medyczne musi mieć takie mapowanie.
@@ -28,3 +31,9 @@ Wygeneruj WYŁĄCZNIE poprawny JSON zgodny ze schematem FitPo50 (bez markdown, b
 To jest DRAFT. Po wygenerowaniu uruchamiamy kanonicznie:
 1. `npm run article:prepare-json --file=<plik.fitpo50.json>`
 2. dopiero dla otrzymanego `CONTENT_READY`: `npm run article:ready-check -- --file <gotowy.fitpo50.json> --assets-dir <folder_z_grafikami>`
+
+Podczas kroku 1 lokalny pipeline, korzystając z aktualnych HTML-i w repozytorium:
+- sprawdza, czy inny URL nie obsługuje już tej samej intencji,
+- dobiera i weryfikuje linki wychodzące,
+- wskazuje istniejące strony, które powinny później linkować do nowego artykułu,
+- ocenia centrum tematyczne, ale niczego nie dopisuje do huba bez akceptacji.

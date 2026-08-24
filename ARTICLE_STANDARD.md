@@ -164,6 +164,15 @@ Artykuł nie przechodzi, jeśli:
 - Linki wewnętrzne w treści mają być wyłącznie względne (`href="slug-artykulu.html"`), bez `https://fitpo50.pl/...`.
 - Tabele w artykułach mają być dopracowane wizualnie: wrapper `.article-table-wrap`, tabela `.article-table` oraz w razie potrzeby `.article-table--compact`; każda tabela wymaga konkretnego `<caption>`, krótkich komórek, czytelnych nagłówków i nie może być zawinięta w `<p><table>`.
 
+## 10a. Intent, Linking & Topic Center Contract
+- Przed statusem `CONTENT_READY` JSON musi mieć `search_intent`, jedną `primary_keyword` długości 2-8 słów oraz 3-8 unikalnych `supporting_keywords`.
+- Claude ani inny model zewnętrzny nie podaje linków wewnętrznych i nie zgaduje slugów. Linkowanie powstaje lokalnie przez `scripts/prepare-article-architecture.js` na podstawie aktualnych artykułów `BlogPosting` w repozytorium.
+- Przed ustaleniem finalnego title/H1 pipeline porównuje frazę główną z tytułami, H1, treścią oraz trwałą mapą właścicieli intencji z `popraw-seo`. Mocny konflikt wymaga jawnego `intent_differentiation`; bez niego JSON pozostaje `BLOCKED`.
+- Minimum 4 linki musi prowadzić do istniejących artykułów, mieć unikalne cele i naturalne anchory obecne już w konkretnych akapitach. Brak naturalnego miejsca daje `INSUFFICIENT_CONTEXTUAL_LINKS`; system nie dopisuje zdania-zapychacza.
+- `internal_link_plan[]` zapisuje target, anchor, dokładną lokalizację i podstawę doboru. `incoming_link_suggestions[]` wskazuje istniejące strony, które po publikacji powinny zostać ręcznie sprawdzone jako źródła linku przychodzącego.
+- Dopasowanie do centrum zapisuje `topic_center_assessment`. Tylko `STRONG` tworzy propozycję `AWAITING_USER_APPROVAL`; nie blokuje zwykłej publikacji i nie zmienia konfiguracji centrum.
+- Link do `centrum-*.html` bez `topic_center_approval.status = APPROVED_BY_USER` jest błędem. Pipeline nigdy nie dodaje hub-linku tylko po to, by wypełnić limit czterech linków.
+
 ## 11. Media + Syntax Contract v2.0 (obowiązkowe)
 - Obrazy w treści artykułu mają korzystać ze standardu:
   - `<picture>` + `<source type="image/avif">` + `<source type="image/webp">` + fallback `<img>`.

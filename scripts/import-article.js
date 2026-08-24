@@ -26,6 +26,7 @@ const https = require('https');
 const { spawnSync } = require('child_process');
 const { inspectPreparedArtifact } = require('./lib/article-json-artifact');
 const { validateArticleEvidence } = require('./lib/article-evidence');
+const { validateArticleArchitecture } = require('./lib/article-intent-links');
 
 const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
@@ -1307,6 +1308,9 @@ function validateInput(data, opts = {}) {
       autoFixes.push(`related_articles #${idx}: url "${url}" wskazuje bieżący artykuł -> importer ignoruje ten URL i dobierze inny.`);
     }
   }
+
+  const architecture = validateArticleArchitecture(data, { root: ROOT });
+  architecture.errors.forEach((error) => errors.push(`Architecture: ${error}`));
 
   return { errors, autoFixes, sections, sources };
 }

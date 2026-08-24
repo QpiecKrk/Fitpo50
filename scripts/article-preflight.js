@@ -5,6 +5,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { POLICY, utils, validators } = require('./lib/article-policy');
 const { validateArticleEvidence } = require('./lib/article-evidence');
+const { validateArticleArchitecture } = require('./lib/article-intent-links');
 const { isSupportedCategory } = require('./lib/categories');
 
 const SOURCE_IMAGE_EXT = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
@@ -363,6 +364,9 @@ function main() {
   logicValidation.errors.forEach((msg) => errors.push(msg));
   const evidenceValidation = validateArticleEvidence(json);
   evidenceValidation.errors.forEach((msg) => errors.push(`Evidence: ${msg}`));
+  const architectureValidation = validateArticleArchitecture(json, { root: process.cwd() });
+  architectureValidation.errors.forEach((msg) => errors.push(`Architecture: ${msg}`));
+  architectureValidation.warnings.forEach((msg) => warnings.push(`Architecture: ${msg}`));
 
   const hero = String(json.hero_image || '').trim();
   let heroSourceImage = '';

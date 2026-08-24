@@ -127,6 +127,32 @@ function writeReports(report, outputFile) {
     lines.push('', '## Blokery');
     report.blockers.forEach((item) => lines.push(`- ${item}`));
   }
+  if (report.intent_architecture) {
+    const architecture = report.intent_architecture;
+    lines.push('', '## Intencja i architektura lokalna');
+    lines.push(`- Główna intencja: ${architecture.search_intent || 'MISSING'}`);
+    lines.push(`- Primary keyword: ${architecture.primary_keyword || 'MISSING'}`);
+    lines.push(`- Frazy wspierające: ${(architecture.supporting_keywords || []).join(', ') || 'MISSING'}`);
+    lines.push(`- Potwierdzone linki wychodzące: ${(architecture.internal_links || []).length}/4`);
+    (architecture.internal_links || []).forEach((item) => {
+      lines.push(`  - ${item.location}: „${item.anchor}” → ${item.target}`);
+    });
+    lines.push(`- Kandydaci do linków przychodzących: ${(architecture.incoming_links || []).length}`);
+    (architecture.incoming_links || []).forEach((item) => {
+      lines.push(`  - ${item.source} (relevance_score=${item.relevance_score})`);
+    });
+    if ((architecture.cannibalization_candidates || []).length) {
+      lines.push(`- Ryzyko kanibalizacji: ${(architecture.cannibalization_candidates || []).map((item) => item.file).join(', ')}`);
+    } else {
+      lines.push('- Ryzyko kanibalizacji: brak mocnego konfliktu w lokalnych danych.');
+    }
+    const center = architecture.topic_center;
+    if (center?.proposed) {
+      lines.push(`- Ten artykuł warto dodać do centrum: ${center.center_name}, bo wykryto sygnały: ${(center.matched_signals || []).join(', ')}. Proponuję dodać go jako ${center.suggested_role}. Status: AWAITING_USER_APPROVAL — bez zmian centrum i bez hub-linku.`);
+    } else {
+      lines.push(`- Centrum tematyczne: bez propozycji (fit=${center?.fit || 'UNKNOWN'}).`);
+    }
+  }
   lines.push('', '## Następny krok');
   lines.push(report.status === STATUSES.CONTENT_READY
     ? `- Użyj przygotowanego pliku: \`npm run article:publish --file="${outputFile}"\``
@@ -201,6 +227,7 @@ function main() {
     } else {
       stages.push(runStage('Bezpieczny fixer JSON', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true']));
       stages.push(runStage('Normalizacja techniczna bez generowania treści', 'node', ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json']));
+      stages.push(runStage('Lokalna intencja, kanibalizacja, linkowanie i centra', 'node', ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true']));
       stages.push(runStage('Weryfikacja źródeł, URL-i i pochodzenia FAQ', 'node', ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true']));
       stages.push(runStage('Bramka treści JSON', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile]));
       stages.filter((item) => item.status === 'FAIL').forEach((item) => {
@@ -241,6 +268,15 @@ function main() {
       stages,
       changes: collectChanges(original, corrected),
       blockers,
+      intent_architecture: {
+        search_intent: corrected.search_intent || '',
+        primary_keyword: corrected.primary_keyword || '',
+        supporting_keywords: Array.isArray(corrected.supporting_keywords) ? corrected.supporting_keywords : [],
+        cannibalization_candidates: corrected.intent_audit?.cannibalization_candidates || [],
+        internal_links: Array.isArray(corrected.internal_link_plan) ? corrected.internal_link_plan : [],
+        incoming_links: Array.isArray(corrected.incoming_link_suggestions) ? corrected.incoming_link_suggestions : [],
+        topic_center: corrected.topic_center_assessment || null,
+      },
     };
     const reports = writeReports(report, outputFile);
     console.log(`[ARTICLE-JSON] status=${status}`);
