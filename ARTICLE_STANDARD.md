@@ -185,6 +185,17 @@ Artykuł nie przechodzi, jeśli:
 - W fallback `<img>` wymagane: poprawny `alt`, `loading="lazy"` oraz prawdziwe `width` i `height` z manifestu.
 - Zakaz używania tagu `</source>` i deklaracji `<?xml ... ?>` w plikach HTML.
 
+## 11a. Staging HTML, wygląd i PDF
+- `article:publish` nie zapisuje pierwszej wersji HTML, listingów, sitemap, assetów ani PDF bezpośrednio do repozytorium. Najpierw klonuje witrynę do izolowanego katalogu systemowego z pominięciem `.git` i wykonuje tam pełny import.
+- Bezpośredni zapis przez `scripts/import-article.js` i ręczne uruchomienie prywatnego `--staging-internal` są blokowane. Publiczne pliki mogą zostać promowane wyłącznie przez kontroler stagingu.
+- Staging renderuje pełną stronę przy 1440 px i 390 px. Bramka blokuje przepełnienie poziome, tekst mniejszy niż 10 px, niezaładowane fonty, uszkodzone ilustracje i niezgodne proporcje `width`/`height`.
+- Animacje `reveal` oraz obrazy lazy-load są aktywowane przed zrzutem, aby screenshot przedstawiał finalny układ, a nie niewidoczne elementy oczekujące na IntersectionObserver.
+- Każda tabela musi pozostać semantycznym HTML w `.article-table-wrap` i mieć bezpośrednie `caption`, `thead`, `tbody`, nagłówki `th`, `scope="col"` w `thead` oraz `scope="row"` dla nagłówków w `tbody`. Obraz udający tabelę nie spełnia kontraktu.
+- PDF powstaje wyłącznie ze stagingowego HTML. Błąd renderowania tabeli lub ilustracji zatrzymuje generowanie; generator nie zamienia tabeli po cichu na tekst rozdzielony kreskami i nie pomija niedziałającego obrazu.
+- Każda strona PDF jest renderowana przez Poppler do PNG. Bramka kontroluje liczbę stron, A4, osadzenie fontów z mapą Unicode, granice każdego słowa, margines treści, komplet ilustracji oraz minimum 98% zgodności tekstu HTML→PDF.
+- HTML source i `_site` oraz PDF source i `_site` muszą być identyczne 1:1. Po pełnym PASS powstaje raport `data/reports/article-preview/<slug>.json|md` ze statusem `PREVIEW_READY`.
+- Promocja do repo jest transakcyjna: przed zapisem system sprawdza, czy żaden plik docelowy nie zmienił się podczas stagingu, kopiuje wyłącznie dozwolone artefakty i przy błędzie przywraca wcześniejsze wersje.
+
 ## 12. Schema Citation Contract v2.0 (obowiązkowe)
 - `BlogPosting.citation` musi być zsynchronizowane z listą źródeł w HTML.
 - Wymagane minimum 4 URL-e w citation, jeśli faktycznie istnieją w materiale źródłowym.

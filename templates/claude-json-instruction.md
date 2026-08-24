@@ -25,6 +25,7 @@ Wygeneruj WYŁĄCZNIE poprawny JSON zgodny ze schematem FitPo50 (bez markdown, b
 - Hero i każda sekcja muszą przedstawiać inne ujęcie. Dla pakietu co najmniej 3 obrazów użyj minimum 3 rzeczywiście różnych technik i 3 różnych kompozycji; żadna technika ani kompozycja nie może dominować w więcej niż połowie pakietu.
 - Obrazy mają być współczesne, jasne i estetyczne, pokazywać osoby 50+ w wiarygodnym otoczeniu oraz różnicować fotografię, ilustrację redakcyjną, infografikę lub inną technikę adekwatną do treści. Nie powtarzaj jednego kadru z kosmetycznie zmienionym tłem.
 - Nie wpisuj `visual_review`, wymiarów, hashy ani `media_manifest`. Te pola powstają lokalnie dopiero po obejrzeniu rzeczywistych plików. Jeśli znasz dokładną nazwę dostarczonego pliku źródłowego, wpisz ją jako `source_file`; inaczej pozostaw to pole puste.
+- Dane porównawcze zapisuj wyłącznie jako semantyczny HTML, nigdy jako obraz tabeli ani tekst z kolumnami rysowanymi kreskami. Każda tabela wymaga wrappera `<div class="article-table-wrap">`, klasy `article-table`, konkretnego `<caption>`, osobnych `<thead>` i `<tbody>`, `th scope="col"` w nagłówku oraz `th scope="row"` dla nagłówka wiersza.
 
 ## Styl i format
 - Język polski, konkretny, praktyczny, bez lania wody.

@@ -2493,6 +2493,10 @@ async function main() {
     return;
   }
 
+  if (process.env.FITPO50_STAGING_INTERNAL !== '1') {
+    throw new Error('Bezpośredni zapis importera jest zablokowany. Użyj article:publish, który buduje HTML i PDF w izolowanym stagingu.');
+  }
+
   if (!precheck.canImport) {
     throw new Error('Precheck nie przeszedł. Popraw błędy blokujące i uruchom import ponownie.');
   }
@@ -2596,7 +2600,11 @@ async function main() {
   });
 }
 
-main().catch((err) => {
-  console.error(`\nBłąd importera: ${err.message || err}`);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(`\nBłąd importera: ${err.message || err}`);
+    process.exit(1);
+  });
+}
+
+module.exports = { main, submitIndexNow };

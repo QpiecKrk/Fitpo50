@@ -49,6 +49,14 @@ INLINE_IMAGE_WIDTH_RATIO = 0.78
 INLINE_IMAGE_MAX_HEIGHT = 68
 
 
+class FitPo50PDF(FPDF):
+    def footer(self) -> None:
+        self.set_y(-10)
+        self.set_font("Arial", size=8)
+        self.set_text_color(105, 105, 105)
+        self.cell(0, 5, f"FitPo50 | strona {self.page_no()}/{{nb}}", align="C")
+
+
 def normalize_href(href: str, source_url: str) -> str:
     href = (href or "").strip()
     if not href:
@@ -148,14 +156,14 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
             return
         path = resolve_image_path(img.get("src", ""), html_path)
         if not path or not path.exists():
-            return
+            raise RuntimeError(f"Brak ilustracji wymaganej przez HTML: {img.get('src', '')}")
         try:
             compressed = compress_image_to_jpg(path, tmp_dir=tmp_dir)
             caption_node = node.find("figcaption")
             caption = caption_node.get_text(" ", strip=True) if caption_node else ""
             add_image(pdf, compressed, caption=caption)
-        except Exception:
-            return
+        except Exception as exc:
+            raise RuntimeError(f"Nie można osadzić ilustracji {path.name}: {exc}") from exc
         return
 
     if node.name == "table":
@@ -186,15 +194,8 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
             pdf.set_font("Arial", size=8)
             pdf.write_html(str(table), tag_styles=HTML_TAG_STYLES)
             pdf.set_font("Arial", size=previous_size)
-        except Exception:
-            if caption_text:
-                pdf.set_font("Arial", "B", 9)
-                pdf.multi_cell(0, 5, caption_text)
-            pdf.set_font("Arial", size=8)
-            for row in node.find_all("tr"):
-                cells = [cell.get_text(" ", strip=True) for cell in row.find_all(["th", "td"], recursive=False)]
-                if cells:
-                    pdf.multi_cell(0, 4, " | ".join(cells))
+        except Exception as exc:
+            raise RuntimeError(f"Nie można poprawnie wyrenderować tabeli do PDF: {exc}") from exc
         pdf.set_font("Arial", size=11)
         pdf.ln(3)
         return
@@ -253,7 +254,7 @@ def generate_pdf(input_html: Path, output_pdf: Path, source_url: str) -> None:
 
     hero_image_node = soup.select_one("section.article-intro-grid .article-hero img")
 
-    pdf = FPDF(format="A4")
+    pdf = FitPo50PDF(format="A4")
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
 
@@ -262,6 +263,7 @@ def generate_pdf(input_html: Path, output_pdf: Path, source_url: str) -> None:
     pdf.add_font("Arial", "B", "/System/Library/Fonts/Supplemental/Arial Bold.ttf")
     pdf.add_font("Arial", "I", "/System/Library/Fonts/Supplemental/Arial Italic.ttf")
     pdf.add_font("Arial", "BI", "/System/Library/Fonts/Supplemental/Arial Bold Italic.ttf")
+    pdf.alias_nb_pages()
     pdf.set_lang("pl-PL")
     pdf.set_author("FitPo50")
     pdf.set_creator("FitPo50 PDF Generator")
@@ -293,8 +295,8 @@ def generate_pdf(input_html: Path, output_pdf: Path, source_url: str) -> None:
                         width_ratio=HERO_IMAGE_WIDTH_RATIO,
                         max_height=HERO_IMAGE_MAX_HEIGHT,
                     )
-                except Exception:
-                    pass
+                except Exception as exc:
+                    raise RuntimeError(f"Nie można osadzić obrazu hero {hero_path.name}: {exc}") from exc
 
         pdf.set_font("Arial", size=11)
         for child in article.children:

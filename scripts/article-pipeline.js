@@ -11,8 +11,18 @@ const {
   safeSlug,
   sha256File,
 } = require('./lib/article-json-artifact');
+const {
+  createStagingWorkspace,
+  promoteStaging,
+  promotionCandidates,
+  runInStaging,
+  runPreviewGate,
+  snapshotCandidates,
+} = require('./lib/article-staging');
+const { submitIndexNow } = require('./import-article');
 
 let tempWorkingCopy = '';
+let transactionalOuter = false;
 const PUBLISHED_LOG_PATH = path.join(process.cwd(), 'data', 'reports', 'published-articles-log.json');
 const TIMINGS_PATH = process.env.FITPO50_PIPELINE_TIMINGS_PATH
   ? path.resolve(process.env.FITPO50_PIPELINE_TIMINGS_PATH)
@@ -158,6 +168,19 @@ function registerPublishedArticle(slug) {
   console.log(`[INFO] Published log updated: ${path.relative(process.cwd(), PUBLISHED_LOG_PATH)}`);
 }
 
+async function submitIndexNowAfterPromotion(slug, enabled) {
+  if (!enabled) return 'wyłączone';
+  const key = String(process.env.INDEXNOW_KEY || '').trim();
+  if (!key) return 'pominięto (brak INDEXNOW_KEY)';
+  const result = await submitIndexNow({
+    host: 'fitpo50.pl',
+    key,
+    keyLocation: String(process.env.INDEXNOW_KEY_LOCATION || '').trim() || undefined,
+    urlList: [`https://fitpo50.pl/${slug}.html`],
+  });
+  return result.ok ? `OK (${result.status || 200})` : `błąd (${result.status || result.error || 'network'})`;
+}
+
 function parseJsonWithDiagnostics(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   try {
@@ -202,6 +225,11 @@ async function main() {
     console.log('Usage: node scripts/article-pipeline.js --file <CONTENT_READY.fitpo50.json> [--category ciekawe] [--force true|false]');
     process.exit(1);
   }
+  const stagingInternal = boolOpt(args['staging-internal'], false);
+  transactionalOuter = !stagingInternal;
+  if (stagingInternal && process.env.FITPO50_STAGING_INTERNAL !== '1') {
+    throw new Error('--staging-internal jest prywatnym trybem pipeline i nie może być uruchamiany bez kontrolera stagingu.');
+  }
 
   const root = process.cwd();
   const input = path.resolve(root, args.file);
@@ -217,6 +245,33 @@ async function main() {
   const parallelTails = boolOpt(args['parallel-tails'], true);
   const assetsDir = args['assets-dir'] ? path.resolve(root, args['assets-dir']) : path.dirname(input);
   const slug = detectSlug(parsedInput, input);
+  if (!stagingInternal) {
+    const candidates = promotionCandidates(parsedInput);
+    const baseline = snapshotCandidates(root, candidates);
+    const stageRoot = createStagingWorkspace(root, slug);
+    console.log(`[STAGING] Izolowany katalog: ${stageRoot}`);
+    try {
+      runInStaging(stageRoot, [...process.argv.slice(2), '--file', input, '--assets-dir', assetsDir]);
+      runPreviewGate(stageRoot, slug);
+      const promoted = promoteStaging({ sourceRoot: root, stageRoot, candidates, baseline });
+      const liveHtml = path.join(root, `${slug}.html`);
+      const siteHtml = path.join(root, '_site', `${slug}.html`);
+      if (!fs.existsSync(liveHtml) || !fs.existsSync(siteHtml) || sha256File(liveHtml) !== sha256File(siteHtml)) {
+        throw new Error('Promocja zakończyła się niespójnym HTML source/_site.');
+      }
+      registerPublishedArticle(slug);
+      const indexNowStatus = await submitIndexNowAfterPromotion(slug, boolOpt(args.indexnow, true));
+      console.log(`[INDEXNOW] ${indexNowStatus} — wysyłka dopiero po PREVIEW_READY i promocji.`);
+      const artifactCleanup = cleanupPreparedArtifact(input);
+      artifactCleanup.removed.forEach((file) => console.log(`[CLEANUP] Usunięto opublikowany artefakt JSON: ${file}`));
+      console.log(`[PUBLISHED] Promowano ${promoted.length} plików dopiero po PREVIEW_READY.`);
+      appendTimingReport('article-pipeline-transactional', stepTimings);
+      return { workingCopy: '', artifactCleanup };
+    } finally {
+      fs.rmSync(stageRoot, { recursive: true, force: true });
+      console.log('[CLEANUP] Usunięto izolowany staging.');
+    }
+  }
   if (prepared.html_exists && !force) {
     throw new Error(`Slug ${prepared.slug} już istnieje jako ${prepared.html_path}. Publikacja zatrzymana (force=false).`);
   }
@@ -262,16 +317,9 @@ async function main() {
     run('NEWS integrity', 'node', ['scripts/news-integrity-check.js']);
   }
   run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
-  registerPublishedArticle(slug);
-
-  const artifactCleanup = cleanupPreparedArtifact(input);
-  artifactCleanup.removed.forEach((file) => console.log(`[CLEANUP] Usunięto opublikowany artefakt JSON: ${file}`));
-  if (artifactCleanup.missing.length) {
-    console.warn(`[WARN] Nie znaleziono wszystkich plików artefaktu do usunięcia: ${artifactCleanup.missing.join(', ')}`);
-  }
-  console.log('\n[PASS] Article pipeline completed.');
-  appendTimingReport('article-pipeline', stepTimings);
-  return { workingCopy, artifactCleanup };
+  console.log('\n[PREVIEW BUILD PASS] Wewnętrzny pipeline stagingowy zakończony; repozytorium publiczne nie zostało zmienione.');
+  appendTimingReport('article-pipeline-staging-internal', stepTimings);
+  return { workingCopy, artifactCleanup: null };
 }
 
 main()
@@ -289,7 +337,7 @@ main()
   })
   .catch((err) => {
     console.error(`\n[FAIL] ${err.message || err}`);
-    appendTimingReport('article-pipeline-fail', stepTimings);
+    if (!transactionalOuter) appendTimingReport('article-pipeline-fail', stepTimings);
     if (tempWorkingCopy) {
       try {
         fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });
@@ -298,6 +346,6 @@ main()
         // no-op
       }
     }
-    runTempCleanup();
+    if (!transactionalOuter) runTempCleanup();
     process.exit(1);
   });

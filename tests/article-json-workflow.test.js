@@ -180,3 +180,14 @@ test('ready-check and fast-gate reject raw JSON without protected artifact metad
     assert.match(`${result.stdout}\n${result.stderr}`, /CONTENT_READY/);
   }
 }));
+
+test('private staging mode cannot be used to bypass the transactional controller', () => withTempDir((dir) => {
+  const source = path.join(dir, 'raw.fitpo50.json');
+  fs.writeFileSync(source, '{"slug":"raw-staging-bypass"}\n');
+  const result = spawnSync('node', ['scripts/article-pipeline.js', '--file', source, '--staging-internal', 'true'], {
+    cwd: REPO,
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 1);
+  assert.match(`${result.stdout}\n${result.stderr}`, /CONTENT_READY|prywatnym trybem/);
+}));
