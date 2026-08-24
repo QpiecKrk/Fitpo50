@@ -12,6 +12,9 @@ const REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
   : path.join(process.cwd(), 'data', 'reports', 'growth');
 const GSC_INPUT_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
 const GSC_CONTENT_STRATEGY_REPORT = process.env.GSC_CONTENT_STRATEGY_REPORT || '';
+const SEO_STATE_DIR = process.env.FITPO50_SEO_STATE_DIR
+  ? path.resolve(process.env.FITPO50_SEO_STATE_DIR)
+  : path.join(os.homedir(), 'Downloads', 'fitpo50-seo-state');
 const SITE_ORIGIN = 'https://fitpo50.pl';
 const TEMPORARILY_IGNORED_SEO_FILES = new Set([
   'narzedzia.html',
@@ -128,6 +131,15 @@ function parseArgs(argv) {
 
 function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
+}
+
+function readSeoState(name) {
+  return readJsonIfExists(path.join(SEO_STATE_DIR, name));
+}
+
+function writeSeoState(name, value) {
+  ensureDir(SEO_STATE_DIR);
+  writeJson(path.join(SEO_STATE_DIR, name), value);
 }
 
 function writeJson(file, payload) {
@@ -1080,6 +1092,12 @@ function approvalReason(card, kind) {
   if (kind === 'ROKUJE') {
     return `URL ma ${pageSignal}: ${gsc.impressions} wyświetleń, ${gsc.clicks} kliknięć i pozycję ${gsc.position}. Działanie wynika z diagnozy ${card?.diagnosis || card?.type || 'GSC'}, a brak ujawnionego query nie usuwa strony z kolejki.`;
   }
+  if (kind === 'MONITORING') {
+    if (isRecentlyTouched(approvalCardKey(card), new Map([[approvalCardKey(card), { date_modified: card?.date_modified }]]), 14)) {
+      return `URL jest po świeżej zmianie z ${card?.date_modified || 'nieustaloną datą'}: nie wykonujemy kolejnej edycji przed checkpointem KPI. Obserwujemy wyświetlenia, kliknięcia, CTR i pozycję, a cooldown nie usuwa strony z raportu.`;
+    }
+    return `URL ma diagnozę ${card?.diagnosis || card?.type || 'VISIBLE_LOW_SIGNAL'} i nie wymaga teraz kolejnej edycji. Chronimy działającą intencję, sprawdzamy trend 7/28/90 dni i wracamy do zmian dopiero po mierzalnym spadku lub nowej szansie.`;
+  }
   const scores = card?.score || {};
   return `Strona ma słabą lub zerową widoczność i wynik SEO/AEO/GEO/AIO ${Number(scores.seo || 0)}/${Number(scores.aeo || 0)}/${Number(scores.geo || 0)}/${Number(scores.aio || 0)}. Najpierw trzeba zbudować konkretną odpowiedź, źródła i linkowanie, a dopiero potem zgłaszać URL w GSC.`;
 }
@@ -1103,6 +1121,14 @@ function approvalPreparationChecklist(kind, query) {
       'dodanie 2-4 linków z liderów i centrów tematycznych, jeśli anchor naprawdę pasuje do zdania',
       'uzupełnienie FAQ tylko o pytania wynikające z GSC/PAA/autocomplete albo treści artykułu',
       'po zmianie dopisanie URL-a do kolejki GSC razem z najważniejszymi źródłami linkowania wewnętrznego',
+    ];
+  }
+  if (kind === 'MONITORING') {
+    return [
+      'nie zmieniać title, meta, leadu ani FAQ bez nowego sygnału GSC lub zakończenia checkpointu',
+      'porównać baseline z wynikami po 7, 14 i 28 dniach: wyświetlenia, kliknięcia, CTR i pozycję',
+      'sprawdzić, czy główny URL zachowuje przypisaną intencję i czy drugi URL nie zaczyna go kanibalizować',
+      'przenieść stronę do BOOST, ROKUJE albo NAPRAWA dopiero na podstawie nowych danych',
     ];
   }
   return [
@@ -1242,6 +1268,7 @@ function buildFullCoverageCard(item, actionCardsByFile) {
     priority: item?.priority || '',
     segment: item?.visibility_segment || '',
     diagnosis: item?.diagnosis || 'UNCLASSIFIED',
+    date_modified: item?.date_modified || '',
     editorial_decision: item?.editorial_decision || '',
     gsc: item?.gsc || {},
     gsc_windows: item?.gsc_windows || {},
@@ -1252,6 +1279,7 @@ function buildFullCoverageCard(item, actionCardsByFile) {
       secondary: item?.keywords?.secondary || [],
       intents: item?.keywords?.intents || [],
       useful_queries: (item?.keywords?.evidence || []).map((row) => row.query).filter(Boolean),
+      evidence: item?.keywords?.evidence || [],
     },
     tasks: item?.required_action?.required_change ? [item.required_action.required_change] : [],
     internal_link_sources: (item?.topology?.suggested_sources || []).map((source) => ({
@@ -1263,6 +1291,16 @@ function buildFullCoverageCard(item, actionCardsByFile) {
     proposed_meta_description: strategyAction.proposed_meta_description || '',
     score: { total: Number(item?.opportunity_score || 0), seo: 0, aeo: 0, geo: 0, aio: 0 },
   };
+}
+
+function seoBasketForCard(card, articleByFile) {
+  const file = approvalCardKey(card);
+  if (isRecentlyTouched(file, articleByFile, 14)) return 'MONITORING';
+  const diagnosis = String(card?.diagnosis || '');
+  if (diagnosis === 'CTR_GAP_TOP10') return 'BOOST';
+  if (diagnosis.startsWith('ZERO_VISIBILITY_') || ['DEEP_31_100', 'DECLINING'].includes(diagnosis)) return 'NAPRAWA';
+  if (['VISIBLE_CLICKING', 'VISIBLE_LOW_SIGNAL'].includes(diagnosis)) return 'MONITORING';
+  return 'ROKUJE';
 }
 
 function mergeStrategyActionDraft(card, actionCardsByFile) {
@@ -1368,30 +1406,49 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
   const enrichedCards = fullCoverageItems.length
     ? fullCoverageItems
     : cards.map((card) => mergeStrategyActionDraft(card, actionCardsByFile));
-  const boostCards = enrichedCards.filter((card) => {
-    if (fullCoverageItems.length) return card.diagnosis === 'CTR_GAP_TOP10';
-    return card.type === 'P0_PUSH_TO_PAGE_ONE';
-  });
-  const repairCards = enrichedCards.filter((card) => {
-    if (fullCoverageItems.length) return String(card.diagnosis || '').startsWith('ZERO_VISIBILITY_') || ['DEEP_31_100', 'DECLINING'].includes(card.diagnosis);
-    return ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'].includes(card.type);
-  });
-  const excludedKeys = new Set([...boostCards, ...repairCards].map(approvalCardKey).filter(Boolean));
-  const promisingCards = fullCoverageItems.length
-    ? enrichedCards.filter((card) => !excludedKeys.has(approvalCardKey(card)))
-    : buildPromisingSeoCards(enrichedCards, contentStrategy, excludedKeys, articleByFile);
-  const allCards = [...boostCards, ...promisingCards, ...repairCards];
+  const boostCards = [];
+  const promisingCards = [];
+  const repairCards = [];
+  const monitoringCards = [];
+  if (fullCoverageItems.length) {
+    for (const card of enrichedCards) {
+      const basket = seoBasketForCard(card, articleByFile);
+      if (basket === 'BOOST') boostCards.push(card);
+      else if (basket === 'NAPRAWA') repairCards.push(card);
+      else if (basket === 'MONITORING') monitoringCards.push(card);
+      else promisingCards.push(card);
+    }
+  } else {
+    const legacyBoost = enrichedCards.filter((card) => card.type === 'P0_PUSH_TO_PAGE_ONE');
+    const legacyRepair = enrichedCards.filter((card) => ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'].includes(card.type));
+    const excludedKeys = new Set([...legacyBoost, ...legacyRepair].map(approvalCardKey).filter(Boolean));
+    boostCards.push(...legacyBoost);
+    repairCards.push(...legacyRepair);
+    promisingCards.push(...buildPromisingSeoCards(enrichedCards, contentStrategy, excludedKeys, articleByFile));
+  }
+  const allCards = [...boostCards, ...promisingCards, ...repairCards, ...monitoringCards];
   const allKeys = new Set(allCards.map(approvalCardKey).filter(Boolean));
   const inventoryCount = fullCoverageItems.length || allCards.length;
+  const boostItems = boostCards.map((card, index) => buildSeoApprovalItem(card, 'BOOST', index + 1, articleByFile, sourceWindowDays));
+  const promisingItems = promisingCards.map((card, index) => buildSeoApprovalItem(card, 'ROKUJE', index + 1, articleByFile, sourceWindowDays));
+  const repairItems = repairCards.map((card, index) => buildSeoApprovalItem(card, 'NAPRAWA', index + 1, articleByFile, sourceWindowDays));
+  const monitoringItems = monitoringCards.map((card, index) => buildSeoApprovalItem(card, 'MONITORING', index + 1, articleByFile, sourceWindowDays));
+  const approvalItems = [...boostItems, ...promisingItems, ...repairItems, ...monitoringItems];
   return {
     status: 'AWAITING_USER_APPROVAL',
-    rule: 'Jedna komenda popraw-seo pokazuje raport liderów BOOST/NAPRAWA oraz drugi raport ROKUJE. Agent nie edytuje HTML, dopóki użytkownik nie zatwierdzi konkretnych ID.',
+    rule: 'Każdy artykuł trafia dokładnie do jednego koszyka: BOOST, ROKUJE, NAPRAWA albo MONITORING. Cooldown przenosi do MONITORING, ale nigdy nie usuwa URL-a z raportu.',
     no_generic_text: true,
     coverage_contract: {
       status: inventoryCount === allKeys.size ? 'PASS' : 'FAIL',
       article_inventory: inventoryCount,
       assigned_actions: allKeys.size,
       omitted_articles: fullCoverageItems.filter((card) => !allKeys.has(approvalCardKey(card))).map((card) => card.file),
+      basket_counts: {
+        BOOST: boostCards.length,
+        ROKUJE: promisingCards.length,
+        NAPRAWA: repairCards.length,
+        MONITORING: monitoringCards.length,
+      },
     },
     approval_examples: [
       'popraw BOOST 1',
@@ -1399,11 +1456,23 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
       'popraw BOOST 1 NAPRAWA 2',
       'popraw 1 2 3 - agent ma doprecyzować, które ID użytkownik wybiera, jeśli numeracja jest niejednoznaczna',
     ],
-    boost: boostCards.map((card, index) => buildSeoApprovalItem(card, 'BOOST', index + 1, articleByFile, sourceWindowDays)),
-    promising: promisingCards.map((card, index) => buildSeoApprovalItem(card, 'ROKUJE', index + 1, articleByFile, sourceWindowDays)),
-    repair: repairCards.map((card, index) => buildSeoApprovalItem(card, 'NAPRAWA', index + 1, articleByFile, sourceWindowDays)),
+    visibility_click_objective: {
+      rule: 'Priorytet raportu: zwiększyć liczbę URL-i z wyświetleniami, a następnie liczbę kliknięć; oceny techniczne są wskaźnikami pomocniczymi.',
+      visible_articles: approvalItems.filter((item) => Number(item.gsc.impressions || 0) > 0).length,
+      clicking_articles: approvalItems.filter((item) => Number(item.gsc.clicks || 0) > 0).length,
+      zero_visibility_articles: approvalItems.filter((item) => Number(item.gsc.impressions || 0) === 0).length,
+      estimated_monthly_click_gain: Number(approvalItems
+        .filter((item) => item.kind !== 'MONITORING')
+        .reduce((sum, item) => sum + Number(item.estimated_traffic_gain?.estimated_monthly_click_gain || 0), 0)
+        .toFixed(1)),
+    },
+    boost: boostItems,
+    promising: promisingItems,
+    repair: repairItems,
+    monitoring: monitoringItems,
     full_portfolio: allCards.map((card) => ({
       file: approvalCardKey(card),
+      basket: seoBasketForCard(card, articleByFile),
       diagnosis: card.diagnosis || card.type,
       required_action: card.required_action?.required_change || card.tasks?.[0] || 'INSUFFICIENT_DATA',
       cooldown_status: isRecentlyTouched(approvalCardKey(card), articleByFile, 14) ? 'COOLDOWN_MONITORUJ' : 'READY_FOR_APPROVAL',
@@ -1447,9 +1516,12 @@ function buildDeltaCheckpoint(day, ageDays, checkpointDate, baseline, current) {
 
 function buildSeoWorkHistory(articles, generatedAt, previousHistory, sourceWindowDays) {
   const generatedDate = parseDate(generatedAt) || new Date();
-  const previousByFile = new Map((previousHistory?.recently_modified || []).map((item) => [item.file, item]));
+  const previousItems = Array.isArray(previousHistory?.urls)
+    ? previousHistory.urls
+    : (previousHistory?.recently_modified || []);
+  const previousByFile = new Map(previousItems.map((item) => [item.file, item]));
   const snapshotDay = generatedDate.toISOString().slice(0, 10);
-  const recent = (articles || [])
+  const urls = (articles || [])
     .map((article) => {
       const ageDays = ageDaysFrom(article.date_modified, generatedAt);
       const modified = parseDate(article.date_modified);
@@ -1465,6 +1537,25 @@ function buildSeoWorkHistory(articles, generatedAt, previousHistory, sourceWindo
       const snapshots = previousSnapshots.filter((snapshot) => String(snapshot.generated_at || '').slice(0, 10) !== snapshotDay);
       snapshots.push({ generated_at: generatedAt, source_window_days: sourceWindowDays, gsc: current });
       const checkpoints = buildKpiCheckpoints(article.date_modified);
+      const previousEvents = Array.isArray(previous?.change_events) ? previous.change_events : [];
+      const changeDetected = Boolean(previous && previous.date_modified !== article.date_modified);
+      const changeEvents = [...previousEvents];
+      if (!previous) {
+        changeEvents.push({
+          detected_at: generatedAt,
+          date_modified: article.date_modified || 'MISSING',
+          baseline: current,
+          status: 'OBSERVED_BASELINE',
+        });
+      } else if (changeDetected) {
+        changeEvents.push({
+          detected_at: generatedAt,
+          previous_date_modified: previous.date_modified || 'MISSING',
+          date_modified: article.date_modified || 'MISSING',
+          baseline: current,
+          status: 'DEPLOYMENT_CHANGE_DETECTED',
+        });
+      }
       return {
         file: article.file,
         url: article.url,
@@ -1475,21 +1566,32 @@ function buildSeoWorkHistory(articles, generatedAt, previousHistory, sourceWindo
         snapshots: snapshots.slice(-12),
         checkpoints,
         delta_tracker: {
+          day_7: buildDeltaCheckpoint(7, ageDays, checkpoints?.day_7, baseline, current),
           day_14: buildDeltaCheckpoint(14, ageDays, checkpoints?.day_14, baseline, current),
           day_28: buildDeltaCheckpoint(28, ageDays, checkpoints?.day_28, baseline, current),
         },
+        change_detected_this_run: changeDetected,
+        change_events: changeEvents.slice(-24),
         cooldown_until: modified ? addDays(modified, 14) : null,
       };
     })
+    .sort((a, b) => String(a.file).localeCompare(String(b.file), 'pl'));
+
+  const recent = urls
     .filter((item) => item.age_days !== null && item.age_days <= 45)
-    .sort((a, b) => a.age_days - b.age_days)
-    .slice(0, 30);
+    .sort((a, b) => a.age_days - b.age_days);
 
   return {
     generated_at: generatedAt,
-    purpose: 'Pamięć operacyjna dla popraw-seo: nie proponować w kółko świeżo poprawionych URL-i, tylko mierzyć efekt po 7/14/28 dniach.',
+    purpose: 'Trwała pamięć każdego URL-a: baseline, zmiany dateModified, snapshoty oraz checkpointy 7/14/28 dni.',
     cooldown_days: 14,
     source_window_days: sourceWindowDays,
+    coverage: {
+      article_inventory: (articles || []).length,
+      urls_with_history: urls.length,
+      omitted_urls: (articles || []).filter((article) => !urls.some((item) => item.file === article.file)).map((article) => article.file),
+    },
+    urls,
     recently_modified: recent.map((item) => {
       const checkpoints = item.checkpoints || {};
       const checkpointDates = Object.values(checkpoints).filter(Boolean);
@@ -1503,36 +1605,88 @@ function buildSeoWorkHistory(articles, generatedAt, previousHistory, sourceWindo
   };
 }
 
-function buildGscAfterChangeQueue(approvalWave) {
+function deploymentEvidenceForArticle(file, expectedDateModified) {
+  const normalizedFile = normalizeReportFile(file);
+  const slug = normalizedFile.replace(/\.html$/i, '');
+  const sourcePath = path.join(ROOT, normalizedFile);
+  const mirrorPath = path.join(ROOT, '_site', normalizedFile);
+  const pdfPath = path.join(ROOT, 'assets', 'pdf', `${slug}.pdf`);
+  const mirrorPdfPath = path.join(ROOT, '_site', 'assets', 'pdf', `${slug}.pdf`);
+  const sitemap = readTextIfExists(path.join(ROOT, 'sitemap.xml'));
+  const sourceHtml = readTextIfExists(sourcePath);
+  const mirrorHtml = readTextIfExists(mirrorPath);
+  const sourceModified = firstMatch(sourceHtml, /"dateModified"\s*:\s*"([^"]+)"/i)
+    || firstMatch(sourceHtml, /property="article:modified_time"\s+content="([^"]+)"/i);
+  const mirrorModified = firstMatch(mirrorHtml, /"dateModified"\s*:\s*"([^"]+)"/i)
+    || firstMatch(mirrorHtml, /property="article:modified_time"\s+content="([^"]+)"/i);
+  const sitemapBlock = sitemap.match(new RegExp(`<url>[\\s\\S]*?<loc>${escapeRegex(`${SITE_ORIGIN}/${normalizedFile}`)}</loc>[\\s\\S]*?</url>`, 'i'))?.[0] || '';
+  const sitemapLastmod = firstMatch(sitemapBlock, /<lastmod>([^<]+)<\/lastmod>/i);
+  const expectedDay = String(expectedDateModified || '').slice(0, 10);
+  const checks = {
+    source_html: fs.existsSync(sourcePath),
+    site_html: fs.existsSync(mirrorPath),
+    date_modified_source: Boolean(expectedDateModified && sourceModified === expectedDateModified),
+    date_modified_site: Boolean(expectedDateModified && mirrorModified === expectedDateModified),
+    sitemap_lastmod: Boolean(expectedDay && sitemapLastmod === expectedDay),
+    pdf_source: fs.existsSync(pdfPath),
+    pdf_site: fs.existsSync(mirrorPdfPath),
+  };
+  return {
+    status: Object.values(checks).every(Boolean) ? 'DEPLOYED_AND_VALIDATED' : 'DEPLOYMENT_INCOMPLETE',
+    checks,
+    source_date_modified: sourceModified || null,
+    site_date_modified: mirrorModified || null,
+    sitemap_lastmod: sitemapLastmod || null,
+  };
+}
+
+function buildGscAfterChangeQueue(approvalWave, seoWorkHistory, previousQueue, deploymentInspector = deploymentEvidenceForArticle) {
   const groups = [
     ['BOOST', approvalWave?.boost || []],
     ['ROKUJE', approvalWave?.promising || []],
     ['NAPRAWA', approvalWave?.repair || []],
+    ['MONITORING', approvalWave?.monitoring || []],
   ];
-  const items = [];
+  const approvalByFile = new Map();
   for (const [kind, groupItems] of groups) {
     for (const item of groupItems) {
-      const urls = unique((item.gsc_submit_after_change || [])
-        .filter(Boolean)
-        .filter((url) => !shouldExcludeSeoFile(url)));
-      items.push({
-        id: item.id,
-        kind,
-        file: item.file,
-        target_url: item.url,
-        submit_after_accepted_edit: urls,
-        status: 'WAITING_FOR_ACCEPTED_AND_APPLIED_EDIT',
-        gsc_note: 'Zgłaszaj dopiero po zaakceptowanej edycji, aktualizacji dateModified, sitemap i _site.',
-        monitor_after: 'KPI 7/14/28 dni od nowego dateModified: impressions, clicks, CTR, position, AI impressions, engagement.',
-      });
+      approvalByFile.set(item.file, { kind, item });
     }
   }
+  const preserved = (previousQueue?.items || []).filter((item) => item.status === 'READY_TO_SUBMIT');
+  const byDeployment = new Map(preserved.map((item) => [`${item.file}|${item.date_modified}`, item]));
+  for (const historyItem of seoWorkHistory?.urls || []) {
+    if (!historyItem.change_detected_this_run) continue;
+    const approval = approvalByFile.get(historyItem.file);
+    if (!approval) continue;
+    const deployment = deploymentInspector(historyItem.file, historyItem.date_modified);
+    if (deployment.status !== 'DEPLOYED_AND_VALIDATED') continue;
+    const urls = unique((approval.item.gsc_submit_after_change || [])
+      .filter(Boolean)
+      .filter((url) => !shouldExcludeSeoFile(url)));
+    byDeployment.set(`${historyItem.file}|${historyItem.date_modified}`, {
+      id: approval.item.id,
+      kind: approval.kind,
+      file: historyItem.file,
+      target_url: approval.item.url,
+      date_modified: historyItem.date_modified,
+      detected_at: seoWorkHistory.generated_at,
+      submit_urls: urls,
+      status: 'READY_TO_SUBMIT',
+      deployment_evidence: deployment,
+      gsc_note: 'Kolejka powstała po wykryciu realnej zmiany dateModified oraz potwierdzeniu HTML, _site, sitemap i PDF.',
+      monitor_after: 'KPI 7/14/28 dni od dateModified: impressions, clicks, CTR, position, AI impressions i engagement.',
+    });
+  }
+  const items = [...byDeployment.values()];
+  const submitTargets = unique(items.flatMap((item) => item.submit_urls || []));
   return {
     generated_at: nowWarsawIso(),
-    status: 'AFTER_ACCEPTED_EDIT_ONLY',
-    rule: 'To nie jest lista do natychmiastowego klikania w GSC. Zgłaszamy URL dopiero po realnej zmianie strony.',
-    submit_targets: [],
+    status: items.length ? 'READY_AFTER_REAL_DEPLOYMENT' : 'EMPTY_AWAITING_REAL_DEPLOYMENT',
+    rule: 'Do kolejki trafia wyłącznie URL z nowym dateModified i potwierdzonym kompletem: source HTML, _site HTML, sitemap lastmod oraz PDF w obu lokalizacjach.',
+    submit_targets: submitTargets,
     items,
+    planned_candidates_count: approvalByFile.size,
   };
 }
 
@@ -1554,26 +1708,62 @@ function cannibalWinnerScore(card) {
     + (position > 0 ? Math.max(0, 50 - position) : 0);
 }
 
-function buildCannibalizationMap(cards, contentStrategy) {
+function intentEvidenceForCard(card) {
+  const evidence = Array.isArray(card?.keyword_plan?.evidence) ? card.keyword_plan.evidence : [];
+  if (evidence.length) {
+    return evidence
+      .filter((row) => row?.query && !looksLikeArticleTitle(row.query))
+      .map((row) => ({
+        query: row.query,
+        clicks: Number(row.clicks || 0),
+        impressions: Number(row.impressions || 0),
+        position: Number(row.position || 0),
+        source: 'GSC_DISCLOSED_QUERY',
+        confidence: 'CONFIRMED_SIGNAL',
+      }));
+  }
+  const primary = String(card?.keyword_plan?.primary || '').trim();
+  if (!primary) return [];
+  return [{
+    query: primary,
+    clicks: Number(card?.gsc?.clicks || 0),
+    impressions: Number(card?.gsc?.impressions || 0),
+    position: Number(card?.gsc?.position || 0),
+    source: 'ARTICLE_TOPIC_FALLBACK',
+    confidence: 'RESEARCH_REQUIRED',
+  }];
+}
+
+function buildCannibalizationMap(cards, contentStrategy, previousMap) {
   const byQuery = new Map();
   for (const card of cards || []) {
-    const gsc = approvalGscSnapshot(card);
-    if (looksLikeArticleTitle(gsc.query)) continue;
-    const key = normalizeCannibalQuery(gsc.query);
-    if (!key || key.length < 4) continue;
-    if (!byQuery.has(key)) byQuery.set(key, []);
-    byQuery.get(key).push(card);
+    for (const evidence of intentEvidenceForCard(card)) {
+      const key = normalizeCannibalQuery(evidence.query);
+      if (!key || key.length < 4) continue;
+      if (!byQuery.has(key)) byQuery.set(key, []);
+      byQuery.get(key).push({ card, evidence });
+    }
   }
 
   const conflicts = [];
+  const intentOwners = [];
+  const previousOwners = new Map((previousMap?.intent_owners || []).map((item) => [item.intent_key, item]));
   for (const [query, group] of byQuery.entries()) {
-    const uniqueGroup = group.filter((card, index, arr) => arr.findIndex((other) => approvalCardKey(other) === approvalCardKey(card)) === index);
-    if (uniqueGroup.length < 2) continue;
-    const sorted = uniqueGroup.sort((a, b) => cannibalWinnerScore(b) - cannibalWinnerScore(a));
-    const winner = sorted[0];
+    const uniqueGroup = group.filter((entry, index, arr) => arr.findIndex((other) => approvalCardKey(other.card) === approvalCardKey(entry.card)) === index);
+    const sorted = uniqueGroup.sort((a, b) => {
+      const evidenceScore = (entry) => entry.evidence.clicks * 1000 + entry.evidence.impressions + (entry.evidence.position > 0 ? Math.max(0, 50 - entry.evidence.position) : 0);
+      return evidenceScore(b) - evidenceScore(a) || cannibalWinnerScore(b.card) - cannibalWinnerScore(a.card);
+    });
+    const previousOwner = previousOwners.get(query);
+    const preserved = previousOwner?.main_file
+      ? sorted.find((entry) => approvalCardKey(entry.card) === previousOwner.main_file)
+      : null;
+    const winnerEntry = previousOwner?.owner_status === 'CONFIRMED' && preserved ? preserved : sorted[0];
+    const winner = winnerEntry.card;
     const mainFile = normalizeReportFile(winner.file || winner.url);
-    const displayQuery = approvalGscSnapshot(winner).query || query;
-    const supportingPages = sorted.slice(1).map((card) => {
+    const displayQuery = winnerEntry.evidence.query || query;
+    const supportingEntries = sorted.filter((entry) => approvalCardKey(entry.card) !== mainFile);
+    const supportingPages = supportingEntries.map(({ card }) => {
       const file = normalizeReportFile(card.file || card.url);
       const inspection = inspectInternalLinkSuggestion(file, mainFile, displayQuery, '');
       return {
@@ -1585,6 +1775,20 @@ function buildCannibalizationMap(cards, contentStrategy) {
         status: inspection.target_already_linked ? 'LINK_ALREADY_EXISTS' : 'READY_FOR_APPROVAL',
       };
     });
+    const owner = {
+      intent_key: query,
+      intent: displayQuery,
+      main_file: mainFile,
+      main_url: cardAbsoluteUrl(winner),
+      owner_status: previousOwner?.owner_status === 'CONFIRMED' && preserved ? 'CONFIRMED' : 'AUTO_PROPOSED',
+      evidence_source: winnerEntry.evidence.source,
+      confidence: winnerEntry.evidence.confidence,
+      supporting_files: supportingPages.map((item) => item.file),
+      first_seen_at: previousOwner?.first_seen_at || nowWarsawIso(),
+      last_seen_at: nowWarsawIso(),
+    };
+    intentOwners.push(owner);
+    if (uniqueGroup.length < 2) continue;
     conflicts.push({
       query: displayQuery,
       main_url: cardAbsoluteUrl(winner),
@@ -1595,10 +1799,10 @@ function buildCannibalizationMap(cards, contentStrategy) {
       action: 'Główny URL trzyma title/meta pod tę frazę. Strony wspierające linkują do niego i nie wzmacniają tego samego title pod identyczną intencję.',
       canonical_note: 'To rekomendacja właściciela intencji, nie automatyczna zmiana rel=canonical.',
       metrics: sorted.map((card) => ({
-        file: normalizeReportFile(card.file || card.url),
-        impressions: Number(card.gsc?.impressions || 0),
-        clicks: Number(card.gsc?.clicks || 0),
-        position: Number(card.gsc?.position || 0),
+        file: normalizeReportFile(card.card.file || card.card.url),
+        impressions: Number(card.evidence.impressions || 0),
+        clicks: Number(card.evidence.clicks || 0),
+        position: Number(card.evidence.position || 0),
       })),
     });
   }
@@ -1606,7 +1810,14 @@ function buildCannibalizationMap(cards, contentStrategy) {
   return {
     generated_at: nowWarsawIso(),
     status: conflicts.length || contentStrategy?.cannibalization?.length ? 'CHECK' : 'NO_STRONG_CONFLICTS',
-    conflicts: conflicts.slice(0, 12),
+    conflicts,
+    intent_owners: intentOwners.sort((a, b) => a.intent.localeCompare(b.intent, 'pl')),
+    coverage: {
+      intents: intentOwners.length,
+      confirmed_by_gsc: intentOwners.filter((item) => item.evidence_source === 'GSC_DISCLOSED_QUERY').length,
+      research_required: intentOwners.filter((item) => item.confidence === 'RESEARCH_REQUIRED').length,
+      conflicts: conflicts.length,
+    },
     strategy_notes: (contentStrategy?.cannibalization || []).slice(0, 14),
     rule: 'Przy poprawkach nie wzmacniaj dwóch URL-i pod tę samą intencję. Wybierz stronę główną, a drugą potraktuj jako wsparcie linkiem.',
   };
@@ -1772,12 +1983,44 @@ function buildUnifiedInsights() {
   const cards = actionCardsFromSeoAio(seoAio);
   const currentRange = seoAio?.data_quality?.weekly_api_ranges?.current || {};
   const sourceWindowDays = inclusiveDays(currentRange.start, currentRange.end) || 30;
-  const previousHistory = readJsonIfExists(path.join(REPORT_DIR, 'popraw-seo-historia.json'));
+  const previousHistory = readSeoState('popraw-seo-historia.json')
+    || readJsonIfExists(path.join(REPORT_DIR, 'popraw-seo-historia.json'));
+  const previousQueue = readSeoState('popraw-seo-gsc-po-zmianach.json')
+    || readJsonIfExists(path.join(REPORT_DIR, 'popraw-seo-gsc-po-zmianach.json'));
+  const previousCannibalizationMap = readSeoState('popraw-seo-kanibalizacja.json')
+    || readJsonIfExists(path.join(REPORT_DIR, 'popraw-seo-kanibalizacja.json'));
   const generatedAt = nowWarsawIso();
   const approvalWave = buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindowDays, fullCoverageReport);
-  const seoWorkHistory = buildSeoWorkHistory(growthData.articles || [], generatedAt, previousHistory, sourceWindowDays);
-  const afterChangeGscQueue = buildGscAfterChangeQueue(approvalWave);
-  const cannibalizationMap = buildCannibalizationMap(cards, contentStrategy);
+  const historyArticles = (fullCoverageReport?.priority_map || [])
+    .filter((item) => item?.type === 'article')
+    .map((item) => {
+      const file = normalizeReportFile(item.path || item.url);
+      return {
+        ...(articleByFile.get(file) || {}),
+        file,
+        url: item.url || `${SITE_ORIGIN}/${file}`,
+        date_modified: item.date_modified || articleByFile.get(file)?.date_modified || '',
+        gsc: item.gsc || {},
+      };
+    });
+  const seoWorkHistory = buildSeoWorkHistory(
+    historyArticles.length ? historyArticles : (growthData.articles || []),
+    generatedAt,
+    previousHistory,
+    sourceWindowDays,
+  );
+  const afterChangeGscQueue = buildGscAfterChangeQueue(approvalWave, seoWorkHistory, previousQueue);
+  const actionCardsByFile = new Map((contentStrategy?.action_cards || [])
+    .map((item) => [normalizeReportFile(item.file), item])
+    .filter(([file]) => Boolean(file)));
+  const intentCards = (fullCoverageReport?.priority_map || [])
+    .filter((item) => item?.type === 'article')
+    .map((item) => buildFullCoverageCard(item, actionCardsByFile));
+  const cannibalizationMap = buildCannibalizationMap(
+    intentCards.length ? intentCards : cards,
+    contentStrategy,
+    previousCannibalizationMap,
+  );
   const broadSeoConclusions = buildBroadSeoConclusions(fullCoverageReport, gscWeeklyApi, indexCoverage);
   const portfolio = seoAio?.portfolio || {};
   const average = portfolio.average_scores || {};
@@ -2892,6 +3135,7 @@ function buildPoprawSeo() {
       'Połączono raporty GSC/SEO/AEO/GEO/AIO i wyciągnięto kluczowe wnioski.',
       'Uwzględniono zewnętrzny raport GSC content strategy, jeśli istnieje w Downloads albo pod GSC_CONTENT_STRATEGY_REPORT.',
       'Zbudowano paczkę do zatwierdzenia: BOOST dla stron blisko wzrostu, NAPRAWA dla stron słabych lub bez widoczności oraz ROKUJE dla stron z potencjałem po liderach.',
+      'Utworzono pełny koszyk MONITORING dla URL-i w cooldownie i działających stron, których nie należy teraz przepisywać.',
     ],
     unified_insights: unifiedInsights,
     approval_wave: unifiedInsights.approval_wave,
@@ -2954,6 +3198,7 @@ function buildPoprawSeo() {
       gsc_content_strategy_status: unifiedInsights.content_strategy?.status || 'MISSING',
       gsc_content_strategy_opportunities: unifiedInsights.content_strategy?.opportunity_leaderboard?.length || 0,
       seo_recently_modified: unifiedInsights.seo_work_history?.recently_modified?.length || 0,
+      seo_history_urls: unifiedInsights.seo_work_history?.urls?.length || 0,
       gsc_after_change_targets: unifiedInsights.gsc_after_change_queue?.submit_targets?.length || 0,
       cannibalization_conflicts: unifiedInsights.cannibalization_map?.conflicts?.length || 0,
     },
@@ -2970,10 +3215,13 @@ function buildPoprawSeo() {
   });
   writePromisingPagesMarkdown(unifiedInsights, path.join(REPORT_DIR, 'popraw-seo-rokuje.md'));
   writeJson(path.join(REPORT_DIR, 'popraw-seo-historia.json'), unifiedInsights.seo_work_history);
+  writeSeoState('popraw-seo-historia.json', unifiedInsights.seo_work_history);
   writeSeoWorkHistoryMarkdown(unifiedInsights.seo_work_history, path.join(REPORT_DIR, 'popraw-seo-historia.md'));
   writeJson(path.join(REPORT_DIR, 'popraw-seo-gsc-po-zmianach.json'), unifiedInsights.gsc_after_change_queue);
+  writeSeoState('popraw-seo-gsc-po-zmianach.json', unifiedInsights.gsc_after_change_queue);
   writeGscAfterChangeMarkdown(unifiedInsights.gsc_after_change_queue, path.join(REPORT_DIR, 'popraw-seo-gsc-po-zmianach.md'));
   writeJson(path.join(REPORT_DIR, 'popraw-seo-kanibalizacja.json'), unifiedInsights.cannibalization_map);
+  writeSeoState('popraw-seo-kanibalizacja.json', unifiedInsights.cannibalization_map);
   writeCannibalizationMarkdown(unifiedInsights.cannibalization_map, path.join(REPORT_DIR, 'popraw-seo-kanibalizacja.md'));
   writeJson(path.join(REPORT_DIR, 'popraw-seo.json'), command);
   writePoprawSeoMarkdown(command, path.join(REPORT_DIR, 'popraw-seo.md'));
@@ -3111,6 +3359,7 @@ function writePoprawSeoDecisionMarkdown(command, file) {
     ['BOOST', approval.boost || []],
     ['ROKUJE', approval.promising || []],
     ['NAPRAWA', approval.repair || []],
+    ['MONITORING', approval.monitoring || []],
   ];
   const lines = ['# Popraw SEO — Decyzje', '', `Wygenerowano: ${command.generated_at}`, '', 'Status: AWAITING_USER_APPROVAL', ''];
   lines.push('Wybierz konkretne ID. Agent może edytować HTML dopiero po Twojej akceptacji.');
@@ -3122,7 +3371,7 @@ function writePoprawSeoDecisionMarkdown(command, file) {
       lines.push('');
       continue;
     }
-    items.slice(0, 5).forEach((item) => {
+    items.forEach((item) => {
       lines.push(`### ${item.id}: ${item.file}`);
       lines.push(`- URL: ${item.url}`);
       lines.push(`- query: ${item.gsc?.query || 'brak'}; impr ${item.gsc?.impressions || 0}; klik ${item.gsc?.clicks || 0}; CTR ${item.gsc?.ctr || 0}%; poz ${item.gsc?.position || 0}`);
@@ -3172,12 +3421,18 @@ function writePoprawSeoMarkdown(command, file) {
   }
   appendContentStrategyMarkdown(lines, insights.content_strategy);
   lines.push('## Paczka Do Zatwierdzenia');
+  if (approval.visibility_click_objective) {
+    const objective = approval.visibility_click_objective;
+    lines.push(`- Cel: ${objective.rule}`);
+    lines.push(`- Widoczne artykuły: ${objective.visible_articles}; z kliknięciami: ${objective.clicking_articles}; bez wyświetleń: ${objective.zero_visibility_articles}; szacowany potencjał kliknięć/mies.: ${objective.estimated_monthly_click_gain}.`);
+  }
   if (approval.coverage_contract) {
     lines.push(`- Pełne pokrycie: ${approval.coverage_contract.status}; artykuły ${approval.coverage_contract.article_inventory}; przypisane działania ${approval.coverage_contract.assigned_actions}; pominięte ${approval.coverage_contract.omitted_articles.length}.`);
   }
   lines.push('- `BOOST` = strony, które Google już pokazuje; poprawiamy CTR, doprecyzowanie leadu i linkowanie.');
   lines.push('- `ROKUJE` = drugi raport: strony niebędące liderami, ale mające sygnał GSC albo miejsce w strategii; po liderach wzmacniamy je równie konkretnie.');
   lines.push('- `NAPRAWA` = strony słabe albo bez widoczności; najpierw budujemy konkretną odpowiedź, FAQ, źródła i linki.');
+  lines.push('- `MONITORING` = strony w cooldownie albo działające targety; pozostają w raporcie, ale bez kolejnej edycji przed wynikiem checkpointu.');
   lines.push('- Zakaz generycznych dopisków: przed edycją HTML agent ma przygotować gotowy tekst w rozmowie i czekać na akceptację.');
   lines.push('');
   if (Array.isArray(approval.boost) && approval.boost.length) {
@@ -3223,6 +3478,18 @@ function writePoprawSeoMarkdown(command, file) {
         lines.push(`   - linki do rozważenia: ${item.internal_link_suggestions.map((link) => `${link.from} -> "${link.anchor || 'anchor do przygotowania'}"`).join('; ')}`);
       }
       lines.push(`   - przed edycją przygotuj: ${item.prepare_before_edit.join('; ')}`);
+    });
+    lines.push('');
+  }
+  if (Array.isArray(approval.monitoring) && approval.monitoring.length) {
+    lines.push('### MONITORING — Bez Pomijania URL-i');
+    approval.monitoring.forEach((item) => {
+      lines.push(`${item.id}. ${item.file}`);
+      lines.push(`   - URL: ${item.url}`);
+      lines.push(`   - powód: ${item.reason}`);
+      lines.push(`   - GSC: impr ${item.gsc.impressions}; klik ${item.gsc.clicks}; CTR ${item.gsc.ctr}%; poz ${item.gsc.position}`);
+      lines.push(`   - konkretne działanie dla URL-a: ${item.required_action?.required_change || item.report_tasks?.[0] || 'INSUFFICIENT_DATA'}`);
+      lines.push(`   - warunek monitoringu: ${item.prepare_before_edit.join('; ')}`);
     });
     lines.push('');
   }
@@ -3298,7 +3565,7 @@ function writePoprawSeoMarkdown(command, file) {
     lines.push('## GSC Po Zaakceptowanych Zmianach');
     lines.push(`- status: ${insights.gsc_after_change_queue.status}; ${insights.gsc_after_change_queue.rule}`);
     insights.gsc_after_change_queue.items.slice(0, 12).forEach((item) => {
-      lines.push(`- ${item.id}: ${item.submit_after_accepted_edit.join(', ') || item.target_url}`);
+      lines.push(`- ${item.id}: ${(item.submit_urls || []).join(', ') || item.target_url}`);
     });
     lines.push('');
   }
@@ -3392,11 +3659,9 @@ function writeSeoWorkHistoryMarkdown(history, file) {
   const items = history?.recently_modified || [];
   if (!items.length) {
     lines.push('Brak świeżo modyfikowanych URL-i w ostatnich 45 dniach.');
-    writeText(file, lines.join('\n'));
-    return;
-  }
-  lines.push('## Ostatnio Zmienione URL-e');
-  items.forEach((item, index) => {
+  } else {
+    lines.push('## Ostatnio Zmienione URL-e');
+    items.forEach((item, index) => {
     lines.push(`${index + 1}. ${item.file}`);
     lines.push(`   - dataModified: ${item.date_modified}; wiek: ${item.age_days} dni; status: ${item.status}`);
     lines.push(`   - baseline: impr ${item.baseline.impressions}; klik ${item.baseline.clicks}; CTR ${item.baseline.ctr}%; poz ${item.baseline.position}`);
@@ -3411,12 +3676,19 @@ function writeSeoWorkHistoryMarkdown(history, file) {
       lines.push(`   - delta ${label.replace('_', ' ')}: impr ${delta.impressions >= 0 ? '+' : ''}${delta.impressions}; klik ${delta.clicks >= 0 ? '+' : ''}${delta.clicks}; CTR ${delta.ctr_percentage_points >= 0 ? '+' : ''}${delta.ctr_percentage_points} pp; poprawa pozycji ${delta.position_improvement >= 0 ? '+' : ''}${delta.position_improvement}`);
     }
     lines.push(`   - następna kontrola: ${item.next_review}`);
+    });
+  }
+  lines.push('');
+  lines.push('## Pełny Rejestr URL-i');
+  lines.push(`- pokrycie: ${history?.coverage?.urls_with_history || 0}/${history?.coverage?.article_inventory || 0}; pominięte ${(history?.coverage?.omitted_urls || []).length}`);
+  (history?.urls || []).forEach((item, index) => {
+    lines.push(`${index + 1}. ${item.file} — dateModified ${item.date_modified}; baseline ${item.baseline.impressions} impr / ${item.baseline.clicks} klik; zdarzenia zmian ${(item.change_events || []).length}`);
   });
   writeText(file, lines.join('\n'));
 }
 
 function writeGscAfterChangeMarkdown(queue, file) {
-  const lines = ['# Popraw SEO — GSC Po Zmianach', '', `Wygenerowano: ${queue?.generated_at || nowWarsawIso()}`, `Status: ${queue?.status || 'AFTER_ACCEPTED_EDIT_ONLY'}`, ''];
+  const lines = ['# Popraw SEO — GSC Po Zmianach', '', `Wygenerowano: ${queue?.generated_at || nowWarsawIso()}`, `Status: ${queue?.status || 'EMPTY_AWAITING_REAL_DEPLOYMENT'}`, ''];
   lines.push('## Zasada');
   lines.push(`- ${queue?.rule || 'Zgłaszamy URL dopiero po realnej zmianie strony.'}`);
   lines.push('- Najpierw akceptacja tekstu, potem HTML, dateModified, sitemap/_site, walidacja, dopiero potem GSC.');
@@ -3431,7 +3703,9 @@ function writeGscAfterChangeMarkdown(queue, file) {
   items.forEach((item) => {
     lines.push(`${item.id}. ${item.file}`);
     lines.push(`   - koszyk: ${item.kind}`);
-    lines.push(`   - zgłoś po edycji: ${item.submit_after_accepted_edit.join(', ') || item.target_url}`);
+    lines.push(`   - wdrożone dateModified: ${item.date_modified}`);
+    lines.push(`   - zgłoś: ${(item.submit_urls || []).join(', ') || item.target_url}`);
+    lines.push(`   - dowód wdrożenia: ${item.deployment_evidence?.status || 'MISSING'}`);
     lines.push(`   - monitoruj: ${item.monitor_after}`);
   });
   lines.push('');
@@ -3444,6 +3718,13 @@ function writeCannibalizationMarkdown(map, file) {
   const lines = ['# Popraw SEO — Kanibalizacja', '', `Wygenerowano: ${map?.generated_at || nowWarsawIso()}`, `Status: ${map?.status || 'NO_STRONG_CONFLICTS'}`, ''];
   lines.push('## Zasada');
   lines.push(`- ${map?.rule || 'Nie wzmacniaj dwóch URL-i pod tę samą intencję.'}`);
+  lines.push('');
+  lines.push('## Trwała Mapa Właścicieli Intencji');
+  lines.push(`- intencje: ${map?.coverage?.intents || 0}; potwierdzone GSC: ${map?.coverage?.confirmed_by_gsc || 0}; wymagają researchu: ${map?.coverage?.research_required || 0}`);
+  (map?.intent_owners || []).forEach((item, index) => {
+    lines.push(`${index + 1}. ${item.intent} → ${item.main_file} (${item.owner_status}; ${item.evidence_source}; ${item.confidence})`);
+    if (item.supporting_files?.length) lines.push(`   - wspierające: ${item.supporting_files.join(', ')}`);
+  });
   lines.push('');
   if (map?.conflicts?.length) {
     lines.push('## Konflikty Z Danych Lokalnych');
@@ -3589,7 +3870,7 @@ function writePoprawSeoInsightsMarkdown(insights, file) {
     lines.push('## GSC Po Zaakceptowanych Zmianach');
     lines.push(`- ${insights.gsc_after_change_queue.rule}`);
     insights.gsc_after_change_queue.items.slice(0, 15).forEach((item) => {
-      lines.push(`- ${item.id}: ${item.submit_after_accepted_edit.join(', ') || item.target_url}`);
+      lines.push(`- ${item.id}: ${(item.submit_urls || []).join(', ') || item.target_url}`);
     });
     lines.push('');
   }
@@ -3728,6 +4009,10 @@ function escapeHtml(value) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+function escapeRegex(value) {
+  return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function updateModifiedDate(html) {
@@ -3888,7 +4173,11 @@ if (require.main === module) {
 
 module.exports = {
   buildBroadSeoConclusions,
+  buildCannibalizationMap,
+  buildGscAfterChangeQueue,
   buildSeoApprovalWave,
+  buildSeoWorkHistory,
+  deploymentEvidenceForArticle,
   estimatedTrafficGain,
   isNoindexSeoFile,
   metricDelta,

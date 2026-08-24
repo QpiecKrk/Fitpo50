@@ -19,6 +19,16 @@ npm run gsc:auto
 
 Kontrakt blokuje raport, jeśli dane mają ponad 72 godziny, końcowa data zakresu jest starsza niż 3 dni, pliki nie pochodzą z jednego cohortu albo okna 7/28/90 są niespójne.
 
+## Kontrakt `popraw-seo`
+
+- Każdy indeksowalny `BlogPosting` trafia dokładnie do jednego koszyka: `BOOST`, `ROKUJE`, `NAPRAWA` albo `MONITORING`.
+- Cooldown nie usuwa URL-a. Świeżo zmieniona strona trafia do `MONITORING` z baseline i checkpointami 7/14/28 dni.
+- Strona bez wyświetleń dostaje diagnozę indeksacji oraz konkretny plan odkrywania; brak query nie oznacza pominięcia.
+- Pełna historia wszystkich URL-i, trwała mapa właścicieli intencji i kolejka GSC są zapisywane poza repo w `~/Downloads/fitpo50-seo-state`.
+- Do aktywnej kolejki GSC trafia wyłącznie realna zmiana potwierdzona przez nowe `dateModified`, source HTML, `_site`, `sitemap.xml` oraz PDF w obu lokalizacjach.
+- Raport końcowy musi spełniać: `article_inventory = assigned_actions`, `omitted_articles = 0` oraz suma czterech koszyków równa inventory.
+- Nadrzędne KPI to liczba artykułów z wyświetleniami i liczba artykułów z kliknięciami; oceny techniczne służą do wyboru działania.
+
 ## Pelny automat (bez CSV) - GSC API
 
 Dostepny jest tez raport API (bez recznego eksportu):
