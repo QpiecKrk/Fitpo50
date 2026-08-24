@@ -3,6 +3,8 @@
 const { spawnSync } = require('child_process');
 
 const COMMANDS = {
+  'prepare-json': 'scripts/article-json-workbench.js',
+  publish: 'scripts/article-pipeline.js',
   import: 'scripts/article-pipeline.js',
   create: 'scripts/create-article-from-template.js',
   preflight: 'scripts/article-preflight.js',
@@ -16,7 +18,9 @@ function printHelp() {
   console.log(`FitPo50 article manager
 
 Usage:
-  node scripts/article-manager.js import --file <article.fitpo50.json> --category <ruch|jedzenie|zdrowie|ciekawe>
+  node scripts/article-manager.js prepare-json --file <draft.fitpo50.json>
+  node scripts/article-manager.js publish --file <CONTENT_READY.fitpo50.json> --category <ruch|jedzenie|zdrowie|ciekawe>
+  node scripts/article-manager.js import --file <CONTENT_READY.fitpo50.json> --category <...>  (alias publish)
   node scripts/article-manager.js create --slug <slug> --title "..." --category <...> --description "..."
   node scripts/article-manager.js preflight --file <article.fitpo50.json> --assets-dir <dir>
   node scripts/article-manager.js fix-json --file <article.fitpo50.json> --write true
@@ -25,7 +29,7 @@ Usage:
   node scripts/article-manager.js final --file <article.fitpo50.json> --assets-dir <dir>
 
 Default command:
-  import
+  prepare-json
 `);
 }
 
@@ -33,7 +37,7 @@ function resolve(argv) {
   const first = String(argv[0] || '').trim();
   if (first === '--help' || first === '-h' || first === 'help') return { help: true };
   if (COMMANDS[first]) return { command: first, args: argv.slice(1) };
-  return { command: 'import', args: argv };
+  return { command: 'prepare-json', args: argv };
 }
 
 function main() {
@@ -52,9 +56,13 @@ function main() {
   process.exit(Number(result.status || 0));
 }
 
-try {
-  main();
-} catch (err) {
-  console.error(`[FAIL] article-manager -> ${err.message || err}`);
-  process.exit(1);
+if (require.main === module) {
+  try {
+    main();
+  } catch (err) {
+    console.error(`[FAIL] article-manager -> ${err.message || err}`);
+    process.exit(1);
+  }
 }
+
+module.exports = { COMMANDS, resolve };

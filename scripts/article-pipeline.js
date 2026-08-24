@@ -4,6 +4,13 @@ const { spawnSync, spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
+const {
+  cleanupPreparedArtifact,
+  inspectPreparedArtifact,
+  reportPathForJson,
+  safeSlug,
+  sha256File,
+} = require('./lib/article-json-artifact');
 
 let tempWorkingCopy = '';
 const PUBLISHED_LOG_PATH = path.join(process.cwd(), 'data', 'reports', 'published-articles-log.json');
@@ -176,42 +183,44 @@ function detectSlug(parsed, inputPath) {
   return fallback;
 }
 
-function safeSlug(value) {
-  return String(value || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
-function ensureImportCopy(sourcePath, slug) {
+function ensureImportCopy(sourcePath, slug, preparedReport) {
   const importDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-import-'));
   const target = path.join(importDir, `${safeSlug(slug)}.fitpo50.json`);
   fs.copyFileSync(sourcePath, target);
+  fs.writeFileSync(reportPathForJson(target), `${JSON.stringify({
+    ...preparedReport,
+    output_file: target,
+    output_sha256: sha256File(target),
+    pipeline_working_copy: true,
+  }, null, 2)}\n`, 'utf8');
   return target;
 }
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
-    console.log('Usage: node scripts/article-pipeline.js --file <path.fitpo50.json> [--category ciekawe] [--force true]');
+    console.log('Usage: node scripts/article-pipeline.js --file <CONTENT_READY.fitpo50.json> [--category ciekawe] [--force true|false]');
     process.exit(1);
   }
 
   const root = process.cwd();
   const input = path.resolve(root, args.file);
   if (!fs.existsSync(input)) throw new Error(`Nie znaleziono pliku: ${input}`);
+  const prepared = inspectPreparedArtifact(input, root);
+  if (!prepared.ok) {
+    throw new Error(`Publikacja wymaga niezmienionego artefaktu CONTENT_READY:\n- ${prepared.errors.join('\n- ')}\nNajpierw uruchom article:prepare-json.`);
+  }
   const parsedInput = parseJsonWithDiagnostics(input);
 
   const category = args.category ? String(args.category) : '';
-  const force = boolOpt(args.force, true);
+  const force = boolOpt(args.force, false);
   const parallelTails = boolOpt(args['parallel-tails'], true);
   const assetsDir = args['assets-dir'] ? path.resolve(root, args['assets-dir']) : path.dirname(input);
   const slug = detectSlug(parsedInput, input);
-  const workingCopy = ensureImportCopy(input, slug);
+  if (prepared.html_exists && !force) {
+    throw new Error(`Slug ${prepared.slug} już istnieje jako ${prepared.html_path}. Publikacja zatrzymana (force=false).`);
+  }
+  const workingCopy = ensureImportCopy(input, slug, prepared.report);
   tempWorkingCopy = workingCopy;
   console.log(`[INFO] Source JSON: ${input}`);
   console.log(`[INFO] Working copy JSON: ${workingCopy}`);
@@ -220,11 +229,7 @@ async function main() {
   const common = ['scripts/import-article.js', '--file', workingCopy, '--faq-strict', 'true'];
   if (category) common.push('--category', category);
 
-  run('Raw JSON parse gate (input)', 'node', ['scripts/fix-fitpo50-json.js', '--file', input, '--write', 'false', '--check', 'true', '--allow-outside-repo', 'true']);
-  run('JSON auto-fix (working copy)', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingCopy, '--write', 'true', '--allow-outside-repo', 'true']);
-  run('E-E-A-T citation enhancer (best effort)', 'node', ['scripts/eeat-citation-enhancer.js', '--file', workingCopy, '--write', 'true', '--strict', 'false']);
-  run('JSON strict autofix (links/FAQ/QA/title)', 'node', ['scripts/json-autofix-strict.js', '--file', workingCopy, '--map', 'data/internal-link-map.json']);
-  run('JSON gate (single file)', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
+  run('CONTENT_READY integrity gate', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
   run('Article preflight (working copy)', 'node', ['scripts/article-preflight.js', '--file', workingCopy, '--assets-dir', assetsDir]);
   run('Prepare article assets (hero + sekcje)', 'node', ['scripts/prepare-article-assets.js', '--file', workingCopy, '--from', assetsDir]);
   run('Precheck (strict FAQ)', 'node', [...common, '--precheck', 'true']);
@@ -259,9 +264,14 @@ async function main() {
   run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
   registerPublishedArticle(slug);
 
+  const artifactCleanup = cleanupPreparedArtifact(input);
+  artifactCleanup.removed.forEach((file) => console.log(`[CLEANUP] Usunięto opublikowany artefakt JSON: ${file}`));
+  if (artifactCleanup.missing.length) {
+    console.warn(`[WARN] Nie znaleziono wszystkich plików artefaktu do usunięcia: ${artifactCleanup.missing.join(', ')}`);
+  }
   console.log('\n[PASS] Article pipeline completed.');
   appendTimingReport('article-pipeline', stepTimings);
-  return { workingCopy };
+  return { workingCopy, artifactCleanup };
 }
 
 main()

@@ -88,6 +88,18 @@ albo hurtowo:
 - sekcja "Nowy artykuł" na `index.html` wskazuje ten wpis.
 - Po publikacji nie zostawiaj w repo roboczego JSON-a z `data/import/*.fitpo50.json`, jeśli finalny HTML jest gotowy i JSON nie jest potrzebny do produkcji.
 
+## 7a. Bezpieczne przyjęcie JSON-u
+- JSON od autora lub modelu jest zawsze statusem `DRAFT`, nigdy gotowym artykułem.
+- Korekta i publikacja są dwoma osobnymi poleceniami:
+  1. `npm run article:prepare-json --file="<draft.fitpo50.json>"`
+  2. po otrzymaniu statusu `CONTENT_READY`: `npm run article:publish --file="<gotowy.fitpo50.json>"`
+- Korekta nie tworzy ani nie modyfikuje HTML. Zapisuje nowy, trwały JSON oraz raport `.fitpo50.report.json` i `.fitpo50.report.md` z pełną listą zmian.
+- Statusy procesu to: `DRAFT`, `CONTENT_READY`, `BLOCKED`.
+- Domyślne `force=false` blokuje kolizję z istniejącym slugiem. `--force true` wymaga świadomego podania i służy wyłącznie kontrolowanej aktualizacji.
+- Publikator przyjmuje tylko artefakt `CONTENT_READY`; sprawdza powiązany raport i SHA-256, więc ręczna zmiana JSON-u po korekcie blokuje import.
+- Plik wejściowy pozostaje bez zmian. Kolejne wyniki dostają wersje `-r2`, `-r3` itd.; narzędzie nie nadpisuje ani nie usuwa jedynej poprawionej wersji.
+- Po pełnej publikacji zakończonej wszystkimi walidacjami pipeline usuwa wykorzystany JSON `CONTENT_READY` oraz oba jego raporty. Przy błędzie lub `BLOCKED` zachowuje je do dalszej naprawy.
+
 ## 8. Bramka jakości (fail conditions)
 Artykuł nie przechodzi, jeśli:
 - ma inline style,

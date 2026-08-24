@@ -1,0 +1,161 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+const { spawnSync } = require('node:child_process');
+
+const {
+  STATUSES,
+  cleanupPreparedArtifact,
+  inspectPreparedArtifact,
+  reportPathForJson,
+  sha256File,
+} = require('../scripts/lib/article-json-artifact');
+const { collectChanges } = require('../scripts/article-json-workbench');
+const { resolve } = require('../scripts/article-manager');
+
+const REPO = path.resolve(__dirname, '..');
+
+function withTempDir(fn) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-json-test-'));
+  try {
+    return fn(dir);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+test('status lifecycle uses only DRAFT, CONTENT_READY and BLOCKED', () => {
+  assert.deepEqual(Object.values(STATUSES), ['DRAFT', 'CONTENT_READY', 'BLOCKED']);
+});
+
+test('article manager defaults to JSON preparation, not publishing', () => {
+  assert.deepEqual(resolve(['--file', 'draft.json']), {
+    command: 'prepare-json',
+    args: ['--file', 'draft.json'],
+  });
+  assert.equal(resolve(['publish', '--file', 'ready.json']).command, 'publish');
+});
+
+test('change report records additions, replacements and removals with JSON paths', () => {
+  const changes = collectChanges(
+    { title: 'A', old: true, sections: [{ heading: 'H2' }] },
+    { title: 'B', sections: [{ heading: 'H2', body: 'Treść' }] },
+  );
+  assert.deepEqual(changes.map((item) => [item.path, item.operation]), [
+    ['$.old', 'REMOVE'],
+    ['$.sections[0].body', 'ADD'],
+    ['$.title', 'REPLACE'],
+  ]);
+});
+
+test('prepared artifact is rejected after any post-review JSON change', () => withTempDir((dir) => {
+  const file = path.join(dir, 'nowy-artykul.fitpo50.json');
+  fs.writeFileSync(file, '{"slug":"nowy-artykul","title":"Wersja gotowa"}\n');
+  const report = {
+    status: STATUSES.CONTENT_READY,
+    output_file: file,
+    output_sha256: sha256File(file),
+  };
+  fs.writeFileSync(reportPathForJson(file), `${JSON.stringify(report)}\n`);
+  assert.equal(inspectPreparedArtifact(file, REPO).ok, true);
+
+  fs.writeFileSync(file, '{"slug":"nowy-artykul","title":"Zmieniono po kontroli"}\n');
+  const inspected = inspectPreparedArtifact(file, REPO);
+  assert.equal(inspected.ok, false);
+  assert.match(inspected.errors.join(' '), /SHA-256/);
+}));
+
+test('successful-publish cleanup removes only the ready JSON and its two reports', () => withTempDir((dir) => {
+  const file = path.join(dir, 'gotowy.fitpo50.json');
+  const report = reportPathForJson(file);
+  const markdown = file.replace(/\.fitpo50\.json$/i, '.fitpo50.report.md');
+  const unrelated = path.join(dir, 'grafika.webp');
+  for (const target of [file, report, markdown, unrelated]) fs.writeFileSync(target, 'test');
+
+  const result = cleanupPreparedArtifact(file);
+  assert.deepEqual(result.removed.sort(), [file, report, markdown].sort());
+  assert.equal(fs.existsSync(file), false);
+  assert.equal(fs.existsSync(report), false);
+  assert.equal(fs.existsSync(markdown), false);
+  assert.equal(fs.existsSync(unrelated), true);
+}));
+
+test('existing slug produces durable BLOCKED JSON and never touches HTML', () => withTempDir((dir) => {
+  const slug = 'apob-norma-cena-jak-czytac-wynik';
+  const existingHtml = path.join(REPO, `${slug}.html`);
+  assert.equal(fs.existsSync(existingHtml), true, 'fixture HTML must exist');
+  const htmlHashBefore = sha256File(existingHtml);
+  const source = path.join(dir, 'incoming.json');
+  const sourceText = `${JSON.stringify({ slug, title: 'Kontrolowany draft' }, null, 2)}\n`;
+  fs.writeFileSync(source, sourceText);
+  const outputDir = path.join(dir, 'ready');
+  const result = spawnSync('node', [
+    'scripts/article-json-workbench.js',
+    '--file', source,
+    '--output-dir', outputDir,
+  ], { cwd: REPO, encoding: 'utf8' });
+
+  assert.equal(result.status, 2);
+  assert.equal(fs.readFileSync(source, 'utf8'), sourceText);
+  assert.equal(sha256File(existingHtml), htmlHashBefore);
+  const output = path.join(outputDir, `${slug}.fitpo50.json`);
+  assert.equal(fs.existsSync(output), true);
+  const report = JSON.parse(fs.readFileSync(reportPathForJson(output), 'utf8'));
+  assert.equal(report.status, STATUSES.BLOCKED);
+  assert.equal(report.html_created, false);
+  assert.equal(report.source_preserved, true);
+  assert.deepEqual(report.status_history.map((item) => item.status), [STATUSES.DRAFT, STATUSES.BLOCKED]);
+  assert.match(report.blockers.join(' '), /force=false/);
+}));
+
+test('malformed input is retained as durable BLOCKED JSON with a parse report', () => withTempDir((dir) => {
+  const source = path.join(dir, 'uszkodzony-draft.json');
+  const sourceText = '{"slug":"uszkodzony-draft", "sections": [}\n';
+  fs.writeFileSync(source, sourceText);
+  const outputDir = path.join(dir, 'ready');
+  const result = spawnSync('node', [
+    'scripts/article-json-workbench.js',
+    '--file', source,
+    '--output-dir', outputDir,
+  ], { cwd: REPO, encoding: 'utf8' });
+
+  assert.equal(result.status, 2);
+  const output = path.join(outputDir, 'uszkodzony-draft.fitpo50.json');
+  assert.equal(fs.readFileSync(output, 'utf8'), sourceText);
+  const report = JSON.parse(fs.readFileSync(reportPathForJson(output), 'utf8'));
+  assert.equal(report.status, STATUSES.BLOCKED);
+  assert.match(report.blockers.join(' '), /składnia JSON/);
+  assert.equal(report.html_created, false);
+}));
+
+test('publisher rejects raw JSON without a CONTENT_READY report before creating HTML', () => withTempDir((dir) => {
+  const slug = `mechanizm-3-test-${Date.now()}`;
+  const source = path.join(dir, `${slug}.fitpo50.json`);
+  fs.writeFileSync(source, `${JSON.stringify({ slug, title: 'Surowy draft' })}\n`);
+  const html = path.join(REPO, `${slug}.html`);
+  const result = spawnSync('node', ['scripts/article-pipeline.js', '--file', source], {
+    cwd: REPO,
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 1);
+  assert.match(`${result.stdout}\n${result.stderr}`, /CONTENT_READY/);
+  assert.equal(fs.existsSync(html), false);
+}));
+
+test('direct importer cannot bypass CONTENT_READY protection', () => withTempDir((dir) => {
+  const slug = `mechanizm-3-importer-${Date.now()}`;
+  const source = path.join(dir, `${slug}.fitpo50.json`);
+  fs.writeFileSync(source, `${JSON.stringify({ slug, title: 'Surowy draft' })}\n`);
+  const html = path.join(REPO, `${slug}.html`);
+  const result = spawnSync('node', ['scripts/import-article.js', '--file', source, '--publish', 'true'], {
+    cwd: REPO,
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 1);
+  assert.match(`${result.stdout}\n${result.stderr}`, /CONTENT_READY/);
+  assert.equal(fs.existsSync(html), false);
+}));

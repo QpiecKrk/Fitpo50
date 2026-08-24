@@ -24,6 +24,7 @@ const {
 } = require('./lib/categories');
 const https = require('https');
 const { spawnSync } = require('child_process');
+const { inspectPreparedArtifact } = require('./lib/article-json-artifact');
 
 const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
@@ -195,8 +196,8 @@ function printUsage() {
     '  INDEXNOW_KEY                    required for IndexNow submission',
     '  INDEXNOW_KEY_LOCATION           optional full URL to hosted key file',
     '',
-    'Recommended publish command:',
-    '  node scripts/import-article.js --file "...fitpo50.json" --publish true --run-internal-links auto --validate true',
+    'Recommended publish command (requires CONTENT_READY artifact):',
+    '  npm run article:publish --file="...fitpo50.json"',
   ].join('\n'));
 }
 
@@ -2741,6 +2742,13 @@ async function main() {
   }
   if (!resolvedInput.endsWith('.json')) {
     throw new Error('Plik wejściowy musi być JSON (.json / .fitpo50.json).');
+  }
+
+  if (!precheckOnly) {
+    const prepared = inspectPreparedArtifact(resolvedInput, ROOT);
+    if (!prepared.ok) {
+      throw new Error(`Importer wymaga niezmienionego artefaktu CONTENT_READY:\n- ${prepared.errors.join('\n- ')}\nNajpierw uruchom article:prepare-json.`);
+    }
   }
 
   if (!fs.existsSync(TEMPLATE_PATH)) {
