@@ -1,9 +1,9 @@
 # Audyt naprawczy artykułów FitPo50 — paczki bez GSC
 
 - Właściwe artykuły w bibliotece: **96**
-- Artykuły już naprawione pełnym procesem: **74**
-- Artykuły oczekujące na naprawę: **22**
-- Paczki oczekujące: **2**
+- Artykuły już naprawione pełnym procesem: **84**
+- Artykuły oczekujące na naprawę: **12**
+- Paczki oczekujące: **1**
 - Osobno naprawiona strona centrum: `centrum-nadcisnienia-po-50.html`
 
 Komenda wykonawcza: `napraw paczkę N`. Numeracja jest stała i nie może być później przeliczana. Po ukończeniu paczki zmienia się jej status, ale skład pozostaje zapisany.
@@ -88,6 +88,16 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 - `testosteron-po-50-naturalnie-bez-trt.html`
 - `zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html`
 - `mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html`
+- `chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html`
+- `apob-norma-cena-jak-czytac-wynik.html`
+- `bieganie-niszczy-kolana.html`
+- `nordic-walking-jak-zaczac-technika-kije-zdrowie.html`
+- `okulary-do-czytania-trening-akomodacji-oka.html`
+- `komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html`
+- `optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html`
+- `sen-po-50.html`
+- `ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html`
+- `regeneracja-ukladu-nerwowego-co-mowi-nauka.html`
 
 ## Paczka 1 — UKOŃCZONA (10 artykułów, 23.08.2026)
 
@@ -179,7 +189,7 @@ Każda naprawa obejmuje: treść i logikę, źródła, SEO/AEO/GEO/AIO, FAQ/sche
 | 9 | `zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html` | 38 | zsynchronizować widoczne FAQ z FAQPage 1:1; uzupełnić wymiary obrazów; zweryfikować obietnice leczenia lub odmładzania |
 | 10 | `mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html` | 37 | uzupełnić wymiary obrazów; sprawdzić sformułowania absolutne w kontekście źródeł; sprawdzić odsetki i terminy w badaniach źródłowych; zweryfikować mechanizmy biomedyczne akapit po akapicie |
 
-## Paczka 7 — 10 artykułów
+## Paczka 7 — UKOŃCZONA (10 artykułów, 24.08.2026)
 
 | # | Artykuł | Wynik audytu | Najważniejsze obszary naprawy |
 |---:|---|---:|---|

@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T14:18:57Z",
+  "generated_at": "2026-08-24T10:00:00Z",
   "audit_mode": "technical_editorial_without_gsc",
   "command_contract": "napraw paczke N",
   "immutable_numbering": true,
   "quality_gate": "content_sources_seo_aeo_geo_aio_faq_schema_links_media_pdf_dates_sitemap_site_validators",
   "totals": {
     "article_inventory": 96,
-    "repaired_articles": 74,
-    "pending_articles": 22,
-    "pending_batches": 2,
+    "repaired_articles": 84,
+    "pending_articles": 12,
+    "pending_batches": 1,
     "separately_repaired_non_article_pages": 1
   },
   "separately_repaired_non_article_pages": [
@@ -89,7 +89,17 @@
     "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html",
     "testosteron-po-50-naturalnie-bez-trt.html",
     "zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html",
-    "mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html"
+    "mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html",
+    "chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html",
+    "apob-norma-cena-jak-czytac-wynik.html",
+    "bieganie-niszczy-kolana.html",
+    "nordic-walking-jak-zaczac-technika-kije-zdrowie.html",
+    "okulary-do-czytania-trening-akomodacji-oka.html",
+    "komorki-zombie-skora-starzenie-po-50-senoliza-abt-263.html",
+    "optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html",
+    "sen-po-50.html",
+    "ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html",
+    "regeneracja-ukladu-nerwowego-co-mowi-nauka.html"
   ],
   "batches": [
     {
@@ -2234,7 +2244,7 @@
     },
     {
       "id": 7,
-      "status": "PENDING",
+      "status": "COMPLETE",
       "article_count": 10,
       "articles": [
         {
@@ -2553,7 +2563,8 @@
             }
           }
         }
-      ]
+      ],
+      "completed_at": "2026-08-24T10:00:00Z"
     },
     {
       "id": 8,

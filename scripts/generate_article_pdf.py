@@ -129,6 +129,10 @@ def add_image(
         pdf.multi_cell(0, 4, caption, align="C")
         pdf.set_font("Arial", size=11)
         pdf.set_text_color(0, 0, 0)
+    # fpdf2 may leave the horizontal cursor at the right edge after a centered
+    # caption. Reset it explicitly so the next heading cannot start outside
+    # the printable area when the inline image is narrower than the page.
+    pdf.set_x(pdf.l_margin)
     pdf.ln(2)
 
 
