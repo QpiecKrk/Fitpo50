@@ -180,6 +180,17 @@
 - Backup z hashami pozostaje aktywny do końca walidacji po promocji. Błąd cofa wszystkie nadpisane pliki i usuwa wszystkie pliki utworzone przez nieudaną publikację.
 - Dziennik w `.tmp/article-publication-transactions` umożliwia odzyskanie stanu po nagłym przerwaniu procesu; konflikt z niezależną zmianą zatrzymuje automatyczne cofanie.
 - Manifest `data/reports/article-publications/<slug>.json` zapisuje typ publikacji, identyfikator transakcji, listę plików, rozmiary i SHA-256 przed/po.
+
+### Aktualizacja systemowa 2026-08-24 — monitoring po publikacji i test końcowy
+
+- Publikacja `CREATE` i `UPDATE` atomowo zapisuje historię w `data/reports/published-articles-log.json` (`publication_events` zachowuje kolejne wdrożenia URL-a) oraz kolejkę `data/reports/gsc-after-publication-queue.json` i `.txt`. Brak któregoś z tych artefaktów, baseline albo checkpointów 7/14/28 blokuje zatwierdzenie transakcji.
+- Baseline jest pobierany z pełnej warstwy stron GSC dla kroczącego okna 28 dni. Brak świeżego GSC nie zatrzymuje publikacji, ale zapisuje jawny status `GSC_INPUT_UNAVAILABLE`; brak wiersza URL-a zapisuje `NO_GSC_ROW_AT_PUBLICATION`, nie zero udające pomiar.
+- Kolejka zawiera kanoniczny target, sitemapę i wyłącznie strony źródłowe, które po publikacji faktycznie zawierają link do targetu. Propozycja przyszłego linku nie może udawać wykonanego linkowania.
+- Każdy udany `npm run gsc:auto` aktualizuje poza repo raport `post-publication-monitor.json` i `.md`: pierwsze wyświetlenie, pierwsze kliknięcie, indeksację bez wyświetleń, zmianę pozycji i CTR oraz snapshoty należne po 7/14/28 dniach. Zachowuje to zasadę `GSC = READ-ONLY REPORT MODE` wobec repozytorium.
+- Różnice metryk są sygnałami z kroczącego okna 28 dni, a nie czystą atrybucją wpływu pojedynczej publikacji.
+- Końcowa macierz regresji znajduje się w `tests/fixtures/pipeline-invalid/`; komenda `npm run test:pipeline-blockers` musi potwierdzić osiem blokad: fałszywe źródło, generyczny quick answer, sztuczne FAQ, nieistniejący link, brak obrazów, złą tabelę, wadliwy PDF i kolizję slugu.
+- Liczniki migracji automatyzacji nie są już ręcznie wpisywane. `fitpo50-doctor` wyprowadza je z historii publikacji, stanu `origin/main` i zdarzeń udanych generacji GSC w lokalnym katalogu raportowym.
+- Pełny opis operacyjny: `docs/post-publication-monitoring.md`.
 - IndexNow oraz usunięcie artefaktu `CONTENT_READY` następują dopiero po `COMMITTED`. Brak wpisu w listingach, sitemapie, `llms`, indeksie, brak PDF/media albo rozjazd source/`_site` blokuje zakończenie.
 
 ### Aktualizacja systemowa 2026-08-23 — pełne pokrycie i wnioski globalne

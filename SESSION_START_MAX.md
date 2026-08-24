@@ -198,6 +198,9 @@ Tryb pracy:
   - `ROKUJE` wymaga realnego sygnalu: frazy/tematu, wyswietlen, pozycji albo klikniec; nie wybieraj strony na podstawie samego tytulu albo pojedynczej przypadkowej pozycji,
   - `popraw-seo` ma pokazywac historie/cooldown po ostatnim `dateModified`, baseline GSC i checkpointy 7/14/28 dni, zeby nie poprawiac w kolko tych samych URL-i bez oceny efektu,
   - `popraw-seo` ma tworzyc kolejke `GSC po zmianach`: URL targetu i sensowne strony zrodlowe zglaszane dopiero po zaakceptowanej edycji, aktualizacji `dateModified`, sitemap, `_site` i walidacji,
+  - kazda nowa publikacja lub aktualizacja przez `article-pipeline` atomowo zapisuje `data/reports/published-articles-log.json` oraz `data/reports/gsc-after-publication-queue.{json,txt}`; wpis zawiera baseline GSC z dnia publikacji, target, faktycznie zmienione strony zrodlowe i terminy checkpointow 7/14/28,
+  - kazdy udany przebieg `GSC` uruchamia `scripts/post-publication-monitor.js` i zapisuje poza repo w `~/Downloads/gsc-auto-input/post-publication-monitor.{json,md}` pierwsze wyświetlenie, pierwsze kliknięcie, indeksację bez wyświetleń oraz zmiany kliknięć, wyświetleń, CTR i pozycji; `GSC` nadal nie edytuje repo,
+  - metryki strony w tym monitoringu pochodza z kroczacego okna 28 dni, dlatego sa sygnalem kierunkowym po publikacji, a nie dowodem wylacznej atrybucji,
   - `popraw-seo` ma wskazywac ryzyka kanibalizacji: glowny URL dla intencji, URL-e wspierajace linkiem i frazy, ktorych nie wzmacniamy rownolegle w title/meta,
   - uzytkownik zatwierdza konkretne ID, np. `popraw BOOST 1`, `popraw ROKUJE 1` albo `popraw BOOST 1 NAPRAWA 2`; jesli poda tylko numery i istnieje ryzyko pomylenia koszykow, agent musi doprecyzowac przed edycja,
   - `popraw-seo` obejmuje tez moduly AIO/GEO: `ai-visibility-test`, `entities`, `structured-score`, `quick-answer-score`, `gsc-generative-ai`, `post-deploy-kpi`, `originality-score`, `topical-map`, `llms-check` i `perplexity-monitor`,
@@ -210,6 +213,7 @@ Tryb pracy:
   - robocze huby regeneruj komenda `npm run preview:hubs`; generator to `scripts/build-preview-hubs.js`, a wspolny styl to `assets/topic-hub.css`,
   - stare skrypty zostawiaj jako aliasy kompatybilnosci do czasu kilku poprawnych publikacji i pushy; migracja jest dwuetapowa: najpierw aliasy do nowych centrow, dopiero po stabilizacji usuwanie aliasow,
   - aliasow nie wolno usuwac, jesli odwoluje sie do nich `package.json`, hook, pipeline, dokumentacja, Hostinger albo instrukcje agentow; `doctor` ma pilnowac dat i licznikow migracji.
+  - po zmianie mechanizmow publikacji uruchom `npm run test:pipeline-blockers`; zestaw ośmiu błędnych fixture JSON musi potwierdzić blokadę fałszywych źródeł, generycznego quick answer, sztucznego FAQ, nieistniejących linków, brakujących obrazów, wadliwej tabeli, uszkodzonego PDF i kolizji slugu.
 - skrot `GSC` w rozmowie oznacza domyslnie:
   - sprawdz ostatni issue z raportem GSC na GitHub,
   - przeczytaj issue `SEO/AEO: Poniedziałkowy raport GSC`,

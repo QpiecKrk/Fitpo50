@@ -1,0 +1,4 @@
+{
+  "expected_blocker": "bad_semantic_table",
+  "sections": [{"title": "Jak czytać wynik?", "paragraphs_html": ["<table><tr><td>Parametr</td><td>Wynik</td></tr><tr><td>ApoB</td><td>95 mg/dl</td></tr></table>"]}]
+}

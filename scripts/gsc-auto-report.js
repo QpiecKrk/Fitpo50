@@ -573,6 +573,43 @@ function runPoprawSeo(workDir, downloadsDir) {
   console.log(`[GSC-AUTO] Wspólny raport popraw-seo: ${reportDir}`);
 }
 
+function runPostPublicationMonitor(workDir) {
+  const res = run(
+    'node',
+    ['scripts/post-publication-monitor.js', '--input-dir', workDir, '--output-dir', workDir],
+    { stdio: 'inherit' },
+  );
+  if (res.status !== 0) throw new Error('post-publication-monitor failed.');
+}
+
+function recordSuccessfulGscRun(workDir, source) {
+  const eventPath = path.join(workDir, 'automation-run-events.json');
+  let payload = { version: 1, events: [] };
+  try {
+    if (fs.existsSync(eventPath)) payload = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
+  } catch (_error) {
+    payload = { version: 1, events: [] };
+  }
+  const manifest = fs.existsSync(path.join(workDir, MANIFEST_NAME))
+    ? JSON.parse(fs.readFileSync(path.join(workDir, MANIFEST_NAME), 'utf8'))
+    : {};
+  const generatedAt = String(manifest.generated_at || new Date().toISOString());
+  const eventId = `gsc:${generatedAt}`;
+  const events = Array.isArray(payload.events) ? payload.events : [];
+  if (!events.some((event) => event.id === eventId)) {
+    events.push({ id: eventId, type: 'gsc_run', status: 'SUCCESS', at: new Date().toISOString(), data_generated_at: generatedAt, source });
+  }
+  payload.version = 1;
+  payload.updated_at = new Date().toISOString();
+  payload.events = events.slice(-200);
+  fs.writeFileSync(eventPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+}
+
+function finishSuccessfulReports(workDir, source) {
+  runPostPublicationMonitor(workDir);
+  recordSuccessfulGscRun(workDir, source);
+}
+
 async function main() {
   loadLocalEnvFromHome();
   const args = parseArgs(process.argv.slice(2));
@@ -588,6 +625,7 @@ async function main() {
       runFullCoverageMap(inputDir, inputDir);
       runSeoAioMachine(inputDir, inputDir);
       runSeoAioWaveProposal(inputDir);
+      finishSuccessfulReports(inputDir, 'gsc_api');
       if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);
       return;
     }
@@ -643,6 +681,7 @@ async function main() {
     runFullCoverageMap(inputDir, inputDir);
     runSeoAioMachine(inputDir, inputDir);
     runSeoAioWaveProposal(inputDir);
+    finishSuccessfulReports(inputDir, sourceLabel || 'imported_csv');
     if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);
     return;
   } catch (freshErr) {

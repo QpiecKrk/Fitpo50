@@ -1,0 +1,8 @@
+{
+  "expected_blocker": "fake_source",
+  "title": "Badanie serca po 50 roku życia",
+  "category": "zdrowie",
+  "sections": [{"paragraphs_html": ["<p>Badanie zmniejsza ryzyko zawału o 20%.</p>"]}],
+  "sources": [{"label": "Nieistniejące źródło", "url": "https://example.com/fake-study", "checked_at": "2026-08-24", "url_status": "broken", "http_status": 404, "evidence_level": "guideline"}],
+  "evidence_claims": [{"claim": "Badanie zmniejsza ryzyko zawału o 20%", "location": "sections[0].paragraphs_html[0]", "claim_type": "medical", "source_urls": ["https://example.com/fake-study"]}]
+}

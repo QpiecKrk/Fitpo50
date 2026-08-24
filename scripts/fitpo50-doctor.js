@@ -51,6 +51,32 @@ function daysUntil(dateText, now) {
   return Math.ceil((target.getTime() - now.getTime()) / 86400000);
 }
 
+function automaticSuccessfulRuns(reminder) {
+  const since = String(reminder.created_at || '1970-01-01');
+  const published = readJsonSafe(path.join(REPORT_DIR, 'published-articles-log.json'));
+  const articlePublications = (published?.items || []).filter((item) => {
+    const date = String(item.last_published_at || item.first_published_at || '').slice(0, 10);
+    return date && date >= since;
+  }).length;
+
+  const remoteCommits = run('git', ['rev-list', '--count', `--since=${since}T00:00:00Z`, 'origin/main']);
+  const gitPushEvidence = remoteCommits.ok ? Number(remoteCommits.stdout || 0) : 0;
+
+  const gscDir = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+  const events = readJsonSafe(path.join(gscDir, 'automation-run-events.json'));
+  const eventIds = new Set((events?.events || [])
+    .filter((event) => event.type === 'gsc_run' && event.status === 'SUCCESS' && String(event.at || '').slice(0, 10) >= since)
+    .map((event) => event.id));
+  const manifest = readJsonSafe(path.join(gscDir, 'gsc-data-manifest.json'));
+  if (String(manifest?.generated_at || '').slice(0, 10) >= since) eventIds.add(`gsc:${manifest.generated_at}`);
+
+  return {
+    article_publications: articlePublications,
+    git_pushes: gitPushEvidence,
+    gsc_runs: eventIds.size,
+  };
+}
+
 function checkAutomationMigrationReminder(nowDate) {
   const reminderPath = path.join(REPORT_DIR, 'automation-migration-reminder.json');
   const reminder = readJsonSafe(reminderPath);
@@ -61,7 +87,9 @@ function checkAutomationMigrationReminder(nowDate) {
   const reviewDays = daysUntil(reminder.review_after, nowDate);
   const cleanupDays = daysUntil(reminder.cleanup_after, nowDate);
   const required = reminder.required_successful_runs || {};
-  const current = reminder.current_successful_runs || {};
+  const current = reminder.counter_mode === 'automatic_evidence'
+    ? automaticSuccessfulRuns(reminder)
+    : (reminder.current_successful_runs || {});
   const missing = Object.keys(required)
     .filter((key) => Number(current[key] || 0) < Number(required[key] || 0))
     .map((key) => `${key}: ${Number(current[key] || 0)}/${Number(required[key] || 0)}`);
@@ -69,7 +97,7 @@ function checkAutomationMigrationReminder(nowDate) {
   const aliasRemovalPhase = reminder.alias_removal_phase || {};
   const aliasStart = aliasPhase.starts_after || 'not scheduled';
   const aliasRemoval = aliasRemovalPhase.earliest_after || 'not scheduled';
-  const migrationMode = `alias phase after ${aliasStart}; alias removal no earlier than ${aliasRemoval}`;
+  const migrationMode = `alias phase after ${aliasStart}; alias removal no earlier than ${aliasRemoval}; counters=${reminder.counter_mode || 'manual'}`;
 
   if (cleanupDays !== null && cleanupDays <= 0) {
     const detail = missing.length

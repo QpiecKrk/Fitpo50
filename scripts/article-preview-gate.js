@@ -57,7 +57,33 @@ function multisetComparison(expected, actual) {
   return { coverage: expected.length ? matched / expected.length : 0, missing };
 }
 
+function validateSemanticTableMarkup(html) {
+  const errors = [];
+  const tables = [...String(html || '').matchAll(/<table\b[^>]*>[\s\S]*?<\/table>/gi)].map((match) => match[0]);
+  tables.forEach((table, index) => {
+    const label = `tabela ${index + 1}`;
+    if (!/<caption\b[^>]*>/i.test(table)) errors.push(`${label}: brak caption`);
+    if (!/<thead\b[^>]*>/i.test(table)) errors.push(`${label}: brak thead`);
+    if (!/<tbody\b[^>]*>/i.test(table)) errors.push(`${label}: brak tbody`);
+    if (!/<th\b[^>]*>/i.test(table)) errors.push(`${label}: brak nagłówków th`);
+    const thead = table.match(/<thead\b[^>]*>([\s\S]*?)<\/thead>/i)?.[1] || '';
+    if (/<th\b(?![^>]*\bscope=["']col["'])[^>]*>/i.test(thead)) errors.push(`${label}: th w thead bez scope=col`);
+    const tbody = table.match(/<tbody\b[^>]*>([\s\S]*?)<\/tbody>/i)?.[1] || '';
+    if (/<th\b(?![^>]*\bscope=["']row["'])[^>]*>/i.test(tbody)) errors.push(`${label}: th w tbody bez scope=row`);
+  });
+  return errors;
+}
+
+function isPdfFile(filePath) {
+  if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile() || fs.statSync(filePath).size < 8) return false;
+  return fs.readFileSync(filePath).subarray(0, 5).toString('ascii') === '%PDF-';
+}
+
 function validatePdfStructure(pdf, expectedText, expectedImages, renderDir, errors) {
+  if (!isPdfFile(pdf)) {
+    errors.push('Plik PDF jest pusty, uszkodzony albo nie ma nagłówka %PDF-.');
+    return { pages: 0, coverage: 0, renders: [] };
+  }
   for (const binary of ['pdfinfo', 'pdftotext', 'pdftoppm', 'pdffonts', 'pdfimages', 'magick', 'identify']) {
     if (spawnSync('which', [binary], { stdio: 'ignore' }).status !== 0) errors.push(`Brak narzędzia PDF: ${binary}.`);
   }
@@ -216,21 +242,16 @@ async function main() {
     const tableErrors = [];
     tables.forEach((table, index) => {
       if (!table.closest('.article-table-wrap')) tableErrors.push(`tabela ${index + 1}: brak .article-table-wrap`);
-      if (!table.querySelector(':scope > caption')) tableErrors.push(`tabela ${index + 1}: brak caption`);
-      if (!table.querySelector(':scope > thead')) tableErrors.push(`tabela ${index + 1}: brak thead`);
-      if (!table.querySelector(':scope > tbody')) tableErrors.push(`tabela ${index + 1}: brak tbody`);
-      if (!table.querySelector('th')) tableErrors.push(`tabela ${index + 1}: brak nagłówków th`);
-      table.querySelectorAll('thead th').forEach((th) => { if (th.getAttribute('scope') !== 'col') tableErrors.push(`tabela ${index + 1}: th w thead bez scope=col`); });
-      table.querySelectorAll('tbody th').forEach((th) => { if (th.getAttribute('scope') !== 'row') tableErrors.push(`tabela ${index + 1}: th w tbody bez scope=row`); });
     });
     const article = document.querySelector('article.article-content')?.cloneNode(true);
     article?.querySelectorAll('.share-article-section, script, style, button').forEach((node) => node.remove());
     const title = document.querySelector('h1.article-header__title')?.textContent || '';
     const textChunks = article ? [...article.querySelectorAll('h1, h2, h3, h4, p, li, caption, th, td, figcaption')].map((node) => node.textContent || '') : [];
     const expectedImages = (document.querySelector('section.article-intro-grid .article-hero img') ? 1 : 0) + document.querySelectorAll('article.article-content figure img').length;
-    return { tables: tables.length, tableErrors, text: `${title} ${textChunks.join(' ')}`, expectedImages };
+    return { tables: tables.length, tableErrors, tableMarkup: tables.map((table) => table.outerHTML).join('\n'), text: `${title} ${textChunks.join(' ')}`, expectedImages };
   });
   semantic.tableErrors.forEach((error) => errors.push(error));
+  validateSemanticTableMarkup(semantic.tableMarkup).forEach((error) => errors.push(error));
   await browser.close();
 
   const pdfResult = validatePdfStructure(pdf, semantic.text, semantic.expectedImages, path.join(previewDir, 'pdf-pages'), errors);
@@ -279,4 +300,13 @@ if (require.main === module) {
   });
 }
 
-module.exports = { inspectHtml, multisetComparison, multisetCoverage, normalizeWords, parseArgs, validatePdfStructure };
+module.exports = {
+  inspectHtml,
+  isPdfFile,
+  multisetComparison,
+  multisetCoverage,
+  normalizeWords,
+  parseArgs,
+  validatePdfStructure,
+  validateSemanticTableMarkup,
+};

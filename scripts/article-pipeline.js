@@ -22,11 +22,14 @@ const {
   validatePublicationSet,
   writePublicationManifest,
 } = require('./lib/article-staging');
+const {
+  defaultGscInputDir,
+  preparePublicationMonitoring,
+} = require('./lib/post-publication-monitor');
 const { submitIndexNow } = require('./import-article');
 
 let tempWorkingCopy = '';
 let transactionalOuter = false;
-const PUBLISHED_LOG_PATH = path.join(process.cwd(), 'data', 'reports', 'published-articles-log.json');
 const TIMINGS_PATH = process.env.FITPO50_PIPELINE_TIMINGS_PATH
   ? path.resolve(process.env.FITPO50_PIPELINE_TIMINGS_PATH)
   : path.join(process.cwd(), 'data', 'reports', 'local', 'pipeline-timings.json');
@@ -145,55 +148,6 @@ function runPostPromotionValidation(root, slug, article) {
   validatePublicationSet(root, article, { requireManifest: true });
 }
 
-function registerPublishedArticle(slug) {
-  const normalizedSlug = safeSlug(slug);
-  if (!normalizedSlug) return;
-  const nowIso = new Date().toISOString();
-  const url = `https://fitpo50.pl/${normalizedSlug}.html`;
-  const emptyState = {
-    version: 1,
-    updated_at: nowIso,
-    items: [],
-  };
-  let state = emptyState;
-  if (fs.existsSync(PUBLISHED_LOG_PATH)) {
-    try {
-      const parsed = JSON.parse(fs.readFileSync(PUBLISHED_LOG_PATH, 'utf8'));
-      if (parsed && typeof parsed === 'object') {
-        state = {
-          version: 1,
-          updated_at: String(parsed.updated_at || nowIso),
-          items: Array.isArray(parsed.items) ? parsed.items : [],
-        };
-      }
-    } catch (_err) {
-      state = emptyState;
-    }
-  }
-  const bySlug = new Map();
-  for (const it of state.items) {
-    const key = safeSlug(String(it.slug || ''));
-    if (!key) continue;
-    bySlug.set(key, it);
-  }
-  const prev = bySlug.get(normalizedSlug);
-  bySlug.set(normalizedSlug, {
-    slug: normalizedSlug,
-    url,
-    first_published_at: prev?.first_published_at || nowIso,
-    last_published_at: nowIso,
-    status: 'pending',
-    last_checked_at: prev?.last_checked_at || '',
-    last_crawl_time: prev?.last_crawl_time || '',
-    notes: prev?.notes || '',
-  });
-  state.items = [...bySlug.values()].sort((a, b) => String(b.last_published_at || '').localeCompare(String(a.last_published_at || '')));
-  state.updated_at = nowIso;
-  fs.mkdirSync(path.dirname(PUBLISHED_LOG_PATH), { recursive: true });
-  fs.writeFileSync(PUBLISHED_LOG_PATH, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
-  console.log(`[INFO] Published log updated: ${path.relative(process.cwd(), PUBLISHED_LOG_PATH)}`);
-}
-
 async function submitIndexNowAfterPromotion(slug, enabled) {
   if (!enabled) return 'wyłączone';
   const key = String(process.env.INDEXNOW_KEY || '').trim();
@@ -288,6 +242,14 @@ async function main() {
     try {
       runInStaging(stageRoot, [...process.argv.slice(2), '--file', input, '--assets-dir', assetsDir]);
       runPreviewGate(stageRoot, slug);
+      const monitoring = preparePublicationMonitoring({
+        stageRoot,
+        article: parsedInput,
+        operation,
+        transactionId,
+        gscInputDir: defaultGscInputDir(),
+      });
+      console.log(`[GSC AFTER PUBLICATION] Baseline: ${monitoring.item.baseline.status}; URL-i źródłowe: ${monitoring.queueItem.source_urls.length}.`);
       validatePublicationSet(stageRoot, parsedInput);
       const manifest = writePublicationManifest({
         stageRoot,
@@ -364,7 +326,6 @@ async function main() {
     run('NEWS integrity', 'node', ['scripts/news-integrity-check.js']);
   }
   run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
-  registerPublishedArticle(slug);
   console.log('\n[PREVIEW BUILD PASS] Wewnętrzny pipeline stagingowy zakończony; repozytorium publiczne nie zostało zmienione.');
   appendTimingReport('article-pipeline-staging-internal', stepTimings);
   return { workingCopy, artifactCleanup: null };

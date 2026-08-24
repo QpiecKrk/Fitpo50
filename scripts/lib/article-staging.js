@@ -88,6 +88,8 @@ function promotionCandidates(article) {
     path.join('data', 'reports', 'article-preview', `${slug}.json`),
     path.join('data', 'reports', 'article-preview', `${slug}.md`),
     path.join('data', 'reports', 'published-articles-log.json'),
+    path.join('data', 'reports', 'gsc-after-publication-queue.json'),
+    path.join('data', 'reports', 'gsc-after-publication-queue.txt'),
   ];
   const mirrored = [
     `_site/${slug}.html`,
@@ -164,6 +166,8 @@ function validatePublicationSet(root, article, { requireManifest = false } = {})
     `data/reports/article-preview/${slug}.json`,
     `data/reports/article-preview/${slug}.md`,
     'data/reports/published-articles-log.json',
+    'data/reports/gsc-after-publication-queue.json',
+    'data/reports/gsc-after-publication-queue.txt',
     ...mediaPaths(article),
   ];
   if (requireManifest) required.push(publicationManifestPath(slug));
@@ -202,6 +206,22 @@ function validatePublicationSet(root, article, { requireManifest = false } = {})
   const searchIndex = JSON.parse(fs.readFileSync(path.join(root, 'assets', 'data', 'search-index.json'), 'utf8'));
   if (!Array.isArray(searchIndex) || !searchIndex.some((entry) => entry && (entry.slug === expectedHref || entry.url === expectedHref))) {
     throw new Error(`Indeks wyszukiwarki nie zawiera ${expectedHref}.`);
+  }
+  const publicationHistory = JSON.parse(fs.readFileSync(path.join(root, 'data/reports/published-articles-log.json'), 'utf8'));
+  const historyItem = (publicationHistory.items || []).find((entry) => entry.slug === slug);
+  if (!historyItem?.baseline || !historyItem?.checkpoints?.day_7 || !historyItem?.checkpoints?.day_14 || !historyItem?.checkpoints?.day_28) {
+    throw new Error(`Historia publikacji ${slug} nie zawiera baseline i checkpointów 7/14/28.`);
+  }
+  if (!Array.isArray(historyItem.publication_events) || !historyItem.publication_events.some((event) => event.event_id === historyItem.transaction_id)) {
+    throw new Error(`Historia publikacji ${slug} nie zawiera zdarzenia bieżącej transakcji.`);
+  }
+  const gscQueue = JSON.parse(fs.readFileSync(path.join(root, 'data/reports/gsc-after-publication-queue.json'), 'utf8'));
+  const queueItem = (gscQueue.items || []).find((entry) => entry.slug === slug);
+  if (!queueItem || queueItem.target_url !== `https://fitpo50.pl/${slug}.html`) {
+    throw new Error(`Kolejka GSC po publikacji nie zawiera docelowego URL-a ${slug}.`);
+  }
+  if (!Array.isArray(queueItem.source_urls) || queueItem.source_urls.length < 1) {
+    throw new Error(`Kolejka GSC po publikacji nie zawiera stron źródłowych dla ${slug}.`);
   }
   return { slug, categoryFile, files: [...new Set(required)], exactPairs };
 }
@@ -243,6 +263,7 @@ function writePublicationManifest({ stageRoot, article, candidates, baseline, tr
       'PREDEPLOY_STAGING',
       'PREVIEW_READY_DESKTOP_MOBILE_PDF',
       'POST_PROMOTION_VALIDATION',
+      'POST_PUBLICATION_BASELINE_AND_GSC_QUEUE',
     ],
     files,
     files_count: files.length,

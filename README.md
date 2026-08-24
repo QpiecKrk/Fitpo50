@@ -131,6 +131,8 @@ Ważne zasady operacyjne:
 - model zewnętrzny deklaruje intencję i frazy, ale nie zgaduje linków FitPo50 ani członkostwa w centrum,
 - lokalny etap architektury wymaga 4 istniejących celów i naturalnych anchorów; propozycja centrum zawsze czeka na akceptację,
 - publikacja atomowo obejmuje artykuł, media, PDF, listingi, sitemap, `llms`, indeks wyszukiwarki i `_site`; jej wynik zapisuje `data/reports/article-publications/<slug>.json`,
+- ta sama transakcja zapisuje baseline GSC, checkpointy 7/14/28 oraz kolejkę targetu i stron źródłowych; kolejne przebiegi GSC tworzą poza repo raport `post-publication-monitor.{json,md}`,
+- `npm run test:pipeline-blockers` sprawdza końcową macierz ośmiu błędnych JSON-ów i artefaktów, które muszą zatrzymać publikację,
 - `CREATE` nie wymaga `--force`, natomiast `UPDATE` istniejącego slugu jest dozwolone wyłącznie z jawnym `--force true`,
 - `article-sync-pro.js` działa w trybie fail-fast i nie ma miękkich fallbacków dla polityki,
 - przy zmianach SEO i listingów preferowany workflow to najpierw `--dry-run`, a dopiero potem zapis:

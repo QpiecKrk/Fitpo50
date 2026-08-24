@@ -82,6 +82,9 @@ test('lista promocji obejmuje HTML, PDF, raport i dokładne warianty mediów', (
     'nowy-artykul.html', '_site/nowy-artykul.html', 'assets/pdf/nowy-artykul.pdf',
     'data/reports/article-preview/nowy-artykul.json', 'zdrowie.html',
     'data/reports/article-publications/nowy-artykul.json',
+    'data/reports/published-articles-log.json',
+    'data/reports/gsc-after-publication-queue.json',
+    'data/reports/gsc-after-publication-queue.txt',
     'assets/data/search-index.json', '_site/assets/data/search-index.json',
     'llms-full.txt', '_site/llms-full.txt',
     'assets/nowy-hero.avif', '_site/assets/nowy-hero.avif',
@@ -203,11 +206,19 @@ test('bramka kompletności wymaga listingów, sitemap, indeksu, PDF i par source
   for (const relative of [
     `data/reports/article-preview/${slug}.json`,
     `data/reports/article-preview/${slug}.md`,
-    'data/reports/published-articles-log.json',
   ]) {
     fs.mkdirSync(path.dirname(path.join(root, relative)), { recursive: true });
     fs.writeFileSync(path.join(root, relative), '{}');
   }
+  fs.writeFileSync(path.join(root, 'data/reports/published-articles-log.json'), JSON.stringify({
+    version: 2,
+    items: [{ slug, transaction_id: 'test-transaction', baseline: {}, checkpoints: { day_7: {}, day_14: {}, day_28: {} }, publication_events: [{ event_id: 'test-transaction' }] }],
+  }));
+  fs.writeFileSync(path.join(root, 'data/reports/gsc-after-publication-queue.json'), JSON.stringify({
+    version: 1,
+    items: [{ slug, target_url: `https://fitpo50.pl/${slug}.html`, source_urls: ['https://fitpo50.pl/index.html'] }],
+  }));
+  fs.writeFileSync(path.join(root, 'data/reports/gsc-after-publication-queue.txt'), `https://fitpo50.pl/${slug}.html\n`);
   assert.doesNotThrow(() => validatePublicationSet(root, article));
   fs.rmSync(path.join(root, '_site', 'assets', 'pdf', `${slug}.pdf`));
   assert.throws(() => validatePublicationSet(root, article), /Niepełny zestaw publikacji/);

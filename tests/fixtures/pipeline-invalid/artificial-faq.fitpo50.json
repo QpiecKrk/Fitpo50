@@ -1,0 +1,7 @@
+{
+  "expected_blocker": "artificial_faq",
+  "title": "Badanie laboratoryjne po 50 roku życia",
+  "answer_blocks": [{"question": "Czy wynik badania trzeba omówić z lekarzem — wariant 2?", "answer_html": "<p>Taką decyzję podejmuje się po ocenie wyniku.</p>"}],
+  "faq_research": [{"question": "Czy wynik badania trzeba omówić z lekarzem — wariant 2?", "source_label": "Research redakcyjny", "source_url": "https://pubmed.ncbi.nlm.nih.gov/12345678/", "source_type": "manual_research", "research_note": "Ręczny przegląd intencji.", "checked_at": "2026-08-24", "url_status": "reachable", "http_status": 200}],
+  "sources": []
+}

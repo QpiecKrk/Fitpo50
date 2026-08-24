@@ -8,10 +8,11 @@
     "git_pushes": 3,
     "gsc_runs": 2
   },
-  "current_successful_runs": {
-    "article_publications": 2,
-    "git_pushes": 1,
-    "gsc_runs": 0
+  "counter_mode": "automatic_evidence",
+  "counter_sources": {
+    "article_publications": "data/reports/published-articles-log.json",
+    "git_pushes": "commits present on origin/main since created_at",
+    "gsc_runs": "unique successful GSC data generations in GSC_WORK_DIR/automation-run-events.json, with current manifest as evidence"
   },
   "cleanup_rule": "Migracja jest dwuetapowa: najpierw stare skrypty zamieniaj na cienkie aliasy do nowych centrow sterowania, a dopiero po okresie stabilizacji usuwaj aliasy. Nie wolno usuwac starego silnika, jesli nowe centrum nadal go wywoluje pod spodem.",
   "legacy_candidates": {

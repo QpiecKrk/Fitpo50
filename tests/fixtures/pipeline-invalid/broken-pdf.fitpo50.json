@@ -1,0 +1,5 @@
+{
+  "expected_blocker": "broken_pdf",
+  "slug": "test-uszkodzonego-pdf",
+  "pdf_fixture_content": "TO NIE JEST PLIK PDF"
+}

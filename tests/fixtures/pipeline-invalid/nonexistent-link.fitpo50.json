@@ -1,0 +1,12 @@
+{
+  "expected_blocker": "nonexistent_internal_link",
+  "slug": "test-nieistniejacego-linku",
+  "title": "Jak bezpiecznie zacząć trening siłowy po 50?",
+  "seo_title": "Jak bezpiecznie zacząć trening siłowy po 50?",
+  "lead": "Plan opisuje przygotowanie do treningu siłowego po pięćdziesiątce.",
+  "quick_answer": "Jeśli zaczynasz trening po 50 roku życia, dobierz obciążenie pozwalające zachować 2 powtórzenia w zapasie i przerwij serię, gdy technika ruchu zaczyna się pogarszać; pierwsze tygodnie służą ocenie tolerancji wysiłku, a nie biciu rekordów.",
+  "primary_keyword": "trening siłowy po 50",
+  "search_intent": "how_to",
+  "sections": [{"title": "Jak zacząć?", "paragraphs_html": ["<p>Przeczytaj także <a href=\"nie-istnieje.html\">plan treningowy po 50</a>, zanim wybierzesz obciążenie.</p>"]}],
+  "internal_link_plan": [{"target": "nie-istnieje.html", "anchor": "plan treningowy po 50", "location": "sections[0].paragraphs_html[0]"}]
+}
