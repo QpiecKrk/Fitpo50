@@ -10,6 +10,16 @@ const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const GSC_SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
 const INSPECT_ENDPOINT = 'https://searchconsole.googleapis.com/v1/urlInspection/index:inspect';
 
+async function fetchWithTimeout(url, options = {}, timeoutMs = 30000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 function parseArgs(argv) {
   const out = {
     reportJson: path.join(ROOT, 'data', 'reports', 'gsc-indexing-watchdog.json'),
@@ -121,7 +131,7 @@ async function getAccessToken(sa) {
     grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
     assertion,
   });
-  const res = await fetch(TOKEN_URL, {
+  const res = await fetchWithTimeout(TOKEN_URL, {
     method: 'POST',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
     body,
@@ -141,7 +151,7 @@ async function getAccessTokenByRefreshToken(oauth) {
     refresh_token: oauth.refreshToken,
     grant_type: 'refresh_token',
   });
-  const res = await fetch(TOKEN_URL, {
+  const res = await fetchWithTimeout(TOKEN_URL, {
     method: 'POST',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
     body,
@@ -190,7 +200,7 @@ function loadLog(logFile) {
 }
 
 async function inspectUrl(accessToken, siteUrl, inspectionUrl) {
-  const res = await fetch(INSPECT_ENDPOINT, {
+  const res = await fetchWithTimeout(INSPECT_ENDPOINT, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${accessToken}`,

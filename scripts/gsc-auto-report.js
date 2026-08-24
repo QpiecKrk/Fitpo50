@@ -5,6 +5,7 @@ const path = require('path');
 const os = require('os');
 const { spawnSync } = require('child_process');
 const https = require('https');
+const { API_REPORT_NAME, MANIFEST_NAME, inspectGscInput } = require('./lib/gsc-data-contract');
 
 const ROOT = process.cwd();
 const DEFAULT_DOWNLOADS_DIR = process.env.GSC_DOWNLOADS_DIR || path.join(os.homedir(), 'Downloads');
@@ -242,15 +243,47 @@ function copyTypedCsvToInput(byType, inputDir) {
     const src = byType[type][0].file;
     const dst = path.join(inputDir, filename);
     fs.copyFileSync(src, dst);
+    const srcStat = fs.statSync(src);
+    fs.utimesSync(dst, srcStat.atime, srcStat.mtime);
     copied[type] = dst;
     // Keep both naming variants to avoid future pipeline breaks.
     if (type === 'query_pages') {
       const aliasDst = path.join(inputDir, 'query_pages.csv');
       fs.copyFileSync(src, aliasDst);
+      fs.utimesSync(aliasDst, srcStat.atime, srcStat.mtime);
       copied.query_pages_alias = aliasDst;
     }
   }
   return copied;
+}
+
+function copyCompanionMetadata(files, inputDir) {
+  const copied = {};
+  for (const name of [MANIFEST_NAME, API_REPORT_NAME]) {
+    const candidates = files
+      .filter((file) => path.basename(file) === name)
+      .map((file) => ({ file, stat: fs.statSync(file) }))
+      .sort((a, b) => b.stat.mtimeMs - a.stat.mtimeMs);
+    if (!candidates[0]) continue;
+    const dst = path.join(inputDir, name);
+    fs.copyFileSync(candidates[0].file, dst);
+    fs.utimesSync(dst, candidates[0].stat.atime, candidates[0].stat.mtime);
+    copied[name] = dst;
+  }
+  return copied;
+}
+
+function assertFreshCompleteInput(inputDir) {
+  const contract = inspectGscInput(inputDir, { strictPeriods: true });
+  if (contract.blocking) {
+    throw new Error(`GSC_DATA_CONTRACT_FAILED:\n${contract.errors.map((item) => `- ${item}`).join('\n')}`);
+  }
+  if (contract.warnings.length) {
+    console.log(`[GSC-AUTO] Kontrakt danych: ${contract.status}; ostrzeżenia: ${contract.warnings.join(' | ')}`);
+  } else {
+    console.log(`[GSC-AUTO] Kontrakt danych: PASS; świeżość ${contract.freshness.age_hours} h; zakresy 7/28/90 potwierdzone.`);
+  }
+  return contract;
 }
 
 function haveAllThree(byType) {
@@ -345,6 +378,11 @@ function tryGenerateCsvFromApi(workDir) {
       };
     }
     return { ok: false, reason: 'GSC API nie dostarczylo kompletu niepustych CSV.' };
+  }
+  try {
+    assertFreshCompleteInput(workDir);
+  } catch (err) {
+    return { ok: false, reason: err.message || String(err) };
   }
   return { ok: true };
 }
@@ -590,11 +628,16 @@ async function main() {
       throw new Error('Brak kompletu CSV (queries/pages/query_pages). Dostarcz eksport GSC lub działający artifact GitHub.');
     }
 
+    const sourceFiles = walkFiles(tmp);
     const copied = copyTypedCsvToInput(typed, inputDir);
+    const metadata = copyCompanionMetadata(sourceFiles, inputDir);
     console.log(`[GSC-AUTO] Skopiowano CSV do ${inputDir}:`, copied);
+    if (Object.keys(metadata).length) console.log('[GSC-AUTO] Skopiowano metadane:', metadata);
     if (sourceLabel) {
       console.log(`[GSC-AUTO] Źródło: ${sourceLabel}`);
     }
+
+    assertFreshCompleteInput(inputDir);
 
     runWeeklyReport(inputDir, inputDir);
     runFullCoverageMap(inputDir, inputDir);
@@ -611,6 +654,8 @@ async function main() {
       '- queries.csv',
       '- pages.csv',
       '- query-pages.csv (lub query_pages.csv)',
+      `- ${MANIFEST_NAME} (potwierdza datę, wspólne zakresy 7/28/90 i integralność plików)`,
+      'Najbezpieczniej wygeneruj komplet przez GSC API; trzy luźne CSV bez manifestu są blokowane.',
       'Nastepnie uruchom ponownie: npm run gsc:auto',
       `Szczegoly bledu auto-fetch: ${freshErr && freshErr.message ? freshErr.message : String(freshErr)}`,
     ].join('\n');

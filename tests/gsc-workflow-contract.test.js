@@ -4,6 +4,8 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
+const { writeManifestFromApiReport } = require('../scripts/lib/gsc-data-contract');
+const { reportingRanges } = require('../scripts/gsc-weekly-api-report');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -24,8 +26,11 @@ test('GSC separates property, page and disclosed-query metrics without generic c
     'apob norma,https://fitpo50.pl/apob.html,0,100,0,8',
     'sakady,https://fitpo50.pl/sakady.html,0,90,0,9',
   ].join('\n'));
-  fs.writeFileSync(path.join(dir, 'gsc-weekly-report-api.json'), JSON.stringify({
+  const apiReport = {
+    generated_at: new Date().toISOString(),
     status: 'ok',
+    property: 'sc-domain:fitpo50.pl',
+    reporting_windows: Object.fromEntries(Object.entries(reportingRanges()).map(([key, range]) => [key, { range }])),
     summary: {
       primary_layer: 'property',
       layers: {
@@ -36,7 +41,9 @@ test('GSC separates property, page and disclosed-query metrics without generic c
         },
       },
     },
-  }));
+  };
+  fs.writeFileSync(path.join(dir, 'gsc-weekly-report-api.json'), JSON.stringify(apiReport));
+  writeManifestFromApiReport(apiReport, dir);
 
   const outputJson = path.join(dir, 'report.json');
   const outputMd = path.join(dir, 'report.md');

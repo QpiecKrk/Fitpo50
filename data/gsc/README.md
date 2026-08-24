@@ -1,24 +1,23 @@
-# GSC CSV Inbox
+# GSC CSV — format techniczny
 
-Wrzuć tutaj cotygodniowe eksporty CSV z Google Search Console (zakres 28 dni):
+Produkcyjny katalog roboczy znajduje się poza repozytorium: `~/Downloads/gsc-auto-input`. Kanoniczny zestaw 90-dniowy zawiera:
 
 1. `Queries` (zapytania): kolumny `query, clicks, impressions, ctr, position`
 2. `Pages` (strony): kolumny `page, clicks, impressions, ctr, position`
 3. `Queries + Pages` (mapowanie): kolumny `query, page, clicks, impressions, ctr, position`
 
-Format plików:
-- Akceptowane nazwy dowolne, byle `.csv`.
-- Skrypt sam wykrywa typ po nagłówkach (EN/PL) i bierze **najnowszy** plik dla każdego typu.
+4. `gsc-data-manifest.json`: data generacji, property, zakresy 7/28/90, liczby wierszy, SHA-256 i diagnostyka paginacji.
+
+Luźne CSV bez manifestu nie są akceptowane. Nie wolno kopiować raportu stron jako `query-pages.csv`. Oba aliasy `query-pages.csv` i `query_pages.csv`, jeśli istnieją równolegle, muszą mieć identyczną zawartość.
 
 Generowanie raportu:
 
 ```bash
-npm run gsc:weekly:report
+npm run gsc:data:check -- --input-dir ~/Downloads/gsc-auto-input
+npm run gsc:auto
 ```
 
-Wynik:
-- `data/reports/gsc-weekly-report.json`
-- `data/reports/gsc-weekly-report.md`
+Kontrakt blokuje raport, jeśli dane mają ponad 72 godziny, końcowa data zakresu jest starsza niż 3 dni, pliki nie pochodzą z jednego cohortu albo okna 7/28/90 są niespójne.
 
 ## Pelny automat (bez CSV) - GSC API
 
@@ -47,3 +46,5 @@ W GitHub Actions:
 Wazne:
 - dla Trybu A: service account musi byc dodany w Google Search Console jako uzytkownik z uprawnieniem `Read`.
 - dla Trybu B: konto Google, ktore wygenerowalo refresh token, musi miec co najmniej `Read` w GSC.
+- warstwa property pokazuje wynik całej usługi; warstwa pages odpowiada za URL-e, a ujawnione query pozostają niepełne z powodu anonimizacji.
+- osiągnięcie limitu 50 000 wierszy jest raportowane jako ostrzeżenie o możliwym ucięciu, nie jako pełna tabela zapytań.

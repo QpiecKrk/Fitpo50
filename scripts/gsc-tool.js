@@ -3,6 +3,7 @@
 const { spawnSync } = require('child_process');
 
 const COMMANDS = {
+  check: 'scripts/gsc-data-contract.js',
   auto: 'scripts/gsc-auto-report.js',
   api: 'scripts/gsc-weekly-api-report.js',
   csv: 'scripts/gsc-weekly-csv-report.js',
@@ -18,6 +19,7 @@ function printHelp() {
 
 Usage:
   node scripts/gsc-tool.js auto
+  node scripts/gsc-tool.js check [--input-dir <dir>]
   node scripts/gsc-tool.js api [options]
   node scripts/gsc-tool.js csv [options]
   node scripts/gsc-tool.js priority-map [options]

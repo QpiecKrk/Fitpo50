@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { spawnSync } = require('child_process');
+const { inspectGscInput } = require('./lib/gsc-data-contract');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -48,6 +49,7 @@ function main() {
     name,
     exists: fs.existsSync(path.join(gscDir, name)),
   }));
+  const gscDataContract = inspectGscInput(gscDir, { strictPeriods: true });
   const sensitiveSiteFiles = [
     '_site/admin/config.php',
     '_site/admin/init-db.php',
@@ -67,6 +69,7 @@ function main() {
     sensitive_site_files: sensitiveSiteFiles,
     gsc_work_dir: gscDir,
     gsc_files: gscFiles,
+    gsc_data_contract: gscDataContract,
     active_import_files: activeImportFiles,
     recent_reports: recentReports,
     key_commands: {
@@ -95,6 +98,11 @@ function main() {
     '',
     '## GSC Input',
     gscFiles.map((file) => `- ${file.name}: ${file.exists ? 'OK' : 'MISSING'}`).join('\n'),
+    `- Data contract: ${gscDataContract.status}`,
+    `- Freshness: ${gscDataContract.freshness.status}; age ${gscDataContract.freshness.age_hours ?? 'UNKNOWN'} h`,
+    `- Periods 7/28/90: ${gscDataContract.periods.status}`,
+    `- Cohort: ${gscDataContract.cohort.status}`,
+    ...(gscDataContract.errors || []).map((item) => `- BLOCKER: ${item}`),
     '',
     '## Active Import JSON',
     activeImportFiles.length ? activeImportFiles.map((name) => `- ${name}`).join('\n') : '- none',

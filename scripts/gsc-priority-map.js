@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { inspectGscInput } = require('./lib/gsc-data-contract');
 const os = require('os');
 
 const ROOT = process.cwd();
@@ -425,12 +426,16 @@ function collectPages(baseUrl) {
         : (robots.includes('noindex')
           ? 'excluded_noindex'
           : (schemaTypes.includes('BlogPosting') ? 'article' : 'support_page')));
+    const contentRole = pageType === 'article'
+      ? (pagePath.startsWith('centrum-') ? 'topic_center' : 'editorial_article')
+      : pageType;
 
     return {
       path: pagePath,
       url: pathToUrl(pagePath, baseUrl),
       in_sitemap: sitemapPathSet.has(pagePath),
       type: pageType,
+      content_role: contentRole,
       category: inferCategory(pagePath, html),
       title,
       h1,
@@ -1019,6 +1024,7 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl, inspectionByUrl = ne
       path: page.path,
       in_sitemap: page.in_sitemap,
       type: page.type,
+      content_role: page.content_role,
       category: page.category,
       title: page.title,
       h1: page.h1,
@@ -1185,11 +1191,14 @@ function writeOutputs(report, outputDir) {
   lines.push('');
   lines.push(`Wygenerowano: ${report.generated_at}`);
   lines.push(`Status danych GSC: ${report.data_quality.gsc_status}`);
+  lines.push(`Kontrakt danych: ${report.data_quality.data_contract.status}; świeżość ${report.data_quality.data_contract.freshness.age_hours} h; zakresy ${report.data_quality.data_contract.periods.status}; cohort ${report.data_quality.data_contract.cohort.status}.`);
   lines.push(`Zakres: ${report.summary.pages_total} stron z sitemap/root HTML, w tym nowe bez danych GSC.`);
   lines.push('');
   lines.push('## Bramka Pełnego Pokrycia Artykułów');
   lines.push(`- status: ${report.coverage_contract.status}`);
   lines.push(`- artykuły: ${report.coverage_contract.article_inventory}`);
+  lines.push(`- artykuły redakcyjne: ${report.coverage_contract.editorial_articles}`);
+  lines.push(`- centra tematyczne z BlogPosting: ${report.coverage_contract.topic_centers}`);
   lines.push(`- diagnozy: ${report.coverage_contract.diagnosed_articles}`);
   lines.push(`- przypisane działania: ${report.coverage_contract.actions_assigned}`);
   lines.push(`- pominięte: ${report.coverage_contract.omitted_articles.length}`);
@@ -1330,6 +1339,13 @@ function writeOutputs(report, outputDir) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  const dataContract = inspectGscInput(args.inputDir, { strictPeriods: true });
+  if (dataContract.blocking) {
+    console.error('[GSC-PRIORITY-MAP] GSC_DATA_CONTRACT_FAILED');
+    dataContract.errors.forEach((item) => console.error(`- ${item}`));
+    process.exitCode = 2;
+    return;
+  }
   const gsc = readGsc(args.inputDir);
   const pages = collectPages(args.baseUrl);
   const inspection = readIndexInspection(args.outputDir);
@@ -1338,12 +1354,15 @@ function main() {
   const portfolio = buildPortfolioSections(priorityMap);
   const aiVisibility = readAiVisibility(args.inputDir);
   const articleItems = priorityMap.filter((item) => item.type === 'article');
+  const editorialArticles = articleItems.filter((item) => item.content_role === 'editorial_article');
+  const topicCenters = articleItems.filter((item) => item.content_role === 'topic_center');
   const diagnosedArticles = articleItems.filter((item) => item.diagnosis && item.required_action?.required_change);
   const omittedArticles = articleItems.filter((item) => !item.diagnosis || !item.required_action?.required_change);
   const report = {
     generated_at: generatedAt,
     data_quality: {
       gsc_status: gsc.status,
+      data_contract: dataContract,
       gsc_files: gsc.files,
       rows: {
         pages: gsc.pages.length,
@@ -1363,6 +1382,8 @@ function main() {
         low_visibility_articles: portfolio.low_visibility_articles.length,
         dormant_articles: portfolio.dormant_articles.length,
         article_inventory: articleItems.length,
+        editorial_articles: editorialArticles.length,
+        topic_centers: topicCenters.length,
         diagnosed_articles: diagnosedArticles.length,
         actions_assigned: diagnosedArticles.length,
         omitted_articles: omittedArticles.length,
@@ -1377,6 +1398,8 @@ function main() {
       status: articleItems.length === diagnosedArticles.length && omittedArticles.length === 0 ? 'PASS' : 'FAIL',
       invariant: 'article_inventory = diagnosed_articles = actions_assigned; omitted_articles = 0',
       article_inventory: articleItems.length,
+      editorial_articles: editorialArticles.length,
+      topic_centers: topicCenters.length,
       diagnosed_articles: diagnosedArticles.length,
       actions_assigned: diagnosedArticles.length,
       omitted_articles: omittedArticles.map((item) => item.path),

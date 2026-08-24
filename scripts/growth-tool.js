@@ -4,6 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { inspectGscInput } = require('./lib/gsc-data-contract');
 
 const ROOT = process.cwd();
 const REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
@@ -624,7 +625,11 @@ function toNumber(value) {
 }
 
 function readGscPages() {
-  const rows = parseCsvRows(path.join(ROOT, 'data', 'gsc', 'Strony.csv'));
+  const contract = inspectGscInput(GSC_INPUT_DIR, { strictPeriods: true });
+  if (contract.blocking) {
+    throw new Error(`GSC_DATA_CONTRACT_FAILED: ${contract.errors.join(' | ')}`);
+  }
+  const rows = parseCsvRows(path.join(GSC_INPUT_DIR, 'pages.csv'));
   const map = new Map();
   for (const row of rows) {
     const page = row.Strona || row.Page || row.URL || Object.values(row)[0] || '';

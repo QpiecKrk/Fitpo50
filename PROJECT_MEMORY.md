@@ -186,6 +186,9 @@
 - Wnioski globalne muszą zawierać: udział widocznych artykułów, liczbę problemów indeksacji, zindeksowane strony bez wyświetleń, luki CTR w TOP 10, pozycje 11-30 i 31+, udział kliknięć liderów, kondycję kategorii/klastrów, trend 28 dni oraz potencjał Google Images, jeśli dane istnieją.
 - Wnioski kończą się kolejnością działań opartą na aktualnych liczbach. Nie wolno zmieniać globalnego priorytetu na podstawie generycznej rekomendacji automatu.
 - Kanoniczne pliki wykonawcze: `scripts/gsc-weekly-api-report.js`, `scripts/gsc-priority-map.js`, `scripts/gsc-indexing-watchdog.js`, `scripts/gsc-auto-report.js`, `scripts/growth-tool.js`. Test kontraktu: `tests/gsc-full-coverage.test.js`.
+- Od 2026-08-24 wejście GSC ma twardy kontrakt `scripts/lib/gsc-data-contract.js` i manifest `gsc-data-manifest.json`: maks. 72 h od generacji, maks. 3 dni opóźnienia końca zakresu, maks. 30 min rozrzutu cohortu, prawidłowe typy CSV, SHA-256/liczby wierszy oraz ciągłe okna 7/28/90. Uruchom `npm run gsc:data:check -- --input-dir ~/Downloads/gsc-auto-input` przed raportem.
+- Zakazane są luźne CSV bez manifestu, kopiowanie `pages.csv` jako `query-pages.csv`, rozbieżne aliasy i używanie starego raportu API jako warstwy property. Paginacja zapisuje diagnostykę; dojście do 50 000 wierszy jest jawnym ostrzeżeniem o możliwym limicie.
+- Pełne inventory GSC rozdziela `editorial_article` i `topic_center`; centra z aktywnym `BlogPosting` pozostają w kontrakcie pełnego pokrycia, a raport musi pokazać oba liczniki.
 
 - **`popraw-seo` nie może samodzielnie edytować artykułów.**
   - Komenda generuje raporty i priorytety, ale zatrzymuje się na planie.

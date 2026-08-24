@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { writeManifestFromApiReport } = require('./lib/gsc-data-contract');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -25,6 +26,17 @@ const AI_REFERRER_HOSTS = [
   'copilot.microsoft.com',
   'bing.com',
 ];
+const API_COLLECTION_DIAGNOSTICS = [];
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = 30000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 function parseArgs(argv) {
   const out = {
@@ -143,7 +155,7 @@ async function getAccessToken(sa) {
     grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
     assertion,
   });
-  const res = await fetch(TOKEN_URL, {
+  const res = await fetchWithTimeout(TOKEN_URL, {
     method: 'POST',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
     body,
@@ -163,7 +175,7 @@ async function getAccessTokenByRefreshToken(oauth) {
     refresh_token: oauth.refreshToken,
     grant_type: 'refresh_token',
   });
-  const res = await fetch(TOKEN_URL, {
+  const res = await fetchWithTimeout(TOKEN_URL, {
     method: 'POST',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
     body,
@@ -178,7 +190,7 @@ async function getAccessTokenByRefreshToken(oauth) {
 
 async function gscQuery(accessToken, siteUrl, requestBody) {
   const endpoint = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`;
-  const res = await fetch(endpoint, {
+  const res = await fetchWithTimeout(endpoint, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${accessToken}`,
@@ -198,14 +210,29 @@ async function gscQueryAllRows(accessToken, siteUrl, baseBody) {
   const rowLimit = 25000;
   let startRow = 0;
   const all = [];
+  const batches = [];
   while (true) {
     const body = { ...baseBody, rowLimit, startRow };
     const response = await gscQuery(accessToken, siteUrl, body);
     const rows = Array.isArray(response.rows) ? response.rows : [];
     all.push(...rows);
+    batches.push({ start_row: startRow, rows: rows.length });
     if (rows.length < rowLimit) break;
     startRow += rowLimit;
+    if (startRow > 1000000) {
+      throw new Error('GSC pagination safety limit exceeded (1,000,000 rows).');
+    }
   }
+  const dimensions = Array.isArray(baseBody.dimensions) ? baseBody.dimensions : [];
+  API_COLLECTION_DIAGNOSTICS.push({
+    search_type: baseBody.type || 'web',
+    dimensions: dimensions.length ? dimensions : ['property'],
+    start_date: baseBody.startDate,
+    end_date: baseBody.endDate,
+    rows: all.length,
+    batches,
+    potential_api_row_cap: all.length >= 50000,
+  });
   return all;
 }
 
@@ -352,6 +379,7 @@ function writeExtendedSnapshots(outputCsvDir, report) {
     generated_at: report.generated_at,
     property: report.property,
     api_limitations: report.api_limitations,
+    collection_quality: report.collection_quality,
     reporting_windows: report.reporting_windows,
     secondary_search_types_28d: report.secondary_search_types_28d,
   }, null, 2)}\n`, 'utf8');
@@ -391,6 +419,9 @@ function writeReport(report, outputJson, outputMd) {
     lines.push('## Zakres dat');
     lines.push(`- Bieżący: ${report.ranges.current.start} -> ${report.ranges.current.end}`);
     lines.push(`- Poprzedni: ${report.ranges.previous.start} -> ${report.ranges.previous.end}`);
+    const truncated = report.collection_quality?.potentially_truncated_datasets || [];
+    lines.push(`- Paginacja API: ${truncated.length ? `WARN — możliwy limit dla ${truncated.length} zestawów` : 'PASS — nie osiągnięto limitu 50 000 wierszy'}`);
+    lines.push('- Integralność eksportu: manifest `gsc-data-manifest.json` zawiera zakresy, liczbę wierszy i SHA-256 każdego głównego CSV.');
     lines.push('');
     lines.push('## KPI całej usługi (zapytanie GSC bez wymiarów)');
     lines.push(`- Kliknięcia: **${Math.round(report.summary.current.total_clicks)}** (prev: ${Math.round(report.summary.previous.total_clicks)})`);
@@ -708,6 +739,7 @@ async function main() {
   }
 
   async function generateForAccessToken(token, authMode) {
+    API_COLLECTION_DIAGNOSTICS.length = 0;
     const [web7, web28, web90, secondarySearchTypes] = await Promise.all([
       fetchWebWindow(token, reportingWindows.day_7),
       fetchWebWindow(token, reportingWindows.day_28),
@@ -850,6 +882,12 @@ async function main() {
         max_rows_per_day_per_search_type: 50000,
         note: 'Warstwa stron i property jest nadrzędna dla wyniku całej witryny; query służą do rozpoznawania ujawnionych intencji.',
       },
+      collection_quality: {
+        datasets: API_COLLECTION_DIAGNOSTICS,
+        potentially_truncated_datasets: API_COLLECTION_DIAGNOSTICS
+          .filter((item) => item.potential_api_row_cap)
+          .map((item) => `${item.search_type}:${item.dimensions.join('+')}:${item.start_date}:${item.end_date}`),
+      },
       reporting_windows: webWindows,
       secondary_search_types_28d: secondarySearchTypes,
       raw_csv_rows: {
@@ -939,11 +977,13 @@ async function main() {
     previousQueryPages: report.raw_csv_rows?.previous_query_pages || [],
   });
   writeExtendedSnapshots(args.outputCsvDir, report);
+  const manifestPath = writeManifestFromApiReport(report, args.outputCsvDir);
   delete report.raw_csv_rows;
   writeReport(report, args.outputJson, args.outputMd);
   console.log('[PASS] GSC API weekly report generated.');
   console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
   console.log(`- MD: ${path.relative(ROOT, args.outputMd)}`);
+  console.log(`- manifest: ${path.relative(ROOT, manifestPath)}`);
   const top3Count = Array.isArray(report?.opportunities?.top3_zero_click) ? report.opportunities.top3_zero_click.length : 0;
   const ctrCount = Array.isArray(report?.opportunities?.ctr_problems) ? report.opportunities.ctr_problems.length : 0;
   const cannibalCount = Array.isArray(report?.opportunities?.cannibalization) ? report.opportunities.cannibalization.length : 0;
@@ -964,6 +1004,8 @@ if (require.main === module) {
 }
 
 module.exports = {
+  API_COLLECTION_DIAGNOSTICS,
+  gscQueryAllRows,
   rangePair,
   reportingRanges,
 };

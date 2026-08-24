@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { spawnSync } = require('child_process');
+const { inspectGscInput } = require('./lib/gsc-data-contract');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -126,6 +127,15 @@ function main() {
   const gscDir = path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
   const gscMissing = ['queries.csv', 'pages.csv', 'query-pages.csv'].filter((name) => !fs.existsSync(path.join(gscDir, name)));
   checks.push(check('GSC input files', 'warn', gscMissing.length === 0, gscMissing.length ? `missing: ${gscMissing.join(', ')}` : 'OK'));
+  const gscContract = inspectGscInput(gscDir, { strictPeriods: true });
+  checks.push(check(
+    'GSC data contract',
+    'warn',
+    !gscContract.blocking,
+    gscContract.blocking
+      ? gscContract.errors.join(' | ')
+      : `${gscContract.status}; age=${gscContract.freshness.age_hours}h; periods=${gscContract.periods.status}; cohort=${gscContract.cohort.status}`,
+  ));
 
   const activeImports = countFiles(path.join(ROOT, 'data', 'import'));
   checks.push(check('Active data/import files', 'warn', activeImports === 0, activeImports ? `${activeImports} active import files` : 'none'));

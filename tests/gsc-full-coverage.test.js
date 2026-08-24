@@ -4,6 +4,8 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
+const { writeManifestFromApiReport } = require('../scripts/lib/gsc-data-contract');
+const { reportingRanges } = require('../scripts/gsc-weekly-api-report');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -36,6 +38,12 @@ test('priority map assigns a diagnosis and action to every article', () => {
     'query,page,clicks,impressions,ctr,position',
     'inna ujawniona fraza,https://fitpo50.pl/index.html,0,10,0,30',
   ].join('\n'));
+  writeManifestFromApiReport({
+    generated_at: new Date().toISOString(),
+    status: 'ok',
+    property: 'sc-domain:fitpo50.pl',
+    reporting_windows: Object.fromEntries(Object.entries(reportingRanges()).map(([key, range]) => [key, { range }])),
+  }, dir);
 
   const result = spawnSync('node', [
     'scripts/gsc-priority-map.js',
@@ -48,6 +56,11 @@ test('priority map assigns a diagnosis and action to every article', () => {
   assert.equal(report.coverage_contract.status, 'PASS');
   assert.equal(report.coverage_contract.article_inventory, report.coverage_contract.diagnosed_articles);
   assert.equal(report.coverage_contract.article_inventory, report.coverage_contract.actions_assigned);
+  assert.equal(
+    report.coverage_contract.article_inventory,
+    report.coverage_contract.editorial_articles + report.coverage_contract.topic_centers,
+  );
+  assert.equal(report.coverage_contract.topic_centers, 6);
   assert.deepEqual(report.coverage_contract.omitted_articles, []);
   assert.ok(report.priority_map.filter((item) => item.type === 'article').every((item) => item.required_action?.required_change));
 

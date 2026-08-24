@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const { inspectGscInput } = require('./lib/gsc-data-contract');
 
 const ROOT = process.cwd();
 const DEFAULT_WORK_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
@@ -491,10 +492,12 @@ function writeOutputs(report, outputJson, outputMd) {
 
   if (report.status !== 'ok') {
     lines.push('## Brak danych wejściowych');
+    if (report.reason) lines.push(`- Powód: ${report.reason}`);
     lines.push('Potrzebny jest komplet niepustych CSV w `~/Downloads/gsc-auto-input`:');
     lines.push('- zapytania (queries)');
     lines.push('- strony (pages)');
     lines.push('- zapytania + strony (query pages)');
+    lines.push('- manifest zakresów i integralności (`gsc-data-manifest.json`)');
     lines.push('');
     lines.push('Następnie uruchom: `npm run gsc:auto`');
   } else {
@@ -503,6 +506,13 @@ function writeOutputs(report, outputJson, outputMd) {
     lines.push(`- rows: queries=${report.data_quality.rows_queries}, pages=${report.data_quality.rows_pages}, query_pages=${report.data_quality.rows_query_pages}`);
     lines.push(`- duplicates (query+page): ${report.data_quality.duplicate_query_page_pairs}`);
     lines.push(`- anomalies: ctr>100=${report.data_quality.anomalies_ctr_over_100}, position<=0=${report.data_quality.anomalies_position_non_positive}`);
+    if (report.data_contract) {
+      lines.push(`- kontrakt wejścia: **${report.data_contract.status}**`);
+      lines.push(`- świeżość: ${report.data_contract.freshness?.status || 'UNKNOWN'}; wiek ${report.data_contract.freshness?.age_hours ?? 'UNKNOWN'} h; limit ${report.data_contract.freshness?.max_age_hours ?? 'UNKNOWN'} h`);
+      lines.push(`- wspólny eksport: ${report.data_contract.cohort?.status || 'UNKNOWN'}; rozrzut ${report.data_contract.cohort?.spread_minutes ?? 'UNKNOWN'} min`);
+      lines.push(`- zakresy 7/28/90: ${report.data_contract.periods?.status || 'UNKNOWN'}; źródło ${report.data_contract.periods?.source || 'none'}`);
+      lines.push(`- paginacja: ${report.data_contract.pagination?.status || 'UNKNOWN'}`);
+    }
     lines.push('');
     lines.push('## Podsumowanie — główna warstwa');
     lines.push(`- Źródło głównego wyniku: **${report.summary.primary_layer === 'property' ? 'cała usługa GSC (bez wymiarów)' : 'suma stron (brak agregatu całej usługi)' }**`);
@@ -644,6 +654,47 @@ function countCsvDataRows(filePath) {
   return Math.max(0, nonEmpty - 1);
 }
 
+function writeDataContractFailure(args, aeoOutputs, contract) {
+  const generatedAt = new Date().toISOString();
+  const aeoReport = {
+    generated_at: generatedAt,
+    status: 'INSUFFICIENT_DATA',
+    strategic_priority: 'SEO -> AEO -> GEO -> AIO',
+    top10_urls: [],
+  };
+  writeAeoOutputs(aeoReport, aeoOutputs.outputJson, aeoOutputs.outputMd);
+  const report = {
+    generated_at: generatedAt,
+    status: 'INSUFFICIENT_DATA',
+    reason: `Kontrakt danych GSC nie przeszedł: ${contract.errors.join(' | ')}`,
+    data_contract: contract,
+    inputs: { input_dir: args.inputDir },
+    summary: { total_clicks: 0, total_impressions: 0, avg_ctr: 0, avg_position: 0 },
+    data_quality: {
+      status: 'FAIL',
+      rows_queries: contract.files?.queries?.rows || 0,
+      rows_pages: contract.files?.pages?.rows || 0,
+      rows_query_pages: contract.files?.query_pages?.rows || 0,
+      duplicate_query_page_pairs: 0,
+      anomalies_ctr_over_100: 0,
+      anomalies_position_non_positive: 0,
+    },
+    opportunities: { top3_zero_click: [], top10_zero_click: [], ctr_problems: [], cannibalization: [], page_opportunities: [] },
+    weekly_plan: ['Pobierz jeden świeży komplet GSC z potwierdzonymi zakresami 7/28/90 i uruchom raport ponownie.'],
+    content_gaps: {},
+    strategic_priority: 'SEO -> AEO -> GEO -> AIO',
+    aeo_opportunity_bot: {
+      status: 'INSUFFICIENT_DATA',
+      output_json: aeoOutputs.outputJson,
+      output_md: aeoOutputs.outputMd,
+      top10_count: 0,
+    },
+  };
+  writeOutputs(report, args.outputJson, args.outputMd);
+  console.log(`[FAIL] ${report.reason}`);
+  process.exitCode = 2;
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const aeoOutputs = resolveAeoOutputs(args.inputDir);
@@ -706,6 +757,12 @@ function main() {
     return;
   }
 
+  const dataContract = inspectGscInput(args.inputDir, { strictPeriods: true });
+  if (dataContract.blocking) {
+    writeDataContractFailure(args, aeoOutputs, dataContract);
+    return;
+  }
+
   const files = fs.readdirSync(args.inputDir).filter((f) => f.toLowerCase().endsWith('.csv'));
   for (const file of files) {
     const abs = path.join(args.inputDir, file);
@@ -751,6 +808,7 @@ function main() {
       anomalies_ctr_over_100: 0,
       anomalies_position_non_positive: 0,
     },
+    data_contract: dataContract,
     opportunities: {
       top3_zero_click: [],
       top10_zero_click: [],
@@ -825,7 +883,13 @@ function main() {
   if (fs.existsSync(apiReportPath)) {
     try {
       const apiReport = JSON.parse(fs.readFileSync(apiReportPath, 'utf8'));
-      apiProperty = apiReport?.summary?.primary_layer === 'property'
+      const apiGeneratedAt = new Date(String(apiReport?.generated_at || '')).getTime();
+      const contractGeneratedAt = new Date(String(dataContract?.freshness?.generated_at || '')).getTime();
+      const sameDataset = dataContract.source === 'gsc_api'
+        && Number.isFinite(apiGeneratedAt)
+        && Number.isFinite(contractGeneratedAt)
+        && Math.abs(apiGeneratedAt - contractGeneratedAt) <= 60000;
+      apiProperty = sameDataset && apiReport?.summary?.primary_layer === 'property'
         ? apiReport?.summary?.layers?.property || null
         : null;
     } catch (err) {
@@ -905,14 +969,18 @@ function main() {
 
   report.status = 'ok';
   report.data_quality = {
-    status: anomaliesCtr === 0 && anomaliesPos === 0 ? 'PASS' : 'WARN',
+    status: anomaliesCtr === 0 && anomaliesPos === 0 && dataContract.status === 'PASS' ? 'PASS' : 'WARN',
     rows_queries: queryRows.length,
     rows_pages: pageRows.length,
     rows_query_pages: qpRows.length,
     duplicate_query_page_pairs: qpRows.length - dupPairs.size,
     anomalies_ctr_over_100: anomaliesCtr,
     anomalies_position_non_positive: anomaliesPos,
+    freshness_status: dataContract.freshness.status,
+    periods_status: dataContract.periods.status,
+    cohort_status: dataContract.cohort.status,
   };
+  report.data_contract = dataContract;
   report.summary = {
     total_clicks: primarySummary.total_clicks,
     total_impressions: primarySummary.total_impressions,
