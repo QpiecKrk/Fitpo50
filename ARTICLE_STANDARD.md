@@ -100,6 +100,15 @@ albo hurtowo:
 - Plik wejściowy pozostaje bez zmian. Kolejne wyniki dostają wersje `-r2`, `-r3` itd.; narzędzie nie nadpisuje ani nie usuwa jedynej poprawionej wersji.
 - Po pełnej publikacji zakończonej wszystkimi walidacjami pipeline usuwa wykorzystany JSON `CONTENT_READY` oraz oba jego raporty. Przy błędzie lub `BLOCKED` zachowuje je do dalszej naprawy.
 
+## 7b. Regression Learning Loop — obowiązkowa naprawa systemowa
+
+- Każdy nowy błąd ujawniony podczas `dodaj artykuł`, `Obal mit`, `UPDATE`, stagingu albo walidacji musi zostać poprawiony zarówno w bieżącym artykule, jak i w mechanizmie, który go przepuścił lub błędnie zgłosił.
+- Najpierw określ klasę przyczyny: dane JSON, logika treści, dowody/FAQ, intencja/linki, media, importer/fixer, szablon HTML, PDF, transakcja publikacji albo monitoring.
+- Jeśli przypadek jest wykrywalny maszynowo, dodaj minimalny test regresji lub fixture odtwarzający problem. Test powinien nie przechodzić przed poprawką i przechodzić po niej.
+- Nie wolno: naprawić wyłącznie finalnego HTML-a, dodać wyjątku dla jednego slugu, zmienić błędu na warning ani obniżyć progu jakości tylko po to, aby publikacja przeszła.
+- Jeśli bezpieczna automatyzacja nie jest możliwa, dodaj jednoznaczną ręczną kontrolę do właściwej sekcji tego dokumentu i wskaż ją w raporcie publikacji.
+- Po zmianie uruchom test jednostkowy/regresyjny, `npm run test:pipeline-blockers`, walidację artykułu, mirror i `predeploy:check`. Zadanie jest zakończone dopiero po PASS bieżącego artykułu i zabezpieczenia przyszłych publikacji.
+
 ## 8. Bramka jakości (fail conditions)
 Artykuł nie przechodzi, jeśli:
 - ma inline style,
@@ -114,7 +123,7 @@ Artykuł nie przechodzi, jeśli:
   - `<section id="quick-answer" class="quick-answer reveal" aria-label="Szybka odpowiedź">`
 - Wymagana zawartość:
   - jedno `h2` o treści `Szybka odpowiedź`,
-  - jeden krótki akapit podsumowania (`p`).
+  - jeden krótki akapit podsumowania (`p`) złożony z 1–3 pełnych, konkretnych zdań; kropka dziesiętna nie jest końcem zdania.
 - Pozycja kanoniczna:
   - po bloku PDF (`.pdf-hero-download`) i przed główną treścią.
 - Reguła anty-regresji layoutu:
@@ -167,7 +176,9 @@ Artykuł nie przechodzi, jeśli:
 ## 10a. Intent, Linking & Topic Center Contract
 - Przed statusem `CONTENT_READY` JSON musi mieć `search_intent`, jedną `primary_keyword` długości 2-8 słów oraz 3-8 unikalnych `supporting_keywords`.
 - Claude ani inny model zewnętrzny nie podaje linków wewnętrznych i nie zgaduje slugów. Linkowanie powstaje lokalnie przez `scripts/prepare-article-architecture.js` na podstawie aktualnych artykułów `BlogPosting` w repozytorium.
+- Skill Claude `docs/skills/fitpo50-article-draft/` jest kontraktem oszczędnego draftu: zwraca jeden JSON `DRAFT`, notatki wyłącznie w `editorial_notes`, realne źródła/FAQ oraz plan obrazów z `PENDING_LOCAL_REVIEW`. Jego `DRAFT_VALID` nie omija lokalnych bramek i nie jest statusem publikacyjnym.
 - Przed ustaleniem finalnego title/H1 pipeline porównuje frazę główną z tytułami, H1, treścią oraz trwałą mapą właścicieli intencji z `popraw-seo`. Mocny konflikt wymaga jawnego `intent_differentiation`; bez niego JSON pozostaje `BLOCKED`.
+- Przy `UPDATE` własny `${slug}.html` jest wyłączony z listy kandydatów kanibalizacji; pozostałe URL-e o podobnej intencji nadal wymagają decyzji.
 - Minimum 4 linki musi prowadzić do istniejących artykułów, mieć unikalne cele i naturalne anchory obecne już w konkretnych akapitach. Brak naturalnego miejsca daje `INSUFFICIENT_CONTEXTUAL_LINKS`; system nie dopisuje zdania-zapychacza.
 - `internal_link_plan[]` zapisuje target, anchor, dokładną lokalizację i podstawę doboru. `incoming_link_suggestions[]` wskazuje istniejące strony, które po publikacji powinny zostać ręcznie sprawdzone jako źródła linku przychodzącego.
 - Dopasowanie do centrum zapisuje `topic_center_assessment`. Tylko `STRONG` tworzy propozycję `AWAITING_USER_APPROVAL`; nie blokuje zwykłej publikacji i nie zmienia konfiguracji centrum.
@@ -180,6 +191,7 @@ Artykuł nie przechodzi, jeśli:
 - Każdy obraz wymaga AVIF, WebP i fallbacku JPG o zgodnych wymiarach. Hero ma minimum 1080×600 px, obraz sekcji minimum 900×500 px, a proporcja krajobrazowa mieści się w zakresie 1.2-2.1 i zgadza z deklaracją.
 - Hash i sygnatura wizualna blokują duplikaty 1:1, niemal ten sam kadr oraz wariant przedstawiający inny obraz. Dla pakietu min. 3 obrazów wymagane są min. 3 techniki i 3 kompozycje; jedna nie może zajmować więcej niż połowy pakietu.
 - `alt` i `caption` muszą opisywać realną zawartość oraz mieć związek z konkretną sekcją. `visual_review.status=VERIFIED` wolno nadać dopiero po rzeczywistym obejrzeniu pliku i zapisaniu konkretnej notatki.
+- Obraz z mylącą liczbą, niepowiązanym tekstem, niezgodnym kadrem lub fałszywą pewnością jest odrzucany. Pipeline nie używa go jako fallbacku.
 - Obrazy w treści artykułu mają korzystać ze standardu:
   - `<picture>` + `<source type="image/avif">` + `<source type="image/webp">` + fallback `<img>`.
 - W fallback `<img>` wymagane: poprawny `alt`, `loading="lazy"` oraz prawdziwe `width` i `height` z manifestu.
@@ -191,9 +203,14 @@ Artykuł nie przechodzi, jeśli:
 - Staging renderuje pełną stronę przy 1440 px i 390 px. Bramka blokuje przepełnienie poziome, tekst mniejszy niż 10 px, niezaładowane fonty, uszkodzone ilustracje i niezgodne proporcje `width`/`height`.
 - Animacje `reveal` oraz obrazy lazy-load są aktywowane przed zrzutem, aby screenshot przedstawiał finalny układ, a nie niewidoczne elementy oczekujące na IntersectionObserver.
 - Każda tabela musi pozostać semantycznym HTML w `.article-table-wrap` i mieć bezpośrednie `caption`, `thead`, `tbody`, nagłówki `th`, `scope="col"` w `thead` oraz `scope="row"` dla nagłówków w `tbody`. Obraz udający tabelę nie spełnia kontraktu.
+- Fixer/importer nie może owijać bloków `table`, `div`, `figure`, `aside`, list, `blockquote` ani `pre` znacznikiem `<p>`.
 - PDF powstaje wyłącznie ze stagingowego HTML. Błąd renderowania tabeli lub ilustracji zatrzymuje generowanie; generator nie zamienia tabeli po cichu na tekst rozdzielony kreskami i nie pomija niedziałającego obrazu.
 - Każda strona PDF jest renderowana przez Poppler do PNG. Bramka kontroluje liczbę stron, A4, osadzenie fontów z mapą Unicode, granice każdego słowa, margines treści, komplet ilustracji oraz minimum 98% zgodności tekstu HTML→PDF.
+- Wszystkie wyrenderowane strony PDF trzeba obejrzeć. Lista źródeł wraz z disclaimerem ma pozostać czytelnym blokiem i nie może być przypadkowo rozdzielona między strony.
 - HTML source i `_site` oraz PDF source i `_site` muszą być identyczne 1:1. Po pełnym PASS powstaje raport `data/reports/article-preview/<slug>.json|md` ze statusem `PREVIEW_READY`.
+- Poprawki `popraw-seo` po akceptacji mogą być wdrażane wyłącznie przez manifest dokładnych operacji `replace_exact` z SHA-256 wersji wejściowej i udokumentowaną podstawą. Automat nie generuje tekstu podczas aplikacji i nie używa generycznych łączników.
+- Każdy zmieniony artykuł — target oraz strona źródłowa z nowym linkiem — otrzymuje nowe `dateModified`, PDF, mirror, sitemap lastmod, render desktop/mobile/PDF i walidację.
+- Lokalny PASS nie tworzy kolejki GSC. Wymagany jest dowód produkcyjny `LIVE_DEPLOYED_AND_VALIDATED`: HTTP 200, canonical, zgodne `dateModified`, obecność zatwierdzonego fragmentu, sitemap lastmod oraz prawidłowy PDF.
 - Promocja do repo jest transakcyjna: przed zapisem system sprawdza, czy żaden plik docelowy nie zmienił się podczas stagingu, kopiuje wyłącznie dozwolone artefakty i przy błędzie przywraca wcześniejsze wersje.
 
 ## 11b. Safe Publication & Rollback Contract
@@ -208,7 +225,7 @@ Artykuł nie przechodzi, jeśli:
 
 ## 12. Schema Citation Contract v2.0 (obowiązkowe)
 - `BlogPosting.citation` musi być zsynchronizowane z listą źródeł w HTML.
-- Wymagane minimum 4 URL-e w citation, jeśli faktycznie istnieją w materiale źródłowym.
+- Wymagane minimum 4 realne, zweryfikowane i wykorzystane URL-e w `citation` oraz liście źródeł HTML.
 - Kategoryczny zakaz dopisywania zmyślonych źródeł tylko po to, by dobić do minimum.
 
 ## 12a. Logic, Evidence & FAQ Contract
@@ -226,6 +243,7 @@ Artykuł nie przechodzi, jeśli:
 ```
 - `claim` musi występować w dokładnie wskazanym fragmencie, a każdy URL musi istnieć również w `sources[]`.
 - Każde `sources[]` wymaga pól `label`, `url`, `evidence_level`, `checked_at`, `url_status`, `http_status`. `evidence_level` musi nazywać faktyczny rodzaj dowodu, np. `guideline`, `systematic_review`, `randomized_trial`, `cohort`, `official_statistics`, `price_list` albo `technical_documentation`. Kontrola adresu jest ważna maksymalnie 180 dni.
+- Błąd transportu otrzymuje status `verification_failed`, a rzeczywista odpowiedź HTTP wskazująca niedostępny adres status `broken`; obu nie wolno traktować jako `reachable`.
 - Jeśli wniosek wynika z wcześniejszych akapitów zamiast z bezpośredniego źródła, JSON wymaga `logic_links[]` z `conclusion_location`, listą `premise_locations` i konkretnym `reasoning` opisującym przejście od przesłanek do wniosku.
 - Każde źródło musi wspierać co najmniej jedno `evidence_claims`; niewykorzystana, dekoracyjna bibliografia blokuje publikację.
 - Twierdzenia `medical` i `safety` wymagają silnego źródła naukowego lub instytucjonalnego oraz jawnego `evidence_level`. Dla tematów medycznych minimum 67% źródeł i co najmniej dwa źródła muszą spełniać ten warunek.
@@ -247,5 +265,6 @@ Artykuł nie przechodzi, jeśli:
   2. daj krótki werdykt FitPo50,
   3. pokaż fizjologię i jakość dowodów,
   4. zakończ praktycznym "co działa zamiast tego".
+- Artykuł mitu zawiera semantyczną tabelę `MIT`–`FAKT/DOWODY` oraz wyjaśnienie mechanizmu w FAQ tylko wtedy, gdy istnieje realne pytanie z GSC/PAA/autocomplete/udokumentowanego researchu.
 - Ton: spokojny, kumpelski, bez moralizowania i bez języka oskarżającego konkretne firmy/osoby.
 - `ClaimReview` dodawaj tylko wtedy, gdy artykuł obala jedno precyzyjne, popularne twierdzenie i da się podać jasny werdykt oraz źródła. Przy artykułach zbiorczych typu "5 mitów" nie dodawaj jednego sztucznego `ClaimReview`.

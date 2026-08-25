@@ -1632,7 +1632,7 @@ function deploymentEvidenceForArticle(file, expectedDateModified) {
     pdf_site: fs.existsSync(mirrorPdfPath),
   };
   return {
-    status: Object.values(checks).every(Boolean) ? 'DEPLOYED_AND_VALIDATED' : 'DEPLOYMENT_INCOMPLETE',
+    status: Object.values(checks).every(Boolean) ? 'COMMITTED_LOCALLY' : 'LOCAL_DEPLOYMENT_INCOMPLETE',
     checks,
     source_date_modified: sourceModified || null,
     site_date_modified: mirrorModified || null,
@@ -1653,14 +1653,14 @@ function buildGscAfterChangeQueue(approvalWave, seoWorkHistory, previousQueue, d
       approvalByFile.set(item.file, { kind, item });
     }
   }
-  const preserved = (previousQueue?.items || []).filter((item) => item.status === 'READY_TO_SUBMIT');
+  const preserved = (previousQueue?.items || []).filter((item) => item.status === 'AWAITING_LIVE_DEPLOYMENT');
   const byDeployment = new Map(preserved.map((item) => [`${item.file}|${item.date_modified}`, item]));
   for (const historyItem of seoWorkHistory?.urls || []) {
     if (!historyItem.change_detected_this_run) continue;
     const approval = approvalByFile.get(historyItem.file);
     if (!approval) continue;
     const deployment = deploymentInspector(historyItem.file, historyItem.date_modified);
-    if (deployment.status !== 'DEPLOYED_AND_VALIDATED') continue;
+    if (deployment.status !== 'COMMITTED_LOCALLY') continue;
     const urls = unique((approval.item.gsc_submit_after_change || [])
       .filter(Boolean)
       .filter((url) => !shouldExcludeSeoFile(url)));
@@ -1671,19 +1671,20 @@ function buildGscAfterChangeQueue(approvalWave, seoWorkHistory, previousQueue, d
       target_url: approval.item.url,
       date_modified: historyItem.date_modified,
       detected_at: seoWorkHistory.generated_at,
-      submit_urls: urls,
-      status: 'READY_TO_SUBMIT',
+      planned_submit_urls: urls,
+      submit_urls: [],
+      status: 'AWAITING_LIVE_DEPLOYMENT',
       deployment_evidence: deployment,
-      gsc_note: 'Kolejka powstała po wykryciu realnej zmiany dateModified oraz potwierdzeniu HTML, _site, sitemap i PDF.',
+      gsc_note: 'Lokalny pakiet jest kompletny, ale URL-e trafią do końcowej listy GSC dopiero po weryfikacji publicznej produkcji.',
       monitor_after: 'KPI 7/14/28 dni od dateModified: impressions, clicks, CTR, position, AI impressions i engagement.',
     });
   }
   const items = [...byDeployment.values()];
-  const submitTargets = unique(items.flatMap((item) => item.submit_urls || []));
+  const submitTargets = [];
   return {
     generated_at: nowWarsawIso(),
-    status: items.length ? 'READY_AFTER_REAL_DEPLOYMENT' : 'EMPTY_AWAITING_REAL_DEPLOYMENT',
-    rule: 'Do kolejki trafia wyłącznie URL z nowym dateModified i potwierdzonym kompletem: source HTML, _site HTML, sitemap lastmod oraz PDF w obu lokalizacjach.',
+    status: items.length ? 'AWAITING_LIVE_DEPLOYMENT' : 'EMPTY_AWAITING_LOCAL_CHANGE',
+    rule: 'Stan lokalny nie tworzy listy do GSC. Końcowe URL-e powstają dopiero po HTTP 200, canonical, dateModified, treści, sitemap i PDF sprawdzonych na fitpo50.pl.',
     submit_targets: submitTargets,
     items,
     planned_candidates_count: approvalByFile.size,
@@ -3140,11 +3141,10 @@ function buildPoprawSeo() {
     unified_insights: unifiedInsights,
     approval_wave: unifiedInsights.approval_wave,
     chosen_articles: autopilot.chosen_articles,
-    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Najpierw przygotuję konkretne teksty do akceptacji, bez edycji HTML.',
+    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Agent przygotuje konkretne teksty i niezmienny manifest patchy, zastosuje go atomowo, zwaliduje, wykona commit/push, sprawdzi produkcję i poda końcową listę GSC. Nie musisz pamiętać kolejnych komend.',
     safe_next_commands: [
       'npm run popraw-seo',
-      'Po akceptacji tekstów: ręczna edycja wskazanego HTML',
-      'npm run growth:verify',
+      'Po akceptacji ID: automatyczny manifest -> popraw-seo:apply -> walidacja -> commit/push -> LIVE -> lista GSC',
     ],
     reports: Object.fromEntries([
       ['growth_report', 'growth-report.md'],
@@ -3565,7 +3565,7 @@ function writePoprawSeoMarkdown(command, file) {
     lines.push('## GSC Po Zaakceptowanych Zmianach');
     lines.push(`- status: ${insights.gsc_after_change_queue.status}; ${insights.gsc_after_change_queue.rule}`);
     insights.gsc_after_change_queue.items.slice(0, 12).forEach((item) => {
-      lines.push(`- ${item.id}: ${(item.submit_urls || []).join(', ') || item.target_url}`);
+      lines.push(`- ${item.id}: oczekuje na produkcję; plan ${(item.planned_submit_urls || []).join(', ') || item.target_url}`);
     });
     lines.push('');
   }
@@ -3605,8 +3605,8 @@ function writePoprawSeoMarkdown(command, file) {
   lines.push('## Co Teraz');
   lines.push(`- ${command.approval_needed}`);
   lines.push('- Realna edycja nie została wykonana.');
-  lines.push('- Następny krok to przygotowanie ręcznych tekstów w rozmowie: Evidence Box, linki, ewentualna tabela/checklista i hub-link.');
-  lines.push('- HTML edytuj dopiero po akceptacji użytkownika.');
+  lines.push('- Agent przygotowuje konkretne teksty i manifest patchy; HTML zmienia dopiero po akceptacji użytkownika.');
+  lines.push('- Po akceptacji agent prowadzi cały proces do potwierdzenia produkcji i listy GSC albo zgłasza dokładny bloker.');
   lines.push('');
   lines.push('## Raporty');
   Object.values(command.reports).forEach((report) => lines.push(`- ${report}`));
@@ -3688,10 +3688,10 @@ function writeSeoWorkHistoryMarkdown(history, file) {
 }
 
 function writeGscAfterChangeMarkdown(queue, file) {
-  const lines = ['# Popraw SEO — GSC Po Zmianach', '', `Wygenerowano: ${queue?.generated_at || nowWarsawIso()}`, `Status: ${queue?.status || 'EMPTY_AWAITING_REAL_DEPLOYMENT'}`, ''];
+  const lines = ['# Popraw SEO — GSC Po Zmianach', '', `Wygenerowano: ${queue?.generated_at || nowWarsawIso()}`, `Status: ${queue?.status || 'EMPTY_AWAITING_LOCAL_CHANGE'}`, ''];
   lines.push('## Zasada');
   lines.push(`- ${queue?.rule || 'Zgłaszamy URL dopiero po realnej zmianie strony.'}`);
-  lines.push('- Najpierw akceptacja tekstu, potem HTML, dateModified, sitemap/_site, walidacja, dopiero potem GSC.');
+  lines.push('- Najpierw akceptacja tekstu, potem HTML, dateModified, sitemap/_site i walidacja lokalna. Lista GSC powstaje dopiero po kontroli publicznej produkcji.');
   lines.push('');
   const items = queue?.items || [];
   if (!items.length) {
@@ -3704,8 +3704,8 @@ function writeGscAfterChangeMarkdown(queue, file) {
     lines.push(`${item.id}. ${item.file}`);
     lines.push(`   - koszyk: ${item.kind}`);
     lines.push(`   - wdrożone dateModified: ${item.date_modified}`);
-    lines.push(`   - zgłoś: ${(item.submit_urls || []).join(', ') || item.target_url}`);
-    lines.push(`   - dowód wdrożenia: ${item.deployment_evidence?.status || 'MISSING'}`);
+    lines.push(`   - plan po potwierdzeniu live: ${(item.planned_submit_urls || []).join(', ') || item.target_url}`);
+    lines.push(`   - stan lokalny: ${item.deployment_evidence?.status || 'MISSING'}; status: ${item.status}`);
     lines.push(`   - monitoruj: ${item.monitor_after}`);
   });
   lines.push('');
@@ -3870,7 +3870,7 @@ function writePoprawSeoInsightsMarkdown(insights, file) {
     lines.push('## GSC Po Zaakceptowanych Zmianach');
     lines.push(`- ${insights.gsc_after_change_queue.rule}`);
     insights.gsc_after_change_queue.items.slice(0, 15).forEach((item) => {
-      lines.push(`- ${item.id}: ${(item.submit_urls || []).join(', ') || item.target_url}`);
+      lines.push(`- ${item.id}: oczekuje na produkcję; plan ${(item.planned_submit_urls || []).join(', ') || item.target_url}`);
     });
     lines.push('');
   }

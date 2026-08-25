@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Run live smoke on production
         env:
@@ -28,3 +30,55 @@ jobs:
             exit 0
           fi
           exit "$status"
+
+      - name: Detect a new popraw-seo deployment manifest
+        id: seo_pending
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          pending=false
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            [ -f data/reports/popraw-seo-deployments.json ] && pending=true
+          elif [ -n "$BEFORE_SHA" ] && [ "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ]; then
+            if ! git diff --quiet "$BEFORE_SHA" "$GITHUB_SHA" -- data/reports/popraw-seo-deployments.json; then
+              pending=true
+            fi
+          elif git show --name-only --format= "$GITHUB_SHA" | grep -qx 'data/reports/popraw-seo-deployments.json'; then
+            pending=true
+          fi
+          echo "pending=$pending" >> "$GITHUB_OUTPUT"
+          echo "Nowy manifest popraw-seo: $pending"
+
+      - name: Verify approved popraw-seo package on production
+        id: seo_live
+        if: steps.seo_pending.outputs.pending == 'true'
+        run: |
+          set +e
+          node scripts/popraw-seo-live-verify.js --retries 12 --delay-ms 15000 --timeout-ms 12000
+          status="$?"
+          set -e
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Publish GSC list in workflow summary
+        if: always() && steps.seo_pending.outputs.pending == 'true' && hashFiles('data/reports/gsc-live-submit-queue.txt') != ''
+        run: |
+          echo '## Popraw SEO — produkcja i GSC' >> "$GITHUB_STEP_SUMMARY"
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          cat data/reports/gsc-live-submit-queue.txt >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload live GSC queue
+        if: always() && steps.seo_pending.outputs.pending == 'true' && hashFiles('data/reports/gsc-live-submit-queue.json') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: popraw-seo-gsc-live
+          path: |
+            data/reports/gsc-live-submit-queue.json
+            data/reports/gsc-live-submit-queue.txt
+          retention-days: 30
+
+      - name: Enforce confirmed live deployment
+        if: steps.seo_pending.outputs.pending == 'true' && steps.seo_live.outputs.status != '0'
+        run: |
+          echo "Popraw-seo nie zostało potwierdzone na produkcji. Szczegóły są w podsumowaniu i artefakcie workflow."
+          exit 1

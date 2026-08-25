@@ -35,7 +35,7 @@ function writeCommandCenterFixture(file) {
   fs.writeFileSync(file, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 }
 
-test('wave autopilot proposal waits for user approval and writes queues', () => {
+test('wave autopilot proposal waits for approval and does not publish a premature GSC queue', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-wave-'));
   const input = path.join(dir, 'seo-aio-command-center.json');
   writeCommandCenterFixture(input);
@@ -51,18 +51,19 @@ test('wave autopilot proposal waits for user approval and writes queues', () => 
   assert.equal(proposal.status, 'AWAITING_USER_APPROVAL');
   assert.equal(proposal.selected_cards.length, 1);
   assert.equal(proposal.proposed_changes.link_operations.length, 2);
-  assert.ok(proposal.gsc_submit_queue.includes('https://fitpo50.pl/source-a.html'));
+  assert.deepEqual(proposal.gsc_submit_queue, []);
+  assert.ok(proposal.planned_gsc_submit_queue.includes('https://fitpo50.pl/source-a.html'));
   assert.match(fs.readFileSync(path.join(dir, 'seo-aio-wave-proposal.md'), 'utf8'), /Bramka Zatwierdzenia/);
 });
 
-test('wave autopilot blocks apply without explicit confirmation', () => {
+test('wave autopilot blocks the retired generic apply mode', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-wave-block-'));
   const input = path.join(dir, 'seo-aio-command-center.json');
   writeCommandCenterFixture(input);
 
   const result = spawnSync(
     'node',
-    ['scripts/seo-aio-wave-autopilot.js', '--input', input, '--output-dir', dir, '--no-mirror', '--wave', '1', '--apply', 'true', '--mode', 'safe-links'],
+    ['scripts/seo-aio-wave-autopilot.js', '--input', input, '--output-dir', dir, '--no-mirror', '--wave', '1', '--apply', 'true', '--mode', 'safe-links', '--confirm', 'APPLY_WAVE'],
     { cwd: ROOT, encoding: 'utf8' },
   );
 

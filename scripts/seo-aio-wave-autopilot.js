@@ -8,7 +8,6 @@ const ROOT = process.cwd();
 const DEFAULT_WORK_DIR = path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
 const DEFAULT_INPUT = path.join(DEFAULT_WORK_DIR, 'seo-aio-command-center.json');
 const DEFAULT_OUTPUT_DIR = DEFAULT_WORK_DIR;
-const APPLY_CONFIRMATION = 'APPLY_WAVE';
 
 function parseArgs(argv) {
   const out = {
@@ -133,14 +132,6 @@ function cleanAnchor(input, fallback) {
     .slice(0, 90);
 }
 
-function escapeHtml(input) {
-  return String(input || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
 function unique(items) {
   const out = [];
   const seen = new Set();
@@ -174,114 +165,23 @@ function buildLinkOperations(cards, linksPerTarget) {
   return ops;
 }
 
-function hasArticleContent(html) {
-  return /<article\s+class="article-content">/i.test(html);
-}
-
-function hasHrefToTarget(html, targetFile) {
-  const escaped = targetFile.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`<a\\b[^>]*href=["'](?:\\.\\/)?${escaped}(?:[?#][^"']*)?["']`, 'i').test(html);
-}
-
-function formatWarsawIso() {
-  const now = new Date();
-  const parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Europe/Warsaw',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  }).formatToParts(now).reduce((acc, part) => {
-    if (part.type !== 'literal') acc[part.type] = part.value;
-    return acc;
-  }, {});
-  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}+02:00`;
-}
-
-function updateModifiedDates(html, iso) {
-  let next = html;
-  next = next.replace(/(<meta\s+property="article:modified_time"\s+content=")[^"]*(")/i, `$1${iso}$2`);
-  next = next.replace(/("dateModified"\s*:\s*")[^"]*(")/g, `$1${iso}$2`);
-  return next;
-}
-
-function insertContextLink(html, op) {
-  if (!hasArticleContent(html)) return { changed: false, reason: 'NO_ARTICLE_CONTENT', html };
-  if (hasHrefToTarget(html, op.target_file)) return { changed: false, reason: 'LINK_ALREADY_EXISTS', html };
-  const paragraph = [
-    '<p>',
-    'W tym samym kontekście warto też sprawdzić ',
-    `<a href="${escapeHtml(op.target_file)}">${escapeHtml(op.anchor)}</a>`,
-    ', bo ten temat pomaga lepiej ułożyć kolejny krok po 50-tce.',
-    '</p>',
-  ].join('');
-  const articleEnd = html.lastIndexOf('</article>');
-  if (articleEnd === -1) return { changed: false, reason: 'NO_ARTICLE_END', html };
-  const next = `${html.slice(0, articleEnd).trimEnd()}\n${paragraph}\n    ${html.slice(articleEnd)}`;
-  return { changed: true, reason: 'INSERTED', html: next };
-}
-
-function applySafeLinks(ops) {
-  const iso = formatWarsawIso();
-  const results = [];
-  const grouped = new Map();
-  for (const op of ops) {
-    if (!grouped.has(op.source_file)) grouped.set(op.source_file, []);
-    grouped.get(op.source_file).push(op);
-  }
-
-  for (const [sourceFile, sourceOps] of grouped.entries()) {
-    const sourcePath = path.join(ROOT, sourceFile);
-    const sitePath = path.join(ROOT, '_site', sourceFile);
-    if (!fs.existsSync(sourcePath)) {
-      results.push({ source_file: sourceFile, changed: false, reason: 'SOURCE_MISSING' });
-      continue;
-    }
-    let html = fs.readFileSync(sourcePath, 'utf8');
-    const fileResults = [];
-    for (const op of sourceOps) {
-      const inserted = insertContextLink(html, op);
-      html = inserted.html;
-      fileResults.push({ ...op, changed: inserted.changed, reason: inserted.reason });
-    }
-    const changed = fileResults.some((item) => item.changed);
-    if (changed) {
-      html = updateModifiedDates(html, iso);
-      fs.writeFileSync(sourcePath, html, 'utf8');
-      if (fs.existsSync(sitePath)) {
-        let siteHtml = fs.readFileSync(sitePath, 'utf8');
-        for (const op of sourceOps) {
-          siteHtml = insertContextLink(siteHtml, op).html;
-        }
-        siteHtml = updateModifiedDates(siteHtml, iso);
-        fs.writeFileSync(sitePath, siteHtml, 'utf8');
-      }
-    }
-    results.push({ source_file: sourceFile, changed, operations: fileResults });
-  }
-  return { mode: 'safe-links', modified_at: iso, results };
-}
-
 function buildProposal(report, args) {
   const cards = Array.isArray(report.waves?.[args.wave]) ? report.waves[args.wave].slice(0, args.limit) : [];
   const linkOperations = buildLinkOperations(cards, args.linksPerTarget);
-  const gscQueue = unique(cards.flatMap((card) => card.promotion_urls || []));
+  const plannedGscQueue = unique(cards.flatMap((card) => card.promotion_urls || []));
   return {
     generated_at: new Date().toISOString(),
     status: args.apply ? 'APPLY_REQUESTED' : 'AWAITING_USER_APPROVAL',
     approval_gate: {
       default_behavior: 'proposal_only_no_file_changes',
-      apply_requires: `--apply true --mode safe-links --confirm ${APPLY_CONFIRMATION}`,
+      apply_requires: 'Zatwierdzony data/reports/popraw-seo-patches.json oraz popraw-seo:apply.',
       reason: 'Po komendzie GSC agent ma zaproponować falę i czekać na zatwierdzenie przed edycją artykułów.',
     },
     source_report: args.input,
     wave: args.wave,
     selected_cards: cards,
     proposed_changes: {
-      mode: 'safe-links',
+      mode: 'proposal_only',
       link_operations: linkOperations,
       content_upgrades: cards.map((card) => ({
         url: card.url,
@@ -293,7 +193,8 @@ function buildProposal(report, args) {
         performance_delta: card.performance_delta,
       })),
     },
-    gsc_submit_queue: gscQueue,
+    planned_gsc_submit_queue: plannedGscQueue,
+    gsc_submit_queue: [],
     validation_after_approval: unique(cards.flatMap((card) => card.validation_commands || []).concat([
       'npm run llms:full',
       'npm run assets:mirror:sync',
@@ -313,8 +214,8 @@ function writeMarkdown(proposal, file) {
   lines.push('');
   lines.push('## Bramka Zatwierdzenia');
   lines.push('- Domyślnie ten raport niczego nie zmienia w artykułach.');
-  lines.push(`- Wdrożenie wymaga osobnej komendy: \`npm run seo:aio:apply-wave -- --wave ${proposal.wave} --apply true --mode safe-links --confirm ${APPLY_CONFIRMATION}\``);
-  lines.push('- Tryb `safe-links` dodaje tylko linki kontekstowe z raportu i aktualizuje `dateModified`; większe zmiany treściowe wymagają osobnej pracy redakcyjnej.');
+  lines.push('- Stary tryb automatycznego dopisywania linków jest wyłączony, ponieważ tworzył generyczny akapit.');
+  lines.push('- Wdrożenie wykonuje wyłącznie `popraw-seo:apply` na konkretnym, zatwierdzonym manifeście patchy.');
   lines.push('');
   lines.push('## Wybrane Karty');
   if (!proposal.selected_cards.length) {
@@ -381,19 +282,13 @@ function main() {
   const report = readJson(args.input);
   const proposal = buildProposal(report, args);
   if (args.apply) {
-    if (args.mode !== 'safe-links' || args.confirm !== APPLY_CONFIRMATION) {
-      throw new Error(`APPLY_BLOCKED: wdrożenie wymaga --mode safe-links --confirm ${APPLY_CONFIRMATION}`);
-    }
-    proposal.status = 'APPLIED_SAFE_LINKS';
-    proposal.apply_result = applySafeLinks(proposal.proposed_changes.link_operations);
+    throw new Error('APPLY_BLOCKED: generyczny safe-links został wycofany. Użyj zatwierdzonego manifestu przez popraw-seo:apply.');
   }
   const paths = writeOutputs(proposal, args);
   console.log(`[SEO-AIO-WAVE] wave=${proposal.wave} cards=${proposal.selected_cards.length} status=${proposal.status}`);
   console.log(`[SEO-AIO-WAVE] proposal: ${paths.md}`);
   console.log(`[SEO-AIO-WAVE] gsc queue: ${paths.gsc}`);
-  if (!args.apply) {
-    console.log(`[SEO-AIO-WAVE] awaiting approval: npm run seo:aio:apply-wave -- --wave ${proposal.wave} --apply true --mode safe-links --confirm ${APPLY_CONFIRMATION}`);
-  }
+  if (!args.apply) console.log('[SEO-AIO-WAVE] awaiting approval: dalsze wdrożenie tylko przez konkretny manifest popraw-seo:apply.');
 }
 
 main();

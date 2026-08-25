@@ -72,7 +72,7 @@ test('MECHANIZM 2 keeps history, baseline and 7/14/28 checkpoints for every URL'
   assert.ok(history.urls.every((item) => item.baseline && item.checkpoints && item.change_events.length >= 1));
 });
 
-test('MECHANIZM 2 creates GSC queue only after a real validated deployment', () => {
+test('MECHANIZM 2 keeps the GSC queue blocked until production is validated', () => {
   const approvalWave = {
     boost: [{
       id: 'BOOST 1', file: 'a.html', url: 'https://fitpo50.pl/a.html',
@@ -83,14 +83,15 @@ test('MECHANIZM 2 creates GSC queue only after a real validated deployment', () 
     generated_at: '2026-08-24T12:00:00+02:00',
     urls: [{ file: 'a.html', date_modified: '2026-08-24T08:00:00+02:00', change_detected_this_run: true }],
   };
-  const incomplete = buildGscAfterChangeQueue(approvalWave, baseHistory, null, () => ({ status: 'DEPLOYMENT_INCOMPLETE', checks: {} }));
-  assert.equal(incomplete.status, 'EMPTY_AWAITING_REAL_DEPLOYMENT');
+  const incomplete = buildGscAfterChangeQueue(approvalWave, baseHistory, null, () => ({ status: 'LOCAL_DEPLOYMENT_INCOMPLETE', checks: {} }));
+  assert.equal(incomplete.status, 'EMPTY_AWAITING_LOCAL_CHANGE');
   assert.deepEqual(incomplete.submit_targets, []);
 
-  const ready = buildGscAfterChangeQueue(approvalWave, baseHistory, null, () => ({ status: 'DEPLOYED_AND_VALIDATED', checks: { all: true } }));
-  assert.equal(ready.status, 'READY_AFTER_REAL_DEPLOYMENT');
-  assert.deepEqual(ready.submit_targets, ['https://fitpo50.pl/a.html', 'https://fitpo50.pl/source.html']);
-  assert.equal(ready.items[0].status, 'READY_TO_SUBMIT');
+  const local = buildGscAfterChangeQueue(approvalWave, baseHistory, null, () => ({ status: 'COMMITTED_LOCALLY', checks: { all: true } }));
+  assert.equal(local.status, 'AWAITING_LIVE_DEPLOYMENT');
+  assert.deepEqual(local.submit_targets, []);
+  assert.deepEqual(local.items[0].planned_submit_urls, ['https://fitpo50.pl/a.html', 'https://fitpo50.pl/source.html']);
+  assert.equal(local.items[0].status, 'AWAITING_LIVE_DEPLOYMENT');
 });
 
 test('MECHANIZM 2 preserves a confirmed main URL in the durable intent map', () => {

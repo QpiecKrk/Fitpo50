@@ -166,6 +166,10 @@ data/reports/admin-doctor.md
 data/reports/growth/
 data/reports/local/
 data/reports/pipeline-timings.json
+data/reports/popraw-seo-patches.json
+data/reports/popraw-seo-apply-result.json
+data/reports/gsc-live-submit-queue.json
+data/reports/gsc-live-submit-queue.txt
 data/reports/content-freshness-report.json
 data/reports/cwv-budget.json
 data/reports/cwv-budget.md
