@@ -76,6 +76,16 @@ function runStage(label, command, args) {
   };
 }
 
+function runStagesUntilFailure(definitions, runner = runStage) {
+  const stages = [];
+  for (const definition of definitions) {
+    const stage = runner(definition.label, definition.command, definition.args);
+    stages.push(stage);
+    if (stage.status === 'FAIL') break;
+  }
+  return stages;
+}
+
 function valueType(value) {
   if (Array.isArray(value)) return 'array';
   if (value === null) return 'null';
@@ -254,12 +264,14 @@ function main() {
     if (fs.existsSync(htmlPath) && !args.force) {
       blockers.push(`Slug ${slug} już istnieje jako ${htmlPath}. Domyślne force=false blokuje przygotowanie aktualizacji.`);
     } else {
-      stages.push(runStage('Bezpieczny fixer JSON', 'node', ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true']));
-      stages.push(runStage('Normalizacja techniczna bez generowania treści', 'node', ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json']));
-      stages.push(runStage('Pakiet mediów: nazwy, warianty, jakość i różnorodność', 'node', ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'true']));
-      stages.push(runStage('Lokalna intencja, kanibalizacja, linkowanie i centra', 'node', ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true']));
-      stages.push(runStage('Weryfikacja źródeł, URL-i i pochodzenia FAQ', 'node', ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true']));
-      stages.push(runStage('Bramka treści JSON', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile]));
+      stages.push(...runStagesUntilFailure([
+        { label: 'Bezpieczny fixer JSON', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true'] },
+        { label: 'Normalizacja techniczna bez generowania treści', command: 'node', args: ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json'] },
+        { label: 'Pakiet mediów: nazwy, warianty, jakość i różnorodność', command: 'node', args: ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'true'] },
+        { label: 'Lokalna intencja, kanibalizacja, linkowanie i centra', command: 'node', args: ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true'] },
+        { label: 'Weryfikacja źródeł, URL-i i pochodzenia FAQ', command: 'node', args: ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true'] },
+        { label: 'Bramka treści JSON', command: 'node', args: ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile] },
+      ]));
       stages.filter((item) => item.status === 'FAIL').forEach((item) => {
         blockers.push(`${item.label}: ${item.stderr || item.stdout || `exit ${item.exit_code}`}`);
       });
@@ -334,4 +346,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { allocateOutput, collectChanges, copyMediaPackage, main, parseArgs };
+module.exports = { allocateOutput, collectChanges, copyMediaPackage, main, parseArgs, runStagesUntilFailure };

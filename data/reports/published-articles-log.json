@@ -1,7 +1,249 @@
 {
-  "version": 1,
-  "updated_at": "2026-08-12T14:24:21.578Z",
+  "version": 2,
+  "updated_at": "2026-08-25T12:21:57.549Z",
   "items": [
+    {
+      "slug": "czy-jajka-podnosza-cholesterol",
+      "url": "https://fitpo50.pl/czy-jajka-podnosza-cholesterol.html",
+      "operation": "UPDATE",
+      "transaction_id": "article-czy-jajka-podnosza-cholesterol-1787660505357-87545",
+      "first_published_at": "2026-08-25T07:53:42.977Z",
+      "last_published_at": "2026-08-25T12:21:57.549Z",
+      "status": "PUBLISHED_AWAITING_GSC",
+      "baseline": {
+        "captured_at": "2026-08-25T12:21:57.549Z",
+        "status": "NO_GSC_ROW_AT_PUBLICATION",
+        "gsc_generated_at": "2026-08-24T15:14:23.121Z",
+        "window": "rolling_28_days",
+        "range": {
+          "start": "2026-07-27",
+          "end": "2026-08-23"
+        },
+        "metrics": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": null
+        },
+        "source_file": "web-28-current-pages.csv",
+        "contract_status": "PASS",
+        "contract_errors": []
+      },
+      "checkpoints": {
+        "day_7": {
+          "due_date": "2026-09-01",
+          "snapshot": null
+        },
+        "day_14": {
+          "due_date": "2026-09-08",
+          "snapshot": null
+        },
+        "day_28": {
+          "due_date": "2026-09-22",
+          "snapshot": null
+        }
+      },
+      "first_impression_after_publication_at": null,
+      "first_click_after_publication_at": null,
+      "indexed_without_impressions_at": null,
+      "gsc_submission_urls": [
+        "https://fitpo50.pl/czy-jajka-podnosza-cholesterol.html"
+      ],
+      "source_urls_for_recrawl": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/mity.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_events": [
+        {
+          "event_id": "article-czy-jajka-podnosza-cholesterol-1787644411434-83722",
+          "operation": "CREATE",
+          "published_at": "2026-08-25T07:53:42.977Z",
+          "baseline": {
+            "captured_at": "2026-08-25T07:53:42.977Z",
+            "status": "NO_GSC_ROW_AT_PUBLICATION",
+            "gsc_generated_at": "2026-08-24T15:14:23.121Z",
+            "window": "rolling_28_days",
+            "range": {
+              "start": "2026-07-27",
+              "end": "2026-08-23"
+            },
+            "metrics": {
+              "clicks": 0,
+              "impressions": 0,
+              "ctr": 0,
+              "position": null
+            },
+            "source_file": "web-28-current-pages.csv",
+            "contract_status": "PASS",
+            "contract_errors": []
+          },
+          "checkpoints": {
+            "day_7": {
+              "due_date": "2026-09-01",
+              "snapshot": null
+            },
+            "day_14": {
+              "due_date": "2026-09-08",
+              "snapshot": null
+            },
+            "day_28": {
+              "due_date": "2026-09-22",
+              "snapshot": null
+            }
+          },
+          "gsc_submission_urls": [
+            "https://fitpo50.pl/czy-jajka-podnosza-cholesterol.html"
+          ],
+          "source_urls_for_recrawl": [
+            "https://fitpo50.pl/",
+            "https://fitpo50.pl/porady.html",
+            "https://fitpo50.pl/mity.html"
+          ]
+        },
+        {
+          "event_id": "article-czy-jajka-podnosza-cholesterol-1787660293924-86830",
+          "operation": "UPDATE",
+          "published_at": "2026-08-25T12:18:26.586Z",
+          "baseline": {
+            "captured_at": "2026-08-25T12:18:26.586Z",
+            "status": "NO_GSC_ROW_AT_PUBLICATION",
+            "gsc_generated_at": "2026-08-24T15:14:23.121Z",
+            "window": "rolling_28_days",
+            "range": {
+              "start": "2026-07-27",
+              "end": "2026-08-23"
+            },
+            "metrics": {
+              "clicks": 0,
+              "impressions": 0,
+              "ctr": 0,
+              "position": null
+            },
+            "source_file": "web-28-current-pages.csv",
+            "contract_status": "PASS",
+            "contract_errors": []
+          },
+          "checkpoints": {
+            "day_7": {
+              "due_date": "2026-09-01",
+              "snapshot": null
+            },
+            "day_14": {
+              "due_date": "2026-09-08",
+              "snapshot": null
+            },
+            "day_28": {
+              "due_date": "2026-09-22",
+              "snapshot": null
+            }
+          },
+          "gsc_submission_urls": [
+            "https://fitpo50.pl/czy-jajka-podnosza-cholesterol.html"
+          ],
+          "source_urls_for_recrawl": [
+            "https://fitpo50.pl/",
+            "https://fitpo50.pl/porady.html",
+            "https://fitpo50.pl/mity.html"
+          ]
+        },
+        {
+          "event_id": "article-czy-jajka-podnosza-cholesterol-1787660385480-87186",
+          "operation": "UPDATE",
+          "published_at": "2026-08-25T12:19:57.707Z",
+          "baseline": {
+            "captured_at": "2026-08-25T12:19:57.707Z",
+            "status": "NO_GSC_ROW_AT_PUBLICATION",
+            "gsc_generated_at": "2026-08-24T15:14:23.121Z",
+            "window": "rolling_28_days",
+            "range": {
+              "start": "2026-07-27",
+              "end": "2026-08-23"
+            },
+            "metrics": {
+              "clicks": 0,
+              "impressions": 0,
+              "ctr": 0,
+              "position": null
+            },
+            "source_file": "web-28-current-pages.csv",
+            "contract_status": "PASS",
+            "contract_errors": []
+          },
+          "checkpoints": {
+            "day_7": {
+              "due_date": "2026-09-01",
+              "snapshot": null
+            },
+            "day_14": {
+              "due_date": "2026-09-08",
+              "snapshot": null
+            },
+            "day_28": {
+              "due_date": "2026-09-22",
+              "snapshot": null
+            }
+          },
+          "gsc_submission_urls": [
+            "https://fitpo50.pl/czy-jajka-podnosza-cholesterol.html"
+          ],
+          "source_urls_for_recrawl": [
+            "https://fitpo50.pl/",
+            "https://fitpo50.pl/porady.html",
+            "https://fitpo50.pl/mity.html"
+          ]
+        },
+        {
+          "event_id": "article-czy-jajka-podnosza-cholesterol-1787660505357-87545",
+          "operation": "UPDATE",
+          "published_at": "2026-08-25T12:21:57.549Z",
+          "baseline": {
+            "captured_at": "2026-08-25T12:21:57.549Z",
+            "status": "NO_GSC_ROW_AT_PUBLICATION",
+            "gsc_generated_at": "2026-08-24T15:14:23.121Z",
+            "window": "rolling_28_days",
+            "range": {
+              "start": "2026-07-27",
+              "end": "2026-08-23"
+            },
+            "metrics": {
+              "clicks": 0,
+              "impressions": 0,
+              "ctr": 0,
+              "position": null
+            },
+            "source_file": "web-28-current-pages.csv",
+            "contract_status": "PASS",
+            "contract_errors": []
+          },
+          "checkpoints": {
+            "day_7": {
+              "due_date": "2026-09-01",
+              "snapshot": null
+            },
+            "day_14": {
+              "due_date": "2026-09-08",
+              "snapshot": null
+            },
+            "day_28": {
+              "due_date": "2026-09-22",
+              "snapshot": null
+            }
+          },
+          "gsc_submission_urls": [
+            "https://fitpo50.pl/czy-jajka-podnosza-cholesterol.html"
+          ],
+          "source_urls_for_recrawl": [
+            "https://fitpo50.pl/",
+            "https://fitpo50.pl/porady.html",
+            "https://fitpo50.pl/mity.html"
+          ]
+        }
+      ],
+      "signal_definition": "Pierwszy sygnał oznacza pierwszy odczyt, w którym krocząca metryka 28-dniowa przekroczyła baseline; przy baseline równym 0 jest to pierwsze widoczne wyświetlenie lub kliknięcie.",
+      "monitoring_note": "Metryki GSC są kroczącym oknem 28 dni; różnice są sygnałem po publikacji, nie czystą atrybucją efektu."
+    },
     {
       "slug": "gleboki-przysiad-asian-squat",
       "url": "https://fitpo50.pl/gleboki-przysiad-asian-squat.html",

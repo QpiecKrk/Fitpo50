@@ -272,6 +272,18 @@ function inferHomepageCategoryFromListings(href) {
   return '';
 }
 
+function inferCategoryPageFromListings(href) {
+  const normalizedHref = normalizeArticleHref(href);
+  if (!normalizedHref) return '';
+  const matches = ['zdrowie.html', 'jedzenie.html', 'rusz-sie.html', 'ciekawe.html', 'mity.html']
+    .filter((file) => exists(file))
+    .filter((file) => {
+      const rx = new RegExp(`href=["'](?:\\.\\/)?${normalizedHref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["']`, 'i');
+      return rx.test(readUtf8(file));
+    });
+  return matches.length === 1 ? matches[0] : '';
+}
+
 function normalizeImageBase(value) {
   const raw = String(value || '').trim();
   if (!raw) return '';
@@ -655,7 +667,8 @@ function main() {
 
     const slugNeedle = `${slug}.html`;
     const importJson = readImportJsonBySlug(slug);
-    const categoryPage = categoryPageFromImportCategory(importJson?.category);
+    const categoryPage = categoryPageFromImportCategory(importJson?.category)
+      || inferCategoryPageFromListings(slugNeedle);
     if (!indexHtml.includes(slugNeedle)) warnings.push(`index.html nie zawiera "${slugNeedle}"`);
     if (!poradyHtml.includes(slugNeedle)) errors.push(`porady.html nie zawiera "${slugNeedle}"`);
     if (categoryPage) {
@@ -671,7 +684,7 @@ function main() {
         errors.push(`${categoryMirror} nie zawiera "${slugNeedle}"`);
       }
     } else {
-      warnings.push(`Nie udało się ustalić strony kategorii dla sluga "${slug}" z data/import.`);
+      warnings.push(`Nie udało się jednoznacznie ustalić strony kategorii dla sluga "${slug}" z data/import ani listingów.`);
     }
     if (!hasInSitemap(sitemapXml, slugNeedle)) errors.push(`sitemap.xml nie zawiera "${slugNeedle}"`);
     if (!llmsTxt.includes(`https://fitpo50.pl/${slugNeedle}`)) warnings.push(`llms.txt nie zawiera "${slugNeedle}"`);

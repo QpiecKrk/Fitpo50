@@ -11,6 +11,8 @@ const MEDICAL_EVIDENCE_LEVELS = new Set([
   'primary_research',
   'regulatory',
   'official_statistics',
+  'official_guidance',
+  'expert_consensus',
 ]);
 const EVIDENCE_LEVELS = new Set([
   ...MEDICAL_EVIDENCE_LEVELS,
@@ -25,7 +27,7 @@ const EVIDENCE_LEVELS = new Set([
 const STRONG_SOURCE_HOSTS = [
   'pubmed.ncbi.nlm.nih.gov', 'ncbi.nlm.nih.gov', 'nih.gov', 'who.int', 'cdc.gov',
   'ema.europa.eu', 'fda.gov', 'gov.pl', 'nhs.uk', 'cochranelibrary.com', 'cochrane.org',
-  'escardio.org', 'ptkardio.pl', 'heart.org', 'ahajournals.org', 'acsm.org',
+  'escardio.org', 'ptkardio.pl', 'heart.org', 'ahajournals.org', 'acc.org', 'acsm.org',
   'diabetesjournals.org', 'thelancet.com', 'nejm.org', 'jamanetwork.com', 'bmj.com',
   'nature.com', 'sciencedirect.com', 'springer.com', 'wiley.com', 'oup.com',
   'journals.plos.org', 'frontiersin.org', 'europepmc.org', 'doi.org',

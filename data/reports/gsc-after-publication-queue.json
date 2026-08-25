@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "updated_at": "2026-08-25T12:21:57.549Z",
+  "items": [
+    {
+      "slug": "czy-jajka-podnosza-cholesterol",
+      "target_url": "https://fitpo50.pl/czy-jajka-podnosza-cholesterol.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/mity.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-08-25T12:21:57.549Z",
+      "transaction_id": "article-czy-jajka-podnosza-cholesterol-1787660505357-87545",
+      "status": "READY_AFTER_PUBLICATION"
+    }
+  ]
+}

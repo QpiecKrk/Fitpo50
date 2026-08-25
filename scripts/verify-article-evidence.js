@@ -43,7 +43,12 @@ async function requestUrl(url, timeout) {
       error: '',
     };
   } catch (err) {
-    return { url_status: 'broken', http_status: 0, final_url: url, error: err.message || String(err) };
+    return {
+      url_status: 'verification_failed',
+      http_status: 0,
+      final_url: url,
+      error: err.message || String(err),
+    };
   }
 }
 

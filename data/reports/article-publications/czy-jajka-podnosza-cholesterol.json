@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "transaction_id": "article-czy-jajka-podnosza-cholesterol-1787660505357-87545",
+  "generated_at": "2026-08-25T12:21:57.578Z",
+  "status": "PUBLISHED",
+  "operation": "UPDATE",
+  "slug": "czy-jajka-podnosza-cholesterol",
+  "url": "https://fitpo50.pl/czy-jajka-podnosza-cholesterol.html",
+  "manifest_file": "data/reports/article-publications/czy-jajka-podnosza-cholesterol.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "5fcb15d0ad277d5e195b30824b698a708d13d69ee2514f8c7abd77d65f353a80",
+      "after_sha256": "4c6a080d56a6f31471a79687941a7f69e95a8712755dc0b9bf552b9f13063643",
+      "bytes": 635191
+    },
+    {
+      "path": "assets/pdf/czy-jajka-podnosza-cholesterol.pdf",
+      "action": "UPDATE",
+      "before_sha256": "5adadca93bdf3e2e01e3c3a7e30e6bdaa87e0887b319a75403074b4c63cae440",
+      "after_sha256": "71443f0a27c7addc14bf167561dada5585b336745b60a09205f3ea307c66c6a8",
+      "bytes": 558510
+    },
+    {
+      "path": "data/crosslink-suggestions/czy-jajka-podnosza-cholesterol.json",
+      "action": "UPDATE",
+      "before_sha256": "86245c81ab3f96263c36d12ef1db2d1a252572271f125cd2e31a8ed45f5173be",
+      "after_sha256": "9b9d3d114a29437008927f5575c94aaa77325d187d4d9e45ce7e4d74b13e00ed",
+      "bytes": 1325
+    },
+    {
+      "path": "data/reports/article-preview/czy-jajka-podnosza-cholesterol.json",
+      "action": "UPDATE",
+      "before_sha256": "69aee802b3f1b5584d289970af4e2512cba273c31a489460201d8183de9dd95f",
+      "after_sha256": "a78cd7640ea9c26b01b9c8689267cbfb16f4cb508131a2bd07ca0f9bc8c8ded4",
+      "bytes": 994
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "14c6ffe240853d7f8de9eb397459a05c3771f443dda1ade9a724429d5e85b617",
+      "after_sha256": "4afbfca30afc4973e897f76707fc95a2bca99e138f16a05fcacf2d9ed751a361",
+      "bytes": 16689
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "3fe3bfbb03ff90eef65540a4d8ca295cad522bd7f408cad86ec8502ff3fa27be",
+      "after_sha256": "64f31be41c8cd0e11a899c00a60bb886d20c23eb07c8925a1990df15af347386",
+      "bytes": 598
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "3e707d00d69ce27b4a65680ed614f9a8aebec86241b810dc43ebecaf193b3310",
+      "after_sha256": "18ed4f24d980d956bb4eecb4059b5dbc65851a1a0e04d68c69be1a7ddcb23a29",
+      "bytes": 252
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "5fcb15d0ad277d5e195b30824b698a708d13d69ee2514f8c7abd77d65f353a80",
+      "after_sha256": "4c6a080d56a6f31471a79687941a7f69e95a8712755dc0b9bf552b9f13063643",
+      "bytes": 635191
+    },
+    {
+      "path": "_site/assets/pdf/czy-jajka-podnosza-cholesterol.pdf",
+      "action": "UPDATE",
+      "before_sha256": "5adadca93bdf3e2e01e3c3a7e30e6bdaa87e0887b319a75403074b4c63cae440",
+      "after_sha256": "71443f0a27c7addc14bf167561dada5585b336745b60a09205f3ea307c66c6a8",
+      "bytes": 558510
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/czy-jajka-podnosza-cholesterol.json",
+      "action": "UPDATE",
+      "before_sha256": "86245c81ab3f96263c36d12ef1db2d1a252572271f125cd2e31a8ed45f5173be",
+      "after_sha256": "9b9d3d114a29437008927f5575c94aaa77325d187d4d9e45ce7e4d74b13e00ed",
+      "bytes": 1325
+    }
+  ],
+  "files_count": 10
+}

@@ -45,6 +45,7 @@ function stripTags(value) {
 function normalize(value) {
   return stripTags(value)
     .toLowerCase()
+    .replace(/ł/g, 'l')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9\s-]+/g, ' ')
@@ -231,7 +232,8 @@ function readIntentOwners(root) {
 function detectCannibalization(article, inventory, root) {
   const primary = normalize(article.primary_keyword);
   const primaryTokens = unique(tokens(primary));
-  const candidates = inventory.map((item) => {
+  const ownFile = `${article.slug}.html`;
+  const candidates = inventory.filter((item) => item.file !== ownFile).map((item) => {
     const titleTokens = unique(tokens(`${item.title} ${item.h1}`));
     const intersection = primaryTokens.filter((token) => titleTokens.includes(token));
     const coverage = primaryTokens.length ? intersection.length / primaryTokens.length : 0;
@@ -315,7 +317,7 @@ function validateExistingLinks(article, inventory, errors) {
     for (const match of paragraph.html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
       const target = normalizeHref(match[1]);
       const anchor = stripTags(match[2]);
-      if (!validTargets.has(target)) errors.push(`${paragraph.location}: cel linku nie jest istniejącym artykułem BlogPosting (${target || match[1]}).`);
+      if (!validTargets.has(target)) errors.push(`${paragraph.location}: cel linku nie istnieje w lokalnym inventory BlogPosting (${target || match[1]}).`);
       if (!isNaturalAnchor(anchor)) errors.push(`${paragraph.location}: anchor „${anchor}” jest generyczny albo nienaturalny.`);
       if (/^centrum-/i.test(target)) {
         const approved = article.topic_center_approval?.status === 'APPROVED_BY_USER'
@@ -348,6 +350,31 @@ function prepareArticleArchitecture(article, options = {}) {
   const inventory = options.inventory || buildArticleInventory(root);
   const strategy = validateStrategy(article, errors);
   const existing = validateExistingLinks(article, inventory, errors);
+  if (errors.length) {
+    const result = {
+      ok: false,
+      inventory_count: inventory.length,
+      strategy,
+      cannibalization_candidates: [],
+      existing_links: existing,
+      added_links: [],
+      confirmed_link_count: 0,
+      incoming_link_suggestions: [],
+      topic_center_assessment: null,
+      errors,
+      warnings,
+    };
+    if (mutate) {
+      article.intent_audit = {
+        status: 'BLOCKED',
+        inventory_count: inventory.length,
+        primary_keyword: strategy.primary,
+        search_intent: strategy.intent,
+        cannibalization_candidates: [],
+      };
+    }
+    return result;
+  }
   const primaryContent = [
     strategy.primary,
     ...strategy.supporting,

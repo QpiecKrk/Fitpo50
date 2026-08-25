@@ -99,8 +99,8 @@ function main() {
     errors.push('Wykryto placeholder redakcyjny w JSON (np. "do doprecyzowania" / "{{...}}").');
   }
 
-  if (!Array.isArray(json.sources) || json.sources.length < 6) {
-    errors.push(`sources: wymagane >=6, jest ${Array.isArray(json.sources) ? json.sources.length : 0}.`);
+  if (!Array.isArray(json.sources) || json.sources.length < 4) {
+    errors.push(`sources: wymagane >=4, jest ${Array.isArray(json.sources) ? json.sources.length : 0}.`);
   } else {
     json.sources.forEach((s, i) => {
       if (!s || typeof s !== 'object' || !String(s.label || '').trim() || !/^https:\/\//i.test(String(s.url || ''))) {

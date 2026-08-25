@@ -7,8 +7,13 @@ const path = require('node:path');
 const {
   assessCenter,
   buildArticleInventory,
+  isNaturalAnchor,
   prepareArticleArchitecture,
 } = require('../scripts/lib/article-intent-links');
+
+test('Polish letters do not split otherwise natural anchors', () => {
+  assert.equal(isNaturalAnchor('cały sposób jedzenia wpływa na LDL'), true);
+});
 
 function withTempRepo(fn) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-architecture-'));
@@ -79,8 +84,24 @@ test('system blocks generic anchors and targets outside current article inventor
   article.sections[0].paragraphs_html[0] = '<p><a href="nie-istnieje.html">tutaj</a> znajdziesz plan.</p>';
   const result = prepareArticleArchitecture(article, { root, mutate: false });
   assert.equal(result.ok, false);
-  assert.match(result.errors.join('\n'), /nie jest istniejącym artykułem BlogPosting/);
+  assert.match(result.errors.join('\n'), /nie istnieje w lokalnym inventory BlogPosting/);
   assert.match(result.errors.join('\n'), /generyczny albo nienaturalny/);
+}));
+
+test('missing intent blocks before architecture can mutate links or suggestions', () => withTempRepo((root) => {
+  addLinkTargets(root);
+  const article = draft();
+  delete article.search_intent;
+  delete article.primary_keyword;
+  const before = JSON.stringify(article.sections);
+  const result = prepareArticleArchitecture(article, { root, mutate: true });
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join('\n'), /search_intent/);
+  assert.match(result.errors.join('\n'), /primary_keyword/);
+  assert.equal(JSON.stringify(article.sections), before);
+  assert.equal(Object.hasOwn(article, 'internal_link_plan'), false);
+  assert.equal(Object.hasOwn(article, 'incoming_link_suggestions'), false);
+  assert.equal(article.intent_audit.status, 'BLOCKED');
 }));
 
 test('strong collision requires a concrete intent differentiation before import', () => withTempRepo((root) => {
@@ -91,6 +112,15 @@ test('strong collision requires a concrete intent differentiation before import'
   assert.equal(result.ok, false);
   assert.match(result.errors.join('\n'), /CANNIBALIZATION_REVIEW_REQUIRED/);
   assert.equal(result.cannibalization_candidates[0].file, 'istniejacy-powrot.html');
+}));
+
+test('updating an existing slug never reports the article as cannibalizing itself', () => withTempRepo((root) => {
+  addLinkTargets(root);
+  const article = draft();
+  addArticle(root, `${article.slug}.html`, article.title, article.lead);
+  const result = prepareArticleArchitecture(article, { root, mutate: false });
+  assert.equal(result.cannibalization_candidates.some((item) => item.file === `${article.slug}.html`), false);
+  assert.doesNotMatch(result.errors.join('\n'), /CANNIBALIZATION_REVIEW_REQUIRED/);
 }));
 
 test('strong center fit is only a proposal awaiting user approval', () => {

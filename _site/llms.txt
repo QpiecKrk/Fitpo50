@@ -415,5 +415,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Głęboki przysiad (Asian squat): test mobilności po 50-tce | FitPo50"
   section: "Ruch"
   summary: "Głęboki przysiad po 50 pokazuje ruchomość kostek, bioder i kolan. Sprawdź test, bezpieczne warianty, klin pod pięty i plan 5 tygodni bez sprzętu."
-
+- url: https://fitpo50.pl/czy-jajka-podnosza-cholesterol.html
+  title: "Czy jajka naprawdę podnoszą cholesterol? Sprawdzamy badania | FitPo50"
+  section: "Mity"
+  summary: "Czy jajka podnoszą cholesterol LDL? Wyjaśniamy wyniki badań, różnice między jajkiem a masłem oraz kiedy po 50-tce sprawdzić lipidogram i ApoB u lekarza."
 

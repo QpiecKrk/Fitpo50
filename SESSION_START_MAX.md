@@ -267,3 +267,14 @@ W nowej sesji mozesz napisac:
   - brak wymaganych linkow kontekstowych,
   - odpowiedzi FAQ poza zakresem polityki.
 - Nie gromadz plikow jednorazowych: tymczasowe artefakty po zadaniu usuwaj, zostawiaj tylko finalne wyniki.
+
+### Regresje wykryte w prawdziwym teście publikacji (2026-08-25)
+
+- Etapy przygotowania JSON są fail-fast; bez intencji i primary keyword nie wolno mutować linków ani sugestii.
+- `verification_failed` oznacza błąd transportu, a `broken` rzeczywistą odpowiedź HTTP wskazującą uszkodzony adres; obu nie wolno uznać za `reachable`.
+- Wymagaj minimum 4 użytych źródeł z mapowaniem claimów, nie 6 dekoracyjnych URL-i.
+- Nie owijaj semantycznej tabeli/bloku znacznikiem `<p>`; `quick_answer` akceptuje 1-3 pełne zdania i wartości dziesiętne.
+- W kategorii `mity` wymagaj tabeli `MIT`–`FAKT/DOWODY` i mechanizmu wyjaśnionego w FAQ pochodzącym z realnego researchu, bez tworzenia sztucznego pytania.
+- Po usunięciu roboczego JSON-u kategorię ustalaj jednoznacznie z listingów.
+- Mylący obraz odrzuć; nie używaj ukrytego fallbacku. Bramka desktop/mobile/PDF pozostaje obowiązkowa także wtedy, gdy Chromium wymaga uruchomienia poza sandboxem.
+- Aktualizowany URL nie może być uznany za kanibalizację samego siebie. W PDF nie dziel listy źródeł między strony; po zmianie renderuj i oglądaj wszystkie strony, bo pokrycie tekstu nie wykrywa sierot typograficznych.

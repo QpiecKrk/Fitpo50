@@ -166,4 +166,15 @@ data/reports/admin-doctor.md
 data/reports/growth/
 data/reports/local/
 data/reports/pipeline-timings.json
+data/reports/content-freshness-report.json
+data/reports/cwv-budget.json
+data/reports/cwv-budget.md
+data/reports/faq-refresh-report.json
+data/reports/link-topology-report.json
+data/reports/link-topology-report.md
+data/reports/quick-answer-backlog.json
+data/reports/quick-answer-backlog.md
+data/reports/seo-crawl-report.json
+data/reports/seo-crawl-report.md
+data/reports/session-start-report.md
 data/cache/internal-link-corpus.json

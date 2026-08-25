@@ -6,7 +6,9 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 
 const { validateArticleEvidence } = require('../scripts/lib/article-evidence');
-const { classifyHttpStatus } = require('../scripts/verify-article-evidence');
+const { classifyHttpStatus, requestUrl } = require('../scripts/verify-article-evidence');
+const { ensureParagraphWrapper } = require('../scripts/fix-fitpo50-json');
+const { hasClearQuickAnswerForm } = require('../scripts/json-fitpo50-gate-diff');
 
 const REPO = path.resolve(__dirname, '..');
 const TODAY = '2026-08-24';
@@ -140,6 +142,34 @@ test('URL checker distinguishes a reachable restricted endpoint from a broken ad
   assert.equal(classifyHttpStatus(500), 'broken');
 });
 
+test('transport failure is not mislabeled as a broken source URL', async () => {
+  const result = await requestUrl('http://127.0.0.1:1/source', 1000);
+  assert.equal(result.url_status, 'verification_failed');
+  assert.equal(result.http_status, 0);
+  assert.ok(result.error);
+});
+
+test('trusted institutional guidance and consensus qualify as medical evidence', () => {
+  const json = validEvidenceJson();
+  json.sources[0].url = 'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000743';
+  json.sources[0].evidence_level = 'expert_consensus';
+  json.sources[1].url = 'https://www.heart.org/en/healthy-living/healthy-eating/eat-smart/nutrition-basics/eggs';
+  json.sources[1].evidence_level = 'official_guidance';
+  json.evidence_claims[0].source_urls = json.sources.map((item) => item.url);
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
+test('American College of Cardiology guidance is recognized as a strong institutional source', () => {
+  const json = validEvidenceJson();
+  const acc = 'https://www.acc.org/Latest-in-Cardiology/Articles/2025/07/01/01/Prioritizing-Health-Dietary-Approaches-For-Elevated-LDL-C';
+  json.sources[0].url = acc;
+  json.sources[0].evidence_level = 'official_guidance';
+  json.evidence_claims[0].source_urls = [acc, json.sources[1].url];
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
 test('strict autofix never invents quick answers, FAQ, research or sources', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-no-faq-autofix-'));
   try {
@@ -162,6 +192,19 @@ test('strict autofix never invents quick answers, FAQ, research or sources', () 
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('JSON fixer never wraps semantic block content inside a paragraph', () => {
+  const table = '<div class="article-table-wrap"><table><caption>Wyniki</caption></table></div>';
+  assert.equal(ensureParagraphWrapper(table), table);
+  assert.equal(ensureParagraphWrapper('<table><caption>Wyniki</caption></table>'), '<table><caption>Wyniki</caption></table>');
+  assert.equal(ensureParagraphWrapper('Zwykły tekst'), '<p>Zwykły tekst</p>');
+});
+
+test('quick answer gate accepts a concise multi-sentence paragraph and decimal values', () => {
+  assert.equal(hasClearQuickAnswerForm('Jajka mogą zmieniać LDL. W badaniu różnica wyniosła 8.14 mg/dl. Decyzję oprzyj na swoim wyniku.'), true);
+  assert.equal(hasClearQuickAnswerForm('urwany fragment bez końca'), false);
+  assert.equal(hasClearQuickAnswerForm('Pierwsze. Drugie. Trzecie. Czwarte.'), false);
 });
 
 test('base JSON fixer preserves missing evidence as blockers instead of fabricating content', () => {

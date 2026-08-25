@@ -12,7 +12,7 @@ const {
   reportPathForJson,
   sha256File,
 } = require('../scripts/lib/article-json-artifact');
-const { collectChanges, copyMediaPackage } = require('../scripts/article-json-workbench');
+const { collectChanges, copyMediaPackage, runStagesUntilFailure } = require('../scripts/article-json-workbench');
 const { resolve } = require('../scripts/article-manager');
 
 const REPO = path.resolve(__dirname, '..');
@@ -28,6 +28,21 @@ function withTempDir(fn) {
 
 test('status lifecycle uses only DRAFT, CONTENT_READY and BLOCKED', () => {
   assert.deepEqual(Object.values(STATUSES), ['DRAFT', 'CONTENT_READY', 'BLOCKED']);
+});
+
+test('workbench stops dependent stages after the first failure', () => {
+  const called = [];
+  const definitions = [
+    { label: 'one', command: 'node', args: [] },
+    { label: 'two', command: 'node', args: [] },
+    { label: 'three', command: 'node', args: [] },
+  ];
+  const stages = runStagesUntilFailure(definitions, (label) => {
+    called.push(label);
+    return { label, status: label === 'two' ? 'FAIL' : 'PASS' };
+  });
+  assert.deepEqual(called, ['one', 'two']);
+  assert.deepEqual(stages.map((item) => item.status), ['PASS', 'FAIL']);
 });
 
 test('article manager defaults to JSON preparation, not publishing', () => {

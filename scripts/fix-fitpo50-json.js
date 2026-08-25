@@ -102,7 +102,7 @@ function truncateAtWordBoundary(text, maxChars) {
 function ensureParagraphWrapper(html) {
   const raw = String(html || '').trim();
   if (!raw) return '';
-  if (/^<p[\s>]/i.test(raw)) return raw;
+  if (/^<(?:p|div|table|figure|aside|ul|ol|blockquote|pre)[\s>]/i.test(raw)) return raw;
   return `<p>${raw}</p>`;
 }
 
@@ -316,8 +316,8 @@ function validate(json) {
       }
     }
   }
-  if (!Array.isArray(json.sources) || json.sources.length < 6) {
-    errors.push(`sources < 6 (jest ${Array.isArray(json.sources) ? json.sources.length : 0})`);
+  if (!Array.isArray(json.sources) || json.sources.length < 4) {
+    errors.push(`sources < 4 (jest ${Array.isArray(json.sources) ? json.sources.length : 0})`);
   }
   if (!Array.isArray(json.answer_blocks) || json.answer_blocks.length < 4) {
     errors.push(`answer_blocks < 4 (jest ${Array.isArray(json.answer_blocks) ? json.answer_blocks.length : 0})`);
@@ -527,4 +527,6 @@ function main() {
   console.log(`[OK] fix-fitpo50-json: ${path.relative(process.cwd(), file)}`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { ensureParagraphWrapper };

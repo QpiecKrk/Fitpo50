@@ -1688,3 +1688,18 @@ Jesli artykul ma obrazy:
   - Braki w starych artykulach (np. brak pelnych danych GSC, slabsze FAQ, historyczne warningi social image/title) traktuj jako `WARN/ACTION`, chyba ze naruszaja twarde gate techniczne, medyczne lub kontrakt publikacyjny.
   - Artykuly bez danych GSC nie sa pomijane: trafiaja do `P1_NO_GSC_DATA_BUILD_DISCOVERY` i dostaja propozycje slow kluczowych, linkowania oraz decyzje redakcyjna.
 - **Zasada decyzyjna dla agentow:** raport nie jest artefaktem koncowym. Po `GSC` agent ma przejsc od raportu do priorytetow, planu fali, wdrozenia, walidacji, listy URL-i do GSC i planu pomiaru efektow.
+
+## Wnioski z pełnego testu nowej publikacji (2026-08-25)
+
+- Workbench JSON działa zależnie i fail-fast: po pierwszym `FAIL` nie uruchamia etapów, które mogłyby mutować niegotowy draft; brak prawidłowej intencji/primary keyword blokuje architekturę przed dodaniem linków, sugestii i wpisów kanibalizacji.
+- Błąd transportu podczas sprawdzania źródła ma status `verification_failed`, nigdy fałszywe `broken`; nadal blokuje publikację do czasu realnej kontroli. HTTP 4xx/5xx jest klasyfikowany osobno.
+- Minimum źródeł wynosi 4 realne, działające i przypisane do konkretnych `evidence_claims`; nie wolno sztucznie dobijać licznika do 6 dekoracyjnymi URL-ami. Oficjalne guidance i expert consensus z uznanych domen instytucjonalnych mogą być silnym dowodem medycznym.
+- Fixer nie może owijać semantycznych bloków (`div`, `table`, `figure`, `aside`, listy, `blockquote`, `pre`) znacznikiem `<p>`. Tabela pozostaje prawdziwym HTML z `caption`, `thead`, `tbody` i `scope`.
+- Naturalność anchorów musi poprawnie normalizować polskie `ł`; poprawnych polskich fraz nie wolno odrzucać przez błędną tokenizację.
+- Przy aktualizacji istniejącego artykułu jego własny `${slug}.html` nie jest kandydatem kanibalizacji; pozostałe URL-e o tej samej intencji nadal wymagają decyzji właściciela intencji.
+- `quick_answer` może być jednym zdaniem albo zwięzłym akapitem 1-3 pełnych zdań; walidacja nie może mylić kropki dziesiętnej z końcem zdania.
+- Dla kategorii `mity` wymagane są: jawny mit i werdykt, praktyczna alternatywa, semantyczna tabela `MIT`–`FAKT/DOWODY` oraz wyjaśnienie mechanizmu w FAQ opartym na realnym GSC/PAA/autocomplete/researchu. Nie wolno wymyślać pytania tylko dla spełnienia bramki.
+- Po usunięciu zużytego JSON-u predeploy ustala kategorię z dokładnie jednego prawdziwego listingu kategorii; brak archiwalnego draftu nie może powodować ślepego ostrzeżenia.
+- Obraz z mylącą liczbą, niepowiązanym tekstem lub fałszywą pewnością jest odrzucany, nie używany jako fallback. Brakujący potrzebny kadr wymaga jawnie zweryfikowanego zamiennika i pełnego manifestu AVIF/WebP/JPG.
+- Jeśli Chromium nie uruchamia się wyłącznie przez sandbox macOS/Mach, należy powtórzyć obowiązkową bramkę podglądu z właściwą zgodą systemową; nie wolno pomijać renderu desktop/mobile/PDF.
+- Generator PDF ma rezerwować przed `h2#zrodla` miejsce na cały blok źródeł i disclaimer, aby lista nie rozpadała się między stronami; po każdej istotnej zmianie PDF trzeba wyrenderować wszystkie strony do obrazów i obejrzeć je ręcznie.
