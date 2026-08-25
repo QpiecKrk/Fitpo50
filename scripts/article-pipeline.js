@@ -240,8 +240,12 @@ async function main() {
     console.log(`[STAGING] Izolowany katalog: ${stageRoot}`);
     console.log(`[PUBLICATION] Tryb ${operation}; transakcja ${transactionId}.`);
     try {
+      let phaseStarted = Date.now();
       runInStaging(stageRoot, [...process.argv.slice(2), '--file', input, '--assets-dir', assetsDir]);
+      stepTimings.push({ tag: 'Izolowany staging: HTML, media, PDF i walidatory', durationMs: Date.now() - phaseStarted });
+      phaseStarted = Date.now();
       runPreviewGate(stageRoot, slug);
+      stepTimings.push({ tag: 'Render desktop/mobile i kontrola PDF', durationMs: Date.now() - phaseStarted });
       const monitoring = preparePublicationMonitoring({
         stageRoot,
         article: parsedInput,

@@ -53,9 +53,9 @@ Dodatkowo według zadania:
 
 #### `dodaj artykuł`
 
-Uruchom pełny workflow JSON-first:
+To jedno polecenie użytkownika uruchamia kanoniczne `article:add`. Użytkownik przekazuje JSON i obrazy; nie musi pamiętać komend pośrednich. Wewnątrz pozostają dwie bezpiecznie rozdzielone fazy:
 
-1. `popraw-json`: `DRAFT` → `CONTENT_READY`, bez tworzenia HTML.
+1. Szybkie `popraw-json`: `DRAFT` → `CONTENT_READY`, bez tworzenia HTML. Najpierw logika, źródła, intencja i pełny preflight treści; dopiero potem kontrola podpisów/obrazów i brakujące warianty mediów.
    Draft dla Claude można tworzyć skillem `docs/skills/fitpo50-article-draft/`; jego walidacja potwierdza tylko strukturę `DRAFT`. FAQ bez rzeczywistego sygnału pozostaje luką do udokumentowanego researchu lokalnego, nigdy automatycznym dopiskiem.
 2. Lokalna intencja, kanibalizacja, minimum 4 prawdziwe linki i propozycja centrum.
 3. Rzeczywista kontrola obrazów oraz manifest AVIF/WebP/JPG.
@@ -65,7 +65,9 @@ Uruchom pełny workflow JSON-first:
 7. Listingi, sitemap, indeksy, `llms.txt`, `_site`, historia i kolejka GSC.
 8. Wszystkie walidatory z `ARTICLE_STANDARD.md`.
 
-Pipeline ma działać fail-fast. Po błędzie nie uruchamiaj zależnych etapów ani nie zostawiaj półgotowej publikacji.
+Techniczna komenda kanoniczna: `npm run article:add -- --file "<draft.fitpo50.json>"`. `article:prepare-json` służy tylko wtedy, gdy użytkownik jawnie chce dostać poprawiony JSON bez publikacji; `article:publish` jest komendą wznowienia dla istniejącego `CONTENT_READY`, nie dodatkowym krokiem do zapamiętania.
+
+Pipeline działa fail-fast. Po błędzie nie uruchamia zależnych etapów ani nie zostawia półgotowej publikacji. Poprawne sprawdzenia URL-i są pamiętane lokalnie przez 7 dni, warianty niezmienionych obrazów są ponownie używane, a kolejne podejście zapisuje ten sam roboczy pakiet zamiast tworzyć serie `-r2`, `-r3`. Jeśli atom zawiedzie, identyczny hashami pakiet `CONTENT_READY` jest przy kolejnej próbie używany bez ponownego przygotowania. Zmiana JSON-u albo obrazu unieważnia pamięć pakietu; tanie bramki treści zawsze wykonują się podczas nowego przygotowania.
 
 Każdy nowy błąd wykryty podczas `dodaj artykuł` albo `Obal mit` napraw dwupoziomowo: najpierw w bieżącym artykule, następnie u źródła w pipeline. Gdy błąd można wykryć automatycznie, dodaj test regresji lub błędny fixture. Nie kończ na ręcznej korekcie jednego pliku i nie osłabiaj bramki, aby przepuścić artykuł.
 

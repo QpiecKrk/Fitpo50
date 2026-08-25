@@ -74,14 +74,15 @@ SKIP_TS_BUILD=1 ./scripts/export_site.sh
 
 ## Dodawanie lub aktualizacja artykułu
 
-Najbezpieczniejsza ścieżka jest dwustopniowa: najpierw powstaje chroniony artefakt `CONTENT_READY`, a dopiero potem HTML:
+Jedno polecenie wykonuje dwie bezpieczne fazy wewnętrzne: najpierw chroniony artefakt `CONTENT_READY`, a dopiero potem atomową publikację HTML, mediów i PDF:
 
 ```bash
-npm run article:prepare-json --file="<draft.fitpo50.json>"
-npm run article:publish --file="<CONTENT_READY.fitpo50.json>"
+npm run article:add -- --file "<draft.fitpo50.json>"
 ```
 
-Po zmianach artykułów warto uruchomić:
+`article:prepare-json` służy wyłącznie do korekty bez publikacji, a `article:publish` do technicznego wznowienia istniejącego `CONTENT_READY`.
+
+Kontrole mirror i predeploy są częścią `article:add`; poniższe komendy pozostają narzędziami serwisowymi:
 
 ```bash
 npm run assets:mirror:sync

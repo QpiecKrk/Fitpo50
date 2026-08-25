@@ -6,7 +6,7 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 
 const { validateArticleEvidence } = require('../scripts/lib/article-evidence');
-const { classifyHttpStatus, requestUrl } = require('../scripts/verify-article-evidence');
+const { cachedResult, classifyHttpStatus, requestUrl } = require('../scripts/verify-article-evidence');
 const { ensureParagraphWrapper } = require('../scripts/fix-fitpo50-json');
 const { hasClearQuickAnswerForm } = require('../scripts/json-fitpo50-gate-diff');
 
@@ -140,6 +140,18 @@ test('URL checker distinguishes a reachable restricted endpoint from a broken ad
   assert.equal(classifyHttpStatus(429), 'reachable');
   assert.equal(classifyHttpStatus(404), 'broken');
   assert.equal(classifyHttpStatus(500), 'broken');
+});
+
+test('fresh local URL verification is reused, but stale and failed results are not', () => {
+  const url = 'https://example.org/source';
+  const now = Date.parse('2026-08-25T10:00:00Z');
+  const fresh = { entries: { [url]: { verified_at: '2026-08-24T10:00:00Z', url_status: 'reachable', http_status: 200, final_url: url } } };
+  assert.equal(cachedResult(fresh, url, now, 7).cached, true);
+  fresh.entries[url].verified_at = '2026-08-01T10:00:00Z';
+  assert.equal(cachedResult(fresh, url, now, 7), null);
+  fresh.entries[url].verified_at = '2026-08-24T10:00:00Z';
+  fresh.entries[url].url_status = 'verification_failed';
+  assert.equal(cachedResult(fresh, url, now, 7), null);
 });
 
 test('transport failure is not mislabeled as a broken source URL', async () => {

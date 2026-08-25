@@ -3,11 +3,31 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
-const { prepareArticleMedia, validateManifestStructure } = require('../scripts/lib/article-media');
+const { createVariant, prepareArticleMedia, validateManifestStructure } = require('../scripts/lib/article-media');
 
 function makePackage() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-media-test-'));
 }
+
+test('wariant obrazu jest używany ponownie tylko do czasu zmiany pliku źródłowego', () => {
+  const dir = makePackage();
+  try {
+    const source = path.join(dir, 'source.jpg');
+    const target = path.join(dir, 'variant.jpg');
+    fs.writeFileSync(source, 'wersja-1');
+    fs.copyFileSync(source, target);
+    const baseTime = Date.now() / 1000;
+    fs.utimesSync(source, baseTime - 10, baseTime - 10);
+    fs.utimesSync(target, baseTime, baseTime);
+    assert.equal(createVariant(source, target, 'jpg'), false);
+    fs.writeFileSync(source, 'wersja-2');
+    fs.utimesSync(source, baseTime + 10, baseTime + 10);
+    assert.equal(createVariant(source, target, 'jpg'), true);
+    assert.equal(fs.readFileSync(target, 'utf8'), 'wersja-2');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
 
 function prompt(ref, base, topic, technique, composition) {
   return {

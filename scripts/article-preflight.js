@@ -73,6 +73,7 @@ function normalizeForSearch(value) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  const contentOnly = String(args['content-only'] || 'false').toLowerCase() === 'true';
   const file = args.file ? path.resolve(args.file) : '';
   if (!file || !fs.existsSync(file)) {
     console.error('Usage: node scripts/article-preflight.js --file <path.fitpo50.json> [--assets-dir <dir>]');
@@ -84,7 +85,7 @@ function main() {
   const errors = [];
   const warnings = [];
 
-  if (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory()) {
+  if (!contentOnly && (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory())) {
     errors.push(`Nie znaleziono katalogu assets-dir: ${assetsDir}`);
   }
 
@@ -317,13 +318,15 @@ function main() {
   architectureValidation.errors.forEach((msg) => errors.push(`Architecture: ${msg}`));
   architectureValidation.warnings.forEach((msg) => warnings.push(`Architecture: ${msg}`));
 
-  const mediaValidation = prepareArticleMedia(json, {
-    assetsDir,
-    mutate: false,
-    ensureVariants: false,
-  });
-  mediaValidation.errors.forEach((message) => errors.push(`Media: ${message}`));
-  mediaValidation.warnings.forEach((message) => warnings.push(`Media: ${message}`));
+  if (!contentOnly) {
+    const mediaValidation = prepareArticleMedia(json, {
+      assetsDir,
+      mutate: false,
+      ensureVariants: false,
+    });
+    mediaValidation.errors.forEach((message) => errors.push(`Media: ${message}`));
+    mediaValidation.warnings.forEach((message) => warnings.push(`Media: ${message}`));
+  }
 
   if (warnings.length) {
     console.log('[WARN]');
@@ -336,7 +339,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log('[PASS] article-preflight OK');
+  console.log(`[PASS] article-preflight OK (${contentOnly ? 'content-only' : 'content+media'})`);
 }
 
 main();

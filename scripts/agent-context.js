@@ -78,7 +78,7 @@ function main() {
       push_check: 'npm run prepush:local',
       export: './scripts/export_site.sh',
       gsc: 'npm run gsc:auto',
-      article_publish: 'npm run article:publish --file=/path/to/file.fitpo50.json',
+      article_add: 'npm run article:add -- --file /path/to/draft.fitpo50.json',
     },
   };
 

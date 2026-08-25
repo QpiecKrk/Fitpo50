@@ -142,7 +142,7 @@ function printUsage() {
     '  INDEXNOW_KEY_LOCATION           optional full URL to hosted key file',
     '',
     'Recommended publish command (requires CONTENT_READY artifact):',
-    '  npm run article:publish --file="...fitpo50.json"',
+    '  npm run article:publish -- --file "...fitpo50.json"',
   ].join('\n'));
 }
 
@@ -2467,7 +2467,7 @@ async function main() {
   if (!precheckOnly) {
     const prepared = inspectPreparedArtifact(resolvedInput, ROOT);
     if (!prepared.ok) {
-      throw new Error(`Importer wymaga niezmienionego artefaktu CONTENT_READY:\n- ${prepared.errors.join('\n- ')}\nNajpierw uruchom article:prepare-json.`);
+      throw new Error(`Importer wymaga niezmienionego artefaktu CONTENT_READY:\n- ${prepared.errors.join('\n- ')}\nDla draftu uruchom article:add; article:prepare-json służy tylko do korekty bez publikacji.`);
     }
   }
 

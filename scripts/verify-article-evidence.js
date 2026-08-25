@@ -5,15 +5,48 @@ const path = require('path');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 
 function parseArgs(argv) {
-  const out = { write: false, timeout: 8000 };
+  const out = { write: false, timeout: 8000, refresh: false, 'cache-ttl-days': 7 };
   for (let i = 0; i < argv.length; i += 1) {
     const token = String(argv[i] || '');
     const next = argv[i + 1];
     if (token === '--file') out.file = String(next || '').trim(), i += 1;
     else if (token === '--write') out.write = String(next || 'true').toLowerCase() !== 'false', i += 1;
     else if (token === '--timeout') out.timeout = Math.max(1000, Number(next || 8000)), i += 1;
+    else if (token === '--cache-file') out['cache-file'] = String(next || '').trim(), i += 1;
+    else if (token === '--cache-ttl-days') out['cache-ttl-days'] = Math.max(1, Number(next || 7)), i += 1;
+    else if (token === '--refresh') out.refresh = String(next || 'true').toLowerCase() !== 'false', i += 1;
   }
   return out;
+}
+
+function readCache(cacheFile) {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
+    return parsed && typeof parsed === 'object' && parsed.entries && typeof parsed.entries === 'object'
+      ? parsed
+      : { version: 1, entries: {} };
+  } catch (_error) {
+    return { version: 1, entries: {} };
+  }
+}
+
+function cachedResult(cache, url, nowMs, ttlDays) {
+  const entry = cache?.entries?.[url];
+  const verifiedAt = Date.parse(String(entry?.verified_at || ''));
+  const fresh = Number.isFinite(verifiedAt) && nowMs - verifiedAt <= ttlDays * 86400000;
+  if (!fresh || entry.url_status !== 'reachable' || Number(entry.http_status || 0) < 1) return null;
+  return {
+    url_status: entry.url_status,
+    http_status: Number(entry.http_status),
+    final_url: String(entry.final_url || url),
+    error: '',
+    cached: true,
+  };
+}
+
+function writeCache(cacheFile, cache) {
+  fs.mkdirSync(path.dirname(cacheFile), { recursive: true });
+  fs.writeFileSync(cacheFile, `${JSON.stringify(cache, null, 2)}\n`, 'utf8');
 }
 
 function classifyHttpStatus(status) {
@@ -73,9 +106,13 @@ async function main() {
     urlToItems.get(url).push(item);
   });
   const today = new Date().toISOString().slice(0, 10);
+  const cacheFile = path.resolve(process.cwd(), args['cache-file'] || path.join('.cache', 'article-evidence-urls.json'));
+  const cache = readCache(cacheFile);
+  const nowMs = Date.now();
   const entries = [...urlToItems.entries()];
   const results = await Promise.all(entries.map(async ([url, items]) => {
-    const result = await requestUrl(url, args.timeout);
+    const result = (!args.refresh && cachedResult(cache, url, nowMs, args['cache-ttl-days']))
+      || await requestUrl(url, args.timeout);
     items.forEach((item) => {
       item.checked_at = today;
       item.url_status = result.url_status;
@@ -84,10 +121,19 @@ async function main() {
       if (result.error) item.url_error = result.error;
       else delete item.url_error;
     });
+    if (result.url_status === 'reachable' && !result.cached) {
+      cache.entries[url] = {
+        verified_at: new Date(nowMs).toISOString(),
+        url_status: result.url_status,
+        http_status: result.http_status,
+        final_url: result.final_url,
+      };
+    }
     return { url, ...result };
   }));
+  writeCache(cacheFile, cache);
   if (args.write) fs.writeFileSync(file, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
-  results.forEach((result) => console.log(`[EVIDENCE-URL] ${result.url_status} ${result.http_status || '-'} ${result.url}`));
+  results.forEach((result) => console.log(`[EVIDENCE-URL] ${result.cached ? 'cache ' : ''}${result.url_status} ${result.http_status || '-'} ${result.url}`));
   const validation = validateArticleEvidence(json, { today });
   if (!validation.ok) {
     console.error('\n[FAIL] Evidence gate');
@@ -104,4 +150,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { classifyHttpStatus, parseArgs, requestUrl };
+module.exports = { cachedResult, classifyHttpStatus, parseArgs, readCache, requestUrl };

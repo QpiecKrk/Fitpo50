@@ -84,7 +84,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 
 - Przed publikacją określ `search_intent`, jedną `primary_keyword` i 3–8 `supporting_keywords`.
 - Linkowanie wewnętrzne powstaje lokalnie na podstawie istniejących stron. Claude nie zna repozytorium i nie podaje slugów.
-- Importowy skill Claude dla nowych draftów znajduje się w `docs/skills/fitpo50-article-draft/`, a gotowy ZIP obok tego katalogu. Claude kończy wyłącznie na `DRAFT`; `DRAFT_VALID` nie oznacza `CONTENT_READY`. Wszystkie uwagi przekazuje w `editorial_notes`, bez osobnej notatki i bez zgadywania linków, centrum lub GSC. Następny etap to lokalne `npm run article:prepare-json --file=<draft.fitpo50.json>`.
+- Importowy skill Claude dla nowych draftów znajduje się w `docs/skills/fitpo50-article-draft/`, a gotowy ZIP obok tego katalogu. Claude kończy wyłącznie na `DRAFT`; `DRAFT_VALID` nie oznacza `CONTENT_READY`. Wszystkie uwagi przekazuje w `editorial_notes`, bez osobnej notatki i bez zgadywania linków, centrum lub GSC. Przy poleceniu `dodaj artykuł` lokalny agent uruchamia jedną komendę `article:add`; samo `article:prepare-json` stosuje tylko na jawne żądanie korekty bez publikacji.
 - Artykuł ma minimum 4 naturalne linki kontekstowe do istniejących URL-i, ze ścieżkami względnymi.
 - Aktualizowany URL nie może być uznany za kanibalizację samego siebie.
 - Dla każdej intencji wybieramy jeden główny URL; pozostałe strony go wspierają i nie konkurują równolegle tym samym title/H1.

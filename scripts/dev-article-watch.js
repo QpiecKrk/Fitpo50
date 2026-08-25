@@ -27,7 +27,7 @@ function now() {
 
 function runFastGate(file, assetsDir) {
   return new Promise((resolve) => {
-    const args = ['scripts/article-fast-gate.js', '--file', file, '--write', 'false'];
+    const args = ['scripts/article-ready-check.js', '--file', file, '--write', 'false'];
     if (assetsDir) args.push('--assets-dir', assetsDir);
     console.log(`\n[${now()}] FAST-GATE start`);
     const child = spawn('node', args, { stdio: 'inherit' });
@@ -57,7 +57,7 @@ async function main() {
 
   console.log(`[WATCH] ${file}`);
   if (assetsDir) console.log(`[ASSETS] ${assetsDir}`);
-  console.log('[INFO] Zapisz plik, aby automatycznie uruchomić fast-gate. Ctrl+C aby zakończyć.');
+  console.log('[INFO] Zapisz plik, aby automatycznie uruchomić kontrolę CONTENT_READY. Ctrl+C aby zakończyć.');
 
   let timer = null;
   let running = false;

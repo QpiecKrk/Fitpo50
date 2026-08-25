@@ -64,40 +64,23 @@ Zmiany globalne robimy przez tokeny CSS w `style.css`:
 
 Zasada: „zmień raz, zmień wszędzie”.
 
-## 7. Procedura dodawania nowego artykułu
-1. Generator:
-`node scripts/create-article-from-template.js --slug <slug> --title "<tytuł>" --category <ruch|jedzenie|zdrowie|ciekawe|mity> --description "<opis>"`
-2. Uzupełnienie treści i SEO.
-3. Ustaw daty publikacji:
-`article:published_time` i `BlogPosting.datePublished` = faktyczna data publikacji.
-`article:modified_time` i `BlogPosting.dateModified` = data ostatniej istotnej aktualizacji.
-Format obowiązkowy: pełny ISO 8601 z godziną i strefą czasową (np. `2026-04-24T08:00:00+02:00`).
-4. Podpięcie nawigacyjne:
-- dodaj wpis na stronie kategorii i w `porady.html`,
-- ustaw `data-order = max + 1` (unikalne) na obu listach,
-- dodaj URL do `sitemap.xml` i wpis do `llms.txt`.
-5. Walidacja standardu:
-`node scripts/validate-article-standard.js <plik.html>`
-6. PDF + przycisk pobierania (obowiązkowe):
-`npm run article:pdf:builder -- --slug <slug>`
-albo hurtowo:
-`npm run article:pdf:sync`
-7. Synchronizacja do `_site`.
-8. Kontrola końcowa:
-- nowy wpis jest widoczny w `porady.html` i na stronie kategorii,
-- sekcja "Nowy artykuł" na `index.html` wskazuje ten wpis.
-- Po publikacji nie zostawiaj w repo roboczego JSON-a z `data/import/*.fitpo50.json`, jeśli finalny HTML jest gotowy i JSON nie jest potrzebny do produkcji.
+## 7. Kanoniczna procedura dodawania nowego artykułu
 
-## 7a. Bezpieczne przyjęcie JSON-u
+- Jedno polecenie użytkownika `dodaj artykuł` uruchamia `npm run article:add -- --file "<draft.fitpo50.json>"`. Obrazy są pobierane z katalogu JSON-u, chyba że agent jawnie poda `--assets-dir`.
+- Nie używaj dla draftów starej ręcznej ścieżki generator → osobny importer → osobny PDF → ręczna synchronizacja. Skrypty składowe pozostają wyłącznie implementacją i narzędziami serwisowymi.
+- Faza przygotowania nie dotyka publicznego HTML. Kontrole logiczne, dowody, FAQ, intencję, linki i preflight treści wykonuje przed konwersją mediów. Agent ogląda obrazy i koryguje prawdziwe podpisy; nie generuje zamienników bez polecenia użytkownika.
+- Dopiero kompletny `CONTENT_READY` uruchamia jeden staging i atom obejmujący HTML, daty ISO 8601, media, PDF, listingi, sitemap, indeksy, `llms.txt`, monitoring i `_site`.
+- Po sukcesie usuń roboczy pakiet JSON; przy `BLOCKED` zachowaj jedną najnowszą wersję do poprawy.
+
+## 7a. Wewnętrzne fazy bezpiecznego przyjęcia JSON-u
 - JSON od autora lub modelu jest zawsze statusem `DRAFT`, nigdy gotowym artykułem.
-- Korekta i publikacja są dwoma osobnymi poleceniami:
-  1. `npm run article:prepare-json --file="<draft.fitpo50.json>"`
-  2. po otrzymaniu statusu `CONTENT_READY`: `npm run article:publish --file="<gotowy.fitpo50.json>"`
+- Korekta i publikacja są oddzielnymi fazami technicznymi, ale pełne `dodaj artykuł` obsługuje je jedną komendą. `article:prepare-json` służy tylko do świadomego zatrzymania po korekcie; `article:publish` tylko do wznowienia gotowego artefaktu.
 - Korekta nie tworzy ani nie modyfikuje HTML. Zapisuje nowy, trwały JSON oraz raport `.fitpo50.report.json` i `.fitpo50.report.md` z pełną listą zmian.
 - Statusy procesu to: `DRAFT`, `CONTENT_READY`, `BLOCKED`.
 - Domyślne `force=false` blokuje kolizję z istniejącym slugiem. `--force true` wymaga świadomego podania i służy wyłącznie kontrolowanej aktualizacji.
 - Publikator przyjmuje tylko artefakt `CONTENT_READY`; sprawdza powiązany raport i SHA-256, więc ręczna zmiana JSON-u po korekcie blokuje import.
-- Plik wejściowy pozostaje bez zmian. Kolejne wyniki dostają wersje `-r2`, `-r3` itd.; narzędzie nie nadpisuje ani nie usuwa jedynej poprawionej wersji.
+- Plik wejściowy pozostaje bez zmian. Domyślnie istnieje jeden stabilny pakiet roboczy dla slugu, aktualizowany przy kolejnej próbie; wersje `-r2`, `-r3` powstają wyłącznie po jawnym `--keep-revisions true`.
+- Poprawne kontrole dostępności URL-i są przechowywane w lokalnym, niecommitowanym cache przez 7 dni. Zmienione obrazy odświeżają warianty; niezmienione warianty są używane ponownie. Po nieudanym atomie cały niezmieniony hashami `CONTENT_READY` może zostać użyty ponownie bez fazy przygotowania. Zmiana JSON-u lub któregokolwiek obrazu unieważnia tę pamięć. Tanie bramki treści zawsze uruchamiają się podczas nowego przygotowania.
 - Po pełnej publikacji zakończonej wszystkimi walidacjami pipeline usuwa wykorzystany JSON `CONTENT_READY` oraz oba jego raporty. Przy błędzie lub `BLOCKED` zachowuje je do dalszej naprawy.
 
 ## 7b. Regression Learning Loop — obowiązkowa naprawa systemowa

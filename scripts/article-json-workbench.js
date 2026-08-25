@@ -35,8 +35,9 @@ function parseJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
-function allocateOutput(outputDir, slug) {
+function allocateOutput(outputDir, slug, keepRevisions = false) {
   fs.mkdirSync(outputDir, { recursive: true });
+  if (!keepRevisions) return path.join(outputDir, `${slug}.fitpo50.json`);
   let revision = 1;
   while (true) {
     const suffix = revision === 1 ? '' : `-r${revision}`;
@@ -65,12 +66,14 @@ function copyMediaPackage(manifest, sourceDir, targetDir) {
 }
 
 function runStage(label, command, args) {
+  const started = Date.now();
   const result = spawnSync(command, args, { cwd: ROOT, encoding: 'utf8' });
   return {
     label,
     command: [command, ...args],
     status: result.status === 0 ? 'PASS' : 'FAIL',
     exit_code: result.status,
+    duration_ms: Date.now() - started,
     stdout: String(result.stdout || '').trim(),
     stderr: String(result.stderr || '').trim(),
   };
@@ -84,6 +87,19 @@ function runStagesUntilFailure(definitions, runner = runStage) {
     if (stage.status === 'FAIL') break;
   }
   return stages;
+}
+
+function buildStageDefinitions(workingFile, assetsDir) {
+  return [
+    { label: 'Bezpieczny fixer JSON', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true'] },
+    { label: 'Normalizacja techniczna bez generowania treści', command: 'node', args: ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json'] },
+    { label: 'Lokalna intencja, kanibalizacja, linkowanie i centra', command: 'node', args: ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true'] },
+    { label: 'Weryfikacja źródeł, URL-i i pochodzenia FAQ', command: 'node', args: ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true'] },
+    { label: 'Bramka treści JSON', command: 'node', args: ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile] },
+    { label: 'Pełny preflight treści przed kosztowną obróbką mediów', command: 'node', args: ['scripts/article-preflight.js', '--file', workingFile, '--content-only', 'true'] },
+    { label: 'Pakiet mediów: nazwy, warianty, jakość i różnorodność', command: 'node', args: ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'true'] },
+    { label: 'Końcowy preflight pakietu importowego', command: 'node', args: ['scripts/article-preflight.js', '--file', workingFile, '--assets-dir', assetsDir] },
+  ];
 }
 
 function valueType(value) {
@@ -143,7 +159,7 @@ function writeReports(report, outputFile) {
     ...report.status_history.map((item) => `- ${item.status}: ${item.at}${item.reason ? ` — ${item.reason}` : ''}`),
     '',
     '## Etapy',
-    ...report.stages.map((item) => `- ${item.status}: ${item.label}`),
+    ...report.stages.map((item) => `- ${item.status}: ${item.label}${Number.isFinite(item.duration_ms) ? ` (${item.duration_ms} ms)` : ''}`),
     '',
     `## Wszystkie zmiany (${report.changes.length})`,
   ];
@@ -191,7 +207,7 @@ function writeReports(report, outputFile) {
   }
   lines.push('', '## Następny krok');
   lines.push(report.status === STATUSES.CONTENT_READY
-    ? `- Użyj przygotowanego pliku: \`npm run article:publish --file="${outputFile}"\``
+    ? `- Użyj przygotowanego pliku: \`npm run article:publish -- --file "${outputFile}"\``
     : '- Nie publikuj. Usuń wskazane blokery i ponownie uruchom prepare-json.');
   fs.writeFileSync(mdPath, `${lines.join('\n')}\n`, 'utf8');
   return { jsonPath, mdPath };
@@ -216,7 +232,7 @@ function main() {
   } catch (err) {
     if (!fallbackSlug) throw new Error(`Niepoprawny JSON (${err.message || err}) i brak poprawnego slug w nazwie pliku.`);
     const outputDir = args['output-dir'] ? outputBaseDir : path.join(outputBaseDir, fallbackSlug);
-    const blockedOutput = allocateOutput(outputDir, fallbackSlug);
+    const blockedOutput = allocateOutput(outputDir, fallbackSlug, String(args['keep-revisions'] || 'false') === 'true');
     fs.copyFileSync(sourceFile, blockedOutput);
     const generatedAt = new Date().toISOString();
     const blocker = `Niepoprawna składnia JSON: ${err.message || err}`;
@@ -251,7 +267,7 @@ function main() {
   const slug = safeSlug(original.slug || fallbackSlug);
   if (!slug) throw new Error('Brak poprawnego slug w JSON-ie i nazwie pliku.');
   const outputDir = args['output-dir'] ? outputBaseDir : path.join(outputBaseDir, slug);
-  const outputFile = allocateOutput(outputDir, slug);
+  const outputFile = allocateOutput(outputDir, slug, String(args['keep-revisions'] || 'false') === 'true');
   const htmlPath = path.join(ROOT, `${slug}.html`);
   const generatedAt = new Date().toISOString();
   const statusHistory = [{ status: STATUSES.DRAFT, at: generatedAt, reason: 'JSON przyjęty jako draft; nie utworzono HTML.' }];
@@ -264,14 +280,7 @@ function main() {
     if (fs.existsSync(htmlPath) && !args.force) {
       blockers.push(`Slug ${slug} już istnieje jako ${htmlPath}. Domyślne force=false blokuje przygotowanie aktualizacji.`);
     } else {
-      stages.push(...runStagesUntilFailure([
-        { label: 'Bezpieczny fixer JSON', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true'] },
-        { label: 'Normalizacja techniczna bez generowania treści', command: 'node', args: ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json'] },
-        { label: 'Pakiet mediów: nazwy, warianty, jakość i różnorodność', command: 'node', args: ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'true'] },
-        { label: 'Lokalna intencja, kanibalizacja, linkowanie i centra', command: 'node', args: ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true'] },
-        { label: 'Weryfikacja źródeł, URL-i i pochodzenia FAQ', command: 'node', args: ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true'] },
-        { label: 'Bramka treści JSON', command: 'node', args: ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile] },
-      ]));
+      stages.push(...runStagesUntilFailure(buildStageDefinitions(workingFile, assetsDir)));
       stages.filter((item) => item.status === 'FAIL').forEach((item) => {
         blockers.push(`${item.label}: ${item.stderr || item.stdout || `exit ${item.exit_code}`}`);
       });
@@ -346,4 +355,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { allocateOutput, collectChanges, copyMediaPackage, main, parseArgs, runStagesUntilFailure };
+module.exports = { allocateOutput, buildStageDefinitions, collectChanges, copyMediaPackage, main, parseArgs, runStagesUntilFailure };

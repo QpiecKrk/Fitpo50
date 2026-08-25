@@ -87,7 +87,7 @@ function runConversion(command, args) {
 }
 
 function createVariant(sourceFile, targetFile, extension) {
-  if (fs.existsSync(targetFile)) return false;
+  if (fs.existsSync(targetFile) && fs.statSync(targetFile).mtimeMs >= fs.statSync(sourceFile).mtimeMs) return false;
   const sourceExtension = path.extname(sourceFile).slice(1).toLowerCase();
   if (extension === 'jpg' && ['jpg', 'jpeg'].includes(sourceExtension)) {
     fs.copyFileSync(sourceFile, targetFile);
@@ -322,7 +322,7 @@ function prepareArticleMedia(article, options = {}) {
       const variantFile = `${base}.${extension}`;
       const variantPath = path.join(assetsDir, variantFile);
       try {
-        if (!fs.existsSync(variantPath) && ensureVariants) {
+        if (ensureVariants) {
           if (createVariant(sourcePath, variantPath, extension)) created.push(variantFile);
         }
         if (!fs.existsSync(variantPath)) {
@@ -400,6 +400,7 @@ function prepareArticleMedia(article, options = {}) {
 
 module.exports = {
   REQUIRED_VARIANTS,
+  createVariant,
   hammingHex,
   inspectImage,
   prepareArticleMedia,

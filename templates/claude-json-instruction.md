@@ -34,10 +34,10 @@ Wygeneruj WYŁĄCZNIE poprawny JSON zgodny ze schematem FitPo50 (bez markdown, b
 
 ## Ważne
 To jest DRAFT. Po wygenerowaniu uruchamiamy kanonicznie:
-1. `npm run article:prepare-json --file=<plik.fitpo50.json> --assets-dir=<jeden_folder_json_i_obrazow>`
-2. dopiero dla otrzymanego `CONTENT_READY`: `npm run article:ready-check -- --file <gotowy.fitpo50.json> --assets-dir <folder_z_grafikami>`
+1. `npm run article:add -- --file <plik.fitpo50.json>` — JSON i obrazy umieszczamy w jednym katalogu.
+2. Pipeline sam kończy przygotowanie `CONTENT_READY` i dopiero wtedy uruchamia jeden atom publikacyjny. Człowiek nie wydaje osobnej komendy `ready-check` ani `publish`.
 
-Podczas kroku 1 lokalny pipeline, korzystając z aktualnych HTML-i w repozytorium:
+Podczas fazy przygotowania lokalny pipeline, korzystając z aktualnych HTML-i w repozytorium:
 - sprawdza, czy inny URL nie obsługuje już tej samej intencji,
 - dobiera i weryfikuje linki wychodzące,
 - wskazuje istniejące strony, które powinny później linkować do nowego artykułu,

@@ -7,8 +7,6 @@ const COMMANDS = {
   contract: 'scripts/article-contract-check.js',
   schema: 'scripts/schema-validator.js',
   'reading-room': 'scripts/reading-room-link-verifier.js',
-  fast: 'scripts/article-fast-gate.js',
-  final: 'scripts/article-final-check.js',
   'publish-guard': 'scripts/article-publish-guard.js',
 };
 
@@ -20,12 +18,8 @@ Usage:
   node scripts/validate-article.js contract <file.html> [_site/file.html]
   node scripts/validate-article.js schema --diff
   node scripts/validate-article.js reading-room --diff
-  node scripts/validate-article.js fast --file <article.fitpo50.json> --assets-dir <dir>
-  node scripts/validate-article.js final --file <article.fitpo50.json> --assets-dir <dir>
 
 Aliases:
-  --fast           same as: fast
-  --final          same as: final
   --contract       same as: contract
   --schema-only    same as: schema
   --reading-room   same as: reading-room
@@ -39,12 +33,6 @@ function resolveCommand(argv) {
   }
   if (COMMANDS[first]) {
     return { command: first, args: argv.slice(1) };
-  }
-  if (argv.includes('--fast')) {
-    return { command: 'fast', args: argv.filter((arg) => arg !== '--fast') };
-  }
-  if (argv.includes('--final')) {
-    return { command: 'final', args: argv.filter((arg) => arg !== '--final') };
   }
   if (argv.includes('--contract')) {
     return { command: 'contract', args: argv.filter((arg) => arg !== '--contract') };

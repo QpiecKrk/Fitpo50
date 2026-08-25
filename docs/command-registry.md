@@ -20,11 +20,10 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 
 ## Artykuly
 
-- `npm run article:prepare-json --file=<draft.fitpo50.json>` - poprawia draft do trwałego artefaktu `CONTENT_READY`; nie tworzy HTML.
-- `python3 docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py <draft.fitpo50.json>` - sprawdza draft z importowego skilla Claude; `DRAFT_VALID` nadal wymaga lokalnego `article:prepare-json`.
-- `npm run article:preflight -- --file <plik.fitpo50.json> --assets-dir <katalog>` - kontrola JSON i obrazow przed importem.
-- `npm run article:ready-check -- --file <plik.fitpo50.json> --assets-dir <katalog>` - szybka kontrola JSON i assetow na kopii roboczej, bez importu HTML/PDF i bez zmiany oryginalnego pliku.
-- `npm run article:publish --file=<plik.fitpo50.json>` - pelny import/publikacja artykulu przez pipeline.
+- `npm run article:add -- --file <draft.fitpo50.json>` - jedyna domyślna komenda pełnego dodania. Przyjmuje JSON i obrazy z jego katalogu, wykonuje szybkie przygotowanie, a po `CONTENT_READY` uruchamia jeden atom publikacyjny.
+- `npm run article:prepare-json -- --file <draft.fitpo50.json>` - tryb wyjątkowy: poprawia draft do `CONTENT_READY`, ale nie publikuje. Używaj tylko, gdy użytkownik chce najpierw dostać sam poprawiony JSON.
+- `npm run article:publish -- --file <CONTENT_READY.fitpo50.json>` - techniczne wznowienie publikacji istniejącego, chronionego artefaktu; użytkownik nie musi wydawać tej komendy po `dodaj artykuł`.
+- `python3 docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py <draft.fitpo50.json>` - wewnętrzny walidator draftu Claude; `DRAFT_VALID` nie oznacza gotowości publikacyjnej.
 - `npm run article:validate` - walidacja standardu artykulow.
 - `npm run article:contract:diff` - kontrakt tylko dla zmienionych HTML.
 - `npm run article:guard:diff` - guard publikacyjny tylko dla zmienionych HTML.

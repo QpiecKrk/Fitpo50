@@ -1,13 +1,13 @@
 # Article Template Guide (FitPo50)
 
-Dokument pomocniczy. Kanoniczne zasady są w `ARTICLE_STANDARD.md`.
+Dokument serwisowy wyłącznie dla ręcznych prototypów HTML. Nie stosuj go do JSON-u od Claude ani do polecenia `dodaj artykuł`; kanoniczny workflow JSON-first jest w `ARTICLE_STANDARD.md` i używa `article:add`.
 
 ## Pliki
 - Szablon: `article-template-bento.html`
 - Generator: `scripts/create-article-from-template.js`
 - Walidator: `scripts/validate-article-standard.js`
 
-## Szybki workflow
+## Ręczny workflow serwisowy (niepublikacyjny)
 1. Tworzenie nowego artykułu:
 ```bash
 node scripts/create-article-from-template.js \
@@ -24,7 +24,7 @@ node scripts/create-article-from-template.js \
 node scripts/validate-article-standard.js nowy-artykul.html
 ```
 
-4. Synchronizacja do `_site`.
+4. Nie publikuj ani nie synchronizuj tą ścieżką. Gotową treść przenieś do JSON-first i uruchom `article:add`.
 
 ## Kategorie
 - `ruch`
