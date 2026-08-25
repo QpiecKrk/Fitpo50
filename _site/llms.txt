@@ -419,4 +419,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Czy jajka naprawdę podnoszą cholesterol? Sprawdzamy badania | FitPo50"
   section: "Mity"
   summary: "Czy jajka podnoszą cholesterol LDL? Wyjaśniamy wyniki badań, różnice między jajkiem a masłem oraz kiedy po 50-tce sprawdzić lipidogram i ApoB u lekarza."
+- url: https://fitpo50.pl/marsz-japonski-czy-10000-krokow.html
+  title: "Marsz japoński czy 10 000 kroków? Uczciwe porównanie po 50 | FitPo50"
+  section: "Mity"
+  summary: "Marsz japoński trzy na trzy kontra 10 000 kroków: co mówią badania o wydolności, sile nóg i ciśnieniu po 50, jak ustawić tempo i kiedy przerwać trening."
 

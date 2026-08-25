@@ -272,6 +272,7 @@ async function main() {
       console.log(`[INDEXNOW] ${indexNowStatus} — wysyłka dopiero po PREVIEW_READY i promocji.`);
       const artifactCleanup = cleanupPreparedArtifact(input);
       artifactCleanup.removed.forEach((file) => console.log(`[CLEANUP] Usunięto opublikowany artefakt JSON: ${file}`));
+      artifactCleanup.removed_directories.forEach((directory) => console.log(`[CLEANUP] Usunięto wykorzystany pakiet roboczy JSON i mediów: ${directory}`));
       console.log(`[PUBLISHED] ${operation}: zatwierdzono atomowo ${transaction.changed.length} plików po PREVIEW_READY i walidacji repo.`);
       appendTimingReport('article-pipeline-transactional', stepTimings);
       return { workingCopy: '', artifactCleanup };

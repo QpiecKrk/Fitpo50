@@ -38,10 +38,11 @@ function main() {
   console.log(`[ARTICLE-ARCHITECTURE] intent=${result.strategy.search_intent || result.strategy.intent || 'MISSING'} primary=${result.strategy.primary || 'MISSING'}`);
   console.log(`[ARTICLE-ARCHITECTURE] links=${result.confirmed_link_count}/4 added=${result.added_links.length}`);
   console.log(`[ARTICLE-ARCHITECTURE] inbound_suggestions=${result.incoming_link_suggestions.length}`);
-  if (result.topic_center_assessment.proposed) {
-    console.log(`[ARTICLE-ARCHITECTURE] center=${result.topic_center_assessment.center_name} status=AWAITING_USER_APPROVAL`);
+  const centerAssessment = result.topic_center_assessment;
+  if (centerAssessment?.proposed) {
+    console.log(`[ARTICLE-ARCHITECTURE] center=${centerAssessment.center_name} status=AWAITING_USER_APPROVAL`);
   } else {
-    console.log(`[ARTICLE-ARCHITECTURE] center=NO_PROPOSAL fit=${result.topic_center_assessment.fit}`);
+    console.log(`[ARTICLE-ARCHITECTURE] center=NO_PROPOSAL fit=${centerAssessment?.fit || 'NOT_ASSESSED'}`);
   }
   result.warnings.forEach((warning) => console.warn(`[WARN] ${warning}`));
   if (!result.ok) {

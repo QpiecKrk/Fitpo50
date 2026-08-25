@@ -1,0 +1,620 @@
+{
+  "version": 1,
+  "transaction_id": "article-marsz-japonski-czy-10000-krokow-1787683500370-7579",
+  "generated_at": "2026-08-25T18:45:15.682Z",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "marsz-japonski-czy-10000-krokow",
+  "url": "https://fitpo50.pl/marsz-japonski-czy-10000-krokow.html",
+  "manifest_file": "data/reports/article-publications/marsz-japonski-czy-10000-krokow.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "marsz-japonski-czy-10000-krokow.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4ca18074d5d3a3e73c9cda08cc1e8434dc8651d6126dd347ee19eb0ad2503a9a",
+      "bytes": 52716
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "83d09689e769ed081c30d6bc831e3d446da7589e6eb7dd913f63e9a8f2ed7e6d",
+      "after_sha256": "4b353836c013533bc8237b9fb07a9b126be404ec142d6ec8401388aaeef7520e",
+      "bytes": 119753
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "ea81153053d104a5b41b142208a7c25d3518c08dbbc46a9adcc9d3d8e2f444c8",
+      "after_sha256": "8aa8b2202d3fad68d2766e5233b0d8330fa0304f3db4957cc77e32952380408b",
+      "bytes": 153727
+    },
+    {
+      "path": "mity.html",
+      "action": "UPDATE",
+      "before_sha256": "272acafb8782ae203f77a89ce64bfd1cdee2de1ff1a171798b2b5155f6222204",
+      "after_sha256": "ceb756a20df20ed925524d411589969b1ea27300ba7386e22829d6b6e553bd1c",
+      "bytes": 38055
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "057f9ec1db75093bce1492d70a91f3ad7aacca33ea03e574de309b3da23ff773",
+      "after_sha256": "f68b91a6b5f0f1698ce7656aa90cb5f46068b9750ee1818c50249bb5cb3f7038",
+      "bytes": 18507
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "720cf40ab16e9a0201d4e531088e1e91bf8490b82aa63d1780172005955b2b40",
+      "after_sha256": "2b87aaa6f8aa90e40b5feb6894b0f6142850ed264de61e4b1029e5694193b33f",
+      "bytes": 34510
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "14d59efde4efc4a8ca08737f5cdf44b68dec147c341da0b001ab359686e6a60e",
+      "after_sha256": "b2f656f43b83a39fba94d6ccd7259305092b017a2a3aea4f1017b963c12a1589",
+      "bytes": 652422
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "c1b36869bd6c7a21bf39f45f007cc389bdf21d9155744cdd2c5e07295d2a60d4",
+      "after_sha256": "16e61054320be67b6caab143a15556c3958ddf8bd636ccfe9fc83beb8de6008c",
+      "bytes": 688725
+    },
+    {
+      "path": "assets/pdf/marsz-japonski-czy-10000-krokow.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "270acd23a44fd7f8c2915fddb45157235d2cc458d32036e4aca925bdad715e01",
+      "bytes": 628262
+    },
+    {
+      "path": "data/crosslink-suggestions/marsz-japonski-czy-10000-krokow.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "305b9b42d9e7049382d9f08ba328aad83ceb080be8d4563b9c2864614d5f5100",
+      "bytes": 1314
+    },
+    {
+      "path": "data/reports/article-preview/marsz-japonski-czy-10000-krokow.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a7610534ca72b07365a974933f8c0714fcbd9cf95c513f66c487eb90a27fd3ed",
+      "bytes": 995
+    },
+    {
+      "path": "data/reports/article-preview/marsz-japonski-czy-10000-krokow.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4fd232f710b94ff71a79de2863be37f350dd1a7fde8aca4263a79e65dc9088ad",
+      "bytes": 293
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "4afbfca30afc4973e897f76707fc95a2bca99e138f16a05fcacf2d9ed751a361",
+      "after_sha256": "05bdb8a09c2d89d3e119bef3d0a891521b09b8c0eb6b7b6041c488346c1138c4",
+      "bytes": 20305
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "64f31be41c8cd0e11a899c00a60bb886d20c23eb07c8925a1990df15af347386",
+      "after_sha256": "8ee2b50a675dfca2b4028ffd2eb8778369b9074bff0c8d0e00264846bf9846a4",
+      "bytes": 1118
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "18ed4f24d980d956bb4eecb4059b5dbc65851a1a0e04d68c69be1a7ddcb23a29",
+      "after_sha256": "df3c2158d786cd7c30df3c656415c32d9d78e8502e654130abacd2ce22efdd74",
+      "bytes": 507
+    },
+    {
+      "path": "_site/marsz-japonski-czy-10000-krokow.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4ca18074d5d3a3e73c9cda08cc1e8434dc8651d6126dd347ee19eb0ad2503a9a",
+      "bytes": 52716
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "83d09689e769ed081c30d6bc831e3d446da7589e6eb7dd913f63e9a8f2ed7e6d",
+      "after_sha256": "4b353836c013533bc8237b9fb07a9b126be404ec142d6ec8401388aaeef7520e",
+      "bytes": 119753
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "ea81153053d104a5b41b142208a7c25d3518c08dbbc46a9adcc9d3d8e2f444c8",
+      "after_sha256": "8aa8b2202d3fad68d2766e5233b0d8330fa0304f3db4957cc77e32952380408b",
+      "bytes": 153727
+    },
+    {
+      "path": "_site/mity.html",
+      "action": "UPDATE",
+      "before_sha256": "272acafb8782ae203f77a89ce64bfd1cdee2de1ff1a171798b2b5155f6222204",
+      "after_sha256": "ceb756a20df20ed925524d411589969b1ea27300ba7386e22829d6b6e553bd1c",
+      "bytes": 38055
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "057f9ec1db75093bce1492d70a91f3ad7aacca33ea03e574de309b3da23ff773",
+      "after_sha256": "f68b91a6b5f0f1698ce7656aa90cb5f46068b9750ee1818c50249bb5cb3f7038",
+      "bytes": 18507
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "720cf40ab16e9a0201d4e531088e1e91bf8490b82aa63d1780172005955b2b40",
+      "after_sha256": "2b87aaa6f8aa90e40b5feb6894b0f6142850ed264de61e4b1029e5694193b33f",
+      "bytes": 34510
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "4337edf939559f0bab7c8b6410c1ae947d3745a136b397de9b6b9749be3706ca",
+      "after_sha256": "b2f656f43b83a39fba94d6ccd7259305092b017a2a3aea4f1017b963c12a1589",
+      "bytes": 652422
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "c1b36869bd6c7a21bf39f45f007cc389bdf21d9155744cdd2c5e07295d2a60d4",
+      "after_sha256": "16e61054320be67b6caab143a15556c3958ddf8bd636ccfe9fc83beb8de6008c",
+      "bytes": 688725
+    },
+    {
+      "path": "_site/assets/pdf/marsz-japonski-czy-10000-krokow.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "270acd23a44fd7f8c2915fddb45157235d2cc458d32036e4aca925bdad715e01",
+      "bytes": 628262
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/marsz-japonski-czy-10000-krokow.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "305b9b42d9e7049382d9f08ba328aad83ceb080be8d4563b9c2864614d5f5100",
+      "bytes": 1314
+    },
+    {
+      "path": "assets/marsz-japonski-hero-dwa-tempa.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "af458c7a23d1316f2e1ce0b6cfa9e9409ded1d0ad85cb26758710d54ca8ee7cb",
+      "bytes": 209347
+    },
+    {
+      "path": "_site/assets/marsz-japonski-hero-dwa-tempa.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "af458c7a23d1316f2e1ce0b6cfa9e9409ded1d0ad85cb26758710d54ca8ee7cb",
+      "bytes": 209347
+    },
+    {
+      "path": "assets/marsz-japonski-hero-dwa-tempa.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "000cfd4ea7ff717a19b279ab5200e60098cbfc8618b9548a73da99a8df358e00",
+      "bytes": 115266
+    },
+    {
+      "path": "_site/assets/marsz-japonski-hero-dwa-tempa.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "000cfd4ea7ff717a19b279ab5200e60098cbfc8618b9548a73da99a8df358e00",
+      "bytes": 115266
+    },
+    {
+      "path": "assets/marsz-japonski-hero-dwa-tempa.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8e8df827ca0d60cfe24866a38d5fdb9b999aa68e13157f1fc9800b38e5538a76",
+      "bytes": 70097
+    },
+    {
+      "path": "_site/assets/marsz-japonski-hero-dwa-tempa.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8e8df827ca0d60cfe24866a38d5fdb9b999aa68e13157f1fc9800b38e5538a76",
+      "bytes": 70097
+    },
+    {
+      "path": "assets/marsz-japonski-protokol-trzy-minuty.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f8e122b19a512db7dc4b8b40dcba9f92641a7a5ba1d509588bd15c634600fd16",
+      "bytes": 92579
+    },
+    {
+      "path": "_site/assets/marsz-japonski-protokol-trzy-minuty.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f8e122b19a512db7dc4b8b40dcba9f92641a7a5ba1d509588bd15c634600fd16",
+      "bytes": 92579
+    },
+    {
+      "path": "assets/marsz-japonski-protokol-trzy-minuty.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "07d3b60123f8ce10ffd241351e860279bbebe5e2c3a34775c62080a6cfab5d85",
+      "bytes": 14504
+    },
+    {
+      "path": "_site/assets/marsz-japonski-protokol-trzy-minuty.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "07d3b60123f8ce10ffd241351e860279bbebe5e2c3a34775c62080a6cfab5d85",
+      "bytes": 14504
+    },
+    {
+      "path": "assets/marsz-japonski-protokol-trzy-minuty.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6e042244f803215dccfb22e78cdfb83c8043188f56e2ac7f03ec11e838eb7335",
+      "bytes": 13458
+    },
+    {
+      "path": "_site/assets/marsz-japonski-protokol-trzy-minuty.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6e042244f803215dccfb22e78cdfb83c8043188f56e2ac7f03ec11e838eb7335",
+      "bytes": 13458
+    },
+    {
+      "path": "assets/marsz-japonski-werdykt-dwie-szale.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8c695ddb95ce0c95f6725e2c340ed07bceaf8dd178ac6f68266ec5c835ed1f7c",
+      "bytes": 207048
+    },
+    {
+      "path": "_site/assets/marsz-japonski-werdykt-dwie-szale.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8c695ddb95ce0c95f6725e2c340ed07bceaf8dd178ac6f68266ec5c835ed1f7c",
+      "bytes": 207048
+    },
+    {
+      "path": "assets/marsz-japonski-werdykt-dwie-szale.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "81c49a8ac416b5b7a6885f61c084ef7df62ecb2012e5472d8b0277e000a3b4e4",
+      "bytes": 54232
+    },
+    {
+      "path": "_site/assets/marsz-japonski-werdykt-dwie-szale.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "81c49a8ac416b5b7a6885f61c084ef7df62ecb2012e5472d8b0277e000a3b4e4",
+      "bytes": 54232
+    },
+    {
+      "path": "assets/marsz-japonski-werdykt-dwie-szale.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4f629af45167ba3b1c422be49a1e4f472aa19a558c28dc5d2da41aedc9a3be3f",
+      "bytes": 42000
+    },
+    {
+      "path": "_site/assets/marsz-japonski-werdykt-dwie-szale.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4f629af45167ba3b1c422be49a1e4f472aa19a558c28dc5d2da41aedc9a3be3f",
+      "bytes": 42000
+    },
+    {
+      "path": "assets/marsz-japonski-porownanie-grupy.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "05827f124c781445a3b389f613a53fb9dd73a65b2a39a16c58953ce4fc94c44b",
+      "bytes": 334359
+    },
+    {
+      "path": "_site/assets/marsz-japonski-porownanie-grupy.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "05827f124c781445a3b389f613a53fb9dd73a65b2a39a16c58953ce4fc94c44b",
+      "bytes": 334359
+    },
+    {
+      "path": "assets/marsz-japonski-porownanie-grupy.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8162dc71253ffc2738bf8c76ad97a3aa0c1982f0074ac375250c53376a9c6384",
+      "bytes": 143740
+    },
+    {
+      "path": "_site/assets/marsz-japonski-porownanie-grupy.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8162dc71253ffc2738bf8c76ad97a3aa0c1982f0074ac375250c53376a9c6384",
+      "bytes": 143740
+    },
+    {
+      "path": "assets/marsz-japonski-porownanie-grupy.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2064352aad2ae7d5240cfe9b2c602f8b97fd1a746e4e2dab9adaa7f8b8ef9db1",
+      "bytes": 91674
+    },
+    {
+      "path": "_site/assets/marsz-japonski-porownanie-grupy.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2064352aad2ae7d5240cfe9b2c602f8b97fd1a746e4e2dab9adaa7f8b8ef9db1",
+      "bytes": 91674
+    },
+    {
+      "path": "assets/marsz-japonski-krzywa-krokow.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5955eab11484c5584bbcdcdae7ece4825371f04398af8b3edac536f02534b443",
+      "bytes": 74375
+    },
+    {
+      "path": "_site/assets/marsz-japonski-krzywa-krokow.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5955eab11484c5584bbcdcdae7ece4825371f04398af8b3edac536f02534b443",
+      "bytes": 74375
+    },
+    {
+      "path": "assets/marsz-japonski-krzywa-krokow.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "63b0dba8ef24c698a6788bf2b57899269fb383f5b909e2196e3f9509c694d78b",
+      "bytes": 13836
+    },
+    {
+      "path": "_site/assets/marsz-japonski-krzywa-krokow.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "63b0dba8ef24c698a6788bf2b57899269fb383f5b909e2196e3f9509c694d78b",
+      "bytes": 13836
+    },
+    {
+      "path": "assets/marsz-japonski-krzywa-krokow.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "935be9129159108d0e01c5ce52d96a76d5bdb3b30d28ccef67dadacfe5701569",
+      "bytes": 14119
+    },
+    {
+      "path": "_site/assets/marsz-japonski-krzywa-krokow.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "935be9129159108d0e01c5ce52d96a76d5bdb3b30d28ccef67dadacfe5701569",
+      "bytes": 14119
+    },
+    {
+      "path": "assets/marsz-japonski-sila-ud-anatomia.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6844e3b0a67a1d794ae7ccd7b0128e13a01f1e6b5cbff64f0a8c3a431dc49db1",
+      "bytes": 100968
+    },
+    {
+      "path": "_site/assets/marsz-japonski-sila-ud-anatomia.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6844e3b0a67a1d794ae7ccd7b0128e13a01f1e6b5cbff64f0a8c3a431dc49db1",
+      "bytes": 100968
+    },
+    {
+      "path": "assets/marsz-japonski-sila-ud-anatomia.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c310e8b64c3368615f8607028f169250d01214a4282aad477893b5b02b968d0f",
+      "bytes": 25830
+    },
+    {
+      "path": "_site/assets/marsz-japonski-sila-ud-anatomia.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c310e8b64c3368615f8607028f169250d01214a4282aad477893b5b02b968d0f",
+      "bytes": 25830
+    },
+    {
+      "path": "assets/marsz-japonski-sila-ud-anatomia.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "089719bae5043d8528dc677e1f53b35fc7c2c9ce92e755909cfd624352b7347a",
+      "bytes": 22285
+    },
+    {
+      "path": "_site/assets/marsz-japonski-sila-ud-anatomia.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "089719bae5043d8528dc677e1f53b35fc7c2c9ce92e755909cfd624352b7347a",
+      "bytes": 22285
+    },
+    {
+      "path": "assets/marsz-japonski-kolano-buty.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eb51fb4e2c3686193a80b4811488a0ccbef5bccf424040befc4144aaa9516e44",
+      "bytes": 200567
+    },
+    {
+      "path": "_site/assets/marsz-japonski-kolano-buty.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eb51fb4e2c3686193a80b4811488a0ccbef5bccf424040befc4144aaa9516e44",
+      "bytes": 200567
+    },
+    {
+      "path": "assets/marsz-japonski-kolano-buty.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a020324933f877ad79f63de1222cd4758a91a4637f10559b01685668ca1b4524",
+      "bytes": 69218
+    },
+    {
+      "path": "_site/assets/marsz-japonski-kolano-buty.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a020324933f877ad79f63de1222cd4758a91a4637f10559b01685668ca1b4524",
+      "bytes": 69218
+    },
+    {
+      "path": "assets/marsz-japonski-kolano-buty.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "faadc7b4ba3266a47e2084a362732009bd5227018d9d904eceb2cb519c6e20d4",
+      "bytes": 48392
+    },
+    {
+      "path": "_site/assets/marsz-japonski-kolano-buty.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "faadc7b4ba3266a47e2084a362732009bd5227018d9d904eceb2cb519c6e20d4",
+      "bytes": 48392
+    },
+    {
+      "path": "assets/marsz-japonski-test-mowy.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "753226a3d0f7608feb87c6e94409502bf40af2812c6ada9cb83b991e37a1c1cc",
+      "bytes": 255920
+    },
+    {
+      "path": "_site/assets/marsz-japonski-test-mowy.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "753226a3d0f7608feb87c6e94409502bf40af2812c6ada9cb83b991e37a1c1cc",
+      "bytes": 255920
+    },
+    {
+      "path": "assets/marsz-japonski-test-mowy.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e9d71694ca93764074c18a8b62b51eda74d9b37eb9039bf5aaa89104f18a3dd0",
+      "bytes": 94290
+    },
+    {
+      "path": "_site/assets/marsz-japonski-test-mowy.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e9d71694ca93764074c18a8b62b51eda74d9b37eb9039bf5aaa89104f18a3dd0",
+      "bytes": 94290
+    },
+    {
+      "path": "assets/marsz-japonski-test-mowy.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6e44e8cfedace7a956a5cbdd02ab4a784b64441ecee54084cc46303147cc1a2a",
+      "bytes": 62032
+    },
+    {
+      "path": "_site/assets/marsz-japonski-test-mowy.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6e44e8cfedace7a956a5cbdd02ab4a784b64441ecee54084cc46303147cc1a2a",
+      "bytes": 62032
+    },
+    {
+      "path": "assets/marsz-japonski-plan-szesc-tygodni.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "722f9d2a7f68691dc791b4381347088a26ce7c66ff30a0c3d2a235a5f6d56355",
+      "bytes": 228180
+    },
+    {
+      "path": "_site/assets/marsz-japonski-plan-szesc-tygodni.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "722f9d2a7f68691dc791b4381347088a26ce7c66ff30a0c3d2a235a5f6d56355",
+      "bytes": 228180
+    },
+    {
+      "path": "assets/marsz-japonski-plan-szesc-tygodni.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5d447339a44a1753cf4e3aa4e9e7f1cc0ff752b0c928dcc561ade53b67cc50e5",
+      "bytes": 63046
+    },
+    {
+      "path": "_site/assets/marsz-japonski-plan-szesc-tygodni.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5d447339a44a1753cf4e3aa4e9e7f1cc0ff752b0c928dcc561ade53b67cc50e5",
+      "bytes": 63046
+    },
+    {
+      "path": "assets/marsz-japonski-plan-szesc-tygodni.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "75502036d1f7f2e5ad2ebfa843fa8198bfc12a0107c237ddb5bca22a780d7593",
+      "bytes": 36975
+    },
+    {
+      "path": "_site/assets/marsz-japonski-plan-szesc-tygodni.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "75502036d1f7f2e5ad2ebfa843fa8198bfc12a0107c237ddb5bca22a780d7593",
+      "bytes": 36975
+    },
+    {
+      "path": "assets/marsz-japonski-sygnal-stop.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "589834d9e5206b795f7fe78ac9903392c348c91d52b14d1aca36b50b88027369",
+      "bytes": 170798
+    },
+    {
+      "path": "_site/assets/marsz-japonski-sygnal-stop.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "589834d9e5206b795f7fe78ac9903392c348c91d52b14d1aca36b50b88027369",
+      "bytes": 170798
+    },
+    {
+      "path": "assets/marsz-japonski-sygnal-stop.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e1a40771c1a958055dafdaa582c3260c95c08288aa8209d1e0d9bf2caeece311",
+      "bytes": 51874
+    },
+    {
+      "path": "_site/assets/marsz-japonski-sygnal-stop.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e1a40771c1a958055dafdaa582c3260c95c08288aa8209d1e0d9bf2caeece311",
+      "bytes": 51874
+    },
+    {
+      "path": "assets/marsz-japonski-sygnal-stop.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5d022445023a85a926395cafa5beacd3302eff26115e599101148452b71a5ff9",
+      "bytes": 40442
+    },
+    {
+      "path": "_site/assets/marsz-japonski-sygnal-stop.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5d022445023a85a926395cafa5beacd3302eff26115e599101148452b71a5ff9",
+      "bytes": 40442
+    }
+  ],
+  "files_count": 85
+}

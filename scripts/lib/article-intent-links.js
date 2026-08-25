@@ -180,8 +180,7 @@ function isNaturalAnchor(anchor) {
   const clean = normalize(anchor);
   if (!clean || GENERIC_ANCHORS.has(clean) || /\b(tutaj|kliknij|czytaj wiecej|dowiedz sie wiecej)\b/.test(clean)) return false;
   const parts = clean.split(' ').filter(Boolean);
-  if (parts.length >= 2 && parts.length <= 7) return true;
-  return parts.length === 1 && (parts[0].length >= 7 || /[a-z]+\d+/i.test(parts[0]));
+  return parts.length >= 2 && parts.length <= 7;
 }
 
 function findAnchorForCandidate(candidate, paragraphs, usedLocations) {

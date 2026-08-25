@@ -55,6 +55,23 @@ function stripTags(text) {
     .trim());
 }
 
+function normalizeFaqResearch(items) {
+  return (Array.isArray(items) ? items : [])
+    .map((r) => ({
+      question: stripTags(String((r && r.question) || '')).replace(/\s+/g, ' ').trim(),
+      source_label: stripTags(String((r && (r.source_label || r.label || r.citation || r.title)) || '')).replace(/\s+/g, ' ').trim(),
+      source_url: String((r && (r.source_url || r.url)) || '').trim(),
+      source_type: String((r && (r.source_type || r.sourceType)) || '').trim(),
+      query: String((r && r.query) || '').replace(/\s+/g, ' ').trim(),
+      research_note: stripTags(String((r && (r.research_note || r.researchNote)) || '')).replace(/\s+/g, ' ').trim(),
+      checked_at: String((r && (r.checked_at || r.checkedAt)) || '').trim(),
+      url_status: String((r && (r.url_status || r.urlStatus)) || '').trim(),
+      http_status: Number((r && (r.http_status || r.httpStatus)) || 0) || 0,
+      final_url: String((r && (r.final_url || r.finalUrl)) || '').trim(),
+    }))
+    .filter((r) => r.question && r.source_label && /^https:\/\//i.test(r.source_url));
+}
+
 function decodeHtmlEntities(input) {
   const named = {
     nbsp: ' ',
@@ -448,20 +465,7 @@ function main() {
 
   json.sources = dedupeSources(Array.isArray(json.sources) ? json.sources : []);
 
-  const faqResearchRaw = Array.isArray(json.faq_research) ? json.faq_research : [];
-  const faqResearch = faqResearchRaw
-    .map((r) => ({
-      question: stripTags(String((r && r.question) || '')).replace(/\s+/g, ' ').trim(),
-      source_label: stripTags(String((r && (r.source_label || r.label || r.citation || r.title)) || '')).replace(/\s+/g, ' ').trim(),
-      source_url: String((r && (r.source_url || r.url)) || '').trim(),
-      source_type: String((r && (r.source_type || r.sourceType)) || '').trim(),
-      checked_at: String((r && (r.checked_at || r.checkedAt)) || '').trim(),
-      url_status: String((r && (r.url_status || r.urlStatus)) || '').trim(),
-      http_status: Number((r && (r.http_status || r.httpStatus)) || 0) || 0,
-    }))
-    .filter((r) => r.question && r.source_label && /^https:\/\//i.test(r.source_url));
-
-  json.faq_research = faqResearch;
+  json.faq_research = normalizeFaqResearch(json.faq_research);
 
   const promptKey = Array.isArray(json.image_prompts_v4) && json.image_prompts_v4.length ? 'image_prompts_v4' : 'image_prompts';
   const imagePrompts = Array.isArray(json[promptKey]) ? json[promptKey] : [];
@@ -529,4 +533,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { ensureParagraphWrapper };
+module.exports = { ensureParagraphWrapper, normalizeFaqResearch };

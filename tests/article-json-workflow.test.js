@@ -108,6 +108,25 @@ test('successful-publish cleanup removes only the ready JSON and its two reports
   assert.equal(fs.existsSync(unrelated), true);
 }));
 
+test('successful publish removes the complete generated ready package but preserves sibling packages', () => withTempDir((dir) => {
+  const readyRoot = path.join(dir, 'fitpo50-json-ready');
+  const packageDir = path.join(readyRoot, 'marsz-japonski');
+  const siblingDir = path.join(readyRoot, 'inny-artykul');
+  fs.mkdirSync(packageDir, { recursive: true });
+  fs.mkdirSync(siblingDir, { recursive: true });
+  const file = path.join(packageDir, 'marsz-japonski-r6.fitpo50.json');
+  fs.writeFileSync(file, '{}');
+  fs.writeFileSync(path.join(packageDir, 'marsz-japonski-r5.fitpo50.json'), '{}');
+  fs.writeFileSync(path.join(packageDir, 'grafika.webp'), 'media');
+  fs.writeFileSync(path.join(siblingDir, 'inny-artykul.fitpo50.json'), '{}');
+
+  const result = cleanupPreparedArtifact(file);
+
+  assert.deepEqual(result.removed_directories, [packageDir]);
+  assert.equal(fs.existsSync(packageDir), false);
+  assert.equal(fs.existsSync(siblingDir), true);
+}));
+
 test('existing slug produces durable BLOCKED JSON and never touches HTML', () => withTempDir((dir) => {
   const slug = 'apob-norma-cena-jak-czytac-wynik';
   const existingHtml = path.join(REPO, `${slug}.html`);

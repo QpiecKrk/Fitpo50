@@ -88,6 +88,15 @@ function inspectPreparedArtifact(inputPath, repoRoot = process.cwd()) {
 
 function cleanupPreparedArtifact(inputPath) {
   const file = path.resolve(inputPath);
+  const packageDir = path.dirname(file);
+  const slug = safeSlug(path.basename(packageDir));
+  const isGeneratedReadyPackage = path.basename(path.dirname(packageDir)) === 'fitpo50-json-ready'
+    && slug
+    && new RegExp(`^${slug}(?:-r\\d+)?\\.fitpo50\\.json$`, 'i').test(path.basename(file));
+  if (isGeneratedReadyPackage) {
+    fs.rmSync(packageDir, { recursive: true, force: true });
+    return { removed: [], removed_directories: [packageDir], missing: [] };
+  }
   const targets = [file, reportPathForJson(file), markdownReportPathForJson(file)];
   const removed = [];
   const missing = [];
@@ -99,7 +108,7 @@ function cleanupPreparedArtifact(inputPath) {
     fs.rmSync(target);
     removed.push(target);
   }
-  return { removed, missing };
+  return { removed, removed_directories: [], missing };
 }
 
 module.exports = {

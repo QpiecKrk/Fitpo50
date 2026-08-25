@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 
 const {
   assessCenter,
@@ -13,6 +14,13 @@ const {
 
 test('Polish letters do not split otherwise natural anchors', () => {
   assert.equal(isNaturalAnchor('cały sposób jedzenia wpływa na LDL'), true);
+});
+
+test('single words are never accepted as contextual anchors', () => {
+  assert.equal(isNaturalAnchor('równowagi'), false);
+  assert.equal(isNaturalAnchor('utrzymać'), false);
+  assert.equal(isNaturalAnchor('pokazują'), false);
+  assert.equal(isNaturalAnchor('potwierdzają'), false);
 });
 
 function withTempRepo(fn) {
@@ -38,11 +46,11 @@ function draft() {
     quick_answer: 'Powrót do regularnego ruchu zaczyna się od oceny tolerancji wysiłku i małych kroków.',
     search_intent: 'how-to',
     primary_keyword: 'powrót do regularnego ruchu',
-    supporting_keywords: ['trening siłowy po 50', 'sen i regeneracja', 'białko w diecie', 'pomiar ciśnienia'],
+    supporting_keywords: ['trening siłowy po 50', 'regeneracja podczas snu', 'białko w diecie', 'pomiar ciśnienia'],
     sections: [
       { paragraphs_html: ['<p>Trening siłowy dla początkujących może być pierwszym elementem planu.</p>'] },
       { paragraphs_html: ['<p>Białko w codziennej diecie pomaga ułożyć posiłki wokół aktywności.</p>'] },
-      { paragraphs_html: ['<p>Sen i regeneracja wpływają na gotowość do kolejnej sesji.</p>'] },
+      { paragraphs_html: ['<p>Regeneracja podczas snu wpływa na gotowość do kolejnej sesji.</p>'] },
       { paragraphs_html: ['<p>Pomiar ciśnienia tętniczego porządkuje ocenę bezpieczeństwa wysiłku.</p>'] },
     ],
   };
@@ -51,7 +59,7 @@ function draft() {
 function addLinkTargets(root) {
   addArticle(root, 'trening-silowy-poczatkujacy.html', 'Trening siłowy dla początkujących');
   addArticle(root, 'bialko-codzienna-dieta.html', 'Białko w codziennej diecie');
-  addArticle(root, 'sen-regeneracja.html', 'Sen i regeneracja');
+  addArticle(root, 'sen-regeneracja.html', 'Regeneracja podczas snu');
   addArticle(root, 'pomiar-cisnienia.html', 'Pomiar ciśnienia tętniczego');
 }
 
@@ -102,6 +110,22 @@ test('missing intent blocks before architecture can mutate links or suggestions'
   assert.equal(Object.hasOwn(article, 'internal_link_plan'), false);
   assert.equal(Object.hasOwn(article, 'incoming_link_suggestions'), false);
   assert.equal(article.intent_audit.status, 'BLOCKED');
+}));
+
+test('architecture CLI reports the real blockers when center assessment was not reached', () => withTempRepo((root) => {
+  const file = path.join(root, 'invalid.fitpo50.json');
+  const article = draft();
+  delete article.search_intent;
+  fs.writeFileSync(file, `${JSON.stringify(article, null, 2)}\n`);
+  const cli = spawnSync(
+    process.execPath,
+    [path.join(__dirname, '..', 'scripts', 'prepare-article-architecture.js'), '--file', file, '--write', 'false'],
+    { cwd: root, encoding: 'utf8' },
+  );
+  assert.equal(cli.status, 2);
+  assert.match(cli.stdout, /center=NO_PROPOSAL fit=NOT_ASSESSED/);
+  assert.match(cli.stderr, /search_intent/);
+  assert.doesNotMatch(`${cli.stdout}\n${cli.stderr}`, /Cannot read properties of null/);
 }));
 
 test('strong collision requires a concrete intent differentiation before import', () => withTempRepo((root) => {
