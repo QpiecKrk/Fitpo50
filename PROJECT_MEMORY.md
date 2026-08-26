@@ -74,6 +74,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Każda metafora musi zostać domknięta rzeczywistym mechanizmem.
 - Każdy wniosek wynika z wcześniejszego wyjaśnienia, źródła, liczby albo warunku.
 - Liczby, progi, ceny, ryzyko, mechanizmy i twierdzenia medyczne wymagają przypisania do konkretnych `evidence_claims[]`.
+- Starszy draft Claude może zostać przełożony na aktualny kontrakt tylko z jawnych danych: typ źródła → `evidence_level`, ID źródła → istniejący URL, opisowa lokalizacja → rzeczywista ścieżka JSON. `evidence_source_ids` pozwala domknąć mapowanie akapitów i podpisów bez wymyślania publikacji ani relacji dowodowej.
 - Minimum to 4 realne i wykorzystane źródła. Nie wolno dodawać dekoracyjnych URL-i dla licznika.
 - W tematach medycznych co najmniej dwa źródła i minimum 67% źródeł muszą mieć odpowiednią siłę naukową lub instytucjonalną.
 - Błąd transportu źródła ma status `verification_failed`; rzeczywiste HTTP 4xx/5xx jest klasyfikowane osobno. Oba stany blokują publikację do wyjaśnienia.
@@ -95,7 +96,11 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Każdy pakiet artykułu ma jeden katalog wejściowy, dokładne nazwy, osobny hero i obrazy sekcji oraz lokalny manifest.
 - Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, błędne kadry i ukryte fallbacki są zabronione.
 - Wymagane warianty: AVIF, WebP i JPG z prawdziwymi wymiarami, konkretnym `alt` i podpisem.
+- Po zatwierdzonej kontroli wizualnej rzeczywiste proporcje pliku zastępują planowaną proporcję z promptu. Layout obsługuje panoramy, krajobraz, kwadrat i pionowe plansze bez wymuszania przycięcia; pionowe i kwadratowe obrazy dostają własny wariant układu.
 - Tabele są semantycznym HTML: `caption`, `thead`, `tbody`, `th` i odpowiednie `scope`. Grafika tabeli nie zastępuje tabeli.
+- Importer automatycznie dodaje tabelom klasę, mobilny kontener przewijania oraz brakujące `scope`; finalna bramka tabel działa dopiero na zbudowanym HTML.
+- Importer nie może upraszczać pierwszego akapitu pod H2 do czystego tekstu: zachowuje istniejące linki, `<strong>`, `<em>` i pozostałe poprawne znaczniki inline. Akapit poza limitem 30–70 słów ma zostać zablokowany przez walidator, a nie po cichu przycięty. Licznik słów liczy widoczny tekst po usunięciu znaczników, nigdy nazwy atrybutów ani slug z `href`.
+- Limit `<title>` 65 znaków obejmuje także stały dopisek ` | FitPo50`; dlatego `seo_title` bez marki ma maksymalnie 55 znaków. H1 pozostaje niezależnym tytułem artykułu.
 - HTML najpierw powstaje w izolowanym stagingu. Render desktop 1440 px i mobile 390 px musi przejść kontrolę overflow, fontów, proporcji i obrazów.
 - PDF powstaje ze stagingowego HTML. Każdą stronę trzeba wyrenderować do obrazu i obejrzeć; sama zgodność tekstowa nie wykrywa osieroconych wierszy ani źle podzielonych źródeł.
 - Blok źródeł i disclaimer w PDF nie mogą rozpadać się przypadkowo między stronami.
@@ -161,6 +166,8 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Lista aktywnych komend: `docs/command-registry.md`.
 
 ## 14. Ostatni zweryfikowany test systemu
+
+Publikacja `szczepionki-mrna-covid-a-rak.html` z 2026-08-26 potwierdziła obsługę starszego formatu draftu Claude, 18 zweryfikowanych źródeł, 22 mieszanych proporcjami obrazów, 8 semantycznych tabel, 7 bloków prostego wyjaśnienia oraz 22-stronicowego PDF. Utrwaliła kolejność: bramki treści → media → domknięcie dowodów dla podpisów → kompletny JSON → staging HTML/PDF → atom publikacyjny. Test ujawnił też dwie regresje naprawione u źródła: rezerwowanie miejsca na dopisek marki w `<title>` oraz zakaz usuwania linków i formatowania z pierwszego akapitu pod H2.
 
 Publikacja `czy-jajka-podnosza-cholesterol.html` z 2026-08-25 potwierdziła działanie pełnego pipeline’u i utrwaliła następujące zabezpieczenia:
 

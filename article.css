@@ -115,6 +115,29 @@
   object-fit: cover;
 }
 
+.inline-figure--portrait,
+.inline-figure--square {
+  background: #f7f5ef;
+}
+
+.inline-figure--portrait picture,
+.inline-figure--square picture {
+  display: flex;
+  justify-content: center;
+}
+
+.inline-figure--portrait img {
+  width: auto;
+  max-width: 100%;
+  max-height: 820px;
+  object-fit: contain;
+}
+
+.inline-figure--square img {
+  max-height: 760px;
+  object-fit: contain;
+}
+
 .highlight-box {
   border: 1px solid #f3d9b7;
   border-left: 4px solid var(--color-accent);

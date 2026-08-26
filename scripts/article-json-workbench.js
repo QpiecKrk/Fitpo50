@@ -95,9 +95,10 @@ function buildStageDefinitions(workingFile, assetsDir) {
     { label: 'Normalizacja techniczna bez generowania treści', command: 'node', args: ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json'] },
     { label: 'Lokalna intencja, kanibalizacja, linkowanie i centra', command: 'node', args: ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true'] },
     { label: 'Weryfikacja źródeł, URL-i i pochodzenia FAQ', command: 'node', args: ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true'] },
-    { label: 'Bramka treści JSON', command: 'node', args: ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile] },
     { label: 'Pełny preflight treści przed kosztowną obróbką mediów', command: 'node', args: ['scripts/article-preflight.js', '--file', workingFile, '--content-only', 'true'] },
     { label: 'Pakiet mediów: nazwy, warianty, jakość i różnorodność', command: 'node', args: ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'true'] },
+    { label: 'Domknięcie mapowania dowodów po dodaniu podpisów mediów', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true'] },
+    { label: 'Bramka kompletnego JSON', command: 'node', args: ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile] },
     { label: 'Końcowy preflight pakietu importowego', command: 'node', args: ['scripts/article-preflight.js', '--file', workingFile, '--assets-dir', assetsDir] },
   ];
 }

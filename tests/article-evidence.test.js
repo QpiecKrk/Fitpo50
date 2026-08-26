@@ -251,3 +251,33 @@ test('base JSON fixer preserves missing evidence as blockers instead of fabricat
     fs.rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test('base JSON fixer translates legacy Claude source and claim fields without inventing sources', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-legacy-evidence-'));
+  try {
+    const file = path.join(dir, 'legacy.fitpo50.json');
+    fs.writeFileSync(file, `${JSON.stringify({
+      slug: 'legacy-evidence-test',
+      title: 'Test starszego formatu dowodów w artykule medycznym',
+      seo_title: 'Test starszego formatu dowodów w artykule medycznym',
+      meta_description: 'Kontrolny opis sprawdzający bezpieczną migrację starszego formatu źródeł i przypisań dowodów bez dopisywania nowych publikacji przez lokalny fixer JSON.',
+      category: 'zdrowie',
+      date_published: TODAY,
+      quick_answer: 'To kontrolny akapit odpowiedzi, który zawiera wystarczającą liczbę słów do przejścia podstawowej normalizacji, ale nie służy do publikacji ani porad medycznych.',
+      key_takeaways: ['Jeden', 'Dwa', 'Trzy', 'Cztery'],
+      sections: [{ heading: 'Co wykazała kohorta?', paragraphs_html: ['<p>Kohorta wykazała wyższe ryzyko w obserwowanej grupie.</p>'], image: {} }],
+      answer_blocks: [],
+      sources: [{ id: 'cohort-1', type: 'kohorta populacyjna', citation: 'Autorzy. Badanie kohortowe.', url: 'https://doi.org/10.1000/example' }],
+      evidence_claims: [{ claim: 'Wynik kohorty', location: 'sections[0] kohorta, akapit 1', sources: ['cohort-1'] }],
+      image_prompts: [],
+    }, null, 2)}\n`);
+    spawnSync('node', ['scripts/fix-fitpo50-json.js', '--file', file, '--write', 'true', '--allow-outside-repo', 'true'], { cwd: REPO, encoding: 'utf8' });
+    const after = JSON.parse(fs.readFileSync(file, 'utf8'));
+    assert.equal(after.sources[0].evidence_level, 'cohort');
+    assert.equal(after.evidence_claims[0].location, 'sections[0].paragraphs_html[0]');
+    assert.deepEqual(after.evidence_claims[0].source_urls, ['https://doi.org/10.1000/example']);
+    assert.match(after.evidence_claims[0].claim, /Kohorta wykazała wyższe ryzyko/);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});

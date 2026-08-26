@@ -3,7 +3,7 @@
 const fs = require('fs');
 const { spawnSync } = require('child_process');
 const { POLICY, utils } = require('./lib/article-policy');
-const { validateArticleEvidence } = require('./lib/article-evidence');
+const { MEDICAL_EVIDENCE_LEVELS, isStrongMedicalSource, validateArticleEvidence } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
 const { validateManifestStructure } = require('./lib/article-media');
 
@@ -160,7 +160,7 @@ function calculateAeoScore(ctx) {
   if (ctx.faqAnswerWordCounts.every((n) => n >= 30 && n <= 60)) faqIntent += 5;
   else notes.push('FAQ: część odpowiedzi wypada poza 30-60 słów.');
 
-  const strongDomains = /(pubmed|nih\.gov|who\.int|cdc\.gov|ema\.europa\.eu|ncbi\.nlm\.nih\.gov|gov\.pl|gov|ptkardio|esmo|escardio|aafp|nhs\.uk|cochrane)/i;
+  const strongDomains = /(doi\.org|pubmed|nih\.gov|cancer\.gov|who\.int|cdc\.gov|ema\.europa\.eu|ncbi\.nlm\.nih\.gov|frontiersin\.org|nature\.com|gov\.pl|ptkardio|esmo|escardio|aafp|nhs\.uk|cochrane)/i;
   const validUrls = ctx.sourceUrls.filter((u) => /^https?:\/\//i.test(u));
   const strongCount = validUrls.filter((u) => strongDomains.test(u)).length;
   const strongRatio = validUrls.length ? strongCount / validUrls.length : 0;
@@ -261,8 +261,8 @@ function validateFile(file) {
     errors.push(`${file}: brak seo_title/meta_title/title.`);
   } else if (seoTitle.length < POLICY.TITLE.MIN) {
     errors.push(`${file}: seo_title jest zbyt krótki (min ${POLICY.TITLE.MIN}, jest ${seoTitle.length}).`);
-  } else if (seoTitle.length > POLICY.TITLE.MAX) {
-    errors.push(`${file}: seo_title przekracza ${POLICY.TITLE.MAX} znaków (jest ${seoTitle.length}).`);
+  } else if (seoTitle.length > POLICY.TITLE.SEO_BASE_MAX) {
+    errors.push(`${file}: seo_title przekracza ${POLICY.TITLE.SEO_BASE_MAX} znaków przed dopiskiem „${POLICY.TITLE.BRAND_SUFFIX.trim()}” (jest ${seoTitle.length}).`);
   }
   const titleNorm = normalizeTextForCompare(title);
   const seoNorm = normalizeTextForCompare(seoTitle);
@@ -445,8 +445,10 @@ function validateFile(file) {
   if (faqOutOfRange > 0) {
     errors.push(`${file}: ${faqOutOfRange} odpowiedzi FAQ wypada poza zakres 30-60 słów.`);
   }
-  const strongDomains = /(pubmed|nih\.gov|who\.int|cdc\.gov|ema\.europa\.eu|ncbi\.nlm\.nih\.gov|gov\.pl|ptkardio|escardio|nhs\.uk|cochrane)/i;
-  const strongCount = sourceUrls.filter((u) => strongDomains.test(String(u || ''))).length;
+  const strongCount = sources.filter((source) => {
+    const level = String(source?.evidence_level || source?.evidenceLevel || '').trim().toLowerCase();
+    return isStrongMedicalSource(source?.url) && MEDICAL_EVIDENCE_LEVELS.has(level);
+  }).length;
   const strongRatio = sourceUrls.length ? strongCount / sourceUrls.length : 0;
   if (sourceUrls.length && strongRatio < 0.5) {
     errors.push(`${file}: udział silnych źródeł medycznych jest zbyt niski (${Math.round(strongRatio * 100)}%, wymagane min 50%).`);

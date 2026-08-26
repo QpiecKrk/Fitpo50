@@ -48,6 +48,8 @@ test('workbench stops dependent stages after the first failure', () => {
 test('content blockers run before media conversion and the final package preflight', () => {
   const labels = buildStageDefinitions('/tmp/article.json', '/tmp/assets').map((item) => item.label);
   assert.ok(labels.indexOf('Pełny preflight treści przed kosztowną obróbką mediów') < labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność'));
+  assert.ok(labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność') < labels.indexOf('Domknięcie mapowania dowodów po dodaniu podpisów mediów'));
+  assert.ok(labels.indexOf('Domknięcie mapowania dowodów po dodaniu podpisów mediów') < labels.indexOf('Bramka kompletnego JSON'));
   assert.ok(labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność') < labels.indexOf('Końcowy preflight pakietu importowego'));
 });
 

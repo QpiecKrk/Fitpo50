@@ -423,4 +423,8 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Marsz japoński czy 10 000 kroków? Uczciwe porównanie po 50 | FitPo50"
   section: "Mity"
   summary: "Marsz japoński trzy na trzy kontra 10 000 kroków: co mówią badania o wydolności, sile nóg i ciśnieniu po 50, jak ustawić tempo i kiedy przerwać trening."
+- url: https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html
+  title: "Czy szczepionki mRNA na COVID-19 powodują raka? Fakty i badania | FitPo50"
+  section: "Mity"
+  summary: "Czy szczepionki mRNA powodują raka? Sprawdzamy badanie z Korei, dane z Włoch, DNA, SV40 i „turbo raka”. Poznaj fakty, ograniczenia i obecny stan wiedzy."
 

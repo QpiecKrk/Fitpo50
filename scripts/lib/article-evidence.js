@@ -25,7 +25,7 @@ const EVIDENCE_LEVELS = new Set([
   'secondary_analysis',
 ]);
 const STRONG_SOURCE_HOSTS = [
-  'pubmed.ncbi.nlm.nih.gov', 'ncbi.nlm.nih.gov', 'nih.gov', 'who.int', 'cdc.gov',
+  'pubmed.ncbi.nlm.nih.gov', 'ncbi.nlm.nih.gov', 'nih.gov', 'cancer.gov', 'who.int', 'cdc.gov',
   'ema.europa.eu', 'fda.gov', 'gov.pl', 'nhs.uk', 'cochranelibrary.com', 'cochrane.org',
   'escardio.org', 'ptkardio.pl', 'heart.org', 'ahajournals.org', 'acc.org', 'acsm.org',
   'diabetesjournals.org', 'thelancet.com', 'nejm.org', 'jamanetwork.com', 'bmj.com',

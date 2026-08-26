@@ -11,6 +11,7 @@ const {
   isSupportedCategory,
   normalizeCategory,
 } = require('../scripts/lib/categories');
+const { ensureCaptionedTables, normalizeSections, normalizeSeoTitleBase } = require('../scripts/import-article');
 
 test('validateSeoDescriptionLength accepts valid SEO description', () => {
   const desc = 'Badanie ApoB (Apolipoproteina B) to najlepszy marker ryzyka miażdżycy po 50-tce. Sprawdź normy, cenę i dlaczego warto je zrobić zamiast LDL dziś.';
@@ -36,6 +37,32 @@ test('countInternalHtmlLinks counts unique internal html links and ignores porad
   `;
   const count = utils.countInternalHtmlLinks(html);
   assert.equal(count, 2);
+});
+
+test('importer turns draft tables into semantic mobile-safe HTML tables', () => {
+  const html = '<table><thead><tr><th>MIT</th><th>Fakt</th></tr></thead><tbody><tr><td>Twierdzenie</td><td>Stan dowodów</td></tr></tbody></table>';
+  const normalized = ensureCaptionedTables(html, 'Co pokazują dowody?');
+  assert.match(normalized, /class="article-table-wrap"/);
+  assert.match(normalized, /class="article-table"/);
+  assert.match(normalized, /<caption>Tabela: Co pokazują dowody\.<\/caption>/);
+  assert.match(normalized, /<th scope="col">MIT<\/th>/);
+  assert.match(normalized, /<th scope="row">Twierdzenie<\/th>/);
+});
+
+test('importer preserves inline links and emphasis in the first paragraph under H2', () => {
+  const [section] = normalizeSections([{
+    heading: 'Dlaczego to ważne?',
+    paragraphs_html: ['<p>To jest <strong>ważne wyjaśnienie</strong> z <a href="badania.html">kontekstowym linkiem</a>, którego importer nie może usuwać.</p>'],
+  }]);
+  assert.match(section.blocks[0].html, /<strong>ważne wyjaśnienie<\/strong>/);
+  assert.match(section.blocks[0].html, /<a href="(?:\.\/)?badania\.html">kontekstowym linkiem<\/a>/);
+  assert.equal(utils.countWords(utils.stripTags(section.blocks[0].html)), 12);
+});
+
+test('SEO title base reserves space for the FitPo50 brand suffix', () => {
+  const base = normalizeSeoTitleBase('Czy bardzo długi tytuł artykułu może przekroczyć limit Google i zepsuć walidację strony');
+  assert.ok(base.length <= POLICY.TITLE.SEO_BASE_MAX);
+  assert.ok(`${base}${POLICY.TITLE.BRAND_SUFFIX}`.length <= POLICY.TITLE.MAX);
 });
 
 test('collectRepeatedLongSentences reports repeated long sentences via central thresholds', () => {

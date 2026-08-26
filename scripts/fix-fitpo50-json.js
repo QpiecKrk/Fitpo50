@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { POLICY, validators } = require('./lib/article-policy');
 const { CATEGORY_LANDING_PAGES, isSupportedCategory, normalizeCategory } = require('./lib/categories');
+const { collectArticleFragments, fragmentNeedsEvidence, isMedicalArticle } = require('./lib/article-evidence');
 
 function toLocalIsoDate(date = new Date()) {
   const y = date.getFullYear();
@@ -257,12 +258,116 @@ function dedupeSources(sources) {
       ...s,
       label,
       url,
+      evidence_level: inferEvidenceLevel(s),
       checked_at: String(s.checked_at || s.checkedAt || '').trim(),
       url_status: String(s.url_status || s.urlStatus || '').trim(),
       http_status: Number(s.http_status || s.httpStatus || 0) || 0,
     });
   }
   return out;
+}
+
+function inferEvidenceLevel(source) {
+  const explicit = String(source?.evidence_level || source?.evidenceLevel || '').trim().toLowerCase();
+  if (explicit) return explicit;
+  const type = stripTags(String(source?.type || '')).toLowerCase();
+  if (/meta.?analiz/.test(type)) return 'meta_analysis';
+  if (/przegląd systematyczny/.test(type)) return 'systematic_review';
+  if (/randomiz/.test(type)) return 'randomized_trial';
+  if (/kohort/.test(type)) return 'cohort';
+  if (/regulator/.test(type)) return 'regulatory';
+  if (/wytycz|konsensus/.test(type)) return 'guideline';
+  if (/raport instytucjonalny/.test(type)) return 'expert_consensus';
+  if (/dokument instytucjonalny|rekomendac|stanowisko/.test(type)) return 'official_guidance';
+  if (/statystyk.*oficjal/.test(type)) return 'official_statistics';
+  if (/badanie oryginalne|analiza laboratoryjna|badanie mechanistyczne|opis przypadku|korespondencja naukowa/.test(type)) return 'primary_research';
+  if (/dokument techniczny/.test(type)) return 'technical_documentation';
+  if (/dokument/.test(type)) return 'official_document';
+  return 'secondary_analysis';
+}
+
+function firstEvidenceSentence(html) {
+  const plain = stripTags(String(html || '')).replace(/\s+/g, ' ').trim();
+  if (!plain) return '';
+  const sentence = plain.match(/^.{20,}?(?:[.!?](?=\s|$)|$)/u)?.[0] || plain;
+  const clean = sentence.replace(/\s+/g, ' ').trim();
+  return wordCount(clean) >= 5 ? clean : plain;
+}
+
+function legacyLocationToPath(location, sections) {
+  const raw = String(location || '').trim();
+  if (/^(?:lead|quick_answer|hero_motto_html|key_takeaways\[\d+\]|answer_blocks\[\d+\]\.answer_html|sections\[\d+\]\.(?:paragraphs_html|list_items)\[\d+\]|sections\[\d+\]\.info_box\.content_html|sections\[\d+\]\.image\.caption)$/.test(raw)) return raw;
+  const sectionMatch = raw.match(/sections\[(\d+)\]/i);
+  if (!sectionMatch) return '';
+  const sectionIndex = Number(sectionMatch[1]);
+  const section = sections[sectionIndex];
+  if (!section) return '';
+  const paragraphMatch = raw.match(/akapit(?:y|ach)?\s*(\d+)/i);
+  const paragraphIndex = paragraphMatch ? Math.max(Number(paragraphMatch[1]) - 1, 0) : 0;
+  if (!Array.isArray(section.paragraphs_html) || !section.paragraphs_html[paragraphIndex]) return '';
+  return `sections[${sectionIndex}].paragraphs_html[${paragraphIndex}]`;
+}
+
+function normalizeEvidenceClaims(claims, sources, sections) {
+  const sourceById = new Map(sources.map((source) => [String(source.id || '').trim(), source.url]).filter(([id, url]) => id && url));
+  return (Array.isArray(claims) ? claims : []).map((claim) => {
+    const location = legacyLocationToPath(claim?.location, sections);
+    const locationMatch = location.match(/^sections\[(\d+)\]\.paragraphs_html\[(\d+)\]$/);
+    const fragment = locationMatch
+      ? sections[Number(locationMatch[1])]?.paragraphs_html?.[Number(locationMatch[2])]
+      : '';
+    const sourceUrls = Array.isArray(claim?.source_urls) && claim.source_urls.length
+      ? claim.source_urls
+      : (Array.isArray(claim?.sources) ? claim.sources.map((id) => sourceById.get(String(id || '').trim())).filter(Boolean) : []);
+    return {
+      claim: location ? firstEvidenceSentence(fragment) : stripTags(String(claim?.claim || '')).trim(),
+      location,
+      claim_type: String(claim?.claim_type || claim?.claimType || inferClaimType(fragment)).trim().toLowerCase(),
+      source_urls: [...new Set(sourceUrls)],
+      note: stripTags(String(claim?.note || claim?.status || '')).trim(),
+    };
+  }).filter((claim) => claim.location && claim.claim && claim.source_urls.length);
+}
+
+function evidenceSourceUrls(ids, sourceById) {
+  return [...new Set((Array.isArray(ids) ? ids : []).map((id) => sourceById.get(String(id || '').trim())).filter(Boolean))];
+}
+
+function inferClaimType(fragment) {
+  const text = stripTags(fragment).toLowerCase();
+  if (/\d/.test(text)) return 'statistic';
+  if (/metodolog|liczebno|próba|błąd systematyczny|korelac|przyczynowo|dowód|sygnał|wniosek|obawa|przekaz|internet|nagłówek|doświadczenie/.test(text)) return 'general';
+  if (/mechanizm|mrna|dna|jądr|transkrypt|immunolog|komórk|nanocząst/.test(text)) return 'mechanism';
+  return 'medical';
+}
+
+function expandEvidenceClaims(json) {
+  const claims = Array.isArray(json.evidence_claims) ? [...json.evidence_claims] : [];
+  const mapped = new Set(claims.map((claim) => String(claim.location || '').trim()).filter(Boolean));
+  const sourceById = new Map((Array.isArray(json.sources) ? json.sources : [])
+    .map((source) => [String(source.id || '').trim(), String(source.url || '').trim()])
+    .filter(([id, url]) => id && url));
+  const globalUrls = evidenceSourceUrls(json.evidence_source_ids, sourceById);
+  const fragments = collectArticleFragments(json);
+  const medical = isMedicalArticle(json);
+  fragments.filter((fragment) => fragmentNeedsEvidence(fragment, medical) || /\b(dlatego|zatem|w rezultacie|to oznacza|wynika z tego|w praktyce oznacza|stąd wniosek)\b/iu.test(fragment.text)).forEach((fragment) => {
+    if (mapped.has(fragment.location)) return;
+    let urls = globalUrls;
+    const sectionMatch = fragment.location.match(/^sections\[(\d+)\]/);
+    const answerMatch = fragment.location.match(/^answer_blocks\[(\d+)\]/);
+    if (sectionMatch) urls = evidenceSourceUrls(json.sections?.[Number(sectionMatch[1])]?.evidence_source_ids, sourceById);
+    if (answerMatch) urls = evidenceSourceUrls(json.answer_blocks?.[Number(answerMatch[1])]?.evidence_source_ids, sourceById);
+    if (!urls.length) return;
+    claims.push({
+      claim: firstEvidenceSentence(fragment.text),
+      location: fragment.location,
+      claim_type: inferClaimType(fragment.text),
+      source_urls: urls,
+      note: 'Mapowanie utworzone z jawnych evidence_source_ids dostarczonych dla tego fragmentu lub sekcji.',
+    });
+    mapped.add(fragment.location);
+  });
+  return claims;
 }
 
 function htmlToParagraphs(contentHtml) {
@@ -390,9 +495,9 @@ function main() {
   const rawSeoTitleInput = String(json.seo_title || '').replace(/\s+/g, ' ').trim();
   json.title = truncateAtWordBoundary(rawTitleInput, 65);
   if (!rawSeoTitleInput || rawSeoTitleInput === rawTitleInput) {
-    json.seo_title = truncateAtWordBoundary(json.title, 65);
+    json.seo_title = truncateAtWordBoundary(json.title, POLICY.TITLE.SEO_BASE_MAX);
   } else {
-    json.seo_title = truncateAtWordBoundary(rawSeoTitleInput, 65);
+    json.seo_title = truncateAtWordBoundary(rawSeoTitleInput, POLICY.TITLE.SEO_BASE_MAX);
   }
   json.slug = String(json.slug || '')
     .toLowerCase()
@@ -437,6 +542,7 @@ function main() {
       title,
       paragraphs_html: paragraphs,
       list_items: listItems.map((x) => stripTags(String(x || '')).trim()).filter(Boolean),
+      evidence_source_ids: [...new Set((Array.isArray(section.evidence_source_ids) ? section.evidence_source_ids : []).map((id) => String(id || '').trim()).filter(Boolean))],
       image: {
         src: String(image.src || '').trim(),
         alt: stripTags(String(image.alt || '')).trim(),
@@ -459,17 +565,37 @@ function main() {
   json.answer_blocks = faq.map((f) => ({
     question: stripTags(String((f && f.question) || '')).trim(),
     answer_html: sanitizeCodeGlyphs(normalizeInternalHtmlLinks(ensureParagraphWrapper((f && (f.answer_html || f.answer)) || ''))),
+    evidence_source_ids: [...new Set((Array.isArray(f?.evidence_source_ids) ? f.evidence_source_ids : []).map((id) => String(id || '').trim()).filter(Boolean))],
   })).filter((f) => f.question && f.answer_html);
 
   json.quick_answer = buildQuickAnswer(json);
 
   json.sources = dedupeSources(Array.isArray(json.sources) ? json.sources : []);
 
+  json.evidence_claims = normalizeEvidenceClaims(json.evidence_claims, json.sources, json.sections);
+  json.evidence_claims = expandEvidenceClaims(json);
+
   json.faq_research = normalizeFaqResearch(json.faq_research);
 
   const promptKey = Array.isArray(json.image_prompts_v4) && json.image_prompts_v4.length ? 'image_prompts_v4' : 'image_prompts';
   const imagePrompts = Array.isArray(json[promptKey]) ? json[promptKey] : [];
-  const mapped = imagePrompts.map((p) => (p && typeof p === 'object' ? p : {}));
+  const mapped = imagePrompts.map((p, promptIndex) => {
+    const prompt = p && typeof p === 'object' ? p : {};
+    const rawRef = String(prompt.section_ref || '').trim();
+    const sectionIndex = json.sections.findIndex((section) => stripTags(section.title).toLowerCase() === ensureQuestionHeading(stripTags(rawRef)).toLowerCase());
+    const sectionRef = /^hero$/i.test(rawRef)
+      ? 'hero'
+      : (/^sekcja-\d+$/i.test(rawRef) ? rawRef.toLowerCase() : (sectionIndex >= 0 ? `sekcja-${sectionIndex + 1}` : (promptIndex === 0 ? 'hero' : rawRef)));
+    return {
+      ...prompt,
+      section_ref: sectionRef,
+      topic: String(prompt.topic || prompt.purpose || '').trim(),
+      technique: String(prompt.technique || prompt.style || '').trim(),
+      composition: String(prompt.composition || prompt.orientation || '').trim(),
+      aspect_ratio: String(prompt.aspect_ratio || prompt.orientation || '').trim(),
+      source_file: String(prompt.source_file || '').trim(),
+    };
+  });
   for (const p of mapped) {
     const fb = String(p.filename_base || '').trim().replace(/[^a-zA-Z0-9_-]/g, '-');
     p.filename_base = fb;

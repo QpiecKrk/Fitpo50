@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-08-26T12:27:21.869Z",
+  "slug": "szczepionki-mrna-covid-a-rak",
+  "html_sha256": "8fcc2db053978589a7f7474ce584108f1970bd8b8986347a20470fbaff538ae9",
+  "site_html_sha256": "8fcc2db053978589a7f7474ce584108f1970bd8b8986347a20470fbaff538ae9",
+  "pdf_sha256": "823933eb8a55122bc0c6aa467ffe8f83961b46e9676f4d362183980392dd6128",
+  "site_pdf_sha256": "823933eb8a55122bc0c6aa467ffe8f83961b46e9676f4d362183980392dd6128",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 8
+  },
+  "pdf": {
+    "pages": 22,
+    "text_coverage": 0.9906,
+    "rendered_pages": 22
+  },
+  "errors": []
+}

@@ -58,7 +58,7 @@ function validateAnswerFirstParagraphs(raw, errors) {
       continue;
     }
     checked += 1;
-    const res = validators.validateIntroParagraph(pMatch[1]);
+    const res = validators.validateIntroParagraph(utils.stripTags(pMatch[1]));
     if (!res.ok) {
       errors.push(`Sekcja "${utils.stripTags(current[1])}": ${res.error}`);
     }

@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+        gtag("config", "AW-18108612630");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
+</script>
+<script>
+  (function () {
+    try {
+      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var h = new Date().getHours();
+      var isNight = (h >= 19 || h < 7);
+      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+    } catch (_) {}
+  })();
+</script>
+<title>Czy szczepionki mRNA powodują raka? Fakty i badania | FitPo50</title>
+<meta name="description" content="Czy szczepionki mRNA powodują raka? Sprawdzamy badanie z Korei, dane z Włoch, DNA, SV40 i „turbo raka”. Poznaj fakty, ograniczenia i obecny stan wiedzy.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Grzegorz Kupiec">
+<meta property="og:title" content="Czy szczepionki mRNA powodują raka? Fakty i badania">
+<meta property="og:description" content="Czy szczepionki mRNA powodują raka? Sprawdzamy badanie z Korei, dane z Włoch, DNA, SV40 i „turbo raka”. Poznaj fakty, ograniczenia i obecny stan wiedzy.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html">
+<meta property="og:image" content="https://fitpo50.pl/assets/szczepionki-mrna-covid-a-rak-hero.jpg">
+<meta property="og:locale" content="pl_PL">
+<meta property="article:published_time" content="2026-08-26T08:00:00+02:00">
+<meta property="article:modified_time" content="2026-08-26T09:30:00+02:00">
+<meta property="article:author" content="Grzegorz Kupiec">
+<meta property="article:section" content="Mity">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Czy szczepionki mRNA powodują raka? Fakty i badania">
+<meta name="twitter:description" content="Czy szczepionki mRNA powodują raka? Sprawdzamy badanie z Korei, dane z Włoch, DNA, SV40 i „turbo raka”. Poznaj fakty, ograniczenia i obecny stan wiedzy.">
+<meta name="twitter:image" content="https://fitpo50.pl/assets/szczepionki-mrna-covid-a-rak-hero.jpg">
+<link rel="canonical" href="https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Czy szczepionki mRNA na COVID-19 powodują raka? Fakty i badania",
+  "description": "Czy szczepionki mRNA powodują raka? Sprawdzamy badanie z Korei, dane z Włoch, DNA, SV40 i „turbo raka”. Poznaj fakty, ograniczenia i obecny stan wiedzy.",
+  "inLanguage": "pl-PL",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html"
+  },
+  "url": "https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html",
+  "image": "https://fitpo50.pl/assets/szczepionki-mrna-covid-a-rak-hero.jpg",
+  "datePublished": "2026-08-26T08:00:00+02:00",
+  "dateModified": "2026-08-26T09:30:00+02:00",
+  "author": {
+    "@type": "Person",
+    "name": "Grzegorz Kupiec",
+    "url": "https://fitpo50.pl/o-mnie.html",
+    "sameAs": [
+      "https://fitpo50.pl/o-mnie.html"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FitPo50",
+    "url": "https://fitpo50.pl/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://fitpo50.pl/assets/logo.jpg"
+    }
+  },
+  "timeRequired": "PT29M",
+  "wordCount": 6998,
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      ".article-header__title",
+      "#quick-answer",
+      "#quick-answer p",
+      ".drop-cap",
+      ".key-takeaways h2",
+      ".key-takeaways li"
+    ]
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "mRNA ze szczepionki nie wchodzi do jądra komórkowego i nie ma jak zmienić Twojego DNA. Do przepisania RNA na DNA potrzebna jest odwrotna transkryptaza, której nie ma ani w preparacie, ani standardowo w Twoich komórkach."
+    },
+    {
+      "@type": "Thing",
+      "name": "Koreańskie badanie na 8,4 mln osób istnieje i pokazało wyższe ryzyko sześciu nowotworów. Od października 2025 wisi nad nim redakcyjna nota o zgłoszonych zastrzeżeniach, a formalny komentarz metodologiczny ocenia jego jakość jako niską."
+    },
+    {
+      "@type": "Thing",
+      "name": "Włoska kohorta z Pescary pokazała coś, co warto zapamiętać: wzrost ryzyka hospitalizacji z powodu raka znikał, gdy autorzy wymagali odstępu 12 miesięcy między szczepieniem a diagnozą. Przy trzech dawkach ryzyko było wtedy niższe niż u nieszczepionych."
+    },
+    {
+      "@type": "Thing",
+      "name": "Turbo rak nie jest rozpoznaniem medycznym. To określenie z internetu, nie z klasyfikacji chorób."
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Kim HJ, Kim MH, Choi MG, Chun EM. 1-year risks of cancers associated with COVID-19 vaccination: a large population-based cohort study in South Korea. Biomark Res. 2025;13:114.",
+      "url": "https://doi.org/10.1186/s40364-025-00831-w",
+      "datePublished": "2025-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Locquet M, Beaudart C, Douxfils J, Roberfroid D, Van Damme P, Dogné JM. Commentary: 1-year risks of cancers associated with COVID-19 vaccination. Front Public Health. 2026;14:1772406.",
+      "url": "https://doi.org/10.3389/fpubh.2026.1772406",
+      "datePublished": "2026-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Acuti Martellucci C, Capodici A, Soldato G i wsp. COVID-19 vaccination, all-cause mortality, and hospitalization for cancer: 30-month cohort study in an Italian province. EXCLI J. 2025;24:690-707.",
+      "url": "https://doi.org/10.17179/excli2025-8400",
+      "datePublished": "2025-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Achs A, Sedlackova T, Predajna L i wsp. Systematic analysis of COVID-19 mRNA vaccines using four orthogonal approaches demonstrates no excessive DNA impurities. npj Vaccines. 2025;10:259.",
+      "url": "https://doi.org/10.1038/s41541-025-01304-9",
+      "datePublished": "2025-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Isidoro C. SARS-CoV2 and Anti-COVID-19 mRNA Vaccines: Is There a Plausible Mechanistic Link with Cancer? Cancers. 2025;17(23):3867.",
+      "url": "https://doi.org/10.3390/cancers17233867",
+      "datePublished": "2025-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Kuperwasser C, El-Deiry WS. COVID vaccination and post-infection cancer signals: Evaluating patterns and potential biological mechanisms. Oncotarget. 2026;17:1-29.",
+      "url": "https://doi.org/10.18632/oncotarget.28824",
+      "datePublished": "2026-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    }
+  ],
+  "citation": [
+    "https://doi.org/10.1186/s40364-025-00831-w",
+    "https://doi.org/10.3389/fpubh.2026.1772406",
+    "https://doi.org/10.17179/excli2025-8400",
+    "https://doi.org/10.1038/s41541-025-01304-9",
+    "https://doi.org/10.3390/cancers17233867",
+    "https://doi.org/10.18632/oncotarget.28824",
+    "https://doi.org/10.1038/s41586-025-09655-y",
+    "https://doi.org/10.1016/j.cell.2022.01.018",
+    "https://doi.org/10.3390/biomedicines10071538",
+    "https://doi.org/10.3389/fmed.2021.798095",
+    "https://www.ema.europa.eu/en/human-regulatory-overview/public-health-threats/coronavirus-disease-covid-19/covid-19-medicines/covid-19-vaccines-key-facts",
+    "https://www.cancer.gov/about-cancer/coronavirus/covid-19-vaccines-people-with-cancer"
+  ],
+  "encoding": {
+    "@type": "MediaObject",
+    "@id": "https://fitpo50.pl/assets/pdf/szczepionki-mrna-covid-a-rak.pdf#media",
+    "name": "Czy szczepionki mRNA na COVID-19 powodują raka? Fakty i badania (PDF)",
+    "contentUrl": "https://fitpo50.pl/assets/pdf/szczepionki-mrna-covid-a-rak.pdf",
+    "encodingFormat": "application/pdf",
+    "inLanguage": "pl-PL"
+  }
+}
+</script>
+
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="image" href="./assets/szczepionki-mrna-covid-a-rak-hero.webp" fetchpriority="high">
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css?v=1.5">
+<link rel="stylesheet" href="./article.css?v=1.5">
+<link rel="icon" href="./favicon.png" type="image/png"><link rel="apple-touch-icon" href="./favicon.png">
+<link rel="stylesheet" href="./assets/footer.css?v=2">
+<meta name="google-adsense-account" content="ca-pub-4993821807276758">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758" crossorigin="anonymous"></script>
+<script type="application/ld+json" id="faqpage-schema-auto">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Czy szczepionki mRNA przeciw COVID-19 powodują raka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nie wykazano tego. Dwa badania obserwacyjne pokazały więcej rozpoznań onkologicznych u zaszczepionych, ale sygnał znika po wprowadzeniu 12-miesięcznego okresu karencji, a formalny komentarz metodologiczny ocenia jakość tych dowodów jako niską. Powstanie guza litego w rok od ekspozycji nie jest biologicznie prawdopodobne."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dlaczego mRNA ze szczepionki nie zmienia DNA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nie. mRNA działa w cytoplazmie i nie wchodzi do jądra komórkowego, gdzie znajduje się DNA. Do przepisania RNA na DNA potrzebna jest odwrotna transkryptaza, której nie ma ani w preparacie, ani standardowo w ludzkich komórkach."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy turbo rak istnieje?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nie jako rozpoznanie medyczne. Pod tym internetowym określeniem zlepiono kilka odrębnych zjawisk: nowotwory biologicznie agresywne znane od dziesięcioleci, diagnozy w wyższym stadium po przerwaniu badań przesiewowych w latach 2020 i 2021 oraz pojedyncze opisy przypadków bez grupy porównawczej."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy po szczepieniu trzeba zrobić badania w kierunku raka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nie ma takiego zalecenia i żadne towarzystwo naukowe go nie wydało. Warto natomiast nadrobić badania przesiewowe zgodne z wiekiem, jeśli wypadły z kalendarza w czasie pandemii. Powiększony węzeł pod pachą po stronie szczepienia utrzymujący się dłużej niż około tydzień warto pokazać lekarzowi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy szczepionka jest bezpieczna w trakcie leczenia onkologicznego?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Według National Cancer Institute nie ma dowodów, by szczepienie powodowało wznowę, progresję ani obniżało skuteczność terapii onkologicznej. Odroczenie zaleca się po przeszczepie komórek macierzystych i terapii CAR-T, o co najmniej trzy miesiące. Decyzję warto uzgodnić z prowadzącym onkologiem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co pokazało badanie z Korei Południowej?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Korelację w oknie rocznym: wyższe współczynniki ryzyka dla sześciu nowotworów, od 1,20 dla piersi do 1,69 dla prostaty. To list do redakcji, nad którym od października 2025 wisi nota o zgłoszonych zastrzeżeniach. Cztery z sześciu lokalizacji objęte są w Korei krajowymi programami przesiewowymi."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json" id="speakable-schema-auto">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      ".article-header__title",
+      "#quick-answer",
+      "#quick-answer p",
+      ".drop-cap",
+      ".key-takeaways h2",
+      ".key-takeaways li"
+    ]
+  }
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Strona główna",
+      "item": "https://fitpo50.pl/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Porady",
+      "item": "https://fitpo50.pl/porady.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Czy szczepionki mRNA powodują raka? Fakty i badania",
+      "item": "https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html"
+    }
+  ]
+}
+</script>
+
+</head>
+<body class="article-template article--mity">
+<div class="shell">
+<header class="topbar">
+  <a href="index.html" class="brand" aria-label="FitPo50 — strona główna">
+    <img class="brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" onerror="this.style.display='none'">
+    <span class="brand__text">
+      <span class="brand__name">FitPo50</span>
+      <span class="brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span>
+    </span>
+  </a>
+  <nav class="menu" aria-label="Menu główne">
+      <a href="index.html">Home</a>
+      <a href="porady.html" class="is-active">Porady</a>
+      <a href="mity.html">Mity</a>
+      <a href="rusz-sie.html">Ruch</a>
+      <a href="jedzenie.html">Jedzenie</a>
+      <a href="zdrowie.html">Zdrowie</a>
+      <a href="ciekawe.html">Ciekawe</a>
+      <a href="dziennik.html">Dziennik</a>
+      <a href="o-mnie.html">O mnie</a>
+  </nav>
+  <label class="searchbar" aria-label="Szukaj artykułów">
+    <span aria-hidden="true">🔎</span>
+    <input type="search" placeholder="Szukaj artykułów...">
+  </label>
+</header>
+
+<main class="article-page" id="main-article">
+  <div class="container article-main-bento">
+    <section class="article-intro-grid reveal" aria-label="Wstęp artykułu">
+      <div class="article-kicker-card article-kicker-card--mity">
+        <p class="article-kicker-card__meta"><span class="article-kicker-card__category-pill">Mity</span><span>29 min czytania</span><span class="article-kicker-card__date">Aktualizacja: 26.08.2026</span></p>
+        <h1 class="article-header__title">Czy szczepionki mRNA na COVID-19 powodują raka? Fakty i badania</h1>
+      </div>
+
+      <div class="article-hero reveal">
+      <picture>
+        <source srcset="./assets/szczepionki-mrna-covid-a-rak-hero.avif" type="image/avif">
+        <source srcset="./assets/szczepionki-mrna-covid-a-rak-hero.webp" type="image/webp">
+        <img src="./assets/szczepionki-mrna-covid-a-rak-hero.jpg" alt="Kobieta i mężczyzna około sześćdziesiątki siedzą w jasnej kuchni nad rozłożonymi dokumentami i spokojnie rozmawiają" loading="eager" width="undefined" height="undefined">
+      </picture>
+      <div class="hero-motto"><em>Sygnał to jeszcze nie dowód. Ale sygnału też się nie zamiata pod dywan.</em></div>
+      </div>
+    </section>
+
+    <div class="article-primary-actions" aria-label="Akcje artykułu">
+      <!-- PDF_DOWNLOAD_BUTTON_START -->
+      <a class="pdf-hero-download" href="./assets/pdf/szczepionki-mrna-covid-a-rak.pdf" download aria-label="Pobierz artykuł w PDF (991 KB)">
+        <span class="pdf-hero-download__eyebrow">Chcesz przeczytać na spokojnie? Pobierz PDF</span>
+        <span class="pdf-hero-download__title">Pobierz artykuł (PDF)</span>
+        <span class="pdf-hero-download__meta">Rozmiar pliku: 991 KB</span>
+        <span class="pdf-hero-download__badge" aria-hidden="true">PDF</span>
+      </a>
+      <!-- PDF_DOWNLOAD_BUTTON_END -->
+
+<button class="pdf-hero-download pdf-hero-download--share" type="button" id="share-article-top" aria-label="Udostępnij artykuł">
+        <span class="pdf-hero-download__eyebrow">Wyślij przyjacielowi albo opublikuj u siebie</span>
+        <span class="pdf-hero-download__title">Udostępnij artykuł</span>
+        <span class="pdf-hero-download__meta">Facebook, LinkedIn, WhatsApp, mail lub kopiowanie linku</span>
+        <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">SHARE</span>
+      </button>
+    </div>
+
+    <article class="article-content">
+      <p class="drop-cap">Ten temat wraca falami. Raz jako nagłówek o milionach Koreańczyków, raz jako historia znajomego, u którego rak wykryto trzy miesiące po dawce przypominającej. Jeśli masz po pięćdziesiątce, jesteś dokładnie w tej grupie, która i szczepiła się najczęściej, i najczęściej trafia na badania przesiewowe. Więc pytanie jest uczciwe i zasługuje na uczciwą odpowiedź: nie na uspokajający komunikat i nie na straszak. Rozłożyliśmy dostępne badania na części, łącznie z tymi, które wskazują na wzrost ryzyka, i pokazujemy, co z nich naprawdę wynika, a co jest dopisane.</p>
+
+<section class="quick-answer reveal" id="quick-answer" aria-label="Szybka odpowiedź">
+  <h2>Szybka odpowiedź</h2>
+  <p>Nie ma dowodów, że szczepionki mRNA przeciw COVID-19 powodują nowe nowotwory. Badania pokazujące wyższe ryzyko mają istotne ograniczenia: nierówne daty rozpoczęcia obserwacji, brak korekty na wielokrotne porównania i zbyt krótki czas śledzenia. mRNA nie wchodzi do jądra komórkowego i nie zmienia DNA. Nierozstrzygnięty pozostaje wpływ silnej stymulacji immunologicznej na uśpione komórki nowotworowe.</p>
+</section>
+
+<section class="key-takeaways reveal" data-ai-summary="auto" aria-label="Kluczowe wnioski">
+  <h2>Kluczowe wnioski</h2>
+  <ul><li>mRNA ze szczepionki nie wchodzi do jądra komórkowego i nie ma jak zmienić Twojego DNA. Do przepisania RNA na DNA potrzebna jest odwrotna transkryptaza, której nie ma ani w preparacie, ani standardowo w Twoich komórkach.</li>
+<li>Koreańskie badanie na 8,4 mln osób istnieje i pokazało wyższe ryzyko sześciu nowotworów. Od października 2025 wisi nad nim redakcyjna nota o zgłoszonych zastrzeżeniach, a formalny komentarz metodologiczny ocenia jego jakość jako niską.</li>
+<li>Włoska kohorta z Pescary pokazała coś, co warto zapamiętać: wzrost ryzyka hospitalizacji z powodu raka znikał, gdy autorzy wymagali odstępu 12 miesięcy między szczepieniem a diagnozą. Przy trzech dawkach ryzyko było wtedy niższe niż u nieszczepionych.</li>
+<li>Turbo rak nie jest rozpoznaniem medycznym. To określenie z internetu, nie z klasyfikacji chorób.</li></ul>
+</section>
+
+<h2>Dlaczego ten przekaz brzmi wiarygodnie?</h2>
+
+<p>Bo opiera się na trzech rzeczach, które naprawdę się wydarzyły. Po pierwsze, preparat był nowy i wprowadzony w tempie, jakiego nikt wcześniej nie widział. Po drugie, część <a href="./szczepionki-covid-skutki-uboczne-mity-i-fakty.html">uznanych działań niepożądanych szczepionek COVID</a> wyszła dopiero po masowym podaniu, na przykład zapalenie mięśnia sercowego u młodych mężczyzn. Po trzecie, w 2021 roku faktycznie ukazał się opis przypadku szybkiej progresji chłoniaka po dawce przypominającej.</p>
+
+<p>Jeśli ktoś raz powiedział, że nie ma problemu, a potem problem jednak był, to następnym razem nie uwierzysz na słowo. To nie jest głupota, to normalna kalibracja zaufania. Sam bym się przy tym zatrzymał.</p>
+
+<p>Dochodzi jeszcze coś, o czym mało kto mówi głośno. Po pandemii wiele osób usłyszało diagnozę onkologiczną w gorszym stadium niż wcześniej. To prawda i ma udokumentowaną przyczynę: w latach 2020 i 2021 badania przesiewowe stanęły. W wojskowym systemie opieki zdrowotnej w USA odsetek kobiet z aktualną cytologią spadł z około 76,5 procent w lutym 2020 do 70,0 procent rok później. To realny ubytek profilaktyki, który zbiegł się w czasie ze szczepieniami. Dwie rzeczy działy się równolegle i ludzki mózg domyślnie łączy je w łańcuch przyczynowy.</p>
+
+<p>Zwróć uwagę, co to znaczy dla Ciebie praktycznie: jeśli w latach 2020 i 2021 odpuściłeś kolonoskopię, mammografię albo PSA, to dziś masz realną zaległość do nadrobienia. Niezależnie od tego, jak skończy się spór o szczepionki.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-zaufanie.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-zaufanie.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-zaufanie.jpg" alt="Infografika w układzie czterech paneli, w których dwa środkowe mają widoczne luki w siatce punktów" loading="lazy" width="1080" height="589"></picture><figcaption>Luki w środkowych panelach to badania przesiewowe, które w latach 2020 i 2021 nie odbyły się</figcaption></figure>
+
+<h2>Co naprawdę wykazało badanie z Korei Południowej?</h2>
+
+<p>Wykazało korelację, nie przyczynę, i sami autorzy tak to nazwali. Zespół z Seulu przeanalizował dane 8 407 849 osób z koreańskiego ubezpieczenia zdrowotnego z lat 2021 do 2023. Po dopasowaniu metodą propensity score w proporcji jeden do czterech do analizy weszło 595 007 osób nieszczepionych i 2 380 028 zaszczepionych. Okno obserwacji: jeden rok.</p>
+
+<p>Liczby są konkretne, więc podajemy je bez zaokrąglania w dół. Współczynniki ryzyka HR po roku od szczepienia: tarczyca 1,35 (95% CI 1,21 do 1,51), żołądek 1,34 (1,13 do 1,58), jelito grube 1,28 (1,12 do 1,47), płuco 1,53 (1,25 do 1,87), pierś 1,20 (1,07 do 1,34), prostata 1,69 (1,35 do 2,11). Dla samych preparatów mRNA istotny wzrost dotyczył tarczycy, jelita grubego, płuca i piersi.</p>
+
+<p><div class="article-table-wrap" role="region" aria-label="Wyniki koreańskiej analizy Kim i wsp. (2025) i to, co z nich faktycznie wynika" tabindex="0"><table class="article-table"><caption>Wyniki koreańskiej analizy Kim i wsp. (2025) i to, co z nich faktycznie wynika</caption><thead><tr><th scope="col">Nowotwór</th><th scope="col">HR (95% CI)</th><th scope="col">Co to znaczy dosłownie</th><th scope="col">Czego to nie znaczy</th></tr></thead><tbody><tr><th scope="row">Tarczyca</th><td>1,35 (1,21 do 1,51)</td><td>W ciągu roku rozpoznano ją częściej u zaszczepionych</td><td>Że szczepionka ją wywołała; Korea ma masowe USG szyi i udokumentowaną nadrozpoznawalność</td></tr><tr><th scope="row">Prostata</th><td>1,69 (1,35 do 2,11)</td><td>Najwyższy zaobserwowany współczynnik w tej pracy</td><td>Że guz powstał w ciągu roku; rak prostaty rośnie latami i wykrywa go badanie PSA</td></tr><tr><th scope="row">Płuco</th><td>1,53 (1,25 do 1,87)</td><td>Istotny wzrost także dla preparatów mRNA</td><td>Wyniku niezależnego od palenia; danych o paleniu w tej bazie nie było</td></tr><tr><th scope="row">Pierś</th><td>1,20 (1,07 do 1,34)</td><td>Najsłabszy z istotnych sygnałów</td><td>Że to nie efekt mammografii; Korea prowadzi krajowy program przesiewowy</td></tr></tbody></table></div></p>
+
+<p>Teraz rzecz, którą trzeba powiedzieć jasno, bo zmienia ciężar tej publikacji. To nie jest pełny artykuł oryginalny, tylko <em>Correspondence</em>, czyli krótka forma listu do redakcji. A 22 października 2025 czasopismo dopisało nad tekstem notę, że do redakcji zgłoszono zastrzeżenia do tej pracy i że działania redakcyjne zostaną podjęte po zakończeniu wyjaśnień. Nota wisi tam do dziś. Autorzy zadeklarowali brak finansowania zewnętrznego i brak konfliktu interesów.</p>
+
+<p>Czy to znaczy, że wyniki są zmyślone? Nie. Znaczy, że nie są jeszcze rozliczone. I że każdy, kto cytuje tę pracę jako dowód, powinien tę notę cytować razem z nią. W obie strony.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Prosto, krok po kroku</h3><p><ol><li><strong>HR 1,35</strong> oznacza, że w obserwowanej grupie rozpoznanie pojawiało się o 35% częściej — nie że 35% osób zachorowało.</li><li><strong>95% CI</strong> to przedział niepewności wyniku.</li><li><strong>Propensity score</strong> dobiera osoby podobne pod względem znanych cech, ale nie naprawia różnic, których baza nie zmierzyła.</li></ol></p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-korea-dane.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-korea-dane.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-korea-dane.jpg" alt="Abstrakcyjna grafika: ogromna chmura drobnych punktów przecięta wąskim złotym pasem" loading="lazy" width="1080" height="589"></picture><figcaption>Ogromna liczba obserwowanych osób i bardzo wąskie okno czasowe jednego roku</figcaption></figure>
+
+<h2>Dlaczego duża próba nie oznacza dobrego dowodu?</h2>
+
+<p>Bo liczebność zmniejsza przypadkowy szum, ale nie rusza błędu systematycznego. Jeśli linijka jest krzywa, to zmierzenie nią stołu osiem milionów razy nie wyprostuje wyniku, tylko da Ci bardzo precyzyjną złą liczbę z bardzo wąskim przedziałem ufności. I właśnie ta wąskość robi wrażenie wiarygodności.</p>
+
+<p>W marcu 2026 sześcioro badaczy z Belgii opublikowało w <em>Frontiers in Public Health</em> formalny komentarz metodologiczny do koreańskiej pracy. Wypunktowali konkretne problemy konstrukcyjne, a nie ogólne wątpliwości.</p>
+
+<p><strong>Różne daty startu.</strong> Grupa zaszczepiona miała datę indeksową równą dacie szczepienia, a nieszczepiona sztywną datę 1 stycznia 2022. To znaczy, że obie grupy obserwowano w innych okresach kalendarzowych, w których wyjściowe ryzyko rozpoznania nowotworu było różne, niezależnie od szczepionki.</p>
+
+<p><strong>Błąd wykrywalności.</strong> Osoby zaszczepione częściej korzystają z ochrony zdrowia. Korea prowadzi krajowe programy przesiewowe dla tarczycy, piersi, żołądka i jelita grubego. To dokładnie te cztery lokalizacje, które w tej pracy wyszły dodatnio. Trudno o bardziej wymowną zbieżność.</p>
+
+<p><strong>Brak korekty na wielokrotne porównania.</strong> Wykonano 30 analiz dla poszczególnych lokalizacji i podgrup bez poprawki statystycznej. Przy takiej liczbie testów część wyników wychodzi istotna czystym przypadkiem. W tej samej pracy w podgrupie po dawce przypominającej wyszła też pozorna ochrona przed białaczką. Nikt nie twierdzi, że szczepionka leczy białaczkę, i to jest właśnie dowód, że część tych sygnałów to szum.</p>
+
+<p><strong>Nieuwzględnione czynniki.</strong> Brak danych o paleniu, alkoholu, chorobach współistniejących, obciążeniu rodzinnym, podatności genetycznej i częstości badań przesiewowych. Do tego 77,22 procent uczestników w obu grupach przeszło wcześniej zakażenie SARS-CoV-2, a analizy wykluczającej te osoby nie zrobiono, choć samo zakażenie jest rozważane jako czynnik onkogenny.</p>
+
+<p>Wniosek komentarza w skali GRADE: dowody niskiej jakości. Rekomendacja: powtórna analiza w schemacie emulacji badania docelowego, z wykluczeniem rozpoznań z pierwszych 6 do 12 miesięcy i obserwacją co najmniej dziesięcioletnią.</p>
+
+<p>Dla porządku, bo obiecaliśmy jawność w obie strony: jeden ze współautorów komentarza deklaruje honoraria od kilkunastu firm farmaceutycznych, w tym Roche i Gedeon Richter, poza tematem pracy. Zespół nie otrzymał finansowania na ten komentarz. Oceń to sam, ale oceniaj tak samo po obu stronach sporu.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Dlaczego więcej diagnoz nie musi znaczyć więcej nowych raków?</h3><p>Wyobraź sobie, że w dzielnicy pali się dom. Przed domem stoją trzy wozy strażackie. Ktoś robi zdjęcie i pisze: strażacy są przy każdym pożarze, więc strażacy podpalają domy. Brzmi absurdalnie, bo od razu widzisz, że straż przyjeżdża tam, gdzie już się pali.</p><p><strong>A teraz odpowiednik epidemiologiczny.</strong> Osoby zaszczepione częściej chodzą do lekarza, częściej robią kolonoskopię, USG i mammografię. Więc częściej znajduje się u nich raka, który już tam był, tylko cichy i niewykryty. W statystyce wygląda to identycznie jak nowe zachorowanie. To nazywa się błędem wykrywalności i to nie jest wymówka, tylko mierzalne zjawisko: dokładnie tak Korea Południowa wyprodukowała swoją słynną epidemię raka tarczycy, kiedy zaczęła masowo robić USG szyi. Guzów nie przybyło. Przybyło patrzenia.</p><p>Żeby odróżnić jedno od drugiego, potrzebujesz czterech różnych rzeczy: <strong>alarmu</strong> (ktoś zgłasza, że coś się stało po szczepieniu), <strong>podejrzanego śladu</strong> (te zgłoszenia układają się w powtarzalny wzorzec), <strong>korelacji</strong> (w dużych danych obie rzeczy chodzą razem) i <strong>dowodu przyczyny</strong> (wiemy, jak jedno robi drugie, i potrafimy wykluczyć inne wyjaśnienia). Dziś jesteśmy przy drugim i trzecim punkcie. Do czwartego jest daleko.</p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.jpg" alt="Minimalistyczna ilustracja wygiętej drewnianej linijki obok stosu identycznych, równo odmierzonych prostokątów" loading="lazy" width="1080" height="589"></picture><figcaption>Krzywą linijką można zmierzyć bardzo precyzyjnie i bardzo źle</figcaption></figure>
+
+<h2>Jak powstaje rak i ile zwykle trwa jego rozwój?</h2>
+
+<p>Rak nie zaczyna się od jednego pstryknięcia. To proces wielostopniowy: komórka musi zebrać kolejne uszkodzenia w genach kontrolujących podział, naprawę DNA i obumieranie, potem obejść nadzór immunologiczny, przekonać otoczenie do zbudowania jej naczyń krwionośnych, a na końcu urosnąć do rozmiaru, który w ogóle da się zobaczyć w badaniu.</p>
+
+<p>Każdy z tych etapów zajmuje czas i to jest sedno sporu o rok obserwacji. Zanim guz lity stanie się widoczny w tomografii czy USG, musi rozrosnąć się z pojedynczych zmienionych komórek do zmiany o wymiarze milimetrowym lub większym. Autorzy komentarza metodologicznego stwierdzają wprost, że powstanie guza litego w ciągu roku od ekspozycji nie wydaje się biologicznie prawdopodobne, i z tego powodu rekomendują obserwacje co najmniej dziesięcioletnie.</p>
+
+<p>Warto tu rozdzielić dwie rzeczy, bo w internecie idą jednym workiem. <strong>Inicjacja</strong> to pierwsze uszkodzenie genetyczne. <strong>Promocja i progresja</strong> to rozrost i przyspieszenie czegoś, co już istnieje. Czynnik, który tylko promuje, może działać szybciej niż czynnik, który inicjuje, ale wtedy nie tworzy nowego raka, tylko wywołuje z ukrycia stary. To zupełnie inne twierdzenie i wymaga zupełnie innego dowodu.</p>
+
+<p>Co z tego masz po pięćdziesiątce: jeśli guz wykryto u Ciebie kilka miesięcy po szczepieniu, to niemal na pewno rósł już wtedy, gdy szedłeś na tę dawkę. Ta świadomość nie jest pocieszeniem, ale zmienia pytanie, które warto zadać lekarzowi, z: co mi zrobiła szczepionka, na: od jak dawna to rosło i czy da się cofnąć zaległości w badaniach.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-jak-powstaje.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-jak-powstaje.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-jak-powstaje.jpg" alt="Pięć abstrakcyjnych etapów od pojedynczej komórki do niewielkiej zbitej masy, rozłożonych poziomo w coraz większych odstępach" loading="lazy" width="1080" height="603"></picture><figcaption>Każdy z etapów zajmuje czas, a odstępy między nimi są tu największą informacją</figcaption></figure>
+
+<h2>Czy roczny okres obserwacji może wykazać wywołanie nowego raka?</h2>
+
+<p>Nie w przypadku guzów litych. Może wykazać coś innego i to warto umieć nazwać: różnicę w tempie wykrywania. Rok to okno, w którym zdąży się zrobić kolonoskopię, mammografię i USG tarczycy, ale nie zdąży się urosnąć nowy rak jelita grubego od zera.</p>
+
+<p>Dlatego w epidemiologii stosuje się okres karencji, po angielsku lag time. Wyrzuca się z analizy rozpoznania z pierwszych miesięcy po ekspozycji, bo one prawie na pewno dotyczą choroby już istniejącej. I tu mamy najciekawszy eksperyment naturalny w całym tym sporze.</p>
+
+<p>Włoski zespół z Pescary zrobił dokładnie to. Przy karencji 180 dni ryzyko hospitalizacji z powodu nowotworu u osób po co najmniej jednej dawce wynosiło HR 1,23 (1,11 do 1,37). Przy karencji 365 dni ten związek przestał być istotny statystycznie, a u osób po co najmniej trzech dawkach odwrócił się na HR 0,90 (0,83 do 0,98), czyli niższe ryzyko niż u nieszczepionych.</p>
+
+<p><div class="article-table-wrap" role="region" aria-label="Ten sam zbiór danych z Pescary, trzy różne okresy karencji" tabindex="0"><table class="article-table"><caption>Ten sam zbiór danych z Pescary, trzy różne okresy karencji</caption><thead><tr><th scope="col">Karencja</th><th scope="col">Po jednej dawce lub więcej</th><th scope="col">Po trzech dawkach lub więcej</th><th scope="col">Interpretacja</th></tr></thead><tbody><tr><th scope="row">90 dni</th><td>Bez istotnych różnic wobec analizy podstawowej</td><td>Bez istotnych różnic</td><td>Okno zdominowane przez wykrywanie istniejącej choroby</td></tr><tr><th scope="row">180 dni (analiza główna)</th><td>HR 1,23 (1,11 do 1,37)</td><td>HR 1,09 (1,02 do 1,16)</td><td>Sygnał obecny, ale wciąż w oknie wykrywalności</td></tr><tr><th scope="row">365 dni</th><td>Związek nieistotny statystycznie</td><td>HR 0,90 (0,83 do 0,98)</td><td>Sygnał znika, przy trzech dawkach odwraca się kierunek</td></tr></tbody></table></div></p>
+
+<p>To jest podręcznikowy odcisk palca błędu wykrywalności. Prawdziwy efekt rakotwórczy zachowuje się odwrotnie: im dłużej czekasz, tym wyraźniej go widać, bo nowotwory potrzebują czasu, żeby się ujawnić. Tu jest na odwrót. Efekt jest najsilniejszy tuż po ekspozycji i rozpuszcza się z czasem, czyli zachowuje się jak wzmożone patrzenie, a nie jak kancerogen.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Karencja — jak filtr w badaniu</h3><p><ol><li>Najpierw usuwa się diagnozy z pierwszych miesięcy po szczepieniu.</li><li>To ogranicza liczenie guzów, które istniały już wcześniej, lecz dopiero zostały wykryte.</li><li>Jeśli sygnał po takim filtrze znika, bardziej pasuje do różnicy w wykrywaniu niż do powstawania nowych nowotworów.</li></ol></p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-karencja.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-karencja.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-karencja.jpg" alt="Trzy słupki obok linii odniesienia: dwa pierwsze nad linią, trzeci pod nią, opisane liczbami dni" loading="lazy" width="1080" height="603"></picture><figcaption>Im dłuższy wymagany odstęp między szczepieniem a diagnozą, tym słabszy sygnał; przy 365 dniach kierunek się odwraca</figcaption></figure>
+
+<h2>Czy mRNA może zmienić Twoje DNA?</h2>
+
+<p>Nie ma jak. I to akurat jest ten fragment tematu, gdzie dowody są mocne, a nie umiarkowane. Powód jest architektoniczny: Twoje DNA leży w jądrze komórkowym, a mRNA ze szczepionki tam nie wchodzi. Pracuje w cytoplazmie, na rybosomach, dokładnie tam, gdzie pracuje każde inne mRNA, które Twoje komórki produkują non stop przez całe życie.</p>
+
+<p>Żeby RNA przepisać na DNA, trzeba enzymu zwanego odwrotną transkryptazą. Europejska Agencja Leków stwierdza wprost, że tego enzymu nie ma standardowo w ludzkich komórkach ani w preparacie szczepionkowym. Dodatkowo RNA ma inny skład chemiczny niż DNA, co samo w sobie uniemożliwia mu bezpośrednie wpięcie się w nić DNA.</p>
+
+<p><strong>Metafora i jej rzeczywisty odpowiednik.</strong> Wyobraź sobie, że DNA to oryginał przepisu zamknięty w sejfie w archiwum, a mRNA to kartka z odręczną kopią jednego przepisu, wyniesiona do kuchni. Kucharz gotuje z kartki, kartka się zużywa i ląduje w koszu. Sejfu nikt nie otwierał. Biologicznie: transkrypcja DNA na mRNA zachodzi w jądrze i tylko tam, translacja mRNA na białko zachodzi w cytoplazmie, a mRNA jest rozkładane przez rybonukleazy komórkowe. Kierunek DNA do RNA do białka nie odwraca się sam.</p>
+
+<p>Uwaga na precyzję, bo tu wielu wpada. Nie piszemy: to jest fizycznie niemożliwe. Piszemy: nie wykazano tego w dostępnych danych, a znany mechanizm biochemiczny mówi, że nie ma po co tego oczekiwać. Zmiana aktywności genu, na przykład przez <a href="./zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html">metylację DNA</a>, nie jest zmianą samej sekwencji DNA. Różnica jest istotna i to właśnie na niej żerują przekazy typu przecież nauka nigdy nie mówi nigdy.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>mRNA i DNA — dwie różne role</h3><p><ol><li><strong>DNA</strong> to archiwum instrukcji w jądrze komórki.</li><li><strong>mRNA</strong> to krótkotrwała kopia robocza używana poza jądrem.</li><li>Zmiana aktywności genu nie jest zmianą zapisu DNA. Do przepisania RNA na DNA potrzeba dodatkowego mechanizmu, którego szczepionka nie dostarcza.</li></ol></p></aside>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.jpg" alt="Schemat komórki: złote wstążki mRNA krążą w cytoplazmie po torach, które omijają zamknięte jądro komórkowe z podwójną helisą" loading="lazy" width="1080" height="603"></picture><figcaption>Ścieżki mRNA prowadzą wokół jądra komórkowego, nigdy do środka</figcaption></figure>
+
+<h2>Co wiadomo o lipidowych nanocząsteczkach i biodostępności?</h2>
+
+<p>Lipidowe nanocząsteczki to mikroskopijne pęcherzyki tłuszczowe, które opakowują mRNA i przeprowadzają je przez błonę komórkową. Bez nich mRNA rozpadłoby się, zanim cokolwiek zdąży zrobić. To nie jest technologia wymyślona na COVID: pierwszy lek wykorzystujący nanocząsteczki lipidowe dopuszczono w Unii Europejskiej w 2018 roku.</p>
+
+<p>Gdzie trafiają. Według danych z badań na zwierzętach, opisanych w dokumentacji rejestracyjnej obu preparatów, mRNA i nanocząsteczki zostają głównie w miejscu wstrzyknięcia i w okolicznych węzłach chłonnych. Niewielkie ilości docierają do innych tkanek, przede wszystkim wątroby, ale też śledziony, serca, nerek, płuc i mózgu. Poziomy mRNA spadały w ciągu 6 do 9 dni po podaniu. Samo białko kolca wykrywano w mięśniu i węzłach chłonnych, a dla preparatu Moderny także w śledzionie. W płucach, sercu i mózgu go nie wykryto.</p>
+
+<p>Jak długo. Tu nie ma sensu wygładzać: dłużej, niż mówiono na początku. Zespół rumuński wykrył szczepionkowe mRNA we krwi jeszcze 15 dni po podaniu. Praca opublikowana w <em>Cell</em> w 2022 roku pokazała mRNA i antygen kolca w ośrodkach rozmnażania pachowych węzłów chłonnych do 60 dni po drugiej dawce. To realne obserwacje z recenzowanych czasopism i nie ma powodu ich chować.</p>
+
+<p>Co z tego wynika i czego nie. Wynika, że okno biologicznej aktywności jest liczone w tygodniach, nie w godzinach, i że ocena związków przyczynowych powinna to okno uwzględniać. Nie wynika, że mRNA gdzieś się kumuluje na stałe, ani że białko kolca krąży latami. To dwie różne rzeczy i zwykle właśnie na tym przejściu przekaz się rozjeżdża.</p>
+
+<p>Praktyczna konsekwencja, o której warto wiedzieć przed badaniem obrazowym: powiększone węzły chłonne pod pachą po stronie szczepienia są normalną reakcją i potrafią się zaświecić w PET czy USG. Amerykański National Cancer Institute zaleca uprzedzić o niedawnym szczepieniu zespół prowadzący, żeby nie odczytano tego jako wznowy.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.jpg" alt="Stylizowana sylwetka człowieka z jasnym skupiskiem złotych cząstek w ramieniu i pod pachą oraz pojedynczymi śladami w innych miejscach" loading="lazy" width="1080" height="603"></picture><figcaption>Największe skupienie w miejscu wstrzyknięcia i w pobliskich węzłach chłonnych, gdzie indziej tylko ślady</figcaption></figure>
+
+<h2>Co z pozostałościami DNA w preparatach?</h2>
+
+<p>Pozostałości DNA w tych preparatach faktycznie występują i nikt tego nie ukrywa. Wynika to z metody produkcji: mRNA przepisuje się z matrycy plazmidowego DNA, a potem tę matrycę się rozkłada i usuwa. W biotechnologii nigdy nie usuwa się czegoś do zera, więc regulatorzy nie wymagają zera, tylko ustalają limit. Dla tych preparatów wynosi on 10 nanogramów na dawkę.</p>
+
+<p>W grudniu 2025 w <em>npj Vaccines</em> ukazała się analiza 15 serii preparatów Comirnaty i Spikevax, pobranych z oficjalnych zasobów pod nadzorem słowackiego urzędu kontroli leków. Zbadano je czterema niezależnymi metodami: qPCR, fluorymetrią, elektroforezą kapilarną i sekwencjonowaniem DNA. We wszystkich seriach ilość pozostałego DNA mieściła się poniżej dopuszczalnego limitu, a wykryty materiał to krótkie fragmenty pochodzące z matrycy transkrypcyjnej. Stosunek DNA do mRNA w poszczególnych seriach wynosił od ponad 1 do 3300 aż do 1 do 30 000.</p>
+
+<p>Istnieją też publikacje raportujące znacznie wyższe wartości. Europejska Agencja Leków ocenia, że opierają się one na metodach niewalidowanych, w których inne składniki preparatu zakłócają pomiar, i deklaruje brak dowodów łączących pozostałe DNA z działaniami niepożądanymi. To jest spór metodologiczny o to, jak w ogóle mierzyć DNA w mieszaninie zawierającej ogromny nadmiar RNA i lipidów, a nie spór o to, czy ktoś coś ukrywa.</p>
+
+<p>Osobno bywa podnoszony wątek fragmentu promotora SV40. Warto wiedzieć, że fragment sekwencji regulatorowej to nie to samo co żywy wirus SV40, i że badania osób szczepionych przeciw polio preparatami zanieczyszczonymi SV40 w latach 1955 do 1963 nie wykazały u nich zwiększonego ryzyka nowotworów, choć Instytut Medycyny uznał te badania za zbyt słabe metodologicznie, by kwestię ostatecznie rozstrzygnąć. Tak wygląda uczciwy stan wiedzy: brak sygnału przy niedoskonałych narzędziach.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Pozostałość DNA to nie żywy wirus</h3><p><ol><li>Przy produkcji mRNA używa się matrycy DNA.</li><li>Po oczyszczaniu mogą zostać krótkie fragmenty, dlatego obowiązuje limit jakościowy.</li><li>Fragment regulatorowy SV40 nie jest całym wirusem SV40 i sam nie potrafi się namnażać.</li></ol></p></aside>
+
+<figure class="inline-figure inline-figure--square"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-pozostalosci-dna.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-pozostalosci-dna.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-pozostalosci-dna.jpg" alt="Duże jednolite pole z niemal niewidocznym skupiskiem drobnych złotych punktów, znacznie poniżej cienkiej poziomej linii" loading="lazy" width="1080" height="1080"></picture><figcaption>Proporcja pozostałości DNA do mRNA i próg dopuszczalny, którego w badanych seriach nie przekroczono</figcaption></figure>
+
+<h2>Czy istnieje biologicznie wiarygodny mechanizm pronowotworowy?</h2>
+
+<p>Genotoksyczny nie. Niegenotoksyczny hipotetycznie tak i to trzeba powiedzieć głośno, zamiast udawać, że pytanie nie istnieje. W grudniu 2025 w czasopiśmie <em>Cancers</em> ukazał się przegląd poświęcony dokładnie temu. Jego autor, jednoosobowo, formułuje wniosek dwuczęściowy: wywołanie nowego raka przez uszkodzenie genów w krótkim czasie jest skrajnie mało prawdopodobne, ale efekty pronowotworowe bez uszkadzania DNA pozostają teoretycznie możliwe.</p>
+
+<p>Jakie konkretnie. Zaburzenie nadzoru immunologicznego, zapalenie w mikrośrodowisku guza, zaburzenie autofagii i szlaków białek supresorowych oraz pobudzenie sygnałów odpowiedzialnych za podział i migrację komórek. Sumaryczny scenariusz w tej hipotezie brzmi: nie powstanie nowego guza, lecz obudzenie i szybszy wzrost uśpionych mikroguzów u osób szczególnie podatnych, wystawionych w krótkim czasie na wielokrotne zakażenia i wielokrotne szczepienia.</p>
+
+<p><strong>Co znaczy uśpiona komórka nowotworowa.</strong> To komórka, która przetrwała leczenie albo oderwała się od guza pierwotnego i utknęła gdzieś w organizmie, nie dzieląc się. Trzyma ją w ryzach układ odpornościowy i lokalne otoczenie tkankowe, czyli mikrośrodowisko. Jeśli ta równowaga się zachwieje, komórka może ruszyć. To nie jest teoria spiskowa, tylko normalna wiedza onkologiczna: dokładnie dlatego po leczeniu raka piersi chodzi się na kontrole przez dziesięć lat, a nie przez rok.</p>
+
+<p><strong>Co znaczy IgG4 i immunosupresja.</strong> Po wielokrotnych dawkach preparatów mRNA opisano przesunięcie odpowiedzi przeciwciał w stronę podklasy IgG4, która ma słabsze właściwości prozapalne. Hipoteza mówi, że taka zmiana mogłaby osłabiać reakcję na komórki nowotworowe. Status: obserwacja immunologiczna, której konsekwencje kliniczne dla onkologii nie zostały u ludzi wykazane. Ani w jedną, ani w drugą stronę.</p>
+
+<p><div class="article-table-wrap" role="region" aria-label="Hipotetyczne mechanizmy pronowotworowe i faktyczny stan dowodów dla każdego z nich" tabindex="0"><table class="article-table"><caption>Hipotetyczne mechanizmy pronowotworowe i faktyczny stan dowodów dla każdego z nich</caption><thead><tr><th scope="col">Hipotetyczny mechanizm</th><th scope="col">Dowód laboratoryjny</th><th scope="col">Dowód u ludzi</th><th scope="col">Aktualny status</th></tr></thead><tbody><tr><th scope="row">Integracja mRNA z DNA</th><td>Brak; wymaga odwrotnej transkryptazy</td><td>Brak</td><td>Odrzucony na poziomie mechanizmu</td></tr><tr><th scope="row">Genotoksyczność pozostałości DNA</th><td>Fragmenty poniżej limitu regulacyjnego w 15 przebadanych seriach</td><td>Brak</td><td>Brak dowodów; spór dotyczy metod pomiaru</td></tr><tr><th scope="row">Zapalenie w mikrośrodowisku guza</th><td>Modele komórkowe i zwierzęce</td><td>Brak danych klinicznych rozstrzygających</td><td>Hipoteza otwarta</td></tr><tr><th scope="row">Osłabienie nadzoru immunologicznego, przesunięcie ku IgG4</th><td>Obserwacje immunologiczne u ludzi</td><td>Brak przełożenia na twarde punkty końcowe w onkologii</td><td>Hipoteza otwarta</td></tr><tr><th scope="row">Obudzenie uśpionych mikroprzerzutów</th><td>Modele biologii nowotworu</td><td>Brak badania zaprojektowanego, żeby to sprawdzić</td><td>Najpoważniejsza otwarta luka</td></tr><tr><th scope="row">Pobudzenie odporności przeciwnowotworowej (kierunek odwrotny)</th><td>Modele zwierzęce, interferon typu I</td><td>Retrospektywne dane u chorych na immunoterapii</td><td>Hipoteza otwarta, badana w planowanym badaniu randomizowanym</td></tr></tbody></table></div></p>
+
+<p>Zwróć uwagę na ostatni wiersz. Ta sama biologia, która stoi za hipotezą obudzenia guza, jest jednocześnie podstawą hipotezy, że silna stymulacja interferonem typu I pomaga układowi odpornościowemu zaatakować raka. Nie da się wybrać sobie tylko tej połowy mechanizmu, która pasuje do tezy.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Uśpiony mikroguz — co to właściwie znaczy?</h3><p>To bardzo małe skupisko zmienionych komórek, które może istnieć bez objawów i bez wzrostu. Hipoteza o jego obudzeniu dotyczy przyspieszenia czegoś już obecnego, a nie stworzenia nowego raka od zera. W tym artykule wyraźnie oddzielamy tę hipotezę od dowodu klinicznego.</p></aside>
+
+<figure class="inline-figure inline-figure--square"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-mechanizm.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-mechanizm.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-mechanizm.jpg" alt="Pojedyncza uśpiona komórka otoczona pierścieniem jasnych komórek odpornościowych i delikatną siatką tkanki" loading="lazy" width="1080" height="1080"></picture><figcaption>Uśpiona komórka trzymana w ryzach przez otoczenie i nadzór immunologiczny</figcaption></figure>
+
+<h2>Co mówią rejestry i inne badania populacyjne?</h2>
+
+<p>Mówią rzeczy niespójne i to jest najuczciwsza odpowiedź. Poza pracą koreańską mamy w zasadzie jedno drugie badanie porównujące wprost zaszczepionych z nieszczepionymi pod kątem nowotworów: włoską kohortę z prowincji Pescara, 296 015 mieszkańców od 11. roku życia, obserwowanych do 30 miesięcy.</p>
+
+<p>Co tam wyszło. Po co najmniej jednej dawce ryzyko hospitalizacji z powodu nowotworu było wyższe, HR 1,23 (1,11 do 1,37), a po trzech dawkach HR 1,09 (1,02 do 1,16). Dla poszczególnych lokalizacji: pierś HR 1,54 (1,10 do 2,16), pęcherz moczowy HR 1,62 (1,07 do 2,45), jelito grube HR 1,34 (1,00 do 1,80). Dla płuca, jajnika i tarczycy nie znaleziono związku, a preparat mRNA-1273 jako jedyny nie wykazał związku z ogólną liczbą hospitalizacji onkologicznych.</p>
+
+<p>Teraz porównaj to z Koreą. Tam istotne były tarczyca i płuco, we Włoszech nie. We Włoszech istotny był pęcherz moczowy, w Korei ta lokalizacja się nie pojawia. Prawdziwy efekt biologiczny preparatu podanego identycznie w obu krajach nie powinien wybierać sobie innych narządów po drugiej stronie świata. Rozbieżność wzorca lokalizacji to mocna przesłanka, że patrzymy na artefakty lokalnych systemów ochrony zdrowia, a nie na farmakologię.</p>
+
+<p>I najważniejsza liczba z tej samej pracy, którą przekazy internetowe zwykle pomijają: śmiertelność ogólna. Osoby po co najmniej jednej dawce HR 0,42 (0,39 do 0,44), po trzech dawkach HR 0,65 (0,62 do 0,67). Autorzy sami tłumaczą, że tak duża różnica jest częściowo efektem zdrowego szczepionego, czyli tego, że osoby szczepiące się są generalnie zdrowsze i bardziej zaradne zdrowotnie. Ale ten sam mechanizm działa też w drugą stronę: ci sami ludzie chodzą częściej na badania i częściej dostają diagnozę onkologiczną.</p>
+
+<p>Autorzy włoskiej pracy nazywają swoje wyniki wstępnymi, dodali do niej erratę i prowadzą na łamach czasopisma trwającą wymianę listów z grupą badaczy kwestionujących ich analizę. To wygląda dokładnie tak, jak powinien wyglądać żywy spór naukowy, i to jest argument za czytaniem całej teczki, a nie jednego nagłówka.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-dwa-kraje.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-dwa-kraje.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-dwa-kraje.jpg" alt="Dwa panele z identycznymi sylwetkami, na których złote znaczniki rozmieszczone są w większości w różnych miejscach" loading="lazy" width="1080" height="603"></picture><figcaption>Te same preparaty, dwa kraje, w większości inne narządy w wynikach</figcaption></figure>
+
+<h2>Co znaczą opisy pojedynczych przypadków?</h2>
+
+<p>Znaczą: przyjrzyjcie się temu. Nie znaczą: to się potwierdziło. Opis przypadku to najniższy szczebel drabiny dowodowej, ale jest niezbędny, bo od niego zaczyna się wykrywanie sygnałów bezpieczeństwa. Problem zaczyna się wtedy, gdy ktoś przeskakuje z pierwszego szczebla od razu na ostatni.</p>
+
+<p>Najgłośniejszy taki opis pochodzi z 2021 roku: szybka progresja chłoniaka angioimmunoblastycznego z komórek T po dawce przypominającej. Autor, sam będąc pacjentem, opisał własny przypadek. Później publicznie tłumaczył, że była to hipoteza, a nie wniosek, że szczepionki uratowały miliony ludzi i że właśnie dlatego trzeba dalej badać ich rzadkie skutki, zwłaszcza w onkologii. Jego praca została mimo to przejęta przez przekazy, których nigdy nie autoryzował.</p>
+
+<p>W styczniu 2026 w <em>Oncotarget</em> ukazał się przegląd zbierający takie doniesienia: 69 publikacji, w tym 66 opisów obejmujących łącznie 333 pacjentów z 27 krajów, plus dwie wspomniane analizy populacyjne. Autorzy wskazują powtarzające się motywy: nietypowo szybka progresja lub wznowa choroby wcześniej stabilnej, zmiany w miejscu wstrzyknięcia lub w regionalnych węzłach chłonnych, oraz hipotezy dotyczące uśpienia guza i ucieczki spod nadzoru immunologicznego. I sami piszą, że to wczesna faza wykrywania sygnału, a praca ma charakter generujący hipotezy.</p>
+
+<p>Dwie rzeczy, które trzeba dopowiedzieć przy tej publikacji. Jedna z osób podpisanych pod tym przeglądem jest redaktorem naczelnym czasopisma, w którym go opublikowano. I druga: 333 pacjentów z 27 krajów, przy miliardach podanych dawek, to zbiór bez mianownika. Nie wiemy, ilu podobnych przypadków wystąpiło u nieszczepionych w tym samym czasie, bo nikt takiej grupy porównawczej nie zebrał. Bez mianownika nie da się policzyć ryzyka, można tylko zebrać historie.</p>
+
+<p>Jak taki sygnał należy prawidłowo zweryfikować: zebrać zgłoszenia, sprawdzić, czy jest ich więcej niż oczekiwano na tle historycznym, poszukać zależności od dawki i od czasu, potem przejść do danych rejestrowych z grupą kontrolną i okresem karencji, na końcu poszukać mechanizmu w laboratorium. Przy nowotworach ta ścieżka trwa lata i nie ma na to skrótu.</p>
+
+<figure class="inline-figure inline-figure--panoramic"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-mianownik.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-mianownik.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-mianownik.jpg" alt="Niewielka grupka wyraźnych punktów na tle ogromnego, gęstego pola drobnych punktów wychodzącego poza kadr" loading="lazy" width="1080" height="458"></picture><figcaption>Policzalne opisy przypadków na tle populacji, której nikt do tego porównania nie zebrał</figcaption></figure>
+
+<h2>Czym jest turbo rak?</h2>
+
+<p>To określenie z internetu, nie z medycyny. Nie znajdziesz go w klasyfikacji chorób, w wytycznych onkologicznych ani w opisie histopatologicznym. W polskiej przestrzeni publicznej rozeszło się na przełomie 2023 roku i od tego czasu wraca regularnie. Organizacje zajmujące się komunikacją zdrowotną wskazują, że termin ukuli przeciwnicy szczepień i że nie jest uznawany przez onkologów ani immunologów za opis realnego, odrębnego zjawiska.</p>
+
+<p>To nie znaczy, że ludzie, którzy go używają, wymyślają sobie problem. Pod jednym hasłem zlepiło się co najmniej sześć różnych rzeczy i część z nich jest jak najbardziej realna.</p>
+
+<p><div class="article-table-wrap" role="region" aria-label="Co się kryje pod hasłem turbo rak i co z tego jest udokumentowane" tabindex="0"><table class="article-table"><caption>Co się kryje pod hasłem turbo rak i co z tego jest udokumentowane</caption><thead><tr><th scope="col">Zjawisko</th><th scope="col">Czy jest realne</th><th scope="col">Co je wyjaśnia</th></tr></thead><tbody><tr><th scope="row">Nowotwory biologicznie agresywne, rosnące w tygodniach</th><td>Tak, znane od dziesięcioleci</td><td>Niektóre chłoniaki, drobnokomórkowy rak płuca, rak trzustki; opisywane długo przed pandemią</td></tr><tr><th scope="row">Diagnozy w wyższym stadium po 2021 roku</th><td>Tak, udokumentowane</td><td>Przerwane i opóźnione badania przesiewowe w latach 2020 i 2021</td></tr><tr><th scope="row">Wzrost liczby rozpoznań u osób młodszych</th><td>Tak, obserwowany</td><td>Trend widoczny także przed pandemią; przyczyny badane, niewyjaśnione</td></tr><tr><th scope="row">Wpływ samego zakażenia SARS-CoV-2</th><td>Hipoteza w badaniach</td><td>Rozważana niezależnie od szczepionek, bez rozstrzygnięcia</td></tr><tr><th scope="row">Pojedyncze przypadki po szczepieniu</th><td>Opisane w literaturze</td><td>Związek czasowy, bez wykazanej przyczynowości, bez mianownika</td></tr><tr><th scope="row">Nowa, odrębna jednostka chorobowa wywołana szczepionką</th><td>Nie wykazano</td><td>Brak dowodu populacyjnego i brak definicji klinicznej</td></tr></tbody></table></div></p>
+
+<p>Dlaczego ta obawa jest zrozumiała. Jeśli ktoś w Twoim otoczeniu usłyszał diagnozę w czwartym stadium czegoś, co dwa lata wcześniej miałoby szansę być wykryte wcześnie, to on naprawdę zetknął się z gorszym scenariuszem niż przed pandemią. Ludzie nie wymyślili tego doświadczenia. Dostali tylko złe wyjaśnienie: takie, które wskazuje jedną przyczynę zamiast rozłożonego w czasie zapaści systemu profilaktyki.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-turbo-rak.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-turbo-rak.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-turbo-rak.jpg" alt="Jedna duża złota forma rozdzielająca się w dół na sześć osobnych, różnokolorowych kształtów" loading="lazy" width="1080" height="589"></picture><figcaption>Jedno hasło, sześć zupełnie różnych zjawisk pod spodem</figcaption></figure>
+
+<h2>Czy szczepienie może wpłynąć na już istniejący nowotwór?</h2>
+
+<p>To jedyne pytanie z całego zestawu, na które uczciwa odpowiedź brzmi: nie wiemy, a dane, które mamy, idą w dwie przeciwne strony naraz. Nie da się tego wygładzić i nie zamierzamy tego robić, bo to akurat jest miejsce, w którym uproszczenie w którąkolwiek stronę byłoby zwykłym oszustwem wobec czytelnika.</p>
+
+<p>Kierunek pierwszy: teoretyczne obawy. Silna stymulacja immunologiczna, zapalenie i przejściowe zmiany w mikrośrodowisku mogłyby w hipotezie zaburzyć równowagę trzymającą uśpione komórki w ryzach. To hipoteza opisana w recenzowanym piśmiennictwie, oparta na modelach, bez potwierdzenia u ludzi.</p>
+
+<p>Kierunek drugi, znacznie mniej znany, a oparty na twardszych danych: w październiku 2025 w <em>Nature</em> opublikowano analizę ponad tysiąca pacjentów leczonych w MD Anderson w latach 2019 do 2023. U chorych na zaawansowanego niedrobnokomórkowego raka płuca, którzy dostali szczepionkę mRNA w ciągu 100 dni od rozpoczęcia immunoterapii inhibitorem punktu kontrolnego, mediana przeżycia całkowitego wyniosła 37,3 miesiąca wobec 20,6 miesiąca u niezaszczepionych. Przeżycie trzyletnie: 55,7 procent wobec 30,8 procent. Podobny kierunek zaobserwowano w czerniaku przerzutowym.</p>
+
+<p>Zanim to podchwycisz jako dowód w drugą stronę: to badanie retrospektywne, czyli obarczone dokładnie tymi samymi ograniczeniami, o które słusznie ma się pretensje do pracy koreańskiej. Opublikowano już analizę kwestionującą wielkość tego efektu po zastosowaniu emulacji badania docelowego. Projektowane jest randomizowane badanie III fazy, które ma to rozstrzygnąć.</p>
+
+<p>Wniosek jest niewygodny dla obu obozów: ta sama biologia jest cytowana jako powód, żeby się bać, i jako powód, żeby mieć nadzieję. Właśnie tak wygląda hipoteza, której nikt jeszcze nie sprawdził jak należy.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.jpg" alt="Złoty punkt centralny, z którego dwie równorzędne ścieżki prowadzą w przeciwne strony do dwóch różnych form" loading="lazy" width="1080" height="589"></picture><figcaption>Ten sam mechanizm, dwie przeciwne hipotezy, żadna jeszcze nie rozstrzygnięta</figcaption></figure>
+
+<h2>Co wiadomo o szczepieniach u osób leczonych onkologicznie?</h2>
+
+<p>Tu akurat wytyczne są jednoznaczne i od lat stabilne. Amerykański National Cancer Institute stwierdza wprost, że nie ma dowodów, by szczepionki przeciw COVID-19 powodowały raka, prowadziły do wznowy albo do progresji choroby, ani żeby osłabiały skuteczność leczenia onkologicznego.</p>
+
+<p>Praktyczne zastrzeżenia, które faktycznie obowiązują i warto je znać. Po przeszczepie komórek macierzystych lub terapii CAR-T zaleca się odroczenie szczepienia o co najmniej trzy miesiące od zakończenia leczenia, bo w okresie najgłębszej immunosupresji szczepionki po prostu słabo działają. Przed planowaną operacją onkologiczną zaleca się odstęp od kilku dni do dwóch tygodni, żeby dało się odróżnić gorączkę pooperacyjną od odczynu poszczepiennego. Przy obrzęku limfatycznym lub po usunięciu węzłów pachowych szczepi się w drugie ramię, a przy obustronnym obrzęku alternatywą jest udo.</p>
+
+<p>Trzeba też powiedzieć, czego szczepionka w tej grupie nie zrobi. U części chorych, zwłaszcza z nowotworami układu krwiotwórczego i w trakcie agresywnej chemioterapii, odpowiedź na szczepienie jest słabsza niż w populacji ogólnej. Ochrona jest, ale mniejsza, i dlatego dla tych osób nadal ma znaczenie unikanie tłumów i szczepienie domowników.</p>
+
+<p>Jedna uwaga porządkowa, którą sami sobie robimy: strona NCI, z której pochodzą te zalecenia, była aktualizowana w październiku 2023, czyli przed publikacją badania koreańskiego. Nie znaczy to, że jest błędna, ale znaczy, że nie odnosi się do najnowszego sporu. Podajemy to, żeby nikt nie musiał tego wyłapywać za nas.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.jpg" alt="Kobieta około sześćdziesiątki rozmawia z lekarką przy biurku w jasnym gabinecie w jesiennym świetle" loading="lazy" width="1080" height="589"></picture><figcaption>Przy leczeniu onkologicznym o terminie szczepienia decyduje rozmowa z prowadzącym, nie forum</figcaption></figure>
+
+<h2>Jak odróżnić sygnał od dowodu?</h2>
+
+<p>Po tym, ile alternatywnych wyjaśnień zostało wykluczonych. Sygnał to obserwacja, która zasługuje na sprawdzenie. Dowód przyczynowy to obserwacja, po której nie zostało już żadne sensowne wyjaśnienie poza tym jednym. Między jednym a drugim leży cała robota metodologiczna i to właśnie ją internet przeskakuje.</p>
+
+<p><div class="article-table-wrap" role="region" aria-label="Osiem rzeczy, które w tej dyskusji nagminnie się myli" tabindex="0"><table class="article-table"><caption>Osiem rzeczy, które w tej dyskusji nagminnie się myli</caption><thead><tr><th scope="col">Zjawisko</th><th scope="col">Co to dokładnie znaczy</th><th scope="col">Czy tu występuje</th></tr></thead><tbody><tr><th scope="row">Powstanie nowego raka</th><td>Zdrowa komórka staje się nowotworową po ekspozycji</td><td>Nie wykazano; okno czasowe biologicznie nieprawdopodobne</td></tr><tr><th scope="row">Wykrycie raka, który już był</th><td>Diagnoza choroby obecnej przed ekspozycją</td><td>Tak, to najlepsze wyjaśnienie sygnałów z Korei i Włoch</td></tr><tr><th scope="row">Wznowa</th><td>Powrót choroby po okresie remisji</td><td>Nie wykazano związku ze szczepieniem</td></tr><tr><th scope="row">Przyspieszenie istniejącej choroby</th><td>Szybsza progresja czegoś, co już rosło</td><td>Hipoteza otwarta, bez danych rozstrzygających u ludzi</td></tr><tr><th scope="row">Pojedynczy przypadek po szczepieniu</th><td>Jedna osoba, jedno zdarzenie, brak grupy porównawczej</td><td>Tak, opisane w literaturze</td></tr><tr><th scope="row">Sygnał bezpieczeństwa</th><td>Wzorzec zgłoszeń wymagający formalnego sprawdzenia</td><td>Tak, i właśnie dlatego prowadzone są analizy</td></tr><tr><th scope="row">Korelacja populacyjna</th><td>Dwie rzeczy chodzą razem w dużych danych</td><td>Tak, w dwóch kohortach obserwacyjnych</td></tr><tr><th scope="row">Potwierdzony związek przyczynowy</th><td>Wyjaśnienia alternatywne wykluczone, mechanizm znany</td><td>Nie</td></tr></tbody></table></div></p>
+
+<p><div class="article-table-wrap" role="region" aria-label="Co dany rodzaj badania potrafi wykazać, a czego nie potrafi" tabindex="0"><table class="article-table"><caption>Co dany rodzaj badania potrafi wykazać, a czego nie potrafi</caption><thead><tr><th scope="col">Rodzaj danych</th><th scope="col">Co może wykazać</th><th scope="col">Czego nie może wykazać</th></tr></thead><tbody><tr><th scope="row">Opis przypadku</th><td>Że coś się w ogóle wydarzyło; postawić hipotezę</td><td>Częstości ani przyczyny</td></tr><tr><th scope="row">Zgłoszenia do systemu nadzoru</th><td>Nietypowe skupiska zdarzeń</td><td>Ryzyka, bo brak mianownika i zgłasza się wybiórczo</td></tr><tr><th scope="row">Kohorta obserwacyjna</th><td>Związek statystyczny po korekcie na znane czynniki</td><td>Przyczynowości, jeśli zostają czynniki nieuwzględnione</td></tr><tr><th scope="row">Kohorta z okresem karencji</th><td>Czy związek przeżywa usunięcie efektu wykrywania</td><td>Wpływu czynników w ogóle niemierzonych, jak palenie</td></tr><tr><th scope="row">Badanie randomizowane</th><td>Efekt przyczynowy w badanym okresie</td><td>Skutków odległych, gdy obserwacja trwa krótko</td></tr><tr><th scope="row">Rejestr nowotworów, obserwacja wieloletnia</th><td>Zmiany zapadalności w skali populacji</td><td>Przypisania zmiany konkretnej osobie</td></tr><tr><th scope="row">Badanie mechanistyczne w laboratorium</th><td>Że dana ścieżka biologiczna jest możliwa</td><td>Że zachodzi u człowieka w dawce klinicznej</td></tr></tbody></table></div></p>
+
+<p><div class="article-table-wrap" role="region" aria-label="Trzy poziomy, które w nagłówkach zlewają się w jeden" tabindex="0"><table class="article-table"><caption>Trzy poziomy, które w nagłówkach zlewają się w jeden</caption><thead><tr><th scope="col">Poziom</th><th scope="col">Pytanie, na które odpowiada</th><th scope="col">Przykład z tego tematu</th></tr></thead><tbody><tr><th scope="row">Związek czasowy</th><td>Czy B nastąpiło po A?</td><td>Diagnoza raka trzy miesiące po dawce</td></tr><tr><th scope="row">Korelacja</th><td>Czy A i B występują razem częściej, niż wynikałoby z przypadku?</td><td>HR 1,23 dla hospitalizacji onkologicznych w kohorcie z Pescary</td></tr><tr><th scope="row">Przyczynowość</th><td>Czy usunięcie A zmieniłoby B?</td><td>Brak; sygnał znika przy karencji 12 miesięcy</td></tr></tbody></table></div></p>
+
+<p>Zapamiętaj jedno przełożenie na życie: nie musisz umieć czytać statystyki, żeby zadać właściwe pytanie. Kiedy widzisz nagłówek o badaniu, spytaj: <strong>jak długo obserwowano ludzi i co się dzieje z wynikiem, gdy wyrzucimy pierwszy rok?</strong> Podobnie przy diagnostyce trzeba odróżniać, <a href="./rentgen-tomografia-ct-rezonans-mri-roznice-badania.html">co pokazują RTG, tomografia i rezonans</a>, zamiast traktować je jak zamienne testy. Te pytania odsiewają znaczną część szumu.</p>
+
+<aside class="highlight-box highlight-box--accent"><h3>Drabina dowodów w sześciu stopniach</h3><p><ol><li>pojedynczy przypadek,</li><li>seria przypadków,</li><li>sygnał w rejestrze,</li><li>kohorta z grupą porównawczą,</li><li>powtórzenie wyniku w innych populacjach,</li><li>spójny mechanizm i badanie zaprojektowane do testu przyczynowego.</li></ol><p>Koreańska analiza daje sygnał korelacyjny. Nie dochodzi sama do ostatniego stopnia.</p></p></aside>
+
+<figure class="inline-figure inline-figure--portrait"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-drabina-dowodow.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-drabina-dowodow.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-drabina-dowodow.jpg" alt="Sześć wznoszących się stopni o rosnącym nasyceniu koloru, ze złotym znacznikiem na trzecim stopniu od dołu" loading="lazy" width="1080" height="1935"></picture><figcaption>Złoty znacznik pokazuje, na którym szczeblu dowodowym stoi dziś ten temat</figcaption></figure>
+
+<h2>Granica prawdy: co w tym przekazie jest uzasadnione?</h2>
+
+<p>Uzasadnione jest samo pytanie i kilka konkretnych obserwacji, na których się opiera. Przekaz nie jest zbudowany z niczego i udawanie, że jest, to najprostszy sposób, żeby stracić czytelnika, który akurat ma rację w połowie.</p>
+
+<p>Prawdą jest, że dwie duże kohorty obserwacyjne pokazały wyższą liczbę rozpoznań onkologicznych u zaszczepionych. Prawdą jest, że mRNA i białko kolca utrzymują się w węzłach chłonnych dłużej, niż zakładano na początku, bo wykryto je tam do 60 dni po drugiej dawce. Prawdą jest, że w preparatach są mierzalne pozostałości DNA z matrycy. Prawdą jest, że okres obserwacji w badaniach rejestracyjnych był krótki i że danych dziesięcioletnich po prostu jeszcze nie ma. Prawdą jest wreszcie, że pytanie o uśpione mikroprzerzuty nie zostało zbadane.</p>
+
+<p>Granica przebiega dokładnie w miejscu, gdzie te fakty zamieniają się w zdanie: a więc szczepionka daje raka. Każdy z powyższych punktów opisuje możliwość albo obserwację, a nie wykazany skutek. Przeskok robi się dopiero w narracji, nie w danych.</p>
+
+<p>Uzasadniona jest też ostrożność wobec twierdzeń kategorycznych z obu stron. Kto mówi, że to niemożliwe, wychodzi poza dane. Kto mówi, że to udowodnione, wychodzi poza dane jeszcze dalej.</p>
+
+<p><div class="article-table-wrap" role="region" aria-label="Najczęstsze twierdzenia o szczepionkach mRNA i aktualny stan dowodów" tabindex="0"><table class="article-table"><caption>Najczęstsze twierdzenia o szczepionkach mRNA i aktualny stan dowodów</caption><thead><tr><th scope="col">MIT lub twierdzenie</th><th scope="col">Fakt i stan dowodów</th></tr></thead><tbody><tr><th scope="row">mRNA zmienia ludzkie DNA</th><td>Nie wykazano tego; mRNA działa poza jądrem i nie dostarcza mechanizmu potrzebnego do integracji z DNA.</td></tr><tr><th scope="row">Badanie koreańskie dowiodło, że szczepionki powodują raka</th><td>Badanie wykazało korelację w rocznym oknie obserwacji. Nie rozstrzyga przyczynowości i ma opisane ograniczenia metodologiczne.</td></tr><tr><th scope="row">Po szczepieniu powstaje turbo rak</th><td>Turbo rak nie jest rozpoznaniem medycznym. Pod tą nazwą łączy się różne zjawiska, w tym agresywne nowotwory znane przed pandemią i opóźnione rozpoznania.</td></tr><tr><th scope="row">Wszystkie pytania są już zamknięte</th><td>Nie. Brakuje wieloletnich danych oraz badań zaprojektowanych do oceny wznowy u osób po leczeniu onkologicznym.</td></tr></tbody></table></div></p>
+
+<figure class="inline-figure inline-figure--portrait"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-granica.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-granica.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-granica.jpg" alt="Pięć solidnych kamieni prowadzących do przerwy, za którą znajduje się jeden kamień narysowany samą przerywaną linią" loading="lazy" width="1080" height="1935"></picture><figcaption>Pięć solidnych obserwacji i przeskok, który robi się w narracji, a nie w danych</figcaption></figure>
+
+<h2>Jak ten przekaz rozszedł się w internecie?</h2>
+
+<p>Według schematu, który powtarza się przy każdym temacie zdrowotnym: prawdziwa publikacja, wyrwany fragment, dorobiona konkluzja. W Polsce fala ruszyła pod koniec 2023 roku, gdy opis przypadku chłoniaka po dawce przypominającej zaczął krążyć jako dowód na turbo raka, mimo że jego autor publicznie tłumaczył, iż postawił hipotezę, a nie wniosek.</p>
+
+<p>Latem 2026 przyszła kolejna fala, tym razem oparta na obu omawianych tu badaniach, koreańskim i włoskim, cytowanych razem w postach twierdzących, że amerykańska agencja zdrowia publicznego przyznała, że szczepionki są największą ekspozycją rakotwórczą w historii. Weryfikacja pokazała, że takiego stwierdzenia nie było, a posty odnosiły się prawdopodobnie do prezentacji wyliczającej niepewności i pojedyncze przypadki.</p>
+
+<p>Powtarzalny mechanizm wygląda tak. Krok pierwszy: znajdujesz prawdziwą pracę naukową. Krok drugi: cytujesz jej wynik, ale pomijasz noty redakcyjne, ograniczenia i analizy wrażliwości. Krok trzeci: zamieniasz słowo związek na słowo powoduje. Krok czwarty: dokładasz nazwę instytucji, żeby brzmiało oficjalnie.</p>
+
+<p>Praktyczny test, który zajmuje minutę: wpisz tytuł badania i sprawdź, czy nad tekstem nie wisi nota redakcyjna, oraz czy istnieje opublikowany komentarz metodologiczny. Przy koreańskiej pracy oba te elementy są, i to na stronie samego wydawcy.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.jpg" alt="Cztery panele, w których gęsty blok linii stopniowo znika, aż zostaje pojedynczy gruby pasek" loading="lazy" width="1080" height="603"></picture><figcaption>Po drodze gubią się noty redakcyjne, ograniczenia i analizy wrażliwości</figcaption></figure>
+
+<h2>Czego nadal uczciwie nie wiemy?</h2>
+
+<p>Nie wiemy, jak wygląda zapadalność na nowotwory u zaszczepionych i nieszczepionych po dziesięciu i piętnastu latach, bo tyle jeszcze nie minęło. Każdy, kto dziś twierdzi, że zna odpowiedź na to pytanie, mówi o czymś, czego nie ma w żadnych danych.</p>
+
+<p>Nie wiemy, czy powtarzana silna stymulacja immunologiczna wpływa na uśpione mikroprzerzuty u osób po leczeniu onkologicznym. Nie ma badania zaprojektowanego, żeby to sprawdzić.</p>
+
+<p>Nie wiemy, jaki jest łączny efekt wielokrotnych zakażeń i wielokrotnych szczepień u tej samej osoby w krótkim czasie, bo prawie wszyscy przeszli i jedno, i drugie, co utrudnia rozdzielenie tych wpływów statystycznie. We włoskiej kohorcie wynik był wyraźnie inny u osób z przebytym zakażeniem i bez niego, a w koreańskiej ponad trzy czwarte uczestników w obu grupach miało zakażenie za sobą.</p>
+
+<p>Nie wiemy, jakie jest kliniczne znaczenie przesunięcia odpowiedzi przeciwciał w stronę IgG4 po wielokrotnych dawkach.</p>
+
+<p>Nie wiemy wreszcie, czy efekt zaobserwowany u chorych na immunoterapii jest prawdziwy, czy jest artefaktem doboru pacjentów. Ta niepewność działa symetrycznie: dotyczy dobrej wiadomości dokładnie tak samo jak złej.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-luki.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-luki.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-luki.jpg" alt="Jasny gabinet zimą, na biurku niedokończona drewniana układanka z widocznymi pustymi miejscami, w tle mężczyzna około sześćdziesiątki" loading="lazy" width="1080" height="603"></picture><figcaption>Puste miejsca w układance to pytania, na które nikt jeszcze nie zebrał danych</figcaption></figure>
+
+<h2>Jakie badanie mogłoby tę kwestię rozstrzygnąć?</h2>
+
+<p>Takie, które połączy rejestr nowotworów z rejestrem szczepień i z danymi o stylu życia, na dużej populacji, przy obserwacji liczonej w dekadach. Randomizowane badanie z punktem końcowym w postaci zapadalności na raka jest tu praktycznie niewykonalne, bo trzeba by przez lata utrzymywać grupę celowo nieszczepioną. Dlatego rozwiązaniem jest starannie skonstruowana analiza obserwacyjna, a nie jej brak.</p>
+
+<p>Elementy, które musi mieć, i to nie jest lista życzeniowa, tylko dokładnie to, czego zabrakło w krytykowanych pracach: <strong>ta sama data startu obserwacji</strong> dla obu grup albo modelowanie ekspozycji jako zmiennej w czasie; <strong>okres karencji</strong> wykluczający rozpoznania z pierwszych 6 do 12 miesięcy; <strong>dopasowanie pod względem korzystania z ochrony zdrowia</strong>, czyli liczby wizyt i badań przesiewowych, a nie tylko wieku i płci; <strong>korekta na wielokrotne porównania</strong>; <strong>analiza wrażliwości z wykluczeniem osób po przebytym zakażeniu</strong>; <strong>dane o paleniu i innych czynnikach ryzyka</strong>, których nie ma w bazach rozliczeniowych; oraz <strong>obserwacja co najmniej dziesięcioletnia</strong>.</p>
+
+<p>Osobno, i szybciej do wykonania: badanie z aktywnym nadzorem u osób w remisji po leczeniu onkologicznym, z zaplanowanym z góry porównaniem czasu do wznowy. To jedyna droga, żeby zamknąć pytanie o uśpione komórki, i można ją zacząć bez czekania dekady.</p>
+
+<p>Do tego czasu właściwe zdanie brzmi: nie wykazano tego w dostępnych danych. Nie: to niemożliwe, i nie: to udowodnione.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-projekt-badania.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-projekt-badania.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-projekt-badania.jpg" alt="Siedem różnych geometrycznych modułów łączących się w jedną spójną, precyzyjnie dopasowaną konstrukcję" loading="lazy" width="1080" height="603"></picture><figcaption>Siedem elementów, z których każdy musi być na swoim miejscu, żeby badanie coś rozstrzygnęło</figcaption></figure>
+
+<h2>Co naprawdę działa dla osoby po pięćdziesiątce?</h2>
+
+<p>Nadrobienie zaległości w badaniach przesiewowych, bo to jedyny element z całej tej dyskusji, który realnie zmienia Twoje rokowanie w perspektywie najbliższych lat. Spór o mechanizmy jest ciekawy. Kolonoskopia ratuje życie.</p>
+
+<p>Sprawdź, kiedy ostatnio miałeś badania z listy odpowiedniej dla swojego wieku i płci. Jeśli w latach 2020 lub 2021 któreś wypadło z kalendarza, to jest ta zaległość, o której mowa w tym artykule. Pamiętaj przy tym, że <a href="./markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html">wynik markera krwi nie jest samodzielną diagnozą</a> i nie zastępuje badań przesiewowych właściwych dla danego nowotworu. Umów zaległe badanie, zanim zamkniesz tę stronę.</p>
+
+<p>Co do samego szczepienia, aktualne stanowisko Światowej Organizacji Zdrowia z marca 2026 jest podejściem opartym na ryzyku, a nie zaleceniem dla wszystkich. Rutynowe szczepienie zalecane jest osobom najstarszym, mieszkańcom placówek opiekuńczych, osobom z istotną immunosupresją oraz osobom starszym z istotnymi chorobami współistniejącymi lub otyłością znacznego stopnia, przy czym granicę wieku dla tej ostatniej grupy poszczególne kraje wyznaczają zwykle na 50 lub 60 lat. Dla osób starszych bez chorób współistniejących decyzję pozostawiono krajom.</p>
+
+<p>Praktycznie oznacza to, że po pięćdziesiątce Twoja odpowiedź nie musi być taka sama jak sąsiada. Jeśli masz cukrzycę, przewlekłą chorobę płuc, obniżoną odporność albo znaczną nadwagę, jesteś w grupie, dla której zalecenie jest wyraźne. Jeśli jesteś zdrowy i sprawny, to kwestia rozmowy z lekarzem, a nie dogmat w żadną stronę.</p>
+
+<p>I rzecz, która nie brzmi efektownie, ale ma największy udokumentowany wpływ na Twoje ryzyko onkologiczne: niepalenie, ograniczenie alkoholu, utrzymanie masy ciała w rozsądnych granicach i regularny ruch. Żadna z tych rzeczy nie jest przedmiotem sporu i każda daje efekt większy niż cokolwiek, co znajdziesz w tej dyskusji.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-co-dziala.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-co-dziala.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-co-dziala.jpg" alt="Kobieta około pięćdziesięciu pięciu lat stoi w jasnym salonie z telefonem przy uchu i ręką na otwartym kalendarzu, uśmiechnięta" loading="lazy" width="1080" height="603"></picture><figcaption>Jedno działanie z tego artykułu, które naprawdę zmienia rokowanie: umówić zaległe badanie</figcaption></figure>
+
+<h2>Kiedy zgłosić się do lekarza?</h2>
+
+<p>Zawsze wtedy, gdy pojawi się objaw alarmowy, i nigdy z powodu samego faktu, że się zaszczepiłeś. Nie ma zalecenia, żeby po szczepieniu wykonywać dodatkowe badania onkologiczne, i żadne towarzystwo naukowe takiego zalecenia nie wydało.</p>
+
+<p>Do lekarza bez zwłoki, jeśli zauważysz: niezamierzoną utratę masy ciała, krew w stolcu lub w moczu, zmianę rytmu wypróżnień utrzymującą się ponad kilka tygodni, kaszel lub chrypkę trwające dłużej niż trzy tygodnie, wyczuwalny guzek w piersi lub pod pachą, niegojącą się zmianę skórną, powiększone węzły chłonne utrzymujące się ponad kilka tygodni, nawracające nocne poty lub gorączkę bez uchwytnej przyczyny.</p>
+
+<p>Jedno praktyczne zastrzeżenie związane bezpośrednio z tematem: powiększony węzeł pod pachą po stronie szczepienia w pierwszych dniach po dawce to typowy odczyn. Jeśli jednak utrzymuje się dłużej niż mniej więcej tydzień, powiedz o tym lekarzowi. A jeśli masz zaplanowane badanie obrazowe, uprzedź zespół o niedawnym szczepieniu, żeby odczyn w węzłach nie został odczytany jako progresja choroby.</p>
+
+<p>Jeśli jesteś w trakcie leczenia onkologicznego albo w remisji, decyzję o szczepieniu podejmuj z prowadzącym onkologiem, nie z internetem. Ma znaczenie rodzaj terapii i moment cyklu leczenia, a to są rzeczy, o których nie da się napisać ogólnie.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.avif" type="image/avif"><source srcset="./assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.webp" type="image/webp"><img src="./assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.jpg" alt="Para około sześćdziesiątki idzie ścieżką nad jeziorem w jesiennym złotym świetle, rozmawiając w ruchu" loading="lazy" width="1080" height="589"></picture><figcaption>Po omówieniu objawów alarmowych zostaje czujność bez lęku: wiedzieć, kiedy porozmawiać z lekarzem, i dalej normalnie żyć</figcaption></figure>
+
+<p class="article-crosslinks-auto"><strong>Zobacz też:</strong> <a href="./ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html">ai w medycynie czy naprawde pomaga pacjentom fakty badania</a>.</p>
+<section class="faq-list reveal" aria-label="Najczęściej zadawane pytania">
+
+  <h2>Najczęściej zadawane pytania</h2>
+
+<article class="faq-item" id="faq-1">
+  <h3>Czy szczepionki mRNA przeciw COVID-19 powodują raka?</h3>
+  <p>Nie wykazano tego. Dwa badania obserwacyjne pokazały więcej rozpoznań onkologicznych u zaszczepionych, ale sygnał znika po wprowadzeniu 12-miesięcznego okresu karencji, a formalny komentarz metodologiczny ocenia jakość tych dowodów jako niską. Powstanie guza litego w rok od ekspozycji nie jest biologicznie prawdopodobne.</p>
+</article>
+
+<article class="faq-item" id="faq-2">
+  <h3>Dlaczego mRNA ze szczepionki nie zmienia DNA?</h3>
+  <p>Nie. mRNA działa w cytoplazmie i nie wchodzi do jądra komórkowego, gdzie znajduje się DNA. Do przepisania RNA na DNA potrzebna jest odwrotna transkryptaza, której nie ma ani w preparacie, ani standardowo w ludzkich komórkach.</p>
+</article>
+
+<article class="faq-item" id="faq-3">
+  <h3>Czy turbo rak istnieje?</h3>
+  <p>Nie jako rozpoznanie medyczne. Pod tym internetowym określeniem zlepiono kilka odrębnych zjawisk: nowotwory biologicznie agresywne znane od dziesięcioleci, diagnozy w wyższym stadium po przerwaniu badań przesiewowych w latach 2020 i 2021 oraz pojedyncze opisy przypadków bez grupy porównawczej.</p>
+</article>
+
+<article class="faq-item" id="faq-4">
+  <h3>Czy po szczepieniu trzeba zrobić badania w kierunku raka?</h3>
+  <p>Nie ma takiego zalecenia i żadne towarzystwo naukowe go nie wydało. Warto natomiast nadrobić badania przesiewowe zgodne z wiekiem, jeśli wypadły z kalendarza w czasie pandemii. Powiększony węzeł pod pachą po stronie szczepienia utrzymujący się dłużej niż około tydzień warto pokazać lekarzowi.</p>
+</article>
+
+<article class="faq-item" id="faq-5">
+  <h3>Czy szczepionka jest bezpieczna w trakcie leczenia onkologicznego?</h3>
+  <p>Według National Cancer Institute nie ma dowodów, by szczepienie powodowało wznowę, progresję ani obniżało skuteczność terapii onkologicznej. Odroczenie zaleca się po przeszczepie komórek macierzystych i terapii CAR-T, o co najmniej trzy miesiące. Decyzję warto uzgodnić z prowadzącym onkologiem.</p>
+</article>
+
+<article class="faq-item" id="faq-6">
+  <h3>Co pokazało badanie z Korei Południowej?</h3>
+  <p>Korelację w oknie rocznym: wyższe współczynniki ryzyka dla sześciu nowotworów, od 1,20 dla piersi do 1,69 dla prostaty. To list do redakcji, nad którym od października 2025 wisi nota o zgłoszonych zastrzeżeniach. Cztery z sześciu lokalizacji objęte są w Korei krajowymi programami przesiewowymi.</p>
+</article>
+
+</section>
+
+
+
+      <section class="share-article-section reveal" aria-labelledby="share-article-title">
+        <h3 id="share-article-title">Udostępnij artykuł</h3>
+        <p class="share-article-section__lead">Wyślij ten materiał przyjacielowi albo opublikuj u siebie. Jednym kliknięciem podasz aktualny link i tytuł artykułu.</p>
+        <div class="share-article-section__actions" role="group" aria-label="Opcje udostępniania">
+          <a class="share-pill share-pill--facebook" href="#" data-share-network="facebook" rel="noopener noreferrer" target="_blank">Facebook</a>
+          <a class="share-pill share-pill--linkedin" href="#" data-share-network="linkedin" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+          <a class="share-pill share-pill--whatsapp" href="#" data-share-network="whatsapp" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+          <a class="share-pill share-pill--mail" href="#" data-share-network="mail">Mail</a>
+          <button class="share-pill share-pill--copy" type="button" data-share-network="copy">Kopiuj link</button>
+        </div>
+        <p class="share-article-section__status" id="share-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <h2 id="zrodla">Źródła</h2>
+      <ol class="sources-list">
+        <li><a href="https://doi.org/10.1186/s40364-025-00831-w" target="_blank" rel="noopener noreferrer">Kim HJ, Kim MH, Choi MG, Chun EM. 1-year risks of cancers associated with COVID-19 vaccination: a large population-based cohort study in South Korea. Biomark Res. 2025;13:114.</a></li>
+        <li><a href="https://doi.org/10.3389/fpubh.2026.1772406" target="_blank" rel="noopener noreferrer">Locquet M, Beaudart C, Douxfils J, Roberfroid D, Van Damme P, Dogné JM. Commentary: 1-year risks of cancers associated with COVID-19 vaccination. Front Public Health. 2026;14:1772406.</a></li>
+        <li><a href="https://doi.org/10.17179/excli2025-8400" target="_blank" rel="noopener noreferrer">Acuti Martellucci C, Capodici A, Soldato G i wsp. COVID-19 vaccination, all-cause mortality, and hospitalization for cancer: 30-month cohort study in an Italian province. EXCLI J. 2025;24:690-707.</a></li>
+        <li><a href="https://doi.org/10.1038/s41541-025-01304-9" target="_blank" rel="noopener noreferrer">Achs A, Sedlackova T, Predajna L i wsp. Systematic analysis of COVID-19 mRNA vaccines using four orthogonal approaches demonstrates no excessive DNA impurities. npj Vaccines. 2025;10:259.</a></li>
+        <li><a href="https://doi.org/10.3390/cancers17233867" target="_blank" rel="noopener noreferrer">Isidoro C. SARS-CoV2 and Anti-COVID-19 mRNA Vaccines: Is There a Plausible Mechanistic Link with Cancer? Cancers. 2025;17(23):3867.</a></li>
+        <li><a href="https://doi.org/10.18632/oncotarget.28824" target="_blank" rel="noopener noreferrer">Kuperwasser C, El-Deiry WS. COVID vaccination and post-infection cancer signals: Evaluating patterns and potential biological mechanisms. Oncotarget. 2026;17:1-29.</a></li>
+        <li><a href="https://doi.org/10.1038/s41586-025-09655-y" target="_blank" rel="noopener noreferrer">Grippin AJ, Marconi C, Copling S i wsp. SARS-CoV-2 mRNA vaccines sensitize tumours to immune checkpoint blockade. Nature. 2025.</a></li>
+        <li><a href="https://doi.org/10.1016/j.cell.2022.01.018" target="_blank" rel="noopener noreferrer">Röltgen K i wsp. Immune imprinting, breadth of variant recognition, and germinal center response in human SARS-CoV-2 infection and vaccination. Cell. 2022;185:1025-1040.</a></li>
+        <li><a href="https://doi.org/10.3390/biomedicines10071538" target="_blank" rel="noopener noreferrer">Fertig TE, Chitoiu L, Marta DS i wsp. Vaccine mRNA Can Be Detected in Blood at 15 Days Post-Vaccination. Biomedicines. 2022;10(7):1538.</a></li>
+        <li><a href="https://doi.org/10.3389/fmed.2021.798095" target="_blank" rel="noopener noreferrer">Goldman S, Bron D, Tousseyn T i wsp. Rapid Progression of Angioimmunoblastic T Cell Lymphoma Following BNT162b2 mRNA Vaccine Booster Shot: A Case Report. Front Med (Lausanne). 2021;8:798095.</a></li>
+        <li><a href="https://www.ema.europa.eu/en/human-regulatory-overview/public-health-threats/coronavirus-disease-covid-19/covid-19-medicines/covid-19-vaccines-key-facts" target="_blank" rel="noopener noreferrer">European Medicines Agency. COVID-19 vaccines: key facts. Aktualizacja strony: 8 kwietnia 2026.</a></li>
+        <li><a href="https://www.cancer.gov/about-cancer/coronavirus/covid-19-vaccines-people-with-cancer" target="_blank" rel="noopener noreferrer">National Cancer Institute. COVID-19 Vaccines and People with Cancer. Aktualizacja: 10 października 2023.</a></li>
+        <li><a href="https://www.who.int/news-room/questions-and-answers/item/coronavirus-disease-%28covid-19%29-vaccines" target="_blank" rel="noopener noreferrer">World Health Organization. COVID-19 vaccines. Questions and answers, 15 maja 2026, z rekomendacjami SAGE z marca 2026.</a></li>
+        <li><a href="https://doi.org/10.1056/NEJMc1507622" target="_blank" rel="noopener noreferrer">Ahn HS, Welch HG. South Korea&#39;s thyroid-cancer epidemic: turning the tide. N Engl J Med. 2015;373:2389-2390.</a></li>
+        <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11670896/" target="_blank" rel="noopener noreferrer">Badanie skriningu raka szyjki macicy w amerykańskim wojskowym systemie opieki zdrowotnej w okresie pandemii COVID-19, PMC11670896.</a></li>
+        <li><a href="https://www.snopes.com/fact-check/cdc-covid-vaccines-carcinogenic/" target="_blank" rel="noopener noreferrer">Snopes. CDC didn&#39;t say COVID-19 vaccines are largest carcinogenic exposure in history. Sierpień 2026.</a></li>
+        <li><a href="https://demagog.org.pl/fake_news/przypadek-turbo-raka-po-szczepieniu-na-covid-19-czy-to-prawda/" target="_blank" rel="noopener noreferrer">Weryfikacje polskich redakcji fact-checkingowych dotyczące określenia turbo rak, opisu przypadku chłoniaka oraz wątku SV40, 2023-2026.</a></li>
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK221118/" target="_blank" rel="noopener noreferrer">Institute of Medicine. Immunization Safety Review: SV40 Contamination of Polio Vaccine and Cancer. National Academies Press, 2003.</a></li>
+      </ol>
+
+      <div class="medical-disclaimer">
+        <p><strong>Uwaga:</strong> Artykuł ma charakter informacyjny i edukacyjny. Nie zastępuje konsultacji lekarskiej, diagnozy ani leczenia.</p>
+      </div>
+    </article>
+  </div>
+</main>
+
+<section class="reading-room porady-preview section-padding" id="porady-preview">
+  <div class="reading-room__head reveal">
+    <h3>
+      <span class="title-with-icon">
+        <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18v16H6.5A2.5 2.5 0 0 0 4 21Z"></path>
+          <path d="M7 7h8M7 11h8M7 15h5"></path>
+        </svg>
+        Czytelnia
+      </span>
+    </h3>
+    <p>Duża garść wiedzy podana prosto, konkretnie i po ludzku.</p>
+  </div>
+  <div class="articles-grid-preview">
+      <a href="marsz-japonski-czy-10000-krokow.html" class="article-promo-card reveal">
+        <div class="article-promo-card__media">
+          <picture>
+            <source srcset="./assets/marsz-japonski-hero-dwa-tempa.avif" type="image/avif">
+            <source srcset="./assets/marsz-japonski-hero-dwa-tempa.webp" type="image/webp">
+            <img src="./assets/marsz-japonski-hero-dwa-tempa.jpg" alt="Marsz japoński czy 10 000 kroków po 50?" class="article-promo-img article-promo-card__img" loading="lazy" width="1080" height="603">
+          </picture>
+        </div>
+        <div class="article-promo-card__content">
+          <span class="article-promo-card__meta article-promo-card__meta--mity">Mity • 12 min</span>
+          <h4 class="article-promo-card__title">Marsz japoński czy 10 000 kroków po 50?</h4>
+          <p class="article-promo-card__desc">Marsz japoński trzy na trzy kontra 10 000 kroków: co mówią badania o wydolności, sile nóg i ciśnieniu po 50, jak ustawić tempo i kiedy przerwać trening.</p>
+          <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
+        </div>
+      </a>
+
+      <a href="czy-jajka-podnosza-cholesterol.html" class="article-promo-card reveal">
+        <div class="article-promo-card__media">
+          <picture>
+            <source srcset="./assets/czy-jajka-podnosza-cholesterol-hero-v2.avif" type="image/avif">
+            <source srcset="./assets/czy-jajka-podnosza-cholesterol-hero-v2.webp" type="image/webp">
+            <img src="./assets/czy-jajka-podnosza-cholesterol-hero-v2.jpg" alt="Czy jajka podnoszą cholesterol? Fakty i badania" class="article-promo-img article-promo-card__img" loading="lazy" width="1080" height="603">
+          </picture>
+        </div>
+        <div class="article-promo-card__content">
+          <span class="article-promo-card__meta article-promo-card__meta--mity">Mity • 10 min</span>
+          <h4 class="article-promo-card__title">Czy jajka podnoszą cholesterol? Fakty i badania</h4>
+          <p class="article-promo-card__desc">Czy jajka podnoszą cholesterol LDL? Wyjaśniamy wyniki badań, różnice między jajkiem a masłem oraz kiedy po 50-tce sprawdzić lipidogram i ApoB u lekarza.</p>
+          <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
+        </div>
+      </a>
+
+      <a href="gleboki-przysiad-asian-squat.html" class="article-promo-card reveal">
+        <div class="article-promo-card__media">
+          <picture>
+            <source srcset="./assets/gleboki-przysiad-asian-squat-hero.avif" type="image/avif">
+            <source srcset="./assets/gleboki-przysiad-asian-squat-hero.webp" type="image/webp">
+            <img src="./assets/gleboki-przysiad-asian-squat-hero.jpg" alt="Głęboki przysiad po 50-tce: mobilność i technika" class="article-promo-img article-promo-card__img" loading="lazy" width="1080" height="603">
+          </picture>
+        </div>
+        <div class="article-promo-card__content">
+          <span class="article-promo-card__meta article-promo-card__meta--ruch">Ruch • 11 min</span>
+          <h4 class="article-promo-card__title">Głęboki przysiad po 50-tce: mobilność i technika</h4>
+          <p class="article-promo-card__desc">Głęboki przysiad wymaga ruchomości kostek, bioder i kontroli tułowia. Sprawdź prosty test, klin pod pięty, progresję i sygnały wymagające konsultacji.</p>
+          <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
+        </div>
+      </a>
+  </div>
+</section>
+</div>
+
+<nav class="bottom-nav" aria-label="Nawigacja dolna">
+  <a href="index.html" class="bottom-nav__item ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg>
+    <span>Dom</span>
+  </a>
+  <a href="porady.html" class="bottom-nav__item ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5V4.5A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+    <span>Porady</span>
+  </a>
+  <a href="index.html#baza-wiedzy" class="bottom-nav__item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    <span>Baza wiedzy</span>
+  </a>
+  <a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer" class="bottom-nav__item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><path d="M17.5 6.5h.01"></path></svg>
+    <span>Instagram</span>
+  </a>
+</nav>
+
+<footer class="site-footer-bento" aria-label="Stopka FitPo50">
+  <div class="site-footer-bento__grid">
+    <section class="site-footer-bento__card" aria-label="O serwisie FitPo50">
+      <div class="site-footer-bento__brand">
+        <img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'">
+        <div>
+          <h2 class="site-footer-bento__title">FitPo50.pl</h2>
+          <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej ściemy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-footer-bento__card" aria-label="Linki serwisu">
+      <h3 class="site-footer-bento__links-title">Nawigacja</h3>
+      <ul class="site-footer-bento__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="porady.html">Porady</a></li>
+        <li><a href="rusz-sie.html">Ruch</a></li>
+        <li><a href="jedzenie.html">Jedzenie</a></li>
+        <li><a href="zdrowie.html">Zdrowie</a></li>
+        <li><a href="ciekawe.html">Ciekawe</a></li>
+        <li><a href="dziennik.html">Dziennik</a></li>
+        <li><a href="o-mnie.html">O mnie</a></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="site-footer-bento__bottom">
+    <p class="site-footer-bento__copy">© 2026 FitPo50 | <a href="polityka-prywatnosci.html">Polityka Prywatności i Cookies</a></p>
+    <p class="site-footer-bento__note">Ważna informacja: nie jestem lekarzem. Treści na stronie mają charakter edukacyjny i informacyjny, nie zastępują konsultacji medycznej ani indywidualnych zaleceń specjalisty.</p>
+  </div>
+</footer>
+
+<script src="./dist/cmp.js?v=1.1" defer></script>
+<script src="./dist/app.js?v=1.2" defer></script>
+</body>
+</html>

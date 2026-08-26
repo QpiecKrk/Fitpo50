@@ -23,6 +23,8 @@ const POLICY = {
     MAX: 65,
     MIN: 35,
     JSON_MIN: 55,
+    BRAND_SUFFIX: ' | FitPo50',
+    SEO_BASE_MAX: 55,
     STRICT_CUTOFF: '2026-06-06'
   },
 

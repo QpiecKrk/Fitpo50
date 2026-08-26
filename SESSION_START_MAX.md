@@ -55,7 +55,7 @@ Dodatkowo według zadania:
 
 To jedno polecenie użytkownika uruchamia kanoniczne `article:add`. Użytkownik przekazuje JSON i obrazy; nie musi pamiętać komend pośrednich. Wewnątrz pozostają dwie bezpiecznie rozdzielone fazy:
 
-1. Szybkie `popraw-json`: `DRAFT` → `CONTENT_READY`, bez tworzenia HTML. Najpierw logika, źródła, intencja i pełny preflight treści; dopiero potem kontrola podpisów/obrazów i brakujące warianty mediów.
+1. Szybkie `popraw-json`: `DRAFT` → `CONTENT_READY`, bez tworzenia HTML. Najpierw logika, źródła, intencja i preflight samej treści; potem kontrola podpisów/obrazów i brakujące warianty mediów; na końcu ponowne domknięcie dowodów dla podpisów oraz bramka kompletnego JSON-u.
    Draft dla Claude można tworzyć skillem `docs/skills/fitpo50-article-draft/`; jego walidacja potwierdza tylko strukturę `DRAFT`. FAQ bez rzeczywistego sygnału pozostaje luką do udokumentowanego researchu lokalnego, nigdy automatycznym dopiskiem.
 2. Lokalna intencja, kanibalizacja, minimum 4 prawdziwe linki i propozycja centrum.
 3. Rzeczywista kontrola obrazów oraz manifest AVIF/WebP/JPG.
@@ -68,6 +68,10 @@ To jedno polecenie użytkownika uruchamia kanoniczne `article:add`. Użytkownik 
 Techniczna komenda kanoniczna: `npm run article:add -- --file "<draft.fitpo50.json>"`. `article:prepare-json` służy tylko wtedy, gdy użytkownik jawnie chce dostać poprawiony JSON bez publikacji; `article:publish` jest komendą wznowienia dla istniejącego `CONTENT_READY`, nie dodatkowym krokiem do zapamiętania.
 
 Pipeline działa fail-fast. Po błędzie nie uruchamia zależnych etapów ani nie zostawia półgotowej publikacji. Poprawne sprawdzenia URL-i są pamiętane lokalnie przez 7 dni, warianty niezmienionych obrazów są ponownie używane, a kolejne podejście zapisuje ten sam roboczy pakiet zamiast tworzyć serie `-r2`, `-r3`. Jeśli atom zawiedzie, identyczny hashami pakiet `CONTENT_READY` jest przy kolejnej próbie używany bez ponownego przygotowania. Zmiana JSON-u albo obrazu unieważnia pamięć pakietu; tanie bramki treści zawsze wykonują się podczas nowego przygotowania.
+
+Starszy JSON Claude jest migrowany wyłącznie z jawnych danych źródłowych i `evidence_source_ids`; pipeline nie wymyśla dowodów. Po rzeczywistym obejrzeniu zatwierdzonych obrazów ich wymiary są źródłem prawdy: panoramy, kwadraty i pionowe plansze zachowujemy bez sztucznego kadrowania. Importer domyka semantykę i mobilny kontener tabel przed podglądem 390 px.
+
+Importer zachowuje linki i semantyczne formatowanie inline w pierwszym akapicie pod każdym H2. Nie wolno po cichu zamieniać go na czysty tekst ani przycinać; limit 30–70 słów egzekwuje bramka, licząc wyłącznie widoczny tekst bez tagów i atrybutów. `seo_title` ma maksymalnie 55 znaków, ponieważ finalny limit 65 obejmuje także stały dopisek ` | FitPo50`.
 
 Każdy nowy błąd wykryty podczas `dodaj artykuł` albo `Obal mit` napraw dwupoziomowo: najpierw w bieżącym artykule, następnie u źródła w pipeline. Gdy błąd można wykryć automatycznie, dodaj test regresji lub błędny fixture. Nie kończ na ręcznej korekcie jednego pliku i nie osłabiaj bramki, aby przepuścić artykuł.
 
@@ -144,6 +148,8 @@ Następnie użytkownik może uruchomić standardowy deployment.
 - Nie zgaduj kategorii po usunięciu JSON-u; ustal ją jednoznacznie z prawdziwego listingu.
 - Odrzucaj obrazy z mylącymi liczbami lub niepowiązanym tekstem.
 - Nie dziel przypadkowo listy źródeł i disclaimera w PDF; obejrzyj każdą stronę po zmianie.
+- Nie usuwaj linków ani `<strong>/<em>` z pierwszego akapitu pod H2 podczas normalizacji.
+- Nie licz limitu `seo_title` bez dopisku marki: baza ma maksymalnie 55 znaków, finalny `<title>` maksymalnie 65.
 
 ## Szybkie rozpoczęcie nowej sesji
 

@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-08-25T18:45:15.640Z",
+  "updated_at": "2026-08-26T12:27:21.877Z",
   "items": [
+    {
+      "slug": "szczepionki-mrna-covid-a-rak",
+      "target_url": "https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/mity.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-08-26T12:27:21.877Z",
+      "transaction_id": "article-szczepionki-mrna-covid-a-rak-1787747214641-38048",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "marsz-japonski-czy-10000-krokow",
       "target_url": "https://fitpo50.pl/marsz-japonski-czy-10000-krokow.html",

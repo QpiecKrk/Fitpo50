@@ -1,7 +1,119 @@
 {
   "version": 2,
-  "updated_at": "2026-08-25T18:45:15.640Z",
+  "updated_at": "2026-08-26T12:27:21.877Z",
   "items": [
+    {
+      "slug": "szczepionki-mrna-covid-a-rak",
+      "url": "https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html",
+      "operation": "CREATE",
+      "transaction_id": "article-szczepionki-mrna-covid-a-rak-1787747214641-38048",
+      "first_published_at": "2026-08-26T12:27:21.877Z",
+      "last_published_at": "2026-08-26T12:27:21.877Z",
+      "status": "PUBLISHED_AWAITING_GSC",
+      "baseline": {
+        "captured_at": "2026-08-26T12:27:21.877Z",
+        "status": "GSC_INPUT_UNAVAILABLE",
+        "gsc_generated_at": "",
+        "window": "unavailable",
+        "range": null,
+        "metrics": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": null
+        },
+        "source_file": "",
+        "contract_status": "FAIL",
+        "contract_errors": [
+          "queries: brak pliku queries.csv.",
+          "pages: brak pliku pages.csv.",
+          "query_pages: brak pliku query-pages.csv lub query_pages.csv.",
+          "Brak obowiązkowego manifestu gsc-data-manifest.json.",
+          "Nie można ustalić czasu wygenerowania danych GSC.",
+          "Brak metadanych zakresów 7/28/90."
+        ]
+      },
+      "checkpoints": {
+        "day_7": {
+          "due_date": "2026-09-02",
+          "snapshot": null
+        },
+        "day_14": {
+          "due_date": "2026-09-09",
+          "snapshot": null
+        },
+        "day_28": {
+          "due_date": "2026-09-23",
+          "snapshot": null
+        }
+      },
+      "first_impression_after_publication_at": null,
+      "first_click_after_publication_at": null,
+      "indexed_without_impressions_at": null,
+      "gsc_submission_urls": [
+        "https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html"
+      ],
+      "source_urls_for_recrawl": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/mity.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_events": [
+        {
+          "event_id": "article-szczepionki-mrna-covid-a-rak-1787747214641-38048",
+          "operation": "CREATE",
+          "published_at": "2026-08-26T12:27:21.877Z",
+          "baseline": {
+            "captured_at": "2026-08-26T12:27:21.877Z",
+            "status": "GSC_INPUT_UNAVAILABLE",
+            "gsc_generated_at": "",
+            "window": "unavailable",
+            "range": null,
+            "metrics": {
+              "clicks": 0,
+              "impressions": 0,
+              "ctr": 0,
+              "position": null
+            },
+            "source_file": "",
+            "contract_status": "FAIL",
+            "contract_errors": [
+              "queries: brak pliku queries.csv.",
+              "pages: brak pliku pages.csv.",
+              "query_pages: brak pliku query-pages.csv lub query_pages.csv.",
+              "Brak obowiązkowego manifestu gsc-data-manifest.json.",
+              "Nie można ustalić czasu wygenerowania danych GSC.",
+              "Brak metadanych zakresów 7/28/90."
+            ]
+          },
+          "checkpoints": {
+            "day_7": {
+              "due_date": "2026-09-02",
+              "snapshot": null
+            },
+            "day_14": {
+              "due_date": "2026-09-09",
+              "snapshot": null
+            },
+            "day_28": {
+              "due_date": "2026-09-23",
+              "snapshot": null
+            }
+          },
+          "gsc_submission_urls": [
+            "https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html"
+          ],
+          "source_urls_for_recrawl": [
+            "https://fitpo50.pl/",
+            "https://fitpo50.pl/porady.html",
+            "https://fitpo50.pl/mity.html"
+          ]
+        }
+      ],
+      "signal_definition": "Pierwszy sygnał oznacza pierwszy odczyt, w którym krocząca metryka 28-dniowa przekroczyła baseline; przy baseline równym 0 jest to pierwsze widoczne wyświetlenie lub kliknięcie.",
+      "monitoring_note": "Metryki GSC są kroczącym oknem 28 dni; różnice są sygnałem po publikacji, nie czystą atrybucją efektu."
+    },
     {
       "slug": "marsz-japonski-czy-10000-krokow",
       "url": "https://fitpo50.pl/marsz-japonski-czy-10000-krokow.html",

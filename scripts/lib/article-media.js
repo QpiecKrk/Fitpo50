@@ -196,14 +196,26 @@ function validateDescriptiveFields(prompt, context, placement, errors) {
 function validateDimensions(entry, placement, declaredRatio, errors) {
   const { width, height, aspect_ratio: ratio } = entry.source;
   const minWidth = placement === 'hero' ? 1080 : 900;
-  const minHeight = placement === 'hero' ? 600 : 500;
+  const minHeight = 450;
   if (width < minWidth || height < minHeight) {
     errors.push(`${entry.filename_base}: za mały obraz ${width}x${height}; minimum dla ${placement} to ${minWidth}x${minHeight}.`);
   }
   const parsedRatio = parseRatio(declaredRatio);
   if (!parsedRatio) errors.push(`${entry.filename_base}: aspect_ratio musi mieć format np. 16:9.`);
   else if (Math.abs(parsedRatio - ratio) > 0.04) errors.push(`${entry.filename_base}: rzeczywista proporcja ${ratio} nie zgadza się z deklaracją ${declaredRatio}.`);
-  if (ratio < 1.2 || ratio > 2.1) errors.push(`${entry.filename_base}: proporcja ${ratio} jest poza zakresem krajobrazowym 1.2-2.1 wymaganym przez layout artykułu.`);
+  if (ratio < 0.5 || ratio > 2.5) errors.push(`${entry.filename_base}: proporcja ${ratio} jest poza bezpiecznym zakresem 0.5-2.5 obsługiwanym przez layout artykułu.`);
+}
+
+function greatestCommonDivisor(left, right) {
+  let a = Math.abs(Number(left) || 0);
+  let b = Math.abs(Number(right) || 0);
+  while (b) [a, b] = [b, a % b];
+  return a || 1;
+}
+
+function exactRatioLabel(width, height) {
+  const divisor = greatestCommonDivisor(width, height);
+  return `${Math.round(width / divisor)}:${Math.round(height / divisor)}`;
 }
 
 function validateManifestStructure(article) {
@@ -302,6 +314,12 @@ function prepareArticleMedia(article, options = {}) {
       errors.push(error.message || String(error));
       continue;
     }
+    const declaredRatio = String(prompt.aspect_ratio || '').trim();
+    const actualRatioLabel = exactRatioLabel(source.width, source.height);
+    if (mutate && Math.abs(parseRatio(declaredRatio) - source.aspect_ratio) > 0.04) {
+      warnings.push(`${base}: planowana proporcja ${declaredRatio || 'MISSING'} została zastąpiona rzeczywistą ${actualRatioLabel}; pliku nie przycięto.`);
+      prompt.aspect_ratio = actualRatioLabel;
+    }
     const entry = {
       placement,
       filename_base: base,
@@ -310,14 +328,14 @@ function prepareArticleMedia(article, options = {}) {
       composition: String(prompt.composition || '').trim(),
       purpose: String(prompt.purpose || '').trim(),
       source_file: sourceName,
-      aspect_ratio_declared: String(prompt.aspect_ratio || '').trim(),
+      aspect_ratio_declared: String(prompt.aspect_ratio || actualRatioLabel).trim(),
       alt: String(prompt.alt_pl || '').trim(),
       caption: String(prompt.caption_pl || '').trim(),
       visual_review: prompt.visual_review || {},
       source,
       variants: {},
     };
-    validateDimensions(entry, placement, prompt.aspect_ratio, errors);
+    validateDimensions(entry, placement, entry.aspect_ratio_declared, errors);
     for (const extension of REQUIRED_VARIANTS) {
       const variantFile = `${base}.${extension}`;
       const variantPath = path.join(assetsDir, variantFile);

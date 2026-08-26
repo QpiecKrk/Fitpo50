@@ -274,7 +274,7 @@ function normalizeSeoTitleBase(rawTitle) {
     .replace(/\s+\|\s*FitPo50$/i, '')
     .replace(/\s+/g, ' ')
     .trim();
-  return truncateAtWordBoundary(clean, POLICY.TITLE.MAX);
+  return truncateAtWordBoundary(clean, POLICY.TITLE.SEO_BASE_MAX);
 }
 
 function normalizeMetaDescription(rawDescription) {
@@ -326,17 +326,6 @@ function decodeHtmlEntities(input) {
       return Number.isFinite(cp) ? String.fromCodePoint(cp) : _m;
     })
     .replace(/&([a-z]+);/gi, (m, key) => named[key.toLowerCase()] ?? m);
-}
-
-function truncateParagraphToWordLimit(html, maxWords) {
-  const plain = decodeHtmlEntities(stripTags(String(html || '')))
-    .replace(/\s+/g, ' ')
-    .trim();
-  if (!plain) return ensureParagraphHtml(html);
-  const words = plain.match(/[\p{L}\p{N}'’-]+/gu) || [];
-  if (words.length <= maxWords) return `<p>${escapeHtml(plain)}</p>`;
-  const clipped = words.slice(0, maxWords).join(' ').replace(/[,:;.\s]+$/g, '').trim();
-  return `<p>${escapeHtml(`${clipped}.`)}</p>`;
 }
 
 function parseJsonFile(filePath) {
@@ -509,9 +498,25 @@ function ensureCaptionedTables(html, sectionTitle) {
     ? `Tabela: ${cleanSectionTitle}.`
     : 'Tabela z danymi i interpretacją.';
 
-  return source.replace(/<table\b([^>]*)>([\s\S]*?)<\/table>/gi, (full, attrs, inner) => {
-    if (/<caption\b/i.test(inner)) return full;
-    return `<table${attrs}><caption>${escapeHtml(fallbackCaption)}</caption>${inner}</table>`;
+  return source.replace(/<table\b([^>]*)>([\s\S]*?)<\/table>/gi, (_full, attrs, inner) => {
+    const classMatch = String(attrs || '').match(/\bclass=["']([^"']*)["']/i);
+    const classes = new Set(String(classMatch?.[1] || '').split(/\s+/).filter(Boolean));
+    classes.add('article-table');
+    const cleanAttrs = String(attrs || '').replace(/\s*class=["'][^"']*["']/i, '');
+    let normalizedInner = /<caption\b/i.test(inner)
+      ? inner
+      : `<caption>${escapeHtml(fallbackCaption)}</caption>${inner}`;
+    normalizedInner = normalizedInner.replace(/<thead\b([^>]*)>([\s\S]*?)<\/thead>/gi, (_head, headAttrs, headInner) => {
+      const cells = headInner.replace(/<th\b(?![^>]*\bscope=)([^>]*)>/gi, '<th scope="col"$1>');
+      return `<thead${headAttrs}>${cells}</thead>`;
+    });
+    normalizedInner = normalizedInner.replace(/<tbody\b([^>]*)>([\s\S]*?)<\/tbody>/gi, (_body, bodyAttrs, bodyInner) => {
+      const rows = bodyInner.replace(/<tr\b([^>]*)>\s*<td\b([^>]*)>([\s\S]*?)<\/td>/gi, '<tr$1><th scope="row"$2>$3</th>');
+      return `<tbody${bodyAttrs}>${rows}</tbody>`;
+    });
+    const captionText = stripTags((normalizedInner.match(/<caption\b[^>]*>([\s\S]*?)<\/caption>/i) || [])[1] || fallbackCaption);
+    const table = `<table${cleanAttrs} class="${[...classes].join(' ')}">${normalizedInner}</table>`;
+    return `<div class="article-table-wrap" role="region" aria-label="${escapeHtml(captionText)}" tabindex="0">${table}</div>`;
   });
 }
 
@@ -620,13 +625,6 @@ function normalizeSections(rawSections) {
       }
     }
 
-    // Automatyczna stabilizacja "answer-first":
-    // pierwszy akapit sekcji przycinamy do limitu z polisy, żeby importer i walidator miały ten sam kontrakt.
-    const firstParagraph = blocks.find((b) => b.type === 'paragraph' && String(b.html || '').trim());
-    if (firstParagraph) {
-      firstParagraph.html = truncateParagraphToWordLimit(firstParagraph.html, POLICY.WORDS.H2_INTRO_MAX);
-    }
-
     sections.push({ title, blocks });
   }
   return sections;
@@ -689,10 +687,14 @@ function toInlinePictureHtml(imgSrc, imgAlt, imgCaption, imgWidth, imgHeight) {
   const dimensions = Number(imgWidth) > 0 && Number(imgHeight) > 0
     ? ` width="${Number(imgWidth)}" height="${Number(imgHeight)}"`
     : '';
-  if (!localSrcMatch) return `<figure class="inline-figure"><img src="${escapeHtml(normalizedSrc)}" alt="${escapedAlt}" loading="lazy"${dimensions}>${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
+  const ratio = Number(imgWidth) > 0 && Number(imgHeight) > 0 ? Number(imgWidth) / Number(imgHeight) : 0;
+  const ratioClass = ratio && ratio < 0.9
+    ? ' inline-figure--portrait'
+    : (ratio >= 0.9 && ratio <= 1.1 ? ' inline-figure--square' : (ratio > 2.1 ? ' inline-figure--panoramic' : ''));
+  if (!localSrcMatch) return `<figure class="inline-figure${ratioClass}"><img src="${escapeHtml(normalizedSrc)}" alt="${escapedAlt}" loading="lazy"${dimensions}>${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
 
   const base = localSrcMatch[1];
-  return `<figure class="inline-figure"><picture><source srcset="${escapeHtml(`${base}.avif`)}" type="image/avif"><source srcset="${escapeHtml(`${base}.webp`)}" type="image/webp"><img src="${escapeHtml(`${base}.jpg`)}" alt="${escapedAlt}" loading="lazy"${dimensions}></picture>${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
+  return `<figure class="inline-figure${ratioClass}"><picture><source srcset="${escapeHtml(`${base}.avif`)}" type="image/avif"><source srcset="${escapeHtml(`${base}.webp`)}" type="image/webp"><img src="${escapeHtml(`${base}.jpg`)}" alt="${escapedAlt}" loading="lazy"${dimensions}></picture>${escapedCaption ? `<figcaption>${escapedCaption}</figcaption>` : ''}</figure>`;
 }
 
 function normalizeLocalHtmlHref(href) {
@@ -894,7 +896,7 @@ function validateInput(data, opts = {}) {
     const seoTitleValidation = validators.validateTitleText(seoTitleRaw, {
       label: 'SEO title',
       min: POLICY.TITLE.MIN,
-      max: POLICY.TITLE.MAX
+      max: POLICY.TITLE.SEO_BASE_MAX
     });
     seoTitleValidation.errors.forEach((msg) => errors.push(msg));
   }
@@ -902,8 +904,8 @@ function validateInput(data, opts = {}) {
     errors.push('SEO title: wygląda na urwany (kończy się na "i cofnąć"). Uzupełnij pełny sens.');
   }
   const seoTitleForLint = String(data.seo_title || data.meta_title || data.title || '').trim();
-  if (seoTitleForLint.length > POLICY.TITLE.MAX) {
-    errors.push(`SEO title: przekracza ${POLICY.TITLE.MAX} znaków (jest ${seoTitleForLint.length}).`);
+  if (seoTitleForLint.length > POLICY.TITLE.SEO_BASE_MAX) {
+    errors.push(`SEO title: przekracza ${POLICY.TITLE.SEO_BASE_MAX} znaków przed dopiskiem „${POLICY.TITLE.BRAND_SUFFIX.trim()}” (jest ${seoTitleForLint.length}).`);
   }
   if (seoTitleForLint.length < POLICY.TITLE.MIN) {
     errors.push(`SEO title: jest zbyt krótki (min ${POLICY.TITLE.MIN}, jest ${seoTitleForLint.length}).`);
@@ -1210,7 +1212,7 @@ function buildPrecheckReport({ inputPath, json, payload, validation, syncSite, a
   }
   const rawSeoBase = String(json.seo_title || json.title || '').replace(/\s+/g, ' ').trim();
   if (rawSeoBase && rawSeoBase !== payload.seoTitleBase) {
-    autoFixes.push(`Skrócę seo_title do bezpiecznej długości (<=${POLICY.TITLE.MAX} znaków): "${payload.seoTitleBase}"`);
+    autoFixes.push(`Skrócę seo_title do bezpiecznej długości (<=${POLICY.TITLE.SEO_BASE_MAX} znaków przed dopiskiem marki): "${payload.seoTitleBase}"`);
   }
 
   for (const err of validation.errors) {
@@ -2607,4 +2609,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { main, submitIndexNow };
+module.exports = { ensureCaptionedTables, main, normalizeSections, normalizeSeoTitleBase, submitIndexNow };

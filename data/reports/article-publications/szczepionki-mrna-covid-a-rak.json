@@ -1,0 +1,1124 @@
+{
+  "version": 1,
+  "transaction_id": "article-szczepionki-mrna-covid-a-rak-1787747214641-38048",
+  "generated_at": "2026-08-26T12:27:21.927Z",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "szczepionki-mrna-covid-a-rak",
+  "url": "https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html",
+  "manifest_file": "data/reports/article-publications/szczepionki-mrna-covid-a-rak.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "szczepionki-mrna-covid-a-rak.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8fcc2db053978589a7f7474ce584108f1970bd8b8986347a20470fbaff538ae9",
+      "bytes": 101330
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "4b353836c013533bc8237b9fb07a9b126be404ec142d6ec8401388aaeef7520e",
+      "after_sha256": "d0f984c7aa79eb3208afe341af44ca5b3eafcc9e0263e26bc8de072a05791018",
+      "bytes": 119773
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "8aa8b2202d3fad68d2766e5233b0d8330fa0304f3db4957cc77e32952380408b",
+      "after_sha256": "75fd1a7e46fe7107c96215c6c11ea48e8c5fba455019515e4f00d41eea481eb3",
+      "bytes": 154825
+    },
+    {
+      "path": "mity.html",
+      "action": "UPDATE",
+      "before_sha256": "ceb756a20df20ed925524d411589969b1ea27300ba7386e22829d6b6e553bd1c",
+      "after_sha256": "3c9092ebbba77ccb536cb7d6437b7a8246fbe3aac7bc49e6eca4101ea9bf6d49",
+      "bytes": 38807
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "f68b91a6b5f0f1698ce7656aa90cb5f46068b9750ee1818c50249bb5cb3f7038",
+      "after_sha256": "3e0e57a97d3b6835fbf0b9c17fb6b82a6444ffc905cde74cabe228fb59053301",
+      "bytes": 18692
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "2b87aaa6f8aa90e40b5feb6894b0f6142850ed264de61e4b1029e5694193b33f",
+      "after_sha256": "657d62766eb96119aa3721052c3a49677f4c6bb17fdfc9fcbced512793480bf3",
+      "bytes": 34846
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "50e8ec55f323c78b9ca0270310074d7db4e8aa37a9d2a49832a6ec0891e9b3f5",
+      "after_sha256": "d10c1dbabbb824ac5cfabe83ee17ec3b899dd1d5394c2674d1e9520c822d8e31",
+      "bytes": 702130
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "6f82fc311e088352412dcdc29a7bf622bca229ed66965deaa9948dc097789f58",
+      "after_sha256": "0ccbede72da165d44b5207ee36fa1bd8e662c639ce08da56fd3f113236b3d512",
+      "bytes": 739310
+    },
+    {
+      "path": "assets/pdf/szczepionki-mrna-covid-a-rak.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "823933eb8a55122bc0c6aa467ffe8f83961b46e9676f4d362183980392dd6128",
+      "bytes": 1013545
+    },
+    {
+      "path": "data/crosslink-suggestions/szczepionki-mrna-covid-a-rak.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9cb5c77dd27eaabc6fa3bd645d41baae69ea51c26a294abbb746b6d59eacb43c",
+      "bytes": 1302
+    },
+    {
+      "path": "data/reports/article-preview/szczepionki-mrna-covid-a-rak.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "212d0593fdda682669a09e61510a2f26e5b60b06f0fc85122c0dbb40ae44071b",
+      "bytes": 994
+    },
+    {
+      "path": "data/reports/article-preview/szczepionki-mrna-covid-a-rak.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9611bdec0209ee7f0a1163b4536a0042d651b30025543a42cf13a4637f3609da",
+      "bytes": 292
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "05bdb8a09c2d89d3e119bef3d0a891521b09b8c0eb6b7b6041c488346c1138c4",
+      "after_sha256": "22d5855da3e7751f9f5fa28098afe9063bcbae85c47a0dd3e5d49a71516e7cf0",
+      "bytes": 24369
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "8ee2b50a675dfca2b4028ffd2eb8778369b9074bff0c8d0e00264846bf9846a4",
+      "after_sha256": "b0c8a93d7d96a10f0c54ca7b0d0c9b55cdebd9a36f46a7df5d0f4ae7bf5b8e7c",
+      "bytes": 1630
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "df3c2158d786cd7c30df3c656415c32d9d78e8502e654130abacd2ce22efdd74",
+      "after_sha256": "89775e2aaf9c5163d97e2950dacea2ed7f48c734b4079180f4bb01ca88554e16",
+      "bytes": 756
+    },
+    {
+      "path": "_site/szczepionki-mrna-covid-a-rak.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8fcc2db053978589a7f7474ce584108f1970bd8b8986347a20470fbaff538ae9",
+      "bytes": 101330
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "4b353836c013533bc8237b9fb07a9b126be404ec142d6ec8401388aaeef7520e",
+      "after_sha256": "d0f984c7aa79eb3208afe341af44ca5b3eafcc9e0263e26bc8de072a05791018",
+      "bytes": 119773
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "8aa8b2202d3fad68d2766e5233b0d8330fa0304f3db4957cc77e32952380408b",
+      "after_sha256": "75fd1a7e46fe7107c96215c6c11ea48e8c5fba455019515e4f00d41eea481eb3",
+      "bytes": 154825
+    },
+    {
+      "path": "_site/mity.html",
+      "action": "UPDATE",
+      "before_sha256": "ceb756a20df20ed925524d411589969b1ea27300ba7386e22829d6b6e553bd1c",
+      "after_sha256": "3c9092ebbba77ccb536cb7d6437b7a8246fbe3aac7bc49e6eca4101ea9bf6d49",
+      "bytes": 38807
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "f68b91a6b5f0f1698ce7656aa90cb5f46068b9750ee1818c50249bb5cb3f7038",
+      "after_sha256": "3e0e57a97d3b6835fbf0b9c17fb6b82a6444ffc905cde74cabe228fb59053301",
+      "bytes": 18692
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "2b87aaa6f8aa90e40b5feb6894b0f6142850ed264de61e4b1029e5694193b33f",
+      "after_sha256": "657d62766eb96119aa3721052c3a49677f4c6bb17fdfc9fcbced512793480bf3",
+      "bytes": 34846
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "0172510a68c331bf639585fe4059d399abebfe5b0a1d5ebc350ff180a0e82d71",
+      "after_sha256": "d10c1dbabbb824ac5cfabe83ee17ec3b899dd1d5394c2674d1e9520c822d8e31",
+      "bytes": 702130
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "6f82fc311e088352412dcdc29a7bf622bca229ed66965deaa9948dc097789f58",
+      "after_sha256": "0ccbede72da165d44b5207ee36fa1bd8e662c639ce08da56fd3f113236b3d512",
+      "bytes": 739310
+    },
+    {
+      "path": "_site/assets/pdf/szczepionki-mrna-covid-a-rak.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "823933eb8a55122bc0c6aa467ffe8f83961b46e9676f4d362183980392dd6128",
+      "bytes": 1013545
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/szczepionki-mrna-covid-a-rak.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9cb5c77dd27eaabc6fa3bd645d41baae69ea51c26a294abbb746b6d59eacb43c",
+      "bytes": 1302
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-hero.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d98df5b9e5ea30adda3b0ada30a4291f6061b262ed22e616a4faf03f6b196c90",
+      "bytes": 207722
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-hero.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d98df5b9e5ea30adda3b0ada30a4291f6061b262ed22e616a4faf03f6b196c90",
+      "bytes": 207722
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-hero.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "133d4e02f58c1d495f978ca6f3ad1f56f00cb88df08f5df196724e8e6217dc36",
+      "bytes": 78204
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-hero.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "133d4e02f58c1d495f978ca6f3ad1f56f00cb88df08f5df196724e8e6217dc36",
+      "bytes": 78204
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-hero.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "38ef2d3b9d65a111aa1be3d60ee4325677164f4c87cbfd40fd21dde2e09a5e62",
+      "bytes": 51025
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-hero.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "38ef2d3b9d65a111aa1be3d60ee4325677164f4c87cbfd40fd21dde2e09a5e62",
+      "bytes": 51025
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-zaufanie.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f30340da930b3225ee86850866aa26f298b36f0b39e6b8dad4b59c35f354f71d",
+      "bytes": 118498
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-zaufanie.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f30340da930b3225ee86850866aa26f298b36f0b39e6b8dad4b59c35f354f71d",
+      "bytes": 118498
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-zaufanie.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b17531c73aa972a804f925d64303225961d9a73b86026709cd82452a235f2d95",
+      "bytes": 22602
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-zaufanie.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b17531c73aa972a804f925d64303225961d9a73b86026709cd82452a235f2d95",
+      "bytes": 22602
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-zaufanie.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "14ec402b894a85eec6023e70ba6df18b1241b9ccdd89a70f64863d1a0877b6d2",
+      "bytes": 24914
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-zaufanie.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "14ec402b894a85eec6023e70ba6df18b1241b9ccdd89a70f64863d1a0877b6d2",
+      "bytes": 24914
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-korea-dane.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e0f354532ffd1447c2aa07f1c3cbaa8e4c82d598a176473149610b1391a42e97",
+      "bytes": 165749
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-korea-dane.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e0f354532ffd1447c2aa07f1c3cbaa8e4c82d598a176473149610b1391a42e97",
+      "bytes": 165749
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-korea-dane.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d76c285de832367f1794af8344288d7132651c433e2f73e85c5d79b3ddd801e3",
+      "bytes": 47726
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-korea-dane.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d76c285de832367f1794af8344288d7132651c433e2f73e85c5d79b3ddd801e3",
+      "bytes": 47726
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-korea-dane.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b7baa0d8be5c6b4afd93bd4c0141bafe9ee79f2a0ec8cbf814e14f870eda2f15",
+      "bytes": 41079
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-korea-dane.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b7baa0d8be5c6b4afd93bd4c0141bafe9ee79f2a0ec8cbf814e14f870eda2f15",
+      "bytes": 41079
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fc990e88fd923b5a9313f6c1455de1d3dba360c170b32494ded7394d9003b3d3",
+      "bytes": 107193
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fc990e88fd923b5a9313f6c1455de1d3dba360c170b32494ded7394d9003b3d3",
+      "bytes": 107193
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "95ccea0c0c658064b51f1f22b9500dc6c188915a9f93e26f9a80536881c74761",
+      "bytes": 18960
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "95ccea0c0c658064b51f1f22b9500dc6c188915a9f93e26f9a80536881c74761",
+      "bytes": 18960
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4d7184c3b07ec7719989c8b9cc95567ed88b51099117f086264c0e2754fc10dd",
+      "bytes": 17702
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4d7184c3b07ec7719989c8b9cc95567ed88b51099117f086264c0e2754fc10dd",
+      "bytes": 17702
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-jak-powstaje.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9ce5d0bc5080fdef84d8168ba127aca5944c6a2a1ddbd12620ebe78274f46800",
+      "bytes": 86755
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-jak-powstaje.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9ce5d0bc5080fdef84d8168ba127aca5944c6a2a1ddbd12620ebe78274f46800",
+      "bytes": 86755
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-jak-powstaje.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "efc00f9b93952b4e455697ef56523d7d4c2efcaf621887611992d55df6f7afb8",
+      "bytes": 12892
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-jak-powstaje.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "efc00f9b93952b4e455697ef56523d7d4c2efcaf621887611992d55df6f7afb8",
+      "bytes": 12892
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-jak-powstaje.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2d6322623ec1f4d93b676f506d53bd314a9a1522b57376438b3da620cb692ce4",
+      "bytes": 14034
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-jak-powstaje.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2d6322623ec1f4d93b676f506d53bd314a9a1522b57376438b3da620cb692ce4",
+      "bytes": 14034
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-karencja.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aeed8b93ef93f0aaf5b15490ed41b015420d434bfc1b34bd230328f8475c1362",
+      "bytes": 74649
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-karencja.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aeed8b93ef93f0aaf5b15490ed41b015420d434bfc1b34bd230328f8475c1362",
+      "bytes": 74649
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-karencja.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "23ac273fca3d1852dd2d43679b60f32b52ce8771c30d24bdfc77dcb2bb9a8c04",
+      "bytes": 6196
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-karencja.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "23ac273fca3d1852dd2d43679b60f32b52ce8771c30d24bdfc77dcb2bb9a8c04",
+      "bytes": 6196
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-karencja.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "982e346a1dd0a05b15326985ea7ce43f450a5289f7deb722298ea5f8a5b59eaf",
+      "bytes": 8783
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-karencja.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "982e346a1dd0a05b15326985ea7ce43f450a5289f7deb722298ea5f8a5b59eaf",
+      "bytes": 8783
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f0bfb28d2b8e4cc7f5feb2d0c9e68608fa54fc9689332f87067ae85819475012",
+      "bytes": 99087
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f0bfb28d2b8e4cc7f5feb2d0c9e68608fa54fc9689332f87067ae85819475012",
+      "bytes": 99087
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "54041aa310b7403db7c55b9a07b382773a65c203736a502d367b782c685878c4",
+      "bytes": 16874
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "54041aa310b7403db7c55b9a07b382773a65c203736a502d367b782c685878c4",
+      "bytes": 16874
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "510ce526e8e68d5c2200d9cfdfc0aec63f94be5e3f8909918453146b0f74202e",
+      "bytes": 16846
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "510ce526e8e68d5c2200d9cfdfc0aec63f94be5e3f8909918453146b0f74202e",
+      "bytes": 16846
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64afab57839c923439d1e3226e29a43bbba1be642d8f4421613379e22b4a0281",
+      "bytes": 76991
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64afab57839c923439d1e3226e29a43bbba1be642d8f4421613379e22b4a0281",
+      "bytes": 76991
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8ed694947bca4c91799065e72b7fe29d865a4212e74517a9dd16105c1837a03a",
+      "bytes": 10338
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8ed694947bca4c91799065e72b7fe29d865a4212e74517a9dd16105c1837a03a",
+      "bytes": 10338
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eb05d4b2f2d85064fb3555033aa184941a4977791e49d4a1075d71e2209b23ec",
+      "bytes": 11774
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eb05d4b2f2d85064fb3555033aa184941a4977791e49d4a1075d71e2209b23ec",
+      "bytes": 11774
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-pozostalosci-dna.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d68133977f06920a5bf577170a1c00da11455ac7da5c4798b358761144716fc8",
+      "bytes": 293041
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-pozostalosci-dna.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d68133977f06920a5bf577170a1c00da11455ac7da5c4798b358761144716fc8",
+      "bytes": 293041
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-pozostalosci-dna.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b3409b90237e6513f0c6e1186eab92be6d3831d52482dd38778decec66801b94",
+      "bytes": 77744
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-pozostalosci-dna.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b3409b90237e6513f0c6e1186eab92be6d3831d52482dd38778decec66801b94",
+      "bytes": 77744
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-pozostalosci-dna.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "142569b9a346c8c8849038f948a7daf311ae50370fe414819b53aed975f1c2b0",
+      "bytes": 64110
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-pozostalosci-dna.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "142569b9a346c8c8849038f948a7daf311ae50370fe414819b53aed975f1c2b0",
+      "bytes": 64110
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-mechanizm.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5b6e4cffee8c1e67e48a3c15563e4e9770e200721c7b7be64beb849b9764ed44",
+      "bytes": 205501
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-mechanizm.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5b6e4cffee8c1e67e48a3c15563e4e9770e200721c7b7be64beb849b9764ed44",
+      "bytes": 205501
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-mechanizm.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0f4c2876b94d16b0b1e9a6ab83dab40293a191381efb7cdf15e7fcca027050be",
+      "bytes": 31930
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-mechanizm.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0f4c2876b94d16b0b1e9a6ab83dab40293a191381efb7cdf15e7fcca027050be",
+      "bytes": 31930
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-mechanizm.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c062dcd58366915c145421ca8820b11f25b0dccccc510f9da90bfa9b53813324",
+      "bytes": 29172
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-mechanizm.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c062dcd58366915c145421ca8820b11f25b0dccccc510f9da90bfa9b53813324",
+      "bytes": 29172
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-dwa-kraje.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "754c5ed631d12a8753edeffe054343ee6985a7300d3c469abb4c5ea425718da3",
+      "bytes": 73404
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-dwa-kraje.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "754c5ed631d12a8753edeffe054343ee6985a7300d3c469abb4c5ea425718da3",
+      "bytes": 73404
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-dwa-kraje.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "da312e9aaeff63eb804e39dcd4d04a3520732e7ee77f319afbcf7d529829a3b5",
+      "bytes": 10160
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-dwa-kraje.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "da312e9aaeff63eb804e39dcd4d04a3520732e7ee77f319afbcf7d529829a3b5",
+      "bytes": 10160
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-dwa-kraje.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0124c22b4519a08845832d8cdeeefffc58e24ad9325aea199808df9edf02dbd5",
+      "bytes": 11656
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-dwa-kraje.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0124c22b4519a08845832d8cdeeefffc58e24ad9325aea199808df9edf02dbd5",
+      "bytes": 11656
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-mianownik.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ea008ee864929b65138ae682d093986818d39b03a15bd4c0c958f3a3df957ca4",
+      "bytes": 250581
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-mianownik.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ea008ee864929b65138ae682d093986818d39b03a15bd4c0c958f3a3df957ca4",
+      "bytes": 250581
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-mianownik.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "131ce27282c8ae17df132964b5f058c589ccc92862112929eda289792da9e60c",
+      "bytes": 117882
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-mianownik.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "131ce27282c8ae17df132964b5f058c589ccc92862112929eda289792da9e60c",
+      "bytes": 117882
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-mianownik.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ab6cd253deb70c4b37229bccf806be04ac11366d839729b481b59bedcc649106",
+      "bytes": 65872
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-mianownik.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ab6cd253deb70c4b37229bccf806be04ac11366d839729b481b59bedcc649106",
+      "bytes": 65872
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-turbo-rak.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f3e3bf83f8a49da6a898aba7525aafe0288866a9b39e07aa97651e028e3523af",
+      "bytes": 90306
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-turbo-rak.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f3e3bf83f8a49da6a898aba7525aafe0288866a9b39e07aa97651e028e3523af",
+      "bytes": 90306
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-turbo-rak.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2b3c4e036e915527baf904d22a1a242904f56392df2c6121c0de13067ae738be",
+      "bytes": 14486
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-turbo-rak.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2b3c4e036e915527baf904d22a1a242904f56392df2c6121c0de13067ae738be",
+      "bytes": 14486
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-turbo-rak.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f8922225e8e7cf292faac386918716cef62f41cd328996e2be6748adb0114dc6",
+      "bytes": 13810
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-turbo-rak.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f8922225e8e7cf292faac386918716cef62f41cd328996e2be6748adb0114dc6",
+      "bytes": 13810
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b74cc7f214c26745d1c889b30585c2af262f998ac8adb235dbfb8d6da8105c97",
+      "bytes": 83804
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b74cc7f214c26745d1c889b30585c2af262f998ac8adb235dbfb8d6da8105c97",
+      "bytes": 83804
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eb85d24d5a5863f8f1299d4a9c76011f2b2c0e0db39909263a598095214c83a1",
+      "bytes": 14102
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eb85d24d5a5863f8f1299d4a9c76011f2b2c0e0db39909263a598095214c83a1",
+      "bytes": 14102
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9292a4f534768d0cd8c6e6b0b65db5fcb3df03ca88ae6a1863ba7783d42cb202",
+      "bytes": 12087
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9292a4f534768d0cd8c6e6b0b65db5fcb3df03ca88ae6a1863ba7783d42cb202",
+      "bytes": 12087
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5ea969e683797078a9c1594050b28092e5cad83dd6a0bb1a9c4c8fa475584012",
+      "bytes": 193802
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5ea969e683797078a9c1594050b28092e5cad83dd6a0bb1a9c4c8fa475584012",
+      "bytes": 193802
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b5f29becafb2609f3318d3b7f0b1a5a623ec360bc06d37dd4e0790e7fae905de",
+      "bytes": 59996
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b5f29becafb2609f3318d3b7f0b1a5a623ec360bc06d37dd4e0790e7fae905de",
+      "bytes": 59996
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5104416f418599d16449e9301a373b8883a215d477f6e408df5c6304a933910b",
+      "bytes": 44991
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5104416f418599d16449e9301a373b8883a215d477f6e408df5c6304a933910b",
+      "bytes": 44991
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-drabina-dowodow.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6049f38834767371982d3ac4ad52e5f8c702fb2c4407f9a9ce6b801a472790c0",
+      "bytes": 298712
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-drabina-dowodow.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6049f38834767371982d3ac4ad52e5f8c702fb2c4407f9a9ce6b801a472790c0",
+      "bytes": 298712
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-drabina-dowodow.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6effebd52a49faed98f1b4df023547c6ac28c4125d091359369912327a138595",
+      "bytes": 11674
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-drabina-dowodow.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6effebd52a49faed98f1b4df023547c6ac28c4125d091359369912327a138595",
+      "bytes": 11674
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-drabina-dowodow.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "518b66c7cf32f6449f915c01b09bd1e1915d2ebd61991041182caf2605416302",
+      "bytes": 10891
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-drabina-dowodow.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "518b66c7cf32f6449f915c01b09bd1e1915d2ebd61991041182caf2605416302",
+      "bytes": 10891
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-granica.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a8c113ab49888de50684eb3c89ecd8db416c2543d611c055013973c96a9cbfc5",
+      "bytes": 301065
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-granica.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a8c113ab49888de50684eb3c89ecd8db416c2543d611c055013973c96a9cbfc5",
+      "bytes": 301065
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-granica.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f47cdc24d9913e650b9dac883506c707fbde159cbc550600b59afa233f0d1190",
+      "bytes": 13720
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-granica.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f47cdc24d9913e650b9dac883506c707fbde159cbc550600b59afa233f0d1190",
+      "bytes": 13720
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-granica.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b4c909c00bac8bc5372d8cdada0ab2a179273c4ecd67668a638319d9cc427092",
+      "bytes": 11772
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-granica.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b4c909c00bac8bc5372d8cdada0ab2a179273c4ecd67668a638319d9cc427092",
+      "bytes": 11772
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "50d954d8eaf1e2641d164a8f060b68ece557981cfed7f1320462c88a0be11c88",
+      "bytes": 164973
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "50d954d8eaf1e2641d164a8f060b68ece557981cfed7f1320462c88a0be11c88",
+      "bytes": 164973
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "92b634db1c299459daf2cdee9a31265896ccd6dd989bbb681cbbe136a5b82e3c",
+      "bytes": 56528
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "92b634db1c299459daf2cdee9a31265896ccd6dd989bbb681cbbe136a5b82e3c",
+      "bytes": 56528
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64cfbb1c17af2f51c67dfd7496065bfaebaac1a927f067dac38ba90ec5460f54",
+      "bytes": 40430
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64cfbb1c17af2f51c67dfd7496065bfaebaac1a927f067dac38ba90ec5460f54",
+      "bytes": 40430
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-luki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2443e4802612b9e8008efc9bc4b92457666eef9ee8085b201bada88579ade805",
+      "bytes": 170703
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-luki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2443e4802612b9e8008efc9bc4b92457666eef9ee8085b201bada88579ade805",
+      "bytes": 170703
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-luki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7901d6b53cee114c2d6577e46e44ac1562f9c6627464dd03499ec22fa1bc4331",
+      "bytes": 57092
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-luki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7901d6b53cee114c2d6577e46e44ac1562f9c6627464dd03499ec22fa1bc4331",
+      "bytes": 57092
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-luki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ccf3b94ed4d4b95dcbc02ea5cc00ac209624d70401ffc278fae466b35bcd78a4",
+      "bytes": 41959
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-luki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ccf3b94ed4d4b95dcbc02ea5cc00ac209624d70401ffc278fae466b35bcd78a4",
+      "bytes": 41959
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-projekt-badania.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "31b5065922448ef9258dec445c1da283a60055e7088cc2c4b03cefa12dc4b63c",
+      "bytes": 109653
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-projekt-badania.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "31b5065922448ef9258dec445c1da283a60055e7088cc2c4b03cefa12dc4b63c",
+      "bytes": 109653
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-projekt-badania.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c1f5b5dccfed19230476c96dae421b267cf498142f4b33ce70062d5f4b00ef3",
+      "bytes": 22066
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-projekt-badania.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c1f5b5dccfed19230476c96dae421b267cf498142f4b33ce70062d5f4b00ef3",
+      "bytes": 22066
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-projekt-badania.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e8ad5fdbb7b32696831b24fa960082dcd80551cec48a5fc376e298d8b1a2667b",
+      "bytes": 21661
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-projekt-badania.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e8ad5fdbb7b32696831b24fa960082dcd80551cec48a5fc376e298d8b1a2667b",
+      "bytes": 21661
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-co-dziala.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "19dd397afee0006ef2dc714e5f25e6010060557b20b71e7f30c95e894c9a11ad",
+      "bytes": 207949
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-co-dziala.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "19dd397afee0006ef2dc714e5f25e6010060557b20b71e7f30c95e894c9a11ad",
+      "bytes": 207949
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-co-dziala.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ae660d666770f4d42b715a59d1abf72e28701877490e454aa28fd145d3bb9875",
+      "bytes": 69988
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-co-dziala.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ae660d666770f4d42b715a59d1abf72e28701877490e454aa28fd145d3bb9875",
+      "bytes": 69988
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-co-dziala.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "93c51d2bd52a26e76432c5b6d7c69b88df896fec36c65bc4886f9756930d0a60",
+      "bytes": 48529
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-co-dziala.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "93c51d2bd52a26e76432c5b6d7c69b88df896fec36c65bc4886f9756930d0a60",
+      "bytes": 48529
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "33a20790fa696a493f192937326e6fa7cae66627780401f8747587a5995f17d2",
+      "bytes": 378089
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "33a20790fa696a493f192937326e6fa7cae66627780401f8747587a5995f17d2",
+      "bytes": 378089
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7349927f6c485a45f21c95a059d581c64978c8b6a9b9b0c18fc78bba8b634127",
+      "bytes": 171860
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7349927f6c485a45f21c95a059d581c64978c8b6a9b9b0c18fc78bba8b634127",
+      "bytes": 171860
+    },
+    {
+      "path": "assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f4cc50e8915922f3e919215ccbf8a947c68153efb886d46f895ec23f063c2b3c",
+      "bytes": 104877
+    },
+    {
+      "path": "_site/assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f4cc50e8915922f3e919215ccbf8a947c68153efb886d46f895ec23f063c2b3c",
+      "bytes": 104877
+    }
+  ],
+  "files_count": 157
+}

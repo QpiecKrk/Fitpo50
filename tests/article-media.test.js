@@ -102,6 +102,29 @@ test('tworzy kompletny manifest i mapuje obrazy bez fallbacków', () => {
   assert.equal(validateManifestStructure(value).ok, true);
 });
 
+test('zatwierdzony pakiet zachowuje panoramę, kwadrat i pionową planszę bez przycinania', () => {
+  const dir = makePackage();
+  const value = article();
+  createFiles(dir, value);
+  const dimensions = {
+    'trening-silowy-hero': [1200, 500],
+    'dobor-obciazenia': [900, 1600],
+    'kontrola-techniki': [1000, 1000],
+    'regeneracja-treningowa': [1200, 675],
+  };
+  const mixedInspector = (file) => {
+    const base = path.basename(file).replace(/\.(png|jpg|webp|avif)$/i, '');
+    const [width, height] = dimensions[base];
+    return { ...inspector(file), width, height, aspect_ratio: Number((width / height).toFixed(4)) };
+  };
+  const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, ensureVariants: false, inspectImage: mixedInspector });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.equal(value.image_prompts[0].aspect_ratio, '12:5');
+  assert.equal(value.image_prompts[1].aspect_ratio, '9:16');
+  assert.equal(value.sections[0].image.width, 900);
+  assert.equal(value.sections[0].image.height, 1600);
+});
+
 test('nie dopasowuje przybliżonej nazwy pliku', () => {
   const dir = makePackage();
   const value = article();
