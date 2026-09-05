@@ -10,6 +10,14 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import subprocess
+from bs4 import BeautifulSoup
+from bs4.formatter import HTMLFormatter
+
+class OrderedFormatter(HTMLFormatter):
+    def attributes(self, tag):
+        return list(tag.attrs.items())
+
 import json
 import re
 import sys
@@ -28,6 +36,11 @@ MARKER_START = "<!-- PDF_DOWNLOAD_BUTTON_START -->"
 MARKER_END = "<!-- PDF_DOWNLOAD_BUTTON_END -->"
 
 
+def is_topic_center(path: Path) -> bool:
+    soup = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
+    return bool(soup.select_one(".hub-shell > main h1#hub-title"))
+
+
 def is_article_page(path: Path) -> bool:
     if path.name == "article-template-bento.html":
         return False
@@ -42,7 +55,7 @@ def collect_article_files(slugs: list[str] | None) -> list[Path]:
             html_path = (REPO_ROOT / f"{slug}.html").resolve()
             if not html_path.exists():
                 raise FileNotFoundError(f"Nie znaleziono pliku: {html_path}")
-            if not is_article_page(html_path):
+            if not is_article_page(html_path) and not is_topic_center(html_path):
                 raise RuntimeError(f"Plik nie wyglada jak strona artykulu: {html_path}")
             files.append(html_path)
         return sorted(files)
@@ -218,6 +231,30 @@ def run(slugs: list[str] | None) -> int:
         slug = html_path.stem
         output_pdf = (REPO_ROOT / "assets" / "pdf" / f"{slug}.pdf").resolve()
         source_url = urljoin(BASE_URL, html_path.name)
+
+        if is_topic_center(html_path):
+            subprocess.run(["node", str(SCRIPT_DIR / "generate-topic-center-pdf.js"), str(html_path)], check=True)
+            size_kb = (output_pdf.stat().st_size + 1023) // 1024
+            html = html_path.read_text(encoding="utf-8")
+            soup = BeautifulSoup(html, "html.parser")
+            actions = soup.select_one(".hub-hero .hub-actions")
+            if actions is None:
+                raise RuntimeError("Brak akcji centrum dla przycisku PDF")
+            button = actions.select_one("a[download]")
+            if button is None:
+                button = soup.new_tag("a", attrs={"class": "hub-btn hub-btn--secondary", "download": ""})
+                actions.append(button)
+            button["href"] = f"./assets/pdf/{slug}.pdf"
+            button.string = f"Pobierz PDF ({size_kb} KB)"
+            for script in soup.select('script[type="application/ld+json"]'):
+                data = json.loads(script.string or "{}")
+                posting = find_blogposting_node(data)
+                if posting:
+                    posting["encoding"] = {"@type": "MediaObject", "contentUrl": urljoin(BASE_URL, f"assets/pdf/{slug}.pdf"), "encodingFormat": "application/pdf"}
+                    script.string = json.dumps(data, ensure_ascii=False, indent=2)
+            html_path.write_text(soup.decode(formatter=OrderedFormatter()), encoding="utf-8")
+            print(f"[OK] centrum {slug}: PDF {size_kb} KB")
+            continue
 
         generate_pdf(input_html=html_path, output_pdf=output_pdf, source_url=source_url)
 

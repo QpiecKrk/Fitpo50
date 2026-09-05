@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const { pageKind } = require('./publication-page-kind');
 
 const ALLOWED_BASIS = new Set(['GSC_QUERY', 'SOURCE', 'ARTICLE_FACT', 'SAFETY_RULE', 'INTERNAL_LINK_MAP']);
 const GENERIC_PATTERNS = [
@@ -52,14 +53,16 @@ function validateAfterText(after, label, errors) {
     errors.push(`${label}: after musi być niepustym, zatwierdzonym tekstem.`);
     return;
   }
+  const visibleText = after.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '').replace(/<[^>]*>/g, ' ');
   for (const pattern of GENERIC_PATTERNS) {
-    if (pattern.test(after)) errors.push(`${label}: wykryto generyczny tekst lub placeholder (${pattern}).`);
+    if (pattern.test(visibleText)) errors.push(`${label}: wykryto generyczny tekst lub placeholder (${pattern}).`);
   }
 }
 
 function hrefTargets(html) {
-  return [...String(html || '').matchAll(/\bhref=["']([^"']+\.html)(?:[?#][^"']*)?["']/gi)]
-    .map((match) => String(match[1] || '').replace(/^\.\//, ''));
+  return [...String(html || '').matchAll(/<a\b[^>]*\bhref=["']([^"']+\.html)(?:[?#][^"']*)?["']/gi)]
+    .map((match) => String(match[1] || '').replace(/^\.\//, ''))
+    .filter((href) => !/^https?:\/\//i.test(href));
 }
 
 function validatePatchManifest(manifest, root, selectedIds) {
@@ -172,7 +175,7 @@ function buildPatchedFiles(manifest, items, root, iso) {
   const articleFiles = new Set(targetFiles);
   for (const file of contents.keys()) {
     const source = fs.readFileSync(path.join(root, file), 'utf8');
-    if (/<article\s+class="article-content">/i.test(source) && /"@type"\s*:\s*"BlogPosting"/i.test(source)) articleFiles.add(file);
+    if (pageKind(source) !== 'unsupported') articleFiles.add(file);
   }
   articleFiles.forEach((file) => {
     const current = contents.has(file) ? contents.get(file) : fs.readFileSync(path.join(root, file), 'utf8');
@@ -183,6 +186,13 @@ function buildPatchedFiles(manifest, items, root, iso) {
 
 function normalizedNeedle(value) {
   return String(value || '').replace(/\s+/g, ' ').trim();
+}
+
+function deploymentNeedle(operation, finalHtml) {
+  // A whole-document replacement is subsequently enriched with dates and PDF
+  // metadata. Verify that final document, rather than the intermediate draft.
+  return normalizedNeedle(/^\s*<!doctype\s+html\b/i.test(operation.after)
+    ? finalHtml : operation.after);
 }
 
 function buildDeploymentManifest({ manifest, items, contents, targetFiles, iso }) {
@@ -196,10 +206,10 @@ function buildDeploymentManifest({ manifest, items, contents, targetFiles, iso }
     targets: targetFiles.map((file) => {
       const item = itemByTarget.get(file);
       const supportFiles = [...new Set(item.operations.map((operation) => safeRelativeFile(operation.file || file)).filter((operationFile) => operationFile !== file))];
-      const supportArticleFiles = supportFiles.filter((support) => /<article\s+class="article-content">/i.test(String(contents.get(support) || '')));
+      const supportArticleFiles = supportFiles.filter((support) => pageKind(String(contents.get(support) || '')) !== 'unsupported');
       const needles = item.operations
         .filter((operation) => safeRelativeFile(operation.file || file) === file)
-        .map((operation) => normalizedNeedle(operation.after))
+        .map((operation) => deploymentNeedle(operation, contents.get(file)))
         .filter(Boolean);
       return {
         id: normalizeId(item.id),
@@ -218,7 +228,7 @@ function buildDeploymentManifest({ manifest, items, contents, targetFiles, iso }
           pdf_url: `https://fitpo50.pl/assets/pdf/${support.replace(/\.html$/, '.pdf')}`,
           content_needles: item.operations
             .filter((operation) => safeRelativeFile(operation.file || file) === support)
-            .map((operation) => normalizedNeedle(operation.after))
+            .map((operation) => deploymentNeedle(operation, contents.get(support)))
             .filter(Boolean),
         })),
       };

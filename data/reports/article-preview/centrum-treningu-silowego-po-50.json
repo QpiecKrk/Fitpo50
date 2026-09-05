@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-05T13:38:29.978Z",
+  "slug": "centrum-treningu-silowego-po-50",
+  "html_sha256": "00e01d44ed297292abef82b9ae566c973941b01d912c4ecde078d6884f1ada79",
+  "site_html_sha256": "00e01d44ed297292abef82b9ae566c973941b01d912c4ecde078d6884f1ada79",
+  "pdf_sha256": "187ee6d3d80b4a4485d56a0bdd43ed9037d2113e04cf8e79083819faaeb41965",
+  "site_pdf_sha256": "187ee6d3d80b4a4485d56a0bdd43ed9037d2113e04cf8e79083819faaeb41965",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 3,
+    "text_coverage": 0.9927,
+    "rendered_pages": 3
+  },
+  "errors": []
+}

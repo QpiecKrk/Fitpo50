@@ -34,3 +34,10 @@ Automat blokuje placeholdery, dawny generyczny akapit `safe-links`, nieistnieją
 - `LIVE_DEPLOYED_AND_VALIDATED` — potwierdzono HTTP 200, canonical, `dateModified`, zatwierdzoną treść, sitemap i PDF.
 
 Końcowe artefakty to `data/reports/gsc-live-submit-queue.json` i `.txt`. Workflow GitHub publikuje je także jako artefakt `popraw-seo-gsc-live` i w swoim podsumowaniu.
+# Staging centrów
+
+Zatwierdzony apply przygotowuje staging i zwraca `AWAITING_VISUAL_REVIEW`.
+Po kontroli wszystkich podglądów agent wykonuje tę samą komendę z
+`--promote-stage <katalog-stagingu>`; hashe chronią przed przeniesieniem
+zmienionego pakietu. Pełny kontrakt centrów i regenerację opisuje
+[topic-center-pipeline.md](topic-center-pipeline.md).

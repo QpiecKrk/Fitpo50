@@ -43,6 +43,9 @@ jobs:
         with:
           node-version: "24"
 
+      - name: Install topic center validator dependency
+        run: python3 -m pip install beautifulsoup4==4.14.3
+
       - name: Validate article standard (AEO gate)
         run: npm run article:validate
 

@@ -59,6 +59,18 @@ test('approved patch is exact, content-specific and updates both modified dates'
   assert.equal((html.match(/2026-08-25T12:00:00\+02:00/g) || []).length, 2);
 });
 
+test('patch validation distinguishes HTML attributes and external sources from placeholder copy and local targets', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-seo-patch-'));
+  const manifest = validManifest(root);
+  const op = manifest.items[0].operations[0];
+  op.after = '<input placeholder="Szukaj"><p>Opis snu z <a href="https://www.cdc.gov/sleep/about/index.html">CDC</a>.</p>';
+  assert.deepEqual(validatePatchManifest(manifest, root, ['BOOST 1']).errors, []);
+  op.after += '<p>placeholder</p><a href="missing.html">Brakujący artykuł</a>';
+  const errors = validatePatchManifest(manifest, root, ['BOOST 1']).errors;
+  assert.ok(errors.some((error) => /generyczny/.test(error)));
+  assert.ok(errors.some((error) => /missing.html/.test(error)));
+});
+
 test('dry-run accepts BOOST-1 alias and never writes the article', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-seo-patch-'));
   const manifest = validManifest(root);
@@ -117,4 +129,16 @@ test('GSC list remains empty until live HTML, canonical, sitemap and PDF all mat
   assert.equal(ready.status, 'LIVE_DEPLOYED_AND_VALIDATED');
   assert.deepEqual(ready.gsc_url_inspection, ['https://fitpo50.pl/a.html']);
   assert.deepEqual(ready.errors, []);
+  deployment.targets[0].expected_pdf_sha256 = sha256(Buffer.from('%PDF-1.7 new edition'));
+  const stalePdf = verifyLiveResponses(deployment, responses);
+  assert.equal(stalePdf.status, 'LIVE_DEPLOYMENT_INCOMPLETE');
+  assert.deepEqual(stalePdf.gsc_url_inspection, []);
+  assert.ok(stalePdf.errors.some((error) => error.includes('PDF nie odpowiada')));
+});
+
+test('sitemap lastmod belongs to the matching URL rather than an earlier entry', () => {
+  const { sitemapLastmod } = require('../scripts/lib/popraw-seo-live-verifier');
+  const xml = '<urlset><url><loc>https://fitpo50.pl/</loc><lastmod>2026-01-01</lastmod></url><url><loc>https://fitpo50.pl/center.html</loc><lastmod>2026-09-05</lastmod></url></urlset>';
+  assert.equal(sitemapLastmod(xml, 'https://fitpo50.pl/center.html'), '2026-09-05');
+  assert.equal(sitemapLastmod(xml, 'https://fitpo50.pl/missing.html'), '');
 });

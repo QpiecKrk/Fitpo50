@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-05T13:38:36.601Z",
+  "slug": "centrum-metabolizmu-po-50",
+  "html_sha256": "db25a74c2b6ec9f7a85a6bbb7a7fc3f2c2bf5e7beddea08b534d839cbbf3d31d",
+  "site_html_sha256": "db25a74c2b6ec9f7a85a6bbb7a7fc3f2c2bf5e7beddea08b534d839cbbf3d31d",
+  "pdf_sha256": "4b1255b7e0d3120204045b246d5a4aa3c9fb98f8522daf63bd01fe9f6185c542",
+  "site_pdf_sha256": "4b1255b7e0d3120204045b246d5a4aa3c9fb98f8522daf63bd01fe9f6185c542",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 3,
+    "text_coverage": 0.9927,
+    "rendered_pages": 3
+  },
+  "errors": []
+}

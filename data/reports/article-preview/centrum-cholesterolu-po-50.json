@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-05T13:38:33.299Z",
+  "slug": "centrum-cholesterolu-po-50",
+  "html_sha256": "194ed51570cc8450f33c3dfa94825b94267ada056a50dc3cef067e2b51ac8d74",
+  "site_html_sha256": "194ed51570cc8450f33c3dfa94825b94267ada056a50dc3cef067e2b51ac8d74",
+  "pdf_sha256": "9a6f32fb824793d7243549a1f813ad564f1afd1a4f149591a240b821a536b941",
+  "site_pdf_sha256": "9a6f32fb824793d7243549a1f813ad564f1afd1a4f149591a240b821a536b941",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 3,
+    "text_coverage": 0.9927,
+    "rendered_pages": 3
+  },
+  "errors": []
+}

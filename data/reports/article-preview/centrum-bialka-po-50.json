@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-05T13:38:26.647Z",
+  "slug": "centrum-bialka-po-50",
+  "html_sha256": "23af8bd7853c6ef4f026324578e378e38879095b4745c6d71f2cf576d536e391",
+  "site_html_sha256": "23af8bd7853c6ef4f026324578e378e38879095b4745c6d71f2cf576d536e391",
+  "pdf_sha256": "77dd3af0f10b9da88d102716122bced9f7f77c62af27c20c95112d66ec086a1e",
+  "site_pdf_sha256": "77dd3af0f10b9da88d102716122bced9f7f77c62af27c20c95112d66ec086a1e",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 3,
+    "text_coverage": 0.9922,
+    "rendered_pages": 3
+  },
+  "errors": []
+}

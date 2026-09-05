@@ -15,6 +15,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { pageKind } = require('./lib/publication-page-kind');
 
 const ROOT = process.cwd();
 
@@ -38,12 +39,13 @@ function exists(rel) {
 }
 
 function isArticleHtml(rel) {
+  if (rel.includes('/')) return false;
   const base = path.basename(rel);
   if (base === 'article-template-bento.html') return false;
   if (!rel.endsWith('.html')) return false;
   if (!exists(rel)) return false;
   const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
-  return /<article\s+class="article-content">/i.test(html);
+  return pageKind(html) !== 'unsupported';
 }
 
 function detectChangedArticles(changedPaths) {

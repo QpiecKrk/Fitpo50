@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-05T13:38:23.256Z",
+  "slug": "centrum-snu-po-50",
+  "html_sha256": "6ec0d6326db25031ceab11730290d8cac7517d6510f7a6798dd843016a11b48f",
+  "site_html_sha256": "6ec0d6326db25031ceab11730290d8cac7517d6510f7a6798dd843016a11b48f",
+  "pdf_sha256": "3e00f1a44c0190565571b76bd3276007c89e0f8ec10042b9aecd6e1eefbdb870",
+  "site_pdf_sha256": "3e00f1a44c0190565571b76bd3276007c89e0f8ec10042b9aecd6e1eefbdb870",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 3,
+    "text_coverage": 0.9921,
+    "rendered_pages": 3
+  },
+  "errors": []
+}

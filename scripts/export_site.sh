@@ -96,6 +96,10 @@ rsync -a \
   --exclude=".cursor/" \
   --exclude=".vscode/" \
   --exclude=".github/" \
+  --exclude=".codex/" \
+  --exclude=".openai/" \
+  --exclude=".tmp/" \
+  --exclude="/output/" \
   --exclude=".githooks/" \
   --exclude=".clinerules" \
   --exclude=".cursorrules" \

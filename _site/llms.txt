@@ -427,4 +427,23 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Czy szczepionki mRNA na COVID-19 powodują raka? Fakty i badania | FitPo50"
   section: "Mity"
   summary: "Czy szczepionki mRNA powodują raka? Sprawdzamy badanie z Korei, dane z Włoch, DNA, SV40 i „turbo raka”. Poznaj fakty, ograniczenia i obecny stan wiedzy."
-
+- url: https://fitpo50.pl/centrum-snu-po-50.html
+  title: "Sen po 50: wybierz poradnik o pobudkach i regeneracji | FitPo50"
+  section: "Centra tematyczne"
+  summary: "Sen po 50: wybierz poradnik o nocnych pobudkach, bezdechu, kawie i regeneracji. Sprawdź, jak prowadzić dzienniczek snu i przygotować pytania do konsultacji."
+- url: https://fitpo50.pl/centrum-bialka-po-50.html
+  title: "Białko po 50: poradniki o posiłkach i suplementach | FitPo50"
+  section: "Centra tematyczne"
+  summary: "Białko po 50: wybierz poradnik o zapotrzebowaniu, produktach i odżywkach. Rozdziel cel żywieniowy od suplementacji i sprawdź ograniczenia przy chorobie nerek."
+- url: https://fitpo50.pl/centrum-treningu-silowego-po-50.html
+  title: "Trening po 50: start, maszyny i dobór poradnika | FitPo50"
+  section: "Centra tematyczne"
+  summary: "Trening siłowy po 50: wybierz poradnik o pierwszej wizycie, maszynach, technice i sile chwytu. Sprawdź zalecenia ruchu i objawy wymagające przerwania ćwiczeń."
+- url: https://fitpo50.pl/centrum-cholesterolu-po-50.html
+  title: "Cholesterol po 50: przewodnik po wynikach i badaniach | FitPo50"
+  section: "Centra tematyczne"
+  summary: "Cholesterol po 50: wybierz poradnik o lipidogramie, ApoB, Lp(a) i badaniach krwi. Przygotuj wyniki do konsultacji i odróżnij ocenę ryzyka od objawów alarmowych."
+- url: https://fitpo50.pl/centrum-metabolizmu-po-50.html
+  title: "Metabolizm po 50: brzuch, wyniki i wybór poradnika | FitPo50"
+  section: "Centra tematyczne"
+  summary: "Metabolizm i brzuch po 50: wybierz poradnik o obwodzie pasa, jedzeniu, ruchu i śnie. Oddziel pomiary od diagnozy i przygotuj konkretne pytania do konsultacji."

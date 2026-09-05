@@ -344,8 +344,11 @@ ${renderFooter()}
 `;
 }
 
+const selectedFiles = process.argv.includes('--files') ? String(process.argv[process.argv.indexOf('--files') + 1] || '').split(',') : null;
 for (const hub of hubs) {
-  const html = renderHub(hub);
+  if (selectedFiles && !selectedFiles.includes(hub.file)) continue;
+  const canonical = path.join(ROOT, 'templates', 'topic-centers', hub.file);
+  const html = fs.existsSync(canonical) ? fs.readFileSync(canonical, 'utf8') : renderHub(hub);
   fs.writeFileSync(path.join(ROOT, hub.file), html, 'utf8');
   fs.mkdirSync(path.join(ROOT, '_site'), { recursive: true });
   fs.writeFileSync(path.join(ROOT, '_site', hub.file), html, 'utf8');

@@ -19,13 +19,13 @@ function modifiedDates(html) {
 }
 
 function sitemapLastmod(xml, url) {
-  const escaped = String(url || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const block = String(xml || '').match(new RegExp(`<url>[\\s\\S]*?<loc>${escaped}</loc>[\\s\\S]*?</url>`, 'i'))?.[0] || '';
+  const block = [...String(xml || '').matchAll(/<url\b[^>]*>[\s\S]*?<\/url>/gi)]
+    .map((match) => match[0]).find((entry) => entry.match(/<loc>([^<]+)<\/loc>/i)?.[1] === url) || '';
   return block.match(/<lastmod>([^<]+)<\/lastmod>/i)?.[1] || '';
 }
 
 function bodyHash(body) {
-  return crypto.createHash('sha256').update(String(body || '')).digest('hex');
+  return crypto.createHash('sha256').update(Buffer.isBuffer(body) ? body : String(body || '')).digest('hex');
 }
 
 function verifyLiveResponses(manifest, responses) {
@@ -56,6 +56,7 @@ function verifyLiveResponses(manifest, responses) {
     if (!pdfResponse || pdfResponse.status !== 200 || !Buffer.from(pdfResponse.body || '').subarray(0, 5).equals(Buffer.from('%PDF-'))) {
       errors.push(`${target.pdf_url}: brak prawidłowego PDF na produkcji.`);
     } else {
+      if (target.expected_pdf_sha256 && bodyHash(pdfResponse.body) !== target.expected_pdf_sha256) errors.push(`${target.pdf_url}: PDF nie odpowiada zatwierdzonej wersji.`);
       checks.push({ url: target.pdf_url, type: 'PDF', status: 200 });
     }
     const lastmod = sitemap && sitemap.status === 200 ? sitemapLastmod(sitemap.body, target.url) : '';
@@ -76,6 +77,8 @@ function verifyLiveResponses(manifest, responses) {
       const sourcePdf = responses.get(source.pdf_url);
       if (!sourcePdf || sourcePdf.status !== 200 || !Buffer.from(sourcePdf.body || '').subarray(0, 5).equals(Buffer.from('%PDF-'))) {
         errors.push(`${source.pdf_url}: brak prawidłowego PDF na produkcji.`);
+      } else if (source.expected_pdf_sha256 && bodyHash(sourcePdf.body) !== source.expected_pdf_sha256) {
+        errors.push(`${source.pdf_url}: PDF nie odpowiada zatwierdzonej wersji.`);
       }
       const sourceLastmod = sitemap && sitemap.status === 200 ? sitemapLastmod(sitemap.body, source.url) : '';
       if (sourceLastmod !== String(source.date_modified || '').slice(0, 10)) errors.push(`${source.url}: sitemap lastmod=${sourceLastmod || 'MISSING'}.`);

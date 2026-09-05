@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-09-05T13:47:15.594Z",
+  "status": "VISUALLY_REVIEWED",
+  "approved_ids": [
+    "BOOST 1",
+    "NAPRAWA 1",
+    "NAPRAWA 2",
+    "NAPRAWA 3",
+    "NAPRAWA 4"
+  ],
+  "items": [
+    {
+      "file": "centrum-snu-po-50.html",
+      "html_sha256": "6ec0d6326db25031ceab11730290d8cac7517d6510f7a6798dd843016a11b48f",
+      "pdf_sha256": "3e00f1a44c0190565571b76bd3276007c89e0f8ec10042b9aecd6e1eefbdb870",
+      "desktop_width": 1440,
+      "mobile_width": 390,
+      "desktop_review": "PASS",
+      "mobile_review": "PASS",
+      "pdf_pages": [
+        {
+          "page": 1,
+          "visual_review": "PASS",
+          "render_sha256": "75dfcdf6435f3fd71d80689cdd3bdd0d02db84b76cd09a642cc1b08011c9ba4e"
+        },
+        {
+          "page": 2,
+          "visual_review": "PASS",
+          "render_sha256": "77f9915616b8fdbfe66466d0496c1663cbc1916856b79f4f8e60396f212cddb7"
+        },
+        {
+          "page": 3,
+          "visual_review": "PASS",
+          "render_sha256": "b4352e215a61383533c92d1c6dc898e27ccf763cf72083f1e859ac39213cd1fb"
+        }
+      ]
+    },
+    {
+      "file": "centrum-bialka-po-50.html",
+      "html_sha256": "23af8bd7853c6ef4f026324578e378e38879095b4745c6d71f2cf576d536e391",
+      "pdf_sha256": "77dd3af0f10b9da88d102716122bced9f7f77c62af27c20c95112d66ec086a1e",
+      "desktop_width": 1440,
+      "mobile_width": 390,
+      "desktop_review": "PASS",
+      "mobile_review": "PASS",
+      "pdf_pages": [
+        {
+          "page": 1,
+          "visual_review": "PASS",
+          "render_sha256": "756f1ff51c7a474092c6184bf779230db15c929744db719cbb9f6b2613b224de"
+        },
+        {
+          "page": 2,
+          "visual_review": "PASS",
+          "render_sha256": "271a55c0678daa433cf227ef856a7edab8ffb534f24a2378d2de238b6d59550a"
+        },
+        {
+          "page": 3,
+          "visual_review": "PASS",
+          "render_sha256": "543dfea3fbe5a7b6bf4850ba28483635193780f4adee45c379964fad1316d948"
+        }
+      ]
+    },
+    {
+      "file": "centrum-treningu-silowego-po-50.html",
+      "html_sha256": "00e01d44ed297292abef82b9ae566c973941b01d912c4ecde078d6884f1ada79",
+      "pdf_sha256": "187ee6d3d80b4a4485d56a0bdd43ed9037d2113e04cf8e79083819faaeb41965",
+      "desktop_width": 1440,
+      "mobile_width": 390,
+      "desktop_review": "PASS",
+      "mobile_review": "PASS",
+      "pdf_pages": [
+        {
+          "page": 1,
+          "visual_review": "PASS",
+          "render_sha256": "091166f4e03bd8c0421bf596cd477cd8527ac82510abfef44966a126da79fe01"
+        },
+        {
+          "page": 2,
+          "visual_review": "PASS",
+          "render_sha256": "5a6ed0d51f1670187a813c33ca071346b66682ec08a57c3192ac3f332bdbe0f0"
+        },
+        {
+          "page": 3,
+          "visual_review": "PASS",
+          "render_sha256": "f29ebe0b1b41046a1059e64a9d9daf24d37fe5e6976c9cbab57f55341708dffc"
+        }
+      ]
+    },
+    {
+      "file": "centrum-cholesterolu-po-50.html",
+      "html_sha256": "194ed51570cc8450f33c3dfa94825b94267ada056a50dc3cef067e2b51ac8d74",
+      "pdf_sha256": "9a6f32fb824793d7243549a1f813ad564f1afd1a4f149591a240b821a536b941",
+      "desktop_width": 1440,
+      "mobile_width": 390,
+      "desktop_review": "PASS",
+      "mobile_review": "PASS",
+      "pdf_pages": [
+        {
+          "page": 1,
+          "visual_review": "PASS",
+          "render_sha256": "970196ddacd00c0f879ebae96fa98a5201cff934653902acc796eb07bb6bcab3"
+        },
+        {
+          "page": 2,
+          "visual_review": "PASS",
+          "render_sha256": "aaa4980732b599de5bbe1893c3460c9622398490926403d7aaa19f538e91d130"
+        },
+        {
+          "page": 3,
+          "visual_review": "PASS",
+          "render_sha256": "9c873ceacd95d0028801ba91e02c42ed2cb1f699215272cfd404d9af24a2f116"
+        }
+      ]
+    },
+    {
+      "file": "centrum-metabolizmu-po-50.html",
+      "html_sha256": "db25a74c2b6ec9f7a85a6bbb7a7fc3f2c2bf5e7beddea08b534d839cbbf3d31d",
+      "pdf_sha256": "4b1255b7e0d3120204045b246d5a4aa3c9fb98f8522daf63bd01fe9f6185c542",
+      "desktop_width": 1440,
+      "mobile_width": 390,
+      "desktop_review": "PASS",
+      "mobile_review": "PASS",
+      "pdf_pages": [
+        {
+          "page": 1,
+          "visual_review": "PASS",
+          "render_sha256": "3f8441b50e81d0295af0c36087fcfa5943cbe592b84410eaae0fe5fc2b821057"
+        },
+        {
+          "page": 2,
+          "visual_review": "PASS",
+          "render_sha256": "2c8935baf5462d39383dbdb05102f4135add1ad515d25109bc9920180dbe5289"
+        },
+        {
+          "page": 3,
+          "visual_review": "PASS",
+          "render_sha256": "f99c2e95e3cce76b11a703c720609c21b96a588cbe1738af3b509a02687a35c9"
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,8 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { pageKind } = require('./lib/publication-page-kind');
+const { prepareCenterPrint } = require('./lib/topic-center-print');
 
 function parseArgs(argv) {
   const out = {};
@@ -79,6 +81,13 @@ function isPdfFile(filePath) {
   return fs.readFileSync(filePath).subarray(0, 5).toString('ascii') === '%PDF-';
 }
 
+function isA4Page(info) {
+  const match = String(info).match(/^Page size:\s+([\d.]+) x ([\d.]+) pts\b/m);
+  // PDF coordinates are rounded differently by Chromium and ReportLab.
+  return Boolean(match && Math.abs(Number(match[1]) - 595.276) < 0.5
+    && Math.abs(Number(match[2]) - 841.89) < 0.5);
+}
+
 function validatePdfStructure(pdf, expectedText, expectedImages, renderDir, errors) {
   if (!isPdfFile(pdf)) {
     errors.push('Plik PDF jest pusty, uszkodzony albo nie ma nagłówka %PDF-.');
@@ -91,7 +100,7 @@ function validatePdfStructure(pdf, expectedText, expectedImages, renderDir, erro
   const info = command('pdfinfo', [pdf]);
   const pages = Number((info.match(/^Pages:\s+(\d+)/m) || [])[1] || 0);
   if (!pages) errors.push('PDF nie ma żadnej strony.');
-  if (!/^Page size:\s+595(?:\.\d+)? x 841(?:\.\d+)? pts \(A4\)/m.test(info)) errors.push('PDF nie ma formatu A4.');
+  if (!isA4Page(info)) errors.push('PDF nie ma formatu A4.');
 
   const fonts = command('pdffonts', [pdf]).split('\n').slice(2).filter((line) => line.trim());
   if (!fonts.length) errors.push('PDF nie zawiera rozpoznawalnych fontów.');
@@ -178,12 +187,12 @@ async function inspectHtml(page, url, viewport, screenshot, errors) {
       const rect = element.getBoundingClientRect();
       return !insideHorizontalScroller(element) && (rect.left < -1 || rect.right > window.innerWidth + 1);
     }).slice(0, 12).map((element) => `${element.tagName.toLowerCase()}.${String(element.className || '').split(/\s+/).slice(0, 2).join('.')}`);
-    const tinyText = [...document.querySelectorAll('article *')].filter(visible).filter((element) => {
+    const tinyText = [...document.querySelectorAll('main *, article *')].filter(visible).filter((element) => {
       if (!element.childNodes.length || ![...element.childNodes].some((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim())) return false;
       return Number.parseFloat(getComputedStyle(element).fontSize) < 10;
     }).slice(0, 12).map((element) => `${element.tagName.toLowerCase()}:${getComputedStyle(element).fontSize}`);
     const brokenImages = [...document.images].filter(visible).filter((image) => !image.complete || image.naturalWidth <= 0 || image.naturalHeight <= 0).map((image) => image.src);
-    const badDeclaredRatios = [...document.querySelectorAll('article img[width][height]')].filter(visible).filter((image) => {
+    const badDeclaredRatios = [...document.querySelectorAll('main img[width][height], article img[width][height]')].filter(visible).filter((image) => {
       const declared = Number(image.getAttribute('width')) / Number(image.getAttribute('height'));
       const natural = image.naturalWidth / image.naturalHeight;
       return !Number.isFinite(declared) || Math.abs(declared - natural) > 0.04;
@@ -237,7 +246,14 @@ async function main() {
   const mobile = await inspectHtml(page, pageUrl, { width: 390, height: 844 }, path.join(previewDir, 'mobile.png'), errors);
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(pageUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
-  const semantic = await page.evaluate(() => {
+  const center = pageKind(fs.readFileSync(html, 'utf8')) === 'topic_center';
+  if (center) await prepareCenterPrint(page);
+  const semantic = await page.evaluate((isCenter) => {
+    if (isCenter) {
+      const main = document.querySelector('main');
+      const tables = [...main.querySelectorAll('table')];
+      return { tables: tables.length, tableErrors: tables.filter((t) => !t.closest('.article-table-wrap')).map(() => 'Tabela bez kontenera przewijania'), tableMarkup: tables.map((t) => t.outerHTML).join('\n'), text: main.innerText, expectedImages: main.querySelectorAll('img').length };
+    }
     const tables = [...document.querySelectorAll('article table')];
     const tableErrors = [];
     tables.forEach((table, index) => {
@@ -249,7 +265,7 @@ async function main() {
     const textChunks = article ? [...article.querySelectorAll('h1, h2, h3, h4, p, li, caption, th, td, figcaption')].map((node) => node.textContent || '') : [];
     const expectedImages = (document.querySelector('section.article-intro-grid .article-hero img') ? 1 : 0) + document.querySelectorAll('article.article-content figure img').length;
     return { tables: tables.length, tableErrors, tableMarkup: tables.map((table) => table.outerHTML).join('\n'), text: `${title} ${textChunks.join(' ')}`, expectedImages };
-  });
+  }, center);
   semantic.tableErrors.forEach((error) => errors.push(error));
   validateSemanticTableMarkup(semantic.tableMarkup).forEach((error) => errors.push(error));
   await browser.close();
@@ -301,6 +317,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  isA4Page,
   inspectHtml,
   isPdfFile,
   multisetComparison,

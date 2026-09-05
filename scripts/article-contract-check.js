@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { pageKind } = require('./lib/publication-page-kind');
+const { validateTopicCenter } = require('./lib/topic-center-contract');
 const path = require('path');
 const { validateArticleHeadContract } = require('./lib/article-head-contract');
 const { POLICY, utils, validators } = require('./lib/article-policy');
@@ -10,6 +12,7 @@ function countMatches(raw, regex) {
 }
 
 function validateArticleContract(filePath) {
+  if (pageKind(fs.readFileSync(filePath, 'utf8')) === 'topic_center') return validateTopicCenter(filePath);
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
   const warnings = [];

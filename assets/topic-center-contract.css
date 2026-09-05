@@ -1,0 +1,7 @@
+.hub-theme-snu { --hub-accent:#5577d8; --hub-accent-soft:#edf1ff; }
+.hub-theme-bialka { --hub-accent:#d98934; --hub-accent-soft:#fff3df; }
+.hub-theme-treningu-silowego { --hub-accent:#ef8d3d; --hub-accent-soft:#fff1e6; }
+.hub-theme-cholesterolu { --hub-accent:#6b9f58; --hub-accent-soft:#eff8ea; }
+.hub-theme-metabolizmu { --hub-accent:#c96c3f; --hub-accent-soft:#fff0e8; }
+.topic-center .hub-content-grid { display: block; }
+.topic-center .medical-disclaimer { font-size: .875rem; margin-top: 1.5rem; }

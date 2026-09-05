@@ -212,6 +212,8 @@ Artykuł nie przechodzi, jeśli:
 - Kategoryczny zakaz dopisywania zmyślonych źródeł tylko po to, by dobić do minimum.
 
 ## 12a. Logic, Evidence & FAQ Contract
+- Kontrola odwołań „poniżej”/„powyżej” obejmuje także sekcję źródeł: odsyłacz musi odpowiadać rzeczywistemu położeniu FAQ w HTML i PDF. Przy zmianie układu użyj jednoznacznej nazwy sekcji.
+- Centrum tematyczne zachowuje układ `hub-shell/main/hub-title` i przechodzi [kontrakt centrów](docs/topic-center-pipeline.md), w tym research, mapę tez, źródła, PDF i pełną kontrolę desktop/mobile. Nie wolno naprawiać go przez wymuszanie klas szablonu zwykłego artykułu.
 - Każdy akapit, quick answer, wniosek, FAQ, info box, takeaway i podpis grafiki przechodzi kontrolę logiczną.
 - Odniesienia typu „ta obietnica”, „ta reklama”, „taki przekaz”, „to zdanie” i „ten wniosek” muszą w tym samym fragmencie nazwać dokładne twierdzenie.
 - Metafora musi w tym samym fragmencie zostać domknięta rzeczywistym mechanizmem. Sam obraz „korka”, „silnika”, „resetu” albo „tarczy” jest błędem blokującym.

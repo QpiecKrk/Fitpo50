@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { pageKind } = require('./lib/publication-page-kind');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const LLMS_TXT_PATH = path.join(ROOT_DIR, 'llms.txt');
@@ -100,6 +101,7 @@ function extractDescription(html) {
 }
 
 function extractArticleHtml(html) {
+  if (pageKind(html) === 'topic_center') return html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] || '';
   const m = html.match(/<article[^>]*class="[^"]*article-content[^"]*"[^>]*>([\s\S]*?)<\/article>/i);
   return m ? m[1] : '';
 }

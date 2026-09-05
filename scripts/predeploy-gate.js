@@ -15,6 +15,8 @@ const { spawnSync } = require('child_process');
 const { validateArticleHeadFile } = require('./lib/article-head-contract');
 const { validators, POLICY, utils } = require('./lib/article-policy');
 const { categoryPageFromImportCategory } = require('./lib/categories');
+const { pageKind } = require('./lib/publication-page-kind');
+const { validateTopicCenter } = require('./lib/topic-center-contract');
 
 const ROOT = process.cwd();
 
@@ -666,6 +668,18 @@ function main() {
     if (!exists(slugMirror)) errors.push(`Brak pliku artykulu w _site: ${slugMirror}`);
 
     const slugNeedle = `${slug}.html`;
+    const center = exists(slugFile) && pageKind(readUtf8(slugFile)) === 'topic_center';
+    if (center) {
+      const contract = validateTopicCenter(path.join(ROOT, slugFile));
+      contract.errors.forEach((error) => errors.push(`${slugFile}: ${error}`));
+      if (!indexHtml.includes(slugNeedle)) errors.push(`index.html nie prowadzi do centrum ${slugNeedle}`);
+      if (!hasInSitemap(sitemapXml, slugNeedle)) errors.push(`sitemap.xml nie zawiera ${slugNeedle}`);
+      if (!llmsTxt.includes(`https://fitpo50.pl/${slugNeedle}`)) errors.push(`llms.txt nie zawiera ${slugNeedle}`);
+      assertFileMirror(slugFile, errors);
+      const pdf = `assets/pdf/${slug}.pdf`;
+      if (!exists(pdf)) errors.push(`Brak PDF centrum: ${pdf}`);
+      else assertFileMirror(pdf, errors);
+    } else {
     const importJson = readImportJsonBySlug(slug);
     const categoryPage = categoryPageFromImportCategory(importJson?.category)
       || inferCategoryPageFromListings(slugNeedle);
@@ -695,6 +709,7 @@ function main() {
       contract.warnings.forEach((w) => warnings.push(`${slugFile}: ${w}`));
       validateArticleHeroConsistency(slugFile, errors, warnings);
       validateQuickAnswerPolicyForSlug(slugFile, errors, warnings);
+    }
     }
   }
 

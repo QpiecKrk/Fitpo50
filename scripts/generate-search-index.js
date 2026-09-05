@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { pageKind } = require('./lib/publication-page-kind');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const DEFAULT_OUTPUT = path.join(ROOT_DIR, 'assets', 'data', 'search-index.json');
@@ -77,7 +78,7 @@ function deriveCategory(bodyClass, sectionMeta, articlePath) {
 }
 
 function isArticleHtml(html) {
-  return /<body[^>]*class="[^"]*article-template[^"]*"/i.test(html) && /<article[^>]*class="[^"]*article-content[^"]*"/i.test(html);
+  return pageKind(html) !== 'unsupported';
 }
 
 function buildEntry(fileName, html) {
@@ -88,7 +89,9 @@ function buildEntry(fileName, html) {
   const readTime = extractFirst(html, /<span[^>]*>\s*(\d+\s*min\s*czytania)\s*<\/span>/i);
 
   const articleMatch = html.match(/<article[^>]*class="[^"]*article-content[^"]*"[^>]*>([\s\S]*?)<\/article>/i);
-  const articleHtml = articleMatch ? articleMatch[1] : '';
+  const articleHtml = pageKind(html) === 'topic_center'
+    ? (html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] || '')
+    : (articleMatch ? articleMatch[1] : '');
 
   const headings = extractAll(articleHtml, /<h2[^>]*>([\s\S]*?)<\/h2>/gi);
   const content = normalizeSpace(decodeHtmlEntities(stripTags(articleHtml)));
@@ -101,7 +104,7 @@ function buildEntry(fileName, html) {
     slug: fileName,
     url: fileName,
     title,
-    category: deriveCategory(bodyClass, sectionMeta, fileName),
+    category: pageKind(html) === 'topic_center' ? 'Centra tematyczne' : deriveCategory(bodyClass, sectionMeta, fileName),
     readTime: readTime || '',
     description,
     headings,
