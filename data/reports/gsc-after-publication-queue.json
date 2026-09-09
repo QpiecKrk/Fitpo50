@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-08-26T12:27:21.877Z",
+  "updated_at": "2026-09-08T07:34:43.014Z",
   "items": [
+    {
+      "slug": "jak-wyglada-25-30-g-bialka",
+      "target_url": "https://fitpo50.pl/jak-wyglada-25-30-g-bialka.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/jedzenie.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-09-08T07:34:43.014Z",
+      "transaction_id": "article-jak-wyglada-25-30-g-bialka-1788852860236-31242",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "szczepionki-mrna-covid-a-rak",
       "target_url": "https://fitpo50.pl/szczepionki-mrna-covid-a-rak.html",

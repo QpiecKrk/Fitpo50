@@ -447,3 +447,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Metabolizm po 50: brzuch, wyniki i wybór poradnika | FitPo50"
   section: "Centra tematyczne"
   summary: "Metabolizm i brzuch po 50: wybierz poradnik o obwodzie pasa, jedzeniu, ruchu i śnie. Oddziel pomiary od diagnozy i przygotuj konkretne pytania do konsultacji."
+- url: https://fitpo50.pl/jak-wyglada-25-30-g-bialka.html
+  title: "Jak wygląda 25–30 g białka na talerzu? Porcje, które warto znać | FitPo50"
+  section: "Jedzenie"
+  summary: "Ile kurczaka, ryby, jajek, twarogu, tofu czy soczewicy daje około 25–30 g białka? Tabele porcji po obróbce, siedem gotowych posiłków i najczęstsze pomyłki."

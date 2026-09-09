@@ -320,7 +320,7 @@ function normalizeEvidenceClaims(claims, sources, sections) {
       ? claim.source_urls
       : (Array.isArray(claim?.sources) ? claim.sources.map((id) => sourceById.get(String(id || '').trim())).filter(Boolean) : []);
     return {
-      claim: location ? firstEvidenceSentence(fragment) : stripTags(String(claim?.claim || '')).trim(),
+      claim: locationMatch ? firstEvidenceSentence(fragment) : stripTags(String(claim?.claim || '')).trim(),
       location,
       claim_type: String(claim?.claim_type || claim?.claimType || inferClaimType(fragment)).trim().toLowerCase(),
       source_urls: [...new Set(sourceUrls)],

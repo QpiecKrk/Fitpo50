@@ -1,0 +1,620 @@
+{
+  "version": 1,
+  "transaction_id": "article-jak-wyglada-25-30-g-bialka-1788852860236-31242",
+  "generated_at": "2026-09-08T07:34:43.058Z",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "jak-wyglada-25-30-g-bialka",
+  "url": "https://fitpo50.pl/jak-wyglada-25-30-g-bialka.html",
+  "manifest_file": "data/reports/article-publications/jak-wyglada-25-30-g-bialka.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "jak-wyglada-25-30-g-bialka.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ade3f0a74a79355d62e2bcf94a98426762589c075ae57a4cbb6d72727b59f641",
+      "bytes": 55066
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "d0f984c7aa79eb3208afe341af44ca5b3eafcc9e0263e26bc8de072a05791018",
+      "after_sha256": "060fd0d2746db1aefb0e152b2699a98d4bed892eabe7f25c0c338a83b4a4a895",
+      "bytes": 119788
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "75fd1a7e46fe7107c96215c6c11ea48e8c5fba455019515e4f00d41eea481eb3",
+      "after_sha256": "0d9269f388ebdc2098eca76090de748df09ec831abbb7e373583a3b724ed01e5",
+      "bytes": 155953
+    },
+    {
+      "path": "jedzenie.html",
+      "action": "UPDATE",
+      "before_sha256": "43bf4fd6d68061cb4e4556d4f17f67cde00bdba37f9b3ad5fd431e40adc60b62",
+      "after_sha256": "c1227b518cdc922243f99376614f1facfb4c2f653028d9efbf676ad98066ca31",
+      "bytes": 48337
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "304edccb9d804ffe8b7d6b2d1f97b923aa39da7e7717d573de9aa0ee0677a2ac",
+      "after_sha256": "9b8587a5ea9d3bceb3d009afaa0419879392ab6c8d16dee57ab8e9f9d7449145",
+      "bytes": 18875
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "160b6b959b22ff11ffa835b3c1bc9c54770cee9bc0e765b4f19e6f57255c4f68",
+      "after_sha256": "c612720c635ab51dc65555db66b5dc5a9490820e4e7577f97bebf3e205663cb6",
+      "bytes": 36873
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "fe31b7b4df8768e94efe307e6ad060ebbbd330ee5b496ae247d2bfac63f9fc37",
+      "after_sha256": "ebe2b61ca00751ea30b7f7b7b1b4882e319090e64ceb53fe8ee921264632e34c",
+      "bytes": 747111
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "8c966aac5ec120f8834cbb41804e9305715524cf3c06541172e6e68a9d12d254",
+      "after_sha256": "ab01c1ef6960b3e7c45a3355564c9c02845a6232424a6a4d4905aa33719b80d3",
+      "bytes": 790518
+    },
+    {
+      "path": "assets/pdf/jak-wyglada-25-30-g-bialka.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "491e43a656cd636ee8089cb820bb2d4eea9570eaa971a1929e68b7147018791f",
+      "bytes": 637285
+    },
+    {
+      "path": "data/crosslink-suggestions/jak-wyglada-25-30-g-bialka.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d128321ba31cd84dd88c159556fc2d5ce0ff2944a1b03149331eccba3a4b2035",
+      "bytes": 1312
+    },
+    {
+      "path": "data/reports/article-preview/jak-wyglada-25-30-g-bialka.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0e68dc370446c58ec14faf44bcf0a40cdf0f8f3f154a85357ba111fc36661772",
+      "bytes": 992
+    },
+    {
+      "path": "data/reports/article-preview/jak-wyglada-25-30-g-bialka.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fa1700a5fe38d6274c50ad636b207e7e45d41ff1c57266f1733ef85a7e5c70f1",
+      "bytes": 290
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "22d5855da3e7751f9f5fa28098afe9063bcbae85c47a0dd3e5d49a71516e7cf0",
+      "after_sha256": "45d4f447966cf5a5cfbd021da2b76aa74a27bdfa78b5f08ba5b75d5e74020368",
+      "bytes": 28429
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "b0c8a93d7d96a10f0c54ca7b0d0c9b55cdebd9a36f46a7df5d0f4ae7bf5b8e7c",
+      "after_sha256": "90637d7500db83d9c0711d3c3401de3894b79dcaa32d6675a87a31f0b0cd5966",
+      "bytes": 2140
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "89775e2aaf9c5163d97e2950dacea2ed7f48c734b4079180f4bb01ca88554e16",
+      "after_sha256": "2e94c33191120dd33ef226f32e5e5741e2f947f31e11cb776676ecdfcc7214ba",
+      "bytes": 1005
+    },
+    {
+      "path": "_site/jak-wyglada-25-30-g-bialka.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ade3f0a74a79355d62e2bcf94a98426762589c075ae57a4cbb6d72727b59f641",
+      "bytes": 55066
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "d0f984c7aa79eb3208afe341af44ca5b3eafcc9e0263e26bc8de072a05791018",
+      "after_sha256": "060fd0d2746db1aefb0e152b2699a98d4bed892eabe7f25c0c338a83b4a4a895",
+      "bytes": 119788
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "75fd1a7e46fe7107c96215c6c11ea48e8c5fba455019515e4f00d41eea481eb3",
+      "after_sha256": "0d9269f388ebdc2098eca76090de748df09ec831abbb7e373583a3b724ed01e5",
+      "bytes": 155953
+    },
+    {
+      "path": "_site/jedzenie.html",
+      "action": "UPDATE",
+      "before_sha256": "43bf4fd6d68061cb4e4556d4f17f67cde00bdba37f9b3ad5fd431e40adc60b62",
+      "after_sha256": "c1227b518cdc922243f99376614f1facfb4c2f653028d9efbf676ad98066ca31",
+      "bytes": 48337
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "304edccb9d804ffe8b7d6b2d1f97b923aa39da7e7717d573de9aa0ee0677a2ac",
+      "after_sha256": "9b8587a5ea9d3bceb3d009afaa0419879392ab6c8d16dee57ab8e9f9d7449145",
+      "bytes": 18875
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "160b6b959b22ff11ffa835b3c1bc9c54770cee9bc0e765b4f19e6f57255c4f68",
+      "after_sha256": "c612720c635ab51dc65555db66b5dc5a9490820e4e7577f97bebf3e205663cb6",
+      "bytes": 36873
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "03245cc980cd654b2f03192b0189357a1a87c6f876f7d06f8665c107c3f33ef5",
+      "after_sha256": "ebe2b61ca00751ea30b7f7b7b1b4882e319090e64ceb53fe8ee921264632e34c",
+      "bytes": 747111
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "8c966aac5ec120f8834cbb41804e9305715524cf3c06541172e6e68a9d12d254",
+      "after_sha256": "ab01c1ef6960b3e7c45a3355564c9c02845a6232424a6a4d4905aa33719b80d3",
+      "bytes": 790518
+    },
+    {
+      "path": "_site/assets/pdf/jak-wyglada-25-30-g-bialka.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "491e43a656cd636ee8089cb820bb2d4eea9570eaa971a1929e68b7147018791f",
+      "bytes": 637285
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/jak-wyglada-25-30-g-bialka.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d128321ba31cd84dd88c159556fc2d5ce0ff2944a1b03149331eccba3a4b2035",
+      "bytes": 1312
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-hero.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "352fd4e901d7d6d916ed1a1bf11f34c688d8f0fa3499ad23db50f2c4b659136d",
+      "bytes": 209591
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-hero.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "352fd4e901d7d6d916ed1a1bf11f34c688d8f0fa3499ad23db50f2c4b659136d",
+      "bytes": 209591
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-hero.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d5749eb0c8b772bea9be5d3b0e93ffa78fb3067dd1c0772222ef539816b17811",
+      "bytes": 66902
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-hero.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d5749eb0c8b772bea9be5d3b0e93ffa78fb3067dd1c0772222ef539816b17811",
+      "bytes": 66902
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-hero.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8011755713a3b085e1cc895f3c3153814cf11851e4f34780d076113cc3c7d5be",
+      "bytes": 47636
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-hero.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8011755713a3b085e1cc895f3c3153814cf11851e4f34780d076113cc3c7d5be",
+      "bytes": 47636
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-krotka-odpowiedz.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "300645f1803f4390ab0072b6c77d618107ebbd6c546933d95da39d53f0203398",
+      "bytes": 233657
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-krotka-odpowiedz.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "300645f1803f4390ab0072b6c77d618107ebbd6c546933d95da39d53f0203398",
+      "bytes": 233657
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-krotka-odpowiedz.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e0a88ef2b966df257693279306c17c991202d81293d28fba4f477c33f7dcf037",
+      "bytes": 81482
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-krotka-odpowiedz.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e0a88ef2b966df257693279306c17c991202d81293d28fba4f477c33f7dcf037",
+      "bytes": 81482
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-krotka-odpowiedz.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "32ff6c507423a5b81104bba5c62983931fd0d61a8616fc436a684495b86cccc7",
+      "bytes": 56092
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-krotka-odpowiedz.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "32ff6c507423a5b81104bba5c62983931fd0d61a8616fc436a684495b86cccc7",
+      "bytes": 56092
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-skad-liczba.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2a20ffb3b61436c506387b5e971b4333748996e338f0bf25c916f9cd6df98c3d",
+      "bytes": 122591
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-skad-liczba.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2a20ffb3b61436c506387b5e971b4333748996e338f0bf25c916f9cd6df98c3d",
+      "bytes": 122591
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-skad-liczba.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5cb442aadabbf31a651a8924c909448875738a9fbce851cbf16d4c11c72c80f9",
+      "bytes": 37182
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-skad-liczba.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5cb442aadabbf31a651a8924c909448875738a9fbce851cbf16d4c11c72c80f9",
+      "bytes": 37182
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-skad-liczba.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e38fbe9f5c0bee0ea714ed027a49f45c2e82863bd864f7727e45c9a00754a931",
+      "bytes": 25030
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-skad-liczba.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e38fbe9f5c0bee0ea714ed027a49f45c2e82863bd864f7727e45c9a00754a931",
+      "bytes": 25030
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-zwierzece.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2da020a76206d51b493fb09a88363dce796dc91afdfb7a9bb0cc0397c45dfbed",
+      "bytes": 190417
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-zwierzece.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2da020a76206d51b493fb09a88363dce796dc91afdfb7a9bb0cc0397c45dfbed",
+      "bytes": 190417
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-zwierzece.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fdf388b9e3bdc8d05d21c4ce7a6518a050a57ff5d756adc3565664d52a15d5a1",
+      "bytes": 60656
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-zwierzece.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fdf388b9e3bdc8d05d21c4ce7a6518a050a57ff5d756adc3565664d52a15d5a1",
+      "bytes": 60656
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-zwierzece.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "317aff8a45220c3e567d368def756893ead892b7bf4aa01dbf80475db1a54e45",
+      "bytes": 45210
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-zwierzece.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "317aff8a45220c3e567d368def756893ead892b7bf4aa01dbf80475db1a54e45",
+      "bytes": 45210
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-roslinne.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5ee8ce38bda20ce91f1b984798610f4c6d839b79d15792c2a1e99082526f5d10",
+      "bytes": 191014
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-roslinne.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5ee8ce38bda20ce91f1b984798610f4c6d839b79d15792c2a1e99082526f5d10",
+      "bytes": 191014
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-roslinne.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8091c17c208f75dd8acbfa1833d0bf14aa088d17377770ffeaacdd9d8e94011c",
+      "bytes": 45770
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-roslinne.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8091c17c208f75dd8acbfa1833d0bf14aa088d17377770ffeaacdd9d8e94011c",
+      "bytes": 45770
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-roslinne.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aae921229852fc2fc1df471bb974af8c22b650162bf4606090ced90d26c137a4",
+      "bytes": 38967
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-roslinne.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aae921229852fc2fc1df471bb974af8c22b650162bf4606090ced90d26c137a4",
+      "bytes": 38967
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-surowe-gotowane.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "af0b0dacb399bd59f3087b1f6dc3ef47d398b7c487ebfcd45e49c49c44bdf9ee",
+      "bytes": 210108
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-surowe-gotowane.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "af0b0dacb399bd59f3087b1f6dc3ef47d398b7c487ebfcd45e49c49c44bdf9ee",
+      "bytes": 210108
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-surowe-gotowane.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "78fe118e68d0e359935b6b771a53ccb9d0626027e07cc12bf226d24876edbc51",
+      "bytes": 75582
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-surowe-gotowane.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "78fe118e68d0e359935b6b771a53ccb9d0626027e07cc12bf226d24876edbc51",
+      "bytes": 75582
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-surowe-gotowane.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a78b0889b5e27a5d8ce20f170f721f3b5e823804aefc2d6e41c68dc81d536091",
+      "bytes": 54450
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-surowe-gotowane.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a78b0889b5e27a5d8ce20f170f721f3b5e823804aefc2d6e41c68dc81d536091",
+      "bytes": 54450
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-posilki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f3ebc1cbc0ef516126d0656a526ace455bf7226f4a4be4739f867e150350821e",
+      "bytes": 259965
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-posilki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f3ebc1cbc0ef516126d0656a526ace455bf7226f4a4be4739f867e150350821e",
+      "bytes": 259965
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-posilki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2933e38a70f9c03b3c45f61f043e38cb51c33184a27c249186daf0ba34cec78e",
+      "bytes": 96798
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-posilki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2933e38a70f9c03b3c45f61f043e38cb51c33184a27c249186daf0ba34cec78e",
+      "bytes": 96798
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-posilki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d32a8259b1fbd2c7f1f8a4e748f3a061e4d1780821b167579cb5df2811d38945",
+      "bytes": 64592
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-posilki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d32a8259b1fbd2c7f1f8a4e748f3a061e4d1780821b167579cb5df2811d38945",
+      "bytes": 64592
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-pomylki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cfd3a2456ce1ac60da015cdc0a54166d47e8cd75c73465820733772743375dcf",
+      "bytes": 121435
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-pomylki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cfd3a2456ce1ac60da015cdc0a54166d47e8cd75c73465820733772743375dcf",
+      "bytes": 121435
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-pomylki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e1211aafc8cefe02c6024721c844293b527a5e4d4b377d417222880918f068c4",
+      "bytes": 31790
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-pomylki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e1211aafc8cefe02c6024721c844293b527a5e4d4b377d417222880918f068c4",
+      "bytes": 31790
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-pomylki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "67dbcf69734c34693c1000567ebd1f069b7cf3b9ec8e620905aa1e9211500e6a",
+      "bytes": 25407
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-pomylki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "67dbcf69734c34693c1000567ebd1f069b7cf3b9ec8e620905aa1e9211500e6a",
+      "bytes": 25407
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-bezpieczenstwo.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7b569d18dd66b13107d5947054646d5e871d89d5023288f48b619b97e3783fc2",
+      "bytes": 192473
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-bezpieczenstwo.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7b569d18dd66b13107d5947054646d5e871d89d5023288f48b619b97e3783fc2",
+      "bytes": 192473
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-bezpieczenstwo.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "604e666a270e5aa20cdd1d78eaf9840002d2c3d677ae50361ef11f6f7a7605e8",
+      "bytes": 59492
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-bezpieczenstwo.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "604e666a270e5aa20cdd1d78eaf9840002d2c3d677ae50361ef11f6f7a7605e8",
+      "bytes": 59492
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-bezpieczenstwo.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "85e11b3d66e59138f900d1f80d5a16a635950ff4943cbf29bba644b7e558ad44",
+      "bytes": 44019
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-bezpieczenstwo.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "85e11b3d66e59138f900d1f80d5a16a635950ff4943cbf29bba644b7e558ad44",
+      "bytes": 44019
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-bez-wagi.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "421d4f86a6a4d620d4f4ec61a3b0d218d78ca980ef90645bc55e2568d73fd01e",
+      "bytes": 192059
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-bez-wagi.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "421d4f86a6a4d620d4f4ec61a3b0d218d78ca980ef90645bc55e2568d73fd01e",
+      "bytes": 192059
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-bez-wagi.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "37e1442b4335b80e8538646c8ca02466c4bea15fd47ea9d515f835b825b2e985",
+      "bytes": 63126
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-bez-wagi.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "37e1442b4335b80e8538646c8ca02466c4bea15fd47ea9d515f835b825b2e985",
+      "bytes": 63126
+    },
+    {
+      "path": "assets/jak-wyglada-25-30-g-bialka-bez-wagi.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c05badc738d37c0d3fcf77c7600801856fb1c3d0171e7daec4e1899867a03c1",
+      "bytes": 46897
+    },
+    {
+      "path": "_site/assets/jak-wyglada-25-30-g-bialka-bez-wagi.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c05badc738d37c0d3fcf77c7600801856fb1c3d0171e7daec4e1899867a03c1",
+      "bytes": 46897
+    }
+  ],
+  "files_count": 85
+}

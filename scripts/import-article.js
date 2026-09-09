@@ -1613,14 +1613,19 @@ function updateLlms(slug, title, section, summary, dryRun) {
   }
 
   if (!dryRun) {
-    fs.writeFileSync(LLMS_PATH, `${content}\n`, 'utf8');
+    const normalizedContent = singleTrailingNewline(content);
+    fs.writeFileSync(LLMS_PATH, normalizedContent, 'utf8');
     const siteMirror = path.join(ROOT, '_site', 'llms.txt');
     if (fs.existsSync(path.dirname(siteMirror))) {
-      fs.writeFileSync(siteMirror, `${content}\n`, 'utf8');
+      fs.writeFileSync(siteMirror, normalizedContent, 'utf8');
     }
   }
 
   return { changed, file: 'llms.txt' };
+}
+
+function singleTrailingNewline(value) {
+  return `${String(value || '').trimEnd()}\n`;
 }
 
 function escapeHtmlAttr(value) {
@@ -2263,6 +2268,8 @@ function normalizePayload(data, cliCategory, options = {}) {
     timeRequiredIso: toIsoDuration(readingTime),
     heroImage,
     heroAlt,
+    heroWidth,
+    heroHeight,
     heroMotto,
     keyTakeaways,
     sections,
@@ -2609,4 +2616,12 @@ if (require.main === module) {
   });
 }
 
-module.exports = { ensureCaptionedTables, main, normalizeSections, normalizeSeoTitleBase, submitIndexNow };
+module.exports = {
+  ensureCaptionedTables,
+  main,
+  normalizePayload,
+  normalizeSections,
+  normalizeSeoTitleBase,
+  singleTrailingNewline,
+  submitIndexNow,
+};

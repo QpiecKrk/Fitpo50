@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-08T07:34:43.004Z",
+  "slug": "jak-wyglada-25-30-g-bialka",
+  "html_sha256": "ade3f0a74a79355d62e2bcf94a98426762589c075ae57a4cbb6d72727b59f641",
+  "site_html_sha256": "ade3f0a74a79355d62e2bcf94a98426762589c075ae57a4cbb6d72727b59f641",
+  "pdf_sha256": "491e43a656cd636ee8089cb820bb2d4eea9570eaa971a1929e68b7147018791f",
+  "site_pdf_sha256": "491e43a656cd636ee8089cb820bb2d4eea9570eaa971a1929e68b7147018791f",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 2
+  },
+  "pdf": {
+    "pages": 10,
+    "text_coverage": 0.9933,
+    "rendered_pages": 10
+  },
+  "errors": []
+}

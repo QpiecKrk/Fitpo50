@@ -182,6 +182,16 @@ test('American College of Cardiology guidance is recognized as a strong institut
   assert.equal(result.ok, true, result.errors.join('\n'));
 });
 
+test('ESPEN guideline is recognized as a strong institutional source', () => {
+  const json = validEvidenceJson();
+  const espen = 'https://www.espen.org/files/ESPEN-Guidelines/example.pdf';
+  json.sources[0].url = espen;
+  json.sources[0].evidence_level = 'guideline';
+  json.evidence_claims[0].source_urls = [espen, json.sources[1].url];
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
 test('strict autofix never invents quick answers, FAQ, research or sources', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-no-faq-autofix-'));
   try {
@@ -277,6 +287,41 @@ test('base JSON fixer translates legacy Claude source and claim fields without i
     assert.equal(after.evidence_claims[0].location, 'sections[0].paragraphs_html[0]');
     assert.deepEqual(after.evidence_claims[0].source_urls, ['https://doi.org/10.1000/example']);
     assert.match(after.evidence_claims[0].claim, /Kohorta wykazała wyższe ryzyko/);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('base JSON fixer preserves evidence claims outside article sections', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-global-evidence-'));
+  try {
+    const file = path.join(dir, 'global-evidence.fitpo50.json');
+    const sourceUrl = 'https://pubmed.ncbi.nlm.nih.gov/25056502/';
+    fs.writeFileSync(file, `${JSON.stringify({
+      slug: 'global-evidence-test',
+      title: 'Test przypisów we wstępie i krótkiej odpowiedzi artykułu',
+      seo_title: 'Test przypisów we wstępie i krótkiej odpowiedzi',
+      meta_description: 'Kontrolny opis sprawdzający zachowanie przypisów do wstępu, krótkiej odpowiedzi oraz kluczowych wniosków podczas bezpiecznej normalizacji JSON.',
+      category: 'zdrowie',
+      date_published: TODAY,
+      lead: 'Badanie objęło starszych mężczyzn i porównało odpowiedź po różnych ilościach białka.',
+      quick_answer: 'Badanie objęło starszych mężczyzn i wykazało różną odpowiedź po kilku ilościach białka podanych w jednym posiłku. To zdanie ma wystarczającą długość do sprawdzenia normalizacji krótkiej odpowiedzi bez dopisywania nowych twierdzeń przez fixer.',
+      key_takeaways: ['Badanie objęło starszych mężczyzn.', 'Drugi wniosek.', 'Trzeci wniosek.', 'Czwarty wniosek.'],
+      sections: [{ title: 'Co sprawdzono w badaniu?', paragraphs_html: ['<p>Autorzy porównali kilka ilości białka.</p>'], image: {} }],
+      answer_blocks: [],
+      sources: [{ label: 'Moore et al. 2015 (PubMed)', url: sourceUrl, evidence_level: 'primary_research', checked_at: TODAY, url_status: 'reachable', http_status: 200 }],
+      evidence_claims: [
+        { claim: 'Badanie objęło starszych mężczyzn', location: 'lead', claim_type: 'general', source_urls: [sourceUrl] },
+        { claim: 'Badanie objęło starszych mężczyzn', location: 'quick_answer', claim_type: 'general', source_urls: [sourceUrl] },
+        { claim: 'Badanie objęło starszych mężczyzn', location: 'key_takeaways[0]', claim_type: 'general', source_urls: [sourceUrl] },
+      ],
+      faq_research: [],
+      image_prompts: [],
+    }, null, 2)}\n`);
+    spawnSync('node', ['scripts/fix-fitpo50-json.js', '--file', file, '--write', 'true', '--allow-outside-repo', 'true'], { cwd: REPO, encoding: 'utf8' });
+    const after = JSON.parse(fs.readFileSync(file, 'utf8'));
+    assert.deepEqual(after.evidence_claims.map((item) => item.location), ['lead', 'quick_answer', 'key_takeaways[0]']);
+    assert.ok(after.evidence_claims.every((item) => item.claim.includes('Badanie objęło starszych mężczyzn')));
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

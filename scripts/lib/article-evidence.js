@@ -30,7 +30,7 @@ const STRONG_SOURCE_HOSTS = [
   'escardio.org', 'ptkardio.pl', 'heart.org', 'ahajournals.org', 'acc.org', 'acsm.org',
   'diabetesjournals.org', 'thelancet.com', 'nejm.org', 'jamanetwork.com', 'bmj.com',
   'nature.com', 'sciencedirect.com', 'springer.com', 'wiley.com', 'oup.com',
-  'journals.plos.org', 'frontiersin.org', 'europepmc.org', 'doi.org',
+  'journals.plos.org', 'frontiersin.org', 'europepmc.org', 'doi.org', 'espen.org',
 ];
 const EVIDENCE_CLAIM_PATTERN = /\b(ryzyk[oa]|zmniejsza|zwiększa|obniża|podnosi|powoduje|zapobiega|leczy|leczenie|terapia|skuteczn|bezpieczn|przeciwwskaz|dawk[aię]|norm[ay]|rozpozn|diagnoz|objaw|ciśnieni|cholesterol|glukoz|insulin|nowotwor|zawał|udar|śmiertelno|badani[eu]|metaanaliz|przegląd systematyczny)\b/iu;
 const NUMBERED_CLAIM_PATTERN = /\b\d+(?:[.,]\d+)?(?:\s*[–-]\s*\d+(?:[.,]\d+)?)?\s*(?:%|mg|g|kg|µg|mcg|mmol|nmol|mmhg|cm|mm|godzin|godziny|dni|tygodni|miesięcy|lat|razy)\b/iu;

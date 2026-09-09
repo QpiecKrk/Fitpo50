@@ -392,7 +392,7 @@ body.article-template .pdf-hero-download__badge.pdf-hero-download__badge--share:
   background: rgba(205, 229, 246, 0.96);
   color: #305368;
   padding: 1px 3px;
-  font-size: 0.4rem;
+  font-size: 0.625rem;
 }
 
 body.article-template .pdf-hero-download:hover {
@@ -408,7 +408,7 @@ body.article-template .pdf-hero-download:focus-visible {
 
 body.article-template .pdf-hero-download__eyebrow {
   font-family: var(--font-ui);
-  font-size: clamp(0.54rem, 0.69vw, 0.66rem);
+  font-size: clamp(0.625rem, 0.75vw, 0.7rem);
   letter-spacing: 0.01em;
   text-transform: none;
   color: rgba(255, 255, 255, 0.86);
@@ -445,7 +445,7 @@ body.article-template .pdf-hero-download__badge {
   background: rgba(255, 255, 255, 0.14);
   color: transparent;
   font-family: var(--font-ui);
-  font-size: 0;
+  font-size: 0.625rem;
   pointer-events: none;
 }
 
@@ -472,7 +472,7 @@ body.article-template .pdf-hero-download__badge::after {
   background: rgba(205, 229, 246, 0.96);
   color: #305368;
   font-family: var(--font-ui);
-  font-size: 0.44rem;
+  font-size: 0.625rem;
   font-weight: 800;
   letter-spacing: 0.03em;
 }
@@ -802,7 +802,7 @@ body.article-template .medical-disclaimer {
     min-width: 44px;
     height: 28px;
     padding: 0 6px;
-    font-size: 0.58rem;
+    font-size: 0.625rem;
   }
 
   body.article-template .pdf-hero-download__eyebrow {
