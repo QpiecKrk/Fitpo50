@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { withChromium } = require('./lib/playwright-lifecycle');
 
 function parseArgs(argv) {
   const out = {};
@@ -75,37 +76,35 @@ async function main() {
     process.exit(1);
   }
 
-  const browser = await playwright.chromium.launch({ headless: true });
-  const page = await browser.newPage();
-
   const failures = [];
+  await withChromium(playwright.chromium, async (browser) => {
+    const page = await browser.newPage();
+    page.setDefaultTimeout(15000);
+    for (const t of targets) {
+      await page.setViewportSize(t.viewport);
+      await page.goto(`file://${path.join(siteDir, t.file)}`, { waitUntil: 'load' });
+      const currentPath = path.join(currentDir, `${t.name}.png`);
+      await page.screenshot({ path: currentPath, fullPage: true });
 
-  for (const t of targets) {
-    await page.setViewportSize(t.viewport);
-    await page.goto(`file://${path.join(siteDir, t.file)}`, { waitUntil: 'load' });
-    const currentPath = path.join(currentDir, `${t.name}.png`);
-    await page.screenshot({ path: currentPath, fullPage: true });
+      const basePath = path.join(baselineDir, `${t.name}.png`);
+      if (updateBaseline || !fs.existsSync(basePath)) {
+        fs.copyFileSync(currentPath, basePath);
+        console.log(`[VISREG] baseline updated: ${path.relative(root, basePath)}`);
+        continue;
+      }
 
-    const basePath = path.join(baselineDir, `${t.name}.png`);
-    if (updateBaseline || !fs.existsSync(basePath)) {
-      fs.copyFileSync(currentPath, basePath);
-      console.log(`[VISREG] baseline updated: ${path.relative(root, basePath)}`);
-      continue;
+      const curr = fs.readFileSync(currentPath);
+      const base = fs.readFileSync(basePath);
+      const dimA = pngDimensions(base);
+      const dimB = pngDimensions(curr);
+      const hashEqual = sha256(base) === sha256(curr);
+      const ratio = hashEqual ? 0 : byteDiffRatio(base, curr);
+
+      if (dimA.w !== dimB.w || dimA.h !== dimB.h || ratio > threshold) {
+        failures.push({ name: t.name, ratio, baseline: basePath, current: currentPath, dimA, dimB });
+      }
     }
-
-    const curr = fs.readFileSync(currentPath);
-    const base = fs.readFileSync(basePath);
-    const dimA = pngDimensions(base);
-    const dimB = pngDimensions(curr);
-    const hashEqual = sha256(base) === sha256(curr);
-    const ratio = hashEqual ? 0 : byteDiffRatio(base, curr);
-
-    if (dimA.w !== dimB.w || dimA.h !== dimB.h || ratio > threshold) {
-      failures.push({ name: t.name, ratio, baseline: basePath, current: currentPath, dimA, dimB });
-    }
-  }
-
-  await browser.close();
+  }, { timeoutMs: 120000, label: 'Regresja wizualna' });
 
   if (failures.length) {
     console.error('\n[FAIL] visual-regression-gate');

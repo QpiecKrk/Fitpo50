@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const { chromium } = require('playwright');
+const { withChromium } = require('./lib/playwright-lifecycle');
 
 const ROOT = process.cwd();
 const SITE_DIR = path.join(ROOT, '_site');
@@ -111,35 +112,38 @@ async function measurePage(page, fullUrl) {
 async function main() {
   if (!fs.existsSync(SITE_DIR)) throw new Error(`Brak katalogu _site: ${SITE_DIR}`);
   const server = await serveStatic(SITE_DIR);
-  const port = server.address().port;
-  const base = `http://127.0.0.1:${port}`;
-  const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage();
-  await installPerformanceObservers(page);
-  // Warm up the browser cache/compiler with a preliminary load of the home page
-  console.log('[cwv-budget] Warming up browser context...');
-  await page.goto(`${base}/index.html`, { waitUntil: 'load' }).catch(() => {});
-  await page.waitForTimeout(1000);
-
   const rows = [];
-  for (const u of URLS) {
-    const m = await measurePage(page, `${base}${u}`);
-    const lcp = Number(m.lcp || 0);
-    const cls = Number(m.cls || 0);
-    const tbt = Number(m.tbt || 0);
-    rows.push({
-      url: u,
-      lcp_ms: Math.round(lcp),
-      cls: Number(cls.toFixed(4)),
-      tbt_ms: Math.round(tbt),
-      status_lcp: scoreStatus(lcp, BUDGETS.lcp_ms),
-      status_cls: scoreStatus(cls, BUDGETS.cls),
-      status_tbt: scoreStatus(tbt, BUDGETS.tbt_ms),
-    });
-  }
+  try {
+    const port = server.address().port;
+    const base = `http://127.0.0.1:${port}`;
+    await withChromium(chromium, async (browser) => {
+      const page = await browser.newPage();
+      page.setDefaultTimeout(15000);
+      await installPerformanceObservers(page);
+      // Warm up the browser cache/compiler with a preliminary load of the home page
+      console.log('[cwv-budget] Warming up browser context...');
+      await page.goto(`${base}/index.html`, { waitUntil: 'load' }).catch(() => {});
+      await page.waitForTimeout(1000);
 
-  await browser.close();
-  server.close();
+      for (const u of URLS) {
+        const m = await measurePage(page, `${base}${u}`);
+        const lcp = Number(m.lcp || 0);
+        const cls = Number(m.cls || 0);
+        const tbt = Number(m.tbt || 0);
+        rows.push({
+          url: u,
+          lcp_ms: Math.round(lcp),
+          cls: Number(cls.toFixed(4)),
+          tbt_ms: Math.round(tbt),
+          status_lcp: scoreStatus(lcp, BUDGETS.lcp_ms),
+          status_cls: scoreStatus(cls, BUDGETS.cls),
+          status_tbt: scoreStatus(tbt, BUDGETS.tbt_ms),
+        });
+      }
+    }, { timeoutMs: 180000, label: 'Pomiar CWV' });
+  } finally {
+    await new Promise((resolve) => server.close(resolve));
+  }
 
   const failCount = rows.filter((r) => r.status_lcp === 'fail' || r.status_cls === 'fail' || r.status_tbt === 'fail').length;
   const warnCount = rows.filter((r) => r.status_lcp === 'warn' || r.status_cls === 'warn' || r.status_tbt === 'warn').length;

@@ -6,6 +6,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const { pageKind } = require('./lib/publication-page-kind');
 const { prepareCenterPrint } = require('./lib/topic-center-print');
+const { withChromium } = require('./lib/playwright-lifecycle');
 
 function parseArgs(argv) {
   const out = {};
@@ -233,42 +234,43 @@ async function main() {
   if (sha256(html) !== sha256(siteHtml)) errors.push('HTML źródłowy i _site nie są identyczne 1:1.');
   if (sha256(pdf) !== sha256(sitePdf)) errors.push('PDF źródłowy i _site nie są identyczne 1:1.');
 
-  const playwright = require('playwright');
-  const browser = await playwright.chromium.launch({ headless: true });
-  const context = await browser.newContext();
-  await context.route(/^https?:\/\//, (route) => route.abort());
-  const page = await context.newPage();
-  page.setDefaultTimeout(15000);
   const previewDir = path.join(root, '.tmp', 'article-preview', slug);
   fs.mkdirSync(previewDir, { recursive: true });
   const pageUrl = `file://${html}`;
-  const desktop = await inspectHtml(page, pageUrl, { width: 1440, height: 1000 }, path.join(previewDir, 'desktop.png'), errors);
-  const mobile = await inspectHtml(page, pageUrl, { width: 390, height: 844 }, path.join(previewDir, 'mobile.png'), errors);
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto(pageUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
   const center = pageKind(fs.readFileSync(html, 'utf8')) === 'topic_center';
-  if (center) await prepareCenterPrint(page);
-  const semantic = await page.evaluate((isCenter) => {
-    if (isCenter) {
-      const main = document.querySelector('main');
-      const tables = [...main.querySelectorAll('table')];
-      return { tables: tables.length, tableErrors: tables.filter((t) => !t.closest('.article-table-wrap')).map(() => 'Tabela bez kontenera przewijania'), tableMarkup: tables.map((t) => t.outerHTML).join('\n'), text: main.innerText, expectedImages: main.querySelectorAll('img').length };
-    }
-    const tables = [...document.querySelectorAll('article table')];
-    const tableErrors = [];
-    tables.forEach((table, index) => {
-      if (!table.closest('.article-table-wrap')) tableErrors.push(`tabela ${index + 1}: brak .article-table-wrap`);
-    });
-    const article = document.querySelector('article.article-content')?.cloneNode(true);
-    article?.querySelectorAll('.share-article-section, script, style, button').forEach((node) => node.remove());
-    const title = document.querySelector('h1.article-header__title')?.textContent || '';
-    const textChunks = article ? [...article.querySelectorAll('h1, h2, h3, h4, p, li, caption, th, td, figcaption')].map((node) => node.textContent || '') : [];
-    const expectedImages = (document.querySelector('section.article-intro-grid .article-hero img') ? 1 : 0) + document.querySelectorAll('article.article-content figure img').length;
-    return { tables: tables.length, tableErrors, tableMarkup: tables.map((table) => table.outerHTML).join('\n'), text: `${title} ${textChunks.join(' ')}`, expectedImages };
-  }, center);
+  const playwright = require('playwright');
+  const { desktop, mobile, semantic } = await withChromium(playwright.chromium, async (browser) => {
+    const context = await browser.newContext();
+    await context.route(/^https?:\/\//, (route) => route.abort());
+    const page = await context.newPage();
+    page.setDefaultTimeout(15000);
+    const desktopResult = await inspectHtml(page, pageUrl, { width: 1440, height: 1000 }, path.join(previewDir, 'desktop.png'), errors);
+    const mobileResult = await inspectHtml(page, pageUrl, { width: 390, height: 844 }, path.join(previewDir, 'mobile.png'), errors);
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.goto(pageUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
+    if (center) await prepareCenterPrint(page);
+    const semanticResult = await page.evaluate((isCenter) => {
+      if (isCenter) {
+        const main = document.querySelector('main');
+        const tables = [...main.querySelectorAll('table')];
+        return { tables: tables.length, tableErrors: tables.filter((t) => !t.closest('.article-table-wrap')).map(() => 'Tabela bez kontenera przewijania'), tableMarkup: tables.map((t) => t.outerHTML).join('\n'), text: main.innerText, expectedImages: main.querySelectorAll('img').length };
+      }
+      const tables = [...document.querySelectorAll('article table')];
+      const tableErrors = [];
+      tables.forEach((table, index) => {
+        if (!table.closest('.article-table-wrap')) tableErrors.push(`tabela ${index + 1}: brak .article-table-wrap`);
+      });
+      const article = document.querySelector('article.article-content')?.cloneNode(true);
+      article?.querySelectorAll('.share-article-section, script, style, button').forEach((node) => node.remove());
+      const title = document.querySelector('h1.article-header__title')?.textContent || '';
+      const textChunks = article ? [...article.querySelectorAll('h1, h2, h3, h4, p, li, caption, th, td, figcaption')].map((node) => node.textContent || '') : [];
+      const expectedImages = (document.querySelector('section.article-intro-grid .article-hero img') ? 1 : 0) + document.querySelectorAll('article.article-content figure img').length;
+      return { tables: tables.length, tableErrors, tableMarkup: tables.map((table) => table.outerHTML).join('\n'), text: `${title} ${textChunks.join(' ')}`, expectedImages };
+    }, center);
+    return { desktop: desktopResult, mobile: mobileResult, semantic: semanticResult };
+  }, { timeoutMs: 120000, label: `Podgląd artykułu ${slug}` });
   semantic.tableErrors.forEach((error) => errors.push(error));
   validateSemanticTableMarkup(semantic.tableMarkup).forEach((error) => errors.push(error));
-  await browser.close();
 
   const pdfResult = validatePdfStructure(pdf, semantic.text, semantic.expectedImages, path.join(previewDir, 'pdf-pages'), errors);
   const generatedAt = new Date().toISOString();
