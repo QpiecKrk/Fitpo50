@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
+const { isEditorialQuery, MIN_CTR_REVIEW_IMPRESSIONS } = require('./lib/gsc-editorial-query');
 
 const ROOT = process.cwd();
 const DEFAULT_WORK_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
@@ -526,7 +527,10 @@ function writeOutputs(report, outputJson, outputMd) {
     lines.push(`- Strony: kliknięcia ${Math.round(report.summary.layers.pages.current.total_clicks)}, wyświetlenia ${Math.round(report.summary.layers.pages.current.total_impressions)}.`);
     lines.push(`- Ujawnione zapytania: kliknięcia ${Math.round(report.summary.layers.disclosed_queries.current.total_clicks)}, wyświetlenia ${Math.round(report.summary.layers.disclosed_queries.current.total_impressions)} — niepełne z powodu anonimizacji zapytań.`);
     lines.push('');
-    lines.push('## Priorytet A: P1-3 i 0 klików');
+    lines.push(`Do oceny CTR trafiają tylko zwykłe zapytania z co najmniej ${MIN_CTR_REVIEW_IMPRESSIONS} wyświetleniami w tym oknie. Zapytania z operatorami wyszukiwania pozostają w danych surowych, lecz nie w priorytetach.`);
+    lines.push(`- Odrzucone z listy okazji zapytania z operatorami: ${report.data_quality.rows_search_operator_queries_excluded_from_opportunities || 0}.`);
+    lines.push('');
+    lines.push('## Sygnał A: P1-3 i 0 klików — do weryfikacji');
     if (!report.opportunities.top3_zero_click.length) {
       lines.push('- Brak kandydatów.');
     } else {
@@ -535,7 +539,7 @@ function writeOutputs(report, outputJson, outputMd) {
       });
     }
     lines.push('');
-    lines.push('## Priorytet B: CTR problemy (pozycja <=10)');
+    lines.push('## Sygnał B: niski CTR (pozycja <=10) — do weryfikacji');
     if (!report.opportunities.ctr_problems.length) {
       lines.push('- Brak kandydatów.');
     } else {
@@ -544,7 +548,7 @@ function writeOutputs(report, outputJson, outputMd) {
       });
     }
     lines.push('');
-    lines.push('## Priorytet C: Kanibalizacja');
+    lines.push('## Sygnał C: kilka URL-i dla jednego query — sprawdź intencje');
     if (!report.opportunities.cannibalization.length) {
       lines.push('- Brak kandydatów.');
     } else {
@@ -898,15 +902,16 @@ function main() {
   }
   const primarySummary = apiProperty?.current || pageSummary;
 
-  const top3Zero = queryRows
-    .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions > 0)
+  const editorialQueries = queryRows.filter((r) => isEditorialQuery(r.query));
+  const top3Zero = editorialQueries
+    .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions >= MIN_CTR_REVIEW_IMPRESSIONS)
     .sort((a, b) => b.impressions - a.impressions);
 
-  const top10Zero = queryRows
-    .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 10 && r.impressions > 0)
+  const top10Zero = editorialQueries
+    .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 10 && r.impressions >= MIN_CTR_REVIEW_IMPRESSIONS)
     .sort((a, b) => b.impressions - a.impressions);
 
-  const ctrPool = queryRows.filter((r) => r.impressions > 0 && r.position > 0 && r.position <= 10);
+  const ctrPool = editorialQueries.filter((r) => r.impressions >= MIN_CTR_REVIEW_IMPRESSIONS && r.position > 0 && r.position <= 10);
   const poolMedianCtr = median(ctrPool.map((r) => r.ctr));
   const ctrProblems = ctrPool
     .filter((r) => r.ctr <= Math.max(1.0, poolMedianCtr * 0.6))
@@ -916,6 +921,7 @@ function main() {
   if (qpRows.length) {
     const byQuery = new Map();
     for (const row of qpRows) {
+      if (!isEditorialQuery(row.query)) continue;
       const q = row.query.trim().toLowerCase();
       if (!byQuery.has(q)) byQuery.set(q, []);
       byQuery.get(q).push(row);
@@ -971,6 +977,9 @@ function main() {
   report.data_quality = {
     status: anomaliesCtr === 0 && anomaliesPos === 0 && dataContract.status === 'PASS' ? 'PASS' : 'WARN',
     rows_queries: queryRows.length,
+    rows_editorial_queries: editorialQueries.length,
+    rows_search_operator_queries_excluded_from_opportunities: queryRows.length - editorialQueries.length,
+    min_impressions_for_ctr_review: MIN_CTR_REVIEW_IMPRESSIONS,
     rows_pages: pageRows.length,
     rows_query_pages: qpRows.length,
     duplicate_query_page_pairs: qpRows.length - dupPairs.size,
@@ -1013,18 +1022,18 @@ function main() {
 
   report.weekly_plan = [
     topQueryA
-      ? `Zoptymalizuj artykuł pod zapytanie "${topQueryA.query}" (P1-3 i 0 klików).`
-      : 'Brak P1-3 i 0 klików: skup się na top10 i CTR.',
+      ? `Sprawdź intencję i próbę dla zapytania "${topQueryA.query}" (P1-3 i 0 klików); dopiero potem oceń snippet.`
+      : `Brak zapytań P1-3 z 0 klików i próbą co najmniej ${MIN_CTR_REVIEW_IMPRESSIONS} wyświetleń; nie zmieniaj snippetu na podstawie pojedynczych wyświetleń.`,
     topQueryB
-      ? `Popraw title/meta + quick-answer dla "${topQueryB.query}" (CTR problem).`
+      ? `Sprawdź próbę, intencję i aktualną odpowiedź dla "${topQueryB.query}" przed zmianą title/meta.`
       : 'Brak krytycznych CTR problemów: podbijaj zapytania z najwyższymi wyświetleniami.',
     topCann
-      ? `Rozwiąż kanibalizację dla "${topCann.query}" (scalenie intencji lub rozdział tematów).`
+      ? `Zweryfikuj nakładanie URL-i dla "${topCann.query}"; samo współwystępowanie nie dowodzi kanibalizacji.`
       : 'Brak silnej kanibalizacji: utrzymuj 1 główny URL na 1 intencję.',
     topPage
-      ? `Dołóż 2-3 linki wewnętrzne do ${topPage.page} z mocnych stron kategorii.`
+      ? `Sprawdź naturalne miejsca na link do ${topPage.page} w powiązanych artykułach.`
       : 'Dołóż linki wewnętrzne do niedolinkowanych artykułów z filarów.',
-    'Po zmianach: request indexing w GSC i weryfikacja efektu po 7 dniach.',
+    'Po wdrożeniu i walidacji produkcji: zgłoś zmieniony URL w GSC i porównaj dane po 7/14/28 dniach.',
   ];
 
   const categoryOrder = ['jedzenie', 'ruch', 'zdrowie', 'mity', 'ciekawe'];

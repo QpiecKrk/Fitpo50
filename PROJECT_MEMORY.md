@@ -120,6 +120,8 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - `GSC` jest trybem analitycznym. Uruchamia `npm run gsc:auto`, synchronizuje dane w `~/Downloads/gsc-auto-input`, sprawdza ich kontrakt i dopiero potem przygotowuje raport; nie edytuje HTML.
 - Wymagane są prawidłowe `queries.csv`, `pages.csv`, `query-pages.csv` oraz ich manifest. Brak, podmiana typu pliku, niespójny hash, stary zakres albo pomieszany cohort oznacza `INSUFFICIENT_DATA`.
 - Warstwa property/stron jest nadrzędna. Query są niepełne z powodu anonimizacji i służą do rozpoznawania ujawnionych intencji.
+- W `popraw-seo` zapytania z operatorami wyszukiwania (`site:`, `-site:` itd.) pozostają w danych surowych, lecz nie mogą tworzyć priorytetów redakcyjnych. Sygnał niskiego CTR wymaga co najmniej 30 wyświetleń w analizowanym oknie. Tytuł strony użyty awaryjnie oznaczamy jako temat, nie jako ujawnione query GSC. Automatyczne propozycje linków wymagają ręcznej kontroli kontekstu akapitu i nie trafiają do kolejki GSC bez rzeczywistej zmiany.
+- Opcjonalny raport generatywnej AI z GSC jest dodatkową warstwą `GSC`/`popraw-seo`: zachowuje URL, kraj, urządzenie, feature i trend dzienny. Gdy raport nie jest jeszcze dostępny w rollout albo nie ma poprawnego eksportu, status musi wynosić `GSC_INPUT_UNAVAILABLE`, a metryki pozostają `null` — nigdy zero.
 - Dane obejmują okna 7/28/90 dni i dostępne typy wyszukiwania. Stary, niepełny lub pomieszany cohort jest błędem blokującym.
 - `popraw-seo` diagnozuje wszystkie indeksowalne `BlogPosting`: `article_inventory = diagnosed_articles = actions_assigned`, `omitted_articles = 0`.
 - Każda strona otrzymuje koszyk i konkretne działanie: `BOOST`, `ROKUJE`, `NAPRAWA` albo `MONITORING`. Cooldown nie usuwa URL-a z raportu.

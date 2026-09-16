@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { writeManifestFromApiReport } = require('./lib/gsc-data-contract');
+const { isEditorialQuery, MIN_CTR_REVIEW_IMPRESSIONS } = require('./lib/gsc-editorial-query');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -448,8 +449,9 @@ function writeReport(report, outputJson, outputMd) {
     }
     lines.push('');
     lines.push('- Ograniczenie API: zapytania anonimizowane pozostają poza tabelą query, dlatego warstwa stron/property jest nadrzędna dla wyniku witryny.');
+    lines.push(`- Do oceny CTR trafiają zwykłe zapytania z co najmniej ${MIN_CTR_REVIEW_IMPRESSIONS} wyświetleniami; ${report.editorial_query_quality?.excluded_search_operator_queries || 0} zapytań z operatorami pozostaje wyłącznie w danych surowych.`);
     lines.push('');
-    lines.push('## Priorytet A: P1-3 i 0 klików');
+    lines.push('## Sygnał A: P1-3 i 0 klików — do weryfikacji');
     if (!report.opportunities.top3_zero_click.length) {
       lines.push('- Brak kandydatów.');
     } else {
@@ -458,7 +460,7 @@ function writeReport(report, outputJson, outputMd) {
       });
     }
     lines.push('');
-    lines.push('## Priorytet B: CTR problemy (pozycja <=10)');
+    lines.push('## Sygnał B: niski CTR (pozycja <=10) — do weryfikacji');
     if (!report.opportunities.ctr_problems.length) {
       lines.push('- Brak kandydatów.');
     } else {
@@ -467,7 +469,7 @@ function writeReport(report, outputJson, outputMd) {
       });
     }
     lines.push('');
-    lines.push('## Priorytet C: Kanibalizacja');
+    lines.push('## Sygnał C: kilka URL-i dla jednego query — sprawdź intencje');
     if (!report.opportunities.cannibalization.length) {
       lines.push('- Brak kandydatów.');
     } else {
@@ -815,12 +817,13 @@ async function main() {
     const queriesSummaryCurrent = aggregateSummary(queriesCurrent);
     const queriesSummaryPrevious = aggregateSummary(queriesPrev);
 
-    const top3Zero = queriesCurrent
-      .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions > 0)
+    const editorialQueries = queriesCurrent.filter((r) => isEditorialQuery(r.query));
+    const top3Zero = editorialQueries
+      .filter((r) => r.clicks === 0 && r.position > 0 && r.position <= 3 && r.impressions >= MIN_CTR_REVIEW_IMPRESSIONS)
       .sort((a, b) => b.impressions - a.impressions)
       .slice(0, 20);
 
-    const pool = queriesCurrent.filter((r) => r.position > 0 && r.position <= 10 && r.impressions > 0);
+    const pool = editorialQueries.filter((r) => r.position > 0 && r.position <= 10 && r.impressions >= MIN_CTR_REVIEW_IMPRESSIONS);
     const ctrMedian = median(pool.map((r) => r.ctr));
     const ctrProblems = pool
       .filter((r) => r.ctr <= Math.max(1.0, ctrMedian * 0.6))
@@ -829,6 +832,7 @@ async function main() {
 
     const byQueryPage = new Map();
     for (const row of qpCurrent) {
+      if (!isEditorialQuery(row.query)) continue;
       const key = row.query.toLowerCase();
       if (!byQueryPage.has(key)) byQueryPage.set(key, []);
       byQueryPage.get(key).push(row);
@@ -882,6 +886,11 @@ async function main() {
         max_rows_per_day_per_search_type: 50000,
         note: 'Warstwa stron i property jest nadrzędna dla wyniku całej witryny; query służą do rozpoznawania ujawnionych intencji.',
       },
+      editorial_query_quality: {
+        disclosed_queries: queriesCurrent.length,
+        excluded_search_operator_queries: queriesCurrent.length - editorialQueries.length,
+        min_impressions_for_ctr_review: MIN_CTR_REVIEW_IMPRESSIONS,
+      },
       collection_quality: {
         datasets: API_COLLECTION_DIAGNOSTICS,
         potentially_truncated_datasets: API_COLLECTION_DIAGNOSTICS
@@ -922,18 +931,18 @@ async function main() {
       },
       weekly_plan: [
         topA
-          ? `Zoptymalizuj URL pod "${topA.query}" (P1-3 i 0 klików).`
-          : 'Brak P1-3 i 0 klików: skup się na CTR w top10.',
+          ? `Sprawdź intencję i próbę dla "${topA.query}" (P1-3 i 0 klików) przed zmianą snippetu.`
+          : `Brak zapytań P1-3 z 0 klików i próbą co najmniej ${MIN_CTR_REVIEW_IMPRESSIONS} wyświetleń; nie zmieniaj snippetu na podstawie pojedynczych wyświetleń.`,
         topB
-          ? `Popraw title/meta + quick-answer dla "${topB.query}" (niski CTR).`
+          ? `Sprawdź próbę i treść odpowiedzi dla "${topB.query}" przed zmianą title/meta.`
           : 'Brak krytycznych CTR problemów: wzmacniaj top strony po impresjach.',
         topC
-          ? `Rozwiąż kanibalizację dla "${topC.query}" (1 intencja = 1 główny URL).`
+          ? `Zweryfikuj nakładanie URL-i dla "${topC.query}"; samo współwystępowanie nie dowodzi kanibalizacji.`
           : 'Brak silnej kanibalizacji: utrzymuj mapowanie intencji.',
         topP
-          ? `Dołóż 2-3 linki wewnętrzne do ${topP.page}.`
+          ? `Sprawdź naturalne miejsca na link do ${topP.page}.`
           : 'Dołóż linki do niedolinkowanych artykułów.',
-        'Po wdrożeniu: request indexing + pomiar po 7 dniach.',
+        'Po wdrożeniu i walidacji produkcji: zgłoś zmieniony URL w GSC i porównaj dane po 7/14/28 dniach.',
       ],
       ai_referrer_monitor: buildAiReferrerMonitor(queriesCurrent, args.outputCsvDir),
     };

@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
+const { isEditorialQuery } = require('./lib/gsc-editorial-query');
 const os = require('os');
 
 const ROOT = process.cwd();
@@ -581,7 +582,7 @@ function concreteRequiredAction(page, metrics, keywordPlan, sources, diagnosis, 
       return { action_type: 'URL_INSPECTION', target: page.path, evidence, required_change: `Najpierw sprawdź stan indeksacji ${page.path}; bez wyniku inspekcji nie wolno zgadywać zmiany treści.`, source_files: sourceFiles, content_status: 'INSUFFICIENT_DATA_UNTIL_INSPECTION' };
     }
     if (/BLOCKED|CANONICAL_CONFLICT|NOT_INDEXED|DISCOVERED|CRAWLED|UNKNOWN_TO_GOOGLE/.test(diagnosis)) {
-      return { action_type: 'INDEXATION_REPAIR', target: page.path, evidence, required_change: `Usuń konkretną przyczynę wskazaną przez URL Inspection (${inspectionDiagnosis(inspection)}), potwierdź canonical i obecność w sitemap, następnie wzmocnij odkrywanie z: ${sourceFiles.join(', ') || 'brak dopasowanych źródeł'}.`, source_files: sourceFiles, content_status: 'TECHNICAL_FIRST' };
+      return { action_type: 'INDEXATION_REPAIR', target: page.path, evidence, required_change: `Usuń konkretną przyczynę wskazaną przez URL Inspection (${inspectionDiagnosis(inspection)}), potwierdź canonical i obecność w sitemap, następnie ręcznie sprawdź naturalne miejsca na linki.`, source_files: sourceFiles, content_status: 'TECHNICAL_FIRST' };
     }
     return { action_type: 'INTENT_RESEARCH', target: page.path, evidence, required_change: `URL jest zindeksowany, ale ma 0 wyświetleń: wykonaj research autocomplete/PAA dla tematu „${page.h1 || page.title}”, następnie dopasuj title, lead i jedną odpowiedź do potwierdzonej intencji.`, source_files: sourceFiles, content_status: 'RESEARCH_REQUIRED_BEFORE_EDIT' };
   }
@@ -589,12 +590,12 @@ function concreteRequiredAction(page, metrics, keywordPlan, sources, diagnosis, 
     return { action_type: 'SNIPPET_CTR', target: page.path, evidence, required_change: `Przy pozycji ${evidence.position} i ${evidence.impressions} wyświetleniach przygotuj title/meta odpowiadające wprost na „${primary || page.h1}”; treść obietnicy musi być widoczna także w leadzie.`, source_files: sourceFiles, content_status: 'DRAFT_REQUIRED' };
   }
   if (diagnosis === 'POSITION_11_30' || diagnosis === 'DEEP_31_100') {
-    return { action_type: 'INTENT_AND_LINKING', target: page.path, evidence, required_change: `Dla „${primary || page.h1}” doprecyzuj pierwszą odpowiedź i brakującą sekcję wynikającą z query/PAA; dodaj linki kontekstowe z: ${sourceFiles.join(', ') || 'INSUFFICIENT_DATA — brak dopasowanych źródeł'}.`, source_files: sourceFiles, content_status: primary ? 'DRAFT_REQUIRED' : 'QUERY_RESEARCH_REQUIRED' };
+    return { action_type: 'INTENT_AND_LINKING', target: page.path, evidence, required_change: `${primary ? `Dla ujawnionego query „${primary}”` : `Dla tematu strony „${page.h1}” po researchu query/PAA`} doprecyzuj pierwszą odpowiedź i zweryfikuj, czy brakuje sekcji; linki dodaj dopiero po kontroli akapitu źródłowego.`, source_files: sourceFiles, content_status: primary ? 'DRAFT_REQUIRED' : 'QUERY_RESEARCH_REQUIRED' };
   }
   if (diagnosis === 'DECLINING') {
     return { action_type: 'DECLINE_RECOVERY', target: page.path, evidence, required_change: `Porównaj spadek dla tego URL-a i query „${primary || 'brak ujawnionego query'}”; zmieniaj snippet lub fragment odpowiedzi dopiero po wskazaniu utraconej intencji.`, source_files: sourceFiles, content_status: primary ? 'DRAFT_REQUIRED' : 'INSUFFICIENT_QUERY_DATA' };
   }
-  return { action_type: 'PROTECT_AND_SCALE', target: page.path, evidence, required_change: `Nie przepisuj działającego targetu. Wzmocnij go linkami z: ${sourceFiles.join(', ') || 'najbliższego potwierdzonego klastra'} i monitoruj kliknięcia oraz CTR w oknach 7/28/90 dni.`, source_files: sourceFiles, content_status: 'TARGET_PROTECTED' };
+  return { action_type: 'PROTECT_AND_SCALE', target: page.path, evidence, required_change: `Monitoruj kliknięcia i CTR w oknach 7/28/90 dni; przed dodaniem linku sprawdź tematyczny kontekst akapitu źródłowego.`, source_files: sourceFiles, content_status: 'TARGET_PROTECTED' };
 }
 
 function clamp(value, min, max) {
@@ -649,7 +650,7 @@ function isUsefulQuery(query) {
   const raw = String(query || '').trim();
   const cleaned = cleanQuery(raw);
   if (!cleaned || cleaned.length < 3) return false;
-  if (/\bsite:/i.test(raw)) return false;
+  if (!isEditorialQuery(raw)) return false;
   if ((raw.match(/-/g) || []).length >= 3) return false;
   if (/grafike daj|^prywatnie zbadali$/i.test(cleaned)) return false;
   return true;
@@ -673,11 +674,14 @@ function buildKeywordPlan(page, queryRows) {
     .filter((row) => isUsefulQuery(row.query))
     .filter((row) => row.query)
     .sort((a, b) => Number(b.impressions || 0) - Number(a.impressions || 0) || Number(a.position || 999) - Number(b.position || 999));
-  const primary = cleanQuery(rows[0]?.query || page.h1 || page.title.replace(/\s*\|\s*FitPo50.*$/i, ''));
+  const disclosedPrimaryQuery = rows[0] ? cleanQuery(rows[0].query) : null;
+  const primary = disclosedPrimaryQuery || cleanQuery(page.h1 || page.title.replace(/\s*\|\s*FitPo50.*$/i, ''));
   const secondary = unique(rows.slice(1, 8).map((row) => cleanQuery(row.query))).slice(0, 6);
   const intents = unique(rows.slice(0, 10).map((row) => inferIntent(row.query))).slice(0, 4);
   return {
     primary,
+    primary_source: disclosedPrimaryQuery ? 'GSC_DISCLOSED_QUERY' : 'ARTICLE_TOPIC_FALLBACK',
+    disclosed_primary_query: disclosedPrimaryQuery,
     secondary,
     intents,
     all_queries: allQueries,
@@ -704,16 +708,22 @@ function similarity(a, b) {
 }
 
 function suggestSources(target, pages) {
+  const topicTokens = (page) => new Set(tokenize(`${page.h1 || page.title} ${page.path.replace(/\.html$/, '').replace(/-/g, ' ')}`)
+    .filter((token) => !['badania', 'badanie', 'sprawdz', 'naukowe', 'przewodnik', 'kompletny', 'zdrowie', 'wyniki', 'wynik', 'norma', 'normy', 'cena', 'kosztuje', 'dziala', 'działa', 'pokazuja', 'pokazują', 'fakty', 'prawda'].includes(token)));
+  const targetTopic = topicTokens(target);
   return pages
     .filter((page) => page.path !== target.path)
     .filter((page) => !page.links_out.includes(target.path))
     .filter((page) => page.type === 'article' || CORE_PAGES.has(page.path))
+    .filter((page) => page.category === target.category || CORE_PAGES.has(page.path))
+    .filter((page) => [...topicTokens(page)].some((token) => targetTopic.has(token)))
     .map((page) => ({
       from: page.path,
       score: similarity(target, page),
       inbound_strength: page.inbound_links,
       anchor: suggestAnchor(target),
       placement: suggestPlacement(page, target),
+      review_status: 'CONTEXT_REVIEW_REQUIRED',
     }))
     .filter((candidate) => candidate.score > 0)
     .sort((a, b) => b.score - a.score || b.inbound_strength - a.inbound_strength)
@@ -726,7 +736,7 @@ function suggestAnchor(page) {
     .replace(/[?!.]+$/g, '')
     .trim();
   if (base.length <= 54) return base;
-  return base.slice(0, 51).trim();
+  return base.slice(0, 70).replace(/\s+\S*$/, '').trim();
 }
 
 function suggestPlacement(source, target) {
@@ -759,8 +769,8 @@ function buildActionPlan(priority, page, keywordPlan, sources) {
   if (page.type === 'article' && !page.has_quick_answer) actions.push('Dodaj blok Szybka odpowiedź pod AEO.');
   if (page.type === 'article' && page.faq_count < 3) actions.push('Dodaj FAQ z pytań GSC/PAA, nie generyczne.');
   if (page.citation_count < 4 && page.type === 'article') actions.push('Uzupełnij cytowania dla E-E-A-T/GEO.');
-  if (sources.length) actions.push(`Najpierw linkuj z: ${sources.slice(0, 3).map((item) => item.from).join(', ')}.`);
-  if (keywordPlan.primary) actions.push(`Fraza główna do śledzenia: "${keywordPlan.primary}".`);
+  if (sources.length) actions.push('Sprawdź akapit źródłowy i intencję czytelnika przed dodaniem linku.');
+  if (keywordPlan.disclosed_primary_query) actions.push(`Ujawnione query GSC do śledzenia: "${keywordPlan.disclosed_primary_query}".`);
 
   return unique(actions).slice(0, 8);
 }
@@ -1061,7 +1071,7 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl, inspectionByUrl = ne
         citation_count: page.citation_count,
       },
       action_plan: [requiredAction.required_change],
-      gsc_submit_after_change: [page.url, ...sourceSuggestions.slice(0, 3).map((item) => pathToUrl(item.from, baseUrl))],
+      gsc_submit_after_change: [page.url],
       promotion_places: [],
     };
     item.promotion_places = buildPromotionPlaces(item, baseUrl);
@@ -1096,6 +1106,7 @@ function buildPortfolioSections(priorityMap) {
       diagnosis: item.diagnosis,
       required_action: item.required_action.required_change,
       primary_keyword: item.keywords.primary,
+      primary_keyword_source: item.keywords.primary_source,
       supporting_keywords: item.keywords.secondary,
       query_count: item.all_keyword_registry.length,
       clicks: item.gsc.clicks,
@@ -1114,6 +1125,7 @@ function buildPortfolioSections(priorityMap) {
       path: item.path,
       url: item.url,
       primary_keyword: item.keywords.primary,
+      primary_keyword_source: item.keywords.primary_source,
       queries: item.all_keyword_registry,
     })),
     performance_delta: {
@@ -1269,7 +1281,7 @@ function writeOutputs(report, outputDir) {
     lines.push('- Brak URL-i w tej grupie.');
   } else {
     report.portfolio.low_visibility_articles.slice(0, 30).forEach((item) => {
-      lines.push(`- ${item.url} — pos ${item.gsc.position}, impr ${item.gsc.impressions}, decyzja: ${item.editorial_decision}, fraza: ${item.keywords.primary}`);
+      lines.push(`- ${item.url} — pos ${item.gsc.position}, impr ${item.gsc.impressions}, decyzja: ${item.editorial_decision}, ${item.keywords.primary_source === 'GSC_DISCLOSED_QUERY' ? 'ujawnione query GSC' : 'temat z tytułu (bez ujawnionego query)'}: ${item.keywords.primary}`);
     });
   }
   lines.push('');
@@ -1278,15 +1290,15 @@ function writeOutputs(report, outputDir) {
     lines.push('- Brak URL-i bez danych GSC.');
   } else {
     report.portfolio.dormant_articles.slice(0, 40).forEach((item) => {
-      lines.push(`- ${item.url} — inbound ${item.topology.inbound_links}, decyzja: ${item.editorial_decision}, fraza startowa: ${item.keywords.primary}`);
+      lines.push(`- ${item.url} — inbound ${item.topology.inbound_links}, decyzja: ${item.editorial_decision}, temat z tytułu (bez ujawnionego query): ${item.keywords.primary}`);
     });
   }
   lines.push('');
   lines.push('## Full Coverage Table');
-  lines.push('| URL | Diagnoza | Decyzja | Query | Impr | ΔImpr | Clicks | CTR | Pos | Wniosek | Modified |');
+  lines.push('| URL | Diagnoza | Decyzja | Query GSC lub temat z tytułu | Impr | ΔImpr | Clicks | CTR | Pos | Wniosek | Modified |');
   lines.push('|---|---|---|---|---:|---:|---:|---:|---:|---|---|');
   report.portfolio.full_coverage_table.forEach((item) => {
-    const keyword = String(item.primary_keyword || '').replace(/\|/g, '/').slice(0, 72);
+    const keyword = `${item.primary_keyword_source === 'GSC_DISCLOSED_QUERY' ? 'GSC: ' : 'Temat (bez query): '}${String(item.primary_keyword || '').replace(/\|/g, '/').slice(0, 72)}`;
     lines.push(`| ${item.url} | ${item.diagnosis} | ${item.decision} | ${keyword} | ${item.impressions} | ${formatSigned(item.impressions_delta)} | ${item.clicks} | ${item.ctr}% | ${item.position} | ${item.performance_conclusion} | ${item.date_modified || 'MISSING'} |`);
   });
   lines.push('');

@@ -6,8 +6,16 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { writeManifestFromApiReport } = require('../scripts/lib/gsc-data-contract');
 const { reportingRanges } = require('../scripts/gsc-weekly-api-report');
+const { isEditorialQuery } = require('../scripts/lib/gsc-editorial-query');
 
 const ROOT = path.resolve(__dirname, '..');
+
+test('search operators stay in raw GSC data but cannot drive editorial opportunities', () => {
+  assert.equal(isEditorialQuery('krew pępowinowa -site:reddit.com'), false);
+  assert.equal(isEditorialQuery('nadcisnienia site:fitpo50.pl'), false);
+  assert.equal(isEditorialQuery('dorsifleksja'), true);
+  assert.equal(isEditorialQuery('kreatyna a białko'), true);
+});
 
 test('GSC separates property, page and disclosed-query metrics without generic copy', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-gsc-test-'));
@@ -15,6 +23,7 @@ test('GSC separates property, page and disclosed-query metrics without generic c
     'query,clicks,impressions,ctr,position',
     'apob norma,0,100,0,8',
     'sakady,0,90,0,9',
+    'krew pepowinowa -site:reddit.com,0,150,0,1.4',
   ].join('\n'));
   fs.writeFileSync(path.join(dir, 'pages.csv'), [
     'page,clicks,impressions,ctr,position',
@@ -25,6 +34,7 @@ test('GSC separates property, page and disclosed-query metrics without generic c
     'query,page,clicks,impressions,ctr,position',
     'apob norma,https://fitpo50.pl/apob.html,0,100,0,8',
     'sakady,https://fitpo50.pl/sakady.html,0,90,0,9',
+    'krew pepowinowa -site:reddit.com,https://fitpo50.pl/apob.html,0,150,0,1.4',
   ].join('\n'));
   const apiReport = {
     generated_at: new Date().toISOString(),
@@ -61,7 +71,13 @@ test('GSC separates property, page and disclosed-query metrics without generic c
   assert.equal(report.summary.primary_layer, 'property');
   assert.equal(report.summary.total_clicks, 50);
   assert.equal(report.summary.layers.pages.current.total_clicks, 7);
-  assert.equal(report.summary.layers.disclosed_queries.current.total_impressions, 190);
+  assert.equal(report.summary.layers.disclosed_queries.current.total_impressions, 340);
+  assert.equal(report.data_quality.rows_search_operator_queries_excluded_from_opportunities, 1);
+  assert.equal(report.data_quality.min_impressions_for_ctr_review, 30);
+  assert.deepEqual(report.opportunities.top3_zero_click, []);
+  assert.ok(report.opportunities.top3_zero_click.every((item) => !item.query.includes('site:')));
+  assert.ok(report.opportunities.ctr_problems.every((item) => !item.query.includes('site:')));
+  assert.ok(report.weekly_plan.every((item) => !item.includes('site:')));
   assert.equal(report.article_delta_plan[0].editorial_status, 'REQUIRES_MANUAL_ON_PAGE_REVIEW');
   assert.equal(report.article_delta_plan[0].delta, null);
   assert.equal(aeo.top10_urls.find((item) => item.supporting_queries.includes('sakady')).url, 'https://fitpo50.pl/sakady.html');

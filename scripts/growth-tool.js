@@ -914,7 +914,8 @@ function firstCardsByType(cards, types, limit) {
       priority: card.priority,
       segment: card.segment,
       decision: card.editorial_decision,
-      query: card.keyword_plan?.primary || '',
+      query: card.keyword_plan?.primary_source === 'ARTICLE_TOPIC_FALLBACK' ? '' : card.keyword_plan?.primary || '',
+      query_source: card.keyword_plan?.primary_source || 'UNSPECIFIED',
       clicks: Number(card.gsc?.clicks || 0),
       impressions: Number(card.gsc?.impressions || 0),
       ctr: Number(card.gsc?.ctr || 0),
@@ -983,6 +984,7 @@ function analyzeSourceLinkSuggestions(card, limit = 4) {
       placement: item.placement || '',
       score: Number(item.score || 0),
       inbound_strength: Number(item.inbound_strength || 0),
+      review_status: 'CONTEXT_REVIEW_REQUIRED',
     };
     const inspection = inspectInternalLinkSuggestion(suggestion.from, targetFile, suggestion.anchor, suggestion.placement);
     if (inspection.target_already_linked || inspection.duplicate_anchor_in_section) {
@@ -1010,7 +1012,7 @@ function cardAbsoluteUrl(card) {
 function approvalGscSnapshot(card) {
   const gsc = card?.gsc || {};
   return {
-    query: card?.keyword_plan?.primary || '',
+    query: card?.keyword_plan?.primary_source === 'ARTICLE_TOPIC_FALLBACK' ? '' : card?.keyword_plan?.primary || '',
     clicks: Number(gsc.clicks || 0),
     impressions: Number(gsc.impressions || 0),
     ctr: Number(gsc.ctr || 0),
@@ -1137,7 +1139,7 @@ function approvalPreparationChecklist(kind, query) {
     'FAQ z realnych pytań użytkowników albo danych GSC/PAA/autocomplete; bez zmyślonych problemów',
     'minimum 4 realne źródła URL do najważniejszych twierdzeń, bez halucynacji i bez źródeł dekoracyjnych',
     'własny konkret: przykład osoby 50+, próg/liczba, tabela albo obserwacja FitPo50, jeśli temat na to pozwala',
-    '2-4 linki wewnętrzne z podanych źródeł oraz zgłoszenie URL w GSC po publikacji',
+    'Linki wewnętrzne tylko z ręcznie potwierdzonych, tematycznych akapitów; zgłoszenie zmienionego URL w GSC po walidacji produkcji',
   ];
 }
 
@@ -1158,7 +1160,7 @@ function approvalChecklistForCard(card, kind) {
       'po walidacji sprawdzić sitemap i linki z konkretnych stron źródłowych',
     ];
   }
-  return approvalPreparationChecklist(kind, card?.keyword_plan?.primary || '');
+  return approvalPreparationChecklist(kind, card?.keyword_plan?.primary_source === 'ARTICLE_TOPIC_FALLBACK' ? '' : card?.keyword_plan?.primary || '');
 }
 
 function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays) {
@@ -1179,7 +1181,8 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     diagnosis: card?.diagnosis || card?.type || '',
     required_action: card?.required_action || null,
     execution_status: isRecentlyTouched(file, articleByFile, 14) ? 'COOLDOWN_MONITORUJ' : 'READY_FOR_APPROVAL',
-    query: card?.keyword_plan?.primary || '',
+    query: card?.keyword_plan?.primary_source === 'ARTICLE_TOPIC_FALLBACK' ? '' : card?.keyword_plan?.primary || '',
+    query_source: card?.keyword_plan?.primary_source || 'UNSPECIFIED',
     reason: approvalReason(card, kind),
     gsc,
     gsc_windows: card?.gsc_windows || {},
@@ -1200,15 +1203,12 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     report_tasks: Array.isArray(card?.tasks) ? card.tasks.slice(0, 5) : [],
     internal_link_suggestions: links,
     internal_link_guard: {
-      status: linkAnalysis.rejected.length ? 'DUPLICATES_REMOVED' : 'PASS',
+      status: links.length ? 'CONTEXT_REVIEW_REQUIRED' : (linkAnalysis.rejected.length ? 'DUPLICATES_REMOVED' : 'NO_CANDIDATES'),
       scanned: linkAnalysis.scanned,
       accepted: links.length,
       rejected: linkAnalysis.rejected,
     },
-    gsc_submit_after_change: [
-      url,
-      ...links.slice(0, 3).map((item) => `${SITE_ORIGIN}/${item.from}`),
-    ].filter(Boolean),
+    gsc_submit_after_change: [url].filter(Boolean),
   };
 }
 
@@ -1276,6 +1276,7 @@ function buildFullCoverageCard(item, actionCardsByFile) {
     required_action: item?.required_action || {},
     keyword_plan: {
       primary: item?.keywords?.evidence?.[0]?.query || item?.keywords?.primary || '',
+      primary_source: item?.keywords?.primary_source || (item?.keywords?.evidence?.[0]?.query ? 'GSC_DISCLOSED_QUERY' : 'ARTICLE_TOPIC_FALLBACK'),
       secondary: item?.keywords?.secondary || [],
       intents: item?.keywords?.intents || [],
       useful_queries: (item?.keywords?.evidence || []).map((row) => row.query).filter(Boolean),
@@ -1286,6 +1287,9 @@ function buildFullCoverageCard(item, actionCardsByFile) {
       from: source.from,
       anchor: source.anchor,
       placement: source.placement,
+      score: source.score,
+      inbound_strength: source.inbound_strength,
+      review_status: source.review_status,
     })),
     proposed_title: strategyAction.proposed_title || '',
     proposed_meta_description: strategyAction.proposed_meta_description || '',
@@ -1916,7 +1920,7 @@ function buildBroadSeoConclusions(fullCoverageReport, weeklyApi, indexCoverage) 
       rank: 5,
       area: 'KLASTER_MITY',
       evidence: `Mity: widoczne ${categories.mity.visible}/${categories.mity.total}, kliknięcia ${categories.mity.clicks}, wyświetlenia ${categories.mity.impressions}.`,
-      decision: 'Potraktować Mity jako klaster naprawczy: sprawdzić indeksację pięciu niewidocznych tekstów, wzmacniać je z odpowiadających tematów zdrowie/jedzenie i dopasować nagłówki do pytań, które ludzie faktycznie wpisują.',
+      decision: `Potraktować Mity jako klaster naprawczy: sprawdzić indeksację ${categories.mity.zero} tekstów bez wyświetleń, wzmacniać je z odpowiadających tematów zdrowie/jedzenie i dopasować nagłówki do pytań, które ludzie faktycznie wpisują.`,
       urls: articles.filter((item) => item.category === 'mity').map((item) => item.url),
     });
   }
@@ -2118,7 +2122,7 @@ function buildUnifiedInsights() {
       fitpo50_doctor: Boolean(doctor && !doctor.parse_error),
       ai_visibility_monitor: Boolean(aiVisibility && !aiVisibility.parse_error),
       gsc_submit_queue: gscQueue.length > 0,
-      gsc_generative_ai: Boolean(generativeAi && !generativeAi.parse_error),
+      gsc_generative_ai: Boolean(generativeAi && !generativeAi.parse_error && generativeAi.status === 'OK'),
       post_deploy_kpi_plan: Boolean(postDeployKpi && !postDeployKpi.parse_error),
       originality_score: Boolean(originality && !originality.parse_error),
       gsc_content_strategy: contentStrategy.status === 'OK',
@@ -2395,7 +2399,7 @@ function extractSnippetControls(html) {
 function classifySnippetControls(file, html, controls) {
   const isArticle = /class=["'][^"']*article-page[^"']*["']|"@type"\s*:\s*"BlogPosting"/i.test(html);
   const isSupport = SUPPORT_PAGES.has(file);
-  const intentionalNoindex = ['narzedzia.html', 'kalkulator-phenoage-wiek-fenotypowy.html', 'index1.html'].includes(file);
+  const intentionalNoindex = ['narzedzia.html', 'kalkulator-phenoage-wiek-fenotypowy.html'].includes(file);
   const issues = [];
   if (controls.has_noindex && isArticle && !intentionalNoindex) {
     issues.push('ARTICLE_NOINDEX');
@@ -2711,6 +2715,9 @@ function buildGenerativeAiGscReport() {
       features: new Set(),
       countries: new Set(),
       devices: new Set(),
+      country_breakdown: new Map(),
+      device_breakdown: new Map(),
+      trend: new Map(),
       latest_date: '',
       source_files: new Set(),
     };
@@ -2719,6 +2726,25 @@ function buildGenerativeAiGscReport() {
     if (row.feature) current.features.add(row.feature);
     if (row.country) current.countries.add(row.country);
     if (row.device) current.devices.add(row.device);
+    if (row.country) {
+      const country = current.country_breakdown.get(row.country) || { impressions: 0, clicks: 0 };
+      country.impressions += Number(row.impressions || 0);
+      country.clicks += Number(row.clicks || 0);
+      current.country_breakdown.set(row.country, country);
+    }
+    if (row.device) {
+      const device = current.device_breakdown.get(row.device) || { impressions: 0, clicks: 0 };
+      device.impressions += Number(row.impressions || 0);
+      device.clicks += Number(row.clicks || 0);
+      current.device_breakdown.set(row.device, device);
+    }
+    if (row.date) {
+      const date = String(row.date);
+      const daily = current.trend.get(date) || { impressions: 0, clicks: 0 };
+      daily.impressions += Number(row.impressions || 0);
+      daily.clicks += Number(row.clicks || 0);
+      current.trend.set(date, daily);
+    }
     if (row.date && String(row.date) > String(current.latest_date || '')) current.latest_date = String(row.date);
     if (row.source_file) current.source_files.add(row.source_file);
     byUrl.set(row.file, current);
@@ -2732,20 +2758,36 @@ function buildGenerativeAiGscReport() {
       features: [...item.features].sort(),
       countries: [...item.countries].sort(),
       devices: [...item.devices].sort(),
+      country_breakdown: [...item.country_breakdown.entries()]
+        .map(([country, metrics]) => ({ country, impressions: Math.round(metrics.impressions), clicks: Math.round(metrics.clicks) }))
+        .sort((a, b) => b.impressions - a.impressions || a.country.localeCompare(b.country)),
+      device_breakdown: [...item.device_breakdown.entries()]
+        .map(([device, metrics]) => ({ device, impressions: Math.round(metrics.impressions), clicks: Math.round(metrics.clicks) }))
+        .sort((a, b) => b.impressions - a.impressions || a.device.localeCompare(b.device)),
+      trend: [...item.trend.entries()]
+        .map(([date, metrics]) => ({ date, impressions: Math.round(metrics.impressions), clicks: Math.round(metrics.clicks) }))
+        .sort((a, b) => a.date.localeCompare(b.date)),
       latest_date: item.latest_date,
       source_files: [...item.source_files].sort(),
     }))
     .sort((a, b) => b.impressions - a.impressions || a.file.localeCompare(b.file));
+  const available = pages.length > 0;
+  const dates = rows.map((row) => String(row.date || '')).filter(Boolean).sort();
   const report = {
     generated_at: nowWarsawIso(),
-    status: pages.length ? 'OK' : 'NO_EXPORT_OR_ROLLOUT_NOT_AVAILABLE',
+    status: available ? 'OK' : 'GSC_INPUT_UNAVAILABLE',
+    availability_reason: available
+      ? 'DATA_AVAILABLE'
+      : (files.length ? 'EXPORT_HAS_NO_USABLE_ROWS' : 'REPORT_NOT_EXPORTED_OR_ROLLOUT_NOT_AVAILABLE'),
     input_dir: GSC_INPUT_DIR,
     source_files: files.map((file) => path.relative(ROOT, file).replace(/^\.\.\//, '')),
+    dimensions: ['url', 'country', 'device', 'date', 'feature'],
     expected_export_hint: 'Wrzuć do gsc-auto-input eksport CSV/JSON z raportu Search Generative AI: pages + impressions, opcjonalnie country/device/date/feature.',
     summary: {
-      pages: pages.length,
-      impressions: pages.reduce((sum, item) => sum + item.impressions, 0),
-      clicks: pages.reduce((sum, item) => sum + item.clicks, 0),
+      pages: available ? pages.length : null,
+      impressions: available ? pages.reduce((sum, item) => sum + item.impressions, 0) : null,
+      clicks: available ? pages.reduce((sum, item) => sum + item.clicks, 0) : null,
+      date_range: available && dates.length ? { start: dates[0], end: dates[dates.length - 1] } : null,
     },
     pages,
     recommended_actions: pages.length
@@ -2768,7 +2810,10 @@ function writeGenerativeAiGscMarkdown(report, file) {
   const lines = ['# GSC Generative AI Visibility', '', `Wygenerowano: ${report.generated_at}`, `Status: ${report.status}`, ''];
   lines.push(`Katalog wejściowy: ${report.input_dir}`);
   lines.push(`Źródła: ${report.source_files.join(', ') || 'brak eksportu'}`);
-  lines.push(`Podsumowanie: URL-e=${report.summary.pages}, AI impressions=${report.summary.impressions}, clicks=${report.summary.clicks}`);
+  lines.push(`Powód dostępności: ${report.availability_reason}`);
+  lines.push(report.status === 'OK'
+    ? `Podsumowanie: URL-e=${report.summary.pages}, AI impressions=${report.summary.impressions}, clicks=${report.summary.clicks}`
+    : 'Podsumowanie: dane niedostępne (nie zero).');
   lines.push('');
   if (!report.pages.length) {
     lines.push(`Brak danych: ${report.expected_export_hint}`);
@@ -2779,6 +2824,7 @@ function writeGenerativeAiGscMarkdown(report, file) {
       lines.push(`${index + 1}. ${item.file}`);
       lines.push(`   - AI impressions: ${item.impressions}; clicks: ${item.clicks}; features: ${item.features.join(', ') || 'brak'}`);
       if (item.countries.length || item.devices.length) lines.push(`   - kraje/urządzenia: ${item.countries.join(', ') || 'brak'} / ${item.devices.join(', ') || 'brak'}`);
+      if (item.trend.length) lines.push(`   - trend: ${item.trend[0].date} → ${item.trend[item.trend.length - 1].date} (${item.trend.length} punktów)`);
     });
     lines.push('');
   }
@@ -3530,7 +3576,9 @@ function writePoprawSeoMarkdown(command, file) {
     const ai = insights.generative_ai_visibility;
     lines.push('## GSC Generative AI');
     lines.push(`- status: ${ai.status}`);
-    lines.push(`- podsumowanie: URL-e ${ai.summary?.pages || 0}, AI impressions ${ai.summary?.impressions || 0}, clicks ${ai.summary?.clicks || 0}`);
+    lines.push(ai.status === 'OK'
+      ? `- podsumowanie: URL-e ${ai.summary?.pages}, AI impressions ${ai.summary?.impressions}, clicks ${ai.summary?.clicks}`
+      : '- podsumowanie: GSC_INPUT_UNAVAILABLE — brak raportu lub danych nie jest zerem.');
     if (ai.source_files?.length) lines.push(`- źródła: ${ai.source_files.join(', ')}`);
     if (ai.top_pages?.length) {
       ai.top_pages.slice(0, 6).forEach((item, idx) => {
@@ -3823,7 +3871,9 @@ function writePoprawSeoInsightsMarkdown(insights, file) {
     const ai = insights.generative_ai_visibility;
     lines.push('## GSC Generative AI');
     lines.push(`- status: ${ai.status}`);
-    lines.push(`- summary: URL-e ${ai.summary?.pages || 0}, AI impressions ${ai.summary?.impressions || 0}, clicks ${ai.summary?.clicks || 0}`);
+    lines.push(ai.status === 'OK'
+      ? `- summary: URL-e ${ai.summary?.pages}, AI impressions ${ai.summary?.impressions}, clicks ${ai.summary?.clicks}`
+      : '- summary: GSC_INPUT_UNAVAILABLE — brak raportu lub danych nie jest zerem.');
     if (ai.source_files?.length) lines.push(`- źródła: ${ai.source_files.join(', ')}`);
     (ai.top_pages || []).slice(0, 10).forEach((item, idx) => {
       lines.push(`${idx + 1}. ${item.file}: AI impressions ${item.impressions}; features: ${(item.features || []).join(', ') || 'brak'}`);

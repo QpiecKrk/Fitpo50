@@ -67,6 +67,12 @@ test('priority map assigns a diagnosis and action to every article', () => {
   const queryPrivatePage = report.priority_map.find((item) => item.url === visibleUrl);
   assert.equal(queryPrivatePage.gsc.query_privacy_note, 'PAGE_SIGNAL_VALID_QUERY_ANONYMIZED_OR_NOT_RETURNED');
   assert.equal(queryPrivatePage.diagnosis, 'POSITION_11_30');
+  assert.equal(queryPrivatePage.keywords.primary_source, 'ARTICLE_TOPIC_FALLBACK');
+  assert.equal(queryPrivatePage.keywords.disclosed_primary_query, null);
+  assert.match(fs.readFileSync(path.join(dir, 'gsc-priority-map.md'), 'utf8'), /Temat \(bez query\):/);
+  const apobSources = queryPrivatePage.topology.suggested_sources.map((item) => item.from);
+  assert.ok(!apobSources.includes('interleukina-6-il-6-badanie-normy-cena.html'));
+  assert.deepEqual(queryPrivatePage.gsc_submit_after_change, [visibleUrl]);
 });
 
 test('approval wave keeps query-private and zero-visibility pages in the portfolio', () => {
@@ -131,5 +137,7 @@ test('broad conclusions separate indexation from indexed zero visibility', () =>
   assert.equal(result.summary.indexation_problem, 1);
   assert.equal(result.summary.visible_articles, 2);
   assert.equal(result.summary.day_28.clicks_change_pct, -50);
-  assert.ok(result.priorities.some((item) => item.area === 'KLASTER_MITY'));
+  const myths = result.priorities.find((item) => item.area === 'KLASTER_MITY');
+  assert.ok(myths);
+  assert.match(myths.decision, /2 tekstów bez wyświetleń/);
 });
