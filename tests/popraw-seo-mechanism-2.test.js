@@ -48,6 +48,25 @@ test('MECHANIZM 2 assigns every article to exactly one of four baskets', () => {
   assert.equal(new Set(files).size, 4);
   assert.deepEqual(wave.coverage_contract.basket_counts, { BOOST: 1, ROKUJE: 1, NAPRAWA: 1, MONITORING: 1 });
   assert.equal(wave.monitoring[0].execution_status, 'COOLDOWN_MONITORUJ');
+  assert.equal(wave.rokuje_execution_sequence.pilot_size, 4);
+  assert.equal(wave.rokuje_execution_sequence.expansion_size, 20);
+  assert.equal(wave.rokuje_execution_sequence.expansion_gate, 'PILOT_LIVE_DEPLOYED_AND_VALIDATED');
+  assert.equal(wave.rokuje_execution_sequence.regenerate_before_expansion, true);
+});
+
+test('MECHANIZM 2 ranks ROKUJE deterministically before the 4 plus 20 sequence', () => {
+  const priorityMap = Array.from({ length: 26 }, (_, index) => article(
+    `rokuje-${String(index + 1).padStart(2, '0')}.html`,
+    'POSITION_11_30',
+    { query: `rokuje ${index + 1}`, clicks: 0, impressions: index + 1, ctr: 0, position: 20 },
+  ));
+  const articleByFile = new Map(priorityMap.map((item) => [item.path, { date_modified: item.date_modified, title: item.path, meta_description: '' }]));
+  const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: priorityMap });
+
+  assert.equal(wave.promising.length, 26);
+  assert.equal(wave.promising[0].file, 'rokuje-26.html');
+  assert.equal(wave.promising[3].file, 'rokuje-23.html');
+  assert.equal(wave.promising[23].file, 'rokuje-03.html');
 });
 
 test('MECHANIZM 2 keeps history, baseline and 7/14/28 checkpoints for every URL', () => {

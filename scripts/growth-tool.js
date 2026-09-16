@@ -16,6 +16,8 @@ const SEO_STATE_DIR = process.env.FITPO50_SEO_STATE_DIR
   ? path.resolve(process.env.FITPO50_SEO_STATE_DIR)
   : path.join(os.homedir(), 'Downloads', 'fitpo50-seo-state');
 const SITE_ORIGIN = 'https://fitpo50.pl';
+const SEO_ROKUJE_PILOT_SIZE = 4;
+const SEO_ROKUJE_EXPANSION_SIZE = 20;
 const TEMPORARILY_IGNORED_SEO_FILES = new Set([
   'narzedzia.html',
 ]);
@@ -1434,6 +1436,7 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
   const allKeys = new Set(allCards.map(approvalCardKey).filter(Boolean));
   const inventoryCount = fullCoverageItems.length || allCards.length;
   const boostItems = boostCards.map((card, index) => buildSeoApprovalItem(card, 'BOOST', index + 1, articleByFile, sourceWindowDays));
+  promisingCards.sort((a, b) => promisingScore(b) - promisingScore(a) || approvalCardKey(a).localeCompare(approvalCardKey(b)));
   const promisingItems = promisingCards.map((card, index) => buildSeoApprovalItem(card, 'ROKUJE', index + 1, articleByFile, sourceWindowDays));
   const repairItems = repairCards.map((card, index) => buildSeoApprovalItem(card, 'NAPRAWA', index + 1, articleByFile, sourceWindowDays));
   const monitoringItems = monitoringCards.map((card, index) => buildSeoApprovalItem(card, 'MONITORING', index + 1, articleByFile, sourceWindowDays));
@@ -1442,6 +1445,15 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
     status: 'AWAITING_USER_APPROVAL',
     rule: 'Każdy artykuł trafia dokładnie do jednego koszyka: BOOST, ROKUJE, NAPRAWA albo MONITORING. Cooldown przenosi do MONITORING, ale nigdy nie usuwa URL-a z raportu.',
     no_generic_text: true,
+    rokuje_execution_sequence: {
+      rule: 'Najpierw wykonaj pilotaż 4 najwyżej sklasyfikowanych pozycji ROKUJE. Po wdrożeniu i statusie LIVE_DEPLOYED_AND_VALIDATED wygeneruj raport ponownie i przygotuj jedną falę 20 najwyżej sklasyfikowanych pozostałych pozycji ROKUJE.',
+      pilot_size: SEO_ROKUJE_PILOT_SIZE,
+      expansion_size: SEO_ROKUJE_EXPANSION_SIZE,
+      ranking: 'promisingScore malejąco, a przy remisie nazwa pliku rosnąco',
+      expansion_gate: 'PILOT_LIVE_DEPLOYED_AND_VALIDATED',
+      regenerate_before_expansion: true,
+      approval_required_for_exact_ids: true,
+    },
     coverage_contract: {
       status: inventoryCount === allKeys.size ? 'PASS' : 'FAIL',
       article_inventory: inventoryCount,
@@ -3187,7 +3199,7 @@ function buildPoprawSeo() {
     unified_insights: unifiedInsights,
     approval_wave: unifiedInsights.approval_wave,
     chosen_articles: autopilot.chosen_articles,
-    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Agent przygotuje konkretne teksty i niezmienny manifest patchy, zastosuje go atomowo, zwaliduje, wykona commit/push, sprawdzi produkcję i poda końcową listę GSC. Nie musisz pamiętać kolejnych komend.',
+    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Dla ROKUJE obowiązuje sekwencja: pilotaż 4 najwyżej sklasyfikowanych stron, a po jego LIVE_DEPLOYED_AND_VALIDATED ponowny raport i jedna fala 20 najwyżej sklasyfikowanych pozostałych stron. Agent przygotuje konkretne teksty i niezmienny manifest patchy, zastosuje go atomowo, zwaliduje, wykona commit/push, sprawdzi produkcję i poda końcową listę GSC. Nie musisz pamiętać kolejnych komend.',
     safe_next_commands: [
       'npm run popraw-seo',
       'Po akceptacji ID: automatyczny manifest -> popraw-seo:apply -> walidacja -> commit/push -> LIVE -> lista GSC',
@@ -3673,6 +3685,7 @@ function writePromisingPagesMarkdown(insights, file) {
   lines.push('- Pracujemy na nich po `BOOST`/najpilniejszych stronach, bo mogą wejść do kolejnej fali wzrostu.');
   lines.push('- Nie wolno dodawać generycznych bloków. Każda zmiana musi wynikać z frazy, metryki, intencji, źródła, progu, liczby albo konkretnej luki w artykule.');
   lines.push('- Po zaakceptowanej edycji zgłaszamy zmieniony URL w GSC oraz, jeśli ma sens, 1-3 strony źródłowe z nowymi linkami wewnętrznymi.');
+  lines.push('- Kolejność pracy jest stała: najpierw 4 najwyżej sklasyfikowane pozycje `ROKUJE`; po ich `LIVE_DEPLOYED_AND_VALIDATED` raport liczymy ponownie i przygotowujemy 20 najwyżej sklasyfikowanych pozostałych pozycji `ROKUJE`.');
   lines.push('');
   if (!items.length) {
     lines.push('Brak kandydatów `ROKUJE` w obecnych danych.');

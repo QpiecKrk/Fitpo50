@@ -92,6 +92,7 @@ Każdy nowy błąd wykryty podczas `dodaj artykuł` albo `Obal mit` napraw dwupo
 - Cooldown i brak ujawnionych query nie usuwają URL-a.
 - Dla stron bez widoczności sprawdź stan indeksacji, canonical, robots i plan odkrywania.
 - Raport zawiera mapę kanibalizacji, historię, baseline, checkpointy 7/14/28 oraz szerokie wnioski całej witryny.
+- Dla `ROKUJE` obowiązuje sekwencja fal: pilotaż 4 najwyżej sklasyfikowanych stron, potem — dopiero po `LIVE_DEPLOYED_AND_VALIDATED` i ponownym przeliczeniu raportu — jedna fala 20 najwyżej sklasyfikowanych pozostałych stron.
 - Zakończ na `AWAITING_USER_APPROVAL`; nie edytuj bez zatwierdzenia konkretnych ID.
 - Po zatwierdzeniu ID użytkownik nie podaje kolejnych komend technicznych. Agent tworzy konkretny manifest `replace_exact`, uruchamia atomowy `popraw-seo:apply`, sprawdza HTML/PDF/mobile/desktop/_site/sitemap, wykonuje commit/push, monitoruje workflow live i podaje listę GSC. Każdy brak lub błąd zgłasza jawnie jako bloker.
 - Lista GSC powstaje wyłącznie po `LIVE_DEPLOYED_AND_VALIDATED`; lokalny komplet ani sam `git push` nie są dowodem wdrożenia produkcyjnego.

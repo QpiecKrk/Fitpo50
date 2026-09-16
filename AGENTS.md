@@ -63,6 +63,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Raport obejmuje wszystkie indeksowalne `BlogPosting`; żaden URL nie może zostać pominięty.
 - Każdy URL otrzymuje `BOOST`, `ROKUJE`, `NAPRAWA` albo `MONITORING` i konkretne działanie.
 - Warstwa stron/property GSC jest nadrzędna wobec anonimizowanych query.
+- `ROKUJE` wykonuj w stałej sekwencji: najpierw pilotaż 4 najwyżej sklasyfikowanych stron. Dopiero po `LIVE_DEPLOYED_AND_VALIDATED` przelicz raport i przedstaw do jednego zatwierdzenia 20 najwyżej sklasyfikowanych pozostałych stron `ROKUJE`.
 - Raport kończy się `AWAITING_USER_APPROVAL`. Bez akceptacji konkretnych ID nie edytuj HTML.
 - Po zatwierdzeniu ID agent prowadzi cały proces bez dalszych komend użytkownika: konkretny manifest patchy, dry-run, atomowy apply i rollback, PDF/_site/sitemap, walidacja, commit/push, kontrola produkcji oraz końcowa lista GSC. Jeżeli etap nie przejdzie, zgłasza bloker zamiast go pomijać.
 - Sam `git push` nie potwierdza produkcji. URL-e do GSC wolno podać dopiero po `LIVE_DEPLOYED_AND_VALIDATED`.

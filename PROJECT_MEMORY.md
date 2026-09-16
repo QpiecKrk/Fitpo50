@@ -125,6 +125,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Dane obejmują okna 7/28/90 dni i dostępne typy wyszukiwania. Stary, niepełny lub pomieszany cohort jest błędem blokującym.
 - `popraw-seo` diagnozuje wszystkie indeksowalne `BlogPosting`: `article_inventory = diagnosed_articles = actions_assigned`, `omitted_articles = 0`.
 - Każda strona otrzymuje koszyk i konkretne działanie: `BOOST`, `ROKUJE`, `NAPRAWA` albo `MONITORING`. Cooldown nie usuwa URL-a z raportu.
+- `ROKUJE` ma stałą kolejność wykonania: najpierw 4 najwyżej sklasyfikowane strony jako pilotaż. Po ich `LIVE_DEPLOYED_AND_VALIDATED` raport jest liczony ponownie, a następna fala obejmuje 20 najwyżej sklasyfikowanych pozostałych stron `ROKUJE`. Każda fala nadal wymaga zatwierdzenia jej konkretnych ID.
 - Brak danych GSC nie usuwa strony. Taki URL otrzymuje diagnostykę indeksacji i plan odkrywania.
 - Raport rozdziela indeksację od widoczności oraz identyfikuje m.in. `INDEXED_ZERO_VISIBILITY`, `CRAWLED_NOT_INDEXED`, `DISCOVERED_NOT_INDEXED`, `UNKNOWN_TO_GOOGLE` i problemy canonical/robots.
 - Raport zawiera mapę kanibalizacji, właściciela intencji, historię zmian, baseline i checkpointy 7/14/28.
