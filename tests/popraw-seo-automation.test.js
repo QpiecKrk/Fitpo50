@@ -129,6 +129,17 @@ test('GSC list remains empty until live HTML, canonical, sitemap and PDF all mat
   assert.equal(ready.status, 'LIVE_DEPLOYED_AND_VALIDATED');
   assert.deepEqual(ready.gsc_url_inspection, ['https://fitpo50.pl/a.html']);
   assert.deepEqual(ready.errors, []);
+
+  deployment.targets[0].content_needles = ['Roboczy fragment sprzed końcowej normalizacji HTML.'];
+  const exactHtmlWins = verifyLiveResponses(deployment, responses);
+  assert.equal(exactHtmlWins.status, 'LIVE_DEPLOYED_AND_VALIDATED');
+  assert.equal(exactHtmlWins.checks.find((check) => check.type === 'HTML').exact_hash, true);
+
+  deployment.targets[0].expected_html_sha256 = sha256(Buffer.from(`${html}\n`));
+  const staleHtml = verifyLiveResponses(deployment, responses);
+  assert.equal(staleHtml.status, 'LIVE_DEPLOYMENT_INCOMPLETE');
+  assert.ok(staleHtml.errors.some((error) => error.includes('brak zatwierdzonego fragmentu')));
+  deployment.targets[0].expected_html_sha256 = sha256(Buffer.from(html));
   deployment.targets[0].expected_pdf_sha256 = sha256(Buffer.from('%PDF-1.7 new edition'));
   const stalePdf = verifyLiveResponses(deployment, responses);
   assert.equal(stalePdf.status, 'LIVE_DEPLOYMENT_INCOMPLETE');
@@ -141,4 +152,37 @@ test('sitemap lastmod belongs to the matching URL rather than an earlier entry',
   const xml = '<urlset><url><loc>https://fitpo50.pl/</loc><lastmod>2026-01-01</lastmod></url><url><loc>https://fitpo50.pl/center.html</loc><lastmod>2026-09-05</lastmod></url></urlset>';
   assert.equal(sitemapLastmod(xml, 'https://fitpo50.pl/center.html'), '2026-09-05');
   assert.equal(sitemapLastmod(xml, 'https://fitpo50.pl/missing.html'), '');
+});
+
+test('live GSC queue contains every approved target URL', () => {
+  const dateModified = '2026-09-16T09:22:06+02:00';
+  const targets = Array.from({ length: 4 }, (_, index) => {
+    const number = index + 1;
+    const url = `https://fitpo50.pl/test-${number}.html`;
+    const html = `<html><head><meta property="article:modified_time" content="${dateModified}"><link rel="canonical" href="${url}"><script type="application/ld+json">{"dateModified":"${dateModified}"}</script></head><body>Treść ${number}</body></html>`;
+    return {
+      file: `test-${number}.html`,
+      url,
+      date_modified: dateModified,
+      content_needles: [`Treść ${number}`],
+      expected_html_sha256: sha256(Buffer.from(html)),
+      pdf_url: `https://fitpo50.pl/assets/pdf/test-${number}.pdf`,
+      expected_pdf_sha256: sha256(Buffer.from('%PDF-1.7 test')),
+      html,
+    };
+  });
+  const manifest = {
+    status: 'COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT',
+    approved_ids: ['ROKUJE 1', 'ROKUJE 2', 'ROKUJE 3', 'ROKUJE 4'],
+    targets: targets.map(({ html, ...target }) => target),
+  };
+  const sitemap = `<urlset>${targets.map((target) => `<url><loc>${target.url}</loc><lastmod>2026-09-16</lastmod></url>`).join('')}</urlset>`;
+  const responses = new Map([['https://fitpo50.pl/sitemap.xml', { status: 200, body: Buffer.from(sitemap) }]]);
+  for (const target of targets) {
+    responses.set(target.url, { status: 200, body: Buffer.from(target.html) });
+    responses.set(target.pdf_url, { status: 200, body: Buffer.from('%PDF-1.7 test') });
+  }
+  const result = verifyLiveResponses(manifest, responses);
+  assert.equal(result.status, 'LIVE_DEPLOYED_AND_VALIDATED');
+  assert.deepEqual(result.gsc_url_inspection, targets.map((target) => target.url));
 });

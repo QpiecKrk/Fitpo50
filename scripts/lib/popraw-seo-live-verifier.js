@@ -47,10 +47,12 @@ function verifyLiveResponses(manifest, responses) {
     if (canonical !== target.url) errors.push(`${target.url}: canonical=${canonical || 'MISSING'}.`);
     const dates = modifiedDates(html);
     if (!dates.length || dates.some((value) => value !== target.date_modified)) errors.push(`${target.url}: dateModified nie odpowiada zatwierdzonej wersji.`);
-    for (const needle of target.content_needles || []) {
-      if (!normalizeText(html).includes(normalizeText(needle))) errors.push(`${target.url}: brak zatwierdzonego fragmentu treści.`);
+    const exactHash = Boolean(target.expected_html_sha256) && bodyHash(htmlResponse.body) === target.expected_html_sha256;
+    if (!exactHash) {
+      for (const needle of target.content_needles || []) {
+        if (!normalizeText(html).includes(normalizeText(needle))) errors.push(`${target.url}: brak zatwierdzonego fragmentu treści.`);
+      }
     }
-    const exactHash = bodyHash(html) === target.expected_html_sha256;
     checks.push({ url: target.url, type: 'HTML', status: 200, canonical, date_modified: dates[0] || '', exact_hash: exactHash });
     const pdfResponse = responses.get(target.pdf_url);
     if (!pdfResponse || pdfResponse.status !== 200 || !Buffer.from(pdfResponse.body || '').subarray(0, 5).equals(Buffer.from('%PDF-'))) {
@@ -67,8 +69,11 @@ function verifyLiveResponses(manifest, responses) {
         errors.push(`${source.url}: strona źródłowa nie zwróciła HTTP 200.`);
         continue;
       }
-      for (const needle of source.content_needles || []) {
-        if (!normalizeText(response.body).includes(normalizeText(needle))) errors.push(`${source.url}: brak zatwierdzonego linku lub fragmentu.`);
+      const sourceExactHash = Boolean(source.expected_html_sha256) && bodyHash(response.body) === source.expected_html_sha256;
+      if (!sourceExactHash) {
+        for (const needle of source.content_needles || []) {
+          if (!normalizeText(response.body).includes(normalizeText(needle))) errors.push(`${source.url}: brak zatwierdzonego linku lub fragmentu.`);
+        }
       }
       const sourceCanonical = canonicalFromHtml(response.body);
       if (sourceCanonical !== source.url) errors.push(`${source.url}: canonical=${sourceCanonical || 'MISSING'}.`);
@@ -82,10 +87,10 @@ function verifyLiveResponses(manifest, responses) {
       }
       const sourceLastmod = sitemap && sitemap.status === 200 ? sitemapLastmod(sitemap.body, source.url) : '';
       if (sourceLastmod !== String(source.date_modified || '').slice(0, 10)) errors.push(`${source.url}: sitemap lastmod=${sourceLastmod || 'MISSING'}.`);
-      checks.push({ url: source.url, type: 'SOURCE_PAGE', status: 200, canonical: sourceCanonical, date_modified: sourceDates[0] || '' });
+      checks.push({ url: source.url, type: 'SOURCE_PAGE', status: 200, canonical: sourceCanonical, date_modified: sourceDates[0] || '', exact_hash: sourceExactHash });
     }
   }
-  const inspectionUrls = [...new Set((manifest.targets || []).map((target) => target.url))].slice(0, 3);
+  const inspectionUrls = [...new Set((manifest.targets || []).map((target) => target.url))];
   const recrawlUrls = [...new Set((manifest.targets || []).flatMap((target) => target.source_pages_for_recrawl || []))];
   return {
     version: 1,
