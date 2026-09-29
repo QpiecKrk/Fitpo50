@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-29T17:48:46.252Z",
+  "slug": "kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50",
+  "html_sha256": "68f7d1418a53fa670b3b85f3f02cc58b88966f83ea6c0089114dd2a998a6959b",
+  "site_html_sha256": "68f7d1418a53fa670b3b85f3f02cc58b88966f83ea6c0089114dd2a998a6959b",
+  "pdf_sha256": "929db493490eda82d49c2b4f7eacb3f4f746f1d6d5188bce5ae390fb138ea649",
+  "site_pdf_sha256": "929db493490eda82d49c2b4f7eacb3f4f746f1d6d5188bce5ae390fb138ea649",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 5,
+    "text_coverage": 1,
+    "rendered_pages": 5
+  },
+  "errors": []
+}

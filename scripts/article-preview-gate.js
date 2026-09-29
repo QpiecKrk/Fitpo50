@@ -263,9 +263,18 @@ async function main() {
       const article = document.querySelector('article.article-content')?.cloneNode(true);
       article?.querySelectorAll('.share-article-section, script, style, button').forEach((node) => node.remove());
       const title = document.querySelector('h1.article-header__title')?.textContent || '';
-      const textChunks = article ? [...article.querySelectorAll('h1, h2, h3, h4, p, li, caption, th, td, figcaption')].map((node) => node.textContent || '') : [];
-      const expectedImages = (document.querySelector('section.article-intro-grid .article-hero img') ? 1 : 0) + document.querySelectorAll('article.article-content figure img').length;
-      return { tables: tables.length, tableErrors, tableMarkup: tables.map((table) => table.outerHTML).join('\n'), text: `${title} ${textChunks.join(' ')}`, expectedImages };
+      // Every text node and image matters, including direct text in callouts
+      // and pictures outside figure. A selector subset could certify lost data.
+      const quickAnswer = document.querySelector('#quick-answer');
+      const externalQuickAnswer = quickAnswer && !quickAnswer.closest('article.article-content') ? quickAnswer : null;
+      const textParts = [];
+      for (const root of [externalQuickAnswer, article].filter(Boolean)) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        while (walker.nextNode()) textParts.push(walker.currentNode.textContent);
+      }
+      const text = textParts.join(' ');
+      const expectedImages = (document.querySelector('section.article-intro-grid .article-hero img') ? 1 : 0) + (article?.querySelectorAll('img').length || 0) + (externalQuickAnswer?.querySelectorAll('img').length || 0);
+      return { tables: tables.length, tableErrors, tableMarkup: tables.map((table) => table.outerHTML).join('\n'), text: `${title} ${text}`, expectedImages };
     }, center);
     return { desktop: desktopResult, mobile: mobileResult, semantic: semanticResult };
   }, { timeoutMs: 120000, label: `Podgląd artykułu ${slug}` });

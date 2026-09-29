@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-29T17:48:27.173Z",
+  "slug": "oponka-zablokowana-powiez",
+  "html_sha256": "c873f35393a6ac37dfe71603830bb84bb76f2b0a17cf395ea1253e5cffb1f924",
+  "site_html_sha256": "c873f35393a6ac37dfe71603830bb84bb76f2b0a17cf395ea1253e5cffb1f924",
+  "pdf_sha256": "0de77eb21121f34ed93829019b6298e55f919ee04ba18275089eeaba5f1bfe38",
+  "site_pdf_sha256": "0de77eb21121f34ed93829019b6298e55f919ee04ba18275089eeaba5f1bfe38",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 6,
+    "text_coverage": 1,
+    "rendered_pages": 6
+  },
+  "errors": []
+}

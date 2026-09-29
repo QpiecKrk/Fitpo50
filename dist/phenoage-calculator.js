@@ -1,5 +1,42 @@
 "use strict";
 (() => {
+  // src/phenoage-core.ts
+  function canonicalizePhenoAgeValues(values, units) {
+    return {
+      ...values,
+      albumin: units.albuminUnit === "gdL" ? values.albumin * 10 : values.albumin,
+      creatinine: units.creatinineUnit === "mgdL" ? values.creatinine * 88.4 : values.creatinine,
+      glucose: units.glucoseUnit === "mgdL" ? values.glucose / 18 : values.glucose,
+      crp: units.crpUnit === "mgL" ? values.crp / 10 : values.crp
+    };
+  }
+  function calculatePhenoAge(values) {
+    const inputs = [
+      values.age,
+      values.albumin,
+      values.creatinine,
+      values.glucose,
+      values.crp,
+      values.lymphocyte,
+      values.mcv,
+      values.rdw,
+      values.alp,
+      values.wbc
+    ];
+    if (inputs.some((value) => !Number.isFinite(value)) || values.crp <= 0) {
+      return Number.NaN;
+    }
+    const linearPredictor = -19.90667 - 0.03359355 * values.albumin + 9506491e-9 * values.creatinine + 0.1953192 * values.glucose + 0.09536762 * Math.log(values.crp) - 0.01199984 * values.lymphocyte + 0.02676401 * values.mcv + 0.3306156 * values.rdw + 1868778e-9 * values.alp + 0.05542406 * values.wbc + 0.08035356 * values.age;
+    const tenYearMortality = 1 - Math.exp(-1.51714 * Math.exp(linearPredictor) / 7692696e-9);
+    return Math.log(-55305e-7 * Math.log(1 - tenYearMortality)) / 0.090165 + 141.50225;
+  }
+  function describeAgeDifference(difference) {
+    if (difference < -0.05) return "poni\u017Cej wieku metrykalnego";
+    if (difference > 0.05) return "powy\u017Cej wieku metrykalnego";
+    return "zbli\u017Cony do wieku metrykalnego";
+  }
+
+  // src/phenoage-calculator.ts
   (function() {
     "use strict";
     const form = document.querySelector("[data-pheno-form]");
@@ -13,20 +50,18 @@
     const differenceNode = document.querySelector("[data-age-difference]");
     const labelNode = document.querySelector("[data-age-label]");
     const explanationNode = document.querySelector("[data-pheno-explanation]");
-    if (!form || !errorNode || !emptyNode || !contentNode || !progressLabel || !progressBar || !ageNode || !chronoNode || !differenceNode || !labelNode || !explanationNode) return;
-    const safeForm = form, safeError = errorNode, safeEmpty = emptyNode, safeContent = contentNode;
-    const safeProgressLabel = progressLabel, safeProgressBar = progressBar;
+    if (!form || !errorNode || !emptyNode || !contentNode || !progressLabel || !progressBar || !ageNode || !chronoNode || !differenceNode || !labelNode || !explanationNode) {
+      return;
+    }
+    const safeForm = form;
+    const safeError = errorNode;
+    const safeEmpty = emptyNode;
+    const safeContent = contentNode;
+    const safeProgressLabel = progressLabel;
+    const safeProgressBar = progressBar;
     const biomarkerInputs = Array.from(safeForm.querySelectorAll("input[required]"));
     function parse(name) {
       return Number(String(new FormData(safeForm).get(name) || "").replace(",", "."));
-    }
-    function canonical(values, units) {
-      return { ...values, albumin: units.albuminUnit === "gdL" ? values.albumin * 10 : values.albumin, creatinine: units.creatinineUnit === "mgdL" ? values.creatinine * 88.4 : values.creatinine, glucose: units.glucoseUnit === "mgdL" ? values.glucose / 18 : values.glucose, crp: units.crpUnit === "mgL" ? values.crp / 10 : values.crp };
-    }
-    function calculate(v) {
-      const xb = -19.9067 - 0.0336 * v.albumin + 95e-4 * v.creatinine + 0.1953 * v.glucose + 0.0954 * Math.log(v.crp) - 0.012 * v.lymphocyte + 0.0268 * v.mcv + 0.3306 * v.rdw + 188e-5 * v.alp + 0.0554 * v.wbc + 0.0804 * v.age;
-      const mortality = 1 - Math.exp(-Math.exp(xb) * (Math.exp(120 * 76927e-7) - 1) / 76927e-7);
-      return 141.50225 + Math.log(-553e-5 * Math.log(1 - mortality)) / 0.090165;
     }
     function updateProgress() {
       let complete = 0;
@@ -61,15 +96,31 @@
           safeForm.reportValidity();
           return;
         }
-        const values = { age: parse("age"), albumin: parse("albumin"), creatinine: parse("creatinine"), glucose: parse("glucose"), crp: parse("crp"), lymphocyte: parse("lymphocyte"), mcv: parse("mcv"), rdw: parse("rdw"), alp: parse("alp"), wbc: parse("wbc") };
+        const values = {
+          age: parse("age"),
+          albumin: parse("albumin"),
+          creatinine: parse("creatinine"),
+          glucose: parse("glucose"),
+          crp: parse("crp"),
+          lymphocyte: parse("lymphocyte"),
+          mcv: parse("mcv"),
+          rdw: parse("rdw"),
+          alp: parse("alp"),
+          wbc: parse("wbc")
+        };
         const data = new FormData(safeForm);
-        const units = { albuminUnit: String(data.get("albuminUnit")), creatinineUnit: String(data.get("creatinineUnit")), glucoseUnit: String(data.get("glucoseUnit")), crpUnit: String(data.get("crpUnit")) };
-        const normalized = canonical(values, units);
+        const units = {
+          albuminUnit: String(data.get("albuminUnit")),
+          creatinineUnit: String(data.get("creatinineUnit")),
+          glucoseUnit: String(data.get("glucoseUnit")),
+          crpUnit: String(data.get("crpUnit"))
+        };
+        const normalized = canonicalizePhenoAgeValues(values, units);
         if (normalized.crp <= 0) {
           showError("CRP musi by\u0107 wi\u0119ksze od zera, poniewa\u017C wz\xF3r wykorzystuje logarytm tego wyniku.");
           return;
         }
-        const phenoAge = calculate(normalized);
+        const phenoAge = calculatePhenoAge(normalized);
         if (!Number.isFinite(phenoAge)) {
           showError("Nie uda\u0142o si\u0119 obliczy\u0107 wyniku. Sprawd\u017A warto\u015Bci i jednostki.");
           return;
@@ -81,15 +132,13 @@
         ageNode.textContent = rounded.toFixed(1).replace(".", ",");
         chronoNode.textContent = `${values.age} lat`;
         differenceNode.textContent = `${difference > 0 ? "+" : ""}${difference.toFixed(1).replace(".", ",")} lat`;
-        if (difference <= -3) {
-          labelNode.textContent = "ni\u017Cszy";
-          explanationNode.textContent = "Wynik jest ni\u017Cszy od wieku metrykalnego. Oznacza to korzystniejszy profil dziewi\u0119ciu marker\xF3w w ramach tego modelu, ale nie dowodzi wolniejszego starzenia wszystkich narz\u0105d\xF3w.";
-        } else if (difference >= 3) {
-          labelNode.textContent = "wy\u017Cszy";
-          explanationNode.textContent = "Wynik jest wy\u017Cszy od wieku metrykalnego. Warto om\xF3wi\u0107 poszczeg\xF3lne wyniki bada\u0144 z lekarzem, zamiast pr\xF3bowa\u0107 obni\u017Ca\u0107 sam\u0105 liczb\u0119 PhenoAge.";
+        labelNode.textContent = describeAgeDifference(difference);
+        if (difference < -0.05) {
+          explanationNode.textContent = "Modelowy wynik jest ni\u017Cszy od wieku metrykalnego. Oznacza to korzystniejszy \u0142\u0105czny profil wprowadzonych danych w ramach tego wzoru, ale nie dowodzi, \u017Ce wszystkie narz\u0105dy s\u0105 m\u0142odsze.";
+        } else if (difference > 0.05) {
+          explanationNode.textContent = "Modelowy wynik jest wy\u017Cszy od wieku metrykalnego. Najwi\u0119cej sensu ma om\xF3wienie poszczeg\xF3lnych wynik\xF3w bada\u0144 z lekarzem, a nie pr\xF3ba obni\u017Cenia samej liczby PhenoAge.";
         } else {
-          labelNode.textContent = "zbli\u017Cony";
-          explanationNode.textContent = "Wynik jest zbli\u017Cony do wieku metrykalnego. Najwi\u0119cej informacji daje obserwowanie marker\xF3w i ich trendu, nie pojedynczej warto\u015Bci modelu.";
+          explanationNode.textContent = "Modelowy wynik jest zbli\u017Cony do wieku metrykalnego. Nadal warto interpretowa\u0107 ka\u017Cdy wynik laboratoryjny osobno i w odniesieniu do w\u0142asnego stanu zdrowia.";
         }
       } finally {
         if (button) button.disabled = false;

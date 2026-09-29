@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-29T17:48:31.711Z",
+  "slug": "zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences",
+  "html_sha256": "6b0634078a2bbe43d907562087f4d3da54af0e8e88bb048c735426d93e04f8e3",
+  "site_html_sha256": "6b0634078a2bbe43d907562087f4d3da54af0e8e88bb048c735426d93e04f8e3",
+  "pdf_sha256": "556b77ae256d4b28407775d2c8ab37c5ec31bfbf03abecd76c153594f090f76a",
+  "site_pdf_sha256": "556b77ae256d4b28407775d2c8ab37c5ec31bfbf03abecd76c153594f090f76a",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

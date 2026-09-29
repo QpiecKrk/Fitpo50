@@ -1,17 +1,11 @@
+import {
+  calculateProtein,
+  type ProteinActivity,
+  type ProteinGoal
+} from './protein-core';
+
 (function () {
   'use strict';
-
-  type Activity = 'low' | 'regular' | 'strength';
-  type Goal = 'maintain' | 'muscle' | 'reduction';
-
-  type ProteinRange = {
-    minimumFactor: number;
-    maximumFactor: number;
-    minimumDaily: number;
-    maximumDaily: number;
-    minimumMeal: number;
-    maximumMeal: number;
-  };
 
   const form = document.querySelector<HTMLFormElement>('[data-protein-form]');
   const errorNode = document.querySelector<HTMLElement>('[data-protein-error]');
@@ -33,7 +27,7 @@
   const proteinEmptyNode = emptyNode;
   const proteinContentNode = contentNode;
   const proteinBlockedNode = blockedNode;
-  const trackedFields = Array.from(proteinForm.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input[name="weight"], select'));
+  const trackedFields = Array.from(proteinForm.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input[name="age"], input[name="weight"], select'));
 
   function updateFieldState(field: HTMLInputElement | HTMLSelectElement): void {
     const fieldContainer = field.closest('.calculator-field');
@@ -50,57 +44,22 @@
     field.addEventListener('change', () => updateFieldState(field));
   });
 
-  function getFactors(activity: Activity, goal: Goal): [number, number] {
-    const activityRanges: Record<Activity, [number, number]> = {
-      low: [1.0, 1.2],
-      regular: [1.2, 1.4],
-      strength: [1.2, 1.6]
-    };
-
-    let [minimumFactor, maximumFactor] = activityRanges[activity];
-
+  function getExplanation(age: number, activity: ProteinActivity, goal: ProteinGoal): string {
     if (goal === 'muscle') {
-      minimumFactor = Math.max(minimumFactor, 1.4);
-      maximumFactor = 1.6;
+      return 'Zakres uwzględnia cel budowania lub odbudowy mięśni. Samo białko nie zastępuje treningu siłowego, odpowiedniej ilości energii i regeneracji.';
     }
 
     if (goal === 'reduction') {
-      minimumFactor = Math.max(minimumFactor, 1.2);
-      maximumFactor = 1.6;
-    }
-
-    return [minimumFactor, maximumFactor];
-  }
-
-  function calculateProtein(weight: number, activity: Activity, goal: Goal, meals: number): ProteinRange {
-    const [minimumFactor, maximumFactor] = getFactors(activity, goal);
-    const minimumDaily = Math.round(weight * minimumFactor);
-    const maximumDaily = Math.round(weight * maximumFactor);
-
-    return {
-      minimumFactor,
-      maximumFactor,
-      minimumDaily,
-      maximumDaily,
-      minimumMeal: Math.round(minimumDaily / meals),
-      maximumMeal: Math.round(maximumDaily / meals)
-    };
-  }
-
-  function getExplanation(activity: Activity, goal: Goal): string {
-    if (goal === 'muscle') {
-      return 'Wyższy zakres wynika z celu budowania lub odbudowy mięśni. Samo białko nie zastępuje treningu siłowego, odpowiedniej ilości energii i regeneracji.';
-    }
-
-    if (goal === 'reduction') {
-      return 'Podczas redukcji wyższy udział białka może ułatwiać ochronę mięśni i sytość. Zbyt duży deficyt energii nadal może jednak pogarszać regenerację.';
+      return 'Podczas redukcji taki zakres bywa stosowany w planach mających ograniczać utratę mięśni. Zbyt duży deficyt energii nadal może pogarszać regenerację.';
     }
 
     if (activity === 'low') {
-      return 'To zakres startowy dla osoby po 50-tce z małą aktywnością. Regularny ruch lub trening siłowy mogą przesunąć potrzeby w górę.';
+      return age >= 65
+        ? 'To zakres zalecany zdrowym osobom starszym z małą aktywnością. Choroba, niedożywienie lub leczenie wymagają indywidualnego ustalenia celu.'
+        : 'To ostrożny zakres startowy dla osoby w wieku 50–64 lat z małą aktywnością. Dolna granica odpowiada europejskiej wartości referencyjnej dla zdrowych dorosłych.';
     }
 
-    return 'Zakres uwzględnia regularną aktywność. W dni treningowe i przy zwiększaniu obciążeń praktyczne zapotrzebowanie może znajdować się bliżej górnej granicy.';
+    return 'Zakres uwzględnia regularną aktywność. To punkt do planowania jadłospisu, a nie granica, do której trzeba dobijać każdego dnia.';
   }
 
   function showError(message: string): void {
@@ -116,6 +75,10 @@
     proteinErrorNode.hidden = true;
   }
 
+  function formatFactor(value: number): string {
+    return value.toLocaleString('pl-PL', { maximumFractionDigits: 2 });
+  }
+
   proteinForm.addEventListener('submit', (event) => {
     event.preventDefault();
     clearError();
@@ -125,11 +88,17 @@
 
     try {
       const data = new FormData(proteinForm);
+      const age = Number(data.get('age'));
       const weight = Number(String(data.get('weight') || '').replace(',', '.'));
-      const activity = String(data.get('activity') || '') as Activity;
-      const goal = String(data.get('goal') || '') as Goal;
+      const activity = String(data.get('activity') || '') as ProteinActivity;
+      const goal = String(data.get('goal') || '') as ProteinGoal;
       const meals = Number(data.get('meals'));
       const kidneyRestriction = data.get('kidney') === 'on';
+
+      if (!Number.isInteger(age) || age < 50 || age > 120) {
+        showError('Podaj wiek od 50 do 120 lat.');
+        return;
+      }
 
       if (!Number.isFinite(weight) || weight < 40 || weight > 250) {
         showError('Podaj masę ciała od 40 do 250 kg.');
@@ -159,14 +128,14 @@
         return;
       }
 
-      const result = calculateProtein(weight, activity, goal, meals);
+      const result = calculateProtein({ age, weight, activity, goal, meals });
       proteinBlockedNode.hidden = true;
       proteinContentNode.hidden = false;
       dailyRangeNode.textContent = `${result.minimumDaily}–${result.maximumDaily}`;
-      factorRangeNode.textContent = `${result.minimumFactor.toFixed(1).replace('.', ',')}–${result.maximumFactor.toFixed(1).replace('.', ',')} g/kg`;
+      factorRangeNode.textContent = `${formatFactor(result.minimumFactor)}–${formatFactor(result.maximumFactor)} g/kg`;
       mealRangeNode.textContent = `${result.minimumMeal}–${result.maximumMeal} g`;
-      explanationNode.textContent = getExplanation(activity, goal);
-      nextStepNode.textContent = `Spróbuj rozłożyć dzienny zakres na ${meals} podobne porcje. Zacznij od sprawdzenia jednego typowego dnia zamiast zmieniać od razu cały jadłospis.`;
+      explanationNode.textContent = getExplanation(age, activity, goal);
+      nextStepNode.textContent = `Podział ${result.minimumMeal}–${result.maximumMeal} g na posiłek to tylko równe dzielenie wyniku przez ${meals}. Zacznij od sprawdzenia jednego typowego dnia zamiast zmieniać od razu cały jadłospis.`;
     } finally {
       if (submitButton) submitButton.disabled = false;
     }

@@ -5,6 +5,6 @@
 - Render HTML: desktop 1440 px + mobile 390 px
 - Tabele semantyczne: 8
 - PDF: 22 stron, wyrenderowano 22
-- Zgodność tekstu HTML→PDF: 99.06%
+- Zgodność tekstu HTML→PDF: 99.08%
 - HTML source/_site: 1:1
 - PDF source/_site: 1:1

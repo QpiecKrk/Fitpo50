@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "apob-norma-cena-jak-czytac-wynik",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "4ae03c067fbb0637ff4070fd7a745a5f3c9aeabfc25a2698bf2fe9dcfb800b1c",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po pięćdziesiątce omawia wynik ApoB podczas konsultacji lekarskiej online",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-hero-2026.avif",
+          "sha256": "631a4800a7ee973eca9c2e6bf8121a9b2975229baf6f1da0eb3a6853196fa2b2",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-hero-2026.webp",
+          "sha256": "b961a85e969b43664f898513f8af7461e23b4a7fcf16f042e12eee5770cbf77e",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-hero-2026.jpg",
+          "sha256": "11b01a9b0707fc7f6e583d6a541d3e9cf2fcd2f86988ca07bb7c85a2bfe492cb",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po pięćdziesiątce omawia wynik ApoB podczas konsultacji lekarskiej online. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co dokładnie mierzy ApoB?",
+      "alt": "Cząstki lipoprotein zawierające po jednej cząsteczce apolipoproteiny B",
+      "caption": "ApoB przybliża liczbę aterogennych cząstek, ponieważ każda z nich zawiera jedną cząsteczkę ApoB100.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-czastki.avif",
+          "sha256": "2b4cd6d5adf9f25802d510d31c3ad856944f00f8902c7caaf3d4f02b91f3e231",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-czastki.webp",
+          "sha256": "b2a08d0ca0f82fd70c78954a4a2cc27afe8b1013ae52dec14f6871356eb633ba",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-czastki.jpg",
+          "sha256": "5785c8b979aa660e9e8d7b82142234cbf0b1cf0605ea470d5446bb087fd5b398",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co dokładnie mierzy ApoB?”: Cząstki lipoprotein zawierające po jednej cząsteczce apolipoproteiny B. Zgodność z treścią potwierdza podpis: ApoB przybliża liczbę aterogennych cząstek, ponieważ każda z nich zawiera jedną cząsteczkę ApoB100."
+      }
+    },
+    {
+      "placement": "section:Jak przeliczyć ApoB z g/l na mg/dl?",
+      "alt": "Dojrzała osoba przelicza jednostki wyniku ApoB przy pomocy kalkulatora",
+      "caption": "Przy porównywaniu wyników ApoB trzeba najpierw sprawdzić jednostkę: wartość w g/l mnoży się przez 100, aby otrzymać mg/dl.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-przeliczenie.avif",
+          "sha256": "f73377368da130b3f2ad87755d123be7fa2d46a7675a9cdf0200b810a2736b85",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-przeliczenie.webp",
+          "sha256": "27c7d3f99e9c72ecaf70188176f35585afdc8cdfca03a325c77372e83d1c5490",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-przeliczenie.jpg",
+          "sha256": "6ded5a7492c63d779c5d2c147e8b052f2941bd15c6a4478cd9d8a44dd8be2ed6",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak przeliczyć ApoB z g/l na mg/dl?”: Dojrzała osoba przelicza jednostki wyniku ApoB przy pomocy kalkulatora. Zgodność z treścią potwierdza podpis: Przy porównywaniu wyników ApoB trzeba najpierw sprawdzić jednostkę: wartość w g/l mnoży się przez 100, aby otrzymać mg/dl."
+      }
+    },
+    {
+      "placement": "section:Czy wynik w zakresie laboratorium oznacza optymalny cel?",
+      "alt": "Lekarka wyjaśnia pacjentowi różnicę między zakresem laboratorium a celem leczenia",
+      "caption": "Zakres referencyjny laboratorium i cel zależny od ryzyka odpowiadają na inne pytania, dlatego wynik wymaga kontekstu klinicznego.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-cel-ryzyko.avif",
+          "sha256": "4aae2d10736ec4a4ceaa473cd5e390b041789e4f18c0a13c8b952f2125a23b9f",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-cel-ryzyko.webp",
+          "sha256": "129922db0c1a4e2e5eed954b0ff471ca2b0b92e5d9f213d4a32d27150ed98cf0",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-cel-ryzyko.jpg",
+          "sha256": "4a29f3224ed1897dde2091aea4192cf2d06b0adb50febd2edf011e0e5469cb88",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy wynik w zakresie laboratorium oznacza optymalny cel?”: Lekarka wyjaśnia pacjentowi różnicę między zakresem laboratorium a celem leczenia. Zgodność z treścią potwierdza podpis: Zakres referencyjny laboratorium i cel zależny od ryzyka odpowiadają na inne pytania, dlatego wynik wymaga kontekstu klinicznego."
+      }
+    },
+    {
+      "placement": "section:Kiedy wynik ApoB wymaga rozmowy z lekarzem?",
+      "alt": "Lekarz omawia z pacjentem wynik ApoB i pozostałe czynniki ryzyka sercowego",
+      "caption": "Decyzji o leczeniu nie podejmuje się na podstawie jednej liczby; lekarz zestawia ApoB z całym profilem ryzyka pacjenta.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-konsultacja.avif",
+          "sha256": "3346657661e8a2fcb11b15a8590b3c4aaee36fc3623272467b4d89f2bea09a19",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-konsultacja.webp",
+          "sha256": "c2998af1a146859e99f902f2e228fcb59cd2cdb7648deec51dd13607ad4ff994",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-konsultacja.jpg",
+          "sha256": "e76bdfc307a45a752883c315f94498a11cf4f104b05acb3927823e0a6da4f63b",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy wynik ApoB wymaga rozmowy z lekarzem?”: Lekarz omawia z pacjentem wynik ApoB i pozostałe czynniki ryzyka sercowego. Zgodność z treścią potwierdza podpis: Decyzji o leczeniu nie podejmuje się na podstawie jednej liczby; lekarz zestawia ApoB z całym profilem ryzyka pacjenta."
+      }
+    },
+    {
+      "placement": "section:Czy do badania ApoB trzeba być na czczo?",
+      "alt": "Kobieta po pięćdziesiątce przygotowana do rutynowego pobrania krwi w laboratorium",
+      "caption": "ApoB można zwykle oznaczać bez rutynowego postu, choć lekarz lub laboratorium może zalecić inne warunki dla całego zestawu badań.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-pobranie.avif",
+          "sha256": "cf5f4553987bd60abe0592c5cb94b19cffd4a7190c894e68298dd85b1ab57712",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-pobranie.webp",
+          "sha256": "410cecb373d2b9d38b329c4d80d3ddef04600b326a05c60706e0b8225dec3cef",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-pobranie.jpg",
+          "sha256": "d6921147587be73eef20055ff2261789a184a4e6832d272fb19f7157e52bf146",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy do badania ApoB trzeba być na czczo?”: Kobieta po pięćdziesiątce przygotowana do rutynowego pobrania krwi w laboratorium. Zgodność z treścią potwierdza podpis: ApoB można zwykle oznaczać bez rutynowego postu, choć lekarz lub laboratorium może zalecić inne warunki dla całego zestawu badań."
+      }
+    },
+    {
+      "placement": "section:Czy badanie ApoB można wykonać na NFZ?",
+      "alt": "Pacjentka pyta w rejestracji poradni o możliwość wykonania specjalistycznego badania",
+      "caption": "ApoB nie znajduje się na liście badań POZ, ale figuruje w katalogu AOS; dostępność i wskazanie trzeba potwierdzić w poradni.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-nfz.avif",
+          "sha256": "55ca80c0f1129341becb3c7b4fdeebebf701960c846d297d1ba990e4f3f68964",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-nfz.webp",
+          "sha256": "5367b56c239e66b1b23b35b05b5162ad21990d7b5d83ec41d2f082dd47b2de06",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-nfz.jpg",
+          "sha256": "472e90224cf531835512e66cd5add39c12b3c669d1b2ed405838fa5d78bb1035",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy badanie ApoB można wykonać na NFZ?”: Pacjentka pyta w rejestracji poradni o możliwość wykonania specjalistycznego badania. Zgodność z treścią potwierdza podpis: ApoB nie znajduje się na liście badań POZ, ale figuruje w katalogu AOS; dostępność i wskazanie trzeba potwierdzić w poradni."
+      }
+    }
+  ]
+}

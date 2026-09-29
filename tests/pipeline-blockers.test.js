@@ -41,6 +41,20 @@ test('pipeline blokuje fałszywe albo niedziałające źródło', () => {
   assert.match(result.errors.join('\n'), /url_status|silnego źródła|dekoracyjna lista źródeł/);
 });
 
+test('bibliografia JSON blokuje wyniki wyszukiwania nawet z HTTP 200', () => {
+  const json = fixture('fake-source');
+  json.sources = [{ url: 'https://pubmed.ncbi.nlm.nih.gov/?term=fascia', label: 'Badania', evidence_level: 'systematic_review', checked_at: '2026-08-24', url_status: 'reachable', http_status: 200 }];
+  const result = validateArticleEvidence(json, { today: '2026-08-24' });
+  assert.match(result.errors.join('\n'), /wyniki wyszukiwania/);
+});
+
+test('reachable nie zastępuje poprawnego kodu HTTP', () => {
+  const json = fixture('fake-source');
+  json.sources = [{ url: 'https://pubmed.ncbi.nlm.nih.gov/25603749/', label: 'Badanie', evidence_level: 'systematic_review', checked_at: '2026-08-24', url_status: 'reachable', http_status: 503 }];
+  const result = validateArticleEvidence(json, { today: '2026-08-24' });
+  assert.match(result.errors.join('\n'), /HTTP.*503/);
+});
+
 test('pipeline blokuje generyczny quick answer', () => {
   const result = validators.validateQuickAnswer(fixture('generic-quick-answer').quick_answer);
   assert.equal(result.valid, false);

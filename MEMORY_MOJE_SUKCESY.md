@@ -10,6 +10,7 @@ Ten plik dotyczy tylko modulu "Moje Sukcesy" (kalendarz + strony dnia).
   - logiki admina odpowiedzialnej za publikacje dnia i synchronizacje kalendarza.
 - Nie dotyczy klasycznych artykulow "Porady".
 - Nie dotyczy dzialu `Mity`; artykuly obalajace mity sa zwyklymi artykulami `Porady` w kategorii `mity.html`.
+- Jezeli material z "Moich Sukcesow" staje sie osobnym artykulem `Porady`, od poczatku przechodzi pelny Quality Gate z `ARTICLE_STANDARD.md`; zasady strony dnia nie zastepuja bramek artykulu.
 
 ## Zasada produktu
 

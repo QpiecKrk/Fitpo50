@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "okulary-do-czytania-trening-akomodacji-oka",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "db66bb7a45cf9997af0a0f2d266faebf86e74e7893d4d5958d784b673a504ace",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta po sześćdziesiątce czyta książkę w prawidłowo dobranych okularach do bliży",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/presbyopia-reading-glasses-hero-2026.avif",
+          "sha256": "3a209b7b0878f2163081ebf727d0fc36a97dbc9fa1b5393c9face8cc1e24ad25",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/presbyopia-reading-glasses-hero-2026.webp",
+          "sha256": "58f167bb0f957facc326e139d52ac24a07112c44a97ff4ecfb2fa2091341ac2d",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/presbyopia-reading-glasses-hero-2026.jpg",
+          "sha256": "2c8796d28211c6770c685306c03d2490324c20aede47c2943e479a8939eb60e0",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Kobieta po sześćdziesiątce czyta książkę w prawidłowo dobranych okularach do bliży. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Dlaczego po 50-tce tekst odsuwa się od oczu?",
+      "alt": "Mężczyzna po pięćdziesiątce odsuwa kartkę, próbując uzyskać wyraźny obraz z bliska",
+      "caption": "Odsuwanie tekstu zwiększa odległość patrzenia i bywa jednym z pierwszych zauważalnych objawów prezbiopii.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/presbyopia-reading-distance-2026.avif",
+          "sha256": "8af4a813975af4416b890deda98df07fedb80b59b09e56720fabe5f6a9ba1253",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/presbyopia-reading-distance-2026.webp",
+          "sha256": "40098cf175b151636a85bf48aa4659fdb6dece6a65dd50fa35c8c5b253d830bd",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/presbyopia-reading-distance-2026.jpg",
+          "sha256": "5720796fdb8f4ed49c4605e18664beafc8312b32486ef381a3165723447dcc00",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego po 50-tce tekst odsuwa się od oczu?”: Mężczyzna po pięćdziesiątce odsuwa kartkę, próbując uzyskać wyraźny obraz z bliska. Zgodność z treścią potwierdza podpis: Odsuwanie tekstu zwiększa odległość patrzenia i bywa jednym z pierwszych zauważalnych objawów prezbiopii."
+      }
+    },
+    {
+      "placement": "section:Czy okulary do czytania osłabiają oczy?",
+      "alt": "Optometrystka dobiera korekcję do bliży w próbnej oprawie podczas badania wzroku",
+      "caption": "Okulary korygują sposób ogniskowania światła podczas noszenia; nie zmieniają oka ani nie przyspieszają prezbiopii.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/presbyopia-refraction-exam-2026.avif",
+          "sha256": "1158d1b4b41cb71e7324e4954cce3684431c3bf8330da4ab37dcf36799a7866c",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/presbyopia-refraction-exam-2026.webp",
+          "sha256": "d6f998aa355b2c66c771c736a17ff73371e6f74bbb69327a36babc3e3371f342",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/presbyopia-refraction-exam-2026.jpg",
+          "sha256": "a2c880a5ee0d886cccd2e94b653d43d40a68d801babb2caa5f9217d9a89d91a9",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy okulary do czytania osłabiają oczy?”: Optometrystka dobiera korekcję do bliży w próbnej oprawie podczas badania wzroku. Zgodność z treścią potwierdza podpis: Okulary korygują sposób ogniskowania światła podczas noszenia; nie zmieniają oka ani nie przyspieszają prezbiopii."
+      }
+    },
+    {
+      "placement": "section:Co mogą dać ćwiczenia i przerwy od ekranu?",
+      "alt": "Kobieta odrywa wzrok od laptopa i patrzy przez okno na odległy krajobraz",
+      "caption": "Patrzenie w dal i regularne mruganie mogą łagodzić dyskomfort pracy z bliska, ale nie przywracają elastyczności soczewki.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/presbyopia-screen-break-2026.avif",
+          "sha256": "c1411f466a3dc30067ec1253432428e815ed610a31dc727d9332adadee245c54",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/presbyopia-screen-break-2026.webp",
+          "sha256": "412f69b198349eb0af364a4a06b178e3ee8552edb3b2c98d365bc9da3f6d9bac",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/presbyopia-screen-break-2026.jpg",
+          "sha256": "a2d53480c015f581abf479663582b1ea152f7cd298094483a81f7afd216b7fed",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co mogą dać ćwiczenia i przerwy od ekranu?”: Kobieta odrywa wzrok od laptopa i patrzy przez okno na odległy krajobraz. Zgodność z treścią potwierdza podpis: Patrzenie w dal i regularne mruganie mogą łagodzić dyskomfort pracy z bliska, ale nie przywracają elastyczności soczewki."
+      }
+    },
+    {
+      "placement": "section:Kiedy okulary z półki nie wystarczą?",
+      "alt": "Okulista bada kobietę po sześćdziesiątce przy lampie szczelinowej",
+      "caption": "Badanie okulistyczne pozwala odróżnić zwykłą potrzebę korekcji od choroby oka lub objawów wymagających pilnej pomocy.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/presbyopia-slit-lamp-exam-2026.avif",
+          "sha256": "1d40ad1c7a174659342f0cf747677cc16a34a023c9fb35336db6ab9685f12782",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/presbyopia-slit-lamp-exam-2026.webp",
+          "sha256": "801782fc5679735168c28df454898fed26d7056e4233d8e68e91811e92e57cf5",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/presbyopia-slit-lamp-exam-2026.jpg",
+          "sha256": "1788e39fffde602da479a66a1baf9584d050af8f323783dc539fb13534e92f87",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy okulary z półki nie wystarczą?”: Okulista bada kobietę po sześćdziesiątce przy lampie szczelinowej. Zgodność z treścią potwierdza podpis: Badanie okulistyczne pozwala odróżnić zwykłą potrzebę korekcji od choroby oka lub objawów wymagających pilnej pomocy."
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+  <title>Siła względna — kalkulator e1RM i postępu | FitPo50</title>
+  <meta name="description" content="Oszacuj siłę z krótkiej serii, porównaj ją z masą ciała i zapisuj własny postęp bez wykonywania próby z maksymalnym ciężarem.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://fitpo50.pl/kalkulator-sily-wzglednej.html">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css?v=1.4">
+  <link rel="stylesheet" href="./assets/footer.css?v=1">
+  <link rel="stylesheet" href="./assets/tools-hub.css?v=1">
+  <link rel="stylesheet" href="./assets/relative-strength-calculator.css?v=2">
+  <link rel="icon" href="./favicon.png" type="image/png"><link rel="apple-touch-icon" href="./favicon.png">
+</head>
+<body class="tools-page strength-page">
+  <div class="tools-shell">
+    <header class="tools-topbar">
+      <a class="tools-brand" href="index.html" aria-label="FitPo50 — strona główna"><img class="tools-brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="112" height="112" loading="eager" fetchpriority="high" onerror="this.style.display='none'"><span class="tools-brand__text"><span class="tools-brand__name">FitPo50</span><span class="tools-brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span></span></a>
+      <a class="strength-back" href="narzedzia.html">← Wszystkie narzędzia</a>
+    </header>
+
+    <main>
+      <section class="strength-hero" aria-labelledby="strength-title">
+        <div class="strength-hero__copy"><span class="tools-kicker">Siła względna</span><h1 id="strength-title">Policz siłę.<br><em>Śledź własny progres.</em></h1><p>Wpisz ciężar i liczbę powtórzeń z krótkiej serii. Kalkulator oszacuje wynik dla jednego powtórzenia i odniesie go do Twojej masy ciała.</p><div class="strength-hero__rule"><b>2–10</b><span>pełnych powtórzeń<br>zamiast próby maksymalnej</span></div></div>
+        <figure class="strength-hero__visual"><picture><source srcset="./assets/relative-strength-human-v1.webp" type="image/webp"><img src="./assets/relative-strength-human-v1.png" width="1254" height="1254" loading="eager" fetchpriority="high" decoding="async" alt="Mężczyzna po pięćdziesiątce wykonujący kontrolowany przysiad z dwoma hantlami, z zaznaczoną linią tułowia i położeniem stawów"></picture><figcaption><strong>Nie sprawdzaj maksimum specjalnie dla kalkulatora.</strong> Użyj poprawnie wykonanej serii z własnego treningu.</figcaption></figure>
+      </section>
+
+      <section class="strength-load-guide" aria-labelledby="load-guide-title">
+        <header><div><span class="tools-section-kicker">Najczęstszy błąd</span><h2 id="load-guide-title">Jaki ciężar wpisać?</h2></div><p>Zawsze podawaj łączny ciężar poruszany w ćwiczeniu. Przy kolejnych zapisach licz go dokładnie w ten sam sposób.</p></header>
+        <div class="strength-load-grid">
+          <article><div class="strength-load-icon strength-load-icon--bar" aria-hidden="true"><i></i><b></b><b></b><span></span><span></span></div><h3>Sztanga</h3><p><strong>Gryf + wszystkie talerze.</strong><br>20 kg + 2 × 10 kg = 40 kg.</p></article>
+          <article><div class="strength-load-icon strength-load-icon--dumbbells" aria-hidden="true"><i></i><i></i></div><h3>Dwa hantle</h3><p><strong>Dodaj oba hantle.</strong><br>2 × 12 kg = 24 kg.</p></article>
+          <article><div class="strength-load-icon strength-load-icon--machine" aria-hidden="true"><span></span><span></span><span></span><b></b></div><h3>Maszyna</h3><p><strong>Wartość ustawiona na stosie.</strong><br>Porównuj tylko tę samą maszynę.</p></article>
+        </div>
+      </section>
+
+      <section class="strength-workspace" aria-label="Kalkulator siły względnej">
+        <form class="strength-form" data-strength-form novalidate>
+          <header><span class="tools-section-kicker">Twoja seria</span><h2>Wpisz sześć informacji</h2><p>Wynik ma największy sens dla pełnych powtórzeń wykonanych tą samą techniką.</p></header>
+          <div class="strength-fields">
+            <label class="strength-field"><span><i>1</i>Ćwiczenie</span><select data-strength-exercise><option value="dumbbell-squat">Przysiad z dwoma hantlami</option><option value="barbell-squat">Przysiad ze sztangą</option><option value="deadlift">Martwy ciąg</option><option value="bench-press">Wyciskanie leżąc</option><option value="dumbbell-press">Wyciskanie hantli</option><option value="row">Wiosłowanie</option><option value="overhead-press">Wyciskanie nad głowę</option><option value="leg-press">Suwnica / leg press</option><option value="other">Inne ćwiczenie</option></select></label>
+            <label class="strength-field"><span><i>2</i>Sprzęt</span><select data-strength-equipment><option value="dumbbells">Dwa hantle</option><option value="barbell">Sztanga</option><option value="machine">Maszyna / wyciąg</option><option value="other">Inny</option></select><small data-strength-equipment-hint></small></label>
+            <label class="strength-field"><span><i>3</i>Masa ciała</span><span class="strength-control"><input type="number" min="35" max="300" step="0.1" inputmode="decimal" placeholder="np. 82" data-strength-body-weight required><b>kg</b></span></label>
+            <label class="strength-field"><span><i>4</i>Łączny ciężar</span><span class="strength-control"><input type="number" min="1" max="1000" step="0.5" inputmode="decimal" placeholder="np. 24" data-strength-load required><b>kg</b></span></label>
+            <label class="strength-field"><span><i>5</i>Pełne powtórzenia</span><span class="strength-control"><input type="number" min="2" max="10" step="1" inputmode="numeric" placeholder="2–10" data-strength-repetitions required><b>powt.</b></span></label>
+            <label class="strength-field"><span><i>6</i>Data</span><input type="date" data-strength-date required></label>
+          </div>
+          <fieldset class="strength-effort"><legend>Czy seria była blisko końca?</legend><label><input type="radio" name="strength-effort" value="near-limit"><span><strong>Tak</strong><small>Zostały najwyżej 1–2 możliwe powtórzenia.</small></span></label><label><input type="radio" name="strength-effort" value="not-near" checked><span><strong>Nie wiem lub nie</strong><small>Zostały co najmniej 3 powtórzenia.</small></span></label></fieldset>
+          <p class="strength-error" data-strength-error role="alert" hidden></p>
+          <button class="strength-submit" type="submit">Oszacuj siłę <span>→</span></button>
+        </form>
+
+        <section class="strength-result" aria-live="polite" aria-labelledby="strength-result-title">
+          <div class="strength-result__empty" data-strength-empty><div class="strength-gauge" aria-hidden="true"><span>e1RM</span><i></i></div><div><span class="tools-section-kicker">Po obliczeniu</span><h2 id="strength-result-title">Zobaczysz dwa wyniki</h2><p><strong>e1RM</strong> to szacowany ciężar dla jednego powtórzenia. <strong>Siła względna</strong> porównuje go z masą ciała.</p></div></div>
+          <div class="strength-result__content" data-strength-content hidden><span class="strength-result__exercise" data-strength-result-exercise>—</span><strong class="strength-result__max"><b data-strength-one-rep-max>—</b><small>kg</small></strong><span class="strength-result__caption">szacowane maksimum jednego powtórzenia</span><div class="strength-result__ratio"><span>Siła względem masy ciała</span><strong><b data-strength-ratio>—</b> ×</strong><small data-strength-body-percent>—</small></div><div class="strength-result__cards"><div><span>Ciężar z serii</span><strong data-strength-working-percent>—</strong></div><div><span>Ocena szacunku</span><strong data-strength-quality>—</strong></div></div><div class="strength-result__path"><div><span>Wykonana seria</span><strong data-strength-series>—</strong></div><i aria-hidden="true"><b></b></i><div><span>Szacunek jednego powtórzenia</span><strong data-strength-estimate-copy>—</strong></div></div><aside><strong>Jak czytać wynik?</strong><p data-strength-quality-copy></p></aside><button type="button" data-strength-save>Zapisz wynik na tym urządzeniu</button></div>
+        </section>
+      </section>
+
+      <section class="strength-history" aria-labelledby="strength-history-title"><header><div><span class="tools-section-kicker">Twój progres</span><h2 id="strength-history-title">Wyniki treningów</h2><p>Wykres pokazuje wybrane ćwiczenie. Tabela zachowuje wszystkie zapisane serie.</p></div><button type="button" data-strength-clear hidden>Usuń historię</button></header><div class="strength-history__chart"><h3 data-strength-chart-title>Trend wybranego ćwiczenia</h3><svg data-strength-chart viewBox="0 0 680 220" role="img" hidden></svg><p data-strength-chart-empty>Wykres pojawi się po zapisaniu pierwszego wyniku dla wybranego ćwiczenia.</p></div><div class="strength-history__table-wrap"><p class="strength-history__empty" data-strength-history-empty>Nie zapisano jeszcze żadnej serii. Historia pozostaje wyłącznie w tej przeglądarce.</p><table data-strength-history-table hidden><caption>Historia szacowanej siły zapisana w tej przeglądarce</caption><thead><tr><th scope="col">Data</th><th scope="col">Ćwiczenie</th><th scope="col">Seria</th><th scope="col">e1RM</th><th scope="col">Zmiana</th></tr></thead><tbody data-strength-history-body></tbody></table></div></section>
+
+      <section class="strength-method" aria-labelledby="strength-method-title"><div><span class="tools-section-kicker">Co naprawdę liczymy?</span><h2 id="strength-method-title">Szacunek, nie próba maksymalna</h2><p>Kalkulator używa wzoru Epleya: ciężar × (1 + liczba powtórzeń ÷ 30). Ten sam wzór stosowany przy kolejnych treningach pomaga obserwować kierunek zmiany.</p></div><div><p>Badania nad wyciskaniem i suwnicą wykazały, że krótsze serie lepiej przewidują 1RM, a liniowych równań nie powinno się opierać na więcej niż 10 powtórzeniach. W badaniach osób starszych różnice między szacunkiem a rzeczywistym 1RM dochodziły jednak do około 20%.</p><p>Nie porównuj wyników różnych ćwiczeń, maszyn ani technik. Wynik `1,00 × masa ciała` w jednym ruchu nie znaczy tego samego w innym.</p><a href="https://pubmed.ncbi.nlm.nih.gov/16937972/" target="_blank" rel="noopener noreferrer">Badanie dokładności dla 5, 10 i 20 powtórzeń →</a><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11435939/" target="_blank" rel="noopener noreferrer">Równania dla trenujących osób starszych →</a><a href="https://acsm.org/older-adults-strength-training/" target="_blank" rel="noopener noreferrer">Trening siłowy osób starszych według ACSM →</a></div></section>
+
+      <section class="tools-safety" aria-labelledby="strength-safety-title"><div><span aria-hidden="true">🛡️</span></div><div><h2 id="strength-safety-title">Nie testuj maksimum dla liczby</h2><p>Użyj serii, którą i tak bezpiecznie wykonujesz w planie. Kalkulator nie ocenia techniki, bólu, przeciwwskazań ani gotowości do podnoszenia większego ciężaru.</p></div></section>
+    </main>
+
+    <footer class="site-footer-bento" aria-label="Stopka FitPo50"><div class="site-footer-bento__grid"><section class="site-footer-bento__card" aria-label="O serwisie FitPo50"><div class="site-footer-bento__brand"><img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'"><div><h2 class="site-footer-bento__title">FitPo50.pl</h2><p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce.</p></div></div></section><section class="site-footer-bento__card"><h3 class="site-footer-bento__links-title">Narzędzia FitPo50</h3><p class="site-footer-bento__lead"><a href="narzedzia.html">Wróć do katalogu narzędzi</a></p></section></div><div class="site-footer-bento__bottom"><p class="site-footer-bento__copy">© 2026 FitPo50</p><p class="site-footer-bento__note">Treści mają charakter edukacyjny i informacyjny.</p></div></footer>
+  </div>
+  <script src="./dist/relative-strength-calculator.js?v=1" defer></script>
+</body>
+</html>

@@ -1,6 +1,16 @@
 # ARTICLE STANDARD (FitPo50)
 
-Ten dokument definiuje kanoniczny standard artykułów. Obowiązuje dla wszystkich nowych publikacji.
+Ten dokument definiuje kanoniczny standard artykułów. Obowiązuje dla wszystkich nowych publikacji oraz całych artykułów aktualizowanych dowolną ścieżką, w tym przez `popraw-seo` i `napraw paczkę N`, niezależnie od wielkości zmiany.
+
+## Pełna walidacja nowych i aktualizowanych artykułów
+
+- Każdy nowy artykuł i każdy artykuł zmieniany przez import, ręczną aktualizację, `popraw-seo` lub `napraw paczkę N` musi spełnić wszystkie aktualne wymagania tego dokumentu i przejść ten sam pełny zestaw bramek. Dotyczy to całej strony, także niezmienionych sekcji i stron otrzymujących link przychodzący w ramach zatwierdzonej naprawy. Wiek publikacji, wcześniejszy PASS ani drobna korekta title/meta nie zwalniają z żadnej bramki.
+- Zakres obejmuje logikę i kompletność treści; weryfikację źródeł i mapowanie twierdzeń do dowodów; bezpieczeństwo, liczby, ceny i aktualność; pochodzenie FAQ; intencję, SEO/AEO/GEO/AIO, kanibalizację i linkowanie; tytuły, opisy, nagłówki i dane strukturalne; szablon, semantykę, tabele i dostępność; rzeczywistą kontrolę obrazów, ich wariantów, wymiarów, altów i podpisów; staging desktop/mobile; PDF oraz obejrzenie wszystkich jego stron; daty, listingi, indeksy, sitemap i zgodność HTML/PDF/mediów z `_site`; pełne walidatory i kontrolę produkcji. Ta lista nie ogranicza pozostałych wymagań standardu.
+- Dla istniejącego HTML-a odtwórz roboczy pakiet walidacyjny z aktualnej treści, rzeczywistych mediów i zweryfikowanych źródeł, jeżeli wymaga go bramka nowych artykułów. Nie wymyślaj `evidence_claims`, `faq_research`, wyników kontroli obrazów ani innych deklaracji tylko po to, aby uzyskać PASS. Brak starego JSON-u nie uprawnia do pominięcia preflight treści, dowodów lub architektury.
+- Kontrole automatyczne i rzeczywisty przegląd redakcyjny oraz wizualny są obowiązkowe łącznie. Sam PASS walidatora HTML, poprawny HTTP źródła lub wypełniony formularz dowodów nie potwierdzają jakości merytorycznej.
+- Dla każdego URL-a zapisz wyniki wszystkich bramek, dowody kontroli oraz wersję lub hashe sprawdzonych plików. Brak wykonanej kontroli oznacza etap nieukończony; błąd blokuje publikację. Napraw wykryte problemy w zatwierdzonym zakresie, ponów właściwe kontrole i dopiero po pełnym PASS przejdź do kolejnego etapu. Jeśli naprawa jest zablokowana, podaj konkretną przyczynę; nie osłabiaj wymagań ani nie oznaczaj pominiętej kontroli jako PASS.
+- Walidacja istniejącej strony nie oznacza tworzenia nowego URL-a ani ponownego generowania poprawnych obrazów. Zachowaj tożsamość artykułu i używaj trybu aktualizacji. Niezmienione materiały mogą zostać użyte ponownie, jeśli spełniają aktualne wymagania i zostały objęte kontrolą. Centra tematyczne przechodzą właściwy kontrakt centrów zamiast szablonu zwykłego artykułu.
+- Zatwierdzenie ID lub paczki uruchamia pełny proces naprawy i walidacji; nie stanowi potwierdzenia jakości istniejącej treści.
 
 ## 0. Zero Generic Text
 - Każda zmiana w tekście artykułu musi być konkretna, logiczna i oparta o treść artykułu, dane GSC/PAA/autocomplete, sprawdzone źródło, konkretną liczbę/próg albo jasny warunek bezpieczeństwa.
@@ -150,6 +160,8 @@ Artykuł nie przechodzi, jeśli:
   - po leadzie/wstępie, przed pierwszym głównym blokiem sekcji.
 
 ## 10. Content + Linking Contract v2.0 (obowiązkowe)
+- Liczba głównych sekcji wynika wyłącznie z intencji i zakresu tematu. Nie obowiązuje minimalna liczba sekcji. Artykuł ma wyczerpywać istotne pytania bez dopisywania bloków dla długości, symetrii szablonu lub wyniku walidatora.
+- Każda sekcja musi wnosić konkretną odpowiedź, mechanizm, decyzję praktyczną, ograniczenie dowodu albo potrzebny kontekst. Generyczne wstępy, powtórzenia, parafrazy wcześniejszych sekcji i tekst bez sprawdzalnej wartości blokują publikację.
 - Pytające nagłówki H2 (np. zaczynające się od `Czy`, `Jak`, `Dlaczego`, `Ile`, `Kiedy`) muszą kończyć się `?`.
 - Pierwszy akapit pod każdym H2 (lead sekcji) musi mieć 30-70 słów.
 - Każdy artykuł musi mieć min. 4 sensowne linki wewnętrzne do istniejących artykułów.
@@ -169,8 +181,9 @@ Artykuł nie przechodzi, jeśli:
 
 ## 11. Media + Syntax Contract v2.0 (obowiązkowe)
 - JSON i wszystkie obrazy wejściowe tworzą jeden katalog artykułu. Pipeline nie szuka plików rekurencyjnie, nie normalizuje przybliżonych nazw i nie pobiera zastępstwa z globalnego `assets/`.
-- Wymagany jest dokładnie jeden obraz `hero` oraz jeden odrębny obraz dla każdej sekcji. `filename_base` jest dokładną nazwą kebab-case, a każdy wpis obrazu wymaga konkretnego tematu, techniki, kompozycji, celu, proporcji, altu i podpisu.
+- Wymagany jest dokładnie jeden obraz `hero` oraz jeden odrębny obraz dla każdej merytorycznej sekcji głównej. Sekcje użytkowe, takie jak szybka odpowiedź, udostępnianie, źródła, disclaimer i czytelnia, nie tworzą zapotrzebowania na osobny obraz. Liczba obrazów wynika z realnej architektury tematu, a nie ze stałego minimum. `filename_base` jest dokładną nazwą kebab-case, a każdy wpis obrazu wymaga konkretnego tematu, techniki, kompozycji, celu, proporcji, altu i podpisu.
 - Przed `CONTENT_READY` lokalna kontrola rzeczywistych plików zapisuje `media_manifest`: placement, temat, technikę, cel, nazwę źródła, wymiary, SHA-256, warianty oraz udokumentowany `visual_review`. Manifestu nie generuje Claude.
+- Kontrola wizualna ocenia zgodność obrazu z sekcją, prawdziwość widocznego tekstu i liczb, poprawność anatomii oraz sprzętu, kadr i brak mylących logo. Sam watermark nie jest błędem blokującym.
 - Każdy obraz wymaga AVIF, WebP i fallbacku JPG o zgodnych wymiarach. Hero ma minimum 1080×600 px, obraz sekcji minimum 900×500 px, a proporcja krajobrazowa mieści się w zakresie 1.2-2.1 i zgadza z deklaracją.
 - Hash i sygnatura wizualna blokują duplikaty 1:1, niemal ten sam kadr oraz wariant przedstawiający inny obraz. Dla pakietu min. 3 obrazów wymagane są min. 3 techniki i 3 kompozycje; jedna nie może zajmować więcej niż połowy pakietu.
 - `alt` i `caption` muszą opisywać realną zawartość oraz mieć związek z konkretną sekcją. `visual_review.status=VERIFIED` wolno nadać dopiero po rzeczywistym obejrzeniu pliku i zapisaniu konkretnej notatki.
@@ -208,10 +221,15 @@ Artykuł nie przechodzi, jeśli:
 
 ## 12. Schema Citation Contract v2.0 (obowiązkowe)
 - `BlogPosting.citation` musi być zsynchronizowane z listą źródeł w HTML.
+- Przy aktualizacji istniejącego HTML-a sprawdź także `BlogPosting.mentions`, `about` i FAQ schema: nie mogą zachowywać usuniętych źródeł ani twierdzeń sprzecznych z widoczną treścią. Dla każdego PMID/PMCID/DOI porównaj tytuł, autorów i rok z rekordem wydawcy lub bazy bibliograficznej, a następnie oceń zgodność badanej populacji i wyników z konkretnym twierdzeniem. Sam HTTP 200, istnienie identyfikatora lub podobieństwo tematyczne nie potwierdza dowodu; zamiana URL-a bez ponownej oceny claimu nie jest naprawą bibliografii.
+- Dla kategorycznych tez (np. „nigdy”, „nie ma efektu”, „zawsze”) sprawdź także późniejsze badania i wyniki przeciwne. Zapisz populację, interwencję, porównanie, wynik i ograniczenia; nie przenoś wyników ćwiczeń na masaż, biomarkerów na korzyści kliniczne ani małych grup na całą populację 50+. Sprzeczności wymagają rzetelnego omówienia, nie wyboru tylko wygodnego źródła.
+- Bibliografia wskazuje konkretne publikacje lub dokumenty. Strona wyszukiwania PubMed/PMC nie zastępuje źródła, nawet jeśli zwraca HTTP 200. `http_status` oznacza końcowy kod 2xx po przekierowaniach; samo `url_status: reachable` nie unieważnia błędu HTTP.
 - Wymagane minimum 4 realne, zweryfikowane i wykorzystane URL-e w `citation` oraz liście źródeł HTML.
 - Kategoryczny zakaz dopisywania zmyślonych źródeł tylko po to, by dobić do minimum.
 
 ## 12a. Logic, Evidence & FAQ Contract
+- W tematach medycznych preferuj w tej kolejności: aktualne wytyczne uznanych towarzystw naukowych i instytucji publicznych, przeglądy systematyczne lub metaanalizy, właściwe badania pierwotne oraz oficjalne rejestry i dokumenty. Źródło komercyjne może potwierdzać wyłącznie własną cenę, skład, instrukcję lub status produktu; nie stanowi samodzielnego dowodu skuteczności, bezpieczeństwa ani mechanizmu medycznego.
+- Autorytet domeny nie zastępuje dopasowania dowodu. Źródło musi dotyczyć tej samej populacji, interwencji, porównania i wyniku, które opisuje twierdzenie, a ograniczenia badania muszą być widoczne w tekście.
 - Kontrola odwołań „poniżej”/„powyżej” obejmuje także sekcję źródeł: odsyłacz musi odpowiadać rzeczywistemu położeniu FAQ w HTML i PDF. Przy zmianie układu użyj jednoznacznej nazwy sekcji.
 - Centrum tematyczne zachowuje układ `hub-shell/main/hub-title` i przechodzi [kontrakt centrów](docs/topic-center-pipeline.md), w tym research, mapę tez, źródła, PDF i pełną kontrolę desktop/mobile. Nie wolno naprawiać go przez wymuszanie klas szablonu zwykłego artykułu.
 - Każdy akapit, quick answer, wniosek, FAQ, info box, takeaway i podpis grafiki przechodzi kontrolę logiczną.

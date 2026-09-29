@@ -111,8 +111,8 @@ function main() {
   }
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
-  if (sections.length < 6) {
-    errors.push(`sections: wymagane >=6, jest ${sections.length}.`);
+  if (sections.length === 0) {
+    errors.push('sections: wymagany jest co najmniej jeden merytoryczny blok wynikający z intencji artykułu.');
   }
 
   const readingTime = String(json.reading_time || json.readTime || '').replace(/\s+/g, ' ').trim();

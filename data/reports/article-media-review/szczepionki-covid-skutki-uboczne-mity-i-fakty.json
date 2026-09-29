@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "szczepionki-covid-skutki-uboczne-mity-i-fakty",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "93d8fab9a7c65fad134ce68baaee9c2fcf61e44ad13b341b94fe52d821a4626f",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Lekarka omawia bezpieczeństwo szczepienia przeciw COVID-19 z parą po pięćdziesiątce",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/covid-vaccine-safety-consultation-2026.avif",
+          "sha256": "e4defc15aa2549c72289b14503515e54212ddc44dac6e2c8d08d25b2a599f1d4",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/covid-vaccine-safety-consultation-2026.webp",
+          "sha256": "4d5ee2156037b48ffede73af19d529ee97e8341625121152e11bde92db4a00dd",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/covid-vaccine-safety-consultation-2026.jpg",
+          "sha256": "3bfe27036b58a50165fd2dfc6acad2cfb124c8a2d9948395cb0c84a8f36f2c85",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Lekarka omawia bezpieczeństwo szczepienia przeciw COVID-19 z parą po pięćdziesiątce. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jakie objawy po szczepieniu są częste, a które wymagają pomocy?",
+      "alt": "Kobieta po sześćdziesiątce odpoczywa i sprawdza temperaturę po szczepieniu",
+      "caption": "Ból ręki, zmęczenie lub gorączka najczęściej mają krótki przebieg; nasilone albo nietypowe objawy wymagają oceny.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/covid-vaccine-common-reactions-2026.avif",
+          "sha256": "5c36999e2e3b2628bd0435dfaf232aaf7122fb29b59407387739fa68ade39e75",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/covid-vaccine-common-reactions-2026.webp",
+          "sha256": "19892f56bd23e449f388b08a9673b0fe6c8237e7b943ae9e48a137864af65567",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/covid-vaccine-common-reactions-2026.jpg",
+          "sha256": "285de0bdbaee6274c880a32157b6043f65695efb9beb651ab44f67efd26e3ba0",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jakie objawy po szczepieniu są częste, a które wymagają pomocy?”: Kobieta po sześćdziesiątce odpoczywa i sprawdza temperaturę po szczepieniu. Zgodność z treścią potwierdza podpis: Ból ręki, zmęczenie lub gorączka najczęściej mają krótki przebieg; nasilone albo nietypowe objawy wymagają oceny."
+      }
+    },
+    {
+      "placement": "section:Co wiadomo o zapaleniu mięśnia sercowego po mRNA?",
+      "alt": "Lekarka wykonuje EKG u młodego mężczyzny zgłaszającego niepokojące objawy po szczepieniu",
+      "caption": "Ból w klatce, duszność lub kołatanie wymagają badania; zegarek ani sam opis objawów nie potwierdzają zapalenia serca.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/covid-vaccine-myocarditis-ecg-2026.avif",
+          "sha256": "a40d6d975b1f4d41558812d98990d17d760112107c9338bb2df107bc4f20889e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/covid-vaccine-myocarditis-ecg-2026.webp",
+          "sha256": "1434a2b3bbc7db25b88362329a3e36ffffa16d9c258758cc9f61abda5df39b4c",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/covid-vaccine-myocarditis-ecg-2026.jpg",
+          "sha256": "cd35794ce037b4f5ecd289b1c94e95fc8d6e09e3ae88f2fbb4bff4151d8959d4",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co wiadomo o zapaleniu mięśnia sercowego po mRNA?”: Lekarka wykonuje EKG u młodego mężczyzny zgłaszającego niepokojące objawy po szczepieniu. Zgodność z treścią potwierdza podpis: Ból w klatce, duszność lub kołatanie wymagają badania; zegarek ani sam opis objawów nie potwierdzają zapalenia serca."
+      }
+    },
+    {
+      "placement": "section:Czym było TTS po szczepionkach wektorowych?",
+      "alt": "Diagnostka laboratoryjna przygotowuje próbki krwi do oceny liczby płytek",
+      "caption": "TTS łączył zakrzepicę z małą liczbą płytek, dlatego rozpoznanie wymagało obrazu klinicznego i badań krwi.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/covid-vaccine-tts-platelet-lab-2026.avif",
+          "sha256": "41fa4882249ddf04a9d1b7b2646ec5c57e9ab9f66eeca1d328a82f225f1d78e6",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/covid-vaccine-tts-platelet-lab-2026.webp",
+          "sha256": "794ba877fcfb4f8c7d4ddb75908399c2e8d9e5208c8ff723faba1c931cef7c3e",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/covid-vaccine-tts-platelet-lab-2026.jpg",
+          "sha256": "b07bcb5697f30ddcbb31d9d2580d2fd0bc524cd1256e3b23581b75b196e277bf",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym było TTS po szczepionkach wektorowych?”: Diagnostka laboratoryjna przygotowuje próbki krwi do oceny liczby płytek. Zgodność z treścią potwierdza podpis: TTS łączył zakrzepicę z małą liczbą płytek, dlatego rozpoznanie wymagało obrazu klinicznego i badań krwi."
+      }
+    },
+    {
+      "placement": "section:Dlaczego VAERS nie podaje liczby przypadków spowodowanych szczepieniem?",
+      "alt": "Analityczka bezpieczeństwa szczepień porównuje anonimowe zgłoszenia i wykresy",
+      "caption": "Zgłoszenia pomagają wykrywać sygnały, ale związek przyczynowy ocenia się dopiero z użyciem dodatkowych danych i metod.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/covid-vaccine-vaers-analysis-2026.avif",
+          "sha256": "e62fd585ea229a798b70a7d6685bb4b65ddf8e60e2759995efdc26568a140169",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/covid-vaccine-vaers-analysis-2026.webp",
+          "sha256": "d15722baae5c7b4c0223952e213beb1808d1e54fad8f19e74d88fa3fc3932cc6",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/covid-vaccine-vaers-analysis-2026.jpg",
+          "sha256": "8b10fb92a934ed4fca620f162fb962e9ce1b2dd3dc66d5a8bb19896c3a40edb1",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego VAERS nie podaje liczby przypadków spowodowanych szczepieniem?”: Analityczka bezpieczeństwa szczepień porównuje anonimowe zgłoszenia i wykresy. Zgodność z treścią potwierdza podpis: Zgłoszenia pomagają wykrywać sygnały, ale związek przyczynowy ocenia się dopiero z użyciem dodatkowych danych i metod."
+      }
+    }
+  ]
+}

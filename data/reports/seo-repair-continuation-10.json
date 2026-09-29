@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "package_id": "SEO-REPAIR-CONTINUATION-10",
+  "created_at": "2026-09-29",
+  "status": "AWAITING_REPAIR",
+  "origin": "Approved PAKIET 01-27 split after 17 articles reached the full publication gate",
+  "immutable_membership": true,
+  "article_count": 10,
+  "articles": [
+    "kreatyna-po-50-tce-kompletny-przewodnik.html",
+    "trening-maszynowy-po-50.html",
+    "trening-3x30-dla-50-plus.html",
+    "jak-zaczac-na-silowni-po-50.html",
+    "trening-silowy-eliksir-mlodosci-po-50.html",
+    "healthspan-nie-lifespan-po-50.html",
+    "sen-po-50.html",
+    "ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html",
+    "dieta-50-50-po-piecdziesiatce.html",
+    "post-36-godzinny-co-sie-dzieje-z-cialem.html"
+  ],
+  "required_gate": "Full ARTICLE_STANDARD.md gate used for a new article: editorial and medical evidence review, FAQ provenance, intent and cannibalization, contextual internal links, schema and metadata, reviewed hero plus one distinct image per substantive H2, desktop/mobile preview, regenerated and page-by-page reviewed PDF, source/_site equality, sitemap and production validation",
+  "content_rules": [
+    "No generic filler or artificial section minimum",
+    "Length follows the topic; long articles are allowed",
+    "Medical claims use relevant authoritative primary sources, guidelines or systematic reviews",
+    "A watermark alone does not block an image; misleading text, numbers, anatomy, equipment or context do",
+    "Every machine-detectable defect is fixed both in the article and in the pipeline with a regression test"
+  ],
+  "publication_rule": "Repair all 10 in isolated staging and publish them as one atomic package only after every gate passes. Then commit, push, verify production and prepare the GSC URL list."
+}

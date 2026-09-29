@@ -47,6 +47,7 @@ Jeżeli którykolwiek krok poza dozwolonym, nieblokującym restore zwróci błą
 
 ## 5. Publikacja artykułu z JSON-u
 
+- Nowe artykuły, aktualizacje, `popraw-seo` i `napraw paczkę N` przechodzą jeden wspólny, pełny Quality Gate z `ARTICLE_STANDARD.md`. Kontrola zawsze obejmuje całą treść oraz HTML, źródła, FAQ, linki, media, PDF, dane strukturalne, listingi, sitemap i `_site`; nie tylko zmieniony fragment.
 - JSON od Claude lub innego modelu jest zawsze draftem, nie źródłem prawdy.
 - Korekta JSON-u i publikacja to dwa odrębne etapy: `DRAFT` → `CONTENT_READY` → `PREVIEW_READY` → `COMMITTED`; błąd daje `BLOCKED`.
 - Plik z `Downloads` pozostaje bez zmian. Pipeline pracuje na kontrolowanej kopii i nie archiwizuje zużytego JSON-u w repo.
@@ -94,7 +95,8 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 ## 8. Obrazy, HTML i PDF
 
 - Każdy pakiet artykułu ma jeden katalog wejściowy, dokładne nazwy, osobny hero i obrazy sekcji oraz lokalny manifest.
-- Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, błędne kadry i ukryte fallbacki są zabronione.
+- Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, nieprawdziwa anatomia lub sprzęt, błędne kadry i ukryte fallbacki są zabronione; sam watermark nie jest przeszkodą.
+- Artykuł ma hero i odrębny obraz dla każdej głównej sekcji merytorycznej. Nie obowiązuje sztywna liczba sekcji ani obrazów: zakres wynika z tematu, a sekcje użytkowe nie są liczone.
 - Wymagane warianty: AVIF, WebP i JPG z prawdziwymi wymiarami, konkretnym `alt` i podpisem.
 - Po zatwierdzonej kontroli wizualnej rzeczywiste proporcje pliku zastępują planowaną proporcję z promptu. Layout obsługuje panoramy, krajobraz, kwadrat i pionowe plansze bez wymuszania przycięcia; pionowe i kwadratowe obrazy dostają własny wariant układu.
 - Tabele są semantycznym HTML: `caption`, `thead`, `tbody`, `th` i odpowiednie `scope`. Grafika tabeli nie zastępuje tabeli.
@@ -135,7 +137,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Stary `seo:aio:apply-wave --mode safe-links` jest wycofany, bo dopisywał generyczny akapit. `popraw-seo:apply` przyjmuje wyłącznie `replace_exact` powiązane z hashem pliku i konkretną podstawą GSC/źródło/fakt/bezpieczeństwo/mapa linków.
 - Lokalny komplet ma status `COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT`, nie `DEPLOYED`. Końcowa lista GSC pozostaje pusta do kontroli publicznego HTTP 200, canonical, `dateModified`, zatwierdzonej treści, sitemap i PDF oraz statusu `LIVE_DEPLOYED_AND_VALIDATED`.
 - Jeśli którykolwiek etap po akceptacji nie przejdzie, agent zgłasza dokładny bloker. Nie wolno pomijać PDF, mirroru, sitemap, pushu, kontroli live ani listy GSC dlatego, że użytkownik nie podał osobnej komendy.
-- Zatwierdzona naprawa URL-a oznacza pełny Quality Gate strony, a nie wyłącznie title/meta lub jeden dopisek.
+- Każdy artykuł zmieniany przez `popraw-seo` musi przejść pełną walidację jak nowy artykuł i spełnić wszystkie aktualne wymagania `ARTICLE_STANDARD.md`. Kontrola obejmuje całą stronę i wszystkie artefakty, również niezmienione sekcje; łączy walidatory z rzeczywistym przeglądem redakcyjnym i wizualnym. Sam PASS HTML nie wystarcza, a brak starego JSON-u nie pozwala pominąć bramek treści, dowodów lub architektury. Pełny kontrakt i sposób dokumentowania wyników określa sekcja „Pełna walidacja po `popraw-seo`” w `ARTICLE_STANDARD.md`.
 
 ### `popraw-ai`
 

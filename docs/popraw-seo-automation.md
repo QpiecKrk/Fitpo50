@@ -4,7 +4,7 @@
 
 Użytkownik podaje tylko `popraw-seo`, a po raporcie zatwierdza konkretne ID. Nie musi znać ani uruchamiać komend technicznych. Akceptacja ID uruchamia obowiązek agenta doprowadzenia paczki do końca:
 
-1. przygotowanie konkretnych tekstów i `data/reports/popraw-seo-patches.json`,
+1. pełny przegląd każdego artykułu według wymagań nowej publikacji, naprawa wykrytych problemów oraz przygotowanie konkretnych tekstów i `data/reports/popraw-seo-patches.json`,
 2. kontrola SHA-256 wszystkich plików oraz dry-run,
 3. atomowe `popraw-seo:apply`,
 4. `dateModified`, PDF, `_site`, sitemap i pełne walidatory,
@@ -13,6 +13,8 @@ Użytkownik podaje tylko `popraw-seo`, a po raporcie zatwierdza konkretne ID. Ni
 7. lista 1–3 URL-i do GSC dopiero po `LIVE_DEPLOYED_AND_VALIDATED`.
 
 Jeśli dowolny etap nie może się zakończyć, agent nie pomija go i nie ogłasza sukcesu. Zwraca `BLOCKED` z nazwą etapu, przyczyną, cofniętymi zmianami i konkretnym działaniem naprawczym.
+
+Każdy zmieniany artykuł przechodzi **pełną walidację jak nowy artykuł**, zgodnie z [kanonicznym standardem](../ARTICLE_STANDARD.md#pełna-walidacja-po-popraw-seo). Dotyczy to wszystkich wymagań, całej strony i wszystkich jej artefaktów, także przy drobnej zmianie SEO. Samo uruchomienie `popraw-seo:apply` i uzyskanie PASS lokalnych walidatorów nie zastępuje kontroli dowodów, logiki, architektury ani rzeczywistej kontroli wizualnej. Agent dokumentuje komplet wyników dla każdego URL-a; bez pełnego PASS nie promuje stagingu ani nie publikuje.
 
 ## Kontrakt zatwierdzonego patcha
 
@@ -24,6 +26,8 @@ Manifest ma status `AWAITING_USER_APPROVAL`, `version: 1`, `source_hashes` i `it
 - opcjonalny `file`, gdy zmiana dotyczy strony źródłowej linkującej do targetu.
 
 Automat blokuje placeholdery, dawny generyczny akapit `safe-links`, nieistniejące cele linków, niezgodny hash, fragment występujący zero lub więcej niż jeden raz oraz ID spoza manifestu.
+
+Przed promocją stagingu każdy artykuł wymaga `data/reports/article-media-review/<slug>.json`. Manifest jest związany hashem z aktualnym HTML i plikami AVIF/WebP/JPG. Zmiana HTML albo wariantu obrazu unieważnia przegląd. Technicznie poprawne wymiary i brak uszkodzonego pliku nie potwierdzają jakości kadru.
 
 ## Stany
 

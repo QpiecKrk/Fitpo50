@@ -59,9 +59,9 @@ function restore(state) {
   }
 }
 
-function run(label, command, args) {
+function run(label, command, args, cwd = ROOT) {
   console.log(`[POPRAW-SEO APPLY] ${label}`);
-  const result = spawnSync(command, args, { cwd: ROOT, encoding: 'utf8' });
+  const result = spawnSync(command, args, { cwd, encoding: 'utf8' });
   if (result.stdout) process.stdout.write(result.stdout);
   if (result.stderr) process.stderr.write(result.stderr);
   if (result.status !== 0) throw new Error(`${label}: exit ${result.status ?? 'unknown'}`);
@@ -94,6 +94,7 @@ function candidateFiles(touched, articleFiles) {
     files.add(path.join(ROOT, '_site', 'assets', 'pdf', `${slug}.pdf`));
     files.add(path.join(ROOT, 'data', 'reports', 'article-preview', `${slug}.json`));
     files.add(path.join(ROOT, 'data', 'reports', 'article-preview', `${slug}.md`));
+    files.add(path.join(ROOT, 'data', 'reports', 'article-media-review', `${slug}.json`));
   });
   return [...files];
 }
@@ -136,12 +137,18 @@ function main() {
       if (record.sourceRoot !== ROOT || JSON.stringify(record.ids) !== JSON.stringify(selectedIds)) throw new Error('Staging należy do innego repozytorium albo zestawu ID.');
       baseline = new Map(record.baseline);
       for (const [file, hash] of Object.entries(record.hashes)) if (sha256File(path.join(stageRoot, file)) !== hash) throw new Error(`Staging zmieniony po walidacji: ${file}`);
+      for (const file of patched.articleFiles) {
+        const slug = file.replace(/\.html$/, '');
+        run(`Kontrola obrazów przed promocją ${file}`, 'python3', [path.join(ROOT, 'scripts', 'article-media-review.py'), '--slug', slug], stageRoot);
+      }
     }
     const transaction = beginPromotionTransaction({ sourceRoot: ROOT, stageRoot, candidates, baseline, transactionId: `seo-${Date.now()}` });
     try {
       for (const file of patched.articleFiles) {
+        const slug = file.replace(/\.html$/, '');
         run(`Walidacja po promocji ${file}`, 'node', ['scripts/validate-article-standard.js', file, `_site/${file}`]);
         run(`Kontrakt po promocji ${file}`, 'node', ['scripts/article-contract-check.js', file]);
+        run(`Kontrola obrazów po promocji ${file}`, 'python3', ['scripts/article-media-review.py', '--slug', slug]);
       }
       run('Predeploy po promocji', 'node', ['scripts/predeploy-gate.js']);
       transaction.verify();

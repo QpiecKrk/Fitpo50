@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "oponka-zablokowana-powiez",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "c873f35393a6ac37dfe71603830bb84bb76f2b0a17cf395ea1253e5cffb1f924",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce porównuje miarkę obwodu pasa z wałkiem do rolowania",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-powiez-mit-hero.avif",
+          "sha256": "8b4ae2f225eacd62604cf3af4473c5ae5dd2f85e105a27636a3048f64205ac72",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/oponka-powiez-mit-hero.webp",
+          "sha256": "a88b6403eeffae8d34732d010311234c3756ffce7648833f4e338e6aef38346f",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/oponka-powiez-mit-hero.jpg",
+          "sha256": "c403290a8b0ce1a68ed5fedaba7572e8412ac33296316903d3c8e28426da3592",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po 50-tce porównuje miarkę obwodu pasa z wałkiem do rolowania. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Dlaczego ta obietnica brzmi tak wiarygodnie?",
+      "alt": "Kobieta po 50-tce porównuje wałek do rolowania z modelem anatomicznym tułowia",
+      "caption": "Wałek i model anatomiczny wyjaśniają, dlaczego prawdziwe pojęcie powięzi łatwo połączyć z nieudowodnioną obietnicą odchudzania.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-powiez-obietnica.avif",
+          "sha256": "a24636b5ca13d82398857449860192b8a2cd292c1d2d03c581b2663032c14de1",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/oponka-powiez-obietnica.webp",
+          "sha256": "dd908c812a2ac78bb2475ba9d2dd69ad443566f5432a40c9dcb7668a480efe1f",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/oponka-powiez-obietnica.jpg",
+          "sha256": "78c76100fec3e475d978e31097df583695af5b13471038901576b919f8c760f3",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego ta obietnica brzmi tak wiarygodnie?”: Kobieta po 50-tce porównuje wałek do rolowania z modelem anatomicznym tułowia. Zgodność z treścią potwierdza podpis: Wałek i model anatomiczny wyjaśniają, dlaczego prawdziwe pojęcie powięzi łatwo połączyć z nieudowodnioną obietnicą odchudzania."
+      }
+    },
+    {
+      "placement": "section:Co to w ogóle jest powięź i jak działa?",
+      "alt": "Model warstw skóry, tłuszczu podskórnego, powięzi i mięśni",
+      "caption": "Warstwy tkanki tłuszczowej, powięzi i mięśni sąsiadują ze sobą, ale pełnią odmienne funkcje i nie tworzą mechanicznej blokady spalania tłuszczu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-warstwy-tkanek.avif",
+          "sha256": "8e3e6975cd85201242bc8046d466cca8cddbbdad1b2c393d3b58f03f5131b73a",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/oponka-warstwy-tkanek.webp",
+          "sha256": "7ba443f02ec69719d0fc51eede3bc74ca27de83bb4a28a738ba455eaedc2d9e7",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/oponka-warstwy-tkanek.jpg",
+          "sha256": "6ae9c48ec5510974a35322f59961c09199417e2efcba3315225613b56c764385",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co to w ogóle jest powięź i jak działa?”: Model warstw skóry, tłuszczu podskórnego, powięzi i mięśni. Zgodność z treścią potwierdza podpis: Warstwy tkanki tłuszczowej, powięzi i mięśni sąsiadują ze sobą, ale pełnią odmienne funkcje i nie tworzą mechanicznej blokady spalania tłuszczu."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę mówi fizjologia spalania tłuszczu?",
+      "alt": "Kobieta i mężczyzna po 50-tce idą energicznym krokiem przez park",
+      "caption": "Marsz angażuje całe ciało i ilustruje systemowy wydatek energii; nie wskazuje jednej okolicy, z której organizm ma usuwać tłuszcz.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-ruch-calym-cialem.avif",
+          "sha256": "15571366967f43e7ac151f65e40abfebad4ba072bb7ebb57f7bb03345c7a13f2",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/oponka-ruch-calym-cialem.webp",
+          "sha256": "796cba69d32b487518c053e3a377e7be6a85313ae11a4f1a98dd50411f346bb4",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/oponka-ruch-calym-cialem.jpg",
+          "sha256": "f44324fd12205d5ac2ad5f3cf51c25e0377375926bebb0bd09e99edb554b6248",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co naprawdę mówi fizjologia spalania tłuszczu?”: Kobieta i mężczyzna po 50-tce idą energicznym krokiem przez park. Zgodność z treścią potwierdza podpis: Marsz angażuje całe ciało i ilustruje systemowy wydatek energii; nie wskazuje jednej okolicy, z której organizm ma usuwać tłuszcz."
+      }
+    },
+    {
+      "placement": "section:Co mówią twarde dowody?",
+      "alt": "Badaczka porównuje wykresy i wyniki kilku badań naukowych",
+      "caption": "Ocena dowodów wymaga porównania populacji, interwencji i wyników, zwłaszcza gdy małe badanie daje wynik odmienny od wcześniejszej metaanalizy.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-ocena-dowodow.avif",
+          "sha256": "e3ab24798ddb40a4ea1f2a31128ea164cb385f90212ebe4c28fde5a586945a2d",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/oponka-ocena-dowodow.webp",
+          "sha256": "798bfecfc21e4fac1c67ec8b2017f5a3f2338df714c401233e6316f2c46d2be4",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/oponka-ocena-dowodow.jpg",
+          "sha256": "b3487ac4861f58defde101b3cd434597acb88aac04b4c986400190b1a3de6b31",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co mówią twarde dowody?”: Badaczka porównuje wykresy i wyniki kilku badań naukowych. Zgodność z treścią potwierdza podpis: Ocena dowodów wymaga porównania populacji, interwencji i wyników, zwłaszcza gdy małe badanie daje wynik odmienny od wcześniejszej metaanalizy."
+      }
+    },
+    {
+      "placement": "section:Gdzie jest granica prawdy?",
+      "alt": "Kobieta po 50-tce spokojnie roluje boczną część uda na macie",
+      "caption": "Rolowanie może służyć pracy nad komfortem ruchu lub ruchomością, lecz taki cel nie jest dowodem miejscowego spalania tkanki tłuszczowej.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-rolowanie-mobilnosc.avif",
+          "sha256": "32f4be1faa1d45d79055c9e5d79f103438427c95a58dd72bd05a40971e055044",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/oponka-rolowanie-mobilnosc.webp",
+          "sha256": "eda83bbf517152b638430f22aaaacc924d78ef2f4ced2cace970c7064d84f2f2",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/oponka-rolowanie-mobilnosc.jpg",
+          "sha256": "e8ff51fbcbf74e027ca88834a2ab1cd52bc26255796280dea2f08689cf751a7d",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Gdzie jest granica prawdy?”: Kobieta po 50-tce spokojnie roluje boczną część uda na macie. Zgodność z treścią potwierdza podpis: Rolowanie może służyć pracy nad komfortem ruchu lub ruchomością, lecz taki cel nie jest dowodem miejscowego spalania tkanki tłuszczowej."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę działa na oponkę po 50-tce?",
+      "alt": "Para po 50-tce przygotowuje posiłek, a w tle widać sprzęt do ćwiczeń",
+      "caption": "Regularny ruch i wykonalny sposób jedzenia tworzą codzienny plan pracy nad składem ciała bez obietnicy jednego tempa lub miejsca redukcji.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-plan-nawyki.avif",
+          "sha256": "fc06e0d295297add53423fc59eb7a6a38c82c296780f7508af9407b8d7852bf0",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/oponka-plan-nawyki.webp",
+          "sha256": "32b121896610c269ecc0aee629253f6b69e7251471e23c46dde21a93d137da5d",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/oponka-plan-nawyki.jpg",
+          "sha256": "1d37e1c384e87af48a1521f819bf0494cda735e1ed8eeea2af86d2e7172cee6c",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co naprawdę działa na oponkę po 50-tce?”: Para po 50-tce przygotowuje posiłek, a w tle widać sprzęt do ćwiczeń. Zgodność z treścią potwierdza podpis: Regularny ruch i wykonalny sposób jedzenia tworzą codzienny plan pracy nad składem ciała bez obietnicy jednego tempa lub miejsca redukcji."
+      }
+    },
+    {
+      "placement": "section:Kiedy oponka to sygnał, żeby pójść do lekarza?",
+      "alt": "Mężczyzna po 60-tce rozmawia z lekarką o zmianach obwodu brzucha",
+      "caption": "Szybka zmiana obwodu, ból, twardy brzuch lub wyczuwalny guz wymagają oceny przyczyny, a nie eksperymentowania z wałkiem.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-konsultacja-lekarska.avif",
+          "sha256": "dc6a6ba5e3b35727cbc44a5437543445cae91a1341cdcc9c9a386c4457a76d89",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/oponka-konsultacja-lekarska.webp",
+          "sha256": "acc530ee02ce69abd17de35104a8f6faa7731478a37e6c8a2c3af4e527ea4df5",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/oponka-konsultacja-lekarska.jpg",
+          "sha256": "72ecc1841dc073ddbe37d1d4117d2f29c18dfc582f149ce8e299d4701b54b589",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy oponka to sygnał, żeby pójść do lekarza?”: Mężczyzna po 60-tce rozmawia z lekarką o zmianach obwodu brzucha. Zgodność z treścią potwierdza podpis: Szybka zmiana obwodu, ból, twardy brzuch lub wyczuwalny guz wymagają oceny przyczyny, a nie eksperymentowania z wałkiem."
+      }
+    }
+  ]
+}

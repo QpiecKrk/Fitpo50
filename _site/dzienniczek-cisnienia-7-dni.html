@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+  <title>Dzienniczek ciśnienia na 7 dni | Narzędzia FitPo50</title>
+  <meta name="description" content="Zapisz domowe pomiary ciśnienia przez siedem dni i oblicz średnią z dni 2–7. Dane pozostają wyłącznie w Twojej przeglądarce.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://fitpo50.pl/dzienniczek-cisnienia-7-dni.html">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css?v=1.4">
+  <link rel="stylesheet" href="./assets/footer.css?v=1">
+  <link rel="stylesheet" href="./assets/tools-hub.css?v=1">
+  <link rel="stylesheet" href="./assets/blood-pressure-diary.css?v=2">
+  <link rel="icon" href="./favicon.png" type="image/png"><link rel="apple-touch-icon" href="./favicon.png">
+  <script>
+    (function () {
+      try {
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var isPhone = window.matchMedia && (window.matchMedia("(max-width: 820px)").matches || window.matchMedia("(hover: none) and (pointer: coarse)").matches);
+        var hour = new Date().getHours();
+        var isNight = hour >= 19 || hour < 7;
+        if (prefersDark || (isPhone && isNight)) document.documentElement.classList.add("night-shell");
+      } catch (_) {}
+    })();
+  </script>
+</head>
+<body class="tools-page bp-page">
+  <div class="tools-shell">
+    <header class="tools-topbar">
+      <a class="tools-brand" href="index.html" aria-label="FitPo50 — strona główna">
+        <img class="tools-brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="112" height="112" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
+        <span class="tools-brand__text"><span class="tools-brand__name">FitPo50</span><span class="tools-brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span></span>
+      </a>
+      <a class="calculator-back" href="narzedzia.html">← Wszystkie narzędzia</a>
+    </header>
+
+    <main>
+      <section class="bp-hero" aria-labelledby="bp-title">
+        <div>
+          <span class="tools-kicker">Dzienniczek ciśnienia</span>
+          <h1 id="bp-title">Zapisuj ciśnienie przez 7 dni.<br><em>Średnią policzymy za Ciebie.</em></h1>
+          <p>Zapisuj po dwa pomiary rano i wieczorem. Dzienniczek obliczy średnią z dni 2–7 oraz przygotuje uporządkowany zapis do rozmowy z lekarzem.</p>
+        </div>
+        <div class="bp-hero__side">
+          <figure class="bp-hero__illustration">
+            <picture><source srcset="./assets/blood-pressure-human-v1.webp" type="image/webp"><img src="./assets/blood-pressure-human-v1.png" width="1254" height="1254" loading="eager" fetchpriority="high" decoding="async" alt="Mężczyzna po pięćdziesiątce mierzący ciśnienie w domu, siedząc z podpartymi plecami i ramieniem opartym na wysokości serca"></picture>
+            <figcaption><strong>Spokojna pozycja daje lepszy zapis.</strong> Plecy podparte, stopy na podłodze, ramię rozluźnione na wysokości serca.</figcaption>
+          </figure>
+          <aside class="bp-hero__privacy"><strong>Twoje wyniki zostają tutaj</strong><p>Dane są zapisywane wyłącznie w tej przeglądarce. FitPo50 ich nie wysyła ani nie zapisuje na serwerze.</p></aside>
+        </div>
+      </section>
+
+      <section class="bp-protocol" id="jak-mierzyc" aria-labelledby="protocol-title">
+        <header><span class="tools-section-kicker">Zanim zaczniesz</span><h2 id="protocol-title">Jak wykonać serię pomiarów?</h2></header>
+        <ol>
+          <li><b>01</b><span><strong>Przygotuj się</strong>Przez 30 minut nie ćwicz, nie pal i nie pij napojów z kofeiną. Opróżnij pęcherz.</span></li>
+          <li><b>02</b><span><strong>Usiądź na 5 minut</strong>Oprzyj plecy, postaw stopy płasko, nie krzyżuj nóg i nie rozmawiaj.</span></li>
+          <li><b>03</b><span><strong>Ułóż ramię</strong>Załóż dopasowany mankiet na nagie ramię i oprzyj je na wysokości serca.</span></li>
+          <li><b>04</b><span><strong>Zrób dwa odczyty</strong>Powtórz pomiar po co najmniej minucie. Zapisz oba wyniki, rano i wieczorem.</span></li>
+        </ol>
+        <p class="bp-protocol__note"><strong>Dlaczego dzień 1 jest pomijany?</strong> NICE zaleca przy siedmiodniowym pomiarze domowym obliczanie średniej z dni 2–7. Dzienniczek zachowa pierwszy dzień, ale nie włączy go do średniej głównej.</p>
+      </section>
+
+      <section class="bp-workspace" aria-label="Dzienniczek i podsumowanie">
+        <form class="bp-form" data-bp-form novalidate>
+          <div class="bp-form__head">
+            <div><span class="tools-section-kicker">Twój zapis</span><h2>Wpisz pomiary</h2></div>
+            <a class="bp-download" href="output/pdf/dzienniczek-cisnienia-7-dni.pdf" download>Pobierz pusty PDF</a>
+          </div>
+          <p class="bp-unit-note">Wartości ciśnienia wpisuj w mmHg. Puls jest opcjonalny.</p>
+          <div class="bp-error" data-bp-error role="alert" hidden></div>
+          <div class="bp-days" data-bp-days></div>
+          <div class="bp-form__actions">
+            <button class="bp-clear" type="button" data-bp-clear>Wyczyść dzienniczek</button>
+            <span data-bp-saved aria-live="polite"></span>
+          </div>
+          <noscript><p class="bp-error">Do automatycznego liczenia średniej potrzebna jest włączona obsługa JavaScript. Możesz skorzystać z pustego PDF-u.</p></noscript>
+        </form>
+
+        <aside class="bp-summary" aria-labelledby="summary-title">
+          <span class="tools-section-kicker">Podsumowanie</span>
+          <h2 id="summary-title">Średnia z dni 2–7</h2>
+          <div class="bp-summary__empty" data-bp-empty><strong>—/—</strong><p>Uzupełnij przynajmniej jeden pełny odczyt od dnia 2.</p></div>
+          <div class="bp-summary__content" data-bp-content hidden>
+            <div class="bp-summary__main"><span>Ciśnienie</span><strong><span data-bp-average>—/—</span> <small>mmHg</small></strong></div>
+            <div class="bp-summary__grid">
+              <div><span>Rano</span><strong data-bp-morning>—/—</strong></div>
+              <div><span>Wieczorem</span><strong data-bp-evening>—/—</strong></div>
+              <div><span>Średni puls</span><strong data-bp-pulse>brak danych</strong></div>
+              <div><span>Odczyty</span><strong data-bp-count>0 z 24</strong></div>
+            </div>
+            <p class="bp-summary__quality" data-bp-completeness></p>
+          </div>
+          <div class="bp-safety-alert" data-bp-safety role="alert" hidden>
+            <strong>Bardzo wysoki odczyt</strong>
+            <p>Jeśli ciśnienie skurczowe przekracza 180 mmHg lub rozkurczowe przekracza 120 mmHg, odczekaj co najmniej minutę i zmierz ponownie. Jeżeli nadal jest tak wysokie, pilnie skontaktuj się z pomocą medyczną. Przy bólu w klatce, duszności, osłabieniu, drętwieniu, zaburzeniu widzenia lub mowy dzwoń pod 112 albo 999.</p>
+          </div>
+          <div class="bp-summary__meaning">
+            <h3>Co zrobić ze średnią?</h3>
+            <p>Pokaż zapis lekarzowi lub pielęgniarce. Średnia z domowych pomiarów pomaga ocenić trend, ale sama nie potwierdza rozpoznania i nie jest podstawą do samodzielnej zmiany leków.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="bp-checklist" id="checklista" aria-labelledby="checklist-title">
+        <header><span class="tools-section-kicker">Szybka checklista</span><h2 id="checklist-title">Czy pomiar był porównywalny?</h2></header>
+        <div>
+          <label><input type="checkbox"> <span>Minęło 30 minut od wysiłku, palenia i kofeiny.</span></label>
+          <label><input type="checkbox"> <span>Pęcherz był opróżniony, a odpoczynek trwał 5 minut.</span></label>
+          <label><input type="checkbox"> <span>Plecy i stopy były oparte, nogi nieskrzyżowane.</span></label>
+          <label><input type="checkbox"> <span>Mankiet miał właściwy rozmiar i był założony na nagie ramię.</span></label>
+          <label><input type="checkbox"> <span>Ramię spoczywało na wysokości serca.</span></label>
+          <label><input type="checkbox"> <span>Podczas pomiaru nie rozmawiałem i wykonałem drugi odczyt po minucie.</span></label>
+        </div>
+      </section>
+
+      <section class="bp-sources" aria-labelledby="sources-title">
+        <div><span class="tools-section-kicker">Metoda i bezpieczeństwo</span><h2 id="sources-title">Źródła</h2><p>Zasady pomiaru i obliczania średniej pochodzą z aktualnych materiałów instytucjonalnych. Ostatnia kontrola: 6 września 2026 r.</p></div>
+        <ol>
+          <li><a href="https://www.nice.org.uk/guidance/ng136/chapter/recommendations" target="_blank" rel="noopener noreferrer">NICE NG136 — Hypertension in adults: diagnosis and management</a></li>
+          <li><a href="https://www.escardio.org/guidelines/clinical-practice-guidelines/pocket-guidelines/elevated-blood-pressure-and-hypertension/" target="_blank" rel="noopener noreferrer">ESC 2024 — Elevated Blood Pressure and Hypertension</a></li>
+          <li><a href="https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home" target="_blank" rel="noopener noreferrer">American Heart Association — Home Blood Pressure Monitoring</a></li>
+        </ol>
+      </section>
+
+      <section class="bp-related" aria-labelledby="related-title">
+        <div><span class="tools-section-kicker">Czytaj dalej</span><h2 id="related-title">Więcej o ciśnieniu</h2></div>
+        <div>
+          <a href="centrum-nadcisnienia-po-50.html"><strong>Centrum Nadciśnienia</strong><span>Pomiary, ruch, leczenie i najważniejsze pytania.</span></a>
+          <a href="nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn.html"><strong>Jak kontrolować nadciśnienie?</strong><span>Co rzeczywiście pomaga i czego nie obiecywać.</span></a>
+          <a href="trening-silowy-po-50-cisnienie-plan-8-tygodni.html"><strong>Trening siłowy i ciśnienie</strong><span>Jak ćwiczyć z kontrolą i bezpiecznie zwiększać wysiłek.</span></a>
+        </div>
+      </section>
+
+      <section class="tools-safety" aria-labelledby="safety-title">
+        <div><span aria-hidden="true">🛡️</span></div>
+        <div><h2 id="safety-title">Zapis wspiera rozmowę. Nie stawia diagnozy.</h2><p>Dzienniczek ma charakter edukacyjny. Nie odstawiaj ani nie zmieniaj dawki leków na podstawie samych wyników bez uzgodnienia z lekarzem.</p></div>
+      </section>
+    </main>
+
+    <footer class="site-footer-bento" aria-label="Stopka FitPo50">
+      <div class="site-footer-bento__grid">
+        <section class="site-footer-bento__card" aria-label="O serwisie FitPo50"><div class="site-footer-bento__brand"><img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'"><div><h2 class="site-footer-bento__title">FitPo50.pl</h2><p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej ściemy.</p></div></div></section>
+        <section class="site-footer-bento__card" aria-label="Status strony"><h3 class="site-footer-bento__links-title">Narzędzie w wersji roboczej</h3><p class="site-footer-bento__lead">Dzienniczek pozostaje odłączony od publicznej nawigacji do czasu ukończenia kolekcji.</p></section>
+      </div>
+      <div class="site-footer-bento__bottom"><p class="site-footer-bento__copy">© 2026 FitPo50 | <a href="polityka-prywatnosci.html">Polityka Prywatności i Cookies</a></p><p class="site-footer-bento__note">Ważna informacja: nie jestem lekarzem. Treści mają charakter edukacyjny i informacyjny.</p></div>
+    </footer>
+  </div>
+  <script src="./dist/blood-pressure-diary.js?v=2" defer></script>
+</body>
+</html>

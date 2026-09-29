@@ -125,6 +125,9 @@ function validateCheckedUrl(item, label, today, errors) {
   }
   if (urlStatus !== 'reachable') errors.push(`${label}: url_status musi mieć wartość "reachable" po realnym sprawdzeniu adresu.`);
   if (!httpStatus) errors.push(`${label}: brak http_status z kontroli adresu.`);
+  else if (!Number.isInteger(httpStatus) || httpStatus < 200 || httpStatus >= 300) {
+    errors.push(`${label}: końcowy HTTP ${httpStatus} nie potwierdza dostępności źródła; wymagany kod 2xx po przekierowaniach.`);
+  }
 }
 
 function validateFaqResearch(json, today) {
@@ -216,6 +219,13 @@ function validateArticleEvidence(json, options = {}) {
     const url = String(source?.url || '').trim();
     const normalized = normalizeUrl(url);
     validateCheckedUrl(source, `sources[${index}]`, today, errors);
+    if (normalized) {
+      const parsed = new URL(normalized);
+      const ncbi = ['pubmed.ncbi.nlm.nih.gov', 'pmc.ncbi.nlm.nih.gov', 'www.ncbi.nlm.nih.gov', 'ncbi.nlm.nih.gov'].includes(parsed.hostname);
+      if (ncbi && (parsed.searchParams.has('term') || /(?:^|\/)search(?:\/|$)/.test(parsed.pathname) || ['/', '/pubmed', '/pmc'].includes(parsed.pathname))) {
+        errors.push(`sources[${index}]: wyniki wyszukiwania lub strona główna nie są konkretną publikacją bibliograficzną.`);
+      }
+    }
     if (!String(source?.label || '').trim()) errors.push(`sources[${index}]: brak pełnego label.`);
     const evidenceLevel = String(source?.evidence_level || source?.evidenceLevel || '').trim().toLowerCase();
     if (!EVIDENCE_LEVELS.has(evidenceLevel)) {

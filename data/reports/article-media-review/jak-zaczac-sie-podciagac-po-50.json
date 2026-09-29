@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "jak-zaczac-sie-podciagac-po-50",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "3da1111542d2003dab236ce4fa6e5dde56f2c6b82d0fe0af1a17e39c2e0074fd",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po pięćdziesiątce ćwiczy podciąganie z podparciem stóp i asekuracją trenera",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-hero-2026.avif",
+          "sha256": "358d96e3e1d8f50e062148896c9cb44d68f3f188ae38e5a4e24234d83d681a29",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/podciaganie-hero-2026.webp",
+          "sha256": "759a646bb235bce53f04925f1d6a31bab18856055b5d8df0eee7b6728b0c7bf2",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/podciaganie-hero-2026.jpg",
+          "sha256": "71374a39708b12a83b84472f7bdbbaadb75b87d38b68e5703be834b841d6d86c",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po pięćdziesiątce ćwiczy podciąganie z podparciem stóp i asekuracją trenera. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak sprawdzić gotowość barków i chwytu?",
+      "alt": "Trenerka obserwuje zakres unoszenia ramion u dojrzałej kobiety przed treningiem",
+      "caption": "Bezbolesne uniesienie ramion jest wstępną próbą tolerancji ruchu, ale nie zastępuje badania przy utrzymujących się objawach.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-gotowosc.avif",
+          "sha256": "bcec6109674e7ccf41882db5b0b2f0b0e589df37878becbd79950a21a1d7e575",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/podciaganie-gotowosc.webp",
+          "sha256": "b11430be73fd95c93ce2382df6317e2ac42f5e49075406c8d8873b59eb56ff10",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/podciaganie-gotowosc.jpg",
+          "sha256": "b537ad210858fc8b0a0622c523997f159d1587eaff05e7f5ff6842f953fdf375",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak sprawdzić gotowość barków i chwytu?”: Trenerka obserwuje zakres unoszenia ramion u dojrzałej kobiety przed treningiem. Zgodność z treścią potwierdza podpis: Bezbolesne uniesienie ramion jest wstępną próbą tolerancji ruchu, ale nie zastępuje badania przy utrzymujących się objawach."
+      }
+    },
+    {
+      "placement": "section:Od jakich ćwiczeń zacząć?",
+      "alt": "Dojrzały mężczyzna wykonuje przyciąganie poziome pod kontrolą trenera",
+      "caption": "Przyciąganie poziome pozwala regulować trudność kątem ustawienia ciała i uczyć kontroli łopatek oraz łokci.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-wioslowanie.avif",
+          "sha256": "35ba19520307037947ac16243501fd63481aaaae2f9337e9975fb99bd2454ac2",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/podciaganie-wioslowanie.webp",
+          "sha256": "a298186b7eb87fa3d7bda666dde664c37ae4cdbf5c95d4c7ca3b76329a3a751a",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/podciaganie-wioslowanie.jpg",
+          "sha256": "caf3b33ac574ff98b18f4f38baec73b5a8c5812e9586f4130312c10b6cc74ea0",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Od jakich ćwiczeń zacząć?”: Dojrzały mężczyzna wykonuje przyciąganie poziome pod kontrolą trenera. Zgodność z treścią potwierdza podpis: Przyciąganie poziome pozwala regulować trudność kątem ustawienia ciała i uczyć kontroli łopatek oraz łokci."
+      }
+    },
+    {
+      "placement": "section:Jak przejść do podciągania wspomaganego?",
+      "alt": "Kobieta po pięćdziesiątce ćwiczy na maszynie do podciągania wspomaganego",
+      "caption": "Maszyna pozwala zapisać poziom pomocy i zmniejszać go stopniowo bez zmiany kilku parametrów naraz.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-wspomagane.avif",
+          "sha256": "da6ca8d75cd60ee4dd6c2b0556fc1f43fbfa346e49b8529f7a14a22db01c4426",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/podciaganie-wspomagane.webp",
+          "sha256": "9b12f58ee753e9cddee9260d92ea3e317b4cbe3457fbeeb27f961617a29b89c7",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/podciaganie-wspomagane.jpg",
+          "sha256": "67186373fa3e7f713776ec95f27c62e98e4825e6590ba926253de0ae554a5acc",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak przejść do podciągania wspomaganego?”: Kobieta po pięćdziesiątce ćwiczy na maszynie do podciągania wspomaganego. Zgodność z treścią potwierdza podpis: Maszyna pozwala zapisać poziom pomocy i zmniejszać go stopniowo bez zmiany kilku parametrów naraz."
+      }
+    },
+    {
+      "placement": "section:Kiedy ból barku lub łokcia wymaga przerwy?",
+      "alt": "Fizjoterapeutka ocenia ruch barku u dojrzałego mężczyzny po bólu podczas ćwiczeń",
+      "caption": "Ostry ból kończy serię; nagły uraz, utrata ruchu lub utrzymujące się drętwienie wymagają oceny medycznej.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-bol-barku.avif",
+          "sha256": "f9d27b1dc96374bf66fb14133e2ac9076a9e4cc98870a6d0893d009ca4fcf26b",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/podciaganie-bol-barku.webp",
+          "sha256": "fc8c6b08eb6ac4e93556bd7f90c4fdfca010cbf8f1b66fdbc84a3cda1bc0031e",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/podciaganie-bol-barku.jpg",
+          "sha256": "3c9ebad50ec67a0c4feab1e52aecf0918ab6bef6c3f4430272bc9e59a111f722",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy ból barku lub łokcia wymaga przerwy?”: Fizjoterapeutka ocenia ruch barku u dojrzałego mężczyzny po bólu podczas ćwiczeń. Zgodność z treścią potwierdza podpis: Ostry ból kończy serię; nagły uraz, utrata ruchu lub utrzymujące się drętwienie wymagają oceny medycznej."
+      }
+    }
+  ]
+}

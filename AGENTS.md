@@ -33,6 +33,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 ## Treść FitPo50
 
 - Zero generycznych tekstów i placeholderów.
+- Artykuł ma wyczerpać realną intencję czytelnika, ale liczba i długość sekcji wynikają z tematu. Nie dopisuj sekcji, zdań ani obrazów dla sztucznego minimum.
 - JSON zewnętrzny jest draftem; kontrola logiki, dowodów i obrazów jest obowiązkowa.
 - Niejasne odniesienia, niedomknięte metafory i wnioski bez przesłanek blokują publikację.
 - FAQ pochodzi wyłącznie z realnego GSC/PAA/autocomplete/udokumentowanego researchu.
@@ -41,10 +42,11 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 
 ## Quality Gate artykułu
 
+- Ten sam pełny Quality Gate obowiązuje nowe artykuły, aktualizacje, `popraw-seo`, `napraw paczkę N` i import starszego draftu. Wcześniejszy PASS ani mały zakres zmiany nie zwalniają z kontroli całej strony i wszystkich artefaktów.
 - Opis SEO ma 145–160 znaków, kończy się pełnym zdaniem i jest identyczny w meta, Open Graph, Twitter i `BlogPosting.description`.
 - Pytające H2 kończą się `?`; pierwszy akapit pod H2 ma 30–70 słów.
 - Minimum 4 naturalne linki wewnętrzne prowadzą do istniejących stron i używają ścieżek względnych.
-- Obrazy korzystają z `<picture>` z AVIF/WebP/JPG, konkretnym `alt`, wymiarami i kontrolą wizualną.
+- Obrazy korzystają z `<picture>` z AVIF/WebP/JPG, konkretnym `alt`, wymiarami i kontrolą wizualną. Wymagany jest hero oraz odrębny, merytorycznie trafny obraz dla każdej głównej sekcji treści; sekcje użytkowe nie zwiększają licznika. Watermark sam nie blokuje obrazu.
 - Tabele są semantycznym HTML z `caption`, `thead`, `tbody` i `scope`.
 - `BlogPosting.citation` jest zgodne 1:1 z wykorzystaną listą źródeł.
 - Publikacja wymaga stagingu desktop/mobile, PDF, obejrzenia wszystkich stron PDF, synchronizacji `_site` oraz pełnych walidatorów.
@@ -67,7 +69,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Raport kończy się `AWAITING_USER_APPROVAL`. Bez akceptacji konkretnych ID nie edytuj HTML.
 - Po zatwierdzeniu ID agent prowadzi cały proces bez dalszych komend użytkownika: konkretny manifest patchy, dry-run, atomowy apply i rollback, PDF/_site/sitemap, walidacja, commit/push, kontrola produkcji oraz końcowa lista GSC. Jeżeli etap nie przejdzie, zgłasza bloker zamiast go pomijać.
 - Sam `git push` nie potwierdza produkcji. URL-e do GSC wolno podać dopiero po `LIVE_DEPLOYED_AND_VALIDATED`.
-- Zatwierdzona pozycja przechodzi pełny Quality Gate, nie tylko korektę title/meta.
+- Każdy artykuł zmieniany przez `popraw-seo` przechodzi pełną walidację jak nowy artykuł i musi spełnić wszystkie aktualne wymagania `ARTICLE_STANDARD.md`, także w niezmienionych sekcjach. Obowiązują łącznie bramki automatyczne, przegląd redakcyjny i kontrola wizualna wszystkich artefaktów; sam PASS HTML nie wystarcza. Brak lub błąd dowolnej wymaganej kontroli blokuje publikację.
 
 ## `napraw paczkę N`
 

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "6b0634078a2bbe43d907562087f4d3da54af0e8e88bb048c735426d93e04f8e3",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Pacjent uczestniczy w badaniu okulistycznym eksperymentalnej terapii ER-100",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/er100-hero-2026.avif",
+          "sha256": "b2ddb20d30a2be6263cebb54fc6c8f8b838fda9dfaa84222c4f6a559eaacbe8d",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/er100-hero-2026.webp",
+          "sha256": "ed56c3b4785423eb86c944ec291bf2bbd22f9c2044e8679215e04b02753f905b",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/er100-hero-2026.jpg",
+          "sha256": "215a7b4a2bbd55d7566a7fd25459ca3ff399cc6e492a04b50e5d1e44f77d1a73",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Pacjent uczestniczy w badaniu okulistycznym eksperymentalnej terapii ER-100. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym dokładnie jest ER-100?",
+      "alt": "Przekrój oka pokazujący wektor AAV docierający do komórek siatkówki",
+      "caption": "ER-100 wykorzystuje zmodyfikowany wektor AAV do dostarczenia instrukcji OSK do komórek siatkówki w jednym leczonym oku.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/er100-aav-siatkowka.avif",
+          "sha256": "e06aa6de005a4f24e080d811728cfe23dc26e68b015fc66b0f3aa709ba246c9e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/er100-aav-siatkowka.webp",
+          "sha256": "abbac0a9aab8c8a7962fdd195342f5715af330fc437e4e484f0066c8bdd4f6dd",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/er100-aav-siatkowka.jpg",
+          "sha256": "4f634344e03550b00dccb8b871854202d45f27146275b9e5657400ca0cee0a58",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym dokładnie jest ER-100?”: Przekrój oka pokazujący wektor AAV docierający do komórek siatkówki. Zgodność z treścią potwierdza podpis: ER-100 wykorzystuje zmodyfikowany wektor AAV do dostarczenia instrukcji OSK do komórek siatkówki w jednym leczonym oku."
+      }
+    },
+    {
+      "placement": "section:Kogo obejmuje badanie fazy 1?",
+      "alt": "Zespół badawczy omawia z dojrzałymi pacjentami kryteria badania okulistycznego",
+      "caption": "Badanie ma wąskie kryteria medyczne i obejmuje osoby z jaskrą otwartego kąta lub NAION, a nie zdrowych ochotników.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/er100-kwalifikacja.avif",
+          "sha256": "08e904fbe6d37533d6b8a86ae576d544d0cf3bc1543bca2db88b3ad8e2f410af",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/er100-kwalifikacja.webp",
+          "sha256": "467c4d2558c2a331e411639bcc35f852b03c13dad4c3a202c434bec635d6a6be",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/er100-kwalifikacja.jpg",
+          "sha256": "c93028ecb2f3090de2f3685b32b41d7e6d48199dc0abe814c104baf6d1907f4c",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kogo obejmuje badanie fazy 1?”: Zespół badawczy omawia z dojrzałymi pacjentami kryteria badania okulistycznego. Zgodność z treścią potwierdza podpis: Badanie ma wąskie kryteria medyczne i obejmuje osoby z jaskrą otwartego kąta lub NAION, a nie zdrowych ochotników."
+      }
+    },
+    {
+      "placement": "section:Co mierzy badanie i kiedy poznamy odpowiedź?",
+      "alt": "Uczestnik badania wykonuje badanie pola widzenia i obrazowanie siatkówki OCT",
+      "caption": "Faza 1 mierzy przede wszystkim bezpieczeństwo; testy pola widzenia i OCT dostarczają także eksploracyjnych danych o funkcji oka.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/er100-pomiary-badania.avif",
+          "sha256": "534051e96a88e2a55017283c20d95a9c34e05927504ef140d1cc640bcc9b375e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/er100-pomiary-badania.webp",
+          "sha256": "c0a8b779d6979c96629eea652a53015eeec7ef687b1cc8661d3e7c48212cf435",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/er100-pomiary-badania.jpg",
+          "sha256": "f3a985413ed98057bb9de2450ec1a62c942e0f6e5b814d296161d38a5507153f",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co mierzy badanie i kiedy poznamy odpowiedź?”: Uczestnik badania wykonuje badanie pola widzenia i obrazowanie siatkówki OCT. Zgodność z treścią potwierdza podpis: Faza 1 mierzy przede wszystkim bezpieczeństwo; testy pola widzenia i OCT dostarczają także eksploracyjnych danych o funkcji oka."
+      }
+    },
+    {
+      "placement": "section:Czy ER-100 odmładza całe ciało?",
+      "alt": "Model oka na tle nieostrej sylwetki pokazuje granicę między badaniem oka a całym ciałem",
+      "caption": "Dane z terapii podanej do jednego oka nie pozwalają wnioskować o odmładzaniu innych narządów ani całego organizmu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/er100-granica-dowodu.avif",
+          "sha256": "cf0264b687b07c15d2133dfa02b368448f00f8f9c1c589ecaed14dddf1042be0",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/er100-granica-dowodu.webp",
+          "sha256": "8f3d9228e5585f372899a2b4c215cfac8a7a103e01dddd637e0c554ac4bf12fb",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/er100-granica-dowodu.jpg",
+          "sha256": "7b9f6c19fee7b7574736805eabf90b033aec2292bd20e640a502d12da467e70a",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy ER-100 odmładza całe ciało?”: Model oka na tle nieostrej sylwetki pokazuje granicę między badaniem oka a całym ciałem. Zgodność z treścią potwierdza podpis: Dane z terapii podanej do jednego oka nie pozwalają wnioskować o odmładzaniu innych narządów ani całego organizmu."
+      }
+    }
+  ]
+}

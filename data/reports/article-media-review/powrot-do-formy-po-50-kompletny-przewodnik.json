@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "powrot-do-formy-po-50-kompletny-przewodnik",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "c2468b75c6592257b4980b6c6755f2825c2a73337150e6c1ac1ffd4710d6bb2c",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kolorowa, komiksowa ilustracja 50-latka jako superbohatera wchodzącego triumfalnie na siłownię",
+      "caption": "",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/powrot-do-formy-po-50-hero.avif",
+          "sha256": "dc76955f6727701b2a2d2c544f65ac6998174508455dd6077c7dbc551e83b9f4",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/powrot-do-formy-po-50-hero.webp",
+          "sha256": "4520659b3f91bdea550086e771ca5c24ebc5628013edadc8b9af232a523d1bc7",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/powrot-do-formy-po-50-hero.jpg",
+          "sha256": "a30b70324f269589635e047eb2bba4cdb80f0b8b338739ffb5f20e42dd15a6b4",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Kolorowa, komiksowa ilustracja 50-latka jako superbohatera wchodzącego triumfalnie na siłownię. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czy przed startem każdy musi zrobić komplet badań?",
+      "alt": "Mężczyzna po sześćdziesiątce omawia z lekarką objawy i gotowość do powrotu do ćwiczeń",
+      "caption": "Konsultacja zależy od objawów, chorób i planowanej intensywności, a nie od samej daty urodzenia.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/powrot-forma-badania-start-2026.avif",
+          "sha256": "ff6d060d3b02a80657e81c2d10d43ad5e0b701531b3849a639a7af78569cadfa",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/powrot-forma-badania-start-2026.webp",
+          "sha256": "63bec70ae3fab7855ef733fad4ffc97cbbff64d0be165c01a8ac9b7d9da4fadb",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/powrot-forma-badania-start-2026.jpg",
+          "sha256": "0242b39ceedae93063d2e72bade35203eedf3c356978e565aa4ff9365c3cfda0",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy przed startem każdy musi zrobić komplet badań?”: Mężczyzna po sześćdziesiątce omawia z lekarką objawy i gotowość do powrotu do ćwiczeń. Zgodność z treścią potwierdza podpis: Konsultacja zależy od objawów, chorób i planowanej intensywności, a nie od samej daty urodzenia."
+      }
+    },
+    {
+      "placement": "section:Co jest naprawdę potrzebne do pierwszego treningu?",
+      "alt": "Kobieta po sześćdziesiątce rozpoczyna prosty trening w domu z krzesłem i gumą oporową",
+      "caption": "Prosty sprzęt obniża próg wejścia; najważniejsze są bezpieczne warunki i ruch możliwy do regularnego powtarzania.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/powrot-forma-minimum-sprzetu-2026.avif",
+          "sha256": "318e77230e10f098979b1bcbc93ac00b63a9873ff2e819ece7089d88d3d747ea",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/powrot-forma-minimum-sprzetu-2026.webp",
+          "sha256": "f95c8c7ed9aa095e30d96bf07437e9b50abd330a130cdbab7f6f8bc22da2e516",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/powrot-forma-minimum-sprzetu-2026.jpg",
+          "sha256": "0e22cefe3a6df8e971499c10ed992e92c89c3c65d468b75258f0da1ccec90273",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co jest naprawdę potrzebne do pierwszego treningu?”: Kobieta po sześćdziesiątce rozpoczyna prosty trening w domu z krzesłem i gumą oporową. Zgodność z treścią potwierdza podpis: Prosty sprzęt obniża próg wejścia; najważniejsze są bezpieczne warunki i ruch możliwy do regularnego powtarzania."
+      }
+    },
+    {
+      "placement": "section:Jak powinny wyglądać pierwsze dwa tygodnie?",
+      "alt": "Kobieta po sześćdziesiątce wykonuje kontrolowane wstawanie z krzesła podczas lekkiego treningu",
+      "caption": "Pierwsze sesje służą poznaniu tolerancji i techniki, dlatego powinny kończyć się przed całkowitym wyczerpaniem.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/powrot-forma-pierwsze-dwa-tygodnie-2026.avif",
+          "sha256": "2f68b60e70c3b6ea6ff586e8890cf5c125af4b7438158724cffd99b4a8e452c0",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/powrot-forma-pierwsze-dwa-tygodnie-2026.webp",
+          "sha256": "80c36266a9c8fde6b51aa7b3a30de13ee32de2434561145113e7ba966449b1a7",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/powrot-forma-pierwsze-dwa-tygodnie-2026.jpg",
+          "sha256": "25840a453c43d54efd7fe0a3aadebc5f65569b958e8a718f4868432c039924d3",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak powinny wyglądać pierwsze dwa tygodnie?”: Kobieta po sześćdziesiątce wykonuje kontrolowane wstawanie z krzesła podczas lekkiego treningu. Zgodność z treścią potwierdza podpis: Pierwsze sesje służą poznaniu tolerancji i techniki, dlatego powinny kończyć się przed całkowitym wyczerpaniem."
+      }
+    },
+    {
+      "placement": "section:Jak połączyć siłę, marsz i równowagę?",
+      "alt": "Kobieta po sześćdziesiątce maszeruje, ćwiczy z gumą i wykonuje równowagę przy stabilnym podparciu",
+      "caption": "Marsz, siła i równowaga uzupełniają się; nie muszą jednak występować w jednej długiej sesji.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/powrot-forma-sila-marsz-rownowaga-2026.avif",
+          "sha256": "bf65167e0ddac9386bb236f22a2b8759055a932901f3fe2614a3f96e70801309",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/powrot-forma-sila-marsz-rownowaga-2026.webp",
+          "sha256": "690d5b863221c5e815a7c2d738cfa2a95779f2616f83ecf6a311e1557f03602d",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/powrot-forma-sila-marsz-rownowaga-2026.jpg",
+          "sha256": "0f59ebf633736266509fd03c9ae063cf94ce8a36c585ae85cc1466daec3c50f0",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak połączyć siłę, marsz i równowagę?”: Kobieta po sześćdziesiątce maszeruje, ćwiczy z gumą i wykonuje równowagę przy stabilnym podparciu. Zgodność z treścią potwierdza podpis: Marsz, siła i równowaga uzupełniają się; nie muszą jednak występować w jednej długiej sesji."
+      }
+    },
+    {
+      "placement": "section:Jak zwiększać obciążenie od trzeciego do szóstego tygodnia?",
+      "alt": "Mężczyzna po sześćdziesiątce ćwiczy z umiarkowanymi hantlami i zapisuje wykonane sesje",
+      "caption": "Mały, zapisany krok progresji pozwala odróżnić rozwój od przypadkowego dokładania wysiłku.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/powrot-forma-progresja-2026.avif",
+          "sha256": "798bba5446a86f7a5688b9449e7c97b7b4ad3146e852cabb7e52f231f16061a7",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/powrot-forma-progresja-2026.webp",
+          "sha256": "4da41c15db812ae487c458c52ac6e31ff60958f2d4d3b5672f5c76272b150ede",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/powrot-forma-progresja-2026.jpg",
+          "sha256": "25d1e26e958fa79873d3e47cdd76dcb1aedfd253cd8a82f177998421d2b05427",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak zwiększać obciążenie od trzeciego do szóstego tygodnia?”: Mężczyzna po sześćdziesiątce ćwiczy z umiarkowanymi hantlami i zapisuje wykonane sesje. Zgodność z treścią potwierdza podpis: Mały, zapisany krok progresji pozwala odróżnić rozwój od przypadkowego dokładania wysiłku."
+      }
+    },
+    {
+      "placement": "section:Jak mierzyć efekty bez obsesji na punkcie wagi?",
+      "alt": "Kobieta po sześćdziesiątce mierzy obwód pasa obok butów, krzesła i dziennika treningowego",
+      "caption": "Pomiar obwodu ma sens jako jeden z kilku wskaźników; sprawność codzienna i wykonana praca pokazują inną część postępu.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/powrot-forma-pomiar-postepu-2026.avif",
+          "sha256": "7228640147e78f08ef856d15a036835583524f480e50dc81daeaee01fb0544d3",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/powrot-forma-pomiar-postepu-2026.webp",
+          "sha256": "b050167d57cf78d2bfa1696bbcc6f03f81ecd90af14bf90dccb9a52e5501b074",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/powrot-forma-pomiar-postepu-2026.jpg",
+          "sha256": "0250c39850618e7cd338ec6dec3683e781e20db036355e6ef8a494c6559511c4",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak mierzyć efekty bez obsesji na punkcie wagi?”: Kobieta po sześćdziesiątce mierzy obwód pasa obok butów, krzesła i dziennika treningowego. Zgodność z treścią potwierdza podpis: Pomiar obwodu ma sens jako jeden z kilku wskaźników; sprawność codzienna i wykonana praca pokazują inną część postępu."
+      }
+    }
+  ]
+}

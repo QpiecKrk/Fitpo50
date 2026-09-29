@@ -13,6 +13,7 @@ Output contains:
 from __future__ import annotations
 
 import argparse
+import math
 import sys
 import tempfile
 from pathlib import Path
@@ -28,8 +29,10 @@ def _try_optional_path(path: str) -> None:
 
 _try_optional_path("/tmp/pdfdeps")
 
-from bs4 import BeautifulSoup, Tag  # type: ignore
+from bs4 import BeautifulSoup, Tag, NavigableString  # type: ignore
+from html import escape
 from fpdf import FPDF  # type: ignore
+from fpdf.enums import MethodReturnValue  # type: ignore
 from fpdf.fonts import FontFace  # type: ignore
 from fpdf.html import TextStyle  # type: ignore
 from PIL import Image  # type: ignore
@@ -38,7 +41,7 @@ from PIL import Image  # type: ignore
 BASE_URL = "https://fitpo50.pl/"
 
 TEXT_TAGS = {"p", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "blockquote"}
-CONTAINER_TAGS = {"section", "div", "article"}
+CONTAINER_TAGS = {"section", "div", "article", "aside"}
 HTML_TAG_STYLES = {
     "code": FontFace(family="Arial"),
     "pre": TextStyle(font_family="Arial"),
@@ -126,7 +129,7 @@ def add_image(
         display_w = display_h * (w_px / h_px)
 
     caption_h = 8 if caption else 0
-    if pdf.get_y() + display_h + caption_h > pdf.h - pdf.b_margin:
+    if pdf.y + display_h + caption_h > pdf.h - pdf.b_margin:
         pdf.add_page()
     x = pdf.l_margin + max((pdf.epw - display_w) / 2, 0)
     pdf.image(str(image_path), x=x, w=display_w, h=display_h)
@@ -150,8 +153,8 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
     if "share-article-section" in (node.get("class") or []):
         return
 
-    if node.name == "figure":
-        img = node.find("img")
+    if node.name in {"figure", "picture", "img"}:
+        img = node if node.name == "img" else node.find("img")
         if not img:
             return
         path = resolve_image_path(img.get("src", ""), html_path)
@@ -206,14 +209,91 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
         # Reserve enough room for the complete heading and the opening lines
         # of the paragraph that follows it.
         if node.name in {"h2", "h3", "h4", "h5", "h6"}:
-            remaining_height = pdf.h - pdf.b_margin - pdf.get_y()
-            required_height = 85 if node.get("id") == "zrodla" else 30
+            remaining_height = pdf.h - pdf.b_margin - pdf.y
+            inside_faq = node.find_parent(class_=lambda value: value and any(
+                item in {"faq-list", "faq-section"} for item in (value if isinstance(value, list) else str(value).split())
+            )) is not None
+            next_tag = node.find_next_sibling()
+            followed_by_image = next_tag is not None and next_tag.name in {"figure", "picture", "img"}
+            if node.get("id") == "zrodla":
+                required_height = 85
+            elif inside_faq:
+                required_height = 75
+            elif followed_by_image:
+                required_height = 90
+            else:
+                # A fixed 30 mm reserve still allowed a two-line H2 to sit
+                # alone at the bottom of a page. Measure the actual heading
+                # and keep at least the first three lines of the opening
+                # paragraph with it. This preserves long sections without
+                # forcing the whole paragraph onto the next page.
+                original_family = pdf.font_family or "Arial"
+                original_style = pdf.font_style
+                original_size = pdf.font_size_pt or 11
+                heading_sizes = {"h2": 16, "h3": 14, "h4": 12, "h5": 11, "h6": 10}
+                pdf.set_font("Arial", "B", heading_sizes[node.name])
+                heading_height = pdf.multi_cell(
+                    0,
+                    8,
+                    node.get_text(" ", strip=True),
+                    dry_run=True,
+                    output=MethodReturnValue.HEIGHT,
+                )
+                opening_height = 16.5
+                if next_tag is not None and next_tag.name == "p":
+                    pdf.set_font("Arial", size=11)
+                    opening_text = next_tag.get_text(" ", strip=True)
+                    paragraph_height = pdf.multi_cell(
+                        0,
+                        5.5,
+                        opening_text,
+                        dry_run=True,
+                        output=MethodReturnValue.HEIGHT,
+                    )
+                    page_body_height = pdf.h - pdf.t_margin - pdf.b_margin
+                    # The paragraph renderer below moves short paragraphs as
+                    # a whole. Reserve that same full height here, otherwise
+                    # the heading may remain behind on the previous page.
+                    if len(opening_text) <= 600 and paragraph_height + 3 <= page_body_height:
+                        opening_height = paragraph_height + 3
+                    else:
+                        opening_height = min(paragraph_height, 16.5)
+                pdf.set_font(original_family, original_style, original_size)
+                required_height = heading_height + opening_height + 7
+            if remaining_height < required_height:
+                pdf.add_page()
+        if node.name == "blockquote":
+            # A short editorial quote is a single visual unit. FPDF may fit
+            # its first line at the bottom and move only the final words to
+            # the next page, which passes text checks but produces a broken
+            # document. Estimate conservatively and move the whole quote.
+            quote_text = node.get_text(" ", strip=True)
+            estimated_lines = max(1, math.ceil(len(quote_text) / 80))
+            required_height = 8 + estimated_lines * 7
+            remaining_height = pdf.h - pdf.b_margin - pdf.y
             if remaining_height < required_height:
                 pdf.add_page()
         fragment = sanitize_fragment(node, source_url=source_url)
         if not fragment:
             return
         try:
+            # Move an ordinary short paragraph before rendering when it does
+            # not fit in the remaining area. Otherwise FPDF can leave a
+            # single final line (or even two words) at the top of the next
+            # page. Longer passages may still split normally.
+            paragraph_text = node.get_text(" ", strip=True)
+            if node.name == "p" and len(paragraph_text) <= 600:
+                estimated_height = pdf.multi_cell(
+                    0,
+                    5.5,
+                    paragraph_text,
+                    dry_run=True,
+                    output=MethodReturnValue.HEIGHT,
+                )
+                remaining_height = pdf.h - pdf.b_margin - pdf.y
+                page_body_height = pdf.h - pdf.t_margin - pdf.b_margin
+                if estimated_height + 3 > remaining_height and estimated_height + 3 <= page_body_height:
+                    pdf.add_page()
             pdf.write_html(fragment, tag_styles=HTML_TAG_STYLES)
         except Exception:
             text = node.get_text(" ", strip=True)
@@ -230,6 +310,8 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
         for child in node.children:
             if isinstance(child, Tag):
                 render_node(pdf, child, source_url=source_url, html_path=html_path, tmp_dir=tmp_dir)
+            elif isinstance(child, NavigableString) and str(child).strip():
+                pdf.write_html(f"<p>{escape(str(child).strip())}</p>", tag_styles=HTML_TAG_STYLES)
         return
 
     text = node.get_text(" ", strip=True)
@@ -300,9 +382,41 @@ def generate_pdf(input_html: Path, output_pdf: Path, source_url: str) -> None:
                     raise RuntimeError(f"Nie można osadzić obrazu hero {hero_path.name}: {exc}") from exc
 
         pdf.set_font("Arial", size=11)
+        quick_answer = soup.select_one('#quick-answer')
+        if quick_answer is not None and article not in quick_answer.parents:
+            render_node(pdf, quick_answer, source_url, input_html, tmp_dir)
+        children = []
         for child in article.children:
             if isinstance(child, Tag):
-                render_node(pdf, child, source_url=source_url, html_path=input_html, tmp_dir=tmp_dir)
+                children.append(child)
+            elif isinstance(child, NavigableString) and child.strip():
+                paragraph = soup.new_tag('p')
+                paragraph.string = str(child)
+                children.append(paragraph)
+        index = 0
+        while index < len(children):
+            child = children[index]
+            is_sources = child.name in {"h2", "h3"} and (
+                child.get("id") == "zrodla" or child.get_text(" ", strip=True).lower() in {"źródła", "źródła naukowe"}
+            )
+            if is_sources:
+                block = [child]
+                index += 1
+                while index < len(children):
+                    candidate = children[index]
+                    if candidate.name in {"ol", "ul"} or "medical-disclaimer" in (candidate.get("class") or []):
+                        block.append(candidate)
+                        index += 1
+                    else:
+                        break
+                # The heading renderer reserves 85 mm for the beginning of
+                # the bibliography. This avoids an orphaned heading without
+                # forcing a mostly empty page when the block still fits.
+                for item in block:
+                    render_node(pdf, item, source_url, input_html, tmp_dir)
+            else:
+                render_node(pdf, child, source_url, input_html, tmp_dir)
+                index += 1
 
     # Keep PDF metadata stable and SEO-friendly (avoid generic "Kluczowe wnioski" titles).
     pdf.set_title(title)

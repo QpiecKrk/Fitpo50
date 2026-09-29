@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+  <title>Obwód pasa do wzrostu — kalkulator WHtR | FitPo50</title>
+  <meta name="description" content="Oblicz stosunek obwodu talii do wzrostu, zobacz techniczną instrukcję pomiaru i zapisuj własny trend na urządzeniu.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://fitpo50.pl/kalkulator-obwodu-pasa-do-wzrostu.html">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css?v=1.4">
+  <link rel="stylesheet" href="./assets/footer.css?v=1">
+  <link rel="stylesheet" href="./assets/tools-hub.css?v=1">
+  <link rel="stylesheet" href="./assets/waist-height-calculator.css?v=6">
+  <link rel="icon" href="./favicon.png" type="image/png"><link rel="apple-touch-icon" href="./favicon.png">
+</head>
+<body class="tools-page whtr-page">
+  <div class="tools-shell">
+    <header class="tools-topbar">
+      <a class="tools-brand" href="index.html" aria-label="FitPo50 — strona główna">
+        <img class="tools-brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="112" height="112" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
+        <span class="tools-brand__text"><span class="tools-brand__name">FitPo50</span><span class="tools-brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span></span>
+      </a>
+      <a class="whtr-back" href="narzedzia.html">← Wszystkie narzędzia</a>
+    </header>
+
+    <main>
+      <section class="whtr-hero" aria-labelledby="whtr-title">
+        <div class="whtr-hero__copy">
+          <span class="tools-kicker">Obwód talii do wzrostu</span>
+          <h1 id="whtr-title">Zmierz pas.<br><em>Sprawdź proporcję.</em></h1>
+          <p>WHtR porównuje obwód talii ze wzrostem. Najłatwiejsza zasada do zapamiętania: talia powinna być mniejsza niż połowa wzrostu.</p>
+        </div>
+        <aside class="whtr-hero__mark" aria-label="Wyjaśnienie wartości WHtR 0,5"><span>WHtR = pas ÷ wzrost</span><strong>0,5</strong><small>pas równy połowie wzrostu</small><p>Przykład: przy 170 cm wzrostu jest to 85 cm w pasie.</p></aside>
+      </section>
+
+      <section class="whtr-measure" aria-labelledby="measure-title">
+        <div class="whtr-measure__head"><div class="whtr-measure__title"><span class="tools-section-kicker">Najpierw dobry pomiar</span><h2 id="measure-title">Gdzie dokładnie przyłożyć taśmę?</h2></div><p>Nie mierz w najszerszym ani najwęższym miejscu „na oko”. Znajdź dwa punkty kostne i wybierz środek między nimi.</p></div>
+        <figure class="whtr-diagram">
+          <picture>
+            <source srcset="./assets/waist-measurement-human-v1.webp" type="image/webp">
+            <img src="./assets/waist-measurement-human-v1.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Osoba stojąca przodem z taśmą ułożoną poziomo w połowie odległości między dolnym żebrem a górną krawędzią kości biodrowej">
+          </picture>
+          <figcaption><strong>Żółta taśma pokazuje miejsce pomiaru:</strong> dokładnie w połowie między dolnym żebrem a górą kości biodrowej.</figcaption>
+        </figure>
+        <ol class="whtr-steps">
+          <li><span>1</span><div><strong>Znajdź dwa punkty</strong><p>Wyczuj dolną krawędź ostatniego żebra oraz górną krawędź kości biodrowej.</p></div></li>
+          <li><span>2</span><div><strong>Ustaw taśmę pośrodku</strong><p>Poprowadź ją wokół brzucha poziomo, bez skręcenia i bez wciskania w skórę.</p></div></li>
+          <li><span>3</span><div><strong>Oddychaj normalnie</strong><p>Stań swobodnie i odczytaj wynik po naturalnym wydechu. Zapisz pomiar do 0,5 cm.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="whtr-workspace" aria-label="Kalkulator obwodu talii do wzrostu">
+        <form class="whtr-form" data-whtr-form novalidate>
+          <header><span class="tools-section-kicker">Policz proporcję</span><h2>Wpisz dwa pomiary</h2><p>Mierz wzrost i talię w centymetrach. Masa ciała jest opcjonalna.</p></header>
+          <div class="whtr-form__fields">
+            <label class="whtr-field"><span><i>1</i>Wzrost</span><span class="whtr-control"><input type="number" min="120" max="230" step="0.1" inputmode="decimal" placeholder="np. 174" data-whtr-height required><b>cm</b></span></label>
+            <label class="whtr-field"><span><i>2</i>Obwód talii</span><span class="whtr-control"><input type="number" min="40" max="250" step="0.1" inputmode="decimal" placeholder="np. 91" data-whtr-waist required><b>cm</b></span></label>
+            <label class="whtr-field"><span><i>3</i>Masa ciała <small>(opcjonalnie)</small></span><span class="whtr-control"><input type="number" min="30" max="350" step="0.1" inputmode="decimal" placeholder="np. 82" data-whtr-weight><b>kg</b></span><small>Pozwala sprawdzić, czy klasyfikacja NICE dla BMI poniżej 35 ma zastosowanie.</small></label>
+            <label class="whtr-field"><span><i>4</i>Data pomiaru</span><input type="date" data-whtr-date required></label>
+          </div>
+          <p class="whtr-error" data-whtr-error role="alert" hidden></p>
+          <button class="whtr-submit" type="submit">Oblicz WHtR <span>→</span></button>
+        </form>
+
+        <section class="whtr-result" aria-live="polite" aria-labelledby="whtr-result-title">
+          <div class="whtr-result__empty" data-whtr-empty><div><span aria-hidden="true">½</span><h2 id="whtr-result-title">Tutaj pojawi się proporcja</h2><p>Wynik jest prostym narzędziem przesiewowym. Nie rozpoznaje cukrzycy, nadciśnienia ani choroby serca.</p></div><ul class="whtr-result__preview"><li><strong>WHtR</strong><span>stosunek talii do wzrostu</span></li><li><strong>½ wzrostu</strong><span>Twój punkt odniesienia</span></li><li><strong>Trend</strong><span>zapis kolejnych pomiarów</span></li></ul></div>
+          <div class="whtr-result__content" data-whtr-content hidden>
+            <span class="whtr-result__level" data-whtr-level>—</span>
+            <strong class="whtr-result__ratio" data-whtr-ratio>—</strong>
+            <small>obwód talii ÷ wzrost</small>
+            <h2 data-whtr-headline>—</h2>
+            <p data-whtr-explanation></p>
+            <div class="whtr-result__numbers"><div><span>Połowa Twojego wzrostu</span><strong data-whtr-half>—</strong></div><div><span>Twój pomiar</span><strong data-whtr-difference>—</strong></div></div>
+            <aside><strong>Czy ta klasyfikacja pasuje?</strong><p data-whtr-applicability></p></aside>
+            <button type="button" data-whtr-save>Zapisz pomiar na tym urządzeniu</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="whtr-history" aria-labelledby="history-title">
+        <header><div><span class="tools-section-kicker">Twój trend</span><h2 id="history-title">Zapisane pomiary</h2></div><button type="button" data-whtr-clear hidden>Usuń historię</button></header>
+        <div class="whtr-history__content"><p class="whtr-history__empty" data-whtr-history-empty>Nie zapisano jeszcze żadnego pomiaru. Historia pojawi się dopiero po użyciu przycisku „Zapisz pomiar”.</p><div class="whtr-history__table-wrap"><table data-whtr-history-table hidden><caption>Historia obwodu talii i wskaźnika WHtR zapisana w tej przeglądarce</caption><thead><tr><th scope="col">Data</th><th scope="col">Talia</th><th scope="col">WHtR</th><th scope="col">Zmiana</th></tr></thead><tbody data-whtr-history-body></tbody></table></div><p class="whtr-history__privacy">Historia pozostaje w pamięci tej przeglądarki. Nie jest wysyłana do FitPo50 i można ją usunąć jednym przyciskiem.</p></div>
+      </section>
+
+      <section class="whtr-method" aria-labelledby="method-title"><div><span class="tools-section-kicker">Jak czytamy wynik?</span><h2 id="method-title">Mniej niż połowa wzrostu</h2></div><div><p>NICE klasyfikuje WHtR 0,40–0,49 jako zdrowy poziom centralnego otłuszczenia, 0,50–0,59 jako podwyższony, a 0,60 lub więcej jako wysoki. Klasyfikacja dotyczy przede wszystkim dorosłych z BMI poniżej 35.</p><p>WHtR uzupełnia ocenę, ale nie zastępuje ciśnienia, glukozy, lipidogramu ani rozmowy o całkowitym ryzyku.</p><a href="https://www.nice.org.uk/guidance/ng246/chapter/Identifying-and-assessing-overweight-obesity-and-central-adiposity" target="_blank" rel="noopener noreferrer">Zalecenia NICE →</a><a href="https://iris.who.int/bitstream/handle/10665/44583/9789241501491?sequence=1" target="_blank" rel="noopener noreferrer">Technika pomiaru WHO →</a><a href="https://pubmed.ncbi.nlm.nih.gov/22106927/" target="_blank" rel="noopener noreferrer">Przegląd badań nad WHtR →</a></div></section>
+
+      <section class="tools-safety" aria-labelledby="safety-title"><div><span aria-hidden="true">🛡️</span></div><div><h2 id="safety-title">Wskaźnik pomaga ocenić kierunek</h2><p>Nie określa samodzielnie stanu zdrowia ani tempa odchudzania. Niezamierzony spadek masy lub obwodu, osłabienie i inne nowe objawy wymagają osobnej oceny.</p></div></section>
+    </main>
+
+    <footer class="site-footer-bento" aria-label="Stopka FitPo50"><div class="site-footer-bento__grid"><section class="site-footer-bento__card" aria-label="O serwisie FitPo50"><div class="site-footer-bento__brand"><img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'"><div><h2 class="site-footer-bento__title">FitPo50.pl</h2><p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce.</p></div></div></section><section class="site-footer-bento__card"><h3 class="site-footer-bento__links-title">Narzędzia FitPo50</h3><p class="site-footer-bento__lead"><a href="narzedzia.html">Wróć do katalogu narzędzi</a></p></section></div><div class="site-footer-bento__bottom"><p class="site-footer-bento__copy">© 2026 FitPo50</p><p class="site-footer-bento__note">Treści mają charakter edukacyjny i informacyjny.</p></div></footer>
+  </div>
+  <script src="./dist/waist-height-calculator.js?v=1" defer></script>
+</body>
+</html>

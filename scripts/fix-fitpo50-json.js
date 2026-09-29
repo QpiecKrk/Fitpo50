@@ -423,8 +423,8 @@ function validate(json) {
   if (!Array.isArray(json.key_takeaways) || json.key_takeaways.length !== 4) {
     errors.push('key_takeaways != 4');
   }
-  if (!Array.isArray(json.sections) || json.sections.length < 6) {
-    errors.push(`sections < 6 (jest ${Array.isArray(json.sections) ? json.sections.length : 0})`);
+  if (!Array.isArray(json.sections) || json.sections.length === 0) {
+    errors.push('sections musi zawierać co najmniej jeden merytoryczny blok wynikający z intencji artykułu');
   }
   const qaWords = wordCount(stripTags(String(json.quick_answer || '')));
   if (qaWords < 40 || qaWords > 60) {

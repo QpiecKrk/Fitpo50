@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+  <title>Tempo marszu — kalkulator min/km i km/h | FitPo50</title>
+  <meta name="description" content="Oblicz tempo marszu, prędkość i czas na typowych dystansach. Oceń intensywność testem rozmowy i zapisuj własne postępy.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://fitpo50.pl/kalkulator-tempa-marszu.html">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css?v=1.4">
+  <link rel="stylesheet" href="./assets/footer.css?v=1">
+  <link rel="stylesheet" href="./assets/tools-hub.css?v=1">
+  <link rel="stylesheet" href="./assets/walking-pace-calculator.css?v=2">
+  <link rel="icon" href="./favicon.png" type="image/png"><link rel="apple-touch-icon" href="./favicon.png">
+</head>
+<body class="tools-page walk-page">
+  <div class="tools-shell">
+    <header class="tools-topbar">
+      <a class="tools-brand" href="index.html" aria-label="FitPo50 — strona główna">
+        <img class="tools-brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="112" height="112" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
+        <span class="tools-brand__text"><span class="tools-brand__name">FitPo50</span><span class="tools-brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span></span>
+      </a>
+      <a class="walk-back" href="narzedzia.html">← Wszystkie narzędzia</a>
+    </header>
+
+    <main>
+      <section class="walk-hero" aria-labelledby="walk-title">
+        <div class="walk-hero__copy">
+          <span class="tools-kicker">Tempo marszu</span>
+          <h1 id="walk-title">Zmierz trasę.<br><em>Zobacz swój rytm.</em></h1>
+          <p>Wpisz dystans i czas. Dostaniesz tempo na kilometr, prędkość oraz prostą odpowiedź, ile zajmie Ci przejście 1, 3 i 5 km.</p>
+          <div class="walk-hero__formula" aria-label="Sposób obliczania tempa"><span>DYSTANS</span><b>+</b><span>CZAS</span><b>=</b><strong>TEMPO</strong></div>
+        </div>
+        <figure class="walk-hero__visual">
+          <picture><source srcset="./assets/walking-pace-human-v1.webp" type="image/webp"><img src="./assets/walking-pace-human-v1.png" width="1254" height="1254" loading="eager" fetchpriority="high" decoding="async" alt="Kobieta po pięćdziesiątce maszerująca po wyznaczonej trasie od startu do mety ze stoperem"></picture>
+          <figcaption><strong>Nie potrzebujesz bieżni.</strong> Wystarczy trasa o znanej długości i stoper w telefonie.</figcaption>
+        </figure>
+      </section>
+
+      <section class="walk-guide" aria-labelledby="walk-guide-title">
+        <header><div><span class="tools-section-kicker">Pomiar bez zgadywania</span><h2 id="walk-guide-title">Jak zmierzyć jeden marsz?</h2></div><p>Wybierz możliwie równą trasę. Przy kolejnych próbach użyj tego samego odcinka, żeby porównanie miało sens.</p></header>
+        <div class="walk-route" aria-hidden="true"><span class="walk-route__start">START</span><i></i><i></i><i></i><strong>🚶</strong><i></i><i></i><span class="walk-route__finish">META</span></div>
+        <ol>
+          <li><span>1</span><div><strong>Sprawdź dystans</strong><p>Użyj oznaczonej pętli, mapy lub pomiaru GPS. Zapisz metry albo kilometry.</p></div></li>
+          <li><span>2</span><div><strong>Włącz stoper</strong><p>Idź swoim zwykłym tempem. Nie przyspieszaj tylko dlatego, że wykonujesz pomiar.</p></div></li>
+          <li><span>3</span><div><strong>Sprawdź oddech</strong><p>Na końcu oceń, czy możesz śpiewać, rozmawiać, czy powiedzieć tylko kilka słów.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="walk-workspace" aria-label="Kalkulator tempa marszu">
+        <form class="walk-form" data-walk-form novalidate>
+          <header><span class="tools-section-kicker">Twój marsz</span><h2>Wpisz dystans i czas</h2><p>Możesz użyć dowolnej trasy od 50 metrów do 100 kilometrów.</p></header>
+          <div class="walk-form__row">
+            <label class="walk-field walk-field--distance"><span><i>1</i>Dystans</span><span class="walk-control"><input type="number" min="0.05" max="100000" step="0.01" inputmode="decimal" placeholder="np. 3" data-walk-distance required><select data-walk-distance-unit aria-label="Jednostka dystansu"><option value="km">km</option><option value="m">m</option></select></span></label>
+            <label class="walk-field"><span><i>2</i>Data</span><input type="date" data-walk-date required></label>
+          </div>
+          <fieldset class="walk-time"><legend><i>3</i>Czas przejścia</legend><label><span>godz.</span><input type="number" min="0" max="23" step="1" inputmode="numeric" value="0" data-walk-hours></label><b>:</b><label><span>min</span><input type="number" min="0" max="59" step="1" inputmode="numeric" placeholder="np. 28" data-walk-minutes></label><b>:</b><label><span>sek.</span><input type="number" min="0" max="59" step="1" inputmode="numeric" value="0" data-walk-seconds></label></fieldset>
+          <fieldset class="walk-talk"><legend><i>4</i>Co mogłeś robić podczas marszu?</legend>
+            <label><input type="radio" name="walk-talk-test" value="easy"><span><strong>Rozmawiać i śpiewać</strong><small>oddech swobodny</small></span></label>
+            <label><input type="radio" name="walk-talk-test" value="moderate"><span><strong>Mówić, ale nie śpiewać</strong><small>oddech wyraźnie szybszy</small></span></label>
+            <label><input type="radio" name="walk-talk-test" value="vigorous"><span><strong>Tylko kilka słów</strong><small>potrzebne przerwy na oddech</small></span></label>
+            <label><input type="radio" name="walk-talk-test" value="not-checked" checked><span><strong>Nie sprawdzałem</strong><small>policz tylko tempo</small></span></label>
+          </fieldset>
+          <p class="walk-error" data-walk-error role="alert" hidden></p>
+          <button class="walk-submit" type="submit">Oblicz tempo <span>→</span></button>
+        </form>
+
+        <section class="walk-result" aria-live="polite" aria-labelledby="walk-result-title">
+          <div class="walk-result__empty" data-walk-empty><div class="walk-dial" aria-hidden="true"><span>min/km</span><i></i></div><div><span class="tools-section-kicker">Po obliczeniu</span><h2 id="walk-result-title">Zobaczysz rytm marszu</h2><p>Tempo mówi, ile czasu zajmuje kilometr. Prędkość pokazuje, ile kilometrów pokonujesz w godzinę.</p></div></div>
+          <div class="walk-result__content" data-walk-content hidden>
+            <span class="walk-result__eyebrow">Twoje tempo</span>
+            <strong class="walk-result__pace" data-walk-pace>—</strong><small>min/km</small>
+            <div class="walk-result__speed"><span>Prędkość</span><strong><b data-walk-speed>—</b> km/h</strong></div>
+            <div class="walk-result__times"><div><span>1 km</span><strong data-walk-one-km>—</strong></div><div><span>3 km</span><strong data-walk-three-km>—</strong></div><div><span>5 km</span><strong data-walk-five-km>—</strong></div></div>
+            <aside><span>Test rozmowy</span><strong data-walk-intensity>—</strong><p data-walk-intensity-copy></p></aside>
+            <button type="button" data-walk-save>Zapisz marsz na tym urządzeniu</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="walk-history" aria-labelledby="walk-history-title">
+        <header><div><span class="tools-section-kicker">Twoje postępy</span><h2 id="walk-history-title">Ostatnie marsze</h2><p>Im krótszy czas na kilometr, tym szybsze tempo.</p></div><button type="button" data-walk-clear hidden>Usuń historię</button></header>
+        <div class="walk-history__chart"><svg data-walk-chart viewBox="0 0 680 220" role="img" hidden></svg><p data-walk-chart-empty>Wykres pojawi się po zapisaniu pierwszego marszu.</p></div>
+        <div class="walk-history__table-wrap"><p class="walk-history__empty" data-walk-history-empty>Nie zapisano jeszcze żadnego marszu. Wyniki pozostają wyłącznie w pamięci tej przeglądarki.</p><table data-walk-history-table hidden><caption>Historia tempa marszu zapisana w tej przeglądarce</caption><thead><tr><th scope="col">Data</th><th scope="col">Dystans</th><th scope="col">Tempo</th><th scope="col">Zmiana</th></tr></thead><tbody data-walk-history-body></tbody></table></div>
+      </section>
+
+      <section class="walk-method" aria-labelledby="walk-method-title">
+        <div><span class="tools-section-kicker">Tempo a wysiłek</span><h2 id="walk-method-title">Oddech mówi więcej niż sama liczba</h2><p>Dwie osoby idące 5 km/h mogą odczuwać zupełnie inny wysiłek. Dlatego kalkulator nie przypisuje intensywności wyłącznie na podstawie prędkości.</p></div>
+        <div class="walk-talk-scale"><article><span>LEKKO</span><strong>Możesz rozmawiać i śpiewać</strong><p>Oddech pozostaje swobodny.</p></article><article><span>UMIARKOWANIE</span><strong>Możesz mówić, ale nie śpiewać</strong><p>To prosty test umiarkowanej intensywności opisany przez CDC.</p></article><article><span>WYSOKO</span><strong>Tylko kilka słów naraz</strong><p>Potrzebujesz przerwy na oddech.</p></article></div>
+        <div class="walk-method__sources"><a href="https://www.cdc.gov/physical-activity-basics/guidelines/adults.html" target="_blank" rel="noopener noreferrer">Zalecenia CDC dla dorosłych →</a><a href="https://www.cdc.gov/physicalactivity/basics/measuring/index.html" target="_blank" rel="noopener noreferrer">Pomiar intensywności i test rozmowy CDC →</a><a href="https://www.who.int/news-room/fact-sheets/detail/physical-activity" target="_blank" rel="noopener noreferrer">Aktywność fizyczna według WHO →</a></div>
+      </section>
+
+      <section class="tools-safety" aria-labelledby="walk-safety-title"><div><span aria-hidden="true">🛡️</span></div><div><h2 id="walk-safety-title">Porównuj siebie ze sobą</h2><p>Tempo zależy od trasy, pogody, nawierzchni i samopoczucia. Nowe niepokojące objawy podczas marszu są ważniejsze niż wynik kalkulatora — przerwij wysiłek i skorzystaj z odpowiedniej pomocy.</p></div></section>
+    </main>
+
+    <footer class="site-footer-bento" aria-label="Stopka FitPo50"><div class="site-footer-bento__grid"><section class="site-footer-bento__card" aria-label="O serwisie FitPo50"><div class="site-footer-bento__brand"><img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'"><div><h2 class="site-footer-bento__title">FitPo50.pl</h2><p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce.</p></div></div></section><section class="site-footer-bento__card"><h3 class="site-footer-bento__links-title">Narzędzia FitPo50</h3><p class="site-footer-bento__lead"><a href="narzedzia.html">Wróć do katalogu narzędzi</a></p></section></div><div class="site-footer-bento__bottom"><p class="site-footer-bento__copy">© 2026 FitPo50</p><p class="site-footer-bento__note">Treści mają charakter edukacyjny i informacyjny.</p></div></footer>
+  </div>
+  <script src="./dist/walking-pace-calculator.js?v=1" defer></script>
+</body>
+</html>

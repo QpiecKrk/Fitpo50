@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="./base.css">
   <link rel="stylesheet" href="./style.css?v=1.4">
   <link rel="stylesheet" href="./assets/footer.css?v=1">
-  <link rel="stylesheet" href="./assets/phenoage-calculator.css?v=1">
+  <link rel="stylesheet" href="./assets/phenoage-calculator.css?v=3">
   <link rel="icon" href="./favicon.png" type="image/png"><link rel="apple-touch-icon" href="./favicon.png">
 </head>
 <body class="pheno-page">
@@ -28,14 +28,14 @@
         <div class="pheno-hero__copy">
           <span class="pheno-eyebrow">Kliniczny wiek fenotypowy</span>
           <h1 id="pheno-title">PhenoAge.<br><em>Co mówi Twoja krew?</em></h1>
-          <p>Wprowadź wiek i dziewięć wyników laboratoryjnych. Model przeliczy je na statystyczny wiek fenotypowy związany z ogólnym stanem fizjologicznym.</p>
+          <p>Wprowadź wiek i dziewięć wyników laboratoryjnych. Otrzymasz statystyczny wynik modelu oparty na danych populacyjnych — nie „wiek wszystkich narządów”.</p>
           <div class="pheno-privacy"><span>●</span> Dane są liczone lokalnie i nie opuszczają urządzenia.</div>
         </div>
-        <aside class="pheno-hero__monogram" aria-label="Informacja o modelu">
-          <span>PA</span>
-          <div><strong>10</strong><small>danych wejściowych</small></div>
-          <div><strong>2018</strong><small>rok publikacji modelu</small></div>
-        </aside>
+        <figure class="pheno-hero__visual">
+          <picture><source srcset="./assets/phenoage-blood-human-v1.webp" type="image/webp"><img src="./assets/phenoage-blood-human-v1.png" width="1254" height="1254" loading="eager" fetchpriority="high" decoding="async" alt="Mężczyzna po pięćdziesiątce analizujący wyniki krwi przedstawione obok symbolu DNA i zegara"></picture>
+          <div class="pheno-hero__facts" aria-label="Informacje o modelu"><span><strong>10</strong>danych wejściowych</span><span><strong>2018</strong>rok publikacji modelu</span></div>
+          <figcaption><strong>To wynik modelu statystycznego.</strong> Łączy wiek z dziewięcioma markerami krwi i nie mierzy wieku każdego narządu.</figcaption>
+        </figure>
       </section>
 
       <section class="pheno-progress" aria-label="Kompletność formularza">
@@ -95,16 +95,18 @@
             <div><span>Interpretacja</span><strong data-age-label>—</strong></div>
           </div>
           <div class="pheno-result__note"><h3>Co oznacza ten wynik?</h3><p data-pheno-explanation></p></div>
-          <div class="pheno-result__caution"><span>Ważne</span><p>Pojedynczy wynik może zmienić się podczas infekcji, stanu zapalnego lub po zmianie leczenia. Nie podejmuj decyzji medycznych wyłącznie na jego podstawie.</p></div>
+          <div class="pheno-result__caution"><span>Ważne</span><p>Pojedynczy wynik może zmienić się podczas infekcji, stanu zapalnego lub po zmianie leczenia. Model nie ma ustalonego progu, od którego wynik sam w sobie rozpoznaje chorobę.</p></div>
         </div>
       </section>
 
       <section class="pheno-method">
         <div><span class="pheno-eyebrow">Metoda</span><h2>Co dokładnie obliczamy?</h2></div>
         <div>
-          <p>To kalkulator <strong>klinicznego Phenotypic Age</strong>, z którego później opracowano epigenetyczny zegar DNAm PhenoAge. Wykorzystuje model Gompertza, wiek oraz dziewięć rutynowych markerów krwi.</p>
-          <p>Nie jest to zegar Horvatha ani badanie DNA. Wynik opisuje statystyczny profil fizjologiczny w odniesieniu do danych populacyjnych.</p>
-          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5940111/" target="_blank" rel="noopener noreferrer">Publikacja źródłowa Levine i wsp. →</a>
+          <p>To kalkulator <strong>klinicznego Phenotypic Age</strong>, z którego później opracowano epigenetyczny zegar DNAm PhenoAge. Wykorzystuje model Gompertza, wiek oraz dziewięć rutynowych markerów krwi w jednostkach użytych przez autorów.</p>
+          <p>Nie jest to zegar Horvatha ani badanie DNA. Model opracowano w danych NHANES III i sprawdzono w NHANES IV. Wynik jest silnie zależny od bieżących badań, zwłaszcza markerów stanu zapalnego, i nie służy do śledzenia zmian z dnia na dzień.</p>
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5940111/" target="_blank" rel="noopener noreferrer">Publikacja źródłowa Levine i wsp. →</a><br>
+          <a href="https://github.com/dayoonkwon/BioAge/blob/master/R/phenoage_calc.R" target="_blank" rel="noopener noreferrer">Kod referencyjny pakietu BioAge →</a><br>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/34725754/" target="_blank" rel="noopener noreferrer">Publikacja pakietu BioAge →</a>
         </div>
       </section>
 
@@ -112,12 +114,14 @@
         <strong>Narzędzie edukacyjne</strong><p>Wynik nie zastępuje interpretacji morfologii, CRP, glukozy, funkcji nerek ani wątroby przez lekarza. Nie służy do rozpoznawania chorób ani oceny pilności leczenia.</p>
       </section>
     </main>
-    <footer class="pheno-footer" aria-label="Stopka kalkulatora PhenoAge">
-      <div class="pheno-footer__brand"><strong>FitPo50</strong><span>Narzędzia zdrowia po 50-tce</span></div>
-      <nav aria-label="Linki stopki"><a href="narzedzia.html">Wróć do narzędzi</a><a href="polityka-prywatnosci.html">Polityka prywatności</a></nav>
-      <p>Treści i wyniki mają charakter edukacyjny. Nie zastępują konsultacji lekarskiej, diagnozy ani indywidualnych zaleceń.</p>
+    <footer class="site-footer-bento" aria-label="Stopka FitPo50">
+      <div class="site-footer-bento__grid">
+        <section class="site-footer-bento__card" aria-label="O serwisie FitPo50"><div class="site-footer-bento__brand"><img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'"><div><h2 class="site-footer-bento__title">FitPo50.pl</h2><p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce.</p></div></div></section>
+        <section class="site-footer-bento__card"><h3 class="site-footer-bento__links-title">Narzędzia FitPo50</h3><p class="site-footer-bento__lead"><a href="narzedzia.html">Wróć do katalogu narzędzi</a></p></section>
+      </div>
+      <div class="site-footer-bento__bottom"><p class="site-footer-bento__copy">© 2026 FitPo50</p><p class="site-footer-bento__note">Treści mają charakter edukacyjny i informacyjny.</p></div>
     </footer>
   </div>
-  <script src="./dist/phenoage-calculator.js?v=1" defer></script>
+  <script src="./dist/phenoage-calculator.js?v=2" defer></script>
 </body>
 </html>

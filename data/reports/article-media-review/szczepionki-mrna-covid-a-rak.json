@@ -1,0 +1,758 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "szczepionki-mrna-covid-a-rak",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "e58ce8a1d708cabd99f259d6e492743ff47c3a70e59efcefae8c1a8b6b0221dd",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Para po pięćdziesiątce porównuje wydrukowane informacje medyczne z materiałem na tablecie",
+      "caption": "",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/mrna-cancer-evidence-hero-2026.avif",
+          "sha256": "ced5db65c7444a964d25928a3d1cb412aa939f974b4537db3b7c76c67d5c197b",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/mrna-cancer-evidence-hero-2026.webp",
+          "sha256": "8928388d969badecfde62d86b9c11d6c134746b7311269469500d40583e90630",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/mrna-cancer-evidence-hero-2026.jpg",
+          "sha256": "991f5e37b0e0c3198ddfa64800f9b5ccab785b83d6793d730cb84ec7ade7fbcd",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Para po pięćdziesiątce porównuje wydrukowane informacje medyczne z materiałem na tablecie. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Dlaczego ten przekaz brzmi wiarygodnie?",
+      "alt": "Kobieta około sześćdziesiątki porównuje kalendarz z odłożonymi terminami badań profilaktycznych",
+      "caption": "Pandemiczne odwołania i opóźnienia badań przesiewowych stworzyły realne zaległości, które mogły przesunąć moment rozpoznania choroby.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-zaufanie.avif",
+          "sha256": "022af2124e66d73f096c1df61ed7ab17791e99fba36272c9afc44e433d0ccb65",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-zaufanie.webp",
+          "sha256": "0f27918d3b7707c8add49b46d954ed84c00f4b600c01d1de85833263e513162d",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-zaufanie.jpg",
+          "sha256": "789de22ea1b0b1a590067bd4dc9187c827ce6ad78637d5b537c32c696469ce9d",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego ten przekaz brzmi wiarygodnie?”: Kobieta około sześćdziesiątki porównuje kalendarz z odłożonymi terminami badań profilaktycznych. Zgodność z treścią potwierdza podpis: Pandemiczne odwołania i opóźnienia badań przesiewowych stworzyły realne zaległości, które mogły przesunąć moment rozpoznania choroby."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę wykazało badanie z Korei Południowej?",
+      "alt": "Abstrakcyjna grafika: ogromna chmura drobnych punktów przecięta wąskim złotym pasem",
+      "caption": "Ogromna liczba obserwowanych osób i bardzo wąskie okno czasowe jednego roku",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-korea-dane.avif",
+          "sha256": "b7baa0d8be5c6b4afd93bd4c0141bafe9ee79f2a0ec8cbf814e14f870eda2f15",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-korea-dane.webp",
+          "sha256": "d76c285de832367f1794af8344288d7132651c433e2f73e85c5d79b3ddd801e3",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-korea-dane.jpg",
+          "sha256": "e0f354532ffd1447c2aa07f1c3cbaa8e4c82d598a176473149610b1391a42e97",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co naprawdę wykazało badanie z Korei Południowej?”: Abstrakcyjna grafika: ogromna chmura drobnych punktów przecięta wąskim złotym pasem. Zgodność z treścią potwierdza podpis: Ogromna liczba obserwowanych osób i bardzo wąskie okno czasowe jednego roku"
+      }
+    },
+    {
+      "placement": "section:Dlaczego duża próba nie oznacza dobrego dowodu?",
+      "alt": "Minimalistyczna ilustracja wygiętej drewnianej linijki obok stosu identycznych, równo odmierzonych prostokątów",
+      "caption": "Krzywą linijką można zmierzyć bardzo precyzyjnie i bardzo źle",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.avif",
+          "sha256": "4d7184c3b07ec7719989c8b9cc95567ed88b51099117f086264c0e2754fc10dd",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.webp",
+          "sha256": "95ccea0c0c658064b51f1f22b9500dc6c188915a9f93e26f9a80536881c74761",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-krzywa-linijka.jpg",
+          "sha256": "fc990e88fd923b5a9313f6c1455de1d3dba360c170b32494ded7394d9003b3d3",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego duża próba nie oznacza dobrego dowodu?”: Minimalistyczna ilustracja wygiętej drewnianej linijki obok stosu identycznych, równo odmierzonych prostokątów. Zgodność z treścią potwierdza podpis: Krzywą linijką można zmierzyć bardzo precyzyjnie i bardzo źle"
+      }
+    },
+    {
+      "placement": "section:Jak powstaje rak i ile zwykle trwa jego rozwój?",
+      "alt": "Pięć abstrakcyjnych etapów od pojedynczej komórki do niewielkiej zbitej masy, rozłożonych poziomo w coraz większych odstępach",
+      "caption": "Każdy z etapów zajmuje czas, a odstępy między nimi są tu największą informacją",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-jak-powstaje.avif",
+          "sha256": "2d6322623ec1f4d93b676f506d53bd314a9a1522b57376438b3da620cb692ce4",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-jak-powstaje.webp",
+          "sha256": "efc00f9b93952b4e455697ef56523d7d4c2efcaf621887611992d55df6f7afb8",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-jak-powstaje.jpg",
+          "sha256": "9ce5d0bc5080fdef84d8168ba127aca5944c6a2a1ddbd12620ebe78274f46800",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak powstaje rak i ile zwykle trwa jego rozwój?”: Pięć abstrakcyjnych etapów od pojedynczej komórki do niewielkiej zbitej masy, rozłożonych poziomo w coraz większych odstępach. Zgodność z treścią potwierdza podpis: Każdy z etapów zajmuje czas, a odstępy między nimi są tu największą informacją"
+      }
+    },
+    {
+      "placement": "section:Czy roczny okres obserwacji może wykazać wywołanie nowego raka?",
+      "alt": "Trzy coraz dłuższe okna obserwacji z zaznaczonym wyłączeniem wczesnych rozpoznań i słabnącym pozornym związkiem",
+      "caption": "W analizie wszystkich hospitalizacji onkologicznych związek słabł po wydłużeniu karencji; po 365 dniach nie był istotny dla co najmniej jednej dawki, a przy co najmniej trzech dawkach kierunek był odwrotny.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-karencja.avif",
+          "sha256": "209d3f9e0dcef1aa32300d076e4e35dbf5dfb0db8159a840490215ce11ccbaf9",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-karencja.webp",
+          "sha256": "bb4ae3d163c85b051602dd406c2d9dfb4d231fefcf98bb083fd7090d4af77bfe",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-karencja.jpg",
+          "sha256": "3140b9f8b53923ec5a8cbbc0e250e67b9749ae5b5529908be1a01c64c3ef2ae2",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy roczny okres obserwacji może wykazać wywołanie nowego raka?”: Trzy coraz dłuższe okna obserwacji z zaznaczonym wyłączeniem wczesnych rozpoznań i słabnącym pozornym związkiem. Zgodność z treścią potwierdza podpis: W analizie wszystkich hospitalizacji onkologicznych związek słabł po wydłużeniu karencji; po 365 dniach nie był istotny dla co najmniej jednej dawki, a przy co najmniej trzech dawkach kierunek był odwrotny."
+      }
+    },
+    {
+      "placement": "section:Czy mRNA może zmienić Twoje DNA?",
+      "alt": "Schemat komórki: złote wstążki mRNA krążą w cytoplazmie po torach, które omijają zamknięte jądro komórkowe z podwójną helisą",
+      "caption": "Schemat pokazuje miejsce działania mRNA w cytoplazmie; dostępne dane nie wskazują, by szczepionkowe mRNA wchodziło do jądra i zmieniało DNA.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.avif",
+          "sha256": "510ce526e8e68d5c2200d9cfdfc0aec63f94be5e3f8909918453146b0f74202e",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.webp",
+          "sha256": "54041aa310b7403db7c55b9a07b382773a65c203736a502d367b782c685878c4",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-jadro-komorkowe.jpg",
+          "sha256": "f0bfb28d2b8e4cc7f5feb2d0c9e68608fa54fc9689332f87067ae85819475012",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy mRNA może zmienić Twoje DNA?”: Schemat komórki: złote wstążki mRNA krążą w cytoplazmie po torach, które omijają zamknięte jądro komórkowe z podwójną helisą. Zgodność z treścią potwierdza podpis: Schemat pokazuje miejsce działania mRNA w cytoplazmie; dostępne dane nie wskazują, by szczepionkowe mRNA wchodziło do jądra i zmieniało DNA."
+      }
+    },
+    {
+      "placement": "section:Co wiadomo o lipidowych nanocząsteczkach i biodostępności?",
+      "alt": "Stylizowana sylwetka człowieka z jasnym skupiskiem złotych cząstek w ramieniu i pod pachą oraz pojedynczymi śladami w innych miejscach",
+      "caption": "Ilustracja pokazuje główne miejsca odpowiedzi po wstrzyknięciu; nie jest ilościową mapą dystrybucji u człowieka.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.avif",
+          "sha256": "eb05d4b2f2d85064fb3555033aa184941a4977791e49d4a1075d71e2209b23ec",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.webp",
+          "sha256": "8ed694947bca4c91799065e72b7fe29d865a4212e74517a9dd16105c1837a03a",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-nanoczasteczki.jpg",
+          "sha256": "64afab57839c923439d1e3226e29a43bbba1be642d8f4421613379e22b4a0281",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co wiadomo o lipidowych nanocząsteczkach i biodostępności?”: Stylizowana sylwetka człowieka z jasnym skupiskiem złotych cząstek w ramieniu i pod pachą oraz pojedynczymi śladami w innych miejscach. Zgodność z treścią potwierdza podpis: Ilustracja pokazuje główne miejsca odpowiedzi po wstrzyknięciu; nie jest ilościową mapą dystrybucji u człowieka."
+      }
+    },
+    {
+      "placement": "section:Co z pozostałościami DNA w preparatach?",
+      "alt": "Niewielkie złote fragmenty na tle dużego pola symbolizują skalę pozostałości DNA wobec mRNA",
+      "caption": "W badanych seriach pozostałości matrycy DNA były krótkie i mieściły się poniżej limitu jakościowego.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/mrna-cancer-residual-dna-scale-2026.avif",
+          "sha256": "e8e546895f957fd44eeec97c9b013b34a781dbf3728d9bd89b81be3ce2abcc9d",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/mrna-cancer-residual-dna-scale-2026.webp",
+          "sha256": "ce602ebb41d9714fb2611243e9de76647c7dbd21479d676571892505d37b1492",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/mrna-cancer-residual-dna-scale-2026.jpg",
+          "sha256": "2e5485130492f1bf15bd2bc2129b62a69e08bfefbc5e10719251d5fb5c91eae9",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co z pozostałościami DNA w preparatach?”: Niewielkie złote fragmenty na tle dużego pola symbolizują skalę pozostałości DNA wobec mRNA. Zgodność z treścią potwierdza podpis: W badanych seriach pozostałości matrycy DNA były krótkie i mieściły się poniżej limitu jakościowego."
+      }
+    },
+    {
+      "placement": "section:Czy istnieje biologicznie wiarygodny mechanizm pronowotworowy?",
+      "alt": "Pojedyncza zmieniona komórka otoczona komórkami odpornościowymi i włóknami tkanki",
+      "caption": "Mikrośrodowisko guza jest rzeczywistym obszarem badań, lecz możliwa ścieżka biologiczna nie jest dowodem działania u ludzi.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/mrna-cancer-hypothesis-microenvironment-2026.avif",
+          "sha256": "ed4971a1de3fdc8b368c3a19ca77da9978ca1c922179265398365a4df10c4d06",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/mrna-cancer-hypothesis-microenvironment-2026.webp",
+          "sha256": "2603bd1944d4dde5131c1e9857e77a797e5485e7b11f4e2234a3cee4c9a7678d",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/mrna-cancer-hypothesis-microenvironment-2026.jpg",
+          "sha256": "821ec73cdf282a1eb02619e4fac38734c1709782f5ba76ef9ab9d5565337a502",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy istnieje biologicznie wiarygodny mechanizm pronowotworowy?”: Pojedyncza zmieniona komórka otoczona komórkami odpornościowymi i włóknami tkanki. Zgodność z treścią potwierdza podpis: Mikrośrodowisko guza jest rzeczywistym obszarem badań, lecz możliwa ścieżka biologiczna nie jest dowodem działania u ludzi."
+      }
+    },
+    {
+      "placement": "section:Co mówią rejestry i inne badania populacyjne?",
+      "alt": "Dwa panele z identycznymi sylwetkami, na których złote znaczniki rozmieszczone są w większości w różnych miejscach",
+      "caption": "Te same preparaty, dwa kraje, w większości inne narządy w wynikach",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-dwa-kraje.avif",
+          "sha256": "0124c22b4519a08845832d8cdeeefffc58e24ad9325aea199808df9edf02dbd5",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-dwa-kraje.webp",
+          "sha256": "da312e9aaeff63eb804e39dcd4d04a3520732e7ee77f319afbcf7d529829a3b5",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-dwa-kraje.jpg",
+          "sha256": "754c5ed631d12a8753edeffe054343ee6985a7300d3c469abb4c5ea425718da3",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co mówią rejestry i inne badania populacyjne?”: Dwa panele z identycznymi sylwetkami, na których złote znaczniki rozmieszczone są w większości w różnych miejscach. Zgodność z treścią potwierdza podpis: Te same preparaty, dwa kraje, w większości inne narządy w wynikach"
+      }
+    },
+    {
+      "placement": "section:Co znaczą opisy pojedynczych przypadków?",
+      "alt": "Sześć wyróżnionych punktów na tle dużej populacji pokazuje problem braku mianownika",
+      "caption": "Seria przypadków pozwala zauważyć zdarzenia, ale bez grupy odniesienia nie pozwala obliczyć ryzyka.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/mrna-cancer-case-reports-denominator-2026.avif",
+          "sha256": "e6189648418e9b53a8f6aebbd8f6c5f800b5bf0545b2997f0b1f17ce055edeae",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/mrna-cancer-case-reports-denominator-2026.webp",
+          "sha256": "50c22ed8b9cfab30cf64588c97783d1b09ef984576402e8c611674824b8e71bf",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/mrna-cancer-case-reports-denominator-2026.jpg",
+          "sha256": "18ce76f8ab3b368ec34c1ac1d02ca17ce52b6b70f373aef497062e412ddf549c",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co znaczą opisy pojedynczych przypadków?”: Sześć wyróżnionych punktów na tle dużej populacji pokazuje problem braku mianownika. Zgodność z treścią potwierdza podpis: Seria przypadków pozwala zauważyć zdarzenia, ale bez grupy odniesienia nie pozwala obliczyć ryzyka."
+      }
+    },
+    {
+      "placement": "section:Czym jest turbo rak?",
+      "alt": "Jedna duża złota forma rozdzielająca się w dół na sześć osobnych, różnokolorowych kształtów",
+      "caption": "Jedno hasło, sześć zupełnie różnych zjawisk pod spodem",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-turbo-rak.avif",
+          "sha256": "f8922225e8e7cf292faac386918716cef62f41cd328996e2be6748adb0114dc6",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-turbo-rak.webp",
+          "sha256": "2b3c4e036e915527baf904d22a1a242904f56392df2c6121c0de13067ae738be",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-turbo-rak.jpg",
+          "sha256": "f3e3bf83f8a49da6a898aba7525aafe0288866a9b39e07aa97651e028e3523af",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym jest turbo rak?”: Jedna duża złota forma rozdzielająca się w dół na sześć osobnych, różnokolorowych kształtów. Zgodność z treścią potwierdza podpis: Jedno hasło, sześć zupełnie różnych zjawisk pod spodem"
+      }
+    },
+    {
+      "placement": "section:Czy szczepienie może wpłynąć na już istniejący nowotwór?",
+      "alt": "Złoty punkt centralny, z którego dwie równorzędne ścieżki prowadzą w przeciwne strony do dwóch różnych form",
+      "caption": "Ten sam mechanizm, dwie przeciwne hipotezy, żadna jeszcze nie rozstrzygnięta",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.avif",
+          "sha256": "9292a4f534768d0cd8c6e6b0b65db5fcb3df03ca88ae6a1863ba7783d42cb202",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.webp",
+          "sha256": "eb85d24d5a5863f8f1299d4a9c76011f2b2c0e0db39909263a598095214c83a1",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-dwa-kierunki.jpg",
+          "sha256": "b74cc7f214c26745d1c889b30585c2af262f998ac8adb235dbfb8d6da8105c97",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy szczepienie może wpłynąć na już istniejący nowotwór?”: Złoty punkt centralny, z którego dwie równorzędne ścieżki prowadzą w przeciwne strony do dwóch różnych form. Zgodność z treścią potwierdza podpis: Ten sam mechanizm, dwie przeciwne hipotezy, żadna jeszcze nie rozstrzygnięta"
+      }
+    },
+    {
+      "placement": "section:Co wiadomo o szczepieniach u osób leczonych onkologicznie?",
+      "alt": "Kobieta około sześćdziesiątki rozmawia z lekarką przy biurku w jasnym gabinecie w jesiennym świetle",
+      "caption": "Przy leczeniu onkologicznym o terminie szczepienia decyduje rozmowa z prowadzącym, nie forum",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.avif",
+          "sha256": "5104416f418599d16449e9301a373b8883a215d477f6e408df5c6304a933910b",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.webp",
+          "sha256": "b5f29becafb2609f3318d3b7f0b1a5a623ec360bc06d37dd4e0790e7fae905de",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-onkologia-rozmowa.jpg",
+          "sha256": "5ea969e683797078a9c1594050b28092e5cad83dd6a0bb1a9c4c8fa475584012",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co wiadomo o szczepieniach u osób leczonych onkologicznie?”: Kobieta około sześćdziesiątki rozmawia z lekarką przy biurku w jasnym gabinecie w jesiennym świetle. Zgodność z treścią potwierdza podpis: Przy leczeniu onkologicznym o terminie szczepienia decyduje rozmowa z prowadzącym, nie forum"
+      }
+    },
+    {
+      "placement": "section:Jak odróżnić sygnał od dowodu?",
+      "alt": "Sześć stopni hierarchii dowodów ze znacznikiem na trzecim poziomie",
+      "caption": "Sygnał korelacyjny jest etapem sprawdzania hipotezy; do wniosku przyczynowego potrzeba kolejnych poziomów dowodu.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/mrna-cancer-evidence-ladder-2026.avif",
+          "sha256": "46c1bc299afb0722c5036ce075dace68cedf8fb4584ddff4b7e1ce49621c5fc2",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/mrna-cancer-evidence-ladder-2026.webp",
+          "sha256": "ac446a45c16c1f270ed848e33edb1b8d0a031d3ae740879688a7ab35173f6788",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/mrna-cancer-evidence-ladder-2026.jpg",
+          "sha256": "41243103e3cd91d800f523dbe9f072f6bf48f82ce05000e363704920c668c714",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak odróżnić sygnał od dowodu?”: Sześć stopni hierarchii dowodów ze znacznikiem na trzecim poziomie. Zgodność z treścią potwierdza podpis: Sygnał korelacyjny jest etapem sprawdzania hipotezy; do wniosku przyczynowego potrzeba kolejnych poziomów dowodu."
+      }
+    },
+    {
+      "placement": "section:Granica prawdy: co w tym przekazie jest uzasadnione?",
+      "alt": "Pięć pełnych elementów ścieżki i oddzielony luką element zaznaczony przerywaną linią",
+      "caption": "Dane kończą się przed wnioskiem o przyczynowości; ostatniego kroku nie można dopisać samą narracją.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/mrna-cancer-causation-gap-2026.avif",
+          "sha256": "1dd7f8f38309c9d19c2cae1818d418694d69d719126c2c3b6936a7ecf7b351a5",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/mrna-cancer-causation-gap-2026.webp",
+          "sha256": "e8bbdfbeaa2e92adcbb2498b05a41ee7dcbf62d077d77540a5c0f365b7c46dff",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/mrna-cancer-causation-gap-2026.jpg",
+          "sha256": "4273cdbdb1fa54e97bc41aec5cd6360cd235b70602b880129b813190d808e689",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Granica prawdy: co w tym przekazie jest uzasadnione?”: Pięć pełnych elementów ścieżki i oddzielony luką element zaznaczony przerywaną linią. Zgodność z treścią potwierdza podpis: Dane kończą się przed wnioskiem o przyczynowości; ostatniego kroku nie można dopisać samą narracją."
+      }
+    },
+    {
+      "placement": "section:Jak ten przekaz rozszedł się w internecie?",
+      "alt": "Cztery panele, w których gęsty blok linii stopniowo znika, aż zostaje pojedynczy gruby pasek",
+      "caption": "Po drodze gubią się noty redakcyjne, ograniczenia i analizy wrażliwości",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.avif",
+          "sha256": "64cfbb1c17af2f51c67dfd7496065bfaebaac1a927f067dac38ba90ec5460f54",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.webp",
+          "sha256": "92b634db1c299459daf2cdee9a31265896ccd6dd989bbb681cbbe136a5b82e3c",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-obieg-przekazu.jpg",
+          "sha256": "50d954d8eaf1e2641d164a8f060b68ece557981cfed7f1320462c88a0be11c88",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak ten przekaz rozszedł się w internecie?”: Cztery panele, w których gęsty blok linii stopniowo znika, aż zostaje pojedynczy gruby pasek. Zgodność z treścią potwierdza podpis: Po drodze gubią się noty redakcyjne, ograniczenia i analizy wrażliwości"
+      }
+    },
+    {
+      "placement": "section:Czego nadal uczciwie nie wiemy?",
+      "alt": "Jasny gabinet zimą, na biurku niedokończona drewniana układanka z widocznymi pustymi miejscami, w tle mężczyzna około sześćdziesiątki",
+      "caption": "Puste miejsca w układance to pytania, na które nikt jeszcze nie zebrał danych",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-luki.avif",
+          "sha256": "ccf3b94ed4d4b95dcbc02ea5cc00ac209624d70401ffc278fae466b35bcd78a4",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-luki.webp",
+          "sha256": "7901d6b53cee114c2d6577e46e44ac1562f9c6627464dd03499ec22fa1bc4331",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-luki.jpg",
+          "sha256": "2443e4802612b9e8008efc9bc4b92457666eef9ee8085b201bada88579ade805",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czego nadal uczciwie nie wiemy?”: Jasny gabinet zimą, na biurku niedokończona drewniana układanka z widocznymi pustymi miejscami, w tle mężczyzna około sześćdziesiątki. Zgodność z treścią potwierdza podpis: Puste miejsca w układance to pytania, na które nikt jeszcze nie zebrał danych"
+      }
+    },
+    {
+      "placement": "section:Jakie badanie mogłoby tę kwestię rozstrzygnąć?",
+      "alt": "Siedem różnych geometrycznych modułów łączących się w jedną spójną, precyzyjnie dopasowaną konstrukcję",
+      "caption": "Siedem elementów, z których każdy musi być na swoim miejscu, żeby badanie coś rozstrzygnęło",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-projekt-badania.avif",
+          "sha256": "e8ad5fdbb7b32696831b24fa960082dcd80551cec48a5fc376e298d8b1a2667b",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-projekt-badania.webp",
+          "sha256": "5c1f5b5dccfed19230476c96dae421b267cf498142f4b33ce70062d5f4b00ef3",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-projekt-badania.jpg",
+          "sha256": "31b5065922448ef9258dec445c1da283a60055e7088cc2c4b03cefa12dc4b63c",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jakie badanie mogłoby tę kwestię rozstrzygnąć?”: Siedem różnych geometrycznych modułów łączących się w jedną spójną, precyzyjnie dopasowaną konstrukcję. Zgodność z treścią potwierdza podpis: Siedem elementów, z których każdy musi być na swoim miejscu, żeby badanie coś rozstrzygnęło"
+      }
+    },
+    {
+      "placement": "section:Co naprawdę działa dla osoby po pięćdziesiątce?",
+      "alt": "Kobieta około pięćdziesięciu pięciu lat stoi w jasnym salonie z telefonem przy uchu i ręką na otwartym kalendarzu, uśmiechnięta",
+      "caption": "Jedno działanie z tego artykułu, które naprawdę zmienia rokowanie: umówić zaległe badanie",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-co-dziala.avif",
+          "sha256": "93c51d2bd52a26e76432c5b6d7c69b88df896fec36c65bc4886f9756930d0a60",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-co-dziala.webp",
+          "sha256": "ae660d666770f4d42b715a59d1abf72e28701877490e454aa28fd145d3bb9875",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-co-dziala.jpg",
+          "sha256": "19dd397afee0006ef2dc714e5f25e6010060557b20b71e7f30c95e894c9a11ad",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co naprawdę działa dla osoby po pięćdziesiątce?”: Kobieta około pięćdziesięciu pięciu lat stoi w jasnym salonie z telefonem przy uchu i ręką na otwartym kalendarzu, uśmiechnięta. Zgodność z treścią potwierdza podpis: Jedno działanie z tego artykułu, które naprawdę zmienia rokowanie: umówić zaległe badanie"
+      }
+    },
+    {
+      "placement": "section:Kiedy zgłosić się do lekarza?",
+      "alt": "Para około sześćdziesiątki idzie ścieżką nad jeziorem w jesiennym złotym świetle, rozmawiając w ruchu",
+      "caption": "Po omówieniu objawów alarmowych zostaje czujność bez lęku: wiedzieć, kiedy porozmawiać z lekarzem, i dalej normalnie żyć",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.avif",
+          "sha256": "f4cc50e8915922f3e919215ccbf8a947c68153efb886d46f895ec23f063c2b3c",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.webp",
+          "sha256": "7349927f6c485a45f21c95a059d581c64978c8b6a9b9b0c18fc78bba8b634127",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/szczepionki-mrna-covid-a-rak-kiedy-do-lekarza.jpg",
+          "sha256": "33a20790fa696a493f192937326e6fa7cae66627780401f8747587a5995f17d2",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy zgłosić się do lekarza?”: Para około sześćdziesiątki idzie ścieżką nad jeziorem w jesiennym złotym świetle, rozmawiając w ruchu. Zgodność z treścią potwierdza podpis: Po omówieniu objawów alarmowych zostaje czujność bez lęku: wiedzieć, kiedy porozmawiać z lekarzem, i dalej normalnie żyć"
+      }
+    }
+  ]
+}

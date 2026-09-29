@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-29T17:48:15.489Z",
+  "slug": "kreatyna-i-bialko-po-50-tce-jak-laczyc",
+  "html_sha256": "42157aeefbee19e97d7b9000785f8f9549d5b0b5882a5faa07d9ac3dc7834584",
+  "site_html_sha256": "42157aeefbee19e97d7b9000785f8f9549d5b0b5882a5faa07d9ac3dc7834584",
+  "pdf_sha256": "9f133105ed651308cff2e08cc393c3317b50bb136a552faca78f90cab948c68f",
+  "site_pdf_sha256": "9f133105ed651308cff2e08cc393c3317b50bb136a552faca78f90cab948c68f",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 6,
+    "text_coverage": 1,
+    "rendered_pages": 6
+  },
+  "errors": []
+}

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "krew-pepowinowa-skarb-czy-marketing",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "fb3b523725306d8dc5072f99e2a4fa5ffc2f1eee069a57faaed949137d3eda1f",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Techniczka kontroluje jednostkę krwi pępowinowej przed kriogenicznym przechowywaniem",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/cord-blood-hero-2026.avif",
+          "sha256": "fbc1a8f5a003943ba3350e816fe094b039916ebab86356798c4c5111f78c18f6",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/cord-blood-hero-2026.webp",
+          "sha256": "50ee3b747dd1f9753881619c803f7f90b3be45d8b0283ead6f2047a9111a576b",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/cord-blood-hero-2026.jpg",
+          "sha256": "892ca2456f4724dda33769649532a294270ca859129c63dc0aff86fca3e7fb35",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Techniczka kontroluje jednostkę krwi pępowinowej przed kriogenicznym przechowywaniem. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co rzeczywiście leczy się krwią pępowinową?",
+      "alt": "Specjaliści sprawdzają jednostkę krwi pępowinowej przed wydaniem do transplantacji",
+      "caption": "Krew pępowinowa ma uznane zastosowania transplantacyjne, ale jednostka jest kwalifikowana do konkretnego biorcy i rozpoznania.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/cord-blood-transplant-lab-2026.avif",
+          "sha256": "15a7bdece0da6272ae3675c67cc5c2106f5ae695947a8ca8690d0877b18330a3",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/cord-blood-transplant-lab-2026.webp",
+          "sha256": "557076daf937432160fb742205a7e1005a776041f185324b8f44d4e937f6568c",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/cord-blood-transplant-lab-2026.jpg",
+          "sha256": "2319688946dd3847be435e8e0d789d4aec765c41a55139b276c1a5b56ace71d7",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co rzeczywiście leczy się krwią pępowinową?”: Specjaliści sprawdzają jednostkę krwi pępowinowej przed wydaniem do transplantacji. Zgodność z treścią potwierdza podpis: Krew pępowinowa ma uznane zastosowania transplantacyjne, ale jednostka jest kwalifikowana do konkretnego biorcy i rozpoznania."
+      }
+    },
+    {
+      "placement": "section:Dlaczego własny materiał nie zawsze pomoże dziecku?",
+      "alt": "Lekarka wyjaśnia rodzicom, dlaczego wybór dawcy zależy od choroby i zgodności",
+      "caption": "Własny depozyt nie zawsze nadaje się do leczenia własnej choroby; znaczenie mają rozpoznanie, jakość jednostki i zgodność dawcy z biorcą.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/cord-blood-autologous-limits-2026.avif",
+          "sha256": "d2354c2fd3bbf5bd8a45bd702b43bec72b15b42197d80ac024d8a08f69392172",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/cord-blood-autologous-limits-2026.webp",
+          "sha256": "4cc220ce6f8c72d3609756af6f86b449c3f85dd1dab8409d795fd4ccfbf6cb8a",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/cord-blood-autologous-limits-2026.jpg",
+          "sha256": "0dde92a352e7fa4474671e7ac9f26ee3236957d058b7d2d861f2700ebcd70da1",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego własny materiał nie zawsze pomoże dziecku?”: Lekarka wyjaśnia rodzicom, dlaczego wybór dawcy zależy od choroby i zgodności. Zgodność z treścią potwierdza podpis: Własny depozyt nie zawsze nadaje się do leczenia własnej choroby; znaczenie mają rozpoznanie, jakość jednostki i zgodność dawcy z biorcą."
+      }
+    },
+    {
+      "placement": "section:Bank publiczny czy prywatny - czym się różnią?",
+      "alt": "Zestawienie publicznego banku kriogenicznego i prywatnej umowy rodzinnej",
+      "caption": "Darowizna publiczna służy zgodnemu biorcy, a prywatny bank rezerwuje materiał dla rodziny i pobiera opłaty za usługę.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/cord-blood-public-private-2026.avif",
+          "sha256": "667d47883de1783fe57f4ad843f5c4f63cb5cda2c77f964aea562f64bf089e3e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/cord-blood-public-private-2026.webp",
+          "sha256": "7c3f360861e44bc54e9824d83043c3cca79373880c02daea58399020c3505fa4",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/cord-blood-public-private-2026.jpg",
+          "sha256": "5fbe97ad965d5442a906251cc88ef42906aa5d6b31fba79463d18aa835b94697",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Bank publiczny czy prywatny - czym się różnią?”: Zestawienie publicznego banku kriogenicznego i prywatnej umowy rodzinnej. Zgodność z treścią potwierdza podpis: Darowizna publiczna służy zgodnemu biorcy, a prywatny bank rezerwuje materiał dla rodziny i pobiera opłaty za usługę."
+      }
+    },
+    {
+      "placement": "section:Jak policzyć pełny koszt bankowania?",
+      "alt": "Przyszli rodzice sumują opłatę początkową i wieloletnie koszty przechowywania",
+      "caption": "Pełny koszt obejmuje wszystkie etapy umowy i wieloletni abonament, a nie tylko promocyjną opłatę początkową.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/cord-blood-full-cost-2026.avif",
+          "sha256": "d841858be1e2c7f69e72a4f8f66ed8a33091d9eddbd17c0fa7c70f3129a227c9",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/cord-blood-full-cost-2026.webp",
+          "sha256": "7de4872939b9b50fcba284c98c2dad094522c63999d73a78cc524381ce1ba7c4",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/cord-blood-full-cost-2026.jpg",
+          "sha256": "0fa74590a3a0ebc29e7dd69f99c290d1db21c6aa9e5901f1d5bd987ea1098e6d",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak policzyć pełny koszt bankowania?”: Przyszli rodzice sumują opłatę początkową i wieloletnie koszty przechowywania. Zgodność z treścią potwierdza podpis: Pełny koszt obejmuje wszystkie etapy umowy i wieloletni abonament, a nie tylko promocyjną opłatę początkową."
+      }
+    }
+  ]
+}

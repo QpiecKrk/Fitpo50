@@ -289,7 +289,7 @@ function validateFile(file) {
   }
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
-  if (sections.length < 6) errors.push(`${file}: sections musi mieć minimum 6 elementów (jest ${sections.length}).`);
+  if (sections.length === 0) errors.push(`${file}: sections musi zawierać co najmniej jeden merytoryczny blok wynikający z intencji artykułu.`);
   const sectionChunksForLinks = [];
   const sectionChunksForCode = [];
   for (let i = 0; i < sections.length; i += 1) {

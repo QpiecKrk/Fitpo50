@@ -20,7 +20,7 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 
 ## Artykuly
 
-- `npm run article:add -- --file <draft.fitpo50.json>` - jedyna domyślna komenda pełnego dodania. Przyjmuje JSON i obrazy z jego katalogu, wykonuje szybkie przygotowanie, a po `CONTENT_READY` uruchamia jeden atom publikacyjny.
+- `npm run article:add -- --file <draft.fitpo50.json>` - jedyna domyślna komenda pełnego dodania. Przyjmuje JSON i obrazy z jego katalogu, wykonuje przygotowanie, pełny Quality Gate z `ARTICLE_STANDARD.md`, a po `CONTENT_READY` uruchamia jeden atom publikacyjny. Nowe artykuły i wszystkie ścieżki aktualizacji przechodzą ten sam komplet bramek.
 - `npm run article:prepare-json -- --file <draft.fitpo50.json>` - tryb wyjątkowy: poprawia draft do `CONTENT_READY`, ale nie publikuje. Używaj tylko, gdy użytkownik chce najpierw dostać sam poprawiony JSON.
 - `npm run article:publish -- --file <CONTENT_READY.fitpo50.json>` - techniczne wznowienie publikacji istniejącego, chronionego artefaktu; użytkownik nie musi wydawać tej komendy po `dodaj artykuł`.
 - `python3 docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py <draft.fitpo50.json>` - wewnętrzny walidator draftu Claude; `DRAFT_VALID` nie oznacza gotowości publikacyjnej.
@@ -33,12 +33,14 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 
 - `npm run gsc:auto` - kanoniczny workflow polecenia `GSC`: pobranie/synchronizacja, kontrola kontraktu danych 7/28/90, raporty i monitoring po publikacji. Dane robocze pozostają w `~/Downloads/gsc-auto-input`.
 - `npm run gsc:data:check` - sprawdza typy CSV, manifest, hashe, świeżość i spójność cohortu przed analizą.
+- `npm run growth:gsc-generative-ai` - czyta opcjonalny eksport raportu generatywnej AI z GSC i zapisuje warstwę URL/kraj/urządzenie/trend. Brak raportu lub poprawnych danych daje `GSC_INPUT_UNAVAILABLE` oraz metryki `null`, nie zero.
 - `npm run gsc:priority-map -- --input-dir ~/Downloads/gsc-auto-input --output-dir data/reports` - raport z CSV z GSC.
 - `npm run gsc:weekly:api:local` - pobiera dane z GSC API, uzywajac sekretow z lokalnego `.env.local`.
 - `npm run seo:aio:machine -- --input-dir ~/Downloads/gsc-auto-input --output-dir data/reports` - centrum decyzji SEO/AEO/GEO/AIO.
 - `npm run seo:aio:apply-wave` - tylko raport propozycji. Stary zapis `safe-links` jest zablokowany, bo tworzył generyczny akapit.
 - `npm run popraw-seo` - diagnozuje wszystkie indeksowalne `BlogPosting` i przypisuje każdy URL do `BOOST`, `ROKUJE`, `NAPRAWA` albo `MONITORING`. Bramka wymaga `omitted_articles = 0`; komenda nie edytuje HTML bez zatwierdzenia konkretnych ID.
 - `npm run popraw-seo:apply --ids="BOOST 1,NAPRAWA 2" --confirm=APPLY_APPROVED_SEO` - techniczna komenda agenta: atomowo stosuje zatwierdzony manifest konkretnych patchy, regeneruje PDF/mirror/sitemap i wykonuje walidatory. Użytkownik nie musi jej pamiętać.
+- `python3 scripts/article-media-review.py --slug <slug>` - sprawdza hash-bound manifest rzeczywistego przeglądu wszystkich obrazów artykułu: zgodność z sekcją, brak mylącego tekstu lub logo oraz wiarygodność anatomii i sprzętu. Watermark sam w sobie nie blokuje publikacji. `popraw-seo:apply` uruchamia tę bramkę automatycznie przed i po promocji stagingu.
 - `npm run popraw-seo:live` - techniczna kontrola produkcji; dopiero `LIVE_DEPLOYED_AND_VALIDATED` tworzy końcową listę GSC. Uruchamia ją automatycznie workflow po pushu.
 - `npm run popraw-seo:gsc-local` - pobiera GSC przez API z `.env.local`, przebudowuje priority-map, SEO/AIO command center i raport `popraw-seo`.
 - `npm run seo:aeo:guard` - kontrola szybkich odpowiedzi, FAQ i elementow AEO.

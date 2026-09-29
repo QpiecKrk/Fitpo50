@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "kreatyna-i-bialko-po-50-tce-jak-laczyc",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "42157aeefbee19e97d7b9000785f8f9549d5b0b5882a5faa07d9ac3dc7834584",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce odmierza kreatynę obok jogurtu, jaj, strączków i posiłku białkowego po treningu siłowym",
+      "caption": "",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-po-50-hero-v2.avif",
+          "sha256": "fbb30f3769419129ced6a317d4b8b288020bf64b83e14d95e2dc33cbd5818e03",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-po-50-hero-v2.webp",
+          "sha256": "d8659610939feae8b0f5414154511a43d39e4591ade0dc5c46b808c83f0a542e",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-po-50-hero-v2.jpg",
+          "sha256": "69347e596adc5ed7b3c6b3d29cac3a577f3bbb80938087f32dbc320ea482da99",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po 50-tce odmierza kreatynę obok jogurtu, jaj, strączków i posiłku białkowego po treningu siłowym. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym różni się działanie białka i kreatyny?",
+      "alt": "Dwie odrębne ścieżki: aminokwasy z białka trafiają do odnowy tkanek, a kreatyna wspiera szybkie odtwarzanie energii w mięśniu",
+      "caption": "Białko odpowiada za podaż aminokwasów, a kreatyna za pulę szybkiej energii; wspólnym warunkiem efektu pozostaje trening.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-role-2026.avif",
+          "sha256": "2906b1a634fbb9cd883eae819f68167a3eafa6ca1bd084c5620d79ef70d07c3e",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-role-2026.webp",
+          "sha256": "00fc356084453f4561c4a36b30043337034c354d2b7be20bf0c5127bb12af904",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-role-2026.jpg",
+          "sha256": "fd04997609b6c0f358075183b14c22ef9deb1aa43429f57d2956b3746c332ae3",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym różni się działanie białka i kreatyny?”: Dwie odrębne ścieżki: aminokwasy z białka trafiają do odnowy tkanek, a kreatyna wspiera szybkie odtwarzanie energii w mięśniu. Zgodność z treścią potwierdza podpis: Białko odpowiada za podaż aminokwasów, a kreatyna za pulę szybkiej energii; wspólnym warunkiem efektu pozostaje trening."
+      }
+    },
+    {
+      "placement": "section:Ile białka potrzebuje osoba po 50-tce?",
+      "alt": "Trzy pełne posiłki z różnymi źródłami białka rozłożone w ciągu dnia osoby po pięćdziesiątce",
+      "caption": "Dobową ilość białka łatwiej osiągnąć kilkoma pełnymi posiłkami niż ratować wieczorem przypadkową dużą porcją.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-cel-bialka-2026.avif",
+          "sha256": "e61354a089843ebd1ff680a0cb4514e7d229c63721b4c6873d279243208f0099",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-cel-bialka-2026.webp",
+          "sha256": "963597f5cd19f4b015830ea745bd3f51922cfe28ed060841ee12d8491051e5ae",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-cel-bialka-2026.jpg",
+          "sha256": "e1548d608b0db456c1bccf3b13ec882c6a925da309a251d7ac0d65267ce3bb46",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Ile białka potrzebuje osoba po 50-tce?”: Trzy pełne posiłki z różnymi źródłami białka rozłożone w ciągu dnia osoby po pięćdziesiątce. Zgodność z treścią potwierdza podpis: Dobową ilość białka łatwiej osiągnąć kilkoma pełnymi posiłkami niż ratować wieczorem przypadkową dużą porcją."
+      }
+    },
+    {
+      "placement": "section:Jak dawkować monohydrat kreatyny?",
+      "alt": "Jedna niewielka codzienna porcja monohydratu kreatyny obok kalendarza z zaznaczoną regularnością",
+      "caption": "Najprostszy schemat to stała mała porcja codziennie; regularność ma większe znaczenie niż pora przyjęcia.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-dawkowanie-kreatyny-2026.avif",
+          "sha256": "d65dc24f4a6de4e829f17d4093b8b33f9bd8645a3deeb7bd2cc3b2e9d3c7bd25",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-dawkowanie-kreatyny-2026.webp",
+          "sha256": "a8c6370b41ce2a418ed22c8b1e36271992a919749e194ac51f3cc12f04486616",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-dawkowanie-kreatyny-2026.jpg",
+          "sha256": "305668b0e8f34400d798c66965506bac36bea2a52d8e6ea7b8fca675fffa8486",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak dawkować monohydrat kreatyny?”: Jedna niewielka codzienna porcja monohydratu kreatyny obok kalendarza z zaznaczoną regularnością. Zgodność z treścią potwierdza podpis: Najprostszy schemat to stała mała porcja codziennie; regularność ma większe znaczenie niż pora przyjęcia."
+      }
+    },
+    {
+      "placement": "section:Jak połączyć białko i kreatynę w zwykłym dniu?",
+      "alt": "Plan dnia z trzema posiłkami białkowymi i jedną stałą porcją kreatyny przypisaną do codziennej rutyny",
+      "caption": "Dobowa suma białka i codzienna kreatyna są ważniejsze niż idealna minuta po ostatnim powtórzeniu.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-plan-dnia-2026.avif",
+          "sha256": "879fec7626a6404b73eda7a94a1b1442a368462a450ff79a8e1b1324f0e7c7ce",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-plan-dnia-2026.webp",
+          "sha256": "c7661a0b34d71a070da8e03521abdac7fc89756df53fb03500d1ae65577d2e94",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-plan-dnia-2026.jpg",
+          "sha256": "c4d93ee506437ba8738ba0c712129fe8f52f932fbbaa550ebed4806e662ab750",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak połączyć białko i kreatynę w zwykłym dniu?”: Plan dnia z trzema posiłkami białkowymi i jedną stałą porcją kreatyny przypisaną do codziennej rutyny. Zgodność z treścią potwierdza podpis: Dobowa suma białka i codzienna kreatyna są ważniejsze niż idealna minuta po ostatnim powtórzeniu."
+      }
+    },
+    {
+      "placement": "section:Co pokazują badania u starszych dorosłych?",
+      "alt": "Mała dodatkowa część wyniku kreatyny nałożona na większy fundament regularnego treningu oporowego",
+      "caption": "Badania wskazują na mały dodatkowy efekt kreatyny; największą część pracy nadal wykonuje regularny trening.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-badania-starszych-2026.avif",
+          "sha256": "9e35b39182bcdafaa6c9a1000ca02df8df2c0742ff8ffeeeac44d07fee878252",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-badania-starszych-2026.webp",
+          "sha256": "faf0b8a440e4a240255a25144c3a47fdf3ad050e468671651a0d3d50e5a770fc",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-badania-starszych-2026.jpg",
+          "sha256": "86088698dae0b7a99ffea376ccfca02d7d16b582332f17fc1c6c5b45453caa3f",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co pokazują badania u starszych dorosłych?”: Mała dodatkowa część wyniku kreatyny nałożona na większy fundament regularnego treningu oporowego. Zgodność z treścią potwierdza podpis: Badania wskazują na mały dodatkowy efekt kreatyny; największą część pracy nadal wykonuje regularny trening."
+      }
+    },
+    {
+      "placement": "section:Kiedy trzeba zachować ostrożność?",
+      "alt": "Lekarz porównuje wyniki kreatyniny i filtracji z informacją o przyjmowanej kreatynie",
+      "caption": "Po rozpoczęciu kreatyny wynik kreatyniny trzeba interpretować razem z informacją o suplementacji, a nie w oderwaniu od niej.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-nerki-wyniki-2026.avif",
+          "sha256": "11b8a88399042f0cdfb9fdbaa46fee7638ce6289421fa06f1dd68a271abcb5d8",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-nerki-wyniki-2026.webp",
+          "sha256": "002eb9a1237d1a86804dabf15510376786777ccbb30471ef1df1d2c3ea9370d0",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-nerki-wyniki-2026.jpg",
+          "sha256": "eddbb35b640b418cf42b637b01604b0ff34bd377542e1399f82f26644c7b1af6",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy trzeba zachować ostrożność?”: Lekarz porównuje wyniki kreatyniny i filtracji z informacją o przyjmowanej kreatynie. Zgodność z treścią potwierdza podpis: Po rozpoczęciu kreatyny wynik kreatyniny trzeba interpretować razem z informacją o suplementacji, a nie w oderwaniu od niej."
+      }
+    }
+  ]
+}

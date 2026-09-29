@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "apob-apoa-badania-cholesterol",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "a92101f15d7d6ae8938727abea21447ca92a2720420dc5ea5c330f578b25055d",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Stylizowane grupy cząstek lipoproteinowych różniące się liczbą i zawartością",
+      "caption": "",
+      "width": 2200,
+      "height": 1200,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-hero.avif",
+          "sha256": "4959176fe11e45db5d2e293970121898f593f718b432ce19bc5bfada8f785746",
+          "width": 2200,
+          "height": 1200
+        },
+        "webp": {
+          "file": "assets/apob-apoa-hero.webp",
+          "sha256": "2104cc753f79bfe664f08a4f96fc360d5798c19b1b5aeee24d765c96b24e02c6",
+          "width": 2200,
+          "height": 1200
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-hero.jpg",
+          "sha256": "e28121020899bd64987e94b6f856e1bf6d63db8fa48ead32bdd67abbf018c617",
+          "width": 2200,
+          "height": 1200
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Stylizowane grupy cząstek lipoproteinowych różniące się liczbą i zawartością. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co mierzą ApoB i ApoA1?",
+      "alt": "Laborantka porównuje dwie grupy stylizowanych cząstek lipoproteinowych",
+      "caption": "ApoB przybliża liczbę cząstek aterogennych, a ApoA1 opisuje główne białko HDL — oba wyniki mówią o innych elementach transportu lipidów.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-particles-2026.avif",
+          "sha256": "a7f40c5424a7eec45089ad4892a56e1c3376f09588f97aab690ac7c1863d14de",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-apoa-particles-2026.webp",
+          "sha256": "9d5a20d13341fc8126924a788732f9885d18f89eba9efc6e7e48cae39c1b2286",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-particles-2026.jpg",
+          "sha256": "0ce1ee2dd2266a950e65ba5fd0dc7dea5269515520c0f7308d320c31cc428a55",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co mierzą ApoB i ApoA1?”: Laborantka porównuje dwie grupy stylizowanych cząstek lipoproteinowych. Zgodność z treścią potwierdza podpis: ApoB przybliża liczbę cząstek aterogennych, a ApoA1 opisuje główne białko HDL — oba wyniki mówią o innych elementach transportu lipidów."
+      }
+    },
+    {
+      "placement": "section:Jak oblicza się wskaźnik ApoB/ApoA1?",
+      "alt": "Analiza wyniku ApoB i ApoA1 razem z profilem ryzyka",
+      "caption": "Analiza wyniku ApoB i ApoA1 razem z profilem ryzyka",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-kobieta-wyniki.avif",
+          "sha256": "8ad14c3e31964bbd33a7bcc0b6067bf1cad082974eed36a40f7304fc69051cf8",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/apob-apoa-kobieta-wyniki.webp",
+          "sha256": "ab5726e7f8c9a580f50be826110f14150e4230862f82e597a9da7bf7f2627dee",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-kobieta-wyniki.jpg",
+          "sha256": "b5d2c4fc94a3372bb573cecd5ca2d80b949cd9c537ef282124cebe79b61269df",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak oblicza się wskaźnik ApoB/ApoA1?”: Analiza wyniku ApoB i ApoA1 razem z profilem ryzyka. Zgodność z treścią potwierdza podpis: Analiza wyniku ApoB i ApoA1 razem z profilem ryzyka"
+      }
+    },
+    {
+      "placement": "section:Czy wskaźnik przewiduje zawał lepiej niż lipidogram?",
+      "alt": "Lekarka omawia z pacjentem kilka wyników oceny ryzyka sercowo-naczyniowego",
+      "caption": "Iloraz ApoB/ApoA1 może uzupełnić ocenę, lecz nie zastępuje pełnego obrazu ryzyka sercowo-naczyniowego.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-risk-consultation-2026.avif",
+          "sha256": "87dc4f42e2bcde081a2b67815f17ffde726fc00c3fd51fe30e6efca5077447a6",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-apoa-risk-consultation-2026.webp",
+          "sha256": "d2d7ec58b488cb93bf2fab48c312676657e046601c354792fd34f3442da2633e",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-risk-consultation-2026.jpg",
+          "sha256": "c66bfe270d64ddc81b850de17fb926d58473e6994301a3d1d988773d5c1a3e0c",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy wskaźnik przewiduje zawał lepiej niż lipidogram?”: Lekarka omawia z pacjentem kilka wyników oceny ryzyka sercowo-naczyniowego. Zgodność z treścią potwierdza podpis: Iloraz ApoB/ApoA1 może uzupełnić ocenę, lecz nie zastępuje pełnego obrazu ryzyka sercowo-naczyniowego."
+      }
+    },
+    {
+      "placement": "section:Kiedy warto oznaczyć ApoB i ApoA1?",
+      "alt": "Pielęgniarka zabezpiecza próbkę krwi po pobraniu od mężczyzny po 50-tce",
+      "caption": "Oznaczenie ApoB może pomóc zwłaszcza wtedy, gdy sam LDL-C nie oddaje dobrze liczby cząstek aterogennych.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-testing-2026.avif",
+          "sha256": "5de8a07ee4787d94ac6cb94d2a29ab69e813c66f28a0f93c93847f512d8dc3b8",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/apob-apoa-testing-2026.webp",
+          "sha256": "952a19fdfe651e637134723fa143757bd7838c661860266900e5c3e4668d1572",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-testing-2026.jpg",
+          "sha256": "5e5598c9be20b84c106a6466c1d898ca56e7b5d979bf03546e4f5c68835d9865",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy warto oznaczyć ApoB i ApoA1?”: Pielęgniarka zabezpiecza próbkę krwi po pobraniu od mężczyzny po 50-tce. Zgodność z treścią potwierdza podpis: Oznaczenie ApoB może pomóc zwłaszcza wtedy, gdy sam LDL-C nie oddaje dobrze liczby cząstek aterogennych."
+      }
+    }
+  ]
+}

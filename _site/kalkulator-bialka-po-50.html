@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./style.css?v=1.4">
   <link rel="stylesheet" href="./assets/footer.css?v=1">
   <link rel="stylesheet" href="./assets/tools-hub.css?v=1">
-  <link rel="stylesheet" href="./assets/protein-calculator.css?v=1">
+  <link rel="stylesheet" href="./assets/protein-calculator.css?v=2">
   <link rel="icon" href="./favicon.png" type="image/png"><link rel="apple-touch-icon" href="./favicon.png">
   <script>
     (function () {
@@ -42,7 +42,11 @@
           <h1 id="calculator-title">Policz. Podziel.<br><em>Zjedz dobrze.</em></h1>
           <p>Ustal orientacyjny dzienny zakres białka i zobacz, jak rozłożyć go między posiłki. Prosto, praktycznie i bez udawanej precyzji do jednego grama.</p>
         </div>
-        <div class="calculator-hero__mark" aria-hidden="true"><span>PRO</span><strong>1,0–1,6</strong><small>g/kg masy ciała</small></div>
+        <figure class="calculator-hero__visual">
+          <picture><source srcset="./assets/protein-planning-human-v1.webp" type="image/webp"><img src="./assets/protein-planning-human-v1.png" width="1254" height="1254" loading="eager" fetchpriority="high" decoding="async" alt="Kobieta po pięćdziesiątce rozkładająca produkty bogate w białko między kilka posiłków"></picture>
+          <div class="calculator-hero__range" aria-label="Zakres używany przez kalkulator"><strong>0,83–1,5</strong><span>g/kg masy ciała</span></div>
+          <figcaption><strong>Nie musisz zjadać wszystkiego naraz.</strong> Kalkulator pokaże także orientacyjną porcję na każdy główny posiłek.</figcaption>
+        </figure>
       </section>
 
       <section class="calculator-workspace" aria-label="Kalkulator zapotrzebowania na białko">
@@ -53,13 +57,19 @@
           </div>
 
           <label class="calculator-field">
-            <span class="calculator-field__label"><i>1</i>Masa ciała używana do obliczeń</span>
+            <span class="calculator-field__label"><i>1</i>Wiek</span>
+            <span class="calculator-input-wrap"><input type="number" name="age" min="50" max="120" step="1" inputmode="numeric" placeholder="np. 58" required><b>lat</b></span>
+            <small>Rekomendacje dla zdrowych osób starszych dotyczą przede wszystkim wieku 65+.</small>
+          </label>
+
+          <label class="calculator-field">
+            <span class="calculator-field__label"><i>2</i>Masa ciała używana do obliczeń</span>
             <span class="calculator-input-wrap"><input type="number" name="weight" min="40" max="250" step="0.1" inputmode="decimal" placeholder="np. 78" required><b>kg</b></span>
             <small>Przy znacznej niedowadze lub otyłości właściwa masa do obliczeń może wymagać ustalenia z dietetykiem.</small>
           </label>
 
           <label class="calculator-field">
-            <span class="calculator-field__label"><i>2</i>Aktywność w typowym tygodniu</span>
+            <span class="calculator-field__label"><i>3</i>Aktywność w typowym tygodniu</span>
             <select name="activity" required>
               <option value="">Wybierz aktywność</option>
               <option value="low">Mała — głównie siedzący tryb życia</option>
@@ -69,7 +79,7 @@
           </label>
 
           <label class="calculator-field">
-            <span class="calculator-field__label"><i>3</i>Główny cel</span>
+            <span class="calculator-field__label"><i>4</i>Główny cel</span>
             <select name="goal" required>
               <option value="">Wybierz cel</option>
               <option value="maintain">Utrzymanie zdrowia i sprawności</option>
@@ -79,7 +89,7 @@
           </label>
 
           <label class="calculator-field">
-            <span class="calculator-field__label"><i>4</i>Liczba głównych posiłków</span>
+            <span class="calculator-field__label"><i>5</i>Liczba głównych posiłków</span>
             <select name="meals" required>
               <option value="3">3 posiłki</option>
               <option value="4" selected>4 posiłki</option>
@@ -131,8 +141,9 @@
       <section class="calculator-method" aria-labelledby="method-title">
         <div><span class="tools-section-kicker">Jak to liczymy?</span><h2 id="method-title">Zakres, nie wyrok</h2></div>
         <div class="calculator-method__content">
-          <p>Punktem wyjścia jest zakres 1,0–1,2 g/kg dla osoby po 50-tce. Regularny ruch, trening siłowy, redukcja masy albo budowanie mięśni przesuwają go do 1,2–1,6 g/kg. Wynik mnożymy przez podaną masę ciała, a następnie dzielimy przez liczbę posiłków.</p>
-          <p>Kalkulator nie uwzględnia wyników badań, chorób przewlekłych, niedowagi, znacznej otyłości ani zaleceń związanych z leczeniem.</p>
+          <p>Dla zdrowej osoby w wieku 50–64 lat z małą aktywnością kalkulator zaczyna od 0,83–1,0 g/kg. Dla zdrowej osoby od 65. roku życia stosuje 1,0–1,2 g/kg. Przy regularnym ruchu, treningu siłowym, budowaniu mięśni albo redukcji używa zakresu planistycznego do 1,2–1,5 g/kg.</p>
+          <p>Zakres 1,0–1,2 g/kg pochodzi z zaleceń dla osób powyżej 65 lat. Wyższe wartości są stosowane w wybranych zaleceniach i badaniach, ale nie stanowią automatycznej recepty dla każdej osoby. Kalkulator nie uwzględnia wyników badań, niedowagi, znacznej otyłości ani leczenia.</p>
+          <p><a href="https://www.efsa.europa.eu/en/efsajournal/pub/2557" target="_blank" rel="noopener noreferrer">EFSA — wartość referencyjna dla zdrowych dorosłych</a><br><a href="https://pubmed.ncbi.nlm.nih.gov/23867520/" target="_blank" rel="noopener noreferrer">PROT-AGE — białko u osób powyżej 65 lat</a><br><a href="https://pubmed.ncbi.nlm.nih.gov/24814383/" target="_blank" rel="noopener noreferrer">ESPEN — białko i aktywność w starszym wieku</a><br><a href="https://pubmed.ncbi.nlm.nih.gov/30629126/" target="_blank" rel="noopener noreferrer">Badanie redukcji masy z podażą 1,2–1,5 g/kg</a></p>
         </div>
       </section>
 
@@ -159,6 +170,6 @@
       <div class="site-footer-bento__bottom"><p class="site-footer-bento__copy">© 2026 FitPo50</p><p class="site-footer-bento__note">Treści mają charakter edukacyjny i informacyjny.</p></div>
     </footer>
   </div>
-  <script src="./dist/protein-calculator.js?v=1" defer></script>
+  <script src="./dist/protein-calculator.js?v=2" defer></script>
 </body>
 </html>

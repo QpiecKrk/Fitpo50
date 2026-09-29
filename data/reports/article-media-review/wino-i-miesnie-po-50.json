@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "wino-i-miesnie-po-50",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "44ab426835c4cf690ef3d33cfb2fac71b18887ead0b3ca23515f1b2d3abfcbdb",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kieliszek czerwonego wina obok napiętego przedramienia — symbol wyboru między przyjemnością a regeneracją mięśni",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/wino_miesnie_hero.avif",
+          "sha256": "6b23095a45c3c28da068afa727c988afbff0e9086967cc259ad6a2f63ed28dc5",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/wino_miesnie_hero.webp",
+          "sha256": "aacbfee1187870cd49e3a0f1a981e6fdab90dd848e91e5e4f9309a919e4bbf6f",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/wino_miesnie_hero.jpg",
+          "sha256": "372083b96774032a11e19e5ed6dce570f09e2a2e669982bfbeaedda5bd48b4e8",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Kieliszek czerwonego wina obok napiętego przedramienia — symbol wyboru między przyjemnością a regeneracją mięśni. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak mięsień rośnie i co naprawdę mierzy synteza białek?",
+      "alt": "Mężczyzna po pięćdziesiątce podczas kolacji z winem i podczas treningu siłowego następnego dnia",
+      "caption": "Jedna noc łączy dwie sytuacje: ekspozycję na alkohol i kolejną sesję, ale krótkie samopoczucie nie opisuje całej adaptacji.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/man_friday_wine_gym_saturday.avif",
+          "sha256": "48b5be681cbe0d3272d3c9772f1907a1ce41f02ec21755c34a785f9d927ae504",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/man_friday_wine_gym_saturday.webp",
+          "sha256": "9290e105ffe626b1e40e56715e24ed4cecd2d9d98eac79103b4730bb3bea90c6",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/man_friday_wine_gym_saturday.jpg",
+          "sha256": "8b732921c596dab58ea64a307762fba02fb5753376bc9c53f63a28453391f225",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak mięsień rośnie i co naprawdę mierzy synteza białek?”: Mężczyzna po pięćdziesiątce podczas kolacji z winem i podczas treningu siłowego następnego dnia. Zgodność z treścią potwierdza podpis: Jedna noc łączy dwie sytuacje: ekspozycję na alkohol i kolejną sesję, ale krótkie samopoczucie nie opisuje całej adaptacji."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę pokazuje badanie z dawką 1,5 g/kg?",
+      "alt": "Duża pula symbolizująca eksperymentalną dawkę alkoholu zestawiona z pojedynczym kieliszkiem bez sugerowania równego efektu",
+      "caption": "Eksperyment z dużą dawką pozwala wykryć mechanizm, lecz nie wyznacza skutku pojedynczej lampki ani bezpiecznego progu.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/wino-miesnie-parr-dose-2026.avif",
+          "sha256": "1822743a81248c7af6b29c81856a801997d8b4a317ea8130c7cde1c8f56a23a0",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/wino-miesnie-parr-dose-2026.webp",
+          "sha256": "170e8c0c77356bb07427cfc23b000115c80f681f827cfcf8f30a2b663d9417e4",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/wino-miesnie-parr-dose-2026.jpg",
+          "sha256": "cb1b56b8c6c8a6a3d289c0186a9dfa7bde00603323f6e7e76fc0802cded95797",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co naprawdę pokazuje badanie z dawką 1,5 g/kg?”: Duża pula symbolizująca eksperymentalną dawkę alkoholu zestawiona z pojedynczym kieliszkiem bez sugerowania równego efektu. Zgodność z treścią potwierdza podpis: Eksperyment z dużą dawką pozwala wykryć mechanizm, lecz nie wyznacza skutku pojedynczej lampki ani bezpiecznego progu."
+      }
+    },
+    {
+      "placement": "section:Czy alkohol psuje sen nawet w mniejszej dawce?",
+      "alt": "Nocny zegar, kieliszek wina i torba treningowa obok łóżka",
+      "caption": "Alkohol może przyspieszyć zaśnięcie po większej dawce, a jednocześnie pogorszyć późniejszą architekturę snu i regenerację.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/clock_muscle_wine_night.avif",
+          "sha256": "58986848921d1eb993afcaf90c5030eae333149abdc6adddb05586a9097ff138",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/clock_muscle_wine_night.webp",
+          "sha256": "8acc2fcf2675fa1cef259d7d366a6f9252cccc645da375c2c222732909f3b64d",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/clock_muscle_wine_night.jpg",
+          "sha256": "cd8b52ae005e07e8afc4c896effe7a202d1b2b2b5905e39311bf368ee0276faa",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy alkohol psuje sen nawet w mniejszej dawce?”: Nocny zegar, kieliszek wina i torba treningowa obok łóżka. Zgodność z treścią potwierdza podpis: Alkohol może przyspieszyć zaśnięcie po większej dawce, a jednocześnie pogorszyć późniejszą architekturę snu i regenerację."
+      }
+    },
+    {
+      "placement": "section:Czy trening jest stracony, jeśli następnego dnia czujesz się dobrze?",
+      "alt": "Mężczyzna po pięćdziesiątce rano z wodą i torbą treningową przygotowaną do kolejnej sesji",
+      "caption": "Dobre samopoczucie i sprawna kolejna sesja są ważne, ale nie mierzą snu REM, ryzyka zdrowotnego ani przewlekłego nawyku.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/weekend_recovery_morning.avif",
+          "sha256": "5af74a60f7668474db51f981975c15ece9a797b50fa3cd7750a2d544ce218141",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/weekend_recovery_morning.webp",
+          "sha256": "09de1f71b753332b7f13481d22251fb887516a6f981ff88611cf75748a9afcaa",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/weekend_recovery_morning.jpg",
+          "sha256": "34062a50031bb0a7254aecdc75467288758008a24a729e44a6863debe1ccea62",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy trening jest stracony, jeśli następnego dnia czujesz się dobrze?”: Mężczyzna po pięćdziesiątce rano z wodą i torbą treningową przygotowaną do kolejnej sesji. Zgodność z treścią potwierdza podpis: Dobre samopoczucie i sprawna kolejna sesja są ważne, ale nie mierzą snu REM, ryzyka zdrowotnego ani przewlekłego nawyku."
+      }
+    },
+    {
+      "placement": "section:Jak ograniczyć koszt alkoholu dla regeneracji?",
+      "alt": "Kobieta po pięćdziesiątce wybiera między winem przy kolacji a przygotowaniem do treningu",
+      "caption": "Praktyczna decyzja nie wymaga moralizowania: warto porównać przyjemność z alkoholu z kosztem snu i jakości kolejnej sesji.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/woman_wine_weights_choice.avif",
+          "sha256": "d728eb2daf6ff30e39fee8226ae384d5cfb74a1225c082a2ecdc4e1ceb2fdeb1",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/woman_wine_weights_choice.webp",
+          "sha256": "6b28f5dba039a3b68ed91cb2fb61e0b306489a53c47bf8ff9e1f79a404b09549",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/woman_wine_weights_choice.jpg",
+          "sha256": "35a4eed5a6227e8a80324e03311390f2123980dc936492ed6abb154c624903f1",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak ograniczyć koszt alkoholu dla regeneracji?”: Kobieta po pięćdziesiątce wybiera między winem przy kolacji a przygotowaniem do treningu. Zgodność z treścią potwierdza podpis: Praktyczna decyzja nie wymaga moralizowania: warto porównać przyjemność z alkoholu z kosztem snu i jakości kolejnej sesji."
+      }
+    },
+    {
+      "placement": "section:Jaki jest najprostszy test na własnej skórze?",
+      "alt": "Osoba po pięćdziesiątce zapisuje sen i wyniki treningu w prostym dzienniku przez kolejne dni",
+      "caption": "Stałe cztery obserwacje są bardziej użyteczne niż ogólne wrażenie, że po winie „chyba śpię dobrze”.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/wino-miesnie-dziennik-test-2026.avif",
+          "sha256": "a704057b03063622c6ea94d6bbd209654837929dfc35715aabc8667d3db4c176",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/wino-miesnie-dziennik-test-2026.webp",
+          "sha256": "7e6f577a4212b8fa8e4c1ad20c8ece6c28d15cae8e1f8974d802bcbb464df382",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/wino-miesnie-dziennik-test-2026.jpg",
+          "sha256": "9a28dcf056f692ef308776bcbcd69875f7071310a083015871f880073531dfee",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jaki jest najprostszy test na własnej skórze?”: Osoba po pięćdziesiątce zapisuje sen i wyniki treningu w prostym dzienniku przez kolejne dni. Zgodność z treścią potwierdza podpis: Stałe cztery obserwacje są bardziej użyteczne niż ogólne wrażenie, że po winie „chyba śpię dobrze”."
+      }
+    },
+    {
+      "placement": "section:Kiedy alkohol przestaje być tylko tematem formy?",
+      "alt": "Lekarka rozmawia z mężczyzną po pięćdziesiątce o alkoholu, lekach, śnie i wynikach zdrowotnych",
+      "caption": "Gdy pojawiają się objawy, interakcje z lekami lub utrata kontroli nad piciem, priorytetem jest rozmowa medyczna, a nie optymalizacja treningu.",
+      "width": 1536,
+      "height": 1024,
+      "variants": {
+        "avif": {
+          "file": "assets/wino-miesnie-rozmowa-lekarz-2026.avif",
+          "sha256": "3224abea7d317868e67444759d3328899cae56ee237b28ebb04fdd750eb52ffb",
+          "width": 1536,
+          "height": 1024
+        },
+        "webp": {
+          "file": "assets/wino-miesnie-rozmowa-lekarz-2026.webp",
+          "sha256": "b974344c07b46cf184defb47183f639fc8b573ae0c1894e84833485ac756ae81",
+          "width": 1536,
+          "height": 1024
+        },
+        "jpg": {
+          "file": "assets/wino-miesnie-rozmowa-lekarz-2026.jpg",
+          "sha256": "d7dfdcc3460bbc3ec474e39abee4a8a72e95a90c6de49a1aaac0abe0f1ef99cb",
+          "width": 1536,
+          "height": 1024
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy alkohol przestaje być tylko tematem formy?”: Lekarka rozmawia z mężczyzną po pięćdziesiątce o alkoholu, lekach, śnie i wynikach zdrowotnych. Zgodność z treścią potwierdza podpis: Gdy pojawiają się objawy, interakcje z lekami lub utrata kontroli nad piciem, priorytetem jest rozmowa medyczna, a nie optymalizacja treningu."
+      }
+    }
+  ]
+}

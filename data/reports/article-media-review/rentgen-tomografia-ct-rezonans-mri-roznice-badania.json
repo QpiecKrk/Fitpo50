@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "rentgen-tomografia-ct-rezonans-mri-roznice-badania",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "f2e99d0d36e78ef03f555bd0e41c008d100b615157278f0ab056235f012833dc",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Zestawienie wyglądu kolana na zdjęciu zewnętrznym, RTG, MRI i CT",
+      "caption": "",
+      "width": 1800,
+      "height": 982,
+      "variants": {
+        "avif": {
+          "file": "assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.avif",
+          "sha256": "51687740b3c366895dc13b3012206921e4388bbb55b348c8dfd2d702c6b0731d",
+          "width": 1800,
+          "height": 982
+        },
+        "webp": {
+          "file": "assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.webp",
+          "sha256": "91319c72bd3c8d98ba42b250789664db63f383696ff83467545661aa2d26a77e",
+          "width": 1800,
+          "height": 982
+        },
+        "jpg": {
+          "file": "assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.jpg",
+          "sha256": "a379cc32cd8739f40e78731d141fba9b7c7b6af48d7cd01ac07b96afa8dac796",
+          "width": 1800,
+          "height": 982
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Zestawienie wyglądu kolana na zdjęciu zewnętrznym, RTG, MRI i CT. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak powstaje obraz RTG, CT i MRI?",
+      "alt": "Oddzielne pracownie RTG, tomografii komputerowej i rezonansu magnetycznego",
+      "caption": "RTG, CT i MRI korzystają z różnych urządzeń i zjawisk fizycznych, dlatego odpowiadają na inne pytania kliniczne.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/rtg-ct-mri-rooms-2026.avif",
+          "sha256": "bee6896522a6b97dec2ef0b7fd6ab2e25c8047944dbb2e13c304c9a70d91e879",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/rtg-ct-mri-rooms-2026.webp",
+          "sha256": "dd57779e2f95365b37b5ae8dc217a5fc96815b7d33eb56b7f43dbbe198be264b",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/rtg-ct-mri-rooms-2026.jpg",
+          "sha256": "87c3e7e25853e02b98dda689b634d23a4bd2222f0cc2e722a5f6c8384236d9f9",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak powstaje obraz RTG, CT i MRI?”: Oddzielne pracownie RTG, tomografii komputerowej i rezonansu magnetycznego. Zgodność z treścią potwierdza podpis: RTG, CT i MRI korzystają z różnych urządzeń i zjawisk fizycznych, dlatego odpowiadają na inne pytania kliniczne."
+      }
+    },
+    {
+      "placement": "section:Kiedy częściej wybiera się RTG lub CT?",
+      "alt": "Techniczka przygotowuje pacjentkę do tomografii komputerowej w oddzielnej pracowni",
+      "caption": "CT jest szybkie i szczegółowe, lecz używa promieniowania X; wybór powinien wynikać z konkretnego pytania klinicznego.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/rtg-ct-choice-2026.avif",
+          "sha256": "16a3825a3a2ef379cd50359e6bd3478cbe0cce2ff545187574ccac269c4b43a3",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/rtg-ct-choice-2026.webp",
+          "sha256": "df4188da94e0105270a5efb9fac06464027cbb640f470c8d081442ffc7309b53",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/rtg-ct-choice-2026.jpg",
+          "sha256": "945914b51c3d2d97811ab8371423b8ebf0b9d4053678ff5e14edeb608b3c0505",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy częściej wybiera się RTG lub CT?”: Techniczka przygotowuje pacjentkę do tomografii komputerowej w oddzielnej pracowni. Zgodność z treścią potwierdza podpis: CT jest szybkie i szczegółowe, lecz używa promieniowania X; wybór powinien wynikać z konkretnego pytania klinicznego."
+      }
+    },
+    {
+      "placement": "section:Kiedy MRI ma przewagę i jakie ma ograniczenia?",
+      "alt": "Techniczka sprawdza kartę implantu przed wejściem pacjenta do pracowni MRI",
+      "caption": "Dokładny model implantu i warunki jego użycia są ważniejsze niż ogólna informacja, że urządzenie zawiera metal.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/mri-safety-screening-2026.avif",
+          "sha256": "e6df07e78ea8cea76c9890b6c54e6fc69c1c8896f5e96067311d44e86ad08eb1",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/mri-safety-screening-2026.webp",
+          "sha256": "dc2c370bb5b07957736ad42cdac3987d8f4c80d09cb25e8fae51f3e1f798d6fe",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/mri-safety-screening-2026.jpg",
+          "sha256": "09e3c1134079ccd49f0566a8c408731d28c44e64bdf600802f6301410f803bc3",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy MRI ma przewagę i jakie ma ograniczenia?”: Techniczka sprawdza kartę implantu przed wejściem pacjenta do pracowni MRI. Zgodność z treścią potwierdza podpis: Dokładny model implantu i warunki jego użycia są ważniejsze niż ogólna informacja, że urządzenie zawiera metal."
+      }
+    },
+    {
+      "placement": "section:Co trzeba wiedzieć o kontraście?",
+      "alt": "Zespół radiologii sprawdza wkłucie i kwalifikację przed podaniem kontrastu",
+      "caption": "Przed kontrastem liczy się rodzaj badania, wcześniejsze reakcje, czynność nerek, leki i instrukcja konkretnej pracowni.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/contrast-preparation-2026.avif",
+          "sha256": "b45ca2247d1f2caf45f98639987a7156e0a072b84049217e453040515e8f2abc",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/contrast-preparation-2026.webp",
+          "sha256": "1607e70b9e7cc1ac1e5b067bbc9522806f6db8c6cc9827d276ccd8bcadd2860f",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/contrast-preparation-2026.jpg",
+          "sha256": "1a1ef29c39c5fe5a62e6bd3f2484b1f43e3440951fca97fbe9fee94470388d1e",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co trzeba wiedzieć o kontraście?”: Zespół radiologii sprawdza wkłucie i kwalifikację przed podaniem kontrastu. Zgodność z treścią potwierdza podpis: Przed kontrastem liczy się rodzaj badania, wcześniejsze reakcje, czynność nerek, leki i instrukcja konkretnej pracowni."
+      }
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "97cdc7b13b16bccb1b36622eba683de61d144517e820d8b0aab58aeccd6ceaf0",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Dojrzała kobieta wykonuje zadanie wzrokowe podczas badania ruchów oczu",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-hero-2026.avif",
+          "sha256": "38038a1e1f03de56b7c06872c5bd81491736d4331fa7aec2fa62709a05ed6ad4",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sakady-hero-2026.webp",
+          "sha256": "36f302d754e4ba733b7029d4850f2216db4a78607b7a7288001b1e568f6ea774",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sakady-hero-2026.jpg",
+          "sha256": "276c14f8111ecf61b81f543373fcd6b2e8ffa46e190c220ec957efa13ffbb540",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Dojrzała kobieta wykonuje zadanie wzrokowe podczas badania ruchów oczu. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym są sakady i fiksacje?",
+      "alt": "Dojrzały mężczyzna obserwuje figury podczas pomiaru punktów fiksacji i sakad",
+      "caption": "Podczas fiksacji oko zbiera szczegóły, a krótka sakada przenosi spojrzenie do kolejnego punktu sceny.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-fiksacje.avif",
+          "sha256": "e2ceada7d58b807200a6184ac9793b2fc4f5957fc4f483e9a1e47535c706509e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sakady-fiksacje.webp",
+          "sha256": "37b6e390a02d2b1831b9d70be5729773b0cbe890aff2f10330ce525310222e5b",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sakady-fiksacje.jpg",
+          "sha256": "55a80c06720ed6da14560851a68b60c4acfb83ff339915e20a64151ee992fe17",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym są sakady i fiksacje?”: Dojrzały mężczyzna obserwuje figury podczas pomiaru punktów fiksacji i sakad. Zgodność z treścią potwierdza podpis: Podczas fiksacji oko zbiera szczegóły, a krótka sakada przenosi spojrzenie do kolejnego punktu sceny."
+      }
+    },
+    {
+      "placement": "section:Na czym polega supresja sakadyczna?",
+      "alt": "Sekwencja widoku przed ruchem oka, podczas sakady i po ponownej fiksacji",
+      "caption": "W czasie sakady czułość na część bodźców spada, lecz wzrok nie wyłącza się całkowicie jak migawka aparatu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-supresja.avif",
+          "sha256": "024e0ccaa8fc97ec04d2a3b24036e24a57caf4a92bda8cc930004eed50e11ed5",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sakady-supresja.webp",
+          "sha256": "bb14a406b84884295f6d10ef0829e02165ef4e0003ed1fe2a8f9aca08e61c43a",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sakady-supresja.jpg",
+          "sha256": "610af316b0ecd5ac7f0b65e2bba8e55b14f224dd84e3b63af556d554aa944638",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Na czym polega supresja sakadyczna?”: Sekwencja widoku przed ruchem oka, podczas sakady i po ponownej fiksacji. Zgodność z treścią potwierdza podpis: W czasie sakady czułość na część bodźców spada, lecz wzrok nie wyłącza się całkowicie jak migawka aparatu."
+      }
+    },
+    {
+      "placement": "section:Czy mózg uzupełnia brakujące chwile?",
+      "alt": "Dojrzała osoba ogląda obraz w muzeum podczas dwóch kolejnych fiksacji wzroku",
+      "caption": "Układ wzrokowy porównuje informacje z kolejnych fiksacji i aktualizuje położenie obiektów w stabilnej scenie.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-integracja.avif",
+          "sha256": "1dde069fd014456a23228e3b521265c57104274556742d0badff00f4930421fe",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sakady-integracja.webp",
+          "sha256": "80f5e69f609eb5636939acb28b80bd732c294c1cd67d6535f687aa1ddf7926cb",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sakady-integracja.jpg",
+          "sha256": "56ffe6f3c7645c702ca21f51ad47f0199deeee0d8cfef3f8ceafafb3f52bd8f0",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy mózg uzupełnia brakujące chwile?”: Dojrzała osoba ogląda obraz w muzeum podczas dwóch kolejnych fiksacji wzroku. Zgodność z treścią potwierdza podpis: Układ wzrokowy porównuje informacje z kolejnych fiksacji i aktualizuje położenie obiektów w stabilnej scenie."
+      }
+    },
+    {
+      "placement": "section:Które objawy nie pasują do zwykłych sakad?",
+      "alt": "Okulistka bada siatkówkę dojrzałego pacjenta przy użyciu lampy szczelinowej",
+      "caption": "Nagłe błyski, nowe męty, cień w polu widzenia albo silny ból oka wymagają pilnej oceny medycznej.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-objawy-alarmowe.avif",
+          "sha256": "3a1c6822c6a321239ebf0fc07a59a4954622f72c7290bb60ee8c851d5ebdb73a",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sakady-objawy-alarmowe.webp",
+          "sha256": "6e04a24590e94b8dc2891af879527ae6c9f63b9889bef79b85f00a2bc3fcde69",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sakady-objawy-alarmowe.jpg",
+          "sha256": "059ffcd55250b89fa6a7cae233aeaa1df13816d4a091aae3bf68ee21280c4304",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Które objawy nie pasują do zwykłych sakad?”: Okulistka bada siatkówkę dojrzałego pacjenta przy użyciu lampy szczelinowej. Zgodność z treścią potwierdza podpis: Nagłe błyski, nowe męty, cień w polu widzenia albo silny ból oka wymagają pilnej oceny medycznej."
+      }
+    }
+  ]
+}

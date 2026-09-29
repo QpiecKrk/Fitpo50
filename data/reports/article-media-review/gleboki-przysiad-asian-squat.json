@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "gleboki-przysiad-asian-squat",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "7304407c13503d24d260128cd8163ecae55da535ee80ef20cc8099b4cf3cd483",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po pięćdziesiątce wykonuje kontrolowany głęboki przysiad z piętami na podłodze",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/deep-squat-hero-2026.avif",
+          "sha256": "3e8469dee25de4e8862c13c5d779fbce684e89628e6e7e2463b5c3ed565fee15",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/deep-squat-hero-2026.webp",
+          "sha256": "cae84c494479c6ddfcbf5743918b84d30dae1eca58a4fee52ca135202676f4d6",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/deep-squat-hero-2026.jpg",
+          "sha256": "9fdb15a0c2a67c902cd9c8e41f103507984cb781c48c0cd392633dcef6ca9e33",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po pięćdziesiątce wykonuje kontrolowany głęboki przysiad z piętami na podłodze. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę sprawdza głęboki przysiad?",
+      "alt": "Stawy biodrowe, kolanowe i skokowe podczas głębokiego przysiadu",
+      "caption": "Stawy biodrowe, kolanowe i skokowe podczas głębokiego przysiadu",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/sekcja-1-anatomia-przysiadu.avif",
+          "sha256": "f464471a8878e3b7f65b328f9db850324571d156d0ff0d31b59188386d54b2b8",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/sekcja-1-anatomia-przysiadu.webp",
+          "sha256": "8ce5a8d95c6078a3626aa0ac6608906e50b0a0f51119a4ce2078b1e43a038379",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/sekcja-1-anatomia-przysiadu.jpg",
+          "sha256": "2172a1a12bffed083c042abd1e317b73c7d58c06adac0e4d7db02dc9c6a953d7",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co naprawdę sprawdza głęboki przysiad?”: Stawy biodrowe, kolanowe i skokowe podczas głębokiego przysiadu. Zgodność z treścią potwierdza podpis: Stawy biodrowe, kolanowe i skokowe podczas głębokiego przysiadu"
+      }
+    },
+    {
+      "placement": "section:Czy głęboki przysiad jest bezpieczny dla kolan?",
+      "alt": "Fizjoterapeutka obserwuje ustawienie kolan podczas kontrolowanego przysiadu kobiety po pięćdziesiątce",
+      "caption": "Bezpieczeństwo zależy od kontroli ruchu, obciążenia, historii urazów i aktualnych objawów, a nie od samej głębokości.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/deep-squat-knee-review-2026.avif",
+          "sha256": "df7c45f8a1b7d5922100f183cb4105697690de824ae47a3ccf47698c700cbb65",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/deep-squat-knee-review-2026.webp",
+          "sha256": "1cde3c415b86115e45fff87c663f497916dc92379aae18c52d2adab9c3ce0a93",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/deep-squat-knee-review-2026.jpg",
+          "sha256": "d6a83b54bad74665ebf5208ff496fe5ec7a765192134c1963f54dee9b72579b9",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy głęboki przysiad jest bezpieczny dla kolan?”: Fizjoterapeutka obserwuje ustawienie kolan podczas kontrolowanego przysiadu kobiety po pięćdziesiątce. Zgodność z treścią potwierdza podpis: Bezpieczeństwo zależy od kontroli ruchu, obciążenia, historii urazów i aktualnych objawów, a nie od samej głębokości."
+      }
+    },
+    {
+      "placement": "section:Jak sprawdzić, co ogranicza głębokość?",
+      "alt": "Mężczyzna wykonuje przysiad przy stabilnym podparciu z klinami pod obiema piętami",
+      "caption": "Porównanie ruchu bez klina i z niewielkim uniesieniem pięt pomaga ocenić udział ruchomości stawu skokowego, ale nie zastępuje diagnozy.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/deep-squat-heel-wedge-test-2026.avif",
+          "sha256": "b6eaba43d88f2366693d043080a9c5fad9910d3adc0b86a197b1594df56457b0",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/deep-squat-heel-wedge-test-2026.webp",
+          "sha256": "443c85c5488b9562439d7b10132589b965b3c5e045cc9e74f2ceac4d78045405",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/deep-squat-heel-wedge-test-2026.jpg",
+          "sha256": "05c1ddce5d0681fab210f8f382af46b66cba71e25446bb36251eb0483e84beb0",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak sprawdzić, co ogranicza głębokość?”: Mężczyzna wykonuje przysiad przy stabilnym podparciu z klinami pod obiema piętami. Zgodność z treścią potwierdza podpis: Porównanie ruchu bez klina i z niewielkim uniesieniem pięt pomaga ocenić udział ruchomości stawu skokowego, ale nie zastępuje diagnozy."
+      }
+    },
+    {
+      "placement": "section:Jak progresować bez wymuszania pozycji?",
+      "alt": "Kobieta po sześćdziesiątce ćwiczy kontrolowany przysiad do stabilnego krzesła",
+      "caption": "Przysiad do krzesła pozwala dobrać powtarzalną głębokość i budować kontrolę przed trudniejszym wariantem.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/deep-squat-chair-progression-2026.avif",
+          "sha256": "a0e4f11547cc87f2818b0dd1f480a1a9de5e0f640403ebb2f713afaf43a2fcb4",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/deep-squat-chair-progression-2026.webp",
+          "sha256": "6e69994df432c1b5f9be8ad6e05a45d81e075a9683a03e55c59fbdd6088ffaa4",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/deep-squat-chair-progression-2026.jpg",
+          "sha256": "d86f425f93fc0dde6015eb25a2d4a7a0074a6116608e4b688b9ca8aad6a5ff3d",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak progresować bez wymuszania pozycji?”: Kobieta po sześćdziesiątce ćwiczy kontrolowany przysiad do stabilnego krzesła. Zgodność z treścią potwierdza podpis: Przysiad do krzesła pozwala dobrać powtarzalną głębokość i budować kontrolę przed trudniejszym wariantem."
+      }
+    }
+  ]
+}

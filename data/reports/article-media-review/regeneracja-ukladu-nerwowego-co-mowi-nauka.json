@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "regeneracja-ukladu-nerwowego-co-mowi-nauka",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "bf307b35ed312c7122d35040f9a955867a2e08f2093745187955a5b16da627bd",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po sześćdziesiątce ćwiczy precyzję dłoni z terapeutką zajęciową",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/nervous-system-rehab-hero-2026.avif",
+          "sha256": "4e84217f4d601bdb7145a75363f5e6cc9c2e550873d2f7b8daa5fefecc3bf8bf",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/nervous-system-rehab-hero-2026.webp",
+          "sha256": "b64fbff3570fa3bb2a4839a0ab5b11eee944f8eb3788ec01d48137937ff88151",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/nervous-system-rehab-hero-2026.jpg",
+          "sha256": "05db07e1b4ba82afd5b19fd23c47390c589adc81517c41d5a7f37797b80baf71",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po sześćdziesiątce ćwiczy precyzję dłoni z terapeutką zajęciową. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym różni się regeneracja nerwu od neuroplastyczności?",
+      "alt": "Porównanie neuroplastyczności mózgu z odrostem nerwu obwodowego",
+      "caption": "Porównanie neuroplastyczności mózgu z odrostem nerwu obwodowego",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/sekcja-1-neuroplastycznosc-vs-regeneracja.avif",
+          "sha256": "f36c673c098fee7e64b5b667aef784655d88db8236c08cf1f5db93421df78622",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/sekcja-1-neuroplastycznosc-vs-regeneracja.webp",
+          "sha256": "455334e51e8887b22f1ca3ecf14998164038c85f3d5dd1e0276d784a2e9bdebe",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/sekcja-1-neuroplastycznosc-vs-regeneracja.jpg",
+          "sha256": "6a36d4cd9506e8d64ef869bee0d3a0e2bda52b8b2ef5f595737116673812edf8",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym różni się regeneracja nerwu od neuroplastyczności?”: Porównanie neuroplastyczności mózgu z odrostem nerwu obwodowego. Zgodność z treścią potwierdza podpis: Porównanie neuroplastyczności mózgu z odrostem nerwu obwodowego"
+      }
+    },
+    {
+      "placement": "section:Czy nerw obwodowy odrasta 1 mm dziennie?",
+      "alt": "Terapeutka ocenia czucie palców i ruch dłoni po urazie nerwu obwodowego",
+      "caption": "Tempo odrostu aksonu nie jest równoznaczne z terminem odzyskania czucia lub siły; funkcję ocenia się w badaniu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/peripheral-nerve-hand-assessment-2026.avif",
+          "sha256": "bd94127f431ca996033c106b2a56a3ab724677f10112efa838f8a3ec251a9fcb",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/peripheral-nerve-hand-assessment-2026.webp",
+          "sha256": "c830eea37ff7660f779c43a228b949decb789fffe906a055ce1877c3afcc3f56",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/peripheral-nerve-hand-assessment-2026.jpg",
+          "sha256": "29ee82b4c1b83a78fea6b942dd90b11e92af050fb7e16ff10f6aac91ea5c3557",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy nerw obwodowy odrasta 1 mm dziennie?”: Terapeutka ocenia czucie palców i ruch dłoni po urazie nerwu obwodowego. Zgodność z treścią potwierdza podpis: Tempo odrostu aksonu nie jest równoznaczne z terminem odzyskania czucia lub siły; funkcję ocenia się w badaniu."
+      }
+    },
+    {
+      "placement": "section:Co ruch może zmienić w mózgu i układzie nerwowym?",
+      "alt": "Kobieta po sześćdziesiątce ćwiczy chód i równowagę pod nadzorem fizjoterapeutki",
+      "caption": "Rehabilitacja wykorzystuje powtarzany, celowany trening funkcji; nie oznacza to odtworzenia całej uszkodzonej tkanki.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/neurological-gait-rehab-2026.avif",
+          "sha256": "d98f2d5001bfad0ec7ec29dad3f1f0f79718abd5638a3b0aa29d1377172543f2",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/neurological-gait-rehab-2026.webp",
+          "sha256": "44cc538566e296f07e559c7e2275e09bd058269e640728303e10d891a683e98d",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/neurological-gait-rehab-2026.jpg",
+          "sha256": "5f89f58282025106c2a00900611cd2d92ea0f9e50d3619be257deacd9f747fe2",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co ruch może zmienić w mózgu i układzie nerwowym?”: Kobieta po sześćdziesiątce ćwiczy chód i równowagę pod nadzorem fizjoterapeutki. Zgodność z treścią potwierdza podpis: Rehabilitacja wykorzystuje powtarzany, celowany trening funkcji; nie oznacza to odtworzenia całej uszkodzonej tkanki."
+      }
+    },
+    {
+      "placement": "section:Które objawy wymagają pilnej diagnostyki?",
+      "alt": "Ratowniczka ocenia opadanie jednej ręki podczas testu FAST u starszego mężczyzny",
+      "caption": "Nagłe opadnięcie twarzy, osłabienie ręki lub zaburzenia mowy wymagają natychmiastowego wezwania pomocy.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/stroke-fast-paramedic-check-2026.avif",
+          "sha256": "80d153a0f6c1676e7611896f37eff3c5d6616b5e9ee9b59636c9b363aae5b190",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/stroke-fast-paramedic-check-2026.webp",
+          "sha256": "ac0a0ea375e42f99ec21e1897597b76749e9033fe2fd7fdd36bcbe7783bec050",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/stroke-fast-paramedic-check-2026.jpg",
+          "sha256": "2d48b90c251d6fe2cc447efbe9d06348b1d504af2d8fa669b2e8faf1782dc1c8",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Które objawy wymagają pilnej diagnostyki?”: Ratowniczka ocenia opadanie jednej ręki podczas testu FAST u starszego mężczyzny. Zgodność z treścią potwierdza podpis: Nagłe opadnięcie twarzy, osłabienie ręki lub zaburzenia mowy wymagają natychmiastowego wezwania pomocy."
+      }
+    }
+  ]
+}

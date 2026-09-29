@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-29T17:49:18.180Z",
+  "slug": "szczepionki-covid-skutki-uboczne-mity-i-fakty",
+  "html_sha256": "93d8fab9a7c65fad134ce68baaee9c2fcf61e44ad13b341b94fe52d821a4626f",
+  "site_html_sha256": "93d8fab9a7c65fad134ce68baaee9c2fcf61e44ad13b341b94fe52d821a4626f",
+  "pdf_sha256": "236c454132924ebb430bba23412f5e8d9288ed2dad403a735ea84593949455e0",
+  "site_pdf_sha256": "236c454132924ebb430bba23412f5e8d9288ed2dad403a735ea84593949455e0",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

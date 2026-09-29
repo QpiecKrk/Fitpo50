@@ -3,6 +3,7 @@
 ## Zakres modułu
 - Moduł `NEWS` dotyczy wyłącznie sekcji szybkich newsów na `index.html` (kotwica `#news`) oraz panelu admin dla newsów.
 - Logika NEWS jest oddzielona od modułów `Porady` i `Moje Sukcesy`.
+- Pełny artykuł utworzony na podstawie newsa trafia do modułu `Porady` i od początku przechodzi pełny Quality Gate z `ARTICLE_STANDARD.md`; reguły skróconego feedu NEWS nie zastępują bramek artykułu.
 - `Mity` to osobna kategoria artykułów w module `Porady` (`mity.html`), nie część modułu NEWS.
 - Usunięcie linku `News` z górnego menu nie oznacza usunięcia sekcji NEWS z `index.html`.
 - Nie mieszamy tabel/biznes-logiki `entries/media` z danymi newsów.

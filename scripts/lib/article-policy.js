@@ -198,7 +198,11 @@ const POLICY = {
     'zrodla',
     'źródła',
     'szybka odpowiedź',
-    'szybka odpowiedz'
+    'szybka odpowiedz',
+    'szybkie odpowiedzi (q&a)?',
+    'cytaty do zapamiętania?',
+    'w skrócie (ai)?',
+    'czytaj też?'
   ]
 };
 

@@ -11,6 +11,8 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 
 - Artykul to pojedyncza strona docelowa.
 - Obowiazuje kanoniczny standard z `ARTICLE_STANDARD.md` (bez recznych wariantow layoutu).
+- Ten sam pelny Quality Gate obowiazuje nowy artykul, import, aktualizacje, `popraw-seo` i `napraw paczke N`. Kontrolujemy cala strone i wszystkie artefakty, a nie tylko zmieniony fragment.
+- Liczba sekcji wynika z tematu i intencji. Artykul ma byc wyczerpujacy i interesujacy, bez generycznych dopiskow ani sztucznego wydluzania.
 - Kanoniczny flow publikacji: `scripts/import-article.js` z plikow `.fitpo50.json` (zawsze z precheck).
 - Plik `.fitpo50.json` jest wsadem roboczym do importu; po udanej publikacji finalnym zrodlem jest HTML + assety + PDF + indeksy, a JSON nie musi zostawac w repo.
 - Roboczych JSON-ow w `data/import/*.fitpo50.json` nie commitujemy, jesli finalny HTML jest gotowy i JSON blokuje `json:gate:diff`.
@@ -29,7 +31,7 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Naglowek sekcji "Czytelnia" ma byc index-style (`.reading-room__head` + ikona), nie wariant alternatywny.
 - Interlinking w tresci: minimum 4 linki wewnetrzne osadzone w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
 - Crosslinki wewnetrzne dopinamy recznie po imporcie (kontrola redakcyjna); nie przenosimy automatycznie linkow z promptu/modelu.
-- FAQ: jesli JSON dostarczy za malo pytan, importer ma dopisac brakujace automatycznie (bank pytan sieciowych/PAA), a nie przerywac publikacji.
+- FAQ: importer nigdy nie generuje ani nie dopisuje brakujacych pytan. Kazde pytanie musi miec udokumentowane zrodlo w `faq_research[]` (GSC, PAA, autocomplete albo jawnie opisana analiza); brak wymaganej liczby wiarygodnych pytan blokuje publikacje.
 - Dopuszczamy bardziej wyrazisty styl artykulu (kolory, callouty, typografia, tabele), ale:
   - zachowujemy spojnosc z designem serwisu,
   - trzymamy max 2-3 rodziny fontow na artykul,
@@ -84,6 +86,7 @@ Callouty i bloki pomocnicze:
   - praktycznej wskazowki do wdrozenia.
 
 Obrazy i separatory:
+- Wymagany jest osobny hero i odrebny, obejrzany obraz dla kazdej glownej sekcji merytorycznej; sekcje uzytkowe nie sa liczone. Watermark sam w sobie nie blokuje obrazu, ale mylace napisy, liczby, anatomia, sprzet lub kontekst blokuja publikacje.
 - Gdy w sekcji wystepuja 2+ obrazki pod rzad, grupujemy je:
   - wrapper `.figure-stack`,
   - podpis grupy `.figure-stack__label`,

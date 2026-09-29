@@ -221,8 +221,8 @@ function readGsc(inputDir) {
   const pageWindows = {};
   for (const days of [7, 28, 90]) {
     pageWindows[`day_${days}`] = {
-      current: readCsvIfExists(path.join(inputDir, `web-${days}d-current-pages.csv`)).map(mapGscRow),
-      previous: readCsvIfExists(path.join(inputDir, `web-${days}d-previous-pages.csv`)).map(mapGscRow),
+      current: readCsvIfExists(path.join(inputDir, `web-${days}-current-pages.csv`)).map(mapGscRow),
+      previous: readCsvIfExists(path.join(inputDir, `web-${days}-previous-pages.csv`)).map(mapGscRow),
     };
   }
   return {
@@ -558,7 +558,7 @@ function visibilityDiagnosis(page, metrics, performance, inspection) {
   const position = Number(metrics?.position || 0);
   if (!impressions) return `ZERO_VISIBILITY_${inspectionDiagnosis(inspection)}`;
   if (performance?.conclusion === 'DECLINING_REFRESH' || performance?.conclusion === 'CTR_DROP') return 'DECLINING';
-  if (position > 0 && position <= 10 && (clicks === 0 || ctr < 1)) return 'CTR_GAP_TOP10';
+  if (impressions >= 30 && position > 0 && position <= 10 && (clicks === 0 || ctr < 1)) return 'CTR_GAP_TOP10';
   if (position > 10 && position <= 30) return 'POSITION_11_30';
   if (position > 30) return 'DEEP_31_100';
   if (clicks > 0) return 'VISIBLE_CLICKING';
@@ -1441,5 +1441,6 @@ module.exports = {
   collectPages,
   concreteRequiredAction,
   parseNumber,
+  readGsc,
   visibilityDiagnosis,
 };

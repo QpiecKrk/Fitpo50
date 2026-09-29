@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+  <title>Interpretator wyników badań | Narzędzia FitPo50</title>
+  <meta name="description" content="Porównaj wynik z zakresem własnego laboratorium i sprawdź, co mierzy badanie oraz jaki może być rozsądny następny krok.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://fitpo50.pl/interpretator-wynikow-badan.html">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css?v=1.4">
+  <link rel="stylesheet" href="./assets/footer.css?v=1">
+  <link rel="stylesheet" href="./assets/tools-hub.css?v=1">
+  <link rel="stylesheet" href="./assets/lab-results-interpreter.css?v=2">
+  <link rel="icon" href="./favicon.png" type="image/png"><link rel="apple-touch-icon" href="./favicon.png">
+</head>
+<body class="tools-page lab-page">
+  <div class="tools-shell">
+    <header class="tools-topbar">
+      <a class="tools-brand" href="index.html" aria-label="FitPo50 — strona główna">
+        <img class="tools-brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" width="112" height="112" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
+        <span class="tools-brand__text"><span class="tools-brand__name">FitPo50</span><span class="tools-brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span></span>
+      </a>
+      <a class="lab-back" href="narzedzia.html">← Wszystkie narzędzia</a>
+    </header>
+
+    <main>
+      <section class="lab-hero" aria-labelledby="lab-title">
+        <div class="lab-hero__copy">
+          <span class="tools-kicker">Interpretator wyników badań</span>
+          <h1 id="lab-title">Masz wynik.<br><em>Zobacz, co z niego wynika.</em></h1>
+          <p>Przepisz wartość oraz zakres podany przez Twoje laboratorium. Dostaniesz jasne wyjaśnienie i następny krok, bez diagnozy z jednej liczby.</p>
+        </div>
+        <figure class="lab-hero__visual">
+          <picture><source srcset="./assets/lab-results-human-v1.webp" type="image/webp"><img src="./assets/lab-results-human-v1.png" width="1254" height="1254" loading="eager" fetchpriority="high" decoding="async" alt="Kobieta po pięćdziesiątce porównująca wynik badania z zakresem laboratorium za pomocą lupy"></picture>
+          <div class="lab-hero__count" aria-label="Zakres narzędzia"><strong>11</strong><span>częstych badań</span></div>
+          <figcaption><strong>Patrz na wynik razem z zakresem.</strong> Przepisz granice dokładnie z dokumentu otrzymanego z laboratorium.</figcaption>
+        </figure>
+      </section>
+
+      <section class="lab-workspace" aria-label="Interpretacja wyniku badania">
+        <form class="lab-form" data-lab-form novalidate>
+          <header><span class="tools-section-kicker">Przepisz z wyniku</span><h2>Badanie i zakres laboratorium</h2><p>Zakres znajdziesz zwykle obok wyniku. Może mieć dwie granice, tylko górną albo tylko dolną.</p></header>
+
+          <label class="lab-field lab-field--wide">
+            <span><i>1</i>Jakie to badanie?</span>
+            <select name="test" data-lab-test required>
+              <option value="">Wybierz badanie</option>
+              <option value="glucose">Glukoza na czczo</option>
+              <option value="hba1c">Hemoglobina glikowana HbA1c</option>
+              <option value="ldl">Cholesterol LDL</option>
+              <option value="hdl">Cholesterol HDL</option>
+              <option value="triglycerides">Trójglicerydy</option>
+              <option value="creatinine">Kreatynina w surowicy</option>
+              <option value="egfr">eGFR</option>
+              <option value="alt">ALT</option>
+              <option value="ast">AST</option>
+              <option value="tsh">TSH</option>
+              <option value="crp">CRP standardowe</option>
+            </select>
+          </label>
+
+          <div class="lab-form__row lab-form__row--context">
+            <label class="lab-field"><span><i>2</i>Wiek <small>(potrzebny dla kreatyniny)</small></span><span class="lab-control"><input type="number" name="age" min="50" max="120" step="1" inputmode="numeric" placeholder="np. 58"><b>lat</b></span></label>
+            <label class="lab-field"><span><i>3</i>Płeć we wzorze eGFR <small>(dla kreatyniny)</small></span><select name="sex"><option value="">Wybierz</option><option value="female">Kobieta</option><option value="male">Mężczyzna</option></select></label>
+          </div>
+
+          <div class="lab-form__row lab-form__row--value">
+            <label class="lab-field"><span><i>4</i>Twój wynik</span><input type="number" min="0" step="any" inputmode="decimal" placeholder="np. 96" data-lab-value required></label>
+            <label class="lab-field"><span>Jednostka</span><select data-lab-unit disabled required><option value="">Najpierw wybierz badanie</option></select></label>
+          </div>
+
+          <fieldset class="lab-range">
+            <legend><i>5</i>Zakres z Twojego laboratorium</legend>
+            <p>Przepisz co najmniej jedną granicę. Nie korzystaj z zakresu znalezionego przypadkowo w internecie.</p>
+            <div class="lab-form__row">
+              <label class="lab-field"><span>Dolna granica <small>(jeśli jest)</small></span><span class="lab-control"><input type="number" min="0" step="any" inputmode="decimal" placeholder="np. 70" data-lab-lower><b data-lab-unit-label>jednostka</b></span></label>
+              <label class="lab-field"><span>Górna granica <small>(jeśli jest)</small></span><span class="lab-control"><input type="number" min="0" step="any" inputmode="decimal" placeholder="np. 99" data-lab-upper><b data-lab-unit-label>jednostka</b></span></label>
+            </div>
+          </fieldset>
+
+          <p class="lab-error" data-lab-error role="alert" hidden></p>
+          <button class="lab-submit" type="submit">Wyjaśnij mój wynik <span>→</span></button>
+          <p class="lab-privacy">Obliczenie odbywa się w przeglądarce. Wpisane dane nie opuszczają urządzenia.</p>
+        </form>
+
+        <section class="lab-result" aria-live="polite" aria-labelledby="lab-result-heading">
+          <div class="lab-result__empty" data-lab-empty>
+            <span aria-hidden="true">↗</span>
+            <h2 id="lab-result-heading">Tutaj wyjaśnimy Twój wynik</h2>
+            <p>Najpierw porównamy go z zakresem z wydruku. Potem wyjaśnimy, co mierzy badanie i co warto sprawdzić dalej.</p>
+          </div>
+
+          <div class="lab-result__content" data-lab-content hidden>
+            <span class="lab-result__status" data-lab-status>—</span>
+            <strong class="lab-result__value" data-lab-result-value>—</strong>
+            <h2 data-lab-result-title>—</h2>
+
+            <article><h3>Co mierzy to badanie?</h3><p data-lab-measure></p></article>
+            <article><h3>Jak rozumieć ten wynik?</h3><p data-lab-meaning></p></article>
+            <article class="lab-result__next"><h3>Co zrobić dalej?</h3><p data-lab-next></p></article>
+
+            <aside class="lab-egfr" data-lab-egfr hidden>
+              <span>Orientacyjne eGFR z CKD-EPI 2021</span>
+              <strong data-lab-egfr-value>—</strong>
+              <p>To dodatkowy szacunek z kreatyniny, wieku i płci używanej przez równanie. Wynik laboratorium może się różnić; przy ważnych decyzjach klinicznych potrzebna jest profesjonalna ocena.</p>
+            </aside>
+
+            <div class="lab-result__links">
+              <a data-lab-article href="badania-krwi-po-50-jak-czesto.html">Czytaj w FitPo50 →</a>
+              <a data-lab-source href="#" target="_blank" rel="noopener noreferrer">Źródło medyczne →</a>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="lab-how" aria-labelledby="lab-how-title">
+        <div><span class="tools-section-kicker">Dlaczego przepisujesz zakres?</span><h2 id="lab-how-title">Każde laboratorium może podawać inny zakres</h2></div>
+        <div><p>Laboratoria mogą używać różnych metod i urządzeń. Dlatego przepisz zakres widoczny obok swojego wyniku.</p><p>Wynik w zakresie laboratorium nie zawsze oznacza, że osiągnięto cel leczenia. Dotyczy to szczególnie LDL-C, HbA1c, TSH i wyników nerkowych.</p></div>
+      </section>
+
+      <section class="tools-safety" aria-labelledby="lab-safety-title">
+        <div><span aria-hidden="true">🛡️</span></div>
+        <div><h2 id="lab-safety-title">Jedna liczba nie stawia diagnozy</h2><p>Jeśli masz nasilone lub nagłe objawy, skontaktuj się z personelem medycznym niezależnie od komunikatu narzędzia. Interpretator nie ocenia pilności leczenia i nie służy do zmieniania leków.</p></div>
+      </section>
+    </main>
+
+    <footer class="site-footer-bento" aria-label="Stopka FitPo50">
+      <div class="site-footer-bento__grid">
+        <section class="site-footer-bento__card" aria-label="O serwisie FitPo50"><div class="site-footer-bento__brand"><img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'"><div><h2 class="site-footer-bento__title">FitPo50.pl</h2><p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce.</p></div></div></section>
+        <section class="site-footer-bento__card"><h3 class="site-footer-bento__links-title">Narzędzia FitPo50</h3><p class="site-footer-bento__lead"><a href="narzedzia.html">Wróć do katalogu narzędzi</a></p></section>
+      </div>
+      <div class="site-footer-bento__bottom"><p class="site-footer-bento__copy">© 2026 FitPo50</p><p class="site-footer-bento__note">Treści mają charakter edukacyjny i informacyjny.</p></div>
+    </footer>
+  </div>
+  <script src="./dist/lab-results-interpreter.js?v=1" defer></script>
+</body>
+</html>

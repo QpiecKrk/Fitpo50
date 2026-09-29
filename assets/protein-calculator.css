@@ -648,3 +648,67 @@ html.night-shell .calculator-field.is-complete {
     grid-template-columns: 1fr;
   }
 }
+
+/* Human illustration added for the private tools preview. */
+.calculator-page .calculator-hero {
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
+}
+
+.calculator-hero__visual {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  padding: 18px 18px 0;
+  overflow: hidden;
+  border: 1px solid var(--tools-line);
+  border-radius: 28px;
+  background: radial-gradient(circle at 72% 24%, rgba(232,213,168,.72), transparent 15rem), linear-gradient(145deg,#f0f5ef,#fbfaf6);
+  box-shadow: 0 14px 34px rgba(40,64,50,.07);
+}
+
+.calculator-hero__visual picture {
+  display: grid;
+  place-items: end center;
+  min-height: 360px;
+}
+
+.calculator-hero__visual img {
+  display: block;
+  width: min(100%, 480px);
+  height: 390px;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.calculator-hero__range {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  display: grid;
+  gap: 4px;
+  padding: 13px 15px;
+  border-radius: 15px;
+  color: white;
+  background: rgba(22,43,56,.92);
+  box-shadow: 0 10px 24px rgba(22,43,56,.16);
+}
+
+.calculator-hero__range strong { font: 750 1.28rem/1 "Work Sans",sans-serif; }
+.calculator-hero__range span { color: rgba(255,255,255,.68); font: 700 .65rem/1 "Work Sans",sans-serif; text-transform: uppercase; letter-spacing: .05em; }
+.calculator-hero__visual figcaption { margin: 0 -18px; padding: 16px 20px 18px; color: #51615a; background: rgba(255,255,255,.86); font: 500 .78rem/1.45 "Work Sans",sans-serif; }
+.calculator-hero__visual figcaption strong { display: block; margin-bottom: 3px; color: var(--protein-navy); font-size: .88rem; }
+
+@media (max-width: 900px) {
+  .calculator-page .calculator-hero { grid-template-columns: 1fr; }
+  .calculator-hero__visual picture { min-height: 320px; }
+  .calculator-hero__visual img { height: 350px; }
+}
+
+@media (max-width: 620px) {
+  .calculator-hero__visual { padding: 12px 12px 0; border-radius: 22px; }
+  .calculator-hero__visual picture { min-height: 280px; }
+  .calculator-hero__visual img { height: 310px; }
+  .calculator-hero__range { top: 12px; left: 12px; padding: 11px 12px; }
+  .calculator-hero__visual figcaption { margin: 0 -12px; padding: 15px 17px 17px; }
+}

@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50",
+  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
+  "reviewed_html_sha256": "68f7d1418a53fa670b3b85f3f02cc58b88966f83ea6c0089114dd2a998a6959b",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kriokomora i medyczna komora hiperbaryczna pod nadzorem personelu",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/komory-hero-2026.avif",
+          "sha256": "1dce8549d64a619a9f07f9d624fcdb01fdfe23502a05e4cc0336c69c4ca56507",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/komory-hero-2026.webp",
+          "sha256": "a8af634f28e5dc955917ef319cc2a5e1c1a45ffb7be91f6419ae6dfcd2ff13c6",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/komory-hero-2026.jpg",
+          "sha256": "4268905599617dc42634293dddf7bf1c5e910e285edd45710ae0eb125ad8d848",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Kriokomora i medyczna komora hiperbaryczna pod nadzorem personelu. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym różni się kriokomora od HBOT?",
+      "alt": "Lekarz porównuje modele kriokomory i twardej komory hiperbarycznej",
+      "caption": "Modele pomagają zobaczyć podstawową różnicę: kriokomora wykorzystuje zimne powietrze, a HBOT tlen pod zwiększonym ciśnieniem.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/komory-roznice.avif",
+          "sha256": "afc459e405fb756cd479f66a1b307e997cbadb49d75fca549ec7e92f65667113",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/komory-roznice.webp",
+          "sha256": "b56b126c2e14a53acf2a36f412e0eba432927f6697e30cd6b44a3bf3b585bdf9",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/komory-roznice.jpg",
+          "sha256": "721de012b3b3a0d528ac7b2d154c412deb161bf34f2462b4232e40a43ec4f8e4",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym różni się kriokomora od HBOT?”: Lekarz porównuje modele kriokomory i twardej komory hiperbarycznej. Zgodność z treścią potwierdza podpis: Modele pomagają zobaczyć podstawową różnicę: kriokomora wykorzystuje zimne powietrze, a HBOT tlen pod zwiększonym ciśnieniem."
+      }
+    },
+    {
+      "placement": "section:Czy kriokomora rzeczywiście przyspiesza regenerację?",
+      "alt": "Dojrzały mężczyzna korzysta z kriokomory pod stałym nadzorem operatora",
+      "caption": "Krótką ekspozycję na zimno należy traktować jako procedurę z ryzykiem, a nie jako potwierdzone leczenie wielu dolegliwości.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/kriokomora-nadzor.avif",
+          "sha256": "8fe9416b47582dae9da6df70a136f976524df8d39f8d36d3c5702b23f7f7bb35",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/kriokomora-nadzor.webp",
+          "sha256": "e5e5c77dabafff9a146cd2f9ed6f0cbd9516f784996e73b7b1d32927ac840c83",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/kriokomora-nadzor.jpg",
+          "sha256": "d07d7b19d13cd22b877c812ed0abc02db526238e03e8b40c2a6c9de8405a3c13",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy kriokomora rzeczywiście przyspiesza regenerację?”: Dojrzały mężczyzna korzysta z kriokomory pod stałym nadzorem operatora. Zgodność z treścią potwierdza podpis: Krótką ekspozycję na zimno należy traktować jako procedurę z ryzykiem, a nie jako potwierdzone leczenie wielu dolegliwości."
+      }
+    },
+    {
+      "placement": "section:Kiedy HBOT jest leczeniem, a kiedy ofertą wellness?",
+      "alt": "Pacjent pozostaje pod obserwacją personelu podczas terapii w komorze hiperbarycznej",
+      "caption": "W medycznej HBOT parametry sesji i liczba zabiegów wynikają z rozpoznania oraz protokołu, a nie z uniwersalnego pakietu wellness.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/komora-hiperbaryczna-sekcja3.avif",
+          "sha256": "cd7e1c19d383a9c7b22f77c3f7dea515de2f442697caedf150c567807dce180c",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/komora-hiperbaryczna-sekcja3.webp",
+          "sha256": "a660e16f2b490e67755b6c41a2bde520b9c6c0738715dd5001e14e57c03073a5",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/komora-hiperbaryczna-sekcja3.jpg",
+          "sha256": "0de25fcdee3fb93af75f7d2c08ae34a04db3806820797fb231dd1329d6c157ea",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy HBOT jest leczeniem, a kiedy ofertą wellness?”: Pacjent pozostaje pod obserwacją personelu podczas terapii w komorze hiperbarycznej. Zgodność z treścią potwierdza podpis: W medycznej HBOT parametry sesji i liczba zabiegów wynikają z rozpoznania oraz protokołu, a nie z uniwersalnego pakietu wellness."
+      }
+    },
+    {
+      "placement": "section:Jak ocenić obietnice kliniki?",
+      "alt": "Lekarka i fizjoterapeuta porównują wyniki kilku badań nad krioterapią",
+      "caption": "Wiarygodna ocena sprawdza jakość badań, grupę pacjentów, protokół i mierzony wynik, zamiast opierać się na pojedynczej historii sukcesu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/kriokomora-dowody.avif",
+          "sha256": "c204b1f586b8662ba34911793d0334bc615b7840604628717e48aaad6c835d9e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/kriokomora-dowody.webp",
+          "sha256": "9d23c5cc4eea16ab136b0936ac0eebe90cc445ba014a918bf44c250b53b70bee",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/kriokomora-dowody.jpg",
+          "sha256": "8328250acc9ace4dda03df7796d6f1fad60f39d07ad77f603ef4c08eb0fff240",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak ocenić obietnice kliniki?”: Lekarka i fizjoterapeuta porównują wyniki kilku badań nad krioterapią. Zgodność z treścią potwierdza podpis: Wiarygodna ocena sprawdza jakość badań, grupę pacjentów, protokół i mierzony wynik, zamiast opierać się na pojedynczej historii sukcesu."
+      }
+    },
+    {
+      "placement": "section:Kto powinien szczególnie uważać?",
+      "alt": "Lekarka bada ucho dojrzałej pacjentki przed kwalifikacją do procedury ciśnieniowej",
+      "caption": "Ocena uszu, chorób płuc i serca, ciśnienia oraz przyjmowanych leków pomaga dobrać procedurę lub z niej zrezygnować.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/komory-kwalifikacja.avif",
+          "sha256": "70f7c1a0175a0a58e261e288664b262d4c3bb42b6f6fcfa173b917eb533293c8",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/komory-kwalifikacja.webp",
+          "sha256": "6060e67317b169b3af1b80a6c2f94f7401190cd60d65ed749b0f8e84338492a4",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/komory-kwalifikacja.jpg",
+          "sha256": "395e7dc001a758d24a605650a2714a8dbc5fad3f00e7c3143e3475ac74a1258c",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kto powinien szczególnie uważać?”: Lekarka bada ucho dojrzałej pacjentki przed kwalifikacją do procedury ciśnieniowej. Zgodność z treścią potwierdza podpis: Ocena uszu, chorób płuc i serca, ciśnienia oraz przyjmowanych leków pomaga dobrać procedurę lub z niej zrezygnować."
+      }
+    }
+  ]
+}

@@ -4,6 +4,7 @@ const fs = require('fs');
 const { pageKind } = require('./lib/publication-page-kind');
 const { validateTopicCenter } = require('./lib/topic-center-contract');
 const path = require('path');
+const { spawnSync } = require('child_process');
 const { validateArticleHeadContract } = require('./lib/article-head-contract');
 const { POLICY, utils, validators } = require('./lib/article-policy');
 
@@ -16,6 +17,14 @@ function validateArticleContract(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
   const warnings = [];
+
+  const consistency = spawnSync('python3', [path.join(__dirname, 'article-content-consistency.py'), filePath], { encoding: 'utf8' });
+  if (consistency.status !== 0) {
+    errors.push(`Nie wykonano kontroli spójności treści: ${consistency.stderr || consistency.error?.message || 'błąd procesu'}`);
+  } else {
+    try { errors.push(...JSON.parse(consistency.stdout).errors); }
+    catch (_error) { errors.push('Niepoprawny wynik kontroli spójności treści.'); }
+  }
 
   const head = validateArticleHeadContract(raw);
   errors.push(...head.errors);
@@ -87,6 +96,12 @@ function validateArticleContract(filePath) {
 
   const faqQuestions = countMatches(raw, /<(?:details|article)\s+class="faq-item"/gi);
   if (faqQuestions < 4) errors.push(`FAQ: za mało pytań (jest ${faqQuestions}, min 4).`);
+
+  const tableCount = countMatches(raw, /<table\b/gi);
+  const responsiveTableCount = countMatches(raw, /<div\b[^>]*class="[^"]*\barticle-table-wrap\b[^"]*"[^>]*>\s*<table\b/gi);
+  if (responsiveTableCount !== tableCount) {
+    errors.push(`Tabele bez kontenera .article-table-wrap: ${tableCount - responsiveTableCount}/${tableCount}.`);
+  }
 
   const hasBreadcrumbList = /"@type"\s*:\s*"BreadcrumbList"/i.test(raw);
   if (!hasBreadcrumbList) warnings.push('Brak schema BreadcrumbList.');
