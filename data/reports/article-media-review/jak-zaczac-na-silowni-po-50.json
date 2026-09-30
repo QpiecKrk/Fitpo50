@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "slug": "jak-zaczac-na-silowni-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "85356894880fba767b4cfbf2ea3d5af5e70ecf11e3f47dd1affd245aa05c664d",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Zadowolony 50-latek wchodzący na siłownię z plecaczkiem",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/poczatek-hero.avif",
+          "sha256": "491e7ff1e40be9084d014f42985f2c587942b3e89e1ea7edffa6f4d8bea4e197",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/poczatek-hero.webp",
+          "sha256": "5831a52f79242415f0f2e54d28e6b4310b0b2b4adc3b012f7ecaadc3ffca0977",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/poczatek-hero.jpg",
+          "sha256": "c14cc9262b6787b5a85b29ecaa0d8208bc3d8566156de90453e2a479d2ab23c1",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co daje trening siłowy po 50-tce?",
+      "alt": "Kobieta i mężczyzna po 50-tce trenują siłowo na maszynach i z hantlami",
+      "caption": "Regularny trening siłowy pomaga po 50-tce utrzymać mięśnie, siłę i sprawność potrzebną w codziennym życiu.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-korzysci-50plus-20260930.avif",
+          "sha256": "f04739adce6f984de95409994bacc3d6878d8b4e78b71830937da8f8a534e5a7",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/silownia-korzysci-50plus-20260930.webp",
+          "sha256": "e75d15f1207c7cfde7d1cc3861c2f8afff1c5c275602a3c1a846ff4d3d5d66db",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/silownia-korzysci-50plus-20260930.jpg",
+          "sha256": "024d48e498131443e604f5520caf23368aaf8554f0453ea0fb38d643f8eb5c65",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co daje trening siłowy po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Prawda o siłowni, której nikt Ci nie powie?",
+      "alt": "Osoby w różnym wieku spokojnie ćwiczą obok siebie w przyjaznej siłowni",
+      "caption": "Większość ćwiczących skupia się na własnym planie, dlatego pierwsza wizyta zwykle okazuje się mniej stresująca niż oczekiwano.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-atmosfera-bez-obaw-20260930.avif",
+          "sha256": "bc83b7fac95e1239c1917f53144e765b3369df21059ee3ab0152597b1b0cde9a",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/silownia-atmosfera-bez-obaw-20260930.webp",
+          "sha256": "455d3935d8292f712338141320e1de5c7ef3f75c3b11258ae719d29c2bc635a1",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/silownia-atmosfera-bez-obaw-20260930.jpg",
+          "sha256": "562b6744122087f87067c217bc5b3e9582a4972f270545a53cf000caef2af25e",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Prawda o siłowni, której nikt Ci nie powie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Pierwszy krok: trener personalny — jeden raz wystarczy?",
+      "alt": "Trener ustawia maszynę dla kobiety rozpoczynającej ćwiczenia po 50-tce",
+      "caption": "Jedna dobrze wykorzystana konsultacja może nauczyć ustawiania maszyn, podstaw techniki i bezpiecznego doboru obciążenia.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-trener-pierwsza-wizyta-20260930.avif",
+          "sha256": "ccd2421b1c0e487e81585177eda44c4d135aa77a9f4e6854d540bcf08533d801",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/silownia-trener-pierwsza-wizyta-20260930.webp",
+          "sha256": "ccc823b70f4b02f2147598ef235be09338582f7d885797fe5534f2e58952baaa",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/silownia-trener-pierwsza-wizyta-20260930.jpg",
+          "sha256": "f395eb4fc6f389654d354c621cca1eb7d2af813718e68f89c689d62f7df0e599",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Pierwszy krok: trener personalny — jeden raz wystarczy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Ubierz się tak, żeby dobrze się czuć?",
+      "alt": "Kobieta po 50-tce w wygodnym stroju przygotowana do wejścia na siłownię",
+      "caption": "Na początek wystarczą wygodne ubrania i stabilne buty; strój ma ułatwiać ruch i dawać poczucie swobody.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-wygodny-stroj-20260930.avif",
+          "sha256": "6d54caa8e1555a422151c617bf5b76ac1c37a07f41689c0b34b32f36e074b8b8",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/silownia-wygodny-stroj-20260930.webp",
+          "sha256": "8b8e1a1407afb93f16b5ddacc641d1716e4c775115cbfb713e91b80addab489b",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/silownia-wygodny-stroj-20260930.jpg",
+          "sha256": "1c0cfd8487b8f0d2af98ce77b1319bc030a20124fef6746f81ca780f8d8638b1",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ubierz się tak, żeby dobrze się czuć?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Plan na pierwsze 4 tygodnie — prosty jak budowa cepa?",
+      "alt": "Para po 50-tce wykonuje prosty trening i zapisuje postępy w notesie",
+      "caption": "W pierwszych tygodniach najważniejsze są regularność, opanowanie ruchów i spokojne zwiększanie liczby serii lub obciążenia.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-plan-cztery-tygodnie-20260930.avif",
+          "sha256": "def9f3a652fdd1f28ed8032d5f27a43704e5420fc0a9bd199fc6700fbe323700",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/silownia-plan-cztery-tygodnie-20260930.webp",
+          "sha256": "0a47b3dc4e629bbbacad80af929b7cc7e96001a309c0a358b53d662b056fe731",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/silownia-plan-cztery-tygodnie-20260930.jpg",
+          "sha256": "b24ce1aa92e80052cbfb1ee510a872dcc10647453863daddd7ffc4a5dcc2e046",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Plan na pierwsze 4 tygodnie — prosty jak budowa cepa?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co zabrać na pierwszą wizytę?",
+      "alt": "Buty ręcznik woda kłódka i torba przygotowane na pierwszą wizytę w siłowni",
+      "caption": "Buty, ręcznik, woda i kłódka wystarczą na pierwszą wizytę; resztę wyposażenia zapewnia zwykle klub.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-co-zabrac-20260930.avif",
+          "sha256": "c66ae740d97a1cca12a848ad3f446b505bbaa2db565c55a065a0febcec1beb52",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/silownia-co-zabrac-20260930.webp",
+          "sha256": "ac1577a2c5c1977e9086e3d618b62f56112c439583c79c71686959838ca3f415",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/silownia-co-zabrac-20260930.jpg",
+          "sha256": "9ffaaa3d6c7672ca9737955e73c794eb89c0523ee7c4d6003cc5f6454c6bb9f6",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co zabrać na pierwszą wizytę?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jedna rzecz, której się nie spodziewasz?",
+      "alt": "Grupa osób po 50-tce rozmawia po wspólnym treningu na siłowni",
+      "caption": "Regularne wizyty mogą przynieść coś więcej niż sprawność: znajome twarze, rozmowy i poczucie przynależności.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-spolecznosc-20260930.avif",
+          "sha256": "c1b951eb01726e3c943553add88521c0cf96386ffed24dbf9b22bad9edab38ac",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/silownia-spolecznosc-20260930.webp",
+          "sha256": "16784c950b6e7d3cdd211ff6447f575626ecdfc214e56e28251a46edfdc11208",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/silownia-spolecznosc-20260930.jpg",
+          "sha256": "87a908b76c7039972e8b2d8b66e52394f33c11c5d677ca08af8f73340004ebe3",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jedna rzecz, której się nie spodziewasz?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Podsumowanie — co naprawdę stoi na drodze?",
+      "alt": "Kobieta po 50-tce z torbą wchodzi po raz pierwszy do jasnej siłowni",
+      "caption": "Najtrudniejszy bywa pierwszy krok za drzwi klubu; później wystarczy prosty plan i konsekwentne, spokojne wizyty.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-pierwszy-krok-20260930.avif",
+          "sha256": "79d43175acbb560e23774fed51350478cd3d50d05becdefefffdc4083dc3b482",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/silownia-pierwszy-krok-20260930.webp",
+          "sha256": "203a0b6b0847bb188cc73163c839394988d0b2636f1d5d915d0ee719b39bc0be",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/silownia-pierwszy-krok-20260930.jpg",
+          "sha256": "6398c5a2df7194a1321021136cbbccabd3ddba7d3800a0fcbdaa84cb2e9e4dae",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Podsumowanie — co naprawdę stoi na drodze?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

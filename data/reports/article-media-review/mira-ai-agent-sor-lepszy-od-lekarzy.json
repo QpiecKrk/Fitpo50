@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "mira-ai-agent-sor-lepszy-od-lekarzy",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "3ce728c3fba764fd1631bd90bb1907a949466b678a83999f0c1c3fa059b93d2b",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Nocny szpitalny SOR z interfejsem agenta medycznego MIRA AI",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/mira-ai-sor-agent-hero.avif",
+          "sha256": "218e65e48d6dd12838fdc5b6eb1050744d4c15fdfe7115f8245d477e4dc34bb6",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/mira-ai-sor-agent-hero.webp",
+          "sha256": "776b0fb51705f5b00518c82a633003a785a2f73dd0b4efc4e0b6d6e87d866826",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/mira-ai-sor-agent-hero.jpg",
+          "sha256": "cdbbdaa28169d78fe5561d61f05458e68b26270213fe656b15914e5c7b8313fc",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Nocny szpitalny SOR z interfejsem agenta medycznego MIRA AI. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co dokładnie zbadano?",
+      "alt": "Schemat działania środowiska sandbox EHR systemu MIRA",
+      "caption": "Autorzy opublikowanego w „Nature” badania zbudowali środowisko symulujące pracę w elektronicznej dokumentacji medycznej.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-1-20260929.avif",
+          "sha256": "7e0b834f9b7019b4ef6f849b082ff26dcfa5df1b15dc3cce3afbdad12afc6ff4",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-1-20260929.webp",
+          "sha256": "e0d6dc6de57a3f4cdeece4115153d427eaf426d662a28a689bc69713e0187001",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-1-20260929.jpg",
+          "sha256": "36fb65ecaef1a6c571c07df31237dad2d6ab30489b71496df57c21c88740c746",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co dokładnie zbadano?”: Schemat działania środowiska sandbox EHR systemu MIRA. Zgodność z treścią potwierdza podpis: Autorzy opublikowanego w „Nature” badania zbudowali środowisko symulujące pracę w elektronicznej dokumentacji medycznej."
+      }
+    },
+    {
+      "placement": "section:Jak MIRA wypadła na tle lekarzy?",
+      "alt": "Wykres porównujący trafność MIRY i lekarzy",
+      "caption": "Dla wszystkich 574 przypadków raportowana trafność MIRA wyniosła 88,9%.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-2-20260929.avif",
+          "sha256": "ceb3d63ecf99bf787913248ae835998eee826fe2cf51c9a5d49cd7cbde6dc475",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-2-20260929.webp",
+          "sha256": "e5b1f01d44421bcac7e6f212d3b38d367e781f8829a632e4ccd37fc80371d41b",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-2-20260929.jpg",
+          "sha256": "e15f184ef61498887a1137f2dd806010355ed7503ea7f0f4393502b91e90f24b",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak MIRA wypadła na tle lekarzy?”: Wykres porównujący trafność MIRY i lekarzy. Zgodność z treścią potwierdza podpis: Dla wszystkich 574 przypadków raportowana trafność MIRA wyniosła 88,9%."
+      }
+    },
+    {
+      "placement": "section:Czy AI zlecała więcej badań?",
+      "alt": "System MIRA pracujący w elektronicznej dokumentacji medycznej",
+      "caption": "W publikacji MIRA obejmowała badaniami krwi 51,1% dostępnych analitów, a certyfikowani lekarze 28,3%.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-3-20260929.avif",
+          "sha256": "bc6bb8d95164f9087d08901e78f1a95c3735ae7e4941ffaa69da690d225f3329",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-3-20260929.webp",
+          "sha256": "58cae39a4f07bc200f35f7f54d1d88bf5188aa839b54b4feb03439160c84a261",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-3-20260929.jpg",
+          "sha256": "bae615f93bc64592c706bbe409724c288876c5c3ce5e7e913d7cb671924ff1d0",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy AI zlecała więcej badań?”: System MIRA pracujący w elektronicznej dokumentacji medycznej. Zgodność z treścią potwierdza podpis: W publikacji MIRA obejmowała badaniami krwi 51,1% dostępnych analitów, a certyfikowani lekarze 28,3%."
+      }
+    },
+    {
+      "placement": "section:Co musi się wydarzyć przed wdrożeniem?",
+      "alt": "Mapa drogowa wdrożenia AI w medycynie klinicznej – etapy i regulacje",
+      "caption": "Potrzebne są prospektywne badania w różnych szpitalach, z udziałem prawdziwych zespołów i pacjentów, oraz pomiar szkód, opóźnień, nierówności i kosztów.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-4-20260929.avif",
+          "sha256": "390c65294442ad2d87558c134c9db9fa1e6b7b5b4d179ff7c392ab8fedc6c598",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-4-20260929.webp",
+          "sha256": "15ff0369a8a3adbb2298ecd1dc12e5087aac8f1e435cc98dd843b7a6cfacb72f",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/mira-ai-agent-sor-lepszy-od-lekarzy-section-4-20260929.jpg",
+          "sha256": "1f5070fcdb5814982309c8d858ca7ffc3939be4c3784ebea2b442a778fd0a47e",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co musi się wydarzyć przed wdrożeniem?”: Mapa drogowa wdrożenia AI w medycynie klinicznej – etapy i regulacje. Zgodność z treścią potwierdza podpis: Potrzebne są prospektywne badania w różnych szpitalach, z udziałem prawdziwych zespołów i pacjentów, oraz pomiar szkód, opóźnień, nierówności i kosztów."
+      }
+    }
+  ]
+}

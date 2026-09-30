@@ -185,6 +185,7 @@ Artykuł nie przechodzi, jeśli:
 - Przed `CONTENT_READY` lokalna kontrola rzeczywistych plików zapisuje `media_manifest`: placement, temat, technikę, cel, nazwę źródła, wymiary, SHA-256, warianty oraz udokumentowany `visual_review`. Manifestu nie generuje Claude.
 - Kontrola wizualna ocenia zgodność obrazu z sekcją, prawdziwość widocznego tekstu i liczb, poprawność anatomii oraz sprzętu, kadr i brak mylących logo. Sam watermark nie jest błędem blokującym.
 - Każdy obraz wymaga AVIF, WebP i fallbacku JPG o zgodnych wymiarach. Hero ma minimum 1080×600 px, obraz sekcji minimum 900×500 px, a proporcja krajobrazowa mieści się w zakresie 1.2-2.1 i zgadza z deklaracją.
+- Obrazy w `assets/` są wysyłane z rocznym cache `immutable`. Zmiana zawartości obrazu wymaga nowej, wersjonowanej nazwy pliku oraz aktualizacji wszystkich odwołań w źródle, metadanych, manifeście mediów i `_site`. Nie wolno nadpisywać istniejącego obrazu pod tym samym publicznym URL-em.
 - Hash i sygnatura wizualna blokują duplikaty 1:1, niemal ten sam kadr oraz wariant przedstawiający inny obraz. Dla pakietu min. 3 obrazów wymagane są min. 3 techniki i 3 kompozycje; jedna nie może zajmować więcej niż połowy pakietu.
 - `alt` i `caption` muszą opisywać realną zawartość oraz mieć związek z konkretną sekcją. `visual_review.status=VERIFIED` wolno nadać dopiero po rzeczywistym obejrzeniu pliku i zapisaniu konkretnej notatki.
 - Obraz z mylącą liczbą, niepowiązanym tekstem, niezgodnym kadrem lub fałszywą pewnością jest odrzucany. Pipeline nie używa go jako fallbacku.
@@ -199,11 +200,14 @@ Artykuł nie przechodzi, jeśli:
 - Staging renderuje pełną stronę przy 1440 px i 390 px. Bramka blokuje przepełnienie poziome, tekst mniejszy niż 10 px, niezaładowane fonty, uszkodzone ilustracje i niezgodne proporcje `width`/`height`.
 - Animacje `reveal` oraz obrazy lazy-load są aktywowane przed zrzutem, aby screenshot przedstawiał finalny układ, a nie niewidoczne elementy oczekujące na IntersectionObserver.
 - Każda tabela musi pozostać semantycznym HTML w `.article-table-wrap` i mieć bezpośrednie `caption`, `thead`, `tbody`, nagłówki `th`, `scope="col"` w `thead` oraz `scope="row"` dla nagłówków w `tbody`. Obraz udający tabelę nie spełnia kontraktu.
+- Klasa `.sources-list` należy wyłącznie do elementu `<ol>`. Nie wolno nadawać jej zewnętrznemu wrapperowi, ponieważ podwójne marginesy i wcięcia powodują przepełnienie na mobile; długie adresy źródeł muszą mieć wymuszone bezpieczne zawijanie.
 - Fixer/importer nie może owijać bloków `table`, `div`, `figure`, `aside`, list, `blockquote` ani `pre` znacznikiem `<p>`.
 - PDF powstaje wyłącznie ze stagingowego HTML. Błąd renderowania tabeli lub ilustracji zatrzymuje generowanie; generator nie zamienia tabeli po cichu na tekst rozdzielony kreskami i nie pomija niedziałającego obrazu.
 - Każda strona PDF jest renderowana przez Poppler do PNG. Bramka kontroluje liczbę stron, A4, osadzenie fontów z mapą Unicode, granice każdego słowa, margines treści, komplet ilustracji oraz minimum 98% zgodności tekstu HTML→PDF.
+- Bramka stagingowa zbiera niezależnie błędy HTML i PDF. Wykryty wcześniej błąd mobilny nie może przerwać kontroli struktury, tekstu, obrazów ani renderów PDF.
 - Wszystkie wyrenderowane strony PDF trzeba obejrzeć. Lista źródeł wraz z disclaimerem ma pozostać czytelnym blokiem i nie może być przypadkowo rozdzielona między strony.
 - HTML source i `_site` oraz PDF source i `_site` muszą być identyczne 1:1. Po pełnym PASS powstaje raport `data/reports/article-preview/<slug>.json|md` ze statusem `PREVIEW_READY`.
+- Walidatory HTML nie mogą zależeć od kolejności atrybutów w poprawnym znaczniku. Meta, linki, nagłówki, wrappery tabel i pozostałe kontrakty rozpoznają atrybuty po nazwie i wartości.
 - Poprawki `popraw-seo` po akceptacji mogą być wdrażane wyłącznie przez manifest dokładnych operacji `replace_exact` z SHA-256 wersji wejściowej i udokumentowaną podstawą. Automat nie generuje tekstu podczas aplikacji i nie używa generycznych łączników.
 - Każdy zmieniony artykuł — target oraz strona źródłowa z nowym linkiem — otrzymuje nowe `dateModified`, PDF, mirror, sitemap lastmod, render desktop/mobile/PDF i walidację.
 - Lokalny PASS nie tworzy kolejki GSC. Wymagany jest dowód produkcyjny `LIVE_DEPLOYED_AND_VALIDATED`: HTTP 200, canonical, zgodne `dateModified`, obecność zatwierdzonego fragmentu, sitemap lastmod oraz prawidłowy PDF.

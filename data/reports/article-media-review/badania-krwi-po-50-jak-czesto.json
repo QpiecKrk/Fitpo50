@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "badania-krwi-po-50-jak-czesto",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "5fb1e6c882e3498d83c5d90246e3f5403cdae6c8e95d76b542a1b6a7f7da55a0",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Fiolki z krwią na ciemnym tle laboratoryjnym z widocznym harmonogramem badań dla osób po 50. roku życia",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-po-50-hero-20260929.avif",
+          "sha256": "d79e5c2badaf7fdfe3e3ebffd83e7b2c8d73dbb823354ff22e21d77e11d69d1e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/badania-krwi-po-50-hero-20260929.webp",
+          "sha256": "1792432e109e96160a851bc07675af5227566f067b7e9c5ad9b9715af145b1f9",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-po-50-hero-20260929.jpg",
+          "sha256": "b8770c5064a200e0fcad16f72d1437dcc046da2289870367279f35866e556c8d",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Fiolki z krwią na ciemnym tle laboratoryjnym z widocznym harmonogramem badań dla osób po 50. roku życia. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Od czego zacząć plan badań po 50-tce?",
+      "alt": "Jak zbudować własny harmonogram badań krwi po 50. roku życia?",
+      "caption": "Zbierz wcześniejsze wyniki, listę leków, choroby rodzinne, ciśnienie, masę ciała, palenie i nowe objawy.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-1-20260929.avif",
+          "sha256": "9eb9602b68ceb9d7a3b39c87b19e1dd2d8aff82f1f90a1964b1788f3a28a9c47",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-1-20260929.webp",
+          "sha256": "30d554c2898f5a4d4b28b420c48f6439241788767de2e6c9fcd77c8d677dcbd8",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-1-20260929.jpg",
+          "sha256": "4cd68df47566eb229ff6f5520093bc91a1be4e83192ba0898ce03277aa5061fd",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Od czego zacząć plan badań po 50-tce?”: Jak zbudować własny harmonogram badań krwi po 50. roku życia?. Zgodność z treścią potwierdza podpis: Zbierz wcześniejsze wyniki, listę leków, choroby rodzinne, ciśnienie, masę ciała, palenie i nowe objawy."
+      }
+    },
+    {
+      "placement": "section:Jak często kontrolować glukozę i lipidy?",
+      "alt": "Które badania krwi wymagają kontroli co 3 miesiące?",
+      "caption": "USPSTF zaleca przesiew w kierunku stanu przedcukrzycowego i cukrzycy u dorosłych 35–70 lat z nadwagą lub otyłością.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-2-20260929.avif",
+          "sha256": "8cc4256cf46133ee5545fdd4f8816dd041622d10ac0cb1273991399b7e55ed8a",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-2-20260929.webp",
+          "sha256": "f0f37e077c47a241e391c34ae7b9e5a8c9c9b46e45de775110022157b91bcffa",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-2-20260929.jpg",
+          "sha256": "9494d0d2fab0a6aad145a11ee0037406d7043e5d78c17afcac115d28aaa341d3",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak często kontrolować glukozę i lipidy?”: Które badania krwi wymagają kontroli co 3 miesiące?. Zgodność z treścią potwierdza podpis: USPSTF zaleca przesiew w kierunku stanu przedcukrzycowego i cukrzycy u dorosłych 35–70 lat z nadwagą lub otyłością."
+      }
+    },
+    {
+      "placement": "section:Czy morfologia, TSH i witamina D są obowiązkowe co rok?",
+      "alt": "Które badania krwi wystarczy wykonywać raz w roku?",
+      "caption": "Nie ma uniwersalnego zalecenia, aby każda bezobjawowa osoba wykonywała wszystkie te oznaczenia corocznie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-3-20260929.avif",
+          "sha256": "c6a7787bb794ea54a6b77f51f6b10fdeca3050c4ddedc536ebbd3a64bccdabc7",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-3-20260929.webp",
+          "sha256": "1e3f9ced707e27a73d3305d8f914f39c21da29e899f5db14f9dd0a8f7f067d8f",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-3-20260929.jpg",
+          "sha256": "dc77788515ad5c7e8cb326180496bc63f56e65b160006b63e90d1eda18e996cb",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy morfologia, TSH i witamina D są obowiązkowe co rok?”: Które badania krwi wystarczy wykonywać raz w roku?. Zgodność z treścią potwierdza podpis: Nie ma uniwersalnego zalecenia, aby każda bezobjawowa osoba wykonywała wszystkie te oznaczenia corocznie."
+      }
+    },
+    {
+      "placement": "section:Które badania wymagają wspólnej decyzji lub konkretnego wskazania?",
+      "alt": "Co z markerami nowotworowymi – kiedy i po co je badać?",
+      "caption": "PSA u mężczyzn 55–69 lat według USPSTF wymaga indywidualnej decyzji po rozmowie o korzyściach i szkodach; po 70 roku życia rutynowy przesiew nie jest zalecany.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-4-20260929.avif",
+          "sha256": "d08016b572ef7f4fae550ddbee0816ec558f0a3296a431513e00e7e5d21d2371",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-4-20260929.webp",
+          "sha256": "dfcde2c79ec42263459ad23bbf626e8b6c3a089a433641af86658b27287b609d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-po-50-jak-czesto-section-4-20260929.jpg",
+          "sha256": "072fb36daa7b02ab4c49ac6050a4006b4d4504b68b12a579b62d5ee50658d3e7",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Które badania wymagają wspólnej decyzji lub konkretnego wskazania?”: Co z markerami nowotworowymi – kiedy i po co je badać?. Zgodność z treścią potwierdza podpis: PSA u mężczyzn 55–69 lat według USPSTF wymaga indywidualnej decyzji po rozmowie o korzyściach i szkodach; po 70 roku życia rutynowy przesiew nie jest zalecany."
+      }
+    }
+  ]
+}

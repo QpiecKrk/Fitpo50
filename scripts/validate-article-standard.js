@@ -4,8 +4,9 @@ const fs = require('fs');
 const { pageKind } = require('./lib/publication-page-kind');
 const { validateTopicCenter } = require('./lib/topic-center-contract');
 const path = require('path');
-const { validateArticleHeadContract } = require('./lib/article-head-contract');
+const { validateArticleHeadContract, firstTagAttribute } = require('./lib/article-head-contract');
 const { utils, validators, POLICY } = require('./lib/article-policy');
+const { validateSemanticTableMarkup } = require('./article-preview-gate');
 
 function getHtmlFiles() {
   return fs.readdirSync(process.cwd())
@@ -26,7 +27,7 @@ function stripFaqBlock(articleContentHtml) {
 }
 
 function extractArticleContentHtml(raw) {
-  const startMatch = raw.match(/<article\s+class="article-content">/i);
+  const startMatch = raw.match(/<article\b(?=[^>]*\bclass="article-content")[^>]*>/i);
   if (!startMatch || startMatch.index === undefined) return '';
   const start = startMatch.index + startMatch[0].length;
   const endBySources = raw.search(/<h2\s+id="zrodla">/i);
@@ -72,7 +73,7 @@ function validateAnswerFirstParagraphs(raw, errors) {
 }
 
 function validateQuickAnswerBlock(articleContentHtml, errors, warnings, quickAnswerMode = 'strict') {
-  const blockMatch = articleContentHtml.match(/<section\s+class="quick-answer[^"]*"[\s\S]*?<\/section>/i);
+  const blockMatch = articleContentHtml.match(/<section\b(?=[^>]*\bclass="[^"]*\bquick-answer\b[^"]*")[^>]*>[\s\S]*?<\/section>/i);
   if (!blockMatch) {
     errors.push('Brak sekcji .quick-answer (Szybka odpowiedź).');
     return;
@@ -221,6 +222,26 @@ function validateInlineFiguresUsePicture(articleContentHtml, errors) {
     if (!/<img\b/i.test(figureHtml)) {
       errors.push(`Inline figure #${idx}: brak fallback <img>.`);
     }
+  }
+}
+
+function validateArticleTables(raw, errors) {
+  const tables = [...String(raw || '').matchAll(/<table\b[^>]*>[\s\S]*?<\/table>/gi)]
+    .map((match) => match[0]);
+  if (!tables.length) return;
+
+  const responsiveTables = [...String(raw || '').matchAll(
+    /<div\b(?=[^>]*\bclass=["'][^"']*\barticle-table-wrap\b[^"']*["'])[^>]*>\s*<table\b/gi,
+  )].length;
+  if (responsiveTables !== tables.length) {
+    errors.push(`Tabele bez kontenera .article-table-wrap: ${tables.length - responsiveTables}/${tables.length}.`);
+  }
+  validateSemanticTableMarkup(tables.join('\n')).forEach((error) => errors.push(error));
+}
+
+function validateSourcesListMarkup(raw, errors) {
+  if (/<(?!ol\b)[a-z][a-z0-9:-]*\b[^>]*\bclass=["'][^"']*\bsources-list\b[^"']*["'][^>]*>/i.test(String(raw || ''))) {
+    errors.push('Klasa .sources-list może występować wyłącznie na elemencie <ol>; wrapper źródeł wymaga odrębnej klasy.');
   }
 }
 
@@ -446,7 +467,7 @@ function isLegacyArticle(raw) {
   const cutoffRaw = String(POLICY.QUICK_ANSWER?.LEGACY_CUTOFF || '').trim();
   const cutoff = cutoffRaw ? new Date(`${cutoffRaw}T00:00:00+02:00`) : null;
   if (!cutoff || Number.isNaN(cutoff.getTime())) return false;
-  const publishedMeta = raw.match(/<meta\s+property="article:published_time"\s+content="([^"]+)"/i)?.[1] || '';
+  const publishedMeta = firstTagAttribute(raw, 'meta', 'property', 'article:published_time', 'content');
   const publishedSchema = extractPublishedDateFromLdJson(raw);
   const publishedRaw = String(publishedMeta || publishedSchema || '').trim();
   if (!publishedRaw) return true;
@@ -459,7 +480,7 @@ function isLegacyForTitleGate(raw) {
   const cutoffRaw = String(POLICY.TITLE?.STRICT_CUTOFF || '').trim();
   const cutoff = cutoffRaw ? new Date(`${cutoffRaw}T00:00:00+02:00`) : null;
   if (!cutoff || Number.isNaN(cutoff.getTime())) return isLegacyArticle(raw);
-  const publishedMeta = raw.match(/<meta\s+property="article:published_time"\s+content="([^"]+)"/i)?.[1] || '';
+  const publishedMeta = firstTagAttribute(raw, 'meta', 'property', 'article:published_time', 'content');
   const publishedSchema = extractPublishedDateFromLdJson(raw);
   const publishedRaw = String(publishedMeta || publishedSchema || '').trim();
   if (!publishedRaw) return true;
@@ -478,14 +499,14 @@ function validateFile(filePath) {
     { label: 'body.article-template', regex: /<body[^>]*class="[^"]*article-template[^"]*"/i },
     { label: 'body.article--kategoria', regex: /<body[^>]*class="[^"]*article--(ruch|jedzenie|zdrowie|ciekawe|mity)[^"]*"/i },
     { label: '.shell', regex: /class="shell"/i },
-    { label: 'header.topbar', regex: /<header\s+class="topbar"/i },
+    { label: 'header.topbar', regex: /<header\b(?=[^>]*\bclass="[^"]*\btopbar\b[^"]*")[^>]*>/i },
     { label: 'article-intro-grid', regex: /class="[^"]*article-intro-grid[^"]*"/i },
     { label: 'article-content', regex: /class="article-content"/i },
-    { label: 'Czytelnia index-style section', regex: /<section\s+class="reading-room porady-preview section-padding"\s+id="porady-preview">/i },
+    { label: 'Czytelnia index-style section', regex: /<section\b(?=[^>]*\bclass="[^"]*\breading-room\b[^"]*\bporady-preview\b[^"]*\bsection-padding\b[^"]*")(?=[^>]*\bid="porady-preview")[^>]*>/i },
     { label: 'Czytelnia head', regex: /class="reading-room__head\s+reveal"/i },
     { label: 'Czytelnia icon wrapper', regex: /class="title-with-icon"/i },
-    { label: 'bottom-nav', regex: /<nav\s+class="bottom-nav"/i },
-    { label: 'site-footer-bento', regex: /<footer\s+class="site-footer-bento"/i },
+    { label: 'bottom-nav', regex: /<nav\b(?=[^>]*\bclass="[^"]*\bbottom-nav\b[^"]*")[^>]*>/i },
+    { label: 'site-footer-bento', regex: /<footer\b(?=[^>]*\bclass="[^"]*\bsite-footer-bento\b[^"]*")[^>]*>/i },
     { label: 'style.css include', regex: /href="\.\/style\.css(\?v=[^"]+)?"/i },
     { label: 'article.css include', regex: /href="\.\/article\.css(\?v=[^"]+)?"/i }
   ];
@@ -509,7 +530,7 @@ function validateFile(filePath) {
 
   const bodyOpen = raw.search(/<body[^>]*>/i);
   const bodyClose = raw.search(/<\/body>/i);
-  const footerOpen = raw.search(/<footer\s+class="site-footer-bento"/i);
+  const footerOpen = raw.search(/<footer\b(?=[^>]*\bclass="[^"]*\bsite-footer-bento\b[^"]*")[^>]*>/i);
   if (bodyOpen === -1 || bodyClose === -1 || footerOpen === -1) {
     errors.push('Brak body/footer do walidacji położenia');
   } else if (!(footerOpen > bodyOpen && footerOpen < bodyClose)) {
@@ -591,12 +612,12 @@ function validateFile(filePath) {
     }
   }
 
-  const metaPublished = raw.match(/<meta\s+property="article:published_time"\s+content="([^"]+)"/i);
-  if (metaPublished && !POLICY.PATTERNS.ISO_DATE_TZ.test(metaPublished[1])) {
+  const metaPublished = firstTagAttribute(raw, 'meta', 'property', 'article:published_time', 'content');
+  if (metaPublished && !POLICY.PATTERNS.ISO_DATE_TZ.test(metaPublished)) {
     errors.push('article:published_time musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T08:00:00+02:00)');
   }
-  const metaModified = raw.match(/<meta\s+property="article:modified_time"\s+content="([^"]+)"/i);
-  if (metaModified && !POLICY.PATTERNS.ISO_DATE_TZ.test(metaModified[1])) {
+  const metaModified = firstTagAttribute(raw, 'meta', 'property', 'article:modified_time', 'content');
+  if (metaModified && !POLICY.PATTERNS.ISO_DATE_TZ.test(metaModified)) {
     errors.push('article:modified_time musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T09:30:00+02:00)');
   }
 
@@ -633,6 +654,8 @@ function validateFile(filePath) {
     validateAnswerFirstParagraphs(articleContentHtml, errors);
   }
   validateHeroShareContract(raw, errors);
+  validateArticleTables(raw, errors);
+  validateSourcesListMarkup(raw, errors);
   validateCitationsInBlogPosting(raw, errors);
   validateSpeakableTargetsQuickAnswer(raw, errors);
   validateBlogPostingAuthorIsPerson(raw, errors);
@@ -676,4 +699,10 @@ function main() {
   if (hasErrors) process.exit(1);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = {
+  validateArticleTables,
+  validateSourcesListMarkup,
+  validateFile,
+};

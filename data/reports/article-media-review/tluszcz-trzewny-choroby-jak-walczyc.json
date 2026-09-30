@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "tluszcz-trzewny-choroby-jak-walczyc",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "2ccf0b09582a8033384645e2d98e6c5ee0dcc633d4b4d208426ddec36c00bafb",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce mierzy obwód talii centymetrem, skupiona mina",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-hero.avif",
+          "sha256": "ff0b48840e637f63638a7393ac1d0108de3906e50254da693d5fd99636a9bee7",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-hero.webp",
+          "sha256": "20ed8a22f3ab88be66c45c8673e3fd49c1d9f87afb38a375ee34fbdf9d8fd4e8",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-hero.jpg",
+          "sha256": "96560462f9dc085ff5595d5d05dd8a69ed9b3525bde678587a3a1ae1ad6670b3",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po 50-tce mierzy obwód talii centymetrem, skupiona mina. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym tłuszcz trzewny różni się od podskórnego?",
+      "alt": "Anatomiczny przekrój brzucha pokazujący położenie tłuszczu trzewnego",
+      "caption": "Tkanka podskórna leży pod skórą, a trzewna w jamie brzusznej wokół narządów.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-1-20260929.avif",
+          "sha256": "964534874109f88f66283a0ebbc6b8d2151a0418823ee73dd5f004c036caad75",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-1-20260929.webp",
+          "sha256": "f0961cf1986c6791159e971c074eadefddea9b616961a33e8a84dec5db092787",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-1-20260929.jpg",
+          "sha256": "0cb9d5c0b87883935936b3c9f291c7b3f645c20502b938798bae8dcaa288f68d",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym tłuszcz trzewny różni się od podskórnego?”: Anatomiczny przekrój brzucha pokazujący położenie tłuszczu trzewnego. Zgodność z treścią potwierdza podpis: Tkanka podskórna leży pod skórą, a trzewna w jamie brzusznej wokół narządów."
+      }
+    },
+    {
+      "placement": "section:Jak prawidłowo mierzyć obwód pasa?",
+      "alt": "Kobieta po pięćdziesiątce prawidłowo mierzy obwód pasa",
+      "caption": "Używaj tej samej nieelastycznej taśmy, stań swobodnie i mierz po spokojnym wydechu w miejscu zgodnym z wybranym protokołem.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-2-20260929.avif",
+          "sha256": "3daa3045adef8255b4a159d272408627deef10653be2734ca879d4bc1c883130",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-2-20260929.webp",
+          "sha256": "0c4e15a79db013e44b330f44e0b150493b4e1cbcee2b2c0c878ccd50a76d129a",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-2-20260929.jpg",
+          "sha256": "ad521da7b82dd3e56175b8a1e61f324ffd20e5cfe2312174cf77dec4d1d64396",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak prawidłowo mierzyć obwód pasa?”: Kobieta po pięćdziesiątce prawidłowo mierzy obwód pasa. Zgodność z treścią potwierdza podpis: Używaj tej samej nieelastycznej taśmy, stań swobodnie i mierz po spokojnym wydechu w miejscu zgodnym z wybranym protokołem."
+      }
+    },
+    {
+      "placement": "section:Który rodzaj ruchu działa najlepiej?",
+      "alt": "Kobieta po pięćdziesiątce ćwiczy na rowerze stacjonarnym",
+      "caption": "Metaanalizy randomizowanych badań wskazują, że trening aerobowy, oporowy, łączony i interwałowy mogą zmniejszać tłuszcz trzewny u osób z nadwagą lub otyłością.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-3-20260929.avif",
+          "sha256": "a5cf3fd23a990c04f4e61217e7676cb8401adf5d2d5dd3e24ac8f45e024d3573",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-3-20260929.webp",
+          "sha256": "2057cf15c8d5f50c0dda2d7e540330490245c296fa48590b6e3f8bb19e3622d6",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-3-20260929.jpg",
+          "sha256": "75e6362c15e02d6a1db1b7c6f2d9fd3d61272b805765f818fe1866a2c682ebf5",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Który rodzaj ruchu działa najlepiej?”: Kobieta po pięćdziesiątce ćwiczy na rowerze stacjonarnym. Zgodność z treścią potwierdza podpis: Metaanalizy randomizowanych badań wskazują, że trening aerobowy, oporowy, łączony i interwałowy mogą zmniejszać tłuszcz trzewny u osób z nadwagą lub otyłością."
+      }
+    },
+    {
+      "placement": "section:Co poza treningiem pomaga zmniejszyć pas?",
+      "alt": "Spokojny sen jako element regeneracji i kontroli masy ciała",
+      "caption": "Zmiana diety działa przez całkowity bilans energii i możliwość utrzymania planu, nie przez pojedynczy produkt.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-4-20260929.avif",
+          "sha256": "25bbf4ef3bb93d4c0d1893c874b783cdd16afb4d60e847c74251017ca901bc44",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-4-20260929.webp",
+          "sha256": "f16c99de473c9e2427fe8fa584b28f5dca10f255fe66d012cb44b8cff1949577",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-4-20260929.jpg",
+          "sha256": "dc1046ac7cf4ca6905e7014f8665df05019ba0c1cd41c196f87a8e480c7b5dcd",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co poza treningiem pomaga zmniejszyć pas?”: Spokojny sen jako element regeneracji i kontroli masy ciała. Zgodność z treścią potwierdza podpis: Zmiana diety działa przez całkowity bilans energii i możliwość utrzymania planu, nie przez pojedynczy produkt."
+      }
+    }
+  ]
+}

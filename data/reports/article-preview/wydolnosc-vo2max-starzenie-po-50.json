@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T13:02:18.047Z",
+  "slug": "wydolnosc-vo2max-starzenie-po-50",
+  "html_sha256": "9dae096d2d4806684ad3623e9155e265956d842da8b432e6bc50619c4436acc0",
+  "site_html_sha256": "9dae096d2d4806684ad3623e9155e265956d842da8b432e6bc50619c4436acc0",
+  "pdf_sha256": "887612656122c44db325c5a4e5b3694c4ee53a321231cfba81cba5e102d873e7",
+  "site_pdf_sha256": "887612656122c44db325c5a4e5b3694c4ee53a321231cfba81cba5e102d873e7",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

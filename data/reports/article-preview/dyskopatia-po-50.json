@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:54:42.330Z",
+  "slug": "dyskopatia-po-50",
+  "html_sha256": "aed39768a47389f06a37cd8b7fc599b46efedfa6fa309b18e0df86c6cf0c5e56",
+  "site_html_sha256": "aed39768a47389f06a37cd8b7fc599b46efedfa6fa309b18e0df86c6cf0c5e56",
+  "pdf_sha256": "612449e97c4fd33627b3edde8cf1121758417f31df4751fc7e43b034afb57102",
+  "site_pdf_sha256": "612449e97c4fd33627b3edde8cf1121758417f31df4751fc7e43b034afb57102",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 2
+  },
+  "pdf": {
+    "pages": 9,
+    "text_coverage": 1,
+    "rendered_pages": 9
+  },
+  "errors": []
+}

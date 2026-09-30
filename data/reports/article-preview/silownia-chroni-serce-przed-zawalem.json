@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T13:00:01.368Z",
+  "slug": "silownia-chroni-serce-przed-zawalem",
+  "html_sha256": "d0cab0792807f957d4753eaa5951ba6ab17c676632d3d1985ca65270420f7ce0",
+  "site_html_sha256": "d0cab0792807f957d4753eaa5951ba6ab17c676632d3d1985ca65270420f7ce0",
+  "pdf_sha256": "ccc43279b1ca72d304193cce852433cd3dc88a78bc0c3de2c496e56fac2cf517",
+  "site_pdf_sha256": "ccc43279b1ca72d304193cce852433cd3dc88a78bc0c3de2c496e56fac2cf517",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 6,
+    "text_coverage": 1,
+    "rendered_pages": 6
+  },
+  "errors": []
+}

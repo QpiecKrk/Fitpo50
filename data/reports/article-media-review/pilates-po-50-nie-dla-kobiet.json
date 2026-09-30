@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "pilates-po-50-nie-dla-kobiet",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "fb1b3c3be989a9b6a01b4bfb69b3489b590c34486e17566672754402eee1f524",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce wykonuje ćwiczenia pilates w jasnym, nowoczesnym studiu",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/pilates-strong-man-hero.avif",
+          "sha256": "80d743851ed9ba29ecf987b43717c3601dc1033e030ae992a8428ace4216210a",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/pilates-strong-man-hero.webp",
+          "sha256": "924e98abe00e286b517c73ca953d6fe104102dadb09b9618e9466dbbafa517da",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/pilates-strong-man-hero.jpg",
+          "sha256": "b5f652afb7449c38d7f5e53450d743c8e3f3514245c2c8686aed219fe004dedf",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po 50-tce wykonuje ćwiczenia pilates w jasnym, nowoczesnym studiu. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co Pilates może poprawić po 50-tce?",
+      "alt": "Mężczyzna po 50-tce z idealną postawą w kawiarni — subtelna grafika anatomiczna rdzenia nałożona na zdjęcie",
+      "caption": "Badania u osób starszych wskazują możliwą poprawę równowagi, siły, elastyczności i funkcji, lecz wyniki zależą od programu i jakości badań.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-1-20260929.avif",
+          "sha256": "115d6cea14d1973c34e5f159e3b098a33fcc74f9e6801dd84eb15b6cdfe4d355",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-1-20260929.webp",
+          "sha256": "c65e3f7178c5ed33f4d30825b4a49d84874d617a87d366b8ccea71a8bf15d432",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-1-20260929.jpg",
+          "sha256": "2ad7d1e387d455028a623757e0af20705e9c9642882a54d929aaa4486d6a20d9",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co Pilates może poprawić po 50-tce?”: Mężczyzna po 50-tce z idealną postawą w kawiarni — subtelna grafika anatomiczna rdzenia nałożona na zdjęcie. Zgodność z treścią potwierdza podpis: Badania u osób starszych wskazują możliwą poprawę równowagi, siły, elastyczności i funkcji, lecz wyniki zależą od programu i jakości badań."
+      }
+    },
+    {
+      "placement": "section:Jak wygląda pierwsza sesja Pilatesu?",
+      "alt": "Para po 50-tce w studiu pilates śmieje się podczas nieudanego ćwiczenia równoważnego, instruktor uśmiecha się w tle",
+      "caption": "Zacznij od spokojnego oddechu, ustawienia żeber i miednicy, ślizgów pięt, naprzemiennego unoszenia stóp oraz mostu w bezbolesnym zakresie.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-2-20260929.avif",
+          "sha256": "936e972712f6dd0ae3c766cc9ee10f7172d5c555e33d118c57564327d2d9db7e",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-2-20260929.webp",
+          "sha256": "70be4811433718e5c565f430ec0976be3cbcc0f44931e4cab844eece5ef1e541",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-2-20260929.jpg",
+          "sha256": "29cb151563758ba81f1d41bbb3a6eadd5e055a809f306da83397123c9fefd8b9",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak wygląda pierwsza sesja Pilatesu?”: Para po 50-tce w studiu pilates śmieje się podczas nieudanego ćwiczenia równoważnego, instruktor uśmiecha się w tle. Zgodność z treścią potwierdza podpis: Zacznij od spokojnego oddechu, ustawienia żeber i miednicy, ślizgów pięt, naprzemiennego unoszenia stóp oraz mostu w bezbolesnym zakresie."
+      }
+    },
+    {
+      "placement": "section:Jak progresować bez przeciążania kręgosłupa?",
+      "alt": "Elegancka kobieta po 50-tce balansuje na pomoście przy marinie, śmiejąc się gdy prawie traci równowagę",
+      "caption": "Najpierw wydłuż dźwignię lub dodaj pojedyncze powtórzenia, zachowując neutralną kontrolę i swobodny oddech.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-3-20260929.avif",
+          "sha256": "f92c60f0035dac0164b4db6266a3443ce2b30052c35a97b783800d84fe4652eb",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-3-20260929.webp",
+          "sha256": "388db748620c5a57723b3d074ccbc82530ae6cc96d2c8453acde746c33c9419b",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-3-20260929.jpg",
+          "sha256": "43715c7221d094955821396eaee575e32f6e94913fb34cdb724b7ffce1b06a74",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak progresować bez przeciążania kręgosłupa?”: Elegancka kobieta po 50-tce balansuje na pomoście przy marinie, śmiejąc się gdy prawie traci równowagę. Zgodność z treścią potwierdza podpis: Najpierw wydłuż dźwignię lub dodaj pojedyncze powtórzenia, zachowując neutralną kontrolę i swobodny oddech."
+      }
+    },
+    {
+      "placement": "section:Czy Pilates wystarczy dla zdrowia po 50-tce?",
+      "alt": "Archiwalne i współczesne zestawienie: żołnierz ćwiczący na prowizorycznym sprzęcie i mężczyzna po 50-tce na reformerze pilates w nowoczesnym studiu",
+      "caption": "Nie musi. WHO zaleca dorosłym także aktywność aerobową oraz wzmacnianie głównych grup mięśni co najmniej dwa dni tygodniowo; starszym osobom z gorszą mobilnością potrzebny jest również ruch wieloskładnikowy z równowagą.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-4-20260929.avif",
+          "sha256": "d0e7db2aa6832f1f4e291fdf82df123a6ed4987c6cfbafa7e0e4ce1dd909de1a",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-4-20260929.webp",
+          "sha256": "02c505333d51fe44653eb3e2d5ab8a543cf8859cc54eaff7ebce50e49eab9db8",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/pilates-po-50-nie-dla-kobiet-section-4-20260929.jpg",
+          "sha256": "3bbb2ccf31e3bfcda539c83a85b4d1cf915701fae81cb57773d0e58267b92f5b",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy Pilates wystarczy dla zdrowia po 50-tce?”: Archiwalne i współczesne zestawienie: żołnierz ćwiczący na prowizorycznym sprzęcie i mężczyzna po 50-tce na reformerze pilates w nowoczesnym studiu. Zgodność z treścią potwierdza podpis: Nie musi. WHO zaleca dorosłym także aktywność aerobową oraz wzmacnianie głównych grup mięśni co najmniej dwa dni tygodniowo; starszym osobom z gorszą mobilnością potrzebny jest również ruch wieloskładnikowy z równowagą."
+      }
+    }
+  ]
+}

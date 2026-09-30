@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:57:53.540Z",
+  "slug": "mira-ai-agent-sor-lepszy-od-lekarzy",
+  "html_sha256": "3ce728c3fba764fd1631bd90bb1907a949466b678a83999f0c1c3fa059b93d2b",
+  "site_html_sha256": "3ce728c3fba764fd1631bd90bb1907a949466b678a83999f0c1c3fa059b93d2b",
+  "pdf_sha256": "785a6e8b461b16fb9f7b597c83c5d821019a5f1918ed7b7548beef01ea9f6023",
+  "site_pdf_sha256": "785a6e8b461b16fb9f7b597c83c5d821019a5f1918ed7b7548beef01ea9f6023",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

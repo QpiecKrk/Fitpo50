@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "czy-jajka-podnosza-cholesterol",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "19def6a76a9920d243913fe8fdf6295a2edbede5f54072376e097d02e5d3368e",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Uśmiechnięty mężczyzna po 50. roku życia je jajko na śniadanie w jasnej kuchni",
+      "caption": "",
+      "width": 1100,
+      "height": 600,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-hero-v2.avif",
+          "sha256": "f9ac1b2932cb523903a473e48333176de89b03439ec2868d0689b308bb1dd7d3",
+          "width": 1100,
+          "height": 600
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-hero-v2.webp",
+          "sha256": "d7e1426f9210c91967cbc015a4bac9a282f67f4ecbf0964a987a88ede6888cbc",
+          "width": 1100,
+          "height": 600
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-hero-v2.jpg",
+          "sha256": "0be4210ec7c1da8d3091a7a7817be260bfa10f7a0b38bbc9bcbd99b12fb89090",
+          "width": 1100,
+          "height": 600
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy jajka podnoszą cholesterol LDL?",
+      "alt": "Ilustracja wątroby regulującej własną produkcję cholesterolu po posiłku",
+      "caption": "Wątroba reguluje syntezę cholesterolu, ale ta kompensacja nie gwarantuje niezmiennego LDL.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-fabryka.avif",
+          "sha256": "a27de81e0e5b7b9e53901e0d98add7d90d5c786f9b7f63510487e485ddec711c",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-fabryka.webp",
+          "sha256": "1011df378f9be01ab6f6ec4813d013e8571910966a3d9c1582217983a388c18f",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-fabryka.jpg",
+          "sha256": "7ec72cab1c8124e0b6c3cb44fa51cef5e29b9ec799bfb44a9765483ee1b57b49",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy jajka podnoszą cholesterol LDL?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego reakcja LDL różni się między osobami?",
+      "alt": "Ilustracja kobiety i mężczyzny po 50. roku życia z różnymi reakcjami organizmu na ten sam produkt",
+      "caption": "Średnia zmiana LDL w badaniu nie przewiduje dokładnej reakcji pojedynczej osoby.",
+      "width": 1697,
+      "height": 927,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-reakcja-indywidualna.avif",
+          "sha256": "1250a3a8000b3cb96377e7cd936f115f428265da5d1203e6dbd754b511587900",
+          "width": 1697,
+          "height": 927
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-reakcja-indywidualna.webp",
+          "sha256": "8c79b36f96dd567cae8e0b57345e331fc44a14e504b6374830af17bcfd1dd43e",
+          "width": 1697,
+          "height": 927
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-reakcja-indywidualna.jpg",
+          "sha256": "fd1211099500a048cb04597ce43491261b885cc7f4e0f27b1e72f8b7e1091443",
+          "width": 1697,
+          "height": 927
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego reakcja LDL różni się między osobami?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego jajko i masło wpływają na LDL inaczej?",
+      "alt": "Infografika porównująca cholesterol pokarmowy w jajku z tłuszczami nasyconymi w maśle",
+      "caption": "Jajko i masło mogą wpływać na LDL, lecz robią to przez inne składniki i z inną przewidywalnością.",
+      "width": 1697,
+      "height": 927,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-jajko-vs-maslo-v2.avif",
+          "sha256": "d94a804dc7dbf6d19d216b494e15288eb059ba56caf673ec5622c0da6c8db014",
+          "width": 1697,
+          "height": 927
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-jajko-vs-maslo-v2.webp",
+          "sha256": "30f2a832644ad1e8954ca3d478707d301e69dd508130031303f8a9e7db6220f6",
+          "width": 1697,
+          "height": 927
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-jajko-vs-maslo-v2.jpg",
+          "sha256": "d4cc75eb1e343aff7b053d6faaab7a729e5b49311618439b1b095655335c3701",
+          "width": 1697,
+          "height": 927
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego jajko i masło wpływają na LDL inaczej?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Ile jajek dziennie można jeść po 50-tce?",
+      "alt": "Talerz z rybą, warzywami, pełnym ziarnem i jajkami w diecie śródziemnomorskiej",
+      "caption": "Jajko może być częścią posiłku bogatego w warzywa, pełne ziarna i tłuszcze nienasycone.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-talerz.avif",
+          "sha256": "7c0b5833a8ed7be76807190fe06d8b35f3534ac8028c48102f1e4d1e274380bc",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-talerz.webp",
+          "sha256": "eabea79ee28651025a9470aae14cfffe54b690798920591f75cf3c1429489038",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-talerz.jpg",
+          "sha256": "be2bc8d6971daece69f280b0a53312ea83a09715dc36948c98a20a0e281aa86b",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ile jajek dziennie można jeść po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy sposób przygotowania jaj ma znaczenie?",
+      "alt": "Para po 50. roku życia przygotowuje jajka, warzywa i pełnoziarniste pieczywo w jasnej kuchni",
+      "caption": "O profilu śniadania decydują także tłuszcz do smażenia, dodatki i częstotliwość ich używania.",
+      "width": 1697,
+      "height": 927,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-przygotowanie.avif",
+          "sha256": "f8a7161fb4bb2958b69d76723dd327c79796328ca53c2ac579abca306296a743",
+          "width": 1697,
+          "height": 927
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-przygotowanie.webp",
+          "sha256": "6688cc9887d7e5e3aeadcd7bcc2742498bd46db8d36f20207983f1d351211a8f",
+          "width": 1697,
+          "height": 927
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-przygotowanie.jpg",
+          "sha256": "fc86898c609e32e33b6116fed0bb45588b0d8517c7c9215161b3ac150d0e4dd6",
+          "width": 1697,
+          "height": 927
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy sposób przygotowania jaj ma znaczenie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy jajka wymagają indywidualnej decyzji?",
+      "alt": "Mężczyzna po 50. roku życia omawia z lekarką wyniki lipidogramu na tablecie",
+      "caption": "Wysokie LDL, cukrzyca lub choroba serca wymagają indywidualnej decyzji o diecie i leczeniu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-lekarz.avif",
+          "sha256": "7ab1c659c0592bb811352d8e32c0426fea570c32c36e5be7e39c327660cf66f4",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-lekarz.webp",
+          "sha256": "f2e2306288a2d96ac145165a12f299eb677b691d90b44d99622a53b8371352be",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-lekarz.jpg",
+          "sha256": "3c1fe78cc088651ca8170281ea3d66ecf6fb6f41f6c3bf12c557216b5008b342",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy jajka wymagają indywidualnej decyzji?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

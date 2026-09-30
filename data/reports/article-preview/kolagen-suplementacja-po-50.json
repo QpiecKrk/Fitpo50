@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:56:40.344Z",
+  "slug": "kolagen-suplementacja-po-50",
+  "html_sha256": "9f52f6291560508255af16c172d35ffb1eb6619cb2f738bfaa4a311781d43a4a",
+  "site_html_sha256": "9f52f6291560508255af16c172d35ffb1eb6619cb2f738bfaa4a311781d43a4a",
+  "pdf_sha256": "1a498699919ef197b224d58c7a325014de4eb16bc1dd5ff775293533b104fbb3",
+  "site_pdf_sha256": "1a498699919ef197b224d58c7a325014de4eb16bc1dd5ff775293533b104fbb3",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 8,
+    "text_coverage": 1,
+    "rendered_pages": 8
+  },
+  "errors": []
+}

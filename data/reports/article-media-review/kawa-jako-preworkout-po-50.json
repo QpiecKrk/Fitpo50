@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "kawa-jako-preworkout-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "5781284f2a4b5221cc223ee8a8e6d7dd2a5831cf4a27679048ddfc4d093f3b69",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Espresso kontra pre-workout na marmurowym blacie — porównanie",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/kawa_preworkout_hero.avif",
+          "sha256": "194024349fbc947d7b95fc9bc31938288c706151fd415d33fd619899743870b9",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/kawa_preworkout_hero.webp",
+          "sha256": "312bb81f67302f1c25fee59f9e11d74d0b7381b889039b21cd702ceb3dad4404",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/kawa_preworkout_hero.jpg",
+          "sha256": "feeab7a3d84ae091f77e48e7e060a65c97f921d88efdce3cd8335805dfa0c545",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Espresso kontra pre-workout na marmurowym blacie — porównanie. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czy kawa rzeczywiście poprawia trening?",
+      "alt": "Mężczyzna po pięćdziesiątce wchodzi na trening z małą kawą",
+      "caption": "Stanowisko ISSN wskazuje, że kofeina może poprawiać wiele aspektów wydolności, najspójniej wytrzymałość tlenową, a u części osób także siłę, szybkość i czujność.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-1-20260929.avif",
+          "sha256": "562b1d980d6dab3b829252e3df6b63585d86d954b421896c3da3ad3fc7d0b122",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-1-20260929.webp",
+          "sha256": "b5f67698b74380bbfde4c2661a22af6fafb98122372ff2b6ce665580b43dbf29",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-1-20260929.jpg",
+          "sha256": "817ba33ebe51ce4d774cd29f1b132d6bbad9cae70cb4b88f58a249d5a6b06a47",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy kawa rzeczywiście poprawia trening?”: Mężczyzna po pięćdziesiątce wchodzi na trening z małą kawą. Zgodność z treścią potwierdza podpis: Stanowisko ISSN wskazuje, że kofeina może poprawiać wiele aspektów wydolności, najspójniej wytrzymałość tlenową, a u części osób także siłę, szybkość i czujność."
+      }
+    },
+    {
+      "placement": "section:Ile kofeiny wypić przed wysiłkiem?",
+      "alt": "Aktywny mężczyzna odmierza ziarna do małej kawy przed treningiem",
+      "caption": "W badaniach często stosuje się 3–6 mg/kg około 60 minut przed wysiłkiem, ale kawa nie ma laboratoryjnie stałej zawartości.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-2-20260929.avif",
+          "sha256": "a5519a0b24129261f640835d22f1cf873d07eec223d603450565117144f19351",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-2-20260929.webp",
+          "sha256": "288e3247cab0bc977846c2c46cd9cfef11596b361cf8f22e61052545e29fdd54",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-2-20260929.jpg",
+          "sha256": "7fa39697677211f35dde146bbe051f900970ceccbe1e5e3f206214e4725395d2",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Ile kofeiny wypić przed wysiłkiem?”: Aktywny mężczyzna odmierza ziarna do małej kawy przed treningiem. Zgodność z treścią potwierdza podpis: W badaniach często stosuje się 3–6 mg/kg około 60 minut przed wysiłkiem, ale kawa nie ma laboratoryjnie stałej zawartości."
+      }
+    },
+    {
+      "placement": "section:Dlaczego pora kawy ma znaczenie?",
+      "alt": "Mężczyzna po pięćdziesiątce sprawdza porę picia kawy przed treningiem",
+      "caption": "Kofeina działa przez wiele godzin, a EFSA wskazuje, że nawet 100 mg blisko pory snu może wpływać na jego długość i przebieg.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-3-20260929.avif",
+          "sha256": "3f218a3bfd3114223c1dcb98c4ac1706d10b66cbfad39c1fd822ac966fc9f8e8",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-3-20260929.webp",
+          "sha256": "3a7a341b78a4ac02096d14656f4330e54dbf8639a947eb458f0e16879a3483b0",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-3-20260929.jpg",
+          "sha256": "24d61cca62523e6dfebeb80ad3afd31907828b773deadc69916360e5e1c9f9b8",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego pora kawy ma znaczenie?”: Mężczyzna po pięćdziesiątce sprawdza porę picia kawy przed treningiem. Zgodność z treścią potwierdza podpis: Kofeina działa przez wiele godzin, a EFSA wskazuje, że nawet 100 mg blisko pory snu może wpływać na jego długość i przebieg."
+      }
+    },
+    {
+      "placement": "section:Kto powinien zachować szczególną ostrożność?",
+      "alt": "Kobieta po pięćdziesiątce obserwuje reakcję organizmu po kawie",
+      "caption": "Kofeina może nasilać kołatanie, lęk, drżenie, refluks i przejściowo podnosić ciśnienie.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-4-20260929.avif",
+          "sha256": "9a2a8faddfac7f88e47e7336f4fc9a7ebf1ddd6e097886f17f86f45a8852e67d",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-4-20260929.webp",
+          "sha256": "4507c1316ca93fe7a96baa8ad4f1e8f11c569dd3c6f52a5ae9810424213385ab",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/kawa-jako-preworkout-po-50-section-4-20260929.jpg",
+          "sha256": "47162a0c307dcbf88ba950a0b2f6cd4868d9ccd1a3abec53650498792975a07a",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kto powinien zachować szczególną ostrożność?”: Kobieta po pięćdziesiątce obserwuje reakcję organizmu po kawie. Zgodność z treścią potwierdza podpis: Kofeina może nasilać kołatanie, lęk, drżenie, refluks i przejściowo podnosić ciśnienie."
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:58:05.770Z",
+  "slug": "mit-metabolizm-po-50-zwalnia-tycie",
+  "html_sha256": "4fa9ce6dd9b1c121a7bf2545be89dd3bb04aeb3f0420dc27067ce2b0d0aac22a",
+  "site_html_sha256": "4fa9ce6dd9b1c121a7bf2545be89dd3bb04aeb3f0420dc27067ce2b0d0aac22a",
+  "pdf_sha256": "2e149227a251b264785e7e4d3a89e1631ea1326f15c3db08d3457eddb31ddbcd",
+  "site_pdf_sha256": "2e149227a251b264785e7e4d3a89e1631ea1326f15c3db08d3457eddb31ddbcd",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 6,
+    "text_coverage": 1,
+    "rendered_pages": 6
+  },
+  "errors": []
+}

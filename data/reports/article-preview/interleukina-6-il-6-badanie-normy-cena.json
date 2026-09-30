@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:55:19.954Z",
+  "slug": "interleukina-6-il-6-badanie-normy-cena",
+  "html_sha256": "ecc35208597ec176961d50d2b112478d55c0ddb74b4f028e28f705d27f630219",
+  "site_html_sha256": "ecc35208597ec176961d50d2b112478d55c0ddb74b4f028e28f705d27f630219",
+  "pdf_sha256": "6415862b3112911139fbfa62f8c967a3752813fbe4c6e2cb9176befc72127396",
+  "site_pdf_sha256": "6415862b3112911139fbfa62f8c967a3752813fbe4c6e2cb9176befc72127396",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

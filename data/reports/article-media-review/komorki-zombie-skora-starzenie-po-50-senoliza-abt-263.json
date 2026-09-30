@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "komorki-zombie-skora-starzenie-po-50-senoliza-abt-263",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "0d851e88517c07b8f376c0cfaa88098297c4670688bfe41c0d6a576f448fd731",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Przekrój skóry pod mikroskopem — komórki senescencyjne i zdrowe fibroblasty",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/komorki-zombie-skora-hero-v2.avif",
+          "sha256": "78686c38dbdd88bbcf6e154b895068e9382500c0d97b5a05015deb06a7d70051",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/komorki-zombie-skora-hero-v2.webp",
+          "sha256": "a9bb9c9df8fb6bfde7439ab12345ee1143e5a943794daa3933ed128e2e3dae41",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/komorki-zombie-skora-hero-v2.jpg",
+          "sha256": "0c04c03bf2d18901aa445ab5cd2fe1d3295ea38ac58df62c14f15f5a9466b859",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czym są komórki senescentne i SASP?",
+      "alt": "Schemat zmian struktury skóry związanych ze starzeniem",
+      "caption": "Schemat zmian struktury skóry związanych ze starzeniem",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/skora-starzenie-struktura.avif",
+          "sha256": "c89cc36abdd79290a5d158b1f7cfdfdf57a40eecea35dbcc2085bdd1797ac272",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/skora-starzenie-struktura.webp",
+          "sha256": "b1c13d7ffb2388b6b02a9fcfad8366d55ddd577d32439b49772512f005b50580",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/skora-starzenie-struktura.jpg",
+          "sha256": "df7be1cf0aaf963a134f6eaf3614c05dc0c47df2d92c61f4241a9176c591cf7a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czym są komórki senescentne i SASP?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co ABT-263 zrobił w badaniach skóry?",
+      "alt": "Schemat komórki senescentnej wydzielającej składniki SASP",
+      "caption": "Schemat komórki senescentnej wydzielającej składniki SASP",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/komorka-senescencyjna-sasp.avif",
+          "sha256": "bdb40dbad1622fc9bb55942f54d9740be41356ea919212b5027db098acf83acc",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/komorka-senescencyjna-sasp.webp",
+          "sha256": "8eb6cc786defccf5e54fa48bcd3dfd0fc195444cfbeee111234dcbb9fc8d129d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/komorka-senescencyjna-sasp.jpg",
+          "sha256": "80fc4a7c5f2eefe8637fda4ba4294fdf8aa9516dd43c5702e2ef12a0adb3dcaa",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co ABT-263 zrobił w badaniach skóry?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego navitoclax nie jest domowym senolitykiem?",
+      "alt": "Ilustracja wybranych składników SASP i ich otoczenia tkankowego",
+      "caption": "Ilustracja wybranych składników SASP i ich otoczenia tkankowego",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/sasp-skladniki-kolaz.avif",
+          "sha256": "0398e58cb2b24410986510f77e8854544157f2ef048eba4684e2e2e5351976ed",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/sasp-skladniki-kolaz.webp",
+          "sha256": "fe9cac6dbd2215e26187e2fff5a619365a7c33a14f7b74f8992aa9e10787f354",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/sasp-skladniki-kolaz.jpg",
+          "sha256": "d3546740819a64a9e84b200d8c1434f1b58823b7316699b5389df49f15820bd0",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego navitoclax nie jest domowym senolitykiem?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co realnie można zrobić dla skóry po 50-tce?",
+      "alt": "Kosmetyki do codziennej pielęgnacji skóry po 50-tce z ochroną przeciwsłoneczną",
+      "caption": "Codzienna ochrona przeciwsłoneczna i dobrze tolerowana pielęgnacja mają lepsze podstawy niż domowe „senolityki”.",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/skora-realna-pielegnacja-po50-v2.avif",
+          "sha256": "fa41924879686f6cfe9114e99a2697d07e7a061f3fbf9b2c5f1617c300267c9f",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/skora-realna-pielegnacja-po50-v2.webp",
+          "sha256": "f5a8bf4c267f4af0674c8836109bd1ea40dfa7f72d9aaba54b95da0ec73dc648",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/skora-realna-pielegnacja-po50-v2.jpg",
+          "sha256": "92860129125714645f7f2e4962f06dfdd8ecdaf82610c0526e1e6f583171d1b6",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co realnie można zrobić dla skóry po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

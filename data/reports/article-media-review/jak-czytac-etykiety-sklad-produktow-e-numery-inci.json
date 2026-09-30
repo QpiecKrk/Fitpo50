@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "jak-czytac-etykiety-sklad-produktow-e-numery-inci",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "37a9a9643cfb0bdf3f856d85868531a7e015046a18b9e2e497fff486d1f27861",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Jak czytać etykiety? Przewodnik po składach i E-numerach",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/etykiety-sklad-produktow-lupa-hero-v2.avif",
+          "sha256": "e2d25a6bf98364e6f370972071d8e6cda0e137e47f5bc7c0de1da2df49b7d213",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/etykiety-sklad-produktow-lupa-hero-v2.webp",
+          "sha256": "42782af4be4a538fe83a998971571b5033691ec3dd4b69117d979ad34a598a6e",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/etykiety-sklad-produktow-lupa-hero-v2.jpg",
+          "sha256": "3996a4623a022c60071eafe23bb2f9fd0f2b88c668262bc83186abb4c4aee4db",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Etykieta na talerzu – jak wyczytać z niej prawdę?",
+      "alt": "Infografika po polsku: anatomia etykiety żywnościowej i obowiązkowe informacje",
+      "caption": "Najważniejsze pola etykiety żywności pozwalają porównać skład, porcję, alergeny i wartość odżywczą.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/etykieta-zywnosci-anatomia-schemat-infografika.avif",
+          "sha256": "f9a358d544679980bbfef9435ff0ed252f6cab2c028061815d1b334cfa29c261",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/etykieta-zywnosci-anatomia-schemat-infografika.webp",
+          "sha256": "01f42bfa956db444830e6ed1b5b932b9b3aec73e328dab82563e678f0b0b98f0",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/etykieta-zywnosci-anatomia-schemat-infografika.jpg",
+          "sha256": "a14c5d95d0e7fe8b6d73fe0794ad76c07825d1e3ed4f8a1205d87e343ea4dc9f",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Etykieta na talerzu – jak wyczytać z niej prawdę?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Tabela wartości odżywczej – nie daj się oszukać małym porcjom?",
+      "alt": "Infografika: jak porównywać wartości odżywcze na 100 gramów produktu",
+      "caption": "Porównanie wartości w 100 gramach ogranicza błąd wynikający z różnych wielkości porcji producentów.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/tabela-wartosci-odzywczej-jak-czytac-infografika.avif",
+          "sha256": "df41aa39830b42219c9cf81fb0afd638e7a2281a6e076df38e8560502882cc9b",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/tabela-wartosci-odzywczej-jak-czytac-infografika.webp",
+          "sha256": "3b8be4f1a04319cbb84088bf43e4e591218d952b450f78731d0c55486a798a55",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/tabela-wartosci-odzywczej-jak-czytac-infografika.jpg",
+          "sha256": "60ad4872eb3a72e62d9e7d6be0d1eddcb80485af4f01feee3a106639e985ffc1",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Tabela wartości odżywczej – nie daj się oszukać małym porcjom?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:E-numery – czy naprawdę trzeba się ich bać?",
+      "alt": "Infografika: kategorie E-numerów i przykładowe dodatki do żywności",
+      "caption": "Numer E identyfikuje dopuszczony dodatek; sama obecność oznaczenia nie rozstrzyga o wartości produktu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/e-numery-kategorie-mapa-infografika.avif",
+          "sha256": "1523a1f8fd88bd928edf9d0f82294c7819b613f4e604ffc6aff8ac1ea3d813e8",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/e-numery-kategorie-mapa-infografika.webp",
+          "sha256": "3790f9a0c725f951ce0ee237932ba24a9c43087adfcca0856f8eeedb091fcc43",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/e-numery-kategorie-mapa-infografika.jpg",
+          "sha256": "05695e3bf7ee00bf9a06559d94de7ae60e5feb3cd64ca375f6eeab4236d243e2",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:E-numery – czy naprawdę trzeba się ich bać?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Ukryty cukier – producent wie, jak Cię oszukać?",
+      "alt": "Infografika po polsku: 20 najczęstszych ukrytych nazw cukru na etykietach – z kolorowymi tagami i przykładami produktów, w których je znajdziesz",
+      "caption": "Różne nazwy cukrów mogą pojawiać się osobno w składzie, dlatego warto czytać całą listę składników.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/ukryty-cukier-nazwy-etykiety-infografika.avif",
+          "sha256": "6f4fc128a1b12a0b3c4a95df4d762db07512bf738770f7fb67c2a9a5b56835dc",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/ukryty-cukier-nazwy-etykiety-infografika.webp",
+          "sha256": "db6ee5b455ea9fcca7bd9bc60d9e03663e9d293ed46afe0fb0aa175b18095fa2",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/ukryty-cukier-nazwy-etykiety-infografika.jpg",
+          "sha256": "8376202a47e173ca48eb2e88cd995c0b03b2bc30569a08b57cdbbf06e47c13e0",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ukryty cukier – producent wie, jak Cię oszukać?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Etykiety kosmetyków – czy Twój krem to sama woda?",
+      "alt": "Infografika: kolejność i funkcje składników na liście INCI kosmetyku",
+      "caption": "Lista INCI porządkuje składniki głównie według udziału, ale nie podaje pełnego stężenia każdego z nich.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/inci-sklad-kosmetyku-anatomia-infografika.avif",
+          "sha256": "b96a4115ae7bd61d9258346c3a2302d67f7804458ca152a7b88ff019182ef212",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/inci-sklad-kosmetyku-anatomia-infografika.webp",
+          "sha256": "7757a25898f26bacfcb8b02fc3dd883f03746b90cdb8eaa86aeb3720e6bb28a2",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/inci-sklad-kosmetyku-anatomia-infografika.jpg",
+          "sha256": "634eb9f93ec213ec66d161d3eacd814843bf61c9e5ff410f0e27faad794bfb91",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Etykiety kosmetyków – czy Twój krem to sama woda?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Marketingowe triki – jak nie dać się „uwieść” opakowaniu?",
+      "alt": "Infografika: marketingowe hasła na opakowaniu a informacje na etykiecie",
+      "caption": "Hasło z przodu opakowania warto sprawdzić z listą składników i tabelą wartości odżywczej.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/pulapki-marketingowe-opakowania-infografika.avif",
+          "sha256": "78ec3a3e7331ce8ec3eda05ec9eb677bfa34936587612610a6fdbbf14ff89925",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/pulapki-marketingowe-opakowania-infografika.webp",
+          "sha256": "179052eeecbfe6ffdbebe413182f798e81abcf23e02fbdc03e4ec8a94bace9fe",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/pulapki-marketingowe-opakowania-infografika.jpg",
+          "sha256": "cb22bd2bb1b349ce492f04728482d1fe280351b0900ac51cbcb9ca48b636e673",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Marketingowe triki – jak nie dać się „uwieść” opakowaniu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "slug": "post-36-godzinny-co-sie-dzieje-z-cialem",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "725cab63dca781cc7a5ccbb751ff468321784d759a8d8ec42a2dba8c1271663b",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po pięćdziesiątce patrzy na zegarek przy szklance wody, symbolizując decyzję o poście przerywanym",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/post-36h-hero-v2.avif",
+          "sha256": "6a26db0404aaecf716cf1f72ec24f61a8b5af5b896a8f601ba96eb13135277f4",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/post-36h-hero-v2.webp",
+          "sha256": "2435de64be010ab2b1015c06540dd4fada944dbacba144a48406607960c75db5",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/post-36h-hero-v2.jpg",
+          "sha256": "39dbf454bfd1e271a60e1044b8adbe1c82b0f07930322edae35f1c2759fc31a7",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co tak właściwie dzieje się z ciałem przez te 36 godzin?",
+      "alt": "Infografika pokazująca fazy metaboliczne podczas 36-godzinnego postu: glukoza, ketoza, autofagia",
+      "caption": "Oś czasu metabolizmu podczas 36-godzinnego postu – od spalania glukozy do produkcji ketonów i uruchomienia autofagii.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-36h-metabolizm-timeline.avif",
+          "sha256": "06cc8165b1b4bca415f3af8050d65ffb30d15839c7e8107127f8ccbf510b2892",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-36h-metabolizm-timeline.webp",
+          "sha256": "3a9fbcd609e103ad612edb076fc5d4adff70ec43764aa52fbde395d89e7b78f5",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-36h-metabolizm-timeline.jpg",
+          "sha256": "3749e167198fcfe215c3aebb1174997c0c14bc8bf1082f3d5748425c44ef8849",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co tak właściwie dzieje się z ciałem przez te 36 godzin?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy insulinooporność i glukoza naprawdę się resetują?",
+      "alt": "Wykres przedstawiający spadek wskaźnika HOMA-IR w grupie stosującej post przerywany vs. kontrolna",
+      "caption": "Redukcja insulinooporności (HOMA-IR) po 26 tygodniach intermittent fasting – dane z RCT Horne et al. 2024.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-insulinoopornosc-wykres.avif",
+          "sha256": "48721d539c5212ef650ee0cdeb4c3b6b6c4aa92b2fac18996e16bf4a0cc41b22",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-insulinoopornosc-wykres.webp",
+          "sha256": "299759e390d61cb7f5b2af196d3bf224af15236e8f7d5753bd4c0b78e96dc953",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-insulinoopornosc-wykres.jpg",
+          "sha256": "60a4831946ddd73476a9e21f6aa05ba7e0f5e15a3c5a19f54e5996ed91afcd75",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy insulinooporność i glukoza naprawdę się resetują?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy hormon wzrostu naprawdę wzrasta o 1300%?",
+      "alt": "Grafika przedstawiająca wzrost poziomu hormonu wzrostu HGH w trakcie postu u mężczyzny po pięćdziesiątce",
+      "caption": "Wzrost HGH podczas postu – efekt niezależny od utraty wagi (Horne et al. 2025, Frontiers in Endocrinology).",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-hormon-wzrostu-hgh.avif",
+          "sha256": "61f352d584bde58b672e7e2d2800bfe2051bcb75af615d3d611b8c5b82f315c2",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-hormon-wzrostu-hgh.webp",
+          "sha256": "4cecab7752209a9c2d448f5fc342b6d5f9012dc372306eda13a5f95f34ce79fd",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-hormon-wzrostu-hgh.jpg",
+          "sha256": "9a3f5266fdc69f13b4ac16d07108b09e20bfbf7b2283963e94c5ed321c2942dc",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy hormon wzrostu naprawdę wzrasta o 1300%?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Autofagia – czy komórki naprawdę sprzątają się podczas postu?",
+      "alt": "Ilustracja procesu autofagii – komórka rozkładająca uszkodzone organelle podczas postu",
+      "caption": "Autofagia: komórkowe sprzątanie aktywowane przez post – po raz pierwszy bezpośrednio potwierdzone u ludzi w maju 2025 roku.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-autofagia-komorki.avif",
+          "sha256": "5d34f087d97b594daaae72f077c98537d8cd3d7d56f277b132d5fc6b753df6f1",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-autofagia-komorki.webp",
+          "sha256": "30ccce59261b15c5bcd230b515aa334909a408d0bcd961d9f7c31d5e4b0a77da",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-autofagia-komorki.jpg",
+          "sha256": "b856d9c4f66eda60145fc12add6efded39bf6e44af4c4bccba6fa063438e9332",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Autofagia – czy komórki naprawdę sprzątają się podczas postu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy 36-godzinny post niszczy mięśnie?",
+      "alt": "Aktywny mężczyzna po pięćdziesiątce wykonuje trening z ciężarkami, symbolizując ochronę mięśni podczas postu",
+      "caption": "Trening oporowy i odpowiednia podaż białka w dniach jedzenia chronią mięśnie podczas protokołów postnych.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-miesnie-ochrona.avif",
+          "sha256": "4ed94cd7add76b0e6cf27b098669320bbc5da516ecce6fbc76f03ff2afae0456",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-miesnie-ochrona.webp",
+          "sha256": "a5b81c323caae59839fb1430a51dd0aff2e6dd62bb17f8a153224ed1174be694",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-miesnie-ochrona.jpg",
+          "sha256": "9ebe9cdd49e15c5514f34352202aa3f2128360701eb254db7ae2cf20707f95f3",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy 36-godzinny post niszczy mięśnie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dla kogo post 36-godzinny jest ryzykowny lub zakazany?",
+      "alt": "Lekarz omawiający z pacjentem wskazania do postu przerywanego w nowoczesnym gabinecie medycznym",
+      "caption": "Przed wdrożeniem 36-godzinnego postu warto wykluczyć przeciwwskazania – szczególnie przy cukrzycy i lekach.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-36h-przeciwwskazania.avif",
+          "sha256": "12ab1334376611f5e3bcd493f08e4554929bb5d61afc50e541b51184aab397c5",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-36h-przeciwwskazania.webp",
+          "sha256": "ce775711047fad76fa04716e8997555847b1f75cabdfe3c2a45c2d5467c59c30",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-36h-przeciwwskazania.jpg",
+          "sha256": "7e516031a62bfa6490b0ca848cfa2ee87e165308e527a24a8882322d4c868435",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dla kogo post 36-godzinny jest ryzykowny lub zakazany?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Więc czy to naprawdę najlepsza medycyna świata?",
+      "alt": "Mężczyzna po pięćdziesiątce przeglądający wyniki badań laboratoryjnych z zadowoloną miną",
+      "caption": "Post 36-godzinny wywołuje mierzalne zmiany, lecz ich znaczenie kliniczne zależy od protokołu, zdrowia i długoterminowych nawyków.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-36h-werdykt-nauka.avif",
+          "sha256": "05381b8b9de05ef9027eabed52202777039003f731e29cc73d62f77b43cbc8a2",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-36h-werdykt-nauka.webp",
+          "sha256": "5c17b2d04b9194b20ac425f1d02c68bf3671a93c78ab40028fefc805bf2fd64a",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-36h-werdykt-nauka.jpg",
+          "sha256": "a56daec247db23554c100e266e03978573fc74a02d9e4483e5e0e209f5e3d0d6",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Więc czy to naprawdę najlepsza medycyna świata?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

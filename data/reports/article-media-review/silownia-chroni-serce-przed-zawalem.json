@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "silownia-chroni-serce-przed-zawalem",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "d0cab0792807f957d4753eaa5951ba6ab17c676632d3d1985ca65270420f7ce0",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Uśmiechnięty mężczyzna po 50-tce wykonujący trening z hantlami, w tle nowoczesna siłownia, ciepłe światło",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-serce-ochrona-hero-v2.avif",
+          "sha256": "4f25e5c6e1bece94b3e9afe54c700cb84c127b430e423cb830c86a5cb6267c02",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/silownia-serce-ochrona-hero-v2.webp",
+          "sha256": "ee5c56934d52fe74c3391a3215bf2db03d9f42c0c0ed307cd5792e6f3e485638",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/silownia-serce-ochrona-hero-v2.jpg",
+          "sha256": "3b76bb6fefb9f363b58bc0d980c9cc119e4538bc5b16dd13a4e09faafaf80843",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Serce jako pompa: dlaczego siła mięśni ma znaczenie?",
+      "alt": "Ilustracja serca jako nowoczesnej pompy połączonej z mięśniami, napisy po polsku",
+      "caption": "Mięśnie i układ krążenia adaptują się do regularnego, stopniowanego wysiłku.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/serce-pompa-mechanizm-wyjasnienie.avif",
+          "sha256": "db9508eb4aeb393955add5f4c3e3d504e70806a01bb5eeacb5c12739a60b5a28",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/serce-pompa-mechanizm-wyjasnienie.webp",
+          "sha256": "adab8bc1ec0e0551dbcd13050afdea6f27dd24393be0bf026e55afc8ba1b690d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/serce-pompa-mechanizm-wyjasnienie.jpg",
+          "sha256": "c9ca8a1bca116d053c93ac7e9f56ceaa758dca40e0874f63cd4ff20be538c225",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Serce jako pompa: dlaczego siła mięśni ma znaczenie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak trening siłowy wpływa na glukozę i naczynia?",
+      "alt": "Schemat pokazujący jak mięśnie wchłaniają cukier z krwi, opisy w języku polskim",
+      "caption": "Skurcz mięśni zwiększa wykorzystanie glukozy; efekt nie zastępuje leczenia cukrzycy.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/miesnie-magazyn-cukru-wyjasnienie.avif",
+          "sha256": "1618134cee195f692db640aee7500539b68e4abfb88a01e38ad998996ac26c5f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/miesnie-magazyn-cukru-wyjasnienie.webp",
+          "sha256": "e13b2e7a822964ad94c722a158e0b68d5bdc72cb030e2c64293c8de19dfc00ad",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/miesnie-magazyn-cukru-wyjasnienie.jpg",
+          "sha256": "63dcfb1aed9eb4a3417453d14aac8f21556c6e12a3cf0b3f6c59a790d5198530",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak trening siłowy wpływa na glukozę i naczynia?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak trening oporowy wpływa na ciśnienie krwi?",
+      "alt": "Grafika porównująca naczynia krwionośne osoby trenującej i nietrenującej, polskie etykiety",
+      "caption": "Regularny ruch może wspierać funkcję naczyń, ale nie usuwa blaszki miażdżycowej.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/cisnienie-krwi-hantle-porownanie.avif",
+          "sha256": "b0b17eb4d1d7dd95e2a05177fd4983419a7f57aed5ba525c065c8ea0bf475d00",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/cisnienie-krwi-hantle-porownanie.webp",
+          "sha256": "636e86401ce4412e02cbbbf64b5cedb0fc23a44ca280ea072d3b233363908c6e",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/cisnienie-krwi-hantle-porownanie.jpg",
+          "sha256": "38aab8faa90a67b7512e2ed908ba21f31c65a96008d92e8ae5026b3e5277df48",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak trening oporowy wpływa na ciśnienie krwi?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Stan zapalny: gaszenie pożaru w organizmie?",
+      "alt": "Wizualizacja miokin uwalnianych z mięśni do krwiobiegu, napisy po polsku",
+      "caption": "Pracujące mięśnie wydzielają miokiny; ich działanie zależy od kontekstu i rodzaju wysiłku.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/miesnie-organ-endokrynny-miokiny.avif",
+          "sha256": "6b7db2f572ffa0b67cfdff7204539e514c76eac02d315e2eec54f1d85f725542",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/miesnie-organ-endokrynny-miokiny.webp",
+          "sha256": "299c5f05dd79e13689d85024ee034f72ad14a47bae71dd5d2deb878f0532e290",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/miesnie-organ-endokrynny-miokiny.jpg",
+          "sha256": "33c78d2f3eeeb066b0bf47633bf0acf722eb83e530ff277c85d1f68a145162c0",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Stan zapalny: gaszenie pożaru w organizmie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy trening siłowy pomaga ograniczać tłuszcz trzewny?",
+      "alt": "Porównanie przekroju brzucha z dużą ilością tłuszczu trzewnego i z mięśniami, polskie opisy",
+      "caption": "Tłuszcz trzewny jest jednym z elementów ryzyka metabolicznego ocenianego razem z ciśnieniem, lipidami i glikemią.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-vs-miesnie.avif",
+          "sha256": "0b9cbf54d99da2e45aeabb74035d2b2868a2de71ae82f28f4e2beab1ddec89cf",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-vs-miesnie.webp",
+          "sha256": "5b157068b4ee7245e4828f6c9cca5fe2f5d5097fb803dc8cd43a28fd73d7c506",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-vs-miesnie.jpg",
+          "sha256": "35a9e94425209abd176b464641f671c52d7a63e79fabf0a8ef15d807a63ebaac",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy trening siłowy pomaga ograniczać tłuszcz trzewny?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak zacząć trening siłowy dla serca po 50-tce?",
+      "alt": "Infografika z prostym planem treningowym dla seniora, polskie napisy",
+      "caption": "Plan startowy powinien uwzględniać aktualną sprawność, objawy i kontrolę ciśnienia.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/plan-startowy-silownia-serce.avif",
+          "sha256": "81552f3760e93a2cddfc0b8011dfb3b193baf3c722aecda2ca6f4aaffbccba69",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/plan-startowy-silownia-serce.webp",
+          "sha256": "1da2f5b9891862178e3ee2c420eba902dcb6d4f02608c80870f594ba3a849080",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/plan-startowy-silownia-serce.jpg",
+          "sha256": "f45be5f4cf17163aba4fb10489a34b96b14bb159236216f3b97aaba71951dc97",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak zacząć trening siłowy dla serca po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

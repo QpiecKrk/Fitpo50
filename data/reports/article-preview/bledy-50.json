@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:53:21.080Z",
+  "slug": "bledy-50",
+  "html_sha256": "866a83db91c6d636a86f4d54a1ee3b01385c9ef9f2baf757f438853c9448bbbf",
+  "site_html_sha256": "866a83db91c6d636a86f4d54a1ee3b01385c9ef9f2baf757f438853c9448bbbf",
+  "pdf_sha256": "945cd59f4f7cdfbb0450dd899c3ee1e3fffcedddb40da3c033c0424fb400712b",
+  "site_pdf_sha256": "945cd59f4f7cdfbb0450dd899c3ee1e3fffcedddb40da3c033c0424fb400712b",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 6,
+    "text_coverage": 0.9971,
+    "rendered_pages": 6
+  },
+  "errors": []
+}

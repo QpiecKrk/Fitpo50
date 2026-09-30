@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:53:36.370Z",
+  "slug": "co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie",
+  "html_sha256": "0b5c34815d42cfdf051bc66537eba1cf5c8369db379ca58a4339b09c22835e71",
+  "site_html_sha256": "0b5c34815d42cfdf051bc66537eba1cf5c8369db379ca58a4339b09c22835e71",
+  "pdf_sha256": "65e032c65ee8b703c3bcbbe63a5a5eb9371668091c5d312c9ff817502c2bd1a6",
+  "site_pdf_sha256": "65e032c65ee8b703c3bcbbe63a5a5eb9371668091c5d312c9ff817502c2bd1a6",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

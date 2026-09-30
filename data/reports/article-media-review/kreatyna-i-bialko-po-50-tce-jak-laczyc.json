@@ -2,9 +2,9 @@
   "version": 1,
   "status": "VERIFIED",
   "slug": "kreatyna-i-bialko-po-50-tce-jak-laczyc",
-  "reviewed_at": "2026-09-29T19:46:54+02:00",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
   "reviewed_by": "Codex — rzeczywista kontrola wyrenderowanych plików",
-  "reviewed_html_sha256": "42157aeefbee19e97d7b9000785f8f9549d5b0b5882a5faa07d9ac3dc7834584",
+  "reviewed_html_sha256": "7e35cf124192f9c28b62d90d12c1a53acffec1926a268f6b07d601594f7196dc",
   "entries": [
     {
       "placement": "hero",
@@ -14,19 +14,19 @@
       "height": 1024,
       "variants": {
         "avif": {
-          "file": "assets/kreatyna-bialko-po-50-hero-v2.avif",
+          "file": "assets/kreatyna-bialko-po-50-hero-20260929.avif",
           "sha256": "fbb30f3769419129ced6a317d4b8b288020bf64b83e14d95e2dc33cbd5818e03",
           "width": 1536,
           "height": 1024
         },
         "webp": {
-          "file": "assets/kreatyna-bialko-po-50-hero-v2.webp",
+          "file": "assets/kreatyna-bialko-po-50-hero-20260929.webp",
           "sha256": "d8659610939feae8b0f5414154511a43d39e4591ade0dc5c46b808c83f0a542e",
           "width": 1536,
           "height": 1024
         },
         "jpg": {
-          "file": "assets/kreatyna-bialko-po-50-hero-v2.jpg",
+          "file": "assets/kreatyna-bialko-po-50-hero-20260929.jpg",
           "sha256": "69347e596adc5ed7b3c6b3d29cac3a577f3bbb80938087f32dbc320ea482da99",
           "width": 1536,
           "height": 1024

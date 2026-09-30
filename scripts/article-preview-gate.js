@@ -94,10 +94,11 @@ function validatePdfStructure(pdf, expectedText, expectedImages, renderDir, erro
     errors.push('Plik PDF jest pusty, uszkodzony albo nie ma nagłówka %PDF-.');
     return { pages: 0, coverage: 0, renders: [] };
   }
+  const toolErrorStart = errors.length;
   for (const binary of ['pdfinfo', 'pdftotext', 'pdftoppm', 'pdffonts', 'pdfimages', 'magick', 'identify']) {
     if (spawnSync('which', [binary], { stdio: 'ignore' }).status !== 0) errors.push(`Brak narzędzia PDF: ${binary}.`);
   }
-  if (errors.length) return { pages: 0, coverage: 0, renders: [] };
+  if (errors.length > toolErrorStart) return { pages: 0, coverage: 0, renders: [] };
   const info = command('pdfinfo', [pdf]);
   const pages = Number((info.match(/^Pages:\s+(\d+)/m) || [])[1] || 0);
   if (!pages) errors.push('PDF nie ma żadnej strony.');

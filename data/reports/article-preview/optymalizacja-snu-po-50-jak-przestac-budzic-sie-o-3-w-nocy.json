@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:58:43.090Z",
+  "slug": "optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy",
+  "html_sha256": "88658b4f34df396cebfb335fb49e9a084ababf469fca548454e8807a7402869b",
+  "site_html_sha256": "88658b4f34df396cebfb335fb49e9a084ababf469fca548454e8807a7402869b",
+  "pdf_sha256": "99c543d27faee45a3ffd918caa19bc43e33efd3b47bd373dbed229b7be3ce5c2",
+  "site_pdf_sha256": "99c543d27faee45a3ffd918caa19bc43e33efd3b47bd373dbed229b7be3ce5c2",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

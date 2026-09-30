@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "bieganie-niszczy-kolana",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "a76c586180d74a9f83cafeeccdc50b50a66040f42383fd99e4365eaa00b41a5d",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Zadowolona osoba po 50-tce po biegu w nowoczesnym mieście",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/kolana-hero.avif",
+          "sha256": "f3df8a280f0b437067a1fc5b2c0f35d65a7dd427994ec86fea719d642e0e3748",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/kolana-hero.webp",
+          "sha256": "21b2f144d77cdfbf43013a26de460cf7b4558b1b9904ec12d55af1677d16a3f5",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/kolana-hero.jpg",
+          "sha256": "00d9cd5db9aa64790b142ec2df66302da6d6e93ef88300adeeb0c319bf79a9c7",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co badania mówią o bieganiu i chorobie zwyrodnieniowej kolan?",
+      "alt": "Rekreacyjny biegacz po 60-tce z wizualizacją prawidłowej anatomii stawu kolanowego",
+      "caption": "Dane o bieganiu rekreacyjnym trzeba odróżnić od urazu, sportu wyczynowego i biegu mimo narastających objawów.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bieganie-kolano-badania-20260930.avif",
+          "sha256": "6567c9fa3e019827918887087341cfdf85847e0a30c5e02c5151ca488e4075de",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bieganie-kolano-badania-20260930.webp",
+          "sha256": "ee5469516a8ed2e4ecf7d9383ac1c7c20c30f3828665c51723b6edde414dd2dc",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bieganie-kolano-badania-20260930.jpg",
+          "sha256": "e0cf563d74249d2ad43fe0c6151ab6f31bc8ec44b7d6f6791eb231fd8a0fce3d",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co badania mówią o bieganiu i chorobie zwyrodnieniowej kolan?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego kolano może boleć mimo braku uszkodzenia?",
+      "alt": "Biegaczka po 50-tce omawia ból kolana z fizjoterapeutą po treningu",
+      "caption": "Ból może wiązać się z nagłą zmianą obciążenia i wrażliwością tkanek, dlatego sam objaw nie opisuje rozmiaru uszkodzenia.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bieganie-bol-bez-uszkodzenia-20260930.avif",
+          "sha256": "6c814e0d1510eb835636f85158d969cefe9afd14889ddff4606164456d80f6b3",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bieganie-bol-bez-uszkodzenia-20260930.webp",
+          "sha256": "7fba6307d212b333adfb365ebc16c0067348c2d46c38ad7895e2ef47da265c05",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bieganie-bol-bez-uszkodzenia-20260930.jpg",
+          "sha256": "357a1f2a664166ef78ad7bcbd3cc7bd620274aa2d7de41763101fc5b3160bfc5",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego kolano może boleć mimo braku uszkodzenia?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak wrócić do biegania po 50-tce?",
+      "alt": "Kobieta po 50-tce wraca do biegania spokojną metodą marsz-bieg z trenerem",
+      "caption": "Marsz przeplatany krótkim biegiem pozwala stopniowo sprawdzić reakcję kolana i odbudować tolerancję wysiłku.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bieganie-powrot-marsz-bieg-20260930.avif",
+          "sha256": "2217924fb3dee210944408492c60c11317b56bcbdbe9e9e6c8ccf4ce92605c98",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bieganie-powrot-marsz-bieg-20260930.webp",
+          "sha256": "7a52aa7c5a5df5c0aa81745caac80e216982f082ce01361efb08dcf55e69487d",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bieganie-powrot-marsz-bieg-20260930.jpg",
+          "sha256": "ba5375b68685cefd86d17a0806c943cc3309294b906aba87404c6d74a76afb44",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak wrócić do biegania po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy ból kolana wymaga badania zamiast kolejnego treningu?",
+      "alt": "Fizjoterapeutka bada kolano biegacza po 60-tce przed powrotem do treningu",
+      "caption": "Obrzęk, blokowanie, utrata stabilności lub narastający ból uzasadniają badanie przed kolejną próbą biegu.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bieganie-kolano-kiedy-badanie-20260930.avif",
+          "sha256": "e6bfc53329328cf6ce05a7fc00739031e6a5c24ca7f53f1d6afd89cc8c3a28f2",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bieganie-kolano-kiedy-badanie-20260930.webp",
+          "sha256": "d26c0381361900b5d2df42e1e91b6120c61462855b64a9a42899e21f5b22d99c",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bieganie-kolano-kiedy-badanie-20260930.jpg",
+          "sha256": "d1fbf550b11e252346670acecf2fe228710610995b6a38ccb879b41f3b12176e",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy ból kolana wymaga badania zamiast kolejnego treningu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

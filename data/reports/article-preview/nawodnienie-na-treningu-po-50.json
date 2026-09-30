@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:58:33.124Z",
+  "slug": "nawodnienie-na-treningu-po-50",
+  "html_sha256": "abf722228da646a6f92ce57efa8b14da575eefa724c3defb7f7117c0e253fa54",
+  "site_html_sha256": "abf722228da646a6f92ce57efa8b14da575eefa724c3defb7f7117c0e253fa54",
+  "pdf_sha256": "819a2caa61220f2aebf12228e3e6721b088eb87efc5e9a06c4ed6e06a7859549",
+  "site_pdf_sha256": "819a2caa61220f2aebf12228e3e6721b088eb87efc5e9a06c4ed6e06a7859549",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

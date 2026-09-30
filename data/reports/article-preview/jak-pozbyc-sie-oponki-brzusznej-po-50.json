@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:55:42.329Z",
+  "slug": "jak-pozbyc-sie-oponki-brzusznej-po-50",
+  "html_sha256": "4ccd59c9cb4c18a3760334d9a090a98d3f352f56a9fd531e6237d1dde17e096b",
+  "site_html_sha256": "4ccd59c9cb4c18a3760334d9a090a98d3f352f56a9fd531e6237d1dde17e096b",
+  "pdf_sha256": "d2af5f5c7c088669b98b7769f74e2ce97a658422df250a476ac2181e4bdd65dd",
+  "site_pdf_sha256": "d2af5f5c7c088669b98b7769f74e2ce97a658422df250a476ac2181e4bdd65dd",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 5,
+    "text_coverage": 1,
+    "rendered_pages": 5
+  },
+  "errors": []
+}

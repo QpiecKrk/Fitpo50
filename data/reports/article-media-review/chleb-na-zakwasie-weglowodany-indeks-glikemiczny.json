@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "chleb-na-zakwasie-weglowodany-indeks-glikemiczny",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "f406ce4e9e3dcff89e111bf2514bc7af48126c27c45285daeec0fe18c5619e52",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Pełnoziarnisty chleb na zakwasie krojony na drewnianej desce",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/zakwas-chleb-hero-v2.avif",
+          "sha256": "4c01104551db5cc4ea4291028b65398e104eb66e9c06b7b22e291a943485e93f",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/zakwas-chleb-hero-v2.webp",
+          "sha256": "87cc804086ad800c9a930376714f12fbeed1d1219bc8082eb61b26af2d38638f",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/zakwas-chleb-hero-v2.jpg",
+          "sha256": "aef19bea5895cd0024e409826ad507873f4533cd6e0d7a459d8662c657861f45",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy chleb na zakwasie ma zawsze niski indeks glikemiczny?",
+      "alt": "Aktywny zakwas w słoiku z widocznymi pęcherzykami fermentacji",
+      "caption": "Aktywny zakwas w słoiku z widocznymi pęcherzykami fermentacji",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/zakwas-ekosystem-sekcja1.avif",
+          "sha256": "b41438a40200ab4aec3570c59bd9803d4f45b9767ff431380b8f8d75b7ffd8cc",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/zakwas-ekosystem-sekcja1.webp",
+          "sha256": "71d147d1d796bb8da78465d947e3a53f1783ff2e1ecc6ecdd1f31d0f0088647b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/zakwas-ekosystem-sekcja1.jpg",
+          "sha256": "f4419bcebc8854682a91efe3a197d98dfd604d1f17d73b79c898a7dab673ca2f",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy chleb na zakwasie ma zawsze niski indeks glikemiczny?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę pokazały badania glikemii po zakwasie?",
+      "alt": "Porównanie odpowiedzi glikemicznej po różnych rodzajach pieczywa",
+      "caption": "Porównanie odpowiedzi glikemicznej po różnych rodzajach pieczywa",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/indeks-glikemiczny-porownanie-sekcja2.avif",
+          "sha256": "7f0ff10b86df7ae661ca0d211be0ef5d12fc099d7b67ab1dc14aab2850e0bb77",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/indeks-glikemiczny-porownanie-sekcja2.webp",
+          "sha256": "52a4c43fec7164fed162662bd1f755777dae67d8363ccdf46a7a601489ea2330",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/indeks-glikemiczny-porownanie-sekcja2.jpg",
+          "sha256": "416e9a082c1ac1caf2bcab1af908fabb69f62de84712a25adc52c26831c4269f",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co naprawdę pokazały badania glikemii po zakwasie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak wybrać pieczywo, gdy zależy Ci na glikemii?",
+      "alt": "Mężczyzna po 50-tce je śniadanie z pieczywem na zakwasie",
+      "caption": "Mężczyzna po 50-tce je śniadanie z pieczywem na zakwasie",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/insulina-odpowiedz-zakwas-sekcja3.avif",
+          "sha256": "17624ba036793dbfe7fcdc4c95916aa7bfc39f259ba5cb7c8bcfab99f48b49be",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/insulina-odpowiedz-zakwas-sekcja3.webp",
+          "sha256": "9792f501ca9824f1f37871c1e1fa93433bf5dea8c502acf469bc637fa0e78de4",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/insulina-odpowiedz-zakwas-sekcja3.jpg",
+          "sha256": "931278ec471a99b373105b4ff465f9091042a0e116941969c900a3a6c293c8cc",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak wybrać pieczywo, gdy zależy Ci na glikemii?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy własny pomiar jest ważniejszy niż tabela IG?",
+      "alt": "Kobieta po 50-tce mierzy glukozę po posiłku z chlebem na zakwasie i zapisuje wynik",
+      "caption": "Własny, powtarzalny pomiar pokazuje indywidualną odpowiedź na konkretny posiłek, a nie samą wartość z tabeli IG.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/chleb-zakwas-wlasny-pomiar-glikemii-20260930.avif",
+          "sha256": "18bcf461195426f0cc8edc8116a02177542683b2613f43dbf311d3efa5bafcf6",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/chleb-zakwas-wlasny-pomiar-glikemii-20260930.webp",
+          "sha256": "b4192e8ed823995bf4651ff85521e27fc5c2d2092055ffaff8be97618c35e04c",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/chleb-zakwas-wlasny-pomiar-glikemii-20260930.jpg",
+          "sha256": "75d05531186111853af09a41d0edd7df01579115cbb103ec57557ac1964f3f60",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy własny pomiar jest ważniejszy niż tabela IG?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

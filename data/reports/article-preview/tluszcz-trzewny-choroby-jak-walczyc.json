@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T13:01:01.401Z",
+  "slug": "tluszcz-trzewny-choroby-jak-walczyc",
+  "html_sha256": "2ccf0b09582a8033384645e2d98e6c5ee0dcc633d4b4d208426ddec36c00bafb",
+  "site_html_sha256": "2ccf0b09582a8033384645e2d98e6c5ee0dcc633d4b4d208426ddec36c00bafb",
+  "pdf_sha256": "83eb470cf9c6958e60037dca950c293466de67746e002ca5fe3ea83f6214dc3c",
+  "site_pdf_sha256": "83eb470cf9c6958e60037dca950c293466de67746e002ca5fe3ea83f6214dc3c",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

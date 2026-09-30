@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "wydolnosc-vo2max-starzenie-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "9dae096d2d4806684ad3623e9155e265956d842da8b432e6bc50619c4436acc0",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce wchodzi po schodach w centrum miasta",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/vo2max-lead-miasto-schody.avif",
+          "sha256": "deffa2d30393a0464ef83148e5d416243b44e4f163c9cbf5d2b82056b188c956",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/vo2max-lead-miasto-schody.webp",
+          "sha256": "bdf9fae3d72f54c9d6526366b356c3e993ca0d412c19603702e211cee165386d",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/vo2max-lead-miasto-schody.jpg",
+          "sha256": "e60be3e7ecb8f8088a5ccaef7cb2eeaed7a28ef79839fcbc26ea2dc94d872628",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co dokładnie oznacza VO2max?",
+      "alt": "Schemat pobierania i wykorzystania tlenu podczas wysiłku",
+      "caption": "Schemat pobierania i wykorzystania tlenu podczas wysiłku",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/vo2max-schemat-silnik.avif",
+          "sha256": "1e44a9db13e6755306f441575d9665e2ac87961618f6ad8f1d3bdf790a3b819d",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/vo2max-schemat-silnik.webp",
+          "sha256": "d7a76aa04e8a0a05b9a08da72e79c8a5b5230eca66c3d8c0c0373d4680c08065",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/vo2max-schemat-silnik.jpg",
+          "sha256": "0612f88e2955eeea4b4989ef9c98879b3d207ffef3312b134ee6adc1097a01ac",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co dokładnie oznacza VO2max?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy zegarek mierzy VO2max wiarygodnie?",
+      "alt": "Porównanie treningu tlenowego i siłowego dla sprawności",
+      "caption": "Porównanie treningu tlenowego i siłowego dla sprawności",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/vo2max-cardio-vs-sila-ikony.avif",
+          "sha256": "43e92421a6920ccf287abc00c9a5b3c88bedfa6d4474ee309080f1daba71ff5c",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/vo2max-cardio-vs-sila-ikony.webp",
+          "sha256": "9072bd421bb3879fa3524e0b71fc8376f0c5ef5b43e18a9ab394ffc4270c873c",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/vo2max-cardio-vs-sila-ikony.jpg",
+          "sha256": "ca8ff485ca11eec39a56a2080f8c8bae8ef196cb466adabde691b78a5529ac17",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy zegarek mierzy VO2max wiarygodnie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak poprawiać wydolność po 50-tce?",
+      "alt": "Test sześciominutowego marszu wykonywany na wyznaczonym odcinku",
+      "caption": "Test sześciominutowego marszu wykonywany na wyznaczonym odcinku",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/vo2max-6-min-walk-schemat.avif",
+          "sha256": "cb559f599fcdc5b4fcafdb5928135e3684dbbf1e696acbecb29fb252581face6",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/vo2max-6-min-walk-schemat.webp",
+          "sha256": "05592e7f86d5ca8a7cc857f7ba792ab5807ec37c7e163bdbb1969af43dd57cc0",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/vo2max-6-min-walk-schemat.jpg",
+          "sha256": "8a6e299ad194eca8d35dbd627a5d0117c5671e4ff76dfb6651597bf776229baf",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak poprawiać wydolność po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy test wydolności wymaga nadzoru?",
+      "alt": "Mężczyzna po 60-tce wykonuje test wydolności z analizą oddechu i monitorowaniem EKG",
+      "caption": "Stopniowany test z analizą oddechu i EKG pozwala kontrolować reakcję organizmu podczas wysiłku.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/vo2max-test-wysilkowy-nadzor-20260930.avif",
+          "sha256": "a15189bf7a890367279de0507a741bbccf804a06a43a5908e138c3332b3c21c0",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/vo2max-test-wysilkowy-nadzor-20260930.webp",
+          "sha256": "080a3c1c09fae570a2e569606834973f50af1cdb477f613add644720b6de15b6",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/vo2max-test-wysilkowy-nadzor-20260930.jpg",
+          "sha256": "2700d3102dfc9a351808b184993a5e6f61c5adcb173c919d5ba5a1dfaec5c31a",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy test wydolności wymaga nadzoru?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

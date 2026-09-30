@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:59:09.990Z",
+  "slug": "post-36-godzinny-co-sie-dzieje-z-cialem",
+  "html_sha256": "725cab63dca781cc7a5ccbb751ff468321784d759a8d8ec42a2dba8c1271663b",
+  "site_html_sha256": "725cab63dca781cc7a5ccbb751ff468321784d759a8d8ec42a2dba8c1271663b",
+  "pdf_sha256": "ca75e7e5aa59405643c8e5e6b188429f377255fd5e4345c5fa6bb3231b65e029",
+  "site_pdf_sha256": "ca75e7e5aa59405643c8e5e6b188429f377255fd5e4345c5fa6bb3231b65e029",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 9,
+    "text_coverage": 1,
+    "rendered_pages": 9
+  },
+  "errors": []
+}

@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "post-36-godzinny-cud-czy-mit-badania-vs-hype",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "d18efc179ed29c7b02066b8e281646c128ff5bca45db4082dc8b92463ddc338a",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po pięćdziesiątce patrzy na zegarek przy szklance wody, symbolizując decyzję o poście przerywanym",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/post-36h-hero1-v2.avif",
+          "sha256": "6a26db0404aaecf716cf1f72ec24f61a8b5af5b896a8f601ba96eb13135277f4",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/post-36h-hero1-v2.webp",
+          "sha256": "2435de64be010ab2b1015c06540dd4fada944dbacba144a48406607960c75db5",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/post-36h-hero1-v2.jpg",
+          "sha256": "39dbf454bfd1e271a60e1044b8adbe1c82b0f07930322edae35f1c2759fc31a7",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego ten tekst nie powtarza osi czasu postu?",
+      "alt": "Czytelnik porównuje rodzaj badania, czas postu i wyniki metaboliczne",
+      "caption": "Najpierw sprawdź protokół badania, potem wynik. Sama etykieta „post” nie wystarcza.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-36h-werdykt-nauka.avif",
+          "sha256": "05381b8b9de05ef9027eabed52202777039003f731e29cc73d62f77b43cbc8a2",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-36h-werdykt-nauka.webp",
+          "sha256": "5c17b2d04b9194b20ac425f1d02c68bf3671a93c78ab40028fefc805bf2fd64a",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-36h-werdykt-nauka.jpg",
+          "sha256": "a56daec247db23554c100e266e03978573fc74a02d9e4483e5e0e209f5e3d0d6",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego ten tekst nie powtarza osi czasu postu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy 36 godzin bez jedzenia daje przewagę nad zwykłym deficytem?",
+      "alt": "Kobieta po 50-tce porównuje zwykły plan posiłków z długim okresem bez jedzenia",
+      "caption": "Długi post jest jedną ze strategii ograniczania energii; przewagę trzeba oceniać względem prostszego, trwałego deficytu.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/post-36h-deficyt-porownanie-20260930.avif",
+          "sha256": "07f6da3e9c1b41c0b4174e6f67410e56defa2f3d8aa1fe00019fee71b48ad9ea",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/post-36h-deficyt-porownanie-20260930.webp",
+          "sha256": "245deb054fbd6e43b02b8353d4a0d2bcc36a16cf72fb5676b71995caac88140b",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/post-36h-deficyt-porownanie-20260930.jpg",
+          "sha256": "bb11a582fff1b55e8faf0306aae0580bc26c65b849387d70e2a3785db4b95fc4",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy 36 godzin bez jedzenia daje przewagę nad zwykłym deficytem?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy autofagia uruchamia się dokładnie po 24 godzinach?",
+      "alt": "Badaczka obserwuje procesy autofagii w komórkach bez przypisywania im dokładnej godziny",
+      "caption": "Autofagia zachodzi dynamicznie i zależy od tkanki oraz warunków; badanie komórek nie wyznacza jednej godziny dla całego człowieka.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/autofagia-laboratorium-bez-zegara-20260930.avif",
+          "sha256": "ae187567dce2c3447ad8afb395828e630fbefe9fc09bbb47ca117e1d17350c24",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/autofagia-laboratorium-bez-zegara-20260930.webp",
+          "sha256": "a293d8d13bcbf1284bb777971b2e259e23d4c2d21aada6262c455aa50203e7f8",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/autofagia-laboratorium-bez-zegara-20260930.jpg",
+          "sha256": "46bfe49c68f95f5f25f333fbf77255512234421f7ac8ce7f452303984f50baac",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy autofagia uruchamia się dokładnie po 24 godzinach?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy wzrost HGH chroni mięśnie po 50-tce?",
+      "alt": "Mięśnie potrzebują treningu, energii i aminokwasów, a nie samego wzrostu HGH",
+      "caption": "Wzrost HGH podczas postu nie zastępuje aminokwasów i treningu oporowego.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-miesnie-ochrona.avif",
+          "sha256": "4ed94cd7add76b0e6cf27b098669320bbc5da516ecce6fbc76f03ff2afae0456",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-miesnie-ochrona.webp",
+          "sha256": "a5b81c323caae59839fb1430a51dd0aff2e6dd62bb17f8a153224ed1174be694",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-miesnie-ochrona.jpg",
+          "sha256": "9ebe9cdd49e15c5514f34352202aa3f2128360701eb254db7ae2cf20707f95f3",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy wzrost HGH chroni mięśnie po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kto nie powinien testować 36-godzinnego postu samodzielnie?",
+      "alt": "Mężczyzna po 60-tce omawia z lekarką leki i glukometr przed rozważeniem długiego postu",
+      "caption": "Leki obniżające glukozę i niektóre choroby zwiększają ryzyko, dlatego długiego postu nie należy wtedy testować samodzielnie.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/post-36h-przeciwwskazania-konsultacja-20260930.avif",
+          "sha256": "925ae732c9b6ca4a3a537ada47570f960f39629039a59fd9452045928af309f8",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/post-36h-przeciwwskazania-konsultacja-20260930.webp",
+          "sha256": "1509e3132c48c2b7be490f57bd3c225c0b0fb86f6a0b207e7db27064602fc2b2",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/post-36h-przeciwwskazania-konsultacja-20260930.jpg",
+          "sha256": "b55bd22feb2aaa19c0f330609d54e3a1ce419f021896f9cb3004e2dc07b43da9",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kto nie powinien testować 36-godzinnego postu samodzielnie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak podjąć decyzję bez ulegania hype’owi?",
+      "alt": "Mężczyzna po 50-tce porównuje wyniki badań z własnym planem dnia i zwykłym posiłkiem",
+      "caption": "Rozsądna decyzja uwzględnia jakość dowodów, zdrowie, leki i możliwość utrzymania planu bez internetowej presji.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/post-36h-decyzja-bez-hype-20260930.avif",
+          "sha256": "54a93b5b18d0685ce8cf5416622178379815b2a783b902663ca465cebc454083",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/post-36h-decyzja-bez-hype-20260930.webp",
+          "sha256": "04ea0b40a806c2b9c57a504d2654e0c8b170a137b90855c1da66b7570909ae70",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/post-36h-decyzja-bez-hype-20260930.jpg",
+          "sha256": "3ce2375b27eeb133dee077f7bb56fc01fcf2cc2a170639300dbe293fd90e3b31",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak podjąć decyzję bez ulegania hype’owi?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

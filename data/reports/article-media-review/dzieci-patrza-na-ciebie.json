@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "dzieci-patrza-na-ciebie",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "b5fdce01bb85affd3c0aa3daec6e0b02e465fd89f08485fb0d0336ba131954d5",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Ojciec biegnący z dzieckiem w parku",
+      "caption": "",
+      "width": 2400,
+      "height": 1792,
+      "variants": {
+        "avif": {
+          "file": "assets/dzieci-patrza-na-ciebie-hero-20260929.avif",
+          "sha256": "26ce37792940c93215655582a0ae5706c42ad666c2321010db8ab5679ff7273e",
+          "width": 2400,
+          "height": 1792
+        },
+        "webp": {
+          "file": "assets/dzieci-patrza-na-ciebie-hero-20260929.webp",
+          "sha256": "912ceb8cc192c64ac623411d11f5cf4848b47385198afb6248cb25eb03297551",
+          "width": 2400,
+          "height": 1792
+        },
+        "jpg": {
+          "file": "assets/dzieci-patrza-na-ciebie-hero-20260929.jpg",
+          "sha256": "2fb08172962632741331b598c4275dfa765a4faf0bf26a9b1afb2fcb805d1504",
+          "width": 2400,
+          "height": 1792
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Ojciec biegnący z dzieckiem w parku. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czy dzieci po prostu kopiują zachowania rodziców?",
+      "alt": "Rodzic szykuje się do aktywności fizycznej, dziecko obserwuje w domu",
+      "caption": "Nie. Metaanalizy pokazują związki między praktykami rodziców a jedzeniem dzieci, ale podobieństwo całej diety rodzica i dziecka bywa niejednoznaczne.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-1-20260929.avif",
+          "sha256": "bcb5288291f39fa2c0845915d9aa7225e2d5b9d2c1d0ffbd2ead87c4c4ab6597",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-1-20260929.webp",
+          "sha256": "72338b33bf35691d348dcdd0d7cf763c5db950a6c47f762398898735c1f37b80",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-1-20260929.jpg",
+          "sha256": "6a325ad9d97b33e8d42aa0f1a695694c7627b525f932de19122ed6e475073efc",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy dzieci po prostu kopiują zachowania rodziców?”: Rodzic szykuje się do aktywności fizycznej, dziecko obserwuje w domu. Zgodność z treścią potwierdza podpis: Nie. Metaanalizy pokazują związki między praktykami rodziców a jedzeniem dzieci, ale podobieństwo całej diety rodzica i dziecka bywa niejednoznaczne."
+      }
+    },
+    {
+      "placement": "section:Co działa poza samym dawaniem przykładu?",
+      "alt": "Aktywna mama ćwiczy na siłowni przy młodszej osobie",
+      "caption": "Przeglądy dotyczące aktywności wskazują częstszy związek ze wsparciem logistycznym i zachętą niż z samym modelowaniem w części badań ilościowych.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-2-20260929.avif",
+          "sha256": "79531ef10533460525ae821adba34c8c2614b03c335578c315901fc5635e5765",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-2-20260929.webp",
+          "sha256": "6e8a753638a280aedeb26a1d0935570d6d99a693deda85cb98762156a20bbe34",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-2-20260929.jpg",
+          "sha256": "35e4b1ee112d87c9a93c0bb2f7a691681cd7788c05ab5f877bfd3b83edfdf99e",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co działa poza samym dawaniem przykładu?”: Aktywna mama ćwiczy na siłowni przy młodszej osobie. Zgodność z treścią potwierdza podpis: Przeglądy dotyczące aktywności wskazują częstszy związek ze wsparciem logistycznym i zachętą niż z samym modelowaniem w części badań ilościowych."
+      }
+    },
+    {
+      "placement": "section:Jak rozmawiać o jedzeniu bez zawstydzania?",
+      "alt": "Wspólny trening i rozmowa ojca z dorosłym synem w parku",
+      "caption": "Mów o smaku, energii, sytości i różnorodności, a nie o „dobrym” i „złym” ciele.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-3-20260929.avif",
+          "sha256": "5d1bc46e0d506fac3b4c3315ea6e3f1eba83a184e8ffbdb0afc0916524849301",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-3-20260929.webp",
+          "sha256": "592e62b0699f9f0b451608a3e4277a57bdfcc6903b3b00a6e1c0fd8f55e63ef6",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-3-20260929.jpg",
+          "sha256": "cb50d79a07267396a1c2b88e56d329e39c0f57a3510b443f85e4133e535ba18f",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak rozmawiać o jedzeniu bez zawstydzania?”: Wspólny trening i rozmowa ojca z dorosłym synem w parku. Zgodność z treścią potwierdza podpis: Mów o smaku, energii, sytości i różnorodności, a nie o „dobrym” i „złym” ciele."
+      }
+    },
+    {
+      "placement": "section:Jaki jeden rytuał wybrać na początek?",
+      "alt": "Wspólna jazda rowerem dorosłego z dzieckiem",
+      "caption": "Dobierz zachowanie do wieku, zdrowia i planu dnia: wspólne przygotowanie jednego posiłku, spacer po kolacji albo wyjście rowerowe w bezpiecznym miejscu.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-4-20260929.avif",
+          "sha256": "ae41ea4a61d0d9d72f35e70e670f3dc9a43d2000a7f2b038c1cfae9b64f49d20",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-4-20260929.webp",
+          "sha256": "6b4a33b40429e8d7bfb81a786d7088ede023347c0304e1f9dcdd5612dcc9039f",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/dzieci-patrza-na-ciebie-section-4-20260929.jpg",
+          "sha256": "4199df2a5cfc6e4afd8e1e01ec7d296f58ef06a4019e19de66791bf97e26d2ba",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jaki jeden rytuał wybrać na początek?”: Wspólna jazda rowerem dorosłego z dzieckiem. Zgodność z treścią potwierdza podpis: Dobierz zachowanie do wieku, zdrowia i planu dnia: wspólne przygotowanie jednego posiłku, spacer po kolacji albo wyjście rowerowe w bezpiecznym miejscu."
+      }
+    }
+  ]
+}

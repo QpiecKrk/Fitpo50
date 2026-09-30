@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "slug": "jak-wyglada-25-30-g-bialka",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "cb763f33b543f619cda1d6d6f8cd8577bcdef4b9a5b746489d4d320b1ad56a9a",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta około sześćdziesiątki przy kuchennym stole ogląda kilka talerzyków z różnymi porcjami jedzenia: pieczony kurczak, łosoś, jajka, tofu, soczewica i skyr",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-hero-v2.avif",
+          "sha256": "a5036b97dd7d52ea17078c95b655341beaaa3984beb68f9023f368d844886952",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-hero-v2.webp",
+          "sha256": "fd9249e35acb1030f63640ce1b57d8a233d45eae09a1b431e64a7981c9b518ec",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-hero-v2.jpg",
+          "sha256": "5b075b553f6faf361dde122e66a0e9fe593538bd43e81fdffa5aff5e2e30b42c",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Ile produktu daje około 25–30 g białka?",
+      "alt": "Sześć talerzyków z różnymi porcjami jedzenia ułożonych w siatce: kurczak, dorsz, jajka, twaróg, tofu i soczewica",
+      "caption": "Kurczak, ryba, jajka, twaróg, tofu i soczewica różnią się zawartością białka; konkretne porcje podają tabela i etykieta.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-krotka-odpowiedz.avif",
+          "sha256": "32ff6c507423a5b81104bba5c62983931fd0d61a8616fc436a684495b86cccc7",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-krotka-odpowiedz.webp",
+          "sha256": "e0a88ef2b966df257693279306c17c991202d81293d28fba4f477c33f7dcf037",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-krotka-odpowiedz.jpg",
+          "sha256": "300645f1803f4390ab0072b6c77d618107ebbd6c546933d95da39d53f0203398",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ile produktu daje około 25–30 g białka?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Skąd wzięło się 25–30 g i czy to obowiązuje każdego?",
+      "alt": "Trójwymiarowa krzywa zbudowana ze świecących włókien mięśniowych, która najpierw rośnie, a potem się wypłaszcza",
+      "caption": "Odpowiedź mięśni na białko rośnie do pewnego poziomu, a potem przyrasta wolniej – stąd pomysł na porcję w posiłku.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-skad-liczba.avif",
+          "sha256": "e38fbe9f5c0bee0ea714ed027a49f45c2e82863bd864f7727e45c9a00754a931",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-skad-liczba.webp",
+          "sha256": "5cb442aadabbf31a651a8924c909448875738a9fbce851cbf16d4c11c72c80f9",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-skad-liczba.jpg",
+          "sha256": "2a20ffb3b61436c506387b5e971b4333748996e338f0bf25c916f9cd6df98c3d",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Skąd wzięło się 25–30 g i czy to obowiązuje każdego?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Produkty zwierzęce: ile ważą porcje z 25–30 g białka?",
+      "alt": "Mężczyzna około sześćdziesiątki kroi pieczoną pierś z kurczaka; obok kubek skyru, kostka twarogu i miska jajek",
+      "caption": "Mięso, jajka i nabiał dostarczają różne ilości białka w 100 g, dlatego wielkość porcji nie jest identyczna.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-zwierzece.avif",
+          "sha256": "317aff8a45220c3e567d368def756893ead892b7bf4aa01dbf80475db1a54e45",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-zwierzece.webp",
+          "sha256": "fdf388b9e3bdc8d05d21c4ce7a6518a050a57ff5d756adc3565664d52a15d5a1",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-zwierzece.jpg",
+          "sha256": "2da020a76206d51b493fb09a88363dce796dc91afdfb7a9bb0cc0397c45dfbed",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Produkty zwierzęce: ile ważą porcje z 25–30 g białka?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Produkty roślinne: ile ważą porcje z 25–30 g białka?",
+      "alt": "Papierowy kolaż z tofu, tempehem, seitanem i coraz większymi miskami soczewicy, ciecierzycy, fasoli i edamame",
+      "caption": "Ilość wody zmienia wielkość porcji: ugotowane strączki zajmują więcej miejsca, więc na talerzu często łączy się je z tofu lub tempehem.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-roslinne.avif",
+          "sha256": "aae921229852fc2fc1df471bb974af8c22b650162bf4606090ced90d26c137a4",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-roslinne.webp",
+          "sha256": "8091c17c208f75dd8acbfa1833d0bf14aa088d17377770ffeaacdd9d8e94011c",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-roslinne.jpg",
+          "sha256": "5ee8ce38bda20ce91f1b984798610f4c6d839b79d15792c2a1e99082526f5d10",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Produkty roślinne: ile ważą porcje z 25–30 g białka?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Masa surowa czy po ugotowaniu: której liczby dotyczą tabele?",
+      "alt": "Surowa i pieczona pierś z kurczaka oraz sucha i ugotowana soczewica pokazane obok siebie",
+      "caption": "Mięso podczas pieczenia traci wodę, a strączki podczas gotowania ją chłoną; porównuj masę w tej samej postaci.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-surowe-gotowane.avif",
+          "sha256": "a78b0889b5e27a5d8ce20f170f721f3b5e823804aefc2d6e41c68dc81d536091",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-surowe-gotowane.webp",
+          "sha256": "78fe118e68d0e359935b6b771a53ccb9d0626027e07cc12bf226d24876edbc51",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-surowe-gotowane.jpg",
+          "sha256": "af0b0dacb399bd59f3087b1f6dc3ef47d398b7c487ebfcd45e49c49c44bdf9ee",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Masa surowa czy po ugotowaniu: której liczby dotyczą tabele?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak złożyć siedem posiłków z około 25–30 g białka?",
+      "alt": "Cztery talerze z codziennymi posiłkami widziane z góry, dłonie dwóch osób sięgają po jedzenie",
+      "caption": "Zwykłe posiłki mogą łączyć jedno główne źródło białka z dodatkiem; wyliczone przykłady znajdziesz w tekście.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-posilki.avif",
+          "sha256": "d32a8259b1fbd2c7f1f8a4e748f3a061e4d1780821b167579cb5df2811d38945",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-posilki.webp",
+          "sha256": "2933e38a70f9c03b3c45f61f043e38cb51c33184a27c249186daf0ba34cec78e",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-posilki.jpg",
+          "sha256": "f3ebc1cbc0ef516126d0656a526ace455bf7226f4a4be4739f867e150350821e",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak złożyć siedem posiłków z około 25–30 g białka?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jakich błędów unikać przy liczeniu białka na talerzu?",
+      "alt": "Dwa talerze śniadaniowe obok siebie: dwa jajka z chlebem oraz dwa jajka z chlebem i twarogiem, pod nimi proporcjonalne paski",
+      "caption": "Dwa jajka to dopiero połowa porcji 25–30 g – drugi składnik białkowy robi różnicę.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-pomylki.avif",
+          "sha256": "67dbcf69734c34693c1000567ebd1f069b7cf3b9ec8e620905aa1e9211500e6a",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-pomylki.webp",
+          "sha256": "e1211aafc8cefe02c6024721c844293b527a5e4d4b377d417222880918f068c4",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-pomylki.jpg",
+          "sha256": "cfd3a2456ce1ac60da015cdc0a54166d47e8cd75c73465820733772743375dcf",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jakich błędów unikać przy liczeniu białka na talerzu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy 25–30 g w posiłku nie jest dobrym celem?",
+      "alt": "Starsza kobieta rozmawia z dietetyczką w jasnym gabinecie, na biurku model talerza z porcjami jedzenia",
+      "caption": "Przy chorobie nerek, niedożywieniu czy zaleconych ograniczeniach ilość białka w posiłku ustala się indywidualnie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-bezpieczenstwo.avif",
+          "sha256": "85e11b3d66e59138f900d1f80d5a16a635950ff4943cbf29bba644b7e558ad44",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-bezpieczenstwo.webp",
+          "sha256": "604e666a270e5aa20cdd1d78eaf9840002d2c3d677ae50361ef11f6f7a7605e8",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-bezpieczenstwo.jpg",
+          "sha256": "7b569d18dd66b13107d5947054646d5e871d89d5023288f48b619b97e3783fc2",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy 25–30 g w posiłku nie jest dobrym celem?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak korzystać z tabel bez ważenia wszystkiego przez całe życie?",
+      "alt": "Otwarta dłoń mężczyzny obok pieczonego fileta z kurczaka; w tle kubek skyru i szklanka ciecierzycy",
+      "caption": "Dłoń pomaga zapamiętać wygląd porcji dopiero po jednorazowym sprawdzeniu jej masy lub objętości; sama nie jest dokładną miarą.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-bez-wagi.avif",
+          "sha256": "5c05badc738d37c0d3fcf77c7600801856fb1c3d0171e7daec4e1899867a03c1",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-bez-wagi.webp",
+          "sha256": "37e1442b4335b80e8538646c8ca02466c4bea15fd47ea9d515f835b825b2e985",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-wyglada-25-30-g-bialka-bez-wagi.jpg",
+          "sha256": "421d4f86a6a4d620d4f4ec61a3b0d218d78ca980ef90645bc55e2568d73fd01e",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak korzystać z tabel bez ważenia wszystkiego przez całe życie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

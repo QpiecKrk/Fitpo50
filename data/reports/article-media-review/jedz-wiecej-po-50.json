@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "jedz-wiecej-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "ff986d9b271c5eaa41ea3c70df3e7bb79a65b96eb37482388a1ffada5e9be865",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Zbyt mały posiłek obok hantla jako symbol błędu niedojadania",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-hero.avif",
+          "sha256": "f55c218311790d25f22caead7372a5204e1fa1c52d521a2f8ca8f4ed01704ea7",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-hero.webp",
+          "sha256": "29a865c58239c40c8159d3c1692a5b9cafe0f43bc06c28d39f986a3866721a4b",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-hero.jpg",
+          "sha256": "cf07423579873db6d9d84bad9b81a11beb06542bb20d12cc6d6f86e3a0f35016",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Zbyt mały posiłek obok hantla jako symbol błędu niedojadania. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Kiedy jedzenie jest naprawdę zbyt małe?",
+      "alt": "Mężczyzna po treningu patrzy na zbyt mały posiłek",
+      "caption": "Sygnałem może być niezamierzony spadek masy, osłabienie, pogorszenie wyników treningowych, dłuższa regeneracja albo coraz luźniejsze ubrania.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-po-50-section-1-20260929.avif",
+          "sha256": "a6456f0c4c8c5e3d5826adec9ed3016947c59bc61cddb1d0140cf8672f7de71c",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-po-50-section-1-20260929.webp",
+          "sha256": "8c5b4d3a6b61d0630d972a4aaab9a5c6d3c80e183a435921d97c68d5ad1e7a70",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-po-50-section-1-20260929.jpg",
+          "sha256": "f74f9f52b33f84c6597a73bd0ba29f5b70a02227c64421259852c6d30fa06eda",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy jedzenie jest naprawdę zbyt małe?”: Mężczyzna po treningu patrzy na zbyt mały posiłek. Zgodność z treścią potwierdza podpis: Sygnałem może być niezamierzony spadek masy, osłabienie, pogorszenie wyników treningowych, dłuższa regeneracja albo coraz luźniejsze ubrania."
+      }
+    },
+    {
+      "placement": "section:Ile białka może potrzebować osoba po 50-tce?",
+      "alt": "Różnorodne pełnowartościowe źródła białka",
+      "caption": "Wytyczne ESPEN dla starszych osób wskazują co najmniej 1,0 g białka/kg masy ciała dziennie, a u zdrowych starszych dorosłych często 1,0–1,2 g/kg.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-po-50-section-2-20260929.avif",
+          "sha256": "e545acba70120f59b472077cd9bb412cad8c1af6927714fde44d390eea01a117",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-po-50-section-2-20260929.webp",
+          "sha256": "a0db0755f8d39465f359b1b12403ba65ba3afa846730f9f618a00cfc711334c2",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-po-50-section-2-20260929.jpg",
+          "sha256": "a8470f25c284122f1720f86b71e79ab4c915dd6bce35ec2d74ce3e4a215fa90a",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Ile białka może potrzebować osoba po 50-tce?”: Różnorodne pełnowartościowe źródła białka. Zgodność z treścią potwierdza podpis: Wytyczne ESPEN dla starszych osób wskazują co najmniej 1,0 g białka/kg masy ciała dziennie, a u zdrowych starszych dorosłych często 1,0–1,2 g/kg."
+      }
+    },
+    {
+      "placement": "section:Jak zwiększyć wartość posiłku bez ogromnej porcji?",
+      "alt": "Kobieta wzbogaca posiłek oliwą orzechami jogurtem i serem",
+      "caption": "Gdy apetyt jest mały, zwiększ gęstość odżywczą: do owsianki dodaj jogurt lub skyr, do zupy soczewicę albo mięso, a do kanapki jajko, twaróg lub rybę.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-po-50-section-3-20260929.avif",
+          "sha256": "87277ca64ec05eae0f794d411f497417c9d755717cab2d3b5fee92a6325f4082",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-po-50-section-3-20260929.webp",
+          "sha256": "7e734c0561ea590d62f8c60e00929c0229d2901ff908dab3bb5389ed59770e44",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-po-50-section-3-20260929.jpg",
+          "sha256": "d20e343edd16fc0a328653234abd55b02ae47c6cb42045b23000f7f10b1f6dfb",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak zwiększyć wartość posiłku bez ogromnej porcji?”: Kobieta wzbogaca posiłek oliwą orzechami jogurtem i serem. Zgodność z treścią potwierdza podpis: Gdy apetyt jest mały, zwiększ gęstość odżywczą: do owsianki dodaj jogurt lub skyr, do zupy soczewicę albo mięso, a do kanapki jajko, twaróg lub rybę."
+      }
+    },
+    {
+      "placement": "section:Jak chudnąć i jednocześnie chronić mięśnie?",
+      "alt": "Aktywna para przygotowuje zbilansowany posiłek po treningu",
+      "caption": "Deficyt energii powinien być na tyle umiarkowany, aby można było trenować, spać i dostarczać potrzebne składniki.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-po-50-section-4-20260929.avif",
+          "sha256": "82556bdfa000d5d955362331f801ba778600df6c0bd979384c81068702156fad",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-po-50-section-4-20260929.webp",
+          "sha256": "7576ad5acc421490c83b010ba9aa272b75a0dcb6e220ecea426c38cb4148cc76",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-po-50-section-4-20260929.jpg",
+          "sha256": "0374559beea25fc6bce0ac8387dc00b48e277c455c49d8d0abaf2a19a51bbb51",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak chudnąć i jednocześnie chronić mięśnie?”: Aktywna para przygotowuje zbilansowany posiłek po treningu. Zgodność z treścią potwierdza podpis: Deficyt energii powinien być na tyle umiarkowany, aby można było trenować, spać i dostarczać potrzebne składniki."
+      }
+    }
+  ]
+}

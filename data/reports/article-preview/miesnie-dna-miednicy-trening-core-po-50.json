@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:57:47.688Z",
+  "slug": "miesnie-dna-miednicy-trening-core-po-50",
+  "html_sha256": "3e07bed20606fb3da7807185c7955434e32c8a91dcdab1aed4f78706d27bb6f9",
+  "site_html_sha256": "3e07bed20606fb3da7807185c7955434e32c8a91dcdab1aed4f78706d27bb6f9",
+  "pdf_sha256": "26111ec5c871d6538a0125d34bb798d6618192e67575da6e033d52fe5a08a845",
+  "site_pdf_sha256": "26111ec5c871d6538a0125d34bb798d6618192e67575da6e033d52fe5a08a845",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 8,
+    "text_coverage": 1,
+    "rendered_pages": 8
+  },
+  "errors": []
+}

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "10b43be4720df8f3308bb74fd362905bae3f374f00f221ed64c0ca513a72577b",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Aktywny, uśmiechnięty pięćdziesięciolatek w słonecznym, nowoczesnym wnętrzu, pełen energii i lekkości",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/brzuch-to-nie-woda-hero-v2.avif",
+          "sha256": "38860418d14b621d705e6e4ae2f8be0f63d415b20410bcbbba65b9f444e41409",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/brzuch-to-nie-woda-hero-v2.webp",
+          "sha256": "232ab231ac6dc7dbc4f756788c8c456477d5455cf625f55051c145f2de099342",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/brzuch-to-nie-woda-hero-v2.jpg",
+          "sha256": "5903eb097dd274515744131399d9c2384ca8ee7d7aaabefd3ba0451bc6252c1a",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak odróżnić tłuszcz na brzuchu od wzdęcia i obrzęku?",
+      "alt": "Porównanie tkanki tłuszczowej i obrzęku w okolicy brzucha",
+      "caption": "Porównanie tkanki tłuszczowej i obrzęku w okolicy brzucha",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit-sekcja-1.avif",
+          "sha256": "953874682a38db3a94197875daca5ca6b28a44b42be5bf7733556203b8cea59d",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit-sekcja-1.webp",
+          "sha256": "3da9d38dd8711ef58ea3c4e19ef726d838d52fe160e182078a5d7e0373ee09cf",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit-sekcja-1.jpg",
+          "sha256": "a08900b8579958abfc2c0bc612eb8ecb5708cc0b4d8925b9d0b504066cbe7562",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak odróżnić tłuszcz na brzuchu od wzdęcia i obrzęku?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy drenaż limfatyczny może zmniejszyć tłuszcz z brzucha?",
+      "alt": "Pomiar obwodu talii wykonywany zawsze w tych samych warunkach",
+      "caption": "Pomiar obwodu talii wykonywany zawsze w tych samych warunkach",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit-sekcja-2.avif",
+          "sha256": "e4c1d0479aa5a4caec45f270b42eb4cbbcd54b5bf66233e113b99f5a5316d270",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit-sekcja-2.webp",
+          "sha256": "b96f2cd2277b2c4e043180b2f5844752a74e30f0dc0d9901d65355baf88d8025",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit-sekcja-2.jpg",
+          "sha256": "fc79fcdf2643a1a28a4cdbe213473d2193cc304f78412e20e81255667327166f",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy drenaż limfatyczny może zmniejszyć tłuszcz z brzucha?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę może zmienić obwód brzucha w kilka dni?",
+      "alt": "Spokojny marsz jako element pracy nad bilansem energii i zdrowiem metabolicznym",
+      "caption": "Spokojny marsz jako element pracy nad bilansem energii i zdrowiem metabolicznym",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit-sekcja-3.avif",
+          "sha256": "74a5b055def0c821c7c156660bf4186cf0d4a29c83c129def011a482d61b05bd",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit-sekcja-3.webp",
+          "sha256": "ce7c4b499765c8212db211d494e484837038e79b0c516a2088a5e7533fe57416",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/brzuch-to-nie-woda-tylko-tluszcz-detoks-limfatyczny-mit-sekcja-3.jpg",
+          "sha256": "d00572fb280df8a449447c5f46b4b8b64a2be3e3c2ced095d8c7d234aaec4426",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co naprawdę może zmienić obwód brzucha w kilka dni?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy powiększony brzuch wymaga konsultacji?",
+      "alt": "Kobieta po 50-tce rozmawia z lekarką o utrzymującym się powiększeniu i dolegliwościach brzucha",
+      "caption": "Utrzymujące się powiększenie brzucha z bólem lub innymi objawami wymaga oceny przyczyny, a nie kolejnego „detoksu”.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/powiekszony-brzuch-konsultacja-20260930.avif",
+          "sha256": "5192c3da0b430f9de4f85efaedb7f697a9e4fd3612157bb1ba41df3fc7f444e0",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/powiekszony-brzuch-konsultacja-20260930.webp",
+          "sha256": "3476dc7d83bc0a8700a389d07861ec1123b62b34b46668b31e88abbecc54a052",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/powiekszony-brzuch-konsultacja-20260930.jpg",
+          "sha256": "0d4d24a53893d380291759bc4c7a37ab1e916ea5c9b912bd9e69537882af058a",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy powiększony brzuch wymaga konsultacji?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

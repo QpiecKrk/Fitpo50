@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:57:39.072Z",
+  "slug": "media-spolecznosciowe-po-50",
+  "html_sha256": "797b418f172125be7e7ce4f39e6834c4c7b267f94487fc0e5935d0042161b1f6",
+  "site_html_sha256": "797b418f172125be7e7ce4f39e6834c4c7b267f94487fc0e5935d0042161b1f6",
+  "pdf_sha256": "71a0fc1f274c96135ef768c50c4cb4a6005e8763f451ad03d90cb50c32ad61b5",
+  "site_pdf_sha256": "71a0fc1f274c96135ef768c50c4cb4a6005e8763f451ad03d90cb50c32ad61b5",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 2
+  },
+  "pdf": {
+    "pages": 10,
+    "text_coverage": 1,
+    "rendered_pages": 10
+  },
+  "errors": []
+}

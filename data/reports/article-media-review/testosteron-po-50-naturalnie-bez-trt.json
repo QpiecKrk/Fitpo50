@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "testosteron-po-50-naturalnie-bez-trt",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "cb48804cd07c311de5348e4c0bad8065803f079ff9c0b671df48c4d3593fbeda",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce patrzy przez okno na miasto i myśli o zdrowiu",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/testosteron-lead-okno-miasto.avif",
+          "sha256": "d76ef76057ea0c3d47f0fb0e0e189a571aac86fae13bd99fd74afc5142b28808",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/testosteron-lead-okno-miasto.webp",
+          "sha256": "374901740041c4d3edfff3d544ff8ea4654da1b052b272bf7129dfc42ec9f107",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/testosteron-lead-okno-miasto.jpg",
+          "sha256": "392e1b5e996148a473e5323772300404cb29dcfafb55b711e1ebae62d51df105",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po 50-tce patrzy przez okno na miasto i myśli o zdrowiu. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak rozpoznaje się niedobór testosteronu?",
+      "alt": "Mężczyzna po 50-tce konsultuje wyniki z lekarzem",
+      "caption": "Endocrine Society zaleca rozpoznanie tylko u mężczyzn z objawami zgodnymi z niedoborem oraz jednoznacznie i stale niskim stężeniem.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-1-20260929.avif",
+          "sha256": "686b186ec6d696c827539d9e975c1169c9c2cf4f2a2b555ec7182d55f3faf33a",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-1-20260929.webp",
+          "sha256": "7dbd116916b11cf950532c91711e216feca73c9d57ca9bf629f38829f191a27a",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-1-20260929.jpg",
+          "sha256": "20d249ad41dc5ed90055431d831abb2c1e4b2387b557cdf69dc0bdbd61075cdf",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak rozpoznaje się niedobór testosteronu?”: Mężczyzna po 50-tce konsultuje wyniki z lekarzem. Zgodność z treścią potwierdza podpis: Endocrine Society zaleca rozpoznanie tylko u mężczyzn z objawami zgodnymi z niedoborem oraz jednoznacznie i stale niskim stężeniem."
+      }
+    },
+    {
+      "placement": "section:Które objawy są ważne, a które nieswoiste?",
+      "alt": "Zmęczony mężczyzna pracujący nocą przy biurku",
+      "caption": "Spadek libido, mniej spontanicznych erekcji i wybrane zaburzenia seksualne są bardziej ukierunkowane niż samo zmęczenie.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-2-20260929.avif",
+          "sha256": "ee357bede4acc8adc7d04a1d29ae00f574b00668962bdbe75cc08ee236529a3b",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-2-20260929.webp",
+          "sha256": "a09fd289642f86759948e76ed0131f19a949346c4ecd3ad068315b3900ace7b8",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-2-20260929.jpg",
+          "sha256": "5d2d64c0255c57eb9c1785ee3e956c47d10cfd63e968131caecabfcb7b0619fa",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Które objawy są ważne, a które nieswoiste?”: Zmęczony mężczyzna pracujący nocą przy biurku. Zgodność z treścią potwierdza podpis: Spadek libido, mniej spontanicznych erekcji i wybrane zaburzenia seksualne są bardziej ukierunkowane niż samo zmęczenie."
+      }
+    },
+    {
+      "placement": "section:Co można poprawić bez TRT?",
+      "alt": "Cztery filary testosteronu: sen, ruch, tłuszcz brzuszny, stres i alkohol",
+      "caption": "Regularny trening oporowy, leczenie otyłości, odpowiednia ilość snu i ograniczenie nadmiaru alkoholu wspierają ogólne zdrowie oraz funkcje seksualne.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-3-20260929.avif",
+          "sha256": "9c0e8fe2c8d255180d579d84fc4d54c2fec353d7ffb1b0809f460682bc22c37a",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-3-20260929.webp",
+          "sha256": "e54c2a556573f134ce95fb80d9f1e4708a661e8fcbce3c258f61c77c3af9681d",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-3-20260929.jpg",
+          "sha256": "b6d6cf4ccca5b12641bb5b31c08e33e4070f480fa16ed4a106ac8c410cadb70a",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co można poprawić bez TRT?”: Cztery filary testosteronu: sen, ruch, tłuszcz brzuszny, stres i alkohol. Zgodność z treścią potwierdza podpis: Regularny trening oporowy, leczenie otyłości, odpowiednia ilość snu i ograniczenie nadmiaru alkoholu wspierają ogólne zdrowie oraz funkcje seksualne."
+      }
+    },
+    {
+      "placement": "section:Kiedy TRT może być właściwe i czego wymaga?",
+      "alt": "Notatnik z 12-tygodniowym planem poprawy stylu życia",
+      "caption": "TRT rozważa się przy potwierdzonym objawowym niedoborze po ustaleniu przyczyny, korzyści, ryzyka i preferencji pacjenta.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-4-20260929.avif",
+          "sha256": "3061294f9b3ccf6a54f937def106fc662e24feb9e44dc97b7288e28f44ba638a",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-4-20260929.webp",
+          "sha256": "0f71dbab712b4a6c87ae474da25086f37148157f854d2ce8382f01b64441ec87",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/testosteron-po-50-naturalnie-bez-trt-section-4-20260929.jpg",
+          "sha256": "70cc1ed7a3ededa133cb8452acec46d53f185125ca0290155df1165a1ce0bd52",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy TRT może być właściwe i czego wymaga?”: Notatnik z 12-tygodniowym planem poprawy stylu życia. Zgodność z treścią potwierdza podpis: TRT rozważa się przy potwierdzonym objawowym niedoborze po ustaleniu przyczyny, korzyści, ryzyka i preferencji pacjenta."
+      }
+    }
+  ]
+}

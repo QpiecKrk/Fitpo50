@@ -6,6 +6,17 @@ function firstMatch(raw, regex) {
   return m ? String(m[1] || '').trim() : '';
 }
 
+function firstTagAttribute(raw, tagName, selectorAttribute, selectorValue, targetAttribute) {
+  const tagRx = new RegExp(`<${tagName}\\b[^>]*>`, 'gi');
+  const selectorRx = new RegExp(`\\b${selectorAttribute}\\s*=\\s*["']${selectorValue.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}["']`, 'i');
+  const targetRx = new RegExp(`\\b${targetAttribute}\\s*=\\s*["']([^"']*)["']`, 'i');
+  for (const match of String(raw || '').matchAll(tagRx)) {
+    if (!selectorRx.test(match[0])) continue;
+    return String(match[0].match(targetRx)?.[1] || '').trim();
+  }
+  return '';
+}
+
 function validateArticleHeadContract(raw, opts = {}) {
   const errors = [];
   const warnings = [];
@@ -17,10 +28,10 @@ function validateArticleHeadContract(raw, opts = {}) {
   };
 
   const title = firstMatch(raw, /<title>([^<]+)<\/title>/i);
-  const ogTitle = firstMatch(raw, /<meta\s+property="og:title"\s+content="([^"]*)"/i);
-  const twitterTitle = firstMatch(raw, /<meta\s+name="twitter:title"\s+content="([^"]*)"/i);
-  const ogImage = firstMatch(raw, /<meta\s+property="og:image"\s+content="([^"]*)"/i);
-  const twitterImage = firstMatch(raw, /<meta\s+name="twitter:image"\s+content="([^"]*)"/i);
+  const ogTitle = firstTagAttribute(raw, 'meta', 'property', 'og:title', 'content');
+  const twitterTitle = firstTagAttribute(raw, 'meta', 'name', 'twitter:title', 'content');
+  const ogImage = firstTagAttribute(raw, 'meta', 'property', 'og:image', 'content');
+  const twitterImage = firstTagAttribute(raw, 'meta', 'name', 'twitter:image', 'content');
   if (!title) {
     errors.push('Brak tagu <title>.');
   } else {
@@ -54,9 +65,9 @@ function validateArticleHeadContract(raw, opts = {}) {
     warnings.push('twitter:image powinno wskazywać plik .jpg (kompatybilność social scraperów).');
   }
 
-  const metaDescription = firstMatch(raw, /<meta\s+name="description"\s+content="([^"]*)"/i);
-  const ogDescription = firstMatch(raw, /<meta\s+property="og:description"\s+content="([^"]*)"/i);
-  const twitterDescription = firstMatch(raw, /<meta\s+name="twitter:description"\s+content="([^"]*)"/i);
+  const metaDescription = firstTagAttribute(raw, 'meta', 'name', 'description', 'content');
+  const ogDescription = firstTagAttribute(raw, 'meta', 'property', 'og:description', 'content');
+  const twitterDescription = firstTagAttribute(raw, 'meta', 'name', 'twitter:description', 'content');
 
   let schemaDescription = '';
   let blogPostingNode = null;
@@ -96,8 +107,8 @@ function validateArticleHeadContract(raw, opts = {}) {
   if (!twitterDescription) warnings.push('Brak twitter:description.');
   if (!schemaDescription) warnings.push('Brak BlogPosting.description w schema JSON-LD.');
 
-  const articlePublishedTime = firstMatch(raw, /<meta\s+property="article:published_time"\s+content="([^"]*)"/i);
-  const articleModifiedTime = firstMatch(raw, /<meta\s+property="article:modified_time"\s+content="([^"]*)"/i);
+  const articlePublishedTime = firstTagAttribute(raw, 'meta', 'property', 'article:published_time', 'content');
+  const articleModifiedTime = firstTagAttribute(raw, 'meta', 'property', 'article:modified_time', 'content');
   if (!articlePublishedTime || !POLICY.PATTERNS.ISO_DATE_TZ.test(articlePublishedTime)) {
     errors.push('Brak lub niepoprawne article:published_time (wymagane pełne ISO 8601 z TZ).');
   }
@@ -159,6 +170,7 @@ function validateArticleHeadFile(filePath, opts = {}) {
 
 module.exports = {
   firstMatch,
+  firstTagAttribute,
   validateArticleHeadContract,
   validateArticleHeadFile,
 };

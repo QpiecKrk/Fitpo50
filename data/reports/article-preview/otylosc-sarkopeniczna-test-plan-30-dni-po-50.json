@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:58:48.153Z",
+  "slug": "otylosc-sarkopeniczna-test-plan-30-dni-po-50",
+  "html_sha256": "7582b98a2890b1cc0c823e94e7d2622bacd175a342c9bca66a457f2abe12d65a",
+  "site_html_sha256": "7582b98a2890b1cc0c823e94e7d2622bacd175a342c9bca66a457f2abe12d65a",
+  "pdf_sha256": "45e73cb58ae3ff95cc223e97b87d351eb469597d206838be734744d4ce36ac54",
+  "site_pdf_sha256": "45e73cb58ae3ff95cc223e97b87d351eb469597d206838be734744d4ce36ac54",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

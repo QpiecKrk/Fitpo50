@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "czy-kawa-odwadnia-i-wyplukuje-magnez",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "8ec376500873fa07f3c3cbe8915fa6c85d81a7baf14b60dc3e5b8c99b38e6987",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Pięćdziesięciolatek w jasnej kuchni trzyma kubek kawy w smudze porannego światła, spokojny, skupiony moment",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-kawa-odwadnia-hero-v2.avif",
+          "sha256": "0344ea8589eb939aeb55f1651789fef372b277f4ec68be0efcedaeda1b58a87d",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/czy-kawa-odwadnia-hero-v2.webp",
+          "sha256": "d42f061dfe9de7a4115bf6fc5ce83fb3a81c151de9b84acf87c1acebf0628def",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/czy-kawa-odwadnia-hero-v2.jpg",
+          "sha256": "8c839eb7d51dc486bcd4dc1eb2269a2164e68ce224e2767cf527f3c9446486d1",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:O co właściwie chodzi w tym micie?",
+      "alt": "Ilustracja pokazująca duży dopływ płynu z kawy i niewielką utratę moczu",
+      "caption": "Bilans płynów: z filiżanki dostajesz więcej wody, niż tracisz przez łagodną diurezę.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-kawa-odwadnia-bucket-analogy.avif",
+          "sha256": "e85cf09d39045c38895221dcd95fb16564b0842273de60fb02c61042d2910515",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/czy-kawa-odwadnia-bucket-analogy.webp",
+          "sha256": "ddcb7aa429958da3c59a33797a55fe8d5fdd85efefedebe8f32d1dfe2bda9f5a",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/czy-kawa-odwadnia-bucket-analogy.jpg",
+          "sha256": "a5aa134ea79f12c67be8a4aa1c8416124674fd2e17fe35e2a512bcf0924a9623",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:O co właściwie chodzi w tym micie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co mówi fizjologia?",
+      "alt": "Infografika pokazująca łagodny efekt moczopędny kofeiny i rozwój tolerancji przy regularnym piciu",
+      "caption": "Przy regularnym piciu moczopędny efekt kofeiny zwykle słabnie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-kawa-odwadnia-physiology.avif",
+          "sha256": "a7eeb24996290cacf0ee291bdd8e3b487178abb9d99cb369b6e2710530d35456",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/czy-kawa-odwadnia-physiology.webp",
+          "sha256": "4b54b8e8101bfd682f83ed4f201dc5a4daf4b1835eca757d97f52f9ce47ac696",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/czy-kawa-odwadnia-physiology.jpg",
+          "sha256": "1f5f27916b9d39ef7f442dd314c2c7e868ff53a9fc02a4b686615b4f34b1eab3",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co mówi fizjologia?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co mówią dowody?",
+      "alt": "Wykres porównujący podobne markery nawodnienia po kawie i po wodzie",
+      "caption": "W kontrolowanym badaniu umiarkowane picie kawy nie pogorszyło markerów nawodnienia.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-kawa-odwadnia-evidence.avif",
+          "sha256": "e24b6a5c6f5f3ed1bb9aadded3b374dbd72bd47a04e971c93115e46dc4b46b7a",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/czy-kawa-odwadnia-evidence.webp",
+          "sha256": "a35f09bad260e68d3e45e38a5e2bd04c03abc3a1623ad0755e5ee194c1c25fde",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/czy-kawa-odwadnia-evidence.jpg",
+          "sha256": "f2745ca47161622f060c4c41f33659c33074c4524697046271a0663530af72e2",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co mówią dowody?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Gdzie jest granica prawdy?",
+      "alt": "Tabela porównująca mity i fakty o kawie, nawodnieniu oraz magnezie",
+      "caption": "Moczopędne działanie kofeiny jest realne, lecz przy umiarkowanym piciu nie oznacza odwodnienia.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-kawa-odwadnia-mit-fakt-table.avif",
+          "sha256": "961f0f9376c2693724d6dab3551d4e834a5d8bdf8fdc5e2c133472d06a807f39",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/czy-kawa-odwadnia-mit-fakt-table.webp",
+          "sha256": "2520241afab8a1ca5c87641dca135ae150399300988628e88de13bbfae4affb9",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/czy-kawa-odwadnia-mit-fakt-table.jpg",
+          "sha256": "3e7df52f031fcef0a8d9e639fcc18f577678ac3544855c8f1b60b87220771a2f",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Gdzie jest granica prawdy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę działa po 50-tce?",
+      "alt": "Produkty bogate w magnez: zielone warzywa, orzechy, pestki, strączki i gorzka czekolada",
+      "caption": "Najpewniejszym źródłem magnezu pozostaje różnorodna dieta.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-kawa-odwadnia-magnesium-foods.avif",
+          "sha256": "8636ac8a7c2cd6a0229fda679c4ec3b9dbc1b6097e08427c7b36d258b2011087",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/czy-kawa-odwadnia-magnesium-foods.webp",
+          "sha256": "0ccabc92f9053131a5e2fae6b3732afac8e798c88dc90ac85a261a961dee4cf8",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/czy-kawa-odwadnia-magnesium-foods.jpg",
+          "sha256": "6429b12e8686f14347060555aeed5a511229ce182eda75aa25b28b56019b1596",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co naprawdę działa po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy lepiej dopytać specjalistę?",
+      "alt": "Mężczyzna po 50-tce rozmawia z lekarką o kawie, lekach moczopędnych oraz zdrowiu serca i nerek",
+      "caption": "Przy chorobach nerek, serca lub lekach moczopędnych limit kofeiny warto ustalić indywidualnie.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/czy-kawa-odwadnia-kiedy-do-lekarza.avif",
+          "sha256": "383d80be9865fffe7639c8d66efb88ed1eea0bc3793a02715fcbadfc9fe19dcb",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/czy-kawa-odwadnia-kiedy-do-lekarza.webp",
+          "sha256": "d01ddd02b13b7ac04eb818851577c9da74a04313ca981503eebd9f8d0d251a24",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/czy-kawa-odwadnia-kiedy-do-lekarza.jpg",
+          "sha256": "3f174c9f346546203e093d3a2369ea9c6c30a7273c992f88f6a68ad823ecb49f",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy lepiej dopytać specjalistę?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

@@ -4,6 +4,8 @@ const { spawn, spawnSync } = require('child_process');
 const readline = require('readline');
 
 const TASKS = {
+  'immutable-asset:guard': { cmd: 'node', args: ['scripts/immutable-asset-guard.js'], always: true },
+  'article:content-consistency:all': { cmd: 'node', args: ['scripts/article-content-consistency-all.js'], always: true },
   'assets:mirror:check': { cmd: 'node', args: ['scripts/sync-site-assets-mirror.js', '--check'], always: true },
   'article:validate': { cmd: 'node', args: ['scripts/validate-article-standard.js'], always: true },
   'predeploy:check': { cmd: 'node', args: ['scripts/predeploy-gate.js'], always: true },

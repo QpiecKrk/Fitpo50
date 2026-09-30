@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:54:23.632Z",
+  "slug": "dieta-przeciwzapalna-po-50-produkty-jadlospis",
+  "html_sha256": "76dc29442f90cdb5c9d7c7019605603023b7e58d2e915a4b3a3dfee07669659d",
+  "site_html_sha256": "76dc29442f90cdb5c9d7c7019605603023b7e58d2e915a4b3a3dfee07669659d",
+  "pdf_sha256": "3a2377a63b8ed6c3103edf315fbf050095066d2d4f17ad39fbd331f9b1c5a86d",
+  "site_pdf_sha256": "3a2377a63b8ed6c3103edf315fbf050095066d2d4f17ad39fbd331f9b1c5a86d",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 8,
+    "text_coverage": 1,
+    "rendered_pages": 8
+  },
+  "errors": []
+}

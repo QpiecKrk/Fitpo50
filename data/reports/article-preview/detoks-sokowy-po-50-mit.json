@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:53:57.777Z",
+  "slug": "detoks-sokowy-po-50-mit",
+  "html_sha256": "511272544bcd1fd4406049201fb0d2caed39105a80f1a5d270e55cdd238ab306",
+  "site_html_sha256": "511272544bcd1fd4406049201fb0d2caed39105a80f1a5d270e55cdd238ab306",
+  "pdf_sha256": "5ad0e9f3fef95a165c9434bf8bd31a95fe8a756469866e8e713b1d80d73bf0c3",
+  "site_pdf_sha256": "5ad0e9f3fef95a165c9434bf8bd31a95fe8a756469866e8e713b1d80d73bf0c3",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 6,
+    "text_coverage": 1,
+    "rendered_pages": 6
+  },
+  "errors": []
+}

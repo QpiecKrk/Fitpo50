@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "slug": "szczepienie-hpv-ochrona-kobiet-mezczyzn",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "901b8f048c83d0a8120a9faf4891e6b7c4018c2f7b603db7e95342fd232077bf",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Artystyczna wizualizacja wirusa HPV pod mikroskopem elektronowym — sferyczne cząsteczki wirusowe w intensywnych kolorach na czarnym tle",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-hero.avif",
+          "sha256": "1da4fc8c61f7b49aac4db8b793d0fc686589cce93c6d4c9117fd58b235dbab86",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-hero.webp",
+          "sha256": "02203f5de97ad21066d8284b56d5aa2556ebb908c7e24a6d27fb497e39fc4a61",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-hero.jpg",
+          "sha256": "85c95adc21b4fa2bbe187e91dcaa0e7dffe11ed18fc6ae01175a392aff7c762e",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czym jest HPV i dlaczego to nie jest temat jednej płci?",
+      "alt": "Renderowanie 3D cząsteczek wirusa HPV — sferyczne struktury białkowe unoszące się na ciemnym tle, wizualizacja naukowa",
+      "caption": "HPV obejmuje wiele typów wirusa i może powodować choroby zarówno u kobiet, jak i u mężczyzn.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-s1-v2.avif",
+          "sha256": "b160c55fd59b709f23e80887ac61402cb167db60fb2a535d6dadabed4c5c00b8",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-s1-v2.webp",
+          "sha256": "26c0f8455d1971e62517949124fcc227d95c0feb0e2bf61e1e1392834d0209b8",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-s1-v2.jpg",
+          "sha256": "7ab3e84bb360323f24e73388dcd1982c3ac620b462916c55ad0692f54f693838",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czym jest HPV i dlaczego to nie jest temat jednej płci?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:ASCO 2024: 3,4 mln pacjentów i konkretne liczby?",
+      "alt": "Wykres słupkowy: liczba nowotworów HPV na 100 000 pacjentów — zaszczepieni vs niezaszczepieni, mężczyźni i kobiety",
+      "caption": "Porównanie częstości nowotworów wymaga uwzględnienia wieku, płci, statusu szczepienia i czasu obserwacji.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-s2-v2.avif",
+          "sha256": "8417697704d21b4382eeb74e9ec27e9ab5136faf895201a030eeace45f3b623d",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-s2-v2.webp",
+          "sha256": "60d9ff675a087bde196f19db84f2f7133e551a4fbcf123ae1f1ad673f99502cb",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-s2-v2.jpg",
+          "sha256": "ddd9a47c3fbc21476de24a4beabf923a03b0dd3a75b83567e23d4bbd9c323969",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:ASCO 2024: 3,4 mln pacjentów i konkretne liczby?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co pokazują dane populacyjne z wielu krajów?",
+      "alt": "Mapa świata z zaznaczonymi krajami posiadającymi powszechne programy szczepień HPV i wykresem redukcji zakażeń",
+      "caption": "Dane populacyjne pokazują skutki programów szczepień w wielu krajach i różnych grupach wieku.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-s3-v2.avif",
+          "sha256": "138ff123901951ecbc7c04e2b36faa55af86575ae40c3543d22994c1ba324697",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-s3-v2.webp",
+          "sha256": "617712702a1e45f28253b521fdefe7907d48d18791b67345b74d171be69abfff",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-s3-v2.jpg",
+          "sha256": "332d781e74f8cec9ed8d28b14bf8ea7a49a02e1a78720f7699d8bffbe14bc4d5",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co pokazują dane populacyjne z wielu krajów?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak działa szczepionka HPV i co daje w praktyce?",
+      "alt": "Mikroskopowe zdjęcie cząstek wirusopodobnych HPV (VLP) — nanotechnologiczna struktura białkowa szczepionki w stylu elektronowej mikroskopii",
+      "caption": "Cząstki wirusopodobne w szczepionce uczą układ odpornościowy rozpoznawania HPV bez wywoływania zakażenia.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-s4-v2.avif",
+          "sha256": "46fb09a1788682f6eaa291debff44a0460d97ae1a1168a647c2a6b42c9465f27",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-s4-v2.webp",
+          "sha256": "7a41268948f12cb160bfe4713f73765018209e290e357132ba54bb1020a22f58",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-s4-v2.jpg",
+          "sha256": "1fd72822c87b8c57ae3cac233a302b23c522013054fd856f8197d71d279dc6b1",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak działa szczepionka HPV i co daje w praktyce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Polska: co zrobić praktycznie?",
+      "alt": "Mężczyzna po pięćdziesiątce w gabinecie lekarskim — spokojnie rozmawia z lekarzem o szczepieniu, nowoczesna przychodnia",
+      "caption": "Kwalifikacja do szczepienia obejmuje rozmowę o wieku, wcześniejszych dawkach i przeciwwskazaniach.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-s5-v2.avif",
+          "sha256": "a48c340278ed46d60ac719dd0fd94a871dec9e7c314dbc2257f69fd97e9d3739",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-s5-v2.webp",
+          "sha256": "98603298d2e9d36eec753ce7a60cc31936925990f27b5b2daffa499597ec6aff",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-s5-v2.jpg",
+          "sha256": "c423ee28d03bcfe74eb46d930a3318add7d6be444856d0e4e29df60494a48d6f",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Polska: co zrobić praktycznie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

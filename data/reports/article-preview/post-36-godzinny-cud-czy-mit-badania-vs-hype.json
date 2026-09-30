@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:59:17.908Z",
+  "slug": "post-36-godzinny-cud-czy-mit-badania-vs-hype",
+  "html_sha256": "d18efc179ed29c7b02066b8e281646c128ff5bca45db4082dc8b92463ddc338a",
+  "site_html_sha256": "d18efc179ed29c7b02066b8e281646c128ff5bca45db4082dc8b92463ddc338a",
+  "pdf_sha256": "d4359f8ee3c74682ac79d93d438972575da2e6dffffbeb66a349b2528177196c",
+  "site_pdf_sha256": "d4359f8ee3c74682ac79d93d438972575da2e6dffffbeb66a349b2528177196c",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 6,
+    "text_coverage": 1,
+    "rendered_pages": 6
+  },
+  "errors": []
+}

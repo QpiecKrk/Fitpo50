@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:56:16.211Z",
+  "slug": "jak-zaczac-na-silowni-po-50",
+  "html_sha256": "85356894880fba767b4cfbf2ea3d5af5e70ecf11e3f47dd1affd245aa05c664d",
+  "site_html_sha256": "85356894880fba767b4cfbf2ea3d5af5e70ecf11e3f47dd1affd245aa05c664d",
+  "pdf_sha256": "f407485ec22ba69736376dd6f2a8af2a08f287f38b577fce1944484440e06a51",
+  "site_pdf_sha256": "f407485ec22ba69736376dd6f2a8af2a08f287f38b577fce1944484440e06a51",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 7,
+    "text_coverage": 1,
+    "rendered_pages": 7
+  },
+  "errors": []
+}

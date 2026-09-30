@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "0dcc976e3011a0c54bd457aef9302436a4f94c9276a86420e497fcfd46071bac",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Zegar epigenetyczny Horvatha. Jak zmierzyć i cofnąć wiek",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-horvatha-dna-hero-v2.avif",
+          "sha256": "364dbf7b28c1e15c340e22863b535c6dd181c0032d8688463b618b844b772e08",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-horvatha-dna-hero-v2.webp",
+          "sha256": "5ecb05cc5abfd28cd56baa596dfe90c4a382865ee19012942aa56b5def395785",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-horvatha-dna-hero-v2.jpg",
+          "sha256": "cf89df67ee366ad3a841667bbefd7a96eb309fd795173ee1c6fd5e8c48254ad0",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak zegar Horvatha wykorzystuje metylację DNA?",
+      "alt": "Metylacja DNA jako chemiczne znaczniki analizowane przez zegar epigenetyczny",
+      "caption": "Metylacja DNA jako chemiczne znaczniki analizowane przez zegar epigenetyczny",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-1.avif",
+          "sha256": "0ac46804e918b9feac5eaaf3b53c3ec83b27c695f8a133a5dcf44f722ce361be",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-1.webp",
+          "sha256": "eacbe820fd0cab59f68955e96d7870e5891b9821c5328e816e6215cc05bdc449",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-1.jpg",
+          "sha256": "036da624fa875d58b52a8331f1118e7864d2389bcfeafa81659f9a298fc560b3",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak zegar Horvatha wykorzystuje metylację DNA?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czym różnią się Horvath, GrimAge i DunedinPACE?",
+      "alt": "Algorytm porównuje wzorzec metylacji z danymi populacyjnymi",
+      "caption": "Algorytm porównuje wzorzec metylacji z danymi populacyjnymi",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-3.avif",
+          "sha256": "ff157559357a3a31d7614931189d9cbc0d4197ed2b328f32a7f1055ed5d6f386",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-3.webp",
+          "sha256": "4bea50b0e7b6d811aec38e7d4acfe4fdc7526d7c3ffd4dbb320c22a1b1fb39b4",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-3.jpg",
+          "sha256": "ca33d2bbec8bbc8f5151eb9a5a63254db99283a50e57af8252b4ac49f09d664f",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czym różnią się Horvath, GrimAge i DunedinPACE?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy test z krwi mówi, ile lat będziesz żyć?",
+      "alt": "Porównanie dwóch wyników testu wymagające tej samej metody i laboratorium",
+      "caption": "Porównanie dwóch wyników testu wymagające tej samej metody i laboratorium",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-6.avif",
+          "sha256": "2c2d040aefb6128b9112f0debec284127abeba3f93a023115650a002e23c92ec",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-6.webp",
+          "sha256": "66858de305c13826c05bd17a878c92268fe5fa27b42d9a2146a6a128b3f5087f",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-6.jpg",
+          "sha256": "c7ada00573b7fcc0c28a740cfd595025d2c8b83dd0b936d78b8440bbc61f50eb",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy test z krwi mówi, ile lat będziesz żyć?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy dieta lub suplement mogą cofnąć wiek epigenetyczny?",
+      "alt": "Kobieta po 50-tce porównuje elementy stylu życia i suplement wobec abstrakcyjnego schematu DNA",
+      "caption": "Dieta, ruch i sen wspierają zdrowie, lecz pojedynczy wynik zegara nie potwierdza „cofnięcia wieku” przez suplement.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-styl-zycia-suplement-20260930.avif",
+          "sha256": "be11447e1f5aa318dbb46b272d402cd2a5d0a699305d23a9a179c12e3dcd8e45",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-styl-zycia-suplement-20260930.webp",
+          "sha256": "f18b099806fdd3515ec4a2a9cf36bb792a4b1a151c8edc43adbe4f0ee7fb5383",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-styl-zycia-suplement-20260930.jpg",
+          "sha256": "1beeff655d9cb6178749ac9795296ba53487022bec00bba7eb8abef453467d9e",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy dieta lub suplement mogą cofnąć wiek epigenetyczny?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

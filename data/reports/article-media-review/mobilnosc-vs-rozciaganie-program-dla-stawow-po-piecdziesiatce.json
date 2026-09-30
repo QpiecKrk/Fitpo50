@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "bb2c0b5bdbaea8bf8f2b86402798098cee1aac09a459174a5990a15926b7e118",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Aktywna kobieta po pięćdziesiątce wykonuje ćwiczenia mobilności na macie w słonecznym salonie – symbol sprawności stawów i niezależności w dojrzałym wieku",
+      "caption": "",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/mobilnosc-stawy-hero.avif",
+          "sha256": "1f94e1f22b16d91ec36d7183b17b45643821ef0da25cf00b6a39f36c3af79df0",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/mobilnosc-stawy-hero.webp",
+          "sha256": "97357a07eacbcf11b1cabe7efce5c6cb1997746457e3159d0bf40e6c6beeffcf",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/mobilnosc-stawy-hero.jpg",
+          "sha256": "e3c02a863031b053518c22ecc96ad32c91ea5f42ab49d0d2076c0e22f4e7354e",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Aktywna kobieta po pięćdziesiątce wykonuje ćwiczenia mobilności na macie w słonecznym salonie – symbol sprawności stawów i niezależności w dojrzałym wieku. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym różni się mobilność od elastyczności?",
+      "alt": "Schemat porównujący rozciąganie pasywne i trening mobilności aktywnej – dwie sylwetki w pozycji ćwiczeniowej z opisami cech każdego podejścia",
+      "caption": "Elastyczność opisuje bierny zakres, do którego tkanki można doprowadzić, natomiast mobilność wymaga aktywnego ruchu i kontroli.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-1-20260929.avif",
+          "sha256": "bb8b705d979449f7c6945c4370e04e98e2e88dc05132edd673311a6b9d41c776",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-1-20260929.webp",
+          "sha256": "8f5eaa913a1e8873f10297b5efc08ed77c1ab4fe7f3b88c97b7df8dabe87bba5",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-1-20260929.jpg",
+          "sha256": "baa88eb801fa29092cf8976558fa45c104ef3b141361b81f3a16978cbbb4acdc",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym różni się mobilność od elastyczności?”: Schemat porównujący rozciąganie pasywne i trening mobilności aktywnej – dwie sylwetki w pozycji ćwiczeniowej z opisami cech każdego podejścia. Zgodność z treścią potwierdza podpis: Elastyczność opisuje bierny zakres, do którego tkanki można doprowadzić, natomiast mobilność wymaga aktywnego ruchu i kontroli."
+      }
+    },
+    {
+      "placement": "section:Czy rozciąganie jest konieczne przed każdym treningiem?",
+      "alt": "Trzy zdjęcia obok siebie: starszy mężczyzna ćwiczący tai chi w parku, kobieta na macie do jogi, para na zajęciach pilates z wałkiem – porównanie metod mobilności",
+      "caption": "Nie ma obowiązku wykonywania długiego rozciągania statycznego przed każdą sesją.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-2-20260929.avif",
+          "sha256": "66f9d1c33f8b71edcb8d8c657b185313fa2291987d0a11ebc117e9533cadabb8",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-2-20260929.webp",
+          "sha256": "5257dd55b9c51a2839df4cc28b7cecb8255f76374c22ef2d1edb792677b4324c",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-2-20260929.jpg",
+          "sha256": "9d5c6ab67f1da7ee537f9671ed4a57e4247ba260e2e945d9387984f1f5c7f363",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy rozciąganie jest konieczne przed każdym treningiem?”: Trzy zdjęcia obok siebie: starszy mężczyzna ćwiczący tai chi w parku, kobieta na macie do jogi, para na zajęciach pilates z wałkiem – porównanie metod mobilności. Zgodność z treścią potwierdza podpis: Nie ma obowiązku wykonywania długiego rozciągania statycznego przed każdą sesją."
+      }
+    },
+    {
+      "placement": "section:Czy trening siłowy może poprawić zakres ruchu?",
+      "alt": "Mężczyzna po pięćdziesiątce wykonuje przysiad ze sztangą w pełnym zakresie ruchu – ilustracja treningu siłowego poprawiającego mobilność stawu biodrowego i kolanowego",
+      "caption": "Metaanalizy badań z obciążeniem zewnętrznym wykazały poprawę zakresu ruchu po treningu siłowym oraz brak istotnej różnicy względem samego rozciągania.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-3-20260929.avif",
+          "sha256": "92887b91671bc1bb57efdd9cd157f9d9cf087ee8f92d82edc86ad627a6c6b1c2",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-3-20260929.webp",
+          "sha256": "cadc85844bad80611d6f11182c721d95c097f0f87de586b849e06a0b45be10a7",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-3-20260929.jpg",
+          "sha256": "b23d02ecbc7f252d07ffa5c16e8c11e06e2099c63fc7bba452197e61af4f0e9f",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy trening siłowy może poprawić zakres ruchu?”: Mężczyzna po pięćdziesiątce wykonuje przysiad ze sztangą w pełnym zakresie ruchu – ilustracja treningu siłowego poprawiającego mobilność stawu biodrowego i kolanowego. Zgodność z treścią potwierdza podpis: Metaanalizy badań z obciążeniem zewnętrznym wykazały poprawę zakresu ruchu po treningu siłowym oraz brak istotnej różnicy względem samego rozciągania."
+      }
+    },
+    {
+      "placement": "section:Jak ułożyć krótki program dla bioder, barków i kostek?",
+      "alt": "Schemat sylwetki człowieka z zaznaczonymi stawami priorytetowymi po 50. roku życia – biodra, odcinek piersiowy, stawy skokowe – z kierunkami ruchu wymagającymi pracy",
+      "caption": "Wybierz po jednym ruchu dla obszaru, który realnie ogranicza codzienność.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-4-20260929.avif",
+          "sha256": "24f5396ccf391b3eca72fe9f2d3b0b1acaff8294c5f530a8ca9341ee483531b5",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-4-20260929.webp",
+          "sha256": "a50971d3cb3170741adcd1d4d725fc781ed7d32c671cace1514f25a5710d25c1",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-4-20260929.jpg",
+          "sha256": "b8bd24b37991e6bf84f616153cdcc3d54556aceb8ffa7274701390d5d256f4ec",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak ułożyć krótki program dla bioder, barków i kostek?”: Schemat sylwetki człowieka z zaznaczonymi stawami priorytetowymi po 50. roku życia – biodra, odcinek piersiowy, stawy skokowe – z kierunkami ruchu wymagającymi pracy. Zgodność z treścią potwierdza podpis: Wybierz po jednym ruchu dla obszaru, który realnie ogranicza codzienność."
+      }
+    },
+    {
+      "placement": "section:Kiedy sztywność wymaga diagnostyki?",
+      "alt": "Fizjoterapeuta ocenia zakres ruchu w biodrze starszej pacjentki podczas wizyty w gabinecie – profesjonalna ocena bólu stawowego po 50. roku życia",
+      "caption": "Nagły obrzęk, zaczerwienienie, gorący staw, uraz, blokowanie, narastająca słabość albo ból nocny nie są wskazaniem do mocniejszego rozciągania.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-5-20260929.avif",
+          "sha256": "6bdfe661d4922ffa479a919ec6b7231a583f995a0c69ed75602dedd0b2c85894",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-5-20260929.webp",
+          "sha256": "45a73bb933dfbf763cfd4708ae27b4e975a1c88319d79ce13da3cf49d274d65d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce-section-5-20260929.jpg",
+          "sha256": "2f9ca0a0c564506963379fccd66fcea0e55e44b5c19af2273de222ce06e1245a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy sztywność wymaga diagnostyki?”: Fizjoterapeuta ocenia zakres ruchu w biodrze starszej pacjentki podczas wizyty w gabinecie – profesjonalna ocena bólu stawowego po 50. roku życia. Zgodność z treścią potwierdza podpis: Nagły obrzęk, zaczerwienienie, gorący staw, uraz, blokowanie, narastająca słabość albo ból nocny nie są wskazaniem do mocniejszego rozciągania."
+      }
+    }
+  ]
+}

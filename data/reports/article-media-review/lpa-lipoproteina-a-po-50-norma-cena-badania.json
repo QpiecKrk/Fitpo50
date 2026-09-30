@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "lpa-lipoproteina-a-po-50-norma-cena-badania",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "07a8d96a89767fe400832f1e43b65b56195ed3009e790a434860ac4d300bb53a",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Uśmiechnięta para po 50-tce w jasnym, słonecznym wnętrzu, poranne światło, spokojna i pogodna atmosfera",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-para-50-plus-poranne-swiatlo-20260929.avif",
+          "sha256": "1e46ce458b15dcfed3e0ea0556b2562776d4b75f6a5518523d31e0ae7d4dfbe3",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/lpa-para-50-plus-poranne-swiatlo-20260929.webp",
+          "sha256": "12e9f260df119d693ff9c8b478514f2dbedfb18dbf3432c626758b6c52d15e6e",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/lpa-para-50-plus-poranne-swiatlo-20260929.jpg",
+          "sha256": "18ca4b14263445b4ea97b97d940ab90edff352acbed13fda9f0874e494dbd71a",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Uśmiechnięta para po 50-tce w jasnym, słonecznym wnętrzu, poranne światło, spokojna i pogodna atmosfera. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym Lp(a) różni się od LDL i ApoB?",
+      "alt": "Infografika po polsku pokazująca różnicę między LDL, ApoB i Lp(a)",
+      "caption": "Lp(a) przypomina cząstkę LDL, ale zawiera dodatkową apolipoproteinę(a).",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-1-20260929.avif",
+          "sha256": "bfcfc32354078647099213f454a1f14588e8521ce7a3129a639255ea26c77620",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-1-20260929.webp",
+          "sha256": "fa4585b7febd065b2ae31bb87e9ca325db35902bc003421d86f812e2efb4a8d7",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-1-20260929.jpg",
+          "sha256": "4de3a7908e1f26ff2044070a9c5898c1883bf94f8fa0dd1889dd8ea3df77627b",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym Lp(a) różni się od LDL i ApoB?”: Infografika po polsku pokazująca różnicę między LDL, ApoB i Lp(a). Zgodność z treścią potwierdza podpis: Lp(a) przypomina cząstkę LDL, ale zawiera dodatkową apolipoproteinę(a)."
+      }
+    },
+    {
+      "placement": "section:Jak interpretować progi w nmol/l i mg/dl?",
+      "alt": "Infografika po polsku pokazująca progi wyniku Lp(a) w mg na decylitr i nmol na litr",
+      "caption": "Aktualizacja NLA określa poniżej 75 nmol/l lub 30 mg/dl jako niski poziom ryzyka, 75–125 nmol/l lub 30–50 mg/dl jako zakres pośredni, a co najmniej 125 nmol/l lub 50 mg/dl jako wysoki.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-2-20260929.avif",
+          "sha256": "9a38cd8eaaaede5b6f5da8cf2d8d3497b52443e29ec323359e326223d28c4c3c",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-2-20260929.webp",
+          "sha256": "9239b89bcd30bcf5c5af7f5e5d96d3f5ccfca00c585bf3c7924f71dfbaf170ce",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-2-20260929.jpg",
+          "sha256": "5217ccaf1ee1ee272a539a2de42d40cba72ccde698436cf483ed64bbe5b66c39",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak interpretować progi w nmol/l i mg/dl?”: Infografika po polsku pokazująca progi wyniku Lp(a) w mg na decylitr i nmol na litr. Zgodność z treścią potwierdza podpis: Aktualizacja NLA określa poniżej 75 nmol/l lub 30 mg/dl jako niski poziom ryzyka, 75–125 nmol/l lub 30–50 mg/dl jako zakres pośredni, a co najmniej 125 nmol/l lub 50 mg/dl jako wysoki."
+      }
+    },
+    {
+      "placement": "section:Czy Lp(a) wystarczy zbadać raz?",
+      "alt": "Osoba po 50-tce spokojnie analizująca wynik badania krwi przy jasnym stole",
+      "caption": "Ponieważ poziom jest głównie genetyczny i względnie stabilny, NLA zaleca co najmniej jeden pomiar u każdego dorosłego.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-3-20260929.avif",
+          "sha256": "ec2e163331c607a148f3febc51666ffb13f119a1b2a26c1c8607289868fbb333",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-3-20260929.webp",
+          "sha256": "1988ee5d92c40ae7e7b5fd20597ebdf9ebf6566f50d9aed75ed012fb32fdcc1b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-3-20260929.jpg",
+          "sha256": "33be59a67b533df42316da923bae76fbf657c0b8ece4e13b2652da64df89faf6",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy Lp(a) wystarczy zbadać raz?”: Osoba po 50-tce spokojnie analizująca wynik badania krwi przy jasnym stole. Zgodność z treścią potwierdza podpis: Ponieważ poziom jest głównie genetyczny i względnie stabilny, NLA zaleca co najmniej jeden pomiar u każdego dorosłego."
+      }
+    },
+    {
+      "placement": "section:Co można zrobić przy wysokiej Lp(a)?",
+      "alt": "Uśmiechnięty mężczyzna po 50-tce podczas aktywności na świeżym powietrzu w parku",
+      "caption": "Styl życia zwykle nie obniża znacznie samej Lp(a), ale nadal ogranicza pozostałe składniki ryzyka.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-4-20260929.avif",
+          "sha256": "c45cc580989609938384451225446d7ae63d04c576850f18b226ae5992e2264a",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-4-20260929.webp",
+          "sha256": "52b550edb0d500b4b6d1b324c0c0d637b701d9d8776f8a46f35b6b8a1a7690cd",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-4-20260929.jpg",
+          "sha256": "b4f2dd9f596ca07371d41e45a5c01651631a2418e1bb30bcb27456d6377ff68b",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co można zrobić przy wysokiej Lp(a)?”: Uśmiechnięty mężczyzna po 50-tce podczas aktywności na świeżym powietrzu w parku. Zgodność z treścią potwierdza podpis: Styl życia zwykle nie obniża znacznie samej Lp(a), ale nadal ogranicza pozostałe składniki ryzyka."
+      }
+    }
+  ]
+}

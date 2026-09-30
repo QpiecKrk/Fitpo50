@@ -1,0 +1,384 @@
+{
+  "version": 1,
+  "slug": "suplementy-po-50-tce-kompletny-przewodnik",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "437c6707ecceb80bee55a78f4dfec4d227d39818bc4010191265501c421ca9e5",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Aktywna kobieta po piecdziesiatce przy porannej kawie z suplementami na stole",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/suplementy-po-50-hero-v2.avif",
+          "sha256": "ea0d2f1261028fe2cc0d99423bbd3addaf84d5f295777acfb0768b9daff7fe92",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/suplementy-po-50-hero-v2.webp",
+          "sha256": "d3ea7ad9f57f41c30bc2ef1e9709d4e59ffbcb8e7e35f2399f1d995c229d5edc",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/suplementy-po-50-hero-v2.jpg",
+          "sha256": "83344af494cac4b5544fcdfac174c4ab0e9758854464a8753173d2eee3d2086d",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy suplementy po pięćdziesiątce to wyrzucanie pieniędzy w błoto?",
+      "alt": "Kobieta po pięćdziesiątce czytająca etykietę suplementu w aptece z uśmiechem",
+      "caption": "Sceptycyzm wobec suplementów jest zdrowy. Problem zaczyna się wtedy, gdy odrzucamy też te substancje, które naprawdę mają za sobą solidną naukę.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/suplementy-mit-fakt.avif",
+          "sha256": "72581effc171739508735c553caab4552aa5d9ff080a9c92e7445b6bec7279a3",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/suplementy-mit-fakt.webp",
+          "sha256": "05d80b6144abb6b1308084807374c25d568770d854f9b9a9c6b3001cbcf0d9a6",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/suplementy-mit-fakt.jpg",
+          "sha256": "f5d2876bf846830e28a7276182cdf320f9c7355a1871094e2ef1ff2db468d4c6",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy suplementy po pięćdziesiątce to wyrzucanie pieniędzy w błoto?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Witamina D3 – dlaczego to numer jeden po pięćdziesiątce?",
+      "alt": "Aktywna para po pięćdziesiątce spacerująca w słonecznym parku w Krakowie",
+      "caption": "Polskie słońce od października do marca jest zbyt nisko nad horyzontem, by skóra wyprodukowała wystarczającą ilość witaminy D3. Suplementacja przez co najmniej 8 miesięcy w roku to standard, nie opcja.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/witamina-d3-slonce-zdrowie.avif",
+          "sha256": "e962e1d3816d488affbc206ddd8146d3575ff04920580be20079ab21809a0968",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/witamina-d3-slonce-zdrowie.webp",
+          "sha256": "20ee6a33db4fda55f08ca87cedeeace649a44866943fd24165bde311cdc6fbd6",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/witamina-d3-slonce-zdrowie.jpg",
+          "sha256": "d00c830c4341c78efa513357509cbe395017413f42a2e11bc71f24a00c86cd15",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Witamina D3 – dlaczego to numer jeden po pięćdziesiątce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Omega-3 – co naprawdę wiemy o rybach w kapsułce?",
+      "alt": "Świeży łosoś i sardynki obok kapsułek omega-3 na białym tle kuchennym",
+      "caption": "Najlepszym źródłem EPA i DHA są tłuste ryby morskie – łosoś, makrela, sardynki. Suplement ma sens tylko wtedy, gdy ryby są rzadkością na talerzu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/omega-3-ryby-suplementy.avif",
+          "sha256": "8921a1f22200fa3e96c2795c6ae70fbb76b63a45b0d01e26457df00f136b54ce",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/omega-3-ryby-suplementy.webp",
+          "sha256": "058778470ae1a303a367e0c29c5e9ab14c0249e97bfbe75d2b7f6805a95ee5d9",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/omega-3-ryby-suplementy.jpg",
+          "sha256": "bf10bb60cc6bedb93388abd72cf25ede01d8970ce20843da50957e0915208c4d",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Omega-3 – co naprawdę wiemy o rybach w kapsułce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Magnez – czy to naprawdę najważniejszy minerał po 50-tce?",
+      "alt": "Spokojnie śpiący Polak po pięćdziesiątce w jasnej nowoczesnej sypialni",
+      "caption": "Magnez poprawia jakość snu, obniża ciśnienie i wspiera pracę ponad 300 enzymów. Kluczowe: forma ma znaczenie – tlenek to prawie nieprzyswajalna substancja.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/magnez-sen-relaks-po-50.avif",
+          "sha256": "da6cf3fb4fcaec819400205cc0688f40b36b0fa07832444447f10726ac819dad",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/magnez-sen-relaks-po-50.webp",
+          "sha256": "45e9c5c54676b45ea480013524bb984eb1206a958eaf248d836bcfe1d743edd6",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/magnez-sen-relaks-po-50.jpg",
+          "sha256": "142b440bd67f6175c0e39416fabe168849005bd3c6ef836eb5e0bf69e16530fa",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Magnez – czy to naprawdę najważniejszy minerał po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Witamina K2 i wapń – co naprawdę buduje kości po pięćdziesiątce?",
+      "alt": "Żywność bogata w wapń i suplementy K2 i D3 na kolorowym tle kuchennym",
+      "caption": "Dla kości liczą się dieta, witamina D przy niedoborze, trening oporowy i ocena ryzyka złamań; K2 nie jest obowiązkowym dodatkiem dla każdego.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/k2-d3-wapn-kosci.avif",
+          "sha256": "eb25c567d32db63d32da9c787b8a24b05b1166485e78077e68408613bfe877b0",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/k2-d3-wapn-kosci.webp",
+          "sha256": "d570de6e2b7a23742a87c1b6d2e1633fbcedc42cbefa766afa740171e0b3d2cd",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/k2-d3-wapn-kosci.jpg",
+          "sha256": "c336ef26d9c89a255497b30190784607fc804507c98d2b2c2a5b9ed80f9dc97d",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Witamina K2 i wapń – co naprawdę buduje kości po pięćdziesiątce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Witamina B12 i folian – dlaczego po pięćdziesiątce wchłaniasz je coraz gorzej?",
+      "alt": "Skupiony Polak po pięćdziesiątce pracujący przy laptopie z pełną energią w domu",
+      "caption": "Niedobór B12 może przez lata niszczyć neurony zanim pojawią się wyraźne objawy. U osób przyjmujących leki na refluks lub stosujących dietę roślinną – badanie poziomu B12 to obowiązek.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/witamina-b12-energia-mozg.avif",
+          "sha256": "5f019ebafae48fc85b25459611d20b4fff7bc65bc8e4183a2e8e9e6b60aff6cc",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/witamina-b12-energia-mozg.webp",
+          "sha256": "61289e3161691cc4989a99d4591ca00a66bbe641f97844a0023ce3efaf8d4ed2",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/witamina-b12-energia-mozg.jpg",
+          "sha256": "20c09e8207c1506b73211a8ecd3ca712dd2e05f2922b41e618a691e20c142016",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Witamina B12 i folian – dlaczego po pięćdziesiątce wchłaniasz je coraz gorzej?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Które popularne suplementy NIE działają i dlaczego nadal się sprzedają?",
+      "alt": "Rząd kolorowych suplementów na aptecznej półce z dużym znakiem zapytania",
+      "caption": "Multiwitaminy, kolagen w tabletkach i antyoksydanty w megadawkach – miliardy złotych rocznie wydawane na produkty, które w badaniach klinicznych nie wykazują obiecanych korzyści zdrowotnych.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/suplementy-ktore-nie-dzialaja.avif",
+          "sha256": "caa7635af6009b5248ef57371c6d0240b930cce9b3847ecda91b43639f67e883",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/suplementy-ktore-nie-dzialaja.webp",
+          "sha256": "65164b9f4b2474c77364d6543700459063aefa3e8c7453a06d20bd16efeb9ae3",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/suplementy-ktore-nie-dzialaja.jpg",
+          "sha256": "ea7c3101f8111b057c3548251f29e92cc073d2c5bec6101ceb601a6d93daa71b",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Które popularne suplementy NIE działają i dlaczego nadal się sprzedają?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak ustalić własną krótką listę suplementów po 50-tce?",
+      "alt": "Pięć suplementów D3 magnez omega-3 B12 kreatyna ułożonych na białym stole z polskimi etykietami",
+      "caption": "Krótka lista ma wynikać z konkretnego wskazania. Większa liczba kapsułek nie oznacza lepszego planu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/top5-suplementow-po-50.avif",
+          "sha256": "3bca6334f630aa9082cfc4aeba19190c01d8ec3a56d1be747ee82b1ceab5eff7",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/top5-suplementow-po-50.webp",
+          "sha256": "9decf475652329ef57dde426960a73fcd0fa20acbcf6afabfcb15ff0ec6b91b3",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/top5-suplementow-po-50.jpg",
+          "sha256": "8f49b33c75c13213c6ae6dab92d707cc9258f4840e92b960b201ee6c54062c5e",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak ustalić własną krótką listę suplementów po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak kupować suplementy mądrzej – na co patrzeć, czego unikać?",
+      "alt": "Kobieta po pięćdziesiątce czytająca etykietę suplementu z lupą w jasnej aptece",
+      "caption": "Certyfikat NSF, Informed-Sport lub USP Verified na opakowaniu to minimalny standard jakości przy zakupie suplementów. Bez niego kupujesz kota w worku.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-kupowac-suplementy-madrzej.avif",
+          "sha256": "6b2c2778cf8bc3445bb46553909b4d49b2ee9792e5074d94a6727cfc6f667938",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-kupowac-suplementy-madrzej.webp",
+          "sha256": "fed6b5989633235b32d9e534030a54627b94d0be64ff0ade4487626ac90b4f64",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-kupowac-suplementy-madrzej.jpg",
+          "sha256": "b9f45853c5a437e488925238f40dcc844778d7e3f060df2bd6b90f8a48b5c679",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak kupować suplementy mądrzej – na co patrzeć, czego unikać?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy suplementy nie wystarczają – granica między suplementem a lekiem?",
+      "alt": "Lekarz i pacjentka po pięćdziesiątce rozmawiają o suplementacji przy biurku w gabinecie",
+      "caption": "Przy poważnych schorzeniach suplementy mogą wspierać – ale nie zastępują terapii. Lekarz powinien wiedzieć o każdym suplemencie, który regularnie przyjmujesz.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/suplement-vs-lek-lekarz.avif",
+          "sha256": "eef27f63bcafaf9c7493a02948da00a9fe3b4461bce9d16e1897c30f35bad04e",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/suplement-vs-lek-lekarz.webp",
+          "sha256": "7495ec28729ee0c08dbe6e9efe97d2081f898b3a4be0dcab929fa0eb09cf4645",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/suplement-vs-lek-lekarz.jpg",
+          "sha256": "014866f254e9f866a4e394cacfa2180b7c6a115f7c338fa3797b282ca1961923",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy suplementy nie wystarczają – granica między suplementem a lekiem?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

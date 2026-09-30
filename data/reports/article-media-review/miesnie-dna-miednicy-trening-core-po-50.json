@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "slug": "miesnie-dna-miednicy-trening-core-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "3e07bed20606fb3da7807185c7955434e32c8a91dcdab1aed4f78706d27bb6f9",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta w wieku 50 lat wykonująca kontrolowany przysiad na siłowni",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/hero-dno-miednicy-fitpo50-v2.avif",
+          "sha256": "d2a4e5fe929b39bd5caaf4c20fb1c6a12f90fe6fe9cd64c205ee8224e7be6728",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/hero-dno-miednicy-fitpo50-v2.webp",
+          "sha256": "9e3051f3d85fb925270f26b8a9ad76597300be03db055fe202bb1399e1872831",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/hero-dno-miednicy-fitpo50-v2.jpg",
+          "sha256": "62c29b736b793f7950aeea2a8ce817cc5e090593692a02512e7f6dc1daafa1c7",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego mięśnie dna miednicy słabną po 50-tce i po menopauzie?",
+      "alt": "Schemat anatomiczny dna miednicy z zaznaczonymi mięśniami i opisami po polsku",
+      "caption": "Mięśnie dna miednicy współpracują z przeponą i głębokimi mięśniami brzucha.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/dno-miednicy-anatomia-50plus.avif",
+          "sha256": "fcae4d9d6b78edebbfd0f708627795b5e8db0ced334c9e0b313fa08e2062840f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/dno-miednicy-anatomia-50plus.webp",
+          "sha256": "427a088701b242811c2f2c66c34ec4fee671274446264ef1156b64dcbc5e45df",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/dno-miednicy-anatomia-50plus.jpg",
+          "sha256": "fae78264b103919fdaf18a7427c012ccb88468171cb163e19688ea24068150bd",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego mięśnie dna miednicy słabną po 50-tce i po menopauzie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Trening oporowy a ciśnienie śródbrzuszne – jak bezpiecznie dźwigać po 50-tce?",
+      "alt": "Schemat prawidłowego oddechu podczas treningu siłowego z opisami: wdech–wydech, fazy ćwiczenia",
+      "caption": "Oddech jest jednym z elementów kontroli ciśnienia podczas wysiłku.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-oddech-dno-miednicy-schemat.avif",
+          "sha256": "97d53f7f3abdee6a7db752fa6947cb47703afed552c64d4793a7f5dc2cfb2a83",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/trening-oddech-dno-miednicy-schemat.webp",
+          "sha256": "ca171030ac634f7870877a2b95826e545bb314fea206310c32fdddaff132c6e6",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/trening-oddech-dno-miednicy-schemat.jpg",
+          "sha256": "e3491dbfb663929204d97fd6c59c93e98a69076ccd72665bef65a7045ce0098e",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Trening oporowy a ciśnienie śródbrzuszne – jak bezpiecznie dźwigać po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kegel to nie wszystko – jakie są najlepsze ćwiczenia na wzmocnienie głębokiego core?",
+      "alt": "Ilustracja sześciu ćwiczeń core z opisami polskimi: kegel, dead bug, bird dog, mostek, przysiad, oddech",
+      "caption": "Zestaw ćwiczeń core aktywujących dno miednicy w ruchu funkcjonalnym.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/cwiczenia-core-dno-miednicy-zestaw.avif",
+          "sha256": "904331c0f61623d96207dffc60332a968d2bba72d4aadf1a986c97a780efd104",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/cwiczenia-core-dno-miednicy-zestaw.webp",
+          "sha256": "f89fb1997f135120f04acbab157910276ffbacc40bfad9fee5f809d57b7fae1e",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/cwiczenia-core-dno-miednicy-zestaw.jpg",
+          "sha256": "fff25eacff76db937abc94186a35e7fc1dfb0bf57ed27433ebfa05fa8896aa1a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kegel to nie wszystko – jakie są najlepsze ćwiczenia na wzmocnienie głębokiego core?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy przysiady wzmacniają dno miednicy?",
+      "alt": "Schemat faz przysiadu z oznaczeniami: wdech w dole, wydech przy wstawaniu, aktywacja dna miednicy",
+      "caption": "Przysiad ćwiczy nogi i pośladki; jego wpływ na objawy dna miednicy trzeba oceniać indywidualnie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/przysiad-dno-miednicy-oddech-fazy.avif",
+          "sha256": "6938937a86569a453ad97ba9cd34981b2570d36d809b1daa96b070c050a1ef1c",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/przysiad-dno-miednicy-oddech-fazy.webp",
+          "sha256": "a7a73c6defdaf9f26d6443969499abab3da23d2e972522bb1c2967471fa015b4",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/przysiad-dno-miednicy-oddech-fazy.jpg",
+          "sha256": "83c4e55c72c83de76cb28da711cf45e754585373ee711efcf11b9f2b884624b1",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy przysiady wzmacniają dno miednicy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Trening po menopauzie – co zmienia się w praktyce i jak to uwzględnić?",
+      "alt": "Infografika: zasady treningu po menopauzie z ikonami i opisami po polsku, ciemne tło",
+      "caption": "Kluczowe zasady bezpiecznego treningu dla kobiet po menopauzie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/menopauza-trening-zasady-infografika.avif",
+          "sha256": "9944f075aa8ee23061e4c4a423235f464543504d1b13581a3fbd595fc40aaeff",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/menopauza-trening-zasady-infografika.webp",
+          "sha256": "d08c0860d441a050a17a2bedef75eb5fd4e2b85a4bacdb9a0b094164badaf27e",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/menopauza-trening-zasady-infografika.jpg",
+          "sha256": "da0b613c722263073c77c798dff799074a8b63587653056db1ec150e91e10b04",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Trening po menopauzie – co zmienia się w praktyce i jak to uwzględnić?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy zgłosić się do fizjoterapeuty uroginekologicznego?",
+      "alt": "Lista sygnałów alarmowych w formie graficznej z polskimi podpisami na ciemnym tle",
+      "caption": "Objawy, które warto omówić z fizjoterapeutą zajmującym się dnem miednicy.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/fizjoterapeuta-uroginekologiczny-kiedy-isc.avif",
+          "sha256": "7a8de6186b0269e2f6cf5720d03dda9a54bd824c9de1f4faf72c235f5916028b",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/fizjoterapeuta-uroginekologiczny-kiedy-isc.webp",
+          "sha256": "730cb9bacb5997fed56832ae65f3b8f5f8a19f9865feca24cf07ebaa12693b01",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/fizjoterapeuta-uroginekologiczny-kiedy-isc.jpg",
+          "sha256": "688b4173218d841852a6e0b77dfc6889732d361baa793401641256c31eebac33",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy zgłosić się do fizjoterapeuty uroginekologicznego?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak przepona wpływa na dno miednicy?",
+      "alt": "Schemat synchronizacji przepony i dna miednicy z fazami oddechu, opisy po polsku",
+      "caption": "Przepona i dno miednicy współpracują podczas oddechu oraz zmian ciśnienia.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/przepona-dno-miednicy-synchronizacja.avif",
+          "sha256": "8e2efe62c4a3b3c61d211fa9cc2dbc6ad2669ff78a0bcda3e60748d3f4fd5e63",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/przepona-dno-miednicy-synchronizacja.webp",
+          "sha256": "e987875029dc08a9580e7963c99ac37d2d32ba62e8638ed89c891e1081fae0d3",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/przepona-dno-miednicy-synchronizacja.jpg",
+          "sha256": "36d40bd7778b6db9b265b7239eee7a6828d70bd396d61659b79c54de8c832054",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak przepona wpływa na dno miednicy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

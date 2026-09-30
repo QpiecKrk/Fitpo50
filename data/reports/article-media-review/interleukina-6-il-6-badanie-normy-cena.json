@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "interleukina-6-il-6-badanie-normy-cena",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "ecc35208597ec176961d50d2b112478d55c0ddb74b4f028e28f705d27f630219",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Uśmiechnięta para w średnim wieku na porannym spacerze w parku, symbolizująca zdrowie i profilaktykę",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/interleukina-6-hero-20260929.avif",
+          "sha256": "200b964c783947302197caa40d15d06d5cee57572ad381431bc2b806e4e7de95",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/interleukina-6-hero-20260929.webp",
+          "sha256": "ca626998ae12ebfdcbb7e4e4f455e2eb6bfa12e39800dc9114509403b7cf76b0",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/interleukina-6-hero-20260929.jpg",
+          "sha256": "54cbde65e6b50391a565110af3ad4679793e8bb955c1c27fd952c7c406822cbc",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Uśmiechnięta para w średnim wieku na porannym spacerze w parku, symbolizująca zdrowie i profilaktykę. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym jest IL-6 i dlaczego nie jest tylko „zła”?",
+      "alt": "Ilustracja do sekcji: Czym jest interleukina 6 i jak działa w organizmie",
+      "caption": "Interleukina 6 działa w wielu szlakach odpornościowych i metabolicznych.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-1-20260929.avif",
+          "sha256": "ee25545dd18e29fe419b04777665fa88d28ab291e7e89e3c05ecd525deb48b96",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-1-20260929.webp",
+          "sha256": "e58f41d1f7f9c33793766774a8f02f461cfebe7dfcbac03e2e8ebe4e430a160f",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-1-20260929.jpg",
+          "sha256": "19f5d763da5d731978de02958db67024b4573eb00715c433040e80b6aa8b0c79",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym jest IL-6 i dlaczego nie jest tylko „zła”?”: Ilustracja do sekcji: Czym jest interleukina 6 i jak działa w organizmie. Zgodność z treścią potwierdza podpis: Interleukina 6 działa w wielu szlakach odpornościowych i metabolicznych."
+      }
+    },
+    {
+      "placement": "section:Kiedy lekarz może zlecić badanie IL-6?",
+      "alt": "Ilustracja do sekcji: Jak wygląda badanie interleukiny 6 i ile kosztuje",
+      "caption": "Badanie bywa używane w wybranych sytuacjach klinicznych i specjalistycznych, gdy wynik może uzupełnić ocenę odpowiedzi zapalnej.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-2-20260929.avif",
+          "sha256": "100588750e724d594d5d94013d84cb93adc39c4a9506bfc43f74c991353874b3",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-2-20260929.webp",
+          "sha256": "c59a7d66de78629ab0684c1a5ef7810910a5a210138698e9eaf214c87f64e381",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-2-20260929.jpg",
+          "sha256": "bccd73bedeb2e68def4bc3dc9fcafe97ecd7cb480419774dc1883ee46bee4e4a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy lekarz może zlecić badanie IL-6?”: Ilustracja do sekcji: Jak wygląda badanie interleukiny 6 i ile kosztuje. Zgodność z treścią potwierdza podpis: Badanie bywa używane w wybranych sytuacjach klinicznych i specjalistycznych, gdy wynik może uzupełnić ocenę odpowiedzi zapalnej."
+      }
+    },
+    {
+      "placement": "section:Jak czytać wynik i zakres referencyjny?",
+      "alt": "Ilustracja do sekcji: Jak czytać wynik badania IL-6? Co oznaczają podwyższone wartości",
+      "caption": "Najpierw sprawdź jednostkę, metodę i zakres podany przez laboratorium.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-3-20260929.avif",
+          "sha256": "124899af41f2829f431773c1b69fcfbbc6f031c57a2176d7a2d8d610fdc17be5",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-3-20260929.webp",
+          "sha256": "06b01b5af187a9e76651cf3190473d9dfb6180ac73217f8dcac0ab2ecf6319b2",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-3-20260929.jpg",
+          "sha256": "144732c3f2981ab027a4893faefbae8bf66793ecaee22bde0b9c2f38e7d593f9",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak czytać wynik i zakres referencyjny?”: Ilustracja do sekcji: Jak czytać wynik badania IL-6? Co oznaczają podwyższone wartości. Zgodność z treścią potwierdza podpis: Najpierw sprawdź jednostkę, metodę i zakres podany przez laboratorium."
+      }
+    },
+    {
+      "placement": "section:Czy ruch obniża czy podnosi IL-6?",
+      "alt": "Ilustracja do sekcji: Co obniża, a co podnosi poziom interleukiny 6",
+      "caption": "Długi lub intensywny wysiłek może przejściowo zwiększyć IL-6 uwalnianą między innymi przez pracujące mięśnie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-4-20260929.avif",
+          "sha256": "7b1f18c00a4ca43fcd0de4e822966e65078eb889a7cba4a3554718731d5c86ee",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-4-20260929.webp",
+          "sha256": "67d218ed07be4fcb001352c3aad747a7498016b720cf9be1ba2c5b2493ff250b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/interleukina-6-il-6-badanie-normy-cena-section-4-20260929.jpg",
+          "sha256": "6e922b56afc1e4fd59821d23e0da596bd362c317c216574246b9b900b1d37ec9",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy ruch obniża czy podnosi IL-6?”: Ilustracja do sekcji: Co obniża, a co podnosi poziom interleukiny 6. Zgodność z treścią potwierdza podpis: Długi lub intensywny wysiłek może przejściowo zwiększyć IL-6 uwalnianą między innymi przez pracujące mięśnie."
+      }
+    }
+  ]
+}

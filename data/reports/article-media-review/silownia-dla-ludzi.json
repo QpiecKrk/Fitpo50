@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "silownia-dla-ludzi",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "339b27c8508aea5d4dc4386e3809ef3fe2b5d90b17604b64552cfefd4493fe78",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Osoba po 50-tce wchodzi na siłownię, skupiona i spokojna",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/silka-hero.avif",
+          "sha256": "c27cf71dbacdf91b620b0f60ef1d7e13092077f2a67fe178a520345ff94eff44",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/silka-hero.webp",
+          "sha256": "da5c73b801c04c7d96bd377d1699632154816257d66bf32a6f9dadef993eade9",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/silka-hero.jpg",
+          "sha256": "efe4f525a6662e622e8c9b4454f4e8d7695f73087f07217ced0ffe6ebaf76088",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Osoba po 50-tce wchodzi na siłownię, skupiona i spokojna. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co rzeczywiście daje siłownia po 50-tce?",
+      "alt": "Grupa osób po pięćdziesiątce wykonuje ćwiczenia oporowe",
+      "caption": "Trening oporowy może poprawiać siłę, zdolność wstawania, przenoszenia zakupów i stabilność.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-dla-ludzi-section-1-20260929.avif",
+          "sha256": "8bb8bbc2e85b346dd3e4802a54325270768f3fb488767517444e3d9fccaee431",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/silownia-dla-ludzi-section-1-20260929.webp",
+          "sha256": "85b76287c160ee1f0663494502722f42581ed5471f27c4d1f576019dca21cc2a",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/silownia-dla-ludzi-section-1-20260929.jpg",
+          "sha256": "bd1a8dca6bae0f6e061ff0f37d1f5233a008005745fe78ab1f625ee85ce603bc",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co rzeczywiście daje siłownia po 50-tce?”: Grupa osób po pięćdziesiątce wykonuje ćwiczenia oporowe. Zgodność z treścią potwierdza podpis: Trening oporowy może poprawiać siłę, zdolność wstawania, przenoszenia zakupów i stabilność."
+      }
+    },
+    {
+      "placement": "section:Czy siłownia pomaga na samotność?",
+      "alt": "Trzy osoby po pięćdziesiątce rozmawiają między seriami",
+      "caption": "Regularne wyjście z domu tworzy okazję do krótkich rozmów i rozpoznawania tych samych osób.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-dla-ludzi-section-2-20260929.avif",
+          "sha256": "07421b6310ef640cf16383ebe50877923e04c7c006dddfda6b69b82ab2cc6f1d",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/silownia-dla-ludzi-section-2-20260929.webp",
+          "sha256": "e1b89c3783b1b280536445d480755173d5fdd937449cff316ece717b872cee65",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/silownia-dla-ludzi-section-2-20260929.jpg",
+          "sha256": "fb3762653a002c76a9fcc2ff0230e4069ff82776b5542cbed47ff3a618af8e0b",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy siłownia pomaga na samotność?”: Trzy osoby po pięćdziesiątce rozmawiają między seriami. Zgodność z treścią potwierdza podpis: Regularne wyjście z domu tworzy okazję do krótkich rozmów i rozpoznawania tych samych osób."
+      }
+    },
+    {
+      "placement": "section:Jak wybrać klub bez marketingowych złudzeń?",
+      "alt": "Kobieta ogląda wyposażenie praktycznego klubu z trenerem",
+      "caption": "Sprawdź dojazd, schody, szatnię, dostępność sprzętu i natężenie ruchu w godzinie, w której naprawdę będziesz ćwiczyć.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-dla-ludzi-section-3-20260929.avif",
+          "sha256": "364fbaf4a12aef64dd905b381f08d5a7805644877cd7c5f9657d1a8b96b3a9f2",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/silownia-dla-ludzi-section-3-20260929.webp",
+          "sha256": "e9fab35cc5379b04bf93374462e33e4fa34d4c47922e85dd6d34be75092d2599",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/silownia-dla-ludzi-section-3-20260929.jpg",
+          "sha256": "1e1a1cb3bbd1391c3538dd68a9e20d63a31e05fc0cb89a33ee1a612b0217ebf0",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak wybrać klub bez marketingowych złudzeń?”: Kobieta ogląda wyposażenie praktycznego klubu z trenerem. Zgodność z treścią potwierdza podpis: Sprawdź dojazd, schody, szatnię, dostępność sprzętu i natężenie ruchu w godzinie, w której naprawdę będziesz ćwiczyć."
+      }
+    },
+    {
+      "placement": "section:Jak zacząć rozmowę i nie czuć się intruzem?",
+      "alt": "Dwaj dojrzali mężczyźni rozmawiają przy dystrybutorze wody",
+      "caption": "Najbezpieczniejsze są krótkie, sytuacyjne pytania: czy sprzęt jest wolny, jak ustawić siedzisko, czy można ćwiczyć na zmianę.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-dla-ludzi-section-4-20260929.avif",
+          "sha256": "89b4c3b25f8ca630d3542ed26d59337a132a6fc1e165a5bd0e02aa17c663ba05",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/silownia-dla-ludzi-section-4-20260929.webp",
+          "sha256": "a0f31efdcc1f43b0f06c09c22c97fdcde5647aba6f5d0229c689fbf570992263",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/silownia-dla-ludzi-section-4-20260929.jpg",
+          "sha256": "e6805ad3bd5343d4463023a6782dd70b38e9f77886b3537476467aa0f98d7b43",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak zacząć rozmowę i nie czuć się intruzem?”: Dwaj dojrzali mężczyźni rozmawiają przy dystrybutorze wody. Zgodność z treścią potwierdza podpis: Najbezpieczniejsze są krótkie, sytuacyjne pytania: czy sprzęt jest wolny, jak ustawić siedzisko, czy można ćwiczyć na zmianę."
+      }
+    }
+  ]
+}

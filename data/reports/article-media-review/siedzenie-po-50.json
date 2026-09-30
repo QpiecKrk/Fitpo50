@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "slug": "siedzenie-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "b857e043239d84f7a6cc9ca5237a5eee50a7a5c156983b41aacfd31fb39e91af",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta po 50-tce wstaje od biurka i zaczyna krótki spacer po domu",
+      "caption": "",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-hero-ruch-20260930.avif",
+          "sha256": "2c747bd2b878dd9b9c7b288c24953d19ede267dfd9304dc21ecd2d9195fd855a",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/siedzenie-hero-ruch-20260930.webp",
+          "sha256": "683828baeb645d09b2c0082a4694d9642499fa9d84b1f0f9196b4e05dbf8c5ca",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/siedzenie-hero-ruch-20260930.jpg",
+          "sha256": "c58149fa2fdb4e7f9a50d6b78eaa3fafcdac9298d3515d2e9a93cf2500323676",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Problem, którego nie ma na plakacie w gabinecie lekarskim?",
+      "alt": "Mężczyzna po 60-tce długo siedzi na kanapie obok butów spacerowych",
+      "caption": "Długie bloki siedzenia łatwo przeoczyć, szczególnie gdy poza treningiem większość dnia spędzasz bez ruchu.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-niewidoczny-problem-20260930.avif",
+          "sha256": "78107d40f744acd2dfdf04114d809132eae3d1cf30f5faeaf9a3bce288d82134",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/siedzenie-niewidoczny-problem-20260930.webp",
+          "sha256": "757bf72f3bcaae42117131f9af0faf5562720dc0c53dd98c342ee6e7c6832e7e",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/siedzenie-niewidoczny-problem-20260930.jpg",
+          "sha256": "72420b3d126d6d9d78dcf0a544fe980f5857262eacd666d6768f838ee260d973",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Problem, którego nie ma na plakacie w gabinecie lekarskim?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co konkretnie robi siedzenie z ciałem po 50-tce?",
+      "alt": "Kobieta po 60-tce przerywa pracę przy biurku i porusza nogami",
+      "caption": "Krótka przerwa uruchamia mięśnie nóg i przerywa bezruch, choć sama nie zastępuje regularnej aktywności fizycznej.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-wplyw-na-cialo-20260930.avif",
+          "sha256": "b5dd6212a1ab2108b59c4998fc582a1b377a055e2df8e8107cdbed6327ffc14b",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/siedzenie-wplyw-na-cialo-20260930.webp",
+          "sha256": "76a442ceeae14d42fa4787ba078fc1a7b4e3575142c7b96b529cfe744b154f1b",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/siedzenie-wplyw-na-cialo-20260930.jpg",
+          "sha256": "fe1d21b4c7e101bf91a7f0a73b5517cd5d6f78712940814cdd3c2e6ca05b3d18",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co konkretnie robi siedzenie z ciałem po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Pół godziny mniej — co naprawdę się zmienia po roku?",
+      "alt": "Kobieta po 60-tce zamienia czas siedzenia na codzienny spacer",
+      "caption": "Ograniczenie siedzenia o niewielką porcję każdego dnia ma sens, gdy zamieniasz ją na chodzenie lub inną lekką aktywność.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-pol-godziny-mniej-20260930.avif",
+          "sha256": "64c5fbbb3716e2cff42d2958565220e5eb834e3a115054b839d33d8000618955",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/siedzenie-pol-godziny-mniej-20260930.webp",
+          "sha256": "90addea773b39967939d6f93d5acf6f6e365034df03fa4f1cf0ee2ed26555e4b",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/siedzenie-pol-godziny-mniej-20260930.jpg",
+          "sha256": "ce7497d785eade76e8b46d8fb2ec32a3a0470b5801c1b6c8661e3a16cbe005ee",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Pół godziny mniej — co naprawdę się zmienia po roku?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego chodzenie to nie „cokolwiek”?",
+      "alt": "Para po 60-tce maszeruje energicznie po parku",
+      "caption": "Chodzenie angażuje duże grupy mięśni, podnosi wydatek energetyczny i można je łatwo wpleść w zwykły dzień.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-chodzenie-20260930.avif",
+          "sha256": "223a11e3f2b149b4a24e4adfdce6d69a8d1253f56313f3d7997a3909ebeaa694",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/siedzenie-chodzenie-20260930.webp",
+          "sha256": "d8eb41b003349f11076bfd00d7783c5a90334bd971f28f2fdbe4968b9b4ed14e",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/siedzenie-chodzenie-20260930.jpg",
+          "sha256": "4777c836af416fe13297302d555002a9d6a72c6edc05fd73e7a8815d9fbfe232",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego chodzenie to nie „cokolwiek”?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak to zrobić?",
+      "alt": "Kobieta po 60-tce robi przerwę od biurka i idzie po wodę",
+      "caption": "Najprostszy plan łączy częste wstawanie z konkretnym powodem: wodą, schodami, rozmową na stojąco lub krótkim spacerem.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-jak-przerywac-20260930.avif",
+          "sha256": "62d7337a0ad356aea26d143c1d2c63ecee447ee881503adc090989235a6c7265",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/siedzenie-jak-przerywac-20260930.webp",
+          "sha256": "d34164aba685356128a93ea37263677421377c32f94a12854498e5801d6c7c1a",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/siedzenie-jak-przerywac-20260930.jpg",
+          "sha256": "b7c3278a7ae456cdfa2da9ba6da8313a52643b18d9af84462fa8a597710ac026",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak to zrobić?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Obalamy mity?",
+      "alt": "Mężczyzna po treningu wychodzi na spacer zamiast wracać na kanapę",
+      "caption": "Pojedynczy trening jest ważny, ale nie usuwa skutków wielu kolejnych godzin bezruchu w pozostałej części dnia.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-mity-aktywny-kanapowiec-20260930.avif",
+          "sha256": "b7f84d88516b0e592e612d357a1c8fe32a8c17bbffecf4944a643b76264e3f3b",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/siedzenie-mity-aktywny-kanapowiec-20260930.webp",
+          "sha256": "7918b16783930c2ea5d232dba6bd47a70396f0b1fdc79a7d6134b75585d33fd4",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/siedzenie-mity-aktywny-kanapowiec-20260930.jpg",
+          "sha256": "ee5bcee2f1490f0f3f2919f2090b6dc436aa5a56552e9746e27ff26cdd628fd9",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Obalamy mity?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Na koniec?",
+      "alt": "Para po 60-tce wybiera schody i pieszy powrót z zakupów",
+      "caption": "Mniej siedzenia nie wymaga rewolucji: liczą się powtarzane decyzje, by przejść kawałek, wstać i wykonać codzienne zadanie w ruchu.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-male-decyzje-20260930.avif",
+          "sha256": "3c39d1f810774ffb9fe05b31feed5f525eabe6450a0af10d8173844cb414851f",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/siedzenie-male-decyzje-20260930.webp",
+          "sha256": "71ff71c17406cf5349eff87fd0b3927afa1dfd4f54cb77bbb9ceacbb580ca8a4",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/siedzenie-male-decyzje-20260930.jpg",
+          "sha256": "a65cbfb9e2f9763259748e17b9adf6732059354ec0e4b605e27c84e92fae1d64",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Na koniec?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "waga-smart-pomiar-skladu-ciala-prawda",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "0c7b5436fcef376dc5d9bab0b1e944d16aad3e4831b86287e4a52af1f4b9619a",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta po 50-tce stoi na nowoczesnej wadze smart i sprawdza wyniki w aplikacji",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/waga-smart-hero-v2.avif",
+          "sha256": "cdac9b0c220cb0bb6eee0a7e8acfb4d29f530a56b6fd8b67789bdd7963182277",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/waga-smart-hero-v2.webp",
+          "sha256": "d0e7b52811a7279db8fd3cc822a1efc484dbea0d148f8beb37dcfeb17290287f",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/waga-smart-hero-v2.jpg",
+          "sha256": "1246fe19c5905de694ab072a0aa2c4d6d53c313bd83a03756f6650924ffd7732",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak działa technologia BIA w Twojej wadze łazienkowej?",
+      "alt": "Zbliżenie na stopy na elektrodach wagi łazienkowej",
+      "caption": "Srebrne płytki na wadze to elektrody, przez które płynie impuls analizujący Twoje ciało.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waga-smart-elektrody-bia.avif",
+          "sha256": "729d5bdf0f5dbb9afd51e9c804e492c3e9889cd17153e0c2ea84a1749bb142ae",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waga-smart-elektrody-bia.webp",
+          "sha256": "3393cf36318df146545c2cdbeb694827d2ce22c0f56b9fc5531428b54d51dd22",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waga-smart-elektrody-bia.jpg",
+          "sha256": "1c5257db5bf31add74fa9c364f05ce9b72256a14226c8daa121568f244ce5fff",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak działa technologia BIA w Twojej wadze łazienkowej?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Masa ciała, tłuszcz i mięśnie: Co waga mierzy naprawdę dobrze?",
+      "alt": "Mężczyzna porównujący wyniki z wagi z badaniem lekarskim",
+      "caption": "Różnica między wagą domową a badaniem DEXA może wynosić kilka kilogramów tłuszczu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waga-smart-wyniki-porownanie.avif",
+          "sha256": "53db2aa3818edbaa43e52d94849380e4ee0735079a58ee72b5005d14138f4e9f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waga-smart-wyniki-porownanie.webp",
+          "sha256": "3225d1f8b542df48efeb69b34c713fd390b128d24b40e12be7cbc6644627d201",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waga-smart-wyniki-porownanie.jpg",
+          "sha256": "3a5e144882694819c7827b6ba963898c72a15b607a0ed61ac26c52ee323cd2e7",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Masa ciała, tłuszcz i mięśnie: Co waga mierzy naprawdę dobrze?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Tłuszcz trzewny: Dlaczego Twoja waga może Cię oszukiwać?",
+      "alt": "Kobieta mierząca obwód talii centymetrem przy lustrze",
+      "caption": "Obwód talii to najprostszy i najpewniejszy wskaźnik zdrowia metabolicznego.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waga-smart-obwod-talii.avif",
+          "sha256": "a14dbc88ff67a47eeda3c70e94d06d1cf2e94feebc5b6d5b15ed647f1fc9c3f8",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waga-smart-obwod-talii.webp",
+          "sha256": "a317696a022821260435d6e16a90168ee420c0f1b8e6b0b061fd42645ad75aba",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waga-smart-obwod-talii.jpg",
+          "sha256": "204b555911053c3daaadfec472537525ca79f0c7c990319f456bbd6a8fa7c631",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Tłuszcz trzewny: Dlaczego Twoja waga może Cię oszukiwać?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Nawodnienie: Cichy sabotażysta Twoich wyników na wadze smart?",
+      "alt": "Szklanka wody obok wagi łazienkowej",
+      "caption": "Płyny w Twoim organizmie to główny czynnik zaburzający pomiary BIA.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waga-smart-szklanka-wody.avif",
+          "sha256": "cf5ded6bf2659c6b8fedbb766513c2d1ea717af5e5f54603e5b896f5b17e9ec4",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waga-smart-szklanka-wody.webp",
+          "sha256": "0238f4606792794a701d08c8a2afebfeea42e35ded694daa841126c6a49a38bf",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waga-smart-szklanka-wody.jpg",
+          "sha256": "bcf6ded5da7fc74db21f0dec690df1a2e7757b11221b8a4bd886724cc5e97996",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Nawodnienie: Cichy sabotażysta Twoich wyników na wadze smart?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Masa kości i BMI: Dlaczego waga liczy, a nie mierzy?",
+      "alt": "Mężczyzna po 50-tce na wadze rano z kawą",
+      "caption": "Poranna rutyna z wagą to dobry nawyk, o ile rozumiesz ograniczenia tych liczb.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waga-smart-poranek-rutyna.avif",
+          "sha256": "dc351fbe3e16057ff0b4b0d9c76b8d1e29871762cc7680f7b0f80ff0e04c5398",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waga-smart-poranek-rutyna.webp",
+          "sha256": "5d1a75145a31d40e939c17a243cc6b3978cf83965887afd097ea4242d5c2ecd6",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waga-smart-poranek-rutyna.jpg",
+          "sha256": "47fda5d4cfd29d3473b61ef902d59e344e484d25120ecc22eec3337759fc664f",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Masa kości i BMI: Dlaczego waga liczy, a nie mierzy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak używać wagi smart mądrze? Zasada 30 pomiarów?",
+      "alt": "Para po 50-tce analizująca wykresy w aplikacji zdrowotnej",
+      "caption": "Analizowanie trendów miesięcznych to najmądrzejszy sposób korzystania z wagi smart.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waga-smart-para-aplikacja-trend.avif",
+          "sha256": "464de5ee73bb1acd64451fb1d17e05fba54e5cfc7745b8e50f66cde7512f4578",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waga-smart-para-aplikacja-trend.webp",
+          "sha256": "0b7b5df56e0d1368ec67ecfe8c7de0e2162a06325a45551f03c044a7567c45eb",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waga-smart-para-aplikacja-trend.jpg",
+          "sha256": "0ff5d9c0f78e385c918e386b1450702c9013901080db51aae9724bea0e07034b",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak używać wagi smart mądrze? Zasada 30 pomiarów?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

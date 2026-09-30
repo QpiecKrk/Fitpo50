@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "ukryty-cukier-po-50-pulapki-zdrowego-jedzenia",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "0c3d9b08013056443d851183bc57af68fc248bafc5a36d277d3e065c942b7cbb",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Blat kuchenny z sokiem pomarańczowym, jogurtem owocowym i całą pomarańczą — porównanie zawartości cukru",
+      "caption": "",
+      "width": 1400,
+      "height": 764,
+      "variants": {
+        "avif": {
+          "file": "assets/zdrowe-pulapki-hero-20260929.avif",
+          "sha256": "a519e7ae8a70b41fb6590bc1c15c37dc277fd509f520483290b53e39d526b74f",
+          "width": 1400,
+          "height": 764
+        },
+        "webp": {
+          "file": "assets/zdrowe-pulapki-hero-20260929.webp",
+          "sha256": "1d9ed042dfba490a5c700ca76d574ae17c71318cb99e1469c12866f34a6abd23",
+          "width": 1400,
+          "height": 764
+        },
+        "jpg": {
+          "file": "assets/zdrowe-pulapki-hero-20260929.jpg",
+          "sha256": "3ad7a2a73e6af138ca8959739c4c819a1d70fe1b7773c54c61fc4c4d1cc0e9e9",
+          "width": 1400,
+          "height": 764
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Blat kuchenny z sokiem pomarańczowym, jogurtem owocowym i całą pomarańczą — porównanie zawartości cukru. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czym różnią się cukry ogółem, dodane i wolne?",
+      "alt": "Kobieta porównuje etykiety jogurtów i soku",
+      "caption": "Cukry ogółem w tabeli obejmują między innymi laktozę z naturalnego jogurtu, cukry z owoców oraz cukier dodany podczas produkcji.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-1-20260929.avif",
+          "sha256": "0b06bbd44d824f0d4f9d5e95f8167ecf6d7460c76f21de8b0fe64da2998abc97",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-1-20260929.webp",
+          "sha256": "eaf6da7b540a9664e789624f5d20a5d561bda7a9353453d914864bcb4760e650",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-1-20260929.jpg",
+          "sha256": "bfaaba778551bacd79b21d8aad521ac0e9a743e0e393ebb3b1d6238595202a21",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym różnią się cukry ogółem, dodane i wolne?”: Kobieta porównuje etykiety jogurtów i soku. Zgodność z treścią potwierdza podpis: Cukry ogółem w tabeli obejmują między innymi laktozę z naturalnego jogurtu, cukry z owoców oraz cukier dodany podczas produkcji."
+      }
+    },
+    {
+      "placement": "section:Jak czytać etykietę krok po kroku?",
+      "alt": "Mężczyzna czyta tabelę wartości odżywczej produktu",
+      "caption": "Najpierw przeczytaj nazwę i listę składników, które podano w kolejności malejącej masy.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-2-20260929.avif",
+          "sha256": "9f3fdf9239f967c226f3f99a05185b49566faf6b588c52ef3789d60ec694b4b8",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-2-20260929.webp",
+          "sha256": "6b458dc9169125e2569b1e5871a2e6af16f1c0eb52aa0a6996ca5454fe1f0b17",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-2-20260929.jpg",
+          "sha256": "0a502a7489d1bd92aa33231906470a952de1c6f3990d98eee8c3c340faaacea0",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak czytać etykietę krok po kroku?”: Mężczyzna czyta tabelę wartości odżywczej produktu. Zgodność z treścią potwierdza podpis: Najpierw przeczytaj nazwę i listę składników, które podano w kolejności malejącej masy."
+      }
+    },
+    {
+      "placement": "section:Co z jogurtem, granolą, batonem i sokiem?",
+      "alt": "Jogurt granola baton i sok na kuchennym stole",
+      "caption": "Nie da się uczciwie przypisać całej kategorii jednej liczby cukru, bo receptury bardzo się różnią.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-3-20260929.avif",
+          "sha256": "fc9550ae26006868c86ac864c66335aee6223788eae367b323cadd1d8b786793",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-3-20260929.webp",
+          "sha256": "564850b6dcf33bb88b9c9c3e50b75623bddcff6174ea250394e7cc71e45d452a",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-3-20260929.jpg",
+          "sha256": "0eb2d0c3ca5b5a0c5f6dee77d62c8657a5eb7b43c84ca5e565b80f07ec86c426",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co z jogurtem, granolą, batonem i sokiem?”: Jogurt granola baton i sok na kuchennym stole. Zgodność z treścią potwierdza podpis: Nie da się uczciwie przypisać całej kategorii jednej liczby cukru, bo receptury bardzo się różnią."
+      }
+    },
+    {
+      "placement": "section:Jak ograniczać cukry bez obsesyjnego liczenia?",
+      "alt": "Kobieta wybiera wodę oraz jogurt z owocami zamiast słodkiego napoju",
+      "caption": "Zacznij od napojów, bo wodę, kawę lub herbatę bez cukru łatwo porównać z napojem słodzonym.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-4-20260929.avif",
+          "sha256": "6a2a0686d80278dccb84074e38198ee631fd1d9c8aed9b3cb782ae4ab756587e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-4-20260929.webp",
+          "sha256": "c4821651ecf4a742bbc8a8e9deb7c4d538f3fe8bf05f874010e0b1fa7d47d24c",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/ukryty-cukier-po-50-pulapki-zdrowego-jedzenia-section-4-20260929.jpg",
+          "sha256": "d7aa03c00a63b6c2ab9c826bb56b184d2193ac29eef452521696c2b0fdaa82f0",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak ograniczać cukry bez obsesyjnego liczenia?”: Kobieta wybiera wodę oraz jogurt z owocami zamiast słodkiego napoju. Zgodność z treścią potwierdza podpis: Zacznij od napojów, bo wodę, kawę lub herbatę bez cukru łatwo porównać z napojem słodzonym."
+      }
+    }
+  ]
+}

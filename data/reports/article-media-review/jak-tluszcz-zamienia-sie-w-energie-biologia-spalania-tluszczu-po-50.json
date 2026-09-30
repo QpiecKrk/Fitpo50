@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "b3154955bd5c8eb36962f0ff2e2d3c2774ea49cb4479757a94749966a2c3a8eb",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Schemat cyklu metabolicznego pokazujący jak tłuszcz zapasowy staje się energią użyteczną",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-energia-metabolizm-hero-20260929.avif",
+          "sha256": "e74cac9b50627b00bac8fc8e71805fd5a53ce45bf5fc0028639ef4cb91676600",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/tluszcz-energia-metabolizm-hero-20260929.webp",
+          "sha256": "5ef185be9c1917d2fe5a3c2b2b2982e0f7eafacc0425dea9842ca9593d44e031",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/tluszcz-energia-metabolizm-hero-20260929.jpg",
+          "sha256": "db524ebd4f12c9ffdf053379898545efc83d79b04085457745131167e00d0cd2",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Schemat cyklu metabolicznego pokazujący jak tłuszcz zapasowy staje się energią użyteczną. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak tłuszcz opuszcza komórkę tłuszczową?",
+      "alt": "Schemat komórki tłuszczowej uwalniającej kwasy tłuszczowe",
+      "caption": "Trójglicerydy są rozkładane do kwasów tłuszczowych i glicerolu, które mogą zostać wykorzystane przez tkanki.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-1-20260929.avif",
+          "sha256": "99a7e6ac86ec217b3837e044f98c79e53737496aea60f0e452c298e9191c0340",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-1-20260929.webp",
+          "sha256": "b75d3b96af2a48c3e0159dd45c7c559750aa3df6d0d2a564f7884f5a583b8a05",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-1-20260929.jpg",
+          "sha256": "0d68e28310c25a320e8b0e2930eded8eaf4d8ae3f6170b52c1b1a4f85163a5ee",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak tłuszcz opuszcza komórkę tłuszczową?”: Schemat komórki tłuszczowej uwalniającej kwasy tłuszczowe. Zgodność z treścią potwierdza podpis: Trójglicerydy są rozkładane do kwasów tłuszczowych i glicerolu, które mogą zostać wykorzystane przez tkanki."
+      }
+    },
+    {
+      "placement": "section:Co dzieje się w mitochondriach?",
+      "alt": "Schemat mitochondrium i etapów utleniania kwasów tłuszczowych",
+      "caption": "Kwasy tłuszczowe są rozkładane w kolejnych reakcjach, a powstające nośniki elektronów zasilają produkcję ATP.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-2-20260929.avif",
+          "sha256": "4ccb37900e3f18cd63fdb0136eb827c08c3e2c72cd87b531b03b7bb6a5e24164",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-2-20260929.webp",
+          "sha256": "f06cc83aa2acbb65459637cb8ec68664b0a25d543c0c910bee965e5d8894b410",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-2-20260929.jpg",
+          "sha256": "39c12627b9ef05c5317f96596eb58365c490e8cd60fd87291dc97fef9f79c393",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co dzieje się w mitochondriach?”: Schemat mitochondrium i etapów utleniania kwasów tłuszczowych. Zgodność z treścią potwierdza podpis: Kwasy tłuszczowe są rozkładane w kolejnych reakcjach, a powstające nośniki elektronów zasilają produkcję ATP."
+      }
+    },
+    {
+      "placement": "section:Czy tłuszcz naprawdę wydychamy?",
+      "alt": "Kobieta po pięćdziesiątce oddycha podczas marszu w chłodny poranek",
+      "caption": "Podczas pełnego utlenienia atomy węgla z trójglicerydów trafiają głównie do dwutlenku węgla, a wodór do wody.",
+      "width": 1672,
+      "height": 940,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-3-20260929.avif",
+          "sha256": "00dac7185cfd8246975d75bd0a949390ec32fe469d6e002efc10ac46c673de86",
+          "width": 1672,
+          "height": 940
+        },
+        "webp": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-3-20260929.webp",
+          "sha256": "64ab15cf960a88875fe9f9f6f05f8e7d0b15d10d9b756c6465945cedc04978e3",
+          "width": 1672,
+          "height": 940
+        },
+        "jpg": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-3-20260929.jpg",
+          "sha256": "81acff2678896d93ddeb23a008258cdb2b46fe9ffbae7f9e7bccb1ab8f6b9e30",
+          "width": 1672,
+          "height": 940
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy tłuszcz naprawdę wydychamy?”: Kobieta po pięćdziesiątce oddycha podczas marszu w chłodny poranek. Zgodność z treścią potwierdza podpis: Podczas pełnego utlenienia atomy węgla z trójglicerydów trafiają głównie do dwutlenku węgla, a wodór do wody."
+      }
+    },
+    {
+      "placement": "section:Czy po 50-tce metabolizm przestaje spalać tłuszcz?",
+      "alt": "Schemat intensywności wysiłku i wykorzystania tłuszczu jako paliwa",
+      "caption": "Nie. Z wiekiem może zmieniać się masa mięśniowa, aktywność, sen, leki i stan zdrowia, co wpływa na zapotrzebowanie oraz zachowanie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-4-20260929.avif",
+          "sha256": "0baeb75dda34016385cf2833707613ce60d606ecfde71d8f4164c7566e809a63",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-4-20260929.webp",
+          "sha256": "4f31c7634008381b91413fbd55017de5c84cdc50c4c5c2d883c5e8791d93b325",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-tluszcz-zamienia-sie-w-energie-biologia-spalania-tluszczu-po-50-section-4-20260929.jpg",
+          "sha256": "117256a0a51a6a529d61a060a966805bf8ee82863a566061e2e09acaa57e8a54",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy po 50-tce metabolizm przestaje spalać tłuszcz?”: Schemat intensywności wysiłku i wykorzystania tłuszczu jako paliwa. Zgodność z treścią potwierdza podpis: Nie. Z wiekiem może zmieniać się masa mięśniowa, aktywność, sen, leki i stan zdrowia, co wpływa na zapotrzebowanie oraz zachowanie."
+      }
+    }
+  ]
+}

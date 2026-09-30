@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:53:02.361Z",
+  "slug": "badania-krwi-po-50-jak-czesto",
+  "html_sha256": "5fb1e6c882e3498d83c5d90246e3f5403cdae6c8e95d76b542a1b6a7f7da55a0",
+  "site_html_sha256": "5fb1e6c882e3498d83c5d90246e3f5403cdae6c8e95d76b542a1b6a7f7da55a0",
+  "pdf_sha256": "3bdd243d86b791a54954ddf1fbcd3222e1d424b8722edf06a71065cd0b5bc9ba",
+  "site_pdf_sha256": "3bdd243d86b791a54954ddf1fbcd3222e1d424b8722edf06a71065cd0b5bc9ba",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 5,
+    "text_coverage": 1,
+    "rendered_pages": 5
+  },
+  "errors": []
+}

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:55:28.732Z",
+  "slug": "jak-czytac-etykiety-sklad-produktow-e-numery-inci",
+  "html_sha256": "37a9a9643cfb0bdf3f856d85868531a7e015046a18b9e2e497fff486d1f27861",
+  "site_html_sha256": "37a9a9643cfb0bdf3f856d85868531a7e015046a18b9e2e497fff486d1f27861",
+  "pdf_sha256": "c1d9f5f8231bf3c4cf5bc7610ac265f2e72acbe86e2aeaa479a5474e1f3cb5d4",
+  "site_pdf_sha256": "c1d9f5f8231bf3c4cf5bc7610ac265f2e72acbe86e2aeaa479a5474e1f3cb5d4",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 7,
+    "text_coverage": 1,
+    "rendered_pages": 7
+  },
+  "errors": []
+}

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "a3e05655eb5303436375f9c7e0edcdc125b79505a079cb55bbd5e04b50896a05",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Uśmiechnięty mężczyzna 50+ w jasnej, nowoczesnej kuchni je kolorowy talerz: owoce, pełne ziarno, oliwa",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-hero-20260929.avif",
+          "sha256": "d07e8334537a71386a7df73f670194b8e33b41ed20a5b5a3094feef8ecf5d52e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-hero-20260929.webp",
+          "sha256": "e7948fc7ccf1942fefd2ef45fb056ddb4a3b762b1ed523748f3f1b197a1a1709",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-hero-20260929.jpg",
+          "sha256": "3d60c44e34cfeff62914e477e712d7a5225b01505434bea6b0aa6030ee8bb597",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Uśmiechnięty mężczyzna 50+ w jasnej, nowoczesnej kuchni je kolorowy talerz: owoce, pełne ziarno, oliwa. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czy cukier w owocach działa jak cukier w napoju?",
+      "alt": "Kolorowa miska całych owoców obok szklanki soku, jasne światło",
+      "caption": "Cały owoc zawiera wodę, strukturę komórkową i błonnik, dlatego tempo jedzenia oraz sytość różnią się od soku.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-1-20260929.avif",
+          "sha256": "0685becf28e7ecaca3d2487631fb0c8d8bbbca6b6d2ec5752f71c536a3ce86dc",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-1-20260929.webp",
+          "sha256": "f6038bf48a3e67dd3e679c731b9294dd41882b0239d37aaa30f469c1650a8d15",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-1-20260929.jpg",
+          "sha256": "6fde3a28e96be3a56f99a2b1a24d4eccf5c4c0aa42e0a953f0c892d74ecd907a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy cukier w owocach działa jak cukier w napoju?”: Kolorowa miska całych owoców obok szklanki soku, jasne światło. Zgodność z treścią potwierdza podpis: Cały owoc zawiera wodę, strukturę komórkową i błonnik, dlatego tempo jedzenia oraz sytość różnią się od soku."
+      }
+    },
+    {
+      "placement": "section:Czy wszystkie węglowodany są problemem?",
+      "alt": "Talerz pełnoziarnistych potraw i strączków w nowoczesnej kuchni, świeże kolory",
+      "caption": "Nie. Pełne ziarna, warzywa, owoce i strączki różnią się od napojów słodzonych oraz produktów z oczyszczonej mąki pod względem błonnika, gęstości energetycznej i sposobu jedzenia.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-2-20260929.avif",
+          "sha256": "683da5183e163e2f32c361892a92075d858464261f89e8048e5481022218c7c1",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-2-20260929.webp",
+          "sha256": "5311add99025ee197210f0329bf4090c06d820428904bf8ca6447ee2a34c5a81",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-2-20260929.jpg",
+          "sha256": "0dc0755f87f2d12d066288d907ff8e0d498baedcc99a35945c13f3d7ff27f74a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy wszystkie węglowodany są problemem?”: Talerz pełnoziarnistych potraw i strączków w nowoczesnej kuchni, świeże kolory. Zgodność z treścią potwierdza podpis: Nie. Pełne ziarna, warzywa, owoce i strączki różnią się od napojów słodzonych oraz produktów z oczyszczonej mąki pod względem błonnika, gęstości energetycznej i sposobu jedzenia."
+      }
+    },
+    {
+      "placement": "section:Czy tłuszcz jest zdrowy bez ograniczeń?",
+      "alt": "Butelka oliwy i rzepaku na jasnym blacie, obok orzechy i awokado",
+      "caption": "Nie. Tłuszcze nienasycone z oliwy, orzechów lub ryb mają inny profil niż duża podaż tłuszczów nasyconych i przemysłowych trans.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-3-20260929.avif",
+          "sha256": "7411c6f6c0b581f418312acfd63df724facc1389c8c4882d5127f7663ca6b6e0",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-3-20260929.webp",
+          "sha256": "6a22fc578ea8854755862ded387c852044e627ae13bf075c796d2cd35a37b205",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-3-20260929.jpg",
+          "sha256": "f7f4e16fae99d43c169a5544ed1096463d699835ddbc1b17fe5c45dd0b72610a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy tłuszcz jest zdrowy bez ograniczeń?”: Butelka oliwy i rzepaku na jasnym blacie, obok orzechy i awokado. Zgodność z treścią potwierdza podpis: Nie. Tłuszcze nienasycone z oliwy, orzechów lub ryb mają inny profil niż duża podaż tłuszczów nasyconych i przemysłowych trans."
+      }
+    },
+    {
+      "placement": "section:Ile soli jest rozsądną granicą?",
+      "alt": "Solniczka i świeże warzywa na jasnym stole, pogodna scena",
+      "caption": "WHO zaleca dorosłym mniej niż 2 g sodu dziennie, co odpowiada mniej niż 5 g soli.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-4-20260929.avif",
+          "sha256": "c4f359b1c92d8b7342cef1312a55472093995e9a72871de8ead4419000efe14f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-4-20260929.webp",
+          "sha256": "4e4419de6e593e4e6fc4dc2d2c8c5718480e811c0053dc6d171cb6ae599873f9",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-4-20260929.jpg",
+          "sha256": "e89d1d49d894f743da9a8ed40f754cda583a9aa5ba068f2cd857e7ed07304d17",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Ile soli jest rozsądną granicą?”: Solniczka i świeże warzywa na jasnym stole, pogodna scena. Zgodność z treścią potwierdza podpis: WHO zaleca dorosłym mniej niż 2 g sodu dziennie, co odpowiada mniej niż 5 g soli."
+      }
+    }
+  ]
+}

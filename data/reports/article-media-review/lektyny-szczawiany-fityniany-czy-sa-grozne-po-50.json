@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "lektyny-szczawiany-fityniany-czy-sa-grozne-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "1b46d75ed5106bd3f0d668aa592b64b930916ce90ee32e6d8e30845a60a9363f",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Lektyny, szczawiany i fityniany. Czy rośliny nam szkodzą?",
+      "caption": "",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/antyodzywcze-skladniki-warzywa-straczki.avif",
+          "sha256": "912f97fcfe824832a94a3bb39d50323b87b51f4dbe4d85efab33e4120a275ee2",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/antyodzywcze-skladniki-warzywa-straczki.webp",
+          "sha256": "27d33c96035c47a984096920c7431690a876220249c5f4c250bf2a557a20e9d0",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/antyodzywcze-skladniki-warzywa-straczki.jpg",
+          "sha256": "6e84b3615166619103e658f006f642777743d9de2d93108db5e79cd9328fe887",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Lektyny, szczawiany i fityniany. Czy rośliny nam szkodzą?. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czy lektyny z fasoli są toksyczne?",
+      "alt": "Ugotowana fasola jako bezpieczne źródło białka roślinnego",
+      "caption": "Niektóre surowe strączki, szczególnie fasola nerkowa, zawierają fitohemaglutyninę zdolną wywołać nudności, wymioty i biegunkę.",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-1-20260929.avif",
+          "sha256": "561a9c1899b468001e007cc4b2d1922a216cbe000ce4973a6b4f35cee8e64dfd",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-1-20260929.webp",
+          "sha256": "ed680029ac93729219eb61f48034c13f18274fe78a641a1e120d50b9a8682a12",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-1-20260929.jpg",
+          "sha256": "7271d2c53df9e10023d348a00ceecc9fcc188e0dca6d78bd1f54ba32387eed33",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy lektyny z fasoli są toksyczne?”: Ugotowana fasola jako bezpieczne źródło białka roślinnego. Zgodność z treścią potwierdza podpis: Niektóre surowe strączki, szczególnie fasola nerkowa, zawierają fitohemaglutyninę zdolną wywołać nudności, wymioty i biegunkę."
+      }
+    },
+    {
+      "placement": "section:Kiedy szczawiany mają znaczenie dla nerek?",
+      "alt": "Szpinak i produkty zawierające szczawiany w codziennym jadłospisie",
+      "caption": "Szczawiany mogą uczestniczyć w powstawaniu najczęstszych kamieni szczawianowo-wapniowych, ale ryzyko zależy też od objętości moczu, sodu, wapnia, cytrynianów i innych czynników.",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-2-20260929.avif",
+          "sha256": "98e104fbcb2c724fbc3c521bf47ded3090606b6df4c83774d77f601b9569d136",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-2-20260929.webp",
+          "sha256": "673e42d2cb496f70e5f816011cf476789ec77e4cdf62b4e84511fb41dcf4db82",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-2-20260929.jpg",
+          "sha256": "f390de62bc1ef49220dbe07aa07a1747c180f7530421e6605fb699f3f0ea005d",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy szczawiany mają znaczenie dla nerek?”: Szpinak i produkty zawierające szczawiany w codziennym jadłospisie. Zgodność z treścią potwierdza podpis: Szczawiany mogą uczestniczyć w powstawaniu najczęstszych kamieni szczawianowo-wapniowych, ale ryzyko zależy też od objętości moczu, sodu, wapnia, cytrynianów i innych czynników."
+      }
+    },
+    {
+      "placement": "section:Czy wapń trzeba ograniczać przy szczawianach?",
+      "alt": "Ugotowany szpinak podany z jogurtem jako źródłem wapnia",
+      "caption": "Zwykle nie należy automatycznie ograniczać wapnia z żywności, ponieważ wapń spożyty w posiłku może związać część szczawianów w jelicie.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-3-20260929.avif",
+          "sha256": "9494951f4291dd203415ebb63a9358199241642f6ed0e2fa04f2d1ad2a880006",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-3-20260929.webp",
+          "sha256": "fdeb2b29f0bd7aee1b915ee06c816a4104c18b1338aef04fbace40ca8d5b9c24",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-3-20260929.jpg",
+          "sha256": "88052f4b28dcb5ff2c4c7057dd02b6daeef6f01bb2390aafcdfe5e922b03ccb5",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy wapń trzeba ograniczać przy szczawianach?”: Ugotowany szpinak podany z jogurtem jako źródłem wapnia. Zgodność z treścią potwierdza podpis: Zwykle nie należy automatycznie ograniczać wapnia z żywności, ponieważ wapń spożyty w posiłku może związać część szczawianów w jelicie."
+      }
+    },
+    {
+      "placement": "section:Czy fityniany powodują niedobory minerałów?",
+      "alt": "Produkty zbożowe i strączki zawierające fityniany",
+      "caption": "Fityniany wiążą część żelaza, cynku i innych minerałów w przewodzie pokarmowym, lecz efekt pojedynczego posiłku nie jest równy niedoborowi klinicznemu.",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-4-20260929.avif",
+          "sha256": "f811e0994da6cc978a333de9f4be1c32de73d594880260c40c60ce553070cf9a",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-4-20260929.webp",
+          "sha256": "3b5926b6ef123a27978bf8078631186a2673422a92d80356c92e0052e5636151",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/lektyny-szczawiany-fityniany-czy-sa-grozne-po-50-section-4-20260929.jpg",
+          "sha256": "97d4e9fd133201186cad4b9d4c3e285073e65748b9bec89da5284a776d49e57d",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy fityniany powodują niedobory minerałów?”: Produkty zbożowe i strączki zawierające fityniany. Zgodność z treścią potwierdza podpis: Fityniany wiążą część żelaza, cynku i innych minerałów w przewodzie pokarmowym, lecz efekt pojedynczego posiłku nie jest równy niedoborowi klinicznemu."
+      }
+    }
+  ]
+}

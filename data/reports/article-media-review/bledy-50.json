@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "slug": "bledy-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "866a83db91c6d636a86f4d54a1ee3b01385c9ef9f2baf757f438853c9448bbbf",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 60-tce siedzący na ławce w siłowni, zamyślony",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-hero.avif",
+          "sha256": "ec591c17a3d1818e0a682d10a7b35893aca0600076ca6e0a1ebe8c6bcca05f59",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/bledy-hero.webp",
+          "sha256": "3fb92c8c376fea04bb9e942f38c95f8c0b90d5c83a44aae08ef74ede8f13ba14",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/bledy-hero.jpg",
+          "sha256": "4ccf4b3d89eb64a38bb3fe5ff48351bcd5addadf97afd106305bd9c32f865b58",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:BŁĄD #1 Za ciężko na start?",
+      "alt": "Mężczyzna po 60-tce wybiera lżejsze hantle z pomocą trenerki",
+      "caption": "Na starcie dobierz ciężar, który pozwala zachować technikę i wyraźny zapas powtórzeń.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-start-zbyt-ciezko-20260930.avif",
+          "sha256": "515a5162772caa2ebdc8461628af45d5657c816d6f13697dc95fd8710cc4a3f7",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bledy-start-zbyt-ciezko-20260930.webp",
+          "sha256": "0ebd8472eb02623f6c96a4473a4ab6eecaacc9dfd440832a0800518583d1ef51",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bledy-start-zbyt-ciezko-20260930.jpg",
+          "sha256": "176190d010456b587e1aa83090472c01ff01d896edf504059e4f59e6eda98e15",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:BŁĄD #1 Za ciężko na start?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:BŁĄD #2 Pomijanie rozgrzewki?",
+      "alt": "Kobieta po 60-tce wykonuje dynamiczną rozgrzewkę przed ćwiczeniami siłowymi",
+      "caption": "Krótka rozgrzewka przygotowuje ruchy i pozwala stopniowo wejść w obciążenie właściwego treningu.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-rozgrzewka-20260930.avif",
+          "sha256": "bf09d3d9f9fdc3b5010ce3c913a70f90a7bcd18bc5982e5d3f75250078c3ebdc",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bledy-rozgrzewka-20260930.webp",
+          "sha256": "1a14c69295981352c20446082971bf9e715b2013393f02a96831ddd643d7af69",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bledy-rozgrzewka-20260930.jpg",
+          "sha256": "5417ed1ca4db5d24d30077a43990177a188a642176e29858545bdfc72accaf60",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:BŁĄD #2 Pomijanie rozgrzewki?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:BŁĄD #3 Tylko cardio — bieżnia, orbitrek i nic więcej?",
+      "alt": "Kobieta po 60-tce uzupełnia trening na bieżni ćwiczeniem siłowym z hantlami",
+      "caption": "Cardio wspiera wydolność, a trening oporowy dostarcza osobnego bodźca dla siły i mięśni.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-cardio-i-sila-20260930.avif",
+          "sha256": "03819bb4a5de66ddd80ca9e1e8e4a9689297731b941babdfc018345c7c0e4281",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bledy-cardio-i-sila-20260930.webp",
+          "sha256": "4e61ac713ffa10edc4b2ddd90042cf940e38fd2e2d8c6e01c6298daff5fbc4a3",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bledy-cardio-i-sila-20260930.jpg",
+          "sha256": "3c33fe8495b69674e0e2d026fa5531af0fdb8674d7c8f082b6be962bdb8cdead",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:BŁĄD #3 Tylko cardio — bieżnia, orbitrek i nic więcej?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:BŁĄD #4 Brak regeneracji — więcej to lepiej?",
+      "alt": "Kobieta po 60-tce łączy spacer, lekką mobilność i zapis regeneracji między treningami",
+      "caption": "Regeneracja obejmuje sen, rozsądne przerwy i lżejszy ruch, który pomaga utrzymać plan bez dokładania zmęczenia.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-regeneracja-plan-20260930.avif",
+          "sha256": "584fde9ec8232b61c12e41ab6ce06f2cf636dad494603a5eae7efa3508a249d2",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bledy-regeneracja-plan-20260930.webp",
+          "sha256": "7a559cd6cf02f2f0bafdc8fd95345e96fcc4be496d355e18e5cafae33595ff8e",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bledy-regeneracja-plan-20260930.jpg",
+          "sha256": "47aca9776dfe8d0bb77e8730e56324872fe2b28b9a7d74124b628770c8664eb7",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:BŁĄD #4 Brak regeneracji — więcej to lepiej?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:BŁĄD #5 Ignorowanie bólu stawów — \"przejdzie\"?",
+      "alt": "Mężczyzna po 60-tce przerywa ćwiczenie i omawia ból kolana z fizjoterapeutką",
+      "caption": "Narastający lub ostry ból stawu wymaga zmiany obciążenia i oceny przyczyny zamiast ćwiczenia przez objaw.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-bol-stawu-reakcja-20260930.avif",
+          "sha256": "2100477a7ffa807f0eee0c1cc30a9d7fc390403bb76b4ff748666515d01bfd9a",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bledy-bol-stawu-reakcja-20260930.webp",
+          "sha256": "0ed460713f5be3e02b5dca034ed410061a43ef22ab40a63da13cc9455ee1270a",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bledy-bol-stawu-reakcja-20260930.jpg",
+          "sha256": "e5b60f201d8164c20914a316b6923a508b773ead897b1faa96d3447ee439a7c7",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:BŁĄD #5 Ignorowanie bólu stawów — \"przejdzie\"?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

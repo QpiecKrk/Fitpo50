@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "820dbbe517a0571bac52f777dbea288339af1b5766cc9cc7f4d66fb8d2e6859e",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Człowiek w sklepie czyta etykietę produktu z lupą w dłoni",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/ukryte-skladniki-hero-20260929.avif",
+          "sha256": "85ea2ef678b71327f280edca254cb8fa725db587d495bc6bea0b71ffb90eb8f5",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/ukryte-skladniki-hero-20260929.webp",
+          "sha256": "da742cfcaad8081b504c7a31f4be06ffeca365429b5f093b59cc97d5cc736dd7",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/ukryte-skladniki-hero-20260929.jpg",
+          "sha256": "fcf54a1729c4dc83bb8dc908ecac5c84ed010c5f1fa23a9e5bcddbebe55dfae2",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Człowiek w sklepie czyta etykietę produktu z lupą w dłoni. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak czytać kolejność składników?",
+      "alt": "Osoba w sklepie trzyma produkt i czyta skład z tyłu opakowania",
+      "caption": "W unijnym systemie składniki wymienia się zasadniczo w kolejności malejącej według masy w chwili użycia.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-1-20260929.avif",
+          "sha256": "50e2d4cd153dd01870a1754e9fd41787e86a758f1e4cd9ffc9651b3775665c75",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-1-20260929.webp",
+          "sha256": "2d0d130fe51905094bcd59c1f8949884e64cc17d05b0eb1828b15736310c8d28",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-1-20260929.jpg",
+          "sha256": "e40beaaf0cabfc74dff9ecd31b2af6fa612c63a6a1179564ed0d7c04f08e76a7",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak czytać kolejność składników?”: Osoba w sklepie trzyma produkt i czyta skład z tyłu opakowania. Zgodność z treścią potwierdza podpis: W unijnym systemie składniki wymienia się zasadniczo w kolejności malejącej według masy w chwili użycia."
+      }
+    },
+    {
+      "placement": "section:Czy różne nazwy cukru wprowadzają w błąd?",
+      "alt": "Tablica z listą 20 nazw ukrytego cukru na etykietach żywności",
+      "caption": "Syrop glukozowy, sacharoza, miód i koncentrat soku są odrębnymi składnikami, choć wszystkie mogą wnosić cukry.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-2-20260929.avif",
+          "sha256": "be56dcf54e608c2909494f4bf172d855025143f88d862ec06e0f6425c264ced9",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-2-20260929.webp",
+          "sha256": "4e4c77a54e6fe2664c18c3b4a8687b60c48f8cff4db57f669914e202e2fdf052",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-2-20260929.jpg",
+          "sha256": "00aa28fb52971d6daffc1496816ec2604984b2a8bfe2a374f404f32cdd0e8c3e",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy różne nazwy cukru wprowadzają w błąd?”: Tablica z listą 20 nazw ukrytego cukru na etykietach żywności. Zgodność z treścią potwierdza podpis: Syrop glukozowy, sacharoza, miód i koncentrat soku są odrębnymi składnikami, choć wszystkie mogą wnosić cukry."
+      }
+    },
+    {
+      "placement": "section:Jak porównać sól, tłuszcz i wielkość porcji?",
+      "alt": "Miska płatków śniadaniowych z zaznaczeniem różnicy między porcją na etykiecie a rzeczywistą",
+      "caption": "Najpierw zestaw wartości na 100 g lub 100 ml, ponieważ porcja sugerowana przez producenta może być mniejsza niż ilość faktycznie zjadana.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-3-20260929.avif",
+          "sha256": "35360aa07fc29b809eb0263e0911e9ab0e2525cc4489f9dfb27c2db858f305ce",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-3-20260929.webp",
+          "sha256": "772a97e89003463bea8f69bc5d80d88b51cf922c408129f5c62d8773e985aae8",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-3-20260929.jpg",
+          "sha256": "7ff598e3932b773f0033f7ce0a53d401cc5cc746181433e8d5bbd7396911900c",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak porównać sól, tłuszcz i wielkość porcji?”: Miska płatków śniadaniowych z zaznaczeniem różnicy między porcją na etykiecie a rzeczywistą. Zgodność z treścią potwierdza podpis: Najpierw zestaw wartości na 100 g lub 100 ml, ponieważ porcja sugerowana przez producenta może być mniejsza niż ilość faktycznie zjadana."
+      }
+    },
+    {
+      "placement": "section:Czy E-numery oznaczają niezdrowy produkt?",
+      "alt": "Tabela z podziałem dodatków E na bezpieczne i potencjalnie szkodliwe",
+      "caption": "Nie. E-numer identyfikuje dodatek oceniony i dopuszczony w Unii Europejskiej wraz z warunkami użycia.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-4-20260929.avif",
+          "sha256": "cf52b088c2aafb1c17f5cb61a6ca0f635f0f66cc55ddf1d15b67a0ad16960575",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-4-20260929.webp",
+          "sha256": "8e658fe9317288bfb126e529a06a2937497cb0994df6b626668afad2658f7ae4",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-producenci-ukrywaja-niezdrowe-skladniki-zywnosci-section-4-20260929.jpg",
+          "sha256": "095a4d7459a2be738483a986bcfe1ac35090ffcfea1abcdee8ed235a3a722e3e",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy E-numery oznaczają niezdrowy produkt?”: Tabela z podziałem dodatków E na bezpieczne i potencjalnie szkodliwe. Zgodność z treścią potwierdza podpis: Nie. E-numer identyfikuje dodatek oceniony i dopuszczony w Unii Europejskiej wraz z warunkami użycia."
+      }
+    }
+  ]
+}

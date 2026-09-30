@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:59:27.943Z",
+  "slug": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze",
+  "html_sha256": "d75a91d1949554fce77bd21143dc5dcc6211615d22431813aa30e6263a24c696",
+  "site_html_sha256": "d75a91d1949554fce77bd21143dc5dcc6211615d22431813aa30e6263a24c696",
+  "pdf_sha256": "1989820d266053519cb46e4b233d1fb6a1a0fe324b7cef9bf3a35f282eba514e",
+  "site_pdf_sha256": "1989820d266053519cb46e4b233d1fb6a1a0fe324b7cef9bf3a35f282eba514e",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

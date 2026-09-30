@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "nawodnienie-na-treningu-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "abf722228da646a6f92ce57efa8b14da575eefa724c3defb7f7117c0e253fa54",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Dojrzały mężczyzna z butelką wody na nowoczesnej siłowni",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/woda-na-silowni-20260929.avif",
+          "sha256": "37be388c118b796f879c5555212bf98dde654add133f0e2851c072aed4263b09",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/woda-na-silowni-20260929.webp",
+          "sha256": "492c1a295136dfc20c8e8bcc36ea4d3eebf594470eac578340db6d502099d0e1",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/woda-na-silowni-20260929.jpg",
+          "sha256": "c4a04c2b9009c28d6e14b3571bb88ad06cfe558031b2d853fe122495504abe0e",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Dojrzały mężczyzna z butelką wody na nowoczesnej siłowni. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Ile pić podczas zwykłego treningu?",
+      "alt": "Kobieta pije wodę podczas zwykłego treningu siłowego",
+      "caption": "Straty potu zmieniają się wraz z temperaturą, ubraniem, intensywnością, masą ciała i indywidualną potliwością, dlatego jedna dawka na godzinę może być zbyt mała albo zbyt duża.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-1-20260929.avif",
+          "sha256": "1e541eb000a736c99e6238269679e9e0f5c1b97653ff9816f7b9a904f5afb7a2",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-1-20260929.webp",
+          "sha256": "391f47323949d2ad040b724345609265ca740adae4778f47bf1fe30498817db5",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-1-20260929.jpg",
+          "sha256": "3cefa2428604ba0b4e2964368168c1789d7fb6c9ec676ce4556d67107e7b1d23",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Ile pić podczas zwykłego treningu?”: Kobieta pije wodę podczas zwykłego treningu siłowego. Zgodność z treścią potwierdza podpis: Straty potu zmieniają się wraz z temperaturą, ubraniem, intensywnością, masą ciała i indywidualną potliwością, dlatego jedna dawka na godzinę może być zbyt mała albo zbyt duża."
+      }
+    },
+    {
+      "placement": "section:Jak oszacować własne straty potu?",
+      "alt": "Mężczyzna waży się po treningu aby oszacować utratę płynów",
+      "caption": "Przy dłuższej sesji możesz porównać masę przed i po treningu w podobnym ubraniu, uwzględniając wypity płyn oraz oddany mocz.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-2-20260929.avif",
+          "sha256": "bf21e9b6435b61832aeb6ab0f1775b1efbda56945d53862923cc0a53ee530d7e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-2-20260929.webp",
+          "sha256": "e1d2371d4c10f4193503da3d2e37bbec8316ae8e1df591ceb22f37c892db6d2f",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-2-20260929.jpg",
+          "sha256": "d7e1a902a97dc6ef1d85b199a949ce7ee509547feee7e08a44e625543be0b5fd",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak oszacować własne straty potu?”: Mężczyzna waży się po treningu aby oszacować utratę płynów. Zgodność z treścią potwierdza podpis: Przy dłuższej sesji możesz porównać masę przed i po treningu w podobnym ubraniu, uwzględniając wypity płyn oraz oddany mocz."
+      }
+    },
+    {
+      "placement": "section:Kiedy potrzebne są elektrolity?",
+      "alt": "Dojrzały rowerzysta uzupełnia płyny podczas długiego wysiłku w upale",
+      "caption": "Woda zwykle wystarcza przy krótszym rekreacyjnym treningu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-3-20260929.avif",
+          "sha256": "e9e42bd854a7b37dfcda75c22e22d3acb89d45ebaa91996dd9287c1a0ac8e462",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-3-20260929.webp",
+          "sha256": "fd4d1bbb932fe069b6eb6bdd6715f40de7fe24050c3dae29cc1c5f7899f49910",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-3-20260929.jpg",
+          "sha256": "85b8ddb58041f6409200a5b4a6201c3b83915c6cb40e72a3b60632f6ff1e17c5",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy potrzebne są elektrolity?”: Dojrzały rowerzysta uzupełnia płyny podczas długiego wysiłku w upale. Zgodność z treścią potwierdza podpis: Woda zwykle wystarcza przy krótszym rekreacyjnym treningu."
+      }
+    },
+    {
+      "placement": "section:Jak rozpoznać odwodnienie i hiponatremię?",
+      "alt": "Ratowniczka ocenia dolegliwości sportowca po wysiłku",
+      "caption": "Pragnienie, suchość w ustach i spadek wydolności mogą towarzyszyć niedoborowi płynu, ale nie są swoiste.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-4-20260929.avif",
+          "sha256": "86aa60bcacff22107509e85746629048a36808564fc103e947311a859c778df6",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-4-20260929.webp",
+          "sha256": "0b4a7928f3d798da82cfb580e7b6fb998eee897528ee7cbf281e50ad93878156",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/nawodnienie-na-treningu-po-50-section-4-20260929.jpg",
+          "sha256": "05ac9096929d36d173477a002e10df4eb2a9ae8df9aaf98bd2dc9ff6b2c0d8a7",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak rozpoznać odwodnienie i hiponatremię?”: Ratowniczka ocenia dolegliwości sportowca po wysiłku. Zgodność z treścią potwierdza podpis: Pragnienie, suchość w ustach i spadek wydolności mogą towarzyszyć niedoborowi płynu, ale nie są swoiste."
+      }
+    }
+  ]
+}

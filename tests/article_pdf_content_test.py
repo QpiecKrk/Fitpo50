@@ -94,4 +94,13 @@ class PdfContentTest(unittest.TestCase):
    self.assertNotIn('Facebook',text)
    images=subprocess.check_output(['pdfimages','-list',str(pdf)],text=True)
    self.assertIn('image', '\n'.join(images.splitlines()[2:]))
+
+ def test_table_with_nested_inline_markup_renders(self):
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);page=root/'article.html';pdf=root/'article.pdf'
+   page.write_text('<h1 class="article-header__title">Tabela</h1><article class="article-content"><table><caption>Porównanie</caption><thead><tr><th>Badanie</th><th>Wynik</th></tr></thead><tbody><tr><td><strong>Próba kliniczna</strong> (2026)</td><td>Treść komórki</td></tr></tbody></table></article>')
+   generate_pdf(page,pdf,'https://fitpo50.pl/article.html')
+   text=subprocess.check_output(['pdftotext',str(pdf),'-'],text=True)
+   self.assertIn('Próba kliniczna',text)
+   self.assertIn('Treść komórki',text)
 if __name__=='__main__':unittest.main()

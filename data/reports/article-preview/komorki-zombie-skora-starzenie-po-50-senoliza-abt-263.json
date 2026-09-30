@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:56:46.332Z",
+  "slug": "komorki-zombie-skora-starzenie-po-50-senoliza-abt-263",
+  "html_sha256": "0d851e88517c07b8f376c0cfaa88098297c4670688bfe41c0d6a576f448fd731",
+  "site_html_sha256": "0d851e88517c07b8f376c0cfaa88098297c4670688bfe41c0d6a576f448fd731",
+  "pdf_sha256": "3fd12cb4c62d1c2550156d882c61b3fbe10f38d3abb69321c1e779195970c600",
+  "site_pdf_sha256": "3fd12cb4c62d1c2550156d882c61b3fbe10f38d3abb69321c1e779195970c600",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

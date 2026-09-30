@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "mit-metabolizm-po-50-zwalnia-tycie",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "4fa9ce6dd9b1c121a7bf2545be89dd3bb04aeb3f0420dc27067ce2b0d0aac22a",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta po pięćdziesiątce energicznie spaceruje rześkim porankiem w parku, uśmiechnięta i pełna energii",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-metabolizm-po-50-hero-v2.avif",
+          "sha256": "7313731a9887c0c3bcaea57bafc9f7fdfc647665f1df28f3be9dc5f4b55f6a98",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/mit-metabolizm-po-50-hero-v2.webp",
+          "sha256": "e4fb1b34f7d73c8cc0e151d9356dd9f9ee961f57162500e114d26b02f728b8e2",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/mit-metabolizm-po-50-hero-v2.jpg",
+          "sha256": "7c0a70d36eef1f901f0440d27add1e2d076c943ed14fa9a41fb79c84e1ff3608",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Skąd w ogóle wziął się ten mit?",
+      "alt": "Półka z bezimiennymi suplementami obiecującymi przyspieszenie metabolizmu",
+      "caption": "Mit o gasnącym metabolizmie świetnie sprzedaje suplementy – gorzej sprawdza się w badaniach.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-metabolizm-po-50-zrodlo-mitu.avif",
+          "sha256": "688611016ca7766c40781c913c99460739896ac4540daa7eeba6ba69a4614aa8",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-metabolizm-po-50-zrodlo-mitu.webp",
+          "sha256": "11e898f59cb0f78a2dbd349ad9252d8256524ec28e8cc9f24e42503d5c1d3405",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-metabolizm-po-50-zrodlo-mitu.jpg",
+          "sha256": "c307bd8f1e91f95f4419f81f56096826273504b1a982be57813f0c302097ae16",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Skąd w ogóle wziął się ten mit?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co mówi fizjologia?",
+      "alt": "Prosty schemat pokazujący trzy składowe dziennego wydatku energetycznego organizmu",
+      "caption": "Metabolizm spoczynkowy zależy głównie od ilości mięśni – nie od samego wieku.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-metabolizm-po-50-mechanizm.avif",
+          "sha256": "3396bc2900a6b6063ede616f37678e24863565ad796bc8503d0565e1fa5ad220",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-metabolizm-po-50-mechanizm.webp",
+          "sha256": "671591f9a9069d941fcd15dd05354f64b0307b88a5069564a87e863e7aab8e70",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-metabolizm-po-50-mechanizm.jpg",
+          "sha256": "af6448a236bda52c5060ea05623a39857283a43615be8e6a4749684fbde90960",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co mówi fizjologia?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co mówią dowody?",
+      "alt": "Infografika porównująca mit o spadającym metabolizmie z faktycznym przebiegiem według badań",
+      "caption": "Badanie z 2021 roku na ponad 6400 osobach pokazało: metabolizm jest stabilny aż do 60. roku życia.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-metabolizm-po-50-mit-vs-fakt.avif",
+          "sha256": "2e1202bcb7085982236b094ca626dedd92636f6a3d7936d95c9f614d3ef93584",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-metabolizm-po-50-mit-vs-fakt.webp",
+          "sha256": "dadcbe10fee397b98f4cf8629f70bf61a0ab53cb4ee1ce3142507791ffa03b48",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-metabolizm-po-50-mit-vs-fakt.jpg",
+          "sha256": "9f68b175181940597e5c1dfe90fd106b254938dd7d7c564dd66ec3abc0006899",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co mówią dowody?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Granica prawdy – co w tym micie jest prawdziwe?",
+      "alt": "Delikatna ilustracja pokazująca zmianę rozmieszczenia tkanki tłuszczowej związaną z menopauzą",
+      "caption": "Zmiana rozmieszczenia tkanki tłuszczowej po menopauzie to fakt – ale to nie to samo, co „wyłączający się” metabolizm.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-metabolizm-po-50-granica-prawdy.avif",
+          "sha256": "7ba468410589c64bd9218ee0bdfa2eb964f790b1ee89c33df2d34fd529abb0bc",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-metabolizm-po-50-granica-prawdy.webp",
+          "sha256": "cc82151f947fa6fb5602b530a411c5e8449d075fbff8981f692be2e667d74462",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-metabolizm-po-50-granica-prawdy.jpg",
+          "sha256": "cad02cd855147bc6fbdf7f3517b98b20afa206a1474e92134737e26750330058",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Granica prawdy – co w tym micie jest prawdziwe?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę działa po 50-tce?",
+      "alt": "Kobieta i mężczyzna po pięćdziesiątce wykonują trening siłowy z hantlami",
+      "caption": "Trening siłowy to najlepiej udokumentowany sposób, by utrzymać tempo metabolizmu po 50-tce.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-metabolizm-po-50-praktyka.avif",
+          "sha256": "8eb73427fb7253f270786b8faf668f208701d1b27d1ddf6558aecc773bba4ef5",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-metabolizm-po-50-praktyka.webp",
+          "sha256": "c29a97942135f4cff08f165d96d87e2a88f47b092faf28f680e3f2460016ba6b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-metabolizm-po-50-praktyka.jpg",
+          "sha256": "8c2b57bd194e8e0f703f444338d8a10003a0cc7c7bae325cf66b89a2ecd08ee3",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co naprawdę działa po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy warto zgłosić się do specjalisty?",
+      "alt": "Osoba po 50-tce omawia z lekarzem wyniki podstawowych badań metabolicznych",
+      "caption": "Szybka, nietypowa zmiana masy ciała to powód do spokojnej kontroli, nie do kupowania spalacza.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/mit-metabolizm-po-50-kiedy-do-lekarza.avif",
+          "sha256": "db133519091aa10789ef3356bf359f6c772ac84e5cf60fba2fa73f06b81dbb0d",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/mit-metabolizm-po-50-kiedy-do-lekarza.webp",
+          "sha256": "a7e95e25897c54f5d6394ac46f95c53a3a7f4db7b783041e69bfad676065113f",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/mit-metabolizm-po-50-kiedy-do-lekarza.jpg",
+          "sha256": "82a354c9937b37918f7584c39f81bf984079cf0e116d96173749296e949ea1d1",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy warto zgłosić się do specjalisty?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

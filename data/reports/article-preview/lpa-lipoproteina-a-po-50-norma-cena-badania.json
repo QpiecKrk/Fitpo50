@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:57:10.672Z",
+  "slug": "lpa-lipoproteina-a-po-50-norma-cena-badania",
+  "html_sha256": "07a8d96a89767fe400832f1e43b65b56195ed3009e790a434860ac4d300bb53a",
+  "site_html_sha256": "07a8d96a89767fe400832f1e43b65b56195ed3009e790a434860ac4d300bb53a",
+  "pdf_sha256": "f14070975c973c58cd3c4c15f296a323946fec0356d009118cdaf242341ba62f",
+  "site_pdf_sha256": "f14070975c973c58cd3c4c15f296a323946fec0356d009118cdaf242341ba62f",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

@@ -179,6 +179,14 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
         if caption:
             caption.decompose()
         table.attrs = {"border": "1", "width": "100%"}
+        # fpdf2's HTML table parser can leave an open cell when a TD contains
+        # nested inline markup (for example <strong>), and then reports the
+        # next TD as an illegal nested cell. PDFs need the complete cell text,
+        # so normalize every cell to plain text before handing the table over.
+        for cell in table.find_all(["td", "th"]):
+            cell_text = cell.get_text(" ", strip=True)
+            cell.clear()
+            cell.append(cell_text)
         for element in table.find_all(True):
             if element.name == "a":
                 href = normalize_href(element.get("href", ""), source_url)

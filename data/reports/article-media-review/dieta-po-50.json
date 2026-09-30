@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "dieta-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "bff8cba4de536402e4ab1f8b1f0ca96842bf513e3f9dffdaf169a1786d14dff4",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kawałek ciasta i miara krawiecka na stole - symbol walki przyjemności z kontrolą",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-hero.avif",
+          "sha256": "326bb0cf1d80cb94bcefabee066c3c36b8bd03c362619292907cae5acd8b59c8",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/dieta-hero.webp",
+          "sha256": "c142d72fa89d03e4dde2ab8eff18c41d90c8cc5395d85e09e410f746a5702401",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/dieta-hero.jpg",
+          "sha256": "376a50f6a6f2b1e8df0534597f43fb8b83a53accc4a9e4e80c9977c35cc30eee",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Kawałek ciasta i miara krawiecka na stole - symbol walki przyjemności z kontrolą. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czy po 50-tce metabolizm nagle zwalnia?",
+      "alt": "Kobieta po pięćdziesiątce przygotowuje świeży posiłek w domowej kuchni",
+      "caption": "Nie ma jednego dnia, w którym organizm przestaje prawidłowo zużywać energię.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-1-20260929.avif",
+          "sha256": "82d74b9ba986cd12b731d7da842a4b91bca390fd08ecdeb52ebdd28faa7da699",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-1-20260929.webp",
+          "sha256": "f62db1cb442f90941c75a1ffaa898d2e9eb01eac5cfd693a36feecc874726904",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-1-20260929.jpg",
+          "sha256": "6017ab15b0cd96ccea463087f7b99c7237c0590ed75d35e1fb41ffab45ccf3e5",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy po 50-tce metabolizm nagle zwalnia?”: Kobieta po pięćdziesiątce przygotowuje świeży posiłek w domowej kuchni. Zgodność z treścią potwierdza podpis: Nie ma jednego dnia, w którym organizm przestaje prawidłowo zużywać energię."
+      }
+    },
+    {
+      "placement": "section:Ile białka potrzebuje osoba po 50-tce?",
+      "alt": "Różnorodne źródła białka dla osób po pięćdziesiątce",
+      "caption": "Stanowisko grupy ekspertów ESPEN proponuje zdrowym starszym osobom zwykle 1,0–1,2 g białka na kilogram masy ciała dziennie, a w chorobie często więcej po indywidualnej ocenie.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-2-20260929.avif",
+          "sha256": "b45f38379459ee25259716d20e3a1e78a5ce25e2f73c0b2fbb36e054f691ad0a",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-2-20260929.webp",
+          "sha256": "a3e738d2f92b7c40c09e77c27044017c5a5fa0d7b5f3c402a549ec511218aad4",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-2-20260929.jpg",
+          "sha256": "7b4208e454e68841f023ac1300ced783c17785c783cf350cb7a4511cb7b58f90",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Ile białka potrzebuje osoba po 50-tce?”: Różnorodne źródła białka dla osób po pięćdziesiątce. Zgodność z treścią potwierdza podpis: Stanowisko grupy ekspertów ESPEN proponuje zdrowym starszym osobom zwykle 1,0–1,2 g białka na kilogram masy ciała dziennie, a w chorobie często więcej po indywidualnej ocenie."
+      }
+    },
+    {
+      "placement": "section:Jak zbudować sycący talerz bez ważenia wszystkiego?",
+      "alt": "Zbilansowany talerz z warzywami ziemniakami i porcją białka",
+      "caption": "Zacznij od warzyw lub owoców, dodaj wyraźne źródło białka, produkt skrobiowy dopasowany do aktywności i niewielką porcję tłuszczu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-3-20260929.avif",
+          "sha256": "4749d2b9dad7ae5509e0996c2b6c6995ad7e04159ec142977828391f51c415c3",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-3-20260929.webp",
+          "sha256": "fcaf789f32575a35bd6fb9abe549906a0cc51a1ce6521c1cec9570218be8a873",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-3-20260929.jpg",
+          "sha256": "ecb888b88ee6abb228df4af7eb6cca12a447ae8f690ade8c472f25a30d515467",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak zbudować sycący talerz bez ważenia wszystkiego?”: Zbilansowany talerz z warzywami ziemniakami i porcją białka. Zgodność z treścią potwierdza podpis: Zacznij od warzyw lub owoców, dodaj wyraźne źródło białka, produkt skrobiowy dopasowany do aktywności i niewielką porcję tłuszczu."
+      }
+    },
+    {
+      "placement": "section:Czy trzeba rezygnować z pieczywa, ziemniaków i kolacji?",
+      "alt": "Kobieta po pięćdziesiątce je zbilansowaną kolację z pieczywem i ziemniakami",
+      "caption": "Nie. Redukcja masy nie wymaga wykluczenia pieczywa ani ziemniaków, a godzina kolacji sama nie rozstrzyga o wyniku.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-4-20260929.avif",
+          "sha256": "95c829f5a293c848d60c90dbb7a9cc26263d7cfeecb7182b08fc5989192c63f0",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-4-20260929.webp",
+          "sha256": "8e34d3358d09ad1a2d6641d4b97ed935268ed9391418e848f6aead90cdd9c021",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-4-20260929.jpg",
+          "sha256": "78e58473e1c300d4fa1891ddabfa67deef16f8620079f4405da724c5225d1c75",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy trzeba rezygnować z pieczywa, ziemniaków i kolacji?”: Kobieta po pięćdziesiątce je zbilansowaną kolację z pieczywem i ziemniakami. Zgodność z treścią potwierdza podpis: Nie. Redukcja masy nie wymaga wykluczenia pieczywa ani ziemniaków, a godzina kolacji sama nie rozstrzyga o wyniku."
+      }
+    },
+    {
+      "placement": "section:Kiedy plan żywienia powinien prowadzić specjalista?",
+      "alt": "Dietetyczka omawia indywidualny plan żywienia z parą po pięćdziesiątce",
+      "caption": "Niezamierzony spadek masy, trudności z gryzieniem lub połykaniem, uporczywa biegunka, krew w stolcu i objawy niedożywienia wymagają diagnostyki.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-5-20260929.avif",
+          "sha256": "79b335db6038ec018700e42f7de280e69a927b6e6352ea2a0b4283f566b9a3fc",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-5-20260929.webp",
+          "sha256": "f82e313b7791015313dcce08a85c2485d292fcda7c099989d2aff20caeffc64b",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-5-20260929.jpg",
+          "sha256": "f7a3b133f217f3a8019883bc5d11b7403e959b22e9664f888a0cfb65f04e4a28",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy plan żywienia powinien prowadzić specjalista?”: Dietetyczka omawia indywidualny plan żywienia z parą po pięćdziesiątce. Zgodność z treścią potwierdza podpis: Niezamierzony spadek masy, trudności z gryzieniem lub połykaniem, uporczywa biegunka, krew w stolcu i objawy niedożywienia wymagają diagnostyki."
+      }
+    }
+  ]
+}

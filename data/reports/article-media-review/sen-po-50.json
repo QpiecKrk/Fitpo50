@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "sen-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "d25d5cea350653494ce3c83058356390e89fe7dfd5a25b9d02500e7bbacd9186",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Para po 50-tce śpiąca spokojnie w jasnej sypialni",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/sen-hero.avif",
+          "sha256": "d1bd626f516c293281c00eba17d09eb4029f1a2bdbc58cc8f7f557766e46fbea",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/sen-hero.webp",
+          "sha256": "3c5a66690467aa0af5c6ae8d5d3e6d3b93a2279beba071fd3d1d7ba4e499f561",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/sen-hero.jpg",
+          "sha256": "eb8c370e8ccd67700e9347cae994c55ee25ca6dad95de2e87e8dbbf3211f59d2",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Ile godzin snu potrzeba po 50-tce?",
+      "alt": "Kobieta po 60-tce śpi w ciemnej sypialni z subtelną wizualizacją cykli snu",
+      "caption": "Potrzeba snu jest indywidualna, a jakość nocy obejmuje także ciągłość i funkcjonowanie następnego dnia.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/sen-po50-cykle-nocy-20260930.avif",
+          "sha256": "571a832fc66c66c5d50212ec309fd2a65350e1b55e996a7f7fc53e364ab6aed4",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/sen-po50-cykle-nocy-20260930.webp",
+          "sha256": "d747499a6c1786bf06644451397c03b519586ded7dcf60524552cfb68241d305",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/sen-po50-cykle-nocy-20260930.jpg",
+          "sha256": "366ba5223ab4ebe30824b0f1593a6a767b12fe5528c6a397ecb7ca5d5a5092c6",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ile godzin snu potrzeba po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak ustawić rytm dobowy bez obietnic „resetu hormonów”?",
+      "alt": "Kobieta po 60-tce korzysta z porannego światła i przyciemnia lampy wieczorem",
+      "caption": "Stała pora wstawania, światło rano i mniej jasnego światła wieczorem pomagają ustabilizować rytm dobowy.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/sen-po50-rytm-dobowy-swiatlo-20260930.avif",
+          "sha256": "c02820ca8717523e198feceae05acbeafa491b0175d5f82358f700391600c7ea",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/sen-po50-rytm-dobowy-swiatlo-20260930.webp",
+          "sha256": "f81b9283ecd0803282aef41dfd6d2a175bba6337eb79fcc69fd1439cf78650f1",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/sen-po50-rytm-dobowy-swiatlo-20260930.jpg",
+          "sha256": "061445cde81bd32b395e96185512dd5d9513aab7a7205d045ef756d17af75eea",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak ustawić rytm dobowy bez obietnic „resetu hormonów”?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak ruch, kofeina i alkohol wpływają na noc?",
+      "alt": "Cztery sceny pokazują ruch, kawę, alkohol przy kolacji i spokojny sen kobiety po 60-tce",
+      "caption": "Ruch zwykle wspiera sen, natomiast późna kofeina i alkohol mogą pogorszyć zasypianie lub ciągłość nocy.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/sen-po50-ruch-kofeina-alkohol-20260930.avif",
+          "sha256": "5b5b539511e2061bf74d465a0106d364586ec90aabec412835a341b54b1583a9",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/sen-po50-ruch-kofeina-alkohol-20260930.webp",
+          "sha256": "2714dd38d90fd0b1130627e9f782b193bc968cffec3a2421b18a02bd1aa0f9f4",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/sen-po50-ruch-kofeina-alkohol-20260930.jpg",
+          "sha256": "04de27fd0f431ba87da6ccf41e0fcfc7f656d239d81064359ea0f2edf016e331",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak ruch, kofeina i alkohol wpływają na noc?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy problem ze snem wymaga diagnostyki?",
+      "alt": "Kobieta po 60-tce omawia przewlekłe problemy ze snem z lekarzem",
+      "caption": "Utrzymująca się bezsenność, głośne chrapanie, bezdechy lub duża senność w dzień wymagają ukierunkowanej oceny.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/sen-po50-diagnostyka-bezsennosc-20260930.avif",
+          "sha256": "adbda9ed92311679f7f0fcb708656150b2d38537be2df809459dfc3f4fcb1bec",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/sen-po50-diagnostyka-bezsennosc-20260930.webp",
+          "sha256": "e9d01118f9da9cea501b1b50a5e4efa935ed6f0a065b40f64a59c71515507c34",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/sen-po50-diagnostyka-bezsennosc-20260930.jpg",
+          "sha256": "183ecca6be78f9641dcb5bcd5aafd69f9240adb4c6b1ca6a0a17e2773ec02852",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy problem ze snem wymaga diagnostyki?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

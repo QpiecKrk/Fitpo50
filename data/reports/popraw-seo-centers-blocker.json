@@ -1,0 +1,57 @@
+{
+  "status": "RESOLVED_LIVE_DEPLOYED_AND_VALIDATED",
+  "stage": "PRE_APPLY_QUALITY_GATE",
+  "approved_ids": [
+    "BOOST 1",
+    "NAPRAWA 1",
+    "NAPRAWA 2",
+    "NAPRAWA 3",
+    "NAPRAWA 4"
+  ],
+  "html_changed": false,
+  "commit_created": false,
+  "live_deployed": false,
+  "gsc_submit_urls": [],
+  "reason": "Zatwierdzone centra mają układ hub-shell, nieobsługiwany przez wymagany generator PDF i Quality Gate artykułów.",
+  "required_resolution": "Uzgodnić kontrakt centrów z pełnym Quality Gate: obsługa istniejącego układu w generatorze PDF i renderze, kompletne metadane i źródła, testy regresji; następnie przygotować manifest patchy i wznowić zatwierdzoną paczkę.",
+  "items": [
+    {
+      "id": "BOOST 1",
+      "file": "centrum-snu-po-50.html",
+      "validation_exit_code": 1,
+      "validation_output": "\n✖ centrum-snu-po-50.html\n  - Brak: body.article-template\n  - Brak: body.article--kategoria\n  - Brak: .shell\n  - Brak: header.topbar\n  - Brak: article-intro-grid\n  - Brak: article-content\n  - Brak: Czytelnia index-style section\n  - Brak: Czytelnia head\n  - Brak: Czytelnia icon wrapper\n  - Brak: bottom-nav\n  - Brak: article.css include\n  - Brak lub niepoprawne article:published_time (wymagane pełne ISO 8601 z TZ).\n  - Brak lub niepoprawne BlogPosting.datePublished (wymagane pełne ISO 8601 z TZ).\n  - Brak BlogPosting.speakable.cssSelector.\n  - Brak schema BreadcrumbList.\n  - Wykryto inline CSS (style=\"...\")\n  - Brak <article class=\"article-content\"> do walidacji AEO/GEO.\n  - Brak .hero-motto pod hero.\n  - Brak wrappera .article-primary-actions pod hero.\n  - Brak przycisku \"Udostępnij\" pod hero (#share-article-top).\n  - Brak badge SHARE w przycisku udostępniania pod hero.\n  - Brak sekcji .share-article-section przed Źródłami.\n  - BlogPosting.citation: wymagane minimum 4 poprawne URL-e (jest 0).\n  - BlogPosting.speakable musi wskazywać sekcję quick-answer (#quick-answer lub #quick-answer p).\n  - BlogPosting.author musi być obiektem Person.\n",
+      "pdf_exists": false
+    },
+    {
+      "id": "NAPRAWA 1",
+      "file": "centrum-bialka-po-50.html",
+      "validation_exit_code": 1,
+      "validation_output": "\n✖ centrum-bialka-po-50.html\n  - Brak: body.article-template\n  - Brak: body.article--kategoria\n  - Brak: .shell\n  - Brak: header.topbar\n  - Brak: article-intro-grid\n  - Brak: article-content\n  - Brak: Czytelnia index-style section\n  - Brak: Czytelnia head\n  - Brak: Czytelnia icon wrapper\n  - Brak: bottom-nav\n  - Brak: article.css include\n  - Brak lub niepoprawne article:published_time (wymagane pełne ISO 8601 z TZ).\n  - Brak lub niepoprawne BlogPosting.datePublished (wymagane pełne ISO 8601 z TZ).\n  - Brak BlogPosting.speakable.cssSelector.\n  - Brak schema BreadcrumbList.\n  - Wykryto inline CSS (style=\"...\")\n  - Brak <article class=\"article-content\"> do walidacji AEO/GEO.\n  - Brak .hero-motto pod hero.\n  - Brak wrappera .article-primary-actions pod hero.\n  - Brak przycisku \"Udostępnij\" pod hero (#share-article-top).\n  - Brak badge SHARE w przycisku udostępniania pod hero.\n  - Brak sekcji .share-article-section przed Źródłami.\n  - BlogPosting.citation: wymagane minimum 4 poprawne URL-e (jest 0).\n  - BlogPosting.speakable musi wskazywać sekcję quick-answer (#quick-answer lub #quick-answer p).\n  - BlogPosting.author musi być obiektem Person.\n",
+      "pdf_exists": false
+    },
+    {
+      "id": "NAPRAWA 2",
+      "file": "centrum-treningu-silowego-po-50.html",
+      "validation_exit_code": 1,
+      "validation_output": "\n✖ centrum-treningu-silowego-po-50.html\n  - Brak: body.article-template\n  - Brak: body.article--kategoria\n  - Brak: .shell\n  - Brak: header.topbar\n  - Brak: article-intro-grid\n  - Brak: article-content\n  - Brak: Czytelnia index-style section\n  - Brak: Czytelnia head\n  - Brak: Czytelnia icon wrapper\n  - Brak: bottom-nav\n  - Brak: article.css include\n  - Brak lub niepoprawne article:published_time (wymagane pełne ISO 8601 z TZ).\n  - Brak lub niepoprawne BlogPosting.datePublished (wymagane pełne ISO 8601 z TZ).\n  - Brak BlogPosting.speakable.cssSelector.\n  - Brak schema BreadcrumbList.\n  - Wykryto inline CSS (style=\"...\")\n  - Brak <article class=\"article-content\"> do walidacji AEO/GEO.\n  - Brak .hero-motto pod hero.\n  - Brak wrappera .article-primary-actions pod hero.\n  - Brak przycisku \"Udostępnij\" pod hero (#share-article-top).\n  - Brak badge SHARE w przycisku udostępniania pod hero.\n  - Brak sekcji .share-article-section przed Źródłami.\n  - BlogPosting.citation: wymagane minimum 4 poprawne URL-e (jest 0).\n  - BlogPosting.speakable musi wskazywać sekcję quick-answer (#quick-answer lub #quick-answer p).\n  - BlogPosting.author musi być obiektem Person.\n",
+      "pdf_exists": false
+    },
+    {
+      "id": "NAPRAWA 3",
+      "file": "centrum-cholesterolu-po-50.html",
+      "validation_exit_code": 1,
+      "validation_output": "\n✖ centrum-cholesterolu-po-50.html\n  - Brak: body.article-template\n  - Brak: body.article--kategoria\n  - Brak: .shell\n  - Brak: header.topbar\n  - Brak: article-intro-grid\n  - Brak: article-content\n  - Brak: Czytelnia index-style section\n  - Brak: Czytelnia head\n  - Brak: Czytelnia icon wrapper\n  - Brak: bottom-nav\n  - Brak: article.css include\n  - Brak lub niepoprawne article:published_time (wymagane pełne ISO 8601 z TZ).\n  - Brak lub niepoprawne BlogPosting.datePublished (wymagane pełne ISO 8601 z TZ).\n  - Brak BlogPosting.speakable.cssSelector.\n  - Brak schema BreadcrumbList.\n  - Wykryto inline CSS (style=\"...\")\n  - Brak <article class=\"article-content\"> do walidacji AEO/GEO.\n  - Brak .hero-motto pod hero.\n  - Brak wrappera .article-primary-actions pod hero.\n  - Brak przycisku \"Udostępnij\" pod hero (#share-article-top).\n  - Brak badge SHARE w przycisku udostępniania pod hero.\n  - Brak sekcji .share-article-section przed Źródłami.\n  - BlogPosting.citation: wymagane minimum 4 poprawne URL-e (jest 0).\n  - BlogPosting.speakable musi wskazywać sekcję quick-answer (#quick-answer lub #quick-answer p).\n  - BlogPosting.author musi być obiektem Person.\n",
+      "pdf_exists": false
+    },
+    {
+      "id": "NAPRAWA 4",
+      "file": "centrum-metabolizmu-po-50.html",
+      "validation_exit_code": 1,
+      "validation_output": "\n✖ centrum-metabolizmu-po-50.html\n  - Brak: body.article-template\n  - Brak: body.article--kategoria\n  - Brak: .shell\n  - Brak: header.topbar\n  - Brak: article-intro-grid\n  - Brak: article-content\n  - Brak: Czytelnia index-style section\n  - Brak: Czytelnia head\n  - Brak: Czytelnia icon wrapper\n  - Brak: bottom-nav\n  - Brak: article.css include\n  - Brak lub niepoprawne article:published_time (wymagane pełne ISO 8601 z TZ).\n  - Brak lub niepoprawne BlogPosting.datePublished (wymagane pełne ISO 8601 z TZ).\n  - Brak BlogPosting.speakable.cssSelector.\n  - Brak schema BreadcrumbList.\n  - Wykryto inline CSS (style=\"...\")\n  - Brak <article class=\"article-content\"> do walidacji AEO/GEO.\n  - Brak .hero-motto pod hero.\n  - Brak wrappera .article-primary-actions pod hero.\n  - Brak przycisku \"Udostępnij\" pod hero (#share-article-top).\n  - Brak badge SHARE w przycisku udostępniania pod hero.\n  - Brak sekcji .share-article-section przed Źródłami.\n  - BlogPosting.citation: wymagane minimum 4 poprawne URL-e (jest 0).\n  - BlogPosting.speakable musi wskazywać sekcję quick-answer (#quick-answer lub #quick-answer p).\n  - BlogPosting.author musi być obiektem Person.\n",
+      "pdf_exists": false
+    }
+  ],
+  "resolved_at": "2026-09-05T13:43:49.262Z",
+  "resolution": "Pięć centrów opublikowano. Potwierdzono HTML, PDF i sitemap na produkcji; wszystkie cztery workflow commita zakończone sukcesem.",
+  "commit": "1fae1408b979e1ca028f5ab6908ea53fcdac69af"
+}

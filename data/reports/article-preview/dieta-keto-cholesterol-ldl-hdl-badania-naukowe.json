@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:54:08.927Z",
+  "slug": "dieta-keto-cholesterol-ldl-hdl-badania-naukowe",
+  "html_sha256": "011bee01c65a7eff26213a53102bb2e964fc25039958005a3a9970123110fd36",
+  "site_html_sha256": "011bee01c65a7eff26213a53102bb2e964fc25039958005a3a9970123110fd36",
+  "pdf_sha256": "9837990998d277ad892a178914df449531d971589c87fac8d22546cdd813ef56",
+  "site_pdf_sha256": "9837990998d277ad892a178914df449531d971589c87fac8d22546cdd813ef56",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

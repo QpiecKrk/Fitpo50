@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "6cb544e3c2c0b62dd00b7bbd46a8ba589e585f93feea3f28d8cd89519c781c82",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Symboliczna ilustracja probówek z krwią i wykresem ryzyka zdrowotnego na tle nowoczesnego miasta",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/markery-krwi-hero.avif",
+          "sha256": "c933925200fc2827ee4c8f7d1c784e64382822ceb2c4c0c12af54f387799e982",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/markery-krwi-hero.webp",
+          "sha256": "7a3b9891d20c94ebd9b0f79f1b67ea1d4980f712bc32857b386a34371243b887",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/markery-krwi-hero.jpg",
+          "sha256": "719d5fddea1cc6c7f6f9681fe8799827ada0d5448a8dbd7a3c621bd40e8439e7",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Symboliczna ilustracja probówek z krwią i wykresem ryzyka zdrowotnego na tle nowoczesnego miasta. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czy wynik poza normą oznacza chorobę?",
+      "alt": "Symboliczne probówki z etykietami różnych markerów krwi",
+      "caption": "Nie zawsze. Zakres referencyjny jest zwykle wyznaczany statystycznie dla określonej populacji i metody, dlatego część zdrowych osób może znaleźć się poza nim.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-1-20260929.avif",
+          "sha256": "976a497ef1eb215c3cfc94449d446d946d0bada43a1343334ec025e8698ea44c",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-1-20260929.webp",
+          "sha256": "83ec7bd5662c776b8e2c7a1509b4553b9bf36b6490a415c968e31aad058880b8",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-1-20260929.jpg",
+          "sha256": "f43025fc37c4c5510450eb71ff9e5707c8a1e1bf86a2793781d576c6d3b13c6b",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy wynik poza normą oznacza chorobę?”: Symboliczne probówki z etykietami różnych markerów krwi. Zgodność z treścią potwierdza podpis: Nie zawsze. Zakres referencyjny jest zwykle wyznaczany statystycznie dla określonej populacji i metody, dlatego część zdrowych osób może znaleźć się poza nim."
+      }
+    },
+    {
+      "placement": "section:Dlaczego trend bywa ważniejszy niż jedna liczba?",
+      "alt": "Wykres trendów markerów krwi w czasie — symboliczna ilustracja",
+      "caption": "Powtarzające się oznaczenia mogą pokazać kierunek zmiany, lecz tylko wtedy, gdy porównujesz tę samą analizę i uwzględniasz warunki.",
+      "width": 1080,
+      "height": 831,
+      "variants": {
+        "avif": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-2-20260929.avif",
+          "sha256": "50f9c72284e9744597bf98b778b5bd6b189eda7db01201d3db2134d4d3d40181",
+          "width": 1080,
+          "height": 831
+        },
+        "webp": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-2-20260929.webp",
+          "sha256": "be32d89a9ad35a3c1cbbef57d160c1346cca3146e303b77a6dcbf922f0d3b129",
+          "width": 1080,
+          "height": 831
+        },
+        "jpg": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-2-20260929.jpg",
+          "sha256": "10d50acd7ac495df92fbd4db45d549333b92ab1e05694f68fdba0dcd976f258b",
+          "width": 1080,
+          "height": 831
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego trend bywa ważniejszy niż jedna liczba?”: Wykres trendów markerów krwi w czasie — symboliczna ilustracja. Zgodność z treścią potwierdza podpis: Powtarzające się oznaczenia mogą pokazać kierunek zmiany, lecz tylko wtedy, gdy porównujesz tę samą analizę i uwzględniasz warunki."
+      }
+    },
+    {
+      "placement": "section:Które markery odpowiadają na konkretne pytania?",
+      "alt": "Checklist badań krwi dla osoby po 50-tce — symboliczna ilustracja w stylu infografiki",
+      "caption": "HbA1c odzwierciedla średnią glikemię z poprzednich tygodni, ale mogą go zaburzać niektóre choroby krwi.",
+      "width": 1080,
+      "height": 831,
+      "variants": {
+        "avif": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-3-20260929.avif",
+          "sha256": "50553550ced2d832d568759e342f883b592ee0e9eb0687b126f6d7ffb600127e",
+          "width": 1080,
+          "height": 831
+        },
+        "webp": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-3-20260929.webp",
+          "sha256": "2d45ab53a0bf62d0d43f1b06c0030da4487efadbcea0a115a05062f185d7b86d",
+          "width": 1080,
+          "height": 831
+        },
+        "jpg": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-3-20260929.jpg",
+          "sha256": "439e60cc90a2bfc8a8c44d5469c1b6b0e8b0396a6389d336cf6bd62f0b7c07bd",
+          "width": 1080,
+          "height": 831
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Które markery odpowiadają na konkretne pytania?”: Checklist badań krwi dla osoby po 50-tce — symboliczna ilustracja w stylu infografiki. Zgodność z treścią potwierdza podpis: HbA1c odzwierciedla średnią glikemię z poprzednich tygodni, ale mogą go zaburzać niektóre choroby krwi."
+      }
+    },
+    {
+      "placement": "section:Kiedy wynik wymaga szybkiego działania?",
+      "alt": "Symboliczna ilustracja fałszywego alarmu — pusty formularz wyników z dużym znakiem zapytania",
+      "caption": "Laboratorium może oznaczyć wartość krytyczną i skontaktować się z pacjentem lub lekarzem; takiego komunikatu nie wolno odkładać.",
+      "width": 1080,
+      "height": 831,
+      "variants": {
+        "avif": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-4-20260929.avif",
+          "sha256": "3e8470442ade3412474fa6d4501d6acbbb14768ce6937f81bdb6582cb5b30a03",
+          "width": 1080,
+          "height": 831
+        },
+        "webp": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-4-20260929.webp",
+          "sha256": "3c9c3c4586caff069e55ac15223d5d3aece40887e53d998b3be929d6a399ee21",
+          "width": 1080,
+          "height": 831
+        },
+        "jpg": {
+          "file": "assets/markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu-section-4-20260929.jpg",
+          "sha256": "b79bbf82d040905e0ea9038f055d17b56632ab23d15b85af9f567e37cd6a9a79",
+          "width": 1080,
+          "height": 831
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy wynik wymaga szybkiego działania?”: Symboliczna ilustracja fałszywego alarmu — pusty formularz wyników z dużym znakiem zapytania. Zgodność z treścią potwierdza podpis: Laboratorium może oznaczyć wartość krytyczną i skontaktować się z pacjentem lub lekarzem; takiego komunikatu nie wolno odkładać."
+      }
+    }
+  ]
+}

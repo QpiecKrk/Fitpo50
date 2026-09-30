@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:59:48.695Z",
+  "slug": "siedzenie-po-50",
+  "html_sha256": "b857e043239d84f7a6cc9ca5237a5eee50a7a5c156983b41aacfd31fb39e91af",
+  "site_html_sha256": "b857e043239d84f7a6cc9ca5237a5eee50a7a5c156983b41aacfd31fb39e91af",
+  "pdf_sha256": "aec3698eae3d2895a099e156f737378e1debe0e3fca37fa7d285f0bb0fa1de18",
+  "site_pdf_sha256": "aec3698eae3d2895a099e156f737378e1debe0e3fca37fa7d285f0bb0fa1de18",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 2
+  },
+  "pdf": {
+    "pages": 9,
+    "text_coverage": 1,
+    "rendered_pages": 9
+  },
+  "errors": []
+}

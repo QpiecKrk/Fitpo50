@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "slug": "dyskopatia-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "aed39768a47389f06a37cd8b7fc599b46efedfa6fa309b18e0df86c6cf0c5e56",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Osoba po 50-tce spokojnie i z pewnością siebie spogląda na wyniki rezonansu kręgosłupa",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/rezonans-hero.avif",
+          "sha256": "ab2fe42174f945d001cf6e85ae33a7e0bded8a4885033e58b07aa66a6bd62efb",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/rezonans-hero.webp",
+          "sha256": "9906e5715b5e4e5b8b322d066713bbae8f3a204413a0c62fbfc404d05aad800a",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/rezonans-hero.jpg",
+          "sha256": "197cfc420d261cf169eb71bbe055e435f39c7f1479cca69b00d44f7d6f8e77d0",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Najpierw wyjaśnijmy co tak naprawdę się dzieje w kręgosłupie?",
+      "alt": "Model krążka międzykręgowego obok aktywnej osoby po 50-tce",
+      "caption": "Zmiany widoczne w krążku międzykręgowym nie przesądzają o bólu ani nie wykluczają bezpiecznego ruchu.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/dyskopatia-anatomia-bez-strachu-20260930.avif",
+          "sha256": "f9baa9928fad1a808c7c296f20063c5fb548725bfae29d44458f350486efd92a",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/dyskopatia-anatomia-bez-strachu-20260930.webp",
+          "sha256": "497a9a62fbbedebada12f7f906dad4d9201535f420064b2b99a4ae723c415950",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/dyskopatia-anatomia-bez-strachu-20260930.jpg",
+          "sha256": "eb4a4beae396deb2b368920dbd87ad03c82b97cb2ff2cb905f7f20664e93017e",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Najpierw wyjaśnijmy co tak naprawdę się dzieje w kręgosłupie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co nauka mówi o ćwiczeniach przy dyskopatii — wyniki są jednoznaczne?",
+      "alt": "Fizjoterapeuta uczy osobę po 50-tce kontrolowanego ćwiczenia stabilizacyjnego",
+      "caption": "Stopniowane ćwiczenia, dobrane do objawów, pomagają odzyskać siłę i tolerancję ruchu bez straszenia kręgosłupem.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/dyskopatia-cwiczenia-dowody-20260930.avif",
+          "sha256": "4702fa4999eec5f4ee57df639d716831b1bf6d29b3b0beb79f41c69376ced69e",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/dyskopatia-cwiczenia-dowody-20260930.webp",
+          "sha256": "9ee927d6adc75fe94ac630478cf969517e9a65869809e8532cc9ef7ea6263f41",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/dyskopatia-cwiczenia-dowody-20260930.jpg",
+          "sha256": "bd5190513366bd5f51b39f70b4e85fbf28afea650884f09480da3fa19d95042e",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co nauka mówi o ćwiczeniach przy dyskopatii — wyniki są jednoznaczne?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:A co z rwą kulszową? Czy ból promieniujący do nogi to zakaz ruchu?",
+      "alt": "Badanie ruchu i objawów rwy kulszowej u osoby po 50-tce",
+      "caption": "Przy rwie kulszowej kierunek i dawkę ruchu dobiera się według reakcji objawów, siły mięśni i badania neurologicznego.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/dyskopatia-rwa-ruch-20260930.avif",
+          "sha256": "ddc55aa289e706448481305f5ba0135efda49ac5185412847334113c8ef79e61",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/dyskopatia-rwa-ruch-20260930.webp",
+          "sha256": "ea24e4add76439e579cf9d29a631bf1a5fd2e17dd020bb5d5bd9bd4755950d68",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/dyskopatia-rwa-ruch-20260930.jpg",
+          "sha256": "c885dde88f835d35243ff3c2d7dca3f4faa87e24ce0158d16a5291a396d4f031",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:A co z rwą kulszową? Czy ból promieniujący do nogi to zakaz ruchu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Obalamy mity — jeden po drugim?",
+      "alt": "Zestaw scen pokazujących fakty i mity o dyskopatii po 50-tce",
+      "caption": "Rezonans, pas lędźwiowy i sam odpoczynek nie zastępują oceny objawów ani stopniowego powrotu do aktywności.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/dyskopatia-mity-20260930.avif",
+          "sha256": "8692bbcd3ecf4635826e06f48f1f5f482e75f1931ca0033e8c7e94389026fcf5",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/dyskopatia-mity-20260930.webp",
+          "sha256": "ab1126d904dd4384f16efcbbac69044feb5990a62b33b752717ff6bf10d35fc9",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/dyskopatia-mity-20260930.jpg",
+          "sha256": "531ece7c112466e186a0e2e07d718b7ab54687720d023aa61c97543ca39516af",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Obalamy mity — jeden po drugim?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co możesz robić — i czego unikać?",
+      "alt": "Codzienne czynności wykonywane z kontrolą obciążenia kręgosłupa",
+      "caption": "Spacer, ćwiczenia i codzienne zadania można skalować tak, aby odbudowywać sprawność bez nasilenia promieniowania bólu.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/dyskopatia-co-robic-20260930.avif",
+          "sha256": "f9190f54d401b471c47bf3bdbaf763cb4eed28565f02252b45581d359e4e3c57",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/dyskopatia-co-robic-20260930.webp",
+          "sha256": "4fe7f1b3d5d3929f32bd7d685a494e2269ac2e753e77e1f8745847ef1716b048",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/dyskopatia-co-robic-20260930.jpg",
+          "sha256": "31e26470c7d0f58c325ce9cff500e12cfb7c6615583af03db9033456ac6ea4fe",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co możesz robić — i czego unikać?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy naprawdę potrzebna jest konsultacja lekarska — sygnały alarmowe?",
+      "alt": "Fizjoterapeuta sprawdza siłę i czucie w nodze pacjenta po 50-tce",
+      "caption": "Narastające osłabienie nogi, zaburzenia zwieraczy lub drętwienie krocza wymagają pilnej oceny lekarskiej.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/dyskopatia-czerwone-flagi-20260930.avif",
+          "sha256": "1f762b5135717f162475470ec17cbbcc7a7825e6b8697a9496d7b0bd8164d4d6",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/dyskopatia-czerwone-flagi-20260930.webp",
+          "sha256": "39d8e6dc2732986ad477b9f254790a44b8f356381eb8f2871a76f30d63ef342f",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/dyskopatia-czerwone-flagi-20260930.jpg",
+          "sha256": "ba304ae009e6c8cdbe82ecf7377041ad82a38705784a50ab0fb24e818e6a241e",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy naprawdę potrzebna jest konsultacja lekarska — sygnały alarmowe?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak zacząć — plan działania?",
+      "alt": "Osoba po 50-tce ustala z fizjoterapeutą etapowy plan powrotu do ruchu",
+      "caption": "Dobry plan zaczyna się od tolerowanego ruchu, obserwacji objawów i stopniowego dokładania ćwiczeń oraz obciążenia.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/dyskopatia-plan-dzialania-20260930.avif",
+          "sha256": "dce6e8b02540d8fad321c4442da6a979d9d884272e6808955dbb7df2714db535",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/dyskopatia-plan-dzialania-20260930.webp",
+          "sha256": "722341aa669ecd81c5d8d5ddff1fd46ac246537a8453653dd9fe63e97bb5531e",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/dyskopatia-plan-dzialania-20260930.jpg",
+          "sha256": "17a7c72074d0d847c4e84259a81ea8d337e75c8c9ebc620378332c608c961098",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak zacząć — plan działania?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

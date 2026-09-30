@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T13:02:23.399Z",
+  "slug": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna",
+  "html_sha256": "0dcc976e3011a0c54bd457aef9302436a4f94c9276a86420e497fcfd46071bac",
+  "site_html_sha256": "0dcc976e3011a0c54bd457aef9302436a4f94c9276a86420e497fcfd46071bac",
+  "pdf_sha256": "8de2762e04844928b244a91c8c7c9c95df59001a6df3e816659c5b03393150f5",
+  "site_pdf_sha256": "8de2762e04844928b244a91c8c7c9c95df59001a6df3e816659c5b03393150f5",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

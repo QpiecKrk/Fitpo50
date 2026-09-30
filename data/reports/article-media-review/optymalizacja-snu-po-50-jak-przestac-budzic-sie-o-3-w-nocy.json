@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "88658b4f34df396cebfb335fb49e9a084ababf469fca548454e8807a7402869b",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta 50+ śpiąca spokojnie w ciemnej sypialni z zegarkiem przy łóżku wskazującym 3 w nocy",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/optymalizacja-snu-po50-hero-v2.avif",
+          "sha256": "766d1b4df8624abe0890adc02957867d44df1ac7a26b162337bd2cfb4493b379",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/optymalizacja-snu-po50-hero-v2.webp",
+          "sha256": "38c996de14373427b321eac217387d6f047f7045812850190c5c5702c377854f",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/optymalizacja-snu-po50-hero-v2.jpg",
+          "sha256": "db7ec96c74bc041b3701447235224a09093452d2161974febdd73eede5496c63",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego możesz budzić się właśnie około 3 w nocy?",
+      "alt": "Porównanie uproszczonej architektury snu młodszej i starszej osoby",
+      "caption": "Porównanie uproszczonej architektury snu młodszej i starszej osoby",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/sen-po50-zmiany-biologiczne-sekcja1.avif",
+          "sha256": "db3f049c5b78e4cb26bb4eba7b7fb64600a4fefb906802bb071703dca39e66b6",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/sen-po50-zmiany-biologiczne-sekcja1.webp",
+          "sha256": "d83abbadb9ff8f477c2f5991a60f101160c271fcc2585e31b90ee6f800e6735d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/sen-po50-zmiany-biologiczne-sekcja1.jpg",
+          "sha256": "f5c31df5bc420f341eb6e767b7d2e46a1555b1bf6fa7531bcc1a53f4e0c4ef94",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego możesz budzić się właśnie około 3 w nocy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co zapisać przez pierwsze 14 dni?",
+      "alt": "Infografika pokazująca, że dawka melatoniny wymaga indywidualnej oceny",
+      "caption": "Infografika pokazująca, że dawka melatoniny wymaga indywidualnej oceny",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/melatonina-suplementacja-sen-sekcja2.avif",
+          "sha256": "df8250b0815d57369eb3b8d052cc3f7cc747d1e14c92bd8fe4cd79778dacac25",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/melatonina-suplementacja-sen-sekcja2.webp",
+          "sha256": "6f4281e2c563febc77b8de0f9479253702607a1f6006d64d6c80151bad507418",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/melatonina-suplementacja-sen-sekcja2.jpg",
+          "sha256": "42f99a52b9aa7bfbe3be2380caed9bd65282322b2a75ca9d242715f7386ed577",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co zapisać przez pierwsze 14 dni?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co robić po nocnej pobudce?",
+      "alt": "Kobieta po 50-tce czyta papierową książkę w słabym świetle po nocnej pobudce",
+      "caption": "Jeśli sen nie wraca, spokojna czynność przy słabym świetle pomaga przerwać narastające napięcie związane z bezsennością.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/nocna-pobudka-spokojna-reakcja-20260930.avif",
+          "sha256": "5f9018ce2f13b37d3dd835596856cf966f0c48b61b42d65d2356e30cff0d4717",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/nocna-pobudka-spokojna-reakcja-20260930.webp",
+          "sha256": "c8bf7bae7f317611b2598ee887d17da8a7cd5062698b0bc4f80a567af5f1fa1a",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/nocna-pobudka-spokojna-reakcja-20260930.jpg",
+          "sha256": "105549bdd174658d6bd2790bb44d55888e8fd87bda8fb4b876263455104fbf86",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co robić po nocnej pobudce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy potrzebna jest diagnostyka lub leczenie CBT-I?",
+      "alt": "Kobieta po 50-tce omawia dziennik snu z lekarką podczas konsultacji bezsenności",
+      "caption": "Dziennik snu pomaga ocenić wzorzec pobudek i zaplanować diagnostykę lub terapię poznawczo-behawioralną bezsenności.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/bezsennosc-dziennik-snu-cbti-konsultacja-20260930.avif",
+          "sha256": "106165cb92d730b05df8e96303775906ae66fe0b8ff1c8aa3ad199e71407b078",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/bezsennosc-dziennik-snu-cbti-konsultacja-20260930.webp",
+          "sha256": "67f04db3dfac90d3181356952ca1c38e1a382c65890f9aac7f346d33e1751168",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/bezsennosc-dziennik-snu-cbti-konsultacja-20260930.jpg",
+          "sha256": "8fe2273cbe356159665207563eab4adc78563beb444e17cdf42c0c2f52566990",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy potrzebna jest diagnostyka lub leczenie CBT-I?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

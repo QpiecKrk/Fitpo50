@@ -1,0 +1,418 @@
+{
+  "version": 1,
+  "slug": "media-spolecznosciowe-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "797b418f172125be7e7ce4f39e6834c4c7b267f94487fc0e5935d0042161b1f6",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Dojrzała osoba korzystająca świadomie z mediów społecznościowych",
+      "caption": "",
+      "width": 1200,
+      "height": 669,
+      "variants": {
+        "avif": {
+          "file": "assets/media_hero_v2-v2.avif",
+          "sha256": "1b303c922e9cb495498a42f0b23bb56a9a449a2f82e67b5ae231163c7da487b0",
+          "width": 1200,
+          "height": 669
+        },
+        "webp": {
+          "file": "assets/media_hero_v2-v2.webp",
+          "sha256": "420b56c1ec67e9d9811c8d33e8467756d91093cf484322a333ca6a18141a5c5b",
+          "width": 1200,
+          "height": 669
+        },
+        "jpg": {
+          "file": "assets/media_hero_v2-v2.jpg",
+          "sha256": "96d579d1b4d1a759633c750c8cb405d80704d7b5e381483d63dfa94fb20f1764",
+          "width": 1200,
+          "height": 669
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Zacznijmy od mitu, który krąży najczęściej?",
+      "alt": "Kobieta po 60-tce świadomie korzysta ze smartfona przy stole",
+      "caption": "Media społecznościowe mogą być narzędziem kontaktu i nauki, jeśli korzystasz z nich celowo i kontrolujesz czas.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-mit-20260930.avif",
+          "sha256": "54e54d5fc8a5671d9d5508dc23199da42e4509f4615a57c4dee1b39b22ceb837",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-mit-20260930.webp",
+          "sha256": "293ff1b64f04cf738b0414c9c61012d2c820b0d07644ecf5c9ddab98328c27a6",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-mit-20260930.jpg",
+          "sha256": "525a811a734285a1790e50953bb06b401e24f06bd8a9ad8778bb895ceb33e9c0",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Zacznijmy od mitu, który krąży najczęściej?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co nauka mówi o starszych dorosłych i mediach społecznościowych?",
+      "alt": "Para po 60-tce rozmawia przez tablet z rodziną",
+      "caption": "Badania opisują zarówno możliwe korzyści dla więzi i dobrostanu, jak i znaczenie sposobu korzystania z platform.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-badania-relacje-20260930.avif",
+          "sha256": "ee0393e1eb05202c35ba93b0f374296580fb6d56ee3e1ccd8fb249a2ceeaf79e",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-badania-relacje-20260930.webp",
+          "sha256": "fb4c93f6dbe65a71140d4bf4d23856a6871eb0a00ebf33e1da30136a5ec19bad",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-badania-relacje-20260930.jpg",
+          "sha256": "44f9dddd7ca7562f68e10c61cde9eac2ee799d0c0a3159635e4a3caf4ac7d53f",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co nauka mówi o starszych dorosłych i mediach społecznościowych?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Samotność po 50-tce to nie kaprys — to epidemia z konsekwencjami zdrowotnymi?",
+      "alt": "Mężczyzna po 60-tce nawiązuje wideorozmowę z bliskimi",
+      "caption": "Kontakt online nie zastępuje wszystkich spotkań, ale może przerwać izolację i ułatwić podtrzymywanie ważnych relacji.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-samotnosc-20260930.avif",
+          "sha256": "23b72bfa230e8f7acc3cd3186103646d1d336a3a0663d8d28b5b9913f311af84",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-samotnosc-20260930.webp",
+          "sha256": "ba56a28938cf5bec6cfc5e535d3fa2efbe57a880eca63bf82e8e9a565833beb7",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-samotnosc-20260930.jpg",
+          "sha256": "8a539ed2e19da6f3ef56b6ec16a3be60bfb3000044768a873c918ed08e17212a",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Samotność po 50-tce to nie kaprys — to epidemia z konsekwencjami zdrowotnymi?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Media społecznościowe a mózg — to się opłaca?",
+      "alt": "Kobieta po 60-tce uczy się rękodzieła z filmu na tablecie",
+      "caption": "Uczenie się nowych czynności i aktywna rozmowa angażują uwagę lepiej niż bezmyślne, długie przewijanie treści.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-mozg-nauka-20260930.avif",
+          "sha256": "b9a7df9a5f7513ea42c07c1fd4b4d7309bb0956ec52f1c024251a143e7fd13aa",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-mozg-nauka-20260930.webp",
+          "sha256": "ff54aab23f3137bb58cd946f4a07db79fce22d2ed65adbd6917ab26201eba923",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-mozg-nauka-20260930.jpg",
+          "sha256": "85d0f9fbb1ea5ce5d345584b17abb8a1570fa7f8cddde65bff6ec9605250d604",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Media społecznościowe a mózg — to się opłaca?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Nie musisz nic o sobie pisać. Serio?",
+      "alt": "Mężczyzna po 60-tce przegląda materiały podróżnicze na tablecie",
+      "caption": "Możesz obserwować interesujące profile, grupy i wydarzenia bez publikowania prywatnych zdjęć ani opisywania swojego życia.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-bez-publikowania-20260930.avif",
+          "sha256": "c3257edeab9479b9e33bac3d4584b05a7a97597a452dd1727e22af404848ea34",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-bez-publikowania-20260930.webp",
+          "sha256": "bb3d416cae8c90a99498afb5138bb04e2c22a79c463e6ad125fc657b3c0308d6",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-bez-publikowania-20260930.jpg",
+          "sha256": "58997bcc6601517e10fa6cd1afb87325bd9db773343c8e6780768ddd665bda65",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Nie musisz nic o sobie pisać. Serio?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Bezpieczeństwo — co tak naprawdę warto wiedzieć?",
+      "alt": "Kobieta po 60-tce sprawdza ustawienia prywatności z bliską osobą",
+      "caption": "Prywatność, mocne hasło i ostrożność wobec pilnych próśb o pieniądze ograniczają najczęstsze zagrożenia.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-bezpieczenstwo-20260930.avif",
+          "sha256": "6749bde937311d3b7e1cbf11f7feb625fe453c89dbc3baed5f66bb950067b5d7",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-bezpieczenstwo-20260930.webp",
+          "sha256": "423d62f918795041e7241bea25fa3319bc209586d222ff0e2ca2fdc16f596717",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-bezpieczenstwo-20260930.jpg",
+          "sha256": "6dbbe03e172d965987fd946c1d4ae3f084c491f8b5cc782aa15370c2fe4c3e7e",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Bezpieczeństwo — co tak naprawdę warto wiedzieć?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co konkretnie możesz tam znaleźć — tabela platform?",
+      "alt": "Kobieta po 60-tce korzysta ze smartfona tabletu i laptopa",
+      "caption": "Różne platformy służą innym celom: kontaktowi z bliskimi, grupom zainteresowań, krótkim filmom lub nauce.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-platformy-20260930.avif",
+          "sha256": "8b8f494cccd9a47f399eb8682c9be094babb1f5c0d3688e63460346ce29fd5cd",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-platformy-20260930.webp",
+          "sha256": "4b5641b3dbf5a2b23fc362a5e15a14fc7860b2f7be1a3588593d54589dbf03a2",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-platformy-20260930.jpg",
+          "sha256": "05595ff83e38fdb0fb5b43d83b76359874afd0b2a476fe8891dc3a96ca6c2c02",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co konkretnie możesz tam znaleźć — tabela platform?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:TikTok po 50-tce — ale skąd wiem co tam jest?",
+      "alt": "Mężczyzna po 50-tce ogląda krótki poradnik ćwiczeń na telefonie",
+      "caption": "Krótkie filmy mogą podsunąć pomysł, ale porady zdrowotne i treningowe trzeba sprawdzać w wiarygodnych źródłach.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-krotkie-filmy-20260930.avif",
+          "sha256": "fe95cba28ea3d0c0804339e7b3ba980aa85942b635a2e886081234e2b442df53",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-krotkie-filmy-20260930.webp",
+          "sha256": "ce144a6fa9511090d4740c6c4245676d416befbb205ac52be6b93d95894e2998",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-krotkie-filmy-20260930.jpg",
+          "sha256": "2130e0b09c706e099e148cf1b2d2567ef63ffbca4fcf4b979da36f0f322d84ce",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:TikTok po 50-tce — ale skąd wiem co tam jest?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Grupy na Facebooku — jak znaleźć swoje plemię?",
+      "alt": "Grupa osób po 50-tce planuje wspólną wycieczkę przy mapie",
+      "caption": "Dobrze moderowana grupa może połączyć ludzi o wspólnych zainteresowaniach i prowadzić do spotkań poza internetem.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-grupy-20260930.avif",
+          "sha256": "f7c4c3ec300e29bb67f12b52883d04c1ef82f72fbe6ebe4f7c921f8bd8bc4cd9",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-grupy-20260930.webp",
+          "sha256": "e665f62ee3bff74abe23bab3b4ad8fe756984d0ff704d236e88d2a1369263174",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-grupy-20260930.jpg",
+          "sha256": "bf969ce0856c244b5aff4fe4b52f08d4628528adbdba4a30dcec6ce701ee4775",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Grupy na Facebooku — jak znaleźć swoje plemię?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Obalamy mity?",
+      "alt": "Para po 60-tce porównuje informacje z telefonu i laptopa",
+      "caption": "Wiek nie odbiera zdolności do korzystania z technologii; pomaga cierpliwa nauka i nawyk sprawdzania źródeł.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-mity-weryfikacja-20260930.avif",
+          "sha256": "64142a77e6f2bfbd15bc9ec8a8998a5c66859b0c97a25d3bd2a2baeebbc54164",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-mity-weryfikacja-20260930.webp",
+          "sha256": "f1547c3b01513ce753a62e6ea5b04f760eda13429b23d42aa8f2afcde4759c63",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-mity-weryfikacja-20260930.jpg",
+          "sha256": "2422a514816c7d04fadc2317291fa9cc324b8fab24cfde6641ac3c450cb9b775",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Obalamy mity?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Na koniec — bo to jest najważniejsze?",
+      "alt": "Kobieta po 60-tce odkłada telefon i wychodzi na spotkanie z przyjaciółkami",
+      "caption": "Najlepszy efekt pojawia się wtedy, gdy kontakt online ułatwia rozmowę, wspólne działanie i relacje w codziennym życiu.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/social-media-realne-relacje-20260930.avif",
+          "sha256": "2c77d9ae081f79b77d02bb287d597209ff870096b272497ede4b95351d5ba284",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/social-media-realne-relacje-20260930.webp",
+          "sha256": "2e7dc4688cd33f81f79fde029d99b74763e8fd937834a5712258f92215cfaf71",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/social-media-realne-relacje-20260930.jpg",
+          "sha256": "5fa32689683f3c4e1111fc9b506546d94b7293cb4a76640be6209cdc2e994089",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Na koniec — bo to jest najważniejsze?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

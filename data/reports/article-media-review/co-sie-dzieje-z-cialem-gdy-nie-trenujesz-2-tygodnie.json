@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "0b5c34815d42cfdf051bc66537eba1cf5c8369db379ca58a4339b09c22835e71",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Uśmiechnięty mężczyzna 50+ wraca do biegania w słonecznym parku po krótkiej przerwie od treningu",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/co-sie-dzieje-z-cialem-2-tygodnie-hero-v2.avif",
+          "sha256": "572583a7b6bd22d623f9dadc34e918788d84f3e3d4fcb68f35f45417c1226ac6",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/co-sie-dzieje-z-cialem-2-tygodnie-hero-v2.webp",
+          "sha256": "6221bdbe39e0a635a31222043d71309dd3dfa4ba81f2d318e1ad4ffb97129d81",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/co-sie-dzieje-z-cialem-2-tygodnie-hero-v2.jpg",
+          "sha256": "36881bcb24787b024efefeede71a0bf03613fc8c3ac2d368ee69294d1e831f93",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy po dwóch tygodniach tracisz mięśnie i siłę?",
+      "alt": "Porównanie krótkiej przerwy z długotrwałym brakiem aktywności",
+      "caption": "Porównanie krótkiej przerwy z długotrwałym brakiem aktywności",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/2-tygodnie-mit-utraty-miesni.avif",
+          "sha256": "b68dc01fa4509d147c6839e89d28309f0219cf859cc5d6256ee4609e37a5d829",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/2-tygodnie-mit-utraty-miesni.webp",
+          "sha256": "93c896db5cdff9efa9a24ceb3797e5770f645b78094fb70f03b223cbf223c76a",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/2-tygodnie-mit-utraty-miesni.jpg",
+          "sha256": "0b57dca6675ff9f05370f1041d719070e45e1439c0e7e7233508bd712d6c9f30",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy po dwóch tygodniach tracisz mięśnie i siłę?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego kondycja może pogorszyć się szybciej?",
+      "alt": "Schemat możliwego spadku wydolności podczas przerwy",
+      "caption": "Schemat możliwego spadku wydolności podczas przerwy",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/spadek-kondycji-vo2max-schemat.avif",
+          "sha256": "52dbd0b08df353f376baed35727c7e73f8cc2878ce56c1be82162bbe5d7c46f2",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/spadek-kondycji-vo2max-schemat.webp",
+          "sha256": "aafbab3325ca874da84dd89e311e14dff5bcb22c0b393b032d36adc707ebcc0b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/spadek-kondycji-vo2max-schemat.jpg",
+          "sha256": "0e6c12e9e5953d6203c81576f49ec0794032c587b5ed47103ec3376c44470efe",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego kondycja może pogorszyć się szybciej?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego mięśnie wyglądają na mniejsze?",
+      "alt": "Mężczyzna po 50-tce obserwuje sylwetkę po przerwie z wizualizacją wody i glikogenu w mięśniu",
+      "caption": "Mniejsza pełność mięśni po przerwie może wynikać ze zmian glikogenu i wody, a nie z gwałtownej utraty całej tkanki mięśniowej.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/przerwa-treningowa-glikogen-woda-20260930.avif",
+          "sha256": "a7c6e83cce0192e03fdce2a4358a3c40b485875c91e825f563e16b3b371a5668",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/przerwa-treningowa-glikogen-woda-20260930.webp",
+          "sha256": "e4d1ce8a478a2a0e976ed3544e1b211b2891fb6175e06ae8cfe03a71dcb9c590",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/przerwa-treningowa-glikogen-woda-20260930.jpg",
+          "sha256": "b861fcbf86426039ce738160bc9ba56e69e3161337785c5c9cfd6472ed8b42df",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego mięśnie wyglądają na mniejsze?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak wrócić po dwóch tygodniach przerwy?",
+      "alt": "Kobieta po 60-tce wraca do lekkiego treningu siłowego pod kontrolą trenera",
+      "caption": "Pierwsze sesje po przerwie powinny zostawić zapas i odbudować rytm, zanim wróci wcześniejsze obciążenie.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/powrot-po-przerwie-lekki-trening-20260930.avif",
+          "sha256": "c49b2a5422e730a218acdcc65e693c498c9eeaf56912f9be4c3f1142d17ffb55",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/powrot-po-przerwie-lekki-trening-20260930.webp",
+          "sha256": "fcf4d6026c55598304b471f45da174dc3dbb610f106ba0d2262ff1f0883ff3c2",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/powrot-po-przerwie-lekki-trening-20260930.jpg",
+          "sha256": "8e054e84a4b49516f7eaae87dbd2b5725e089f62b923a7f658a762c0981e5f7e",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak wrócić po dwóch tygodniach przerwy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

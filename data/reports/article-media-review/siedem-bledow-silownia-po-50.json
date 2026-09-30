@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "siedem-bledow-silownia-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "07fda5916e49cc412e5fbab5418047f478b74ccee9da5eb4ec891b85eabffeb4",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna odpoczywający na macie na siłowni po treningu",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/siedem-bledow-silownia-po-50-hero.avif",
+          "sha256": "a47270c0a29e3f7ff4b932849cc23690cdbce991ba64db68760d4b418ffa983c",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/siedem-bledow-silownia-po-50-hero.webp",
+          "sha256": "e10093fa62a1d9abf8256cd207d1b3f17d69c841b9717dea2bde2a2ef82839bc",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/siedem-bledow-silownia-po-50-hero.jpg",
+          "sha256": "a47ad613ec11e40c7709c3f081a52860bb45e73b1b0602bfaae3f1f13328aa08",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna odpoczywający na macie na siłowni po treningu. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Które błędy dotyczą dawki i progresji?",
+      "alt": "Hantle i kartka z planem stopniowego zwiększania obciążenia",
+      "caption": "Mały, zapisany progres obciążenia pozwala ocenić dawkę i ogranicza przypadkowe skoki wysiłku.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/siedem-bledow-progres-ciezaru-20260929.avif",
+          "sha256": "aaeffebd811b12a4e3f9939b0e73c4d1c50226baef75aee8d10422595f18cec3",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/siedem-bledow-progres-ciezaru-20260929.webp",
+          "sha256": "f5ce090816dc15d952e36561999066bd0eb957c9804bc000e699f266034b799e",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/siedem-bledow-progres-ciezaru-20260929.jpg",
+          "sha256": "e44535b04aa244033654e050b0b396ecf328ef0370da2931d647cd236336c0a0",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Które błędy dotyczą dawki i progresji?”: Hantle i kartka z planem stopniowego zwiększania obciążenia. Zgodność z treścią potwierdza podpis: Mały, zapisany progres obciążenia pozwala ocenić dawkę i ogranicza przypadkowe skoki wysiłku."
+      }
+    },
+    {
+      "placement": "section:Jakie błędy techniczne zdarzają się najczęściej?",
+      "alt": "Zbliżenie na oddech podczas wysiłku i jego związek z ciśnieniem",
+      "caption": "Swobodny, kontrolowany oddech ogranicza niepotrzebne wstrzymywanie powietrza podczas serii.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/siedem-bledow-oddech-20260929.avif",
+          "sha256": "f856d4f98dc9329f5028d9127e4b90507caa8fe8cf8c4d1b5302999f5c5764fc",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/siedem-bledow-oddech-20260929.webp",
+          "sha256": "81efd431bce47189828c1a9348a97c9809c929806b3c71fb081ecc5e164779a6",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/siedem-bledow-oddech-20260929.jpg",
+          "sha256": "1d15ee25002e252833b3cfea3c0b2ccb9bf593d872c8b7f7821112f81ab71f92",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jakie błędy techniczne zdarzają się najczęściej?”: Zbliżenie na oddech podczas wysiłku i jego związek z ciśnieniem. Zgodność z treścią potwierdza podpis: Swobodny, kontrolowany oddech ogranicza niepotrzebne wstrzymywanie powietrza podczas serii."
+      }
+    },
+    {
+      "placement": "section:Dlaczego sama rozgrzewka na bieżni nie wystarcza?",
+      "alt": "Dojrzała kobieta rozpoczyna rozgrzewkę marszem na bieżni",
+      "caption": "Marsz podnosi temperaturę ciała, a konkretne ćwiczenie nadal wymaga własnych lekkich serii przygotowawczych.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/siedem-bledow-rozgrzewka-bieznia-20260929.avif",
+          "sha256": "5eb5571cce6acbff8ac91e6809e07dcb4dbc0f3ad24cc6f96f77894b85b26f14",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/siedem-bledow-rozgrzewka-bieznia-20260929.webp",
+          "sha256": "843b7334d598703878b0e98b30da467c4494ca47a4cbc81b599f1c85c7004630",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/siedem-bledow-rozgrzewka-bieznia-20260929.jpg",
+          "sha256": "0ce743fc81671c430be761ee6b663a60223f88389a4935852e30874aa8b526bf",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego sama rozgrzewka na bieżni nie wystarcza?”: Dojrzała kobieta rozpoczyna rozgrzewkę marszem na bieżni. Zgodność z treścią potwierdza podpis: Marsz podnosi temperaturę ciała, a konkretne ćwiczenie nadal wymaga własnych lekkich serii przygotowawczych."
+      }
+    },
+    {
+      "placement": "section:Kiedy ambicję trzeba zastąpić oceną objawów?",
+      "alt": "Dojrzały mężczyzna na siłowni zatrzymuje się przed kolejną serią",
+      "caption": "Rozsądna decyzja o przerwaniu wysiłku bywa ważniejsza niż dokończenie serii za wszelką cenę.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/siedem-bledow-mentalne-nastawienie-20260929.avif",
+          "sha256": "de06c866b7f7443eeac44e87012845e2c6d76ba8e69a6d13e04ed3f3dff4fac6",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/siedem-bledow-mentalne-nastawienie-20260929.webp",
+          "sha256": "2ed1b42089837e110de55016d093c45db8b04d22e113a8c6e5b0423fcc256e25",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/siedem-bledow-mentalne-nastawienie-20260929.jpg",
+          "sha256": "4a57396e74905a33b583153a42d1020d35fbb1580cab9b70b108ae6bc6bcc90d",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy ambicję trzeba zastąpić oceną objawów?”: Dojrzały mężczyzna na siłowni zatrzymuje się przed kolejną serią. Zgodność z treścią potwierdza podpis: Rozsądna decyzja o przerwaniu wysiłku bywa ważniejsza niż dokończenie serii za wszelką cenę."
+      }
+    }
+  ]
+}

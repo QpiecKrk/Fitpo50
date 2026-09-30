@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:55:09.069Z",
+  "slug": "hrt-mit-badanie-po-50",
+  "html_sha256": "7cf09282fabf02b7433d7585d75092216cda6cc17de3c668da70b78f78e0add2",
+  "site_html_sha256": "7cf09282fabf02b7433d7585d75092216cda6cc17de3c668da70b78f78e0add2",
+  "pdf_sha256": "8db08589270e5e570883734e157b5399644f16560ce8d71b698aecb6ef3dec24",
+  "site_pdf_sha256": "8db08589270e5e570883734e157b5399644f16560ce8d71b698aecb6ef3dec24",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 9,
+    "text_coverage": 1,
+    "rendered_pages": 9
+  },
+  "errors": []
+}

@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "detoks-sokowy-po-50-mit",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "511272544bcd1fd4406049201fb0d2caed39105a80f1a5d270e55cdd238ab306",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Para po pięćdziesiątce przygotowuje pełnowartościowy posiłek zamiast detoksu sokowego",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/detoks-sokowy-hero-v2.avif",
+          "sha256": "01756973f6ef453727956ecb24c76b94b83e6731af008ea1562859e82347adb4",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/detoks-sokowy-hero-v2.webp",
+          "sha256": "4ed5f66f3f17e2d4d2c81488a3d82fd38e8276f3a8d3df7d856b3253a4e8bf06",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/detoks-sokowy-hero-v2.jpg",
+          "sha256": "c0a5d0d47604b436ec3c2273c9b37a1295993edb8f6f507bf3007b27ee7cb899",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego obietnica detoksu sokowego brzmi tak wiarygodnie?",
+      "alt": "Pełnowartościowy posiłek jako praktyczna alternatywa dla detoksu sokowego",
+      "caption": "Reklama obiecuje reset. Ciało potrzebuje powtarzalności.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/detoks-sokowy-co-dziala-trening-x.avif",
+          "sha256": "80666747051f4e89b9f3e3ee3a5b82f5be8cdfd19c0e3beb69cc66ab02520473",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/detoks-sokowy-co-dziala-trening-x.webp",
+          "sha256": "7d23184c7dd7d16a46d685bcd71d3e9a325c204d4e42fe0ec330a26b8bbc4a17",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/detoks-sokowy-co-dziala-trening-x.jpg",
+          "sha256": "63b5494519face506b6bef0a0bc329b54bbcb4d48838e911e8dfd3c44eed5836",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego obietnica detoksu sokowego brzmi tak wiarygodnie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę robi wątroba każdego dnia?",
+      "alt": "Ilustracja pokazująca wątrobę jako narząd pracujący nieprzerwanie przez całą dobę",
+      "caption": "Wątroba nie czeka na sok — pracuje cały czas.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/detoks-sokowy-watroba-mechanizm.avif",
+          "sha256": "e703bda58baa8811e13dfdd98179bb5b645a9f1f6b4b3b45694f8747902a2a42",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/detoks-sokowy-watroba-mechanizm.webp",
+          "sha256": "e28f7bc75f3c912218001b7104d125cac94967bca111a9317462c1884680c04c",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/detoks-sokowy-watroba-mechanizm.jpg",
+          "sha256": "02c0c70ec86be1a7c97eb582cbc51747e52c78e36fcf0f1b58bd5ff87ebc8dba",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co naprawdę robi wątroba każdego dnia?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co mówi fizjologia o diecie sokowej?",
+      "alt": "Infografika porównująca obietnicę detoksu sokowego z fizjologiczną pracą wątroby",
+      "caption": "Obietnica brzmi lekko. Fizjologia bywa mniej instagramowa.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/detoks-sokowy-fruktoza-infografika.avif",
+          "sha256": "82c09d5ee67b51db981383aae7094ff3a0232495ccb3dc912f3e241bf68ce65e",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/detoks-sokowy-fruktoza-infografika.webp",
+          "sha256": "4ab62a958403a58245b765c7aeea1a97a85c5748e758ec57fd806ef12af87542",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/detoks-sokowy-fruktoza-infografika.jpg",
+          "sha256": "31458a5897b56ba724766c7cd58088dc07c2944e50edb7724527aa21b7666e6c",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co mówi fizjologia o diecie sokowej?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego po 50-tce detoks sokowy może szkodzić mięśniom?",
+      "alt": "Porównanie pełnowartościowego posiłku białkowego i samego soku owocowego",
+      "caption": "Po 50-tce mięśnie potrzebują białka, nie tylko płynów.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/detoks-sokowy-utrata-miesni.avif",
+          "sha256": "a090fce0b2e1550d3163c4f22476cea33a5aa041826ae1cfb3b8a5d9320a28f9",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/detoks-sokowy-utrata-miesni.webp",
+          "sha256": "4f7264e90002cd514310097713d2982df74380820b345cf349677c6a752f736f",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/detoks-sokowy-utrata-miesni.jpg",
+          "sha256": "7f1a48340e7b2bdca5879d8e9aae97e15af8904f6dd7c694ced115facef05e1a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego po 50-tce detoks sokowy może szkodzić mięśniom?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co jest prawdą w sokach, a gdzie zaczyna się mit?",
+      "alt": "Kobieta po pięćdziesiątce wybiera pełnowartościowy posiłek zamiast samego soku",
+      "caption": "Sok może być dodatkiem. Problem zaczyna się, gdy zastępuje jedzenie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/detoks-sokowy-co-dziala-trening.avif",
+          "sha256": "80666747051f4e89b9f3e3ee3a5b82f5be8cdfd19c0e3beb69cc66ab02520473",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/detoks-sokowy-co-dziala-trening.webp",
+          "sha256": "7d23184c7dd7d16a46d685bcd71d3e9a325c204d4e42fe0ec330a26b8bbc4a17",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/detoks-sokowy-co-dziala-trening.jpg",
+          "sha256": "63b5494519face506b6bef0a0bc329b54bbcb4d48838e911e8dfd3c44eed5836",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co jest prawdą w sokach, a gdzie zaczyna się mit?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę działa na wątrobę i kiedy iść do lekarza?",
+      "alt": "Kobieta po pięćdziesiątce rozmawia z lekarką o badaniach zamiast robić detoks sokowy",
+      "caption": "Niepokojące objawy wymagają diagnostyki, nie sokowej kuracji.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/detoks-sokowy-konsultacja-lekarz.avif",
+          "sha256": "231beaca84d1e456c65b01a898f4df240554dcbb8622423a86b27b5ef63a3820",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/detoks-sokowy-konsultacja-lekarz.webp",
+          "sha256": "e4573c5a963b00258f7d56e17ce96fae928150862fb43bc33d5f87e7c9497fa4",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/detoks-sokowy-konsultacja-lekarz.jpg",
+          "sha256": "72b16342062d31b58bcc65c1cfc630a8c99273a444c837bcf08bc4dd7b9dcde0",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co naprawdę działa na wątrobę i kiedy iść do lekarza?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

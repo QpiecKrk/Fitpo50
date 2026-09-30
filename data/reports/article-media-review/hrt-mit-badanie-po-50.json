@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "slug": "hrt-mit-badanie-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "7cf09282fabf02b7433d7585d75092216cda6cc17de3c668da70b78f78e0add2",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Pewna siebie kobieta po pięćdziesiątce w gabinecie lekarskim — spokojna, świadoma, nieustraszona",
+      "caption": "",
+      "width": 2752,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/hrt-prawda-hero.avif",
+          "sha256": "f0d900986e7055ff045dacf0b4e8fcf0bfdc9d4b7f04f01de72817d198ea48c0",
+          "width": 2752,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/hrt-prawda-hero.webp",
+          "sha256": "352d681a85b0876a00c0ad68be30045889ca724dfe4e341277741a811433fb10",
+          "width": 2752,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/hrt-prawda-hero.jpg",
+          "sha256": "088a2dcea097840c8c3a2c4fd1ec875255b1aba824c670e4ae1c849b750da588",
+          "width": 2752,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co się stało w 2002 roku — i co było z tym nie tak?",
+      "alt": "Strona gazety z 2002 roku z dramatycznym nagłówkiem o HRT, płonąca elegancko jednym rogiem",
+      "caption": "Nagłówki z 2002 roku utrwaliły uproszczony obraz wyników badania WHI i ryzyka HRT.",
+      "width": 2200,
+      "height": 1642,
+      "variants": {
+        "avif": {
+          "file": "assets/hrt-prawda-s1-v2.avif",
+          "sha256": "be9b3172b6d75fa291b268e6c8950ca30a0a8f7515a8572dd69bfc5c05ac8286",
+          "width": 2200,
+          "height": 1642
+        },
+        "webp": {
+          "file": "assets/hrt-prawda-s1-v2.webp",
+          "sha256": "2b7213b5660ee251f2abde051cbf67000a431ed4ea9a3d50382db974b0321a19",
+          "width": 2200,
+          "height": 1642
+        },
+        "jpg": {
+          "file": "assets/hrt-prawda-s1-v2.jpg",
+          "sha256": "e00ccb68a88cd533dcc4f3158011cb5474419b6a4839b89cc3f01927c19479e3",
+          "width": 2200,
+          "height": 1642
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co się stało w 2002 roku — i co było z tym nie tak?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Pięć konkretnych błędów badania WHI — tłumaczę po ludzku?",
+      "alt": "Kobieta po pięćdziesiątce w równoprawnej rozmowie z lekarką — obie pochylone ku sobie, zaangażowane",
+      "caption": "Rozmowa z lekarką powinna uwzględniać wiek, czas od menopauzy, objawy i indywidualne przeciwwskazania.",
+      "width": 2200,
+      "height": 1642,
+      "variants": {
+        "avif": {
+          "file": "assets/hrt-prawda-s2-v2.avif",
+          "sha256": "6f83c6151652d85dc5a6184affe27b3ea06f7bd063acf8b75b0282d7abaa5452",
+          "width": 2200,
+          "height": 1642
+        },
+        "webp": {
+          "file": "assets/hrt-prawda-s2-v2.webp",
+          "sha256": "1ecf9a2d20573cc5adb737ba9c08125ed50a751bb9690452c2bcef94ddc1095b",
+          "width": 2200,
+          "height": 1642
+        },
+        "jpg": {
+          "file": "assets/hrt-prawda-s2-v2.jpg",
+          "sha256": "7622d2fada367e69512e7f5eb00bef3d6ffcf4cef107729be7c71e9a2add1b1e",
+          "width": 2200,
+          "height": 1642
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Pięć konkretnych błędów badania WHI — tłumaczę po ludzku?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Ryzyko względne vs bezwzględne — najważniejsza lekcja statystyki w tym artykule?",
+      "alt": "Dwie grupy 100 kobiet obok siebie — minimalna różnica między grupą z HRT i bez HRT widoczna gołym okiem",
+      "caption": "Ryzyko względne może brzmieć alarmująco, dlatego decyzję trzeba opierać także na liczbach bezwzględnych.",
+      "width": 2200,
+      "height": 1642,
+      "variants": {
+        "avif": {
+          "file": "assets/hrt-prawda-s3-v2.avif",
+          "sha256": "53ce73bac929c536ace21d818f0e1a660323c43887184fed46ee5c5482670275",
+          "width": 2200,
+          "height": 1642
+        },
+        "webp": {
+          "file": "assets/hrt-prawda-s3-v2.webp",
+          "sha256": "f51792a29a77eb8618708e4d4692a8ba44fb8a7df05f112e44e35004064f4f82",
+          "width": 2200,
+          "height": 1642
+        },
+        "jpg": {
+          "file": "assets/hrt-prawda-s3-v2.jpg",
+          "sha256": "14a60ab24fc983f6d22ccd4e77217c56bad6253028aa7407ff7fa737b317dad0",
+          "width": 2200,
+          "height": 1642
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ryzyko względne vs bezwzględne — najważniejsza lekcja statystyki w tym artykule?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co HRT naprawdę daje kobietom po menopauzie?",
+      "alt": "Kobieta po pięćdziesiątce nakłada plaster hormonalny na ramię o poranku — spokojnie, jak codzienną rutynę",
+      "caption": "Plaster przezskórny jest jedną z dróg podawania hormonów, dobieraną indywidualnie podczas konsultacji.",
+      "width": 2200,
+      "height": 1642,
+      "variants": {
+        "avif": {
+          "file": "assets/hrt-prawda-s4-v2.avif",
+          "sha256": "f34e301c01dcfc08a41f828571211c53396d6f7f9a4a17976e85edb851c7efee",
+          "width": 2200,
+          "height": 1642
+        },
+        "webp": {
+          "file": "assets/hrt-prawda-s4-v2.webp",
+          "sha256": "b43a330ba6bcc83147dc4103bbe422806e9e260c94524dce127b760b29f8ac46",
+          "width": 2200,
+          "height": 1642
+        },
+        "jpg": {
+          "file": "assets/hrt-prawda-s4-v2.jpg",
+          "sha256": "6c9e81d745da20ef1e7be9d31ab684eff57445c44825ea1aed14410bd19925fd",
+          "width": 2200,
+          "height": 1642
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co HRT naprawdę daje kobietom po menopauzie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Nowoczesne HRT to nie to, co badało WHI — i co zrobić z tą wiedzą?",
+      "alt": "Cztery polskie kobiety po pięćdziesiątce śmieją się przy stoliku w kawiarni — żywotne, obecne, zdrowe",
+      "caption": "Współczesna decyzja o HRT wymaga oceny korzyści, ryzyka, drogi podania i regularnej kontroli.",
+      "width": 2200,
+      "height": 1642,
+      "variants": {
+        "avif": {
+          "file": "assets/hrt-prawda-s5-v2.avif",
+          "sha256": "7f344749c69ea9d3fff60047b583ef5fd3a6fe6a6b95c80775dafad1b8d63725",
+          "width": 2200,
+          "height": 1642
+        },
+        "webp": {
+          "file": "assets/hrt-prawda-s5-v2.webp",
+          "sha256": "a1601d12c656dc7133d7a6efe6baa6032005c436ecfac4e2937b8cc87b5c654b",
+          "width": 2200,
+          "height": 1642
+        },
+        "jpg": {
+          "file": "assets/hrt-prawda-s5-v2.jpg",
+          "sha256": "497fa763a3dbe773a45434c20f6bd5a25c3b34dfb42236ba5c58d9c3a9e7e549",
+          "width": 2200,
+          "height": 1642
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Nowoczesne HRT to nie to, co badało WHI — i co zrobić z tą wiedzą?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

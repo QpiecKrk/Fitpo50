@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "motywacja-zniknela-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "5c2bfccf22809075c372caa357e3eb1bf8e7856ed5bf17de49cfacaa550bb74a",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Przygotowany strój treningowy, buty i smartwatch na stole w porannym świetle – moment zawahania",
+      "caption": "",
+      "width": 1200,
+      "height": 669,
+      "variants": {
+        "avif": {
+          "file": "assets/brak-motyw-20260929.avif",
+          "sha256": "7a067afb48d2ca535dd72916df266c991f6894dbcfb23f1622e0e98eddc6435d",
+          "width": 1200,
+          "height": 669
+        },
+        "webp": {
+          "file": "assets/brak-motyw-20260929.webp",
+          "sha256": "de36f3523c7d0c6b0897b5a8dc9774a862893740fe473307669610e8f26ceee3",
+          "width": 1200,
+          "height": 669
+        },
+        "jpg": {
+          "file": "assets/brak-motyw-20260929.jpg",
+          "sha256": "62484c8fecd8bdac8c3ae9a3095f1abf38a4601c0e3ca44b0f8f3652faf7296e",
+          "width": 1200,
+          "height": 669
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Przygotowany strój treningowy, buty i smartwatch na stole w porannym świetle – moment zawahania. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Dlaczego zapał znika po pierwszych treningach?",
+      "alt": "Kobieta po pierwszych treningach zastanawia się nad dalszym planem",
+      "caption": "Nowość i szybka nagroda pomagają zacząć, ale nie tworzą automatycznie trwałego zachowania.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/motywacja-zniknela-po-50-section-1-20260929.avif",
+          "sha256": "12b4e5a4dd5e68101edc2c9fc53447ce7a3311fa743b23cbc9988c7e7549b1d1",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/motywacja-zniknela-po-50-section-1-20260929.webp",
+          "sha256": "4bec509df5aeda4f9c5b061389557e87083670a9e7cfb0e1e0e3158466f3742b",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/motywacja-zniknela-po-50-section-1-20260929.jpg",
+          "sha256": "be6f341fb8d5cbffcf1077b304d769844f8ec400537ab5150515cf870ad03500",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego zapał znika po pierwszych treningach?”: Kobieta po pierwszych treningach zastanawia się nad dalszym planem. Zgodność z treścią potwierdza podpis: Nowość i szybka nagroda pomagają zacząć, ale nie tworzą automatycznie trwałego zachowania."
+      }
+    },
+    {
+      "placement": "section:Jak zbudować plan „jeśli–to”?",
+      "alt": "Kobieta przygotowuje buty przy drzwiach i ustawia przypomnienie",
+      "caption": "Zapisz jedną rozpoznawalną sytuację i jedną czynność: „Jeśli we wtorek o 18:00 wracam z pracy, zakładam buty i idę na 10 minut”.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/motywacja-zniknela-po-50-section-2-20260929.avif",
+          "sha256": "7a23380940243e8a5aa72a807e6894fd5dfdde79e1cb1ee7e8bf257506b3820b",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/motywacja-zniknela-po-50-section-2-20260929.webp",
+          "sha256": "ca4916600b6f5af257111933c5a832b624cb84296f98a2061ec4cb611a1811ba",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/motywacja-zniknela-po-50-section-2-20260929.jpg",
+          "sha256": "649cf045ad03c8153eb98635a3bb26dcc6b607d26e47bbea4b636b102878cb69",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak zbudować plan „jeśli–to”?”: Kobieta przygotowuje buty przy drzwiach i ustawia przypomnienie. Zgodność z treścią potwierdza podpis: Zapisz jedną rozpoznawalną sytuację i jedną czynność: „Jeśli we wtorek o 18:00 wracam z pracy, zakładam buty i idę na 10 minut”."
+      }
+    },
+    {
+      "placement": "section:Ile czasu naprawdę trwa budowa nawyku?",
+      "alt": "Mężczyzna zaznacza kolejne wykonane aktywności w kalendarzu",
+      "caption": "Nie istnieje jeden termin obowiązujący każdego.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/motywacja-zniknela-po-50-section-3-20260929.avif",
+          "sha256": "7dec8d158c51fe5bab68a50c1907f32eaf64516dcc8dd8e27a9f318681b49ead",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/motywacja-zniknela-po-50-section-3-20260929.webp",
+          "sha256": "668995d2018dc8666a4d8e463377e96d700cb511675ff89420798458374ed22a",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/motywacja-zniknela-po-50-section-3-20260929.jpg",
+          "sha256": "3a2035c19ff807fe45e4f8e9a301fb3e979b859ff19d1e1c355a2ce29b2621d0",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Ile czasu naprawdę trwa budowa nawyku?”: Mężczyzna zaznacza kolejne wykonane aktywności w kalendarzu. Zgodność z treścią potwierdza podpis: Nie istnieje jeden termin obowiązujący każdego."
+      }
+    },
+    {
+      "placement": "section:Kiedy brak motywacji może być objawem zdrowotnym?",
+      "alt": "Lekarka rozmawia z pacjentką o długotrwałym braku energii",
+      "caption": "Nagła lub utrzymująca się zmiana napędu może towarzyszyć depresji, zaburzeniom snu, niedokrwistości, chorobom tarczycy, bólowi albo działaniu leków.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/motywacja-zniknela-po-50-section-4-20260929.avif",
+          "sha256": "3a6f1138561cb4efc22961fc103680e2c0f26588f8f495abb69174aac577bab3",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/motywacja-zniknela-po-50-section-4-20260929.webp",
+          "sha256": "c64c035c0206e69676b1988caa42ac7ae8dd9d9c6fffe18af09c50e05ec78e90",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/motywacja-zniknela-po-50-section-4-20260929.jpg",
+          "sha256": "46afabd3312034b5a07a90befdc1364472c95b6f8d3bc0448aa4cfea639fd51c",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy brak motywacji może być objawem zdrowotnym?”: Lekarka rozmawia z pacjentką o długotrwałym braku energii. Zgodność z treścią potwierdza podpis: Nagła lub utrzymująca się zmiana napędu może towarzyszyć depresji, zaburzeniom snu, niedokrwistości, chorobom tarczycy, bólowi albo działaniu leków."
+      }
+    }
+  ]
+}

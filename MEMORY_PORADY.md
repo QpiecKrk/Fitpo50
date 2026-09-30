@@ -37,6 +37,7 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
   - trzymamy max 2-3 rodziny fontow na artykul,
   - nie rozwalamy layoutu stylami inline (zakaz `style=\"...\"`, szczegolnie w sekcji "Czytelnia"),
   - tabelki musza byc responsywne i czytelne na mobile.
+  - `.sources-list` stosujemy tylko na `<ol>`, a dlugie adresy zrodel musza zawijac sie bez poszerzania strony na mobile.
 
 ## Standard wizualny artykulu (obowiazuje od 2026-04-17)
 

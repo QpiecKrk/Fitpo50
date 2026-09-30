@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "syndrom-pierwszego-poniedzialku",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "6eca2579e05a816c699f48074bc4b75f3181bc67ab15c79288bdc1956f9faa6d",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Wejście na siłownię w poniedziałkowy poranek — Polacy po 50-tce wchodzą przez szklane drzwi, na zewnątrz szare niebo",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/ponedzialek_hero.avif",
+          "sha256": "be3a3a006df0e913c19bd9d87d78daec0abb124504bd183c3b6c10981af17e01",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/ponedzialek_hero.webp",
+          "sha256": "0d642f4239af04b79c66b9fcf5a6a91d263be6b25fc6c43c56dcb58c372f8422",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/ponedzialek_hero.jpg",
+          "sha256": "f1cc465e60fb99919213c02a530a71f69a03906041f3c21981b56381d6ccd978",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Wejście na siłownię w poniedziałkowy poranek — Polacy po 50-tce wchodzą przez szklane drzwi, na zewnątrz szare niebo. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Dlaczego poniedziałek wydaje się dobrym momentem?",
+      "alt": "Widok z góry na serię tygodniowych planerów — każdy z zakreślonym poniedziałkiem START i porzuconą serią, szósty z ciągłymi znacznikami",
+      "caption": "Daty oddzielające jeden okres od drugiego mogą tworzyć psychologiczne poczucie nowego początku.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-1-20260929.avif",
+          "sha256": "1b6c0e17493a7c16dd948f1292d575911e7c660fceb48a4832a61d7d311897b4",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-1-20260929.webp",
+          "sha256": "19645a128f1a651da889f7a7382630604f2ac97801041063c13eddbe19505bfd",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-1-20260929.jpg",
+          "sha256": "38c2ac504dc3e07c227e8f4142fa5c4f802fcd2a4fb6e32bc1e0865643934dbb",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego poniedziałek wydaje się dobrym momentem?”: Widok z góry na serię tygodniowych planerów — każdy z zakreślonym poniedziałkiem START i porzuconą serią, szósty z ciągłymi znacznikami. Zgodność z treścią potwierdza podpis: Daty oddzielające jeden okres od drugiego mogą tworzyć psychologiczne poczucie nowego początku."
+      }
+    },
+    {
+      "placement": "section:Jak wybrać jedno zachowanie na 14 dni?",
+      "alt": "Otwarty notatnik z odręcznym zapisem po polsku: plan if-then na trzeci tydzień — obok kubek kawy i telefon z kalendarzem",
+      "caption": "Wybierz czynność mierzalną i możliwą do wykonania przy zwykłym tygodniu: dwa dziesięciominutowe spacery po kolacji albo dwa krótkie treningi.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-2-20260929.avif",
+          "sha256": "8b0aebea74f1b90098ab62f030e4fec015269dd7028c73c320ad653783967fa5",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-2-20260929.webp",
+          "sha256": "ec48d10ee8b5bb3a1c38f6646b13cdde711f0be60e57e3b175d9ccfe3673a924",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-2-20260929.jpg",
+          "sha256": "f2115e6cb44e63e63809ab78edb75ee0b7c4b8c4b176913999bd1b81ae9212b5",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak wybrać jedno zachowanie na 14 dni?”: Otwarty notatnik z odręcznym zapisem po polsku: plan if-then na trzeci tydzień — obok kubek kawy i telefon z kalendarzem. Zgodność z treścią potwierdza podpis: Wybierz czynność mierzalną i możliwą do wykonania przy zwykłym tygodniu: dwa dziesięciominutowe spacery po kolacji albo dwa krótkie treningi."
+      }
+    },
+    {
+      "placement": "section:Co zrobić, gdy plan przerwie wyjazd lub choroba?",
+      "alt": "Polski mężczyzna po 50-tce stoi przed lustrem w szatni siłowni — spokojny, oceniający, z torbą w ręku. Już zdecydował",
+      "caption": "Zapisz z góry regułę powrotu: „po przerwie wracam w pierwszym zwykłym terminie i wykonuję wersję minimalną”.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-3-20260929.avif",
+          "sha256": "7177072e8924dbce64783820116ec15f5bbf1ec90543d20959dfc836332adb01",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-3-20260929.webp",
+          "sha256": "5ba8e42f5c547661a3e8a9070a62a93b7598e3d02f83e004c7ee583a4447478e",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-3-20260929.jpg",
+          "sha256": "12158b64417684fa8f96c3189f3e7eac057ff6692699717fccb593f33b79adda",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co zrobić, gdy plan przerwie wyjazd lub choroba?”: Polski mężczyzna po 50-tce stoi przed lustrem w szatni siłowni — spokojny, oceniający, z torbą w ręku. Już zdecydował. Zgodność z treścią potwierdza podpis: Zapisz z góry regułę powrotu: „po przerwie wracam w pierwszym zwykłym terminie i wykonuję wersję minimalną”."
+      }
+    },
+    {
+      "placement": "section:Jak mierzyć postęp bez pułapki „wszystko albo nic”?",
+      "alt": "Polski mężczyzna po 50-tce siedzi na brzegu łóżka w stroju do ćwiczeń, patrzy na buty — dzień 17 nowego nawyku",
+      "caption": "Policz zaplanowane okazje i wykonane minima, na przykład 6 z 8 w cztery tygodnie.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-4-20260929.avif",
+          "sha256": "745fb3c0c26a397ac9c45a2c02fd2da4aa5242efa8d3c6742fb9dbefd0ec896e",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-4-20260929.webp",
+          "sha256": "62a9c6adc48002eef3f881f9cc2ec4a110d7f58842fe35d90fb5615216cc39dd",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/syndrom-pierwszego-poniedzialku-section-4-20260929.jpg",
+          "sha256": "60f7f2e53ef4d945f640f36c8b99a7573ae9695e6f3af2fad4e9b05a5ff20148",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak mierzyć postęp bez pułapki „wszystko albo nic”?”: Polski mężczyzna po 50-tce siedzi na brzegu łóżka w stroju do ćwiczeń, patrzy na buty — dzień 17 nowego nawyku. Zgodność z treścią potwierdza podpis: Policz zaplanowane okazje i wykonane minima, na przykład 6 z 8 w cztery tygodnie."
+      }
+    }
+  ]
+}

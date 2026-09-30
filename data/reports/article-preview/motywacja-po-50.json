@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:58:16.772Z",
+  "slug": "motywacja-po-50",
+  "html_sha256": "fc660795df47b72530c5a31ee17e93f498973cd3bbda0f41b271f2d13c6a01b6",
+  "site_html_sha256": "fc660795df47b72530c5a31ee17e93f498973cd3bbda0f41b271f2d13c6a01b6",
+  "pdf_sha256": "84e5567da1c0c6e9612ba83e82d4887f7e3e21c3df0fd9f8ae6f17a26e634f5c",
+  "site_pdf_sha256": "84e5567da1c0c6e9612ba83e82d4887f7e3e21c3df0fd9f8ae6f17a26e634f5c",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

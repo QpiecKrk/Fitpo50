@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "slug": "dieta-przeciwzapalna-po-50-produkty-jadlospis",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "76dc29442f90cdb5c9d7c7019605603023b7e58d2e915a4b3a3dfee07669659d",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kolorowe warzywa, ryby i oliwa z oliwek na drewnianym stole",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-przeciwzapalna-hero-v2.avif",
+          "sha256": "bad71dd8f80fa054b7d1f3dd6cf5948b576815038fe5608ad574dd111ac90bed",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/dieta-przeciwzapalna-hero-v2.webp",
+          "sha256": "3882d9b91e0edfbbd28d31e287450934298b0cea982cbc81f753726045002de8",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/dieta-przeciwzapalna-hero-v2.jpg",
+          "sha256": "65eeeab3fe25779badd2eb2725dc219ae8125fb0e8d16f89a02f0535f2c6497a",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czym jest 'inflammaging' i dlaczego dotyczy każdego po 50-tce?",
+      "alt": "Schemat procesu inflammagingu — przewlekłe zapalenie a starzenie",
+      "caption": "Inflammaging: niski stan zapalny utrzymujący się latami przyspiesza procesy degeneracyjne.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/inflammaging-schemat.avif",
+          "sha256": "88edd01c441cc26490f79103c6175566c0fed9b2e17bc8d853c289a1cadbf459",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/inflammaging-schemat.webp",
+          "sha256": "81d6957f91bfac983ddc0db159f28cd9c91e8f0c9b9386d05640f54a41e55b4b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/inflammaging-schemat.jpg",
+          "sha256": "4b4eb9b3c30a376fc254439b5dcaf0a4ce8c86213c9f29e4f41d9c2ebdb360b1",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czym jest 'inflammaging' i dlaczego dotyczy każdego po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Które kwasy Omega-3 fachowo działają i skąd je brać?",
+      "alt": "Talerz z łososiem, sardynkami i makrele — najlepsze źródła Omega-3",
+      "caption": "Tłuste ryby dostarczają EPA i DHA, ale potrzebę suplementacji ocenia się indywidualnie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/omega3-ryby-zrodla.avif",
+          "sha256": "790646ddba1995f8e8ac01e82a7e6ee21eec8be99ae48cdb3e286ac4e11f607f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/omega3-ryby-zrodla.webp",
+          "sha256": "1922b46f21819ec117cd1b92e9219c7dd1d247a2f451b3e8b32d58d10dd0728e",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/omega3-ryby-zrodla.jpg",
+          "sha256": "6db442bb885f156cb260767d002a6e9f3c72f939b668eea49e4f7c16bd4e2870",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Które kwasy Omega-3 fachowo działają i skąd je brać?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Polifenole: które produkty mają ich naprawdę dużo?",
+      "alt": "Jagody, oliwa, zielona herbata i kurkuma na stole",
+      "caption": "Produkty bogate w polifenole — codzienne podstawy diety przeciwzapalnej.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/polifenole-produkty.avif",
+          "sha256": "45a46a91f7573698a2365e825beb33f05d20d22c9971f4b369b675a1afc91630",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/polifenole-produkty.webp",
+          "sha256": "167860bcd1546406ee875b832a26cced616c229ba6ec57fbb701472330331da2",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/polifenole-produkty.jpg",
+          "sha256": "e89048d6d4995000e9b442c9328b06740ebd25e5be00885a9f43d6d95724b1fe",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Polifenole: które produkty mają ich naprawdę dużo?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co jeść na stany zapalne w stawach? Poznaj kompletną listę?",
+      "alt": "Kompletna lista produktów diety przeciwzapalnej na desce kuchennej",
+      "caption": "Regularność ważniejsza niż perfekcja — chodzi o wzorzec, nie o jednorazowy detoks.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/lista-produktow-przeciwzapalnych.avif",
+          "sha256": "2762c02e95c9be2d62ac3888432368c836a1e1343c6d2b15322eb4d1beeb59e1",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/lista-produktow-przeciwzapalnych.webp",
+          "sha256": "fd1f353e27e74cf144cb4a28ccfe8d9e0c77e42fbff33658effee409388a9983",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/lista-produktow-przeciwzapalnych.jpg",
+          "sha256": "6ccee8c7efa34d11597554a5971fb666f602c02f6277ae4bc16095c135ee96e0",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co jeść na stany zapalne w stawach? Poznaj kompletną listę?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Których produktów unikać, żeby nie nakręcać stanu zapalnego?",
+      "alt": "Produkty prozapalne do ograniczenia — fast food, słodycze, przetworzone mięso",
+      "caption": "Ograniczaj żywność wysoko przetworzoną, ale termin i wielkość zmiany CRP zależą od przyczyny.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/produkty-prozapalne-unikac.avif",
+          "sha256": "3ae4fab99bab926358c09edfd927792d6f4d4611a09ab6a9f30d6c177108b85d",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/produkty-prozapalne-unikac.webp",
+          "sha256": "1e601bb19badaa1054539d999163a03019e26046090550201db2312f7c356f9b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/produkty-prozapalne-unikac.jpg",
+          "sha256": "8b48636be64408e4d983526f216bc7f64a42e0df9aaf4faf85a223e3b8d38a12",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Których produktów unikać, żeby nie nakręcać stanu zapalnego?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Tygodniowy jadłospis przeciwzapalny po 50-tce — jak wygląda w praktyce?",
+      "alt": "Tygodniowy jadłospis diety przeciwzapalnej rozłożony na stole",
+      "caption": "Jadłospis to punkt startowy — zamieniaj produkty w obrębie tej samej grupy, jak Ci pasuje.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jadlospis-tygodniowy-przeciwzapalny.avif",
+          "sha256": "4436da124de3445332366f8ce653b2d70b6bee8268b7445134e6c2b69c2018e1",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jadlospis-tygodniowy-przeciwzapalny.webp",
+          "sha256": "e4238eb39d51f00b7c88a3cc62c119a71a139b5e477f9b5db4409c52869a34ed",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jadlospis-tygodniowy-przeciwzapalny.jpg",
+          "sha256": "9395d60b0b3a9febf7744b5ee64386d015069354f2edaff81e2ae705da1eb986",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Tygodniowy jadłospis przeciwzapalny po 50-tce — jak wygląda w praktyce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy suplementy zastąpią dietę w walce z zapaleniem?",
+      "alt": "Kapsułki Omega-3 i witamina D3 obok naturalnych źródeł tych składników",
+      "caption": "Suplement rozważa się przy konkretnym wskazaniu; nie zastępuje diagnostyki ani całego jadłospisu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/suplementy-omega3-witamina-d.avif",
+          "sha256": "790646ddba1995f8e8ac01e82a7e6ee21eec8be99ae48cdb3e286ac4e11f607f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/suplementy-omega3-witamina-d.webp",
+          "sha256": "1922b46f21819ec117cd1b92e9219c7dd1d247a2f451b3e8b32d58d10dd0728e",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/suplementy-omega3-witamina-d.jpg",
+          "sha256": "6db442bb885f156cb260767d002a6e9f3c72f939b668eea49e4f7c16bd4e2870",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy suplementy zastąpią dietę w walce z zapaleniem?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

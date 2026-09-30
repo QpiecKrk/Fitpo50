@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "sila-chwytu-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "b247d574d342286cc536aa036737f8da76d99140b612420afb667081c6d0ee27",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mocny uścisk dłoni na hantlu",
+      "caption": "",
+      "width": 1300,
+      "height": 726,
+      "variants": {
+        "avif": {
+          "file": "assets/Hero_piesc-20260929.avif",
+          "sha256": "ae8b25b37d01ede4e5b8e1b85d06d6e36890cb5275e0967d45c7a5752bfb41f0",
+          "width": 1300,
+          "height": 726
+        },
+        "webp": {
+          "file": "assets/Hero_piesc-20260929.webp",
+          "sha256": "981febb3ac4acfca1f235cabc93fd4c157520b7543a2e8257cd9fee92d6dfdbc",
+          "width": 1300,
+          "height": 726
+        },
+        "jpg": {
+          "file": "assets/Hero_piesc-20260929.jpg",
+          "sha256": "056c5eb4058e7c1472e9740cb6599aae0f00067a67cc4273a53f6667f0aadcc3",
+          "width": 1300,
+          "height": 726
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mocny uścisk dłoni na hantlu. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak prawidłowo zmierzyć siłę chwytu?",
+      "alt": "Fizjoterapeutka mierzy siłę chwytu dynamometrem",
+      "caption": "Usiądź lub stań zgodnie z protokołem urządzenia, ustaw bark neutralnie, łokieć według instrukcji i zaciśnij dłoń maksymalnie przez kilka sekund.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sila-chwytu-po-50-section-1-20260929.avif",
+          "sha256": "206926876ab62ea4bda561523c15c533c9758bbb500075f1e3cbef08affabb07",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sila-chwytu-po-50-section-1-20260929.webp",
+          "sha256": "8e03731847cc998ce6db2af82340fb753c8ed95b364a29c1d1725594c2fd34c8",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sila-chwytu-po-50-section-1-20260929.jpg",
+          "sha256": "20bc27c7232738d04bea6ccad99a775705d12b7834c25e4a5f0ef44a54273d5a",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak prawidłowo zmierzyć siłę chwytu?”: Fizjoterapeutka mierzy siłę chwytu dynamometrem. Zgodność z treścią potwierdza podpis: Usiądź lub stań zgodnie z protokołem urządzenia, ustaw bark neutralnie, łokieć według instrukcji i zaciśnij dłoń maksymalnie przez kilka sekund."
+      }
+    },
+    {
+      "placement": "section:Jak rozumieć progi 27 kg i 16 kg?",
+      "alt": "Lekarka omawia z pacjentką wynik pomiaru siły chwytu",
+      "caption": "EWGSOP2 wskazuje poniżej 27 kg u mężczyzn i poniżej 16 kg u kobiet jako niską siłę chwytu w algorytmie sarkopenii.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sila-chwytu-po-50-section-2-20260929.avif",
+          "sha256": "b4511c27e885d1c5babc0e95af56f44b18eeb2a3e3a8800ac60b48625cc0295f",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sila-chwytu-po-50-section-2-20260929.webp",
+          "sha256": "4e511fe3c56ec0f91b1341a70f90c263e0995559487c833a8ded6b54dec946ed",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sila-chwytu-po-50-section-2-20260929.jpg",
+          "sha256": "30991acab4f50876b8c07fa743c4fed81084bc5bf342b34beef5e36d76d67190",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak rozumieć progi 27 kg i 16 kg?”: Lekarka omawia z pacjentką wynik pomiaru siły chwytu. Zgodność z treścią potwierdza podpis: EWGSOP2 wskazuje poniżej 27 kg u mężczyzn i poniżej 16 kg u kobiet jako niską siłę chwytu w algorytmie sarkopenii."
+      }
+    },
+    {
+      "placement": "section:Czy słaby chwyt przewiduje choroby i długość życia?",
+      "alt": "Mężczyzna po sześćdziesiątce wnosi zakupy po schodach",
+      "caption": "W dużych badaniach obserwacyjnych słabszy chwyt wiązał się z większym ryzykiem niesprawności, chorób i zgonu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sila-chwytu-po-50-section-3-20260929.avif",
+          "sha256": "fd5c6aa89a748e7c4394da207f0684a533e6bfaac61c6b89a31d882168d2041f",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sila-chwytu-po-50-section-3-20260929.webp",
+          "sha256": "428de9c1d0aa90ceac3a76fc2679cb9ad6e2985d9afc3471200d457eaaa4467a",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sila-chwytu-po-50-section-3-20260929.jpg",
+          "sha256": "14c39ce245caa814f9ef5dbe1b6431a1b1c09aea75d7c75dde70b5d29cd96eeb",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy słaby chwyt przewiduje choroby i długość życia?”: Mężczyzna po sześćdziesiątce wnosi zakupy po schodach. Zgodność z treścią potwierdza podpis: W dużych badaniach obserwacyjnych słabszy chwyt wiązał się z większym ryzykiem niesprawności, chorób i zgonu."
+      }
+    },
+    {
+      "placement": "section:Jak trenować chwyt bez przeciążenia dłoni?",
+      "alt": "Mężczyzna wykonuje spacer farmera pod nadzorem trenera",
+      "caption": "Zacznij od noszenia lekkich hantli, wiosłowania i kontrolowanego ściskania, jeśli nie wywołują bólu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sila-chwytu-po-50-section-4-20260929.avif",
+          "sha256": "16a9b440a33d34184c08656411249b11d202214b32b51e8645e74bb8b1cd2b5f",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sila-chwytu-po-50-section-4-20260929.webp",
+          "sha256": "b6ad777a5ce2600d9c73571d86e4579cbdd5d8b0ea190e08b358c06e47f6c2c5",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sila-chwytu-po-50-section-4-20260929.jpg",
+          "sha256": "9065075d3a77ad93bc4369fee0c04b8690d594eff982f5b95a6366a5d60b452e",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak trenować chwyt bez przeciążenia dłoni?”: Mężczyzna wykonuje spacer farmera pod nadzorem trenera. Zgodność z treścią potwierdza podpis: Zacznij od noszenia lekkich hantli, wiosłowania i kontrolowanego ściskania, jeśli nie wywołują bólu."
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:58:58.712Z",
+  "slug": "pilates-po-50-nie-dla-kobiet",
+  "html_sha256": "fb1b3c3be989a9b6a01b4bfb69b3489b590c34486e17566672754402eee1f524",
+  "site_html_sha256": "fb1b3c3be989a9b6a01b4bfb69b3489b590c34486e17566672754402eee1f524",
+  "pdf_sha256": "d9531ce8ba675774857becddee388e805bfe5779eff5f1454d9a4b5127fd46d5",
+  "site_pdf_sha256": "d9531ce8ba675774857becddee388e805bfe5779eff5f1454d9a4b5127fd46d5",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

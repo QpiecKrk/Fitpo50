@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "badania-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "dd8d0f2ae4620b1efc9c767cd815adaf04a2e1388b581b64a6544555fd5f26be",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Osoba po 50-tce zadowolona z wyników badań, gotowa do aktywności",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-przed-50-hero.avif",
+          "sha256": "b7e7aab042294bc11deda17f7d0b26b23282a5037b4ae615f1f79f47a7af2890",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/badania-przed-50-hero.webp",
+          "sha256": "2f04fb974cfda32830e217270a75374d199ba9c60d35709d5fcae9159dccb777",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/badania-przed-50-hero.jpg",
+          "sha256": "e83fd4636adb096e5a122b00cf91692c3617cbe243ada57d150a1e72106bc906",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Osoba po 50-tce zadowolona z wyników badań, gotowa do aktywności. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czy każdy po 50-tce potrzebuje badań przed treningiem?",
+      "alt": "Lekarz omawia z aktywnym mężczyzną po pięćdziesiątce bezpieczny powrót do treningu",
+      "caption": "Nie. Aktualizowany algorytm ACSM ogranicza niepotrzebne skierowania i uwzględnia obecny poziom aktywności, znaną chorobę sercowo-naczyniową, metaboliczną lub nerkową, obecność objawów oraz intensywność planowanego wysiłku.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-po-50-section-1-20260929.avif",
+          "sha256": "8441c7dcaf6ce60a517ee2bafe70713bc0a49db7e2e9ab55e781cc1a016d5dc7",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/badania-po-50-section-1-20260929.webp",
+          "sha256": "cc4e24b62701f3278a14f722379672b6d5cd08f48bdd75ddf1d91a56fd1cfca1",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/badania-po-50-section-1-20260929.jpg",
+          "sha256": "278e399a400366b62e469eb63368b806a6db0a2f42cf9f415772b35ce272f93f",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy każdy po 50-tce potrzebuje badań przed treningiem?”: Lekarz omawia z aktywnym mężczyzną po pięćdziesiątce bezpieczny powrót do treningu. Zgodność z treścią potwierdza podpis: Nie. Aktualizowany algorytm ACSM ogranicza niepotrzebne skierowania i uwzględnia obecny poziom aktywności, znaną chorobę sercowo-naczyniową, metaboliczną lub nerkową, obecność objawów oraz intensywność planowanego wysiłku."
+      }
+    },
+    {
+      "placement": "section:Kiedy przed wysiłkiem potrzebna jest konsultacja?",
+      "alt": "Lekarka rozmawia z pacjentem po pięćdziesiątce o objawach wymagających konsultacji",
+      "caption": "Konsultacji wymagają szczególnie objawy sugerujące problem sercowo-naczyniowy: ból lub ucisk w klatce, omdlenie, zawroty związane z wysiłkiem, kołatanie z osłabieniem oraz duszność nieproporcjonalna do obciążenia.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-po-50-section-2-20260929.avif",
+          "sha256": "80b5025f9e59b73d26acbb0abd432a668d4cba6823668a19a5420a2eec379236",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/badania-po-50-section-2-20260929.webp",
+          "sha256": "c895509fa4437cf2049d2d0ddd364112a4492e8b767b930df6309f8111844df2",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/badania-po-50-section-2-20260929.jpg",
+          "sha256": "f9d43b53c8d31f742faf6d2bbe69f994ff4351b3b72e04371e10fad949d98576",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy przed wysiłkiem potrzebna jest konsultacja?”: Lekarka rozmawia z pacjentem po pięćdziesiątce o objawach wymagających konsultacji. Zgodność z treścią potwierdza podpis: Konsultacji wymagają szczególnie objawy sugerujące problem sercowo-naczyniowy: ból lub ucisk w klatce, omdlenie, zawroty związane z wysiłkiem, kołatanie z osłabieniem oraz duszność nieproporcjonalna do obciążenia."
+      }
+    },
+    {
+      "placement": "section:Czy EKG i próba wysiłkowa są potrzebne bez objawów?",
+      "alt": "Mężczyzna po pięćdziesiątce wykonuje próbę wysiłkową pod nadzorem personelu medycznego",
+      "caption": "Nie rutynowo. USPSTF zaleca, aby nie wykonywać przesiewowego EKG spoczynkowego ani wysiłkowego w celu zapobiegania zdarzeniom sercowo-naczyniowym u bezobjawowych dorosłych z małym ryzykiem.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-po-50-section-3-20260929.avif",
+          "sha256": "76f064e84c5beb42b7f251d2dc5aa25b4f5a7c19a5326c36fb7f1ee1dff87e24",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/badania-po-50-section-3-20260929.webp",
+          "sha256": "6735fcc0f1503d3319fa9dd8b8fd3408de232ca329e8c78d322dfe6ba8325364",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/badania-po-50-section-3-20260929.jpg",
+          "sha256": "cc97efcb9bce5982f7f339b0c16ccdac35d32e56ff16868c97678973e9ca78ff",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy EKG i próba wysiłkowa są potrzebne bez objawów?”: Mężczyzna po pięćdziesiątce wykonuje próbę wysiłkową pod nadzorem personelu medycznego. Zgodność z treścią potwierdza podpis: Nie rutynowo. USPSTF zaleca, aby nie wykonywać przesiewowego EKG spoczynkowego ani wysiłkowego w celu zapobiegania zdarzeniom sercowo-naczyniowym u bezobjawowych dorosłych z małym ryzykiem."
+      }
+    },
+    {
+      "placement": "section:Jak rozpocząć ruch po prawidłowej ocenie?",
+      "alt": "Dojrzała para rozpoczyna spokojny marsz na świeżym powietrzu",
+      "caption": "Zacznij od intensywności pozwalającej mówić pełnymi zdaniami, zanotuj reakcję podczas wysiłku i przez następną dobę, a następnie zwiększaj jeden parametr.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-po-50-section-4-20260929.avif",
+          "sha256": "2bf153b063de0fd3d117079a02da6ee44f14a3de5a6cb62b5fc709817e2b1b4e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/badania-po-50-section-4-20260929.webp",
+          "sha256": "8dd2a79d869542dce04804500bb6bd7c7058d16666ec59d11d8f4fd2b9eec15f",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/badania-po-50-section-4-20260929.jpg",
+          "sha256": "c653826fa5bd0d0da8cc8da716f703ec34e8589782c321c59449f0bb3c4e0668",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak rozpocząć ruch po prawidłowej ocenie?”: Dojrzała para rozpoczyna spokojny marsz na świeżym powietrzu. Zgodność z treścią potwierdza podpis: Zacznij od intensywności pozwalającej mówić pełnymi zdaniami, zanotuj reakcję podczas wysiłku i przez następną dobę, a następnie zwiększaj jeden parametr."
+      }
+    }
+  ]
+}

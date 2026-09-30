@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:54:47.948Z",
+  "slug": "dzieci-patrza-na-ciebie",
+  "html_sha256": "b5fdce01bb85affd3c0aa3daec6e0b02e465fd89f08485fb0d0336ba131954d5",
+  "site_html_sha256": "b5fdce01bb85affd3c0aa3daec6e0b02e465fd89f08485fb0d0336ba131954d5",
+  "pdf_sha256": "f3ad62300048d11126345acb0f78c885bdb99414d3a970dd73f9c1b505a609b9",
+  "site_pdf_sha256": "f3ad62300048d11126345acb0f78c885bdb99414d3a970dd73f9c1b505a609b9",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

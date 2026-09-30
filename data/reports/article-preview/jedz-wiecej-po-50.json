@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:56:22.291Z",
+  "slug": "jedz-wiecej-po-50",
+  "html_sha256": "ff986d9b271c5eaa41ea3c70df3e7bb79a65b96eb37482388a1ffada5e9be865",
+  "site_html_sha256": "ff986d9b271c5eaa41ea3c70df3e7bb79a65b96eb37482388a1ffada5e9be865",
+  "pdf_sha256": "6fb96c9b9c26464952b65c350f8951e814be58b35b8aee9bf85a31be3d85bb25",
+  "site_pdf_sha256": "6fb96c9b9c26464952b65c350f8951e814be58b35b8aee9bf85a31be3d85bb25",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

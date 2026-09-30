@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:58:11.494Z",
+  "slug": "mobilnosc-vs-rozciaganie-program-dla-stawow-po-piecdziesiatce",
+  "html_sha256": "bb2c0b5bdbaea8bf8f2b86402798098cee1aac09a459174a5990a15926b7e118",
+  "site_html_sha256": "bb2c0b5bdbaea8bf8f2b86402798098cee1aac09a459174a5990a15926b7e118",
+  "pdf_sha256": "7b9f00c0abcb86eaae3ece47fd628ac8a490db6eaad5a8d6393dbc4d1be2292c",
+  "site_pdf_sha256": "7b9f00c0abcb86eaae3ece47fd628ac8a490db6eaad5a8d6393dbc4d1be2292c",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 5,
+    "text_coverage": 1,
+    "rendered_pages": 5
+  },
+  "errors": []
+}

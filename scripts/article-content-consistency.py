@@ -27,6 +27,14 @@ def has_type(node, kind):
     return kind in (value if isinstance(value, list) else [value])
 
 
+def positive_dimension(value):
+    try:
+        parsed = int(str(value).strip())
+    except (TypeError, ValueError):
+        return 0
+    return parsed if parsed > 0 else 0
+
+
 def validate_picture(picture, label, root, errors, hero=False):
     img = picture.select_one('img')
     if img is None:
@@ -41,10 +49,10 @@ def validate_picture(picture, label, root, errors, hero=False):
         errors.append(f'{label}: fallback IMG musi być plikiem JPG.')
     if len(normalized(img.get('alt'))) < 20:
         errors.append(f'{label}: alt jest pusty, generyczny albo zbyt krótki.')
-    width = int(img.get('width', 0) or 0)
-    height = int(img.get('height', 0) or 0)
+    width = positive_dimension(img.get('width'))
+    height = positive_dimension(img.get('height'))
     if not width or not height:
-        errors.append(f'{label}: brak deklarowanych wymiarów width/height.')
+        errors.append(f'{label}: brak lub niepoprawne deklarowane wymiary width/height.')
     elif width / height < 1.2 or width / height > 2.1:
         errors.append(f'{label}: proporcja {width}x{height} jest poza zakresem 1.2–2.1.')
     elif width < (1080 if hero else 900) or height < (600 if hero else 500):
@@ -64,7 +72,7 @@ def validate_picture(picture, label, root, errors, hero=False):
             try:
                 with Image.open(media_file) as image:
                     actual = image.size
-                if actual != (width, height):
+                if width and height and actual != (width, height):
                     errors.append(f'{label}: deklarowane {width}x{height}, plik {media_ref} ma {actual[0]}x{actual[1]}.')
             except Exception as exc:
                 errors.append(f'{label}: nie można odczytać {media_ref}: {exc}.')
@@ -76,7 +84,9 @@ def validate_sections_and_media(soup, article, root, errors):
     ignored_titles = {
         'kluczowe wnioski', 'najczęściej zadawane pytania', 'najczęściej zadawane pytania?',
         'zrodla', 'źródła', 'źródła naukowe', 'szybka odpowiedź', 'szybka odpowiedz',
-        'szybkie odpowiedzi (q&a)?', 'cytaty do zapamiętania?', 'w skrócie (ai)?', 'czytaj też?'
+        'szybkie odpowiedzi (q&a)?', 'szybkie odpowiedzi (aeo)?',
+        'cytaty do zapamiętania?', 'cytaty do zapamiętania (geo)?',
+        'w skrócie (ai)?', 'w skrócie (aio)?', 'czytaj też?'
     }
     def ignored(heading):
         if heading.get('id') == 'zrodla' or normalized(heading.get_text()).lower() in ignored_titles:

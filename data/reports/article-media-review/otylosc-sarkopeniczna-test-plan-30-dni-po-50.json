@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "otylosc-sarkopeniczna-test-plan-30-dni-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "7582b98a2890b1cc0c823e94e7d2622bacd175a342c9bca66a457f2abe12d65a",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce stojący przed lustrem obok cienia silniejszej sylwetki",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/sarkopenia-test-plan-hero.avif",
+          "sha256": "d7e2b2906750c9a1d1816d6633920e51bd10f71ede533e93cb6344a563aa7bf1",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/sarkopenia-test-plan-hero.webp",
+          "sha256": "658df6c34893adac4705937dd21d55bab5a44be27515f245653406902b22fb0b",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/sarkopenia-test-plan-hero.jpg",
+          "sha256": "e0bc033ff287bc316692880811a24ecce03e9f9b0ffdc9edfaaeee0ef0046a93",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak wykonać przesiew bez udawania diagnozy?",
+      "alt": "Nadmiar tłuszczu współistniejący z małą masą i funkcją mięśni",
+      "caption": "Nadmiar tłuszczu współistniejący z małą masą i funkcją mięśni",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/sarkopenia-test-plan-anatomia.avif",
+          "sha256": "d4589243fcf2b65b31fd82018476de5e8a4645bd1d1fa5cc9f5da3899604805a",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/sarkopenia-test-plan-anatomia.webp",
+          "sha256": "1fd34ca6bfa26abab8fbcde1ede1e63bd97e975eaecb45033f40cb3eff2e77dd",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/sarkopenia-test-plan-anatomia.jpg",
+          "sha256": "c64d95153e5d2743be4eac6a65bf4ccc395e25ba07e3d942eedc817eaf38235e",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak wykonać przesiew bez udawania diagnozy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak potwierdza się otyłość sarkopeniczną?",
+      "alt": "Kontrolowany test pięciu wstań z krzesła",
+      "caption": "Kontrolowany test pięciu wstań z krzesła",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/sarkopenia-test-plan-krzeslo.avif",
+          "sha256": "273a445447fa861e8fb27a1a656fcd324c4da24d417043f7e7fb2a4954914bcb",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/sarkopenia-test-plan-krzeslo.webp",
+          "sha256": "3a999cf7d1948525421748f69b35f554efd6a6fc7ec096d071b618f49f4b3e3e",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/sarkopenia-test-plan-krzeslo.jpg",
+          "sha256": "a98112d6b0f2359a80893d4b5c9c235bbed967e3fdab5855653cd1dbb76eb7e1",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak potwierdza się otyłość sarkopeniczną?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak wygląda trening przez pierwsze 30 dni?",
+      "alt": "Prosty trening oporowy całego ciała po 50-tce",
+      "caption": "Prosty trening oporowy całego ciała po 50-tce",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/sarkopenia-test-plan-trening.avif",
+          "sha256": "7e2441e6cecde4792f570b86730b83932a5b816167a13073c4bcc5743352022e",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/sarkopenia-test-plan-trening.webp",
+          "sha256": "831447a3daec352a59654d57df83eea4484561be5d050390239ae1d2cd8fa508",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/sarkopenia-test-plan-trening.jpg",
+          "sha256": "2dd0542ce4abec2c9b98abe5db3bd0844fc0095db0f4c68778d89a43760a8f11",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak wygląda trening przez pierwsze 30 dni?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak jeść, aby redukować tłuszcz bez agresywnej utraty mięśni?",
+      "alt": "Kobieta po 50-tce przygotowuje pełny posiłek z rybą, warzywami i pełnymi ziarnami",
+      "caption": "Umiarkowany deficyt energii, odpowiednia podaż białka i trening oporowy pomagają ograniczać utratę mięśni.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/otylosc-sarkopeniczna-posilek-ochrona-miesni-20260930.avif",
+          "sha256": "3357418f14f8ca5e18973af88390a870a7d270271591e3dc29caef99997de175",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/otylosc-sarkopeniczna-posilek-ochrona-miesni-20260930.webp",
+          "sha256": "53720c0389591712889ab7b955141a928885328509351d75fe3fc7511a0f64ab",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/otylosc-sarkopeniczna-posilek-ochrona-miesni-20260930.jpg",
+          "sha256": "8360d0fb43d59b78c9418401dc6a90ef82be86445190a4a26c68d19e4a49e521",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak jeść, aby redukować tłuszcz bez agresywnej utraty mięśni?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

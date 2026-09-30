@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "dlaczego-bieznia-to-za-malo",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "8d50ac92920031a7b91fdaea49efe74722cb73d523dd3c7cd4c3e77d85623948",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Dojrzały mężczyzna ćwiczący z hantlami obok bieżni w nowoczesnej siłowni",
+      "caption": "",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/bieznia-za-malo-hero-20260929.avif",
+          "sha256": "54fe8865ca42b4b568faafa5ea007854ef5bebe00d33f8adf3775f6b1c36d414",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/bieznia-za-malo-hero-20260929.webp",
+          "sha256": "7261f852aad3cb1ae554546f09274dc83c85e850c25e1b36d5acdfb8d9f06a7b",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/bieznia-za-malo-hero-20260929.jpg",
+          "sha256": "3825fbb505baf95409578bee8ed0c3e334dddff496056b8b8dc63a44495caad5",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Dojrzały mężczyzna ćwiczący z hantlami obok bieżni w nowoczesnej siłowni. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co bieżnia rzeczywiście daje po 50-tce?",
+      "alt": "Dojrzała kobieta chodząca na bieżni w jasnej, nowoczesnej siłowni",
+      "caption": "Marsz i bieg na bieżni zwiększają wydatek energetyczny oraz obciążają układ krążenia w sposób zależny od tempa i nachylenia.",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-1-20260929.avif",
+          "sha256": "fb70dec72acb8af8964c8953174e8d6302b178f81e1ce3802ef2058663ac9fc6",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-1-20260929.webp",
+          "sha256": "2f3979e776e007057202cd2af0b0534cbfff9365335087c4d57b1677457ec0a9",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-1-20260929.jpg",
+          "sha256": "e4dbe80b3aa9d01699aab8add47d3a40c2c513e858cc1e4e9e1bcac8e5419e51",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co bieżnia rzeczywiście daje po 50-tce?”: Dojrzała kobieta chodząca na bieżni w jasnej, nowoczesnej siłowni. Zgodność z treścią potwierdza podpis: Marsz i bieg na bieżni zwiększają wydatek energetyczny oraz obciążają układ krążenia w sposób zależny od tempa i nachylenia."
+      }
+    },
+    {
+      "placement": "section:Czego sam marsz zwykle nie rozwija wystarczająco?",
+      "alt": "Mężczyzna po pięćdziesiątce ćwiczący z hantlami w nowoczesnej siłowni",
+      "caption": "Chodzenie angażuje mięśnie nóg, lecz obciążenie jest powtarzalne i nie rośnie automatycznie wraz z adaptacją.",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-2-20260929.avif",
+          "sha256": "d18379486e60d4cf773e06d13f30c11816a87c9eab45262b0bfa62c0915d0cbb",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-2-20260929.webp",
+          "sha256": "cef57817f515606b1af93bafcc7fba8dbc303e5dc3a13cceed638bc61723fe63",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-2-20260929.jpg",
+          "sha256": "7fc9dabd4c91852b9e7b2db36d239e5bcccb341b49196c2202ac3f9c28a36e45",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czego sam marsz zwykle nie rozwija wystarczająco?”: Mężczyzna po pięćdziesiątce ćwiczący z hantlami w nowoczesnej siłowni. Zgodność z treścią potwierdza podpis: Chodzenie angażuje mięśnie nóg, lecz obciążenie jest powtarzalne i nie rośnie automatycznie wraz z adaptacją."
+      }
+    },
+    {
+      "placement": "section:Dlaczego równowaga jest osobnym elementem?",
+      "alt": "Kobieta po pięćdziesiątce wykonująca przysiady z hantlami w siłowni",
+      "caption": "Stabilny marsz przodem nie ćwiczy wszystkich sytuacji, w których traci się równowagę: zmiany kierunku, sięgania, nierównego podłoża i przenoszenia ciężaru na jedną nogę.",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-3-20260929.avif",
+          "sha256": "d026a80b7183de8830313ee26e3fa0ed08eb13c1fbb2fc71117936dea3fc723c",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-3-20260929.webp",
+          "sha256": "328e705558808ee6adfd98bddad0428a36a1070a5109c045001ee1ad54deac46",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-3-20260929.jpg",
+          "sha256": "3cabdef601f9a44def3572af24f4d9b26b62ee5223d457171b228b5cdf87d04f",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego równowaga jest osobnym elementem?”: Kobieta po pięćdziesiątce wykonująca przysiady z hantlami w siłowni. Zgodność z treścią potwierdza podpis: Stabilny marsz przodem nie ćwiczy wszystkich sytuacji, w których traci się równowagę: zmiany kierunku, sięgania, nierównego podłoża i przenoszenia ciężaru na jedną nogę."
+      }
+    },
+    {
+      "placement": "section:Jak połączyć cardio i siłę w jednym tygodniu?",
+      "alt": "Dojrzały mężczyzna ćwiczący na maszynach siłowych w jasnej, nowoczesnej siłowni",
+      "caption": "Najprostszy układ to trzy marsze oraz dwa krótkie treningi całego ciała w niekolejne dni.",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-4-20260929.avif",
+          "sha256": "f6c0696eaa7abe192ab302a8774c38c3e3c043a443b3521215eb00212ace3a04",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-4-20260929.webp",
+          "sha256": "6d2d8fa0f45c69e2addb9c18928bbe41833b247be63949db2af79d7cbcce7c4e",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-4-20260929.jpg",
+          "sha256": "f5a0dee153ca70e79bbb9bd0f96ee24db6b4b15ca74c73e761d18434412fdd03",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak połączyć cardio i siłę w jednym tygodniu?”: Dojrzały mężczyzna ćwiczący na maszynach siłowych w jasnej, nowoczesnej siłowni. Zgodność z treścią potwierdza podpis: Najprostszy układ to trzy marsze oraz dwa krótkie treningi całego ciała w niekolejne dni."
+      }
+    },
+    {
+      "placement": "section:Kiedy bieżnia nie jest dobrym miejscem na samodzielny start?",
+      "alt": "Para w wieku 55+ ćwicząca razem w nowoczesnej siłowni",
+      "caption": "Nowy ból w klatce, omdlenie, duszność nieproporcjonalna do wysiłku, niestabilne ciśnienie albo świeży uraz wymagają konsultacji przed intensywnym treningiem.",
+      "width": 2816,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-5-20260929.avif",
+          "sha256": "1b0818645c7da1aa3952c97a0e3995487c9ac638e3d9d0e34e2c6022938b13f7",
+          "width": 2816,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-5-20260929.webp",
+          "sha256": "f47eeebd75076b985ff5a2e2ef4b195ed011435462e80f6b0d073c4876023b29",
+          "width": 2816,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/dlaczego-bieznia-to-za-malo-section-5-20260929.jpg",
+          "sha256": "0de50499a2fd9cbc0d1b105a10cd902c285a8cc4c14f6a7485b230487638cd5a",
+          "width": 2816,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy bieżnia nie jest dobrym miejscem na samodzielny start?”: Para w wieku 55+ ćwicząca razem w nowoczesnej siłowni. Zgodność z treścią potwierdza podpis: Nowy ból w klatce, omdlenie, duszność nieproporcjonalna do wysiłku, niestabilne ciśnienie albo świeży uraz wymagają konsultacji przed intensywnym treningiem."
+      }
+    }
+  ]
+}

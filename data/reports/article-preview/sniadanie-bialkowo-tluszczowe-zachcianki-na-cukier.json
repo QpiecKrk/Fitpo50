@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T13:00:12.181Z",
+  "slug": "sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier",
+  "html_sha256": "de9c4c54e773aba2db752cedf9c8d422d5e9acc83e5dbff5a07bf9257d439e27",
+  "site_html_sha256": "de9c4c54e773aba2db752cedf9c8d422d5e9acc83e5dbff5a07bf9257d439e27",
+  "pdf_sha256": "0bbf399f53157ad25084c03d398d64ee67f970f4557638d85f9389cd0f59f591",
+  "site_pdf_sha256": "0bbf399f53157ad25084c03d398d64ee67f970f4557638d85f9389cd0f59f591",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 5,
+    "text_coverage": 1,
+    "rendered_pages": 5
+  },
+  "errors": []
+}

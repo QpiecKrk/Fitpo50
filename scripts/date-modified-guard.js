@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { spawnSync } = require('child_process');
+const { firstTagAttribute } = require('./lib/article-head-contract');
 
 function run(cmd, args) {
   return spawnSync(cmd, args, { encoding: 'utf8' });
@@ -58,8 +59,7 @@ function extractArticleBody(raw) {
 }
 
 function extractMetaModified(raw) {
-  const m = String(raw || '').match(/<meta\s+property="article:modified_time"\s+content="([^"]+)"/i);
-  return m ? String(m[1] || '').trim() : '';
+  return firstTagAttribute(String(raw || ''), 'meta', 'property', 'article:modified_time', 'content');
 }
 
 function extractSchemaModified(raw) {
@@ -123,9 +123,17 @@ function main() {
   console.log(`[PASS] date-modified-guard - sprawdzono pliki: ${files.length}`);
 }
 
-try {
-  main();
-} catch (err) {
-  console.error(`[FAIL] date-modified-guard -> ${err.message || err}`);
-  process.exit(1);
+if (require.main === module) {
+  try {
+    main();
+  } catch (err) {
+    console.error(`[FAIL] date-modified-guard -> ${err.message || err}`);
+    process.exit(1);
+  }
 }
+
+module.exports = {
+  extractMetaModified,
+  extractSchemaModified,
+  hasSubstantiveChange,
+};

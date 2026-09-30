@@ -1,12 +1,12 @@
 {
   "version": 1,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-29T17:49:43.628Z",
+  "generated_at": "2026-09-30T13:02:12.871Z",
   "slug": "wino-i-miesnie-po-50",
-  "html_sha256": "44ab426835c4cf690ef3d33cfb2fac71b18887ead0b3ca23515f1b2d3abfcbdb",
-  "site_html_sha256": "44ab426835c4cf690ef3d33cfb2fac71b18887ead0b3ca23515f1b2d3abfcbdb",
-  "pdf_sha256": "48f022739531d7454fb85b2870324d6ffd09305a22037acdf842a9b8021ec190",
-  "site_pdf_sha256": "48f022739531d7454fb85b2870324d6ffd09305a22037acdf842a9b8021ec190",
+  "html_sha256": "39f08b924931fffca5f4a03204ea3f68de3058a781dffb5f75831b70d1c2dd4a",
+  "site_html_sha256": "39f08b924931fffca5f4a03204ea3f68de3058a781dffb5f75831b70d1c2dd4a",
+  "pdf_sha256": "4973e377c3a18ae7c8380aa3a386491c0e8b75944edc0ab535a62f08d5c61764",
+  "site_pdf_sha256": "4973e377c3a18ae7c8380aa3a386491c0e8b75944edc0ab535a62f08d5c61764",
   "html": {
     "desktop": {
       "bodyOverflow": false,

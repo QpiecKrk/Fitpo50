@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "waty-apple-watch-moc-zdrowie-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "51d637786e88793609bde597398dcb51e721f29f975e6c2f4acdc9638d3be2a7",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Zbliżenie na Apple Watch na nadgarstku biegacza po 50-tce, ekran pokazuje moc w watach",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/waty-trening-apple-watch-hero-20260929.avif",
+          "sha256": "1f127021088967eea82ff944b6b19f01014b4ca6dc4fd0a85e7759f94e8ba8f6",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/waty-trening-apple-watch-hero-20260929.webp",
+          "sha256": "ad68ffc57a56ec54ad3de63e18947165486aeb6fb9a6c401f7cc3b95a1fd7629",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/waty-trening-apple-watch-hero-20260929.jpg",
+          "sha256": "6b881b75b1f31abea0e352d5df8f77fd792af5778f8f8d3a254b714d574e87b1",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Zbliżenie na Apple Watch na nadgarstku biegacza po 50-tce, ekran pokazuje moc w watach. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co oznaczają waty podczas biegu?",
+      "alt": "Infografika porównująca moc żarówki, rowerzysty i biegacza",
+      "caption": "Wat jest jednostką mocy, czyli tempa wykonywania pracy.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-1-20260929.avif",
+          "sha256": "9dc932e184173d5036ff7ea69fe56f80b8590c31cfea4a7fe5981827b20f1a07",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-1-20260929.webp",
+          "sha256": "51e194c083578e111f85fe518a6a5df88386a43ba54039254a74d51b83597a0e",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-1-20260929.jpg",
+          "sha256": "cea244b57360900554dbf97c78ee62fc37ca910c75d034a476a94ff7260029a6",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co oznaczają waty podczas biegu?”: Infografika porównująca moc żarówki, rowerzysty i biegacza. Zgodność z treścią potwierdza podpis: Wat jest jednostką mocy, czyli tempa wykonywania pracy."
+      }
+    },
+    {
+      "placement": "section:Które treningi i zegarki pokazują moc?",
+      "alt": "Kobieta po 50-tce biega w parku sprawdzając moc na Apple Watch",
+      "caption": "Apple wprowadził moc biegową w watchOS 9 dla Apple Watch SE drugiej generacji oraz Series 6 i nowszych modeli.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-2-20260929.avif",
+          "sha256": "cc973559a093f93b5e9918baa621ccd89ed01f5b8e86ede7d8f87ffe99bb7cf7",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-2-20260929.webp",
+          "sha256": "81547dba160c4bb29292b8cd5c17b49d1835a7a6593ff2aa5348a37784aa5ff5",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-2-20260929.jpg",
+          "sha256": "0bb4824e8198bb444b4cc6662eb6f2e54f95f769718e1d4062365bf940ef66eb",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Które treningi i zegarki pokazują moc?”: Kobieta po 50-tce biega w parku sprawdzając moc na Apple Watch. Zgodność z treścią potwierdza podpis: Apple wprowadził moc biegową w watchOS 9 dla Apple Watch SE drugiej generacji oraz Series 6 i nowszych modeli."
+      }
+    },
+    {
+      "placement": "section:Dlaczego moc nie zastępuje tętna?",
+      "alt": "Infografika porównująca tętno i moc w watach",
+      "caption": "Moc zmienia się niemal od razu po przyspieszeniu lub wejściu na podbieg, a tętno reaguje z opóźnieniem.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-3-20260929.avif",
+          "sha256": "f8a21561c8019b0c514988b0b3b971e2d8cd498a4a0b4006d7e607e78f09dc5f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-3-20260929.webp",
+          "sha256": "706be77b3a512c4b63b1b3aaa57767f937a061eaeb12f0598bebba99bf0bd499",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-3-20260929.jpg",
+          "sha256": "1eee41172c859eddb3f96ba945981df6e12138c09eacf0d87be49a364096d299",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego moc nie zastępuje tętna?”: Infografika porównująca tętno i moc w watach. Zgodność z treścią potwierdza podpis: Moc zmienia się niemal od razu po przyspieszeniu lub wejściu na podbieg, a tętno reaguje z opóźnieniem."
+      }
+    },
+    {
+      "placement": "section:Jak używać mocy bez testu maksymalnego?",
+      "alt": "Infografika przedstawiająca 5 stref mocy treningowej",
+      "caption": "Wybierz powtarzalny odcinek i przez kilka spokojnych biegów obserwuj średnią moc, tempo, tętno i odczuwany wysiłek.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-4-20260929.avif",
+          "sha256": "5c5568939d1cfc11847d5c57ac96580b0b4dfa048ff0ce46ce361c138242221b",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-4-20260929.webp",
+          "sha256": "430d2ac1108eb26af65908ec384f30c75a2321fa653ff5f9dc2177e751a43c99",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/waty-apple-watch-moc-zdrowie-po-50-section-4-20260929.jpg",
+          "sha256": "4bb868af57afada71c20e4bbdce041223cf1a7ce16ffae71d03cbe90d32129f8",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak używać mocy bez testu maksymalnego?”: Infografika przedstawiająca 5 stref mocy treningowej. Zgodność z treścią potwierdza podpis: Wybierz powtarzalny odcinek i przez kilka spokojnych biegów obserwuj średnią moc, tempo, tętno i odczuwany wysiłek."
+      }
+    }
+  ]
+}

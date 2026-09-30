@@ -5,6 +5,9 @@ const path = require('node:path');
 const fs = require('node:fs');
 const os = require('node:os');
 const { validateArticleContract } = require('../scripts/article-contract-check');
+const { validateArticleHeadContract } = require('../scripts/lib/article-head-contract');
+const { validateArticleTables, validateSourcesListMarkup } = require('../scripts/validate-article-standard');
+const { extractMetaModified } = require('../scripts/date-modified-guard');
 const check = (html) => {
   const run = spawnSync('python3', [path.join(__dirname, '../scripts/article-content-consistency.py'), '--stdin'], { input: html, encoding: 'utf8' });
   assert.equal(run.status, 0, run.stderr);
@@ -39,9 +42,28 @@ test('each substantive section requires its own complete picture and caption', (
   assert.match(errors, /Sekcja 3.*AVIF/);
 });
 test('legacy Q&A and reading helper headings are not treated as substantive sections', () => {
- const helpers = '<h2>Szybkie odpowiedzi (Q&A)?</h2><div class="qa-grid"><h2>Cytaty do zapamiętania?</h2><h2>W skrócie (AI)?</h2><h2>Czytaj też?</h2></div>';
+ const helpers = '<h2>Szybkie odpowiedzi (Q&A)?</h2><h2>Szybkie odpowiedzi (AEO)?</h2><div class="qa-grid"><h2>Cytaty do zapamiętania?</h2><h2>Cytaty do zapamiętania (GEO)?</h2><h2>W skrócie (AI)?</h2><h2>W skrócie (AIO)?</h2><h2>Czytaj też?</h2></div>';
  const html = fixture().replace('<section class="faq-section">', `${helpers}<section class="faq-section">`);
  assert.deepEqual(check(html), []);
+});
+test('invalid image dimensions are reported without crashing the validator', () => {
+ const html = fixture().replace('width="1200" height="675"', 'width="undefined" height="675"');
+ const errors = check(html);
+ assert.ok(errors.some(e => e.includes('width/height')));
+});
+test('head validator accepts equivalent meta attributes in a different order', () => {
+ const description = 'To jest poprawny opis artykułu, który ma odpowiednią długość, pełne zdanie i zachowuje spójność we wszystkich wymaganych polach metadanych serwisu.';
+ const html = `<title>Poprawny tytuł artykułu | FitPo50</title>
+ <meta content="${description}" name="description">
+ <meta content="${description}" property="og:description">
+ <meta content="${description}" name="twitter:description">
+ <meta content="Tytuł" property="og:title"><meta content="Tytuł" name="twitter:title">
+ <meta content="https://fitpo50.pl/assets/hero.jpg" property="og:image"><meta content="https://fitpo50.pl/assets/hero.jpg" name="twitter:image">
+ <meta content="2026-09-30T10:00:00+02:00" property="article:published_time">
+ <meta content="2026-09-30T11:00:00+02:00" property="article:modified_time">
+ <script type="application/ld+json">${JSON.stringify({'@type':'BlogPosting',description,datePublished:'2026-09-30T10:00:00+02:00',dateModified:'2026-09-30T11:00:00+02:00',speakable:{'@type':'SpeakableSpecification',cssSelector:['#quick-answer']}})}</script>
+ <script type="application/ld+json">${JSON.stringify({'@type':'BreadcrumbList',itemListElement:[]})}</script>`;
+ assert.deepEqual(validateArticleHeadContract(html).errors, []);
 });
 test('publication contract blocks tables without the responsive wrapper', () => {
  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-table-contract-'));
@@ -49,4 +71,39 @@ test('publication contract blocks tables without the responsive wrapper', () => 
  fs.writeFileSync(file, `${fixture()}<table><caption>Plan</caption></table>`);
  const errors = validateArticleContract(file).errors.join('\n');
  assert.match(errors, /Tabele bez kontenera \.article-table-wrap: 1\/1/);
+});
+test('main article validator blocks missing table wrapper and scope attributes', () => {
+ const errors = [];
+ validateArticleTables('<table><caption>Plan</caption><thead><tr><th>Dzień</th></tr></thead><tbody><tr><th>1</th></tr></tbody></table>', errors);
+ const message = errors.join('\n');
+ assert.match(message, /Tabele bez kontenera \.article-table-wrap: 1\/1/);
+ assert.match(message, /thead bez scope=col/);
+ assert.match(message, /tbody bez scope=row/);
+});
+test('main article validator accepts semantic table with reordered wrapper attributes', () => {
+ const errors = [];
+ validateArticleTables('<div role="region" class="card article-table-wrap" tabindex="0"><table><caption>Plan</caption><thead><tr><th data-kind="day" scope="col">Dzień</th></tr></thead><tbody><tr><th class="row" scope="row">1</th></tr></tbody></table></div>', errors);
+ assert.deepEqual(errors, []);
+});
+test('sources-list class cannot be nested on a generic wrapper', () => {
+ const errors = [];
+ validateSourcesListMarkup('<div class="sources-list"><h2>Źródła</h2><ol class="sources-list"><li>Źródło</li></ol></div>', errors);
+ assert.match(errors.join('\n'), /wyłącznie na elemencie <ol>/);
+});
+test('article stylesheet wraps long source URLs on mobile', () => {
+ const css = fs.readFileSync(path.join(__dirname, '../article.css'), 'utf8');
+ assert.match(css, /\.sources-list a\s*\{[^}]*overflow-wrap:\s*anywhere;[^}]*word-break:\s*break-word;/s);
+});
+test('publication contract accepts quick-answer and key-takeaways with reordered attributes', () => {
+ const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-reordered-sections-'));
+ const file = path.join(dir, 'article.html');
+ const html = fixture()
+   .replace('<article class="article-content">', '<article class="article-content"><section aria-label="Szybka odpowiedź" id="quick-answer" class="quick-answer reveal"><p>Odpowiedź.</p></section><section data-ai-summary="editorial" class="key-takeaways reveal"><p>Wnioski.</p></section>')
+   .replace('<table><caption>Plan</caption></table>', '');
+ fs.writeFileSync(file, html);
+ const errors = validateArticleContract(file).errors.join('\n');
+ assert.doesNotMatch(errors, /Brak sekcji (quick-answer|key-takeaways)/);
+});
+test('date-modified guard accepts reordered meta attributes', () => {
+ assert.equal(extractMetaModified('<meta content="2026-09-30T14:30:00+02:00" property="article:modified_time">'), '2026-09-30T14:30:00+02:00');
 });

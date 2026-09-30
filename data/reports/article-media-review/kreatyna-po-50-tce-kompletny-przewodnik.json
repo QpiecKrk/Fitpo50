@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "kreatyna-po-50-tce-kompletny-przewodnik",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "816fb3163afedaf54db56a57d85431fdd2f7bc193bb7d90e1bb7ba9c80c1be14",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Aktywny mezczyzna po piecdziesiatce na silowni trzyma sloik z kreatyna",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-po-50-hero-20260929.avif",
+          "sha256": "098f292d8026a182b69c1aa51245b56a2fd057a3f268238a68efe99c9b442d0e",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/kreatyna-po-50-hero-20260929.webp",
+          "sha256": "1602f4b7ae9744efb50d4bebc920a8445c188454f9203f11b4f2205cd598dce1",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/kreatyna-po-50-hero-20260929.jpg",
+          "sha256": "9beb499ce25e4ad7804428eaa9bec688bfd471ab5dd5ec5868aeb893a4180bce",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Aktywny mezczyzna po piecdziesiatce na silowni trzyma sloik z kreatyna. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co daje kreatyna osobie po 50-tce?",
+      "alt": "Starszy mezczyzna cwiczacy z hantelkami pod okiem trenera w silowni",
+      "caption": "Kreatyna zwiększa dostępność fosfokreatyny, z której mięśnie szybko odtwarzają ATP podczas krótkiego, intensywnego wysiłku.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-1-20260929.avif",
+          "sha256": "f5bd87d62d04e6287891c1416b8fdced8741cad2bcd19123bc6b215bd703cbf1",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-1-20260929.webp",
+          "sha256": "aa2b4c8a0c46b8427749f31e653d9fcba4e02eaf3665a2a80a462472fdfc58a3",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-1-20260929.jpg",
+          "sha256": "5a177988bdde37bd846064744c88d6b34a8def4f4c67de100040d278309dfa89",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co daje kreatyna osobie po 50-tce?”: Starszy mezczyzna cwiczacy z hantelkami pod okiem trenera w silowni. Zgodność z treścią potwierdza podpis: Kreatyna zwiększa dostępność fosfokreatyny, z której mięśnie szybko odtwarzają ATP podczas krótkiego, intensywnego wysiłku."
+      }
+    },
+    {
+      "placement": "section:Czy kreatyna poprawia pamięć?",
+      "alt": "Schemat mozgu z zaznaczonymi obszarami pamieci i metabolizmu energetycznego",
+      "caption": "Nowsze przeglądy znajdują możliwy sygnał poprawy niektórych wyników poznawczych, ale baza badań u starszych dorosłych jest mała i niejednorodna.",
+      "width": 1024,
+      "height": 559,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-2-20260929.avif",
+          "sha256": "7566ec47fbd78d3284242307a73f178f997cc0c5aeebb5b07dc48db3cdda4f73",
+          "width": 1024,
+          "height": 559
+        },
+        "webp": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-2-20260929.webp",
+          "sha256": "599cc4cf9d96018bb7b63774c77f6eae7fbcf5bb15ffc16ab325475886ff6684",
+          "width": 1024,
+          "height": 559
+        },
+        "jpg": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-2-20260929.jpg",
+          "sha256": "48a6a04c9b2a76f6920e5eeffea582a3eba08346e7862a6e7b1da51c14070bea",
+          "width": 1024,
+          "height": 559
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy kreatyna poprawia pamięć?”: Schemat mozgu z zaznaczonymi obszarami pamieci i metabolizmu energetycznego. Zgodność z treścią potwierdza podpis: Nowsze przeglądy znajdują możliwy sygnał poprawy niektórych wyników poznawczych, ale baza badań u starszych dorosłych jest mała i niejednorodna."
+      }
+    },
+    {
+      "placement": "section:Jak dawkować kreatynę bez zbędnego komplikowania?",
+      "alt": "Infografika przedstawiajaca protokol dawkowania kreatyny po 50-tce",
+      "caption": "Najprostszy protokół to 3–5 g monohydratu codziennie.",
+      "width": 1024,
+      "height": 559,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-3-20260929.avif",
+          "sha256": "c2b29be747f9fbee5e16016078fad448449bf37cd3d3a4bcaf58c6af921bf6db",
+          "width": 1024,
+          "height": 559
+        },
+        "webp": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-3-20260929.webp",
+          "sha256": "4d171df41fa2906ac3f02246c832a557d8fa4974b2826a528905544e9a69a5eb",
+          "width": 1024,
+          "height": 559
+        },
+        "jpg": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-3-20260929.jpg",
+          "sha256": "7635f0a3aa680b6ad8385fafea7f8cea6458b456048c4452eb87792c48c32359",
+          "width": 1024,
+          "height": 559
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak dawkować kreatynę bez zbędnego komplikowania?”: Infografika przedstawiajaca protokol dawkowania kreatyny po 50-tce. Zgodność z treścią potwierdza podpis: Najprostszy protokół to 3–5 g monohydratu codziennie."
+      }
+    },
+    {
+      "placement": "section:Kiedy potrzebna jest konsultacja i jak czytać kreatyninę?",
+      "alt": "Lekarz rozmawiajacy ze starsza pacjentka, trzymajaca wyniki badan krwi",
+      "caption": "Osoba z przewlekłą chorobą nerek, nieprawidłowym eGFR, chorobą wymagającą ograniczeń płynów albo lekami mogącymi uszkadzać nerki nie powinna rozpoczynać suplementacji samodzielnie.",
+      "width": 1024,
+      "height": 559,
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-4-20260929.avif",
+          "sha256": "d11fc8a06615d4b97f0d037e1b95f32bbf4acc27c05d8ee33fcea0dbd3b1f4fa",
+          "width": 1024,
+          "height": 559
+        },
+        "webp": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-4-20260929.webp",
+          "sha256": "28e824543bb3ac86bc9e191cf6b3e6f2596a29aab4a0a406fd3f4ac580f610a5",
+          "width": 1024,
+          "height": 559
+        },
+        "jpg": {
+          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-4-20260929.jpg",
+          "sha256": "9ca1fc08f09257f771f783a4f34aa7023ce04231303d668d12d6ffe27367a5ea",
+          "width": 1024,
+          "height": 559
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy potrzebna jest konsultacja i jak czytać kreatyninę?”: Lekarz rozmawiajacy ze starsza pacjentka, trzymajaca wyniki badan krwi. Zgodność z treścią potwierdza podpis: Osoba z przewlekłą chorobą nerek, nieprawidłowym eGFR, chorobą wymagającą ograniczeń płynów albo lekami mogącymi uszkadzać nerki nie powinna rozpoczynać suplementacji samodzielnie."
+      }
+    }
+  ]
+}

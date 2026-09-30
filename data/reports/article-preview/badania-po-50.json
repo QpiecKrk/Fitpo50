@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:53:07.980Z",
+  "slug": "badania-po-50",
+  "html_sha256": "dd8d0f2ae4620b1efc9c767cd815adaf04a2e1388b581b64a6544555fd5f26be",
+  "site_html_sha256": "dd8d0f2ae4620b1efc9c767cd815adaf04a2e1388b581b64a6544555fd5f26be",
+  "pdf_sha256": "9cc322092a8729ad2a08be3b498c012c7877d6e80c9865e17d3775c966f42c08",
+  "site_pdf_sha256": "9cc322092a8729ad2a08be3b498c012c7877d6e80c9865e17d3775c966f42c08",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 5,
+    "text_coverage": 1,
+    "rendered_pages": 5
+  },
+  "errors": []
+}

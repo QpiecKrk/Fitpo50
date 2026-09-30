@@ -5,7 +5,7 @@ const { pageKind } = require('./lib/publication-page-kind');
 const { validateTopicCenter } = require('./lib/topic-center-contract');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { validateArticleHeadContract } = require('./lib/article-head-contract');
+const { validateArticleHeadContract, firstTagAttribute } = require('./lib/article-head-contract');
 const { POLICY, utils, validators } = require('./lib/article-policy');
 
 function countMatches(raw, regex) {
@@ -30,10 +30,10 @@ function validateArticleContract(filePath) {
   errors.push(...head.errors);
   warnings.push(...head.warnings);
 
-  const quickAnswer = /<section\s+class="quick-answer[^\"]*"[\s\S]*?<\/section>/i.test(raw);
+  const quickAnswer = /<section\b(?=[^>]*\bclass=["'][^"']*\bquick-answer\b[^"']*["'])[^>]*>[\s\S]*?<\/section>/i.test(raw);
   if (!quickAnswer) errors.push('Brak sekcji quick-answer.');
 
-  const keyTakeaways = /<section\s+class="key-takeaways/.test(raw);
+  const keyTakeaways = /<section\b(?=[^>]*\bclass=["'][^"']*\bkey-takeaways\b[^"']*["'])[^>]*>/i.test(raw);
   if (!keyTakeaways) errors.push('Brak sekcji key-takeaways.');
 
   const normalized = utils.fuzzyNormalize(utils.stripTags(raw));
@@ -107,8 +107,8 @@ function validateArticleContract(filePath) {
   if (!hasBreadcrumbList) warnings.push('Brak schema BreadcrumbList.');
 
   const isoDate = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(Z|[+-]\d{2}:\d{2})$/;
-  const pub = (raw.match(/article:published_time"\s+content="([^"]+)"/i) || [])[1] || '';
-  const mod = (raw.match(/article:modified_time"\s+content="([^"]+)"/i) || [])[1] || '';
+  const pub = firstTagAttribute(raw, 'meta', 'property', 'article:published_time', 'content');
+  const mod = firstTagAttribute(raw, 'meta', 'property', 'article:modified_time', 'content');
   if (pub && !isoDate.test(pub)) errors.push('article:published_time nie jest ISO 8601 z TZ.');
   if (mod && !isoDate.test(mod)) errors.push('article:modified_time nie jest ISO 8601 z TZ.');
 

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "healthspan-nie-lifespan-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "48b6d314ae2046c746436c05163575e3da0acc3bd2fd4d1cc2590feb11cd3ec1",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce stoi na rozstaju dróg — szpital kontra park",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/healthspan_zegar_hero-20260929.avif",
+          "sha256": "ee4cc4d10ee1439841faf9f155cc51bc402d3d6cde07e2dfd7a0a9a4ce051b8c",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/healthspan_zegar_hero-20260929.webp",
+          "sha256": "c65b29f035cd51362799d93fe6ff78017aa2435c029bc1331b871c7b7bc2ee94",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/healthspan_zegar_hero-20260929.jpg",
+          "sha256": "15079bc2a8c70b287d0ac8f319a7a0b3aa69b48ecc9d58ba10bb4ae8b93d20db",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po 50-tce stoi na rozstaju dróg — szpital kontra park. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę oznacza healthspan?",
+      "alt": "Dwie pary rąk na ławce w parku — starsze i dziecięce, symbol przekazywania sprawności",
+      "caption": "WHO opisuje zdrowe starzenie jako rozwijanie i utrzymywanie zdolności funkcjonalnej, która umożliwia dobre życie.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-1-20260929.avif",
+          "sha256": "ba9e7596955a27011a6dd3dc053750591efc9a36ea4cfc2095cab4829bf59f2a",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-1-20260929.webp",
+          "sha256": "0f2065069be43b639c8ac78cedeb82f819c1ae1ba2e726f143fd5d713592de21",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-1-20260929.jpg",
+          "sha256": "604b63aaad38d2e13a541f9bffd3d47b60e44310b9ccd2f175995a2dede7ed09",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co naprawdę oznacza healthspan?”: Dwie pary rąk na ławce w parku — starsze i dziecięce, symbol przekazywania sprawności. Zgodność z treścią potwierdza podpis: WHO opisuje zdrowe starzenie jako rozwijanie i utrzymywanie zdolności funkcjonalnej, która umożliwia dobre życie."
+      }
+    },
+    {
+      "placement": "section:Jak mierzyć codzienną sprawność bez laboratorium?",
+      "alt": "Dziadek po 70-tce unosi wnuka w parku — radość i sprawność jako cel",
+      "caption": "Raz na miesiąc można w podobnych warunkach zapisać czas przejścia znanego odcinka, liczbę kontrolowanych wstań z krzesła i zdolność utrzymania równowagi przy podparciu w zasięgu ręki.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-2-20260929.avif",
+          "sha256": "d1b60c0bde98debc2453bd1640d387405bb33ba9e9acde9954094256f8d031d7",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-2-20260929.webp",
+          "sha256": "428a803e827806fceee9630c3c8e4b486e018d2eec996e7c352ba18331bfd39e",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-2-20260929.jpg",
+          "sha256": "d09fe6494d48b4746713ab402f01b3a3783c6a6d2b0e0f8be33a853f5e03426b",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak mierzyć codzienną sprawność bez laboratorium?”: Dziadek po 70-tce unosi wnuka w parku — radość i sprawność jako cel. Zgodność z treścią potwierdza podpis: Raz na miesiąc można w podobnych warunkach zapisać czas przejścia znanego odcinka, liczbę kontrolowanych wstań z krzesła i zdolność utrzymania równowagi przy podparciu w zasięgu ręki."
+      }
+    },
+    {
+      "placement": "section:Które działania mają największy sens?",
+      "alt": "Kobieta po 50-tce stoi na szczycie wzniesienia i patrzy na miasto — perspektywa i wybór",
+      "caption": "Podstawą jest tygodniowe połączenie aktywności aerobowej, ćwiczeń wzmacniających i pracy nad równowagą, dostosowane do zdrowia.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-3-20260929.avif",
+          "sha256": "b4a558cfc4827b609ba2ede29de0e118d67f042a9ec365ce5eaf7119f81fe2af",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-3-20260929.webp",
+          "sha256": "1f3b09f19b21f4bf8cfa2a78681122cd264599493f4d88d3ff168c2885fd3625",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-3-20260929.jpg",
+          "sha256": "c5d9e6658a7bb633bf710898b4fdee4db136ce689b4c846da62dc4d0e9be0c75",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Które działania mają największy sens?”: Kobieta po 50-tce stoi na szczycie wzniesienia i patrzy na miasto — perspektywa i wybór. Zgodność z treścią potwierdza podpis: Podstawą jest tygodniowe połączenie aktywności aerobowej, ćwiczeń wzmacniających i pracy nad równowagą, dostosowane do zdrowia."
+      }
+    },
+    {
+      "placement": "section:Kiedy spadek formy wymaga diagnostyki?",
+      "alt": "Kalendarz z ikonami treningu i szpitala — dwa możliwe scenariusze tej samej osi czasu",
+      "caption": "Nowa duszność, ból w klatce, omdlenie, jednostronne osłabienie albo gwałtowna utrata wydolności wymagają pilnej oceny zależnie od nasilenia.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-4-20260929.avif",
+          "sha256": "efae8fa44f144c65bbfe0723ea11e376775c8c20be889dc63fe6784d790ce2d8",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-4-20260929.webp",
+          "sha256": "b9dba2765a1698af23750a2ca4cfaab6681b61aff750801c054e59ea5e38b9f8",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/healthspan-nie-lifespan-po-50-section-4-20260929.jpg",
+          "sha256": "73015d0607045c0b155f4c9a10a944d03ad8b28eb9f4a429d3917b297c034d37",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy spadek formy wymaga diagnostyki?”: Kalendarz z ikonami treningu i szpitala — dwa możliwe scenariusze tej samej osi czasu. Zgodność z treścią potwierdza podpis: Nowa duszność, ból w klatce, omdlenie, jednostronne osłabienie albo gwałtowna utrata wydolności wymagają pilnej oceny zależnie od nasilenia."
+      }
+    }
+  ]
+}

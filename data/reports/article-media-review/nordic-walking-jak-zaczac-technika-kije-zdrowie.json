@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "nordic-walking-jak-zaczac-technika-kije-zdrowie",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "16040f24ceee9b0a95e5b8d532c6a5c24facba7801fea97c2de82dc356bd787e",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Para po 55-tce w trakcie energicznego marszu nordic walking w parku – widoczna poprawna technika i wyprostowana sylwetka",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/nordic-walking-para-technika-park-hero-v2.avif",
+          "sha256": "a8fce2716367b53e2f5321c6b71bcadac1d98c8700407535657348144c759113",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/nordic-walking-para-technika-park-hero-v2.webp",
+          "sha256": "dbfc4186214d7310ab4b499ed0a1b938ea02663a0ffa0492d67c4d28caa59b22",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/nordic-walking-para-technika-park-hero-v2.jpg",
+          "sha256": "7a91ebc12dacb74e8164b429a64b1e2c280fbe3bc9080733850d829c667a622c",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak dobrać długość kijów do nordic walking?",
+      "alt": "Oś czasu rozwoju nordic walking jako formy aktywności",
+      "caption": "Oś czasu rozwoju nordic walking jako formy aktywności",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/nordic-walking-historia-os-czasu-infografika.avif",
+          "sha256": "3664d4d43e67e1946689bfbf844f210d84d4d83085cd1d79495bd556b3566219",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/nordic-walking-historia-os-czasu-infografika.webp",
+          "sha256": "a8f6c6d6da1a1fbd355e57ecff172b4b52cd5b70367b1f2b53b77f0bcb1e06f3",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/nordic-walking-historia-os-czasu-infografika.jpg",
+          "sha256": "52537ec64983e60e4b585d543d3d1f2c89e3d57195595b4f6f0b2fa0fa460d97",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak dobrać długość kijów do nordic walking?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak wygląda poprawny krok i praca ramion?",
+      "alt": "Ilustracja różnic pracy ciała podczas zwykłego marszu i nordic walking",
+      "caption": "Ilustracja różnic pracy ciała podczas zwykłego marszu i nordic walking",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/nordic-walking-miesnie-porownanie-infografika.avif",
+          "sha256": "39d6c9b66b7078283db5b0be111be5a77c6ebb515b23ae172d6b41f69670e81f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/nordic-walking-miesnie-porownanie-infografika.webp",
+          "sha256": "5c1dc15cdd15e8ff6acaad86c08763d373deb54db3f87af4751df2e075a068b2",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/nordic-walking-miesnie-porownanie-infografika.jpg",
+          "sha256": "a0ce7d1b2908f12706dd1c118f3936b048e6aa9b87829c69165fc0b59fce7e1a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak wygląda poprawny krok i praca ramion?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jaki plan zastosować przez pierwsze 4 tygodnie?",
+      "alt": "Schemat naprzemiennego kroku i ukośnego ustawienia kijów",
+      "caption": "Schemat naprzemiennego kroku i ukośnego ustawienia kijów",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/nordic-walking-technika-schemat-kroku-ilustracja.avif",
+          "sha256": "548e0645f2994e5e10f58e6f2e1d5097b9ff83454acf284eb270be5b0871c50e",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/nordic-walking-technika-schemat-kroku-ilustracja.webp",
+          "sha256": "de4c6e49d9fec219ada47b9e810861c9147d5db13678fca75bdce459135f8260",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/nordic-walking-technika-schemat-kroku-ilustracja.jpg",
+          "sha256": "f7ff6bbb3c3584659c7d9f06e04654b11b45190d77985ba09e984782afca8947",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jaki plan zastosować przez pierwsze 4 tygodnie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy nordic walking wymaga ostrożności?",
+      "alt": "Fizjoterapeutka koryguje technikę nordic walking u kobiety ze stabilizatorem kolana",
+      "caption": "Ból, niestabilność i choroby przewlekłe wymagają dostosowania tempa, techniki oraz długości trasy do możliwości.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/nordic-walking-ostroznosc-fizjoterapeuta-20260930.avif",
+          "sha256": "48a23a227bce547304a3cb8609d06899eb102d38b172549cb336bcddfbccbe53",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/nordic-walking-ostroznosc-fizjoterapeuta-20260930.webp",
+          "sha256": "a2f0c929ae90da51f914db9ca8f815d0b1955442eaa39c3c87a811b2f049c447",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/nordic-walking-ostroznosc-fizjoterapeuta-20260930.jpg",
+          "sha256": "6c454d38ea8cea18aa23a28961ecf06f87111b4433666fab0714efa5f2b5df5b",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy nordic walking wymaga ostrożności?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

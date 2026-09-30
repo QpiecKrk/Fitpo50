@@ -97,14 +97,16 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Każdy pakiet artykułu ma jeden katalog wejściowy, dokładne nazwy, osobny hero i obrazy sekcji oraz lokalny manifest.
 - Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, nieprawdziwa anatomia lub sprzęt, błędne kadry i ukryte fallbacki są zabronione; sam watermark nie jest przeszkodą.
 - Artykuł ma hero i odrębny obraz dla każdej głównej sekcji merytorycznej. Nie obowiązuje sztywna liczba sekcji ani obrazów: zakres wynika z tematu, a sekcje użytkowe nie są liczone.
-- Wymagane warianty: AVIF, WebP i JPG z prawdziwymi wymiarami, konkretnym `alt` i podpisem.
+- Wymagane warianty: AVIF, WebP i JPG z prawdziwymi wymiarami, konkretnym `alt` i podpisem. Gdy zmienia się zawartość obrazu, nadaj wszystkim wariantom nową, wersjonowaną nazwę i zaktualizuj źródło, metadane, manifest oraz `_site`; roczny cache `immutable` wyklucza bezpieczne nadpisanie istniejącego URL-u.
 - Po zatwierdzonej kontroli wizualnej rzeczywiste proporcje pliku zastępują planowaną proporcję z promptu. Layout obsługuje panoramy, krajobraz, kwadrat i pionowe plansze bez wymuszania przycięcia; pionowe i kwadratowe obrazy dostają własny wariant układu.
 - Tabele są semantycznym HTML: `caption`, `thead`, `tbody`, `th` i odpowiednie `scope`. Grafika tabeli nie zastępuje tabeli.
 - Importer automatycznie dodaje tabelom klasę, mobilny kontener przewijania oraz brakujące `scope`; finalna bramka tabel działa dopiero na zbudowanym HTML.
+- `.sources-list` jest klasą listy `<ol>`, nigdy jej wrappera. Długie URL-e źródeł muszą zawijać się na mobile. Walidatory rozpoznają poprawne znaczniki niezależnie od kolejności atrybutów.
 - Importer nie może upraszczać pierwszego akapitu pod H2 do czystego tekstu: zachowuje istniejące linki, `<strong>`, `<em>` i pozostałe poprawne znaczniki inline. Akapit poza limitem 30–70 słów ma zostać zablokowany przez walidator, a nie po cichu przycięty. Licznik słów liczy widoczny tekst po usunięciu znaczników, nigdy nazwy atrybutów ani slug z `href`.
 - Limit `<title>` 65 znaków obejmuje także stały dopisek ` | FitPo50`; dlatego `seo_title` bez marki ma maksymalnie 55 znaków. H1 pozostaje niezależnym tytułem artykułu.
 - HTML najpierw powstaje w izolowanym stagingu. Render desktop 1440 px i mobile 390 px musi przejść kontrolę overflow, fontów, proporcji i obrazów.
 - PDF powstaje ze stagingowego HTML. Każdą stronę trzeba wyrenderować do obrazu i obejrzeć; sama zgodność tekstowa nie wykrywa osieroconych wierszy ani źle podzielonych źródeł.
+- Kontrola PDF wykonuje się do końca także wtedy, gdy w tym samym przebiegu wykryto osobny błąd HTML lub mobile; raport ma zawierać komplet niezależnych blokerów.
 - Blok źródeł i disclaimer w PDF nie mogą rozpadać się przypadkowo między stronami.
 - HTML i PDF w źródle oraz `_site` muszą być identyczne 1:1.
 

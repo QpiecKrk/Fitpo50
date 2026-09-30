@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "trening-3x30-dla-50-plus",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "047da822cecf9fc85e386f65da42df6b9b6236ddde839ed5e9abca05aebf195b",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Plan 3x30 dla osób po 50-tce",
+      "caption": "",
+      "width": 2752,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-lead-lifestyle-20260929.avif",
+          "sha256": "62b205ae6290913780c8199c4ff5e89f83649531ee46864851e1b21ca694f6fc",
+          "width": 2752,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/trening-3x30-lead-lifestyle-20260929.webp",
+          "sha256": "4f6ccd854d56b59ed4a420b54899f27d467be7f9618b33846b22c063a52ab432",
+          "width": 2752,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-lead-lifestyle-20260929.jpg",
+          "sha256": "b6ea7c7bd2c2ed85cb032e3d923bdeed485ac65245b2c56556a6af1ee11c6906",
+          "width": 2752,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Plan 3x30 dla osób po 50-tce. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak rozłożyć trzy treningi po 30 minut?",
+      "alt": "Tygodniowy schemat planu treningowego 3x30 dla osób po 50-tce",
+      "caption": "W poniedziałek wykonaj sesję siłową A, w środę marsz z blokiem równowagi, a w piątek sesję siłową B.",
+      "width": 2752,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-dla-50-plus-section-1-20260929.avif",
+          "sha256": "a3fcae9f3bb9ab633676981edc5b10b5a811cdde9c27ed85de764c525695c64c",
+          "width": 2752,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/trening-3x30-dla-50-plus-section-1-20260929.webp",
+          "sha256": "d52a6d3e41fec66da613ebcbffcd5041c014d36f7f7a04fbcd86fa7fba468a9f",
+          "width": 2752,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-dla-50-plus-section-1-20260929.jpg",
+          "sha256": "801d59cec797fdf30c1427c19992cdf9252efb7f5ad595697125604d9e48e831",
+          "width": 2752,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak rozłożyć trzy treningi po 30 minut?”: Tygodniowy schemat planu treningowego 3x30 dla osób po 50-tce. Zgodność z treścią potwierdza podpis: W poniedziałek wykonaj sesję siłową A, w środę marsz z blokiem równowagi, a w piątek sesję siłową B."
+      }
+    },
+    {
+      "placement": "section:Co wykonać podczas sesji siłowej A i B?",
+      "alt": "Przysiad do krzesła jako ćwiczenie siłowe w domu",
+      "caption": "W sesji A wybierz siad do krzesła lub wypychanie nogami, przyciąganie oraz wyciskanie.",
+      "width": 2752,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-dla-50-plus-section-2-20260929.avif",
+          "sha256": "7a00cf55bbd6148c941415680b95aa9362f26aeeac79839e0908ddebf8c84682",
+          "width": 2752,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/trening-3x30-dla-50-plus-section-2-20260929.webp",
+          "sha256": "f9a144036a5472093161327c3d407071ff00fbfe02fc7617e180f15d56ef1988",
+          "width": 2752,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-dla-50-plus-section-2-20260929.jpg",
+          "sha256": "912fab7bf59418c32902e957b6c71c9af0c743d38da9f39e6c44a3132dbdc205",
+          "width": 2752,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co wykonać podczas sesji siłowej A i B?”: Przysiad do krzesła jako ćwiczenie siłowe w domu. Zgodność z treścią potwierdza podpis: W sesji A wybierz siad do krzesła lub wypychanie nogami, przyciąganie oraz wyciskanie."
+      }
+    },
+    {
+      "placement": "section:Jak zaplanować marsz, równowagę i mobilność?",
+      "alt": "Infografika: ćwiczenia równowagi i mobilności",
+      "caption": "Po 5 minutach spokojnego marszu przejdź do 10-15 minut tempa, przy którym możesz mówić zdaniami.",
+      "width": 2752,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-dla-50-plus-section-3-20260929.avif",
+          "sha256": "0c66475d63b97b167430e5bec2cccbb7bc4e8de695fb8f5e565cf1b8b7714d3f",
+          "width": 2752,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/trening-3x30-dla-50-plus-section-3-20260929.webp",
+          "sha256": "9c96f02d090b8d0e30cad69605a423078f5b2ca085c30ee99cfd14f0df861be3",
+          "width": 2752,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-dla-50-plus-section-3-20260929.jpg",
+          "sha256": "8e56c36b22df379c275c1409f7745b10e5e5570e60c58f8a7eb7c40b31af18d1",
+          "width": 2752,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak zaplanować marsz, równowagę i mobilność?”: Infografika: ćwiczenia równowagi i mobilności. Zgodność z treścią potwierdza podpis: Po 5 minutach spokojnego marszu przejdź do 10-15 minut tempa, przy którym możesz mówić zdaniami."
+      }
+    },
+    {
+      "placement": "section:Jak progresować plan przez pierwsze 4 tygodnie?",
+      "alt": "Infografika: plan 3x30 dzień A, B i C",
+      "caption": "W pierwszym tygodniu poznaj ustawienia i zanotuj obciążenia.",
+      "width": 2752,
+      "height": 1536,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-dla-50-plus-section-4-20260929.avif",
+          "sha256": "a2e3019dc90acf2444d9e8508ed4e6ed1c6488df8a3693895eb6e43eda9b0fcd",
+          "width": 2752,
+          "height": 1536
+        },
+        "webp": {
+          "file": "assets/trening-3x30-dla-50-plus-section-4-20260929.webp",
+          "sha256": "f17f5da06644838b7c086e560e4924368ff7e87a8033ead3d6dd4bdde24fe06f",
+          "width": 2752,
+          "height": 1536
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-dla-50-plus-section-4-20260929.jpg",
+          "sha256": "9556306825971db78d2b58a394ed4bc83c4c78c3c94769e31165c05fe4c12516",
+          "width": 2752,
+          "height": 1536
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak progresować plan przez pierwsze 4 tygodnie?”: Infografika: plan 3x30 dzień A, B i C. Zgodność z treścią potwierdza podpis: W pierwszym tygodniu poznaj ustawienia i zanotuj obciążenia."
+      }
+    }
+  ]
+}

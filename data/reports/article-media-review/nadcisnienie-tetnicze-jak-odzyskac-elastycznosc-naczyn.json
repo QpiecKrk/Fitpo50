@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "nadcisnienie-tetnicze-jak-odzyskac-elastycznosc-naczyn",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "6e8dc0bf941e3f12be4d27091c5d267776ab6426f673eb2e00569e8efddf0417",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Starszy mężczyzna spokojnie mierzy ciśnienie krwi przy oknie – symbol świadomej kontroli nadciśnienia i zdrowia naczyń po pięćdziesiątce",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/nadcisnienie-elastycznosc-naczyn-hero-v2.avif",
+          "sha256": "5f33c50795b7dae1908747498dd4218606e481e88d8d4b1115c82a296b455d3c",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/nadcisnienie-elastycznosc-naczyn-hero-v2.webp",
+          "sha256": "1696ca5b8565e1915b2cb5b05a5af19c10030228371ace99706033c44c25f5fc",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/nadcisnienie-elastycznosc-naczyn-hero-v2.jpg",
+          "sha256": "a56b5dafd7342869a5cefc7104a4e9332c2cfe6accc30e03779ceb90143cde83",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co oznacza sztywność tętnic i czy można ją cofnąć?",
+      "alt": "Schemat różnicy między bardziej elastyczną i sztywniejszą tętnicą",
+      "caption": "Schemat różnicy między bardziej elastyczną i sztywniejszą tętnicą",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/nadcisnienie-schemat-tetnica-elastyczna-sztywna.avif",
+          "sha256": "027e8ce2e9255034ed6b2ccef3dbd606dd9dde4807876934b8df279c7b84ee8e",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/nadcisnienie-schemat-tetnica-elastyczna-sztywna.webp",
+          "sha256": "b587350aceb6d29604998624853fb468445d8cd2e26e2dcc56f895b4fed34587",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/nadcisnienie-schemat-tetnica-elastyczna-sztywna.jpg",
+          "sha256": "abcefe977994a386686ca1ecf32bb1d88a0ecba1faef993ddd28e0161a8e3c5d",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co oznacza sztywność tętnic i czy można ją cofnąć?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jaki ruch pomaga przy nadciśnieniu?",
+      "alt": "Marsz o umiarkowanej intensywności jako element kontroli ciśnienia",
+      "caption": "Marsz o umiarkowanej intensywności jako element kontroli ciśnienia",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/nadcisnienie-trening-interwaly-marsz.avif",
+          "sha256": "1eff54b92ad7c4452e0c91b692023f10534ee4a43f1b262e6f6277fd629aecc7",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/nadcisnienie-trening-interwaly-marsz.webp",
+          "sha256": "d59e5e7987346c04068ff7c3ad42cffe87180377c8ce37d9b99e7c6f8993e74d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/nadcisnienie-trening-interwaly-marsz.jpg",
+          "sha256": "8e42df76042aea0527a676f7ac6603fd00f9874bf39bf693beaf2dbd9c69f4d6",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jaki ruch pomaga przy nadciśnieniu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak DASH, sól i leki wpływają na wynik?",
+      "alt": "Talerz zgodny z zasadami diety DASH z warzywami, rybą, orzechami i pieczywem pełnoziarnistym",
+      "caption": "DASH łączy warzywa, pełne ziarna, orzechy i inne mało przetworzone produkty z ograniczeniem sodu.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/nadcisnienie-dash-talerz-v2.avif",
+          "sha256": "90ce40eaf0c6b76ec4cbeb7ee9f31e8208b9223ed48c7b01ef8defad6c09fbe8",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/nadcisnienie-dash-talerz-v2.webp",
+          "sha256": "554360be2c3e61dd6281a965c244f8bd69e0e9baf3f5826acfbd5e207fbda369",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/nadcisnienie-dash-talerz-v2.jpg",
+          "sha256": "be4ff01d62378f0a59ebcdbfc1de476bd72f9776eb4b8084258770133b196314",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak DASH, sól i leki wpływają na wynik?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak prawidłowo mierzyć ciśnienie w domu?",
+      "alt": "Prawidłowa pozycja podczas domowego pomiaru ciśnienia",
+      "caption": "Prawidłowa pozycja podczas domowego pomiaru ciśnienia",
+      "width": 1400,
+      "height": 787,
+      "variants": {
+        "avif": {
+          "file": "assets/nadcisnienie-domowy-pomiar-cisnienia.avif",
+          "sha256": "b2351e0f871b308bc95de1537a699da0a14c7408562057da9dad5c8ec420c84e",
+          "width": 1400,
+          "height": 787
+        },
+        "webp": {
+          "file": "assets/nadcisnienie-domowy-pomiar-cisnienia.webp",
+          "sha256": "3c8b483d0202d6187596f0c2789b1e3199863ba0b918db19b571418f679d7a24",
+          "width": 1400,
+          "height": 787
+        },
+        "jpg": {
+          "file": "assets/nadcisnienie-domowy-pomiar-cisnienia.jpg",
+          "sha256": "3d681facc2e4c883bf418ba0d55dd5e9ee43a795d5927c277d835bb9afc4f889",
+          "width": 1400,
+          "height": 787
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak prawidłowo mierzyć ciśnienie w domu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

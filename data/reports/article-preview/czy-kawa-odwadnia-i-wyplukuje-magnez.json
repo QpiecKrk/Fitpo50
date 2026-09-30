@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:53:50.993Z",
+  "slug": "czy-kawa-odwadnia-i-wyplukuje-magnez",
+  "html_sha256": "8ec376500873fa07f3c3cbe8915fa6c85d81a7baf14b60dc3e5b8c99b38e6987",
+  "site_html_sha256": "8ec376500873fa07f3c3cbe8915fa6c85d81a7baf14b60dc3e5b8c99b38e6987",
+  "pdf_sha256": "e1adfcb2be06d8fa129439c8d75876ed99b398b4132ede899216251e709ce82a",
+  "site_pdf_sha256": "e1adfcb2be06d8fa129439c8d75876ed99b398b4132ede899216251e709ce82a",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 0
+  },
+  "pdf": {
+    "pages": 6,
+    "text_coverage": 1,
+    "rendered_pages": 6
+  },
+  "errors": []
+}

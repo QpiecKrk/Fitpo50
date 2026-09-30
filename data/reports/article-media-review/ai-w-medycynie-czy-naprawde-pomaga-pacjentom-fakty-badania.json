@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "8655eddf8593e715852b895ebcc36d97aef0f4f27a97a2e273913c1e4ba82164",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Doświadczony lekarz analizuje wyniki badań na monitorze wspieranym przez AI – nowoczesna, spokojna atmosfera gabinetu",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/ai-medycyna-lekarz-monitor-rtg-hero-v2.avif",
+          "sha256": "87aab7ced691c3020b811ffc8b116d1514f0206e126a5456df28bd0b6feecdaf",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/ai-medycyna-lekarz-monitor-rtg-hero-v2.webp",
+          "sha256": "273079f45890cc807af45dc908c0f50ff939133eaaffb0c9b85cf0d29d5be5d5",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/ai-medycyna-lekarz-monitor-rtg-hero-v2.jpg",
+          "sha256": "2bc86c24f617b9f2a6c3d396ea0040ed9e2ab8bbcf8bf2f2fb9f336ce639ecc1",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czym różni się trafność algorytmu od korzyści dla pacjenta?",
+      "alt": "Cztery przykładowe zastosowania sztucznej inteligencji w opiece medycznej",
+      "caption": "Cztery przykładowe zastosowania sztucznej inteligencji w opiece medycznej",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/ai-medycyna-4-obszary-zastosowania-infografika.avif",
+          "sha256": "bccdc4b3cf83a4c2cd93b9714a85a284a200c635fb5480cc68174bad7ed475ba",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/ai-medycyna-4-obszary-zastosowania-infografika.webp",
+          "sha256": "500714c1c1fe2fd01340d9ba05d14e9a16d180511c93843f0ebc12e1870c760b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/ai-medycyna-4-obszary-zastosowania-infografika.jpg",
+          "sha256": "1ce44dde0e338430d1c5add9ee39d31b8c59f0b2aeacac9c6ad3bb552db9e05d",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czym różni się trafność algorytmu od korzyści dla pacjenta?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co pokazał przegląd 4667 badań medycznej AI?",
+      "alt": "Lekarka weryfikuje wynik analizy na ekranie tabletu",
+      "caption": "Lekarka weryfikuje wynik analizy na ekranie tabletu",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/ai-lekarka-tablet-wyniki-analiza.avif",
+          "sha256": "2ad2a14d19ec5a5d2ed331cf74f2475c19ccd54b259c2ddec3bfa3bcf5d33187",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/ai-lekarka-tablet-wyniki-analiza.webp",
+          "sha256": "e4f4d32d33471bba65b9c9b4e0df2f2bccd3819cd84c7501931b9a2aec6a7d90",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/ai-lekarka-tablet-wyniki-analiza.jpg",
+          "sha256": "d0797d76aa7197291651acc975139064419215966d42c25ed0cfadb9dff6ee36",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co pokazał przegląd 4667 badań medycznej AI?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy urządzenie z AI po autoryzacji jest bezbłędne?",
+      "alt": "Lekarz rozmawia z pacjentką podczas wizyty w gabinecie",
+      "caption": "Lekarz rozmawia z pacjentką podczas wizyty w gabinecie",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/ai-skryba-lekarz-pacjent-rozmowa.avif",
+          "sha256": "e43217c9ef8678f25451648836231446d1323dbf3d4504761fedf9ad31941577",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/ai-skryba-lekarz-pacjent-rozmowa.webp",
+          "sha256": "f584228c3aea5c3760efa1d53357d9179013d6cce40be6fa65ac4e8226bd22aa",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/ai-skryba-lekarz-pacjent-rozmowa.jpg",
+          "sha256": "fb5cc184769fff495f708cfe1fab4064b11cf47f9d31813b68d9842ede9a6940",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy urządzenie z AI po autoryzacji jest bezbłędne?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:O co pacjent może zapytać lekarza lub placówkę?",
+      "alt": "Lekarz omawia z parą po 50-tce wynik wsparty algorytmem medycznym",
+      "caption": "Lekarz powinien wyjaśnić rolę algorytmu, ograniczenia wyniku i sposób weryfikacji przez człowieka.",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/ai-pacjent-pytania-placowka-v2.avif",
+          "sha256": "03a7f7f90e82dc83533e460ee959fee8bbbdd5fbd9c6180ad4e7054d42fa197f",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/ai-pacjent-pytania-placowka-v2.webp",
+          "sha256": "b67e91d064211ede2a43b4ec73ad8e6e7ee2895e4c67d7824453ca6953be1a8c",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/ai-pacjent-pytania-placowka-v2.jpg",
+          "sha256": "dcbcc7f98a328096bee0011a5ed7ef454fc3fd08c6d1d901e9d15592f343648e",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:O co pacjent może zapytać lekarza lub placówkę?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

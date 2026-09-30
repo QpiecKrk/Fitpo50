@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:56:29.157Z",
+  "slug": "kawa-jako-preworkout-po-50",
+  "html_sha256": "5781284f2a4b5221cc223ee8a8e6d7dd2a5831cf4a27679048ddfc4d093f3b69",
+  "site_html_sha256": "5781284f2a4b5221cc223ee8a8e6d7dd2a5831cf4a27679048ddfc4d093f3b69",
+  "pdf_sha256": "2095a0e9f3756914285054330355b62dd4132ed536d852cebc1d723194f82a46",
+  "site_pdf_sha256": "2095a0e9f3756914285054330355b62dd4132ed536d852cebc1d723194f82a46",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

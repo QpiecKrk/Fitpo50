@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "dieta-keto-cholesterol-ldl-hdl-badania-naukowe",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "011bee01c65a7eff26213a53102bb2e964fc25039958005a3a9970123110fd36",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta po 50-tce przygotowuje zdrowy posiłek keto – awokado, jajka, oliwa, orzechy na jasnym blacie kuchennym",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/keto-cholesterol-hero-20260929.avif",
+          "sha256": "840c2853126cf5574005d489b1335e981f82302ac87ebf02bfed27211f53ddc6",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/keto-cholesterol-hero-20260929.webp",
+          "sha256": "844acc9985812f04413e84399cf6645c60c058016d34817a2d4ed4ae6aed6817",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/keto-cholesterol-hero-20260929.jpg",
+          "sha256": "3c5ed84c02cb5e142b753e8335d25222a4c31cc086a76da1af3a28dcf8be93c1",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Kobieta po 50-tce przygotowuje zdrowy posiłek keto – awokado, jajka, oliwa, orzechy na jasnym blacie kuchennym. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak dieta keto zmienia LDL, HDL i trójglicerydy?",
+      "alt": "Infografika porównawcza: wpływ diety keto na lipidogram – LDL, HDL, trójglicerydy, grafika z polskimi opisami",
+      "caption": "Średnia z badań randomizowanych nie opisuje każdego uczestnika.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-1-20260929.avif",
+          "sha256": "54fe603cd7c01aed76289bf17a918702934f10cd4e6759b9fe6de3abcdec513c",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-1-20260929.webp",
+          "sha256": "da638450c948702cb62986f8fda7076fc25bc25bdd16fd884181f054a2fee78d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-1-20260929.jpg",
+          "sha256": "2a640efc6ec029e248ceeca94603b629ea75421693f995f2e7ccae71482e85cf",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak dieta keto zmienia LDL, HDL i trójglicerydy?”: Infografika porównawcza: wpływ diety keto na lipidogram – LDL, HDL, trójglicerydy, grafika z polskimi opisami. Zgodność z treścią potwierdza podpis: Średnia z badań randomizowanych nie opisuje każdego uczestnika."
+      }
+    },
+    {
+      "placement": "section:Dlaczego ApoB jest ważne przy wzroście LDL?",
+      "alt": "Mężczyzna po 50-tce, szczupły i aktywny, rozmawia z kardiologiem w gabinecie – trzyma wyniki z bardzo wysokim LDL",
+      "caption": "ApoB przybliża liczbę cząstek aterogennych, ponieważ każda cząstka LDL i inne cząstki zawierające ApoB mają po jednej jego kopii.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-2-20260929.avif",
+          "sha256": "816a98c3273466edfb0b0920acf034f0a9b4d4688cab3ced28f30dc44d05f2f6",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-2-20260929.webp",
+          "sha256": "b87fff91bd3e98e0f5ef5a35b5010cd11c9b404e9f3ff2966055cd8e827265b6",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-2-20260929.jpg",
+          "sha256": "6968c2817f4c22d5d912f98bf203a5416af8229c0b21459070449743e592725c",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego ApoB jest ważne przy wzroście LDL?”: Mężczyzna po 50-tce, szczupły i aktywny, rozmawia z kardiologiem w gabinecie – trzyma wyniki z bardzo wysokim LDL. Zgodność z treścią potwierdza podpis: ApoB przybliża liczbę cząstek aterogennych, ponieważ każda cząstka LDL i inne cząstki zawierające ApoB mają po jednej jego kopii."
+      }
+    },
+    {
+      "placement": "section:Co zbadać przed keto i po 8-12 tygodniach?",
+      "alt": "Mężczyzna po 55-tce konsultuje się z lekarzem pierwszego kontaktu, trzyma kartkę z wynikami badań krwi – poważna rozmowa",
+      "caption": "Przed startem zapisz lipidogram, najlepiej ApoB, ciśnienie, masę oraz przyjmowane leki; przy cukrzycy i chorobach nerek plan wymaga konsultacji.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-3-20260929.avif",
+          "sha256": "9f45caab1081387829333d0d6aedfc4d9de602efca8f8e7876eb5449be51691a",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-3-20260929.webp",
+          "sha256": "08c72ec880d3534d5ec1b2728867df655fc298e22690504e09ff7c1b2f1101c0",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-3-20260929.jpg",
+          "sha256": "c99c2fbc517834419cdb2801c91e56e95ab9e4ba0599e2fe982414cd83194e69",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co zbadać przed keto i po 8-12 tygodniach?”: Mężczyzna po 55-tce konsultuje się z lekarzem pierwszego kontaktu, trzyma kartkę z wynikami badań krwi – poważna rozmowa. Zgodność z treścią potwierdza podpis: Przed startem zapisz lipidogram, najlepiej ApoB, ciśnienie, masę oraz przyjmowane leki; przy cukrzycy i chorobach nerek plan wymaga konsultacji."
+      }
+    },
+    {
+      "placement": "section:Co zrobić, gdy LDL lub ApoB wyraźnie wzrośnie?",
+      "alt": "Grafika porównawcza: zielone strzałki w dół przy trójglicerydach i cukrze, strzałka w górę przy HDL – polskie opisy",
+      "caption": "Nie zakładaj, że wzrost jest nieszkodliwy, bo trójglicerydy spadły.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-4-20260929.avif",
+          "sha256": "57ec023f20055ec7e86a8aa92b619442dd838a186d51478c10c0b170af3223cd",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-4-20260929.webp",
+          "sha256": "515ba2318a2f9fae5ae0c97677efe44d571cc6ef4d8870a84a71b0ad02ed4641",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/dieta-keto-cholesterol-ldl-hdl-badania-naukowe-section-4-20260929.jpg",
+          "sha256": "7144431ec8331cae633fad186a38392376b06af61677b7703a186409c7bcf906",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co zrobić, gdy LDL lub ApoB wyraźnie wzrośnie?”: Grafika porównawcza: zielone strzałki w dół przy trójglicerydach i cukrze, strzałka w górę przy HDL – polskie opisy. Zgodność z treścią potwierdza podpis: Nie zakładaj, że wzrost jest nieszkodliwy, bo trójglicerydy spadły."
+      }
+    }
+  ]
+}

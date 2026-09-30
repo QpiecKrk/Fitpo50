@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "slug": "trening-silowy-po-50-cisnienie-plan-8-tygodni",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "0ac3a62b057492547c4d03b96125edb6b42237b8974fd62319dd0d19867d4d21",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T13:30:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po pięćdziesiątce wykonuje przysiad ze sztangą w nowoczesnej siłowni, w tle ekran pokazuje spadający wykres ciśnienia tętniczego",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-cisnienie-po-50-hero.avif",
+          "sha256": "233fc548e89a2dd959cfc77264a99f4f16b1502317d7d750d553e9bf8ac3bc9d",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/trening-silowy-cisnienie-po-50-hero.webp",
+          "sha256": "40cd3853760aa9260089d6db01487e1910f238b35c79c4e93423d83cb5d4dd47",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-cisnienie-po-50-hero.jpg",
+          "sha256": "68b755675c6489edc3dd3b1cc84a5f775aab82674d76427c267991e28ca83ebf",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz został obejrzany w zestawie kontrolnym; odpowiada tematowi i miejscu w artykule, a przedstawiony ruch lub sprzęt są wiarygodne wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy trening siłowy rzeczywiście obniża ciśnienie krwi?",
+      "alt": "Mężczyzna ćwiczy z hantlami, obok schemat naczynia krwionośnego pokazujący poprawę elastyczności i spadek insulinooporności",
+      "caption": "Trening siłowy poprawia elastyczność naczyń i wspiera efekt hipotensyjny.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/mechanizm-hipotensyjny-trening-naczynia.avif",
+          "sha256": "5e8fbd0baf97d21633a8237a52fa635539663bcb3a2dbd58123c11def276491d",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/mechanizm-hipotensyjny-trening-naczynia.webp",
+          "sha256": "3c08831e5ab712957aceca61ae0f06d45fe195b3c003b252953658c1400ff82d",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/mechanizm-hipotensyjny-trening-naczynia.jpg",
+          "sha256": "33b57ecd7b38dbd9951ce502922299dee78e30aaa2972e7b9fb8c327ee921e59",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz został obejrzany w zestawie kontrolnym; odpowiada tematowi i miejscu w artykule, a przedstawiony ruch lub sprzęt są wiarygodne wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jakie zakresy intensywności są bezpieczne i skuteczne po 50.?",
+      "alt": "Mężczyzna z hantlami na tle skali 1RM z zaznaczoną zieloną strefą bezpieczeństwa 40–70% i czerwonym polem ryzyka powyżej 80%",
+      "caption": "Zakres 40-70% 1RM to bezpieczna strefa intensywności przy nadciśnieniu.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/zakresy-intensywnosci-1rm-cisnienie-skala.avif",
+          "sha256": "dccd3753333cb766fa05f0f81a28d102722b8cca7f876744dc27cbd5600b69b9",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/zakresy-intensywnosci-1rm-cisnienie-skala.webp",
+          "sha256": "06a592465d9e4d8537a029ea0f07e9b9ac5b248c972366806b435c38d6d5f470",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/zakresy-intensywnosci-1rm-cisnienie-skala.jpg",
+          "sha256": "17545cc78c6e329703428112531684dd0b30d6e7461c7b80ee0cef6f9b72b25a",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz został obejrzany w zestawie kontrolnym; odpowiada tematowi i miejscu w artykule, a przedstawiony ruch lub sprzęt są wiarygodne wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co mówią najnowsze badania naukowe o treningu siłowym i ciśnieniu?",
+      "alt": "Ekspert wskazuje ekran z wykresem metaanalizy pokazującym średni spadek ciśnienia skurczowego po treningu oporowym",
+      "caption": "Metaanalizy potwierdzają spadek ciśnienia po regularnym treningu oporowym.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/badania-naukowe-cisnienie-metaanaliza-2023.avif",
+          "sha256": "a39d545a816f7c48c902e898e6ce761228fb13ae7c414d5049361f491e7a0159",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/badania-naukowe-cisnienie-metaanaliza-2023.webp",
+          "sha256": "0ba8d7e362b4c293221604529826a92bab497bbabe012e011ac8899758dc1e24",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/badania-naukowe-cisnienie-metaanaliza-2023.jpg",
+          "sha256": "7743b70fc93a835b6efa2420c52ac8b4f9c99ad9fae7ad3879dfaf203b615e67",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz został obejrzany w zestawie kontrolnym; odpowiada tematowi i miejscu w artykule, a przedstawiony ruch lub sprzęt są wiarygodne wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak trenować siłowo przy nadciśnieniu – co wolno, a czego unikać?",
+      "alt": "Mężczyzna na siłowni mierzy ciśnienie ciśnieniomierzem naramiennym przed rozpoczęciem serii ćwiczeń",
+      "caption": "Pomiar ciśnienia przed treningiem zwiększa bezpieczeństwo i kontrolę wysiłku.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/nadcisnienie-trening-pomiar-bezpieczenstwo.avif",
+          "sha256": "81599193d186ba5a05001dcaee7a80f414a259f8e1b65a04a4cd52f2a3b05638",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/nadcisnienie-trening-pomiar-bezpieczenstwo.webp",
+          "sha256": "8d44f878847faa7b23624da6f0a2baadb4f7d918cc925052a99f70affd305d87",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/nadcisnienie-trening-pomiar-bezpieczenstwo.jpg",
+          "sha256": "9992e7f9961ede485300de5efaeeaed22ebe27b07d15198c6a242246bd217763",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz został obejrzany w zestawie kontrolnym; odpowiada tematowi i miejscu w artykule, a przedstawiony ruch lub sprzęt są wiarygodne wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak wygląda plan treningu siłowego na 8 tygodni krok po kroku?",
+      "alt": "Tablica z rozpisanym planem 8 tygodni i progresją obciążenia obok ćwiczącego mężczyzny wykonującego wiosłowanie hantlą",
+      "caption": "Plan 8 tygodni opiera się na progresji obciążenia i kontrolowanej intensywności.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/plan-8-tygodni-trening-progresja-kalendarz.avif",
+          "sha256": "d6de008628ac4024a3268abf6c5dddc66a5bd32e4eebece8c6182e54d7e61e14",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/plan-8-tygodni-trening-progresja-kalendarz.webp",
+          "sha256": "38e686a049d671e4e4268f3e39dbd236468beab420a7f347993f379ce7375b10",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/plan-8-tygodni-trening-progresja-kalendarz.jpg",
+          "sha256": "096770648d77052351d2e176a5d8b8e35cd506e9d88aa9640c26bee4458bc692",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz został obejrzany w zestawie kontrolnym; odpowiada tematowi i miejscu w artykule, a przedstawiony ruch lub sprzęt są wiarygodne wizualnie."
+      }
+    },
+    {
+      "placement": "section:Po jakim czasie zobaczysz pierwsze efekty i jak je rzetelnie mierzyć?",
+      "alt": "Mężczyzna zapisuje wartości ciśnienia w dzienniku, a obok widoczny wykres trendu spadku po 8 tygodniach treningu",
+      "caption": "Systematyczny dziennik pomiarów ułatwia ocenę realnego postępu po 4-8 tygodniach.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/efekty-pomiar-cisnienie-dziennik-postep.avif",
+          "sha256": "eb9f7dd38131dfed196fc1f657b934b805d04a7d6eecee7bd6f8eb24e3aeee0c",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/efekty-pomiar-cisnienie-dziennik-postep.webp",
+          "sha256": "16517b18c2f7ecdd24d0ba25f13edbfd732eae220e37619ce3aeef1311063974",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/efekty-pomiar-cisnienie-dziennik-postep.jpg",
+          "sha256": "379cd08802fe6cf0c0e56155195718f652b244c03d10e6c0d09047c10c113230",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz został obejrzany w zestawie kontrolnym; odpowiada tematowi i miejscu w artykule, a przedstawiony ruch lub sprzęt są wiarygodne wizualnie."
+      }
+    }
+  ]
+}

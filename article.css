@@ -741,6 +741,13 @@ body.article-template .share-article-section__status {
 
 body.article-template .sources-list li {
   margin-bottom: var(--space-2);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+body.article-template .sources-list a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 body.article-template .medical-disclaimer {

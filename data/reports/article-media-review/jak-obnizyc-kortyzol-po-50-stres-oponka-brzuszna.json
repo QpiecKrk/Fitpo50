@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "0760e5c51223d06fc3f1f6bce4f69a4a55e290d4b85cde2ddea6edea56d47f3f",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce idący spokojnie przez polskie miasto o poranku, widok z perspektywy GoPro",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/kortyzol-po-50-stres-oponka-hero-20260929.avif",
+          "sha256": "3fe4634b51d57d3156a1a0273079fbd9c9d88ea8dbce91008ac5c99af17bd202",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/kortyzol-po-50-stres-oponka-hero-20260929.webp",
+          "sha256": "225a961a851e9a3bd027882a480a01051898950f0fbf93465c8f9d7ffe08548e",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/kortyzol-po-50-stres-oponka-hero-20260929.jpg",
+          "sha256": "1c214bc7022a275a8b6bb4e4bdf28d3e8e7636dac176dd53f3457b20e25dc960",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po 50-tce idący spokojnie przez polskie miasto o poranku, widok z perspektywy GoPro. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Czy wysoki kortyzol tworzy oponkę brzuszną?",
+      "alt": "Schemat reakcji tkanki tłuszczowej brzucha na przewlekły stres i kortyzol",
+      "caption": "Patologiczny nadmiar kortyzolu w zespole Cushinga może zmieniać rozmieszczenie tkanki tłuszczowej, lecz popularna „oponka kortyzolowa” nie pozwala rozpoznać tej choroby.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-1-20260929.avif",
+          "sha256": "f309633455b2c51fe450d16d04e64472d8b7cd0739d4515e03ef2979d9277524",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-1-20260929.webp",
+          "sha256": "43068a3e3da7c603dff5de94f3976eae3f495e1f96434307e47a6ca4f7019a20",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-1-20260929.jpg",
+          "sha256": "89d9619f2b3a563470ec6a666147ae30341049b698c43041b6de557aa4c38bd8",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy wysoki kortyzol tworzy oponkę brzuszną?”: Schemat reakcji tkanki tłuszczowej brzucha na przewlekły stres i kortyzol. Zgodność z treścią potwierdza podpis: Patologiczny nadmiar kortyzolu w zespole Cushinga może zmieniać rozmieszczenie tkanki tłuszczowej, lecz popularna „oponka kortyzolowa” nie pozwala rozpoznać tej choroby."
+      }
+    },
+    {
+      "placement": "section:Dlaczego pojedynczy kortyzol może wprowadzać w błąd?",
+      "alt": "Próbki śliny pobierane o różnych porach do oceny dobowego rytmu kortyzolu",
+      "caption": "Stężenie kortyzolu zmienia się w rytmie dobowym i zależy od snu, ostrego stresu, wysiłku, choroby oraz sposobu pobrania.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-2-20260929.avif",
+          "sha256": "85caae92fd0cf3a703961671635e20176804aa15aec0007f26645567a36d9d14",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-2-20260929.webp",
+          "sha256": "cf468ec6072ea841f9167dc8433d629947e7e5d8e0edaf1402cd9a7960e4ba61",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-2-20260929.jpg",
+          "sha256": "94a152da6971a3530df2f6c13dacc1c707556e07df3a32cfe87de836dfcf0e9d",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego pojedynczy kortyzol może wprowadzać w błąd?”: Próbki śliny pobierane o różnych porach do oceny dobowego rytmu kortyzolu. Zgodność z treścią potwierdza podpis: Stężenie kortyzolu zmienia się w rytmie dobowym i zależy od snu, ostrego stresu, wysiłku, choroby oraz sposobu pobrania."
+      }
+    },
+    {
+      "placement": "section:Które działania rzeczywiście pomagają przy przewlekłym stresie?",
+      "alt": "Mężczyzna po pięćdziesiątce wycisza się wieczorem przy książce",
+      "caption": "Nie istnieje jeden „detoks kortyzolu”. Ustal stałą porę wstawania, ogranicz alkohol jako środek nasenny, zaplanuj regularny umiarkowany ruch i sprawdź, czy lista obowiązków zostawia czas na regenerację.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-3-20260929.avif",
+          "sha256": "f4b0872da9ff31ec367b040c55b08b331af9751d0e88cabf4c3ec5665019d634",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-3-20260929.webp",
+          "sha256": "948643c5a85aed565e0fec47d7923dfe62dda17b901c1262bd127845ce6befb2",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-3-20260929.jpg",
+          "sha256": "1a2da02b1a04fb926e5bdd3d4221c9c00eaf7532c6a0ebe7dd718fee58229703",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Które działania rzeczywiście pomagają przy przewlekłym stresie?”: Mężczyzna po pięćdziesiątce wycisza się wieczorem przy książce. Zgodność z treścią potwierdza podpis: Nie istnieje jeden „detoks kortyzolu”. Ustal stałą porę wstawania, ogranicz alkohol jako środek nasenny, zaplanuj regularny umiarkowany ruch i sprawdź, czy lista obowiązków zostawia czas na regenerację."
+      }
+    },
+    {
+      "placement": "section:Kiedy podejrzewać zespół Cushinga?",
+      "alt": "Lekarz omawia z pacjentką objawy wymagające diagnostyki zespołu Cushinga",
+      "caption": "Podejrzenie rośnie przy kilku postępujących i względnie swoistych cechach, takich jak szerokie purpurowe rozstępy, łatwe siniaczenie, osłabienie mięśni ud i ramion, osteoporoza w nietypowym wieku albo charakterystyczne zmiany przy stosowaniu glikokortykosteroidów.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-4-20260929.avif",
+          "sha256": "f9995d030a2d9915a589ef90643be4c20c8d8d14e41876c362dc01a5587ec531",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-4-20260929.webp",
+          "sha256": "c92f5f47c22afb33e6cdcb457023b77de32d2fa2b5bf8cc538bc93a7ad890493",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/jak-obnizyc-kortyzol-po-50-stres-oponka-brzuszna-section-4-20260929.jpg",
+          "sha256": "c31b8cc31ac9b6b600db57001e2270b17fd389e209325724641e8cd784518174",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy podejrzewać zespół Cushinga?”: Lekarz omawia z pacjentką objawy wymagające diagnostyki zespołu Cushinga. Zgodność z treścią potwierdza podpis: Podejrzenie rośnie przy kilku postępujących i względnie swoistych cechach, takich jak szerokie purpurowe rozstępy, łatwe siniaczenie, osłabienie mięśni ud i ramion, osteoporoza w nietypowym wieku albo charakterystyczne zmiany przy stosowaniu glikokortykosteroidów."
+      }
+    }
+  ]
+}

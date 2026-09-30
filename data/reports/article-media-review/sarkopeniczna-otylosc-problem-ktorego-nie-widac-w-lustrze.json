@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "slug": "sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "d75a91d1949554fce77bd21143dc5dcc6211615d22431813aa30e6263a24c696",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Sylwetka po 50-tce z ukrytym ryzykiem otyłości sarkopenicznej",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/sarkopenia-lead-lustro-cien.avif",
+          "sha256": "d42ce4fe91ab8c6759207a2aebfbd9070ecd75f1df1eb63c212bc03c35272ed7",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/sarkopenia-lead-lustro-cien.webp",
+          "sha256": "98c5da12741d4d6d27c9699653b9e0702996f36d651c39a33c79dcb28b5e8d18",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/sarkopenia-lead-lustro-cien.jpg",
+          "sha256": "8cb6b73223865e1d9ff244024ca0bdcaa04846dd4130439f0e0030930c7bb304",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak definiuje się otyłość sarkopeniczną?",
+      "alt": "Schemat współistnienia nadmiaru tłuszczu i małej masy mięśniowej",
+      "caption": "Schemat współistnienia nadmiaru tłuszczu i małej masy mięśniowej",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/sarkopenia-schemat-miesnie-tluszcz.avif",
+          "sha256": "351228a18114d7b66f8acf57ef80a99a55e625ec2fedf2e1a521f3be4fee6c42",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/sarkopenia-schemat-miesnie-tluszcz.webp",
+          "sha256": "82b1a91bc9ab2e87960798ae63505aaa9bfba20218e901ed7b68878b59ce87fd",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/sarkopenia-schemat-miesnie-tluszcz.jpg",
+          "sha256": "374c57600911c512d9fec3d394e43ea76c26c1b8536b5e08881f19c3da339ef5",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak definiuje się otyłość sarkopeniczną?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Dlaczego sama waga i BMI mogą przeoczyć problem?",
+      "alt": "Test wstawania z krzesła jako przesiewowa ocena sprawności",
+      "caption": "Test wstawania z krzesła jako przesiewowa ocena sprawności",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/sarkopenia-domowy-test-krzeslo.avif",
+          "sha256": "abf0bfc17b15d27d354d9708fe5f0aa8161d34c3c23a80413c9ec451f55e5867",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/sarkopenia-domowy-test-krzeslo.webp",
+          "sha256": "9b7a35b2aa49b66ca7cf24091331cc6388aefe08c8f113dce198427d96cafd56",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/sarkopenia-domowy-test-krzeslo.jpg",
+          "sha256": "d373489d39aced2f986c7eba711f2590f4550bca41a4716ff581fcdc765a8d65",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego sama waga i BMI mogą przeoczyć problem?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak wygląda wiarygodna ocena mięśni i tłuszczu?",
+      "alt": "Trening oporowy dopasowany do możliwości osoby po 50-tce",
+      "caption": "Trening oporowy dopasowany do możliwości osoby po 50-tce",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/sarkopenia-trening-sila-50plus.avif",
+          "sha256": "ec0faa4cc29fe0c463161567d07db78a63c0580bc959352b6b94a6160083af02",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/sarkopenia-trening-sila-50plus.webp",
+          "sha256": "a942371dbdf45c31e0f783da451aae7bd3c556a449b364029bbbca03da62be42",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/sarkopenia-trening-sila-50plus.jpg",
+          "sha256": "3a2013b066e05d6d98efc12ea7ccea9e75ac803df55084960225d331017af30a",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak wygląda wiarygodna ocena mięśni i tłuszczu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co pomaga odzyskać funkcję bez utraty kolejnych mięśni?",
+      "alt": "Kobieta po 50-tce przygotowuje pełny posiłek wspierający ochronę mięśni podczas redukcji tłuszczu",
+      "caption": "Odzyskiwanie funkcji łączy trening oporowy z odpowiednią energią i białkiem rozłożonym w codziennych posiłkach.",
+      "width": 1200,
+      "height": 675,
+      "variants": {
+        "avif": {
+          "file": "assets/sarkopeniczna-otylosc-odzywianie-funkcja-20260930.avif",
+          "sha256": "3357418f14f8ca5e18973af88390a870a7d270271591e3dc29caef99997de175",
+          "width": 1200,
+          "height": 675
+        },
+        "webp": {
+          "file": "assets/sarkopeniczna-otylosc-odzywianie-funkcja-20260930.webp",
+          "sha256": "53720c0389591712889ab7b955141a928885328509351d75fe3fc7511a0f64ab",
+          "width": 1200,
+          "height": 675
+        },
+        "jpg": {
+          "file": "assets/sarkopeniczna-otylosc-odzywianie-funkcja-20260930.jpg",
+          "sha256": "8360d0fb43d59b78c9418401dc6a90ef82be86445190a4a26c68d19e4a49e521",
+          "width": 1200,
+          "height": 675
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co pomaga odzyskać funkcję bez utraty kolejnych mięśni?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

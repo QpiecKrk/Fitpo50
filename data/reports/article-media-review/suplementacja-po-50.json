@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "suplementacja-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "7394b86275149a07e5759f67918607e071a3f45d0ee55ba60572d35c0b285eef",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Blat kuchenny rano, słoik kreatyny, shaker i banan - codzienność aktywnego 50-latka",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/bialko-hero.avif",
+          "sha256": "d51cef949de11bae3f6d4a34cc4b360ad6ff601e0ca68590793ae4c3f9867f68",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/bialko-hero.webp",
+          "sha256": "f06b31209f935f0e5beedd5a71ccf2c2210258ebd89c78486947abe233dd8b89",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/bialko-hero.jpg",
+          "sha256": "782c23f2b4cf4544519b1655b2e5a53894010143d71e60066493a5df17d81a4d",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Blat kuchenny rano, słoik kreatyny, shaker i banan - codzienność aktywnego 50-latka. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Kiedy odżywka białkowa rzeczywiście ułatwia dietę?",
+      "alt": "Kobieta przygotowuje prosty koktajl białkowy w domu",
+      "caption": "Proszek może pomóc osobie z małym apetytem, ograniczonym czasem lub dietą, w której brakuje wygodnego źródła białka.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/suplementacja-po-50-section-1-20260929.avif",
+          "sha256": "b892edc38e32bb6c2e653e14facf19b9f14ab15525350e2bee882dfb37fa4ac6",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/suplementacja-po-50-section-1-20260929.webp",
+          "sha256": "e3038ad4fc65bff5c3ce89c0dd79642e0cc3eecbaf882daa2565414f1daa2453",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/suplementacja-po-50-section-1-20260929.jpg",
+          "sha256": "2127b723d9090e0613b5a0fd7e2e9517336b4985fa72b8fbd085fc9b3c1c32ad",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy odżywka białkowa rzeczywiście ułatwia dietę?”: Kobieta przygotowuje prosty koktajl białkowy w domu. Zgodność z treścią potwierdza podpis: Proszek może pomóc osobie z małym apetytem, ograniczonym czasem lub dietą, w której brakuje wygodnego źródła białka."
+      }
+    },
+    {
+      "placement": "section:Co wiadomo o kreatynie po 50-tce?",
+      "alt": "Mężczyzna odmierza porcję monohydratu kreatyny",
+      "caption": "Metaanalizy wskazują, że kreatyna dodana do treningu oporowego może zwiększać przyrost siły i beztłuszczowej masy w porównaniu z samym treningiem.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/suplementacja-po-50-section-2-20260929.avif",
+          "sha256": "23bcd2c71c032c033179c082ad59cce2807d1058983041ce8ff6f715990bc738",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/suplementacja-po-50-section-2-20260929.webp",
+          "sha256": "f00f3a836d964bf04cc5ba439eb3ccb7f479d5fa1d61790241ddf26142de48c6",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/suplementacja-po-50-section-2-20260929.jpg",
+          "sha256": "dc8b36058f77f06a92acf1bcf2829ef37e3cef7a89088a565261cde6d1d5b782",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co wiadomo o kreatynie po 50-tce?”: Mężczyzna odmierza porcję monohydratu kreatyny. Zgodność z treścią potwierdza podpis: Metaanalizy wskazują, że kreatyna dodana do treningu oporowego może zwiększać przyrost siły i beztłuszczowej masy w porównaniu z samym treningiem."
+      }
+    },
+    {
+      "placement": "section:Czy białko i kreatynę trzeba brać po treningu?",
+      "alt": "Kobieta po treningu je pełnowartościowy posiłek",
+      "caption": "Regularność całej diety ma większe znaczenie niż wąskie „okno anaboliczne”.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/suplementacja-po-50-section-3-20260929.avif",
+          "sha256": "fd0b122e378a823d9979baf9921277353e0a4d1011a4f3b9ece956a0e7f7a25b",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/suplementacja-po-50-section-3-20260929.webp",
+          "sha256": "b5096d661fb820f6ebdc1e01e3301d354c1201df65d92326706ee415b2d76d09",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/suplementacja-po-50-section-3-20260929.jpg",
+          "sha256": "d063dcad317616fe30f4506db64c84f263db769ab3d6b9267a73a22857b9dc21",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy białko i kreatynę trzeba brać po treningu?”: Kobieta po treningu je pełnowartościowy posiłek. Zgodność z treścią potwierdza podpis: Regularność całej diety ma większe znaczenie niż wąskie „okno anaboliczne”."
+      }
+    },
+    {
+      "placement": "section:Kiedy potrzebna jest konsultacja?",
+      "alt": "Lekarka przegląda z pacjentem stosowane suplementy",
+      "caption": "Przewlekła choroba nerek, nieprawidłowy eGFR, konieczność ograniczania białka lub płynów oraz leki nefrotoksyczne wymagają omówienia suplementacji z lekarzem lub dietetykiem klinicznym.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/suplementacja-po-50-section-4-20260929.avif",
+          "sha256": "bfdaf8798a2bffd3570c9474aac23cd464d2f5af5402697b80186196a71d89c7",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/suplementacja-po-50-section-4-20260929.webp",
+          "sha256": "884a023ba16fb9b7f060ccb27e65d1e8d3a661965135eb3c0a25e00ffbf18f35",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/suplementacja-po-50-section-4-20260929.jpg",
+          "sha256": "22ecb13a822be58bfe71b48f58c4d7d38c4f58bb3816d0e77086c964dd30b1ee",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy potrzebna jest konsultacja?”: Lekarka przegląda z pacjentem stosowane suplementy. Zgodność z treścią potwierdza podpis: Przewlekła choroba nerek, nieprawidłowy eGFR, konieczność ograniczania białka lub płynów oraz leki nefrotoksyczne wymagają omówienia suplementacji z lekarzem lub dietetykiem klinicznym."
+      }
+    },
+    {
+      "placement": "section:Czego nie warto kupować w ciemno?",
+      "alt": "Kobieta ostrożnie porównuje suplementy na sklepowej półce",
+      "caption": "Mieszanki z wieloma składnikami utrudniają ocenę dawki i przyczyny działań niepożądanych.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/suplementacja-po-50-section-5-20260929.avif",
+          "sha256": "b300f728469724cb707c2fe8bf75a732688c933adca9e40a03317e83e0570ca3",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/suplementacja-po-50-section-5-20260929.webp",
+          "sha256": "3be8c455e05f1af589e77ea1e13b3f327b0cbbe232a9f3fa7f5de27a06571913",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/suplementacja-po-50-section-5-20260929.jpg",
+          "sha256": "9877c2e3a1fd78412bcf8a04139c67703a166ecfcc41eb671981fc105589e05c",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czego nie warto kupować w ciemno?”: Kobieta ostrożnie porównuje suplementy na sklepowej półce. Zgodność z treścią potwierdza podpis: Mieszanki z wieloma składnikami utrudniają ocenę dawki i przyczyny działań niepożądanych."
+      }
+    }
+  ]
+}

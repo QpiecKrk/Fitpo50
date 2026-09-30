@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "trening-silowy-starzenie-komorkowe-dna",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "d60a317c772c72fb1071324ae4caaa042a0eb82911d8d621b6b77c3de8da5c01",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Mężczyzna po 50-tce ćwiczy ze sztangą na tle wizualizacji telomerów DNA",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-dna-hero.avif",
+          "sha256": "92eb49eae288dc6b74cba9026afb6b8c08081dba9e9bb63cbb1a9d247e9e0510",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/trening-silowy-dna-hero.webp",
+          "sha256": "feababb892340f8ee9f563ecab0520edd65e0cba366ef3468c9be13d1281d778",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-dna-hero.jpg",
+          "sha256": "2aebab6fe911cb3514d3510c3ae8afb0269717f17c40d8ed91507f2f526fba45",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po 50-tce ćwiczy ze sztangą na tle wizualizacji telomerów DNA. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę mierzą telomery i zegary epigenetyczne?",
+      "alt": "Artystyczna wizualizacja telomerów na końcach chromosomów",
+      "caption": "Telomery są fragmentami chroniącymi końce chromosomów, a ich długość różni się między tkankami i ludźmi.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-1-20260929.avif",
+          "sha256": "6739496e2bcaa84484e5757cb0e3595b8093c6c039616b4923ca486f70defc8f",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-1-20260929.webp",
+          "sha256": "b288892d7a155f7de0f8eeb1acea9fb57ee2b5a65bd16c91d287eb5aadf530e1",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-1-20260929.jpg",
+          "sha256": "cd89ede0918ab9caad7b869fdb9871f6b96a8253e6eaf3dddbea110fb3e1816d",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co naprawdę mierzą telomery i zegary epigenetyczne?”: Artystyczna wizualizacja telomerów na końcach chromosomów. Zgodność z treścią potwierdza podpis: Telomery są fragmentami chroniącymi końce chromosomów, a ich długość różni się między tkankami i ludźmi."
+      }
+    },
+    {
+      "placement": "section:Czy 90 minut treningu odmładza komórki o cztery lata?",
+      "alt": "Stylizowane połączenie włókien mięśniowych z nicią DNA",
+      "caption": "Badanie obserwacyjne może wykazać, że osoby deklarujące więcej treningu oporowego mają przeciętnie inny profil telomerów.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-2-20260929.avif",
+          "sha256": "b74573eb89829623bcc8d32f8fe6349fd69bb8cdbc8a9e4f5b27c7a16643d194",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-2-20260929.webp",
+          "sha256": "77fb5136daf2d9c512d941dc0c49d6b1526941cc2673bd0abdc9d5b570e4e001",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-2-20260929.jpg",
+          "sha256": "3005d8bcec2391bd56326167deaf39dbb68b62c6ce67496fee30b2fc024fdf6b",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy 90 minut treningu odmładza komórki o cztery lata?”: Stylizowane połączenie włókien mięśniowych z nicią DNA. Zgodność z treścią potwierdza podpis: Badanie obserwacyjne może wykazać, że osoby deklarujące więcej treningu oporowego mają przeciętnie inny profil telomerów."
+      }
+    },
+    {
+      "placement": "section:Jak mięśnie wpływają na cały organizm?",
+      "alt": "Wizualizacja miokinin płynących od mięśni do mózgu",
+      "caption": "Pracujące mięśnie uwalniają substancje sygnałowe nazywane miokinami i zmieniają wykorzystanie glukozy.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-3-20260929.avif",
+          "sha256": "4d1daa3206f28cc76b7d5bdd5c2c1ceb65966171704b634491d033adcb3805c0",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-3-20260929.webp",
+          "sha256": "31d927d2994437e8c5b20ab7ba9f0cc9a0aa2dc64070454e0e4072b2fe3a24a4",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-3-20260929.jpg",
+          "sha256": "1641bdd3d7034d55fc00e5ac4a97c150702c9fd7539969d25237c1f2083bcd2c",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak mięśnie wpływają na cały organizm?”: Wizualizacja miokinin płynących od mięśni do mózgu. Zgodność z treścią potwierdza podpis: Pracujące mięśnie uwalniają substancje sygnałowe nazywane miokinami i zmieniają wykorzystanie glukozy."
+      }
+    },
+    {
+      "placement": "section:Czy siła chwytu przewiduje długość życia?",
+      "alt": "Zbliżenie na dłonie trzymające hantlę",
+      "caption": "Słabszy chwyt wiąże się w dużych badaniach z większym ryzykiem niesprawności i zgonu.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-4-20260929.avif",
+          "sha256": "c5c67128e5530170d57eed9bc6f04d8a014336ac689ff175ab6b5b4fd8fe4bd5",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-4-20260929.webp",
+          "sha256": "f7b08beb006a90ae2761782f82e6ce8997591231aee44ecfac518c68a89977bd",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-4-20260929.jpg",
+          "sha256": "dd36376a49d07659c7bc0f90eeeae7381719a98f7a64c04a6a0bc9de5ea44f83",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy siła chwytu przewiduje długość życia?”: Zbliżenie na dłonie trzymające hantlę. Zgodność z treścią potwierdza podpis: Słabszy chwyt wiąże się w dużych badaniach z większym ryzykiem niesprawności i zgonu."
+      }
+    },
+    {
+      "placement": "section:Jaka dawka treningu ma najlepsze oparcie w wytycznych?",
+      "alt": "Para po 50-tce ćwicząca razem w nowoczesnej siłowni",
+      "caption": "WHO zaleca dorosłym wykonywanie ćwiczeń wzmacniających wszystkie główne grupy mięśni co najmniej dwa dni w tygodniu.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-5-20260929.avif",
+          "sha256": "7740aa04c68b87b2eb054354416efabec2a319b3e652760086993b0671058f92",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-5-20260929.webp",
+          "sha256": "cbee740ed6257d04c8d0ed7582fe676d5fc221ee9b6d6dd39c6fad690a307d49",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-starzenie-komorkowe-dna-section-5-20260929.jpg",
+          "sha256": "184abbda8a10dea06ec4fd16097db9becb53bde6350029635151ef9bbb9a73c1",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jaka dawka treningu ma najlepsze oparcie w wytycznych?”: Para po 50-tce ćwicząca razem w nowoczesnej siłowni. Zgodność z treścią potwierdza podpis: WHO zaleca dorosłym wykonywanie ćwiczeń wzmacniających wszystkie główne grupy mięśni co najmniej dwa dni w tygodniu."
+      }
+    }
+  ]
+}

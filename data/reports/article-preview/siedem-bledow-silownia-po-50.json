@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T12:59:38.981Z",
+  "slug": "siedem-bledow-silownia-po-50",
+  "html_sha256": "07fda5916e49cc412e5fbab5418047f478b74ccee9da5eb4ec891b85eabffeb4",
+  "site_html_sha256": "07fda5916e49cc412e5fbab5418047f478b74ccee9da5eb4ec891b85eabffeb4",
+  "pdf_sha256": "36c8a3054cedffe8d019055c690340337c4dd24e4c5a316342a4b11d744006b3",
+  "site_pdf_sha256": "36c8a3054cedffe8d019055c690340337c4dd24e4c5a316342a4b11d744006b3",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 1,
+    "rendered_pages": 4
+  },
+  "errors": []
+}

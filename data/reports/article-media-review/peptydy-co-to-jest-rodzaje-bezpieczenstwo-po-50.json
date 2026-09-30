@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "11e98e1060357fab2d21491e803bf4ad182170d40900ce44c9f1354d5b335e4e",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda?",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-lancuch-aminokwasow-molekularny-hero-20260929.avif",
+          "sha256": "d47f5a746b6b1bcc08b579ead6da4567095837f92dec0512c0587c3731339834",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/peptydy-lancuch-aminokwasow-molekularny-hero-20260929.webp",
+          "sha256": "1fc81f20db76fbe0f3f7fdc9f79bafa9ae03a3bfeaa7afea642b65f9df08a40d",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/peptydy-lancuch-aminokwasow-molekularny-hero-20260929.jpg",
+          "sha256": "385d22bd3e63d511371637e2c6695c8bc20ff390edaeaef4a28f0af86d314e48",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda?. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co oznacza słowo „peptyd”?",
+      "alt": "Peptydy: co to jest i dlaczego rządzą Twoim ciałem?",
+      "caption": "Peptydy są zbudowane z aminokwasów i pełnią w organizmie różne funkcje sygnałowe.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-1-20260929.avif",
+          "sha256": "fb66be0af9f74a6c28cc0b83201336d52f6845786b054c9061c7ff129d1a641a",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-1-20260929.webp",
+          "sha256": "afcb8576d676d06a16a7560e994650cf647d7a84bf7ace4c0229d3b2b3f530a6",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-1-20260929.jpg",
+          "sha256": "3ade8214f77e7c94c65ee59c7e916a76f15dadcfafa79625b75c6a319aa84389",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co oznacza słowo „peptyd”?”: Peptydy: co to jest i dlaczego rządzą Twoim ciałem?. Zgodność z treścią potwierdza podpis: Peptydy są zbudowane z aminokwasów i pełnią w organizmie różne funkcje sygnałowe."
+      }
+    },
+    {
+      "placement": "section:Czym zatwierdzony lek różni się od produktu z internetu?",
+      "alt": "Bezpieczeństwo i drogi podania: jak nie dać się nabrać na „hype”",
+      "caption": "Lek przechodzi badania jakości, dawkowania, skuteczności i działań niepożądanych dla określonego wskazania.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-2-20260929.avif",
+          "sha256": "e923de4dce85db632240966777c79d421bca53ece532d9cdb455ef1a3cb5916c",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-2-20260929.webp",
+          "sha256": "49ee2dfb5140a95743b023758bd333d19e108f53eb55e25af1b6b63854965b73",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-2-20260929.jpg",
+          "sha256": "81a6db7ae4d347fe3b0acda8f6b2ccbc64230727895d83794efd6a60f0a8d019",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czym zatwierdzony lek różni się od produktu z internetu?”: Bezpieczeństwo i drogi podania: jak nie dać się nabrać na „hype”. Zgodność z treścią potwierdza podpis: Lek przechodzi badania jakości, dawkowania, skuteczności i działań niepożądanych dla określonego wskazania."
+      }
+    },
+    {
+      "placement": "section:Co wiadomo o BPC-157 i TB-500?",
+      "alt": "Szara strefa (BPC-157, TB-500): rewolucja czy ryzykowne eksperymenty?",
+      "caption": "FDA opisuje BPC-157 oraz fragment tymozyny beta-4 znany jako TB-500 jako substancje z niewystarczającymi danymi o ekspozycji i bezpieczeństwie u ludzi.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-3-20260929.avif",
+          "sha256": "35eecff8b80cec583ba6f67703c80a9b76e65f440ad572daf891c90a52eb48f8",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-3-20260929.webp",
+          "sha256": "b616324bfb05fce8b70b7c18810bdc9f1c81e8fec15717020c2d764bbd52a64d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-3-20260929.jpg",
+          "sha256": "6974fd0204f5efb3b8bbe469e441fbda20dc6133849fc706b32a87fbeb7898c8",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co wiadomo o BPC-157 i TB-500?”: Szara strefa (BPC-157, TB-500): rewolucja czy ryzykowne eksperymenty?. Zgodność z treścią potwierdza podpis: FDA opisuje BPC-157 oraz fragment tymozyny beta-4 znany jako TB-500 jako substancje z niewystarczającymi danymi o ekspozycji i bezpieczeństwie u ludzi."
+      }
+    },
+    {
+      "placement": "section:Czy peptydy w kosmetyku działają jak zastrzyk?",
+      "alt": "Kosmetyki i GHK-Cu: jak peptydy regenerują skórę od zewnątrz",
+      "caption": "Nie. Preparat miejscowy, suplement doustny i lek w iniekcji mają inne wchłanianie, dawkę oraz wymagania dowodowe.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-4-20260929.avif",
+          "sha256": "689320989ec4f7efafa73d3d7057052774b7f91bdb0c4afccfcaf47a196ad638",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-4-20260929.webp",
+          "sha256": "a88772f5b914d0c7e7965344270bb3595aae9cde1ff6e3d762bd2982db0f83e1",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-section-4-20260929.jpg",
+          "sha256": "8f84a2aa441e05896d6b39c8cfad37f51d4542e22d93d1f94041031fbb8d4db0",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy peptydy w kosmetyku działają jak zastrzyk?”: Kosmetyki i GHK-Cu: jak peptydy regenerują skórę od zewnątrz. Zgodność z treścią potwierdza podpis: Nie. Preparat miejscowy, suplement doustny i lek w iniekcji mają inne wchłanianie, dawkę oraz wymagania dowodowe."
+      }
+    }
+  ]
+}

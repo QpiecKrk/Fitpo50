@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "upf-jedzenie-ultra-przetworzone-uzaleznienie",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "9ab6d8d3afb6ce13496d1ee2aed61957615217f7a09172dd01833a24b3566953",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Wizualizacja mózgu reagującego na ultra-przetworzoną przekąskę",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/upf-mozg-chips-hero.avif",
+          "sha256": "0ce3782b77c3ee57a9dc3b9fdfbc9141d7d6611dfd6c8fd37cf804f0e2ab85cb",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/upf-mozg-chips-hero.webp",
+          "sha256": "26f596ad7f545e200198da851ca220743aee3f33f60e899b418b33c8b5b0e654",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/upf-mozg-chips-hero.jpg",
+          "sha256": "c4316203650577e24df2e0e756814a4b35b65005638b270521315fd8c0e37fd3",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Wizualizacja mózgu reagującego na ultra-przetworzoną przekąskę. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co oznacza UPF w klasyfikacji NOVA?",
+      "alt": "Osoba po 50-tce czytająca z uwagą etykietę produktu w sklepie",
+      "caption": "Ultra-przetworzona żywność to przemysłowe formulacje zwykle z wieloma składnikami, w tym substancjami rzadko używanymi w domowej kuchni.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-1-20260929.avif",
+          "sha256": "b17ce8393a00ad287eab5b614ac24e4d2b62d83870047551f7ae6655fb4e976b",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-1-20260929.webp",
+          "sha256": "337dc9f0ba407d558730dc07c681b63f1938bc4ef7609885308ef2910cf409d1",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-1-20260929.jpg",
+          "sha256": "72827d1cd50a8291a00bec0bb2822656c6532cfcefc115cc4cb4c744e00097f0",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co oznacza UPF w klasyfikacji NOVA?”: Osoba po 50-tce czytająca z uwagą etykietę produktu w sklepie. Zgodność z treścią potwierdza podpis: Ultra-przetworzona żywność to przemysłowe formulacje zwykle z wieloma składnikami, w tym substancjami rzadko używanymi w domowej kuchni."
+      }
+    },
+    {
+      "placement": "section:Co wykazało randomizowane badanie NIH?",
+      "alt": "Laboratorium żywnościowe z precyzyjnie ważonymi składnikami",
+      "caption": "W badaniu stacjonarnym dwadzieścia osób przez dwa tygodnie jadło dietę ultra-przetworzoną, a przez kolejne dwa dietę nieprzetworzoną, w losowej kolejności.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-2-20260929.avif",
+          "sha256": "3ef1bc2c7810b638659f513467bc70964edec4033e8ee76087e500d9111097fd",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-2-20260929.webp",
+          "sha256": "0200f3d8a496f04a070c39759869a8c5fa6e6a006c7245c42d94f10550fd24f7",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-2-20260929.jpg",
+          "sha256": "cc93b54f56bb53d759c587956f0ecdb30689e0db741b65a94e3885df24b198b8",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co wykazało randomizowane badanie NIH?”: Laboratorium żywnościowe z precyzyjnie ważonymi składnikami. Zgodność z treścią potwierdza podpis: W badaniu stacjonarnym dwadzieścia osób przez dwa tygodnie jadło dietę ultra-przetworzoną, a przez kolejne dwa dietę nieprzetworzoną, w losowej kolejności."
+      }
+    },
+    {
+      "placement": "section:Czy reakcja mózgu oznacza uzależnienie jak od narkotyków?",
+      "alt": "Wizualizacja receptorów dopaminy w mózgu",
+      "caption": "Jedzenie i substancje psychoaktywne angażują część wspólnych obwodów nagrody, ale sam obraz aktywacji mózgu nie dowodzi identycznej siły, farmakologii ani ryzyka.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-3-20260929.avif",
+          "sha256": "6a68ef042eeaece7756c96508e5f426fb1bdf16b9a2b1fde9ccfd00c0838f83c",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-3-20260929.webp",
+          "sha256": "469dac99c89463487728d9ba42598252418062c91ae7fe55aec67b1961053a58",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-3-20260929.jpg",
+          "sha256": "efcdd2263459094bf8076c385b2c518744d716fba235d9ef65c8f75a753db053",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy reakcja mózgu oznacza uzależnienie jak od narkotyków?”: Wizualizacja receptorów dopaminy w mózgu. Zgodność z treścią potwierdza podpis: Jedzenie i substancje psychoaktywne angażują część wspólnych obwodów nagrody, ale sam obraz aktywacji mózgu nie dowodzi identycznej siły, farmakologii ani ryzyka."
+      }
+    },
+    {
+      "placement": "section:Co mierzy Yale Food Addiction Scale?",
+      "alt": "Kobieta po 50-tce zastanawiająca się nad wyborem między owocem a przekąską",
+      "caption": "YFAS przenosi kryteria zaburzeń związanych z używaniem substancji na zachowania dotyczące jedzenia.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-4-20260929.avif",
+          "sha256": "1b41895f58384130c336d7bda5926276a8efb8a175e6014e41d5fb38e0bcc61a",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-4-20260929.webp",
+          "sha256": "0fc177c1b5c096abc8d1f13aefad14146853893924b74f88351c2a9b8de01c39",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-4-20260929.jpg",
+          "sha256": "441f60bf326978d0f2578ccaecc706847993dd5a0b27fe8a28ab093c08744fcc",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co mierzy Yale Food Addiction Scale?”: Kobieta po 50-tce zastanawiająca się nad wyborem między owocem a przekąską. Zgodność z treścią potwierdza podpis: YFAS przenosi kryteria zaburzeń związanych z używaniem substancji na zachowania dotyczące jedzenia."
+      }
+    },
+    {
+      "placement": "section:Jak ograniczyć UPF bez zasady wszystko albo nic?",
+      "alt": "Para po 50-tce wspólnie przygotowująca posiłek z warzyw",
+      "caption": "Najpierw wybierz produkt jedzony najczęściej, a nie najbardziej „zakazany”.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-5-20260929.avif",
+          "sha256": "126414b7669a583f6d120955ae561d41a4c1a8f0e9c89ad48fd975ebed285ec6",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-5-20260929.webp",
+          "sha256": "e5f630a0361664de769ec338a45d1d78bd62de3a57c9a00341dbd465def82a1d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/upf-jedzenie-ultra-przetworzone-uzaleznienie-section-5-20260929.jpg",
+          "sha256": "393aeb0c800c3daa6e68cd3c891104bd6cd83e25b9158efded32a6d3325104d1",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak ograniczyć UPF bez zasady wszystko albo nic?”: Para po 50-tce wspólnie przygotowująca posiłek z warzyw. Zgodność z treścią potwierdza podpis: Najpierw wybierz produkt jedzony najczęściej, a nie najbardziej „zakazany”."
+      }
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "2f108fc63bb5e3e1327fcff2657723fbe21ef3155912bd62b559059847f85546",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Starsza kobieta siedzi na ławce, trzyma dłoń na klatce piersiowej, patrzy w zamyśleniu w dal – symbol cichej choroby serca",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/hfpef-cicha-epidemia-hero-20260929.avif",
+          "sha256": "c53dbc8c6af61816401e02817079a1a520e5e6b08a1d9226528b075717352029",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/hfpef-cicha-epidemia-hero-20260929.webp",
+          "sha256": "2963bce0d8fe842d8f387bf9e970e260f340bc96ddaa128b6653e2f739c3f856",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/hfpef-cicha-epidemia-hero-20260929.jpg",
+          "sha256": "9f168adcab4fe5385127cd08951bfae8bd023082ae67f230512e9ed3028d52a8",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Starsza kobieta siedzi na ławce, trzyma dłoń na klatce piersiowej, patrzy w zamyśleniu w dal – symbol cichej choroby serca. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Dlaczego prawidłowa frakcja wyrzutowa nie zamyka diagnostyki?",
+      "alt": "Schemat porównujący zdrowe serce i serce z HFpEF – widoczna pogrubiona ściana lewej komory i mniejsza objętość napełniania",
+      "caption": "Frakcja wyrzutowa opisuje odsetek krwi wyrzucanej z lewej komory podczas skurczu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-1-20260929.avif",
+          "sha256": "3689f0668ff0ee812ff5fe777b3bae6092914687bf4c706e33a8fc015bf00ee6",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-1-20260929.webp",
+          "sha256": "745f09dc39c18f116b228ed18a0c3a69197be9f431cd063e0fa1059d541672ef",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-1-20260929.jpg",
+          "sha256": "1b4e00b1d1b6397264bfee212a5a2fb802fbf43380266e4917ab1d95090d6664",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego prawidłowa frakcja wyrzutowa nie zamyka diagnostyki?”: Schemat porównujący zdrowe serce i serce z HFpEF – widoczna pogrubiona ściana lewej komory i mniejsza objętość napełniania. Zgodność z treścią potwierdza podpis: Frakcja wyrzutowa opisuje odsetek krwi wyrzucanej z lewej komory podczas skurczu."
+      }
+    },
+    {
+      "placement": "section:Jakie objawy i sygnały alarmowe wymagają reakcji?",
+      "alt": "Dojrzała kobieta zatrzymuje się na połowie klatki schodowej, trzyma się poręczy, oddycha głęboko – symbol duszności wysiłkowej w HFpEF",
+      "caption": "Typowe są duszność wysiłkowa, mniejsza tolerancja ruchu, obrzęki nóg i duszność przy leżeniu, ale te objawy mają również inne przyczyny.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-2-20260929.avif",
+          "sha256": "f01eea140cec0d72fcf64347c569ba087443199ceec96bf8e96a29cf87ea495c",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-2-20260929.webp",
+          "sha256": "3f234a7cc233de52462ec354b5e7d8fedc60d98f96cebb39103049df46ef45c8",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-2-20260929.jpg",
+          "sha256": "d6187bb203cd015de0343400cb9015a9360205c7ac3570527fd2c524d7f7c74b",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jakie objawy i sygnały alarmowe wymagają reakcji?”: Dojrzała kobieta zatrzymuje się na połowie klatki schodowej, trzyma się poręczy, oddycha głęboko – symbol duszności wysiłkowej w HFpEF. Zgodność z treścią potwierdza podpis: Typowe są duszność wysiłkowa, mniejsza tolerancja ruchu, obrzęki nóg i duszność przy leżeniu, ale te objawy mają również inne przyczyny."
+      }
+    },
+    {
+      "placement": "section:Jak lekarz potwierdza lub wyklucza HFpEF?",
+      "alt": "Kardiolog przy aparacie ultrasonograficznym wykonuje echo wysiłkowe u pacjenta – badanie kluczowe w diagnostyce HFpEF",
+      "caption": "Ocena zwykle obejmuje wywiad, badanie, EKG, echo i BNP lub NT-proBNP oraz poszukiwanie innych przyczyn duszności.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-3-20260929.avif",
+          "sha256": "a7652ec4a84e358d9e3c02bc49b914c2112dd978482e5b15424bf64f0d58e369",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-3-20260929.webp",
+          "sha256": "c5fb35f147102921fb7cacc46ed7439bde09ee8aa07cff3bae10ac5d555858fc",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-3-20260929.jpg",
+          "sha256": "1b4ca60126adba710493466eae83d8d5dcc34a55196db084767fb806cf07c737",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak lekarz potwierdza lub wyklucza HFpEF?”: Kardiolog przy aparacie ultrasonograficznym wykonuje echo wysiłkowe u pacjenta – badanie kluczowe w diagnostyce HFpEF. Zgodność z treścią potwierdza podpis: Ocena zwykle obejmuje wywiad, badanie, EKG, echo i BNP lub NT-proBNP oraz poszukiwanie innych przyczyn duszności."
+      }
+    },
+    {
+      "placement": "section:Jak obecnie leczy się HFpEF?",
+      "alt": "Para aktywnych seniorów w średnim wieku uprawia nordic walking w parku – symbol rehabilitacji kardiologicznej i leczenia HFpEF przez aktywność fizyczną",
+      "caption": "Leczenie dobiera się do zastoju, ciśnienia, rytmu serca, funkcji nerek, cukrzycy, masy ciała i innych chorób.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-4-20260929.avif",
+          "sha256": "b9ed0c1d9355cc69182816052850e4adc6f8e56b1aa3b5f7406de05f563603e6",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-4-20260929.webp",
+          "sha256": "c4fb8d100149928a035b80cfe858678b71d5914e4eabf5b41ab28e4fd10500ff",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50-section-4-20260929.jpg",
+          "sha256": "7eea37baa66db7bb144a78ce53b490ecd1743404f1896949e2f4f798750a3498",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak obecnie leczy się HFpEF?”: Para aktywnych seniorów w średnim wieku uprawia nordic walking w parku – symbol rehabilitacji kardiologicznej i leczenia HFpEF przez aktywność fizyczną. Zgodność z treścią potwierdza podpis: Leczenie dobiera się do zastoju, ciśnienia, rytmu serca, funkcji nerek, cukrzycy, masy ciała i innych chorób."
+      }
+    }
+  ]
+}

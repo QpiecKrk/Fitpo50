@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "07679146ce0357151ef90c74fac5f29cb726d79e12f8e6f28c9fcc1a7148c6a3",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Dojrzały mężczyzna przy stole z zegarkiem i zdrowym posiłkiem — post przerywany po 50-tce",
+      "caption": "",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/if-50plus-hero.avif",
+          "sha256": "a39ae4bff22936aea356a6f3b40c02cb6179e389a4ce095c2714f2dd0d94b5f9",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/if-50plus-hero.webp",
+          "sha256": "fb84a63aa89990e40ee56d25452bc7b342bebf7f5c62a5a9b213e174bb8629bd",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/if-50plus-hero.jpg",
+          "sha256": "4d1bbbb7d4e094c6426c12567a3919d41a6f64907ac448abb6df74cc589ded6b",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Dojrzały mężczyzna przy stole z zegarkiem i zdrowym posiłkiem — post przerywany po 50-tce. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co pokazują badania porównujące IF ze zwykłą dietą?",
+      "alt": "Infografika przedstawiająca trzy warianty postu przerywanego: 16:8, 5:2 i ADF",
+      "caption": "Metaanaliza sieciowa BMJ objęła 99 randomizowanych badań i 6582 dorosłych.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-1-20260929.avif",
+          "sha256": "04af32fa90a76709db77c92932c23874499ce7aa3a4b0bbf5800833d486d45a8",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-1-20260929.webp",
+          "sha256": "fc31e35173e6c8a80ab923fd72503184742d8252adfadb66776bf78bbdb19a3b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-1-20260929.jpg",
+          "sha256": "bcb0d136d3ff800fd282f08ab4c7a77d30a71a667f9c82a0a279b759032b4b8d",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co pokazują badania porównujące IF ze zwykłą dietą?”: Infografika przedstawiająca trzy warianty postu przerywanego: 16:8, 5:2 i ADF. Zgodność z treścią potwierdza podpis: Metaanaliza sieciowa BMJ objęła 99 randomizowanych badań i 6582 dorosłych."
+      }
+    },
+    {
+      "placement": "section:Dlaczego mięśnie są ważnym ograniczeniem po 50-tce?",
+      "alt": "Porównanie aktywnej masy mięśniowej i anatomii mięśnia — ryzyko sarkopenii po 50-tce",
+      "caption": "W krótkim oknie jedzenia trudniej czasem zmieścić pełne posiłki i rozłożyć białko.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-2-20260929.avif",
+          "sha256": "b75e0ec2cc3a1af343c69f2e6ea4c58ddd5f3da5280e13a6d3ea74bb702ac90a",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-2-20260929.webp",
+          "sha256": "0073a61194995716db103e2136e10d4121d1eb7941c02bbe112499c6fcc9a17c",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-2-20260929.jpg",
+          "sha256": "ae19eb944c965de05fafcf21caca574ba117bf5b023fda9370fab259e2df8c81",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego mięśnie są ważnym ograniczeniem po 50-tce?”: Porównanie aktywnej masy mięśniowej i anatomii mięśnia — ryzyko sarkopenii po 50-tce. Zgodność z treścią potwierdza podpis: W krótkim oknie jedzenia trudniej czasem zmieścić pełne posiłki i rozłożyć białko."
+      }
+    },
+    {
+      "placement": "section:Kto nie powinien eksperymentować samodzielnie?",
+      "alt": "Infografika: bezwzględne przeciwwskazania i sytuacje wymagające konsultacji przy poście przerywanym",
+      "caption": "Insulina i część leków przeciwcukrzycowych może wywołać hipoglikemię, gdy zmieniają się godziny i ilość posiłków.",
+      "width": 1080,
+      "height": 806,
+      "variants": {
+        "avif": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-3-20260929.avif",
+          "sha256": "c388a5d49c88f60751a2feb4915723446f5d6dcba4f13024673675c670e4deed",
+          "width": 1080,
+          "height": 806
+        },
+        "webp": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-3-20260929.webp",
+          "sha256": "14492ebc792d6a8440275605591ba6bdf744af0cc8d70f449658eaf56ecfc4f6",
+          "width": 1080,
+          "height": 806
+        },
+        "jpg": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-3-20260929.jpg",
+          "sha256": "2d179045734b90f0c70299cbf0049c451af045cffb9b9eb7578f2860a807bcd4",
+          "width": 1080,
+          "height": 806
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kto nie powinien eksperymentować samodzielnie?”: Infografika: bezwzględne przeciwwskazania i sytuacje wymagające konsultacji przy poście przerywanym. Zgodność z treścią potwierdza podpis: Insulina i część leków przeciwcukrzycowych może wywołać hipoglikemię, gdy zmieniają się godziny i ilość posiłków."
+      }
+    },
+    {
+      "placement": "section:Jak przetestować łagodniejszy wariant?",
+      "alt": "Trzy posiłki bogate w białko rozłożone w oknie żywieniowym 8 godzin — plan TRE 16:8",
+      "caption": "Zacznij od regularnej przerwy nocnej, na przykład 12 godzin, bez automatycznego przechodzenia do jednego posiłku dziennie.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-4-20260929.avif",
+          "sha256": "73091ee4a8526570d0a81c3589669f312f5c374bf61bd2e91c5cb11d36fe0e3e",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-4-20260929.webp",
+          "sha256": "aded6ff29bbb107d361c06cfff802fbba25e4dd50c8dd4e4c9f6e7050508ad97",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-4-20260929.jpg",
+          "sha256": "6e0c746bb818c4fa450d6422f4cac5384d8d25a443e686b64e2ee78a99a260b9",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak przetestować łagodniejszy wariant?”: Trzy posiłki bogate w białko rozłożone w oknie żywieniowym 8 godzin — plan TRE 16:8. Zgodność z treścią potwierdza podpis: Zacznij od regularnej przerwy nocnej, na przykład 12 godzin, bez automatycznego przechodzenia do jednego posiłku dziennie."
+      }
+    }
+  ]
+}

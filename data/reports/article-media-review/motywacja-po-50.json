@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "motywacja-po-50",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "fc660795df47b72530c5a31ee17e93f498973cd3bbda0f41b271f2d13c6a01b6",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Osoba rano przed treningiem, widać lekkie wahanie",
+      "caption": "",
+      "width": 1600,
+      "height": 893,
+      "variants": {
+        "avif": {
+          "file": "assets/zmuszanie-hero.avif",
+          "sha256": "ec1633a16dc9c93156aabc6931f0e7f9c0200ccc2ce1446d7c102474aab3ca82",
+          "width": 1600,
+          "height": 893
+        },
+        "webp": {
+          "file": "assets/zmuszanie-hero.webp",
+          "sha256": "4014bd033e480b79d42c017a814e967d14c319334c57416ff95b2fc1036d7176",
+          "width": 1600,
+          "height": 893
+        },
+        "jpg": {
+          "file": "assets/zmuszanie-hero.jpg",
+          "sha256": "d6660d8ae8379df9a4ba6490d95cc35f6643d97f80276e9325feb2b84511fc61",
+          "width": 1600,
+          "height": 893
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Osoba rano przed treningiem, widać lekkie wahanie. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Dlaczego sama motywacja nie wystarcza?",
+      "alt": "Przygotowany wieczorem strój i buty treningowe czekają przy łóżku",
+      "caption": "Widoczny sygnał w otoczeniu zmniejsza liczbę decyzji potrzebnych do rozpoczęcia treningu.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/motywacja-system-start-20260929.avif",
+          "sha256": "5330add4d37917772776949e6c16bab029d3111b47a9f14fb2af3f62cfe37658",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/motywacja-system-start-20260929.webp",
+          "sha256": "a3c43bd8495080b415b7cb73617164806ffab10f9ee204ef7aa00c96cf10b554",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/motywacja-system-start-20260929.jpg",
+          "sha256": "0d175c3f9363477777c6417caa0ac07b610a63671fc2f90d2b97306d292dff4b",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Dlaczego sama motywacja nie wystarcza?”: Przygotowany wieczorem strój i buty treningowe czekają przy łóżku. Zgodność z treścią potwierdza podpis: Widoczny sygnał w otoczeniu zmniejsza liczbę decyzji potrzebnych do rozpoczęcia treningu."
+      }
+    },
+    {
+      "placement": "section:Jak zbudować plan, który uruchamia się automatycznie?",
+      "alt": "Dojrzała osoba zaznacza wykonane treningi na prostym papierowym kalendarzu",
+      "caption": "Stała pora i prosty zapis pomagają zamienić zamiar w powtarzalny plan działania.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/motywacja-plan-kalendarz-20260929.avif",
+          "sha256": "393e07bc01d2037c1f13941c6711dd5a267a18c93817a0b9b5aa57129dacaa1a",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/motywacja-plan-kalendarz-20260929.webp",
+          "sha256": "2361958906f58ec7bea0bc40bb470eaf991de0f7187710ab9ce27c748266ee27",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/motywacja-plan-kalendarz-20260929.jpg",
+          "sha256": "7a6ed58eb25e6fe564bf788a44c985ca8c791ce83612199bac4ad6a2f40e4b5f",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak zbudować plan, który uruchamia się automatycznie?”: Dojrzała osoba zaznacza wykonane treningi na prostym papierowym kalendarzu. Zgodność z treścią potwierdza podpis: Stała pora i prosty zapis pomagają zamienić zamiar w powtarzalny plan działania."
+      }
+    },
+    {
+      "placement": "section:Co mierzyć, żeby widzieć postęp?",
+      "alt": "Mężczyzna po pięćdziesiątce sprawdza zegarek po treningu siłowym",
+      "caption": "Warto śledzić wykonane sesje i obciążenia, zamiast oceniać postęp wyłącznie przez nastrój.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/motywacja-pomiar-postepu-20260929.avif",
+          "sha256": "1c899eaf34f44508e731c33fdd296c8c083617f1ff50aa865d9ca29eb358aa71",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/motywacja-pomiar-postepu-20260929.webp",
+          "sha256": "ffdfecc79803610509e7ce11e14f6a722ff54eaf0405093fd43615b93a2ee849",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/motywacja-pomiar-postepu-20260929.jpg",
+          "sha256": "67579c6ac26c351a0f2e9de6395483918d9f7bb953137d8acfb8b0543d04dcab",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co mierzyć, żeby widzieć postęp?”: Mężczyzna po pięćdziesiątce sprawdza zegarek po treningu siłowym. Zgodność z treścią potwierdza podpis: Warto śledzić wykonane sesje i obciążenia, zamiast oceniać postęp wyłącznie przez nastrój."
+      }
+    },
+    {
+      "placement": "section:Jak wrócić po chorobie, wyjeździe albo gorszym tygodniu?",
+      "alt": "Kobieta po pięćdziesiątce spokojnie ćwiczy na rowerze stacjonarnym",
+      "caption": "Po przerwie pomaga celowo mniejsza dawka ruchu, którą można bezpiecznie zwiększać w kolejnych dniach.",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/motywacja-powrot-po-przerwie-20260929.avif",
+          "sha256": "6ab99dc76152d5ac5dee9e959851de6a736e3dd0b49bc3dd40570ddbb289d2e1",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/motywacja-powrot-po-przerwie-20260929.webp",
+          "sha256": "07eaa3c40500b381e7f2b4e044dfa4419014021a9b9b56fb13684c403c7ee1b0",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/motywacja-powrot-po-przerwie-20260929.jpg",
+          "sha256": "c4a616e60b0d93761d5aad3eb6de6a9b3d30b5bb8d984662f3d157bd7e5335ad",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak wrócić po chorobie, wyjeździe albo gorszym tygodniu?”: Kobieta po pięćdziesiątce spokojnie ćwiczy na rowerze stacjonarnym. Zgodność z treścią potwierdza podpis: Po przerwie pomaga celowo mniejsza dawka ruchu, którą można bezpiecznie zwiększać w kolejnych dniach."
+      }
+    }
+  ]
+}

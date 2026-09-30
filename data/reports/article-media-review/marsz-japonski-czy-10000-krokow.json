@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "slug": "marsz-japonski-czy-10000-krokow",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "f93d587573db5050ba58e77e70a7941b91ce24cd6cc200d5fa9e9e8e51d4cd8d",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta i mężczyzna po pięćdziesiątce idą tą samą aleją parku, jedno szybkim, drugie spokojnym krokiem",
+      "caption": "",
+      "width": 1080,
+      "height": 600,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-hero-dwa-tempa.avif",
+          "sha256": "8e8df827ca0d60cfe24866a38d5fdb9b999aa68e13157f1fc9800b38e5538a76",
+          "width": 1080,
+          "height": 600
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-hero-dwa-tempa.webp",
+          "sha256": "000cfd4ea7ff717a19b279ab5200e60098cbfc8618b9548a73da99a8df358e00",
+          "width": 1080,
+          "height": 600
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-hero-dwa-tempa.jpg",
+          "sha256": "af458c7a23d1316f2e1ce0b6cfa9e9409ded1d0ad85cb26758710d54ca8ee7cb",
+          "width": 1080,
+          "height": 600
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czym właściwie jest marsz japoński?",
+      "alt": "Wykres naprzemiennych bloków wysokiego i niskiego wysiłku ułożonych w pięć powtórzeń",
+      "caption": "Pięć powtórzeń naprzemiennych odcinków to cała konstrukcja protokołu z Shinshu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-protokol-trzy-minuty.avif",
+          "sha256": "6e042244f803215dccfb22e78cdfb83c8043188f56e2ac7f03ec11e838eb7335",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-protokol-trzy-minuty.webp",
+          "sha256": "07d3b60123f8ce10ffd241351e860279bbebe5e2c3a34775c62080a6cfab5d85",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-protokol-trzy-minuty.jpg",
+          "sha256": "f8e122b19a512db7dc4b8b40dcba9f92641a7a5ba1d509588bd15c634600fd16",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czym właściwie jest marsz japoński?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Werdykt FitPo50: mit jest w połowie prawdziwy?",
+      "alt": "Papierowy kolaż z wagą: po jednej stronie buty, po drugiej stoper, schody i torba Daily Walk",
+      "caption": "Trening i dzienna objętość ruchu to dwie różne miary, nie konkurenci w jednym rankingu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-werdykt-dwie-szale.avif",
+          "sha256": "4f629af45167ba3b1c422be49a1e4f472aa19a558c28dc5d2da41aedc9a3be3f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-werdykt-dwie-szale.webp",
+          "sha256": "81c49a8ac416b5b7a6885f61c084ef7df62ecb2012e5472d8b0277e000a3b4e4",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-werdykt-dwie-szale.jpg",
+          "sha256": "8c695ddb95ce0c95f6725e2c340ed07bceaf8dd178ac6f68266ec5c835ed1f7c",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Werdykt FitPo50: mit jest w połowie prawdziwy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Bezpośrednie porównanie obu metod: co wyszło w badaniu?",
+      "alt": "Trzy pary w parku: jedna maszeruje szybko, druga idzie spokojnie, trzecia stoi i rozmawia przy mapie",
+      "caption": "Plansza symbolizuje trzy grupy badania: interwały, marsz ciągły oraz grupę bez programu treningowego.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-porownanie-grupy.avif",
+          "sha256": "2064352aad2ae7d5240cfe9b2c602f8b97fd1a746e4e2dab9adaa7f8b8ef9db1",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-porownanie-grupy.webp",
+          "sha256": "8162dc71253ffc2738bf8c76ad97a3aa0c1982f0074ac375250c53376a9c6384",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-porownanie-grupy.jpg",
+          "sha256": "05827f124c781445a3b389f613a53fb9dd73a65b2a39a16c58953ce4fc94c44b",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Bezpośrednie porównanie obu metod: co wyszło w badaniu?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Ile kroków dziennie naprawdę potrzebujesz?",
+      "alt": "Wykres pojedynczej krzywej, która najpierw szybko rośnie, a potem przechodzi w płaski odcinek",
+      "caption": "Krzywa korzyści z liczby kroków rośnie stromo na początku i wypłaszcza się znacznie przed dziesięcioma tysiącami.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-krzywa-krokow.avif",
+          "sha256": "935be9129159108d0e01c5ce52d96a76d5bdb3b30d28ccef67dadacfe5701569",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-krzywa-krokow.webp",
+          "sha256": "63b0dba8ef24c698a6788bf2b57899269fb383f5b909e2196e3f9509c694d78b",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-krzywa-krokow.jpg",
+          "sha256": "5955eab11484c5584bbcdcdae7ece4825371f04398af8b3edac536f02534b443",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ile kroków dziennie naprawdę potrzebujesz?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Wydolność, siła nóg i ciśnienie: czego się spodziewać?",
+      "alt": "Trójwymiarowa ilustracja anatomiczna nogi w fazie odbicia z podświetlonymi mięśniami uda",
+      "caption": "Poglądowa wizualizacja mięśni uda i łydki pracujących podczas szybkiego marszu; wyjaśnia wynik dotyczący siły nóg, ale nie jest atlasem anatomicznym.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-sila-ud-anatomia.avif",
+          "sha256": "089719bae5043d8528dc677e1f53b35fc7c2c9ce92e755909cfd624352b7347a",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-sila-ud-anatomia.webp",
+          "sha256": "c310e8b64c3368615f8607028f169250d01214a4282aad477893b5b02b968d0f",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-sila-ud-anatomia.jpg",
+          "sha256": "6844e3b0a67a1d794ae7ccd7b0128e13a01f1e6b5cbff64f0a8c3a431dc49db1",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Wydolność, siła nóg i ciśnienie: czego się spodziewać?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Masa ciała i stawy: tu dowody są słabsze?",
+      "alt": "Makrofotografia stóp i łydek osoby dorosłej w trakcie kroku na płaskim chodniku",
+      "caption": "Płaski teren i kontrola tempa to najprostsze zabezpieczenie kolan przy zwyrodnieniu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-kolano-buty.avif",
+          "sha256": "faadc7b4ba3266a47e2084a362732009bd5227018d9d904eceb2cb519c6e20d4",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-kolano-buty.webp",
+          "sha256": "a020324933f877ad79f63de1222cd4758a91a4637f10559b01685668ca1b4524",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-kolano-buty.jpg",
+          "sha256": "eb51fb4e2c3686193a80b4811488a0ccbef5bccf424040befc4144aaa9516e44",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Masa ciała i stawy: tu dowody są słabsze?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak ustawić intensywność bez badań wydolnościowych?",
+      "alt": "Dwie osoby około sześćdziesiątki idą szybko wzdłuż bulwaru i rozmawiają krótkimi zdaniami",
+      "caption": "Kilka słów bez zaczerpnięcia oddechu to praktyczny znak, że szybki odcinek jest wystarczająco szybki.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-test-mowy.avif",
+          "sha256": "6e44e8cfedace7a956a5cbdd02ab4a784b64441ecee54084cc46303147cc1a2a",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-test-mowy.webp",
+          "sha256": "e9d71694ca93764074c18a8b62b51eda74d9b37eb9039bf5aaa89104f18a3dd0",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-test-mowy.jpg",
+          "sha256": "753226a3d0f7608feb87c6e94409502bf40af2812c6ada9cb83b991e37a1c1cc",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak ustawić intensywność bez badań wydolnościowych?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Plan na pierwsze sześć tygodni?",
+      "alt": "Kolaż z sześcioma kolumnami papierowych bloków rosnącymi stopniowo od lewej do prawej",
+      "caption": "Rosnące kolumny klocków symbolizują stopniowe zwiększanie wysiłku przez sześć tygodni; dokładny plan znajduje się w punktach powyżej.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-plan-szesc-tygodni.avif",
+          "sha256": "75502036d1f7f2e5ad2ebfa843fa8198bfc12a0107c237ddb5bca22a780d7593",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-plan-szesc-tygodni.webp",
+          "sha256": "5d447339a44a1753cf4e3aa4e9e7f1cc0ff752b0c928dcc561ade53b67cc50e5",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-plan-szesc-tygodni.jpg",
+          "sha256": "722f9d2a7f68691dc791b4381347088a26ce7c66ff30a0c3d2a235a5f6d56355",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Plan na pierwsze sześć tygodni?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Przeciwwskazania i sygnały do natychmiastowego przerwania?",
+      "alt": "Mężczyzna po sześćdziesiątce zatrzymał się na ścieżce, trzyma dłoń na klatce piersiowej i telefon",
+      "caption": "Mężczyzna zatrzymany podczas marszu po pojawieniu się niepokojącego objawu.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/marsz-japonski-sygnal-stop.avif",
+          "sha256": "5d022445023a85a926395cafa5beacd3302eff26115e599101148452b71a5ff9",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/marsz-japonski-sygnal-stop.webp",
+          "sha256": "e1a40771c1a958055dafdaa582c3260c95c08288aa8209d1e0d9bf2caeece311",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/marsz-japonski-sygnal-stop.jpg",
+          "sha256": "589834d9e5206b795f7fe78ac9903392c348c91d52b14d1aca36b50b88027369",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Przeciwwskazania i sygnały do natychmiastowego przerwania?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}

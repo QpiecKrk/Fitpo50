@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "de9c4c54e773aba2db752cedf9c8d422d5e9acc83e5dbff5a07bf9257d439e27",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Stół z pełnowartościowym śniadaniem białkowo-tłuszczowym: jajka, awokado, łosoś, orzechy i warzywa na ciemnym tle kuchennym",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-hero-20260929.avif",
+          "sha256": "a0e9fb7194b03c698fe5e248f0169d033d9efe693f088e9a68ccee74da2a021d",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-hero-20260929.webp",
+          "sha256": "b5284fb4ade9b77a990425430f7b8c8d671b12de207ff1123b47e40b6d5306ea",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-hero-20260929.jpg",
+          "sha256": "1a16b086e4bb8ab84476621087b476c010243f4a134ac177e3479267e80441fa",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Stół z pełnowartościowym śniadaniem białkowo-tłuszczowym: jajka, awokado, łosoś, orzechy i warzywa na ciemnym tle kuchennym. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Co białko zmienia w odczuwaniu głodu?",
+      "alt": "Infografika pokazująca wpływ białka i tłuszczu na spowolnienie wchłaniania glukozy i wydzielanie GLP-1",
+      "caption": "Metaanaliza krótkich badań u dorosłych wykazała przeciętnie mniejszy głód i większą pełność po większej podaży białka, ale długoterminowe wyniki były niejednoznaczne.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-1-20260929.avif",
+          "sha256": "b0edb79c52fec12d5204154140a4a634b53927b5aca742c16c6a4e0996d5d21e",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-1-20260929.webp",
+          "sha256": "8318dbccfb7797b2940be88c423b0a9076c6aa6e78434eb9bc1ec992bc763983",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-1-20260929.jpg",
+          "sha256": "add9572b4203bde196fa644586adf174c5cca1da69450fd4b34774989e1b0e18",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co białko zmienia w odczuwaniu głodu?”: Infografika pokazująca wpływ białka i tłuszczu na spowolnienie wchłaniania glukozy i wydzielanie GLP-1. Zgodność z treścią potwierdza podpis: Metaanaliza krótkich badań u dorosłych wykazała przeciętnie mniejszy głód i większą pełność po większej podaży białka, ale długoterminowe wyniki były niejednoznaczne."
+      }
+    },
+    {
+      "placement": "section:Czy śniadanie musi być bardzo tłuste i bez węglowodanów?",
+      "alt": "Infografika: które węglowodany zostawić, ograniczyć lub usunąć ze śniadania po 50. – lista z ikonami produktów",
+      "caption": "Nie. Tłuszcz może spowalniać opróżnianie żołądka i poprawiać smak, ale jest energetyczny.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-2-20260929.avif",
+          "sha256": "aecbf1ed9fad677baf3e72cf7d9d4d5c814cecee9e07121149b7d044ca73970f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-2-20260929.webp",
+          "sha256": "761734fa9afb344c8aadef7106304af809d51b5ad024db8c5cfc64a8c9f76655",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-2-20260929.jpg",
+          "sha256": "4df3d1ac9cd94a1da31524186ec3bcfdf56fd3b390d1c7d05febbdbac12c14f8",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy śniadanie musi być bardzo tłuste i bez węglowodanów?”: Infografika: które węglowodany zostawić, ograniczyć lub usunąć ze śniadania po 50. – lista z ikonami produktów. Zgodność z treścią potwierdza podpis: Nie. Tłuszcz może spowalniać opróżnianie żołądka i poprawiać smak, ale jest energetyczny."
+      }
+    },
+    {
+      "placement": "section:Jak przeprowadzić uczciwy test przez 7 dni?",
+      "alt": "Meal prep śniadania białkowo-tłuszczowego w słoikach: twaróg, jajka i warzywa przygotowane wieczorem",
+      "caption": "Wybierz dwa śniadania o zbliżonej kaloryczności, ale różniące się udziałem białka.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-3-20260929.avif",
+          "sha256": "a20c93cf4536ebb9f720a98c787810030a794bc343145e58672f4e8561ca4b29",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-3-20260929.webp",
+          "sha256": "8256d48c24566381431526b87be6b3a51b3cbf79ff3189fc2f73514022dc38b8",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-3-20260929.jpg",
+          "sha256": "8bfe40fa8a949dc51d0bf4b4db1d8ba87d31f1762fd27f675ba44770c18f0ab1",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak przeprowadzić uczciwy test przez 7 dni?”: Meal prep śniadania białkowo-tłuszczowego w słoikach: twaróg, jajka i warzywa przygotowane wieczorem. Zgodność z treścią potwierdza podpis: Wybierz dwa śniadania o zbliżonej kaloryczności, ale różniące się udziałem białka."
+      }
+    },
+    {
+      "placement": "section:Kiedy zachcianki wymagają innego podejścia?",
+      "alt": "Porównanie krzywej glukozy po śniadaniu węglowodanowym i białkowo-tłuszczowym – wykres infograficzny",
+      "caption": "Nawracające objadanie z utratą kontroli, silne poczucie winy lub kompensowanie jedzenia wymagają rozmowy ze specjalistą, a nie kolejnych zakazów.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-4-20260929.avif",
+          "sha256": "8a63f74e4de81254611c13228c5353b8556db07791b856740ce484f9af048d6e",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-4-20260929.webp",
+          "sha256": "ce518ff0f03827f13206791f317d81d8fbe1272251fa667d4b7a1fb1de835667",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/sniadanie-bialkowo-tluszczowe-zachcianki-na-cukier-section-4-20260929.jpg",
+          "sha256": "4586d5400a73c3e9b0fdd3445338271c68b76921eb9b402f2daebc662856521c",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Kiedy zachcianki wymagają innego podejścia?”: Porównanie krzywej glukozy po śniadaniu węglowodanowym i białkowo-tłuszczowym – wykres infograficzny. Zgodność z treścią potwierdza podpis: Nawracające objadanie z utratą kontroli, silne poczucie winy lub kompensowanie jedzenia wymagają rozmowy ze specjalistą, a nie kolejnych zakazów."
+      }
+    }
+  ]
+}

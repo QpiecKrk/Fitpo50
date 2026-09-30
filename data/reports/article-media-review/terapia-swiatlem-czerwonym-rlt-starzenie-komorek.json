@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "status": "VERIFIED",
+  "slug": "terapia-swiatlem-czerwonym-rlt-starzenie-komorek",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
+  "reviewed_html_sha256": "90efe518ee33402aedd6c4bbe6ef5b97a60ffd1321289a1354a68e5c38113750",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Kobieta po 50-tce korzystajaca z terapii swiatlem czerwonym na twarz",
+      "caption": "",
+      "width": 1672,
+      "height": 941,
+      "variants": {
+        "avif": {
+          "file": "assets/rlt-hero-swiatlo-czerwone-kobieta-20260929.avif",
+          "sha256": "d6231f65c0d029f37f34a06f695fec5bd53f67c3f77ccda2fda5a359f665832c",
+          "width": 1672,
+          "height": 941
+        },
+        "webp": {
+          "file": "assets/rlt-hero-swiatlo-czerwone-kobieta-20260929.webp",
+          "sha256": "47686fefd996efd29383924b18ca08fcc35a0dd177b6ec4e3d1bdb18286b1c90",
+          "width": 1672,
+          "height": 941
+        },
+        "jpg": {
+          "file": "assets/rlt-hero-swiatlo-czerwone-kobieta-20260929.jpg",
+          "sha256": "421bd6945776500a9cf9e9eda4cdde05e3cbfc0ce4cf96ac2964935e69026675",
+          "width": 1672,
+          "height": 941
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „hero artykułu”: Kobieta po 50-tce korzystajaca z terapii swiatlem czerwonym na twarz. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+      }
+    },
+    {
+      "placement": "section:Jak działa fotobiomodulacja i co oznacza dawka?",
+      "alt": "Schemat dzialania swiatla czerwonego na mitochondrium i produkcje ATP",
+      "caption": "Światło pada na tkankę i może zmieniać aktywność cząsteczek pochłaniających fotony, lecz efekt zależy od parametrów oraz tkanki.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-1-20260929.avif",
+          "sha256": "f643d74b3bcb7b33fbed10615535059d35b418043c97936e4600dcd9c35f93de",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-1-20260929.webp",
+          "sha256": "2d039874d586b9271864ac3263d37e08a37fd16cb355b7bea5780b190290aca0",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-1-20260929.jpg",
+          "sha256": "af36713c4443cded9f1f02d53c054e949b66e5fad12989d5392db83ade601085",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak działa fotobiomodulacja i co oznacza dawka?”: Schemat dzialania swiatla czerwonego na mitochondrium i produkcje ATP. Zgodność z treścią potwierdza podpis: Światło pada na tkankę i może zmieniać aktywność cząsteczek pochłaniających fotony, lecz efekt zależy od parametrów oraz tkanki."
+      }
+    },
+    {
+      "placement": "section:Czy czerwone światło odmładza skórę?",
+      "alt": "Zblizenie na twarz kobiety po 50-tce przed i po terapii swiatlem czerwonym",
+      "caption": "Niewielkie randomizowane badania wykazały poprawę wybranych pomiarów zmarszczek po określonych protokołach LED.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-2-20260929.avif",
+          "sha256": "f37c05de5be2ec0caea9a0828f3fa999b5c845e8800219b5c198c727396b25f3",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-2-20260929.webp",
+          "sha256": "2f6dcb84170aa78294f8c03cf5d65477e4cb9fc615b0bcb95abf7bff2e4a89cc",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-2-20260929.jpg",
+          "sha256": "2a61d02464567417315e5d7cb640453987212a446ea3ac5009a68562710a1e75",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Czy czerwone światło odmładza skórę?”: Zblizenie na twarz kobiety po 50-tce przed i po terapii swiatlem czerwonym. Zgodność z treścią potwierdza podpis: Niewielkie randomizowane badania wykazały poprawę wybranych pomiarów zmarszczek po określonych protokołach LED."
+      }
+    },
+    {
+      "placement": "section:Co wiadomo o bólu, regeneracji i innych chorobach?",
+      "alt": "Osoba po 50-tce uzywajaca panelu LED po treningu silowym",
+      "caption": "Przegląd parasolowy wykazał umiarkowaną pewność dla części wyników, między innymi niepełnosprawności w chorobie zwyrodnieniowej kolana, lecz dla wielu innych zastosowań pewność była niska.",
+      "width": 1080,
+      "height": 603,
+      "variants": {
+        "avif": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-3-20260929.avif",
+          "sha256": "3da8edf3a95f7bec7b2a833444802023718e1571e207e3928a58ded132deaf11",
+          "width": 1080,
+          "height": 603
+        },
+        "webp": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-3-20260929.webp",
+          "sha256": "07c26dbe714d09ceb728ad6d996e762ed7cc4eb319de8bc3b45ce33f7b6cbeb1",
+          "width": 1080,
+          "height": 603
+        },
+        "jpg": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-3-20260929.jpg",
+          "sha256": "3b4b473eb74c4a615f7b0cd92a5dc8995408e886980135ad6b9ac7f6ecc9e5a5",
+          "width": 1080,
+          "height": 603
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Co wiadomo o bólu, regeneracji i innych chorobach?”: Osoba po 50-tce uzywajaca panelu LED po treningu silowym. Zgodność z treścią potwierdza podpis: Przegląd parasolowy wykazał umiarkowaną pewność dla części wyników, między innymi niepełnosprawności w chorobie zwyrodnieniowej kolana, lecz dla wielu innych zastosowań pewność była niska."
+      }
+    },
+    {
+      "placement": "section:Jak bezpiecznie ocenić urządzenie domowe?",
+      "alt": "Panel LED do terapii swiatlem czerwonym uzywany w domu przez osobe doroslA",
+      "caption": "Sprawdź instrukcję, parametry, ostrzeżenia, status regulacyjny i ochronę oczu właściwą dla urządzenia.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-4-20260929.avif",
+          "sha256": "456ec24f88508d70073665c0eef43947208b4194c917bfd894e287dd5dd7eff3",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-4-20260929.webp",
+          "sha256": "7d15f7aa3b88e615eafaed13e39b68bd3fed18b83b1cd484f13d9ade21daf8b2",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/terapia-swiatlem-czerwonym-rlt-starzenie-komorek-section-4-20260929.jpg",
+          "sha256": "147adea587d0ad670f7dbb48235f89bbc3e35fbf45d663e6d7e4ff29dcb6a44f",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obejrzano pełny kadr dla „Jak bezpiecznie ocenić urządzenie domowe?”: Panel LED do terapii swiatlem czerwonym uzywany w domu przez osobe doroslA. Zgodność z treścią potwierdza podpis: Sprawdź instrukcję, parametry, ostrzeżenia, status regulacyjny i ochronę oczu właściwą dla urządzenia."
+      }
+    }
+  ]
+}

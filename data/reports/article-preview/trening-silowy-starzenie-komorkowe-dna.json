@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-09-30T13:01:39.162Z",
+  "slug": "trening-silowy-starzenie-komorkowe-dna",
+  "html_sha256": "d60a317c772c72fb1071324ae4caaa042a0eb82911d8d621b6b77c3de8da5c01",
+  "site_html_sha256": "d60a317c772c72fb1071324ae4caaa042a0eb82911d8d621b6b77c3de8da5c01",
+  "pdf_sha256": "da903a771c624d29ca386b5db5fa000f3e0e1b5d2a8c6a6a84e55007b11eeb8b",
+  "site_pdf_sha256": "da903a771c624d29ca386b5db5fa000f3e0e1b5d2a8c6a6a84e55007b11eeb8b",
+  "html": {
+    "desktop": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "mobile": {
+      "bodyOverflow": false,
+      "overflow": [],
+      "tinyText": [],
+      "brokenImages": [],
+      "badDeclaredRatios": [],
+      "fontStatus": "loaded"
+    },
+    "semantic_tables": 1
+  },
+  "pdf": {
+    "pages": 5,
+    "text_coverage": 1,
+    "rendered_pages": 5
+  },
+  "errors": []
+}

@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "slug": "kolagen-suplementacja-po-50",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "9f52f6291560508255af16c172d35ffb1eb6619cb2f738bfaa4a311781d43a4a",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "entries": [
+    {
+      "placement": "hero",
+      "alt": "Aktywna kobieta po 50-tce biegnąca ulicą polskiego miasta",
+      "caption": "",
+      "width": 1200,
+      "height": 654,
+      "variants": {
+        "avif": {
+          "file": "assets/kolagen-suplementacja-po-50-hero-v2.avif",
+          "sha256": "880f18fe9455934945341e26b70a16e500b00542d4ec8ab9e32d69a4faf149fb",
+          "width": 1200,
+          "height": 654
+        },
+        "webp": {
+          "file": "assets/kolagen-suplementacja-po-50-hero-v2.webp",
+          "sha256": "18942eae517d47b763ee2e95e85e9f3bd6ceb0a718c5ab42915bd6a94a87b142",
+          "width": 1200,
+          "height": 654
+        },
+        "jpg": {
+          "file": "assets/kolagen-suplementacja-po-50-hero-v2.jpg",
+          "sha256": "b0856db593396d0f9972df34d20a317158e6cc3a72dd93a29931f4247aadf041",
+          "width": 1200,
+          "height": 654
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co to jest kolagen i za co naprawdę odpowiada?",
+      "alt": "Schemat typów kolagenu w ciele człowieka – skóra, stawy, kości",
+      "caption": "Trzy główne typy kolagenu i miejsca, gdzie pełnią swoją funkcję",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/kolagen-typy-schemat.avif",
+          "sha256": "b14e43583790dcd12a30e00f39ebce6f2fa9e8231a299cd6543c00f960870f4f",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/kolagen-typy-schemat.webp",
+          "sha256": "52ee5b9ea356a805b85f5877ab0474d7cce3f406d48d26ef4fd6de436c04215d",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/kolagen-typy-schemat.jpg",
+          "sha256": "a17c11377316e2a678658f1c8099fb2d37ba3c7dc40478104a1823ed70ce2c51",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co to jest kolagen i za co naprawdę odpowiada?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy kolagen zaczyna spadać i co ten spadek przyspiesza?",
+      "alt": "Schemat zmian kolagenu wraz z wiekiem z zaznaczeniem, że tempo jest indywidualne",
+      "caption": "Zmiany kolagenu zależą od tkanki, wieku, hormonów, UV, palenia i aktywności.",
+      "width": 1080,
+      "height": 648,
+      "variants": {
+        "avif": {
+          "file": "assets/kolagen-spadek-po-50.avif",
+          "sha256": "be3b112887b90bba0179d0a91af0633048bc8d6cd7d0f4e4bbe3eb45bb357bda",
+          "width": 1080,
+          "height": 648
+        },
+        "webp": {
+          "file": "assets/kolagen-spadek-po-50.webp",
+          "sha256": "9a85abe94b38520ac5ff6930104a851816b9ef8a0f718d07857ce996bc25020c",
+          "width": 1080,
+          "height": 648
+        },
+        "jpg": {
+          "file": "assets/kolagen-spadek-po-50.jpg",
+          "sha256": "245be0ed9e0d81ad9836e562fd21a95207a27de615d6f1cad0d27d188b243dc0",
+          "width": 1080,
+          "height": 648
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy kolagen zaczyna spadać i co ten spadek przyspiesza?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Jak sprawdzić poziom kolagenu – czy istnieje badanie krwi?",
+      "alt": "Wyniki badań laboratoryjnych – markery P1NP i CTX na papierze",
+      "caption": "P1NP i CTX to pośrednie markery obrotu kolagenu kostnego – dostępne jako rutynowe badania",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/kolagen-badania-krew.avif",
+          "sha256": "89b50a3b1c455cff67d3e116967f94b71a641433b4efa805acca6e20f075246d",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/kolagen-badania-krew.webp",
+          "sha256": "d3297aaa9370f7bc5c5506be6ee6aece606157157705f19cef7d6e030f84a817",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/kolagen-badania-krew.jpg",
+          "sha256": "84b3b72ac683d98aaff024516e8866aa21530d18b5649531990afb24b1c87d01",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak sprawdzić poziom kolagenu – czy istnieje badanie krwi?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Co naprawdę pokazują badania naukowe o suplementacji?",
+      "alt": "Naukowiec analizujący wyniki badań klinicznych nad kolagenem",
+      "caption": "Część badań pokazuje małe efekty, ale pewność dowodów zależy od jakości i finansowania.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/kolagen-badania-wyniki.avif",
+          "sha256": "7a225cca68c8b1dc436f64cd46a04d4a7d04a5b18c1ee9ec8883dae426a402e5",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/kolagen-badania-wyniki.webp",
+          "sha256": "99a96f7ea32bff4c061dbc8496e2268e5908b8530764ac5765dbd68b1e49473c",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/kolagen-badania-wyniki.jpg",
+          "sha256": "9e9baf796432018e245e43151db52acf65ce646faf7880b50908779d47931115",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co naprawdę pokazują badania naukowe o suplementacji?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Hydrolizat, peptydy czy niedenaturowany – jaki kolagen wybrać?",
+      "alt": "Różne formy suplementów kolagenowych – proszek, kapsułki, saszetki",
+      "caption": "Hydrolizat i kolagen niedenaturowany to różne preparaty; żaden nie zastępuje diagnozy stawu.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/kolagen-rodzaje-wybor.avif",
+          "sha256": "d81546ba9fe60173098ca1c783fd2c0be082b244bdae6f73344541065032c871",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/kolagen-rodzaje-wybor.webp",
+          "sha256": "b0cdeabf97d0b6153a214bbdbb14aa8064407da2de561457dd40b161458e72ba",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/kolagen-rodzaje-wybor.jpg",
+          "sha256": "a68edfcef209d670736c088415dad49535fc366449105708fa8f7c914ac4165a",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Hydrolizat, peptydy czy niedenaturowany – jaki kolagen wybrać?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Ile kolagenu brać i o jakiej porze, żeby to miało sens?",
+      "alt": "Tabela dawkowania kolagenu wg celu – skóra, stawy, kości, mięśnie",
+      "caption": "Zakresy na grafice pochodzą z pojedynczych badań różnych celów, a nie z jednej uniwersalnej rekomendacji.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/kolagen-dawkowanie-cel.avif",
+          "sha256": "89b50a3b1c455cff67d3e116967f94b71a641433b4efa805acca6e20f075246d",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/kolagen-dawkowanie-cel.webp",
+          "sha256": "d3297aaa9370f7bc5c5506be6ee6aece606157157705f19cef7d6e030f84a817",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/kolagen-dawkowanie-cel.jpg",
+          "sha256": "84b3b72ac683d98aaff024516e8866aa21530d18b5649531990afb24b1c87d01",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ile kolagenu brać i o jakiej porze, żeby to miało sens?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Czy bez witaminy C kolagen w ogóle ma sens?",
+      "alt": "Witamina C w owocach cytrusowych obok kolagenu w proszku na stole kuchennym",
+      "caption": "Witamina C uczestniczy w syntezie kolagenu; jej źródłem może być zwykła dieta.",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/kolagen-witamina-c-biochemia.avif",
+          "sha256": "61650f4e4f588f2a344bf846a59158b031b43f2cd13cd37cf042b453f963ff6d",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/kolagen-witamina-c-biochemia.webp",
+          "sha256": "a0aa5a2f339f526f0c98a4ae6982458d7eeb1ae42673ab2271ea447472b3de69",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/kolagen-witamina-c-biochemia.jpg",
+          "sha256": "48d29028a64e94edab16ca8efc9c1d705307079a24cfa82cf1f44b2e41f275a7",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Czy bez witaminy C kolagen w ogóle ma sens?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    },
+    {
+      "placement": "section:Kiedy suplementacja kolagenu ma sens, a kiedy to przepalanie pieniędzy?",
+      "alt": "Osoba po 50-tce analizująca opakowanie suplementu w aptece",
+      "caption": "Świadoma suplementacja to klucz – kolagen działa jako uzupełnienie, nie lekarstwo",
+      "width": 1080,
+      "height": 589,
+      "variants": {
+        "avif": {
+          "file": "assets/kolagen-kiedy-warto.avif",
+          "sha256": "75b4363341a3cfdf18c27bae6ef4d21a7dc59a4d39add8cbfadd61a680a1b448",
+          "width": 1080,
+          "height": 589
+        },
+        "webp": {
+          "file": "assets/kolagen-kiedy-warto.webp",
+          "sha256": "7d54b05a4177edc3329117bb6f85252f168f0d2e9d1d191b45b0937b50df88fb",
+          "width": 1080,
+          "height": 589
+        },
+        "jpg": {
+          "file": "assets/kolagen-kiedy-warto.jpg",
+          "sha256": "f73e1f81a3e4686aa88c64e946a02c9347620314d5aa8cdaeacb6dde3b548a6d",
+          "width": 1080,
+          "height": 589
+        }
+      },
+      "visual_review": {
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy suplementacja kolagenu ma sens, a kiedy to przepalanie pieniędzy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+      }
+    }
+  ]
+}
