@@ -1,35 +1,35 @@
 {
-  "version": 1,
-  "status": "VERIFIED",
+  "version": 2,
   "slug": "healthspan-nie-lifespan-po-50",
-  "reviewed_at": "2026-09-30T10:45:00+02:00",
-  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
-  "reviewed_html_sha256": "48b6d314ae2046c746436c05163575e3da0acc3bd2fd4d1cc2590feb11cd3ec1",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "3b95971e40b28105181db215e4a54422d1f99200c925b756373b77173b3c118b",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T17:35:00+02:00",
   "entries": [
     {
       "placement": "hero",
-      "alt": "Mężczyzna po 50-tce stoi na rozstaju dróg — szpital kontra park",
+      "alt": "Aktywni dorośli po 60-tce robią zakupy, maszerują i bawią się z wnuczką w parku",
       "caption": "",
-      "width": 1080,
-      "height": 603,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/healthspan_zegar_hero-20260929.avif",
-          "sha256": "ee4cc4d10ee1439841faf9f155cc51bc402d3d6cde07e2dfd7a0a9a4ce051b8c",
-          "width": 1080,
-          "height": 603
+          "file": "assets/healthspan-functional-life-hero-20260930.avif",
+          "sha256": "33bf4dc912d8fc1841e3b6788565950ddfd8302f5695c2649e1eb1cb96d33465",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/healthspan_zegar_hero-20260929.webp",
-          "sha256": "c65b29f035cd51362799d93fe6ff78017aa2435c029bc1331b871c7b7bc2ee94",
-          "width": 1080,
-          "height": 603
+          "file": "assets/healthspan-functional-life-hero-20260930.webp",
+          "sha256": "cb10921569e496fe47107c0f2c27d6ed4f4e66c0e8ede95e9625809d4d26727e",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/healthspan_zegar_hero-20260929.jpg",
-          "sha256": "15079bc2a8c70b287d0ac8f319a7a0b3aa69b48ecc9d58ba10bb4ae8b93d20db",
-          "width": 1080,
-          "height": 603
+          "file": "assets/healthspan-functional-life-hero-20260930.jpg",
+          "sha256": "6d7e14de79c0738f883f7b242b05f68863c9fa00c03c50226be4e5d825adb9dc",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -37,7 +37,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po 50-tce stoi na rozstaju dróg — szpital kontra park. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „hero”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -71,7 +74,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Co naprawdę oznacza healthspan?”: Dwie pary rąk na ławce w parku — starsze i dziecięce, symbol przekazywania sprawności. Zgodność z treścią potwierdza podpis: WHO opisuje zdrowe starzenie jako rozwijanie i utrzymywanie zdolności funkcjonalnej, która umożliwia dobre życie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Co naprawdę oznacza healthspan?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -105,7 +111,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Jak mierzyć codzienną sprawność bez laboratorium?”: Dziadek po 70-tce unosi wnuka w parku — radość i sprawność jako cel. Zgodność z treścią potwierdza podpis: Raz na miesiąc można w podobnych warunkach zapisać czas przejścia znanego odcinka, liczbę kontrolowanych wstań z krzesła i zdolność utrzymania równowagi przy podparciu w zasięgu ręki."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak mierzyć codzienną sprawność bez laboratorium?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -139,33 +148,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Które działania mają największy sens?”: Kobieta po 50-tce stoi na szczycie wzniesienia i patrzy na miasto — perspektywa i wybór. Zgodność z treścią potwierdza podpis: Podstawą jest tygodniowe połączenie aktywności aerobowej, ćwiczeń wzmacniających i pracy nad równowagą, dostosowane do zdrowia."
+        "embedded_text": {
+          "kind": "WATERMARK_ONLY"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Które działania mają największy sens?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne. Widoczny jest wyłącznie nieinformacyjny znak wodny, bez treści medycznej lub liczbowej."
       }
     },
     {
       "placement": "section:Kiedy spadek formy wymaga diagnostyki?",
-      "alt": "Kalendarz z ikonami treningu i szpitala — dwa możliwe scenariusze tej samej osi czasu",
+      "alt": "Starsza kobieta opisuje lekarce nowy spadek sprawności podczas konsultacji",
       "caption": "Nowa duszność, ból w klatce, omdlenie, jednostronne osłabienie albo gwałtowna utrata wydolności wymagają pilnej oceny zależnie od nasilenia.",
-      "width": 1080,
-      "height": 806,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/healthspan-nie-lifespan-po-50-section-4-20260929.avif",
-          "sha256": "efae8fa44f144c65bbfe0723ea11e376775c8c20be889dc63fe6784d790ce2d8",
-          "width": 1080,
-          "height": 806
+          "file": "assets/healthspan-decline-consult-20260930.avif",
+          "sha256": "b6fdeba9c4aed4dc3d0d83e8b4e6ea73979d86d1e4078d59cc18143765507629",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/healthspan-nie-lifespan-po-50-section-4-20260929.webp",
-          "sha256": "b9dba2765a1698af23750a2ca4cfaab6681b61aff750801c054e59ea5e38b9f8",
-          "width": 1080,
-          "height": 806
+          "file": "assets/healthspan-decline-consult-20260930.webp",
+          "sha256": "f1ff3ffe5cb6b44951105356e0b1ed0e044d8dead8791abe38257b98cd17c874",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/healthspan-nie-lifespan-po-50-section-4-20260929.jpg",
-          "sha256": "73015d0607045c0b155f4c9a10a944d03ad8b28eb9f4a429d3917b297c034d37",
-          "width": 1080,
-          "height": 806
+          "file": "assets/healthspan-decline-consult-20260930.jpg",
+          "sha256": "f52394bdf31e870a67316e0eedcbdc4cfd9c45b6ea06a8a8865a7476552c3edf",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -173,7 +185,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Kiedy spadek formy wymaga diagnostyki?”: Kalendarz z ikonami treningu i szpitala — dwa możliwe scenariusze tej samej osi czasu. Zgodność z treścią potwierdza podpis: Nowa duszność, ból w klatce, omdlenie, jednostronne osłabienie albo gwałtowna utrata wydolności wymagają pilnej oceny zależnie od nasilenia."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Kiedy spadek formy wymaga diagnostyki?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     }
   ]

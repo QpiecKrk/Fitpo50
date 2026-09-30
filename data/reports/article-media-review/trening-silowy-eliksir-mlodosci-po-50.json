@@ -1,10 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "slug": "trening-silowy-eliksir-mlodosci-po-50",
   "status": "VERIFIED",
-  "reviewed_html_sha256": "0f43a8a9347853356c89c0ccb30249f786c5434a460dbf636e3d0861e74376e5",
+  "reviewed_html_sha256": "f0f89250aff4e3509f23df42503d5576577934e04272a4a5f404dc7af48d883c",
   "reviewed_by": "Codex visual review",
-  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_at": "2026-09-30T17:35:00+02:00",
   "entries": [
     {
       "placement": "hero",
@@ -37,33 +37,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „hero”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
-      "placement": "section:Dlaczego hormony mają znaczenie po 50-tce?",
-      "alt": "Infografika przedstawiająca poziomy hormonu wzrostu przed i po treningu siłowym u osób starszych",
-      "caption": "Ostra odpowiedź hormonalna po sesji jest przejściowa i nie mierzy długoterminowego efektu treningu.",
-      "width": 1080,
-      "height": 589,
+      "placement": "section:Czy trening siłowy naprawdę „odmładza hormony”?",
+      "alt": "Kobieta i mężczyzna po 50-tce wykonują kontrolowany trening siłowy pod opieką trenerki",
+      "caption": "Trening uruchamia wiele szlaków adaptacji; pojedynczy pomiar hormonu nie opisuje długoterminowego efektu.",
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/trening-silowy-hormony-badania.avif",
-          "sha256": "e6686d60c6f76f64a9c79ab57bcaa20c8a9886062dcd0b289c09dc6dd134c32d",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-hormones-20260930.avif",
+          "sha256": "fa16172a8c8382adb614c6ae0d3d31af349476c9a0563867afce1c873e6f794e",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/trening-silowy-hormony-badania.webp",
-          "sha256": "cb9c5f3df9b14c8232774c32af8802a3d64704ee3fc1d02244772ee2c54a7558",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-hormones-20260930.webp",
+          "sha256": "ab3380d8ad82ca134b04a1052d1100b1e77666131d2d72534dd68655f534f009",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/trening-silowy-hormony-badania.jpg",
-          "sha256": "a5850a7e1ec1b81395af860f5a3db26f394c76bfc6f0756602779b739fa97ba8",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-hormones-20260930.jpg",
+          "sha256": "fd9f1aa07bdd692103e014d06fe4976754ff35fbb62420359225342b3305b200",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -71,33 +74,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Dlaczego hormony mają znaczenie po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Czy trening siłowy naprawdę „odmładza hormony”?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
-      "placement": "section:Jak trening siłowy wpływa na metabolizm i insulinowrażliwość?",
-      "alt": "Graficzne porównanie poziomu insuliny i glukozy przed i po programie treningowym u osób 50+",
-      "caption": "Insulinowrażliwość poprawia się po regularnym treningu siłowym — kluczowy mechanizm ochrony metabolicznej",
-      "width": 1080,
-      "height": 589,
+      "placement": "section:Co trening oporowy daje mięśniom i codziennej sprawności?",
+      "alt": "Kobieta ćwiczy wstawanie z krzesła z fizjoterapeutką i samodzielnie wnosi zakupy po schodach",
+      "caption": "Siła ma praktyczne znaczenie wtedy, gdy ułatwia wstawanie, chodzenie, przenoszenie i zachowanie samodzielności.",
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/metabolizm-insulinowrazliwosc-trening.avif",
-          "sha256": "5d7624029905d0e7409a4add2f54133e066281d9290dfb6fb5fd54d8d5c4f33e",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-function-20260930.avif",
+          "sha256": "db06ab3daf26079c8e95f5203e2ab53cd4c0be468e5621137795ff41bcda9286",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/metabolizm-insulinowrazliwosc-trening.webp",
-          "sha256": "eaf39b98447b865b5118553d54a5299da6d1c85af944cfde6b95429e71b7533d",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-function-20260930.webp",
+          "sha256": "850ddccf5ba8e9e4e4685d04e98b4499e17eb97c395c1684532edf089deec025",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/metabolizm-insulinowrazliwosc-trening.jpg",
-          "sha256": "fdde2ee90a88bd8ca6b07f2a7ef51b4e927268e1e3d407af85e0a256014d2689",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-function-20260930.jpg",
+          "sha256": "f3f20d524be560bbb50c8694f53c007cf91db174cea375475679fc6502a7e705",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -105,33 +111,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak trening siłowy wpływa na metabolizm i insulinowrażliwość?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Co trening oporowy daje mięśniom i codziennej sprawności?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
-      "placement": "section:Sarkopenia i utrata masy mięśniowej — jak ją zatrzymać?",
-      "alt": "Porównanie sylwetek przed i po programie treningowym — efekt odbudowy masy mięśniowej po 50-tce",
-      "caption": "Trening siłowy odwraca proces sarkopenil — widoczne efekty po kilku miesiącach regularnych ćwiczeń",
-      "width": 1080,
-      "height": 589,
+      "placement": "section:Jak trening siłowy wspiera metabolizm?",
+      "alt": "Kobieta po 50-tce trenuje z hantlem, a ilustracja pokazuje wychwyt glukozy przez mięśnie",
+      "caption": "Mięśnie uczestniczą w gospodarce glukozą, ale trening jest częścią planu obejmującego również dietę, sen i leczenie.",
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/sarkopenia-utrata-miesni-50.avif",
-          "sha256": "75a9db9c141d3ac3826cd4733c137afc08b08eb04192063e2a61b9124c477dd9",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-metabolism-20260930.avif",
+          "sha256": "7b05375b64d0fe49933221d46a663ec84ad77a888d355bff25b86a5114525c42",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/sarkopenia-utrata-miesni-50.webp",
-          "sha256": "adfad33f97b15df42e65197579282c3c9557178cb8401fab4c433998e44d171d",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-metabolism-20260930.webp",
+          "sha256": "00419a625e53549352ff29c6ecc8097fab0ba6482761736253cc7e9fd7b2d532",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/sarkopenia-utrata-miesni-50.jpg",
-          "sha256": "cb9b11235b613622e17ef02a9c8e4db2f038f7ebeff3fcd97c6469460b613b2d",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-metabolism-20260930.jpg",
+          "sha256": "e4fca66b93bca7fc138e12a51bd4b2b6549c4765207977aa24cc60381cec12f3",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -139,33 +148,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Sarkopenia i utrata masy mięśniowej — jak ją zatrzymać?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak trening siłowy wspiera metabolizm?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
-      "placement": "section:Ryzyko zgonu i długowieczność — liczby nie kłamią?",
-      "alt": "Wykres przedstawiający zależność między czasem treningu siłowego a redukcją ryzyka zgonu",
-      "caption": "Maksymalna redukcja ryzyka zgonu przy 60 minutach treningu tygodniowo — dane z meta-analizy 2022",
-      "width": 1080,
-      "height": 589,
+      "placement": "section:Czy trening siłowy wydłuża życie?",
+      "alt": "Grupa osób po 50-tce łączy trening oporowy z marszem i codzienną aktywnością",
+      "caption": "Długoterminowe zdrowie wiąże się z całym wzorcem aktywności, a nie z jedną magiczną dawką treningu siłowego.",
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/dlugoletnosc-trening-silowy-ryzyko.avif",
-          "sha256": "b9cdfddb584e3b092ec472e5537ea9786a3f96c5b7a0506af1ec274fd7ae3ff2",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-health-20260930.avif",
+          "sha256": "4abef76a19e00e8f2c86d0e0f97ed390f04dea25b64a78b69951b9e60ee4f0e6",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/dlugoletnosc-trening-silowy-ryzyko.webp",
-          "sha256": "dafc4b68324bd2d2480144e962192251d5234aec63ae28ea7bc4dc4ec0bd9398",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-health-20260930.webp",
+          "sha256": "baee3697e4a064ed2ed90130a11b6cd36ecb64597d2fcfbfb07b25295062ef02",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/dlugoletnosc-trening-silowy-ryzyko.jpg",
-          "sha256": "ef3e2bd5de5355c76a4aa94d73a9c237c60e37df00583f709b8c37c2b3dbafc3",
-          "width": 1080,
-          "height": 589
+          "file": "assets/trening-silowy-eliksir-health-20260930.jpg",
+          "sha256": "48a07b25f0b16ad4b2cfcd2b5e43e074d3c213c34bd6a81517b0e7881e1460d3",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -173,81 +185,16 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ryzyko zgonu i długowieczność — liczby nie kłamią?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Czy trening siłowy wydłuża życie?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
-      "placement": "section:Trening siłowy a zdrowie mózgu i BDNF?",
-      "alt": "Wizualizacja wzrostu poziomu BDNF po treningu siłowym u osób starszych",
-      "caption": "Poziom BDNF rośnie po regularnym treningu siłowym — kluczowy wskaźnik zdrowia mózgu",
-      "width": 1080,
-      "height": 589,
-      "variants": {
-        "avif": {
-          "file": "assets/bdnf-mozg-trening-silowy.avif",
-          "sha256": "a5e4baccbd1e08742d2efff75049ca742e47c58e497a3918952229f72b697b29",
-          "width": 1080,
-          "height": 589
-        },
-        "webp": {
-          "file": "assets/bdnf-mozg-trening-silowy.webp",
-          "sha256": "0b8bb12ae44a6dd52259588f50bd79b2585f11cfa6243cbe590e46eb064fee11",
-          "width": 1080,
-          "height": 589
-        },
-        "jpg": {
-          "file": "assets/bdnf-mozg-trening-silowy.jpg",
-          "sha256": "1fdad97f00599078cf6f2a7cb0459f04f822ea88a51d2e749348f4bab4fa6a94",
-          "width": 1080,
-          "height": 589
-        }
-      },
-      "visual_review": {
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Trening siłowy a zdrowie mózgu i BDNF?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
-      }
-    },
-    {
-      "placement": "section:Kortyzol i regulacja stresu po 50-tce?",
-      "alt": "Infografika porównująca poziomy kortyzolu przed i po długoterminowym treningu siłowym",
-      "caption": "Kortyzol stabilizuje się po regularnym treningu siłowym — ochrona przed przewlekłym stresem",
-      "width": 1080,
-      "height": 589,
-      "variants": {
-        "avif": {
-          "file": "assets/kortyzol-stres-trening-oporowy.avif",
-          "sha256": "6804cf22acfb0e27f1ed8dd6f17fefbf1bdc4820ea6bfdebf8d742a49bfa1606",
-          "width": 1080,
-          "height": 589
-        },
-        "webp": {
-          "file": "assets/kortyzol-stres-trening-oporowy.webp",
-          "sha256": "9150640d7ae3ae07d35260a4aeb0342a189f30c31e31dbd2eed89c23e2d7e76a",
-          "width": 1080,
-          "height": 589
-        },
-        "jpg": {
-          "file": "assets/kortyzol-stres-trening-oporowy.jpg",
-          "sha256": "76812505e8dcf9d4a22a365540b1a7d7bd1d036764c8028de6269c858dee65ec",
-          "width": 1080,
-          "height": 589
-        }
-      },
-      "visual_review": {
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kortyzol i regulacja stresu po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
-      }
-    },
-    {
-      "placement": "section:Jak zacząć trening siłowy po 50-tce bezpiecznie?",
-      "alt": "Osoba po 50-tce konsultuje technikę ćwiczeń z trenerem personalnym w siłowni",
-      "caption": "Poprawna technika od pierwszego treningu chroni przed kontuzjami i maksymalizuje efekty",
+      "placement": "section:Jak bezpiecznie zacząć trening po 50-tce?",
+      "alt": "Trenerka pomaga kobiecie po 50-tce bezpiecznie wykonać siad do ławki",
+      "caption": "Dobry start polega na nauce ruchu i stopniowej progresji, a nie na testowaniu maksymalnego ciężaru.",
       "width": 1080,
       "height": 589,
       "variants": {
@@ -275,7 +222,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak zacząć trening siłowy po 50-tce bezpiecznie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "WATERMARK_ONLY"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak bezpiecznie zacząć trening po 50-tce?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne. Widoczny jest wyłącznie nieinformacyjny znak wodny, bez treści medycznej lub liczbowej."
       }
     }
   ]

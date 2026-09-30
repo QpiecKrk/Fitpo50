@@ -1,10 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "slug": "jak-zaczac-na-silowni-po-50",
   "status": "VERIFIED",
-  "reviewed_html_sha256": "85356894880fba767b4cfbf2ea3d5af5e70ecf11e3f47dd1affd245aa05c664d",
+  "reviewed_html_sha256": "039f4aac9b349fbe99b26f105dbd6831159a89f07a3bd7a90ce35b32824b2daf",
   "reviewed_by": "Codex visual review",
-  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_at": "2026-09-30T17:35:00+02:00",
   "entries": [
     {
       "placement": "hero",
@@ -37,7 +37,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „hero”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -71,7 +74,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co daje trening siłowy po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Co daje trening siłowy po 50-tce?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -105,7 +111,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Prawda o siłowni, której nikt Ci nie powie?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Prawda o siłowni, której nikt Ci nie powie?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -139,7 +148,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Pierwszy krok: trener personalny — jeden raz wystarczy?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Pierwszy krok: trener personalny — jeden raz wystarczy?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -173,7 +185,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ubierz się tak, żeby dobrze się czuć?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Ubierz się tak, żeby dobrze się czuć?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -207,7 +222,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Plan na pierwsze 4 tygodnie — prosty jak budowa cepa?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Plan na pierwsze 4 tygodnie — prosty jak budowa cepa?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -241,7 +259,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Co zabrać na pierwszą wizytę?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Co zabrać na pierwszą wizytę?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -275,7 +296,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jedna rzecz, której się nie spodziewasz?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jedna rzecz, której się nie spodziewasz?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -309,7 +333,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Podsumowanie — co naprawdę stoi na drodze?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Podsumowanie — co naprawdę stoi na drodze?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     }
   ]

@@ -2,7 +2,8 @@
   "schema_version": 1,
   "package_id": "SEO-REPAIR-CONTINUATION-10",
   "created_at": "2026-09-29",
-  "status": "AWAITING_REPAIR",
+  "status": "LOCAL_VALIDATED_AWAITING_DEPLOYMENT",
+  "validated_at": "2026-09-30T17:35:00+02:00",
   "origin": "Approved PAKIET 01-27 split after 17 articles reached the full publication gate",
   "immutable_membership": true,
   "article_count": 10,
@@ -26,5 +27,19 @@
     "A watermark alone does not block an image; misleading text, numbers, anatomy, equipment or context do",
     "Every machine-detectable defect is fixed both in the article and in the pipeline with a regression test"
   ],
-  "publication_rule": "Repair all 10 in isolated staging and publish them as one atomic package only after every gate passes. Then commit, push, verify production and prepare the GSC URL list."
+  "publication_rule": "Repair all 10 in isolated staging and publish them as one atomic package only after every gate passes. Then commit, push, verify production and prepare the GSC URL list.",
+  "local_validation": {
+    "article_standard_and_contract": "PASS",
+    "editorial_and_medical_evidence_review": "PASS",
+    "media_review_v2": "PASS",
+    "desktop_and_mobile_preview": "PASS",
+    "pdf_review": {
+      "status": "PASS",
+      "files": 10,
+      "pages_reviewed": 47
+    },
+    "source_site_sync": "PASS",
+    "sitemap_lastmod": "PASS",
+    "production_status": "PENDING_PUSH_AND_LIVE_VALIDATION"
+  }
 }

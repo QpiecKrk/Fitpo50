@@ -38,11 +38,12 @@ class ArticleMediaReviewTest(unittest.TestCase):
             entry['visual_review'] = {
                 'status': 'VERIFIED', 'matches_topic': True, 'no_misleading_text_or_logo': True,
                 'anatomy_and_equipment_plausible': True,
+                'embedded_text': {'kind': 'NONE'},
                 'note': 'Obejrzano cały kadr; przedstawia dokładnie temat przypisanej sekcji i nie zawiera artefaktów.',
             }
         manifest = root / 'review.json'
         manifest.write_text(json.dumps({
-            'version': 1, 'status': 'VERIFIED', 'slug': slug,
+            'version': 2, 'status': 'VERIFIED', 'slug': slug,
             'reviewed_at': '2026-09-27T07:00:00+02:00', 'reviewed_by': 'Tester lokalny',
             'reviewed_html_sha256': hashlib.sha256(html.read_bytes()).hexdigest(), 'entries': entries,
         }))
@@ -77,11 +78,34 @@ class ArticleMediaReviewTest(unittest.TestCase):
                 entry['visual_review'] = {
                     'status': 'VERIFIED', 'matches_topic': True, 'no_misleading_text_or_logo': True,
                     'anatomy_and_equipment_plausible': True,
+                    'embedded_text': {'kind': 'NONE'},
                     'note': 'Obejrzano cały kadr; przedstawia dokładnie temat przypisanej sekcji i nie zawiera artefaktów.',
                 }
             manifest.write_text(json.dumps(payload))
             errors = REVIEW.validate(root, slug, manifest)
             self.assertTrue(any('brak wymaganego pliku wariantu jpg' in error for error in errors))
+
+    def test_content_text_with_claims_requires_transcription_and_evidence(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            slug, _, manifest = self.package(root)
+            payload = json.loads(manifest.read_text())
+            payload['entries'][1]['visual_review']['embedded_text'] = {
+                'kind': 'CONTENT', 'claims_or_numbers_present': True, 'matches_article_claims': True,
+            }
+            manifest.write_text(json.dumps(payload))
+            errors = REVIEW.validate(root, slug, manifest)
+            self.assertTrue(any('transkrypcji' in error for error in errors))
+            self.assertTrue(any('URL dowodu' in error for error in errors))
+
+    def test_watermark_only_does_not_require_evidence(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            slug, _, manifest = self.package(root)
+            payload = json.loads(manifest.read_text())
+            payload['entries'][1]['visual_review']['embedded_text'] = {'kind': 'WATERMARK_ONLY'}
+            manifest.write_text(json.dumps(payload))
+            self.assertEqual(REVIEW.validate(root, slug, manifest), [])
 
 
 if __name__ == '__main__':

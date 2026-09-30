@@ -95,7 +95,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 ## 8. Obrazy, HTML i PDF
 
 - Każdy pakiet artykułu ma jeden katalog wejściowy, dokładne nazwy, osobny hero i obrazy sekcji oraz lokalny manifest.
-- Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, nieprawdziwa anatomia lub sprzęt, błędne kadry i ukryte fallbacki są zabronione; sam watermark nie jest przeszkodą.
+- Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, nieprawdziwa anatomia lub sprzęt, błędne kadry i ukryte fallbacki są zabronione; sam watermark nie jest przeszkodą. Nowy manifest kontroli ma `version=2` i jawnie klasyfikuje tekst na obrazie jako brak, sam watermark albo treść. Liczby i twierdzenia wymagają transkrypcji i URL-i dowodów; stare manifesty `version=1` są akceptowane tylko z niezmienionym, zamrożonym hashem.
 - Artykuł ma hero i odrębny obraz dla każdej głównej sekcji merytorycznej. Nie obowiązuje sztywna liczba sekcji ani obrazów: zakres wynika z tematu, a sekcje użytkowe nie są liczone.
 - Wymagane warianty: AVIF, WebP i JPG z prawdziwymi wymiarami, konkretnym `alt` i podpisem. Gdy zmienia się zawartość obrazu, nadaj wszystkim wariantom nową, wersjonowaną nazwę i zaktualizuj źródło, metadane, manifest oraz `_site`; roczny cache `immutable` wyklucza bezpieczne nadpisanie istniejącego URL-u.
 - Po zatwierdzonej kontroli wizualnej rzeczywiste proporcje pliku zastępują planowaną proporcję z promptu. Layout obsługuje panoramy, krajobraz, kwadrat i pionowe plansze bez wymuszania przycięcia; pionowe i kwadratowe obrazy dostają własny wariant układu.

@@ -1,10 +1,10 @@
 {
-  "version": 1,
-  "status": "VERIFIED",
+  "version": 2,
   "slug": "dieta-50-50-po-piecdziesiatce",
-  "reviewed_at": "2026-09-30T10:45:00+02:00",
-  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
-  "reviewed_html_sha256": "7fedc22b0e2a0f76166ad8642ee2ba59342e967696ec94b07355543e6c9f79c5",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "c8edba7c85a7e651ba7054c57dd184072626a8eba93a0df9bd8be6a9044f10c3",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T17:35:00+02:00",
   "entries": [
     {
       "placement": "hero",
@@ -37,33 +37,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „hero artykułu”: Mężczyzna po pięćdziesiątce w kuchni patrzy na talerz i kalendarz z zaznaczonymi dniami postu i jedzenia. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „hero”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Na czym polega dieta 50/50?",
-      "alt": "Kalendarz tygodnia z naprzemiennie zaznaczonymi dniami postu i jedzenia",
+      "alt": "Para po 50-tce planuje naprzemienne dni postne i zwykłe na pustym kalendarzu bez narzuconych liczb",
       "caption": "W tym artykule 50/50 oznacza alternate-day fasting: naprzemienne dni bardzo małej podaży energii i dni jedzenia bez wyznaczonego deficytu.",
-      "width": 1080,
-      "height": 590,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-1-20260929.avif",
-          "sha256": "9a3a332ce362bf93e4ee1125eea8fa9bd267a1b07922f708b93397641605d08a",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-schedule-20260930.avif",
+          "sha256": "1b2c02c6d1add3df478a6f2b4583d317314657c7a59f0249b559b8e9fa03ca2d",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-1-20260929.webp",
-          "sha256": "5ef4af94e61e00c495cd19ab2ab0f9ab208b7bced0245a6e953a1e57403af954",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-schedule-20260930.webp",
+          "sha256": "565b118ad35ca163816a160319b7286e0911715aa1364ac2e7e959e29d43b827",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-1-20260929.jpg",
-          "sha256": "aed4d14ff5f92fa1c7a6c75c5ba51fc6af894e415ac949e00bf7feae0b835e16",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-schedule-20260930.jpg",
+          "sha256": "c03a7ed0ba28f1b5a70c38268ca5ae004c65b2113f0ce355e6e087852dc71aea",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -71,33 +74,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Na czym polega dieta 50/50?”: Kalendarz tygodnia z naprzemiennie zaznaczonymi dniami postu i jedzenia. Zgodność z treścią potwierdza podpis: W tym artykule 50/50 oznacza alternate-day fasting: naprzemienne dni bardzo małej podaży energii i dni jedzenia bez wyznaczonego deficytu."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Na czym polega dieta 50/50?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Co wykazało roczne badanie porównawcze?",
-      "alt": "Waga łazienkowa i miarka krawiecka na drewnianym blacie",
+      "alt": "Uczestniczka badania redukcji masy ciała stoi na wadze podczas kontroli w poradni",
       "caption": "Randomizowane badanie objęło 100 dorosłych z otyłością, ze średnim wiekiem około 44 lat.",
-      "width": 1080,
-      "height": 590,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-2-20260929.avif",
-          "sha256": "62bb15ce327a53d1ea6ffdfe40e5cc8a45ca4b25aea5b511e0e937b3d67d1aaa",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-trial-20260930.avif",
+          "sha256": "676dec7abf17a05d4a948bd0cd21205d0cef34bc5de38f7e7c3b5f64fb89ddf3",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-2-20260929.webp",
-          "sha256": "f1f9269cdb0185392aefe600045a924db26a9f9173c371233df1896c9cb75320",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-trial-20260930.webp",
+          "sha256": "5e79aadae90d84c654a18e30f04b520c9140d7778f3366e0dd566035a36094ac",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-2-20260929.jpg",
-          "sha256": "ad3ebcb645a9ddaf4d37fab666d20e3700f9712258dab7900b8a886da3b8d991",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-trial-20260930.jpg",
+          "sha256": "b08fff0461b8a4bbe3f63c6ab81cfb65cf55aa81fbfbb1fd1a1a71d2d879c125",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -105,33 +111,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Co wykazało roczne badanie porównawcze?”: Waga łazienkowa i miarka krawiecka na drewnianym blacie. Zgodność z treścią potwierdza podpis: Randomizowane badanie objęło 100 dorosłych z otyłością, ze średnim wiekiem około 44 lat."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Co wykazało roczne badanie porównawcze?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Czy post daje dodatkową przewagę metaboliczną?",
-      "alt": "Glukometr i wyniki badania krwi z lipidogramem na stole",
+      "alt": "Lekarka omawia z kobietą po 50-tce wyniki i ograniczenia dowodów dotyczących postu",
       "caption": "Duża metaanaliza sieciowa 99 badań wykazała niewielką przewagę postu naprzemiennego nad ciągłym ograniczeniem masy ciała, około 1,29 kg.",
-      "width": 1080,
-      "height": 590,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-3-20260929.avif",
-          "sha256": "76870244bc2062e3b46d90215db7c19b7ebe079ed580f0ae6d662f786c3561ea",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-metabolic-20260930.avif",
+          "sha256": "fa7750ba1da1d04cb993b8e7690e9ac2c832c2e7ee16b0eb6ff54ad91499a27e",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-3-20260929.webp",
-          "sha256": "1a76229861af0c1b113699c5130afbe0aceb27619bc47508bd539417bf01f0e2",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-metabolic-20260930.webp",
+          "sha256": "f8546c07b3c7d628dd7c2fdf2a33ca0a660f38c353065f153c490fba93fc05a5",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-3-20260929.jpg",
-          "sha256": "70361a67e54cbbec6185dec157b471a0aec6145bd53c8ed7b1e2736aa3340813",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-metabolic-20260930.jpg",
+          "sha256": "c6b1bf122acc664ef204f9cb289f422c87bf56f9df79b12eccac35942f41b7f0",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -139,33 +148,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Czy post daje dodatkową przewagę metaboliczną?”: Glukometr i wyniki badania krwi z lipidogramem na stole. Zgodność z treścią potwierdza podpis: Duża metaanaliza sieciowa 99 badań wykazała niewielką przewagę postu naprzemiennego nad ciągłym ograniczeniem masy ciała, około 1,29 kg."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Czy post daje dodatkową przewagę metaboliczną?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Jak chronić mięśnie podczas redukcji?",
-      "alt": "Dojrzały mężczyzna ćwiczy z hantlami na jasnej siłowni",
+      "alt": "Kobieta i mężczyzna po 50-tce wykonują trening oporowy wspierający ochronę mięśni podczas redukcji",
       "caption": "Dni bardzo małej podaży energii utrudniają rozłożenie białka w posiłkach.",
-      "width": 1080,
-      "height": 590,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-4-20260929.avif",
-          "sha256": "c7395b7e87645456d2a7a2047eee86da9a402e5ec908ecb01c01f4b1568e3d7b",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-muscle-20260930.avif",
+          "sha256": "a617eb0248268917ec150f4b583f27fb9464c9925c0ecfd56812f7357818d3a2",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-4-20260929.webp",
-          "sha256": "4d11960cf8937cc7fa232246da4326650fef77a3e4982b7a2971a3aa1f04da27",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-muscle-20260930.webp",
+          "sha256": "ffe980fd4baf3468887abc4cf44b505a9c6df8cb0e0c31efcc792c7e97742c24",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-4-20260929.jpg",
-          "sha256": "134bee9cff4037317a155253124ea4ded0fd6943d3d2c3d872b1e0d2919ec5ea",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-muscle-20260930.jpg",
+          "sha256": "1e47189d971f1f9ee788b25cb2b9266f840cf86d31237a2d07686cbe12015ae1",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -173,33 +185,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Jak chronić mięśnie podczas redukcji?”: Dojrzały mężczyzna ćwiczy z hantlami na jasnej siłowni. Zgodność z treścią potwierdza podpis: Dni bardzo małej podaży energii utrudniają rozłożenie białka w posiłkach."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak chronić mięśnie podczas redukcji?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Kto nie powinien zaczynać bez konsultacji?",
-      "alt": "Osoba rozmawiająca z lekarzem w gabinecie, na biurku opakowania leków",
+      "alt": "Mężczyzna po 50-tce konsultuje z lekarką bezpieczeństwo postu przy lekach i glikemii",
       "caption": "Post może prowadzić do niedocukrzenia u osób przyjmujących insulinę lub niektóre leki przeciwcukrzycowe, jeśli dawki nie zostaną skorygowane.",
-      "width": 1080,
-      "height": 590,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-5-20260929.avif",
-          "sha256": "1046f6711b168b332e418e0097752791e2f374dc3e97c2c1278d6297f840a25e",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-consult-20260930.avif",
+          "sha256": "a8c5ecc808c31a240e9147cf066d55daadf121cf4dfb7e1b512aeaa5fa02886d",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-5-20260929.webp",
-          "sha256": "83a4bc3f465dadf496a12aaf034ba3f80c04946e89f0ba90fe5db90fb11cab11",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-consult-20260930.webp",
+          "sha256": "3c5b1d5284a3252356592ee3345c760afb0770a400c0d8fd749b06ddd92810f4",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/dieta-50-50-po-piecdziesiatce-section-5-20260929.jpg",
-          "sha256": "ac08b760f7fb3de63e866a7f8abf73e8e49046b9a563100dacc67913a6903c1d",
-          "width": 1080,
-          "height": 590
+          "file": "assets/dieta-50-50-consult-20260930.jpg",
+          "sha256": "2bf3a59ce4da460e4daf5fa37ad09a037661c5574a8fec20dbbf64aea4f56f2e",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -207,7 +222,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Kto nie powinien zaczynać bez konsultacji?”: Osoba rozmawiająca z lekarzem w gabinecie, na biurku opakowania leków. Zgodność z treścią potwierdza podpis: Post może prowadzić do niedocukrzenia u osób przyjmujących insulinę lub niektóre leki przeciwcukrzycowe, jeśli dawki nie zostaną skorygowane."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Kto nie powinien zaczynać bez konsultacji?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     }
   ]

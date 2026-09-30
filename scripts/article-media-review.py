@@ -24,6 +24,7 @@ SKIPPED_H2 = {
     'cytaty do zapamiętania?',
 }
 REQUIRED_VARIANTS = ('avif', 'webp', 'jpg')
+ALLOWED_EMBEDDED_TEXT = ('NONE', 'WATERMARK_ONLY', 'CONTENT')
 
 
 def sha256(path):
@@ -107,8 +108,18 @@ def validate(root, slug, manifest_path=None):
         manifest = json.loads(manifest_path.read_text())
     except (ValueError, OSError) as error:
         return [f'Nie można odczytać manifestu kontroli wizualnej: {error}.']
-    if manifest.get('version') != 1:
-        errors.append('Manifest kontroli wizualnej wymaga version=1.')
+    version = manifest.get('version')
+    if version not in (1, 2):
+        errors.append('Manifest kontroli wizualnej wymaga version=2 albo zamrożonego manifestu legacy version=1.')
+    if version == 1:
+        legacy_path = root / 'data' / 'reports' / 'article-media-review-legacy-v1.json'
+        try:
+            legacy = json.loads(legacy_path.read_text())
+        except (ValueError, OSError):
+            legacy = {}
+        expected_manifest_hash = legacy.get(slug) if isinstance(legacy, dict) else None
+        if expected_manifest_hash != sha256(manifest_path):
+            errors.append('Nowy lub zmieniony przegląd obrazu wymaga version=2; version=1 jest dozwolone tylko dla zamrożonych manifestów legacy.')
     if manifest.get('slug') != slug:
         errors.append('Slug manifestu kontroli wizualnej nie zgadza się z artykułem.')
     if manifest.get('status') != 'VERIFIED':
@@ -141,6 +152,22 @@ def validate(root, slug, manifest_path=None):
         for flag in ('no_misleading_text_or_logo', 'anatomy_and_equipment_plausible'):
             if review.get(flag) is not True:
                 errors.append(f'{placement}: visual_review.{flag} musi być jawnie potwierdzone.')
+        if version == 2:
+            embedded = review.get('embedded_text') if isinstance(review.get('embedded_text'), dict) else {}
+            kind = embedded.get('kind')
+            if kind not in ALLOWED_EMBEDDED_TEXT:
+                errors.append(f'{placement}: visual_review.embedded_text.kind musi mieć wartość NONE, WATERMARK_ONLY albo CONTENT.')
+            if kind == 'CONTENT':
+                if len(str(embedded.get('transcription') or '').strip()) < 3:
+                    errors.append(f'{placement}: obraz z tekstem treściowym wymaga transkrypcji widocznego tekstu.')
+                if embedded.get('claims_or_numbers_present') not in (True, False):
+                    errors.append(f'{placement}: obraz z tekstem treściowym wymaga jawnej oceny claims_or_numbers_present.')
+                if embedded.get('matches_article_claims') is not True:
+                    errors.append(f'{placement}: tekst na obrazie musi być jawnie zgodny z treścią artykułu.')
+                if embedded.get('claims_or_numbers_present') is True:
+                    evidence = embedded.get('evidence_urls')
+                    if not isinstance(evidence, list) or not evidence or any(not re.match(r'^https?://', str(url)) for url in evidence):
+                        errors.append(f'{placement}: tekst z twierdzeniem lub liczbą wymaga co najmniej jednego URL dowodu.')
         if len(str(review.get('note') or '').strip()) < 30:
             errors.append(f'{placement}: notatka z rzeczywistego przeglądu obrazu jest zbyt krótka.')
     return errors

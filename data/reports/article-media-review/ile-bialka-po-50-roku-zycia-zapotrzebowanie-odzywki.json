@@ -1,10 +1,10 @@
 {
-  "version": 1,
-  "status": "VERIFIED",
+  "version": 2,
   "slug": "ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki",
-  "reviewed_at": "2026-09-30T10:45:00+02:00",
-  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
-  "reviewed_html_sha256": "c29a11e41b523b1bee21eaaf105495c2b5072d84fe9ef3e9dad8e38c0df3f3cf",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "a35c422fbe80b68c928f71cf04627ce35d74ec7da96f3115e5b60119061bfea5",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T17:35:00+02:00",
   "entries": [
     {
       "placement": "hero",
@@ -37,33 +37,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „hero artykułu”: Ile białka po 50. roku życia? Zapotrzebowanie, źródła i odżywki. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „hero”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Jak obliczyć dzienną ilość białka?",
-      "alt": "Infografika z kalkulatorem białka dla różnych mas ciała po 50-tce, opisy po polsku, ciemne tło",
+      "alt": "Mężczyzna po 50-tce oblicza z dietetyczką ilość białka na podstawie masy ciała i jadłospisu",
       "caption": "Pomnóż odpowiednią masę ciała przez ustalony cel w gramach na kilogram.",
-      "width": 1080,
-      "height": 589,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-1-20260929.avif",
-          "sha256": "7cbbcfb68c5b9d2bad11d09cd619d0d28d222d85ca1e21753acd092b49f22f73",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-target-20260930.avif",
+          "sha256": "7d74be451e62c3b0ddfe8dc07a937447bfa838d071c0f4a2f334be197634d61a",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-1-20260929.webp",
-          "sha256": "4bc9788b49adc53bf9166665c532537085fa04abe0fe538c43dab9f2df5ebae3",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-target-20260930.webp",
+          "sha256": "363d718c787ccbda2ee29862a8ad68d7e9b713453c8a1aa7e968f20690dbebb5",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-1-20260929.jpg",
-          "sha256": "30f19a43bfaa74a2bf8cee04e75a88daf45e1ad60433beb89abcbaf68f9b4808",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-target-20260930.jpg",
+          "sha256": "de07d52d6a00074b6ee264544a60cdd4b5cbf90cd3fa57f0b358cb4e26cc88a1",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -71,33 +74,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Jak obliczyć dzienną ilość białka?”: Infografika z kalkulatorem białka dla różnych mas ciała po 50-tce, opisy po polsku, ciemne tło. Zgodność z treścią potwierdza podpis: Pomnóż odpowiednią masę ciała przez ustalony cel w gramach na kilogram."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak obliczyć dzienną ilość białka?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Jak rozłożyć białko między posiłki?",
-      "alt": "Harmonogram posiłków z zawartością białka w ciągu dnia, opisy po polsku, ciemne tło, ikony posiłków",
+      "alt": "Kobieta po 50-tce je trzy zbilansowane posiłki zawierające różne źródła białka",
       "caption": "Mięśnie reagują na porcję aminokwasów oraz trening, dlatego praktycznie warto umieścić wyraźne źródło białka w każdym głównym posiłku.",
-      "width": 1080,
-      "height": 589,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-2-20260929.avif",
-          "sha256": "9c2426aa7d497bb687a58352d9142c35678073ccfca2f6d7a952deb288ce315f",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-meals-20260930.avif",
+          "sha256": "eb7ccdd3c74bba4968003e0c76d9ae5ddbb11b65adbdfb6f9b7054c9257d5837",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-2-20260929.webp",
-          "sha256": "aa09674a529e2cfbe009133ba159fb21b3416147117eb5aa673fef9ba9de10ee",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-meals-20260930.webp",
+          "sha256": "c2fd2ae20ac5ac7a7a775ea76de5c1424b9da1c328c9486451f9adf317b702a5",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-2-20260929.jpg",
-          "sha256": "d08fa6dbf0d4d593a113172c8a61c141031791aeef2c231b4e6c5436adb3e18c",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-meals-20260930.jpg",
+          "sha256": "86f704420f77eea5013fdf366f155fc5960955ec9406ec3bc39c226ba08d49de",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -105,33 +111,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Jak rozłożyć białko między posiłki?”: Harmonogram posiłków z zawartością białka w ciągu dnia, opisy po polsku, ciemne tło, ikony posiłków. Zgodność z treścią potwierdza podpis: Mięśnie reagują na porcję aminokwasów oraz trening, dlatego praktycznie warto umieścić wyraźne źródło białka w każdym głównym posiłku."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak rozłożyć białko między posiłki?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Czy WPC lub WPI jest konieczne?",
-      "alt": "Tabela porównawcza WPC i WPI z kluczowymi parametrami i opisami po polsku, ciemne tło",
+      "alt": "Mężczyzna po 50-tce porównuje dwa nieoznakowane opakowania odżywki białkowej przy zbilansowanym posiłku",
       "caption": "Nie. Koncentrat WPC jest zwykle tańszy i zawiera więcej laktozy, a izolat WPI ma wyższy udział białka oraz mniej laktozy i tłuszczu.",
-      "width": 1080,
-      "height": 589,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-3-20260929.avif",
-          "sha256": "e1ea887aa148c004fe9001db9ad8f203c10d6bef254ad785f09732f0200c45f3",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-whey-choice-v2-20260930.avif",
+          "sha256": "fa9248647d29c347e4fcd47182d04b4eff26018088acffb4f4720bccf8670779",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-3-20260929.webp",
-          "sha256": "1bcec893b38b81aed75f83b7a0fd1d9d0bae112b2f8b067d0e96e95869bfed4b",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-whey-choice-v2-20260930.webp",
+          "sha256": "579d02d0fd9c9476ba9cfe55db70159da64d49ab2d4bfb5c5ccbbae6265a294b",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-3-20260929.jpg",
-          "sha256": "19fb09e8b71e9f41c98b069c6a9269112346d2e6dfe6174ed5ae86d44ed52b08",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-whey-choice-v2-20260930.jpg",
+          "sha256": "ca872ea68e8ec0fca5de5b4f980ae9cfc11d91a9905c9afd33717a24c2f0da39",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -139,33 +148,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Czy WPC lub WPI jest konieczne?”: Tabela porównawcza WPC i WPI z kluczowymi parametrami i opisami po polsku, ciemne tło. Zgodność z treścią potwierdza podpis: Nie. Koncentrat WPC jest zwykle tańszy i zawiera więcej laktozy, a izolat WPI ma wyższy udział białka oraz mniej laktozy i tłuszczu."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Czy WPC lub WPI jest konieczne?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Kiedy większa ilość białka wymaga konsultacji?",
-      "alt": "Infografika obalająca mit szkodliwości białka dla nerek, po polsku, ciemne tło, przekreślony symbol ostrzeżenia",
+      "alt": "Lekarka omawia z mężczyzną po 50-tce wyniki nerkowe i indywidualną podaż białka",
       "caption": "Przewlekła choroba nerek, zalecone ograniczenie białka, nieprawidłowy eGFR, choroba wątroby lub znaczne niedożywienie wymagają indywidualnego planu.",
-      "width": 1080,
-      "height": 589,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-4-20260929.avif",
-          "sha256": "0271a3fcfa523a168fd963d5c897ca01722a2798e1b666c6bc2265f9adb9b335",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-kidney-consult-20260930.avif",
+          "sha256": "0d815cb6e3a040a80f232ffd18b98bbd4a57d356c66dc46f3ceab87cf0a2a753",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-4-20260929.webp",
-          "sha256": "d8d189374e8b745324f358834957a049d065ec8f6afa4e210219b6e544ca35ed",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-kidney-consult-20260930.webp",
+          "sha256": "65fa7582b0f7728c86c51916fac18a9d9f0ed959cdc5c445ba14677a5ec660dc",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki-section-4-20260929.jpg",
-          "sha256": "32ca90ce8aab0f6d3f2dcc543c02ab60349029f6ed4a2b1f06e1c41713174f7e",
-          "width": 1080,
-          "height": 589
+          "file": "assets/ile-bialka-kidney-consult-20260930.jpg",
+          "sha256": "578dca48f2ea9be7a819f151226fe4d92fae6fe19310cbca91496119d149d51f",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -173,7 +185,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Kiedy większa ilość białka wymaga konsultacji?”: Infografika obalająca mit szkodliwości białka dla nerek, po polsku, ciemne tło, przekreślony symbol ostrzeżenia. Zgodność z treścią potwierdza podpis: Przewlekła choroba nerek, zalecone ograniczenie białka, nieprawidłowy eGFR, choroba wątroby lub znaczne niedożywienie wymagają indywidualnego planu."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Kiedy większa ilość białka wymaga konsultacji?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     }
   ]

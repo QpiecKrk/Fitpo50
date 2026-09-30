@@ -1,10 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "slug": "sen-po-50",
   "status": "VERIFIED",
-  "reviewed_html_sha256": "d25d5cea350653494ce3c83058356390e89fe7dfd5a25b9d02500e7bbacd9186",
+  "reviewed_html_sha256": "e0ae837f694c7d42b6d7dd4b5330a799d5a36babe363128a0131c8f98fe7d2af",
   "reviewed_by": "Codex visual review",
-  "reviewed_at": "2026-09-30T10:45:00+02:00",
+  "reviewed_at": "2026-09-30T17:35:00+02:00",
   "entries": [
     {
       "placement": "hero",
@@ -37,7 +37,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „hero”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "WATERMARK_ONLY"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „hero”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne. Widoczny jest wyłącznie nieinformacyjny znak wodny, bez treści medycznej lub liczbowej."
       }
     },
     {
@@ -71,7 +74,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Ile godzin snu potrzeba po 50-tce?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Ile godzin snu potrzeba po 50-tce?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -105,7 +111,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak ustawić rytm dobowy bez obietnic „resetu hormonów”?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak ustawić rytm dobowy bez obietnic „resetu hormonów”?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -139,7 +148,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Jak ruch, kofeina i alkohol wpływają na noc?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak ruch, kofeina i alkohol wpływają na noc?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -173,7 +185,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obraz obejrzany w pełnym zestawie kontrolnym; odpowiada miejscu „section:Kiedy problem ze snem wymaga diagnostyki?”, nie zawiera mylącego logo ani treści i jest wiarygodny wizualnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Kiedy problem ze snem wymaga diagnostyki?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     }
   ]

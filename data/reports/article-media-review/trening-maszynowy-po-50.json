@@ -1,10 +1,10 @@
 {
-  "version": 1,
-  "status": "VERIFIED",
+  "version": 2,
   "slug": "trening-maszynowy-po-50",
-  "reviewed_at": "2026-09-30T10:45:00+02:00",
-  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
-  "reviewed_html_sha256": "ee203f3cfafef89d7e4a5fdfc259348c448aa3f7cd7bbd640535d1c61b93eb87",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "11b8db54c821a6cd27ade721f6f8b7747698451109590db740d7ab55a7bbbafc",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T17:35:00+02:00",
   "entries": [
     {
       "placement": "hero",
@@ -37,7 +37,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „hero artykułu”: Osoba po 50-tce na maszynie chest press w nowoczesnej siłowni. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „hero”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -71,7 +74,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Czy maszyny są bezpieczniejsze od wolnych ciężarów?”: Trener pokazuje kobiecie prawidłowe ustawienie maszyny. Zgodność z treścią potwierdza podpis: Maszyna stabilizuje część ruchu i ułatwia naukę dozowania wysiłku, dlatego początkujący może skupić się na ustawieniu, oddechu i tempie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Czy maszyny są bezpieczniejsze od wolnych ciężarów?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -105,7 +111,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Jak ustawić pierwsze dwa tygodnie?”: Mężczyzna wykonuje lekki trening na suwnicy pod nadzorem. Zgodność z treścią potwierdza podpis: Wybierz pięć lub sześć ruchów obejmujących nogi, przyciąganie, wypychanie i biodra."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak ustawić pierwsze dwa tygodnie?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -139,7 +148,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Kiedy zwiększyć ciężar od trzeciego tygodnia?”: Kobieta zapisuje powtórzenia po serii na suwnicy. Zgodność z treścią potwierdza podpis: Jeśli w dwóch kolejnych treningach wykonujesz górny zakres powtórzeń z równym tempem, bez skracania ruchu i z zapasem, podnieś obciążenie o najmniejszy dostępny stopień."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Kiedy zwiększyć ciężar od trzeciego tygodnia?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
@@ -173,7 +185,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Czy po 30 dniach trzeba przejść na wolne ciężary?”: Trener omawia z mężczyzną wybór maszyny hantli i ćwiczeń z masą ciała. Zgodność z treścią potwierdza podpis: Nie. Maszyny mogą pozostać podstawą programu, jeśli pozwalają trenować bez bólu i stopniowo zwiększać wysiłek."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Czy po 30 dniach trzeba przejść na wolne ciężary?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     }
   ]

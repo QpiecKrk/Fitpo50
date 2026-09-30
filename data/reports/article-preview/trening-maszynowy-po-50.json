@@ -1,12 +1,12 @@
 {
   "version": 1,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T13:01:12.496Z",
+  "generated_at": "2026-09-30T19:07:54.652Z",
   "slug": "trening-maszynowy-po-50",
-  "html_sha256": "ee203f3cfafef89d7e4a5fdfc259348c448aa3f7cd7bbd640535d1c61b93eb87",
-  "site_html_sha256": "ee203f3cfafef89d7e4a5fdfc259348c448aa3f7cd7bbd640535d1c61b93eb87",
-  "pdf_sha256": "81ede8665462565f8c7623a8fbad3ba49d68979b244f95b239457f8d434d0fb9",
-  "site_pdf_sha256": "81ede8665462565f8c7623a8fbad3ba49d68979b244f95b239457f8d434d0fb9",
+  "html_sha256": "11b8db54c821a6cd27ade721f6f8b7747698451109590db740d7ab55a7bbbafc",
+  "site_html_sha256": "11b8db54c821a6cd27ade721f6f8b7747698451109590db740d7ab55a7bbbafc",
+  "pdf_sha256": "ebb68ec48803361d04ec4a4dc997744abe9d02552a29f47f24709c76f4728771",
+  "site_pdf_sha256": "ebb68ec48803361d04ec4a4dc997744abe9d02552a29f47f24709c76f4728771",
   "html": {
     "desktop": {
       "bodyOverflow": false,

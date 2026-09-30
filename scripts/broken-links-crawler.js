@@ -57,13 +57,28 @@ function collectRefs(html) {
 }
 
 function extractCanonical(html) {
-  const m = String(html).match(/<link\s+rel="canonical"\s+href="([^"]+)"/i);
-  return m ? String(m[1]).trim() : '';
+  const tags = String(html).match(/<link\b[^>]*>/gi) || [];
+  for (const tag of tags) {
+    const rel = extractAttribute(tag, 'rel').toLowerCase().split(/\s+/);
+    if (rel.includes('canonical')) return extractAttribute(tag, 'href');
+  }
+  return '';
 }
 
 function extractRobots(html) {
-  const m = String(html).match(/<meta\s+name="robots"\s+content="([^"]+)"/i);
-  return m ? String(m[1]).trim().toLowerCase() : '';
+  const tags = String(html).match(/<meta\b[^>]*>/gi) || [];
+  for (const tag of tags) {
+    if (extractAttribute(tag, 'name').toLowerCase() === 'robots') {
+      return extractAttribute(tag, 'content').toLowerCase();
+    }
+  }
+  return '';
+}
+
+function extractAttribute(tag, name) {
+  const escaped = String(name).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = String(tag).match(new RegExp(`\\b${escaped}\\s*=\\s*(?:"([^"]*)"|'([^']*)')`, 'i'));
+  return match ? String(match[1] ?? match[2] ?? '').trim() : '';
 }
 
 function extractTitle(html) {
@@ -242,4 +257,6 @@ function main() {
   console.log(`[PASS] seo-crawl OK (HTML: ${htmlFiles.length}, dir: ${targetDir}).`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { extractCanonical, extractRobots };

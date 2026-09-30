@@ -1,10 +1,10 @@
 {
-  "version": 1,
-  "status": "VERIFIED",
+  "version": 2,
   "slug": "kreatyna-po-50-tce-kompletny-przewodnik",
-  "reviewed_at": "2026-09-30T10:45:00+02:00",
-  "reviewed_by": "Codex — rzeczywista kontrola pełnych kadrów",
-  "reviewed_html_sha256": "816fb3163afedaf54db56a57d85431fdd2f7bc193bb7d90e1bb7ba9c80c1be14",
+  "status": "VERIFIED",
+  "reviewed_html_sha256": "904d82b11f7f9bd145cff42b6fb70525475a9bf082e0ff38a65ca8f688a33115",
+  "reviewed_by": "Codex visual review",
+  "reviewed_at": "2026-09-30T17:35:00+02:00",
   "entries": [
     {
       "placement": "hero",
@@ -37,33 +37,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „hero artykułu”: Aktywny mezczyzna po piecdziesiatce na silowni trzyma sloik z kreatyna. Zgodność z treścią potwierdza podpis: Kadr wprowadza temat artykułu i odpowiada jego głównej obietnicy."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „hero”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Co daje kreatyna osobie po 50-tce?",
-      "alt": "Starszy mezczyzna cwiczacy z hantelkami pod okiem trenera w silowni",
+      "alt": "Mężczyzna po 60-tce wykonuje wyciskanie nogami pod nadzorem trenera obok nieoznakowanego opakowania kreatyny",
       "caption": "Kreatyna zwiększa dostępność fosfokreatyny, z której mięśnie szybko odtwarzają ATP podczas krótkiego, intensywnego wysiłku.",
-      "width": 1080,
-      "height": 589,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-1-20260929.avif",
-          "sha256": "f5bd87d62d04e6287891c1416b8fdced8741cad2bcd19123bc6b215bd703cbf1",
-          "width": 1080,
-          "height": 589
+          "file": "assets/kreatyna-strength-context-20260930.avif",
+          "sha256": "e533173642af88e2ada4232faa0b6dcd5df2d0b2f66020f05b534f8a83142a5e",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-1-20260929.webp",
-          "sha256": "aa2b4c8a0c46b8427749f31e653d9fcba4e02eaf3665a2a80a462472fdfc58a3",
-          "width": 1080,
-          "height": 589
+          "file": "assets/kreatyna-strength-context-20260930.webp",
+          "sha256": "711bd44e6fcbd221f6373736feeddd265b7086a13c254d8185699ab139fe5d3e",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-1-20260929.jpg",
-          "sha256": "5a177988bdde37bd846064744c88d6b34a8def4f4c67de100040d278309dfa89",
-          "width": 1080,
-          "height": 589
+          "file": "assets/kreatyna-strength-context-20260930.jpg",
+          "sha256": "afebab3251a6c286cb1a8b63134b895c35f8b6cb9b0b5765cf66a511058e5b00",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -71,33 +74,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Co daje kreatyna osobie po 50-tce?”: Starszy mezczyzna cwiczacy z hantelkami pod okiem trenera w silowni. Zgodność z treścią potwierdza podpis: Kreatyna zwiększa dostępność fosfokreatyny, z której mięśnie szybko odtwarzają ATP podczas krótkiego, intensywnego wysiłku."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Co daje kreatyna osobie po 50-tce?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Czy kreatyna poprawia pamięć?",
-      "alt": "Schemat mozgu z zaznaczonymi obszarami pamieci i metabolizmu energetycznego",
+      "alt": "Kobieta po 60-tce wykonuje zadanie poznawcze podczas obserwacji badaczki",
       "caption": "Nowsze przeglądy znajdują możliwy sygnał poprawy niektórych wyników poznawczych, ale baza badań u starszych dorosłych jest mała i niejednorodna.",
-      "width": 1024,
-      "height": 559,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-2-20260929.avif",
-          "sha256": "7566ec47fbd78d3284242307a73f178f997cc0c5aeebb5b07dc48db3cdda4f73",
-          "width": 1024,
-          "height": 559
+          "file": "assets/kreatyna-memory-research-20260930.avif",
+          "sha256": "06252718f70645b4197ad15edd37cc0a30588769814de5bfaf7e3ab71fefc25c",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-2-20260929.webp",
-          "sha256": "599cc4cf9d96018bb7b63774c77f6eae7fbcf5bb15ffc16ab325475886ff6684",
-          "width": 1024,
-          "height": 559
+          "file": "assets/kreatyna-memory-research-20260930.webp",
+          "sha256": "355c40bd9d2ac755774d06da0252a3c8c01d78cdb586693a33405a56e286107b",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-2-20260929.jpg",
-          "sha256": "48a6a04c9b2a76f6920e5eeffea582a3eba08346e7862a6e7b1da51c14070bea",
-          "width": 1024,
-          "height": 559
+          "file": "assets/kreatyna-memory-research-20260930.jpg",
+          "sha256": "734ff186cd328256217ce1696dd63a5e0f50794f44d5eb914a11250a84a39b49",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -105,33 +111,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Czy kreatyna poprawia pamięć?”: Schemat mozgu z zaznaczonymi obszarami pamieci i metabolizmu energetycznego. Zgodność z treścią potwierdza podpis: Nowsze przeglądy znajdują możliwy sygnał poprawy niektórych wyników poznawczych, ale baza badań u starszych dorosłych jest mała i niejednorodna."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Czy kreatyna poprawia pamięć?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Jak dawkować kreatynę bez zbędnego komplikowania?",
-      "alt": "Infografika przedstawiajaca protokol dawkowania kreatyny po 50-tce",
+      "alt": "Mężczyzna po 50-tce wsypuje porcję kreatyny z nieoznakowanego opakowania do szklanki wody",
       "caption": "Najprostszy protokół to 3–5 g monohydratu codziennie.",
-      "width": 1024,
-      "height": 559,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-3-20260929.avif",
-          "sha256": "c2b29be747f9fbee5e16016078fad448449bf37cd3d3a4bcaf58c6af921bf6db",
-          "width": 1024,
-          "height": 559
+          "file": "assets/kreatyna-dosing-20260930.avif",
+          "sha256": "ee379cbe7f3afbe7c9f3096f1d140eb84d3672d6e12769e81a2c4463c50cdecb",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-3-20260929.webp",
-          "sha256": "4d171df41fa2906ac3f02246c832a557d8fa4974b2826a528905544e9a69a5eb",
-          "width": 1024,
-          "height": 559
+          "file": "assets/kreatyna-dosing-20260930.webp",
+          "sha256": "9712835a1b362e03f292afb31b2eba09ad96bfb5d1baeed91ab33b3e43bf0cd3",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-3-20260929.jpg",
-          "sha256": "7635f0a3aa680b6ad8385fafea7f8cea6458b456048c4452eb87792c48c32359",
-          "width": 1024,
-          "height": 559
+          "file": "assets/kreatyna-dosing-20260930.jpg",
+          "sha256": "5391bae78660133eee2ccb01b2b817aa7b68a6264706adae8ee3b89d0f56c61b",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -139,33 +148,36 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Jak dawkować kreatynę bez zbędnego komplikowania?”: Infografika przedstawiajaca protokol dawkowania kreatyny po 50-tce. Zgodność z treścią potwierdza podpis: Najprostszy protokół to 3–5 g monohydratu codziennie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Jak dawkować kreatynę bez zbędnego komplikowania?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     },
     {
       "placement": "section:Kiedy potrzebna jest konsultacja i jak czytać kreatyninę?",
-      "alt": "Lekarz rozmawiajacy ze starsza pacjentka, trzymajaca wyniki badan krwi",
+      "alt": "Kobieta po 60-tce omawia z lekarzem funkcję nerek i interpretację kreatyniny",
       "caption": "Osoba z przewlekłą chorobą nerek, nieprawidłowym eGFR, chorobą wymagającą ograniczeń płynów albo lekami mogącymi uszkadzać nerki nie powinna rozpoczynać suplementacji samodzielnie.",
-      "width": 1024,
-      "height": 559,
+      "width": 1600,
+      "height": 900,
       "variants": {
         "avif": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-4-20260929.avif",
-          "sha256": "d11fc8a06615d4b97f0d037e1b95f32bbf4acc27c05d8ee33fcea0dbd3b1f4fa",
-          "width": 1024,
-          "height": 559
+          "file": "assets/kreatyna-kidney-consult-20260930.avif",
+          "sha256": "a14673d5654644f5626b2b67189af7a79a09504747c16e75644346cb510751b4",
+          "width": 1600,
+          "height": 900
         },
         "webp": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-4-20260929.webp",
-          "sha256": "28e824543bb3ac86bc9e191cf6b3e6f2596a29aab4a0a406fd3f4ac580f610a5",
-          "width": 1024,
-          "height": 559
+          "file": "assets/kreatyna-kidney-consult-20260930.webp",
+          "sha256": "1a1c161d3f2c59c88200de41cee9f43d49827375bfa88cd015c92b52cbb1e0fa",
+          "width": 1600,
+          "height": 900
         },
         "jpg": {
-          "file": "assets/kreatyna-po-50-tce-kompletny-przewodnik-section-4-20260929.jpg",
-          "sha256": "9ca1fc08f09257f771f783a4f34aa7023ce04231303d668d12d6ffe27367a5ea",
-          "width": 1024,
-          "height": 559
+          "file": "assets/kreatyna-kidney-consult-20260930.jpg",
+          "sha256": "4d7a11fd4bbe694fb2f81b798ecfe63026f5898d04ab86a6e14deec0a352b61b",
+          "width": 1600,
+          "height": 900
         }
       },
       "visual_review": {
@@ -173,7 +185,10 @@
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
-        "note": "Obejrzano pełny kadr dla „Kiedy potrzebna jest konsultacja i jak czytać kreatyninę?”: Lekarz rozmawiajacy ze starsza pacjentka, trzymajaca wyniki badan krwi. Zgodność z treścią potwierdza podpis: Osoba z przewlekłą chorobą nerek, nieprawidłowym eGFR, chorobą wymagającą ograniczeń płynów albo lekami mogącymi uszkadzać nerki nie powinna rozpoczynać suplementacji samodzielnie."
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały kadr w pełnej rozdzielczości dla miejsca „section:Kiedy potrzebna jest konsultacja i jak czytać kreatyninę?”. Obraz odpowiada treści sekcji, nie zawiera mylących liczb ani twierdzeń, a anatomia i sprzęt są wiarygodne."
       }
     }
   ]

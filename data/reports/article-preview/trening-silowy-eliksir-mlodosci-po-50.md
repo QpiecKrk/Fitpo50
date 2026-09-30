@@ -3,8 +3,8 @@
 - Status: **PREVIEW_READY**
 - Slug: trening-silowy-eliksir-mlodosci-po-50
 - Render HTML: desktop 1440 px + mobile 390 px
-- Tabele semantyczne: 0
-- PDF: 8 stron, wyrenderowano 8
+- Tabele semantyczne: 1
+- PDF: 5 stron, wyrenderowano 5
 - Zgodność tekstu HTML→PDF: 100.00%
 - HTML source/_site: 1:1
 - PDF source/_site: 1:1

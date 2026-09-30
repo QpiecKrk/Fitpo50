@@ -1,12 +1,12 @@
 {
   "version": 1,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T13:01:07.074Z",
+  "generated_at": "2026-09-30T19:07:59.391Z",
   "slug": "trening-3x30-dla-50-plus",
-  "html_sha256": "047da822cecf9fc85e386f65da42df6b9b6236ddde839ed5e9abca05aebf195b",
-  "site_html_sha256": "047da822cecf9fc85e386f65da42df6b9b6236ddde839ed5e9abca05aebf195b",
-  "pdf_sha256": "dfc6e62b622f841691624591afe22b98c316130ce43fb19f4152dbb24fdc07cb",
-  "site_pdf_sha256": "dfc6e62b622f841691624591afe22b98c316130ce43fb19f4152dbb24fdc07cb",
+  "html_sha256": "22c3f3dbc7455727a78f859dc574d40468ade5564346c3f2a0e518b9c2e5329a",
+  "site_html_sha256": "22c3f3dbc7455727a78f859dc574d40468ade5564346c3f2a0e518b9c2e5329a",
+  "pdf_sha256": "34b9c60fa093900a7b4a8534d69154573f4f2af7d01505def691202d463c3f3b",
+  "site_pdf_sha256": "34b9c60fa093900a7b4a8534d69154573f4f2af7d01505def691202d463c3f3b",
   "html": {
     "desktop": {
       "bodyOverflow": false,
