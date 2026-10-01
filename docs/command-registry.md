@@ -15,6 +15,9 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 - `npm run predeploy:check` - bramka przed wdrozeniem, bez pelnego builda.
 - `npm run assets:mirror:sync` - synchronizuje aktywa zrodlowe do `_site`.
 - `npm run assets:mirror:check` - sprawdza, czy mirror jest spojny.
+- `npm run deployment:prepare` - po eksporcie tworzy unikalny marker paczki w źródle i `_site`; marker musi wejść do commita.
+- `npm run deployment:verify` - twarda kontrola po pushu: `origin/main`, marker wydania, HTTP, canonical, sitemap, a dla zmienionych artykułów także PDF i obrazy. Tylko `LIVE_DEPLOYED_AND_VALIDATED` potwierdza produkcję.
+- `npm run hostinger:recovery` - bezpieczny dry-run awarii integracji. Tryb apply wymaga jawnego przełącznika, czystego repo i markera serwerowego; nie usuwa nieznanych plików.
 - `npm run sitemap:lastmod:sync` - aktualizuje daty w sitemap.
 - `npm run sitemap:lastmod:check` - sprawdza sitemap bez zapisu.
 
@@ -71,4 +74,5 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 
 - `npm run prepush:strict` - starszy wariant laczony; preferuj `npm run prepush:local`.
 - `npm run check:build-export` - szeroki check techniczny; do codziennego push wystarcza `prepush:local`.
+- `npm run hostinger:clean-repo` - komenda wycofana; zawsze blokuje wykonanie i wskazuje bezpieczne recovery.
 - `npm run growth:*` inne niz wymienione wyzej - tylko gdy wiadomo, jaki raport lub akcja jest potrzebna.

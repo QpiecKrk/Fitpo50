@@ -3,6 +3,7 @@ set -euo pipefail
 
 ./scripts/export_site.sh
 npm run assets:mirror:sync
+npm run deployment:prepare
 npm run predeploy:check
 
 # Dodaj tylko zmiany w już śledzonych plikach
@@ -20,11 +21,8 @@ if git diff --cached --quiet; then
 fi
 
 git commit -m "Aktualizacja strony"
-git pull --rebase --autostash origin main
 git push
 
 echo "OK: Git gotowy."
-echo "Przed kliknieciem 'Wdróż' na serwerze wykonaj:"
-echo "  cd <repo-na-serwerze>"
-echo "  npm run hostinger:clean-repo"
-echo "Dopiero potem uruchom deployment w Hostingerze."
+echo "Hostinger wdraża main automatycznie. Uruchamiam twardą kontrolę produkcji."
+npm run deployment:verify

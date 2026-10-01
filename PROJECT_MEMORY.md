@@ -162,7 +162,9 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Status RED zatrzymuje push. YELLOW wymaga przeczytania ostrzeżeń; świadomie zatwierdzony duży zakres może użyć jednorazowego `FITPO50_BYPASS_DIFF_GUARD=1`, ale pozostałe testy nadal obowiązują.
 - Nie używamy `git clean -fd`, `git reset --hard` ani ślepego usuwania untracked.
 - Sprzątanie dotyczy wyłącznie jawnie sprawdzonej listy plików tymczasowych lub wyraźnie zatwierdzonego zakresu.
-- Po pushu na Hostingerze: `npm run hostinger:clean-repo`, następnie standardowy deployment.
+- Hostinger automatycznie wdraża `main`. Przed commitem utwórz marker przez `npm run deployment:prepare`, a po pushu uruchom `npm run deployment:verify`.
+- `PUSHED` nie oznacza produkcji. `DEPLOYED` oznacza wykrycie markera z niepełną walidacją. Produkcję potwierdza wyłącznie `LIVE_DEPLOYED_AND_VALIDATED`.
+- `npm run hostinger:clean-repo` jest wycofane. Awaryjne `npm run hostinger:recovery` domyślnie wykonuje tylko dry-run, nie usuwa nieznanych plików i blokuje się na brudnym lub rozbieżnym repo.
 
 ## 13. Pamięć modułowa
 

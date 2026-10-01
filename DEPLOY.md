@@ -1,42 +1,46 @@
 # Deploy
 
-Do `public_html` wrzucaj tylko wyeksportowaną wersję strony, nie całe repo.
+Standardem jest automatyczne wdrożenie przez integrację Hostinger po pushu do gałęzi `main`. Publiczny eksport pozostaje w `_site`, a jego zgodność ze źródłem jest obowiązkowa.
 
-Eksport czystej wersji:
+## Standardowy workflow
 
 ```bash
 ./scripts/export_site.sh
+npm run assets:mirror:sync
+npm run deployment:prepare
+npm run predeploy:check
+git diff --check
+git add -A
+git commit -m "<konkretny opis>"
+git push origin main
+npm run deployment:verify
 ```
 
-Wynik trafia do katalogu `_site/`.
+`deployment:prepare` zapisuje ten sam unikalny marker do `deployment.json` i `_site/deployment.json`. Marker musi wejść do tego samego commita co paczka.
 
-Na serwer wysyłaj zawartość `_site/`, a nie katalog główny projektu.
+Znaczenie wyników:
 
-`export_site.sh` automatycznie:
-- sprawdza zależności npm,
-- doinstaluje je, jeśli brakuje (`npm install`),
-- buduje TypeScript (`npm run build`),
-- dopiero potem generuje czysty katalog `_site/`.
+- `PUSHED` — commit jest na GitHubie, ale serwer nie pokazuje jeszcze markera paczki;
+- `DEPLOYED` — marker dotarł, lecz kontrola produkcyjna ma blokery;
+- `LIVE_DEPLOYED_AND_VALIDATED` — wdrożenie i pełna kontrola produkcji przeszły;
+- `NOT_PUSHED` — `origin/main` nie odpowiada oczekiwanemu commitowi.
 
-Awaryjnie (tylko świadomie, gdy chcesz pominąć kompilację TS):
+Sam push i zielony panel Hostinger nie potwierdzają produkcji. Pełny kontrakt opisuje `docs/deployment-status-contract.md`.
+
+## Awaria integracji Hostinger
+
+Komenda `npm run hostinger:clean-repo` jest wycofana i zawsze kończy się blokadą. Nie wolno automatycznie czyścić serwerowego repo.
+
+Zacznij od bezpiecznej analizy:
 
 ```bash
-SKIP_TS_BUILD=1 ./scripts/export_site.sh
+npm run hostinger:recovery
 ```
 
-## Hostinger: szybka naprawa błędu "Changes not staged for commit"
-
-Jeśli deploy na Hostinger zatrzyma się, bo repo na serwerze jest "brudne"
-(najczęściej lokalne zmiany w `data/news-live.json`, `assets/data/news-fallback.json`
-oraz plikach `assets/news/news_20*`), uruchom w katalogu repo:
+Dry-run wymaga lokalnego markera serwera `.fitpo50-hostinger-deploy` o treści `fitpo50.pl`, sprawdza właściwe repo, branch, `origin`, historię i pokazuje lokalne zmiany. Niczego nie modyfikuje. Tryb apply wymaga dodatkowo czystego drzewa oraz jawnego przełącznika:
 
 ```bash
-npm run hostinger:clean-repo
+FITPO50_HOSTINGER_RECOVERY=APPLY_APPROVED npm run hostinger:recovery -- --apply
 ```
 
-Co robi ta komenda:
-- tworzy backup lokalnych plików NEWS do `/tmp/fitpo50-deploy-backup-YYYYmmdd-HHMMSS`,
-- pobiera `origin/main`,
-- wykonuje `git reset --hard origin/main`,
-- wykonuje `git clean -fd`,
-- pokazuje końcowy `git status --short` (powinno być pusto).
+Procedura wykonuje zweryfikowany backup danych runtime i wyłącznie fast-forward. Nie usuwa nieznanych plików. Brudne repo lub rozbieżna historia zatrzymują naprawę.

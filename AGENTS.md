@@ -29,6 +29,8 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Nie cofaj zmian użytkownika, jeśli nie należą do bieżącego zadania.
 - Nie wykonuj commit/push bez jawnego polecenia.
 - Polecenie `git push` uruchamia pełny workflow opisany w `SESSION_START_MAX.md`.
+- Standardem wdrożenia jest automatyczny deploy Hostinger z `main`; po pushu uruchom `npm run deployment:verify` i uznaj produkcję dopiero przy `LIVE_DEPLOYED_AND_VALIDATED`.
+- `npm run hostinger:clean-repo` jest wycofane. Awaryjne `hostinger:recovery` zaczyna się od dry-run i nie może usuwać nieznanych plików.
 
 ## Treść FitPo50
 
