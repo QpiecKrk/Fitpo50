@@ -111,8 +111,9 @@ async function main() {
     if (result.status === 'LIVE_DEPLOYED_AND_VALIDATED') break;
     if (attempt < args.retries) await sleep(args.delayMs);
   }
-  fs.mkdirSync(path.join('data', 'reports'), { recursive: true });
-  fs.writeFileSync(path.join('data', 'reports', 'deployment-live-status.json'), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
+  const reportDir = path.join('data', 'reports', 'local');
+  fs.mkdirSync(reportDir, { recursive: true });
+  fs.writeFileSync(path.join(reportDir, 'deployment-live-status.json'), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
   console.log(`[${result.status}] commit=${expectedCommit} release=${marker.release_id}`);
   if (result.errors.length) result.errors.forEach((error) => console.error(`[BLOCKER] ${error}`));
   if (result.status !== 'LIVE_DEPLOYED_AND_VALIDATED') process.exit(2);

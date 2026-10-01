@@ -18,6 +18,8 @@ npm run deployment:verify
 
 Kontrola nie zamienia błędów sieci na PASS. Porównuje `origin/main` z lokalnym commitem, sprawdza unikalny `deployment.json`, HTTP 200, canonical i pliki bazowe. Jeśli commit zmienia artykuły, sprawdza też `dateModified`, sitemap `lastmod`, PDF oraz wszystkie obrazy użyte przez te artykuły.
 
+Lokalny wynik kontroli jest zapisywany w ignorowanym katalogu `data/reports/local/deployment-live-status.json`.
+
 ## Statusy
 
 - `PUSHED` — oczekiwany commit jest na `origin/main`, ale marker nie dotarł jeszcze na produkcję.
