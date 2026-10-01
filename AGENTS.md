@@ -34,6 +34,9 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Katalogi tymczasowe usuwaj wyłącznie przez `tmp:cleanup`: domyślnie dry-run, minimum 12 godzin, prawidłowy manifest właściciela, martwy PID i brak aktywnego locka.
 - Każdy nowy staging lub workspace `/tmp` musi używać `scripts/lib/temp-workspace.js`; każdy nowy skrypt Playwright musi używać `withChromium`.
 - W `prepush-parallel-checks` zadania muszą deklarować `access: read|write`; zadania zapisujące wykonuj sekwencyjnie albo w odrębnych workspace.
+- Status każdej komendy z `package.json` musi być zapisany w `docs/command-registry.md` jako `PUBLIC`, `INTERNAL`, `RECOVERY` albo `RETIRED`; zgodność egzekwuje `command:contract:check`.
+- Wewnętrzny zapis importera i prywatny staging wymagają capability wystawionej przez kontroler dla aktywnego workspace; sama zmienna środowiskowa nie jest autoryzacją.
+- `export_site.sh` odpowiada za pełny eksport HTML, `sync-site-assets-mirror.js` wyłącznie za jawne mirrory PDF/NEWS/assetów, a świeży eksport musi przejść deterministyczne parity z `_site`.
 
 ## Treść FitPo50
 

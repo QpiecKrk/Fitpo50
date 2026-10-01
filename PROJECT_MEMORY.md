@@ -29,6 +29,8 @@ W razie rozbieżności obowiązuje kolejność:
 - `mity.html` jest osobną kategorią, nie częścią `ciekawe.html`.
 - `porady.html` jest zbiorczą stroną artykułów.
 - `_site/` jest publicznym eksportem i musi być zgodny ze źródłem.
+- Pełny HTML publikuje wyłącznie `export_site.sh`; `assets:mirror:sync` obsługuje PDF/NEWS i jawne mirrory assetów, nie naprawia HTML. `check:build-export` oraz `prepush:local` porównują świeży eksport z `_site` plik po pliku i blokują brak, nadmiar lub różnicę treści.
+- Każda komenda `package.json` ma dokładnie jeden status w `docs/command-registry.md`: `PUBLIC`, `INTERNAL`, `RECOVERY` albo `RETIRED`. Rejestr i `package.json` muszą przechodzić `command:contract:check`.
 - `Moje Sukcesy`, `Porady` i `NEWS` są oddzielnymi modułami. Nie wolno mieszać ich danych ani logiki.
 - Nie zmieniamy publicznych URL-i ani design systemu bez wyraźnej potrzeby i planu migracji.
 - Pliki prywatne, szczególnie `admin/config.php`, `.env*`, klucze i dane użytkowników, nigdy nie trafiają do Git ani `_site`.
@@ -53,6 +55,7 @@ Jeżeli którykolwiek krok poza dozwolonym, nieblokującym restore zwróci błą
 - Plik z `Downloads` pozostaje bez zmian. Pipeline pracuje na kontrolowanej kopii i nie archiwizuje zużytego JSON-u w repo.
 - Publikacja rozróżnia `CREATE` i `UPDATE`; istniejący slug wymaga jawnego `--force true`.
 - Pipeline działa fail-fast. Po pierwszym błędzie nie uruchamia etapów zależnych ani mutujących.
+- Wewnętrzny importer może zapisywać wyłącznie w aktywnym stagingu z krótkotrwałą capability wystawioną przez kontroler. Podrobienie flagi środowiskowej ani bezpośrednie wywołanie skryptu nie upoważnia do zapisu.
 - Nie wolno publikować bez przejścia logiki, dowodów, FAQ, intencji, linków, mediów, stagingu HTML, PDF i końcowych walidatorów.
 - Finalne źródło prawdy to HTML, media, PDF, listingi, sitemap, indeksy, manifest publikacji i ich odpowiedniki w `_site`.
 

@@ -13,7 +13,7 @@ const {
   sha256File,
 } = require('../scripts/lib/article-json-artifact');
 const { allocateOutput, buildStageDefinitions, collectChanges, copyMediaPackage, runStagesUntilFailure } = require('../scripts/article-json-workbench');
-const { expectedPreparedPath, packageHashesMatch, preparedPathFromOutput } = require('../scripts/article-add');
+const { executeArticleAdd, expectedPreparedPath, packageHashesMatch, preparedPathFromOutput } = require('../scripts/article-add');
 
 const REPO = path.resolve(__dirname, '..');
 
@@ -63,6 +63,30 @@ test('workbench reuses one stable ready file unless revision history is explicit
 test('one-command controller reads the prepared artifact path from workbench output', () => {
   assert.equal(preparedPathFromOutput('[ARTICLE-JSON] status=CONTENT_READY\n[ARTICLE-JSON] JSON: /tmp/gotowy.fitpo50.json\n'), '/tmp/gotowy.fitpo50.json');
 });
+
+test('article:add prowadzi poprawny fixture przez przygotowanie i atom publikacyjny', () => withTempDir((dir) => {
+  const source = path.join(dir, 'kontrolowany-fixture.json');
+  const outputDir = path.join(dir, 'ready');
+  const prepared = path.join(outputDir, 'kontrolowany-fixture.fitpo50.json');
+  fs.writeFileSync(source, `${JSON.stringify({ slug: 'kontrolowany-fixture', title: 'Kontrolowany fixture' })}\n`);
+  const calls = [];
+  const status = executeArticleAdd({ file: source, 'output-dir': outputDir }, {
+    runCommand(command, args) {
+      calls.push({ command, args });
+      if (args[0] === 'scripts/article-json-workbench.js') {
+        fs.mkdirSync(outputDir, { recursive: true });
+        fs.copyFileSync(source, prepared);
+        return { status: 0, stdout: `[ARTICLE-JSON] status=CONTENT_READY\n[ARTICLE-JSON] JSON: ${prepared}\n`, stderr: '' };
+      }
+      return { status: 0, stdout: '', stderr: '' };
+    },
+  });
+  assert.equal(status, 0);
+  assert.equal(calls.length, 2);
+  assert.equal(calls[0].args[0], 'scripts/article-json-workbench.js');
+  assert.equal(calls[1].args[0], 'scripts/article-pipeline.js');
+  assert.ok(calls[1].args.includes(prepared));
+}));
 
 test('one-command controller reuses only a hash-identical CONTENT_READY package', () => withTempDir((dir) => {
   const sourceDir = path.join(dir, 'source');

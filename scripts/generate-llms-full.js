@@ -130,14 +130,21 @@ function articleToMarkdown(articleHtml) {
     .trim();
 }
 
+function generatedAt(items) {
+  const timestamps = items
+    .map((item) => Date.parse(String(item.modified || '')))
+    .filter(Number.isFinite);
+  if (!timestamps.length) return '1970-01-01T00:00:00.000Z';
+  return new Date(Math.max(...timestamps)).toISOString();
+}
+
 function buildDocument(items) {
-  const now = new Date().toISOString();
   const lines = [];
   lines.push('# FitPo50 — llms-full.txt');
   lines.push('');
   lines.push(`source: ${BASE_URL}`);
   lines.push('language: pl-PL');
-  lines.push(`generated_at: ${now}`);
+  lines.push(`generated_at: ${generatedAt(items)}`);
   lines.push(`articles_count: ${items.length}`);
   lines.push('');
   for (const item of items) {
@@ -174,6 +181,9 @@ function loadItems(limit) {
       title: extractTitle(html),
       description: extractDescription(html),
       content: articleToMarkdown(articleHtml),
+      modified: (html.match(/"dateModified"\s*:\s*"([^"]+)"/i) || [])[1]
+        || (html.match(/<meta\s+property="article:modified_time"\s+content="([^"]+)"/i) || [])[1]
+        || '',
     });
   }
   return items;
@@ -205,4 +215,6 @@ function main() {
   }
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { buildDocument, generatedAt, loadItems };

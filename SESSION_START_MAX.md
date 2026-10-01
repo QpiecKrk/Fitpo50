@@ -49,6 +49,9 @@ Dodatkowo według zadania:
 - Tabele są semantycznym HTML, nigdy obrazem ani tekstem rozdzielonym kreskami.
 - Każdy obraz obejrzyj i sprawdź w kontekście sekcji. Watermark sam nie blokuje, lecz mylący tekst, liczby, anatomia, sprzęt lub kadr blokują publikację.
 - Nie publikuj bez PDF, kontroli desktop/mobile, obejrzenia wszystkich stron PDF oraz zgodności source/`_site`.
+- Korzystaj tylko z wejść `PUBLIC` w `docs/command-registry.md`. Komendy `INTERNAL` wywołuje kontroler, `RECOVERY` służą wyłącznie awarii, a `RETIRED` są zabronione.
+- Nie uruchamiaj importera ani prywatnego stagingu przez ręczne ustawienie zmiennych środowiskowych; zapis wymaga capability wystawionej przez kontroler aktywnego stagingu.
+- `assets:mirror:sync` nie synchronizuje HTML. Pełny eksport tworzy `export_site.sh`, a `prepush:local` musi potwierdzić deterministyczną zgodność świeżego eksportu z `_site`.
 - Nie commituj roboczego JSON-u po zakończonej publikacji.
 - Nie wykonuj commit/push, usuwania lub wdrożenia bez odpowiedniego polecenia użytkownika.
 

@@ -28,6 +28,7 @@ const { inspectPreparedArtifact } = require('./lib/article-json-artifact');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
 const { validateManifestStructure } = require('./lib/article-media');
+const { capabilityFromEnvironment } = require('./lib/pipeline-capability');
 
 const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
@@ -2505,6 +2506,7 @@ async function main() {
   if (process.env.FITPO50_STAGING_INTERNAL !== '1') {
     throw new Error('Bezpośredni zapis importera jest zablokowany. Użyj article:publish, który buduje HTML i PDF w izolowanym stagingu.');
   }
+  capabilityFromEnvironment('article-import:write', process.cwd());
 
   if (!precheck.canImport) {
     throw new Error('Precheck nie przeszedł. Popraw błędy blokujące i uruchom import ponownie.');

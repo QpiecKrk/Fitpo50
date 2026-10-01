@@ -22,6 +22,7 @@ const {
   writePublicationManifest,
 } = require('./lib/article-staging');
 const { createManagedTempDir, disposeTempWorkspace, resolveWorkspaceProjectRoot } = require('./lib/temp-workspace');
+const { capabilityFromEnvironment } = require('./lib/pipeline-capability');
 const {
   defaultGscInputDir,
   preparePublicationMonitoring,
@@ -215,6 +216,7 @@ async function main() {
   if (stagingInternal && process.env.FITPO50_STAGING_INTERNAL !== '1') {
     throw new Error('--staging-internal jest prywatnym trybem pipeline i nie może być uruchamiany bez kontrolera stagingu.');
   }
+  if (stagingInternal) capabilityFromEnvironment('article-pipeline:staging', process.cwd());
 
   const root = process.cwd();
   const input = path.resolve(root, args.file);

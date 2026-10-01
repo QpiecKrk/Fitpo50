@@ -70,11 +70,11 @@ function packageHashesMatch(source, sourceAssetsDir, preparedFile) {
   return true;
 }
 
-function main() {
-  const args = parseArgs(process.argv.slice(2));
+function executeArticleAdd(args, dependencies = {}) {
+  const runCommand = dependencies.runCommand || run;
   if (args.help || args.h) {
     console.log('Użycie: npm run article:add -- --file <draft.fitpo50.json> [--assets-dir <katalog>] [--force true]');
-    return;
+    return 0;
   }
   if (!args.file) {
     console.error('Użycie: node scripts/article-add.js --file <draft.fitpo50.json> [--assets-dir <katalog>] [--force true]');
@@ -92,7 +92,7 @@ function main() {
     console.log('[ARTICLE-ADD] Faza 1/2: REUSED — JSON i obrazy nie zmieniły się od ostatniego CONTENT_READY.');
   } else {
     console.log('[ARTICLE-ADD] Faza 1/2: szybkie przygotowanie i kompletna kontrola pakietu.');
-    const prepared = run('node', prepareArgs);
+    const prepared = runCommand('node', prepareArgs);
     if (prepared.stdout) process.stdout.write(prepared.stdout);
     if (prepared.stderr) process.stderr.write(prepared.stderr);
     if (prepared.status !== 0) {
@@ -106,10 +106,15 @@ function main() {
   console.log('[ARTICLE-ADD] Faza 2/2: jeden atom HTML + obrazy + PDF + listingi + sitemap + _site.');
   const publishArgs = ['scripts/article-pipeline.js', '--file', preparedFile, '--assets-dir', path.dirname(preparedFile)];
   if (args.force) publishArgs.push('--force', args.force);
-  const published = run('node', publishArgs, { stdio: 'inherit', encoding: undefined });
+  const published = runCommand('node', publishArgs, { stdio: 'inherit', encoding: undefined });
   if (published.error) throw published.error;
   if (published.status === null) throw new Error(`Atom publikacyjny został przerwany sygnałem ${published.signal || 'UNKNOWN'}.`);
-  process.exit(Number(published.status || 0));
+  return Number(published.status || 0);
+}
+
+function main() {
+  const status = executeArticleAdd(parseArgs(process.argv.slice(2)));
+  if (status) process.exit(status);
 }
 
 if (require.main === module) {
@@ -121,4 +126,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { expectedPreparedPath, main, packageHashesMatch, parseArgs, preparedPathFromOutput };
+module.exports = { executeArticleAdd, expectedPreparedPath, main, packageHashesMatch, parseArgs, preparedPathFromOutput };

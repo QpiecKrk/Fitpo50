@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const { issuePipelineCapability } = require('./pipeline-capability');
 const { spawnSync } = require('child_process');
 const { categoryFileFromKey, normalizeCategory } = require('./categories');
 const { createManagedTempDir } = require('./temp-workspace');
@@ -481,6 +482,9 @@ function promoteStaging({ sourceRoot, stageRoot, candidates, baseline }) {
 }
 
 function runInStaging(stageRoot, args) {
+  const capability = issuePipelineCapability(stageRoot, {
+    operations: ['article-pipeline:staging', 'article-import:write'],
+  });
   const result = spawnSync('node', ['scripts/article-pipeline.js', ...args, '--staging-internal', 'true', '--indexnow', 'false'], {
     cwd: stageRoot,
     encoding: 'utf8',
@@ -488,6 +492,8 @@ function runInStaging(stageRoot, args) {
     env: {
       ...process.env,
       FITPO50_STAGING_INTERNAL: '1',
+      FITPO50_PIPELINE_CAPABILITY_TOKEN: capability.token,
+      FITPO50_PIPELINE_CAPABILITY_FILE: capability.capabilityPath,
       FITPO50_PIPELINE_TIMINGS_PATH: path.join(stageRoot, 'data', 'reports', 'local', 'pipeline-timings.json'),
     },
   });

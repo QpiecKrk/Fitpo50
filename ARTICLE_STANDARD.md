@@ -89,6 +89,7 @@ Zasada: „zmień raz, zmień wszędzie”.
 - Statusy procesu to: `DRAFT`, `CONTENT_READY`, `BLOCKED`.
 - Domyślne `force=false` blokuje kolizję z istniejącym slugiem. `--force true` wymaga świadomego podania i służy wyłącznie kontrolowanej aktualizacji.
 - Publikator przyjmuje tylko artefakt `CONTENT_READY`; sprawdza powiązany raport i SHA-256, więc ręczna zmiana JSON-u po korekcie blokuje import.
+- Zapis importera jest prywatnym etapem kontrolera: wymaga aktywnego manifestu stagingu, krótkotrwałej capability związanej z katalogiem i osobnego uprawnienia operacji. Sama flaga środowiskowa, bezpośrednie wywołanie `import-article.js` albo wskazanie poprawnego `CONTENT_READY` nie wystarcza.
 - Plik wejściowy pozostaje bez zmian. Domyślnie istnieje jeden stabilny pakiet roboczy dla slugu, aktualizowany przy kolejnej próbie; wersje `-r2`, `-r3` powstają wyłącznie po jawnym `--keep-revisions true`.
 - Poprawne kontrole dostępności URL-i są przechowywane w lokalnym, niecommitowanym cache przez 7 dni. Zmienione obrazy odświeżają warianty; niezmienione warianty są używane ponownie. Po nieudanym atomie cały niezmieniony hashami `CONTENT_READY` może zostać użyty ponownie bez fazy przygotowania. Zmiana JSON-u lub któregokolwiek obrazu unieważnia tę pamięć. Tanie bramki treści zawsze uruchamiają się podczas nowego przygotowania.
 - Po pełnej publikacji zakończonej wszystkimi walidacjami pipeline usuwa wykorzystany JSON `CONTENT_READY` oraz oba jego raporty. Przy błędzie lub `BLOCKED` zachowuje je do dalszej naprawy.
@@ -222,6 +223,7 @@ Artykuł nie przechodzi, jeśli:
 - Udana transakcja zapisuje `data/reports/article-publications/<slug>.json`. Manifest podaje `CREATE`/`UPDATE`, identyfikator transakcji, wszystkie zmienione pliki, akcję `CREATE`/`UPDATE`, rozmiar oraz hashe przed i po publikacji.
 - Backup i dziennik są usuwane dopiero po statusie `COMMITTED`. IndexNow i usunięcie wykorzystanego artefaktu `CONTENT_READY` następują dopiero po zatwierdzeniu transakcji.
 - Półgotowy zestaw nie może być uznany za publikację: brak artykułu w listingu, sitemapie, `llms`, indeksie wyszukiwarki, brak PDF/media albo rozjazd wymaganej pary source/`_site` jest błędem blokującym.
+- Kontrola końcowa tworzy świeży, pełny eksport i porównuje go z `_site` plik po pliku. Osobno raportuje brak, nadmiar i różnicę zawartości w klasach HTML, PDF, dane i assety; synchronizacja wybranych assetów nie może maskować różnicy HTML.
 
 ## 12. Schema Citation Contract v2.0 (obowiązkowe)
 - `BlogPosting.citation` musi być zsynchronizowane z listą źródeł w HTML.

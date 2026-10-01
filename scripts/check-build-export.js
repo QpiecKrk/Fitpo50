@@ -26,10 +26,16 @@ function main() {
   let status = 'FAILED';
   try {
     run('Strict build (typecheck + esbuild)', 'npm', ['run', 'build:strict']);
-    run('Assets mirror sync', 'npm', ['run', 'assets:mirror:sync']);
+    run('Assets mirror check (bez naprawiania różnic)', 'npm', ['run', 'assets:mirror:check']);
     run('Static export', 'bash', ['./scripts/export_site.sh', exportDir], {
       env: { ...process.env, SKIP_TS_BUILD: '1' },
     });
+    run('Deterministic source/_site parity', 'node', [
+      'scripts/export-parity-check.js',
+      '--expected', exportDir,
+      '--actual', path.resolve('_site'),
+      '--report', path.resolve('data/reports/local/export-parity.json'),
+    ]);
     run('Smoke check', 'node', ['scripts/static-smoke-check.js', exportDir]);
     if (!args.skipBrokenLinks) {
       run('Broken links crawl', 'node', ['scripts/broken-links-crawler.js', exportDir]);

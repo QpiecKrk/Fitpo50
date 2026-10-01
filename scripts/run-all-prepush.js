@@ -79,6 +79,12 @@ async function main() {
     timings.push(await runStep('export:fresh(tmp)', 'bash', ['./scripts/export_site.sh', exportDir], {
       env: { SKIP_TS_BUILD: '1' },
     }));
+    timings.push(await runStep('export:parity', 'node', [
+      'scripts/export-parity-check.js',
+      '--expected', exportDir,
+      '--actual', path.resolve('_site'),
+      '--report', path.resolve('data/reports/local/export-parity.json'),
+    ]));
     timings.push(await runStep('smoke:static(fresh-export)', 'node', ['scripts/static-smoke-check.js', exportDir]));
     exportStatus = 'COMPLETED';
 
