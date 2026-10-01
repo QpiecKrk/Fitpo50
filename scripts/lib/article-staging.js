@@ -5,6 +5,7 @@ const { issuePipelineCapability } = require('./pipeline-capability');
 const { spawnSync } = require('child_process');
 const { categoryFileFromKey, normalizeCategory } = require('./categories');
 const { createManagedTempDir } = require('./temp-workspace');
+const { validatePreviewReport } = require('./article-preview-report');
 
 const EXCLUDED_TOP_LEVEL = new Set(['.git', 'node_modules', '.tmp', 'output', 'tmp']);
 const TRANSACTION_DIR = path.join('.tmp', 'article-publication-transactions');
@@ -202,6 +203,8 @@ function validatePublicationSet(root, article, { requireManifest = false } = {})
       throw new Error(`Niespójna para publikacji: ${sourceRelative} <-> ${mirrorRelative}`);
     }
   }
+  const preview = validatePreviewReport(root, slug);
+  if (!preview.ok) throw new Error(`Raport PREVIEW_READY jest nieaktualny albo niepełny: ${preview.errors.join(' | ')}`);
 
   const expectedHref = `${slug}.html`;
   for (const relative of ['index.html', 'porady.html', categoryFile, 'sitemap.xml', 'llms.txt']) {

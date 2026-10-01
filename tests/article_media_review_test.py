@@ -107,6 +107,24 @@ class ArticleMediaReviewTest(unittest.TestCase):
             manifest.write_text(json.dumps(payload))
             self.assertEqual(REVIEW.validate(root, slug, manifest), [])
 
+    def test_changed_image_hash_invalidates_review(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            slug, _, manifest = self.package(root)
+            Image.new('RGB', (1200, 675), 'red').save(root / 'assets' / 'section.jpg')
+            errors = REVIEW.validate(root, slug, manifest)
+            self.assertTrue(any('hash/wymiary nie zgadzają się' in error for error in errors))
+
+    def test_wrong_anatomy_or_equipment_blocks_review(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            slug, _, manifest = self.package(root)
+            payload = json.loads(manifest.read_text())
+            payload['entries'][0]['visual_review']['anatomy_and_equipment_plausible'] = False
+            manifest.write_text(json.dumps(payload))
+            errors = REVIEW.validate(root, slug, manifest)
+            self.assertTrue(any('anatomy_and_equipment_plausible' in error for error in errors))
+
 
 if __name__ == '__main__':
     unittest.main()

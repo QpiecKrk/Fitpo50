@@ -7,6 +7,7 @@ const { spawnSync } = require('child_process');
 const { pageKind } = require('./lib/publication-page-kind');
 const { prepareCenterPrint } = require('./lib/topic-center-print');
 const { withChromium } = require('./lib/playwright-lifecycle');
+const { validatePreviewReport } = require('./lib/article-preview-report');
 
 function parseArgs(argv) {
   const out = {};
@@ -23,6 +24,40 @@ function parseArgs(argv) {
 
 function sha256(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+}
+
+function relativeFile(root, file) {
+  return path.relative(root, file).split(path.sep).join('/');
+}
+
+function fileArtifact(root, file) {
+  return { file: relativeFile(root, file), sha256: sha256(file), bytes: fs.statSync(file).size };
+}
+
+function imageArtifacts(root, images, errors) {
+  return (Array.isArray(images) ? images : []).map((image, index) => {
+    const variants = {};
+    const itemErrors = [];
+    for (const extension of ['avif', 'webp', 'jpg']) {
+      const raw = String(image?.variants?.[extension] || '').trim().split(/\s+/)[0].replace(/^\.\//, '');
+      const file = path.resolve(root, raw);
+      if (!raw || !file.startsWith(`${path.resolve(root)}${path.sep}`) || !fs.existsSync(file)) {
+        itemErrors.push(`brak wariantu ${extension}`);
+        variants[extension] = { file: raw, status: 'FAIL' };
+      } else {
+        variants[extension] = { ...fileArtifact(root, file), status: 'PASS' };
+      }
+    }
+    const placement = String(image?.placement || `image:${index + 1}`);
+    itemErrors.forEach((error) => errors.push(`${placement}: ${error}.`));
+    return {
+      placement,
+      alt: String(image?.alt || ''),
+      status: itemErrors.length ? 'FAIL' : 'PASS',
+      variants,
+      errors: itemErrors,
+    };
+  });
 }
 
 function command(command, args, options = {}) {
@@ -133,21 +168,37 @@ function validatePdfStructure(pdf, expectedText, expectedImages, renderDir, erro
   command('pdftoppm', ['-png', '-r', '144', pdf, path.join(renderDir, 'page')]);
   const renders = fs.readdirSync(renderDir).filter((name) => /^page-\d+\.png$/.test(name)).sort();
   if (renders.length !== pages) errors.push(`Nie wyrenderowano wszystkich stron PDF: ${renders.length}/${pages}.`);
-  renders.forEach((name) => {
+  const pageReviews = [];
+  renders.forEach((name, index) => {
     const file = path.join(renderDir, name);
+    const pageErrors = [];
     const dimensions = command('identify', ['-format', '%w %h', file]).trim().split(/\s+/).map(Number);
     const geometry = command('magick', [file, '-alpha', 'off', '-fuzz', '4%', '-trim', '-format', '%w %h %X %Y', 'info:']).trim();
     const match = geometry.match(/^(\d+)\s+(\d+)\s+\+(\d+)\s+\+(\d+)$/);
     if (!match || Number(match[1]) < 50 || Number(match[2]) < 50) {
-      errors.push(`${name}: strona PDF jest pusta albo nie można ustalić obszaru treści.`);
+      pageErrors.push('strona PDF jest pusta albo nie można ustalić obszaru treści');
+      errors.push(`${name}: ${pageErrors[0]}.`);
+      pageReviews.push({ page: index + 1, ...fileArtifact(process.cwd(), file), status: 'FAIL', errors: pageErrors });
       return;
     }
     const [, contentWidth, contentHeight, x, y] = match.map(Number);
     const right = dimensions[0] - x - contentWidth;
     const bottom = dimensions[1] - y - contentHeight;
-    if (Math.min(x, y, right, bottom) < 4) errors.push(`${name}: treść lub ilustracja dotyka krawędzi i może być ucięta.`);
+    if (Math.min(x, y, right, bottom) < 4) {
+      pageErrors.push('treść lub ilustracja dotyka krawędzi i może być ucięta');
+      errors.push(`${name}: ${pageErrors[0]}.`);
+    }
+    pageReviews.push({
+      page: index + 1,
+      ...fileArtifact(process.cwd(), file),
+      width: dimensions[0],
+      height: dimensions[1],
+      content_bounds: { x, y, width: contentWidth, height: contentHeight },
+      status: pageErrors.length ? 'FAIL' : 'PASS',
+      errors: pageErrors,
+    });
   });
-  return { pages, coverage, renders };
+  return { pages, coverage, renders, pageReviews };
 }
 
 async function inspectHtml(page, url, viewport, screenshot, errors) {
@@ -245,8 +296,11 @@ async function main() {
     await context.route(/^https?:\/\//, (route) => route.abort());
     const page = await context.newPage();
     page.setDefaultTimeout(15000);
-    const desktopResult = await inspectHtml(page, pageUrl, { width: 1440, height: 1000 }, path.join(previewDir, 'desktop.png'), errors);
-    const mobileResult = await inspectHtml(page, pageUrl, { width: 390, height: 844 }, path.join(previewDir, 'mobile.png'), errors);
+    const desktopErrors = [];
+    const mobileErrors = [];
+    const desktopResult = await inspectHtml(page, pageUrl, { width: 1440, height: 1000 }, path.join(previewDir, 'desktop.png'), desktopErrors);
+    const mobileResult = await inspectHtml(page, pageUrl, { width: 390, height: 844 }, path.join(previewDir, 'mobile.png'), mobileErrors);
+    errors.push(...desktopErrors, ...mobileErrors);
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(pageUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
     if (center) await prepareCenterPrint(page);
@@ -254,7 +308,8 @@ async function main() {
       if (isCenter) {
         const main = document.querySelector('main');
         const tables = [...main.querySelectorAll('table')];
-        return { tables: tables.length, tableErrors: tables.filter((t) => !t.closest('.article-table-wrap')).map(() => 'Tabela bez kontenera przewijania'), tableMarkup: tables.map((t) => t.outerHTML).join('\n'), text: main.innerText, expectedImages: main.querySelectorAll('img').length };
+        const pictures = [...main.querySelectorAll('picture')];
+        return { tables: tables.length, tableErrors: tables.filter((t) => !t.closest('.article-table-wrap')).map(() => 'Tabela bez kontenera przewijania'), tableMarkup: tables.map((t) => t.outerHTML).join('\n'), text: main.innerText, expectedImages: main.querySelectorAll('img').length, images: pictures.map((picture, index) => { const img = picture.querySelector('img'); const sources = [...picture.querySelectorAll('source')]; return { placement: `center:${index + 1}`, alt: img?.getAttribute('alt') || '', variants: { jpg: img?.getAttribute('src') || '', avif: sources.find((source) => source.type === 'image/avif')?.getAttribute('srcset') || '', webp: sources.find((source) => source.type === 'image/webp')?.getAttribute('srcset') || '' } }; }) };
       }
       const tables = [...document.querySelectorAll('article table')];
       const tableErrors = [];
@@ -274,32 +329,63 @@ async function main() {
         while (walker.nextNode()) textParts.push(walker.currentNode.textContent);
       }
       const text = textParts.join(' ');
-      const expectedImages = (document.querySelector('section.article-intro-grid .article-hero img') ? 1 : 0) + (article?.querySelectorAll('img').length || 0) + (externalQuickAnswer?.querySelectorAll('img').length || 0);
-      return { tables: tables.length, tableErrors, tableMarkup: tables.map((table) => table.outerHTML).join('\n'), text: `${title} ${text}`, expectedImages };
+      const selectedPictures = [];
+      const heroPicture = document.querySelector('section.article-intro-grid .article-hero picture');
+      if (heroPicture) selectedPictures.push({ placement: 'hero', picture: heroPicture });
+      [...(article?.querySelectorAll('figure picture') || [])].forEach((picture, index) => selectedPictures.push({ placement: `section-image:${index + 1}`, picture }));
+      const expectedImages = selectedPictures.length + (externalQuickAnswer?.querySelectorAll('img').length || 0);
+      const images = selectedPictures.map(({ placement, picture }) => {
+        const img = picture.querySelector('img');
+        const sources = [...picture.querySelectorAll('source')];
+        return { placement, alt: img?.getAttribute('alt') || '', variants: { jpg: img?.getAttribute('src') || '', avif: sources.find((source) => source.type === 'image/avif')?.getAttribute('srcset') || '', webp: sources.find((source) => source.type === 'image/webp')?.getAttribute('srcset') || '' } };
+      });
+      return { tables: tables.length, tableErrors, tableMarkup: tables.map((table) => table.outerHTML).join('\n'), text: `${title} ${text}`, expectedImages, images };
     }, center);
-    return { desktop: desktopResult, mobile: mobileResult, semantic: semanticResult };
+    return { desktop: { ...desktopResult, status: desktopErrors.length ? 'FAIL' : 'PASS', errors: desktopErrors }, mobile: { ...mobileResult, status: mobileErrors.length ? 'FAIL' : 'PASS', errors: mobileErrors }, semantic: semanticResult };
   }, { timeoutMs: 120000, label: `Podgląd artykułu ${slug}` });
   semantic.tableErrors.forEach((error) => errors.push(error));
   validateSemanticTableMarkup(semantic.tableMarkup).forEach((error) => errors.push(error));
 
   const pdfResult = validatePdfStructure(pdf, semantic.text, semantic.expectedImages, path.join(previewDir, 'pdf-pages'), errors);
+  const images = imageArtifacts(root, semantic.images, errors);
   const generatedAt = new Date().toISOString();
+  const desktopScreenshot = path.join(previewDir, 'desktop.png');
+  const mobileScreenshot = path.join(previewDir, 'mobile.png');
   const report = {
-    version: 1,
+    version: 2,
     status: errors.length ? 'BLOCKED' : 'PREVIEW_READY',
     generated_at: generatedAt,
+    reviewed_at: generatedAt,
     slug,
     html_sha256: sha256(html),
     site_html_sha256: sha256(siteHtml),
     pdf_sha256: sha256(pdf),
     site_pdf_sha256: sha256(sitePdf),
     html: { desktop, mobile, semantic_tables: semantic.tables },
-    pdf: { pages: pdfResult.pages, text_coverage: Number(pdfResult.coverage.toFixed(4)), rendered_pages: pdfResult.renders.length },
+    artifacts: {
+      html_source: fileArtifact(root, html),
+      html_site: fileArtifact(root, siteHtml),
+      pdf_source: fileArtifact(root, pdf),
+      pdf_site: fileArtifact(root, sitePdf),
+    },
+    views: {
+      desktop: { status: desktop.status, viewport: { width: 1440, height: 1000 }, screenshot_file: relativeFile(root, desktopScreenshot), screenshot_sha256: sha256(desktopScreenshot), errors: desktop.errors },
+      mobile: { status: mobile.status, viewport: { width: 390, height: 844 }, screenshot_file: relativeFile(root, mobileScreenshot), screenshot_sha256: sha256(mobileScreenshot), errors: mobile.errors },
+    },
+    images,
+    pdf: { pages: pdfResult.pages, text_coverage: Number(pdfResult.coverage.toFixed(4)), rendered_pages: pdfResult.renders.length, page_reviews: pdfResult.pageReviews || [] },
     errors,
   };
   const reportDir = path.join(root, 'data', 'reports', 'article-preview');
   fs.mkdirSync(reportDir, { recursive: true });
   fs.writeFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  if (!errors.length) {
+    const validation = validatePreviewReport(root, slug, { requireRenderFiles: true });
+    if (!validation.ok) errors.push(...validation.errors);
+    report.status = errors.length ? 'BLOCKED' : 'PREVIEW_READY';
+    report.errors = errors;
+    fs.writeFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  }
   const markdown = [
     '# FitPo50 — staging HTML i PDF', '',
     `- Status: **${report.status}**`,

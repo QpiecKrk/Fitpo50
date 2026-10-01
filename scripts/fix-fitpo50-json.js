@@ -615,6 +615,11 @@ function main() {
       p.visual_review = {
         status: String(p.visual_review.status || '').trim(),
         matches_topic: p.visual_review.matches_topic === true,
+        no_misleading_text_or_logo: p.visual_review.no_misleading_text_or_logo === true,
+        anatomy_and_equipment_plausible: p.visual_review.anatomy_and_equipment_plausible === true,
+        embedded_text: p.visual_review.embedded_text && typeof p.visual_review.embedded_text === 'object'
+          ? { ...p.visual_review.embedded_text }
+          : {},
         reviewed_by: String(p.visual_review.reviewed_by || '').trim(),
         reviewed_at: String(p.visual_review.reviewed_at || '').trim(),
         note: String(p.visual_review.note || '').trim(),

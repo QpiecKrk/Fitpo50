@@ -10,6 +10,7 @@ const {
   promoteStaging,
   promotionCandidates,
   recoverInterruptedTransactions,
+  sha256File,
   snapshotCandidates,
   validatePublicationSet,
   writePublicationManifest,
@@ -208,7 +209,7 @@ test('bramka kompletności wymaga listingów, sitemap, indeksu, PDF i par source
   const slug = 'complete';
   const article = { slug, category: 'zdrowie', media_manifest: { entries: [] } };
   const samePairs = [
-    [`${slug}.html`, `_site/${slug}.html`, '<body>article</body>'],
+    [`${slug}.html`, `_site/${slug}.html`, '<body><section class="article-intro-grid"><figure class="article-hero"><picture><img src="./assets/preview-hero.jpg"></picture></figure></section><article>article</article></body>'],
     ['sitemap.xml', '_site/sitemap.xml', `<loc>https://fitpo50.pl/${slug}.html</loc>`],
     ['llms.txt', '_site/llms.txt', `- url: https://fitpo50.pl/${slug}.html`],
     ['llms-full.txt', '_site/llms-full.txt', 'full'],
@@ -231,8 +232,31 @@ test('bramka kompletności wymaga listingów, sitemap, indeksu, PDF i par source
     `data/reports/article-preview/${slug}.md`,
   ]) {
     fs.mkdirSync(path.dirname(path.join(root, relative)), { recursive: true });
-    fs.writeFileSync(path.join(root, relative), '{}');
+    if (relative.endsWith('.md')) fs.writeFileSync(path.join(root, relative), '# PREVIEW_READY\n');
   }
+  for (const extension of ['avif', 'webp', 'jpg']) {
+    fs.mkdirSync(path.join(root, 'assets'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'assets', `preview-hero.${extension}`), extension);
+  }
+  const artifact = (relative) => ({ file: relative, sha256: sha256File(path.join(root, relative)) });
+  fs.writeFileSync(path.join(root, `data/reports/article-preview/${slug}.json`), JSON.stringify({
+    version: 2,
+    status: 'PREVIEW_READY',
+    slug,
+    reviewed_at: '2026-10-01T08:00:00.000Z',
+    artifacts: {
+      html_source: artifact(`${slug}.html`), html_site: artifact(`_site/${slug}.html`),
+      pdf_source: artifact(`assets/pdf/${slug}.pdf`), pdf_site: artifact(`_site/assets/pdf/${slug}.pdf`),
+    },
+    views: {
+      desktop: { status: 'PASS', viewport: { width: 1440 }, screenshot_sha256: 'a'.repeat(64) },
+      mobile: { status: 'PASS', viewport: { width: 390 }, screenshot_sha256: 'b'.repeat(64) },
+    },
+    images: [{ placement: 'hero', status: 'PASS', variants: {
+      avif: artifact('assets/preview-hero.avif'), webp: artifact('assets/preview-hero.webp'), jpg: artifact('assets/preview-hero.jpg'),
+    } }],
+    pdf: { pages: 1, page_reviews: [{ page: 1, status: 'PASS', sha256: 'c'.repeat(64) }] },
+  }));
   fs.writeFileSync(path.join(root, 'data/reports/published-articles-log.json'), JSON.stringify({
     version: 2,
     items: [{ slug, transaction_id: 'test-transaction', baseline: {}, checkpoints: { day_7: {}, day_14: {}, day_28: {} }, publication_events: [{ event_id: 'test-transaction' }] }],

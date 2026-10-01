@@ -140,6 +140,7 @@ function main() {
       for (const file of patched.articleFiles) {
         const slug = file.replace(/\.html$/, '');
         run(`Kontrola obrazów przed promocją ${file}`, 'python3', [path.join(ROOT, 'scripts', 'article-media-review.py'), '--slug', slug], stageRoot);
+        run(`Kontrakt raportu wizualnego przed promocją ${file}`, 'node', [path.join(ROOT, 'scripts', 'article-preview-report-check.js'), '--slug', slug], stageRoot);
       }
     }
     const transaction = beginPromotionTransaction({ sourceRoot: ROOT, stageRoot, candidates, baseline, transactionId: `seo-${Date.now()}` });
@@ -149,6 +150,7 @@ function main() {
         run(`Walidacja po promocji ${file}`, 'node', ['scripts/validate-article-standard.js', file, `_site/${file}`]);
         run(`Kontrakt po promocji ${file}`, 'node', ['scripts/article-contract-check.js', file]);
         run(`Kontrola obrazów po promocji ${file}`, 'python3', ['scripts/article-media-review.py', '--slug', slug]);
+        run(`Kontrakt raportu wizualnego po promocji ${file}`, 'node', ['scripts/article-preview-report-check.js', '--slug', slug]);
       }
       run('Predeploy po promocji', 'node', ['scripts/predeploy-gate.js']);
       transaction.verify();

@@ -7,6 +7,7 @@ const SOURCE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const REQUIRED_VARIANTS = ['jpg', 'webp', 'avif'];
 const GENERIC_MEDIA_TEXT = /(grafika artykułu|grafika do artykułu|obraz sekcji|zdjęcie związane z tematem|nowoczesna grafika|ilustracja tematu)/iu;
 const VERIFIED_REVIEW = 'VERIFIED';
+const ALLOWED_EMBEDDED_TEXT = new Set(['NONE', 'WATERMARK_ONLY', 'CONTENT']);
 
 function stripTags(value) {
   return String(value || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -191,6 +192,38 @@ function validateDescriptiveFields(prompt, context, placement, errors) {
     errors.push(`${base}: visual_review wymaga reviewed_by i reviewed_at.`);
   }
   if (String(review.note || '').trim().length < 20) errors.push(`${base}: visual_review.note musi konkretnie opisać zgodność obrazu z sekcją.`);
+  validateVisualReview(review, base, errors);
+}
+
+function validateVisualReview(review, label, errors) {
+  if (review.no_misleading_text_or_logo !== true) {
+    errors.push(`${label}: visual_review.no_misleading_text_or_logo musi być jawnie potwierdzone.`);
+  }
+  if (review.anatomy_and_equipment_plausible !== true) {
+    errors.push(`${label}: visual_review.anatomy_and_equipment_plausible musi być jawnie potwierdzone.`);
+  }
+  const embedded = review.embedded_text && typeof review.embedded_text === 'object' ? review.embedded_text : {};
+  const kind = String(embedded.kind || '').trim();
+  if (!ALLOWED_EMBEDDED_TEXT.has(kind)) {
+    errors.push(`${label}: visual_review.embedded_text.kind musi mieć wartość NONE, WATERMARK_ONLY albo CONTENT.`);
+    return;
+  }
+  if (kind !== 'CONTENT') return;
+  if (String(embedded.transcription || '').trim().length < 3) {
+    errors.push(`${label}: obraz z tekstem treściowym wymaga transkrypcji widocznego tekstu.`);
+  }
+  if (![true, false].includes(embedded.claims_or_numbers_present)) {
+    errors.push(`${label}: obraz z tekstem treściowym wymaga jawnej oceny claims_or_numbers_present.`);
+  }
+  if (embedded.matches_article_claims !== true) {
+    errors.push(`${label}: tekst na obrazie musi być jawnie zgodny z treścią artykułu.`);
+  }
+  if (embedded.claims_or_numbers_present === true) {
+    const evidence = embedded.evidence_urls;
+    if (!Array.isArray(evidence) || !evidence.length || evidence.some((url) => !/^https?:\/\//.test(String(url)))) {
+      errors.push(`${label}: tekst z twierdzeniem lub liczbą wymaga co najmniej jednego URL dowodu.`);
+    }
+  }
 }
 
 function validateDimensions(entry, placement, declaredRatio, errors) {
@@ -223,6 +256,7 @@ function validateManifestStructure(article) {
   const manifest = article.media_manifest;
   if (!manifest || typeof manifest !== 'object') return { ok: false, errors: ['Brak media_manifest utworzonego lokalnie.'] };
   const entries = Array.isArray(manifest.entries) ? manifest.entries : [];
+  if (manifest.version !== 2) errors.push('media_manifest: wymagane version=2 z pełną kontrolą tekstu, anatomii i sprzętu.');
   const expected = expectedPlacements(article);
   if (entries.length !== expected.length) errors.push(`media_manifest.entries: wymagane ${expected.length}, jest ${entries.length}.`);
   expected.forEach((placement) => {
@@ -242,6 +276,7 @@ function validateManifestStructure(article) {
       if (hammingHex(entry?.source?.perceptual_hash, variant?.perceptual_hash) > 14) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: wariant ${extension} może przedstawiać inny obraz.`);
     });
     if (entry?.visual_review?.status !== VERIFIED_REVIEW || entry?.visual_review?.matches_topic !== true) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak zatwierdzonej kontroli wizualnej.`);
+    validateVisualReview(entry?.visual_review || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
   });
   const hero = entries.find((entry) => entry.placement === 'hero');
   if (hero) {
@@ -380,7 +415,7 @@ function prepareArticleMedia(article, options = {}) {
   }
 
   const manifest = {
-    version: 1,
+    version: 2,
     package_directory: path.basename(assetsDir),
     strict_single_directory: true,
     exact_filename_matching: true,

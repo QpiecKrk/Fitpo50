@@ -44,6 +44,9 @@ function prompt(ref, base, topic, technique, composition) {
     visual_review: {
       status: 'VERIFIED',
       matches_topic: true,
+      no_misleading_text_or_logo: true,
+      anatomy_and_equipment_plausible: true,
+      embedded_text: { kind: 'NONE' },
       reviewed_by: 'Codex',
       reviewed_at: '2026-08-24',
       note: `Obejrzano plik: kadr wyraźnie pokazuje ${topic.toLowerCase()} bez przypadkowych elementów.`,
@@ -99,6 +102,7 @@ test('tworzy kompletny manifest i mapuje obrazy bez fallbacków', () => {
   assert.equal(value.hero_width, 1200);
   assert.equal(value.sections[2].image.src, './assets/regeneracja-treningowa.webp');
   assert.equal(value.media_manifest.entries.length, 4);
+  assert.equal(value.media_manifest.version, 2);
   assert.equal(validateManifestStructure(value).ok, true);
 });
 
@@ -169,4 +173,31 @@ test('blokuje obraz bez rzeczywistej kontroli i kompletnego wariantu', () => {
   assert.equal(result.ok, false);
   assert.match(result.errors.join('\n'), /visual_review musi mieć status VERIFIED/);
   assert.match(result.errors.join('\n'), /brak wymaganego wariantu kontrola-techniki.avif/);
+});
+
+test('watermark bez treści merytorycznej nie blokuje zatwierdzonego obrazu', () => {
+  const dir = makePackage();
+  const value = article();
+  value.image_prompts[1].visual_review.embedded_text = { kind: 'WATERMARK_ONLY' };
+  createFiles(dir, value);
+  const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, inspectImage: inspector });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.equal(validateManifestStructure(value).ok, true);
+});
+
+test('blokuje nieudokumentowaną liczbę w obrazie oraz błędną anatomię lub sprzęt', () => {
+  const dir = makePackage();
+  const value = article();
+  value.image_prompts[1].visual_review.embedded_text = {
+    kind: 'CONTENT',
+    claims_or_numbers_present: true,
+    matches_article_claims: true,
+  };
+  value.image_prompts[2].visual_review.anatomy_and_equipment_plausible = false;
+  createFiles(dir, value);
+  const result = prepareArticleMedia(value, { assetsDir: dir, inspectImage: inspector });
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join('\n'), /wymaga transkrypcji/);
+  assert.match(result.errors.join('\n'), /wymaga co najmniej jednego URL dowodu/);
+  assert.match(result.errors.join('\n'), /anatomy_and_equipment_plausible/);
 });
