@@ -5,6 +5,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { writeManifestFromApiReport } = require('./lib/gsc-data-contract');
 const { isEditorialQuery, MIN_CTR_REVIEW_IMPRESSIONS } = require('./lib/gsc-editorial-query');
+const { STATUS, classifyExternalError, redactSecrets } = require('./lib/external-integration-status');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -398,12 +399,11 @@ function writeReport(report, outputJson, outputMd) {
   lines.push(`Status: ${report.status}`);
   lines.push('');
 
-  if (report.status !== 'ok') {
-    lines.push('## Brak konfiguracji API');
-    lines.push('- Ustaw `GSC_SITE_URL` (np. `sc-domain:fitpo50.pl` lub `https://fitpo50.pl/`).');
-    lines.push('- Tryb 1 (service account): `GSC_SERVICE_ACCOUNT_JSON_B64`.');
-    lines.push('- Tryb 2 (OAuth refresh token): `GSC_OAUTH_CLIENT_ID`, `GSC_OAUTH_CLIENT_SECRET`, `GSC_OAUTH_REFRESH_TOKEN`.');
-    lines.push('- Wymagane uprawnienie w GSC: konto użyte do odczytu musi mieć minimum Read.');
+  if (report.status !== STATUS.OK_VERIFIED) {
+    lines[0] = '# GSC Integration Diagnostic';
+    lines.push('## Diagnostyka — to nie jest raport danych GSC');
+    lines.push(`- Powód: ${report.reason || 'UNKNOWN'}`);
+    lines.push('- Nie utworzono CSV ani manifestu danych.');
     if (Array.isArray(report.missing_config) && report.missing_config.length) {
       lines.push('');
       lines.push('### Brakujące elementy');
@@ -411,10 +411,12 @@ function writeReport(report, outputJson, outputMd) {
         lines.push(`- ${item}`);
       });
     }
-    if (report.error) {
+    if (Array.isArray(report.attempts) && report.attempts.length) {
       lines.push('');
-      lines.push('### Debug');
-      lines.push(`- ${report.error}`);
+      lines.push('### Próby połączenia');
+      report.attempts.forEach((attempt) => {
+        lines.push(`- ${attempt.auth_mode || 'unknown'}: ${attempt.status} / ${attempt.reason}`);
+      });
     }
   } else {
     lines.push('## Zakres dat');
@@ -511,40 +513,15 @@ function writeReport(report, outputJson, outputMd) {
   fs.writeFileSync(outputMd, `${lines.join('\n')}\n`, 'utf8');
 }
 
-function emptyReport(property, missingConfig = []) {
+function diagnosticReport(status, property, details = {}) {
   return {
     generated_at: new Date().toISOString(),
-    status: 'missing_api_config',
+    report_kind: 'DIAGNOSTIC',
+    status,
+    reason: details.reason || status,
     property,
-    missing_config: missingConfig,
-    ranges: {},
-    summary: {
-      current: { total_clicks: 0, total_impressions: 0, avg_ctr: 0, avg_position: 0 },
-      previous: { total_clicks: 0, total_impressions: 0, avg_ctr: 0, avg_position: 0 },
-    },
-    opportunities: {
-      top3_zero_click: [],
-      ctr_problems: [],
-      cannibalization: [],
-      page_opportunities: [],
-    },
-    weekly_plan: [
-      'Uzupełnij brakujące sekrety GSC i uruchom workflow ponownie.',
-      'Po konfiguracji raport sam wygeneruje priorytety tygodnia.',
-    ],
-  };
-}
-
-function authFailedReport(property, errorMessage) {
-  return {
-    ...emptyReport(property),
-    status: 'auth_failed',
-    error: String(errorMessage || '').trim(),
-    weekly_plan: [
-      'Tryb service account nie przeszedł autoryzacji w GSC.',
-      'Dodaj OAuth secrets (client_id, client_secret, refresh_token) albo używaj trybu CSV.',
-      'Po konfiguracji uruchom workflow ponownie.',
-    ],
+    missing_config: Array.isArray(details.missingConfig) ? details.missingConfig : [],
+    attempts: Array.isArray(details.attempts) ? details.attempts : [],
   };
 }
 
@@ -669,21 +646,23 @@ async function main() {
   const rawSiteUrl = String(process.env.GSC_SITE_URL || '').trim();
   const property = normalizeSiteUrl(rawSiteUrl || 'https://fitpo50.pl/');
   let sa = null;
-  const authErrors = [];
+  const attempts = [];
+  const serviceAccountConfigured = Boolean(process.env.GSC_SERVICE_ACCOUNT_JSON || process.env.GSC_SERVICE_ACCOUNT_JSON_B64);
   try {
     sa = parseServiceAccountFromEnv();
   } catch (err) {
-    authErrors.push(`service_account_parse: ${err.message || err}`);
+    attempts.push({ auth_mode: 'service_account', ...classifyExternalError(err, { authMode: 'service_account' }) });
   }
   const oauth = parseOauthRefreshFromEnv();
   const missingConfig = collectMissingConfig(rawSiteUrl, Boolean(sa), oauth);
 
-  if ((!sa && !oauth) || !property) {
-    const report = emptyReport(property, missingConfig);
+  if (!rawSiteUrl || (!serviceAccountConfigured && !oauth)) {
+    const report = diagnosticReport(STATUS.MISSING_CONFIG, property, { reason: 'GSC_CONFIG_INCOMPLETE', missingConfig });
     writeReport(report, args.outputJson, args.outputMd);
-    console.log('[WARN] GSC API config missing. Generated reminder report.');
+    console.error('[FAIL] GSC API config missing. Generated diagnostic only.');
     console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
     console.log(`- MD: ${path.relative(ROOT, args.outputMd)}`);
+    process.exitCode = 1;
     return;
   }
 
@@ -877,7 +856,8 @@ async function main() {
 
     return {
       generated_at: new Date().toISOString(),
-      status: 'ok',
+      report_kind: 'DATASET',
+      status: STATUS.OK_VERIFIED,
       property,
       auth_mode: authMode,
       api_limitations: {
@@ -954,7 +934,7 @@ async function main() {
       const token = await getAccessToken(sa);
       report = await generateForAccessToken(token, 'service_account');
     } catch (err) {
-      authErrors.push(`service_account: ${err.message || err}`);
+      attempts.push({ auth_mode: 'service_account', ...classifyExternalError(err, { authMode: 'service_account' }) });
     }
   }
   if (!report && oauth) {
@@ -962,18 +942,26 @@ async function main() {
       const token = await getAccessTokenByRefreshToken(oauth);
       report = await generateForAccessToken(token, 'oauth_refresh_token');
     } catch (err) {
-      authErrors.push(`oauth_refresh_token: ${err.message || err}`);
+      attempts.push({ auth_mode: 'oauth_refresh_token', ...classifyExternalError(err, { authMode: 'oauth_refresh_token' }) });
     }
   }
   if (!report) {
-    report = authFailedReport(property, authErrors.join(' | '));
+    const priority = [STATUS.AUTH_FAILED, STATUS.DATA_INVALID, STATUS.REQUEST_FAILED];
+    const status = priority.find((candidate) => attempts.some((attempt) => attempt.status === candidate)) || STATUS.REQUEST_FAILED;
+    report = diagnosticReport(status, property, {
+      reason: attempts.map((attempt) => attempt.reason).join('|') || 'GSC_REQUEST_FAILED',
+      attempts: attempts.map((attempt) => ({
+        auth_mode: attempt.auth_mode,
+        status: attempt.status,
+        reason: attempt.reason,
+        message: redactSecrets(attempt.message),
+      })),
+    });
     writeReport(report, args.outputJson, args.outputMd);
-    console.log('[WARN] GSC API auth failed. Generated fallback reminder report.');
-    if (report.error) {
-      console.log(`- error: ${report.error}`);
-    }
+    console.error(`[FAIL] GSC API integration: ${report.status}. Generated diagnostic only.`);
     console.log(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
     console.log(`- MD: ${path.relative(ROOT, args.outputMd)}`);
+    process.exitCode = 1;
     return;
   }
 
@@ -1003,18 +991,23 @@ if (require.main === module) {
   main().catch((err) => {
     const args = parseArgs(process.argv.slice(2));
     const property = normalizeSiteUrl(process.env.GSC_SITE_URL || 'https://fitpo50.pl/');
-    const report = authFailedReport(property, err.message || String(err));
+    const classified = classifyExternalError(err);
+    const report = diagnosticReport(classified.status, property, {
+      reason: classified.reason,
+      attempts: [{ auth_mode: 'unknown', ...classified }],
+    });
     writeReport(report, args.outputJson, args.outputMd);
-    console.error(`[WARN] gsc-weekly-api-report fallback: ${err.message || err}`);
+    console.error(`[FAIL] gsc-weekly-api-report: ${classified.status} / ${classified.reason}`);
     console.error(`- JSON: ${path.relative(ROOT, args.outputJson)}`);
     console.error(`- MD: ${path.relative(ROOT, args.outputMd)}`);
-    process.exit(0);
+    process.exit(1);
   });
 }
 
 module.exports = {
   API_COLLECTION_DIAGNOSTICS,
   gscQueryAllRows,
+  diagnosticReport,
   rangePair,
   reportingRanges,
 };

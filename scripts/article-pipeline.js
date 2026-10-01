@@ -27,7 +27,7 @@ const {
   defaultGscInputDir,
   preparePublicationMonitoring,
 } = require('./lib/post-publication-monitor');
-const { submitIndexNow } = require('./import-article');
+const { submitIndexNow } = require('./lib/indexnow-client');
 
 let tempWorkingCopy = '';
 let transactionalOuter = false;
@@ -150,16 +150,18 @@ function runPostPromotionValidation(root, slug, article) {
 }
 
 async function submitIndexNowAfterPromotion(slug, enabled) {
-  if (!enabled) return 'wyłączone';
   const key = String(process.env.INDEXNOW_KEY || '').trim();
-  if (!key) return 'pominięto (brak INDEXNOW_KEY)';
   const result = await submitIndexNow({
     host: 'fitpo50.pl',
     key,
     keyLocation: String(process.env.INDEXNOW_KEY_LOCATION || '').trim() || undefined,
     urlList: [`https://fitpo50.pl/${slug}.html`],
+    enabled,
   });
-  return result.ok ? `OK (${result.status || 200})` : `błąd (${result.status || result.error || 'network'})`;
+  const evidenceDir = path.join(process.cwd(), 'data', 'reports', 'local', 'indexnow');
+  fs.mkdirSync(evidenceDir, { recursive: true });
+  fs.writeFileSync(path.join(evidenceDir, `${slug}.json`), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
+  return `${result.status} (${result.http_status || result.reason})`;
 }
 
 function parseJsonWithDiagnostics(filePath) {

@@ -57,6 +57,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run dev:article` — Bezpośrednia komenda robocza lub odczytowa (node scripts/dev-article-watch.js).
 - [PUBLIC] `npm run faq:refresh:report` — Bezpośrednia komenda robocza lub odczytowa (node scripts/faq-refresh-report.js).
 - [PUBLIC] `npm run fitpo50:doctor` — Bezpośrednia komenda robocza lub odczytowa (node scripts/fitpo50-doctor.js).
+- [PUBLIC] `npm run external:config:check` — Sprawdza wyłącznie obecność nazw lokalnych zmiennych GSC/IndexNow; nigdy nie wypisuje wartości.
 - [PUBLIC] `npm run growth:ai-visibility-test` — Bezpośrednia komenda robocza lub odczytowa (node scripts/growth-tool.js ai-visibility-test).
 - [PUBLIC] `npm run growth:audit-ai` — Bezpośrednia komenda robocza lub odczytowa (node scripts/growth-tool.js audit-ai).
 - [PUBLIC] `npm run growth:entities` — Bezpośrednia komenda robocza lub odczytowa (node scripts/growth-tool.js entities).

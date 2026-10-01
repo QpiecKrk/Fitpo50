@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const { STATUS } = require('./external-integration-status');
 
 const MANIFEST_NAME = 'gsc-data-manifest.json';
 const API_REPORT_NAME = 'gsc-weekly-report-api.json';
@@ -167,6 +168,9 @@ function inspectGscInput(inputDir, options = {}) {
   const apiReportPath = path.join(resolvedDir, API_REPORT_NAME);
   const manifest = readJson(manifestPath);
   const apiReport = readJson(apiReportPath);
+  if (apiReport && (apiReport.status !== STATUS.OK_VERIFIED || apiReport.report_kind !== 'DATASET')) {
+    errors.push(`Raport API nie jest zweryfikowanym zestawem danych: status=${apiReport.status || 'UNKNOWN'}, kind=${apiReport.report_kind || 'UNKNOWN'}.`);
+  }
   if (requireManifest && !manifest) errors.push(`Brak obowiązkowego manifestu ${MANIFEST_NAME}.`);
   const generatedAtRaw = manifest?.generated_at || apiReport?.generated_at || '';
   const generatedAt = parseDate(generatedAtRaw);
@@ -234,7 +238,7 @@ function inspectGscInput(inputDir, options = {}) {
     blocking: errors.length > 0,
     checked_at: now.toISOString(),
     input_dir: resolvedDir,
-    source: manifest?.source || (apiReport?.status === 'ok' ? 'gsc_api' : 'manual_csv'),
+    source: manifest?.source || (apiReport?.status === STATUS.OK_VERIFIED ? 'gsc_api' : 'manual_csv'),
     property: manifest?.property || apiReport?.property || '',
     freshness: {
       status: freshnessReference && ageHours <= maxAgeHours && futureHours <= 1 ? 'PASS' : 'FAIL',
@@ -265,6 +269,9 @@ function inspectGscInput(inputDir, options = {}) {
 }
 
 function buildManifestFromApiReport(report, outputDir) {
+  if (report?.status !== STATUS.OK_VERIFIED || report?.report_kind !== 'DATASET') {
+    throw new Error('GSC_MANIFEST_REJECTED: only OK_VERIFIED DATASET reports may create a manifest.');
+  }
   const files = resolveRequiredFiles(outputDir);
   const fileManifest = {};
   for (const spec of REQUIRED_INPUTS) {

@@ -30,7 +30,8 @@ function makeDataset() {
   fs.writeFileSync(path.join(dir, 'query-pages.csv'), 'query,page,clicks,impressions,ctr,position\napob,https://fitpo50.pl/apob.html,1,10,10,4\n');
   const report = {
     generated_at: new Date().toISOString(),
-    status: 'ok',
+    report_kind: 'DATASET',
+    status: 'OK_VERIFIED',
     property: 'sc-domain:fitpo50.pl',
     reporting_windows: {
       day_7: { range: rangePair(7) },
@@ -69,6 +70,18 @@ test('three loose CSV files without a manifest are not accepted', () => {
   const result = inspectGscInput(dir, { strictPeriods: true });
   assert.equal(result.blocking, true);
   assert.ok(result.errors.some((item) => item.includes('manifestu')));
+});
+
+test('diagnostic report can never pass as a GSC dataset', () => {
+  const { dir } = makeDataset();
+  fs.writeFileSync(path.join(dir, 'gsc-weekly-report-api.json'), JSON.stringify({
+    generated_at: new Date().toISOString(),
+    report_kind: 'DIAGNOSTIC',
+    status: 'AUTH_FAILED',
+  }));
+  const result = inspectGscInput(dir, { strictPeriods: true });
+  assert.equal(result.blocking, true);
+  assert.ok(result.errors.some((item) => item.includes('nie jest zweryfikowanym zestawem danych')));
 });
 
 test('fresh files with an old reporting window are rejected', () => {

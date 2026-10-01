@@ -330,10 +330,6 @@ function tryGenerateCsvFromApi(workDir) {
     ],
     { cwd: ROOT },
   );
-  if (res.status !== 0) {
-    return { ok: false, reason: 'gsc-weekly-api-report exited with non-zero status.' };
-  }
-
   let apiReport = null;
   if (fs.existsSync(outputJson)) {
     try {
@@ -343,41 +339,22 @@ function tryGenerateCsvFromApi(workDir) {
     }
   }
 
-  if (apiReport && apiReport.status !== 'ok') {
-    if (apiReport.status === 'auth_failed') {
-      const err = String(apiReport.error || '').toLowerCase();
-      if (err.includes('invalid_grant') || err.includes('token has been expired') || err.includes('token has been expired or revoked')) {
+  if (res.status !== 0 || (apiReport && apiReport.status !== 'OK_VERIFIED')) {
+    if (apiReport?.status === 'AUTH_FAILED') {
+      const reasons = (apiReport.attempts || []).map((attempt) => attempt.reason).join('|');
+      if (reasons.includes('OAUTH_REFRESH_TOKEN_INVALID')) {
         return { ok: false, reason: buildRefreshTokenInstructions() };
       }
-      return { ok: false, reason: `AUTH_FAILED: brak autoryzacji GSC API (${String(apiReport.error || 'brak szczegolow')}).` };
+      return { ok: false, reason: `AUTH_FAILED: ${apiReport.reason || 'brak autoryzacji GSC API'}.` };
     }
-    if (apiReport.status === 'missing_api_config') {
+    if (apiReport?.status === 'MISSING_CONFIG') {
       return { ok: false, reason: 'MISSING_API_CONFIG: brak konfiguracji OAuth (GSC_OAUTH_CLIENT_ID / GSC_OAUTH_CLIENT_SECRET / GSC_OAUTH_REFRESH_TOKEN / GSC_SITE_URL).' };
     }
-    return { ok: false, reason: `GSC API status=${apiReport.status}; stare CSV nie zostały uznane za świeży wynik.` };
+    return { ok: false, reason: `GSC API status=${apiReport?.status || 'PROCESS_FAILED'}; stare CSV nie zostały uznane za świeży wynik.` };
   }
 
   const typed = collectCsvByType(walkFiles(workDir));
   if (!haveAllThree(typed)) {
-    if (apiReport && apiReport.status === 'auth_failed') {
-      const err = String(apiReport.error || '').toLowerCase();
-      if (err.includes('invalid_grant') || err.includes('token has been expired') || err.includes('token has been expired or revoked')) {
-        return {
-          ok: false,
-          reason: buildRefreshTokenInstructions(),
-        };
-      }
-      return {
-        ok: false,
-        reason: `AUTH_FAILED: brak autoryzacji GSC API (${String(apiReport.error || 'brak szczegolow')}).`,
-      };
-    }
-    if (apiReport && apiReport.status === 'missing_api_config') {
-      return {
-        ok: false,
-        reason: 'MISSING_API_CONFIG: brak konfiguracji OAuth (GSC_OAUTH_CLIENT_ID / GSC_OAUTH_CLIENT_SECRET / GSC_OAUTH_REFRESH_TOKEN / GSC_SITE_URL).',
-      };
-    }
     return { ok: false, reason: 'GSC API nie dostarczylo kompletu niepustych CSV.' };
   }
   try {

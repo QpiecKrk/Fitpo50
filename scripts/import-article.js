@@ -22,13 +22,13 @@ const {
   categoryLabelFromKey,
   normalizeCategory,
 } = require('./lib/categories');
-const https = require('https');
 const { spawnSync } = require('child_process');
 const { inspectPreparedArtifact } = require('./lib/article-json-artifact');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
 const { validateManifestStructure } = require('./lib/article-media');
 const { capabilityFromEnvironment } = require('./lib/pipeline-capability');
+const { submitIndexNow } = require('./lib/indexnow-client');
 
 const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
@@ -2407,42 +2407,6 @@ function printSummary(report) {
   console.log('Brak modyfikacji Newsów/miniatur: potwierdzone przez projekt importera.');
 }
 
-function submitIndexNow({ host, key, keyLocation, urlList }) {
-  const payload = JSON.stringify({ host, key, keyLocation, urlList });
-  return new Promise((resolve) => {
-    const req = https.request(
-      'https://api.indexnow.org/indexnow',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Content-Length': Buffer.byteLength(payload),
-        },
-        timeout: 5000,
-      },
-      (res) => {
-        const chunks = [];
-        res.on('data', (chunk) => chunks.push(chunk));
-        res.on('end', () => {
-          const body = Buffer.concat(chunks).toString('utf8').trim();
-          if (res.statusCode >= 200 && res.statusCode < 300) {
-            resolve({ ok: true, status: res.statusCode, body });
-          } else {
-            resolve({ ok: false, status: res.statusCode, body });
-          }
-        });
-      },
-    );
-    req.on('error', (err) => resolve({ ok: false, error: err.message || String(err) }));
-    req.on('timeout', () => {
-      req.destroy(new Error('timeout'));
-      resolve({ ok: false, error: 'timeout' });
-    });
-    req.write(payload);
-    req.end();
-  });
-}
-
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (boolOpt(args.help, false) || boolOpt(args.h, false)) {
@@ -2544,9 +2508,9 @@ async function main() {
       const indexNowKey = String(process.env.INDEXNOW_KEY || '').trim();
       const indexNowKeyLocation = String(process.env.INDEXNOW_KEY_LOCATION || '').trim();
       if (!indexNowKey) {
-        indexNowStatus = 'pominieto (brak INDEXNOW_KEY)';
+        indexNowStatus = 'MISSING_CONFIG (INDEXNOW_KEY_MISSING)';
       } else if (dryRun) {
-        indexNowStatus = 'dry-run (bez wysylki)';
+        indexNowStatus = 'SKIPPED_EXPLICITLY (DRY_RUN)';
       } else {
         const articleUrl = `https://fitpo50.pl/${payload.slug}.html`;
         const result = await submitIndexNow({
@@ -2555,14 +2519,10 @@ async function main() {
           keyLocation: indexNowKeyLocation || undefined,
           urlList: [articleUrl],
         });
-        if (result.ok) {
-          indexNowStatus = `OK (${result.status || 200})`;
-        } else {
-          indexNowStatus = `blad (${result.status || 'network'}${result.error ? `: ${result.error}` : ''})`;
-        }
+        indexNowStatus = `${result.status} (${result.http_status || result.reason})`;
       }
     } else {
-      indexNowStatus = 'wylaczone (--indexnow false)';
+      indexNowStatus = 'SKIPPED_EXPLICITLY (DISABLED_BY_CALLER)';
     }
   }
 

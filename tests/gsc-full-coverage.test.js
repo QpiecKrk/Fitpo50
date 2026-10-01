@@ -40,7 +40,8 @@ test('priority map assigns a diagnosis and action to every article', () => {
   ].join('\n'));
   writeManifestFromApiReport({
     generated_at: new Date().toISOString(),
-    status: 'ok',
+    report_kind: 'DATASET',
+    status: 'OK_VERIFIED',
     property: 'sc-domain:fitpo50.pl',
     reporting_windows: Object.fromEntries(Object.entries(reportingRanges()).map(([key, range]) => [key, { range }])),
   }, dir);

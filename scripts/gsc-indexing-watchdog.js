@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { STATUS, classifyExternalError, redactSecrets } = require('./lib/external-integration-status');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -256,7 +257,7 @@ function loadInventoryCandidates(file, zeroVisibilityOnly) {
 function buildReportSkeleton(siteUrl, logFile, args) {
   return {
     generated_at: new Date().toISOString(),
-    status: 'ok',
+    status: STATUS.OK_VERIFIED,
     property: siteUrl,
     log_file: path.relative(ROOT, logFile),
     threshold_hours: args.thresholdHours,
@@ -292,40 +293,43 @@ async function main() {
     })());
 
   if (!siteUrl) {
-    report.status = 'missing_site_url';
+    report.status = STATUS.MISSING_CONFIG;
     report.error = 'Brak GSC_SITE_URL.';
     writeJson(args.reportJson, report);
     writeMd(args.reportMd, [
       '# GSC Indexing Watchdog',
       '',
       `Wygenerowano: ${report.generated_at}`,
-      'Status: missing_site_url',
+      `Status: ${STATUS.MISSING_CONFIG}`,
       '',
       '- Brak `GSC_SITE_URL`.',
     ]);
+    process.exitCode = 1;
     return;
   }
 
   let sa = null;
-  const authErrors = [];
+  const authAttempts = [];
+  const serviceAccountConfigured = Boolean(process.env.GSC_SERVICE_ACCOUNT_JSON || process.env.GSC_SERVICE_ACCOUNT_JSON_B64);
   try {
     sa = parseServiceAccountFromEnv();
   } catch (err) {
-    authErrors.push(`service_account_parse: ${err.message || err}`);
+    authAttempts.push({ auth_mode: 'service_account', ...classifyExternalError(err, { authMode: 'service_account' }) });
   }
   const oauth = parseOauthRefreshFromEnv();
-  if (!sa && !oauth) {
-    report.status = 'missing_api_config';
+  if (!serviceAccountConfigured && !oauth) {
+    report.status = STATUS.MISSING_CONFIG;
     report.error = 'Brak konfiguracji API (service account lub OAuth refresh token).';
     writeJson(args.reportJson, report);
     writeMd(args.reportMd, [
       '# GSC Indexing Watchdog',
       '',
       `Wygenerowano: ${report.generated_at}`,
-      'Status: missing_api_config',
+      `Status: ${STATUS.MISSING_CONFIG}`,
       '',
       '- Ustaw sekrety GSC (service account albo OAuth).',
     ]);
+    process.exitCode = 1;
     return;
   }
 
@@ -335,7 +339,7 @@ async function main() {
       token = await getAccessToken(sa);
       report.auth_mode = 'service_account';
     } catch (err) {
-      authErrors.push(`service_account: ${err.message || err}`);
+      authAttempts.push({ auth_mode: 'service_account', ...classifyExternalError(err, { authMode: 'service_account' }) });
     }
   }
   if (!token && oauth) {
@@ -343,21 +347,29 @@ async function main() {
       token = await getAccessTokenByRefreshToken(oauth);
       report.auth_mode = 'oauth_refresh_token';
     } catch (err) {
-      authErrors.push(`oauth_refresh_token: ${err.message || err}`);
+      authAttempts.push({ auth_mode: 'oauth_refresh_token', ...classifyExternalError(err, { authMode: 'oauth_refresh_token' }) });
     }
   }
   if (!token) {
-    report.status = 'auth_failed';
-    report.error = authErrors.join(' | ');
+    const priority = [STATUS.AUTH_FAILED, STATUS.DATA_INVALID, STATUS.REQUEST_FAILED];
+    report.status = priority.find((candidate) => authAttempts.some((attempt) => attempt.status === candidate)) || STATUS.REQUEST_FAILED;
+    report.auth_attempts = authAttempts.map((attempt) => ({
+      auth_mode: attempt.auth_mode,
+      status: attempt.status,
+      reason: attempt.reason,
+      message: redactSecrets(attempt.message),
+    }));
+    report.error = report.auth_attempts.map((attempt) => `${attempt.auth_mode}: ${attempt.reason}`).join(' | ');
     writeJson(args.reportJson, report);
     writeMd(args.reportMd, [
       '# GSC Indexing Watchdog',
       '',
       `Wygenerowano: ${report.generated_at}`,
-      'Status: auth_failed',
+      `Status: ${report.status}`,
       '',
       `- ${report.error || 'Nieznany błąd autoryzacji.'}`,
     ]);
+    process.exitCode = 1;
     return;
   }
 
@@ -419,17 +431,19 @@ async function main() {
         sitemaps: inspection.sitemaps,
       });
     } catch (err) {
+      const classified = classifyExternalError(err, { authMode: report.auth_mode });
+      report.status = classified.status;
       report.pending_older_72h += 1;
       report.alerts.push({
         slug,
         url,
         published_at: publishedAt,
-        error: String(err.message || err),
+        error: classified.message,
       });
       const update = bySlug.get(slug) || item;
       update.last_checked_at = new Date().toISOString();
       update.status = 'pending';
-      update.notes = `inspection_error: ${String(err.message || err)}`;
+      update.notes = `inspection_error: ${classified.reason}`;
     }
   }
 
@@ -465,7 +479,12 @@ async function main() {
     }
   }
   writeMd(args.reportMd, lines);
-  console.log('[PASS] gsc-indexing-watchdog report generated.');
+  if (report.status !== STATUS.OK_VERIFIED) {
+    console.error(`[FAIL] gsc-indexing-watchdog status: ${report.status}.`);
+    process.exitCode = 1;
+  } else {
+    console.log('[PASS] gsc-indexing-watchdog report generated.');
+  }
   console.log(`- JSON: ${path.relative(ROOT, args.reportJson)}`);
   console.log(`- MD: ${path.relative(ROOT, args.reportMd)}`);
 }
