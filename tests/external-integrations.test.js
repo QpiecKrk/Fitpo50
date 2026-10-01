@@ -7,6 +7,7 @@ const { EventEmitter } = require('node:events');
 const { spawnSync } = require('node:child_process');
 const { STATUS, classifyExternalError, redactSecrets } = require('../scripts/lib/external-integration-status');
 const { submitIndexNow } = require('../scripts/lib/indexnow-client');
+const { publicAttempts } = require('../scripts/gsc-weekly-api-report');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -39,6 +40,25 @@ test('secret values are redacted from diagnostics', () => {
   const secret = 'top-secret-refresh-token';
   assert.doesNotMatch(redactSecrets(`invalid_grant ${secret}`, [secret]), new RegExp(secret));
   assert.match(redactSecrets(`invalid_grant ${secret}`, [secret]), /REDACTED/);
+});
+
+test('successful fallback retains a redacted reason for the rejected auth mode', () => {
+  const secret = 'oauth-secret-value';
+  const previous = process.env.GSC_OAUTH_CLIENT_SECRET;
+  process.env.GSC_OAUTH_CLIENT_SECRET = secret;
+  try {
+    const attempts = publicAttempts([{
+      auth_mode: 'service_account',
+      status: STATUS.AUTH_FAILED,
+      reason: 'SERVICE_ACCOUNT_PROPERTY_ACCESS_DENIED',
+      message: `permission denied ${secret}`,
+    }]);
+    assert.equal(attempts[0].reason, 'SERVICE_ACCOUNT_PROPERTY_ACCESS_DENIED');
+    assert.doesNotMatch(JSON.stringify(attempts), new RegExp(secret));
+  } finally {
+    if (previous === undefined) delete process.env.GSC_OAUTH_CLIENT_SECRET;
+    else process.env.GSC_OAUTH_CLIENT_SECRET = previous;
+  }
 });
 
 test('IndexNow produces verifiable evidence without key or response body', async () => {

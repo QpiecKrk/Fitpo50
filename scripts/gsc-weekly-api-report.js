@@ -420,6 +420,10 @@ function writeReport(report, outputJson, outputMd) {
     }
   } else {
     lines.push('## Zakres dat');
+    lines.push(`- Tryb autoryzacji: ${report.auth_mode || 'unknown'}`);
+    if (Array.isArray(report.fallback_attempts) && report.fallback_attempts.length) {
+      lines.push(`- Wcześniejsze próby: ${report.fallback_attempts.map((attempt) => `${attempt.auth_mode}: ${attempt.status}/${attempt.reason}`).join('; ')}`);
+    }
     lines.push(`- Bieżący: ${report.ranges.current.start} -> ${report.ranges.current.end}`);
     lines.push(`- Poprzedni: ${report.ranges.previous.start} -> ${report.ranges.previous.end}`);
     const truncated = report.collection_quality?.potentially_truncated_datasets || [];
@@ -523,6 +527,15 @@ function diagnosticReport(status, property, details = {}) {
     missing_config: Array.isArray(details.missingConfig) ? details.missingConfig : [],
     attempts: Array.isArray(details.attempts) ? details.attempts : [],
   };
+}
+
+function publicAttempts(attempts) {
+  return (Array.isArray(attempts) ? attempts : []).map((attempt) => ({
+    auth_mode: attempt.auth_mode,
+    status: attempt.status,
+    reason: attempt.reason,
+    message: redactSecrets(attempt.message),
+  }));
 }
 
 function aggregateSummary(rows) {
@@ -950,12 +963,7 @@ async function main() {
     const status = priority.find((candidate) => attempts.some((attempt) => attempt.status === candidate)) || STATUS.REQUEST_FAILED;
     report = diagnosticReport(status, property, {
       reason: attempts.map((attempt) => attempt.reason).join('|') || 'GSC_REQUEST_FAILED',
-      attempts: attempts.map((attempt) => ({
-        auth_mode: attempt.auth_mode,
-        status: attempt.status,
-        reason: attempt.reason,
-        message: redactSecrets(attempt.message),
-      })),
+      attempts: publicAttempts(attempts),
     });
     writeReport(report, args.outputJson, args.outputMd);
     console.error(`[FAIL] GSC API integration: ${report.status}. Generated diagnostic only.`);
@@ -964,6 +972,8 @@ async function main() {
     process.exitCode = 1;
     return;
   }
+
+  report.fallback_attempts = publicAttempts(attempts);
 
   writeCanonicalCsvTriplet(args.outputCsvDir, {
     queries: report.raw_csv_rows?.queries || [],
@@ -1008,6 +1018,7 @@ module.exports = {
   API_COLLECTION_DIAGNOSTICS,
   gscQueryAllRows,
   diagnosticReport,
+  publicAttempts,
   rangePair,
   reportingRanges,
 };
