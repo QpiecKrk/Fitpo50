@@ -6,6 +6,7 @@ const test = require('node:test');
 const {
   beginPromotionTransaction,
   cloneEntry,
+  createStagingWorkspace,
   promoteStaging,
   promotionCandidates,
   recoverInterruptedTransactions,
@@ -13,12 +14,21 @@ const {
   validatePublicationSet,
   writePublicationManifest,
 } = require('../scripts/lib/article-staging');
+const { disposeTempWorkspace, readWorkspaceManifest } = require('../scripts/lib/temp-workspace');
 const { multisetCoverage, normalizeWords } = require('../scripts/article-preview-gate');
 const { deriveCategory } = require('../scripts/generate-search-index');
 
+const FIXTURE_ROOTS = [];
+
 function temp(prefix) {
-  return fs.mkdtempSync(path.join(os.tmpdir(), prefix));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), prefix));
+  FIXTURE_ROOTS.push(root);
+  return root;
 }
+
+test.after(() => {
+  for (const root of FIXTURE_ROOTS) fs.rmSync(root, { recursive: true, force: true });
+});
 
 test('staging jest kopią niezależną i pomija .git oraz node_modules', () => {
   const source = temp('fitpo50-stage-source-');
@@ -33,6 +43,19 @@ test('staging jest kopią niezależną i pomija .git oraz node_modules', () => {
   assert.equal(fs.readFileSync(path.join(source, 'article.html'), 'utf8'), 'wersja publiczna');
   assert.equal(fs.existsSync(path.join(stage, '.git')), false);
   assert.equal(fs.existsSync(path.join(stage, 'node_modules')), false);
+});
+
+test('staging publikacyjny ma manifest właściciela i aktywny lock', () => {
+  const source = temp('fitpo50-stage-owner-source-');
+  fs.writeFileSync(path.join(source, 'article.html'), 'content');
+  const stage = createStagingWorkspace(source, 'manifest-test');
+  const manifest = readWorkspaceManifest(stage);
+  assert.equal(manifest.workspace_type, 'article-publication-staging');
+  assert.equal(manifest.project_root, source);
+  assert.equal(manifest.slug, 'manifest-test');
+  assert.equal(manifest.status, 'ACTIVE');
+  assert.equal(fs.existsSync(path.join(stage, '.fitpo50-workspace.lock')), true);
+  disposeTempWorkspace(stage);
 });
 
 test('promocja kopiuje tylko zmienione pliki po sprawdzeniu baseline', () => {

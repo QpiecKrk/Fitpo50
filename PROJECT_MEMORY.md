@@ -165,6 +165,9 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Hostinger automatycznie wdraża `main`. Przed commitem utwórz marker przez `npm run deployment:prepare`, a po pushu uruchom `npm run deployment:verify`.
 - `PUSHED` nie oznacza produkcji. `DEPLOYED` oznacza wykrycie markera z niepełną walidacją. Produkcję potwierdza wyłącznie `LIVE_DEPLOYED_AND_VALIDATED`.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `npm run hostinger:recovery` domyślnie wykonuje tylko dry-run, nie usuwa nieznanych plików i blokuje się na brudnym lub rozbieżnym repo.
+- Katalogi robocze publikacji, eksportu, workbencha, GSC i PDF mają manifest właściciela oraz lock. Cleanup domyślnie jest dry-run i usuwa wyłącznie zarządzany katalog starszy niż 12 godzin, należący do bieżącego projektu, bez żywego PID-u.
+- Katalog bez manifestu, katalog innego projektu, świeży workspace, aktywny PID lub błędny lock zawsze są pomijane.
+- Chromium uruchamiaj wyłącznie przez `withChromium`, a zadania zapisujące w prepush wykonuj sekwencyjnie.
 
 ## 13. Pamięć modułowa
 

@@ -2,9 +2,9 @@
 
 const { spawnSync } = require('child_process');
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
 const { validateArticleContract } = require('./article-contract-check');
+const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 
 const MUST_FIX_ON_TOUCH = [
   /^Niespójny tytuł: <title> \(bez "\| FitPo50"\) != (?:og:title|twitter:title)\.$/,
@@ -54,14 +54,14 @@ function originMainRaw(file) {
 }
 
 function validateRaw(raw, file) {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-contract-'));
+  const tmpDir = createManagedTempDir({ prefix: 'fitpo50-contract-', type: 'article-contract-fixture', projectRoot: process.cwd() });
   const tmpFile = path.join(tmpDir, path.basename(file));
   try {
     fs.writeFileSync(tmpFile, raw, 'utf8');
     return validateArticleContract(tmpFile);
   } finally {
     try {
-      fs.rmSync(tmpDir, { recursive: true, force: true });
+      disposeTempWorkspace(tmpDir, { status: 'COMPLETED' });
     } catch (_err) {
       // Temp cleanup failure should not hide the actual contract result.
     }

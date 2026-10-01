@@ -3,8 +3,8 @@
 const { spawn } = require('child_process');
 const readline = require('readline');
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
+const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 
 function prefixOutput(tag, stream, logger) {
   if (!stream) return;
@@ -59,7 +59,9 @@ function appendTimingReport(scope, totalMs, steps) {
 async function main() {
   const started = Date.now();
   const timings = [];
+  let exportWorkspace = '';
   let exportDir = '';
+  let exportStatus = 'FAILED';
   console.log('Pre-push: start');
 
   try {
@@ -72,16 +74,18 @@ async function main() {
     ]);
     timings.push(...parallel);
 
-    exportDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-prepush-export-'));
+    exportWorkspace = createManagedTempDir({ prefix: 'fitpo50-prepush-export-', type: 'prepush-export', projectRoot: process.cwd() });
+    exportDir = path.join(exportWorkspace, 'site');
     timings.push(await runStep('export:fresh(tmp)', 'bash', ['./scripts/export_site.sh', exportDir], {
       env: { SKIP_TS_BUILD: '1' },
     }));
     timings.push(await runStep('smoke:static(fresh-export)', 'node', ['scripts/static-smoke-check.js', exportDir]));
+    exportStatus = 'COMPLETED';
 
-    timings.push(await runStep('tmp:cleanup', 'node', ['scripts/tmp-cleanup.js']));
+    timings.push(await runStep('tmp:cleanup:dry', 'node', ['scripts/tmp-cleanup.js', '--dry-run']));
   } finally {
-    if (exportDir) {
-      fs.rmSync(exportDir, { recursive: true, force: true });
+    if (exportWorkspace) {
+      disposeTempWorkspace(exportWorkspace, { status: exportStatus });
     }
   }
 

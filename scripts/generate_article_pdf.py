@@ -13,9 +13,12 @@ Output contains:
 from __future__ import annotations
 
 import argparse
+import json
 import math
+import os
 import sys
 import tempfile
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -50,6 +53,40 @@ HERO_IMAGE_WIDTH_RATIO = 0.92
 HERO_IMAGE_MAX_HEIGHT = 78
 INLINE_IMAGE_WIDTH_RATIO = 0.78
 INLINE_IMAGE_MAX_HEIGHT = 68
+
+
+def write_temp_workspace_owner(directory: Path, input_html: Path) -> None:
+    """Mark the PDF workspace so interrupted runs can be cleaned safely later."""
+    created_at = datetime.now(timezone.utc).isoformat()
+    current_root = Path.cwd().resolve()
+    parent_manifest_path = current_root / ".fitpo50-workspace.json"
+    project_root = str(current_root)
+    if parent_manifest_path.exists():
+        try:
+            parent_manifest = json.loads(parent_manifest_path.read_text(encoding="utf-8"))
+            if parent_manifest.get("project_root"):
+                project_root = str(Path(parent_manifest["project_root"]).resolve())
+        except (OSError, ValueError, TypeError):
+            pass
+    manifest = {
+        "version": 1,
+        "workspace_type": "article-pdf-render",
+        "pid": os.getpid(),
+        "created_at": created_at,
+        "updated_at": created_at,
+        "project_root": project_root,
+        "slug": input_html.stem,
+        "status": "ACTIVE",
+    }
+    lock = {
+        "version": 1,
+        "pid": os.getpid(),
+        "created_at": created_at,
+        "project_root": project_root,
+        "workspace_type": "article-pdf-render",
+    }
+    (directory / ".fitpo50-workspace.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (directory / ".fitpo50-workspace.lock").write_text(json.dumps(lock, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 class FitPo50PDF(FPDF):
@@ -374,6 +411,7 @@ def generate_pdf(input_html: Path, output_pdf: Path, source_url: str) -> None:
 
     with tempfile.TemporaryDirectory(prefix="fitpo50_pdf_") as tmp:
         tmp_dir = Path(tmp)
+        write_temp_workspace_owner(tmp_dir, input_html)
 
         if hero_image_node:
             hero_path = resolve_image_path(hero_image_node.get("src", ""), input_html)

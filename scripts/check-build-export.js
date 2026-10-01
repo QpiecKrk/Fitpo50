@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
-const fs = require('fs');
-const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 
 function parseArgs(argv) {
   return {
@@ -20,17 +19,11 @@ function run(label, cmd, args, opts = {}) {
   }
 }
 
-function rmSafe(target) {
-  try {
-    fs.rmSync(target, { recursive: true, force: true });
-  } catch {
-    // best effort
-  }
-}
-
 function main() {
   const args = parseArgs(process.argv.slice(2));
-  const exportDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-export-check-'));
+  const workspace = createManagedTempDir({ prefix: 'fitpo50-export-check-', type: 'build-export-check', projectRoot: process.cwd() });
+  const exportDir = path.join(workspace, 'site');
+  let status = 'FAILED';
   try {
     run('Strict build (typecheck + esbuild)', 'npm', ['run', 'build:strict']);
     run('Assets mirror sync', 'npm', ['run', 'assets:mirror:sync']);
@@ -44,8 +37,9 @@ function main() {
       console.log('[CHECK-BUILD-EXPORT] Broken links crawl skipped (--skip-broken-links).');
     }
     console.log(`\n[PASS] check-build-export OK (${exportDir})`);
+    status = 'COMPLETED';
   } finally {
-    rmSafe(exportDir);
+    disposeTempWorkspace(workspace, { status });
     console.log('[CLEANUP] Removed temporary export directory.');
   }
 }

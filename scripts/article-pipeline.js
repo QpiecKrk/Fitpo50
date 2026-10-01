@@ -3,7 +3,6 @@
 const { spawnSync, spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
-const os = require('os');
 const {
   cleanupPreparedArtifact,
   inspectPreparedArtifact,
@@ -22,6 +21,7 @@ const {
   validatePublicationSet,
   writePublicationManifest,
 } = require('./lib/article-staging');
+const { createManagedTempDir, disposeTempWorkspace, resolveWorkspaceProjectRoot } = require('./lib/temp-workspace');
 const {
   defaultGscInputDir,
   preparePublicationMonitoring,
@@ -119,7 +119,7 @@ function appendTimingReport(scope, steps) {
 }
 
 function runTempCleanup() {
-  const res = spawnSync('node', ['scripts/tmp-cleanup.js'], { stdio: 'inherit' });
+  const res = spawnSync('node', ['scripts/tmp-cleanup.js', '--dry-run'], { stdio: 'inherit' });
   if (res.status !== 0) {
     console.warn('[WARN] tmp-cleanup exited with non-zero status.');
   }
@@ -187,7 +187,12 @@ function detectSlug(parsed, inputPath) {
 }
 
 function ensureImportCopy(sourcePath, slug, preparedReport) {
-  const importDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-import-'));
+  const importDir = createManagedTempDir({
+    prefix: 'fitpo50-import-',
+    type: 'article-import-working-copy',
+    projectRoot: resolveWorkspaceProjectRoot(),
+    slug,
+  });
   const target = path.join(importDir, `${safeSlug(slug)}.fitpo50.json`);
   fs.copyFileSync(sourcePath, target);
   fs.writeFileSync(reportPathForJson(target), `${JSON.stringify({
@@ -237,6 +242,7 @@ async function main() {
     const candidates = promotionCandidates(parsedInput);
     const baseline = snapshotCandidates(root, candidates);
     const stageRoot = createStagingWorkspace(root, slug);
+    let stageStatus = 'FAILED';
     console.log(`[STAGING] Izolowany katalog: ${stageRoot}`);
     console.log(`[PUBLICATION] Tryb ${operation}; transakcja ${transactionId}.`);
     try {
@@ -279,9 +285,10 @@ async function main() {
       artifactCleanup.removed_directories.forEach((directory) => console.log(`[CLEANUP] Usunięto wykorzystany pakiet roboczy JSON i mediów: ${directory}`));
       console.log(`[PUBLISHED] ${operation}: zatwierdzono atomowo ${transaction.changed.length} plików po PREVIEW_READY i walidacji repo.`);
       appendTimingReport('article-pipeline-transactional', stepTimings);
+      stageStatus = 'COMPLETED';
       return { workingCopy: '', artifactCleanup };
     } finally {
-      fs.rmSync(stageRoot, { recursive: true, force: true });
+      disposeTempWorkspace(stageRoot, { status: stageStatus });
       console.log('[CLEANUP] Usunięto izolowany staging.');
     }
   }
@@ -341,7 +348,7 @@ main()
     tempWorkingCopy = result?.workingCopy || '';
     if (tempWorkingCopy) {
       try {
-        fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });
+        disposeTempWorkspace(path.dirname(tempWorkingCopy), { status: 'COMPLETED' });
         console.log('[CLEANUP] Removed temporary working JSON directory.');
       } catch (_err) {
         console.warn('[WARN] Could not remove temporary working JSON directory.');
@@ -354,7 +361,7 @@ main()
     if (!transactionalOuter) appendTimingReport('article-pipeline-fail', stepTimings);
     if (tempWorkingCopy) {
       try {
-        fs.rmSync(path.dirname(tempWorkingCopy), { recursive: true, force: true });
+        disposeTempWorkspace(path.dirname(tempWorkingCopy), { status: 'FAILED', error: err.message || err });
         console.log('[CLEANUP] Removed temporary working JSON directory after failure.');
       } catch (_err) {
         // no-op

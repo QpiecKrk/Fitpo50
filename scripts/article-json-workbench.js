@@ -11,6 +11,7 @@ const {
   safeSlug,
   sha256File,
 } = require('./lib/article-json-artifact');
+const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 
 const ROOT = process.cwd();
 
@@ -274,7 +275,12 @@ function main() {
   const statusHistory = [{ status: STATUSES.DRAFT, at: generatedAt, reason: 'JSON przyjęty jako draft; nie utworzono HTML.' }];
   const blockers = [];
   const stages = [];
-  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-json-workbench-'));
+  const tempDir = createManagedTempDir({
+    prefix: 'fitpo50-json-workbench-',
+    type: 'article-json-workbench',
+    projectRoot: ROOT,
+    slug,
+  });
   const workingFile = path.join(tempDir, `${slug}.fitpo50.json`);
   fs.copyFileSync(sourceFile, workingFile);
   try {
@@ -343,7 +349,7 @@ function main() {
     console.log(`[ARTICLE-JSON] raport: ${reports.mdPath}`);
     if (status !== STATUSES.CONTENT_READY) process.exitCode = 2;
   } finally {
-    fs.rmSync(tempDir, { recursive: true, force: true });
+    disposeTempWorkspace(tempDir, { status: blockers.length ? 'FAILED' : 'COMPLETED' });
   }
 }
 

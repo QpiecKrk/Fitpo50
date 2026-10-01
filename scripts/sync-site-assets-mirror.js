@@ -81,7 +81,7 @@ function syncNewsThumbnailsMirror(checkOnly) {
 function syncPdfMirror(slugs, checkOnly) {
   const pdfDir = abs('assets/pdf');
   if (!fs.existsSync(pdfDir)) return 0;
-  ensureDir('_site/assets/pdf');
+  if (!checkOnly) ensureDir('_site/assets/pdf');
 
   let changed = 0;
   const allow = new Set((slugs || []).map((s) => String(s || '').trim()).filter(Boolean));

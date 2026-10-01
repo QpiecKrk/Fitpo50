@@ -1,9 +1,9 @@
 const crypto = require('crypto');
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { categoryFileFromKey, normalizeCategory } = require('./categories');
+const { createManagedTempDir } = require('./temp-workspace');
 
 const EXCLUDED_TOP_LEVEL = new Set(['.git', 'node_modules', '.tmp', 'output', 'tmp']);
 const TRANSACTION_DIR = path.join('.tmp', 'article-publication-transactions');
@@ -52,7 +52,12 @@ function cloneEntry(source, target, relative = '') {
 }
 
 function createStagingWorkspace(sourceRoot, slug) {
-  const stageRoot = fs.mkdtempSync(path.join(os.tmpdir(), `fitpo50-preview-${slug}-`));
+  const stageRoot = createManagedTempDir({
+    prefix: `fitpo50-preview-${slug}-`,
+    type: 'article-publication-staging',
+    projectRoot: sourceRoot,
+    slug,
+  });
   cloneEntry(sourceRoot, stageRoot);
   const nodeModules = path.join(sourceRoot, 'node_modules');
   if (fs.existsSync(nodeModules)) fs.symlinkSync(nodeModules, path.join(stageRoot, 'node_modules'));

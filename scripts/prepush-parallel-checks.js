@@ -4,18 +4,18 @@ const { spawn, spawnSync } = require('child_process');
 const readline = require('readline');
 
 const TASKS = {
-  'immutable-asset:guard': { cmd: 'node', args: ['scripts/immutable-asset-guard.js'], always: true },
-  'article:content-consistency:all': { cmd: 'node', args: ['scripts/article-content-consistency-all.js'], always: true },
-  'assets:mirror:check': { cmd: 'node', args: ['scripts/sync-site-assets-mirror.js', '--check'], always: true },
-  'article:validate': { cmd: 'node', args: ['scripts/validate-article-standard.js'], always: true },
-  'predeploy:check': { cmd: 'node', args: ['scripts/predeploy-gate.js'], always: true },
-  'news:integrity': { cmd: 'node', args: ['scripts/news-integrity-check.js'], match: [/^data\/news-live\.json$/, /^assets\/data\/news-fallback\.json$/, /^admin\/news/i] },
-  'article:guard:diff': { cmd: 'node', args: ['scripts/run-article-guard-diff.js'], match: [/\.html$/i] },
-  'article:contract:diff': { cmd: 'node', args: ['scripts/run-article-contract-diff.js'], match: [/\.html$/i] },
-  'schema:validate': { cmd: 'node', args: ['scripts/schema-validator.js', '--diff'], match: [/\.html$/i] },
-  'adsense:readiness': { cmd: 'node', args: ['scripts/adsense-readiness-check.js'], always: true },
-  'json:gate:diff': { cmd: 'node', args: ['scripts/json-fitpo50-gate-diff.js'], match: [/\.fitpo50\.json$/i] },
-  'date:modified:guard': { cmd: 'node', args: ['scripts/date-modified-guard.js'], match: [/\.html$/i] },
+  'immutable-asset:guard': { cmd: 'node', args: ['scripts/immutable-asset-guard.js'], always: true, access: 'read' },
+  'article:content-consistency:all': { cmd: 'node', args: ['scripts/article-content-consistency-all.js'], always: true, access: 'read' },
+  'assets:mirror:check': { cmd: 'node', args: ['scripts/sync-site-assets-mirror.js', '--check'], always: true, access: 'read' },
+  'article:validate': { cmd: 'node', args: ['scripts/validate-article-standard.js'], always: true, access: 'read' },
+  'predeploy:check': { cmd: 'node', args: ['scripts/predeploy-gate.js'], always: true, access: 'read' },
+  'news:integrity': { cmd: 'node', args: ['scripts/news-integrity-check.js'], match: [/^data\/news-live\.json$/, /^assets\/data\/news-fallback\.json$/, /^admin\/news/i], access: 'read' },
+  'article:guard:diff': { cmd: 'node', args: ['scripts/run-article-guard-diff.js'], match: [/\.html$/i], access: 'read' },
+  'article:contract:diff': { cmd: 'node', args: ['scripts/run-article-contract-diff.js'], match: [/\.html$/i], access: 'read' },
+  'schema:validate': { cmd: 'node', args: ['scripts/schema-validator.js', '--diff'], match: [/\.html$/i], access: 'read' },
+  'adsense:readiness': { cmd: 'node', args: ['scripts/adsense-readiness-check.js'], always: true, access: 'read' },
+  'json:gate:diff': { cmd: 'node', args: ['scripts/json-fitpo50-gate-diff.js'], match: [/\.fitpo50\.json$/i], access: 'read' },
+  'date:modified:guard': { cmd: 'node', args: ['scripts/date-modified-guard.js'], match: [/\.html$/i], access: 'read' },
 };
 const DEFAULT_TASKS = Object.keys(TASKS);
 
@@ -101,6 +101,18 @@ function resolveRunnableTasks(tasks, changed, forceAll) {
   return { runnables, skipped };
 }
 
+function executionPlan(tasks, definitions = TASKS) {
+  const parallelRead = [];
+  const sequentialWrite = [];
+  for (const task of tasks) {
+    const access = definitions[task]?.access;
+    if (access === 'read') parallelRead.push(task);
+    else if (access === 'write') sequentialWrite.push(task);
+    else throw new Error(`Zadanie ${task} nie deklaruje access=read|write.`);
+  }
+  return { parallelRead, sequentialWrite };
+}
+
 function prefixOutput(task, stream, logger) {
   if (!stream) return;
   const rl = readline.createInterface({ input: stream });
@@ -138,13 +150,15 @@ async function main() {
   const { tasks, all, worktree } = parseArgs(process.argv.slice(2));
   const changed = changedFiles(worktree);
   const { runnables, skipped } = resolveRunnableTasks(tasks, changed, all);
-  console.log(`[PREPUSH-PARALLEL] start tasks=${runnables.length}/${tasks.length} mode=${worktree ? 'worktree' : 'commits'}`);
+  const plan = executionPlan(runnables);
+  console.log(`[PREPUSH-PARALLEL] start tasks=${runnables.length}/${tasks.length} reads_parallel=${plan.parallelRead.length} writes_sequential=${plan.sequentialWrite.length} mode=${worktree ? 'worktree' : 'commits'}`);
   if (skipped.length) {
     console.log(`[PREPUSH-PARALLEL] skipped: ${skipped.join(', ')}`);
   }
   const startedAt = Date.now();
 
-  const results = await Promise.all(runnables.map((task) => runTask(task)));
+  const results = await Promise.all(plan.parallelRead.map((task) => runTask(task)));
+  for (const task of plan.sequentialWrite) results.push(await runTask(task));
   const failed = results.filter((r) => r.code !== 0);
   const seconds = ((Date.now() - startedAt) / 1000).toFixed(2);
 
@@ -160,7 +174,11 @@ async function main() {
   console.log(`\n[PASS] prepush-parallel-checks in ${seconds}s`);
 }
 
-main().catch((err) => {
-  console.error(`[FAIL] prepush-parallel-checks -> ${err.message || err}`);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(`[FAIL] prepush-parallel-checks -> ${err.message || err}`);
+    process.exit(1);
+  });
+}
+
+module.exports = { TASKS, changedFiles, executionPlan, parseArgs, resolveRunnableTasks, shouldRunTask };

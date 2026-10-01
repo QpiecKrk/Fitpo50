@@ -135,6 +135,7 @@ git push origin main
 - Hostinger automatycznie wdraża `main`. Po pushu uruchom `npm run deployment:verify` i czekaj na `LIVE_DEPLOYED_AND_VALIDATED`.
 - `PUSHED` oznacza wyłącznie obecność commita na GitHubie. `DEPLOYED` oznacza wykrycie markera na serwerze z niepełną walidacją. Dopiero `LIVE_DEPLOYED_AND_VALIDATED` potwierdza produkcję i pozwala utworzyć listę GSC.
 - `npm run hostinger:clean-repo` jest wycofane. Przy rzeczywistym błędzie integracji zacznij od `npm run hostinger:recovery` w trybie dry-run i stosuj kontrakt z `docs/deployment-status-contract.md`.
+- `npm run tmp:cleanup` jest odczytowym dry-run. Trybu `tmp:cleanup:apply` używaj dopiero po przeglądzie listy; usuwa wyłącznie stare, zarządzane i osierocone workspace zgodnie z `docs/temporary-workspace-safety.md`.
 
 ### 5. Najważniejsze regresje, których nie wolno przywrócić
 

@@ -67,8 +67,10 @@ Ten plik porzadkuje najwazniejsze komendy, zeby agenci i czlowiek nie wybierali 
 
 - `npm run reports:prune:dry` - pokazuje robocze raporty starsze niz 30 dni, ktore mozna usunac.
 - `npm run reports:prune` - usuwa tylko bezpieczne, niecommitowane raporty robocze starsze niz 30 dni.
-- `npm run tmp:cleanup:dry` - pokazuje tymczasowe pliki do sprzatniecia.
-- `npm run tmp:cleanup` - sprzata tymczasowe pliki techniczne.
+- `npm run tmp:cleanup` - kanoniczny, odczytowy dry-run; pokazuje kwalifikujące się stare workspace i powód pominięcia pozostałych.
+- `npm run tmp:cleanup:dry` - jawny alias tego samego dry-run.
+- `npm run tmp:cleanup:apply` - usuwa tylko zarządzane workspace starsze niż 12 godzin, należące do bieżącego projektu, bez żywego PID-u i aktywnego locka.
+- `npm run test:runtime-safety` - testy manifestów/locków, cleanup, lifecycle Chromium i bezpiecznej równoległości.
 
 ## Komendy, ktorych nie traktujemy jako glownego workflow
 

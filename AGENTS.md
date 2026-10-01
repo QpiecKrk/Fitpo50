@@ -31,6 +31,9 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Polecenie `git push` uruchamia pełny workflow opisany w `SESSION_START_MAX.md`.
 - Standardem wdrożenia jest automatyczny deploy Hostinger z `main`; po pushu uruchom `npm run deployment:verify` i uznaj produkcję dopiero przy `LIVE_DEPLOYED_AND_VALIDATED`.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `hostinger:recovery` zaczyna się od dry-run i nie może usuwać nieznanych plików.
+- Katalogi tymczasowe usuwaj wyłącznie przez `tmp:cleanup`: domyślnie dry-run, minimum 12 godzin, prawidłowy manifest właściciela, martwy PID i brak aktywnego locka.
+- Każdy nowy staging lub workspace `/tmp` musi używać `scripts/lib/temp-workspace.js`; każdy nowy skrypt Playwright musi używać `withChromium`.
+- W `prepush-parallel-checks` zadania muszą deklarować `access: read|write`; zadania zapisujące wykonuj sekwencyjnie albo w odrębnych workspace.
 
 ## Treść FitPo50
 

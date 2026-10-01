@@ -105,6 +105,8 @@ rsync -a \
   --exclude=".cursorrules" \
   --exclude=".windsurfrules" \
   --exclude=".DS_Store" \
+  --exclude=".fitpo50-workspace.json" \
+  --exclude=".fitpo50-workspace.lock" \
   --exclude=".editorconfig" \
   --exclude=".env*" \
   --exclude="AGENT.md" \

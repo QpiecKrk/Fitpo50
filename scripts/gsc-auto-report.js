@@ -6,6 +6,7 @@ const os = require('os');
 const { spawnSync } = require('child_process');
 const https = require('https');
 const { API_REPORT_NAME, MANIFEST_NAME, inspectGscInput } = require('./lib/gsc-data-contract');
+const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 
 const ROOT = process.cwd();
 const DEFAULT_DOWNLOADS_DIR = process.env.GSC_DOWNLOADS_DIR || path.join(os.homedir(), 'Downloads');
@@ -613,10 +614,11 @@ function finishSuccessfulReports(workDir, source) {
 async function main() {
   loadLocalEnvFromHome();
   const args = parseArgs(process.argv.slice(2));
+  let tmp = '';
+  let tmpStatus = 'FAILED';
   try {
     const inputDir = path.resolve(args.workDir);
     ensureDir(inputDir);
-    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gsc-auto-'));
 
     const apiRes = tryGenerateCsvFromApi(inputDir);
     if (apiRes.ok) {
@@ -627,9 +629,11 @@ async function main() {
       runSeoAioWaveProposal(inputDir);
       finishSuccessfulReports(inputDir, 'gsc_api');
       if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);
+      tmpStatus = 'COMPLETED';
       return;
     }
     console.log(`[GSC-AUTO] GSC API pominięte: ${apiRes.reason}`);
+    tmp = createManagedTempDir({ prefix: 'gsc-auto-', type: 'gsc-auto-input', projectRoot: ROOT });
 
     let sourceLabel = '';
     if (args.preferGithub) {
@@ -683,6 +687,7 @@ async function main() {
     runSeoAioWaveProposal(inputDir);
     finishSuccessfulReports(inputDir, sourceLabel || 'imported_csv');
     if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);
+    tmpStatus = 'COMPLETED';
     return;
   } catch (freshErr) {
     const inputDir = path.resolve(args.workDir);
@@ -700,6 +705,7 @@ async function main() {
     ].join('\n');
     throw new Error(manualMsg);
   } finally {
+    if (tmp) disposeTempWorkspace(tmp, { status: tmpStatus });
     // Optional only: default GSC mode is read-only report generation outside repo.
     if (args.cleanupRepoArtifacts) {
       cleanupRepoGscArtifacts();
