@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit --pretty false",
     "build:strict": "npm run typecheck && npm run build:esbuild",
     "article:add": "node scripts/article-add.js",
+    "article:coverage:report": "node scripts/article-system-coverage-report.js",
     "article:prepare-json": "node scripts/article-json-workbench.js",
     "article:architecture": "node scripts/prepare-article-architecture.js",
     "article:media": "node scripts/prepare-article-media.js",
