@@ -234,6 +234,35 @@ async function inspectUrl(accessToken, siteUrl, inspectionUrl) {
   };
 }
 
+async function inspectWithCredentialFallback(options) {
+  const attempts = [];
+  const inspect = options.inspect || inspectUrl;
+  const getOauthToken = options.getOauthToken || getAccessTokenByRefreshToken;
+  let token = options.token;
+  let authMode = options.authMode;
+
+  try {
+    const inspection = await inspect(token, options.siteUrl, options.inspectionUrl);
+    return { ok: true, inspection, token, authMode, attempts };
+  } catch (error) {
+    attempts.push({ auth_mode: authMode, ...classifyExternalError(error, { authMode }) });
+  }
+
+  if (authMode !== 'service_account' || !options.oauth) {
+    return { ok: false, inspection: null, token, authMode, attempts };
+  }
+
+  authMode = 'oauth_refresh_token';
+  try {
+    token = await getOauthToken(options.oauth);
+    const inspection = await inspect(token, options.siteUrl, options.inspectionUrl);
+    return { ok: true, inspection, token, authMode, attempts };
+  } catch (error) {
+    attempts.push({ auth_mode: authMode, ...classifyExternalError(error, { authMode }) });
+    return { ok: false, inspection: null, token, authMode, attempts };
+  }
+}
+
 function loadInventoryCandidates(file, zeroVisibilityOnly) {
   if (!file || !fs.existsSync(file)) return [];
   try {
@@ -385,7 +414,24 @@ async function main() {
     const publishedAt = String(item.last_published_at || item.first_published_at || '').trim();
     report.scanned += 1;
     try {
-      const inspection = await inspectUrl(token, siteUrl, url);
+      const attempt = await inspectWithCredentialFallback({
+        token,
+        authMode: report.auth_mode,
+        oauth,
+        siteUrl,
+        inspectionUrl: url,
+      });
+      authAttempts.push(...attempt.attempts);
+      token = attempt.token;
+      report.auth_mode = attempt.authMode;
+      if (!attempt.ok) {
+        const last = attempt.attempts[attempt.attempts.length - 1];
+        const error = new Error(last?.message || 'URL Inspection request failed.');
+        error.integrationStatus = last?.status;
+        error.integrationReason = last?.reason;
+        throw error;
+      }
+      const inspection = attempt.inspection;
       const crawlMs = safeDateMs(inspection.lastCrawlTime);
       const publishedMs = safeDateMs(publishedAt);
       const crawledAfterPublish = Number.isFinite(crawlMs) && Number.isFinite(publishedMs) && crawlMs >= (publishedMs - 6 * 60 * 60 * 1000);
@@ -431,7 +477,9 @@ async function main() {
         sitemaps: inspection.sitemaps,
       });
     } catch (err) {
-      const classified = classifyExternalError(err, { authMode: report.auth_mode });
+      const classified = err.integrationStatus
+        ? { status: err.integrationStatus, reason: err.integrationReason, message: redactSecrets(err.message) }
+        : classifyExternalError(err, { authMode: report.auth_mode });
       report.status = classified.status;
       report.pending_older_72h += 1;
       report.alerts.push({
@@ -446,6 +494,13 @@ async function main() {
       update.notes = `inspection_error: ${classified.reason}`;
     }
   }
+
+  report.fallback_attempts = authAttempts.map((attempt) => ({
+    auth_mode: attempt.auth_mode,
+    status: attempt.status,
+    reason: attempt.reason,
+    message: redactSecrets(attempt.message),
+  }));
 
   if (!inventoryMode) {
     log.items = [...bySlug.values()].sort((a, b) => String(b.last_published_at || '').localeCompare(String(a.last_published_at || '')));
@@ -489,7 +544,11 @@ async function main() {
   console.log(`- MD: ${path.relative(ROOT, args.reportMd)}`);
 }
 
-main().catch((err) => {
-  console.error(`[FAIL] ${err.message || err}`);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(`[FAIL] ${err.message || err}`);
+    process.exit(1);
+  });
+}
+
+module.exports = { inspectWithCredentialFallback };

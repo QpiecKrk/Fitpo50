@@ -6,6 +6,10 @@ const path = require('path');
 const ROOT = process.cwd();
 const NEWS_EXTS = ['avif', 'webp', 'jpg'];
 
+function isRuntimeNewsThumb(imageBase) {
+  return /^news_20/i.test(String(imageBase || '').trim());
+}
+
 function abs(rel) {
   return path.join(ROOT, rel);
 }
@@ -65,6 +69,9 @@ function syncNewsThumbnailsMirror(checkOnly) {
   for (const item of published) {
     const imageBase = String(item.image_base || '').trim();
     if (!imageBase) continue;
+    // Runtime thumbnails are intentionally ignored by Git and may exist only on
+    // the server. The NEWS integrity and predeploy gates apply the same rule.
+    if (isRuntimeNewsThumb(imageBase)) continue;
     for (const ext of NEWS_EXTS) {
       const src = `assets/news/${imageBase}.${ext}`;
       const dst = `_site/assets/news/${imageBase}.${ext}`;
@@ -138,4 +145,6 @@ function main() {
   console.log(`[PASS] sync-site-assets-mirror: updated files=${changed}`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { isRuntimeNewsThumb, syncNewsThumbnailsMirror };
