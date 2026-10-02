@@ -20,6 +20,14 @@ function walk(root, relative = '') {
   return files;
 }
 
+function isParityManagedPath(relative) {
+  const normalized = String(relative || '').split(path.sep).join('/');
+  if (normalized === 'llms-full.txt') return false;
+  if (normalized.startsWith('admin/uploads/')) return false;
+  if (/^assets\/news\/news_20/i.test(normalized)) return false;
+  return true;
+}
+
 function kindFor(relative) {
   const normalized = String(relative || '').toLowerCase();
   if (normalized.endsWith('.html')) return 'HTML';
@@ -37,8 +45,10 @@ function compareExportTrees(expectedRoot, actualRoot) {
   const actual = path.resolve(actualRoot);
   if (!fs.existsSync(expected) || !fs.statSync(expected).isDirectory()) throw new Error(`Brak katalogu oczekiwanego eksportu: ${expected}`);
   if (!fs.existsSync(actual) || !fs.statSync(actual).isDirectory()) throw new Error(`Brak katalogu publicznego eksportu: ${actual}`);
-  const expectedFiles = walk(expected);
-  const actualFiles = walk(actual);
+  // Parity covers Git-managed public output. Runtime uploads/thumbnails and the
+  // generated llms-full artifact are intentionally absent from a clean clone.
+  const expectedFiles = walk(expected).filter(isParityManagedPath);
+  const actualFiles = walk(actual).filter(isParityManagedPath);
   const expectedSet = new Set(expectedFiles);
   const actualSet = new Set(actualFiles);
   const missing = expectedFiles.filter((relative) => !actualSet.has(relative)).map(item);
@@ -58,4 +68,4 @@ function compareExportTrees(expectedRoot, actualRoot) {
   };
 }
 
-module.exports = { compareExportTrees, kindFor, walk };
+module.exports = { compareExportTrees, isParityManagedPath, kindFor, walk };

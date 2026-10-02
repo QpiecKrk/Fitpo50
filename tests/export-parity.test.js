@@ -4,7 +4,7 @@ const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 
-const { compareExportTrees } = require('../scripts/lib/export-parity');
+const { compareExportTrees, isParityManagedPath } = require('../scripts/lib/export-parity');
 const { buildDocument } = require('../scripts/generate-llms-full');
 
 const roots = [];
@@ -46,6 +46,26 @@ test('parity klasyfikuje brak PDF-u, danych i wariantu obrazu', () => {
   write(expected, 'assets/a.avif', 'image');
   const report = compareExportTrees(expected, actual);
   assert.deepEqual(report.missing.map((item) => item.kind).sort(), ['ASSET', 'DATA', 'PDF']);
+});
+
+test('parity pomija wyłącznie artefakty runtime i generowane, których nie ma w czystym checkout', () => {
+  assert.equal(isParityManagedPath('llms-full.txt'), false);
+  assert.equal(isParityManagedPath('admin/uploads/example.webp'), false);
+  assert.equal(isParityManagedPath('assets/news/news_20260625_example.avif'), false);
+  assert.equal(isParityManagedPath('assets/news/editorial-cover.avif'), true);
+  assert.equal(isParityManagedPath('artykul.html'), true);
+
+  const expected = temp();
+  const actual = temp();
+  write(expected, 'artykul.html', 'ta sama treść');
+  write(actual, 'artykul.html', 'ta sama treść');
+  write(expected, 'llms-full.txt', 'generowane');
+  write(expected, 'admin/uploads/example.webp', 'runtime');
+  write(expected, 'assets/news/news_20260625_example.avif', 'runtime');
+  const report = compareExportTrees(expected, actual);
+  assert.equal(report.ok, true);
+  assert.equal(report.expected_files, 1);
+  assert.equal(report.actual_files, 1);
 });
 
 test('llms-full ma deterministyczny generated_at wynikający z treści', () => {
