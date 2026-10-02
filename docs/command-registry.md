@@ -97,8 +97,8 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run reports:prune:dry` — Bezpośrednia komenda robocza lub odczytowa (node scripts/reports-prune.js --dry-run).
 - [PUBLIC] `npm run schema:validate` — Bezpośrednia komenda robocza lub odczytowa (node scripts/schema-validator.js --diff).
 - [PUBLIC] `npm run seo:aeo:guard` — Bezpośrednia komenda robocza lub odczytowa (node scripts/seo-aeo-guard.js).
-- [PUBLIC] `npm run seo:aio:apply-wave` — Bezpośrednia komenda robocza lub odczytowa (node scripts/seo-aio-wave-autopilot.js).
 - [PUBLIC] `npm run seo:aio:machine` — Bezpośrednia komenda robocza lub odczytowa (node scripts/seo-aio-command-center.js).
+- [PUBLIC] `npm run seo:aio:wave:proposal` — Generuje wyłącznie propozycję ze statusem AWAITING_USER_APPROVAL; nie wdraża zmian ani nie tworzy produkcyjnej kolejki GSC.
 - [PUBLIC] `npm run seo:crawl` — Bezpośrednia komenda robocza lub odczytowa (node scripts/broken-links-crawler.js _site).
 - [PUBLIC] `npm run session:start` — Lekki start diagnostyczny sesji: kontekst i doctor.
 - [PUBLIC] `npm run site:full-audit` — Bezpośrednia komenda robocza lub odczytowa (npm run check:build-export && npm run broken-links:crawl && npm run workflow:maintenance && npm run aio:full-audit).
@@ -183,3 +183,4 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 
 - [RETIRED] `npm run hostinger:clean-repo` — Zablokowana historyczna komenda; zawsze odmawia wykonania.
 - [RETIRED] `npm run prepush:strict` — Wycofany wariant złożony; zastąpiony przez prepush:local.
+- [RETIRED] `npm run seo:aio:apply-wave` — Myląca historyczna nazwa; zawsze odmawia wykonania i wskazuje seo:aio:wave:proposal.

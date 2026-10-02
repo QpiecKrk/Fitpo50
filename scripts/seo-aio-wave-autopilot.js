@@ -278,12 +278,16 @@ function writeOutputs(proposal, args) {
 }
 
 function main() {
-  const args = parseArgs(process.argv.slice(2));
-  const report = readJson(args.input);
-  const proposal = buildProposal(report, args);
-  if (args.apply) {
+  const argv = process.argv.slice(2);
+  if (argv.includes('--apply')) {
     throw new Error('APPLY_BLOCKED: generyczny safe-links został wycofany. Użyj zatwierdzonego manifestu przez popraw-seo:apply.');
   }
+  if (argv.includes('--retired-command')) {
+    throw new Error('RETIRED: seo:aio:apply-wave zostało wycofane. Użyj npm run seo:aio:wave:proposal.');
+  }
+  const args = parseArgs(argv);
+  const report = readJson(args.input);
+  const proposal = buildProposal(report, args);
   const paths = writeOutputs(proposal, args);
   console.log(`[SEO-AIO-WAVE] wave=${proposal.wave} cards=${proposal.selected_cards.length} status=${proposal.status}`);
   console.log(`[SEO-AIO-WAVE] proposal: ${paths.md}`);

@@ -7,6 +7,24 @@ const test = require('node:test');
 
 const ROOT = path.resolve(__dirname, '..');
 
+function runNpm(script, args = []) {
+  return spawnSync('npm', ['run', script, '--', ...args], {
+    cwd: ROOT,
+    encoding: 'utf8',
+    env: { ...process.env, NO_COLOR: '1' },
+  });
+}
+
+function contentWorktreeState() {
+  const result = spawnSync(
+    'git',
+    ['status', '--short', '--untracked-files=all', '--', '*.html', '_site'],
+    { cwd: ROOT, encoding: 'utf8' },
+  );
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  return result.stdout;
+}
+
 function writeCommandCenterFixture(file) {
   const report = {
     waves: {
@@ -69,4 +87,56 @@ test('wave autopilot blocks the retired generic apply mode', () => {
 
   assert.notEqual(result.status, 0);
   assert.match(result.stderr || result.stdout, /APPLY_BLOCKED/);
+});
+
+test('public npm proposal command is proposal-only and leaves articles and _site unchanged', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-wave-npm-'));
+  const input = path.join(dir, 'seo-aio-command-center.json');
+  writeCommandCenterFixture(input);
+  const before = contentWorktreeState();
+
+  const result = runNpm('seo:aio:wave:proposal', [
+    '--input', input,
+    '--output-dir', dir,
+    '--no-mirror',
+    '--wave', '1',
+  ]);
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /status=AWAITING_USER_APPROVAL/);
+  const proposal = JSON.parse(fs.readFileSync(path.join(dir, 'seo-aio-wave-proposal.json'), 'utf8'));
+  assert.equal(proposal.status, 'AWAITING_USER_APPROVAL');
+  assert.deepEqual(proposal.gsc_submit_queue, []);
+  assert.deepEqual(proposal.planned_gsc_submit_queue, [
+    'https://fitpo50.pl/target.html',
+    'https://fitpo50.pl/source-a.html',
+  ]);
+  assert.equal(fs.readFileSync(path.join(dir, 'seo-aio-wave-gsc-submit.txt'), 'utf8'), '\n');
+  assert.equal(contentWorktreeState(), before);
+});
+
+test('public npm proposal command blocks every --apply attempt before writing output', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-wave-npm-apply-'));
+  const input = path.join(dir, 'seo-aio-command-center.json');
+  writeCommandCenterFixture(input);
+
+  const result = runNpm('seo:aio:wave:proposal', [
+    '--input', input,
+    '--output-dir', dir,
+    '--no-mirror',
+    '--apply',
+  ]);
+
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr || result.stdout, /APPLY_BLOCKED/);
+  assert.equal(fs.existsSync(path.join(dir, 'seo-aio-wave-proposal.json')), false);
+  assert.equal(fs.existsSync(path.join(dir, 'seo-aio-wave-gsc-submit.txt')), false);
+});
+
+test('retired npm command refuses execution and points to proposal command', () => {
+  const result = runNpm('seo:aio:apply-wave');
+
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr || result.stdout, /RETIRED/);
+  assert.match(result.stderr || result.stdout, /seo:aio:wave:proposal/);
 });

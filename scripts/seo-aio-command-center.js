@@ -416,7 +416,7 @@ function buildReport(args) {
       'node --check scripts/gsc-weekly-api-report.js scripts/gsc-priority-map.js scripts/seo-aio-command-center.js',
       'npm run gsc:priority-map -- --input-dir ~/Downloads/gsc-auto-input --output-dir data/reports',
       'npm run seo:aio:machine -- --input-dir ~/Downloads/gsc-auto-input --output-dir ~/Downloads/gsc-auto-input',
-      'npm run seo:aio:apply-wave -- --input ~/Downloads/gsc-auto-input/seo-aio-command-center.json --output-dir ~/Downloads/gsc-auto-input --wave 1 --limit 5',
+      'npm run seo:aio:wave:proposal -- --input ~/Downloads/gsc-auto-input/seo-aio-command-center.json --output-dir ~/Downloads/gsc-auto-input --wave 1 --limit 5',
       'npm run llms:full',
       'npm run assets:mirror:sync',
       'npm run predeploy:check',
