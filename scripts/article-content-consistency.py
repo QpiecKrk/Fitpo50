@@ -9,6 +9,9 @@ from bs4 import BeautifulSoup
 from PIL import Image
 
 
+CONTRACT = json.loads((Path(__file__).resolve().parent / 'contracts' / 'article-visual-review-v3.json').read_text())
+
+
 def normalized(value):
     return ' '.join(BeautifulSoup(str(value or ''), 'html.parser').get_text(' ', strip=True).split())
 
@@ -53,9 +56,10 @@ def validate_picture(picture, label, root, errors, hero=False):
     height = positive_dimension(img.get('height'))
     if not width or not height:
         errors.append(f'{label}: brak lub niepoprawne deklarowane wymiary width/height.')
-    elif width / height < 1.2 or width / height > 2.1:
-        errors.append(f'{label}: proporcja {width}x{height} jest poza zakresem 1.2–2.1.')
-    elif width < (1080 if hero else 900) or height < (600 if hero else 500):
+    layout = CONTRACT['image_layout']['hero' if hero else 'section']
+    if width and height and (width / height < layout['min_aspect_ratio'] or width / height > layout['max_aspect_ratio']):
+        errors.append(f'{label}: proporcja {width}x{height} jest poza zakresem {layout["min_aspect_ratio"]}–{layout["max_aspect_ratio"]}.')
+    elif width and height and (width < layout['min_width'] or height < layout['min_height']):
         errors.append(f'{label}: obraz {width}x{height} jest mniejszy niż wymagane minimum.')
     figure = picture.find_parent('figure')
     if not hero and (figure is None or len(normalized(figure.find('figcaption'))) < 30):

@@ -6,7 +6,7 @@ const path = require('node:path');
 
 const MANIFEST_NAME = '.fitpo50-workspace.json';
 const LOCK_NAME = '.fitpo50-workspace.lock';
-const WORKSPACE_STATUSES = new Set(['ACTIVE', 'COMPLETED', 'FAILED']);
+const WORKSPACE_STATUSES = new Set(['ACTIVE', 'AWAITING_REVIEW', 'COMPLETED', 'FAILED']);
 
 function atomicWriteJson(filePath, payload) {
   const temporary = `${filePath}.writing-${process.pid}-${Date.now()}`;
@@ -92,9 +92,26 @@ function markTempWorkspace(directory, status, extra = {}) {
   if (!manifest) throw new Error(`Brak prawidłowego manifestu workspace: ${directory}`);
   const now = new Date().toISOString();
   const next = { ...manifest, ...extra, status, updated_at: now };
-  if (status !== 'ACTIVE') next.completed_at = next.completed_at || now;
+  if (status === 'COMPLETED' || status === 'FAILED') next.completed_at = next.completed_at || now;
+  else delete next.completed_at;
   atomicWriteJson(manifestPath, next);
   if (status !== 'ACTIVE') fs.rmSync(path.join(directory, LOCK_NAME), { force: true });
+  return next;
+}
+
+function reactivateTempWorkspace(directory) {
+  const manifest = readWorkspaceManifest(directory);
+  if (!manifest || manifest.status !== 'AWAITING_REVIEW') throw new Error(`Workspace nie oczekuje na review: ${directory}`);
+  const now = new Date().toISOString();
+  const next = { ...manifest, status: 'ACTIVE', pid: process.pid, updated_at: now };
+  atomicWriteJson(path.join(directory, MANIFEST_NAME), next);
+  atomicWriteJson(path.join(directory, LOCK_NAME), {
+    version: 1,
+    pid: process.pid,
+    created_at: now,
+    project_root: next.project_root,
+    workspace_type: next.workspace_type,
+  });
   return next;
 }
 
@@ -123,6 +140,7 @@ function inspectTempWorkspace(directory, options = {}) {
     return { eligible: false, reason: 'FOREIGN_PROJECT', directory, manifest };
   }
   const ageMs = Math.max(0, nowMs - createdMs);
+  if (manifest.status === 'AWAITING_REVIEW') return { eligible: false, reason: 'AWAITING_REVIEW', directory, manifest, ageMs };
   if (ageMs < minAgeMs) return { eligible: false, reason: 'FRESH', directory, manifest, ageMs };
   const lock = fs.existsSync(lockPath) ? readJsonIfValid(lockPath) : null;
   if (fs.existsSync(lockPath) && !lock) return { eligible: false, reason: 'INVALID_LOCK', directory, manifest, ageMs };
@@ -140,6 +158,7 @@ module.exports = {
   inspectTempWorkspace,
   isProcessAlive,
   markTempWorkspace,
+  reactivateTempWorkspace,
   readWorkspaceManifest,
   resolveWorkspaceProjectRoot,
 };

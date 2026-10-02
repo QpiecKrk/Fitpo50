@@ -248,6 +248,18 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
         pdf.ln(3)
         return
 
+    if node.name == "div" and "article-quote" in (node.get("class") or []):
+        # An editorial quote may contain an inline link. Treat the complete
+        # container as one block; walking its children separately turns the
+        # text before/inside/after the link into three paragraphs and can
+        # leave punctuation alone on a new line in the PDF.
+        quote_soup = BeautifulSoup("<blockquote></blockquote>", "html.parser")
+        quote = quote_soup.find("blockquote")
+        for child in list(node.contents):
+            quote.append(BeautifulSoup(str(child), "html.parser"))
+        render_node(pdf, quote, source_url=source_url, html_path=html_path, tmp_dir=tmp_dir)
+        return
+
     if node.name in TEXT_TAGS:
         # FPDF can otherwise start a heading in the last lines of a page and
         # continue it after the automatic break, clipping the first words.

@@ -21,13 +21,21 @@ const {
   validatePublicationSet,
   writePublicationManifest,
 } = require('./lib/article-staging');
-const { createManagedTempDir, disposeTempWorkspace, resolveWorkspaceProjectRoot } = require('./lib/temp-workspace');
+const {
+  createManagedTempDir,
+  disposeTempWorkspace,
+  markTempWorkspace,
+  reactivateTempWorkspace,
+  readWorkspaceManifest,
+  resolveWorkspaceProjectRoot,
+} = require('./lib/temp-workspace');
 const { capabilityFromEnvironment } = require('./lib/pipeline-capability');
 const {
   defaultGscInputDir,
   preparePublicationMonitoring,
 } = require('./lib/post-publication-monitor');
 const { submitIndexNow } = require('./lib/indexnow-client');
+const { validatePreviewReport } = require('./lib/article-preview-report');
 
 let tempWorkingCopy = '';
 let transactionalOuter = false;
@@ -207,6 +215,60 @@ function ensureImportCopy(sourcePath, slug, preparedReport) {
   return target;
 }
 
+function articleStageRecordPath(stageRoot) {
+  return path.join(stageRoot, 'article-stage.json');
+}
+
+function isReviewMutableCandidate(relative, slug) {
+  return relative === `data/reports/article-preview/${slug}.json`
+    || relative === `data/reports/article-preview/${slug}.md`;
+}
+
+function candidateHashes(stageRoot, candidates, slug) {
+  return Object.fromEntries(candidates
+    .filter((relative) => !isReviewMutableCandidate(relative, slug))
+    .filter((relative) => fs.existsSync(path.join(stageRoot, relative)))
+    .map((relative) => [relative, sha256File(path.join(stageRoot, relative))]));
+}
+
+function writeArticleStageRecord({ stageRoot, sourceRoot, slug, input, candidates, baseline, transactionId, operation }) {
+  const payload = {
+    version: 1,
+    source_root: sourceRoot,
+    slug,
+    input_file: input,
+    input_sha256: sha256File(input),
+    candidates,
+    baseline: [...baseline],
+    static_hashes: candidateHashes(stageRoot, candidates, slug),
+    transaction_id: transactionId,
+    operation,
+    status: 'AWAITING_VISUAL_REVIEW',
+    created_at: new Date().toISOString(),
+  };
+  fs.writeFileSync(articleStageRecordPath(stageRoot), `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  return payload;
+}
+
+function readArticleStageRecord(stageRoot, sourceRoot, slug, input) {
+  const workspace = readWorkspaceManifest(stageRoot);
+  if (!workspace || workspace.workspace_type !== 'article-publication-staging' || path.resolve(workspace.project_root) !== path.resolve(sourceRoot)) {
+    throw new Error('Wskazany katalog nie jest zarządzanym stagingiem publikacji tego repozytorium.');
+  }
+  const recordPath = articleStageRecordPath(stageRoot);
+  if (!fs.existsSync(recordPath)) throw new Error(`Brak rekordu wznowienia: ${recordPath}`);
+  const record = JSON.parse(fs.readFileSync(recordPath, 'utf8'));
+  if (record.source_root !== sourceRoot || record.slug !== slug || record.input_file !== input) throw new Error('Staging należy do innego repozytorium, slugu albo artefaktu wejściowego.');
+  if (record.input_sha256 !== sha256File(input)) throw new Error('Artefakt CONTENT_READY zmienił się podczas oczekiwania na review.');
+  for (const [relative, hash] of Object.entries(record.static_hashes || {})) {
+    const file = path.join(stageRoot, relative);
+    if (!fs.existsSync(file) || sha256File(file) !== hash) throw new Error(`Staging zmienił się po kontroli technicznej: ${relative}`);
+  }
+  const preview = validatePreviewReport(stageRoot, slug, { requireRenderFiles: true });
+  if (!preview.ok) throw new Error(`Staging nie ma kompletnego PREVIEW_READY v3:\n- ${preview.errors.join('\n- ')}`);
+  return { ...record, preview_timing: preview.report?.timing || {} };
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
@@ -241,21 +303,43 @@ async function main() {
     if (liveArticleExists && !force) {
       throw new Error(`Slug ${slug} już istnieje. Aktualizacja wymaga jawnego --force true.`);
     }
-    const operation = liveArticleExists ? 'UPDATE' : 'CREATE';
-    const transactionId = `article-${slug}-${Date.now()}-${process.pid}`;
-    const candidates = promotionCandidates(parsedInput);
-    const baseline = snapshotCandidates(root, candidates);
-    const stageRoot = createStagingWorkspace(root, slug);
+    let operation = liveArticleExists ? 'UPDATE' : 'CREATE';
+    let transactionId = `article-${slug}-${Date.now()}-${process.pid}`;
+    let candidates = promotionCandidates(parsedInput);
+    let baseline = snapshotCandidates(root, candidates);
+    const resumeStage = String(args['promote-stage'] || '').trim();
+    const stageRoot = resumeStage ? path.resolve(resumeStage) : createStagingWorkspace(root, slug);
     let stageStatus = 'FAILED';
+    let keepForReview = Boolean(resumeStage);
     console.log(`[STAGING] Izolowany katalog: ${stageRoot}`);
-    console.log(`[PUBLICATION] Tryb ${operation}; transakcja ${transactionId}.`);
     try {
-      let phaseStarted = Date.now();
-      runInStaging(stageRoot, [...process.argv.slice(2), '--file', input, '--assets-dir', assetsDir]);
-      stepTimings.push({ tag: 'Izolowany staging: HTML, media, PDF i walidatory', durationMs: Date.now() - phaseStarted });
-      phaseStarted = Date.now();
-      runPreviewGate(stageRoot, slug);
-      stepTimings.push({ tag: 'Render desktop/mobile i kontrola PDF', durationMs: Date.now() - phaseStarted });
+      if (resumeStage) {
+        const record = readArticleStageRecord(stageRoot, root, slug, input);
+        reactivateTempWorkspace(stageRoot);
+        keepForReview = false;
+        operation = record.operation;
+        transactionId = record.transaction_id;
+        candidates = record.candidates;
+        baseline = new Map(record.baseline);
+        stepTimings.push({ tag: 'Techniczny preview HTML/PDF', durationMs: Number(record.preview_timing?.technical_ms || 0) });
+        stepTimings.push({ tag: 'Oczekiwanie na rzeczywisty visual review', durationMs: Number(record.preview_timing?.review_wait_ms || 0) });
+        console.log(`[RESUME] PREVIEW_READY v3 potwierdzony; wznawiam transakcję ${transactionId}.`);
+      } else {
+        console.log(`[PUBLICATION] Tryb ${operation}; transakcja ${transactionId}.`);
+        let phaseStarted = Date.now();
+        runInStaging(stageRoot, [...process.argv.slice(2), '--file', input, '--assets-dir', assetsDir]);
+        stepTimings.push({ tag: 'Izolowany staging: HTML, media, PDF i walidatory', durationMs: Date.now() - phaseStarted });
+        phaseStarted = Date.now();
+        runPreviewGate(stageRoot, slug);
+        stepTimings.push({ tag: 'Render desktop/mobile i kontrola PDF', durationMs: Date.now() - phaseStarted });
+        writeArticleStageRecord({ stageRoot, sourceRoot: root, slug, input, candidates, baseline, transactionId, operation });
+        markTempWorkspace(stageRoot, 'AWAITING_REVIEW');
+        keepForReview = true;
+        console.log(`[AWAITING_VISUAL_REVIEW] ${stageRoot}`);
+        console.log(`[RESUME_COMMAND] npm run article:publish -- --file "${input}" --assets-dir "${assetsDir}" --force ${force} --promote-stage "${stageRoot}"`);
+        appendTimingReport('article-pipeline-awaiting-review', stepTimings);
+        return { workingCopy: '', artifactCleanup: null, awaitingReview: true };
+      }
       const monitoring = preparePublicationMonitoring({
         stageRoot,
         article: parsedInput,
@@ -292,8 +376,12 @@ async function main() {
       stageStatus = 'COMPLETED';
       return { workingCopy: '', artifactCleanup };
     } finally {
-      disposeTempWorkspace(stageRoot, { status: stageStatus });
-      console.log('[CLEANUP] Usunięto izolowany staging.');
+      if (!keepForReview) {
+        disposeTempWorkspace(stageRoot, { status: stageStatus });
+        console.log('[CLEANUP] Usunięto izolowany staging.');
+      } else {
+        console.log('[STAGING RETAINED] Dowody pozostają do rzeczywistego review i wznowienia transakcji.');
+      }
     }
   }
   if (prepared.html_exists && !force) {

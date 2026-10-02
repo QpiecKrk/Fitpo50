@@ -1,0 +1,32 @@
+{
+  "valid_watermark": {
+    "status": "VERIFIED",
+    "matches_topic": true,
+    "no_misleading_text_or_logo": true,
+    "anatomy_and_equipment_plausible": true,
+    "embedded_text": { "kind": "WATERMARK_ONLY" },
+    "note": "Obejrzano cały kadr; watermark nie przekazuje twierdzenia ani liczby merytorycznej."
+  },
+  "invalid_claim_without_evidence": {
+    "status": "VERIFIED",
+    "matches_topic": true,
+    "no_misleading_text_or_logo": true,
+    "anatomy_and_equipment_plausible": true,
+    "embedded_text": {
+      "kind": "CONTENT",
+      "transcription": "Wynik 70%",
+      "claims_or_numbers_present": true,
+      "matches_article_claims": true,
+      "evidence_urls": []
+    },
+    "note": "Obejrzano cały kadr; widoczna liczba nie ma przypisanego adresu dowodu."
+  },
+  "invalid_anatomy": {
+    "status": "VERIFIED",
+    "matches_topic": true,
+    "no_misleading_text_or_logo": true,
+    "anatomy_and_equipment_plausible": false,
+    "embedded_text": { "kind": "NONE" },
+    "note": "Obejrzano cały kadr; ułożenie anatomii albo sprzętu jest niewiarygodne."
+  }
+}

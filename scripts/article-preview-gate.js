@@ -7,7 +7,13 @@ const { spawnSync } = require('child_process');
 const { pageKind } = require('./lib/publication-page-kind');
 const { prepareCenterPrint } = require('./lib/topic-center-print');
 const { withChromium } = require('./lib/playwright-lifecycle');
-const { validatePreviewReport } = require('./lib/article-preview-report');
+const { isInsideRoot, validatePreviewReport } = require('./lib/article-preview-report');
+const {
+  CONTRACT,
+  applyVisualReview,
+  createReviewTemplate,
+  imageInventoryHash,
+} = require('./lib/article-visual-review');
 
 function parseArgs(argv) {
   const out = {};
@@ -52,12 +58,82 @@ function imageArtifacts(root, images, errors) {
     itemErrors.forEach((error) => errors.push(`${placement}: ${error}.`));
     return {
       placement,
+      role: String(image?.role || 'content'),
+      heading: String(image?.heading || ''),
+      context: String(image?.context || ''),
       alt: String(image?.alt || ''),
-      status: itemErrors.length ? 'FAIL' : 'PASS',
+      caption: String(image?.caption || ''),
+      technical_status: itemErrors.length ? 'FAIL' : 'PASS',
       variants,
       errors: itemErrors,
     };
+  }).map((image) => ({ ...image, inventory_sha256: imageInventoryHash(image) }));
+}
+
+function collectDomInventory(isCenter) {
+  const normalize = (value) => String(value || '').replace(/\s+/g, ' ').trim();
+  const slugify = (value) => normalize(value).toLowerCase().normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const root = isCenter ? document.querySelector('main') : document.querySelector('article.article-content');
+  const tables = [...(root?.querySelectorAll('table') || [])];
+  const tableErrors = tables.filter((table) => !table.closest('.article-table-wrap')).map((_table, index) => `tabela ${index + 1}: brak .article-table-wrap`);
+  const roots = [];
+  const hero = document.querySelector('section.article-intro-grid .article-hero picture');
+  if (hero) roots.push({ picture: hero, role: 'hero' });
+  if (isCenter) {
+    [...(root?.querySelectorAll('picture') || [])].forEach((picture) => { if (picture !== hero) roots.push({ picture, role: 'center' }); });
+  } else {
+    const quick = document.querySelector('#quick-answer');
+    if (quick && !quick.closest('article.article-content')) [...quick.querySelectorAll('picture')].forEach((picture) => roots.push({ picture, role: 'quick-answer' }));
+    [...(root?.querySelectorAll('picture') || [])]
+      .filter((picture) => !picture.closest('.share-article-section, .reading-room, .porady-preview'))
+      .forEach((picture) => roots.push({ picture, role: picture.closest('.faq-item') ? 'faq' : 'content' }));
+  }
+  const unique = [];
+  const seenNodes = new Set();
+  roots.forEach((item) => { if (!seenNodes.has(item.picture)) { seenNodes.add(item.picture); unique.push(item); } });
+  const headings = [...(root?.querySelectorAll('h2') || [])];
+  const images = unique.map(({ picture, role }, index) => {
+    const img = picture.querySelector('img');
+    const sources = [...picture.querySelectorAll('source')];
+    let heading = '';
+    const sectionHeading = picture.closest('section')?.querySelector(':scope > h2, :scope > header h2');
+    if (sectionHeading) heading = normalize(sectionHeading.textContent);
+    if (!heading) {
+      for (const candidate of headings) {
+        if (candidate.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_FOLLOWING) heading = normalize(candidate.textContent);
+      }
+    }
+    const explicitPlacement = picture.getAttribute('data-preview-placement') || picture.closest('[data-preview-placement]')?.getAttribute('data-preview-placement');
+    const placement = explicitPlacement || (role === 'hero' ? 'hero' : `${role}:${index + 1}${heading ? `:${slugify(heading).slice(0, 48)}` : ''}`);
+    const figure = picture.closest('figure');
+    const contextRoot = picture.closest('section, .faq-item, aside, article') || figure || picture.parentElement;
+    return {
+      placement,
+      role,
+      heading,
+      context: normalize(contextRoot?.innerText || '').slice(0, 800),
+      alt: normalize(img?.getAttribute('alt')),
+      caption: normalize(figure?.querySelector('figcaption')?.textContent),
+      variants: {
+        jpg: img?.getAttribute('src') || '',
+        avif: sources.find((source) => source.type === 'image/avif')?.getAttribute('srcset') || '',
+        webp: sources.find((source) => source.type === 'image/webp')?.getAttribute('srcset') || '',
+      },
+    };
   });
+  const quickAnswer = document.querySelector('#quick-answer');
+  const externalQuickAnswer = quickAnswer && !quickAnswer.closest('article.article-content') ? quickAnswer : null;
+  const textRoots = isCenter ? [root] : [externalQuickAnswer, root];
+  const text = textRoots.filter(Boolean).map((item) => normalize(item.innerText)).join(' ');
+  return {
+    tables: tables.length,
+    tableErrors,
+    tableMarkup: tables.map((table) => table.outerHTML).join('\n'),
+    text,
+    expectedImages: images.length,
+    images,
+  };
 }
 
 function command(command, args, options = {}) {
@@ -178,7 +254,7 @@ function validatePdfStructure(pdf, expectedText, expectedImages, renderDir, erro
     if (!match || Number(match[1]) < 50 || Number(match[2]) < 50) {
       pageErrors.push('strona PDF jest pusta albo nie można ustalić obszaru treści');
       errors.push(`${name}: ${pageErrors[0]}.`);
-      pageReviews.push({ page: index + 1, ...fileArtifact(process.cwd(), file), status: 'FAIL', errors: pageErrors });
+      pageReviews.push({ page: index + 1, ...fileArtifact(process.cwd(), file), technical_status: 'FAIL', errors: pageErrors });
       return;
     }
     const [, contentWidth, contentHeight, x, y] = match.map(Number);
@@ -194,7 +270,7 @@ function validatePdfStructure(pdf, expectedText, expectedImages, renderDir, erro
       width: dimensions[0],
       height: dimensions[1],
       content_bounds: { x, y, width: contentWidth, height: contentHeight },
-      status: pageErrors.length ? 'FAIL' : 'PASS',
+      technical_status: pageErrors.length ? 'FAIL' : 'PASS',
       errors: pageErrors,
     });
   });
@@ -276,6 +352,38 @@ async function main() {
   const slug = String(args.slug || '').trim();
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error('Podaj poprawny --slug.');
   const root = process.cwd();
+  const reportDir = path.join(root, 'data', 'reports', 'article-preview');
+  const reportPath = path.join(reportDir, `${slug}.json`);
+  const markdownPath = path.join(reportDir, `${slug}.md`);
+  if (args['review-file']) {
+    const reviewPath = path.resolve(root, String(args['review-file']));
+    if (!isInsideRoot(root, reviewPath)) throw new Error('Plik review musi należeć do zarządzanego stagingu albo repozytorium.');
+    const technical = validatePreviewReport(root, slug, { requireReady: false, requireRenderFiles: true });
+    if (!technical.ok) throw new Error(`Raport techniczny nie pozwala zastosować review:\n- ${technical.errors.join('\n- ')}`);
+    const review = JSON.parse(fs.readFileSync(reviewPath, 'utf8'));
+    const reviewed = applyVisualReview(technical.report, review);
+    fs.writeFileSync(reportPath, `${JSON.stringify(reviewed, null, 2)}\n`, 'utf8');
+    const finalValidation = validatePreviewReport(root, slug, { requireRenderFiles: true });
+    if (!finalValidation.ok) {
+      fs.writeFileSync(reportPath, `${JSON.stringify({ ...reviewed, status: CONTRACT.pending_status }, null, 2)}\n`, 'utf8');
+      throw new Error(`Visual review nie przeszedł:\n- ${finalValidation.errors.join('\n- ')}`);
+    }
+    fs.writeFileSync(markdownPath, `${[
+      '# FitPo50 — staging HTML, obrazy i PDF', '',
+      `- Status: **${CONTRACT.ready_status}**`,
+      `- Technical: **${CONTRACT.technical_status}**`,
+      `- Visual: **${CONTRACT.verified_status}**`,
+      `- Slug: ${slug}`,
+      `- Reviewed by: ${reviewed.visual_review.reviewed_by}`,
+      `- Review method: ${reviewed.visual_review.review_method}`,
+      `- Obrazy: ${reviewed.images.length}`,
+      `- PDF: ${reviewed.pdf.pages} stron`,
+    ].join('\n')}\n`, 'utf8');
+    console.log(`[PREVIEW_READY] ${slug}: TECHNICAL_PASS + VISUAL_REVIEW_VERIFIED.`);
+    return;
+  }
+
+  const startedAt = Date.now();
   const html = path.join(root, `${slug}.html`);
   const siteHtml = path.join(root, '_site', `${slug}.html`);
   const pdf = path.join(root, 'assets', 'pdf', `${slug}.pdf`);
@@ -304,44 +412,12 @@ async function main() {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(pageUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
     if (center) await prepareCenterPrint(page);
-    const semanticResult = await page.evaluate((isCenter) => {
-      if (isCenter) {
-        const main = document.querySelector('main');
-        const tables = [...main.querySelectorAll('table')];
-        const pictures = [...main.querySelectorAll('picture')];
-        return { tables: tables.length, tableErrors: tables.filter((t) => !t.closest('.article-table-wrap')).map(() => 'Tabela bez kontenera przewijania'), tableMarkup: tables.map((t) => t.outerHTML).join('\n'), text: main.innerText, expectedImages: main.querySelectorAll('img').length, images: pictures.map((picture, index) => { const img = picture.querySelector('img'); const sources = [...picture.querySelectorAll('source')]; return { placement: `center:${index + 1}`, alt: img?.getAttribute('alt') || '', variants: { jpg: img?.getAttribute('src') || '', avif: sources.find((source) => source.type === 'image/avif')?.getAttribute('srcset') || '', webp: sources.find((source) => source.type === 'image/webp')?.getAttribute('srcset') || '' } }; }) };
-      }
-      const tables = [...document.querySelectorAll('article table')];
-      const tableErrors = [];
-      tables.forEach((table, index) => {
-        if (!table.closest('.article-table-wrap')) tableErrors.push(`tabela ${index + 1}: brak .article-table-wrap`);
-      });
-      const article = document.querySelector('article.article-content')?.cloneNode(true);
-      article?.querySelectorAll('.share-article-section, script, style, button').forEach((node) => node.remove());
-      const title = document.querySelector('h1.article-header__title')?.textContent || '';
-      // Every text node and image matters, including direct text in callouts
-      // and pictures outside figure. A selector subset could certify lost data.
-      const quickAnswer = document.querySelector('#quick-answer');
-      const externalQuickAnswer = quickAnswer && !quickAnswer.closest('article.article-content') ? quickAnswer : null;
-      const textParts = [];
-      for (const root of [externalQuickAnswer, article].filter(Boolean)) {
-        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-        while (walker.nextNode()) textParts.push(walker.currentNode.textContent);
-      }
-      const text = textParts.join(' ');
-      const selectedPictures = [];
-      const heroPicture = document.querySelector('section.article-intro-grid .article-hero picture');
-      if (heroPicture) selectedPictures.push({ placement: 'hero', picture: heroPicture });
-      [...(article?.querySelectorAll('figure picture') || [])].forEach((picture, index) => selectedPictures.push({ placement: `section-image:${index + 1}`, picture }));
-      const expectedImages = selectedPictures.length + (externalQuickAnswer?.querySelectorAll('img').length || 0);
-      const images = selectedPictures.map(({ placement, picture }) => {
-        const img = picture.querySelector('img');
-        const sources = [...picture.querySelectorAll('source')];
-        return { placement, alt: img?.getAttribute('alt') || '', variants: { jpg: img?.getAttribute('src') || '', avif: sources.find((source) => source.type === 'image/avif')?.getAttribute('srcset') || '', webp: sources.find((source) => source.type === 'image/webp')?.getAttribute('srcset') || '' } };
-      });
-      return { tables: tables.length, tableErrors, tableMarkup: tables.map((table) => table.outerHTML).join('\n'), text: `${title} ${text}`, expectedImages, images };
-    }, center);
-    return { desktop: { ...desktopResult, status: desktopErrors.length ? 'FAIL' : 'PASS', errors: desktopErrors }, mobile: { ...mobileResult, status: mobileErrors.length ? 'FAIL' : 'PASS', errors: mobileErrors }, semantic: semanticResult };
+    const semanticResult = await page.evaluate(collectDomInventory, center);
+    return {
+      desktop: { ...desktopResult, technical_status: desktopErrors.length ? 'FAIL' : 'PASS', errors: desktopErrors },
+      mobile: { ...mobileResult, technical_status: mobileErrors.length ? 'FAIL' : 'PASS', errors: mobileErrors },
+      semantic: semanticResult,
+    };
   }, { timeoutMs: 120000, label: `Podgląd artykułu ${slug}` });
   semantic.tableErrors.forEach((error) => errors.push(error));
   validateSemanticTableMarkup(semantic.tableMarkup).forEach((error) => errors.push(error));
@@ -352,16 +428,21 @@ async function main() {
   const desktopScreenshot = path.join(previewDir, 'desktop.png');
   const mobileScreenshot = path.join(previewDir, 'mobile.png');
   const report = {
-    version: 2,
-    status: errors.length ? 'BLOCKED' : 'PREVIEW_READY',
+    version: CONTRACT.version,
+    status: errors.length ? 'BLOCKED' : CONTRACT.pending_status,
     generated_at: generatedAt,
-    reviewed_at: generatedAt,
+    reviewed_at: null,
     slug,
     html_sha256: sha256(html),
     site_html_sha256: sha256(siteHtml),
     pdf_sha256: sha256(pdf),
     site_pdf_sha256: sha256(sitePdf),
-    html: { desktop, mobile, semantic_tables: semantic.tables },
+    technical_review: {
+      status: errors.length ? 'TECHNICAL_BLOCKED' : CONTRACT.technical_status,
+      completed_at: generatedAt,
+      errors: [...errors],
+    },
+    html: { semantic_tables: semantic.tables },
     artifacts: {
       html_source: fileArtifact(root, html),
       html_site: fileArtifact(root, siteHtml),
@@ -369,26 +450,42 @@ async function main() {
       pdf_site: fileArtifact(root, sitePdf),
     },
     views: {
-      desktop: { status: desktop.status, viewport: { width: 1440, height: 1000 }, screenshot_file: relativeFile(root, desktopScreenshot), screenshot_sha256: sha256(desktopScreenshot), errors: desktop.errors },
-      mobile: { status: mobile.status, viewport: { width: 390, height: 844 }, screenshot_file: relativeFile(root, mobileScreenshot), screenshot_sha256: sha256(mobileScreenshot), errors: mobile.errors },
+      desktop: { technical_status: desktop.technical_status, viewport: { width: 1440, height: 1000 }, screenshot_file: relativeFile(root, desktopScreenshot), screenshot_sha256: sha256(desktopScreenshot), errors: desktop.errors },
+      mobile: { technical_status: mobile.technical_status, viewport: { width: 390, height: 844 }, screenshot_file: relativeFile(root, mobileScreenshot), screenshot_sha256: sha256(mobileScreenshot), errors: mobile.errors },
     },
     images,
     pdf: { pages: pdfResult.pages, text_coverage: Number(pdfResult.coverage.toFixed(4)), rendered_pages: pdfResult.renders.length, page_reviews: pdfResult.pageReviews || [] },
+    visual_review: {
+      status: CONTRACT.pending_status,
+      reviewed_by: null,
+      reviewed_at: null,
+      review_method: null,
+      views: {},
+      images: [],
+      pdf_pages: [],
+      errors: [],
+    },
+    timing: { technical_ms: Date.now() - startedAt, review_wait_ms: null },
     errors,
   };
-  const reportDir = path.join(root, 'data', 'reports', 'article-preview');
   fs.mkdirSync(reportDir, { recursive: true });
   fs.writeFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   if (!errors.length) {
-    const validation = validatePreviewReport(root, slug, { requireRenderFiles: true });
+    const validation = validatePreviewReport(root, slug, { requireReady: false, requireRenderFiles: true });
     if (!validation.ok) errors.push(...validation.errors);
-    report.status = errors.length ? 'BLOCKED' : 'PREVIEW_READY';
+    report.status = errors.length ? 'BLOCKED' : CONTRACT.pending_status;
+    report.technical_review.status = errors.length ? 'TECHNICAL_BLOCKED' : CONTRACT.technical_status;
+    report.technical_review.errors = [...errors];
     report.errors = errors;
     fs.writeFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   }
+  const templatePath = path.join(previewDir, 'visual-review-template.json');
+  fs.writeFileSync(templatePath, `${JSON.stringify(createReviewTemplate(report), null, 2)}\n`, 'utf8');
   const markdown = [
     '# FitPo50 — staging HTML i PDF', '',
     `- Status: **${report.status}**`,
+    `- Technical: **${report.technical_review.status}**`,
+    `- Visual: **${report.visual_review.status}**`,
     `- Slug: ${slug}`,
     `- Render HTML: desktop 1440 px + mobile 390 px`,
     `- Tabele semantyczne: ${semantic.tables}`,
@@ -404,7 +501,8 @@ async function main() {
     process.exitCode = 2;
     return;
   }
-  console.log(`[PREVIEW_READY] ${slug}: HTML desktop/mobile + ${pdfResult.pages} stron PDF przeszły kontrolę.`);
+  console.log(`[${CONTRACT.pending_status}] ${slug}: ${CONTRACT.technical_status}; wymagany rzeczywisty review.`);
+  console.log(`[REVIEW_TEMPLATE] ${templatePath}`);
 }
 
 if (require.main === module) {
@@ -415,6 +513,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  collectDomInventory,
   isA4Page,
   inspectHtml,
   isPdfFile,

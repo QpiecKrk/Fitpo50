@@ -2,12 +2,13 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { CONTRACT } = require('./article-visual-review');
 
 const SOURCE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
-const REQUIRED_VARIANTS = ['jpg', 'webp', 'avif'];
+const REQUIRED_VARIANTS = [...CONTRACT.required_variants];
 const GENERIC_MEDIA_TEXT = /(grafika artykułu|grafika do artykułu|obraz sekcji|zdjęcie związane z tematem|nowoczesna grafika|ilustracja tematu)/iu;
 const VERIFIED_REVIEW = 'VERIFIED';
-const ALLOWED_EMBEDDED_TEXT = new Set(['NONE', 'WATERMARK_ONLY', 'CONTENT']);
+const ALLOWED_EMBEDDED_TEXT = new Set(CONTRACT.embedded_text_kinds);
 
 function stripTags(value) {
   return String(value || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -228,15 +229,18 @@ function validateVisualReview(review, label, errors) {
 
 function validateDimensions(entry, placement, declaredRatio, errors) {
   const { width, height, aspect_ratio: ratio } = entry.source;
-  const minWidth = placement === 'hero' ? 1080 : 900;
-  const minHeight = 450;
+  const layout = placement === 'hero' ? CONTRACT.image_layout.hero : CONTRACT.image_layout.section;
+  const minWidth = layout.min_width;
+  const minHeight = layout.min_height;
   if (width < minWidth || height < minHeight) {
     errors.push(`${entry.filename_base}: za mały obraz ${width}x${height}; minimum dla ${placement} to ${minWidth}x${minHeight}.`);
   }
   const parsedRatio = parseRatio(declaredRatio);
   if (!parsedRatio) errors.push(`${entry.filename_base}: aspect_ratio musi mieć format np. 16:9.`);
   else if (Math.abs(parsedRatio - ratio) > 0.04) errors.push(`${entry.filename_base}: rzeczywista proporcja ${ratio} nie zgadza się z deklaracją ${declaredRatio}.`);
-  if (ratio < 0.5 || ratio > 2.5) errors.push(`${entry.filename_base}: proporcja ${ratio} jest poza bezpiecznym zakresem 0.5-2.5 obsługiwanym przez layout artykułu.`);
+  if (ratio < layout.min_aspect_ratio || ratio > layout.max_aspect_ratio) {
+    errors.push(`${entry.filename_base}: proporcja ${ratio} jest poza krajobrazowym zakresem ${layout.min_aspect_ratio}-${layout.max_aspect_ratio} obsługiwanym przez layout artykułu.`);
+  }
 }
 
 function greatestCommonDivisor(left, right) {
@@ -268,6 +272,7 @@ function validateManifestStructure(article) {
       if (!String(entry?.[field] || '').trim()) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak ${field}.`);
     }
     if (!entry?.source?.sha256 || !entry?.source?.width || !entry?.source?.height) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak metadanych rzeczywistego źródła.`);
+    else validateDimensions(entry, entry.placement, entry.aspect_ratio_declared, errors);
     REQUIRED_VARIANTS.forEach((extension) => {
       const variant = entry?.variants?.[extension];
       if (!variant?.file || !variant?.sha256 || !variant?.width || !variant?.height) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: niepełny wariant ${extension}.`);
@@ -297,11 +302,6 @@ function validateManifestStructure(article) {
       else if (hammingHex(entries[left]?.source?.perceptual_hash, entries[right]?.source?.perceptual_hash) <= 3) errors.push(`media_manifest: niemal ten sam kadr ${entries[left].source_file} i ${entries[right].source_file}.`);
     }
   }
-  const techniques = new Set(entries.map((entry) => normalize(entry.technique)).filter(Boolean));
-  const compositions = new Set(entries.map((entry) => normalize(entry.composition)).filter(Boolean));
-  const requiredDiversity = Math.min(3, entries.length);
-  if (techniques.size < requiredDiversity) errors.push(`media_manifest: za mała różnorodność technik (${techniques.size}/${requiredDiversity}).`);
-  if (compositions.size < requiredDiversity) errors.push(`media_manifest: za mała różnorodność kadrów (${compositions.size}/${requiredDiversity}).`);
   return { ok: errors.length === 0, errors };
 }
 
@@ -403,16 +403,8 @@ function prepareArticleMedia(article, options = {}) {
   }
   const techniques = entries.map((entry) => normalize(entry.technique)).filter(Boolean);
   const compositions = entries.map((entry) => normalize(entry.composition)).filter(Boolean);
-  const requiredDiversity = Math.min(3, entries.length);
-  if (new Set(techniques).size < requiredDiversity) errors.push(`Za mała różnorodność technik: ${new Set(techniques).size}/${requiredDiversity}.`);
-  if (new Set(compositions).size < requiredDiversity) errors.push(`Za mała różnorodność kadrów: ${new Set(compositions).size}/${requiredDiversity}.`);
-  const maxRepeat = Math.max(1, Math.ceil(entries.length / 2));
-  for (const technique of new Set(techniques)) {
-    if (techniques.filter((item) => item === technique).length > maxRepeat) errors.push(`Technika „${technique}” dominuje w pakiecie; maksimum ${maxRepeat}/${entries.length}.`);
-  }
-  for (const composition of new Set(compositions)) {
-    if (compositions.filter((item) => item === composition).length > maxRepeat) errors.push(`Kadr „${composition}” powtarza się zbyt często; maksimum ${maxRepeat}/${entries.length}.`);
-  }
+  if (entries.length > 1 && new Set(techniques).size === 1) warnings.push('Wszystkie obrazy opisano tą samą techniką; spójna seria jest dozwolona, ale obejrzyj kadry pod kątem powtarzalności.');
+  if (entries.length > 1 && new Set(compositions).size === 1) warnings.push('Wszystkie obrazy mają ten sam opis kadru; nie blokuje to spójnej serii, ale rzeczywisty review musi wykluczyć powtarzalne ujęcia.');
 
   const manifest = {
     version: 2,

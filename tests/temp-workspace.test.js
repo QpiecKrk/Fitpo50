@@ -5,7 +5,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { executeCleanup } = require('../scripts/tmp-cleanup');
-const { createManagedTempDir, disposeTempWorkspace, readWorkspaceManifest, resolveWorkspaceProjectRoot } = require('../scripts/lib/temp-workspace');
+const { createManagedTempDir, disposeTempWorkspace, markTempWorkspace, reactivateTempWorkspace, readWorkspaceManifest, resolveWorkspaceProjectRoot } = require('../scripts/lib/temp-workspace');
 
 const FIXTURE_ROOTS = [];
 
@@ -74,6 +74,20 @@ test('cleanup nie usuwa starego katalogu aktywnego procesu ani drugiej sesji', (
   assert.equal(result.skipped.filter((item) => item.reason === 'ACTIVE_PROCESS').length, 2);
   assert.equal(fs.existsSync(first), true);
   assert.equal(fs.existsSync(second), true);
+});
+
+test('cleanup nie usuwa dowodów stagingu oczekujących na visual review, a wznowienie odtwarza lock', () => {
+  const { tempRoot, projectRoot } = fixture();
+  const directory = createManagedTempDir({ prefix: 'fitpo50-preview-review-', type: 'article-publication-staging', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso() });
+  markTempWorkspace(directory, 'AWAITING_REVIEW');
+  const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
+  assert.equal(result.removed.length, 0);
+  assert.ok(result.skipped.some((item) => item.reason === 'AWAITING_REVIEW'));
+  assert.equal(fs.existsSync(directory), true);
+  reactivateTempWorkspace(directory);
+  assert.equal(readWorkspaceManifest(directory).status, 'ACTIVE');
+  assert.equal(fs.existsSync(path.join(directory, '.fitpo50-workspace.lock')), true);
+  disposeTempWorkspace(directory);
 });
 
 test('cleanup usuwa wyłącznie stary zarządzany katalog z martwym PID-em', () => {

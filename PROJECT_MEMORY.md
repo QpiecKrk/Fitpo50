@@ -51,7 +51,7 @@ Jeżeli którykolwiek krok poza dozwolonym, nieblokującym restore zwróci błą
 
 - Nowe artykuły, aktualizacje, `popraw-seo` i `napraw paczkę N` przechodzą jeden wspólny, pełny Quality Gate z `ARTICLE_STANDARD.md`. Kontrola zawsze obejmuje całą treść oraz HTML, źródła, FAQ, linki, media, PDF, dane strukturalne, listingi, sitemap i `_site`; nie tylko zmieniony fragment.
 - JSON od Claude lub innego modelu jest zawsze draftem, nie źródłem prawdy.
-- Korekta JSON-u i publikacja to dwa odrębne etapy: `DRAFT` → `CONTENT_READY` → `PREVIEW_READY` → `COMMITTED`; błąd daje `BLOCKED`.
+- Korekta JSON-u i publikacja to rozdzielone etapy: `DRAFT` → `CONTENT_READY` → `TECHNICAL_PASS`/`VISUAL_REVIEW_PENDING` → `VISUAL_REVIEW_VERIFIED` → `PREVIEW_READY` → `COMMITTED`; błąd daje `BLOCKED`.
 - Plik z `Downloads` pozostaje bez zmian. Pipeline pracuje na kontrolowanej kopii i nie archiwizuje zużytego JSON-u w repo.
 - Publikacja rozróżnia `CREATE` i `UPDATE`; istniejący slug wymaga jawnego `--force true`.
 - Pipeline działa fail-fast. Po pierwszym błędzie nie uruchamia etapów zależnych ani mutujących.
@@ -98,16 +98,17 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 ## 8. Obrazy, HTML i PDF
 
 - Każdy pakiet artykułu ma jeden katalog wejściowy, dokładne nazwy, osobny hero i obrazy sekcji oraz lokalny manifest.
-- Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, nieprawdziwa anatomia lub sprzęt, błędne kadry i ukryte fallbacki są zabronione; sam watermark nie jest przeszkodą. Nowy manifest kontroli ma `version=2` i jawnie klasyfikuje tekst na obrazie jako brak, sam watermark albo treść. Liczby i twierdzenia wymagają transkrypcji i URL-i dowodów; stare manifesty `version=1` są akceptowane tylko z niezmienionym, zamrożonym hashem.
+- Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, nieprawdziwa anatomia lub sprzęt, błędne kadry i ukryte fallbacki są zabronione; sam watermark nie jest przeszkodą. Kanoniczny raport preview `version=3` klasyfikuje tekst jako brak, sam watermark albo treść i wiąże review z hashem pliku, placementem, H2, altem, podpisem oraz kontekstem. Liczby i twierdzenia wymagają transkrypcji i URL-i dowodów. Raporty preview v1/v2 pozostają zamrożonym legacy i nie uzyskują po cichu znaczenia v3.
 - Artykuł ma hero i odrębny obraz dla każdej głównej sekcji merytorycznej. Nie obowiązuje sztywna liczba sekcji ani obrazów: zakres wynika z tematu, a sekcje użytkowe nie są liczone.
 - Wymagane warianty: AVIF, WebP i JPG z prawdziwymi wymiarami, konkretnym `alt` i podpisem. Gdy zmienia się zawartość obrazu, nadaj wszystkim wariantom nową, wersjonowaną nazwę i zaktualizuj źródło, metadane, manifest oraz `_site`; roczny cache `immutable` wyklucza bezpieczne nadpisanie istniejącego URL-u.
-- Po zatwierdzonej kontroli wizualnej rzeczywiste proporcje pliku zastępują planowaną proporcję z promptu. Layout obsługuje panoramy, krajobraz, kwadrat i pionowe plansze bez wymuszania przycięcia; pionowe i kwadratowe obrazy dostają własny wariant układu.
+- Obecny layout artykułu obsługuje krajobraz: hero minimum 1080×600, sekcja minimum 900×500, proporcja 1.2–2.1. Portret i kwadrat wymagają osobnego, jawnie wspieranego wariantu layoutu; nie są globalnie dopuszczane przez sam fakt istnienia pliku.
 - Tabele są semantycznym HTML: `caption`, `thead`, `tbody`, `th` i odpowiednie `scope`. Grafika tabeli nie zastępuje tabeli.
 - Importer automatycznie dodaje tabelom klasę, mobilny kontener przewijania oraz brakujące `scope`; finalna bramka tabel działa dopiero na zbudowanym HTML.
 - `.sources-list` jest klasą listy `<ol>`, nigdy jej wrappera. Długie URL-e źródeł muszą zawijać się na mobile. Walidatory rozpoznają poprawne znaczniki niezależnie od kolejności atrybutów.
 - Importer nie może upraszczać pierwszego akapitu pod H2 do czystego tekstu: zachowuje istniejące linki, `<strong>`, `<em>` i pozostałe poprawne znaczniki inline. Akapit poza limitem 30–70 słów ma zostać zablokowany przez walidator, a nie po cichu przycięty. Licznik słów liczy widoczny tekst po usunięciu znaczników, nigdy nazwy atrybutów ani slug z `href`.
 - Limit `<title>` 65 znaków obejmuje także stały dopisek ` | FitPo50`; dlatego `seo_title` bez marki ma maksymalnie 55 znaków. H1 pozostaje niezależnym tytułem artykułu.
 - HTML najpierw powstaje w izolowanym stagingu. Render desktop 1440 px i mobile 390 px musi przejść kontrolę overflow, fontów, proporcji i obrazów.
+- Generator renderów zapisuje tylko `TECHNICAL_PASS` i `VISUAL_REVIEW_PENDING`; nie może sam nadać `reviewed_by`, `reviewed_at` ani `VISUAL_REVIEW_VERIFIED`. `PREVIEW_READY` wymaga rzeczywistego review desktopu, mobile, każdego elementu kanonicznego DOM inventory i każdej strony PDF. Dowody renderów pozostają w zarządzanym stagingu do wznowienia tej samej transakcji, lecz nie trafiają do Git ani publicznego `_site`.
 - PDF powstaje ze stagingowego HTML. Każdą stronę trzeba wyrenderować do obrazu i obejrzeć; sama zgodność tekstowa nie wykrywa osieroconych wierszy ani źle podzielonych źródeł.
 - Kontrola PDF wykonuje się do końca także wtedy, gdy w tym samym przebiegu wykryto osobny błąd HTML lub mobile; raport ma zawierać komplet niezależnych blokerów.
 - Blok źródeł i disclaimer w PDF nie mogą rozpadać się przypadkowo między stronami.

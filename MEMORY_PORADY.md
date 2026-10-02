@@ -87,7 +87,7 @@ Callouty i bloki pomocnicze:
   - praktycznej wskazowki do wdrozenia.
 
 Obrazy i separatory:
-- Wymagany jest osobny hero i odrebny, obejrzany obraz dla kazdej glownej sekcji merytorycznej; sekcje uzytkowe nie sa liczone. Watermark sam w sobie nie blokuje obrazu, ale mylace napisy, liczby, anatomia, sprzet lub kontekst blokuja publikacje. Nowy lub zmieniony przeglad obrazu wymaga manifestu `version=2`; tekst tresciowy z liczba albo twierdzeniem musi miec transkrypcje i URL dowodu. Manifest `version=1` pozostaje tylko zamrozonym legacy.
+- Wymagany jest osobny hero i odrebny, obejrzany obraz dla kazdej glownej sekcji merytorycznej; sekcje uzytkowe nie sa liczone. Watermark sam w sobie nie blokuje obrazu, ale mylace napisy, liczby, anatomia, sprzet lub kontekst blokuja publikacje. Szczegoly review sa kanonicznie opisane w `ARTICLE_STANDARD.md`: nowy raport preview ma `version=3`, a v1/v2 pozostaja zamrozonym legacy.
 - Gdy w sekcji wystepuja 2+ obrazki pod rzad, grupujemy je:
   - wrapper `.figure-stack`,
   - podpis grupy `.figure-stack__label`,

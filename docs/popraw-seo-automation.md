@@ -27,7 +27,7 @@ Manifest ma status `AWAITING_USER_APPROVAL`, `version: 1`, `source_hashes` i `it
 
 Automat blokuje placeholdery, dawny generyczny akapit `safe-links`, nieistniejące cele linków, niezgodny hash, fragment występujący zero lub więcej niż jeden raz oraz ID spoza manifestu.
 
-Przed promocją stagingu każdy artykuł wymaga `data/reports/article-media-review/<slug>.json`. Manifest jest związany hashem z aktualnym HTML i plikami AVIF/WebP/JPG. Zmiana HTML albo wariantu obrazu unieważnia przegląd. Technicznie poprawne wymiary i brak uszkodzonego pliku nie potwierdzają jakości kadru.
+Przed promocją stagingu każdy artykuł wymaga jednego raportu `data/reports/article-preview/<slug>.json` w kontrakcie `version=3`. Generator zapisuje `TECHNICAL_PASS` i `VISUAL_REVIEW_PENDING`; po rzeczywistym obejrzeniu desktopu, mobile, każdego obrazu i każdej strony PDF ten sam raport może otrzymać `VISUAL_REVIEW_VERIFIED` oraz `PREVIEW_READY`. Aktywna ścieżka nie uruchamia równolegle dawnego `article-media-review`; JS i Python korzystają z jednego schema oraz wspólnych fixture wyłącznie dla zgodności i zamrożonego legacy.
 
 ## Stany
 
@@ -38,10 +38,6 @@ Przed promocją stagingu każdy artykuł wymaga `data/reports/article-media-revi
 - `LIVE_DEPLOYED_AND_VALIDATED` — potwierdzono HTTP 200, canonical, `dateModified`, zatwierdzoną treść, sitemap i PDF.
 
 Końcowe artefakty to `data/reports/gsc-live-submit-queue.json` i `.txt`. Workflow GitHub publikuje je także jako artefakt `popraw-seo-gsc-live` i w swoim podsumowaniu.
-# Staging centrów
+# Staging i wznowienie
 
-Zatwierdzony apply przygotowuje staging i zwraca `AWAITING_VISUAL_REVIEW`.
-Po kontroli wszystkich podglądów agent wykonuje tę samą komendę z
-`--promote-stage <katalog-stagingu>`; hashe chronią przed przeniesieniem
-zmienionego pakietu. Pełny kontrakt centrów i regenerację opisuje
-[topic-center-pipeline.md](topic-center-pipeline.md).
+Zatwierdzony apply przygotowuje zarządzany staging i zwraca `AWAITING_VISUAL_REVIEW`. Po kontroli wszystkich podglądów agent stosuje review przez istniejący `article-preview-gate`, po czym wznawia tę samą operację z `--promote-stage <katalog-stagingu>`. `article-preview-report-check --require-render-files` ponownie sprawdza hashe przed promocją. Pełny kontrakt centrów opisuje [topic-center-pipeline.md](topic-center-pipeline.md).

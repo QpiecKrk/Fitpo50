@@ -7,7 +7,7 @@ Każdy katalog roboczy publikacji, eksportu, workbencha, GSC i renderowania PDF 
 - `.fitpo50-workspace.json` — typ procesu, PID, czas utworzenia, katalog projektu, slug i status,
 - `.fitpo50-workspace.lock` — aktywna blokada procesu.
 
-Status `ACTIVE` oznacza trwającą pracę. Prawidłowo zakończony proces zapisuje `COMPLETED` albo `FAILED`, usuwa lock i usuwa własny katalog. Jeśli proces zostanie przerwany, manifest i lock pozwalają rozpoznać osieroconą pracę bez zgadywania po samej nazwie katalogu.
+Status `ACTIVE` oznacza trwającą pracę. `AWAITING_REVIEW` oznacza zakończoną kontrolę techniczną i celowo zachowane prywatne rendery oczekujące na rzeczywisty review; taki katalog nie jest kandydatem do cleanupu. Wznowienie tej samej transakcji przywraca `ACTIVE`. Prawidłowo zakończony proces zapisuje `COMPLETED` albo `FAILED`, usuwa lock i usuwa własny katalog. Jeśli proces zostanie przerwany, manifest i lock pozwalają rozpoznać osieroconą pracę bez zgadywania po samej nazwie katalogu.
 
 ## Cleanup
 
@@ -31,7 +31,7 @@ Katalog może zostać usunięty tylko wtedy, gdy:
 - ma co najmniej 12 godzin,
 - zapisany PID i PID locka nie działają.
 
-Świeże katalogi, aktywne procesy, inne projekty, błędne manifesty, błędne locki i katalogi bez manifestu są pomijane. Pliki tymczasowe znalezione wewnątrz repo bez danych właściciela są raportowane, ale nie są automatycznie usuwane.
+Świeże katalogi, aktywne procesy, katalogi `AWAITING_REVIEW`, inne projekty, błędne manifesty, błędne locki i katalogi bez manifestu są pomijane. Pliki tymczasowe znalezione wewnątrz repo bez danych właściciela są raportowane, ale nie są automatycznie usuwane.
 
 ## Chromium
 

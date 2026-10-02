@@ -61,6 +61,16 @@ class PdfContentTest(unittest.TestCase):
    end_page=next(i for i,text in enumerate(pages) if 'KONIEC CYTATU' in text)
    self.assertEqual(start_page,end_page)
 
+ def test_article_quote_with_inline_link_remains_one_text_block(self):
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);page=root/'article.html';pdf=root/'article.pdf'
+   quote='"Mam 50+ lat, zaczynam od zera, chcę ćwiczyć siłowo. Pokaż mi pięć ćwiczeń i <a href="plan.html">jak nie skrzywdzić kolan</a>."'
+   page.write_text(f'<h1 class="article-header__title">Test cytatu z linkiem</h1><article class="article-content"><div class="article-quote">{quote}</div></article>')
+   generate_pdf(page,pdf,'https://fitpo50.pl/article.html')
+   text=subprocess.check_output(['pdftotext','-layout',str(pdf),'-'],text=True)
+   self.assertIn('Pokaż mi pięć ćwiczeń i jak nie skrzywdzić kolan."', ' '.join(text.split()))
+   self.assertNotRegex(text, r'jak nie skrzywdzić kolan\s*\n\s*\.\s*"')
+
  def test_short_paragraph_does_not_leave_an_orphan_line(self):
   with tempfile.TemporaryDirectory() as folder:
    root=Path(folder);page=root/'article.html';pdf=root/'article.pdf'

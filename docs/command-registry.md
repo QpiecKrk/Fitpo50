@@ -13,7 +13,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 
 - Nowy artykuł: `npm run article:add -- --file <draft.fitpo50.json>`.
 - Korekta JSON bez publikacji: `npm run article:prepare-json -- --file <draft.fitpo50.json>`.
-- Wznowienie gotowego artefaktu: `npm run article:publish -- --file <CONTENT_READY.fitpo50.json>`.
+- Wznowienie gotowego artefaktu: `npm run article:publish -- --file <CONTENT_READY.fitpo50.json>`; po `VISUAL_REVIEW_PENDING` kontroler podaje wariant z `--promote-stage <zarządzany-staging>` do wznowienia tej samej transakcji.
 - Pełna bramka przed pushem: `npm run prepush:local`.
 - Pełny eksport i parity: `npm run check:build-export`.
 - Kontrola produkcji: `npm run deployment:verify`.
@@ -38,7 +38,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run article:evidence:verify` — Bezpośrednia komenda robocza lub odczytowa (node scripts/verify-article-evidence.js).
 - [PUBLIC] `npm run article:guard:diff` — Bezpośrednia komenda robocza lub odczytowa (node scripts/run-article-guard-diff.js).
 - [PUBLIC] `npm run article:prepare-json` — Wyjątkowe przygotowanie artefaktu CONTENT_READY bez publikacji.
-- [PUBLIC] `npm run article:publish` — Wznowienie publikacji sprawdzonego artefaktu CONTENT_READY przez izolowany staging.
+- [PUBLIC] `npm run article:publish` — Publikacja CONTENT_READY przez izolowany staging; po rzeczywistym review wznawia tę samą transakcję przez podane przez kontroler `--promote-stage`.
 - [PUBLIC] `npm run article:validate` — Bezpośrednia komenda robocza lub odczytowa (node scripts/validate-article-standard.js).
 - [PUBLIC] `npm run assets:audit` — Bezpośrednia komenda robocza lub odczytowa (node scripts/assets-audit.js --report data/reports/assets-audit.json).
 - [PUBLIC] `npm run assets:audit:apply` — Bezpośrednia komenda robocza lub odczytowa (node scripts/assets-audit.js --apply --report data/reports/assets-audit.json).
@@ -138,7 +138,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [INTERNAL] `npm run article:pdf:builder` — Techniczny etap kontrolowanego workflow (python3 scripts/article-pdf-builder.py).
 - [INTERNAL] `npm run article:pdf:sync` — Techniczny etap kontrolowanego workflow (python3 scripts/sync_article_pdfs_and_buttons.py).
 - [INTERNAL] `npm run article:preflight` — Techniczny etap kontrolowanego workflow (node scripts/article-preflight.js).
-- [INTERNAL] `npm run article:preview:gate` — Techniczny etap kontrolowanego workflow (node scripts/article-preview-gate.js).
+- [INTERNAL] `npm run article:preview:gate` — Wspólny etap preview v3: generuje TECHNICAL_PASS/VISUAL_REVIEW_PENDING, a z jawnym plikiem review potwierdza VISUAL_REVIEW_VERIFIED/PREVIEW_READY.
 - [INTERNAL] `npm run article:validate:center` — Techniczny etap kontrolowanego workflow (node scripts/validate-article.js).
 - [INTERNAL] `npm run build:esbuild` — Techniczny etap kontrolowanego workflow (esbuild src/app.ts src/cmp.ts src/footer.ts src/search.ts --outdir=dist --target=es2018 --format=iife --log-level=error && esbuild src/protein-calculator.ts --bundle --outfile=dist/protein-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/phenoage-calculator.ts --bundle --outfile=dist/phenoage-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/blood-pressure-diary.ts --bundle --outfile=dist/blood-pressure-diary.js --target=es2018 --format=iife --log-level=error && esbuild src/lab-results-interpreter.ts --bundle --outfile=dist/lab-results-interpreter.js --target=es2018 --format=iife --log-level=error && esbuild src/waist-height-calculator.ts --bundle --outfile=dist/waist-height-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/walking-pace-calculator.ts --bundle --outfile=dist/walking-pace-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/relative-strength-calculator.ts --bundle --outfile=dist/relative-strength-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/lipid-markers-explainer.ts --bundle --outfile=dist/lipid-markers-explainer.js --target=es2018 --format=iife --log-level=error).
 - [INTERNAL] `npm run check:site:fast` — Techniczny etap kontrolowanego workflow (npm run build && node scripts/static-smoke-check.js _site).

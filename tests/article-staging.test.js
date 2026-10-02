@@ -18,6 +18,7 @@ const {
 const { disposeTempWorkspace, readWorkspaceManifest } = require('../scripts/lib/temp-workspace');
 const { multisetCoverage, normalizeWords } = require('../scripts/article-preview-gate');
 const { deriveCategory } = require('../scripts/generate-search-index');
+const { applyVisualReview, createReviewTemplate, imageInventoryHash } = require('../scripts/lib/article-visual-review');
 
 const FIXTURE_ROOTS = [];
 
@@ -239,24 +240,35 @@ test('bramka kompletności wymaga listingów, sitemap, indeksu, PDF i par source
     fs.writeFileSync(path.join(root, 'assets', `preview-hero.${extension}`), extension);
   }
   const artifact = (relative) => ({ file: relative, sha256: sha256File(path.join(root, relative)) });
-  fs.writeFileSync(path.join(root, `data/reports/article-preview/${slug}.json`), JSON.stringify({
-    version: 2,
-    status: 'PREVIEW_READY',
+  const image = { placement: 'hero', role: 'hero', heading: '', context: 'Kompletny artykuł', alt: 'Hero kompletnego artykułu', caption: '', technical_status: 'PASS', variants: {
+    avif: artifact('assets/preview-hero.avif'), webp: artifact('assets/preview-hero.webp'), jpg: artifact('assets/preview-hero.jpg'),
+  } };
+  image.inventory_sha256 = imageInventoryHash(image);
+  let preview = {
+    version: 3,
+    status: 'VISUAL_REVIEW_PENDING',
     slug,
-    reviewed_at: '2026-10-01T08:00:00.000Z',
+    generated_at: '2026-10-01T08:00:00.000Z',
+    technical_review: { status: 'TECHNICAL_PASS', completed_at: '2026-10-01T08:00:00.000Z', errors: [] },
     artifacts: {
       html_source: artifact(`${slug}.html`), html_site: artifact(`_site/${slug}.html`),
       pdf_source: artifact(`assets/pdf/${slug}.pdf`), pdf_site: artifact(`_site/assets/pdf/${slug}.pdf`),
     },
     views: {
-      desktop: { status: 'PASS', viewport: { width: 1440 }, screenshot_sha256: 'a'.repeat(64) },
-      mobile: { status: 'PASS', viewport: { width: 390 }, screenshot_sha256: 'b'.repeat(64) },
+      desktop: { technical_status: 'PASS', viewport: { width: 1440 }, screenshot_sha256: 'a'.repeat(64) },
+      mobile: { technical_status: 'PASS', viewport: { width: 390 }, screenshot_sha256: 'b'.repeat(64) },
     },
-    images: [{ placement: 'hero', status: 'PASS', variants: {
-      avif: artifact('assets/preview-hero.avif'), webp: artifact('assets/preview-hero.webp'), jpg: artifact('assets/preview-hero.jpg'),
-    } }],
-    pdf: { pages: 1, page_reviews: [{ page: 1, status: 'PASS', sha256: 'c'.repeat(64) }] },
-  }));
+    images: [image],
+    pdf: { pages: 1, page_reviews: [{ page: 1, technical_status: 'PASS', sha256: 'c'.repeat(64) }] },
+    visual_review: { status: 'VISUAL_REVIEW_PENDING', views: {}, images: [], pdf_pages: [] },
+  };
+  const review = createReviewTemplate(preview);
+  review.reviewed_by = 'Tester stagingu'; review.reviewed_at = '2026-10-01T08:05:00.000Z'; review.review_method = 'pełny fixture';
+  Object.values(review.views).forEach((item) => Object.assign(item, { status: 'VERIFIED', note: 'Obejrzano pełny render fixture na właściwym viewportcie bez błędów.' }));
+  review.images.forEach((item) => Object.assign(item, { status: 'VERIFIED', matches_topic: true, no_misleading_text_or_logo: true, anatomy_and_equipment_plausible: true, embedded_text: { kind: 'NONE' }, note: 'Obejrzano cały obraz fixture; jest zgodny z kontekstem i technicznie wiarygodny.' }));
+  review.pdf_pages.forEach((item) => Object.assign(item, { status: 'VERIFIED', note: 'Obejrzano całą stronę PDF fixture; treść jest kompletna i czytelna.' }));
+  preview = applyVisualReview(preview, review);
+  fs.writeFileSync(path.join(root, `data/reports/article-preview/${slug}.json`), JSON.stringify(preview));
   fs.writeFileSync(path.join(root, 'data/reports/published-articles-log.json'), JSON.stringify({
     version: 2,
     items: [{ slug, transaction_id: 'test-transaction', baseline: {}, checkpoints: { day_7: {}, day_14: {}, day_28: {} }, publication_events: [{ event_id: 'test-transaction' }] }],

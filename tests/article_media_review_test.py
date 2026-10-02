@@ -9,6 +9,7 @@ from PIL import Image
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / 'scripts' / 'article-media-review.py'
+SHARED_CASES = json.loads((Path(__file__).resolve().parent / 'fixtures' / 'article-visual-review-v3-cases.json').read_text())
 SPEC = importlib.util.spec_from_file_location('article_media_review', SCRIPT)
 REVIEW = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(REVIEW)
@@ -103,7 +104,7 @@ class ArticleMediaReviewTest(unittest.TestCase):
             root = Path(folder)
             slug, _, manifest = self.package(root)
             payload = json.loads(manifest.read_text())
-            payload['entries'][1]['visual_review']['embedded_text'] = {'kind': 'WATERMARK_ONLY'}
+            payload['entries'][1]['visual_review'] = dict(SHARED_CASES['valid_watermark'])
             manifest.write_text(json.dumps(payload))
             self.assertEqual(REVIEW.validate(root, slug, manifest), [])
 
@@ -120,7 +121,7 @@ class ArticleMediaReviewTest(unittest.TestCase):
             root = Path(folder)
             slug, _, manifest = self.package(root)
             payload = json.loads(manifest.read_text())
-            payload['entries'][0]['visual_review']['anatomy_and_equipment_plausible'] = False
+            payload['entries'][0]['visual_review'] = dict(SHARED_CASES['invalid_anatomy'])
             manifest.write_text(json.dumps(payload))
             errors = REVIEW.validate(root, slug, manifest)
             self.assertTrue(any('anatomy_and_equipment_plausible' in error for error in errors))

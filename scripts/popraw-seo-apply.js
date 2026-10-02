@@ -18,6 +18,7 @@ const RESULT_FILE = path.join(ROOT, 'data', 'reports', 'popraw-seo-apply-result.
 const CONFIRMATION = 'APPLY_APPROVED_SEO';
 const { pageKind } = require('./lib/publication-page-kind');
 const { createStagingWorkspace, snapshotCandidates, beginPromotionTransaction, sha256File, recoverInterruptedTransactions } = require('./lib/article-staging');
+const { disposeTempWorkspace, markTempWorkspace, reactivateTempWorkspace, readWorkspaceManifest } = require('./lib/temp-workspace');
 
 function parseArgs(argv) {
   const out = { manifest: DEFAULT_MANIFEST, ids: '', confirm: '', dryRun: false, stageOnly: false, internal: false, promoteStage: '' };
@@ -94,7 +95,6 @@ function candidateFiles(touched, articleFiles) {
     files.add(path.join(ROOT, '_site', 'assets', 'pdf', `${slug}.pdf`));
     files.add(path.join(ROOT, 'data', 'reports', 'article-preview', `${slug}.json`));
     files.add(path.join(ROOT, 'data', 'reports', 'article-preview', `${slug}.md`));
-    files.add(path.join(ROOT, 'data', 'reports', 'article-media-review', `${slug}.json`));
   });
   return [...files];
 }
@@ -128,20 +128,26 @@ function main() {
       fs.writeFileSync(stageManifest, JSON.stringify(manifest));
       const child = spawnSync('node', ['scripts/popraw-seo-apply.js', '--manifest', stageManifest, '--ids', args.ids, '--confirm', CONFIRMATION, '--stage-internal'], { cwd: stageRoot, stdio: 'inherit', env: { ...process.env, FITPO50_SEO_STAGING: '1' } });
       if (child.status !== 0) throw new Error(`Staging nie przeszedł; źródłowy HTML bez zmian. Podgląd: ${stageRoot}`);
-      const hashes = Object.fromEntries(candidates.filter((file) => fs.existsSync(path.join(stageRoot, file))).map((file) => [file, sha256File(path.join(stageRoot, file))]));
+      const hashes = Object.fromEntries(candidates
+        .filter((file) => !/data\/reports\/article-preview\/[^/]+\.(?:json|md)$/.test(file))
+        .filter((file) => fs.existsSync(path.join(stageRoot, file)))
+        .map((file) => [file, sha256File(path.join(stageRoot, file))]));
       fs.writeFileSync(path.join(stageRoot, 'seo-stage.json'), JSON.stringify({ sourceRoot: ROOT, ids: selectedIds, baseline: [...baseline], hashes }));
+      markTempWorkspace(stageRoot, 'AWAITING_REVIEW');
       console.log(`[AWAITING_VISUAL_REVIEW] ${stageRoot}`);
       return;
     } else {
+      const workspace = readWorkspaceManifest(stageRoot);
+      if (!workspace || workspace.workspace_type !== 'article-publication-staging' || workspace.status !== 'AWAITING_REVIEW') throw new Error('Wskazany katalog nie jest stagingiem popraw-seo oczekującym na review.');
       const record = JSON.parse(fs.readFileSync(path.join(stageRoot, 'seo-stage.json'), 'utf8'));
       if (record.sourceRoot !== ROOT || JSON.stringify(record.ids) !== JSON.stringify(selectedIds)) throw new Error('Staging należy do innego repozytorium albo zestawu ID.');
       baseline = new Map(record.baseline);
       for (const [file, hash] of Object.entries(record.hashes)) if (sha256File(path.join(stageRoot, file)) !== hash) throw new Error(`Staging zmieniony po walidacji: ${file}`);
       for (const file of patched.articleFiles) {
         const slug = file.replace(/\.html$/, '');
-        run(`Kontrola obrazów przed promocją ${file}`, 'python3', [path.join(ROOT, 'scripts', 'article-media-review.py'), '--slug', slug], stageRoot);
-        run(`Kontrakt raportu wizualnego przed promocją ${file}`, 'node', [path.join(ROOT, 'scripts', 'article-preview-report-check.js'), '--slug', slug], stageRoot);
+        run(`Kontrakt raportu wizualnego przed promocją ${file}`, 'node', [path.join(ROOT, 'scripts', 'article-preview-report-check.js'), '--slug', slug, '--require-render-files'], stageRoot);
       }
+      reactivateTempWorkspace(stageRoot);
     }
     const transaction = beginPromotionTransaction({ sourceRoot: ROOT, stageRoot, candidates, baseline, transactionId: `seo-${Date.now()}` });
     try {
@@ -149,7 +155,6 @@ function main() {
         const slug = file.replace(/\.html$/, '');
         run(`Walidacja po promocji ${file}`, 'node', ['scripts/validate-article-standard.js', file, `_site/${file}`]);
         run(`Kontrakt po promocji ${file}`, 'node', ['scripts/article-contract-check.js', file]);
-        run(`Kontrola obrazów po promocji ${file}`, 'python3', ['scripts/article-media-review.py', '--slug', slug]);
         run(`Kontrakt raportu wizualnego po promocji ${file}`, 'node', ['scripts/article-preview-report-check.js', '--slug', slug]);
       }
       run('Predeploy po promocji', 'node', ['scripts/predeploy-gate.js']);
@@ -157,6 +162,7 @@ function main() {
       transaction.commit();
     } catch (error) { transaction.rollback(error.message); throw error; }
     console.log(`[APPLIED_VALIDATED] Atomowa promocja: ${transaction.changed.length} plików. Podglądy: ${stageRoot}`);
+    disposeTempWorkspace(stageRoot, { status: 'COMPLETED' });
     return;
   }
   const state = snapshot(candidateFiles(validation.touched, patched.articleFiles));

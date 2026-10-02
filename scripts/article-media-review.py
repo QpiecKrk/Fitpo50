@@ -12,6 +12,9 @@ from bs4 import BeautifulSoup
 from PIL import Image
 
 
+CONTRACT = json.loads((Path(__file__).resolve().parent / 'contracts' / 'article-visual-review-v3.json').read_text())
+
+
 SKIPPED_H2 = {
     'szybka odpowiedź',
     'szybkie odpowiedzi (q&a)?',
@@ -23,8 +26,8 @@ SKIPPED_H2 = {
     'w skrócie (ai)?',
     'cytaty do zapamiętania?',
 }
-REQUIRED_VARIANTS = ('avif', 'webp', 'jpg')
-ALLOWED_EMBEDDED_TEXT = ('NONE', 'WATERMARK_ONLY', 'CONTENT')
+REQUIRED_VARIANTS = tuple(CONTRACT['required_variants'])
+ALLOWED_EMBEDDED_TEXT = tuple(CONTRACT['embedded_text_kinds'])
 
 
 def sha256(path):
@@ -168,7 +171,7 @@ def validate(root, slug, manifest_path=None):
                     evidence = embedded.get('evidence_urls')
                     if not isinstance(evidence, list) or not evidence or any(not re.match(r'^https?://', str(url)) for url in evidence):
                         errors.append(f'{placement}: tekst z twierdzeniem lub liczbą wymaga co najmniej jednego URL dowodu.')
-        if len(str(review.get('note') or '').strip()) < 30:
+        if len(str(review.get('note') or '').strip()) < CONTRACT['note_min_length']:
             errors.append(f'{placement}: notatka z rzeczywistego przeglądu obrazu jest zbyt krótka.')
     return errors
 

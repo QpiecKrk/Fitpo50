@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import json
-import math
 import re
 import sys
 from collections import Counter
@@ -12,6 +11,11 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
+
+VISUAL_REVIEW_CONTRACT = json.loads(
+    (Path(__file__).resolve().parents[4] / "scripts" / "contracts" / "article-visual-review-v3.json").read_text(encoding="utf-8")
+)
+SECTION_LAYOUT = VISUAL_REVIEW_CONTRACT["image_layout"]["section"]
 
 CATEGORIES = {"zdrowie", "jedzenie", "ruch", "ciekawe", "mity"}
 LOCAL_FIELDS = {"internal_link_plan", "incoming_link_suggestions", "intent_audit", "topic_center_assessment", "topic_center_approval", "media_manifest"}
@@ -300,8 +304,6 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
     expected = {"hero", *(f"sekcja-{index + 1}" for index in range(len(sections)))}
     placements: list[str] = []
     filenames: list[str] = []
-    techniques: list[str] = []
-    compositions: list[str] = []
     for index, prompt in enumerate(prompts):
         if not isinstance(prompt, dict):
             errors.append(f"image_prompts_v4[{index}] nie jest obiektem.")
@@ -322,16 +324,18 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
             filenames.append(filename)
         ratio = prompt.get("aspect_ratio")
         match = re.fullmatch(r"(\d+(?:\.\d+)?):(\d+(?:\.\d+)?)", str(ratio or ""))
-        if not match or float(match.group(2)) == 0 or not 1.2 <= float(match.group(1)) / float(match.group(2)) <= 2.1:
-            errors.append(f"image_prompts_v4[{index}].aspect_ratio musi być poprawną proporcją poziomą 1.2–2.1.")
+        ratio_value = float(match.group(1)) / float(match.group(2)) if match and float(match.group(2)) else 0
+        if not match or not SECTION_LAYOUT["min_aspect_ratio"] <= ratio_value <= SECTION_LAYOUT["max_aspect_ratio"]:
+            errors.append(
+                f"image_prompts_v4[{index}].aspect_ratio musi być poprawną proporcją poziomą "
+                f"{SECTION_LAYOUT['min_aspect_ratio']}–{SECTION_LAYOUT['max_aspect_ratio']}."
+            )
         review = prompt.get("visual_review")
         if not isinstance(review, dict) or review.get("status") != "PENDING_LOCAL_REVIEW":
             errors.append(f"image_prompts_v4[{index}].visual_review.status musi być PENDING_LOCAL_REVIEW.")
         negative = str(prompt.get("negative_prompt", "")).casefold()
         if placement == "hero" and not all(term in negative for term in ("no text", "no lettering", "no numbers", "no logo", "no watermark", "no ui")):
             errors.append("Hero negative_prompt musi zakazywać tekstu, liter, liczb, logo, watermarku i UI.")
-        techniques.append(str(prompt.get("technique", "")).strip().casefold())
-        compositions.append(str(prompt.get("composition", "")).strip().casefold())
     missing, extra = sorted(expected - set(placements)), sorted(set(placements) - expected)
     if missing:
         errors.append(f"Brak promptów obrazów dla: {', '.join(missing)}.")
@@ -341,14 +345,6 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
         errors.append("image_prompts_v4 zawiera powtórzony section_ref.")
     if len(filenames) != len(set(filenames)):
         errors.append("filename_base obrazów muszą być unikalne.")
-    required_diversity = min(3, len(prompts))
-    if len(set(techniques)) < required_diversity or len(set(compositions)) < required_diversity:
-        errors.append("Pakiet obrazów wymaga minimum 3 technik i 3 kompozycji.")
-    max_repeat = max(1, math.floor(len(prompts) / 2))
-    if techniques and max(Counter(techniques).values()) > max_repeat:
-        errors.append("Jedna technika dominuje w więcej niż połowie obrazów.")
-    if compositions and max(Counter(compositions).values()) > max_repeat:
-        errors.append("Jedna kompozycja dominuje w więcej niż połowie obrazów.")
 
     if data.get("category") == "mity":
         if not isinstance(data.get("myth_claim"), str) or not data["myth_claim"].strip():

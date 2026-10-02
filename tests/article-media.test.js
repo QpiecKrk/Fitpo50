@@ -106,7 +106,7 @@ test('tworzy kompletny manifest i mapuje obrazy bez fallbacków', () => {
   assert.equal(validateManifestStructure(value).ok, true);
 });
 
-test('zatwierdzony pakiet zachowuje panoramę, kwadrat i pionową planszę bez przycinania', () => {
+test('pakiet blokuje panoramę, kwadrat i pionową planszę nieobsługiwane przez krajobrazowy layout', () => {
   const dir = makePackage();
   const value = article();
   createFiles(dir, value);
@@ -122,11 +122,11 @@ test('zatwierdzony pakiet zachowuje panoramę, kwadrat i pionową planszę bez p
     return { ...inspector(file), width, height, aspect_ratio: Number((width / height).toFixed(4)) };
   };
   const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, ensureVariants: false, inspectImage: mixedInspector });
-  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.equal(result.ok, false);
   assert.equal(value.image_prompts[0].aspect_ratio, '12:5');
   assert.equal(value.image_prompts[1].aspect_ratio, '9:16');
-  assert.equal(value.sections[0].image.width, 900);
-  assert.equal(value.sections[0].image.height, 1600);
+  assert.match(result.errors.join('\n'), /krajobrazowym zakresem 1.2-2.1/);
+  assert.match(result.errors.join('\n'), /minimum dla hero to 1080x600/);
 });
 
 test('nie dopasowuje przybliżonej nazwy pliku', () => {
@@ -149,7 +149,7 @@ test('blokuje ten sam lub niemal ten sam kadr', () => {
   assert.match(result.errors.join('\n'), /Duplikat wizualny/);
 });
 
-test('blokuje powtarzanie jednej techniki i kompozycji', () => {
+test('spójna technika i kompozycja nie blokują, ale wymagają rzeczywistego review kadrów', () => {
   const dir = makePackage();
   const value = article();
   value.image_prompts.forEach((item) => {
@@ -158,9 +158,9 @@ test('blokuje powtarzanie jednej techniki i kompozycji', () => {
   });
   createFiles(dir, value);
   const result = prepareArticleMedia(value, { assetsDir: dir, inspectImage: inspector });
-  assert.equal(result.ok, false);
-  assert.match(result.errors.join('\n'), /Za mała różnorodność technik/);
-  assert.match(result.errors.join('\n'), /Za mała różnorodność kadrów/);
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.match(result.warnings.join('\n'), /spójna seria jest dozwolona/);
+  assert.match(result.warnings.join('\n'), /rzeczywisty review/);
 });
 
 test('blokuje obraz bez rzeczywistej kontroli i kompletnego wariantu', () => {

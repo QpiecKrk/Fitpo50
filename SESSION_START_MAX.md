@@ -66,16 +66,17 @@ To jedno polecenie użytkownika uruchamia kanoniczne `article:add`. Użytkownik 
 2. Lokalna intencja, kanibalizacja, minimum 4 prawdziwe linki i propozycja centrum.
 3. Rzeczywista kontrola obrazów oraz manifest AVIF/WebP/JPG.
 4. Transakcyjny staging HTML i PDF.
-5. Render desktop/mobile oraz wszystkich stron PDF.
-6. Atomowa publikacja `CREATE` lub jawne `UPDATE --force true`.
-7. Listingi, sitemap, indeksy, `llms.txt`, `_site`, historia i kolejka GSC.
-8. Wszystkie walidatory z `ARTICLE_STANDARD.md`.
+5. Render desktop/mobile oraz wszystkich stron PDF daje wyłącznie `TECHNICAL_PASS` i zatrzymuje staging na `VISUAL_REVIEW_PENDING`.
+6. Po rzeczywistym obejrzeniu obu widoków, każdego obrazu i każdej strony PDF powstaje `VISUAL_REVIEW_VERIFIED`; dopiero wtedy raport `version=3` otrzymuje `PREVIEW_READY` i ta sama transakcja może zostać wznowiona.
+7. Atomowa publikacja `CREATE` lub jawne `UPDATE --force true`.
+8. Listingi, sitemap, indeksy, `llms.txt`, `_site`, historia i kolejka GSC.
+9. Wszystkie walidatory z `ARTICLE_STANDARD.md`.
 
 Techniczna komenda kanoniczna: `npm run article:add -- --file "<draft.fitpo50.json>"`. `article:prepare-json` służy tylko wtedy, gdy użytkownik jawnie chce dostać poprawiony JSON bez publikacji; `article:publish` jest komendą wznowienia dla istniejącego `CONTENT_READY`, nie dodatkowym krokiem do zapamiętania.
 
 Pipeline działa fail-fast. Po błędzie nie uruchamia zależnych etapów ani nie zostawia półgotowej publikacji. Poprawne sprawdzenia URL-i są pamiętane lokalnie przez 7 dni, warianty niezmienionych obrazów są ponownie używane, a kolejne podejście zapisuje ten sam roboczy pakiet zamiast tworzyć serie `-r2`, `-r3`. Jeśli atom zawiedzie, identyczny hashami pakiet `CONTENT_READY` jest przy kolejnej próbie używany bez ponownego przygotowania. Zmiana JSON-u albo obrazu unieważnia pamięć pakietu; tanie bramki treści zawsze wykonują się podczas nowego przygotowania.
 
-Starszy JSON Claude jest migrowany wyłącznie z jawnych danych źródłowych i `evidence_source_ids`; pipeline nie wymyśla dowodów. Po rzeczywistym obejrzeniu zatwierdzonych obrazów ich wymiary są źródłem prawdy: panoramy, kwadraty i pionowe plansze zachowujemy bez sztucznego kadrowania. Importer domyka semantykę i mobilny kontener tabel przed podglądem 390 px.
+Starszy JSON Claude jest migrowany wyłącznie z jawnych danych źródłowych i `evidence_source_ids`; pipeline nie wymyśla dowodów. Obecny układ artykułu przyjmuje obrazy krajobrazowe: hero co najmniej 1080×600, sekcja co najmniej 900×500 i proporcję 1.2–2.1. Portret lub kwadrat wymaga w przyszłości osobnego, jawnie opisanego typu layoutu; nie rozszerzamy tolerancji całego systemu. Importer domyka semantykę i mobilny kontener tabel przed podglądem 390 px.
 
 Importer zachowuje linki i semantyczne formatowanie inline w pierwszym akapicie pod każdym H2. Nie wolno po cichu zamieniać go na czysty tekst ani przycinać; limit 30–70 słów egzekwuje bramka, licząc wyłącznie widoczny tekst bez tagów i atrybutów. `seo_title` ma maksymalnie 55 znaków, ponieważ finalny limit 65 obejmuje także stały dopisek ` | FitPo50`.
 
