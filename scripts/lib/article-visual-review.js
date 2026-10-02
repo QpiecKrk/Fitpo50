@@ -30,6 +30,40 @@ function reviewArtifactHash(item) {
   return String(item?.artifact_sha256 || item?.screenshot_sha256 || item?.sha256 || '');
 }
 
+function reviewEnvelope(report) {
+  return {
+    version: report?.version,
+    slug: report?.slug,
+    reviewed_by: report?.visual_review?.reviewed_by,
+    reviewed_at: report?.visual_review?.reviewed_at,
+    review_method: report?.visual_review?.review_method,
+    views: report?.visual_review?.views,
+    images: report?.visual_review?.images,
+    pdf_pages: report?.visual_review?.pdf_pages,
+  };
+}
+
+function technicalEvidenceIsClean(report) {
+  const technicalErrors = report?.technical_review?.errors;
+  const reportErrors = report?.errors;
+  const artifacts = report?.artifacts || {};
+  return Boolean(report?.technical_review?.status === CONTRACT.technical_status
+    && Array.isArray(technicalErrors) && technicalErrors.length === 0
+    && Array.isArray(reportErrors) && reportErrors.length === 0
+    && artifacts.html_source?.sha256
+    && artifacts.html_source.sha256 === artifacts.html_site?.sha256
+    && artifacts.pdf_source?.sha256
+    && artifacts.pdf_source.sha256 === artifacts.pdf_site?.sha256);
+}
+
+function withImageReviewProvenance(image, review) {
+  const enriched = { ...image };
+  for (const field of CONTRACT.image_review_provenance_fields || []) {
+    if (!enriched[field]) enriched[field] = String(review?.[field] || '');
+  }
+  return enriched;
+}
+
 function imageInventoryHash(image) {
   return stableHash({
     placement: image?.placement || '',
@@ -45,7 +79,19 @@ function imageInventoryHash(image) {
   });
 }
 
-function createReviewTemplate(report) {
+function reusableImageReviews(previousReport) {
+  if (!previousReport || previousReport.version !== CONTRACT.version || previousReport.status !== CONTRACT.ready_status) return new Map();
+  const previousReview = reviewEnvelope(previousReport);
+  if (!technicalEvidenceIsClean(previousReport) || !validateVisualReview(previousReport, previousReview).ok) return new Map();
+  const reuseKey = CONTRACT.image_review_reuse_key;
+  return new Map((previousReview.images || []).map((image) => [image[reuseKey], {
+    ...withImageReviewProvenance(image, previousReview),
+    reused_from_report_generated_at: previousReport.generated_at,
+  }]));
+}
+
+function createReviewTemplate(report, previousReport = null) {
+  const reusable = reusableImageReviews(previousReport);
   return {
     version: CONTRACT.version,
     slug: report.slug,
@@ -64,16 +110,20 @@ function createReviewTemplate(report) {
         note: '',
       },
     },
-    images: (report.images || []).map((image) => ({
-      placement: image.placement,
-      inventory_sha256: image.inventory_sha256 || imageInventoryHash(image),
-      status: 'PENDING',
-      matches_topic: false,
-      no_misleading_text_or_logo: false,
-      anatomy_and_equipment_plausible: false,
-      embedded_text: { kind: 'NONE' },
-      note: '',
-    })),
+    images: (report.images || []).map((image) => {
+      const inventorySha256 = image.inventory_sha256 || imageInventoryHash(image);
+      const previous = reusable.get(inventorySha256);
+      return previous ? { ...previous, placement: image.placement, inventory_sha256: inventorySha256 } : {
+        placement: image.placement,
+        inventory_sha256: inventorySha256,
+        status: 'PENDING',
+        matches_topic: false,
+        no_misleading_text_or_logo: false,
+        anatomy_and_equipment_plausible: false,
+        embedded_text: { kind: 'NONE' },
+        note: '',
+      };
+    }),
     pdf_pages: (report.pdf?.page_reviews || []).map((page) => ({
       page: page.page,
       status: 'PENDING',
@@ -168,7 +218,7 @@ function applyVisualReview(report, review) {
   const waitMs = Math.max(0, Date.parse(reviewedAt) - Date.parse(generatedAt)) || 0;
   return {
     ...report,
-    status: validation.ok && report.technical_review?.status === CONTRACT.technical_status
+    status: validation.ok && technicalEvidenceIsClean(report)
       ? CONTRACT.ready_status
       : CONTRACT.pending_status,
     reviewed_at: validation.ok ? reviewedAt : null,
@@ -178,7 +228,7 @@ function applyVisualReview(report, review) {
       reviewed_at: validation.ok ? reviewedAt : null,
       review_method: String(review?.review_method || ''),
       views: review?.views || {},
-      images: review?.images || [],
+      images: (review?.images || []).map((image) => withImageReviewProvenance(image, review)),
       pdf_pages: review?.pdf_pages || [],
       errors: validation.errors,
     },
@@ -195,6 +245,8 @@ module.exports = {
   applyVisualReview,
   createReviewTemplate,
   imageInventoryHash,
+  reviewEnvelope,
   stableHash,
+  technicalEvidenceIsClean,
   validateVisualReview,
 };

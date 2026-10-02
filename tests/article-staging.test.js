@@ -261,6 +261,7 @@ test('bramka kompletności wymaga listingów, sitemap, indeksu, PDF i par source
     images: [image],
     pdf: { pages: 1, page_reviews: [{ page: 1, technical_status: 'PASS', sha256: 'c'.repeat(64) }] },
     visual_review: { status: 'VISUAL_REVIEW_PENDING', views: {}, images: [], pdf_pages: [] },
+    errors: [],
   };
   const review = createReviewTemplate(preview);
   review.reviewed_by = 'Tester stagingu'; review.reviewed_at = '2026-10-01T08:05:00.000Z'; review.review_method = 'pełny fixture';

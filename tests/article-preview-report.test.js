@@ -127,17 +127,45 @@ test('zmiana kontrolowanego pliku po review blokuje', () => {
   assert.ok(validatePreviewReport(value.root, value.slug).errors.some((error) => /hero \/ webp: plik zmienił się/.test(error)));
 });
 
-test('zmiana samej meta wymaga nowego technicznego preview, lecz zachowuje review niezmienionego inventory obrazu', () => {
+test('późniejsza zmiana samej meta zachowuje wcześniejszy review niezmienionego obrazu', () => {
   const value = fixture();
-  const review = verifiedReview(value.report);
+  saveReviewed(value);
+  const previousReport = value.report;
   const html = path.join(value.root, `${value.slug}.html`);
   const siteHtml = path.join(value.root, `_site/${value.slug}.html`);
   fs.writeFileSync(html, fs.readFileSync(html, 'utf8').replace('wersja a', 'wersja b'));
   fs.copyFileSync(html, siteHtml);
-  value.report.artifacts.html_source.sha256 = sha256File(html);
-  value.report.artifacts.html_site.sha256 = sha256File(siteHtml);
-  value.report.generated_at = '2026-10-01T08:02:00.000Z';
-  assert.equal(validateVisualReview(value.report, review).ok, true);
+  const laterReport = {
+    ...previousReport,
+    status: CONTRACT.pending_status,
+    generated_at: '2026-10-01T09:00:00.000Z',
+    reviewed_at: null,
+    artifacts: {
+      ...previousReport.artifacts,
+      html_source: { ...previousReport.artifacts.html_source, sha256: sha256File(html) },
+      html_site: { ...previousReport.artifacts.html_site, sha256: sha256File(siteHtml) },
+    },
+    technical_review: { status: CONTRACT.technical_status, completed_at: '2026-10-01T09:00:00.000Z', errors: [] },
+    visual_review: { status: CONTRACT.pending_status, views: {}, images: [], pdf_pages: [], errors: [] },
+    errors: [],
+  };
+  const review = createReviewTemplate(laterReport, previousReport);
+  assert.equal(review.images[0].status, 'VERIFIED');
+  assert.equal(review.images[0].reviewed_at, '2026-10-01T08:05:00.000Z');
+  review.reviewed_by = 'Tester kolejnego preview';
+  review.reviewed_at = '2026-10-01T09:05:00.000Z';
+  review.review_method = 'nowy desktop, mobile i PDF; reuse obrazu po identycznym inventory';
+  for (const view of Object.values(review.views)) {
+    view.status = 'VERIFIED';
+    view.note = 'Obejrzano nowy pełny render po zmianie meta; układ pozostał czytelny i kompletny.';
+  }
+  review.pdf_pages.forEach((page) => {
+    page.status = 'VERIFIED';
+    page.note = 'Obejrzano ponownie całą stronę PDF; treść oraz układ pozostają kompletne.';
+  });
+  const reapplied = applyVisualReview(laterReport, review);
+  assert.equal(reapplied.status, CONTRACT.ready_status);
+  assert.equal(reapplied.visual_review.images[0].reviewed_at, '2026-10-01T08:05:00.000Z');
 });
 
 test('zmiana kontekstu obrazu unieważnia jego review', () => {
@@ -146,6 +174,40 @@ test('zmiana kontekstu obrazu unieważnia jego review', () => {
   value.report.images[0].context = 'Inny kontekst sekcji';
   value.report.images[0].inventory_sha256 = imageInventoryHash(value.report.images[0]);
   assert.ok(validateVisualReview(value.report, review).errors.some((error) => /inventory zmieniło się/.test(error)));
+});
+
+test('zmiana kontekstu nie przenosi wcześniejszego review obrazu do nowego szablonu', () => {
+  const value = fixture();
+  saveReviewed(value);
+  const previousReport = value.report;
+  const laterReport = JSON.parse(JSON.stringify(previousReport));
+  laterReport.status = CONTRACT.pending_status;
+  laterReport.generated_at = '2026-10-01T09:00:00.000Z';
+  laterReport.technical_review.completed_at = laterReport.generated_at;
+  laterReport.visual_review = { status: CONTRACT.pending_status, views: {}, images: [], pdf_pages: [], errors: [] };
+  laterReport.images[0].context = 'Zmieniony kontekst sekcji';
+  laterReport.images[0].inventory_sha256 = imageInventoryHash(laterReport.images[0]);
+  const review = createReviewTemplate(laterReport, previousReport);
+  assert.equal(review.images[0].status, 'PENDING');
+});
+
+test('PREVIEW_READY blokuje błędy techniczne i różne pary source oraz _site', () => {
+  const withErrors = fixture();
+  const review = verifiedReview(withErrors.report);
+  withErrors.report.technical_review.errors = ['Błąd techniczny fixture.'];
+  withErrors.report.errors = ['Błąd techniczny fixture.'];
+  const applied = applyVisualReview(withErrors.report, review);
+  assert.equal(applied.status, CONTRACT.pending_status);
+  fs.writeFileSync(withErrors.reportPath, JSON.stringify({ ...applied, status: CONTRACT.ready_status }));
+  assert.match(validatePreviewReport(withErrors.root, withErrors.slug).errors.join('\n'), /błędów technicznych|czystego dowodu/);
+
+  const mismatched = fixture();
+  saveReviewed(mismatched);
+  const siteHtml = path.join(mismatched.root, `_site/${mismatched.slug}.html`);
+  fs.appendFileSync(siteHtml, '<!-- różnica -->');
+  mismatched.report.artifacts.html_site.sha256 = sha256File(siteHtml);
+  fs.writeFileSync(mismatched.reportPath, JSON.stringify(mismatched.report));
+  assert.match(validatePreviewReport(mismatched.root, mismatched.slug).errors.join('\n'), /HTML source i _site nie są identyczne/);
 });
 
 test('watermark przechodzi, a claim bez dowodu i błędna anatomia blokują', () => {

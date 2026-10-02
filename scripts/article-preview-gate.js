@@ -383,6 +383,15 @@ async function main() {
     return;
   }
 
+  let previousReport = null;
+  if (fs.existsSync(reportPath)) {
+    try {
+      previousReport = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+    } catch (_error) {
+      previousReport = null;
+    }
+  }
+
   const startedAt = Date.now();
   const html = path.join(root, `${slug}.html`);
   const siteHtml = path.join(root, '_site', `${slug}.html`);
@@ -480,7 +489,7 @@ async function main() {
     fs.writeFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   }
   const templatePath = path.join(previewDir, 'visual-review-template.json');
-  fs.writeFileSync(templatePath, `${JSON.stringify(createReviewTemplate(report), null, 2)}\n`, 'utf8');
+  fs.writeFileSync(templatePath, `${JSON.stringify(createReviewTemplate(report, previousReport), null, 2)}\n`, 'utf8');
   const markdown = [
     '# FitPo50 — staging HTML i PDF', '',
     `- Status: **${report.status}**`,

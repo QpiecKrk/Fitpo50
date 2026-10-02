@@ -3,7 +3,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const { CONTRACT, imageInventoryHash, validateVisualReview } = require('./article-visual-review');
+const { CONTRACT, imageInventoryHash, reviewEnvelope, technicalEvidenceIsClean, validateVisualReview } = require('./article-visual-review');
 
 function sha256File(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
@@ -64,11 +64,18 @@ function validateLegacyReport(root, slug, report, errors) {
 function validateV3Report(root, report, options, errors) {
   if (report.technical_review?.status !== CONTRACT.technical_status) errors.push(`Kontrola techniczna nie ma statusu ${CONTRACT.technical_status}.`);
   if (!/^\d{4}-\d{2}-\d{2}T/.test(String(report.generated_at || ''))) errors.push('Raport nie ma poprawnego generated_at.');
+  if (!Array.isArray(report.technical_review?.errors)) errors.push('Kontrola techniczna nie ma jawnej tablicy errors.');
+  else if (report.technical_review.errors.length) errors.push(`Kontrola techniczna zawiera ${report.technical_review.errors.length} błędów.`);
+  if (!Array.isArray(report.errors)) errors.push('Raport nie ma jawnej tablicy errors.');
+  else if (report.errors.length) errors.push(`Raport zawiera ${report.errors.length} błędów technicznych.`);
 
   validateCurrentFile(root, 'HTML source', report.artifacts?.html_source, errors);
   validateCurrentFile(root, 'HTML _site', report.artifacts?.html_site, errors);
   validateCurrentFile(root, 'PDF source', report.artifacts?.pdf_source, errors);
   validateCurrentFile(root, 'PDF _site', report.artifacts?.pdf_site, errors);
+  if (report.artifacts?.html_source?.sha256 !== report.artifacts?.html_site?.sha256) errors.push('HTML source i _site nie są identyczne 1:1.');
+  if (report.artifacts?.pdf_source?.sha256 !== report.artifacts?.pdf_site?.sha256) errors.push('PDF source i _site nie są identyczne 1:1.');
+  if (!technicalEvidenceIsClean(report)) errors.push('TECHNICAL_PASS nie ma kompletnego, czystego dowodu technicznego.');
 
   for (const [name, width] of [['desktop', 1440], ['mobile', 390]]) {
     const view = report.views?.[name];
@@ -111,16 +118,7 @@ function validateV3Report(root, report, options, errors) {
   if (options.requireReady !== false) {
     if (report.status !== CONTRACT.ready_status) errors.push(`Raport nie ma statusu ${CONTRACT.ready_status} (${report.status || 'brak'}).`);
     if (report.visual_review?.status !== CONTRACT.verified_status) errors.push(`Raport nie ma statusu ${CONTRACT.verified_status}.`);
-    const review = {
-      version: report.version,
-      slug: report.slug,
-      reviewed_by: report.visual_review?.reviewed_by,
-      reviewed_at: report.visual_review?.reviewed_at,
-      review_method: report.visual_review?.review_method,
-      views: report.visual_review?.views,
-      images: report.visual_review?.images,
-      pdf_pages: report.visual_review?.pdf_pages,
-    };
+    const review = reviewEnvelope(report);
     errors.push(...validateVisualReview(report, review).errors);
   } else if (![CONTRACT.pending_status, CONTRACT.ready_status].includes(report.status)) {
     errors.push(`Raport techniczny ma niepoprawny status ${report.status || 'brak'}.`);

@@ -4,6 +4,8 @@
   "note_min_length": 30,
   "required_variants": ["avif", "webp", "jpg"],
   "embedded_text_kinds": ["NONE", "WATERMARK_ONLY", "CONTENT"],
+  "image_review_provenance_fields": ["reviewed_by", "reviewed_at", "review_method"],
+  "image_review_reuse_key": "inventory_sha256",
   "technical_status": "TECHNICAL_PASS",
   "pending_status": "VISUAL_REVIEW_PENDING",
   "verified_status": "VISUAL_REVIEW_VERIFIED",
