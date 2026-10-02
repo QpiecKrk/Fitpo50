@@ -161,8 +161,8 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [INTERNAL] `npm run interlinking:optimize` — Techniczny etap kontrolowanego workflow (node scripts/global-link-topology-optimizer.js).
 - [INTERNAL] `npm run json:autofix:strict` — Techniczny etap kontrolowanego workflow (node scripts/json-autofix-strict.js).
 - [INTERNAL] `npm run json:fix` — Techniczny etap kontrolowanego workflow (node scripts/fix-fitpo50-json.js).
-- [INTERNAL] `npm run popraw-seo:apply` — Techniczny zapis zatwierdzonego manifestu SEO; wywołuje go kontrolowany workflow.
-- [INTERNAL] `npm run popraw-seo:apply:dry` — Techniczny etap kontrolowanego workflow (node scripts/popraw-seo-apply.js --ids "$npm_config_ids" --dry-run).
+- [INTERNAL] `npm run popraw-seo:apply` — Techniczny zapis zatwierdzonego manifestu SEO; kontrolowany workflow przekazuje argumenty bezpośrednio po `--`, np. `npm run popraw-seo:apply -- --ids "BOOST 1,NAPRAWA 2" --confirm APPLY_APPROVED_SEO`.
+- [INTERNAL] `npm run popraw-seo:apply:dry` — Techniczny dry-run bez zapisu; argumenty są przekazywane bezpośrednio po `--`, np. `npm run popraw-seo:apply:dry -- --ids "BOOST 1,NAPRAWA 2"`.
 - [INTERNAL] `npm run popraw-seo:live` — Techniczny etap kontrolowanego workflow (node scripts/popraw-seo-live-verify.js).
 - [INTERNAL] `npm run postinstall` — Techniczny etap kontrolowanego workflow (bash scripts/install-git-hooks.sh || true).
 - [INTERNAL] `npm run prepush:checks` — Techniczny etap kontrolowanego workflow (node scripts/prepush-checks.js).

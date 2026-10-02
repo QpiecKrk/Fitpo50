@@ -12,6 +12,8 @@ const {
 } = require('../scripts/lib/popraw-seo-approved-patches');
 const { verifyLiveResponses } = require('../scripts/lib/popraw-seo-live-verifier');
 
+const ROOT = path.resolve(__dirname, '..');
+
 function articleHtml(dateModified = '2026-08-01T08:00:00+02:00') {
   return `<html><head><meta property="article:modified_time" content="${dateModified}"><link rel="canonical" href="https://fitpo50.pl/a.html"><script type="application/ld+json">{"@type":"BlogPosting","dateModified":"${dateModified}"}</script></head><body><article class="article-content"><p>Stary konkretny akapit.</p></article></body></html>`;
 }
@@ -36,6 +38,29 @@ function validManifest(root) {
       }],
     }],
   };
+}
+
+function npmCliFixture() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-seo-cli-'));
+  const sourcePackage = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+  fs.writeFileSync(path.join(root, 'package.json'), `${JSON.stringify({
+    name: 'fitpo50-seo-cli-fixture',
+    version: '1.0.0',
+    private: true,
+    scripts: {
+      'popraw-seo:apply': sourcePackage.scripts['popraw-seo:apply'],
+      'popraw-seo:apply:dry': sourcePackage.scripts['popraw-seo:apply:dry'],
+    },
+  }, null, 2)}\n`);
+  fs.cpSync(path.join(ROOT, 'scripts'), path.join(root, 'scripts'), { recursive: true });
+  return root;
+}
+
+function withoutLegacyNpmConfig() {
+  const env = { ...process.env };
+  delete env.npm_config_ids;
+  delete env.npm_config_confirm;
+  return env;
 }
 
 test('approved patch manifest rejects generic copy and stale source hashes', () => {
@@ -82,6 +107,61 @@ test('dry-run accepts BOOST-1 alias and never writes the article', () => {
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.equal(fs.readFileSync(path.join(root, 'a.html'), 'utf8'), before);
   assert.match(result.stdout, /DRY-RUN PASS/);
+});
+
+test('npm CLI forwards ids and confirmation after -- without npm_config variables', () => {
+  const root = npmCliFixture();
+  const manifest = validManifest(root);
+  const secondHtml = articleHtml().replaceAll('a.html', 'b.html');
+  fs.writeFileSync(path.join(root, 'b.html'), secondHtml);
+  manifest.source_hashes['b.html'] = sha256(Buffer.from(secondHtml));
+  manifest.items.push({
+    id: 'NAPRAWA 2',
+    file: 'b.html',
+    operations: [{
+      type: 'replace_exact',
+      before: '<p>Stary konkretny akapit.</p>',
+      after: '<p>Nowy, konkretny opis odpowiada na udokumentowaną intencję i zachowuje warunek bezpieczeństwa.</p>',
+      reason: 'Naprawa zatwierdzonej intencji testowej.',
+      basis: [{ type: 'GSC_QUERY', value: 'zatwierdzona fraza testowa: 80 wyświetleń' }],
+    }],
+  });
+  const manifestPath = path.join(root, 'patches.json');
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+  const beforeA = fs.readFileSync(path.join(root, 'a.html'), 'utf8');
+  const beforeB = fs.readFileSync(path.join(root, 'b.html'), 'utf8');
+  const env = withoutLegacyNpmConfig();
+
+  const dryRun = spawnSync(
+    'npm',
+    ['run', 'popraw-seo:apply:dry', '--', '--manifest', manifestPath, '--ids', 'BOOST 1,NAPRAWA 2'],
+    { cwd: root, encoding: 'utf8', env },
+  );
+  assert.equal(dryRun.status, 0, dryRun.stderr || dryRun.stdout);
+  assert.match(dryRun.stdout, /DRY-RUN PASS.*BOOST 1, NAPRAWA 2/);
+  assert.doesNotMatch(`${dryRun.stdout}\n${dryRun.stderr}`, /Unknown cli config|npm_config_ids|npm_config_confirm/i);
+  assert.equal(fs.readFileSync(path.join(root, 'a.html'), 'utf8'), beforeA);
+  assert.equal(fs.readFileSync(path.join(root, 'b.html'), 'utf8'), beforeB);
+
+  const blockedManifest = path.join(root, 'blocked-manifest.json');
+  fs.writeFileSync(blockedManifest, '{}');
+  const confirmed = spawnSync(
+    'npm',
+    ['run', 'popraw-seo:apply', '--', '--manifest', blockedManifest, '--ids', 'BOOST 1,NAPRAWA 2', '--confirm', 'APPLY_APPROVED_SEO'],
+    { cwd: root, encoding: 'utf8', env },
+  );
+  assert.notEqual(confirmed.status, 0);
+  assert.doesNotMatch(`${confirmed.stdout}\n${confirmed.stderr}`, /Wdrożenie wymaga --confirm/);
+  assert.match(`${confirmed.stdout}\n${confirmed.stderr}`, /Manifest patchy jest zablokowany/);
+  assert.doesNotMatch(`${confirmed.stdout}\n${confirmed.stderr}`, /Unknown cli config|npm_config_ids|npm_config_confirm/i);
+
+  const missingConfirmation = spawnSync(
+    'npm',
+    ['run', 'popraw-seo:apply', '--', '--manifest', blockedManifest, '--ids', 'BOOST 1,NAPRAWA 2'],
+    { cwd: root, encoding: 'utf8', env },
+  );
+  assert.notEqual(missingConfirmation.status, 0);
+  assert.match(`${missingConfirmation.stdout}\n${missingConfirmation.stderr}`, /Wdrożenie wymaga --confirm APPLY_APPROVED_SEO/);
 });
 
 test('a source article receiving a link also gets dateModified and PDF/live obligations', () => {
