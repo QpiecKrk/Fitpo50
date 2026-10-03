@@ -1,0 +1,186 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-10-03T03:33:37.508Z",
+  "reviewed_at": "2026-10-03T03:34:21.904042Z",
+  "slug": "centrum-nadcisnienia-po-50",
+  "html_sha256": "36da247c48f983ec583dea40c519fce9a079eb7c7d8fd5e093c3e37aed6c26f9",
+  "site_html_sha256": "36da247c48f983ec583dea40c519fce9a079eb7c7d8fd5e093c3e37aed6c26f9",
+  "pdf_sha256": "d818c35fc5cea8a17263502a24f9513cd71afdaa4ee67114ccb14130ae56ab4e",
+  "site_pdf_sha256": "d818c35fc5cea8a17263502a24f9513cd71afdaa4ee67114ccb14130ae56ab4e",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T03:33:37.508Z",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 0
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "centrum-nadcisnienia-po-50.html",
+      "sha256": "36da247c48f983ec583dea40c519fce9a079eb7c7d8fd5e093c3e37aed6c26f9",
+      "bytes": 32431
+    },
+    "html_site": {
+      "file": "_site/centrum-nadcisnienia-po-50.html",
+      "sha256": "36da247c48f983ec583dea40c519fce9a079eb7c7d8fd5e093c3e37aed6c26f9",
+      "bytes": 32431
+    },
+    "pdf_source": {
+      "file": "assets/pdf/centrum-nadcisnienia-po-50.pdf",
+      "sha256": "d818c35fc5cea8a17263502a24f9513cd71afdaa4ee67114ccb14130ae56ab4e",
+      "bytes": 178096
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/centrum-nadcisnienia-po-50.pdf",
+      "sha256": "d818c35fc5cea8a17263502a24f9513cd71afdaa4ee67114ccb14130ae56ab4e",
+      "bytes": 178096
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/centrum-nadcisnienia-po-50/desktop.png",
+      "screenshot_sha256": "111875aad5f5de1d74f1a54bf7c5f48bbcff5c6bb39234addc5efae3f0067d64",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/centrum-nadcisnienia-po-50/mobile.png",
+      "screenshot_sha256": "029ac17bd1895b802abf06ff657fcb01717cafaccc2e4ef16165dbe6ceec6868",
+      "errors": []
+    }
+  },
+  "images": [],
+  "pdf": {
+    "pages": 4,
+    "text_coverage": 0.9941,
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/centrum-nadcisnienia-po-50/pdf-pages/page-1.png",
+        "sha256": "9b4f941e43203b71c53ad1d3f7ef8e90e674e4951c3319a36aa7754d19ffc6b8",
+        "bytes": 276154,
+        "width": 1190,
+        "height": 1684,
+        "content_bounds": {
+          "x": 102,
+          "y": 110,
+          "width": 969,
+          "height": 1542
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/centrum-nadcisnienia-po-50/pdf-pages/page-2.png",
+        "sha256": "b43e83e6cf3fd58a5e9d8482bca8f7b93705a697395d797a6f9f701e26057139",
+        "bytes": 189990,
+        "width": 1190,
+        "height": 1684,
+        "content_bounds": {
+          "x": 102,
+          "y": 108,
+          "width": 880,
+          "height": 1544
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/centrum-nadcisnienia-po-50/pdf-pages/page-3.png",
+        "sha256": "80a68be7391d374194c71ea96144723d7bdfb8e86060a5f5de65731f2f68c9a3",
+        "bytes": 299496,
+        "width": 1190,
+        "height": 1684,
+        "content_bounds": {
+          "x": 102,
+          "y": 126,
+          "width": 960,
+          "height": 1526
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/centrum-nadcisnienia-po-50/pdf-pages/page-4.png",
+        "sha256": "1b91454224ab9392dcdd58dc30dcd1b3a3348d065c3e96fddbb6383e0675a7ba",
+        "bytes": 156158,
+        "width": 1190,
+        "height": 1684,
+        "content_bounds": {
+          "x": 102,
+          "y": 118,
+          "width": 964,
+          "height": 1534
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — rzeczywisty przegląd renderów",
+    "reviewed_at": "2026-10-03T03:34:21.904042Z",
+    "review_method": "Ręczne obejrzenie pełnego desktopu 1440 px, mobilnego widoku 390 px i każdej z czterech stron PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "111875aad5f5de1d74f1a54bf7c5f48bbcff5c6bb39234addc5efae3f0067d64",
+        "note": "Obejrzano pełny render desktopowy; tekst, karty, odsyłacze i stopka są kompletne oraz czytelne."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "029ac17bd1895b802abf06ff657fcb01717cafaccc2e4ef16165dbe6ceec6868",
+        "note": "Obejrzano pełny render 390 px; brak ucięć, przepełnień i problemów kontrastu po korekcie dekoracji nagłówka."
+      }
+    },
+    "images": [],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "9b4f941e43203b71c53ad1d3f7ef8e90e674e4951c3319a36aa7754d19ffc6b8",
+        "note": "Obejrzano całą stronę PDF 1; treść jest kompletna, czytelna i nie ma uciętych sekcji."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "b43e83e6cf3fd58a5e9d8482bca8f7b93705a697395d797a6f9f701e26057139",
+        "note": "Obejrzano całą stronę PDF 2; treść jest kompletna, czytelna i nie ma uciętych sekcji."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "80a68be7391d374194c71ea96144723d7bdfb8e86060a5f5de65731f2f68c9a3",
+        "note": "Obejrzano całą stronę PDF 3; treść jest kompletna, czytelna i nie ma uciętych sekcji."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "1b91454224ab9392dcdd58dc30dcd1b3a3348d065c3e96fddbb6383e0675a7ba",
+        "note": "Obejrzano całą stronę PDF 4; treść jest kompletna, czytelna i nie ma uciętych sekcji."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 3484,
+    "review_wait_ms": 44396
+  },
+  "errors": []
+}

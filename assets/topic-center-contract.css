@@ -3,5 +3,7 @@
 .hub-theme-treningu-silowego { --hub-accent:#ef8d3d; --hub-accent-soft:#fff1e6; }
 .hub-theme-cholesterolu { --hub-accent:#6b9f58; --hub-accent-soft:#eff8ea; }
 .hub-theme-metabolizmu { --hub-accent:#c96c3f; --hub-accent-soft:#fff0e8; }
+.hub-theme-nadcisnienia { --hub-accent:#d85d5d; --hub-accent-soft:#fff0f0; }
+html.night-shell .hub-theme-nadcisnienia .hub-hero::before { opacity:.14; }
 .topic-center .hub-content-grid { display: block; }
 .topic-center .medical-disclaimer { font-size: .875rem; margin-top: 1.5rem; }

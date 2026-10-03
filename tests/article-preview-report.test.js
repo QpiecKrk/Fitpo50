@@ -120,6 +120,27 @@ test('brak jednego obrazu albo jednej strony PDF w review blokuje', () => {
   assert.ok(validatePreviewReport(pdf.root, pdf.slug).errors.some((error) => /1\/2 stron PDF/.test(error)));
 });
 
+test('topic center bez obrazów ma kompletne puste inventory, ale zwykły artykuł nadal jest blokowany', () => {
+  const article = fixture();
+  article.report.images = [];
+  article.report.visual_review.images = [];
+  fs.writeFileSync(article.reportPath, JSON.stringify(article.report));
+  assert.match(validatePreviewReport(article.root, article.slug, { requireReady: false }).errors.join('\n'), /inventory obrazów/);
+
+  const center = fixture();
+  const centerHtml = '<div class="hub-shell"><main><h1 id="hub-title">Centrum kontrolne</h1><p>Treść.</p></main></div>';
+  for (const relative of [`${center.slug}.html`, `_site/${center.slug}.html`]) {
+    fs.writeFileSync(path.join(center.root, relative), centerHtml);
+  }
+  center.report.images = [];
+  center.report.visual_review.images = [];
+  center.report.artifacts.html_source.sha256 = sha256File(path.join(center.root, `${center.slug}.html`));
+  center.report.artifacts.html_site.sha256 = sha256File(path.join(center.root, `_site/${center.slug}.html`));
+  fs.writeFileSync(center.reportPath, JSON.stringify(center.report));
+  const result = validatePreviewReport(center.root, center.slug, { requireReady: false });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
 test('zmiana kontrolowanego pliku po review blokuje', () => {
   const value = fixture();
   saveReviewed(value);

@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { CONTRACT, imageInventoryHash, reviewEnvelope, technicalEvidenceIsClean, validateVisualReview } = require('./article-visual-review');
+const { pageKind } = require('./publication-page-kind');
 
 function sha256File(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
@@ -86,7 +87,15 @@ function validateV3Report(root, report, options, errors) {
   }
 
   const images = Array.isArray(report.images) ? report.images : [];
-  if (!images.length) errors.push('Raport nie zawiera kanonicznego inventory obrazów.');
+  let allowsEmptyImageInventory = false;
+  try {
+    const htmlSource = safeRelative(root, report.artifacts?.html_source?.file);
+    allowsEmptyImageInventory = fs.existsSync(htmlSource)
+      && pageKind(fs.readFileSync(htmlSource, 'utf8')) === 'topic_center';
+  } catch (_error) {
+    allowsEmptyImageInventory = false;
+  }
+  if (!images.length && !allowsEmptyImageInventory) errors.push('Raport nie zawiera kanonicznego inventory obrazów.');
   const placements = new Set();
   const variantFiles = new Map();
   for (const image of images) {
