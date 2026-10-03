@@ -62,7 +62,7 @@ Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audi
 - `quick_answer`: 45–70 słów, 1–3 pełne zdania, bez wstępu typu „warto pamiętać”. Odpowiada od razu i podaje najważniejszy warunek lub wyjątek.
 - `key_takeaways`: 3–5 konkretnych wniosków, bez claimów szerszych niż dowody.
 - `sections`: zwykle 6–10 logicznych sekcji. Krótszego tematu nie rozciągaj; przy mniej niż 6 sekcjach zapisz powód w `editorial_notes.local_pipeline_tasks`.
-- Pytające H2 kończą się `?`. Pierwszy `paragraphs_html` pod H2 ma 30–70 słów.
+- Pytające H2 kończą się `?`. Pierwszy `paragraphs_html` pod H2 ma odpowiadać bezpośrednio i konkretnie na pytanie; 30–70 słów jest zaleceniem, nie samodzielnym blokerem.
 - Dozwolone bloki treści to semantyczny HTML bez stylów inline. Tabela wymaga wrappera `.article-table-wrap`, `table.article-table`, `caption`, `thead`, `tbody`, `th scope="col"` i — gdy jest nagłówkiem wiersza — `th scope="row"`.
 - Każda sekcja może zawierać `title`, `paragraphs_html`, `list_items` oraz opcjonalny `info_box`. Nie dodawaj `image`; obrazy opisuje `image_prompts_v4`.
 

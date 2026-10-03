@@ -164,7 +164,9 @@ Artykuł nie przechodzi, jeśli:
 - Liczba głównych sekcji wynika wyłącznie z intencji i zakresu tematu. Nie obowiązuje minimalna liczba sekcji. Artykuł ma wyczerpywać istotne pytania bez dopisywania bloków dla długości, symetrii szablonu lub wyniku walidatora.
 - Każda sekcja musi wnosić konkretną odpowiedź, mechanizm, decyzję praktyczną, ograniczenie dowodu albo potrzebny kontekst. Generyczne wstępy, powtórzenia, parafrazy wcześniejszych sekcji i tekst bez sprawdzalnej wartości blokują publikację.
 - Pytające nagłówki H2 (np. zaczynające się od `Czy`, `Jak`, `Dlaczego`, `Ile`, `Kiedy`) muszą kończyć się `?`.
-- Pierwszy akapit pod każdym H2 (lead sekcji) musi mieć 30-70 słów.
+- Pierwszy akapit pod każdym H2 (lead sekcji) musi bezpośrednio i konkretnie odpowiadać na pytanie H2.
+- Zakres 30–70 słów jest zaleceniem redakcyjnym, nie samodzielnym blokerem: krótsza kompletna odpowiedź i dłuższa wartościowa odpowiedź mogą przejść.
+- Brak odpowiedzi, odpowiedź generyczna, powtórzony lead, niedomknięta myśl albo twierdzenie bez dowodu blokują publikację.
 - Każdy artykuł musi mieć min. 4 sensowne linki wewnętrzne do istniejących artykułów.
 - Linki wewnętrzne w treści mają być wyłącznie względne (`href="slug-artykulu.html"`), bez `https://fitpo50.pl/...`.
 - Tabele w artykułach mają być dopracowane wizualnie: wrapper `.article-table-wrap`, tabela `.article-table` oraz w razie potrzeby `.article-table--compact`; każda tabela wymaga konkretnego `<caption>`, krótkich komórek, czytelnych nagłówków i nie może być zawinięta w `<p><table>`.

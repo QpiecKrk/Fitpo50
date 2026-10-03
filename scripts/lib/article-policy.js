@@ -2,11 +2,11 @@
  * FitPo50 Article Policy Engine v1.2
  * 
  * Centralized source of truth for SEO, AEO, and Editorial rules.
- * v1.2: Aligned with AGENTS.md (30-70 words), improved path regex.
+ * v1.3: Answer-first H2 intro contract; 30-70 words is guidance, not a standalone blocker.
  */
 
 const POLICY = {
-  // Word count limits (strict editorial contract from AGENTS.md)
+  // Word count limits and editorial guidance
   WORDS: {
     H2_INTRO_MIN: 30,
     H2_INTRO_MAX: 70,
@@ -72,6 +72,42 @@ const POLICY = {
     'istotne jest zrównoważone podejście',
     'należy zawsze dostosować'
   ],
+
+  GENERIC_ANSWER_FIRST_PATTERNS: [
+    'warto rozłożyć na praktyczne kroki',
+    'po 50-tce najwięcej daje spokojne tempo',
+    'to właśnie ten szczegół często decyduje',
+    'w tej części warto spokojnie uporządkować fakty',
+    'ten artykuł porządkuje najważniejsze fakty',
+    'warto patrzeć szerzej',
+    'najważniejsze to regularność',
+    'kluczowe jest indywidualne podejście',
+    'to zależy od wielu czynników',
+    'warto pamiętać o całościowym podejściu',
+    'istotne jest zrównoważone podejście'
+  ],
+
+  ANSWER_FIRST: {
+    RECOMMENDED_MIN_WORDS: 30,
+    RECOMMENDED_MAX_WORDS: 70,
+    MIN_COMPLETE_WORDS: 8,
+    UNFINISHED_PATTERNS: [
+      /,\s*(czyli|bo|ponieważ|dlatego|gdy|jeśli)\s*\.?\s*$/iu,
+      /\b(na przykład|czyli|bo|ponieważ|dlatego|gdy|jeśli)\s*$/iu,
+      /[,:;–-]\s*$/u
+    ],
+    EVIDENCE_CLAIM_PATTERNS: [
+      /\bbadania\s+(pokazuj[aą]|wskazuj[aą]|dowodz[aą])\b/iu,
+      /\budowodniono\b/iu,
+      /\bzmniejsza\s+ryzyko\b/iu,
+      /\bzwiększa\s+ryzyko\b/iu
+    ],
+    EVIDENCE_CONTEXT_PATTERNS: [
+      /\b\d+(?:[.,]\d+)?\b/u,
+      /\b(meta-?analiz|przegl[aą]d|randomiz|kohort|wytyczn|badani[eu]|źr[oó]d[lł]|publikacj)\b/iu,
+      /<a\b/iu
+    ]
+  },
 
   QUICK_ANSWER: {
     LEGACY_CUTOFF: '2026-06-01',
@@ -336,14 +372,62 @@ const validators = {
     return { ok, error: ok ? null : `H2 "${clean}" musi kończyć się znakiem zapytania.` };
   },
 
-  validateIntroParagraph: (text) => {
-    const count = utils.countWords(text);
-    const ok = count >= POLICY.WORDS.H2_INTRO_MIN && count <= POLICY.WORDS.H2_INTRO_MAX;
-    return { 
-      ok, 
+  validateAnswerFirstParagraph: (text, options = {}) => {
+    const raw = String(text || '');
+    const clean = utils.stripTags(raw).replace(/\s+/g, ' ').trim();
+    const count = utils.countWords(clean);
+    const errors = [];
+    const warnings = [];
+    const label = String(options.label || 'Pierwszy akapit');
+    const normalized = utils.fuzzyNormalize(clean);
+    const leadNormalized = options.lead ? utils.fuzzyNormalize(options.lead) : '';
+
+    if (!clean) {
+      errors.push(`${label}: brak bezpośredniej odpowiedzi pod H2.`);
+    } else if (count < POLICY.ANSWER_FIRST.MIN_COMPLETE_WORDS) {
+      errors.push(`${label}: odpowiedź jest zbyt krótka, aby domknąć intencję pytania H2.`);
+    }
+
+    if (leadNormalized && normalized && normalized === leadNormalized) {
+      errors.push(`${label}: odpowiedź nie może być kopią 1:1 leadu artykułu.`);
+    }
+
+    for (const phrase of POLICY.GENERIC_ANSWER_FIRST_PATTERNS || []) {
+      if (normalized.includes(utils.fuzzyNormalize(phrase))) {
+        errors.push(`${label}: odpowiedź jest zbyt generyczna (fraza: "${phrase}").`);
+        break;
+      }
+    }
+
+    if (POLICY.ANSWER_FIRST.UNFINISHED_PATTERNS.some((rx) => rx.test(clean))) {
+      errors.push(`${label}: odpowiedź wygląda na niedomkniętą myśl.`);
+    }
+
+    const hasEvidenceClaim = POLICY.ANSWER_FIRST.EVIDENCE_CLAIM_PATTERNS.some((rx) => rx.test(clean));
+    const hasEvidenceContext = POLICY.ANSWER_FIRST.EVIDENCE_CONTEXT_PATTERNS.some((rx) => rx.test(raw));
+    if (hasEvidenceClaim && !hasEvidenceContext) {
+      errors.push(`${label}: twierdzenie o dowodach lub ryzyku wymaga konkretu, liczby, źródła albo widocznego kontekstu dowodowego.`);
+    }
+
+    const logical = validators.validateLogicalCoherence([{ label, text: clean }]);
+    errors.push(...logical.errors);
+
+    if (count > 0 && (count < POLICY.ANSWER_FIRST.RECOMMENDED_MIN_WORDS || count > POLICY.ANSWER_FIRST.RECOMMENDED_MAX_WORDS)) {
+      warnings.push(`${label}: ${count} słów; zalecany zakres ${POLICY.ANSWER_FIRST.RECOMMENDED_MIN_WORDS}-${POLICY.ANSWER_FIRST.RECOMMENDED_MAX_WORDS}, ale kompletna odpowiedź może przejść.`);
+    }
+
+    return {
+      ok: errors.length === 0,
+      valid: errors.length === 0,
       count,
-      error: ok ? null : `Akapit ma ${count} słów (wymagane ${POLICY.WORDS.H2_INTRO_MIN}-${POLICY.WORDS.H2_INTRO_MAX}).` 
+      errors,
+      warnings,
+      error: errors[0] || null
     };
+  },
+
+  validateIntroParagraph: (text, options = {}) => {
+    return validators.validateAnswerFirstParagraph(text, options);
   },
 
   validateSeoDescriptionLength: (desc) => {

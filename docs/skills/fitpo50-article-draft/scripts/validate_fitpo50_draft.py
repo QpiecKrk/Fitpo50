@@ -164,8 +164,21 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
             errors.append(f"sections[{index}].title jest pytaniem bez znaku ?.")
         if not string_list(paragraphs, 1):
             errors.append(f"sections[{index}].paragraphs_html musi być niepustą listą tekstów.")
-        elif not 30 <= words(paragraphs[0]) <= 70:
-            errors.append(f"Pierwszy akapit sections[{index}] ma {words(paragraphs[0])} słów; wymagane 30–70.")
+        else:
+            first_words = words(paragraphs[0])
+            first_text = re.sub(r"<[^>]+>", " ", paragraphs[0]).strip()
+            generic_intro = any(phrase in first_text.casefold() for phrase in (
+                "warto rozłożyć na praktyczne kroki",
+                "w tej części warto spokojnie uporządkować fakty",
+                "ten artykuł porządkuje najważniejsze fakty",
+                "warto patrzeć szerzej",
+                "kluczowe jest indywidualne podejście",
+                "to zależy od wielu czynników",
+            ))
+            if first_words < 8:
+                errors.append(f"Pierwszy akapit sections[{index}] nie domyka odpowiedzi answer-first.")
+            if generic_intro:
+                errors.append(f"Pierwszy akapit sections[{index}] jest generyczny.")
         if "image" in section:
             errors.append(f"sections[{index}].image jest polem lokalnym; użyj image_prompts_v4.")
     content_data = {key: value for key, value in data.items() if key != "editorial_notes"}

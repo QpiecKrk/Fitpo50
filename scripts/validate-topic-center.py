@@ -81,9 +81,22 @@ def validate(file):
         for heading in main.select('h2'):
             title = heading.get_text(' ', strip=True)
             check(not re.match(r'^(Czy|Jak|Dlaczego|Ile|Kiedy|Od czego|Co |Na czym|Który)', title) or title.endswith('?'), f'Pytający H2 bez ?: {title}')
-            paragraph = heading.find_next_sibling('p')
-            words = len(paragraph.get_text(' ', strip=True).split()) if paragraph else 0
-            check(30 <= words <= 70, f'H2 {title}: pierwszy akapit {words} słów, wymagane 30–70')
+            paragraph = heading.find_next_sibling()
+            check(paragraph is not None and paragraph.name == 'p', f'H2 {title}: odpowiedź answer-first musi zaczynać się bezpośrednio od akapitu <p>')
+            paragraph_text = paragraph.get_text(' ', strip=True) if paragraph and paragraph.name == 'p' else ''
+            words = len(paragraph_text.split()) if paragraph_text else 0
+            generic_intro = any(phrase in paragraph_text.casefold() for phrase in (
+                'warto rozłożyć na praktyczne kroki',
+                'w tej części warto spokojnie uporządkować fakty',
+                'ten artykuł porządkuje najważniejsze fakty',
+                'warto patrzeć szerzej',
+                'kluczowe jest indywidualne podejście',
+                'to zależy od wielu czynników',
+            ))
+            unfinished = bool(re.search(r'(,|:|;|–|-)?\s*(czyli|bo|ponieważ|dlatego|gdy|jeśli)?\s*$', paragraph_text)) and paragraph_text.endswith((',', ':', ';', '–', '-'))
+            check(words >= 8, f'H2 {title}: pierwszy akapit nie domyka odpowiedzi answer-first')
+            check(not generic_intro, f'H2 {title}: pierwszy akapit jest generyczny')
+            check(not unfinished, f'H2 {title}: pierwszy akapit wygląda na niedomkniętą myśl')
         links = set()
         for a in main.select('a[href]'):
             href = a['href']

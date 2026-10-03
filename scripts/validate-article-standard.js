@@ -43,6 +43,17 @@ function extractArticleContentHtml(raw) {
   return raw.slice(start, end);
 }
 
+function firstMeaningfulTag(sectionHtml) {
+  const withoutLeadingNoise = String(sectionHtml || '').replace(/^(?:\s|<!--[\s\S]*?-->)+/g, '');
+  const match = withoutLeadingNoise.match(/^<([a-z0-9-]+)\b[^>]*>/i);
+  if (!match) return null;
+  return {
+    tag: match[1].toLowerCase(),
+    html: withoutLeadingNoise,
+    openTag: match[0]
+  };
+}
+
 function validateAnswerFirstParagraphs(raw, errors) {
   const h2Rx = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
   const h2s = [...raw.matchAll(h2Rx)];
@@ -56,15 +67,24 @@ function validateAnswerFirstParagraphs(raw, errors) {
     const sectionStart = current.index + current[0].length;
     const sectionEnd = next ? next.index : raw.length;
     const sectionHtml = raw.slice(sectionStart, sectionEnd);
-    const pMatch = sectionHtml.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i);
+    const firstTag = firstMeaningfulTag(sectionHtml);
+    if (!firstTag) {
+      errors.push(`Sekcja "${utils.stripTags(current[1])}" nie zawiera bezpośredniej odpowiedzi po H2.`);
+      continue;
+    }
+    if (firstTag.tag !== 'p') {
+      errors.push(`Sekcja "${utils.stripTags(current[1])}": pierwszy istotny element po H2 to <${firstTag.tag}>, a odpowiedź answer-first musi zaczynać się od <p>.`);
+      continue;
+    }
+    const pMatch = firstTag.html.match(/^<p\b[^>]*>([\s\S]*?)<\/p>/i);
     if (!pMatch) {
       errors.push(`Sekcja "${utils.stripTags(current[1])}" nie zawiera akapitu otwierającego <p>.`);
       continue;
     }
     checked += 1;
-    const res = validators.validateIntroParagraph(utils.stripTags(pMatch[1]));
+    const res = validators.validateAnswerFirstParagraph(pMatch[1], { label: `Sekcja "${utils.stripTags(current[1])}"` });
     if (!res.ok) {
-      errors.push(`Sekcja "${utils.stripTags(current[1])}": ${res.error}`);
+      errors.push(...res.errors);
     }
   }
 

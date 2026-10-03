@@ -78,7 +78,7 @@ Pipeline działa fail-fast. Po błędzie nie uruchamia zależnych etapów ani ni
 
 Starszy JSON Claude jest migrowany wyłącznie z jawnych danych źródłowych i `evidence_source_ids`; pipeline nie wymyśla dowodów. Obecny układ artykułu przyjmuje obrazy krajobrazowe: hero co najmniej 1080×600, sekcja co najmniej 900×500 i proporcję 1.2–2.1. Portret lub kwadrat wymaga w przyszłości osobnego, jawnie opisanego typu layoutu; nie rozszerzamy tolerancji całego systemu. Importer domyka semantykę i mobilny kontener tabel przed podglądem 390 px.
 
-Importer zachowuje linki i semantyczne formatowanie inline w pierwszym akapicie pod każdym H2. Nie wolno po cichu zamieniać go na czysty tekst ani przycinać; limit 30–70 słów egzekwuje bramka, licząc wyłącznie widoczny tekst bez tagów i atrybutów. `seo_title` ma maksymalnie 55 znaków, ponieważ finalny limit 65 obejmuje także stały dopisek ` | FitPo50`.
+Importer zachowuje linki i semantyczne formatowanie inline w pierwszym akapicie pod każdym H2. Nie wolno po cichu zamieniać go na czysty tekst ani przycinać. Pierwszy akapit działa answer-first: odpowiada bezpośrednio i konkretnie na H2; 30–70 słów jest zaleceniem, a nie samodzielnym blokerem. `seo_title` ma maksymalnie 55 znaków, ponieważ finalny limit 65 obejmuje także stały dopisek ` | FitPo50`.
 
 Każdy nowy błąd wykryty podczas `dodaj artykuł` albo `Obal mit` napraw dwupoziomowo: najpierw w bieżącym artykule, następnie u źródła w pipeline. Gdy błąd można wykryć automatycznie, dodaj test regresji lub błędny fixture. Nie kończ na ręcznej korekcie jednego pliku i nie osłabiaj bramki, aby przepuścić artykuł.
 

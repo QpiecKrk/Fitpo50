@@ -52,7 +52,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 
 - Ten sam pełny Quality Gate obowiązuje nowe artykuły, aktualizacje, `popraw-seo`, `napraw paczkę N` i import starszego draftu. Wcześniejszy PASS ani mały zakres zmiany nie zwalniają z kontroli całej strony i wszystkich artefaktów.
 - Opis SEO ma 145–160 znaków, kończy się pełnym zdaniem i jest identyczny w meta, Open Graph, Twitter i `BlogPosting.description`.
-- Pytające H2 kończą się `?`; pierwszy akapit pod H2 ma 30–70 słów.
+- Pytające H2 kończą się `?`; pierwszy akapit pod H2 ma odpowiadać bezpośrednio i konkretnie na pytanie. Zakres 30–70 słów jest zaleceniem, nie samodzielnym blokerem.
 - Minimum 4 naturalne linki wewnętrzne prowadzą do istniejących stron i używają ścieżek względnych.
 - Obrazy korzystają z `<picture>` z AVIF/WebP/JPG, konkretnym `alt`, wymiarami i kontrolą wizualną. Wymagany jest hero oraz odrębny, merytorycznie trafny obraz dla każdej głównej sekcji treści; sekcje użytkowe nie zwiększają licznika. Watermark sam nie blokuje obrazu. Zmieniony obraz zawsze otrzymuje nową, wersjonowaną nazwę, ponieważ publiczne assety mają cache `immutable`.
 - Tabele są semantycznym HTML z `caption`, `thead`, `tbody` i `scope`.

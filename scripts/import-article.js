@@ -952,12 +952,9 @@ function validateInput(data, opts = {}) {
         sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}" nie ma akapitu otwierającego.`);
         continue;
       }
-      const introRes = validators.validateIntroParagraph(stripTags(firstParagraph.html));
+      const introRes = validators.validateAnswerFirstParagraph(firstParagraph.html, { label: `Sekcja "${section.title || '(bez tytułu)'}"` });
       if (!introRes.ok) {
-        autoFixes.push(
-          `Sekcja "${section.title || '(bez tytułu)'}": ${introRes.error} ` +
-          'Importer ustabilizuje pierwszy akapit, ale warto ręcznie dopracować odpowiedź do standardu.'
-        );
+        sectionParagraphErrors.push(...introRes.errors);
       }
 
       for (const block of section.blocks) {

@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const { spawnSync } = require('child_process');
-const { POLICY, utils } = require('./lib/article-policy');
+const { POLICY, utils, validators } = require('./lib/article-policy');
 const { MEDICAL_EVIDENCE_LEVELS, isStrongMedicalSource, validateArticleEvidence } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
 const { validateManifestStructure } = require('./lib/article-media');
@@ -302,11 +302,8 @@ function validateFile(file) {
       errors.push(`${file}: sections[${i}] ma mniej niż 2 akapity.`);
       continue;
     }
-    const first = String(paragraphs[0] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-    const wc = countWords(first);
-    if (wc < POLICY.WORDS.H2_INTRO_MIN || wc > POLICY.WORDS.H2_INTRO_MAX) {
-      errors.push(`${file}: sections[${i}] pierwszy akapit poza limitem ${POLICY.WORDS.H2_INTRO_MIN}-${POLICY.WORDS.H2_INTRO_MAX} słów (jest ${wc}).`);
-    }
+    const introRes = validators.validateAnswerFirstParagraph(String(paragraphs[0] || ''), { label: `${file}: sections[${i}] pierwszy akapit` });
+    if (!introRes.ok) errors.push(...introRes.errors);
 
     if (!s.image || typeof s.image !== 'object') {
       errors.push(`${file}: sections[${i}] brak image.`);

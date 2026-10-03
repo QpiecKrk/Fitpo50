@@ -14,9 +14,14 @@ const { validateAboutEntities } = require('../scripts/lib/entity-sameas-policy')
 
 const ROOT = path.resolve(__dirname, '..');
 const FIXTURES = path.join(__dirname, 'fixtures', 'pipeline-invalid');
+const ANSWER_FIRST_FIXTURE = path.join(__dirname, 'fixtures', 'answer-first-cases.json');
 
 function fixture(name) {
   return JSON.parse(fs.readFileSync(path.join(FIXTURES, `${name}.fitpo50.json`), 'utf8'));
+}
+
+function answerFirstCases() {
+  return JSON.parse(fs.readFileSync(ANSWER_FIRST_FIXTURE, 'utf8'));
 }
 
 test('końcowa macierz błędnych JSON-ów zawiera wszystkie osiem wymaganych blokad', () => {
@@ -66,6 +71,51 @@ test('pipeline blokuje generyczny quick answer', () => {
   const result = validators.validateQuickAnswer(fixture('generic-quick-answer').quick_answer);
   assert.equal(result.valid, false);
   assert.match(result.errors.join('\n'), /generyczna/);
+});
+
+test('answer-first accepts complete short and valuable long answers without strict 30-70 blocking', () => {
+  const cases = answerFirstCases();
+  const shortResult = validators.validateAnswerFirstParagraph(cases.short_complete.paragraph, { heading: cases.short_complete.heading });
+  const longResult = validators.validateAnswerFirstParagraph(cases.long_valuable.paragraph, { heading: cases.long_valuable.heading });
+  assert.equal(shortResult.ok, true);
+  assert.equal(longResult.ok, true);
+  assert.ok(shortResult.warnings.length > 0);
+});
+
+test('answer-first blocks generic, repeated, missing and unfinished opening answers', () => {
+  const cases = answerFirstCases();
+  const generic = validators.validateAnswerFirstParagraph(cases.generic_text.paragraph, { heading: cases.generic_text.heading });
+  assert.equal(generic.ok, false);
+  assert.match(generic.errors.join('\n'), /generyczna/);
+
+  const repeated = validators.validateAnswerFirstParagraph(cases.repeated_lead.paragraph, {
+    heading: cases.repeated_lead.heading,
+    lead: cases.repeated_lead.lead,
+  });
+  assert.equal(repeated.ok, false);
+  assert.match(repeated.errors.join('\n'), /kopią 1:1 leadu/);
+
+  const missing = validators.validateAnswerFirstParagraph(cases.missing_answer.paragraph, { heading: cases.missing_answer.heading });
+  assert.equal(missing.ok, false);
+  assert.match(missing.errors.join('\n'), /brak bezpośredniej odpowiedzi/);
+
+  const unfinished = validators.validateAnswerFirstParagraph('Tak, bo', { heading: 'Czy to działa?' });
+  assert.equal(unfinished.ok, false);
+  assert.match(unfinished.errors.join('\n'), /niedomkniętą myśl|zbyt krótka/);
+});
+
+test('article validator rejects a non-paragraph element before the answer-first paragraph', () => {
+  const cases = answerFirstCases();
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-answer-first-dom-'));
+  try {
+    const htmlPath = path.join(dir, 'dom.html');
+    fs.writeFileSync(htmlPath, `<!doctype html><html><head><title>Test answer-first | FitPo50</title></head><body class="article-template"><article class="article-content"><h2>${cases.element_before_paragraph.heading}</h2>${cases.element_before_paragraph.html}</article></body></html>`);
+    const { validateFile } = require('../scripts/validate-article-standard');
+    const result = validateFile(htmlPath);
+    assert.match(result.errors.join('\n'), /pierwszy istotny element po H2 to <figure>/);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('pipeline blokuje sztuczne FAQ oznaczone jako wariant', () => {

@@ -180,9 +180,9 @@ function main() {
       errors.push(`sections[${idx + 1}].title: ${headingRes.error}`);
     }
     const p = Array.isArray(section.paragraphs_html) ? section.paragraphs_html[0] || '' : '';
-    const introRes = validators.validateIntroParagraph(utils.stripTags(p));
+    const introRes = validators.validateAnswerFirstParagraph(p, { label: `sections[${idx + 1}] pierwszy akapit` });
     if (!introRes.ok) {
-      errors.push(`sections[${idx + 1}] pierwszy akapit: ${introRes.error}`);
+      errors.push(...introRes.errors);
     }
   });
 

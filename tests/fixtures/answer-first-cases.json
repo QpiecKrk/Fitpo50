@@ -1,0 +1,27 @@
+{
+  "short_complete": {
+    "heading": "Czy ApoB warto badać po 50-tce?",
+    "paragraph": "Tak, ApoB warto badać po 50-tce, gdy LDL jest niejasny albo ryzyko sercowo-naczyniowe wymaga dokładniejszej oceny."
+  },
+  "long_valuable": {
+    "heading": "Jak bezpiecznie wrócić do treningu po przerwie?",
+    "paragraph": "Bezpieczny powrót zaczyna się od dwóch tygodni lżejszego obciążenia, obserwacji bólu i stopniowego dokładania serii. Jeśli po treningu objawy utrzymują się następnego dnia albo pojawia się ból stawu, zmniejsz zakres ruchu, przerwij ćwiczenie prowokujące problem i wróć do progresji dopiero po spokojnym treningu bez zaostrzenia. Taki dłuższy akapit nadal odpowiada na pytanie, bo podaje kolejność decyzji, warunek zatrzymania i sposób powrotu, zamiast dopisywać ogólny wstęp. Czytelnik dostaje jasny próg działania i nie musi zgadywać, kiedy kontynuować plan."
+  },
+  "generic_text": {
+    "heading": "Jak zacząć zmianę nawyków po 50-tce?",
+    "paragraph": "W tej części warto spokojnie uporządkować fakty i przełożyć je na praktyczne kroki, bo to właśnie ten szczegół często decyduje o powodzeniu całego planu."
+  },
+  "repeated_lead": {
+    "heading": "Czy szybki marsz wystarczy po 50-tce?",
+    "lead": "Szybki marsz pomaga budować bazę kondycyjną, ale po 50-tce nie zastępuje treningu siłowego i ćwiczeń równowagi.",
+    "paragraph": "Szybki marsz pomaga budować bazę kondycyjną, ale po 50-tce nie zastępuje treningu siłowego i ćwiczeń równowagi."
+  },
+  "missing_answer": {
+    "heading": "Kiedy ból kolana wymaga przerwy?",
+    "paragraph": ""
+  },
+  "element_before_paragraph": {
+    "heading": "Czym są sakady?",
+    "html": "<figure><img src=\"sakady.jpg\" alt=\"Oko w ruchu\"></figure><p>Sakady to krótkie, szybkie ruchy oczu, które przenoszą wzrok między punktami fiksacji.</p>"
+  }
+}
