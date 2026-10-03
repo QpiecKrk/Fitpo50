@@ -15,6 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { validateEntitySameAs } = require('./lib/entity-sameas-policy');
 const { POLICY, utils, validators, enforcers } = require('./lib/article-policy');
 const {
   CATEGORY_LANDING_URLS,
@@ -79,25 +80,6 @@ const READING_ROOM_FALLBACKS = [
     description: 'Najważniejsze zasady odżywiania po 50-tce: co jeść, jak planować i czego nie komplikować.',
   },
 ];
-const WIKIDATA_ENTITY_MAP = [
-  { key: 'apob', name: 'Apolipoprotein B', sameAs: 'https://www.wikidata.org/wiki/Q420633' },
-  { key: 'apolipoproteina b', name: 'Apolipoprotein B', sameAs: 'https://www.wikidata.org/wiki/Q420633' },
-  { key: 'ldl', name: 'Low-density lipoprotein', sameAs: 'https://www.wikidata.org/wiki/Q159472' },
-  { key: 'hdl', name: 'High-density lipoprotein', sameAs: 'https://www.wikidata.org/wiki/Q181503' },
-  { key: 'cholesterol', name: 'Cholesterol', sameAs: 'https://www.wikidata.org/wiki/Q43656' },
-  { key: 'miazdzyca', name: 'Atherosclerosis', sameAs: 'https://www.wikidata.org/wiki/Q133212' },
-  { key: 'miażdżyca', name: 'Atherosclerosis', sameAs: 'https://www.wikidata.org/wiki/Q133212' },
-  { key: 'metylacja dna', name: 'DNA methylation', sameAs: 'https://www.wikidata.org/wiki/Q29197' },
-  { key: 'epigenetyczny', name: 'Epigenetics', sameAs: 'https://www.wikidata.org/wiki/Q29181' },
-  { key: 'zegar horvatha', name: 'Epigenetic clock', sameAs: 'https://www.wikidata.org/wiki/Q109345510' },
-  { key: 'sakady', name: 'Saccade', sameAs: 'https://www.wikidata.org/wiki/Q270190' },
-  { key: 'saccade', name: 'Saccade', sameAs: 'https://www.wikidata.org/wiki/Q270190' },
-  { key: 'supresja sakadyczna', name: 'Saccadic suppression', sameAs: 'https://www.wikidata.org/wiki/Q7394493' },
-  { key: 'insulinoopornosc', name: 'Insulin resistance', sameAs: 'https://www.wikidata.org/wiki/Q541507' },
-  { key: 'insulinooporność', name: 'Insulin resistance', sameAs: 'https://www.wikidata.org/wiki/Q541507' },
-  { key: 'cukrzyca', name: 'Diabetes', sameAs: 'https://www.wikidata.org/wiki/Q12204' },
-];
-
 function parseArgs(argv) {
   const out = {};
   for (let i = 0; i < argv.length; i += 1) {
@@ -536,7 +518,11 @@ function normalizeEntities(rawEntities) {
     const sameAs = String(item.sameAs || item.wikidata || item.wikidata_url || '').trim();
     if (!name) continue;
     const node = { '@type': 'Thing', name };
-    if (sameAs && /^https?:\/\//i.test(sameAs)) node.sameAs = sameAs;
+    if (sameAs) {
+      const validation = validateEntitySameAs(name, sameAs);
+      if (!validation.ok) throw new Error(`ENTITY_SAME_AS_BLOCKED: ${validation.error}`);
+      node.sameAs = sameAs;
+    }
     out.push(node);
   }
   return out;
@@ -545,32 +531,7 @@ function normalizeEntities(rawEntities) {
 function buildAboutEntities({ data, title, category, keyTakeaways, sources }) {
   const manual = normalizeEntities(data.entities || data.schema_entities || data.wikidata_entities);
   if (manual.length) return manual.slice(0, 6);
-
-  const haystack = [
-    title,
-    category?.label || '',
-    ...keyTakeaways,
-    ...normalizeArray(sources).map((s) => `${s?.label || ''} ${s?.url || ''}`),
-  ].join(' ');
-  const normalized = String(haystack)
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, ' ')
-    .replace(/\s+/g, ' ');
-
-  const hits = [];
-  for (const candidate of WIKIDATA_ENTITY_MAP) {
-    if (!normalized.includes(candidate.key)) continue;
-    if (hits.some((x) => x.sameAs === candidate.sameAs)) continue;
-    hits.push({
-      '@type': 'Thing',
-      name: candidate.name,
-      sameAs: candidate.sameAs,
-    });
-  }
-
-  if (hits.length) return hits.slice(0, 6);
-  return keyTakeaways.slice(0, 4).map((name) => ({ '@type': 'Thing', name }));
+  return [];
 }
 
 function normalizeSections(rawSections) {
@@ -2579,9 +2540,11 @@ if (require.main === module) {
 }
 
 module.exports = {
+  buildAboutEntities,
   ensureCaptionedTables,
   main,
   normalizePayload,
+  normalizeEntities,
   normalizeSections,
   normalizeSeoTitleBase,
   singleTrailingNewline,

@@ -1,35 +1,430 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:53:31.493Z",
+  "generated_at": "2026-10-03T07:21:57.194Z",
+  "reviewed_at": "2026-10-03T08:16:44.943Z",
   "slug": "chleb-na-zakwasie-weglowodany-indeks-glikemiczny",
-  "html_sha256": "f406ce4e9e3dcff89e111bf2514bc7af48126c27c45285daeec0fe18c5619e52",
-  "site_html_sha256": "f406ce4e9e3dcff89e111bf2514bc7af48126c27c45285daeec0fe18c5619e52",
-  "pdf_sha256": "ca64acb8f27c112f2b3d3372e70c7be221a11e500007ed4d880d33e391b84a17",
-  "site_pdf_sha256": "ca64acb8f27c112f2b3d3372e70c7be221a11e500007ed4d880d33e391b84a17",
+  "html_sha256": "c0ca487059fd573f65ec3397e2fb77229f0c386c327c029e54317c16682e4acc",
+  "site_html_sha256": "c0ca487059fd573f65ec3397e2fb77229f0c386c327c029e54317c16682e4acc",
+  "pdf_sha256": "e3b2e34df73a9c83fc491e60d71b98e2be35b060e56c29f58af204355eb16e17",
+  "site_pdf_sha256": "e3b2e34df73a9c83fc491e60d71b98e2be35b060e56c29f58af204355eb16e17",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T07:21:57.194Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html",
+      "sha256": "c0ca487059fd573f65ec3397e2fb77229f0c386c327c029e54317c16682e4acc",
+      "bytes": 32190
+    },
+    "html_site": {
+      "file": "_site/chleb-na-zakwasie-weglowodany-indeks-glikemiczny.html",
+      "sha256": "c0ca487059fd573f65ec3397e2fb77229f0c386c327c029e54317c16682e4acc",
+      "bytes": 32190
+    },
+    "pdf_source": {
+      "file": "assets/pdf/chleb-na-zakwasie-weglowodany-indeks-glikemiczny.pdf",
+      "sha256": "e3b2e34df73a9c83fc491e60d71b98e2be35b060e56c29f58af204355eb16e17",
+      "bytes": 466008
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/chleb-na-zakwasie-weglowodany-indeks-glikemiczny.pdf",
+      "sha256": "e3b2e34df73a9c83fc491e60d71b98e2be35b060e56c29f58af204355eb16e17",
+      "bytes": 466008
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/chleb-na-zakwasie-weglowodany-indeks-glikemiczny/desktop.png",
+      "screenshot_sha256": "81aa8a6f8067d7289827d0535686e3788a5351a20509cc6163f60aa61b1b8c22",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/chleb-na-zakwasie-weglowodany-indeks-glikemiczny/mobile.png",
+      "screenshot_sha256": "46a2c98b88ea146d54f4cdbcf08167187ad8e70503490cf57f138196f8251f56",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "JEDZENIE 9 min czytania Chleb na zakwasie a indeks glikemiczny: co zmienia glikemię? Fermentacja to najstarszy suplement diety na świecie. I nadal jeden z najlepszych.",
+      "alt": "Pełnoziarnisty chleb na zakwasie krojony na drewnianej desce",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zakwas-chleb-hero-v2.avif",
+          "sha256": "4c01104551db5cc4ea4291028b65398e104eb66e9c06b7b22e291a943485e93f",
+          "bytes": 98179,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zakwas-chleb-hero-v2.webp",
+          "sha256": "87cc804086ad800c9a930376714f12fbeed1d1219bc8082eb61b26af2d38638f",
+          "bytes": 113174,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zakwas-chleb-hero-v2.jpg",
+          "sha256": "aef19bea5895cd0024e409826ad507873f4533cd6e0d7a459d8662c657861f45",
+          "bytes": 204381,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e86efb3ad9b14e8a8b0b1cc4e804e06f985e866b8ecfee17533679d2ae97f900"
+    },
+    {
+      "placement": "content:2:czy-chleb-na-zakwasie-ma-zawsze-niski-indeks-gli",
+      "role": "content",
+      "heading": "Czy chleb na zakwasie ma zawsze niski indeks glikemiczny?",
+      "context": "Szybka odpowiedź Chleb na zakwasie nie jest automatycznie pieczywem o niskim indeksie glikemicznym. Przegląd 18 badań wykazał mniejszy wzrost glukozy po 60 i 120 minutach niż po pieczywie kontrolnym, ale pewność dowodów oceniono jako niską lub bardzo niską. Najwięcej zmieniają rodzaj mąki, udział całego ziarna, porcja i dodatki do posiłku. Kluczowe wnioski Sama obecność zakwasu nie określa indeksu ani ładunku glikemicznego konkretnego bochenka. W przeglądzie 18 prób efekt dotyczył glikemii poposiłkowej, a nie trwałej poprawy cukrzycy. Pieczywo pełnoziarniste na zakwasie zwykle daje rozsądniejszy wybór niż jasny bochenek o tej samej nazwie. Przy cukrzycy praktyczną odpowiedź daje porównywalna porcja i pomiar według zaleceń zespołu leczącego. Czy chleb na zakwasie ma zawsze niski indeks glik",
+      "alt": "Aktywny zakwas w słoiku z widocznymi pęcherzykami fermentacji",
+      "caption": "Aktywny zakwas w słoiku z widocznymi pęcherzykami fermentacji",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zakwas-ekosystem-sekcja1.avif",
+          "sha256": "b41438a40200ab4aec3570c59bd9803d4f45b9767ff431380b8f8d75b7ffd8cc",
+          "bytes": 47338,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zakwas-ekosystem-sekcja1.webp",
+          "sha256": "71d147d1d796bb8da78465d947e3a53f1783ff2e1ecc6ecdd1f31d0f0088647b",
+          "bytes": 94520,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zakwas-ekosystem-sekcja1.jpg",
+          "sha256": "f4419bcebc8854682a91efe3a197d98dfd604d1f17d73b79c898a7dab673ca2f",
+          "bytes": 151165,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7108ad69748b3829c4e3e2935a57b6c79292f424f83fa68e9958df0a657263ae"
+    },
+    {
+      "placement": "content:3:co-naprawde-pokazaly-badania-glikemii-po-zakwasi",
+      "role": "content",
+      "heading": "Co naprawdę pokazały badania glikemii po zakwasie?",
+      "context": "Szybka odpowiedź Chleb na zakwasie nie jest automatycznie pieczywem o niskim indeksie glikemicznym. Przegląd 18 badań wykazał mniejszy wzrost glukozy po 60 i 120 minutach niż po pieczywie kontrolnym, ale pewność dowodów oceniono jako niską lub bardzo niską. Najwięcej zmieniają rodzaj mąki, udział całego ziarna, porcja i dodatki do posiłku. Kluczowe wnioski Sama obecność zakwasu nie określa indeksu ani ładunku glikemicznego konkretnego bochenka. W przeglądzie 18 prób efekt dotyczył glikemii poposiłkowej, a nie trwałej poprawy cukrzycy. Pieczywo pełnoziarniste na zakwasie zwykle daje rozsądniejszy wybór niż jasny bochenek o tej samej nazwie. Przy cukrzycy praktyczną odpowiedź daje porównywalna porcja i pomiar według zaleceń zespołu leczącego. Czy chleb na zakwasie ma zawsze niski indeks glik",
+      "alt": "Porównanie odpowiedzi glikemicznej po różnych rodzajach pieczywa",
+      "caption": "Porównanie odpowiedzi glikemicznej po różnych rodzajach pieczywa",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/indeks-glikemiczny-porownanie-sekcja2.avif",
+          "sha256": "7f0ff10b86df7ae661ca0d211be0ef5d12fc099d7b67ab1dc14aab2850e0bb77",
+          "bytes": 34829,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/indeks-glikemiczny-porownanie-sekcja2.webp",
+          "sha256": "52a4c43fec7164fed162662bd1f755777dae67d8363ccdf46a7a601489ea2330",
+          "bytes": 63700,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/indeks-glikemiczny-porownanie-sekcja2.jpg",
+          "sha256": "416e9a082c1ac1caf2bcab1af908fabb69f62de84712a25adc52c26831c4269f",
+          "bytes": 117919,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3830932c136217341056c2a939368cc4c77e15a6c09ab59132c6da946a89bf49"
+    },
+    {
+      "placement": "content:4:jak-wybrac-pieczywo-gdy-zalezy-ci-na-glikemii",
+      "role": "content",
+      "heading": "Jak wybrać pieczywo, gdy zależy Ci na glikemii?",
+      "context": "Szybka odpowiedź Chleb na zakwasie nie jest automatycznie pieczywem o niskim indeksie glikemicznym. Przegląd 18 badań wykazał mniejszy wzrost glukozy po 60 i 120 minutach niż po pieczywie kontrolnym, ale pewność dowodów oceniono jako niską lub bardzo niską. Najwięcej zmieniają rodzaj mąki, udział całego ziarna, porcja i dodatki do posiłku. Kluczowe wnioski Sama obecność zakwasu nie określa indeksu ani ładunku glikemicznego konkretnego bochenka. W przeglądzie 18 prób efekt dotyczył glikemii poposiłkowej, a nie trwałej poprawy cukrzycy. Pieczywo pełnoziarniste na zakwasie zwykle daje rozsądniejszy wybór niż jasny bochenek o tej samej nazwie. Przy cukrzycy praktyczną odpowiedź daje porównywalna porcja i pomiar według zaleceń zespołu leczącego. Czy chleb na zakwasie ma zawsze niski indeks glik",
+      "alt": "Mężczyzna po 50-tce je śniadanie z pieczywem na zakwasie",
+      "caption": "Mężczyzna po 50-tce je śniadanie z pieczywem na zakwasie",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/insulina-odpowiedz-zakwas-sekcja3.avif",
+          "sha256": "17624ba036793dbfe7fcdc4c95916aa7bfc39f259ba5cb7c8bcfab99f48b49be",
+          "bytes": 54700,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/insulina-odpowiedz-zakwas-sekcja3.webp",
+          "sha256": "9792f501ca9824f1f37871c1e1fa93433bf5dea8c502acf469bc637fa0e78de4",
+          "bytes": 104556,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/insulina-odpowiedz-zakwas-sekcja3.jpg",
+          "sha256": "931278ec471a99b373105b4ff465f9091042a0e116941969c900a3a6c293c8cc",
+          "bytes": 164931,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "69b3672c1ec6a564c5f2ab071004fa01a2ce5fb9229fec23daa4df70902c170a"
+    },
+    {
+      "placement": "content:5:kiedy-wlasny-pomiar-jest-wazniejszy-niz-tabela-i",
+      "role": "content",
+      "heading": "Kiedy własny pomiar jest ważniejszy niż tabela IG?",
+      "context": "Szybka odpowiedź Chleb na zakwasie nie jest automatycznie pieczywem o niskim indeksie glikemicznym. Przegląd 18 badań wykazał mniejszy wzrost glukozy po 60 i 120 minutach niż po pieczywie kontrolnym, ale pewność dowodów oceniono jako niską lub bardzo niską. Najwięcej zmieniają rodzaj mąki, udział całego ziarna, porcja i dodatki do posiłku. Kluczowe wnioski Sama obecność zakwasu nie określa indeksu ani ładunku glikemicznego konkretnego bochenka. W przeglądzie 18 prób efekt dotyczył glikemii poposiłkowej, a nie trwałej poprawy cukrzycy. Pieczywo pełnoziarniste na zakwasie zwykle daje rozsądniejszy wybór niż jasny bochenek o tej samej nazwie. Przy cukrzycy praktyczną odpowiedź daje porównywalna porcja i pomiar według zaleceń zespołu leczącego. Czy chleb na zakwasie ma zawsze niski indeks glik",
+      "alt": "Kobieta po 50-tce mierzy glukozę po posiłku z chlebem na zakwasie i zapisuje wynik",
+      "caption": "Własny, powtarzalny pomiar pokazuje indywidualną odpowiedź na konkretny posiłek, a nie samą wartość z tabeli IG.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/chleb-zakwas-wlasny-pomiar-glikemii-20260930.avif",
+          "sha256": "18bcf461195426f0cc8edc8116a02177542683b2613f43dbf311d3efa5bafcf6",
+          "bytes": 92902,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/chleb-zakwas-wlasny-pomiar-glikemii-20260930.webp",
+          "sha256": "b4192e8ed823995bf4651ff85521e27fc5c2d2092055ffaff8be97618c35e04c",
+          "bytes": 109558,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/chleb-zakwas-wlasny-pomiar-glikemii-20260930.jpg",
+          "sha256": "75d05531186111853af09a41d0edd7df01579115cbb103ec57557ac1964f3f60",
+          "bytes": 252958,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "a77ca29a0aeb951a46335ed16e9a44e373f2f5baf9e6540254670e43245f8de6"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/chleb-na-zakwasie-weglowodany-indeks-glikemiczny/pdf-pages/page-1.png",
+        "sha256": "634438f3583bbb1eb914291c07c8c069f0b3afa6018a00724d9156cf20577229",
+        "bytes": 743073,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1050,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/chleb-na-zakwasie-weglowodany-indeks-glikemiczny/pdf-pages/page-2.png",
+        "sha256": "b6df467f331cb10d53f728e507a184e56e3149a5febaba2bc8b07bd459d16a4a",
+        "bytes": 855574,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1063,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/chleb-na-zakwasie-weglowodany-indeks-glikemiczny/pdf-pages/page-3.png",
+        "sha256": "ac7fe3f726e1a6ac181fb449ea72eaa6acc327b3d61f58045ba0e2956bf67f9b",
+        "bytes": 1025100,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/chleb-na-zakwasie-weglowodany-indeks-glikemiczny/pdf-pages/page-4.png",
+        "sha256": "99b4ea7bc665641f6090a51b8eb8db74bce214116cd09c27be711302ae2873a6",
+        "bytes": 171715,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1062,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — kontrola wizualna FitPo50",
+    "reviewed_at": "2026-10-03T08:16:44.943Z",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "81aa8a6f8067d7289827d0535686e3788a5351a20509cc6163f60aa61b1b8c22",
+        "note": "Pełny render desktop obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "46a2c98b88ea146d54f4cdbcf08167187ad8e70503490cf57f138196f8251f56",
+        "note": "Pełny render mobile obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "e86efb3ad9b14e8a8b0b1cc4e804e06f985e866b8ecfee17533679d2ae97f900",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:2:czy-chleb-na-zakwasie-ma-zawsze-niski-indeks-gli",
+        "inventory_sha256": "7108ad69748b3829c4e3e2935a57b6c79292f424f83fa68e9958df0a657263ae",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Zakwas żytni, aktywny, karmienie jutro",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:3:co-naprawde-pokazaly-badania-glikemii-po-zakwasi",
+        "inventory_sha256": "3830932c136217341056c2a939368cc4c77e15a6c09ab59132c6da946a89bf49",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Wskaźnik glikemiczny popularnego pieczywa: chleb zakwasowy 54, pełnoziarnisty 68, biały 71",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pubmed.ncbi.nlm.nih.gov/35943419/"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:4:jak-wybrac-pieczywo-gdy-zalezy-ci-na-glikemii",
+        "inventory_sha256": "69b3672c1ec6a564c5f2ab071004fa01a2ce5fb9229fec23daa4df70902c170a",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Dzień dobry, smacznego",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:5:kiedy-wlasny-pomiar-jest-wazniejszy-niz-tabela-i",
+        "inventory_sha256": "a77ca29a0aeb951a46335ed16e9a44e373f2f5baf9e6540254670e43245f8de6",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "634438f3583bbb1eb914291c07c8c069f0b3afa6018a00724d9156cf20577229",
+        "note": "Strona PDF 1 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "b6df467f331cb10d53f728e507a184e56e3149a5febaba2bc8b07bd459d16a4a",
+        "note": "Strona PDF 2 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "ac7fe3f726e1a6ac181fb449ea72eaa6acc327b3d61f58045ba0e2956bf67f9b",
+        "note": "Strona PDF 3 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "99b4ea7bc665641f6090a51b8eb8db74bce214116cd09c27be711302ae2873a6",
+        "note": "Strona PDF 4 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4496,
+    "review_wait_ms": 3287749
   },
   "errors": []
 }

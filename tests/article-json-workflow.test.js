@@ -14,6 +14,7 @@ const {
 } = require('../scripts/lib/article-json-artifact');
 const { allocateOutput, buildStageDefinitions, collectChanges, copyMediaPackage, runStagesUntilFailure } = require('../scripts/article-json-workbench');
 const { executeArticleAdd, expectedPreparedPath, packageHashesMatch, preparedPathFromOutput } = require('../scripts/article-add');
+const { buildAboutEntities, normalizeEntities } = require('../scripts/import-article');
 
 const REPO = path.resolve(__dirname, '..');
 
@@ -28,6 +29,32 @@ function withTempDir(fn) {
 
 test('status lifecycle uses only DRAFT, CONTENT_READY and BLOCKED', () => {
   assert.deepEqual(Object.values(STATUSES), ['DRAFT', 'CONTENT_READY', 'BLOCKED']);
+});
+
+test('entity sameAs accepts only the verified exact pair and preserves name-only Thing', () => {
+  assert.deepEqual(normalizeEntities(['Diabetes']), [{ '@type': 'Thing', name: 'Diabetes' }]);
+  assert.deepEqual(normalizeEntities([{ name: 'Cholesterol', sameAs: 'https://www.wikidata.org/wiki/Q43656' }]), [
+    { '@type': 'Thing', name: 'Cholesterol', sameAs: 'https://www.wikidata.org/wiki/Q43656' },
+  ]);
+  assert.throws(
+    () => normalizeEntities([{ name: 'Low-density lipoprotein', sameAs: 'https://www.wikidata.org/wiki/Q159472' }]),
+    /ENTITY_SAME_AS_BLOCKED/,
+  );
+  assert.throws(
+    () => normalizeEntities([{ name: 'Cholesterol', sameAs: 'https://www.wikidata.org/wiki/Q159472' }]),
+    /ENTITY_SAME_AS_BLOCKED/,
+  );
+});
+
+test('generator never infers ApoB or sameAs from title, takeaways and source URLs', () => {
+  const about = buildAboutEntities({
+    data: {},
+    title: 'Ile białka po 50 roku życia — zapotrzebowanie i odżywki',
+    category: { label: 'Jedzenie' },
+    keyTakeaways: ['Białko wspiera utrzymanie mięśni.'],
+    sources: [{ label: 'ApoB w adresie nie jest tematem', url: 'https://example.org/apob' }],
+  });
+  assert.deepEqual(about, []);
 });
 
 test('workbench stops dependent stages after the first failure', () => {

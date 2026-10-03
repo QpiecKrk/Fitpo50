@@ -1,35 +1,418 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T19:07:59.391Z",
+  "generated_at": "2026-10-03T07:22:28.616Z",
+  "reviewed_at": "2026-10-03T08:16:44.943Z",
   "slug": "trening-3x30-dla-50-plus",
-  "html_sha256": "22c3f3dbc7455727a78f859dc574d40468ade5564346c3f2a0e518b9c2e5329a",
-  "site_html_sha256": "22c3f3dbc7455727a78f859dc574d40468ade5564346c3f2a0e518b9c2e5329a",
-  "pdf_sha256": "34b9c60fa093900a7b4a8534d69154573f4f2af7d01505def691202d463c3f3b",
-  "site_pdf_sha256": "34b9c60fa093900a7b4a8534d69154573f4f2af7d01505def691202d463c3f3b",
+  "html_sha256": "f619e31c9154100a312666de9c9c64495c7acf55f6076c31dab93336f2f360ad",
+  "site_html_sha256": "f619e31c9154100a312666de9c9c64495c7acf55f6076c31dab93336f2f360ad",
+  "pdf_sha256": "48d45b535a0dd805f0c70cf3400fc0116438f958d15b4cdedbabf8d80731f111",
+  "site_pdf_sha256": "48d45b535a0dd805f0c70cf3400fc0116438f958d15b4cdedbabf8d80731f111",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T07:22:28.616Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "trening-3x30-dla-50-plus.html",
+      "sha256": "f619e31c9154100a312666de9c9c64495c7acf55f6076c31dab93336f2f360ad",
+      "bytes": 30029
+    },
+    "html_site": {
+      "file": "_site/trening-3x30-dla-50-plus.html",
+      "sha256": "f619e31c9154100a312666de9c9c64495c7acf55f6076c31dab93336f2f360ad",
+      "bytes": 30029
+    },
+    "pdf_source": {
+      "file": "assets/pdf/trening-3x30-dla-50-plus.pdf",
+      "sha256": "48d45b535a0dd805f0c70cf3400fc0116438f958d15b4cdedbabf8d80731f111",
+      "bytes": 490155
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/trening-3x30-dla-50-plus.pdf",
+      "sha256": "48d45b535a0dd805f0c70cf3400fc0116438f958d15b4cdedbabf8d80731f111",
+      "bytes": 490155
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/trening-3x30-dla-50-plus/desktop.png",
+      "screenshot_sha256": "45faa160ffd5e82249b24e537335922c672af28773eaf5aafb5397636af2d359",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/trening-3x30-dla-50-plus/mobile.png",
+      "screenshot_sha256": "1cbfb2d378af165dba7b5d26b2cfd7f2fd668624ddba0c0488bb62b1f63c3d7b",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "RUCH 12 min czytania Trening 3x30 po 50-tce: trzy sesje siły, równowagi i sprawności Trzy razy po 30 minut. Plan, który da się utrzymać w normalnym życiu po 50-tce.",
+      "alt": "Plan 3x30 dla osób po 50-tce",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-lead-lifestyle-20260929.avif",
+          "sha256": "62b205ae6290913780c8199c4ff5e89f83649531ee46864851e1b21ca694f6fc",
+          "bytes": 371734,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-3x30-lead-lifestyle-20260929.webp",
+          "sha256": "4f6ccd854d56b59ed4a420b54899f27d467be7f9618b33846b22c063a52ab432",
+          "bytes": 528980,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-lead-lifestyle-20260929.jpg",
+          "sha256": "b6ea7c7bd2c2ed85cb032e3d923bdeed485ac65245b2c56556a6af1ee11c6906",
+          "bytes": 826689,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "a347c58c49cb33d4071ca7d9c75fd7ad7f7916842525d042d1fd7c17abb6945b"
+    },
+    {
+      "placement": "content:2:jak-rozlozyc-trzy-treningi-po-30-minut",
+      "role": "content",
+      "heading": "Jak rozłożyć trzy treningi po 30 minut?",
+      "context": "Szybka odpowiedź Plan 3x30 to trzy sesje po około 30 minut: dwa treningi całego ciała i jeden trening marszu, równowagi oraz mobilności. To praktyczny punkt startu, nie oficjalna norma. Zacznij z zapasem 2-3 powtórzeń, a przez pierwsze 4 tygodnie zwiększaj tylko jeden parametr: powtórzenia, czas albo najmniejszy dostępny ciężar. Kluczowe wnioski WHO zaleca wzmacnianie głównych grup mięśni co najmniej dwa dni w tygodniu oraz ruch aerobowy i równowagę. Plan 3x30 nie wyczerpuje całej tygodniowej dawki ruchu, lecz porządkuje trzy konkretne wejścia. Pierwsze dwie sesje obejmują wzorce przysiadu, pchania, przyciągania, zawiasu biodrowego i noszenia. Progresja dotyczy jednego parametru naraz i ustaje, jeśli technika lub objawy się pogarszają. Jak rozłożyć trzy treningi po 30 minut? W poniedziałek",
+      "alt": "Dorośli po 50-tce wykonują trening siłowy, marsz i ćwiczenie równowagi pod nadzorem trenerki",
+      "caption": "W poniedziałek wykonaj sesję siłową A, w środę marsz z blokiem równowagi, a w piątek sesję siłową B.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-week-20260930.avif",
+          "sha256": "36f3502f62a06020fc8d3517785eb00331043cf9252d91e20f9c39909b72a070",
+          "bytes": 91533,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-3x30-week-20260930.webp",
+          "sha256": "d18df072a3a4589d07fcc456fe90b6bb9cda7b59653a99589979eb3dbebf4e5a",
+          "bytes": 151876,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-week-20260930.jpg",
+          "sha256": "c2190399f2d5cf4e59f7020f9e73a8338c2e60d490b7dbfff561454897bb7932",
+          "bytes": 293900,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "647913a8ce26ea576bb99ea261fee17b5dc3826b5ac4a9238bdb54a40672b5dd"
+    },
+    {
+      "placement": "content:3:co-wykonac-podczas-sesji-silowej-a-i-b",
+      "role": "content",
+      "heading": "Co wykonać podczas sesji siłowej A i B?",
+      "context": "Szybka odpowiedź Plan 3x30 to trzy sesje po około 30 minut: dwa treningi całego ciała i jeden trening marszu, równowagi oraz mobilności. To praktyczny punkt startu, nie oficjalna norma. Zacznij z zapasem 2-3 powtórzeń, a przez pierwsze 4 tygodnie zwiększaj tylko jeden parametr: powtórzenia, czas albo najmniejszy dostępny ciężar. Kluczowe wnioski WHO zaleca wzmacnianie głównych grup mięśni co najmniej dwa dni w tygodniu oraz ruch aerobowy i równowagę. Plan 3x30 nie wyczerpuje całej tygodniowej dawki ruchu, lecz porządkuje trzy konkretne wejścia. Pierwsze dwie sesje obejmują wzorce przysiadu, pchania, przyciągania, zawiasu biodrowego i noszenia. Progresja dotyczy jednego parametru naraz i ustaje, jeśli technika lub objawy się pogarszają. Jak rozłożyć trzy treningi po 30 minut? W poniedziałek",
+      "alt": "Przysiad do krzesła jako ćwiczenie siłowe w domu",
+      "caption": "W sesji A wybierz siad do krzesła lub wypychanie nogami, przyciąganie oraz wyciskanie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-dla-50-plus-section-2-20260929.avif",
+          "sha256": "7a00cf55bbd6148c941415680b95aa9362f26aeeac79839e0908ddebf8c84682",
+          "bytes": 319651,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-3x30-dla-50-plus-section-2-20260929.webp",
+          "sha256": "f9a144036a5472093161327c3d407071ff00fbfe02fc7617e180f15d56ef1988",
+          "bytes": 327282,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-dla-50-plus-section-2-20260929.jpg",
+          "sha256": "912fab7bf59418c32902e957b6c71c9af0c743d38da9f39e6c44a3132dbdc205",
+          "bytes": 672176,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e8725e1c3e6d3c3f0ed5ae8399eabe33d50921e5b39d87fc9791c1c1aa4babfe"
+    },
+    {
+      "placement": "content:4:jak-zaplanowac-marsz-rownowage-i-mobilnosc",
+      "role": "content",
+      "heading": "Jak zaplanować marsz, równowagę i mobilność?",
+      "context": "Szybka odpowiedź Plan 3x30 to trzy sesje po około 30 minut: dwa treningi całego ciała i jeden trening marszu, równowagi oraz mobilności. To praktyczny punkt startu, nie oficjalna norma. Zacznij z zapasem 2-3 powtórzeń, a przez pierwsze 4 tygodnie zwiększaj tylko jeden parametr: powtórzenia, czas albo najmniejszy dostępny ciężar. Kluczowe wnioski WHO zaleca wzmacnianie głównych grup mięśni co najmniej dwa dni w tygodniu oraz ruch aerobowy i równowagę. Plan 3x30 nie wyczerpuje całej tygodniowej dawki ruchu, lecz porządkuje trzy konkretne wejścia. Pierwsze dwie sesje obejmują wzorce przysiadu, pchania, przyciągania, zawiasu biodrowego i noszenia. Progresja dotyczy jednego parametru naraz i ustaje, jeśli technika lub objawy się pogarszają. Jak rozłożyć trzy treningi po 30 minut? W poniedziałek",
+      "alt": "Dorośli po 50-tce łączą marsz z prostymi ćwiczeniami równowagi przy stabilnej poręczy",
+      "caption": "Po 5 minutach spokojnego marszu przejdź do 10-15 minut tempa, przy którym możesz mówić zdaniami.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-balance-20260930.avif",
+          "sha256": "43bddf6e22ce53f623595de57993da4b87397f4aed133b6be752748bb827bfba",
+          "bytes": 63019,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-3x30-balance-20260930.webp",
+          "sha256": "f9c896ffeabda689790afa95a961427ea196fb078eb1068cebcb5272ac117c8e",
+          "bytes": 111032,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-balance-20260930.jpg",
+          "sha256": "00f96f1102686f0a9f988c891bf6c16934d1a74a00576939752623964ae96a19",
+          "bytes": 234955,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6b0b19cfe58185aca3008d003d007aece5182138c1f775f0dde92d54678b79c7"
+    },
+    {
+      "placement": "content:5:jak-progresowac-plan-przez-pierwsze-4-tygodnie",
+      "role": "content",
+      "heading": "Jak progresować plan przez pierwsze 4 tygodnie?",
+      "context": "Szybka odpowiedź Plan 3x30 to trzy sesje po około 30 minut: dwa treningi całego ciała i jeden trening marszu, równowagi oraz mobilności. To praktyczny punkt startu, nie oficjalna norma. Zacznij z zapasem 2-3 powtórzeń, a przez pierwsze 4 tygodnie zwiększaj tylko jeden parametr: powtórzenia, czas albo najmniejszy dostępny ciężar. Kluczowe wnioski WHO zaleca wzmacnianie głównych grup mięśni co najmniej dwa dni w tygodniu oraz ruch aerobowy i równowagę. Plan 3x30 nie wyczerpuje całej tygodniowej dawki ruchu, lecz porządkuje trzy konkretne wejścia. Pierwsze dwie sesje obejmują wzorce przysiadu, pchania, przyciągania, zawiasu biodrowego i noszenia. Progresja dotyczy jednego parametru naraz i ustaje, jeśli technika lub objawy się pogarszają. Jak rozłożyć trzy treningi po 30 minut? W poniedziałek",
+      "alt": "Mężczyzna po 60-tce i trenerka oceniają mały krok progresji obciążenia podczas ćwiczeń",
+      "caption": "W pierwszym tygodniu poznaj ustawienia i zanotuj obciążenia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-3x30-progress-20260930.avif",
+          "sha256": "a73c887902a13e530ac25eb3acd7007ab49658cd7184ff53e63bcff5d50df8bf",
+          "bytes": 64832,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-3x30-progress-20260930.webp",
+          "sha256": "ee0a1e0aa9f81dadbad8ff1566d4c728065a0ff1efb72b39e5e9fd5d4d083702",
+          "bytes": 112982,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-3x30-progress-20260930.jpg",
+          "sha256": "fe1ec101bc50dd8db344f4bcd0b60ad572984fbf53c52cf7e893b432a7383c4b",
+          "bytes": 237166,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "eb18a7cee88949b4cf305e354548c38d4c8be20c80603e8c520264ef7dfa8650"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/trening-3x30-dla-50-plus/pdf-pages/page-1.png",
+        "sha256": "5c2142cdb09120ee6b982a15f36e95a60a000ee4863e22ef13089f45f86014ce",
+        "bytes": 712378,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1047,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/trening-3x30-dla-50-plus/pdf-pages/page-2.png",
+        "sha256": "9660e1d92e22199363ed66a3040c73290b2954fe7eeae557fa3f8fee66f91563",
+        "bytes": 898866,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1048,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/trening-3x30-dla-50-plus/pdf-pages/page-3.png",
+        "sha256": "9835f8c89abc6c131fb0063112eace08b83c60fe7932368cf7896622c89af645",
+        "bytes": 834242,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/trening-3x30-dla-50-plus/pdf-pages/page-4.png",
+        "sha256": "00316f5c801b3b0439cd686ef9a28858dcfa27fb7d60327d41bb71b3ee6534be",
+        "bytes": 185671,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1041,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — kontrola wizualna FitPo50",
+    "reviewed_at": "2026-10-03T08:16:44.943Z",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "45faa160ffd5e82249b24e537335922c672af28773eaf5aafb5397636af2d359",
+        "note": "Pełny render desktop obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "1cbfb2d378af165dba7b5d26b2cfd7f2fd668624ddba0c0488bb62b1f63c3d7b",
+        "note": "Pełny render mobile obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "a347c58c49cb33d4071ca7d9c75fd7ad7f7916842525d042d1fd7c17abb6945b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:2:jak-rozlozyc-trzy-treningi-po-30-minut",
+        "inventory_sha256": "647913a8ce26ea576bb99ea261fee17b5dc3826b5ac4a9238bdb54a40672b5dd",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:3:co-wykonac-podczas-sesji-silowej-a-i-b",
+        "inventory_sha256": "e8725e1c3e6d3c3f0ed5ae8399eabe33d50921e5b39d87fc9791c1c1aa4babfe",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:4:jak-zaplanowac-marsz-rownowage-i-mobilnosc",
+        "inventory_sha256": "6b0b19cfe58185aca3008d003d007aece5182138c1f775f0dde92d54678b79c7",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:5:jak-progresowac-plan-przez-pierwsze-4-tygodnie",
+        "inventory_sha256": "eb18a7cee88949b4cf305e354548c38d4c8be20c80603e8c520264ef7dfa8650",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "5c2142cdb09120ee6b982a15f36e95a60a000ee4863e22ef13089f45f86014ce",
+        "note": "Strona PDF 1 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "9660e1d92e22199363ed66a3040c73290b2954fe7eeae557fa3f8fee66f91563",
+        "note": "Strona PDF 2 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "9835f8c89abc6c131fb0063112eace08b83c60fe7932368cf7896622c89af645",
+        "note": "Strona PDF 3 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "00316f5c801b3b0439cd686ef9a28858dcfa27fb7d60327d41bb71b3ee6534be",
+        "note": "Strona PDF 4 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4581,
+    "review_wait_ms": 3256327
   },
   "errors": []
 }

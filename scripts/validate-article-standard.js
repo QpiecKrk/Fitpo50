@@ -7,6 +7,7 @@ const path = require('path');
 const { validateArticleHeadContract, firstTagAttribute } = require('./lib/article-head-contract');
 const { utils, validators, POLICY } = require('./lib/article-policy');
 const { validateSemanticTableMarkup } = require('./article-preview-gate');
+const { validateAboutEntities } = require('./lib/entity-sameas-policy');
 
 function getHtmlFiles() {
   return fs.readdirSync(process.cwd())
@@ -405,6 +406,14 @@ function validateBlogPostingAuthorIsPerson(raw, errors) {
   errors.push('Brak schema BlogPosting do walidacji autora.');
 }
 
+function validateBlogPostingAboutSameAs(raw, errors) {
+  const blogPosting = extractBlogPostingNode(raw);
+  if (!blogPosting) return;
+  for (const error of validateAboutEntities(blogPosting.about)) {
+    errors.push(`BlogPosting.about.sameAs: ${error}`);
+  }
+}
+
 
 function validateHeadSeoConsistency(raw, errors) {
   const res = validateArticleHeadContract(raw);
@@ -659,6 +668,7 @@ function validateFile(filePath) {
   validateCitationsInBlogPosting(raw, errors);
   validateSpeakableTargetsQuickAnswer(raw, errors);
   validateBlogPostingAuthorIsPerson(raw, errors);
+  validateBlogPostingAboutSameAs(raw, errors);
 
   return { errors, warnings };
 }

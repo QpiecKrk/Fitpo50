@@ -33,6 +33,17 @@ test('kanoniczny DOM inventory obejmuje hero, quick answer, picture poza figure,
   assert.equal(result.expectedImages, 5);
 });
 
+test('tekst do kontroli PDF pomija interfejs udostępniania i moduły czytelni', async () => {
+  const result = await inventory(`<main><article class="article-content">
+    <h2>Treść artykułu?</h2><p>To zdanie musi znaleźć się w kontroli PDF.</p>
+    <section class="share-article-section"><p>Udostępnij przez Facebook albo WhatsApp.</p></section>
+    <section class="reading-room porady-preview"><p>Popularne mity i polecane artykuły.</p></section>
+  </article></main>`);
+  assert.match(result.text, /To zdanie musi znaleźć się w kontroli PDF/);
+  assert.match(result.text, /Treść artykułu\? To zdanie/);
+  assert.doesNotMatch(result.text, /Udostępnij|Facebook|WhatsApp|Popularne mity|polecane artykuły/);
+});
+
 test('DOM inventory zachowuje jawnie powtórzony placement i ten sam obraz do blokady kontraktu', async () => {
   const result = await inventory(`<main><article class="article-content"><h2>Sekcja?</h2>
     ${picture('same', 'duplikat')}${picture('same', 'duplikat')}</article></main>`);

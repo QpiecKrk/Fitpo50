@@ -125,7 +125,17 @@ function collectDomInventory(isCenter) {
   const quickAnswer = document.querySelector('#quick-answer');
   const externalQuickAnswer = quickAnswer && !quickAnswer.closest('article.article-content') ? quickAnswer : null;
   const textRoots = isCenter ? [root] : [externalQuickAnswer, root];
-  const text = textRoots.filter(Boolean).map((item) => normalize(item.innerText)).join(' ');
+  const text = textRoots.filter(Boolean).map((item) => {
+    const parts = [];
+    const walker = document.createTreeWalker(item, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const textNode = walker.currentNode;
+      if (!textNode.parentElement?.closest('.share-article-section, .reading-room, .porady-preview')) {
+        parts.push(textNode.nodeValue || '');
+      }
+    }
+    return normalize(parts.join(' '));
+  }).join(' ');
   return {
     tables: tables.length,
     tableErrors,

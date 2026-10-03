@@ -1,35 +1,569 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:53:43.923Z",
+  "generated_at": "2026-10-03T07:22:12.222Z",
+  "reviewed_at": "2026-10-03T08:16:44.943Z",
   "slug": "czy-jajka-podnosza-cholesterol",
-  "html_sha256": "19def6a76a9920d243913fe8fdf6295a2edbede5f54072376e097d02e5d3368e",
-  "site_html_sha256": "19def6a76a9920d243913fe8fdf6295a2edbede5f54072376e097d02e5d3368e",
-  "pdf_sha256": "02f78ce88b1f4ba6b3f9c2334d9cf158a5828a9b8294fb318f8b18f59b5c4b5d",
-  "site_pdf_sha256": "02f78ce88b1f4ba6b3f9c2334d9cf158a5828a9b8294fb318f8b18f59b5c4b5d",
+  "html_sha256": "8917877628a42f453dd1bb2aeb00f4167234b9afc7e5458b610885b9c6ab7f60",
+  "site_html_sha256": "8917877628a42f453dd1bb2aeb00f4167234b9afc7e5458b610885b9c6ab7f60",
+  "pdf_sha256": "a97ab6f07b57aca78aaebf660cedd1dee21a5b48224f70beff0c0ff29d4ed815",
+  "site_pdf_sha256": "a97ab6f07b57aca78aaebf660cedd1dee21a5b48224f70beff0c0ff29d4ed815",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T07:22:12.222Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "czy-jajka-podnosza-cholesterol.html",
+      "sha256": "8917877628a42f453dd1bb2aeb00f4167234b9afc7e5458b610885b9c6ab7f60",
+      "bytes": 39345
+    },
+    "html_site": {
+      "file": "_site/czy-jajka-podnosza-cholesterol.html",
+      "sha256": "8917877628a42f453dd1bb2aeb00f4167234b9afc7e5458b610885b9c6ab7f60",
+      "bytes": 39345
+    },
+    "pdf_source": {
+      "file": "assets/pdf/czy-jajka-podnosza-cholesterol.pdf",
+      "sha256": "a97ab6f07b57aca78aaebf660cedd1dee21a5b48224f70beff0c0ff29d4ed815",
+      "bytes": 559849
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/czy-jajka-podnosza-cholesterol.pdf",
+      "sha256": "a97ab6f07b57aca78aaebf660cedd1dee21a5b48224f70beff0c0ff29d4ed815",
+      "bytes": 559849
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/czy-jajka-podnosza-cholesterol/desktop.png",
+      "screenshot_sha256": "ad6a0a289e5c439c140555a256ef632b9cb611142080fb1ed946703c664bc933",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/czy-jajka-podnosza-cholesterol/mobile.png",
+      "screenshot_sha256": "909897c5914bed011a0ce24aa394c3c98cb251cebae69a8ed9de00baeaeb2b42",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "MITY 8 min czytania Aktualizacja: 03.10.2026 Czy jajka naprawdę podnoszą cholesterol? Sprawdzamy badania MIT: każde jajko podnosi cholesterol tak samo jak masło. WERDYKT FITPO50: to fałszywe uproszczenie — jajka mogą podnosić LDL, ale wpływ jest zmienny, a tłuszcze nasycone z masła działają innym mechanizmem.",
+      "alt": "Uśmiechnięty mężczyzna po 50. roku życia je jajko na śniadanie w jasnej kuchni",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-hero-v2.avif",
+          "sha256": "f9ac1b2932cb523903a473e48333176de89b03439ec2868d0689b308bb1dd7d3",
+          "bytes": 51790,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-hero-v2.webp",
+          "sha256": "d7e1426f9210c91967cbc015a4bac9a282f67f4ecbf0964a987a88ede6888cbc",
+          "bytes": 75380,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-hero-v2.jpg",
+          "sha256": "0be4210ec7c1da8d3091a7a7817be260bfa10f7a0b38bbc9bcbd99b12fb89090",
+          "bytes": 139500,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "cfc30fac00cbb6346e9d63c3ae7ffaba51bcf41a0acd8cd3f3bf168e15fba2e9"
+    },
+    {
+      "placement": "content:2:czy-jajka-podnosza-cholesterol-ldl",
+      "role": "content",
+      "heading": "Czy jajka podnoszą cholesterol LDL?",
+      "context": "Jajko zawiera cholesterol pokarmowy, ale nie trafia on z talerza prosto do tętnicy. Wątroba reguluje własną syntezę cholesterolu, jednak ta kompensacja nie jest jednakowa u wszystkich. Badania randomizowane pokazują średnio niewielki wzrost LDL przy większym spożyciu jaj, dlatego uczciwy werdykt nie brzmi ani „jajka zatykają naczynia”, ani „jajka są obojętne dla każdego”. Szybka odpowiedź Jajka mogą nieznacznie podnosić LDL, a reakcja różni się między osobami i zależy od dawki oraz całej diety. Meta-analiza 17 badań randomizowanych wykazała średni wzrost LDL o 8,14 mg/dl przy większym spożyciu jaj. Jeśli masz prawidłowy lipidogram, jedno jajko dziennie może mieścić się w zdrowym jadłospisie; przy wysokim LDL decyzję oprzyj na wyniku i zaleceniu lekarza. Kluczowe wnioski W meta-analizie 17 ",
+      "alt": "Ilustracja wątroby regulującej własną produkcję cholesterolu po posiłku",
+      "caption": "Wątroba reguluje syntezę cholesterolu, ale ta kompensacja nie gwarantuje niezmiennego LDL.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-fabryka.avif",
+          "sha256": "a27de81e0e5b7b9e53901e0d98add7d90d5c786f9b7f63510487e485ddec711c",
+          "bytes": 35080,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-fabryka.webp",
+          "sha256": "1011df378f9be01ab6f6ec4813d013e8571910966a3d9c1582217983a388c18f",
+          "bytes": 54656,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-fabryka.jpg",
+          "sha256": "7ec72cab1c8124e0b6c3cb44fa51cef5e29b9ec799bfb44a9765483ee1b57b49",
+          "bytes": 105267,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "94730bde8057422de35b499e969c72c2b8b0a729ad10e21bf4d31a8340b62fb6"
+    },
+    {
+      "placement": "content:3:dlaczego-reakcja-ldl-rozni-sie-miedzy-osobami",
+      "role": "content",
+      "heading": "Dlaczego reakcja LDL różni się między osobami?",
+      "context": "Jajko zawiera cholesterol pokarmowy, ale nie trafia on z talerza prosto do tętnicy. Wątroba reguluje własną syntezę cholesterolu, jednak ta kompensacja nie jest jednakowa u wszystkich. Badania randomizowane pokazują średnio niewielki wzrost LDL przy większym spożyciu jaj, dlatego uczciwy werdykt nie brzmi ani „jajka zatykają naczynia”, ani „jajka są obojętne dla każdego”. Szybka odpowiedź Jajka mogą nieznacznie podnosić LDL, a reakcja różni się między osobami i zależy od dawki oraz całej diety. Meta-analiza 17 badań randomizowanych wykazała średni wzrost LDL o 8,14 mg/dl przy większym spożyciu jaj. Jeśli masz prawidłowy lipidogram, jedno jajko dziennie może mieścić się w zdrowym jadłospisie; przy wysokim LDL decyzję oprzyj na wyniku i zaleceniu lekarza. Kluczowe wnioski W meta-analizie 17 ",
+      "alt": "Ilustracja kobiety i mężczyzny po 50. roku życia z różnymi reakcjami organizmu na ten sam produkt",
+      "caption": "Średnia zmiana LDL w badaniu nie przewiduje dokładnej reakcji pojedynczej osoby.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-reakcja-indywidualna.avif",
+          "sha256": "1250a3a8000b3cb96377e7cd936f115f428265da5d1203e6dbd754b511587900",
+          "bytes": 92505,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-reakcja-indywidualna.webp",
+          "sha256": "8c79b36f96dd567cae8e0b57345e331fc44a14e504b6374830af17bcfd1dd43e",
+          "bytes": 123162,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-reakcja-indywidualna.jpg",
+          "sha256": "fd1211099500a048cb04597ce43491261b885cc7f4e0f27b1e72f8b7e1091443",
+          "bytes": 242164,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "bbd4ce70e4991b8a24dd9653e2617d49e074dd7fece93be5710ae24444dcbe78"
+    },
+    {
+      "placement": "content:4:dlaczego-jajko-i-maslo-wplywaja-na-ldl-inaczej",
+      "role": "content",
+      "heading": "Dlaczego jajko i masło wpływają na LDL inaczej?",
+      "context": "Jajko zawiera cholesterol pokarmowy, ale nie trafia on z talerza prosto do tętnicy. Wątroba reguluje własną syntezę cholesterolu, jednak ta kompensacja nie jest jednakowa u wszystkich. Badania randomizowane pokazują średnio niewielki wzrost LDL przy większym spożyciu jaj, dlatego uczciwy werdykt nie brzmi ani „jajka zatykają naczynia”, ani „jajka są obojętne dla każdego”. Szybka odpowiedź Jajka mogą nieznacznie podnosić LDL, a reakcja różni się między osobami i zależy od dawki oraz całej diety. Meta-analiza 17 badań randomizowanych wykazała średni wzrost LDL o 8,14 mg/dl przy większym spożyciu jaj. Jeśli masz prawidłowy lipidogram, jedno jajko dziennie może mieścić się w zdrowym jadłospisie; przy wysokim LDL decyzję oprzyj na wyniku i zaleceniu lekarza. Kluczowe wnioski W meta-analizie 17 ",
+      "alt": "Infografika porównująca cholesterol pokarmowy w jajku z tłuszczami nasyconymi w maśle",
+      "caption": "Jajko i masło mogą wpływać na LDL, lecz robią to przez inne składniki i z inną przewidywalnością.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-jajko-vs-maslo-v2.avif",
+          "sha256": "d94a804dc7dbf6d19d216b494e15288eb059ba56caf673ec5622c0da6c8db014",
+          "bytes": 54092,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-jajko-vs-maslo-v2.webp",
+          "sha256": "30f2a832644ad1e8954ca3d478707d301e69dd508130031303f8a9e7db6220f6",
+          "bytes": 80906,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-jajko-vs-maslo-v2.jpg",
+          "sha256": "d4cc75eb1e343aff7b053d6faaab7a729e5b49311618439b1b095655335c3701",
+          "bytes": 195775,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f893d5654aa37bd6099458bfca81e41c129915574b47b0b381aa459f502a25cd"
+    },
+    {
+      "placement": "content:5:ile-jajek-dziennie-mozna-jesc-po-50-tce",
+      "role": "content",
+      "heading": "Ile jajek dziennie można jeść po 50-tce?",
+      "context": "Jajko zawiera cholesterol pokarmowy, ale nie trafia on z talerza prosto do tętnicy. Wątroba reguluje własną syntezę cholesterolu, jednak ta kompensacja nie jest jednakowa u wszystkich. Badania randomizowane pokazują średnio niewielki wzrost LDL przy większym spożyciu jaj, dlatego uczciwy werdykt nie brzmi ani „jajka zatykają naczynia”, ani „jajka są obojętne dla każdego”. Szybka odpowiedź Jajka mogą nieznacznie podnosić LDL, a reakcja różni się między osobami i zależy od dawki oraz całej diety. Meta-analiza 17 badań randomizowanych wykazała średni wzrost LDL o 8,14 mg/dl przy większym spożyciu jaj. Jeśli masz prawidłowy lipidogram, jedno jajko dziennie może mieścić się w zdrowym jadłospisie; przy wysokim LDL decyzję oprzyj na wyniku i zaleceniu lekarza. Kluczowe wnioski W meta-analizie 17 ",
+      "alt": "Talerz z rybą, warzywami, pełnym ziarnem i jajkami w diecie śródziemnomorskiej",
+      "caption": "Jajko może być częścią posiłku bogatego w warzywa, pełne ziarna i tłuszcze nienasycone.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-talerz.avif",
+          "sha256": "7c0b5833a8ed7be76807190fe06d8b35f3534ac8028c48102f1e4d1e274380bc",
+          "bytes": 71370,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-talerz.webp",
+          "sha256": "eabea79ee28651025a9470aae14cfffe54b690798920591f75cf3c1429489038",
+          "bytes": 113440,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-talerz.jpg",
+          "sha256": "be2bc8d6971daece69f280b0a53312ea83a09715dc36948c98a20a0e281aa86b",
+          "bytes": 175154,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "494eb493f00b15c388dce9940f91ea771de19e9f4a587239c4e4d9cec12e9f71"
+    },
+    {
+      "placement": "content:6:czy-sposob-przygotowania-jaj-ma-znaczenie",
+      "role": "content",
+      "heading": "Czy sposób przygotowania jaj ma znaczenie?",
+      "context": "Jajko zawiera cholesterol pokarmowy, ale nie trafia on z talerza prosto do tętnicy. Wątroba reguluje własną syntezę cholesterolu, jednak ta kompensacja nie jest jednakowa u wszystkich. Badania randomizowane pokazują średnio niewielki wzrost LDL przy większym spożyciu jaj, dlatego uczciwy werdykt nie brzmi ani „jajka zatykają naczynia”, ani „jajka są obojętne dla każdego”. Szybka odpowiedź Jajka mogą nieznacznie podnosić LDL, a reakcja różni się między osobami i zależy od dawki oraz całej diety. Meta-analiza 17 badań randomizowanych wykazała średni wzrost LDL o 8,14 mg/dl przy większym spożyciu jaj. Jeśli masz prawidłowy lipidogram, jedno jajko dziennie może mieścić się w zdrowym jadłospisie; przy wysokim LDL decyzję oprzyj na wyniku i zaleceniu lekarza. Kluczowe wnioski W meta-analizie 17 ",
+      "alt": "Para po 50. roku życia przygotowuje jajka, warzywa i pełnoziarniste pieczywo w jasnej kuchni",
+      "caption": "O profilu śniadania decydują także tłuszcz do smażenia, dodatki i częstotliwość ich używania.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-przygotowanie.avif",
+          "sha256": "f8a7161fb4bb2958b69d76723dd327c79796328ca53c2ac579abca306296a743",
+          "bytes": 87786,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-przygotowanie.webp",
+          "sha256": "6688cc9887d7e5e3aeadcd7bcc2742498bd46db8d36f20207983f1d351211a8f",
+          "bytes": 118166,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-przygotowanie.jpg",
+          "sha256": "fc86898c609e32e33b6116fed0bb45588b0d8517c7c9215161b3ac150d0e4dd6",
+          "bytes": 252843,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4310bee25cc2a5d8ca2a83770c925787074b0e8e9096f90e7701807cf214b23a"
+    },
+    {
+      "placement": "content:7:kiedy-jajka-wymagaja-indywidualnej-decyzji",
+      "role": "content",
+      "heading": "Kiedy jajka wymagają indywidualnej decyzji?",
+      "context": "Jajko zawiera cholesterol pokarmowy, ale nie trafia on z talerza prosto do tętnicy. Wątroba reguluje własną syntezę cholesterolu, jednak ta kompensacja nie jest jednakowa u wszystkich. Badania randomizowane pokazują średnio niewielki wzrost LDL przy większym spożyciu jaj, dlatego uczciwy werdykt nie brzmi ani „jajka zatykają naczynia”, ani „jajka są obojętne dla każdego”. Szybka odpowiedź Jajka mogą nieznacznie podnosić LDL, a reakcja różni się między osobami i zależy od dawki oraz całej diety. Meta-analiza 17 badań randomizowanych wykazała średni wzrost LDL o 8,14 mg/dl przy większym spożyciu jaj. Jeśli masz prawidłowy lipidogram, jedno jajko dziennie może mieścić się w zdrowym jadłospisie; przy wysokim LDL decyzję oprzyj na wyniku i zaleceniu lekarza. Kluczowe wnioski W meta-analizie 17 ",
+      "alt": "Mężczyzna po 50. roku życia omawia z lekarką wyniki lipidogramu na tablecie",
+      "caption": "Wysokie LDL, cukrzyca lub choroba serca wymagają indywidualnej decyzji o diecie i leczeniu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-lekarz.avif",
+          "sha256": "7ab1c659c0592bb811352d8e32c0426fea570c32c36e5be7e39c327660cf66f4",
+          "bytes": 47405,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-lekarz.webp",
+          "sha256": "f2e2306288a2d96ac145165a12f299eb677b691d90b44d99622a53b8371352be",
+          "bytes": 67442,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-jajka-podnosza-cholesterol-lekarz.jpg",
+          "sha256": "3c1fe78cc088651ca8170281ea3d66ecf6fb6f41f6c3bf12c557216b5008b342",
+          "bytes": 122791,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6c4ed9db6aeca5a80d150098a6f88aa47f206632343657e44b56d45c9f679bbb"
+    }
+  ],
   "pdf": {
     "pages": 6,
     "text_coverage": 0.9946,
-    "rendered_pages": 6
+    "rendered_pages": 6,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/czy-jajka-podnosza-cholesterol/pdf-pages/page-1.png",
+        "sha256": "15f6941b9416619a47a61a153a11a9dc89ab78d144b209b9cf01c0c5263ef5d0",
+        "bytes": 784458,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 59,
+          "width": 1064,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/czy-jajka-podnosza-cholesterol/pdf-pages/page-2.png",
+        "sha256": "19e9ac1f0450aea3bb2ae06113e1afde390fed28b9dd608041bb3cb4314be490",
+        "bytes": 776803,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1064,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/czy-jajka-podnosza-cholesterol/pdf-pages/page-3.png",
+        "sha256": "c242938d6339e975f8a23c63d357d674226621f4c70c6cb91e84286acf6a5d94",
+        "bytes": 494841,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/czy-jajka-podnosza-cholesterol/pdf-pages/page-4.png",
+        "sha256": "68967f2c41af0bc7b0340f9fe773c0aef6f80164cd01d08155f33938dc2e7e22",
+        "bytes": 980022,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 53,
+          "width": 1050,
+          "height": 1597
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/czy-jajka-podnosza-cholesterol/pdf-pages/page-5.png",
+        "sha256": "de2dcd096a97a49f9112e6dbb4d038a6ba13e92916ee82f2c353f5273e923e84",
+        "bytes": 585977,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1062,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/czy-jajka-podnosza-cholesterol/pdf-pages/page-6.png",
+        "sha256": "7b40738140d8b03332763dee80412387f8dac434bb27cb2182c1de5572e7e5b5",
+        "bytes": 164567,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1047,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — kontrola wizualna FitPo50",
+    "reviewed_at": "2026-10-03T08:16:44.943Z",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "ad6a0a289e5c439c140555a256ef632b9cb611142080fb1ed946703c664bc933",
+        "note": "Pełny render desktop obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "909897c5914bed011a0ce24aa394c3c98cb251cebae69a8ed9de00baeaeb2b42",
+        "note": "Pełny render mobile obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "cfc30fac00cbb6346e9d63c3ae7ffaba51bcf41a0acd8cd3f3bf168e15fba2e9",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Jajko: winny czy nie?",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:2:czy-jajka-podnosza-cholesterol-ldl",
+        "inventory_sha256": "94730bde8057422de35b499e969c72c2b8b0a729ad10e21bf4d31a8340b62fb6",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Wątroba sama reguluje: cholesterol z jedzenia, własna produkcja cholesterolu i regulowany poziom we krwi",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000743"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:3:dlaczego-reakcja-ldl-rozni-sie-miedzy-osobami",
+        "inventory_sha256": "bbd4ce70e4991b8a24dd9653e2617d49e074dd7fece93be5710ae24444dcbe78",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:4:dlaczego-jajko-i-maslo-wplywaja-na-ldl-inaczej",
+        "inventory_sha256": "f893d5654aa37bd6099458bfca81e41c129915574b47b0b381aa459f502a25cd",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Jajko to nie masło: cholesterol pokarmowy a tłuszcze nasycone; praktyczne różnice",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000743"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:5:ile-jajek-dziennie-mozna-jesc-po-50-tce",
+        "inventory_sha256": "494eb493f00b15c388dce9940f91ea771de19e9f4a587239c4e4d9cec12e9f71",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:6:czy-sposob-przygotowania-jaj-ma-znaczenie",
+        "inventory_sha256": "4310bee25cc2a5d8ca2a83770c925787074b0e8e9096f90e7701807cf214b23a",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:7:kiedy-jajka-wymagaja-indywidualnej-decyzji",
+        "inventory_sha256": "6c4ed9db6aeca5a80d150098a6f88aa47f206632343657e44b56d45c9f679bbb",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "15f6941b9416619a47a61a153a11a9dc89ab78d144b209b9cf01c0c5263ef5d0",
+        "note": "Strona PDF 1 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "19e9ac1f0450aea3bb2ae06113e1afde390fed28b9dd608041bb3cb4314be490",
+        "note": "Strona PDF 2 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "c242938d6339e975f8a23c63d357d674226621f4c70c6cb91e84286acf6a5d94",
+        "note": "Strona PDF 3 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "68967f2c41af0bc7b0340f9fe773c0aef6f80164cd01d08155f33938dc2e7e22",
+        "note": "Strona PDF 4 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "de2dcd096a97a49f9112e6dbb4d038a6ba13e92916ee82f2c353f5273e923e84",
+        "note": "Strona PDF 5 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "7b40738140d8b03332763dee80412387f8dac434bb27cb2182c1de5572e7e5b5",
+        "note": "Strona PDF 6 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 6186,
+    "review_wait_ms": 3272721
   },
   "errors": []
 }

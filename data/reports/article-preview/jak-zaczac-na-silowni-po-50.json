@@ -1,35 +1,668 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T19:08:06.508Z",
+  "generated_at": "2026-10-03T07:22:23.957Z",
+  "reviewed_at": "2026-10-03T08:16:44.943Z",
   "slug": "jak-zaczac-na-silowni-po-50",
-  "html_sha256": "039f4aac9b349fbe99b26f105dbd6831159a89f07a3bd7a90ce35b32824b2daf",
-  "site_html_sha256": "039f4aac9b349fbe99b26f105dbd6831159a89f07a3bd7a90ce35b32824b2daf",
-  "pdf_sha256": "174cd2e16e79227641f77aae398fa12d80e5b840578933e0703bef590be20509",
-  "site_pdf_sha256": "174cd2e16e79227641f77aae398fa12d80e5b840578933e0703bef590be20509",
+  "html_sha256": "25c90bddb3340698de2bfaf2b58b00dc9fe2728b1348ddb1f3b81aa52886ef03",
+  "site_html_sha256": "25c90bddb3340698de2bfaf2b58b00dc9fe2728b1348ddb1f3b81aa52886ef03",
+  "pdf_sha256": "4c10844484af5e21b08959895a67154558e08fd88ff2d2aaa5f03bf89fc87b5d",
+  "site_pdf_sha256": "4c10844484af5e21b08959895a67154558e08fd88ff2d2aaa5f03bf89fc87b5d",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T07:22:23.957Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 0
   },
+  "artifacts": {
+    "html_source": {
+      "file": "jak-zaczac-na-silowni-po-50.html",
+      "sha256": "25c90bddb3340698de2bfaf2b58b00dc9fe2728b1348ddb1f3b81aa52886ef03",
+      "bytes": 39295
+    },
+    "html_site": {
+      "file": "_site/jak-zaczac-na-silowni-po-50.html",
+      "sha256": "25c90bddb3340698de2bfaf2b58b00dc9fe2728b1348ddb1f3b81aa52886ef03",
+      "bytes": 39295
+    },
+    "pdf_source": {
+      "file": "assets/pdf/jak-zaczac-na-silowni-po-50.pdf",
+      "sha256": "4c10844484af5e21b08959895a67154558e08fd88ff2d2aaa5f03bf89fc87b5d",
+      "bytes": 819486
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/jak-zaczac-na-silowni-po-50.pdf",
+      "sha256": "4c10844484af5e21b08959895a67154558e08fd88ff2d2aaa5f03bf89fc87b5d",
+      "bytes": 819486
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/jak-zaczac-na-silowni-po-50/desktop.png",
+      "screenshot_sha256": "a1b8824f29373c40777c3009b33396a9e8d9297fa173e94f769ab369793cc72f",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/jak-zaczac-na-silowni-po-50/mobile.png",
+      "screenshot_sha256": "17960a00ac8dd98b447d3c58e9bcacb13451b6aa2cf38c950f86383765a7cd8a",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "RUCH 5 min czytania Aktualizacja: 03.10.2026 Jak zacząć na siłowni po 50: prosty plan bez chaosu i bólu WIEK TO DOŚWIADCZENIE. SIŁOWNIA JEST DLA CIEBIE.",
+      "alt": "Zadowolony 50-latek wchodzący na siłownię z plecaczkiem",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/poczatek-hero.avif",
+          "sha256": "491e7ff1e40be9084d014f42985f2c587942b3e89e1ea7edffa6f4d8bea4e197",
+          "bytes": 60587,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/poczatek-hero.webp",
+          "sha256": "5831a52f79242415f0f2e54d28e6b4310b0b2b4adc3b012f7ecaadc3ffca0977",
+          "bytes": 117428,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/poczatek-hero.jpg",
+          "sha256": "c14cc9262b6787b5a85b29ecaa0d8208bc3d8566156de90453e2a479d2ab23c1",
+          "bytes": 338135,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ecacf60bb83d61aa257409a96c62ac131429c6f10fe15443e2f5756563ec9437"
+    },
+    {
+      "placement": "content:2:co-daje-trening-silowy-po-50-tce",
+      "role": "content",
+      "heading": "Co daje trening siłowy po 50-tce?",
+      "context": "Masz ponad 50 lat i myślisz o siłowni. Albo już o niej myślisz od jakiegoś czasu, ale coś Cię powstrzymuje. Wiek? Wstyd? Poczucie, że to nie miejsce dla Ciebie? Ten artykuł jest właśnie dla Ciebie — i obiecuję, że po jego przeczytaniu te bariery będą wyglądać znacznie mniej groźnie. Szybka odpowiedź Start na siłowni po 50-tce powinien być prosty: 2-3 treningi tygodniowo, ruchy podstawowe i umiarkowane obciążenia. Przez pierwsze 4 tygodnie skup się na technice i regularności, nie na rekordach. Jeśli ćwiczenie wywołuje ból stawu, przerwij serię i zmień ruch lub obciążenie. Silny ból, obrzęk, uraz albo nasilanie się objawów wymaga oceny medycznej zamiast czekania według sztywnego terminu. Kluczowe wnioski Bezpieczny start opiera się na nauce techniki, umiarkowanej objętości i zapisywaniu obci",
+      "alt": "Kobieta i mężczyzna po 50-tce trenują siłowo na maszynach i z hantlami",
+      "caption": "Regularny trening siłowy pomaga po 50-tce utrzymać mięśnie, siłę i sprawność potrzebną w codziennym życiu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-korzysci-50plus-20260930.avif",
+          "sha256": "f04739adce6f984de95409994bacc3d6878d8b4e78b71830937da8f8a534e5a7",
+          "bytes": 50959,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/silownia-korzysci-50plus-20260930.webp",
+          "sha256": "e75d15f1207c7cfde7d1cc3861c2f8afff1c5c275602a3c1a846ff4d3d5d66db",
+          "bytes": 87358,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/silownia-korzysci-50plus-20260930.jpg",
+          "sha256": "024d48e498131443e604f5520caf23368aaf8554f0453ea0fb38d643f8eb5c65",
+          "bytes": 168395,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5273fb88a38053bed7ed8e3f72a371485af1c3d5accb2bc5355b2b62455b631b"
+    },
+    {
+      "placement": "content:3:prawda-o-silowni-ktorej-nikt-ci-nie-powie",
+      "role": "content",
+      "heading": "Prawda o siłowni, której nikt Ci nie powie?",
+      "context": "Masz ponad 50 lat i myślisz o siłowni. Albo już o niej myślisz od jakiegoś czasu, ale coś Cię powstrzymuje. Wiek? Wstyd? Poczucie, że to nie miejsce dla Ciebie? Ten artykuł jest właśnie dla Ciebie — i obiecuję, że po jego przeczytaniu te bariery będą wyglądać znacznie mniej groźnie. Szybka odpowiedź Start na siłowni po 50-tce powinien być prosty: 2-3 treningi tygodniowo, ruchy podstawowe i umiarkowane obciążenia. Przez pierwsze 4 tygodnie skup się na technice i regularności, nie na rekordach. Jeśli ćwiczenie wywołuje ból stawu, przerwij serię i zmień ruch lub obciążenie. Silny ból, obrzęk, uraz albo nasilanie się objawów wymaga oceny medycznej zamiast czekania według sztywnego terminu. Kluczowe wnioski Bezpieczny start opiera się na nauce techniki, umiarkowanej objętości i zapisywaniu obci",
+      "alt": "Osoby w różnym wieku spokojnie ćwiczą obok siebie w przyjaznej siłowni",
+      "caption": "Większość ćwiczących skupia się na własnym planie, dlatego pierwsza wizyta zwykle okazuje się mniej stresująca niż oczekiwano.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-atmosfera-bez-obaw-20260930.avif",
+          "sha256": "bc83b7fac95e1239c1917f53144e765b3369df21059ee3ab0152597b1b0cde9a",
+          "bytes": 48616,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/silownia-atmosfera-bez-obaw-20260930.webp",
+          "sha256": "455d3935d8292f712338141320e1de5c7ef3f75c3b11258ae719d29c2bc635a1",
+          "bytes": 83484,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/silownia-atmosfera-bez-obaw-20260930.jpg",
+          "sha256": "562b6744122087f87067c217bc5b3e9582a4972f270545a53cf000caef2af25e",
+          "bytes": 161817,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "06280e542d6c38b3c7a509f22f14425dc56cf647d9b3bbbb7a7cf26ac52fa92e"
+    },
+    {
+      "placement": "content:4:pierwszy-krok-trener-personalny-jeden-raz-wystar",
+      "role": "content",
+      "heading": "Pierwszy krok: trener personalny — jeden raz wystarczy?",
+      "context": "Masz ponad 50 lat i myślisz o siłowni. Albo już o niej myślisz od jakiegoś czasu, ale coś Cię powstrzymuje. Wiek? Wstyd? Poczucie, że to nie miejsce dla Ciebie? Ten artykuł jest właśnie dla Ciebie — i obiecuję, że po jego przeczytaniu te bariery będą wyglądać znacznie mniej groźnie. Szybka odpowiedź Start na siłowni po 50-tce powinien być prosty: 2-3 treningi tygodniowo, ruchy podstawowe i umiarkowane obciążenia. Przez pierwsze 4 tygodnie skup się na technice i regularności, nie na rekordach. Jeśli ćwiczenie wywołuje ból stawu, przerwij serię i zmień ruch lub obciążenie. Silny ból, obrzęk, uraz albo nasilanie się objawów wymaga oceny medycznej zamiast czekania według sztywnego terminu. Kluczowe wnioski Bezpieczny start opiera się na nauce techniki, umiarkowanej objętości i zapisywaniu obci",
+      "alt": "Trener ustawia maszynę dla kobiety rozpoczynającej ćwiczenia po 50-tce",
+      "caption": "Jedna dobrze wykorzystana konsultacja może nauczyć ustawiania maszyn, podstaw techniki i bezpiecznego doboru obciążenia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-trener-pierwsza-wizyta-20260930.avif",
+          "sha256": "ccd2421b1c0e487e81585177eda44c4d135aa77a9f4e6854d540bcf08533d801",
+          "bytes": 48728,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/silownia-trener-pierwsza-wizyta-20260930.webp",
+          "sha256": "ccc823b70f4b02f2147598ef235be09338582f7d885797fe5534f2e58952baaa",
+          "bytes": 83252,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/silownia-trener-pierwsza-wizyta-20260930.jpg",
+          "sha256": "f395eb4fc6f389654d354c621cca1eb7d2af813718e68f89c689d62f7df0e599",
+          "bytes": 163920,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "67a3f622baad3adf4fab7534a135efc90e80d9336155f00c361e8521975c7d4f"
+    },
+    {
+      "placement": "content:5:ubierz-sie-tak-zeby-dobrze-sie-czuc",
+      "role": "content",
+      "heading": "Ubierz się tak, żeby dobrze się czuć?",
+      "context": "Masz ponad 50 lat i myślisz o siłowni. Albo już o niej myślisz od jakiegoś czasu, ale coś Cię powstrzymuje. Wiek? Wstyd? Poczucie, że to nie miejsce dla Ciebie? Ten artykuł jest właśnie dla Ciebie — i obiecuję, że po jego przeczytaniu te bariery będą wyglądać znacznie mniej groźnie. Szybka odpowiedź Start na siłowni po 50-tce powinien być prosty: 2-3 treningi tygodniowo, ruchy podstawowe i umiarkowane obciążenia. Przez pierwsze 4 tygodnie skup się na technice i regularności, nie na rekordach. Jeśli ćwiczenie wywołuje ból stawu, przerwij serię i zmień ruch lub obciążenie. Silny ból, obrzęk, uraz albo nasilanie się objawów wymaga oceny medycznej zamiast czekania według sztywnego terminu. Kluczowe wnioski Bezpieczny start opiera się na nauce techniki, umiarkowanej objętości i zapisywaniu obci",
+      "alt": "Kobieta po 50-tce w wygodnym stroju przygotowana do wejścia na siłownię",
+      "caption": "Na początek wystarczą wygodne ubrania i stabilne buty; strój ma ułatwiać ruch i dawać poczucie swobody.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-wygodny-stroj-20260930.avif",
+          "sha256": "6d54caa8e1555a422151c617bf5b76ac1c37a07f41689c0b34b32f36e074b8b8",
+          "bytes": 30091,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/silownia-wygodny-stroj-20260930.webp",
+          "sha256": "8b8e1a1407afb93f16b5ddacc641d1716e4c775115cbfb713e91b80addab489b",
+          "bytes": 53282,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/silownia-wygodny-stroj-20260930.jpg",
+          "sha256": "1c0cfd8487b8f0d2af98ce77b1319bc030a20124fef6746f81ca780f8d8638b1",
+          "bytes": 122062,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "2fe58064e303085e6ee0b2cd8c5c56745b77e9babb4e1ba19a0cf877cb912d2c"
+    },
+    {
+      "placement": "content:6:plan-na-pierwsze-4-tygodnie-prosty-jak-budowa-ce",
+      "role": "content",
+      "heading": "Plan na pierwsze 4 tygodnie — prosty jak budowa cepa?",
+      "context": "Masz ponad 50 lat i myślisz o siłowni. Albo już o niej myślisz od jakiegoś czasu, ale coś Cię powstrzymuje. Wiek? Wstyd? Poczucie, że to nie miejsce dla Ciebie? Ten artykuł jest właśnie dla Ciebie — i obiecuję, że po jego przeczytaniu te bariery będą wyglądać znacznie mniej groźnie. Szybka odpowiedź Start na siłowni po 50-tce powinien być prosty: 2-3 treningi tygodniowo, ruchy podstawowe i umiarkowane obciążenia. Przez pierwsze 4 tygodnie skup się na technice i regularności, nie na rekordach. Jeśli ćwiczenie wywołuje ból stawu, przerwij serię i zmień ruch lub obciążenie. Silny ból, obrzęk, uraz albo nasilanie się objawów wymaga oceny medycznej zamiast czekania według sztywnego terminu. Kluczowe wnioski Bezpieczny start opiera się na nauce techniki, umiarkowanej objętości i zapisywaniu obci",
+      "alt": "Para po 50-tce wykonuje prosty trening i zapisuje postępy w notesie",
+      "caption": "W pierwszych tygodniach najważniejsze są regularność, opanowanie ruchów i spokojne zwiększanie liczby serii lub obciążenia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-plan-cztery-tygodnie-20260930.avif",
+          "sha256": "def9f3a652fdd1f28ed8032d5f27a43704e5420fc0a9bd199fc6700fbe323700",
+          "bytes": 51336,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/silownia-plan-cztery-tygodnie-20260930.webp",
+          "sha256": "0a47b3dc4e629bbbacad80af929b7cc7e96001a309c0a358b53d662b056fe731",
+          "bytes": 87098,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/silownia-plan-cztery-tygodnie-20260930.jpg",
+          "sha256": "b24ce1aa92e80052cbfb1ee510a872dcc10647453863daddd7ffc4a5dcc2e046",
+          "bytes": 166749,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "46fd8262e9d3d2396e0aa8f48f8f9ceb8aa880f91e7e0cff731bc5c4729c38c3"
+    },
+    {
+      "placement": "content:7:co-zabrac-na-pierwsza-wizyte",
+      "role": "content",
+      "heading": "Co zabrać na pierwszą wizytę?",
+      "context": "Masz ponad 50 lat i myślisz o siłowni. Albo już o niej myślisz od jakiegoś czasu, ale coś Cię powstrzymuje. Wiek? Wstyd? Poczucie, że to nie miejsce dla Ciebie? Ten artykuł jest właśnie dla Ciebie — i obiecuję, że po jego przeczytaniu te bariery będą wyglądać znacznie mniej groźnie. Szybka odpowiedź Start na siłowni po 50-tce powinien być prosty: 2-3 treningi tygodniowo, ruchy podstawowe i umiarkowane obciążenia. Przez pierwsze 4 tygodnie skup się na technice i regularności, nie na rekordach. Jeśli ćwiczenie wywołuje ból stawu, przerwij serię i zmień ruch lub obciążenie. Silny ból, obrzęk, uraz albo nasilanie się objawów wymaga oceny medycznej zamiast czekania według sztywnego terminu. Kluczowe wnioski Bezpieczny start opiera się na nauce techniki, umiarkowanej objętości i zapisywaniu obci",
+      "alt": "Buty ręcznik woda kłódka i torba przygotowane na pierwszą wizytę w siłowni",
+      "caption": "Buty, ręcznik, woda i kłódka wystarczą na pierwszą wizytę; resztę wyposażenia zapewnia zwykle klub.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-co-zabrac-20260930.avif",
+          "sha256": "c66ae740d97a1cca12a848ad3f446b505bbaa2db565c55a065a0febcec1beb52",
+          "bytes": 45195,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/silownia-co-zabrac-20260930.webp",
+          "sha256": "ac1577a2c5c1977e9086e3d618b62f56112c439583c79c71686959838ca3f415",
+          "bytes": 78780,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/silownia-co-zabrac-20260930.jpg",
+          "sha256": "9ffaaa3d6c7672ca9737955e73c794eb89c0523ee7c4d6003cc5f6454c6bb9f6",
+          "bytes": 153354,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "dc0a0abc7a3fff92db2124d0abd3f4b2e377d5ba669c28658fb9d84fa21ce8a8"
+    },
+    {
+      "placement": "content:8:jedna-rzecz-ktorej-sie-nie-spodziewasz",
+      "role": "content",
+      "heading": "Jedna rzecz, której się nie spodziewasz?",
+      "context": "Masz ponad 50 lat i myślisz o siłowni. Albo już o niej myślisz od jakiegoś czasu, ale coś Cię powstrzymuje. Wiek? Wstyd? Poczucie, że to nie miejsce dla Ciebie? Ten artykuł jest właśnie dla Ciebie — i obiecuję, że po jego przeczytaniu te bariery będą wyglądać znacznie mniej groźnie. Szybka odpowiedź Start na siłowni po 50-tce powinien być prosty: 2-3 treningi tygodniowo, ruchy podstawowe i umiarkowane obciążenia. Przez pierwsze 4 tygodnie skup się na technice i regularności, nie na rekordach. Jeśli ćwiczenie wywołuje ból stawu, przerwij serię i zmień ruch lub obciążenie. Silny ból, obrzęk, uraz albo nasilanie się objawów wymaga oceny medycznej zamiast czekania według sztywnego terminu. Kluczowe wnioski Bezpieczny start opiera się na nauce techniki, umiarkowanej objętości i zapisywaniu obci",
+      "alt": "Grupa osób po 50-tce rozmawia po wspólnym treningu na siłowni",
+      "caption": "Regularne wizyty mogą przynieść coś więcej niż sprawność: znajome twarze, rozmowy i poczucie przynależności.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-spolecznosc-20260930.avif",
+          "sha256": "c1b951eb01726e3c943553add88521c0cf96386ffed24dbf9b22bad9edab38ac",
+          "bytes": 53358,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/silownia-spolecznosc-20260930.webp",
+          "sha256": "16784c950b6e7d3cdd211ff6447f575626ecdfc214e56e28251a46edfdc11208",
+          "bytes": 91722,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/silownia-spolecznosc-20260930.jpg",
+          "sha256": "87a908b76c7039972e8b2d8b66e52394f33c11c5d677ca08af8f73340004ebe3",
+          "bytes": 173986,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "0657198a5fa93e97701471e7741e83fbf1cd2cf0717fff39425329bd5bc6577b"
+    },
+    {
+      "placement": "content:9:podsumowanie-co-naprawde-stoi-na-drodze",
+      "role": "content",
+      "heading": "Podsumowanie — co naprawdę stoi na drodze?",
+      "context": "Masz ponad 50 lat i myślisz o siłowni. Albo już o niej myślisz od jakiegoś czasu, ale coś Cię powstrzymuje. Wiek? Wstyd? Poczucie, że to nie miejsce dla Ciebie? Ten artykuł jest właśnie dla Ciebie — i obiecuję, że po jego przeczytaniu te bariery będą wyglądać znacznie mniej groźnie. Szybka odpowiedź Start na siłowni po 50-tce powinien być prosty: 2-3 treningi tygodniowo, ruchy podstawowe i umiarkowane obciążenia. Przez pierwsze 4 tygodnie skup się na technice i regularności, nie na rekordach. Jeśli ćwiczenie wywołuje ból stawu, przerwij serię i zmień ruch lub obciążenie. Silny ból, obrzęk, uraz albo nasilanie się objawów wymaga oceny medycznej zamiast czekania według sztywnego terminu. Kluczowe wnioski Bezpieczny start opiera się na nauce techniki, umiarkowanej objętości i zapisywaniu obci",
+      "alt": "Kobieta po 50-tce z torbą wchodzi po raz pierwszy do jasnej siłowni",
+      "caption": "Najtrudniejszy bywa pierwszy krok za drzwi klubu; później wystarczy prosty plan i konsekwentne, spokojne wizyty.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/silownia-pierwszy-krok-20260930.avif",
+          "sha256": "79d43175acbb560e23774fed51350478cd3d50d05becdefefffdc4083dc3b482",
+          "bytes": 61030,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/silownia-pierwszy-krok-20260930.webp",
+          "sha256": "203a0b6b0847bb188cc73163c839394988d0b2636f1d5d915d0ee719b39bc0be",
+          "bytes": 103498,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/silownia-pierwszy-krok-20260930.jpg",
+          "sha256": "6398c5a2df7194a1321021136cbbccabd3ddba7d3800a0fcbdaa84cb2e9e4dae",
+          "bytes": 184132,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "de9b1132e5105b7f80f8a10fa2071679f484bfa63d43eab2354d1379dd5394d4"
+    }
+  ],
   "pdf": {
     "pages": 7,
     "text_coverage": 1,
-    "rendered_pages": 7
+    "rendered_pages": 7,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/jak-zaczac-na-silowni-po-50/pdf-pages/page-1.png",
+        "sha256": "8846c348de8cb586d4e475273f0819d38e0f8da965ea676fa2053c8e71b11b07",
+        "bytes": 632466,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 59,
+          "width": 1061,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/jak-zaczac-na-silowni-po-50/pdf-pages/page-2.png",
+        "sha256": "ba2ca94aafa83e540d6d854b2bdacc8d5fe1ddde17a1c1bd7cdac5b4291715d0",
+        "bytes": 993164,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1059,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/jak-zaczac-na-silowni-po-50/pdf-pages/page-3.png",
+        "sha256": "162feea3e228c6af055acdd447b32b9209c2e685c5df4afd2fe940006d587fa8",
+        "bytes": 821512,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1048,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/jak-zaczac-na-silowni-po-50/pdf-pages/page-4.png",
+        "sha256": "2313f018c6fc106edbf598ad3570886412b14c90b701ef563a0523149229a1de",
+        "bytes": 679460,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1055,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/jak-zaczac-na-silowni-po-50/pdf-pages/page-5.png",
+        "sha256": "d30f83534399b09e2d82ac3da2394ee05abc47430fff3d67f42724ecd140654d",
+        "bytes": 984356,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1051,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/jak-zaczac-na-silowni-po-50/pdf-pages/page-6.png",
+        "sha256": "961fce4254e25966984f69c6c55741845faed09d8c441b6be6b059466c3d0631",
+        "bytes": 662409,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1062,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/jak-zaczac-na-silowni-po-50/pdf-pages/page-7.png",
+        "sha256": "4fe3b04160f5db09b34bf8b6db26fefda231daee032a6e2ecc90d7c0b8a8f95c",
+        "bytes": 187238,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1063,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — kontrola wizualna FitPo50",
+    "reviewed_at": "2026-10-03T08:16:44.943Z",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "a1b8824f29373c40777c3009b33396a9e8d9297fa173e94f769ab369793cc72f",
+        "note": "Pełny render desktop obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "17960a00ac8dd98b447d3c58e9bcacb13451b6aa2cf38c950f86383765a7cd8a",
+        "note": "Pełny render mobile obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "ecacf60bb83d61aa257409a96c62ac131429c6f10fe15443e2f5756563ec9437",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:2:co-daje-trening-silowy-po-50-tce",
+        "inventory_sha256": "5273fb88a38053bed7ed8e3f72a371485af1c3d5accb2bc5355b2b62455b631b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:3:prawda-o-silowni-ktorej-nikt-ci-nie-powie",
+        "inventory_sha256": "06280e542d6c38b3c7a509f22f14425dc56cf647d9b3bbbb7a7cf26ac52fa92e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:4:pierwszy-krok-trener-personalny-jeden-raz-wystar",
+        "inventory_sha256": "67a3f622baad3adf4fab7534a135efc90e80d9336155f00c361e8521975c7d4f",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:5:ubierz-sie-tak-zeby-dobrze-sie-czuc",
+        "inventory_sha256": "2fe58064e303085e6ee0b2cd8c5c56745b77e9babb4e1ba19a0cf877cb912d2c",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:6:plan-na-pierwsze-4-tygodnie-prosty-jak-budowa-ce",
+        "inventory_sha256": "46fd8262e9d3d2396e0aa8f48f8f9ceb8aa880f91e7e0cff731bc5c4729c38c3",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:7:co-zabrac-na-pierwsza-wizyte",
+        "inventory_sha256": "dc0a0abc7a3fff92db2124d0abd3f4b2e377d5ba669c28658fb9d84fa21ce8a8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:8:jedna-rzecz-ktorej-sie-nie-spodziewasz",
+        "inventory_sha256": "0657198a5fa93e97701471e7741e83fbf1cd2cf0717fff39425329bd5bc6577b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:9:podsumowanie-co-naprawde-stoi-na-drodze",
+        "inventory_sha256": "de9b1132e5105b7f80f8a10fa2071679f484bfa63d43eab2354d1379dd5394d4",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "8846c348de8cb586d4e475273f0819d38e0f8da965ea676fa2053c8e71b11b07",
+        "note": "Strona PDF 1 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "ba2ca94aafa83e540d6d854b2bdacc8d5fe1ddde17a1c1bd7cdac5b4291715d0",
+        "note": "Strona PDF 2 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "162feea3e228c6af055acdd447b32b9209c2e685c5df4afd2fe940006d587fa8",
+        "note": "Strona PDF 3 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "2313f018c6fc106edbf598ad3570886412b14c90b701ef563a0523149229a1de",
+        "note": "Strona PDF 4 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "d30f83534399b09e2d82ac3da2394ee05abc47430fff3d67f42724ecd140654d",
+        "note": "Strona PDF 5 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "961fce4254e25966984f69c6c55741845faed09d8c441b6be6b059466c3d0631",
+        "note": "Strona PDF 6 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "4fe3b04160f5db09b34bf8b6db26fefda231daee032a6e2ecc90d7c0b8a8f95c",
+        "note": "Strona PDF 7 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 6998,
+    "review_wait_ms": 3260986
   },
   "errors": []
 }

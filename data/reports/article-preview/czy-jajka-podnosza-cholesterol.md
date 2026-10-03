@@ -1,10 +1,10 @@
-# FitPo50 — staging HTML i PDF
+# FitPo50 — staging HTML, obrazy i PDF
 
 - Status: **PREVIEW_READY**
+- Technical: **TECHNICAL_PASS**
+- Visual: **VISUAL_REVIEW_VERIFIED**
 - Slug: czy-jajka-podnosza-cholesterol
-- Render HTML: desktop 1440 px + mobile 390 px
-- Tabele semantyczne: 1
-- PDF: 6 stron, wyrenderowano 6
-- Zgodność tekstu HTML→PDF: 99.46%
-- HTML source/_site: 1:1
-- PDF source/_site: 1:1
+- Reviewed by: Codex — kontrola wizualna FitPo50
+- Review method: Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.
+- Obrazy: 7
+- PDF: 6 stron

@@ -1,35 +1,430 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:57:10.672Z",
+  "generated_at": "2026-10-03T07:22:05.961Z",
+  "reviewed_at": "2026-10-03T08:16:44.943Z",
   "slug": "lpa-lipoproteina-a-po-50-norma-cena-badania",
-  "html_sha256": "07a8d96a89767fe400832f1e43b65b56195ed3009e790a434860ac4d300bb53a",
-  "site_html_sha256": "07a8d96a89767fe400832f1e43b65b56195ed3009e790a434860ac4d300bb53a",
-  "pdf_sha256": "f14070975c973c58cd3c4c15f296a323946fec0356d009118cdaf242341ba62f",
-  "site_pdf_sha256": "f14070975c973c58cd3c4c15f296a323946fec0356d009118cdaf242341ba62f",
+  "html_sha256": "447efe08be4aa10e9108dd70ce44ca4ec2b1168982e1a5e91f084ba3dba80793",
+  "site_html_sha256": "447efe08be4aa10e9108dd70ce44ca4ec2b1168982e1a5e91f084ba3dba80793",
+  "pdf_sha256": "5d4791a1b9a754fd21c55fc9aa639ff02c666027df76509fda1852771c2a5a0a",
+  "site_pdf_sha256": "5d4791a1b9a754fd21c55fc9aa639ff02c666027df76509fda1852771c2a5a0a",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T07:22:05.961Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "lpa-lipoproteina-a-po-50-norma-cena-badania.html",
+      "sha256": "447efe08be4aa10e9108dd70ce44ca4ec2b1168982e1a5e91f084ba3dba80793",
+      "bytes": 31660
+    },
+    "html_site": {
+      "file": "_site/lpa-lipoproteina-a-po-50-norma-cena-badania.html",
+      "sha256": "447efe08be4aa10e9108dd70ce44ca4ec2b1168982e1a5e91f084ba3dba80793",
+      "bytes": 31660
+    },
+    "pdf_source": {
+      "file": "assets/pdf/lpa-lipoproteina-a-po-50-norma-cena-badania.pdf",
+      "sha256": "5d4791a1b9a754fd21c55fc9aa639ff02c666027df76509fda1852771c2a5a0a",
+      "bytes": 445616
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/lpa-lipoproteina-a-po-50-norma-cena-badania.pdf",
+      "sha256": "5d4791a1b9a754fd21c55fc9aa639ff02c666027df76509fda1852771c2a5a0a",
+      "bytes": 445616
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/lpa-lipoproteina-a-po-50-norma-cena-badania/desktop.png",
+      "screenshot_sha256": "5c8b207b93761d3b521135db0a547f50c77f76ff04f4ddab4c2e7dcb31a0a5f0",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/lpa-lipoproteina-a-po-50-norma-cena-badania/mobile.png",
+      "screenshot_sha256": "c0c0d89ff877b23a09f37b62bcea3523b2fd2a977449c4482cdf71dc9a916be8",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 11 min czytania Lipoproteina(a) po 50-tce: jak czytać wynik badania Lp(a)? Jedno badanie krwi, które zwykle robi się tylko raz - a mimo to niewielu je zna.",
+      "alt": "Uśmiechnięta para po 50-tce w jasnym, słonecznym wnętrzu, poranne światło, spokojna i pogodna atmosfera",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-para-50-plus-poranne-swiatlo-20260929.avif",
+          "sha256": "1e46ce458b15dcfed3e0ea0556b2562776d4b75f6a5518523d31e0ae7d4dfbe3",
+          "bytes": 148219,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/lpa-para-50-plus-poranne-swiatlo-20260929.webp",
+          "sha256": "12e9f260df119d693ff9c8b478514f2dbedfb18dbf3432c626758b6c52d15e6e",
+          "bytes": 160590,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/lpa-para-50-plus-poranne-swiatlo-20260929.jpg",
+          "sha256": "18ca4b14263445b4ea97b97d940ab90edff352acbed13fda9f0874e494dbd71a",
+          "bytes": 308315,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "dd041884cbdc2f874cb80af8aee841c09ef7c62c0c85b74fd7bee98f0c968e7b"
+    },
+    {
+      "placement": "content:2:czym-lp-a-rozni-sie-od-ldl-i-apob",
+      "role": "content",
+      "heading": "Czym Lp(a) różni się od LDL i ApoB?",
+      "context": "Szybka odpowiedź Lp(a) jest cząstką lipoproteinową, której stężenie zależy głównie od genów i zwykle niewiele zmienia się przez styl życia. NLA zaleca oznaczenie co najmniej raz u każdego dorosłego; poniżej 75 nmol/l lub 30 mg/dl ryzyko uznaje się za niskie, a od 125 nmol/l lub 50 mg/dl za wysokie. Jednostek nie należy przeliczać stałym mnożnikiem. Kluczowe wnioski Lp(a) uzupełnia, a nie zastępuje LDL-C, ApoB, ciśnienia, glukozy i wywiadu rodzinnego. Pomiar raz w dorosłym życiu często wystarcza, lecz lekarz może zalecić powtórzenie w określonej sytuacji. mg/dl i nmol/l opisują inne wielkości; stały przelicznik może dać błędny wynik. Przy wysokiej Lp(a) najważniejsze jest intensywne ograniczanie całkowitego ryzyka sercowo-naczyniowego. Czym Lp(a) różni się od LDL i ApoB? Lp(a) przypomina cz",
+      "alt": "Infografika po polsku pokazująca różnicę między LDL, ApoB i Lp(a)",
+      "caption": "Lp(a) przypomina cząstkę LDL, ale zawiera dodatkową apolipoproteinę(a).",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-1-20260929.avif",
+          "sha256": "bfcfc32354078647099213f454a1f14588e8521ce7a3129a639255ea26c77620",
+          "bytes": 77018,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-1-20260929.webp",
+          "sha256": "fa4585b7febd065b2ae31bb87e9ca325db35902bc003421d86f812e2efb4a8d7",
+          "bytes": 74206,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-1-20260929.jpg",
+          "sha256": "4de3a7908e1f26ff2044070a9c5898c1883bf94f8fa0dd1889dd8ea3df77627b",
+          "bytes": 136760,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3b25bc07880be05bc1e0d3bd3f8b8a5b07f969269f28f6a36af4201b900ad476"
+    },
+    {
+      "placement": "content:3:jak-interpretowac-progi-w-nmol-l-i-mg-dl",
+      "role": "content",
+      "heading": "Jak interpretować progi w nmol/l i mg/dl?",
+      "context": "Szybka odpowiedź Lp(a) jest cząstką lipoproteinową, której stężenie zależy głównie od genów i zwykle niewiele zmienia się przez styl życia. NLA zaleca oznaczenie co najmniej raz u każdego dorosłego; poniżej 75 nmol/l lub 30 mg/dl ryzyko uznaje się za niskie, a od 125 nmol/l lub 50 mg/dl za wysokie. Jednostek nie należy przeliczać stałym mnożnikiem. Kluczowe wnioski Lp(a) uzupełnia, a nie zastępuje LDL-C, ApoB, ciśnienia, glukozy i wywiadu rodzinnego. Pomiar raz w dorosłym życiu często wystarcza, lecz lekarz może zalecić powtórzenie w określonej sytuacji. mg/dl i nmol/l opisują inne wielkości; stały przelicznik może dać błędny wynik. Przy wysokiej Lp(a) najważniejsze jest intensywne ograniczanie całkowitego ryzyka sercowo-naczyniowego. Czym Lp(a) różni się od LDL i ApoB? Lp(a) przypomina cz",
+      "alt": "Infografika po polsku pokazująca progi wyniku Lp(a) w mg na decylitr i nmol na litr",
+      "caption": "Aktualizacja NLA określa poniżej 75 nmol/l lub 30 mg/dl jako niski poziom ryzyka, 75–125 nmol/l lub 30–50 mg/dl jako zakres pośredni, a co najmniej 125 nmol/l lub 50 mg/dl jako wysoki.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-2-20260929.avif",
+          "sha256": "9a38cd8eaaaede5b6f5da8cf2d8d3497b52443e29ec323359e326223d28c4c3c",
+          "bytes": 64563,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-2-20260929.webp",
+          "sha256": "9239b89bcd30bcf5c5af7f5e5d96d3f5ccfca00c585bf3c7924f71dfbaf170ce",
+          "bytes": 64286,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-2-20260929.jpg",
+          "sha256": "5217ccaf1ee1ee272a539a2de42d40cba72ccde698436cf483ed64bbe5b66c39",
+          "bytes": 125588,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "fd98c8493ed593f41f017702202b59ef58185da1fea9b6e60ab4ac494f6d7193"
+    },
+    {
+      "placement": "content:4:czy-lp-a-wystarczy-zbadac-raz",
+      "role": "content",
+      "heading": "Czy Lp(a) wystarczy zbadać raz?",
+      "context": "Szybka odpowiedź Lp(a) jest cząstką lipoproteinową, której stężenie zależy głównie od genów i zwykle niewiele zmienia się przez styl życia. NLA zaleca oznaczenie co najmniej raz u każdego dorosłego; poniżej 75 nmol/l lub 30 mg/dl ryzyko uznaje się za niskie, a od 125 nmol/l lub 50 mg/dl za wysokie. Jednostek nie należy przeliczać stałym mnożnikiem. Kluczowe wnioski Lp(a) uzupełnia, a nie zastępuje LDL-C, ApoB, ciśnienia, glukozy i wywiadu rodzinnego. Pomiar raz w dorosłym życiu często wystarcza, lecz lekarz może zalecić powtórzenie w określonej sytuacji. mg/dl i nmol/l opisują inne wielkości; stały przelicznik może dać błędny wynik. Przy wysokiej Lp(a) najważniejsze jest intensywne ograniczanie całkowitego ryzyka sercowo-naczyniowego. Czym Lp(a) różni się od LDL i ApoB? Lp(a) przypomina cz",
+      "alt": "Osoba po 50-tce spokojnie analizująca wynik badania krwi przy jasnym stole",
+      "caption": "Ponieważ poziom jest głównie genetyczny i względnie stabilny, NLA zaleca co najmniej jeden pomiar u każdego dorosłego.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-3-20260929.avif",
+          "sha256": "ec2e163331c607a148f3febc51666ffb13f119a1b2a26c1c8607289868fbb333",
+          "bytes": 65974,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-3-20260929.webp",
+          "sha256": "1988ee5d92c40ae7e7b5fd20597ebdf9ebf6566f50d9aed75ed012fb32fdcc1b",
+          "bytes": 65528,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-3-20260929.jpg",
+          "sha256": "33be59a67b533df42316da923bae76fbf657c0b8ece4e13b2652da64df89faf6",
+          "bytes": 123772,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "0e3e3341761d29be6e92edf7e56b0193b849c46621bc5e16da1225e2a0a2c281"
+    },
+    {
+      "placement": "content:5:co-mozna-zrobic-przy-wysokiej-lp-a",
+      "role": "content",
+      "heading": "Co można zrobić przy wysokiej Lp(a)?",
+      "context": "Szybka odpowiedź Lp(a) jest cząstką lipoproteinową, której stężenie zależy głównie od genów i zwykle niewiele zmienia się przez styl życia. NLA zaleca oznaczenie co najmniej raz u każdego dorosłego; poniżej 75 nmol/l lub 30 mg/dl ryzyko uznaje się za niskie, a od 125 nmol/l lub 50 mg/dl za wysokie. Jednostek nie należy przeliczać stałym mnożnikiem. Kluczowe wnioski Lp(a) uzupełnia, a nie zastępuje LDL-C, ApoB, ciśnienia, glukozy i wywiadu rodzinnego. Pomiar raz w dorosłym życiu często wystarcza, lecz lekarz może zalecić powtórzenie w określonej sytuacji. mg/dl i nmol/l opisują inne wielkości; stały przelicznik może dać błędny wynik. Przy wysokiej Lp(a) najważniejsze jest intensywne ograniczanie całkowitego ryzyka sercowo-naczyniowego. Czym Lp(a) różni się od LDL i ApoB? Lp(a) przypomina cz",
+      "alt": "Uśmiechnięty mężczyzna po 50-tce podczas aktywności na świeżym powietrzu w parku",
+      "caption": "Styl życia zwykle nie obniża znacznie samej Lp(a), ale nadal ogranicza pozostałe składniki ryzyka.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-4-20260929.avif",
+          "sha256": "c45cc580989609938384451225446d7ae63d04c576850f18b226ae5992e2264a",
+          "bytes": 165711,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-4-20260929.webp",
+          "sha256": "52b550edb0d500b4b6d1b324c0c0d637b701d9d8776f8a46f35b6b8a1a7690cd",
+          "bytes": 153286,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/lpa-lipoproteina-a-po-50-norma-cena-badania-section-4-20260929.jpg",
+          "sha256": "b4f2dd9f596ca07371d41e45a5c01651631a2418e1bb30bcb27456d6377ff68b",
+          "bytes": 218157,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "750f0452d35762cbf1521bc91bf2ee6137627fe9630ab5535f3b34d3d103fed8"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/lpa-lipoproteina-a-po-50-norma-cena-badania/pdf-pages/page-1.png",
+        "sha256": "c4b4cee7bffd1e53ebb05421a2e151b6740285c33770261fde04888333d1dff8",
+        "bytes": 649187,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1058,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/lpa-lipoproteina-a-po-50-norma-cena-badania/pdf-pages/page-2.png",
+        "sha256": "00b2fd9e84b95cc1981319f39b4b2e0eaa52dd78e181336eb63be6b1f236cbc5",
+        "bytes": 615592,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 62,
+          "width": 1060,
+          "height": 1588
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/lpa-lipoproteina-a-po-50-norma-cena-badania/pdf-pages/page-3.png",
+        "sha256": "aca6c04a62893ee5ae5c75781b956042411f0f8e3368ba0f670477274674d79f",
+        "bytes": 1052007,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/lpa-lipoproteina-a-po-50-norma-cena-badania/pdf-pages/page-4.png",
+        "sha256": "286200d7e166618b5b4ef903b732b967d2db86f4eb31c058a2808d2fdf6f077a",
+        "bytes": 182027,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — kontrola wizualna FitPo50",
+    "reviewed_at": "2026-10-03T08:16:44.943Z",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "5c8b207b93761d3b521135db0a547f50c77f76ff04f4ddab4c2e7dcb31a0a5f0",
+        "note": "Pełny render desktop obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "c0c0d89ff877b23a09f37b62bcea3523b2fd2a977449c4482cdf71dc9a916be8",
+        "note": "Pełny render mobile obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "dd041884cbdc2f874cb80af8aee841c09ef7c62c0c85b74fd7bee98f0c968e7b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:2:czym-lp-a-rozni-sie-od-ldl-i-apob",
+        "inventory_sha256": "3b25bc07880be05bc1e0d3bd3f8b8a5b07f969269f28f6a36af4201b900ad476",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Porównanie markerów lipidowych: LDL, ApoB i Lp(a), ich rola i znaczenie kliniczne",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pubmed.ncbi.nlm.nih.gov/38565461/"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:3:jak-interpretowac-progi-w-nmol-l-i-mg-dl",
+        "inventory_sha256": "fd98c8493ed593f41f017702202b59ef58185da1fea9b6e60ab4ac494f6d7193",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Jak interpretować wynik Lp(a), LDL oraz ApoB: poziomy, ryzyko i dalsze działanie",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pubmed.ncbi.nlm.nih.gov/38565461/"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:4:czy-lp-a-wystarczy-zbadac-raz",
+        "inventory_sha256": "0e3e3341761d29be6e92edf7e56b0193b849c46621bc5e16da1225e2a0a2c281",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:5:co-mozna-zrobic-przy-wysokiej-lp-a",
+        "inventory_sha256": "750f0452d35762cbf1521bc91bf2ee6137627fe9630ab5535f3b34d3d103fed8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "c4b4cee7bffd1e53ebb05421a2e151b6740285c33770261fde04888333d1dff8",
+        "note": "Strona PDF 1 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "00b2fd9e84b95cc1981319f39b4b2e0eaa52dd78e181336eb63be6b1f236cbc5",
+        "note": "Strona PDF 2 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "aca6c04a62893ee5ae5c75781b956042411f0f8e3368ba0f670477274674d79f",
+        "note": "Strona PDF 3 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "286200d7e166618b5b4ef903b732b967d2db86f4eb31c058a2808d2fdf6f077a",
+        "note": "Strona PDF 4 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4334,
+    "review_wait_ms": 3278982
   },
   "errors": []
 }

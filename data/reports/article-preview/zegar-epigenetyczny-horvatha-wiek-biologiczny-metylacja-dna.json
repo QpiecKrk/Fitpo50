@@ -1,35 +1,433 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T13:02:23.399Z",
+  "generated_at": "2026-10-03T07:22:32.968Z",
+  "reviewed_at": "2026-10-03T08:16:44.943Z",
   "slug": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna",
-  "html_sha256": "0dcc976e3011a0c54bd457aef9302436a4f94c9276a86420e497fcfd46071bac",
-  "site_html_sha256": "0dcc976e3011a0c54bd457aef9302436a4f94c9276a86420e497fcfd46071bac",
-  "pdf_sha256": "8de2762e04844928b244a91c8c7c9c95df59001a6df3e816659c5b03393150f5",
-  "site_pdf_sha256": "8de2762e04844928b244a91c8c7c9c95df59001a6df3e816659c5b03393150f5",
+  "html_sha256": "ffc2e667f4e0ce71fdb4fe435324c25eb6efbf19d89451089f26e673eafdc2aa",
+  "site_html_sha256": "ffc2e667f4e0ce71fdb4fe435324c25eb6efbf19d89451089f26e673eafdc2aa",
+  "pdf_sha256": "a6612bd3432ceab5db3a61fa4a017ac24069bc6bb135b0379d097e0571e27e70",
+  "site_pdf_sha256": "a6612bd3432ceab5db3a61fa4a017ac24069bc6bb135b0379d097e0571e27e70",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T07:22:32.968Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+      "sha256": "ffc2e667f4e0ce71fdb4fe435324c25eb6efbf19d89451089f26e673eafdc2aa",
+      "bytes": 29457
+    },
+    "html_site": {
+      "file": "_site/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html",
+      "sha256": "ffc2e667f4e0ce71fdb4fe435324c25eb6efbf19d89451089f26e673eafdc2aa",
+      "bytes": 29457
+    },
+    "pdf_source": {
+      "file": "assets/pdf/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.pdf",
+      "sha256": "a6612bd3432ceab5db3a61fa4a017ac24069bc6bb135b0379d097e0571e27e70",
+      "bytes": 427670
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.pdf",
+      "sha256": "a6612bd3432ceab5db3a61fa4a017ac24069bc6bb135b0379d097e0571e27e70",
+      "bytes": 427670
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna/desktop.png",
+      "screenshot_sha256": "961905b4734fed771c63c3553f49975049e58770d5de614563452ef17e300335",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna/mobile.png",
+      "screenshot_sha256": "d97c7d4fe69adca642854ed01b78a866ac55666b5dd4c309bc0fb049519b0b94",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "CIEKAWE 14 min czytania Zegar Horvatha: czego test nie mówi o wieku biologicznym? Twój PESEL to umowa społeczna. Twoje DNA ma własny zegar, który mówi prawdę o tym, ile naprawdę masz lat.",
+      "alt": "Zegar epigenetyczny Horvatha. Jak zmierzyć i cofnąć wiek",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-horvatha-dna-hero-v2.avif",
+          "sha256": "364dbf7b28c1e15c340e22863b535c6dd181c0032d8688463b618b844b772e08",
+          "bytes": 56234,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-horvatha-dna-hero-v2.webp",
+          "sha256": "5ecb05cc5abfd28cd56baa596dfe90c4a382865ee19012942aa56b5def395785",
+          "bytes": 62830,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-horvatha-dna-hero-v2.jpg",
+          "sha256": "cf89df67ee366ad3a841667bbefd7a96eb309fd795173ee1c6fd5e8c48254ad0",
+          "bytes": 150492,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6f2367ae9736ec6f214be5ee3b2c02d2cf78a2320795d25cefef3d6c16a0e017"
+    },
+    {
+      "placement": "content:2:jak-zegar-horvatha-wykorzystuje-metylacje-dna",
+      "role": "content",
+      "heading": "Jak zegar Horvatha wykorzystuje metylację DNA?",
+      "context": "Szybka odpowiedź U osoby po 50-tce zegar Horvatha szacuje wiek na podstawie metylacji wybranych miejsc DNA. Dobrze opisuje wzorce w populacjach, ale wynik komercyjnego testu nie jest diagnozą ani wiarygodnym licznikiem lat życia. Różne zegary mierzą inne cele, a wynik zależy od tkanki, laboratorium i algorytmu. Najnowsze analizy odradzają używanie go do samodzielnych decyzji klinicznych. Kluczowe wnioski Horvath, GrimAge i DunedinPACE nie są zamiennymi nazwami tego samego wyniku. Różnica kilku „lat biologicznych” może wynikać z metody, tkanki i zmienności pomiaru. Spadek wyniku po krótkiej interwencji nie dowodzi cofnięcia procesu starzenia ani wydłużenia życia. Ciśnienie, lipidy, glikemia, sprawność i palenie mają dziś bardziej bezpośrednie znaczenie dla decyzji zdrowotnych. Jak zegar Hor",
+      "alt": "Metylacja DNA jako chemiczne znaczniki analizowane przez zegar epigenetyczny",
+      "caption": "Metylacja DNA jako chemiczne znaczniki analizowane przez zegar epigenetyczny",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-1.avif",
+          "sha256": "0ac46804e918b9feac5eaaf3b53c3ec83b27c695f8a133a5dcf44f722ce361be",
+          "bytes": 39080,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-1.webp",
+          "sha256": "eacbe820fd0cab59f68955e96d7870e5891b9821c5328e816e6215cc05bdc449",
+          "bytes": 77318,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-1.jpg",
+          "sha256": "036da624fa875d58b52a8331f1118e7864d2389bcfeafa81659f9a298fc560b3",
+          "bytes": 148511,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "d9bd185cd1df9895e9a17a087f5c33aec70b4969e9f985cdbd1fbaea866619d0"
+    },
+    {
+      "placement": "content:3:czym-roznia-sie-horvath-grimage-i-dunedinpace",
+      "role": "content",
+      "heading": "Czym różnią się Horvath, GrimAge i DunedinPACE?",
+      "context": "Szybka odpowiedź U osoby po 50-tce zegar Horvatha szacuje wiek na podstawie metylacji wybranych miejsc DNA. Dobrze opisuje wzorce w populacjach, ale wynik komercyjnego testu nie jest diagnozą ani wiarygodnym licznikiem lat życia. Różne zegary mierzą inne cele, a wynik zależy od tkanki, laboratorium i algorytmu. Najnowsze analizy odradzają używanie go do samodzielnych decyzji klinicznych. Kluczowe wnioski Horvath, GrimAge i DunedinPACE nie są zamiennymi nazwami tego samego wyniku. Różnica kilku „lat biologicznych” może wynikać z metody, tkanki i zmienności pomiaru. Spadek wyniku po krótkiej interwencji nie dowodzi cofnięcia procesu starzenia ani wydłużenia życia. Ciśnienie, lipidy, glikemia, sprawność i palenie mają dziś bardziej bezpośrednie znaczenie dla decyzji zdrowotnych. Jak zegar Hor",
+      "alt": "Algorytm porównuje wzorzec metylacji z danymi populacyjnymi",
+      "caption": "Algorytm porównuje wzorzec metylacji z danymi populacyjnymi",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-3.avif",
+          "sha256": "ff157559357a3a31d7614931189d9cbc0d4197ed2b328f32a7f1055ed5d6f386",
+          "bytes": 46521,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-3.webp",
+          "sha256": "4bea50b0e7b6d811aec38e7d4acfe4fdc7526d7c3ffd4dbb320c22a1b1fb39b4",
+          "bytes": 88692,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-3.jpg",
+          "sha256": "ca33d2bbec8bbc8f5151eb9a5a63254db99283a50e57af8252b4ac49f09d664f",
+          "bytes": 184540,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "81f379183ed13e1e2802378faef2026d372b0659604e18fca79eafe8c24fedc3"
+    },
+    {
+      "placement": "content:4:czy-test-z-krwi-mowi-ile-lat-bedziesz-zyc",
+      "role": "content",
+      "heading": "Czy test z krwi mówi, ile lat będziesz żyć?",
+      "context": "Szybka odpowiedź U osoby po 50-tce zegar Horvatha szacuje wiek na podstawie metylacji wybranych miejsc DNA. Dobrze opisuje wzorce w populacjach, ale wynik komercyjnego testu nie jest diagnozą ani wiarygodnym licznikiem lat życia. Różne zegary mierzą inne cele, a wynik zależy od tkanki, laboratorium i algorytmu. Najnowsze analizy odradzają używanie go do samodzielnych decyzji klinicznych. Kluczowe wnioski Horvath, GrimAge i DunedinPACE nie są zamiennymi nazwami tego samego wyniku. Różnica kilku „lat biologicznych” może wynikać z metody, tkanki i zmienności pomiaru. Spadek wyniku po krótkiej interwencji nie dowodzi cofnięcia procesu starzenia ani wydłużenia życia. Ciśnienie, lipidy, glikemia, sprawność i palenie mają dziś bardziej bezpośrednie znaczenie dla decyzji zdrowotnych. Jak zegar Hor",
+      "alt": "Porównanie dwóch wyników testu wymagające tej samej metody i laboratorium",
+      "caption": "Porównanie dwóch wyników testu wymagające tej samej metody i laboratorium",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-6.avif",
+          "sha256": "2c2d040aefb6128b9112f0debec284127abeba3f93a023115650a002e23c92ec",
+          "bytes": 47006,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-6.webp",
+          "sha256": "66858de305c13826c05bd17a878c92268fe5fa27b42d9a2146a6a128b3f5087f",
+          "bytes": 96460,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna-sekcja-6.jpg",
+          "sha256": "c7ada00573b7fcc0c28a740cfd595025d2c8b83dd0b936d78b8440bbc61f50eb",
+          "bytes": 162339,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7ccdddace71bb09c3ff82a793dd9d6301cc12047f6a4a1c468476be9fc55af07"
+    },
+    {
+      "placement": "content:5:czy-dieta-lub-suplement-moga-cofnac-wiek-epigene",
+      "role": "content",
+      "heading": "Czy dieta lub suplement mogą cofnąć wiek epigenetyczny?",
+      "context": "Szybka odpowiedź U osoby po 50-tce zegar Horvatha szacuje wiek na podstawie metylacji wybranych miejsc DNA. Dobrze opisuje wzorce w populacjach, ale wynik komercyjnego testu nie jest diagnozą ani wiarygodnym licznikiem lat życia. Różne zegary mierzą inne cele, a wynik zależy od tkanki, laboratorium i algorytmu. Najnowsze analizy odradzają używanie go do samodzielnych decyzji klinicznych. Kluczowe wnioski Horvath, GrimAge i DunedinPACE nie są zamiennymi nazwami tego samego wyniku. Różnica kilku „lat biologicznych” może wynikać z metody, tkanki i zmienności pomiaru. Spadek wyniku po krótkiej interwencji nie dowodzi cofnięcia procesu starzenia ani wydłużenia życia. Ciśnienie, lipidy, glikemia, sprawność i palenie mają dziś bardziej bezpośrednie znaczenie dla decyzji zdrowotnych. Jak zegar Hor",
+      "alt": "Kobieta po 50-tce porównuje elementy stylu życia i suplement wobec abstrakcyjnego schematu DNA",
+      "caption": "Dieta, ruch i sen wspierają zdrowie, lecz pojedynczy wynik zegara nie potwierdza „cofnięcia wieku” przez suplement.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zegar-epigenetyczny-styl-zycia-suplement-20260930.avif",
+          "sha256": "be11447e1f5aa318dbb46b272d402cd2a5d0a699305d23a9a179c12e3dcd8e45",
+          "bytes": 109415,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zegar-epigenetyczny-styl-zycia-suplement-20260930.webp",
+          "sha256": "f18b099806fdd3515ec4a2a9cf36bb792a4b1a151c8edc43adbe4f0ee7fb5383",
+          "bytes": 122610,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zegar-epigenetyczny-styl-zycia-suplement-20260930.jpg",
+          "sha256": "1beeff655d9cb6178749ac9795296ba53487022bec00bba7eb8abef453467d9e",
+          "bytes": 280885,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "72ddaf6b62a7c2b895815760e0a87fd6f6b4399484c0946c6563957f3dc0fcbf"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna/pdf-pages/page-1.png",
+        "sha256": "aae8820e0400f36321213418e3d920e21b0b58703a427a55e167e9a45cbb2889",
+        "bytes": 572644,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1064,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna/pdf-pages/page-2.png",
+        "sha256": "12a7c57551d3ca3355eca254889ec55ea7508b88f246c5d4e18727c54be8863b",
+        "bytes": 661838,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna/pdf-pages/page-3.png",
+        "sha256": "b7bac761038948835299124dac0c152fc780a26e0e129f57b27fd32d28b52788",
+        "bytes": 998683,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna/pdf-pages/page-4.png",
+        "sha256": "24f67ce77b1d758c9b2e68260b36100d7ee452e1a6917a00bd68b21bbf66ab23",
+        "bytes": 178566,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1062,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — kontrola wizualna FitPo50",
+    "reviewed_at": "2026-10-03T08:16:44.943Z",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "961905b4734fed771c63c3553f49975049e58770d5de614563452ef17e300335",
+        "note": "Pełny render desktop obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "d97c7d4fe69adca642854ed01b78a866ac55666b5dd4c309bc0fb049519b0b94",
+        "note": "Pełny render mobile obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "6f2367ae9736ec6f214be5ee3b2c02d2cf78a2320795d25cefef3d6c16a0e017",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Symbole grup metylowych -CH3 na wizualizacji DNA",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:2:jak-zegar-horvatha-wykorzystuje-metylacje-dna",
+        "inventory_sha256": "d9bd185cd1df9895e9a17a087f5c33aec70b4969e9f985cdbd1fbaea866619d0",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Mechanizm metylacji DNA: miejsce CpG, metylacja i gen wyciszony",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-10-r115"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:3:czym-roznia-sie-horvath-grimage-i-dunedinpace",
+        "inventory_sha256": "81f379183ed13e1e2802378faef2026d372b0659604e18fca79eafe8c24fedc3",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Ewolucja zegarów epigenetycznych: Horvath, PhenoAge, GrimAge i DunedinPACE",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-10-r115"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:4:czy-test-z-krwi-mowi-ile-lat-bedziesz-zyc",
+        "inventory_sha256": "7ccdddace71bb09c3ff82a793dd9d6301cc12047f6a4a1c468476be9fc55af07",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:5:czy-dieta-lub-suplement-moga-cofnac-wiek-epigene",
+        "inventory_sha256": "72ddaf6b62a7c2b895815760e0a87fd6f6b4399484c0946c6563957f3dc0fcbf",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "aae8820e0400f36321213418e3d920e21b0b58703a427a55e167e9a45cbb2889",
+        "note": "Strona PDF 1 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "12a7c57551d3ca3355eca254889ec55ea7508b88f246c5d4e18727c54be8863b",
+        "note": "Strona PDF 2 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "b7bac761038948835299124dac0c152fc780a26e0e129f57b27fd32d28b52788",
+        "note": "Strona PDF 3 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "24f67ce77b1d758c9b2e68260b36100d7ee452e1a6917a00bd68b21bbf66ab23",
+        "note": "Strona PDF 4 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4278,
+    "review_wait_ms": 3251975
   },
   "errors": []
 }

@@ -1,35 +1,430 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:57:58.663Z",
+  "generated_at": "2026-10-03T07:22:01.552Z",
+  "reviewed_at": "2026-10-03T08:16:44.943Z",
   "slug": "mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol",
-  "html_sha256": "a3e05655eb5303436375f9c7e0edcdc125b79505a079cb55bbd5e04b50896a05",
-  "site_html_sha256": "a3e05655eb5303436375f9c7e0edcdc125b79505a079cb55bbd5e04b50896a05",
-  "pdf_sha256": "45bf37a596992292e643800966545dd4bad34359d1c75d3ac57e16b6cdd630aa",
-  "site_pdf_sha256": "45bf37a596992292e643800966545dd4bad34359d1c75d3ac57e16b6cdd630aa",
+  "html_sha256": "c651692699bf19a09591db813e0e0a8de5924bcdb034e97747e59776995cef7f",
+  "site_html_sha256": "c651692699bf19a09591db813e0e0a8de5924bcdb034e97747e59776995cef7f",
+  "pdf_sha256": "55765ade38cbb57420ba192ca5714dee799de95e020fc444cfa5f4cf19ece162",
+  "site_pdf_sha256": "55765ade38cbb57420ba192ca5714dee799de95e020fc444cfa5f4cf19ece162",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T07:22:01.552Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html",
+      "sha256": "c651692699bf19a09591db813e0e0a8de5924bcdb034e97747e59776995cef7f",
+      "bytes": 32076
+    },
+    "html_site": {
+      "file": "_site/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html",
+      "sha256": "c651692699bf19a09591db813e0e0a8de5924bcdb034e97747e59776995cef7f",
+      "bytes": 32076
+    },
+    "pdf_source": {
+      "file": "assets/pdf/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.pdf",
+      "sha256": "55765ade38cbb57420ba192ca5714dee799de95e020fc444cfa5f4cf19ece162",
+      "bytes": 373896
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.pdf",
+      "sha256": "55765ade38cbb57420ba192ca5714dee799de95e020fc444cfa5f4cf19ece162",
+      "bytes": 373896
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol/desktop.png",
+      "screenshot_sha256": "ae99bb72c8249ea379b5969736711006bb149b74bef4d12f5d0879aa616a21a8",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol/mobile.png",
+      "screenshot_sha256": "d83b3e9c334247cde92745a082afc8abf43a2ec1cf7292a55c65dc456f810669",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "MITY 11 min czytania MIT: czy owoce, węglowodany, tłuszcz i sól zawsze trują? Składnik jedzenia to nie trucizna ani lek. Cała gra toczy się o ilość, formę i kontekst.",
+      "alt": "Uśmiechnięty mężczyzna 50+ w jasnej, nowoczesnej kuchni je kolorowy talerz: owoce, pełne ziarno, oliwa",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-hero-20260929.avif",
+          "sha256": "d07e8334537a71386a7df73f670194b8e33b41ed20a5b5a3094feef8ecf5d52e",
+          "bytes": 188085,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-hero-20260929.webp",
+          "sha256": "e7948fc7ccf1942fefd2ef45fb056ddb4a3b762b1ed523748f3f1b197a1a1709",
+          "bytes": 201214,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-hero-20260929.jpg",
+          "sha256": "3d60c44e34cfeff62914e477e712d7a5225b01505434bea6b0aa6030ee8bb597",
+          "bytes": 339731,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "0d76fb3584b5dd846da527c870890895fdf3fa913862faf77b35bea1f341ee35"
+    },
+    {
+      "placement": "content:2:czy-cukier-w-owocach-dziala-jak-cukier-w-napoju",
+      "role": "content",
+      "heading": "Czy cukier w owocach działa jak cukier w napoju?",
+      "context": "Szybka odpowiedź Nie da się uczciwie uznać całej grupy „owoce”, „węglowodany” albo „tłuszcz” za truciznę. Ryzyko zależy od produktu, dawki, wzorca diety i chorób. WHO zaleca dorosłym co najmniej 400 g warzyw i owoców oraz mniej niż 5 g soli dziennie. Sok nie działa jak cały owoc, a tłuszcze nasycone i nienasycone mają inne znaczenie. Kluczowe wnioski Całe owoce dostarczają błonnika i nie są metabolicznie równoważne sokom ani napojom słodzonym. Węglowodany obejmują zarówno pełne ziarna i strączki, jak i rafinowane słodycze; nazwa makroskładnika nie opisuje jakości. WHO zaleca mniej niż 2 g sodu, czyli mniej niż 5 g soli dziennie u dorosłych, z wyjątkami klinicznymi. Rodzaj tłuszczu ma znaczenie: zastępowanie tłuszczów nasyconych nienasyconymi różni się od dodawania dowolnego tłuszczu. Czy c",
+      "alt": "Kolorowa miska całych owoców obok szklanki soku, jasne światło",
+      "caption": "Cały owoc zawiera wodę, strukturę komórkową i błonnik, dlatego tempo jedzenia oraz sytość różnią się od soku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-1-20260929.avif",
+          "sha256": "0685becf28e7ecaca3d2487631fb0c8d8bbbca6b6d2ec5752f71c536a3ce86dc",
+          "bytes": 30655,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-1-20260929.webp",
+          "sha256": "f6038bf48a3e67dd3e679c731b9294dd41882b0239d37aaa30f469c1650a8d15",
+          "bytes": 31420,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-1-20260929.jpg",
+          "sha256": "6fde3a28e96be3a56f99a2b1a24d4eccf5c4c0aa42e0a953f0c892d74ecd907a",
+          "bytes": 68412,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "b0d5881aedfd9cbe7f18ccdd6931cfd3b51ab4a6c2daf059a44d29741a60c462"
+    },
+    {
+      "placement": "content:3:czy-wszystkie-weglowodany-sa-problemem",
+      "role": "content",
+      "heading": "Czy wszystkie węglowodany są problemem?",
+      "context": "Szybka odpowiedź Nie da się uczciwie uznać całej grupy „owoce”, „węglowodany” albo „tłuszcz” za truciznę. Ryzyko zależy od produktu, dawki, wzorca diety i chorób. WHO zaleca dorosłym co najmniej 400 g warzyw i owoców oraz mniej niż 5 g soli dziennie. Sok nie działa jak cały owoc, a tłuszcze nasycone i nienasycone mają inne znaczenie. Kluczowe wnioski Całe owoce dostarczają błonnika i nie są metabolicznie równoważne sokom ani napojom słodzonym. Węglowodany obejmują zarówno pełne ziarna i strączki, jak i rafinowane słodycze; nazwa makroskładnika nie opisuje jakości. WHO zaleca mniej niż 2 g sodu, czyli mniej niż 5 g soli dziennie u dorosłych, z wyjątkami klinicznymi. Rodzaj tłuszczu ma znaczenie: zastępowanie tłuszczów nasyconych nienasyconymi różni się od dodawania dowolnego tłuszczu. Czy c",
+      "alt": "Talerz pełnoziarnistych potraw i strączków w nowoczesnej kuchni, świeże kolory",
+      "caption": "Nie. Pełne ziarna, warzywa, owoce i strączki różnią się od napojów słodzonych oraz produktów z oczyszczonej mąki pod względem błonnika, gęstości energetycznej i sposobu jedzenia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-2-20260929.avif",
+          "sha256": "683da5183e163e2f32c361892a92075d858464261f89e8048e5481022218c7c1",
+          "bytes": 99173,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-2-20260929.webp",
+          "sha256": "5311add99025ee197210f0329bf4090c06d820428904bf8ca6447ee2a34c5a81",
+          "bytes": 93288,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-2-20260929.jpg",
+          "sha256": "0dc0755f87f2d12d066288d907ff8e0d498baedcc99a35945c13f3d7ff27f74a",
+          "bytes": 153611,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "de7cb97ad5536f9abdcc5c8f353503b0539fdfd841a91941134ab1dc1b55eb46"
+    },
+    {
+      "placement": "content:4:czy-tluszcz-jest-zdrowy-bez-ograniczen",
+      "role": "content",
+      "heading": "Czy tłuszcz jest zdrowy bez ograniczeń?",
+      "context": "Szybka odpowiedź Nie da się uczciwie uznać całej grupy „owoce”, „węglowodany” albo „tłuszcz” za truciznę. Ryzyko zależy od produktu, dawki, wzorca diety i chorób. WHO zaleca dorosłym co najmniej 400 g warzyw i owoców oraz mniej niż 5 g soli dziennie. Sok nie działa jak cały owoc, a tłuszcze nasycone i nienasycone mają inne znaczenie. Kluczowe wnioski Całe owoce dostarczają błonnika i nie są metabolicznie równoważne sokom ani napojom słodzonym. Węglowodany obejmują zarówno pełne ziarna i strączki, jak i rafinowane słodycze; nazwa makroskładnika nie opisuje jakości. WHO zaleca mniej niż 2 g sodu, czyli mniej niż 5 g soli dziennie u dorosłych, z wyjątkami klinicznymi. Rodzaj tłuszczu ma znaczenie: zastępowanie tłuszczów nasyconych nienasyconymi różni się od dodawania dowolnego tłuszczu. Czy c",
+      "alt": "Butelka oliwy i rzepaku na jasnym blacie, obok orzechy i awokado",
+      "caption": "Nie. Tłuszcze nienasycone z oliwy, orzechów lub ryb mają inny profil niż duża podaż tłuszczów nasyconych i przemysłowych trans.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-3-20260929.avif",
+          "sha256": "7411c6f6c0b581f418312acfd63df724facc1389c8c4882d5127f7663ca6b6e0",
+          "bytes": 38389,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-3-20260929.webp",
+          "sha256": "6a22fc578ea8854755862ded387c852044e627ae13bf075c796d2cd35a37b205",
+          "bytes": 40420,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-3-20260929.jpg",
+          "sha256": "f7f4e16fae99d43c169a5544ed1096463d699835ddbc1b17fe5c45dd0b72610a",
+          "bytes": 83710,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ad3485951fc91b828a76752b41842d6e6e9ec6f5d02e1961ee49ea6df22e298f"
+    },
+    {
+      "placement": "content:5:ile-soli-jest-rozsadna-granica",
+      "role": "content",
+      "heading": "Ile soli jest rozsądną granicą?",
+      "context": "Szybka odpowiedź Nie da się uczciwie uznać całej grupy „owoce”, „węglowodany” albo „tłuszcz” za truciznę. Ryzyko zależy od produktu, dawki, wzorca diety i chorób. WHO zaleca dorosłym co najmniej 400 g warzyw i owoców oraz mniej niż 5 g soli dziennie. Sok nie działa jak cały owoc, a tłuszcze nasycone i nienasycone mają inne znaczenie. Kluczowe wnioski Całe owoce dostarczają błonnika i nie są metabolicznie równoważne sokom ani napojom słodzonym. Węglowodany obejmują zarówno pełne ziarna i strączki, jak i rafinowane słodycze; nazwa makroskładnika nie opisuje jakości. WHO zaleca mniej niż 2 g sodu, czyli mniej niż 5 g soli dziennie u dorosłych, z wyjątkami klinicznymi. Rodzaj tłuszczu ma znaczenie: zastępowanie tłuszczów nasyconych nienasyconymi różni się od dodawania dowolnego tłuszczu. Czy c",
+      "alt": "Solniczka i świeże warzywa na jasnym stole, pogodna scena",
+      "caption": "WHO zaleca dorosłym mniej niż 2 g sodu dziennie, co odpowiada mniej niż 5 g soli.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-4-20260929.avif",
+          "sha256": "c4f359b1c92d8b7342cef1312a55472093995e9a72871de8ead4419000efe14f",
+          "bytes": 84950,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-4-20260929.webp",
+          "sha256": "4e4419de6e593e4e6fc4dc2d2c8c5718480e811c0053dc6d171cb6ae599873f9",
+          "bytes": 83300,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol-section-4-20260929.jpg",
+          "sha256": "e89d1d49d894f743da9a8ed40f754cda583a9aa5ba068f2cd857e7ed07304d17",
+          "bytes": 139312,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "444faa30a3eaaa0aa0c4d84d6b4f3fe8586c4ab885b83a018cec89b992684cc8"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol/pdf-pages/page-1.png",
+        "sha256": "a260d2497b52f9bb133969fb7c24b29b17d47baefc59cb01d3843c093aacb53c",
+        "bytes": 696258,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1060,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol/pdf-pages/page-2.png",
+        "sha256": "ed7739cfbfd78abdab93309a61991acc9f612783291ff2a16d1a21ae68f7992f",
+        "bytes": 642385,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol/pdf-pages/page-3.png",
+        "sha256": "9877206d8def76bfbeb88a1f18a48a76fb5357c0309126493026f7bbaf02021f",
+        "bytes": 736774,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol/pdf-pages/page-4.png",
+        "sha256": "09985f683025522a3ffb232894f3c5a0a042345e0afe7e6676b2e192c042d1d5",
+        "bytes": 169232,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1064,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — kontrola wizualna FitPo50",
+    "reviewed_at": "2026-10-03T08:16:44.943Z",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "ae99bb72c8249ea379b5969736711006bb149b74bef4d12f5d0879aa616a21a8",
+        "note": "Pełny render desktop obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "d83b3e9c334247cde92745a082afc8abf43a2ec1cf7292a55c65dc456f810669",
+        "note": "Pełny render mobile obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "0d76fb3584b5dd846da527c870890895fdf3fa913862faf77b35bea1f341ee35",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:2:czy-cukier-w-owocach-dziala-jak-cukier-w-napoju",
+        "inventory_sha256": "b0d5881aedfd9cbe7f18ccdd6931cfd3b51ab4a6c2daf059a44d29741a60c462",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Jabłko, jagody i maliny, sok owocowy",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:3:czy-wszystkie-weglowodany-sa-problemem",
+        "inventory_sha256": "de7cb97ad5536f9abdcc5c8f353503b0539fdfd841a91941134ab1dc1b55eb46",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Zdrowe ziarna; białe pieczywo i słodycze; podpisy produktów",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:4:czy-tluszcz-jest-zdrowy-bez-ograniczen",
+        "inventory_sha256": "ad3485951fc91b828a76752b41842d6e6e9ec6f5d02e1961ee49ea6df22e298f",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Oliwa z oliwek extra virgin; olej rzepakowy polski; orzechy mieszane",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:5:ile-soli-jest-rozsadna-granica",
+        "inventory_sha256": "444faa30a3eaaa0aa0c4d84d6b4f3fe8586c4ab885b83a018cec89b992684cc8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Sól i warzywa; naturę na talerzu, świeże smaki zdrowego życia",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "a260d2497b52f9bb133969fb7c24b29b17d47baefc59cb01d3843c093aacb53c",
+        "note": "Strona PDF 1 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "ed7739cfbfd78abdab93309a61991acc9f612783291ff2a16d1a21ae68f7992f",
+        "note": "Strona PDF 2 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "9877206d8def76bfbeb88a1f18a48a76fb5357c0309126493026f7bbaf02021f",
+        "note": "Strona PDF 3 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "09985f683025522a3ffb232894f3c5a0a042345e0afe7e6676b2e192c042d1d5",
+        "note": "Strona PDF 4 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4268,
+    "review_wait_ms": 3283391
   },
   "errors": []
 }

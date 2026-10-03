@@ -1,10 +1,10 @@
-# FitPo50 — staging HTML i PDF
+# FitPo50 — staging HTML, obrazy i PDF
 
 - Status: **PREVIEW_READY**
+- Technical: **TECHNICAL_PASS**
+- Visual: **VISUAL_REVIEW_VERIFIED**
 - Slug: jak-zaczac-na-silowni-po-50
-- Render HTML: desktop 1440 px + mobile 390 px
-- Tabele semantyczne: 0
-- PDF: 7 stron, wyrenderowano 7
-- Zgodność tekstu HTML→PDF: 100.00%
-- HTML source/_site: 1:1
-- PDF source/_site: 1:1
+- Reviewed by: Codex — kontrola wizualna FitPo50
+- Review method: Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.
+- Obrazy: 9
+- PDF: 7 stron

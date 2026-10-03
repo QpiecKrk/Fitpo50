@@ -10,6 +10,7 @@ const { validateArticleArchitecture } = require('../scripts/lib/article-intent-l
 const { validateManifestStructure } = require('../scripts/lib/article-media');
 const { validators } = require('../scripts/lib/article-policy');
 const { isPdfFile, validateSemanticTableMarkup } = require('../scripts/article-preview-gate');
+const { validateAboutEntities } = require('../scripts/lib/entity-sameas-policy');
 
 const ROOT = path.resolve(__dirname, '..');
 const FIXTURES = path.join(__dirname, 'fixtures', 'pipeline-invalid');
@@ -33,6 +34,12 @@ test('globalny diff gate nie traktuje celowo błędnych fixture jako draftów pu
   const source = fs.readFileSync(path.join(ROOT, 'scripts', 'json-fitpo50-gate-diff.js'), 'utf8');
   assert.match(source, /tests\/fixtures\/pipeline-invalid\//);
   assert.match(source, /!isIntentionalInvalidFixture\(file\)/);
+});
+
+test('wspólna polityka encji blokuje fałszywe sameAs i dopuszcza name-only oraz Q43656', () => {
+  assert.deepEqual(validateAboutEntities([{ '@type': 'Thing', name: 'Diabetes' }]), []);
+  assert.deepEqual(validateAboutEntities([{ '@type': 'Thing', name: 'Cholesterol', sameAs: 'https://www.wikidata.org/wiki/Q43656' }]), []);
+  assert.match(validateAboutEntities([{ '@type': 'Thing', name: 'Diabetes', sameAs: 'https://www.wikidata.org/wiki/Q12204' }]).join('\n'), /Niezarejestrowana/);
 });
 
 test('pipeline blokuje fałszywe albo niedziałające źródło', () => {

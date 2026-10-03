@@ -1,35 +1,418 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T19:11:40.944Z",
+  "generated_at": "2026-10-03T07:22:16.868Z",
+  "reviewed_at": "2026-10-03T08:16:44.943Z",
   "slug": "ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki",
-  "html_sha256": "a35c422fbe80b68c928f71cf04627ce35d74ec7da96f3115e5b60119061bfea5",
-  "site_html_sha256": "a35c422fbe80b68c928f71cf04627ce35d74ec7da96f3115e5b60119061bfea5",
-  "pdf_sha256": "bbf609902a15b12fbea90234911ebc341dbac2971811eedfa49f4fa9784d6a89",
-  "site_pdf_sha256": "bbf609902a15b12fbea90234911ebc341dbac2971811eedfa49f4fa9784d6a89",
+  "html_sha256": "678d0e3c16215322da9f854d81a3ac053fdeaa0a37102b6a0a6bb86dcf2d2611",
+  "site_html_sha256": "678d0e3c16215322da9f854d81a3ac053fdeaa0a37102b6a0a6bb86dcf2d2611",
+  "pdf_sha256": "ea3db0a195519b8921e74a86ad0f2a728609ad97b1b991a24a2992077cc3c5dc",
+  "site_pdf_sha256": "ea3db0a195519b8921e74a86ad0f2a728609ad97b1b991a24a2992077cc3c5dc",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T07:22:16.868Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html",
+      "sha256": "678d0e3c16215322da9f854d81a3ac053fdeaa0a37102b6a0a6bb86dcf2d2611",
+      "bytes": 32037
+    },
+    "html_site": {
+      "file": "_site/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.html",
+      "sha256": "678d0e3c16215322da9f854d81a3ac053fdeaa0a37102b6a0a6bb86dcf2d2611",
+      "bytes": 32037
+    },
+    "pdf_source": {
+      "file": "assets/pdf/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.pdf",
+      "sha256": "ea3db0a195519b8921e74a86ad0f2a728609ad97b1b991a24a2992077cc3c5dc",
+      "bytes": 501315
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki.pdf",
+      "sha256": "ea3db0a195519b8921e74a86ad0f2a728609ad97b1b991a24a2992077cc3c5dc",
+      "bytes": 501315
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki/desktop.png",
+      "screenshot_sha256": "de5b889cbbb9a6bf64a7004ff77ff6010fe568a684e4aa8a79ed5da4778fde02",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki/mobile.png",
+      "screenshot_sha256": "b8866d7c4a47e9fdc9f8173069baefb57e198fd980e29e839afc8735854d6ff2",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "JEDZENIE 9 min czytania Ile białka po 50-tce: zapotrzebowanie, posiłki i odżywka Białko to budulec mięśni — i jedyna inwestycja w zdrowie, którą możesz zrobić przy każdym posiłku.",
+      "alt": "Ile białka po 50. roku życia? Zapotrzebowanie, źródła i odżywki",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/hero-bialko-po-50-fitpo50-20260929.avif",
+          "sha256": "72e25e7bdc4383a20bb4825f978b20231d5774b34751b6917a13af82eabb6922",
+          "bytes": 169727,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/hero-bialko-po-50-fitpo50-20260929.webp",
+          "sha256": "15e8c3703018fdaa0337563361715c7b7e354ba9d9d605e763ae1e46ffb81858",
+          "bytes": 198102,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/hero-bialko-po-50-fitpo50-20260929.jpg",
+          "sha256": "2d25d291c9f8027b9b278582824e793da0b274ac16ce51b89e8a2bd8933768d3",
+          "bytes": 332646,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "dffcdaf1d865f195728bf4507f3f8aed7f539842045bf7f1e9f9ee1758adab92"
+    },
+    {
+      "placement": "content:2:jak-obliczyc-dzienna-ilosc-bialka",
+      "role": "content",
+      "heading": "Jak obliczyć dzienną ilość białka?",
+      "context": "Szybka odpowiedź Eksperci ESPEN zalecają zdrowym starszym osobom zwykle co najmniej 1,0–1,2 g białka na kilogram masy ciała dziennie, razem z regularnym ruchem. Przy chorobie lub niedożywieniu cel bywa wyższy, ale przy przewlekłej chorobie nerek może wymagać innego ustalenia. Odżywka WPC jest wygodnym źródłem, a nie obowiązkowym suplementem. Kluczowe wnioski Zakres 1,0–1,2 g/kg dotyczy zdrowych starszych osób i nie jest automatyczną receptą dla każdego pięćdziesięciolatka. Białko najlepiej rozłożyć między główne posiłki zamiast zostawiać większość na kolację. WPC, WPI i zwykłe jedzenie dostarczają aminokwasów; wybór zależy od tolerancji i wygody. Choroba nerek, niedożywienie lub znaczna otyłość wymagają indywidualnego sposobu liczenia. Jak obliczyć dzienną ilość białka? Pomnóż odpowiednią ",
+      "alt": "Mężczyzna po 50-tce oblicza z dietetyczką ilość białka na podstawie masy ciała i jadłospisu",
+      "caption": "Pomnóż odpowiednią masę ciała przez ustalony cel w gramach na kilogram.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ile-bialka-target-20260930.avif",
+          "sha256": "7d74be451e62c3b0ddfe8dc07a937447bfa838d071c0f4a2f334be197634d61a",
+          "bytes": 87258,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ile-bialka-target-20260930.webp",
+          "sha256": "363d718c787ccbda2ee29862a8ad68d7e9b713453c8a1aa7e968f20690dbebb5",
+          "bytes": 150126,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ile-bialka-target-20260930.jpg",
+          "sha256": "de07d52d6a00074b6ee264544a60cdd4b5cbf90cd3fa57f0b358cb4e26cc88a1",
+          "bytes": 275223,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "46c58d7b7faa83c3af57af297fc1c5c838b451137d59f77fea03d24c27816b64"
+    },
+    {
+      "placement": "content:3:jak-rozlozyc-bialko-miedzy-posilki",
+      "role": "content",
+      "heading": "Jak rozłożyć białko między posiłki?",
+      "context": "Szybka odpowiedź Eksperci ESPEN zalecają zdrowym starszym osobom zwykle co najmniej 1,0–1,2 g białka na kilogram masy ciała dziennie, razem z regularnym ruchem. Przy chorobie lub niedożywieniu cel bywa wyższy, ale przy przewlekłej chorobie nerek może wymagać innego ustalenia. Odżywka WPC jest wygodnym źródłem, a nie obowiązkowym suplementem. Kluczowe wnioski Zakres 1,0–1,2 g/kg dotyczy zdrowych starszych osób i nie jest automatyczną receptą dla każdego pięćdziesięciolatka. Białko najlepiej rozłożyć między główne posiłki zamiast zostawiać większość na kolację. WPC, WPI i zwykłe jedzenie dostarczają aminokwasów; wybór zależy od tolerancji i wygody. Choroba nerek, niedożywienie lub znaczna otyłość wymagają indywidualnego sposobu liczenia. Jak obliczyć dzienną ilość białka? Pomnóż odpowiednią ",
+      "alt": "Kobieta po 50-tce je trzy zbilansowane posiłki zawierające różne źródła białka",
+      "caption": "Mięśnie reagują na porcję aminokwasów oraz trening, dlatego praktycznie warto umieścić wyraźne źródło białka w każdym głównym posiłku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ile-bialka-meals-20260930.avif",
+          "sha256": "eb7ccdd3c74bba4968003e0c76d9ae5ddbb11b65adbdfb6f9b7054c9257d5837",
+          "bytes": 124773,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ile-bialka-meals-20260930.webp",
+          "sha256": "c2fd2ae20ac5ac7a7a775ea76de5c1424b9da1c328c9486451f9adf317b702a5",
+          "bytes": 203600,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ile-bialka-meals-20260930.jpg",
+          "sha256": "86f704420f77eea5013fdf366f155fc5960955ec9406ec3bc39c226ba08d49de",
+          "bytes": 339315,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "a7c94a901b3dab8da0b7e0d0a31adaf4ea7dc78366e3cc8a529aa2f133f1828e"
+    },
+    {
+      "placement": "content:4:czy-wpc-lub-wpi-jest-konieczne",
+      "role": "content",
+      "heading": "Czy WPC lub WPI jest konieczne?",
+      "context": "Szybka odpowiedź Eksperci ESPEN zalecają zdrowym starszym osobom zwykle co najmniej 1,0–1,2 g białka na kilogram masy ciała dziennie, razem z regularnym ruchem. Przy chorobie lub niedożywieniu cel bywa wyższy, ale przy przewlekłej chorobie nerek może wymagać innego ustalenia. Odżywka WPC jest wygodnym źródłem, a nie obowiązkowym suplementem. Kluczowe wnioski Zakres 1,0–1,2 g/kg dotyczy zdrowych starszych osób i nie jest automatyczną receptą dla każdego pięćdziesięciolatka. Białko najlepiej rozłożyć między główne posiłki zamiast zostawiać większość na kolację. WPC, WPI i zwykłe jedzenie dostarczają aminokwasów; wybór zależy od tolerancji i wygody. Choroba nerek, niedożywienie lub znaczna otyłość wymagają indywidualnego sposobu liczenia. Jak obliczyć dzienną ilość białka? Pomnóż odpowiednią ",
+      "alt": "Mężczyzna po 50-tce porównuje dwa nieoznakowane opakowania odżywki białkowej przy zbilansowanym posiłku",
+      "caption": "Nie. Koncentrat WPC jest zwykle tańszy i zawiera więcej laktozy, a izolat WPI ma wyższy udział białka oraz mniej laktozy i tłuszczu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ile-bialka-whey-choice-v2-20260930.avif",
+          "sha256": "fa9248647d29c347e4fcd47182d04b4eff26018088acffb4f4720bccf8670779",
+          "bytes": 56854,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ile-bialka-whey-choice-v2-20260930.webp",
+          "sha256": "579d02d0fd9c9476ba9cfe55db70159da64d49ab2d4bfb5c5ccbbae6265a294b",
+          "bytes": 103370,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ile-bialka-whey-choice-v2-20260930.jpg",
+          "sha256": "ca872ea68e8ec0fca5de5b4f980ae9cfc11d91a9905c9afd33717a24c2f0da39",
+          "bytes": 213226,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "06260861d6819518835bb274990e25bf0d6f66d5f8486ef3a7f1840c32ebdaca"
+    },
+    {
+      "placement": "content:5:kiedy-wieksza-ilosc-bialka-wymaga-konsultacji",
+      "role": "content",
+      "heading": "Kiedy większa ilość białka wymaga konsultacji?",
+      "context": "Szybka odpowiedź Eksperci ESPEN zalecają zdrowym starszym osobom zwykle co najmniej 1,0–1,2 g białka na kilogram masy ciała dziennie, razem z regularnym ruchem. Przy chorobie lub niedożywieniu cel bywa wyższy, ale przy przewlekłej chorobie nerek może wymagać innego ustalenia. Odżywka WPC jest wygodnym źródłem, a nie obowiązkowym suplementem. Kluczowe wnioski Zakres 1,0–1,2 g/kg dotyczy zdrowych starszych osób i nie jest automatyczną receptą dla każdego pięćdziesięciolatka. Białko najlepiej rozłożyć między główne posiłki zamiast zostawiać większość na kolację. WPC, WPI i zwykłe jedzenie dostarczają aminokwasów; wybór zależy od tolerancji i wygody. Choroba nerek, niedożywienie lub znaczna otyłość wymagają indywidualnego sposobu liczenia. Jak obliczyć dzienną ilość białka? Pomnóż odpowiednią ",
+      "alt": "Lekarka omawia z mężczyzną po 50-tce wyniki nerkowe i indywidualną podaż białka",
+      "caption": "Przewlekła choroba nerek, zalecone ograniczenie białka, nieprawidłowy eGFR, choroba wątroby lub znaczne niedożywienie wymagają indywidualnego planu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ile-bialka-kidney-consult-20260930.avif",
+          "sha256": "0d815cb6e3a040a80f232ffd18b98bbd4a57d356c66dc46f3ceab87cf0a2a753",
+          "bytes": 56625,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ile-bialka-kidney-consult-20260930.webp",
+          "sha256": "65fa7582b0f7728c86c51916fac18a9d9f0ed959cdc5c445ba14677a5ec660dc",
+          "bytes": 106650,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ile-bialka-kidney-consult-20260930.jpg",
+          "sha256": "578dca48f2ea9be7a819f151226fe4d92fae6fe19310cbca91496119d149d51f",
+          "bytes": 221586,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "520ab192ccd676939fb3471738f0f37ce0f75be77f4be5332bc469ff1f0ca854"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki/pdf-pages/page-1.png",
+        "sha256": "bd31d6aba2c8c4541214fff129b274b1caa7af68b92069455a7e4791b2892c67",
+        "bytes": 699468,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1064,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki/pdf-pages/page-2.png",
+        "sha256": "f94b0b2c8eea6cbe797064947e2283c878d14e67a17ccf45ec8bec6f5d8a827f",
+        "bytes": 1067859,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1045,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki/pdf-pages/page-3.png",
+        "sha256": "5b8f9c7862a179080c483a960d702194cbf5dc48bc4df99c912dc769e6bcdd70",
+        "bytes": 834818,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/ile-bialka-po-50-roku-zycia-zapotrzebowanie-odzywki/pdf-pages/page-4.png",
+        "sha256": "97efe4ea8099c103a27c9e776df37051fbc517574d606502372b8eb3ec57aec2",
+        "bytes": 202684,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — kontrola wizualna FitPo50",
+    "reviewed_at": "2026-10-03T08:16:44.943Z",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "de5b889cbbb9a6bf64a7004ff77ff6010fe568a684e4aa8a79ed5da4778fde02",
+        "note": "Pełny render desktop obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "b8866d7c4a47e9fdc9f8173069baefb57e198fd980e29e839afc8735854d6ff2",
+        "note": "Pełny render mobile obejrzany: układ, tekst, obrazy i brak przepełnień są prawidłowe."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "dffcdaf1d865f195728bf4507f3f8aed7f539842045bf7f1e9f9ee1758adab92",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:2:jak-obliczyc-dzienna-ilosc-bialka",
+        "inventory_sha256": "46c58d7b7faa83c3af57af297fc1c5c838b451137d59f77fea03d24c27816b64",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:3:jak-rozlozyc-bialko-miedzy-posilki",
+        "inventory_sha256": "a7c94a901b3dab8da0b7e0d0a31adaf4ea7dc78366e3cc8a529aa2f133f1828e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:4:czy-wpc-lub-wpi-jest-konieczne",
+        "inventory_sha256": "06260861d6819518835bb274990e25bf0d6f66d5f8486ef3a7f1840c32ebdaca",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      },
+      {
+        "placement": "content:5:kiedy-wieksza-ilosc-bialka-wymaga-konsultacji",
+        "inventory_sha256": "520ab192ccd676939fb3471738f0f37ce0f75be77f4be5332bc469ff1f0ca854",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnej kompozycji; odpowiada sekcji, nie wprowadza w błąd i nie pokazuje błędnej anatomii ani sprzętu.",
+        "reviewed_by": "Codex — kontrola wizualna FitPo50",
+        "reviewed_at": "2026-10-03T08:16:44.943Z",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop i mobile, każdego obrazu oraz każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "bd31d6aba2c8c4541214fff129b274b1caa7af68b92069455a7e4791b2892c67",
+        "note": "Strona PDF 1 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "f94b0b2c8eea6cbe797064947e2283c878d14e67a17ccf45ec8bec6f5d8a827f",
+        "note": "Strona PDF 2 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "5b8f9c7862a179080c483a960d702194cbf5dc48bc4df99c912dc769e6bcdd70",
+        "note": "Strona PDF 3 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "97efe4ea8099c103a27c9e776df37051fbc517574d606502372b8eb3ec57aec2",
+        "note": "Strona PDF 4 obejrzana w całości: treść jest czytelna, kompletna i bez uciętych elementów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4579,
+    "review_wait_ms": 3268075
   },
   "errors": []
 }
