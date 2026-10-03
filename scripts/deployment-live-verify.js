@@ -26,10 +26,15 @@ function git(args) {
   return String(result.stdout || '').trim();
 }
 
+function isPublicRootHtmlPath(file) {
+  const normalized = String(file || '').replace(/\\/g, '/');
+  return /^[^/]+\.html$/i.test(normalized);
+}
+
 function localArticlesForCommit(commit, baseUrl) {
   const result = spawnSync('git', ['diff', '--name-only', `${commit}^`, commit, '--', '*.html'], { encoding: 'utf8' });
   if (result.status !== 0) return [];
-  return String(result.stdout || '').split('\n').map((value) => value.trim()).filter((file) => file && !file.startsWith('_site/')).flatMap((file) => {
+  return String(result.stdout || '').split('\n').map((value) => value.trim()).filter(isPublicRootHtmlPath).flatMap((file) => {
     if (!fs.existsSync(file)) return [];
     const html = fs.readFileSync(file, 'utf8');
     if (!/"@type"\s*:\s*"BlogPosting"/.test(html)) return [];
@@ -119,7 +124,11 @@ async function main() {
   if (result.status !== 'LIVE_DEPLOYED_AND_VALIDATED') process.exit(2);
 }
 
-main().catch((error) => {
-  console.error(`[LIVE][FAIL] ${error.message || error}`);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(`[LIVE][FAIL] ${error.message || error}`);
+    process.exit(1);
+  });
+}
+
+module.exports = { isPublicRootHtmlPath };

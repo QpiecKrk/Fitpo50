@@ -6,6 +6,7 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { prepareDeploymentMarker } = require('../scripts/prepare-deployment-marker');
 const { verifyDeployment } = require('../scripts/lib/deployment-live-verifier');
+const { isPublicRootHtmlPath } = require('../scripts/deployment-live-verify');
 
 const ROOT = path.resolve(__dirname, '..');
 function run(command, args, cwd, env = {}) { return spawnSync(command, args, { cwd, env: { ...process.env, ...env }, encoding: 'utf8' }); }
@@ -90,6 +91,13 @@ test('old article HTML, missing PDF and missing image block final live status', 
   assert.ok(result.errors.some((error) => /stary lub zmieniony HTML/.test(error)));
   assert.ok(result.errors.some((error) => /brak prawidłowego PDF/.test(error)));
   assert.ok(result.errors.some((error) => /brak wymaganego obrazu/.test(error)));
+});
+
+test('live verifier selects public root HTML and ignores source templates', () => {
+  assert.equal(isPublicRootHtmlPath('centrum-nadcisnienia-po-50.html'), true);
+  assert.equal(isPublicRootHtmlPath('_site/centrum-nadcisnienia-po-50.html'), false);
+  assert.equal(isPublicRootHtmlPath('templates/topic-centers/centrum-nadcisnienia-po-50.html'), false);
+  assert.equal(isPublicRootHtmlPath('docs/example.html'), false);
 });
 
 test('recovery dry-run and blocked apply preserve dirty and untracked files', () => {
