@@ -111,10 +111,12 @@ def validate_sections_and_media(soup, article, root, errors):
     for heading in headings:
         pictures = sections[id(heading)]
         title = normalized(heading.get_text())
-        if len(pictures) != 1:
-            errors.append(f'Sekcja „{title}” wymaga dokładnie jednego odrębnego obrazu; znaleziono {len(pictures)}.')
+        if not pictures:
+            errors.append(f'Sekcja „{title}” wymaga co najmniej jednego odrębnego obrazu; znaleziono 0.')
             continue
-        sources.append(validate_picture(pictures[0], f'Sekcja „{title}”', root, errors))
+        for index, picture in enumerate(pictures, start=1):
+            label = f'Sekcja „{title}”' if index == 1 else f'Sekcja „{title}”, obraz {index}'
+            sources.append(validate_picture(picture, label, root, errors))
     if len([source for source in sources if source]) != len(set(source for source in sources if source)):
         errors.append('Obrazy sekcji muszą być odrębne; wykryto powtórzony fallback JPG.')
     hero_pictures = soup.select('section.article-intro-grid .article-hero picture')

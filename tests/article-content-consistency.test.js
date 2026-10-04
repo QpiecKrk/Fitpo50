@@ -41,6 +41,11 @@ test('each substantive section requires its own complete picture and caption', (
  const errors = check(html).join('\n');
   assert.match(errors, /Sekcja 3.*AVIF/);
 });
+test('a substantive section may contain an additional distinct reviewed image', () => {
+ const extra = '<figure><picture><source type="image/avif" srcset="./assets/section-1-extra.avif"><source type="image/webp" srcset="./assets/section-1-extra.webp"><img src="./assets/section-1-extra.jpg" alt="Druga konkretna ilustracja uzupełniająca sekcję pierwszą" width="1200" height="675"></picture><figcaption>Drugi konkretny podpis ilustracji, która wnosi nową informację do sekcji.</figcaption></figure>';
+ const html = fixture().replace('<figcaption>Konkretny podpis ilustracji numer 1 związanej z sekcją.</figcaption></figure>', '<figcaption>Konkretny podpis ilustracji numer 1 związanej z sekcją.</figcaption></figure>'+extra);
+ assert.deepEqual(check(html), []);
+});
 test('legacy Q&A and reading helper headings are not treated as substantive sections', () => {
  const helpers = '<h2>Szybkie odpowiedzi (Q&A)?</h2><h2>Szybkie odpowiedzi (AEO)?</h2><div class="qa-grid"><h2>Cytaty do zapamiętania?</h2><h2>Cytaty do zapamiętania (GEO)?</h2><h2>W skrócie (AI)?</h2><h2>W skrócie (AIO)?</h2><h2>Czytaj też?</h2></div>';
  const html = fixture().replace('<section class="faq-section">', `${helpers}<section class="faq-section">`);

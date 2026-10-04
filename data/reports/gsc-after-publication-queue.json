@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-10-04T05:42:04.328Z",
+  "updated_at": "2026-10-04T12:42:39.739Z",
   "items": [
+    {
+      "slug": "stluszczona-watroba-masld-po-50",
+      "target_url": "https://fitpo50.pl/stluszczona-watroba-masld-po-50.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/zdrowie.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-10-04T12:42:39.739Z",
+      "transaction_id": "article-stluszczona-watroba-masld-po-50-1791117621622-10484",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "ai-w-diagnostyce-i-lekach-na-raka",
       "target_url": "https://fitpo50.pl/ai-w-diagnostyce-i-lekach-na-raka.html",

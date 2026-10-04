@@ -6,7 +6,7 @@ Wczytaj ten plik przed tworzeniem `.fitpo50.json`. To kontrakt draftu Claude dla
 
 Claude tworzy treść, research, mapę dowodów i plan ilustracji. Lokalny agent zawsze wykonuje później:
 
-- research finalnego FAQ na podstawie aktualnego GSC, PAA lub autocomplete,
+- research finalnego FAQ na podstawie aktualnego GSC, PAA, autocomplete lub udokumentowanego researchu ręcznego,
 - linkowanie wewnętrzne na podstawie aktualnego repozytorium,
 - analizę kanibalizacji i centrum tematycznego,
 - kontrolę rzeczywistych obrazów, HTML, PDF i publikację.
@@ -14,6 +14,7 @@ Claude tworzy treść, research, mapę dowodów i plan ilustracji. Lokalny agent
 Claude nie zna aktualnego serwisu ani danych GSC. Dlatego:
 
 - `answer_blocks` i `faq_research` pozostają pustymi listami,
+- `editorial_notes.faq_gaps` pozostaje pustą listą; Claude nie szuka ani nie proponuje pytań FAQ,
 - nie powstają linki do `*.html`, slugi innych artykułów ani propozycje centrum,
 - `editorial_notes.local_pipeline_tasks` zawiera osobno zadanie FAQ i zadanie linkowania.
 
@@ -40,7 +41,7 @@ Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audi
   "quick_answer": "",
   "reading_time": "X min czytania",
   "hero_motto_html": "<em>...</em>",
-  "search_intent": "",
+  "search_intent": "informacyjna",
   "primary_keyword": "",
   "supporting_keywords": [],
   "key_takeaways": [],
@@ -58,7 +59,7 @@ Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audi
     "medical_risks": [],
     "assumptions": [],
     "local_pipeline_tasks": [
-      "LOCAL_AGENT_REQUIRED: przygotuj finalne FAQ z aktualnego GSC/PAA/autocomplete.",
+      "LOCAL_AGENT_REQUIRED: przygotuj prawdziwe finalne FAQ z aktualnego GSC/PAA/autocomplete lub udokumentowanego researchu ręcznego.",
       "LOCAL_AGENT_REQUIRED: dodaj naturalne linkowanie wewnętrzne po analizie aktualnego repozytorium."
     ]
   }
@@ -72,15 +73,19 @@ Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audi
 - Artykuł ma wyczerpać realną intencję czytelnika. Nie obowiązuje docelowa liczba słów ani sekcji.
 - Złożony temat może i powinien być dłuższy, jeśli kolejne części wnoszą dowody, mechanizm, praktyczne znaczenie albo bezpieczeństwo.
 - Nie skracaj kosztem brakującego wyjaśnienia. Nie wydłużaj powtórzeniami, listami dla licznika ani sekcjami bez osobnej funkcji.
-- `title` jest naturalnym H1 i nie podlega mechanicznemu limitowi pojedynczych znaków.
-- `seo_title` bez dopisku marki ma maksymalnie 55 znaków. `og_title` i `twitter_title` są identyczne z `seo_title`.
+- `title` jest naturalnym, kompletnym gramatycznie H1 długości 55–65 znaków. Nie wolno go mechanicznie ucinać; zbyt długi tytuł trzeba świadomie przepisać bez utraty sensu.
+- `seo_title` bez dopisku marki ma 35–55 znaków, jest pełną frazą i nie kończy się urwanym przyimkiem, spójnikiem, dwukropkiem ani myślnikiem. `og_title` i `twitter_title` są identyczne z `seo_title`.
 - `listing_title` ma bezpieczny zakres 45–80 znaków; 55–70 jest celem, nie sztywnym wymogiem.
 - Cztery opisy SEO są identyczne 1:1, mają 145–160 znaków i kończą się pełnym zdaniem.
 - `lead` nazywa problem i nie powtarza quick answer.
-- `quick_answer` zawiera 1–3 konkretne zdania, odpowiada od razu i mieści się w publikacyjnym zakresie 40–60 słów.
+- `search_intent` ma dokładnie jedną wartość: `how-to`, `czy-warto`, `objawy`, `normy`, `bezpieczenstwo`, `definicja`, `porownanie`, `informacyjna`, `plan`, `koszt` albo `dawkowanie`.
+- `primary_keyword` ma 2–8 słów i występuje naturalnie w `title`, `seo_title`, `lead` albo `quick_answer`; `supporting_keywords` zawiera 3–8 unikalnych fraz.
+- `key_takeaways` zawiera dokładnie 4 kompletne wnioski. Po każdej zmianie tej listy sprawdź wszystkie indeksy `evidence_claims.location`.
+- `quick_answer` zawiera 1–3 konkretne zdania, liczbę albo jawny warunek, odpowiada od razu i mieści się we wspólnym zakresie wszystkich bramek: 45–60 słów.
 - Pytające H2 kończą się `?`. Pierwszy akapit odpowiada bezpośrednio i konkretnie; 30–70 słów jest zaleceniem, nie samodzielnym blokerem.
+- Pierwszy akapit pod H2 kończy pełną myśl znakiem `.`, `!` albo `?`; nie może urywać się dwukropkiem zapowiadającym brakującą treść.
 - Każda metafora jest domknięta mechanizmem. Niejasne „to”, „ten wniosek” i „ta obietnica” muszą mieć nazwany poprzednik.
-- Tabela pozostaje semantycznym HTML: wrapper `.article-table-wrap`, `table.article-table`, `caption`, `thead`, `tbody` i właściwe `scope`.
+- Tabela pozostaje semantycznym HTML: wrapper `.article-table-wrap`, `table.article-table`, `caption`, `thead`, `tbody` i właściwe `scope`. Bloków `div`, `table`, `figure`, `aside`, list, `blockquote` ani `pre` nie wolno umieszczać wewnątrz `<p>`.
 
 ## Źródła i dowody
 
@@ -106,7 +111,9 @@ Nie używaj portali plotkarskich, tekstów sponsorowanych lub afiliacyjnych, ano
 }
 ```
 
-Ustaw `reachable` i `http_status` tylko po rzeczywistym otwarciu URL-a. W przeciwnym razie użyj `requires_local_verification` i pomiń `http_status`.
+Ustaw `reachable` i `http_status` tylko po rzeczywistym otwarciu URL-a i uzyskaniu końcowego kodu 2xx po przekierowaniach. Kod 3xx, 401, 403, 404, 429 lub 5xx nie jest dowodem dostępności dla draftu. W przeciwnym razie użyj `requires_local_verification` i pomiń `http_status`; walidator nada wtedy `DRAFT_REVIEW_REQUIRED`. Preferuj dostępny, kanoniczny rekord konkretnej publikacji w PubMed/PMC lub dokument instytucji zamiast zablokowanej strony DOI/wydawcy. Strona wyników wyszukiwania PubMed, PMC lub Google nigdy nie jest źródłem.
+
+`checked_at` zapisuje dzień faktycznego sprawdzenia i jest ważne maksymalnie 180 dni. URL-e i identyfikatory `sources[].id` są unikalne. Publikacje naukowe mają `publication_year` oraz `doi_or_pmid`, jeśli identyfikator istnieje.
 
 Każda liczba, próg, ryzyko, cena, mechanizm, rekomendacja, kategoryczna teza medyczna, wynik badania oraz merytoryczny podpis lub tekst ilustracji wymaga `evidence_claims`:
 
@@ -121,16 +128,19 @@ Każda liczba, próg, ryzyko, cena, mechanizm, rekomendacja, kategoryczna teza m
 
 Każde źródło musi być użyte. `logic_links` łączą wniosek z wcześniejszymi przesłankami, gdy relacja nie jest prostym cytowaniem jednego źródła.
 
+Każdy `claim` ma co najmniej 5 słów i jest dokładnym fragmentem finalnej wersji pola wskazanego przez `location`. `location` wskazuje pojedynczy tekst, nie całą listę lub obiekt. Po skróceniu, przeniesieniu albo usunięciu akapitu, sekcji lub wniosku przelicz indeksy i ponownie uruchom walidator; martwe odwołanie, np. `key_takeaways[4]` przy czterech elementach, blokuje draft.
+
 ## FAQ i linkowanie
 
 Claude nie tworzy finalnego FAQ i nie próbuje ustalać linków wewnętrznych. Oba obszary zależą od danych, których nie ma w skillu.
 
 - `answer_blocks: []`
 - `faq_research: []`
+- `editorial_notes.faq_gaps: []`
 - brak `href` prowadzących do `*.html`
 - dwa jawne zadania `LOCAL_AGENT_REQUIRED` w `editorial_notes.local_pipeline_tasks`
 
-Brak FAQ i linków jest na etapie `DRAFT` prawidłowy. Lokalny agent musi je uzupełnić przed `CONTENT_READY`; finalna publikacja nadal podlega pełnym bramkom FAQ i minimum czterech naturalnych linków.
+Brak FAQ i linków jest na etapie `DRAFT` prawidłowy. Nie pytaj użytkownika o pytania FAQ ani slugi linków. Lokalny agent zawsze wykonuje prawdziwy research FAQ i uzupełnia co najmniej cztery naturalne linki przed `CONTENT_READY`.
 
 ## Plan ilustracji
 

@@ -12,6 +12,10 @@ from typing import Any
 from urllib.parse import urlparse
 
 CATEGORIES = {"zdrowie", "jedzenie", "ruch", "ciekawe", "mity"}
+SEARCH_INTENTS = {
+    "how-to", "czy-warto", "objawy", "normy", "bezpieczenstwo", "definicja",
+    "porownanie", "informacyjna", "plan", "koszt", "dawkowanie",
+}
 LOCAL_FIELDS = {"internal_link_plan", "incoming_link_suggestions", "intent_audit", "topic_center_assessment", "topic_center_approval", "media_manifest"}
 REQUIRED_TEXT = (
     "title", "seo_title", "og_title", "twitter_title", "slug", "category",
@@ -31,6 +35,16 @@ QUESTION_STARTERS = ("czy ", "jak ", "dlaczego ", "ile ", "kiedy ", "co ", "któ
 PLACEHOLDER = re.compile(r"\b(todo|tbd|placeholder|do uzupełnienia|do doprecyzowania|wariant\s+\d+)\b|\{\{", re.I)
 KEBAB = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
+INCOMPLETE_TITLE = re.compile(r"(?:[:;,–-]|\b(?:a|ale|albo|bo|czy|dla|do|i|na|o|od|po|przy|w|z|ze))\s*$", re.I)
+BLOCK_IN_PARAGRAPH = re.compile(r"<(?:div|table|figure|aside|ul|ol|blockquote|pre)\b", re.I)
+QUICK_CONDITION = re.compile(r"\b(?:jeśli|jezeli|gdy|kiedy|u osób po 50|przy wyniku)\b", re.I)
+QUICK_NUMBER = re.compile(r"\b\d+(?:[.,]\d+)?(?:\s*[–-]\s*\d+(?:[.,]\d+)?)?\b")
+BANNED_SEO_TITLES = ("kompletny przewodnik", "praktyczny przewodnik", "wszystko co musisz wiedzieć")
+BANNED_META = (
+    "ten artykuł porządkuje najważniejsze fakty",
+    "po 50-tce warto patrzeć na zdrowie szerzej",
+    "po 50-tce najlepsze efekty daje prosty plan",
+)
 
 
 def words(value: Any) -> int:
@@ -43,6 +57,10 @@ def sentences(value: Any) -> int:
 
 def normalized(value: Any) -> str:
     return " ".join(re.sub(r"<[^>]+>", " ", str(value or "")).split()).casefold()
+
+
+def plain_text(value: Any) -> str:
+    return " ".join(re.sub(r"<[^>]+>", " ", str(value or "")).split())
 
 
 def is_https(value: Any) -> bool:
@@ -60,6 +78,46 @@ def is_date(value: Any) -> bool:
         return True
     except ValueError:
         return False
+
+
+def is_search_results_url(value: Any) -> bool:
+    if not isinstance(value, str):
+        return False
+    parsed = urlparse(value)
+    host = (parsed.hostname or "").casefold()
+    path = parsed.path.rstrip("/").casefold()
+    query = parsed.query.casefold()
+    if host.startswith("www."):
+        host = host[4:]
+    if host.startswith("google.") and path == "/search":
+        return True
+    if host == "pubmed.ncbi.nlm.nih.gov" and not re.fullmatch(r"/\d+", path):
+        return bool(query or not path)
+    if host in {"ncbi.nlm.nih.gov", "www.ncbi.nlm.nih.gov"} and "/pmc" in path and ("term=" in query or path.endswith("/pmc")):
+        return True
+    return False
+
+
+def validate_semantic_html(value: str, label: str, errors: list[str]) -> None:
+    for paragraph in re.findall(r"<p\b[^>]*>([\s\S]*?)</p>", value, re.I):
+        if BLOCK_IN_PARAGRAPH.search(paragraph):
+            errors.append(f"{label} zawiera blok semantyczny wewnątrz <p>; tabela/div/figura musi być osobnym blokiem.")
+            break
+    for table in re.findall(r"<table\b[\s\S]*?</table>", value, re.I):
+        table_lower = table.casefold()
+        if "article-table" not in table_lower:
+            errors.append(f"{label}: tabela wymaga klasy article-table.")
+        for required_tag in ("<caption", "<thead", "<tbody"):
+            if required_tag not in table_lower:
+                errors.append(f"{label}: tabela wymaga znacznika {required_tag}>.")
+        if not re.search(r"<th\b[^>]*scope=[\"']col[\"']", table, re.I):
+            errors.append(f'{label}: tabela wymaga nagłówka th scope="col".')
+        if not re.search(r"<th\b[^>]*scope=[\"']row[\"']", table, re.I):
+            errors.append(f'{label}: tabela wymaga nagłówka th scope="row".')
+        table_start = value.casefold().find(table_lower)
+        wrapper_start = value.casefold().rfind("article-table-wrap", 0, table_start)
+        if wrapper_start < 0:
+            errors.append(f"{label}: tabela wymaga wrappera .article-table-wrap.")
 
 
 def string_list(value: Any, minimum: int = 0, maximum: int | None = None) -> bool:
@@ -109,9 +167,18 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
     for field in LOCAL_FIELDS & data.keys():
         errors.append(f"{field} jest polem lokalnego pipeline i nie może powstać w Claude.")
 
-    seo_title = str(data.get("seo_title", ""))
-    if seo_title and len(seo_title) > 55:
-        errors.append(f"seo_title ma {len(seo_title)} znaków; maksimum bez dopisku marki to 55.")
+    title = plain_text(data.get("title", ""))
+    if title and not 55 <= len(title) <= 65:
+        errors.append(f"title ma {len(title)} znaków; wymagane 55–65, maksimum to 65.")
+    if title and INCOMPLETE_TITLE.search(title):
+        errors.append("title wygląda na urwany albo niedomknięty gramatycznie; przepisz go świadomie, nie skracaj automatycznie.")
+    seo_title = plain_text(data.get("seo_title", ""))
+    if seo_title and not 35 <= len(seo_title) <= 55:
+        errors.append(f"seo_title ma {len(seo_title)} znaków; wymagane 35–55 bez dopisku marki.")
+    if seo_title and INCOMPLETE_TITLE.search(seo_title):
+        errors.append("seo_title wygląda na urwany albo niedomknięty gramatycznie.")
+    if any(phrase in seo_title.casefold() for phrase in BANNED_SEO_TITLES):
+        errors.append("seo_title zawiera generyczny, mało-klikalny szablon.")
     listing_title = str(data.get("listing_title", ""))
     if listing_title and not 45 <= len(listing_title) <= 80:
         errors.append(f"listing_title ma {len(listing_title)} znaków; bezpieczny zakres to 45–80.")
@@ -126,18 +193,33 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
         errors.append(f"Opis SEO ma {len(descriptions[0])} znaków; wymagane 145–160.")
     if descriptions[0] and descriptions[0][-1] not in ".!?":
         errors.append("Opis SEO musi kończyć się pełnym znakiem zdania.")
+    if descriptions[0] and any(phrase in descriptions[0].casefold() for phrase in BANNED_META):
+        errors.append("Opis SEO zawiera generyczny, mało-klikalny szablon.")
     quick = str(data.get("quick_answer", ""))
     if quick and not 1 <= sentences(quick) <= 3:
         errors.append(f"quick_answer ma {sentences(quick)} zdań; wymagane 1–3.")
     quick_words = words(quick)
-    if quick and not 40 <= quick_words <= 60:
-        errors.append(f"quick_answer ma {quick_words} słów; publikacyjny zakres to 40–60.")
+    if quick and not 45 <= quick_words <= 60:
+        errors.append(f"quick_answer ma {quick_words} słów; wspólny zakres wszystkich bramek to 45–60.")
+    if quick and not (QUICK_NUMBER.search(quick) or QUICK_CONDITION.search(quick)):
+        errors.append("quick_answer musi zawierać konkretną liczbę albo warunek (np. jeśli, gdy, kiedy, u osób po 50).")
     if not re.fullmatch(r"\d+ min czytania", str(data.get("reading_time", ""))):
         errors.append('reading_time musi mieć format "X min czytania".')
+    raw_intent = str(data.get("search_intent", "")).strip().casefold().replace(" ", "-")
+    if raw_intent not in SEARCH_INTENTS:
+        errors.append(f"search_intent musi być jednym z: {', '.join(sorted(SEARCH_INTENTS))}.")
+    primary_keyword = plain_text(data.get("primary_keyword", ""))
+    if not 2 <= words(primary_keyword) <= 8:
+        errors.append("primary_keyword musi być konkretną frazą długości 2–8 słów.")
+    intent_surface = normalized(" ".join(str(data.get(field, "")) for field in ("title", "seo_title", "lead", "quick_answer")))
+    if primary_keyword and normalized(primary_keyword) not in intent_surface:
+        errors.append("primary_keyword musi występować naturalnie w title, seo_title, lead albo quick_answer.")
     if not string_list(data.get("supporting_keywords"), 3, 8):
         errors.append("supporting_keywords musi zawierać 3–8 niepustych fraz.")
-    if not string_list(data.get("key_takeaways"), 3, 5):
-        errors.append("key_takeaways musi zawierać 3–5 niepustych wniosków.")
+    elif len({normalized(item) for item in data["supporting_keywords"]}) != len(data["supporting_keywords"]):
+        errors.append("supporting_keywords musi zawierać unikalne frazy.")
+    if not string_list(data.get("key_takeaways"), 4, 4):
+        errors.append("key_takeaways musi zawierać dokładnie 4 niepuste wnioski.")
     notes = data.get("editorial_notes")
     if not isinstance(notes, dict):
         errors.append("editorial_notes musi być obiektem.")
@@ -150,6 +232,8 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
             errors.append("editorial_notes.local_pipeline_tasks musi zlecać lokalnemu agentowi finalny research FAQ.")
         if "link" not in tasks:
             errors.append("editorial_notes.local_pipeline_tasks musi zlecać lokalnemu agentowi linkowanie wewnętrzne.")
+        if isinstance(notes.get("faq_gaps"), list) and notes["faq_gaps"]:
+            errors.append("editorial_notes.faq_gaps musi pozostać puste; Claude nie bada ani nie proponuje FAQ.")
 
     sections = data.get("sections") if isinstance(data.get("sections"), list) else []
     if not sections:
@@ -167,7 +251,7 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
             errors.append(f"sections[{index}].paragraphs_html musi być niepustą listą tekstów.")
         else:
             first_words = words(paragraphs[0])
-            first_text = re.sub(r"<[^>]+>", " ", paragraphs[0]).strip()
+            first_text = plain_text(paragraphs[0])
             generic_intro = any(phrase in first_text.casefold() for phrase in (
                 "warto rozłożyć na praktyczne kroki",
                 "w tej części warto spokojnie uporządkować fakty",
@@ -180,6 +264,10 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
                 errors.append(f"Pierwszy akapit sections[{index}] nie domyka odpowiedzi answer-first.")
             if generic_intro:
                 errors.append(f"Pierwszy akapit sections[{index}] jest generyczny.")
+            if first_text and first_text[-1] not in ".!?":
+                errors.append(f"Pierwszy akapit sections[{index}] jest urwany albo nie kończy pełnej myśli.")
+            for paragraph_index, paragraph in enumerate(paragraphs):
+                validate_semantic_html(paragraph, f"sections[{index}].paragraphs_html[{paragraph_index}]", errors)
         if "image" in section or "images" in section:
             errors.append(f"sections[{index}] nie może zawierać lokalnych image/images; użyj image_prompts_v4.")
     content_data = {key: value for key, value in data.items() if key != "editorial_notes"}
@@ -193,6 +281,7 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
     if len(sources) < 4:
         errors.append(f"Źródeł jest {len(sources)}; wymagane są co najmniej 4 rzeczywiste i wykorzystane źródła.")
     source_urls: set[str] = set()
+    source_ids: set[str] = set()
     for index, source in enumerate(sources):
         if not isinstance(source, dict):
             errors.append(f"sources[{index}] nie jest obiektem.")
@@ -203,18 +292,40 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
         if not is_https(url):
             errors.append(f"sources[{index}].url nie jest prawidłowym publicznym HTTPS URL-em.")
         else:
+            if url in source_urls:
+                errors.append(f"sources[{index}].url powtarza wcześniejsze źródło.")
             source_urls.add(url)
+            if is_search_results_url(url):
+                errors.append(f"sources[{index}].url prowadzi do strony wyników wyszukiwania zamiast konkretnej publikacji lub dokumentu.")
+        source_id = str(source.get("id", "")).strip()
+        if source_id:
+            if source_id in source_ids:
+                errors.append(f"sources[{index}].id musi być unikalne.")
+            source_ids.add(source_id)
         if source.get("evidence_level") not in EVIDENCE_LEVELS:
             errors.append(f"sources[{index}].evidence_level ma niedozwoloną wartość.")
-        if not is_date(source.get("checked_at")):
+        checked_at = source.get("checked_at")
+        if not is_date(checked_at):
             errors.append(f"sources[{index}].checked_at musi być prawidłową datą YYYY-MM-DD.")
+        else:
+            age = (date.today() - date.fromisoformat(checked_at)).days
+            if age < 0:
+                errors.append(f"sources[{index}].checked_at nie może być datą z przyszłości.")
+            elif age > 180:
+                errors.append(f"sources[{index}].checked_at ma {age} dni; wymagane ponowne sprawdzenie URL-a.")
         status = source.get("url_status")
         if status not in {"reachable", "requires_local_verification"}:
             errors.append(f"sources[{index}].url_status ma niedozwoloną wartość.")
-        if status == "reachable" and not isinstance(source.get("http_status"), int):
-            errors.append(f"sources[{index}] reachable wymaga liczbowego http_status.")
+        if status == "reachable":
+            http_status = source.get("http_status")
+            if not isinstance(http_status, int) or isinstance(http_status, bool):
+                errors.append(f"sources[{index}] reachable wymaga liczbowego http_status.")
+            elif not 200 <= http_status < 300:
+                errors.append(f"sources[{index}] reachable wymaga końcowego HTTP 2xx po przekierowaniach; otrzymano {http_status}.")
         if status == "requires_local_verification" and "http_status" in source:
             errors.append(f"sources[{index}] nieweryfikowane nie może deklarować http_status.")
+        elif status == "requires_local_verification":
+            warnings.append(f"sources[{index}] wymaga lokalnej weryfikacji URL; wybierz dostępny kanoniczny URL, jeśli to możliwe.")
         year = source.get("publication_year")
         if year is not None and (not isinstance(year, int) or not 1900 <= year <= date.today().year):
             errors.append(f"sources[{index}].publication_year jest nieprawidłowy.")
@@ -222,6 +333,17 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
             errors.append(f"sources[{index}] publikacja naukowa wymaga publication_year.")
         if "doi_or_pmid" in source and not isinstance(source["doi_or_pmid"], str):
             errors.append(f"sources[{index}].doi_or_pmid musi być tekstem.")
+
+    for section_index, section in enumerate(sections):
+        if not isinstance(section, dict) or "evidence_source_ids" not in section:
+            continue
+        ids = section.get("evidence_source_ids")
+        if not string_list(ids, 1):
+            errors.append(f"sections[{section_index}].evidence_source_ids musi być niepustą listą identyfikatorów źródeł.")
+            continue
+        for source_id in ids:
+            if source_id not in source_ids:
+                errors.append(f"sections[{section_index}].evidence_source_ids odwołuje się do nieistniejącego źródła: {source_id}")
 
     claims = data.get("evidence_claims") if isinstance(data.get("evidence_claims"), list) else []
     if not claims:
@@ -232,17 +354,25 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
             errors.append(f"evidence_claims[{index}] nie jest obiektem.")
             continue
         statement, location, urls = claim.get("claim"), claim.get("location"), claim.get("source_urls")
-        if not isinstance(statement, str) or len(statement.strip()) < 8:
-            errors.append(f"evidence_claims[{index}].claim jest zbyt krótkie lub puste.")
-        if not isinstance(location, str) or locate(data, location) is None:
+        if not isinstance(statement, str) or words(statement) < 5:
+            errors.append(f"evidence_claims[{index}].claim musi zawierać co najmniej 5 słów i nazywać konkretne twierdzenie.")
+        located = locate(data, location) if isinstance(location, str) else None
+        if not isinstance(location, str) or located is None:
             errors.append(f"evidence_claims[{index}].location nie wskazuje istniejącego pola.")
-        elif isinstance(statement, str) and normalized(statement) not in normalized(locate(data, location)):
+        elif not isinstance(located, str):
+            errors.append(f"evidence_claims[{index}].location musi wskazywać dokładny fragment tekstowy, nie całą listę lub obiekt.")
+        elif isinstance(statement, str) and normalized(statement) not in normalized(located):
             errors.append(f"evidence_claims[{index}].claim nie występuje dokładnie we wskazanym location.")
         if claim.get("claim_type") not in CLAIM_TYPES:
             errors.append(f"evidence_claims[{index}].claim_type ma niedozwoloną wartość.")
         if not string_list(urls, 1):
             errors.append(f"evidence_claims[{index}].source_urls musi być niepustą listą URL-i.")
         else:
+            if len(set(urls)) != len(urls):
+                errors.append(f"evidence_claims[{index}].source_urls zawiera duplikaty.")
+            for url in urls:
+                if not is_https(url):
+                    errors.append(f"evidence_claims[{index}].source_urls zawiera nieprawidłowy URL.")
             used_urls.update(urls)
     for url in sorted(source_urls - used_urls):
         errors.append(f"Dekoracyjne źródło bez evidence_claims: {url}")

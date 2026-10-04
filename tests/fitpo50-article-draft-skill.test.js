@@ -32,14 +32,15 @@ function validDraft() {
   assert.ok(description.length >= 145 && description.length <= 160);
   const urls = [1, 2, 3, 4].map((id) => `https://pubmed.ncbi.nlm.nih.gov/${id}/`);
   const claims = [
-    'Wytyczne pomagają uporządkować decyzję.',
-    'Badania porównawcze pokazują ograniczenia metod.',
+    'Aktualne wytyczne pomagają uporządkować bezpieczną decyzję.',
+    'Badania porównawcze pokazują istotne ograniczenia ocenianych metod.',
     'Wynik grupowy nie przewiduje pewnie wyniku jednej osoby.',
-    'Rozmowa ze specjalistą pozwala uwzględnić przeciwwskazania.',
+    'Rozmowa ze specjalistą pozwala uwzględnić indywidualne przeciwwskazania.',
   ];
+  const today = new Date().toISOString().slice(0, 10);
   return {
     status: 'DRAFT',
-    title: 'Jak rozsądnie oceniać nowe informacje zdrowotne po pięćdziesiątce?',
+    title: 'Jak rozsądnie oceniać informacje zdrowotne po 50. roku życia?',
     seo_title: 'Jak oceniać informacje zdrowotne po 50?',
     og_title: 'Jak oceniać informacje zdrowotne po 50?',
     twitter_title: 'Jak oceniać informacje zdrowotne po 50?',
@@ -52,11 +53,11 @@ function validDraft() {
     listing_title: 'Jak oceniać informacje zdrowotne po 50. roku życia',
     listing_desc: 'Praktyczny przewodnik po ocenie dowodów, ograniczeń i pytań do specjalisty.',
     lead: 'Nowa informacja zdrowotna ma sens dopiero wtedy, gdy wiadomo, skąd pochodzi, czego dotyczy i czego jeszcze nie dowodzi.',
-    quick_answer: 'Najpierw sprawdź źródło, rodzaj badania i grupę uczestników. Potem oddziel wynik statystyczny od obietnicy dla jednej osoby oraz zobacz, czy autorzy opisali ograniczenia. Jeśli informacja może zmienić leczenie, suplementację albo diagnostykę, przygotuj pytania i omów je ze specjalistą znającym Twoją sytuację.',
+    quick_answer: 'Najpierw sprawdź źródło, rodzaj badania i grupę uczestników. Potem oddziel wynik statystyczny od obietnicy dla jednej osoby oraz zobacz, czy autorzy opisali ograniczenia. Jeśli informacja może zmienić leczenie, suplementację albo diagnostykę, przygotuj pytania i omów je ze specjalistą znającym Twoją sytuację i możliwe działania niepożądane terapii.',
     reading_time: '7 min czytania',
     hero_motto_html: '<em>Najpierw dowód, potem decyzja.</em>',
-    search_intent: 'praktyczna ocena wiarygodności informacji zdrowotnych',
-    primary_keyword: 'wiarygodne informacje zdrowotne',
+    search_intent: 'how-to',
+    primary_keyword: 'informacje zdrowotne',
     supporting_keywords: ['jak ocenić badanie', 'wiarygodne źródła medyczne', 'rozmowa z lekarzem'],
     key_takeaways: ['Sprawdź źródło.', 'Oceń metodę.', 'Uwzględnij ograniczenia.', 'Skonsultuj decyzję.'],
     editorial_notes: {
@@ -71,7 +72,7 @@ function validDraft() {
     }],
     sources: urls.map((url, index) => ({
       id: `S${index + 1}`, label: `Oficjalne źródło dowodowe numer ${index + 1}`, url,
-      evidence_level: 'official_guidance', checked_at: '2026-10-04', url_status: 'reachable', http_status: 200,
+      evidence_level: 'official_guidance', checked_at: today, url_status: 'reachable', http_status: 200,
     })),
     evidence_claims: claims.map((claim, index) => ({
       claim, location: 'sections[0].paragraphs_html[0]', claim_type: 'general', source_urls: [urls[index]],
@@ -102,4 +103,40 @@ test('Claude draft skill rejects generated FAQ because local agent owns final FA
   const result = validate(draft);
   assert.equal(result.status, 1);
   assert.match(result.stdout, /answer_blocks musi pozostać puste/);
+});
+
+test('Claude draft skill rejects MASLD-class structural mismatches before local import', () => {
+  const draft = validDraft();
+  draft.title = 'Stłuszczona wątroba bez alkoholu: dlaczego wynik USG wymaga pełnego i spokojnego wyjaśnienia';
+  draft.search_intent = 'praktyczna edukacja pacjenta po wyniku USG';
+  draft.key_takeaways.push('Piąty wniosek zostałby później obcięty przez fixer.');
+  draft.sources[0].http_status = 403;
+  draft.evidence_claims[0].claim = 'Wytyczne pomagają.';
+  const result = validate(draft);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /title ma .*maksimum to 65/);
+  assert.match(result.stdout, /search_intent musi być jednym z/);
+  assert.match(result.stdout, /key_takeaways musi zawierać dokładnie 4/);
+  assert.match(result.stdout, /końcowego HTTP 2xx/);
+  assert.match(result.stdout, /claim musi zawierać co najmniej 5 słów/);
+});
+
+test('Claude draft skill rejects stale evidence locations and nested semantic blocks', () => {
+  const draft = validDraft();
+  draft.evidence_claims[0].location = 'key_takeaways[4]';
+  draft.sections[0].paragraphs_html[1] = '<p><div class="article-table-wrap"><table class="article-table"><caption>Plan</caption><thead><tr><th scope="col">Krok</th></tr></thead><tbody><tr><th scope="row">1</th></tr></tbody></table></div></p>';
+  const result = validate(draft);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /location nie wskazuje istniejącego pola/);
+  assert.match(result.stdout, /blok semantyczny wewnątrz <p>/);
+});
+
+test('Claude draft skill keeps FAQ research and internal linking exclusively local', () => {
+  const draft = validDraft();
+  draft.editorial_notes.faq_gaps = ['Czy użytkownicy pytają o czas działania?'];
+  draft.sections[0].paragraphs_html.push('<p>Zobacz też <a href="wymyslony-slug.html">inny tekst</a>.</p>');
+  const result = validate(draft);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /editorial_notes\.faq_gaps musi pozostać puste/);
+  assert.match(result.stdout, /Claude nie może dodawać linków wewnętrznych/);
 });

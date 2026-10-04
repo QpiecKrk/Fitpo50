@@ -215,6 +215,10 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
         caption_text = caption.get_text(" ", strip=True) if caption else ""
         if caption:
             caption.decompose()
+        has_spanning_cells = any(
+            cell.get("colspan") or cell.get("rowspan")
+            for cell in table.find_all(["td", "th"])
+        )
         table.attrs = {"border": "1", "width": "100%"}
         # fpdf2's HTML table parser can leave an open cell when a TD contains
         # nested inline markup (for example <strong>), and then reports the
@@ -231,7 +235,18 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
             elif element.name in {"td", "th"}:
                 columns = max(len(element.parent.find_all(["td", "th"], recursive=False)), 1)
                 first_row = table.find("tr")
-                element.attrs = {"width": f"{int(100 / columns)}%"} if element.parent is first_row else {}
+                # fpdf2 justifies table-cell text by default. In narrow,
+                # multi-column tables this can stretch a short phrase across
+                # the full cell and make neighbouring columns look as if they
+                # overlap. Keep prose left-aligned in every row while retaining
+                # the explicit widths required by the first row.
+                cell_attrs = {"align": "left"}
+                for span_attr in ("colspan", "rowspan"):
+                    if element.get(span_attr):
+                        cell_attrs[span_attr] = element.get(span_attr)
+                element.attrs = cell_attrs
+                if element.parent is first_row:
+                    element.attrs["width"] = f"{int(100 / columns)}%"
             elif element.name not in {"thead", "tbody", "tr", "caption"}:
                 element.attrs = {}
         try:
@@ -240,7 +255,35 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
                 pdf.set_font("Arial", "B", 9)
                 pdf.multi_cell(0, 5, caption_text)
             pdf.set_font("Arial", size=8)
-            pdf.write_html(str(table), tag_styles=HTML_TAG_STYLES)
+            rows = [
+                [cell.get_text(" ", strip=True) for cell in row.find_all(["td", "th"], recursive=False)]
+                for row in table.find_all("tr")
+            ]
+            column_counts = {len(row) for row in rows if row}
+            if rows and column_counts == {len(rows[0])} and not has_spanning_cells:
+                # The native table API permits an explicit text alignment.
+                # write_html() defaults to justified cell text, which creates
+                # distracting gaps in narrow columns and can visually merge
+                # neighbouring cells.
+                html_rows = table.find_all("tr")
+                with pdf.table(
+                    width=pdf.epw,
+                    text_align="LEFT",
+                    line_height=4,
+                    padding=1,
+                ) as pdf_table:
+                    for html_row in html_rows:
+                        pdf_row = pdf_table.row()
+                        for cell in html_row.find_all(["td", "th"], recursive=False):
+                            pdf_row.cell(
+                                text=cell.get_text(" ", strip=True),
+                                align="L",
+                                style=FontFace(emphasis="B") if cell.name == "th" else None,
+                            )
+            else:
+                # Preserve uncommon colspan/rowspan layouts via the HTML
+                # renderer instead of flattening their structure.
+                pdf.write_html(str(table), tag_styles=HTML_TAG_STYLES)
             pdf.set_font("Arial", size=previous_size)
         except Exception as exc:
             raise RuntimeError(f"Nie można poprawnie wyrenderować tabeli do PDF: {exc}") from exc
@@ -258,6 +301,21 @@ def render_node(pdf: FPDF, node: Tag, source_url: str, html_path: Path, tmp_dir:
         for child in list(node.contents):
             quote.append(BeautifulSoup(str(child), "html.parser"))
         render_node(pdf, quote, source_url=source_url, html_path=html_path, tmp_dir=tmp_dir)
+        return
+
+    if node.name == "p" and node.find(["table", "figure", "picture", "div", "section"]) is not None:
+        # Legacy/imported HTML can contain a block element wrapped in <p>.
+        # Passing that whole fragment to write_html() bypasses the dedicated
+        # table/image renderers and, for tables, restores fpdf2's justified
+        # cell text. Unwrap the invalid paragraph and route each child through
+        # the normal block renderer.
+        for child in node.children:
+            if isinstance(child, Tag):
+                render_node(pdf, child, source_url=source_url, html_path=html_path, tmp_dir=tmp_dir)
+            elif isinstance(child, NavigableString) and str(child).strip():
+                paragraph = BeautifulSoup(f"<p>{escape(str(child).strip())}</p>", "html.parser").find("p")
+                if paragraph is not None:
+                    render_node(pdf, paragraph, source_url=source_url, html_path=html_path, tmp_dir=tmp_dir)
         return
 
     if node.name in TEXT_TAGS:

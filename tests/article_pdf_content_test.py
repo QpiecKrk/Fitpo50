@@ -113,4 +113,12 @@ class PdfContentTest(unittest.TestCase):
    text=subprocess.check_output(['pdftotext',str(pdf),'-'],text=True)
    self.assertIn('Próba kliniczna',text)
    self.assertIn('Treść komórki',text)
+
+ def test_table_cells_do_not_justify_words_across_the_column(self):
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);page=root/'article.html';pdf=root/'article.pdf'
+   page.write_text('<h1 class="article-header__title">Tabela FIB-4</h1><article class="article-content"><p><div class="article-table-wrap"><table><caption>Interpretacja</caption><thead><tr><th>Wynik</th><th>Co to oznacza</th><th>Co dalej</th></tr></thead><tbody><tr><th>poniżej 1,3</th><td>niskie ryzyko zaawansowanego włóknienia</td><td>ponowna ocena co 1–3 lata</td></tr><tr><th>1,3–2,67</th><td>wynik pośredni, niejednoznaczny</td><td>elastografia albo rok intensywnej zmiany stylu życia i ponowny FIB-4</td></tr><tr><th>powyżej 2,67</th><td>podwyższone ryzyko zaawansowanego włóknienia</td><td>skierowanie do hepatologa</td></tr></tbody></table></div></p></article>')
+   generate_pdf(page,pdf,'https://fitpo50.pl/article.html')
+   text=subprocess.check_output(['pdftotext','-layout',str(pdf),'-'],text=True)
+   self.assertNotRegex(text, r'podwyższone\s{3,}ryzyko')
 if __name__=='__main__':unittest.main()

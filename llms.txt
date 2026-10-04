@@ -455,3 +455,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "AI w diagnostyce i lekach na raka: co już działa, a co nie | FitPo50"
   section: "Zdrowie"
   summary: "Czy komputer dobrze opisał twoje badanie? Sprawdzamy, co AI naprawdę daje w diagnostyce raka, gdzie się myli i jak daleko jest do nowych leków od AI."
+- url: https://fitpo50.pl/stluszczona-watroba-masld-po-50.html
+  title: "Stłuszczona wątroba po 50-tce: co oznacza USG i czym jest MASLD? | FitPo50"
+  section: "Zdrowie"
+  summary: "Stłuszczona wątroba (MASLD) po 50-tce zwykle nie wynika z alkoholu. Sprawdź, co znaczy opis USG, jakie badania zrobić i co udowodniono, że pomaga wątrobie."

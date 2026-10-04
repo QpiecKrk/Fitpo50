@@ -506,7 +506,11 @@ function main() {
 
   const rawTitleInput = String(json.title || '').replace(/\s+/g, ' ').trim();
   const rawSeoTitleInput = String(json.seo_title || '').replace(/\s+/g, ' ').trim();
-  json.title = truncateAtWordBoundary(rawTitleInput, 65);
+  // The editorial H1 must stay complete. Silently truncating it can leave a
+  // grammatically unfinished title that still happens to fit the character
+  // limit. Keep the author's full title and let validateTitleText() block an
+  // overlong value so an editor can rewrite it deliberately.
+  json.title = rawTitleInput;
   if (!rawSeoTitleInput || rawSeoTitleInput === rawTitleInput) {
     json.seo_title = truncateAtWordBoundary(json.title, POLICY.TITLE.SEO_BASE_MAX);
   } else {

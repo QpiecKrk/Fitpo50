@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/ai-diagnostyka-hero-okno.avif" type="image/avif">
-          <source srcset="./assets/ai-diagnostyka-hero-okno.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/ai-diagnostyka-hero-okno.webp" alt="" width="1200" height="654" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/stluszczona-watroba-masld-po-50-hero.avif" type="image/avif">
+          <source srcset="./assets/stluszczona-watroba-masld-po-50-hero.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/stluszczona-watroba-masld-po-50-hero.webp" alt="" width="1200" height="654" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">AI w diagnostyce i lekach na raka: co już działa, a co nie</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Czy komputer dobrze opisał twoje badanie? Sprawdzamy, co AI naprawdę daje w diagnostyce raka, gdzie się myli i jak daleko jest do nowych leków od AI.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="ai-w-diagnostyce-i-lekach-na-raka.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Stłuszczona wątroba po 50-tce: co oznacza USG i czym jest MASLD?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Stłuszczona wątroba (MASLD) po 50-tce zwykle nie wynika z alkoholu. Sprawdź, co znaczy opis USG, jakie badania zrobić i co udowodniono, że pomaga wątrobie.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="stluszczona-watroba-masld-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'AI w diagnostyce i lekach na raka: co już działa, a co nie',
-        excerpt: 'Czy komputer dobrze opisał twoje badanie? Sprawdzamy, co AI naprawdę daje w diagnostyce raka, gdzie się myli i jak daleko jest do nowych leków od AI.',
-        image: './assets/ai-diagnostyka-hero-okno.webp',
-        url: 'ai-w-diagnostyce-i-lekach-na-raka.html'
+        title: 'Stłuszczona wątroba po 50-tce: co oznacza USG i czym jest MASLD?',
+        excerpt: 'Stłuszczona wątroba (MASLD) po 50-tce zwykle nie wynika z alkoholu. Sprawdź, co znaczy opis USG, jakie badania zrobić i co udowodniono, że pomaga wątrobie.',
+        image: './assets/stluszczona-watroba-masld-po-50-hero.webp',
+        url: 'stluszczona-watroba-masld-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2544,6 +2544,13 @@
       const fallback = [
         {
           category: 'Zdrowie',
+          title: 'Stłuszczona wątroba po 50-tce: co oznacza USG i czym jest MASLD?',
+          excerpt: 'Stłuszczona wątroba (MASLD) po 50-tce zwykle nie wynika z alkoholu. Sprawdź, co znaczy opis USG, jakie badania zrobić i co udowodniono, że pomaga wątrobie.',
+          image: './assets/stluszczona-watroba-masld-po-50-hero.webp',
+          url: 'stluszczona-watroba-masld-po-50.html'
+        },
+        {
+          category: 'Zdrowie',
           title: 'AI w diagnostyce i lekach na raka: co już działa, a co nie',
           excerpt: 'Czy komputer dobrze opisał twoje badanie? Sprawdzamy, co AI naprawdę daje w diagnostyce raka, gdzie się myli i jak daleko jest do nowych leków od AI.',
           image: './assets/ai-diagnostyka-hero-okno.webp',
@@ -2555,13 +2562,6 @@
           excerpt: 'Ile kurczaka, ryby, jajek, twarogu, tofu czy soczewicy daje około 25–30 g białka? Tabele porcji po obróbce, siedem gotowych posiłków i najczęstsze pomyłki.',
           image: './assets/jak-wyglada-25-30-g-bialka-hero-v2.webp',
           url: 'jak-wyglada-25-30-g-bialka.html'
-        },
-        {
-          category: 'Mity',
-          title: 'Czy szczepionki mRNA na COVID-19 powodują raka? Fakty i badania',
-          excerpt: 'Czy szczepionki mRNA powodują raka? Sprawdzamy badanie z Korei, dane z Włoch, DNA, SV40 i „turbo raka”. Poznaj fakty, ograniczenia i obecny stan wiedzy.',
-          image: './assets/mrna-cancer-evidence-hero-2026.webp',
-          url: 'szczepionki-mrna-covid-a-rak.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

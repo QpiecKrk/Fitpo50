@@ -1,0 +1,845 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-10-04T12:40:40.553Z",
+  "reviewed_at": "2026-10-04T12:41:15Z",
+  "slug": "stluszczona-watroba-masld-po-50",
+  "html_sha256": "2e0d3baad71c82047c7ff8c666e6558ffa1517b35080bdd58a811d1a7b36887e",
+  "site_html_sha256": "2e0d3baad71c82047c7ff8c666e6558ffa1517b35080bdd58a811d1a7b36887e",
+  "pdf_sha256": "2f0038cab8956ee7114bbbbf9dd41277b59818315296c218a9f14c434e75d4a5",
+  "site_pdf_sha256": "2f0038cab8956ee7114bbbbf9dd41277b59818315296c218a9f14c434e75d4a5",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-04T12:40:40.553Z",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 1
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "stluszczona-watroba-masld-po-50.html",
+      "sha256": "2e0d3baad71c82047c7ff8c666e6558ffa1517b35080bdd58a811d1a7b36887e",
+      "bytes": 54007
+    },
+    "html_site": {
+      "file": "_site/stluszczona-watroba-masld-po-50.html",
+      "sha256": "2e0d3baad71c82047c7ff8c666e6558ffa1517b35080bdd58a811d1a7b36887e",
+      "bytes": 54007
+    },
+    "pdf_source": {
+      "file": "assets/pdf/stluszczona-watroba-masld-po-50.pdf",
+      "sha256": "2f0038cab8956ee7114bbbbf9dd41277b59818315296c218a9f14c434e75d4a5",
+      "bytes": 760956
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/stluszczona-watroba-masld-po-50.pdf",
+      "sha256": "2f0038cab8956ee7114bbbbf9dd41277b59818315296c218a9f14c434e75d4a5",
+      "bytes": 760956
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/desktop.png",
+      "screenshot_sha256": "23efb89f4e0bd2f9960df3218725b507c73f47b20a98badbf53e703b02be2a21",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/mobile.png",
+      "screenshot_sha256": "dcf0d4a8a630602a281f8b8666547948e4cc5154af8ea937f79e177586511766",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 12 min czytania Aktualizacja: 04.10.2026 Stłuszczona wątroba po 50-tce: co oznacza USG i czym jest MASLD? Wynik USG to początek rozmowy z lekarzem, a nie wyrok dla Twojej wątroby.",
+      "alt": "Kobieta i mężczyzna po pięćdziesiątce idą szybkim krokiem promenadą nad rzeką w słoneczny jesienny poranek",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/stluszczona-watroba-masld-po-50-hero.avif",
+          "sha256": "55ce1ee9850779dbd29eb93ad631bc57ecd8fb59025303eee35d5685fad7fa90",
+          "bytes": 70837,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/stluszczona-watroba-masld-po-50-hero.webp",
+          "sha256": "aa821ccf605210e74c5d19817daeba656dd1a2129db59a4fd26209bb63dad877",
+          "bytes": 110016,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/stluszczona-watroba-masld-po-50-hero.jpg",
+          "sha256": "43559cd67f9c4c6cedf2937b829b8eea7a8e765d677b16e9faf30bc3c7bf26bc",
+          "bytes": 275402,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "cc460c855cc66d81d7ebcc2a22e4b59ed2478534743a51c0047c681d3268990a"
+    },
+    {
+      "placement": "content:2:czym-jest-masld-i-czy-stluszczenie-watroby-moze-",
+      "role": "content",
+      "heading": "Czym jest MASLD i czy stłuszczenie wątroby może pojawić się bez alkoholu?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Trójwymiarowy schemat zrazika wątroby, w którym część komórek wątroby ma widoczne żółte krople tłuszczu",
+      "caption": "Schemat: przy MASLD w wątrobie odkłada się nadmiar triglicerydów w postaci kropli tłuszczu w komórkach.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/masld-definicja-zrazik-watroby.avif",
+          "sha256": "30ac2fafd98a95df5447091dbf013c8636e922d70ec69de42e7bcac52f6909fd",
+          "bytes": 42449,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/masld-definicja-zrazik-watroby.webp",
+          "sha256": "5285245f4fc24d19a2a7a0be0bae13eafbb1c5c6fe221e9637b585aa7db6684e",
+          "bytes": 62564,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/masld-definicja-zrazik-watroby.jpg",
+          "sha256": "741c85be5d0e6705472459919c18be7b52a3dd65bb9d691287c0a596891b7e27",
+          "bytes": 183259,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "fd7dcb2b5404f32a4791741324da104affac93344514726372a86a6d31c3bd5b"
+    },
+    {
+      "placement": "content:3:dlaczego-usg-straszy-akurat-po-50-tce",
+      "role": "content",
+      "heading": "Dlaczego USG „straszy” akurat po 50-tce?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Lekarka wykonuje badanie USG jamy brzusznej pacjentce po pięćdziesiątce w jasnym, nowoczesnym gabinecie",
+      "caption": "USG to tania, bezpieczna metoda, która dobrze wykrywa wyraźne stłuszczenie, ale nie ocenia włóknienia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/usg-brzucha-wynik-stluszczenia.avif",
+          "sha256": "ce96f3efaa16f5790eae275363b80ed61cbecd42b55e206b11bf806c5e750130",
+          "bytes": 35377,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/usg-brzucha-wynik-stluszczenia.webp",
+          "sha256": "c349c21700e4933be11e28dae21bff1a7a1a8ebb0c878ed5e50f78237433b69b",
+          "bytes": 45924,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/usg-brzucha-wynik-stluszczenia.jpg",
+          "sha256": "3fe1e03d491cd9168574d4548819163fc276ddd88ec87f0370f79e6760f7c2d3",
+          "bytes": 161282,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "9c050523f823332e1523771bd343f06ccfb671c4359a326df44217ed91ce8dbe"
+    },
+    {
+      "placement": "content:4:czy-stluszczona-watroba-jest-grozna",
+      "role": "content",
+      "heading": "Czy stłuszczona wątroba jest groźna?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Poziomy wykres słupkowy pokazujący, że nadwyżka zgonów z powodu marskości rośnie od 1,2 przy prostym stłuszczeniu do 22,3 przy marskości",
+      "caption": "Nadwyżka zgonów z powodu marskości rośnie wraz ze stopniem zaawansowania choroby wątroby (szwedzka kohorta z biopsją).",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/stluszczenie-a-marskosc-zgony-wykres.avif",
+          "sha256": "ea720b60e03c4ba49b1cfd7d42c62955a9444cd1b25ad5c7379c96053f8c89c8",
+          "bytes": 21042,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/stluszczenie-a-marskosc-zgony-wykres.webp",
+          "sha256": "99c8013c70c61a652ade95bf01e943f03c6df70c890944169b23fb187c6697d0",
+          "bytes": 21206,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/stluszczenie-a-marskosc-zgony-wykres.jpg",
+          "sha256": "4d5e5ba5cbd8c8bcbae13cdfbdd60c174424bc88a1e89ea0aeb6261ea9a3a8dc",
+          "bytes": 97411,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "594d6e80c85f3e0ba298c0b9de6ec795da115ffc74c7414750c179e668c5143a"
+    },
+    {
+      "placement": "content:5:jakie-badania-po-usg-pokaza-czy-watroba-jest-nap",
+      "role": "content",
+      "heading": "Jakie badania po USG pokażą, czy wątroba jest naprawdę zagrożona?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Trzy stacje schematu: niskie ryzyko przy FIB-4 poniżej 1,3, elastografia przy wartości pośredniej i skierowanie do hepatologa powyżej 2,67",
+      "caption": "Wynik FIB-4 podpowiada, czy wystarczy obserwacja, czy potrzebna jest elastografia albo wizyta u hepatologa.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/fib-4-elastografia-schemat-badan.avif",
+          "sha256": "674d1df4961a4ad6bcd8a8cd8c20e260f421947a9329b151f6122eb757f03ac3",
+          "bytes": 21068,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/fib-4-elastografia-schemat-badan.webp",
+          "sha256": "f9d1f02363e4a1f4033d2546588dcc5183e544f3ea99211d6eb8928f57d63054",
+          "bytes": 24858,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/fib-4-elastografia-schemat-badan.jpg",
+          "sha256": "62149fc6e3bf60d1bd86b7acb0c6ce04ce5062d64466b51252f57b81e9cd2436",
+          "bytes": 108571,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "332bb2da79070f0adf229b0376c484b2a35b4a52a0e44d1696c763d3539577f2"
+    },
+    {
+      "placement": "content:6:czy-stluszczenie-watroby-mozna-cofnac",
+      "role": "content",
+      "heading": "Czy stłuszczenie wątroby można cofnąć?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Trzy rosnące stopnie schodów z progami utraty masy ciała: 5 procent, 7 do 10 procent i co najmniej 10 procent",
+      "caption": "Im większy utrzymany spadek masy ciała, tym więcej korzyści dla wątroby: najpierw mniej tłuszczu, potem mniej zapalenia i włóknienia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ubytek-masy-ciala-progi-wateroba.avif",
+          "sha256": "8433fbcdc108a35baf7510885465dbc31d2207b1567dad6669b89975fb1fdb77",
+          "bytes": 20059,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ubytek-masy-ciala-progi-wateroba.webp",
+          "sha256": "74ebe00597694ee4dcece327672d978a84f5f3e01879e3d7faf294b66e911354",
+          "bytes": 21334,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ubytek-masy-ciala-progi-wateroba.jpg",
+          "sha256": "55b3071ed3b5e80b00d00fdfbc97beac89f5a8ceae04fb2aa6aaf59c50b85c7f",
+          "bytes": 88532,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f449b5a19734db9324f87d3a4ef1a6493f2e600625441f064210044761930fe8"
+    },
+    {
+      "placement": "content:7:co-jesc-a-czego-unikac-zeby-odciazyc-watrobe-po-",
+      "role": "content",
+      "heading": "Co jeść, a czego unikać, żeby odciążyć wątrobę po 50-tce?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Drewniany stół z sałatką z ciecierzycą, grillowaną rybą, orzechami i oliwą oraz dłońmi kobiety i mężczyzny sięgającymi po jedzenie",
+      "caption": "Dieta śródziemnomorska to warzywa, strączki, orzechy, oliwa i ryby zamiast produktów ultraprzetworzonych.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-srodziemnomorska-stol.avif",
+          "sha256": "f796046257c326d4e7f399ea4af221fb3670bf48e52480a4d89f5fedb54b0852",
+          "bytes": 87669,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/dieta-srodziemnomorska-stol.webp",
+          "sha256": "3c1c70a1812a6978b39dfc17ccc868f67a553c958a4fbf39a8aebdaa2573a1af",
+          "bytes": 137584,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/dieta-srodziemnomorska-stol.jpg",
+          "sha256": "3b3a7762bd6cf953460462e633167ab86002d4ed50615f295ad5fc9b5e91a5aa",
+          "bytes": 330429,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "296582da904c7a6e26215374b3347d3ad4a316fb1a8370c3baece8e496940380"
+    },
+    {
+      "placement": "content:8:jaki-ruch-najlepiej-dziala-na-stluszczona-watrob",
+      "role": "content",
+      "heading": "Jaki ruch najlepiej działa na stłuszczoną wątrobę po 50-tce?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Troje znajomych po pięćdziesiątce idzie z kijkami leśną ścieżką w wiosenne popołudnie",
+      "caption": "Marsz z kijkami to jedna z łagodnych form aktywności aerobowej, od której można zacząć.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ruch-marsz-z-kijkami-po-50.avif",
+          "sha256": "bd966dbe5867293f157718cae449b3d6b7221b8aef8fb5a96cec78ed5ce64d88",
+          "bytes": 96212,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ruch-marsz-z-kijkami-po-50.webp",
+          "sha256": "6cc04ac1333edb053a9edb37b343f2752e95118544d3c409ed0308df0fea88b7",
+          "bytes": 161848,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ruch-marsz-z-kijkami-po-50.jpg",
+          "sha256": "42cad01ccc70b742728157d88f40333b8625a9c12b5158501ee8eb778f500e17",
+          "bytes": 357162,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e2b57141d0394ae0213b63a4488b094ddd0b9c66ef9c1d1e4cde02d7863eb0f6"
+    },
+    {
+      "placement": "content:9:jaki-ruch-najlepiej-dziala-na-stluszczona-watrob",
+      "role": "content",
+      "heading": "Jaki ruch najlepiej działa na stłuszczoną wątrobę po 50-tce?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Kobieta po pięćdziesiątce wykonuje ćwiczenie z lekkimi hantlami w jasnej sali fitness",
+      "caption": "Ćwiczenia siłowe uzupełniają trening aerobowy i pomagają zachować masę mięśniową.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-hantle-po-50.avif",
+          "sha256": "f15275b99567ff9f40e53e05ad921192a8fd47129c478de4fa6bcb82f6b21102",
+          "bytes": 46841,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-silowy-hantle-po-50.webp",
+          "sha256": "3633e68e09699b72405eb4a9f4657a05b90c75caee5933c050e4427030d6293b",
+          "bytes": 66290,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-hantle-po-50.jpg",
+          "sha256": "2533c229e860d46cbfcf77be3e9cd719eb4c12222f91f57e01cce9101cc67546",
+          "bytes": 206720,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "46f7f1eb421a10903ef12b6a521816b0c409ebb6226b245cd0e25aff435ab308"
+    },
+    {
+      "placement": "content:10:czy-suplementy-detoksy-i-leki-maja-sens-przy-stl",
+      "role": "content",
+      "heading": "Czy suplementy, „detoksy” i leki mają sens przy stłuszczonej wątrobie?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Farmaceutka i klient po pięćdziesiątce czytają razem opakowanie preparatu przy ladzie w aptece",
+      "caption": "Zanim kupisz preparat reklamowany jako „na wątrobę”, zapytaj lekarza lub farmaceutę.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apteka-konsultacja-suplementy.avif",
+          "sha256": "5481a7c6b56f943039ff537c1e769e8c0ccfce8d0d21bf708a8dec09217d4889",
+          "bytes": 41795,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apteka-konsultacja-suplementy.webp",
+          "sha256": "15a80906b794b6758f160b5b2f11d46b843c227b615b5c0dd33a53a71a07141d",
+          "bytes": 55048,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apteka-konsultacja-suplementy.jpg",
+          "sha256": "78793cdad1d3798863c1ec66971aa5a7e8a4611d2aececc5c72a102534cee267",
+          "bytes": 179283,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "05a0844c044c235839c298bb39904b32597fa92b237916508a09d0f63be8a10e"
+    },
+    {
+      "placement": "content:11:od-czego-zaczac-po-opisie-usg-ze-stluszczeniem-w",
+      "role": "content",
+      "heading": "Od czego zacząć po opisie USG ze stłuszczeniem wątroby?",
+      "context": "Dostajesz opis USG: „cechy stłuszczenia wątroby”. Alkoholu prawie nie pijesz, a w głowie już masz marskość. Spokojnie, ten wynik jest dziś bardzo częsty, ale nie wolno go też zbagatelizować. Wyjaśniam, co oznacza, jakie badania warto zrobić i co ma poparcie w dowodach. Szybka odpowiedź Stłuszczenie wątroby po 50-tce zwykle ma podłoże metaboliczne: insulinooporność, tłuszcz trzewny, u kobiet menopauzę. Samo USG to dopiero początek, bo o rokowaniu decyduje włóknienie, które ocenia się testem FIB-4 i elastografią. Podstawą leczenia jest utrata 5–10% masy ciała, ruch i dieta śródziemnomorska. Kluczowe wnioski Stłuszczenie wątroby bez nadużywania alkoholu to najczęściej MASLD: tłuszcz w wątrobie plus zaburzenia metaboliczne, takie jak nadmiar tłuszczu trzewnego, insulinooporność czy podwyższone",
+      "alt": "Kobieta po pięćdziesiątce przy kuchennym stole zapisuje w notesie plan działania, obok teczka z wynikami badań i kubek herbaty",
+      "caption": "Spokojny plan zaczyna się od zebrania wyników i rozmowy z lekarzem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/plan-dzialania-po-usg-stol-kuchenny.avif",
+          "sha256": "916b211a60929d2fe4f20a37f0ed893252b561d14a2689608e8cecf3a58d53bb",
+          "bytes": 51103,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/plan-dzialania-po-usg-stol-kuchenny.webp",
+          "sha256": "cb5327f73c8e61d965a84683fe936112fff4eb70420c261334a1c8b0844dce9d",
+          "bytes": 70008,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/plan-dzialania-po-usg-stol-kuchenny.jpg",
+          "sha256": "a26de047f09e85353ff54600a84439174999145e725368b529ed72773aa381e7",
+          "bytes": 207537,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "be49c01ea9891eaa5a7207419ba42c8353fb2e229ad315466bfc456796f30f1c"
+    }
+  ],
+  "pdf": {
+    "pages": 10,
+    "text_coverage": 1,
+    "rendered_pages": 10,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-01.png",
+        "sha256": "67047586b053bc5ebb6fd62dc33af27126b67dc37e5ececdcbd1f66aa6a02b0f",
+        "bytes": 823307,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1061,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-02.png",
+        "sha256": "516091ba7fd59a93f99825442453841ce02dd92b09d48a79b1c8b18e649021c7",
+        "bytes": 681213,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1065,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-03.png",
+        "sha256": "3b249b82fab4870e49205a18b96c1e8e2581dc3e5c8a487134ab63b035035d84",
+        "bytes": 552127,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1055,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-04.png",
+        "sha256": "2eeabae09efee95ebd70fc8d1d3a49d43d22c667ba4c7c34e249ce5fb72eb9f6",
+        "bytes": 383977,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-05.png",
+        "sha256": "12162db8a62a55954924af98ee9f51a2b942c68320699602b59ffd19fea41045",
+        "bytes": 478195,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 101,
+          "width": 1061,
+          "height": 1549
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-06.png",
+        "sha256": "60fe3c2ec25cea73352eb22ee2f13d96b0ebfedbec0978421832cc4d52695f5f",
+        "bytes": 858426,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1063,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-07.png",
+        "sha256": "149855b987976bcaecacea732b555497a9a696080136377e3f429ba1e94d6980",
+        "bytes": 1172026,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1061,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-08.png",
+        "sha256": "e28b3e6a6f0f66e5f9668c80e34bcb6a34c4ba9964e0f864613ac9d60498e71c",
+        "bytes": 580545,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1042,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 9,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-09.png",
+        "sha256": "f47550c4116089328bec47dafe970428eb40ff001d947e580b9079146b1c519a",
+        "bytes": 560767,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1063,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 10,
+        "file": ".tmp/article-preview/stluszczona-watroba-masld-po-50/pdf-pages/page-10.png",
+        "sha256": "74b17e4370839ede6cd9d4c0ae5af9d845a7fb6343b1b4b8bada1145ad94d5a6",
+        "bytes": 185289,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1066,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-04T12:41:15Z",
+    "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "23efb89f4e0bd2f9960df3218725b507c73f47b20a98badbf53e703b02be2a21",
+        "note": "Pełny widok desktopowy jest kompletny, bez przepełnienia poziomego, uciętych nagłówków, uszkodzonych obrazów ani rozbitej tabeli."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "dcf0d4a8a630602a281f8b8666547948e4cc5154af8ea937f79e177586511766",
+        "note": "Pełny widok mobilny zachowuje kolejność treści, czytelną tabelę, obrazy i źródła; nie ma poziomego przepełnienia ani przycięcia tekstu."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "cc460c855cc66d81d7ebcc2a22e4b59ed2478534743a51c0047c681d3268990a",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Para po pięćdziesiątce idzie żwawo promenadą; kadr wspiera temat trwałej aktywności przy MASLD i nie zawiera napisów ani logo.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:2:czym-jest-masld-i-czy-stluszczenie-watroby-moze-",
+        "inventory_sha256": "fd7dcb2b5404f32a4791741324da104affac93344514726372a86a6d31c3bd5b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Stylizowany przekrój zrazika pokazuje centralną żyłę, pasma hepatocytów i krople tłuszczu bez etykiet, logo lub mylących liczb.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:3:dlaczego-usg-straszy-akurat-po-50-tce",
+        "inventory_sha256": "9c050523f823332e1523771bd343f06ccfb671c4359a326df44217ed91ce8dbe",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Lekarka prawidłowo przykłada głowicę USG do brzucha pacjentki; sprzęt i pozycja są wiarygodne, a ekran nie ujawnia danych.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:4:czy-stluszczona-watroba-jest-grozna",
+        "inventory_sha256": "594d6e80c85f3e0ba298c0b9de6ec795da115ffc74c7414750c179e668c5143a",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Nadwyżka zgonów z powodu marskości na 1000 osobolat; Proste stłuszczenie 1,2; MASH bez włóknienia 3,0; Włóknienie bez marskości 5,5; Marskość 22,3",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://doi.org/10.1016/j.jhep.2024.04.031"
+          ]
+        },
+        "note": "Wykres ma cztery czytelne słupki i wartości zgodne z akapitem o szwedzkiej kohorcie; nie zawiera dodatkowych liczb ani logo.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:5:jakie-badania-po-usg-pokaza-czy-watroba-jest-nap",
+        "inventory_sha256": "332bb2da79070f0adf229b0376c484b2a35b4a52a0e44d1696c763d3539577f2",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "FIB-4 poniżej 1,3: niskie ryzyko. FIB-4 1,3–2,67: elastografia. FIB-4 powyżej 2,67: hepatolog.",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://doi.org/10.1016/j.jhep.2024.04.031"
+          ]
+        },
+        "note": "Trzystopniowy schemat jest czytelny i zgodny z opisem progów FIB-4 dla osób do 65 lat; ikony badań i konsultacji są poprawne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:6:czy-stluszczenie-watroby-mozna-cofnac",
+        "inventory_sha256": "f449b5a19734db9324f87d3a4ef1a6493f2e600625441f064210044761930fe8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Utrata masy ciała: co najmniej 5% – mniej tłuszczu w wątrobie; 7–10% – mniejsze zapalenie; co najmniej 10% – poprawa włóknienia",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://doi.org/10.1016/j.jhep.2024.04.031",
+            "https://pubmed.ncbi.nlm.nih.gov/25865049/"
+          ]
+        },
+        "note": "Trzy stopnie pokazują progi 5%, 7–10% i co najmniej 10% zgodne z treścią artykułu; brak dodatkowych obietnic lub logo.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:7:co-jesc-a-czego-unikac-zeby-odciazyc-watrobe-po-",
+        "inventory_sha256": "296582da904c7a6e26215374b3347d3ad4a316fb1a8370c3baece8e496940380",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Widok stołu pokazuje rybę, ciecierzycę, warzywa, orzechy i oliwę, czyli składniki opisanej diety śródziemnomorskiej; brak marek.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:8:jaki-ruch-najlepiej-dziala-na-stluszczona-watrob",
+        "inventory_sha256": "e2b57141d0394ae0213b63a4488b094ddd0b9c66ef9c1d1e4cde02d7863eb0f6",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Troje dorosłych prawidłowo używa kijków na leśnej ścieżce; scena pasuje do łagodnej aktywności aerobowej i nie zawiera napisów.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:9:jaki-ruch-najlepiej-dziala-na-stluszczona-watrob",
+        "inventory_sha256": "46f7f1eb421a10903ef12b6a521816b0c409ebb6226b245cd0e25aff435ab308",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Kobieta wykonuje kontrolowane uginanie ramienia z hantlem; chwyt, ustawienie kończyn i wyposażenie sali są wiarygodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:10:czy-suplementy-detoksy-i-leki-maja-sens-przy-stl",
+        "inventory_sha256": "05a0844c044c235839c298bb39904b32597fa92b237916508a09d0f63be8a10e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Farmaceutka i klient oglądają neutralne opakowanie preparatu; scena odpowiada konsultacji o suplementach, a etykiety są nieczytelne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      },
+      {
+        "placement": "content:11:od-czego-zaczac-po-opisie-usg-ze-stluszczeniem-w",
+        "inventory_sha256": "be49c01ea9891eaa5a7207419ba42c8353fb2e229ad315466bfc456796f30f1c",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Kobieta zapisuje plan przy teczce z wynikami i kubku; kadr pasuje do spokojnego planowania dalszych kroków po USG, bez danych osobowych.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-04T12:41:15Z",
+        "review_method": "Ręczna kontrola pełnych renderów desktop 1440 px i mobile 390 px, wszystkich 11 obrazów oraz każdej z 10 stron PDF po finalnej regeneracji."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "67047586b053bc5ebb6fd62dc33af27126b67dc37e5ececdcbd1f66aa6a02b0f",
+        "note": "Strona 1 zawiera pełny tytuł, hero, lead, szybką odpowiedź i początek pierwszej sekcji bez przycięć lub kolizji."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "516091ba7fd59a93f99825442453841ce02dd92b09d48a79b1c8b18e649021c7",
+        "note": "Strona 2 ma czytelne kryteria MASLD, ilustrację zrazika i początek sekcji USG; tekst oraz podpis obrazu są kompletne."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "3b249b82fab4870e49205a18b96c1e8e2581dc3e5c8a487134ab63b035035d84",
+        "note": "Strona 3 poprawnie pokazuje obraz USG i sekcję o ryzyku; akapity są czytelne, a żaden element nie wychodzi poza margines."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "2eeabae09efee95ebd70fc8d1d3a49d43d22c667ba4c7c34e249ce5fb72eb9f6",
+        "note": "Strona 4 po poprawce ma pełny wykres, podpis i semantyczną tabelę FIB-4 z lewostronnym tekstem bez nakładania kolumn."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "12162db8a62a55954924af98ee9f51a2b942c68320699602b59ffd19fea41045",
+        "note": "Strona 5 zawiera schemat FIB-4, sekcję o cofnięciu zmian i infografikę progów masy; obrazy i tekst pozostają czytelne."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "60fe3c2ec25cea73352eb22ee2f13d96b0ebfedbec0978421832cc4d52695f5f",
+        "note": "Strona 6 zachowuje kompletną sekcję żywieniową, zdjęcie diety i początek części o ruchu, bez samotnych lub uciętych nagłówków."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "149855b987976bcaecacea732b555497a9a696080136377e3f429ba1e94d6980",
+        "note": "Strona 7 poprawnie układa dwa obrazy aktywności oraz początek sekcji o suplementach; podpisy i akapity są kompletne."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "e28b3e6a6f0f66e5f9668c80e34bcb6a34c4ba9964e0f864613ac9d60498e71c",
+        "note": "Strona 8 zawiera leczenie, konsultację w aptece i pięciopunktowy plan działania; numeracja i ostrzeżenie są czytelne."
+      },
+      {
+        "page": 9,
+        "status": "VERIFIED",
+        "artifact_sha256": "f47550c4116089328bec47dafe970428eb40ff001d947e580b9079146b1c519a",
+        "note": "Strona 9 prezentuje obraz planowania oraz trzy pierwsze odpowiedzi FAQ; nagłówki pytań pozostają razem z odpowiedziami."
+      },
+      {
+        "page": 10,
+        "status": "VERIFIED",
+        "artifact_sha256": "74b17e4370839ede6cd9d4c0ae5af9d845a7fb6343b1b4b8bada1145ad94d5a6",
+        "note": "Strona 10 zawiera ostatnie FAQ, sześć źródeł i disclaimer; linki, numeracja oraz stopka są kompletne i nieprzycięte."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 9267,
+    "review_wait_ms": 34447
+  },
+  "errors": []
+}
