@@ -45,8 +45,9 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run assets:audit:apply` — Bezpośrednia komenda robocza lub odczytowa (node scripts/assets-audit.js --apply --report data/reports/assets-audit.json).
 - [PUBLIC] `npm run assets:mirror:check` — Odczytowo sprawdza mirrory PDF/NEWS i wskazanych assetów.
 - [PUBLIC] `npm run assets:mirror:sync` — Synchronizuje wyłącznie mirrory PDF/NEWS i innych wskazanych assetów do _site; nie eksportuje HTML.
-- [PUBLIC] `npm run assets:trash:prune` — Bezpośrednia komenda robocza lub odczytowa (node scripts/assets-trash-retention.js --days 14).
-- [PUBLIC] `npm run assets:trash:prune:dry` — Bezpośrednia komenda robocza lub odczytowa (node scripts/assets-trash-retention.js --days 14 --dry-run).
+- [PUBLIC] `npm run assets:trash:prune` — Domyślny dry-run retencji 14 dni; pokazuje kandydatów bez kasowania.
+- [PUBLIC] `npm run assets:trash:prune:apply` — Jawnie usuwa wyłącznie pliki starsze niż 14 dni z chronionych katalogów assets/trash.
+- [PUBLIC] `npm run assets:trash:prune:dry` — Jawny alias odczytowego dry-run retencji 14 dni.
 - [PUBLIC] `npm run broken-links:crawl` — Bezpośrednia komenda robocza lub odczytowa (node scripts/broken-links-crawler.js _site).
 - [PUBLIC] `npm run build` — Bezpośrednia komenda robocza lub odczytowa (npm run build:esbuild).
 - [PUBLIC] `npm run build:strict` — Bezpośrednia komenda robocza lub odczytowa (npm run typecheck && npm run build:esbuild).
@@ -93,8 +94,9 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run prepush:worktree` — Bezpośrednia komenda robocza lub odczytowa (node scripts/prepush-parallel-checks.js --worktree).
 - [PUBLIC] `npm run quick-answer:backlog` — Bezpośrednia komenda robocza lub odczytowa (node scripts/audit-quick-answer-backlog.js).
 - [PUBLIC] `npm run reading-room:verify` — Bezpośrednia komenda robocza lub odczytowa (node scripts/reading-room-link-verifier.js --diff).
-- [PUBLIC] `npm run reports:prune` — Bezpośrednia komenda robocza lub odczytowa (node scripts/reports-prune.js).
-- [PUBLIC] `npm run reports:prune:dry` — Bezpośrednia komenda robocza lub odczytowa (node scripts/reports-prune.js --dry-run).
+- [PUBLIC] `npm run reports:prune` — Domyślny dry-run raportów starszych niż 30 dni; pokazuje kandydatów bez kasowania.
+- [PUBLIC] `npm run reports:prune:apply` — Jawnie usuwa wyłącznie nieśledzone raporty z allowlisty po ponownej kontroli Git i ścieżek.
+- [PUBLIC] `npm run reports:prune:dry` — Jawny alias odczytowego dry-run raportów.
 - [PUBLIC] `npm run schema:validate` — Bezpośrednia komenda robocza lub odczytowa (node scripts/schema-validator.js --diff).
 - [PUBLIC] `npm run seo:aeo:guard` — Bezpośrednia komenda robocza lub odczytowa (node scripts/seo-aeo-guard.js).
 - [PUBLIC] `npm run seo:aio:machine` — Bezpośrednia komenda robocza lub odczytowa (node scripts/seo-aio-command-center.js).
@@ -115,7 +117,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run test:pipeline-blockers` — Testy blokad publikacji, w tym hash-bound desktop/mobile, wszystkie obrazy oraz komplet stron PDF.
 - [PUBLIC] `npm run test:popraw-seo-automation` — Bezpośrednia komenda robocza lub odczytowa (node --test tests/popraw-seo-automation.test.js tests/popraw-seo-mechanism-2.test.js tests/seo-aio-wave-autopilot.test.js).
 - [PUBLIC] `npm run test:publishing-engine` — Bezpośrednia komenda robocza lub odczytowa (node --test tests/publishing-engine.test.js).
-- [PUBLIC] `npm run test:runtime-safety` — Bezpośrednia komenda robocza lub odczytowa (node --test tests/temp-workspace.test.js tests/playwright-lifecycle.test.js tests/prepush-concurrency.test.js).
+- [PUBLIC] `npm run test:runtime-safety` — Testuje destrukcyjne komendy, workspace tymczasowe, cykl Playwright i bezpieczną równoległość.
 - [PUBLIC] `npm run test:system-contract` — Bezpośrednia komenda robocza lub odczytowa (node --test tests/pipeline-capability.test.js tests/export-parity.test.js tests/command-contract.test.js).
 - [PUBLIC] `npm run tmp:cleanup` — Domyślny odczytowy dry-run bez usuwania katalogów.
 - [PUBLIC] `npm run tmp:cleanup:apply` — Jawne usunięcie wyłącznie zweryfikowanych, osieroconych workspace’ów.

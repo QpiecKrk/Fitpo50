@@ -5,8 +5,9 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { inspectTempWorkspace } = require('./lib/temp-workspace');
+const { assertPathInside, assertProjectRoot } = require('./lib/destructive-path-guard');
 
-const ROOT = process.cwd();
+const ROOT = path.resolve(__dirname, '..');
 const DEFAULT_MIN_AGE_HOURS = 12;
 const TMP_PREFIXES = [
   'fitpo50-import-',
@@ -29,21 +30,35 @@ function parseArgs(argv) {
     systemOnly: false,
     repoOnly: false,
   };
+  let mode = '';
   for (let index = 0; index < argv.length; index += 1) {
     const token = String(argv[index] || '');
     const value = String(argv[index + 1] || '');
-    if (token === '--apply') out.apply = true;
-    else if (token === '--dry-run') out.apply = false;
-    else if (token === '--min-age-hours' && value) {
+    if (token === '--apply' || token === '--dry-run') {
+      if (mode && mode !== token) throw new Error('Nie można łączyć --apply i --dry-run.');
+      mode = token;
+      out.apply = token === '--apply';
+    }
+    else if (token === '--min-age-hours') {
+      if (!value) throw new Error('Brak wartości --min-age-hours.');
       const hours = Number(value);
       if (!Number.isFinite(hours) || hours < 0) throw new Error(`Nieprawidłowe --min-age-hours: ${value}`);
       out.minAgeHours = hours;
       index += 1;
     }
-    else if (token === '--temp-root' && value) { out.tempRoot = path.resolve(value); index += 1; }
-    else if (token === '--project-root' && value) { out.projectRoot = path.resolve(value); index += 1; }
+    else if (token === '--temp-root') {
+      if (!value) throw new Error('Brak wartości --temp-root.');
+      out.tempRoot = path.resolve(value);
+      index += 1;
+    }
+    else if (token === '--project-root') {
+      if (!value) throw new Error('Brak wartości --project-root.');
+      out.projectRoot = path.resolve(value);
+      index += 1;
+    }
     else if (token === '--system-only') out.systemOnly = true;
     else if (token === '--repo-only') out.repoOnly = true;
+    else throw new Error(`Nieznany argument: ${token || '(pusty)'}`);
   }
   if (out.systemOnly && out.repoOnly) throw new Error('Nie można łączyć --system-only i --repo-only.');
   return out;
@@ -116,6 +131,8 @@ function executeCleanup(options = {}) {
         skipped.push(current);
         continue;
       }
+      if (!hasManagedPrefix(path.basename(current.directory))) throw new Error(`Nieznany prefiks workspace: ${current.directory}`);
+      assertPathInside(options.tempRoot || os.tmpdir(), current.directory, { mustExist: true, type: 'directory' });
       candidates.push(current);
       fs.rmSync(current.directory, { recursive: true, force: true });
       removed.push(current);
@@ -132,6 +149,11 @@ function printResult(result) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  const root = assertProjectRoot(ROOT);
+  const requestedProjectRoot = fs.realpathSync(args.projectRoot);
+  if (requestedProjectRoot !== root) throw new Error(`CLI tmp:cleanup może obsługiwać tylko bieżący projekt: ${root}`);
+  args.tempRoot = assertPathInside(os.tmpdir(), args.tempRoot, { allowEqual: true, mustExist: true, type: 'directory' });
+  args.projectRoot = root;
   const result = executeCleanup({
     apply: args.apply,
     minAgeMs: args.minAgeHours * 3600000,

@@ -31,11 +31,17 @@ Katalog może zostać usunięty tylko wtedy, gdy:
 - ma co najmniej 12 godzin,
 - zapisany PID i PID locka nie działają.
 
+CLI dodatkowo akceptuje wyłącznie bieżący root FitPo50 oraz systemowy katalog tymczasowy lub jego podkatalog. Nieznane argumenty, połączenie `--apply` z `--dry-run`, symlink albo ścieżka wychodząca poza katalog tymczasowy kończą działanie błędem przed usuwaniem.
+
 Świeże katalogi, aktywne procesy, katalogi `AWAITING_REVIEW`, inne projekty, błędne manifesty, błędne locki i katalogi bez manifestu są pomijane. Pliki tymczasowe znalezione wewnątrz repo bez danych właściciela są raportowane, ale nie są automatycznie usuwane.
 
 ## Chromium
 
 Każdy skrypt Playwright korzysta z `scripts/lib/playwright-lifecycle.js`. Wrapper zamyka przeglądarkę w `finally` po sukcesie, błędzie i timeout. Test regresji blokuje dodanie bezpośredniego `chromium.launch()` w innym pliku.
+
+## Eksport
+
+`scripts/export_site.sh` może czyścić wyłącznie repozytoryjny `_site` albo katalog `site` należący do aktywnego zarządzanego workspace typu `build-export-check` lub `prepush-export`. Dowolny katalog, root repozytorium, katalog domowy, zwykły katalog tymczasowy i symlink są blokowane przed buildem, `rm -rf` i `rsync --delete`.
 
 ## Równoległość
 

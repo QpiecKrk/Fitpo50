@@ -1,125 +1,131 @@
 #!/usr/bin/env node
-/*
- * Hard-cleanup for files that were previously moved to assets/trash.
- * Default retention is 14 days based on mtime.
- */
+'use strict';
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { assertPathInside, assertProjectRoot } = require('./lib/destructive-path-guard');
 
-const ROOT = process.cwd();
+const ROOT = path.resolve(__dirname, '..');
 const DEFAULT_DAYS = 14;
-const TARGET_DIRS = [
-  path.join(ROOT, 'assets', 'trash'),
-  path.join(ROOT, '_site', 'assets', 'trash'),
-];
+const MIN_APPLY_DAYS = 14;
 
 function parseArgs(argv) {
-  const out = { days: DEFAULT_DAYS, dryRun: false, verbose: false };
-  for (let i = 0; i < argv.length; i += 1) {
-    const a = argv[i];
-    if (a === '--dry-run') out.dryRun = true;
-    else if (a === '--verbose') out.verbose = true;
-    else if (a === '--days') {
-      const v = Number(argv[i + 1]);
-      if (!Number.isFinite(v) || v < 0) throw new Error('--days musi byc liczba >= 0');
-      out.days = v;
-      i += 1;
+  const out = { days: DEFAULT_DAYS, apply: false, verbose: false };
+  let mode = '';
+  for (let index = 0; index < argv.length; index += 1) {
+    const token = String(argv[index] || '');
+    if (token === '--apply' || token === '--dry-run') {
+      if (mode && mode !== token) throw new Error('Nie można łączyć --apply i --dry-run.');
+      mode = token;
+      out.apply = token === '--apply';
+    } else if (token === '--verbose') {
+      out.verbose = true;
+    } else if (token === '--days') {
+      const value = String(argv[index + 1] || '');
+      const days = Number(value);
+      if (!value || !Number.isFinite(days) || days < 0) throw new Error(`Nieprawidłowe --days: ${value || '(brak)'}`);
+      out.days = days;
+      index += 1;
+    } else {
+      throw new Error(`Nieznany argument: ${token || '(pusty)'}`);
     }
   }
+  if (out.apply && out.days < MIN_APPLY_DAYS) throw new Error(`Tryb apply wymaga retencji minimum ${MIN_APPLY_DAYS} dni.`);
   return out;
 }
 
-function walk(dir, acc) {
-  if (!fs.existsSync(dir)) return;
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
+function walk(rootDirectory, accumulator) {
+  const entries = fs.readdirSync(rootDirectory, { withFileTypes: true });
   for (const entry of entries) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      walk(full, acc);
-    } else if (entry.isFile()) {
-      acc.push(full);
-    }
+    const absolute = path.join(rootDirectory, entry.name);
+    if (entry.isSymbolicLink()) throw new Error(`Symlink w assets/trash blokuje cleanup: ${absolute}`);
+    if (entry.isDirectory()) walk(absolute, accumulator);
+    else if (entry.isFile()) accumulator.push(absolute);
   }
 }
 
-function isInside(parent, child) {
-  const rel = path.relative(parent, child);
-  return rel && !rel.startsWith('..') && !path.isAbsolute(rel);
-}
-
-function removeEmptyDirsBottomUp(rootDir) {
-  if (!fs.existsSync(rootDir)) return 0;
+function removeEmptyDirectories(rootDirectory) {
   let removed = 0;
-
-  function recurse(dir) {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
+  function recurse(directory) {
+    assertPathInside(rootDirectory, directory, { allowEqual: true, mustExist: true, type: 'directory' });
+    const entries = fs.readdirSync(directory, { withFileTypes: true });
     for (const entry of entries) {
-      if (entry.isDirectory()) recurse(path.join(dir, entry.name));
+      const absolute = path.join(directory, entry.name);
+      if (entry.isSymbolicLink()) throw new Error(`Symlink w assets/trash blokuje cleanup: ${absolute}`);
+      if (entry.isDirectory()) recurse(absolute);
     }
-
-    if (dir === rootDir) return;
-    const after = fs.readdirSync(dir);
-    if (after.length === 0) {
-      fs.rmdirSync(dir);
+    if (directory !== rootDirectory && fs.readdirSync(directory).length === 0) {
+      fs.rmdirSync(directory);
       removed += 1;
     }
   }
-
-  recurse(rootDir);
+  recurse(rootDirectory);
   return removed;
 }
 
-function main() {
-  const args = parseArgs(process.argv.slice(2));
-  const now = Date.now();
-  const thresholdMs = args.days * 24 * 60 * 60 * 1000;
-
+function executeRetention(options = {}) {
+  const root = assertProjectRoot(options.root || ROOT);
+  const args = options.args || { days: DEFAULT_DAYS, apply: false, verbose: false };
+  if (args.apply && args.days < MIN_APPLY_DAYS) throw new Error(`Tryb apply wymaga retencji minimum ${MIN_APPLY_DAYS} dni.`);
+  const nowMs = Number(options.nowMs === undefined ? Date.now() : options.nowMs);
+  const thresholdMs = args.days * 86400000;
+  const targetDirectories = options.targetDirectories || [path.join(root, 'assets', 'trash'), path.join(root, '_site', 'assets', 'trash')];
+  const candidates = [];
   let scanned = 0;
-  let eligible = 0;
-  let removed = 0;
   let bytes = 0;
+  let removedDirectories = 0;
 
-  for (const dir of TARGET_DIRS) {
-    if (!fs.existsSync(dir)) continue;
-
+  for (const requestedDirectory of targetDirectories) {
+    if (!fs.existsSync(requestedDirectory)) continue;
+    const directory = assertPathInside(requestedDirectory, requestedDirectory, { allowEqual: true, mustExist: true, type: 'directory' });
     const files = [];
-    walk(dir, files);
+    walk(directory, files);
     scanned += files.length;
-
-    for (const file of files) {
-      if (!isInside(dir, file)) continue;
-
+    for (const requestedFile of files) {
+      const file = assertPathInside(directory, requestedFile, { mustExist: true, type: 'file' });
       const stat = fs.statSync(file);
-      const age = now - stat.mtimeMs;
-      if (age < thresholdMs) continue;
-
-      eligible += 1;
+      if (nowMs - stat.mtimeMs < thresholdMs) continue;
+      candidates.push({ file, directory, size: stat.size, mtimeMs: stat.mtimeMs });
       bytes += stat.size;
-
-      if (!args.dryRun) {
-        fs.unlinkSync(file);
-        removed += 1;
-      }
-
-      if (args.verbose) {
-        const rel = path.relative(ROOT, file);
-        console.log(`${args.dryRun ? '[DRY]' : '[DEL]'} ${rel}`);
-      }
     }
-
-    if (!args.dryRun) removeEmptyDirsBottomUp(dir);
   }
 
-  const mb = (bytes / (1024 * 1024)).toFixed(2);
-  console.log(
-    `[ASSETS-TRASH-RETENTION] mode=${args.dryRun ? 'dry-run' : 'apply'} days=${args.days} scanned=${scanned} eligible=${eligible} removed=${removed} freedMB=${mb}`
-  );
+  const removed = [];
+  if (args.apply) {
+    for (const item of candidates) {
+      const file = assertPathInside(item.directory, item.file, { mustExist: true, type: 'file' });
+      const stat = fs.statSync(file);
+      if (nowMs - stat.mtimeMs < thresholdMs) throw new Error(`Plik nie spełnia już retencji: ${file}`);
+      fs.unlinkSync(file);
+      removed.push(file);
+    }
+    for (const requestedDirectory of targetDirectories) {
+      if (!fs.existsSync(requestedDirectory)) continue;
+      const directory = assertPathInside(requestedDirectory, requestedDirectory, { allowEqual: true, mustExist: true, type: 'directory' });
+      removedDirectories += removeEmptyDirectories(directory);
+    }
+  }
+
+  return { apply: Boolean(args.apply), days: args.days, verbose: Boolean(args.verbose), scanned, candidates, removed, removedDirectories, bytes };
 }
 
-try {
-  main();
-} catch (err) {
-  console.error('[ASSETS-TRASH-RETENTION] ERROR:', err.message || err);
-  process.exit(1);
+function printResult(result, root = ROOT) {
+  if (!result.apply || result.verbose) {
+    for (const item of result.candidates.slice(0, 80)) console.log(`${result.apply ? '[DEL]' : '[DRY]'} ${path.relative(root, item.file)}`);
+    if (result.candidates.length > 80) console.log(`... ${result.candidates.length - 80} more`);
+  }
+  const megabytes = (result.bytes / (1024 * 1024)).toFixed(2);
+  console.log(`[ASSETS-TRASH-RETENTION] mode=${result.apply ? 'apply' : 'dry-run'} days=${result.days} scanned=${result.scanned} eligible=${result.candidates.length} removed=${result.removed.length} removedDirs=${result.removedDirectories} freedMB=${megabytes}`);
+  if (!result.apply) console.log('[ASSETS-TRASH-RETENTION] bez zmian; użyj --apply po przeglądzie listy.');
 }
+
+if (require.main === module) {
+  try {
+    printResult(executeRetention({ args: parseArgs(process.argv.slice(2)) }));
+  } catch (error) {
+    console.error(`[ASSETS-TRASH-RETENTION][FAIL] ${error.message || error}`);
+    process.exit(1);
+  }
+}
+
+module.exports = { DEFAULT_DAYS, MIN_APPLY_DAYS, executeRetention, parseArgs };

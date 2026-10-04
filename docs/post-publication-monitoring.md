@@ -26,7 +26,7 @@ Checkpointy po 7, 14 i 28 dniach są utrwalane przy pierwszym przebiegu GSC wyko
 ```bash
 npm run gsc:post-publication
 npm run test:pipeline-blockers
-npm run reports:prune:dry
+npm run reports:prune
 ```
 
 `npm run gsc:auto` uruchamia monitoring automatycznie. Wynik trafia do `~/Downloads/gsc-auto-input/post-publication-monitor.json` i `.md`, więc analityczna komenda `GSC` pozostaje read-only wobec repozytorium.
@@ -50,4 +50,4 @@ Fixture w `tests/fixtures/pipeline-invalid/` sprawdzają osiem błędów obowią
 
 Globalny `json:gate:diff` pomija wyłącznie ten katalog celowo błędnych danych; ich oczekiwane odrzucenie weryfikuje `npm run test:pipeline-blockers`. Jawne uruchomienie walidatora z `--file` nadal może służyć do diagnostyki pojedynczego fixture.
 
-Stare raporty nie są usuwane automatycznie. `npm run reports:prune:dry` najpierw pokazuje bezpiecznych, nieśledzonych kandydatów; usunięcie wymaga osobnej świadomej decyzji.
+Stare raporty nie są usuwane automatycznie. `npm run reports:prune` jest domyślnym dry-runem i najpierw pokazuje bezpiecznych, nieśledzonych kandydatów. Dopiero osobna komenda `npm run reports:prune:apply` wykonuje kasowanie po ponownej kontroli Git, wieku, nazwy i rzeczywistej ścieżki każdego pliku.

@@ -2,8 +2,9 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
+const { assertPathInside, assertProjectRoot } = require('./lib/destructive-path-guard');
 
-const ROOT = process.cwd();
+const ROOT = path.resolve(__dirname, '..');
 const ASSETS_DIR = path.join(ROOT, 'assets');
 const SITE_DIR = path.join(ROOT, '_site');
 const IMAGE_EXTS = new Set(['.avif', '.webp', '.jpg', '.jpeg', '.png', '.gif', '.svg', '.ico']);
@@ -20,11 +21,12 @@ function parseArgs(argv) {
   for (let i = 0; i < argv.length; i += 1) {
     const token = String(argv[i] || '');
     if (token === '--apply') out.apply = true;
-    if (token === '--verbose') out.verbose = true;
-    if (token === '--report') {
+    else if (token === '--verbose') out.verbose = true;
+    else if (token === '--report') {
       out.report = String(argv[i + 1] || '').trim();
+      if (!out.report) throw new Error('Brak wartości --report.');
       i += 1;
-    }
+    } else throw new Error(`Nieznany argument: ${token || '(pusty)'}`);
   }
   return out;
 }
@@ -46,6 +48,10 @@ function walk(dir, shouldIncludeFile, out = []) {
     for (const entry of entries) {
       const abs = path.join(current, entry.name);
       const rel = relativeFromRoot(abs);
+      if (entry.isSymbolicLink()) {
+        if (IGNORE_DIRS.has(entry.name)) continue;
+        throw new Error(`Symlink blokuje audyt assetów: ${abs}`);
+      }
       if (entry.isDirectory()) {
         if (IGNORE_DIRS.has(entry.name)) continue;
         if (rel.startsWith('assets/trash/')) continue;
@@ -144,24 +150,38 @@ function ensureDir(absDir) {
 }
 
 function moveToTrash(relAssetPath) {
-  const srcAbs = path.join(ROOT, relAssetPath);
+  const srcAbs = assertPathInside(ASSETS_DIR, path.join(ROOT, relAssetPath), { mustExist: true, type: 'file' });
   const trashRel = path.join('assets', 'trash', relAssetPath.replace(/^assets\//, ''));
-  const trashAbs = path.join(ROOT, trashRel);
-  ensureDir(path.dirname(trashAbs));
-  fs.renameSync(srcAbs, trashAbs);
+  const trashRoot = path.join(ROOT, 'assets', 'trash');
+  ensureDir(trashRoot);
+  const trashAbs = assertPathInside(trashRoot, path.join(ROOT, trashRel));
+  if (fs.existsSync(trashAbs)) throw new Error(`Cel w assets/trash już istnieje: ${trashAbs}`);
 
   const siteSrcRel = path.join('_site', relAssetPath);
   const siteSrcAbs = path.join(ROOT, siteSrcRel);
+  let safeSiteSource = '';
+  let siteTrashAbs = '';
   if (fs.existsSync(siteSrcAbs)) {
+    const siteAssetsRoot = path.join(ROOT, '_site', 'assets');
+    safeSiteSource = assertPathInside(siteAssetsRoot, siteSrcAbs, { mustExist: true, type: 'file' });
     const siteTrashRel = path.join('_site', 'assets', 'trash', relAssetPath.replace(/^assets\//, ''));
-    const siteTrashAbs = path.join(ROOT, siteTrashRel);
-    ensureDir(path.dirname(siteTrashAbs));
-    fs.renameSync(siteSrcAbs, siteTrashAbs);
+    const siteTrashRoot = path.join(ROOT, '_site', 'assets', 'trash');
+    ensureDir(siteTrashRoot);
+    siteTrashAbs = assertPathInside(siteTrashRoot, path.join(ROOT, siteTrashRel));
+    if (fs.existsSync(siteTrashAbs)) throw new Error(`Cel w _site/assets/trash już istnieje: ${siteTrashAbs}`);
+  }
+
+  ensureDir(path.dirname(trashAbs));
+  if (siteTrashAbs) ensureDir(path.dirname(siteTrashAbs));
+  fs.renameSync(srcAbs, trashAbs);
+  if (safeSiteSource) {
+    fs.renameSync(safeSiteSource, siteTrashAbs);
   }
 }
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  assertProjectRoot(ROOT);
   if (!fs.existsSync(ASSETS_DIR)) {
     console.error('[FAIL] Brak katalogu assets/.');
     process.exit(1);
@@ -207,7 +227,8 @@ function main() {
   }
 
   if (args.report) {
-    const reportAbs = path.resolve(ROOT, args.report);
+    const reportsRoot = path.join(ROOT, 'data', 'reports');
+    const reportAbs = assertPathInside(reportsRoot, path.resolve(ROOT, args.report));
     ensureDir(path.dirname(reportAbs));
     fs.writeFileSync(reportAbs, `${JSON.stringify(summary, null, 2)}\n`, 'utf8');
     console.log(`[ASSETS-AUDIT] report: ${relativeFromRoot(reportAbs)}`);
@@ -233,8 +254,10 @@ function main() {
   // prune empty directories in assets (except protected)
   const protectedDirs = new Set(['assets', 'assets/news', 'assets/pdf', 'assets/data', 'assets/trash']);
   function pruneEmpty(dirAbs) {
+    assertPathInside(ASSETS_DIR, dirAbs, { allowEqual: true, mustExist: true, type: 'directory' });
     const entries = fs.readdirSync(dirAbs, { withFileTypes: true });
     for (const entry of entries) {
+      if (entry.isSymbolicLink()) throw new Error(`Symlink blokuje usuwanie pustych katalogów: ${path.join(dirAbs, entry.name)}`);
       if (!entry.isDirectory()) continue;
       pruneEmpty(path.join(dirAbs, entry.name));
     }
@@ -246,4 +269,13 @@ function main() {
   pruneEmpty(ASSETS_DIR);
 }
 
-main();
+if (require.main === module) {
+  try {
+    main();
+  } catch (error) {
+    console.error(`[ASSETS-AUDIT][FAIL] ${error.message || error}`);
+    process.exit(1);
+  }
+}
+
+module.exports = { parseArgs };

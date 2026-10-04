@@ -116,9 +116,10 @@ test('tryb apply nie pozwala obniżyć minimalnego wieku poniżej 12 godzin', ()
 });
 
 test('CLI bez --apply nie zmienia fixture', () => {
-  const { tempRoot, projectRoot } = fixture();
+  const { tempRoot } = fixture();
+  const projectRoot = path.resolve(__dirname, '..');
   const directory = createManagedTempDir({ prefix: 'fitpo50-import-', type: 'article-import', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso() });
-  const result = spawnSync('node', ['scripts/tmp-cleanup.js', '--temp-root', tempRoot, '--project-root', projectRoot, '--system-only', '--min-age-hours', '12'], { cwd: path.resolve(__dirname, '..'), encoding: 'utf8' });
+  const result = spawnSync('node', ['scripts/tmp-cleanup.js', '--temp-root', tempRoot, '--project-root', projectRoot, '--system-only', '--min-age-hours', '12'], { cwd: projectRoot, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /mode=dry-run/);
   assert.equal(fs.existsSync(directory), true);
@@ -128,6 +129,19 @@ test('nieprawidłowy wiek CLI kończy się błędem zamiast przejścia na zero',
   const result = spawnSync('node', ['scripts/tmp-cleanup.js', '--min-age-hours', 'abc'], { cwd: path.resolve(__dirname, '..'), encoding: 'utf8' });
   assert.equal(result.status, 1);
   assert.match(result.stderr, /Nieprawidłowe --min-age-hours/);
+});
+
+test('CLI odrzuca konflikt trybów, nieznany argument i obcy root projektu', () => {
+  const cwd = path.resolve(__dirname, '..');
+  let result = spawnSync('node', ['scripts/tmp-cleanup.js', '--apply', '--dry-run'], { cwd, encoding: 'utf8' });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /Nie można łączyć/);
+  result = spawnSync('node', ['scripts/tmp-cleanup.js', '--unknown'], { cwd, encoding: 'utf8' });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /Nieznany argument/);
+  result = spawnSync('node', ['scripts/tmp-cleanup.js', '--project-root', os.tmpdir()], { cwd, encoding: 'utf8' });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /bieżący projekt/);
 });
 
 test('nowe katalogi tymczasowe JS mogą powstawać tylko przez wspólny moduł', () => {

@@ -14,6 +14,8 @@ if [[ -z "$NODE_BIN" ]]; then
   exit 1
 fi
 
+OUTPUT_DIR="$("$NODE_BIN" "$ROOT_DIR/scripts/lib/destructive-path-guard.js" export-output "$ROOT_DIR" "$OUTPUT_DIR")"
+
 run_ts_build() {
   if [[ "${SKIP_TS_BUILD:-0}" == "1" ]]; then
     echo "SKIP_TS_BUILD=1 -> pomijam build TypeScript."
