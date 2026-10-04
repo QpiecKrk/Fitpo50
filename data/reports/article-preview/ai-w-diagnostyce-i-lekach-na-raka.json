@@ -1,0 +1,692 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-10-04T05:38:28.890Z",
+  "reviewed_at": "2026-10-04T07:40:33+02:00",
+  "slug": "ai-w-diagnostyce-i-lekach-na-raka",
+  "html_sha256": "1750149fa7af053616f15a8bd1cad1d4f7fd6aaff3e8cd18a127c6f8e3f36ee4",
+  "site_html_sha256": "1750149fa7af053616f15a8bd1cad1d4f7fd6aaff3e8cd18a127c6f8e3f36ee4",
+  "pdf_sha256": "fcf9cefdcf6f23b0fd3eabeb3f1b7a839d5162b65550bd64ba2d3e121ef07d3e",
+  "site_pdf_sha256": "fcf9cefdcf6f23b0fd3eabeb3f1b7a839d5162b65550bd64ba2d3e121ef07d3e",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-04T05:38:28.890Z",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 1
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "ai-w-diagnostyce-i-lekach-na-raka.html",
+      "sha256": "1750149fa7af053616f15a8bd1cad1d4f7fd6aaff3e8cd18a127c6f8e3f36ee4",
+      "bytes": 49333
+    },
+    "html_site": {
+      "file": "_site/ai-w-diagnostyce-i-lekach-na-raka.html",
+      "sha256": "1750149fa7af053616f15a8bd1cad1d4f7fd6aaff3e8cd18a127c6f8e3f36ee4",
+      "bytes": 49333
+    },
+    "pdf_source": {
+      "file": "assets/pdf/ai-w-diagnostyce-i-lekach-na-raka.pdf",
+      "sha256": "fcf9cefdcf6f23b0fd3eabeb3f1b7a839d5162b65550bd64ba2d3e121ef07d3e",
+      "bytes": 690556
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/ai-w-diagnostyce-i-lekach-na-raka.pdf",
+      "sha256": "fcf9cefdcf6f23b0fd3eabeb3f1b7a839d5162b65550bd64ba2d3e121ef07d3e",
+      "bytes": 690556
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/desktop.png",
+      "screenshot_sha256": "a1213d4c3d4b714f57134ceccff325ca6dbfb615fa7293da476641100881d639",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/mobile.png",
+      "screenshot_sha256": "86352c6d82c42c1fe73c2a2c36a7f42ffdb7ebbc58150941d95192aa2c911179",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 15 min czytania Aktualizacja: 04.10.2026 AI w diagnostyce i lekach na raka: co już działa, a co nie Maszyna patrzy szybciej. Człowiek musi wiedzieć, kiedy jej nie wierzyć.",
+      "alt": "Kobieta po pięćdziesiątce w koralowym swetrze siedzi w jasnej poczekalni przychodni i patrzy przez okno na miasto, w szybie odbija się świetlista siatka połączeń",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ai-diagnostyka-hero-okno.avif",
+          "sha256": "c52e0de0d17b7ffc3f7512993ade193b0058bee24d65069f5784cb937557afbe",
+          "bytes": 49265,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ai-diagnostyka-hero-okno.webp",
+          "sha256": "716275ded31254323932d0176ff1e52904bc37436298b98b6b7380cdc3f2e726",
+          "bytes": 72398,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ai-diagnostyka-hero-okno.jpg",
+          "sha256": "610fa0a386f709747dfd77b3e71048070cd73268b2a4edc54a2e4f7280e03035",
+          "bytes": 208526,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f2cd7b7222257d73ee3246d7a4f07c09d468bc7532f04b8771bef5937cc1a7df"
+    },
+    {
+      "placement": "content:2:co-wlasciwie-robi-ai-gdy-oglada-twoje-badanie",
+      "role": "content",
+      "heading": "Co właściwie robi AI, gdy ogląda twoje badanie?",
+      "context": "Słyszysz, że twoje zdjęcie „przejrzała sztuczna inteligencja”, i nie wiesz, czy się cieszyć, czy niepokoić. Znam to uczucie: z jednej strony nagłówki o maszynach, które widzą więcej niż lekarz, z drugiej strach, że nikt już nie patrzy na człowieka. Sprawdziłem, co mówią badania, a nie reklamy. Szybka odpowiedź AI w diagnostyce już pomaga: w dużym szwedzkim badaniu z randomizacją mammografia wspierana przez AI wykryła o 29 procent więcej raków piersi i ograniczyła liczbę raków przeoczonych między badaniami. Warunek jest jeden: ostatnie słowo ma lekarz, bo błędna podpowiedź maszyny potrafi go zmylić. Leki na raka zaprojektowane przez AI wciąż są na etapie badań. Kluczowe wnioski W randomizowanym badaniu MASAI mammografia wspierana przez AI wykryła o 29% więcej raków i o 12% ograniczyła raki ",
+      "alt": "Kolaż z setek papierowych kafelków przypominających skany, ułożonych w spiralę, w centrum mosiężna lupa powiększa jeden kafelek",
+      "caption": "Algorytm nie myśli jak lekarz: porównuje twoje zdjęcie z tysiącami obrazów, na których się uczył.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ai-diagnostyka-kolaz-wzorce.avif",
+          "sha256": "5a9a7cb55f0c3db4db270229db849767f94e3a49cb6d8601704834a572f5ae29",
+          "bytes": 88578,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ai-diagnostyka-kolaz-wzorce.webp",
+          "sha256": "c99452f6bded09158451d8404657d44fee320e64d89e9c2d2e68dfaf65e9831b",
+          "bytes": 147914,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ai-diagnostyka-kolaz-wzorce.jpg",
+          "sha256": "ff0d14c7793c50072d7055aca7ca65bafd02e010cbe17abee478a4c6ee287b9f",
+          "bytes": 368857,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "401f4afe008b74f93f7ba492237a0e03a45b1ac1964eb4e0bb3c3057a96850d6"
+    },
+    {
+      "placement": "content:3:co-pokazalo-najwieksze-badanie-ai-w-mammografii",
+      "role": "content",
+      "heading": "Co pokazało największe badanie AI w mammografii?",
+      "context": "Słyszysz, że twoje zdjęcie „przejrzała sztuczna inteligencja”, i nie wiesz, czy się cieszyć, czy niepokoić. Znam to uczucie: z jednej strony nagłówki o maszynach, które widzą więcej niż lekarz, z drugiej strach, że nikt już nie patrzy na człowieka. Sprawdziłem, co mówią badania, a nie reklamy. Szybka odpowiedź AI w diagnostyce już pomaga: w dużym szwedzkim badaniu z randomizacją mammografia wspierana przez AI wykryła o 29 procent więcej raków piersi i ograniczyła liczbę raków przeoczonych między badaniami. Warunek jest jeden: ostatnie słowo ma lekarz, bo błędna podpowiedź maszyny potrafi go zmylić. Leki na raka zaprojektowane przez AI wciąż są na etapie badań. Kluczowe wnioski W randomizowanym badaniu MASAI mammografia wspierana przez AI wykryła o 29% więcej raków i o 12% ograniczyła raki ",
+      "alt": "Diagram: strumień kropek symbolizujących zdjęcia przechodzi przez filtr i rozdziela się na kanał do jednego oka i kanał do dwóch oczu",
+      "caption": "W badaniu MASAI AI decydowała, czy zdjęcie przeczyta jeden radiolog, czy dwóch — a decyzję o dalszych badaniach zawsze podejmował lekarz.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ai-diagnostyka-masai-strumienie.avif",
+          "sha256": "101000e6c9604c31be425c7c88042a44ab2668332d1f77db08f6cb04a4a63d22",
+          "bytes": 24511,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ai-diagnostyka-masai-strumienie.webp",
+          "sha256": "163cfcb61470558a4bb5cee002b17b1b1a7611bf7e07911e2e74031c9b5316f0",
+          "bytes": 24192,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ai-diagnostyka-masai-strumienie.jpg",
+          "sha256": "f9511c852cf01186a807e20bb9ef965b2686afcbeba935fc1cd2656f3463f51e",
+          "bytes": 112236,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "92288a51a37338c3b24bb99696f4cbf9bbb81bec5420911c6cfe8a8f377c9753"
+    },
+    {
+      "placement": "content:4:czy-komputer-dobrze-zinterpretowal-badanie",
+      "role": "content",
+      "heading": "Czy komputer dobrze zinterpretował badanie?",
+      "context": "Słyszysz, że twoje zdjęcie „przejrzała sztuczna inteligencja”, i nie wiesz, czy się cieszyć, czy niepokoić. Znam to uczucie: z jednej strony nagłówki o maszynach, które widzą więcej niż lekarz, z drugiej strach, że nikt już nie patrzy na człowieka. Sprawdziłem, co mówią badania, a nie reklamy. Szybka odpowiedź AI w diagnostyce już pomaga: w dużym szwedzkim badaniu z randomizacją mammografia wspierana przez AI wykryła o 29 procent więcej raków piersi i ograniczyła liczbę raków przeoczonych między badaniami. Warunek jest jeden: ostatnie słowo ma lekarz, bo błędna podpowiedź maszyny potrafi go zmylić. Leki na raka zaprojektowane przez AI wciąż są na etapie badań. Kluczowe wnioski W randomizowanym badaniu MASAI mammografia wspierana przez AI wykryła o 29% więcej raków i o 12% ograniczyła raki ",
+      "alt": "Na biurku blaszana figurka robota wskazuje w lewo, w tle siwa radiolożka w okularach ogląda zdjęcie pod światło i z uśmiechem pokazuje w prawo",
+      "caption": "Błąd automatyzacji: gdy maszyna podpowiada źle, nawet doświadczony specjalista może dać się pociągnąć w złą stronę.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ai-diagnostyka-radiolog-watpliwosc.avif",
+          "sha256": "67b72b1d13936d916e48b2b3afb3dd1284a18a236ff4eedb3587a6f6809de251",
+          "bytes": 33323,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ai-diagnostyka-radiolog-watpliwosc.webp",
+          "sha256": "54b65e5866b7ea115017d13ac8b85f4bfa3948694da52376abdabc675cea9a5e",
+          "bytes": 41948,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ai-diagnostyka-radiolog-watpliwosc.jpg",
+          "sha256": "398ebe8035c2689499497505fb90a7df6d35ed4d347ed6c70303e220455d03bf",
+          "bytes": 147356,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3f8e9716c8f5bc20b3d6860b57aa70d01a449ab9eaa322e6b756d1961f77d635"
+    },
+    {
+      "placement": "content:5:czy-lekarz-pracujacy-z-ai-moze-stracic-wprawe",
+      "role": "content",
+      "heading": "Czy lekarz pracujący z AI może stracić wprawę?",
+      "context": "Słyszysz, że twoje zdjęcie „przejrzała sztuczna inteligencja”, i nie wiesz, czy się cieszyć, czy niepokoić. Znam to uczucie: z jednej strony nagłówki o maszynach, które widzą więcej niż lekarz, z drugiej strach, że nikt już nie patrzy na człowieka. Sprawdziłem, co mówią badania, a nie reklamy. Szybka odpowiedź AI w diagnostyce już pomaga: w dużym szwedzkim badaniu z randomizacją mammografia wspierana przez AI wykryła o 29 procent więcej raków piersi i ograniczyła liczbę raków przeoczonych między badaniami. Warunek jest jeden: ostatnie słowo ma lekarz, bo błędna podpowiedź maszyny potrafi go zmylić. Leki na raka zaprojektowane przez AI wciąż są na etapie badań. Kluczowe wnioski W randomizowanym badaniu MASAI mammografia wspierana przez AI wykryła o 29% więcej raków i o 12% ograniczyła raki ",
+      "alt": "Zbliżenie dłoni lekarza z obrączką na pokrętłach endoskopu, w tle rozmyty przełącznik w pozycji wyłączonej",
+      "caption": "Polskie badanie z czterech ośrodków sugeruje, że po okresie pracy z AI wykrywalność bez niej może spadać — wprawę trzeba ćwiczyć.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ai-diagnostyka-dlonie-endoskopisty.avif",
+          "sha256": "27cb39178bac5c338b421afc8c5bfac6f30c14dca5e26e6ad944ecceba6263b4",
+          "bytes": 32032,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ai-diagnostyka-dlonie-endoskopisty.webp",
+          "sha256": "5ccd71f14a399bbf9bb4fec77c8a9375161b527b485a0c8f73d8727cea33e17b",
+          "bytes": 39258,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ai-diagnostyka-dlonie-endoskopisty.jpg",
+          "sha256": "a3854d76f56caea41e9ad34780ef4da22f58ad9470f3d92ec68870336e2d03da",
+          "bytes": 141335,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "0cdaa7407e1f8ebf5ffb5b032ff1691bd22a2deccb90c8fb81abbdecc1a15f3f"
+    },
+    {
+      "placement": "content:6:jak-ai-szuka-lekow-na-nowotwory",
+      "role": "content",
+      "heading": "Jak AI szuka leków na nowotwory?",
+      "context": "Słyszysz, że twoje zdjęcie „przejrzała sztuczna inteligencja”, i nie wiesz, czy się cieszyć, czy niepokoić. Znam to uczucie: z jednej strony nagłówki o maszynach, które widzą więcej niż lekarz, z drugiej strach, że nikt już nie patrzy na człowieka. Sprawdziłem, co mówią badania, a nie reklamy. Szybka odpowiedź AI w diagnostyce już pomaga: w dużym szwedzkim badaniu z randomizacją mammografia wspierana przez AI wykryła o 29 procent więcej raków piersi i ograniczyła liczbę raków przeoczonych między badaniami. Warunek jest jeden: ostatnie słowo ma lekarz, bo błędna podpowiedź maszyny potrafi go zmylić. Leki na raka zaprojektowane przez AI wciąż są na etapie badań. Kluczowe wnioski W randomizowanym badaniu MASAI mammografia wspierana przez AI wykryła o 29% więcej raków i o 12% ograniczyła raki ",
+      "alt": "Trójwymiarowy model białka w turkusowych i fioletowych wstęgach z wgłębieniem, do którego zbliża się świecąca złota cząsteczka",
+      "caption": "AI przewiduje kształt zamka, czyli białka, i pomaga projektować klucz, czyli cząsteczkę leku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ai-diagnostyka-bialko-klucz.avif",
+          "sha256": "f9ae7ce04aaa3a9f6abf27ec7a65fde4eaa7726b0f3023f34be4df9544ccc72e",
+          "bytes": 37287,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ai-diagnostyka-bialko-klucz.webp",
+          "sha256": "97a4e5d29414f685392ce7a5e8a91a7ee1d538b915deac92e43d7d45053eb56e",
+          "bytes": 48460,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ai-diagnostyka-bialko-klucz.jpg",
+          "sha256": "53544f00173ad8ed8f17504ee3ae7d5eb14187e063e41a43a518b4a8165a7ba0",
+          "bytes": 161846,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6a2c019516c2a36be602688a41e8337a6215ab7cb67f81f7cd2d7ad785860ec3"
+    },
+    {
+      "placement": "content:7:ile-lekow-odkrytych-przez-ai-naprawde-dziala",
+      "role": "content",
+      "heading": "Ile leków odkrytych przez AI naprawdę działa?",
+      "context": "Słyszysz, że twoje zdjęcie „przejrzała sztuczna inteligencja”, i nie wiesz, czy się cieszyć, czy niepokoić. Znam to uczucie: z jednej strony nagłówki o maszynach, które widzą więcej niż lekarz, z drugiej strach, że nikt już nie patrzy na człowieka. Sprawdziłem, co mówią badania, a nie reklamy. Szybka odpowiedź AI w diagnostyce już pomaga: w dużym szwedzkim badaniu z randomizacją mammografia wspierana przez AI wykryła o 29 procent więcej raków piersi i ograniczyła liczbę raków przeoczonych między badaniami. Warunek jest jeden: ostatnie słowo ma lekarz, bo błędna podpowiedź maszyny potrafi go zmylić. Leki na raka zaprojektowane przez AI wciąż są na etapie badań. Kluczowe wnioski W randomizowanym badaniu MASAI mammografia wspierana przez AI wykryła o 29% więcej raków i o 12% ograniczyła raki ",
+      "alt": "Papierowy kolaż: ogromny lejek pełen kolorowych fiolek u góry, na dole wypadają tylko trzy, obok stoją kobieta i mężczyzna po sześćdziesiątce",
+      "caption": "Faza I to dopiero początek lejka: skuteczność sprawdza się później i tam AI na razie nie wyprzedza tradycyjnych metod.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ai-diagnostyka-lejek-fiolki.avif",
+          "sha256": "c8b003f86c2c9dbce83bce71dcbbd71f6134ed2fa1c2de6e8e03308a02ccb820",
+          "bytes": 47341,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ai-diagnostyka-lejek-fiolki.webp",
+          "sha256": "283271b8e1b2ccace4fce701af40ede0d96651c336775bbc91c8234e9b658971",
+          "bytes": 66872,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ai-diagnostyka-lejek-fiolki.jpg",
+          "sha256": "bc21b3c1b2d593ccb835eec3f7fe9f23df7a89550f9294305e371da4abeaeca5",
+          "bytes": 206613,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "c96ef3265754cd6ff2bd4231ace42abb2346a0b89d4b9c364f8399e7d783e896"
+    },
+    {
+      "placement": "content:8:co-z-tego-wynika-dla-ciebie-po-piecdziesiatce",
+      "role": "content",
+      "heading": "Co z tego wynika dla ciebie po pięćdziesiątce?",
+      "context": "Słyszysz, że twoje zdjęcie „przejrzała sztuczna inteligencja”, i nie wiesz, czy się cieszyć, czy niepokoić. Znam to uczucie: z jednej strony nagłówki o maszynach, które widzą więcej niż lekarz, z drugiej strach, że nikt już nie patrzy na człowieka. Sprawdziłem, co mówią badania, a nie reklamy. Szybka odpowiedź AI w diagnostyce już pomaga: w dużym szwedzkim badaniu z randomizacją mammografia wspierana przez AI wykryła o 29 procent więcej raków piersi i ograniczyła liczbę raków przeoczonych między badaniami. Warunek jest jeden: ostatnie słowo ma lekarz, bo błędna podpowiedź maszyny potrafi go zmylić. Leki na raka zaprojektowane przez AI wciąż są na etapie badań. Kluczowe wnioski W randomizowanym badaniu MASAI mammografia wspierana przez AI wykryła o 29% więcej raków i o 12% ograniczyła raki ",
+      "alt": "Uśmiechnięta para po pięćdziesiątce robi sobie selfie przed przeszkloną przychodnią w słoneczny zimowy dzień na ulicy polskiego miasta",
+      "caption": "Najlepszy algorytm nie pomoże, jeśli badanie się nie odbędzie — pierwszy krok wciąż należy do ciebie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ai-diagnostyka-para-po-badaniu.avif",
+          "sha256": "477abb284cfd2500b9bda421493689195cc888ed41c0768203cea15957d32d27",
+          "bytes": 80398,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ai-diagnostyka-para-po-badaniu.webp",
+          "sha256": "0ee14ae457fdd12fc6e77b4587e1616fe209b70c95150ead032f984283be9a8c",
+          "bytes": 126036,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ai-diagnostyka-para-po-badaniu.jpg",
+          "sha256": "295fc419a57aacd5afc6829cdb4f507d3d9853f3b89babdef2af6b3ed3e8f4be",
+          "bytes": 309933,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "9d844d01b1750edf4d71aa36342eea4cca06dad6f92642264362bd335c90135e"
+    },
+    {
+      "placement": "content:9:czego-jeszcze-nie-wiemy-o-ai-w-medycynie",
+      "role": "content",
+      "heading": "Czego jeszcze nie wiemy o AI w medycynie?",
+      "context": "Słyszysz, że twoje zdjęcie „przejrzała sztuczna inteligencja”, i nie wiesz, czy się cieszyć, czy niepokoić. Znam to uczucie: z jednej strony nagłówki o maszynach, które widzą więcej niż lekarz, z drugiej strach, że nikt już nie patrzy na człowieka. Sprawdziłem, co mówią badania, a nie reklamy. Szybka odpowiedź AI w diagnostyce już pomaga: w dużym szwedzkim badaniu z randomizacją mammografia wspierana przez AI wykryła o 29 procent więcej raków piersi i ograniczyła liczbę raków przeoczonych między badaniami. Warunek jest jeden: ostatnie słowo ma lekarz, bo błędna podpowiedź maszyny potrafi go zmylić. Leki na raka zaprojektowane przez AI wciąż są na etapie badań. Kluczowe wnioski W randomizowanym badaniu MASAI mammografia wspierana przez AI wykryła o 29% więcej raków i o 12% ograniczyła raki ",
+      "alt": "Mężczyzna w zielonej kurtce stoi na rozwidleniu parkowych ścieżek, jedna prowadzi do szklanego budynku badawczego, druga w kolorowe drzewa",
+      "caption": "AI w medycynie stoi na rozstajach: część dróg jest już sprawdzona, inne dopiero wymagają badań.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ai-diagnostyka-rozstaje.avif",
+          "sha256": "8621ba656252a9253c04bd1fa42da5881f6f6aa63106d4788513f6f09c6e93bd",
+          "bytes": 106407,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ai-diagnostyka-rozstaje.webp",
+          "sha256": "664106c7b7ded641fc07b1f473b41b52c481344b6e74ffe22e056f6d65560d39",
+          "bytes": 177966,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ai-diagnostyka-rozstaje.jpg",
+          "sha256": "984935781d8c77d9be846e7e789961592f1b29171b01fcc5f8794e201929a749",
+          "bytes": 385334,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "58c00fe2cc8cb7d6344ed626a97dd041eb65840ce5c65ff2df2bb0624c0d3f60"
+    }
+  ],
+  "pdf": {
+    "pages": 8,
+    "text_coverage": 0.9968,
+    "rendered_pages": 8,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/pdf-pages/page-1.png",
+        "sha256": "863956db535a903a59183b7637c31b04ca44bff7d1e47fa6690a2fe70bba04c3",
+        "bytes": 728250,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1063,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/pdf-pages/page-2.png",
+        "sha256": "b2c71dd83f605ba96737ce1319b138715fc8ce4eb2f1b4102e13f7c68681cf44",
+        "bytes": 871133,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/pdf-pages/page-3.png",
+        "sha256": "fb76fb436ec559a5e3ccc1773a70f71fec8638262da3732674bdfd777fa03016",
+        "bytes": 656994,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 110,
+          "width": 1061,
+          "height": 1540
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/pdf-pages/page-4.png",
+        "sha256": "ee3b4655e097fe831e54e28ee116362e9ef9341ebe406991d83b7c8e2a9bc361",
+        "bytes": 618032,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1060,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/pdf-pages/page-5.png",
+        "sha256": "de0c53d47f679f992f2bda5242ecece6eedb4c61ca5c18a6a40023e3fdde6bca",
+        "bytes": 599126,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1063,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/pdf-pages/page-6.png",
+        "sha256": "7b5348c6d2b325008a9ab51cace37d0fe7e302202364e370e4cda60f02c4f6f8",
+        "bytes": 1000735,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 56,
+          "width": 1060,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/pdf-pages/page-7.png",
+        "sha256": "8615a89ba5dff6c8df3f860580457728a4f426ed0fd2757febbf2354a223813e",
+        "bytes": 727059,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1065,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/ai-w-diagnostyce-i-lekach-na-raka/pdf-pages/page-8.png",
+        "sha256": "41eedfa02f38ceeb574e9d2bd2b3244261a710f805750015792e0ecbc44cea3a",
+        "bytes": 266033,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1066,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+    "reviewed_at": "2026-10-04T07:40:33+02:00",
+    "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "a1213d4c3d4b714f57134ceccff325ca6dbfb615fa7293da476641100881d639",
+        "note": "Pełny render desktopowy jest czytelny; nie ma przepełnień, ucięć, kolizji ani uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "86352c6d82c42c1fe73c2a2c36a7f42ffdb7ebbc58150941d95192aa2c911179",
+        "note": "Pełny render mobilny zachowuje pojedynczą kolumnę, czytelne odstępy i nie wykazuje poziomego przepełnienia."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "f2cd7b7222257d73ee3246d7a4f07c09d468bc7532f04b8771bef5937cc1a7df",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Hero trafnie łączy pacjentkę po pięćdziesiątce z motywem AI; kadr jest naturalny i nie zawiera mylących elementów.",
+        "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+        "reviewed_at": "2026-10-04T07:40:33+02:00",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF."
+      },
+      {
+        "placement": "content:2:co-wlasciwie-robi-ai-gdy-oglada-twoje-badanie",
+        "inventory_sha256": "401f4afe008b74f93f7ba492237a0e03a45b1ac1964eb4e0bb3c3057a96850d6",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Kolaż wzorców i lupa czytelnie ilustrują porównywanie obrazów przez algorytm; brak napisów, logo i błędów anatomicznych.",
+        "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+        "reviewed_at": "2026-10-04T07:40:33+02:00",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF."
+      },
+      {
+        "placement": "content:3:co-pokazalo-najwieksze-badanie-ai-w-mammografii",
+        "inventory_sha256": "92288a51a37338c3b24bb99696f4cbf9bbb81bec5420911c6cfe8a8f377c9753",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Abstrakcyjny podział strumienia odpowiada opisowi organizacji odczytu w badaniu; grafika nie sugeruje wyniku klinicznego.",
+        "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+        "reviewed_at": "2026-10-04T07:40:33+02:00",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF."
+      },
+      {
+        "placement": "content:4:czy-komputer-dobrze-zinterpretowal-badanie",
+        "inventory_sha256": "3f8e9716c8f5bc20b3d6860b57aa70d01a449ab9eaa322e6b756d1961f77d635",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Scena radiolożki i symbolicznego robota wspiera temat wątpliwości interpretacyjnej; obraz nie udaje diagnozy ani instrukcji.",
+        "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+        "reviewed_at": "2026-10-04T07:40:33+02:00",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF."
+      },
+      {
+        "placement": "content:5:czy-lekarz-pracujacy-z-ai-moze-stracic-wprawe",
+        "inventory_sha256": "0cdaa7407e1f8ebf5ffb5b032ff1691bd22a2deccb90c8fb81abbdecc1a15f3f",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Dłonie poprawnie obsługują sterowanie endoskopu; kadr pasuje do sprawności operatora i nie zawiera mylącego tekstu.",
+        "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+        "reviewed_at": "2026-10-04T07:40:33+02:00",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF."
+      },
+      {
+        "placement": "content:6:jak-ai-szuka-lekow-na-nowotwory",
+        "inventory_sha256": "6a2c019516c2a36be602688a41e8337a6215ab7cb67f81f7cd2d7ad785860ec3",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Model białka i cząsteczka trafnie wspierają metaforę zamka i klucza; wizualizacja nie przedstawia konkretnej obietnicy leczenia.",
+        "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+        "reviewed_at": "2026-10-04T07:40:33+02:00",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF."
+      },
+      {
+        "placement": "content:7:ile-lekow-odkrytych-przez-ai-naprawde-dziala",
+        "inventory_sha256": "c96ef3265754cd6ff2bd4231ace42abb2346a0b89d4b9c364f8399e7d783e896",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Lejek i nieliczne fiolki dobrze obrazują selekcję kandydatów na leki; scena jest umowna i nie zawiera twierdzeń liczbowych.",
+        "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+        "reviewed_at": "2026-10-04T07:40:33+02:00",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF."
+      },
+      {
+        "placement": "content:8:co-z-tego-wynika-dla-ciebie-po-piecdziesiatce",
+        "inventory_sha256": "9d844d01b1750edf4d71aa36342eea4cca06dad6f92642264362bd335c90135e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "INCIDENTAL_ENVIRONMENT",
+          "transcription": "CENTRUM MEDYCZNE; WEJŚCIE",
+          "claims_or_numbers_present": false
+        },
+        "note": "Para przed przychodnią odpowiada praktycznemu wnioskowi sekcji; naturalny szyld wejścia buduje realizm i nie zawiera reklamy ani claimu.",
+        "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+        "reviewed_at": "2026-10-04T07:40:33+02:00",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF."
+      },
+      {
+        "placement": "content:9:czego-jeszcze-nie-wiemy-o-ai-w-medycynie",
+        "inventory_sha256": "58c00fe2cc8cb7d6344ed626a97dd041eb65840ce5c65ff2df2bb0624c0d3f60",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Rozstaje przy ośrodku badawczym czytelnie symbolizują niepewność dalszego rozwoju AI; brak mylących oznaczeń i obietnic.",
+        "reviewed_by": "Codex — rzeczywisty przegląd wizualny",
+        "reviewed_at": "2026-10-04T07:40:33+02:00",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop i mobile, wszystkich dziewięciu ilustracji oraz każdej z ośmiu stron PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "863956db535a903a59183b7637c31b04ca44bff7d1e47fa6690a2fe70bba04c3",
+        "note": "Obejrzano całą stronę pierwszą PDF; tytuł, hero i początek treści są kompletne, ostre oraz czytelne."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "b2c71dd83f605ba96737ce1319b138715fc8ce4eb2f1b4102e13f7c68681cf44",
+        "note": "Obejrzano całą stronę drugą PDF; tabela, akapity i ilustracja mieszczą się w składzie bez ucięć."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "fb76fb436ec559a5e3ccc1773a70f71fec8638262da3732674bdfd777fa03016",
+        "note": "Obejrzano całą stronę trzecią PDF; tekst i ilustracje zachowują logiczną kolejność oraz prawidłowe marginesy."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "ee3b4655e097fe831e54e28ee116362e9ef9341ebe406991d83b7c8e2a9bc361",
+        "note": "Obejrzano całą stronę czwartą PDF; nagłówki, akapity i grafika są kompletne i nie nachodzą na siebie."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "de0c53d47f679f992f2bda5242ecece6eedb4c61ca5c18a6a40023e3fdde6bca",
+        "note": "Obejrzano całą stronę piątą PDF; ilustracje i tekst są ostre, czytelne oraz poprawnie rozmieszczone."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "7b5348c6d2b325008a9ab51cace37d0fe7e302202364e370e4cda60f02c4f6f8",
+        "note": "Obejrzano całą stronę szóstą PDF; zdjęcie przychodni, podpis i treść zachowują prawidłowy układ bez ucięć."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "8615a89ba5dff6c8df3f860580457728a4f426ed0fd2757febbf2354a223813e",
+        "note": "Obejrzano całą stronę siódmą PDF; końcowe sekcje artykułu są kompletne, spójne i czytelne."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "41eedfa02f38ceeb574e9d2bd2b3244261a710f805750015792e0ecbc44cea3a",
+        "note": "Obejrzano całą stronę ósmą PDF; lista źródeł mieści się w marginesach i pozostaje czytelna do końca strony."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 8152,
+    "review_wait_ms": 124110
+  },
+  "errors": []
+}

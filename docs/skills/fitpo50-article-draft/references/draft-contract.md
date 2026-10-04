@@ -143,7 +143,9 @@ Preferuj prawdziwe autocomplete z zapisanym dokładnym zapytaniem i adresem endp
 }
 ```
 
-Hero nie zawiera napisów, liter, liczb, logo, znaków wodnych ani interfejsu. Spójna seria może używać tej samej techniki lub stylu, jeśli każdy kadr ma odrębną wartość dla swojej sekcji. Powtórzone pliki, niemal identyczne kadry, generyczność i obrazy bez wartości blokują pakiet.
+Hero nie zawiera dodanych napisów reklamowych, liczb, logo, znaków wodnych ani interfejsu. Naturalne napisy obecne w realnym otoczeniu — na ulicy, budynku lub w biurze — są dozwolone, jeśli nie są reklamą ani twierdzeniem medycznym; lokalny agent klasyfikuje je jako `INCIDENTAL_ENVIRONMENT` podczas rzeczywistego visual review. Spójna seria może używać tej samej techniki lub stylu, jeśli każdy kadr ma odrębną wartość dla swojej sekcji. Powtórzone pliki, niemal identyczne kadry, generyczność i obrazy bez wartości blokują pakiet.
+
+`listing_title` celuje w 55–70 znaków, ale kompletny i czytelny wariant 45–80 znaków jest poprawny. To zalecenie redakcyjne, nie praca mechaniczna na pojedynczych znakach.
 
 Ludzie: głównie 50–65 lat, naturalne rysy, zmarszczki i sylwetki; zadbani, aktywni, dobrze sytuowani, ale bez ostentacyjnego luksusu. Zachowuj równowagę kobiet i mężczyzn w serii. Pory roku — również zima — wnętrza, miasta, natura, praca, podróż i nieoczywiste miejsca tworzą pulę możliwości, nie listę obowiązkową. Każdy kadr musi służyć konkretnej sekcji. Obrazy mają być jasne, optymistyczne i współczesne.
 

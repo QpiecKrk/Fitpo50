@@ -159,7 +159,12 @@ def validate(root, slug, manifest_path=None):
             embedded = review.get('embedded_text') if isinstance(review.get('embedded_text'), dict) else {}
             kind = embedded.get('kind')
             if kind not in ALLOWED_EMBEDDED_TEXT:
-                errors.append(f'{placement}: visual_review.embedded_text.kind musi mieć wartość NONE, WATERMARK_ONLY albo CONTENT.')
+                errors.append(f'{placement}: visual_review.embedded_text.kind musi mieć wartość NONE, WATERMARK_ONLY, INCIDENTAL_ENVIRONMENT albo CONTENT.')
+            if kind == 'INCIDENTAL_ENVIRONMENT':
+                if len(str(embedded.get('transcription') or '').strip()) < 3:
+                    errors.append(f'{placement}: czytelny napis środowiskowy wymaga krótkiej transkrypcji.')
+                if embedded.get('claims_or_numbers_present') is not False:
+                    errors.append(f'{placement}: napis środowiskowy nie może zawierać twierdzeń, liczb ani instrukcji wymagających dowodu.')
             if kind == 'CONTENT':
                 if len(str(embedded.get('transcription') or '').strip()) < 3:
                     errors.append(f'{placement}: obraz z tekstem treściowym wymaga transkrypcji widocznego tekstu.')

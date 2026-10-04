@@ -206,7 +206,16 @@ function validateVisualReview(review, label, errors) {
   const embedded = review.embedded_text && typeof review.embedded_text === 'object' ? review.embedded_text : {};
   const kind = String(embedded.kind || '').trim();
   if (!ALLOWED_EMBEDDED_TEXT.has(kind)) {
-    errors.push(`${label}: visual_review.embedded_text.kind musi mieć wartość NONE, WATERMARK_ONLY albo CONTENT.`);
+    errors.push(`${label}: visual_review.embedded_text.kind musi mieć wartość NONE, WATERMARK_ONLY, INCIDENTAL_ENVIRONMENT albo CONTENT.`);
+    return;
+  }
+  if (kind === 'INCIDENTAL_ENVIRONMENT') {
+    if (String(embedded.transcription || '').trim().length < 3) {
+      errors.push(`${label}: czytelny napis środowiskowy wymaga krótkiej transkrypcji.`);
+    }
+    if (embedded.claims_or_numbers_present !== false) {
+      errors.push(`${label}: napis środowiskowy nie może zawierać twierdzeń, liczb ani instrukcji wymagających dowodu.`);
+    }
     return;
   }
   if (kind !== 'CONTENT') return;
@@ -227,13 +236,18 @@ function validateVisualReview(review, label, errors) {
   }
 }
 
-function validateDimensions(entry, placement, declaredRatio, errors) {
+function validateDimensions(entry, placement, declaredRatio, errors, warnings = null) {
   const { width, height, aspect_ratio: ratio } = entry.source;
   const layout = placement === 'hero' ? CONTRACT.image_layout.hero : CONTRACT.image_layout.section;
   const minWidth = layout.min_width;
   const minHeight = layout.min_height;
   if (width < minWidth || height < minHeight) {
     errors.push(`${entry.filename_base}: za mały obraz ${width}x${height}; minimum dla ${placement} to ${minWidth}x${minHeight}.`);
+  }
+  const recommendedWidth = Number(layout.recommended_min_width || minWidth);
+  const recommendedHeight = Number(layout.recommended_min_height || minHeight);
+  if (warnings && width >= minWidth && height >= minHeight && (width < recommendedWidth || height < recommendedHeight)) {
+    warnings.push(`${entry.filename_base}: obraz ${width}x${height} mieści się w bezpiecznym zakresie; zalecane jest co najmniej ${recommendedWidth}x${recommendedHeight}, ale drobna różnica nie blokuje publikacji.`);
   }
   const parsedRatio = parseRatio(declaredRatio);
   if (!parsedRatio) errors.push(`${entry.filename_base}: aspect_ratio musi mieć format np. 16:9.`);
@@ -370,7 +384,7 @@ function prepareArticleMedia(article, options = {}) {
       source,
       variants: {},
     };
-    validateDimensions(entry, placement, entry.aspect_ratio_declared, errors);
+    validateDimensions(entry, placement, entry.aspect_ratio_declared, errors, warnings);
     for (const extension of REQUIRED_VARIANTS) {
       const variantFile = `${base}.${extension}`;
       const variantPath = path.join(assetsDir, variantFile);

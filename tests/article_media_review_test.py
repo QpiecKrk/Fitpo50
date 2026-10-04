@@ -108,6 +108,15 @@ class ArticleMediaReviewTest(unittest.TestCase):
             manifest.write_text(json.dumps(payload))
             self.assertEqual(REVIEW.validate(root, slug, manifest), [])
 
+    def test_incidental_environment_text_does_not_require_evidence(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            slug, _, manifest = self.package(root)
+            payload = json.loads(manifest.read_text())
+            payload['entries'][1]['visual_review'] = dict(SHARED_CASES['valid_incidental_environment'])
+            manifest.write_text(json.dumps(payload))
+            self.assertEqual(REVIEW.validate(root, slug, manifest), [])
+
     def test_changed_image_hash_invalidates_review(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

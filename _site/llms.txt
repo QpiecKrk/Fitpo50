@@ -451,3 +451,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Jak wygląda 25–30 g białka na talerzu? Porcje, które warto znać | FitPo50"
   section: "Jedzenie"
   summary: "Ile kurczaka, ryby, jajek, twarogu, tofu czy soczewicy daje około 25–30 g białka? Tabele porcji po obróbce, siedem gotowych posiłków i najczęstsze pomyłki."
+- url: https://fitpo50.pl/ai-w-diagnostyce-i-lekach-na-raka.html
+  title: "AI w diagnostyce i lekach na raka: co już działa, a co nie | FitPo50"
+  section: "Zdrowie"
+  summary: "Czy komputer dobrze opisał twoje badanie? Sprawdzamy, co AI naprawdę daje w diagnostyce raka, gdzie się myli i jak daleko jest do nowych leków od AI."

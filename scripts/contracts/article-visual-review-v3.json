@@ -3,7 +3,7 @@
   "schema_name": "fitpo50-article-visual-review",
   "note_min_length": 30,
   "required_variants": ["avif", "webp", "jpg"],
-  "embedded_text_kinds": ["NONE", "WATERMARK_ONLY", "CONTENT"],
+  "embedded_text_kinds": ["NONE", "WATERMARK_ONLY", "INCIDENTAL_ENVIRONMENT", "CONTENT"],
   "image_review_provenance_fields": ["reviewed_by", "reviewed_at", "review_method"],
   "image_review_reuse_key": "inventory_sha256",
   "technical_status": "TECHNICAL_PASS",
@@ -12,14 +12,18 @@
   "ready_status": "PREVIEW_READY",
   "image_layout": {
     "hero": {
-      "min_width": 1080,
-      "min_height": 600,
+      "min_width": 1024,
+      "min_height": 560,
+      "recommended_min_width": 1080,
+      "recommended_min_height": 600,
       "min_aspect_ratio": 1.2,
       "max_aspect_ratio": 2.1
     },
     "section": {
-      "min_width": 900,
-      "min_height": 500,
+      "min_width": 800,
+      "min_height": 450,
+      "recommended_min_width": 900,
+      "recommended_min_height": 500,
       "min_aspect_ratio": 1.2,
       "max_aspect_ratio": 2.1
     }

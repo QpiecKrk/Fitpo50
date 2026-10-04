@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-09-08T07:34:43.014Z",
+  "updated_at": "2026-10-04T05:42:04.328Z",
   "items": [
+    {
+      "slug": "ai-w-diagnostyce-i-lekach-na-raka",
+      "target_url": "https://fitpo50.pl/ai-w-diagnostyce-i-lekach-na-raka.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/zdrowie.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-10-04T05:42:04.328Z",
+      "transaction_id": "article-ai-w-diagnostyce-i-lekach-na-raka-1791092291464-47712",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "jak-wyglada-25-30-g-bialka",
       "target_url": "https://fitpo50.pl/jak-wyglada-25-30-g-bialka.html",

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  // Delay analytics load to keep critical rendering path clean on mobile.
+  window.addEventListener("load", () => {
+    const loadAnalytics = () => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-S21SKTVM7K";
+      script.onload = () => {
+        gtag("config", "G-S21SKTVM7K");
+        gtag("config", "AW-18108612630");
+      };
+      document.head.appendChild(script);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+    } else {
+      window.setTimeout(loadAnalytics, 2000);
+    }
+  }, { once: true });
+</script>
+<script>
+  (function () {
+    try {
+      var isPhone = (window.matchMedia && (window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches));
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var h = new Date().getHours();
+      var isNight = (h >= 19 || h < 7);
+      if (isPhone && (prefersDark || isNight)) document.documentElement.classList.add('night-shell');
+    } catch (_) {}
+  })();
+</script>
+<title>AI w diagnostyce i lekach na raka: co już działa, a co | FitPo50</title>
+<meta name="description" content="Czy komputer dobrze opisał twoje badanie? Sprawdzamy, co AI naprawdę daje w diagnostyce raka, gdzie się myli i jak daleko jest do nowych leków od AI.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Grzegorz Kupiec">
+<meta property="og:title" content="AI w diagnostyce i lekach na raka: co już działa, a co">
+<meta property="og:description" content="Czy komputer dobrze opisał twoje badanie? Sprawdzamy, co AI naprawdę daje w diagnostyce raka, gdzie się myli i jak daleko jest do nowych leków od AI.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fitpo50.pl/ai-w-diagnostyce-i-lekach-na-raka.html">
+<meta property="og:image" content="https://fitpo50.pl/assets/ai-diagnostyka-hero-okno.jpg">
+<meta property="og:locale" content="pl_PL">
+<meta property="article:published_time" content="2026-10-04T08:00:00+02:00">
+<meta property="article:modified_time" content="2026-10-04T09:30:00+02:00">
+<meta property="article:author" content="Grzegorz Kupiec">
+<meta property="article:section" content="Zdrowie">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI w diagnostyce i lekach na raka: co już działa, a co">
+<meta name="twitter:description" content="Czy komputer dobrze opisał twoje badanie? Sprawdzamy, co AI naprawdę daje w diagnostyce raka, gdzie się myli i jak daleko jest do nowych leków od AI.">
+<meta name="twitter:image" content="https://fitpo50.pl/assets/ai-diagnostyka-hero-okno.jpg">
+<link rel="canonical" href="https://fitpo50.pl/ai-w-diagnostyce-i-lekach-na-raka.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AI w diagnostyce i lekach na raka: co już działa, a co nie",
+  "description": "Czy komputer dobrze opisał twoje badanie? Sprawdzamy, co AI naprawdę daje w diagnostyce raka, gdzie się myli i jak daleko jest do nowych leków od AI.",
+  "inLanguage": "pl-PL",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://fitpo50.pl/ai-w-diagnostyce-i-lekach-na-raka.html"
+  },
+  "url": "https://fitpo50.pl/ai-w-diagnostyce-i-lekach-na-raka.html",
+  "image": "https://fitpo50.pl/assets/ai-diagnostyka-hero-okno.jpg",
+  "datePublished": "2026-10-04T08:00:00+02:00",
+  "dateModified": "2026-10-04T09:30:00+02:00",
+  "author": {
+    "@type": "Person",
+    "name": "Grzegorz Kupiec",
+    "url": "https://fitpo50.pl/o-mnie.html",
+    "sameAs": [
+      "https://fitpo50.pl/o-mnie.html"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FitPo50",
+    "url": "https://fitpo50.pl/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://fitpo50.pl/assets/logo.jpg"
+    }
+  },
+  "timeRequired": "PT15M",
+  "wordCount": 2219,
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      ".article-header__title",
+      "#quick-answer",
+      "#quick-answer p",
+      ".drop-cap",
+      ".key-takeaways h2",
+      ".key-takeaways li"
+    ]
+  },
+  "mentions": [
+    {
+      "@type": "ScholarlyArticle",
+      "name": "The Lancet – Lång K i wsp., Interval cancer, sensitivity, and specificity comparing AI-supported mammography screening with standard double reading without AI in the MASAI study, randomizowane badanie, 2026",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41620232/",
+      "datePublished": "2026-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Radiology – Dratsch T i wsp., Automation Bias in Mammography: The Impact of Artificial Intelligence BI-RADS Suggestions on Reader Performance, 2023",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37129490/",
+      "datePublished": "2023-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "The Lancet Gastroenterology & Hepatology – Budzyń K i wsp., Endoscopist deskilling risk after exposure to artificial intelligence in colonoscopy, badanie wieloośrodkowe obserwacyjne, 2025",
+      "url": "https://doi.org/10.1016/S2468-1253(25)00133-5",
+      "datePublished": "2025-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Drug Discovery Today – Jayatunga MKP i wsp., How successful are AI-discovered drugs in clinical trials? A first analysis and emerging lessons, 2024",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38692505/",
+      "datePublished": "2024-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Nature Medicine – Xu Z i wsp., A generative AI-discovered TNIK inhibitor for idiopathic pulmonary fibrosis: a randomized phase 2a trial, 2025 (rekord PubMed)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40461817/",
+      "datePublished": "2025-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Królewska Szwedzka Akademia Nauk – komunikat prasowy, Nagroda Nobla z chemii 2024 (AlphaFold, projektowanie białek)",
+      "url": "https://www.nobelprize.org/prizes/chemistry/2024/press-release/",
+      "datePublished": "2024-01-01T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Autorzy badania"
+      }
+    }
+  ],
+  "citation": [
+    "https://pubmed.ncbi.nlm.nih.gov/41620232/",
+    "https://pubmed.ncbi.nlm.nih.gov/37129490/",
+    "https://doi.org/10.1016/S2468-1253(25)00133-5",
+    "https://pubmed.ncbi.nlm.nih.gov/38692505/",
+    "https://pubmed.ncbi.nlm.nih.gov/40461817/",
+    "https://www.nobelprize.org/prizes/chemistry/2024/press-release/",
+    "https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices",
+    "https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/transparency-machine-learning-enabled-medical-devices-guiding-principles"
+  ],
+  "encoding": {
+    "@type": "MediaObject",
+    "@id": "https://fitpo50.pl/assets/pdf/ai-w-diagnostyce-i-lekach-na-raka.pdf#media",
+    "name": "AI w diagnostyce i lekach na raka: co już działa, a co nie (PDF)",
+    "contentUrl": "https://fitpo50.pl/assets/pdf/ai-w-diagnostyce-i-lekach-na-raka.pdf",
+    "encodingFormat": "application/pdf",
+    "inLanguage": "pl-PL"
+  }
+}
+</script>
+
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="image" href="./assets/ai-diagnostyka-hero-okno.webp" fetchpriority="high">
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css?v=1.5">
+<link rel="stylesheet" href="./article.css?v=1.5">
+<link rel="icon" href="./favicon.png" type="image/png"><link rel="apple-touch-icon" href="./favicon.png">
+<link rel="stylesheet" href="./assets/footer.css?v=2">
+<meta name="google-adsense-account" content="ca-pub-4993821807276758">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758" crossorigin="anonymous"></script>
+<script type="application/ld+json" id="faqpage-schema-auto">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Czy sztuczna inteligencja zastąpi radiologa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dostępne dowody na to nie wskazują. W szwedzkim badaniu MASAI AI przejęła część pracy i radiolodzy mieli o 44 procent mniej pracy przy odczytach, ale każdą mammografię oceniał co najmniej jeden lekarz. Eksperyment z 2023 r. pokazał przy tym, że błędna podpowiedź AI obniża trafność ocen lekarzy, więc nadzór człowieka pozostaje kluczowy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy AI znalazła już lek na raka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nie w sensie leku zarejestrowanego i dostępnego dla pacjentów — na październik 2026 r. nie znalazłem takiego potwierdzenia. Około połowa cząsteczek odkrytych z pomocą AI, które weszły do badań klinicznych, to leki onkologiczne, ale w fazie II skuteczne okazało się około 40 procent z nich, podobnie jak przy metodach tradycyjnych."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy AI może się pomylić przy ocenie badania?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tak. System może zaznaczyć zmianę, której nie ma, albo przeoczyć istotny obraz, zwłaszcza gdy trafia na dane inne niż te użyte podczas uczenia. Badanie radiologów pokazało też, że błędna sugestia AI może obniżać trafność ich ocen. Dlatego wynik musi interpretować lekarz w kontekście całego badania i sytuacji pacjenta."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy wynik badania ocenionego przez AI trzeba omówić z lekarzem?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tak. AI jest narzędziem wspierającym, a nie osobą stawiającą rozpoznanie i układającą plan leczenia. Lekarz ocenia jakość badania, objawy, wcześniejsze wyniki i znaczenie ewentualnej podpowiedzi algorytmu. Nie zmieniaj leczenia ani terminu dalszej diagnostyki wyłącznie na podstawie komunikatu programu lub czatu."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json" id="speakable-schema-auto">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      ".article-header__title",
+      "#quick-answer",
+      "#quick-answer p",
+      ".drop-cap",
+      ".key-takeaways h2",
+      ".key-takeaways li"
+    ]
+  }
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Strona główna",
+      "item": "https://fitpo50.pl/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Zdrowie",
+      "item": "https://fitpo50.pl/zdrowie.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "AI w diagnostyce i lekach na raka: co już działa, a co",
+      "item": "https://fitpo50.pl/ai-w-diagnostyce-i-lekach-na-raka.html"
+    }
+  ]
+}
+</script>
+
+</head>
+<body class="article-template article--zdrowie">
+<div class="shell">
+<header class="topbar">
+  <a href="index.html" class="brand" aria-label="FitPo50 — strona główna">
+    <img class="brand__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" onerror="this.style.display='none'">
+    <span class="brand__text">
+      <span class="brand__name">FitPo50</span>
+      <span class="brand__tagline">WRÓĆ DO FORMY<br>PO 50-TCE</span>
+    </span>
+  </a>
+  <nav class="menu" aria-label="Menu główne">
+      <a href="index.html">Home</a>
+      <a href="porady.html" class="is-active">Porady</a>
+      <a href="mity.html">Mity</a>
+      <a href="rusz-sie.html">Ruch</a>
+      <a href="jedzenie.html">Jedzenie</a>
+      <a href="zdrowie.html">Zdrowie</a>
+      <a href="ciekawe.html">Ciekawe</a>
+      <a href="dziennik.html">Dziennik</a>
+      <a href="o-mnie.html">O mnie</a>
+  </nav>
+  <label class="searchbar" aria-label="Szukaj artykułów">
+    <span aria-hidden="true">🔎</span>
+    <input type="search" placeholder="Szukaj artykułów...">
+  </label>
+</header>
+
+<main class="article-page" id="main-article">
+  <div class="container article-main-bento">
+    <section class="article-intro-grid reveal" aria-label="Wstęp artykułu">
+      <div class="article-kicker-card article-kicker-card--zdrowie">
+        <p class="article-kicker-card__meta"><span class="article-kicker-card__category-pill">Zdrowie</span><span>15 min czytania</span><span class="article-kicker-card__date">Aktualizacja: 04.10.2026</span></p>
+        <h1 class="article-header__title">AI w diagnostyce i lekach na raka: co już działa, a co nie</h1>
+      </div>
+
+      <div class="article-hero reveal">
+      <picture>
+        <source srcset="./assets/ai-diagnostyka-hero-okno.avif" type="image/avif">
+        <source srcset="./assets/ai-diagnostyka-hero-okno.webp" type="image/webp">
+        <img src="./assets/ai-diagnostyka-hero-okno.jpg" alt="Kobieta po pięćdziesiątce w koralowym swetrze siedzi w jasnej poczekalni przychodni i patrzy przez okno na miasto, w szybie odbija się świetlista siatka połączeń" loading="eager" width="1080" height="589">
+      </picture>
+      <div class="hero-motto"><em>Maszyna patrzy szybciej. Człowiek musi wiedzieć, kiedy jej nie wierzyć.</em></div>
+      </div>
+    </section>
+
+    <div class="article-primary-actions" aria-label="Akcje artykułu">
+      <!-- PDF_DOWNLOAD_BUTTON_START -->
+      <a class="pdf-hero-download" href="./assets/pdf/ai-w-diagnostyce-i-lekach-na-raka.pdf" download aria-label="Pobierz artykuł w PDF (675 KB)">
+        <span class="pdf-hero-download__eyebrow">Chcesz przeczytać na spokojnie? Pobierz PDF</span>
+        <span class="pdf-hero-download__title">Pobierz artykuł (PDF)</span>
+        <span class="pdf-hero-download__meta">Rozmiar pliku: 675 KB</span>
+        <span class="pdf-hero-download__badge" aria-hidden="true">PDF</span>
+      </a>
+      <!-- PDF_DOWNLOAD_BUTTON_END -->
+
+<button class="pdf-hero-download pdf-hero-download--share" type="button" id="share-article-top" aria-label="Udostępnij artykuł">
+        <span class="pdf-hero-download__eyebrow">Wyślij przyjacielowi albo opublikuj u siebie</span>
+        <span class="pdf-hero-download__title">Udostępnij artykuł</span>
+        <span class="pdf-hero-download__meta">Facebook, LinkedIn, WhatsApp, mail lub kopiowanie linku</span>
+        <span class="pdf-hero-download__badge pdf-hero-download__badge--share" aria-hidden="true">SHARE</span>
+      </button>
+    </div>
+
+    <article class="article-content">
+      <p class="drop-cap">Słyszysz, że twoje zdjęcie „przejrzała sztuczna inteligencja”, i nie wiesz, czy się cieszyć, czy niepokoić. Znam to uczucie: z jednej strony nagłówki o maszynach, które widzą więcej niż lekarz, z drugiej strach, że nikt już nie patrzy na człowieka. Sprawdziłem, co mówią badania, a nie reklamy.</p>
+
+<section class="quick-answer reveal" id="quick-answer" aria-label="Szybka odpowiedź">
+  <h2>Szybka odpowiedź</h2>
+  <p>AI w diagnostyce już pomaga: w dużym szwedzkim badaniu z randomizacją mammografia wspierana przez AI wykryła o 29 procent więcej raków piersi i ograniczyła liczbę raków przeoczonych między badaniami. Warunek jest jeden: ostatnie słowo ma lekarz, bo błędna podpowiedź maszyny potrafi go zmylić. Leki na raka zaprojektowane przez AI wciąż są na etapie badań.</p>
+</section>
+
+<section class="key-takeaways reveal" data-ai-summary="auto" aria-label="Kluczowe wnioski">
+  <h2>Kluczowe wnioski</h2>
+  <ul><li>W randomizowanym badaniu MASAI mammografia wspierana przez AI wykryła o 29% więcej raków i o 12% ograniczyła raki interwałowe.</li>
+<li>Błędna podpowiedź AI wyraźnie obniżała trafność ocen radiologów, także bardzo doświadczonych.</li>
+<li>Polskie badanie obserwacyjne sugeruje spadek wykrywalności gruczolaków bez AI po okresie pracy z AI.</li>
+<li>Leki odkryte z pomocą AI lepiej przechodzą fazę I, ale w fazie II osiągają wyniki zbliżone do tradycyjnych.</li></ul>
+</section>
+
+<h2>Co właściwie robi AI, gdy ogląda twoje badanie?</h2>
+
+<p><a href="./ai-w-medycynie-czy-naprawde-pomaga-pacjentom-fakty-badania.html">Algorytm diagnostyczny nie myśli jak lekarz</a>. To program, który na ogromnej liczbie opisanych wcześniej obrazów nauczył się, jakie układy jasnych i ciemnych plamek częściej towarzyszą chorobie. Gdy dostaje twoje zdjęcie z badania, takiego jak <a href="./rentgen-tomografia-ct-rezonans-mri-roznice-badania.html">RTG, tomografia lub rezonans</a>, nie stawia diagnozy, tylko wylicza, jak bardzo obraz przypomina te, które kiedyś okazały się nowotworem.</p>
+
+<p>To ważna różnica. Komunikat „wysokie ryzyko” znaczy tyle: ten obraz jest podobny do przypadków chorych, na których program się uczył. Jeśli te przypadki pochodziły z innego aparatu, innej grupy ludzi albo innego szpitala, podobieństwo może zwodzić. Dlatego każdy system trzeba sprawdzać tam, gdzie ma pracować, a nie tylko w laboratorium producenta.</p>
+
+<p>Takich narzędzi jest już sporo. Amerykańska agencja FDA prowadzi publiczną listę wyrobów medycznych wykorzystujących AI. Według zestawień opartych na tej liście do marca 2026 r. było ich około 1500, a mniej więcej trzy czwarte dotyczyło radiologii. Innymi słowy: AI w medycynie to dziś przede wszystkim AI, która patrzy na obrazy.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/ai-diagnostyka-kolaz-wzorce.avif" type="image/avif"><source srcset="./assets/ai-diagnostyka-kolaz-wzorce.webp" type="image/webp"><img src="./assets/ai-diagnostyka-kolaz-wzorce.jpg" alt="Kolaż z setek papierowych kafelków przypominających skany, ułożonych w spiralę, w centrum mosiężna lupa powiększa jeden kafelek" loading="lazy" width="1080" height="589"></picture><figcaption>Algorytm nie myśli jak lekarz: porównuje twoje zdjęcie z tysiącami obrazów, na których się uczył.</figcaption></figure>
+
+<h2>Co pokazało największe badanie AI w mammografii?</h2>
+
+<p>Najmocniejszy dowód pochodzi ze Szwecji. W badaniu MASAI wzięło udział 106 tysięcy kobiet, losowo przydzielonych albo do zwykłego podwójnego odczytu mammografii przez dwóch radiologów, albo do odczytu wspieranego przez AI. To badanie z randomizacją, czyli najwyższa półka dowodów, a nie pokaz możliwości.</p>
+
+<p>Jak to działało w praktyce? Program oceniał ryzyko na każdym zdjęciu. Mammografie o niskim ryzyku czytał jeden radiolog, a te o wyższym ryzyku dwóch. AI dodatkowo zaznaczała lekarzom podejrzane miejsca na zdjęciu. Dla samej pacjentki badanie wyglądało dokładnie tak samo jak zawsze.</p>
+
+<p>Wyniki? Z pomocą AI wykryto o 29 procent więcej nowotworów, głównie małych i bez przerzutów do węzłów chłonnych. Radiolodzy mieli o 44 procent mniej pracy przy odczytach. Po dwóch latach obserwacji okazało się też, że między badaniami pojawiło się o 12 procent mniej raków interwałowych: 82 zamiast 93.</p>
+
+<p>Raki interwałowe to te, które ujawniają się między dwiema rundami badań przesiewowych, choć poprzednia mammografia wyszła czysto. Zwykle są groźniejsze, więc ich liczba pokazuje, ile badanie realnie przeoczyło. W grupie z AI było też o 27 procent mniej agresywnych podtypów, a czułość wzrosła bez zwiększenia liczby fałszywych alarmów.</p>
+
+<p><div class="article-table-wrap"><div class="article-table-wrap" role="region" aria-label="Badanie MASAI: mammografia z AI kontra podwójny odczyt bez AI" tabindex="0"><table class="article-table"><caption>Badanie MASAI: mammografia z AI kontra podwójny odczyt bez AI</caption><thead><tr><th scope="col">Co mierzono</th><th scope="col">Wynik w grupie z AI</th></tr></thead><tbody><tr><th scope="row">Wykryte nowotwory</th><td>o 29% więcej</td></tr><tr><th scope="row">Obciążenie radiologów odczytami</th><td>o 44% mniej</td></tr><tr><th scope="row">Raki interwałowe po 2 latach</th><td>82 zamiast 93 (o 12% mniej)</td></tr><tr><th scope="row">Agresywne podtypy wśród raków interwałowych</th><td>o 27% mniej</td></tr><tr><th scope="row">Fałszywe alarmy</th><td>bez wzrostu</td></tr></tbody></table></div></div></p>
+
+<p>Uczciwie trzeba dodać ograniczenia. Wynik dotyczy jednego konkretnego programu, jednego sposobu jego użycia i szwedzkiego systemu badań przesiewowych. Nie wiadomo jeszcze, czy kobiety z grupy AI rzadziej umrą na raka piersi, bo na taką odpowiedź potrzeba wielu lat obserwacji.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/ai-diagnostyka-masai-strumienie.avif" type="image/avif"><source srcset="./assets/ai-diagnostyka-masai-strumienie.webp" type="image/webp"><img src="./assets/ai-diagnostyka-masai-strumienie.jpg" alt="Diagram: strumień kropek symbolizujących zdjęcia przechodzi przez filtr i rozdziela się na kanał do jednego oka i kanał do dwóch oczu" loading="lazy" width="1080" height="589"></picture><figcaption>W badaniu MASAI AI decydowała, czy zdjęcie przeczyta jeden radiolog, czy dwóch — a decyzję o dalszych badaniach zawsze podejmował lekarz.</figcaption></figure>
+
+<h2>Czy komputer dobrze zinterpretował badanie?</h2>
+
+<p>Krótka odpowiedź brzmi: nie wiadomo, dopóki nie sprawdzi tego człowiek. AI myli się inaczej niż lekarz. Potrafi dostrzec coś, co umknęło oku, ale potrafi też z pełnym przekonaniem zaznaczyć niewinny cień. Jeszcze ważniejsze jest to, jak jej błąd wpływa na lekarza, który patrzy na ten sam obraz.</p>
+
+<p>W 2023 r. niemieccy badacze pokazali 27 radiologom 50 mammografii z podpowiedziami rzekomego systemu AI. Część podpowiedzi była celowo błędna. Gdy podpowiedź była trafna, lekarze oceniali poprawnie około 80 procent zdjęć. Gdy była błędna, trafność spadała u niedoświadczonych do 19,8 procent, u średnio doświadczonych do 24,8 procent, a u bardzo doświadczonych do 45,5 procent.</p>
+
+<p>To zjawisko ma nazwę: błąd automatyzacji. Ufamy maszynie, bo jest szybka, pewna siebie i zwykle ma rację. W tym eksperymencie nawet doświadczeni specjaliści dali się pociągnąć w złą stronę, choć słabiej niż młodsi koledzy. Ograniczenie jest jasne: to był test na 50 zdjęciach, a nie codzienna praca w pracowni.</p>
+
+<p>Ciekawy szczegół: mniej doświadczeni radiolodzy byli mniej pewni własnych ocen niż starsi koledzy, co według autorów mogło czynić ich bardziej podatnymi na złe podpowiedzi. Najłatwiej dawali się przekonać wtedy, gdy maszyna błędnie sugerowała wyższą kategorię ryzyka, niż było naprawdę.</p>
+
+<p>Autorzy zaproponowali konkretne zabezpieczenia: pokazywać lekarzowi, jak bardzo system jest pewny swojej oceny, uczyć radiologów, na jakiej zasadzie działa program, i dbać o to, by lekarz czuł się odpowiedzialny za własną decyzję. Mówiąc po ludzku: AI ma być drugą parą oczu, a nie ostatnim słowem.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/ai-diagnostyka-radiolog-watpliwosc.avif" type="image/avif"><source srcset="./assets/ai-diagnostyka-radiolog-watpliwosc.webp" type="image/webp"><img src="./assets/ai-diagnostyka-radiolog-watpliwosc.jpg" alt="Na biurku blaszana figurka robota wskazuje w lewo, w tle siwa radiolożka w okularach ogląda zdjęcie pod światło i z uśmiechem pokazuje w prawo" loading="lazy" width="1080" height="589"></picture><figcaption>Błąd automatyzacji: gdy maszyna podpowiada źle, nawet doświadczony specjalista może dać się pociągnąć w złą stronę.</figcaption></figure>
+
+<h2>Czy lekarz pracujący z AI może stracić wprawę?</h2>
+
+<p>Tu pojawia się wątek z Polski. Badanie przeprowadzono w czterech polskich ośrodkach wykonujących kolonoskopię. Sprawdzano, co dzieje się z lekarzami, którzy przez kilka miesięcy pracowali z programem AI wskazującym polipy w jelicie. Pytanie było proste: jak radzą sobie, kiedy program jest wyłączony?</p>
+
+<p>Odsetek kolonoskopii bez AI, w których wykryto gruczolaka, spadł z 28,4 do 22,4 procent. Gruczolaki to zmiany, z których może rozwinąć się rak jelita grubego, a ich wykrywalność jest podstawową miarą jakości tego badania. Spadek o 6 punktów procentowych sugeruje, że część zmian, które wcześniej zostałyby znalezione, mogła zostać przeoczona.</p>
+
+<p>W liczbach: przeanalizowano 795 kolonoskopii bez AI sprzed jej wprowadzenia i 648 po nim. Dla porównania w kolonoskopiach z włączonym AI wykrywalność wyniosła 25,3 procent, czyli mniej niż w tych ośrodkach bez AI przed jej wprowadzeniem. To nie dowód, ale sygnał, którego nie wolno zbyć wzruszeniem ramion.</p>
+
+<p>Ograniczenia są poważne. To badanie obserwacyjne, porównujące okres przed wprowadzeniem AI i po nim, więc nie dowodzi przyczyny. Mogły się zmienić grupy pacjentów, obciążenie pracą albo inne warunki. Ale kierunek jest znajomy: gdy maszyna pilnuje za nas, sami łatwo zaczynamy pilnować słabiej.</p>
+
+<p>Wniosek dla pacjenta nie brzmi „unikaj AI”. Brzmi raczej tak: dobra placówka mierzy wyniki swoich lekarzy zarówno z AI, jak i bez niej. Autorzy badania mówili wprost, że warto monitorować własną wykrywalność w obu trybach pracy, żeby wcześnie zauważyć niepokojące zmiany.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/ai-diagnostyka-dlonie-endoskopisty.avif" type="image/avif"><source srcset="./assets/ai-diagnostyka-dlonie-endoskopisty.webp" type="image/webp"><img src="./assets/ai-diagnostyka-dlonie-endoskopisty.jpg" alt="Zbliżenie dłoni lekarza z obrączką na pokrętłach endoskopu, w tle rozmyty przełącznik w pozycji wyłączonej" loading="lazy" width="1080" height="589"></picture><figcaption>Polskie badanie z czterech ośrodków sugeruje, że po okresie pracy z AI wykrywalność bez niej może spadać — wprawę trzeba ćwiczyć.</figcaption></figure>
+
+<h2>Jak AI szuka leków na nowotwory?</h2>
+
+<p>Szukanie leku przypomina dorabianie klucza do zamka, którego kształtu nie widać. Zamkiem jest białko w komórce nowotworowej, a kluczem cząsteczka, która ma się do niego dopasować i zablokować jego działanie. AI pomaga wskazać białko warte ataku, przewidzieć jego kształt i zaprojektować pasujące cząsteczki.</p>
+
+<p>Przełomem okazało się przewidywanie kształtu białek. W 2020 r. Demis Hassabis i John Jumper z Google DeepMind pokazali model AlphaFold2, którym przewidziano strukturę praktycznie wszystkich około 200 milionów znanych białek. Korzysta z niego ponad dwa miliony badaczy ze 190 krajów, a w 2024 r. obaj dostali za to Nagrodę Nobla z chemii.</p>
+
+<p>Problem był stary: od lat 70. naukowcy próbowali przewidzieć kształt białka na podstawie sekwencji aminokwasów i szło im to bardzo opornie. Drugą połowę tej samej Nagrody Nobla dostał David Baker za projektowanie zupełnie nowych białek, także takich, które mogą posłużyć jako leki i szczepionki.</p>
+
+<p>Znajomość kształtu zamka nie daje jeszcze klucza. Skraca jednak etap, który wcześniej wymagał żmudnych badań laboratoryjnych nad każdym białkiem z osobna. Chemicy mogą szybciej odrzucać ślepe zaułki i wysyłać do laboratorium mniej kandydatów, za to lepiej dobranych. Ostateczny test i tak odbywa się na komórkach, zwierzętach i ludziach.</p>
+
+<p>Onkologia jest w centrum tej gorączki. Według analizy opublikowanej w 2024 r. w czasopiśmie „Drug Discovery Today” mniej więcej połowa cząsteczek odkrytych z pomocą AI, które trafiły do badań klinicznych fazy I i II, to leki przeciwnowotworowe.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/ai-diagnostyka-bialko-klucz.avif" type="image/avif"><source srcset="./assets/ai-diagnostyka-bialko-klucz.webp" type="image/webp"><img src="./assets/ai-diagnostyka-bialko-klucz.jpg" alt="Trójwymiarowy model białka w turkusowych i fioletowych wstęgach z wgłębieniem, do którego zbliża się świecąca złota cząsteczka" loading="lazy" width="1080" height="589"></picture><figcaption>AI przewiduje kształt zamka, czyli białka, i pomaga projektować klucz, czyli cząsteczkę leku.</figcaption></figure>
+
+<h2>Ile leków odkrytych przez AI naprawdę działa?</h2>
+
+<p>Tu trzeba zdjąć różowe okulary. Wspomniana analiza policzyła, że do grudnia 2023 r. badania fazy I ukończyły 24 cząsteczki odkryte z pomocą AI, a 21 z nich przeszło je pomyślnie. To 80–90 procent, wyraźnie więcej niż historyczna średnia branży farmaceutycznej.</p>
+
+<p>Faza I sprawdza jednak głównie bezpieczeństwo. Prawdziwy test skuteczności zaczyna się w fazie II i tam z 10 cząsteczek sukces odniosły 4, czyli około 40 procent. To mniej więcej tyle, ile osiągają leki odkrywane tradycyjnie. AI pomaga więc zaprojektować cząsteczkę, którą da się bezpiecznie podać, ale nie gwarantuje, że ta cząsteczka wyleczy chorobę.</p>
+
+<p>Autorzy analizy policzyli też scenariusz na przyszłość: gdyby te trendy się utrzymały, szansa, że cząsteczka przejdzie wszystkie fazy badań, mogłaby wzrosnąć z 5–10 do 9–18 procent. To prognoza oparta na niewielkiej liczbie przypadków, a nie gotowy wynik.</p>
+
+<p>Najdalej zaszedł lek, który wcale nie jest na raka. Rentosertib firmy Insilico Medicine powstał tak, że AI wskazała nowy cel w organizmie, a potem zaprojektowała cząsteczkę. W badaniu fazy 2a na 71 chorych z idiopatycznym włóknieniem płuc najwyższa dawka przez 12 tygodni zwiększyła natężoną pojemność życiową płuc średnio o 98,4 ml, a w grupie placebo spadła ona o 20,3 ml. Chorych podzielono na trzy grupy z różnymi dawkami i grupę placebo, po 17–18 osób w każdej.</p>
+
+<p>To obiecujący sygnał, ale z małej grupy i krótkiej obserwacji. Głównym celem badania było bezpieczeństwo, a nie dowód skuteczności, a działania niepożądane występowały podobnie często jak przy placebo. Sami autorzy piszą, że lek wymaga większych i dłuższych badań.</p>
+
+<p>Stan na październik 2026 r.: nie znalazłem potwierdzenia, by amerykańska FDA lub europejska EMA zarejestrowały lek, którego cel i cząsteczkę od początku wskazała i zaprojektowała AI. Kto dziś obiecuje lek na raka od AI w najbliższej aptece, sprzedaje nadzieję, a nie fakty.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/ai-diagnostyka-lejek-fiolki.avif" type="image/avif"><source srcset="./assets/ai-diagnostyka-lejek-fiolki.webp" type="image/webp"><img src="./assets/ai-diagnostyka-lejek-fiolki.jpg" alt="Papierowy kolaż: ogromny lejek pełen kolorowych fiolek u góry, na dole wypadają tylko trzy, obok stoją kobieta i mężczyzna po sześćdziesiątce" loading="lazy" width="1080" height="589"></picture><figcaption>Faza I to dopiero początek lejka: skuteczność sprawdza się później i tam AI na razie nie wyprzedza tradycyjnych metod.</figcaption></figure>
+
+<h2>Co z tego wynika dla ciebie po pięćdziesiątce?</h2>
+
+<p>Najważniejsze: AI działa tylko tam, gdzie badanie w ogóle się odbywa. Program, który w Szwecji wyłapywał więcej raków piersi, nie pomoże komuś, kto od lat odkłada mammografię albo kolonoskopię. Pierwszy krok jest więc staroświecki: iść na badania przesiewowe, do których się kwalifikujesz, i uporządkować z lekarzem także <a href="./badania-po-50.html">badania potrzebne po 50-tce</a>.</p>
+
+<p>Jeśli twoje badanie oceniano z pomocą AI, możesz zapytać lekarza, jak program był używany i kto ostatecznie ocenił zdjęcia. Opis podpisuje lekarz i to on powinien wytłumaczyć, co wynik znaczy dla ciebie. Wiedza z badania MASAI i eksperymentu z błędem automatyzacji mówi jasno: najlepiej działa duet, a nie sama maszyna.</p>
+
+<p>Osobna sprawa to chatboty. Wklejenie wyniku do czatu może pomóc zrozumieć trudne słowa w opisie, ale taki czat nie jest wyrobem medycznym sprawdzonym na przypadkach takich jak twój. Traktuj go jak słownik, nie jak drugą opinię, a każdą niepokojącą interpretację zabierz do lekarza.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/ai-diagnostyka-para-po-badaniu.avif" type="image/avif"><source srcset="./assets/ai-diagnostyka-para-po-badaniu.webp" type="image/webp"><img src="./assets/ai-diagnostyka-para-po-badaniu.jpg" alt="Uśmiechnięta para po pięćdziesiątce robi sobie selfie przed przeszkloną przychodnią w słoneczny zimowy dzień na ulicy polskiego miasta" loading="lazy" width="1080" height="589"></picture><figcaption>Najlepszy algorytm nie pomoże, jeśli badanie się nie odbędzie — pierwszy krok wciąż należy do ciebie.</figcaption></figure>
+
+<h2>Czego jeszcze nie wiemy o AI w medycynie?</h2>
+
+<p>Uczciwy bilans wygląda tak: w diagnostyce obrazowej mamy już mocny dowód z dużego badania z randomizacją. W szukaniu leków mamy szybszy start i lepsze wyniki pierwszej fazy badań, ale wciąż brak dowodu, że AI zwiększa liczbę skutecznych terapii dla chorych. Tę samą zasadę — oddzielanie mechanizmu od wyniku ważnego dla pacjenta — stosujemy w analizie pytań o <a href="./szczepionki-mrna-covid-a-rak.html">szczepionki mRNA i raka</a>.</p>
+
+<p>Otwarte pytania są konkretne. Czy wyniki ze Szwecji powtórzą się w innych krajach i z innymi programami? Jak chronić lekarzy przed błędem automatyzacji i utratą wprawy? Czy przewaga AI w fazie I przełoży się na leki, które przedłużają życie, a nie tylko zmniejszają guz na zdjęciu? Odpowiedzą na to kolejne badania, nie reklamy.</p>
+
+<p>Do tego czasu rozsądna postawa to ani zachwyt, ani strach. W dobrze zaprojektowanym systemie AI już teraz pomaga wykrywać więcej nowotworów. Przy zbyt ślepym zaufaniu może przepuścić to, co doświadczony lekarz kiedyś by zauważył. Różnicę robi człowiek, który wie, kiedy maszynie nie wierzyć.</p>
+
+<figure class="inline-figure"><picture><source srcset="./assets/ai-diagnostyka-rozstaje.avif" type="image/avif"><source srcset="./assets/ai-diagnostyka-rozstaje.webp" type="image/webp"><img src="./assets/ai-diagnostyka-rozstaje.jpg" alt="Mężczyzna w zielonej kurtce stoi na rozwidleniu parkowych ścieżek, jedna prowadzi do szklanego budynku badawczego, druga w kolorowe drzewa" loading="lazy" width="1080" height="589"></picture><figcaption>AI w medycynie stoi na rozstajach: część dróg jest już sprawdzona, inne dopiero wymagają badań.</figcaption></figure>
+
+<section class="faq-list reveal" aria-label="Najczęściej zadawane pytania">
+
+  <h2>Najczęściej zadawane pytania</h2>
+
+<article class="faq-item" id="faq-1">
+  <h3>Czy sztuczna inteligencja zastąpi radiologa?</h3>
+  <p>Dostępne dowody na to nie wskazują. W szwedzkim badaniu MASAI AI przejęła część pracy i radiolodzy mieli o 44 procent mniej pracy przy odczytach, ale każdą mammografię oceniał co najmniej jeden lekarz. Eksperyment z 2023 r. pokazał przy tym, że błędna podpowiedź AI obniża trafność ocen lekarzy, więc nadzór człowieka pozostaje kluczowy.</p>
+</article>
+
+<article class="faq-item" id="faq-2">
+  <h3>Czy AI znalazła już lek na raka?</h3>
+  <p>Nie w sensie leku zarejestrowanego i dostępnego dla pacjentów — na październik 2026 r. nie znalazłem takiego potwierdzenia. Około połowa cząsteczek odkrytych z pomocą AI, które weszły do badań klinicznych, to leki onkologiczne, ale w fazie II skuteczne okazało się około 40 procent z nich, podobnie jak przy metodach tradycyjnych.</p>
+</article>
+
+<article class="faq-item" id="faq-3">
+  <h3>Czy AI może się pomylić przy ocenie badania?</h3>
+  <p>Tak. System może zaznaczyć zmianę, której nie ma, albo przeoczyć istotny obraz, zwłaszcza gdy trafia na dane inne niż te użyte podczas uczenia. Badanie radiologów pokazało też, że błędna sugestia AI może obniżać trafność ich ocen. Dlatego wynik musi interpretować lekarz w kontekście całego badania i sytuacji pacjenta.</p>
+</article>
+
+<article class="faq-item" id="faq-4">
+  <h3>Czy wynik badania ocenionego przez AI trzeba omówić z lekarzem?</h3>
+  <p>Tak. AI jest narzędziem wspierającym, a nie osobą stawiającą rozpoznanie i układającą plan leczenia. Lekarz ocenia jakość badania, objawy, wcześniejsze wyniki i znaczenie ewentualnej podpowiedzi algorytmu. Nie zmieniaj leczenia ani terminu dalszej diagnostyki wyłącznie na podstawie komunikatu programu lub czatu.</p>
+</article>
+
+</section>
+
+
+
+      <section class="share-article-section reveal" aria-labelledby="share-article-title">
+        <h3 id="share-article-title">Udostępnij artykuł</h3>
+        <p class="share-article-section__lead">Wyślij ten materiał przyjacielowi albo opublikuj u siebie. Jednym kliknięciem podasz aktualny link i tytuł artykułu.</p>
+        <div class="share-article-section__actions" role="group" aria-label="Opcje udostępniania">
+          <a class="share-pill share-pill--facebook" href="#" data-share-network="facebook" rel="noopener noreferrer" target="_blank">Facebook</a>
+          <a class="share-pill share-pill--linkedin" href="#" data-share-network="linkedin" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+          <a class="share-pill share-pill--whatsapp" href="#" data-share-network="whatsapp" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+          <a class="share-pill share-pill--mail" href="#" data-share-network="mail">Mail</a>
+          <button class="share-pill share-pill--copy" type="button" data-share-network="copy">Kopiuj link</button>
+        </div>
+        <p class="share-article-section__status" id="share-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <h2 id="zrodla">Źródła</h2>
+      <ol class="sources-list">
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/41620232/" target="_blank" rel="noopener noreferrer">The Lancet – Lång K i wsp., Interval cancer, sensitivity, and specificity comparing AI-supported mammography screening with standard double reading without AI in the MASAI study, randomizowane badanie, 2026</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/37129490/" target="_blank" rel="noopener noreferrer">Radiology – Dratsch T i wsp., Automation Bias in Mammography: The Impact of Artificial Intelligence BI-RADS Suggestions on Reader Performance, 2023</a></li>
+        <li><a href="https://doi.org/10.1016/S2468-1253(25)00133-5" target="_blank" rel="noopener noreferrer">The Lancet Gastroenterology &amp; Hepatology – Budzyń K i wsp., Endoscopist deskilling risk after exposure to artificial intelligence in colonoscopy, badanie wieloośrodkowe obserwacyjne, 2025</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/38692505/" target="_blank" rel="noopener noreferrer">Drug Discovery Today – Jayatunga MKP i wsp., How successful are AI-discovered drugs in clinical trials? A first analysis and emerging lessons, 2024</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/40461817/" target="_blank" rel="noopener noreferrer">Nature Medicine – Xu Z i wsp., A generative AI-discovered TNIK inhibitor for idiopathic pulmonary fibrosis: a randomized phase 2a trial, 2025 (rekord PubMed)</a></li>
+        <li><a href="https://www.nobelprize.org/prizes/chemistry/2024/press-release/" target="_blank" rel="noopener noreferrer">Królewska Szwedzka Akademia Nauk – komunikat prasowy, Nagroda Nobla z chemii 2024 (AlphaFold, projektowanie białek)</a></li>
+        <li><a href="https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices" target="_blank" rel="noopener noreferrer">U.S. Food and Drug Administration – Artificial Intelligence-Enabled Medical Devices, publiczna lista wyrobów medycznych z AI</a></li>
+        <li><a href="https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/transparency-machine-learning-enabled-medical-devices-guiding-principles" target="_blank" rel="noopener noreferrer">FDA, Health Canada i MHRA – Transparency for Machine Learning-Enabled Medical Devices: Guiding Principles</a></li>
+      </ol>
+
+      <div class="medical-disclaimer">
+        <p><strong>Uwaga:</strong> Artykuł ma charakter informacyjny i edukacyjny. Nie zastępuje konsultacji lekarskiej, diagnozy ani leczenia.</p>
+      </div>
+    </article>
+  </div>
+</main>
+
+<section class="reading-room porady-preview section-padding" id="porady-preview">
+  <div class="reading-room__head reveal">
+    <h3>
+      <span class="title-with-icon">
+        <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18v16H6.5A2.5 2.5 0 0 0 4 21Z"></path>
+          <path d="M7 7h8M7 11h8M7 15h5"></path>
+        </svg>
+        Czytelnia
+      </span>
+    </h3>
+    <p>Duża garść wiedzy podana prosto, konkretnie i po ludzku.</p>
+  </div>
+  <div class="articles-grid-preview">
+      <a href="jak-wyglada-25-30-g-bialka.html" class="article-promo-card reveal">
+        <div class="article-promo-card__media">
+          <picture>
+            <source srcset="./assets/jak-wyglada-25-30-g-bialka-hero-v2.avif" type="image/avif">
+            <source srcset="./assets/jak-wyglada-25-30-g-bialka-hero-v2.webp" type="image/webp">
+            <img src="./assets/jak-wyglada-25-30-g-bialka-hero-v2.jpg" alt="25–30 g białka na talerzu: ile to kurczaka, jajek i" class="article-promo-img article-promo-card__img" loading="lazy" width="1080" height="603">
+          </picture>
+        </div>
+        <div class="article-promo-card__content">
+          <span class="article-promo-card__meta article-promo-card__meta--jedzenie">Jedzenie • 12 min</span>
+          <h4 class="article-promo-card__title">25–30 g białka na talerzu: ile to kurczaka, jajek i</h4>
+          <p class="article-promo-card__desc">Ile kurczaka, ryby, jajek, twarogu, tofu czy soczewicy daje około 25–30 g białka? Tabele porcji po obróbce, siedem gotowych posiłków i najczęstsze pomyłki.</p>
+          <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
+        </div>
+      </a>
+
+      <a href="szczepionki-mrna-covid-a-rak.html" class="article-promo-card reveal">
+        <div class="article-promo-card__media">
+          <picture>
+            <source srcset="./assets/mrna-cancer-evidence-hero-2026.avif" type="image/avif">
+            <source srcset="./assets/mrna-cancer-evidence-hero-2026.webp" type="image/webp">
+            <img src="./assets/mrna-cancer-evidence-hero-2026.jpg" alt="Czy szczepionki mRNA powodują raka? Fakty i badania" class="article-promo-img article-promo-card__img" loading="lazy" width="1080" height="603">
+          </picture>
+        </div>
+        <div class="article-promo-card__content">
+          <span class="article-promo-card__meta article-promo-card__meta--mity">Mity • 10 min</span>
+          <h4 class="article-promo-card__title">Czy szczepionki mRNA powodują raka? Fakty i badania</h4>
+          <p class="article-promo-card__desc">Czy szczepionki mRNA powodują raka? Sprawdzamy badanie z Korei, dane z Włoch, DNA, SV40 i „turbo raka”. Poznaj fakty, ograniczenia i obecny stan wiedzy.</p>
+          <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
+        </div>
+      </a>
+
+      <a href="marsz-japonski-czy-10000-krokow.html" class="article-promo-card reveal">
+        <div class="article-promo-card__media">
+          <picture>
+            <source srcset="./assets/marsz-japonski-hero-dwa-tempa.avif" type="image/avif">
+            <source srcset="./assets/marsz-japonski-hero-dwa-tempa.webp" type="image/webp">
+            <img src="./assets/marsz-japonski-hero-dwa-tempa.jpg" alt="Marsz japoński czy 10 000 kroków po 50?" class="article-promo-img article-promo-card__img" loading="lazy" width="1080" height="603">
+          </picture>
+        </div>
+        <div class="article-promo-card__content">
+          <span class="article-promo-card__meta article-promo-card__meta--mity">Mity • 11 min</span>
+          <h4 class="article-promo-card__title">Marsz japoński czy 10 000 kroków po 50?</h4>
+          <p class="article-promo-card__desc">Marsz japoński trzy na trzy kontra 10 000 kroków: co mówią badania o wydolności, sile nóg i ciśnieniu po 50, jak ustawić tempo i kiedy przerwać trening.</p>
+          <span class="btn btn--outline article-promo-card__cta">Czytaj artykuł -></span>
+        </div>
+      </a>
+  </div>
+</section>
+</div>
+
+<nav class="bottom-nav" aria-label="Nawigacja dolna">
+  <a href="index.html" class="bottom-nav__item ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg>
+    <span>Dom</span>
+  </a>
+  <a href="porady.html" class="bottom-nav__item ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5V4.5A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+    <span>Porady</span>
+  </a>
+  <a href="index.html#baza-wiedzy" class="bottom-nav__item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    <span>Baza wiedzy</span>
+  </a>
+  <a href="https://www.instagram.com/fitpo50" target="_blank" rel="noopener noreferrer" class="bottom-nav__item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><path d="M17.5 6.5h.01"></path></svg>
+    <span>Instagram</span>
+  </a>
+</nav>
+
+<footer class="site-footer-bento" aria-label="Stopka FitPo50">
+  <div class="site-footer-bento__grid">
+    <section class="site-footer-bento__card" aria-label="O serwisie FitPo50">
+      <div class="site-footer-bento__brand">
+        <img class="site-footer-bento__logo" src="./assets/logo-fitpo50.png" alt="Logo FitPo50" loading="lazy" width="112" height="112" onerror="this.src='./assets/logo.jpg'">
+        <div>
+          <h2 class="site-footer-bento__title">FitPo50.pl</h2>
+          <p class="site-footer-bento__lead">Praktyczny serwis o ruchu, jedzeniu i zdrowiu po 50-tce - prosto, konkretnie i bez marketingowej ściemy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-footer-bento__card" aria-label="Linki serwisu">
+      <h3 class="site-footer-bento__links-title">Nawigacja</h3>
+      <ul class="site-footer-bento__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="porady.html">Porady</a></li>
+        <li><a href="rusz-sie.html">Ruch</a></li>
+        <li><a href="jedzenie.html">Jedzenie</a></li>
+        <li><a href="zdrowie.html">Zdrowie</a></li>
+        <li><a href="ciekawe.html">Ciekawe</a></li>
+        <li><a href="dziennik.html">Dziennik</a></li>
+        <li><a href="o-mnie.html">O mnie</a></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="site-footer-bento__bottom">
+    <p class="site-footer-bento__copy">© 2026 FitPo50 | <a href="polityka-prywatnosci.html">Polityka Prywatności i Cookies</a></p>
+    <p class="site-footer-bento__note">Ważna informacja: nie jestem lekarzem. Treści na stronie mają charakter edukacyjny i informacyjny, nie zastępują konsultacji medycznej ani indywidualnych zaleceń specjalisty.</p>
+  </div>
+</footer>
+
+<script src="./dist/cmp.js?v=1.1" defer></script>
+<script src="./dist/app.js?v=1.2" defer></script>
+</body>
+</html>

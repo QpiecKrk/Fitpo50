@@ -1,0 +1,578 @@
+{
+  "version": 1,
+  "transaction_id": "article-ai-w-diagnostyce-i-lekach-na-raka-1791092291464-47712",
+  "generated_at": "2026-10-04T05:42:04.359Z",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "ai-w-diagnostyce-i-lekach-na-raka",
+  "url": "https://fitpo50.pl/ai-w-diagnostyce-i-lekach-na-raka.html",
+  "manifest_file": "data/reports/article-publications/ai-w-diagnostyce-i-lekach-na-raka.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "ai-w-diagnostyce-i-lekach-na-raka.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1750149fa7af053616f15a8bd1cad1d4f7fd6aaff3e8cd18a127c6f8e3f36ee4",
+      "bytes": 49333
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "d5a89285c94aa0c05bb86e7df5a1cce4c0ac9f90b168f77385bcf5baddd6a602",
+      "after_sha256": "fdf21febea38590f38a493e564f939be5cc5542a440942278e52ef4bbe5bcca2",
+      "bytes": 119725
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "0d9269f388ebdc2098eca76090de748df09ec831abbb7e373583a3b724ed01e5",
+      "after_sha256": "6e55017268147420f243f8e71f20c13d0dd39c13b26533b5574e1ebe376b2d2b",
+      "bytes": 157048
+    },
+    {
+      "path": "zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "e8ceebc6ef92a816e945c89c1abe5522d3afd7010035b0222ad96078827c390e",
+      "after_sha256": "ea8c390cba0f320f224e73d79d60f82a18b8b090de50e8ae9f669085486cc90a",
+      "bytes": 59679
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "92ad17ec8a0c5c980ae60f4ec466df0d1468c8bc1da5b39fbc61e79961032507",
+      "after_sha256": "1c366896fc967ba610e227bd73c85369bf51105c3a3121f8edb7bc67d55b2b7f",
+      "bytes": 19065
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "7b82f5792e19729808a4bbddd1d1c71762ced14d2cc872ce635c0313fb77598d",
+      "after_sha256": "3bf34066b5904cd289c0c490489e8c6a3bddf711f0cb6a67224f54dbaf14553b",
+      "bytes": 37207
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "3eb34c7075285a8ea7b2d4455846458b9ccda0ccbb67bf9d736fa8edf0e307b0",
+      "after_sha256": "7e7ddabcccc72eec03c9ed85b27a5f35eb58c5cdcc7fd3d61ef0fdde78e208c1",
+      "bytes": 775799
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "2aff1f953641815f9fecaf4878a12a6396720b069c9ed30174ea22afc2a7e37d",
+      "after_sha256": "84c29d175bdbc37f253eed8d4426b238651d5fa21f96079e4769969764bf0762",
+      "bytes": 821195
+    },
+    {
+      "path": "assets/pdf/ai-w-diagnostyce-i-lekach-na-raka.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fcf9cefdcf6f23b0fd3eabeb3f1b7a839d5162b65550bd64ba2d3e121ef07d3e",
+      "bytes": 690556
+    },
+    {
+      "path": "data/crosslink-suggestions/ai-w-diagnostyce-i-lekach-na-raka.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aa72c4d7afcbc232dffba6f1090683a95d65dd657c9ae0783500657a9cbfd45d",
+      "bytes": 1297
+    },
+    {
+      "path": "data/reports/article-preview/ai-w-diagnostyce-i-lekach-na-raka.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fbfc49194a295c911a01fd5fe1681a3571ad04324a7d3377a3e38f13e0c6ee14",
+      "bytes": 36084
+    },
+    {
+      "path": "data/reports/article-preview/ai-w-diagnostyce-i-lekach-na-raka.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c37b4b2aaa8622fbbbe74d1b28f0328e34caa0bf7b8bd8247786ca9ab3936cc0",
+      "bytes": 404
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "45d4f447966cf5a5cfbd021da2b76aa74a27bdfa78b5f08ba5b75d5e74020368",
+      "after_sha256": "b9c8d8cb888d910f0a608774a2f32bccdb5e116d4979a6f5887ea09be16cd18f",
+      "bytes": 32529
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "90637d7500db83d9c0711d3c3401de3894b79dcaa32d6675a87a31f0b0cd5966",
+      "after_sha256": "f57190ffc6011a1b264668f183a2106dccca5eb4abc962d076848c2cba25b053",
+      "bytes": 2670
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "2e94c33191120dd33ef226f32e5e5741e2f947f31e11cb776676ecdfcc7214ba",
+      "after_sha256": "a743c1b4535d37f5a5189167ccbea900fa9a075449f3944daad59dfb0e92505c",
+      "bytes": 1267
+    },
+    {
+      "path": "_site/ai-w-diagnostyce-i-lekach-na-raka.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1750149fa7af053616f15a8bd1cad1d4f7fd6aaff3e8cd18a127c6f8e3f36ee4",
+      "bytes": 49333
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "d5a89285c94aa0c05bb86e7df5a1cce4c0ac9f90b168f77385bcf5baddd6a602",
+      "after_sha256": "fdf21febea38590f38a493e564f939be5cc5542a440942278e52ef4bbe5bcca2",
+      "bytes": 119725
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "0d9269f388ebdc2098eca76090de748df09ec831abbb7e373583a3b724ed01e5",
+      "after_sha256": "6e55017268147420f243f8e71f20c13d0dd39c13b26533b5574e1ebe376b2d2b",
+      "bytes": 157048
+    },
+    {
+      "path": "_site/zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "e8ceebc6ef92a816e945c89c1abe5522d3afd7010035b0222ad96078827c390e",
+      "after_sha256": "ea8c390cba0f320f224e73d79d60f82a18b8b090de50e8ae9f669085486cc90a",
+      "bytes": 59679
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "92ad17ec8a0c5c980ae60f4ec466df0d1468c8bc1da5b39fbc61e79961032507",
+      "after_sha256": "1c366896fc967ba610e227bd73c85369bf51105c3a3121f8edb7bc67d55b2b7f",
+      "bytes": 19065
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "7b82f5792e19729808a4bbddd1d1c71762ced14d2cc872ce635c0313fb77598d",
+      "after_sha256": "3bf34066b5904cd289c0c490489e8c6a3bddf711f0cb6a67224f54dbaf14553b",
+      "bytes": 37207
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "3eb34c7075285a8ea7b2d4455846458b9ccda0ccbb67bf9d736fa8edf0e307b0",
+      "after_sha256": "7e7ddabcccc72eec03c9ed85b27a5f35eb58c5cdcc7fd3d61ef0fdde78e208c1",
+      "bytes": 775799
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "2aff1f953641815f9fecaf4878a12a6396720b069c9ed30174ea22afc2a7e37d",
+      "after_sha256": "84c29d175bdbc37f253eed8d4426b238651d5fa21f96079e4769969764bf0762",
+      "bytes": 821195
+    },
+    {
+      "path": "_site/assets/pdf/ai-w-diagnostyce-i-lekach-na-raka.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fcf9cefdcf6f23b0fd3eabeb3f1b7a839d5162b65550bd64ba2d3e121ef07d3e",
+      "bytes": 690556
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/ai-w-diagnostyce-i-lekach-na-raka.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aa72c4d7afcbc232dffba6f1090683a95d65dd657c9ae0783500657a9cbfd45d",
+      "bytes": 1297
+    },
+    {
+      "path": "assets/ai-diagnostyka-hero-okno.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c52e0de0d17b7ffc3f7512993ade193b0058bee24d65069f5784cb937557afbe",
+      "bytes": 49265
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-hero-okno.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c52e0de0d17b7ffc3f7512993ade193b0058bee24d65069f5784cb937557afbe",
+      "bytes": 49265
+    },
+    {
+      "path": "assets/ai-diagnostyka-hero-okno.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "716275ded31254323932d0176ff1e52904bc37436298b98b6b7380cdc3f2e726",
+      "bytes": 72398
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-hero-okno.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "716275ded31254323932d0176ff1e52904bc37436298b98b6b7380cdc3f2e726",
+      "bytes": 72398
+    },
+    {
+      "path": "assets/ai-diagnostyka-hero-okno.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "610fa0a386f709747dfd77b3e71048070cd73268b2a4edc54a2e4f7280e03035",
+      "bytes": 208526
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-hero-okno.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "610fa0a386f709747dfd77b3e71048070cd73268b2a4edc54a2e4f7280e03035",
+      "bytes": 208526
+    },
+    {
+      "path": "assets/ai-diagnostyka-kolaz-wzorce.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5a9a7cb55f0c3db4db270229db849767f94e3a49cb6d8601704834a572f5ae29",
+      "bytes": 88578
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-kolaz-wzorce.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5a9a7cb55f0c3db4db270229db849767f94e3a49cb6d8601704834a572f5ae29",
+      "bytes": 88578
+    },
+    {
+      "path": "assets/ai-diagnostyka-kolaz-wzorce.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c99452f6bded09158451d8404657d44fee320e64d89e9c2d2e68dfaf65e9831b",
+      "bytes": 147914
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-kolaz-wzorce.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c99452f6bded09158451d8404657d44fee320e64d89e9c2d2e68dfaf65e9831b",
+      "bytes": 147914
+    },
+    {
+      "path": "assets/ai-diagnostyka-kolaz-wzorce.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ff0d14c7793c50072d7055aca7ca65bafd02e010cbe17abee478a4c6ee287b9f",
+      "bytes": 368857
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-kolaz-wzorce.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ff0d14c7793c50072d7055aca7ca65bafd02e010cbe17abee478a4c6ee287b9f",
+      "bytes": 368857
+    },
+    {
+      "path": "assets/ai-diagnostyka-masai-strumienie.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "101000e6c9604c31be425c7c88042a44ab2668332d1f77db08f6cb04a4a63d22",
+      "bytes": 24511
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-masai-strumienie.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "101000e6c9604c31be425c7c88042a44ab2668332d1f77db08f6cb04a4a63d22",
+      "bytes": 24511
+    },
+    {
+      "path": "assets/ai-diagnostyka-masai-strumienie.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "163cfcb61470558a4bb5cee002b17b1b1a7611bf7e07911e2e74031c9b5316f0",
+      "bytes": 24192
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-masai-strumienie.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "163cfcb61470558a4bb5cee002b17b1b1a7611bf7e07911e2e74031c9b5316f0",
+      "bytes": 24192
+    },
+    {
+      "path": "assets/ai-diagnostyka-masai-strumienie.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f9511c852cf01186a807e20bb9ef965b2686afcbeba935fc1cd2656f3463f51e",
+      "bytes": 112236
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-masai-strumienie.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f9511c852cf01186a807e20bb9ef965b2686afcbeba935fc1cd2656f3463f51e",
+      "bytes": 112236
+    },
+    {
+      "path": "assets/ai-diagnostyka-radiolog-watpliwosc.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "67b72b1d13936d916e48b2b3afb3dd1284a18a236ff4eedb3587a6f6809de251",
+      "bytes": 33323
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-radiolog-watpliwosc.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "67b72b1d13936d916e48b2b3afb3dd1284a18a236ff4eedb3587a6f6809de251",
+      "bytes": 33323
+    },
+    {
+      "path": "assets/ai-diagnostyka-radiolog-watpliwosc.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "54b65e5866b7ea115017d13ac8b85f4bfa3948694da52376abdabc675cea9a5e",
+      "bytes": 41948
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-radiolog-watpliwosc.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "54b65e5866b7ea115017d13ac8b85f4bfa3948694da52376abdabc675cea9a5e",
+      "bytes": 41948
+    },
+    {
+      "path": "assets/ai-diagnostyka-radiolog-watpliwosc.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "398ebe8035c2689499497505fb90a7df6d35ed4d347ed6c70303e220455d03bf",
+      "bytes": 147356
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-radiolog-watpliwosc.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "398ebe8035c2689499497505fb90a7df6d35ed4d347ed6c70303e220455d03bf",
+      "bytes": 147356
+    },
+    {
+      "path": "assets/ai-diagnostyka-dlonie-endoskopisty.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "27cb39178bac5c338b421afc8c5bfac6f30c14dca5e26e6ad944ecceba6263b4",
+      "bytes": 32032
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-dlonie-endoskopisty.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "27cb39178bac5c338b421afc8c5bfac6f30c14dca5e26e6ad944ecceba6263b4",
+      "bytes": 32032
+    },
+    {
+      "path": "assets/ai-diagnostyka-dlonie-endoskopisty.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5ccd71f14a399bbf9bb4fec77c8a9375161b527b485a0c8f73d8727cea33e17b",
+      "bytes": 39258
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-dlonie-endoskopisty.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5ccd71f14a399bbf9bb4fec77c8a9375161b527b485a0c8f73d8727cea33e17b",
+      "bytes": 39258
+    },
+    {
+      "path": "assets/ai-diagnostyka-dlonie-endoskopisty.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a3854d76f56caea41e9ad34780ef4da22f58ad9470f3d92ec68870336e2d03da",
+      "bytes": 141335
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-dlonie-endoskopisty.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a3854d76f56caea41e9ad34780ef4da22f58ad9470f3d92ec68870336e2d03da",
+      "bytes": 141335
+    },
+    {
+      "path": "assets/ai-diagnostyka-bialko-klucz.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f9ae7ce04aaa3a9f6abf27ec7a65fde4eaa7726b0f3023f34be4df9544ccc72e",
+      "bytes": 37287
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-bialko-klucz.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f9ae7ce04aaa3a9f6abf27ec7a65fde4eaa7726b0f3023f34be4df9544ccc72e",
+      "bytes": 37287
+    },
+    {
+      "path": "assets/ai-diagnostyka-bialko-klucz.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "97a4e5d29414f685392ce7a5e8a91a7ee1d538b915deac92e43d7d45053eb56e",
+      "bytes": 48460
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-bialko-klucz.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "97a4e5d29414f685392ce7a5e8a91a7ee1d538b915deac92e43d7d45053eb56e",
+      "bytes": 48460
+    },
+    {
+      "path": "assets/ai-diagnostyka-bialko-klucz.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "53544f00173ad8ed8f17504ee3ae7d5eb14187e063e41a43a518b4a8165a7ba0",
+      "bytes": 161846
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-bialko-klucz.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "53544f00173ad8ed8f17504ee3ae7d5eb14187e063e41a43a518b4a8165a7ba0",
+      "bytes": 161846
+    },
+    {
+      "path": "assets/ai-diagnostyka-lejek-fiolki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c8b003f86c2c9dbce83bce71dcbbd71f6134ed2fa1c2de6e8e03308a02ccb820",
+      "bytes": 47341
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-lejek-fiolki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c8b003f86c2c9dbce83bce71dcbbd71f6134ed2fa1c2de6e8e03308a02ccb820",
+      "bytes": 47341
+    },
+    {
+      "path": "assets/ai-diagnostyka-lejek-fiolki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "283271b8e1b2ccace4fce701af40ede0d96651c336775bbc91c8234e9b658971",
+      "bytes": 66872
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-lejek-fiolki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "283271b8e1b2ccace4fce701af40ede0d96651c336775bbc91c8234e9b658971",
+      "bytes": 66872
+    },
+    {
+      "path": "assets/ai-diagnostyka-lejek-fiolki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bc21b3c1b2d593ccb835eec3f7fe9f23df7a89550f9294305e371da4abeaeca5",
+      "bytes": 206613
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-lejek-fiolki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bc21b3c1b2d593ccb835eec3f7fe9f23df7a89550f9294305e371da4abeaeca5",
+      "bytes": 206613
+    },
+    {
+      "path": "assets/ai-diagnostyka-para-po-badaniu.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "477abb284cfd2500b9bda421493689195cc888ed41c0768203cea15957d32d27",
+      "bytes": 80398
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-para-po-badaniu.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "477abb284cfd2500b9bda421493689195cc888ed41c0768203cea15957d32d27",
+      "bytes": 80398
+    },
+    {
+      "path": "assets/ai-diagnostyka-para-po-badaniu.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0ee14ae457fdd12fc6e77b4587e1616fe209b70c95150ead032f984283be9a8c",
+      "bytes": 126036
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-para-po-badaniu.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0ee14ae457fdd12fc6e77b4587e1616fe209b70c95150ead032f984283be9a8c",
+      "bytes": 126036
+    },
+    {
+      "path": "assets/ai-diagnostyka-para-po-badaniu.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "295fc419a57aacd5afc6829cdb4f507d3d9853f3b89babdef2af6b3ed3e8f4be",
+      "bytes": 309933
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-para-po-badaniu.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "295fc419a57aacd5afc6829cdb4f507d3d9853f3b89babdef2af6b3ed3e8f4be",
+      "bytes": 309933
+    },
+    {
+      "path": "assets/ai-diagnostyka-rozstaje.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8621ba656252a9253c04bd1fa42da5881f6f6aa63106d4788513f6f09c6e93bd",
+      "bytes": 106407
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-rozstaje.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8621ba656252a9253c04bd1fa42da5881f6f6aa63106d4788513f6f09c6e93bd",
+      "bytes": 106407
+    },
+    {
+      "path": "assets/ai-diagnostyka-rozstaje.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "664106c7b7ded641fc07b1f473b41b52c481344b6e74ffe22e056f6d65560d39",
+      "bytes": 177966
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-rozstaje.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "664106c7b7ded641fc07b1f473b41b52c481344b6e74ffe22e056f6d65560d39",
+      "bytes": 177966
+    },
+    {
+      "path": "assets/ai-diagnostyka-rozstaje.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "984935781d8c77d9be846e7e789961592f1b29171b01fcc5f8794e201929a749",
+      "bytes": 385334
+    },
+    {
+      "path": "_site/assets/ai-diagnostyka-rozstaje.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "984935781d8c77d9be846e7e789961592f1b29171b01fcc5f8794e201929a749",
+      "bytes": 385334
+    }
+  ],
+  "files_count": 79
+}

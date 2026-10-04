@@ -142,10 +142,13 @@ function main() {
   if (listingTitle) {
     const listingTitleValidation = validators.validateTitleText(listingTitle, {
       label: 'listing_title',
-      min: POLICY.TITLE.JSON_MIN,
-      max: 90
+      min: POLICY.TITLE.LISTING_MIN,
+      max: POLICY.TITLE.LISTING_MAX
     });
     listingTitleValidation.errors.forEach((msg) => errors.push(msg));
+    if (listingTitle.length < POLICY.TITLE.LISTING_RECOMMENDED_MIN || listingTitle.length > POLICY.TITLE.LISTING_RECOMMENDED_MAX) {
+      warnings.push(`listing_title ma ${listingTitle.length} znaków; zalecany zakres to ${POLICY.TITLE.LISTING_RECOMMENDED_MIN}-${POLICY.TITLE.LISTING_RECOMMENDED_MAX}, ale kompletny tytuł w zakresie ${POLICY.TITLE.LISTING_MIN}-${POLICY.TITLE.LISTING_MAX} nie blokuje publikacji.`);
+    }
   }
   if (/\|\s*fitpo50\s*$/i.test(rawSeoTitle)) {
     warnings.push('seo_title zawiera już suffix "| FitPo50" — importer go znormalizuje, ale lepiej traktować seo_title jako bazę bez suffixu.');

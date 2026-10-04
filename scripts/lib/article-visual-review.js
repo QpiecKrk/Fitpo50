@@ -153,6 +153,10 @@ function validateImageReview(expected, review, label, errors) {
   if (!CONTRACT.embedded_text_kinds.includes(embedded.kind)) {
     errors.push(`${label}: embedded_text.kind musi mieć wartość ${CONTRACT.embedded_text_kinds.join(', ')}.`);
   }
+  if (embedded.kind === 'INCIDENTAL_ENVIRONMENT') {
+    if (String(embedded.transcription || '').trim().length < 3) errors.push(`${label}: czytelny napis środowiskowy wymaga krótkiej transkrypcji.`);
+    if (embedded.claims_or_numbers_present !== false) errors.push(`${label}: napis środowiskowy nie może zawierać twierdzeń, liczb ani instrukcji wymagających dowodu.`);
+  }
   if (embedded.kind === 'CONTENT') {
     if (String(embedded.transcription || '').trim().length < 3) errors.push(`${label}: tekst treściowy wymaga transkrypcji.`);
     if (![true, false].includes(embedded.claims_or_numbers_present)) errors.push(`${label}: trzeba jawnie ocenić claims_or_numbers_present.`);

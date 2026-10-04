@@ -7,6 +7,18 @@
     "embedded_text": { "kind": "WATERMARK_ONLY" },
     "note": "Obejrzano cały kadr; watermark nie przekazuje twierdzenia ani liczby merytorycznej."
   },
+  "valid_incidental_environment": {
+    "status": "VERIFIED",
+    "matches_topic": true,
+    "no_misleading_text_or_logo": true,
+    "anatomy_and_equipment_plausible": true,
+    "embedded_text": {
+      "kind": "INCIDENTAL_ENVIRONMENT",
+      "transcription": "Centrum medyczne — wejście",
+      "claims_or_numbers_present": false
+    },
+    "note": "Obejrzano cały kadr; naturalny szyld jest częścią miejsca i nie przekazuje twierdzenia medycznego."
+  },
   "invalid_claim_without_evidence": {
     "status": "VERIFIED",
     "matches_topic": true,

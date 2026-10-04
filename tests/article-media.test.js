@@ -126,7 +126,24 @@ test('pakiet blokuje panoramę, kwadrat i pionową planszę nieobsługiwane prze
   assert.equal(value.image_prompts[0].aspect_ratio, '12:5');
   assert.equal(value.image_prompts[1].aspect_ratio, '9:16');
   assert.match(result.errors.join('\n'), /krajobrazowym zakresem 1.2-2.1/);
-  assert.match(result.errors.join('\n'), /minimum dla hero to 1080x600/);
+  assert.match(result.errors.join('\n'), /minimum dla hero to 1024x560/);
+});
+
+test('hero 1080x589 przechodzi z zaleceniem zamiast blokady', () => {
+  const dir = makePackage();
+  const value = article();
+  createFiles(dir, value);
+  const tolerantInspector = (file) => {
+    const result = inspector(file);
+    if (path.basename(file).startsWith('trening-silowy-hero')) {
+      return { ...result, width: 1080, height: 589, aspect_ratio: Number((1080 / 589).toFixed(4)) };
+    }
+    return result;
+  };
+  const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, ensureVariants: false, inspectImage: tolerantInspector });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.match(result.warnings.join('\n'), /mieści się w bezpiecznym zakresie/);
+  assert.match(result.warnings.join('\n'), /1080x600/);
 });
 
 test('nie dopasowuje przybliżonej nazwy pliku', () => {
@@ -183,6 +200,34 @@ test('watermark bez treści merytorycznej nie blokuje zatwierdzonego obrazu', ()
   const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, inspectImage: inspector });
   assert.equal(result.ok, true, result.errors.join('\n'));
   assert.equal(validateManifestStructure(value).ok, true);
+});
+
+test('naturalny napis środowiskowy nie blokuje realistycznego zdjęcia', () => {
+  const dir = makePackage();
+  const value = article();
+  value.image_prompts[1].visual_review.embedded_text = {
+    kind: 'INCIDENTAL_ENVIRONMENT',
+    transcription: 'Centrum medyczne — wejście',
+    claims_or_numbers_present: false,
+  };
+  createFiles(dir, value);
+  const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, inspectImage: inspector });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.equal(validateManifestStructure(value).ok, true);
+});
+
+test('napis środowiskowy z twierdzeniem nadal blokuje publikację', () => {
+  const dir = makePackage();
+  const value = article();
+  value.image_prompts[1].visual_review.embedded_text = {
+    kind: 'INCIDENTAL_ENVIRONMENT',
+    transcription: 'AI wykrywa 99 procent nowotworów',
+    claims_or_numbers_present: true,
+  };
+  createFiles(dir, value);
+  const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, inspectImage: inspector });
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join('\n'), /nie może zawierać twierdzeń, liczb ani instrukcji/);
 });
 
 test('blokuje nieudokumentowaną liczbę w obrazie oraz błędną anatomię lub sprzęt', () => {
