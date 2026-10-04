@@ -1,35 +1,440 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:53:02.361Z",
+  "generated_at": "2026-10-03T14:26:28.194Z",
+  "reviewed_at": "2026-10-03T14:31:11.563Z",
   "slug": "badania-krwi-po-50-jak-czesto",
-  "html_sha256": "5fb1e6c882e3498d83c5d90246e3f5403cdae6c8e95d76b542a1b6a7f7da55a0",
-  "site_html_sha256": "5fb1e6c882e3498d83c5d90246e3f5403cdae6c8e95d76b542a1b6a7f7da55a0",
-  "pdf_sha256": "3bdd243d86b791a54954ddf1fbcd3222e1d424b8722edf06a71065cd0b5bc9ba",
-  "site_pdf_sha256": "3bdd243d86b791a54954ddf1fbcd3222e1d424b8722edf06a71065cd0b5bc9ba",
+  "html_sha256": "70db5ecf5d113872d4219e4601a1dbe6c5bcf2d15049ffc9d603230709a3b15d",
+  "site_html_sha256": "70db5ecf5d113872d4219e4601a1dbe6c5bcf2d15049ffc9d603230709a3b15d",
+  "pdf_sha256": "1d8f05d33b86e4860505e4558b7a327065d0010e2be5d8dabe92f68636be8ef5",
+  "site_pdf_sha256": "1d8f05d33b86e4860505e4558b7a327065d0010e2be5d8dabe92f68636be8ef5",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:26:28.194Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "badania-krwi-po-50-jak-czesto.html",
+      "sha256": "70db5ecf5d113872d4219e4601a1dbe6c5bcf2d15049ffc9d603230709a3b15d",
+      "bytes": 31827
+    },
+    "html_site": {
+      "file": "_site/badania-krwi-po-50-jak-czesto.html",
+      "sha256": "70db5ecf5d113872d4219e4601a1dbe6c5bcf2d15049ffc9d603230709a3b15d",
+      "bytes": 31827
+    },
+    "pdf_source": {
+      "file": "assets/pdf/badania-krwi-po-50-jak-czesto.pdf",
+      "sha256": "1d8f05d33b86e4860505e4558b7a327065d0010e2be5d8dabe92f68636be8ef5",
+      "bytes": 376182
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/badania-krwi-po-50-jak-czesto.pdf",
+      "sha256": "1d8f05d33b86e4860505e4558b7a327065d0010e2be5d8dabe92f68636be8ef5",
+      "bytes": 376182
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/badania-krwi-po-50-jak-czesto/desktop.png",
+      "screenshot_sha256": "d5dcaba40ef0b0aa71ebdea41ecc71260dc204e966e841300e6699e0ffe6d59e",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/badania-krwi-po-50-jak-czesto/mobile.png",
+      "screenshot_sha256": "19cb4ce395995cd7e490d0a273232b6db17329150ef1c25d8628ac7e9892f622",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 7 min czytania Badania krwi po 50-tce: które warto i jak często wykonywać? Wiedza o własnej krwi to najlepsza polisa zdrowotna po pięćdziesiątce.",
+      "alt": "Fiolki z krwią na ciemnym tle laboratoryjnym z widocznym harmonogramem badań dla osób po 50. roku życia",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-po-50-hero-20260929.avif",
+          "sha256": "d79e5c2badaf7fdfe3e3ebffd83e7b2c8d73dbb823354ff22e21d77e11d69d1e",
+          "bytes": 101076,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/badania-krwi-po-50-hero-20260929.webp",
+          "sha256": "1792432e109e96160a851bc07675af5227566f067b7e9c5ad9b9715af145b1f9",
+          "bytes": 120560,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-po-50-hero-20260929.jpg",
+          "sha256": "b8770c5064a200e0fcad16f72d1437dcc046da2289870367279f35866e556c8d",
+          "bytes": 258906,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "78f18960172eb429525292332de449a527bdc040dd6ca2a3a791af26c0bacf3d"
+    },
+    {
+      "placement": "content:2:od-czego-zaczac-plan-badan-po-50-tce",
+      "role": "content",
+      "heading": "Od czego zacząć plan badań po 50-tce?",
+      "context": "Szybka odpowiedź Po 50-tce nie istnieje jeden obowiązkowy pakiet krwi co 3 miesiące ani raz w roku dla wszystkich. Częstotliwość zależy od wcześniejszych wyników, ciśnienia, masy ciała, chorób, leków, objawów i programu profilaktyki. Zacznij od przeglądu ryzyka z lekarzem; po nowym rozpoznaniu lub zmianie leczenia kontrola może być częstsza niż u zdrowej osoby ze stabilnymi wynikami. Kluczowe wnioski Wiek 50 lat sam nie ustala częstotliwości morfologii, lipidogramu, TSH, witaminy D ani markerów nowotworowych. USPSTF zaleca badanie stanu przedcukrzycowego i cukrzycy u dorosłych 35–70 lat z nadwagą lub otyłością; termin powtórki zależy od wyniku i ryzyka. PSA wymaga wspólnej decyzji, a markery nowotworowe nie są uniwersalnym pakietem przesiewowym. Kontrole po rozpoczęciu leku służą innemu ce",
+      "alt": "Kobieta po 50-tce przygotowuje informacje potrzebne do ustalenia planu badań",
+      "caption": "Zbierz wcześniejsze wyniki, listę leków, choroby rodzinne, ciśnienie, masę ciała, palenie i nowe objawy.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-plan-indywidualny-20261003-v2.avif",
+          "sha256": "ce934bfae9241420793974e457499cf95dd4ff3ed4f323dea9453c5815056a3d",
+          "bytes": 51776,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/badania-krwi-plan-indywidualny-20261003-v2.webp",
+          "sha256": "cbe9c8a7dc9e3bb7ce0733209e3d388e60f8c21af567c8ff3aa57eea0f5921c2",
+          "bytes": 76848,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-plan-indywidualny-20261003-v2.jpg",
+          "sha256": "26e32155334c2fe366fe6e4a9ed0722f6ba462a61d56f2469fe809d0ff677f76",
+          "bytes": 131456,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "540d1e682dea7b522f012005396bc6b56de2b2401a6d475bc10541cc43f36172"
+    },
+    {
+      "placement": "content:3:jak-czesto-kontrolowac-glukoze-i-lipidy",
+      "role": "content",
+      "heading": "Jak często kontrolować glukozę i lipidy?",
+      "context": "Szybka odpowiedź Po 50-tce nie istnieje jeden obowiązkowy pakiet krwi co 3 miesiące ani raz w roku dla wszystkich. Częstotliwość zależy od wcześniejszych wyników, ciśnienia, masy ciała, chorób, leków, objawów i programu profilaktyki. Zacznij od przeglądu ryzyka z lekarzem; po nowym rozpoznaniu lub zmianie leczenia kontrola może być częstsza niż u zdrowej osoby ze stabilnymi wynikami. Kluczowe wnioski Wiek 50 lat sam nie ustala częstotliwości morfologii, lipidogramu, TSH, witaminy D ani markerów nowotworowych. USPSTF zaleca badanie stanu przedcukrzycowego i cukrzycy u dorosłych 35–70 lat z nadwagą lub otyłością; termin powtórki zależy od wyniku i ryzyka. PSA wymaga wspólnej decyzji, a markery nowotworowe nie są uniwersalnym pakietem przesiewowym. Kontrole po rozpoczęciu leku służą innemu ce",
+      "alt": "Próbki krwi przygotowane do badań glukozy i lipidów dobieranych według ryzyka",
+      "caption": "Glukozę i lipidy kontroluje się według wyniku, ryzyka oraz prowadzonego leczenia, a nie jednego kalendarza dla wszystkich.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-glukoza-lipidy-20261003-v2.avif",
+          "sha256": "c5936f8258f67c003bd030dfbfc73d369071cabf8ce9d9b1010f32a889e9fce2",
+          "bytes": 30996,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/badania-krwi-glukoza-lipidy-20261003-v2.webp",
+          "sha256": "338509844ac2bff4d8f64259175c8125d55a324128bef265e04244e7ddbd1c81",
+          "bytes": 43216,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-glukoza-lipidy-20261003-v2.jpg",
+          "sha256": "952fae3c968bc798726a9d0f5c5511d8706f167a5401a874a1865a2181286c02",
+          "bytes": 90339,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3fe00c045cdf14fb06bc9e2a6e928beba87b14f6537252f7aa4b6ddc2bb0cbbb"
+    },
+    {
+      "placement": "content:4:czy-morfologia-tsh-i-witamina-d-sa-obowiazkowe-c",
+      "role": "content",
+      "heading": "Czy morfologia, TSH i witamina D są obowiązkowe co rok?",
+      "context": "Szybka odpowiedź Po 50-tce nie istnieje jeden obowiązkowy pakiet krwi co 3 miesiące ani raz w roku dla wszystkich. Częstotliwość zależy od wcześniejszych wyników, ciśnienia, masy ciała, chorób, leków, objawów i programu profilaktyki. Zacznij od przeglądu ryzyka z lekarzem; po nowym rozpoznaniu lub zmianie leczenia kontrola może być częstsza niż u zdrowej osoby ze stabilnymi wynikami. Kluczowe wnioski Wiek 50 lat sam nie ustala częstotliwości morfologii, lipidogramu, TSH, witaminy D ani markerów nowotworowych. USPSTF zaleca badanie stanu przedcukrzycowego i cukrzycy u dorosłych 35–70 lat z nadwagą lub otyłością; termin powtórki zależy od wyniku i ryzyka. PSA wymaga wspólnej decyzji, a markery nowotworowe nie są uniwersalnym pakietem przesiewowym. Kontrole po rozpoczęciu leku służą innemu ce",
+      "alt": "Pacjent rozmawia z lekarką o doborze badań do objawów i indywidualnego ryzyka",
+      "caption": "Nie ma uniwersalnego zalecenia, aby każda bezobjawowa osoba wykonywała morfologię, TSH i witaminę D co roku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-dobor-badan-20261003-v2.avif",
+          "sha256": "ca5103ee7748eb7d5477011a9a6e8e6a3d081cb309a39eca91a35de79e96a660",
+          "bytes": 44543,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/badania-krwi-dobor-badan-20261003-v2.webp",
+          "sha256": "74e9232cc56ec9457ffb7084f9c2477e8f036cc40c6ac852381d0b70099e0869",
+          "bytes": 57762,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-dobor-badan-20261003-v2.jpg",
+          "sha256": "96a7042e9dc593647ab98c62fbe651f7fd557435fcea8c0a14cb71a0b16c799d",
+          "bytes": 112135,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6ded9a36d288b4d94603af3cfb195ede012fc1f1cc06d7887652172a9fc691ac"
+    },
+    {
+      "placement": "content:5:ktore-badania-wymagaja-wspolnej-decyzji-lub-konk",
+      "role": "content",
+      "heading": "Które badania wymagają wspólnej decyzji lub konkretnego wskazania?",
+      "context": "Szybka odpowiedź Po 50-tce nie istnieje jeden obowiązkowy pakiet krwi co 3 miesiące ani raz w roku dla wszystkich. Częstotliwość zależy od wcześniejszych wyników, ciśnienia, masy ciała, chorób, leków, objawów i programu profilaktyki. Zacznij od przeglądu ryzyka z lekarzem; po nowym rozpoznaniu lub zmianie leczenia kontrola może być częstsza niż u zdrowej osoby ze stabilnymi wynikami. Kluczowe wnioski Wiek 50 lat sam nie ustala częstotliwości morfologii, lipidogramu, TSH, witaminy D ani markerów nowotworowych. USPSTF zaleca badanie stanu przedcukrzycowego i cukrzycy u dorosłych 35–70 lat z nadwagą lub otyłością; termin powtórki zależy od wyniku i ryzyka. PSA wymaga wspólnej decyzji, a markery nowotworowe nie są uniwersalnym pakietem przesiewowym. Kontrole po rozpoczęciu leku służą innemu ce",
+      "alt": "Mężczyzna omawia z lekarką wskazania, korzyści i możliwe szkody konkretnego badania",
+      "caption": "PSA wymaga indywidualnej decyzji po rozmowie o korzyściach i szkodach, a markery nowotworowe nie są uniwersalnym pakietem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/badania-krwi-wspolna-decyzja-20261003-v2.avif",
+          "sha256": "c2cd9e806bbbe8e00337410e571ff3f5ed05158aa487e9d0f4fa84830ee0bf40",
+          "bytes": 44993,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/badania-krwi-wspolna-decyzja-20261003-v2.webp",
+          "sha256": "93083c4255763dde45cc094cd12b2b5a7a3bbf0b137bea4ea874c8aa229a16ab",
+          "bytes": 59644,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/badania-krwi-wspolna-decyzja-20261003-v2.jpg",
+          "sha256": "6c214b4bef5eaf7c778d86fbc78922cdc259afa5916bc729f54517cde5490fad",
+          "bytes": 111055,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "05da255ee92280e9e8f33d45dd3a89e53ffe9a0c3a6426f24dab03632349ba77"
+    }
+  ],
   "pdf": {
     "pages": 5,
     "text_coverage": 1,
-    "rendered_pages": 5
+    "rendered_pages": 5,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/badania-krwi-po-50-jak-czesto/pdf-pages/page-1.png",
+        "sha256": "890885b163251a1b7a1626ebf30d26f71a4ef8d2c0b1e22387f6976e14c71b3d",
+        "bytes": 622071,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1051,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/badania-krwi-po-50-jak-czesto/pdf-pages/page-2.png",
+        "sha256": "459f6c79f2eb7fd2c7c38971568700fec759a43fbc29c459f3128a7e4aabe295",
+        "bytes": 799025,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1059,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/badania-krwi-po-50-jak-czesto/pdf-pages/page-3.png",
+        "sha256": "e2607d46f9503b28b8db3b56879741b6a44a96d8388f87ecd727fd1126e8230b",
+        "bytes": 855894,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1064,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/badania-krwi-po-50-jak-czesto/pdf-pages/page-4.png",
+        "sha256": "5a87d7ea16816b562506fd83ad15934067a60fbda1fb41f61520839b0f6b5e1d",
+        "bytes": 210138,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 59,
+          "width": 1078,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/badania-krwi-po-50-jak-czesto/pdf-pages/page-5.png",
+        "sha256": "0570b749e64b183d4a6f3ba5be6873072d2f43ff8838d8ef077176c08d99fb66",
+        "bytes": 54568,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 52,
+          "width": 933,
+          "height": 1598
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.563Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "d5dcaba40ef0b0aa71ebdea41ecc71260dc204e966e841300e6699e0ffe6d59e",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "19cb4ce395995cd7e490d0a273232b6db17329150ef1c25d8628ac7e9892f622",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "78f18960172eb429525292332de449a527bdc040dd6ca2a3a791af26c0bacf3d",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz badania-krwi-po-50-hero-20260929.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.563Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:od-czego-zaczac-plan-badan-po-50-tce",
+        "inventory_sha256": "540d1e682dea7b522f012005396bc6b56de2b2401a6d475bc10541cc43f36172",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz badania-krwi-plan-indywidualny-20261003-v2.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.563Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:jak-czesto-kontrolowac-glukoze-i-lipidy",
+        "inventory_sha256": "3fe00c045cdf14fb06bc9e2a6e928beba87b14f6537252f7aa4b6ddc2bb0cbbb",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz badania-krwi-glukoza-lipidy-20261003-v2.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.563Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:czy-morfologia-tsh-i-witamina-d-sa-obowiazkowe-c",
+        "inventory_sha256": "6ded9a36d288b4d94603af3cfb195ede012fc1f1cc06d7887652172a9fc691ac",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz badania-krwi-dobor-badan-20261003-v2.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.563Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:ktore-badania-wymagaja-wspolnej-decyzji-lub-konk",
+        "inventory_sha256": "05da255ee92280e9e8f33d45dd3a89e53ffe9a0c3a6426f24dab03632349ba77",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz badania-krwi-wspolna-decyzja-20261003-v2.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.563Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "890885b163251a1b7a1626ebf30d26f71a4ef8d2c0b1e22387f6976e14c71b3d",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "459f6c79f2eb7fd2c7c38971568700fec759a43fbc29c459f3128a7e4aabe295",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "e2607d46f9503b28b8db3b56879741b6a44a96d8388f87ecd727fd1126e8230b",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "5a87d7ea16816b562506fd83ad15934067a60fbda1fb41f61520839b0f6b5e1d",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "0570b749e64b183d4a6f3ba5be6873072d2f43ff8838d8ef077176c08d99fb66",
+        "note": "Strona PDF 5 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 5411,
+    "review_wait_ms": 283369
   },
   "errors": []
 }

@@ -1,35 +1,418 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T08:41:28.752Z",
+  "generated_at": "2026-10-03T14:03:15.398Z",
+  "reviewed_at": "2026-10-03T14:31:11.565Z",
   "slug": "jak-zaczac-sie-podciagac-po-50",
-  "html_sha256": "3da1111542d2003dab236ce4fa6e5dde56f2c6b82d0fe0af1a17e39c2e0074fd",
-  "site_html_sha256": "3da1111542d2003dab236ce4fa6e5dde56f2c6b82d0fe0af1a17e39c2e0074fd",
-  "pdf_sha256": "c61157fdb4f6d9d33985a77835c05131fb9bb7b81096dcfadc434537493de95b",
-  "site_pdf_sha256": "c61157fdb4f6d9d33985a77835c05131fb9bb7b81096dcfadc434537493de95b",
+  "html_sha256": "bace1d92b5b9862b2c7aa9cfeac8a155d0c29f4ee3c5c89af3bb4b4d7f9303df",
+  "site_html_sha256": "bace1d92b5b9862b2c7aa9cfeac8a155d0c29f4ee3c5c89af3bb4b4d7f9303df",
+  "pdf_sha256": "5fccd938c1644852a1b39a415889d9d18c170c5c5d284f9ff78599f293e620e1",
+  "site_pdf_sha256": "5fccd938c1644852a1b39a415889d9d18c170c5c5d284f9ff78599f293e620e1",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:03:15.398Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "jak-zaczac-sie-podciagac-po-50.html",
+      "sha256": "bace1d92b5b9862b2c7aa9cfeac8a155d0c29f4ee3c5c89af3bb4b4d7f9303df",
+      "bytes": 29106
+    },
+    "html_site": {
+      "file": "_site/jak-zaczac-sie-podciagac-po-50.html",
+      "sha256": "bace1d92b5b9862b2c7aa9cfeac8a155d0c29f4ee3c5c89af3bb4b4d7f9303df",
+      "bytes": 29106
+    },
+    "pdf_source": {
+      "file": "assets/pdf/jak-zaczac-sie-podciagac-po-50.pdf",
+      "sha256": "5fccd938c1644852a1b39a415889d9d18c170c5c5d284f9ff78599f293e620e1",
+      "bytes": 450390
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/jak-zaczac-sie-podciagac-po-50.pdf",
+      "sha256": "5fccd938c1644852a1b39a415889d9d18c170c5c5d284f9ff78599f293e620e1",
+      "bytes": 450390
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/jak-zaczac-sie-podciagac-po-50/desktop.png",
+      "screenshot_sha256": "d61e7c1acd77dcc9c524377c3ef0810efad3b15c027eb7fc3e86d3bcded9a886",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/jak-zaczac-sie-podciagac-po-50/mobile.png",
+      "screenshot_sha256": "fa62df379cf323d0897b8b7bd2a52bd0811646a0728f0c704996135ea11a0bdf",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "RUCH 11 min czytania 50 podciągnięć po 50-tce? Bezpieczny plan do pierwszego Drążek nie pyta o metrykę. Pyta tylko, czy się trzymasz.",
+      "alt": "Mężczyzna po pięćdziesiątce ćwiczy podciąganie z podparciem stóp i asekuracją trenera",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-hero-2026.avif",
+          "sha256": "358d96e3e1d8f50e062148896c9cb44d68f3f188ae38e5a4e24234d83d681a29",
+          "bytes": 199230,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podciaganie-hero-2026.webp",
+          "sha256": "759a646bb235bce53f04925f1d6a31bab18856055b5d8df0eee7b6728b0c7bf2",
+          "bytes": 170856,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podciaganie-hero-2026.jpg",
+          "sha256": "71374a39708b12a83b84472f7bdbbaadb75b87d38b68e5703be834b841d6d86c",
+          "bytes": 274215,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "0a4e2a3d856aceb6898a6ac9ada34b8264c58bca2a32b34682af6512b66857f8"
+    },
+    {
+      "placement": "content:2:jak-sprawdzic-gotowosc-barkow-i-chwytu",
+      "role": "content",
+      "heading": "Jak sprawdzić gotowość barków i chwytu?",
+      "context": "Szybka odpowiedź Nie. Dla osoby początkującej 50 podciągnięć jest arbitralnym i odległym celem, a nie miarą zdrowia. Najpierw sprawdź tolerancję barków i chwytu, zbuduj siłę w łatwiejszych przyciąganiach, a potem stopniowo zmniejszaj pomoc. Pierwsze kontrolowane powtórzenie bez bólu jest lepszym celem niż duża liczba ruchów wykonanych kosztem techniki. Kluczowe wnioski Wiek nie wyklucza podciągania, ale historia barku i aktualna tolerancja zmieniają punkt startu. Guma zwiększa liczbę możliwych powtórzeń, ale pomoc zależy od jej ułożenia i rozciągnięcia. Kipping nie jest skrótem do pierwszego kontrolowanego powtórzenia i zwiększa dynamikę obciążenia. Pierwszym celem jest kontrolowany ruch bez bólu; liczba 50 nie jest normą zdrowia ani gotowym planem treningowym. Jak sprawdzić gotowość barkó",
+      "alt": "Trenerka obserwuje zakres unoszenia ramion u dojrzałej kobiety przed treningiem",
+      "caption": "Bezbolesne uniesienie ramion jest wstępną próbą tolerancji ruchu, ale nie zastępuje badania przy utrzymujących się objawach.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-gotowosc.avif",
+          "sha256": "bcec6109674e7ccf41882db5b0b2f0b0e589df37878becbd79950a21a1d7e575",
+          "bytes": 147375,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podciaganie-gotowosc.webp",
+          "sha256": "b11430be73fd95c93ce2382df6317e2ac42f5e49075406c8d8873b59eb56ff10",
+          "bytes": 126294,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podciaganie-gotowosc.jpg",
+          "sha256": "b537ad210858fc8b0a0622c523997f159d1587eaff05e7f5ff6842f953fdf375",
+          "bytes": 221996,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "17e52045783949c60741488bbeeeab802e0a7f3bf52feb01fb9d29f68004467d"
+    },
+    {
+      "placement": "content:3:od-jakich-cwiczen-zaczac",
+      "role": "content",
+      "heading": "Od jakich ćwiczeń zacząć?",
+      "context": "Szybka odpowiedź Nie. Dla osoby początkującej 50 podciągnięć jest arbitralnym i odległym celem, a nie miarą zdrowia. Najpierw sprawdź tolerancję barków i chwytu, zbuduj siłę w łatwiejszych przyciąganiach, a potem stopniowo zmniejszaj pomoc. Pierwsze kontrolowane powtórzenie bez bólu jest lepszym celem niż duża liczba ruchów wykonanych kosztem techniki. Kluczowe wnioski Wiek nie wyklucza podciągania, ale historia barku i aktualna tolerancja zmieniają punkt startu. Guma zwiększa liczbę możliwych powtórzeń, ale pomoc zależy od jej ułożenia i rozciągnięcia. Kipping nie jest skrótem do pierwszego kontrolowanego powtórzenia i zwiększa dynamikę obciążenia. Pierwszym celem jest kontrolowany ruch bez bólu; liczba 50 nie jest normą zdrowia ani gotowym planem treningowym. Jak sprawdzić gotowość barkó",
+      "alt": "Dojrzały mężczyzna wykonuje przyciąganie poziome pod kontrolą trenera",
+      "caption": "Przyciąganie poziome pozwala regulować trudność kątem ustawienia ciała i uczyć kontroli łopatek oraz łokci.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-wioslowanie.avif",
+          "sha256": "35ba19520307037947ac16243501fd63481aaaae2f9337e9975fb99bd2454ac2",
+          "bytes": 252512,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podciaganie-wioslowanie.webp",
+          "sha256": "a298186b7eb87fa3d7bda666dde664c37ae4cdbf5c95d4c7ca3b76329a3a751a",
+          "bytes": 212722,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podciaganie-wioslowanie.jpg",
+          "sha256": "caf3b33ac574ff98b18f4f38baec73b5a8c5812e9586f4130312c10b6cc74ea0",
+          "bytes": 296160,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "1f83832360cc062cf7d1e0427da87995584156e9aebe92033913c8a73b1fe8d5"
+    },
+    {
+      "placement": "content:4:jak-przejsc-do-podciagania-wspomaganego",
+      "role": "content",
+      "heading": "Jak przejść do podciągania wspomaganego?",
+      "context": "Szybka odpowiedź Nie. Dla osoby początkującej 50 podciągnięć jest arbitralnym i odległym celem, a nie miarą zdrowia. Najpierw sprawdź tolerancję barków i chwytu, zbuduj siłę w łatwiejszych przyciąganiach, a potem stopniowo zmniejszaj pomoc. Pierwsze kontrolowane powtórzenie bez bólu jest lepszym celem niż duża liczba ruchów wykonanych kosztem techniki. Kluczowe wnioski Wiek nie wyklucza podciągania, ale historia barku i aktualna tolerancja zmieniają punkt startu. Guma zwiększa liczbę możliwych powtórzeń, ale pomoc zależy od jej ułożenia i rozciągnięcia. Kipping nie jest skrótem do pierwszego kontrolowanego powtórzenia i zwiększa dynamikę obciążenia. Pierwszym celem jest kontrolowany ruch bez bólu; liczba 50 nie jest normą zdrowia ani gotowym planem treningowym. Jak sprawdzić gotowość barkó",
+      "alt": "Kobieta po pięćdziesiątce ćwiczy na maszynie do podciągania wspomaganego",
+      "caption": "Maszyna pozwala zapisać poziom pomocy i zmniejszać go stopniowo bez zmiany kilku parametrów naraz.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-wspomagane.avif",
+          "sha256": "da6ca8d75cd60ee4dd6c2b0556fc1f43fbfa346e49b8529f7a14a22db01c4426",
+          "bytes": 173927,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podciaganie-wspomagane.webp",
+          "sha256": "9b12f58ee753e9cddee9260d92ea3e317b4cbe3457fbeeb27f961617a29b89c7",
+          "bytes": 152114,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podciaganie-wspomagane.jpg",
+          "sha256": "67186373fa3e7f713776ec95f27c62e98e4825e6590ba926253de0ae554a5acc",
+          "bytes": 258111,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "900c488ad9d6ba7672bf5307b406b8620396386d0456cd34423722ad63f3b689"
+    },
+    {
+      "placement": "content:5:kiedy-bol-barku-lub-lokcia-wymaga-przerwy",
+      "role": "content",
+      "heading": "Kiedy ból barku lub łokcia wymaga przerwy?",
+      "context": "Szybka odpowiedź Nie. Dla osoby początkującej 50 podciągnięć jest arbitralnym i odległym celem, a nie miarą zdrowia. Najpierw sprawdź tolerancję barków i chwytu, zbuduj siłę w łatwiejszych przyciąganiach, a potem stopniowo zmniejszaj pomoc. Pierwsze kontrolowane powtórzenie bez bólu jest lepszym celem niż duża liczba ruchów wykonanych kosztem techniki. Kluczowe wnioski Wiek nie wyklucza podciągania, ale historia barku i aktualna tolerancja zmieniają punkt startu. Guma zwiększa liczbę możliwych powtórzeń, ale pomoc zależy od jej ułożenia i rozciągnięcia. Kipping nie jest skrótem do pierwszego kontrolowanego powtórzenia i zwiększa dynamikę obciążenia. Pierwszym celem jest kontrolowany ruch bez bólu; liczba 50 nie jest normą zdrowia ani gotowym planem treningowym. Jak sprawdzić gotowość barkó",
+      "alt": "Fizjoterapeutka ocenia ruch barku u dojrzałego mężczyzny po bólu podczas ćwiczeń",
+      "caption": "Ostry ból kończy serię; nagły uraz, utrata ruchu lub utrzymujące się drętwienie wymagają oceny medycznej.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podciaganie-bol-barku.avif",
+          "sha256": "f9d27b1dc96374bf66fb14133e2ac9076a9e4cc98870a6d0893d009ca4fcf26b",
+          "bytes": 176784,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podciaganie-bol-barku.webp",
+          "sha256": "fc8c6b08eb6ac4e93556bd7f90c4fdfca010cbf8f1b66fdbc84a3cda1bc0031e",
+          "bytes": 148458,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podciaganie-bol-barku.jpg",
+          "sha256": "3c9ebad50ec67a0c4feab1e52aecf0918ab6bef6c3f4430272bc9e59a111f722",
+          "bytes": 238703,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "63b8e4f9b5306a3af6e62c50202caf08bdcaea99294b02f48343dbafc8057c46"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/jak-zaczac-sie-podciagac-po-50/pdf-pages/page-1.png",
+        "sha256": "627d820ce0b1765d9ca6339f251ce294872d70318d61f60653f63d015155e8a0",
+        "bytes": 651028,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1063,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/jak-zaczac-sie-podciagac-po-50/pdf-pages/page-2.png",
+        "sha256": "15a11be01b7d5587bef2c006145ab4c8b65a781b088c981669e7db764e824aee",
+        "bytes": 828171,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1056,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/jak-zaczac-sie-podciagac-po-50/pdf-pages/page-3.png",
+        "sha256": "154b7680daa5f1e83d8752e946aed0286cf2bf6417d130df5acb8c44a696bc3e",
+        "bytes": 847346,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/jak-zaczac-sie-podciagac-po-50/pdf-pages/page-4.png",
+        "sha256": "f121d120cfc9e1dc288d08d69f2a43130a56f7f61f9f69b5bca58269f6d31e27",
+        "bytes": 214675,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1035,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.565Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "d61e7c1acd77dcc9c524377c3ef0810efad3b15c027eb7fc3e86d3bcded9a886",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "fa62df379cf323d0897b8b7bd2a52bd0811646a0728f0c704996135ea11a0bdf",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "0a4e2a3d856aceb6898a6ac9ada34b8264c58bca2a32b34682af6512b66857f8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz podciaganie-hero-2026.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:jak-sprawdzic-gotowosc-barkow-i-chwytu",
+        "inventory_sha256": "17e52045783949c60741488bbeeeab802e0a7f3bf52feb01fb9d29f68004467d",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz podciaganie-gotowosc.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:od-jakich-cwiczen-zaczac",
+        "inventory_sha256": "1f83832360cc062cf7d1e0427da87995584156e9aebe92033913c8a73b1fe8d5",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz podciaganie-wioslowanie.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:jak-przejsc-do-podciagania-wspomaganego",
+        "inventory_sha256": "900c488ad9d6ba7672bf5307b406b8620396386d0456cd34423722ad63f3b689",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz podciaganie-wspomagane.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:kiedy-bol-barku-lub-lokcia-wymaga-przerwy",
+        "inventory_sha256": "63b8e4f9b5306a3af6e62c50202caf08bdcaea99294b02f48343dbafc8057c46",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz podciaganie-bol-barku.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "627d820ce0b1765d9ca6339f251ce294872d70318d61f60653f63d015155e8a0",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "15a11be01b7d5587bef2c006145ab4c8b65a781b088c981669e7db764e824aee",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "154b7680daa5f1e83d8752e946aed0286cf2bf6417d130df5acb8c44a696bc3e",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "f121d120cfc9e1dc288d08d69f2a43130a56f7f61f9f69b5bca58269f6d31e27",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 5837,
+    "review_wait_ms": 1676167
   },
   "errors": []
 }

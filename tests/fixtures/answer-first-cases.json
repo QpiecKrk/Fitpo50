@@ -23,5 +23,17 @@
   "element_before_paragraph": {
     "heading": "Czym są sakady?",
     "html": "<figure><img src=\"sakady.jpg\" alt=\"Oko w ruchu\"></figure><p>Sakady to krótkie, szybkie ruchy oczu, które przenoszą wzrok między punktami fiksacji.</p>"
+  },
+  "clear_antecedent": {
+    "heading": "Czy mRNA może zmienić DNA?",
+    "paragraph": "Nie ma dowodów, że szczepionkowe mRNA zmienia ludzkie DNA. Ten wniosek wynika z mechanizmu działania mRNA oraz danych jakościowych i bezpieczeństwa."
+  },
+  "clear_antecedent_with_bridge": {
+    "heading": "Dlaczego obietnica detoksu brzmi wiarygodnie?",
+    "paragraph": "Reklama detoksu sokowego trafia w realną potrzebę: chcesz poczuć lekkość i mniej zmęczenia. Po 50-tce ta obietnica brzmi jeszcze mocniej, gdy regeneracja jest wolniejsza."
+  },
+  "vague_without_antecedent": {
+    "heading": "Dlaczego reklama brzmi wiarygodnie?",
+    "paragraph": "Ta obietnica brzmi wiarygodnie i skłania wiele osób do szybkiego zakupu bez sprawdzenia mechanizmu ani jakości dowodów."
   }
 }

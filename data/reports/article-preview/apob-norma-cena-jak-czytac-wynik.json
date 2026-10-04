@@ -1,35 +1,532 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T08:39:21.930Z",
+  "generated_at": "2026-10-03T14:02:49.056Z",
+  "reviewed_at": "2026-10-03T14:31:11.560Z",
   "slug": "apob-norma-cena-jak-czytac-wynik",
-  "html_sha256": "4ae03c067fbb0637ff4070fd7a745a5f3c9aeabfc25a2698bf2fe9dcfb800b1c",
-  "site_html_sha256": "4ae03c067fbb0637ff4070fd7a745a5f3c9aeabfc25a2698bf2fe9dcfb800b1c",
-  "pdf_sha256": "a80e1c87bad9e53a29427f9606f1258731f11acdd6b099f549d184affa135a0c",
-  "site_pdf_sha256": "a80e1c87bad9e53a29427f9606f1258731f11acdd6b099f549d184affa135a0c",
+  "html_sha256": "88ad26ae190df8e36c6a9930a57d2b40ca8d277cfae18371dba537706bfddc78",
+  "site_html_sha256": "88ad26ae190df8e36c6a9930a57d2b40ca8d277cfae18371dba537706bfddc78",
+  "pdf_sha256": "7ca01189f01fce052a0c82f1af0b7e440d5857ac58695d4a58af9c4797769070",
+  "site_pdf_sha256": "7ca01189f01fce052a0c82f1af0b7e440d5857ac58695d4a58af9c4797769070",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:02:49.056Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "apob-norma-cena-jak-czytac-wynik.html",
+      "sha256": "88ad26ae190df8e36c6a9930a57d2b40ca8d277cfae18371dba537706bfddc78",
+      "bytes": 31399
+    },
+    "html_site": {
+      "file": "_site/apob-norma-cena-jak-czytac-wynik.html",
+      "sha256": "88ad26ae190df8e36c6a9930a57d2b40ca8d277cfae18371dba537706bfddc78",
+      "bytes": 31399
+    },
+    "pdf_source": {
+      "file": "assets/pdf/apob-norma-cena-jak-czytac-wynik.pdf",
+      "sha256": "7ca01189f01fce052a0c82f1af0b7e440d5857ac58695d4a58af9c4797769070",
+      "bytes": 552668
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/apob-norma-cena-jak-czytac-wynik.pdf",
+      "sha256": "7ca01189f01fce052a0c82f1af0b7e440d5857ac58695d4a58af9c4797769070",
+      "bytes": 552668
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/apob-norma-cena-jak-czytac-wynik/desktop.png",
+      "screenshot_sha256": "4b8add53c061dfd4ab4c6f203763c47c30a3d148a352bddfef3e5fa0aab34097",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/apob-norma-cena-jak-czytac-wynik/mobile.png",
+      "screenshot_sha256": "aef1a0b52ac012b6661dea0b2f28977dc83914a794604914c3e2c85c7c9f47bb",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 9 min czytania ApoB po 50-tce: norma, wynik mg/dl, cele i badanie na NFZ LDL jest w normie – zdanie, które może dawać fałszywe poczucie bezpieczeństwa. ApoB mówi więcej.",
+      "alt": "Mężczyzna po pięćdziesiątce omawia wynik ApoB podczas konsultacji lekarskiej online",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-hero-2026.avif",
+          "sha256": "631a4800a7ee973eca9c2e6bf8121a9b2975229baf6f1da0eb3a6853196fa2b2",
+          "bytes": 61630,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-hero-2026.webp",
+          "sha256": "b961a85e969b43664f898513f8af7461e23b4a7fcf16f042e12eee5770cbf77e",
+          "bytes": 122022,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-hero-2026.jpg",
+          "sha256": "11b01a9b0707fc7f6e583d6a541d3e9cf2fcd2f86988ca07bb7c85a2bfe492cb",
+          "bytes": 230295,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "c465cd4a77425a57bdf8944c5ea65620e8c8c22fa069c91fefa217a16f9910d0"
+    },
+    {
+      "placement": "content:2:co-dokladnie-mierzy-apob",
+      "role": "content",
+      "heading": "Co dokładnie mierzy ApoB?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę aterogennych cząstek lipoprotein, ale nie istnieje jedna „norma po 50-tce”. W wytycznych ESC/EAS cele wtórne wynoszą poniżej 100, 80 lub 65 mg/dl odpowiednio dla umiarkowanego, wysokiego i bardzo wysokiego ryzyka. Wynik 0,80 g/l to 80 mg/dl. Decyzja zależy też od LDL, chorób, leków i całkowitego ryzyka. Kluczowe wnioski Wiek 50 lat sam nie wyznacza celu ApoB; robi to kategoria ryzyka sercowo-naczyniowego. Przeliczenie jest proste: 1 g/l odpowiada 100 mg/dl, więc 0,80 g/l to 80 mg/dl. Cele ESC/EAS poniżej 100, 80 i 65 mg/dl są celami wtórnymi dla kolejnych kategorii ryzyka, nie zakresem referencyjnym dla wszystkich. Cena badania zmienia się między laboratoriami, dlatego artykuł nie podaje jednej kwoty jako stałej cechy testu. Co dokładnie mierzy ApoB? ",
+      "alt": "Cząstki lipoprotein zawierające po jednej cząsteczce apolipoproteiny B",
+      "caption": "ApoB przybliża liczbę aterogennych cząstek, ponieważ każda z nich zawiera jedną cząsteczkę ApoB100.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-czastki.avif",
+          "sha256": "2b4cd6d5adf9f25802d510d31c3ad856944f00f8902c7caaf3d4f02b91f3e231",
+          "bytes": 111784,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-czastki.webp",
+          "sha256": "b2a08d0ca0f82fd70c78954a4a2cc27afe8b1013ae52dec14f6871356eb633ba",
+          "bytes": 216190,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-czastki.jpg",
+          "sha256": "5785c8b979aa660e9e8d7b82142234cbf0b1cf0605ea470d5446bb087fd5b398",
+          "bytes": 326016,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "1b2fc439951c330b64fce88af9de4e753b101a88da9d57f07c6cdbaef8d33edc"
+    },
+    {
+      "placement": "content:3:jak-przeliczyc-apob-z-g-l-na-mg-dl",
+      "role": "content",
+      "heading": "Jak przeliczyć ApoB z g/l na mg/dl?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę aterogennych cząstek lipoprotein, ale nie istnieje jedna „norma po 50-tce”. W wytycznych ESC/EAS cele wtórne wynoszą poniżej 100, 80 lub 65 mg/dl odpowiednio dla umiarkowanego, wysokiego i bardzo wysokiego ryzyka. Wynik 0,80 g/l to 80 mg/dl. Decyzja zależy też od LDL, chorób, leków i całkowitego ryzyka. Kluczowe wnioski Wiek 50 lat sam nie wyznacza celu ApoB; robi to kategoria ryzyka sercowo-naczyniowego. Przeliczenie jest proste: 1 g/l odpowiada 100 mg/dl, więc 0,80 g/l to 80 mg/dl. Cele ESC/EAS poniżej 100, 80 i 65 mg/dl są celami wtórnymi dla kolejnych kategorii ryzyka, nie zakresem referencyjnym dla wszystkich. Cena badania zmienia się między laboratoriami, dlatego artykuł nie podaje jednej kwoty jako stałej cechy testu. Co dokładnie mierzy ApoB? ",
+      "alt": "Dojrzała osoba przelicza jednostki wyniku ApoB przy pomocy kalkulatora",
+      "caption": "Przy porównywaniu wyników ApoB trzeba najpierw sprawdzić jednostkę: wartość w g/l mnoży się przez 100, aby otrzymać mg/dl.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-przeliczenie.avif",
+          "sha256": "f73377368da130b3f2ad87755d123be7fa2d46a7675a9cdf0200b810a2736b85",
+          "bytes": 35274,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-przeliczenie.webp",
+          "sha256": "27c7d3f99e9c72ecaf70188176f35585afdc8cdfca03a325c77372e83d1c5490",
+          "bytes": 76662,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-przeliczenie.jpg",
+          "sha256": "6ded5a7492c63d779c5d2c147e8b052f2941bd15c6a4478cd9d8a44dd8be2ed6",
+          "bytes": 168609,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "83c1a1565a54b4289eda8f50bb388d527ea12d8cda96a799fcf01e34295bbd96"
+    },
+    {
+      "placement": "content:4:czy-wynik-w-zakresie-laboratorium-oznacza-optyma",
+      "role": "content",
+      "heading": "Czy wynik w zakresie laboratorium oznacza optymalny cel?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę aterogennych cząstek lipoprotein, ale nie istnieje jedna „norma po 50-tce”. W wytycznych ESC/EAS cele wtórne wynoszą poniżej 100, 80 lub 65 mg/dl odpowiednio dla umiarkowanego, wysokiego i bardzo wysokiego ryzyka. Wynik 0,80 g/l to 80 mg/dl. Decyzja zależy też od LDL, chorób, leków i całkowitego ryzyka. Kluczowe wnioski Wiek 50 lat sam nie wyznacza celu ApoB; robi to kategoria ryzyka sercowo-naczyniowego. Przeliczenie jest proste: 1 g/l odpowiada 100 mg/dl, więc 0,80 g/l to 80 mg/dl. Cele ESC/EAS poniżej 100, 80 i 65 mg/dl są celami wtórnymi dla kolejnych kategorii ryzyka, nie zakresem referencyjnym dla wszystkich. Cena badania zmienia się między laboratoriami, dlatego artykuł nie podaje jednej kwoty jako stałej cechy testu. Co dokładnie mierzy ApoB? ",
+      "alt": "Lekarka wyjaśnia pacjentowi różnicę między zakresem laboratorium a celem leczenia",
+      "caption": "Zakres referencyjny laboratorium i cel zależny od ryzyka odpowiadają na inne pytania, dlatego wynik wymaga kontekstu klinicznego.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-cel-ryzyko.avif",
+          "sha256": "4aae2d10736ec4a4ceaa473cd5e390b041789e4f18c0a13c8b952f2125a23b9f",
+          "bytes": 61126,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-cel-ryzyko.webp",
+          "sha256": "129922db0c1a4e2e5eed954b0ff471ca2b0b92e5d9f213d4a32d27150ed98cf0",
+          "bytes": 117416,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-cel-ryzyko.jpg",
+          "sha256": "4a29f3224ed1897dde2091aea4192cf2d06b0adb50febd2edf011e0e5469cb88",
+          "bytes": 235120,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "d99e3225dedefa0345816e3163407620e09a56a61717be6b259ad9f080b791d4"
+    },
+    {
+      "placement": "content:5:kiedy-wynik-apob-wymaga-rozmowy-z-lekarzem",
+      "role": "content",
+      "heading": "Kiedy wynik ApoB wymaga rozmowy z lekarzem?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę aterogennych cząstek lipoprotein, ale nie istnieje jedna „norma po 50-tce”. W wytycznych ESC/EAS cele wtórne wynoszą poniżej 100, 80 lub 65 mg/dl odpowiednio dla umiarkowanego, wysokiego i bardzo wysokiego ryzyka. Wynik 0,80 g/l to 80 mg/dl. Decyzja zależy też od LDL, chorób, leków i całkowitego ryzyka. Kluczowe wnioski Wiek 50 lat sam nie wyznacza celu ApoB; robi to kategoria ryzyka sercowo-naczyniowego. Przeliczenie jest proste: 1 g/l odpowiada 100 mg/dl, więc 0,80 g/l to 80 mg/dl. Cele ESC/EAS poniżej 100, 80 i 65 mg/dl są celami wtórnymi dla kolejnych kategorii ryzyka, nie zakresem referencyjnym dla wszystkich. Cena badania zmienia się między laboratoriami, dlatego artykuł nie podaje jednej kwoty jako stałej cechy testu. Co dokładnie mierzy ApoB? ",
+      "alt": "Lekarz omawia z pacjentem wynik ApoB i pozostałe czynniki ryzyka sercowego",
+      "caption": "Decyzji o leczeniu nie podejmuje się na podstawie jednej liczby; lekarz zestawia ApoB z całym profilem ryzyka pacjenta.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-konsultacja.avif",
+          "sha256": "3346657661e8a2fcb11b15a8590b3c4aaee36fc3623272467b4d89f2bea09a19",
+          "bytes": 57685,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-konsultacja.webp",
+          "sha256": "c2998af1a146859e99f902f2e228fcb59cd2cdb7648deec51dd13607ad4ff994",
+          "bytes": 112120,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-konsultacja.jpg",
+          "sha256": "e76bdfc307a45a752883c315f94498a11cf4f104b05acb3927823e0a6da4f63b",
+          "bytes": 229678,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "035a7792c49e072e5a813f2add49b365bb10a22d6a2b940b04b6da8df24e2476"
+    },
+    {
+      "placement": "content:6:czy-do-badania-apob-trzeba-byc-na-czczo",
+      "role": "content",
+      "heading": "Czy do badania ApoB trzeba być na czczo?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę aterogennych cząstek lipoprotein, ale nie istnieje jedna „norma po 50-tce”. W wytycznych ESC/EAS cele wtórne wynoszą poniżej 100, 80 lub 65 mg/dl odpowiednio dla umiarkowanego, wysokiego i bardzo wysokiego ryzyka. Wynik 0,80 g/l to 80 mg/dl. Decyzja zależy też od LDL, chorób, leków i całkowitego ryzyka. Kluczowe wnioski Wiek 50 lat sam nie wyznacza celu ApoB; robi to kategoria ryzyka sercowo-naczyniowego. Przeliczenie jest proste: 1 g/l odpowiada 100 mg/dl, więc 0,80 g/l to 80 mg/dl. Cele ESC/EAS poniżej 100, 80 i 65 mg/dl są celami wtórnymi dla kolejnych kategorii ryzyka, nie zakresem referencyjnym dla wszystkich. Cena badania zmienia się między laboratoriami, dlatego artykuł nie podaje jednej kwoty jako stałej cechy testu. Co dokładnie mierzy ApoB? ",
+      "alt": "Kobieta po pięćdziesiątce przygotowana do rutynowego pobrania krwi w laboratorium",
+      "caption": "ApoB można zwykle oznaczać bez rutynowego postu, choć lekarz lub laboratorium może zalecić inne warunki dla całego zestawu badań.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-pobranie.avif",
+          "sha256": "cf5f4553987bd60abe0592c5cb94b19cffd4a7190c894e68298dd85b1ab57712",
+          "bytes": 56010,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-pobranie.webp",
+          "sha256": "410cecb373d2b9d38b329c4d80d3ddef04600b326a05c60706e0b8225dec3cef",
+          "bytes": 108840,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-pobranie.jpg",
+          "sha256": "d6921147587be73eef20055ff2261789a184a4e6832d272fb19f7157e52bf146",
+          "bytes": 217070,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "17d97e8a064b64023203862f8e5e8aef0469afac3e0d7b475e14459cb91baff2"
+    },
+    {
+      "placement": "content:7:czy-badanie-apob-mozna-wykonac-na-nfz",
+      "role": "content",
+      "heading": "Czy badanie ApoB można wykonać na NFZ?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę aterogennych cząstek lipoprotein, ale nie istnieje jedna „norma po 50-tce”. W wytycznych ESC/EAS cele wtórne wynoszą poniżej 100, 80 lub 65 mg/dl odpowiednio dla umiarkowanego, wysokiego i bardzo wysokiego ryzyka. Wynik 0,80 g/l to 80 mg/dl. Decyzja zależy też od LDL, chorób, leków i całkowitego ryzyka. Kluczowe wnioski Wiek 50 lat sam nie wyznacza celu ApoB; robi to kategoria ryzyka sercowo-naczyniowego. Przeliczenie jest proste: 1 g/l odpowiada 100 mg/dl, więc 0,80 g/l to 80 mg/dl. Cele ESC/EAS poniżej 100, 80 i 65 mg/dl są celami wtórnymi dla kolejnych kategorii ryzyka, nie zakresem referencyjnym dla wszystkich. Cena badania zmienia się między laboratoriami, dlatego artykuł nie podaje jednej kwoty jako stałej cechy testu. Co dokładnie mierzy ApoB? ",
+      "alt": "Pacjentka pyta w rejestracji poradni o możliwość wykonania specjalistycznego badania",
+      "caption": "ApoB nie znajduje się na liście badań POZ, ale figuruje w katalogu AOS; dostępność i wskazanie trzeba potwierdzić w poradni.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-nfz.avif",
+          "sha256": "55ca80c0f1129341becb3c7b4fdeebebf701960c846d297d1ba990e4f3f68964",
+          "bytes": 46168,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-nfz.webp",
+          "sha256": "5367b56c239e66b1b23b35b05b5162ad21990d7b5d83ec41d2f082dd47b2de06",
+          "bytes": 89288,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-nfz.jpg",
+          "sha256": "472e90224cf531835512e66cd5add39c12b3c669d1b2ed405838fa5d78bb1035",
+          "bytes": 193906,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "94e289dc7e6e581a4fc218f0a33927011cec9f3a5e8c4bee36bfcdd6777993d4"
+    }
+  ],
   "pdf": {
     "pages": 5,
     "text_coverage": 1,
-    "rendered_pages": 5
+    "rendered_pages": 5,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/apob-norma-cena-jak-czytac-wynik/pdf-pages/page-1.png",
+        "sha256": "84b5f3a0d3569c47f2bf900f5529cef647567b0d6c0a8c966e39bd7bec97f62b",
+        "bytes": 612837,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1061,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/apob-norma-cena-jak-czytac-wynik/pdf-pages/page-2.png",
+        "sha256": "7d3b09fdc26c60f1919949dfe315c59be52aa1f38962af976d74ad8ef20bd76c",
+        "bytes": 907882,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/apob-norma-cena-jak-czytac-wynik/pdf-pages/page-3.png",
+        "sha256": "60da21b751db8f3196adc825b29d5d75b95361c2f64318a9dc9738c5f9e84011",
+        "bytes": 813723,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/apob-norma-cena-jak-czytac-wynik/pdf-pages/page-4.png",
+        "sha256": "7ab0cfac32371738fd6bdf0c675a347009ce036864addc17c41907c78c7c8bd1",
+        "bytes": 755925,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1065,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/apob-norma-cena-jak-czytac-wynik/pdf-pages/page-5.png",
+        "sha256": "b47d1791630ddb80624ab6417e7994252f6e4675eda208c02e4b5c5f48240391",
+        "bytes": 185599,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 59,
+          "width": 1059,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.560Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "4b8add53c061dfd4ab4c6f203763c47c30a3d148a352bddfef3e5fa0aab34097",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "aef1a0b52ac012b6661dea0b2f28977dc83914a794604914c3e2c85c7c9f47bb",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "c465cd4a77425a57bdf8944c5ea65620e8c8c22fa069c91fefa217a16f9910d0",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz apob-hero-2026.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.560Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:co-dokladnie-mierzy-apob",
+        "inventory_sha256": "1b2fc439951c330b64fce88af9de4e753b101a88da9d57f07c6cdbaef8d33edc",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz apob-czastki.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.560Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:jak-przeliczyc-apob-z-g-l-na-mg-dl",
+        "inventory_sha256": "83c1a1565a54b4289eda8f50bb388d527ea12d8cda96a799fcf01e34295bbd96",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz apob-przeliczenie.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.560Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:czy-wynik-w-zakresie-laboratorium-oznacza-optyma",
+        "inventory_sha256": "d99e3225dedefa0345816e3163407620e09a56a61717be6b259ad9f080b791d4",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz apob-cel-ryzyko.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.560Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:kiedy-wynik-apob-wymaga-rozmowy-z-lekarzem",
+        "inventory_sha256": "035a7792c49e072e5a813f2add49b365bb10a22d6a2b940b04b6da8df24e2476",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz apob-konsultacja.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.560Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:6:czy-do-badania-apob-trzeba-byc-na-czczo",
+        "inventory_sha256": "17d97e8a064b64023203862f8e5e8aef0469afac3e0d7b475e14459cb91baff2",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz apob-pobranie.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.560Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:7:czy-badanie-apob-mozna-wykonac-na-nfz",
+        "inventory_sha256": "94e289dc7e6e581a4fc218f0a33927011cec9f3a5e8c4bee36bfcdd6777993d4",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz apob-nfz.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.560Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "84b5f3a0d3569c47f2bf900f5529cef647567b0d6c0a8c966e39bd7bec97f62b",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "7d3b09fdc26c60f1919949dfe315c59be52aa1f38962af976d74ad8ef20bd76c",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "60da21b751db8f3196adc825b29d5d75b95361c2f64318a9dc9738c5f9e84011",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "7ab0cfac32371738fd6bdf0c675a347009ce036864addc17c41907c78c7c8bd1",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "b47d1791630ddb80624ab6417e7994252f6e4675eda208c02e4b5c5f48240391",
+        "note": "Strona PDF 5 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 7743,
+    "review_wait_ms": 1702504
   },
   "errors": []
 }

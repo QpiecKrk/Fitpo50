@@ -1,10 +1,10 @@
-# FitPo50 — staging HTML i PDF
+# FitPo50 — staging HTML, obrazy i PDF
 
 - Status: **PREVIEW_READY**
+- Technical: **TECHNICAL_PASS**
+- Visual: **VISUAL_REVIEW_VERIFIED**
 - Slug: siedzenie-po-50
-- Render HTML: desktop 1440 px + mobile 390 px
-- Tabele semantyczne: 2
-- PDF: 9 stron, wyrenderowano 9
-- Zgodność tekstu HTML→PDF: 100.00%
-- HTML source/_site: 1:1
-- PDF source/_site: 1:1
+- Reviewed by: Codex
+- Review method: Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.
+- Obrazy: 8
+- PDF: 9 stron

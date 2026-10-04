@@ -1,35 +1,418 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T08:44:01.015Z",
+  "generated_at": "2026-10-03T14:03:26.542Z",
+  "reviewed_at": "2026-10-03T14:31:11.565Z",
   "slug": "sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile",
-  "html_sha256": "97cdc7b13b16bccb1b36622eba683de61d144517e820d8b0aab58aeccd6ceaf0",
-  "site_html_sha256": "97cdc7b13b16bccb1b36622eba683de61d144517e820d8b0aab58aeccd6ceaf0",
-  "pdf_sha256": "d9a01f4d879d7ab5fe3366304a5b52eba6f242abb792532513fbe2872d54011f",
-  "site_pdf_sha256": "d9a01f4d879d7ab5fe3366304a5b52eba6f242abb792532513fbe2872d54011f",
+  "html_sha256": "befdf4a66a097ae2bdbf21ce119515c2509e3d62af3828ee39b39a761cf3c4a6",
+  "site_html_sha256": "befdf4a66a097ae2bdbf21ce119515c2509e3d62af3828ee39b39a761cf3c4a6",
+  "pdf_sha256": "640acb192f146f0551054626150dc77372b2f06e999528325506dadd92bb678f",
+  "site_pdf_sha256": "640acb192f146f0551054626150dc77372b2f06e999528325506dadd92bb678f",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:03:26.542Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
+      "sha256": "befdf4a66a097ae2bdbf21ce119515c2509e3d62af3828ee39b39a761cf3c4a6",
+      "bytes": 27877
+    },
+    "html_site": {
+      "file": "_site/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html",
+      "sha256": "befdf4a66a097ae2bdbf21ce119515c2509e3d62af3828ee39b39a761cf3c4a6",
+      "bytes": 27877
+    },
+    "pdf_source": {
+      "file": "assets/pdf/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.pdf",
+      "sha256": "640acb192f146f0551054626150dc77372b2f06e999528325506dadd92bb678f",
+      "bytes": 378626
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.pdf",
+      "sha256": "640acb192f146f0551054626150dc77372b2f06e999528325506dadd92bb678f",
+      "bytes": 378626
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile/desktop.png",
+      "screenshot_sha256": "eab8c988d448cff14fb916a9689d1cb046da69a47e5ca668d0960154ba717772",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile/mobile.png",
+      "screenshot_sha256": "c8d234d593d4647a90ad85d0531c27b27d0ee989d328dd956ae54e92266f410c",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "CIEKAWE 10 min czytania Sakady i supresja sakadyczna: dlaczego obraz jest stabilny? Nie widzisz świata takim, jaki jest. Widzisz go takim, jakim twój mózg zdecydował go pokazać.",
+      "alt": "Dojrzała kobieta wykonuje zadanie wzrokowe podczas badania ruchów oczu",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-hero-2026.avif",
+          "sha256": "38038a1e1f03de56b7c06872c5bd81491736d4331fa7aec2fa62709a05ed6ad4",
+          "bytes": 150593,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sakady-hero-2026.webp",
+          "sha256": "36f302d754e4ba733b7029d4850f2216db4a78607b7a7288001b1e568f6ea774",
+          "bytes": 138454,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sakady-hero-2026.jpg",
+          "sha256": "276c14f8111ecf61b81f543373fcd6b2e8ffa46e190c220ec957efa13ffbb540",
+          "bytes": 225947,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "749491230ab02b42153910a133ad1b4f7c7d9e588ac68ea42ad45608515f1029"
+    },
+    {
+      "placement": "content:2:czym-sa-sakady-i-fiksacje",
+      "role": "content",
+      "heading": "Czym są sakady i fiksacje?",
+      "context": "Szybka odpowiedź Sakady to szybkie ruchy oczu przenoszące punkt spojrzenia. W ich pobliżu czułość wzrokowa na część bodźców spada, co nazywa się supresją sakadyczną. Nie oznacza to całkowitej „ślepoty” ani wyłączania oczu. Jeśli wystąpią nagłe błyski, lawina nowych mętów, cień jak kurtyna, silny ból oka lub nagła utrata widzenia, potrzebna jest pilna ocena okulistyczna. Kluczowe wnioski Supresja jest selektywnym spadkiem wrażliwości, a nie całkowitym wyłączeniem wzroku. Mózg łączy informacje przed, w trakcie i po sakadzie, aby utrzymać użyteczny obraz świata. Czytanie obejmuje fiksacje, sakady i czasem regresje; ich obecność sama nie oznacza choroby. Nagłe błyski, męty, kurtyna lub utrata widzenia nie są zwykłym efektem sakad. Czym są sakady i fiksacje? Podczas fiksacji wzrok pobiera szcze",
+      "alt": "Dojrzały mężczyzna obserwuje figury podczas pomiaru punktów fiksacji i sakad",
+      "caption": "Podczas fiksacji oko zbiera szczegóły, a krótka sakada przenosi spojrzenie do kolejnego punktu sceny.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-fiksacje.avif",
+          "sha256": "e2ceada7d58b807200a6184ac9793b2fc4f5957fc4f483e9a1e47535c706509e",
+          "bytes": 95945,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sakady-fiksacje.webp",
+          "sha256": "37b6e390a02d2b1831b9d70be5729773b0cbe890aff2f10330ce525310222e5b",
+          "bytes": 97912,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sakady-fiksacje.jpg",
+          "sha256": "55a80c06720ed6da14560851a68b60c4acfb83ff339915e20a64151ee992fe17",
+          "bytes": 168096,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "554d87a5138c6ab19f319816e80d52feb3a413913bcee79727f04f8fbae088c2"
+    },
+    {
+      "placement": "content:3:na-czym-polega-supresja-sakadyczna",
+      "role": "content",
+      "heading": "Na czym polega supresja sakadyczna?",
+      "context": "Szybka odpowiedź Sakady to szybkie ruchy oczu przenoszące punkt spojrzenia. W ich pobliżu czułość wzrokowa na część bodźców spada, co nazywa się supresją sakadyczną. Nie oznacza to całkowitej „ślepoty” ani wyłączania oczu. Jeśli wystąpią nagłe błyski, lawina nowych mętów, cień jak kurtyna, silny ból oka lub nagła utrata widzenia, potrzebna jest pilna ocena okulistyczna. Kluczowe wnioski Supresja jest selektywnym spadkiem wrażliwości, a nie całkowitym wyłączeniem wzroku. Mózg łączy informacje przed, w trakcie i po sakadzie, aby utrzymać użyteczny obraz świata. Czytanie obejmuje fiksacje, sakady i czasem regresje; ich obecność sama nie oznacza choroby. Nagłe błyski, męty, kurtyna lub utrata widzenia nie są zwykłym efektem sakad. Czym są sakady i fiksacje? Podczas fiksacji wzrok pobiera szcze",
+      "alt": "Sekwencja widoku przed ruchem oka, podczas sakady i po ponownej fiksacji",
+      "caption": "W czasie sakady czułość na część bodźców spada, lecz wzrok nie wyłącza się całkowicie jak migawka aparatu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-supresja.avif",
+          "sha256": "024e0ccaa8fc97ec04d2a3b24036e24a57caf4a92bda8cc930004eed50e11ed5",
+          "bytes": 132549,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sakady-supresja.webp",
+          "sha256": "bb14a406b84884295f6d10ef0829e02165ef4e0003ed1fe2a8f9aca08e61c43a",
+          "bytes": 120686,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sakady-supresja.jpg",
+          "sha256": "610af316b0ecd5ac7f0b65e2bba8e55b14f224dd84e3b63af556d554aa944638",
+          "bytes": 207048,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ff1c186496c2c2ba1ae658f7e0240ef2fc14a8769f90ce3a8d7a20f92b4c1a3b"
+    },
+    {
+      "placement": "content:4:czy-mozg-uzupelnia-brakujace-chwile",
+      "role": "content",
+      "heading": "Czy mózg uzupełnia brakujące chwile?",
+      "context": "Szybka odpowiedź Sakady to szybkie ruchy oczu przenoszące punkt spojrzenia. W ich pobliżu czułość wzrokowa na część bodźców spada, co nazywa się supresją sakadyczną. Nie oznacza to całkowitej „ślepoty” ani wyłączania oczu. Jeśli wystąpią nagłe błyski, lawina nowych mętów, cień jak kurtyna, silny ból oka lub nagła utrata widzenia, potrzebna jest pilna ocena okulistyczna. Kluczowe wnioski Supresja jest selektywnym spadkiem wrażliwości, a nie całkowitym wyłączeniem wzroku. Mózg łączy informacje przed, w trakcie i po sakadzie, aby utrzymać użyteczny obraz świata. Czytanie obejmuje fiksacje, sakady i czasem regresje; ich obecność sama nie oznacza choroby. Nagłe błyski, męty, kurtyna lub utrata widzenia nie są zwykłym efektem sakad. Czym są sakady i fiksacje? Podczas fiksacji wzrok pobiera szcze",
+      "alt": "Dojrzała osoba ogląda obraz w muzeum podczas dwóch kolejnych fiksacji wzroku",
+      "caption": "Układ wzrokowy porównuje informacje z kolejnych fiksacji i aktualizuje położenie obiektów w stabilnej scenie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-integracja.avif",
+          "sha256": "1dde069fd014456a23228e3b521265c57104274556742d0badff00f4930421fe",
+          "bytes": 151767,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sakady-integracja.webp",
+          "sha256": "80f5e69f609eb5636939acb28b80bd732c294c1cd67d6535f687aa1ddf7926cb",
+          "bytes": 130200,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sakady-integracja.jpg",
+          "sha256": "56ffe6f3c7645c702ca21f51ad47f0199deeee0d8cfef3f8ceafafb3f52bd8f0",
+          "bytes": 211889,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "56ee3b179bfae40761eeba6d9f2f523b22a464f37a9dc6838a3913362b1a041b"
+    },
+    {
+      "placement": "content:5:ktore-objawy-nie-pasuja-do-zwyklych-sakad",
+      "role": "content",
+      "heading": "Które objawy nie pasują do zwykłych sakad?",
+      "context": "Szybka odpowiedź Sakady to szybkie ruchy oczu przenoszące punkt spojrzenia. W ich pobliżu czułość wzrokowa na część bodźców spada, co nazywa się supresją sakadyczną. Nie oznacza to całkowitej „ślepoty” ani wyłączania oczu. Jeśli wystąpią nagłe błyski, lawina nowych mętów, cień jak kurtyna, silny ból oka lub nagła utrata widzenia, potrzebna jest pilna ocena okulistyczna. Kluczowe wnioski Supresja jest selektywnym spadkiem wrażliwości, a nie całkowitym wyłączeniem wzroku. Mózg łączy informacje przed, w trakcie i po sakadzie, aby utrzymać użyteczny obraz świata. Czytanie obejmuje fiksacje, sakady i czasem regresje; ich obecność sama nie oznacza choroby. Nagłe błyski, męty, kurtyna lub utrata widzenia nie są zwykłym efektem sakad. Czym są sakady i fiksacje? Podczas fiksacji wzrok pobiera szcze",
+      "alt": "Okulistka bada siatkówkę dojrzałego pacjenta przy użyciu lampy szczelinowej",
+      "caption": "Nagłe błyski, nowe męty, cień w polu widzenia albo silny ból oka wymagają pilnej oceny medycznej.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sakady-objawy-alarmowe.avif",
+          "sha256": "3a1c6822c6a321239ebf0fc07a59a4954622f72c7290bb60ee8c851d5ebdb73a",
+          "bytes": 180811,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sakady-objawy-alarmowe.webp",
+          "sha256": "6e04a24590e94b8dc2891af879527ae6c9f63b9889bef79b85f00a2bc3fcde69",
+          "bytes": 155098,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sakady-objawy-alarmowe.jpg",
+          "sha256": "059ffcd55250b89fa6a7cae233aeaa1df13816d4a091aae3bf68ee21280c4304",
+          "bytes": 247884,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e27002a7076bc7fa38f89c8c702101ba39055d369b01ac893d804a3e40116c09"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile/pdf-pages/page-1.png",
+        "sha256": "a3766966c4fa78a33323366c3ca029955de0986a6550c28005e40b4c64923633",
+        "bytes": 551712,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1037,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile/pdf-pages/page-2.png",
+        "sha256": "bc5f3b032d599f5b1bb63723c77adc0bdaf940a1aaa23c92b28680a295906fe6",
+        "bytes": 648791,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1057,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile/pdf-pages/page-3.png",
+        "sha256": "f1e3c53f631b6671b594a75b9ddc4103be64e9a97b8b3c31fb40e8c4f1dda663",
+        "bytes": 801606,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1056,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile/pdf-pages/page-4.png",
+        "sha256": "7b00e4df32ec92ff7533c5440908a47c0f036862a6942109e130de17a63737b1",
+        "bytes": 214024,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 62,
+          "width": 1078,
+          "height": 1588
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.565Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "eab8c988d448cff14fb916a9689d1cb046da69a47e5ca668d0960154ba717772",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "c8d234d593d4647a90ad85d0531c27b27d0ee989d328dd956ae54e92266f410c",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "749491230ab02b42153910a133ad1b4f7c7d9e588ac68ea42ad45608515f1029",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sakady-hero-2026.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:czym-sa-sakady-i-fiksacje",
+        "inventory_sha256": "554d87a5138c6ab19f319816e80d52feb3a413913bcee79727f04f8fbae088c2",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sakady-fiksacje.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:na-czym-polega-supresja-sakadyczna",
+        "inventory_sha256": "ff1c186496c2c2ba1ae658f7e0240ef2fc14a8769f90ce3a8d7a20f92b4c1a3b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sakady-supresja.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:czy-mozg-uzupelnia-brakujace-chwile",
+        "inventory_sha256": "56ee3b179bfae40761eeba6d9f2f523b22a464f37a9dc6838a3913362b1a041b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sakady-integracja.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:ktore-objawy-nie-pasuja-do-zwyklych-sakad",
+        "inventory_sha256": "e27002a7076bc7fa38f89c8c702101ba39055d369b01ac893d804a3e40116c09",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sakady-objawy-alarmowe.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.565Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "a3766966c4fa78a33323366c3ca029955de0986a6550c28005e40b4c64923633",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "bc5f3b032d599f5b1bb63723c77adc0bdaf940a1aaa23c92b28680a295906fe6",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "f1e3c53f631b6671b594a75b9ddc4103be64e9a97b8b3c31fb40e8c4f1dda663",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "7b00e4df32ec92ff7533c5440908a47c0f036862a6942109e130de17a63737b1",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 5482,
+    "review_wait_ms": 1665023
   },
   "errors": []
 }

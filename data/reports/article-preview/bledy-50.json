@@ -1,35 +1,508 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:53:21.080Z",
+  "generated_at": "2026-10-03T14:03:09.343Z",
+  "reviewed_at": "2026-10-03T14:31:11.564Z",
   "slug": "bledy-50",
-  "html_sha256": "866a83db91c6d636a86f4d54a1ee3b01385c9ef9f2baf757f438853c9448bbbf",
-  "site_html_sha256": "866a83db91c6d636a86f4d54a1ee3b01385c9ef9f2baf757f438853c9448bbbf",
-  "pdf_sha256": "945cd59f4f7cdfbb0450dd899c3ee1e3fffcedddb40da3c033c0424fb400712b",
-  "site_pdf_sha256": "945cd59f4f7cdfbb0450dd899c3ee1e3fffcedddb40da3c033c0424fb400712b",
+  "html_sha256": "91d2ddddd8541beca1355f52b5e399025d1930cf6b1fab730a897ff8932fd4a8",
+  "site_html_sha256": "91d2ddddd8541beca1355f52b5e399025d1930cf6b1fab730a897ff8932fd4a8",
+  "pdf_sha256": "28c07c12d85280f39c71da35fbeff32c9ece264f45a8bd1f618d5b1d6f73838d",
+  "site_pdf_sha256": "28c07c12d85280f39c71da35fbeff32c9ece264f45a8bd1f618d5b1d6f73838d",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:03:09.343Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "bledy-50.html",
+      "sha256": "91d2ddddd8541beca1355f52b5e399025d1930cf6b1fab730a897ff8932fd4a8",
+      "bytes": 35604
+    },
+    "html_site": {
+      "file": "_site/bledy-50.html",
+      "sha256": "91d2ddddd8541beca1355f52b5e399025d1930cf6b1fab730a897ff8932fd4a8",
+      "bytes": 35604
+    },
+    "pdf_source": {
+      "file": "assets/pdf/bledy-50.pdf",
+      "sha256": "28c07c12d85280f39c71da35fbeff32c9ece264f45a8bd1f618d5b1d6f73838d",
+      "bytes": 594493
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/bledy-50.pdf",
+      "sha256": "28c07c12d85280f39c71da35fbeff32c9ece264f45a8bd1f618d5b1d6f73838d",
+      "bytes": 594493
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/bledy-50/desktop.png",
+      "screenshot_sha256": "f549f49ba17ab73d8f8f8006be24e99134419e46e423cc2be79cd8c90b05ebae",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/bledy-50/mobile.png",
+      "screenshot_sha256": "4757182243d1fd4a001dd30196c86c2387f75fae9fb9145fa434a44363b6da0f",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "RUCH 7 min czytania Aktualizacja: 03.10.2026 Trening po 50-tce: 5 błędów, które hamują Twoje efekty? TRENUJ MĄDRZEJ, A NIE TYLKO CIĘŻEJ.",
+      "alt": "Mężczyzna po 60-tce siedzący na ławce w siłowni, zamyślony",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-hero.avif",
+          "sha256": "ec591c17a3d1818e0a682d10a7b35893aca0600076ca6e0a1ebe8c6bcca05f59",
+          "bytes": 66181,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bledy-hero.webp",
+          "sha256": "3fb92c8c376fea04bb9e942f38c95f8c0b90d5c83a44aae08ef74ede8f13ba14",
+          "bytes": 124094,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bledy-hero.jpg",
+          "sha256": "4ccf4b3d89eb64a38bb3fe5ff48351bcd5addadf97afd106305bd9c32f865b58",
+          "bytes": 359106,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "71ebea98d4b7df3c82baeb901de3ad44bcd119221237f65b71bf53d66d123961"
+    },
+    {
+      "placement": "content:2:blad-1za-ciezko-na-start",
+      "role": "content",
+      "heading": "BŁĄD #1Za ciężko na start?",
+      "context": "Szybka odpowiedź Najczęstsze błędy po 50-tce to zbyt szybki start, pomijanie siły i brak planu regeneracji, a nie sam wiek. Lepszy efekt daje progres 5-10% tygodniowo niż jednorazowy zryw. Jeśli po dwóch tygodniach rośnie ból i spada energia, zwykle trzeba zmniejszyć objętość i uprościć plan, zamiast dokładać kolejne ćwiczenia. Wchodzisz na siłownię z dobrymi chęciami. I to jest już połowa sukcesu. Ale jest kilka błędów, które popełnia prawie każdy po pięćdziesiątce — i które potrafią zniszczyć cały wysiłek zanim cokolwiek się zacznie. Jeśli dopiero startujesz, zacznij też od tekstu jak zacząć na siłowni po 50-tce. A jeśli problemem jest już sam opór przed wyjściem z domu, przeczytaj również jak zbudować motywację do ćwiczeń po 50-tce. Oto one. Kluczowe wnioski Kluczowe wnioski Najważniejs",
+      "alt": "Mężczyzna po 60-tce wybiera lżejsze hantle z pomocą trenerki",
+      "caption": "Na starcie dobierz ciężar, który pozwala zachować technikę i wyraźny zapas powtórzeń.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-start-zbyt-ciezko-20260930.avif",
+          "sha256": "515a5162772caa2ebdc8461628af45d5657c816d6f13697dc95fd8710cc4a3f7",
+          "bytes": 87637,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bledy-start-zbyt-ciezko-20260930.webp",
+          "sha256": "0ebd8472eb02623f6c96a4473a4ab6eecaacc9dfd440832a0800518583d1ef51",
+          "bytes": 101910,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bledy-start-zbyt-ciezko-20260930.jpg",
+          "sha256": "176190d010456b587e1aa83090472c01ff01d896edf504059e4f59e6eda98e15",
+          "bytes": 249640,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e5f78edd901b272df853d28fd815689d2bbbec35bac28b9a16d2ce0b0d27ac26"
+    },
+    {
+      "placement": "content:3:blad-2pomijanie-rozgrzewki",
+      "role": "content",
+      "heading": "BŁĄD #2Pomijanie rozgrzewki?",
+      "context": "Szybka odpowiedź Najczęstsze błędy po 50-tce to zbyt szybki start, pomijanie siły i brak planu regeneracji, a nie sam wiek. Lepszy efekt daje progres 5-10% tygodniowo niż jednorazowy zryw. Jeśli po dwóch tygodniach rośnie ból i spada energia, zwykle trzeba zmniejszyć objętość i uprościć plan, zamiast dokładać kolejne ćwiczenia. Wchodzisz na siłownię z dobrymi chęciami. I to jest już połowa sukcesu. Ale jest kilka błędów, które popełnia prawie każdy po pięćdziesiątce — i które potrafią zniszczyć cały wysiłek zanim cokolwiek się zacznie. Jeśli dopiero startujesz, zacznij też od tekstu jak zacząć na siłowni po 50-tce. A jeśli problemem jest już sam opór przed wyjściem z domu, przeczytaj również jak zbudować motywację do ćwiczeń po 50-tce. Oto one. Kluczowe wnioski Kluczowe wnioski Najważniejs",
+      "alt": "Kobieta po 60-tce wykonuje dynamiczną rozgrzewkę przed ćwiczeniami siłowymi",
+      "caption": "Krótka rozgrzewka przygotowuje ruchy i pozwala stopniowo wejść w obciążenie właściwego treningu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-rozgrzewka-20260930.avif",
+          "sha256": "bf09d3d9f9fdc3b5010ce3c913a70f90a7bcd18bc5982e5d3f75250078c3ebdc",
+          "bytes": 98085,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bledy-rozgrzewka-20260930.webp",
+          "sha256": "1a14c69295981352c20446082971bf9e715b2013393f02a96831ddd643d7af69",
+          "bytes": 109428,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bledy-rozgrzewka-20260930.jpg",
+          "sha256": "5417ed1ca4db5d24d30077a43990177a188a642176e29858545bdfc72accaf60",
+          "bytes": 254254,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5fa7cd7951a055ccd8ef205d07321ccb9500ea3139451ac353bea6219a90ca93"
+    },
+    {
+      "placement": "content:4:blad-3tylko-cardio-bieznia-orbitrek-i-nic-wiecej",
+      "role": "content",
+      "heading": "BŁĄD #3Tylko cardio — bieżnia, orbitrek i nic więcej?",
+      "context": "Szybka odpowiedź Najczęstsze błędy po 50-tce to zbyt szybki start, pomijanie siły i brak planu regeneracji, a nie sam wiek. Lepszy efekt daje progres 5-10% tygodniowo niż jednorazowy zryw. Jeśli po dwóch tygodniach rośnie ból i spada energia, zwykle trzeba zmniejszyć objętość i uprościć plan, zamiast dokładać kolejne ćwiczenia. Wchodzisz na siłownię z dobrymi chęciami. I to jest już połowa sukcesu. Ale jest kilka błędów, które popełnia prawie każdy po pięćdziesiątce — i które potrafią zniszczyć cały wysiłek zanim cokolwiek się zacznie. Jeśli dopiero startujesz, zacznij też od tekstu jak zacząć na siłowni po 50-tce. A jeśli problemem jest już sam opór przed wyjściem z domu, przeczytaj również jak zbudować motywację do ćwiczeń po 50-tce. Oto one. Kluczowe wnioski Kluczowe wnioski Najważniejs",
+      "alt": "Kobieta po 60-tce uzupełnia trening na bieżni ćwiczeniem siłowym z hantlami",
+      "caption": "Cardio wspiera wydolność, a trening oporowy dostarcza osobnego bodźca dla siły i mięśni.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-cardio-i-sila-20260930.avif",
+          "sha256": "03819bb4a5de66ddd80ca9e1e8e4a9689297731b941babdfc018345c7c0e4281",
+          "bytes": 85560,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bledy-cardio-i-sila-20260930.webp",
+          "sha256": "4e61ac713ffa10edc4b2ddd90042cf940e38fd2e2d8c6e01c6298daff5fbc4a3",
+          "bytes": 98416,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bledy-cardio-i-sila-20260930.jpg",
+          "sha256": "3c33fe8495b69674e0e2d026fa5531af0fdb8674d7c8f082b6be962bdb8cdead",
+          "bytes": 240354,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "1c2c21dc63649473d61caa6183ca670c42782c7f718197d7f78f38ecafe22609"
+    },
+    {
+      "placement": "content:5:blad-4-brak-regeneracji-wiecej-to-lepiej",
+      "role": "content",
+      "heading": "BŁĄD #4 Brak regeneracji — więcej to lepiej?",
+      "context": "Szybka odpowiedź Najczęstsze błędy po 50-tce to zbyt szybki start, pomijanie siły i brak planu regeneracji, a nie sam wiek. Lepszy efekt daje progres 5-10% tygodniowo niż jednorazowy zryw. Jeśli po dwóch tygodniach rośnie ból i spada energia, zwykle trzeba zmniejszyć objętość i uprościć plan, zamiast dokładać kolejne ćwiczenia. Wchodzisz na siłownię z dobrymi chęciami. I to jest już połowa sukcesu. Ale jest kilka błędów, które popełnia prawie każdy po pięćdziesiątce — i które potrafią zniszczyć cały wysiłek zanim cokolwiek się zacznie. Jeśli dopiero startujesz, zacznij też od tekstu jak zacząć na siłowni po 50-tce. A jeśli problemem jest już sam opór przed wyjściem z domu, przeczytaj również jak zbudować motywację do ćwiczeń po 50-tce. Oto one. Kluczowe wnioski Kluczowe wnioski Najważniejs",
+      "alt": "Kobieta po 60-tce łączy spacer, lekką mobilność i zapis regeneracji między treningami",
+      "caption": "Regeneracja obejmuje sen, rozsądne przerwy i lżejszy ruch, który pomaga utrzymać plan bez dokładania zmęczenia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-regeneracja-plan-20260930.avif",
+          "sha256": "584fde9ec8232b61c12e41ab6ce06f2cf636dad494603a5eae7efa3508a249d2",
+          "bytes": 132570,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bledy-regeneracja-plan-20260930.webp",
+          "sha256": "7a559cd6cf02f2f0bafdc8fd95345e96fcc4be496d355e18e5cafae33595ff8e",
+          "bytes": 149726,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bledy-regeneracja-plan-20260930.jpg",
+          "sha256": "47aca9776dfe8d0bb77e8730e56324872fe2b28b9a7d74124b628770c8664eb7",
+          "bytes": 315945,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "b1c614d43d64a03b9d6e40609a2f022edf3d61059487448c1a5eb43431d681cc"
+    },
+    {
+      "placement": "content:6:blad-5ignorowanie-bolu-stawow-przejdzie",
+      "role": "content",
+      "heading": "BŁĄD #5Ignorowanie bólu stawów — \"przejdzie\"?",
+      "context": "Szybka odpowiedź Najczęstsze błędy po 50-tce to zbyt szybki start, pomijanie siły i brak planu regeneracji, a nie sam wiek. Lepszy efekt daje progres 5-10% tygodniowo niż jednorazowy zryw. Jeśli po dwóch tygodniach rośnie ból i spada energia, zwykle trzeba zmniejszyć objętość i uprościć plan, zamiast dokładać kolejne ćwiczenia. Wchodzisz na siłownię z dobrymi chęciami. I to jest już połowa sukcesu. Ale jest kilka błędów, które popełnia prawie każdy po pięćdziesiątce — i które potrafią zniszczyć cały wysiłek zanim cokolwiek się zacznie. Jeśli dopiero startujesz, zacznij też od tekstu jak zacząć na siłowni po 50-tce. A jeśli problemem jest już sam opór przed wyjściem z domu, przeczytaj również jak zbudować motywację do ćwiczeń po 50-tce. Oto one. Kluczowe wnioski Kluczowe wnioski Najważniejs",
+      "alt": "Mężczyzna po 60-tce przerywa ćwiczenie i omawia ból kolana z fizjoterapeutką",
+      "caption": "Narastający lub ostry ból stawu wymaga zmiany obciążenia i oceny przyczyny zamiast ćwiczenia przez objaw.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bledy-bol-stawu-reakcja-20260930.avif",
+          "sha256": "2100477a7ffa807f0eee0c1cc30a9d7fc390403bb76b4ff748666515d01bfd9a",
+          "bytes": 82101,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bledy-bol-stawu-reakcja-20260930.webp",
+          "sha256": "0ed460713f5be3e02b5dca034ed410061a43ef22ab40a63da13cc9455ee1270a",
+          "bytes": 96162,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bledy-bol-stawu-reakcja-20260930.jpg",
+          "sha256": "e5b60f201d8164c20914a316b6923a508b773ead897b1faa96d3447ee439a7c7",
+          "bytes": 233427,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "38116c4a6d3dbc5d915b1eb89175fb7dfa2232a9f0702abd664e3b87d4ed3f04"
+    }
+  ],
   "pdf": {
     "pages": 6,
     "text_coverage": 0.9971,
-    "rendered_pages": 6
+    "rendered_pages": 6,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/bledy-50/pdf-pages/page-1.png",
+        "sha256": "2d6312acc870ca6c212afcb749c9472c3312b90117756e8e36fd78242001ad03",
+        "bytes": 684989,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 59,
+          "width": 1078,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/bledy-50/pdf-pages/page-2.png",
+        "sha256": "fab0230018d985237c1bfdd961ec3c0c46f0074dcd71c8cccdfadbe9c12c05c0",
+        "bytes": 981472,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/bledy-50/pdf-pages/page-3.png",
+        "sha256": "360981a3f6a95c83bedf554664b00f1d1900b30dfc04410ff973cdfdb055f5f2",
+        "bytes": 668341,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1061,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/bledy-50/pdf-pages/page-4.png",
+        "sha256": "226f39509fa45901d53dc601e8965c65a74844e16e13c9ec5151ddae16403c6f",
+        "bytes": 1048620,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1061,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/bledy-50/pdf-pages/page-5.png",
+        "sha256": "e2527e9a5433480d574e1269739b7322d51e67594a741ac037a2b20c76e14eac",
+        "bytes": 306822,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1055,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/bledy-50/pdf-pages/page-6.png",
+        "sha256": "8356f0060d449da25c08f110d01d715d68f11aa92d0db74a4c175f83e2f0c0ea",
+        "bytes": 112371,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1060,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.564Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "f549f49ba17ab73d8f8f8006be24e99134419e46e423cc2be79cd8c90b05ebae",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "4757182243d1fd4a001dd30196c86c2387f75fae9fb9145fa434a44363b6da0f",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "71ebea98d4b7df3c82baeb901de3ad44bcd119221237f65b71bf53d66d123961",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bledy-hero.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:blad-1za-ciezko-na-start",
+        "inventory_sha256": "e5f78edd901b272df853d28fd815689d2bbbec35bac28b9a16d2ce0b0d27ac26",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bledy-start-zbyt-ciezko-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:blad-2pomijanie-rozgrzewki",
+        "inventory_sha256": "5fa7cd7951a055ccd8ef205d07321ccb9500ea3139451ac353bea6219a90ca93",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bledy-rozgrzewka-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:blad-3tylko-cardio-bieznia-orbitrek-i-nic-wiecej",
+        "inventory_sha256": "1c2c21dc63649473d61caa6183ca670c42782c7f718197d7f78f38ecafe22609",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bledy-cardio-i-sila-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:blad-4-brak-regeneracji-wiecej-to-lepiej",
+        "inventory_sha256": "b1c614d43d64a03b9d6e40609a2f022edf3d61059487448c1a5eb43431d681cc",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bledy-regeneracja-plan-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:6:blad-5ignorowanie-bolu-stawow-przejdzie",
+        "inventory_sha256": "38116c4a6d3dbc5d915b1eb89175fb7dfa2232a9f0702abd664e3b87d4ed3f04",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bledy-bol-stawu-reakcja-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "2d6312acc870ca6c212afcb749c9472c3312b90117756e8e36fd78242001ad03",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "fab0230018d985237c1bfdd961ec3c0c46f0074dcd71c8cccdfadbe9c12c05c0",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "360981a3f6a95c83bedf554664b00f1d1900b30dfc04410ff973cdfdb055f5f2",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "226f39509fa45901d53dc601e8965c65a74844e16e13c9ec5151ddae16403c6f",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "e2527e9a5433480d574e1269739b7322d51e67594a741ac037a2b20c76e14eac",
+        "note": "Strona PDF 5 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "8356f0060d449da25c08f110d01d715d68f11aa92d0db74a4c175f83e2f0c0ea",
+        "note": "Strona PDF 6 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 7735,
+    "review_wait_ms": 1682221
   },
   "errors": []
 }

@@ -118,6 +118,32 @@ test('article validator rejects a non-paragraph element before the answer-first 
   }
 });
 
+test('answer-first accepts a clear prior antecedent and blocks a vague opening reference', () => {
+  const cases = answerFirstCases();
+  const clear = validators.validateAnswerFirstParagraph(cases.clear_antecedent.paragraph, { heading: cases.clear_antecedent.heading });
+  const clearWithBridge = validators.validateAnswerFirstParagraph(cases.clear_antecedent_with_bridge.paragraph, { heading: cases.clear_antecedent_with_bridge.heading });
+  const vague = validators.validateAnswerFirstParagraph(cases.vague_without_antecedent.paragraph, { heading: cases.vague_without_antecedent.heading });
+  assert.equal(clear.ok, true);
+  assert.equal(clearWithBridge.ok, true);
+  assert.equal(vague.ok, false);
+  assert.match(vague.errors.join('\n'), /skrót logiczny bez lokalnego kontekstu/);
+});
+
+test('article validator does not add a missing-H2 error when eligible headings fail DOM order', () => {
+  const cases = answerFirstCases();
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-answer-first-diagnostic-'));
+  try {
+    const htmlPath = path.join(dir, 'dom.html');
+    fs.writeFileSync(htmlPath, `<!doctype html><html><head><title>Test answer-first | FitPo50</title></head><body class="article-template"><article class="article-content"><h2>${cases.element_before_paragraph.heading}</h2>${cases.element_before_paragraph.html}</article></body></html>`);
+    const { validateFile } = require('../scripts/validate-article-standard');
+    const result = validateFile(htmlPath);
+    assert.match(result.errors.join('\n'), /pierwszy istotny element po H2 to <figure>/);
+    assert.doesNotMatch(result.errors.join('\n'), /Nie znaleziono sekcji H2/);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('pipeline blokuje sztuczne FAQ oznaczone jako wariant', () => {
   const result = validateArticleEvidence(fixture('artificial-faq'), { today: '2026-08-24' });
   assert.equal(result.ok, false);

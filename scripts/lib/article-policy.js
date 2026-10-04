@@ -529,10 +529,17 @@ const validators = {
 
       const firstSentence = (text.split(/(?<=[.!?])\s+/)[0] || text).trim();
       const startsWithVagueReference = POLICY.LOGIC_COHERENCE.VAGUE_REFERENCE_OPENERS.some((rx) => rx.test(firstSentence));
-      const containsVagueReference = POLICY.LOGIC_COHERENCE.VAGUE_REFERENCE_ANYWHERE.test(text);
+      const vagueReferenceMatch = text.match(POLICY.LOGIC_COHERENCE.VAGUE_REFERENCE_ANYWHERE);
+      const containsVagueReference = Boolean(vagueReferenceMatch);
       if (startsWithVagueReference || containsVagueReference) {
         const hasLocalContext = POLICY.LOGIC_COHERENCE.VAGUE_REFERENCE_CONTEXT.some((rx) => rx.test(text));
-        if (!hasLocalContext) {
+        const priorContext = vagueReferenceMatch && Number.isInteger(vagueReferenceMatch.index)
+          ? text.slice(0, vagueReferenceMatch.index).trim()
+          : '';
+        const antecedentBoundary = priorContext.match(/^([\s\S]*[.!?])(?:\s+[\p{L}\p{N}-]+){0,4}$/u);
+        const hasCompleteAntecedent = Boolean(antecedentBoundary)
+          && utils.countWords(antecedentBoundary[1]) >= 8;
+        if (!hasLocalContext && !hasCompleteAntecedent) {
           errors.push(`${label}: skrót logiczny bez lokalnego kontekstu. Akapit zaczyna od ogólnego odniesienia ("${firstSentence.slice(0, 90)}..."), ale nie nazywa w tym samym fragmencie konkretnej obietnicy, mitu, reklamy albo twierdzenia.`);
         }
       }

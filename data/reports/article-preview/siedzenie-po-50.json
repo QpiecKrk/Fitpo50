@@ -1,35 +1,666 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:59:48.695Z",
+  "generated_at": "2026-10-03T14:03:43.615Z",
+  "reviewed_at": "2026-10-03T14:31:11.566Z",
   "slug": "siedzenie-po-50",
-  "html_sha256": "b857e043239d84f7a6cc9ca5237a5eee50a7a5c156983b41aacfd31fb39e91af",
-  "site_html_sha256": "b857e043239d84f7a6cc9ca5237a5eee50a7a5c156983b41aacfd31fb39e91af",
-  "pdf_sha256": "aec3698eae3d2895a099e156f737378e1debe0e3fca37fa7d285f0bb0fa1de18",
-  "site_pdf_sha256": "aec3698eae3d2895a099e156f737378e1debe0e3fca37fa7d285f0bb0fa1de18",
+  "html_sha256": "376ea5897a0c0f12e054b30703ad00edce90accb47fb532e1d60d9d630eb7df6",
+  "site_html_sha256": "376ea5897a0c0f12e054b30703ad00edce90accb47fb532e1d60d9d630eb7df6",
+  "pdf_sha256": "250ef79590cdf7f5fa5dec748b189362a3f6a0c9c7f801ce74dc49e346882965",
+  "site_pdf_sha256": "250ef79590cdf7f5fa5dec748b189362a3f6a0c9c7f801ce74dc49e346882965",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:03:43.615Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 2
   },
+  "artifacts": {
+    "html_source": {
+      "file": "siedzenie-po-50.html",
+      "sha256": "376ea5897a0c0f12e054b30703ad00edce90accb47fb532e1d60d9d630eb7df6",
+      "bytes": 44384
+    },
+    "html_site": {
+      "file": "_site/siedzenie-po-50.html",
+      "sha256": "376ea5897a0c0f12e054b30703ad00edce90accb47fb532e1d60d9d630eb7df6",
+      "bytes": 44384
+    },
+    "pdf_source": {
+      "file": "assets/pdf/siedzenie-po-50.pdf",
+      "sha256": "250ef79590cdf7f5fa5dec748b189362a3f6a0c9c7f801ce74dc49e346882965",
+      "bytes": 822869
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/siedzenie-po-50.pdf",
+      "sha256": "250ef79590cdf7f5fa5dec748b189362a3f6a0c9c7f801ce74dc49e346882965",
+      "bytes": 822869
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/siedzenie-po-50/desktop.png",
+      "screenshot_sha256": "04ae2eaf360c8797b4c4f0d36609a16b78659f5a596f988cbabe38ff4fc48915",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/siedzenie-po-50/mobile.png",
+      "screenshot_sha256": "319c1fec135a9672701f8883d2244d9e9da752d1215c0a1a5f5c180d445233ca",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 8 min czytania Aktualizacja: 03.10.2026 Siedzenie po 50: jak często wstawać i robić krótki ruch 30 MINUT MNIEJ. MIERZALNA ZMIANA.",
+      "alt": "Kobieta po 50-tce wstaje od biurka i zaczyna krótki spacer po domu",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-hero-ruch-20260930.avif",
+          "sha256": "2c747bd2b878dd9b9c7b288c24953d19ede267dfd9304dc21ecd2d9195fd855a",
+          "bytes": 51094,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/siedzenie-hero-ruch-20260930.webp",
+          "sha256": "683828baeb645d09b2c0082a4694d9642499fa9d84b1f0f9196b4e05dbf8c5ca",
+          "bytes": 87674,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/siedzenie-hero-ruch-20260930.jpg",
+          "sha256": "c58149fa2fdb4e7f9a50d6b78eaa3fafcdac9298d3515d2e9a93cf2500323676",
+          "bytes": 156531,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e475ad03f178697261305cc734e9db51bd0eacba377660ead0ff5c2fd0fb7e38"
+    },
+    {
+      "placement": "content:2:problem-ktorego-nie-ma-na-plakacie-w-gabinecie-l",
+      "role": "content",
+      "heading": "Problem, którego nie ma na plakacie w gabinecie lekarskim?",
+      "context": "Problem, którego nie ma na plakacie w gabinecie lekarskim? Jest takie zjawisko, które badacze nazywają „Active Couch Potato”. Po polsku: aktywny kanapowiec. To jest osoba, która ćwiczy regularnie — 3 razy w tygodniu, może 4 — ale poza tymi godzinami treningu siedzi praktycznie bez przerwy. I ta osoba może mieć wyższe ryzyko chorób metabolicznych niż ktoś, kto podobny czas siedzenia regularnie przerywa wstawaniem i ruchem. Długie bloki siedzenia łatwo przeoczyć, szczególnie gdy poza treningiem większość dnia spędzasz bez ruchu. Badanie opublikowane w Nature Reviews Cardiology podkreśla, że siedzenie jako odrębne zachowanie — niezależne od braku ćwiczeń — jest samodzielnym czynnikiem ryzyka sercowo-naczyniowego. Innymi słowy: nawet jeśli chodzisz na siłownię, długie godziny siedzenia między ",
+      "alt": "Mężczyzna po 60-tce długo siedzi na kanapie obok butów spacerowych",
+      "caption": "Długie bloki siedzenia łatwo przeoczyć, szczególnie gdy poza treningiem większość dnia spędzasz bez ruchu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-niewidoczny-problem-20260930.avif",
+          "sha256": "78107d40f744acd2dfdf04114d809132eae3d1cf30f5faeaf9a3bce288d82134",
+          "bytes": 49782,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/siedzenie-niewidoczny-problem-20260930.webp",
+          "sha256": "757bf72f3bcaae42117131f9af0faf5562720dc0c53dd98c342ee6e7c6832e7e",
+          "bytes": 88956,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/siedzenie-niewidoczny-problem-20260930.jpg",
+          "sha256": "72420b3d126d6d9d78dcf0a544fe980f5857262eacd666d6768f838ee260d973",
+          "bytes": 157991,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7bc601ddcf4985bf1a85cc774bc7fd9eda279bccefd70525e02bfe9d63d30307"
+    },
+    {
+      "placement": "content:3:co-konkretnie-robi-siedzenie-z-cialem-po-50-tce",
+      "role": "content",
+      "heading": "Co konkretnie robi siedzenie z ciałem po 50-tce?",
+      "context": "Co konkretnie robi siedzenie z ciałem po 50-tce? Podczas siedzenia mięśnie nóg pracują mniej, przepływ krwi w kończynach zmienia się, a po posiłku glukoza i insulina mogą utrzymywać się wyżej niż wtedy, gdy siedzenie przerywa krótki marsz. Nie oznacza to, że po dokładnie 30 minutach zachodzi jeden gwałtowny przełącznik metaboliczny. Krótka przerwa uruchamia mięśnie nóg i przerywa bezruch, choć sama nie zastępuje regularnej aktywności fizycznej. Długie siedzenie może współwystępować z bólem lub sztywnością, ale nie każdy ból pleców pochodzi od krzesła. Badania krótkich przerw najczęściej oceniają glukozę, insulinę, ciśnienie albo przepływ krwi; wynik laboratoryjny nie jest automatycznie diagnozą konkretnej osoby. Co obserwowano podczas krótkich przerw w siedzeniu? Skurcze mięśni nóg pomagaj",
+      "alt": "Kobieta po 60-tce przerywa pracę przy biurku i porusza nogami",
+      "caption": "Krótka przerwa uruchamia mięśnie nóg i przerywa bezruch, choć sama nie zastępuje regularnej aktywności fizycznej.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-wplyw-na-cialo-20260930.avif",
+          "sha256": "b5dd6212a1ab2108b59c4998fc582a1b377a055e2df8e8107cdbed6327ffc14b",
+          "bytes": 68578,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/siedzenie-wplyw-na-cialo-20260930.webp",
+          "sha256": "76a442ceeae14d42fa4787ba078fc1a7b4e3575142c7b96b529cfe744b154f1b",
+          "bytes": 115224,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/siedzenie-wplyw-na-cialo-20260930.jpg",
+          "sha256": "fe1d21b4c7e101bf91a7f0a73b5517cd5d6f78712940814cdd3c2e6ca05b3d18",
+          "bytes": 189858,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "560f236c282175e4711504d9f1b631f1dab5dec82cb9b436fab923de9fe0babb"
+    },
+    {
+      "placement": "content:4:pol-godziny-mniej-co-naprawde-sie-zmienia-po-rok",
+      "role": "content",
+      "heading": "Pół godziny mniej — co naprawdę się zmienia po roku?",
+      "context": "Pół godziny mniej — co naprawdę się zmienia po roku? Trzydzieści minut mniej siedzenia dziennie to łatwy do policzenia cel, ale nie ma podstaw, by przeliczać go liniowo na określony spadek ryzyka po roku. Badania zastępowania czasu pokazują związki populacyjne, a krótkie eksperymenty mierzą doraźne markery. Oba rodzaje danych wspierają „siedź mniej, ruszaj się więcej”, nie gwarancję wyniku. Ograniczenie siedzenia o niewielką porcję każdego dnia ma sens, gdy zamieniasz ją na chodzenie lub inną lekką aktywność. Odpowiedź zależy od tego, czym zastąpisz siedzenie. Lekki marsz daje inny bodziec niż samo stanie, a korzyść jest zwykle większa u osób najmniej aktywnych. Wynik modelu statystycznego nie jest prognozą dla jednej osoby. Analizy zastępowania czasu sugerują korzystniejszy profil, gdy cz",
+      "alt": "Kobieta po 60-tce zamienia czas siedzenia na codzienny spacer",
+      "caption": "Ograniczenie siedzenia o niewielką porcję każdego dnia ma sens, gdy zamieniasz ją na chodzenie lub inną lekką aktywność.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-pol-godziny-mniej-20260930.avif",
+          "sha256": "64c5fbbb3716e2cff42d2958565220e5eb834e3a115054b839d33d8000618955",
+          "bytes": 42059,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/siedzenie-pol-godziny-mniej-20260930.webp",
+          "sha256": "90addea773b39967939d6f93d5acf6f6e365034df03fa4f1cf0ee2ed26555e4b",
+          "bytes": 78934,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/siedzenie-pol-godziny-mniej-20260930.jpg",
+          "sha256": "ce7497d785eade76e8b46d8fb2ec32a3a0470b5801c1b6c8661e3a16cbe005ee",
+          "bytes": 152966,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f1932d66a282661507c22084ca7f01acb32a7cef1ab9645d26c66dbba9830f9d"
+    },
+    {
+      "placement": "content:5:dlaczego-chodzenie-to-nie-cokolwiek",
+      "role": "content",
+      "heading": "Dlaczego chodzenie to nie „cokolwiek”?",
+      "context": "Dlaczego chodzenie to nie „cokolwiek”? Wstanie i marsz uruchamiają skurcze mięśni nóg, zwiększają ich zapotrzebowanie na energię i wspierają przepływ krwi. Nie ma podstaw do obietnicy, że po 20–30 minutach siedzenia aktywność konkretnego enzymu spada u człowieka o ponad 90% ani że jeden krok natychmiast odwraca cały efekt. Jeśli lubisz zmienne tempo, zobacz też marsz japoński i porównanie z celem 10 000 kroków. 1. Chodzenie aktywuje enzymy, które siedzenie wyłącza Chodzenie angażuje duże grupy mięśni, podnosi wydatek energetyczny i można je łatwo wpleść w zwykły dzień. Ciekawostka Pracujące mięśnie wydzielają różne cząsteczki sygnałowe nazywane miokinami. Nie są „naturalnymi lekami”, nie wszystkie działają wyłącznie korzystnie i nie można powiedzieć, że podczas siedzenia ich produkcja całk",
+      "alt": "Para po 60-tce maszeruje energicznie po parku",
+      "caption": "Chodzenie angażuje duże grupy mięśni, podnosi wydatek energetyczny i można je łatwo wpleść w zwykły dzień.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-chodzenie-20260930.avif",
+          "sha256": "223a11e3f2b149b4a24e4adfdce6d69a8d1253f56313f3d7997a3909ebeaa694",
+          "bytes": 77843,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/siedzenie-chodzenie-20260930.webp",
+          "sha256": "d8eb41b003349f11076bfd00d7783c5a90334bd971f28f2fdbe4968b9b4ed14e",
+          "bytes": 134028,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/siedzenie-chodzenie-20260930.jpg",
+          "sha256": "4777c836af416fe13297302d555002a9d6a72c6edc05fd73e7a8815d9fbfe232",
+          "bytes": 210767,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4650aaeeb93cd4364226f3f983f084278b4b3763673fc9237a9068411b81dbd6"
+    },
+    {
+      "placement": "content:6:jak-to-zrobic",
+      "role": "content",
+      "heading": "Jak to zrobić?",
+      "context": "Jak to zrobić? Wybierz sygnał, który już pojawia się w Twoim dniu: koniec rozmowy, reklama w telewizji, uzupełnienie wody albo wysłanie dokumentu. Wtedy wstań na 2–5 minut. Jeśli szybkie podnoszenie powoduje zawroty głowy, rób to wolniej i wykorzystaj stabilne podparcie. Dłuższy spacer możesz rozwijać osobno, na przykład według zasad bezpiecznego nordic walking po 50-tce. Najprostszy plan łączy częste wstawanie z konkretnym powodem: wodą, schodami, rozmową na stojąco lub krótkim spacerem. Nie musisz nic specjalnego planować. Potrzebujesz tylko jednej zmiany w myśleniu: każde 30–40 minut siedzenia = automatyczny sygnał do wstania na 2–5 minut. Budzik lub alarm w telefonie co 35 minut — kiedy dzwoni, wstajesz. Tylko tyle. Szklanka wody na biurku — musi się skończyć przed następną szklanką (p",
+      "alt": "Kobieta po 60-tce robi przerwę od biurka i idzie po wodę",
+      "caption": "Najprostszy plan łączy częste wstawanie z konkretnym powodem: wodą, schodami, rozmową na stojąco lub krótkim spacerem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-jak-przerywac-20260930.avif",
+          "sha256": "62d7337a0ad356aea26d143c1d2c63ecee447ee881503adc090989235a6c7265",
+          "bytes": 48659,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/siedzenie-jak-przerywac-20260930.webp",
+          "sha256": "d34164aba685356128a93ea37263677421377c32f94a12854498e5801d6c7c1a",
+          "bytes": 86926,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/siedzenie-jak-przerywac-20260930.jpg",
+          "sha256": "b7c3278a7ae456cdfa2da9ba6da8313a52643b18d9af84462fa8a597710ac026",
+          "bytes": 160351,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f7927221b2cec3b695c15732e91044d803292a64ffa4879491b15e6f5540b1b8"
+    },
+    {
+      "placement": "content:7:obalamy-mity",
+      "role": "content",
+      "heading": "Obalamy mity?",
+      "context": "Obalamy mity? Mity mieszają dwa różne cele: spełnienie zaleceń treningowych i ograniczenie czasu bez ruchu. Można ćwiczyć regularnie, a nadal siedzieć długo; można też często wstawać, ale nie wykonywać treningu wzmacniającego. Najlepsza strategia łączy oba zachowania, bez oczekiwania, że jedno całkowicie „wyzeruje” drugie. Pojedynczy trening jest ważny, ale nie usuwa skutków wielu kolejnych godzin bezruchu w pozostałej części dnia. Mity i fakty o siedzeniu, krokach oraz przerwach ruchowych po 50-tce. MIT FAKT Jeśli chodzisz na siłownię — siedzenie nie ma znaczenia. Błąd. Siedzenie jest niezależnym czynnikiem ryzyka. Możesz mieć metaboliczne skutki siedzenia mimo ćwiczeń. 10 000 kroków to naukowa norma. 10 000 nie jest medycznym minimum. Badania pokazują korzyści już przy wzroście z niższeg",
+      "alt": "Mężczyzna po treningu wychodzi na spacer zamiast wracać na kanapę",
+      "caption": "Pojedynczy trening jest ważny, ale nie usuwa skutków wielu kolejnych godzin bezruchu w pozostałej części dnia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-mity-aktywny-kanapowiec-20260930.avif",
+          "sha256": "b7f84d88516b0e592e612d357a1c8fe32a8c17bbffecf4944a643b76264e3f3b",
+          "bytes": 69202,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/siedzenie-mity-aktywny-kanapowiec-20260930.webp",
+          "sha256": "7918b16783930c2ea5d232dba6bd47a70396f0b1fdc79a7d6134b75585d33fd4",
+          "bytes": 116364,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/siedzenie-mity-aktywny-kanapowiec-20260930.jpg",
+          "sha256": "ee5bcee2f1490f0f3f2919f2090b6dc436aa5a56552e9746e27ff26cdd628fd9",
+          "bytes": 192520,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "023c2e12d9e1de32a57b7e9635f23d03a2223d6936486040ffe976c95bd71346"
+    },
+    {
+      "placement": "content:8:na-koniec",
+      "role": "content",
+      "heading": "Na koniec?",
+      "context": "Na koniec? Nie potrzebujesz magicznej liczby kroków ani perfekcyjnego alarmu. Zacznij od jednej pory dnia, w której zwykle siedzisz bez przerwy, i dodaj krótkie przejście po mieszkaniu. Po tygodniu sprawdź wykonalność, a nie wynik laboratoryjny. Potem obejmij przerwami kolejne bloki dnia. Mniej siedzenia nie wymaga rewolucji: liczą się powtarzane decyzje, by przejść kawałek, wstać i wykonać codzienne zadanie w ruchu. Nie 10 000 kroków. Nie godzina ćwiczeń. Nie 30 minut cardio. 30 minut mniej siedzenia dziennie. To jest liczba, którą każdy może osiągnąć bez żadnej dodatkowej infrastruktury. Przez rok: 182 godziny ruchu zamiast siedzenia. Tyle samo co kilkadziesiąt sesji siłowni. Ruch nie zaczyna się wyłącznie na siłowni. Krótkie przerwy w siedzeniu uzupełniają zaplanowany trening.",
+      "alt": "Para po 60-tce wybiera schody i pieszy powrót z zakupów",
+      "caption": "Mniej siedzenia nie wymaga rewolucji: liczą się powtarzane decyzje, by przejść kawałek, wstać i wykonać codzienne zadanie w ruchu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/siedzenie-male-decyzje-20260930.avif",
+          "sha256": "3c39d1f810774ffb9fe05b31feed5f525eabe6450a0af10d8173844cb414851f",
+          "bytes": 89207,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/siedzenie-male-decyzje-20260930.webp",
+          "sha256": "71ff71c17406cf5349eff87fd0b3927afa1dfd4f54cb77bbb9ceacbb580ca8a4",
+          "bytes": 146944,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/siedzenie-male-decyzje-20260930.jpg",
+          "sha256": "a65cbfb9e2f9763259748e17b9adf6732059354ec0e4b605e27c84e92fae1d64",
+          "bytes": 225033,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "89020836508ba911dd634eb9a2aaea4d70aa5397bb03a1324a3aa9659ad01db2"
+    }
+  ],
   "pdf": {
     "pages": 9,
     "text_coverage": 1,
-    "rendered_pages": 9
+    "rendered_pages": 9,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/siedzenie-po-50/pdf-pages/page-1.png",
+        "sha256": "c8d4f21ceff722c0869455911f3b585eddebd63859ffc957cc4689db16ef7d34",
+        "bytes": 668836,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1064,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/siedzenie-po-50/pdf-pages/page-2.png",
+        "sha256": "aa158b85950d7c855e7033b7659ecf944b63333ea3838794e69c82fc5d2e3a53",
+        "bytes": 1025344,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1061,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/siedzenie-po-50/pdf-pages/page-3.png",
+        "sha256": "18124ff4808fe472b3234ec564309748f46e31bd009e88e459651215492f8ce2",
+        "bytes": 750767,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1063,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/siedzenie-po-50/pdf-pages/page-4.png",
+        "sha256": "d7ce0019718a11619d43489a4c0e32136ee1c3e5fe56a45d51ef7d0adb647c2e",
+        "bytes": 785483,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1065,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/siedzenie-po-50/pdf-pages/page-5.png",
+        "sha256": "910e3d38edc9dce1a6bfd181ff2023e3c9babcea54f4a7f9fc2e9866c0e89a9c",
+        "bytes": 353949,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/siedzenie-po-50/pdf-pages/page-6.png",
+        "sha256": "f79e3d7008a578bdc83f6bc48a3a627132913578c2865e6fcf8620c04672b5e5",
+        "bytes": 1017845,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1024,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/siedzenie-po-50/pdf-pages/page-7.png",
+        "sha256": "562e594708b29319e39a8496b711dae4d827efe0d29415dae9ce11c49fc0a885",
+        "bytes": 653806,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/siedzenie-po-50/pdf-pages/page-8.png",
+        "sha256": "04a1de2441a9fb5245f187dbc87e1b1477a8baedc58969d38274e5c492edfaf2",
+        "bytes": 283390,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 52,
+          "width": 1064,
+          "height": 1598
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 9,
+        "file": ".tmp/article-preview/siedzenie-po-50/pdf-pages/page-9.png",
+        "sha256": "34cf05795a8d424175dcb75f046d9d8fb493a34bc7bc172fc3f1c56231ec88cd",
+        "bytes": 53072,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1050,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.566Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "04ae2eaf360c8797b4c4f0d36609a16b78659f5a596f988cbabe38ff4fc48915",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "319c1fec135a9672701f8883d2244d9e9da752d1215c0a1a5f5c180d445233ca",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "e475ad03f178697261305cc734e9db51bd0eacba377660ead0ff5c2fd0fb7e38",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz siedzenie-hero-ruch-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:problem-ktorego-nie-ma-na-plakacie-w-gabinecie-l",
+        "inventory_sha256": "7bc601ddcf4985bf1a85cc774bc7fd9eda279bccefd70525e02bfe9d63d30307",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz siedzenie-niewidoczny-problem-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:co-konkretnie-robi-siedzenie-z-cialem-po-50-tce",
+        "inventory_sha256": "560f236c282175e4711504d9f1b631f1dab5dec82cb9b436fab923de9fe0babb",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz siedzenie-wplyw-na-cialo-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:pol-godziny-mniej-co-naprawde-sie-zmienia-po-rok",
+        "inventory_sha256": "f1932d66a282661507c22084ca7f01acb32a7cef1ab9645d26c66dbba9830f9d",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz siedzenie-pol-godziny-mniej-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:dlaczego-chodzenie-to-nie-cokolwiek",
+        "inventory_sha256": "4650aaeeb93cd4364226f3f983f084278b4b3763673fc9237a9068411b81dbd6",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz siedzenie-chodzenie-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:6:jak-to-zrobic",
+        "inventory_sha256": "f7927221b2cec3b695c15732e91044d803292a64ffa4879491b15e6f5540b1b8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz siedzenie-jak-przerywac-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:7:obalamy-mity",
+        "inventory_sha256": "023c2e12d9e1de32a57b7e9635f23d03a2223d6936486040ffe976c95bd71346",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz siedzenie-mity-aktywny-kanapowiec-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:8:na-koniec",
+        "inventory_sha256": "89020836508ba911dd634eb9a2aaea4d70aa5397bb03a1324a3aa9659ad01db2",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz siedzenie-male-decyzje-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "c8d4f21ceff722c0869455911f3b585eddebd63859ffc957cc4689db16ef7d34",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "aa158b85950d7c855e7033b7659ecf944b63333ea3838794e69c82fc5d2e3a53",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "18124ff4808fe472b3234ec564309748f46e31bd009e88e459651215492f8ce2",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "d7ce0019718a11619d43489a4c0e32136ee1c3e5fe56a45d51ef7d0adb647c2e",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "910e3d38edc9dce1a6bfd181ff2023e3c9babcea54f4a7f9fc2e9866c0e89a9c",
+        "note": "Strona PDF 5 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "f79e3d7008a578bdc83f6bc48a3a627132913578c2865e6fcf8620c04672b5e5",
+        "note": "Strona PDF 6 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "562e594708b29319e39a8496b711dae4d827efe0d29415dae9ce11c49fc0a885",
+        "note": "Strona PDF 7 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "04a1de2441a9fb5245f187dbc87e1b1477a8baedc58969d38274e5c492edfaf2",
+        "note": "Strona PDF 8 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 9,
+        "status": "VERIFIED",
+        "artifact_sha256": "34cf05795a8d424175dcb75f046d9d8fb493a34bc7bc172fc3f1c56231ec88cd",
+        "note": "Strona PDF 9 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 10820,
+    "review_wait_ms": 1647951
   },
   "errors": []
 }

@@ -1,35 +1,418 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:53:13.506Z",
+  "generated_at": "2026-10-03T14:03:01.378Z",
+  "reviewed_at": "2026-10-03T14:31:11.564Z",
   "slug": "bieganie-niszczy-kolana",
-  "html_sha256": "a76c586180d74a9f83cafeeccdc50b50a66040f42383fd99e4365eaa00b41a5d",
-  "site_html_sha256": "a76c586180d74a9f83cafeeccdc50b50a66040f42383fd99e4365eaa00b41a5d",
-  "pdf_sha256": "e093257c6da821b2ec4d8d8078a1add0d217ee6956db2ac232a824c268b10e31",
-  "site_pdf_sha256": "e093257c6da821b2ec4d8d8078a1add0d217ee6956db2ac232a824c268b10e31",
+  "html_sha256": "4bb86ffbe7f6dfca87290f031b65229ab9030d81649a9bec4e799bb8118c74c9",
+  "site_html_sha256": "4bb86ffbe7f6dfca87290f031b65229ab9030d81649a9bec4e799bb8118c74c9",
+  "pdf_sha256": "a26c7f00eebe9db6b5974122371009bae1f5086470e92985fa948f789e32bf5e",
+  "site_pdf_sha256": "a26c7f00eebe9db6b5974122371009bae1f5086470e92985fa948f789e32bf5e",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:03:01.378Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "bieganie-niszczy-kolana.html",
+      "sha256": "4bb86ffbe7f6dfca87290f031b65229ab9030d81649a9bec4e799bb8118c74c9",
+      "bytes": 28816
+    },
+    "html_site": {
+      "file": "_site/bieganie-niszczy-kolana.html",
+      "sha256": "4bb86ffbe7f6dfca87290f031b65229ab9030d81649a9bec4e799bb8118c74c9",
+      "bytes": 28816
+    },
+    "pdf_source": {
+      "file": "assets/pdf/bieganie-niszczy-kolana.pdf",
+      "sha256": "a26c7f00eebe9db6b5974122371009bae1f5086470e92985fa948f789e32bf5e",
+      "bytes": 524481
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/bieganie-niszczy-kolana.pdf",
+      "sha256": "a26c7f00eebe9db6b5974122371009bae1f5086470e92985fa948f789e32bf5e",
+      "bytes": 524481
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/bieganie-niszczy-kolana/desktop.png",
+      "screenshot_sha256": "1883613c18ecdc7b1b514c12ff744d11d375aa6b5edd00036e80ef996ab38400",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/bieganie-niszczy-kolana/mobile.png",
+      "screenshot_sha256": "553b5a762681dadcd35262b95aacc21a81cffc1f913667a8c41a1113f4b077b8",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 12 min czytania Czy bieganie po 50-tce niszczy kolana? Co mówią badania? BIEGANIE TO RUCH. BEZRUCH TO RYZYKO.",
+      "alt": "Zadowolona osoba po 50-tce po biegu w nowoczesnym mieście",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/kolana-hero.avif",
+          "sha256": "f3df8a280f0b437067a1fc5b2c0f35d65a7dd427994ec86fea719d642e0e3748",
+          "bytes": 101287,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/kolana-hero.webp",
+          "sha256": "21b2f144d77cdfbf43013a26de460cf7b4558b1b9904ec12d55af1677d16a3f5",
+          "bytes": 208756,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/kolana-hero.jpg",
+          "sha256": "00d9cd5db9aa64790b142ec2df66302da6d6e93ef88300adeeb0c319bf79a9c7",
+          "bytes": 450882,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "fedb39d0073ae63fe369db32dc133dc6d6a5ec58de3582db1e1661a6df3b4045"
+    },
+    {
+      "placement": "content:2:co-badania-mowia-o-bieganiu-i-chorobie-zwyrodnie",
+      "role": "content",
+      "heading": "Co badania mówią o bieganiu i chorobie zwyrodnieniowej kolan?",
+      "context": "Szybka odpowiedź Dostępne przeglądy nie pokazują, aby rekreacyjne bieganie samo w sobie częściej powodowało chorobę zwyrodnieniową kolan. Metaanaliza 125 810 osób wykazała niższą częstość choroby u biegaczy rekreacyjnych niż u zawodowych i osób niebiegających, ale nie dowodzi przyczynowości. Ryzyko zmieniają wcześniejsze urazy, duża objętość, masa ciała, objawy i zbyt szybka progresja. Kluczowe wnioski Rekreacyjne bieganie i bieganie wyczynowe nie są tą samą ekspozycją dla stawu. Niższa częstość choroby u amatorów jest obserwacją; może częściowo wynikać z różnic zdrowia i dawnych urazów. Ból podczas biegu nie oznacza automatycznie „zużycia chrząstki”, ale wymaga oceny wzorca i reakcji po wysiłku. Powrót powinien zwiększać jeden parametr naraz: czas, częstotliwość albo tempo. Co badania mów",
+      "alt": "Rekreacyjny biegacz po 60-tce z wizualizacją prawidłowej anatomii stawu kolanowego",
+      "caption": "Dane o bieganiu rekreacyjnym trzeba odróżnić od urazu, sportu wyczynowego i biegu mimo narastających objawów.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bieganie-kolano-badania-20260930.avif",
+          "sha256": "6567c9fa3e019827918887087341cfdf85847e0a30c5e02c5151ca488e4075de",
+          "bytes": 100691,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bieganie-kolano-badania-20260930.webp",
+          "sha256": "ee5469516a8ed2e4ecf7d9383ac1c7c20c30f3828665c51723b6edde414dd2dc",
+          "bytes": 124078,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bieganie-kolano-badania-20260930.jpg",
+          "sha256": "e0cf563d74249d2ad43fe0c6151ab6f31bc8ec44b7d6f6791eb231fd8a0fce3d",
+          "bytes": 292036,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "d3698b455ca70da4c2bcbcff01e839be43b24b436c9a779cbb523daaac815ace"
+    },
+    {
+      "placement": "content:3:dlaczego-kolano-moze-bolec-mimo-braku-uszkodzeni",
+      "role": "content",
+      "heading": "Dlaczego kolano może boleć mimo braku uszkodzenia?",
+      "context": "Szybka odpowiedź Dostępne przeglądy nie pokazują, aby rekreacyjne bieganie samo w sobie częściej powodowało chorobę zwyrodnieniową kolan. Metaanaliza 125 810 osób wykazała niższą częstość choroby u biegaczy rekreacyjnych niż u zawodowych i osób niebiegających, ale nie dowodzi przyczynowości. Ryzyko zmieniają wcześniejsze urazy, duża objętość, masa ciała, objawy i zbyt szybka progresja. Kluczowe wnioski Rekreacyjne bieganie i bieganie wyczynowe nie są tą samą ekspozycją dla stawu. Niższa częstość choroby u amatorów jest obserwacją; może częściowo wynikać z różnic zdrowia i dawnych urazów. Ból podczas biegu nie oznacza automatycznie „zużycia chrząstki”, ale wymaga oceny wzorca i reakcji po wysiłku. Powrót powinien zwiększać jeden parametr naraz: czas, częstotliwość albo tempo. Co badania mów",
+      "alt": "Biegaczka po 50-tce omawia ból kolana z fizjoterapeutą po treningu",
+      "caption": "Ból może wiązać się z nagłą zmianą obciążenia i wrażliwością tkanek, dlatego sam objaw nie opisuje rozmiaru uszkodzenia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bieganie-bol-bez-uszkodzenia-20260930.avif",
+          "sha256": "6c814e0d1510eb835636f85158d969cefe9afd14889ddff4606164456d80f6b3",
+          "bytes": 94501,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bieganie-bol-bez-uszkodzenia-20260930.webp",
+          "sha256": "7fba6307d212b333adfb365ebc16c0067348c2d46c38ad7895e2ef47da265c05",
+          "bytes": 106956,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bieganie-bol-bez-uszkodzenia-20260930.jpg",
+          "sha256": "357a1f2a664166ef78ad7bcbd3cc7bd620274aa2d7de41763101fc5b3160bfc5",
+          "bytes": 261146,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7878c8e770b16c82ca0b210fa32c4c9ea8b23ca42d3891483f264e54e3248003"
+    },
+    {
+      "placement": "content:4:jak-wrocic-do-biegania-po-50-tce",
+      "role": "content",
+      "heading": "Jak wrócić do biegania po 50-tce?",
+      "context": "Szybka odpowiedź Dostępne przeglądy nie pokazują, aby rekreacyjne bieganie samo w sobie częściej powodowało chorobę zwyrodnieniową kolan. Metaanaliza 125 810 osób wykazała niższą częstość choroby u biegaczy rekreacyjnych niż u zawodowych i osób niebiegających, ale nie dowodzi przyczynowości. Ryzyko zmieniają wcześniejsze urazy, duża objętość, masa ciała, objawy i zbyt szybka progresja. Kluczowe wnioski Rekreacyjne bieganie i bieganie wyczynowe nie są tą samą ekspozycją dla stawu. Niższa częstość choroby u amatorów jest obserwacją; może częściowo wynikać z różnic zdrowia i dawnych urazów. Ból podczas biegu nie oznacza automatycznie „zużycia chrząstki”, ale wymaga oceny wzorca i reakcji po wysiłku. Powrót powinien zwiększać jeden parametr naraz: czas, częstotliwość albo tempo. Co badania mów",
+      "alt": "Kobieta po 50-tce wraca do biegania spokojną metodą marsz-bieg z trenerem",
+      "caption": "Marsz przeplatany krótkim biegiem pozwala stopniowo sprawdzić reakcję kolana i odbudować tolerancję wysiłku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bieganie-powrot-marsz-bieg-20260930.avif",
+          "sha256": "2217924fb3dee210944408492c60c11317b56bcbdbe9e9e6c8ccf4ce92605c98",
+          "bytes": 137278,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bieganie-powrot-marsz-bieg-20260930.webp",
+          "sha256": "7a52aa7c5a5df5c0aa81745caac80e216982f082ce01361efb08dcf55e69487d",
+          "bytes": 160272,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bieganie-powrot-marsz-bieg-20260930.jpg",
+          "sha256": "ba5375b68685cefd86d17a0806c943cc3309294b906aba87404c6d74a76afb44",
+          "bytes": 334073,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "2772eb7c5472d984a7f3efca661c23272a77bc66e93dc37ed411576bf54c9c67"
+    },
+    {
+      "placement": "content:5:kiedy-bol-kolana-wymaga-badania-zamiast-kolejneg",
+      "role": "content",
+      "heading": "Kiedy ból kolana wymaga badania zamiast kolejnego treningu?",
+      "context": "Szybka odpowiedź Dostępne przeglądy nie pokazują, aby rekreacyjne bieganie samo w sobie częściej powodowało chorobę zwyrodnieniową kolan. Metaanaliza 125 810 osób wykazała niższą częstość choroby u biegaczy rekreacyjnych niż u zawodowych i osób niebiegających, ale nie dowodzi przyczynowości. Ryzyko zmieniają wcześniejsze urazy, duża objętość, masa ciała, objawy i zbyt szybka progresja. Kluczowe wnioski Rekreacyjne bieganie i bieganie wyczynowe nie są tą samą ekspozycją dla stawu. Niższa częstość choroby u amatorów jest obserwacją; może częściowo wynikać z różnic zdrowia i dawnych urazów. Ból podczas biegu nie oznacza automatycznie „zużycia chrząstki”, ale wymaga oceny wzorca i reakcji po wysiłku. Powrót powinien zwiększać jeden parametr naraz: czas, częstotliwość albo tempo. Co badania mów",
+      "alt": "Fizjoterapeutka bada kolano biegacza po 60-tce przed powrotem do treningu",
+      "caption": "Obrzęk, blokowanie, utrata stabilności lub narastający ból uzasadniają badanie przed kolejną próbą biegu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bieganie-kolano-kiedy-badanie-20260930.avif",
+          "sha256": "e6bfc53329328cf6ce05a7fc00739031e6a5c24ca7f53f1d6afd89cc8c3a28f2",
+          "bytes": 72528,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bieganie-kolano-kiedy-badanie-20260930.webp",
+          "sha256": "d26c0381361900b5d2df42e1e91b6120c61462855b64a9a42899e21f5b22d99c",
+          "bytes": 83730,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bieganie-kolano-kiedy-badanie-20260930.jpg",
+          "sha256": "d1fbf550b11e252346670acecf2fe228710610995b6a38ccb879b41f3b12176e",
+          "bytes": 221470,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e6f98984e78e8260c324e6707dbb1c1316d0186db8c3f6eb19bd04c8be95efe5"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/bieganie-niszczy-kolana/pdf-pages/page-1.png",
+        "sha256": "50919140fa0d0b70cbd2dbf7c413f2cc906f6892b34bbe102009ebfe33d5d3ac",
+        "bytes": 771656,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1051,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/bieganie-niszczy-kolana/pdf-pages/page-2.png",
+        "sha256": "626ea82b498816d9f3360c2226cf3aaa4ab55a2e62a773b9f71818abbb348823",
+        "bytes": 1028781,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1049,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/bieganie-niszczy-kolana/pdf-pages/page-3.png",
+        "sha256": "931dffbf8440fbc474d812386c6f5a81aeb02af762fa5fec22438bf9c8c6c20f",
+        "bytes": 996065,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/bieganie-niszczy-kolana/pdf-pages/page-4.png",
+        "sha256": "c2f8471deeb0eb2bc09fd84db71c4cb8b7db89c16da87c6a9ee6b7a8f2ec80af",
+        "bytes": 184534,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1034,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.564Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "1883613c18ecdc7b1b514c12ff744d11d375aa6b5edd00036e80ef996ab38400",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "553b5a762681dadcd35262b95aacc21a81cffc1f913667a8c41a1113f4b077b8",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "fedb39d0073ae63fe369db32dc133dc6d6a5ec58de3582db1e1661a6df3b4045",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz kolana-hero.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:co-badania-mowia-o-bieganiu-i-chorobie-zwyrodnie",
+        "inventory_sha256": "d3698b455ca70da4c2bcbcff01e839be43b24b436c9a779cbb523daaac815ace",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bieganie-kolano-badania-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:dlaczego-kolano-moze-bolec-mimo-braku-uszkodzeni",
+        "inventory_sha256": "7878c8e770b16c82ca0b210fa32c4c9ea8b23ca42d3891483f264e54e3248003",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bieganie-bol-bez-uszkodzenia-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:jak-wrocic-do-biegania-po-50-tce",
+        "inventory_sha256": "2772eb7c5472d984a7f3efca661c23272a77bc66e93dc37ed411576bf54c9c67",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bieganie-powrot-marsz-bieg-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:kiedy-bol-kolana-wymaga-badania-zamiast-kolejneg",
+        "inventory_sha256": "e6f98984e78e8260c324e6707dbb1c1316d0186db8c3f6eb19bd04c8be95efe5",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz bieganie-kolano-kiedy-badanie-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.564Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "50919140fa0d0b70cbd2dbf7c413f2cc906f6892b34bbe102009ebfe33d5d3ac",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "626ea82b498816d9f3360c2226cf3aaa4ab55a2e62a773b9f71818abbb348823",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "931dffbf8440fbc474d812386c6f5a81aeb02af762fa5fec22438bf9c8c6c20f",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "c2f8471deeb0eb2bc09fd84db71c4cb8b7db89c16da87c6a9ee6b7a8f2ec80af",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 6164,
+    "review_wait_ms": 1690186
   },
   "errors": []
 }

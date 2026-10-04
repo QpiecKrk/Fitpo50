@@ -1,35 +1,565 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T13:00:45.132Z",
+  "generated_at": "2026-10-03T14:26:43.842Z",
+  "reviewed_at": "2026-10-03T14:31:11.567Z",
   "slug": "szczepienie-hpv-ochrona-kobiet-mezczyzn",
-  "html_sha256": "901b8f048c83d0a8120a9faf4891e6b7c4018c2f7b603db7e95342fd232077bf",
-  "site_html_sha256": "901b8f048c83d0a8120a9faf4891e6b7c4018c2f7b603db7e95342fd232077bf",
-  "pdf_sha256": "514da3c1049a3fc3b02e07b616c1ec41bf7fd50f1b15bae9db79e67bca1200e2",
-  "site_pdf_sha256": "514da3c1049a3fc3b02e07b616c1ec41bf7fd50f1b15bae9db79e67bca1200e2",
+  "html_sha256": "31ade9331d265f723494201bdc656f2f64b3528cfa071cfe9e21558ee8638796",
+  "site_html_sha256": "31ade9331d265f723494201bdc656f2f64b3528cfa071cfe9e21558ee8638796",
+  "pdf_sha256": "cd1e054bd59747792d10528b55fe58c78e64f19f290552362e05d0e88f8156b6",
+  "site_pdf_sha256": "cd1e054bd59747792d10528b55fe58c78e64f19f290552362e05d0e88f8156b6",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:26:43.842Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
+      "sha256": "31ade9331d265f723494201bdc656f2f64b3528cfa071cfe9e21558ee8638796",
+      "bytes": 42586
+    },
+    "html_site": {
+      "file": "_site/szczepienie-hpv-ochrona-kobiet-mezczyzn.html",
+      "sha256": "31ade9331d265f723494201bdc656f2f64b3528cfa071cfe9e21558ee8638796",
+      "bytes": 42586
+    },
+    "pdf_source": {
+      "file": "assets/pdf/szczepienie-hpv-ochrona-kobiet-mezczyzn.pdf",
+      "sha256": "cd1e054bd59747792d10528b55fe58c78e64f19f290552362e05d0e88f8156b6",
+      "bytes": 662692
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/szczepienie-hpv-ochrona-kobiet-mezczyzn.pdf",
+      "sha256": "cd1e054bd59747792d10528b55fe58c78e64f19f290552362e05d0e88f8156b6",
+      "bytes": 662692
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/desktop.png",
+      "screenshot_sha256": "1724d4cb53fbd1853bd326f826f8b9b8637166f5a40918621d9dc0119ac0f86c",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/mobile.png",
+      "screenshot_sha256": "593b3413f9ff23b547d6ac2daaa869878867710099be036b5b374ec4c4a9d8e1",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 9 min czytania Aktualizacja: 03.10.2026 Szczepienie HPV po 50-tce: skuteczność, wiek i decyzja? Szczepienie HPV to nie tylko temat kobiet. Dane pokazują realną ochronę także u mężczyzn. Największa korzyść: zanim wirus zdąży zakażać.",
+      "alt": "Artystyczna wizualizacja wirusa HPV pod mikroskopem elektronowym — sferyczne cząsteczki wirusowe w intensywnych kolorach na czarnym tle",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-hero.avif",
+          "sha256": "1da4fc8c61f7b49aac4db8b793d0fc686589cce93c6d4c9117fd58b235dbab86",
+          "bytes": 89970,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-hero.webp",
+          "sha256": "02203f5de97ad21066d8284b56d5aa2556ebb908c7e24a6d27fb497e39fc4a61",
+          "bytes": 146592,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-hero.jpg",
+          "sha256": "85c95adc21b4fa2bbe187e91dcaa0e7dffe11ed18fc6ae01175a392aff7c762e",
+          "bytes": 246216,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f4f9b6688cf66f56cd4191b7d0f252876759f2de56b0dfe04e20f60b7ec43352"
+    },
+    {
+      "placement": "content:2:czym-jest-hpv-i-dlaczego-to-nie-jest-temat-jedne",
+      "role": "content",
+      "heading": "Czym jest HPV i dlaczego to nie jest temat jednej płci?",
+      "context": "HPV dotyczy obu płci i może prowadzić do kilku typów nowotworów. Analiza obserwacyjna zaprezentowana na ASCO w 2024 roku wykazała mniej rozpoznań nowotworów HPV-zależnych u zaszczepionych mężczyzn i kobiet. Taki projekt pokazuje związek, ale nie dowodzi samodzielnie przyczynowości i może być obciążony różnicami między grupami. Szybka odpowiedź Szczepienie przeciw HPV zapobiega nowym zakażeniom typami objętymi preparatem i zmniejsza ryzyko zmian przedrakowych oraz części nowotworów u obu płci. Największą korzyść daje przed ekspozycją. U dorosłych 27–45 lat decyzja bywa indywidualna; powyżej 45 lat brakuje rutynowej rekomendacji i nie należy obiecywać korzyści osobom po 50-tce na podstawie danych z młodszych grup. Kluczowe wnioski HPV może prowadzić do nowotworów szyjki macicy, odbytu, prąci",
+      "alt": "Renderowanie 3D cząsteczek wirusa HPV — sferyczne struktury białkowe unoszące się na ciemnym tle, wizualizacja naukowa",
+      "caption": "HPV obejmuje wiele typów wirusa i może powodować choroby zarówno u kobiet, jak i u mężczyzn.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-s1-v2.avif",
+          "sha256": "b160c55fd59b709f23e80887ac61402cb167db60fb2a535d6dadabed4c5c00b8",
+          "bytes": 144767,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-s1-v2.webp",
+          "sha256": "26c0f8455d1971e62517949124fcc227d95c0feb0e2bf61e1e1392834d0209b8",
+          "bytes": 185640,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-s1-v2.jpg",
+          "sha256": "7ab3e84bb360323f24e73388dcd1982c3ac620b462916c55ad0692f54f693838",
+          "bytes": 374174,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f4146a60147da5921f454a7cd1bbbbe4369bbc5f7d7a87a43762ba807e6722b4"
+    },
+    {
+      "placement": "content:3:asco-2024-3-4-mln-pacjentow-i-konkretne-liczby",
+      "role": "content",
+      "heading": "ASCO 2024: 3,4 mln pacjentów i konkretne liczby?",
+      "context": "HPV dotyczy obu płci i może prowadzić do kilku typów nowotworów. Analiza obserwacyjna zaprezentowana na ASCO w 2024 roku wykazała mniej rozpoznań nowotworów HPV-zależnych u zaszczepionych mężczyzn i kobiet. Taki projekt pokazuje związek, ale nie dowodzi samodzielnie przyczynowości i może być obciążony różnicami między grupami. Szybka odpowiedź Szczepienie przeciw HPV zapobiega nowym zakażeniom typami objętymi preparatem i zmniejsza ryzyko zmian przedrakowych oraz części nowotworów u obu płci. Największą korzyść daje przed ekspozycją. U dorosłych 27–45 lat decyzja bywa indywidualna; powyżej 45 lat brakuje rutynowej rekomendacji i nie należy obiecywać korzyści osobom po 50-tce na podstawie danych z młodszych grup. Kluczowe wnioski HPV może prowadzić do nowotworów szyjki macicy, odbytu, prąci",
+      "alt": "Mężczyźni w różnym wieku rozmawiają z lekarką o profilaktyce HPV",
+      "caption": "Dane obserwacyjne wspierają profilaktykę HPV u obu płci, ale nie wyznaczają gwarantowanego efektu dla konkretnej osoby.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-rozmowa-o-profilaktyce-20261003-v3.avif",
+          "sha256": "b58b7b37cc9f1d6b327522ba46072c6c6ecbf1ed41e82223cf2bfef0fce97f0f",
+          "bytes": 51502,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/hpv-rozmowa-o-profilaktyce-20261003-v3.webp",
+          "sha256": "5687687f127dc58c931df725a906bcaaa9bcf5fd5dfe64b53c9a35cdb7c4b33b",
+          "bytes": 67586,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/hpv-rozmowa-o-profilaktyce-20261003-v3.jpg",
+          "sha256": "5c8fd7f9cd9309ad43d919908099289b5549cb36514c887c8659890d634b0771",
+          "bytes": 127466,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "c9077479f2217d3a51fd29c2a609480bd7cca42eb2f6b90949376c81b4b506de"
+    },
+    {
+      "placement": "content:4:co-pokazuja-dane-populacyjne-z-wielu-krajow",
+      "role": "content",
+      "heading": "Co pokazują dane populacyjne z wielu krajów?",
+      "context": "HPV dotyczy obu płci i może prowadzić do kilku typów nowotworów. Analiza obserwacyjna zaprezentowana na ASCO w 2024 roku wykazała mniej rozpoznań nowotworów HPV-zależnych u zaszczepionych mężczyzn i kobiet. Taki projekt pokazuje związek, ale nie dowodzi samodzielnie przyczynowości i może być obciążony różnicami między grupami. Szybka odpowiedź Szczepienie przeciw HPV zapobiega nowym zakażeniom typami objętymi preparatem i zmniejsza ryzyko zmian przedrakowych oraz części nowotworów u obu płci. Największą korzyść daje przed ekspozycją. U dorosłych 27–45 lat decyzja bywa indywidualna; powyżej 45 lat brakuje rutynowej rekomendacji i nie należy obiecywać korzyści osobom po 50-tce na podstawie danych z młodszych grup. Kluczowe wnioski HPV może prowadzić do nowotworów szyjki macicy, odbytu, prąci",
+      "alt": "Osoby w różnym wieku korzystają z dostępu do profilaktyki w przychodni",
+      "caption": "Efekt populacyjny zależy od szerokiego dostępu, wieku szczepienia, liczby dawek i czasu obserwacji programu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-program-populacyjny-20261003-v3.avif",
+          "sha256": "1eca63640907bd3ed58e3d15fb0cb84076e32cd419ea98fc39dda91e56371700",
+          "bytes": 49157,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/hpv-program-populacyjny-20261003-v3.webp",
+          "sha256": "701ab90b1bdc8bce12c8c82d99b0a90156dcd051caf081c8fead9cec8eaa7bd9",
+          "bytes": 64978,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/hpv-program-populacyjny-20261003-v3.jpg",
+          "sha256": "053e6aa8e5f579f1ee5cff8aeff59bfd0d14db4f9f7128de1f04c70a921fb320",
+          "bytes": 123401,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "71b61185efafb774c91e8bb3118b1b59709d5dff0f704da3d7e9d612b4a20bf1"
+    },
+    {
+      "placement": "content:5:jak-dziala-szczepionka-hpv-i-co-daje-w-praktyce",
+      "role": "content",
+      "heading": "Jak działa szczepionka HPV i co daje w praktyce?",
+      "context": "HPV dotyczy obu płci i może prowadzić do kilku typów nowotworów. Analiza obserwacyjna zaprezentowana na ASCO w 2024 roku wykazała mniej rozpoznań nowotworów HPV-zależnych u zaszczepionych mężczyzn i kobiet. Taki projekt pokazuje związek, ale nie dowodzi samodzielnie przyczynowości i może być obciążony różnicami między grupami. Szybka odpowiedź Szczepienie przeciw HPV zapobiega nowym zakażeniom typami objętymi preparatem i zmniejsza ryzyko zmian przedrakowych oraz części nowotworów u obu płci. Największą korzyść daje przed ekspozycją. U dorosłych 27–45 lat decyzja bywa indywidualna; powyżej 45 lat brakuje rutynowej rekomendacji i nie należy obiecywać korzyści osobom po 50-tce na podstawie danych z młodszych grup. Kluczowe wnioski HPV może prowadzić do nowotworów szyjki macicy, odbytu, prąci",
+      "alt": "Mikroskopowe zdjęcie cząstek wirusopodobnych HPV (VLP) — nanotechnologiczna struktura białkowa szczepionki w stylu elektronowej mikroskopii",
+      "caption": "Cząstki wirusopodobne w szczepionce uczą układ odpornościowy rozpoznawania HPV bez wywoływania zakażenia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-s4-v2.avif",
+          "sha256": "46fb09a1788682f6eaa291debff44a0460d97ae1a1168a647c2a6b42c9465f27",
+          "bytes": 144616,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-s4-v2.webp",
+          "sha256": "7a41268948f12cb160bfe4713f73765018209e290e357132ba54bb1020a22f58",
+          "bytes": 190884,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-s4-v2.jpg",
+          "sha256": "1fd72822c87b8c57ae3cac233a302b23c522013054fd856f8197d71d279dc6b1",
+          "bytes": 400370,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "46a790e4564e2b3315d5a02f0e5e2bd646b4eda857371658f20a0e43a386023b"
+    },
+    {
+      "placement": "content:6:polska-co-zrobic-praktycznie",
+      "role": "content",
+      "heading": "Polska: co zrobić praktycznie?",
+      "context": "HPV dotyczy obu płci i może prowadzić do kilku typów nowotworów. Analiza obserwacyjna zaprezentowana na ASCO w 2024 roku wykazała mniej rozpoznań nowotworów HPV-zależnych u zaszczepionych mężczyzn i kobiet. Taki projekt pokazuje związek, ale nie dowodzi samodzielnie przyczynowości i może być obciążony różnicami między grupami. Szybka odpowiedź Szczepienie przeciw HPV zapobiega nowym zakażeniom typami objętymi preparatem i zmniejsza ryzyko zmian przedrakowych oraz części nowotworów u obu płci. Największą korzyść daje przed ekspozycją. U dorosłych 27–45 lat decyzja bywa indywidualna; powyżej 45 lat brakuje rutynowej rekomendacji i nie należy obiecywać korzyści osobom po 50-tce na podstawie danych z młodszych grup. Kluczowe wnioski HPV może prowadzić do nowotworów szyjki macicy, odbytu, prąci",
+      "alt": "Mężczyzna po pięćdziesiątce w gabinecie lekarskim — spokojnie rozmawia z lekarzem o szczepieniu, nowoczesna przychodnia",
+      "caption": "Kwalifikacja do szczepienia obejmuje rozmowę o wieku, wcześniejszych dawkach i przeciwwskazaniach.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/hpv-szczepienie-s5-v2.avif",
+          "sha256": "a48c340278ed46d60ac719dd0fd94a871dec9e7c314dbc2257f69fd97e9d3739",
+          "bytes": 72341,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/hpv-szczepienie-s5-v2.webp",
+          "sha256": "98603298d2e9d36eec753ce7a60cc31936925990f27b5b2daffa499597ec6aff",
+          "bytes": 97308,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/hpv-szczepienie-s5-v2.jpg",
+          "sha256": "c423ee28d03bcfe74eb46d930a3318add7d6be444856d0e4e29df60494a48d6f",
+          "bytes": 220396,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7819f32d9b12f097c5bea21745dd96d9dc95e420818381edc57ae1b2fc321aca"
+    }
+  ],
   "pdf": {
     "pages": 8,
     "text_coverage": 1,
-    "rendered_pages": 8
+    "rendered_pages": 8,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/pdf-pages/page-1.png",
+        "sha256": "397ff4ed6eed97d8e88b8cf9041ba3e2d04b1bdf6c022c3cb71cc91714e96f52",
+        "bytes": 780395,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 59,
+          "width": 1078,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/pdf-pages/page-2.png",
+        "sha256": "5c3478aa58f4bb4e4ea573a4983290a12fc76436af7e010e38a31473e3a049e6",
+        "bytes": 728579,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1062,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/pdf-pages/page-3.png",
+        "sha256": "951d964d948302c33ee54bcf8d53049ec41f0faa319aca7523b3d334d852db55",
+        "bytes": 946383,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1052,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/pdf-pages/page-4.png",
+        "sha256": "15df05312966dfdc26d5e2d1975e66fac4e03886ae1ab96cfb9ef773f74e95c2",
+        "bytes": 642586,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1065,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/pdf-pages/page-5.png",
+        "sha256": "933f9e358b69fe2912c3ae0c003c8eb45e75e9401edd91803e7c6968bdcf4417",
+        "bytes": 522841,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1058,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/pdf-pages/page-6.png",
+        "sha256": "47208be50d848e8b712b21a5ef2ca904898b7c59d186babe97e09a2bfb3aeda3",
+        "bytes": 312028,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1058,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/pdf-pages/page-7.png",
+        "sha256": "ad0808b8e515c32d901cf0dbc58b8946d144055e7d1e4ea65dc65665091ef8f9",
+        "bytes": 307828,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 51,
+          "y": 52,
+          "width": 1056,
+          "height": 1598
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/szczepienie-hpv-ochrona-kobiet-mezczyzn/pdf-pages/page-8.png",
+        "sha256": "36291077892cdd6304c3428b44f2cdb91532e98c3f617718e0d7add788f6e4ff",
+        "bytes": 82301,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1058,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.567Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "1724d4cb53fbd1853bd326f826f8b9b8637166f5a40918621d9dc0119ac0f86c",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "593b3413f9ff23b547d6ac2daaa869878867710099be036b5b374ec4c4a9d8e1",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "f4f9b6688cf66f56cd4191b7d0f252876759f2de56b0dfe04e20f60b7ec43352",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "HPV",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz hpv-szczepienie-hero.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:czym-jest-hpv-i-dlaczego-to-nie-jest-temat-jedne",
+        "inventory_sha256": "f4146a60147da5921f454a7cd1bbbbe4369bbc5f7d7a87a43762ba807e6722b4",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz hpv-szczepienie-s1-v2.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:asco-2024-3-4-mln-pacjentow-i-konkretne-liczby",
+        "inventory_sha256": "c9077479f2217d3a51fd29c2a609480bd7cca42eb2f6b90949376c81b4b506de",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz hpv-rozmowa-o-profilaktyce-20261003-v3.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:co-pokazuja-dane-populacyjne-z-wielu-krajow",
+        "inventory_sha256": "71b61185efafb774c91e8bb3118b1b59709d5dff0f704da3d7e9d612b4a20bf1",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz hpv-program-populacyjny-20261003-v3.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:jak-dziala-szczepionka-hpv-i-co-daje-w-praktyce",
+        "inventory_sha256": "46a790e4564e2b3315d5a02f0e5e2bd646b4eda857371658f20a0e43a386023b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "CZĄSTECZKI WIRUSOPODOBNE; TECHNOLOGIA CZĄSTECZKI WIRUSOPODOBNE (VLP)",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz hpv-szczepienie-s4-v2.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:6:polska-co-zrobic-praktycznie",
+        "inventory_sha256": "7819f32d9b12f097c5bea21745dd96d9dc95e420818381edc57ae1b2fc321aca",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "GABINET KONSULTACYJNY; REJESTRACJA; TECHNOLOGIA VLP W SZCZEPIONKACH HPV; harmonogram szczepień i wykres konsultacyjny",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://www.cdc.gov/vaccines/vpd/hpv/hcp/recommendations.html",
+            "https://www.who.int/publications/i/item/who-wer9750-645-672"
+          ]
+        },
+        "note": "Obraz hpv-szczepienie-s5-v2.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "397ff4ed6eed97d8e88b8cf9041ba3e2d04b1bdf6c022c3cb71cc91714e96f52",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "5c3478aa58f4bb4e4ea573a4983290a12fc76436af7e010e38a31473e3a049e6",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "951d964d948302c33ee54bcf8d53049ec41f0faa319aca7523b3d334d852db55",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "15df05312966dfdc26d5e2d1975e66fac4e03886ae1ab96cfb9ef773f74e95c2",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "933f9e358b69fe2912c3ae0c003c8eb45e75e9401edd91803e7c6968bdcf4417",
+        "note": "Strona PDF 5 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "47208be50d848e8b712b21a5ef2ca904898b7c59d186babe97e09a2bfb3aeda3",
+        "note": "Strona PDF 6 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "ad0808b8e515c32d901cf0dbc58b8946d144055e7d1e4ea65dc65665091ef8f9",
+        "note": "Strona PDF 7 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "36291077892cdd6304c3428b44f2cdb91532e98c3f617718e0d7add788f6e4ff",
+        "note": "Strona PDF 8 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 9259,
+    "review_wait_ms": 267725
   },
   "errors": []
 }

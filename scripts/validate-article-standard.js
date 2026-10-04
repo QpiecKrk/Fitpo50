@@ -59,10 +59,12 @@ function validateAnswerFirstParagraphs(raw, errors) {
   const h2s = [...raw.matchAll(h2Rx)];
 
   let checked = 0;
+  let eligibleHeadings = 0;
   for (let i = 0; i < h2s.length; i += 1) {
     const current = h2s[i];
     const next = h2s[i + 1];
     if (validators.isSkippedH2Title(current[1])) continue;
+    eligibleHeadings += 1;
 
     const sectionStart = current.index + current[0].length;
     const sectionEnd = next ? next.index : raw.length;
@@ -88,7 +90,7 @@ function validateAnswerFirstParagraphs(raw, errors) {
     }
   }
 
-  if (checked === 0) {
+  if (eligibleHeadings === 0) {
     errors.push('Nie znaleziono sekcji H2 do walidacji answer-first.');
   }
 }

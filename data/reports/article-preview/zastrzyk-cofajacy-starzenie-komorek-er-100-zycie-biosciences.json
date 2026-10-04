@@ -1,35 +1,418 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T08:46:30.653Z",
+  "generated_at": "2026-10-03T14:04:00.192Z",
+  "reviewed_at": "2026-10-03T14:31:11.567Z",
   "slug": "zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences",
-  "html_sha256": "6b0634078a2bbe43d907562087f4d3da54af0e8e88bb048c735426d93e04f8e3",
-  "site_html_sha256": "6b0634078a2bbe43d907562087f4d3da54af0e8e88bb048c735426d93e04f8e3",
-  "pdf_sha256": "556b77ae256d4b28407775d2c8ab37c5ec31bfbf03abecd76c153594f090f76a",
-  "site_pdf_sha256": "556b77ae256d4b28407775d2c8ab37c5ec31bfbf03abecd76c153594f090f76a",
+  "html_sha256": "ae2d6057d4dbba5482d62b98737e7f5391b3e29499229fbdb5a0de0b9fee9ffe",
+  "site_html_sha256": "ae2d6057d4dbba5482d62b98737e7f5391b3e29499229fbdb5a0de0b9fee9ffe",
+  "pdf_sha256": "310b5628e66eea0b460a98b7748d06ab45e2c81a8ae63be2d1777fe48044ce6d",
+  "site_pdf_sha256": "310b5628e66eea0b460a98b7748d06ab45e2c81a8ae63be2d1777fe48044ce6d",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:04:00.192Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html",
+      "sha256": "ae2d6057d4dbba5482d62b98737e7f5391b3e29499229fbdb5a0de0b9fee9ffe",
+      "bytes": 28599
+    },
+    "html_site": {
+      "file": "_site/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html",
+      "sha256": "ae2d6057d4dbba5482d62b98737e7f5391b3e29499229fbdb5a0de0b9fee9ffe",
+      "bytes": 28599
+    },
+    "pdf_source": {
+      "file": "assets/pdf/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.pdf",
+      "sha256": "310b5628e66eea0b460a98b7748d06ab45e2c81a8ae63be2d1777fe48044ce6d",
+      "bytes": 396808
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.pdf",
+      "sha256": "310b5628e66eea0b460a98b7748d06ab45e2c81a8ae63be2d1777fe48044ce6d",
+      "bytes": 396808
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences/desktop.png",
+      "screenshot_sha256": "c0545fca9c6076016104ef2d82479bea423b7de99152fa827f6580dd698d46c1",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences/mobile.png",
+      "screenshot_sha256": "07a875a80299c618b74453114351dd1ff3800060a1eba3f1a134d5be7c98e83f",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 7 min czytania ER-100: co naprawdę bada pierwsza faza terapii genowej oka? „Starzenie jest w dużej mierze utratą informacji epigenetycznej — nie nieodwracalnym uszkodzeniem.” — prof. David Sinclair, Harvard Medical School",
+      "alt": "Pacjent uczestniczy w badaniu okulistycznym eksperymentalnej terapii ER-100",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/er100-hero-2026.avif",
+          "sha256": "b2ddb20d30a2be6263cebb54fc6c8f8b838fda9dfaa84222c4f6a559eaacbe8d",
+          "bytes": 46344,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/er100-hero-2026.webp",
+          "sha256": "ed56c3b4785423eb86c944ec291bf2bbd22f9c2044e8679215e04b02753f905b",
+          "bytes": 94800,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/er100-hero-2026.jpg",
+          "sha256": "215a7b4a2bbd55d7566a7fd25459ca3ff399cc6e492a04b50e5d1e44f77d1a73",
+          "bytes": 204298,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "dee5817bdeee3103310d7e986b8eb45b2de1984f4ee6d1eb4954e6500054008b"
+    },
+    {
+      "placement": "content:2:czym-dokladnie-jest-er-100",
+      "role": "content",
+      "heading": "Czym dokładnie jest ER-100?",
+      "context": "Szybka odpowiedź ER-100 nie jest dostępnym „zastrzykiem odmładzającym”. To eksperymentalna terapia AAV podawana do jednego oka w pierwszym badaniu na ludziach. Rekord ClinicalTrials.gov sprawdzony 26 września 2026 roku podaje fazę 1, rekrutację, do 18 uczestników z jaskrą otwartego kąta lub NAION i obserwację bezpieczeństwa do 5 lat. Rekord nadal nie zawiera wyników badania. Kluczowe wnioski Badanie NCT07290244 jest rekrutującym badaniem fazy 1, którego głównym celem jest bezpieczeństwo i tolerancja. ER-100 podaje się doszklistkowo do jednego oka, a ekspresję konstruktu aktywuje doustna doksycyklina według protokołu. Plan obejmuje do 18 osób: 12 z jaskrą otwartego kąta i 6 z NAION. Brak opublikowanych wyników klinicznych oznacza, że nie wiadomo jeszcze, czy terapia poprawia widzenie u ludz",
+      "alt": "Przekrój oka pokazujący wektor AAV docierający do komórek siatkówki",
+      "caption": "ER-100 wykorzystuje zmodyfikowany wektor AAV do dostarczenia instrukcji OSK do komórek siatkówki w jednym leczonym oku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/er100-aav-siatkowka.avif",
+          "sha256": "e06aa6de005a4f24e080d811728cfe23dc26e68b015fc66b0f3aa709ba246c9e",
+          "bytes": 79057,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/er100-aav-siatkowka.webp",
+          "sha256": "abbac0a9aab8c8a7962fdd195342f5715af330fc437e4e484f0066c8bdd4f6dd",
+          "bytes": 150086,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/er100-aav-siatkowka.jpg",
+          "sha256": "4f634344e03550b00dccb8b871854202d45f27146275b9e5657400ca0cee0a58",
+          "bytes": 257922,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4b3ef7272d532333f2ab9ca86073007d79a8e9fcf00fbbaa84b960ff1986e2dc"
+    },
+    {
+      "placement": "content:3:kogo-obejmuje-badanie-fazy-1",
+      "role": "content",
+      "heading": "Kogo obejmuje badanie fazy 1?",
+      "context": "Szybka odpowiedź ER-100 nie jest dostępnym „zastrzykiem odmładzającym”. To eksperymentalna terapia AAV podawana do jednego oka w pierwszym badaniu na ludziach. Rekord ClinicalTrials.gov sprawdzony 26 września 2026 roku podaje fazę 1, rekrutację, do 18 uczestników z jaskrą otwartego kąta lub NAION i obserwację bezpieczeństwa do 5 lat. Rekord nadal nie zawiera wyników badania. Kluczowe wnioski Badanie NCT07290244 jest rekrutującym badaniem fazy 1, którego głównym celem jest bezpieczeństwo i tolerancja. ER-100 podaje się doszklistkowo do jednego oka, a ekspresję konstruktu aktywuje doustna doksycyklina według protokołu. Plan obejmuje do 18 osób: 12 z jaskrą otwartego kąta i 6 z NAION. Brak opublikowanych wyników klinicznych oznacza, że nie wiadomo jeszcze, czy terapia poprawia widzenie u ludz",
+      "alt": "Zespół badawczy omawia z dojrzałymi pacjentami kryteria badania okulistycznego",
+      "caption": "Badanie ma wąskie kryteria medyczne i obejmuje osoby z jaskrą otwartego kąta lub NAION, a nie zdrowych ochotników.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/er100-kwalifikacja.avif",
+          "sha256": "08e904fbe6d37533d6b8a86ae576d544d0cf3bc1543bca2db88b3ad8e2f410af",
+          "bytes": 52954,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/er100-kwalifikacja.webp",
+          "sha256": "467c4d2558c2a331e411639bcc35f852b03c13dad4c3a202c434bec635d6a6be",
+          "bytes": 103156,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/er100-kwalifikacja.jpg",
+          "sha256": "c93028ecb2f3090de2f3685b32b41d7e6d48199dc0abe814c104baf6d1907f4c",
+          "bytes": 212742,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "2b03fb3c62e58fa271011db1960ee6cf66f85b114f535397778f0c68e48f9011"
+    },
+    {
+      "placement": "content:4:co-mierzy-badanie-i-kiedy-poznamy-odpowiedz",
+      "role": "content",
+      "heading": "Co mierzy badanie i kiedy poznamy odpowiedź?",
+      "context": "Szybka odpowiedź ER-100 nie jest dostępnym „zastrzykiem odmładzającym”. To eksperymentalna terapia AAV podawana do jednego oka w pierwszym badaniu na ludziach. Rekord ClinicalTrials.gov sprawdzony 26 września 2026 roku podaje fazę 1, rekrutację, do 18 uczestników z jaskrą otwartego kąta lub NAION i obserwację bezpieczeństwa do 5 lat. Rekord nadal nie zawiera wyników badania. Kluczowe wnioski Badanie NCT07290244 jest rekrutującym badaniem fazy 1, którego głównym celem jest bezpieczeństwo i tolerancja. ER-100 podaje się doszklistkowo do jednego oka, a ekspresję konstruktu aktywuje doustna doksycyklina według protokołu. Plan obejmuje do 18 osób: 12 z jaskrą otwartego kąta i 6 z NAION. Brak opublikowanych wyników klinicznych oznacza, że nie wiadomo jeszcze, czy terapia poprawia widzenie u ludz",
+      "alt": "Uczestnik badania wykonuje badanie pola widzenia i obrazowanie siatkówki OCT",
+      "caption": "Faza 1 mierzy przede wszystkim bezpieczeństwo; testy pola widzenia i OCT dostarczają także eksploracyjnych danych o funkcji oka.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/er100-pomiary-badania.avif",
+          "sha256": "534051e96a88e2a55017283c20d95a9c34e05927504ef140d1cc640bcc9b375e",
+          "bytes": 51903,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/er100-pomiary-badania.webp",
+          "sha256": "c0a8b779d6979c96629eea652a53015eeec7ef687b1cc8661d3e7c48212cf435",
+          "bytes": 105332,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/er100-pomiary-badania.jpg",
+          "sha256": "f3a985413ed98057bb9de2450ec1a62c942e0f6e5b814d296161d38a5507153f",
+          "bytes": 219945,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7ddf86e9505a4dcf468754f8059e37c09786fff6d42bdd854ddcd1a29d3aa2b3"
+    },
+    {
+      "placement": "content:5:czy-er-100-odmladza-cale-cialo",
+      "role": "content",
+      "heading": "Czy ER-100 odmładza całe ciało?",
+      "context": "Szybka odpowiedź ER-100 nie jest dostępnym „zastrzykiem odmładzającym”. To eksperymentalna terapia AAV podawana do jednego oka w pierwszym badaniu na ludziach. Rekord ClinicalTrials.gov sprawdzony 26 września 2026 roku podaje fazę 1, rekrutację, do 18 uczestników z jaskrą otwartego kąta lub NAION i obserwację bezpieczeństwa do 5 lat. Rekord nadal nie zawiera wyników badania. Kluczowe wnioski Badanie NCT07290244 jest rekrutującym badaniem fazy 1, którego głównym celem jest bezpieczeństwo i tolerancja. ER-100 podaje się doszklistkowo do jednego oka, a ekspresję konstruktu aktywuje doustna doksycyklina według protokołu. Plan obejmuje do 18 osób: 12 z jaskrą otwartego kąta i 6 z NAION. Brak opublikowanych wyników klinicznych oznacza, że nie wiadomo jeszcze, czy terapia poprawia widzenie u ludz",
+      "alt": "Model oka na tle nieostrej sylwetki pokazuje granicę między badaniem oka a całym ciałem",
+      "caption": "Dane z terapii podanej do jednego oka nie pozwalają wnioskować o odmładzaniu innych narządów ani całego organizmu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/er100-granica-dowodu.avif",
+          "sha256": "cf0264b687b07c15d2133dfa02b368448f00f8f9c1c589ecaed14dddf1042be0",
+          "bytes": 41707,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/er100-granica-dowodu.webp",
+          "sha256": "8f3d9228e5585f372899a2b4c215cfac8a7a103e01dddd637e0c554ac4bf12fb",
+          "bytes": 89476,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/er100-granica-dowodu.jpg",
+          "sha256": "7b9f6c19fee7b7574736805eabf90b033aec2292bd20e640a502d12da467e70a",
+          "bytes": 191139,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "848ca8e2a222f6e862bc283050b10522dbd59272028416376eb377bc54fea0de"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences/pdf-pages/page-1.png",
+        "sha256": "c9ba3a80aeafcbd9de88e0a975dc96fa4cb035b69e1b658a42c0b7deb56a6db0",
+        "bytes": 561270,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 59,
+          "width": 1066,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences/pdf-pages/page-2.png",
+        "sha256": "b9f2b5c1d876cdebf61461ce5b7befb08353d3431217fa1a1453ee9a028a26b4",
+        "bytes": 738794,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1038,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences/pdf-pages/page-3.png",
+        "sha256": "25a30f21c7afc6e65e42b6b8f553fe07f0e105c778bfe0e90a2a80cc710e60d6",
+        "bytes": 743233,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1063,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences/pdf-pages/page-4.png",
+        "sha256": "536241a66b7138bea1cde808aef8a39155c8b8d79a1a21feeabff780b308a581",
+        "bytes": 221440,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.567Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "c0545fca9c6076016104ef2d82479bea423b7de99152fa827f6580dd698d46c1",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "07a875a80299c618b74453114351dd1ff3800060a1eba3f1a134d5be7c98e83f",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "dee5817bdeee3103310d7e986b8eb45b2de1984f4ee6d1eb4954e6500054008b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz er100-hero-2026.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:czym-dokladnie-jest-er-100",
+        "inventory_sha256": "4b3ef7272d532333f2ab9ca86073007d79a8e9fcf00fbbaa84b960ff1986e2dc",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz er100-aav-siatkowka.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:kogo-obejmuje-badanie-fazy-1",
+        "inventory_sha256": "2b03fb3c62e58fa271011db1960ee6cf66f85b114f535397778f0c68e48f9011",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz er100-kwalifikacja.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:co-mierzy-badanie-i-kiedy-poznamy-odpowiedz",
+        "inventory_sha256": "7ddf86e9505a4dcf468754f8059e37c09786fff6d42bdd854ddcd1a29d3aa2b3",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz er100-pomiary-badania.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:czy-er-100-odmladza-cale-cialo",
+        "inventory_sha256": "848ca8e2a222f6e862bc283050b10522dbd59272028416376eb377bc54fea0de",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz er100-granica-dowodu.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.567Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "c9ba3a80aeafcbd9de88e0a975dc96fa4cb035b69e1b658a42c0b7deb56a6db0",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "b9f2b5c1d876cdebf61461ce5b7befb08353d3431217fa1a1453ee9a028a26b4",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "25a30f21c7afc6e65e42b6b8f553fe07f0e105c778bfe0e90a2a80cc710e60d6",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "536241a66b7138bea1cde808aef8a39155c8b8d79a1a21feeabff780b308a581",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 6392,
+    "review_wait_ms": 1631375
   },
   "errors": []
 }

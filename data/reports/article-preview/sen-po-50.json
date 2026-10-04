@@ -1,35 +1,418 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T19:11:36.557Z",
+  "generated_at": "2026-10-03T14:03:32.538Z",
+  "reviewed_at": "2026-10-03T14:31:11.566Z",
   "slug": "sen-po-50",
-  "html_sha256": "e0ae837f694c7d42b6d7dd4b5330a799d5a36babe363128a0131c8f98fe7d2af",
-  "site_html_sha256": "e0ae837f694c7d42b6d7dd4b5330a799d5a36babe363128a0131c8f98fe7d2af",
-  "pdf_sha256": "02c8997a954404b9ce3f16733c4e0682a26765c5d53257eb85fdf94aa76a6caa",
-  "site_pdf_sha256": "02c8997a954404b9ce3f16733c4e0682a26765c5d53257eb85fdf94aa76a6caa",
+  "html_sha256": "9c55c0ab498880367bf36d481571fc5522c26e9f20b286db4c09253bd7b37ba4",
+  "site_html_sha256": "9c55c0ab498880367bf36d481571fc5522c26e9f20b286db4c09253bd7b37ba4",
+  "pdf_sha256": "09c28468e178631e546c914252ffd8e64eaf3de05bfa0d50db27eb81f5c00960",
+  "site_pdf_sha256": "09c28468e178631e546c914252ffd8e64eaf3de05bfa0d50db27eb81f5c00960",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-03T14:03:32.538Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "sen-po-50.html",
+      "sha256": "9c55c0ab498880367bf36d481571fc5522c26e9f20b286db4c09253bd7b37ba4",
+      "bytes": 28277
+    },
+    "html_site": {
+      "file": "_site/sen-po-50.html",
+      "sha256": "9c55c0ab498880367bf36d481571fc5522c26e9f20b286db4c09253bd7b37ba4",
+      "bytes": 28277
+    },
+    "pdf_source": {
+      "file": "assets/pdf/sen-po-50.pdf",
+      "sha256": "09c28468e178631e546c914252ffd8e64eaf3de05bfa0d50db27eb81f5c00960",
+      "bytes": 396520
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/sen-po-50.pdf",
+      "sha256": "09c28468e178631e546c914252ffd8e64eaf3de05bfa0d50db27eb81f5c00960",
+      "bytes": 396520
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/sen-po-50/desktop.png",
+      "screenshot_sha256": "624e0989462c68feb73e24ff2583a0584b9ddf152801b82ee596fbaaf3ce47c1",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/sen-po-50/mobile.png",
+      "screenshot_sha256": "001c71357b1603b55d9c4c64ba545b2cc61ced5c7477d69bef6acebbd1011bf2",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 10 min czytania Sen po 50-tce: ile godzin potrzeba i jak poprawić jakość? SEN TO NIE PRZERWA. TO TWOJA SIŁA.",
+      "alt": "Para po 50-tce śpiąca spokojnie w jasnej sypialni",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sen-hero.avif",
+          "sha256": "d1bd626f516c293281c00eba17d09eb4029f1a2bdbc58cc8f7f557766e46fbea",
+          "bytes": 50529,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sen-hero.webp",
+          "sha256": "3c5a66690467aa0af5c6ae8d5d3e6d3b93a2279beba071fd3d1d7ba4e499f561",
+          "bytes": 84350,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sen-hero.jpg",
+          "sha256": "eb8c370e8ccd67700e9347cae994c55ee25ca6dad95de2e87e8dbbf3211f59d2",
+          "bytes": 252430,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "16bb450b7d577afbd291b967184166435b65207bdb9de5205e67471ff1969dd4"
+    },
+    {
+      "placement": "content:2:ile-godzin-snu-potrzeba-po-50-tce",
+      "role": "content",
+      "heading": "Ile godzin snu potrzeba po 50-tce?",
+      "context": "Szybka odpowiedź Po 50-tce potrzeba snu nie spada automatycznie do 5-6 godzin. National Institute on Aging podaje dla starszych dorosłych około 7-9 godzin na noc. Zacznij od stałej pory wstawania, światła rano, regularnego ruchu i ograniczenia alkoholu wieczorem. Jeżeli problemy powtarzają się, pogarszają dzień lub występują bezdechy, skonsultuj je bez czekania na upływ umownego terminu diagnostycznego. Kluczowe wnioski Starszy wiek zmienia strukturę i porę snu, ale nie oznacza, że chroniczne 5 godzin jest wystarczające. Najbardziej użytecznym punktem rytmu jest stała pora wstawania, także po gorszej nocy. Alkohol może ułatwić zaśnięcie, a jednocześnie nasilać fragmentację w drugiej części nocy. Przewlekłą bezsenność leczy się przede wszystkim CBT-I; higiena snu jest elementem, nie pełnym ",
+      "alt": "Kobieta po 60-tce śpi w ciemnej sypialni z subtelną wizualizacją cykli snu",
+      "caption": "Potrzeba snu jest indywidualna, a jakość nocy obejmuje także ciągłość i funkcjonowanie następnego dnia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sen-po50-cykle-nocy-20260930.avif",
+          "sha256": "571a832fc66c66c5d50212ec309fd2a65350e1b55e996a7f7fc53e364ab6aed4",
+          "bytes": 39770,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sen-po50-cykle-nocy-20260930.webp",
+          "sha256": "d747499a6c1786bf06644451397c03b519586ded7dcf60524552cfb68241d305",
+          "bytes": 51392,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sen-po50-cykle-nocy-20260930.jpg",
+          "sha256": "366ba5223ab4ebe30824b0f1593a6a767b12fe5528c6a397ecb7ca5d5a5092c6",
+          "bytes": 161784,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "c480a64bb13f161e0b49a02beaba2047352e57f7f9fc48c73e892fa05d091eba"
+    },
+    {
+      "placement": "content:3:jak-ustawic-rytm-dobowy-bez-obietnic-resetu-horm",
+      "role": "content",
+      "heading": "Jak ustawić rytm dobowy bez obietnic „resetu hormonów”?",
+      "context": "Szybka odpowiedź Po 50-tce potrzeba snu nie spada automatycznie do 5-6 godzin. National Institute on Aging podaje dla starszych dorosłych około 7-9 godzin na noc. Zacznij od stałej pory wstawania, światła rano, regularnego ruchu i ograniczenia alkoholu wieczorem. Jeżeli problemy powtarzają się, pogarszają dzień lub występują bezdechy, skonsultuj je bez czekania na upływ umownego terminu diagnostycznego. Kluczowe wnioski Starszy wiek zmienia strukturę i porę snu, ale nie oznacza, że chroniczne 5 godzin jest wystarczające. Najbardziej użytecznym punktem rytmu jest stała pora wstawania, także po gorszej nocy. Alkohol może ułatwić zaśnięcie, a jednocześnie nasilać fragmentację w drugiej części nocy. Przewlekłą bezsenność leczy się przede wszystkim CBT-I; higiena snu jest elementem, nie pełnym ",
+      "alt": "Kobieta po 60-tce korzysta z porannego światła i przyciemnia lampy wieczorem",
+      "caption": "Stała pora wstawania, światło rano i mniej jasnego światła wieczorem pomagają ustabilizować rytm dobowy.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sen-po50-rytm-dobowy-swiatlo-20260930.avif",
+          "sha256": "c02820ca8717523e198feceae05acbeafa491b0175d5f82358f700391600c7ea",
+          "bytes": 77064,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sen-po50-rytm-dobowy-swiatlo-20260930.webp",
+          "sha256": "f81b9283ecd0803282aef41dfd6d2a175bba6337eb79fcc69fd1439cf78650f1",
+          "bytes": 91002,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sen-po50-rytm-dobowy-swiatlo-20260930.jpg",
+          "sha256": "061445cde81bd32b395e96185512dd5d9513aab7a7205d045ef756d17af75eea",
+          "bytes": 231400,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "fa4f517e4457d06cac201e737577cbffdad136b7eca8f7a7aafb3e1501d9f37b"
+    },
+    {
+      "placement": "content:4:jak-ruch-kofeina-i-alkohol-wplywaja-na-noc",
+      "role": "content",
+      "heading": "Jak ruch, kofeina i alkohol wpływają na noc?",
+      "context": "Szybka odpowiedź Po 50-tce potrzeba snu nie spada automatycznie do 5-6 godzin. National Institute on Aging podaje dla starszych dorosłych około 7-9 godzin na noc. Zacznij od stałej pory wstawania, światła rano, regularnego ruchu i ograniczenia alkoholu wieczorem. Jeżeli problemy powtarzają się, pogarszają dzień lub występują bezdechy, skonsultuj je bez czekania na upływ umownego terminu diagnostycznego. Kluczowe wnioski Starszy wiek zmienia strukturę i porę snu, ale nie oznacza, że chroniczne 5 godzin jest wystarczające. Najbardziej użytecznym punktem rytmu jest stała pora wstawania, także po gorszej nocy. Alkohol może ułatwić zaśnięcie, a jednocześnie nasilać fragmentację w drugiej części nocy. Przewlekłą bezsenność leczy się przede wszystkim CBT-I; higiena snu jest elementem, nie pełnym ",
+      "alt": "Cztery sceny pokazują ruch, kawę, alkohol przy kolacji i spokojny sen kobiety po 60-tce",
+      "caption": "Ruch zwykle wspiera sen, natomiast późna kofeina i alkohol mogą pogorszyć zasypianie lub ciągłość nocy.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sen-po50-ruch-kofeina-alkohol-20260930.avif",
+          "sha256": "5b5b539511e2061bf74d465a0106d364586ec90aabec412835a341b54b1583a9",
+          "bytes": 98974,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sen-po50-ruch-kofeina-alkohol-20260930.webp",
+          "sha256": "2714dd38d90fd0b1130627e9f782b193bc968cffec3a2421b18a02bd1aa0f9f4",
+          "bytes": 116384,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sen-po50-ruch-kofeina-alkohol-20260930.jpg",
+          "sha256": "04de27fd0f431ba87da6ccf41e0fcfc7f656d239d81064359ea0f2edf016e331",
+          "bytes": 271501,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "86e48a76e6fc1d42d257fdd5ed42b1a9b1f83bfbb1359c496ae8e2a80cbebbb1"
+    },
+    {
+      "placement": "content:5:kiedy-problem-ze-snem-wymaga-diagnostyki",
+      "role": "content",
+      "heading": "Kiedy problem ze snem wymaga diagnostyki?",
+      "context": "Szybka odpowiedź Po 50-tce potrzeba snu nie spada automatycznie do 5-6 godzin. National Institute on Aging podaje dla starszych dorosłych około 7-9 godzin na noc. Zacznij od stałej pory wstawania, światła rano, regularnego ruchu i ograniczenia alkoholu wieczorem. Jeżeli problemy powtarzają się, pogarszają dzień lub występują bezdechy, skonsultuj je bez czekania na upływ umownego terminu diagnostycznego. Kluczowe wnioski Starszy wiek zmienia strukturę i porę snu, ale nie oznacza, że chroniczne 5 godzin jest wystarczające. Najbardziej użytecznym punktem rytmu jest stała pora wstawania, także po gorszej nocy. Alkohol może ułatwić zaśnięcie, a jednocześnie nasilać fragmentację w drugiej części nocy. Przewlekłą bezsenność leczy się przede wszystkim CBT-I; higiena snu jest elementem, nie pełnym ",
+      "alt": "Kobieta po 60-tce omawia przewlekłe problemy ze snem z lekarzem",
+      "caption": "Utrzymująca się bezsenność, głośne chrapanie, bezdechy lub duża senność w dzień wymagają ukierunkowanej oceny.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/sen-po50-diagnostyka-bezsennosc-20260930.avif",
+          "sha256": "adbda9ed92311679f7f0fcb708656150b2d38537be2df809459dfc3f4fcb1bec",
+          "bytes": 76329,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/sen-po50-diagnostyka-bezsennosc-20260930.webp",
+          "sha256": "e9d01118f9da9cea501b1b50a5e4efa935ed6f0a065b40f64a59c71515507c34",
+          "bytes": 90558,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/sen-po50-diagnostyka-bezsennosc-20260930.jpg",
+          "sha256": "183ecca6be78f9641dcb5bcd5aafd69f9240adb4c6b1ca6a0a17e2773ec02852",
+          "bytes": 221745,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e12076e2d2e88798eb64cf4572061a78cf2ffc68845f6032c2c6fdeb225d8ce3"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/sen-po-50/pdf-pages/page-1.png",
+        "sha256": "6f54f94d61be60c39235a28ea7993aaac47f6fbafa9a44cffd011ec653e857c8",
+        "bytes": 512681,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1052,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/sen-po-50/pdf-pages/page-2.png",
+        "sha256": "8dce6c8cfcedf812ec50b39ab7f1aa617cb022cb2c3758173a2f6d4e759b993e",
+        "bytes": 781905,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1046,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/sen-po-50/pdf-pages/page-3.png",
+        "sha256": "c3ac26fd61bd08d404b5dde1d7d00ea4694a08e12046f2124e8ee01a4f48f769",
+        "bytes": 919291,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/sen-po-50/pdf-pages/page-4.png",
+        "sha256": "74cec15ae1812c6b1d6ade788fc0c645372e6e26b36779396c2e7baa608af13d",
+        "bytes": 185164,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1061,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-03T14:31:11.566Z",
+    "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "624e0989462c68feb73e24ff2583a0584b9ddf152801b82ee596fbaaf3ce47c1",
+        "note": "Pełny widok desktop sprawdzony: brak przepełnień, kolizji, obcięć i uszkodzonych obrazów."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "001c71357b1603b55d9c4c64ba545b2cc61ced5c7477d69bef6acebbd1011bf2",
+        "note": "Pełny widok mobile sprawdzony: tekst, tabele, obrazy i nawigacja mieszczą się poprawnie."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "16bb450b7d577afbd291b967184166435b65207bdb9de5205e67471ff1969dd4",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sen-hero.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:2:ile-godzin-snu-potrzeba-po-50-tce",
+        "inventory_sha256": "c480a64bb13f161e0b49a02beaba2047352e57f7f9fc48c73e892fa05d091eba",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sen-po50-cykle-nocy-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:3:jak-ustawic-rytm-dobowy-bez-obietnic-resetu-horm",
+        "inventory_sha256": "fa4f517e4457d06cac201e737577cbffdad136b7eca8f7a7aafb3e1501d9f37b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sen-po50-rytm-dobowy-swiatlo-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:4:jak-ruch-kofeina-i-alkohol-wplywaja-na-noc",
+        "inventory_sha256": "86e48a76e6fc1d42d257fdd5ed42b1a9b1f83bfbb1359c496ae8e2a80cbebbb1",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sen-po50-ruch-kofeina-alkohol-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      },
+      {
+        "placement": "content:5:kiedy-problem-ze-snem-wymaga-diagnostyki",
+        "inventory_sha256": "e12076e2d2e88798eb64cf4572061a78cf2ffc68845f6032c2c6fdeb225d8ce3",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz sen-po50-diagnostyka-bezsennosc-20260930.jpg obejrzany w pełnym rozmiarze; temat, podpis i kontekst sekcji są zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-03T14:31:11.566Z",
+        "review_method": "Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "6f54f94d61be60c39235a28ea7993aaac47f6fbafa9a44cffd011ec653e857c8",
+        "note": "Strona PDF 1 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "8dce6c8cfcedf812ec50b39ab7f1aa617cb022cb2c3758173a2f6d4e759b993e",
+        "note": "Strona PDF 2 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "c3ac26fd61bd08d404b5dde1d7d00ea4694a08e12046f2124e8ee01a4f48f769",
+        "note": "Strona PDF 3 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "74cec15ae1812c6b1d6ade788fc0c645372e6e26b36779396c2e7baa608af13d",
+        "note": "Strona PDF 4 sprawdzona wizualnie: układ jest czytelny, bez obcięć, nakładania i pustych bloków."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 5792,
+    "review_wait_ms": 1659028
   },
   "errors": []
 }

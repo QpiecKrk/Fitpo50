@@ -1,10 +1,10 @@
-# FitPo50 — staging HTML i PDF
+# FitPo50 — staging HTML, obrazy i PDF
 
 - Status: **PREVIEW_READY**
+- Technical: **TECHNICAL_PASS**
+- Visual: **VISUAL_REVIEW_VERIFIED**
 - Slug: jak-zaczac-sie-podciagac-po-50
-- Render HTML: desktop 1440 px + mobile 390 px
-- Tabele semantyczne: 1
-- PDF: 4 stron, wyrenderowano 4
-- Zgodność tekstu HTML→PDF: 100.00%
-- HTML source/_site: 1:1
-- PDF source/_site: 1:1
+- Reviewed by: Codex
+- Review method: Ręczna kontrola lokalnych obrazów, pełnych zrzutów desktop/mobile i każdej strony PDF.
+- Obrazy: 5
+- PDF: 4 stron
