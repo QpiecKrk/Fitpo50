@@ -312,6 +312,17 @@ function validateFile(file) {
       if (!String(s.image.alt || '').trim()) errors.push(`${file}: sections[${i}].image.alt puste.`);
       if (!String(s.image.caption || '').trim()) errors.push(`${file}: sections[${i}].image.caption puste.`);
     }
+    const additionalImages = Array.isArray(s.images) ? s.images : [];
+    for (let imageIndex = 0; imageIndex < additionalImages.length; imageIndex += 1) {
+      const image = additionalImages[imageIndex] || {};
+      const label = `${file}: sections[${i}].images[${imageIndex}]`;
+      if (!String(image.src || '').trim()) errors.push(`${label}.src puste.`);
+      if (!String(image.alt || '').trim()) errors.push(`${label}.alt puste.`);
+      if (!String(image.caption || '').trim()) errors.push(`${label}.caption puste.`);
+      if (!new RegExp(`^sekcja-${i + 1}-obraz-[2-9]\\d*$`).test(String(image.placement || '').trim())) {
+        errors.push(`${label}.placement musi mieć format sekcja-${i + 1}-obraz-N, gdzie N >= 2.`);
+      }
+    }
 
     for (const p of paragraphs) {
       checkInternalHtmlLinks(p, `${file}: sections[${i}].paragraphs_html`);

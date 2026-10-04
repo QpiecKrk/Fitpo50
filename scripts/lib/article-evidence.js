@@ -90,6 +90,9 @@ function collectArticleFragments(json) {
     });
     if (section?.info_box) add(`sections[${sectionIndex}].info_box.content_html`, section.info_box.content_html);
     if (section?.image) add(`sections[${sectionIndex}].image.caption`, section.image.caption);
+    (Array.isArray(section?.images) ? section.images : []).forEach((image, imageIndex) => {
+      add(`sections[${sectionIndex}].images[${imageIndex}].caption`, image?.caption);
+    });
   });
   (Array.isArray(json.answer_blocks) ? json.answer_blocks : []).forEach((item, index) => {
     add(`answer_blocks[${index}].answer_html`, item?.answer_html || item?.answer);

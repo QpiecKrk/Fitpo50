@@ -587,6 +587,22 @@ function normalizeSections(rawSections) {
       }
     }
 
+    for (const image of normalizeArray(entry.images || [])) {
+      if (!image || typeof image !== 'object') continue;
+      const imgSrc = String(image.src || image.path || '').trim();
+      if (!imgSrc) continue;
+      blocks.push({
+        type: 'html',
+        html: toInlinePictureHtml(
+          imgSrc,
+          String(image.alt || title || 'Grafika artykułu').trim(),
+          String(image.caption || '').trim(),
+          Number(image.width || 0),
+          Number(image.height || 0),
+        ),
+      });
+    }
+
     sections.push({ title, blocks });
   }
   return sections;

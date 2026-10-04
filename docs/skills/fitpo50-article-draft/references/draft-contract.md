@@ -1,12 +1,23 @@
 # Kontrakt draftu FitPo50
 
-Wczytaj ten plik przed tworzeniem `.fitpo50.json`. To kontrakt draftu dla lokalnego pipeline; nie jest kontraktem finalnego HTML.
+Wczytaj ten plik przed tworzeniem `.fitpo50.json`. To kontrakt draftu Claude dla lokalnego pipeline, nie kontrakt finalnego HTML.
 
-## Odpowiedzialność
+## Podział odpowiedzialności
 
-Claude tworzy treść, research, mapę dowodów, FAQ i plan ilustracji. Lokalny pipeline FitPo50 dodaje lub sprawdza: linki wewnętrzne, kanibalizację, centrum tematyczne, rzeczywiste pliki obrazów, `media_manifest`, daty publikacji, HTML, PDF i publikację.
+Claude tworzy treść, research, mapę dowodów i plan ilustracji. Lokalny agent zawsze wykonuje później:
 
-Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audit`, `topic_center_assessment`, `topic_center_approval` ani `media_manifest`. Nie umieszczaj w treści linków do plików `*.html`.
+- research finalnego FAQ na podstawie aktualnego GSC, PAA lub autocomplete,
+- linkowanie wewnętrzne na podstawie aktualnego repozytorium,
+- analizę kanibalizacji i centrum tematycznego,
+- kontrolę rzeczywistych obrazów, HTML, PDF i publikację.
+
+Claude nie zna aktualnego serwisu ani danych GSC. Dlatego:
+
+- `answer_blocks` i `faq_research` pozostają pustymi listami,
+- nie powstają linki do `*.html`, slugi innych artykułów ani propozycje centrum,
+- `editorial_notes.local_pipeline_tasks` zawiera osobno zadanie FAQ i zadanie linkowania.
+
+Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audit`, `topic_center_assessment`, `topic_center_approval` ani `media_manifest`.
 
 ## Minimalna struktura JSON
 
@@ -32,7 +43,6 @@ Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audi
   "search_intent": "",
   "primary_keyword": "",
   "supporting_keywords": [],
-  "myth_claim": "",
   "key_takeaways": [],
   "sections": [],
   "answer_blocks": [],
@@ -47,112 +57,117 @@ Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audi
     "faq_gaps": [],
     "medical_risks": [],
     "assumptions": [],
-    "local_pipeline_tasks": []
+    "local_pipeline_tasks": [
+      "LOCAL_AGENT_REQUIRED: przygotuj finalne FAQ z aktualnego GSC/PAA/autocomplete.",
+      "LOCAL_AGENT_REQUIRED: dodaj naturalne linkowanie wewnętrzne po analizie aktualnego repozytorium."
+    ]
   }
 }
 ```
 
-`myth_claim` jest wymagane tylko dla kategorii `mity`; w pozostałych kategoriach pomiń je.
+`myth_claim` dodaj wyłącznie dla kategorii `mity`.
 
-## Pola redakcyjne
+## Zakres i konstrukcja artykułu
 
-- `title` i `seo_title`: 55–65 znaków, konkretna intencja, bez „kompletnego przewodnika” i podobnych klisz. `og_title` i `twitter_title` są identyczne z `seo_title`.
-- Cztery pola opisu są identyczne 1:1, mają 145–160 znaków, intencję w pierwszych 120 znakach i pełny znak końca zdania.
-- `lead`: mocne otwarcie, które nazywa problem. Nie powtarza quick answer.
-- `quick_answer`: 45–70 słów, 1–3 pełne zdania, bez wstępu typu „warto pamiętać”. Odpowiada od razu i podaje najważniejszy warunek lub wyjątek.
-- `key_takeaways`: 3–5 konkretnych wniosków, bez claimów szerszych niż dowody.
-- `sections`: zwykle 6–10 logicznych sekcji. Krótszego tematu nie rozciągaj; przy mniej niż 6 sekcjach zapisz powód w `editorial_notes.local_pipeline_tasks`.
-- Pytające H2 kończą się `?`. Pierwszy `paragraphs_html` pod H2 ma odpowiadać bezpośrednio i konkretnie na pytanie; 30–70 słów jest zaleceniem, nie samodzielnym blokerem.
-- Dozwolone bloki treści to semantyczny HTML bez stylów inline. Tabela wymaga wrappera `.article-table-wrap`, `table.article-table`, `caption`, `thead`, `tbody`, `th scope="col"` i — gdy jest nagłówkiem wiersza — `th scope="row"`.
-- Każda sekcja może zawierać `title`, `paragraphs_html`, `list_items` oraz opcjonalny `info_box`. Nie dodawaj `image`; obrazy opisuje `image_prompts_v4`.
+- Artykuł ma wyczerpać realną intencję czytelnika. Nie obowiązuje docelowa liczba słów ani sekcji.
+- Złożony temat może i powinien być dłuższy, jeśli kolejne części wnoszą dowody, mechanizm, praktyczne znaczenie albo bezpieczeństwo.
+- Nie skracaj kosztem brakującego wyjaśnienia. Nie wydłużaj powtórzeniami, listami dla licznika ani sekcjami bez osobnej funkcji.
+- `title` jest naturalnym H1 i nie podlega mechanicznemu limitowi pojedynczych znaków.
+- `seo_title` bez dopisku marki ma maksymalnie 55 znaków. `og_title` i `twitter_title` są identyczne z `seo_title`.
+- `listing_title` ma bezpieczny zakres 45–80 znaków; 55–70 jest celem, nie sztywnym wymogiem.
+- Cztery opisy SEO są identyczne 1:1, mają 145–160 znaków i kończą się pełnym zdaniem.
+- `lead` nazywa problem i nie powtarza quick answer.
+- `quick_answer` zawiera 1–3 konkretne zdania, odpowiada od razu i mieści się w publikacyjnym zakresie 40–60 słów.
+- Pytające H2 kończą się `?`. Pierwszy akapit odpowiada bezpośrednio i konkretnie; 30–70 słów jest zaleceniem, nie samodzielnym blokerem.
+- Każda metafora jest domknięta mechanizmem. Niejasne „to”, „ten wniosek” i „ta obietnica” muszą mieć nazwany poprzednik.
+- Tabela pozostaje semantycznym HTML: wrapper `.article-table-wrap`, `table.article-table`, `caption`, `thead`, `tbody` i właściwe `scope`.
 
 ## Źródła i dowody
 
-Użyj 5–8 źródeł, o ile każde faktycznie wspiera treść. Preferuj aktualne wytyczne, przeglądy systematyczne i metaanalizy; pojedyncze badania służą do uzupełniania. Starsze fundamentalne źródło zestaw z nowszym stanem wiedzy i wyjaśnij, co pozostało aktualne.
+Użyj co najmniej 4 rzeczywistych, wykorzystanych źródeł. Nie ma górnego limitu, jeżeli każde źródło wspiera konkretny claim. Preferuj:
+
+- wytyczne towarzystw naukowych i instytucji publicznych,
+- przeglądy systematyczne i metaanalizy,
+- badania randomizowane, kohortowe i inne oryginalne publikacje,
+- dokumenty regulatorów i oficjalne statystyki.
+
+Nie używaj portali plotkarskich, tekstów sponsorowanych lub afiliacyjnych, anonimowych blogów, streszczeń AI ani strony wyników wyszukiwarki jako źródła. Artykuł popularnonaukowy może pomóc znaleźć publikację, ale nie zastępuje jej jako dowód.
 
 ```json
 {
-  "label": "Pełna nazwa instytucji/publikacji i rodzaj materiału",
+  "label": "Pełna nazwa instytucji lub publikacji i rodzaj materiału",
   "url": "https://...",
-  "evidence_level": "guideline|systematic_review|meta_analysis|randomized_trial|cohort|official_guidance|expert_consensus|official_statistics|technical_documentation",
+  "evidence_level": "guideline|systematic_review|meta_analysis|randomized_trial|cohort|primary_research|official_guidance|regulatory|official_statistics|technical_documentation",
   "publication_year": 2026,
-  "doi_or_pmid": "DOI albo PMID — dla publikacji naukowej, jeśli istnieje",
+  "doi_or_pmid": "DOI albo PMID, jeśli istnieje",
   "checked_at": "YYYY-MM-DD",
   "url_status": "reachable|requires_local_verification",
   "http_status": 200
 }
 ```
 
-Ustaw `reachable` i kod HTTP tylko po rzeczywistym otwarciu adresu. W innym przypadku użyj `requires_local_verification` i pomiń `http_status`. Lokalny pipeline zweryfikuje każdy URL ponownie.
+Ustaw `reachable` i `http_status` tylko po rzeczywistym otwarciu URL-a. W przeciwnym razie użyj `requires_local_verification` i pomiń `http_status`.
 
-Każda liczba, próg, ryzyko, mechanizm, rekomendacja medyczna lub kategoryczna teza wymaga wpisu:
+Każda liczba, próg, ryzyko, cena, mechanizm, rekomendacja, kategoryczna teza medyczna, wynik badania oraz merytoryczny podpis lub tekst ilustracji wymaga `evidence_claims`:
 
 ```json
 {
-  "claim": "Dokładny fragment twierdzenia występujący w treści",
+  "claim": "Dokładny fragment występujący w treści lub podpisie",
   "location": "sections[2].paragraphs_html[0]",
   "claim_type": "medical|safety|mechanism|price|statistic|general",
   "source_urls": ["https://..."]
 }
 ```
 
-Każde źródło musi zostać użyte w co najmniej jednym `evidence_claims`. Gdy wniosek wynika z wcześniejszych przesłanek, dodaj `logic_links` z `conclusion_location`, wcześniejszymi `premise_locations` i krótkim `reasoning`.
+Każde źródło musi być użyte. `logic_links` łączą wniosek z wcześniejszymi przesłankami, gdy relacja nie jest prostym cytowaniem jednego źródła.
 
-## FAQ
+## FAQ i linkowanie
 
-Liczba pytań zależy od prawdziwych sygnałów. Celuj w 4–6, ale nigdy nie wymyślaj pytania dla licznika. Jeśli znajdziesz mniej, pozostaw realne pytania i zapisz brak w `editorial_notes.faq_gaps`; lokalny zespół uzupełni research.
+Claude nie tworzy finalnego FAQ i nie próbuje ustalać linków wewnętrznych. Oba obszary zależą od danych, których nie ma w skillu.
 
-Każdy wpis `answer_blocks` ma `question` i `answer_html`. Każde pytanie musi mieć odpowiednik 1:1 w `faq_research`:
+- `answer_blocks: []`
+- `faq_research: []`
+- brak `href` prowadzących do `*.html`
+- dwa jawne zadania `LOCAL_AGENT_REQUIRED` w `editorial_notes.local_pipeline_tasks`
 
-```json
-{
-  "question": "Dokładnie to samo pytanie",
-  "source_type": "autocomplete|paa|manual_research",
-  "source_label": "Konkretne pochodzenie pytania",
-  "source_url": "https://...",
-  "query": "Sprawdzone zapytanie",
-  "research_note": "Co i gdzie rzeczywiście sprawdzono",
-  "checked_at": "YYYY-MM-DD",
-  "url_status": "reachable|requires_local_verification",
-  "http_status": 200
-}
-```
+Brak FAQ i linków jest na etapie `DRAFT` prawidłowy. Lokalny agent musi je uzupełnić przed `CONTENT_READY`; finalna publikacja nadal podlega pełnym bramkom FAQ i minimum czterech naturalnych linków.
 
-Preferuj prawdziwe autocomplete z zapisanym dokładnym zapytaniem i adresem endpointu. PAA wymaga zapisu zapytania, zaobserwowanego pytania i strony wyników; `manual_research` jest dozwolone tylko dla sprawdzalnego publicznego sygnału opisanego w notatce. Nie używaj GSC, ponieważ Claude nie ma danych FitPo50. Brak sygnału zapisuj jako lukę — nie pytanie. Nie twórz wariantów tego samego pytania. Odpowiedź FAQ także podlega mapowaniu dowodów.
+## Plan ilustracji
 
-## Plan obrazów
+Liczba ilustracji wynika z treści. Wymagany jest jeden hero i przynajmniej jeden główny obraz dla każdej merytorycznej sekcji. Jeżeli sekcja naprawdę zyskuje na drugim wykresie, detalu, infografice lub scenie, dodaj kolejne obrazy zamiast ograniczać się do jednego.
 
-`image_prompts_v4` zawiera dokładnie jeden wpis `hero` i dokładnie jeden wpis dla każdej sekcji (`sekcja-1`, `sekcja-2` itd.). Liczby obrazów nie ograniczaj sztucznie: jeśli temat wymaga 15 znaczących sekcji, przygotuj hero i 15 różnych obrazów; nie dziel jednak treści na sekcje tylko dla zwiększenia liczby ilustracji.
+- obraz główny sekcji: `sekcja-N`,
+- dodatkowe obrazy: `sekcja-N-obraz-2`, `sekcja-N-obraz-3` itd.,
+- `filename_base` jest unikalnym kebab-case,
+- `source_file` jest zawsze dokładną pojedynczą nazwą, standardowo `${filename_base}.jpeg`; nie twórz równoległych źródeł `.jpeg` i `.jpg`.
 
 ```json
 {
-  "section_ref": "hero|sekcja-1",
+  "section_ref": "hero|sekcja-1|sekcja-1-obraz-2",
   "filename_base": "slug-krotki-temat",
+  "source_file": "slug-krotki-temat.jpeg",
   "topic": "Konkretny temat i scena",
-  "technique": "editorial photography|scientific 3D|paper collage|data visualization|macro photography|architectural lifestyle",
+  "technique": "editorial photography|scientific 3D|paper collage|data visualization|infographic|macro photography|architectural lifestyle",
   "composition": "Konkretny kadr, perspektywa i układ",
   "purpose": "Co czytelnik ma zrozumieć i gdzie obraz trafia",
   "aspect_ratio": "16:9",
-  "prompt_en": "Pełny prompt po angielsku",
-  "negative_prompt": "No text, no lettering, no numbers, no logo, no watermark, no UI",
+  "prompt_en": "Pełny prompt po angielsku; ewentualny tekst obrazu pozostaje dokładnie po polsku",
+  "overlay_text_pl": "Opcjonalny dokładny polski napis albo pusty tekst",
+  "negative_prompt": "Bez logo, watermarku, reklamy, błędnej anatomii, przypadkowych liter i nieudowodnionych liczb",
   "alt_pl": "Konkretny opis obrazu po polsku",
   "caption_pl": "Podpis wyjaśniający związek obrazu z sekcją",
-  "visual_review": {
-    "status": "PENDING_LOCAL_REVIEW"
-  }
+  "visual_review": { "status": "PENDING_LOCAL_REVIEW" }
 }
 ```
 
-Hero nie zawiera dodanych napisów reklamowych, liczb, logo, znaków wodnych ani interfejsu. Naturalne napisy obecne w realnym otoczeniu — na ulicy, budynku lub w biurze — są dozwolone, jeśli nie są reklamą ani twierdzeniem medycznym; lokalny agent klasyfikuje je jako `INCIDENTAL_ENVIRONMENT` podczas rzeczywistego visual review. Spójna seria może używać tej samej techniki lub stylu, jeśli każdy kadr ma odrębną wartość dla swojej sekcji. Powtórzone pliki, niemal identyczne kadry, generyczność i obrazy bez wartości blokują pakiet.
+Obrazy mają być jasne, optymistyczne, współczesne i prawdziwe. Ludzie to głównie zadbane osoby 50–65 lat ze średniej klasy: naturalne twarze, sylwetki i ubrania, bez ostentacyjnego luksusu oraz bez stereotypu bezradnego seniora. Pokazuj kobiety i mężczyzn, różne pory roku, miasta, nowoczesne biura i przychodnie, domy, naturę, pracę, aktywność i podróż.
 
-`listing_title` celuje w 55–70 znaków, ale kompletny i czytelny wariant 45–80 znaków jest poprawny. To zalecenie redakcyjne, nie praca mechaniczna na pojedynczych znakach.
+Dopuszczalne są fotografie, ilustracje naukowe, anatomiczne 3D, kolaże, wykresy, infografiki, makro i analogie wizualne. Tekst na obrazie może być naturalnym napisem środowiskowym albo celowym, czytelnym napisem graficznym po polsku. Zaplanuj go dokładnie w `overlay_text_pl`; liczba lub claim wymagają dowodu. Przypadkowy bełkot, obcy język, reklama, logo lub myląca informacja nadal blokują obraz.
 
-Ludzie: głównie 50–65 lat, naturalne rysy, zmarszczki i sylwetki; zadbani, aktywni, dobrze sytuowani, ale bez ostentacyjnego luksusu. Zachowuj równowagę kobiet i mężczyzn w serii. Pory roku — również zima — wnętrza, miasta, natura, praca, podróż i nieoczywiste miejsca tworzą pulę możliwości, nie listę obowiązkową. Każdy kadr musi służyć konkretnej sekcji. Obrazy mają być jasne, optymistyczne i współczesne.
+Wymiary są zakresem, nie pracą mechaniczną: hero ma bezpieczne minimum 1024×560 i zalecenie 1080×600; obrazy sekcji minimum 800×450 i zalecenie 900×500; proporcja krajobrazowa 1.2–2.1. Drobne odchylenie od zalecenia nie blokuje.
 
-Dopuszczalne są fotografie, makro, kolaż redakcyjny, ilustracja naukowa, anatomiczne 3D, atrakcyjna infografika, wykres, plansza i analogia wizualna. Prowokacja ma wynikać z inteligentnego zestawienia lub napięcia, nigdy ze straszenia, upokarzania ani epatowania chorobą.
-
-Zakazane: hero z tekstem; sztuczne „przed i po”; krew i drastyczne zabiegi; logotypy; stockowe uściski lekarza; przesadnie umięśnione ciała; stereotyp bezradnego seniora; powtarzanie jednego kadru; obraz zawierający nieudowodnioną liczbę. Tabele i kompletne dane pozostają HTML-em, nie grafiką.
+Nie wymuszaj sztucznej liczby technik. Seria może być spójna, ale nie może powtarzać tego samego pliku, niemal identycznego kadru ani obrazu bez osobnej wartości. Zakazane są drastyczne zabiegi, upokarzanie, fałszywe „przed i po”, stockowy uścisk lekarza, medycznie błędna anatomia i nieudowodnione obietnice.
 
 ## Artykuły `mity`
 
-Zachowaj rytm: nazwij MIT → podaj werdykt FitPo50 → wyjaśnij dowody i mechanizm → pokaż, co działa zamiast. Atakuj twierdzenie, nie ludzi ani firmy. Dodaj semantyczną tabelę `MIT`–`FAKT/DOWODY`. `ClaimReview` proponuj tylko dla jednego precyzyjnego twierdzenia; lokalny pipeline zdecyduje o jego publikacji.
+Zachowaj rytm: nazwij MIT → podaj werdykt FitPo50 → pokaż dowody i mechanizm → wyjaśnij, co działa zamiast. Atakuj twierdzenie, nie ludzi ani firmy. Dodaj semantyczną tabelę `MIT`–`FAKT/DOWODY`. `ClaimReview` proponuj tylko dla jednego precyzyjnego twierdzenia; lokalny pipeline zdecyduje o publikacji.

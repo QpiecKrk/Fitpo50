@@ -7,7 +7,7 @@ const { canonicalFromHtml, modifiedDates, sha256, verifyDeployment } = require('
 const { publicFingerprint } = require('./prepare-deployment-marker');
 
 function parseArgs(argv) {
-  const out = { baseUrl: 'https://fitpo50.pl', retries: 4, delayMs: 15000, timeoutMs: 20000 };
+  const out = { baseUrl: 'https://fitpo50.pl', retries: 39, delayMs: 15000, timeoutMs: 20000 };
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];
     const value = argv[index + 1];
@@ -97,6 +97,16 @@ async function collect(urls, timeoutMs) {
   return responses;
 }
 
+function cacheBustUrl(url, releaseId) {
+  const target = new URL(url);
+  target.searchParams.set('__fitpo50_release', String(releaseId || Date.now()));
+  return target.href;
+}
+
+async function warmCurrentRelease(urls, timeoutMs, releaseId) {
+  await Promise.all(urls.map((url) => fetchOne(cacheBustUrl(url, releaseId), timeoutMs).catch(() => null)));
+}
+
 function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
 
 async function main() {
@@ -111,10 +121,17 @@ async function main() {
   let result;
   for (let attempt = 0; attempt <= args.retries; attempt += 1) {
     console.log(`[LIVE] Próba ${attempt + 1}/${args.retries + 1}.`);
-    const responses = await collect(urlsFor(args.baseUrl, articles), args.timeoutMs);
+    const urls = urlsFor(args.baseUrl, articles);
+    const responses = await collect(urls, args.timeoutMs);
     result = verifyDeployment({ expectedCommit, remoteCommit, marker, responses, baseUrl: args.baseUrl, baseFiles, articles });
     if (result.status === 'LIVE_DEPLOYED_AND_VALIDATED') break;
-    if (attempt < args.retries) await sleep(args.delayMs);
+    if (attempt < args.retries) {
+      if (result.status === 'DEPLOYED') {
+        console.log(`[CACHE_PROPAGATING] Marker jest aktualny; odświeżam CDN dla wydania ${marker.release_id} i ponawiam kontrolę zwykłych URL-i.`);
+        await warmCurrentRelease(urls, args.timeoutMs, marker.release_id);
+      }
+      await sleep(args.delayMs);
+    }
   }
   const reportDir = path.join('data', 'reports', 'local');
   fs.mkdirSync(reportDir, { recursive: true });
@@ -131,4 +148,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { isPublicRootHtmlPath };
+module.exports = { cacheBustUrl, isPublicRootHtmlPath };

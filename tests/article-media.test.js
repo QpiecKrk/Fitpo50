@@ -80,7 +80,7 @@ function createFiles(dir, value) {
 }
 
 function inspector(file) {
-  const base = path.basename(file).replace(/\.(png|jpg|webp|avif)$/i, '');
+  const base = path.basename(file).replace(/\.(png|jpe?g|webp|avif)$/i, '');
   const index = ['trening-silowy-hero', 'dobor-obciazenia', 'kontrola-techniki', 'regeneracja-treningowa'].indexOf(base) + 1;
   return {
     width: 1200,
@@ -103,6 +103,44 @@ test('tworzy kompletny manifest i mapuje obrazy bez fallbacków', () => {
   assert.equal(value.sections[2].image.src, './assets/regeneracja-treningowa.webp');
   assert.equal(value.media_manifest.entries.length, 4);
   assert.equal(value.media_manifest.version, 2);
+  assert.equal(validateManifestStructure(value).ok, true);
+});
+
+test('utrwala dokładny source_file przed utworzeniem wariantu JPG', () => {
+  const dir = makePackage();
+  const value = article();
+  for (const item of value.image_prompts) {
+    delete item.source_file;
+    for (const extension of ['jpeg', 'webp', 'avif']) fs.writeFileSync(path.join(dir, `${item.filename_base}.${extension}`), item.filename_base);
+  }
+
+  const first = prepareArticleMedia(value, { assetsDir: dir, mutate: true, ensureVariants: false, inspectImage: inspector });
+  assert.equal(first.ok, false);
+  assert.ok(value.image_prompts.every((item) => item.source_file === `${item.filename_base}.jpeg`));
+
+  for (const item of value.image_prompts) fs.writeFileSync(path.join(dir, `${item.filename_base}.jpg`), item.filename_base);
+  const second = prepareArticleMedia(value, { assetsDir: dir, mutate: true, ensureVariants: false, inspectImage: inspector });
+  assert.equal(second.ok, true, second.errors.join('\n'));
+});
+
+test('obsługuje dodatkowe obrazy sekcji bez znoszenia wymaganego obrazu głównego', () => {
+  const dir = makePackage();
+  const value = article();
+  const extra = prompt('sekcja-1-obraz-2', 'dobor-obciazenia-detal', 'Detal ustawienia obciążenia', 'fotografia dokumentalna', 'zbliżenie dłoni przy stosie ciężarów');
+  value.image_prompts.splice(2, 0, extra);
+  createFiles(dir, value);
+  const extraInspector = (file) => {
+    const result = inspector(file);
+    if (path.basename(file).startsWith('dobor-obciazenia-detal')) return { ...result, perceptual_hash: 'e0'.repeat(256) };
+    return result;
+  };
+
+  const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, ensureVariants: false, inspectImage: extraInspector });
+
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.equal(value.sections[0].images.length, 1);
+  assert.equal(value.sections[0].images[0].placement, 'sekcja-1-obraz-2');
+  assert.equal(value.media_manifest.entries.length, 5);
   assert.equal(validateManifestStructure(value).ok, true);
 });
 

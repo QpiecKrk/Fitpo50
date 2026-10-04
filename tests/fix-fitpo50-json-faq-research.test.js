@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const { normalizeFaqResearch } = require('../scripts/fix-fitpo50-json');
+const { normalizeFaqResearch, normalizeImagePromptSectionRef } = require('../scripts/fix-fitpo50-json');
 
 test('JSON fixer preserves provenance required by the FAQ evidence gate', () => {
   const item = {
@@ -18,4 +18,9 @@ test('JSON fixer preserves provenance required by the FAQ evidence gate', () => 
   };
 
   assert.deepEqual(normalizeFaqResearch([item]), [item]);
+});
+
+test('JSON fixer preserves supplemental section image placement', () => {
+  assert.equal(normalizeImagePromptSectionRef('sekcja-2-obraz-3', -1, 4), 'sekcja-2-obraz-3');
+  assert.equal(normalizeImagePromptSectionRef('Sekcja-2', -1, 2), 'sekcja-2');
 });

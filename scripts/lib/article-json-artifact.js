@@ -86,16 +86,30 @@ function inspectPreparedArtifact(inputPath, repoRoot = process.cwd()) {
   };
 }
 
-function cleanupPreparedArtifact(inputPath) {
+function cleanupPreparedArtifact(inputPath, options = {}) {
   const file = path.resolve(inputPath);
+  const remove = options.remove || fs.rmSync;
   const packageDir = path.dirname(file);
   const slug = safeSlug(path.basename(packageDir));
   const isGeneratedReadyPackage = path.basename(path.dirname(packageDir)) === 'fitpo50-json-ready'
     && slug
     && new RegExp(`^${slug}(?:-r\\d+)?\\.fitpo50\\.json$`, 'i').test(path.basename(file));
+  const retained = [];
+  const safelyRemove = (target, removeOptions) => {
+    try {
+      remove(target, removeOptions);
+      return true;
+    } catch (error) {
+      if (['EACCES', 'EPERM', 'EBUSY'].includes(error?.code)) {
+        retained.push({ path: target, code: error.code });
+        return false;
+      }
+      throw error;
+    }
+  };
   if (isGeneratedReadyPackage) {
-    fs.rmSync(packageDir, { recursive: true, force: true });
-    return { removed: [], removed_directories: [packageDir], missing: [] };
+    const removed = safelyRemove(packageDir, { recursive: true, force: true });
+    return { removed: [], removed_directories: removed ? [packageDir] : [], missing: [], retained };
   }
   const targets = [file, reportPathForJson(file), markdownReportPathForJson(file)];
   const removed = [];
@@ -105,10 +119,9 @@ function cleanupPreparedArtifact(inputPath) {
       missing.push(target);
       continue;
     }
-    fs.rmSync(target);
-    removed.push(target);
+    if (safelyRemove(target)) removed.push(target);
   }
-  return { removed, removed_directories: [], missing };
+  return { removed, removed_directories: [], missing, retained };
 }
 
 module.exports = {

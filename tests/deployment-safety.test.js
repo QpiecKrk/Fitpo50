@@ -6,7 +6,7 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { prepareDeploymentMarker } = require('../scripts/prepare-deployment-marker');
 const { verifyDeployment } = require('../scripts/lib/deployment-live-verifier');
-const { isPublicRootHtmlPath } = require('../scripts/deployment-live-verify');
+const { cacheBustUrl, isPublicRootHtmlPath } = require('../scripts/deployment-live-verify');
 
 const ROOT = path.resolve(__dirname, '..');
 function run(command, args, cwd, env = {}) { return spawnSync(command, args, { cwd, env: { ...process.env, ...env }, encoding: 'utf8' }); }
@@ -98,6 +98,12 @@ test('live verifier selects public root HTML and ignores source templates', () =
   assert.equal(isPublicRootHtmlPath('_site/centrum-nadcisnienia-po-50.html'), false);
   assert.equal(isPublicRootHtmlPath('templates/topic-centers/centrum-nadcisnienia-po-50.html'), false);
   assert.equal(isPublicRootHtmlPath('docs/example.html'), false);
+});
+
+test('live verifier creates a release-bound cache-buster without changing the public path', () => {
+  const result = new URL(cacheBustUrl('https://fitpo50.pl/porady.html', 'release-123'));
+  assert.equal(result.pathname, '/porady.html');
+  assert.equal(result.searchParams.get('__fitpo50_release'), 'release-123');
 });
 
 test('recovery dry-run and blocked apply preserve dirty and untracked files', () => {

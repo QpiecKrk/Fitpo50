@@ -92,10 +92,10 @@ def expected_entries(root, html_path):
             if node.name == 'figure' and node.find('picture'):
                 pictures.append(node)
             node = node.find_next_sibling()
-        if len(pictures) == 1:
-            figure = pictures[0]
+        for index, figure in enumerate(pictures, start=1):
             caption = figure.find('figcaption')
-            entries.append(inspect_picture(root, figure.find('picture'), f'section:{title}', caption.get_text(' ', strip=True) if caption else ''))
+            placement = f'section:{title}' if index == 1 else f'section:{title}:image:{index}'
+            entries.append(inspect_picture(root, figure.find('picture'), placement, caption.get_text(' ', strip=True) if caption else ''))
     return entries
 
 
@@ -137,7 +137,7 @@ def validate(root, slug, manifest_path=None):
     expected_by_placement = {entry['placement']: entry for entry in expected}
     actual_by_placement = {entry.get('placement'): entry for entry in actual if isinstance(entry, dict)}
     if set(expected_by_placement) != set(actual_by_placement):
-        errors.append('Manifest musi obejmować hero i dokładnie jeden obraz każdej sekcji merytorycznej.')
+        errors.append('Manifest musi obejmować hero oraz każdy obraz obecny w sekcjach merytorycznych.')
     for placement, expected_entry in expected_by_placement.items():
         entry = actual_by_placement.get(placement, {})
         for field in ('alt', 'caption', 'width', 'height'):

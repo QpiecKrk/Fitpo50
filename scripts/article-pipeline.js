@@ -371,6 +371,7 @@ async function main() {
       const artifactCleanup = cleanupPreparedArtifact(input);
       artifactCleanup.removed.forEach((file) => console.log(`[CLEANUP] Usunięto opublikowany artefakt JSON: ${file}`));
       artifactCleanup.removed_directories.forEach((directory) => console.log(`[CLEANUP] Usunięto wykorzystany pakiet roboczy JSON i mediów: ${directory}`));
+      artifactCleanup.retained.forEach((item) => console.warn(`[WARN] Opublikowany pakiet roboczy pozostał na dysku (${item.code}): ${item.path}`));
       console.log(`[PUBLISHED] ${operation}: zatwierdzono atomowo ${transaction.changed.length} plików po PREVIEW_READY i walidacji repo.`);
       appendTimingReport('article-pipeline-transactional', stepTimings);
       stageStatus = 'COMPLETED';

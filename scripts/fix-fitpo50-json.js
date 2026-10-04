@@ -447,9 +447,22 @@ function validate(json) {
   const prompts = Array.isArray(json.image_prompts_v4) && json.image_prompts_v4.length
     ? json.image_prompts_v4
     : (Array.isArray(json.image_prompts) ? json.image_prompts : []);
-  const expectedImages = (Array.isArray(json.sections) ? json.sections.length : 0) + 1;
-  if (prompts.length !== expectedImages) errors.push(`image_prompts musi zawierać dokładnie hero + obraz każdej sekcji (${expectedImages}); jest ${prompts.length}.`);
+  const requiredPlacements = new Set([
+    'hero',
+    ...(Array.isArray(json.sections) ? json.sections.map((_, index) => `sekcja-${index + 1}`) : []),
+  ]);
+  const actualPlacements = new Set(prompts.map((prompt) => String(prompt?.section_ref || '').trim().toLowerCase()));
+  const missingPlacements = [...requiredPlacements].filter((placement) => !actualPlacements.has(placement));
+  if (missingPlacements.length) errors.push(`image_prompts nie obejmuje wymaganych placementów: ${missingPlacements.join(', ')}.`);
   return errors;
+}
+
+function normalizeImagePromptSectionRef(rawRef, sectionIndex, promptIndex) {
+  const value = String(rawRef || '').trim();
+  if (/^hero$/i.test(value)) return 'hero';
+  if (/^sekcja-\d+(?:-obraz-\d+)?$/i.test(value)) return value.toLowerCase();
+  if (sectionIndex >= 0) return `sekcja-${sectionIndex + 1}`;
+  return promptIndex === 0 ? 'hero' : value;
 }
 
 function main() {
@@ -537,19 +550,26 @@ function main() {
 
     const listItems = Array.isArray(section.list_items) ? section.list_items : htmlToListItems(section.content_html || '');
     const infoBox = section.info_box && typeof section.info_box === 'object' ? section.info_box : {};
-    const image = section.image && typeof section.image === 'object' ? section.image : {};
-    const normalizedSection = {
-      title,
-      paragraphs_html: paragraphs,
-      list_items: listItems.map((x) => stripTags(String(x || '')).trim()).filter(Boolean),
-      evidence_source_ids: [...new Set((Array.isArray(section.evidence_source_ids) ? section.evidence_source_ids : []).map((id) => String(id || '').trim()).filter(Boolean))],
-      image: {
+    const normalizeSectionImage = (value) => {
+      const image = value && typeof value === 'object' ? value : {};
+      return {
+        ...(String(image.placement || '').trim() ? { placement: String(image.placement).trim() } : {}),
         src: String(image.src || '').trim(),
         alt: stripTags(String(image.alt || '')).trim(),
         caption: stripTags(String(image.caption || '')).trim(),
         width: Number(image.width || 0) || 0,
         height: Number(image.height || 0) || 0,
-      },
+      };
+    };
+    const image = normalizeSectionImage(section.image);
+    const images = (Array.isArray(section.images) ? section.images : []).map(normalizeSectionImage).filter((item) => item.src);
+    const normalizedSection = {
+      title,
+      paragraphs_html: paragraphs,
+      list_items: listItems.map((x) => stripTags(String(x || '')).trim()).filter(Boolean),
+      evidence_source_ids: [...new Set((Array.isArray(section.evidence_source_ids) ? section.evidence_source_ids : []).map((id) => String(id || '').trim()).filter(Boolean))],
+      image,
+      images,
     };
     if (String(infoBox.content_html || '').trim()) {
       normalizedSection.info_box = {
@@ -583,9 +603,7 @@ function main() {
     const prompt = p && typeof p === 'object' ? p : {};
     const rawRef = String(prompt.section_ref || '').trim();
     const sectionIndex = json.sections.findIndex((section) => stripTags(section.title).toLowerCase() === ensureQuestionHeading(stripTags(rawRef)).toLowerCase());
-    const sectionRef = /^hero$/i.test(rawRef)
-      ? 'hero'
-      : (/^sekcja-\d+$/i.test(rawRef) ? rawRef.toLowerCase() : (sectionIndex >= 0 ? `sekcja-${sectionIndex + 1}` : (promptIndex === 0 ? 'hero' : rawRef)));
+    const sectionRef = normalizeImagePromptSectionRef(rawRef, sectionIndex, promptIndex);
     return {
       ...prompt,
       section_ref: sectionRef,
@@ -664,4 +682,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { ensureParagraphWrapper, normalizeFaqResearch };
+module.exports = { ensureParagraphWrapper, normalizeFaqResearch, normalizeImagePromptSectionRef };

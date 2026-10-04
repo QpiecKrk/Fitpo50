@@ -6,16 +6,10 @@ from __future__ import annotations
 import json
 import re
 import sys
-from collections import Counter
 from datetime import date
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
-
-VISUAL_REVIEW_CONTRACT = json.loads(
-    (Path(__file__).resolve().parents[4] / "scripts" / "contracts" / "article-visual-review-v3.json").read_text(encoding="utf-8")
-)
-SECTION_LAYOUT = VISUAL_REVIEW_CONTRACT["image_layout"]["section"]
 
 CATEGORIES = {"zdrowie", "jedzenie", "ruch", "ciekawe", "mity"}
 LOCAL_FIELDS = {"internal_link_plan", "incoming_link_suggestions", "intent_audit", "topic_center_assessment", "topic_center_approval", "media_manifest"}
@@ -32,7 +26,6 @@ EVIDENCE_LEVELS = {
     "primary_source", "secondary_analysis",
 }
 CLAIM_TYPES = {"medical", "safety", "statistic", "price", "mechanism", "general"}
-FAQ_TYPES = {"autocomplete", "paa", "manual_research"}
 NOTE_FIELDS = ("uncertain_claims", "missing_evidence", "faq_gaps", "medical_risks", "assumptions", "local_pipeline_tasks")
 QUESTION_STARTERS = ("czy ", "jak ", "dlaczego ", "ile ", "kiedy ", "co ", "który ", "która ", "jakie ")
 PLACEHOLDER = re.compile(r"\b(todo|tbd|placeholder|do uzupełnienia|do doprecyzowania|wariant\s+\d+)\b|\{\{", re.I)
@@ -116,10 +109,14 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
     for field in LOCAL_FIELDS & data.keys():
         errors.append(f"{field} jest polem lokalnego pipeline i nie może powstać w Claude.")
 
-    for field in ("title", "seo_title"):
-        value = str(data.get(field, ""))
-        if value and not 55 <= len(value) <= 65:
-            errors.append(f"{field} ma {len(value)} znaków; wymagane 55–65.")
+    seo_title = str(data.get("seo_title", ""))
+    if seo_title and len(seo_title) > 55:
+        errors.append(f"seo_title ma {len(seo_title)} znaków; maksimum bez dopisku marki to 55.")
+    listing_title = str(data.get("listing_title", ""))
+    if listing_title and not 45 <= len(listing_title) <= 80:
+        errors.append(f"listing_title ma {len(listing_title)} znaków; bezpieczny zakres to 45–80.")
+    elif listing_title and not 55 <= len(listing_title) <= 70:
+        warnings.append(f"listing_title ma {len(listing_title)} znaków; zalecany cel to 55–70, ale zakres jest poprawny.")
     if data.get("og_title") != data.get("seo_title") or data.get("twitter_title") != data.get("seo_title"):
         errors.append("og_title i twitter_title muszą być identyczne z seo_title.")
     descriptions = [str(data.get(field, "")) for field in ("meta_description", "og_description", "twitter_description", "schema_blogposting_description")]
@@ -130,10 +127,11 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
     if descriptions[0] and descriptions[0][-1] not in ".!?":
         errors.append("Opis SEO musi kończyć się pełnym znakiem zdania.")
     quick = str(data.get("quick_answer", ""))
-    if quick and not 45 <= words(quick) <= 70:
-        errors.append(f"quick_answer ma {words(quick)} słów; wymagane 45–70.")
     if quick and not 1 <= sentences(quick) <= 3:
         errors.append(f"quick_answer ma {sentences(quick)} zdań; wymagane 1–3.")
+    quick_words = words(quick)
+    if quick and not 40 <= quick_words <= 60:
+        errors.append(f"quick_answer ma {quick_words} słów; publikacyjny zakres to 40–60.")
     if not re.fullmatch(r"\d+ min czytania", str(data.get("reading_time", ""))):
         errors.append('reading_time musi mieć format "X min czytania".')
     if not string_list(data.get("supporting_keywords"), 3, 8):
@@ -147,12 +145,15 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
         for field in NOTE_FIELDS:
             if not string_list(notes.get(field), 0):
                 errors.append(f"editorial_notes.{field} musi być listą tekstów (może być pustą).")
+        tasks = " ".join(notes.get("local_pipeline_tasks", [])).casefold() if isinstance(notes.get("local_pipeline_tasks"), list) else ""
+        if "faq" not in tasks:
+            errors.append("editorial_notes.local_pipeline_tasks musi zlecać lokalnemu agentowi finalny research FAQ.")
+        if "link" not in tasks:
+            errors.append("editorial_notes.local_pipeline_tasks musi zlecać lokalnemu agentowi linkowanie wewnętrzne.")
 
     sections = data.get("sections") if isinstance(data.get("sections"), list) else []
     if not sections:
         errors.append("Brak sections[].")
-    elif len(sections) < 6:
-        warnings.append(f"Tylko {len(sections)} sekcji; DRAFT_REVIEW_REQUIRED przed lokalnym gate.")
     for index, section in enumerate(sections):
         if not isinstance(section, dict):
             errors.append(f"sections[{index}] nie jest obiektem.")
@@ -179,8 +180,8 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
                 errors.append(f"Pierwszy akapit sections[{index}] nie domyka odpowiedzi answer-first.")
             if generic_intro:
                 errors.append(f"Pierwszy akapit sections[{index}] jest generyczny.")
-        if "image" in section:
-            errors.append(f"sections[{index}].image jest polem lokalnym; użyj image_prompts_v4.")
+        if "image" in section or "images" in section:
+            errors.append(f"sections[{index}] nie może zawierać lokalnych image/images; użyj image_prompts_v4.")
     content_data = {key: value for key, value in data.items() if key != "editorial_notes"}
     joined = "\n".join(walk_strings(content_data))
     if re.search(r'href=["\'][^"\']*\.html', joined, re.I):
@@ -189,8 +190,8 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
         errors.append("Wykryto placeholder, sztuczny wariant lub wpis do uzupełnienia w treści JSON.")
 
     sources = data.get("sources") if isinstance(data.get("sources"), list) else []
-    if not 5 <= len(sources) <= 8:
-        warnings.append(f"Źródeł jest {len(sources)}; DRAFT_REVIEW_REQUIRED, jeśli brak nie jest uzasadniony.")
+    if len(sources) < 4:
+        errors.append(f"Źródeł jest {len(sources)}; wymagane są co najmniej 4 rzeczywiste i wykorzystane źródła.")
     source_urls: set[str] = set()
     for index, source in enumerate(sources):
         if not isinstance(source, dict):
@@ -266,55 +267,13 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
 
     faq = data.get("answer_blocks") if isinstance(data.get("answer_blocks"), list) else []
     research = data.get("faq_research") if isinstance(data.get("faq_research"), list) else []
-    faq_questions: list[str] = []
-    for index, item in enumerate(faq):
-        if not isinstance(item, dict) or not isinstance(item.get("question"), str) or not isinstance(item.get("answer_html"), str):
-            errors.append(f"answer_blocks[{index}] wymaga tekstowych question i answer_html.")
-            continue
-        if not item["question"].strip().endswith("?") or words(item["answer_html"]) < 15:
-            errors.append(f"answer_blocks[{index}] wymaga pytania z ? i konkretnej odpowiedzi.")
-        faq_questions.append(item["question"].strip())
-    research_questions: list[str] = []
-    for index, item in enumerate(research):
-        if not isinstance(item, dict):
-            errors.append(f"faq_research[{index}] nie jest obiektem.")
-            continue
-        question, source_type = item.get("question"), item.get("source_type")
-        if not isinstance(question, str) or not question.strip():
-            errors.append(f"faq_research[{index}].question jest puste.")
-        else:
-            research_questions.append(question.strip())
-        if source_type not in FAQ_TYPES:
-            errors.append(f"faq_research[{index}].source_type ma niedozwoloną wartość.")
-        for field in ("source_label", "query", "research_note"):
-            if not isinstance(item.get(field), str) or len(item[field].strip()) < 5:
-                errors.append(f"faq_research[{index}].{field} wymaga konkretnego opisu.")
-        source_url = item.get("source_url")
-        if not is_https(source_url):
-            errors.append(f"faq_research[{index}].source_url musi być publicznym HTTPS URL-em.")
-        host = urlparse(source_url).hostname if isinstance(source_url, str) else ""
-        if source_type == "autocomplete" and host not in {"suggestqueries.google.com", "www.google.com", "google.com"}:
-            errors.append(f"faq_research[{index}] autocomplete wymaga prawdziwego endpointu Google.")
-        if source_type in {"paa", "manual_research"} and len(str(item.get("research_note", ""))) < 20:
-            errors.append(f"faq_research[{index}] {source_type} wymaga sprawdzalnej notatki obserwacji.")
-        if not is_date(item.get("checked_at")):
-            errors.append(f"faq_research[{index}].checked_at musi być datą YYYY-MM-DD.")
-        status = item.get("url_status")
-        if status not in {"reachable", "requires_local_verification"}:
-            errors.append(f"faq_research[{index}].url_status ma niedozwoloną wartość.")
-        if status == "reachable" and not isinstance(item.get("http_status"), int):
-            errors.append(f"faq_research[{index}] reachable wymaga liczbowego http_status.")
-        if status == "requires_local_verification" and "http_status" in item:
-            errors.append(f"faq_research[{index}] nieweryfikowane nie może deklarować http_status.")
-    if len(faq_questions) < 4:
-        warnings.append(f"FAQ ma {len(faq_questions)} pytań; DRAFT_REVIEW_REQUIRED i potrzebny dodatkowy research.")
-    if Counter(faq_questions) != Counter(research_questions):
-        errors.append("answer_blocks i faq_research nie odpowiadają sobie 1:1.")
-    if len(faq_questions) != len(set(question.casefold() for question in faq_questions)):
-        errors.append("FAQ zawiera duplikaty pytań.")
+    if faq:
+        errors.append("answer_blocks musi pozostać puste; finalne FAQ przygotowuje lokalny agent z aktualnych danych.")
+    if research:
+        errors.append("faq_research musi pozostać puste; research FAQ wykonuje lokalny agent.")
 
     prompts = data.get("image_prompts_v4") if isinstance(data.get("image_prompts_v4"), list) else []
-    expected = {"hero", *(f"sekcja-{index + 1}" for index in range(len(sections)))}
+    required = {"hero", *(f"sekcja-{index + 1}" for index in range(len(sections)))}
     placements: list[str] = []
     filenames: list[str] = []
     for index, prompt in enumerate(prompts):
@@ -335,21 +294,24 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
             errors.append(f"image_prompts_v4[{index}].filename_base musi być unikalnym kebab-case.")
         else:
             filenames.append(filename)
+        source_file = prompt.get("source_file")
+        allowed_source = isinstance(source_file, str) and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*\.(?:jpe?g|png)", source_file)
+        if not allowed_source or not isinstance(filename, str) or not source_file.startswith(f"{filename}."):
+            errors.append(f"image_prompts_v4[{index}].source_file musi być dokładną nazwą filename_base z rozszerzeniem .jpeg, .jpg albo .png.")
         ratio = prompt.get("aspect_ratio")
         match = re.fullmatch(r"(\d+(?:\.\d+)?):(\d+(?:\.\d+)?)", str(ratio or ""))
         ratio_value = float(match.group(1)) / float(match.group(2)) if match and float(match.group(2)) else 0
-        if not match or not SECTION_LAYOUT["min_aspect_ratio"] <= ratio_value <= SECTION_LAYOUT["max_aspect_ratio"]:
-            errors.append(
-                f"image_prompts_v4[{index}].aspect_ratio musi być poprawną proporcją poziomą "
-                f"{SECTION_LAYOUT['min_aspect_ratio']}–{SECTION_LAYOUT['max_aspect_ratio']}."
-            )
+        if not match or not 1.2 <= ratio_value <= 2.1:
+            errors.append("image_prompts_v4[{index}].aspect_ratio musi być poprawną proporcją poziomą 1.2–2.1.".format(index=index))
         review = prompt.get("visual_review")
         if not isinstance(review, dict) or review.get("status") != "PENDING_LOCAL_REVIEW":
             errors.append(f"image_prompts_v4[{index}].visual_review.status musi być PENDING_LOCAL_REVIEW.")
-        negative = str(prompt.get("negative_prompt", "")).casefold()
-        if placement == "hero" and not all(term in negative for term in ("no text", "no lettering", "no numbers", "no logo", "no watermark", "no ui")):
-            errors.append("Hero negative_prompt musi zakazywać tekstu, liter, liczb, logo, watermarku i UI.")
-    missing, extra = sorted(expected - set(placements)), sorted(set(placements) - expected)
+        if "overlay_text_pl" in prompt and not isinstance(prompt.get("overlay_text_pl"), str):
+            errors.append(f"image_prompts_v4[{index}].overlay_text_pl musi być tekstem, także gdy jest pusty.")
+    allowed = set(required)
+    for section_index in range(len(sections)):
+        allowed.update(placement for placement in placements if re.fullmatch(fr"sekcja-{section_index + 1}-obraz-[2-9]\d*", placement))
+    missing, extra = sorted(required - set(placements)), sorted(set(placements) - allowed)
     if missing:
         errors.append(f"Brak promptów obrazów dla: {', '.join(missing)}.")
     if extra:
@@ -365,10 +327,8 @@ def validate(data: dict[str, Any]) -> tuple[list[str], list[str]]:
         if not all(token in joined.casefold() for token in ("<table", "<caption", "<thead", "<tbody")):
             errors.append("Artykuł mity wymaga semantycznej tabeli MIT–FAKT/DOWODY.")
     article_words = sum(words(value) for section in sections if isinstance(section, dict) for value in section.get("paragraphs_html", []) if isinstance(value, str))
-    if article_words < 1500:
-        warnings.append(f"Treść główna ma około {article_words} słów; sprawdź kompletność bez sztucznego rozciągania.")
-    elif article_words > 3500:
-        warnings.append(f"Treść główna ma około {article_words} słów; sprawdź powtórzenia.")
+    if article_words < 800:
+        warnings.append(f"Treść główna ma około {article_words} słów; sprawdź, czy temat rzeczywiście został wyczerpany.")
     return errors, warnings
 
 

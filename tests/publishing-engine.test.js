@@ -59,6 +59,20 @@ test('importer preserves inline links and emphasis in the first paragraph under 
   assert.equal(utils.countWords(utils.stripTags(section.blocks[0].html)), 12);
 });
 
+test('importer preserves additional section images as separate picture blocks', () => {
+  const [section] = normalizeSections([{
+    heading: 'Jak działa dodatkowy obraz?',
+    paragraphs_html: ['<p>Pierwszy akapit odpowiada bezpośrednio na pytanie.</p>'],
+    image: { src: './assets/glowny.webp', alt: 'Obraz główny', caption: 'Główny podpis', width: 900, height: 500 },
+    images: [{ src: './assets/detal.webp', alt: 'Detal', caption: 'Dodatkowy podpis', width: 900, height: 500 }],
+  }]);
+
+  const html = section.blocks.map((block) => block.html).join('\n');
+  assert.match(html, /glowny\.webp/);
+  assert.match(html, /detal\.webp/);
+  assert.equal((html.match(/<picture>/g) || []).length, 2);
+});
+
 test('SEO title base reserves space for the FitPo50 brand suffix', () => {
   const base = normalizeSeoTitleBase('Czy bardzo długi tytuł artykułu może przekroczyć limit Google i zepsuć walidację strony');
   assert.ok(base.length <= POLICY.TITLE.SEO_BASE_MAX);

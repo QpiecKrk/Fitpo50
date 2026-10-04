@@ -153,9 +153,26 @@ function promptMap(article) {
   return promptsV4.length ? promptsV4 : (Array.isArray(article.image_prompts) ? article.image_prompts : []);
 }
 
-function expectedPlacements(article) {
+function requiredPlacements(article) {
   const sections = Array.isArray(article.sections) ? article.sections : [];
   return ['hero', ...sections.map((_section, index) => `sekcja-${index + 1}`)];
+}
+
+function sectionIndexFromPlacement(placement) {
+  const match = String(placement || '').match(/^sekcja-(\d+)(?:-obraz-(\d+))?$/);
+  return match ? Number(match[1]) - 1 : -1;
+}
+
+function allowedPlacement(placement, sectionCount) {
+  if (placement === 'hero') return true;
+  const index = sectionIndexFromPlacement(placement);
+  return index >= 0 && index < sectionCount;
+}
+
+function expectedPlacements(article) {
+  const prompts = promptMap(article);
+  const placements = prompts.map((prompt) => String(prompt?.section_ref || '').trim()).filter(Boolean);
+  return placements.length ? placements : requiredPlacements(article);
 }
 
 function placementContext(article, placement) {
@@ -276,9 +293,13 @@ function validateManifestStructure(article) {
   const entries = Array.isArray(manifest.entries) ? manifest.entries : [];
   if (manifest.version !== 2) errors.push('media_manifest: wymagane version=2 z pełną kontrolą tekstu, anatomii i sprzętu.');
   const expected = expectedPlacements(article);
+  const required = requiredPlacements(article);
   if (entries.length !== expected.length) errors.push(`media_manifest.entries: wymagane ${expected.length}, jest ${entries.length}.`);
   expected.forEach((placement) => {
     if (entries.filter((entry) => entry.placement === placement).length !== 1) errors.push(`media_manifest: placement ${placement} musi wystąpić dokładnie raz.`);
+  });
+  required.forEach((placement) => {
+    if (!expected.includes(placement)) errors.push(`media_manifest: brak wymaganego placement ${placement}.`);
   });
   if (!/^\d{4}-\d{2}-\d{2}T/.test(String(manifest.generated_at || ''))) errors.push('media_manifest: brak poprawnego generated_at.');
   entries.forEach((entry) => {
@@ -304,8 +325,11 @@ function validateManifestStructure(article) {
     if (Number(article.hero_width) !== Number(hero.source?.width) || Number(article.hero_height) !== Number(hero.source?.height)) errors.push('Wymiary hero w JSON nie zgadzają się z media_manifest.');
   }
   entries.filter((entry) => entry.placement !== 'hero').forEach((entry) => {
-    const index = Number((entry.placement.match(/(\d+)/) || [])[1] || 0) - 1;
-    const image = article.sections?.[index]?.image || {};
+    const index = sectionIndexFromPlacement(entry.placement);
+    const section = article.sections?.[index] || {};
+    const image = entry.placement === `sekcja-${index + 1}`
+      ? (section.image || {})
+      : (Array.isArray(section.images) ? section.images.find((item) => item?.placement === entry.placement) : null) || {};
     if (image.src !== `./assets/${entry.filename_base}.webp`) errors.push(`${entry.placement}: sections[].image.src nie zgadza się z media_manifest.`);
     if (image.alt !== entry.alt || image.caption !== entry.caption) errors.push(`${entry.placement}: alt lub podpis sekcji nie zgadza się z media_manifest.`);
     if (Number(image.width) !== Number(entry.source?.width) || Number(image.height) !== Number(entry.source?.height)) errors.push(`${entry.placement}: wymiary sekcji nie zgadzają się z media_manifest.`);
@@ -331,17 +355,27 @@ function prepareArticleMedia(article, options = {}) {
     return { ok: false, errors: [`Brak jednego katalogu pakietu mediów: ${assetsDir}.`], warnings, entries: [], created };
   }
   const prompts = promptMap(article);
-  const expected = expectedPlacements(article);
+  const required = requiredPlacements(article);
+  const sectionCount = Array.isArray(article.sections) ? article.sections.length : 0;
   const byPlacement = new Map();
   prompts.forEach((prompt) => {
     const placement = String(prompt?.section_ref || '').trim();
     if (byPlacement.has(placement)) errors.push(`Powtórzony section_ref w image_prompts: ${placement || 'MISSING'}.`);
     byPlacement.set(placement, prompt || {});
   });
-  expected.forEach((placement) => {
+  required.forEach((placement) => {
     if (!byPlacement.has(placement)) errors.push(`Brak obrazu dla ${placement}.`);
   });
-  [...byPlacement.keys()].filter((placement) => !expected.includes(placement)).forEach((placement) => errors.push(`Nadmiarowy lub nieznany section_ref: ${placement || 'MISSING'}.`));
+  [...byPlacement.keys()].filter((placement) => !allowedPlacement(placement, sectionCount)).forEach((placement) => errors.push(`Nadmiarowy lub nieznany section_ref: ${placement || 'MISSING'}.`));
+
+  const expected = [
+    'hero',
+    ...Array.from({ length: sectionCount }, (_unused, index) => {
+      const primary = `sekcja-${index + 1}`;
+      const extras = [...byPlacement.keys()].filter((placement) => placement.startsWith(`${primary}-obraz-`));
+      return [primary, ...extras];
+    }).flat(),
+  ];
 
   const entries = [];
   for (const placement of expected) {
@@ -355,6 +389,7 @@ function prepareArticleMedia(article, options = {}) {
     validateDescriptiveFields(prompt, placementContext(article, placement), placement, errors);
     const sourceName = selectSourceFile(prompt, assetsDir, errors);
     if (!sourceName) continue;
+    if (mutate) prompt.source_file = sourceName;
     const sourcePath = path.join(assetsDir, sourceName);
     let source;
     try {
@@ -442,16 +477,22 @@ function prepareArticleMedia(article, options = {}) {
       article.hero_width = hero.source.width;
       article.hero_height = hero.source.height;
     }
+    (article.sections || []).forEach((section) => {
+      section.images = [];
+    });
     entries.filter((entry) => entry.placement !== 'hero').forEach((entry) => {
-      const index = Number((entry.placement.match(/(\d+)/) || [])[1] || 0) - 1;
+      const index = sectionIndexFromPlacement(entry.placement);
       if (!article.sections?.[index]) return;
-      article.sections[index].image = {
+      const image = {
+        placement: entry.placement,
         src: `./assets/${entry.filename_base}.webp`,
         alt: entry.alt,
         caption: entry.caption,
         width: entry.source.width,
         height: entry.source.height,
       };
+      if (entry.placement === `sekcja-${index + 1}`) article.sections[index].image = image;
+      else article.sections[index].images.push(image);
     });
   }
   return { ok: errors.length === 0, errors, warnings, entries, manifest, created };

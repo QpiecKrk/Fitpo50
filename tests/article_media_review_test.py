@@ -56,6 +56,25 @@ class ArticleMediaReviewTest(unittest.TestCase):
             slug, _, manifest = self.package(root)
             self.assertEqual(REVIEW.validate(root, slug, manifest), [])
 
+    def test_multiple_section_images_are_all_included_in_review(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            _, html, _ = self.package(root)
+            assets = root / 'assets'
+            image = Image.new('RGB', (1200, 675), 'orange')
+            image.save(assets / 'section-extra.jpg')
+            image.save(assets / 'section-extra.webp', 'WEBP')
+            image.save(assets / 'section-extra.avif', 'AVIF')
+            extra = '''<figure><picture>
+          <source type="image/avif" srcset="./assets/section-extra.avif"><source type="image/webp" srcset="./assets/section-extra.webp">
+          <img src="./assets/section-extra.jpg" alt="Dodatkowy wykres uzupełniający wyniki badania" width="1200" height="675"></picture>
+          <figcaption>Dodatkowy wykres pokazuje drugi aspekt wyników opisanych w sekcji.</figcaption></figure>'''
+            html.write_text(html.read_text().replace('<h2 id="zrodla">Źródła</h2>', f'{extra}<h2 id="zrodla">Źródła</h2>'))
+            entries = REVIEW.expected_entries(root, html)
+            self.assertEqual([entry['placement'] for entry in entries], [
+                'hero', 'section:Co pokazuje badanie?', 'section:Co pokazuje badanie?:image:2',
+            ])
+
     def test_html_change_and_misleading_text_confirmation_block(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

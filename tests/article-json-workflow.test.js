@@ -216,6 +216,24 @@ test('successful publish removes the complete generated ready package but preser
   assert.equal(fs.existsSync(siblingDir), true);
 }));
 
+test('published package cleanup reports EPERM without turning a completed publication into failure', () => withTempDir((dir) => {
+  const packageDir = path.join(dir, 'fitpo50-json-ready', 'nowy-artykul');
+  fs.mkdirSync(packageDir, { recursive: true });
+  const file = path.join(packageDir, 'nowy-artykul.fitpo50.json');
+  fs.writeFileSync(file, '{}');
+  const blockedRemove = () => {
+    const error = new Error('Operation not permitted');
+    error.code = 'EPERM';
+    throw error;
+  };
+
+  const result = cleanupPreparedArtifact(file, { remove: blockedRemove });
+
+  assert.deepEqual(result.removed_directories, []);
+  assert.deepEqual(result.retained, [{ path: packageDir, code: 'EPERM' }]);
+  assert.equal(fs.existsSync(file), true);
+}));
+
 test('existing slug produces durable BLOCKED JSON and never touches HTML', () => withTempDir((dir) => {
   const slug = 'apob-norma-cena-jak-czytac-wynik';
   const existingHtml = path.join(REPO, `${slug}.html`);
