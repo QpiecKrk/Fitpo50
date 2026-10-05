@@ -1,0 +1,1108 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-10-05T02:52:02.081Z",
+  "reviewed_at": "2026-10-05T04:55:53+02:00",
+  "slug": "bol-krzyza-po-50-lezenie-czy-cwiczenia",
+  "html_sha256": "27afee41d27b9b5fb20524e619e8ee432e5ed0204333a45f8128a1222410d006",
+  "site_html_sha256": "27afee41d27b9b5fb20524e619e8ee432e5ed0204333a45f8128a1222410d006",
+  "pdf_sha256": "8eafce8b9b6a3488163a1c2398dd9956d4cb1ad03393fb63e1a91e856be559c1",
+  "site_pdf_sha256": "8eafce8b9b6a3488163a1c2398dd9956d4cb1ad03393fb63e1a91e856be559c1",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-05T02:52:02.081Z",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 1
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "bol-krzyza-po-50-lezenie-czy-cwiczenia.html",
+      "sha256": "27afee41d27b9b5fb20524e619e8ee432e5ed0204333a45f8128a1222410d006",
+      "bytes": 55342
+    },
+    "html_site": {
+      "file": "_site/bol-krzyza-po-50-lezenie-czy-cwiczenia.html",
+      "sha256": "27afee41d27b9b5fb20524e619e8ee432e5ed0204333a45f8128a1222410d006",
+      "bytes": 55342
+    },
+    "pdf_source": {
+      "file": "assets/pdf/bol-krzyza-po-50-lezenie-czy-cwiczenia.pdf",
+      "sha256": "8eafce8b9b6a3488163a1c2398dd9956d4cb1ad03393fb63e1a91e856be559c1",
+      "bytes": 1013421
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/bol-krzyza-po-50-lezenie-czy-cwiczenia.pdf",
+      "sha256": "8eafce8b9b6a3488163a1c2398dd9956d4cb1ad03393fb63e1a91e856be559c1",
+      "bytes": 1013421
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/desktop.png",
+      "screenshot_sha256": "13826c6222d0d244ada483142dd34ea4f73ac58ce827045efa69dfba2a729220",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/mobile.png",
+      "screenshot_sha256": "a1b7af36abb2cb6ab65e92fa011a28c28ccdf95e5c3bc3798b6ae51f5decdb5c",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "RUCH 10 min czytania Aktualizacja: 05.10.2026 Boli cię krzyż? Leżenie nie leczy. 8 ćwiczeń na 3 etapy bólu Plecy nie potrzebują urlopu. Potrzebują ruchu.",
+      "alt": "Mężczyzna po pięćdziesiątce wiąże buty do marszu, w tle kobieta rozwija matę do ćwiczeń w jasnym mieszkaniu",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-hero.avif",
+          "sha256": "5fcacad0237c628c7ad286499a85b2ae33674578aee504f2bf21afe3aa11b92c",
+          "bytes": 45776,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-hero.webp",
+          "sha256": "2a8da2b351cd5258596a983044a35e86ba74643caba21c7ca8fc89cbfd9c6f98",
+          "bytes": 60932,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-hero.jpg",
+          "sha256": "72bd5f83b5844dc07ea1061db5ee8d8c901218af73a7f2ed4e54803efb356435",
+          "bytes": 198120,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5d5270c68190efe2b614827e187d273fa8c21320c92694bfa2ca6aad20f44f1e"
+    },
+    {
+      "placement": "content:2:kiedy-z-bolem-krzyza-jechac-do-lekarza-zamiast-c",
+      "role": "content",
+      "heading": "Kiedy z bólem krzyża jechać do lekarza zamiast ćwiczyć?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Kobieta po pięćdziesiątce siedzi na łóżku i spokojnie dzwoni po pomoc medyczną",
+      "caption": "Drętwienie krocza albo kłopoty z pęcherzem przy bólu krzyża to sygnał do telefonu, nie do maty.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-objawy-alarmowe.avif",
+          "sha256": "4bba32d05d5e4be2582150b8ec2a7f3e1955e292a556053f7bd355a38009a329",
+          "bytes": 32518,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-objawy-alarmowe.webp",
+          "sha256": "a0f6d7e84a7b80bd0dd582c757ec6b8e5baa34e8cba465e41a0f4cce313f5be0",
+          "bytes": 41820,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-objawy-alarmowe.jpg",
+          "sha256": "ccb35533ffc87aaedad6aa1dcb77c3591e8c766aa3c4d1a8b0f490e36674d114",
+          "bytes": 145635,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "48192119075c65ce0084ab01b927266ae70b92dbadb1a0dc923986f98011fc7d"
+    },
+    {
+      "placement": "content:3:czy-lezenie-w-lozku-pomaga-na-bol-krzyza",
+      "role": "content",
+      "heading": "Czy leżenie w łóżku pomaga na ból krzyża?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Widok z góry na pustą kanapę z kocem i stopy w kolorowych butach odchodzące w stronę drzwi",
+      "caption": "Kanapa kusi, ale przy bólu krzyża rada, by pozostać aktywnym, wypada lepiej niż leżenie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-lezenie-czy-ruch.avif",
+          "sha256": "39637becd3ecae720e9a5ec83a5fcb443847830a67655de2c90798ff173e9ade",
+          "bytes": 76205,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-lezenie-czy-ruch.webp",
+          "sha256": "5a8abbe5de6e2db731771dcb0dafdd843829e0fdd8fc44414b99c5de29d7ee00",
+          "bytes": 116904,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-lezenie-czy-ruch.jpg",
+          "sha256": "70f0048262273f9eca8f7e447b94f26d50366c3fb1cd91b971b4f7178f13bce3",
+          "bytes": 273223,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "94a6091f467c9dfdf7b1c59fe3cea47bbbd7be139aae5097cb54fb2dc13d0fc2"
+    },
+    {
+      "placement": "content:4:dlaczego-ruch-dziala-na-bol-krzyza-lepiej-niz-os",
+      "role": "content",
+      "heading": "Dlaczego ruch działa na ból krzyża lepiej niż oszczędzanie się?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Para po pięćdziesiątce robi selfie podczas szybkiego marszu nad rzeką",
+      "caption": "Ruch nie musi być treningiem. Przy przewlekłym bólu krzyża ćwiczenia mają najwięcej dowodów.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-ruch-zamiast-oszczedzania.avif",
+          "sha256": "91c01b4f6733314ad64ea72e43dc596d498fabd7aa6820745cc367846d25709e",
+          "bytes": 61063,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-ruch-zamiast-oszczedzania.webp",
+          "sha256": "3eadb9eca8e527dde8b50cf1bd3732b5d8640ce888266e7fc5a6efb5a768a2f8",
+          "bytes": 84986,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-ruch-zamiast-oszczedzania.jpg",
+          "sha256": "68d37867a28fcf3c460d2e389435e76083516ba0323c265c2a869492e20bcaeb",
+          "bytes": 230929,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "0aeec4dc885f45bb43340b57eb80b283fc3bdbdbb57e840b4c37ff92e16deda7"
+    },
+    {
+      "placement": "content:5:jakie-cwiczenia-na-bol-krzyza-sa-najlepsze",
+      "role": "content",
+      "heading": "Jakie ćwiczenia na ból krzyża są najlepsze?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Kolaż trzech zdjęć: grupa pilatesu, marsz w parku i przysiad z hantlą w domu",
+      "caption": "Pilates, marsz czy siła: żadna forma ruchu nie wygrywa wyraźnie, więc wybierz tę, którą polubisz.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-wybor-cwiczen.avif",
+          "sha256": "df591aebfc9f2e3be3e8e6f052f07ffdcf810844262a86e05c6ef55c9efad2a8",
+          "bytes": 70305,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-wybor-cwiczen.webp",
+          "sha256": "35f33fbb41f8ab8721b3182100b531c99fbf094bd0e0ee1bf5134b63f7bbb51e",
+          "bytes": 102808,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-wybor-cwiczen.jpg",
+          "sha256": "a89aa5c9dd5153cd670025c13b094bf8d121ded9fcd822cdd68010c019d0019c",
+          "bytes": 282248,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "74d67bc19bf46efca0635b100f90c750604c19059361866c8034ad0a41df6459"
+    },
+    {
+      "placement": "content:6:jak-cwiczyc-przy-ostrym-bolu-krzyza-poziom-1",
+      "role": "content",
+      "heading": "Jak ćwiczyć przy ostrym bólu krzyża — poziom 1?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Kobieta leży na macie z ugiętymi, złączonymi kolanami opuszczonymi na bok, barki płasko",
+      "caption": "Skręty kolan: barki zostają na macie, kolana opadają powoli do łagodnego rozciągania.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-skrety-kolan.avif",
+          "sha256": "333a08e0777d18e4933f6deea1e076c9971fe2952765c83794d6e53b2e6524c4",
+          "bytes": 39696,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-skrety-kolan.webp",
+          "sha256": "efd7d5c87557905f00796c2e95d06f4ea354abd710c522244973d66d25c84277",
+          "bytes": 52010,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-skrety-kolan.jpg",
+          "sha256": "2a0aab4b25e49851f06b2637fe000f19bf36145b40478302066a456737b1e29e",
+          "bytes": 183926,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "02aac5e836eea7107e2147cfbc2b456a534773665fe7e2c381908d6fbc31acaa"
+    },
+    {
+      "placement": "content:7:jak-cwiczyc-przy-ostrym-bolu-krzyza-poziom-1",
+      "role": "content",
+      "heading": "Jak ćwiczyć przy ostrym bólu krzyża — poziom 1?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Mężczyzna leży na plecach i przyciąga kolana do klatki, trzymając uda od tyłu",
+      "caption": "Kolana do klatki: chwyt za uda pod kolanami i tylko wygodne, łagodne rozciąganie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-kolana-do-klatki.avif",
+          "sha256": "ec3b644a6e0c0b117fd4b7308ad61f8009dab2637414dae1fc58e3f42d016b5a",
+          "bytes": 45336,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-kolana-do-klatki.webp",
+          "sha256": "86d42d24771846ee218cb44a97c0f9dcf6bfbd0b6c99d52d70e58ca29a3362aa",
+          "bytes": 63566,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-kolana-do-klatki.jpg",
+          "sha256": "56b01a56c51eb003dc3c845f310b5578841dc572db1fef0b62c7ff554ec4eee1",
+          "bytes": 195213,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "06bb819d334b2a543f9cc80885e90ca1708c754a536cebac2832d6cb92554c12"
+    },
+    {
+      "placement": "content:8:jak-cwiczyc-przy-ostrym-bolu-krzyza-poziom-1",
+      "role": "content",
+      "heading": "Jak ćwiczyć przy ostrym bólu krzyża — poziom 1?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Mężczyzna idzie wyprostowany osiedlową alejką w słoneczny jesienny dzień",
+      "caption": "Krótki spacer to punkt wyjścia: tyle, ile przejdziesz bez wyraźnego nasilenia bólu, i codziennie trochę więcej.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-krotki-spacer.avif",
+          "sha256": "bdfdb788f8be803a0a1b80ddb483244103c41b6eb1e70d57e9854c8a3c869742",
+          "bytes": 98994,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-krotki-spacer.webp",
+          "sha256": "37cef0208b501d7db0d30a93ef13e4dcc5f5fb071872624f8a254d76b6d3a65b",
+          "bytes": 161746,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-krotki-spacer.jpg",
+          "sha256": "b3f9fb64e07be479e796a82a01d61b1d96e7dd7590600e7ed3b840f48c345b07",
+          "bytes": 366909,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "27a7a4fc269fc2d0e75ca555d4a5b77245503360dafbd0f34a5ddc578bb46816"
+    },
+    {
+      "placement": "content:9:jak-cwiczyc-gdy-bol-zaczyna-odpuszczac-poziom-2",
+      "role": "content",
+      "heading": "Jak ćwiczyć, gdy ból zaczyna odpuszczać — poziom 2?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Kobieta w mostku na macie, barki, biodra i kolana w jednej linii",
+      "caption": "Mostek: pośladki napięte, ciało w prostej linii od barków do kolan, bez wypychania brzucha.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-mostek.avif",
+          "sha256": "23ca7e79bd179de955307c8d3b8b3e029a298be584a539c8f54349a5c4be888c",
+          "bytes": 29987,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-mostek.webp",
+          "sha256": "9264c7fd7ed836c27e359796536917836d7655d191133ed81ce84aa2835d2c19",
+          "bytes": 38120,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-mostek.jpg",
+          "sha256": "1e2227345ab099dfc607ef415ca064127fb4add8145dd61517ad6ef53e53582e",
+          "bytes": 139067,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "18a97365de4b14062093fc6b321a5f79e57be1b7c2fd060f0ceba64b4253091b"
+    },
+    {
+      "placement": "content:10:jak-cwiczyc-gdy-bol-zaczyna-odpuszczac-poziom-2",
+      "role": "content",
+      "heading": "Jak ćwiczyć, gdy ból zaczyna odpuszczać — poziom 2?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Mężczyzna w klęku podpartym w dwóch fazach: plecy zaokrąglone i łagodnie wygięte",
+      "caption": "Koci grzbiet: ruch zaczyna się od miednicy, zakres tylko taki, przy którym ból nie narasta.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-koci-grzbiet.avif",
+          "sha256": "0535032997c0634bcca58499897f7ad8997803762b373fe48246421ae43078f3",
+          "bytes": 36384,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-koci-grzbiet.webp",
+          "sha256": "ff091ba6231f9916ac3a33cb8e5d9fad234d77e420161ea39633f8ea8786f08e",
+          "bytes": 45670,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-koci-grzbiet.jpg",
+          "sha256": "c09ecc5827ba8459ed17c18d44b32fe3d6381e3bb12253cc05b0cd86e1800c22",
+          "bytes": 163261,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5394b6c6e32c5720e5a5ec45e370b25fa5a5e29ed54398e4f961ee19a70aa83c"
+    },
+    {
+      "placement": "content:11:jak-cwiczyc-gdy-bol-zaczyna-odpuszczac-poziom-2",
+      "role": "content",
+      "heading": "Jak ćwiczyć, gdy ból zaczyna odpuszczać — poziom 2?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Kobieta w klęku podpartym unosi rękę i przeciwną nogę, na jej plecach stoi szklanka wody",
+      "caption": "Bird dog: ręka i przeciwna noga na wysokości tułowia, miednica nieruchoma jak pod szklanką wody.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-bird-dog.avif",
+          "sha256": "4abc1ae53b6ef79dde81d723482c3f19ff681ff027cfda1227d111b223ed70a1",
+          "bytes": 30254,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-bird-dog.webp",
+          "sha256": "71dd5128d4c5bc722075b718e47cc5777f7e195720d7ee58eea0d74a2926362f",
+          "bytes": 36258,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-bird-dog.jpg",
+          "sha256": "a19d0c46fa739c5daa8014f793fa220abcd597f37f02559193913a362585d188",
+          "bytes": 135775,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7f35b2646d59f0ef995be4a4ab1c70aeb5cb999bcc1816edd0478ad87e504582"
+    },
+    {
+      "placement": "content:12:jak-wzmacniac-plecy-na-co-dzien-poziom-3",
+      "role": "content",
+      "heading": "Jak wzmacniać plecy na co dzień — poziom 3?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Mężczyzna w przysiadzie nad krzesłem, biodra cofnięte, butelka wody przy klatce",
+      "caption": "Przysiad do krzesła: biodra do tyłu, delikatne dotknięcie siedziska i powrót bez siadania.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-przysiad-do-krzesla.avif",
+          "sha256": "05c2a63630c905cd9b995cd8d6e1ad772ab40e9900a776890f4398e897c241a0",
+          "bytes": 37924,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-przysiad-do-krzesla.webp",
+          "sha256": "22413de73f8e329657466a4ca150e931d6cba95bf248fa0ef58148b63ee9a96a",
+          "bytes": 47628,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-przysiad-do-krzesla.jpg",
+          "sha256": "cf37d3f901e3c0fcf9a9cb612990b7a9cbdb718282f7d21f19cd8b9d6afe38bc",
+          "bytes": 168344,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "cc1a900f9c5374c81d57a4475da752895ab56915680ea9784720bf8bae22553f"
+    },
+    {
+      "placement": "content:13:jak-wzmacniac-plecy-na-co-dzien-poziom-3",
+      "role": "content",
+      "heading": "Jak wzmacniać plecy na co dzień — poziom 3?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Kobieta w podporze bokiem na przedramieniu i kolanach, ciało w prostej linii",
+      "caption": "Podpór bokiem: łokieć pod barkiem, biodra w linii, spokojny oddech zamiast wstrzymywania.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-podpor-bokiem.avif",
+          "sha256": "62ddaac7621e0233574e9449b24827d88b1cf5f5f45bf8c972ccbdeec2e23487",
+          "bytes": 45029,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-podpor-bokiem.webp",
+          "sha256": "2ca5e1504368fe9c69c9508cf2c86b86bad91f6342dced23370ece30a60f7dd0",
+          "bytes": 62460,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-podpor-bokiem.jpg",
+          "sha256": "ae5ab4255e335ef7322539b64b6ccfb3f93639c1029c5b369f15ac8919c06928",
+          "bytes": 198752,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "99191a5ff2205014ef1978d5d737197508fe110e3a4013e8667a291e891d1fcc"
+    },
+    {
+      "placement": "content:14:ile-bolu-podczas-cwiczen-jest-w-porzadku",
+      "role": "content",
+      "heading": "Ile bólu podczas ćwiczeń jest w porządku?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Mężczyzna rano przy oknie z kubkiem, w tle zwinięta mata do ćwiczeń",
+      "caption": "Dyskomfort przy ćwiczeniu jest dopuszczalny, wyraźne nasilenie objawów to sygnał do przerwy.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-ile-bolu.avif",
+          "sha256": "b33dfd914c19d703ebeaf3077d8ba6a734bd6ac957a3dbbf505e23e5e7f77522",
+          "bytes": 39642,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-ile-bolu.webp",
+          "sha256": "00a3e2a8490f84d663fed9fd6aac811b6e9b7407a05cddf2a27b4977c80ce55d",
+          "bytes": 53836,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-ile-bolu.jpg",
+          "sha256": "442463565bed54e2cab48117af4558163b431f73d22e47e350a5c0d68c92073e",
+          "bytes": 186002,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "62104b871f877abcdda0c7972a49f42582e12558e6e50a1c088a909934f2fb12"
+    },
+    {
+      "placement": "content:15:czy-pas-ledzwiowy-wyciag-i-rezonans-pomagaja-na-",
+      "role": "content",
+      "heading": "Czy pas lędźwiowy, wyciąg i rezonans pomagają na ból krzyża?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Pas lędźwiowy odłożony w głąb szafy, na pierwszym planie buty do marszu",
+      "caption": "Pas lędźwiowy do szafy, buty na nogi. Wytyczne odradzają rutynowe stosowanie pasów przy bólu krzyża.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-pas-i-rezonans.avif",
+          "sha256": "eb5d461cc9569027f3797b3ec8ee08f07c7d8f92a0d3761d8188af34f68b83ed",
+          "bytes": 37404,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-pas-i-rezonans.webp",
+          "sha256": "64fdad85640ed8ed4ebc0395675f61011cadf5759c3c291a7e1818652ea542e7",
+          "bytes": 49904,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-pas-i-rezonans.jpg",
+          "sha256": "7f3e5695d113aada1b1b91b3983ad3b7a2634f096853cdba8c35d1852f0de02e",
+          "bytes": 168309,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "81150f7a261e8857c49ec360d78da9597e616366d5c3d24a059b0f2e2c0fb7c4"
+    },
+    {
+      "placement": "content:16:jak-nie-dopuscic-do-nawrotu-bolu-krzyza",
+      "role": "content",
+      "heading": "Jak nie dopuścić do nawrotu bólu krzyża?",
+      "context": "Krzyż strzyka, więc kładziesz się na kanapie i czekasz, aż przejdzie. Znam to, sam nie jestem z innej planety. Tyle że badania i wytyczne mówią co innego, a ćwiczenia na ból krzyża to nie zestaw cudów z internetu, tylko kilka prostych ruchów dobranych do tego, jak bardzo boli dziś. Szybka odpowiedź Jeśli ból krzyża nie daje objawów alarmowych, leż najwyżej 1–2 dni, a potem wracaj do zwykłej aktywności w granicach tolerancji bólu. W przewlekłym bólu krzyża ćwiczenia poprawiały ocenę bólu średnio o 15 punktów na skali 0–100 w porównaniu z brakiem leczenia. Rodzaj ćwiczeń ma mniejsze znaczenie niż regularność. Kluczowe wnioski Drętwienie krocza, kłopoty z pęcherzem albo narastające osłabienie nóg przy bólu krzyża wymagają pilnej pomocy, nie ćwiczeń. Przy ostrym bólu krzyża rada, by pozostać a",
+      "alt": "Wykres słupkowy: marsz z edukacją 208 dni do nawrotu bólu, brak leczenia 112 dni",
+      "caption": "W badaniu WalkBack mediana czasu do nawrotu bólu krzyża wyniosła 208 dni w grupie marszowej i 112 dni bez leczenia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bol-krzyza-po-50-walkback-dni.avif",
+          "sha256": "eac8dd949ed51b886869f5252c53b8f3a3a52ae92ab03704c8e18e51a5f46385",
+          "bytes": 16428,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bol-krzyza-po-50-walkback-dni.webp",
+          "sha256": "616954742b26a49828265502deea0e19be46d7eeac856f2e52c7ca03613a1c0b",
+          "bytes": 21198,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bol-krzyza-po-50-walkback-dni.jpg",
+          "sha256": "0aba22c3056d5fa56ff901175393794c7205d993261331bf42d887f6303ee0f9",
+          "bytes": 65745,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "21c48bb1c7d7e10e62d72c12bc63700071a61ee405203da2345b76fdf6cd4062"
+    }
+  ],
+  "pdf": {
+    "pages": 11,
+    "text_coverage": 1,
+    "rendered_pages": 11,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-01.png",
+        "sha256": "d3f0f74a268259f3bf46a880a11553fb54d0f5be5ad5834052cb6bd5bef920df",
+        "bytes": 635386,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1066,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-02.png",
+        "sha256": "b3efd0aa9c30275ea374c9939d8e02a80dfee1685f6a3ffa2c98d34aac9e028b",
+        "bytes": 886666,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1064,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-03.png",
+        "sha256": "37654bf07d38392f3201855cc758606137caa6e9817831deb4653fe4b1a486ec",
+        "bytes": 733068,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1065,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-04.png",
+        "sha256": "c9fb0bc91ecad501bcd686755d0e4583c9f8bf69579be21e6b9848cd4e853035",
+        "bytes": 724848,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-05.png",
+        "sha256": "d655702bcec214c394d84ebd43646ece129bef02e1999e61fbdfa82f5097aa9a",
+        "bytes": 1224543,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 63,
+          "y": 56,
+          "width": 1054,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-06.png",
+        "sha256": "7c87504aef8475a556a67a7dc49e5b3d2729884c34ad82b5e652974b1a9ca762",
+        "bytes": 674824,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1065,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-07.png",
+        "sha256": "24c4ff54d99a924aa3b217776cc353df339bc1feacf476c88ae8ef885eb73310",
+        "bytes": 712521,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1062,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-08.png",
+        "sha256": "e6624ccc7888b3606c28624657debed4a38f2cec92cd3cb6002d0d0d213073cd",
+        "bytes": 760681,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1062,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 9,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-09.png",
+        "sha256": "f0fec35a167440e5de232a80e2efcbd01a038c2a4ac3ed3145a06f39a067dad6",
+        "bytes": 570564,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1066,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 10,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-10.png",
+        "sha256": "46ba1dd6bffede57800f55a81000a8689a206256c2ee9772ad13675a1a9aaad0",
+        "bytes": 252281,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 82,
+          "width": 1043,
+          "height": 1568
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 11,
+        "file": ".tmp/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia/pdf-pages/page-11.png",
+        "sha256": "27f6b7d69823dc0495f2a6d25c3dbeeaf6e7b45fa3a033fcb855f7dcb8daafc8",
+        "bytes": 185143,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 51,
+          "y": 52,
+          "width": 1068,
+          "height": 1598
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-05T04:55:53+02:00",
+    "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "13826c6222d0d244ada483142dd34ea4f73ac58ce827045efa69dfba2a729220",
+        "note": "Pełny render desktop obejrzany od nagłówka do stopki; układ, tabela, obrazy, podpisy, FAQ i źródła są czytelne bez kolizji."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "a1b7af36abb2cb6ab65e92fa011a28c28ccdf95e5c3bc3798b6ae51f5decdb5c",
+        "note": "Pełny render mobile 390 px obejrzany od początku do końca; brak poziomego przepełnienia strony, ucięć i nakładania treści."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "5d5270c68190efe2b614827e187d273fa8c21320c92694bfa2ca6aad20f44f1e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Fotografia pokazuje osobę po 50-tce przygotowującą się do ruchu i trafnie zapowiada temat artykułu.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:2:kiedy-z-bolem-krzyza-jechac-do-lekarza-zamiast-c",
+        "inventory_sha256": "48192119075c65ce0084ab01b927266ae70b92dbadb1a0dc923986f98011fc7d",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Spokojna rozmowa telefoniczna odpowiada sekcji o pilnym kontakcie medycznym bez niepotrzebnego straszenia.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:3:czy-lezenie-w-lozku-pomaga-na-bol-krzyza",
+        "inventory_sha256": "94a6091f467c9dfdf7b1c59fe3cea47bbbd7be139aae5097cb54fb2dc13d0fc2",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Pusta kanapa i osoba wychodząca w butach czytelnie ilustrują wybór łagodnego ruchu zamiast leżenia.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:4:dlaczego-ruch-dziala-na-bol-krzyza-lepiej-niz-os",
+        "inventory_sha256": "0aeec4dc885f45bb43340b57eb80b283fc3bdbdbb57e840b4c37ff92e16deda7",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Aktywna para podczas marszu dobrze wspiera przekaz o powrocie do ruchu i nie zawiera mylących elementów.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:5:jakie-cwiczenia-na-bol-krzyza-sa-najlepsze",
+        "inventory_sha256": "74d67bc19bf46efca0635b100f90c750604c19059361866c8034ad0a41df6459",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "PILATES DLA DOJRZAŁYCH; BĄDŹ W RUCHU W KRAKOWIE; FORMA W KAŻDYM WIEKU; AKTYWNE ŻYCIE; VISTULA PARK; ZNAJDŹ SWÓJ RYTM; TRENING W DOMU: CODZIENNIE; MOCNY I SPRAWNY",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://www.cochrane.org/evidence/CD009790_exercise-treatment-chronic-low-back-pain",
+            "https://pubmed.ncbi.nlm.nih.gov/31666220/"
+          ]
+        },
+        "note": "Kolaż pokazuje kilka dostępnych form aktywności. Wszystkie widoczne polskie napisy zostały zaakceptowane przez użytkownika.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:6:jak-cwiczyc-przy-ostrym-bolu-krzyza-poziom-1",
+        "inventory_sha256": "02aac5e836eea7107e2147cfbc2b456a534773665fe7e2c381908d6fbc31acaa",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Pozycja leżąca ze skrętem ugiętych kolan jest anatomicznie wiarygodna i pasuje do opisanego ćwiczenia.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:7:jak-cwiczyc-przy-ostrym-bolu-krzyza-poziom-1",
+        "inventory_sha256": "06bb819d334b2a543f9cc80885e90ca1708c754a536cebac2832d6cb92554c12",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "RUCH TO ZDROWIE",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://www.cochrane.org/evidence/CD009790_exercise-treatment-chronic-low-back-pain"
+          ]
+        },
+        "note": "Zdjęcie pokazuje prawidłowy ogólny kierunek ruchu kolan do klatki; dokładne miejsce chwytu wyjaśnia tekst ćwiczenia.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:8:jak-cwiczyc-przy-ostrym-bolu-krzyza-poziom-1",
+        "inventory_sha256": "27a7a4fc269fc2d0e75ca555d4a5b77245503360dafbd0f34a5ddc578bb46816",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "INCIDENTAL_ENVIRONMENT",
+          "transcription": "BLOK B4",
+          "claims_or_numbers_present": false
+        },
+        "note": "Osoba idzie swobodnym krokiem po osiedlu; niewielki napis na budynku jest wyłącznie elementem otoczenia.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:9:jak-cwiczyc-gdy-bol-zaczyna-odpuszczac-poziom-2",
+        "inventory_sha256": "18a97365de4b14062093fc6b321a5f79e57be1b7c2fd060f0ceba64b4253091b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Mostek wykonany jest w czytelnej pozycji bocznej, z wiarygodnym ustawieniem stóp, kolan i bioder.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:10:jak-cwiczyc-gdy-bol-zaczyna-odpuszczac-poziom-2",
+        "inventory_sha256": "5394b6c6e32c5720e5a5ec45e370b25fa5a5e29ed54398e4f961ee19a70aa83c",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "KRAKÓW W RUCHU / KOCI-KROWI GRZBIET",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Podwójna ekspozycja czytelnie pokazuje obie fazy kociego grzbietu; widoczny tytuł ćwiczenia jest zgodny z sekcją.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:11:jak-cwiczyc-gdy-bol-zaczyna-odpuszczac-poziom-2",
+        "inventory_sha256": "7f35b2646d59f0ef995be4a4ab1c70aeb5cb999bcc1816edd0478ad87e504582",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "WATERMARK_ONLY"
+        },
+        "note": "Pozycja bird dog jest czytelna, a szklanka pełni wyłącznie obrazową metaforę stabilnej miednicy.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:12:jak-wzmacniac-plecy-na-co-dzien-poziom-3",
+        "inventory_sha256": "cc1a900f9c5374c81d57a4475da752895ab56915680ea9784720bf8bae22553f",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Mężczyzna wykonuje kontrolowany przysiad do stabilnego krzesła, a butelka stanowi lekkie i wiarygodne obciążenie.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:13:jak-wzmacniac-plecy-na-co-dzien-poziom-3",
+        "inventory_sha256": "99191a5ff2205014ef1978d5d737197508fe110e3a4013e8667a291e891d1fcc",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "AKTYWNE ŻYCIE: RUCH I FORMA",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://www.cochrane.org/evidence/CD009790_exercise-treatment-chronic-low-back-pain"
+          ]
+        },
+        "note": "Zdjęcie pokazuje wiarygodną zmodyfikowaną wersję podporu bokiem; napis na plakacie jest zgodny z przekazem artykułu.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:14:ile-bolu-podczas-cwiczen-jest-w-porzadku",
+        "inventory_sha256": "62104b871f877abcdda0c7972a49f42582e12558e6e50a1c088a909934f2fb12",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Spokojna samoobserwacja przy zwiniętej macie trafnie ilustruje ocenę reakcji organizmu po ćwiczeniach.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:15:czy-pas-ledzwiowy-wyciag-i-rezonans-pomagaja-na-",
+        "inventory_sha256": "81150f7a261e8857c49ec360d78da9597e616366d5c3d24a059b0f2e2c0fb7c4",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Pas odłożony w szafie i buty marszowe na pierwszym planie tworzą jasny, zgodny z sekcją kontrast.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      },
+      {
+        "placement": "content:16:jak-nie-dopuscic-do-nawrotu-bolu-krzyza",
+        "inventory_sha256": "21c48bb1c7d7e10e62d72c12bc63700071a61ee405203da2345b76fdf6cd4062",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Ile dni do nawrotu bólu krzyża? Mediana czasu do nawrotu ograniczającego aktywność — WalkBack, 2024. Marsz z edukacją: 208 dni. Brak leczenia: 112 dni. Źródło: Pocovi i wsp., The Lancet 2024; PMID 38908392",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pubmed.ncbi.nlm.nih.gov/38908392/"
+          ]
+        },
+        "note": "Lokalnie wyrenderowany wykres wiernie przedstawia wartości 208 i 112 dni oraz podaje źródło danych.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-05T04:55:53+02:00",
+        "review_method": "Bezpośrednia kontrola pełnych renderów desktop i mobile, wszystkich 16 ilustracji oraz wszystkich 11 stron PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "d3f0f74a268259f3bf46a880a11553fb54d0f5be5ad5834052cb6bd5bef920df",
+        "note": "Strona 1 PDF obejrzana w całości; tytuł, hero, szybka odpowiedź, wnioski i początek treści są czytelne."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "b3efd0aa9c30275ea374c9939d8e02a80dfee1685f6a3ffa2c98d34aac9e028b",
+        "note": "Strona 2 PDF obejrzana w całości; tekst, link wewnętrzny, zdjęcia i podpisy mieszczą się bez ucięć."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "37654bf07d38392f3201855cc758606137caa6e9817831deb4653fe4b1a486ec",
+        "note": "Strona 3 PDF obejrzana w całości; sekcje o ruchu i wyborze ćwiczeń mają poprawny układ oraz czytelny obraz."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "c9fb0bc91ecad501bcd686755d0e4583c9f8bf69579be21e6b9848cd4e853035",
+        "note": "Strona 4 PDF obejrzana w całości; kolaż, nagłówek, tabela semantyczna i instrukcje są kompletne i czytelne."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "d655702bcec214c394d84ebd43646ece129bef02e1999e61fbdfa82f5097aa9a",
+        "note": "Strona 5 PDF obejrzana w całości; trzy ilustracje poziomu pierwszego oraz podpisy mają prawidłowe proporcje."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "7c87504aef8475a556a67a7dc49e5b3d2729884c34ad82b5e652974b1a9ca762",
+        "note": "Strona 6 PDF obejrzana w całości; instrukcje i dwie ilustracje ćwiczeń nie są przycięte ani zniekształcone."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "24c4ff54d99a924aa3b217776cc353df339bc1feacf476c88ae8ef885eb73310",
+        "note": "Strona 7 PDF obejrzana w całości; bird dog, sekcja wzmacniania, link i przysiad są czytelne bez kolizji."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "e6624ccc7888b3606c28624657debed4a38f2cec92cd3cb6002d0d0d213073cd",
+        "note": "Strona 8 PDF obejrzana w całości; podpór bokiem, tekst o bólu, zdjęcie i kolejny nagłówek mają poprawny układ."
+      },
+      {
+        "page": 9,
+        "status": "VERIFIED",
+        "artifact_sha256": "f0fec35a167440e5de232a80e2efcbd01a038c2a4ac3ed3145a06f39a067dad6",
+        "note": "Strona 9 PDF obejrzana w całości; zalecenia, zdjęcie pasa i sekcja o nawrotach są kompletne oraz czytelne."
+      },
+      {
+        "page": 10,
+        "status": "VERIFIED",
+        "artifact_sha256": "46ba1dd6bffede57800f55a81000a8689a206256c2ee9772ad13675a1a9aaad0",
+        "note": "Strona 10 PDF obejrzana w całości; wykres ma poprawne wartości, a cztery pytania FAQ i odpowiedzi są czytelne."
+      },
+      {
+        "page": 11,
+        "status": "VERIFIED",
+        "artifact_sha256": "27f6b7d69823dc0495f2a6d25c3dbeeaf6e7b45fa3a033fcb855f7dcb8daafc8",
+        "note": "Strona 11 PDF obejrzana w całości; lista jedenastu źródeł i nota medyczna mieszczą się bez ucięć."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 10328,
+    "review_wait_ms": 230919
+  },
+  "errors": []
+}

@@ -1,0 +1,872 @@
+{
+  "version": 1,
+  "transaction_id": "article-bol-krzyza-po-50-lezenie-czy-cwiczenia-1791168700835-34325",
+  "generated_at": "2026-10-05T02:58:47.365Z",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "bol-krzyza-po-50-lezenie-czy-cwiczenia",
+  "url": "https://fitpo50.pl/bol-krzyza-po-50-lezenie-czy-cwiczenia.html",
+  "manifest_file": "data/reports/article-publications/bol-krzyza-po-50-lezenie-czy-cwiczenia.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "bol-krzyza-po-50-lezenie-czy-cwiczenia.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "27afee41d27b9b5fb20524e619e8ee432e5ed0204333a45f8128a1222410d006",
+      "bytes": 55342
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "7664d92fc1b02125c6621899721bdb5f404704c6d37375cfddc088da628b3505",
+      "after_sha256": "8d39188e6399fae61bfc5cb575ea8f9bfc4f594968e517ddd561bca856f08b18",
+      "bytes": 119751
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "ebcecad088d27ed55934869bed78fa1667d401d422b2254df58f047301bb3501",
+      "after_sha256": "dfed3e76e39737e5544f9e3832635b0f3aeba18f04f6618a069c21aa59a6f1b0",
+      "bytes": 159281
+    },
+    {
+      "path": "rusz-sie.html",
+      "action": "UPDATE",
+      "before_sha256": "625c04143f1a19c53fd28188b271c8bad56f14bf16a8cea4c44786879d78c3a5",
+      "after_sha256": "497451da97454067ba604cd8a2cf1469750c4cdc5da01bd572a84dea35de082d",
+      "bytes": 46858
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "6cd3a993c04f6e774d6fd521f5cad3262d1e8ea7b031897afa44e92269a22611",
+      "after_sha256": "ad5ecebe88c712c93eca666fd8af10706799fd05344e4bab357f738ac62ef3ce",
+      "bytes": 19448
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "365934ea6beb5f8e4e0481209e5bf8bce2748361c4a0bcf10ba0df08f1d9fb5a",
+      "after_sha256": "05c1b06ae9b6ffddeb49a858be10965917708db5531d18923aebf9bbf3a11735",
+      "bytes": 37903
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "e2be306849e4b699cec9830266b1302f5d60b87a12d1126f566ab25c48665853",
+      "after_sha256": "716ab3db8e968bd21fa27d7cb5d0ed79a1c2931309c844b85ba2ea2b2386472a",
+      "bytes": 814264
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "5694568a727193806244edcd8405e08825d26894a505e619f3c704b1f312ea92",
+      "after_sha256": "3c7002e4b3c5681e3d5e577789b586c79f61b18ad0734493fd4d02f05376c6b3",
+      "bytes": 860869
+    },
+    {
+      "path": "assets/pdf/bol-krzyza-po-50-lezenie-czy-cwiczenia.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8eafce8b9b6a3488163a1c2398dd9956d4cb1ad03393fb63e1a91e856be559c1",
+      "bytes": 1013421
+    },
+    {
+      "path": "data/crosslink-suggestions/bol-krzyza-po-50-lezenie-czy-cwiczenia.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e0d034d4040a039efd64a4134097a7dc95fcf3a1f349b2672be604ae22f9f41e",
+      "bytes": 1317
+    },
+    {
+      "path": "data/reports/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b6aad976e246c2011ab228a0c48a909d00c3ac91d0c2f45984332ac6d9ee8fd3",
+      "bytes": 59572
+    },
+    {
+      "path": "data/reports/article-preview/bol-krzyza-po-50-lezenie-czy-cwiczenia.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ff69c47eec79b0c24471d024d1c9ee532da6ee126adb6bf067c040d4cf4a1ef9",
+      "bytes": 368
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "057c2aecc207769d0b7258e87d4cbeb1918b27a6a61b0bdafb42964d4388efd5",
+      "after_sha256": "f33a2241bdd45ff2f53fa0f74eadfb4a631c66d552f32c525a9bbf692b029617",
+      "bytes": 40749
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "8fafa87b91184c5a2f326cc4a894f68b95b0c3e0ccbad704cc87bf3f56e67f38",
+      "after_sha256": "b19dd21f8b5b628a37a24d7dc514c310c5eb69030be6c4bb2dbe872509685e74",
+      "bytes": 3740
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "1db7f118e27121d436d37de688dd25a4ad7067acb94cc9e8a7126b33bcc2489b",
+      "after_sha256": "201660b31c93bd626e4e0d4c835be2e6f8d18433eabb8f7b42601c45065d0b90",
+      "bytes": 1798
+    },
+    {
+      "path": "_site/bol-krzyza-po-50-lezenie-czy-cwiczenia.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "27afee41d27b9b5fb20524e619e8ee432e5ed0204333a45f8128a1222410d006",
+      "bytes": 55342
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "7664d92fc1b02125c6621899721bdb5f404704c6d37375cfddc088da628b3505",
+      "after_sha256": "8d39188e6399fae61bfc5cb575ea8f9bfc4f594968e517ddd561bca856f08b18",
+      "bytes": 119751
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "ebcecad088d27ed55934869bed78fa1667d401d422b2254df58f047301bb3501",
+      "after_sha256": "dfed3e76e39737e5544f9e3832635b0f3aeba18f04f6618a069c21aa59a6f1b0",
+      "bytes": 159281
+    },
+    {
+      "path": "_site/rusz-sie.html",
+      "action": "UPDATE",
+      "before_sha256": "625c04143f1a19c53fd28188b271c8bad56f14bf16a8cea4c44786879d78c3a5",
+      "after_sha256": "497451da97454067ba604cd8a2cf1469750c4cdc5da01bd572a84dea35de082d",
+      "bytes": 46858
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "6cd3a993c04f6e774d6fd521f5cad3262d1e8ea7b031897afa44e92269a22611",
+      "after_sha256": "ad5ecebe88c712c93eca666fd8af10706799fd05344e4bab357f738ac62ef3ce",
+      "bytes": 19448
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "365934ea6beb5f8e4e0481209e5bf8bce2748361c4a0bcf10ba0df08f1d9fb5a",
+      "after_sha256": "05c1b06ae9b6ffddeb49a858be10965917708db5531d18923aebf9bbf3a11735",
+      "bytes": 37903
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "e2be306849e4b699cec9830266b1302f5d60b87a12d1126f566ab25c48665853",
+      "after_sha256": "716ab3db8e968bd21fa27d7cb5d0ed79a1c2931309c844b85ba2ea2b2386472a",
+      "bytes": 814264
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "5694568a727193806244edcd8405e08825d26894a505e619f3c704b1f312ea92",
+      "after_sha256": "3c7002e4b3c5681e3d5e577789b586c79f61b18ad0734493fd4d02f05376c6b3",
+      "bytes": 860869
+    },
+    {
+      "path": "_site/assets/pdf/bol-krzyza-po-50-lezenie-czy-cwiczenia.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8eafce8b9b6a3488163a1c2398dd9956d4cb1ad03393fb63e1a91e856be559c1",
+      "bytes": 1013421
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/bol-krzyza-po-50-lezenie-czy-cwiczenia.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e0d034d4040a039efd64a4134097a7dc95fcf3a1f349b2672be604ae22f9f41e",
+      "bytes": 1317
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-hero.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5fcacad0237c628c7ad286499a85b2ae33674578aee504f2bf21afe3aa11b92c",
+      "bytes": 45776
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-hero.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5fcacad0237c628c7ad286499a85b2ae33674578aee504f2bf21afe3aa11b92c",
+      "bytes": 45776
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-hero.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2a8da2b351cd5258596a983044a35e86ba74643caba21c7ca8fc89cbfd9c6f98",
+      "bytes": 60932
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-hero.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2a8da2b351cd5258596a983044a35e86ba74643caba21c7ca8fc89cbfd9c6f98",
+      "bytes": 60932
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-hero.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "72bd5f83b5844dc07ea1061db5ee8d8c901218af73a7f2ed4e54803efb356435",
+      "bytes": 198120
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-hero.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "72bd5f83b5844dc07ea1061db5ee8d8c901218af73a7f2ed4e54803efb356435",
+      "bytes": 198120
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-objawy-alarmowe.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4bba32d05d5e4be2582150b8ec2a7f3e1955e292a556053f7bd355a38009a329",
+      "bytes": 32518
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-objawy-alarmowe.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4bba32d05d5e4be2582150b8ec2a7f3e1955e292a556053f7bd355a38009a329",
+      "bytes": 32518
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-objawy-alarmowe.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a0f6d7e84a7b80bd0dd582c757ec6b8e5baa34e8cba465e41a0f4cce313f5be0",
+      "bytes": 41820
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-objawy-alarmowe.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a0f6d7e84a7b80bd0dd582c757ec6b8e5baa34e8cba465e41a0f4cce313f5be0",
+      "bytes": 41820
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-objawy-alarmowe.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ccb35533ffc87aaedad6aa1dcb77c3591e8c766aa3c4d1a8b0f490e36674d114",
+      "bytes": 145635
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-objawy-alarmowe.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ccb35533ffc87aaedad6aa1dcb77c3591e8c766aa3c4d1a8b0f490e36674d114",
+      "bytes": 145635
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-lezenie-czy-ruch.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "39637becd3ecae720e9a5ec83a5fcb443847830a67655de2c90798ff173e9ade",
+      "bytes": 76205
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-lezenie-czy-ruch.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "39637becd3ecae720e9a5ec83a5fcb443847830a67655de2c90798ff173e9ade",
+      "bytes": 76205
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-lezenie-czy-ruch.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5a8abbe5de6e2db731771dcb0dafdd843829e0fdd8fc44414b99c5de29d7ee00",
+      "bytes": 116904
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-lezenie-czy-ruch.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5a8abbe5de6e2db731771dcb0dafdd843829e0fdd8fc44414b99c5de29d7ee00",
+      "bytes": 116904
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-lezenie-czy-ruch.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "70f0048262273f9eca8f7e447b94f26d50366c3fb1cd91b971b4f7178f13bce3",
+      "bytes": 273223
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-lezenie-czy-ruch.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "70f0048262273f9eca8f7e447b94f26d50366c3fb1cd91b971b4f7178f13bce3",
+      "bytes": 273223
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-ruch-zamiast-oszczedzania.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "91c01b4f6733314ad64ea72e43dc596d498fabd7aa6820745cc367846d25709e",
+      "bytes": 61063
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-ruch-zamiast-oszczedzania.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "91c01b4f6733314ad64ea72e43dc596d498fabd7aa6820745cc367846d25709e",
+      "bytes": 61063
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-ruch-zamiast-oszczedzania.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3eadb9eca8e527dde8b50cf1bd3732b5d8640ce888266e7fc5a6efb5a768a2f8",
+      "bytes": 84986
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-ruch-zamiast-oszczedzania.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3eadb9eca8e527dde8b50cf1bd3732b5d8640ce888266e7fc5a6efb5a768a2f8",
+      "bytes": 84986
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-ruch-zamiast-oszczedzania.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "68d37867a28fcf3c460d2e389435e76083516ba0323c265c2a869492e20bcaeb",
+      "bytes": 230929
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-ruch-zamiast-oszczedzania.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "68d37867a28fcf3c460d2e389435e76083516ba0323c265c2a869492e20bcaeb",
+      "bytes": 230929
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-wybor-cwiczen.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "df591aebfc9f2e3be3e8e6f052f07ffdcf810844262a86e05c6ef55c9efad2a8",
+      "bytes": 70305
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-wybor-cwiczen.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "df591aebfc9f2e3be3e8e6f052f07ffdcf810844262a86e05c6ef55c9efad2a8",
+      "bytes": 70305
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-wybor-cwiczen.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "35f33fbb41f8ab8721b3182100b531c99fbf094bd0e0ee1bf5134b63f7bbb51e",
+      "bytes": 102808
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-wybor-cwiczen.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "35f33fbb41f8ab8721b3182100b531c99fbf094bd0e0ee1bf5134b63f7bbb51e",
+      "bytes": 102808
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-wybor-cwiczen.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a89aa5c9dd5153cd670025c13b094bf8d121ded9fcd822cdd68010c019d0019c",
+      "bytes": 282248
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-wybor-cwiczen.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a89aa5c9dd5153cd670025c13b094bf8d121ded9fcd822cdd68010c019d0019c",
+      "bytes": 282248
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-skrety-kolan.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "333a08e0777d18e4933f6deea1e076c9971fe2952765c83794d6e53b2e6524c4",
+      "bytes": 39696
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-skrety-kolan.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "333a08e0777d18e4933f6deea1e076c9971fe2952765c83794d6e53b2e6524c4",
+      "bytes": 39696
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-skrety-kolan.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "efd7d5c87557905f00796c2e95d06f4ea354abd710c522244973d66d25c84277",
+      "bytes": 52010
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-skrety-kolan.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "efd7d5c87557905f00796c2e95d06f4ea354abd710c522244973d66d25c84277",
+      "bytes": 52010
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-skrety-kolan.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2a0aab4b25e49851f06b2637fe000f19bf36145b40478302066a456737b1e29e",
+      "bytes": 183926
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-skrety-kolan.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2a0aab4b25e49851f06b2637fe000f19bf36145b40478302066a456737b1e29e",
+      "bytes": 183926
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-kolana-do-klatki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ec3b644a6e0c0b117fd4b7308ad61f8009dab2637414dae1fc58e3f42d016b5a",
+      "bytes": 45336
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-kolana-do-klatki.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ec3b644a6e0c0b117fd4b7308ad61f8009dab2637414dae1fc58e3f42d016b5a",
+      "bytes": 45336
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-kolana-do-klatki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "86d42d24771846ee218cb44a97c0f9dcf6bfbd0b6c99d52d70e58ca29a3362aa",
+      "bytes": 63566
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-kolana-do-klatki.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "86d42d24771846ee218cb44a97c0f9dcf6bfbd0b6c99d52d70e58ca29a3362aa",
+      "bytes": 63566
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-kolana-do-klatki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "56b01a56c51eb003dc3c845f310b5578841dc572db1fef0b62c7ff554ec4eee1",
+      "bytes": 195213
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-kolana-do-klatki.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "56b01a56c51eb003dc3c845f310b5578841dc572db1fef0b62c7ff554ec4eee1",
+      "bytes": 195213
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-krotki-spacer.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bdfdb788f8be803a0a1b80ddb483244103c41b6eb1e70d57e9854c8a3c869742",
+      "bytes": 98994
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-krotki-spacer.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bdfdb788f8be803a0a1b80ddb483244103c41b6eb1e70d57e9854c8a3c869742",
+      "bytes": 98994
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-krotki-spacer.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "37cef0208b501d7db0d30a93ef13e4dcc5f5fb071872624f8a254d76b6d3a65b",
+      "bytes": 161746
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-krotki-spacer.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "37cef0208b501d7db0d30a93ef13e4dcc5f5fb071872624f8a254d76b6d3a65b",
+      "bytes": 161746
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-krotki-spacer.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b3f9fb64e07be479e796a82a01d61b1d96e7dd7590600e7ed3b840f48c345b07",
+      "bytes": 366909
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-krotki-spacer.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b3f9fb64e07be479e796a82a01d61b1d96e7dd7590600e7ed3b840f48c345b07",
+      "bytes": 366909
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-mostek.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "23ca7e79bd179de955307c8d3b8b3e029a298be584a539c8f54349a5c4be888c",
+      "bytes": 29987
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-mostek.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "23ca7e79bd179de955307c8d3b8b3e029a298be584a539c8f54349a5c4be888c",
+      "bytes": 29987
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-mostek.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9264c7fd7ed836c27e359796536917836d7655d191133ed81ce84aa2835d2c19",
+      "bytes": 38120
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-mostek.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9264c7fd7ed836c27e359796536917836d7655d191133ed81ce84aa2835d2c19",
+      "bytes": 38120
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-mostek.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1e2227345ab099dfc607ef415ca064127fb4add8145dd61517ad6ef53e53582e",
+      "bytes": 139067
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-mostek.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1e2227345ab099dfc607ef415ca064127fb4add8145dd61517ad6ef53e53582e",
+      "bytes": 139067
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-koci-grzbiet.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0535032997c0634bcca58499897f7ad8997803762b373fe48246421ae43078f3",
+      "bytes": 36384
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-koci-grzbiet.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0535032997c0634bcca58499897f7ad8997803762b373fe48246421ae43078f3",
+      "bytes": 36384
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-koci-grzbiet.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ff091ba6231f9916ac3a33cb8e5d9fad234d77e420161ea39633f8ea8786f08e",
+      "bytes": 45670
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-koci-grzbiet.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ff091ba6231f9916ac3a33cb8e5d9fad234d77e420161ea39633f8ea8786f08e",
+      "bytes": 45670
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-koci-grzbiet.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c09ecc5827ba8459ed17c18d44b32fe3d6381e3bb12253cc05b0cd86e1800c22",
+      "bytes": 163261
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-koci-grzbiet.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c09ecc5827ba8459ed17c18d44b32fe3d6381e3bb12253cc05b0cd86e1800c22",
+      "bytes": 163261
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-bird-dog.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4abc1ae53b6ef79dde81d723482c3f19ff681ff027cfda1227d111b223ed70a1",
+      "bytes": 30254
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-bird-dog.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4abc1ae53b6ef79dde81d723482c3f19ff681ff027cfda1227d111b223ed70a1",
+      "bytes": 30254
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-bird-dog.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "71dd5128d4c5bc722075b718e47cc5777f7e195720d7ee58eea0d74a2926362f",
+      "bytes": 36258
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-bird-dog.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "71dd5128d4c5bc722075b718e47cc5777f7e195720d7ee58eea0d74a2926362f",
+      "bytes": 36258
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-bird-dog.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a19d0c46fa739c5daa8014f793fa220abcd597f37f02559193913a362585d188",
+      "bytes": 135775
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-bird-dog.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a19d0c46fa739c5daa8014f793fa220abcd597f37f02559193913a362585d188",
+      "bytes": 135775
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-przysiad-do-krzesla.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "05c2a63630c905cd9b995cd8d6e1ad772ab40e9900a776890f4398e897c241a0",
+      "bytes": 37924
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-przysiad-do-krzesla.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "05c2a63630c905cd9b995cd8d6e1ad772ab40e9900a776890f4398e897c241a0",
+      "bytes": 37924
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-przysiad-do-krzesla.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "22413de73f8e329657466a4ca150e931d6cba95bf248fa0ef58148b63ee9a96a",
+      "bytes": 47628
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-przysiad-do-krzesla.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "22413de73f8e329657466a4ca150e931d6cba95bf248fa0ef58148b63ee9a96a",
+      "bytes": 47628
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-przysiad-do-krzesla.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cf37d3f901e3c0fcf9a9cb612990b7a9cbdb718282f7d21f19cd8b9d6afe38bc",
+      "bytes": 168344
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-przysiad-do-krzesla.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cf37d3f901e3c0fcf9a9cb612990b7a9cbdb718282f7d21f19cd8b9d6afe38bc",
+      "bytes": 168344
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-podpor-bokiem.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "62ddaac7621e0233574e9449b24827d88b1cf5f5f45bf8c972ccbdeec2e23487",
+      "bytes": 45029
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-podpor-bokiem.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "62ddaac7621e0233574e9449b24827d88b1cf5f5f45bf8c972ccbdeec2e23487",
+      "bytes": 45029
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-podpor-bokiem.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2ca5e1504368fe9c69c9508cf2c86b86bad91f6342dced23370ece30a60f7dd0",
+      "bytes": 62460
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-podpor-bokiem.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2ca5e1504368fe9c69c9508cf2c86b86bad91f6342dced23370ece30a60f7dd0",
+      "bytes": 62460
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-podpor-bokiem.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ae5ab4255e335ef7322539b64b6ccfb3f93639c1029c5b369f15ac8919c06928",
+      "bytes": 198752
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-podpor-bokiem.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ae5ab4255e335ef7322539b64b6ccfb3f93639c1029c5b369f15ac8919c06928",
+      "bytes": 198752
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-ile-bolu.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b33dfd914c19d703ebeaf3077d8ba6a734bd6ac957a3dbbf505e23e5e7f77522",
+      "bytes": 39642
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-ile-bolu.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b33dfd914c19d703ebeaf3077d8ba6a734bd6ac957a3dbbf505e23e5e7f77522",
+      "bytes": 39642
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-ile-bolu.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "00a3e2a8490f84d663fed9fd6aac811b6e9b7407a05cddf2a27b4977c80ce55d",
+      "bytes": 53836
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-ile-bolu.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "00a3e2a8490f84d663fed9fd6aac811b6e9b7407a05cddf2a27b4977c80ce55d",
+      "bytes": 53836
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-ile-bolu.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "442463565bed54e2cab48117af4558163b431f73d22e47e350a5c0d68c92073e",
+      "bytes": 186002
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-ile-bolu.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "442463565bed54e2cab48117af4558163b431f73d22e47e350a5c0d68c92073e",
+      "bytes": 186002
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-pas-i-rezonans.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eb5d461cc9569027f3797b3ec8ee08f07c7d8f92a0d3761d8188af34f68b83ed",
+      "bytes": 37404
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-pas-i-rezonans.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eb5d461cc9569027f3797b3ec8ee08f07c7d8f92a0d3761d8188af34f68b83ed",
+      "bytes": 37404
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-pas-i-rezonans.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64fdad85640ed8ed4ebc0395675f61011cadf5759c3c291a7e1818652ea542e7",
+      "bytes": 49904
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-pas-i-rezonans.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64fdad85640ed8ed4ebc0395675f61011cadf5759c3c291a7e1818652ea542e7",
+      "bytes": 49904
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-pas-i-rezonans.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7f3e5695d113aada1b1b91b3983ad3b7a2634f096853cdba8c35d1852f0de02e",
+      "bytes": 168309
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-pas-i-rezonans.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7f3e5695d113aada1b1b91b3983ad3b7a2634f096853cdba8c35d1852f0de02e",
+      "bytes": 168309
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-walkback-dni.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eac8dd949ed51b886869f5252c53b8f3a3a52ae92ab03704c8e18e51a5f46385",
+      "bytes": 16428
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-walkback-dni.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eac8dd949ed51b886869f5252c53b8f3a3a52ae92ab03704c8e18e51a5f46385",
+      "bytes": 16428
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-walkback-dni.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "616954742b26a49828265502deea0e19be46d7eeac856f2e52c7ca03613a1c0b",
+      "bytes": 21198
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-walkback-dni.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "616954742b26a49828265502deea0e19be46d7eeac856f2e52c7ca03613a1c0b",
+      "bytes": 21198
+    },
+    {
+      "path": "assets/bol-krzyza-po-50-walkback-dni.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0aba22c3056d5fa56ff901175393794c7205d993261331bf42d887f6303ee0f9",
+      "bytes": 65745
+    },
+    {
+      "path": "_site/assets/bol-krzyza-po-50-walkback-dni.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0aba22c3056d5fa56ff901175393794c7205d993261331bf42d887f6303ee0f9",
+      "bytes": 65745
+    }
+  ],
+  "files_count": 121
+}

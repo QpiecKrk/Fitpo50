@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-10-04T12:42:39.739Z",
+  "updated_at": "2026-10-05T02:58:47.323Z",
   "items": [
+    {
+      "slug": "bol-krzyza-po-50-lezenie-czy-cwiczenia",
+      "target_url": "https://fitpo50.pl/bol-krzyza-po-50-lezenie-czy-cwiczenia.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/rusz-sie.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-10-05T02:58:47.323Z",
+      "transaction_id": "article-bol-krzyza-po-50-lezenie-czy-cwiczenia-1791168700835-34325",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "stluszczona-watroba-masld-po-50",
       "target_url": "https://fitpo50.pl/stluszczona-watroba-masld-po-50.html",

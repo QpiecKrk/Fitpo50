@@ -459,3 +459,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Stłuszczona wątroba po 50-tce: co oznacza USG i czym jest MASLD? | FitPo50"
   section: "Zdrowie"
   summary: "Stłuszczona wątroba (MASLD) po 50-tce zwykle nie wynika z alkoholu. Sprawdź, co znaczy opis USG, jakie badania zrobić i co udowodniono, że pomaga wątrobie."
+- url: https://fitpo50.pl/bol-krzyza-po-50-lezenie-czy-cwiczenia.html
+  title: "Boli cię krzyż? Leżenie nie leczy. 8 ćwiczeń na 3 etapy bólu | FitPo50"
+  section: "Ruch"
+  summary: "Leżenie przy bólu krzyża nie przyspiesza powrotu do formy. Sprawdź objawy alarmowe i 8 ćwiczeń na trzy etapy bólu, opisanych krok po kroku, z badaniami."
