@@ -109,6 +109,9 @@ function validateHtaccessRobotsHygiene(errors) {
     'SetEnvIf Request_URI "^/(admin|data|assets/data|assets/pdf|sukcesy)(/|$)" fitpo50_noindex=1',
     'SetEnvIf Request_URI "\\.(json|pdf|sqlite)$" fitpo50_noindex=1',
     'Header always set X-Robots-Tag "noindex, nofollow" env=fitpo50_noindex',
+    'ExpiresByType application/pdf "access plus 0 seconds"',
+    '<FilesMatch "\\.(html?|pdf|json|xml|txt)$">',
+    'Header set Cache-Control "no-cache, max-age=0, s-maxage=0, must-revalidate"',
   ];
   for (const rel of ['.htaccess', '_site/.htaccess']) {
     if (!exists(rel)) {

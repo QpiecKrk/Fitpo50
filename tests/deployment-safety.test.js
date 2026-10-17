@@ -24,6 +24,16 @@ test('Hostinger scripts contain no destructive reset or clean command', () => {
   }
 });
 
+test('mutable public documents bypass stale Hostinger CDN cache', () => {
+  const source = fs.readFileSync(path.join(ROOT, '.htaccess'), 'utf8');
+  const exported = fs.readFileSync(path.join(ROOT, '_site', '.htaccess'), 'utf8');
+  assert.equal(exported, source);
+  assert.match(source, /ExpiresByType application\/pdf "access plus 0 seconds"/);
+  assert.match(source, /<FilesMatch "\\\.\(html\?\|pdf\|json\|xml\|txt\)\$">/);
+  assert.match(source, /Header set Cache-Control "no-cache, max-age=0, s-maxage=0, must-revalidate"/);
+  assert.doesNotMatch(source, /text\/html "access plus 10 minutes"/);
+});
+
 test('retired clean command blocks without changing user files', () => {
   const sentinel = path.join(ROOT, '.deployment-safety-sentinel');
   fs.writeFileSync(sentinel, 'keep');
