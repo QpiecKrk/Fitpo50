@@ -282,6 +282,18 @@ function validateBrokenSentenceArtifacts(articleContentHtml, errors) {
   }
 }
 
+function validateUnlinkedArticlePrompts(articleContentHtml, errors) {
+  const narrative = stripFaqBlock(articleContentHtml);
+  const paragraphs = [...String(narrative || '').matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
+    .map((match) => match[1]);
+  for (const paragraph of paragraphs) {
+    const text = utils.stripTags(paragraph).replace(/\s+/g, ' ').trim();
+    if (!/\bzobacz(?:\s+też)?\s+(?:nasz\s+)?(?:pełny\s+)?(?:artykuł|poradnik|tekst)(?:\s|$)/i.test(text)) continue;
+    if (/<a\b[^>]*\bhref=["'][^"']+["']/i.test(paragraph)) continue;
+    errors.push(`Zapowiedź innego materiału nie zawiera linku: "${text.slice(0, 120)}".`);
+  }
+}
+
 function validateNoXmlProlog(raw, errors) {
   if (/^\s*<\?xml\b/i.test(raw)) {
     errors.push('Wykryto deklarację XML na początku pliku HTML5 (<?xml ...?>). Usuń ją.');
@@ -675,6 +687,7 @@ function validateFile(filePath) {
     validateInlineFiguresUsePicture(articleContentHtml, errors);
     validateNoAbsoluteInternalLinksInNarrative(articleContentHtml, errors);
     validateBrokenSentenceArtifacts(articleContentHtml, errors);
+    validateUnlinkedArticlePrompts(articleContentHtml, errors);
     validateAsideTitlesNotDuplicated(articleContentHtml, errors);
     validateRepeatedLongSentences(articleContentHtml, errors);
     validateBannedEditorialPhrases(articleContentHtml, errors);
@@ -736,5 +749,6 @@ if (require.main === module) main();
 module.exports = {
   validateArticleTables,
   validateSourcesListMarkup,
+  validateUnlinkedArticlePrompts,
   validateFile,
 };

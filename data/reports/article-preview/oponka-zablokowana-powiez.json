@@ -1,35 +1,600 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T08:43:10.424Z",
+  "generated_at": "2026-10-17T10:40:58.324Z",
+  "reviewed_at": "2026-10-17T10:46:41.937Z",
   "slug": "oponka-zablokowana-powiez",
-  "html_sha256": "c873f35393a6ac37dfe71603830bb84bb76f2b0a17cf395ea1253e5cffb1f924",
-  "site_html_sha256": "c873f35393a6ac37dfe71603830bb84bb76f2b0a17cf395ea1253e5cffb1f924",
-  "pdf_sha256": "0de77eb21121f34ed93829019b6298e55f919ee04ba18275089eeaba5f1bfe38",
-  "site_pdf_sha256": "0de77eb21121f34ed93829019b6298e55f919ee04ba18275089eeaba5f1bfe38",
+  "html_sha256": "5907000a108568902183f895b4b7beb44da1c5da805bf3b6eff607f7c5df7903",
+  "site_html_sha256": "5907000a108568902183f895b4b7beb44da1c5da805bf3b6eff607f7c5df7903",
+  "pdf_sha256": "d3ce8b06702b5097a3bf9f38f8a19cec3cd77ff0ee4afd9468914c583a96f5fe",
+  "site_pdf_sha256": "d3ce8b06702b5097a3bf9f38f8a19cec3cd77ff0ee4afd9468914c583a96f5fe",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-17T10:40:58.324Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "oponka-zablokowana-powiez.html",
+      "sha256": "5907000a108568902183f895b4b7beb44da1c5da805bf3b6eff607f7c5df7903",
+      "bytes": 36269
+    },
+    "html_site": {
+      "file": "_site/oponka-zablokowana-powiez.html",
+      "sha256": "5907000a108568902183f895b4b7beb44da1c5da805bf3b6eff607f7c5df7903",
+      "bytes": 36269
+    },
+    "pdf_source": {
+      "file": "assets/pdf/oponka-zablokowana-powiez.pdf",
+      "sha256": "d3ce8b06702b5097a3bf9f38f8a19cec3cd77ff0ee4afd9468914c583a96f5fe",
+      "bytes": 693909
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/oponka-zablokowana-powiez.pdf",
+      "sha256": "d3ce8b06702b5097a3bf9f38f8a19cec3cd77ff0ee4afd9468914c583a96f5fe",
+      "bytes": 693909
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/oponka-zablokowana-powiez/desktop.png",
+      "screenshot_sha256": "000853f384189be5e57387d3d837731d926af0820717b2cefe7b16a8e53df035",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/oponka-zablokowana-powiez/mobile.png",
+      "screenshot_sha256": "4226b4687b149c2dbe89e4b95829877be1cf5888eaad23a69828526b7b7d1f8b",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "MITY 7 min czytania Aktualizacja: 17.10.2026 Czy zablokowana powięź powoduje oponkę brzuszną? Mit i fakty MIT: oponka to „zablokowana powięź”. WERDYKT FITPO50: mit (mocne dowody).",
+      "alt": "Mężczyzna po 50-tce porównuje miarkę obwodu pasa z wałkiem do rolowania",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-powiez-mit-hero.avif",
+          "sha256": "8b4ae2f225eacd62604cf3af4473c5ae5dd2f85e105a27636a3048f64205ac72",
+          "bytes": 67570,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/oponka-powiez-mit-hero.webp",
+          "sha256": "a88b6403eeffae8d34732d010311234c3756ffce7648833f4e338e6aef38346f",
+          "bytes": 107290,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/oponka-powiez-mit-hero.jpg",
+          "sha256": "c403290a8b0ce1a68ed5fedaba7572e8412ac33296316903d3c8e28426da3592",
+          "bytes": 233515,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "dfecbd35fa4e5e1edf21917aebf7190af7d7f75e411d97fd3176c619c3aee8bb"
+    },
+    {
+      "placement": "content:2:dlaczego-ta-obietnica-brzmi-tak-wiarygodnie",
+      "role": "content",
+      "heading": "Dlaczego ta obietnica brzmi tak wiarygodnie?",
+      "context": "Reklamy w sieci obiecują, że wystarczy „odblokować powięź”, rozbić zrosty wałkiem albo wymasować brzuch, a tłuszcz sam zacznie schodzić. Brzmi to całkiem logicznie. Tylko fizjologia mówi co innego. Rozłóżmy to spokojnie. Szybka odpowiedź Jeśli rolujesz brzuch lub inne okolice, pamiętaj: terapia manualna może krótkotrwale zmniejszać ból albo poprawiać zakres ruchu, ale nie rozbija tłuszczu i nie odblokowuje jego spalania z brzucha. Wielkość obwodu zmieniają przede wszystkim całkowita ilość tkanki tłuszczowej, masa mięśniowa, wzdęcia i postawa. Nagłe powiększenie brzucha, ból lub wyczuwalny guz wymagają oceny medycznej. Kluczowe wnioski Tłuszcz spala się systemowo, z całego ciała naraz, a nie z miejsca, które masujesz albo ćwiczysz. Meta-analizy nad „spot reduction” nie znalazły dowodów, że ",
+      "alt": "Kobieta po 50-tce porównuje wałek do rolowania z modelem anatomicznym tułowia",
+      "caption": "Wałek i model anatomiczny wyjaśniają, dlaczego prawdziwe pojęcie powięzi łatwo połączyć z nieudowodnioną obietnicą odchudzania.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-powiez-obietnica.avif",
+          "sha256": "a24636b5ca13d82398857449860192b8a2cd292c1d2d03c581b2663032c14de1",
+          "bytes": 83425,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/oponka-powiez-obietnica.webp",
+          "sha256": "dd908c812a2ac78bb2475ba9d2dd69ad443566f5432a40c9dcb7668a480efe1f",
+          "bytes": 130634,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/oponka-powiez-obietnica.jpg",
+          "sha256": "78c76100fec3e475d978e31097df583695af5b13471038901576b919f8c760f3",
+          "bytes": 261284,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4b8aa418442ed763ba1352c308be535f1ce97cf4d4f20749fbd2e54b901b064e"
+    },
+    {
+      "placement": "content:3:co-to-w-ogole-jest-powiez-i-jak-dziala",
+      "role": "content",
+      "heading": "Co to w ogóle jest powięź i jak działa?",
+      "context": "Reklamy w sieci obiecują, że wystarczy „odblokować powięź”, rozbić zrosty wałkiem albo wymasować brzuch, a tłuszcz sam zacznie schodzić. Brzmi to całkiem logicznie. Tylko fizjologia mówi co innego. Rozłóżmy to spokojnie. Szybka odpowiedź Jeśli rolujesz brzuch lub inne okolice, pamiętaj: terapia manualna może krótkotrwale zmniejszać ból albo poprawiać zakres ruchu, ale nie rozbija tłuszczu i nie odblokowuje jego spalania z brzucha. Wielkość obwodu zmieniają przede wszystkim całkowita ilość tkanki tłuszczowej, masa mięśniowa, wzdęcia i postawa. Nagłe powiększenie brzucha, ból lub wyczuwalny guz wymagają oceny medycznej. Kluczowe wnioski Tłuszcz spala się systemowo, z całego ciała naraz, a nie z miejsca, które masujesz albo ćwiczysz. Meta-analizy nad „spot reduction” nie znalazły dowodów, że ",
+      "alt": "Model warstw skóry, tłuszczu podskórnego, powięzi i mięśni",
+      "caption": "Warstwy tkanki tłuszczowej, powięzi i mięśni sąsiadują ze sobą, ale pełnią odmienne funkcje i nie tworzą mechanicznej blokady spalania tłuszczu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-warstwy-tkanek.avif",
+          "sha256": "8e3e6975cd85201242bc8046d466cca8cddbbdad1b2c393d3b58f03f5131b73a",
+          "bytes": 84011,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/oponka-warstwy-tkanek.webp",
+          "sha256": "7ba443f02ec69719d0fc51eede3bc74ca27de83bb4a28a738ba455eaedc2d9e7",
+          "bytes": 144532,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/oponka-warstwy-tkanek.jpg",
+          "sha256": "6ae9c48ec5510974a35322f59961c09199417e2efcba3315225613b56c764385",
+          "bytes": 263670,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ea3edb9fc3eb37debc2243d5a6f27fe10857d013dac7ec55fbba2fc3cf2d4934"
+    },
+    {
+      "placement": "content:4:co-naprawde-mowi-fizjologia-spalania-tluszczu",
+      "role": "content",
+      "heading": "Co naprawdę mówi fizjologia spalania tłuszczu?",
+      "context": "Reklamy w sieci obiecują, że wystarczy „odblokować powięź”, rozbić zrosty wałkiem albo wymasować brzuch, a tłuszcz sam zacznie schodzić. Brzmi to całkiem logicznie. Tylko fizjologia mówi co innego. Rozłóżmy to spokojnie. Szybka odpowiedź Jeśli rolujesz brzuch lub inne okolice, pamiętaj: terapia manualna może krótkotrwale zmniejszać ból albo poprawiać zakres ruchu, ale nie rozbija tłuszczu i nie odblokowuje jego spalania z brzucha. Wielkość obwodu zmieniają przede wszystkim całkowita ilość tkanki tłuszczowej, masa mięśniowa, wzdęcia i postawa. Nagłe powiększenie brzucha, ból lub wyczuwalny guz wymagają oceny medycznej. Kluczowe wnioski Tłuszcz spala się systemowo, z całego ciała naraz, a nie z miejsca, które masujesz albo ćwiczysz. Meta-analizy nad „spot reduction” nie znalazły dowodów, że ",
+      "alt": "Kobieta i mężczyzna po 50-tce idą energicznym krokiem przez park",
+      "caption": "Marsz angażuje całe ciało i ilustruje systemowy wydatek energii; nie wskazuje jednej okolicy, z której organizm ma usuwać tłuszcz.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-ruch-calym-cialem.avif",
+          "sha256": "15571366967f43e7ac151f65e40abfebad4ba072bb7ebb57f7bb03345c7a13f2",
+          "bytes": 167907,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/oponka-ruch-calym-cialem.webp",
+          "sha256": "796cba69d32b487518c053e3a377e7be6a85313ae11a4f1a98dd50411f346bb4",
+          "bytes": 254644,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/oponka-ruch-calym-cialem.jpg",
+          "sha256": "f44324fd12205d5ac2ad5f3cf51c25e0377375926bebb0bd09e99edb554b6248",
+          "bytes": 393673,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "44cb9a1363a8d2d8090e60bd75d65a0b9f1dd0df3cd79c1ddd1a11446fd77441"
+    },
+    {
+      "placement": "content:5:co-mowia-twarde-dowody",
+      "role": "content",
+      "heading": "Co mówią twarde dowody?",
+      "context": "Reklamy w sieci obiecują, że wystarczy „odblokować powięź”, rozbić zrosty wałkiem albo wymasować brzuch, a tłuszcz sam zacznie schodzić. Brzmi to całkiem logicznie. Tylko fizjologia mówi co innego. Rozłóżmy to spokojnie. Szybka odpowiedź Jeśli rolujesz brzuch lub inne okolice, pamiętaj: terapia manualna może krótkotrwale zmniejszać ból albo poprawiać zakres ruchu, ale nie rozbija tłuszczu i nie odblokowuje jego spalania z brzucha. Wielkość obwodu zmieniają przede wszystkim całkowita ilość tkanki tłuszczowej, masa mięśniowa, wzdęcia i postawa. Nagłe powiększenie brzucha, ból lub wyczuwalny guz wymagają oceny medycznej. Kluczowe wnioski Tłuszcz spala się systemowo, z całego ciała naraz, a nie z miejsca, które masujesz albo ćwiczysz. Meta-analizy nad „spot reduction” nie znalazły dowodów, że ",
+      "alt": "Badaczka porównuje wykresy i wyniki kilku badań naukowych",
+      "caption": "Ocena dowodów wymaga porównania populacji, interwencji i wyników, zwłaszcza gdy małe badanie daje wynik odmienny od wcześniejszej metaanalizy.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-ocena-dowodow.avif",
+          "sha256": "e3ab24798ddb40a4ea1f2a31128ea164cb385f90212ebe4c28fde5a586945a2d",
+          "bytes": 63831,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/oponka-ocena-dowodow.webp",
+          "sha256": "798bfecfc21e4fac1c67ec8b2017f5a3f2338df714c401233e6316f2c46d2be4",
+          "bytes": 104410,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/oponka-ocena-dowodow.jpg",
+          "sha256": "b3487ac4861f58defde101b3cd434597acb88aac04b4c986400190b1a3de6b31",
+          "bytes": 226539,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4da69a4f47ea774defe93d63956cb8f72282c1564ef7a59c04fb32f1c39b0650"
+    },
+    {
+      "placement": "content:6:gdzie-jest-granica-prawdy",
+      "role": "content",
+      "heading": "Gdzie jest granica prawdy?",
+      "context": "Reklamy w sieci obiecują, że wystarczy „odblokować powięź”, rozbić zrosty wałkiem albo wymasować brzuch, a tłuszcz sam zacznie schodzić. Brzmi to całkiem logicznie. Tylko fizjologia mówi co innego. Rozłóżmy to spokojnie. Szybka odpowiedź Jeśli rolujesz brzuch lub inne okolice, pamiętaj: terapia manualna może krótkotrwale zmniejszać ból albo poprawiać zakres ruchu, ale nie rozbija tłuszczu i nie odblokowuje jego spalania z brzucha. Wielkość obwodu zmieniają przede wszystkim całkowita ilość tkanki tłuszczowej, masa mięśniowa, wzdęcia i postawa. Nagłe powiększenie brzucha, ból lub wyczuwalny guz wymagają oceny medycznej. Kluczowe wnioski Tłuszcz spala się systemowo, z całego ciała naraz, a nie z miejsca, które masujesz albo ćwiczysz. Meta-analizy nad „spot reduction” nie znalazły dowodów, że ",
+      "alt": "Kobieta po 50-tce spokojnie roluje boczną część uda na macie",
+      "caption": "Rolowanie może służyć pracy nad komfortem ruchu lub ruchomością, lecz taki cel nie jest dowodem miejscowego spalania tkanki tłuszczowej.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-rolowanie-mobilnosc.avif",
+          "sha256": "32f4be1faa1d45d79055c9e5d79f103438427c95a58dd72bd05a40971e055044",
+          "bytes": 71580,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/oponka-rolowanie-mobilnosc.webp",
+          "sha256": "eda83bbf517152b638430f22aaaacc924d78ef2f4ced2cace970c7064d84f2f2",
+          "bytes": 112334,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/oponka-rolowanie-mobilnosc.jpg",
+          "sha256": "e8ff51fbcbf74e027ca88834a2ab1cd52bc26255796280dea2f08689cf751a7d",
+          "bytes": 239950,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "28201f030be407e6b7c34a2b29148e230bb5beaf86902bf684ab443069cb9fee"
+    },
+    {
+      "placement": "content:7:co-naprawde-dziala-na-oponke-po-50-tce",
+      "role": "content",
+      "heading": "Co naprawdę działa na oponkę po 50-tce?",
+      "context": "Reklamy w sieci obiecują, że wystarczy „odblokować powięź”, rozbić zrosty wałkiem albo wymasować brzuch, a tłuszcz sam zacznie schodzić. Brzmi to całkiem logicznie. Tylko fizjologia mówi co innego. Rozłóżmy to spokojnie. Szybka odpowiedź Jeśli rolujesz brzuch lub inne okolice, pamiętaj: terapia manualna może krótkotrwale zmniejszać ból albo poprawiać zakres ruchu, ale nie rozbija tłuszczu i nie odblokowuje jego spalania z brzucha. Wielkość obwodu zmieniają przede wszystkim całkowita ilość tkanki tłuszczowej, masa mięśniowa, wzdęcia i postawa. Nagłe powiększenie brzucha, ból lub wyczuwalny guz wymagają oceny medycznej. Kluczowe wnioski Tłuszcz spala się systemowo, z całego ciała naraz, a nie z miejsca, które masujesz albo ćwiczysz. Meta-analizy nad „spot reduction” nie znalazły dowodów, że ",
+      "alt": "Para po 50-tce przygotowuje posiłek, a w tle widać sprzęt do ćwiczeń",
+      "caption": "Regularny ruch i wykonalny sposób jedzenia tworzą codzienny plan pracy nad składem ciała bez obietnicy jednego tempa lub miejsca redukcji.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-plan-nawyki.avif",
+          "sha256": "fc06e0d295297add53423fc59eb7a6a38c82c296780f7508af9407b8d7852bf0",
+          "bytes": 111908,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/oponka-plan-nawyki.webp",
+          "sha256": "32b121896610c269ecc0aee629253f6b69e7251471e23c46dde21a93d137da5d",
+          "bytes": 166066,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/oponka-plan-nawyki.jpg",
+          "sha256": "1d37e1c384e87af48a1521f819bf0494cda735e1ed8eeea2af86d2e7172cee6c",
+          "bytes": 306236,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "d6b6195e963316d20c84914de30e6aaa50f7d9cb191c0514a88db9f3915c9542"
+    },
+    {
+      "placement": "content:8:kiedy-oponka-to-sygnal-zeby-pojsc-do-lekarza",
+      "role": "content",
+      "heading": "Kiedy oponka to sygnał, żeby pójść do lekarza?",
+      "context": "Reklamy w sieci obiecują, że wystarczy „odblokować powięź”, rozbić zrosty wałkiem albo wymasować brzuch, a tłuszcz sam zacznie schodzić. Brzmi to całkiem logicznie. Tylko fizjologia mówi co innego. Rozłóżmy to spokojnie. Szybka odpowiedź Jeśli rolujesz brzuch lub inne okolice, pamiętaj: terapia manualna może krótkotrwale zmniejszać ból albo poprawiać zakres ruchu, ale nie rozbija tłuszczu i nie odblokowuje jego spalania z brzucha. Wielkość obwodu zmieniają przede wszystkim całkowita ilość tkanki tłuszczowej, masa mięśniowa, wzdęcia i postawa. Nagłe powiększenie brzucha, ból lub wyczuwalny guz wymagają oceny medycznej. Kluczowe wnioski Tłuszcz spala się systemowo, z całego ciała naraz, a nie z miejsca, które masujesz albo ćwiczysz. Meta-analizy nad „spot reduction” nie znalazły dowodów, że ",
+      "alt": "Mężczyzna po 60-tce rozmawia z lekarką o zmianach obwodu brzucha",
+      "caption": "Szybka zmiana obwodu, ból, twardy brzuch lub wyczuwalny guz wymagają oceny przyczyny, a nie eksperymentowania z wałkiem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/oponka-konsultacja-lekarska.avif",
+          "sha256": "dc6a6ba5e3b35727cbc44a5437543445cae91a1341cdcc9c9a386c4457a76d89",
+          "bytes": 64067,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/oponka-konsultacja-lekarska.webp",
+          "sha256": "acc530ee02ce69abd17de35104a8f6faa7731478a37e6c8a2c3af4e527ea4df5",
+          "bytes": 102190,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/oponka-konsultacja-lekarska.jpg",
+          "sha256": "72ecc1841dc073ddbe37d1d4117d2f29c18dfc582f149ce8e299d4701b54b589",
+          "bytes": 227050,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "d0215dfebf2143e8018062fc44d54ef95bf10d3f7191e0d2361c0660f85a805f"
+    }
+  ],
   "pdf": {
     "pages": 6,
     "text_coverage": 1,
-    "rendered_pages": 6
+    "rendered_pages": 6,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/oponka-zablokowana-powiez/pdf-pages/page-1.png",
+        "sha256": "30817b6abc4461bf86c223fe53761484f1d352890edf58c388b4997ce53823d4",
+        "bytes": 620464,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1060,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/oponka-zablokowana-powiez/pdf-pages/page-2.png",
+        "sha256": "66101bd2dd52629dafeb39c3adb7da95c7d581d83b56891b86a30ce95423dd86",
+        "bytes": 865045,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1062,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/oponka-zablokowana-powiez/pdf-pages/page-3.png",
+        "sha256": "d1e92f7b6bec782d1b5ec185ea0b460304a4ea6bbee681a5a8abc50a2174d195",
+        "bytes": 1006215,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/oponka-zablokowana-powiez/pdf-pages/page-4.png",
+        "sha256": "2e6e9daf3779e6a3d132479005313cad239d207f7ab21d68210277332ae73bf1",
+        "bytes": 922420,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1060,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/oponka-zablokowana-powiez/pdf-pages/page-5.png",
+        "sha256": "a581d40524ac3391224291ff0389d4b9547ad8b34c6952a740a07c502e41c4dc",
+        "bytes": 538203,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/oponka-zablokowana-powiez/pdf-pages/page-6.png",
+        "sha256": "8c9ab8e800e117cb9d3ac082cfdbd63d41cd1f603c9b79f23041b7ed8281727e",
+        "bytes": 320022,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 59,
+          "width": 1066,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-17T10:46:41.937Z",
+    "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "000853f384189be5e57387d3d837731d926af0820717b2cefe7b16a8e53df035",
+        "note": "Pełny render desktop obejrzany: układ jest spójny, bez ucięć, nakładania elementów ani poziomego przepełnienia."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "4226b4687b149c2dbe89e4b95829877be1cf5888eaad23a69828526b7b7d1f8b",
+        "note": "Pełny render mobile obejrzany: tekst, tabele, obrazy i nawigacja mieszczą się w widoku bez ucięć i nakładania."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "dfecbd35fa4e5e1edf21917aebf7190af7d7f75e411d97fd3176c619c3aee8bb",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:2:dlaczego-ta-obietnica-brzmi-tak-wiarygodnie",
+        "inventory_sha256": "4b8aa418442ed763ba1352c308be535f1ce97cf4d4f20749fbd2e54b901b064e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:3:co-to-w-ogole-jest-powiez-i-jak-dziala",
+        "inventory_sha256": "ea3edb9fc3eb37debc2243d5a6f27fe10857d013dac7ec55fbba2fc3cf2d4934",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:4:co-naprawde-mowi-fizjologia-spalania-tluszczu",
+        "inventory_sha256": "44cb9a1363a8d2d8090e60bd75d65a0b9f1dd0df3cd79c1ddd1a11446fd77441",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:5:co-mowia-twarde-dowody",
+        "inventory_sha256": "4da69a4f47ea774defe93d63956cb8f72282c1564ef7a59c04fb32f1c39b0650",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:6:gdzie-jest-granica-prawdy",
+        "inventory_sha256": "28201f030be407e6b7c34a2b29148e230bb5beaf86902bf684ab443069cb9fee",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:7:co-naprawde-dziala-na-oponke-po-50-tce",
+        "inventory_sha256": "d6b6195e963316d20c84914de30e6aaa50f7d9cb191c0514a88db9f3915c9542",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:8:kiedy-oponka-to-sygnal-zeby-pojsc-do-lekarza",
+        "inventory_sha256": "d0215dfebf2143e8018062fc44d54ef95bf10d3f7191e0d2361c0660f85a805f",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "30817b6abc4461bf86c223fe53761484f1d352890edf58c388b4997ce53823d4",
+        "note": "Strona PDF 1 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "66101bd2dd52629dafeb39c3adb7da95c7d581d83b56891b86a30ce95423dd86",
+        "note": "Strona PDF 2 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "d1e92f7b6bec782d1b5ec185ea0b460304a4ea6bbee681a5a8abc50a2174d195",
+        "note": "Strona PDF 3 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "2e6e9daf3779e6a3d132479005313cad239d207f7ab21d68210277332ae73bf1",
+        "note": "Strona PDF 4 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "a581d40524ac3391224291ff0389d4b9547ad8b34c6952a740a07c502e41c4dc",
+        "note": "Strona PDF 5 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "8c9ab8e800e117cb9d3ac082cfdbd63d41cd1f603c9b79f23041b7ed8281727e",
+        "note": "Strona PDF 6 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 6291,
+    "review_wait_ms": 343613
   },
   "errors": []
 }

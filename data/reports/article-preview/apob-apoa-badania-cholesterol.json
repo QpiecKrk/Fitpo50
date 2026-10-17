@@ -1,35 +1,440 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T08:39:16.494Z",
+  "generated_at": "2026-10-17T10:41:10.045Z",
+  "reviewed_at": "2026-10-17T10:46:41.937Z",
   "slug": "apob-apoa-badania-cholesterol",
-  "html_sha256": "a92101f15d7d6ae8938727abea21447ca92a2720420dc5ea5c330f578b25055d",
-  "site_html_sha256": "a92101f15d7d6ae8938727abea21447ca92a2720420dc5ea5c330f578b25055d",
-  "pdf_sha256": "634ae46403c76a43bbc9c7bd953ddde5cc53f0eb4c2581595a2edca6ace784ae",
-  "site_pdf_sha256": "634ae46403c76a43bbc9c7bd953ddde5cc53f0eb4c2581595a2edca6ace784ae",
+  "html_sha256": "e51390efad400df6c2f975c5d53628562b7e2ca6978e158cff52897adb5b4a70",
+  "site_html_sha256": "e51390efad400df6c2f975c5d53628562b7e2ca6978e158cff52897adb5b4a70",
+  "pdf_sha256": "0feb221a1f8049cf3d0280442d1951a1c0683d6f925c87bd989a008c67d54fa3",
+  "site_pdf_sha256": "0feb221a1f8049cf3d0280442d1951a1c0683d6f925c87bd989a008c67d54fa3",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-17T10:41:10.045Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "apob-apoa-badania-cholesterol.html",
+      "sha256": "e51390efad400df6c2f975c5d53628562b7e2ca6978e158cff52897adb5b4a70",
+      "bytes": 28140
+    },
+    "html_site": {
+      "file": "_site/apob-apoa-badania-cholesterol.html",
+      "sha256": "e51390efad400df6c2f975c5d53628562b7e2ca6978e158cff52897adb5b4a70",
+      "bytes": 28140
+    },
+    "pdf_source": {
+      "file": "assets/pdf/apob-apoa-badania-cholesterol.pdf",
+      "sha256": "0feb221a1f8049cf3d0280442d1951a1c0683d6f925c87bd989a008c67d54fa3",
+      "bytes": 448264
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/apob-apoa-badania-cholesterol.pdf",
+      "sha256": "0feb221a1f8049cf3d0280442d1951a1c0683d6f925c87bd989a008c67d54fa3",
+      "bytes": 448264
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/apob-apoa-badania-cholesterol/desktop.png",
+      "screenshot_sha256": "bf93302948cd83424135edf4e5ac23503e5a9e59d8b2a436838dae46801d6d03",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/apob-apoa-badania-cholesterol/mobile.png",
+      "screenshot_sha256": "fcffadb23826c6e9304abeaf7f3810fe89f3ab707b9de42ca0f4ac35d9556169",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 8 min czytania ApoB/ApoA1 po 50-tce: jak czytać wynik i ocenić ryzyko serca? Cholesterol opisuje ładunek. ApoB pomaga oszacować liczbę cząstek.",
+      "alt": "Stylizowane grupy cząstek lipoproteinowych różniące się liczbą i zawartością",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-hero.avif",
+          "sha256": "4959176fe11e45db5d2e293970121898f593f718b432ce19bc5bfada8f785746",
+          "bytes": 273924,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-apoa-hero.webp",
+          "sha256": "2104cc753f79bfe664f08a4f96fc360d5798c19b1b5aeee24d765c96b24e02c6",
+          "bytes": 413836,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-hero.jpg",
+          "sha256": "e28121020899bd64987e94b6f856e1bf6d63db8fa48ead32bdd67abbf018c617",
+          "bytes": 528642,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "671a9f2d8f0625e6575450d865810ddf0ad428f8e65996e9620c7ef659e6c321"
+    },
+    {
+      "placement": "content:2:co-mierza-apob-i-apoa1",
+      "role": "content",
+      "heading": "Co mierzą ApoB i ApoA1?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę cząstek, które mogą wnikać w ścianę tętnicy; ApoA1 jest głównym białkiem HDL. Ich iloraz wiązał się z ryzykiem zawału w badaniach populacyjnych, ale nie ma jednego celu terapeutycznego dla wszystkich. Przy wyniku ApoB/ApoA1 większą rolę ma ApoB odczytane razem z LDL-C, nie-HDL-C i całkowitym ryzykiem. Kluczowe wnioski ApoB i ApoA1 to dwa osobne stężenia; wskaźnik jest ich ilorazem tylko przy zgodnych jednostkach. Niższy iloraz nie daje gwarancji ochrony, a wyższy nie rozpoznaje samodzielnie miażdżycy. ApoB ma silniejsze miejsce w aktualnych zaleceniach niż sam wskaźnik ApoB/ApoA1. Wynik zmienia postępowanie dopiero wtedy, gdy jest połączony z całkowitym ryzykiem i celem leczenia. Co mierzą ApoB i ApoA1? Większość cząstek aterogennych krążących we krwi",
+      "alt": "Laborantka porównuje dwie grupy stylizowanych cząstek lipoproteinowych",
+      "caption": "ApoB przybliża liczbę cząstek aterogennych, a ApoA1 opisuje główne białko HDL — oba wyniki mówią o innych elementach transportu lipidów.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-particles-2026.avif",
+          "sha256": "a7f40c5424a7eec45089ad4892a56e1c3376f09588f97aab690ac7c1863d14de",
+          "bytes": 108963,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-apoa-particles-2026.webp",
+          "sha256": "9d5a20d13341fc8126924a788732f9885d18f89eba9efc6e7e48cae39c1b2286",
+          "bytes": 185078,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-particles-2026.jpg",
+          "sha256": "0ce1ee2dd2266a950e65ba5fd0dc7dea5269515520c0f7308d320c31cc428a55",
+          "bytes": 305585,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "09d65239c5336702f4fc87a369dc2bd521ea49be3350d7ed712910f54dd59e79"
+    },
+    {
+      "placement": "content:3:jak-oblicza-sie-wskaznik-apob-apoa1",
+      "role": "content",
+      "heading": "Jak oblicza się wskaźnik ApoB/ApoA1?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę cząstek, które mogą wnikać w ścianę tętnicy; ApoA1 jest głównym białkiem HDL. Ich iloraz wiązał się z ryzykiem zawału w badaniach populacyjnych, ale nie ma jednego celu terapeutycznego dla wszystkich. Przy wyniku ApoB/ApoA1 większą rolę ma ApoB odczytane razem z LDL-C, nie-HDL-C i całkowitym ryzykiem. Kluczowe wnioski ApoB i ApoA1 to dwa osobne stężenia; wskaźnik jest ich ilorazem tylko przy zgodnych jednostkach. Niższy iloraz nie daje gwarancji ochrony, a wyższy nie rozpoznaje samodzielnie miażdżycy. ApoB ma silniejsze miejsce w aktualnych zaleceniach niż sam wskaźnik ApoB/ApoA1. Wynik zmienia postępowanie dopiero wtedy, gdy jest połączony z całkowitym ryzykiem i celem leczenia. Co mierzą ApoB i ApoA1? Większość cząstek aterogennych krążących we krwi",
+      "alt": "Analiza wyniku ApoB i ApoA1 razem z profilem ryzyka",
+      "caption": "Analiza wyniku ApoB i ApoA1 razem z profilem ryzyka",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-kobieta-wyniki.avif",
+          "sha256": "8ad14c3e31964bbd33a7bcc0b6067bf1cad082974eed36a40f7304fc69051cf8",
+          "bytes": 100729,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-apoa-kobieta-wyniki.webp",
+          "sha256": "ab5726e7f8c9a580f50be826110f14150e4230862f82e597a9da7bf7f2627dee",
+          "bytes": 160420,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-kobieta-wyniki.jpg",
+          "sha256": "b5d2c4fc94a3372bb573cecd5ca2d80b949cd9c537ef282124cebe79b61269df",
+          "bytes": 401680,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "2efa4bf651c5c908363de1f7961d7ef5e05c40e979b49265a371a351813b26d1"
+    },
+    {
+      "placement": "content:4:czy-wskaznik-przewiduje-zawal-lepiej-niz-lipidog",
+      "role": "content",
+      "heading": "Czy wskaźnik przewiduje zawał lepiej niż lipidogram?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę cząstek, które mogą wnikać w ścianę tętnicy; ApoA1 jest głównym białkiem HDL. Ich iloraz wiązał się z ryzykiem zawału w badaniach populacyjnych, ale nie ma jednego celu terapeutycznego dla wszystkich. Przy wyniku ApoB/ApoA1 większą rolę ma ApoB odczytane razem z LDL-C, nie-HDL-C i całkowitym ryzykiem. Kluczowe wnioski ApoB i ApoA1 to dwa osobne stężenia; wskaźnik jest ich ilorazem tylko przy zgodnych jednostkach. Niższy iloraz nie daje gwarancji ochrony, a wyższy nie rozpoznaje samodzielnie miażdżycy. ApoB ma silniejsze miejsce w aktualnych zaleceniach niż sam wskaźnik ApoB/ApoA1. Wynik zmienia postępowanie dopiero wtedy, gdy jest połączony z całkowitym ryzykiem i celem leczenia. Co mierzą ApoB i ApoA1? Większość cząstek aterogennych krążących we krwi",
+      "alt": "Lekarka omawia z pacjentem kilka wyników oceny ryzyka sercowo-naczyniowego",
+      "caption": "Iloraz ApoB/ApoA1 może uzupełnić ocenę, lecz nie zastępuje pełnego obrazu ryzyka sercowo-naczyniowego.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-risk-consultation-2026.avif",
+          "sha256": "87dc4f42e2bcde081a2b67815f17ffde726fc00c3fd51fe30e6efca5077447a6",
+          "bytes": 79742,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-apoa-risk-consultation-2026.webp",
+          "sha256": "d2d7ec58b488cb93bf2fab48c312676657e046601c354792fd34f3442da2633e",
+          "bytes": 141472,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-risk-consultation-2026.jpg",
+          "sha256": "c66bfe270d64ddc81b850de17fb926d58473e6994301a3d1d988773d5c1a3e0c",
+          "bytes": 278800,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7436dbac60c129e4cf7273b65d02a42a7fac265f4a0148c78c3dabb2abf0ce94"
+    },
+    {
+      "placement": "content:5:kiedy-warto-oznaczyc-apob-i-apoa1",
+      "role": "content",
+      "heading": "Kiedy warto oznaczyć ApoB i ApoA1?",
+      "context": "Szybka odpowiedź ApoB przybliża liczbę cząstek, które mogą wnikać w ścianę tętnicy; ApoA1 jest głównym białkiem HDL. Ich iloraz wiązał się z ryzykiem zawału w badaniach populacyjnych, ale nie ma jednego celu terapeutycznego dla wszystkich. Przy wyniku ApoB/ApoA1 większą rolę ma ApoB odczytane razem z LDL-C, nie-HDL-C i całkowitym ryzykiem. Kluczowe wnioski ApoB i ApoA1 to dwa osobne stężenia; wskaźnik jest ich ilorazem tylko przy zgodnych jednostkach. Niższy iloraz nie daje gwarancji ochrony, a wyższy nie rozpoznaje samodzielnie miażdżycy. ApoB ma silniejsze miejsce w aktualnych zaleceniach niż sam wskaźnik ApoB/ApoA1. Wynik zmienia postępowanie dopiero wtedy, gdy jest połączony z całkowitym ryzykiem i celem leczenia. Co mierzą ApoB i ApoA1? Większość cząstek aterogennych krążących we krwi",
+      "alt": "Pielęgniarka zabezpiecza próbkę krwi po pobraniu od mężczyzny po 50-tce",
+      "caption": "Oznaczenie ApoB może pomóc zwłaszcza wtedy, gdy sam LDL-C nie oddaje dobrze liczby cząstek aterogennych.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/apob-apoa-testing-2026.avif",
+          "sha256": "5de8a07ee4787d94ac6cb94d2a29ab69e813c66f28a0f93c93847f512d8dc3b8",
+          "bytes": 72047,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/apob-apoa-testing-2026.webp",
+          "sha256": "952a19fdfe651e637134723fa143757bd7838c661860266900e5c3e4668d1572",
+          "bytes": 136928,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/apob-apoa-testing-2026.jpg",
+          "sha256": "5e5598c9be20b84c106a6466c1d898ca56e7b5d979bf03546e4f5c68835d9865",
+          "bytes": 265986,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "1f33cfd7f376614d2827de8b13582613f0d1e08f889d2f3cc4de3e8ceafcdec0"
+    }
+  ],
   "pdf": {
-    "pages": 4,
+    "pages": 5,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 5,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/apob-apoa-badania-cholesterol/pdf-pages/page-1.png",
+        "sha256": "bce06c79fd585b156bb7216cb33061b15be1fce6d737212a388fa2b09e517a55",
+        "bytes": 852282,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 59,
+          "width": 1063,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/apob-apoa-badania-cholesterol/pdf-pages/page-2.png",
+        "sha256": "ecf2f33c587cc774ae23f4b9d4740e12c73aa007b23dbcf462690b55603a2540",
+        "bytes": 801164,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 56,
+          "width": 1053,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/apob-apoa-badania-cholesterol/pdf-pages/page-3.png",
+        "sha256": "3b8e3728f685e8b5c205487e0f3c0cfa79d512f8353c4579bcf58d892b342ab6",
+        "bytes": 520473,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/apob-apoa-badania-cholesterol/pdf-pages/page-4.png",
+        "sha256": "2d50499243f97fc38b2bf06feeff2e0d55d2e3e52fcde1daa256fd875e6b7f0e",
+        "bytes": 467952,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 56,
+          "width": 1059,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/apob-apoa-badania-cholesterol/pdf-pages/page-5.png",
+        "sha256": "66121a999e5ea3c05dad9b46f1e13930d9565a81f3d8b741e97a75f232f436b2",
+        "bytes": 63417,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 52,
+          "width": 933,
+          "height": 1598
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-17T10:46:41.937Z",
+    "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "bf93302948cd83424135edf4e5ac23503e5a9e59d8b2a436838dae46801d6d03",
+        "note": "Pełny render desktop obejrzany: układ jest spójny, bez ucięć, nakładania elementów ani poziomego przepełnienia."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "fcffadb23826c6e9304abeaf7f3810fe89f3ab707b9de42ca0f4ac35d9556169",
+        "note": "Pełny render mobile obejrzany: tekst, tabele, obrazy i nawigacja mieszczą się w widoku bez ucięć i nakładania."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "671a9f2d8f0625e6575450d865810ddf0ad428f8e65996e9620c7ef659e6c321",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:2:co-mierza-apob-i-apoa1",
+        "inventory_sha256": "09d65239c5336702f4fc87a369dc2bd521ea49be3350d7ed712910f54dd59e79",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:3:jak-oblicza-sie-wskaznik-apob-apoa1",
+        "inventory_sha256": "2efa4bf651c5c908363de1f7961d7ef5e05c40e979b49265a371a351813b26d1",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:4:czy-wskaznik-przewiduje-zawal-lepiej-niz-lipidog",
+        "inventory_sha256": "7436dbac60c129e4cf7273b65d02a42a7fac265f4a0148c78c3dabb2abf0ce94",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:5:kiedy-warto-oznaczyc-apob-i-apoa1",
+        "inventory_sha256": "1f33cfd7f376614d2827de8b13582613f0d1e08f889d2f3cc4de3e8ceafcdec0",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "bce06c79fd585b156bb7216cb33061b15be1fce6d737212a388fa2b09e517a55",
+        "note": "Strona PDF 1 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "ecf2f33c587cc774ae23f4b9d4740e12c73aa007b23dbcf462690b55603a2540",
+        "note": "Strona PDF 2 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "3b8e3728f685e8b5c205487e0f3c0cfa79d512f8353c4579bcf58d892b342ab6",
+        "note": "Strona PDF 3 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "2d50499243f97fc38b2bf06feeff2e0d55d2e3e52fcde1daa256fd875e6b7f0e",
+        "note": "Strona PDF 4 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "66121a999e5ea3c05dad9b46f1e13930d9565a81f3d8b741e97a75f232f436b2",
+        "note": "Strona PDF 5 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4768,
+    "review_wait_ms": 331892
   },
   "errors": []
 }

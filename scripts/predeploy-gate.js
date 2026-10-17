@@ -12,7 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { validateArticleHeadFile } = require('./lib/article-head-contract');
+const { validateArticleHeadFile, firstTagAttribute } = require('./lib/article-head-contract');
 const { validators, POLICY, utils } = require('./lib/article-policy');
 const { categoryPageFromImportCategory } = require('./lib/categories');
 const { pageKind } = require('./lib/publication-page-kind');
@@ -339,7 +339,7 @@ function validateArticleHeroConsistency(relPath, errors, warnings) {
   if (!exists(relPath)) return;
   const html = readUtf8(relPath);
 
-  const preloadMatch = html.match(/<link\s+rel="preload"[^>]*as="image"[^>]*href="([^"]+)"/i);
+  const preloadHref = extractPreloadHeroHref(html);
   const heroBlockMatch = html.match(/<div class="article-hero[^"]*"[\s\S]*?<picture>([\s\S]*?)<\/picture>/i);
   const avifMatch = heroBlockMatch ? heroBlockMatch[1].match(/<source[^>]*srcset="([^"]+\.avif[^"]*)"/i) : null;
   const webpMatch = heroBlockMatch ? heroBlockMatch[1].match(/<source[^>]*srcset="([^"]+\.webp[^"]*)"/i) : null;
@@ -349,7 +349,7 @@ function validateArticleHeroConsistency(relPath, errors, warnings) {
   const schemaMatch = html.match(/"image"\s*:\s*"([^"]+)"/i);
 
   const bases = [
-    { label: 'preload hero', value: normalizeImageBase(preloadMatch ? preloadMatch[1] : '') },
+    { label: 'preload hero', value: normalizeImageBase(preloadHref) },
     { label: 'hero source avif', value: normalizeImageBase(avifMatch ? avifMatch[1] : '') },
     { label: 'hero source webp', value: normalizeImageBase(webpMatch ? webpMatch[1] : '') },
     { label: 'hero img jpg', value: normalizeImageBase(imgMatch ? imgMatch[1] : '') },
@@ -372,6 +372,15 @@ function validateArticleHeroConsistency(relPath, errors, warnings) {
   if (!heroBlockMatch) {
     warnings.push(`${relPath}: nie znaleziono bloku .article-hero do kontroli spójności hero.`);
   }
+}
+
+function extractPreloadHeroHref(html) {
+  const links = [...String(html || '').matchAll(/<link\b[^>]*>/gi)].map((match) => match[0]);
+  const heroPreload = links.find((tag) => (
+    firstTagAttribute(tag, 'link', 'rel', 'preload', 'as') === 'image'
+  ));
+  if (!heroPreload) return '';
+  return firstTagAttribute(heroPreload, 'link', 'rel', 'preload', 'href');
 }
 
 function validateLatestArticleImage(indexHtml, latestHref, errors, warnings) {
@@ -723,4 +732,8 @@ function main() {
   printAndExit(errors, warnings);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = {
+  extractPreloadHeroHref,
+};

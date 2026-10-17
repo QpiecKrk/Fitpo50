@@ -6,8 +6,9 @@ const fs = require('node:fs');
 const os = require('node:os');
 const { validateArticleContract } = require('../scripts/article-contract-check');
 const { validateArticleHeadContract } = require('../scripts/lib/article-head-contract');
-const { validateArticleTables, validateSourcesListMarkup } = require('../scripts/validate-article-standard');
+const { validateArticleTables, validateSourcesListMarkup, validateUnlinkedArticlePrompts } = require('../scripts/validate-article-standard');
 const { extractMetaModified } = require('../scripts/date-modified-guard');
+const { extractPreloadHeroHref } = require('../scripts/predeploy-gate');
 const check = (html) => {
   const run = spawnSync('python3', [path.join(__dirname, '../scripts/article-content-consistency.py'), '--stdin'], { input: html, encoding: 'utf8' });
   assert.equal(run.status, 0, run.stderr);
@@ -95,6 +96,15 @@ test('sources-list class cannot be nested on a generic wrapper', () => {
  validateSourcesListMarkup('<div class="sources-list"><h2>Źródła</h2><ol class="sources-list"><li>Źródło</li></ol></div>', errors);
  assert.match(errors.join('\n'), /wyłącznie na elemencie <ol>/);
 });
+test('article prompt that promises another guide must contain a link', () => {
+ const errors = [];
+ validateUnlinkedArticlePrompts('<p>Zobacz nasz pełny artykuł o tym, jak zmniejszyć obwód pasa.</p>', errors);
+ assert.match(errors.join('\n'), /nie zawiera linku/);
+
+ const linkedErrors = [];
+ validateUnlinkedArticlePrompts('<p>Zobacz nasz pełny artykuł o tym, <a href="jak-zmniejszyc-obwod-pasa.html">jak zmniejszyć obwód pasa</a>.</p>', linkedErrors);
+ assert.deepEqual(linkedErrors, []);
+});
 test('article stylesheet wraps long source URLs on mobile', () => {
  const css = fs.readFileSync(path.join(__dirname, '../article.css'), 'utf8');
  assert.match(css, /\.sources-list a\s*\{[^}]*overflow-wrap:\s*anywhere;[^}]*word-break:\s*break-word;/s);
@@ -111,4 +121,10 @@ test('publication contract accepts quick-answer and key-takeaways with reordered
 });
 test('date-modified guard accepts reordered meta attributes', () => {
  assert.equal(extractMetaModified('<meta content="2026-09-30T14:30:00+02:00" property="article:modified_time">'), '2026-09-30T14:30:00+02:00');
+});
+test('predeploy hero contract accepts reordered preload attributes', () => {
+ assert.equal(
+   extractPreloadHeroHref('<link as="image" fetchpriority="high" href="./assets/hero.webp" rel="preload">'),
+   './assets/hero.webp',
+ );
 });

@@ -1,35 +1,421 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T08:43:55.471Z",
+  "generated_at": "2026-10-17T10:40:43.427Z",
+  "reviewed_at": "2026-10-17T10:46:41.937Z",
   "slug": "rentgen-tomografia-ct-rezonans-mri-roznice-badania",
-  "html_sha256": "f2e99d0d36e78ef03f555bd0e41c008d100b615157278f0ab056235f012833dc",
-  "site_html_sha256": "f2e99d0d36e78ef03f555bd0e41c008d100b615157278f0ab056235f012833dc",
-  "pdf_sha256": "66e2be219e484a734a00747d8ddfe34a8313908dfc3c5b18f3ee22a0de099e17",
-  "site_pdf_sha256": "66e2be219e484a734a00747d8ddfe34a8313908dfc3c5b18f3ee22a0de099e17",
+  "html_sha256": "f9b4675ad451a270343a8615014b46251f8c9610d098ca2296c7a2b23a31bcf1",
+  "site_html_sha256": "f9b4675ad451a270343a8615014b46251f8c9610d098ca2296c7a2b23a31bcf1",
+  "pdf_sha256": "daa585750a0b130c82f5750149df2f23d93ddfff14cf0063e228b74470027af9",
+  "site_pdf_sha256": "daa585750a0b130c82f5750149df2f23d93ddfff14cf0063e228b74470027af9",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-17T10:40:43.427Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "rentgen-tomografia-ct-rezonans-mri-roznice-badania.html",
+      "sha256": "f9b4675ad451a270343a8615014b46251f8c9610d098ca2296c7a2b23a31bcf1",
+      "bytes": 28405
+    },
+    "html_site": {
+      "file": "_site/rentgen-tomografia-ct-rezonans-mri-roznice-badania.html",
+      "sha256": "f9b4675ad451a270343a8615014b46251f8c9610d098ca2296c7a2b23a31bcf1",
+      "bytes": 28405
+    },
+    "pdf_source": {
+      "file": "assets/pdf/rentgen-tomografia-ct-rezonans-mri-roznice-badania.pdf",
+      "sha256": "daa585750a0b130c82f5750149df2f23d93ddfff14cf0063e228b74470027af9",
+      "bytes": 381039
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/rentgen-tomografia-ct-rezonans-mri-roznice-badania.pdf",
+      "sha256": "daa585750a0b130c82f5750149df2f23d93ddfff14cf0063e228b74470027af9",
+      "bytes": 381039
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/rentgen-tomografia-ct-rezonans-mri-roznice-badania/desktop.png",
+      "screenshot_sha256": "734d7e46aef4cafecb525e02c4ecf826cfa7b6f68b4ecb17104ac61d6befc6ac",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/rentgen-tomografia-ct-rezonans-mri-roznice-badania/mobile.png",
+      "screenshot_sha256": "e8e857e2949c672f82964abb02ff132b641888a9c94c4b2b3ed4aee8074ed72a",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "CIEKAWE 9 min czytania Czym różni się rentgen od rezonansu? Porównanie RTG, CT i MRI Każda metoda odpowiada na inne pytanie. Właściwy wybór zaczyna się od objawu i celu badania.",
+      "alt": "Zestawienie wyglądu kolana na zdjęciu zewnętrznym, RTG, MRI i CT",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.avif",
+          "sha256": "51687740b3c366895dc13b3012206921e4388bbb55b348c8dfd2d702c6b0731d",
+          "bytes": 53481,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.webp",
+          "sha256": "91319c72bd3c8d98ba42b250789664db63f383696ff83467545661aa2d26a77e",
+          "bytes": 101512,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/rtg-mri-ct-badania-obrazowe-porownanie-hero.jpg",
+          "sha256": "a379cc32cd8739f40e78731d141fba9b7c7b6af48d7cd01ac07b96afa8dac796",
+          "bytes": 234909,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "04a9e447763de512ca94b4a5ac7a795bcd6a289293de1bfdd43ecc1f056be97c"
+    },
+    {
+      "placement": "content:2:jak-powstaje-obraz-rtg-ct-i-mri",
+      "role": "content",
+      "heading": "Jak powstaje obraz RTG, CT i MRI?",
+      "context": "Szybka odpowiedź Rentgen (RTG) tworzy obraz promieniami X, a rezonans (MRI) wykorzystuje pole magnetyczne i fale radiowe, więc nie naraża na promieniowanie jonizujące. Tomografia (CT) także używa promieni X, lecz składa wiele obrazów w przekroje ciała. Jeśli badanie wymaga wyboru metody, lekarz bierze pod uwagę narząd, pytanie kliniczne, implanty i ewentualny kontrast. Kluczowe wnioski RTG i CT używają promieniowania jonizującego; MRI go nie używa. CT zwykle daje większą dawkę niż zwykłe zdjęcie RTG, ale zakres zależy od badania. Kontrast jodowy i gadolinowy to różne środki o różnych przeciwwskazaniach. MRI wymaga dokładnego zgłoszenia implantów, odłamków metalu i urządzeń elektronicznych. Jak powstaje obraz RTG, CT i MRI? RTG rejestruje projekcję po przejściu promieni X przez ciało. CT ob",
+      "alt": "Oddzielne pracownie RTG, tomografii komputerowej i rezonansu magnetycznego",
+      "caption": "RTG, CT i MRI korzystają z różnych urządzeń i zjawisk fizycznych, dlatego odpowiadają na inne pytania kliniczne.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/rtg-ct-mri-rooms-2026.avif",
+          "sha256": "bee6896522a6b97dec2ef0b7fd6ab2e25c8047944dbb2e13c304c9a70d91e879",
+          "bytes": 99230,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/rtg-ct-mri-rooms-2026.webp",
+          "sha256": "dd57779e2f95365b37b5ae8dc217a5fc96815b7d33eb56b7f43dbbe198be264b",
+          "bytes": 170442,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/rtg-ct-mri-rooms-2026.jpg",
+          "sha256": "87c3e7e25853e02b98dda689b634d23a4bd2222f0cc2e722a5f6c8384236d9f9",
+          "bytes": 312947,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "01ee378941220f86a380b3cb8f3cdfd3165ecc057d639bd55a70d1e884523e68"
+    },
+    {
+      "placement": "content:3:kiedy-czesciej-wybiera-sie-rtg-lub-ct",
+      "role": "content",
+      "heading": "Kiedy częściej wybiera się RTG lub CT?",
+      "context": "Szybka odpowiedź Rentgen (RTG) tworzy obraz promieniami X, a rezonans (MRI) wykorzystuje pole magnetyczne i fale radiowe, więc nie naraża na promieniowanie jonizujące. Tomografia (CT) także używa promieni X, lecz składa wiele obrazów w przekroje ciała. Jeśli badanie wymaga wyboru metody, lekarz bierze pod uwagę narząd, pytanie kliniczne, implanty i ewentualny kontrast. Kluczowe wnioski RTG i CT używają promieniowania jonizującego; MRI go nie używa. CT zwykle daje większą dawkę niż zwykłe zdjęcie RTG, ale zakres zależy od badania. Kontrast jodowy i gadolinowy to różne środki o różnych przeciwwskazaniach. MRI wymaga dokładnego zgłoszenia implantów, odłamków metalu i urządzeń elektronicznych. Jak powstaje obraz RTG, CT i MRI? RTG rejestruje projekcję po przejściu promieni X przez ciało. CT ob",
+      "alt": "Techniczka przygotowuje pacjentkę do tomografii komputerowej w oddzielnej pracowni",
+      "caption": "CT jest szybkie i szczegółowe, lecz używa promieniowania X; wybór powinien wynikać z konkretnego pytania klinicznego.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/rtg-ct-choice-2026.avif",
+          "sha256": "16a3825a3a2ef379cd50359e6bd3478cbe0cce2ff545187574ccac269c4b43a3",
+          "bytes": 51362,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/rtg-ct-choice-2026.webp",
+          "sha256": "df4188da94e0105270a5efb9fac06464027cbb640f470c8d081442ffc7309b53",
+          "bytes": 95940,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/rtg-ct-choice-2026.jpg",
+          "sha256": "945914b51c3d2d97811ab8371423b8ebf0b9d4053678ff5e14edeb608b3c0505",
+          "bytes": 213806,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "8dd9fff4aa9f6014b6a44c908e5dbef682bdaab8d0dc73c5453c8cef59d0472f"
+    },
+    {
+      "placement": "content:4:kiedy-mri-ma-przewage-i-jakie-ma-ograniczenia",
+      "role": "content",
+      "heading": "Kiedy MRI ma przewagę i jakie ma ograniczenia?",
+      "context": "Szybka odpowiedź Rentgen (RTG) tworzy obraz promieniami X, a rezonans (MRI) wykorzystuje pole magnetyczne i fale radiowe, więc nie naraża na promieniowanie jonizujące. Tomografia (CT) także używa promieni X, lecz składa wiele obrazów w przekroje ciała. Jeśli badanie wymaga wyboru metody, lekarz bierze pod uwagę narząd, pytanie kliniczne, implanty i ewentualny kontrast. Kluczowe wnioski RTG i CT używają promieniowania jonizującego; MRI go nie używa. CT zwykle daje większą dawkę niż zwykłe zdjęcie RTG, ale zakres zależy od badania. Kontrast jodowy i gadolinowy to różne środki o różnych przeciwwskazaniach. MRI wymaga dokładnego zgłoszenia implantów, odłamków metalu i urządzeń elektronicznych. Jak powstaje obraz RTG, CT i MRI? RTG rejestruje projekcję po przejściu promieni X przez ciało. CT ob",
+      "alt": "Techniczka sprawdza kartę implantu przed wejściem pacjenta do pracowni MRI",
+      "caption": "Dokładny model implantu i warunki jego użycia są ważniejsze niż ogólna informacja, że urządzenie zawiera metal.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/mri-safety-screening-2026.avif",
+          "sha256": "e6df07e78ea8cea76c9890b6c54e6fc69c1c8896f5e96067311d44e86ad08eb1",
+          "bytes": 59682,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/mri-safety-screening-2026.webp",
+          "sha256": "dc2c370bb5b07957736ad42cdac3987d8f4c80d09cb25e8fae51f3e1f798d6fe",
+          "bytes": 108308,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/mri-safety-screening-2026.jpg",
+          "sha256": "09e3c1134079ccd49f0566a8c408731d28c44e64bdf600802f6301410f803bc3",
+          "bytes": 232602,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "9fdef9a6739f5f299bf9b6b2287336cbfed93d6094e0740a83c5c03435f7e4e1"
+    },
+    {
+      "placement": "content:5:co-trzeba-wiedziec-o-kontrascie",
+      "role": "content",
+      "heading": "Co trzeba wiedzieć o kontraście?",
+      "context": "Szybka odpowiedź Rentgen (RTG) tworzy obraz promieniami X, a rezonans (MRI) wykorzystuje pole magnetyczne i fale radiowe, więc nie naraża na promieniowanie jonizujące. Tomografia (CT) także używa promieni X, lecz składa wiele obrazów w przekroje ciała. Jeśli badanie wymaga wyboru metody, lekarz bierze pod uwagę narząd, pytanie kliniczne, implanty i ewentualny kontrast. Kluczowe wnioski RTG i CT używają promieniowania jonizującego; MRI go nie używa. CT zwykle daje większą dawkę niż zwykłe zdjęcie RTG, ale zakres zależy od badania. Kontrast jodowy i gadolinowy to różne środki o różnych przeciwwskazaniach. MRI wymaga dokładnego zgłoszenia implantów, odłamków metalu i urządzeń elektronicznych. Jak powstaje obraz RTG, CT i MRI? RTG rejestruje projekcję po przejściu promieni X przez ciało. CT ob",
+      "alt": "Zespół radiologii sprawdza wkłucie i kwalifikację przed podaniem kontrastu",
+      "caption": "Przed kontrastem liczy się rodzaj badania, wcześniejsze reakcje, czynność nerek, leki i instrukcja konkretnej pracowni.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/contrast-preparation-2026.avif",
+          "sha256": "b45ca2247d1f2caf45f98639987a7156e0a072b84049217e453040515e8f2abc",
+          "bytes": 82246,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/contrast-preparation-2026.webp",
+          "sha256": "1607e70b9e7cc1ac1e5b067bbc9522806f6db8c6cc9827d276ccd8bcadd2860f",
+          "bytes": 139788,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/contrast-preparation-2026.jpg",
+          "sha256": "1a1ef29c39c5fe5a62e6bd3f2484b1f43e3440951fca97fbe9fee94470388d1e",
+          "bytes": 279416,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "a2aa595de21662ab30df8b8a594bba8e9b3a4b05b69fb89faf48281ac76c99ac"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/rentgen-tomografia-ct-rezonans-mri-roznice-badania/pdf-pages/page-1.png",
+        "sha256": "13db8fad7dc59e67b2b3f38d716aafcaa8ba891a58849f58261fa4aa3541a0ab",
+        "bytes": 480583,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1057,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/rentgen-tomografia-ct-rezonans-mri-roznice-badania/pdf-pages/page-2.png",
+        "sha256": "308d3b0047e38b474db01cb3848204d2c69b92aa2ec25684ca57d6ebbcdb4c2d",
+        "bytes": 679895,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1048,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/rentgen-tomografia-ct-rezonans-mri-roznice-badania/pdf-pages/page-3.png",
+        "sha256": "19c65efbb9481273be3072a4f96fa927f02d52cd32e40c0f0819d887dab9bd3f",
+        "bytes": 777593,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/rentgen-tomografia-ct-rezonans-mri-roznice-badania/pdf-pages/page-4.png",
+        "sha256": "c8ec4c92d3eb1d6dc18e7b27087d8af16ec1231277f79fb308909c4e8982aadb",
+        "bytes": 176557,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-17T10:46:41.937Z",
+    "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "734d7e46aef4cafecb525e02c4ecf826cfa7b6f68b4ecb17104ac61d6befc6ac",
+        "note": "Pełny render desktop obejrzany: układ jest spójny, bez ucięć, nakładania elementów ani poziomego przepełnienia."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "e8e857e2949c672f82964abb02ff132b641888a9c94c4b2b3ed4aee8074ed72a",
+        "note": "Pełny render mobile obejrzany: tekst, tabele, obrazy i nawigacja mieszczą się w widoku bez ucięć i nakładania."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "04a9e447763de512ca94b4a5ac7a795bcd6a289293de1bfdd43ecc1f056be97c",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "PHOTO; X-RAY; MRI; CT SCAN",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:2:jak-powstaje-obraz-rtg-ct-i-mri",
+        "inventory_sha256": "01ee378941220f86a380b3cb8f3cdfd3165ecc057d639bd55a70d1e884523e68",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:3:kiedy-czesciej-wybiera-sie-rtg-lub-ct",
+        "inventory_sha256": "8dd9fff4aa9f6014b6a44c908e5dbef682bdaab8d0dc73c5453c8cef59d0472f",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:4:kiedy-mri-ma-przewage-i-jakie-ma-ograniczenia",
+        "inventory_sha256": "9fdef9a6739f5f299bf9b6b2287336cbfed93d6094e0740a83c5c03435f7e4e1",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:5:co-trzeba-wiedziec-o-kontrascie",
+        "inventory_sha256": "a2aa595de21662ab30df8b8a594bba8e9b3a4b05b69fb89faf48281ac76c99ac",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "13db8fad7dc59e67b2b3f38d716aafcaa8ba891a58849f58261fa4aa3541a0ab",
+        "note": "Strona PDF 1 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "308d3b0047e38b474db01cb3848204d2c69b92aa2ec25684ca57d6ebbcdb4c2d",
+        "note": "Strona PDF 2 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "19c65efbb9481273be3072a4f96fa927f02d52cd32e40c0f0819d887dab9bd3f",
+        "note": "Strona PDF 3 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "c8ec4c92d3eb1d6dc18e7b27087d8af16ec1231277f79fb308909c4e8982aadb",
+        "note": "Strona PDF 4 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 5066,
+    "review_wait_ms": 358510
   },
   "errors": []
 }

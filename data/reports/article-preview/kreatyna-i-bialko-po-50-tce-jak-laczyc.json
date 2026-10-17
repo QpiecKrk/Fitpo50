@@ -1,35 +1,554 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:56:54.013Z",
+  "generated_at": "2026-10-17T10:41:04.826Z",
+  "reviewed_at": "2026-10-17T10:46:41.937Z",
   "slug": "kreatyna-i-bialko-po-50-tce-jak-laczyc",
-  "html_sha256": "7e35cf124192f9c28b62d90d12c1a53acffec1926a268f6b07d601594f7196dc",
-  "site_html_sha256": "7e35cf124192f9c28b62d90d12c1a53acffec1926a268f6b07d601594f7196dc",
-  "pdf_sha256": "abc0c0204e79a43e4ef942e8a06140acbc613d7495f635dfc0d6cc237d3ccd48",
-  "site_pdf_sha256": "abc0c0204e79a43e4ef942e8a06140acbc613d7495f635dfc0d6cc237d3ccd48",
+  "html_sha256": "d89c4af96bb5e210117ec1880d9b76bd98298d276f543e63bbe57a8422ffe5a5",
+  "site_html_sha256": "d89c4af96bb5e210117ec1880d9b76bd98298d276f543e63bbe57a8422ffe5a5",
+  "pdf_sha256": "b9d5ba1dbbbf3ff4c7da73fe11cf52ef2ef4d4300fcd0a6603305d91513ad227",
+  "site_pdf_sha256": "b9d5ba1dbbbf3ff4c7da73fe11cf52ef2ef4d4300fcd0a6603305d91513ad227",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-17T10:41:04.826Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+      "sha256": "d89c4af96bb5e210117ec1880d9b76bd98298d276f543e63bbe57a8422ffe5a5",
+      "bytes": 34491
+    },
+    "html_site": {
+      "file": "_site/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+      "sha256": "d89c4af96bb5e210117ec1880d9b76bd98298d276f543e63bbe57a8422ffe5a5",
+      "bytes": 34491
+    },
+    "pdf_source": {
+      "file": "assets/pdf/kreatyna-i-bialko-po-50-tce-jak-laczyc.pdf",
+      "sha256": "b9d5ba1dbbbf3ff4c7da73fe11cf52ef2ef4d4300fcd0a6603305d91513ad227",
+      "bytes": 661934
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/kreatyna-i-bialko-po-50-tce-jak-laczyc.pdf",
+      "sha256": "b9d5ba1dbbbf3ff4c7da73fe11cf52ef2ef4d4300fcd0a6603305d91513ad227",
+      "bytes": 661934
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/kreatyna-i-bialko-po-50-tce-jak-laczyc/desktop.png",
+      "screenshot_sha256": "8f4e89e9f3dd9d792067f477a7b3cad7e05dc34d0e1617d3e6fc0e768861be63",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/kreatyna-i-bialko-po-50-tce-jak-laczyc/mobile.png",
+      "screenshot_sha256": "f300be83cb2a2c8081c7da24da83c52db6186559e70734908be53ee6b6d09354",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "JEDZENIE 13 min czytania Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie Mięśnie nie znikają dlatego, że masz 50 lat. Znikają dlatego, że nie dajesz im powodu, żeby zostały.",
+      "alt": "Mężczyzna po 50-tce odmierza kreatynę obok jogurtu, jaj, strączków i posiłku białkowego po treningu siłowym",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-po-50-hero-20260929.avif",
+          "sha256": "fbb30f3769419129ced6a317d4b8b288020bf64b83e14d95e2dc33cbd5818e03",
+          "bytes": 85118,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-po-50-hero-20260929.webp",
+          "sha256": "d8659610939feae8b0f5414154511a43d39e4591ade0dc5c46b808c83f0a542e",
+          "bytes": 182856,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-po-50-hero-20260929.jpg",
+          "sha256": "69347e596adc5ed7b3c6b3d29cac3a577f3bbb80938087f32dbc320ea482da99",
+          "bytes": 322655,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3f6b38f2c251108e0a1e9b79fefd127e8a05591aef8464a7f38c059f45e30422"
+    },
+    {
+      "placement": "content:2:czym-rozni-sie-dzialanie-bialka-i-kreatyny",
+      "role": "content",
+      "heading": "Czym różni się działanie białka i kreatyny?",
+      "context": "Szybka odpowiedź Białko i kreatyna wykonują dwa różne zadania. Białko dostarcza aminokwasów, a kreatyna zwiększa pulę fosfokreatyny potrzebną podczas krótkiego, intensywnego wysiłku. Można przyjmować je razem. Jeśli jedzeniem pokrywasz cel białka, odżywka nie jest konieczna; kreatyna pozostaje dodatkiem do regularnego treningu, a nie jego zamiennikiem po pięćdziesiątce. Kluczowe wnioski Białko uzupełnia materiał budulcowy, a kreatyna wspiera szybkie odnawianie energii w pracującym mięśniu. Dla zdrowej osoby najprostszy schemat kreatyny to 3–5 g monohydratu codziennie; faza ładowania jest opcjonalna. Badania u starszych dorosłych wskazują na małą dodatkową poprawę siły, ale wyniki dla masy mięśniowej i sprawności nie są jednolite. Przy chorobie nerek, zaleconym ograniczeniu białka albo niep",
+      "alt": "Dwie odrębne ścieżki: aminokwasy z białka trafiają do odnowy tkanek, a kreatyna wspiera szybkie odtwarzanie energii w mięśniu",
+      "caption": "Białko odpowiada za podaż aminokwasów, a kreatyna za pulę szybkiej energii; wspólnym warunkiem efektu pozostaje trening.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-role-2026.avif",
+          "sha256": "2906b1a634fbb9cd883eae819f68167a3eafa6ca1bd084c5620d79ef70d07c3e",
+          "bytes": 89117,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-role-2026.webp",
+          "sha256": "00fc356084453f4561c4a36b30043337034c354d2b7be20bf0c5127bb12af904",
+          "bytes": 188626,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-role-2026.jpg",
+          "sha256": "fd04997609b6c0f358075183b14c22ef9deb1aa43429f57d2956b3746c332ae3",
+          "bytes": 333030,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7e1dd68299706b97fc0390eba931f582cb941aa8d4bca03e5ea55e026fec242e"
+    },
+    {
+      "placement": "content:3:ile-bialka-potrzebuje-osoba-po-50-tce",
+      "role": "content",
+      "heading": "Ile białka potrzebuje osoba po 50-tce?",
+      "context": "Szybka odpowiedź Białko i kreatyna wykonują dwa różne zadania. Białko dostarcza aminokwasów, a kreatyna zwiększa pulę fosfokreatyny potrzebną podczas krótkiego, intensywnego wysiłku. Można przyjmować je razem. Jeśli jedzeniem pokrywasz cel białka, odżywka nie jest konieczna; kreatyna pozostaje dodatkiem do regularnego treningu, a nie jego zamiennikiem po pięćdziesiątce. Kluczowe wnioski Białko uzupełnia materiał budulcowy, a kreatyna wspiera szybkie odnawianie energii w pracującym mięśniu. Dla zdrowej osoby najprostszy schemat kreatyny to 3–5 g monohydratu codziennie; faza ładowania jest opcjonalna. Badania u starszych dorosłych wskazują na małą dodatkową poprawę siły, ale wyniki dla masy mięśniowej i sprawności nie są jednolite. Przy chorobie nerek, zaleconym ograniczeniu białka albo niep",
+      "alt": "Trzy pełne posiłki z różnymi źródłami białka rozłożone w ciągu dnia osoby po pięćdziesiątce",
+      "caption": "Dobową ilość białka łatwiej osiągnąć kilkoma pełnymi posiłkami niż ratować wieczorem przypadkową dużą porcją.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-cel-bialka-2026.avif",
+          "sha256": "e61354a089843ebd1ff680a0cb4514e7d229c63721b4c6873d279243208f0099",
+          "bytes": 88737,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-cel-bialka-2026.webp",
+          "sha256": "963597f5cd19f4b015830ea745bd3f51922cfe28ed060841ee12d8491051e5ae",
+          "bytes": 182486,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-cel-bialka-2026.jpg",
+          "sha256": "e1548d608b0db456c1bccf3b13ec882c6a925da309a251d7ac0d65267ce3bb46",
+          "bytes": 307420,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f5de6ec90e59b7cfd4f5d07c620c4283b435c9d31fc5671d238ab5082515e400"
+    },
+    {
+      "placement": "content:4:jak-dawkowac-monohydrat-kreatyny",
+      "role": "content",
+      "heading": "Jak dawkować monohydrat kreatyny?",
+      "context": "Szybka odpowiedź Białko i kreatyna wykonują dwa różne zadania. Białko dostarcza aminokwasów, a kreatyna zwiększa pulę fosfokreatyny potrzebną podczas krótkiego, intensywnego wysiłku. Można przyjmować je razem. Jeśli jedzeniem pokrywasz cel białka, odżywka nie jest konieczna; kreatyna pozostaje dodatkiem do regularnego treningu, a nie jego zamiennikiem po pięćdziesiątce. Kluczowe wnioski Białko uzupełnia materiał budulcowy, a kreatyna wspiera szybkie odnawianie energii w pracującym mięśniu. Dla zdrowej osoby najprostszy schemat kreatyny to 3–5 g monohydratu codziennie; faza ładowania jest opcjonalna. Badania u starszych dorosłych wskazują na małą dodatkową poprawę siły, ale wyniki dla masy mięśniowej i sprawności nie są jednolite. Przy chorobie nerek, zaleconym ograniczeniu białka albo niep",
+      "alt": "Jedna niewielka codzienna porcja monohydratu kreatyny obok kalendarza z zaznaczoną regularnością",
+      "caption": "Najprostszy schemat to stała mała porcja codziennie; regularność ma większe znaczenie niż pora przyjęcia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-dawkowanie-kreatyny-2026.avif",
+          "sha256": "d65dc24f4a6de4e829f17d4093b8b33f9bd8645a3deeb7bd2cc3b2e9d3c7bd25",
+          "bytes": 42998,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-dawkowanie-kreatyny-2026.webp",
+          "sha256": "a8c6370b41ce2a418ed22c8b1e36271992a919749e194ac51f3cc12f04486616",
+          "bytes": 103682,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-dawkowanie-kreatyny-2026.jpg",
+          "sha256": "305668b0e8f34400d798c66965506bac36bea2a52d8e6ea7b8fca675fffa8486",
+          "bytes": 221105,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5e98daf7307db99697f4555f26f73c66664b4b4876daf53363e5ca6a02455e27"
+    },
+    {
+      "placement": "content:5:jak-polaczyc-bialko-i-kreatyne-w-zwyklym-dniu",
+      "role": "content",
+      "heading": "Jak połączyć białko i kreatynę w zwykłym dniu?",
+      "context": "Szybka odpowiedź Białko i kreatyna wykonują dwa różne zadania. Białko dostarcza aminokwasów, a kreatyna zwiększa pulę fosfokreatyny potrzebną podczas krótkiego, intensywnego wysiłku. Można przyjmować je razem. Jeśli jedzeniem pokrywasz cel białka, odżywka nie jest konieczna; kreatyna pozostaje dodatkiem do regularnego treningu, a nie jego zamiennikiem po pięćdziesiątce. Kluczowe wnioski Białko uzupełnia materiał budulcowy, a kreatyna wspiera szybkie odnawianie energii w pracującym mięśniu. Dla zdrowej osoby najprostszy schemat kreatyny to 3–5 g monohydratu codziennie; faza ładowania jest opcjonalna. Badania u starszych dorosłych wskazują na małą dodatkową poprawę siły, ale wyniki dla masy mięśniowej i sprawności nie są jednolite. Przy chorobie nerek, zaleconym ograniczeniu białka albo niep",
+      "alt": "Plan dnia z trzema posiłkami białkowymi i jedną stałą porcją kreatyny przypisaną do codziennej rutyny",
+      "caption": "Dobowa suma białka i codzienna kreatyna są ważniejsze niż idealna minuta po ostatnim powtórzeniu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-plan-dnia-2026.avif",
+          "sha256": "879fec7626a6404b73eda7a94a1b1442a368462a450ff79a8e1b1324f0e7c7ce",
+          "bytes": 76214,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-plan-dnia-2026.webp",
+          "sha256": "c7661a0b34d71a070da8e03521abdac7fc89756df53fb03500d1ae65577d2e94",
+          "bytes": 162102,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-plan-dnia-2026.jpg",
+          "sha256": "c4d93ee506437ba8738ba0c712129fe8f52f932fbbaa550ebed4806e662ab750",
+          "bytes": 295217,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f45ae8c41d6003ef24f753fcff3c18711685af365b8f0b1a804c56b8c9e35a56"
+    },
+    {
+      "placement": "content:6:co-pokazuja-badania-u-starszych-doroslych",
+      "role": "content",
+      "heading": "Co pokazują badania u starszych dorosłych?",
+      "context": "Szybka odpowiedź Białko i kreatyna wykonują dwa różne zadania. Białko dostarcza aminokwasów, a kreatyna zwiększa pulę fosfokreatyny potrzebną podczas krótkiego, intensywnego wysiłku. Można przyjmować je razem. Jeśli jedzeniem pokrywasz cel białka, odżywka nie jest konieczna; kreatyna pozostaje dodatkiem do regularnego treningu, a nie jego zamiennikiem po pięćdziesiątce. Kluczowe wnioski Białko uzupełnia materiał budulcowy, a kreatyna wspiera szybkie odnawianie energii w pracującym mięśniu. Dla zdrowej osoby najprostszy schemat kreatyny to 3–5 g monohydratu codziennie; faza ładowania jest opcjonalna. Badania u starszych dorosłych wskazują na małą dodatkową poprawę siły, ale wyniki dla masy mięśniowej i sprawności nie są jednolite. Przy chorobie nerek, zaleconym ograniczeniu białka albo niep",
+      "alt": "Mała dodatkowa część wyniku kreatyny nałożona na większy fundament regularnego treningu oporowego",
+      "caption": "Badania wskazują na mały dodatkowy efekt kreatyny; największą część pracy nadal wykonuje regularny trening.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-badania-starszych-2026.avif",
+          "sha256": "9e35b39182bcdafaa6c9a1000ca02df8df2c0742ff8ffeeeac44d07fee878252",
+          "bytes": 82731,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-badania-starszych-2026.webp",
+          "sha256": "faf0b8a440e4a240255a25144c3a47fdf3ad050e468671651a0d3d50e5a770fc",
+          "bytes": 174408,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-badania-starszych-2026.jpg",
+          "sha256": "86088698dae0b7a99ffea376ccfca02d7d16b582332f17fc1c6c5b45453caa3f",
+          "bytes": 309431,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "8a2f5070f1932c403dd2a555cd5d6fe8ce2d89642099383798c94d786f4dd791"
+    },
+    {
+      "placement": "content:7:kiedy-trzeba-zachowac-ostroznosc",
+      "role": "content",
+      "heading": "Kiedy trzeba zachować ostrożność?",
+      "context": "Szybka odpowiedź Białko i kreatyna wykonują dwa różne zadania. Białko dostarcza aminokwasów, a kreatyna zwiększa pulę fosfokreatyny potrzebną podczas krótkiego, intensywnego wysiłku. Można przyjmować je razem. Jeśli jedzeniem pokrywasz cel białka, odżywka nie jest konieczna; kreatyna pozostaje dodatkiem do regularnego treningu, a nie jego zamiennikiem po pięćdziesiątce. Kluczowe wnioski Białko uzupełnia materiał budulcowy, a kreatyna wspiera szybkie odnawianie energii w pracującym mięśniu. Dla zdrowej osoby najprostszy schemat kreatyny to 3–5 g monohydratu codziennie; faza ładowania jest opcjonalna. Badania u starszych dorosłych wskazują na małą dodatkową poprawę siły, ale wyniki dla masy mięśniowej i sprawności nie są jednolite. Przy chorobie nerek, zaleconym ograniczeniu białka albo niep",
+      "alt": "Lekarz porównuje wyniki kreatyniny i filtracji z informacją o przyjmowanej kreatynie",
+      "caption": "Po rozpoczęciu kreatyny wynik kreatyniny trzeba interpretować razem z informacją o suplementacji, a nie w oderwaniu od niej.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/kreatyna-bialko-nerki-wyniki-2026.avif",
+          "sha256": "11b8a88399042f0cdfb9fdbaa46fee7638ce6289421fa06f1dd68a271abcb5d8",
+          "bytes": 78139,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/kreatyna-bialko-nerki-wyniki-2026.webp",
+          "sha256": "002eb9a1237d1a86804dabf15510376786777ccbb30471ef1df1d2c3ea9370d0",
+          "bytes": 163344,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/kreatyna-bialko-nerki-wyniki-2026.jpg",
+          "sha256": "eddbb35b640b418cf42b637b01604b0ff34bd377542e1399f82f26644c7b1af6",
+          "bytes": 296610,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3c2b1ba97b8a27025790b67f706ebf3dfdb0cc9b62ebcd946e5fc689679cd757"
+    }
+  ],
   "pdf": {
     "pages": 6,
     "text_coverage": 1,
-    "rendered_pages": 6
+    "rendered_pages": 6,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/kreatyna-i-bialko-po-50-tce-jak-laczyc/pdf-pages/page-1.png",
+        "sha256": "f17a7539505aa3c8c53c1fc6ac5c6ad7e70ac0f62574b37c056fd59c455fb18f",
+        "bytes": 631359,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 59,
+          "width": 1065,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/kreatyna-i-bialko-po-50-tce-jak-laczyc/pdf-pages/page-2.png",
+        "sha256": "3ddd5f6e57d4446607a8497f2587a8a05bcdfb7c5a469d2d5bb0a0e9ca647f4d",
+        "bytes": 833372,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1062,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/kreatyna-i-bialko-po-50-tce-jak-laczyc/pdf-pages/page-3.png",
+        "sha256": "0ea3f92c120a4d7161f4adfeb4883d670eb664d3dc38242e7766e1b0965027ec",
+        "bytes": 735769,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1056,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/kreatyna-i-bialko-po-50-tce-jak-laczyc/pdf-pages/page-4.png",
+        "sha256": "5289cc1a32dec75d1749c250e116c3c9abecb4ae13db27cc7f92d3afd23e87b0",
+        "bytes": 564754,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 58,
+          "width": 1078,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/kreatyna-i-bialko-po-50-tce-jak-laczyc/pdf-pages/page-5.png",
+        "sha256": "f3141af73224fe417e8cb04020db1455dd239bb130e9e1db91b8fecea28a9e5a",
+        "bytes": 518864,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1057,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/kreatyna-i-bialko-po-50-tce-jak-laczyc/pdf-pages/page-6.png",
+        "sha256": "3be9d23cbffff441bc319f52fb935cea913c9d8bc2dd5ede4201cf0b39d39a0d",
+        "bytes": 149178,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1063,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-17T10:46:41.937Z",
+    "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "8f4e89e9f3dd9d792067f477a7b3cad7e05dc34d0e1617d3e6fc0e768861be63",
+        "note": "Pełny render desktop obejrzany: układ jest spójny, bez ucięć, nakładania elementów ani poziomego przepełnienia."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "f300be83cb2a2c8081c7da24da83c52db6186559e70734908be53ee6b6d09354",
+        "note": "Pełny render mobile obejrzany: tekst, tabele, obrazy i nawigacja mieszczą się w widoku bez ucięć i nakładania."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "3f6b38f2c251108e0a1e9b79fefd127e8a05591aef8464a7f38c059f45e30422",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:2:czym-rozni-sie-dzialanie-bialka-i-kreatyny",
+        "inventory_sha256": "7e1dd68299706b97fc0390eba931f582cb941aa8d4bca03e5ea55e026fec242e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:3:ile-bialka-potrzebuje-osoba-po-50-tce",
+        "inventory_sha256": "f5de6ec90e59b7cfd4f5d07c620c4283b435c9d31fc5671d238ab5082515e400",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:4:jak-dawkowac-monohydrat-kreatyny",
+        "inventory_sha256": "5e98daf7307db99697f4555f26f73c66664b4b4876daf53363e5ca6a02455e27",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:5:jak-polaczyc-bialko-i-kreatyne-w-zwyklym-dniu",
+        "inventory_sha256": "f45ae8c41d6003ef24f753fcff3c18711685af365b8f0b1a804c56b8c9e35a56",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:6:co-pokazuja-badania-u-starszych-doroslych",
+        "inventory_sha256": "8a2f5070f1932c403dd2a555cd5d6fe8ce2d89642099383798c94d786f4dd791",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:7:kiedy-trzeba-zachowac-ostroznosc",
+        "inventory_sha256": "3c2b1ba97b8a27025790b67f706ebf3dfdb0cc9b62ebcd946e5fc689679cd757",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "f17a7539505aa3c8c53c1fc6ac5c6ad7e70ac0f62574b37c056fd59c455fb18f",
+        "note": "Strona PDF 1 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "3ddd5f6e57d4446607a8497f2587a8a05bcdfb7c5a469d2d5bb0a0e9ca647f4d",
+        "note": "Strona PDF 2 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "0ea3f92c120a4d7161f4adfeb4883d670eb664d3dc38242e7766e1b0965027ec",
+        "note": "Strona PDF 3 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "5289cc1a32dec75d1749c250e116c3c9abecb4ae13db27cc7f92d3afd23e87b0",
+        "note": "Strona PDF 4 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "f3141af73224fe417e8cb04020db1455dd239bb130e9e1db91b8fecea28a9e5a",
+        "note": "Strona PDF 5 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "3be9d23cbffff441bc319f52fb935cea913c9d8bc2dd5ede4201cf0b39d39a0d",
+        "note": "Strona PDF 6 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 6020,
+    "review_wait_ms": 337111
   },
   "errors": []
 }

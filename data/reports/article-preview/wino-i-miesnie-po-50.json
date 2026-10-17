@@ -1,35 +1,606 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T13:02:12.871Z",
+  "generated_at": "2026-10-17T10:41:22.418Z",
+  "reviewed_at": "2026-10-17T10:46:41.937Z",
   "slug": "wino-i-miesnie-po-50",
-  "html_sha256": "39f08b924931fffca5f4a03204ea3f68de3058a781dffb5f75831b70d1c2dd4a",
-  "site_html_sha256": "39f08b924931fffca5f4a03204ea3f68de3058a781dffb5f75831b70d1c2dd4a",
-  "pdf_sha256": "4973e377c3a18ae7c8380aa3a386491c0e8b75944edc0ab535a62f08d5c61764",
-  "site_pdf_sha256": "4973e377c3a18ae7c8380aa3a386491c0e8b75944edc0ab535a62f08d5c61764",
+  "html_sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
+  "site_html_sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
+  "pdf_sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164",
+  "site_pdf_sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-17T10:41:22.418Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "wino-i-miesnie-po-50.html",
+      "sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
+      "bytes": 35303
+    },
+    "html_site": {
+      "file": "_site/wino-i-miesnie-po-50.html",
+      "sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
+      "bytes": 35303
+    },
+    "pdf_source": {
+      "file": "assets/pdf/wino-i-miesnie-po-50.pdf",
+      "sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164",
+      "bytes": 590277
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/wino-i-miesnie-po-50.pdf",
+      "sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164",
+      "bytes": 590277
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/wino-i-miesnie-po-50/desktop.png",
+      "screenshot_sha256": "328bad0231bd3b031d98aa3705ac190e8f130ba8ab22ff6034bdbae6ce90dde0",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/wino-i-miesnie-po-50/mobile.png",
+      "screenshot_sha256": "fea00f69934564356bbae8941f70f0af78ce203d5b5bddc6a3b7bbfbbeb52ba0",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "JEDZENIE 9 min czytania Aktualizacja: 17.10.2026 Wino po treningu po 50-tce: mięśnie, sen i regeneracja mięśni Pijesz wino w piątek? Oto co to naprawdę robi Twoim mięśniom następnego dnia.",
+      "alt": "Kieliszek czerwonego wina obok napiętego przedramienia — symbol wyboru między przyjemnością a regeneracją mięśni",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wino_miesnie_hero.avif",
+          "sha256": "6b23095a45c3c28da068afa727c988afbff0e9086967cc259ad6a2f63ed28dc5",
+          "bytes": 24439,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wino_miesnie_hero.webp",
+          "sha256": "aacbfee1187870cd49e3a0f1a981e6fdab90dd848e91e5e4f9309a919e4bbf6f",
+          "bytes": 41652,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wino_miesnie_hero.jpg",
+          "sha256": "372083b96774032a11e19e5ed6dce570f09e2a2e669982bfbeaedda5bd48b4e8",
+          "bytes": 105614,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "bcea123fdef5fbee5933f822708a735c7393e487d191e683d24c7082d59a8958"
+    },
+    {
+      "placement": "content:2:jak-miesien-rosnie-i-co-naprawde-mierzy-synteza-",
+      "role": "content",
+      "heading": "Jak mięsień rośnie i co naprawdę mierzy synteza białek?",
+      "context": "Szybka odpowiedź Duża dawka alkoholu tuż po treningu obniżała w badaniu wczesną syntezę białek mięśniowych, ale nie wolno przypisywać tego samego efektu jednej lampce wina. Mniejsze dawki nadal mogą pogarszać sen. Jeśli zależy Ci na sile i regeneracji, najprościej nie pić po ciężkiej sesji; żadnej ilości alkoholu nie można jednak nazwać obojętną dla całego zdrowia. Kluczowe wnioski Najmocniejszy eksperyment po treningu użył 1,5 g alkoholu na kilogram masy ciała — dawki wielokrotnie większej niż jedna lampka. Spadek syntezy białek mięśniowych nie oznacza automatycznie identycznego spadku przyrostu mięśni po miesiącach. Metaanaliza snu wykazała zmniejszenie snu REM już po małych dawkach, a zaburzenie narastało wraz z dawką. Woda, elektrolity i posiłek są potrzebne po treningu, ale nie neutra",
+      "alt": "Mężczyzna po pięćdziesiątce podczas kolacji z winem i podczas treningu siłowego następnego dnia",
+      "caption": "Jedna noc łączy dwie sytuacje: ekspozycję na alkohol i kolejną sesję, ale krótkie samopoczucie nie opisuje całej adaptacji.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/man_friday_wine_gym_saturday.avif",
+          "sha256": "48b5be681cbe0d3272d3c9772f1907a1ce41f02ec21755c34a785f9d927ae504",
+          "bytes": 39502,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/man_friday_wine_gym_saturday.webp",
+          "sha256": "9290e105ffe626b1e40e56715e24ed4cecd2d9d98eac79103b4730bb3bea90c6",
+          "bytes": 69278,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/man_friday_wine_gym_saturday.jpg",
+          "sha256": "8b732921c596dab58ea64a307762fba02fb5753376bc9c53f63a28453391f225",
+          "bytes": 109042,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "06db2a7d835e258d981a95ab2ae0446a3ec49e41c65030470cb7f3c35b5f8910"
+    },
+    {
+      "placement": "content:3:co-naprawde-pokazuje-badanie-z-dawka-1-5-g-kg",
+      "role": "content",
+      "heading": "Co naprawdę pokazuje badanie z dawką 1,5 g/kg?",
+      "context": "Szybka odpowiedź Duża dawka alkoholu tuż po treningu obniżała w badaniu wczesną syntezę białek mięśniowych, ale nie wolno przypisywać tego samego efektu jednej lampce wina. Mniejsze dawki nadal mogą pogarszać sen. Jeśli zależy Ci na sile i regeneracji, najprościej nie pić po ciężkiej sesji; żadnej ilości alkoholu nie można jednak nazwać obojętną dla całego zdrowia. Kluczowe wnioski Najmocniejszy eksperyment po treningu użył 1,5 g alkoholu na kilogram masy ciała — dawki wielokrotnie większej niż jedna lampka. Spadek syntezy białek mięśniowych nie oznacza automatycznie identycznego spadku przyrostu mięśni po miesiącach. Metaanaliza snu wykazała zmniejszenie snu REM już po małych dawkach, a zaburzenie narastało wraz z dawką. Woda, elektrolity i posiłek są potrzebne po treningu, ale nie neutra",
+      "alt": "Duża pula symbolizująca eksperymentalną dawkę alkoholu zestawiona z pojedynczym kieliszkiem bez sugerowania równego efektu",
+      "caption": "Eksperyment z dużą dawką pozwala wykryć mechanizm, lecz nie wyznacza skutku pojedynczej lampki ani bezpiecznego progu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wino-miesnie-parr-dose-2026.avif",
+          "sha256": "1822743a81248c7af6b29c81856a801997d8b4a317ea8130c7cde1c8f56a23a0",
+          "bytes": 29834,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wino-miesnie-parr-dose-2026.webp",
+          "sha256": "170e8c0c77356bb07427cfc23b000115c80f681f827cfcf8f30a2b663d9417e4",
+          "bytes": 66994,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wino-miesnie-parr-dose-2026.jpg",
+          "sha256": "cb1b56b8c6c8a6a3d289c0186a9dfa7bde00603323f6e7e76fc0802cded95797",
+          "bytes": 155156,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "00de8ed1d63562a1c3861fc64fe5532126ea420de4e09cb2226f367106c39688"
+    },
+    {
+      "placement": "content:4:czy-alkohol-psuje-sen-nawet-w-mniejszej-dawce",
+      "role": "content",
+      "heading": "Czy alkohol psuje sen nawet w mniejszej dawce?",
+      "context": "Szybka odpowiedź Duża dawka alkoholu tuż po treningu obniżała w badaniu wczesną syntezę białek mięśniowych, ale nie wolno przypisywać tego samego efektu jednej lampce wina. Mniejsze dawki nadal mogą pogarszać sen. Jeśli zależy Ci na sile i regeneracji, najprościej nie pić po ciężkiej sesji; żadnej ilości alkoholu nie można jednak nazwać obojętną dla całego zdrowia. Kluczowe wnioski Najmocniejszy eksperyment po treningu użył 1,5 g alkoholu na kilogram masy ciała — dawki wielokrotnie większej niż jedna lampka. Spadek syntezy białek mięśniowych nie oznacza automatycznie identycznego spadku przyrostu mięśni po miesiącach. Metaanaliza snu wykazała zmniejszenie snu REM już po małych dawkach, a zaburzenie narastało wraz z dawką. Woda, elektrolity i posiłek są potrzebne po treningu, ale nie neutra",
+      "alt": "Nocny zegar, kieliszek wina i torba treningowa obok łóżka",
+      "caption": "Alkohol może przyspieszyć zaśnięcie po większej dawce, a jednocześnie pogorszyć późniejszą architekturę snu i regenerację.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/clock_muscle_wine_night.avif",
+          "sha256": "58986848921d1eb993afcaf90c5030eae333149abdc6adddb05586a9097ff138",
+          "bytes": 37022,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/clock_muscle_wine_night.webp",
+          "sha256": "8acc2fcf2675fa1cef259d7d366a6f9252cccc645da375c2c222732909f3b64d",
+          "bytes": 68752,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/clock_muscle_wine_night.jpg",
+          "sha256": "cd8b52ae005e07e8afc4c896effe7a202d1b2b2b5905e39311bf368ee0276faa",
+          "bytes": 106673,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "0aafae268595cda97095a57ed0a877003a82348ec6e74962c6dab4fb5eb29d4e"
+    },
+    {
+      "placement": "content:5:czy-trening-jest-stracony-jesli-nastepnego-dnia-",
+      "role": "content",
+      "heading": "Czy trening jest stracony, jeśli następnego dnia czujesz się dobrze?",
+      "context": "Szybka odpowiedź Duża dawka alkoholu tuż po treningu obniżała w badaniu wczesną syntezę białek mięśniowych, ale nie wolno przypisywać tego samego efektu jednej lampce wina. Mniejsze dawki nadal mogą pogarszać sen. Jeśli zależy Ci na sile i regeneracji, najprościej nie pić po ciężkiej sesji; żadnej ilości alkoholu nie można jednak nazwać obojętną dla całego zdrowia. Kluczowe wnioski Najmocniejszy eksperyment po treningu użył 1,5 g alkoholu na kilogram masy ciała — dawki wielokrotnie większej niż jedna lampka. Spadek syntezy białek mięśniowych nie oznacza automatycznie identycznego spadku przyrostu mięśni po miesiącach. Metaanaliza snu wykazała zmniejszenie snu REM już po małych dawkach, a zaburzenie narastało wraz z dawką. Woda, elektrolity i posiłek są potrzebne po treningu, ale nie neutra",
+      "alt": "Mężczyzna po pięćdziesiątce rano z wodą i torbą treningową przygotowaną do kolejnej sesji",
+      "caption": "Dobre samopoczucie i sprawna kolejna sesja są ważne, ale nie mierzą snu REM, ryzyka zdrowotnego ani przewlekłego nawyku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/weekend_recovery_morning.avif",
+          "sha256": "5af74a60f7668474db51f981975c15ece9a797b50fa3cd7750a2d544ce218141",
+          "bytes": 44969,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/weekend_recovery_morning.webp",
+          "sha256": "09de1f71b753332b7f13481d22251fb887516a6f981ff88611cf75748a9afcaa",
+          "bytes": 81192,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/weekend_recovery_morning.jpg",
+          "sha256": "34062a50031bb0a7254aecdc75467288758008a24a729e44a6863debe1ccea62",
+          "bytes": 133458,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "deaf06e0fb133b069de6083d85da1223aec6be4b18271eb28a3ecb4f82d69488"
+    },
+    {
+      "placement": "content:6:jak-ograniczyc-koszt-alkoholu-dla-regeneracji",
+      "role": "content",
+      "heading": "Jak ograniczyć koszt alkoholu dla regeneracji?",
+      "context": "Szybka odpowiedź Duża dawka alkoholu tuż po treningu obniżała w badaniu wczesną syntezę białek mięśniowych, ale nie wolno przypisywać tego samego efektu jednej lampce wina. Mniejsze dawki nadal mogą pogarszać sen. Jeśli zależy Ci na sile i regeneracji, najprościej nie pić po ciężkiej sesji; żadnej ilości alkoholu nie można jednak nazwać obojętną dla całego zdrowia. Kluczowe wnioski Najmocniejszy eksperyment po treningu użył 1,5 g alkoholu na kilogram masy ciała — dawki wielokrotnie większej niż jedna lampka. Spadek syntezy białek mięśniowych nie oznacza automatycznie identycznego spadku przyrostu mięśni po miesiącach. Metaanaliza snu wykazała zmniejszenie snu REM już po małych dawkach, a zaburzenie narastało wraz z dawką. Woda, elektrolity i posiłek są potrzebne po treningu, ale nie neutra",
+      "alt": "Kobieta po pięćdziesiątce wybiera między winem przy kolacji a przygotowaniem do treningu",
+      "caption": "Praktyczna decyzja nie wymaga moralizowania: warto porównać przyjemność z alkoholu z kosztem snu i jakości kolejnej sesji.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/woman_wine_weights_choice.avif",
+          "sha256": "d728eb2daf6ff30e39fee8226ae384d5cfb74a1225c082a2ecdc4e1ceb2fdeb1",
+          "bytes": 39116,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/woman_wine_weights_choice.webp",
+          "sha256": "6b28f5dba039a3b68ed91cb2fb61e0b306489a53c47bf8ff9e1f79a404b09549",
+          "bytes": 64568,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/woman_wine_weights_choice.jpg",
+          "sha256": "35a4eed5a6227e8a80324e03311390f2123980dc936492ed6abb154c624903f1",
+          "bytes": 115280,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "148a85a716f6ad3049d50dc77846b88ed7ed2d5e23f0b5ff89a36cd07664b2fe"
+    },
+    {
+      "placement": "content:7:jaki-jest-najprostszy-test-na-wlasnej-skorze",
+      "role": "content",
+      "heading": "Jaki jest najprostszy test na własnej skórze?",
+      "context": "Szybka odpowiedź Duża dawka alkoholu tuż po treningu obniżała w badaniu wczesną syntezę białek mięśniowych, ale nie wolno przypisywać tego samego efektu jednej lampce wina. Mniejsze dawki nadal mogą pogarszać sen. Jeśli zależy Ci na sile i regeneracji, najprościej nie pić po ciężkiej sesji; żadnej ilości alkoholu nie można jednak nazwać obojętną dla całego zdrowia. Kluczowe wnioski Najmocniejszy eksperyment po treningu użył 1,5 g alkoholu na kilogram masy ciała — dawki wielokrotnie większej niż jedna lampka. Spadek syntezy białek mięśniowych nie oznacza automatycznie identycznego spadku przyrostu mięśni po miesiącach. Metaanaliza snu wykazała zmniejszenie snu REM już po małych dawkach, a zaburzenie narastało wraz z dawką. Woda, elektrolity i posiłek są potrzebne po treningu, ale nie neutra",
+      "alt": "Osoba po pięćdziesiątce zapisuje sen i wyniki treningu w prostym dzienniku przez kolejne dni",
+      "caption": "Stałe cztery obserwacje są bardziej użyteczne niż ogólne wrażenie, że po winie „chyba śpię dobrze”.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wino-miesnie-dziennik-test-2026.avif",
+          "sha256": "a704057b03063622c6ea94d6bbd209654837929dfc35715aabc8667d3db4c176",
+          "bytes": 74622,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wino-miesnie-dziennik-test-2026.webp",
+          "sha256": "7e6f577a4212b8fa8e4c1ad20c8ece6c28d15cae8e1f8974d802bcbb464df382",
+          "bytes": 157288,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wino-miesnie-dziennik-test-2026.jpg",
+          "sha256": "9a28dcf056f692ef308776bcbcd69875f7071310a083015871f880073531dfee",
+          "bytes": 291164,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "32b755d4fbd5400c526eaf38461c7f833cb0aebccaab362d80454f33d42f6cfe"
+    },
+    {
+      "placement": "content:8:kiedy-alkohol-przestaje-byc-tylko-tematem-formy",
+      "role": "content",
+      "heading": "Kiedy alkohol przestaje być tylko tematem formy?",
+      "context": "Szybka odpowiedź Duża dawka alkoholu tuż po treningu obniżała w badaniu wczesną syntezę białek mięśniowych, ale nie wolno przypisywać tego samego efektu jednej lampce wina. Mniejsze dawki nadal mogą pogarszać sen. Jeśli zależy Ci na sile i regeneracji, najprościej nie pić po ciężkiej sesji; żadnej ilości alkoholu nie można jednak nazwać obojętną dla całego zdrowia. Kluczowe wnioski Najmocniejszy eksperyment po treningu użył 1,5 g alkoholu na kilogram masy ciała — dawki wielokrotnie większej niż jedna lampka. Spadek syntezy białek mięśniowych nie oznacza automatycznie identycznego spadku przyrostu mięśni po miesiącach. Metaanaliza snu wykazała zmniejszenie snu REM już po małych dawkach, a zaburzenie narastało wraz z dawką. Woda, elektrolity i posiłek są potrzebne po treningu, ale nie neutra",
+      "alt": "Lekarka rozmawia z mężczyzną po pięćdziesiątce o alkoholu, lekach, śnie i wynikach zdrowotnych",
+      "caption": "Gdy pojawiają się objawy, interakcje z lekami lub utrata kontroli nad piciem, priorytetem jest rozmowa medyczna, a nie optymalizacja treningu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wino-miesnie-rozmowa-lekarz-2026.avif",
+          "sha256": "3224abea7d317868e67444759d3328899cae56ee237b28ebb04fdd750eb52ffb",
+          "bytes": 60251,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wino-miesnie-rozmowa-lekarz-2026.webp",
+          "sha256": "b974344c07b46cf184defb47183f639fc8b573ae0c1894e84833485ac756ae81",
+          "bytes": 126144,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wino-miesnie-rozmowa-lekarz-2026.jpg",
+          "sha256": "d7dfdcc3460bbc3ec474e39abee4a8a72e95a90c6de49a1aaac0abe0f1ef99cb",
+          "bytes": 253792,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "1e90b53d4e7b96f75bb081eafb87e00006cd086c5b862554dde05253b8670900"
+    }
+  ],
   "pdf": {
     "pages": 6,
     "text_coverage": 1,
-    "rendered_pages": 6
+    "rendered_pages": 6,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-1.png",
+        "sha256": "cd6150bbab7368017b988abb2b9534fb5f858be8271b7e5251a41e1841ccf158",
+        "bytes": 496233,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 59,
+          "width": 1078,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-2.png",
+        "sha256": "577ee3bb133140bfa26e3e64ef36df7556ec94f4601ffc531543b1195f6565ea",
+        "bytes": 737026,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1044,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-3.png",
+        "sha256": "352f4306035facf1de6d697134b976a7343dc5a3c6a906ab6683da456853ed9d",
+        "bytes": 699065,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 58,
+          "width": 1066,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-4.png",
+        "sha256": "e2ff3a3355d336dd099ef59d42942fe878c8712f7394024dc9d42f36abc49c9b",
+        "bytes": 478300,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1063,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-5.png",
+        "sha256": "7d16a9da80ac862c4f404b591a61011fe490b85131dcecffe3baabb46823d1c4",
+        "bytes": 768837,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1064,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-6.png",
+        "sha256": "6a23ff6d59454eb08c8aa70f887b5d2bd0796c4f0b30dc1bf1aba079ddf12d22",
+        "bytes": 264898,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 52,
+          "width": 1047,
+          "height": 1598
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-17T10:46:41.937Z",
+    "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "328bad0231bd3b031d98aa3705ac190e8f130ba8ab22ff6034bdbae6ce90dde0",
+        "note": "Pełny render desktop obejrzany: układ jest spójny, bez ucięć, nakładania elementów ani poziomego przepełnienia."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "fea00f69934564356bbae8941f70f0af78ce203d5b5bddc6a3b7bbfbbeb52ba0",
+        "note": "Pełny render mobile obejrzany: tekst, tabele, obrazy i nawigacja mieszczą się w widoku bez ucięć i nakładania."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "bcea123fdef5fbee5933f822708a735c7393e487d191e683d24c7082d59a8958",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "WATERMARK_ONLY"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:2:jak-miesien-rosnie-i-co-naprawde-mierzy-synteza-",
+        "inventory_sha256": "06db2a7d835e258d981a95ab2ae0446a3ec49e41c65030470cb7f3c35b5f8910",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "WATERMARK_ONLY"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:3:co-naprawde-pokazuje-badanie-z-dawka-1-5-g-kg",
+        "inventory_sha256": "00de8ed1d63562a1c3861fc64fe5532126ea420de4e09cb2226f367106c39688",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Symbol nierówności między kieliszkiem a dużą laboratoryjną porcją alkoholu",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pubmed.ncbi.nlm.nih.gov/24533082/"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:4:czy-alkohol-psuje-sen-nawet-w-mniejszej-dawce",
+        "inventory_sha256": "0aafae268595cda97095a57ed0a877003a82348ec6e74962c6dab4fb5eb29d4e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "WATERMARK_ONLY"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:5:czy-trening-jest-stracony-jesli-nastepnego-dnia-",
+        "inventory_sha256": "deaf06e0fb133b069de6083d85da1223aec6be4b18271eb28a3ecb4f82d69488",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:6:jak-ograniczyc-koszt-alkoholu-dla-regeneracji",
+        "inventory_sha256": "148a85a716f6ad3049d50dc77846b88ed7ed2d5e23f0b5ff89a36cd07664b2fe",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "WATERMARK_ONLY"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:7:jaki-jest-najprostszy-test-na-wlasnej-skorze",
+        "inventory_sha256": "32b755d4fbd5400c526eaf38461c7f833cb0aebccaab362d80454f33d42f6cfe",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:8:kiedy-alkohol-przestaje-byc-tylko-tematem-formy",
+        "inventory_sha256": "1e90b53d4e7b96f75bb081eafb87e00006cd086c5b862554dde05253b8670900",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "cd6150bbab7368017b988abb2b9534fb5f858be8271b7e5251a41e1841ccf158",
+        "note": "Strona PDF 1 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "577ee3bb133140bfa26e3e64ef36df7556ec94f4601ffc531543b1195f6565ea",
+        "note": "Strona PDF 2 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "352f4306035facf1de6d697134b976a7343dc5a3c6a906ab6683da456853ed9d",
+        "note": "Strona PDF 3 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "e2ff3a3355d336dd099ef59d42942fe878c8712f7394024dc9d42f36abc49c9b",
+        "note": "Strona PDF 4 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "7d16a9da80ac862c4f404b591a61011fe490b85131dcecffe3baabb46823d1c4",
+        "note": "Strona PDF 5 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "6a23ff6d59454eb08c8aa70f887b5d2bd0796c4f0b30dc1bf1aba079ddf12d22",
+        "note": "Strona PDF 6 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 6222,
+    "review_wait_ms": 319519
   },
   "errors": []
 }

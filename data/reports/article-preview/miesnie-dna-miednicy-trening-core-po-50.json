@@ -1,35 +1,657 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:57:47.688Z",
+  "generated_at": "2026-10-17T10:40:51.591Z",
+  "reviewed_at": "2026-10-17T10:46:41.937Z",
   "slug": "miesnie-dna-miednicy-trening-core-po-50",
-  "html_sha256": "3e07bed20606fb3da7807185c7955434e32c8a91dcdab1aed4f78706d27bb6f9",
-  "site_html_sha256": "3e07bed20606fb3da7807185c7955434e32c8a91dcdab1aed4f78706d27bb6f9",
-  "pdf_sha256": "26111ec5c871d6538a0125d34bb798d6618192e67575da6e033d52fe5a08a845",
-  "site_pdf_sha256": "26111ec5c871d6538a0125d34bb798d6618192e67575da6e033d52fe5a08a845",
+  "html_sha256": "fdf54ae3319645a00446571458e0f5331d598226e5d2be2e3639cc03f4bd12b4",
+  "site_html_sha256": "fdf54ae3319645a00446571458e0f5331d598226e5d2be2e3639cc03f4bd12b4",
+  "pdf_sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2",
+  "site_pdf_sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-17T10:40:51.591Z",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 0
   },
+  "artifacts": {
+    "html_source": {
+      "file": "miesnie-dna-miednicy-trening-core-po-50.html",
+      "sha256": "fdf54ae3319645a00446571458e0f5331d598226e5d2be2e3639cc03f4bd12b4",
+      "bytes": 45592
+    },
+    "html_site": {
+      "file": "_site/miesnie-dna-miednicy-trening-core-po-50.html",
+      "sha256": "fdf54ae3319645a00446571458e0f5331d598226e5d2be2e3639cc03f4bd12b4",
+      "bytes": 45592
+    },
+    "pdf_source": {
+      "file": "assets/pdf/miesnie-dna-miednicy-trening-core-po-50.pdf",
+      "sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2",
+      "bytes": 618279
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/miesnie-dna-miednicy-trening-core-po-50.pdf",
+      "sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2",
+      "bytes": 618279
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/desktop.png",
+      "screenshot_sha256": "930a284df5125531364a9f1f8065d67bcd73a7cae14ec489c44b7bc29a7b5363",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/mobile.png",
+      "screenshot_sha256": "6906803343275f00dce5f07b716f87a4d2695bd84685d54d1218cdd594449272",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "RUCH 9 min czytania Aktualizacja: 17.10.2026 Mięśnie dna miednicy po 50-tce: ćwiczenia i odczyt wyniku EMG Dno miednicy to fundament Twojego ciała — zadbaj o nie tak jak o każdy inny mięsień.",
+      "alt": "Kobieta w wieku 50 lat wykonująca kontrolowany przysiad na siłowni",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/hero-dno-miednicy-fitpo50-v2.avif",
+          "sha256": "d2a4e5fe929b39bd5caaf4c20fb1c6a12f90fe6fe9cd64c205ee8224e7be6728",
+          "bytes": 44588,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/hero-dno-miednicy-fitpo50-v2.webp",
+          "sha256": "9e3051f3d85fb925270f26b8a9ad76597300be03db055fe202bb1399e1872831",
+          "bytes": 54878,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/hero-dno-miednicy-fitpo50-v2.jpg",
+          "sha256": "62c29b736b793f7950aeea2a8ce817cc5e090593692a02512e7f6dc1daafa1c7",
+          "bytes": 139160,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "cbc8b56f2160d3d55eab82c5621ba3c2341fc8e3842a0dab6cc3a70404153371"
+    },
+    {
+      "placement": "content:2:dlaczego-miesnie-dna-miednicy-slabna-po-50-tce-i",
+      "role": "content",
+      "heading": "Dlaczego mięśnie dna miednicy słabną po 50-tce i po menopauzie?",
+      "context": "Mięśnie dna miednicy podtrzymują narządy i uczestniczą w kontroli moczu, stolca oraz ciśnienia podczas ruchu. Po menopauzie na objawy wpływają zmiany tkanek, ale także porody, operacje, kaszel, zaparcia i sposób oddychania przy wysiłku. Ten poradnik pokazuje, kiedy ćwiczyć samodzielnie, a kiedy potrzebna jest indywidualna ocena. Szybka odpowiedź U osób po 50-tce z wysiłkowym lub mieszanym nietrzymaniem moczu pierwszym wyborem jest nadzorowany trening mięśni dna miednicy prowadzony przez co najmniej 3 miesiące. Ćwiczenie wymaga zarówno napięcia, jak i pełnego rozluźnienia; samo zaciskanie podczas każdego ruchu nie jest uniwersalną metodą. Ból, uczucie ciężaru, wyciek moczu albo trudność z rozpoznaniem skurczu są wskazaniem do fizjoterapii uroginekologicznej. Kluczowe wnioski Po menopauzie z",
+      "alt": "Schemat anatomiczny dna miednicy z zaznaczonymi mięśniami i opisami po polsku",
+      "caption": "Mięśnie dna miednicy współpracują z przeponą i głębokimi mięśniami brzucha.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/dno-miednicy-anatomia-50plus.avif",
+          "sha256": "fcae4d9d6b78edebbfd0f708627795b5e8db0ced334c9e0b313fa08e2062840f",
+          "bytes": 20327,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/dno-miednicy-anatomia-50plus.webp",
+          "sha256": "427a088701b242811c2f2c66c34ec4fee671274446264ef1156b64dcbc5e45df",
+          "bytes": 44160,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/dno-miednicy-anatomia-50plus.jpg",
+          "sha256": "fae78264b103919fdaf18a7427c012ccb88468171cb163e19688ea24068150bd",
+          "bytes": 90966,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e62e12f2e36b5ad451418840c322d3069978a5789875e9211950a080d7088c63"
+    },
+    {
+      "placement": "content:3:trening-oporowy-a-cisnienie-srodbrzuszne-jak-bez",
+      "role": "content",
+      "heading": "Trening oporowy a ciśnienie śródbrzuszne – jak bezpiecznie dźwigać po 50-tce?",
+      "context": "Mięśnie dna miednicy podtrzymują narządy i uczestniczą w kontroli moczu, stolca oraz ciśnienia podczas ruchu. Po menopauzie na objawy wpływają zmiany tkanek, ale także porody, operacje, kaszel, zaparcia i sposób oddychania przy wysiłku. Ten poradnik pokazuje, kiedy ćwiczyć samodzielnie, a kiedy potrzebna jest indywidualna ocena. Szybka odpowiedź U osób po 50-tce z wysiłkowym lub mieszanym nietrzymaniem moczu pierwszym wyborem jest nadzorowany trening mięśni dna miednicy prowadzony przez co najmniej 3 miesiące. Ćwiczenie wymaga zarówno napięcia, jak i pełnego rozluźnienia; samo zaciskanie podczas każdego ruchu nie jest uniwersalną metodą. Ból, uczucie ciężaru, wyciek moczu albo trudność z rozpoznaniem skurczu są wskazaniem do fizjoterapii uroginekologicznej. Kluczowe wnioski Po menopauzie z",
+      "alt": "Kobieta po 60-tce wykonuje lekki martwy ciąg z kettlem pod obserwacją trenerki",
+      "caption": "Przy rekreacyjnym dźwiganiu zacznij od obciążenia pozwalającego zachować swobodny oddech i obserwuj objawy.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-oddech-obciazenie-20261017.avif",
+          "sha256": "c65bd1580e5e119b814bb294d7e23d342f38f6a362555066ec5f8a54817171b1",
+          "bytes": 84058,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-oddech-obciazenie-20261017.webp",
+          "sha256": "6813bc425904392891e2d33925cb74c47aded7fa04a9af4961e7c1a6290b89c8",
+          "bytes": 134572,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-oddech-obciazenie-20261017.jpg",
+          "sha256": "195d93be27976d55978270efb404349310df479728aa96ed9bc5023e919ab7f4",
+          "bytes": 258387,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3d6cd8c2d741c48c00816f5bd74da778bcd4703a934f2bba1a574648fed6da9c"
+    },
+    {
+      "placement": "content:4:kegel-to-nie-wszystko-jakie-sa-najlepsze-cwiczen",
+      "role": "content",
+      "heading": "Kegel to nie wszystko – jakie są najlepsze ćwiczenia na wzmocnienie głębokiego core?",
+      "context": "Mięśnie dna miednicy podtrzymują narządy i uczestniczą w kontroli moczu, stolca oraz ciśnienia podczas ruchu. Po menopauzie na objawy wpływają zmiany tkanek, ale także porody, operacje, kaszel, zaparcia i sposób oddychania przy wysiłku. Ten poradnik pokazuje, kiedy ćwiczyć samodzielnie, a kiedy potrzebna jest indywidualna ocena. Szybka odpowiedź U osób po 50-tce z wysiłkowym lub mieszanym nietrzymaniem moczu pierwszym wyborem jest nadzorowany trening mięśni dna miednicy prowadzony przez co najmniej 3 miesiące. Ćwiczenie wymaga zarówno napięcia, jak i pełnego rozluźnienia; samo zaciskanie podczas każdego ruchu nie jest uniwersalną metodą. Ból, uczucie ciężaru, wyciek moczu albo trudność z rozpoznaniem skurczu są wskazaniem do fizjoterapii uroginekologicznej. Kluczowe wnioski Po menopauzie z",
+      "alt": "Ilustracja sześciu ćwiczeń core z opisami polskimi: kegel, dead bug, bird dog, mostek, przysiad, oddech",
+      "caption": "Zestaw ćwiczeń core aktywujących dno miednicy w ruchu funkcjonalnym.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/cwiczenia-core-dno-miednicy-zestaw.avif",
+          "sha256": "904331c0f61623d96207dffc60332a968d2bba72d4aadf1a986c97a780efd104",
+          "bytes": 39170,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/cwiczenia-core-dno-miednicy-zestaw.webp",
+          "sha256": "f89fb1997f135120f04acbab157910276ffbacc40bfad9fee5f809d57b7fae1e",
+          "bytes": 70224,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/cwiczenia-core-dno-miednicy-zestaw.jpg",
+          "sha256": "fff25eacff76db937abc94186a35e7fc1dfb0bf57ed27433ebfa05fa8896aa1a",
+          "bytes": 127106,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "044f87eaeb9e7d5f20ccf14fa9632535f0a366eef7d11ab31d71b82d0afb16a4"
+    },
+    {
+      "placement": "content:5:jak-czytac-wynik-emg-i-ocenic-prace-dna-miednicy",
+      "role": "content",
+      "heading": "Jak czytać wynik EMG i ocenić pracę dna miednicy w przysiadzie?",
+      "context": "Mięśnie dna miednicy podtrzymują narządy i uczestniczą w kontroli moczu, stolca oraz ciśnienia podczas ruchu. Po menopauzie na objawy wpływają zmiany tkanek, ale także porody, operacje, kaszel, zaparcia i sposób oddychania przy wysiłku. Ten poradnik pokazuje, kiedy ćwiczyć samodzielnie, a kiedy potrzebna jest indywidualna ocena. Szybka odpowiedź U osób po 50-tce z wysiłkowym lub mieszanym nietrzymaniem moczu pierwszym wyborem jest nadzorowany trening mięśni dna miednicy prowadzony przez co najmniej 3 miesiące. Ćwiczenie wymaga zarówno napięcia, jak i pełnego rozluźnienia; samo zaciskanie podczas każdego ruchu nie jest uniwersalną metodą. Ból, uczucie ciężaru, wyciek moczu albo trudność z rozpoznaniem skurczu są wskazaniem do fizjoterapii uroginekologicznej. Kluczowe wnioski Po menopauzie z",
+      "alt": "Kobieta po 50-tce wykonuje przysiad do krzesła podczas oceny aktywności mięśni przez fizjoterapeutkę",
+      "caption": "EMG może wspierać ocenę aktywności mięśni podczas ruchu, ale wynik interpretuje się razem z objawami i badaniem klinicznym.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/emg-dno-miednicy-przysiad-20261017.avif",
+          "sha256": "f10789c0e0ef33270c7359824ce26951a43623c7c31e612f936303215710fc7f",
+          "bytes": 55376,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/emg-dno-miednicy-przysiad-20261017.webp",
+          "sha256": "d5e57fc56c1e23302f042ead27f73155752cdf81f6ce4a8fa482504de3e254c8",
+          "bytes": 102404,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/emg-dno-miednicy-przysiad-20261017.jpg",
+          "sha256": "869bbc1b7036d0a90529361430d5a28f670c2a8933c402b92ccc1768b9ad4f56",
+          "bytes": 212188,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ebfc38b708254f07cfd427bb253c14c8501c03abe8a342fa87a8b36cf7f42023"
+    },
+    {
+      "placement": "content:6:trening-po-menopauzie-co-zmienia-sie-w-praktyce-",
+      "role": "content",
+      "heading": "Trening po menopauzie – co zmienia się w praktyce i jak to uwzględnić?",
+      "context": "Mięśnie dna miednicy podtrzymują narządy i uczestniczą w kontroli moczu, stolca oraz ciśnienia podczas ruchu. Po menopauzie na objawy wpływają zmiany tkanek, ale także porody, operacje, kaszel, zaparcia i sposób oddychania przy wysiłku. Ten poradnik pokazuje, kiedy ćwiczyć samodzielnie, a kiedy potrzebna jest indywidualna ocena. Szybka odpowiedź U osób po 50-tce z wysiłkowym lub mieszanym nietrzymaniem moczu pierwszym wyborem jest nadzorowany trening mięśni dna miednicy prowadzony przez co najmniej 3 miesiące. Ćwiczenie wymaga zarówno napięcia, jak i pełnego rozluźnienia; samo zaciskanie podczas każdego ruchu nie jest uniwersalną metodą. Ból, uczucie ciężaru, wyciek moczu albo trudność z rozpoznaniem skurczu są wskazaniem do fizjoterapii uroginekologicznej. Kluczowe wnioski Po menopauzie z",
+      "alt": "Kobieta po menopauzie zapisuje reakcję na trening siłowy i planuje stopniową progresję",
+      "caption": "Plan treningu po menopauzie warto dopasować do sprawności, objawów i regeneracji zamiast opierać go na jednej obowiązkowej regule czasu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/menopauza-trening-plan-20261017.avif",
+          "sha256": "297f15c3de366487c7b31b2890d4d738dd2b1f377b8fd566a137a58b05b1a2e6",
+          "bytes": 51377,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/menopauza-trening-plan-20261017.webp",
+          "sha256": "d0fda5ad1018032331450f503790bd4a8463bf0426271896603befab8e6011ec",
+          "bytes": 95156,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/menopauza-trening-plan-20261017.jpg",
+          "sha256": "f108aa0348f9d3f2037edb6dc8207eb839f15989b02af129744b336529d26023",
+          "bytes": 202048,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "04973bf1a9eebb84d8cba7bd57a7bf5662b375dfe7b512c3727ba26ca7870f69"
+    },
+    {
+      "placement": "content:7:kiedy-zglosic-sie-do-fizjoterapeuty-uroginekolog",
+      "role": "content",
+      "heading": "Kiedy zgłosić się do fizjoterapeuty uroginekologicznego?",
+      "context": "Mięśnie dna miednicy podtrzymują narządy i uczestniczą w kontroli moczu, stolca oraz ciśnienia podczas ruchu. Po menopauzie na objawy wpływają zmiany tkanek, ale także porody, operacje, kaszel, zaparcia i sposób oddychania przy wysiłku. Ten poradnik pokazuje, kiedy ćwiczyć samodzielnie, a kiedy potrzebna jest indywidualna ocena. Szybka odpowiedź U osób po 50-tce z wysiłkowym lub mieszanym nietrzymaniem moczu pierwszym wyborem jest nadzorowany trening mięśni dna miednicy prowadzony przez co najmniej 3 miesiące. Ćwiczenie wymaga zarówno napięcia, jak i pełnego rozluźnienia; samo zaciskanie podczas każdego ruchu nie jest uniwersalną metodą. Ból, uczucie ciężaru, wyciek moczu albo trudność z rozpoznaniem skurczu są wskazaniem do fizjoterapii uroginekologicznej. Kluczowe wnioski Po menopauzie z",
+      "alt": "Kobieta po 60-tce rozmawia z fizjoterapeutką o objawach dna miednicy i indywidualnym planie ćwiczeń",
+      "caption": "Ocena objawów, zdolności napięcia i rozluźnienia oraz reakcji na obciążenie pomaga dobrać indywidualny program.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/fizjoterapia-dno-miednicy-konsultacja-20261017.avif",
+          "sha256": "32ee0c0f404970c80975066a30e3d72960208399ba3e4134fb59519e2cd97036",
+          "bytes": 49306,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/fizjoterapia-dno-miednicy-konsultacja-20261017.webp",
+          "sha256": "60eeab3563dd9a102b86c7735b4290a02c22ada5a90e753ecae764896000b62a",
+          "bytes": 92992,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/fizjoterapia-dno-miednicy-konsultacja-20261017.jpg",
+          "sha256": "7893387e86b273df31313693c7b46200b72c96277820c148ed4b6bb38ddaf92a",
+          "bytes": 203443,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4b6b3dd5c63318b35f716df47ed0dd3afd34d62710897d1353070431878f54e8"
+    },
+    {
+      "placement": "content:8:jak-przepona-wplywa-na-dno-miednicy",
+      "role": "content",
+      "heading": "Jak przepona wpływa na dno miednicy?",
+      "context": "Mięśnie dna miednicy podtrzymują narządy i uczestniczą w kontroli moczu, stolca oraz ciśnienia podczas ruchu. Po menopauzie na objawy wpływają zmiany tkanek, ale także porody, operacje, kaszel, zaparcia i sposób oddychania przy wysiłku. Ten poradnik pokazuje, kiedy ćwiczyć samodzielnie, a kiedy potrzebna jest indywidualna ocena. Szybka odpowiedź U osób po 50-tce z wysiłkowym lub mieszanym nietrzymaniem moczu pierwszym wyborem jest nadzorowany trening mięśni dna miednicy prowadzony przez co najmniej 3 miesiące. Ćwiczenie wymaga zarówno napięcia, jak i pełnego rozluźnienia; samo zaciskanie podczas każdego ruchu nie jest uniwersalną metodą. Ból, uczucie ciężaru, wyciek moczu albo trudność z rozpoznaniem skurczu są wskazaniem do fizjoterapii uroginekologicznej. Kluczowe wnioski Po menopauzie z",
+      "alt": "Kobieta po 60-tce ćwiczy spokojny oddech pod obserwacją fizjoterapeutki",
+      "caption": "Spokojny oddech pomaga obserwować napięcie i rozluźnienie, ale nie zastępuje indywidualnej oceny dna miednicy.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/przepona-dno-miednicy-oddech-20261017.avif",
+          "sha256": "f61a36023e64fa5e704da447d052e90fc621bc79213b491b0148b708990b1119",
+          "bytes": 63154,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/przepona-dno-miednicy-oddech-20261017.webp",
+          "sha256": "807a6e78c616c15a8b1cf980770c94710f9dc6c5467d98bddeca6d8066a82ce3",
+          "bytes": 110440,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/przepona-dno-miednicy-oddech-20261017.jpg",
+          "sha256": "b4748a8fcf827f6287f7aa0387f60f6085d5921708f28dfeb5e6ad90cdb5e43d",
+          "bytes": 219016,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "25abb3fb3907bd95b83c6ed27a74f2b915f3d57e6538fe78c9fcd0e17973aef8"
+    }
+  ],
   "pdf": {
     "pages": 8,
     "text_coverage": 1,
-    "rendered_pages": 8
+    "rendered_pages": 8,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/pdf-pages/page-1.png",
+        "sha256": "f0c910daf24d92b0a5fa6b86af21b62f6097a5e681d747a9fc82a65a05170c63",
+        "bytes": 592545,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1063,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/pdf-pages/page-2.png",
+        "sha256": "282a3c53d584a36ac84f9cce222573e8d7c87157fd3a01bb0cc707f6db04f79b",
+        "bytes": 550461,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1059,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/pdf-pages/page-3.png",
+        "sha256": "4f804bfeaa8ea9547cf59883a4ce4c109c7d72098379af59520dead3e0d5c382",
+        "bytes": 602014,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1063,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/pdf-pages/page-4.png",
+        "sha256": "4f0d1ac056e2285309d643bf9b7e7a25167073b4c0b8580716f2574ccfe5a10d",
+        "bytes": 515294,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1063,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/pdf-pages/page-5.png",
+        "sha256": "38a46489a8eed367639dde0c2dccbf51f540020061bcb87bff0a6c2050b0a8ec",
+        "bytes": 835910,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1059,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/pdf-pages/page-6.png",
+        "sha256": "d74a89062f1df9cf5c8a3c01be2b44321f9bc6a15aa22f078c11f1ffd9a4904e",
+        "bytes": 573455,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1064,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/pdf-pages/page-7.png",
+        "sha256": "9c9fcce8cdf6dc8ea9c68b671e2fefd8484cb30394fbe2f431244ad9213671e9",
+        "bytes": 516621,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/miesnie-dna-miednicy-trening-core-po-50/pdf-pages/page-8.png",
+        "sha256": "8405c86b8c85873426240cea0c5d0b78931559b95b316c0e363d8111c1218e79",
+        "bytes": 285471,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 51,
+          "y": 58,
+          "width": 1045,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-17T10:46:41.937Z",
+    "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "930a284df5125531364a9f1f8065d67bcd73a7cae14ec489c44b7bc29a7b5363",
+        "note": "Pełny render desktop obejrzany: układ jest spójny, bez ucięć, nakładania elementów ani poziomego przepełnienia."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "6906803343275f00dce5f07b716f87a4d2695bd84685d54d1218cdd594449272",
+        "note": "Pełny render mobile obejrzany: tekst, tabele, obrazy i nawigacja mieszczą się w widoku bez ucięć i nakładania."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "cbc8b56f2160d3d55eab82c5621ba3c2341fc8e3842a0dab6cc3a70404153371",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "WATERMARK_ONLY"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:2:dlaczego-miesnie-dna-miednicy-slabna-po-50-tce-i",
+        "inventory_sha256": "e62e12f2e36b5ad451418840c322d3069978a5789875e9211950a080d7088c63",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "DNO MIEDNICY; MIĘSIEŃ DŹWIGACZ ODBYTU; PRZEPONA MIEDNICZNA",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://www.ics.org/folder/committees/working-group-documents/terminology-for-pelvic-floor-function-and-dysfunction/d/ics-report-on-the-terminology-for-pelvic-floor-muscle-assessment-2021/download"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:3:trening-oporowy-a-cisnienie-srodbrzuszne-jak-bez",
+        "inventory_sha256": "3d6cd8c2d741c48c00816f5bd74da778bcd4703a934f2bba1a574648fed6da9c",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:4:kegel-to-nie-wszystko-jakie-sa-najlepsze-cwiczen",
+        "inventory_sha256": "044f87eaeb9e7d5f20ccf14fa9632535f0a366eef7d11ab31d71b82d0afb16a4",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "PELVICZNY CORE: SEKWENCJA ĆWICZEŃ; KEGEL; MARTWY ROBAK; PTAK-PIES; MOST POŚLADKOWY; PRZYSIAD; ĆWICZENIE ODDECHOWE",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://www.nice.org.uk/guidance/ng210/chapter/recommendations",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC9222935/"
+          ]
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:5:jak-czytac-wynik-emg-i-ocenic-prace-dna-miednicy",
+        "inventory_sha256": "ebfc38b708254f07cfd427bb253c14c8501c03abe8a342fa87a8b36cf7f42023",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:6:trening-po-menopauzie-co-zmienia-sie-w-praktyce-",
+        "inventory_sha256": "04973bf1a9eebb84d8cba7bd57a7bf5662b375dfe7b512c3727ba26ca7870f69",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:7:kiedy-zglosic-sie-do-fizjoterapeuty-uroginekolog",
+        "inventory_sha256": "4b6b3dd5c63318b35f716df47ed0dd3afd34d62710897d1353070431878f54e8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      },
+      {
+        "placement": "content:8:jak-przepona-wplywa-na-dno-miednicy",
+        "inventory_sha256": "25abb3fb3907bd95b83c6ed27a74f2b915f3d57e6538fe78c9fcd0e17973aef8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T10:46:41.937Z",
+        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "f0c910daf24d92b0a5fa6b86af21b62f6097a5e681d747a9fc82a65a05170c63",
+        "note": "Strona PDF 1 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "282a3c53d584a36ac84f9cce222573e8d7c87157fd3a01bb0cc707f6db04f79b",
+        "note": "Strona PDF 2 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "4f804bfeaa8ea9547cf59883a4ce4c109c7d72098379af59520dead3e0d5c382",
+        "note": "Strona PDF 3 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "4f0d1ac056e2285309d643bf9b7e7a25167073b4c0b8580716f2574ccfe5a10d",
+        "note": "Strona PDF 4 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "38a46489a8eed367639dde0c2dccbf51f540020061bcb87bff0a6c2050b0a8ec",
+        "note": "Strona PDF 5 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "d74a89062f1df9cf5c8a3c01be2b44321f9bc6a15aa22f078c11f1ffd9a4904e",
+        "note": "Strona PDF 6 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "9c9fcce8cdf6dc8ea9c68b671e2fefd8484cb30394fbe2f431244ad9213671e9",
+        "note": "Strona PDF 7 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "8405c86b8c85873426240cea0c5d0b78931559b95b316c0e363d8111c1218e79",
+        "note": "Strona PDF 8 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 7617,
+    "review_wait_ms": 350346
   },
   "errors": []
 }
