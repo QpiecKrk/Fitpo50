@@ -163,6 +163,7 @@ Artykuł nie przechodzi, jeśli:
 ## 10. Content + Linking Contract v2.0 (obowiązkowe)
 - Liczba głównych sekcji wynika wyłącznie z intencji i zakresu tematu. Nie obowiązuje minimalna liczba sekcji. Artykuł ma wyczerpywać istotne pytania bez dopisywania bloków dla długości, symetrii szablonu lub wyniku walidatora.
 - Każda sekcja musi wnosić konkretną odpowiedź, mechanizm, decyzję praktyczną, ograniczenie dowodu albo potrzebny kontekst. Generyczne wstępy, powtórzenia, parafrazy wcześniejszych sekcji i tekst bez sprawdzalnej wartości blokują publikację.
+- Skrót specjalistyczny trzeba rozwinąć przy pierwszym widocznym użyciu. Nagłówek nie może wymagać od czytelnika znajomości niewyjaśnionego akronimu; jeśli skrót pojawia się po raz pierwszy w H2, nagłówek lub bezpośrednia odpowiedź pod nim musi podać pełną polską nazwę i, gdy pomaga, nazwę źródłową.
 - Pytające nagłówki H2 (np. zaczynające się od `Czy`, `Jak`, `Dlaczego`, `Ile`, `Kiedy`) muszą kończyć się `?`.
 - Pierwszy akapit pod każdym H2 (lead sekcji) musi bezpośrednio i konkretnie odpowiadać na pytanie H2.
 - Zakres 30–70 słów jest zaleceniem redakcyjnym, nie samodzielnym blokerem: krótsza kompletna odpowiedź i dłuższa wartościowa odpowiedź mogą przejść.

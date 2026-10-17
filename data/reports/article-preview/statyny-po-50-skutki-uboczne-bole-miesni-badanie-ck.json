@@ -1,16 +1,16 @@
 {
   "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-10-17T12:31:03.254Z",
-  "reviewed_at": "2026-10-17T14:36:00+02:00",
+  "generated_at": "2026-10-17T13:08:46.830Z",
+  "reviewed_at": "2026-10-17T15:12:00+02:00",
   "slug": "statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck",
-  "html_sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
-  "site_html_sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
-  "pdf_sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
-  "site_pdf_sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
+  "html_sha256": "cae0279f691cf5a1cca65aa6001cde67f32ab82c3467b06826ae89e03585c0ab",
+  "site_html_sha256": "cae0279f691cf5a1cca65aa6001cde67f32ab82c3467b06826ae89e03585c0ab",
+  "pdf_sha256": "33e76358e68b7b580ebcc5c25782804503fbdfa2611d940f6b34b762006b443a",
+  "site_pdf_sha256": "33e76358e68b7b580ebcc5c25782804503fbdfa2611d940f6b34b762006b443a",
   "technical_review": {
     "status": "TECHNICAL_PASS",
-    "completed_at": "2026-10-17T12:31:03.254Z",
+    "completed_at": "2026-10-17T13:08:46.830Z",
     "errors": []
   },
   "html": {
@@ -19,23 +19,23 @@
   "artifacts": {
     "html_source": {
       "file": "statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html",
-      "sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
-      "bytes": 47472
+      "sha256": "cae0279f691cf5a1cca65aa6001cde67f32ab82c3467b06826ae89e03585c0ab",
+      "bytes": 47696
     },
     "html_site": {
       "file": "_site/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html",
-      "sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
-      "bytes": 47472
+      "sha256": "cae0279f691cf5a1cca65aa6001cde67f32ab82c3467b06826ae89e03585c0ab",
+      "bytes": 47696
     },
     "pdf_source": {
       "file": "assets/pdf/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.pdf",
-      "sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
-      "bytes": 639895
+      "sha256": "33e76358e68b7b580ebcc5c25782804503fbdfa2611d940f6b34b762006b443a",
+      "bytes": 640503
     },
     "pdf_site": {
       "file": "_site/assets/pdf/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.pdf",
-      "sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
-      "bytes": 639895
+      "sha256": "33e76358e68b7b580ebcc5c25782804503fbdfa2611d940f6b34b762006b443a",
+      "bytes": 640503
     }
   },
   "views": {
@@ -46,7 +46,7 @@
         "height": 1000
       },
       "screenshot_file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/desktop.png",
-      "screenshot_sha256": "70f68e3552ae7017b4b382e8ecb245d2490a7f1f7ddfdea0e959c1892910c68c",
+      "screenshot_sha256": "545fa14705c2121b1fe4e91e9a05ee45b0f67104b7ef3d44621acd7ba896c558",
       "errors": []
     },
     "mobile": {
@@ -56,7 +56,7 @@
         "height": 844
       },
       "screenshot_file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/mobile.png",
-      "screenshot_sha256": "833c354ea61722225201c01fbfc04896d7e1380307f173555d8a2d3370be1b4e",
+      "screenshot_sha256": "4953ea856952e12b35a0ad4cef24780cb90d7e317f22ff6974e0030efc40f2fb",
       "errors": []
     }
   },
@@ -124,9 +124,9 @@
       "inventory_sha256": "e8b0eb49128079475d882d5f447ae1578f6c2176a62b677abd9e4ac706a1da4b"
     },
     {
-      "placement": "content:3:jak-odroznic-prawdziwe-sams-od-efektu-nocebo",
+      "placement": "content:3:jak-odroznic-objawy-miesniowe-zwiazane-ze-statyn",
       "role": "content",
-      "heading": "Jak odróżnić prawdziwe SAMS od efektu nocebo?",
+      "heading": "Jak odróżnić objawy mięśniowe związane ze statyną (SAMS) od efektu nocebo?",
       "context": "Wpisujesz w Google „statyny po 50 skutki uboczne” i po pięciu minutach jesteś pewien, że twoje łydki właśnie się rozpadają. Znam to. Sąsiad odstawił, szwagier odstawił, forum krzyczy. Problem jest prawdziwy, ale dużo mniejszy, niż wygląda – i zamiast zgadywać, można go sprawdzić. Szybka odpowiedź W dużych badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie wynikało z leku. Nie odstawiaj go sam: jeśli ból jest silny, mięśnie słabną albo mocz ciemnieje, pilnie skontaktuj się z lekarzem i zbadaj CK. Koenzym Q10 nie ma mocnych dowodów, a przy prawdziwej nietolerancji są inne leki. Kluczowe wnioski W badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie było spowodowanych samym lekiem. Nie odstawiaj statyny sam; silne osłabienie, gorączka lub ciemny mocz wyma",
       "alt": "Wykres słupkowy: nasilenie objawów 8,0 bez tabletek, 15,4 na placebo i 16,3 na statynie w badaniu SAMSON",
       "caption": "W badaniu SAMSON objawy na placebo były prawie tak silne jak na statynie: 15,4 wobec 16,3 punktu w skali 0–100.",
@@ -152,7 +152,7 @@
         }
       },
       "errors": [],
-      "inventory_sha256": "471ba49e8d18422bf7ed8f94f9c34e98f3545a77c6f1862ac0b5b9d77ef06126"
+      "inventory_sha256": "a4b208e42825b8a9d07a1ebd9cd950265183c220f2de921ba1ffdb85f3cd8de7"
     },
     {
       "placement": "content:4:czy-bol-nog-po-statynie-to-powod-by-od-razu-odst",
@@ -334,8 +334,8 @@
       {
         "page": 2,
         "file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/pdf-pages/page-2.png",
-        "sha256": "8368af682ea46f00a58076e946d473199352274929761d2f0648f5be7689271a",
-        "bytes": 738816,
+        "sha256": "dcafbe7d3573b04cc96dfc44bb9ba23f9bbae16e57ba839fa0d84fe64ba70a78",
+        "bytes": 769117,
         "width": 1191,
         "height": 1684,
         "content_bounds": {
@@ -448,18 +448,18 @@
   "visual_review": {
     "status": "VISUAL_REVIEW_VERIFIED",
     "reviewed_by": "Codex",
-    "reviewed_at": "2026-10-17T14:36:00+02:00",
-    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF.",
+    "reviewed_at": "2026-10-17T15:12:00+02:00",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron finalnego PDF.",
     "views": {
       "desktop": {
         "status": "VERIFIED",
-        "artifact_sha256": "70f68e3552ae7017b4b382e8ecb245d2490a7f1f7ddfdea0e959c1892910c68c",
-        "note": "Pełny render desktop obejrzany od nagłówka do stopki: układ jest spójny, tekst czytelny, obrazy i tabela nie wychodzą poza kontener."
+        "artifact_sha256": "545fa14705c2121b1fe4e91e9a05ee45b0f67104b7ef3d44621acd7ba896c558",
+        "note": "Pełny render desktop obejrzany: rozwinięcie SAMS jest czytelne, a strona nie ma kolizji, ucięć ani poziomego przepełnienia."
       },
       "mobile": {
         "status": "VERIFIED",
-        "artifact_sha256": "833c354ea61722225201c01fbfc04896d7e1380307f173555d8a2d3370be1b4e",
-        "note": "Pełny render mobile obejrzany od nagłówka do stopki: brak poziomego przepełnienia, ucięć, kolizji i zbyt małych elementów treści."
+        "artifact_sha256": "4953ea856952e12b35a0ad4cef24780cb90d7e317f22ff6974e0030efc40f2fb",
+        "note": "Pełny render mobile obejrzany: długi nagłówek łamie się poprawnie, tekst pozostaje czytelny i nie poszerza strony."
       }
     },
     "images": [
@@ -478,7 +478,8 @@
         "note": "Hero obejrzany: naturalna scena rozciągania nogi przy organizerze leków, prawidłowa anatomia i brak mylących marek.",
         "reviewed_by": "Codex",
         "reviewed_at": "2026-10-17T14:36:00+02:00",
-        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF.",
+        "reused_from_report_generated_at": "2026-10-17T13:06:22.672Z"
       },
       {
         "placement": "content:2:czy-statyny-naprawde-powoduja-bole-miesni",
@@ -493,28 +494,30 @@
         "note": "Obraz obejrzany: kobieta z kijkami w ruchu pasuje do różnicowania bólu po wysiłku; anatomia i sprzęt są wiarygodne.",
         "reviewed_by": "Codex",
         "reviewed_at": "2026-10-17T14:36:00+02:00",
-        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF.",
+        "reused_from_report_generated_at": "2026-10-17T13:06:22.672Z"
       },
       {
-        "placement": "content:3:jak-odroznic-prawdziwe-sams-od-efektu-nocebo",
-        "inventory_sha256": "471ba49e8d18422bf7ed8f94f9c34e98f3545a77c6f1862ac0b5b9d77ef06126",
+        "placement": "content:3:jak-odroznic-objawy-miesniowe-zwiazane-ze-statyn",
+        "inventory_sha256": "a4b208e42825b8a9d07a1ebd9cd950265183c220f2de921ba1ffdb85f3cd8de7",
         "status": "VERIFIED",
         "matches_topic": true,
         "no_misleading_text_or_logo": true,
         "anatomy_and_equipment_plausible": true,
         "embedded_text": {
           "kind": "CONTENT",
-          "transcription": "Nasilenie objawów mięśniowych; Statyna 16.3; Placebo 15.4; Bez tabletek 8.0",
+          "transcription": "Nasilenie objawów mięśniowych; Statyna 16,3; Placebo 15,4; Bez tabletek 8,0",
           "claims_or_numbers_present": true,
           "matches_article_claims": true,
           "evidence_urls": [
             "https://pubmed.ncbi.nlm.nih.gov/34531021/"
           ]
         },
-        "note": "Wykres obejrzany: wszystkie trzy etykiety i wartości są czytelne oraz zgodne z wynikami badania SAMSON cytowanymi w artykule.",
+        "note": "Wykres SAMSON obejrzany ponownie po zmianie nagłówka: wartości są czytelne, zgodne z podpisem i prawidłowo ilustrują porównanie statyny z placebo.",
         "reviewed_by": "Codex",
-        "reviewed_at": "2026-10-17T14:36:00+02:00",
-        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+        "reviewed_at": "2026-10-17T15:07:00+02:00",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron odświeżonego PDF.",
+        "reused_from_report_generated_at": "2026-10-17T13:06:22.672Z"
       },
       {
         "placement": "content:4:czy-bol-nog-po-statynie-to-powod-by-od-razu-odst",
@@ -529,7 +532,8 @@
         "note": "Obraz obejrzany: rozmowa pacjenta z lekarką pasuje do sekcji alarmowej; brak błędów anatomii, sprzętu i czytelnych danych.",
         "reviewed_by": "Codex",
         "reviewed_at": "2026-10-17T14:36:00+02:00",
-        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF.",
+        "reused_from_report_generated_at": "2026-10-17T13:06:22.672Z"
       },
       {
         "placement": "content:5:jakie-badania-krwi-zrobic-gdy-bola-miesnie-na-st",
@@ -547,7 +551,8 @@
         "note": "Obraz obejrzany: probówka z oznaczeniem CK jest czytelna i trafna dla sekcji o badaniach; brak mylących liczb i marek.",
         "reviewed_by": "Codex",
         "reviewed_at": "2026-10-17T14:36:00+02:00",
-        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF.",
+        "reused_from_report_generated_at": "2026-10-17T13:06:22.672Z"
       },
       {
         "placement": "content:6:czy-koenzym-q10-likwiduje-skutki-uboczne-statyn",
@@ -562,7 +567,8 @@
         "note": "Obraz obejrzany: kapsułki i znak zapytania jasno pokazują niepewność dowodów dla Q10; brak napisów, marek i błędów anatomii.",
         "reviewed_by": "Codex",
         "reviewed_at": "2026-10-17T14:36:00+02:00",
-        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF.",
+        "reused_from_report_generated_at": "2026-10-17T13:06:22.672Z"
       },
       {
         "placement": "content:7:czym-zastapic-statyny-gdy-naprawde-ich-nie-toler",
@@ -577,7 +583,8 @@
         "note": "Obraz obejrzany: para czyta ulotkę w aptece, co pasuje do omawiania alternatyw leczenia; brak czytelnych marek i reklam.",
         "reviewed_by": "Codex",
         "reviewed_at": "2026-10-17T14:36:00+02:00",
-        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF.",
+        "reused_from_report_generated_at": "2026-10-17T13:06:22.672Z"
       },
       {
         "placement": "content:8:jak-zapisac-objawy-po-statynie-i-co-zrobic-krok-",
@@ -592,7 +599,8 @@
         "note": "Obraz obejrzany: notowanie objawów na balkonie pasuje do planu działania; notatki są nieczytelne i nie ujawniają danych.",
         "reviewed_by": "Codex",
         "reviewed_at": "2026-10-17T14:36:00+02:00",
-        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF.",
+        "reused_from_report_generated_at": "2026-10-17T13:06:22.672Z"
       }
     ],
     "pdf_pages": [
@@ -600,56 +608,56 @@
         "page": 1,
         "status": "VERIFIED",
         "artifact_sha256": "aab6892452c668191fbd61f254330fda321d3193fe2e47e9c255bad8be52b266",
-        "note": "Strona 1/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+        "note": "Strona 1 obejrzana: hero, szybka odpowiedź, wnioski i początek artykułu są kompletne oraz czytelne."
       },
       {
         "page": 2,
         "status": "VERIFIED",
-        "artifact_sha256": "8368af682ea46f00a58076e946d473199352274929761d2f0648f5be7689271a",
-        "note": "Strona 2/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+        "artifact_sha256": "dcafbe7d3573b04cc96dfc44bb9ba23f9bbae16e57ba839fa0d84fe64ba70a78",
+        "note": "Strona 2 obejrzana: nagłówek i pełne wyjaśnienie SAMS są czytelne, bez ucięć i nakładania tekstu."
       },
       {
         "page": 3,
         "status": "VERIFIED",
         "artifact_sha256": "00bc7de1d462453990f4c65b84f492b1cd4bd5c074db19192fbe6dff8f4c7e99",
-        "note": "Strona 3/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+        "note": "Strona 3 obejrzana: wykres SAMSON i sekcja bezpieczeństwa są kompletne oraz poprawnie rozmieszczone."
       },
       {
         "page": 4,
         "status": "VERIFIED",
         "artifact_sha256": "37005e1eef342d601ca3c02cba09a52c8d4b1e12078d4df5d2b094cc23e18ea5",
-        "note": "Strona 4/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+        "note": "Strona 4 obejrzana: ilustracja, tabela CK i tekst pozostają czytelne oraz nie wychodzą poza marginesy."
       },
       {
         "page": 5,
         "status": "VERIFIED",
         "artifact_sha256": "bd6879cb6c21fcebfbbd77e6d0600bfcadea1298d95e63f7469191cf7794f320",
-        "note": "Strona 5/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+        "note": "Strona 5 obejrzana: sekcje CK i koenzymu Q10 wraz z obrazami są kompletne i prawidłowo złożone."
       },
       {
         "page": 6,
         "status": "VERIFIED",
         "artifact_sha256": "a115a4a6fcf17a1a089ba397ec92ef8ff4dd01b6947cdc6927ceadd9ce59a2fa",
-        "note": "Strona 6/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+        "note": "Strona 6 obejrzana: alternatywy dla statyn i początek planu działania są kompletne i nieucięte."
       },
       {
         "page": 7,
         "status": "VERIFIED",
         "artifact_sha256": "c9416408f1967d082d9b3b0ad7a80f090ec2d246d21a20d7bcfaa62720d12775",
-        "note": "Strona 7/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+        "note": "Strona 7 obejrzana: lista kroków, ostatnia ilustracja i pierwsza część FAQ są czytelne oraz kompletne."
       },
       {
         "page": 8,
         "status": "VERIFIED",
         "artifact_sha256": "d84e04e621fcbfde96231fefca4117db3343ccbb1aa7549945aad58545b7a54e",
-        "note": "Strona 8/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+        "note": "Strona 8 obejrzana: FAQ, komplet 13 źródeł i disclaimer są czytelne i prawidłowo zakończone."
       }
     ],
     "errors": []
   },
   "timing": {
-    "technical_ms": 8022,
-    "review_wait_ms": 296746
+    "technical_ms": 7867,
+    "review_wait_ms": 193170
   },
   "errors": []
 }
