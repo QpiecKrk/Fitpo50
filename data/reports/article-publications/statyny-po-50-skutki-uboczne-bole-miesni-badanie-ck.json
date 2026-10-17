@@ -1,0 +1,536 @@
+{
+  "version": 1,
+  "transaction_id": "article-statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck-1792240245920-88102",
+  "generated_at": "2026-10-17T12:32:12.182Z",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck",
+  "url": "https://fitpo50.pl/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html",
+  "manifest_file": "data/reports/article-publications/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
+      "bytes": 47472
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "8d39188e6399fae61bfc5cb575ea8f9bfc4f594968e517ddd561bca856f08b18",
+      "after_sha256": "cb64dba28e1789b21ff5953e7d430c7b06210f0f221af51c78c75b5a1b060c25",
+      "bytes": 119799
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "dfed3e76e39737e5544f9e3832635b0f3aeba18f04f6618a069c21aa59a6f1b0",
+      "after_sha256": "4cc9bb0b78c957087c473dfec79eae8450cfa21293fcdf7b7fbe124af8164cd3",
+      "bytes": 160398
+    },
+    {
+      "path": "zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "16a653b0f7fcec22257b50cdacaaad9c3bfd889547a9c79dfe1af9799a05f517",
+      "after_sha256": "3e053ccc7b86ddc5721136588b66bc8ee2f92e4d214096695005cae408472ac8",
+      "bytes": 61218
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "6dc9cc735aba2c3fc1089c83c0418843d5171fa495d6ab6f29e352e454e7f0fd",
+      "after_sha256": "4453bff2d951aad4eb5922cdfed87c157054e2ed842a485a81f7b14cf52fd01c",
+      "bytes": 19656
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "05c1b06ae9b6ffddeb49a858be10965917708db5531d18923aebf9bbf3a11735",
+      "after_sha256": "fccc2fb18e3fcec7b2ca22d896afebaf33d63a7eb7f388c1be672c146a766353",
+      "bytes": 38258
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "b369e2b9a6a5735a3fe1d3b7ac657741d35df5f3dd12f1b59455d023825dd7f7",
+      "after_sha256": "a8c1f8f58cf734bfb7864ca68f4efcd7086b620858aeb497299793b314e9fafa",
+      "bytes": 828499
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "bd97cdfbd3c3dd403afaa08e267a4c2407b660318952993c0cadaf0624976ef3",
+      "after_sha256": "043b3cc8e09566c93c3a3c06f52897d8f9c52bd4ad0ad99ab1883cb7fa6e9474",
+      "bytes": 875611
+    },
+    {
+      "path": "assets/pdf/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
+      "bytes": 639895
+    },
+    {
+      "path": "data/crosslink-suggestions/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c34500444e9b1d457af9bd2bffa233ab8072a95b2119f107463de2daa11a245c",
+      "bytes": 1333
+    },
+    {
+      "path": "data/reports/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "43ca365951db068f39f0a886979d6fe481c9b69106039d7bfcef4aef6d11f9b9",
+      "bytes": 33212
+    },
+    {
+      "path": "data/reports/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "550dedf5cdc5567d1a7ccc7b1b41ab5182aadcdc11757989359ea4dbff2cc768",
+      "bytes": 389
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "f33a2241bdd45ff2f53fa0f74eadfb4a631c66d552f32c525a9bbf692b029617",
+      "after_sha256": "481867004b2a85ec8d298494562e168ddc2c39850c8fee31eff4ef5bcd4efd5a",
+      "bytes": 44493
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "b19dd21f8b5b628a37a24d7dc514c310c5eb69030be6c4bb2dbe872509685e74",
+      "after_sha256": "d299f90714859a0041aa1ea275758ac12de49fd503d2cd807c9a2b01f82de0e4",
+      "bytes": 4324
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "201660b31c93bd626e4e0d4c835be2e6f8d18433eabb8f7b42601c45065d0b90",
+      "after_sha256": "8d9e79645f98ee56fa474120d785083086f200d0fd3bf621db3f953817051e67",
+      "bytes": 2096
+    },
+    {
+      "path": "_site/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
+      "bytes": 47472
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "8d39188e6399fae61bfc5cb575ea8f9bfc4f594968e517ddd561bca856f08b18",
+      "after_sha256": "cb64dba28e1789b21ff5953e7d430c7b06210f0f221af51c78c75b5a1b060c25",
+      "bytes": 119799
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "dfed3e76e39737e5544f9e3832635b0f3aeba18f04f6618a069c21aa59a6f1b0",
+      "after_sha256": "4cc9bb0b78c957087c473dfec79eae8450cfa21293fcdf7b7fbe124af8164cd3",
+      "bytes": 160398
+    },
+    {
+      "path": "_site/zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "16a653b0f7fcec22257b50cdacaaad9c3bfd889547a9c79dfe1af9799a05f517",
+      "after_sha256": "3e053ccc7b86ddc5721136588b66bc8ee2f92e4d214096695005cae408472ac8",
+      "bytes": 61218
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "6dc9cc735aba2c3fc1089c83c0418843d5171fa495d6ab6f29e352e454e7f0fd",
+      "after_sha256": "4453bff2d951aad4eb5922cdfed87c157054e2ed842a485a81f7b14cf52fd01c",
+      "bytes": 19656
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "05c1b06ae9b6ffddeb49a858be10965917708db5531d18923aebf9bbf3a11735",
+      "after_sha256": "fccc2fb18e3fcec7b2ca22d896afebaf33d63a7eb7f388c1be672c146a766353",
+      "bytes": 38258
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "b369e2b9a6a5735a3fe1d3b7ac657741d35df5f3dd12f1b59455d023825dd7f7",
+      "after_sha256": "a8c1f8f58cf734bfb7864ca68f4efcd7086b620858aeb497299793b314e9fafa",
+      "bytes": 828499
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "bd97cdfbd3c3dd403afaa08e267a4c2407b660318952993c0cadaf0624976ef3",
+      "after_sha256": "043b3cc8e09566c93c3a3c06f52897d8f9c52bd4ad0ad99ab1883cb7fa6e9474",
+      "bytes": 875611
+    },
+    {
+      "path": "_site/assets/pdf/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
+      "bytes": 639895
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c34500444e9b1d457af9bd2bffa233ab8072a95b2119f107463de2daa11a245c",
+      "bytes": 1333
+    },
+    {
+      "path": "assets/statyny-hero-poranek-lydka.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aa8122c02932e451cf721e48448e7868ff55dce0d81d254aed47fed8b909b5da",
+      "bytes": 63757
+    },
+    {
+      "path": "_site/assets/statyny-hero-poranek-lydka.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aa8122c02932e451cf721e48448e7868ff55dce0d81d254aed47fed8b909b5da",
+      "bytes": 63757
+    },
+    {
+      "path": "assets/statyny-hero-poranek-lydka.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4437451c03f251bcff73926aeaa140dff0477c1cb08070a95a71d70dcff13c06",
+      "bytes": 93596
+    },
+    {
+      "path": "_site/assets/statyny-hero-poranek-lydka.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4437451c03f251bcff73926aeaa140dff0477c1cb08070a95a71d70dcff13c06",
+      "bytes": 93596
+    },
+    {
+      "path": "assets/statyny-hero-poranek-lydka.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aec9fb50678bd7b8f68300fe1fad0f4c063763ebcb7ed9e28aacf9aabd8677aa",
+      "bytes": 263931
+    },
+    {
+      "path": "_site/assets/statyny-hero-poranek-lydka.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aec9fb50678bd7b8f68300fe1fad0f4c063763ebcb7ed9e28aacf9aabd8677aa",
+      "bytes": 263931
+    },
+    {
+      "path": "assets/statyny-nordic-walking-udo.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "291fb8d8b9a0ad43548cd573f6617fdcb54ef28597044d57cfde8958ee5b4294",
+      "bytes": 62880
+    },
+    {
+      "path": "_site/assets/statyny-nordic-walking-udo.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "291fb8d8b9a0ad43548cd573f6617fdcb54ef28597044d57cfde8958ee5b4294",
+      "bytes": 62880
+    },
+    {
+      "path": "assets/statyny-nordic-walking-udo.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eca12b7c6ae2b883376f4bc883972b55ed21353d5e8fb95875a60acc2cc0ffa7",
+      "bytes": 94002
+    },
+    {
+      "path": "_site/assets/statyny-nordic-walking-udo.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eca12b7c6ae2b883376f4bc883972b55ed21353d5e8fb95875a60acc2cc0ffa7",
+      "bytes": 94002
+    },
+    {
+      "path": "assets/statyny-nordic-walking-udo.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6c189cf91f87727188ac6d64d096a5d906ed5f8ae1db7034d3bb75cb8098438c",
+      "bytes": 253697
+    },
+    {
+      "path": "_site/assets/statyny-nordic-walking-udo.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6c189cf91f87727188ac6d64d096a5d906ed5f8ae1db7034d3bb75cb8098438c",
+      "bytes": 253697
+    },
+    {
+      "path": "assets/statyny-samson-wykres-objawow.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6fcb32db3e77e74ea86c51f8a33374001c09a291f2d0935a7e3f9b848df7166a",
+      "bytes": 13508
+    },
+    {
+      "path": "_site/assets/statyny-samson-wykres-objawow.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6fcb32db3e77e74ea86c51f8a33374001c09a291f2d0935a7e3f9b848df7166a",
+      "bytes": 13508
+    },
+    {
+      "path": "assets/statyny-samson-wykres-objawow.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dbaff876e85943ab48f35aec5ab0f7457ce4ac87146fff39336cf8c54cb383c4",
+      "bytes": 16138
+    },
+    {
+      "path": "_site/assets/statyny-samson-wykres-objawow.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dbaff876e85943ab48f35aec5ab0f7457ce4ac87146fff39336cf8c54cb383c4",
+      "bytes": 16138
+    },
+    {
+      "path": "assets/statyny-samson-wykres-objawow.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3b682f9a0e43cd4fb7021b343d24df6d0b7581f7a77e72c4006bcdfcb373a257",
+      "bytes": 39315
+    },
+    {
+      "path": "_site/assets/statyny-samson-wykres-objawow.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3b682f9a0e43cd4fb7021b343d24df6d0b7581f7a77e72c4006bcdfcb373a257",
+      "bytes": 39315
+    },
+    {
+      "path": "assets/statyny-gabinet-rozmowa.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c9a8f4d1e6a60381218fd81e987d0a07c432dd177b135699622d7c279f6b3bd2",
+      "bytes": 45727
+    },
+    {
+      "path": "_site/assets/statyny-gabinet-rozmowa.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c9a8f4d1e6a60381218fd81e987d0a07c432dd177b135699622d7c279f6b3bd2",
+      "bytes": 45727
+    },
+    {
+      "path": "assets/statyny-gabinet-rozmowa.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "67be291d86089a4b71b80491a9acda749dd5530f90d1e3c2a5fc6d69b212766b",
+      "bytes": 61724
+    },
+    {
+      "path": "_site/assets/statyny-gabinet-rozmowa.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "67be291d86089a4b71b80491a9acda749dd5530f90d1e3c2a5fc6d69b212766b",
+      "bytes": 61724
+    },
+    {
+      "path": "assets/statyny-gabinet-rozmowa.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c6a8fd02c94ab39f53cfbe9d2747407db95c3ba2852257ef045d20d48b81a76e",
+      "bytes": 197655
+    },
+    {
+      "path": "_site/assets/statyny-gabinet-rozmowa.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c6a8fd02c94ab39f53cfbe9d2747407db95c3ba2852257ef045d20d48b81a76e",
+      "bytes": 197655
+    },
+    {
+      "path": "assets/statyny-probowka-ck-makro.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3374ee8414350d199d5d39781aac575ad02229fbedb7ac2daae8a6202af3cdb4",
+      "bytes": 25860
+    },
+    {
+      "path": "_site/assets/statyny-probowka-ck-makro.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3374ee8414350d199d5d39781aac575ad02229fbedb7ac2daae8a6202af3cdb4",
+      "bytes": 25860
+    },
+    {
+      "path": "assets/statyny-probowka-ck-makro.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5020f920a6afefaa33b7d8f906343d4c945c2db7d0177ffde4d1952fab7d6527",
+      "bytes": 33170
+    },
+    {
+      "path": "_site/assets/statyny-probowka-ck-makro.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5020f920a6afefaa33b7d8f906343d4c945c2db7d0177ffde4d1952fab7d6527",
+      "bytes": 33170
+    },
+    {
+      "path": "assets/statyny-probowka-ck-makro.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "555cc048a565c1bfaaf1bbe3b8c6ee43cf561988e9432c98a52b644044c40f08",
+      "bytes": 126603
+    },
+    {
+      "path": "_site/assets/statyny-probowka-ck-makro.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "555cc048a565c1bfaaf1bbe3b8c6ee43cf561988e9432c98a52b644044c40f08",
+      "bytes": 126603
+    },
+    {
+      "path": "assets/statyny-koenzym-q10-kolaz.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6de9ef59f71baca22e31f5ca2ddce28c9466af643f9b915ca2e82af0ce0b7ee5",
+      "bytes": 83309
+    },
+    {
+      "path": "_site/assets/statyny-koenzym-q10-kolaz.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6de9ef59f71baca22e31f5ca2ddce28c9466af643f9b915ca2e82af0ce0b7ee5",
+      "bytes": 83309
+    },
+    {
+      "path": "assets/statyny-koenzym-q10-kolaz.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "70c70e3d36b7de03736419d4df50a93ed1c2271487db52aec57ffa1c521d19be",
+      "bytes": 136412
+    },
+    {
+      "path": "_site/assets/statyny-koenzym-q10-kolaz.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "70c70e3d36b7de03736419d4df50a93ed1c2271487db52aec57ffa1c521d19be",
+      "bytes": 136412
+    },
+    {
+      "path": "assets/statyny-koenzym-q10-kolaz.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d19722385f2a683d043f18d9fce9ff28dde4d32ed1dbbba8720f053368623735",
+      "bytes": 340767
+    },
+    {
+      "path": "_site/assets/statyny-koenzym-q10-kolaz.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d19722385f2a683d043f18d9fce9ff28dde4d32ed1dbbba8720f053368623735",
+      "bytes": 340767
+    },
+    {
+      "path": "assets/statyny-apteka-para-ulotka.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dce3e9509f9fdd17d5d698f8a14e524de5b3ff24cbbee83f51f2b5c65d8c26e1",
+      "bytes": 46790
+    },
+    {
+      "path": "_site/assets/statyny-apteka-para-ulotka.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dce3e9509f9fdd17d5d698f8a14e524de5b3ff24cbbee83f51f2b5c65d8c26e1",
+      "bytes": 46790
+    },
+    {
+      "path": "assets/statyny-apteka-para-ulotka.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "359aa2230b874621f37bb2affe4cff9ebe2641c0220df45cc1291b5e50b801be",
+      "bytes": 63944
+    },
+    {
+      "path": "_site/assets/statyny-apteka-para-ulotka.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "359aa2230b874621f37bb2affe4cff9ebe2641c0220df45cc1291b5e50b801be",
+      "bytes": 63944
+    },
+    {
+      "path": "assets/statyny-apteka-para-ulotka.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b2a177e0d9131d1ca0bd8717a36252d8e6a849c708507e6fda8e1c499227050c",
+      "bytes": 200469
+    },
+    {
+      "path": "_site/assets/statyny-apteka-para-ulotka.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b2a177e0d9131d1ca0bd8717a36252d8e6a849c708507e6fda8e1c499227050c",
+      "bytes": 200469
+    },
+    {
+      "path": "assets/statyny-notatki-balkon.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4f049b9ec5d66e2b988dabfab5e8e1550d123ffbf9da168a3c253d3f153a53a4",
+      "bytes": 88662
+    },
+    {
+      "path": "_site/assets/statyny-notatki-balkon.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4f049b9ec5d66e2b988dabfab5e8e1550d123ffbf9da168a3c253d3f153a53a4",
+      "bytes": 88662
+    },
+    {
+      "path": "assets/statyny-notatki-balkon.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5547f1c696278d9af20b5f390108887f7e87ddeeac3351f03cbbdbfd405eb6e1",
+      "bytes": 137202
+    },
+    {
+      "path": "_site/assets/statyny-notatki-balkon.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5547f1c696278d9af20b5f390108887f7e87ddeeac3351f03cbbdbfd405eb6e1",
+      "bytes": 137202
+    },
+    {
+      "path": "assets/statyny-notatki-balkon.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7cac1aa8aead5e316130a6d751ca64762d6f054b070fdfe66d8395e184d61e4d",
+      "bytes": 339787
+    },
+    {
+      "path": "_site/assets/statyny-notatki-balkon.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7cac1aa8aead5e316130a6d751ca64762d6f054b070fdfe66d8395e184d61e4d",
+      "bytes": 339787
+    }
+  ],
+  "files_count": 73
+}

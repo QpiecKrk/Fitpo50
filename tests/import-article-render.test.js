@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
-const { normalizePayload, singleTrailingNewline } = require('../scripts/import-article');
+const { normalizePayload, singleTrailingNewline, upsertBlogPostingSchema } = require('../scripts/import-article');
 
 test('importer przekazuje rzeczywiste wymiary hero do HTML', () => {
   const payload = normalizePayload({
@@ -31,4 +31,19 @@ test('etykiety akcji artykułu nie schodzą poniżej 10 px', () => {
 test('wpis llms kończy się dokładnie jednym znakiem nowej linii', () => {
   assert.equal(singleTrailingNewline('wpis\n\n'), 'wpis\n');
   assert.equal(singleTrailingNewline('wpis'), 'wpis\n');
+});
+
+test('BlogPosting.citation zachowuje wszystkie źródła także powyżej 12 pozycji', () => {
+  const citations = Array.from({ length: 13 }, (_unused, index) => `https://example.org/source-${index + 1}`);
+  const html = `<script type="application/ld+json">${JSON.stringify({ '@type': 'BlogPosting', headline: 'Artykuł testowy' })}</script>`;
+  const result = upsertBlogPostingSchema(html, {
+    wordCount: 100,
+    timeRequired: 'PT1M',
+    hasKeyTakeaways: false,
+    about: [],
+    mentions: [],
+    citations,
+  });
+  const schema = JSON.parse(result.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  assert.deepEqual(schema.citation, citations);
 });

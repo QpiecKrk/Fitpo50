@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-10-05T02:58:47.323Z",
+  "updated_at": "2026-10-17T12:32:12.146Z",
   "items": [
+    {
+      "slug": "statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck",
+      "target_url": "https://fitpo50.pl/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/zdrowie.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-10-17T12:32:12.146Z",
+      "transaction_id": "article-statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck-1792240245920-88102",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "bol-krzyza-po-50-lezenie-czy-cwiczenia",
       "target_url": "https://fitpo50.pl/bol-krzyza-po-50-lezenie-czy-cwiczenia.html",

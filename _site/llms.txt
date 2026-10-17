@@ -463,3 +463,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Boli cię krzyż? Leżenie nie leczy. 8 ćwiczeń na 3 etapy bólu | FitPo50"
   section: "Ruch"
   summary: "Leżenie przy bólu krzyża nie przyspiesza powrotu do formy. Sprawdź objawy alarmowe i 8 ćwiczeń na trzy etapy bólu, opisanych krok po kroku, z badaniami."
+- url: https://fitpo50.pl/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html
+  title: "Statyny po 50-tce: bóle mięśni, nocebo i kiedy badać CK | FitPo50"
+  section: "Zdrowie"
+  summary: "Bolą cię mięśnie na statynie? Sprawdzamy, ile tego bólu robi sam lek, a ile nocebo, kiedy zbadać CK, czy koenzym Q10 pomaga i czym zastąpić statyny."

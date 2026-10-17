@@ -1463,7 +1463,10 @@ function upsertBlogPostingSchema(html, opts) {
       }
 
       if (Array.isArray(opts.citations) && opts.citations.length) {
-        node.citation = opts.citations.slice(0, 12);
+        // Bibliografia widoczna i BlogPosting.citation muszą pozostać zgodne 1:1.
+        // Nie obcinaj listy: pełny Quality Gate dopuszcza więcej niż 12 realnie
+        // wykorzystanych źródeł i słusznie blokuje rozjazd danych strukturalnych.
+        node.citation = [...opts.citations];
       }
 
       touched = true;
@@ -2562,4 +2565,5 @@ module.exports = {
   normalizeSeoTitleBase,
   singleTrailingNewline,
   submitIndexNow,
+  upsertBlogPostingSchema,
 };

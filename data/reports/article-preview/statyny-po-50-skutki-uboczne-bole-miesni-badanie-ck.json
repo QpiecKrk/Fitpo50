@@ -1,0 +1,655 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-10-17T12:31:03.254Z",
+  "reviewed_at": "2026-10-17T14:36:00+02:00",
+  "slug": "statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck",
+  "html_sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
+  "site_html_sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
+  "pdf_sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
+  "site_pdf_sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-17T12:31:03.254Z",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 1
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html",
+      "sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
+      "bytes": 47472
+    },
+    "html_site": {
+      "file": "_site/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html",
+      "sha256": "e3cf6e4827835c3f031edc187c9225fde8c6d38d1166afb17dd0f5d536947e8d",
+      "bytes": 47472
+    },
+    "pdf_source": {
+      "file": "assets/pdf/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.pdf",
+      "sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
+      "bytes": 639895
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.pdf",
+      "sha256": "699d6c57e8b215f3ab8e7a63342f4130c590383b23d2eba5ee51e408dbc57f88",
+      "bytes": 639895
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/desktop.png",
+      "screenshot_sha256": "70f68e3552ae7017b4b382e8ecb245d2490a7f1f7ddfdea0e959c1892910c68c",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/mobile.png",
+      "screenshot_sha256": "833c354ea61722225201c01fbfc04896d7e1380307f173555d8a2d3370be1b4e",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 8 min czytania Aktualizacja: 17.10.2026 Statyny po 50-tce: bóle mięśni, nocebo i kiedy badać CK Ból jest prawdziwy. Winowajca – nie zawsze.",
+      "alt": "Mężczyzna po pięćdziesiątce w jasnej kuchni rozciąga łydkę i z uśmiechem patrzy na organizer z tabletkami",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/statyny-hero-poranek-lydka.avif",
+          "sha256": "aa8122c02932e451cf721e48448e7868ff55dce0d81d254aed47fed8b909b5da",
+          "bytes": 63757,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/statyny-hero-poranek-lydka.webp",
+          "sha256": "4437451c03f251bcff73926aeaa140dff0477c1cb08070a95a71d70dcff13c06",
+          "bytes": 93596,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/statyny-hero-poranek-lydka.jpg",
+          "sha256": "aec9fb50678bd7b8f68300fe1fad0f4c063763ebcb7ed9e28aacf9aabd8677aa",
+          "bytes": 263931,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ad0e32d126f07855485aed5f3f7df5ceefa4f0af74d604ebd6d8173183c18b8e"
+    },
+    {
+      "placement": "content:2:czy-statyny-naprawde-powoduja-bole-miesni",
+      "role": "content",
+      "heading": "Czy statyny naprawdę powodują bóle mięśni?",
+      "context": "Wpisujesz w Google „statyny po 50 skutki uboczne” i po pięciu minutach jesteś pewien, że twoje łydki właśnie się rozpadają. Znam to. Sąsiad odstawił, szwagier odstawił, forum krzyczy. Problem jest prawdziwy, ale dużo mniejszy, niż wygląda – i zamiast zgadywać, można go sprawdzić. Szybka odpowiedź W dużych badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie wynikało z leku. Nie odstawiaj go sam: jeśli ból jest silny, mięśnie słabną albo mocz ciemnieje, pilnie skontaktuj się z lekarzem i zbadaj CK. Koenzym Q10 nie ma mocnych dowodów, a przy prawdziwej nietolerancji są inne leki. Kluczowe wnioski W badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie było spowodowanych samym lekiem. Nie odstawiaj statyny sam; silne osłabienie, gorączka lub ciemny mocz wyma",
+      "alt": "Kobieta po pięćdziesiątce z kijkami do nordic walkingu dotyka uda w słonecznym parku nad rzeką",
+      "caption": "Ból mięśni po wysiłku jest częsty, a CK po treningu bywa podwyższona także bez udziału statyny.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/statyny-nordic-walking-udo.avif",
+          "sha256": "291fb8d8b9a0ad43548cd573f6617fdcb54ef28597044d57cfde8958ee5b4294",
+          "bytes": 62880,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/statyny-nordic-walking-udo.webp",
+          "sha256": "eca12b7c6ae2b883376f4bc883972b55ed21353d5e8fb95875a60acc2cc0ffa7",
+          "bytes": 94002,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/statyny-nordic-walking-udo.jpg",
+          "sha256": "6c189cf91f87727188ac6d64d096a5d906ed5f8ae1db7034d3bb75cb8098438c",
+          "bytes": 253697,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e8b0eb49128079475d882d5f447ae1578f6c2176a62b677abd9e4ac706a1da4b"
+    },
+    {
+      "placement": "content:3:jak-odroznic-prawdziwe-sams-od-efektu-nocebo",
+      "role": "content",
+      "heading": "Jak odróżnić prawdziwe SAMS od efektu nocebo?",
+      "context": "Wpisujesz w Google „statyny po 50 skutki uboczne” i po pięciu minutach jesteś pewien, że twoje łydki właśnie się rozpadają. Znam to. Sąsiad odstawił, szwagier odstawił, forum krzyczy. Problem jest prawdziwy, ale dużo mniejszy, niż wygląda – i zamiast zgadywać, można go sprawdzić. Szybka odpowiedź W dużych badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie wynikało z leku. Nie odstawiaj go sam: jeśli ból jest silny, mięśnie słabną albo mocz ciemnieje, pilnie skontaktuj się z lekarzem i zbadaj CK. Koenzym Q10 nie ma mocnych dowodów, a przy prawdziwej nietolerancji są inne leki. Kluczowe wnioski W badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie było spowodowanych samym lekiem. Nie odstawiaj statyny sam; silne osłabienie, gorączka lub ciemny mocz wyma",
+      "alt": "Wykres słupkowy: nasilenie objawów 8,0 bez tabletek, 15,4 na placebo i 16,3 na statynie w badaniu SAMSON",
+      "caption": "W badaniu SAMSON objawy na placebo były prawie tak silne jak na statynie: 15,4 wobec 16,3 punktu w skali 0–100.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/statyny-samson-wykres-objawow.avif",
+          "sha256": "6fcb32db3e77e74ea86c51f8a33374001c09a291f2d0935a7e3f9b848df7166a",
+          "bytes": 13508,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/statyny-samson-wykres-objawow.webp",
+          "sha256": "dbaff876e85943ab48f35aec5ab0f7457ce4ac87146fff39336cf8c54cb383c4",
+          "bytes": 16138,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/statyny-samson-wykres-objawow.jpg",
+          "sha256": "3b682f9a0e43cd4fb7021b343d24df6d0b7581f7a77e72c4006bcdfcb373a257",
+          "bytes": 39315,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "471ba49e8d18422bf7ed8f94f9c34e98f3545a77c6f1862ac0b5b9d77ef06126"
+    },
+    {
+      "placement": "content:4:czy-bol-nog-po-statynie-to-powod-by-od-razu-odst",
+      "role": "content",
+      "heading": "Czy ból nóg po statynie to powód, by od razu odstawić lek?",
+      "context": "Wpisujesz w Google „statyny po 50 skutki uboczne” i po pięciu minutach jesteś pewien, że twoje łydki właśnie się rozpadają. Znam to. Sąsiad odstawił, szwagier odstawił, forum krzyczy. Problem jest prawdziwy, ale dużo mniejszy, niż wygląda – i zamiast zgadywać, można go sprawdzić. Szybka odpowiedź W dużych badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie wynikało z leku. Nie odstawiaj go sam: jeśli ból jest silny, mięśnie słabną albo mocz ciemnieje, pilnie skontaktuj się z lekarzem i zbadaj CK. Koenzym Q10 nie ma mocnych dowodów, a przy prawdziwej nietolerancji są inne leki. Kluczowe wnioski W badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie było spowodowanych samym lekiem. Nie odstawiaj statyny sam; silne osłabienie, gorączka lub ciemny mocz wyma",
+      "alt": "Mężczyzna po sześćdziesiątce pokazuje lekarce notatki w telefonie w jasnym gabinecie",
+      "caption": "Silne osłabienie mięśni, gorączka albo ciemny mocz to powód do pilnego kontaktu z lekarzem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/statyny-gabinet-rozmowa.avif",
+          "sha256": "c9a8f4d1e6a60381218fd81e987d0a07c432dd177b135699622d7c279f6b3bd2",
+          "bytes": 45727,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/statyny-gabinet-rozmowa.webp",
+          "sha256": "67be291d86089a4b71b80491a9acda749dd5530f90d1e3c2a5fc6d69b212766b",
+          "bytes": 61724,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/statyny-gabinet-rozmowa.jpg",
+          "sha256": "c6a8fd02c94ab39f53cfbe9d2747407db95c3ba2852257ef045d20d48b81a76e",
+          "bytes": 197655,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "45438193c0a190c9fa7d2de93f1ce5447d8dc8e99bca926aa86cf5394f41fa0e"
+    },
+    {
+      "placement": "content:5:jakie-badania-krwi-zrobic-gdy-bola-miesnie-na-st",
+      "role": "content",
+      "heading": "Jakie badania krwi zrobić, gdy bolą mięśnie na statynie?",
+      "context": "Wpisujesz w Google „statyny po 50 skutki uboczne” i po pięciu minutach jesteś pewien, że twoje łydki właśnie się rozpadają. Znam to. Sąsiad odstawił, szwagier odstawił, forum krzyczy. Problem jest prawdziwy, ale dużo mniejszy, niż wygląda – i zamiast zgadywać, można go sprawdzić. Szybka odpowiedź W dużych badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie wynikało z leku. Nie odstawiaj go sam: jeśli ból jest silny, mięśnie słabną albo mocz ciemnieje, pilnie skontaktuj się z lekarzem i zbadaj CK. Koenzym Q10 nie ma mocnych dowodów, a przy prawdziwej nietolerancji są inne leki. Kluczowe wnioski W badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie było spowodowanych samym lekiem. Nie odstawiaj statyny sam; silne osłabienie, gorączka lub ciemny mocz wyma",
+      "alt": "Probówka z krwią z napisem CK w statywie laboratoryjnym, w tle dłoń pielęgniarki",
+      "caption": "Kinazę kreatynową lepiej oznaczać, gdy mięśnie nie są świeżo po ciężkim wysiłku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/statyny-probowka-ck-makro.avif",
+          "sha256": "3374ee8414350d199d5d39781aac575ad02229fbedb7ac2daae8a6202af3cdb4",
+          "bytes": 25860,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/statyny-probowka-ck-makro.webp",
+          "sha256": "5020f920a6afefaa33b7d8f906343d4c945c2db7d0177ffde4d1952fab7d6527",
+          "bytes": 33170,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/statyny-probowka-ck-makro.jpg",
+          "sha256": "555cc048a565c1bfaaf1bbe3b8c6ee43cf561988e9432c98a52b644044c40f08",
+          "bytes": 126603,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "359d0bf5198a85eee79b56c8ba791fd24843258b85414c8775386a396aef1a36"
+    },
+    {
+      "placement": "content:6:czy-koenzym-q10-likwiduje-skutki-uboczne-statyn",
+      "role": "content",
+      "heading": "Czy koenzym Q10 likwiduje skutki uboczne statyn?",
+      "context": "Wpisujesz w Google „statyny po 50 skutki uboczne” i po pięciu minutach jesteś pewien, że twoje łydki właśnie się rozpadają. Znam to. Sąsiad odstawił, szwagier odstawił, forum krzyczy. Problem jest prawdziwy, ale dużo mniejszy, niż wygląda – i zamiast zgadywać, można go sprawdzić. Szybka odpowiedź W dużych badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie wynikało z leku. Nie odstawiaj go sam: jeśli ból jest silny, mięśnie słabną albo mocz ciemnieje, pilnie skontaktuj się z lekarzem i zbadaj CK. Koenzym Q10 nie ma mocnych dowodów, a przy prawdziwej nietolerancji są inne leki. Kluczowe wnioski W badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie było spowodowanych samym lekiem. Nie odstawiaj statyny sam; silne osłabienie, gorączka lub ciemny mocz wyma",
+      "alt": "Kolaż z kapsułkami suplementu i dużym papierowym znakiem zapytania na stole",
+      "caption": "Koenzym Q10 dał w metaanalizach sprzeczne wyniki, więc nie jest pewnym lekiem na ból po statynach.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/statyny-koenzym-q10-kolaz.avif",
+          "sha256": "6de9ef59f71baca22e31f5ca2ddce28c9466af643f9b915ca2e82af0ce0b7ee5",
+          "bytes": 83309,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/statyny-koenzym-q10-kolaz.webp",
+          "sha256": "70c70e3d36b7de03736419d4df50a93ed1c2271487db52aec57ffa1c521d19be",
+          "bytes": 136412,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/statyny-koenzym-q10-kolaz.jpg",
+          "sha256": "d19722385f2a683d043f18d9fce9ff28dde4d32ed1dbbba8720f053368623735",
+          "bytes": 340767,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e60ebf7449acbcd48dc30a4874907083596d98f368d5c7c85ada47f96cfef29e"
+    },
+    {
+      "placement": "content:7:czym-zastapic-statyny-gdy-naprawde-ich-nie-toler",
+      "role": "content",
+      "heading": "Czym zastąpić statyny, gdy naprawdę ich nie tolerujesz?",
+      "context": "Wpisujesz w Google „statyny po 50 skutki uboczne” i po pięciu minutach jesteś pewien, że twoje łydki właśnie się rozpadają. Znam to. Sąsiad odstawił, szwagier odstawił, forum krzyczy. Problem jest prawdziwy, ale dużo mniejszy, niż wygląda – i zamiast zgadywać, można go sprawdzić. Szybka odpowiedź W dużych badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie wynikało z leku. Nie odstawiaj go sam: jeśli ból jest silny, mięśnie słabną albo mocz ciemnieje, pilnie skontaktuj się z lekarzem i zbadaj CK. Koenzym Q10 nie ma mocnych dowodów, a przy prawdziwej nietolerancji są inne leki. Kluczowe wnioski W badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie było spowodowanych samym lekiem. Nie odstawiaj statyny sam; silne osłabienie, gorączka lub ciemny mocz wyma",
+      "alt": "Para po pięćdziesiątce czyta ulotkę leku przy ladzie w jasnej aptece",
+      "caption": "Przy prawdziwej nietolerancji statyn są inne leki obniżające LDL o udowodnionym działaniu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/statyny-apteka-para-ulotka.avif",
+          "sha256": "dce3e9509f9fdd17d5d698f8a14e524de5b3ff24cbbee83f51f2b5c65d8c26e1",
+          "bytes": 46790,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/statyny-apteka-para-ulotka.webp",
+          "sha256": "359aa2230b874621f37bb2affe4cff9ebe2641c0220df45cc1291b5e50b801be",
+          "bytes": 63944,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/statyny-apteka-para-ulotka.jpg",
+          "sha256": "b2a177e0d9131d1ca0bd8717a36252d8e6a849c708507e6fda8e1c499227050c",
+          "bytes": 200469,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "2a6c97a320cd7b502dcdd2de6af9da8a74361510001b1c9611fc8b1e022db12d"
+    },
+    {
+      "placement": "content:8:jak-zapisac-objawy-po-statynie-i-co-zrobic-krok-",
+      "role": "content",
+      "heading": "Jak zapisać objawy po statynie i co zrobić krok po kroku?",
+      "context": "Wpisujesz w Google „statyny po 50 skutki uboczne” i po pięciu minutach jesteś pewien, że twoje łydki właśnie się rozpadają. Znam to. Sąsiad odstawił, szwagier odstawił, forum krzyczy. Problem jest prawdziwy, ale dużo mniejszy, niż wygląda – i zamiast zgadywać, można go sprawdzić. Szybka odpowiedź W dużych badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie wynikało z leku. Nie odstawiaj go sam: jeśli ból jest silny, mięśnie słabną albo mocz ciemnieje, pilnie skontaktuj się z lekarzem i zbadaj CK. Koenzym Q10 nie ma mocnych dowodów, a przy prawdziwej nietolerancji są inne leki. Kluczowe wnioski W badaniach z placebo ponad 90% bólów mięśni zgłaszanych na statynie nie było spowodowanych samym lekiem. Nie odstawiaj statyny sam; silne osłabienie, gorączka lub ciemny mocz wyma",
+      "alt": "Kobieta po pięćdziesiątce zapisuje objawy po statynie i listę leków w zeszycie na balkonie",
+      "caption": "Zapisane objawy po statynie, wysiłek i lista leków ułatwiają lekarzowi ocenę dolegliwości.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/statyny-notatki-balkon.avif",
+          "sha256": "4f049b9ec5d66e2b988dabfab5e8e1550d123ffbf9da168a3c253d3f153a53a4",
+          "bytes": 88662,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/statyny-notatki-balkon.webp",
+          "sha256": "5547f1c696278d9af20b5f390108887f7e87ddeeac3351f03cbbdbfd405eb6e1",
+          "bytes": 137202,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/statyny-notatki-balkon.jpg",
+          "sha256": "7cac1aa8aead5e316130a6d751ca64762d6f054b070fdfe66d8395e184d61e4d",
+          "bytes": 339787,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "82fd9cdaee252845819c03b76c040e6bcff73e574e99ffbd7cc98665a9c55cf4"
+    }
+  ],
+  "pdf": {
+    "pages": 8,
+    "text_coverage": 1,
+    "rendered_pages": 8,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/pdf-pages/page-1.png",
+        "sha256": "aab6892452c668191fbd61f254330fda321d3193fe2e47e9c255bad8be52b266",
+        "bytes": 790880,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1065,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/pdf-pages/page-2.png",
+        "sha256": "8368af682ea46f00a58076e946d473199352274929761d2f0648f5be7689271a",
+        "bytes": 738816,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1059,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/pdf-pages/page-3.png",
+        "sha256": "00bc7de1d462453990f4c65b84f492b1cd4bd5c074db19192fbe6dff8f4c7e99",
+        "bytes": 285274,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1062,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/pdf-pages/page-4.png",
+        "sha256": "37005e1eef342d601ca3c02cba09a52c8d4b1e12078d4df5d2b094cc23e18ea5",
+        "bytes": 632946,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/pdf-pages/page-5.png",
+        "sha256": "bd6879cb6c21fcebfbbd77e6d0600bfcadea1298d95e63f7469191cf7794f320",
+        "bytes": 890309,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1056,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/pdf-pages/page-6.png",
+        "sha256": "a115a4a6fcf17a1a089ba397ec92ef8ff4dd01b6947cdc6927ceadd9ce59a2fa",
+        "bytes": 667520,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 58,
+          "width": 1054,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/pdf-pages/page-7.png",
+        "sha256": "c9416408f1967d082d9b3b0ad7a80f090ec2d246d21a20d7bcfaa62720d12775",
+        "bytes": 754597,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 69,
+          "width": 1047,
+          "height": 1581
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck/pdf-pages/page-8.png",
+        "sha256": "d84e04e621fcbfde96231fefca4117db3343ccbb1aa7549945aad58545b7a54e",
+        "bytes": 323956,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 51,
+          "y": 58,
+          "width": 1077,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-17T14:36:00+02:00",
+    "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "70f68e3552ae7017b4b382e8ecb245d2490a7f1f7ddfdea0e959c1892910c68c",
+        "note": "Pełny render desktop obejrzany od nagłówka do stopki: układ jest spójny, tekst czytelny, obrazy i tabela nie wychodzą poza kontener."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "833c354ea61722225201c01fbfc04896d7e1380307f173555d8a2d3370be1b4e",
+        "note": "Pełny render mobile obejrzany od nagłówka do stopki: brak poziomego przepełnienia, ucięć, kolizji i zbyt małych elementów treści."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "ad0e32d126f07855485aed5f3f7df5ceefa4f0af74d604ebd6d8173183c18b8e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "INCIDENTAL_ENVIRONMENT",
+          "transcription": "MON, TUE, WED, THU, FRI",
+          "claims_or_numbers_present": false
+        },
+        "note": "Hero obejrzany: naturalna scena rozciągania nogi przy organizerze leków, prawidłowa anatomia i brak mylących marek.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T14:36:00+02:00",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+      },
+      {
+        "placement": "content:2:czy-statyny-naprawde-powoduja-bole-miesni",
+        "inventory_sha256": "e8b0eb49128079475d882d5f447ae1578f6c2176a62b677abd9e4ac706a1da4b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany: kobieta z kijkami w ruchu pasuje do różnicowania bólu po wysiłku; anatomia i sprzęt są wiarygodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T14:36:00+02:00",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+      },
+      {
+        "placement": "content:3:jak-odroznic-prawdziwe-sams-od-efektu-nocebo",
+        "inventory_sha256": "471ba49e8d18422bf7ed8f94f9c34e98f3545a77c6f1862ac0b5b9d77ef06126",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Nasilenie objawów mięśniowych; Statyna 16.3; Placebo 15.4; Bez tabletek 8.0",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pubmed.ncbi.nlm.nih.gov/34531021/"
+          ]
+        },
+        "note": "Wykres obejrzany: wszystkie trzy etykiety i wartości są czytelne oraz zgodne z wynikami badania SAMSON cytowanymi w artykule.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T14:36:00+02:00",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+      },
+      {
+        "placement": "content:4:czy-bol-nog-po-statynie-to-powod-by-od-razu-odst",
+        "inventory_sha256": "45438193c0a190c9fa7d2de93f1ce5447d8dc8e99bca926aa86cf5394f41fa0e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany: rozmowa pacjenta z lekarką pasuje do sekcji alarmowej; brak błędów anatomii, sprzętu i czytelnych danych.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T14:36:00+02:00",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+      },
+      {
+        "placement": "content:5:jakie-badania-krwi-zrobic-gdy-bola-miesnie-na-st",
+        "inventory_sha256": "359d0bf5198a85eee79b56c8ba791fd24843258b85414c8775386a396aef1a36",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Etykieta: CK",
+          "claims_or_numbers_present": false,
+          "matches_article_claims": true
+        },
+        "note": "Obraz obejrzany: probówka z oznaczeniem CK jest czytelna i trafna dla sekcji o badaniach; brak mylących liczb i marek.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T14:36:00+02:00",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+      },
+      {
+        "placement": "content:6:czy-koenzym-q10-likwiduje-skutki-uboczne-statyn",
+        "inventory_sha256": "e60ebf7449acbcd48dc30a4874907083596d98f368d5c7c85ada47f96cfef29e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany: kapsułki i znak zapytania jasno pokazują niepewność dowodów dla Q10; brak napisów, marek i błędów anatomii.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T14:36:00+02:00",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+      },
+      {
+        "placement": "content:7:czym-zastapic-statyny-gdy-naprawde-ich-nie-toler",
+        "inventory_sha256": "2a6c97a320cd7b502dcdd2de6af9da8a74361510001b1c9611fc8b1e022db12d",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany: para czyta ulotkę w aptece, co pasuje do omawiania alternatyw leczenia; brak czytelnych marek i reklam.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T14:36:00+02:00",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+      },
+      {
+        "placement": "content:8:jak-zapisac-objawy-po-statynie-i-co-zrobic-krok-",
+        "inventory_sha256": "82fd9cdaee252845819c03b76c040e6bcff73e574e99ffbd7cc98665a9c55cf4",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obraz obejrzany: notowanie objawów na balkonie pasuje do planu działania; notatki są nieczytelne i nie ujawniają danych.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-17T14:36:00+02:00",
+        "review_method": "Rzeczywiste obejrzenie pełnych renderów desktop 1440 px, mobile 390 px, wszystkich 8 obrazów oraz wszystkich 8 stron PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "aab6892452c668191fbd61f254330fda321d3193fe2e47e9c255bad8be52b266",
+        "note": "Strona 1/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "8368af682ea46f00a58076e946d473199352274929761d2f0648f5be7689271a",
+        "note": "Strona 2/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "00bc7de1d462453990f4c65b84f492b1cd4bd5c074db19192fbe6dff8f4c7e99",
+        "note": "Strona 3/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "37005e1eef342d601ca3c02cba09a52c8d4b1e12078d4df5d2b094cc23e18ea5",
+        "note": "Strona 4/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "bd6879cb6c21fcebfbbd77e6d0600bfcadea1298d95e63f7469191cf7794f320",
+        "note": "Strona 5/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "a115a4a6fcf17a1a089ba397ec92ef8ff4dd01b6947cdc6927ceadd9ce59a2fa",
+        "note": "Strona 6/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "c9416408f1967d082d9b3b0ad7a80f090ec2d246d21a20d7bcfaa62720d12775",
+        "note": "Strona 7/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "d84e04e621fcbfde96231fefca4117db3343ccbb1aa7549945aad58545b7a54e",
+        "note": "Strona 8/8 obejrzana w pełnej rozdzielczości: tekst, nagłówki, obrazy i marginesy są czytelne; brak ucięć oraz przypadkowych podziałów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 8022,
+    "review_wait_ms": 296746
+  },
+  "errors": []
+}
