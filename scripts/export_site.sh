@@ -102,7 +102,7 @@ rsync -a \
   --exclude=".openai/" \
   --exclude=".tmp/" \
   --exclude="/.venv/" \
-  --exclude="**pycache**/" \
+  --exclude="__pycache__/" \
   --exclude="/output/" \
   --exclude=".githooks/" \
   --exclude=".clinerules" \
