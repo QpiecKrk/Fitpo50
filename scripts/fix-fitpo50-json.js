@@ -5,6 +5,7 @@ const path = require('path');
 const { POLICY, validators } = require('./lib/article-policy');
 const { CATEGORY_LANDING_PAGES, isSupportedCategory, normalizeCategory } = require('./lib/categories');
 const { collectArticleFragments, fragmentNeedsEvidence, isMedicalArticle } = require('./lib/article-evidence');
+const { normalizeSectionRole } = require('./lib/article-section-contract');
 
 function toLocalIsoDate(date = new Date()) {
   const y = date.getFullYear();
@@ -14,6 +15,56 @@ function toLocalIsoDate(date = new Date()) {
 }
 
 const TODAY = toLocalIsoDate();
+
+function requiredImagePromptPlacements(sections) {
+  return new Set([
+    'hero',
+    ...(Array.isArray(sections) ? sections
+      .map((section, index) => (normalizeSectionRole(section?.section_role) === 'utility' ? '' : `sekcja-${index + 1}`))
+      .filter(Boolean) : []),
+  ]);
+}
+
+function addImagePromptEvidenceClaims(json, promptKey) {
+  const prompts = Array.isArray(json?.[promptKey]) ? json[promptKey] : [];
+  const claims = Array.isArray(json?.evidence_claims) ? json.evidence_claims : [];
+  const existingLocations = new Set(claims.map((claim) => String(claim?.location || '').trim()));
+  const sourceUrls = new Set((Array.isArray(json?.sources) ? json.sources : []).map((source) => String(source?.url || '').trim()).filter(Boolean));
+  prompts.forEach((prompt, promptIndex) => {
+    const evidenceUrls = (Array.isArray(prompt?.evidence_source_urls) ? prompt.evidence_source_urls : [])
+      .map((url) => String(url || '').trim())
+      .filter((url) => sourceUrls.has(url));
+    if (!evidenceUrls.length) return;
+    ['alt_pl', 'caption_pl', 'overlay_text_pl'].forEach((field) => {
+      const location = `${promptKey}[${promptIndex}].${field}`;
+      const text = String(prompt?.[field] || '').replace(/\s+/g, ' ').trim();
+      const needsEvidence = fragmentNeedsEvidence({ text }, isMedicalArticle(json)) || /\d/u.test(text);
+      if (!text || existingLocations.has(location) || !needsEvidence) return;
+      const claimType = /\b(zawał|depresj|insulin|ryzyk|sen|zasypian|medyczn)\b/iu.test(text)
+        ? 'medical'
+        : (/\d|%|\b(?:rr|or|ci)\b/iu.test(text) ? 'statistic' : 'general');
+      claims.push({ claim: text, location, claim_type: claimType, source_urls: evidenceUrls, note: '' });
+      existingLocations.add(location);
+    });
+    const sectionMatch = String(prompt?.section_ref || '').match(/^sekcja-(\d+)$/);
+    const sectionIndex = sectionMatch ? Number(sectionMatch[1]) - 1 : -1;
+    const sectionImage = sectionIndex >= 0 ? json?.sections?.[sectionIndex]?.image : null;
+    if (sectionImage && typeof sectionImage === 'object') {
+      ['alt', 'caption'].forEach((field) => {
+        const location = `sections[${sectionIndex}].image.${field}`;
+        const text = String(sectionImage[field] || '').replace(/\s+/g, ' ').trim();
+        if (!text || existingLocations.has(location)) return;
+        const claimType = /\b(zawał|depresj|insulin|ryzyk|sen|zasypian|medyczn)\b/iu.test(text)
+          ? 'medical'
+          : (/\d|%|\b(?:rr|or|ci)\b/iu.test(text) ? 'statistic' : 'general');
+        claims.push({ claim: text, location, claim_type: claimType, source_urls: evidenceUrls, note: '' });
+        existingLocations.add(location);
+      });
+    }
+  });
+  json.evidence_claims = claims;
+  return claims;
+}
 function parseArgs(argv) {
   const out = { write: false, allowOutsideRepo: false, check: false };
   for (let i = 0; i < argv.length; i += 1) {
@@ -69,6 +120,10 @@ function normalizeFaqResearch(items) {
       url_status: String((r && (r.url_status || r.urlStatus)) || '').trim(),
       http_status: Number((r && (r.http_status || r.httpStatus)) || 0) || 0,
       final_url: String((r && (r.final_url || r.finalUrl)) || '').trim(),
+      ...(r?.intent_verified === true ? { intent_verified: true } : {}),
+      ...(String(r?.verified_suggestion || '').trim()
+        ? { verified_suggestion: stripTags(String(r.verified_suggestion)).replace(/\s+/g, ' ').trim() }
+        : {}),
     }))
     .filter((r) => r.question && r.source_label && /^https:\/\//i.test(r.source_url));
 }
@@ -308,19 +363,20 @@ function legacyLocationToPath(location, sections) {
   return `sections[${sectionIndex}].paragraphs_html[${paragraphIndex}]`;
 }
 
-function normalizeEvidenceClaims(claims, sources, sections) {
+function normalizeEvidenceClaims(claims, sources, json) {
+  const sections = Array.isArray(json?.sections) ? json.sections : [];
   const sourceById = new Map(sources.map((source) => [String(source.id || '').trim(), source.url]).filter(([id, url]) => id && url));
+  const fragmentByLocation = new Map(collectArticleFragments(json).map((fragment) => [fragment.location, fragment.text]));
   return (Array.isArray(claims) ? claims : []).map((claim) => {
-    const location = legacyLocationToPath(claim?.location, sections);
-    const locationMatch = location.match(/^sections\[(\d+)\]\.paragraphs_html\[(\d+)\]$/);
-    const fragment = locationMatch
-      ? sections[Number(locationMatch[1])]?.paragraphs_html?.[Number(locationMatch[2])]
-      : '';
+    const rawLocation = String(claim?.location || '').trim();
+    const location = fragmentByLocation.has(rawLocation) ? rawLocation : legacyLocationToPath(rawLocation, sections);
+    const fragment = fragmentByLocation.get(location) || '';
+    const isLegacyLocation = Boolean(location && location !== rawLocation);
     const sourceUrls = Array.isArray(claim?.source_urls) && claim.source_urls.length
       ? claim.source_urls
       : (Array.isArray(claim?.sources) ? claim.sources.map((id) => sourceById.get(String(id || '').trim())).filter(Boolean) : []);
     return {
-      claim: locationMatch ? firstEvidenceSentence(fragment) : stripTags(String(claim?.claim || '')).trim(),
+      claim: isLegacyLocation ? firstEvidenceSentence(fragment) : stripTags(String(claim?.claim || '')).trim(),
       location,
       claim_type: String(claim?.claim_type || claim?.claimType || inferClaimType(fragment)).trim().toLowerCase(),
       source_urls: [...new Set(sourceUrls)],
@@ -426,31 +482,24 @@ function validate(json) {
   if (!Array.isArray(json.sections) || json.sections.length === 0) {
     errors.push('sections musi zawierać co najmniej jeden merytoryczny blok wynikający z intencji artykułu');
   }
-  const qaWords = wordCount(stripTags(String(json.quick_answer || '')));
-  if (qaWords < 40 || qaWords > 60) {
-    errors.push(`quick_answer poza zakresem 40-60 słów (jest ${qaWords})`);
-  }
+  const quickAnswerValidation = validators.validateQuickAnswer(json.quick_answer || '', { mode: 'strict' });
+  errors.push(...quickAnswerValidation.errors.map((error) => `quick_answer: ${error}`));
   if (Array.isArray(json.sections)) {
     for (let i = 0; i < json.sections.length; i += 1) {
+      if (normalizeSectionRole(json.sections[i]?.section_role) === 'utility') continue;
       const title = String(json.sections[i]?.title || '').trim();
       if (!title.endsWith('?')) {
         errors.push(`sections[${i}].title musi być pytaniem zakończonym "?".`);
       }
     }
   }
-  if (!Array.isArray(json.sources) || json.sources.length < 4) {
-    errors.push(`sources < 4 (jest ${Array.isArray(json.sources) ? json.sources.length : 0})`);
-  }
-  if (!Array.isArray(json.answer_blocks) || json.answer_blocks.length < 4) {
-    errors.push(`answer_blocks < 4 (jest ${Array.isArray(json.answer_blocks) ? json.answer_blocks.length : 0})`);
+  if (!Array.isArray(json.sources) || json.sources.length < POLICY.WORDS.CITATION_MIN_URLS) {
+    errors.push(`sources < ${POLICY.WORDS.CITATION_MIN_URLS} (jest ${Array.isArray(json.sources) ? json.sources.length : 0})`);
   }
   const prompts = Array.isArray(json.image_prompts_v4) && json.image_prompts_v4.length
     ? json.image_prompts_v4
     : (Array.isArray(json.image_prompts) ? json.image_prompts : []);
-  const requiredPlacements = new Set([
-    'hero',
-    ...(Array.isArray(json.sections) ? json.sections.map((_, index) => `sekcja-${index + 1}`) : []),
-  ]);
+  const requiredPlacements = requiredImagePromptPlacements(json.sections);
   const actualPlacements = new Set(prompts.map((prompt) => String(prompt?.section_ref || '').trim().toLowerCase()));
   const missingPlacements = [...requiredPlacements].filter((placement) => !actualPlacements.has(placement));
   if (missingPlacements.length) errors.push(`image_prompts nie obejmuje wymaganych placementów: ${missingPlacements.join(', ')}.`);
@@ -546,7 +595,9 @@ function main() {
   const sections = Array.isArray(json.sections) ? json.sections : [];
   json.sections = sections.map((s) => {
     const section = (s && typeof s === 'object') ? s : {};
-    const title = ensureQuestionHeading(stripTags(String(section.title || section.heading || '')).trim());
+    const sectionRole = normalizeSectionRole(section.section_role);
+    const rawTitle = stripTags(String(section.title || section.heading || '')).trim();
+    const title = sectionRole === 'utility' ? rawTitle : ensureQuestionHeading(rawTitle);
     const paragraphsRaw = Array.isArray(section.paragraphs_html)
       ? section.paragraphs_html
       : htmlToParagraphs(section.content_html || '');
@@ -569,6 +620,7 @@ function main() {
     const images = (Array.isArray(section.images) ? section.images : []).map(normalizeSectionImage).filter((item) => item.src);
     const normalizedSection = {
       title,
+      section_role: sectionRole,
       paragraphs_html: paragraphs,
       list_items: listItems.map((x) => stripTags(String(x || '')).trim()).filter(Boolean),
       evidence_source_ids: [...new Set((Array.isArray(section.evidence_source_ids) ? section.evidence_source_ids : []).map((id) => String(id || '').trim()).filter(Boolean))],
@@ -596,7 +648,7 @@ function main() {
 
   json.sources = dedupeSources(Array.isArray(json.sources) ? json.sources : []);
 
-  json.evidence_claims = normalizeEvidenceClaims(json.evidence_claims, json.sources, json.sections);
+  json.evidence_claims = normalizeEvidenceClaims(json.evidence_claims, json.sources, json);
   json.evidence_claims = expandEvidenceClaims(json);
 
   json.faq_research = normalizeFaqResearch(json.faq_research);
@@ -632,6 +684,12 @@ function main() {
     p.alt_pl = String(p.alt_pl || '').trim();
     p.caption_pl = String(p.caption_pl || '').trim();
     p.overlay_text_pl = String(p.overlay_text_pl || '').trim();
+    p.season_and_time = String(p.season_and_time || '').trim();
+    p.mood = String(p.mood || '').trim();
+    p.evidence_source_urls = Array.isArray(p.evidence_source_urls)
+      ? [...new Set(p.evidence_source_urls.map((url) => String(url || '').trim()).filter(Boolean))]
+      : [];
+    p.requires_exact_data_render = p.requires_exact_data_render === true;
     p.negative_prompt = String(p.negative_prompt || '').trim();
     if (p.visual_review && typeof p.visual_review === 'object') {
       p.visual_review = {
@@ -649,6 +707,7 @@ function main() {
     }
   }
   json[promptKey] = mapped;
+  addImagePromptEvidenceClaims(json, promptKey);
 
   const hero = mapped.find((p) => p.section_ref === 'hero');
   if (hero?.filename_base) {
@@ -686,4 +745,11 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { ensureParagraphWrapper, normalizeFaqResearch, normalizeImagePromptSectionRef };
+module.exports = {
+  ensureParagraphWrapper,
+  normalizeFaqResearch,
+  normalizeImagePromptSectionRef,
+  normalizeSectionRole,
+  requiredImagePromptPlacements,
+  addImagePromptEvidenceClaims,
+};

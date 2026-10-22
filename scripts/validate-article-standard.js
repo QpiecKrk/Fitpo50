@@ -54,8 +54,12 @@ function firstMeaningfulTag(sectionHtml) {
   };
 }
 
+function isUtilityHeadingAttributes(attributes) {
+  return /\bdata-section-role\s*=\s*["']utility["']/i.test(String(attributes || ''));
+}
+
 function validateAnswerFirstParagraphs(raw, errors) {
-  const h2Rx = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
+  const h2Rx = /<h2([^>]*)>([\s\S]*?)<\/h2>/gi;
   const h2s = [...raw.matchAll(h2Rx)];
 
   let checked = 0;
@@ -63,7 +67,7 @@ function validateAnswerFirstParagraphs(raw, errors) {
   for (let i = 0; i < h2s.length; i += 1) {
     const current = h2s[i];
     const next = h2s[i + 1];
-    if (validators.isSkippedH2Title(current[1])) continue;
+    if (isUtilityHeadingAttributes(current[1]) || validators.isSkippedH2Title(current[2])) continue;
     eligibleHeadings += 1;
 
     const sectionStart = current.index + current[0].length;
@@ -71,20 +75,20 @@ function validateAnswerFirstParagraphs(raw, errors) {
     const sectionHtml = raw.slice(sectionStart, sectionEnd);
     const firstTag = firstMeaningfulTag(sectionHtml);
     if (!firstTag) {
-      errors.push(`Sekcja "${utils.stripTags(current[1])}" nie zawiera bezpośredniej odpowiedzi po H2.`);
+      errors.push(`Sekcja "${utils.stripTags(current[2])}" nie zawiera bezpośredniej odpowiedzi po H2.`);
       continue;
     }
     if (firstTag.tag !== 'p') {
-      errors.push(`Sekcja "${utils.stripTags(current[1])}": pierwszy istotny element po H2 to <${firstTag.tag}>, a odpowiedź answer-first musi zaczynać się od <p>.`);
+      errors.push(`Sekcja "${utils.stripTags(current[2])}": pierwszy istotny element po H2 to <${firstTag.tag}>, a odpowiedź answer-first musi zaczynać się od <p>.`);
       continue;
     }
     const pMatch = firstTag.html.match(/^<p\b[^>]*>([\s\S]*?)<\/p>/i);
     if (!pMatch) {
-      errors.push(`Sekcja "${utils.stripTags(current[1])}" nie zawiera akapitu otwierającego <p>.`);
+      errors.push(`Sekcja "${utils.stripTags(current[2])}" nie zawiera akapitu otwierającego <p>.`);
       continue;
     }
     checked += 1;
-    const res = validators.validateAnswerFirstParagraph(pMatch[1], { label: `Sekcja "${utils.stripTags(current[1])}"` });
+    const res = validators.validateAnswerFirstParagraph(pMatch[1], { label: `Sekcja "${utils.stripTags(current[2])}"` });
     if (!res.ok) {
       errors.push(...res.errors);
     }
@@ -216,9 +220,10 @@ function validateHeroShareContract(raw, errors) {
 }
 
 function validateQuestionHeadings(articleContentHtml, errors) {
-  const h2Rx = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
+  const h2Rx = /<h2([^>]*)>([\s\S]*?)<\/h2>/gi;
   for (const m of articleContentHtml.matchAll(h2Rx)) {
-    const titleRaw = utils.stripTags(m[1]);
+    if (isUtilityHeadingAttributes(m[1])) continue;
+    const titleRaw = utils.stripTags(m[2]);
     const res = validators.validateH2Title(titleRaw);
     if (!res.ok) {
       errors.push(res.error);
@@ -692,8 +697,8 @@ function validateFile(filePath) {
     validateRepeatedLongSentences(articleContentHtml, errors);
     validateBannedEditorialPhrases(articleContentHtml, errors);
     const internalLinks = utils.countInternalHtmlLinks(stripFaqBlock(articleContentHtml));
-    if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_MIN) {
-      errors.push(`Za mało linków kontekstowych w treści: ${internalLinks}/${POLICY.WORDS.INTERNAL_LINKS_MIN}.`);
+    if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) {
+      warnings.push(`Mało linków kontekstowych w treści: ${internalLinks}; to ostrzeżenie, nie bloker.`);
     }
     validateAnswerFirstParagraphs(articleContentHtml, errors);
   }
@@ -747,7 +752,9 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {
+  validateAnswerFirstParagraphs,
   validateArticleTables,
+  validateQuestionHeadings,
   validateSourcesListMarkup,
   validateUnlinkedArticlePrompts,
   validateFile,

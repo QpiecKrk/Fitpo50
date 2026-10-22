@@ -62,7 +62,7 @@ Dodatkowo według zadania:
 To jedno polecenie użytkownika uruchamia kanoniczne `article:add`. Użytkownik przekazuje JSON i obrazy; nie musi pamiętać komend pośrednich. Wewnątrz pozostają dwie bezpiecznie rozdzielone fazy:
 
 1. Szybkie `popraw-json`: `DRAFT` → `CONTENT_READY`, bez tworzenia HTML. Najpierw logika, źródła, intencja i preflight samej treści; potem kontrola podpisów/obrazów i brakujące warianty mediów; na końcu ponowne domknięcie dowodów dla podpisów oraz bramka kompletnego JSON-u.
-   Draft dla Claude można tworzyć skillem `docs/skills/fitpo50-article-draft/`; jego walidacja potwierdza tylko strukturę `DRAFT`. FAQ bez rzeczywistego sygnału pozostaje luką do udokumentowanego researchu lokalnego, nigdy automatycznym dopiskiem.
+   Draft dla Claude można tworzyć skillem `docs/skills/fitpo50-article-draft/`; jego walidacja potwierdza tylko strukturę `DRAFT`. Claude może dostarczyć FAQ tylko z rzeczywistym sygnałem zapisanym 1:1 w `faq_research`; lokalny pipeline zawsze ponownie sprawdza ten sygnał. Brak FAQ pozostaje prawidłowy, jeśli research nie znalazł rzeczywistych pytań.
 2. Lokalna intencja, kanibalizacja, minimum 4 prawdziwe linki i propozycja centrum.
 3. Rzeczywista kontrola obrazów oraz manifest AVIF/WebP/JPG.
 4. Transakcyjny staging HTML i PDF.
@@ -72,7 +72,7 @@ To jedno polecenie użytkownika uruchamia kanoniczne `article:add`. Użytkownik 
 8. Listingi, sitemap, indeksy, `llms.txt`, `_site`, historia i kolejka GSC.
 9. Wszystkie walidatory z `ARTICLE_STANDARD.md`.
 
-Techniczna komenda kanoniczna: `npm run article:add -- --file "<draft.fitpo50.json>"`. `article:prepare-json` służy tylko wtedy, gdy użytkownik jawnie chce dostać poprawiony JSON bez publikacji; `article:publish` jest komendą wznowienia dla istniejącego `CONTENT_READY`, nie dodatkowym krokiem do zapamiętania.
+Techniczna komenda kanoniczna: `npm run article:add -- --file "<draft.fitpo50.json>"`. Kontroler zapisuje stan i przy kolejnym wywołaniu rozpoznaje ten sam staging. Po obejrzeniu artefaktów agent przekazuje w tej samej komendzie `--review-file <review.json>`; `--status true` pokazuje stan. Jeśli w czasie oczekiwania zmienił się JSON, stary staging pozostaje nienaruszony i dopiero jawne `--restart true` rozpoczyna nową transakcję. `article:prepare-json` służy tylko wtedy, gdy użytkownik jawnie chce dostać poprawiony JSON bez publikacji. `article:publish` pozostaje wewnętrznym silnikiem kontrolera i nie jest osobnym workflow użytkownika.
 
 Pipeline działa fail-fast. Po błędzie nie uruchamia zależnych etapów ani nie zostawia półgotowej publikacji. Poprawne sprawdzenia URL-i są pamiętane lokalnie przez 7 dni, warianty niezmienionych obrazów są ponownie używane, a kolejne podejście zapisuje ten sam roboczy pakiet zamiast tworzyć serie `-r2`, `-r3`. Jeśli atom zawiedzie, identyczny hashami pakiet `CONTENT_READY` jest przy kolejnej próbie używany bez ponownego przygotowania. Zmiana JSON-u albo obrazu unieważnia pamięć pakietu; tanie bramki treści zawsze wykonują się podczas nowego przygotowania.
 
@@ -136,7 +136,7 @@ git push origin main
 - Status RED zatrzymuje push. Przy YELLOW przeczytaj i oceń ostrzeżenia.
 - Nienaturalnie duży, niezatwierdzony zakres wymaga potwierdzenia. `git push wszystko` zatwierdza cały wcześniej omówiony zakres.
 - Jeśli świadomie zatwierdzony zakres przekracza diff guard, wolno jednorazowo użyć `FITPO50_BYPASS_DIFF_GUARD=1`; pozostałe testy nadal muszą przejść.
-- Hostinger automatycznie wdraża `main`. Po pushu uruchom `npm run deployment:verify` i czekaj na `LIVE_DEPLOYED_AND_VALIDATED`.
+- Hostinger automatycznie wdraża `main`. Po pushu workflow uruchamia `npm run deployment:finalize`; czekaj na `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie jest częścią pusha: po obu statusach uruchom osobno `npm run indexnow:release`.
 - `PUSHED` oznacza wyłącznie obecność commita na GitHubie. `DEPLOYED` oznacza wykrycie markera na serwerze z niepełną walidacją. Dopiero `LIVE_DEPLOYED_AND_VALIDATED` potwierdza produkcję i pozwala utworzyć listę GSC.
 - `npm run hostinger:clean-repo` jest wycofane. Przy rzeczywistym błędzie integracji zacznij od `npm run hostinger:recovery` w trybie dry-run i stosuj kontrakt z `docs/deployment-status-contract.md`.
 - `npm run tmp:cleanup` jest odczytowym dry-run. Trybu `tmp:cleanup:apply` używaj dopiero po przeglądzie listy; usuwa wyłącznie stare, zarządzane i osierocone workspace zgodnie z `docs/temporary-workspace-safety.md`.

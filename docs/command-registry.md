@@ -11,12 +11,14 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 
 ## Kanoniczne wejścia
 
-- Nowy artykuł: `npm run article:add -- --file <draft.fitpo50.json>`.
+- Nowy artykuł: `npm run article:add -- --file <draft.fitpo50.json>`. `--dry-run --json` przechodzi cały łańcuch bez promocji do repozytorium i zwraca zbiorczy raport z klasą oraz ścieżką JSON każdego problemu. Pierwszy etap zbiorczo sprawdza paczkę Pisarza i Ilustratora; linkowanie wewnętrzne pozostaje lokalne. Ta sama komenda rozpoznaje zapisany stan i wznawia istniejący staging; po rzeczywistym przeglądzie agent może przekazać `--review-file <review.json>`. `--status true` pokazuje stan bez modyfikacji. Jeśli JSON zmienił się podczas oczekiwania na review, pipeline zachowuje stary staging i wymaga jawnego `--restart true` przed rozpoczęciem nowej transakcji.
 - Korekta JSON bez publikacji: `npm run article:prepare-json -- --file <draft.fitpo50.json>`.
-- Wznowienie gotowego artefaktu: `npm run article:publish -- --file <CONTENT_READY.fitpo50.json>`; po `VISUAL_REVIEW_PENDING` kontroler podaje wariant z `--promote-stage <zarządzany-staging>` do wznowienia tej samej transakcji.
+- Gotowy artefakt `CONTENT_READY` również przekazuje się do `article:add`; kontroler rozpoznaje jego status i nie wykonuje ponownie przygotowania JSON-u. Po `AWAITING_REVIEW` zapisany stan wskazuje tę samą transakcję.
 - Pełna bramka przed pushem: `npm run prepush:local`.
 - Pełny eksport i parity: `npm run check:build-export`.
-- Kontrola produkcji: `npm run deployment:verify`.
+- Kontrola produkcji bez zgłoszenia URL-i: `npm run deployment:verify`.
+- Domknięcie wdrożenia po pushu: `npm run deployment:finalize` (live i ekspozycja bezpieczeństwa, bez IndexNow).
+- Zgłoszenie wdrożonego wydania: `npm run indexnow:release` (osobno, dopiero po udanej finalizacji).
 - Zwykły deploy następuje automatycznie z `main`; `hostinger:recovery` dotyczy wyłącznie awarii.
 
 ## Granice synchronizacji
@@ -33,13 +35,12 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run adsense:readiness` — Bezpośrednia komenda robocza lub odczytowa (node scripts/adsense-readiness-check.js).
 - [PUBLIC] `npm run agent:context` — Bezpośrednia komenda robocza lub odczytowa (node scripts/agent-context.js).
 - [PUBLIC] `npm run aio:full-audit` — Bezpośrednia komenda robocza lub odczytowa (node scripts/growth-tool.js full-audit).
-- [PUBLIC] `npm run article:add` — Jedyne domyślne wejście dla nowego artykułu; przygotowuje draft i prowadzi pełną publikację atomową.
+- [PUBLIC] `npm run article:add` — Jedyne domyślne wejście dla nowego artykułu; przygotowuje draft, zapisuje trwały stan, prowadzi atomowy staging, zatrzymuje się na rzeczywisty review i wznawia tę samą transakcję bez ręcznego składania komend pośrednich.
 - [PUBLIC] `npm run article:coverage:report` — Informacyjny raport pokrycia produkcyjnego katalogu BlogPosting oraz rozdzielonych statusów preview, publikacji, walidacji, wdrożenia i GSC; nie jest bramką publikacyjną.
 - [PUBLIC] `npm run article:contract:diff` — Bezpośrednia komenda robocza lub odczytowa (node scripts/run-article-contract-diff.js).
 - [PUBLIC] `npm run article:evidence:verify` — Bezpośrednia komenda robocza lub odczytowa (node scripts/verify-article-evidence.js).
 - [PUBLIC] `npm run article:guard:diff` — Bezpośrednia komenda robocza lub odczytowa (node scripts/run-article-guard-diff.js).
 - [PUBLIC] `npm run article:prepare-json` — Wyjątkowe przygotowanie artefaktu CONTENT_READY bez publikacji.
-- [PUBLIC] `npm run article:publish` — Publikacja CONTENT_READY przez izolowany staging; po rzeczywistym review wznawia tę samą transakcję przez podane przez kontroler `--promote-stage`.
 - [PUBLIC] `npm run article:validate` — Bezpośrednia komenda robocza lub odczytowa (node scripts/validate-article-standard.js).
 - [PUBLIC] `npm run assets:audit` — Bezpośrednia komenda robocza lub odczytowa (node scripts/assets-audit.js --report data/reports/assets-audit.json).
 - [PUBLIC] `npm run assets:audit:apply` — Bezpośrednia komenda robocza lub odczytowa (node scripts/assets-audit.js --apply --report data/reports/assets-audit.json).
@@ -56,7 +57,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run content:freshness:report` — Bezpośrednia komenda robocza lub odczytowa (node scripts/content-freshness-bot.js).
 - [PUBLIC] `npm run cwv:budget` — Bezpośrednia komenda robocza lub odczytowa (node scripts/cwv-performance-budget.js).
 - [PUBLIC] `npm run deployment:verify` — Odczytowa kontrola wdrożonego commita, markera i kluczowych plików produkcji.
-- [PUBLIC] `npm run dev:article` — Bezpośrednia komenda robocza lub odczytowa (node scripts/dev-article-watch.js).
+- [PUBLIC] `npm run deployment:finalize` — Domyka wdrożenie po pushu: kontrola live i kontrola ekspozycji, bez wysyłania IndexNow.
 - [PUBLIC] `npm run faq:refresh:report` — Bezpośrednia komenda robocza lub odczytowa (node scripts/faq-refresh-report.js).
 - [PUBLIC] `npm run fitpo50:doctor` — Bezpośrednia komenda robocza lub odczytowa (node scripts/fitpo50-doctor.js).
 - [PUBLIC] `npm run external:config:check` — Sprawdza wyłącznie obecność nazw lokalnych zmiennych GSC/IndexNow; nigdy nie wypisuje wartości.
@@ -84,7 +85,8 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run json:gate:diff` — Bezpośrednia komenda robocza lub odczytowa (node scripts/json-fitpo50-gate-diff.js).
 - [PUBLIC] `npm run json:gate:file` — Bezpośrednia komenda robocza lub odczytowa (node scripts/json-fitpo50-gate-diff.js --file "$npm_config_file").
 - [PUBLIC] `npm run live:latest:check` — Bezpośrednia komenda robocza lub odczytowa (node scripts/live-latest-article-check.js --base-url https://fitpo50.pl).
-- [PUBLIC] `npm run live:postpush:check` — Bezpośrednia komenda robocza lub odczytowa (npm run deployment:verify).
+- [PUBLIC] `npm run indexnow:release` — Osobno wysyła URL-e wyłącznie dla wydania z potwierdzonym live i `SECURITY_EXPOSURE_PASS`; zapisuje dowód i blokuje duplikaty.
+- [PUBLIC] `npm run live:postpush:check` — Alias kontroli wdrożenia i ekspozycji (npm run deployment:finalize), bez IndexNow.
 - [PUBLIC] `npm run llms:full` — Bezpośrednia komenda robocza lub odczytowa (node scripts/generate-llms-full.js).
 - [PUBLIC] `npm run news:integrity` — Bezpośrednia komenda robocza lub odczytowa (node scripts/news-integrity-check.js).
 - [PUBLIC] `npm run popraw-seo` — Tworzy raport i kolejkę SEO bez edycji HTML przed zatwierdzeniem ID.
@@ -142,11 +144,13 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [INTERNAL] `npm run article:pdf:sync` — Techniczny etap kontrolowanego workflow (python3 scripts/sync_article_pdfs_and_buttons.py).
 - [INTERNAL] `npm run article:preflight` — Techniczny etap kontrolowanego workflow (node scripts/article-preflight.js).
 - [INTERNAL] `npm run article:preview:gate` — Wspólny etap preview v3: generuje TECHNICAL_PASS/VISUAL_REVIEW_PENDING, a z jawnym plikiem review potwierdza VISUAL_REVIEW_VERIFIED/PREVIEW_READY.
+- [INTERNAL] `npm run article:publish` — Silnik stagingu i atomowej promocji wywoływany przez `article:add`; nie jest osobnym workflow użytkownika.
 - [INTERNAL] `npm run article:validate:center` — Techniczny etap kontrolowanego workflow (node scripts/validate-article.js).
 - [INTERNAL] `npm run build:esbuild` — Techniczny etap kontrolowanego workflow (esbuild src/app.ts src/cmp.ts src/footer.ts src/search.ts --outdir=dist --target=es2018 --format=iife --log-level=error && esbuild src/protein-calculator.ts --bundle --outfile=dist/protein-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/phenoage-calculator.ts --bundle --outfile=dist/phenoage-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/blood-pressure-diary.ts --bundle --outfile=dist/blood-pressure-diary.js --target=es2018 --format=iife --log-level=error && esbuild src/lab-results-interpreter.ts --bundle --outfile=dist/lab-results-interpreter.js --target=es2018 --format=iife --log-level=error && esbuild src/waist-height-calculator.ts --bundle --outfile=dist/waist-height-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/walking-pace-calculator.ts --bundle --outfile=dist/walking-pace-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/relative-strength-calculator.ts --bundle --outfile=dist/relative-strength-calculator.js --target=es2018 --format=iife --log-level=error && esbuild src/lipid-markers-explainer.ts --bundle --outfile=dist/lipid-markers-explainer.js --target=es2018 --format=iife --log-level=error).
 - [INTERNAL] `npm run check:site:fast` — Techniczny etap kontrolowanego workflow (npm run build && node scripts/static-smoke-check.js _site).
 - [INTERNAL] `npm run command:contract:check` — Wewnętrzna bramka zgodności package.json z tym rejestrem.
 - [INTERNAL] `npm run deployment:prepare` — Etap workflow push tworzący marker wydania; nie jest samodzielnym wejściem publikacyjnym.
+- [INTERNAL] `npm run security:exposure:check` — Sprawdza, czy produkcja nie udostępnia plików repozytorium, konfiguracji ani kopii _site.
 - [INTERNAL] `npm run eeat:citation:enhance` — Techniczny etap kontrolowanego workflow (node scripts/eeat-citation-enhancer.js).
 - [INTERNAL] `npm run growth` — Techniczny etap kontrolowanego workflow (node scripts/growth-tool.js).
 - [INTERNAL] `npm run growth:apply` — Techniczny etap kontrolowanego workflow (node scripts/growth-tool.js apply --write).

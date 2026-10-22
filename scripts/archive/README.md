@@ -8,9 +8,12 @@ Skrypty przeniesione z aktywnego pipeline do archiwum.
 
 ## Uwaga
 Aktualny pipeline publikacji opiera się na:
+- `scripts/article-add.js` — jedyne wejście użytkownika i trwały stan procesu
+- `scripts/article-json-workbench.js` — przygotowanie `DRAFT` → `CONTENT_READY`
 - `scripts/fix-fitpo50-json.js`
 - `scripts/article-preflight.js`
-- `scripts/article-pipeline.js`
+- `scripts/article-pipeline.js` — wewnętrzny silnik stagingu i atomowej promocji
+- `scripts/article-preview-gate.js` — wspólny podgląd i visual review v3
 - `scripts/validate-article-standard.js`
 
 ## Ostatnio zarchiwizowane

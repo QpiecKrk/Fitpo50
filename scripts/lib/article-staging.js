@@ -7,6 +7,7 @@ const { categoryFileFromKey, normalizeCategory } = require('./categories');
 const { createManagedTempDir } = require('./temp-workspace');
 const { validatePreviewReport } = require('./article-preview-report');
 
+const ALLOWED_TOP_LEVEL_DIRECTORIES = new Set(['scripts', 'assets', 'data', '_site', 'src', 'dist', 'templates', 'admin', 'docs', 'sukcesy']);
 const EXCLUDED_TOP_LEVEL = new Set(['.git', 'node_modules', '.tmp', 'output', 'tmp']);
 const TRANSACTION_DIR = path.join('.tmp', 'article-publication-transactions');
 const TRANSACTION_LOCK = path.join('.tmp', 'article-publication.lock');
@@ -31,18 +32,41 @@ function assertSafeRelative(relative) {
   return normalized;
 }
 
+function isSensitiveStagePath(relative) {
+  const normalized = String(relative || '').replace(/\\/g, '/').replace(/^\.\//, '');
+  const base = path.posix.basename(normalized).toLowerCase();
+  return normalized === '_site/admin' || normalized.startsWith('_site/admin/')
+    || /^(?:admin\/)?uploads(?:\/|$)/i.test(normalized)
+    || /^\.env(?:\.|$)/i.test(base)
+    || /(?:^|\/)(?:config\.php|database\.sqlite)$/i.test(normalized)
+    || /\.(?:pem|key|p12|pfx)$/i.test(base);
+}
+
+function isAllowedRootFile(name) {
+  if (['.htaccess', '.editorconfig'].includes(name)) return true;
+  return /\.(?:html|css|js|json|xml|txt|md|php|webmanifest|ico|png|svg)$/i.test(name);
+}
+
+function isAllowedStagePath(relative, isDirectory) {
+  const normalized = String(relative || '').replace(/\\/g, '/').replace(/^\.\//, '');
+  if (!normalized || isSensitiveStagePath(normalized)) return false;
+  const top = normalized.split('/')[0];
+  if (EXCLUDED_TOP_LEVEL.has(top)) return false;
+  if (normalized.includes('/')) return ALLOWED_TOP_LEVEL_DIRECTORIES.has(top);
+  return isDirectory ? ALLOWED_TOP_LEVEL_DIRECTORIES.has(top) : isAllowedRootFile(top);
+}
+
 function cloneEntry(source, target, relative = '') {
   const stat = fs.lstatSync(source);
   if (stat.isSymbolicLink()) {
-    fs.symlinkSync(fs.readlinkSync(source), target);
-    return;
+    throw new Error(`Staging nie kopiuje dowolnych symlinków: ${relative || source}`);
   }
   if (stat.isDirectory()) {
     fs.mkdirSync(target, { recursive: true });
     for (const name of fs.readdirSync(source)) {
       const childRelative = relative ? path.join(relative, name) : name;
-      const top = childRelative.split(path.sep)[0];
-      if (EXCLUDED_TOP_LEVEL.has(top)) continue;
+      const childStat = fs.lstatSync(path.join(source, name));
+      if (!isAllowedStagePath(childRelative, childStat.isDirectory())) continue;
       if (/^data\/reports\/(?:local|visual-current)(?:\/|$)/.test(childRelative.replace(/\\/g, '/'))) continue;
       cloneEntry(path.join(source, name), path.join(target, name), childRelative);
     }
@@ -51,6 +75,55 @@ function cloneEntry(source, target, relative = '') {
   fs.mkdirSync(path.dirname(target), { recursive: true });
   fs.copyFileSync(source, target, fs.constants.COPYFILE_FICLONE);
   fs.chmodSync(target, stat.mode);
+}
+
+function collectStageFiles(root, relative = '', output = []) {
+  if (!fs.existsSync(root)) return output;
+  for (const name of fs.readdirSync(root)) {
+    const childRelative = relative ? path.join(relative, name) : name;
+    const normalized = childRelative.replace(/\\/g, '/');
+    if (normalized === 'node_modules' || normalized.startsWith('node_modules/') || normalized === '.tmp' || normalized.startsWith('.tmp/')) continue;
+    if (/^data\/reports\/(?:local|visual-current)(?:\/|$)/.test(normalized)) continue;
+    if (['.fitpo50-workspace.json', '.fitpo50-workspace.lock', 'article-stage.json'].includes(normalized)) continue;
+    const absolute = path.join(root, name);
+    const stat = fs.lstatSync(absolute);
+    if (stat.isSymbolicLink()) continue;
+    if (stat.isDirectory()) collectStageFiles(absolute, childRelative, output);
+    else if (stat.isFile()) output.push(normalized);
+  }
+  return output;
+}
+
+function collectAllowedSourceFiles(root, relative = '', output = []) {
+  for (const name of fs.readdirSync(root)) {
+    const childRelative = relative ? path.join(relative, name) : name;
+    const normalized = childRelative.replace(/\\/g, '/');
+    const absolute = path.join(root, name);
+    const stat = fs.lstatSync(absolute);
+    if (!isAllowedStagePath(normalized, stat.isDirectory())) continue;
+    if (/^data\/reports\/(?:local|visual-current)(?:\/|$)/.test(normalized)) continue;
+    if (stat.isSymbolicLink()) continue;
+    if (stat.isDirectory()) collectAllowedSourceFiles(absolute, childRelative, output);
+    else if (stat.isFile()) output.push(normalized);
+  }
+  return output;
+}
+
+function assertNoUnexpectedStageChanges(sourceRoot, stageRoot, candidates) {
+  const allowed = new Set(candidates.map((value) => String(value).replace(/\\/g, '/')));
+  const unexpected = [];
+  for (const relative of collectStageFiles(stageRoot)) {
+    if (allowed.has(relative)) continue;
+    const staged = path.join(stageRoot, relative);
+    const source = path.join(sourceRoot, relative);
+    if (!fs.existsSync(source) || !fs.statSync(source).isFile() || sha256File(staged) !== sha256File(source)) unexpected.push(relative);
+  }
+  for (const relative of collectAllowedSourceFiles(sourceRoot)) {
+    if (allowed.has(relative)) continue;
+    if (!fs.existsSync(path.join(stageRoot, relative))) unexpected.push(`DELETED:${relative}`);
+  }
+  if (unexpected.length) throw new Error(`Staging zmienił pliki spoza manifestu publikacji: ${unexpected.join(', ')}`);
+  return { ok: true, files_checked: collectStageFiles(stageRoot).length };
 }
 
 function createStagingWorkspace(sourceRoot, slug) {
@@ -97,6 +170,8 @@ function promotionCandidates(article) {
     path.join('data', 'reports', 'published-articles-log.json'),
     path.join('data', 'reports', 'gsc-after-publication-queue.json'),
     path.join('data', 'reports', 'gsc-after-publication-queue.txt'),
+    path.join('data', 'reports', 'link-topology-report.json'),
+    path.join('data', 'reports', 'link-topology-report.md'),
   ];
   const mirrored = [
     `_site/${slug}.html`,
@@ -347,7 +422,8 @@ function recoverInterruptedTransactions(sourceRoot) {
     return [];
   }
   const recovered = [];
-  for (const name of fs.readdirSync(transactionsRoot)) {
+  try {
+    for (const name of fs.readdirSync(transactionsRoot)) {
     const transactionRoot = path.join(transactionsRoot, name);
     const journalPath = path.join(transactionRoot, 'journal.json');
     if (!fs.existsSync(journalPath)) {
@@ -364,9 +440,11 @@ function recoverInterruptedTransactions(sourceRoot) {
     journal.recovered_at = new Date().toISOString();
     atomicWriteJson(journalPath, journal);
     recovered.push(journal.transaction_id);
-    fs.rmSync(transactionRoot, { recursive: true, force: true });
+      fs.rmSync(transactionRoot, { recursive: true, force: true });
+    }
+  } finally {
+    releaseLock(sourceRoot);
   }
-  releaseLock(sourceRoot);
   return recovered;
 }
 
@@ -413,13 +491,16 @@ function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline
   }
 
   const rollback = (reason = '') => {
-    restoreJournal(sourceRoot, transactionRoot, journal);
-    journal.status = 'ROLLED_BACK';
-    journal.rolled_back_at = new Date().toISOString();
-    journal.rollback_reason = String(reason || 'publikacja przerwana');
-    atomicWriteJson(journalPath, journal);
-    releaseLock(sourceRoot, transactionId);
-    fs.rmSync(transactionRoot, { recursive: true, force: true });
+    try {
+      restoreJournal(sourceRoot, transactionRoot, journal);
+      journal.status = 'ROLLED_BACK';
+      journal.rolled_back_at = new Date().toISOString();
+      journal.rollback_reason = String(reason || 'publikacja przerwana');
+      atomicWriteJson(journalPath, journal);
+      fs.rmSync(transactionRoot, { recursive: true, force: true });
+    } finally {
+      releaseLock(sourceRoot, transactionId);
+    }
   };
 
   try {
@@ -488,7 +569,7 @@ function runInStaging(stageRoot, args) {
   const capability = issuePipelineCapability(stageRoot, {
     operations: ['article-pipeline:staging', 'article-import:write'],
   });
-  const result = spawnSync('node', ['scripts/article-pipeline.js', ...args, '--staging-internal', 'true', '--indexnow', 'false'], {
+  const result = spawnSync('node', ['scripts/article-pipeline.js', ...args, '--staging-internal', 'true'], {
     cwd: stageRoot,
     encoding: 'utf8',
     stdio: 'inherit',
@@ -510,6 +591,7 @@ function runPreviewGate(stageRoot, slug) {
 
 module.exports = {
   beginPromotionTransaction,
+  assertNoUnexpectedStageChanges,
   changedFiles,
   cloneEntry,
   createStagingWorkspace,

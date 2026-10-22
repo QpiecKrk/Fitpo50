@@ -22,6 +22,9 @@ logs/
 cache/
 .cache/
 .agent-mem/
+__pycache__/
+.venv/
+*.py[cod]
 
 # Local assistant notes
 AGENT.md

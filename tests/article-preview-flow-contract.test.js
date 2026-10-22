@@ -37,3 +37,13 @@ test('paczka F nie wprowadza drugiej capability, parity ani transakcji', () => {
   assert.equal((changedRuntime.match(/require\('\.\/lib\/article-staging'\)/g) || []).length, 2);
   assert.doesNotMatch(changedRuntime, /require\([^)]*(?:capability-v2|parity-v2|staging-v2|transaction-v2)/i);
 });
+
+test('pipeline nie wysyła IndexNow ani nie uruchamia automatycznego linkera przed live', () => {
+  const pipeline = read('scripts/article-pipeline.js');
+  const importer = read('scripts/import-article.js');
+  assert.doesNotMatch(pipeline, /submitIndexNow|--indexnow/);
+  assert.doesNotMatch(importer, /submitIndexNow|runInternalLinks|ensureMinimumInternalLinks|article-crosslinks-auto/);
+  const release = read('scripts/indexnow-release.js');
+  assert.match(release, /LIVE_DEPLOYED_AND_VALIDATED/);
+  assert.match(release, /SECURITY_EXPOSURE_PASS/);
+});

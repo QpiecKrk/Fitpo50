@@ -6,12 +6,14 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const {
   STATUSES,
+  computePreparedPackageFingerprint,
   markdownReportPathForJson,
   reportPathForJson,
   safeSlug,
   sha256File,
 } = require('./lib/article-json-artifact');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
+const { validateScope } = require('./lib/article-scope-guard');
 
 const ROOT = process.cwd();
 
@@ -90,15 +92,59 @@ function runStagesUntilFailure(definitions, runner = runStage) {
   return stages;
 }
 
-function buildStageDefinitions(workingFile, assetsDir) {
+function scopeStage(label) {
+  if (/architektur|linkowani/i.test(label)) return 'ARCHITECTURE';
+  if (/medi|podpis/i.test(label)) return 'MEDIA';
+  if (/źródeł|URL-i|pochodzenia FAQ/i.test(label)) return 'EVIDENCE';
+  return 'NORMALIZATION';
+}
+
+function runStagesWithScope(definitions, workingFile, runner = runStage) {
+  const stages = [];
+  for (const definition of definitions) {
+    const beforeText = fs.readFileSync(workingFile, 'utf8');
+    let before;
+    try { before = JSON.parse(beforeText); } catch (_error) { before = null; }
+    const stage = runner(definition.label, definition.command, definition.args);
+    if (stage.status === 'PASS' && before) {
+      try {
+        const after = JSON.parse(fs.readFileSync(workingFile, 'utf8'));
+        const scope = validateScope(before, after, { stage: scopeStage(definition.label) });
+        stage.modified_keys = scope.modified_keys;
+        if (!scope.ok) {
+          fs.writeFileSync(workingFile, beforeText, 'utf8');
+          stage.status = 'FAIL';
+          stage.exit_code = 20;
+          stage.stderr = `BLOCKED: Wykryto nieautoryzowaną modyfikację pól spoza zakresu etapu ${scope.stage}: ${scope.unauthorized_keys.join(', ')}`;
+          stage.unauthorized_keys = scope.unauthorized_keys;
+        }
+      } catch (error) {
+        fs.writeFileSync(workingFile, beforeText, 'utf8');
+        stage.status = 'FAIL';
+        stage.exit_code = 20;
+        stage.stderr = `BLOCKED: Nie można zweryfikować zakresu zmian: ${error.message || error}`;
+      }
+    }
+    stages.push(stage);
+    if (stage.status === 'FAIL') break;
+  }
+  return stages;
+}
+
+function buildStageDefinitions(workingFile, assetsDir, options = {}) {
+  const evidenceArgs = ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true'];
+  if (options.cacheFile) evidenceArgs.push('--cache-file', options.cacheFile);
+  if (options.httpFixture) evidenceArgs.push('--http-fixture', options.httpFixture);
   return [
-    { label: 'Bezpieczny fixer JSON', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true'] },
+    { label: 'Szybki odbiór paczki Pisarz + Ilustrator', command: 'node', args: ['scripts/article-package-intake.js', '--file', workingFile, '--assets-dir', assetsDir] },
+    { label: 'Kontrakt wejściowy treści, FAQ, dowodów i promptów obrazów', command: 'python3', args: ['docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py', '--allow-verified-review', workingFile] },
+    { label: 'Kontrola bezpiecznego fixera JSON', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--check', 'true', '--allow-outside-repo', 'true'] },
     { label: 'Normalizacja techniczna bez generowania treści', command: 'node', args: ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json'] },
     { label: 'Lokalna intencja, kanibalizacja, linkowanie i centra', command: 'node', args: ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true'] },
-    { label: 'Weryfikacja źródeł, URL-i i pochodzenia FAQ', command: 'node', args: ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true'] },
+    { label: 'Weryfikacja źródeł, URL-i i pochodzenia FAQ', command: 'node', args: evidenceArgs },
     { label: 'Pełny preflight treści przed kosztowną obróbką mediów', command: 'node', args: ['scripts/article-preflight.js', '--file', workingFile, '--content-only', 'true'] },
-    { label: 'Pakiet mediów: nazwy, warianty, jakość i różnorodność', command: 'node', args: ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'true'] },
-    { label: 'Domknięcie mapowania dowodów po dodaniu podpisów mediów', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--write', 'true', '--allow-outside-repo', 'true'] },
+    { label: 'Pakiet mediów: nazwy, warianty, jakość i różnorodność', command: 'node', args: ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'false'] },
+    { label: 'Kontrola mapowania dowodów po dodaniu podpisów mediów', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--check', 'true', '--allow-outside-repo', 'true'] },
     { label: 'Bramka kompletnego JSON', command: 'node', args: ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile] },
     { label: 'Końcowy preflight pakietu importowego', command: 'node', args: ['scripts/article-preflight.js', '--file', workingFile, '--assets-dir', assetsDir] },
   ];
@@ -179,7 +225,7 @@ function writeReports(report, outputFile) {
     lines.push(`- Główna intencja: ${architecture.search_intent || 'MISSING'}`);
     lines.push(`- Primary keyword: ${architecture.primary_keyword || 'MISSING'}`);
     lines.push(`- Frazy wspierające: ${(architecture.supporting_keywords || []).join(', ') || 'MISSING'}`);
-    lines.push(`- Potwierdzone linki wychodzące: ${(architecture.internal_links || []).length}/4`);
+    lines.push(`- Potwierdzone linki wychodzące: ${(architecture.internal_links || []).length} (ostrzeżenie poniżej 2)`);
     (architecture.internal_links || []).forEach((item) => {
       lines.push(`  - ${item.location}: „${item.anchor}” → ${item.target}`);
     });
@@ -209,7 +255,7 @@ function writeReports(report, outputFile) {
   }
   lines.push('', '## Następny krok');
   lines.push(report.status === STATUSES.CONTENT_READY
-    ? `- Użyj przygotowanego pliku: \`npm run article:publish -- --file "${outputFile}"\``
+    ? `- Wznów kanoniczny proces tym samym wejściem: \`npm run article:add -- --file "${outputFile}"\``
     : '- Nie publikuj. Usuń wskazane blokery i ponownie uruchom prepare-json.');
   fs.writeFileSync(mdPath, `${lines.join('\n')}\n`, 'utf8');
   return { jsonPath, mdPath };
@@ -287,7 +333,7 @@ function main() {
     if (fs.existsSync(htmlPath) && !args.force) {
       blockers.push(`Slug ${slug} już istnieje jako ${htmlPath}. Domyślne force=false blokuje przygotowanie aktualizacji.`);
     } else {
-      stages.push(...runStagesUntilFailure(buildStageDefinitions(workingFile, assetsDir)));
+      stages.push(...runStagesWithScope(buildStageDefinitions(workingFile, assetsDir, { cacheFile: args['cache-file'], httpFixture: args['http-fixture'] }), workingFile));
       stages.filter((item) => item.status === 'FAIL').forEach((item) => {
         blockers.push(`${item.label}: ${item.stderr || item.stdout || `exit ${item.exit_code}`}`);
       });
@@ -307,16 +353,22 @@ function main() {
     }
     fs.copyFileSync(workingFile, outputFile);
     const status = blockers.length ? STATUSES.BLOCKED : STATUSES.CONTENT_READY;
+    const failedStage = stages.find((item) => item.status === 'FAIL');
+    const failureKind = failedStage?.exit_code === 30 ? 'ENVIRONMENT_FAILURE' : 'CONTENT_BLOCKED';
     if (status === STATUSES.CONTENT_READY) copyMediaPackage(corrected.media_manifest, assetsDir, path.dirname(outputFile));
     statusHistory.push({
       status,
+      failure_kind: status === STATUSES.CONTENT_READY ? '' : failureKind,
       at: new Date().toISOString(),
       reason: status === STATUSES.CONTENT_READY
         ? 'Wszystkie bramki treści JSON przeszły; nadal nie utworzono HTML.'
         : blockers[0],
     });
+    const packageState = status === STATUSES.CONTENT_READY
+      ? computePreparedPackageFingerprint(outputFile, corrected)
+      : null;
     const report = {
-      version: 1,
+      version: 2,
       generated_at: generatedAt,
       status,
       status_history: statusHistory,
@@ -324,6 +376,8 @@ function main() {
       source_sha256: sha256File(sourceFile),
       output_file: outputFile,
       output_sha256: sha256File(outputFile),
+      package_sha256: packageState?.fingerprint || '',
+      package_files: packageState?.entries || [],
       slug,
       force: args.force,
       existing_html: fs.existsSync(htmlPath) ? htmlPath : null,
@@ -331,6 +385,7 @@ function main() {
       source_preserved: true,
       stages,
       changes: collectChanges(original, corrected),
+      modified_keys: [...new Set(stages.flatMap((stage) => stage.modified_keys || []))],
       blockers,
       intent_architecture: {
         search_intent: corrected.search_intent || '',
@@ -347,7 +402,7 @@ function main() {
     console.log(`[ARTICLE-JSON] status=${status}`);
     console.log(`[ARTICLE-JSON] JSON: ${outputFile}`);
     console.log(`[ARTICLE-JSON] raport: ${reports.mdPath}`);
-    if (status !== STATUSES.CONTENT_READY) process.exitCode = 2;
+    if (status !== STATUSES.CONTENT_READY) process.exitCode = failureKind === 'ENVIRONMENT_FAILURE' ? 30 : 2;
   } finally {
     disposeTempWorkspace(tempDir, { status: blockers.length ? 'FAILED' : 'COMPLETED' });
   }
@@ -362,4 +417,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { allocateOutput, buildStageDefinitions, collectChanges, copyMediaPackage, main, parseArgs, runStagesUntilFailure };
+module.exports = { allocateOutput, buildStageDefinitions, collectChanges, copyMediaPackage, main, parseArgs, runStagesUntilFailure, runStagesWithScope, scopeStage };

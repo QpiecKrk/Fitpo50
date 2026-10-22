@@ -36,7 +36,7 @@ function main() {
 
   console.log(`[ARTICLE-ARCHITECTURE] inventory=${result.inventory_count}`);
   console.log(`[ARTICLE-ARCHITECTURE] intent=${result.strategy.search_intent || result.strategy.intent || 'MISSING'} primary=${result.strategy.primary || 'MISSING'}`);
-  console.log(`[ARTICLE-ARCHITECTURE] links=${result.confirmed_link_count}/4 added=${result.added_links.length}`);
+  console.log(`[ARTICLE-ARCHITECTURE] links=${result.confirmed_link_count} warning_below=2 added=${result.added_links.length}`);
   console.log(`[ARTICLE-ARCHITECTURE] inbound_suggestions=${result.incoming_link_suggestions.length}`);
   const centerAssessment = result.topic_center_assessment;
   if (centerAssessment?.proposed) {

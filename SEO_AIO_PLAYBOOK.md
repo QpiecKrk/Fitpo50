@@ -93,7 +93,7 @@ Uwaga: to kolejka startowa oparta o potencjal zapytan i szerokosc intencji. Po p
 ## Co zrobic na kazdym z 10 URL (szablon)
 - Dodac/udoskonalic "Szybka odpowiedz" 40-60 slow.
 - Przepisac H2 na pytania (bez zmiany sensu merytoryki).
-- Sprawdzic FAQ (min. 4 Q/A) + schema `FAQPage` 1:1.
+- Jeśli istnieją realne pytania z udokumentowanego researchu, sprawdzić FAQ i schema `FAQPage` 1:1. Nie obowiązuje sztuczne minimum; przy braku pytań nie tworzyć sekcji ani schematu.
 - Podbic CTR: test 1 nowego title + 1 nowej meta description.
 - Dodac 2-3 mocne linki wewnetrzne z URL o wysokich impresjach.
 

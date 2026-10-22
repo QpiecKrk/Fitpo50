@@ -30,7 +30,7 @@ const STRONG_SOURCE_HOSTS = [
   'escardio.org', 'ptkardio.pl', 'heart.org', 'ahajournals.org', 'acc.org', 'acsm.org',
   'diabetesjournals.org', 'thelancet.com', 'nejm.org', 'jamanetwork.com', 'bmj.com',
   'nature.com', 'sciencedirect.com', 'springer.com', 'wiley.com', 'oup.com',
-  'journals.plos.org', 'frontiersin.org', 'europepmc.org', 'doi.org', 'espen.org',
+  'journals.plos.org', 'frontiersin.org', 'europepmc.org', 'doi.org', 'espen.org', 'medlineplus.gov',
 ];
 const EVIDENCE_CLAIM_PATTERN = /\b(ryzyk[oa]|zmniejsza|zwiększa|obniża|podnosi|powoduje|zapobiega|leczy|leczenie|terapia|skuteczn|bezpieczn|przeciwwskaz|dawk[aię]|norm[ay]|rozpozn|diagnoz|objaw|ciśnieni|cholesterol|glukoz|insulin|nowotwor|zawał|udar|śmiertelno|badani[eu]|metaanaliz|przegląd systematyczny)\b/iu;
 const NUMBERED_CLAIM_PATTERN = /\b\d+(?:[.,]\d+)?(?:\s*[–-]\s*\d+(?:[.,]\d+)?)?\s*(?:%|mg|g|kg|µg|mcg|mmol|nmol|mmhg|cm|mm|godzin|godziny|dni|tygodni|miesięcy|lat|razy)\b/iu;
@@ -71,6 +71,78 @@ function isStrongMedicalSource(url) {
   return Boolean(hostname && STRONG_SOURCE_HOSTS.some((host) => hostname === host || hostname.endsWith(`.${host}`)));
 }
 
+function hasPublicationIdentifier(source) {
+  const doi = String(source?.doi || '').trim();
+  const pmid = String(source?.pmid || '').trim();
+  const url = String(source?.url || source?.source_url || '').trim();
+  return Boolean(doi || pmid || /doi\.org\/10\./i.test(url) || /pubmed\.ncbi\.nlm\.nih\.gov\/\d+/i.test(url));
+}
+
+function isQualifiedBlockedSource(source) {
+  return String(source?.url_status || '').toLowerCase() === 'blocked_by_publisher'
+    && [403, 405].includes(Number(source?.http_status || 0))
+    && (hasPublicationIdentifier(source) || isStrongMedicalSource(source?.url || source?.source_url));
+}
+
+function countsTowardSourceMinimum(source) {
+  return String(source?.url_status || '').toLowerCase() === 'reachable' || isQualifiedBlockedSource(source);
+}
+
+function withEvidenceVerification(json, item) {
+  const url = String(item?.url || item?.source_url || item?.sourceUrl || '').trim();
+  const verified = json?.evidence_verification?.entries?.[url];
+  return verified && typeof verified === 'object' ? { ...item, ...verified } : item;
+}
+
+function validateSourceContractFields(source, label) {
+  const errors = [];
+  for (const field of ['fallback_url', 'evidence_scope', 'publication_date', 'checked_via', 'recheck_after']) {
+    if (!Object.prototype.hasOwnProperty.call(source || {}, field)) errors.push(`${label}.${field} jest obowiązkowe (null jest dozwolony).`);
+  }
+  const fallback = source?.fallback_url;
+  if (fallback !== null && fallback !== undefined && !/^https:\/\//i.test(String(fallback))) errors.push(`${label}.fallback_url musi być HTTPS URL-em albo null.`);
+  for (const field of ['evidence_scope', 'checked_via']) {
+    const value = source?.[field];
+    if (value !== null && value !== undefined && !String(value).trim()) errors.push(`${label}.${field} musi być niepustym tekstem albo null.`);
+  }
+  for (const field of ['publication_date', 'recheck_after']) {
+    const value = source?.[field];
+    if (value !== null && value !== undefined && !isIsoDay(value)) errors.push(`${label}.${field} musi mieć format YYYY-MM-DD albo null.`);
+    if (value !== null && value !== undefined && isIsoDay(value) && String(value) > new Date().toISOString().slice(0, 10)) errors.push(`${label}.${field} nie może być datą z przyszłości.`);
+  }
+  return errors;
+}
+
+function collectOverlayEvidenceClaims(json) {
+  const claims = [];
+  const key = Array.isArray(json?.image_prompts_v4) ? 'image_prompts_v4' : 'image_prompts';
+  (Array.isArray(json?.[key]) ? json[key] : []).forEach((prompt, promptIndex) => {
+    (Array.isArray(prompt?.overlay_claims) ? prompt.overlay_claims : []).forEach((claim, claimIndex) => {
+      claims.push({
+        claim: claim?.claim,
+        location: `${key}[${promptIndex}].overlay_text_pl`,
+        claim_type: claim?.claim_type || 'statistic',
+        source_urls: claim?.source_url ? [claim.source_url] : [],
+        _label: `${key}[${promptIndex}].overlay_claims[${claimIndex}]`,
+      });
+    });
+  });
+  return claims;
+}
+
+function deviceModelTokens(value) {
+  return new Set(String(value || '').toLowerCase().match(/\b(?=[a-z0-9-]*\d)(?=[a-z0-9-]*[a-z])[a-z0-9-]{3,}\b/g) || []);
+}
+
+function isAuthoritativeDeviceDocumentation(source, fragmentText) {
+  const level = String(source?.evidence_level || source?.evidenceLevel || '').trim().toLowerCase();
+  if (level !== 'technical_documentation') return false;
+  const fragmentTokens = deviceModelTokens(fragmentText);
+  if (!fragmentTokens.size) return false;
+  const sourceTokens = deviceModelTokens(`${source?.label || ''} ${source?.url || ''}`);
+  return [...fragmentTokens].some((token) => sourceTokens.has(token));
+}
+
 function collectArticleFragments(json) {
   const fragments = [];
   const add = (location, text) => {
@@ -89,13 +161,24 @@ function collectArticleFragments(json) {
       add(`sections[${sectionIndex}].list_items[${itemIndex}]`, item);
     });
     if (section?.info_box) add(`sections[${sectionIndex}].info_box.content_html`, section.info_box.content_html);
-    if (section?.image) add(`sections[${sectionIndex}].image.caption`, section.image.caption);
+    if (section?.image) {
+      add(`sections[${sectionIndex}].image.alt`, section.image.alt);
+      add(`sections[${sectionIndex}].image.caption`, section.image.caption);
+    }
     (Array.isArray(section?.images) ? section.images : []).forEach((image, imageIndex) => {
       add(`sections[${sectionIndex}].images[${imageIndex}].caption`, image?.caption);
     });
   });
   (Array.isArray(json.answer_blocks) ? json.answer_blocks : []).forEach((item, index) => {
     add(`answer_blocks[${index}].answer_html`, item?.answer_html || item?.answer);
+  });
+  const promptKey = Array.isArray(json.image_prompts_v4) && json.image_prompts_v4.length
+    ? 'image_prompts_v4'
+    : 'image_prompts';
+  (Array.isArray(json[promptKey]) ? json[promptKey] : []).forEach((prompt, index) => {
+    add(`${promptKey}[${index}].alt_pl`, prompt?.alt_pl);
+    add(`${promptKey}[${index}].caption_pl`, prompt?.caption_pl);
+    add(`${promptKey}[${index}].overlay_text_pl`, prompt?.overlay_text_pl);
   });
   return fragments;
 }
@@ -113,7 +196,7 @@ function fragmentNeedsEvidence(fragment, medicalArticle) {
   return medicalArticle && /\b(zaleca|nie należy|należy|powinien|powinna|można stosować|nie stosuj)\b/iu.test(text);
 }
 
-function validateCheckedUrl(item, label, today, errors) {
+function validateCheckedUrl(item, label, today, errors, warnings = [], options = {}) {
   const url = String(item?.url || item?.source_url || item?.sourceUrl || '').trim();
   const checkedAt = String(item?.checked_at || item?.checkedAt || '').trim();
   const urlStatus = String(item?.url_status || item?.urlStatus || '').trim().toLowerCase();
@@ -126,24 +209,42 @@ function validateCheckedUrl(item, label, today, errors) {
     if (age < 0) errors.push(`${label}: checked_at jest datą z przyszłości.`);
     if (age > 180) errors.push(`${label}: weryfikacja URL ma ${age} dni; wymagane ponowne sprawdzenie (maks. 180 dni).`);
   }
-  if (urlStatus !== 'reachable') errors.push(`${label}: url_status musi mieć wartość "reachable" po realnym sprawdzeniu adresu.`);
-  if (!httpStatus) errors.push(`${label}: brak http_status z kontroli adresu.`);
-  else if (!Number.isInteger(httpStatus) || httpStatus < 200 || httpStatus >= 300) {
-    errors.push(`${label}: końcowy HTTP ${httpStatus} nie potwierdza dostępności źródła; wymagany kod 2xx po przekierowaniach.`);
+  if (urlStatus === 'blocked_by_publisher') {
+    if (![401, 403, 405].includes(httpStatus)) errors.push(`${label}: status blocked_by_publisher wymaga HTTP 401, 403 albo 405.`);
+    else if (isQualifiedBlockedSource(item)) warnings.push(`${label}: wydawca blokuje automat (HTTP ${httpStatus}); źródło ma trwały identyfikator albo wiarygodną domenę i wymaga kontroli merytorycznej, lecz nie blokuje transportowo.`);
+    else errors.push(`${label}: wydawca blokuje automat (HTTP ${httpStatus || '?'}), a źródło nie ma DOI/PMID ani wiarygodnej domeny urzędowej lub naukowej.`);
+  } else if (urlStatus === 'temporarily_unavailable') {
+    errors.push(`${label}: serwer źródła jest chwilowo niedostępny albo ogranicza żądania (HTTP ${httpStatus || '?'}); ponów kontrolę.`);
+    if (httpStatus !== 429 && httpStatus < 500) errors.push(`${label}: status temporarily_unavailable wymaga HTTP 429 albo 5xx.`);
+  } else if (urlStatus === 'verification_failed') {
+    errors.push(`${label}: nie udało się zweryfikować źródła z powodu błędu DNS, timeoutu, TLS albo połączenia; ponów kontrolę.`);
+    if (httpStatus !== 0) errors.push(`${label}: status verification_failed nie może udawać odpowiedzi HTTP.`);
+  } else if (urlStatus === 'broken') {
+    errors.push(`${label}: źródło jest martwe (HTTP ${httpStatus || '?'}); wymagane źródło zastępcze.`);
+    if (![404, 410].includes(httpStatus)) errors.push(`${label}: status broken wymaga HTTP 404 albo 410.`);
+  } else if (urlStatus === 'reachable') {
+    if (!Number.isInteger(httpStatus) || httpStatus < 200 || httpStatus >= 300) {
+      errors.push(`${label}: końcowy HTTP ${httpStatus || '?'} nie potwierdza dostępności źródła; wymagany kod 2xx po przekierowaniach.`);
+    }
+  } else if (urlStatus === 'requires_local_verification' && options.allowPendingVerification) {
+    warnings.push(`${label}: URL czeka na lokalną weryfikację pipeline.`);
+  } else if (urlStatus !== 'reachable') {
+    errors.push(`${label}: nieznany url_status "${urlStatus || 'brak'}".`);
   }
 }
 
-function validateFaqResearch(json, today) {
+function validateFaqResearch(json, today, warnings = [], options = {}) {
   const errors = [];
   const faq = Array.isArray(json.answer_blocks) ? json.answer_blocks : [];
   const research = Array.isArray(json.faq_research) ? json.faq_research : [];
-  const faqByQuestion = new Set(faq.map((item) => utils.fuzzyNormalize(item?.question || '')).filter(Boolean));
+  const faqByQuestion = new Set(faq.map((item) => utils.faqIntentNormalize(item?.question || '')).filter(Boolean));
   const researchSeen = new Set();
 
-  research.forEach((item, index) => {
+  research.forEach((rawItem, index) => {
+    const item = withEvidenceVerification(json, rawItem);
     const label = `faq_research[${index}]`;
     const question = String(item?.question || '').trim();
-    const normalizedQuestion = utils.fuzzyNormalize(question);
+    const normalizedQuestion = utils.faqIntentNormalize(question);
     const sourceType = String(item?.source_type || item?.sourceType || '').trim().toLowerCase();
     const sourceUrl = String(item?.source_url || item?.sourceUrl || item?.url || '').trim();
     const query = String(item?.query || '').trim();
@@ -156,7 +257,7 @@ function validateFaqResearch(json, today) {
     if (!FAQ_SOURCE_TYPES.has(sourceType)) {
       errors.push(`${label}: source_type musi być jednym z: autocomplete, paa, gsc, manual_research.`);
     }
-    validateCheckedUrl(item, label, today, errors);
+    validateCheckedUrl(item, label, today, errors, warnings, { allowPendingVerification: options.allowPendingVerification });
 
     if (sourceType === 'autocomplete') {
       if (!/suggestqueries\.google\.com\/complete\/search/i.test(sourceUrl)) {
@@ -164,11 +265,18 @@ function validateFaqResearch(json, today) {
       }
       try {
         const urlQuery = new URL(sourceUrl).searchParams.get('q') || '';
-        if (!urlQuery || utils.fuzzyNormalize(urlQuery) !== normalizedQuestion) {
+        if (!urlQuery || utils.faqIntentNormalize(urlQuery) !== normalizedQuestion) {
           errors.push(`${label}: parametr q autocomplete musi odpowiadać pytaniu FAQ 1:1.`);
         }
       } catch (_err) {
         // Niepoprawny URL został już zgłoszony przez validateCheckedUrl.
+      }
+      if (item?.intent_verified !== true && !options.allowPendingAutocomplete) {
+        errors.push(`${label}: odpowiedź Google Suggest nie została lokalnie sprawdzona albo nie zawiera pytania FAQ 1:1.`);
+      }
+      const verifiedSuggestion = String(item?.verified_suggestion || '').trim();
+      if (item?.intent_verified === true && utils.faqIntentNormalize(verifiedSuggestion) !== normalizedQuestion) {
+        errors.push(`${label}: verified_suggestion nie odpowiada pytaniu FAQ 1:1.`);
       }
     }
     if (sourceType === 'gsc') {
@@ -196,7 +304,10 @@ function validateArticleEvidence(json, options = {}) {
   const fragmentsByLocation = new Map(fragments.map((item) => [item.location, item]));
   const medicalArticle = isMedicalArticle(json);
   const sources = Array.isArray(json.sources) ? json.sources : [];
-  const claims = Array.isArray(json.evidence_claims) ? json.evidence_claims : [];
+  const claims = [
+    ...(Array.isArray(json.evidence_claims) ? json.evidence_claims : []),
+    ...collectOverlayEvidenceClaims(json),
+  ];
   const logicLinks = Array.isArray(json.logic_links) ? json.logic_links : [];
   const sourceByUrl = new Map();
   const validLogicConclusions = new Set();
@@ -218,10 +329,12 @@ function validateArticleEvidence(json, options = {}) {
     }
   });
 
-  sources.forEach((source, index) => {
+  sources.forEach((rawSource, index) => {
+    const source = withEvidenceVerification(json, rawSource);
     const url = String(source?.url || '').trim();
     const normalized = normalizeUrl(url);
-    validateCheckedUrl(source, `sources[${index}]`, today, errors);
+    validateCheckedUrl(source, `sources[${index}]`, today, errors, warnings, { allowPendingVerification: options.allowPendingVerification });
+    errors.push(...validateSourceContractFields(rawSource, `sources[${index}]`));
     if (normalized) {
       const parsed = new URL(normalized);
       const ncbi = ['pubmed.ncbi.nlm.nih.gov', 'pmc.ncbi.nlm.nih.gov', 'www.ncbi.nlm.nih.gov', 'ncbi.nlm.nih.gov'].includes(parsed.hostname);
@@ -244,14 +357,18 @@ function validateArticleEvidence(json, options = {}) {
   const mappedLocations = new Set();
   const usedSourceUrls = new Set();
   claims.forEach((claim, index) => {
-    const label = `evidence_claims[${index}]`;
+    const label = claim?._label || `evidence_claims[${index}]`;
     const location = String(claim?.location || '').trim();
     const claimText = utils.stripTags(claim?.claim || '').replace(/\s+/g, ' ').trim();
     const claimType = String(claim?.claim_type || claim?.claimType || '').trim().toLowerCase();
     const sourceUrls = Array.isArray(claim?.source_urls) ? claim.source_urls : [];
     const fragment = fragmentsByLocation.get(location);
+    const minimumClaimWords = /\.overlay_text_pl$/u.test(location) ? 2 : 5;
+    const minimumClaimWordsLabel = minimumClaimWords === 2 ? 'słowa' : 'słów';
     if (!fragment) errors.push(`${label}: location "${location}" nie wskazuje istniejącego fragmentu JSON.`);
-    if (utils.countWords(claimText) < 5) errors.push(`${label}: claim musi nazywać konkretne twierdzenie (min. 5 słów).`);
+    if (utils.countWords(claimText) < minimumClaimWords) {
+      errors.push(`${label}: claim musi nazywać konkretne twierdzenie (min. ${minimumClaimWords} ${minimumClaimWordsLabel}).`);
+    }
     if (fragment && claimText && !utils.fuzzyNormalize(fragment.text).includes(utils.fuzzyNormalize(claimText))) {
       errors.push(`${label}: claim nie występuje w przypisanym fragmencie ${location}.`);
     }
@@ -259,6 +376,7 @@ function validateArticleEvidence(json, options = {}) {
     if (!sourceUrls.length) errors.push(`${label}: brak source_urls przypisanych do twierdzenia.`);
     mappedLocations.add(location);
     let hasStrongMedicalEvidence = false;
+    let hasAuthoritativeDeviceDocumentation = false;
     sourceUrls.forEach((rawUrl) => {
       const normalized = normalizeUrl(rawUrl);
       const source = sourceByUrl.get(normalized);
@@ -269,9 +387,15 @@ function validateArticleEvidence(json, options = {}) {
       usedSourceUrls.add(normalized);
       const level = String(source.evidence_level || source.evidenceLevel || '').trim().toLowerCase();
       if (isStrongMedicalSource(source.url) && MEDICAL_EVIDENCE_LEVELS.has(level)) hasStrongMedicalEvidence = true;
+      if (claimType === 'safety' && isAuthoritativeDeviceDocumentation(source, fragment?.text || claimText)) {
+        hasAuthoritativeDeviceDocumentation = true;
+      }
     });
-    if ((claimType === 'medical' || claimType === 'safety') && !hasStrongMedicalEvidence) {
+    if (claimType === 'medical' && !hasStrongMedicalEvidence) {
       errors.push(`${label}: twierdzenie ${claimType} wymaga silnego źródła medycznego i jawnego evidence_level.`);
+    }
+    if (claimType === 'safety' && !hasStrongMedicalEvidence && !hasAuthoritativeDeviceDocumentation) {
+      errors.push(`${label}: twierdzenie safety wymaga silnego źródła medycznego albo dokumentacji technicznej producenta wskazanego modelu urządzenia.`);
     }
   });
 
@@ -305,7 +429,7 @@ function validateArticleEvidence(json, options = {}) {
     }
   }
 
-  errors.push(...validateFaqResearch(json, today));
+  errors.push(...validateFaqResearch(json, today, warnings, options));
   const logic = validators.validateLogicalCoherence(fragments.map((fragment) => ({ label: fragment.location, text: fragment.text })));
   errors.push(...logic.errors);
   return { ok: errors.length === 0, errors, warnings, medicalArticle, fragments };
@@ -319,7 +443,14 @@ module.exports = {
   collectArticleFragments,
   fragmentNeedsEvidence,
   isMedicalArticle,
+  isAuthoritativeDeviceDocumentation,
+  countsTowardSourceMinimum,
+  collectOverlayEvidenceClaims,
+  hasPublicationIdentifier,
+  isQualifiedBlockedSource,
   isStrongMedicalSource,
   normalizeUrl,
+  withEvidenceVerification,
+  validateSourceContractFields,
   validateArticleEvidence,
 };

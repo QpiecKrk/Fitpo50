@@ -7,7 +7,7 @@ const STATUSES = new Set(['PUBLIC', 'INTERNAL', 'RECOVERY', 'RETIRED']);
 const REQUIRED_STATUSES = new Map([
   ['article:add', 'PUBLIC'],
   ['article:prepare-json', 'PUBLIC'],
-  ['article:publish', 'PUBLIC'],
+  ['article:publish', 'INTERNAL'],
   ['article:assets:prepare', 'INTERNAL'],
   ['article:architecture', 'INTERNAL'],
   ['article:media', 'INTERNAL'],

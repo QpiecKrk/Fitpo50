@@ -15,6 +15,7 @@ const { spawnSync } = require('child_process');
 const { validateArticleHeadFile, firstTagAttribute } = require('./lib/article-head-contract');
 const { validators, POLICY, utils } = require('./lib/article-policy');
 const { categoryPageFromImportCategory } = require('./lib/categories');
+const { normalizeInternalHref } = require('./lib/article-normalization');
 const { pageKind } = require('./lib/publication-page-kind');
 const { validateTopicCenter } = require('./lib/topic-center-contract');
 
@@ -104,11 +105,16 @@ function validateRobotsHygiene(errors) {
 
 function validateHtaccessRobotsHygiene(errors) {
   const requiredSnippets = [
+    'RewriteRule ^(?:_site|scripts|docs|tests|src|templates)(?:/|$) - [F,L,NC]',
+    'RewriteRule ^data(?:/|$) - [F,L,NC]',
+    'RewriteRule \\.md$ - [F,L,NC]',
+    'RewriteRule ^(?:package(?:-lock)?\\.json|tsconfig\\.json)$ - [F,L,NC]',
     'RewriteRule ^assets/?$ - [G,L]',
     'RewriteRule ^sukcesy/?$ - [G,L]',
     'SetEnvIf Request_URI "^/(admin|data|assets/data|assets/pdf|sukcesy)(/|$)" fitpo50_noindex=1',
     'SetEnvIf Request_URI "\\.(json|pdf|sqlite)$" fitpo50_noindex=1',
     'Header always set X-Robots-Tag "noindex, nofollow" env=fitpo50_noindex',
+    '<FilesMatch "^(?:\\.env.*|config\\.php)$">',
     'ExpiresByType application/pdf "access plus 0 seconds"',
     '<FilesMatch "\\.(html?|pdf|json|xml|txt)$">',
     'Header set Cache-Control "no-cache, max-age=0, s-maxage=0, must-revalidate"',
@@ -232,10 +238,7 @@ function hasInSitemap(sitemapXml, hrefOrUrl) {
 }
 
 function normalizeArticleHref(href) {
-  return String(href || '')
-    .trim()
-    .replace(/^\.\//, '')
-    .replace(/[?#].*$/, '');
+  return normalizeInternalHref(href);
 }
 
 function readImportJsonBySlug(slug) {

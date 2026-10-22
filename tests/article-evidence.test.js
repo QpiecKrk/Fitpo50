@@ -5,13 +5,32 @@ const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 
-const { validateArticleEvidence } = require('../scripts/lib/article-evidence');
-const { cachedResult, classifyHttpStatus, requestUrl } = require('../scripts/verify-article-evidence');
+const { isAuthoritativeDeviceDocumentation, validateArticleEvidence, validateSourceContractFields } = require('../scripts/lib/article-evidence');
+const {
+  cachedResult,
+  classifyHttpStatus,
+  decodeAutocompleteBody,
+  findExactAutocompleteSuggestion,
+  isEnvironmentVerificationFailure,
+  parseAutocompleteSuggestions,
+  requestUrl,
+  requestSourceUrl,
+} = require('../scripts/verify-article-evidence');
 const { ensureParagraphWrapper } = require('../scripts/fix-fitpo50-json');
 const { hasClearQuickAnswerForm } = require('../scripts/json-fitpo50-gate-diff');
 
 const REPO = path.resolve(__dirname, '..');
 const TODAY = '2026-08-24';
+const HTTP_FIXTURE = JSON.parse(fs.readFileSync(path.join(REPO, 'tests/fixtures/http/article-evidence-responses.json'), 'utf8'));
+
+function fixtureFetch(calls) {
+  return async (url, options) => {
+    calls.push({ url, method: options.method, headers: options.headers });
+    const status = HTTP_FIXTURE.responses[url]?.[options.method];
+    if (!status) throw new Error(`Brak atrapy ${options.method} ${url}`);
+    return { status, url, headers: { get: () => 'text/html' }, arrayBuffer: async () => new ArrayBuffer(0) };
+  };
+}
 
 function source(label, url) {
   return {
@@ -21,8 +40,21 @@ function source(label, url) {
     url_status: 'reachable',
     http_status: 200,
     evidence_level: 'guideline',
+    fallback_url: null,
+    evidence_scope: null,
+    publication_date: null,
+    checked_via: 'test_fixture',
+    recheck_after: null,
   };
 }
+
+test('future publication_date is blocked by the shared source contract', () => {
+  const errors = validateSourceContractFields({
+    ...source('Badanie z datą w przyszłości', 'https://example.org/future'),
+    publication_date: '2999-01-01',
+  }, 'sources[0]');
+  assert.ok(errors.some((message) => message.includes('nie może być datą z przyszłości')));
+});
 
 function validEvidenceJson() {
   const pubmed = 'https://pubmed.ncbi.nlm.nih.gov/12345678/';
@@ -61,6 +93,39 @@ function validEvidenceJson() {
 test('complete claim-to-source mapping passes the evidence gate', () => {
   const result = validateArticleEvidence(validEvidenceJson(), { today: TODAY });
   assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
+test('manufacturer documentation supports only a model-specific device safety instruction', () => {
+  const documentation = {
+    label: 'Medtronic MiniMed 780G — instrukcja ustawienia daty i godziny',
+    url: 'https://www.minimed.com/en-us/support/product-support/780g/updating-time-date',
+    evidence_level: 'technical_documentation',
+    fallback_url: null,
+    evidence_scope: 'device_instructions_only',
+    publication_date: null,
+    checked_via: 'test_fixture',
+    recheck_after: null,
+  };
+  assert.equal(isAuthoritativeDeviceDocumentation(documentation, 'Pompa MiniMed 780G wymaga prawidłowej godziny.'), true);
+  assert.equal(isAuthoritativeDeviceDocumentation(documentation, 'Każda pompa insulinowa poprawia bezpieczeństwo terapii.'), false);
+
+  const json = validEvidenceJson();
+  json.title = 'Zmiana ustawień zegara po zmianie czasu';
+  json.category = 'ciekawe';
+  json.sections[0].paragraphs_html[0] = '<p>Producent pompy MiniMed 780G podaje, że prawidłowa godzina jest potrzebna do podawania insuliny bazalnej.</p>';
+  json.sources = [{ ...documentation, checked_at: TODAY, url_status: 'reachable', http_status: 200 }];
+  json.evidence_claims = [{
+    claim: 'prawidłowa godzina jest potrzebna do podawania insuliny bazalnej',
+    location: 'sections[0].paragraphs_html[0]',
+    claim_type: 'safety',
+    source_urls: [documentation.url],
+  }];
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+
+  json.sections[0].paragraphs_html[0] = '<p>Każda pompa insulinowa poprawia bezpieczeństwo terapii.</p>';
+  json.evidence_claims[0].claim = 'Każda pompa insulinowa poprawia bezpieczeństwo terapii';
+  assert.match(validateArticleEvidence(json, { today: TODAY }).errors.join('\n'), /dokumentacji technicznej producenta wskazanego modelu/);
 });
 
 test('vague references, open metaphors and unsupported conclusions are blocking', () => {
@@ -122,6 +187,167 @@ test('FAQ must have documented origin and never accepts artificial variant numbe
   assert.match(validateArticleEvidence(missingOrigin, { today: TODAY }).errors.join(' '), /source_type/);
 });
 
+test('autocomplete verification requires the exact normalized FAQ suggestion, not only HTTP 200', () => {
+  const question = 'Czy zmiana czasu ma sens?';
+  const suggestions = parseAutocompleteSuggestions(JSON.stringify([question, ['czy zmiana czasu ma sens', 'zmiana czasu skutki']]));
+  assert.equal(findExactAutocompleteSuggestion(question, suggestions), 'czy zmiana czasu ma sens');
+  assert.equal(findExactAutocompleteSuggestion('Czy zmiana czasu zostanie zniesiona?', suggestions), '');
+
+  const json = validEvidenceJson();
+  json.answer_blocks[0].question = question;
+  json.faq_research[0] = {
+    question,
+    source_label: 'Google Autocomplete PL',
+    source_url: `https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=${encodeURIComponent(question)}`,
+    source_type: 'autocomplete',
+    research_note: 'Pytanie sprawdzono w odpowiedzi Google Suggest dla dokładnego zapytania.',
+    checked_at: TODAY,
+    url_status: 'reachable',
+    http_status: 200,
+    intent_verified: false,
+  };
+  assert.match(validateArticleEvidence(json, { today: TODAY }).errors.join(' '), /nie zawiera pytania FAQ 1:1/);
+  json.faq_research[0].intent_verified = true;
+  json.faq_research[0].verified_suggestion = 'czy zmiana czasu ma sens';
+  assert.doesNotMatch(validateArticleEvidence(json, { today: TODAY }).errors.join(' '), /Google Suggest|verified_suggestion/);
+});
+
+test('autocomplete decoding and matching preserve Polish characters consistently', async () => {
+  const payload = JSON.stringify(['jak schudnąć po 50?', ['jak schudnąć po 50?']]);
+  const bytes = Buffer.from(payload, 'utf8');
+  const response = { arrayBuffer: async () => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) };
+  const decoded = await decodeAutocompleteBody(response);
+  const suggestions = parseAutocompleteSuggestions(decoded);
+  assert.equal(findExactAutocompleteSuggestion('Jak schudnąć po 50?', suggestions), 'jak schudnąć po 50?');
+});
+
+test('autocomplete honors ISO-8859-2 charset and shares Polish diacritic normalization', async () => {
+  const bytes = Buffer.from(HTTP_FIXTURE.autocomplete_iso_8859_2.bytes);
+  const response = {
+    headers: { get: () => HTTP_FIXTURE.autocomplete_iso_8859_2.content_type },
+    arrayBuffer: async () => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
+  };
+  const suggestions = parseAutocompleteSuggestions(await decodeAutocompleteBody(response));
+  assert.equal(findExactAutocompleteSuggestion('Czy załóż?', suggestions), 'czy załóż');
+  assert.equal(findExactAutocompleteSuggestion('CZY ZALOZ', suggestions), 'czy załóż');
+});
+
+test('qualified publisher block warns while an unqualified 403 remains blocking', () => {
+  const qualified = validEvidenceJson();
+  qualified.sources[0].url_status = 'blocked_by_publisher';
+  qualified.sources[0].http_status = 403;
+  qualified.sources[0].pmid = '12345678';
+  const qualifiedResult = validateArticleEvidence(qualified, { today: TODAY });
+  assert.doesNotMatch(qualifiedResult.errors.join(' '), /wydawca blokuje automat/);
+  assert.match(qualifiedResult.warnings.join(' '), /nie blokuje transportowo/);
+
+  const unqualified = validEvidenceJson();
+  unqualified.sources[0].url = 'https://commercial-example.test/article';
+  unqualified.sources[0].url_status = 'blocked_by_publisher';
+  unqualified.sources[0].http_status = 403;
+  unqualified.evidence_claims[0].source_urls[0] = unqualified.sources[0].url;
+  assert.match(validateArticleEvidence(unqualified, { today: TODAY }).errors.join(' '), /nie ma DOI\/PMID/);
+});
+
+test('local verification manifest validates sources and autocomplete without mutating writer-owned arrays', () => {
+  const json = validEvidenceJson();
+  json.sources[0].url_status = 'requires_local_verification';
+  delete json.sources[0].http_status;
+  const sourceBefore = JSON.stringify(json.sources);
+  const url = json.sources[0].url;
+  json.evidence_verification = {
+    version: 1,
+    entries: {
+      [url]: { checked_at: TODAY, url_status: 'reachable', http_status: 200, final_url: url },
+    },
+  };
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.doesNotMatch(result.errors.join(' '), /nieznany url_status|brak http_status/);
+  assert.equal(JSON.stringify(json.sources), sourceBefore);
+  assert.equal(json.sources[0].url_status, 'requires_local_verification');
+});
+
+test('source checker retries HEAD 403 and 405 with browser-style GET before classifying', async () => {
+  const originalFetch = global.fetch;
+  try {
+    for (const url of ['https://fixture.test/forbidden', 'https://fixture.test/method-not-allowed']) {
+      const calls = [];
+      global.fetch = fixtureFetch(calls);
+      const result = await requestUrl(url, 1000);
+      assert.equal(result.url_status, 'blocked_by_publisher');
+      assert.deepEqual(calls.map((item) => item.method), ['HEAD', 'GET']);
+      assert.match(calls[1].headers['user-agent'], /Mozilla\/5\.0/);
+    }
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test('source checker uses only the writer-provided fallback after a saved 403 response', async () => {
+  const originalFetch = global.fetch;
+  const calls = [];
+  try {
+    global.fetch = fixtureFetch(calls);
+    const result = await requestSourceUrl('https://fixture.test/forbidden', [{ fallback_url: 'https://fixture.test/fallback' }], 1000);
+    assert.equal(result.url_status, 'reachable');
+    assert.equal(result.checked_via, 'fallback_url');
+    assert.equal(result.publisher_http_status, 403);
+    assert.deepEqual(calls.map((item) => `${item.method} ${item.url}`), [
+      'HEAD https://fixture.test/forbidden',
+      'GET https://fixture.test/forbidden',
+      'HEAD https://fixture.test/fallback',
+    ]);
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test('saved 200 and 404 HTTP fixtures classify deterministically without internet', async () => {
+  const originalFetch = global.fetch;
+  try {
+    global.fetch = fixtureFetch([]);
+    assert.equal((await requestUrl('https://fixture.test/ok', 1000)).url_status, 'reachable');
+    assert.equal((await requestUrl('https://fixture.test/missing', 1000)).url_status, 'broken');
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test('transport and rate-limit failures are environment failures, not content failures', () => {
+  assert.equal(isEnvironmentVerificationFailure({ url_status: 'verification_failed' }), true);
+  assert.equal(isEnvironmentVerificationFailure({ url_status: 'temporarily_unavailable' }), true);
+  assert.equal(isEnvironmentVerificationFailure({ url_status: 'broken' }), false);
+  assert.equal(isEnvironmentVerificationFailure({ url_status: 'reachable' }), false);
+});
+
+test('evidence locations include image alt, caption and overlay text', () => {
+  const json = validEvidenceJson();
+  const url = json.sources[0].url;
+  json.image_prompts_v4 = [{
+    caption_pl: 'Badanie wykazało zmianę ryzyka o 20% w obserwowanej grupie.',
+    alt_pl: 'Wykres ryzyka w obserwowanej grupie badania',
+    overlay_text_pl: 'Ryzyko niższe o 20%',
+  }];
+  json.evidence_claims.push({
+    claim: 'Badanie wykazało zmianę ryzyka o 20%',
+    location: 'image_prompts_v4[0].caption_pl',
+    claim_type: 'statistic',
+    source_urls: [url],
+  }, {
+    claim: 'Wykres ryzyka w obserwowanej grupie badania',
+    location: 'image_prompts_v4[0].alt_pl',
+    claim_type: 'medical',
+    source_urls: [url],
+  }, {
+    claim: 'Ryzyko niższe o 20%',
+    location: 'image_prompts_v4[0].overlay_text_pl',
+    claim_type: 'statistic',
+    source_urls: [url],
+  });
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
 test('stale or broken source verification is blocking', () => {
   const stale = validEvidenceJson();
   stale.sources[0].checked_at = '2025-01-01';
@@ -130,16 +356,18 @@ test('stale or broken source verification is blocking', () => {
   const broken = validEvidenceJson();
   broken.sources[0].url_status = 'broken';
   broken.sources[0].http_status = 404;
-  assert.match(validateArticleEvidence(broken, { today: TODAY }).errors.join(' '), /url_status/);
+  assert.match(validateArticleEvidence(broken, { today: TODAY }).errors.join(' '), /martwe|źródło zastępcze/);
 });
 
 test('URL checker distinguishes a reachable restricted endpoint from a broken address', () => {
   assert.equal(classifyHttpStatus(200), 'reachable');
   assert.equal(classifyHttpStatus(301), 'reachable');
-  assert.equal(classifyHttpStatus(403), 'reachable');
-  assert.equal(classifyHttpStatus(429), 'reachable');
+  assert.equal(classifyHttpStatus(403), 'blocked_by_publisher');
+  assert.equal(classifyHttpStatus(405), 'blocked_by_publisher');
+  assert.equal(classifyHttpStatus(429), 'temporarily_unavailable');
   assert.equal(classifyHttpStatus(404), 'broken');
-  assert.equal(classifyHttpStatus(500), 'broken');
+  assert.equal(classifyHttpStatus(410), 'broken');
+  assert.equal(classifyHttpStatus(500), 'temporarily_unavailable');
 });
 
 test('fresh local URL verification is reused, but stale and failed results are not', () => {
@@ -155,10 +383,44 @@ test('fresh local URL verification is reused, but stale and failed results are n
 });
 
 test('transport failure is not mislabeled as a broken source URL', async () => {
-  const result = await requestUrl('http://127.0.0.1:1/source', 1000);
-  assert.equal(result.url_status, 'verification_failed');
-  assert.equal(result.http_status, 0);
-  assert.ok(result.error);
+  const originalFetch = global.fetch;
+  let result;
+  try {
+    global.fetch = async () => { throw new Error('ECONNREFUSED fixture'); };
+    result = await requestUrl('https://fixture.test/network-error', 1000);
+    assert.equal(result.url_status, 'verification_failed');
+    assert.equal(result.http_status, 0);
+    assert.ok(result.error);
+  } finally {
+    global.fetch = originalFetch;
+  }
+
+  const json = validEvidenceJson();
+  json.sources[0] = { ...json.sources[0], url_status: 'verification_failed', http_status: 0 };
+  const errors = validateArticleEvidence(json, { today: TODAY }).errors.join(' ');
+  assert.match(errors, /DNS, timeoutu, TLS albo połączenia/);
+  assert.doesNotMatch(errors, /brak http_status/);
+});
+
+test('environment failure exits 30 and leaves the article JSON byte-identical', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-evidence-env-'));
+  try {
+    const file = path.join(dir, 'draft.fitpo50.json');
+    const cache = path.join(dir, 'cache.json');
+    const payload = `${JSON.stringify({
+      sources: [{ label: 'Niedostępny test', url: 'https://fixture.test/network-error' }],
+      faq_research: [],
+    }, null, 2)}\n`;
+    fs.writeFileSync(file, payload);
+    const result = spawnSync('node', [
+      'scripts/verify-article-evidence.js', '--file', file, '--write', 'true', '--timeout', '1000', '--cache-file', cache,
+      '--http-fixture', path.join(REPO, 'tests/fixtures/http/article-evidence-responses.json'),
+    ], { cwd: REPO, encoding: 'utf8' });
+    assert.equal(result.status, 30, `${result.stdout}\n${result.stderr}`);
+    assert.equal(fs.readFileSync(file, 'utf8'), payload);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('trusted institutional guidance and consensus qualify as medical evidence', () => {
@@ -188,6 +450,16 @@ test('ESPEN guideline is recognized as a strong institutional source', () => {
   json.sources[0].url = espen;
   json.sources[0].evidence_level = 'guideline';
   json.evidence_claims[0].source_urls = [espen, json.sources[1].url];
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
+test('MedlinePlus guidance is recognized as a strong US public-health source', () => {
+  const json = validEvidenceJson();
+  const medline = 'https://medlineplus.gov/ency/article/004018.htm';
+  json.sources[0].url = medline;
+  json.sources[0].evidence_level = 'official_guidance';
+  json.evidence_claims[0].source_urls = [medline, json.sources[1].url];
   const result = validateArticleEvidence(json, { today: TODAY });
   assert.equal(result.ok, true, result.errors.join('\n'));
 });
@@ -225,6 +497,7 @@ test('JSON fixer never wraps semantic block content inside a paragraph', () => {
 
 test('quick answer gate accepts a concise multi-sentence paragraph and decimal values', () => {
   assert.equal(hasClearQuickAnswerForm('Jajka mogą zmieniać LDL. W badaniu różnica wyniosła 8.14 mg/dl. Decyzję oprzyj na swoim wyniku.'), true);
+  assert.equal(hasClearQuickAnswerForm('Dr. Kowalski nie zastępuje konsultacji. Jeśli wynik rośnie, omów go z lekarzem.'), true);
   assert.equal(hasClearQuickAnswerForm('urwany fragment bez końca'), false);
   assert.equal(hasClearQuickAnswerForm('Pierwsze. Drugie. Trzecie. Czwarte.'), false);
 });
@@ -322,6 +595,64 @@ test('base JSON fixer preserves evidence claims outside article sections', () =>
     const after = JSON.parse(fs.readFileSync(file, 'utf8'));
     assert.deepEqual(after.evidence_claims.map((item) => item.location), ['lead', 'quick_answer', 'key_takeaways[0]']);
     assert.ok(after.evidence_claims.every((item) => item.claim.includes('Badanie objęło starszych mężczyzn')));
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('base JSON fixer preserves precise canonical claims in sections and image prompts', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-canonical-evidence-'));
+  try {
+    const file = path.join(dir, 'canonical-evidence.fitpo50.json');
+    const sourceUrl = 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4455479/';
+    const sectionClaim = 'prawidłowa godzina pompy jest potrzebna do właściwego podawania insuliny';
+    const imageClaim = 'Ryzyko względne wyniosło 1,04';
+    fs.writeFileSync(file, `${JSON.stringify({
+      slug: 'canonical-evidence-test',
+      title: 'Test zachowania dokładnych przypisań dowodów w artykule',
+      seo_title: 'Test zachowania dokładnych przypisań dowodów',
+      meta_description: 'Kontrolny opis sprawdzający, czy fixer zachowuje dokładne twierdzenia przypisane do akapitów i podpisów obrazów zamiast zastępować je inną treścią.',
+      category: 'zdrowie',
+      date_published: TODAY,
+      quick_answer: 'To kontrolna odpowiedź opisująca warunek i konkretny wynik 1,04, aby sprawdzić zachowanie przypisań bez dopisywania albo podmieniania twierdzeń.',
+      key_takeaways: ['Jeden', 'Dwa', 'Trzy', 'Cztery'],
+      sections: [{
+        title: 'Co pokazuje instrukcja urządzenia?',
+        paragraphs_html: [`<p>Producent wyjaśnia, że ${sectionClaim} w tym konkretnym modelu.</p>`],
+        image: {},
+      }],
+      answer_blocks: [],
+      sources: [{ label: 'Aldasouqi i Reed 2014 (PMC)', url: sourceUrl, evidence_level: 'primary_research', checked_at: TODAY, url_status: 'reachable', http_status: 200 }],
+      evidence_claims: [
+        { claim: sectionClaim, location: 'sections[0].paragraphs_html[0]', claim_type: 'safety', source_urls: [sourceUrl] },
+        { claim: imageClaim, location: 'image_prompts_v4[0].overlay_text_pl', claim_type: 'statistic', source_urls: [sourceUrl] },
+      ],
+      faq_research: [],
+      image_prompts_v4: [{
+        section_ref: 'sekcja-1',
+        filename_base: 'canonical-evidence-test-obraz',
+        source_file: 'canonical-evidence-test-obraz.jpeg',
+        topic: 'Kontrolna grafika danych',
+        technique: 'data visualization',
+        composition: 'Poziomy wykres na jasnym tle',
+        purpose: 'Kontrola zachowania dowodu przypisanego do grafiki',
+        aspect_ratio: '16:9',
+        prompt_en: 'A clean horizontal chart without decorative content.',
+        negative_prompt: 'No logos and no unrelated text.',
+        alt_pl: 'Kontrolny wykres ryzyka względnego',
+        caption_pl: 'Kontrolny podpis wykresu.',
+        overlay_text_pl: imageClaim,
+        overlay_claims: [{ claim: imageClaim, source_url: sourceUrl }],
+        evidence_source_urls: [sourceUrl],
+        requires_exact_data_render: true,
+      }],
+    }, null, 2)}\n`);
+    spawnSync('node', ['scripts/fix-fitpo50-json.js', '--file', file, '--write', 'true', '--allow-outside-repo', 'true'], { cwd: REPO, encoding: 'utf8' });
+    const after = JSON.parse(fs.readFileSync(file, 'utf8'));
+    assert.deepEqual(after.evidence_claims.slice(0, 2).map(({ claim, location }) => ({ claim, location })), [
+      { claim: sectionClaim, location: 'sections[0].paragraphs_html[0]' },
+      { claim: imageClaim, location: 'image_prompts_v4[0].overlay_text_pl' },
+    ]);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

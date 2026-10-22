@@ -10,7 +10,7 @@ const {
   issuePipelineCapability,
 } = require('../scripts/lib/pipeline-capability');
 const { createManagedTempDir, disposeTempWorkspace } = require('../scripts/lib/temp-workspace');
-const { reportPathForJson, sha256File } = require('../scripts/lib/article-json-artifact');
+const { computePreparedPackageFingerprint, reportPathForJson, sha256File } = require('../scripts/lib/article-json-artifact');
 
 const REPO = path.resolve(__dirname, '..');
 
@@ -94,10 +94,12 @@ test('bezpośredni importer nie zapisuje nawet z podrobioną flagą stagingu i p
   roots.push(directory);
   const input = path.join(directory, 'direct-import.fitpo50.json');
   fs.writeFileSync(input, `${JSON.stringify({ slug: 'direct-import', title: 'Test bezpośredniego importu' })}\n`);
+  const packageState = computePreparedPackageFingerprint(input);
   fs.writeFileSync(reportPathForJson(input), `${JSON.stringify({
     status: 'CONTENT_READY',
     output_file: input,
     output_sha256: sha256File(input),
+    package_sha256: packageState.fingerprint,
   })}\n`);
   const result = spawnSync('node', ['scripts/import-article.js', '--file', input, '--publish', 'true'], {
     cwd: REPO,

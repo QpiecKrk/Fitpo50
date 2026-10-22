@@ -116,7 +116,6 @@ rsync -a \
   --exclude="README.md" \
   --exclude="ARTICLE_STANDARD.md" \
   --exclude="article-template-bento.html" \
-  --exclude="ARTICLE_TEMPLATE_GUIDE.md" \
   --exclude="CLAUDE.md" \
   --exclude="DEPLOY.md" \
   --exclude="PROJECT_MEMORY.md" \

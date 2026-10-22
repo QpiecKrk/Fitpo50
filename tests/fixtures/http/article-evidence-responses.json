@@ -1,0 +1,14 @@
+{
+  "responses": {
+    "https://fixture.test/ok": { "HEAD": 200 },
+    "https://fixture.test/forbidden": { "HEAD": 403, "GET": 403 },
+    "https://fixture.test/method-not-allowed": { "HEAD": 405, "GET": 405 },
+    "https://fixture.test/missing": { "HEAD": 404 },
+    "https://fixture.test/fallback": { "HEAD": 200 },
+    "https://fixture.test/network-error": { "error": "ECONNREFUSED fixture" }
+  },
+  "autocomplete_iso_8859_2": {
+    "content_type": "application/json; charset=ISO-8859-2",
+    "bytes": [91, 34, 99, 122, 121, 32, 122, 97, 179, 243, 191, 34, 44, 91, 34, 99, 122, 121, 32, 122, 97, 179, 243, 191, 34, 93, 93]
+  }
+}

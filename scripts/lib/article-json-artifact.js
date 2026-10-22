@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const { slugify } = require('./slugify');
 
 const STATUSES = Object.freeze({
   DRAFT: 'DRAFT',
@@ -12,15 +13,35 @@ function sha256File(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 }
 
+function packageMediaNames(json) {
+  const names = new Set();
+  for (const entry of Array.isArray(json?.media_manifest?.entries) ? json.media_manifest.entries : []) {
+    if (entry?.source_file) names.add(String(entry.source_file));
+    Object.values(entry?.variants || {}).forEach((variant) => {
+      if (variant?.file) names.add(String(variant.file));
+    });
+  }
+  return [...names].sort((a, b) => a.localeCompare(b, 'pl'));
+}
+
+function computePreparedPackageFingerprint(inputPath, jsonValue = null) {
+  const file = path.resolve(inputPath);
+  const json = jsonValue || JSON.parse(fs.readFileSync(file, 'utf8'));
+  const entries = [{ relative_path: path.basename(file), sha256: sha256File(file) }];
+  for (const name of packageMediaNames(json)) {
+    if (!name || name !== path.basename(name)) throw new Error(`Niebezpieczna nazwa pliku w media_manifest: ${name}`);
+    const mediaPath = path.join(path.dirname(file), name);
+    if (!fs.existsSync(mediaPath) || !fs.statSync(mediaPath).isFile()) throw new Error(`Brak pliku pakietu CONTENT_READY: ${name}`);
+    entries.push({ relative_path: name, sha256: sha256File(mediaPath) });
+  }
+  const fingerprint = crypto.createHash('sha256')
+    .update(entries.map((entry) => `${entry.relative_path}\0${entry.sha256}`).join('\n'))
+    .digest('hex');
+  return { fingerprint, entries };
+}
+
 function safeSlug(value) {
-  return String(value || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
+  return slugify(value);
 }
 
 function reportPathForJson(jsonPath) {
@@ -67,6 +88,13 @@ function inspectPreparedArtifact(inputPath, repoRoot = process.cwd()) {
     }
     if (path.resolve(report.output_file || '') !== file) {
       errors.push('Raport przygotowania wskazuje inny plik wynikowy.');
+    }
+    try {
+      const packageState = computePreparedPackageFingerprint(file, json);
+      if (!report.package_sha256) errors.push('Raport nie zawiera skrótu całej paczki CONTENT_READY; przygotuj JSON ponownie.');
+      else if (report.package_sha256 !== packageState.fingerprint) errors.push('SHA-256 całej paczki nie zgadza się z raportem; JSON albo obraz został zmieniony po akceptacji.');
+    } catch (error) {
+      errors.push(error.message || String(error));
     }
   }
   const slug = safeSlug(json?.slug || '');
@@ -127,9 +155,11 @@ function cleanupPreparedArtifact(inputPath, options = {}) {
 module.exports = {
   STATUSES,
   cleanupPreparedArtifact,
+  computePreparedPackageFingerprint,
   inspectPreparedArtifact,
   markdownReportPathForJson,
   reportPathForJson,
   safeSlug,
   sha256File,
+  packageMediaNames,
 };

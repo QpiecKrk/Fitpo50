@@ -44,6 +44,7 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
     { path: '/sitemap.xml' },
     { path: '/llms.txt' },
     { path: '/ads.txt' },
+    { path: '/assets/data/search-index.json' },
   ];
   for (const item of requiredBaseFiles) {
     const url = `${normalizedBase}${item.path}`;
@@ -78,6 +79,12 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
     for (const imageUrl of article.imageUrls || []) {
       const image = responses.get(imageUrl);
       if (!image || image.status !== 200 || Buffer.from(image.body || '').length === 0) errors.push(`${imageUrl}: brak wymaganego obrazu.`);
+    }
+    for (const listingUrl of article.listingUrls || []) {
+      const listing = responses.get(listingUrl);
+      if (!listing || listing.status !== 200 || !String(listing.body || '').includes(`${new URL(article.url).pathname.slice(1)}`)) {
+        errors.push(`${listingUrl}: listing lub indeks nie zawiera ${article.url}.`);
+      }
     }
     checks.push({ type: 'ARTICLE', url: article.url, pass: true });
   }

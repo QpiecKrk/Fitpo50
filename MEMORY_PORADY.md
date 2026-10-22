@@ -17,7 +17,7 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Plik `.fitpo50.json` jest wsadem roboczym do importu; po udanej publikacji finalnym zrodlem jest HTML + assety + PDF + indeksy, a JSON nie musi zostawac w repo.
 - Roboczych JSON-ow w `data/import/*.fitpo50.json` nie commitujemy, jesli finalny HTML jest gotowy i JSON blokuje `json:gate:diff`.
 - Regula importera dla "Czytelni": linki z JSON (`related_articles` / `related`) sa ignorowane; importer dobiera 3 karty tylko z lokalnie istniejacych artykulow.
-- `article-template-bento.html` / `node scripts/create-article-from-template.js ...` stosujemy tylko do recznych szkicow i materialow roboczych.
+- `article-template-bento.html` jest wewnętrznym szablonem importera. Nie tworzymy ręcznych artykułów HTML ani alternatywnych szkiców poza workflow JSON-first.
 - Przed oddaniem artykulu uruchamiamy walidator:
   - `node scripts/validate-article-standard.js <plik.html>`
 - Przed publikacja artykulu obowiazkowo generujemy PDF i podpinamy przycisk hero:
@@ -31,7 +31,7 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Naglowek sekcji "Czytelnia" ma byc index-style (`.reading-room__head` + ikona), nie wariant alternatywny.
 - Interlinking w tresci: minimum 4 linki wewnetrzne osadzone w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
 - Crosslinki wewnetrzne dopinamy recznie po imporcie (kontrola redakcyjna); nie przenosimy automatycznie linkow z promptu/modelu.
-- FAQ: importer nigdy nie generuje ani nie dopisuje brakujacych pytan. Kazde pytanie musi miec udokumentowane zrodlo w `faq_research[]` (GSC, PAA, autocomplete albo jawnie opisana analiza); brak wymaganej liczby wiarygodnych pytan blokuje publikacje.
+- FAQ: importer nigdy nie generuje ani nie dopisuje pytań. Każde istniejące pytanie musi mieć udokumentowane źródło w `faq_research[]` (GSC, PAA, autocomplete albo jawnie opisana analiza). Nie ma sztucznego minimum; przy braku realnych pytań artykuł nie zawiera sekcji ani schema `FAQPage`.
 - Dopuszczamy bardziej wyrazisty styl artykulu (kolory, callouty, typografia, tabele), ale:
   - zachowujemy spojnosc z designem serwisu,
   - trzymamy max 2-3 rodziny fontow na artykul,

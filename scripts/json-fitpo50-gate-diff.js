@@ -3,9 +3,11 @@
 const fs = require('fs');
 const { spawnSync } = require('child_process');
 const { POLICY, utils, validators } = require('./lib/article-policy');
-const { MEDICAL_EVIDENCE_LEVELS, isStrongMedicalSource, validateArticleEvidence } = require('./lib/article-evidence');
+const { MEDICAL_EVIDENCE_LEVELS, countsTowardSourceMinimum, isStrongMedicalSource, validateArticleEvidence, withEvidenceVerification } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
-const { validateManifestStructure } = require('./lib/article-media');
+const { sectionRequiresPrimaryImage, validateManifestStructure } = require('./lib/article-media');
+const { normalizeInternalHref } = require('./lib/article-normalization');
+const { validateSectionSchema } = require('./lib/article-section-contract');
 
 const errors = [];
 const warnings = [];
@@ -27,10 +29,15 @@ function readChangedFiles() {
 }
 
 function parseArgs(argv) {
-  const out = { files: [] };
+  const out = { files: [], json: false, phase: 'final' };
   for (let i = 0; i < argv.length; i += 1) {
     const token = String(argv[i] || '');
-    if (token === '--file') {
+    if (token === '--json') out.json = true;
+    else if (token === '--phase') {
+      out.phase = String(argv[i + 1] || 'final');
+      i += 1;
+    }
+    else if (token === '--file') {
       const next = argv[i + 1];
       if (next && !String(next).startsWith('--')) {
         out.files.push(String(next));
@@ -43,6 +50,10 @@ function parseArgs(argv) {
 
 function isFitpoJson(file) {
   return /\.fitpo50\.json$/i.test(file) || /fitpo50\.json$/i.test(file);
+}
+
+function sectionRequiresQuestionHeading(section) {
+  return sectionRequiresPrimaryImage(section);
 }
 
 function isArchivedImport(file) {
@@ -90,15 +101,7 @@ function isQuestionHeading(text) {
 }
 
 function normalizeLocalHtmlHref(href) {
-  const raw = String(href || '').trim();
-  if (!raw) return '';
-  if (/^https?:\/\/(www\.)?fitpo50\.pl\//i.test(raw)) {
-    return raw
-      .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
-      .replace(/^[./]+/, '')
-      .replace(/[?#].*$/, '');
-  }
-  return raw.replace(/^[./]+/, '').replace(/[?#].*$/, '');
+  return normalizeInternalHref(href);
 }
 
 function checkInternalHtmlLinks(value, label) {
@@ -139,9 +142,9 @@ function calculateAeoScore(ctx) {
   let links = 0;
   const notes = [];
 
-  if (ctx.quickAnswerWords >= POLICY.WORDS.QUICK_ANSWER_MIN && ctx.quickAnswerWords <= POLICY.WORDS.QUICK_ANSWER_MAX) {
+  if (ctx.quickAnswerSentences >= 1 && ctx.quickAnswerSentences <= 3 && ctx.quickAnswerWords <= POLICY.WORDS.QUICK_ANSWER_MAX) {
     quickAnswer += 15;
-  } else if (ctx.quickAnswerWords >= 30 && ctx.quickAnswerWords <= 80) {
+  } else if (ctx.quickAnswerWords > 0 && ctx.quickAnswerWords <= 80) {
     quickAnswer += 8;
     notes.push('quick_answer: poza limitem polityki, ale nadal czytelny.');
   } else {
@@ -153,12 +156,15 @@ function calculateAeoScore(ctx) {
   const intentPattern = /\b(jak|czy|ile|kiedy|dlaczego|objawy|norma|wynik|warto|bezpiecz|dawk|skutek)\b/iu;
   const matchedFaq = ctx.faqQuestions.filter((q) => intentPattern.test(q)).length;
   const faqCoverage = ctx.faqQuestions.length ? matchedFaq / ctx.faqQuestions.length : 0;
-  if (ctx.faqQuestions.length >= POLICY.WORDS.FAQ_MIN_ITEMS) faqIntent += 10;
-  if (faqCoverage >= 0.75) faqIntent += 10;
-  else if (faqCoverage >= 0.5) faqIntent += 5;
-  else notes.push('FAQ: słabe pokrycie intencji pytań użytkowników.');
-  if (ctx.faqAnswerWordCounts.every((n) => n >= 30 && n <= 60)) faqIntent += 5;
-  else notes.push('FAQ: część odpowiedzi wypada poza 30-60 słów.');
+  if (ctx.faqQuestions.length) {
+    if (faqCoverage >= 0.75) faqIntent += 20;
+    else if (faqCoverage >= 0.5) faqIntent += 10;
+    else notes.push('FAQ: słabe pokrycie intencji pytań użytkowników.');
+    if (ctx.faqAnswerWordCounts.every((n) => n > 0)) faqIntent += 5;
+    else notes.push('FAQ: co najmniej jedna odpowiedź jest pusta.');
+  } else {
+    notes.push('FAQ: brak sekcji, ponieważ nie dostarczono udokumentowanych pytań użytkowników.');
+  }
 
   const strongDomains = /(doi\.org|pubmed|nih\.gov|cancer\.gov|who\.int|cdc\.gov|ema\.europa\.eu|ncbi\.nlm\.nih\.gov|frontiersin\.org|nature\.com|gov\.pl|ptkardio|esmo|escardio|aafp|nhs\.uk|cochrane)/i;
   const validUrls = ctx.sourceUrls.filter((u) => /^https?:\/\//i.test(u));
@@ -169,13 +175,19 @@ function calculateAeoScore(ctx) {
   else if (strongRatio >= 0.5) sources += 8;
   else notes.push('Źródła: niski udział domen medyczno-naukowych.');
 
-  if (ctx.internalLinkCount >= POLICY.WORDS.INTERNAL_LINKS_MIN) links += 15;
+  if (ctx.internalLinkCount >= POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) links += 15;
+  else if (ctx.internalLinkCount === 1) links += 8;
   const genericAnchors = ctx.internalAnchorTexts.filter((a) => isGenericAnchor(a)).length;
   if (ctx.internalAnchorTexts.length && genericAnchors === 0) links += 10;
   else if (genericAnchors > 0) notes.push(`Linki: wykryto generyczne anchory (${genericAnchors}).`);
 
   const total = quickAnswer + faqIntent + sources + links;
-  return { total, breakdown: { quickAnswer, faqIntent, sources, links }, notes };
+  return {
+    total,
+    availableMax: ctx.faqQuestions.length ? 100 : 75,
+    breakdown: { quickAnswer, faqIntent, sources, links },
+    notes,
+  };
 }
 
 function hasIntentToken(text) {
@@ -198,7 +210,8 @@ function collectCodeNonAscii(chunks) {
   return offending;
 }
 
-function validateFile(file) {
+function validateFile(file, options = {}) {
+  const draftPhase = options.phase === 'draft';
   let json;
   try {
     json = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -242,11 +255,8 @@ function validateFile(file) {
 
   const quickAnswer = String(json.quick_answer || json.quickAnswer || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const quickAnswerWords = countWords(quickAnswer);
-  if (!quickAnswer) {
-    errors.push(`${file}: brak quick_answer (wymagane 40-60 słów).`);
-  } else if (quickAnswerWords < 40 || quickAnswerWords > 60) {
-    errors.push(`${file}: quick_answer poza limitem 40-60 słów (jest ${quickAnswerWords}).`);
-  }
+  const quickAnswerValidation = validators.validateQuickAnswer(quickAnswer, { mode: 'strict' });
+  quickAnswerValidation.errors.forEach((error) => errors.push(`${file}: ${error}`));
   const quickNorm = normalizeTextForCompare(quickAnswer);
   for (const phrase of POLICY.GENERIC_QUICK_ANSWER_PATTERNS || []) {
     const needle = normalizeTextForCompare(phrase);
@@ -290,11 +300,13 @@ function validateFile(file) {
 
   const sections = Array.isArray(json.sections) ? json.sections : [];
   if (sections.length === 0) errors.push(`${file}: sections musi zawierać co najmniej jeden merytoryczny blok wynikający z intencji artykułu.`);
+  validateSectionSchema(sections).errors.forEach((error) => errors.push(`${file}: ${error}`));
   const sectionChunksForLinks = [];
   const sectionChunksForCode = [];
   for (let i = 0; i < sections.length; i += 1) {
     const s = sections[i] || {};
-    if (!isQuestionHeading(String(s.title || s.heading || '').trim())) {
+    const requiresPrimaryContent = sectionRequiresPrimaryImage(s);
+    if (sectionRequiresQuestionHeading(s) && !isQuestionHeading(String(s.title || s.heading || '').trim())) {
       errors.push(`${file}: sections[${i}].title musi być pytaniem zakończonym "?".`);
     }
     const paragraphs = Array.isArray(s.paragraphs_html) ? s.paragraphs_html : [];
@@ -305,12 +317,14 @@ function validateFile(file) {
     const introRes = validators.validateAnswerFirstParagraph(String(paragraphs[0] || ''), { label: `${file}: sections[${i}] pierwszy akapit` });
     if (!introRes.ok) errors.push(...introRes.errors);
 
-    if (!s.image || typeof s.image !== 'object') {
-      errors.push(`${file}: sections[${i}] brak image.`);
-    } else {
-      if (!String(s.image.src || '').trim()) errors.push(`${file}: sections[${i}].image.src puste.`);
-      if (!String(s.image.alt || '').trim()) errors.push(`${file}: sections[${i}].image.alt puste.`);
-      if (!String(s.image.caption || '').trim()) errors.push(`${file}: sections[${i}].image.caption puste.`);
+    if (requiresPrimaryContent && !draftPhase) {
+      if (!s.image || typeof s.image !== 'object') {
+        errors.push(`${file}: sections[${i}] brak image.`);
+      } else {
+        if (!String(s.image.src || '').trim()) errors.push(`${file}: sections[${i}].image.src puste.`);
+        if (!String(s.image.alt || '').trim()) errors.push(`${file}: sections[${i}].image.alt puste.`);
+        if (!String(s.image.caption || '').trim()) errors.push(`${file}: sections[${i}].image.caption puste.`);
+      }
     }
     const additionalImages = Array.isArray(s.images) ? s.images : [];
     for (let imageIndex = 0; imageIndex < additionalImages.length; imageIndex += 1) {
@@ -336,18 +350,13 @@ function validateFile(file) {
     }
   }
   const internalLinkCount = countInternalHtmlLinks(sectionChunksForLinks);
-  if (internalLinkCount < 4) {
-    errors.push(`${file}: za mało linków kontekstowych w sekcjach (${internalLinkCount}/4).`);
+  if (internalLinkCount < POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) {
+    warnings.push(`${file}: LOW_CONTEXTUAL_LINK_COUNT: wykryto ${internalLinkCount} naturalnych linków; to ostrzeżenie, nie bloker.`);
   }
 
   const faq = Array.isArray(json.answer_blocks) ? json.answer_blocks : [];
-  if (faq.length < 4) {
-    errors.push(`${file}: answer_blocks < 4 (jest ${faq.length}).`);
-  }
   const faqResearch = Array.isArray(json.faq_research) ? json.faq_research : [];
-  if (faqResearch.length < 4) {
-    errors.push(`${file}: faq_research musi mieć minimum 4 wpisy (jest ${faqResearch.length}).`);
-  }
+  if (faq.length !== faqResearch.length) errors.push(`${file}: answer_blocks i faq_research muszą odpowiadać sobie 1:1.`);
   const normalizeQuestion = (value) => String(value || '')
     .toLowerCase()
     .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
@@ -357,6 +366,9 @@ function validateFile(file) {
   const faqSeen = new Set();
   for (let i = 0; i < faq.length; i += 1) {
     const q = normalizeQuestion(faq[i] && faq[i].question);
+    if (q && q !== normalizeQuestion(faqResearch[i]?.question)) {
+      errors.push(`${file}: FAQ #${i + 1} nie odpowiada kolejnością lub brzmieniem faq_research #${i + 1} 1:1.`);
+    }
     if (q) {
       if (faqSeen.has(q)) {
         errors.push(`${file}: FAQ #${i + 1} duplikuje wcześniejsze pytanie.`);
@@ -393,6 +405,7 @@ function validateFile(file) {
     const answerHtml = faq[i]?.answer_html || '';
     const answerWords = countWords(String(answerHtml).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
     faqAnswerWordCounts.push(answerWords);
+    if (answerWords === 0) errors.push(`${file}: FAQ #${i + 1} nie ma odpowiedzi.`);
     checkInternalHtmlLinks(answerHtml, `${file}: answer_blocks[${i}].answer_html`);
     sectionChunksForCode.push(answerHtml);
   }
@@ -406,9 +419,28 @@ function validateFile(file) {
     errors.push(`${file}: w <code> wykryto znaki spoza ASCII (np. "${codeOffending[0]}"), co może wywalić generator PDF.`);
   }
 
+  const imagePrompts = Array.isArray(json.image_prompts_v4) ? json.image_prompts_v4 : [];
+  const knownSourceUrls = new Set((Array.isArray(json.sources) ? json.sources : []).map((source) => String(source?.url || '').trim()).filter(Boolean));
+  imagePrompts.forEach((prompt, promptIndex) => {
+    if (prompt?.requires_exact_data_render !== true) return;
+    const overlayClaims = Array.isArray(prompt.overlay_claims) ? prompt.overlay_claims : [];
+    if (!overlayClaims.length) errors.push(`${file}: image_prompts_v4[${promptIndex}].overlay_claims jest wymagane dla requires_exact_data_render=true.`);
+    overlayClaims.forEach((claim, claimIndex) => {
+      const claimText = String(claim?.claim || '').trim();
+      const sourceUrl = String(claim?.source_url || '').trim();
+      if (!claimText || !utils.fuzzyNormalize(prompt.overlay_text_pl || '').includes(utils.fuzzyNormalize(claimText))) {
+        errors.push(`${file}: image_prompts_v4[${promptIndex}].overlay_claims[${claimIndex}].claim musi występować w overlay_text_pl.`);
+      }
+      if (!knownSourceUrls.has(sourceUrl)) errors.push(`${file}: image_prompts_v4[${promptIndex}].overlay_claims[${claimIndex}].source_url musi występować w sources[].`);
+    });
+  });
+
   const sources = Array.isArray(json.sources) ? json.sources : [];
-  if (sources.length < 4) {
-    errors.push(`${file}: sources musi mieć minimum 4 pozycje (jest ${sources.length}).`);
+  const countableSources = draftPhase
+    ? sources.filter((source) => source?.evidence_scope !== 'device_instructions_only')
+    : sources.filter((source) => source?.evidence_scope !== 'device_instructions_only' && countsTowardSourceMinimum(withEvidenceVerification(json, source)));
+  if (countableSources.length < POLICY.WORDS.CITATION_MIN_URLS) {
+    errors.push(`${file}: sources musi mieć minimum ${POLICY.WORDS.CITATION_MIN_URLS} dostępne albo kwalifikowane źródła (jest ${countableSources.length}).`);
   }
   const sourceUrls = sources
     .map((s) => String((s && (s.url || s.href)) || '').trim())
@@ -433,6 +465,7 @@ function validateFile(file) {
   }
   const aeo = calculateAeoScore({
     quickAnswerWords,
+    quickAnswerSentences: utils.countCompleteSentences(quickAnswerPlain),
     quickAnswerPlain,
     faqQuestions,
     faqAnswerWordCounts,
@@ -440,18 +473,14 @@ function validateFile(file) {
     internalLinkCount,
     internalAnchorTexts,
   });
-  const threshold = 70;
-  warnings.push(`${file}: AEO score ${aeo.total}/100 (quick_answer=${aeo.breakdown.quickAnswer}, faq_intent=${aeo.breakdown.faqIntent}, sources=${aeo.breakdown.sources}, links=${aeo.breakdown.links}).`);
+  const threshold = Math.ceil(aeo.availableMax * 0.7);
+  warnings.push(`${file}: AEO score ${aeo.total}/${aeo.availableMax} (quick_answer=${aeo.breakdown.quickAnswer}, faq_intent=${aeo.breakdown.faqIntent}, sources=${aeo.breakdown.sources}, links=${aeo.breakdown.links}).`);
   for (const note of aeo.notes) warnings.push(`${file}: AEO note: ${note}`);
   if (aeo.total < threshold) {
-    errors.push(`${file}: AEO score poniżej progu ${threshold}/100 (jest ${aeo.total}) - popraw quick_answer/FAQ/źródła/linki przed publikacją.`);
+    errors.push(`${file}: AEO score poniżej progu ${threshold}/${aeo.availableMax} (jest ${aeo.total}) - popraw quick_answer/źródła/linki oraz tylko udokumentowane FAQ.`);
   }
   if (!hasClearQuickAnswerForm(quickAnswerPlain)) {
     errors.push(`${file}: quick_answer musi być jednym, klarownym zdaniem lub zwięzłym akapitem zakończonym interpunkcją.`);
-  }
-  const faqOutOfRange = faqAnswerWordCounts.filter((n) => n < 30 || n > 60).length;
-  if (faqOutOfRange > 0) {
-    errors.push(`${file}: ${faqOutOfRange} odpowiedzi FAQ wypada poza zakres 30-60 słów.`);
   }
   const strongCount = sources.filter((source) => {
     const level = String(source?.evidence_level || source?.evidenceLevel || '').trim().toLowerCase();
@@ -461,13 +490,16 @@ function validateFile(file) {
   if (sourceUrls.length && strongRatio < 0.5) {
     errors.push(`${file}: udział silnych źródeł medycznych jest zbyt niski (${Math.round(strongRatio * 100)}%, wymagane min 50%).`);
   }
-  const evidence = validateArticleEvidence(json);
+  const evidence = validateArticleEvidence(json, { allowPendingAutocomplete: draftPhase, allowPendingVerification: draftPhase });
   evidence.errors.forEach((error) => errors.push(`${file}: ${error}`));
-  const architecture = validateArticleArchitecture(json, { root: process.cwd() });
-  architecture.errors.forEach((error) => errors.push(`${file}: Architecture: ${error}`));
-  architecture.warnings.forEach((warning) => warnings.push(`${file}: Architecture: ${warning}`));
-  const media = validateManifestStructure(json);
-  media.errors.forEach((error) => errors.push(`${file}: Media: ${error}`));
+  evidence.warnings.forEach((warning) => warnings.push(`${file}: Evidence: ${warning}`));
+  if (!draftPhase) {
+    const architecture = validateArticleArchitecture(json, { root: process.cwd() });
+    architecture.errors.forEach((error) => errors.push(`${file}: Architecture: ${error}`));
+    architecture.warnings.forEach((warning) => warnings.push(`${file}: Architecture: ${warning}`));
+    const media = validateManifestStructure(json);
+    media.errors.forEach((error) => errors.push(`${file}: Media: ${error}`));
+  }
 }
 
 function main() {
@@ -480,7 +512,8 @@ function main() {
     targets = changed.filter((file) => isFitpoJson(file) && !isArchivedImport(file) && !isIntentionalInvalidFixture(file));
   }
   if (!targets.length) {
-    console.log('[PASS] json:gate:diff - brak zmienionych plików *.fitpo50.json');
+    if (args.json) console.log(JSON.stringify({ version: 1, status: 'PASS', diagnostics: [], summary: { files: 0, errors: 0, warnings: 0 } }));
+    else console.log('[PASS] json:gate:diff - brak zmienionych plików *.fitpo50.json');
     return;
   }
 
@@ -490,18 +523,34 @@ function main() {
       errors.push(`${file}: plik nie istnieje.`);
       continue;
     }
-    validateFile(file);
+    validateFile(file, { phase: args.phase });
+  }
+
+  const diagnostics = [
+    ...errors.map((message) => ({ path: '/', type: 'REQUIRES_WRITER', rule: 'RULE_JSON_GATE', severity: 'ERROR', message, suggestion: 'Popraw wskazane pole w drafcie i uruchom kontrolę ponownie.' })),
+    ...warnings.map((message) => ({ path: '/', type: 'FIXABLE_LOCAL', rule: 'RULE_JSON_GATE_WARNING', severity: 'WARNING', message, suggestion: 'Sprawdź raport; ostrzeżenie nie blokuje dalszej pracy.' })),
+  ];
+  if (args.json) {
+    console.log(JSON.stringify({
+      version: 1,
+      status: errors.length ? 'BLOCKED' : 'PASS',
+      diagnostics,
+      summary: { files: normalized.length, errors: errors.length, warnings: warnings.length },
+    }));
+    if (errors.length) process.exitCode = 20;
+    return;
   }
 
   if (warnings.length) {
     console.log('\n[WARN]');
-    for (const w of warnings) console.log(`- ${w}`);
+    for (const w of warnings) console.log(`- [/] [FIXABLE_LOCAL] [RULE_JSON_GATE_WARNING] ${w} -> Sprawdź raport.`);
   }
 
   if (errors.length) {
     console.log('\n[FAIL] json:gate:diff');
-    for (const e of errors) console.log(`- ${e}`);
-    process.exit(1);
+    for (const e of errors) console.log(`- [/] [REQUIRES_WRITER] [RULE_JSON_GATE] ${e} -> Popraw draft.`);
+    process.exitCode = 20;
+    return;
   }
 
   console.log(`[PASS] json:gate:diff - sprawdzono pliki: ${normalized.length}`);
@@ -516,4 +565,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { hasClearQuickAnswerForm, normalizeQuickAnswerForSentenceGate };
+module.exports = { calculateAeoScore, hasClearQuickAnswerForm, normalizeQuickAnswerForSentenceGate, parseArgs, sectionRequiresQuestionHeading, validateFile };

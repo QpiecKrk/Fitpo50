@@ -11,7 +11,52 @@ const {
   isSupportedCategory,
   normalizeCategory,
 } = require('../scripts/lib/categories');
-const { ensureCaptionedTables, normalizeSections, normalizeSeoTitleBase } = require('../scripts/import-article');
+const { ensureCaptionedTables, normalizeSections, normalizeSeoTitleBase, renderFaqList, renderSectionsHtml, upsertSitemapXml } = require('../scripts/import-article');
+const { slugify } = require('../scripts/lib/slugify');
+
+const ROOT = path.resolve(__dirname, '..');
+const DRAFT_VALIDATOR = path.join(ROOT, 'docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py');
+
+test('wspólny slugifier zachowuje polskie ł jako l', () => {
+  assert.equal(slugify('Żołądek i łydka po 50-tce'), 'zoladek-i-lydka-po-50-tce');
+});
+
+test('sitemap aktualizuje lastmod istniejącego URL-a i nie tworzy duplikatu', () => {
+  const url = 'https://fitpo50.pl/test.html';
+  const xml = `<urlset>\n  <url>\n    <loc>${url}</loc>\n    <lastmod>2026-01-01</lastmod>\n  </url>\n</urlset>\n`;
+  const result = upsertSitemapXml(xml, url, '2026-10-21');
+  assert.equal(result.operation, 'UPDATE');
+  assert.match(result.xml, /<lastmod>2026-10-21<\/lastmod>/);
+  assert.equal((result.xml.match(/<loc>/g) || []).length, 1);
+});
+
+test('brak realnych pytań nie tworzy pustej sekcji FAQ', () => {
+  assert.equal(renderFaqList([]), '');
+});
+
+test('quick answer nie traktuje polskich skrótów ani liczb dziesiętnych jako osobnych zdań', () => {
+  const cases = [
+    ['Zacznij od ok. 3 g dziennie. Jeśli tolerancja jest dobra, utrzymaj plan.', 2],
+    ['Np. 5 g może być porcją, ale decyzja zależy od sytuacji.', 1],
+    ['Plan obejmuje m.in. 2 spacery tygodniowo. Potem oceń reakcję.', 2],
+    ['Wynik 2,5 mmol/l nie jest samodzielną diagnozą.', 1],
+  ];
+  const python = spawnSync('python3', ['-c', [
+    'import importlib.util, json, sys',
+    'spec = importlib.util.spec_from_file_location("draft_validator", sys.argv[1])',
+    'module = importlib.util.module_from_spec(spec)',
+    'spec.loader.exec_module(module)',
+    'print(json.dumps([module.sentences(item) for item in json.loads(sys.stdin.read())]))',
+  ].join('; '), DRAFT_VALIDATOR], {
+    cwd: ROOT,
+    encoding: 'utf8',
+    input: JSON.stringify(cases.map(([text]) => text)),
+  });
+  assert.equal(python.status, 0, python.stderr);
+  const expected = cases.map(([, count]) => count);
+  assert.deepEqual(cases.map(([text]) => utils.countCompleteSentences(text)), expected);
+  assert.deepEqual(JSON.parse(python.stdout), expected);
+});
 
 test('validateSeoDescriptionLength accepts valid SEO description', () => {
   const desc = 'Badanie ApoB (Apolipoproteina B) to najlepszy marker ryzyka miażdżycy po 50-tce. Sprawdź normy, cenę i dlaczego warto je zrobić zamiast LDL dziś.';
@@ -71,6 +116,18 @@ test('importer preserves additional section images as separate picture blocks', 
   assert.match(html, /glowny\.webp/);
   assert.match(html, /detal\.webp/);
   assert.equal((html.match(/<picture>/g) || []).length, 2);
+});
+
+test('importer preserves utility section role without forcing a question or primary image contract', () => {
+  const [section] = normalizeSections([{
+    section_role: 'utility',
+    title: 'Plan na pierwszy tydzień po zmianie czasu',
+    paragraphs_html: ['<p>Praktyczna lista działań na kolejne dni.</p>'],
+  }]);
+
+  assert.equal(section.title, 'Plan na pierwszy tydzień po zmianie czasu');
+  assert.equal(section.sectionRole, 'utility');
+  assert.match(renderSectionsHtml([section]), /<h2 data-section-role="utility">Plan na pierwszy tydzień po zmianie czasu<\/h2>/);
 });
 
 test('SEO title base reserves space for the FitPo50 brand suffix', () => {

@@ -6,6 +6,16 @@ npm run assets:mirror:sync
 npm run deployment:prepare
 npm run predeploy:check
 
+# Nowe pliki nie mogą zniknąć z commita tylko dlatego, że git add -u ich nie widzi.
+# Nie dodajemy ich automatycznie: lista ma zostać świadomie sprawdzona i dodana przed push_one.
+untracked_files="$(git ls-files --others --exclude-standard)"
+if [[ -n "$untracked_files" ]]; then
+  echo "STOP: są nowe nieśledzone pliki, których push_one nie może pominąć:"
+  echo "$untracked_files"
+  echo "Dodaj właściwe pliki jawnie przez git add, a potem ponów push_one."
+  exit 1
+fi
+
 # Dodaj tylko zmiany w już śledzonych plikach
 git add -u
 
@@ -24,5 +34,6 @@ git commit -m "Aktualizacja strony"
 git push
 
 echo "OK: Git gotowy."
-echo "Hostinger wdraża main automatycznie. Uruchamiam twardą kontrolę produkcji."
-npm run deployment:verify
+echo "Hostinger wdraża main automatycznie. Uruchamiam twardą kontrolę produkcji bez IndexNow."
+npm run deployment:finalize
+echo "OK: produkcja i ekspozycja plików sprawdzone. IndexNow uruchom osobno: npm run indexnow:release"

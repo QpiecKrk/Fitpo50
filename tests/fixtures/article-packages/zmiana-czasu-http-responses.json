@@ -1,0 +1,117 @@
+{
+  "responses": {
+    "https://fixture.test/not-found-sentinel": {
+      "HEAD": 404
+    },
+    "https://eli.gov.pl/api/acts/DU/2022/539/text.html": {
+      "HEAD": 200
+    },
+    "https://eli.gov.pl/api/acts/DU/2004/144/text.html": {
+      "HEAD": 200
+    },
+    "https://publications.europa.eu/resource/cellar/95bd5989-226d-11f1-8c3a-01aa75ed71a1.0019.03/DOC_1": {
+      "HEAD": 200
+    },
+    "https://www.gov.pl/web/premier/projekt-rozporzadzenia-prezesa-rady-ministrow-w-sprawie-wprowadzenia-i-odwolania-czasu-letniego-srodkowoeuropejskiego-w-latach-20272031": {
+      "HEAD": 200
+    },
+    "https://data.consilium.europa.eu/doc/document/ST-10045-2026-INIT/en/pdf": {
+      "HEAD": 200
+    },
+    "https://www.europarl.europa.eu/RegData/etudes/BRIE/2018/630308/EPRS_BRI%282018%29630308_EN.pdf": {
+      "HEAD": 200
+    },
+    "https://orka.sejm.gov.pl/Druki10ka.nsf/0/11FE311F5C014EA4C1258D240028A8E4/%24File/1815.pdf": {
+      "HEAD": 200
+    },
+    "https://api.sejm.gov.pl/sejm/term10/processes/1815": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7954020/": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC11526362/": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6463000/": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC13331903/": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC12709669/": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC12069741/": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10351306/": {
+      "HEAD": 200
+    },
+    "https://journals.lww.com/epidem/fulltext/2017/05000/daylight_savings_time_transitions_and_the.7.aspx": {
+      "HEAD": 403,
+      "GET": 403
+    },
+    "https://pubmed.ncbi.nlm.nih.gov/27775953/": {
+      "HEAD": 200
+    },
+    "https://www.nia.nih.gov/health/sleep/sleep-and-older-adults": {
+      "HEAD": 405,
+      "GET": 405
+    },
+    "https://medlineplus.gov/ency/article/004018.htm": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC3903359/": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC1855248/": {
+      "HEAD": 200
+    },
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC2342968/": {
+      "HEAD": 200
+    },
+    "https://www.nhs.uk/mental-health/conditions/seasonal-affective-disorder-sad/": {
+      "HEAD": 200
+    },
+    "https://www.gov.pl/web/zdrowie/depresja-to-powazny-problem-zdrowotny-nie-boj-sie-szukac-pomocy": {
+      "HEAD": 200
+    },
+    "https://www.gov.pl/web/kgpsp/bezpieczenstwo-o-zmroku": {
+      "HEAD": 200
+    },
+    "https://eli.gov.pl/api/acts/DU/2024/1251/text/T/D20241251L.pdf": {
+      "HEAD": 200
+    },
+    "https://www.ema.europa.eu/en/documents/template-form/qrd-product-information-annotated-template-english-version-104-highlighted_en.pdf": {
+      "HEAD": 200
+    },
+    "https://www.minimed.com/en-us/support/product-support/780g/updating-time-date": {
+      "HEAD": 200
+    },
+    "https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=Dlaczego%20zmieniamy%20czas%20na%20zimowy%3F": {
+      "GET": 200,
+      "suggestions": [
+        "Dlaczego zmieniamy czas na zimowy?"
+      ]
+    },
+    "https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=O%20kt%C3%B3rej%20zmiana%20czasu%20na%20zimowy%3F": {
+      "GET": 200,
+      "suggestions": [
+        "O której zmiana czasu na zimowy?"
+      ]
+    },
+    "https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=Czy%20zmiana%20czasu%20jest%20szkodliwa%3F": {
+      "GET": 200,
+      "suggestions": [
+        "Czy zmiana czasu jest szkodliwa?"
+      ]
+    },
+    "https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=Czy%20to%20ostatnia%20zmiana%20czasu%3F": {
+      "GET": 200,
+      "suggestions": [
+        "Czy to ostatnia zmiana czasu?"
+      ]
+    }
+  }
+}

@@ -13,6 +13,13 @@
   # Remove malformed legacy template asset URL reported by GSC
   RewriteRule ^assets/\$\{item\.img\}\.avif$ - [G,L]
 
+  # Repo may still be deployed from its root. Deny every non-public project
+  # surface at the web-server boundary instead of relying on robots/noindex.
+  RewriteRule ^(?:_site|scripts|docs|tests|src|templates)(?:/|$) - [F,L,NC]
+  RewriteRule ^data(?:/|$) - [F,L,NC]
+  RewriteRule \.md$ - [F,L,NC]
+  RewriteRule ^(?:package(?:-lock)?\.json|tsconfig\.json)$ - [F,L,NC]
+
   # Directory roots reported by GSC as crawl targets, not user-facing pages
   RewriteRule ^assets/?$ - [G,L]
   RewriteRule ^sukcesy/?$ - [G,L]
@@ -85,6 +92,17 @@
 
 # === Block direct access to SQLite database files ===
 <FilesMatch "\.sqlite$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# === Block private configuration files while preserving server-side includes ===
+<FilesMatch "^(?:\.env.*|config\.php)$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>

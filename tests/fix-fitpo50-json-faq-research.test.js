@@ -5,7 +5,13 @@ const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 
-const { normalizeFaqResearch, normalizeImagePromptSectionRef } = require('../scripts/fix-fitpo50-json');
+const {
+  normalizeFaqResearch,
+  normalizeImagePromptSectionRef,
+  normalizeSectionRole,
+  requiredImagePromptPlacements,
+  addImagePromptEvidenceClaims,
+} = require('../scripts/fix-fitpo50-json');
 
 test('JSON fixer preserves provenance required by the FAQ evidence gate', () => {
   const item = {
@@ -19,6 +25,8 @@ test('JSON fixer preserves provenance required by the FAQ evidence gate', () => 
     url_status: 'reachable',
     http_status: 200,
     final_url: 'https://www.cdc.gov/example',
+    intent_verified: true,
+    verified_suggestion: 'Jak poznać właściwe tempo?',
   };
 
   assert.deepEqual(normalizeFaqResearch([item]), [item]);
@@ -27,6 +35,40 @@ test('JSON fixer preserves provenance required by the FAQ evidence gate', () => 
 test('JSON fixer preserves supplemental section image placement', () => {
   assert.equal(normalizeImagePromptSectionRef('sekcja-2-obraz-3', -1, 4), 'sekcja-2-obraz-3');
   assert.equal(normalizeImagePromptSectionRef('Sekcja-2', -1, 2), 'sekcja-2');
+});
+
+test('JSON fixer preserves utility sections and does not invent their image placement', () => {
+  assert.equal(normalizeSectionRole('utility'), 'utility');
+  assert.equal(normalizeSectionRole('main'), 'main');
+  assert.deepEqual(
+    [...requiredImagePromptPlacements([{ section_role: 'main' }, { section_role: 'utility' }])],
+    ['hero', 'sekcja-1'],
+  );
+});
+
+test('JSON fixer maps factual image text only to declared article sources', () => {
+  const sourceUrl = 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10351306/';
+  const json = {
+    title: 'Zmiana czasu i sen',
+    category: 'ciekawe',
+    sources: [{ url: sourceUrl }],
+    evidence_claims: [],
+    sections: [{ image: { alt: 'Wykres snu po zmianie czasu.', caption: 'Dlatego warto obserwować swój sen po zmianie czasu.' } }],
+    image_prompts_v4: [{
+      section_ref: 'sekcja-1',
+      alt_pl: 'Wykres problemów ze snem przed i po zmianie czasu.',
+      caption_pl: 'Neutralny podpis bez twierdzenia.',
+      overlay_text_pl: 'Kłopot z zasypianiem: 3,3% → 7,1%',
+      evidence_source_urls: [sourceUrl, 'https://example.com/undeclared'],
+    }],
+  };
+  addImagePromptEvidenceClaims(json, 'image_prompts_v4');
+  assert.deepEqual(json.evidence_claims.map((claim) => claim.location), [
+    'image_prompts_v4[0].overlay_text_pl',
+    'sections[0].image.alt',
+    'sections[0].image.caption',
+  ]);
+  assert.ok(json.evidence_claims.every((claim) => claim.source_urls.length === 1 && claim.source_urls[0] === sourceUrl));
 });
 
 test('JSON fixer blocks an overlong editorial title without silently truncating it', () => {

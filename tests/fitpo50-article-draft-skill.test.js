@@ -15,15 +15,38 @@ function prompt(sectionRef, filenameBase) {
     technique: 'fotografia dokumentalna',
     composition: 'poziomy szeroki plan z czytelnym punktem skupienia',
     purpose: 'wyjaśnienie omawianego mechanizmu',
+    season_and_time: 'Wiosenny poranek w naturalnym świetle',
+    mood: 'Pogodny i spokojny',
     prompt_en: 'Bright optimistic modern documentary scene with middle-class adults aged over fifty, natural light and credible details.',
     alt_pl: 'Jasna scena ilustrująca temat artykułu i jego praktyczne znaczenie',
     caption_pl: 'Ilustracja pokazuje praktyczny kontekst informacji wyjaśnionych w tej części artykułu.',
     negative_prompt: 'dark mood, fear, distorted anatomy, fake medical equipment',
     filename_base: filenameBase,
-    source_file: `${filenameBase}.jpeg`,
+    source_file: `${filenameBase}.jpg`,
     aspect_ratio: '16:9',
     overlay_text_pl: '',
+    evidence_source_urls: [],
+    requires_exact_data_render: false,
     visual_review: { status: 'PENDING_LOCAL_REVIEW' },
+  };
+}
+
+function faqPair(question) {
+  return {
+    answer: {
+      question,
+      answer_html: '<p>Sprawdź autora, metodę, badaną populację oraz ograniczenia opisane przy wyniku.</p>',
+    },
+    research: {
+      question,
+      source_type: 'autocomplete',
+      source_label: 'Google Autocomplete PL',
+      source_url: `https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=${encodeURIComponent(question)}`,
+      checked_at: new Date().toISOString().slice(0, 10),
+      url_status: 'reachable',
+      http_status: 200,
+      research_note: 'Pytanie wystąpiło jako dokładna podpowiedź w pobranej odpowiedzi Google Suggest.',
+    },
   };
 }
 
@@ -38,6 +61,11 @@ function validDraft() {
     'Rozmowa ze specjalistą pozwala uwzględnić indywidualne przeciwwskazania.',
   ];
   const today = new Date().toISOString().slice(0, 10);
+  const faqs = [
+    faqPair('Jak ocenić wiarygodność informacji zdrowotnej?'),
+    faqPair('Czy wynik jednego badania wystarczy do podjęcia decyzji?'),
+    faqPair('Jak sprawdzić, czy badanie dotyczy osób po 50 roku życia?'),
+  ];
   return {
     status: 'DRAFT',
     title: 'Jak rozsądnie oceniać informacje zdrowotne po 50. roku życia?',
@@ -73,23 +101,31 @@ function validDraft() {
     sources: urls.map((url, index) => ({
       id: `S${index + 1}`, label: `Oficjalne źródło dowodowe numer ${index + 1}`, url,
       evidence_level: 'official_guidance', checked_at: today, url_status: 'reachable', http_status: 200,
+      fallback_url: null, evidence_scope: null, publication_date: null, checked_via: 'writer_http', recheck_after: null,
     })),
     evidence_claims: claims.map((claim, index) => ({
       claim, location: 'sections[0].paragraphs_html[0]', claim_type: 'general', source_urls: [urls[index]],
     })),
     logic_links: [],
-    answer_blocks: [],
-    faq_research: [],
-    image_prompts_v4: [prompt('hero', 'ocena-informacji-hero'), prompt('sekcja-1', 'ocena-sily-informacji'), prompt('sekcja-1-obraz-2', 'ocena-sily-wykres')],
+    answer_blocks: faqs.map((item) => item.answer),
+    faq_research: faqs.map((item) => item.research),
+    image_prompts_v4: [prompt('hero', 'ocena-informacji-hero-v1'), prompt('sekcja-1', 'ocena-sily-informacji-v1'), prompt('sekcja-1-obraz-2', 'ocena-sily-wykres-v1')],
   };
 }
 
-function validate(payload) {
+function validate(payload, extraArgs = []) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-skill-test-'));
   const file = path.join(directory, 'draft.fitpo50.json');
   fs.writeFileSync(file, `${JSON.stringify(payload, null, 2)}\n`);
-  return spawnSync('python3', [VALIDATOR, file], { cwd: ROOT, encoding: 'utf8' });
+  return spawnSync('python3', [VALIDATOR, ...extraArgs, file], { cwd: ROOT, encoding: 'utf8' });
 }
+
+test('local workbench may revalidate a genuinely reviewed package without pretending the Writer reviewed it', () => {
+  const draft = validDraft();
+  draft.image_prompts_v4.forEach((item) => { item.visual_review.status = 'VERIFIED'; });
+  assert.notEqual(validate(draft).status, 0);
+  assert.equal(validate(draft, ['--allow-verified-review']).status, 0);
+});
 
 test('Claude draft skill accepts flexible supplemental images and local FAQ/link tasks', () => {
   const result = validate(validDraft());
@@ -97,12 +133,76 @@ test('Claude draft skill accepts flexible supplemental images and local FAQ/link
   assert.match(result.stdout, /DRAFT_(?:VALID|REVIEW_REQUIRED)/);
 });
 
-test('Claude draft skill rejects generated FAQ because local agent owns final FAQ', () => {
+test('Claude draft validator nie liczy skrótów i liczb dziesiętnych jako zdań', () => {
   const draft = validDraft();
-  draft.answer_blocks = [{ question: 'Czy to działa?', answer_html: '<p>Tak.</p>' }];
+  draft.quick_answer = 'Zacznij od ok. 3 g dziennie, jeśli taki zakres wynika z ocenionego planu. Np. 2,5 g nie tworzy dodatkowego zdania.';
+  const result = validate(draft);
+  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  assert.doesNotMatch(result.stdout, /quick_answer ma .* zdań/);
+});
+
+test('Claude draft skill accepts documented FAQ and leaves local verification to the pipeline', () => {
+  const draft = validDraft();
+  const result = validate(draft);
+  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+});
+
+test('Claude draft skill accepts any FAQ count when every item has documented research', () => {
+  const tooFew = validDraft();
+  tooFew.answer_blocks = tooFew.answer_blocks.slice(0, 2);
+  tooFew.faq_research = tooFew.faq_research.slice(0, 2);
+  const first = validate(tooFew);
+  assert.equal(first.status, 0, `${first.stdout}\n${first.stderr}`);
+
+  const tooMany = validDraft();
+  for (let index = 4; index <= 8; index += 1) {
+    const pair = faqPair(`Jak ocenić dodatkowe pytanie numer ${index}?`);
+    tooMany.answer_blocks.push(pair.answer);
+    tooMany.faq_research.push(pair.research);
+  }
+  const second = validate(tooMany);
+  assert.equal(second.status, 0, `${second.stdout}\n${second.stderr}`);
+
+  const none = validDraft();
+  none.answer_blocks = [];
+  none.faq_research = [];
+  const third = validate(none);
+  assert.equal(third.status, 0, `${third.stdout}\n${third.stderr}`);
+});
+
+test('Claude draft skill reserves FAQ verification fields for the local pipeline', () => {
+  const draft = validDraft();
+  draft.faq_research[0].intent_verified = true;
   const result = validate(draft);
   assert.equal(result.status, 1);
-  assert.match(result.stdout, /answer_blocks musi pozostać puste/);
+  assert.match(result.stdout, /nie może zawierać lokalnego pola intent_verified/);
+});
+
+test('Claude draft skill requires versioned JPG source names for Illustrator handoff', () => {
+  const draft = validDraft();
+  draft.image_prompts_v4[0].filename_base = 'ocena-informacji-hero';
+  draft.image_prompts_v4[0].source_file = 'ocena-informacji-hero.jpeg';
+  const result = validate(draft);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /kończyć się wersją -vN/);
+  assert.match(result.stdout, /filename_base \+ \.jpg/);
+});
+
+test('Claude draft skill rejects an evidence-bearing image caption without declared sources', () => {
+  const draft = validDraft();
+  draft.image_prompts_v4[0].caption_pl = 'Dlatego ten wynik zmniejsza ryzyko zawału o 20%.';
+  draft.image_prompts_v4[0].evidence_source_urls = [];
+  const result = validate(draft);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /caption_pl zawiera wniosek, liczbę lub tezę medyczną/);
+});
+
+test('Claude draft skill rejects FAQ without a matching research record', () => {
+  const draft = validDraft();
+  draft.answer_blocks = [{ question: 'Czy to działa?', answer_html: '<p>Tak, jeśli twierdzenie potwierdza właściwe badanie.</p>' }];
+  const result = validate(draft);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /odpowiadać sobie 1:1|nie ma dopasowania 1:1/);
 });
 
 test('Claude draft skill rejects MASLD-class structural mismatches before local import', () => {
@@ -131,12 +231,12 @@ test('Claude draft skill rejects stale evidence locations and nested semantic bl
   assert.match(result.stdout, /blok semantyczny wewnątrz <p>/);
 });
 
-test('Claude draft skill keeps FAQ research and internal linking exclusively local', () => {
+test('Claude draft skill keeps internal linking local and reports unresolved FAQ gaps', () => {
   const draft = validDraft();
   draft.editorial_notes.faq_gaps = ['Czy użytkownicy pytają o czas działania?'];
   draft.sections[0].paragraphs_html.push('<p>Zobacz też <a href="wymyslony-slug.html">inny tekst</a>.</p>');
   const result = validate(draft);
   assert.equal(result.status, 1);
-  assert.match(result.stdout, /editorial_notes\.faq_gaps musi pozostać puste/);
+  assert.match(result.stdout, /nierozstrzygnięte pytania/);
   assert.match(result.stdout, /Claude nie może dodawać linków wewnętrznych/);
 });

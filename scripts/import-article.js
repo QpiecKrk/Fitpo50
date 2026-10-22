@@ -26,10 +26,12 @@ const {
 const { spawnSync } = require('child_process');
 const { inspectPreparedArtifact } = require('./lib/article-json-artifact');
 const { validateArticleEvidence } = require('./lib/article-evidence');
-const { validateArticleArchitecture } = require('./lib/article-intent-links');
-const { validateManifestStructure } = require('./lib/article-media');
+const { validateArticleArchitecture, validateRenderedInternalLinkPlan } = require('./lib/article-intent-links');
+const { sectionRequiresPrimaryImage, validateManifestStructure } = require('./lib/article-media');
 const { capabilityFromEnvironment } = require('./lib/pipeline-capability');
-const { submitIndexNow } = require('./lib/indexnow-client');
+const { slugify } = require('./lib/slugify');
+const { normalizeInternalHref } = require('./lib/article-normalization');
+const { normalizeSectionRole, validateSectionSchema } = require('./lib/article-section-contract');
 
 const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
@@ -112,20 +114,14 @@ function printUsage() {
     '  --precheck true|false           only validate input (default: false)',
     '  --dry-run true|false            do not write files (default: false)',
     '  --publish true|false            update listings/sitemap/llms (default: true)',
-    '  --indexnow true|false           submit URL to IndexNow after publish (default: true)',
     '  --sync-site true|false          mirror changes to _site (default: true)',
-    '  --run-internal-links true|false|auto run PHP internal-link helper (default: auto)',
     '  --validate true|false           run article validator (default: true)',
     '  --faq-strict true               legacy flag; real FAQ research is always required',
     '  --force true|false              overwrite existing article HTML (default: false)',
     '  --category <key>                override JSON category',
     '  --help                          show this help',
-    'Env:',
-    '  INDEXNOW_KEY                    required for IndexNow submission',
-    '  INDEXNOW_KEY_LOCATION           optional full URL to hosted key file',
-    '',
-    'Recommended publish command (requires CONTENT_READY artifact):',
-    '  npm run article:publish -- --file "...fitpo50.json"',
+    'Kanoniczne polecenie publikacyjne:',
+    '  npm run article:add -- --file "...fitpo50.json"',
   ].join('\n'));
 }
 
@@ -135,17 +131,6 @@ function boolOpt(value, fallback) {
   if (['1', 'true', 'yes', 'on'].includes(v)) return true;
   if (['0', 'false', 'no', 'off'].includes(v)) return false;
   return fallback;
-}
-
-function slugify(text) {
-  return String(text || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
 }
 
 function escapeHtml(value) {
@@ -365,12 +350,13 @@ function buildScholarlyMentions(sources) {
     const name = String(source.label || '').trim();
     const url = String(source.url || '').trim();
     if (!name || !/^https?:\/\//i.test(url)) continue;
-    const year = extractYearFromText(name);
+    const publicationDate = String(source.publication_date || '').trim();
+    const year = String(source.publication_year || extractYearFromText(name) || '').trim();
     out.push({
       '@type': 'ScholarlyArticle',
       name,
       url,
-      ...(year ? { datePublished: `${year}-01-01T00:00:00+00:00` } : {}),
+      ...(publicationDate ? { datePublished: publicationDate } : (year ? { datePublished: year } : {})),
       author: {
         '@type': 'Organization',
         name: 'Autorzy badania',
@@ -539,7 +525,9 @@ function normalizeSections(rawSections) {
   for (const entry of normalizeArray(rawSections)) {
     if (!entry || typeof entry !== 'object') continue;
 
-    const title = ensureQuestionHeading(String(entry.title || entry.heading || '').trim());
+    const sectionRole = normalizeSectionRole(entry.section_role);
+    const rawTitle = String(entry.title || entry.heading || '').trim();
+    const title = sectionRole === 'utility' ? rawTitle : ensureQuestionHeading(rawTitle);
     const blocks = [];
 
     if (entry.content_html) {
@@ -603,57 +591,9 @@ function normalizeSections(rawSections) {
       });
     }
 
-    sections.push({ title, blocks });
+    sections.push({ title, blocks, sectionRole });
   }
   return sections;
-}
-
-function listCandidateInternalArticles(currentSlug) {
-  const files = fs.readdirSync(ROOT)
-    .filter((name) => name.endsWith('.html'))
-    .filter((name) => !CATEGORY_LANDING_URLS.has(name.toLowerCase()))
-    .filter((name) => name !== 'index.html' && name !== 'article-template-bento.html')
-    .filter((name) => name !== `${currentSlug}.html`)
-    .sort();
-  return files;
-}
-
-function ensureMinimumInternalLinks(slug, dryRun, syncSite, minimum = POLICY.WORDS.INTERNAL_LINKS_MIN) {
-  const targetPaths = [path.join(ROOT, `${slug}.html`)];
-  if (syncSite) targetPaths.push(path.join(ROOT, '_site', `${slug}.html`));
-
-  for (const targetPath of targetPaths) {
-    if (!fs.existsSync(targetPath)) continue;
-    const raw = fs.readFileSync(targetPath, 'utf8');
-    const articleMatch = raw.match(/<article class="article-content">[\s\S]*?<\/article>/i);
-    if (!articleMatch) continue;
-    const articleHtml = articleMatch[0];
-    const narrativeHtml = articleHtml.split(/<section\s+class="faq-list\b/i)[0];
-    const existingCount = utils.countInternalHtmlLinks([narrativeHtml]);
-    if (existingCount >= minimum) continue;
-
-    const needed = minimum - existingCount;
-    const existingLinks = new Set(
-      [...articleHtml.matchAll(/<a\b[^>]*href="([^"]+)"/gi)]
-        .map((m) => String(m[1] || '').replace(/^\.\//, '').trim().toLowerCase())
-    );
-    const candidates = listCandidateInternalArticles(slug)
-      .filter((href) => !existingLinks.has(href.toLowerCase()))
-      .slice(0, needed);
-    if (!candidates.length) continue;
-
-    const links = candidates
-      .map((href) => `<a href="./${href}">${escapeHtml(href.replace(/\.html$/i, '').replace(/-/g, ' '))}</a>`)
-      .join(', ');
-    const addon = `<p class="article-crosslinks-auto"><strong>Zobacz też:</strong> ${links}.</p>`;
-    const faqStart = articleHtml.search(/<section\s+class="faq-list\b/i);
-    const updatedArticle = faqStart >= 0
-      ? `${articleHtml.slice(0, faqStart)}${addon}\n${articleHtml.slice(faqStart)}`
-      : articleHtml.replace(/<\/article>$/i, `${addon}\n</article>`);
-    const next = raw.replace(articleHtml, updatedArticle);
-    if (!dryRun) fs.writeFileSync(targetPath, next, 'utf8');
-    console.log(`[AUTO] Uzupełniono linki kontekstowe w ${path.basename(targetPath)} (+${candidates.length}).`);
-  }
 }
 
 function toInlinePictureHtml(imgSrc, imgAlt, imgCaption, imgWidth, imgHeight) {
@@ -678,11 +618,10 @@ function toInlinePictureHtml(imgSrc, imgAlt, imgCaption, imgWidth, imgHeight) {
 function normalizeLocalHtmlHref(href) {
   const raw = String(href || '').trim();
   if (!raw) return '';
-  if (/^(https?:|mailto:|tel:|javascript:|#)/i.test(raw)) return '';
-  const clean = raw.split('#')[0].split('?')[0].trim();
-  if (!clean) return '';
-  if (!/\.html$/i.test(clean)) return '';
-  return clean.replace(/^\.\//, '').replace(/^\/+/, '');
+  if (/^(mailto:|tel:|javascript:|#)/i.test(raw)) return '';
+  if (/^https?:/i.test(raw) && !/^https?:\/\/(?:www\.)?fitpo50\.pl\//i.test(raw)) return '';
+  const normalized = normalizeInternalHref(raw);
+  return /\.html$/i.test(normalized) ? normalized : '';
 }
 
 function normalizeImageBase(value) {
@@ -934,12 +873,8 @@ function validateInput(data, opts = {}) {
   }
 
   const quickAnswer = normalizeQuickAnswer(data.quick_answer || data.quickAnswer || '', lead);
-  const quickAnswerWords = countWordsUtf8(quickAnswer);
-  if (!quickAnswer) {
-    errors.push(`Brak quick_answer (wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów).`);
-  } else if (quickAnswerWords < POLICY.WORDS.QUICK_ANSWER_MIN || quickAnswerWords > POLICY.WORDS.QUICK_ANSWER_MAX) {
-    errors.push(`quick_answer: wymagane ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${quickAnswerWords}).`);
-  }
+  const quickAnswerValidation = validators.validateQuickAnswer(quickAnswer, { mode: 'strict' });
+  errors.push(...quickAnswerValidation.errors.map((error) => `quick_answer: ${error}`));
   if (lead && quickAnswer && normalizeCmp(lead) === normalizeCmp(quickAnswer)) {
     errors.push('quick_answer nie może być kopią 1:1 leadu.');
   }
@@ -951,14 +886,18 @@ function validateInput(data, opts = {}) {
     }
   }
 
+  validateSectionSchema(data.sections || []).errors.forEach((error) => errors.push(error));
   const sections = normalizeSections(data.sections || []);
   if (!sections.length) errors.push('Brak sekcji: sections[].');
   if (sections.length > 0) {
     const sectionParagraphErrors = [];
     for (const section of sections) {
-      const headingRes = validators.validateH2Title(String(section.title || '').trim());
-      if (!headingRes.ok) {
-        sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": ${headingRes.error}`);
+      const requiresPrimaryContent = sectionRequiresPrimaryImage({ section_role: section.sectionRole });
+      if (requiresPrimaryContent) {
+        const headingRes = validators.validateH2Title(String(section.title || '').trim());
+        if (!headingRes.ok) {
+          sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": ${headingRes.error}`);
+        }
       }
       if (containsEditorialPlaceholder(section.title)) {
         sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}": wykryto placeholder w tytule.`);
@@ -968,9 +907,11 @@ function validateInput(data, opts = {}) {
         sectionParagraphErrors.push(`Sekcja "${section.title || '(bez tytułu)'}" nie ma akapitu otwierającego.`);
         continue;
       }
-      const introRes = validators.validateAnswerFirstParagraph(firstParagraph.html, { label: `Sekcja "${section.title || '(bez tytułu)'}"` });
-      if (!introRes.ok) {
-        sectionParagraphErrors.push(...introRes.errors);
+      if (requiresPrimaryContent) {
+        const introRes = validators.validateAnswerFirstParagraph(firstParagraph.html, { label: `Sekcja "${section.title || '(bez tytułu)'}"` });
+        if (!introRes.ok) {
+          sectionParagraphErrors.push(...introRes.errors);
+        }
       }
 
       for (const block of section.blocks) {
@@ -995,10 +936,9 @@ function validateInput(data, opts = {}) {
       }
     }
     const internalLinks = utils.countInternalHtmlLinks(linkSource);
-    if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_MIN) {
+    if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) {
       autoFixes.push(
-        `AEO/GEO: wykryto ${internalLinks}/${POLICY.WORDS.INTERNAL_LINKS_MIN} linków wewnętrznych w treści. ` +
-        'Crosslinki wewnętrzne uzupełniamy ręcznie po imporcie (kontrola redakcyjna).'
+        `AEO/GEO: wykryto ${internalLinks} linków wewnętrznych w treści; to ostrzeżenie, nie bloker.`
       );
     }
   }
@@ -1039,14 +979,23 @@ function validateInput(data, opts = {}) {
       errors.push(`Źródło #${idx}: label "${label}" jest zbyt ogólny. Podaj pełną nazwę źródła.`);
     }
   }
+  const sourceUrlSet = new Set(rawSources.map((item) => String(item?.url || '').trim()).filter(Boolean));
+  normalizeArray(data.image_prompts_v4 || []).forEach((prompt, promptIndex) => {
+    if (prompt?.requires_exact_data_render !== true) return;
+    const overlayClaims = normalizeArray(prompt.overlay_claims || []);
+    if (!overlayClaims.length) errors.push(`image_prompts_v4[${promptIndex}].overlay_claims jest wymagane dla requires_exact_data_render=true.`);
+    overlayClaims.forEach((claim, claimIndex) => {
+      if (!sourceUrlSet.has(String(claim?.source_url || '').trim())) errors.push(`image_prompts_v4[${promptIndex}].overlay_claims[${claimIndex}].source_url musi występować w sources[].`);
+    });
+  });
   const evidenceValidation = validateArticleEvidence(data);
   evidenceValidation.errors.forEach((error) => errors.push(`Evidence: ${error}`));
 
   const faqItems = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
   if (faqStrict) {
     const faqResearch = normalizeFaqResearch(data.faq_research || data.faq_sources || []);
-    if (faqItems.length < POLICY.WORDS.FAQ_MIN_ITEMS) {
-      errors.push(`FAQ: wymagane minimum ${POLICY.WORDS.FAQ_MIN_ITEMS} pytań (bez auto-dopisywania).`);
+    if (faqItems.length !== faqResearch.length) {
+      errors.push('FAQ i faq_research muszą odpowiadać sobie 1:1.');
     }
     const placeholderIdx = faqItems.findIndex((it) => isFaqPlaceholder(it.question, it.answerHtml));
     if (placeholderIdx >= 0) {
@@ -1074,11 +1023,6 @@ function validateInput(data, opts = {}) {
     if (duplicateFaqIdx >= 0) {
       errors.push(`FAQ #${duplicateFaqIdx + 1}: duplikat pytania FAQ. Każde pytanie musi być unikalne.`);
     }
-    if (faqResearch.length < POLICY.WORDS.FAQ_MIN_ITEMS) {
-      errors.push(
-        `FAQ research: dodaj minimum ${POLICY.WORDS.FAQ_MIN_ITEMS} wpisy w faq_research[] z polami question + source_label + source_url (pytania z sieci: autocomplete/PAA).`
-      );
-    }
     for (let i = 0; i < faqResearch.length; i += 1) {
       const item = faqResearch[i] || {};
       const sourceLabel = String(item.source_label || item.sourceLabel || item.label || '').trim();
@@ -1095,8 +1039,12 @@ function validateInput(data, opts = {}) {
       }
     }
     const researchQuestions = new Set(faqResearch.map((x) => x.question.toLowerCase()));
-    for (let i = 0; i < Math.min(faqItems.length, POLICY.WORDS.FAQ_MIN_ITEMS); i += 1) {
+    for (let i = 0; i < faqItems.length; i += 1) {
       const q = String(faqItems[i].question || '').trim().toLowerCase();
+      const researchQuestion = String(faqResearch[i]?.question || '').trim().toLowerCase();
+      if (q && q !== researchQuestion) {
+        errors.push(`FAQ #${i + 1}: kolejność lub brzmienie nie odpowiada faq_research #${i + 1} 1:1.`);
+      }
       if (!researchQuestions.has(q)) {
         errors.push(`FAQ #${i + 1}: pytanie nie ma potwierdzenia w faq_research[].`);
       }
@@ -1302,7 +1250,8 @@ function renderSectionsHtml(sections) {
 
   for (const section of sections) {
     if (section.title) {
-      chunks.push(`<h2>${escapeHtml(section.title)}</h2>`);
+      const roleAttr = section.sectionRole === 'utility' ? ' data-section-role="utility"' : '';
+      chunks.push(`<h2${roleAttr}>${escapeHtml(section.title)}</h2>`);
     }
 
     for (const block of section.blocks) {
@@ -1517,41 +1466,44 @@ function writeFileAtomic(filePath, content) {
   fs.renameSync(tmpPath, filePath);
 }
 
+function upsertSitemapXml(inputXml, url, date) {
+  const xml = String(inputXml || '');
+  if (!xml.includes('</urlset>')) throw new Error('sitemap.xml: brak znacznika </urlset>.');
+  const escapedUrl = escapeRegex(String(url || ''));
+  const blockRx = new RegExp(`<url>\\s*<loc>${escapedUrl}<\\/loc>[\\s\\S]*?<\\/url>`, 'i');
+  const current = xml.match(blockRx)?.[0] || '';
+  if (current) {
+    const nextBlock = /<lastmod>[^<]*<\/lastmod>/i.test(current)
+      ? current.replace(/<lastmod>[^<]*<\/lastmod>/i, `<lastmod>${date}</lastmod>`)
+      : current.replace(/(<loc>[^<]*<\/loc>)/i, `$1\n    <lastmod>${date}</lastmod>`);
+    const nextXml = xml.replace(blockRx, nextBlock);
+    return { xml: nextXml, changed: nextXml !== xml, operation: 'UPDATE' };
+  }
+  const entry = [
+    '  <url>',
+    `    <loc>${url}</loc>`,
+    `    <lastmod>${date}</lastmod>`,
+    '    <changefreq>monthly</changefreq>',
+    '    <priority>0.8</priority>',
+    '  </url>',
+    '',
+  ].join('\n');
+  return { xml: xml.replace(/<\/urlset>\s*$/u, `${entry}</urlset>\n`), changed: true, operation: 'CREATE' };
+}
+
 function updateSitemap(slug, dateIso, dryRun) {
   if (!fs.existsSync(SITEMAP_PATH)) return { changed: false, file: 'sitemap.xml (brak)' };
-
   return withSitemapLock(() => {
-    let xml = fs.readFileSync(SITEMAP_PATH, 'utf8');
+    const original = fs.readFileSync(SITEMAP_PATH, 'utf8');
     const url = `https://fitpo50.pl/${slug}.html`;
-    if (xml.includes(`<loc>${url}</loc>`)) {
-      return { changed: false, file: 'sitemap.xml' };
-    }
-
     const date = String(dateIso || '').split('T')[0] || new Date().toISOString().slice(0, 10);
-    const entry = [
-      '  <url>',
-      `    <loc>${url}</loc>`,
-      `    <lastmod>${date}</lastmod>`,
-      '    <changefreq>monthly</changefreq>',
-      '    <priority>0.8</priority>',
-      '  </url>',
-      '',
-    ].join('\n');
-
-    if (!xml.includes('</urlset>')) {
-      throw new Error('sitemap.xml: brak znacznika </urlset>.');
-    }
-    xml = xml.replace(/<\/urlset>\s*$/u, `${entry}</urlset>\n`);
-
-    if (!dryRun) {
-      writeFileAtomic(SITEMAP_PATH, xml);
+    const result = upsertSitemapXml(original, url, date);
+    if (result.changed && !dryRun) {
+      writeFileAtomic(SITEMAP_PATH, result.xml);
       const siteMirror = path.join(ROOT, '_site', 'sitemap.xml');
-      if (fs.existsSync(path.dirname(siteMirror))) {
-        writeFileAtomic(siteMirror, xml);
-      }
+      if (fs.existsSync(path.dirname(siteMirror))) writeFileAtomic(siteMirror, result.xml);
     }
-
-    return { changed: true, file: 'sitemap.xml' };
+    return { changed: result.changed, file: 'sitemap.xml', operation: result.operation };
   });
 }
 
@@ -2009,10 +1961,6 @@ function runCommand(label, command, args, opts = {}) {
   return result;
 }
 
-function stripXmlProcessingInstruction(html) {
-  return String(html || '').replace(/^\s*<\?xml[^>]*>\s*/i, '');
-}
-
 function assertNoReadingRoomPlaceholders(html) {
   const checks = [
     { rx: /Powiązany artykuł\s*[123]/i, msg: 'Wykryto placeholder "Powiązany artykuł X" w sekcji Czytelnia.' },
@@ -2025,51 +1973,6 @@ function assertNoReadingRoomPlaceholders(html) {
       throw new Error(`${check.msg} Importer ignoruje related_articles z JSON; popraw fallback importera.`);
     }
   }
-}
-
-function sanitizeHtmlFileAfterPhpRewrite(filePath) {
-  if (!fs.existsSync(filePath)) return false;
-  const original = fs.readFileSync(filePath, 'utf8');
-  const sanitized = stripXmlProcessingInstruction(original);
-  if (sanitized === original) return false;
-  fs.writeFileSync(filePath, sanitized, 'utf8');
-  return true;
-}
-
-function runInternalLinks(slug, dryRun) {
-  if (dryRun) return { skipped: true };
-
-  const phpCode = [
-    'require "admin/bootstrap.php";',
-    'require "admin/helpers/internal-links.php";',
-    '$file = $argv[1];',
-    '$html = file_get_contents($file);',
-    'if ($html === false) { fwrite(STDERR, "Nie udało się odczytać HTML."); exit(2); }',
-    '$result = autoLinkInternalArticlesInHtml($html, [',
-    `  "min_words" => ${POLICY.AUTO_LINK.MIN_WORDS},`,
-    `  "min_links" => ${POLICY.AUTO_LINK.MIN_LINKS},`,
-    `  "max_links" => ${POLICY.AUTO_LINK.MAX_LINKS},`,
-    '  "current_href" => basename($file),',
-    ']);',
-    'file_put_contents($file, $result["html"]);',
-    'echo json_encode(["added" => (int)$result["added"], "skipped_short" => (bool)$result["skipped_short"]], JSON_UNESCAPED_UNICODE);',
-  ].join(' ');
-
-  const htmlPath = path.join(ROOT, `${slug}.html`);
-  const res = runCommand('Internal linking', 'php', ['-r', phpCode, htmlPath]);
-
-  const parsed = JSON.parse((res.stdout || '').trim() || '{}');
-  const removedXmlPi = sanitizeHtmlFileAfterPhpRewrite(htmlPath);
-
-  const sitePath = path.join(ROOT, '_site', `${slug}.html`);
-  if (fs.existsSync(sitePath)) {
-    fs.copyFileSync(htmlPath, sitePath);
-  }
-
-  return {
-    ...parsed,
-    removedXmlPi,
-  };
 }
 
 function runValidator(slug, dryRun) {
@@ -2229,6 +2132,7 @@ function normalizePayload(data, cliCategory, options = {}) {
     category,
     keyTakeaways,
     sources,
+    internalLinkPlan: Array.isArray(data.internal_link_plan) ? data.internal_link_plan : [],
   });
   const mentions = buildScholarlyMentions(sources);
 
@@ -2254,6 +2158,7 @@ function normalizePayload(data, cliCategory, options = {}) {
     faqItems,
     faqResearch,
     sources,
+    internalLinkPlan: Array.isArray(data.internal_link_plan) ? data.internal_link_plan : [],
     relatedDefaults,
     wordCount: countWordsUtf8(plainForWordCount),
     about,
@@ -2369,17 +2274,10 @@ function printSummary(report) {
   console.log(`Sekcje: ${report.sections}`);
   console.log(`FAQ: ${report.faq}`);
   console.log(`Źródła: ${report.sources}`);
-  if (report.internalLinks) {
-    console.log(`Internal links dodane: ${report.internalLinks.added || 0}`);
-    console.log(`Internal links pominięte przez min_words: ${report.internalLinks.skipped_short ? 'tak' : 'nie'}`);
-  }
   if (report.updatedFiles.length) {
     console.log(`Zaktualizowane pliki: ${report.updatedFiles.join(', ')}`);
   }
   console.log(`Publikacja w listingach: ${report.listingsUpdated ? 'TAK' : 'NIE'}`);
-  if (report.indexNowStatus) {
-    console.log(`IndexNow: ${report.indexNowStatus}`);
-  }
   console.log('PDF + przycisk pobierania: wymagane i wykonane.');
   console.log('Brak modyfikacji Newsów/miniatur: potwierdzone przez projekt importera.');
 }
@@ -2400,9 +2298,7 @@ async function main() {
   const dryRun = boolOpt(args['dry-run'], false);
   const publish = boolOpt(args.publish, true);
   const syncSite = boolOpt(args['sync-site'], true);
-  const runInternalMode = String(args['run-internal-links'] ?? 'auto').trim().toLowerCase();
   const runValidate = boolOpt(args.validate, true);
-  const indexNowEnabled = boolOpt(args.indexnow, true);
   const faqStrict = boolOpt(args['faq-strict'], true);
   const precheckOnly = boolOpt(args.precheck, false) || boolOpt(args['check-only'], false);
   const force = boolOpt(args.force, false);
@@ -2445,7 +2341,7 @@ async function main() {
   }
 
   if (process.env.FITPO50_STAGING_INTERNAL !== '1') {
-    throw new Error('Bezpośredni zapis importera jest zablokowany. Użyj article:publish, który buduje HTML i PDF w izolowanym stagingu.');
+    throw new Error('Bezpośredni zapis importera jest zablokowany. Użyj article:add, który przygotowuje treść oraz buduje HTML i PDF w izolowanym stagingu.');
   }
   capabilityFromEnvironment('article-import:write', process.cwd());
 
@@ -2463,7 +2359,6 @@ async function main() {
 
   const written = writeArticleFiles(payload.slug, html, syncSite, dryRun, force);
 
-  let indexNowStatus = '';
   const updatedFiles = [];
   if (publish) {
     const listingFiles = updateListings(payload, dryRun, syncSite);
@@ -2481,42 +2376,12 @@ async function main() {
     );
     if (llmsResult.changed) updatedFiles.push(llmsResult.file);
 
-    if (indexNowEnabled) {
-      const indexNowKey = String(process.env.INDEXNOW_KEY || '').trim();
-      const indexNowKeyLocation = String(process.env.INDEXNOW_KEY_LOCATION || '').trim();
-      if (!indexNowKey) {
-        indexNowStatus = 'MISSING_CONFIG (INDEXNOW_KEY_MISSING)';
-      } else if (dryRun) {
-        indexNowStatus = 'SKIPPED_EXPLICITLY (DRY_RUN)';
-      } else {
-        const articleUrl = `https://fitpo50.pl/${payload.slug}.html`;
-        const result = await submitIndexNow({
-          host: 'fitpo50.pl',
-          key: indexNowKey,
-          keyLocation: indexNowKeyLocation || undefined,
-          urlList: [articleUrl],
-        });
-        indexNowStatus = `${result.status} (${result.http_status || result.reason})`;
-      }
-    } else {
-      indexNowStatus = 'SKIPPED_EXPLICITLY (DISABLED_BY_CALLER)';
-    }
   }
 
-  let internalLinksResult = null;
-  const sectionHtmlForAuto = payload.sections.flatMap((section) => section.blocks.map((b) => b.html || ''));
-  const sectionInternalLinks = utils.countInternalHtmlLinks(sectionHtmlForAuto);
-  const runInternal = runInternalMode === 'true'
-    || runInternalMode === '1'
-    || runInternalMode === 'yes'
-    || runInternalMode === 'on'
-    || (runInternalMode === 'auto' && sectionInternalLinks === 0);
-  if (runInternal) {
-    console.warn('\nUwaga: auto-linking wewnętrzny włączony (helper może przebudować HTML).');
-    internalLinksResult = runInternalLinks(payload.slug, dryRun);
+  const renderedLinkPlan = validateRenderedInternalLinkPlan(html, payload.internalLinkPlan);
+  if (!renderedLinkPlan.ok) {
+    throw new Error(`Finalny HTML nie zgadza się z zatwierdzonym internal_link_plan:\n- ${renderedLinkPlan.errors.join('\n- ')}`);
   }
-
-  ensureMinimumInternalLinks(payload.slug, dryRun, syncSite, POLICY.WORDS.INTERNAL_LINKS_MIN);
 
   runPdfSync(payload.slug, dryRun);
   updatedFiles.push('assets/pdf/<slug>.pdf + przycisk PDF + schema encoding');
@@ -2541,9 +2406,7 @@ async function main() {
     sections: payload.sections.length,
     faq: payload.faqItems.length,
     sources: payload.sources.length,
-    internalLinks: internalLinksResult,
     updatedFiles,
-    indexNowStatus,
     listingsUpdated: updatedFiles.some((file) => file.includes('porady.html') || file.includes('index.html') || file.endsWith('.html')),
   });
 }
@@ -2557,13 +2420,17 @@ if (require.main === module) {
 
 module.exports = {
   buildAboutEntities,
+  buildScholarlyMentions,
   ensureCaptionedTables,
   main,
   normalizePayload,
   normalizeEntities,
   normalizeSections,
   normalizeSeoTitleBase,
+  renderFaqList,
+  renderSectionsHtml,
   singleTrailingNewline,
-  submitIndexNow,
+  updateSitemap,
+  upsertSitemapXml,
   upsertBlogPostingSchema,
 };

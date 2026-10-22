@@ -68,14 +68,15 @@ function expectedBaseFiles(baseUrl) {
     ['/sitemap.xml', 'sitemap.xml'],
     ['/llms.txt', 'llms.txt'],
     ['/ads.txt', 'ads.txt'],
+    ['/assets/data/search-index.json', 'assets/data/search-index.json'],
   ];
   return files.map(([urlPath, localPath]) => ({ url: `${baseUrl}${urlPath}`, sha256: sha256(fs.readFileSync(path.join('_site', localPath))) }));
 }
 
 function urlsFor(baseUrl, articles) {
   return [...new Set([
-    `${baseUrl}/deployment.json`, `${baseUrl}/`, `${baseUrl}/porady.html`, `${baseUrl}/sitemap.xml`, `${baseUrl}/llms.txt`, `${baseUrl}/ads.txt`,
-    ...articles.flatMap((article) => [article.url, article.pdfUrl, ...article.imageUrls]),
+    `${baseUrl}/deployment.json`, `${baseUrl}/`, `${baseUrl}/porady.html`, `${baseUrl}/sitemap.xml`, `${baseUrl}/llms.txt`, `${baseUrl}/ads.txt`, `${baseUrl}/assets/data/search-index.json`,
+    ...articles.flatMap((article) => [article.url, article.pdfUrl, ...(article.imageUrls || []), ...(article.listingUrls || [])]),
   ])];
 }
 
@@ -116,7 +117,17 @@ async function main() {
   if (marker.public_fingerprint_sha256 !== fingerprint) throw new Error('deployment.json nie odpowiada bieżącemu eksportowi _site. Uruchom npm run deployment:prepare.');
   const expectedCommit = args.commit || git(['rev-parse', 'HEAD']);
   const remoteCommit = git(['ls-remote', 'origin', 'refs/heads/main']).split(/\s+/)[0] || '';
-  const articles = localArticlesForCommit(expectedCommit, args.baseUrl);
+  const articles = Array.isArray(marker.articles) && marker.version >= 2
+    ? marker.articles.map((article) => ({
+      url: article.url,
+      dateModified: article.date_modified,
+      pdfUrl: `${args.baseUrl}/${article.pdf_path}`,
+      imageUrls: (article.images || []).map((image) => `${args.baseUrl}/${image.path}`),
+      listingUrls: (article.listing_paths || []).map((file) => `${args.baseUrl}/${file}`),
+      expectedHtmlSha256: article.html_sha256,
+      expectedPdfSha256: article.pdf_sha256,
+    }))
+    : localArticlesForCommit(expectedCommit, args.baseUrl);
   const baseFiles = expectedBaseFiles(args.baseUrl);
   let result;
   for (let attempt = 0; attempt <= args.retries; attempt += 1) {

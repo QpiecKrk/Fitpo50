@@ -13,6 +13,8 @@ Output contains:
 from __future__ import annotations
 
 import argparse
+import hashlib
+import importlib.metadata
 import json
 import math
 import os
@@ -23,14 +25,28 @@ from pathlib import Path
 from urllib.parse import urljoin
 
 
-def _try_optional_path(path: str) -> None:
-    """Allow using user-level temp dependencies without global install."""
-    p = Path(path)
-    if p.exists():
-        sys.path.insert(0, str(p))
+REQUIRED_DEPENDENCIES = {
+    "beautifulsoup4": "4.14.3",
+    "fpdf2": "2.8.4",
+    "Pillow": "11.3.0",
+}
 
 
-_try_optional_path("/tmp/pdfdeps")
+def verify_dependency_versions() -> None:
+    mismatches = []
+    for package, expected in REQUIRED_DEPENDENCIES.items():
+        try:
+            actual = importlib.metadata.version(package)
+        except importlib.metadata.PackageNotFoundError:
+            actual = "MISSING"
+        if actual != expected:
+            mismatches.append(f"{package}={actual} (wymagane {expected})")
+    if mismatches:
+        raise RuntimeError("Niezgodne zależności PDF: " + ", ".join(mismatches) + ". Użyj requirements-pdf.txt.")
+
+
+verify_dependency_versions()
+
 
 from bs4 import BeautifulSoup, Tag, NavigableString  # type: ignore
 from html import escape
@@ -53,6 +69,48 @@ HERO_IMAGE_WIDTH_RATIO = 0.92
 HERO_IMAGE_MAX_HEIGHT = 78
 INLINE_IMAGE_WIDTH_RATIO = 0.78
 INLINE_IMAGE_MAX_HEIGHT = 68
+FONT_MANIFEST = Path(__file__).resolve().parents[1] / "assets" / "fonts" / "pdf" / "manifest.json"
+
+
+def sha256_file(file_path: Path) -> str:
+    digest = hashlib.sha256()
+    with file_path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def verified_pdf_fonts() -> dict[str, Path]:
+    if not FONT_MANIFEST.exists():
+        raise RuntimeError(f"Brak manifestu fontów PDF: {FONT_MANIFEST}")
+    manifest = json.loads(FONT_MANIFEST.read_text(encoding="utf-8"))
+    result: dict[str, Path] = {}
+    for style in ("regular", "bold", "italic", "bold_italic"):
+        entry = manifest.get("files", {}).get(style, {})
+        font_path = FONT_MANIFEST.parent / str(entry.get("file", ""))
+        expected = str(entry.get("sha256", ""))
+        if not font_path.is_file() or len(expected) != 64 or sha256_file(font_path) != expected:
+            raise RuntimeError(f"Font PDF nie przeszedł kontroli integralności: {style}")
+        result[style] = font_path
+    return result
+
+
+def stable_document_datetime(soup: BeautifulSoup) -> datetime:
+    for script in soup.select('script[type="application/ld+json"]'):
+        try:
+            payload = json.loads(script.string or script.get_text() or "{}")
+        except (TypeError, ValueError):
+            continue
+        candidates = payload if isinstance(payload, list) else [payload]
+        for item in candidates:
+            if isinstance(item, dict) and item.get("dateModified"):
+                raw = str(item["dateModified"]).replace("Z", "+00:00")
+                try:
+                    parsed = datetime.fromisoformat(raw)
+                    return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
+                except ValueError:
+                    pass
+    return datetime(2000, 1, 1, tzinfo=timezone.utc)
 
 
 def write_temp_workspace_owner(directory: Path, input_html: Path) -> None:
@@ -90,6 +148,10 @@ def write_temp_workspace_owner(directory: Path, input_html: Path) -> None:
 
 
 class FitPo50PDF(FPDF):
+    def file_id(self):
+        """Do not insert a random identifier; content and metadata define the PDF bytes."""
+        return None
+
     def footer(self) -> None:
         self.set_y(-10)
         self.set_font("Arial", size=8)
@@ -454,13 +516,15 @@ def generate_pdf(input_html: Path, output_pdf: Path, source_url: str) -> None:
 
     pdf = FitPo50PDF(format="A4")
     pdf.set_auto_page_break(auto=True, margin=15)
-    pdf.add_page()
 
-    # Unicode-capable fonts for Polish text.
-    pdf.add_font("Arial", "", "/System/Library/Fonts/Supplemental/Arial.ttf")
-    pdf.add_font("Arial", "B", "/System/Library/Fonts/Supplemental/Arial Bold.ttf")
-    pdf.add_font("Arial", "I", "/System/Library/Fonts/Supplemental/Arial Italic.ttf")
-    pdf.add_font("Arial", "BI", "/System/Library/Fonts/Supplemental/Arial Bold Italic.ttf")
+    # Repo-owned, hash-verified Unicode fonts make the canonical build portable.
+    fonts = verified_pdf_fonts()
+    pdf.add_font("Arial", "", str(fonts["regular"]))
+    pdf.add_font("Arial", "B", str(fonts["bold"]))
+    pdf.add_font("Arial", "I", str(fonts["italic"]))
+    pdf.add_font("Arial", "BI", str(fonts["bold_italic"]))
+    pdf.set_creation_date(stable_document_datetime(soup))
+    pdf.add_page()
     pdf.alias_nb_pages()
     pdf.set_lang("pl-PL")
     pdf.set_author("FitPo50")

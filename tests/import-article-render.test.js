@@ -2,7 +2,13 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
-const { normalizePayload, singleTrailingNewline, upsertBlogPostingSchema } = require('../scripts/import-article');
+const { buildScholarlyMentions, normalizePayload, singleTrailingNewline, upsertBlogPostingSchema } = require('../scripts/import-article');
+
+test('source with only a publication year never gets an invented January 1 date', () => {
+  const [mention] = buildScholarlyMentions([{ label: 'Badanie kohortowe 2024', url: 'https://example.org/study', publication_year: 2024, publication_date: null }]);
+  assert.equal(mention.datePublished, '2024');
+  assert.notEqual(mention.datePublished, '2024-01-01');
+});
 
 test('importer przekazuje rzeczywiste wymiary hero do HTML', () => {
   const payload = normalizePayload({
@@ -19,6 +25,21 @@ test('importer przekazuje rzeczywiste wymiary hero do HTML', () => {
   });
   assert.equal(payload.heroWidth, 1080);
   assert.equal(payload.heroHeight, 589);
+});
+
+test('importer przenosi zatwierdzony internal_link_plan do walidacji finalnego HTML', () => {
+  const plan = [{ target: 'sen-po-50.html', anchor: 'dobry sen', location: 'sections[0].paragraphs_html[0]' }];
+  const payload = normalizePayload({
+    title: 'Zmiana czasu a sen',
+    slug: 'zmiana-czasu-a-sen',
+    category: 'ciekawe',
+    lead: 'Zmiana czasu może chwilowo wpływać na sen.',
+    hero_image: 'zmiana-czasu-hero',
+    sections: [],
+    sources: [],
+    internal_link_plan: plan,
+  });
+  assert.deepEqual(payload.internalLinkPlan, plan);
 });
 
 test('etykiety akcji artykułu nie schodzą poniżej 10 px', () => {

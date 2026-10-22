@@ -6,10 +6,15 @@ const { POLICY, utils, validators } = require('./lib/article-policy');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
 const { isSupportedCategory } = require('./lib/categories');
-const { prepareArticleMedia } = require('./lib/article-media');
+const { prepareArticleMedia, sectionRequiresPrimaryImage } = require('./lib/article-media');
+const { normalizeInternalHref } = require('./lib/article-normalization');
 
 const PLACEHOLDER_RX = /(do doprecyzowania|do uzupelnienia|placeholder|\{\{.+?\}\})/i;
 const READ_TIME_RX = /^\d+\s+min\s+czytania$/i;
+
+function sectionRequiresAnswerFirstContract(section) {
+  return sectionRequiresPrimaryImage(section);
+}
 
 function parseArgs(argv) {
   const out = {};
@@ -52,14 +57,8 @@ function collectInternalLinksFromHtml(html) {
 }
 
 function normalizeLocalHrefToPath(href) {
-  const raw = String(href || '').trim();
-  if (/^https?:\/\/(www\.)?fitpo50\.pl\//i.test(raw)) {
-    return raw
-      .replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
-      .replace(/^[./]+/, '')
-      .replace(/[?#].*$/, '');
-  }
-  return utils.normalizeInternalHtmlHref(raw);
+  const normalized = normalizeInternalHref(href);
+  return /\.html$/i.test(normalized) ? normalized : '';
 }
 
 function normalizeForSearch(value) {
@@ -100,8 +99,8 @@ function main() {
     errors.push('Wykryto placeholder redakcyjny w JSON (np. "do doprecyzowania" / "{{...}}").');
   }
 
-  if (!Array.isArray(json.sources) || json.sources.length < 4) {
-    errors.push(`sources: wymagane >=4, jest ${Array.isArray(json.sources) ? json.sources.length : 0}.`);
+  if (!Array.isArray(json.sources) || json.sources.length < POLICY.WORDS.CITATION_MIN_URLS) {
+    errors.push(`sources: wymagane >=${POLICY.WORDS.CITATION_MIN_URLS}, jest ${Array.isArray(json.sources) ? json.sources.length : 0}.`);
   } else {
     json.sources.forEach((s, i) => {
       if (!s || typeof s !== 'object' || !String(s.label || '').trim() || !/^https:\/\//i.test(String(s.url || ''))) {
@@ -178,6 +177,7 @@ function main() {
     warnings.push('quick_answer_no_generic ustaw na true (pole opcjonalne checklisty redakcyjnej).');
   }
   sections.forEach((section, idx) => {
+    if (!sectionRequiresAnswerFirstContract(section)) return;
     const headingRes = validators.validateH2Title(String(section.title || section.heading || '').trim());
     if (!headingRes.ok) {
       errors.push(`sections[${idx + 1}].title: ${headingRes.error}`);
@@ -190,26 +190,27 @@ function main() {
   });
 
   const internalLinks = countInternalLinksInSections(sections);
-  if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_MIN) {
-    errors.push(`Za mało linków kontekstowych w sekcjach JSON: ${internalLinks}/${POLICY.WORDS.INTERNAL_LINKS_MIN} (wymagane minimum ${POLICY.WORDS.INTERNAL_LINKS_MIN}).`);
+  if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) {
+    warnings.push(`Mało linków kontekstowych w sekcjach JSON: ${internalLinks}; to ostrzeżenie, nie bloker.`);
   }
 
-  if (!Array.isArray(json.answer_blocks) || json.answer_blocks.length < POLICY.WORDS.FAQ_MIN_ITEMS) {
-    errors.push(`FAQ answer_blocks: wymagane >=${POLICY.WORDS.FAQ_MIN_ITEMS}, jest ${Array.isArray(json.answer_blocks) ? json.answer_blocks.length : 0}.`);
-  }
   const faqResearch = Array.isArray(json.faq_research) ? json.faq_research : [];
-  if (faqResearch.length < POLICY.WORDS.FAQ_MIN_ITEMS) {
-    errors.push(`faq_research: wymagane >=${POLICY.WORDS.FAQ_MIN_ITEMS}, jest ${faqResearch.length}.`);
-  }
   const normalizeQuestion = (value) => String(value || '')
     .toLowerCase()
     .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
     .replace(/\s+/g, ' ')
     .trim();
   const answerBlocks = Array.isArray(json.answer_blocks) ? json.answer_blocks : [];
+  if (answerBlocks.length !== faqResearch.length) {
+    errors.push('FAQ: answer_blocks i faq_research muszą odpowiadać sobie 1:1.');
+  }
   const faqResearchSet = new Set(faqResearch.map((item) => normalizeQuestion(item && item.question)));
   answerBlocks.forEach((item, idx) => {
     const q = normalizeQuestion(item && item.question);
+    const researchQuestion = normalizeQuestion(faqResearch[idx]?.question);
+    if (q && q !== researchQuestion) {
+      errors.push(`FAQ #${idx + 1}: kolejność lub brzmienie nie odpowiada faq_research #${idx + 1} 1:1.`);
+    }
     if (q && !faqResearchSet.has(q)) {
       errors.push(`FAQ #${idx + 1}: pytanie nie ma dopasowania 1:1 w faq_research.question.`);
     }
@@ -345,4 +346,6 @@ function main() {
   console.log(`[PASS] article-preflight OK (${contentOnly ? 'content-only' : 'content+media'})`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { sectionRequiresAnswerFirstContract };

@@ -41,6 +41,10 @@ function prompt(ref, base, topic, technique, composition) {
     aspect_ratio: '16:9',
     alt_pl: `${topic} pokazany w praktycznej sytuacji osoby po pięćdziesiątce`,
     caption_pl: `${topic} — podpis wyjaśnia, dlaczego ten obraz wspiera dokładnie tę część materiału.`,
+    season_and_time: 'Bez znaczenia dla tego kontrolowanego kadru testowego',
+    mood: 'Spokojny, konkretny i przyjazny',
+    evidence_source_urls: [],
+    requires_exact_data_render: false,
     visual_review: {
       status: 'VERIFIED',
       matches_topic: true,
@@ -103,7 +107,50 @@ test('tworzy kompletny manifest i mapuje obrazy bez fallbacków', () => {
   assert.equal(value.sections[2].image.src, './assets/regeneracja-treningowa.webp');
   assert.equal(value.media_manifest.entries.length, 4);
   assert.equal(value.media_manifest.version, 2);
+  assert.equal(value.media_manifest.entries[0].season_and_time, 'Bez znaczenia dla tego kontrolowanego kadru testowego');
+  assert.equal(value.media_manifest.entries[0].mood, 'Spokojny, konkretny i przyjazny');
+  assert.deepEqual(value.media_manifest.entries[0].evidence_source_urls, []);
+  assert.equal(value.media_manifest.entries[0].requires_exact_data_render, false);
   assert.equal(validateManifestStructure(value).ok, true);
+});
+
+test('sekcja użytkowa nie wymusza sztucznego obrazu głównego', () => {
+  const dir = makePackage();
+  const value = article();
+  value.sections[2].section_role = 'utility';
+  value.image_prompts = value.image_prompts.filter((item) => item.section_ref !== 'sekcja-3');
+  createFiles(dir, value);
+  const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, ensureVariants: false, inspectImage: inspector });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.deepEqual(result.entries.map((item) => item.placement), ['hero', 'sekcja-1', 'sekcja-2']);
+  assert.equal(validateManifestStructure(value).ok, true);
+});
+
+test('grafika z dokładnymi danymi wymaga zgodnej transkrypcji i źródeł z artykułu', () => {
+  const dir = makePackage();
+  const value = article();
+  const evidenceUrl = 'https://pubmed.ncbi.nlm.nih.gov/12345678/';
+  value.sources = [{ url: evidenceUrl }];
+  const dataPrompt = value.image_prompts[2];
+  dataPrompt.overlay_text_pl = 'Zakres kontrolny: 10–20%';
+  dataPrompt.evidence_source_urls = [evidenceUrl];
+  dataPrompt.requires_exact_data_render = true;
+  dataPrompt.visual_review.embedded_text = {
+    kind: 'CONTENT',
+    transcription: 'Zakres kontrolny: 10–20%',
+    claims_or_numbers_present: true,
+    matches_article_claims: true,
+    evidence_urls: [evidenceUrl],
+  };
+  createFiles(dir, value);
+  const result = prepareArticleMedia(value, { assetsDir: dir, mutate: true, ensureVariants: false, inspectImage: inspector });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.equal(validateManifestStructure(value).ok, true);
+
+  value.media_manifest.entries.find((item) => item.placement === 'sekcja-2').visual_review.embedded_text.transcription = 'Zakres kontrolny: 25%';
+  const invalid = validateManifestStructure(value);
+  assert.equal(invalid.ok, false);
+  assert.match(invalid.errors.join('\n'), /transkrypcja tekstu grafiki nie odpowiada dokładnie/);
 });
 
 test('utrwala dokładny source_file przed utworzeniem wariantu JPG', () => {

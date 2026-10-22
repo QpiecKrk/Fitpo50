@@ -3,13 +3,16 @@
 const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
+const { canonicalFromHtml, modifiedDates } = require('./lib/deployment-live-verifier');
+const { categoryFileFromKey, normalizeCategory } = require('./lib/categories');
 
 function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
 }
 
 function publicFingerprint(siteDir) {
-  const required = ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'ads.txt'];
+  const required = ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'ads.txt', 'assets/data/search-index.json'];
   const entries = required.map((relativePath) => {
     const absolutePath = path.join(siteDir, relativePath);
     if (!fs.existsSync(absolutePath)) throw new Error(`Brak wymaganego pliku eksportu: ${relativePath}`);
@@ -18,14 +21,67 @@ function publicFingerprint(siteDir) {
   return sha256(entries.join('\n'));
 }
 
+function changedRootArticles(rootDir) {
+  const result = spawnSync('git', ['status', '--porcelain=v1', '--untracked-files=all'], { cwd: rootDir, encoding: 'utf8' });
+  if (result.status !== 0) return [];
+  const fromStatus = String(result.stdout || '').split('\n').map((line) => line.slice(3).trim()).filter(Boolean);
+  const ahead = spawnSync('git', ['diff', '--name-only', 'origin/main...HEAD', '--', '*.html'], { cwd: rootDir, encoding: 'utf8' });
+  const fromAhead = ahead.status === 0 ? String(ahead.stdout || '').split('\n').map((line) => line.trim()).filter(Boolean) : [];
+  return [...new Set([...fromStatus, ...fromAhead])]
+    .filter((file) => /^[^/]+\.html$/i.test(file))
+    .filter((file) => fs.existsSync(path.join(rootDir, '_site', file)))
+    .filter((file) => /"@type"\s*:\s*"BlogPosting"/.test(fs.readFileSync(path.join(rootDir, '_site', file), 'utf8')))
+    .sort((a, b) => a.localeCompare(b, 'pl'));
+}
+
+function articleDeploymentEntry(rootDir, file) {
+  const htmlPath = path.join(rootDir, '_site', file);
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  const canonical = canonicalFromHtml(html);
+  const dates = modifiedDates(html);
+  if (!canonical || dates.length !== 1) throw new Error(`${file}: marker wymaga jednego canonical i dateModified.`);
+  const slug = path.basename(file, '.html');
+  const pdfRelative = path.join('assets', 'pdf', `${slug}.pdf`);
+  const pdfPath = path.join(rootDir, '_site', pdfRelative);
+  if (!fs.existsSync(pdfPath)) throw new Error(`${file}: brak PDF w _site.`);
+  const imagePaths = [...html.matchAll(/<(?:source|img)\b[^>]+(?:src|srcset)=["']([^"']+)["']/gi)]
+    .flatMap((match) => match[1].split(',').map((entry) => entry.trim().split(/\s+/)[0]))
+    .filter((value) => value && !/^(?:https?:|data:|\/\/)/.test(value))
+    .map((value) => value.replace(/^\.\//, ''))
+    .filter((value) => fs.existsSync(path.join(rootDir, '_site', value)));
+  const section = html.match(/<meta\s+property=["']article:section["']\s+content=["']([^"']+)["']/i)?.[1] || 'ciekawe';
+  const categoryFile = categoryFileFromKey(normalizeCategory(section).key);
+  const listingCandidates = ['index.html', 'porady.html', categoryFile, 'assets/data/search-index.json'];
+  const listingPaths = listingCandidates.filter((relativePath) => {
+    const listing = path.join(rootDir, '_site', relativePath);
+    return fs.existsSync(listing) && fs.readFileSync(listing, 'utf8').includes(file);
+  });
+  for (const requiredListing of ['porady.html', categoryFile, 'assets/data/search-index.json']) {
+    if (!listingPaths.includes(requiredListing)) throw new Error(`${file}: eksport nie zawiera artykułu w ${requiredListing}.`);
+  }
+  return {
+    file,
+    slug,
+    url: canonical,
+    date_modified: dates[0],
+    html_sha256: sha256(fs.readFileSync(htmlPath)),
+    pdf_path: pdfRelative.replace(/\\/g, '/'),
+    pdf_sha256: sha256(fs.readFileSync(pdfPath)),
+    images: [...new Set(imagePaths)].sort().map((relativePath) => ({ path: relativePath, sha256: sha256(fs.readFileSync(path.join(rootDir, '_site', relativePath))) })),
+    listing_paths: listingPaths,
+  };
+}
+
 function prepareDeploymentMarker(rootDir, options = {}) {
   const siteDir = path.join(rootDir, '_site');
   if (!fs.existsSync(siteDir)) throw new Error('Brak katalogu _site. Najpierw wykonaj eksport.');
+  const articles = changedRootArticles(rootDir).map((file) => articleDeploymentEntry(rootDir, file));
   const marker = {
-    version: 1,
+    version: 2,
     release_id: options.releaseId || crypto.randomUUID(),
     prepared_at: options.preparedAt || new Date().toISOString(),
     public_fingerprint_sha256: publicFingerprint(siteDir),
+    articles,
   };
   const serialized = `${JSON.stringify(marker, null, 2)}\n`;
   fs.writeFileSync(path.join(rootDir, 'deployment.json'), serialized, 'utf8');
@@ -44,4 +100,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { prepareDeploymentMarker, publicFingerprint, sha256 };
+module.exports = { articleDeploymentEntry, changedRootArticles, prepareDeploymentMarker, publicFingerprint, sha256 };

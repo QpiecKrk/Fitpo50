@@ -4,9 +4,10 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
-const { prepareDeploymentMarker } = require('../scripts/prepare-deployment-marker');
+const { changedRootArticles, prepareDeploymentMarker } = require('../scripts/prepare-deployment-marker');
 const { verifyDeployment } = require('../scripts/lib/deployment-live-verifier');
 const { cacheBustUrl, isPublicRootHtmlPath } = require('../scripts/deployment-live-verify');
+const { SENSITIVE_PATHS, classifyExposureResponse } = require('../scripts/security-exposure-check');
 
 const ROOT = path.resolve(__dirname, '..');
 function run(command, args, cwd, env = {}) { return spawnSync(command, args, { cwd, env: { ...process.env, ...env }, encoding: 'utf8' }); }
@@ -48,9 +49,38 @@ test('deployment marker is identical in source and export', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-marker-'));
   fs.mkdirSync(path.join(root, '_site'));
   for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'ads.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
+  fs.mkdirSync(path.join(root, '_site', 'assets', 'data'), { recursive: true });
+  fs.writeFileSync(path.join(root, '_site', 'assets', 'data', 'search-index.json'), '[]');
   const marker = prepareDeploymentMarker(root, { releaseId: 'release-test', preparedAt: '2026-10-01T10:00:00.000Z' });
   assert.equal(marker.release_id, 'release-test');
   assert.equal(fs.readFileSync(path.join(root, 'deployment.json'), 'utf8'), fs.readFileSync(path.join(root, '_site', 'deployment.json'), 'utf8'));
+});
+
+test('deployment marker inventory includes articles from every commit ahead of origin/main', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-marker-multicommit-'));
+  try {
+    git(root, 'init');
+    git(root, 'config', 'user.email', 'test@example.com');
+    git(root, 'config', 'user.name', 'Test');
+    fs.mkdirSync(path.join(root, '_site'));
+    for (const file of ['one.html', 'two.html']) {
+      fs.writeFileSync(path.join(root, file), '<html>base</html>');
+      fs.writeFileSync(path.join(root, '_site', file), '<script type="application/ld+json">{"@type":"BlogPosting"}</script>');
+    }
+    git(root, 'add', '.');
+    git(root, 'commit', '-m', 'base');
+    const base = git(root, 'rev-parse', 'HEAD');
+    git(root, 'update-ref', 'refs/remotes/origin/main', base);
+    fs.writeFileSync(path.join(root, 'one.html'), '<html>one</html>');
+    git(root, 'add', 'one.html');
+    git(root, 'commit', '-m', 'one');
+    fs.writeFileSync(path.join(root, 'two.html'), '<html>two</html>');
+    git(root, 'add', 'two.html');
+    git(root, 'commit', '-m', 'two');
+    assert.deepEqual(changedRootArticles(root), ['one.html', 'two.html']);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('live verifier only returns final status after remote, marker and all checks pass', () => {
@@ -63,6 +93,7 @@ test('live verifier only returns final status after remote, marker and all check
     [`${baseUrl}/sitemap.xml`, { status: 200, body: '<urlset></urlset>' }],
     [`${baseUrl}/llms.txt`, { status: 200, body: 'ok' }],
     [`${baseUrl}/ads.txt`, { status: 200, body: 'ok' }],
+    [`${baseUrl}/assets/data/search-index.json`, { status: 200, body: '[]' }],
   ]);
   const baseFiles = [...responses.entries()].filter(([url]) => url !== `${baseUrl}/deployment.json`).map(([url, response]) => ({ url, sha256: require('../scripts/lib/deployment-live-verifier').sha256(response.body) }));
   const pass = verifyDeployment({ expectedCommit: '1'.repeat(40), remoteCommit: '1'.repeat(40), marker, responses, baseUrl, baseFiles });
@@ -85,6 +116,7 @@ test('old article HTML, missing PDF and missing image block final live status', 
     [`${baseUrl}/sitemap.xml`, { status: 200, body: '<urlset><url><loc>https://fitpo50.pl/test.html</loc><lastmod>2026-10-01</lastmod></url></urlset>' }],
     [`${baseUrl}/llms.txt`, { status: 200, body: 'ok' }],
     [`${baseUrl}/ads.txt`, { status: 200, body: 'ok' }],
+    [`${baseUrl}/assets/data/search-index.json`, { status: 200, body: '[]' }],
   ];
   const responses = new Map(baseResponses);
   responses.set(`${baseUrl}/test.html`, { status: 200, body: '<link rel="canonical" href="https://fitpo50.pl/test.html"><meta property="article:modified_time" content="2026-10-01T10:00:00+02:00"><script>{"dateModified":"2026-10-01T10:00:00+02:00"}</script><p>stara treść</p>' });
@@ -114,6 +146,30 @@ test('live verifier creates a release-bound cache-buster without changing the pu
   const result = new URL(cacheBustUrl('https://fitpo50.pl/porady.html', 'release-123'));
   assert.equal(result.pathname, '/porady.html');
   assert.equal(result.searchParams.get('__fitpo50_release'), 'release-123');
+});
+
+test('security exposure gate accepts only protected or missing sensitive paths', () => {
+  assert.equal(classifyExposureResponse(403), 'PROTECTED');
+  assert.equal(classifyExposureResponse(404), 'PROTECTED');
+  assert.equal(classifyExposureResponse(200), 'EXPOSED');
+  assert.equal(classifyExposureResponse(302), 'EXPOSED');
+  assert.equal(classifyExposureResponse(500), 'INCONCLUSIVE');
+});
+
+test('security exposure gate covers every root Markdown document class', () => {
+  const source = fs.readFileSync(path.join(ROOT, '.htaccess'), 'utf8');
+  assert.match(source, /RewriteRule \\.md\$ - \[F,L,NC\]/);
+  for (const pathname of ['/README.md', '/DEPLOY.md', '/SEO_AIO_PLAYBOOK.md', '/ARTICLE_STANDARD.md']) {
+    assert.ok(SENSITIVE_PATHS.includes(pathname), `brak kontroli ekspozycji ${pathname}`);
+  }
+});
+
+test('post-push validation never submits IndexNow automatically', () => {
+  const finalize = fs.readFileSync(path.join(ROOT, 'scripts', 'deployment-finalize.js'), 'utf8');
+  const push = fs.readFileSync(path.join(ROOT, 'scripts', 'push_one.sh'), 'utf8');
+  assert.doesNotMatch(finalize, /run\([^\n]*indexnow-release/);
+  assert.doesNotMatch(push, /^\s*npm run indexnow:release\s*$/m);
+  assert.match(finalize, /security-exposure-check/);
 });
 
 test('recovery dry-run and blocked apply preserve dirty and untracked files', () => {

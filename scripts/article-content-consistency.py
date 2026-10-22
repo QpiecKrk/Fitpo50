@@ -93,6 +93,8 @@ def validate_sections_and_media(soup, article, root, errors):
         'w skrócie (ai)?', 'w skrócie (aio)?', 'czytaj też?'
     }
     def ignored(heading):
+        if heading.get('data-section-role') == 'utility':
+            return True
         if heading.get('id') == 'zrodla' or normalized(heading.get_text()).lower() in ignored_titles:
             return True
         return any(set(parent.get('class') or []) & ignored_classes for parent in heading.parents if getattr(parent, 'attrs', None) is not None)
@@ -199,9 +201,10 @@ def validate(raw, root=None, filename=None):
             if not re.search(r'"@type"\s*:\s*(?:\[\s*)?"BlogPosting"', file.read_text()):
                 continue
         targets.add(target)
-    if len(targets) < 4:
-        errors.append(f'Za mało unikalnych kontekstowych linków do artykułów: {len(targets)} (minimum 4).')
-    return {'errors': errors, 'contextual_targets': sorted(targets), 'visible_sources':source_urls}
+    warnings = []
+    if len(targets) < 2:
+        warnings.append(f'Mało unikalnych kontekstowych linków do artykułów: {len(targets)}; to ostrzeżenie, nie bloker.')
+    return {'errors': errors, 'warnings': warnings, 'contextual_targets': sorted(targets), 'visible_sources':source_urls}
 
 
 if __name__ == '__main__':

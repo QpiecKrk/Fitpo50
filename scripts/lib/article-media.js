@@ -153,9 +153,15 @@ function promptMap(article) {
   return promptsV4.length ? promptsV4 : (Array.isArray(article.image_prompts) ? article.image_prompts : []);
 }
 
+function sectionRequiresPrimaryImage(section) {
+  return requiresMainSectionContracts(section);
+}
+
 function requiredPlacements(article) {
   const sections = Array.isArray(article.sections) ? article.sections : [];
-  return ['hero', ...sections.map((_section, index) => `sekcja-${index + 1}`)];
+  return ['hero', ...sections
+    .map((section, index) => (sectionRequiresPrimaryImage(section) ? `sekcja-${index + 1}` : ''))
+    .filter(Boolean)];
 }
 
 function sectionIndexFromPlacement(placement) {
@@ -182,7 +188,35 @@ function placementContext(article, placement) {
   return `${section.title || ''} ${(section.paragraphs_html || []).map(stripTags).join(' ')}`;
 }
 
-function validateDescriptiveFields(prompt, context, placement, errors) {
+function normalizedUrl(value) {
+  try {
+    const url = new URL(String(value || '').trim());
+    url.hash = '';
+    return url.toString().replace(/\/$/, '').toLowerCase();
+  } catch (_error) {
+    return '';
+  }
+}
+
+function validateExactDataReview(prompt, label, errors) {
+  if (prompt.requires_exact_data_render !== true) return;
+  const overlay = String(prompt.overlay_text_pl || '').trim();
+  const evidence = Array.isArray(prompt.evidence_source_urls) ? prompt.evidence_source_urls : [];
+  const embedded = prompt.visual_review?.embedded_text || {};
+  if (!overlay) errors.push(`${label}: requires_exact_data_render=true wymaga dokładnego overlay_text_pl.`);
+  if (!evidence.length) errors.push(`${label}: requires_exact_data_render=true wymaga evidence_source_urls.`);
+  if (embedded.kind !== 'CONTENT') errors.push(`${label}: grafika danych wymaga visual_review.embedded_text.kind=CONTENT.`);
+  const transcription = String(embedded.transcription || '').trim();
+  if (overlay && transcription && normalize(overlay) !== normalize(transcription)) {
+    errors.push(`${label}: transkrypcja tekstu grafiki nie odpowiada dokładnie zatwierdzonemu overlay_text_pl.`);
+  }
+  const reviewedEvidence = new Set((Array.isArray(embedded.evidence_urls) ? embedded.evidence_urls : []).map(normalizedUrl).filter(Boolean));
+  for (const url of evidence.map(normalizedUrl).filter(Boolean)) {
+    if (!reviewedEvidence.has(url)) errors.push(`${label}: kontrola grafiki danych nie potwierdza źródła ${url}.`);
+  }
+}
+
+function validateDescriptiveFields(prompt, context, placement, errors, articleSourceUrls = new Set()) {
   const base = String(prompt.filename_base || '').trim();
   const topic = String(prompt.topic || '').trim();
   const technique = String(prompt.technique || '').trim();
@@ -190,6 +224,10 @@ function validateDescriptiveFields(prompt, context, placement, errors) {
   const purpose = String(prompt.purpose || '').trim();
   const alt = String(prompt.alt_pl || '').trim();
   const caption = String(prompt.caption_pl || '').trim();
+  const overlay = String(prompt.overlay_text_pl || '').trim();
+  const seasonAndTime = String(prompt.season_and_time || '').trim();
+  const mood = String(prompt.mood || '').trim();
+  const evidenceUrls = Array.isArray(prompt.evidence_source_urls) ? prompt.evidence_source_urls : [];
   if (topic.length < 12) errors.push(`${base}: topic musi konkretnie opisywać temat obrazu (min. 12 znaków).`);
   if (technique.length < 4) errors.push(`${base}: brak konkretnej technique.`);
   if (composition.length < 8) errors.push(`${base}: brak opisu composition/kadru.`);
@@ -197,6 +235,20 @@ function validateDescriptiveFields(prompt, context, placement, errors) {
   if (alt.length < 25 || GENERIC_MEDIA_TEXT.test(alt)) errors.push(`${base}: alt_pl jest zbyt krótki albo generyczny.`);
   if (caption.length < 30 || GENERIC_MEDIA_TEXT.test(caption)) errors.push(`${base}: caption_pl jest zbyt krótki albo generyczny.`);
   if (normalize(alt) === normalize(caption)) errors.push(`${base}: alt_pl i caption_pl nie mogą być identyczne.`);
+  if (prompt.season_and_time !== undefined && seasonAndTime.length < 4) errors.push(`${base}: season_and_time musi konkretnie opisywać porę albo jawnie wskazywać jej brak.`);
+  if (prompt.mood !== undefined && mood.length < 4) errors.push(`${base}: mood musi konkretnie opisywać zamierzony nastrój.`);
+  if (prompt.requires_exact_data_render !== undefined && typeof prompt.requires_exact_data_render !== 'boolean') {
+    errors.push(`${base}: requires_exact_data_render musi być wartością true albo false.`);
+  }
+  if (prompt.evidence_source_urls !== undefined && !Array.isArray(prompt.evidence_source_urls)) {
+    errors.push(`${base}: evidence_source_urls musi być listą URL-i.`);
+  }
+  evidenceUrls.forEach((url) => {
+    const normalized = normalizedUrl(url);
+    if (!normalized) errors.push(`${base}: evidence_source_urls zawiera niepoprawny URL.`);
+    else if (!articleSourceUrls.has(normalized)) errors.push(`${base}: źródło obrazu nie występuje w sources[]: ${url}`);
+  });
+  if (prompt.requires_exact_data_render === true && !overlay) errors.push(`${base}: grafika wymagająca dokładnych danych musi mieć overlay_text_pl.`);
   const contextTokens = new Set(semanticTokens(context));
   const topicTokens = semanticTokens(`${topic} ${alt} ${caption}`);
   if (!topicTokens.some((token) => contextTokens.has(token))) {
@@ -211,6 +263,7 @@ function validateDescriptiveFields(prompt, context, placement, errors) {
   }
   if (String(review.note || '').trim().length < 20) errors.push(`${base}: visual_review.note musi konkretnie opisać zgodność obrazu z sekcją.`);
   validateVisualReview(review, base, errors);
+  validateExactDataReview(prompt, base, errors);
 }
 
 function validateVisualReview(review, label, errors) {
@@ -291,6 +344,9 @@ function validateManifestStructure(article) {
   const manifest = article.media_manifest;
   if (!manifest || typeof manifest !== 'object') return { ok: false, errors: ['Brak media_manifest utworzonego lokalnie.'] };
   const entries = Array.isArray(manifest.entries) ? manifest.entries : [];
+  const articleSourceUrls = new Set((Array.isArray(article.sources) ? article.sources : [])
+    .map((source) => normalizedUrl(source?.url))
+    .filter(Boolean));
   if (manifest.version !== 2) errors.push('media_manifest: wymagane version=2 z pełną kontrolą tekstu, anatomii i sprzętu.');
   const expected = expectedPlacements(article);
   const required = requiredPlacements(article);
@@ -317,6 +373,10 @@ function validateManifestStructure(article) {
     });
     if (entry?.visual_review?.status !== VERIFIED_REVIEW || entry?.visual_review?.matches_topic !== true) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak zatwierdzonej kontroli wizualnej.`);
     validateVisualReview(entry?.visual_review || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
+    (Array.isArray(entry?.evidence_source_urls) ? entry.evidence_source_urls : []).forEach((url) => {
+      if (!articleSourceUrls.has(normalizedUrl(url))) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: źródło obrazu nie występuje w sources[]: ${url}`);
+    });
+    validateExactDataReview(entry || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
   });
   const hero = entries.find((entry) => entry.placement === 'hero');
   if (hero) {
@@ -355,6 +415,9 @@ function prepareArticleMedia(article, options = {}) {
     return { ok: false, errors: [`Brak jednego katalogu pakietu mediów: ${assetsDir}.`], warnings, entries: [], created };
   }
   const prompts = promptMap(article);
+  const articleSourceUrls = new Set((Array.isArray(article.sources) ? article.sources : [])
+    .map((source) => normalizedUrl(source?.url))
+    .filter(Boolean));
   const required = requiredPlacements(article);
   const sectionCount = Array.isArray(article.sections) ? article.sections.length : 0;
   const byPlacement = new Map();
@@ -386,7 +449,7 @@ function prepareArticleMedia(article, options = {}) {
       errors.push(`${placement}: filename_base musi być dokładną nazwą kebab-case bez rozszerzenia.`);
       continue;
     }
-    validateDescriptiveFields(prompt, placementContext(article, placement), placement, errors);
+    validateDescriptiveFields(prompt, placementContext(article, placement), placement, errors, articleSourceUrls);
     const sourceName = selectSourceFile(prompt, assetsDir, errors);
     if (!sourceName) continue;
     if (mutate) prompt.source_file = sourceName;
@@ -411,6 +474,11 @@ function prepareArticleMedia(article, options = {}) {
       technique: String(prompt.technique || '').trim(),
       composition: String(prompt.composition || '').trim(),
       purpose: String(prompt.purpose || '').trim(),
+      season_and_time: String(prompt.season_and_time || '').trim(),
+      mood: String(prompt.mood || '').trim(),
+      overlay_text_pl: String(prompt.overlay_text_pl || '').trim(),
+      evidence_source_urls: Array.isArray(prompt.evidence_source_urls) ? [...prompt.evidence_source_urls] : [],
+      requires_exact_data_render: prompt.requires_exact_data_render === true,
       source_file: sourceName,
       aspect_ratio_declared: String(prompt.aspect_ratio || actualRatioLabel).trim(),
       alt: String(prompt.alt_pl || '').trim(),
@@ -504,5 +572,7 @@ module.exports = {
   hammingHex,
   inspectImage,
   prepareArticleMedia,
+  sectionRequiresPrimaryImage,
   validateManifestStructure,
 };
+const { requiresMainSectionContracts } = require('./article-section-contract');

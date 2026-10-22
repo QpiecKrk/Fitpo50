@@ -92,10 +92,12 @@ function validateArticleContract(filePath) {
   }
 
   const contextualLinks = countMatches(raw, /<a\b[^>]*href="(\.\/)?[a-z0-9-]+\.html(?:[?#][^\"]*)?"/gi);
-  if (contextualLinks < 4) errors.push(`Za mało linków wewnętrznych .html (jest ${contextualLinks}, min 4).`);
+  if (contextualLinks < POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) {
+    warnings.push(`Mało naturalnych linków wewnętrznych .html (${contextualLinks}); nie jest to bloker publikacji.`);
+  }
 
   const faqQuestions = countMatches(raw, /<(?:details|article)\s+class="faq-item"/gi);
-  if (faqQuestions < 4) errors.push(`FAQ: za mało pytań (jest ${faqQuestions}, min 4).`);
+  if (faqQuestions === 0) warnings.push('Brak FAQ: dozwolone, jeżeli research nie dostarczył rzeczywistych pytań użytkowników.');
 
   const tableCount = countMatches(raw, /<table\b/gi);
   const responsiveTableCount = countMatches(raw, /<div\b[^>]*class="[^"]*\barticle-table-wrap\b[^"]*"[^>]*>\s*<table\b/gi);

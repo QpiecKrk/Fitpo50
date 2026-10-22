@@ -6,14 +6,15 @@ const fs = require('node:fs');
 const os = require('node:os');
 const { validateArticleContract } = require('../scripts/article-contract-check');
 const { validateArticleHeadContract } = require('../scripts/lib/article-head-contract');
-const { validateArticleTables, validateSourcesListMarkup, validateUnlinkedArticlePrompts } = require('../scripts/validate-article-standard');
+const { validateAnswerFirstParagraphs, validateArticleTables, validateQuestionHeadings, validateSourcesListMarkup, validateUnlinkedArticlePrompts } = require('../scripts/validate-article-standard');
 const { extractMetaModified } = require('../scripts/date-modified-guard');
 const { extractPreloadHeroHref } = require('../scripts/predeploy-gate');
-const check = (html) => {
+const checkReport = (html) => {
   const run = spawnSync('python3', [path.join(__dirname, '../scripts/article-content-consistency.py'), '--stdin'], { input: html, encoding: 'utf8' });
   assert.equal(run.status, 0, run.stderr);
-  return JSON.parse(run.stdout).errors;
+  return JSON.parse(run.stdout);
 };
+const check = (html) => checkReport(html).errors;
 function fixture({ faq = 'Odpowiedź widoczna.', citation = 'https://example.org/source', links = true } = {}) {
  const bodyLinks = links ? [1,2,3,4].map(n => `<p><a href="article-${n}.html">Temat ${n}</a></p>`).join('') : '';
  const sections = [1,2,3,4,5,6].map(n => `<h2>Sekcja ${n}</h2><p>Konkretny opis sekcji.</p><figure><picture><source type="image/avif" srcset="./assets/section-${n}.avif"><source type="image/webp" srcset="./assets/section-${n}.webp"><img src="./assets/section-${n}.jpg" alt="Konkretny opis ilustracji numer ${n}" width="1200" height="675"></picture><figcaption>Konkretny podpis ilustracji numer ${n} związanej z sekcją.</figcaption></figure>`).join('');
@@ -22,7 +23,11 @@ function fixture({ faq = 'Odpowiedź widoczna.', citation = 'https://example.org
 test('matching visible FAQ and citations pass, including @graph', () => assert.deepEqual(check(fixture()), []));
 test('stale FAQ answer blocks even when the question is identical', () => assert.ok(check(fixture({faq:'Inna dawka leku.'})).some(e=>e.includes('FAQ'))));
 test('citation must equal the visible bibliography', () => assert.ok(check(fixture({citation:'https://example.org/other'})).some(e=>e.includes('citation'))));
-test('navigation cannot satisfy contextual linking', () => assert.ok(check(fixture({links:false})).some(e=>e.includes('kontekst'))));
+test('navigation cannot satisfy contextual linking and fewer than two links is only a warning', () => {
+ const report = checkReport(fixture({links:false}));
+ assert.deepEqual(report.errors, []);
+ assert.ok(report.warnings.some(e=>e.includes('kontekst')));
+});
 test('search result URL is not a bibliographic source', () => assert.ok(check(fixture().replaceAll('https://example.org/source','https://pubmed.ncbi.nlm.nih.gov/?term=fascia')).some(e=>e.includes('wyszukiwania'))));
 test('malformed JSON-LD fails closed', () => assert.ok(check(fixture()+'<script type="application/ld+json">{bad}</script>').some(e=>e.includes('JSON-LD'))));
 test('duplicate FAQPage is reported explicitly even with identical answers', () => {
@@ -51,6 +56,18 @@ test('legacy Q&A and reading helper headings are not treated as substantive sect
  const helpers = '<h2>Szybkie odpowiedzi (Q&A)?</h2><h2>Szybkie odpowiedzi (AEO)?</h2><div class="qa-grid"><h2>Cytaty do zapamiętania?</h2><h2>Cytaty do zapamiętania (GEO)?</h2><h2>W skrócie (AI)?</h2><h2>W skrócie (AIO)?</h2><h2>Czytaj też?</h2></div>';
  const html = fixture().replace('<section class="faq-section">', `${helpers}<section class="faq-section">`);
  assert.deepEqual(check(html), []);
+});
+test('utility section marker excludes a practical helper section from the primary image contract', () => {
+ const utility = '<h2 data-section-role="utility">Plan na pierwszy tydzień po zmianie czasu</h2><p>Praktyczna lista działań na kolejne dni.</p>';
+ const html = fixture().replace('<section class="faq-section">', `${utility}<section class="faq-section">`);
+ assert.deepEqual(check(html), []);
+});
+test('HTML standard validator skips question and answer-first contracts only for marked utility headings', () => {
+ const html = '<h2 data-section-role="utility">Plan praktyczny</h2><ul><li>Dzień pierwszy</li></ul><h2>Co zrobić najpierw?</h2><p>Najpierw zachowaj stałą porę pobudki, aby łagodnie ustabilizować rytm dnia po zmianie czasu.</p>';
+ const errors = [];
+ validateQuestionHeadings(html, errors);
+ validateAnswerFirstParagraphs(html, errors);
+ assert.deepEqual(errors, []);
 });
 test('invalid image dimensions are reported without crashing the validator', () => {
  const html = fixture().replace('width="1200" height="675"', 'width="undefined" height="675"');

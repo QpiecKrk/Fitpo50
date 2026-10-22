@@ -15,8 +15,16 @@ function isSha256(value) {
 }
 
 function isInsideRoot(root, target) {
-  const resolvedRoot = path.resolve(root);
-  const resolvedTarget = path.resolve(target);
+  const canonical = (value) => {
+    const resolved = path.resolve(value);
+    try {
+      return fs.realpathSync.native(resolved);
+    } catch (_error) {
+      return resolved;
+    }
+  };
+  const resolvedRoot = canonical(root);
+  const resolvedTarget = canonical(target);
   return resolvedTarget === resolvedRoot || resolvedTarget.startsWith(`${resolvedRoot}${path.sep}`);
 }
 

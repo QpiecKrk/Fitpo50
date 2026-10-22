@@ -5,6 +5,7 @@ const path = require('node:path');
 const test = require('node:test');
 const {
   beginPromotionTransaction,
+  assertNoUnexpectedStageChanges,
   cloneEntry,
   createStagingWorkspace,
   promoteStaging,
@@ -45,6 +46,39 @@ test('staging jest kopią niezależną i pomija .git oraz node_modules', () => {
   assert.equal(fs.readFileSync(path.join(source, 'article.html'), 'utf8'), 'wersja publiczna');
   assert.equal(fs.existsSync(path.join(stage, '.git')), false);
   assert.equal(fs.existsSync(path.join(stage, 'node_modules')), false);
+});
+
+test('staging nie kopiuje sekretów, bazy admina ani publicznego duplikatu _site/admin', () => {
+  const source = temp('fitpo50-stage-secrets-source-');
+  const stage = temp('fitpo50-stage-secrets-target-');
+  fs.mkdirSync(path.join(source, 'admin'), { recursive: true });
+  fs.mkdirSync(path.join(source, '_site', 'admin'), { recursive: true });
+  fs.writeFileSync(path.join(source, '.env.local'), 'SECRET=yes');
+  fs.writeFileSync(path.join(source, 'admin', 'config.php'), '<?php secret();');
+  fs.writeFileSync(path.join(source, 'admin', 'database.sqlite'), 'db');
+  fs.writeFileSync(path.join(source, 'admin', 'bootstrap.php'), '<?php safe();');
+  fs.writeFileSync(path.join(source, '_site', 'admin', 'database.sqlite'), 'db');
+  fs.writeFileSync(path.join(source, 'article.html'), 'public');
+  cloneEntry(source, stage);
+  assert.equal(fs.existsSync(path.join(stage, '.env.local')), false);
+  assert.equal(fs.existsSync(path.join(stage, 'admin', 'config.php')), false);
+  assert.equal(fs.existsSync(path.join(stage, 'admin', 'database.sqlite')), false);
+  assert.equal(fs.existsSync(path.join(stage, '_site', 'admin')), false);
+  assert.equal(fs.existsSync(path.join(stage, 'admin', 'bootstrap.php')), true);
+});
+
+test('zmiana stagingu spoza manifestu blokuje promocję z nazwą pliku', () => {
+  const source = temp('fitpo50-stage-manifest-source-');
+  const stage = temp('fitpo50-stage-manifest-target-');
+  fs.writeFileSync(path.join(source, 'article.html'), 'old');
+  fs.writeFileSync(path.join(source, 'porady.html'), 'old list');
+  cloneEntry(source, stage);
+  fs.writeFileSync(path.join(stage, 'article.html'), 'new');
+  fs.writeFileSync(path.join(stage, 'porady.html'), 'unexpected');
+  assert.throws(() => assertNoUnexpectedStageChanges(source, stage, ['article.html']), /porady\.html/);
+  fs.writeFileSync(path.join(stage, 'porady.html'), 'old list');
+  fs.rmSync(path.join(stage, 'porady.html'));
+  assert.throws(() => assertNoUnexpectedStageChanges(source, stage, ['article.html']), /DELETED:porady\.html/);
 });
 
 test('staging publikacyjny ma manifest właściciela i aktywny lock', () => {
@@ -110,6 +144,8 @@ test('lista promocji obejmuje HTML, PDF, raport i dokładne warianty mediów', (
     'data/reports/published-articles-log.json',
     'data/reports/gsc-after-publication-queue.json',
     'data/reports/gsc-after-publication-queue.txt',
+    'data/reports/link-topology-report.json',
+    'data/reports/link-topology-report.md',
     'assets/data/search-index.json', '_site/assets/data/search-index.json',
     'llms-full.txt', '_site/llms-full.txt',
     'assets/nowy-hero.avif', '_site/assets/nowy-hero.avif',

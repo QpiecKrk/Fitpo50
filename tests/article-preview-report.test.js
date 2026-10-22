@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { sha256File, validatePreviewReport } = require('../scripts/lib/article-preview-report');
+const { isInsideRoot, sha256File, validatePreviewReport } = require('../scripts/lib/article-preview-report');
 const {
   CONTRACT,
   applyVisualReview,
@@ -64,6 +64,17 @@ function fixture() {
   fs.writeFileSync(reportPath, JSON.stringify(report));
   return { root, slug, report, reportPath };
 }
+
+test('managed-root check accepts a canonical symlink alias but still rejects outside files', () => {
+  const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-preview-alias-'));
+  const root = path.join(parent, 'real-root');
+  const alias = path.join(parent, 'root-alias');
+  fs.mkdirSync(root);
+  fs.writeFileSync(path.join(root, 'review.json'), '{}');
+  fs.symlinkSync(root, alias);
+  assert.equal(isInsideRoot(root, path.join(alias, 'review.json')), true);
+  assert.equal(isInsideRoot(root, path.join(parent, 'outside.json')), false);
+});
 
 function verifiedReview(report) {
   const review = createReviewTemplate(report);

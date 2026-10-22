@@ -5,17 +5,17 @@
  * v1.3: Answer-first H2 intro contract; 30-70 words is guidance, not a standalone blocker.
  */
 
+const { normalizeInternalHref } = require('./article-normalization');
+
 const POLICY = {
   // Word count limits and editorial guidance
   WORDS: {
     H2_INTRO_MIN: 30,
     H2_INTRO_MAX: 70,
-    QUICK_ANSWER_MIN: 45,
     QUICK_ANSWER_MAX: 70,
     SEO_DESCRIPTION_MIN: 145,
     SEO_DESCRIPTION_MAX: 160,
-    INTERNAL_LINKS_MIN: 4,
-    FAQ_MIN_ITEMS: 4,
+    INTERNAL_LINKS_WARN_BELOW: 2,
     CITATION_MIN_URLS: 4
   },
 
@@ -209,7 +209,7 @@ const POLICY = {
 
   AUTO_LINK: {
     MIN_WORDS: 40,
-    MIN_LINKS: 4,
+    WARN_BELOW: 2,
     MAX_LINKS: 6
   },
 
@@ -258,6 +258,21 @@ const utils = {
     return m ? m.length : 0;
   },
 
+  countCompleteSentences: (text) => {
+    const clean = String(text || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!clean) return 0;
+    const protectAbbreviation = (value, offset, source) => {
+      const suffix = source.slice(offset + value.length).replace(/^["'»”)]*/, '');
+      if (!suffix.trim()) return `${value.slice(0, -1).replace(/\./g, '¤')}.`;
+      return value.replace(/\./g, '¤');
+    };
+    const protectedText = clean
+      .replace(/(?<=\d)[.,](?=\d)/g, '¤')
+      .replace(/\b(?:m\.in|p\.n\.e)\./giu, protectAbbreviation)
+      .replace(/\b(?:np|dr|prof|mgr|lek|inż|ok|tzw|tj|tzn|itp|itd|ul|al|św|vs|nr|godz|min|sek|r)\./giu, protectAbbreviation);
+    return (protectedText.match(/[.!?]+(?=(?:["'»”)]|\s|$))/g) || []).length;
+  },
+
   /**
    * Usuwanie tagów HTML z zachowaniem spacji
    */
@@ -290,13 +305,26 @@ const utils = {
       .trim();
   },
 
+  /**
+   * Jedna normalizacja pytań FAQ dla researchu i późniejszej walidacji.
+   * Usuwa wyłącznie różnice zapisu, nie zmienia znaczenia pytania.
+   */
+  faqIntentNormalize: (text) => {
+    return String(text || '')
+      .toLowerCase()
+      .replace(/[ł]/g, 'l')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9\s]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  },
+
   normalizeInternalHtmlHref: (href) => {
     const raw = String(href || '').trim();
-    if (!raw) return '';
-    if (/^(https?:|mailto:|tel:|javascript:|#)/i.test(raw)) return '';
-    const clean = raw.split('#')[0].split('?')[0].trim();
-    if (!clean || !/\.html$/i.test(clean)) return '';
-    return clean.replace(/^\.\//, '').replace(/^\/+/, '');
+    if (!raw || /^(mailto:|tel:|javascript:|#)/i.test(raw)) return '';
+    const normalized = normalizeInternalHref(raw);
+    return /\.html$/i.test(normalized) ? normalized : '';
   },
 
   countInternalHtmlLinks: (htmlChunks, options = {}) => {
@@ -316,9 +344,7 @@ const utils = {
         const isRelInternal = !/^(https?:|mailto:|tel:|javascript:|#)/i.test(href) && /\.html(?:[?#].*)?$/i.test(href);
         if (!isAbsInternal && !isRelInternal) continue;
 
-        const normalized = utils.normalizeInternalHtmlHref(
-          href.replace(/^https?:\/\/(www\.)?fitpo50\.pl\//i, '')
-        ).toLowerCase();
+        const normalized = utils.normalizeInternalHtmlHref(href).toLowerCase();
 
         if (!normalized) continue;
 
@@ -502,14 +528,18 @@ const validators = {
     const warnings = [];
     const clean = utils.stripTags(text).replace(/\s+/g, ' ').trim();
     const words = utils.countWords(clean);
+    const sentences = utils.countCompleteSentences(clean);
     const push = mode === 'legacy' ? warnings : errors;
 
     if (!clean) {
       push.push('Brak treści "Szybka odpowiedź".');
-      return { valid: false, errors, warnings, words };
+      return { valid: false, errors, warnings, words, sentences };
     }
-    if (words < POLICY.WORDS.QUICK_ANSWER_MIN || words > POLICY.WORDS.QUICK_ANSWER_MAX) {
-      push.push(`Szybka odpowiedź poza zakresem ${POLICY.WORDS.QUICK_ANSWER_MIN}-${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${words}).`);
+    if (sentences < 1 || sentences > 3 || !/[.!?]["'»”)]?$/.test(clean)) {
+      push.push(`Szybka odpowiedź musi zawierać 1-3 pełne zdania (jest ${sentences}).`);
+    }
+    if (words > POLICY.WORDS.QUICK_ANSWER_MAX) {
+      push.push(`Szybka odpowiedź przekracza ${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${words}).`);
     }
     const banned = validators.containsBannedPhrase(clean);
     if (banned.found) {
@@ -519,7 +549,7 @@ const validators = {
       push.push('Szybka odpowiedź musi zawierać liczbę albo warunek (np. jeśli/gdy/kiedy/u osób po 50/przy wyniku).');
     }
 
-    return { valid: errors.length === 0, errors, warnings, words };
+    return { valid: errors.length === 0, errors, warnings, words, sentences };
   },
 
   validateLogicalCoherence: (items) => {

@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const {
   cleanupPreparedArtifact,
+  computePreparedPackageFingerprint,
   inspectPreparedArtifact,
   reportPathForJson,
   safeSlug,
@@ -12,6 +13,7 @@ const {
 } = require('./lib/article-json-artifact');
 const {
   beginPromotionTransaction,
+  assertNoUnexpectedStageChanges,
   createStagingWorkspace,
   promotionCandidates,
   recoverInterruptedTransactions,
@@ -34,11 +36,19 @@ const {
   defaultGscInputDir,
   preparePublicationMonitoring,
 } = require('./lib/post-publication-monitor');
-const { submitIndexNow } = require('./lib/indexnow-client');
 const { validatePreviewReport } = require('./lib/article-preview-report');
+const {
+  EXIT_CODES,
+  classifyPipelineFailure,
+  contentBlocked,
+  environmentFailure,
+  writePipelineStatus,
+} = require('./lib/article-pipeline-status');
 
 let tempWorkingCopy = '';
 let transactionalOuter = false;
+let activeSlug = '';
+let activeRoot = process.cwd();
 const TIMINGS_PATH = process.env.FITPO50_PIPELINE_TIMINGS_PATH
   ? path.resolve(process.env.FITPO50_PIPELINE_TIMINGS_PATH)
   : path.join(process.cwd(), 'data', 'reports', 'local', 'pipeline-timings.json');
@@ -75,8 +85,11 @@ function run(label, cmd, args) {
   const started = Date.now();
   const res = spawnSync(cmd, args, { stdio: 'inherit' });
   stepTimings.push({ tag: label, durationMs: Date.now() - started });
+  if (res.error) throw environmentFailure(`${label} nie wystartował: ${res.error.message || res.error}`);
   if (res.status !== 0) {
-    throw new Error(`${label} failed (exit ${res.status ?? 'unknown'})`);
+    throw res.status === EXIT_CODES.ENVIRONMENT_FAILURE
+      ? environmentFailure(`${label} failed (exit ${res.status ?? 'unknown'})`)
+      : contentBlocked(`${label} failed (exit ${res.status ?? 'unknown'})`);
   }
 }
 
@@ -90,12 +103,14 @@ function runParallel(label, jobs) {
       const started = Date.now();
       const child = spawn(job.cmd, job.args, { stdio: 'inherit' });
       child.on('error', (err) => {
-        reject(new Error(`${job.label} failed to start: ${err.message || err}`));
+        reject(environmentFailure(`${job.label} failed to start: ${err.message || err}`));
       });
       child.on('exit', (code) => {
         stepTimings.push({ tag: job.label, durationMs: Date.now() - started });
         if (code !== 0) {
-          reject(new Error(`${job.label} failed (exit ${code ?? 'unknown'})`));
+          reject(code === EXIT_CODES.ENVIRONMENT_FAILURE
+            ? environmentFailure(`${job.label} failed (exit ${code ?? 'unknown'})`)
+            : contentBlocked(`${job.label} failed (exit ${code ?? 'unknown'})`));
           return;
         }
         resolve();
@@ -157,21 +172,6 @@ function runPostPromotionValidation(root, slug, article) {
   validatePublicationSet(root, article, { requireManifest: true });
 }
 
-async function submitIndexNowAfterPromotion(slug, enabled) {
-  const key = String(process.env.INDEXNOW_KEY || '').trim();
-  const result = await submitIndexNow({
-    host: 'fitpo50.pl',
-    key,
-    keyLocation: String(process.env.INDEXNOW_KEY_LOCATION || '').trim() || undefined,
-    urlList: [`https://fitpo50.pl/${slug}.html`],
-    enabled,
-  });
-  const evidenceDir = path.join(process.cwd(), 'data', 'reports', 'local', 'indexnow');
-  fs.mkdirSync(evidenceDir, { recursive: true });
-  fs.writeFileSync(path.join(evidenceDir, `${slug}.json`), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
-  return `${result.status} (${result.http_status || result.reason})`;
-}
-
 function parseJsonWithDiagnostics(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   try {
@@ -179,13 +179,13 @@ function parseJsonWithDiagnostics(filePath) {
   } catch (err) {
     const message = String(err && err.message ? err.message : err);
     const posMatch = message.match(/position (\d+)/i);
-    if (!posMatch) throw new Error(`JSON parse error: ${message}`);
+    if (!posMatch) throw contentBlocked(`JSON parse error: ${message}`);
     const pos = Number(posMatch[1]);
     const head = raw.slice(0, pos);
     const line = head.split('\n').length;
     const col = pos - head.lastIndexOf('\n');
     const lineText = raw.split('\n')[line - 1] || '';
-    throw new Error(`JSON parse error: ${message} (line ${line}, col ${col}): ${lineText.trim()}`);
+    throw contentBlocked(`JSON parse error: ${message} (line ${line}, col ${col}): ${lineText.trim()}`);
   }
 }
 
@@ -193,7 +193,7 @@ function detectSlug(parsed, inputPath) {
   const fromJson = parsed && typeof parsed === 'object' ? String(parsed.slug || '').trim() : '';
   if (fromJson) return fromJson;
   const fallback = path.basename(inputPath).replace(/\.fitpo50\.json$/i, '').replace(/\.json$/i, '');
-  if (!fallback) throw new Error('Brak slug w JSON i brak nazwy pliku do fallbacku.');
+  if (!fallback) throw contentBlocked('Brak slug w JSON i brak nazwy pliku do fallbacku.');
   return fallback;
 }
 
@@ -206,10 +206,20 @@ function ensureImportCopy(sourcePath, slug, preparedReport) {
   });
   const target = path.join(importDir, `${safeSlug(slug)}.fitpo50.json`);
   fs.copyFileSync(sourcePath, target);
+  const sourceJson = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
+  for (const entry of preparedReport.package_files || []) {
+    const name = String(entry.relative_path || '');
+    if (!name || name === path.basename(sourcePath)) continue;
+    if (name !== path.basename(name)) throw contentBlocked(`Nieprawidłowa nazwa pliku w pakiecie: ${name}`);
+    fs.copyFileSync(path.join(path.dirname(sourcePath), name), path.join(importDir, name));
+  }
+  const packageState = computePreparedPackageFingerprint(target, sourceJson);
   fs.writeFileSync(reportPathForJson(target), `${JSON.stringify({
     ...preparedReport,
     output_file: target,
     output_sha256: sha256File(target),
+    package_sha256: packageState.fingerprint,
+    package_files: packageState.entries,
     pipeline_working_copy: true,
   }, null, 2)}\n`, 'utf8');
   return target;
@@ -253,19 +263,19 @@ function writeArticleStageRecord({ stageRoot, sourceRoot, slug, input, candidate
 function readArticleStageRecord(stageRoot, sourceRoot, slug, input) {
   const workspace = readWorkspaceManifest(stageRoot);
   if (!workspace || workspace.workspace_type !== 'article-publication-staging' || path.resolve(workspace.project_root) !== path.resolve(sourceRoot)) {
-    throw new Error('Wskazany katalog nie jest zarządzanym stagingiem publikacji tego repozytorium.');
+    throw contentBlocked('Wskazany katalog nie jest zarządzanym stagingiem publikacji tego repozytorium.');
   }
   const recordPath = articleStageRecordPath(stageRoot);
-  if (!fs.existsSync(recordPath)) throw new Error(`Brak rekordu wznowienia: ${recordPath}`);
+  if (!fs.existsSync(recordPath)) throw contentBlocked(`Brak rekordu wznowienia: ${recordPath}`);
   const record = JSON.parse(fs.readFileSync(recordPath, 'utf8'));
-  if (record.source_root !== sourceRoot || record.slug !== slug || record.input_file !== input) throw new Error('Staging należy do innego repozytorium, slugu albo artefaktu wejściowego.');
-  if (record.input_sha256 !== sha256File(input)) throw new Error('Artefakt CONTENT_READY zmienił się podczas oczekiwania na review.');
+  if (record.source_root !== sourceRoot || record.slug !== slug || record.input_file !== input) throw contentBlocked('Staging należy do innego repozytorium, slugu albo artefaktu wejściowego.');
+  if (record.input_sha256 !== sha256File(input)) throw contentBlocked('Artefakt CONTENT_READY zmienił się podczas oczekiwania na review.');
   for (const [relative, hash] of Object.entries(record.static_hashes || {})) {
     const file = path.join(stageRoot, relative);
-    if (!fs.existsSync(file) || sha256File(file) !== hash) throw new Error(`Staging zmienił się po kontroli technicznej: ${relative}`);
+    if (!fs.existsSync(file) || sha256File(file) !== hash) throw contentBlocked(`Staging zmienił się po kontroli technicznej: ${relative}`);
   }
   const preview = validatePreviewReport(stageRoot, slug, { requireRenderFiles: true });
-  if (!preview.ok) throw new Error(`Staging nie ma kompletnego PREVIEW_READY v3:\n- ${preview.errors.join('\n- ')}`);
+  if (!preview.ok) throw contentBlocked(`Staging nie ma kompletnego PREVIEW_READY v3:\n- ${preview.errors.join('\n- ')}`);
   return { ...record, preview_timing: preview.report?.timing || {} };
 }
 
@@ -278,30 +288,35 @@ async function main() {
   const stagingInternal = boolOpt(args['staging-internal'], false);
   transactionalOuter = !stagingInternal;
   if (stagingInternal && process.env.FITPO50_STAGING_INTERNAL !== '1') {
-    throw new Error('--staging-internal jest prywatnym trybem pipeline i nie może być uruchamiany bez kontrolera stagingu.');
+    throw contentBlocked('--staging-internal jest prywatnym trybem pipeline i nie może być uruchamiany bez kontrolera stagingu.');
   }
   if (stagingInternal) capabilityFromEnvironment('article-pipeline:staging', process.cwd());
 
   const root = process.cwd();
+  activeRoot = root;
   const input = path.resolve(root, args.file);
-  if (!fs.existsSync(input)) throw new Error(`Nie znaleziono pliku: ${input}`);
+  if (!fs.existsSync(input)) throw contentBlocked(`Nie znaleziono pliku: ${input}`);
   const prepared = inspectPreparedArtifact(input, root);
   if (!prepared.ok) {
-    throw new Error(`Publikacja wymaga niezmienionego artefaktu CONTENT_READY:\n- ${prepared.errors.join('\n- ')}\nNajpierw uruchom article:prepare-json.`);
+    throw contentBlocked(`Publikacja wymaga niezmienionego artefaktu CONTENT_READY:\n- ${prepared.errors.join('\n- ')}\nUżyj kanonicznego article:add; article:prepare-json służy tylko do korekty bez publikacji.`);
   }
   const parsedInput = parseJsonWithDiagnostics(input);
 
   const category = args.category ? String(args.category) : '';
   const force = boolOpt(args.force, false);
+  const dryRun = boolOpt(args['dry-run'], false);
   const parallelTails = boolOpt(args['parallel-tails'], true);
   const assetsDir = args['assets-dir'] ? path.resolve(root, args['assets-dir']) : path.dirname(input);
   const slug = detectSlug(parsedInput, input);
+  activeSlug = safeSlug(slug);
   if (!stagingInternal) {
-    const recovered = recoverInterruptedTransactions(root);
-    recovered.forEach((transactionId) => console.log(`[RECOVERY] Cofnięto przerwaną publikację: ${transactionId}`));
+    if (!dryRun) {
+      const recovered = recoverInterruptedTransactions(root);
+      recovered.forEach((transactionId) => console.log(`[RECOVERY] Cofnięto przerwaną publikację: ${transactionId}`));
+    }
     const liveArticleExists = fs.existsSync(path.join(root, `${slug}.html`));
     if (liveArticleExists && !force) {
-      throw new Error(`Slug ${slug} już istnieje. Aktualizacja wymaga jawnego --force true.`);
+      throw contentBlocked(`Slug ${slug} już istnieje. Aktualizacja wymaga jawnego --force true.`);
     }
     let operation = liveArticleExists ? 'UPDATE' : 'CREATE';
     let transactionId = `article-${slug}-${Date.now()}-${process.pid}`;
@@ -332,12 +347,20 @@ async function main() {
         phaseStarted = Date.now();
         runPreviewGate(stageRoot, slug);
         stepTimings.push({ tag: 'Render desktop/mobile i kontrola PDF', durationMs: Date.now() - phaseStarted });
+        assertNoUnexpectedStageChanges(root, stageRoot, candidates);
         writeArticleStageRecord({ stageRoot, sourceRoot: root, slug, input, candidates, baseline, transactionId, operation });
         markTempWorkspace(stageRoot, 'AWAITING_REVIEW');
         keepForReview = true;
         console.log(`[AWAITING_VISUAL_REVIEW] ${stageRoot}`);
-        console.log(`[RESUME_COMMAND] npm run article:publish -- --file "${input}" --assets-dir "${assetsDir}" --force ${force} --promote-stage "${stageRoot}"`);
-        appendTimingReport('article-pipeline-awaiting-review', stepTimings);
+        if (!dryRun) {
+          writePipelineStatus(root, slug, 'AWAITING_REVIEW', {
+            next_action: 'REVIEW_VISUAL_ARTIFACTS',
+            next_args: { stage_root: stageRoot, input_file: input, assets_dir: assetsDir, force },
+          });
+          appendTimingReport('article-pipeline-awaiting-review', stepTimings);
+        } else {
+          console.log('[DRY_RUN] Preview desktop, mobile i PDF powstał wyłącznie w zarządzanym stagingu; repozytorium i stan publikacji pozostały nietknięte.');
+        }
         return { workingCopy: '', artifactCleanup: null, awaitingReview: true };
       }
       const monitoring = preparePublicationMonitoring({
@@ -364,15 +387,15 @@ async function main() {
         transaction.commit();
       } catch (error) {
         transaction.rollback(error.message || error);
-        throw new Error(`Publikacja cofnięta po błędzie walidacji: ${error.message || error}`);
+        error.message = `Publikacja cofnięta po błędzie walidacji: ${error.message || error}`;
+        throw error;
       }
-      const indexNowStatus = await submitIndexNowAfterPromotion(slug, boolOpt(args.indexnow, true));
-      console.log(`[INDEXNOW] ${indexNowStatus} — wysyłka dopiero po PREVIEW_READY i promocji.`);
       const artifactCleanup = cleanupPreparedArtifact(input);
       artifactCleanup.removed.forEach((file) => console.log(`[CLEANUP] Usunięto opublikowany artefakt JSON: ${file}`));
       artifactCleanup.removed_directories.forEach((directory) => console.log(`[CLEANUP] Usunięto wykorzystany pakiet roboczy JSON i mediów: ${directory}`));
       artifactCleanup.retained.forEach((item) => console.warn(`[WARN] Opublikowany pakiet roboczy pozostał na dysku (${item.code}): ${item.path}`));
       console.log(`[PUBLISHED] ${operation}: zatwierdzono atomowo ${transaction.changed.length} plików po PREVIEW_READY i walidacji repo.`);
+      writePipelineStatus(root, slug, 'SUCCESS', { next_action: 'AWAIT_SEPARATE_COMMIT_AND_PUSH_COMMAND' });
       appendTimingReport('article-pipeline-transactional', stepTimings);
       stageStatus = 'COMPLETED';
       return { workingCopy: '', artifactCleanup };
@@ -386,7 +409,7 @@ async function main() {
     }
   }
   if (prepared.html_exists && !force) {
-    throw new Error(`Slug ${prepared.slug} już istnieje jako ${prepared.html_path}. Publikacja zatrzymana (force=false).`);
+    throw contentBlocked(`Slug ${prepared.slug} już istnieje jako ${prepared.html_path}. Publikacja zatrzymana (force=false).`);
   }
   const workingCopy = ensureImportCopy(input, slug, prepared.report);
   tempWorkingCopy = workingCopy;
@@ -407,7 +430,6 @@ async function main() {
     [
       ...common,
       '--publish', 'true',
-      '--run-internal-links', 'auto',
       '--validate', 'true',
       '--force', force ? 'true' : 'false',
     ],
@@ -448,6 +470,7 @@ main()
       }
     }
     runTempCleanup();
+    if (result?.awaitingReview) process.exitCode = EXIT_CODES.AWAITING_REVIEW;
   })
   .catch((err) => {
     console.error(`\n[FAIL] ${err.message || err}`);
@@ -461,5 +484,11 @@ main()
       }
     }
     if (!transactionalOuter) runTempCleanup();
-    process.exit(1);
+    const failure = classifyPipelineFailure(err);
+    if (activeSlug) writePipelineStatus(activeRoot, activeSlug, failure.status, {
+      next_action: failure.nextAction,
+      error_code: failure.code,
+      error: String(err.message || err),
+    });
+    process.exit(failure.exitCode);
   });

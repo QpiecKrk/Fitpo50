@@ -2,6 +2,8 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { TOPIC_CENTERS } = require('./topic-centers');
+const { foldPolish } = require('./slugify');
+const { normalizeInternalHref, stripAnchorTags } = require('./article-normalization');
 
 const INTENTS = new Set([
   'how-to', 'czy-warto', 'objawy', 'normy', 'bezpieczenstwo', 'definicja',
@@ -19,6 +21,12 @@ const GENERIC_ANCHORS = new Set([
   'czytaj wiecej', 'dowiedz sie wiecej', 'kliknij tutaj', 'sprawdz', 'sprawdz tutaj',
   'ten artykul', 'tutaj', 'wiecej', 'zobacz',
 ]);
+
+const EDITORIAL_ANCHOR_PHRASES = Object.freeze({
+  'sen-po-50.html': ['dobry sen', 'gorszy sen', 'jakość snu', 'zaburzenia snu', 'problemy ze snem', 'sen po 50'],
+});
+
+const POLICY_AUTO_LINK_MAX = 6;
 
 const CENTER_PROFILES = Object.freeze({
   strength: ['trening silowy', 'silownia', 'maszyny', 'progresja', 'sila chwytu', 'oporowy'],
@@ -43,11 +51,8 @@ function stripTags(value) {
 }
 
 function normalize(value) {
-  return stripTags(value)
+  return foldPolish(stripTags(value))
     .toLowerCase()
-    .replace(/ł/g, 'l')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9\s-]+/g, ' ')
     .replace(/-/g, ' ')
     .replace(/\s+/g, ' ')
@@ -75,11 +80,7 @@ function isArticleHtml(file, html) {
 }
 
 function normalizeHref(value) {
-  return String(value || '')
-    .trim()
-    .replace(/^https?:\/\/(?:www\.)?fitpo50\.pl\//i, '')
-    .replace(/^[./]+/, '')
-    .replace(/[?#].*$/, '');
+  return normalizeInternalHref(value);
 }
 
 function extractInternalLinks(html) {
@@ -160,7 +161,7 @@ function candidatePhrases(candidate) {
   rawTokens.forEach((token) => {
     if (!STOP_WORDS.has(token) && (token.length >= 7 || /^[a-z]+\d+$/i.test(token))) phrases.push(token);
   });
-  return unique(phrases).sort((a, b) => b.length - a.length);
+  return unique([...(EDITORIAL_ANCHOR_PHRASES[candidate.file] || []), ...phrases]);
 }
 
 function findActualPhrase(text, normalizedPhrase) {
@@ -183,12 +184,21 @@ function isNaturalAnchor(anchor) {
   return parts.length >= 2 && parts.length <= 7;
 }
 
+function isAllowedAutoLinkParagraph(paragraph, anchor) {
+  const html = String(paragraph?.html || '');
+  if (/<(?:h[1-6]|table|thead|tbody|tfoot|tr|th|td)\b/i.test(html)) return false;
+  const plain = stripTags(html);
+  const position = plain.toLocaleLowerCase('pl').indexOf(String(anchor || '').toLocaleLowerCase('pl'));
+  if (position < 0) return false;
+  return /[.!?]\s+/u.test(plain.slice(0, position));
+}
+
 function findAnchorForCandidate(candidate, paragraphs, usedLocations) {
   for (const phrase of candidatePhrases(candidate)) {
     for (const paragraph of paragraphs) {
       if (usedLocations.has(paragraph.location) || /<a\b/i.test(paragraph.html)) continue;
       const actual = findActualPhrase(paragraph.plain, phrase);
-      if (actual && isNaturalAnchor(actual)) return { paragraph, anchor: actual };
+      if (actual && isNaturalAnchor(actual) && isAllowedAutoLinkParagraph(paragraph, actual)) return { paragraph, anchor: actual };
     }
   }
   return null;
@@ -312,10 +322,14 @@ function validateStrategy(article, errors) {
 function validateExistingLinks(article, inventory, errors) {
   const validTargets = new Set(inventory.map((item) => item.file));
   const found = [];
+  const seenTargets = new Set();
   collectParagraphs(article).forEach((paragraph) => {
     for (const match of paragraph.html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
       const target = normalizeHref(match[1]);
       const anchor = stripTags(match[2]);
+      if (target === `${article.slug}.html`) errors.push(`${paragraph.location}: link nie może prowadzić do bieżącego artykułu (${target}).`);
+      if (seenTargets.has(target)) errors.push(`${paragraph.location}: adres ${target} może wystąpić najwyżej raz w treści artykułu.`);
+      seenTargets.add(target);
       if (!validTargets.has(target)) errors.push(`${paragraph.location}: cel linku nie istnieje w lokalnym inventory BlogPosting (${target || match[1]}).`);
       if (!isNaturalAnchor(anchor)) errors.push(`${paragraph.location}: anchor „${anchor}” jest generyczny albo nienaturalny.`);
       if (/^centrum-/i.test(target)) {
@@ -327,6 +341,71 @@ function validateExistingLinks(article, inventory, errors) {
     }
   });
   return found;
+}
+
+function linkPlanKey(item, includeLocation = true) {
+  const target = normalizeHref(item?.target || item?.href || '');
+  const anchor = normalize(item?.anchor || item?.text || '');
+  const location = includeLocation ? String(item?.location || '').trim() : '';
+  return `${target}\u0000${anchor}\u0000${location}`;
+}
+
+function multiset(values) {
+  const counts = new Map();
+  values.forEach((value) => counts.set(value, (counts.get(value) || 0) + 1));
+  return counts;
+}
+
+function compareLinkPlan(actual, planned, includeLocation = true) {
+  const actualCounts = multiset(actual.map((item) => linkPlanKey(item, includeLocation)));
+  const plannedCounts = multiset(planned.map((item) => linkPlanKey(item, includeLocation)));
+  const missing = [];
+  const unexpected = [];
+  for (const [key, count] of plannedCounts) {
+    const deficit = count - (actualCounts.get(key) || 0);
+    if (deficit > 0) missing.push(...Array(deficit).fill(key));
+  }
+  for (const [key, count] of actualCounts) {
+    const surplus = count - (plannedCounts.get(key) || 0);
+    if (surplus > 0) unexpected.push(...Array(surplus).fill(key));
+  }
+  return { ok: missing.length === 0 && unexpected.length === 0, missing, unexpected };
+}
+
+function validateInternalLinkPlan(article, actualLinks) {
+  const errors = [];
+  const plan = Array.isArray(article?.internal_link_plan) ? article.internal_link_plan : [];
+  const comparison = compareLinkPlan(actualLinks, plan, true);
+  if (!comparison.ok) {
+    if (comparison.missing.length) errors.push(`internal_link_plan: brakuje zaplanowanych linków (${comparison.missing.length}).`);
+    if (comparison.unexpected.length) errors.push(`internal_link_plan: wykryto linki spoza planu (${comparison.unexpected.length}).`);
+  }
+  const targets = plan.map((item) => normalizeHref(item?.target || ''));
+  if (new Set(targets).size !== targets.length) errors.push('internal_link_plan: cele muszą być unikalne.');
+  return { ok: errors.length === 0, errors };
+}
+
+function renderedNarrativeLinks(html) {
+  const articleMatch = String(html || '').match(/<article\b[^>]*class=["'][^"']*article-content[^"']*["'][^>]*>([\s\S]*?)<\/article>/i);
+  if (!articleMatch) return [];
+  const narrative = articleMatch[1].split(/<section\b[^>]*class=["'][^"']*faq-list\b/i)[0];
+  const links = [];
+  for (const match of narrative.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    const target = normalizeHref(match[1]);
+    if (!target.endsWith('.html') || target === 'porady.html') continue;
+    links.push({ target, anchor: stripTags(match[2]) });
+  }
+  return links;
+}
+
+function validateRenderedInternalLinkPlan(html, plan) {
+  const actual = renderedNarrativeLinks(html);
+  const planned = Array.isArray(plan) ? plan : [];
+  const comparison = compareLinkPlan(actual, planned, false);
+  const errors = [];
+  if (comparison.missing.length) errors.push(`Finalny HTML nie zawiera ${comparison.missing.length} zaplanowanych linków/anchorów.`);
+  if (comparison.unexpected.length) errors.push(`Finalny HTML zawiera ${comparison.unexpected.length} linków/anchorów spoza planu.`);
+  return { ok: errors.length === 0, errors, actual };
 }
 
 function buildIncomingSuggestions(article, inventory, articleTokens) {
@@ -349,6 +428,9 @@ function prepareArticleArchitecture(article, options = {}) {
   const inventory = options.inventory || buildArticleInventory(root);
   const strategy = validateStrategy(article, errors);
   const existing = validateExistingLinks(article, inventory, errors);
+  if (Array.isArray(article.internal_link_plan)) {
+    errors.push(...validateInternalLinkPlan(article, existing).errors);
+  }
   if (errors.length) {
     const result = {
       ok: false,
@@ -405,9 +487,8 @@ function prepareArticleArchitecture(article, options = {}) {
     .filter((item) => item.relevance_score >= 5)
     .sort((a, b) => b.relevance_score - a.relevance_score || a.file.localeCompare(b.file, 'pl'));
   const additions = [];
-  const required = Math.max(4 - usedTargets.size, 0);
   for (const candidate of candidates) {
-    if (additions.length >= required) break;
+    if (usedTargets.size >= POLICY_AUTO_LINK_MAX) break;
     const match = findAnchorForCandidate(candidate, paragraphs, usedLocations);
     if (!match) continue;
     const applied = linkPhraseOutsideTags(match.paragraph.html, match.anchor, candidate.file);
@@ -427,8 +508,8 @@ function prepareArticleArchitecture(article, options = {}) {
       match.paragraph.html = applied.html;
     }
   }
-  if (usedTargets.size < 4) {
-    errors.push(`INSUFFICIENT_CONTEXTUAL_LINKS: lokalne inventory pozwoliło potwierdzić ${usedTargets.size}/4 naturalnych, unikalnych linków. Nie dodano sztucznego zdania ani generycznego anchora.`);
+  if (usedTargets.size < 2) {
+    warnings.push(`LOW_CONTEXTUAL_LINK_COUNT: potwierdzono ${usedTargets.size} naturalnych, unikalnych linków; to ostrzeżenie, nie bloker.`);
   }
 
   const centerAssessment = assessCenter(article);
@@ -474,8 +555,11 @@ module.exports = {
   assessCenter,
   buildArticleInventory,
   isNaturalAnchor,
+  isAllowedAutoLinkParagraph,
   linkPhraseOutsideTags,
   normalize,
   prepareArticleArchitecture,
+  validateInternalLinkPlan,
+  validateRenderedInternalLinkPlan,
   validateArticleArchitecture,
 };

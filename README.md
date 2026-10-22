@@ -80,7 +80,7 @@ Jedno polecenie wykonuje dwie bezpieczne fazy wewnętrzne: najpierw chroniony ar
 npm run article:add -- --file "<draft.fitpo50.json>"
 ```
 
-`article:prepare-json` służy wyłącznie do korekty bez publikacji, a `article:publish` do technicznego wznowienia istniejącego `CONTENT_READY`.
+Polecenie zapisuje stan i wznawia ten sam staging. Po obejrzeniu desktopu, mobile, obrazów i wszystkich stron PDF agent używa ponownie `article:add` z `--review-file <review.json>`. Stan można odczytać przez `--status true`; zmieniony w trakcie JSON wymaga jawnego `--restart true`. `article:prepare-json` służy wyłącznie do korekty bez publikacji. `article:publish` jest wewnętrznym silnikiem kontrolera, a nie drugim workflow użytkownika.
 
 Kontrole mirror i predeploy są częścią `article:add`; poniższe komendy pozostają narzędziami serwisowymi:
 

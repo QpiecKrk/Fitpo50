@@ -11,6 +11,8 @@ const { validateManifestStructure } = require('../scripts/lib/article-media');
 const { validators } = require('../scripts/lib/article-policy');
 const { isPdfFile, validateSemanticTableMarkup } = require('../scripts/article-preview-gate');
 const { validateAboutEntities } = require('../scripts/lib/entity-sameas-policy');
+const { sectionRequiresQuestionHeading } = require('../scripts/json-fitpo50-gate-diff');
+const { sectionRequiresAnswerFirstContract } = require('../scripts/article-preflight');
 
 const ROOT = path.resolve(__dirname, '..');
 const FIXTURES = path.join(__dirname, 'fixtures', 'pipeline-invalid');
@@ -39,6 +41,13 @@ test('globalny diff gate nie traktuje celowo błędnych fixture jako draftów pu
   const source = fs.readFileSync(path.join(ROOT, 'scripts', 'json-fitpo50-gate-diff.js'), 'utf8');
   assert.match(source, /tests\/fixtures\/pipeline-invalid\//);
   assert.match(source, /!isIntentionalInvalidFixture\(file\)/);
+});
+
+test('sekcja użytkowa nie wymaga pytającego H2 ani osobnego obrazu', () => {
+  assert.equal(sectionRequiresQuestionHeading({ section_role: 'main' }), true);
+  assert.equal(sectionRequiresQuestionHeading({ section_role: 'utility' }), false);
+  assert.equal(sectionRequiresAnswerFirstContract({ section_role: 'main' }), true);
+  assert.equal(sectionRequiresAnswerFirstContract({ section_role: 'utility' }), false);
 });
 
 test('wspólna polityka encji blokuje fałszywe sameAs i dopuszcza name-only oraz Q43656', () => {

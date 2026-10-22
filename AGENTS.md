@@ -29,7 +29,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Nie cofaj zmian użytkownika, jeśli nie należą do bieżącego zadania.
 - Nie wykonuj commit/push bez jawnego polecenia.
 - Polecenie `git push` uruchamia pełny workflow opisany w `SESSION_START_MAX.md`.
-- Standardem wdrożenia jest automatyczny deploy Hostinger z `main`; po pushu uruchom `npm run deployment:verify` i uznaj produkcję dopiero przy `LIVE_DEPLOYED_AND_VALIDATED`.
+- Standardem wdrożenia jest automatyczny deploy Hostinger z `main`; po pushu workflow uruchamia `npm run deployment:finalize`. Produkcję uznaj dopiero przy `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie należy do pusha ani finalizacji wdrożenia: uruchamia się go osobno przez `npm run indexnow:release` dopiero po obu statusach.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `hostinger:recovery` zaczyna się od dry-run i nie może usuwać nieznanych plików.
 - Katalogi tymczasowe usuwaj wyłącznie przez `tmp:cleanup`: domyślnie dry-run, minimum 12 godzin, prawidłowy manifest właściciela, martwy PID i brak aktywnego locka.
 - Każdy nowy staging lub workspace `/tmp` musi używać `scripts/lib/temp-workspace.js`; każdy nowy skrypt Playwright musi używać `withChromium`.
@@ -53,7 +53,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Ten sam pełny Quality Gate obowiązuje nowe artykuły, aktualizacje, `popraw-seo`, `napraw paczkę N` i import starszego draftu. Wcześniejszy PASS ani mały zakres zmiany nie zwalniają z kontroli całej strony i wszystkich artefaktów.
 - Opis SEO ma 145–160 znaków, kończy się pełnym zdaniem i jest identyczny w meta, Open Graph, Twitter i `BlogPosting.description`.
 - Pytające H2 kończą się `?`; pierwszy akapit pod H2 ma odpowiadać bezpośrednio i konkretnie na pytanie. Zakres 30–70 słów jest zaleceniem, nie samodzielnym blokerem.
-- Minimum 4 naturalne linki wewnętrzne prowadzą do istniejących stron i używają ścieżek względnych.
+- Liczba linków wewnętrznych wynika z naturalnego planu; mniej niż 2 daje ostrzeżenie, nie blokadę. Linki prowadzą do istniejących stron i używają ścieżek względnych.
 - Obrazy korzystają z `<picture>` z AVIF/WebP/JPG, konkretnym `alt`, wymiarami i kontrolą wizualną. Wymagany jest hero oraz odrębny, merytorycznie trafny obraz dla każdej głównej sekcji treści; sekcje użytkowe nie zwiększają licznika. Watermark sam nie blokuje obrazu. Zmieniony obraz zawsze otrzymuje nową, wersjonowaną nazwę, ponieważ publiczne assety mają cache `immutable`.
 - Tabele są semantycznym HTML z `caption`, `thead`, `tbody` i `scope`.
 - `BlogPosting.citation` jest zgodne 1:1 z wykorzystaną listą źródeł.
@@ -66,6 +66,14 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Jeśli problem można wykryć maszynowo, dodaj test regresji albo celowo błędny fixture. Test ma najpierw odtwarzać błąd, a po naprawie potwierdzać jego blokadę lub prawidłową obsługę.
 - Nie rozwiązuj problemu przez osłabienie bramki, zmianę błędu na warning ani wyjątek ograniczony do jednego slugu.
 - Jednostkowego przypadku, którego nie można bezpiecznie automatyzować, nie uogólniaj na ślepo; dodaj konkretną kontrolę do `ARTICLE_STANDARD.md`.
+
+## Odpowiedzialność przy `article:add`
+
+- Agent może sam poprawić wyłącznie deterministyczną mechanikę bez zmiany znaczenia: normalizację URL-i i pól technicznych, nazwy i warianty plików, manifesty, raporty oraz opakowanie istniejącej frazy linkiem zgodnym z planem.
+- Do Pisarza wracają zmiany treści, źródeł, `evidence_claims`, FAQ, `faq_research`, roli niejednoznacznej sekcji oraz merytorycznych opisów ilustracji. Agent nie dodaje ani nie podmienia tych danych.
+- Do Ilustratora wracają brakujące, błędne albo merytorycznie niezgodne obrazy.
+- Do użytkownika wracają świadome wyjątki od standardu, akceptacja obrazów, centra tematyczne oraz decyzje publikacyjne.
+- `article:add --dry-run` nie zużywa próby naprawy i nie zapisuje wejściowego JSON-u ani repozytorium. Maksymalnie dwie próby automatycznej naprawy dotyczą jednego hasha draftu; kod 30 nie zwiększa licznika.
 
 ## `popraw-seo`
 

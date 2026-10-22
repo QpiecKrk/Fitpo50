@@ -8,13 +8,22 @@ const { spawnSync } = require('node:child_process');
 const {
   STATUSES,
   cleanupPreparedArtifact,
+  computePreparedPackageFingerprint,
   inspectPreparedArtifact,
   reportPathForJson,
   sha256File,
 } = require('../scripts/lib/article-json-artifact');
 const { allocateOutput, buildStageDefinitions, collectChanges, copyMediaPackage, runStagesUntilFailure } = require('../scripts/article-json-workbench');
-const { executeArticleAdd, expectedPreparedPath, packageHashesMatch, preparedPathFromOutput } = require('../scripts/article-add');
+const { executeArticleAdd, expectedPreparedPath, packageHashesMatch, preparedPathFromOutput, reviewArtifacts } = require('../scripts/article-add');
+const {
+  EXIT_CODES,
+  classifyPipelineFailure,
+  contentBlocked,
+  statusPath,
+} = require('../scripts/lib/article-pipeline-status');
 const { buildAboutEntities, normalizeEntities } = require('../scripts/import-article');
+const { validateScope } = require('../scripts/lib/article-scope-guard');
+const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure, resetSameDraft } = require('../scripts/lib/article-repair-attempts');
 
 const REPO = path.resolve(__dirname, '..');
 
@@ -29,6 +38,13 @@ function withTempDir(fn) {
 
 test('status lifecycle uses only DRAFT, CONTENT_READY and BLOCKED', () => {
   assert.deepEqual(Object.values(STATUSES), ['DRAFT', 'CONTENT_READY', 'BLOCKED']);
+});
+
+test('pipeline exit codes distinguish success, review, content blockers and environment failures', () => {
+  assert.deepEqual(EXIT_CODES, { SUCCESS: 0, AWAITING_REVIEW: 10, CONTENT_BLOCKED: 20, ENVIRONMENT_FAILURE: 30 });
+  assert.equal(classifyPipelineFailure(contentBlocked('CONTENT_READY missing')).exitCode, 20);
+  assert.equal(classifyPipelineFailure(new Error('CONTENT_READY missing')).exitCode, 30);
+  assert.equal(classifyPipelineFailure(new Error('spawn ENOENT')).exitCode, 30);
 });
 
 test('entity sameAs accepts only the verified exact pair and preserves name-only Thing', () => {
@@ -72,8 +88,48 @@ test('workbench stops dependent stages after the first failure', () => {
   assert.deepEqual(stages.map((item) => item.status), ['PASS', 'FAIL']);
 });
 
+test('scope guard accepts declared local fields and blocks writer-owned content', () => {
+  const before = { sections: [{ paragraphs_html: ['<p>Wstęp. Dobry sen pomaga.</p>'] }], sources: [{ url: 'https://example.test/a' }] };
+  const local = structuredClone(before);
+  local.internal_link_plan = [];
+  assert.equal(validateScope(before, local, { stage: 'ARCHITECTURE' }).ok, true);
+  assert.equal(validateScope(before, local, { stage: 'MEDIA' }).ok, false);
+
+  const verified = structuredClone(before);
+  verified.evidence_verification = { version: 1, entries: {} };
+  assert.equal(validateScope(before, verified, { stage: 'EVIDENCE' }).ok, true);
+  assert.equal(validateScope(before, verified, { stage: 'NORMALIZATION' }).ok, false);
+
+  const linked = structuredClone(before);
+  linked.sections[0].paragraphs_html[0] = '<p>Wstęp. <a href="sen-po-50.html">Dobry sen</a> pomaga.</p>';
+  assert.equal(validateScope(before, linked, { stage: 'ARCHITECTURE' }).ok, true);
+
+  for (const field of ['sources', 'evidence_claims', 'answer_blocks', 'faq_research']) {
+    const changed = structuredClone(before);
+    changed[field] = [{ changed: true }];
+    assert.equal(validateScope(before, changed, { stage: 'NORMALIZATION' }).ok, false, field);
+  }
+  const rewritten = structuredClone(before);
+  rewritten.sections[0].paragraphs_html[0] = '<p>Zmieniona treść merytoryczna.</p>';
+  assert.equal(validateScope(before, rewritten, { stage: 'ARCHITECTURE' }).ok, false);
+});
+
+test('repair circuit breaker is hash-bound, ignores new writer versions and supports explicit restart', () => withTempDir((dir) => {
+  const slug = 'test-prob';
+  assert.equal(MAX_REPAIR_ATTEMPTS, 2);
+  recordRepairFailure(dir, slug, 'hash-a');
+  recordRepairFailure(dir, slug, 'hash-a');
+  assert.equal(readAttemptState(dir, slug, 'hash-a').repair_attempts, 2);
+  assert.equal(readAttemptState(dir, slug, 'hash-b').repair_attempts, 0);
+  resetSameDraft(dir, slug, 'hash-a');
+  assert.equal(readAttemptState(dir, slug, 'hash-a').repair_attempts, 0);
+}));
+
 test('content blockers run before media conversion and the final package preflight', () => {
   const labels = buildStageDefinitions('/tmp/article.json', '/tmp/assets').map((item) => item.label);
+  assert.equal(labels[0], 'Szybki odbiór paczki Pisarz + Ilustrator');
+  assert.ok(labels.indexOf('Szybki odbiór paczki Pisarz + Ilustrator') < labels.indexOf('Kontrakt wejściowy treści, FAQ, dowodów i promptów obrazów'));
+  assert.ok(labels.indexOf('Kontrakt wejściowy treści, FAQ, dowodów i promptów obrazów') < labels.indexOf('Lokalna intencja, kanibalizacja, linkowanie i centra'));
   assert.ok(labels.indexOf('Pełny preflight treści przed kosztowną obróbką mediów') < labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność'));
   assert.ok(labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność') < labels.indexOf('Domknięcie mapowania dowodów po dodaniu podpisów mediów'));
   assert.ok(labels.indexOf('Domknięcie mapowania dowodów po dodaniu podpisów mediów') < labels.indexOf('Bramka kompletnego JSON'));
@@ -90,6 +146,36 @@ test('workbench reuses one stable ready file unless revision history is explicit
 test('one-command controller reads the prepared artifact path from workbench output', () => {
   assert.equal(preparedPathFromOutput('[ARTICLE-JSON] status=CONTENT_READY\n[ARTICLE-JSON] JSON: /tmp/gotowy.fitpo50.json\n'), '/tmp/gotowy.fitpo50.json');
 });
+
+test('one-command controller exposes predictable review artifacts', () => {
+  assert.deepEqual(reviewArtifacts('/tmp/stage', 'testowy-artykul'), {
+    stage_root: '/tmp/stage',
+    review_template: '/tmp/stage/.tmp/article-preview/testowy-artykul/visual-review-template.json',
+    desktop: '/tmp/stage/.tmp/article-preview/testowy-artykul/desktop.png',
+    mobile: '/tmp/stage/.tmp/article-preview/testowy-artykul/mobile.png',
+    pdf_pages: '/tmp/stage/.tmp/article-preview/testowy-artykul/pdf-pages',
+  });
+});
+
+test('changed JSON never silently reuses an older review transaction', () => withTempDir((dir) => {
+  const source = path.join(dir, 'zmieniony-artykul.json');
+  fs.writeFileSync(source, `${JSON.stringify({ slug: 'zmieniony-artykul', title: 'Zmieniony artykuł' })}\n`);
+  const stateFile = statusPath(dir, 'zmieniony-artykul');
+  fs.mkdirSync(path.dirname(stateFile), { recursive: true });
+  fs.writeFileSync(stateFile, `${JSON.stringify({
+    status: 'AWAITING_REVIEW',
+    source_sha256: 'stary-hash',
+    next_args: { stage_root: '/tmp/stary-stage', input_file: '/tmp/stary.fitpo50.json' },
+  })}\n`);
+  const status = executeArticleAdd({ file: source }, {
+    root: dir,
+    runCommand() {
+      throw new Error('Nie wolno uruchamiać kolejnego etapu dla zmienionego JSON-u.');
+    },
+  });
+  assert.equal(status, EXIT_CODES.CONTENT_BLOCKED);
+  assert.equal(JSON.parse(fs.readFileSync(stateFile, 'utf8')).status, 'AWAITING_REVIEW');
+}));
 
 test('article:add prowadzi poprawny fixture przez przygotowanie i atom publikacyjny', () => withTempDir((dir) => {
   const source = path.join(dir, 'kontrolowany-fixture.json');
@@ -130,7 +216,8 @@ test('one-command controller reuses only a hash-identical CONTENT_READY package'
   const json = { slug: 'test', media_manifest: { entries: [{ source_file: 'hero.png', source: { sha256: imageHash }, variants: {} }] } };
   fs.writeFileSync(source, `${JSON.stringify(json)}\n`);
   fs.writeFileSync(prepared, `${JSON.stringify(json)}\n`);
-  fs.writeFileSync(reportPathForJson(prepared), `${JSON.stringify({ status: STATUSES.CONTENT_READY, source_file: source, source_sha256: sha256File(source), output_file: prepared, output_sha256: sha256File(prepared) })}\n`);
+  const packageState = computePreparedPackageFingerprint(prepared, json);
+  fs.writeFileSync(reportPathForJson(prepared), `${JSON.stringify({ status: STATUSES.CONTENT_READY, source_file: source, source_sha256: sha256File(source), output_file: prepared, output_sha256: sha256File(prepared), package_sha256: packageState.fingerprint, package_files: packageState.entries })}\n`);
   assert.equal(packageHashesMatch(source, sourceDir, prepared), true);
   fs.writeFileSync(image, 'image-v2');
   assert.equal(packageHashesMatch(source, sourceDir, prepared), false);
@@ -172,6 +259,7 @@ test('prepared artifact is rejected after any post-review JSON change', () => wi
     status: STATUSES.CONTENT_READY,
     output_file: file,
     output_sha256: sha256File(file),
+    package_sha256: computePreparedPackageFingerprint(file).fingerprint,
   };
   fs.writeFileSync(reportPathForJson(file), `${JSON.stringify(report)}\n`);
   assert.equal(inspectPreparedArtifact(file, REPO).ok, true);
@@ -180,6 +268,23 @@ test('prepared artifact is rejected after any post-review JSON change', () => wi
   const inspected = inspectPreparedArtifact(file, REPO);
   assert.equal(inspected.ok, false);
   assert.match(inspected.errors.join(' '), /SHA-256/);
+}));
+
+test('prepared artifact is rejected after any packaged image change', () => withTempDir((dir) => {
+  const file = path.join(dir, 'pakiet.fitpo50.json');
+  const image = path.join(dir, 'hero.png');
+  fs.writeFileSync(image, 'approved-image');
+  const json = { slug: 'pakiet', media_manifest: { entries: [{ source_file: 'hero.png', variants: {} }] } };
+  fs.writeFileSync(file, `${JSON.stringify(json)}\n`);
+  const state = computePreparedPackageFingerprint(file, json);
+  fs.writeFileSync(reportPathForJson(file), `${JSON.stringify({
+    status: STATUSES.CONTENT_READY, output_file: file, output_sha256: sha256File(file), package_sha256: state.fingerprint,
+  })}\n`);
+  assert.equal(inspectPreparedArtifact(file, REPO).ok, true);
+  fs.writeFileSync(image, 'changed-image');
+  const result = inspectPreparedArtifact(file, REPO);
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join(' '), /całej paczki/);
 }));
 
 test('successful-publish cleanup removes only the ready JSON and its two reports', () => withTempDir((dir) => {
@@ -292,7 +397,7 @@ test('publisher rejects raw JSON without a CONTENT_READY report before creating 
     encoding: 'utf8',
   });
 
-  assert.equal(result.status, 1);
+  assert.equal(result.status, 20);
   assert.match(`${result.stdout}\n${result.stderr}`, /CONTENT_READY/);
   assert.equal(fs.existsSync(html), false);
 }));
@@ -312,14 +417,6 @@ test('direct importer cannot bypass CONTENT_READY protection', () => withTempDir
   assert.equal(fs.existsSync(html), false);
 }));
 
-test('ready-check rejects raw JSON without protected artifact metadata', () => withTempDir((dir) => {
-  const source = path.join(dir, 'raw.fitpo50.json');
-  fs.writeFileSync(source, '{"slug":"raw-ready-check"}\n');
-  const result = spawnSync('node', ['scripts/article-ready-check.js', '--file', source], { cwd: REPO, encoding: 'utf8' });
-  assert.equal(result.status, 1);
-  assert.match(`${result.stdout}\n${result.stderr}`, /CONTENT_READY/);
-}));
-
 test('private staging mode cannot be used to bypass the transactional controller', () => withTempDir((dir) => {
   const source = path.join(dir, 'raw.fitpo50.json');
   fs.writeFileSync(source, '{"slug":"raw-staging-bypass"}\n');
@@ -327,6 +424,6 @@ test('private staging mode cannot be used to bypass the transactional controller
     cwd: REPO,
     encoding: 'utf8',
   });
-  assert.equal(result.status, 1);
+  assert.equal(result.status, 20);
   assert.match(`${result.stdout}\n${result.stderr}`, /CONTENT_READY|prywatnym trybem/);
 }));

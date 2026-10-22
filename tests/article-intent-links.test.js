@@ -48,10 +48,10 @@ function draft() {
     primary_keyword: 'powrót do regularnego ruchu',
     supporting_keywords: ['trening siłowy po 50', 'regeneracja podczas snu', 'białko w diecie', 'pomiar ciśnienia'],
     sections: [
-      { paragraphs_html: ['<p>Trening siłowy dla początkujących może być pierwszym elementem planu.</p>'] },
-      { paragraphs_html: ['<p>Białko w codziennej diecie pomaga ułożyć posiłki wokół aktywności.</p>'] },
-      { paragraphs_html: ['<p>Regeneracja podczas snu wpływa na gotowość do kolejnej sesji.</p>'] },
-      { paragraphs_html: ['<p>Pomiar ciśnienia tętniczego porządkuje ocenę bezpieczeństwa wysiłku.</p>'] },
+      { paragraphs_html: ['<p>Zacznij od spokojnej oceny możliwości. Trening siłowy dla początkujących może być pierwszym elementem planu.</p>'] },
+      { paragraphs_html: ['<p>Posiłki warto planować z wyprzedzeniem. Białko w codziennej diecie pomaga ułożyć je wokół aktywności.</p>'] },
+      { paragraphs_html: ['<p>Odpoczynek jest częścią planu. Regeneracja podczas snu wpływa na gotowość do kolejnej sesji.</p>'] },
+      { paragraphs_html: ['<p>Bezpieczeństwo wymaga danych. Pomiar ciśnienia tętniczego porządkuje ocenę tolerancji wysiłku.</p>'] },
     ],
   };
 }
@@ -86,6 +86,20 @@ test('local architecture adds four existing targets on phrases already present i
   assert.equal(result.incoming_link_suggestions.some((item) => item.source.startsWith('centrum-')), false);
 }));
 
+test('curated cornerstone aliases link a natural Polish inflection without adding a sentence', () => withTempRepo((root) => {
+  addArticle(root, 'sen-po-50.html', 'Sen po 50: jak poprawić regenerację');
+  addArticle(root, 'trening-silowy-poczatkujacy.html', 'Trening siłowy dla początkujących');
+  addArticle(root, 'bialko-codzienna-dieta.html', 'Białko w codziennej diecie');
+  addArticle(root, 'pomiar-cisnienia.html', 'Pomiar ciśnienia tętniczego');
+  const article = draft();
+  article.sections[2].paragraphs_html[0] = '<p>Wieczorem ogranicz pobudzające bodźce. Ból i napięcie mogą utrudniać dobry sen.</p>';
+  const before = article.sections[2].paragraphs_html[0];
+  const result = prepareArticleArchitecture(article, { root, mutate: true });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.match(article.sections[2].paragraphs_html[0], /<a href="sen-po-50\.html">dobry sen<\/a>/);
+  assert.equal(article.sections[2].paragraphs_html[0].replace(/<a[^>]+>|<\/a>/g, ''), before);
+}));
+
 test('system blocks generic anchors and targets outside current article inventory', () => withTempRepo((root) => {
   addLinkTargets(root);
   const article = draft();
@@ -94,6 +108,36 @@ test('system blocks generic anchors and targets outside current article inventor
   assert.equal(result.ok, false);
   assert.match(result.errors.join('\n'), /nie istnieje w lokalnym inventory BlogPosting/);
   assert.match(result.errors.join('\n'), /generyczny albo nienaturalny/);
+}));
+
+test('automatic links never enter the first sentence, headings or tables', () => withTempRepo((root) => {
+  addLinkTargets(root);
+  const article = draft();
+  article.sections[0].paragraphs_html[0] = '<p>Trening siłowy dla początkujących jest ważny. Drugi fragment nie zawiera anchora.</p>';
+  article.sections[1].paragraphs_html[0] = '<table><tr><td>Wybierz białko w codziennej diecie</td></tr></table>';
+  const result = prepareArticleArchitecture(article, { root, mutate: true });
+  assert.doesNotMatch(article.sections[0].paragraphs_html[0], /<a\b/);
+  assert.doesNotMatch(article.sections[1].paragraphs_html[0], /<a\b/);
+  assert.equal(result.errors.length, 0);
+}));
+
+test('zero or one natural link is a warning and never a publication blocker', () => withTempRepo((root) => {
+  const article = draft();
+  const result = prepareArticleArchitecture(article, { root, mutate: true });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+  assert.deepEqual(article.internal_link_plan, []);
+  assert.match(result.warnings.join('\n'), /LOW_CONTEXTUAL_LINK_COUNT/);
+}));
+
+test('duplicate target and self-link are blocking', () => withTempRepo((root) => {
+  addLinkTargets(root);
+  const article = draft();
+  article.sections[0].paragraphs_html[0] = '<p>Wstęp. <a href="trening-silowy-poczatkujacy.html">trening siłowy dla początkujących</a>.</p>';
+  article.sections[1].paragraphs_html[0] = '<p>Wstęp. <a href="trening-silowy-poczatkujacy.html">plan treningu siłowego</a>.</p>';
+  article.sections[2].paragraphs_html[0] = `<p>Wstęp. <a href="${article.slug}.html">powrót do regularnego ruchu</a>.</p>`;
+  const result = prepareArticleArchitecture(article, { root, mutate: false });
+  assert.match(result.errors.join('\n'), /najwyżej raz/);
+  assert.match(result.errors.join('\n'), /bieżącego artykułu/);
 }));
 
 test('missing intent blocks before architecture can mutate links or suggestions', () => withTempRepo((root) => {
