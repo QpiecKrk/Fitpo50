@@ -131,7 +131,7 @@ test('content blockers run before media conversion and the final package preflig
   assert.ok(labels.indexOf('Szybki odbiór paczki Pisarz + Ilustrator') < labels.indexOf('Kontrakt wejściowy treści, FAQ, dowodów i promptów obrazów'));
   assert.ok(labels.indexOf('Kontrakt wejściowy treści, FAQ, dowodów i promptów obrazów') < labels.indexOf('Lokalna intencja, kanibalizacja, linkowanie i centra'));
   assert.ok(labels.indexOf('Pełny preflight treści przed kosztowną obróbką mediów') < labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność'));
-  assert.ok(labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność') < labels.indexOf('Domknięcie mapowania dowodów po dodaniu podpisów mediów'));
+  assert.ok(labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność') < labels.indexOf('Kontrola mapowania dowodów po dodaniu podpisów mediów'));
   assert.ok(labels.indexOf('Domknięcie mapowania dowodów po dodaniu podpisów mediów') < labels.indexOf('Bramka kompletnego JSON'));
   assert.ok(labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność') < labels.indexOf('Końcowy preflight pakietu importowego'));
 });

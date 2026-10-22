@@ -8,6 +8,7 @@ const { spawnSync } = require('node:child_process');
 const { inspectArticlePackage } = require('./article-package-intake');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { sha256File } = require('./lib/article-json-artifact');
+const { EXIT_CODES } = require('./lib/article-pipeline-status');
 
 const ROOT = process.cwd();
 
@@ -140,11 +141,18 @@ function main() {
   const args = parseArgs(process.argv.slice(2));
   const report = runDryRun(args);
   console.log(JSON.stringify(report, null, args.json ? 0 : 2));
-  process.exitCode = report.status === 'AWAITING_REVIEW' || report.status === 'PASS' ? 0 : (report.status === 'ENVIRONMENT_FAILURE' ? 30 : 20);
+  process.exitCode = exitCodeForReport(report);
+}
+
+function exitCodeForReport(report) {
+  if (report?.status === 'PASS' || report?.status === 'READY') return EXIT_CODES.SUCCESS;
+  if (report?.status === 'AWAITING_REVIEW') return EXIT_CODES.AWAITING_REVIEW;
+  if (report?.status === 'ENVIRONMENT_FAILURE') return EXIT_CODES.ENVIRONMENT_FAILURE;
+  return EXIT_CODES.CONTENT_BLOCKED;
 }
 
 if (require.main === module) {
   try { main(); } catch (error) { console.error(`[ARTICLE-DRY-RUN][FAIL] ${error.message || error}`); process.exitCode = 30; }
 }
 
-module.exports = { diagnostic, inferJsonPath, parseArgs, runDryRun, validateInput };
+module.exports = { diagnostic, exitCodeForReport, inferJsonPath, parseArgs, runDryRun, validateInput };

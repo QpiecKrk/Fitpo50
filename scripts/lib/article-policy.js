@@ -6,6 +6,7 @@
  */
 
 const { normalizeInternalHref } = require('./article-normalization');
+const ARTICLE_CONTRACT = require('../../docs/skills/fitpo50-article-draft/references/article-contract.json');
 
 const POLICY = {
   // Word count limits and editorial guidance
@@ -15,8 +16,8 @@ const POLICY = {
     QUICK_ANSWER_MAX: 70,
     SEO_DESCRIPTION_MIN: 145,
     SEO_DESCRIPTION_MAX: 160,
-    INTERNAL_LINKS_WARN_BELOW: 2,
-    CITATION_MIN_URLS: 4
+    INTERNAL_LINKS_WARN_BELOW: ARTICLE_CONTRACT.internal_links_warn_below,
+    CITATION_MIN_URLS: ARTICLE_CONTRACT.medical_source_minimum
   },
 
   TITLE: {

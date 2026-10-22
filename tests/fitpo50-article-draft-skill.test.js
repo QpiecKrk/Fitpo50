@@ -133,6 +133,17 @@ test('Claude draft skill accepts flexible supplemental images and local FAQ/link
   assert.match(result.stdout, /DRAFT_(?:VALID|REVIEW_REQUIRED)/);
 });
 
+test('exact-data overlay claim still blocks when source_url is absent from sources', () => {
+  const draft = validDraft();
+  const exact = draft.image_prompts_v4[0];
+  exact.requires_exact_data_render = true;
+  exact.overlay_text_pl = 'Wynik 12,9% po zmianie czasu';
+  exact.overlay_claims = [{ claim: exact.overlay_text_pl, source_url: 'https://example.org/not-declared' }];
+  const result = validate(draft);
+  assert.notEqual(result.status, 0);
+  assert.match(`${result.stdout}\n${result.stderr}`, /overlay_claims\[0\]\.source_url musi występować w sources/);
+});
+
 test('Claude draft validator nie liczy skrótów i liczb dziesiętnych jako zdań', () => {
   const draft = validDraft();
   draft.quick_answer = 'Zacznij od ok. 3 g dziennie, jeśli taki zakres wynika z ocenionego planu. Np. 2,5 g nie tworzy dodatkowego zdania.';

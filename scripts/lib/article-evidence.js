@@ -145,6 +145,8 @@ function isAuthoritativeDeviceDocumentation(source, fragmentText) {
 
 function collectArticleFragments(json) {
   const fragments = [];
+  const promptPlacements = new Set((Array.isArray(json.image_prompts_v4) ? json.image_prompts_v4 : (Array.isArray(json.image_prompts) ? json.image_prompts : []))
+    .map((prompt) => String(prompt?.section_ref || '').trim()).filter(Boolean));
   const add = (location, text) => {
     const plain = utils.stripTags(text).replace(/\s+/g, ' ').trim();
     if (plain) fragments.push({ location, text: plain });
@@ -161,7 +163,8 @@ function collectArticleFragments(json) {
       add(`sections[${sectionIndex}].list_items[${itemIndex}]`, item);
     });
     if (section?.info_box) add(`sections[${sectionIndex}].info_box.content_html`, section.info_box.content_html);
-    if (section?.image) {
+    const derivedImagePlacement = String(section?.image?.placement || '').trim();
+    if (section?.image && (!derivedImagePlacement || !promptPlacements.has(derivedImagePlacement))) {
       add(`sections[${sectionIndex}].image.alt`, section.image.alt);
       add(`sections[${sectionIndex}].image.caption`, section.image.caption);
     }

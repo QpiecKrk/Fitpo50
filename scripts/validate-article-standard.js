@@ -669,17 +669,12 @@ function validateFile(filePath) {
     errors.push('article:modified_time musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T09:30:00+02:00)');
   }
 
-  for (const m of raw.matchAll(/"datePublished"\s*:\s*"([^"]+)"/g)) {
-    if (!POLICY.PATTERNS.ISO_DATE_TZ.test(m[1])) {
-      errors.push('BlogPosting.datePublished musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T08:00:00+02:00)');
-      break;
-    }
+  const blogPostingDates = extractBlogPostingNode(raw);
+  if (blogPostingDates?.datePublished && !POLICY.PATTERNS.ISO_DATE_TZ.test(String(blogPostingDates.datePublished))) {
+    errors.push('BlogPosting.datePublished musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T08:00:00+02:00)');
   }
-  for (const m of raw.matchAll(/"dateModified"\s*:\s*"([^"]+)"/g)) {
-    if (!POLICY.PATTERNS.ISO_DATE_TZ.test(m[1])) {
-      errors.push('BlogPosting.dateModified musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T09:30:00+02:00)');
-      break;
-    }
+  if (blogPostingDates?.dateModified && !POLICY.PATTERNS.ISO_DATE_TZ.test(String(blogPostingDates.dateModified))) {
+    errors.push('BlogPosting.dateModified musi być w ISO 8601 z godziną i strefą (np. 2026-04-24T09:30:00+02:00)');
   }
 
   const articleContentHtml = extractArticleContentHtml(raw);

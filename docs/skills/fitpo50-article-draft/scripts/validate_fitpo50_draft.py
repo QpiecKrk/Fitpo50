@@ -17,7 +17,8 @@ SEARCH_INTENTS = {
     "porownanie", "informacyjna", "plan", "koszt", "dawkowanie",
 }
 LOCAL_FIELDS = {"internal_link_plan", "incoming_link_suggestions", "intent_audit", "topic_center_assessment", "topic_center_approval", "media_manifest", "evidence_verification"}
-MIN_MEDICAL_SOURCES = 4
+ARTICLE_CONTRACT = json.loads((Path(__file__).resolve().parent.parent / "references" / "article-contract.json").read_text(encoding="utf-8"))
+MIN_MEDICAL_SOURCES = int(ARTICLE_CONTRACT["medical_source_minimum"])
 REQUIRED_TEXT = (
     "title", "seo_title", "og_title", "twitter_title", "slug", "category",
     "meta_description", "og_description", "twitter_description", "schema_blogposting_description",

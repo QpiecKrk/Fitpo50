@@ -15,32 +15,22 @@ Branch: `chore/article-pipeline-dry-run-guardrails`
 - Utworzono `.venv`, zainstalowano PyYAML 6.0.3, dodano `.venv/` do `.gitignore` i `requirements-dev.txt` (samo `.venv` nie jest śledzone).
 - Dodano artykuł, obrazy i artefakty publikacyjne z dzisiejszego importu oraz wymagane nowe skrypty wdrożeniowe/fonty.
 
-## W trakcie
+## Stan końcowy
 
-- Minimum 4 źródeł jest używane przez wspólną stałą JS `POLICY.WORDS.CITATION_MIN_URLS` w gate, preflight i fixerze; walidator Python ma jeszcze własną nazwaną stałą `MIN_MEDICAL_SOURCES` i wymaga decyzji, czy wspólny kontrakt ma być plikiem JSON czy generowanym zasobem skilla.
-- Workbench został zmieniony tak, aby fixer działał kontrolnie (`--check`) i nie naruszał chronionych pól Pisarza; etap ten przechodzi na poprawionej fixture.
-- Dokumentacja skilla opisuje część nowych zasad, ale przykład schematu źródła wymaga dopisania pięciu nowych pól i `overlay_claims`; ZIP wymaga ponownego zbudowania.
-
-## Zostało
-
-1. Uruchomić testy celowane po ostatnich zmianach i naprawić regresje.
-2. Doprowadzić poprawioną fixture przez pełny dry-run do `AWAITING_REVIEW` (desktop, mobile, PDF) bez ręcznej zmiany.
-3. Dokończyć wspólne źródło prawdy dla minimum źródeł, bez duplikatu JS/Python.
-4. Uzupełnić skill i `draft-contract.md`, odbudować ZIP.
-5. Uruchomić walidator skilla przez `.venv/bin/python` i zapisać wynik.
-6. Uruchomić `npm run test:article-json-workflow` oraz `npm run test:pipeline-blockers`; testy Playwright mogą wymagać uruchomienia poza sandboxem.
-7. Sprawdzić `git status`, brak `.venv`, `__pycache__` i `.pyc`, a następnie zrobić końcowy lokalny commit.
-8. Przygotować raport końcowy z tabelą „dzisiejszy problem → reguła/test”.
+- Minimum źródeł i próg ostrzeżenia linków pochodzą z jednego pliku `references/article-contract.json`, czytanego przez JS i Python oraz zawartego w ZIP-ie skilla.
+- Poprawiona fixture osiąga `AWAITING_REVIEW` bez ręcznych zmian; pełny staging utworzył desktop, mobile i strony PDF.
+- `--dry-run` zwraca kod 10 dla `AWAITING_REVIEW`; kod 0 jest zarezerwowany dla `PASS/READY`.
+- Pochodne pola `section.image` nie wymagają zdublowanych dowodów, ale brak `overlay_claims[].source_url` w `sources` nadal blokuje.
+- Skill i ZIP są zaktualizowane; walidator skilla zwraca `Skill is valid!`.
+- Historia została rozdzielona na commit kodowy i osobny commit artefaktów artykułu. Przed nałożeniem późniejszych poprawek `git diff --exit-code backup/guardrails-c8868856 HEAD` zwrócił 0.
 
 ## Znane wyniki testów
 
-- `npm run test:article-json-workflow`: wcześniej PASS 27/27, przed ostatnimi zmianami kontraktu źródeł.
-- Celowane nowe testy: wcześniej PASS 90/90, przed ostatnimi zmianami.
-- `npm run test:pipeline-blockers`: wcześniej 160/165; 1 test oczekiwał starego błędu minimum linków (test został już zmieniony na warning), 4 testy Playwright nie uruchomiły Chromium z powodu ograniczeń sandboxa.
-- Pełny dry-run poprawionej fixture: nadal BLOCKED; ostatnio wykryto, że zapisujący fixer naruszał chronione pola. Workbench został następnie przełączony na `--check`, ale nie zweryfikowano wyniku.
-- Walidator skilla po instalacji PyYAML: PASS (`Skill is valid!`).
-- Testy celowane po WIP: PASS 55/55 (`article-dry-run`, `article-evidence`, `import-article-render`, `fitpo50-article-draft-skill`).
-- Poprawiona fixture przechodzi odbiór, kontrakt, fixer, normalizację, architekturę, źródła i preflight; ostatnia poprawka uzupełniła wymagane pole oceny tekstu na grafikach, ale pełny dry-run wymaga ponownego uruchomienia.
+- Walidator skilla: PASS.
+- Testy celowane: PASS 58/58.
+- `npm run test:article-json-workflow`: PASS 27/27.
+- `npm run test:pipeline-blockers` poza sandboxem: PASS 165/165.
+- Pełny dry-run poprawionej fixture: `AWAITING_REVIEW`, kod 10, 0 błędów i 5 ostrzeżeń.
 
 ## Zacznij od
 

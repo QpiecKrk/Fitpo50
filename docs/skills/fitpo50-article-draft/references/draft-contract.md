@@ -108,9 +108,18 @@ Nie używaj portali plotkarskich, tekstów sponsorowanych lub afiliacyjnych, ano
   "doi_or_pmid": "DOI albo PMID, jeśli istnieje",
   "checked_at": "YYYY-MM-DD",
   "url_status": "reachable|requires_local_verification",
-  "http_status": 200
+  "http_status": 200,
+  "fallback_url": null,
+  "evidence_scope": null,
+  "publication_date": "2026-10-22",
+  "checked_via": "writer_http",
+  "recheck_after": null
 }
 ```
+
+Pięć ostatnich pól jest obowiązkowych, ale dopuszcza `null`. `fallback_url` jest jedynym zamiennikiem, którego pipeline może użyć po 403/405. `publication_date` podawaj tylko, gdy znasz pełną datę; przy znanym wyłącznie roku pozostaw `null` i użyj `publication_year`. Źródło technicznej instrukcji urządzenia oznacz `evidence_scope: "device_instructions_only"`; nie liczy się ono do minimum źródeł medycznych.
+
+Każdy obraz z `requires_exact_data_render: true` wymaga `overlay_claims` w postaci obiektów `{ "claim": "dokładny tekst z overlay_text_pl", "source_url": "https://..." }`. Każdy `source_url` musi występować w `sources[].url`.
 
 Ustaw `reachable` i `http_status` tylko po rzeczywistym otwarciu URL-a i uzyskaniu końcowego kodu 2xx po przekierowaniach. Kod 3xx, 401, 403, 404, 429 lub 5xx nie jest dowodem dostępności dla draftu. W przeciwnym razie użyj `requires_local_verification` i pomiń `http_status`; walidator nada wtedy `DRAFT_REVIEW_REQUIRED`. Preferuj dostępny, kanoniczny rekord konkretnej publikacji w PubMed/PMC lub dokument instytucji zamiast zablokowanej strony DOI/wydawcy. Strona wyników wyszukiwania PubMed, PMC lub Google nigdy nie jest źródłem.
 

@@ -66,6 +66,7 @@ for (let index = 0; index < (article.image_prompts_v4 || []).length; index += 1)
       transcription: prompt.overlay_text_pl,
       evidence_urls: prompt.evidence_source_urls || [],
       claims_or_numbers_present: true,
+      matches_article_claims: true,
     } : { kind: 'NONE', transcription: '', evidence_urls: [] },
   };
 }

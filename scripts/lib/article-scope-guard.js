@@ -6,7 +6,7 @@ const PROTECTED_ROOTS = new Set(['sources', 'evidence_claims', 'answer_blocks', 
 const STAGE_ROOTS = Object.freeze({
   ARCHITECTURE: new Set(['internal_link_plan', 'incoming_link_suggestions', 'intent_audit', 'topic_center_assessment']),
   EVIDENCE: new Set(['evidence_verification']),
-  MEDIA: new Set(['media_manifest', 'hero_image', 'hero_image_base']),
+  MEDIA: new Set(['media_manifest', 'hero_image', 'hero_image_base', 'hero_alt', 'hero_width', 'hero_height']),
 });
 
 function collectModifiedKeys(before, after, path = '', result = []) {

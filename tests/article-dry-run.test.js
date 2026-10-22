@@ -5,11 +5,19 @@ const os = require('node:os');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
-const { runDryRun, validateInput } = require('../scripts/article-dry-run');
+const { exitCodeForReport, runDryRun, validateInput } = require('../scripts/article-dry-run');
 
 const ROOT = path.resolve(__dirname, '..');
 const FIXTURE = path.join(ROOT, 'tests/fixtures/article-packages/zmiana-czasu-original-invalid.fitpo50.json');
 const CORRECTED_FIXTURE = path.join(ROOT, 'tests/fixtures/article-packages/zmiana-czasu-corrected.fitpo50.json');
+
+test('dry-run exit contract keeps 10 for review and 0 only for ready', () => {
+  assert.equal(exitCodeForReport({ status: 'AWAITING_REVIEW' }), 10);
+  assert.equal(exitCodeForReport({ status: 'PASS' }), 0);
+  assert.equal(exitCodeForReport({ status: 'READY' }), 0);
+  assert.equal(exitCodeForReport({ status: 'BLOCKED' }), 20);
+  assert.equal(exitCodeForReport({ status: 'ENVIRONMENT_FAILURE' }), 30);
+});
 
 test('both faithful change-time fixtures are present: original invalid and corrected', () => {
   assert.equal(fs.existsSync(FIXTURE), true);

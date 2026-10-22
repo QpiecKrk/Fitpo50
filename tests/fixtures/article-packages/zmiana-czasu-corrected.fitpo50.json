@@ -1766,7 +1766,8 @@
           "evidence_urls": [
             "https://eli.gov.pl/api/acts/DU/2022/539/text.html"
           ],
-          "claims_or_numbers_present": true
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true
         }
       },
       "overlay_claims": [
@@ -1810,7 +1811,8 @@
           "evidence_urls": [
             "https://pmc.ncbi.nlm.nih.gov/articles/PMC10351306/"
           ],
-          "claims_or_numbers_present": true
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true
         }
       },
       "overlay_claims": [
@@ -1892,7 +1894,8 @@
             "https://pmc.ncbi.nlm.nih.gov/articles/PMC11526362/",
             "https://pmc.ncbi.nlm.nih.gov/articles/PMC6463000/"
           ],
-          "claims_or_numbers_present": true
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true
         }
       },
       "overlay_claims": [
@@ -2047,7 +2050,8 @@
             "https://data.consilium.europa.eu/doc/document/ST-10045-2026-INIT/en/pdf",
             "https://publications.europa.eu/resource/cellar/95bd5989-226d-11f1-8c3a-01aa75ed71a1.0019.03/DOC_1"
           ],
-          "claims_or_numbers_present": true
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true
         }
       },
       "overlay_claims": [

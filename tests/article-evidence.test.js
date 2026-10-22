@@ -56,6 +56,20 @@ test('future publication_date is blocked by the shared source contract', () => {
   assert.ok(errors.some((message) => message.includes('nie może być datą z przyszłości')));
 });
 
+test('derived section image fields do not duplicate prompt evidence, but overlay claims remain authoritative', () => {
+  const url = 'https://pubmed.ncbi.nlm.nih.gov/12345678/';
+  const json = validEvidenceJson();
+  json.sections[0].image = { placement: 'sekcja-1', alt: 'Wykres wyniku 20 procent', caption: 'Badanie wykazało zmniejszenie ryzyka o 20%.' };
+  json.image_prompts_v4 = [{
+    section_ref: 'sekcja-1', alt_pl: 'Wykres wyniku 20 procent', caption_pl: 'Badanie wykazało zmniejszenie ryzyka o 20%.',
+    overlay_text_pl: 'Zmniejszenie ryzyka o 20%', requires_exact_data_render: true,
+    overlay_claims: [{ claim: 'Zmniejszenie ryzyka o 20%', source_url: url }],
+  }];
+  json.evidence_claims.push({ claim: 'Zmniejszenie ryzyka o 20%', location: 'image_prompts_v4[0].overlay_text_pl', claim_type: 'statistic', source_urls: [url] });
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.doesNotMatch(result.errors.join('\n'), /sections\[0\]\.image/);
+});
+
 function validEvidenceJson() {
   const pubmed = 'https://pubmed.ncbi.nlm.nih.gov/12345678/';
   const who = 'https://www.who.int/news-room/fact-sheets/detail/physical-activity';
