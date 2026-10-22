@@ -1,6 +1,177 @@
 {
-  "version": 1,
-  "release_id": "d63c006f-f97e-4bc6-96a9-e25ffe58d2d1",
-  "prepared_at": "2026-10-17T13:13:34.828Z",
-  "public_fingerprint_sha256": "81debe024179e38fc3575076d07534bb3b7ed18a8dc41ee8e997258c458fb016"
+  "version": 2,
+  "release_id": "3bc09b5f-4091-48b1-9642-e03994d5e3b9",
+  "prepared_at": "2026-10-22T22:47:27.849Z",
+  "public_fingerprint_sha256": "f56deec186d7f7ee6951eaa48d41e55de6ca1e497740ba2f82f34b7742103e65",
+  "articles": [
+    {
+      "file": "zmiana-czasu-na-zimowy-po-50.html",
+      "slug": "zmiana-czasu-na-zimowy-po-50",
+      "url": "https://fitpo50.pl/zmiana-czasu-na-zimowy-po-50.html",
+      "date_modified": "2026-10-22T09:30:00+02:00",
+      "html_sha256": "948929670fe04ae98e7f8012a2732bd5e48e214dfdeb5bc5f40b442062f24b42",
+      "pdf_path": "assets/pdf/zmiana-czasu-na-zimowy-po-50.pdf",
+      "pdf_sha256": "0a1d3a46ee17d2330610659158974b0fdcce2dc4742c863121a444b395cdbc73",
+      "images": [
+        {
+          "path": "assets/bol-krzyza-po-50-hero.avif",
+          "sha256": "5fcacad0237c628c7ad286499a85b2ae33674578aee504f2bf21afe3aa11b92c"
+        },
+        {
+          "path": "assets/bol-krzyza-po-50-hero.jpg",
+          "sha256": "72bd5f83b5844dc07ea1061db5ee8d8c901218af73a7f2ed4e54803efb356435"
+        },
+        {
+          "path": "assets/bol-krzyza-po-50-hero.webp",
+          "sha256": "2a8da2b351cd5258596a983044a35e86ba74643caba21c7ca8fc89cbfd9c6f98"
+        },
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        },
+        {
+          "path": "assets/statyny-hero-poranek-lydka.avif",
+          "sha256": "aa8122c02932e451cf721e48448e7868ff55dce0d81d254aed47fed8b909b5da"
+        },
+        {
+          "path": "assets/statyny-hero-poranek-lydka.jpg",
+          "sha256": "aec9fb50678bd7b8f68300fe1fad0f4c063763ebcb7ed9e28aacf9aabd8677aa"
+        },
+        {
+          "path": "assets/statyny-hero-poranek-lydka.webp",
+          "sha256": "4437451c03f251bcff73926aeaa140dff0477c1cb08070a95a71d70dcff13c06"
+        },
+        {
+          "path": "assets/stluszczona-watroba-masld-po-50-hero.avif",
+          "sha256": "55ce1ee9850779dbd29eb93ad631bc57ecd8fb59025303eee35d5685fad7fa90"
+        },
+        {
+          "path": "assets/stluszczona-watroba-masld-po-50-hero.jpg",
+          "sha256": "43559cd67f9c4c6cedf2937b829b8eea7a8e765d677b16e9faf30bc3c7bf26bc"
+        },
+        {
+          "path": "assets/stluszczona-watroba-masld-po-50-hero.webp",
+          "sha256": "aa821ccf605210e74c5d19817daeba656dd1a2129db59a4fd26209bb63dad877"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.avif",
+          "sha256": "ce9464f3ecb1c509c3094556694a48089dde489d150a5d0cb23e8ff782c305f8"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.jpg",
+          "sha256": "bc5b6124a1ab6cfec9f02431e4e68f33d9c0ea2c33a8f7c540d3984fbd2172bf"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp",
+          "sha256": "fd523383b79c504205e3b821bb54352659ce269bc56cc8e7894ee1887a5d9608"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.avif",
+          "sha256": "9d30c4f62c2ac77e75665920fe0d45b3811d1debcc730f6bd37faebc6619768b"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.jpg",
+          "sha256": "9e55977cc24f2000cffa6427370dd533240bea86f4c9a3583740a45aa7bc5c27"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.webp",
+          "sha256": "5c28d7e1bfc30b6b5b22bbacea38ee0f44cae2f94565387a4e27f477d448b58e"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.avif",
+          "sha256": "6d87090b1119c76c6e7b343d900c6e42b7b7687a091e235e1a30db22e955d306"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.jpg",
+          "sha256": "2789b8e44ee128fe5a3004399647654d3bf2af36a955d1722d5b0d5e78d18620"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.webp",
+          "sha256": "b8e4b1dc8567e1fa73c62bddb6fd01ea426029dcb932e0e10337d9e926622cdd"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.avif",
+          "sha256": "b682302ddb0b667cbe93f4145800a92db8d15bda86438cde4e81884bde60673e"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.jpg",
+          "sha256": "6c882a526fff4aa67c9e93b5f6a1039b0aa05407a1676ac5147018dfe24049af"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.webp",
+          "sha256": "59f4ab9a84abfcecc47464b5d63365459c6cc5e4beb8cee8135b72396722d735"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.avif",
+          "sha256": "d319cccb8d3f7083158317e53903517e358c171e1c9d75974543c952836c16fc"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.jpg",
+          "sha256": "f4f735902a65e0f8114559b8a39d82bbcb55d4d0401b0d3d613cb0e51b95e9a0"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.webp",
+          "sha256": "14396dcde3d2642f0635b93e8fbd509818dcb35b87067eb49cc41084a963ae7d"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.avif",
+          "sha256": "a76b36adb263da24c0a58c72046c944b1c4c5cf32260c69f08d81706a6cf7b33"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.jpg",
+          "sha256": "8fdb503fbbaab239316dd113cfa0b25f0cf1e8802d5bbad1bef25c083821f5bd"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.webp",
+          "sha256": "6120631b2feb2ee327eff412b5229b3b70980d15be3aab34d19047681c992887"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.avif",
+          "sha256": "d694adc7ea106240ceee063e20db7f1e38ca91722dbc0e147a93c7db9ab1de10"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.jpg",
+          "sha256": "a3afee88c68322c5d3b8f59b8e7c4193bf71a6b7856e37c57b7471b6d4d32251"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.webp",
+          "sha256": "64f216dcf82539c5493bb23c26cbbdeaea2a56bdad375cabb684b0ee234a1c0f"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.avif",
+          "sha256": "a7509400f2a0684bb6583e7985a97c5d9e20cde528d88891fb3ca5a83041fb18"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.jpg",
+          "sha256": "c434117ce7935db2edf20e316acf243d74965c20e054e67426cc3e857219d5cf"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.webp",
+          "sha256": "93424767818c8601d01ee9f760fd4f35fe12e08944ab7799f782d8f9c0bf4f52"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.avif",
+          "sha256": "890cf5b05f54589e8940b4a7d1898146cdd5007aef9fb98a9dbfb72494d197de"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.jpg",
+          "sha256": "7d4c590cc001c161b36083de150d46f6245e5f59bb44385fe67b8c8624350366"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.webp",
+          "sha256": "0c1a646fe52d260bd2271e622082baf50d8f5b902a9a1644694ac49497ea9a1a"
+        }
+      ],
+      "listing_paths": [
+        "index.html",
+        "porady.html",
+        "ciekawe.html",
+        "assets/data/search-index.json"
+      ]
+    }
+  ]
 }
