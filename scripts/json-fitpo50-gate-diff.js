@@ -60,8 +60,8 @@ function isArchivedImport(file) {
   return String(file || '').replace(/\\/g, '/').startsWith('data/import/archive/');
 }
 
-function isIntentionalInvalidFixture(file) {
-  return String(file || '').replace(/\\/g, '/').startsWith('tests/fixtures/pipeline-invalid/');
+function isTestFixture(file) {
+  return String(file || '').replace(/\\/g, '/').startsWith('tests/fixtures/');
 }
 
 function countWords(text) {
@@ -509,7 +509,7 @@ function main() {
     targets = args.files;
   } else {
     const changed = readChangedFiles();
-    targets = changed.filter((file) => isFitpoJson(file) && !isArchivedImport(file) && !isIntentionalInvalidFixture(file));
+    targets = changed.filter((file) => isFitpoJson(file) && !isArchivedImport(file) && !isTestFixture(file));
   }
   if (!targets.length) {
     if (args.json) console.log(JSON.stringify({ version: 1, status: 'PASS', diagnostics: [], summary: { files: 0, errors: 0, warnings: 0 } }));

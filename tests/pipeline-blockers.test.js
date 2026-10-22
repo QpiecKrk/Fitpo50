@@ -13,6 +13,7 @@ const { isPdfFile, validateSemanticTableMarkup } = require('../scripts/article-p
 const { validateAboutEntities } = require('../scripts/lib/entity-sameas-policy');
 const { sectionRequiresQuestionHeading } = require('../scripts/json-fitpo50-gate-diff');
 const { sectionRequiresAnswerFirstContract } = require('../scripts/article-preflight');
+const { applyKnownValidationBaseline } = require('../scripts/validate-article-standard');
 
 const ROOT = path.resolve(__dirname, '..');
 const FIXTURES = path.join(__dirname, 'fixtures', 'pipeline-invalid');
@@ -39,8 +40,25 @@ test('końcowa macierz błędnych JSON-ów zawiera wszystkie osiem wymaganych bl
 
 test('globalny diff gate nie traktuje celowo błędnych fixture jako draftów publikacyjnych', () => {
   const source = fs.readFileSync(path.join(ROOT, 'scripts', 'json-fitpo50-gate-diff.js'), 'utf8');
-  assert.match(source, /tests\/fixtures\/pipeline-invalid\//);
-  assert.match(source, /!isIntentionalInvalidFixture\(file\)/);
+  assert.match(source, /startsWith\('tests\/fixtures\/'\)/);
+  assert.match(source, /!isTestFixture\(file\)/);
+});
+
+test('baseline zwalnia tylko dokładnie znany błąd przypisany do konkretnego pliku', () => {
+  const known = 'Szybka odpowiedź musi zawierać 1-3 pełne zdania (jest 4).';
+  const newError = 'Nowy błąd walidacji.';
+  const warnings = [];
+  const remaining = applyKnownValidationBaseline(
+    'co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html',
+    [known, newError],
+    warnings,
+  );
+  assert.deepEqual(remaining, [newError]);
+  assert.deepEqual(warnings, [`[KNOWN-BASELINE] ${known}`]);
+
+  const otherFileWarnings = [];
+  assert.deepEqual(applyKnownValidationBaseline('nowy-artykul.html', [known], otherFileWarnings), [known]);
+  assert.deepEqual(otherFileWarnings, []);
 });
 
 test('sekcja użytkowa nie wymaga pytającego H2 ani osobnego obrazu', () => {

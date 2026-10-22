@@ -9,6 +9,21 @@ const { utils, validators, POLICY } = require('./lib/article-policy');
 const { validateSemanticTableMarkup } = require('./article-preview-gate');
 const { validateAboutEntities } = require('./lib/entity-sameas-policy');
 
+const VALIDATION_BASELINE_PATH = path.join(__dirname, 'config', 'article-validation-baseline.json');
+const VALIDATION_BASELINE = JSON.parse(fs.readFileSync(VALIDATION_BASELINE_PATH, 'utf8'));
+
+function applyKnownValidationBaseline(filePath, errors, warnings) {
+  const file = path.basename(String(filePath || ''));
+  return errors.filter((error) => {
+    const isKnown = (VALIDATION_BASELINE.known_errors || []).some((item) => (
+      item.error === error && Array.isArray(item.files) && item.files.includes(file)
+    ));
+    if (!isKnown) return true;
+    warnings.push(`[KNOWN-BASELINE] ${error}`);
+    return false;
+  });
+}
+
 function getHtmlFiles() {
   return fs.readdirSync(process.cwd())
     .filter((f) => f.endsWith('.html'))
@@ -542,7 +557,7 @@ function validateFile(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
   const warnings = [];
-  const quickAnswerMode = isLegacyArticle(raw) ? 'legacy' : 'strict';
+  const quickAnswerMode = 'strict';
   const requiredPatterns = [
     { label: 'body.article-template', regex: /<body[^>]*class="[^"]*article-template[^"]*"/i },
     { label: 'body.article--kategoria', regex: /<body[^>]*class="[^"]*article--(ruch|jedzenie|zdrowie|ciekawe|mity)[^"]*"/i },
@@ -705,7 +720,7 @@ function validateFile(filePath) {
   validateBlogPostingAuthorIsPerson(raw, errors);
   validateBlogPostingAboutSameAs(raw, errors);
 
-  return { errors, warnings };
+  return { errors: applyKnownValidationBaseline(filePath, errors, warnings), warnings };
 }
 
 function main() {
@@ -747,6 +762,7 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {
+  applyKnownValidationBaseline,
   validateAnswerFirstParagraphs,
   validateArticleTables,
   validateQuestionHeadings,

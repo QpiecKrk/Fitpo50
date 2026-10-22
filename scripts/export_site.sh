@@ -113,6 +113,7 @@ rsync -a \
   --exclude=".env*" \
   --exclude="AGENT.md" \
   --exclude="AGENTS.md" \
+  --exclude="/HANDOFF.md" \
   --exclude="README.md" \
   --exclude="ARTICLE_STANDARD.md" \
   --exclude="article-template-bento.html" \
@@ -128,6 +129,7 @@ rsync -a \
   --exclude="test-tts.mp3" \
   --exclude="package.json" \
   --exclude="package-lock.json" \
+  --exclude="/requirements*.txt" \
   --exclude="tsconfig.json" \
   --exclude="admin/config.php" \
   --exclude="admin/config.example.php" \
@@ -138,6 +140,7 @@ rsync -a \
   --exclude="/docs/" \
   --exclude="/templates/" \
   --exclude="assets/trash/" \
+  --exclude="/assets/fonts/pdf/" \
   --exclude="data/cache/" \
   --exclude="data/gsc/" \
   --exclude="data/import/" \

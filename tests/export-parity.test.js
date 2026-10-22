@@ -78,3 +78,10 @@ test('llms-full ma deterministyczny generated_at wynikający z treści', () => {
   assert.equal(first, second);
   assert.match(first, /generated_at: 2026-02-03T11:00:00\.000Z/);
 });
+
+test('eksport wyklucza handoff, requirements i fonty przeznaczone wyłącznie dla generatora PDF', () => {
+  const script = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'export_site.sh'), 'utf8');
+  assert.match(script, /--exclude="\/HANDOFF\.md"/);
+  assert.match(script, /--exclude="\/requirements\*\.txt"/);
+  assert.match(script, /--exclude="\/assets\/fonts\/pdf\/"/);
+});
