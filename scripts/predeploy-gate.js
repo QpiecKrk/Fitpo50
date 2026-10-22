@@ -105,10 +105,10 @@ function validateRobotsHygiene(errors) {
 
 function validateHtaccessRobotsHygiene(errors) {
   const requiredSnippets = [
-    'RewriteRule ^(?:_site|scripts|docs|tests|src|templates)(?:/|$) - [F,L,NC]',
-    'RewriteRule ^data(?:/|$) - [F,L,NC]',
+    'RewriteCond %{REQUEST_URI} ^/(?:_site|scripts|docs|tests|src|templates|\\.venv|__pycache__)(?:/|$) [NC]',
     'RewriteRule \\.md$ - [F,L,NC]',
-    'RewriteRule ^(?:package(?:-lock)?\\.json|tsconfig\\.json)$ - [F,L,NC]',
+    'RewriteCond %{REQUEST_URI} ^/(?:requirements[^/]*\\.txt|\\.gitignore|package[^/]*\\.json|tsconfig\\.json|[^/]+\\.py)$ [NC]',
+    'RewriteRule ^data(?:/|$) - [F,L,NC]',
     'RewriteRule ^assets/?$ - [G,L]',
     'RewriteRule ^sukcesy/?$ - [G,L]',
     'SetEnvIf Request_URI "^/(admin|data|assets/data|assets/pdf|sukcesy)(/|$)" fitpo50_noindex=1',
@@ -128,6 +128,12 @@ function validateHtaccessRobotsHygiene(errors) {
     requiredSnippets.forEach((snippet) => {
       if (!raw.includes(snippet)) errors.push(`${rel}: brak zabezpieczenia robots hygiene: ${snippet}`);
     });
+  }
+  for (const rel of ['llms-full.txt', '_site/llms-full.txt']) {
+    if (!exists(rel)) errors.push(`Brak publicznego pliku: ${rel}`);
+  }
+  if (exists('llms-full.txt') && exists('_site/llms-full.txt') && readUtf8('llms-full.txt') !== readUtf8('_site/llms-full.txt')) {
+    errors.push('llms-full.txt: źródło i eksport różnią się. Uruchom export_site.sh.');
   }
 }
 

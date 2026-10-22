@@ -43,6 +43,7 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
     { path: '/porady.html', canonical: `${normalizedBase}/porady.html` },
     { path: '/sitemap.xml' },
     { path: '/llms.txt' },
+    { path: '/llms-full.txt' },
     { path: '/ads.txt' },
     { path: '/assets/data/search-index.json' },
   ];

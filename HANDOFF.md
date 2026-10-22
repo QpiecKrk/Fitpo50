@@ -1,6 +1,22 @@
 # HANDOFF — article pipeline guardrails
 
-Branch: `chore/article-pipeline-dry-run-guardrails`
+Branch: `main`
+
+## Aktualny handoff — ochrona root i llms-full
+
+### Zrobione
+
+- Potwierdzono, że Hostinger serwuje katalog główny repo: produkcja zwracała 200 dla `/requirements-dev.txt`, `/.gitignore` i `/_site/index.html`, mimo że pierwszych dwóch plików nie ma w `_site`.
+- `deployment:finalize` dla `35972e3c4c38d2215ecfbee036e258f5327ff8af` potwierdził `LIVE_DEPLOYED_AND_VALIDATED`, po czym prawidłowo zakończył się `SECURITY_EXPOSURE_BLOCKED` dla publicznego `/_site/index.html`.
+- Główny `.htaccess` oraz jego mirror blokują 403 dla `/_site/`, katalogów technicznych, środowiska Python i plików technicznych; publiczne HTML, `assets/`, sitemap, robots oraz oba pliki llms pozostają dozwolone.
+- `llms-full.txt` i `_site/llms-full.txt` są dodane do stage jako wersjonowane artefakty; predeploy, parity, marker i live verifier wymagają teraz tego pliku.
+- Testy celowane: PASS 18/18. `npm run prepush:local`: PASS; świeży eksport ma parity 3345/3345 plików.
+
+### Zostało
+
+- Nie wykonywać pushu bez osobnego „tak” użytkownika.
+- Po zgodzie wykonać standardowy workflow push/deploy, a następnie potwierdzić na produkcji 403 dla ścieżek technicznych, 200 dla `/llms-full.txt` oraz końcowe `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`.
+- IndexNow pozostaje osobną operacją i nie jest zatwierdzony.
 
 ## Zrobione
 

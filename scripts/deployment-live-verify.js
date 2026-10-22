@@ -67,6 +67,7 @@ function expectedBaseFiles(baseUrl) {
     ['/porady.html', 'porady.html'],
     ['/sitemap.xml', 'sitemap.xml'],
     ['/llms.txt', 'llms.txt'],
+    ['/llms-full.txt', 'llms-full.txt'],
     ['/ads.txt', 'ads.txt'],
     ['/assets/data/search-index.json', 'assets/data/search-index.json'],
   ];
@@ -75,7 +76,7 @@ function expectedBaseFiles(baseUrl) {
 
 function urlsFor(baseUrl, articles) {
   return [...new Set([
-    `${baseUrl}/deployment.json`, `${baseUrl}/`, `${baseUrl}/porady.html`, `${baseUrl}/sitemap.xml`, `${baseUrl}/llms.txt`, `${baseUrl}/ads.txt`, `${baseUrl}/assets/data/search-index.json`,
+    `${baseUrl}/deployment.json`, `${baseUrl}/`, `${baseUrl}/porady.html`, `${baseUrl}/sitemap.xml`, `${baseUrl}/llms.txt`, `${baseUrl}/llms-full.txt`, `${baseUrl}/ads.txt`, `${baseUrl}/assets/data/search-index.json`,
     ...articles.flatMap((article) => [article.url, article.pdfUrl, ...(article.imageUrls || []), ...(article.listingUrls || [])]),
   ])];
 }

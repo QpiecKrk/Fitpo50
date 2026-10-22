@@ -13,12 +13,14 @@
   # Remove malformed legacy template asset URL reported by GSC
   RewriteRule ^assets/\$\{item\.img\}\.avif$ - [G,L]
 
-  # Repo may still be deployed from its root. Deny every non-public project
-  # surface at the web-server boundary instead of relying on robots/noindex.
-  RewriteRule ^(?:_site|scripts|docs|tests|src|templates)(?:/|$) - [F,L,NC]
+  # Hostinger serves the repository root. Deny non-public project surfaces at
+  # the web-server boundary even when they are also excluded from _site.
+  RewriteCond %{REQUEST_URI} ^/(?:_site|scripts|docs|tests|src|templates|\.venv|__pycache__)(?:/|$) [NC]
+  RewriteRule ^ - [F,L]
   RewriteRule ^data(?:/|$) - [F,L,NC]
   RewriteRule \.md$ - [F,L,NC]
-  RewriteRule ^(?:package(?:-lock)?\.json|tsconfig\.json)$ - [F,L,NC]
+  RewriteCond %{REQUEST_URI} ^/(?:requirements[^/]*\.txt|\.gitignore|package[^/]*\.json|tsconfig\.json|[^/]+\.py)$ [NC]
+  RewriteRule ^ - [F,L]
 
   # Directory roots reported by GSC as crawl targets, not user-facing pages
   RewriteRule ^assets/?$ - [G,L]

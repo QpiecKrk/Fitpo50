@@ -17,6 +17,30 @@ function git(cwd, ...args) {
   return String(result.stdout || '').trim();
 }
 
+function requestDeniedByHtaccess(source, pathname) {
+  const lines = String(source).split(/\r?\n/);
+  let requestConditions = [];
+  for (const line of lines) {
+    const condition = line.match(/^\s*RewriteCond\s+%\{REQUEST_URI\}\s+(\S+)\s*(?:\[([^\]]+)\])?/i);
+    if (condition) {
+      requestConditions.push({ pattern: condition[1], flags: condition[2] || '' });
+      continue;
+    }
+    const rule = line.match(/^\s*RewriteRule\s+(\S+)\s+\S+\s*(?:\[([^\]]+)\])?/i);
+    if (!rule) continue;
+    const flags = rule[2] || '';
+    const ruleFlags = flags.includes('NC') ? 'i' : '';
+    const conditionsPass = requestConditions.every(({ pattern, flags: conditionFlags }) => (
+      new RegExp(pattern, conditionFlags.includes('NC') ? 'i' : '').test(pathname)
+    ));
+    const pathWithoutLeadingSlash = pathname.replace(/^\//, '');
+    const denied = conditionsPass && new RegExp(rule[1], ruleFlags).test(pathWithoutLeadingSlash) && flags.split(',').includes('F');
+    requestConditions = [];
+    if (denied) return true;
+  }
+  return false;
+}
+
 test('Hostinger scripts contain no destructive reset or clean command', () => {
   for (const file of ['scripts/hostinger-clean-repo.sh', 'scripts/hostinger-deploy-recovery.sh']) {
     const source = fs.readFileSync(path.join(ROOT, file), 'utf8');
@@ -48,7 +72,7 @@ test('retired clean command blocks without changing user files', () => {
 test('deployment marker is identical in source and export', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-marker-'));
   fs.mkdirSync(path.join(root, '_site'));
-  for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'ads.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
+  for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
   fs.mkdirSync(path.join(root, '_site', 'assets', 'data'), { recursive: true });
   fs.writeFileSync(path.join(root, '_site', 'assets', 'data', 'search-index.json'), '[]');
   const marker = prepareDeploymentMarker(root, { releaseId: 'release-test', preparedAt: '2026-10-01T10:00:00.000Z' });
@@ -92,6 +116,7 @@ test('live verifier only returns final status after remote, marker and all check
     [`${baseUrl}/porady.html`, { status: 200, body: '<link rel="canonical" href="https://fitpo50.pl/porady.html">' }],
     [`${baseUrl}/sitemap.xml`, { status: 200, body: '<urlset></urlset>' }],
     [`${baseUrl}/llms.txt`, { status: 200, body: 'ok' }],
+    [`${baseUrl}/llms-full.txt`, { status: 200, body: 'full' }],
     [`${baseUrl}/ads.txt`, { status: 200, body: 'ok' }],
     [`${baseUrl}/assets/data/search-index.json`, { status: 200, body: '[]' }],
   ]);
@@ -115,6 +140,7 @@ test('old article HTML, missing PDF and missing image block final live status', 
     [`${baseUrl}/porady.html`, { status: 200, body: '<link rel="canonical" href="https://fitpo50.pl/porady.html">' }],
     [`${baseUrl}/sitemap.xml`, { status: 200, body: '<urlset><url><loc>https://fitpo50.pl/test.html</loc><lastmod>2026-10-01</lastmod></url></urlset>' }],
     [`${baseUrl}/llms.txt`, { status: 200, body: 'ok' }],
+    [`${baseUrl}/llms-full.txt`, { status: 200, body: 'full' }],
     [`${baseUrl}/ads.txt`, { status: 200, body: 'ok' }],
     [`${baseUrl}/assets/data/search-index.json`, { status: 200, body: '[]' }],
   ];
@@ -156,10 +182,25 @@ test('security exposure gate accepts only protected or missing sensitive paths',
   assert.equal(classifyExposureResponse(500), 'INCONCLUSIVE');
 });
 
-test('security exposure gate covers every root Markdown document class', () => {
+test('htaccess blocks repository internals and preserves public site paths', () => {
   const source = fs.readFileSync(path.join(ROOT, '.htaccess'), 'utf8');
-  assert.match(source, /RewriteRule \\.md\$ - \[F,L,NC\]/);
-  for (const pathname of ['/README.md', '/DEPLOY.md', '/SEO_AIO_PLAYBOOK.md', '/ARTICLE_STANDARD.md']) {
+  const blocked = [
+    '/_site/index.html', '/requirements-dev.txt', '/requirements-pdf.txt', '/.gitignore',
+    '/README.md', '/package.json', '/package-lock.json', '/tool.py', '/.venv/bin/python',
+    '/__pycache__/module.pyc', '/tests/deployment-safety.test.js', '/scripts/export_site.sh',
+    '/docs/command-registry.md', '/admin/CHANGELOG.md',
+  ];
+  const allowed = [
+    '/index.html', '/porady.html', '/assets/main.css', '/assets/example.webp',
+    '/sitemap.xml', '/robots.txt', '/llms.txt', '/llms-full.txt',
+  ];
+  for (const pathname of blocked) {
+    assert.equal(requestDeniedByHtaccess(source, pathname), true, `oczekiwano 403 dla ${pathname}`);
+  }
+  for (const pathname of allowed) {
+    assert.equal(requestDeniedByHtaccess(source, pathname), false, `ścieżka publiczna nie może dostać 403: ${pathname}`);
+  }
+  for (const pathname of blocked) {
     assert.ok(SENSITIVE_PATHS.includes(pathname), `brak kontroli ekspozycji ${pathname}`);
   }
 });

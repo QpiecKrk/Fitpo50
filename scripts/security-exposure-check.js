@@ -5,8 +5,10 @@ const path = require('node:path');
 
 const SENSITIVE_PATHS = Object.freeze([
   '/README.md', '/DEPLOY.md', '/SEO_AIO_PLAYBOOK.md',
-  '/ARTICLE_STANDARD.md', '/PROJECT_MEMORY.md', '/AGENTS.md', '/package.json', '/scripts/export_site.sh',
-  '/docs/command-registry.md', '/data/entities.json', '/_site/index.html',
+  '/ARTICLE_STANDARD.md', '/PROJECT_MEMORY.md', '/AGENTS.md', '/package.json', '/package-lock.json',
+  '/requirements-dev.txt', '/requirements-pdf.txt', '/.gitignore', '/tool.py',
+  '/scripts/export_site.sh', '/tests/deployment-safety.test.js', '/docs/command-registry.md',
+  '/.venv/bin/python', '/__pycache__/module.pyc', '/admin/CHANGELOG.md', '/data/entities.json', '/_site/index.html',
   '/.env', '/.env.local', '/admin/config.php', '/admin/database.sqlite', '/_site/admin/database.sqlite',
 ]);
 

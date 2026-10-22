@@ -48,8 +48,8 @@ test('parity klasyfikuje brak PDF-u, danych i wariantu obrazu', () => {
   assert.deepEqual(report.missing.map((item) => item.kind).sort(), ['ASSET', 'DATA', 'PDF']);
 });
 
-test('parity pomija wyłącznie artefakty runtime i generowane, których nie ma w czystym checkout', () => {
-  assert.equal(isParityManagedPath('llms-full.txt'), false);
+test('parity obejmuje publiczny llms-full i pomija wyłącznie artefakty runtime', () => {
+  assert.equal(isParityManagedPath('llms-full.txt'), true);
   assert.equal(isParityManagedPath('admin/uploads/example.webp'), false);
   assert.equal(isParityManagedPath('assets/news/news_20260625_example.avif'), false);
   assert.equal(isParityManagedPath('assets/news/editorial-cover.avif'), true);
@@ -60,12 +60,13 @@ test('parity pomija wyłącznie artefakty runtime i generowane, których nie ma 
   write(expected, 'artykul.html', 'ta sama treść');
   write(actual, 'artykul.html', 'ta sama treść');
   write(expected, 'llms-full.txt', 'generowane');
+  write(actual, 'llms-full.txt', 'generowane');
   write(expected, 'admin/uploads/example.webp', 'runtime');
   write(expected, 'assets/news/news_20260625_example.avif', 'runtime');
   const report = compareExportTrees(expected, actual);
   assert.equal(report.ok, true);
-  assert.equal(report.expected_files, 1);
-  assert.equal(report.actual_files, 1);
+  assert.equal(report.expected_files, 2);
+  assert.equal(report.actual_files, 2);
 });
 
 test('llms-full ma deterministyczny generated_at wynikający z treści', () => {

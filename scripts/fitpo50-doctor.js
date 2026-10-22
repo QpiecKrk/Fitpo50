@@ -61,7 +61,13 @@ function main() {
   checks.push(check('Private files in _site/admin', 'red', sensitiveSiteFiles.length === 0, sensitiveSiteFiles.join('\n') || 'none'));
 
   const llmsTracked = run('git', ['ls-files', 'llms-full.txt', '_site/llms-full.txt']);
-  checks.push(check('Tracked llms-full artifacts', 'warn', !llmsTracked.stdout, llmsTracked.stdout || 'none'));
+  const trackedLlmsFiles = llmsTracked.stdout.split('\n').filter(Boolean).sort();
+  checks.push(check(
+    'Tracked llms-full artifacts',
+    'red',
+    trackedLlmsFiles.join('\n') === '_site/llms-full.txt\nllms-full.txt',
+    trackedLlmsFiles.join('\n') || 'none',
+  ));
 
   const mirrorCheck = run('npm', ['run', 'assets:mirror:check']);
   checks.push(check('Assets mirror check', 'red', mirrorCheck.ok, mirrorCheck.ok ? 'PASS' : (mirrorCheck.stderr || mirrorCheck.stdout)));

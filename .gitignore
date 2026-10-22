@@ -127,8 +127,6 @@ _site/audit_*.md
 _site/MEMORY_MOJE_SUKCESY.md
 _site/MEMORY_PORADY.md
 _site/SESSION_START_MAX.md
-llms-full.txt
-_site/llms-full.txt
 
 # NEWS thumbs generated runtime on server should NOT block git/deploy.
 # Keep existing tracked files in git; new server-generated news_20* files are ignored.

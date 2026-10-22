@@ -12,7 +12,7 @@ function sha256(value) {
 }
 
 function publicFingerprint(siteDir) {
-  const required = ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'ads.txt', 'assets/data/search-index.json'];
+  const required = ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt', 'assets/data/search-index.json'];
   const entries = required.map((relativePath) => {
     const absolutePath = path.join(siteDir, relativePath);
     if (!fs.existsSync(absolutePath)) throw new Error(`Brak wymaganego pliku eksportu: ${relativePath}`);
