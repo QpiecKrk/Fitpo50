@@ -467,3 +467,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Statyny po 50-tce: bóle mięśni, nocebo i kiedy badać CK | FitPo50"
   section: "Zdrowie"
   summary: "Bolą cię mięśnie na statynie? Sprawdzamy, ile tego bólu robi sam lek, a ile nocebo, kiedy zbadać CK, czy koenzym Q10 pomaga i czym zastąpić statyny."
+- url: https://fitpo50.pl/zmiana-czasu-na-zimowy-po-50.html
+  title: "Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce? | FitPo50"
+  section: "Ciekawe"
+  summary: "Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach."

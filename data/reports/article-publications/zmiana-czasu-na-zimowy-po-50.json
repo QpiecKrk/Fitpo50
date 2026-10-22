@@ -1,0 +1,592 @@
+{
+  "version": 1,
+  "transaction_id": "article-zmiana-czasu-na-zimowy-po-50-1792652412195-70390",
+  "generated_at": "2026-10-22T10:51:35.096Z",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "zmiana-czasu-na-zimowy-po-50",
+  "url": "https://fitpo50.pl/zmiana-czasu-na-zimowy-po-50.html",
+  "manifest_file": "data/reports/article-publications/zmiana-czasu-na-zimowy-po-50.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "zmiana-czasu-na-zimowy-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "948929670fe04ae98e7f8012a2732bd5e48e214dfdeb5bc5f40b442062f24b42",
+      "bytes": 58277
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "cb64dba28e1789b21ff5953e7d430c7b06210f0f221af51c78c75b5a1b060c25",
+      "after_sha256": "32770714d19e69aaa64ecc2707bc49fcf8e6fe546d1b2200a8e76874b0634565",
+      "bytes": 119872
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "4cc9bb0b78c957087c473dfec79eae8450cfa21293fcdf7b7fbe124af8164cd3",
+      "after_sha256": "f927191acf945ff3a40b092254dd8a6c900eb75cf2995a0873af862586a111ea",
+      "bytes": 161493
+    },
+    {
+      "path": "ciekawe.html",
+      "action": "UPDATE",
+      "before_sha256": "eadff4c0cb8e44544e96682769b39d8dace375573c146c9968e265f603242cb9",
+      "after_sha256": "b5af720ab5d33827824a206b5b5393cefe1fa583f4d82683b84a9186125f97bd",
+      "bytes": 48563
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "4453bff2d951aad4eb5922cdfed87c157054e2ed842a485a81f7b14cf52fd01c",
+      "after_sha256": "5cac014a5431a05ca35cd33a17e3df649f87384f155ca9639a1ecfe255e67f57",
+      "bytes": 19841
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "fccc2fb18e3fcec7b2ca22d896afebaf33d63a7eb7f388c1be672c146a766353",
+      "after_sha256": "f24ac8a57b0dff935463dc89e3ff3e06432a0851d9e48da4896429a3ad849712",
+      "bytes": 38598
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "44d80a6f2bf879e5f7e0af4f62163d3a1ff7cdc8e2005ea5661350ba3a079ee1",
+      "after_sha256": "4bfb33c1b0ab812ca6208b3e28257881a4ba69a2a95df16f877501343d21d4b5",
+      "bytes": 845383
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "286139acc37ae53e84ae44a40ebab67a7f4c5c3da32eaff2334bc812be97a256",
+      "after_sha256": "dc30f27ded170df2427e669572fdf2f22a2299f09e4eff6ddcddc7e6c65b4722",
+      "bytes": 893042
+    },
+    {
+      "path": "assets/pdf/zmiana-czasu-na-zimowy-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0a1d3a46ee17d2330610659158974b0fdcce2dc4742c863121a444b395cdbc73",
+      "bytes": 488140
+    },
+    {
+      "path": "data/crosslink-suggestions/zmiana-czasu-na-zimowy-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7496322a317136e8233369d1260539935fbe0206431dc3c8096e00aa147bfcd7",
+      "bytes": 1341
+    },
+    {
+      "path": "data/reports/article-preview/zmiana-czasu-na-zimowy-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cab52521b543afad51b182c668439c4686ce53d2480205949797bbc11d668d52",
+      "bytes": 38333
+    },
+    {
+      "path": "data/reports/article-preview/zmiana-czasu-na-zimowy-po-50.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "21fa71014ccbe7e52e72e8bf0922d0e16070b4f0f00689685ac5830291c815e9",
+      "bytes": 402
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "481867004b2a85ec8d298494562e168ddc2c39850c8fee31eff4ef5bcd4efd5a",
+      "after_sha256": "0d1e49fcef8adef306451ca607823dc7dbfb63ac392d8fafccd599c6dd7efe5b",
+      "bytes": 48563
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "d299f90714859a0041aa1ea275758ac12de49fd503d2cd807c9a2b01f82de0e4",
+      "after_sha256": "f3871c67fafbd7e0fdfd1c5798456e35c5b5b8731df426a028006168a8174183",
+      "bytes": 4839
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "8d9e79645f98ee56fa474120d785083086f200d0fd3bf621db3f953817051e67",
+      "after_sha256": "706387df1785ae8514660ce80c0722c981d18051826915745863e18996d97388",
+      "bytes": 2348
+    },
+    {
+      "path": "data/reports/link-topology-report.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9ff9c9b0a00d0ab1b6c28b7754c0befa38e256729d05cbe895924da6c110d8f9",
+      "bytes": 8912
+    },
+    {
+      "path": "data/reports/link-topology-report.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7873f65de12329ab30c9d59c347033477382304187023488f1a07f605d8daf81",
+      "bytes": 4905
+    },
+    {
+      "path": "_site/zmiana-czasu-na-zimowy-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "948929670fe04ae98e7f8012a2732bd5e48e214dfdeb5bc5f40b442062f24b42",
+      "bytes": 58277
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "cb64dba28e1789b21ff5953e7d430c7b06210f0f221af51c78c75b5a1b060c25",
+      "after_sha256": "32770714d19e69aaa64ecc2707bc49fcf8e6fe546d1b2200a8e76874b0634565",
+      "bytes": 119872
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "4cc9bb0b78c957087c473dfec79eae8450cfa21293fcdf7b7fbe124af8164cd3",
+      "after_sha256": "f927191acf945ff3a40b092254dd8a6c900eb75cf2995a0873af862586a111ea",
+      "bytes": 161493
+    },
+    {
+      "path": "_site/ciekawe.html",
+      "action": "UPDATE",
+      "before_sha256": "eadff4c0cb8e44544e96682769b39d8dace375573c146c9968e265f603242cb9",
+      "after_sha256": "b5af720ab5d33827824a206b5b5393cefe1fa583f4d82683b84a9186125f97bd",
+      "bytes": 48563
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "4453bff2d951aad4eb5922cdfed87c157054e2ed842a485a81f7b14cf52fd01c",
+      "after_sha256": "5cac014a5431a05ca35cd33a17e3df649f87384f155ca9639a1ecfe255e67f57",
+      "bytes": 19841
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "fccc2fb18e3fcec7b2ca22d896afebaf33d63a7eb7f388c1be672c146a766353",
+      "after_sha256": "f24ac8a57b0dff935463dc89e3ff3e06432a0851d9e48da4896429a3ad849712",
+      "bytes": 38598
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "44d80a6f2bf879e5f7e0af4f62163d3a1ff7cdc8e2005ea5661350ba3a079ee1",
+      "after_sha256": "4bfb33c1b0ab812ca6208b3e28257881a4ba69a2a95df16f877501343d21d4b5",
+      "bytes": 845383
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "286139acc37ae53e84ae44a40ebab67a7f4c5c3da32eaff2334bc812be97a256",
+      "after_sha256": "dc30f27ded170df2427e669572fdf2f22a2299f09e4eff6ddcddc7e6c65b4722",
+      "bytes": 893042
+    },
+    {
+      "path": "_site/assets/pdf/zmiana-czasu-na-zimowy-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0a1d3a46ee17d2330610659158974b0fdcce2dc4742c863121a444b395cdbc73",
+      "bytes": 488140
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/zmiana-czasu-na-zimowy-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7496322a317136e8233369d1260539935fbe0206431dc3c8096e00aa147bfcd7",
+      "bytes": 1341
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ce9464f3ecb1c509c3094556694a48089dde489d150a5d0cb23e8ff782c305f8",
+      "bytes": 62168
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ce9464f3ecb1c509c3094556694a48089dde489d150a5d0cb23e8ff782c305f8",
+      "bytes": 62168
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fd523383b79c504205e3b821bb54352659ce269bc56cc8e7894ee1887a5d9608",
+      "bytes": 72202
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fd523383b79c504205e3b821bb54352659ce269bc56cc8e7894ee1887a5d9608",
+      "bytes": 72202
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bc5b6124a1ab6cfec9f02431e4e68f33d9c0ea2c33a8f7c540d3984fbd2172bf",
+      "bytes": 159704
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bc5b6124a1ab6cfec9f02431e4e68f33d9c0ea2c33a8f7c540d3984fbd2172bf",
+      "bytes": 159704
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9d30c4f62c2ac77e75665920fe0d45b3811d1debcc730f6bd37faebc6619768b",
+      "bytes": 16456
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9d30c4f62c2ac77e75665920fe0d45b3811d1debcc730f6bd37faebc6619768b",
+      "bytes": 16456
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c28d7e1bfc30b6b5b22bbacea38ee0f44cae2f94565387a4e27f477d448b58e",
+      "bytes": 27084
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c28d7e1bfc30b6b5b22bbacea38ee0f44cae2f94565387a4e27f477d448b58e",
+      "bytes": 27084
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9e55977cc24f2000cffa6427370dd533240bea86f4c9a3583740a45aa7bc5c27",
+      "bytes": 67992
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9e55977cc24f2000cffa6427370dd533240bea86f4c9a3583740a45aa7bc5c27",
+      "bytes": 67992
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a7509400f2a0684bb6583e7985a97c5d9e20cde528d88891fb3ca5a83041fb18",
+      "bytes": 20254
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a7509400f2a0684bb6583e7985a97c5d9e20cde528d88891fb3ca5a83041fb18",
+      "bytes": 20254
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "93424767818c8601d01ee9f760fd4f35fe12e08944ab7799f782d8f9c0bf4f52",
+      "bytes": 31320
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "93424767818c8601d01ee9f760fd4f35fe12e08944ab7799f782d8f9c0bf4f52",
+      "bytes": 31320
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c434117ce7935db2edf20e316acf243d74965c20e054e67426cc3e857219d5cf",
+      "bytes": 75118
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c434117ce7935db2edf20e316acf243d74965c20e054e67426cc3e857219d5cf",
+      "bytes": 75118
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d694adc7ea106240ceee063e20db7f1e38ca91722dbc0e147a93c7db9ab1de10",
+      "bytes": 35673
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d694adc7ea106240ceee063e20db7f1e38ca91722dbc0e147a93c7db9ab1de10",
+      "bytes": 35673
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64f216dcf82539c5493bb23c26cbbdeaea2a56bdad375cabb684b0ee234a1c0f",
+      "bytes": 31702
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64f216dcf82539c5493bb23c26cbbdeaea2a56bdad375cabb684b0ee234a1c0f",
+      "bytes": 31702
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a3afee88c68322c5d3b8f59b8e7c4193bf71a6b7856e37c57b7471b6d4d32251",
+      "bytes": 101351
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a3afee88c68322c5d3b8f59b8e7c4193bf71a6b7856e37c57b7471b6d4d32251",
+      "bytes": 101351
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "890cf5b05f54589e8940b4a7d1898146cdd5007aef9fb98a9dbfb72494d197de",
+      "bytes": 17231
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "890cf5b05f54589e8940b4a7d1898146cdd5007aef9fb98a9dbfb72494d197de",
+      "bytes": 17231
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0c1a646fe52d260bd2271e622082baf50d8f5b902a9a1644694ac49497ea9a1a",
+      "bytes": 30034
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0c1a646fe52d260bd2271e622082baf50d8f5b902a9a1644694ac49497ea9a1a",
+      "bytes": 30034
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7d4c590cc001c161b36083de150d46f6245e5f59bb44385fe67b8c8624350366",
+      "bytes": 71414
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7d4c590cc001c161b36083de150d46f6245e5f59bb44385fe67b8c8624350366",
+      "bytes": 71414
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6d87090b1119c76c6e7b343d900c6e42b7b7687a091e235e1a30db22e955d306",
+      "bytes": 56040
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6d87090b1119c76c6e7b343d900c6e42b7b7687a091e235e1a30db22e955d306",
+      "bytes": 56040
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b8e4b1dc8567e1fa73c62bddb6fd01ea426029dcb932e0e10337d9e926622cdd",
+      "bytes": 61830
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b8e4b1dc8567e1fa73c62bddb6fd01ea426029dcb932e0e10337d9e926622cdd",
+      "bytes": 61830
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2789b8e44ee128fe5a3004399647654d3bf2af36a955d1722d5b0d5e78d18620",
+      "bytes": 147246
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2789b8e44ee128fe5a3004399647654d3bf2af36a955d1722d5b0d5e78d18620",
+      "bytes": 147246
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a76b36adb263da24c0a58c72046c944b1c4c5cf32260c69f08d81706a6cf7b33",
+      "bytes": 145186
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a76b36adb263da24c0a58c72046c944b1c4c5cf32260c69f08d81706a6cf7b33",
+      "bytes": 145186
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6120631b2feb2ee327eff412b5229b3b70980d15be3aab34d19047681c992887",
+      "bytes": 201436
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6120631b2feb2ee327eff412b5229b3b70980d15be3aab34d19047681c992887",
+      "bytes": 201436
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8fdb503fbbaab239316dd113cfa0b25f0cf1e8802d5bbad1bef25c083821f5bd",
+      "bytes": 315636
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8fdb503fbbaab239316dd113cfa0b25f0cf1e8802d5bbad1bef25c083821f5bd",
+      "bytes": 315636
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b682302ddb0b667cbe93f4145800a92db8d15bda86438cde4e81884bde60673e",
+      "bytes": 67778
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b682302ddb0b667cbe93f4145800a92db8d15bda86438cde4e81884bde60673e",
+      "bytes": 67778
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "59f4ab9a84abfcecc47464b5d63365459c6cc5e4beb8cee8135b72396722d735",
+      "bytes": 69212
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "59f4ab9a84abfcecc47464b5d63365459c6cc5e4beb8cee8135b72396722d735",
+      "bytes": 69212
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6c882a526fff4aa67c9e93b5f6a1039b0aa05407a1676ac5147018dfe24049af",
+      "bytes": 146087
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6c882a526fff4aa67c9e93b5f6a1039b0aa05407a1676ac5147018dfe24049af",
+      "bytes": 146087
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d319cccb8d3f7083158317e53903517e358c171e1c9d75974543c952836c16fc",
+      "bytes": 17212
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d319cccb8d3f7083158317e53903517e358c171e1c9d75974543c952836c16fc",
+      "bytes": 17212
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "14396dcde3d2642f0635b93e8fbd509818dcb35b87067eb49cc41084a963ae7d",
+      "bytes": 20754
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "14396dcde3d2642f0635b93e8fbd509818dcb35b87067eb49cc41084a963ae7d",
+      "bytes": 20754
+    },
+    {
+      "path": "assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f4f735902a65e0f8114559b8a39d82bbcb55d4d0401b0d3d613cb0e51b95e9a0",
+      "bytes": 47870
+    },
+    {
+      "path": "_site/assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f4f735902a65e0f8114559b8a39d82bbcb55d4d0401b0d3d613cb0e51b95e9a0",
+      "bytes": 47870
+    }
+  ],
+  "files_count": 81
+}

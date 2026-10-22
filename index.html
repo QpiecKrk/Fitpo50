@@ -1704,16 +1704,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/statyny-hero-poranek-lydka.avif" type="image/avif">
-          <source srcset="./assets/statyny-hero-poranek-lydka.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/statyny-hero-poranek-lydka.webp" alt="" width="1200" height="654" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.avif" type="image/avif">
+          <source srcset="./assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp" alt="" width="1200" height="654" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Statyny po 50-tce: bóle mięśni, nocebo i kiedy badać CK</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Bolą cię mięśnie na statynie? Sprawdzamy, ile tego bólu robi sam lek, a ile nocebo, kiedy zbadać CK, czy koenzym Q10 pomaga i czym zastąpić statyny.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="zmiana-czasu-na-zimowy-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2510,10 +2510,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Statyny po 50-tce: bóle mięśni, nocebo i kiedy badać CK',
-        excerpt: 'Bolą cię mięśnie na statynie? Sprawdzamy, ile tego bólu robi sam lek, a ile nocebo, kiedy zbadać CK, czy koenzym Q10 pomaga i czym zastąpić statyny.',
-        image: './assets/statyny-hero-poranek-lydka.webp',
-        url: 'statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html'
+        title: 'Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce?',
+        excerpt: 'Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach.',
+        image: './assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp',
+        url: 'zmiana-czasu-na-zimowy-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2543,6 +2543,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Ciekawe',
+          title: 'Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce?',
+          excerpt: 'Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach.',
+          image: './assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp',
+          url: 'zmiana-czasu-na-zimowy-po-50.html'
+        },
+        {
           category: 'Zdrowie',
           title: 'Statyny po 50-tce: bóle mięśni, nocebo i kiedy badać CK',
           excerpt: 'Bolą cię mięśnie na statynie? Sprawdzamy, ile tego bólu robi sam lek, a ile nocebo, kiedy zbadać CK, czy koenzym Q10 pomaga i czym zastąpić statyny.',
@@ -2555,13 +2562,6 @@
           excerpt: 'Leżenie przy bólu krzyża nie przyspiesza powrotu do formy. Sprawdź objawy alarmowe i 8 ćwiczeń na trzy etapy bólu, opisanych krok po kroku, z badaniami.',
           image: './assets/bol-krzyza-po-50-hero.webp',
           url: 'bol-krzyza-po-50-lezenie-czy-cwiczenia.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Stłuszczona wątroba po 50-tce: co oznacza USG i czym jest MASLD?',
-          excerpt: 'Stłuszczona wątroba (MASLD) po 50-tce zwykle nie wynika z alkoholu. Sprawdź, co znaczy opis USG, jakie badania zrobić i co udowodniono, że pomaga wątrobie.',
-          image: './assets/stluszczona-watroba-masld-po-50-hero.webp',
-          url: 'stluszczona-watroba-masld-po-50.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

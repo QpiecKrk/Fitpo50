@@ -1,0 +1,738 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-10-22T07:00:38.526Z",
+  "reviewed_at": "2026-10-22T09:02:46+02:00",
+  "slug": "zmiana-czasu-na-zimowy-po-50",
+  "html_sha256": "948929670fe04ae98e7f8012a2732bd5e48e214dfdeb5bc5f40b442062f24b42",
+  "site_html_sha256": "948929670fe04ae98e7f8012a2732bd5e48e214dfdeb5bc5f40b442062f24b42",
+  "pdf_sha256": "0a1d3a46ee17d2330610659158974b0fdcce2dc4742c863121a444b395cdbc73",
+  "site_pdf_sha256": "0a1d3a46ee17d2330610659158974b0fdcce2dc4742c863121a444b395cdbc73",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-22T07:00:38.526Z",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 1
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "zmiana-czasu-na-zimowy-po-50.html",
+      "sha256": "948929670fe04ae98e7f8012a2732bd5e48e214dfdeb5bc5f40b442062f24b42",
+      "bytes": 58277
+    },
+    "html_site": {
+      "file": "_site/zmiana-czasu-na-zimowy-po-50.html",
+      "sha256": "948929670fe04ae98e7f8012a2732bd5e48e214dfdeb5bc5f40b442062f24b42",
+      "bytes": 58277
+    },
+    "pdf_source": {
+      "file": "assets/pdf/zmiana-czasu-na-zimowy-po-50.pdf",
+      "sha256": "0a1d3a46ee17d2330610659158974b0fdcce2dc4742c863121a444b395cdbc73",
+      "bytes": 488140
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/zmiana-czasu-na-zimowy-po-50.pdf",
+      "sha256": "0a1d3a46ee17d2330610659158974b0fdcce2dc4742c863121a444b395cdbc73",
+      "bytes": 488140
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/desktop.png",
+      "screenshot_sha256": "073fdbf7e0b54cf50f0c06473e0c344602162afdd3256c52abf3be69fe89822c",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/mobile.png",
+      "screenshot_sha256": "9c3730fa5543a22f463fefd526502d2299f086d9fa8bb06540ae12dcf114663a",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "CIEKAWE 11 min czytania Aktualizacja: 22.10.2026 Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce? Zegarek przestawisz w sekundę. Zegarowi w głowie daj kilka dni i trochę światła.",
+      "alt": "Kobieta po pięćdziesiątce w jesiennym swetrze przestawia wskazówki ściennego zegara w kuchni, za oknem drzewa w kolorach jesieni.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.avif",
+          "sha256": "ce9464f3ecb1c509c3094556694a48089dde489d150a5d0cb23e8ff782c305f8",
+          "bytes": 62168,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp",
+          "sha256": "fd523383b79c504205e3b821bb54352659ce269bc56cc8e7894ee1887a5d9608",
+          "bytes": 72202,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.jpg",
+          "sha256": "bc5b6124a1ab6cfec9f02431e4e68f33d9c0ea2c33a8f7c540d3984fbd2172bf",
+          "bytes": 159704,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6a1ce8be15de5a5f2ca53a51349556a6157d07638eb084a498b46d2a01cb139f"
+    },
+    {
+      "placement": "content:2:kiedy-zmiana-czasu-na-zimowy-w-2026-roku",
+      "role": "content",
+      "heading": "Kiedy zmiana czasu na zimowy w 2026 roku?",
+      "context": "Godzina snu więcej brzmi jak prezent, ale wiele osób po pięćdziesiątce zna drugą stronę tej nocy: budzik niepotrzebny, bo oczy otwierają się same, długo przed świtem, a zmrok łapie już w drodze z pracy. Sprawdziliśmy w przepisach i badaniach, co jesienna zmiana czasu naprawdę robi z organizmem, czego się nie bać, na co uważać i czy ten zwyczaj ma przed sobą jeszcze wiele lat. Szybka odpowiedź Zmiana czasu na zimowy w Polsce nastąpi w niedzielę 25 października 2026 roku: o 3:00 cofamy zegarki na 2:00. U osób po 50-tce pierwsza noc bywa dłuższa, ale przez kilka dni częściej zdarzają się wczesne pobudki i gorszy sen. Metaanalizy nie pokazują po jesiennej zmianie istotnego wzrostu ryzyka zawału, a dane o nastroju są niejednoznaczne. Kluczowe wnioski Zegarki cofamy w niedzielę 25 października 2",
+      "alt": "Infografika z tarczą zegara i strzałką cofającą wskazówki z 3:00 na 2:00 oraz datą 25 października 2026.",
+      "caption": "W niedzielę 25 października 2026 roku o 3:00 czasu letniego zegarki cofamy na 2:00.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.avif",
+          "sha256": "9d30c4f62c2ac77e75665920fe0d45b3811d1debcc730f6bd37faebc6619768b",
+          "bytes": 16456,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.webp",
+          "sha256": "5c28d7e1bfc30b6b5b22bbacea38ee0f44cae2f94565387a4e27f477d448b58e",
+          "bytes": 27084,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-infografika-3-na-2-v1.jpg",
+          "sha256": "9e55977cc24f2000cffa6427370dd533240bea86f4c9a3583740a45aa7bc5c27",
+          "bytes": 67992,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "8c911998943f1d85017ce62ef3cb6b022152f1b45bcdc9ff36ad6c20a068a4f4"
+    },
+    {
+      "placement": "content:3:czy-po-zmianie-czasu-na-zimowy-spimy-dluzej",
+      "role": "content",
+      "heading": "Czy po zmianie czasu na zimowy śpimy dłużej?",
+      "context": "Godzina snu więcej brzmi jak prezent, ale wiele osób po pięćdziesiątce zna drugą stronę tej nocy: budzik niepotrzebny, bo oczy otwierają się same, długo przed świtem, a zmrok łapie już w drodze z pracy. Sprawdziliśmy w przepisach i badaniach, co jesienna zmiana czasu naprawdę robi z organizmem, czego się nie bać, na co uważać i czy ten zwyczaj ma przed sobą jeszcze wiele lat. Szybka odpowiedź Zmiana czasu na zimowy w Polsce nastąpi w niedzielę 25 października 2026 roku: o 3:00 cofamy zegarki na 2:00. U osób po 50-tce pierwsza noc bywa dłuższa, ale przez kilka dni częściej zdarzają się wczesne pobudki i gorszy sen. Metaanalizy nie pokazują po jesiennej zmianie istotnego wzrostu ryzyka zawału, a dane o nastroju są niejednoznaczne. Kluczowe wnioski Zegarki cofamy w niedzielę 25 października 2",
+      "alt": "Wykres słupkowy porównujący odsetki osób zgłaszających niezadowolenie ze snu, kłopot z zasypianiem i z utrzymaniem snu przed i po jesiennej zmianie czasu.",
+      "caption": "W badaniu CLSA niezadowolenie ze snu zgłaszało 28% osób ankietowanych tydzień po jesiennej zmianie wobec 22,6% tydzień przed nią.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.avif",
+          "sha256": "a7509400f2a0684bb6583e7985a97c5d9e20cde528d88891fb3ca5a83041fb18",
+          "bytes": 20254,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.webp",
+          "sha256": "93424767818c8601d01ee9f760fd4f35fe12e08944ab7799f782d8f9c0bf4f52",
+          "bytes": 31320,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-wykres-sen-clsa-v1.jpg",
+          "sha256": "c434117ce7935db2edf20e316acf243d74965c20e054e67426cc3e857219d5cf",
+          "bytes": 75118,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "b54a65127298afc5ecc20921a86a152dccd904e7b20b5997745c030e4ac7540b"
+    },
+    {
+      "placement": "content:4:dlaczego-po-zmianie-czasu-budzisz-sie-za-wczesni",
+      "role": "content",
+      "heading": "Dlaczego po zmianie czasu budzisz się za wcześnie?",
+      "context": "Godzina snu więcej brzmi jak prezent, ale wiele osób po pięćdziesiątce zna drugą stronę tej nocy: budzik niepotrzebny, bo oczy otwierają się same, długo przed świtem, a zmrok łapie już w drodze z pracy. Sprawdziliśmy w przepisach i badaniach, co jesienna zmiana czasu naprawdę robi z organizmem, czego się nie bać, na co uważać i czy ten zwyczaj ma przed sobą jeszcze wiele lat. Szybka odpowiedź Zmiana czasu na zimowy w Polsce nastąpi w niedzielę 25 października 2026 roku: o 3:00 cofamy zegarki na 2:00. U osób po 50-tce pierwsza noc bywa dłuższa, ale przez kilka dni częściej zdarzają się wczesne pobudki i gorszy sen. Metaanalizy nie pokazują po jesiennej zmianie istotnego wzrostu ryzyka zawału, a dane o nastroju są niejednoznaczne. Kluczowe wnioski Zegarki cofamy w niedzielę 25 października 2",
+      "alt": "Mężczyzna około sześćdziesiątki siedzi przed świtem na brzegu łóżka i patrzy w ciemne okno, obok stoi budzik.",
+      "caption": "Wewnętrzny zegar nie przestawia się razem z zegarkiem, dlatego w pierwszych dniach po zmianie czasu pobudka często przychodzi wcześniej.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.avif",
+          "sha256": "d694adc7ea106240ceee063e20db7f1e38ca91722dbc0e147a93c7db9ab1de10",
+          "bytes": 35673,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.webp",
+          "sha256": "64f216dcf82539c5493bb23c26cbbdeaea2a56bdad375cabb684b0ee234a1c0f",
+          "bytes": 31702,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-wczesna-pobudka-v1.jpg",
+          "sha256": "a3afee88c68322c5d3b8f59b8e7c4193bf71a6b7856e37c57b7471b6d4d32251",
+          "bytes": 101351,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e8062c74252b8b348bcd82fd7d96e80d4ea8e5fab2a6b7a173c882e2f20a5a93"
+    },
+    {
+      "placement": "content:5:czy-jesienna-zmiana-czasu-szkodzi-sercu",
+      "role": "content",
+      "heading": "Czy jesienna zmiana czasu szkodzi sercu?",
+      "context": "Godzina snu więcej brzmi jak prezent, ale wiele osób po pięćdziesiątce zna drugą stronę tej nocy: budzik niepotrzebny, bo oczy otwierają się same, długo przed świtem, a zmrok łapie już w drodze z pracy. Sprawdziliśmy w przepisach i badaniach, co jesienna zmiana czasu naprawdę robi z organizmem, czego się nie bać, na co uważać i czy ten zwyczaj ma przed sobą jeszcze wiele lat. Szybka odpowiedź Zmiana czasu na zimowy w Polsce nastąpi w niedzielę 25 października 2026 roku: o 3:00 cofamy zegarki na 2:00. U osób po 50-tce pierwsza noc bywa dłuższa, ale przez kilka dni częściej zdarzają się wczesne pobudki i gorszy sen. Metaanalizy nie pokazują po jesiennej zmianie istotnego wzrostu ryzyka zawału, a dane o nastroju są niejednoznaczne. Kluczowe wnioski Zegarki cofamy w niedzielę 25 października 2",
+      "alt": "Wykres z czterema wynikami ryzyka zawału i przedziałami ufności; wyniki jesienne obejmują linię 1,00, wiosenne leżą nieco na prawo od niej.",
+      "caption": "Po jesiennej zmianie czasu metaanalizy nie pokazują istotnego wzrostu ryzyka zawału; słaby sygnał dotyczy wiosny.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.avif",
+          "sha256": "890cf5b05f54589e8940b4a7d1898146cdd5007aef9fb98a9dbfb72494d197de",
+          "bytes": 17231,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.webp",
+          "sha256": "0c1a646fe52d260bd2271e622082baf50d8f5b902a9a1644694ac49497ea9a1a",
+          "bytes": 30034,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-wykres-zawal-metaanalizy-v1.jpg",
+          "sha256": "7d4c590cc001c161b36083de150d46f6245e5f59bb44385fe67b8c8624350366",
+          "bytes": 71414,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4c772a0859417c93663c9796135e2b70f172893f85890824182d76399ce5716a"
+    },
+    {
+      "placement": "content:6:czy-zmiana-czasu-na-zimowy-moze-pogorszyc-nastro",
+      "role": "content",
+      "heading": "Czy zmiana czasu na zimowy może pogorszyć nastrój?",
+      "context": "Godzina snu więcej brzmi jak prezent, ale wiele osób po pięćdziesiątce zna drugą stronę tej nocy: budzik niepotrzebny, bo oczy otwierają się same, długo przed świtem, a zmrok łapie już w drodze z pracy. Sprawdziliśmy w przepisach i badaniach, co jesienna zmiana czasu naprawdę robi z organizmem, czego się nie bać, na co uważać i czy ten zwyczaj ma przed sobą jeszcze wiele lat. Szybka odpowiedź Zmiana czasu na zimowy w Polsce nastąpi w niedzielę 25 października 2026 roku: o 3:00 cofamy zegarki na 2:00. U osób po 50-tce pierwsza noc bywa dłuższa, ale przez kilka dni częściej zdarzają się wczesne pobudki i gorszy sen. Metaanalizy nie pokazują po jesiennej zmianie istotnego wzrostu ryzyka zawału, a dane o nastroju są niejednoznaczne. Kluczowe wnioski Zegarki cofamy w niedzielę 25 października 2",
+      "alt": "Kobieta po pięćdziesiątce stoi o zmierzchu przy oknie z kubkiem, przyjaciółka kładzie jej dłoń na ramieniu.",
+      "caption": "Wcześniejszy zmierzch bywa trudny; gdy przygnębienie wraca co roku zimą, warto porozmawiać z lekarzem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.avif",
+          "sha256": "6d87090b1119c76c6e7b343d900c6e42b7b7687a091e235e1a30db22e955d306",
+          "bytes": 56040,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.webp",
+          "sha256": "b8e4b1dc8567e1fa73c62bddb6fd01ea426029dcb932e0e10337d9e926622cdd",
+          "bytes": 61830,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-nastroj-zmierzch-v1.jpg",
+          "sha256": "2789b8e44ee128fe5a3004399647654d3bf2af36a955d1722d5b0d5e78d18620",
+          "bytes": 147246,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "fb33bedee8f705753a2af077dd97116437ad8add8580e9131115ac2202cb727f"
+    },
+    {
+      "placement": "content:7:jak-przestawic-zegar-biologiczny-po-zmianie-czas",
+      "role": "content",
+      "heading": "Jak przestawić zegar biologiczny po zmianie czasu?",
+      "context": "Godzina snu więcej brzmi jak prezent, ale wiele osób po pięćdziesiątce zna drugą stronę tej nocy: budzik niepotrzebny, bo oczy otwierają się same, długo przed świtem, a zmrok łapie już w drodze z pracy. Sprawdziliśmy w przepisach i badaniach, co jesienna zmiana czasu naprawdę robi z organizmem, czego się nie bać, na co uważać i czy ten zwyczaj ma przed sobą jeszcze wiele lat. Szybka odpowiedź Zmiana czasu na zimowy w Polsce nastąpi w niedzielę 25 października 2026 roku: o 3:00 cofamy zegarki na 2:00. U osób po 50-tce pierwsza noc bywa dłuższa, ale przez kilka dni częściej zdarzają się wczesne pobudki i gorszy sen. Metaanalizy nie pokazują po jesiennej zmianie istotnego wzrostu ryzyka zawału, a dane o nastroju są niejednoznaczne. Kluczowe wnioski Zegarki cofamy w niedzielę 25 października 2",
+      "alt": "Kobieta i mężczyzna po pięćdziesiątce idą żwawo parkową alejką wśród jesiennych drzew w świetle dnia.",
+      "caption": "Światło dzienne jest najsilniejszym zewnętrznym sygnałem dla zegara biologicznego, dlatego spacer w ciągu dnia to dobry pomysł po zmianie czasu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.avif",
+          "sha256": "a76b36adb263da24c0a58c72046c944b1c4c5cf32260c69f08d81706a6cf7b33",
+          "bytes": 145186,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.webp",
+          "sha256": "6120631b2feb2ee327eff412b5229b3b70980d15be3aab34d19047681c992887",
+          "bytes": 201436,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-spacer-w-swietle-dnia-v1.jpg",
+          "sha256": "8fdb503fbbaab239316dd113cfa0b25f0cf1e8802d5bbad1bef25c083821f5bd",
+          "bytes": 315636,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "27a4b26ab97b28fab8f9285d2a0926c2d3352444c47098b002798920f60db646"
+    },
+    {
+      "placement": "content:8:spacer-po-zmroku-leki-i-urzadzenia-co-sprawdzic-",
+      "role": "content",
+      "heading": "Spacer po zmroku, leki i urządzenia: co sprawdzić w pierwszym tygodniu?",
+      "context": "Godzina snu więcej brzmi jak prezent, ale wiele osób po pięćdziesiątce zna drugą stronę tej nocy: budzik niepotrzebny, bo oczy otwierają się same, długo przed świtem, a zmrok łapie już w drodze z pracy. Sprawdziliśmy w przepisach i badaniach, co jesienna zmiana czasu naprawdę robi z organizmem, czego się nie bać, na co uważać i czy ten zwyczaj ma przed sobą jeszcze wiele lat. Szybka odpowiedź Zmiana czasu na zimowy w Polsce nastąpi w niedzielę 25 października 2026 roku: o 3:00 cofamy zegarki na 2:00. U osób po 50-tce pierwsza noc bywa dłuższa, ale przez kilka dni częściej zdarzają się wczesne pobudki i gorszy sen. Metaanalizy nie pokazują po jesiennej zmianie istotnego wzrostu ryzyka zawału, a dane o nastroju są niejednoznaczne. Kluczowe wnioski Zegarki cofamy w niedzielę 25 października 2",
+      "alt": "Kobieta około sześćdziesiątki idzie poboczem drogi o zmroku, odblaski na ręce i nodze świecą w światłach samochodu.",
+      "caption": "Według straży pożarnej pieszego z odblaskiem kierowca widzi nawet z około 150 metrów, a bez odblasku dopiero z około 20 metrów.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.avif",
+          "sha256": "b682302ddb0b667cbe93f4145800a92db8d15bda86438cde4e81884bde60673e",
+          "bytes": 67778,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.webp",
+          "sha256": "59f4ab9a84abfcecc47464b5d63365459c6cc5e4beb8cee8135b72396722d735",
+          "bytes": 69212,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-odblask-o-zmroku-v1.jpg",
+          "sha256": "6c882a526fff4aa67c9e93b5f6a1039b0aa05407a1676ac5147018dfe24049af",
+          "bytes": 146087,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "9ebbbce1d361fc1fa06be15ea91744869816037043f917199dc3e8c850b54644"
+    },
+    {
+      "placement": "content:9:czy-zmiana-czasu-zostanie-zniesiona",
+      "role": "content",
+      "heading": "Czy zmiana czasu zostanie zniesiona?",
+      "context": "Godzina snu więcej brzmi jak prezent, ale wiele osób po pięćdziesiątce zna drugą stronę tej nocy: budzik niepotrzebny, bo oczy otwierają się same, długo przed świtem, a zmrok łapie już w drodze z pracy. Sprawdziliśmy w przepisach i badaniach, co jesienna zmiana czasu naprawdę robi z organizmem, czego się nie bać, na co uważać i czy ten zwyczaj ma przed sobą jeszcze wiele lat. Szybka odpowiedź Zmiana czasu na zimowy w Polsce nastąpi w niedzielę 25 października 2026 roku: o 3:00 cofamy zegarki na 2:00. U osób po 50-tce pierwsza noc bywa dłuższa, ale przez kilka dni częściej zdarzają się wczesne pobudki i gorszy sen. Metaanalizy nie pokazują po jesiennej zmianie istotnego wzrostu ryzyka zawału, a dane o nastroju są niejednoznaczne. Kluczowe wnioski Zegarki cofamy w niedzielę 25 października 2",
+      "alt": "Oś czasu z sześcioma etapami prac nad zniesieniem zmian czasu w UE, od propozycji z 2018 roku do zmiany na czas letni 28 marca 2027 roku.",
+      "caption": "Komisja Europejska zaproponowała zniesienie zmian czasu w 2018 roku, a jej badanie skutków ma się zakończyć do końca 2026 roku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.avif",
+          "sha256": "d319cccb8d3f7083158317e53903517e358c171e1c9d75974543c952836c16fc",
+          "bytes": 17212,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.webp",
+          "sha256": "14396dcde3d2642f0635b93e8fbd509818dcb35b87067eb49cc41084a963ae7d",
+          "bytes": 20754,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/zmiana-czasu-na-zimowy-po-50-os-czasu-ue-v1.jpg",
+          "sha256": "f4f735902a65e0f8114559b8a39d82bbcb55d4d0401b0d3d613cb0e51b95e9a0",
+          "bytes": 47870,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "9eb8af27ae2240e7af264e9780a0400e1b9b8d86691809d4926fa5428f8f785e"
+    }
+  ],
+  "pdf": {
+    "pages": 9,
+    "text_coverage": 1,
+    "rendered_pages": 9,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/pdf-pages/page-1.png",
+        "sha256": "9228a42eaabfe5c9ef98caebc81555b62191c9bd9509a37b06387b977d47d4b3",
+        "bytes": 655049,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1065,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/pdf-pages/page-2.png",
+        "sha256": "be01b1f49e86f3a8fa43a95b6de59717187b4ca8e92fb00b75601e44eeeebb95",
+        "bytes": 386405,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 57,
+          "width": 1064,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/pdf-pages/page-3.png",
+        "sha256": "b6ed480853fc4a5210171560a64d5c8fef1ca78b665892813c0dfdccaad349b8",
+        "bytes": 471717,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 71,
+          "width": 1050,
+          "height": 1579
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/pdf-pages/page-4.png",
+        "sha256": "559cec955cd33f97e79dea897c856e665f3538dec8eeb3221637ba2ed98bf182",
+        "bytes": 418537,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/pdf-pages/page-5.png",
+        "sha256": "ced175023ebc469b933aa27155ee9cf40fc732bf4dba709eb95ce158360858e8",
+        "bytes": 698324,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 57,
+          "width": 1065,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/pdf-pages/page-6.png",
+        "sha256": "6a85af1099d902d3316e9248fc6a7e824c261f92829d69eb2373821c67b16bd7",
+        "bytes": 1080246,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 56,
+          "width": 1067,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/pdf-pages/page-7.png",
+        "sha256": "a2ed6f167c5dc969df2ed19945fca4713b7a3f960da31f082f512033a325e290",
+        "bytes": 375052,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 58,
+          "width": 1064,
+          "height": 1592
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/pdf-pages/page-8.png",
+        "sha256": "4bf80e7ef186ebee63a33b1085aaca99b415e349a4562226d51eb67a44b38ef9",
+        "bytes": 440744,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 50,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 9,
+        "file": ".tmp/article-preview/zmiana-czasu-na-zimowy-po-50/pdf-pages/page-9.png",
+        "sha256": "401171205cab28ab9fd990a294b1e158ff48b8ce16a3e980b2bdaa96b4cecb2b",
+        "bytes": 269525,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 49,
+          "y": 57,
+          "width": 1067,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+    "reviewed_at": "2026-10-22T09:02:46+02:00",
+    "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "073fdbf7e0b54cf50f0c06473e0c344602162afdd3256c52abf3be69fe89822c",
+        "note": "Obejrzano cały render desktop w pięciu fragmentach; treść, obrazy, tabela, źródła i stopka są kompletne i czytelne."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "9c3730fa5543a22f463fefd526502d2299f086d9fa8bb06540ae12dcf114663a",
+        "note": "Obejrzano cały render mobile w dziewięciu fragmentach; układ jest responsywny, a tekst i obrazy pozostają czytelne."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "6a1ce8be15de5a5f2ca53a51349556a6157d07638eb084a498b46d2a01cb139f",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Hero z kobietą przestawiającą zegar pasuje do tematu; kadr, dłonie i zegar są wiarygodne, bez logo i mylących napisów.",
+        "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+        "reviewed_at": "2026-10-22T09:02:46+02:00",
+        "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF."
+      },
+      {
+        "placement": "content:2:kiedy-zmiana-czasu-na-zimowy-w-2026-roku",
+        "inventory_sha256": "8c911998943f1d85017ce62ef3cb6b022152f1b45bcdc9ff36ad6c20a068a4f4",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "25 października 2026 (niedziela) | godz. 3:00 → 2:00 | cofamy zegarki o 1 godzinę",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://eli.gov.pl/api/acts/DU/2022/539/text.html"
+          ]
+        },
+        "note": "Infografika jest czytelna; data i kierunek zmiany są zgodne z artykułem oraz podanym aktem prawnym.",
+        "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+        "reviewed_at": "2026-10-22T09:02:46+02:00",
+        "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF."
+      },
+      {
+        "placement": "content:3:czy-po-zmianie-czasu-na-zimowy-spimy-dluzej",
+        "inventory_sha256": "b54a65127298afc5ecc20921a86a152dccd904e7b20b5997745c030e4ac7540b",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Objawy snu tydzień przed i tydzień po zmianie czasu: 22,6% → 28%; 3,3% → 7,1%; 8,2% → 12,9%",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC10351306/"
+          ]
+        },
+        "note": "Wykres snu jest ostry i czytelny; wszystkie wartości odpowiadają opisowi w artykule i źródłu CLSA.",
+        "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+        "reviewed_at": "2026-10-22T09:02:46+02:00",
+        "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF."
+      },
+      {
+        "placement": "content:4:dlaczego-po-zmianie-czasu-budzisz-sie-za-wczesni",
+        "inventory_sha256": "e8062c74252b8b348bcd82fd7d96e80d4ea8e5fab2a6b7a173c882e2f20a5a93",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Zdjęcie mężczyzny obudzonego przed świtem trafnie ilustruje sekcję; anatomia, łóżko i zegar są wiarygodne.",
+        "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+        "reviewed_at": "2026-10-22T09:02:46+02:00",
+        "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF."
+      },
+      {
+        "placement": "content:5:czy-jesienna-zmiana-czasu-szkodzi-sercu",
+        "inventory_sha256": "4c772a0859417c93663c9796135e2b70f172893f85890824182d76399ce5716a",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Ryzyko zawału po zmianie czasu: RR 1,04; RR 1,02; OR 1,05; OR 1,01; 1,00 = brak różnicy",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC11526362/",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC6463000/"
+          ]
+        },
+        "note": "Wykres metaanaliz jest czytelny i zgodny z tabelą; przedziały ufności i linia braku różnicy są pokazane poprawnie.",
+        "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+        "reviewed_at": "2026-10-22T09:02:46+02:00",
+        "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF."
+      },
+      {
+        "placement": "content:6:czy-zmiana-czasu-na-zimowy-moze-pogorszyc-nastro",
+        "inventory_sha256": "fb33bedee8f705753a2af077dd97116437ad8add8580e9131115ac2202cb727f",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Scena wsparcia przy wcześniejszym zmierzchu pasuje do sekcji o nastroju; postacie i wnętrze są wiarygodne.",
+        "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+        "reviewed_at": "2026-10-22T09:02:46+02:00",
+        "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF."
+      },
+      {
+        "placement": "content:7:jak-przestawic-zegar-biologiczny-po-zmianie-czas",
+        "inventory_sha256": "27a4b26ab97b28fab8f9285d2a0926c2d3352444c47098b002798920f60db646",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Zdjęcie spaceru w świetle dziennym wspiera zalecenie dotyczące rytmu dobowego; postacie i otoczenie są wiarygodne.",
+        "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+        "reviewed_at": "2026-10-22T09:02:46+02:00",
+        "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF."
+      },
+      {
+        "placement": "content:8:spacer-po-zmroku-leki-i-urzadzenia-co-sprawdzic-",
+        "inventory_sha256": "9ebbbce1d361fc1fa06be15ea91744869816037043f917199dc3e8c850b54644",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Zdjęcie pieszego z odblaskami trafnie ilustruje bezpieczeństwo po zmroku; elementy odblaskowe i droga są wiarygodne.",
+        "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+        "reviewed_at": "2026-10-22T09:02:46+02:00",
+        "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF."
+      },
+      {
+        "placement": "content:9:czy-zmiana-czasu-zostanie-zniesiona",
+        "inventory_sha256": "9eb8af27ae2240e7af264e9780a0400e1b9b8d86691809d4926fa5428f8f785e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "12.09.2018 propozycja KE | 2019 prace utknęły | 2025 polska propozycja | luty 2026 start badania | do końca 2026 wyniki | 28.03.2027 zmiana",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://data.consilium.europa.eu/doc/document/ST-10045-2026-INIT/en/pdf",
+            "https://publications.europa.eu/resource/cellar/95bd5989-226d-11f1-8c3a-01aa75ed71a1.0019.03/DOC_1"
+          ]
+        },
+        "note": "Oś czasu UE jest czytelna i odpowiada opisowi legislacyjnemu; daty oraz etapy są zgodne z dokumentami.",
+        "reviewed_by": "Codex + akceptacja obrazów przez użytkownika",
+        "reviewed_at": "2026-10-22T09:02:46+02:00",
+        "review_method": "Pełne obejrzenie renderów desktop i mobile, dziewięciu obrazów w kontekście oraz wszystkich dziewięciu stron PDF."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "9228a42eaabfe5c9ef98caebc81555b62191c9bd9509a37b06387b977d47d4b3",
+        "note": "Cała strona 1: hero, wprowadzenie, wnioski i początek sekcji są czytelne i nieucięte."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "be01b1f49e86f3a8fa43a95b6de59717187b4ca8e92fb00b75601e44eeeebb95",
+        "note": "Cała strona 2: infografika i sekcja o śnie są czytelne, a stopka kompletna w powiększeniu."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "b6ed480853fc4a5210171560a64d5c8fef1ca78b665892813c0dfdccaad349b8",
+        "note": "Cała strona 3: wykres, tekst i zdjęcie nocnej pobudki mają poprawne proporcje i podpisy."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "559cec955cd33f97e79dea897c856e665f3538dec8eeb3221637ba2ed98bf182",
+        "note": "Cała strona 4: tabela i wykres ryzyka sercowego są ostre, kompletne i bez nakładania."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "ced175023ebc469b933aa27155ee9cf40fc732bf4dba709eb95ce158360858e8",
+        "note": "Cała strona 5: sekcje o nastroju i świetle oraz zdjęcie są czytelne, bez ucięć."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "6a85af1099d902d3316e9248fc6a7e824c261f92829d69eb2373821c67b16bd7",
+        "note": "Cała strona 6: zdjęcia spaceru i odblasku, podpisy oraz tekst mają poprawny układ."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "a2ed6f167c5dc969df2ed19945fca4713b7a3f960da31f082f512033a325e290",
+        "note": "Cała strona 7: oś czasu, plan praktyczny i wszystkie punkty listy są kompletne."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "4bf80e7ef186ebee63a33b1085aaca99b415e349a4562226d51eb67a44b38ef9",
+        "note": "Cała strona 8: FAQ i pierwsza część bibliografii są czytelne i poprawnie numerowane."
+      },
+      {
+        "page": 9,
+        "status": "VERIFIED",
+        "artifact_sha256": "401171205cab28ab9fd990a294b1e158ff48b8ce16a3e980b2bdaa96b4cecb2b",
+        "note": "Cała strona 9: kontynuacja bibliografii i nota prawna są czytelne, bez obcięcia."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 12326,
+    "review_wait_ms": 127474
+  },
+  "errors": []
+}
