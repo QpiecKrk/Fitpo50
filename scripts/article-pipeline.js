@@ -38,6 +38,10 @@ const {
 } = require('./lib/post-publication-monitor');
 const { validatePreviewReport } = require('./lib/article-preview-report');
 const {
+  readDeploymentRegistry,
+  seoPatchesForArticle,
+} = require('./lib/popraw-seo-deployment-registry');
+const {
   EXIT_CODES,
   classifyPipelineFailure,
   contentBlocked,
@@ -77,6 +81,23 @@ function boolOpt(v, fallback) {
   if (['1', 'true', 'yes', 'on'].includes(x)) return true;
   if (['0', 'false', 'no', 'off'].includes(x)) return false;
   return fallback;
+}
+
+function assertSeoPatchOverwriteAllowed({ root, slug, operation, force, allowOverwrite }) {
+  if (operation !== 'UPDATE' || !force || allowOverwrite) return [];
+  let loaded;
+  try {
+    loaded = readDeploymentRegistry(root);
+  } catch (error) {
+    throw environmentFailure(`Nie można odczytać rejestru wdrożeń popraw-seo: ${error.message || error}`, 'SEO_DEPLOYMENT_REGISTRY_INVALID');
+  }
+  const patches = seoPatchesForArticle(loaded.registry, slug);
+  if (!patches.length) return [];
+  const list = patches.map((patch) => `- ${patch.id} (${patch.role}: ${patch.file})`).join('\n');
+  throw contentBlocked(
+    `Aktualizacja ${slug} z --force nadpisałaby wdrożone poprawki popraw-seo z ${path.relative(root, loaded.file)}:\n${list}\nJeśli nadpisanie jest świadome, użyj --allow-overwrite-seo-patches.`,
+    'SEO_PATCH_OVERWRITE_BLOCKED',
+  );
 }
 
 function run(label, cmd, args) {
@@ -282,7 +303,7 @@ function readArticleStageRecord(stageRoot, sourceRoot, slug, input) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
-    console.log('Usage: node scripts/article-pipeline.js --file <CONTENT_READY.fitpo50.json> [--category ciekawe] [--force true|false]');
+    console.log('Usage: node scripts/article-pipeline.js --file <CONTENT_READY.fitpo50.json> [--category ciekawe] [--force true|false] [--allow-overwrite-seo-patches]');
     process.exit(1);
   }
   const stagingInternal = boolOpt(args['staging-internal'], false);
@@ -304,6 +325,7 @@ async function main() {
 
   const category = args.category ? String(args.category) : '';
   const force = boolOpt(args.force, false);
+  const allowOverwriteSeoPatches = boolOpt(args['allow-overwrite-seo-patches'], false);
   const dryRun = boolOpt(args['dry-run'], false);
   const parallelTails = boolOpt(args['parallel-tails'], true);
   const assetsDir = args['assets-dir'] ? path.resolve(root, args['assets-dir']) : path.dirname(input);
@@ -319,6 +341,13 @@ async function main() {
       throw contentBlocked(`Slug ${slug} już istnieje. Aktualizacja wymaga jawnego --force true.`);
     }
     let operation = liveArticleExists ? 'UPDATE' : 'CREATE';
+    assertSeoPatchOverwriteAllowed({
+      root,
+      slug,
+      operation,
+      force,
+      allowOverwrite: allowOverwriteSeoPatches,
+    });
     let transactionId = `article-${slug}-${Date.now()}-${process.pid}`;
     let candidates = promotionCandidates(parsedInput);
     let baseline = snapshotCandidates(root, candidates);
@@ -355,7 +384,13 @@ async function main() {
         if (!dryRun) {
           writePipelineStatus(root, slug, 'AWAITING_REVIEW', {
             next_action: 'REVIEW_VISUAL_ARTIFACTS',
-            next_args: { stage_root: stageRoot, input_file: input, assets_dir: assetsDir, force },
+            next_args: {
+              stage_root: stageRoot,
+              input_file: input,
+              assets_dir: assetsDir,
+              force,
+              allow_overwrite_seo_patches: allowOverwriteSeoPatches,
+            },
           });
           appendTimingReport('article-pipeline-awaiting-review', stepTimings);
         } else {
@@ -458,8 +493,8 @@ async function main() {
   return { workingCopy, artifactCleanup: null };
 }
 
-main()
-  .then((result) => {
+function runCli() {
+  return main().then((result) => {
     tempWorkingCopy = result?.workingCopy || '';
     if (tempWorkingCopy) {
       try {
@@ -492,3 +527,8 @@ main()
     });
     process.exit(failure.exitCode);
   });
+}
+
+if (require.main === module) runCli();
+
+module.exports = { assertSeoPatchOverwriteAllowed, runCli };

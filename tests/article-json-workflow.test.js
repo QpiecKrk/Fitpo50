@@ -24,6 +24,7 @@ const {
 const { buildAboutEntities, normalizeEntities } = require('../scripts/import-article');
 const { validateScope } = require('../scripts/lib/article-scope-guard');
 const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure, resetSameDraft } = require('../scripts/lib/article-repair-attempts');
+const { assertSeoPatchOverwriteAllowed } = require('../scripts/article-pipeline');
 
 const REPO = path.resolve(__dirname, '..');
 
@@ -46,6 +47,37 @@ test('pipeline exit codes distinguish success, review, content blockers and envi
   assert.equal(classifyPipelineFailure(new Error('CONTENT_READY missing')).exitCode, 30);
   assert.equal(classifyPipelineFailure(new Error('spawn ENOENT')).exitCode, 30);
 });
+
+test('forced UPDATE blocks registered popraw-seo patches with exit 20 unless explicitly allowed', () => withTempDir((root) => {
+  const registryDir = path.join(root, 'data', 'reports');
+  fs.mkdirSync(registryDir, { recursive: true });
+  fs.writeFileSync(path.join(registryDir, 'popraw-seo-deployments.json'), `${JSON.stringify({
+    status: 'COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT',
+    targets: [
+      { id: 'BOOST 7', file: 'target.html', source_pages: [{ file: 'linked-source.html' }] },
+    ],
+  })}\n`);
+
+  for (const [slug, expectedRole] of [['target', 'TARGET'], ['linked-source', 'SOURCE_PAGE']]) {
+    let caught;
+    try {
+      assertSeoPatchOverwriteAllowed({ root, slug, operation: 'UPDATE', force: true, allowOverwrite: false });
+    } catch (error) {
+      caught = error;
+    }
+    assert.equal(classifyPipelineFailure(caught).exitCode, EXIT_CODES.CONTENT_BLOCKED);
+    assert.equal(caught.pipelineCode, 'SEO_PATCH_OVERWRITE_BLOCKED');
+    assert.match(caught.message, new RegExp(`BOOST 7 \\(${expectedRole}: ${slug}\\.html\\)`));
+    assert.match(caught.message, /--allow-overwrite-seo-patches/);
+  }
+
+  assert.deepEqual(assertSeoPatchOverwriteAllowed({
+    root, slug: 'target', operation: 'UPDATE', force: true, allowOverwrite: true,
+  }), []);
+  assert.deepEqual(assertSeoPatchOverwriteAllowed({
+    root, slug: 'target', operation: 'CREATE', force: true, allowOverwrite: false,
+  }), []);
+}));
 
 test('entity sameAs accepts only the verified exact pair and preserves name-only Thing', () => {
   assert.deepEqual(normalizeEntities(['Diabetes']), [{ '@type': 'Thing', name: 'Diabetes' }]);
@@ -196,7 +228,7 @@ test('article:add prowadzi poprawny fixture przez przygotowanie i atom publikacy
   const prepared = path.join(outputDir, 'kontrolowany-fixture.fitpo50.json');
   fs.writeFileSync(source, `${JSON.stringify({ slug: 'kontrolowany-fixture', title: 'Kontrolowany fixture' })}\n`);
   const calls = [];
-  const status = executeArticleAdd({ file: source, 'output-dir': outputDir }, {
+  const status = executeArticleAdd({ file: source, 'output-dir': outputDir, 'allow-overwrite-seo-patches': true }, {
     runCommand(command, args) {
       calls.push({ command, args });
       if (args[0] === 'scripts/article-json-workbench.js') {
@@ -212,6 +244,7 @@ test('article:add prowadzi poprawny fixture przez przygotowanie i atom publikacy
   assert.equal(calls[0].args[0], 'scripts/article-json-workbench.js');
   assert.equal(calls[1].args[0], 'scripts/article-pipeline.js');
   assert.ok(calls[1].args.includes(prepared));
+  assert.ok(calls[1].args.includes('--allow-overwrite-seo-patches'));
 }));
 
 test('one-command controller reuses only a hash-identical CONTENT_READY package', () => withTempDir((dir) => {

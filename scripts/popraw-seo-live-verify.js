@@ -3,12 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 const { verifyLiveResponses } = require('./lib/popraw-seo-live-verifier');
+const { deploymentRegistryPath } = require('./lib/popraw-seo-deployment-registry');
 
 const ROOT = process.cwd();
 
 function parseArgs(argv) {
   const out = {
-    manifest: path.join(ROOT, 'data', 'reports', 'popraw-seo-deployments.json'),
+    manifest: deploymentRegistryPath(ROOT),
     outputDir: path.join(ROOT, 'data', 'reports'),
     retries: 4,
     delayMs: 15000,

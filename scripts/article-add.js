@@ -176,8 +176,9 @@ function applyReview({ root, slug, stageRoot, reviewFile, runCommand }) {
   if (result.status !== 0) throw contentBlocked(`Visual review nie przeszedł (exit ${result.status}).`);
 }
 
-function publishPrepared({ preparedFile, assetsDir, force, parallelTails, stageRoot, runCommand }) {
+function publishPrepared({ preparedFile, assetsDir, force, parallelTails, stageRoot, allowOverwriteSeoPatches, runCommand }) {
   const publishArgs = ['scripts/article-pipeline.js', '--file', preparedFile, '--assets-dir', assetsDir, '--force', force ? 'true' : 'false'];
+  if (allowOverwriteSeoPatches) publishArgs.push('--allow-overwrite-seo-patches');
   if (parallelTails !== undefined) publishArgs.push('--parallel-tails', parallelTails ? 'true' : 'false');
   if (stageRoot) publishArgs.push('--promote-stage', stageRoot);
   const result = runCommand('node', publishArgs, { stdio: 'inherit' });
@@ -215,6 +216,7 @@ function continueAwaitingReview(context, state, args, runCommand) {
     force: boolOpt(next.force, context.force),
     parallelTails: context.parallelTails,
     stageRoot,
+    allowOverwriteSeoPatches: boolOpt(next.allow_overwrite_seo_patches, context.allowOverwriteSeoPatches),
     runCommand,
   });
 }
@@ -223,7 +225,7 @@ function executeArticleAdd(args, dependencies = {}) {
   const root = dependencies.root || ROOT;
   const runCommand = dependencies.runCommand || run;
   if (args.help || args.h) {
-    console.log('Użycie: npm run article:add -- --file <draft.fitpo50.json> [--assets-dir <katalog>] [--dry-run] [--json] [--force true] [--review-file <review.json>] [--status true] [--restart true]');
+    console.log('Użycie: npm run article:add -- --file <draft.fitpo50.json> [--assets-dir <katalog>] [--dry-run] [--json] [--force true] [--allow-overwrite-seo-patches] [--review-file <review.json>] [--status true] [--restart true]');
     return EXIT_CODES.SUCCESS;
   }
   if (!args.file) throw contentBlocked('Podaj --file <draft.fitpo50.json>.');
@@ -236,6 +238,7 @@ function executeArticleAdd(args, dependencies = {}) {
     source,
     sourceSha256: sha256File(source),
     force: boolOpt(args.force, false),
+    allowOverwriteSeoPatches: boolOpt(args['allow-overwrite-seo-patches'], false),
     parallelTails: args['parallel-tails'] === undefined ? undefined : boolOpt(args['parallel-tails'], true),
   };
 
@@ -322,6 +325,7 @@ function executeArticleAdd(args, dependencies = {}) {
     assetsDir: path.dirname(preparedFile),
     force: context.force,
     parallelTails: context.parallelTails,
+    allowOverwriteSeoPatches: context.allowOverwriteSeoPatches,
     runCommand,
   });
   if (status === EXIT_CODES.AWAITING_REVIEW) {
