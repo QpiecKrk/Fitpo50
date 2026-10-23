@@ -4,6 +4,7 @@
   RewriteCond %{REQUEST_URI} !^/\.well-known(?:/|$) [NC]
   RewriteRule (^|/)\. - [F,L]
   RewriteRule \.md$ - [F,L,NC]
+  RewriteRule ^(?:init-db|init-hash)\.php$ - [F,L,NC]
 </IfModule>
 
 # === Security Headers ===

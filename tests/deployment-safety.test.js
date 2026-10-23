@@ -193,6 +193,7 @@ test('htaccess blocks repository internals and preserves public site paths', () 
     '/__pycache__/module.pyc', '/tests/deployment-safety.test.js', '/scripts/export_site.sh',
     '/docs/command-registry.md', '/admin/CHANGELOG.md', '/.cursorrules', '/.editorconfig',
     '/.github/workflows/assets-hygiene.yml', '/.githooks/pre-push', '/article-template-bento.html',
+    '/admin/init-db.php', '/admin/init-hash.php',
   ];
   const allowed = [
     '/index.html', '/porady.html', '/assets/main.css', '/assets/example.webp',
@@ -210,9 +211,9 @@ test('htaccess blocks repository internals and preserves public site paths', () 
   }
 });
 
-test('admin htaccess blocks markdown and dotfiles but preserves well-known', () => {
+test('admin htaccess blocks markdown, dotfiles and retired init endpoints but preserves well-known', () => {
   const source = fs.readFileSync(path.join(ROOT, 'admin', '.htaccess'), 'utf8');
-  const blocked = ['/CHANGELOG.md', '/deploy-notes.md', '/.cursorrules', '/.editorconfig', '/.github/workflows/test.yml', '/.githooks/pre-push'];
+  const blocked = ['/CHANGELOG.md', '/deploy-notes.md', '/.cursorrules', '/.editorconfig', '/.github/workflows/test.yml', '/.githooks/pre-push', '/init-db.php', '/init-hash.php'];
   for (const pathname of blocked) assert.equal(requestDeniedByHtaccess(source, pathname), true, `oczekiwano 403 dla admin${pathname}`);
   assert.equal(requestDeniedByHtaccess(source, '/.well-known/acme-challenge/token'), false);
   for (const pathname of ['/CHANGELOG.md', '/deploy-notes.md', '/init-db.php', '/init-hash.php']) {

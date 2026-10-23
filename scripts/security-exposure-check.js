@@ -11,7 +11,7 @@ const SENSITIVE_PATHS = Object.freeze([
   '/scripts/export_site.sh', '/tests/deployment-safety.test.js', '/docs/command-registry.md',
   '/.venv/bin/python', '/__pycache__/module.pyc', '/admin/CHANGELOG.md', '/data/entities.json', '/_site/index.html',
   '/.env', '/.env.local', '/admin/config.php', '/admin/database.sqlite', '/_site/admin/database.sqlite',
-  '/article-template-bento.html',
+  '/article-template-bento.html', '/admin/init-db.php', '/admin/init-hash.php',
 ]);
 
 const ADMIN_SENSITIVE_PATHS = Object.freeze([
