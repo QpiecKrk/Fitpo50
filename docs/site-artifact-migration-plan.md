@@ -9,7 +9,7 @@ Obecnie `_site/` jest częścią workflow deployu i bywa commitowany. Nie należ
 ## Etap 1 — Bezpieczeństwo
 
 - Prywatne pliki admina nie mogą trafiać do `_site`.
-- `admin/config.php`, `config*.php`, `init-db.php`, `init-hash.php` są wykluczone z eksportu.
+- `admin/config.php` i `config*.php` są wykluczone z eksportu; `admin/init-db.php` i `admin/init-hash.php` nie istnieją w repozytorium, a inicjalizacja odbywa się z CLI.
 - Deploy musi działać bez init-skryptów i bez configu w repo.
 
 ## Etap 2 — Kontrola driftu

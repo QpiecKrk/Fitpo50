@@ -12,7 +12,7 @@
 - [ ] `admin/bootstrap.php` jest wgrany — pokazuje czytelny błąd, gdy brakuje `config.php` lub tabel
 - [ ] Prywatna kopia `config.php` istnieje poza `public_html`, np. w katalogu domowym konta
 - [ ] `admin/uploads/*` jest w `.gitignore`  
-- [ ] `init-hash.php` i `init-db.php` **nie są linkowane nigdzie** w kodzie — tylko wywołujesz je raz ręcznie przez URL, po czym kasują się same  
+- [ ] `init-hash.php` i `init-db.php` nie istnieją w repo ani na serwerze; konfigurację wykonujesz wyłącznie z CLI według `docs/admin-cli-setup.md`
 - [ ] Basic Auth (Directory Privacy) jest aktywne na Hostingerze dla `admin.fitpo50.pl`
 
 ---
@@ -56,48 +56,13 @@ chmod 600 /home/u542460614/admin-config.fitpo50.php
 
 ---
 
-### 3. Zainicjalizuj bazę danych
+### 3. Wygeneruj hash i utwórz tabele przez CLI
 
-Otwórz w przeglądarce (będziesz zapytany o Basic Auth):
-
-```
-https://admin.fitpo50.pl/init-db.php?token=CHANGE_ME
-```
-
-- Skrypt tworzy tabele `entries`, `media`, `failed_logins`
-- **Ustaw własny token** w kodzie skryptu przed uruchomieniem
-- **Kasuje się automatycznie** po wykonaniu
-- Jeśli nie usunął się sam → usuń `init-db.php` ręcznie przez FTP
+Połącz się przez SSH i wykonaj procedurę z [`docs/admin-cli-setup.md`](../docs/admin-cli-setup.md). Nie kopiuj do katalogu publicznego żadnych jednorazowych skryptów PHP.
 
 ---
 
-### 4. Wygeneruj hash hasła
-
-> ⚠️ `init-hash.php` **nie jest podlinkowany nigdzie** — wywołujesz go tylko raz, tu.
-
-```
-https://admin.fitpo50.pl/init-hash.php?token=CHANGE_ME&pass=TwojeWybraneHaslo
-```
-
-- **Ustaw własny token** w kodzie skryptu przed uruchomieniem
-- Skrypt wyświetli hash bcrypt dla Twojego hasła
-- **Skopiuj hash** do `config.php` → `PASSWORD_HASH`
-- **Kasuje się automatycznie** po wykonaniu
-- Jeśli nie usunął się sam → usuń `init-hash.php` ręcznie przez FTP
-
----
-
-### 5. Wklej hash do config.php
-
-Otwórz `config.php` na serwerze (przez menedżer plików lub SSH) i uzupełnij:
-
-```php
-define('PASSWORD_HASH', '$2y$12$...TWÓJ_HASH...');
-```
-
----
-
-### 6. Sprawdź uprawnienia katalogów
+### 4. Sprawdź uprawnienia katalogów
 
 ```bash
 chmod 755 /home/u542460614/domains/fitpo50.pl/public_html/admin/
@@ -107,7 +72,7 @@ chmod 600 /home/u542460614/domains/fitpo50.pl/public_html/admin/config.php
 
 ---
 
-### 7. Sprawdź konfigurację z SSH
+### 5. Sprawdź konfigurację z SSH
 
 ```bash
 cd /home/u542460614/domains/fitpo50.pl/public_html/admin
@@ -120,7 +85,7 @@ Jeśli brakuje `config.php`, danych bazy albo tabel, panel pokaże teraz konkret
 
 ---
 
-### 8. Testuj panel
+### 6. Testuj panel
 
 Przejdź na `https://admin.fitpo50.pl` → Basic Auth → strona logowania PHP.
 
@@ -148,8 +113,6 @@ admin/
 ├── bootstrap.php          ← bezpieczne ładowanie configu i komunikaty awarii
 ├── config.php             ← ⚠️ NIE W REPO — tworzysz ręcznie na serwerze
 ├── auth.php               ← middleware: sesja, PDO, CSRF, rate limit
-├── init-db.php            ← jednorazowy init DB — kasuje się sam
-├── init-hash.php          ← jednorazowy generator hasha — kasuje się sam
 ├── actions/
 │   ├── save.php           ← zapis wpisu + generowanie HTML + kalendarz
 │   ├── delete.php         ← usunięcie + cleanup

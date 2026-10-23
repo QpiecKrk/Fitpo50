@@ -47,9 +47,6 @@ code{background:#f1eee8;border-radius:6px;padding:2px 6px}
 }
 
 $adminConfigPath = __DIR__ . '/config.php';
-$adminEntryScript = basename((string)($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
-$isAdminSetupScript = in_array($adminEntryScript, ['init-db.php', 'init-hash.php'], true);
-
 if (!is_file($adminConfigPath)) {
     adminRenderSetupError('Błąd konfiguracji panelu FitPo50', [
         'Brakuje pliku <code>admin/config.php</code>.',
@@ -93,9 +90,7 @@ if ($missingConfigConstants) {
 }
 
 $placeholderConfigConstants = [];
-$placeholderCheckedConstants = $isAdminSetupScript
-    ? ['DB_NAME', 'DB_USER', 'DB_PASS']
-    : ['DB_NAME', 'DB_USER', 'DB_PASS', 'PASSWORD_HASH'];
+$placeholderCheckedConstants = ['DB_NAME', 'DB_USER', 'DB_PASS', 'PASSWORD_HASH'];
 
 foreach ($placeholderCheckedConstants as $constantName) {
     $value = trim((string)constant($constantName));
@@ -111,7 +106,7 @@ if ($placeholderConfigConstants) {
     ]);
 }
 
-if (!$isAdminSetupScript && password_get_info(PASSWORD_HASH)['algoName'] === 'unknown') {
+if (password_get_info(PASSWORD_HASH)['algoName'] === 'unknown') {
     adminRenderSetupError('Błąd konfiguracji panelu FitPo50', [
         'Stała <code>PASSWORD_HASH</code> w <code>admin/config.php</code> nie jest poprawnym hashem hasła.',
         'Wygeneruj nowy hash przez <code>password_hash</code> i wklej pełną wartość zaczynającą się zwykle od <code>$2y$</code>.',

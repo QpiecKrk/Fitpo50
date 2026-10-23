@@ -220,6 +220,19 @@ test('admin htaccess blocks markdown and dotfiles but preserves well-known', () 
   }
 });
 
+test('admin setup is CLI-only and public init scripts do not exist', () => {
+  assert.equal(fs.existsSync(path.join(ROOT, 'admin', 'init-db.php')), false);
+  assert.equal(fs.existsSync(path.join(ROOT, 'admin', 'init-hash.php')), false);
+  const guide = fs.readFileSync(path.join(ROOT, 'docs', 'admin-cli-setup.md'), 'utf8');
+  const schema = fs.readFileSync(path.join(ROOT, 'docs', 'admin-schema.sql'), 'utf8');
+  assert.match(guide, /php -r/);
+  assert.match(guide, /mysql --host=/);
+  assert.doesNotMatch(guide, /https?:\/\/admin\.fitpo50\.pl\/init-/);
+  assert.match(schema, /CREATE TABLE IF NOT EXISTS entries/);
+  assert.match(schema, /CREATE TABLE IF NOT EXISTS media/);
+  assert.match(schema, /CREATE TABLE IF NOT EXISTS failed_logins/);
+});
+
 test('post-push validation never submits IndexNow automatically', () => {
   const finalize = fs.readFileSync(path.join(ROOT, 'scripts', 'deployment-finalize.js'), 'utf8');
   const push = fs.readFileSync(path.join(ROOT, 'scripts', 'push_one.sh'), 'utf8');
