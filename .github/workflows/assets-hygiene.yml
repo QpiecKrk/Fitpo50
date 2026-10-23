@@ -16,7 +16,7 @@ on:
     - cron: "20 3 * * *"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   cleanup:
@@ -41,15 +41,14 @@ jobs:
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.dry_run != true }}
         run: node scripts/assets-trash-retention.js --days "${{ github.event_name == 'workflow_dispatch' && inputs.days || '14' }}"
 
-      - name: Commit cleanup changes
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.dry_run != true }}
-        run: |
-          if git diff --quiet; then
-            echo "No cleanup changes to commit."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "chore(assets): prune expired files from assets trash"
-          git push
+      - name: Write assets audit report
+        if: ${{ always() }}
+        run: node scripts/assets-audit.js --report data/reports/assets-audit.json
+
+      - name: Upload assets hygiene report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: assets-hygiene-report
+          path: data/reports/assets-audit.json
+          if-no-files-found: warn

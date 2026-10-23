@@ -9,8 +9,8 @@ const ASSETS_DIR = path.join(ROOT, 'assets');
 const SITE_DIR = path.join(ROOT, '_site');
 const IMAGE_EXTS = new Set(['.avif', '.webp', '.jpg', '.jpeg', '.png', '.gif', '.svg', '.ico']);
 const DEFAULT_EXCLUDE_PREFIXES = ['assets/trash/', 'assets/pdf/', 'assets/news/', 'assets/data/'];
-const IGNORE_DIRS = new Set(['.git', 'node_modules', '_site', 'assets/trash']);
-const TEXT_FILE_EXTS = new Set(['.html', '.css', '.js', '.json']);
+const IGNORE_DIRS = new Set(['.git', 'node_modules', '_site', '.venv', '__pycache__', 'assets/trash']);
+const TEXT_FILE_EXTS = new Set(['.html', '.css', '.js', '.json', '.php', '.py', '.txt', '.xml', '.md']);
 
 function parseArgs(argv) {
   const out = {
@@ -35,11 +35,11 @@ function normalizeSlashes(p) {
   return String(p || '').replace(/\\/g, '/');
 }
 
-function relativeFromRoot(absPath) {
-  return normalizeSlashes(path.relative(ROOT, absPath));
+function relativeFromRoot(absPath, root = ROOT) {
+  return normalizeSlashes(path.relative(root, absPath));
 }
 
-function walk(dir, shouldIncludeFile, out = []) {
+function walk(dir, shouldIncludeFile, out = [], root = ROOT) {
   if (!fs.existsSync(dir)) return out;
   const stack = [dir];
   while (stack.length) {
@@ -47,7 +47,7 @@ function walk(dir, shouldIncludeFile, out = []) {
     const entries = fs.readdirSync(current, { withFileTypes: true });
     for (const entry of entries) {
       const abs = path.join(current, entry.name);
-      const rel = relativeFromRoot(abs);
+      const rel = relativeFromRoot(abs, root);
       if (entry.isSymbolicLink()) {
         if (IGNORE_DIRS.has(entry.name)) continue;
         throw new Error(`Symlink blokuje audyt assetów: ${abs}`);
@@ -65,8 +65,8 @@ function walk(dir, shouldIncludeFile, out = []) {
   return out;
 }
 
-function isAssetImage(absPath, relPath) {
-  const rel = normalizeSlashes(relPath || relativeFromRoot(absPath));
+function isAssetImage(absPath, relPath, root = ROOT) {
+  const rel = normalizeSlashes(relPath || relativeFromRoot(absPath, root));
   if (!rel.startsWith('assets/')) return false;
   if (DEFAULT_EXCLUDE_PREFIXES.some((prefix) => rel.startsWith(prefix))) return false;
   return IMAGE_EXTS.has(path.extname(rel).toLowerCase());
@@ -145,6 +145,29 @@ function collectRefsFromNewsJson(text, sink) {
   }
 }
 
+function collectAssetAudit(root = ROOT) {
+  const assetsDir = path.join(root, 'assets');
+  if (!fs.existsSync(assetsDir)) throw new Error(`Brak katalogu assets/: ${assetsDir}`);
+  const assetFiles = walk(assetsDir, (abs, rel) => isAssetImage(abs, rel, root), [], root)
+    .map((abs) => relativeFromRoot(abs, root))
+    .sort();
+  const referenced = new Set();
+  const textFiles = walk(root, (abs) => isTextSource(abs), [], root)
+    .map((abs) => relativeFromRoot(abs, root))
+    .filter((rel) => !rel.startsWith('assets/'))
+    .sort();
+
+  for (const rel of textFiles) {
+    const abs = path.join(root, rel);
+    const text = fs.readFileSync(abs, 'utf8');
+    collectRefsFromText(text, rel, referenced);
+    if (rel === 'data/news-live.json') collectRefsFromNewsJson(text, referenced);
+  }
+
+  const unused = assetFiles.filter((rel) => !referenced.has(rel));
+  return { assetFiles, referenced, unused, usedCount: assetFiles.length - unused.length };
+}
+
 function ensureDir(absDir) {
   fs.mkdirSync(absDir, { recursive: true });
 }
@@ -187,25 +210,7 @@ function main() {
     process.exit(1);
   }
 
-  const assetFiles = walk(ASSETS_DIR, (abs, rel) => isAssetImage(abs, rel))
-    .map((abs) => relativeFromRoot(abs))
-    .sort();
-  const referenced = new Set();
-
-  const textFiles = walk(ROOT, (abs) => isTextSource(abs))
-    .map((abs) => relativeFromRoot(abs))
-    .filter((rel) => !rel.startsWith('assets/'))
-    .sort();
-
-  for (const rel of textFiles) {
-    const abs = path.join(ROOT, rel);
-    const text = fs.readFileSync(abs, 'utf8');
-    collectRefsFromText(text, rel, referenced);
-    if (rel === 'data/news-live.json') collectRefsFromNewsJson(text, referenced);
-  }
-
-  const unused = assetFiles.filter((rel) => !referenced.has(rel));
-  const usedCount = assetFiles.length - unused.length;
+  const { assetFiles, referenced, unused, usedCount } = collectAssetAudit(ROOT);
 
   const summary = {
     scanned_at: new Date().toISOString(),
@@ -278,4 +283,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { parseArgs };
+module.exports = { collectAssetAudit, isTextSource, parseArgs };
