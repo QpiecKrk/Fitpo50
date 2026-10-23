@@ -83,7 +83,8 @@ test('PR workflow runs Node tests and typecheck with read-only permissions', () 
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/patch-contract-tests.yml'), 'utf8');
   assert.match(workflow, /pull_request:/);
   assert.match(workflow, /contents: read/);
-  assert.match(workflow, /node --test tests\/popraw-seo-automation.test.js/);
+  assert.match(workflow, /^\s*- run: node --test\s*$/m);
+  assert.doesNotMatch(workflow, /node --test tests\//);
   assert.match(workflow, /npm run typecheck/);
   assert.doesNotMatch(workflow, /git push|deployment:|pull_request_target/);
 });

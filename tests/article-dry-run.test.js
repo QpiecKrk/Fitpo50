@@ -62,7 +62,7 @@ test('article:add --dry-run returns every fixture problem as structured JSON wit
   assert.ok(report.diagnostics.every((item) => item.path && item.class && item.error_code));
 });
 
-test('dry-run valid flow reaches desktop, mobile and PDF review without repository promotion', () => {
+test('dry-run forwards the SEO overwrite exception and reaches review without repository promotion', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-dry-run-test-'));
   const input = path.join(temp, 'valid.fitpo50.json');
   const prepared = path.join(temp, 'ready', 'valid.fitpo50.json');
@@ -71,7 +71,7 @@ test('dry-run valid flow reaches desktop, mobile and PDF review without reposito
   fs.writeFileSync(input, '{"slug":"valid"}\n');
   fs.writeFileSync(prepared, '{"slug":"valid"}\n');
   const calls = [];
-  const report = runDryRun({ file: input, 'assets-dir': temp }, {
+  const report = runDryRun({ file: input, 'assets-dir': temp, 'allow-overwrite-seo-patches': 'true' }, {
     validateInput: () => [],
     createWorkspace: () => temp,
     disposeWorkspace: () => {},
@@ -86,5 +86,13 @@ test('dry-run valid flow reaches desktop, mobile and PDF review without reposito
   assert.match(report.artifacts.mobile, /mobile\.png$/);
   assert.match(report.artifacts.pdf_pages, /pdf-pages$/);
   assert.ok(calls.some((args) => args.includes('--dry-run')));
+  const pipelineArgs = calls.find((args) => args.some((item) => item.endsWith('article-pipeline.js')));
+  assert.ok(pipelineArgs.includes('--allow-overwrite-seo-patches'));
   fs.rmSync(temp, { recursive: true, force: true });
+});
+
+test('dry-run documentation states fail-fast behavior instead of promising the whole chain', () => {
+  const registry = fs.readFileSync(path.join(ROOT, 'docs/command-registry.md'), 'utf8');
+  assert.match(registry, /zatrzymuje się na pierwszym blokującym etapie/);
+  assert.doesNotMatch(registry, /--dry-run --json` przechodzi cały łańcuch/);
 });

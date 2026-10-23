@@ -142,13 +142,14 @@ async function requestUrl(url, timeout, options = {}) {
   }
 }
 
-async function requestSourceUrl(url, items, timeout, options = {}) {
+async function requestSourceUrl(url, sourceRecord, timeout, options = {}) {
   const requester = options.request || requestUrl;
   const requestOptions = { ...options };
   delete requestOptions.request;
   const primary = await requester(url, timeout, requestOptions);
   if (primary.url_status !== 'blocked_by_publisher' || ![403, 405].includes(Number(primary.http_status))) return { ...primary, checked_via: 'primary_url' };
-  const fallbackUrl = String((Array.isArray(items) ? items : []).find((item) => /^https:\/\//i.test(String(item?.fallback_url || '')))?.fallback_url || '').trim();
+  const fallbackUrl = String(sourceRecord?.fallback_url || '').trim();
+  if (fallbackUrl && !/^https:\/\//i.test(fallbackUrl)) return { ...primary, checked_via: 'primary_url' };
   if (!fallbackUrl) return { ...primary, checked_via: 'primary_url' };
   const fallback = await requester(fallbackUrl, timeout, requestOptions);
   return {
@@ -171,6 +172,11 @@ function fixtureRequester(file) {
   };
 }
 
+function sourceRecordForVerification(groupedRecords) {
+  return (Array.isArray(groupedRecords) ? groupedRecords : [])
+    .find((record) => record?.kind === 'source')?.item || null;
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
@@ -181,15 +187,15 @@ async function main() {
   if (!fs.existsSync(file)) throw new Error(`Brak pliku: ${file}`);
   const json = JSON.parse(fs.readFileSync(file, 'utf8'));
   const collections = [
-    ...(Array.isArray(json.sources) ? json.sources : []),
-    ...(Array.isArray(json.faq_research) ? json.faq_research : []),
+    ...(Array.isArray(json.sources) ? json.sources.map((item) => ({ item, kind: 'source' })) : []),
+    ...(Array.isArray(json.faq_research) ? json.faq_research.map((item) => ({ item, kind: 'faq' })) : []),
   ];
   const urlToItems = new Map();
-  collections.forEach((item) => {
+  collections.forEach(({ item, kind }) => {
     const url = String(item?.url || item?.source_url || item?.sourceUrl || '').trim();
     if (!/^https?:\/\//i.test(url)) return;
     if (!urlToItems.has(url)) urlToItems.set(url, []);
-    urlToItems.get(url).push(item);
+    urlToItems.get(url).push({ item, kind });
   });
   const today = new Date().toISOString().slice(0, 10);
   const cacheFile = path.resolve(process.cwd(), args['cache-file'] || path.join('.cache', 'article-evidence-urls.json'));
@@ -198,10 +204,12 @@ async function main() {
   const entries = [...urlToItems.entries()];
   const request = args['http-fixture'] ? fixtureRequester(args['http-fixture']) : requestUrl;
   const results = await Promise.all(entries.map(async ([url, items]) => {
-    const captureAutocomplete = items.some((item) => String(item?.source_type || item?.sourceType || '').toLowerCase() === 'autocomplete');
+    const records = items.map((record) => record.item);
+    const sourceRecord = sourceRecordForVerification(items);
+    const captureAutocomplete = records.some((item) => String(item?.source_type || item?.sourceType || '').toLowerCase() === 'autocomplete');
     const result = (!args.refresh && cachedResult(cache, url, nowMs, args['cache-ttl-days'], captureAutocomplete))
-      || await requestSourceUrl(url, items, args.timeout, { captureAutocomplete, request });
-    const autocompleteItem = items.find((item) => String(item?.source_type || item?.sourceType || '').toLowerCase() === 'autocomplete');
+      || await requestSourceUrl(url, sourceRecord, args.timeout, { captureAutocomplete, request });
+    const autocompleteItem = records.find((item) => String(item?.source_type || item?.sourceType || '').toLowerCase() === 'autocomplete');
     const suggestion = autocompleteItem ? findExactAutocompleteSuggestion(autocompleteItem.question, result.suggestions) : '';
     const verification = {
       checked_at: today,
@@ -274,4 +282,5 @@ module.exports = {
   readCache,
   requestUrl,
   requestSourceUrl,
+  sourceRecordForVerification,
 };

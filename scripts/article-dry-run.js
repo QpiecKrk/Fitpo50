@@ -27,6 +27,14 @@ function parseArgs(argv) {
   return out;
 }
 
+function boolOpt(value, fallback = false) {
+  if (value === undefined || value === null || value === '') return fallback;
+  const normalized = String(value).trim().toLowerCase();
+  if (['1', 'true', 'yes', 'on'].includes(normalized)) return true;
+  if (['0', 'false', 'no', 'off'].includes(normalized)) return false;
+  return fallback;
+}
+
 function inferJsonPath(message) {
   const text = String(message || '');
   const indexed = text.match(/\b(sections|sources|evidence_claims|answer_blocks|faq_research|image_prompts_v4|image_prompts|key_takeaways)\[(\d+)\](?:\.([a-zA-Z0-9_]+))?/);
@@ -124,7 +132,9 @@ function runDryRun(args, dependencies = {}) {
     }
     const prepared = String(workbench.stdout || '').match(/^\[ARTICLE-JSON\] JSON: (.+)$/m)?.[1]?.trim();
     if (!prepared) throw new Error('WorkBench nie zwrócił ścieżki CONTENT_READY.');
-    const pipeline = spawn('node', ['scripts/article-pipeline.js', '--file', prepared, '--assets-dir', path.dirname(prepared), '--force', 'true', '--dry-run', 'true'], { cwd: ROOT, encoding: 'utf8' });
+    const pipelineArgs = ['scripts/article-pipeline.js', '--file', prepared, '--assets-dir', path.dirname(prepared), '--force', 'true', '--dry-run', 'true'];
+    if (boolOpt(args['allow-overwrite-seo-patches'], false)) pipelineArgs.push('--allow-overwrite-seo-patches');
+    const pipeline = spawn('node', pipelineArgs, { cwd: ROOT, encoding: 'utf8' });
     const stageRoot = String(`${pipeline.stdout || ''}\n${pipeline.stderr || ''}`).match(/^\[AWAITING_VISUAL_REVIEW\] (.+)$/m)?.[1]?.trim() || '';
     if (pipeline.status === 10 && stageRoot) {
       keep = true;
@@ -155,4 +165,4 @@ if (require.main === module) {
   try { main(); } catch (error) { console.error(`[ARTICLE-DRY-RUN][FAIL] ${error.message || error}`); process.exitCode = 30; }
 }
 
-module.exports = { diagnostic, exitCodeForReport, inferJsonPath, parseArgs, runDryRun, validateInput };
+module.exports = { boolOpt, diagnostic, exitCodeForReport, inferJsonPath, parseArgs, runDryRun, validateInput };

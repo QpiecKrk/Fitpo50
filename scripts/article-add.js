@@ -221,7 +221,7 @@ function continueAwaitingReview(context, state, args, runCommand) {
   });
 }
 
-function executeArticleAdd(args, dependencies = {}) {
+function executeArticleAddCore(args, dependencies = {}) {
   const root = dependencies.root || ROOT;
   const runCommand = dependencies.runCommand || run;
   if (args.help || args.h) {
@@ -246,6 +246,7 @@ function executeArticleAdd(args, dependencies = {}) {
     const dryArgs = ['scripts/article-dry-run.js', '--file', source, '--assets-dir', path.resolve(args['assets-dir'] || path.dirname(source))];
     if (boolOpt(args.json, false)) dryArgs.push('--json');
     if (args['http-fixture']) dryArgs.push('--http-fixture', path.resolve(args['http-fixture']));
+    if (context.allowOverwriteSeoPatches) dryArgs.push('--allow-overwrite-seo-patches');
     const result = runCommand('node', dryArgs, { stdio: 'inherit' });
     ensureSuccessfulStart(result, 'Dry-run artykułu');
     return Number(result.status);
@@ -291,10 +292,6 @@ function executeArticleAdd(args, dependencies = {}) {
   } else if (packageHashesMatch(source, assetsDir, preparedFile)) {
     console.log('[ARTICLE-ADD] Faza 1/3: REUSED — JSON i obrazy nie zmieniły się od ostatniego CONTENT_READY.');
   } else {
-    const attempts = readAttemptState(root, slug, context.sourceSha256);
-    if (attempts.repair_attempts >= MAX_REPAIR_ATTEMPTS) {
-      throw contentBlocked(`Przekroczono limit ${MAX_REPAIR_ATTEMPTS} prób automatycznej naprawy dla tej wersji draftu. Popraw draft u Pisarza albo użyj jawnego --restart true.`);
-    }
     console.log('[ARTICLE-ADD] Faza 1/3: treść, źródła, FAQ, intencja, linki i media.');
     const prepareArgs = ['scripts/article-json-workbench.js', '--file', source, '--assets-dir', assetsDir, '--force', context.force ? 'true' : 'false'];
     if (args['output-dir']) prepareArgs.push('--output-dir', path.resolve(args['output-dir']));
@@ -304,9 +301,6 @@ function executeArticleAdd(args, dependencies = {}) {
     ensureSuccessfulStart(prepared, 'Przygotowanie JSON-u');
     if (prepared.status !== 0) {
       const isContentFailure = prepared.status === EXIT_CODES.CONTENT_BLOCKED || prepared.status === 2;
-      if (isContentFailure) {
-        recordRepairFailure(root, slug, context.sourceSha256, { stage: 'article-json-workbench' });
-      }
       writePipelineStatus(root, slug, isContentFailure ? 'CONTENT_BLOCKED' : 'ENVIRONMENT_FAILURE', {
         source_file: source,
         source_sha256: context.sourceSha256,
@@ -341,6 +335,41 @@ function executeArticleAdd(args, dependencies = {}) {
     });
   }
   return status;
+}
+
+function repairAttemptIdentity(args, root) {
+  if (args.help || args.h || boolOpt(args['dry-run'], false) || boolOpt(args.status, false) || !args.file) return null;
+  const source = path.resolve(args.file);
+  if (!fs.existsSync(source)) return null;
+  try {
+    return { root, slug: detectSlug(source), draftHash: sha256File(source) };
+  } catch (_error) {
+    return null;
+  }
+}
+
+function executeArticleAdd(args, dependencies = {}) {
+  const root = dependencies.root || ROOT;
+  const identity = repairAttemptIdentity(args, root);
+  if (identity && !boolOpt(args.restart, false)) {
+    const attempts = readAttemptState(identity.root, identity.slug, identity.draftHash);
+    if (attempts.repair_attempts >= MAX_REPAIR_ATTEMPTS) {
+      throw contentBlocked(`Przekroczono limit ${MAX_REPAIR_ATTEMPTS} prób automatycznej naprawy dla tej wersji draftu. Popraw draft u Pisarza albo użyj jawnego --restart true.`);
+    }
+  }
+
+  try {
+    const status = executeArticleAddCore(args, dependencies);
+    if (identity && status === EXIT_CODES.CONTENT_BLOCKED) {
+      recordRepairFailure(identity.root, identity.slug, identity.draftHash, { stage: 'article:add' });
+    }
+    return status;
+  } catch (error) {
+    if (identity && classifyPipelineFailure(error).exitCode === EXIT_CODES.CONTENT_BLOCKED) {
+      recordRepairFailure(identity.root, identity.slug, identity.draftHash, { stage: 'article:add' });
+    }
+    throw error;
+  }
 }
 
 function main() {
@@ -382,6 +411,7 @@ module.exports = {
   boolOpt,
   continueAwaitingReview,
   executeArticleAdd,
+  executeArticleAddCore,
   expectedPreparedPath,
   packageHashesMatch,
   parseArgs,

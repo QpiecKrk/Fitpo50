@@ -15,6 +15,7 @@ const {
   parseAutocompleteSuggestions,
   requestUrl,
   requestSourceUrl,
+  sourceRecordForVerification,
 } = require('../scripts/verify-article-evidence');
 const { ensureParagraphWrapper } = require('../scripts/fix-fitpo50-json');
 const { hasClearQuickAnswerForm } = require('../scripts/json-fitpo50-gate-diff');
@@ -355,7 +356,7 @@ test('source checker uses only the writer-provided fallback after a saved 403 re
   const calls = [];
   try {
     global.fetch = fixtureFetch(calls);
-    const result = await requestSourceUrl('https://fixture.test/forbidden', [{ fallback_url: 'https://fixture.test/fallback' }], 1000);
+    const result = await requestSourceUrl('https://fixture.test/forbidden', { fallback_url: 'https://fixture.test/fallback' }, 1000);
     assert.equal(result.url_status, 'reachable');
     assert.equal(result.checked_via, 'fallback_url');
     assert.equal(result.publisher_http_status, 403);
@@ -367,6 +368,27 @@ test('source checker uses only the writer-provided fallback after a saved 403 re
   } finally {
     global.fetch = originalFetch;
   }
+});
+
+test('source checker uses the fallback assigned to the concrete source record', async () => {
+  const calls = [];
+  const request = async (url) => {
+    calls.push(url);
+    if (url === 'https://fixture.test/shared') {
+      return { url_status: 'blocked_by_publisher', http_status: 403, final_url: url, suggestions: [], error: '' };
+    }
+    if (url === 'https://fixture.test/source-fallback') {
+      return { url_status: 'reachable', http_status: 200, final_url: url, suggestions: [], error: '' };
+    }
+    throw new Error(`Użyto fallbacku z innego rekordu: ${url}`);
+  };
+  const concreteSource = sourceRecordForVerification([
+    { kind: 'faq', item: { fallback_url: 'https://fixture.test/wrong-fallback' } },
+    { kind: 'source', item: { fallback_url: 'https://fixture.test/source-fallback' } },
+  ]);
+  const result = await requestSourceUrl('https://fixture.test/shared', concreteSource, 1000, { request });
+  assert.equal(result.fallback_url, concreteSource.fallback_url);
+  assert.deepEqual(calls, ['https://fixture.test/shared', 'https://fixture.test/source-fallback']);
 });
 
 test('saved 200 and 404 HTTP fixtures classify deterministically without internet', async () => {

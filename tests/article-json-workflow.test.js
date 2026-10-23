@@ -157,6 +157,58 @@ test('repair circuit breaker is hash-bound, ignores new writer versions and supp
   assert.equal(readAttemptState(dir, slug, 'hash-a').repair_attempts, 0);
 }));
 
+test('article:add counts content blockers from the whole command and stops before a third attempt', () => withTempDir((dir) => {
+  const slug = 'limit-calego-article-add';
+  const source = path.join(dir, `${slug}.fitpo50.json`);
+  const outputDir = path.join(dir, 'ready');
+  const prepared = path.join(outputDir, `${slug}.fitpo50.json`);
+  fs.writeFileSync(source, `${JSON.stringify({ slug })}\n`);
+  let pipelineCalls = 0;
+  const runCommand = (_command, args) => {
+    if (args[0] === 'scripts/article-json-workbench.js') {
+      fs.mkdirSync(outputDir, { recursive: true });
+      fs.writeFileSync(prepared, `${JSON.stringify({ slug })}\n`);
+      return { status: 0, stdout: `[ARTICLE-JSON] JSON: ${prepared}\n`, stderr: '' };
+    }
+    if (args[0] === 'scripts/article-pipeline.js') {
+      pipelineCalls += 1;
+      return { status: EXIT_CODES.CONTENT_BLOCKED, stdout: '', stderr: '' };
+    }
+    throw new Error(`Nieoczekiwane polecenie: ${args.join(' ')}`);
+  };
+  const args = { file: source, 'assets-dir': dir, 'output-dir': outputDir };
+
+  assert.equal(executeArticleAdd(args, { root: dir, runCommand }), EXIT_CODES.CONTENT_BLOCKED);
+  assert.equal(executeArticleAdd(args, { root: dir, runCommand }), EXIT_CODES.CONTENT_BLOCKED);
+  assert.equal(readAttemptState(dir, slug, sha256File(source)).repair_attempts, 2);
+  assert.throws(
+    () => executeArticleAdd(args, { root: dir, runCommand }),
+    /Przekroczono limit 2 prób/,
+  );
+  assert.equal(pipelineCalls, 2);
+}));
+
+test('article:add dry-run forwards the explicit SEO overwrite flag and does not consume repair attempts', () => withTempDir((dir) => {
+  const slug = 'dry-run-flaga-seo';
+  const source = path.join(dir, `${slug}.fitpo50.json`);
+  fs.writeFileSync(source, `${JSON.stringify({ slug })}\n`);
+  let childArgs = [];
+  const status = executeArticleAdd({
+    file: source,
+    'dry-run': 'true',
+    'allow-overwrite-seo-patches': 'true',
+  }, {
+    root: dir,
+    runCommand(_command, args) {
+      childArgs = args;
+      return { status: EXIT_CODES.CONTENT_BLOCKED, stdout: '', stderr: '' };
+    },
+  });
+  assert.equal(status, EXIT_CODES.CONTENT_BLOCKED);
+  assert.ok(childArgs.includes('--allow-overwrite-seo-patches'));
+  assert.equal(readAttemptState(dir, slug, sha256File(source)).repair_attempts, 0);
+}));
+
 test('content blockers run before media conversion and the final package preflight', () => {
   const labels = buildStageDefinitions('/tmp/article.json', '/tmp/assets').map((item) => item.label);
   assert.equal(labels[0], 'Szybki odbiór paczki Pisarz + Ilustrator');

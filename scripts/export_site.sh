@@ -103,6 +103,8 @@ rsync -a \
   --exclude=".tmp/" \
   --exclude="/.venv/" \
   --exclude="__pycache__/" \
+  --exclude="*.py" \
+  --exclude="*.pyc" \
   --exclude="/output/" \
   --exclude=".githooks/" \
   --exclude=".clinerules" \
