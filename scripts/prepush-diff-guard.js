@@ -6,20 +6,32 @@ const HARD_LIMIT = 180;
 const WARN_LIMIT = 80;
 const BYPASS_ENV = 'FITPO50_BYPASS_DIFF_GUARD';
 
-function run(cmd, args) {
-  return spawnSync(cmd, args, { encoding: 'utf8' });
+function run(cmd, args, cwd = process.cwd()) {
+  return spawnSync(cmd, args, { cwd, encoding: 'utf8' });
 }
 
-function changedFiles() {
-  const diff = run('git', ['diff', '--name-only', 'origin/main...HEAD']);
+function lines(output) {
+  return String(output || '').split('\n').map((value) => value.trim()).filter(Boolean);
+}
+
+function changedFiles(cwd = process.cwd()) {
+  const diff = run('git', ['diff', '--name-only', 'origin/main...HEAD'], cwd);
   if (diff.status !== 0) {
     const msg = String(diff.stderr || diff.stdout || '').trim();
     throw new Error(`Nie udało się odczytać diff origin/main...HEAD: ${msg}`);
   }
-  return String(diff.stdout || '')
-    .split('\n')
-    .map((s) => s.trim())
-    .filter(Boolean);
+  const staged = run('git', ['diff', '--cached', '--name-only'], cwd);
+  const unstaged = run('git', ['diff', '--name-only'], cwd);
+  const untracked = run('git', ['ls-files', '--others', '--exclude-standard'], cwd);
+  for (const result of [staged, unstaged, untracked]) {
+    if (result.status !== 0) throw new Error(`Nie udało się odczytać zmian working tree: ${String(result.stderr || result.stdout || '').trim()}`);
+  }
+  return [...new Set([
+    ...lines(diff.stdout),
+    ...lines(staged.stdout),
+    ...lines(unstaged.stdout),
+    ...lines(untracked.stdout),
+  ])].sort();
 }
 
 function topGroup(file) {
@@ -61,9 +73,10 @@ function main() {
 }
 
 try {
-  main();
+  if (require.main === module) main();
 } catch (err) {
   console.error(`[FAIL] prepush:diff-guard -> ${err.message || err}`);
   process.exit(1);
 }
 
+module.exports = { changedFiles, topGroup };

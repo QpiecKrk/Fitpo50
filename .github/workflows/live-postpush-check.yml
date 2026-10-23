@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run live smoke on production
+      - name: Verify live deployment and security exposure
         env:
           RETRIES: "1"
           DELAY: "3"
@@ -26,8 +26,8 @@ jobs:
           status="$?"
           set -e
           if [ "$status" = "124" ]; then
-            echo "[WARN] Live post-push check timed out on GitHub runner; treating as soft-pass network issue."
-            exit 0
+            echo "[ERROR] Live post-push check przekroczył 150 s; wdrożenie i kontrola bezpieczeństwa nie zostały potwierdzone."
+            exit 1
           fi
           exit "$status"
 

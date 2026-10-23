@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-const { spawn } = require('child_process');
+const { spawn, spawnSync } = require('child_process');
 const readline = require('readline');
 const fs = require('fs');
+const crypto = require('crypto');
 const path = require('path');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 
@@ -56,6 +57,37 @@ function appendTimingReport(scope, totalMs, steps) {
   }
 }
 
+function repositorySnapshot(root = process.cwd()) {
+  const result = spawnSync(
+    'git',
+    ['ls-files', '--cached', '--others', '--exclude-standard', '-z'],
+    { cwd: root, encoding: 'buffer' },
+  );
+  if (result.status !== 0) throw new Error(`Nie udało się utworzyć migawki źródeł: ${String(result.stderr || result.stdout || '').trim()}`);
+  const files = result.stdout.toString('utf8').split('\0').filter(Boolean);
+  return new Map(files.map((relative) => {
+    const absolute = path.join(root, relative);
+    if (!fs.existsSync(absolute)) return [relative, 'MISSING'];
+    const stat = fs.lstatSync(absolute);
+    if (stat.isSymbolicLink()) return [relative, `LINK:${fs.readlinkSync(absolute)}`];
+    if (!stat.isFile()) return [relative, `OTHER:${stat.mode}`];
+    return [relative, crypto.createHash('sha256').update(fs.readFileSync(absolute)).digest('hex')];
+  }));
+}
+
+function changedSnapshotFiles(before, after) {
+  return [...new Set([...before.keys(), ...after.keys()])]
+    .filter((file) => before.get(file) !== after.get(file))
+    .sort();
+}
+
+function assertExportDidNotModifySources(before, after) {
+  const changed = changedSnapshotFiles(before, after);
+  if (changed.length) {
+    throw new Error(`export:fresh zmienił pliki źródłowe:\n- ${changed.join('\n- ')}\nZapisz wymagane aktualizacje przed ponownym prepush:local.`);
+  }
+}
+
 async function main() {
   const started = Date.now();
   const timings = [];
@@ -76,9 +108,11 @@ async function main() {
 
     exportWorkspace = createManagedTempDir({ prefix: 'fitpo50-prepush-export-', type: 'prepush-export', projectRoot: process.cwd() });
     exportDir = path.join(exportWorkspace, 'site');
+    const sourceSnapshotBeforeExport = repositorySnapshot();
     timings.push(await runStep('export:fresh(tmp)', 'bash', ['./scripts/export_site.sh', exportDir], {
       env: { SKIP_TS_BUILD: '1' },
     }));
+    assertExportDidNotModifySources(sourceSnapshotBeforeExport, repositorySnapshot());
     timings.push(await runStep('export:parity', 'node', [
       'scripts/export-parity-check.js',
       '--expected', exportDir,
@@ -101,7 +135,11 @@ async function main() {
   console.log(`Pre-push: OK (${sec}s)`);
 }
 
-main().catch((err) => {
-  console.error(`Pre-push: FAIL -> ${err.message || err}`);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(`Pre-push: FAIL -> ${err.message || err}`);
+    process.exit(1);
+  });
+}
+
+module.exports = { assertExportDidNotModifySources, changedSnapshotFiles, repositorySnapshot };
