@@ -443,6 +443,7 @@ function validateArticleEvidence(json, options = {}) {
 }
 
 module.exports = {
+  validateFaqResearch,
   CLAIM_TYPES,
   EVIDENCE_LEVELS,
   FAQ_SOURCE_TYPES,

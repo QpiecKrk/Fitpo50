@@ -23,6 +23,10 @@ Manifest ma status `AWAITING_USER_APPROVAL`, `version: 1`, `source_hashes` i `it
 - dokładne `before` oraz zatwierdzone `after`,
 - `reason`,
 - co najmniej jedną podstawę `basis`: `GSC_QUERY`, `SOURCE`, `ARTICLE_FACT`, `SAFETY_RULE` albo `INTERNAL_LINK_MAP`,
+- zmiana widocznego tekstu lub danych strukturalnych wymaga `SOURCE` z HTTP(S) URL w `url` albo `value`; to konserwatywna kontrola dowodów, również dla zmian bez liczb,
+- FAQ patcha zawiera `answer_blocks` i `faq_research` według wspólnego kontraktu Pisarza (wyłącznie GSC/PAA/autocomplete); pytania z HTML i JSON-LD muszą mieć udokumentowane pochodzenie,
+- nowe linki wymagają istniejącego celu oraz krawędzi w `data/crosslink-suggestions/<source-slug>.json` lub `data/reports/link-topology-report.json`; dotyczy to też absolutnych URL-i FitPo50,
+- `operation.file` nie może modyfikować celu należącego do innego ID manifestu; podmiana całego dokumentu HTML jest zabroniona,
 - opcjonalny `file`, gdy zmiana dotyczy strony źródłowej linkującej do targetu.
 
 Automat blokuje placeholdery, dawny generyczny akapit `safe-links`, nieistniejące cele linków, niezgodny hash, fragment występujący zero lub więcej niż jeden raz oraz ID spoza manifestu.

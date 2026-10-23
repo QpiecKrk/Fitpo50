@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { pageKind } = require('./publication-page-kind');
+const { validateFaqResearch } = require('./article-evidence');
 
 const ALLOWED_BASIS = new Set(['GSC_QUERY', 'SOURCE', 'ARTICLE_FACT', 'SAFETY_RULE', 'INTERNAL_LINK_MAP']);
 const GENERIC_PATTERNS = [
@@ -60,9 +61,60 @@ function validateAfterText(after, label, errors) {
 }
 
 function hrefTargets(html) {
-  return [...String(html || '').matchAll(/<a\b[^>]*\bhref=["']([^"']+\.html)(?:[?#][^"']*)?["']/gi)]
-    .map((match) => String(match[1] || '').replace(/^\.\//, ''))
-    .filter((href) => !/^https?:\/\//i.test(href));
+  return [...String(html || '').matchAll(/<a\b[^>]*\bhref\s*=\s*["']([^"']+)["']/gi)].flatMap((match) => {
+    const href = match[1];
+    if (href.startsWith('#')) return [];
+    try {
+      const url = new URL(href, 'https://fitpo50.pl/');
+      if (!['fitpo50.pl', 'www.fitpo50.pl'].includes(url.hostname)) return [];
+      return [decodeURIComponent(url.pathname).replace(/^\//, '') || 'index.html'];
+    } catch (_) { return ['INVALID_URL']; }
+  });
+}
+
+function validateOperationEvidence(operation, label, errors) {
+  const text = (html) => {
+    return String(html || '').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+  };
+  const hasSource = (operation.basis || []).some((basis) => {
+    if (basis.type !== 'SOURCE') return false;
+    try { return ['https:', 'http:'].includes(new URL(basis.url || basis.value).protocol); } catch (_) { return false; }
+  });
+  const changedStructuredContent = /<script\b/i.test(String(operation.after)) && operation.after !== operation.before;
+  if ((text(operation.after) !== text(operation.before) || changedStructuredContent) && !hasSource) {
+    errors.push(`${label}: zmieniona treść wymaga SOURCE basis z URL; sama fraza GSC nie jest dowodem twierdzenia.`);
+  }
+  const after = String(operation.after || '');
+  const questions = [...after.matchAll(/<(h3|summary)\b[^>]*>([\s\S]*?)<\/\1>/gi)]
+    .map((match) => text(match[2])).filter((value) => value.endsWith('?'));
+  for (const match of after.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    try {
+      const walk = (value) => {
+        if (!value || typeof value !== 'object') return;
+        if (value['@type'] === 'Question' && value.name) questions.push(value.name);
+        Object.values(value).forEach((child) => Array.isArray(child) ? child.forEach(walk) : walk(child));
+      };
+      walk(JSON.parse(match[1]));
+    } catch (_) { errors.push(`${label}: niepoprawny JSON-LD.`); }
+  }
+  const answerBlocks = operation.answer_blocks || [...new Set(questions)].map((question) => ({ question }));
+  for (const question of questions) {
+    if (!answerBlocks.some((block) => block.question === question)) errors.push(`${label}: FAQ HTML/schema nie ma odpowiednika w answer_blocks: ${question}`);
+  }
+  errors.push(...validateFaqResearch({ answer_blocks: answerBlocks, faq_research: operation.faq_research || [] },
+    new Date().toISOString().slice(0, 10)).map((error) => `${label}: ${error}`));
+}
+
+function localLinkAllowed(root, source, target) {
+  const file = path.join(root, 'data', 'crosslink-suggestions', source.replace(/\.html$/, '.json'));
+  if (fs.existsSync(file)) {
+    const map = JSON.parse(fs.readFileSync(file, 'utf8'));
+    if (map.slug === source.replace(/\.html$/, '') && (map.suggestions || []).some((item) => hrefTargets(`<a href="${item.href}"></a>`).includes(target))) return true;
+  }
+  const topology = path.join(root, 'data', 'reports', 'link-topology-report.json');
+  if (!fs.existsSync(topology)) return false;
+  return (JSON.parse(fs.readFileSync(topology, 'utf8')).weak_pages || []).some((item) =>
+    item.target === target && (item.suggested_sources || []).some((entry) => entry.src === source));
 }
 
 function validatePatchManifest(manifest, root, selectedIds) {
@@ -87,26 +139,33 @@ function validatePatchManifest(manifest, root, selectedIds) {
   if (!items.length) errors.push('Nie wybrano żadnego poprawnego ID.');
   const touched = new Set();
   const targetOwners = new Map();
+  for (const item of allItems) {
+    const target = safeRelativeFile(item.file);
+    if (targetOwners.has(target)) errors.push(`${target}: dwa zatwierdzone ID próbują zmienić ten sam target.`);
+    targetOwners.set(target, normalizeId(item.id));
+  }
   items.forEach((item) => {
     const id = normalizeId(item.id);
     if (!/^(BOOST|ROKUJE|NAPRAWA) \d+$/.test(id)) errors.push(`${id || 'MISSING'}: do wdrożenia dopuszczone są wyłącznie konkretne ID BOOST, ROKUJE albo NAPRAWA.`);
     const target = safeRelativeFile(item.file);
     if (!target) errors.push(`${id}: file musi wskazywać źródłowy plik HTML.`);
-    else if (targetOwners.has(target)) errors.push(`${target}: dwa zatwierdzone ID próbują zmienić ten sam target (${targetOwners.get(target)}, ${id}).`);
-    else targetOwners.set(target, id);
     if (!Array.isArray(item.operations) || !item.operations.length) errors.push(`${id}: brak konkretnych operations[].`);
     (item.operations || []).forEach((operation, index) => {
       const label = `${id}.operations[${index}]`;
       const file = safeRelativeFile(operation.file || target);
       if (!file) errors.push(`${label}: nieprawidłowy file.`);
       else touched.add(file);
+      if (targetOwners.has(file) && targetOwners.get(file) !== id) errors.push(`${label}: operation.file ${file} należy do ${targetOwners.get(file)}, nie ${id}.`);
+      if (/<!doctype\s+html\b|<html\b/i.test(String(operation.before) + String(operation.after))) errors.push(`${label}: podmiana całego dokumentu jest zabroniona.`);
       if (operation.type !== 'replace_exact') errors.push(`${label}: dozwolone jest wyłącznie replace_exact.`);
       if (typeof operation.before !== 'string' || !operation.before) errors.push(`${label}: brak dokładnego before.`);
       validateAfterText(operation.after, label, errors);
       validateBasis(operation.basis, label, errors);
+      validateOperationEvidence(operation, label, errors);
       if (String(operation.reason || '').trim().length < 12) errors.push(`${label}: reason jest zbyt ogólny.`);
       hrefTargets(operation.after).forEach((href) => {
         if (!safeRelativeFile(href) || !fs.existsSync(path.join(root, href))) errors.push(`${label}: link prowadzi do nieistniejącego celu ${href}.`);
+        if (!hrefTargets(operation.before).includes(href) && !localLinkAllowed(root, file, href)) errors.push(`${label}: link ${file} -> ${href} nie pochodzi z mapy lokalnego pipeline'u.`);
       });
     });
     if (target && !(item.operations || []).some((operation) => safeRelativeFile(operation.file || target) === target)) {

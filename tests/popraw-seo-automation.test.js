@@ -14,6 +14,80 @@ const { verifyLiveResponses } = require('../scripts/lib/popraw-seo-live-verifier
 
 const ROOT = path.resolve(__dirname, '..');
 
+test('patch FAQ uses the shared GSC/PAA/autocomplete contract and rejects manual research', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'seo-faq-'));
+  const manifest = validManifest(root);
+  const op = manifest.items[0].operations[0];
+  const question = 'Jak poprawić sen?';
+  op.after = `<h3>${question}</h3><p>Odpowiedź oparta na badaniu.</p>`;
+  const entry = { question, query: question, impressions: 1, research_note: 'Pytanie zapisane w wynikach wyszukiwarki podczas researchu.', source_url: 'https://example.org/research', checked_at: new Date().toISOString().slice(0, 10), url_status: 'reachable', http_status: 200 };
+  const errors = () => validatePatchManifest(manifest, root, ['BOOST 1']).errors;
+  assert.ok(errors().some((error) => error.includes('pochodzenia')));
+  for (const source_type of ['gsc', 'paa', 'autocomplete']) {
+    op.faq_research = [{ ...entry, source_type }];
+    if (source_type === 'autocomplete') Object.assign(op.faq_research[0], { source_url: `https://suggestqueries.google.com/complete/search?q=${encodeURIComponent(question)}`, intent_verified: true, verified_suggestion: question });
+    assert.deepEqual(errors(), []);
+  }
+  op.faq_research = [{ ...entry, source_type: 'manual_research' }];
+  assert.ok(errors().some((error) => error.includes('source_type')));
+  op.faq_research = [{ ...entry, source_type: 'gsc', impressions: 'abc' }];
+  assert.ok(errors().some((error) => error.includes('impressions')));
+  op.faq_research = [{ ...entry, source_type: 'paa', research_note: '' }];
+  assert.ok(errors().some((error) => error.includes('research_note')));
+});
+
+test('new claims and numbers require SOURCE basis with an HTTP URL', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'seo-source-'));
+  const manifest = validManifest(root);
+  const op = manifest.items[0].operations[0];
+  for (const after of ['<p>Ryzyko spada o 25%.</p>', '<p>Trening poprawia siłę mięśni.</p>']) {
+    op.after = after;
+    op.basis = [{ type: 'ARTICLE_FACT', value: 'Nieudokumentowane twierdzenie.' }];
+    assert.ok(validatePatchManifest(manifest, root, ['BOOST 1']).errors.some((error) => error.includes('SOURCE')));
+    op.basis = [{ type: 'SOURCE', value: 'https://example.org/study' }];
+    assert.deepEqual(validatePatchManifest(manifest, root, ['BOOST 1']).errors, []);
+  }
+});
+
+test('absolute internal links require an existing target and a local pipeline edge', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'seo-link-'));
+  const manifest = validManifest(root);
+  manifest.items[0].operations[0].after = '<p><a href="https://fitpo50.pl/b.html#sekcja">Poradnik</a></p>';
+  const errors = () => validatePatchManifest(manifest, root, ['BOOST 1']).errors;
+  assert.ok(errors().some((error) => error.includes('nieistniejącego')));
+  fs.writeFileSync(path.join(root, 'b.html'), articleHtml());
+  assert.ok(errors().some((error) => error.includes('mapy lokalnego')));
+  fs.mkdirSync(path.join(root, 'data/crosslink-suggestions'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'data/crosslink-suggestions/a.json'), JSON.stringify({ slug: 'a', suggestions: [{ href: 'b.html' }] }));
+  assert.deepEqual(errors(), []);
+});
+
+test('whole document replacement and cross-owner operation.file are blocked', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'seo-owner-'));
+  const manifest = validManifest(root);
+  manifest.items[0].operations[0].after = '<!doctype html><html><body>Nowa strona</body></html>';
+  assert.ok(validatePatchManifest(manifest, root, ['BOOST 1']).errors.some((error) => error.includes('całego dokumentu')));
+  manifest.items[0].operations[0].after = '<p>Poprawiona treść.</p>';
+  const second = structuredClone(manifest.items[0]);
+  second.id = 'BOOST 2'; second.file = 'b.html';
+  fs.writeFileSync(path.join(root, 'b.html'), articleHtml());
+  manifest.source_hashes['b.html'] = sha256(fs.readFileSync(path.join(root, 'b.html')));
+  manifest.items.push(second);
+  manifest.items[0].operations.push({ ...second.operations[0], file: 'b.html' });
+  for (const ids of [['BOOST 1', 'BOOST 2'], ['BOOST 2', 'BOOST 1']]) {
+    assert.ok(validatePatchManifest(manifest, root, ids).errors.some((error) => error.includes('operation.file b.html należy do BOOST 2')));
+  }
+});
+
+test('PR workflow runs Node tests and typecheck with read-only permissions', () => {
+  const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/patch-contract-tests.yml'), 'utf8');
+  assert.match(workflow, /pull_request:/);
+  assert.match(workflow, /contents: read/);
+  assert.match(workflow, /node --test tests\/popraw-seo-automation.test.js/);
+  assert.match(workflow, /npm run typecheck/);
+  assert.doesNotMatch(workflow, /git push|deployment:|pull_request_target/);
+});
+
 function articleHtml(dateModified = '2026-08-01T08:00:00+02:00') {
   return `<html><head><meta property="article:modified_time" content="${dateModified}"><link rel="canonical" href="https://fitpo50.pl/a.html"><script type="application/ld+json">{"@type":"BlogPosting","dateModified":"${dateModified}"}</script></head><body><article class="article-content"><p>Stary konkretny akapit.</p></article></body></html>`;
 }
@@ -34,7 +108,7 @@ function validManifest(root) {
         before: '<p>Stary konkretny akapit.</p>',
         after: '<p>Nowy akapit odpowiada dokładnie na frazę „marsz japoński efekty” i podaje warunek bezpieczeństwa.</p>',
         reason: 'Dopasowanie odpowiedzi do ujawnionej intencji GSC.',
-        basis: [{ type: 'GSC_QUERY', value: 'marsz japoński efekty: 120 wyświetleń, pozycja 11' }],
+        basis: [{ type: 'GSC_QUERY', value: 'marsz japoński efekty: 120 wyświetleń, pozycja 11' }, { type: 'SOURCE', value: 'https://example.org/research' }],
       }],
     }],
   };
@@ -53,6 +127,7 @@ function npmCliFixture() {
     },
   }, null, 2)}\n`);
   fs.cpSync(path.join(ROOT, 'scripts'), path.join(root, 'scripts'), { recursive: true });
+  fs.cpSync(path.join(ROOT, 'docs/skills'), path.join(root, 'docs/skills'), { recursive: true });
   return root;
 }
 
@@ -123,7 +198,7 @@ test('npm CLI forwards ids and confirmation after -- without npm_config variable
       before: '<p>Stary konkretny akapit.</p>',
       after: '<p>Nowy, konkretny opis odpowiada na udokumentowaną intencję i zachowuje warunek bezpieczeństwa.</p>',
       reason: 'Naprawa zatwierdzonej intencji testowej.',
-      basis: [{ type: 'GSC_QUERY', value: 'zatwierdzona fraza testowa: 80 wyświetleń' }],
+      basis: [{ type: 'GSC_QUERY', value: 'zatwierdzona fraza testowa: 80 wyświetleń' }, { type: 'SOURCE', value: 'https://example.org/research' }],
     }],
   });
   const manifestPath = path.join(root, 'patches.json');
@@ -176,8 +251,10 @@ test('a source article receiving a link also gets dateModified and PDF/live obli
     before: '<p>Akapit strony źródłowej.</p>',
     after: '<p>Akapit strony źródłowej prowadzi do <a href="a.html">konkretnego planu marszu interwałowego</a>.</p>',
     reason: 'Naturalne wsparcie głównego URL-a dla tej samej intencji.',
-    basis: [{ type: 'INTERNAL_LINK_MAP', value: 'source.html wspiera właściciela intencji a.html' }],
+    basis: [{ type: 'INTERNAL_LINK_MAP', value: 'source.html wspiera właściciela intencji a.html' }, { type: 'SOURCE', value: 'https://example.org/research' }],
   });
+  fs.mkdirSync(path.join(root, 'data/crosslink-suggestions'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'data/crosslink-suggestions/source.json'), JSON.stringify({ slug: 'source', suggestions: [{ href: 'a.html' }] }));
   const validation = validatePatchManifest(manifest, root, ['BOOST 1']);
   assert.deepEqual(validation.errors, []);
   const iso = '2026-08-25T12:00:00+02:00';
