@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const crypto = require('crypto');
 const os = require('os');
 const path = require('path');
 const {
@@ -36,6 +37,7 @@ function parseArgs(argv) {
     maxCards: 40,
     waveSize: 5,
     stateDir: resolveSeoStateDir(),
+    approveRound: '',
   };
   for (let i = 0; i < argv.length; i += 1) {
     const token = String(argv[i] || '').trim();
@@ -76,6 +78,11 @@ function parseArgs(argv) {
     }
     if (token === '--state-dir' && value) {
       out.stateDir = path.resolve(ROOT, value);
+      i += 1;
+      continue;
+    }
+    if (token === '--approve-round' && value) {
+      out.approveRound = value;
       i += 1;
     }
   }
@@ -350,9 +357,9 @@ function rotationTasks(card) {
   ];
 }
 
-function buildWaves(cards, state = {}, waveSize = 5, roundKey = '') {
+function buildWaves(cards, state = {}, waveSize = 5, roundKey = '', advanceRotation = false) {
   const rotationPool = cards.filter((card) => card.content_type === 'article' && !isSupportPage(card));
-  const selection = selectPriorityWave(rotationPool, { size: waveSize, state, roundKey });
+  const selection = selectPriorityWave(rotationPool, { size: waveSize, state, roundKey, advanceRotation });
   const firstWave = selection.selected.map((card) => (
     card.wave_source === 'ROTATION' ? { ...card, tasks: rotationTasks(card) } : card
   ));
@@ -424,9 +431,16 @@ function buildReport(args) {
   }));
   const rotationStatePath = path.join(args.stateDir, 'priority-rotation.json');
   const rotationState = readJsonIfExists(rotationStatePath) || {};
-  const waveResult = buildWaves(cards, rotationState, args.waveSize, priority.generated_at || 'UNKNOWN_DATASET');
+  const manifestPath = path.join(args.inputDir, 'gsc-data-manifest.json');
+  if (!fs.existsSync(manifestPath)) throw new Error(`Brak gsc-data-manifest.json: ${manifestPath}`);
+  const datasetRoundKey = crypto.createHash('sha256').update(fs.readFileSync(manifestPath)).digest('hex');
+  const advanceRotation = Boolean(args.approveRound);
+  if (advanceRotation && args.approveRound !== datasetRoundKey) {
+    throw new Error(`--approve-round nie odpowiada bieżącemu gsc-data-manifest: oczekiwano ${datasetRoundKey}`);
+  }
+  const waveResult = buildWaves(cards, rotationState, args.waveSize, datasetRoundKey, advanceRotation);
   const waves = waveResult.waves;
-  writeJson(rotationStatePath, waveResult.state);
+  if (advanceRotation) writeJson(rotationStatePath, waveResult.state);
   const gscSubmitQueue = unique([
     ...waves.wave_1_fast_page_one,
     ...waves.wave_2_discovery,
@@ -468,6 +482,8 @@ function buildReport(args) {
       wave_mix: '60% estimated click gain + 40% rotation',
       current_wave_composition: waveResult.composition,
       state_file: rotationStatePath,
+      dataset_round_key: datasetRoundKey,
+      rotation_state_advanced: advanceRotation,
     },
     shared_priority_list: cards.map((card) => ({
       rank: card.shared_priority_rank,

@@ -64,7 +64,7 @@ test('shared priority ranks 810 impressions at position 24 above 9 at position 8
 });
 
 test('wave of 5 contains 3 estimated-gain and 2 rotation articles', () => {
-  const items = Array.from({ length: 7 }, (_, index) => article(
+  const items = Array.from({ length: 25 }, (_, index) => article(
     `wave-${index + 1}.html`,
     'POSITION_11_30',
     { impressions: 700 - index * 50, clicks: 0, ctr: 0, position: 15 + index },
@@ -80,28 +80,51 @@ test('wave of 5 contains 3 estimated-gain and 2 rotation articles', () => {
 });
 
 test('rotation does not repeat an article before remaining candidates get a turn', () => {
-  const items = Array.from({ length: 7 }, (_, index) => article(
+  const items = Array.from({ length: 25 }, (_, index) => article(
     `rotate-${index + 1}.html`,
     'POSITION_11_30',
     { impressions: 700 - index * 50, clicks: 0, ctr: 0, position: 15 + index },
   ));
-  const first = selectPriorityWave(items, { size: 5, state: {}, roundKey: 'round-1', selectedAt: '2026-10-23T00:00:00Z' });
-  const second = selectPriorityWave(items, { size: 5, state: first.state, roundKey: 'round-2', selectedAt: '2026-10-24T00:00:00Z' });
+  const first = selectPriorityWave(items, { size: 5, state: {}, roundKey: 'round-1', advanceRotation: true, selectedAt: '2026-10-23T00:00:00Z' });
+  const second = selectPriorityWave(items, { size: 5, state: first.state, roundKey: 'round-2', advanceRotation: true, selectedAt: '2026-10-24T00:00:00Z' });
   const firstRotation = first.selected.filter((item) => item.wave_source === 'ROTATION').map((item) => item.file);
   const secondRotation = second.selected.filter((item) => item.wave_source === 'ROTATION').map((item) => item.file);
   assert.deepEqual(firstRotation.filter((file) => secondRotation.includes(file)), []);
 });
 
-test('same reporting round is idempotent and does not consume another rotation turn', () => {
-  const items = Array.from({ length: 7 }, (_, index) => article(
+test('dry-run does not change rotation state', () => {
+  const items = Array.from({ length: 25 }, (_, index) => article(
     `stable-${index + 1}.html`,
     'POSITION_11_30',
     { impressions: 700 - index * 50, clicks: 0, ctr: 0, position: 15 + index },
   ));
-  const first = selectPriorityWave(items, { size: 5, state: {}, roundKey: 'same-round', selectedAt: '2026-10-23T00:00:00Z' });
-  const repeated = selectPriorityWave(items, { size: 5, state: first.state, roundKey: 'same-round', selectedAt: '2026-10-24T00:00:00Z' });
-  assert.deepEqual(repeated.state, first.state);
-  assert.deepEqual(repeated.selected.map((item) => item.file), first.selected.map((item) => item.file));
+  const state = { version: 1, sequence: 2, rotation: { 'old.html': { sequence: 2 } } };
+  const before = structuredClone(state);
+  const result = selectPriorityWave(items, { size: 5, state, roundKey: 'same-round' });
+  assert.deepEqual(state, before);
+  assert.deepEqual(result.state, before);
+});
+
+test('rotation candidates are outside top 20 estimated-gain list', () => {
+  const items = Array.from({ length: 25 }, (_, index) => article(
+    `outside-${index + 1}.html`, 'POSITION_11_30',
+    { impressions: 1000 - index * 20, clicks: 0, ctr: 0, position: 12 + index },
+  ));
+  const wave = selectPriorityWave(items, { size: 5, state: {}, roundKey: 'dataset-a' });
+  assert.ok(wave.selected.filter((item) => item.wave_source === 'ROTATION').every((item) => item.shared_priority_rank > 20));
+});
+
+test('new GSC manifest round produces a new wave after prior wave approval', () => {
+  const items = Array.from({ length: 26 }, (_, index) => article(
+    `manifest-${index + 1}.html`, 'POSITION_11_30',
+    { impressions: 1000 - index * 20, clicks: 0, ctr: 0, position: 12 + index },
+  ));
+  const approved = selectPriorityWave(items, { size: 5, state: {}, roundKey: 'manifest-a', advanceRotation: true });
+  const same = selectPriorityWave(items, { size: 5, state: approved.state, roundKey: 'manifest-a' });
+  const fresh = selectPriorityWave(items, { size: 5, state: approved.state, roundKey: 'manifest-b' });
+  const rotationFiles = (wave) => wave.selected.filter((item) => item.wave_source === 'ROTATION').map((item) => item.file);
+  assert.deepEqual(rotationFiles(same), rotationFiles(approved));
+  assert.notDeepEqual(rotationFiles(fresh), rotationFiles(approved));
 });
 
 test('SEO state and growth reports use git-ignored repo storage and legacy migration is non-destructive', () => {

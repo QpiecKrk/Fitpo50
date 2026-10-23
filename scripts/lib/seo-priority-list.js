@@ -117,6 +117,7 @@ function selectPriorityWave(items, options = {}) {
   const gainSlots = Math.min(size, Math.round(size * 0.6));
   const rotationSlots = size - gainSlots;
   const state = options.state && typeof options.state === 'object' ? options.state : {};
+  const advanceRotation = options.advanceRotation === true;
   const rotation = state.rotation && typeof state.rotation === 'object' ? state.rotation : {};
   let sequence = Number(state.sequence || 0);
   const ranked = buildSharedPriorityList(items);
@@ -132,8 +133,9 @@ function selectPriorityWave(items, options = {}) {
     ? previousSelection.filter((saved) => saved.source === 'ESTIMATED_CLICK_GAIN').map((saved) => saved.entry)
     : ranked.slice(0, gainSlots);
   const used = new Set(gain.map((entry) => entry.file));
+  const topGainFiles = new Set(ranked.slice(0, 20).map((entry) => entry.file));
   const rotationCandidates = ranked
-    .filter((entry) => !used.has(entry.file))
+    .filter((entry) => !used.has(entry.file) && !topGainFiles.has(entry.file))
     .sort((a, b) => (
       Number(rotation[a.file]?.sequence || 0) - Number(rotation[b.file]?.sequence || 0)
       || String(a.item?.date_modified || '').localeCompare(String(b.item?.date_modified || ''))
@@ -143,7 +145,7 @@ function selectPriorityWave(items, options = {}) {
     ? previousSelection.filter((saved) => saved.source === 'ROTATION').map((saved) => saved.entry)
     : rotationCandidates.slice(0, rotationSlots);
   const selectedAt = options.selectedAt || new Date().toISOString();
-  if (!previousSelection.length) {
+  if (advanceRotation && !previousSelection.length) {
     for (const entry of rotated) {
       sequence += 1;
       rotation[entry.file] = { sequence, last_selected_at: selectedAt };
@@ -164,20 +166,21 @@ function selectPriorityWave(items, options = {}) {
     wave_source: source,
     ...(source === 'ROTATION' ? { rotation_diagnosis: rotationDiagnosis(entry.item) } : {}),
   });
+  const nextState = advanceRotation ? {
+    version: 1,
+    sequence,
+    rotation,
+    round_key: roundKey || null,
+    last_selection: [
+      ...gain.map((entry) => ({ file: entry.file, source: 'ESTIMATED_CLICK_GAIN' })),
+      ...rotated.map((entry) => ({ file: entry.file, source: 'ROTATION' })),
+    ],
+  } : state;
   return {
     selected: [...gain.map((entry) => decorate(entry, 'ESTIMATED_CLICK_GAIN')), ...rotated.map((entry) => decorate(entry, 'ROTATION'))],
     gain_count: gain.length,
     rotation_count: rotated.length,
-    state: {
-      version: 1,
-      sequence,
-      rotation,
-      round_key: roundKey || null,
-      last_selection: [
-        ...gain.map((entry) => ({ file: entry.file, source: 'ESTIMATED_CLICK_GAIN' })),
-        ...rotated.map((entry) => ({ file: entry.file, source: 'ROTATION' })),
-      ],
-    },
+    state: nextState,
     ranked,
   };
 }

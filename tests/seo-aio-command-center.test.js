@@ -67,6 +67,7 @@ function writeFixture(dir) {
     ],
   };
   fs.writeFileSync(path.join(dir, 'gsc-priority-map.json'), `${JSON.stringify(priorityMap, null, 2)}\n`);
+  fs.writeFileSync(path.join(dir, 'gsc-data-manifest.json'), '{"generated_at":"2026-10-23T00:00:00Z"}\n');
   fs.writeFileSync(path.join(dir, 'gsc-weekly-report.json'), '{"status":"ok"}\n');
   fs.writeFileSync(path.join(dir, 'aeo-opportunities.json'), '{"status":"ok"}\n');
 }
@@ -86,6 +87,8 @@ test('seo-aio command center builds waves, queues and support-page tasks', () =>
   const report = JSON.parse(fs.readFileSync(path.join(outputDir, 'seo-aio-command-center.json'), 'utf8'));
   assert.equal(report.portfolio.total_urls, 2);
   assert.equal(report.priority_contract.source, 'scripts/lib/seo-priority-list.js');
+  assert.equal(report.priority_contract.rotation_state_advanced, false);
+  assert.equal(fs.existsSync(path.join(outputDir, 'state', 'priority-rotation.json')), false);
   assert.deepEqual(report.priority_contract.current_wave_composition, { estimated_click_gain: 1, rotation: 0 });
   assert.equal(report.waves.wave_1_fast_page_one[0].url, 'https://fitpo50.pl/test-artykul.html');
   assert.ok(report.gsc_submit_queue.includes('https://fitpo50.pl/source.html'));
