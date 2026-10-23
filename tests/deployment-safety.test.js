@@ -7,7 +7,7 @@ const { spawnSync } = require('node:child_process');
 const { changedRootArticles, prepareDeploymentMarker } = require('../scripts/prepare-deployment-marker');
 const { verifyDeployment } = require('../scripts/lib/deployment-live-verifier');
 const { cacheBustUrl, isPublicRootHtmlPath } = require('../scripts/deployment-live-verify');
-const { SENSITIVE_PATHS, classifyExposureResponse } = require('../scripts/security-exposure-check');
+const { ADMIN_SENSITIVE_PATHS, SENSITIVE_PATHS, classifyExposureResponse } = require('../scripts/security-exposure-check');
 
 const ROOT = path.resolve(__dirname, '..');
 function run(command, args, cwd, env = {}) { return spawnSync(command, args, { cwd, env: { ...process.env, ...env }, encoding: 'utf8' }); }
@@ -30,9 +30,12 @@ function requestDeniedByHtaccess(source, pathname) {
     if (!rule) continue;
     const flags = rule[2] || '';
     const ruleFlags = flags.includes('NC') ? 'i' : '';
-    const conditionsPass = requestConditions.every(({ pattern, flags: conditionFlags }) => (
-      new RegExp(pattern, conditionFlags.includes('NC') ? 'i' : '').test(pathname)
-    ));
+    const conditionsPass = requestConditions.every(({ pattern, flags: conditionFlags }) => {
+      const negated = pattern.startsWith('!');
+      const source = negated ? pattern.slice(1) : pattern;
+      const matched = new RegExp(source, conditionFlags.includes('NC') ? 'i' : '').test(pathname);
+      return negated ? !matched : matched;
+    });
     const pathWithoutLeadingSlash = pathname.replace(/^\//, '');
     const denied = conditionsPass && new RegExp(rule[1], ruleFlags).test(pathWithoutLeadingSlash) && flags.split(',').includes('F');
     requestConditions = [];
@@ -188,11 +191,13 @@ test('htaccess blocks repository internals and preserves public site paths', () 
     '/_site/index.html', '/requirements-dev.txt', '/requirements-pdf.txt', '/.gitignore',
     '/README.md', '/package.json', '/package-lock.json', '/tool.py', '/.venv/bin/python',
     '/__pycache__/module.pyc', '/tests/deployment-safety.test.js', '/scripts/export_site.sh',
-    '/docs/command-registry.md', '/admin/CHANGELOG.md',
+    '/docs/command-registry.md', '/admin/CHANGELOG.md', '/.cursorrules', '/.editorconfig',
+    '/.github/workflows/assets-hygiene.yml', '/.githooks/pre-push', '/article-template-bento.html',
   ];
   const allowed = [
     '/index.html', '/porady.html', '/assets/main.css', '/assets/example.webp',
     '/sitemap.xml', '/robots.txt', '/llms.txt', '/llms-full.txt',
+    '/.well-known/acme-challenge/token',
   ];
   for (const pathname of blocked) {
     assert.equal(requestDeniedByHtaccess(source, pathname), true, `oczekiwano 403 dla ${pathname}`);
@@ -202,6 +207,16 @@ test('htaccess blocks repository internals and preserves public site paths', () 
   }
   for (const pathname of blocked) {
     assert.ok(SENSITIVE_PATHS.includes(pathname), `brak kontroli ekspozycji ${pathname}`);
+  }
+});
+
+test('admin htaccess blocks markdown and dotfiles but preserves well-known', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'admin', '.htaccess'), 'utf8');
+  const blocked = ['/CHANGELOG.md', '/deploy-notes.md', '/.cursorrules', '/.editorconfig', '/.github/workflows/test.yml', '/.githooks/pre-push'];
+  for (const pathname of blocked) assert.equal(requestDeniedByHtaccess(source, pathname), true, `oczekiwano 403 dla admin${pathname}`);
+  assert.equal(requestDeniedByHtaccess(source, '/.well-known/acme-challenge/token'), false);
+  for (const pathname of ['/CHANGELOG.md', '/deploy-notes.md', '/init-db.php', '/init-hash.php']) {
+    assert.ok(ADMIN_SENSITIVE_PATHS.includes(pathname), `brak kontroli admin.fitpo50.pl${pathname}`);
   }
 });
 
