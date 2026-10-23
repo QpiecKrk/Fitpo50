@@ -1,5 +1,22 @@
 # FitPo50 — aktywna pamięć projektu
 
+## TWARDE ZASADY (czytaj na starcie każdej sesji, wygrywają przy sprzeczności)
+
+- Bez osobnego „tak” użytkownika w czacie: zero commitów na `main`, pushy, deployów, merge'ów, IndexNow, usuwania plików lub gałęzi ani `tmp:cleanup`. Akceptacja ID lub raportu nie jest zgodą.
+- Każda sesja zaczyna się tylko od odczytu: przeczytaj te zasady, pokaż `git status` oraz porównanie `main` z `origin/main`, a potem czekaj na zadanie.
+- Pracuj wyłącznie w zakresie polecenia. Problem poza zakresem zgłoś, ale niczego w nim nie zmieniaj.
+- Deploy: `prepush:local` PASS → `_site` bez plików technicznych → `gitpush` → osobny marker → `deployment:finalize` z `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`.
+- Z `_site` wykluczaj: `HANDOFF.md`, `requirements*.txt`, fonty PDF, `.venv`, `__pycache__`, pliki `.py`/`.pyc` oraz `admin/*.md`.
+- Artykuł wymaga minimum 4 realnych źródeł z mapowaniem twierdzenie → źródło. Linkowanie wewnętrzne tworzy tylko lokalny pipeline. Publikacja obejmuje kafel strony głównej, `porady.html`, właściwy dział, sitemapę, `llms.txt` i `llms-full.txt`.
+- FAQ korzysta wyłącznie ze wspólnego kontraktu `gsc`/`paa`/`autocomplete`; `manual_research` jest zabronione. Baseline ma dokładnie 32 artykuły legacy i 6 centrów.
+- `popraw-seo`: fala obejmuje 3 pozycje według zysku i 2 rotacyjne spoza top 20; dane pochodzą z `data/reports/local/gsc-current`, a stan rotacji z `data/reports/local/seo-state/priority-rotation.json` i jest zużywany wyłącznie przez `--approve-round`.
+- Bramka patchy wymaga podstawy `SOURCE` z URL-em, linków z lokalnej mapy, zakazuje podmiany całego dokumentu i sprawdza właściciela celu.
+- `article:add --force` jest blokowane dla stron z wdrożonymi poprawkami SEO; wyjątek wymaga jawnej flagi `--allow-overwrite-seo-patches`.
+- Tag `p:domain_verify` w `index.html` zostaje na stałe.
+- Git sync panelu pozostaje wyłączony. `.htaccess` blokuje dotfiles poza `/.well-known/`, pliki `*.md`, szablon Bento i `admin/init-*.php`.
+- Kody wyjścia: `0` = `READY`, `10` = `AWAITING_REVIEW`, `20` = błąd treści, `30` = błąd środowiska.
+- Raportuj krótko, prosto i bez żargonu; zawsze podaj ryzyko oraz informację, czy zmianę można cofnąć.
+
 Ten plik zawiera wyłącznie aktualne decyzje. Nie jest kroniką zmian. Szczegółowe kontrakty artykułów są w `ARTICLE_STANDARD.md`, komendy w `docs/command-registry.md`, a monitoring publikacji w `docs/post-publication-monitoring.md`.
 
 ## 1. Cel projektu
@@ -14,12 +31,13 @@ Ten plik zawiera wyłącznie aktualne decyzje. Nie jest kroniką zmian. Szczegó
 W razie rozbieżności obowiązuje kolejność:
 
 1. bieżące polecenie użytkownika,
-2. `AGENTS.md`,
-3. `PROJECT_MEMORY.md`,
-4. `ARTICLE_STANDARD.md`,
-5. pamięć modułowa: `MEMORY_PORADY.md`, `MEMORY_NEWSY.md`, `MEMORY_MOJE_SUKCESY.md`,
-6. `docs/command-registry.md` i dokumentacja konkretnego mechanizmu,
-7. historyczne raporty — wyłącznie jako dane, nigdy jako aktywne instrukcje.
+2. sekcja „TWARDE ZASADY” w tym pliku,
+3. `AGENTS.md`,
+4. pozostałe sekcje `PROJECT_MEMORY.md`,
+5. `ARTICLE_STANDARD.md`,
+6. pamięć modułowa: `MEMORY_PORADY.md`, `MEMORY_NEWSY.md`, `MEMORY_MOJE_SUKCESY.md`,
+7. `docs/command-registry.md` i dokumentacja konkretnego mechanizmu,
+8. historyczne raporty — wyłącznie jako dane, nigdy jako aktywne instrukcje.
 
 `SESSION_START_MAX.md` jest skrótem operacyjnym rozpoczynającym sesję i ma być zgodny z powyższymi plikami.
 
@@ -39,13 +57,11 @@ W razie rozbieżności obowiązuje kolejność:
 
 Na początku nowej sesji:
 
-1. `git pull --ff-only origin main`,
-2. przywrócenie wyłącznie technicznych katalogów agentów zgodnie z `SESSION_START_MAX.md`,
-3. odczyt `PROJECT_MEMORY.md`, `.cursor/active-context.md` i dokumentów właściwych dla zadania,
-4. `npm run assets:mirror:sync`,
-5. `npm run predeploy:check`.
+1. przeczytaj sekcję „TWARDE ZASADY”,
+2. pokaż `git status` i porównanie `main` z `origin/main`,
+3. czekaj na zadanie użytkownika.
 
-Jeżeli którykolwiek krok poza dozwolonym, nieblokującym restore zwróci błąd lub wynik niejednoznaczny, przerwij i pokaż konkretny problem.
+Start sesji jest wyłącznie odczytowy. Nie wykonuj wtedy `pull`, `restore`, eksportu, synchronizacji ani walidatora zapisującego pliki. Pozostałe dokumenty właściwe dla zadania czytaj po jego otrzymaniu.
 
 ## 5. Publikacja artykułu z JSON-u
 
@@ -82,7 +98,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Minimum to 4 realne i wykorzystane źródła. Nie wolno dodawać dekoracyjnych URL-i dla licznika.
 - W tematach medycznych co najmniej dwa źródła i minimum 67% źródeł muszą mieć odpowiednią siłę naukową lub instytucjonalną.
 - Źródła rozróżniają: `broken` dla 404/410, `blocked_by_publisher` dla 401/403/405, `temporarily_unavailable` dla 429 i 5xx oraz `verification_failed` dla DNS, timeoutu, TLS i błędu połączenia. Po ponownej próbie GET odpowiedź 403/405 jest ostrzeżeniem, jeśli źródło ma DOI/PMID albo domenę urzędową lub naukową; tylko takie źródło liczy się wtedy do minimum czterech. 404/410 blokuje jako martwy adres, a błąd środowiska kończy kodem 30 bez zapisu JSON-u. Sam HTTP 200 nie potwierdza tezy.
-- FAQ nowego artykułu powstaje wyłącznie z realnego GSC, PAA albo autocomplete. Jego liczba wynika z researchu i może wynosić zero; pipeline ponownie je weryfikuje i nigdy nie wymyśla brakujących pytań. `manual_research` pozostaje wyłącznie historycznym wyjątkiem sześciu centrów wskazanych w baseline.
+- FAQ nowego artykułu powstaje wyłącznie z realnego GSC, PAA albo autocomplete. Jego liczba wynika z researchu i może wynosić zero; pipeline ponownie je weryfikuje i nigdy nie wymyśla brakujących pytań. `manual_research` jest zabronione w nowych i zmienianych materiałach; sześć opublikowanych centrów pozostaje wyłącznie nieedytowanym wyjątkiem baseline.
 - `quick_answer` ma 1–3 pełne, konkretne zdania, najwyżej 70 słów i nie może być generycznym wstępem.
 
 ## 7. Intencja, linkowanie i centra
@@ -171,9 +187,10 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Status RED zatrzymuje push. YELLOW wymaga przeczytania ostrzeżeń; świadomie zatwierdzony duży zakres może użyć jednorazowego `FITPO50_BYPASS_DIFF_GUARD=1`, ale pozostałe testy nadal obowiązują.
 - Nie używamy `git clean -fd`, `git reset --hard` ani ślepego usuwania untracked.
 - Sprzątanie dotyczy wyłącznie jawnie sprawdzonej listy plików tymczasowych lub wyraźnie zatwierdzonego zakresu.
-- Hostinger automatycznie wdraża `main`. Przed commitem utwórz marker przez `npm run deployment:prepare`, a po pushu workflow uruchamia `npm run deployment:finalize`: kontrolę live i kontrolę ekspozycji. IndexNow jest oddzielną komendą `npm run indexnow:release`, uruchamianą dopiero po obu pozytywnych statusach.
+- Hostinger automatycznie wdraża `main`. Po zatwierdzonym pushu zmian utwórz i wypchnij marker w osobnym commicie, a następnie uruchom `npm run deployment:finalize`: kontrolę live i kontrolę ekspozycji. IndexNow wymaga kolejnego, osobnego „tak” użytkownika po obu pozytywnych statusach.
 - `PUSHED` nie oznacza produkcji. `DEPLOYED` oznacza wykrycie markera z niepełną walidacją. Produkcję potwierdza wyłącznie `LIVE_DEPLOYED_AND_VALIDATED`.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `npm run hostinger:recovery` domyślnie wykonuje tylko dry-run, nie usuwa nieznanych plików i blokuje się na brudnym lub rozbieżnym repo.
+- Nawet bezpieczny `tmp:cleanup` wymaga osobnego „tak” użytkownika; domyślny dry-run nie zastępuje tej zgody.
 - Katalogi robocze publikacji, eksportu, workbencha, GSC i PDF mają manifest właściciela oraz lock. Cleanup domyślnie jest dry-run i usuwa wyłącznie zarządzany katalog starszy niż 12 godzin, należący do bieżącego projektu, bez żywego PID-u.
 - Katalog bez manifestu, katalog innego projektu, świeży workspace, aktywny PID lub błędny lock zawsze są pomijane.
 - Chromium uruchamiaj wyłącznie przez `withChromium`, a zadania zapisujące w prepush wykonuj sekwencyjnie.

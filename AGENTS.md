@@ -1,11 +1,13 @@
 # AGENTS.md — FitPo50
 
+Najpierw przeczytaj sekcję „TWARDE ZASADY (czytaj na starcie każdej sesji, wygrywają przy sprzeczności)” na początku `PROJECT_MEMORY.md`. Jest nadrzędna wobec pozostałych instrukcji repozytorium.
+
 To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisuj tu automatycznych obserwacji, przykładów commitów ani historii zmian.
 
 ## Kolejność instrukcji projektu
 
-1. Przeczytaj `.cursor/active-context.md`.
-2. Przeczytaj `PROJECT_MEMORY.md`.
+1. Przeczytaj sekcję „TWARDE ZASADY” w `PROJECT_MEMORY.md`, pokaż stan repozytorium i czekaj na zadanie.
+2. Po otrzymaniu zadania przeczytaj `.cursor/active-context.md` oraz pozostałe właściwe sekcje `PROJECT_MEMORY.md`.
 3. Dla artykułów przeczytaj `ARTICLE_STANDARD.md` i `MEMORY_PORADY.md`.
 4. Dla NEWS przeczytaj `MEMORY_NEWSY.md`.
 5. Dla Moich Sukcesów przeczytaj `MEMORY_MOJE_SUKCESY.md`.
@@ -31,7 +33,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Polecenie `git push` uruchamia pełny workflow opisany w `SESSION_START_MAX.md`.
 - Standardem wdrożenia jest automatyczny deploy Hostinger z `main`; po pushu workflow uruchamia `npm run deployment:finalize`. Produkcję uznaj dopiero przy `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie należy do pusha ani finalizacji wdrożenia: uruchamia się go osobno przez `npm run indexnow:release` dopiero po obu statusach.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `hostinger:recovery` zaczyna się od dry-run i nie może usuwać nieznanych plików.
-- Katalogi tymczasowe usuwaj wyłącznie przez `tmp:cleanup`: domyślnie dry-run, minimum 12 godzin, prawidłowy manifest właściciela, martwy PID i brak aktywnego locka.
+- `tmp:cleanup`, także jako dry-run, wymaga osobnego „tak” użytkownika. Po zgodzie katalogi tymczasowe usuwaj wyłącznie tym mechanizmem: minimum 12 godzin, prawidłowy manifest właściciela, martwy PID i brak aktywnego locka.
 - Każdy nowy staging lub workspace `/tmp` musi używać `scripts/lib/temp-workspace.js`; każdy nowy skrypt Playwright musi używać `withChromium`.
 - W `prepush-parallel-checks` zadania muszą deklarować `access: read|write`; zadania zapisujące wykonuj sekwencyjnie albo w odrębnych workspace.
 - Status każdej komendy z `package.json` musi być zapisany w `docs/command-registry.md` jako `PUBLIC`, `INTERNAL`, `RECOVERY` albo `RETIRED`; zgodność egzekwuje `command:contract:check`.
@@ -44,7 +46,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Artykuł ma wyczerpać realną intencję czytelnika, ale liczba i długość sekcji wynikają z tematu. Nie dopisuj sekcji, zdań ani obrazów dla sztucznego minimum.
 - JSON zewnętrzny jest draftem; kontrola logiki, dowodów i obrazów jest obowiązkowa.
 - Niejasne odniesienia, niedomknięte metafory i wnioski bez przesłanek blokują publikację.
-- FAQ pochodzi wyłącznie z realnego GSC/PAA/autocomplete/udokumentowanego researchu.
+- FAQ pochodzi wyłącznie z realnego GSC/PAA/autocomplete; `manual_research` jest zabronione dla nowych pytań.
 - Minimum 4 źródła oznacza źródła rzeczywiste, zweryfikowane i użyte w claimach.
 - Każda liczba, próg, ryzyko, cena, mechanizm i teza medyczna wymaga konkretnego dowodu.
 

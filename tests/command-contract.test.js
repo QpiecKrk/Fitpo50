@@ -51,3 +51,20 @@ test('kanoniczna dokumentacja nie może polecać użytkownikowi komendy INTERNAL
     /fixture\.md:1.*INTERNAL.*private:write/i,
   );
 });
+
+test('PROJECT_MEMORY zawiera nadrzędne twarde zasady i odsyłacze startowe', () => {
+  const memory = fs.readFileSync(path.join(ROOT, 'PROJECT_MEMORY.md'), 'utf8');
+  const heading = '## TWARDE ZASADY (czytaj na starcie każdej sesji, wygrywają przy sprzeczności)';
+  const start = memory.indexOf(heading);
+  const end = memory.indexOf('\n## ', start + heading.length);
+  assert.notEqual(start, -1, 'brak kanonicznej sekcji twardych zasad');
+  assert.ok(start < 100, 'sekcja twardych zasad nie znajduje się na samej górze PROJECT_MEMORY.md');
+  const section = memory.slice(start, end === -1 ? memory.length : end);
+  for (const keyword of ['tak', 'IndexNow', 'manual_research', 'p:domain_verify', '--approve-round']) {
+    assert.ok(section.includes(keyword), `sekcja twardych zasad nie zawiera: ${keyword}`);
+  }
+  for (const file of ['AGENTS.md', 'SESSION_START_MAX.md']) {
+    const source = fs.readFileSync(path.join(ROOT, file), 'utf8');
+    assert.match(source.slice(0, 700), /TWARDE ZASADY.*PROJECT_MEMORY\.md/s, `brak odsyłacza na początku ${file}`);
+  }
+});

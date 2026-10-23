@@ -1,28 +1,27 @@
 # SESSION START MAX — FitPo50
 
+Najpierw przeczytaj sekcję „TWARDE ZASADY (czytaj na starcie każdej sesji, wygrywają przy sprzeczności)” na początku `PROJECT_MEMORY.md`. Jest nadrzędna wobec pozostałych instrukcji repozytorium.
+
 Ten plik jest krótkim kontraktem rozpoczęcia nowej sesji. Szczegóły znajdują się w `PROJECT_MEMORY.md`, `ARTICLE_STANDARD.md` i `docs/command-registry.md`.
 
 ## Instrukcja dla agenta
 
 Pracujemy domyślnie po polsku. Zakładaj, że użytkownik nie zna technicznych szczegółów: podawaj wynik prostym językiem, a przy ręcznych działaniach gotowe komendy.
 
-### 1. Start techniczny — zawsze jako pierwszy krok nowej sesji
+### 1. Start odczytowy — zawsze jako pierwszy krok nowej sesji
 
 ```bash
 cd /Users/grzegorzkupiec/Projects/FitPo50-local
-git pull --ff-only origin main
-git restore .agent .agents .brainsync .cursor .windsurfrules 2>/dev/null || true
 git status --short
-npm run assets:mirror:sync
-npm run predeploy:check
+git branch --show-current
+git rev-parse --short=8 main
+git rev-parse --short=8 origin/main
 ```
 
-- Najpierw pokaż wynik startu, potem przejdź do pracy.
-- Nie generuj raportu startowego i nie kopiuj nic do `~/Downloads`.
-- Jeżeli krok inny niż dopuszczony restore zwróci błąd lub niejednoznaczny wynik, zatrzymaj się i pokaż komunikat.
-- Konflikt `untracked files would be overwritten` rozwiązuj przez bezpieczny backup wyłącznie wskazanych plików do katalogu utworzonego przez `mktemp -d`; nigdy nie używaj `git clean`.
+- Przeczytaj twarde zasady, pokaż stan repozytorium i porównanie `main` z `origin/main`, a następnie czekaj na zadanie.
+- Start jest wyłącznie odczytowy: bez `pull`, `restore`, eksportu, synchronizacji, walidacji, sprzątania i innych zapisów.
 
-### 2. Obowiązkowa lektura
+### 2. Obowiązkowa lektura po otrzymaniu zadania
 
 Zawsze przeczytaj w całości:
 
@@ -44,7 +43,7 @@ Dodatkowo według zadania:
 - Liczba sekcji i obrazów wynika z realnego zakresu tematu. Nie wydłużaj tekstu dla minimum; wymagaj hero i odrębnego obrazu dla każdej głównej sekcji merytorycznej.
 - JSON z zewnątrz jest draftem. Sprawdź logikę akapit po akapicie, dowody, FAQ, intencję, linki i prawdziwe obrazy.
 - Każda liczba, próg, cena, ryzyko, mechanizm lub teza medyczna wymaga konkretnego źródła i mapowania claimu.
-- FAQ pochodzi wyłącznie z GSC/PAA/autocomplete/udokumentowanego researchu; nigdy nie jest automatycznie wymyślane.
+- FAQ pochodzi wyłącznie z GSC/PAA/autocomplete; `manual_research` jest zabronione dla nowych pytań i niczego nie wolno automatycznie wymyślać.
 - Minimum 4 źródła oznacza 4 realne i wykorzystane źródła, nie dekoracyjną bibliografię.
 - Tabele są semantycznym HTML, nigdy obrazem ani tekstem rozdzielonym kreskami.
 - Każdy obraz obejrzyj i sprawdź w kontekście sekcji. Watermark sam nie blokuje, lecz mylący tekst, liczby, anatomia, sprzęt lub kadr blokują publikację.
@@ -63,7 +62,7 @@ To jedno polecenie użytkownika uruchamia kanoniczne `article:add`. Użytkownik 
 
 1. Szybkie `popraw-json`: `DRAFT` → `CONTENT_READY`, bez tworzenia HTML. Najpierw logika, źródła, intencja i preflight samej treści; potem kontrola podpisów/obrazów i brakujące warianty mediów; na końcu ponowne domknięcie dowodów dla podpisów oraz bramka kompletnego JSON-u.
    Draft dla Claude można tworzyć skillem `docs/skills/fitpo50-article-draft/`; jego walidacja potwierdza tylko strukturę `DRAFT`. Claude może dostarczyć FAQ tylko z rzeczywistym sygnałem zapisanym 1:1 w `faq_research`; lokalny pipeline zawsze ponownie sprawdza ten sygnał. Brak FAQ pozostaje prawidłowy, jeśli research nie znalazł rzeczywistych pytań.
-2. Lokalna intencja, kanibalizacja, minimum 4 prawdziwe linki i propozycja centrum.
+2. Lokalna intencja, kanibalizacja, plan linkowania z lokalnego pipeline'u i propozycja centrum.
 3. Rzeczywista kontrola obrazów oraz manifest AVIF/WebP/JPG.
 4. Transakcyjny staging HTML i PDF.
 5. Render desktop/mobile oraz wszystkich stron PDF daje wyłącznie `TECHNICAL_PASS` i zatrzymuje staging na `VISUAL_REVIEW_PENDING`.
@@ -122,24 +121,26 @@ Każdy nowy błąd wykryty podczas `dodaj artykuł` albo `Obal mit` napraw dwupo
 Wykonaj kolejno:
 
 ```bash
-npm run fitpo50:doctor
-./scripts/export_site.sh
-npm run assets:mirror:sync
-npm run deployment:prepare
-npm run predeploy:check
-git diff --check
+npm run prepush:local
+# sprawdź, że _site nie zawiera plików technicznych
 git add -A
 git commit -m "<konkretny opis>"
 git push origin main
+npm run deployment:prepare
+git add deployment.json _site/deployment.json
+git commit -m "<konkretny opis markera>"
+git push origin main
+npm run deployment:finalize
 ```
 
+- Cały ten workflow wymaga wcześniejszego, osobnego „tak” użytkownika w czacie; akceptacja ID lub raportu nie wystarcza.
 - Status RED zatrzymuje push. Przy YELLOW przeczytaj i oceń ostrzeżenia.
 - Nienaturalnie duży, niezatwierdzony zakres wymaga potwierdzenia. `git push wszystko` zatwierdza cały wcześniej omówiony zakres.
 - Jeśli świadomie zatwierdzony zakres przekracza diff guard, wolno jednorazowo użyć `FITPO50_BYPASS_DIFF_GUARD=1`; pozostałe testy nadal muszą przejść.
-- Hostinger automatycznie wdraża `main`. Po pushu workflow uruchamia `npm run deployment:finalize`; czekaj na `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie jest częścią pusha: po obu statusach uruchom osobno `npm run indexnow:release`.
+- Hostinger automatycznie wdraża `main`. Po osobnym commicie i pushu markera uruchom `npm run deployment:finalize`; czekaj na `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie jest częścią pusha i wymaga kolejnego, osobnego „tak” użytkownika.
 - `PUSHED` oznacza wyłącznie obecność commita na GitHubie. `DEPLOYED` oznacza wykrycie markera na serwerze z niepełną walidacją. Dopiero `LIVE_DEPLOYED_AND_VALIDATED` potwierdza produkcję i pozwala utworzyć listę GSC.
 - `npm run hostinger:clean-repo` jest wycofane. Przy rzeczywistym błędzie integracji zacznij od `npm run hostinger:recovery` w trybie dry-run i stosuj kontrakt z `docs/deployment-status-contract.md`.
-- `npm run tmp:cleanup` jest odczytowym dry-run. Trybu `tmp:cleanup:apply` używaj dopiero po przeglądzie listy; usuwa wyłącznie stare, zarządzane i osierocone workspace zgodnie z `docs/temporary-workspace-safety.md`.
+- `npm run tmp:cleanup`, także w trybie dry-run, wymaga osobnego „tak” użytkownika. Trybu `tmp:cleanup:apply` używaj dopiero po przeglądzie listy i odrębnej zgodzie; usuwa wyłącznie stare, zarządzane i osierocone workspace zgodnie z `docs/temporary-workspace-safety.md`.
 
 ### 5. Najważniejsze regresje, których nie wolno przywrócić
 

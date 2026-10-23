@@ -17,7 +17,7 @@ kanoniczne źródło, publiczny HTML, PDF i `_site` w jednej transakcji.
 `validate-topic-center.py` wymaga pojedynczych, zgodnych `BlogPosting`,
 `CollectionPage`, `ItemList` i FAQ, pełnych dat ISO, opisu 145–160 znaków,
 istniejących linków kontekstowych, minimum czterech wykorzystanych źródeł,
-udokumentowanego researchu pytań oraz przycisku własnego PDF.
+udokumentowanego sygnału GSC/PAA/autocomplete dla pytań oraz przycisku własnego PDF.
 Lista `ItemList` odpowiada kartom poradników; linki w akapicie wprowadzającym
 nie są osobnymi pozycjami tej listy.
 
