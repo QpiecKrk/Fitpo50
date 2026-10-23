@@ -233,6 +233,15 @@ test('admin setup is CLI-only and public init scripts do not exist', () => {
   assert.match(schema, /CREATE TABLE IF NOT EXISTS failed_logins/);
 });
 
+test('admin Git sync is disabled unless explicitly enabled', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'admin', 'helpers', 'git-sync.php'), 'utf8');
+  assert.match(source, /if \(\$raw === false \|\| trim\(\(string\)\$raw\) === ''\) \{\s*return false;/);
+  assert.match(source, /return in_array\(\$value, \['1', 'true', 'on', 'yes'\], true\);/);
+  assert.match(source, /FITPO50_AUTO_GIT_SYNC=1/);
+  assert.match(source, /\['git', 'push', \$remote, \$branch\]/);
+  assert.match(source, /\['git', 'pull', '--rebase', \$remote, \$branch\]/);
+});
+
 test('post-push validation never submits IndexNow automatically', () => {
   const finalize = fs.readFileSync(path.join(ROOT, 'scripts', 'deployment-finalize.js'), 'utf8');
   const push = fs.readFileSync(path.join(ROOT, 'scripts', 'push_one.sh'), 'utf8');

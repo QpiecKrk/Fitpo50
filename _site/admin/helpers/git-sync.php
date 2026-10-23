@@ -5,11 +5,11 @@ require_once __DIR__ . '/../bootstrap.php';
 function gitAutoSyncEnabled(): bool {
     $raw = getenv('FITPO50_AUTO_GIT_SYNC');
     if ($raw === false || trim((string)$raw) === '') {
-        return true;
+        return false;
     }
 
     $value = strtolower(trim((string)$raw));
-    return !in_array($value, ['0', 'false', 'off', 'no'], true);
+    return in_array($value, ['1', 'true', 'on', 'yes'], true);
 }
 
 function gitAutoSyncRemote(): string {
@@ -30,7 +30,7 @@ function gitAutoSyncFallbackBranch(): string {
  */
 function runGitAutoSync(array $groups, string $actionLabel): array {
     if (!gitAutoSyncEnabled()) {
-        return ['status' => 'disabled', 'message' => 'Auto-sync Git jest wyłączony (FITPO50_AUTO_GIT_SYNC=0).'];
+        return ['status' => 'disabled', 'message' => 'Auto-sync Git jest wyłączony. Wymaga jawnego FITPO50_AUTO_GIT_SYNC=1.'];
     }
 
     $repoRoot = rtrim(SITE_ROOT, DIRECTORY_SEPARATOR);

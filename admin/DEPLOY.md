@@ -13,6 +13,7 @@
 - [ ] Prywatna kopia `config.php` istnieje poza `public_html`, np. w katalogu domowym konta
 - [ ] `admin/uploads/*` jest w `.gitignore`  
 - [ ] `init-hash.php` i `init-db.php` nie istnieją w repo ani na serwerze; konfigurację wykonujesz wyłącznie z CLI według `docs/admin-cli-setup.md`
+- [ ] `FITPO50_AUTO_GIT_SYNC` jest nieustawione lub ma wartość `0`; Git push i `pull --rebase` z serwera są domyślnie wyłączone
 - [ ] Basic Auth (Directory Privacy) jest aktywne na Hostingerze dla `admin.fitpo50.pl`
 
 ---
