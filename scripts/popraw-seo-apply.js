@@ -227,9 +227,9 @@ function main() {
       changed_files: validation.touched,
       target_files: patched.targetFiles,
       changed_article_files: patched.articleFiles,
-      next_automatic_step: 'Agent wykonuje commit/push, monitoruje workflow live i zwraca końcową listę GSC.',
+      next_automatic_step: 'Agent raportuje lokalny wynik i czeka na osobne „tak” użytkownika w czacie przed commitem, pushem, deployem lub IndexNow.',
     }, null, 2)}\n`);
-    console.log(`[APPLIED_VALIDATED] ${selectedIds.join(', ')}. Następny krok agenta: commit, push i kontrola LIVE.`);
+    console.log(`[APPLIED_VALIDATED] ${selectedIds.join(', ')}. Następny krok agenta: raportuj wynik i czekaj na osobne „tak” użytkownika przed commitem, pushem, deployem lub IndexNow.`);
   } catch (error) {
     restore(state);
     console.error('[ROLLBACK] Cofnięto cały pakiet popraw-seo po błędzie.');

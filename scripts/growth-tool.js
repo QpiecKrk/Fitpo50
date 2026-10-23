@@ -3242,10 +3242,10 @@ function buildPoprawSeo() {
     unified_insights: unifiedInsights,
     approval_wave: unifiedInsights.approval_wave,
     chosen_articles: autopilot.chosen_articles,
-    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Dla ROKUJE obowiązuje sekwencja: pilotaż 4 najwyżej sklasyfikowanych stron, a po jego LIVE_DEPLOYED_AND_VALIDATED ponowny raport i jedna fala 20 najwyżej sklasyfikowanych pozostałych stron. Agent przygotuje konkretne teksty i niezmienny manifest patchy, zastosuje go atomowo, zwaliduje, wykona commit/push, sprawdzi produkcję i poda końcową listę GSC. Nie musisz pamiętać kolejnych komend.',
+    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Dla ROKUJE obowiązuje sekwencja: pilotaż 4 najwyżej sklasyfikowanych stron, a po jego LIVE_DEPLOYED_AND_VALIDATED ponowny raport i jedna fala 20 najwyżej sklasyfikowanych pozostałych stron. Agent przygotuje konkretne teksty i niezmienny manifest patchy, zastosuje go atomowo i zwaliduje, po czym zaraportuje wynik. Commit, push, deploy i IndexNow wymagają osobnego „tak” użytkownika w czacie po tym raporcie; akceptacja ID ani raportu nie są taką zgodą.',
     safe_next_commands: [
       'npm run popraw-seo',
-      'Po akceptacji ID: automatyczny manifest -> popraw-seo:apply -> walidacja -> commit/push -> LIVE -> lista GSC',
+      'Po akceptacji ID: manifest -> popraw-seo:apply -> walidacja -> raport -> osobne „tak” użytkownika -> commit/push/deploy; IndexNow tylko po osobnym „tak”.',
     ],
     reports: Object.fromEntries([
       ['growth_report', 'growth-report.md'],
