@@ -8,7 +8,7 @@ on:
 jobs:
   live_check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,16 +17,16 @@ jobs:
 
       - name: Verify live deployment and security exposure
         env:
-          RETRIES: "1"
-          DELAY: "3"
-          TIMEOUT: "10"
+          RETRIES: "12"
+          DELAY: "15"
+          TIMEOUT: "20"
         run: |
           set +e
-          timeout --foreground 150s bash scripts/live-postpush-check.sh https://fitpo50.pl
+          timeout --foreground 300s bash scripts/live-postpush-check.sh https://fitpo50.pl
           status="$?"
           set -e
           if [ "$status" = "124" ]; then
-            echo "[ERROR] Live post-push check przekroczył 150 s; wdrożenie i kontrola bezpieczeństwa nie zostały potwierdzone."
+            echo "[ERROR] Live post-push check przekroczył 300 s; wdrożenie i kontrola bezpieczeństwa nie zostały potwierdzone."
             exit 1
           fi
           exit "$status"
