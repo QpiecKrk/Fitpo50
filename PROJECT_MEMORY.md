@@ -2,7 +2,7 @@
 
 ## TWARDE ZASADY (czytaj na starcie każdej sesji, wygrywają przy sprzeczności)
 
-- Bez osobnego „tak” użytkownika w czacie: zero commitów na `main`, pushy, deployów, merge'ów, IndexNow, usuwania plików lub gałęzi ani `tmp:cleanup`. Akceptacja ID lub raportu nie jest zgodą.
+- Bez osobnego „tak” użytkownika w czacie: zero commitów na `main`, pushy, deployów, merge'ów, IndexNow, ręcznego `tmp:cleanup` ani usuwania danych użytkownika, plików repozytorium lub gałęzi. Automatyczne sprzątanie własnego stagingu, locków i workspace bieżącej operacji jest dozwolone. Akceptacja ID lub raportu nie jest zgodą.
 - Każda sesja zaczyna się tylko od odczytu: przeczytaj te zasady, pokaż `git status` oraz porównanie `main` z `origin/main`, a potem czekaj na zadanie.
 - Pracuj wyłącznie w zakresie polecenia. Problem poza zakresem zgłoś, ale niczego w nim nie zmieniaj.
 - Deploy: `prepush:local` PASS → `_site` bez plików technicznych → `deployment:prepare` przed commitem → jeden commit z treścią i markerem → jeden push → `deployment:finalize` z `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`.
@@ -148,7 +148,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 
 ## 10. `GSC` i `popraw-seo`
 
-- `GSC` jest trybem analitycznym. Uruchamia `npm run gsc:auto`, synchronizuje dane w `~/Downloads/gsc-auto-input`, sprawdza ich kontrakt i dopiero potem przygotowuje raport; nie edytuje HTML.
+- `GSC` jest trybem analitycznym. Domyślne dane są w `data/reports/local/gsc-current`; `~/Downloads/...` wolno wskazać wyłącznie jawnym parametrem. `npm run gsc:auto` sprawdza kontrakt danych i dopiero potem przygotowuje raport; nie edytuje HTML.
 - Wymagane są prawidłowe `queries.csv`, `pages.csv`, `query-pages.csv` oraz ich manifest. Brak, podmiana typu pliku, niespójny hash, stary zakres albo pomieszany cohort oznacza `INSUFFICIENT_DATA`.
 - Warstwa property/stron jest nadrzędna. Query są niepełne z powodu anonimizacji i służą do rozpoznawania ujawnionych intencji.
 - W `popraw-seo` zapytania z operatorami wyszukiwania (`site:`, `-site:` itd.) pozostają w danych surowych, lecz nie mogą tworzyć priorytetów redakcyjnych. Sygnał niskiego CTR wymaga co najmniej 30 wyświetleń w analizowanym oknie. Tytuł strony użyty awaryjnie oznaczamy jako temat, nie jako ujawnione query GSC. Automatyczne propozycje linków wymagają ręcznej kontroli kontekstu akapitu i nie trafiają do kolejki GSC bez rzeczywistej zmiany.
@@ -156,7 +156,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Dane obejmują okna 7/28/90 dni i dostępne typy wyszukiwania. Stary, niepełny lub pomieszany cohort jest błędem blokującym.
 - `popraw-seo` diagnozuje wszystkie indeksowalne `BlogPosting`: `article_inventory = diagnosed_articles = actions_assigned`, `omitted_articles = 0`.
 - Każda strona otrzymuje koszyk i konkretne działanie: `BOOST`, `ROKUJE`, `NAPRAWA` albo `MONITORING`. Cooldown nie usuwa URL-a z raportu.
-- `ROKUJE` ma stałą kolejność wykonania: najpierw 4 najwyżej sklasyfikowane strony jako pilotaż. Po ich `LIVE_DEPLOYED_AND_VALIDATED` raport jest liczony ponownie, a następna fala obejmuje 20 najwyżej sklasyfikowanych pozostałych stron `ROKUJE`. Każda fala nadal wymaga zatwierdzenia jej konkretnych ID.
+- `ROKUJE` ma stałą falę 3 pozycji według zysku i 2 rotacyjnych spoza top 20. Każda fala nadal wymaga zatwierdzenia jej konkretnych ID; model pilotażu 4 / 20 jest historyczny.
 - Brak danych GSC nie usuwa strony. Taki URL otrzymuje diagnostykę indeksacji i plan odkrywania.
 - Raport rozdziela indeksację od widoczności oraz identyfikuje m.in. `INDEXED_ZERO_VISIBILITY`, `CRAWLED_NOT_INDEXED`, `DISCOVERED_NOT_INDEXED`, `UNKNOWN_TO_GOOGLE` i problemy canonical/robots.
 - Raport zawiera mapę kanibalizacji, właściciela intencji, historię zmian, baseline i checkpointy 7/14/28.
@@ -192,7 +192,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Hostinger automatycznie wdraża `main`. Po prepush:local PASS przygotuj marker przed commitem; treść i marker zapisz w jednym commicie i wykonaj jeden zatwierdzony push, a następnie uruchom `npm run deployment:finalize`: kontrolę live i kontrolę ekspozycji. IndexNow wymaga kolejnego, osobnego „tak” użytkownika po obu pozytywnych statusach.
 - `PUSHED` nie oznacza produkcji. `DEPLOYED` oznacza wykrycie markera z niepełną walidacją. Produkcję potwierdza wyłącznie `LIVE_DEPLOYED_AND_VALIDATED`.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `npm run hostinger:recovery` domyślnie wykonuje tylko dry-run, nie usuwa nieznanych plików i blokuje się na brudnym lub rozbieżnym repo.
-- Nawet bezpieczny `tmp:cleanup` wymaga osobnego „tak” użytkownika; domyślny dry-run nie zastępuje tej zgody.
+- Ręczny `tmp:cleanup` i każdy tryb apply wymagają osobnego „tak” użytkownika. Wbudowany `tmp:cleanup --dry-run` w `prepush:local` jest dozwolony.
 - Katalogi robocze publikacji, eksportu, workbencha, GSC i PDF mają manifest właściciela oraz lock. Cleanup domyślnie jest dry-run i usuwa wyłącznie zarządzany katalog starszy niż 12 godzin, należący do bieżącego projektu, bez żywego PID-u.
 - Katalog bez manifestu, katalog innego projektu, świeży workspace, aktywny PID lub błędny lock zawsze są pomijane.
 - Chromium uruchamiaj wyłącznie przez `withChromium`, a zadania zapisujące w prepush wykonuj sekwencyjnie.

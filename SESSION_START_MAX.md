@@ -84,7 +84,7 @@ Każdy nowy błąd wykryty podczas `dodaj artykuł` albo `Obal mit` napraw dwupo
 #### `GSC`
 
 - Tryb wyłącznie analityczny.
-- Uruchom `npm run gsc:auto`; dane robocze mają pozostać poza repo w `~/Downloads/gsc-auto-input`.
+- Uruchom `npm run gsc:auto`; domyślne dane robocze to ignorowane `data/reports/local/gsc-current`. Katalog w `~/Downloads` używaj wyłącznie przez jawny parametr.
 - Zweryfikuj `queries.csv`, `pages.csv`, `query-pages.csv`, manifest oraz kompletny cohort 7/28/90 dni.
 - Warstwa stron/property pokazuje rzeczywisty agregat; query są niepełne z powodu anonimizacji.
 - Brak wymaganych danych oznacza `INSUFFICIENT_DATA`, nie zgadywanie.
@@ -98,7 +98,7 @@ Każdy nowy błąd wykryty podczas `dodaj artykuł` albo `Obal mit` napraw dwupo
 - Cooldown i brak ujawnionych query nie usuwają URL-a.
 - Dla stron bez widoczności sprawdź stan indeksacji, canonical, robots i plan odkrywania.
 - Raport zawiera mapę kanibalizacji, historię, baseline, checkpointy 7/14/28 oraz szerokie wnioski całej witryny.
-- Dla `ROKUJE` obowiązuje sekwencja fal: pilotaż 4 najwyżej sklasyfikowanych stron, potem — dopiero po `LIVE_DEPLOYED_AND_VALIDATED` i ponownym przeliczeniu raportu — jedna fala 20 najwyżej sklasyfikowanych pozostałych stron.
+- Dla `ROKUJE` obowiązuje fala 3 pozycji według zysku i 2 rotacyjne spoza top 20. Pilotaż 4 / 20 jest modelem historycznym.
 - Zakończ na `AWAITING_USER_APPROVAL`; nie edytuj bez zatwierdzenia konkretnych ID.
 - Po zatwierdzeniu ID agent tworzy konkretny manifest `replace_exact`, uruchamia atomowy `popraw-seo:apply` i sprawdza HTML/PDF/mobile/desktop/_site/sitemap, a następnie raportuje wynik. Commit, push, deploy i IndexNow wykonuje wyłącznie po osobnym „tak” użytkownika w czacie po raporcie; akceptacja ID ani raportu nie są taką zgodą. Każdy brak lub błąd zgłasza jawnie jako bloker.
 - Lista GSC powstaje wyłącznie po `LIVE_DEPLOYED_AND_VALIDATED`; lokalny komplet ani sam `git push` nie są dowodem wdrożenia produkcyjnego.
@@ -137,7 +137,7 @@ npm run deployment:finalize
 - Hostinger automatycznie wdraża `main`. Marker przygotuj przed commitem; treść i marker trafiają do jednego commita i jednego pusha. Potem uruchom `npm run deployment:finalize`; czekaj na `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie jest częścią pusha i wymaga kolejnego, osobnego „tak” użytkownika.
 - `PUSHED` oznacza wyłącznie obecność commita na GitHubie. `DEPLOYED` oznacza wykrycie markera na serwerze z niepełną walidacją. Dopiero `LIVE_DEPLOYED_AND_VALIDATED` potwierdza produkcję i pozwala utworzyć listę GSC.
 - `npm run hostinger:clean-repo` jest wycofane. Przy rzeczywistym błędzie integracji zacznij od `npm run hostinger:recovery` w trybie dry-run i stosuj kontrakt z `docs/deployment-status-contract.md`.
-- `npm run tmp:cleanup`, także w trybie dry-run, wymaga osobnego „tak” użytkownika. Trybu `tmp:cleanup:apply` używaj dopiero po przeglądzie listy i odrębnej zgodzie; usuwa wyłącznie stare, zarządzane i osierocone workspace zgodnie z `docs/temporary-workspace-safety.md`.
+- Ręczny `npm run tmp:cleanup` i każdy tryb apply wymagają osobnego „tak” użytkownika. Wbudowany dry-run w `prepush:local` oraz automatyczne sprzątanie własnego stagingu, locków i workspace bieżącej operacji są dozwolone. `tmp:cleanup:apply` używaj dopiero po przeglądzie listy i odrębnej zgodzie.
 
 ### 5. Najważniejsze regresje, których nie wolno przywrócić
 

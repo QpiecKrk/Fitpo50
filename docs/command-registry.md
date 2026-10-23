@@ -104,7 +104,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run seo:aio:machine` — Bezpośrednia komenda robocza lub odczytowa (node scripts/seo-aio-command-center.js).
 - [PUBLIC] `npm run seo:aio:wave:proposal` — Generuje wyłącznie propozycję ze statusem AWAITING_USER_APPROVAL; nie wdraża zmian ani nie tworzy produkcyjnej kolejki GSC.
 - [PUBLIC] `npm run seo:crawl` — Bezpośrednia komenda robocza lub odczytowa (node scripts/broken-links-crawler.js _site).
-- [PUBLIC] `npm run session:start` — Lekki start diagnostyczny sesji: kontekst i doctor.
+- [PUBLIC] `npm run session:start` — Lekki start diagnostyczny, nie jest rozpoczęciem sesji agenta i nie zastępuje odczytowej procedury z `PROJECT_MEMORY.md`.
 - [PUBLIC] `npm run site:full-audit` — Bezpośrednia komenda robocza lub odczytowa (npm run check:build-export && npm run broken-links:crawl && npm run workflow:maintenance && npm run aio:full-audit).
 - [PUBLIC] `npm run sitemap:lastmod:check` — Bezpośrednia komenda robocza lub odczytowa (node scripts/sync-sitemap-lastmod.js --check).
 - [PUBLIC] `npm run smoke:static` — Bezpośrednia komenda robocza lub odczytowa (node scripts/static-smoke-check.js _site).

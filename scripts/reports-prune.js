@@ -4,9 +4,9 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const os = require('node:os');
 const { spawnSync } = require('node:child_process');
 const { assertPathInside, assertProjectRoot } = require('./lib/destructive-path-guard');
+const { defaultGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = path.resolve(__dirname, '..');
 const DEFAULT_DAYS = 30;
@@ -62,7 +62,7 @@ function defaultRoots(root) {
   return [
     { directory: path.join(root, 'data', 'reports'), safeRx: SAFE_DATA_REPORT_RX },
     { directory: path.join(root, 'data', 'reports', 'growth'), safeRx: SAFE_GROWTH_REPORT_RX },
-    { directory: path.join(os.homedir(), 'Downloads', 'gsc-auto-input'), safeRx: SAFE_GSC_RX },
+    { directory: defaultGscWorkDir(root), safeRx: SAFE_GSC_RX },
   ];
 }
 

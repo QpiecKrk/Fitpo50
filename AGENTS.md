@@ -33,7 +33,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Polecenie `git push` uruchamia pełny workflow opisany w `SESSION_START_MAX.md`.
 - Standardem wdrożenia jest automatyczny deploy Hostinger z `main`: `prepush:local` PASS → kontrola `_site` → `deployment:prepare` przed commitem → jeden commit z treścią i markerem → jeden push → `npm run deployment:finalize`. Produkcję uznaj dopiero przy `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie należy do pusha ani finalizacji wdrożenia: uruchamia się go osobno przez `npm run indexnow:release` dopiero po obu statusach.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `hostinger:recovery` zaczyna się od dry-run i nie może usuwać nieznanych plików.
-- `tmp:cleanup`, także jako dry-run, wymaga osobnego „tak” użytkownika. Po zgodzie katalogi tymczasowe usuwaj wyłącznie tym mechanizmem: minimum 12 godzin, prawidłowy manifest właściciela, martwy PID i brak aktywnego locka.
+- Ręczny `tmp:cleanup` i każdy tryb apply wymagają osobnego „tak” użytkownika. Wbudowany `tmp:cleanup --dry-run` w `prepush:local` oraz automatyczne sprzątanie własnego stagingu, locków i workspace bieżącej operacji są dozwolone. Po zgodzie katalogi tymczasowe usuwaj wyłącznie tym mechanizmem: minimum 12 godzin, prawidłowy manifest właściciela, martwy PID i brak aktywnego locka.
 - Każdy nowy staging lub workspace `/tmp` musi używać `scripts/lib/temp-workspace.js`; każdy nowy skrypt Playwright musi używać `withChromium`.
 - W `prepush-parallel-checks` zadania muszą deklarować `access: read|write`; zadania zapisujące wykonuj sekwencyjnie albo w odrębnych workspace.
 - Status każdej komendy z `package.json` musi być zapisany w `docs/command-registry.md` jako `PUBLIC`, `INTERNAL`, `RECOVERY` albo `RETIRED`; zgodność egzekwuje `command:contract:check`.
@@ -83,7 +83,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Raport obejmuje wszystkie indeksowalne `BlogPosting`; żaden URL nie może zostać pominięty.
 - Każdy URL otrzymuje `BOOST`, `ROKUJE`, `NAPRAWA` albo `MONITORING` i konkretne działanie.
 - Warstwa stron/property GSC jest nadrzędna wobec anonimizowanych query.
-- `ROKUJE` wykonuj w stałej sekwencji: najpierw pilotaż 4 najwyżej sklasyfikowanych stron. Dopiero po `LIVE_DEPLOYED_AND_VALIDATED` przelicz raport i przedstaw do jednego zatwierdzenia 20 najwyżej sklasyfikowanych pozostałych stron `ROKUJE`.
+- `ROKUJE` wykonuj falami 3 pozycji według zysku i 2 rotacyjnych spoza top 20. Model pilotażu 4 / 20 jest historyczny.
 - Raport kończy się `AWAITING_USER_APPROVAL`. Bez akceptacji konkretnych ID nie edytuj HTML.
 - Po zatwierdzeniu ID agent przygotowuje konkretny manifest patchy, dry-run, atomowy apply i rollback, PDF/_site/sitemap oraz walidację, po czym raportuje wynik. Commit, push, deploy i IndexNow wymagają osobnego „tak” użytkownika w czacie po tym raporcie; akceptacja ID ani raportu nie są taką zgodą. Jeżeli etap nie przejdzie, zgłasza bloker zamiast go pomijać.
 - Sam `git push` nie potwierdza produkcji. URL-e do GSC wolno podać dopiero po `LIVE_DEPLOYED_AND_VALIDATED`.

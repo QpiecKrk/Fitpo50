@@ -2,9 +2,9 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
 const { spawnSync } = require('child_process');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
+const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -44,7 +44,7 @@ function main() {
   const status = run('git', ['status', '--short']).stdout.split('\n').filter(Boolean);
   const lastCommit = run('git', ['log', '-1', '--oneline']).stdout;
   const branch = run('git', ['branch', '--show-current']).stdout;
-  const gscDir = path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+  const gscDir = resolveGscWorkDir(ROOT);
   const gscFiles = ['queries.csv', 'pages.csv', 'query-pages.csv'].map((name) => ({
     name,
     exists: fs.existsSync(path.join(gscDir, name)),

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const os = require('os');
 const path = require('path');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
+const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 
 function parseArgs(argv) {
   const out = {
-    inputDir: process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input'),
+    inputDir: resolveGscWorkDir(process.cwd()),
     strictPeriods: true,
   };
   for (let i = 0; i < argv.length; i += 1) {

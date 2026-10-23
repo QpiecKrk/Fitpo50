@@ -5,10 +5,10 @@ const path = require('path');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
 const { isEditorialQuery } = require('./lib/gsc-editorial-query');
 const { buildSharedPriorityList } = require('./lib/seo-priority-list');
-const os = require('os');
+const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = process.cwd();
-const DEFAULT_INPUT_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+const DEFAULT_INPUT_DIR = resolveGscWorkDir(ROOT);
 const DEFAULT_OUTPUT_DIR = DEFAULT_INPUT_DIR;
 const SITE_ORIGIN = 'https://fitpo50.pl';
 

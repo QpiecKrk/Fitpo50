@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
+const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = process.cwd();
-const DEFAULT_WORK_DIR = path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+const DEFAULT_WORK_DIR = resolveGscWorkDir(ROOT);
 const DEFAULT_INPUT = path.join(DEFAULT_WORK_DIR, 'seo-aio-command-center.json');
 const DEFAULT_OUTPUT_DIR = DEFAULT_WORK_DIR;
 

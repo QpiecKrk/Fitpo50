@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const crypto = require('crypto');
-const os = require('os');
 const path = require('path');
 const {
   hydrateSharedPriorityList,
@@ -10,10 +9,11 @@ const {
   resolveSeoStateDir,
   selectPriorityWave,
 } = require('./lib/seo-priority-list');
+const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = process.cwd();
 const SITE_ORIGIN = 'https://fitpo50.pl';
-const DEFAULT_WORK_DIR = path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+const DEFAULT_WORK_DIR = resolveGscWorkDir(ROOT);
 const DEFAULT_REPO_REPORT_DIR = path.join(ROOT, 'data', 'reports');
 const SUPPORT_PAGES = new Set([
   'index.html',
@@ -504,9 +504,9 @@ function buildReport(args) {
     ],
     validation_pipeline: [
       'node --check scripts/gsc-weekly-api-report.js scripts/gsc-priority-map.js scripts/seo-aio-command-center.js',
-      'npm run gsc:priority-map -- --input-dir ~/Downloads/gsc-auto-input --output-dir data/reports',
-      'npm run seo:aio:machine -- --input-dir ~/Downloads/gsc-auto-input --output-dir ~/Downloads/gsc-auto-input',
-      'npm run seo:aio:wave:proposal -- --input ~/Downloads/gsc-auto-input/seo-aio-command-center.json --output-dir ~/Downloads/gsc-auto-input --wave 1 --limit 5',
+      'npm run gsc:priority-map -- --input-dir data/reports/local/gsc-current --output-dir data/reports',
+      'npm run seo:aio:machine -- --input-dir data/reports/local/gsc-current --output-dir data/reports/local/gsc-current',
+      'npm run seo:aio:wave:proposal -- --input data/reports/local/gsc-current/seo-aio-command-center.json --output-dir data/reports/local/gsc-current --wave 1 --limit 5',
       'npm run llms:full',
       'npm run assets:mirror:sync',
       'npm run predeploy:check',

@@ -9,6 +9,8 @@ Każdy katalog roboczy publikacji, eksportu, workbencha, GSC i renderowania PDF 
 
 Status `ACTIVE` oznacza trwającą pracę. `AWAITING_REVIEW` oznacza zakończoną kontrolę techniczną i celowo zachowane prywatne rendery oczekujące na rzeczywisty review; taki katalog nie jest kandydatem do cleanupu. Wznowienie tej samej transakcji przywraca `ACTIVE`. Prawidłowo zakończony proces zapisuje `COMPLETED` albo `FAILED`, usuwa lock i usuwa własny katalog. Jeśli proces zostanie przerwany, manifest i lock pozwalają rozpoznać osieroconą pracę bez zgadywania po samej nazwie katalogu.
 
+Automatyczne sprzątanie własnego workspace bieżącej operacji nie jest usuwaniem danych użytkownika ani plików repozytorium. Ręczne wywołanie `tmp:cleanup` oraz każdy tryb `--apply` nadal wymagają osobnego „tak” użytkownika; dry-run uruchamiany wewnątrz `prepush:local` jest dozwolony.
+
 ## Cleanup
 
 Bezargumentowe wywołanie jest zawsze tylko odczytowe:

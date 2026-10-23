@@ -1,8 +1,8 @@
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
 const { inspectGscInput } = require('./gsc-data-contract');
 const { categoryFileFromKey, normalizeCategory } = require('./categories');
+const { resolveGscWorkDir } = require('./gsc-work-dir');
 
 const SITE_ORIGIN = 'https://fitpo50.pl';
 const HISTORY_RELATIVE = path.join('data', 'reports', 'published-articles-log.json');
@@ -345,8 +345,8 @@ function metricDelta(baseline, current) {
   };
 }
 
-function defaultGscInputDir() {
-  return process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+function defaultGscInputDir(root = process.cwd()) {
+  return resolveGscWorkDir(root);
 }
 
 module.exports = {

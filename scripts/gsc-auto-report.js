@@ -8,10 +8,11 @@ const https = require('https');
 const { API_REPORT_NAME, MANIFEST_NAME, inspectGscInput } = require('./lib/gsc-data-contract');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { DEFAULT_GROWTH_REPORT_DIR, migrateLegacySeoData } = require('./lib/seo-priority-list');
+const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = process.cwd();
-const DEFAULT_DOWNLOADS_DIR = process.env.GSC_DOWNLOADS_DIR || path.join(os.homedir(), 'Downloads');
-const DEFAULT_WORK_DIR = process.env.GSC_WORK_DIR || path.join(DEFAULT_DOWNLOADS_DIR, 'gsc-auto-input');
+const DEFAULT_WORK_DIR = resolveGscWorkDir(ROOT);
+const DEFAULT_IMPORT_DIR = process.env.GSC_DOWNLOADS_DIR || DEFAULT_WORK_DIR;
 
 function loadLocalEnvFromHome() {
   const envFile = path.join(os.homedir(), '.fitpo50-gsc.env');
@@ -40,7 +41,7 @@ function parseArgs(argv) {
   const out = {
     repo: process.env.GSC_GH_REPO || 'QpiecKrk/Fitpo50',
     artifact: process.env.GSC_GH_ARTIFACT_NAME || 'gsc-csv',
-    downloadsDir: DEFAULT_DOWNLOADS_DIR,
+    downloadsDir: DEFAULT_IMPORT_DIR,
     workDir: DEFAULT_WORK_DIR,
     preferGithub: true,
     cleanupRepoArtifacts: String(process.env.GSC_CLEAN_REPO_ARTIFACTS || '').toLowerCase() === 'true',
@@ -438,18 +439,18 @@ async function tryGithubArtifactViaApi(repo, artifactName, tempDir) {
   return { ok: false, reason: `Nie znaleziono artefaktu "${artifactName}" przez API.` };
 }
 
-function tryExtractZipFromDownloads(downloadsDir, tempDir) {
-  if (!fs.existsSync(downloadsDir)) return { ok: false, reason: 'Brak katalogu Downloads.' };
-  const zips = fs.readdirSync(downloadsDir)
+function tryExtractZipFromInputDirectory(inputDir, tempDir) {
+  if (!fs.existsSync(inputDir)) return { ok: false, reason: 'Brak katalogu wejściowego ZIP.' };
+  const zips = fs.readdirSync(inputDir)
     .filter((n) => n.toLowerCase().endsWith('.zip') && /(search|console|gsc|skutecznosc|performance|fitpo50)/i.test(n))
     .map((name) => {
-      const abs = path.join(downloadsDir, name);
+      const abs = path.join(inputDir, name);
       const st = fs.statSync(abs);
       return { abs, mtimeMs: st.mtimeMs };
     })
     .sort((a, b) => b.mtimeMs - a.mtimeMs);
 
-  if (!zips.length) return { ok: false, reason: 'Brak pasującego ZIP w Downloads.' };
+  if (!zips.length) return { ok: false, reason: 'Brak pasującego ZIP w katalogu wejściowym.' };
   const latest = zips[0].abs;
   const unzip = run('unzip', ['-o', latest, '-d', tempDir]);
   if (unzip.status !== 0) {
@@ -636,12 +637,12 @@ async function main() {
 
     let typed = collectCsvByType(walkFiles(tmp));
     if (!haveAllThree(typed)) {
-      const zipRes = tryExtractZipFromDownloads(args.downloadsDir, tmp);
+      const zipRes = tryExtractZipFromInputDirectory(args.downloadsDir, tmp);
       if (zipRes.ok) {
-        sourceLabel = sourceLabel || `downloads-zip:${zipRes.zip}`;
+        sourceLabel = sourceLabel || `input-zip:${zipRes.zip}`;
         typed = collectCsvByType(walkFiles(tmp));
       } else {
-        console.log(`[GSC-AUTO] Downloads ZIP pominięty: ${zipRes.reason}`);
+        console.log(`[GSC-AUTO] ZIP wejściowy pominięty: ${zipRes.reason}`);
       }
     }
 

@@ -161,13 +161,13 @@ test('MECHANIZM 2 assigns every article to exactly one of four baskets', () => {
   assert.equal(new Set(files).size, 4);
   assert.deepEqual(wave.coverage_contract.basket_counts, { BOOST: 1, ROKUJE: 1, NAPRAWA: 1, MONITORING: 1 });
   assert.equal(wave.monitoring[0].execution_status, 'COOLDOWN_MONITORUJ');
-  assert.equal(wave.rokuje_execution_sequence.pilot_size, 4);
-  assert.equal(wave.rokuje_execution_sequence.expansion_size, 20);
-  assert.equal(wave.rokuje_execution_sequence.expansion_gate, 'PILOT_LIVE_DEPLOYED_AND_VALIDATED');
-  assert.equal(wave.rokuje_execution_sequence.regenerate_before_expansion, true);
+  assert.equal(wave.rokuje_execution_sequence.gain_size, 3);
+  assert.equal(wave.rokuje_execution_sequence.rotation_size, 2);
+  assert.equal(wave.rokuje_execution_sequence.approval_gate, 'AWAITING_USER_APPROVAL');
+  assert.match(wave.rokuje_execution_sequence.history, /historyczny/);
 });
 
-test('MECHANIZM 2 ranks ROKUJE deterministically before the 4 plus 20 sequence', () => {
+test('MECHANIZM 2 ranks ROKUJE deterministically for the 3 plus 2 wave contract', () => {
   const priorityMap = Array.from({ length: 26 }, (_, index) => article(
     `rokuje-${String(index + 1).padStart(2, '0')}.html`,
     'POSITION_11_30',

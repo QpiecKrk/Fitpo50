@@ -11,17 +11,18 @@ const {
   migrateLegacySeoData,
   resolveSeoStateDir,
 } = require('./lib/seo-priority-list');
+const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = process.cwd();
 const REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
   ? path.resolve(process.env.FITPO50_GROWTH_REPORT_DIR)
   : DEFAULT_GROWTH_REPORT_DIR;
-const GSC_INPUT_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+const GSC_INPUT_DIR = resolveGscWorkDir(ROOT);
 const GSC_CONTENT_STRATEGY_REPORT = process.env.GSC_CONTENT_STRATEGY_REPORT || '';
 const SEO_STATE_DIR = resolveSeoStateDir();
 const SITE_ORIGIN = 'https://fitpo50.pl';
-const SEO_ROKUJE_PILOT_SIZE = 4;
-const SEO_ROKUJE_EXPANSION_SIZE = 20;
+const SEO_GAIN_WAVE_SIZE = 3;
+const SEO_ROTATION_WAVE_SIZE = 2;
 const TEMPORARILY_IGNORED_SEO_FILES = new Set([
   'narzedzia.html',
 ]);
@@ -174,11 +175,10 @@ function readJsonIfExists(file) {
 
 function findLatestGscContentStrategyReport() {
   if (GSC_CONTENT_STRATEGY_REPORT && fs.existsSync(GSC_CONTENT_STRATEGY_REPORT)) return GSC_CONTENT_STRATEGY_REPORT;
-  const downloadsDir = path.join(os.homedir(), 'Downloads');
-  if (!fs.existsSync(downloadsDir)) return '';
-  return fs.readdirSync(downloadsDir)
+  if (!fs.existsSync(GSC_INPUT_DIR)) return '';
+  return fs.readdirSync(GSC_INPUT_DIR)
     .filter((name) => /^gsc-content-strategy-\d{4}-\d{2}-\d{2}\.md$/i.test(name))
-    .map((name) => path.join(downloadsDir, name))
+    .map((name) => path.join(GSC_INPUT_DIR, name))
     .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs)
     [0] || '';
 }
@@ -232,7 +232,7 @@ function readGscContentStrategyReport() {
   if (!file) {
     return {
       status: 'MISSING',
-      expected_file: GSC_CONTENT_STRATEGY_REPORT || path.join(os.homedir(), 'Downloads', 'gsc-content-strategy-YYYY-MM-DD.md'),
+      expected_file: GSC_CONTENT_STRATEGY_REPORT || path.join(GSC_INPUT_DIR, 'gsc-content-strategy-YYYY-MM-DD.md'),
       path: '',
       generated_date: '',
       data_quality: [],
@@ -1489,12 +1489,12 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
       target_ctr: entry.target_ctr,
     })),
     rokuje_execution_sequence: {
-      rule: 'Najpierw wykonaj pilotaż 4 najwyżej sklasyfikowanych pozycji ROKUJE. Po wdrożeniu i statusie LIVE_DEPLOYED_AND_VALIDATED wygeneruj raport ponownie i przygotuj jedną falę 20 najwyżej sklasyfikowanych pozostałych pozycji ROKUJE.',
-      pilot_size: SEO_ROKUJE_PILOT_SIZE,
-      expansion_size: SEO_ROKUJE_EXPANSION_SIZE,
+      rule: 'Każda fala obejmuje 3 pozycje według szacowanego zysku kliknięć oraz 2 rotacyjne spoza top 20; rotacja przesuwa się wyłącznie po --approve-round.',
+      gain_size: SEO_GAIN_WAVE_SIZE,
+      rotation_size: SEO_ROTATION_WAVE_SIZE,
       ranking: 'wspólna lista estimated click gain z scripts/lib/seo-priority-list.js',
-      expansion_gate: 'PILOT_LIVE_DEPLOYED_AND_VALIDATED',
-      regenerate_before_expansion: true,
+      approval_gate: 'AWAITING_USER_APPROVAL',
+      history: 'Model pilotażu 4 / 20 jest historyczny i nie steruje już falą.',
       approval_required_for_exact_ids: true,
     },
     coverage_contract: {
@@ -2837,7 +2837,7 @@ function buildGenerativeAiGscReport() {
     input_dir: GSC_INPUT_DIR,
     source_files: files.map((file) => path.relative(ROOT, file).replace(/^\.\.\//, '')),
     dimensions: ['url', 'country', 'device', 'date', 'feature'],
-    expected_export_hint: 'Wrzuć do gsc-auto-input eksport CSV/JSON z raportu Search Generative AI: pages + impressions, opcjonalnie country/device/date/feature.',
+    expected_export_hint: 'Wrzuć do data/reports/local/gsc-current eksport CSV/JSON z raportu Search Generative AI: pages + impressions, opcjonalnie country/device/date/feature.',
     summary: {
       pages: available ? pages.length : null,
       impressions: available ? pages.reduce((sum, item) => sum + item.impressions, 0) : null,
@@ -3235,14 +3235,14 @@ function buildPoprawSeo() {
       'Zbudowano kolejkę Perplexity Monitor.',
       'Zbudowano plan autopilota bez zapisu w artykułach.',
       'Połączono raporty GSC/SEO/AEO/GEO/AIO i wyciągnięto kluczowe wnioski.',
-      'Uwzględniono zewnętrzny raport GSC content strategy, jeśli istnieje w Downloads albo pod GSC_CONTENT_STRATEGY_REPORT.',
+      'Uwzględniono zewnętrzny raport GSC content strategy, jeśli istnieje w data/reports/local/gsc-current albo pod GSC_CONTENT_STRATEGY_REPORT.',
       'Zbudowano paczkę do zatwierdzenia: BOOST dla stron blisko wzrostu, NAPRAWA dla stron słabych lub bez widoczności oraz ROKUJE dla stron z potencjałem po liderach.',
       'Utworzono pełny koszyk MONITORING dla URL-i w cooldownie i działających stron, których nie należy teraz przepisywać.',
     ],
     unified_insights: unifiedInsights,
     approval_wave: unifiedInsights.approval_wave,
     chosen_articles: autopilot.chosen_articles,
-    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Dla ROKUJE obowiązuje sekwencja: pilotaż 4 najwyżej sklasyfikowanych stron, a po jego LIVE_DEPLOYED_AND_VALIDATED ponowny raport i jedna fala 20 najwyżej sklasyfikowanych pozostałych stron. Agent przygotuje konkretne teksty i niezmienny manifest patchy, zastosuje go atomowo i zwaliduje, po czym zaraportuje wynik. Commit, push, deploy i IndexNow wymagają osobnego „tak” użytkownika w czacie po tym raporcie; akceptacja ID ani raportu nie są taką zgodą.',
+    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Fala ROKUJE ma zawsze 3 pozycje według zysku i 2 rotacyjne spoza top 20; model pilotażu 4 / 20 jest wyłącznie historyczny. Agent przygotuje konkretne teksty i niezmienny manifest patchy, zastosuje go atomowo i zwaliduje, po czym zaraportuje wynik. Commit, push, deploy i IndexNow wymagają osobnego „tak” użytkownika w czacie po tym raporcie; akceptacja ID ani raportu nie są taką zgodą.',
     safe_next_commands: [
       'npm run popraw-seo',
       'Po akceptacji ID: manifest -> popraw-seo:apply -> walidacja -> raport -> osobne „tak” użytkownika -> commit/push/deploy; IndexNow tylko po osobnym „tak”.',
@@ -3640,7 +3640,7 @@ function writePoprawSeoMarkdown(command, file) {
         lines.push(`${idx + 1}. ${item.file} — AI impressions ${item.impressions}; features: ${(item.features || []).join(', ') || 'brak'}`);
       });
     } else {
-      lines.push('- brak eksportu: gdy raport pojawi się w Search Console, wrzuć CSV/JSON do `gsc-auto-input`.');
+      lines.push('- brak eksportu: gdy raport pojawi się w Search Console, wrzuć CSV/JSON do `data/reports/local/gsc-current`.');
     }
     lines.push('');
   }
@@ -3728,7 +3728,7 @@ function writePromisingPagesMarkdown(insights, file) {
   lines.push('- Pracujemy na nich po `BOOST`/najpilniejszych stronach, bo mogą wejść do kolejnej fali wzrostu.');
   lines.push('- Nie wolno dodawać generycznych bloków. Każda zmiana musi wynikać z frazy, metryki, intencji, źródła, progu, liczby albo konkretnej luki w artykule.');
   lines.push('- Po zaakceptowanej edycji zgłaszamy zmieniony URL w GSC oraz, jeśli ma sens, 1-3 strony źródłowe z nowymi linkami wewnętrznymi.');
-  lines.push('- Kolejność pracy jest stała: najpierw 4 najwyżej sklasyfikowane pozycje `ROKUJE`; po ich `LIVE_DEPLOYED_AND_VALIDATED` raport liczymy ponownie i przygotowujemy 20 najwyżej sklasyfikowanych pozostałych pozycji `ROKUJE`.');
+  lines.push('- Fala `ROKUJE` obejmuje 3 pozycje według zysku kliknięć oraz 2 rotacyjne spoza top 20. Model 4 / 20 jest historyczny.');
   lines.push('');
   if (!items.length) {
     lines.push('Brak kandydatów `ROKUJE` w obecnych danych.');

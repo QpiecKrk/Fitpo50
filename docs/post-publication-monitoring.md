@@ -29,7 +29,7 @@ npm run test:pipeline-blockers
 npm run reports:prune
 ```
 
-`npm run gsc:auto` uruchamia monitoring automatycznie. Wynik trafia do `~/Downloads/gsc-auto-input/post-publication-monitor.json` i `.md`, więc analityczna komenda `GSC` pozostaje read-only wobec repozytorium.
+`npm run gsc:auto` uruchamia monitoring automatycznie. Wynik trafia do ignorowanego `data/reports/local/gsc-current/post-publication-monitor.json` i `.md`; katalog w `~/Downloads` można podać wyłącznie jawnie. Analityczna komenda `GSC` nie edytuje HTML.
 
 ## Interpretacja
 

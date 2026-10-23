@@ -2,9 +2,9 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
 const { spawnSync } = require('child_process');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
+const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -78,7 +78,7 @@ function main() {
   const adminDoctor = run('node', ['scripts/admin-doctor.js']);
   checks.push(check('Admin doctor', 'red', adminDoctor.ok, adminDoctor.ok ? 'PASS' : (adminDoctor.stderr || adminDoctor.stdout)));
 
-  const gscDir = path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+  const gscDir = resolveGscWorkDir(ROOT);
   const gscMissing = ['queries.csv', 'pages.csv', 'query-pages.csv'].filter((name) => !fs.existsSync(path.join(gscDir, name)));
   checks.push(check('GSC input files', 'warn', gscMissing.length === 0, gscMissing.length ? `missing: ${gscMissing.join(', ')}` : 'OK'));
   const gscContract = inspectGscInput(gscDir, { strictPeriods: true });

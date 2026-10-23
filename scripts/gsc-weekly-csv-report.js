@@ -2,12 +2,12 @@
 
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
 const { isEditorialQuery, MIN_CTR_REVIEW_IMPRESSIONS } = require('./lib/gsc-editorial-query');
+const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = process.cwd();
-const DEFAULT_WORK_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
+const DEFAULT_WORK_DIR = resolveGscWorkDir(ROOT);
 const DEFAULT_INPUT_DIR = DEFAULT_WORK_DIR;
 const DEFAULT_OUTPUT_JSON = path.join(DEFAULT_WORK_DIR, 'gsc-weekly-report.json');
 const DEFAULT_OUTPUT_MD = path.join(DEFAULT_WORK_DIR, 'gsc-weekly-report.md');
@@ -494,7 +494,7 @@ function writeOutputs(report, outputJson, outputMd) {
   if (report.status !== 'ok') {
     lines.push('## Brak danych wejściowych');
     if (report.reason) lines.push(`- Powód: ${report.reason}`);
-    lines.push('Potrzebny jest komplet niepustych CSV w `~/Downloads/gsc-auto-input`:');
+    lines.push('Potrzebny jest komplet niepustych CSV w `data/reports/local/gsc-current`:');
     lines.push('- zapytania (queries)');
     lines.push('- strony (pages)');
     lines.push('- zapytania + strony (query pages)');
@@ -738,7 +738,7 @@ function main() {
       summary: { total_clicks: 0, total_impressions: 0, avg_ctr: 0, avg_position: 0 },
       data_quality: { status: 'FAIL', rows_queries: 0, rows_pages: 0, rows_query_pages: 0, duplicate_query_page_pairs: 0, anomalies_ctr_over_100: 0, anomalies_position_non_positive: 0 },
       opportunities: { top3_zero_click: [], top10_zero_click: [], ctr_problems: [], cannibalization: [], page_opportunities: [] },
-      weekly_plan: ['Dostarcz 3 pliki CSV do ~/Downloads/gsc-auto-input i uruchom ponownie.'],
+      weekly_plan: ['Dostarcz 3 pliki CSV do data/reports/local/gsc-current i uruchom ponownie.'],
       content_gaps: {},
       strategic_priority: 'SEO -> AEO -> GEO -> AIO',
       aeo_opportunity_bot: {
@@ -852,7 +852,7 @@ function main() {
     };
     report.weekly_plan = [
       'Wyeksportuj z GSC CSV: Queries, Pages i Query+Page (zakres ostatnich 3 miesięcy).',
-      'Skopiuj CSV do katalogu ~/Downloads/gsc-auto-input.',
+      'Skopiuj CSV do katalogu data/reports/local/gsc-current.',
       'Uruchom npm run gsc:auto.',
       'Wybierz 3-5 okazji i popraw 2-3 artykuły.',
       'Po publikacji poproś o indeksację w GSC.',
