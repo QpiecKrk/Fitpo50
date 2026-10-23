@@ -7,13 +7,13 @@ Hostinger automatycznie wdraża gałąź `main`. Po przygotowaniu eksportu nale�
 ```bash
 ./scripts/export_site.sh
 npm run assets:mirror:sync
+npm run prepush:local
 npm run deployment:prepare
-npm run predeploy:check
 git diff --check
 git add -A
 git commit -m "<konkretny opis>"
 git push origin main
-npm run deployment:verify
+npm run deployment:finalize
 ```
 
 Kontrola nie zamienia błędów sieci na PASS. Porównuje `origin/main` z lokalnym commitem, sprawdza unikalny `deployment.json`, HTTP 200, canonical i pliki bazowe. Jeśli commit zmienia artykuły, sprawdza też `dateModified`, sitemap `lastmod`, PDF oraz wszystkie obrazy użyte przez te artykuły.

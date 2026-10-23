@@ -5,7 +5,9 @@
 - Bez osobnego „tak” użytkownika w czacie: zero commitów na `main`, pushy, deployów, merge'ów, IndexNow, usuwania plików lub gałęzi ani `tmp:cleanup`. Akceptacja ID lub raportu nie jest zgodą.
 - Każda sesja zaczyna się tylko od odczytu: przeczytaj te zasady, pokaż `git status` oraz porównanie `main` z `origin/main`, a potem czekaj na zadanie.
 - Pracuj wyłącznie w zakresie polecenia. Problem poza zakresem zgłoś, ale niczego w nim nie zmieniaj.
-- Deploy: `prepush:local` PASS → `_site` bez plików technicznych → `gitpush` → osobny marker → `deployment:finalize` z `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`.
+- Deploy: `prepush:local` PASS → `_site` bez plików technicznych → `deployment:prepare` przed commitem → jeden commit z treścią i markerem → jeden push → `deployment:finalize` z `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`.
+- Hostinger nie usuwa z serwera plików skasowanych z repo; usuwany plik publiczny zablokuj w `.htaccess` albo zgłoś do ręcznego usunięcia.
+- Nigdy nie commituj haseł ani `admin/config.php`; sprawdź, że `config.php` jest w `.gitignore`.
 - Z `_site` wykluczaj: `HANDOFF.md`, `requirements*.txt`, fonty PDF, `.venv`, `__pycache__`, pliki `.py`/`.pyc` oraz `admin/*.md`.
 - Artykuł wymaga minimum 4 realnych źródeł z mapowaniem twierdzenie → źródło. Linkowanie wewnętrzne tworzy tylko lokalny pipeline. Publikacja obejmuje kafel strony głównej, `porady.html`, właściwy dział, sitemapę, `llms.txt` i `llms-full.txt`.
 - FAQ korzysta wyłącznie ze wspólnego kontraktu `gsc`/`paa`/`autocomplete`; `manual_research` jest zabronione. Baseline ma dokładnie 32 artykuły legacy i 6 centrów.
@@ -187,7 +189,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Status RED zatrzymuje push. YELLOW wymaga przeczytania ostrzeżeń; świadomie zatwierdzony duży zakres może użyć jednorazowego `FITPO50_BYPASS_DIFF_GUARD=1`, ale pozostałe testy nadal obowiązują.
 - Nie używamy `git clean -fd`, `git reset --hard` ani ślepego usuwania untracked.
 - Sprzątanie dotyczy wyłącznie jawnie sprawdzonej listy plików tymczasowych lub wyraźnie zatwierdzonego zakresu.
-- Hostinger automatycznie wdraża `main`. Po zatwierdzonym pushu zmian utwórz i wypchnij marker w osobnym commicie, a następnie uruchom `npm run deployment:finalize`: kontrolę live i kontrolę ekspozycji. IndexNow wymaga kolejnego, osobnego „tak” użytkownika po obu pozytywnych statusach.
+- Hostinger automatycznie wdraża `main`. Po prepush:local PASS przygotuj marker przed commitem; treść i marker zapisz w jednym commicie i wykonaj jeden zatwierdzony push, a następnie uruchom `npm run deployment:finalize`: kontrolę live i kontrolę ekspozycji. IndexNow wymaga kolejnego, osobnego „tak” użytkownika po obu pozytywnych statusach.
 - `PUSHED` nie oznacza produkcji. `DEPLOYED` oznacza wykrycie markera z niepełną walidacją. Produkcję potwierdza wyłącznie `LIVE_DEPLOYED_AND_VALIDATED`.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `npm run hostinger:recovery` domyślnie wykonuje tylko dry-run, nie usuwa nieznanych plików i blokuje się na brudnym lub rozbieżnym repo.
 - Nawet bezpieczny `tmp:cleanup` wymaga osobnego „tak” użytkownika; domyślny dry-run nie zastępuje tej zgody.

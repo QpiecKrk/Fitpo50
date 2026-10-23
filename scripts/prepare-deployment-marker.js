@@ -27,11 +27,34 @@ function changedRootArticles(rootDir) {
   const fromStatus = String(result.stdout || '').split('\n').map((line) => line.slice(3).trim()).filter(Boolean);
   const ahead = spawnSync('git', ['diff', '--name-only', 'origin/main...HEAD', '--', '*.html'], { cwd: rootDir, encoding: 'utf8' });
   const fromAhead = ahead.status === 0 ? String(ahead.stdout || '').split('\n').map((line) => line.trim()).filter(Boolean) : [];
-  return [...new Set([...fromStatus, ...fromAhead])]
+  return [...new Set([...fromStatus, ...fromAhead].map((file) => file.replace(/^_site\//, '')))]
     .filter((file) => /^[^/]+\.html$/i.test(file))
     .filter((file) => fs.existsSync(path.join(rootDir, '_site', file)))
     .filter((file) => /"@type"\s*:\s*"BlogPosting"/.test(fs.readFileSync(path.join(rootDir, '_site', file), 'utf8')))
     .sort((a, b) => a.localeCompare(b, 'pl'));
+}
+
+// The last committed marker remains a release boundary even after origin/main
+// advances. Do not use origin/main as the only completeness check.
+function assertArticleInventoryComplete(rootDir, articles) {
+  const git = (args) => {
+    const result = spawnSync('git', args, { cwd: rootDir, encoding: 'utf8' });
+    if (result.status !== 0) throw new Error(`Kontrola kompletności markera: git ${args.join(' ')}: ${result.stderr || result.stdout}`);
+    return String(result.stdout || '').trim();
+  };
+  const boundary = git(['log', '-1', '--format=%H', '--', 'deployment.json']);
+  const changed = boundary
+    ? git(['diff', '--name-only', '--no-renames', boundary, '--', '_site/*.html']).split('\n')
+    : git(['ls-files', '--', '_site/*.html']).split('\n');
+  changed.push(...git(['ls-files', '--others', '--exclude-standard', '--', '_site/*.html']).split('\n'));
+  const included = new Set(articles.map((article) => article.file));
+  const missing = [...new Set(changed)]
+    .filter((file) => /^_site\/[^/]+\.html$/i.test(file))
+    .filter((file) => fs.existsSync(path.join(rootDir, file)))
+    .filter((file) => /"@type"\s*:\s*"BlogPosting"/.test(fs.readFileSync(path.join(rootDir, file), 'utf8')))
+    .map((file) => file.slice('_site/'.length))
+    .filter((file) => !included.has(file));
+  if (missing.length) throw new Error(`DEPLOYMENT_ARTICLES_INCOMPLETE: zmienione BlogPosting w _site pominięte w articles: ${missing.join(', ')}. Marker przygotuj przed commitem i jednym pushem treści oraz markera.`);
 }
 
 function articleDeploymentEntry(rootDir, file) {
@@ -76,6 +99,7 @@ function prepareDeploymentMarker(rootDir, options = {}) {
   const siteDir = path.join(rootDir, '_site');
   if (!fs.existsSync(siteDir)) throw new Error('Brak katalogu _site. Najpierw wykonaj eksport.');
   const articles = changedRootArticles(rootDir).map((file) => articleDeploymentEntry(rootDir, file));
+  assertArticleInventoryComplete(rootDir, articles);
   const marker = {
     version: 2,
     release_id: options.releaseId || crypto.randomUUID(),

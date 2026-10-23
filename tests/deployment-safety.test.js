@@ -10,6 +10,7 @@ const { cacheBustUrl, isPublicRootHtmlPath } = require('../scripts/deployment-li
 const { ADMIN_SENSITIVE_PATHS, SENSITIVE_PATHS, classifyExposureResponse } = require('../scripts/security-exposure-check');
 
 const ROOT = path.resolve(__dirname, '..');
+const { createManagedTempDir, disposeTempWorkspace } = require('../scripts/lib/temp-workspace');
 function run(command, args, cwd, env = {}) { return spawnSync(command, args, { cwd, env: { ...process.env, ...env }, encoding: 'utf8' }); }
 function git(cwd, ...args) {
   const result = run('git', args, cwd);
@@ -74,6 +75,10 @@ test('retired clean command blocks without changing user files', () => {
 
 test('deployment marker is identical in source and export', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-marker-'));
+  git(root, 'init');
+  git(root, 'config', 'user.email', 'test@example.com');
+  git(root, 'config', 'user.name', 'Test');
+  git(root, 'commit', '--allow-empty', '-m', 'initial');
   fs.mkdirSync(path.join(root, '_site'));
   for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
   fs.mkdirSync(path.join(root, '_site', 'assets', 'data'), { recursive: true });
@@ -81,6 +86,66 @@ test('deployment marker is identical in source and export', () => {
   const marker = prepareDeploymentMarker(root, { releaseId: 'release-test', preparedAt: '2026-10-01T10:00:00.000Z' });
   assert.equal(marker.release_id, 'release-test');
   assert.equal(fs.readFileSync(path.join(root, 'deployment.json'), 'utf8'), fs.readFileSync(path.join(root, '_site', 'deployment.json'), 'utf8'));
+});
+
+for (const pushFirst of [true, false]) {
+  test(`release order: ${pushFirst ? 'push then marker is blocked' : 'marker and content in one commit and push'}`, () => {
+    const workspace = createManagedTempDir({ prefix: 'fitpo50-release-test-', projectRoot: ROOT, type: 'test' });
+    try {
+      const remote = path.join(workspace, 'remote.git');
+      const root = path.join(workspace, 'work');
+      git(workspace, 'init', '--bare', remote);
+      git(workspace, 'clone', remote, root);
+      git(root, 'config', 'user.email', 'test@example.com');
+      git(root, 'config', 'user.name', 'Test');
+      git(root, 'checkout', '-b', 'main');
+      fs.mkdirSync(path.join(root, '_site/assets/data'), { recursive: true });
+      for (const f of ['index.html', 'porady.html', 'ciekawe.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt', 'assets/data/search-index.json']) {
+        fs.writeFileSync(path.join(root, '_site', f), 'test.html');
+      }
+      fs.writeFileSync(path.join(root, 'deployment.json'), '{"version":2,"articles":[]}\n');
+      git(root, 'add', '.');
+      git(root, 'commit', '-m', 'previous release');
+      git(root, 'push', '-u', 'origin', 'main');
+      const html = '<link rel="canonical" href="https://fitpo50.pl/test.html"><script>{"@type":"BlogPosting","dateModified":"2026-10-01T10:00:00+02:00"}</script>';
+      fs.writeFileSync(path.join(root, 'test.html'), html);
+      fs.writeFileSync(path.join(root, '_site/test.html'), html);
+      fs.mkdirSync(path.join(root, '_site/assets/pdf'), { recursive: true });
+      fs.writeFileSync(path.join(root, '_site/assets/pdf/test.pdf'), '%PDF-test');
+      if (pushFirst) {
+        git(root, 'add', '.');
+        git(root, 'commit', '-m', 'content without marker');
+        git(root, 'push', 'origin', 'main');
+        assert.deepEqual(changedRootArticles(root), []);
+        const before = fs.readFileSync(path.join(root, 'deployment.json'), 'utf8');
+        assert.throws(() => prepareDeploymentMarker(root), /DEPLOYMENT_ARTICLES_INCOMPLETE.*test.html/);
+        assert.equal(fs.readFileSync(path.join(root, 'deployment.json'), 'utf8'), before);
+        assert.equal(fs.existsSync(path.join(root, '_site/deployment.json')), false);
+      } else {
+        const marker = prepareDeploymentMarker(root);
+        assert.deepEqual(marker.articles.map((a) => a.file), ['test.html']);
+        git(root, 'add', '.');
+        git(root, 'commit', '-m', 'content and marker');
+        git(root, 'push', 'origin', 'main');
+        assert.equal(git(root, 'rev-parse', 'HEAD'), git(root, 'rev-parse', 'origin/main'));
+        assert.equal(JSON.parse(git(root, 'show', 'origin/main:deployment.json')).articles[0].html_sha256, marker.articles[0].html_sha256);
+        assert.equal(git(root, 'status', '--porcelain'), '');
+      }
+    } finally { disposeTempWorkspace(workspace, { status: 'COMPLETED' }); }
+  });
+}
+
+test('retired push_one exits without running release commands', () => {
+  const before = git(ROOT, 'status', '--porcelain');
+  const result = run('bash', ['scripts/push_one.sh'], ROOT);
+  assert.equal(result.status, 2);
+  assert.match(result.stderr, /RETIRED/);
+  assert.equal(git(ROOT, 'status', '--porcelain'), before);
+});
+
+test('admin config remains ignored and untracked', () => {
+  assert.equal(run('git', ['check-ignore', '--no-index', 'admin/config.php'], ROOT).status, 0);
+  assert.equal(git(ROOT, 'ls-files', 'admin/config.php'), '');
 });
 
 test('deployment marker inventory includes articles from every commit ahead of origin/main', () => {

@@ -31,7 +31,7 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Nie cofaj zmian użytkownika, jeśli nie należą do bieżącego zadania.
 - Nie wykonuj commit/push bez jawnego polecenia.
 - Polecenie `git push` uruchamia pełny workflow opisany w `SESSION_START_MAX.md`.
-- Standardem wdrożenia jest automatyczny deploy Hostinger z `main`; po pushu workflow uruchamia `npm run deployment:finalize`. Produkcję uznaj dopiero przy `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie należy do pusha ani finalizacji wdrożenia: uruchamia się go osobno przez `npm run indexnow:release` dopiero po obu statusach.
+- Standardem wdrożenia jest automatyczny deploy Hostinger z `main`: `prepush:local` PASS → kontrola `_site` → `deployment:prepare` przed commitem → jeden commit z treścią i markerem → jeden push → `npm run deployment:finalize`. Produkcję uznaj dopiero przy `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie należy do pusha ani finalizacji wdrożenia: uruchamia się go osobno przez `npm run indexnow:release` dopiero po obu statusach.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `hostinger:recovery` zaczyna się od dry-run i nie może usuwać nieznanych plików.
 - `tmp:cleanup`, także jako dry-run, wymaga osobnego „tak” użytkownika. Po zgodzie katalogi tymczasowe usuwaj wyłącznie tym mechanizmem: minimum 12 godzin, prawidłowy manifest właściciela, martwy PID i brak aktywnego locka.
 - Każdy nowy staging lub workspace `/tmp` musi używać `scripts/lib/temp-workspace.js`; każdy nowy skrypt Playwright musi używać `withChromium`.

@@ -123,12 +123,9 @@ Wykonaj kolejno:
 ```bash
 npm run prepush:local
 # sprawdź, że _site nie zawiera plików technicznych
-git add -A
-git commit -m "<konkretny opis>"
-git push origin main
 npm run deployment:prepare
-git add deployment.json _site/deployment.json
-git commit -m "<konkretny opis markera>"
+git add -A
+git commit -m "<konkretny opis treści i markera>"
 git push origin main
 npm run deployment:finalize
 ```
@@ -137,7 +134,7 @@ npm run deployment:finalize
 - Status RED zatrzymuje push. Przy YELLOW przeczytaj i oceń ostrzeżenia.
 - Nienaturalnie duży, niezatwierdzony zakres wymaga potwierdzenia. `git push wszystko` zatwierdza cały wcześniej omówiony zakres.
 - Jeśli świadomie zatwierdzony zakres przekracza diff guard, wolno jednorazowo użyć `FITPO50_BYPASS_DIFF_GUARD=1`; pozostałe testy nadal muszą przejść.
-- Hostinger automatycznie wdraża `main`. Po osobnym commicie i pushu markera uruchom `npm run deployment:finalize`; czekaj na `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie jest częścią pusha i wymaga kolejnego, osobnego „tak” użytkownika.
+- Hostinger automatycznie wdraża `main`. Marker przygotuj przed commitem; treść i marker trafiają do jednego commita i jednego pusha. Potem uruchom `npm run deployment:finalize`; czekaj na `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie jest częścią pusha i wymaga kolejnego, osobnego „tak” użytkownika.
 - `PUSHED` oznacza wyłącznie obecność commita na GitHubie. `DEPLOYED` oznacza wykrycie markera na serwerze z niepełną walidacją. Dopiero `LIVE_DEPLOYED_AND_VALIDATED` potwierdza produkcję i pozwala utworzyć listę GSC.
 - `npm run hostinger:clean-repo` jest wycofane. Przy rzeczywistym błędzie integracji zacznij od `npm run hostinger:recovery` w trybie dry-run i stosuj kontrakt z `docs/deployment-status-contract.md`.
 - `npm run tmp:cleanup`, także w trybie dry-run, wymaga osobnego „tak” użytkownika. Trybu `tmp:cleanup:apply` używaj dopiero po przeglądzie listy i odrębnej zgodzie; usuwa wyłącznie stare, zarządzane i osierocone workspace zgodnie z `docs/temporary-workspace-safety.md`.

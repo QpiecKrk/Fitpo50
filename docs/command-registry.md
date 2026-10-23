@@ -187,6 +187,8 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 
 ### RETIRED
 
+- [RETIRED] `bash scripts/push_one.sh` — Wycofana ścieżka publikacji; kod 2 bez zapisu, commita ani pusha. Obowiązuje jeden commit treści i markera oraz jeden push według SESSION_START_MAX.md.
+
 - [RETIRED] `npm run hostinger:clean-repo` — Zablokowana historyczna komenda; zawsze odmawia wykonania.
 - [RETIRED] `npm run prepush:strict` — Wycofany wariant złożony; zastąpiony przez prepush:local.
 - [RETIRED] `npm run seo:aio:apply-wave` — Myląca historyczna nazwa; zawsze odmawia wykonania i wskazuje seo:aio:wave:proposal.
