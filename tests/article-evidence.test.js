@@ -225,6 +225,18 @@ test('pipeline evidence validator enforces shared GSC and PAA FAQ provenance req
   assert.equal(result.ok, true, result.errors.join('\n'));
 });
 
+test('GSC FAQ provenance rejects non-numeric impressions', () => {
+  const gsc = validEvidenceJson();
+  Object.assign(gsc.faq_research[0], {
+    source_type: 'gsc',
+    query: gsc.faq_research[0].question,
+    impressions: 'abc',
+  });
+  const result = validateArticleEvidence(gsc, { today: TODAY });
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join('\n'), /GSC wymaga query oraz impressions >= 1/);
+});
+
 test('pipeline rejects manual_research for new FAQ and accepts the three contracted source types', () => {
   const manual = validEvidenceJson();
   manual.faq_research[0].source_type = 'manual_research';

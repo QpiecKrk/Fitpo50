@@ -284,7 +284,8 @@ function validateFaqResearch(json, today, warnings = [], options = {}) {
     }
     if (sourceType === 'gsc') {
       const requirement = POLICY.FAQ_SOURCE_REQUIREMENTS.gsc;
-      if ((requirement.query_required && !query) || Number(item?.impressions || 0) < requirement.impressions_min) {
+      const impressions = Number(item?.impressions);
+      if ((requirement.query_required && !query) || !Number.isFinite(impressions) || impressions < requirement.impressions_min) {
         errors.push(`${label}: GSC wymaga query oraz impressions >= ${requirement.impressions_min}.`);
       }
     }
