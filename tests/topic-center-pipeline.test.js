@@ -8,6 +8,8 @@ const { buildPatchedFiles, buildDeploymentManifest } = require('../scripts/lib/p
 const { isA4Page } = require('../scripts/article-preview-gate');
 const { spawnSync } = require('node:child_process');
 
+const REPO = path.resolve(__dirname, '..');
+
 test('center contract rejects duplicate schema, missing evidence, broken links and FAQ mismatch', () => {
   const repo = path.resolve(__dirname, '..');
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'center-contract-'));
@@ -56,6 +58,29 @@ test('only the six exact published centers retain the manual_research baseline',
   const rejectedTemplate = spawnSync('python3', [path.join(repo, 'scripts/validate-topic-center.py'), template], { encoding: 'utf8' });
   assert.notEqual(rejectedTemplate.status, 0);
   assert.match(rejectedTemplate.stdout, /FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY/);
+});
+
+test('every published topic center is listed in llms.txt and generated llms-full.txt', () => {
+  const centers = fs.readdirSync(REPO).filter((file) => /^centrum-.*\.html$/.test(file)).sort();
+  const llms = fs.readFileSync(path.join(REPO, 'llms.txt'), 'utf8');
+  const full = fs.readFileSync(path.join(REPO, 'llms-full.txt'), 'utf8');
+  assert.equal(centers.length, 6);
+  for (const center of centers) {
+    const url = `https://fitpo50.pl/${center}`;
+    assert.match(llms, new RegExp(`^- url: ${url.replaceAll('.', '\\.')}$`, 'm'), `${center} missing from llms.txt`);
+    assert.match(full, new RegExp(`^URL: ${url.replaceAll('.', '\\.')}$`, 'm'), `${center} missing from llms-full.txt`);
+  }
+});
+
+test('article validation baseline contains exactly 32 legacy articles and six topic centers', () => {
+  const baseline = JSON.parse(fs.readFileSync(path.join(REPO, 'scripts/config/article-validation-baseline.json'), 'utf8'));
+  const quickAnswer = baseline.known_errors.find((item) => item.error.startsWith('Szybka odpowiedź'));
+  const manualResearch = baseline.known_errors.find((item) => item.error === 'FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY');
+  assert.equal(quickAnswer.files.length, 32);
+  assert.equal(new Set(quickAnswer.files).size, 32);
+  assert.equal(manualResearch.files.length, 6);
+  assert.equal(new Set(manualResearch.files).size, 6);
+  assert.ok(manualResearch.files.every((file) => /^centrum-.*\.html$/.test(file)));
 });
 
 test('A4 accepts Chromium rounding but rejects Letter, landscape and missing dimensions', () => {

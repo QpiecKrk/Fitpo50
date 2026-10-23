@@ -443,6 +443,10 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Cholesterol po 50: przewodnik po wynikach i badaniach | FitPo50"
   section: "Centra tematyczne"
   summary: "Cholesterol po 50: wybierz poradnik o lipidogramie, ApoB, Lp(a) i badaniach krwi. Przygotuj wyniki do konsultacji i odróżnij ocenę ryzyka od objawów alarmowych."
+- url: https://fitpo50.pl/centrum-nadcisnienia-po-50.html
+  title: "Nadciśnienie po 50: pomiar, ruch i dieta DASH | FitPo50"
+  section: "Centra tematyczne"
+  summary: "Nadciśnienie po 50: domowy pomiar, próg 135/85 mmHg, ruch, dieta DASH i trening siłowy. Sprawdź, kiedy iść do lekarza i kiedy reagować przy 180/120."
 - url: https://fitpo50.pl/centrum-metabolizmu-po-50.html
   title: "Metabolizm po 50: brzuch, wyniki i wybór poradnika | FitPo50"
   section: "Centra tematyczne"
