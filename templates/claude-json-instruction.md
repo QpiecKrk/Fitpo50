@@ -10,14 +10,14 @@ Wygeneruj WYŁĄCZNIE poprawny JSON zgodny ze schematem FitPo50 (bez markdown, b
 - Podaj `primary_keyword` jako jedną konkretną frazę główną długości 2-8 słów oraz `supporting_keywords` jako 3-8 odrębnych fraz wspierających.
 - Każdy nagłówek sekcji (`sections[].title`) musi być pytaniem i kończyć się `?`.
 - Pierwszy akapit każdej sekcji ma 35-80 słów.
-- Nie dodawaj żadnych linków wewnętrznych FitPo50 i nie wymyślaj slugów. Claude nie zna aktualnego repozytorium. Lokalny pipeline po przyjęciu draftu dobierze minimum 4 istniejące artykuły i osadzi link wyłącznie na naturalnej frazie już obecnej w akapicie.
+- Nie dodawaj żadnych linków wewnętrznych FitPo50 i nie wymyślaj slugów. Claude nie zna aktualnego repozytorium. Lokalny pipeline dobiera linki wynikające z planu i osadza je wyłącznie na naturalnych frazach już obecnych w akapitach.
 - Nie dodawaj linków do centrów tematycznych. Lokalny pipeline tylko oceni dopasowanie i przedstawi mocną propozycję do akceptacji użytkownika.
-- `answer_blocks` minimum 4.
-- `sources` minimum 6 pozycji. Każda wymaga: `label`, `url` https oraz prawdziwy `evidence_level`; nie dodawaj źródła, którego nie używa konkretne twierdzenie.
+- Liczba `answer_blocks` wynika z rzeczywistego researchu i może wynosić zero.
+- `sources` zawiera minimum 4 realne i wykorzystane pozycje. Każda wymaga: `label`, `url` https oraz prawdziwy `evidence_level`; nie dodawaj źródła, którego nie używa konkretne twierdzenie.
 - Dodaj `evidence_claims`: `claim`, dokładne `location` w JSON, `claim_type` i `source_urls`. Każda liczba, próg, cena, ryzyko, mechanizm oraz twierdzenie medyczne musi mieć takie mapowanie.
 - Gdy wniosek opiera się na wcześniejszych akapitach, dodaj `logic_links`: `conclusion_location`, `premise_locations` i konkretne `reasoning`.
-- `faq_research` minimum 4 wpisy. Każdy wymaga: `question`, `source_label`, `source_url`, `source_type` (`autocomplete`, `paa`, `gsc`, `manual_research`) oraz dokumentację pochodzenia (`query`, `impressions` lub `research_note`).
-- Nie wpisuj samodzielnie `checked_at`, `url_status` ani `http_status`; lokalny pipeline uzupełnia je dopiero po realnym sprawdzeniu URL-u.
+- `faq_research` odpowiada `answer_blocks` 1:1 i ma tyle wpisów, ile istnieje realnych pytań. Każdy wymaga: `question`, `source_label`, `source_url`, `source_type` (`autocomplete`, `paa` albo `gsc`) oraz dokumentację pochodzenia. GSC wymaga `query` i `impressions >= 1`; PAA wymaga `query` i `research_note` długości co najmniej 20 znaków.
+- Wpisz `checked_at`, `url_status` i `http_status` wynikające z rzeczywistego sprawdzenia; lokalny pipeline zweryfikuje je ponownie.
 - Nie wymyślaj FAQ, nie przerabiaj duplikatu na „wariant 2” i nie przypinaj pytania do przypadkowego źródła naukowego.
 - Zero placeholderów i zero metatekstu typu: "w tym artykule omówimy".
 - Nie powtarzaj tych samych zdań.

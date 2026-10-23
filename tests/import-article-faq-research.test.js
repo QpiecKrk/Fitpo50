@@ -4,6 +4,27 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 const { spawnSync } = require('node:child_process');
+const { normalizeFaqResearch } = require('../scripts/import-article');
+
+test('importer preserves FAQ v2 provenance fields', () => {
+  const question = 'Jak sprawdzić pytanie użytkownika?';
+  const [normalized] = normalizeFaqResearch([{
+    question,
+    sourceLabel: 'Dane GSC strony',
+    sourceUrl: 'https://example.org/gsc-evidence',
+    sourceType: 'gsc',
+    query: question,
+    impressions: 3,
+    researchNote: 'Pytanie pochodzi z rzeczywistego raportu zapytań.',
+    checkedAt: '2026-10-23',
+    urlStatus: 'reachable',
+    httpStatus: 200,
+  }]);
+  assert.equal(normalized.source_type, 'gsc');
+  assert.equal(normalized.query, question);
+  assert.equal(normalized.impressions, 3);
+  assert.equal(normalized.research_note, 'Pytanie pochodzi z rzeczywistego raportu zapytań.');
+});
 
 test('import-article precheck accepts faq_research in camelCase after normalization', () => {
   const repoRoot = path.resolve(__dirname, '..');

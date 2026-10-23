@@ -174,6 +174,14 @@ test('Claude draft validator enforces shared GSC and PAA FAQ provenance requirem
   assert.equal(accepted.status, 0, `${accepted.stdout}\n${accepted.stderr}`);
 });
 
+test('Claude draft validator rejects manual_research for new FAQ', () => {
+  const draft = validDraft();
+  draft.faq_research[0].source_type = 'manual_research';
+  const result = validate(draft);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /source_type musi być jednym z: autocomplete, gsc, paa/);
+});
+
 test('Claude draft skill accepts any FAQ count when every item has documented research', () => {
   const tooFew = validDraft();
   tooFew.answer_blocks = tooFew.answer_blocks.slice(0, 2);

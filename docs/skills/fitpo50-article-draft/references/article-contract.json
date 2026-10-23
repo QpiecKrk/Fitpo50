@@ -10,5 +10,14 @@
       "query_required": true,
       "research_note_min_chars": 20
     }
+  },
+  "faq_source_types": {
+    "allowed_for_new_content": [
+      "gsc",
+      "paa",
+      "autocomplete"
+    ],
+    "legacy_type": "manual_research",
+    "legacy_baseline_error": "FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY"
   }
 }

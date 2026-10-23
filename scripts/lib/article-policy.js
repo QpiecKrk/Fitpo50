@@ -10,6 +10,7 @@ const ARTICLE_CONTRACT = require('../../docs/skills/fitpo50-article-draft/refere
 
 const POLICY = {
   FAQ_SOURCE_REQUIREMENTS: ARTICLE_CONTRACT.faq_source_requirements,
+  FAQ_SOURCE_TYPES: ARTICLE_CONTRACT.faq_source_types,
 
   // Word count limits and editorial guidance
   WORDS: {

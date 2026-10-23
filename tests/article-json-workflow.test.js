@@ -136,6 +136,19 @@ test('content blockers run before media conversion and the final package preflig
   assert.ok(labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność') < labels.indexOf('Końcowy preflight pakietu importowego'));
 });
 
+test('article:add content gate rejects manual_research before import', () => withTempDir((dir) => {
+  const fixture = JSON.parse(fs.readFileSync(
+    path.join(REPO, 'tests/fixtures/article-packages/zmiana-czasu-corrected.fitpo50.json'),
+    'utf8',
+  ));
+  fixture.faq_research[0].source_type = 'manual_research';
+  const file = path.join(dir, 'manual-research.fitpo50.json');
+  fs.writeFileSync(file, `${JSON.stringify(fixture, null, 2)}\n`);
+  const result = spawnSync('node', ['scripts/json-fitpo50-gate-diff.js', '--file', file], { cwd: REPO, encoding: 'utf8' });
+  assert.notEqual(result.status, 0);
+  assert.match(`${result.stdout}\n${result.stderr}`, /source_type musi być jednym z: gsc, paa, autocomplete/);
+}));
+
 test('workbench reuses one stable ready file unless revision history is explicitly requested', () => withTempDir((dir) => {
   const first = allocateOutput(dir, 'testowy-artykul');
   fs.writeFileSync(first, '{}');

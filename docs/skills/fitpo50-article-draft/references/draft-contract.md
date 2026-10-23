@@ -14,7 +14,7 @@ Pisarz rozwija temat wybrany przez Agenta SEO i zaakceptowany przez Grzegorza. T
 Claude nie zna aktualnego serwisu ani danych GSC. Dlatego:
 
 - `answer_blocks` i `faq_research` mają liczbę pozycji wynikającą z researchu i odpowiadają sobie 1:1; obie listy mogą być puste,
-- każde pytanie FAQ pochodzi z rzeczywistego GSC, PAA, Google Autocomplete albo udokumentowanego researchu ręcznego,
+- każde pytanie FAQ pochodzi z rzeczywistego GSC, PAA albo Google Autocomplete; `manual_research` nie jest dozwolone w nowych draftach,
 - nie powstają linki do `*.html`, slugi innych artykułów ani propozycje centrum,
 - `editorial_notes.local_pipeline_tasks` zawiera osobno zadanie FAQ i zadanie linkowania.
 
@@ -59,7 +59,7 @@ Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audi
     "medical_risks": [],
     "assumptions": [],
     "local_pipeline_tasks": [
-      "LOCAL_AGENT_REQUIRED: ponownie zweryfikuj dostarczone FAQ z aktualnego GSC/PAA/autocomplete lub udokumentowanego researchu ręcznego.",
+      "LOCAL_AGENT_REQUIRED: ponownie zweryfikuj dostarczone FAQ z aktualnego GSC/PAA/autocomplete.",
       "LOCAL_AGENT_REQUIRED: dodaj naturalne linkowanie wewnętrzne po analizie aktualnego repozytorium."
     ]
   }
@@ -146,6 +146,7 @@ Claude może tworzyć FAQ, ale nie może go wymyślać. Linkowanie wewnętrzne z
 
 - `answer_blocks[]` i `faq_research[]` odpowiadają sobie 1:1,
 - nie obowiązuje minimum FAQ; dodaj wyłącznie pytania z wiarygodnym, zapisanym sygnałem,
+- dozwolone `source_type` to wyłącznie `gsc`, `paa` i `autocomplete`; nie używaj `manual_research`,
 - każde `faq_research[]` zawiera dokładne pytanie, `source_type`, `source_label`, `source_url`, `checked_at`, status URL i konkretny `research_note`,
 - dla `gsc` wymagane są `query` oraz liczbowe `impressions >= 1`,
 - dla `paa` wymagane są `query` oraz `research_note` zawierające co najmniej 20 znaków,

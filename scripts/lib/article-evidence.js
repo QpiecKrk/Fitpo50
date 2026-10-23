@@ -1,6 +1,6 @@
 const { POLICY, utils, validators } = require('./article-policy');
 
-const FAQ_SOURCE_TYPES = new Set(['autocomplete', 'paa', 'gsc', 'manual_research']);
+const FAQ_SOURCE_TYPES = new Set(POLICY.FAQ_SOURCE_TYPES.allowed_for_new_content);
 const CLAIM_TYPES = new Set(['medical', 'safety', 'statistic', 'price', 'mechanism', 'general']);
 const MEDICAL_EVIDENCE_LEVELS = new Set([
   'guideline',
@@ -258,7 +258,7 @@ function validateFaqResearch(json, today, warnings = [], options = {}) {
     if (researchSeen.has(normalizedQuestion)) errors.push(`${label}: zduplikowane źródło intencji FAQ.`);
     researchSeen.add(normalizedQuestion);
     if (!FAQ_SOURCE_TYPES.has(sourceType)) {
-      errors.push(`${label}: source_type musi być jednym z: autocomplete, paa, gsc, manual_research.`);
+      errors.push(`${label}: source_type musi być jednym z: ${[...FAQ_SOURCE_TYPES].join(', ')}.`);
     }
     validateCheckedUrl(item, label, today, errors, warnings, { allowPendingVerification: options.allowPendingVerification });
 
@@ -293,9 +293,6 @@ function validateFaqResearch(json, today, warnings = [], options = {}) {
       if ((requirement.query_required && !query) || note.length < requirement.research_note_min_chars) {
         errors.push(`${label}: PAA wymaga query i research_note (min. ${requirement.research_note_min_chars} znaków).`);
       }
-    }
-    if (sourceType === 'manual_research' && note.length < 20) {
-      errors.push(`${label}: manual_research wymaga konkretnego research_note (min. 20 znaków).`);
     }
   });
 

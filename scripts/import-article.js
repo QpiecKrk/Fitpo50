@@ -400,9 +400,17 @@ function normalizeFaqResearch(raw) {
       source_label: sourceLabel,
       source_url: sourceUrl,
       source_type: String(item.source_type || item.sourceType || '').trim(),
+      query: String(item.query || '').replace(/\s+/g, ' ').trim(),
+      ...(item.impressions !== undefined ? { impressions: Number(item.impressions) } : {}),
+      research_note: String(item.research_note || item.researchNote || '').replace(/\s+/g, ' ').trim(),
       checked_at: String(item.checked_at || item.checkedAt || '').trim(),
       url_status: String(item.url_status || item.urlStatus || '').trim(),
       http_status: Number(item.http_status || item.httpStatus || 0) || 0,
+      final_url: String(item.final_url || item.finalUrl || '').trim(),
+      ...(item.intent_verified === true ? { intent_verified: true } : {}),
+      ...(String(item.verified_suggestion || item.verifiedSuggestion || '').trim()
+        ? { verified_suggestion: String(item.verified_suggestion || item.verifiedSuggestion).replace(/\s+/g, ' ').trim() }
+        : {}),
     });
   }
   return out;
@@ -2424,6 +2432,7 @@ module.exports = {
   ensureCaptionedTables,
   main,
   normalizePayload,
+  normalizeFaqResearch,
   normalizeEntities,
   normalizeSections,
   normalizeSeoTitleBase,

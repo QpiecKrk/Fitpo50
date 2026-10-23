@@ -265,8 +265,8 @@ Artykuł nie przechodzi, jeśli:
 - Każde źródło musi wspierać co najmniej jedno `evidence_claims`; niewykorzystana, dekoracyjna bibliografia blokuje publikację.
 - Twierdzenia `medical` i ogólne twierdzenia `safety` wymagają silnego źródła naukowego lub instytucjonalnego oraz jawnego `evidence_level`. Wyłącznie modelowo swoista instrukcja obsługi lub konfiguracji urządzenia medycznego może opierać się na `technical_documentation` producenta, jeśli fragment i źródło wskazują ten sam jednoznaczny model; dokumentacja producenta nie potwierdza ogólnej skuteczności ani bezpieczeństwa klinicznego. Dla tematów medycznych minimum 67% źródeł i co najmniej dwa źródła muszą spełniać ten warunek.
 - FAQ nie jest nigdy generowane ani uzupełniane automatycznie przez lokalny pipeline. Liczba pytań wynika z researchu, może wynosić zero, a `answer_blocks[]` i `faq_research[]` zawsze odpowiadają sobie 1:1.
-- Każdy wpis `faq_research[]` wymaga `source_type`: `autocomplete`, `paa`, `gsc` albo `manual_research`, a także `checked_at`, `url_status` i `http_status`.
-- `gsc` wymaga realnego `query` i `impressions >= 1`; `paa` wymaga `query` i opisu kontroli; `manual_research` wymaga konkretnego `research_note`; `autocomplete` wymaga rzeczywistego endpointu Google Suggest z pytaniem w parametrze `q`.
+- Każdy wpis `faq_research[]` nowego materiału wymaga `source_type`: `autocomplete`, `paa` albo `gsc`, a także `checked_at`, `url_status` i `http_status`. `manual_research` jest dozwolone wyłącznie jako historyczny wyjątek dla sześciu opublikowanych centrów wskazanych dokładnymi nazwami w baseline walidatora.
+- `gsc` wymaga realnego `query` i `impressions >= 1`; `paa` wymaga `query` i opisu kontroli; `autocomplete` wymaga rzeczywistego endpointu Google Suggest z pytaniem w parametrze `q`.
 - Pytania zawierające sztuczne oznaczenia typu „wariant 2” są błędem blokującym.
 - URL-e sprawdza polecenie: `npm run article:evidence:verify -- --file <plik.fitpo50.json> --write true`.
 
@@ -282,6 +282,6 @@ Artykuł nie przechodzi, jeśli:
   2. daj krótki werdykt FitPo50,
   3. pokaż fizjologię i jakość dowodów,
   4. zakończ praktycznym "co działa zamiast tego".
-- Artykuł mitu zawiera semantyczną tabelę `MIT`–`FAKT/DOWODY` oraz wyjaśnienie mechanizmu w FAQ tylko wtedy, gdy istnieje realne pytanie z GSC/PAA/autocomplete/udokumentowanego researchu.
+- Artykuł mitu zawiera semantyczną tabelę `MIT`–`FAKT/DOWODY` oraz wyjaśnienie mechanizmu w FAQ tylko wtedy, gdy istnieje realne pytanie z GSC/PAA/autocomplete.
 - Ton: spokojny, kumpelski, bez moralizowania i bez języka oskarżającego konkretne firmy/osoby.
 - `ClaimReview` dodawaj tylko wtedy, gdy artykuł obala jedno precyzyjne, popularne twierdzenie i da się podać jasny werdykt oraz źródła. Przy artykułach zbiorczych typu "5 mitów" nie dodawaj jednego sztucznego `ClaimReview`.

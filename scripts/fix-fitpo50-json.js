@@ -115,6 +115,7 @@ function normalizeFaqResearch(items) {
       source_url: String((r && (r.source_url || r.url)) || '').trim(),
       source_type: String((r && (r.source_type || r.sourceType)) || '').trim(),
       query: String((r && r.query) || '').replace(/\s+/g, ' ').trim(),
+      ...(r?.impressions !== undefined ? { impressions: Number(r.impressions) } : {}),
       research_note: stripTags(String((r && (r.research_note || r.researchNote)) || '')).replace(/\s+/g, ' ').trim(),
       checked_at: String((r && (r.checked_at || r.checkedAt)) || '').trim(),
       url_status: String((r && (r.url_status || r.urlStatus)) || '').trim(),
@@ -457,6 +458,18 @@ function buildQuickAnswer(json) {
   return fromJson;
 }
 
+function validateFaqSourceTypes(items) {
+  const allowed = new Set(POLICY.FAQ_SOURCE_TYPES.allowed_for_new_content);
+  const errors = [];
+  (Array.isArray(items) ? items : []).forEach((item, index) => {
+    const sourceType = String(item?.source_type || '').trim().toLowerCase();
+    if (!allowed.has(sourceType)) {
+      errors.push(`faq_research[${index}].source_type musi być jednym z: ${[...allowed].join(', ')}.`);
+    }
+  });
+  return errors;
+}
+
 function validate(json) {
   const errors = [];
   const titleValidation = validators.validateTitleText(json.title, {
@@ -482,6 +495,7 @@ function validate(json) {
   if (!Array.isArray(json.sections) || json.sections.length === 0) {
     errors.push('sections musi zawierać co najmniej jeden merytoryczny blok wynikający z intencji artykułu');
   }
+  errors.push(...validateFaqSourceTypes(json.faq_research));
   const quickAnswerValidation = validators.validateQuickAnswer(json.quick_answer || '', { mode: 'strict' });
   errors.push(...quickAnswerValidation.errors.map((error) => `quick_answer: ${error}`));
   if (Array.isArray(json.sections)) {
@@ -752,4 +766,5 @@ module.exports = {
   normalizeSectionRole,
   requiredImagePromptPlacements,
   addImagePromptEvidenceClaims,
+  validateFaqSourceTypes,
 };

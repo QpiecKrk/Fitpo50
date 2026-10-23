@@ -11,14 +11,16 @@ const {
   normalizeSectionRole,
   requiredImagePromptPlacements,
   addImagePromptEvidenceClaims,
+  validateFaqSourceTypes,
 } = require('../scripts/fix-fitpo50-json');
 
-test('JSON fixer preserves provenance required by the FAQ evidence gate', () => {
+test('JSON fixer preserves allowed provenance required by the FAQ evidence gate', () => {
   const item = {
     question: 'Jak poznać właściwe tempo?',
     source_label: 'CDC — kryterium mowy',
     source_url: 'https://www.cdc.gov/example',
-    source_type: 'manual_research',
+    source_type: 'gsc',
+    impressions: 4,
     query: 'CDC talk test walking',
     research_note: 'Ręczny przegląd źródła potwierdził rzeczywiste pytanie i odpowiedź.',
     checked_at: '2026-08-25',
@@ -30,6 +32,16 @@ test('JSON fixer preserves provenance required by the FAQ evidence gate', () => 
   };
 
   assert.deepEqual(normalizeFaqResearch([item]), [item]);
+});
+
+test('JSON fixer never accepts manual_research as provenance for a new FAQ', () => {
+  assert.match(
+    validateFaqSourceTypes([{ source_type: 'manual_research' }]).join('\n'),
+    /source_type musi być jednym z: gsc, paa, autocomplete/,
+  );
+  for (const sourceType of ['gsc', 'paa', 'autocomplete']) {
+    assert.deepEqual(validateFaqSourceTypes([{ source_type: sourceType }]), []);
+  }
 });
 
 test('JSON fixer preserves supplemental section image placement', () => {

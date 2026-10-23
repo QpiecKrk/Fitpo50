@@ -8,6 +8,29 @@ from urllib.parse import urlsplit
 from bs4 import BeautifulSoup
 
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+ARTICLE_CONTRACT = json.loads(
+    (REPO_ROOT / 'docs/skills/fitpo50-article-draft/references/article-contract.json').read_text(encoding='utf-8')
+)
+VALIDATION_BASELINE = json.loads(
+    (REPO_ROOT / 'scripts/config/article-validation-baseline.json').read_text(encoding='utf-8')
+)
+FAQ_SOURCE_TYPES = set(ARTICLE_CONTRACT['faq_source_types']['allowed_for_new_content'])
+LEGACY_FAQ_SOURCE_TYPE = ARTICLE_CONTRACT['faq_source_types']['legacy_type']
+LEGACY_FAQ_BASELINE_ERROR = ARTICLE_CONTRACT['faq_source_types']['legacy_baseline_error']
+LEGACY_FAQ_FILES = set(next(
+    (item.get('files', []) for item in VALIDATION_BASELINE.get('known_errors', [])
+     if item.get('error') == LEGACY_FAQ_BASELINE_ERROR),
+    [],
+))
+
+
+def permits_legacy_manual_research(file):
+    resolved = file.resolve()
+    allowed_parent = resolved.parent in {REPO_ROOT, REPO_ROOT / '_site'}
+    return allowed_parent and resolved.name in LEGACY_FAQ_FILES
+
+
 def validate(file):
     soup = BeautifulSoup(file.read_text(), 'html.parser')
     root = file.parent.parent if file.parent.name == '_site' else file.parent
@@ -124,7 +147,18 @@ def validate(file):
         evidence = json.loads(evidence_node.string if evidence_node else '{}')
         research = evidence.get('faq_research', [])
         check([r.get('question') for r in research] == [q for q, a in visible_faq], 'Brak udokumentowanego researchu dla każdego FAQ')
-        check(all(r.get('source_type') in ['manual_research', 'gsc', 'paa', 'autocomplete'] and r.get('research_note') and r.get('source_url') and r.get('checked_at') for r in research), 'Niekompletny research FAQ')
+        complete_research = all(
+            r.get('research_note') and r.get('source_url') and r.get('checked_at')
+            for r in research
+        )
+        check(complete_research, 'Niekompletny research FAQ')
+        source_types = {str(r.get('source_type', '')).strip().casefold() for r in research}
+        has_legacy_type = LEGACY_FAQ_SOURCE_TYPE in source_types
+        check(
+            source_types.issubset(FAQ_SOURCE_TYPES)
+            or (has_legacy_type and source_types.issubset(FAQ_SOURCE_TYPES | {LEGACY_FAQ_SOURCE_TYPE}) and permits_legacy_manual_research(file)),
+            LEGACY_FAQ_BASELINE_ERROR if has_legacy_type else 'Niedozwolony source_type researchu FAQ',
+        )
         claims = evidence.get('evidence_claims', [])
         check(len(claims) >= len(visible_faq), 'Brak mapowania tez FAQ do dowodów')
         registered = {source.get('url') for source in evidence.get('sources', [])}

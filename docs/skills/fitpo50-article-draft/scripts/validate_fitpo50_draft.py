@@ -20,6 +20,7 @@ LOCAL_FIELDS = {"internal_link_plan", "incoming_link_suggestions", "intent_audit
 ARTICLE_CONTRACT = json.loads((Path(__file__).resolve().parent.parent / "references" / "article-contract.json").read_text(encoding="utf-8"))
 MIN_MEDICAL_SOURCES = int(ARTICLE_CONTRACT["medical_source_minimum"])
 FAQ_SOURCE_REQUIREMENTS = ARTICLE_CONTRACT["faq_source_requirements"]
+FAQ_SOURCE_TYPES = set(ARTICLE_CONTRACT["faq_source_types"]["allowed_for_new_content"])
 REQUIRED_TEXT = (
     "title", "seo_title", "og_title", "twitter_title", "slug", "category",
     "meta_description", "og_description", "twitter_description", "schema_blogposting_description",
@@ -455,8 +456,10 @@ def validate(data: dict[str, Any], allow_verified_review: bool = False) -> tuple
         else:
             research_by_question[key] = item
         source_type = str(item.get("source_type", "")).strip().casefold()
-        if source_type not in {"autocomplete", "paa", "gsc", "manual_research"}:
-            errors.append(f"faq_research[{index}].source_type ma niedozwoloną wartość.")
+        if source_type not in FAQ_SOURCE_TYPES:
+            errors.append(
+                f"faq_research[{index}].source_type musi być jednym z: {', '.join(sorted(FAQ_SOURCE_TYPES))}."
+            )
         if not isinstance(item.get("source_label"), str) or len(item["source_label"].strip()) < 8:
             errors.append(f"faq_research[{index}].source_label musi konkretnie nazywać źródło intencji.")
         source_url = item.get("source_url")

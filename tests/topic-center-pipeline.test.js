@@ -13,6 +13,7 @@ test('center contract rejects duplicate schema, missing evidence, broken links a
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'center-contract-'));
   const name = 'centrum-snu-po-50.html';
   const valid = fs.readFileSync(path.join(__dirname, 'fixtures/topic-centers', name), 'utf8');
+  const validNew = valid.replaceAll('"source_type": "manual_research"', '"source_type": "paa"');
   for (const file of fs.readdirSync(repo).filter((file) => file.endsWith('.html') && file !== name)) {
     fs.symlinkSync(path.join(repo, file), path.join(root, file));
   }
@@ -20,20 +21,41 @@ test('center contract rejects duplicate schema, missing evidence, broken links a
     fs.writeFileSync(path.join(root, name), html);
     return spawnSync('python3', [path.join(repo, 'scripts/validate-topic-center.py'), path.join(root, name)], {encoding: 'utf8'});
   };
-  const result = run(valid);
+  const result = run(validNew);
   assert.equal(result.status, 0, result.stdout + result.stderr);
   const cases = [
-    [valid.replace('</head>', '<script type="application/ld+json">{"@type":"BlogPosting"}</script></head>'), 'bez duplikatów'],
-    [valid.replaceAll('data-evidence=', 'data-unused='), 'wykorzystane przy konkretnej tezie'],
-    [valid.replace('href="sen-po-50.html"', 'href="missing.html"'), 'Uszkodzony link'],
-    [valid.replace('Ile godzin snu zaleca się dorosłym?</h3>', 'Inne pytanie?</h3>'), 'FAQ HTML i schema'],
-    [valid.replace('class="hub-article-link"', 'class="other-link"'), 'ItemList'],
+    [validNew.replace('</head>', '<script type="application/ld+json">{"@type":"BlogPosting"}</script></head>'), 'bez duplikatów'],
+    [validNew.replaceAll('data-evidence=', 'data-unused='), 'wykorzystane przy konkretnej tezie'],
+    [validNew.replace('href="sen-po-50.html"', 'href="missing.html"'), 'Uszkodzony link'],
+    [validNew.replace('Ile godzin snu zaleca się dorosłym?</h3>', 'Inne pytanie?</h3>'), 'FAQ HTML i schema'],
+    [validNew.replace('class="hub-article-link"', 'class="other-link"'), 'ItemList'],
   ];
   for (const [html, error] of cases) {
     const failed = run(html);
     assert.notEqual(failed.status, 0, error);
     assert.ok(failed.stdout.includes(error), failed.stdout + failed.stderr);
   }
+});
+
+test('only the six exact published centers retain the manual_research baseline', () => {
+  const repo = path.resolve(__dirname, '..');
+  const legacyCenters = [
+    'centrum-bialka-po-50.html',
+    'centrum-cholesterolu-po-50.html',
+    'centrum-metabolizmu-po-50.html',
+    'centrum-nadcisnienia-po-50.html',
+    'centrum-snu-po-50.html',
+    'centrum-treningu-silowego-po-50.html',
+  ];
+  for (const name of legacyCenters) {
+    const result = spawnSync('python3', [path.join(repo, 'scripts/validate-topic-center.py'), path.join(repo, name)], { encoding: 'utf8' });
+    assert.equal(result.status, 0, `${name}\n${result.stdout}\n${result.stderr}`);
+  }
+
+  const template = path.join(repo, 'templates/topic-centers/centrum-snu-po-50.html');
+  const rejectedTemplate = spawnSync('python3', [path.join(repo, 'scripts/validate-topic-center.py'), template], { encoding: 'utf8' });
+  assert.notEqual(rejectedTemplate.status, 0);
+  assert.match(rejectedTemplate.stdout, /FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY/);
 });
 
 test('A4 accepts Chromium rounding but rejects Letter, landscape and missing dimensions', () => {

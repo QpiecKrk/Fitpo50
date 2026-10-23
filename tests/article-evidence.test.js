@@ -74,6 +74,7 @@ function validEvidenceJson() {
   const pubmed = 'https://pubmed.ncbi.nlm.nih.gov/12345678/';
   const who = 'https://www.who.int/news-room/fact-sheets/detail/physical-activity';
   const question = 'Czy wynik badania trzeba omówić z lekarzem?';
+  const autocompleteUrl = `https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=${encodeURIComponent(question)}`;
   return {
     title: 'Badanie laboratoryjne po 50 roku życia',
     category: 'zdrowie',
@@ -83,13 +84,15 @@ function validEvidenceJson() {
     answer_blocks: [{ question, answer_html: '<p>Odpowiedź opisuje zakres pytania użytkownika bez dodatkowych twierdzeń.</p>' }],
     faq_research: [{
       question,
-      source_label: 'Udokumentowany research redakcyjny FitPo50',
-      source_url: pubmed,
-      source_type: 'manual_research',
-      research_note: 'Pytanie zapisano podczas ręcznego przeglądu intencji użytkowników.',
+      source_label: 'Google Autocomplete PL',
+      source_url: autocompleteUrl,
+      source_type: 'autocomplete',
+      research_note: 'Pytanie wystąpiło jako dokładna podpowiedź Google Suggest.',
       checked_at: TODAY,
       url_status: 'reachable',
       http_status: 200,
+      intent_verified: true,
+      verified_suggestion: question,
     }],
     sources: [
       source('PubMed: badanie ryzyka w obserwowanej grupie', pubmed),
@@ -220,6 +223,23 @@ test('pipeline evidence validator enforces shared GSC and PAA FAQ provenance req
   paa.faq_research[0].research_note = 'Pytanie potwierdzono w udokumentowanym panelu People Also Ask.';
   result = validateArticleEvidence(paa, { today: TODAY });
   assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
+test('pipeline rejects manual_research for new FAQ and accepts the three contracted source types', () => {
+  const manual = validEvidenceJson();
+  manual.faq_research[0].source_type = 'manual_research';
+  assert.match(validateArticleEvidence(manual, { today: TODAY }).errors.join('\n'), /source_type musi być jednym z: gsc, paa, autocomplete/);
+
+  const autocomplete = validEvidenceJson();
+  assert.equal(validateArticleEvidence(autocomplete, { today: TODAY }).ok, true);
+
+  const gsc = validEvidenceJson();
+  Object.assign(gsc.faq_research[0], { source_type: 'gsc', query: gsc.faq_research[0].question, impressions: 1 });
+  assert.equal(validateArticleEvidence(gsc, { today: TODAY }).ok, true);
+
+  const paa = validEvidenceJson();
+  Object.assign(paa.faq_research[0], { source_type: 'paa', query: paa.faq_research[0].question, research_note: 'Pytanie potwierdzono w udokumentowanym panelu People Also Ask.' });
+  assert.equal(validateArticleEvidence(paa, { today: TODAY }).ok, true);
 });
 
 test('autocomplete verification requires the exact normalized FAQ suggestion, not only HTTP 200', () => {
