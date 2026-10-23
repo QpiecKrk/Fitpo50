@@ -283,10 +283,16 @@ function validateFaqResearch(json, today, warnings = [], options = {}) {
       }
     }
     if (sourceType === 'gsc') {
-      if (!query || Number(item?.impressions || 0) < 1) errors.push(`${label}: GSC wymaga query oraz impressions >= 1.`);
+      const requirement = POLICY.FAQ_SOURCE_REQUIREMENTS.gsc;
+      if ((requirement.query_required && !query) || Number(item?.impressions || 0) < requirement.impressions_min) {
+        errors.push(`${label}: GSC wymaga query oraz impressions >= ${requirement.impressions_min}.`);
+      }
     }
-    if (sourceType === 'paa' && (!query || note.length < 20)) {
-      errors.push(`${label}: PAA wymaga query i research_note opisującego udokumentowane sprawdzenie.`);
+    if (sourceType === 'paa') {
+      const requirement = POLICY.FAQ_SOURCE_REQUIREMENTS.paa;
+      if ((requirement.query_required && !query) || note.length < requirement.research_note_min_chars) {
+        errors.push(`${label}: PAA wymaga query i research_note (min. ${requirement.research_note_min_chars} znaków).`);
+      }
     }
     if (sourceType === 'manual_research' && note.length < 20) {
       errors.push(`${label}: manual_research wymaga konkretnego research_note (min. 20 znaków).`);

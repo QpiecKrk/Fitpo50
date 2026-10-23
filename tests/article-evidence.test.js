@@ -201,6 +201,27 @@ test('FAQ must have documented origin and never accepts artificial variant numbe
   assert.match(validateArticleEvidence(missingOrigin, { today: TODAY }).errors.join(' '), /source_type/);
 });
 
+test('pipeline evidence validator enforces shared GSC and PAA FAQ provenance requirements', () => {
+  const gsc = validEvidenceJson();
+  gsc.faq_research[0].source_type = 'gsc';
+  let result = validateArticleEvidence(gsc, { today: TODAY });
+  assert.match(result.errors.join('\n'), /GSC wymaga query oraz impressions >= 1/);
+  gsc.faq_research[0].query = gsc.faq_research[0].question;
+  gsc.faq_research[0].impressions = 1;
+  result = validateArticleEvidence(gsc, { today: TODAY });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+
+  const paa = validEvidenceJson();
+  paa.faq_research[0].source_type = 'paa';
+  paa.faq_research[0].research_note = 'krótko';
+  result = validateArticleEvidence(paa, { today: TODAY });
+  assert.match(result.errors.join('\n'), /PAA wymaga query i research_note \(min\. 20 znaków\)/);
+  paa.faq_research[0].query = paa.faq_research[0].question;
+  paa.faq_research[0].research_note = 'Pytanie potwierdzono w udokumentowanym panelu People Also Ask.';
+  result = validateArticleEvidence(paa, { today: TODAY });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
 test('autocomplete verification requires the exact normalized FAQ suggestion, not only HTTP 200', () => {
   const question = 'Czy zmiana czasu ma sens?';
   const suggestions = parseAutocompleteSuggestions(JSON.stringify([question, ['czy zmiana czasu ma sens', 'zmiana czasu skutki']]));

@@ -147,6 +147,8 @@ Claude może tworzyć FAQ, ale nie może go wymyślać. Linkowanie wewnętrzne z
 - `answer_blocks[]` i `faq_research[]` odpowiadają sobie 1:1,
 - nie obowiązuje minimum FAQ; dodaj wyłącznie pytania z wiarygodnym, zapisanym sygnałem,
 - każde `faq_research[]` zawiera dokładne pytanie, `source_type`, `source_label`, `source_url`, `checked_at`, status URL i konkretny `research_note`,
+- dla `gsc` wymagane są `query` oraz liczbowe `impressions >= 1`,
+- dla `paa` wymagane są `query` oraz `research_note` zawierające co najmniej 20 znaków,
 - dla `autocomplete` adres prowadzi do Google Suggest i zawiera w parametrze `q` dokładne pytanie; lokalny pipeline pobiera odpowiedź i sprawdza, czy podpowiedź rzeczywiście występuje,
 - odpowiedź FAQ ma być kompletna i źródłowa, bez sztucznego limitu słów,
 - brak `href` prowadzących do `*.html`,

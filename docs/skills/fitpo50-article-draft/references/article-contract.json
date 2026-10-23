@@ -1,4 +1,14 @@
 {
   "medical_source_minimum": 4,
-  "internal_links_warn_below": 2
+  "internal_links_warn_below": 2,
+  "faq_source_requirements": {
+    "gsc": {
+      "query_required": true,
+      "impressions_min": 1
+    },
+    "paa": {
+      "query_required": true,
+      "research_note_min_chars": 20
+    }
+  }
 }

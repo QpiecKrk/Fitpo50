@@ -158,6 +158,22 @@ test('Claude draft skill accepts documented FAQ and leaves local verification to
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
 });
 
+test('Claude draft validator enforces shared GSC and PAA FAQ provenance requirements', () => {
+  const invalid = validDraft();
+  invalid.faq_research[0].source_type = 'gsc';
+  invalid.faq_research[1].source_type = 'paa';
+  const rejected = validate(invalid);
+  assert.equal(rejected.status, 1);
+  assert.match(rejected.stdout, /GSC wymaga query oraz impressions >= 1/);
+  assert.match(rejected.stdout, /PAA wymaga query i research_note \(min\. 20 znaków\)/);
+
+  invalid.faq_research[0].query = invalid.faq_research[0].question;
+  invalid.faq_research[0].impressions = 1;
+  invalid.faq_research[1].query = invalid.faq_research[1].question;
+  const accepted = validate(invalid);
+  assert.equal(accepted.status, 0, `${accepted.stdout}\n${accepted.stderr}`);
+});
+
 test('Claude draft skill accepts any FAQ count when every item has documented research', () => {
   const tooFew = validDraft();
   tooFew.answer_blocks = tooFew.answer_blocks.slice(0, 2);

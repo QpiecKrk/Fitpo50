@@ -19,6 +19,7 @@ SEARCH_INTENTS = {
 LOCAL_FIELDS = {"internal_link_plan", "incoming_link_suggestions", "intent_audit", "topic_center_assessment", "topic_center_approval", "media_manifest", "evidence_verification"}
 ARTICLE_CONTRACT = json.loads((Path(__file__).resolve().parent.parent / "references" / "article-contract.json").read_text(encoding="utf-8"))
 MIN_MEDICAL_SOURCES = int(ARTICLE_CONTRACT["medical_source_minimum"])
+FAQ_SOURCE_REQUIREMENTS = ARTICLE_CONTRACT["faq_source_requirements"]
 REQUIRED_TEXT = (
     "title", "seo_title", "og_title", "twitter_title", "slug", "category",
     "meta_description", "og_description", "twitter_description", "schema_blogposting_description",
@@ -482,6 +483,24 @@ def validate(data: dict[str, Any], allow_verified_review: bool = False) -> tuple
                 errors.append(f"faq_research[{index}] autocomplete wymaga endpointu Google Suggest.")
             if normalized(query).rstrip(" ?!.") != key:
                 errors.append(f"faq_research[{index}] parametr q musi odpowiadać pytaniu FAQ 1:1.")
+        query = str(item.get("query", "")).strip()
+        if source_type == "gsc":
+            requirement = FAQ_SOURCE_REQUIREMENTS["gsc"]
+            try:
+                impressions = float(item.get("impressions", 0) or 0)
+            except (TypeError, ValueError):
+                impressions = 0
+            if (requirement["query_required"] and not query) or impressions < requirement["impressions_min"]:
+                errors.append(
+                    f"faq_research[{index}]: GSC wymaga query oraz impressions >= {requirement['impressions_min']}."
+                )
+        if source_type == "paa":
+            requirement = FAQ_SOURCE_REQUIREMENTS["paa"]
+            note = str(item.get("research_note", "")).strip()
+            if (requirement["query_required"] and not query) or len(note) < requirement["research_note_min_chars"]:
+                errors.append(
+                    f"faq_research[{index}]: PAA wymaga query i research_note (min. {requirement['research_note_min_chars']} znaków)."
+                )
     faq_seen: set[str] = set()
     for index, item in enumerate(faq):
         if not isinstance(item, dict):
