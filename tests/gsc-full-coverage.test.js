@@ -38,6 +38,10 @@ test('priority map assigns a diagnosis and action to every article', () => {
     'query,page,clicks,impressions,ctr,position',
     'inna ujawniona fraza,https://fitpo50.pl/index.html,0,10,0,30',
   ].join('\n'));
+  fs.writeFileSync(path.join(dir, 'web-28-current-pages.csv'), [
+    'page,clicks,impressions,ctr,position',
+    `${visibleUrl},0,3,0,8`,
+  ].join('\n'));
   writeManifestFromApiReport({
     generated_at: new Date().toISOString(),
     report_kind: 'DATASET',
@@ -67,6 +71,8 @@ test('priority map assigns a diagnosis and action to every article', () => {
 
   const queryPrivatePage = report.priority_map.find((item) => item.url === visibleUrl);
   assert.equal(queryPrivatePage.gsc.query_privacy_note, 'PAGE_SIGNAL_VALID_QUERY_ANONYMIZED_OR_NOT_RETURNED');
+  assert.equal(queryPrivatePage.priority, 'P2_INSUFFICIENT_DATA');
+  assert.equal(queryPrivatePage.priority_metrics_28d.impressions, 3);
   assert.equal(queryPrivatePage.diagnosis, 'POSITION_11_30');
   assert.equal(queryPrivatePage.keywords.primary_source, 'ARTICLE_TOPIC_FALLBACK');
   assert.equal(queryPrivatePage.keywords.disclosed_primary_query, null);

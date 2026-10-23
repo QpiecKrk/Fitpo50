@@ -4,13 +4,14 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const crypto = require('crypto');
+const { DEFAULT_GROWTH_REPORT_DIR, migrateLegacySeoData } = require('./lib/seo-priority-list');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const GA4_SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
 const DEFAULT_REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
   ? path.resolve(process.env.FITPO50_GROWTH_REPORT_DIR)
-  : path.join(os.homedir(), 'Downloads', 'fitpo50-growth-reports');
+  : DEFAULT_GROWTH_REPORT_DIR;
 
 function unquoteEnvValue(value) {
   const raw = String(value || '').trim();
@@ -461,6 +462,7 @@ function writeMarkdown(report, file) {
 }
 
 async function main() {
+  migrateLegacySeoData();
   const args = parseArgs(process.argv.slice(2));
   const propertyId = String(process.env.GA4_PROPERTY_ID || process.env.GA_PROPERTY_ID || '').trim().replace(/^properties\//, '');
   let report = null;

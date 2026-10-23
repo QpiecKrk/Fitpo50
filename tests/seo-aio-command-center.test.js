@@ -25,6 +25,7 @@ function writeFixture(dir) {
         type: 'article',
         title: 'Test artykuł',
         gsc: { clicks: 0, impressions: 100, ctr: 0.2, position: 8 },
+        priority_metrics_28d: { clicks: 0, impressions: 100, ctr: 0.2, position: 8 },
         topology: {
           inbound_links: 2,
           outbound_internal_links: 4,
@@ -53,6 +54,7 @@ function writeFixture(dir) {
         type: 'article',
         title: 'Polityka prywatności',
         gsc: { clicks: 0, impressions: 0, ctr: 0, position: 0 },
+        priority_metrics_28d: { clicks: 0, impressions: 0, ctr: 0, position: 0 },
         topology: { inbound_links: 0, outbound_internal_links: 0, suggested_sources: [] },
         keywords: { primary: 'polityka prywatności', secondary: [], intents: [], evidence: [] },
         all_keyword_registry: [],
@@ -76,13 +78,15 @@ test('seo-aio command center builds waves, queues and support-page tasks', () =>
 
   const result = spawnSync(
     'node',
-    ['scripts/seo-aio-command-center.js', '--input-dir', inputDir, '--output-dir', outputDir, '--no-mirror'],
+    ['scripts/seo-aio-command-center.js', '--input-dir', inputDir, '--output-dir', outputDir, '--state-dir', path.join(outputDir, 'state'), '--no-mirror'],
     { cwd: ROOT, encoding: 'utf8' },
   );
 
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const report = JSON.parse(fs.readFileSync(path.join(outputDir, 'seo-aio-command-center.json'), 'utf8'));
   assert.equal(report.portfolio.total_urls, 2);
+  assert.equal(report.priority_contract.source, 'scripts/lib/seo-priority-list.js');
+  assert.deepEqual(report.priority_contract.current_wave_composition, { estimated_click_gain: 1, rotation: 0 });
   assert.equal(report.waves.wave_1_fast_page_one[0].url, 'https://fitpo50.pl/test-artykul.html');
   assert.ok(report.gsc_submit_queue.includes('https://fitpo50.pl/source.html'));
 

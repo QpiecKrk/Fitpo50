@@ -3,6 +3,12 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const {
+  hydrateSharedPriorityList,
+  migrateLegacySeoData,
+  resolveSeoStateDir,
+  selectPriorityWave,
+} = require('./lib/seo-priority-list');
 
 const ROOT = process.cwd();
 const SITE_ORIGIN = 'https://fitpo50.pl';
@@ -28,6 +34,8 @@ function parseArgs(argv) {
     mirrorDir: DEFAULT_REPO_REPORT_DIR,
     baseUrl: SITE_ORIGIN,
     maxCards: 40,
+    waveSize: 5,
+    stateDir: resolveSeoStateDir(),
   };
   for (let i = 0; i < argv.length; i += 1) {
     const token = String(argv[i] || '').trim();
@@ -58,6 +66,16 @@ function parseArgs(argv) {
     }
     if (token === '--max-cards' && value) {
       out.maxCards = Math.max(5, Number(value) || out.maxCards);
+      i += 1;
+      continue;
+    }
+    if (token === '--wave-size' && value) {
+      out.waveSize = Math.max(1, Number(value) || out.waveSize);
+      i += 1;
+      continue;
+    }
+    if (token === '--state-dir' && value) {
+      out.stateDir = path.resolve(ROOT, value);
       i += 1;
     }
   }
@@ -294,10 +312,16 @@ function buildCard(item, baseUrl) {
     url: item.url,
     file: urlToPath(item.url),
     title: item.title || item.h1 || '',
+    date_modified: item.date_modified || '',
+    content_type: item.type || '',
+    content_role: item.content_role || '',
     priority: item.priority,
     segment: item.visibility_segment,
     editorial_decision: item.editorial_decision,
     gsc: item.gsc,
+    gsc_windows: item.gsc_windows || {},
+    priority_metrics_28d: item.priority_metrics_28d || null,
+    index_inspection: item.index_inspection || {},
     performance_delta: item.performance_delta,
     keyword_plan: {
       primary: item.keywords?.primary || '',
@@ -317,9 +341,23 @@ function buildCard(item, baseUrl) {
   };
 }
 
-function buildWaves(cards) {
+function rotationTasks(card) {
+  const diagnosis = card.rotation_diagnosis;
+  return [
+    `Indeksacja: ${diagnosis.indexation.status} — ${diagnosis.indexation.verdict}`,
+    `Title/H1: ${diagnosis.title_h1_intent.decision}`,
+    `Linki przychodzące: ${diagnosis.inbound_links.count}; ${diagnosis.inbound_links.action}`,
+  ];
+}
+
+function buildWaves(cards, state = {}, waveSize = 5, roundKey = '') {
+  const rotationPool = cards.filter((card) => card.content_type === 'article' && !isSupportPage(card));
+  const selection = selectPriorityWave(rotationPool, { size: waveSize, state, roundKey });
+  const firstWave = selection.selected.map((card) => (
+    card.wave_source === 'ROTATION' ? { ...card, tasks: rotationTasks(card) } : card
+  ));
   const actionable = cards.filter((card) => card.type !== 'P3_MONITOR');
-  const used = new Set();
+  const used = new Set(firstWave.map((card) => card.url));
   const take = (predicate, limit) => {
     const picked = [];
     for (const card of actionable) {
@@ -331,11 +369,18 @@ function buildWaves(cards) {
     return picked;
   };
   return {
-    wave_1_fast_page_one: take((card) => card.type === 'P0_PUSH_TO_PAGE_ONE' || card.type === 'P0_FIX_CTR_SNIPPET', 12),
-    wave_2_discovery: take((card) => card.type === 'P1_BUILD_DISCOVERY' || (card.segment === 'DORMANT_ZERO_VISIBILITY' && !card.type.includes('CORE')), 12),
-    wave_3_refresh_geo_aio: take((card) => ['P1_REFRESH_DECLINE', 'P1_AEO_UPGRADE', 'P1_GEO_CITATION_UPGRADE', 'P2_AIO_EXTRACTION_UPGRADE'].includes(card.type), 12),
-    wave_4_scale_winners: take((card) => card.type === 'P2_SCALE_WINNER' || card.segment === 'LEADER_WINNER', 8),
-    wave_5_core_support: take((card) => card.type === 'P2_CORE_SUPPORT_LINKING', 8),
+    waves: {
+      wave_1_fast_page_one: firstWave,
+      wave_2_discovery: take((card) => card.type === 'P1_BUILD_DISCOVERY' || (card.segment === 'DORMANT_ZERO_VISIBILITY' && !card.type.includes('CORE')), 12),
+      wave_3_refresh_geo_aio: take((card) => ['P1_REFRESH_DECLINE', 'P1_AEO_UPGRADE', 'P1_GEO_CITATION_UPGRADE', 'P2_AIO_EXTRACTION_UPGRADE'].includes(card.type), 12),
+      wave_4_scale_winners: take((card) => card.type === 'P2_SCALE_WINNER' || card.segment === 'LEADER_WINNER', 8),
+      wave_5_core_support: take((card) => card.type === 'P2_CORE_SUPPORT_LINKING', 8),
+    },
+    state: selection.state,
+    composition: {
+      estimated_click_gain: selection.gain_count,
+      rotation: selection.rotation_count,
+    },
   };
 }
 
@@ -361,11 +406,27 @@ function buildReport(args) {
   const weekly = readJsonIfExists(weeklyPath);
   const weeklyApi = readJsonIfExists(weeklyApiPath);
   const aeo = readJsonIfExists(aeoPath);
-  const cards = priority.priority_map
+  const rawCards = priority.priority_map
     .filter((item) => item && item.type !== 'redirect')
-    .map((item) => buildCard(item, args.baseUrl))
-    .sort((a, b) => b.score.total - a.score.total || Number(b.gsc?.impressions || 0) - Number(a.gsc?.impressions || 0));
-  const waves = buildWaves(cards);
+    .map((item) => buildCard(item, args.baseUrl));
+  const sharedPriority = hydrateSharedPriorityList(rawCards, priority.shared_priority_list);
+  const cards = sharedPriority.map((entry) => ({
+    ...entry.item,
+    shared_priority_rank: entry.rank,
+    estimated_click_gain: {
+      clicks_28d: entry.estimated_click_gain_28d,
+      target_position: entry.target_position,
+      target_ctr: entry.target_ctr,
+      current_ctr: entry.current_ctr,
+      impressions_28d: entry.impressions_28d,
+      data_status: entry.data_status,
+    },
+  }));
+  const rotationStatePath = path.join(args.stateDir, 'priority-rotation.json');
+  const rotationState = readJsonIfExists(rotationStatePath) || {};
+  const waveResult = buildWaves(cards, rotationState, args.waveSize, priority.generated_at || 'UNKNOWN_DATASET');
+  const waves = waveResult.waves;
+  writeJson(rotationStatePath, waveResult.state);
   const gscSubmitQueue = unique([
     ...waves.wave_1_fast_page_one,
     ...waves.wave_2_discovery,
@@ -401,6 +462,19 @@ function buildReport(args) {
         promotion: average(cards.map((card) => card.score.promotion)),
       },
     },
+    priority_contract: {
+      source: 'scripts/lib/seo-priority-list.js',
+      ranking: 'impressions_28d * (target_position_ctr - current_ctr)',
+      wave_mix: '60% estimated click gain + 40% rotation',
+      current_wave_composition: waveResult.composition,
+      state_file: rotationStatePath,
+    },
+    shared_priority_list: cards.map((card) => ({
+      rank: card.shared_priority_rank,
+      file: card.file,
+      url: card.url,
+      estimated_click_gain: card.estimated_click_gain,
+    })),
     waves,
     top_action_cards: cards.slice(0, args.maxCards),
     gsc_submit_queue: gscSubmitQueue,
@@ -523,6 +597,7 @@ function writeReportCopies(report, args) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  migrateLegacySeoData();
   const report = buildReport(args);
   const outputs = writeReportCopies(report, args);
   console.log(`[SEO-AIO-MACHINE] urls=${report.portfolio.total_urls} cards=${report.top_action_cards.length}`);

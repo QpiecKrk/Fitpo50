@@ -5,16 +5,20 @@ const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
+const {
+  DEFAULT_GROWTH_REPORT_DIR,
+  hydrateSharedPriorityList,
+  migrateLegacySeoData,
+  resolveSeoStateDir,
+} = require('./lib/seo-priority-list');
 
 const ROOT = process.cwd();
 const REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
   ? path.resolve(process.env.FITPO50_GROWTH_REPORT_DIR)
-  : path.join(process.cwd(), 'data', 'reports', 'growth');
+  : DEFAULT_GROWTH_REPORT_DIR;
 const GSC_INPUT_DIR = process.env.GSC_WORK_DIR || path.join(os.homedir(), 'Downloads', 'gsc-auto-input');
 const GSC_CONTENT_STRATEGY_REPORT = process.env.GSC_CONTENT_STRATEGY_REPORT || '';
-const SEO_STATE_DIR = process.env.FITPO50_SEO_STATE_DIR
-  ? path.resolve(process.env.FITPO50_SEO_STATE_DIR)
-  : path.join(os.homedir(), 'Downloads', 'fitpo50-seo-state');
+const SEO_STATE_DIR = resolveSeoStateDir();
 const SITE_ORIGIN = 'https://fitpo50.pl';
 const SEO_ROKUJE_PILOT_SIZE = 4;
 const SEO_ROKUJE_EXPANSION_SIZE = 20;
@@ -1189,6 +1193,8 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     gsc,
     gsc_windows: card?.gsc_windows || {},
     index_inspection: card?.index_inspection || {},
+    shared_priority_rank: Number(card?.shared_priority_rank || 0) || null,
+    estimated_click_gain: card?.estimated_click_gain || null,
     estimated_traffic_gain: estimatedTrafficGain(gsc, sourceWindowDays),
     content_contract: proposalContentContract(card, articleByFile?.get?.(file)),
     current_title: articleByFile?.get?.(file)?.title || '',
@@ -1274,6 +1280,7 @@ function buildFullCoverageCard(item, actionCardsByFile) {
     editorial_decision: item?.editorial_decision || '',
     gsc: item?.gsc || {},
     gsc_windows: item?.gsc_windows || {},
+    priority_metrics_28d: item?.priority_metrics_28d || null,
     index_inspection: item?.index_inspection || {},
     required_action: item?.required_action || {},
     keyword_plan: {
@@ -1433,23 +1440,59 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
     promisingCards.push(...buildPromisingSeoCards(enrichedCards, contentStrategy, excludedKeys, articleByFile));
   }
   const allCards = [...boostCards, ...promisingCards, ...repairCards, ...monitoringCards];
+  const sharedPriority = hydrateSharedPriorityList(allCards, fullCoverageReport?.shared_priority_list);
+  const sharedByFile = new Map(sharedPriority.map((entry) => [entry.file, entry]));
+  const decoratePriority = (card) => {
+    const entry = sharedByFile.get(approvalCardKey(card));
+    if (!entry) return card;
+    return {
+      ...card,
+      shared_priority_rank: entry.rank,
+      estimated_click_gain: {
+        clicks_28d: entry.estimated_click_gain_28d,
+        target_position: entry.target_position,
+        target_ctr: entry.target_ctr,
+        current_ctr: entry.current_ctr,
+        impressions_28d: entry.impressions_28d,
+        data_status: entry.data_status,
+      },
+    };
+  };
+  const bySharedPriority = (a, b) => (
+    Number(a.shared_priority_rank || Number.MAX_SAFE_INTEGER) - Number(b.shared_priority_rank || Number.MAX_SAFE_INTEGER)
+    || approvalCardKey(a).localeCompare(approvalCardKey(b))
+  );
+  const rankedBoostCards = boostCards.map(decoratePriority).sort(bySharedPriority);
+  const rankedPromisingCards = promisingCards.map(decoratePriority).sort(bySharedPriority);
+  const rankedRepairCards = repairCards.map(decoratePriority).sort(bySharedPriority);
+  const rankedMonitoringCards = monitoringCards.map(decoratePriority).sort(bySharedPriority);
   const allKeys = new Set(allCards.map(approvalCardKey).filter(Boolean));
   const inventoryCount = fullCoverageItems.length || allCards.length;
-  const boostItems = boostCards.map((card, index) => buildSeoApprovalItem(card, 'BOOST', index + 1, articleByFile, sourceWindowDays));
-  promisingCards.sort((a, b) => promisingScore(b) - promisingScore(a) || approvalCardKey(a).localeCompare(approvalCardKey(b)));
-  const promisingItems = promisingCards.map((card, index) => buildSeoApprovalItem(card, 'ROKUJE', index + 1, articleByFile, sourceWindowDays));
-  const repairItems = repairCards.map((card, index) => buildSeoApprovalItem(card, 'NAPRAWA', index + 1, articleByFile, sourceWindowDays));
-  const monitoringItems = monitoringCards.map((card, index) => buildSeoApprovalItem(card, 'MONITORING', index + 1, articleByFile, sourceWindowDays));
+  const boostItems = rankedBoostCards.map((card, index) => buildSeoApprovalItem(card, 'BOOST', index + 1, articleByFile, sourceWindowDays));
+  const promisingItems = rankedPromisingCards.map((card, index) => buildSeoApprovalItem(card, 'ROKUJE', index + 1, articleByFile, sourceWindowDays));
+  const repairItems = rankedRepairCards.map((card, index) => buildSeoApprovalItem(card, 'NAPRAWA', index + 1, articleByFile, sourceWindowDays));
+  const monitoringItems = rankedMonitoringCards.map((card, index) => buildSeoApprovalItem(card, 'MONITORING', index + 1, articleByFile, sourceWindowDays));
   const approvalItems = [...boostItems, ...promisingItems, ...repairItems, ...monitoringItems];
   return {
     status: 'AWAITING_USER_APPROVAL',
     rule: 'Każdy artykuł trafia dokładnie do jednego koszyka: BOOST, ROKUJE, NAPRAWA albo MONITORING. Cooldown przenosi do MONITORING, ale nigdy nie usuwa URL-a z raportu.',
     no_generic_text: true,
+    priority_contract: {
+      source: 'scripts/lib/seo-priority-list.js',
+      ranking: 'impressions_28d * (target_position_ctr - current_ctr)',
+    },
+    shared_priority_list: sharedPriority.map((entry) => ({
+      rank: entry.rank,
+      file: entry.file,
+      estimated_click_gain_28d: entry.estimated_click_gain_28d,
+      target_position: entry.target_position,
+      target_ctr: entry.target_ctr,
+    })),
     rokuje_execution_sequence: {
       rule: 'Najpierw wykonaj pilotaż 4 najwyżej sklasyfikowanych pozycji ROKUJE. Po wdrożeniu i statusie LIVE_DEPLOYED_AND_VALIDATED wygeneruj raport ponownie i przygotuj jedną falę 20 najwyżej sklasyfikowanych pozostałych pozycji ROKUJE.',
       pilot_size: SEO_ROKUJE_PILOT_SIZE,
       expansion_size: SEO_ROKUJE_EXPANSION_SIZE,
-      ranking: 'promisingScore malejąco, a przy remisie nazwa pliku rosnąco',
+      ranking: 'wspólna lista estimated click gain z scripts/lib/seo-priority-list.js',
       expansion_gate: 'PILOT_LIVE_DEPLOYED_AND_VALIDATED',
       regenerate_before_expansion: true,
       approval_required_for_exact_ids: true,
@@ -4216,6 +4259,7 @@ Reports: ${REPORT_DIR}
 }
 
 function main() {
+  migrateLegacySeoData();
   const args = parseArgs(process.argv.slice(2));
   const result = runCommand(args.command, args.flags);
   if (args.command !== 'help') {

@@ -7,6 +7,7 @@ const { spawnSync } = require('child_process');
 const https = require('https');
 const { API_REPORT_NAME, MANIFEST_NAME, inspectGscInput } = require('./lib/gsc-data-contract');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
+const { DEFAULT_GROWTH_REPORT_DIR, migrateLegacySeoData } = require('./lib/seo-priority-list');
 
 const ROOT = process.cwd();
 const DEFAULT_DOWNLOADS_DIR = process.env.GSC_DOWNLOADS_DIR || path.join(os.homedir(), 'Downloads');
@@ -537,8 +538,8 @@ function runSeoAioWaveProposal(workDir) {
   }
 }
 
-function runPoprawSeo(workDir, downloadsDir) {
-  const reportDir = process.env.FITPO50_GROWTH_REPORT_DIR || path.join(downloadsDir, 'fitpo50-growth-reports');
+function runPoprawSeo(workDir) {
+  const reportDir = process.env.FITPO50_GROWTH_REPORT_DIR || DEFAULT_GROWTH_REPORT_DIR;
   const res = run('node', ['scripts/growth-tool.js', 'popraw-seo'], {
     stdio: 'inherit',
     env: {
@@ -590,6 +591,7 @@ function finishSuccessfulReports(workDir, source) {
 
 async function main() {
   loadLocalEnvFromHome();
+  migrateLegacySeoData();
   const args = parseArgs(process.argv.slice(2));
   let tmp = '';
   let tmpStatus = 'FAILED';
@@ -599,13 +601,13 @@ async function main() {
 
     const apiRes = tryGenerateCsvFromApi(inputDir);
     if (apiRes.ok) {
-      console.log('[GSC-AUTO] Źródło: GSC API -> ~/Downloads/gsc-auto-input');
+      console.log(`[GSC-AUTO] Źródło: GSC API -> ${inputDir}`);
       runWeeklyReport(inputDir, inputDir);
       runFullCoverageMap(inputDir, inputDir);
       runSeoAioMachine(inputDir, inputDir);
       runSeoAioWaveProposal(inputDir);
       finishSuccessfulReports(inputDir, 'gsc_api');
-      if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);
+      if (!args.skipPoprawSeo) runPoprawSeo(inputDir);
       tmpStatus = 'COMPLETED';
       return;
     }
@@ -663,7 +665,7 @@ async function main() {
     runSeoAioMachine(inputDir, inputDir);
     runSeoAioWaveProposal(inputDir);
     finishSuccessfulReports(inputDir, sourceLabel || 'imported_csv');
-    if (!args.skipPoprawSeo) runPoprawSeo(inputDir, args.downloadsDir);
+    if (!args.skipPoprawSeo) runPoprawSeo(inputDir);
     tmpStatus = 'COMPLETED';
     return;
   } catch (freshErr) {

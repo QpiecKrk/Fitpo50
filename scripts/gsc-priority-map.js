@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
 const { isEditorialQuery } = require('./lib/gsc-editorial-query');
+const { buildSharedPriorityList } = require('./lib/seo-priority-list');
 const os = require('os');
 
 const ROOT = process.cwd();
@@ -618,7 +619,9 @@ function classifyPriority(metrics, page, score) {
   const impressions = Number(metrics?.impressions || 0);
   const position = Number(metrics?.position || 0);
   if (page.type === 'core' || page.type === 'redirect') return 'P3_MAINTAIN';
-  if (position >= 4 && position <= 20 && impressions > 0) return 'P0_NEAR_PAGE_ONE';
+  if (position >= 4 && position <= 20) {
+    return impressions >= 50 ? 'P0_NEAR_PAGE_ONE' : 'P2_INSUFFICIENT_DATA';
+  }
   if (position > 20 && position <= 50 && impressions > 0) return 'P1_GROWTH';
   if (impressions === 0 && page.inbound_links < 4) return 'P1_NO_GSC_DATA_BUILD_DISCOVERY';
   if (score >= 55) return 'P1_OPTIMIZE';
@@ -997,6 +1000,7 @@ function readAiVisibility(inputDir) {
 
 function buildPriorityMap(pages, gsc, generatedAt, baseUrl, inspectionByUrl = new Map()) {
   const { byUrl, queryByUrl, previousByUrl, previousQueryByUrl } = aggregateGscByPage(gsc);
+  const priorityWindow28 = pageMetricMap(gsc.pageWindows?.day_28?.current);
   return pages.map((page) => {
     const metrics = byUrl.get(page.url) || {
       clicks: 0,
@@ -1009,7 +1013,9 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl, inspectionByUrl = ne
     const previousQueryRows = previousQueryByUrl.get(page.url) || [];
     const keywordPlan = buildKeywordPlan(page, queryRows);
     const score = opportunityScore(metrics, page);
-    const priority = classifyPriority(metrics, page, score);
+    const priorityMetricsRow = priorityWindow28.get(page.url) || null;
+    const priorityMetrics = priorityMetricsRow || { clicks: 0, impressions: 0, ctr: 0, position: 0 };
+    const priority = classifyPriority(priorityMetrics, page, score);
     const segment = visibilitySegment(metrics, page);
     const sourceSuggestions = suggestSources(page, pages);
     const performanceDelta = buildPerformanceDelta(metrics, previousMetrics, queryRows, previousQueryRows);
@@ -1047,6 +1053,12 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl, inspectionByUrl = ne
         status: queryRows.length || metrics.impressions ? 'ok' : 'NO_GSC_QUERY_PAGE_DATA',
         query_privacy_note: metrics.impressions > 0 && queryRows.length === 0 ? 'PAGE_SIGNAL_VALID_QUERY_ANONYMIZED_OR_NOT_RETURNED' : null,
       },
+      priority_metrics_28d: priorityMetricsRow ? {
+        clicks: Math.round(priorityMetrics.clicks),
+        impressions: Math.round(priorityMetrics.impressions),
+        ctr: Number(Number(priorityMetrics.ctr || 0).toFixed(2)),
+        position: Number(Number(priorityMetrics.position || 0).toFixed(2)),
+      } : null,
       gsc_windows: windowMetricsForUrl(gsc, page.url),
       diagnosis,
       required_action: requiredAction,
@@ -1082,8 +1094,9 @@ function buildPriorityMap(pages, gsc, generatedAt, baseUrl, inspectionByUrl = ne
       P1_GROWTH: 1,
       P1_NO_GSC_DATA_BUILD_DISCOVERY: 2,
       P1_OPTIMIZE: 3,
-      P2_INTERNAL_LINKING: 4,
-      P3_MAINTAIN: 5,
+      P2_INSUFFICIENT_DATA: 4,
+      P2_INTERNAL_LINKING: 5,
+      P3_MAINTAIN: 6,
     };
     return (rank[a.priority] ?? 99) - (rank[b.priority] ?? 99)
       || b.opportunity_score - a.opportunity_score
@@ -1370,6 +1383,17 @@ function main() {
   const topicCenters = articleItems.filter((item) => item.content_role === 'topic_center');
   const diagnosedArticles = articleItems.filter((item) => item.diagnosis && item.required_action?.required_change);
   const omittedArticles = articleItems.filter((item) => !item.diagnosis || !item.required_action?.required_change);
+  const sharedPriorityList = buildSharedPriorityList(articleItems).map((entry) => ({
+    rank: entry.rank,
+    file: entry.file,
+    url: entry.item.url,
+    estimated_click_gain_28d: entry.estimated_click_gain_28d,
+    target_position: entry.target_position,
+    target_ctr: entry.target_ctr,
+    current_ctr: entry.current_ctr,
+    impressions_28d: entry.impressions_28d,
+    data_status: entry.data_status,
+  }));
   const report = {
     generated_at: generatedAt,
     data_quality: {
@@ -1423,6 +1447,7 @@ function main() {
       method: 'Sitemap/root HTML + GSC query-pages + link topology + AEO/GEO/AI readiness.',
     },
     priority_map: priorityMap,
+    shared_priority_list: sharedPriorityList,
     portfolio,
     ai_visibility_monitor: aiVisibility,
   };
@@ -1438,6 +1463,7 @@ if (require.main === module) main();
 
 module.exports = {
   buildPriorityMap,
+  classifyPriority,
   collectPages,
   concreteRequiredAction,
   parseNumber,
