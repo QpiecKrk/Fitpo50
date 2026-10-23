@@ -137,6 +137,7 @@ rsync -a \
   --exclude="admin/config.example.php" \
   --exclude="admin/init-db.php" \
   --exclude="admin/init-hash.php" \
+  --exclude="admin/*.md" \
   --exclude="src/" \
   --exclude="scripts/" \
   --exclude="/docs/" \

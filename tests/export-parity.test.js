@@ -87,4 +87,5 @@ test('eksport wyklucza pliki robocze, środowisko Python i fonty przeznaczone wy
   assert.match(script, /--exclude="\/assets\/fonts\/pdf\/"/);
   assert.match(script, /--exclude="\/\.venv\/"/);
   assert.match(script, /--exclude="__pycache__\/"/);
+  assert.match(script, /--exclude="admin\/\*\.md"/);
 });
