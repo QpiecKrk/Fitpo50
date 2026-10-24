@@ -19,6 +19,7 @@ const { validatePreviewReport } = require('./lib/article-preview-report');
 const { disposeTempWorkspace, readWorkspaceManifest } = require('./lib/temp-workspace');
 const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure, resetSameDraft } = require('./lib/article-repair-attempts');
 const { packageIdentity } = require('./lib/package-identity');
+const { auditPackage, printReport: printPackageAuditReport } = require('./package-audit');
 
 const ROOT = process.cwd();
 
@@ -61,6 +62,33 @@ function preparedPathFromOutput(output) {
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+function packageAuditAsDryRunReport(report) {
+  const diagnostics = Object.entries(report.by_owner || {}).flatMap(([owner, items]) => (items || []).map((item) => ({
+    path: item.path || '/',
+    class: owner === 'CODEX' ? 'FIXABLE_LOCAL' : 'REQUIRES_WRITER',
+    type: owner === 'CODEX' ? 'FIXABLE_LOCAL' : 'REQUIRES_WRITER',
+    owner,
+    error_code: item.code,
+    severity: 'ERROR',
+    message: item.message,
+    fix: item.fix,
+    ...(item.proposed_change ? { proposed_change: item.proposed_change } : {}),
+    ...(item.illustrator_prompt ? { illustrator_prompt: item.illustrator_prompt } : {}),
+  })));
+  return {
+    version: 1,
+    status: report.status === 'ENVIRONMENT_FAILURE' ? 'ENVIRONMENT_FAILURE' : 'BLOCKED',
+    input_sha256: report.package_sha256,
+    package_audit_report: report.report_file,
+    diagnostics,
+    blocked_dependencies: report.blocked_dependencies || [],
+    warnings: report.warnings || [],
+    proposed_changes: report.proposed_changes || [],
+    mandatory_visual_review: report.mandatory_visual_review,
+    summary: { errors: diagnostics.length, warnings: (report.warnings || []).length },
+  };
 }
 
 function detectSlug(file) {
@@ -235,6 +263,30 @@ function executeArticleAddCore(args, dependencies = {}) {
   if (!args.file) throw contentBlocked('Podaj --file <draft.fitpo50.json>.');
   const source = path.resolve(args.file);
   if (!fs.existsSync(source)) throw contentBlocked(`Brak pliku: ${source}`);
+  const assetsDir = path.resolve(args['assets-dir'] || path.dirname(source));
+  const sourcePreparedAtStart = inspectPreparedArtifact(source, root);
+
+  if (boolOpt(args.status, false)) {
+    const statusSlug = detectSlug(source);
+    const state = readStatus(root, statusSlug);
+    console.log(state ? JSON.stringify(state, null, 2) : `[ARTICLE-ADD] Brak zapisanego stanu dla ${statusSlug}.`);
+    return EXIT_CODES.SUCCESS;
+  }
+
+  const runAudit = dependencies.auditPackage || auditPackage;
+  const auditSource = sourcePreparedAtStart.ok ? path.resolve(String(sourcePreparedAtStart.report.source_file || '')) : source;
+  if (!auditSource || !fs.existsSync(auditSource)) {
+    throw environmentFailure('Nie można wykonać obowiązkowego package:audit: pakiet CONTENT_READY nie ma zachowanego źródłowego draftu.');
+  }
+  const auditAssetsDir = sourcePreparedAtStart.ok ? path.dirname(auditSource) : assetsDir;
+  const auditReport = runAudit({ file: auditSource, 'assets-dir': auditAssetsDir }, dependencies.packageAuditDependencies || {});
+  if (!boolOpt(args.json, false)) (dependencies.printPackageAuditReport || printPackageAuditReport)(auditReport);
+  if (auditReport.exit_code !== EXIT_CODES.SUCCESS) {
+    if (boolOpt(args.json, false)) console.log(JSON.stringify(packageAuditAsDryRunReport(auditReport), null, 2));
+    else console.error(`[ARTICLE-ADD][PACKAGE_AUDIT_BLOCKED] Etap zapisu nie został uruchomiony. Raport: ${auditReport.report_file}`);
+    return Number(auditReport.exit_code);
+  }
+
   const slug = detectSlug(source);
   const context = {
     root,
@@ -247,19 +299,13 @@ function executeArticleAddCore(args, dependencies = {}) {
   };
 
   if (boolOpt(args['dry-run'], false)) {
-    const dryArgs = ['scripts/article-dry-run.js', '--file', source, '--assets-dir', path.resolve(args['assets-dir'] || path.dirname(source))];
+    const dryArgs = ['scripts/article-dry-run.js', '--file', source, '--assets-dir', assetsDir];
     if (boolOpt(args.json, false)) dryArgs.push('--json');
     if (args['http-fixture']) dryArgs.push('--http-fixture', path.resolve(args['http-fixture']));
     if (context.allowOverwriteSeoPatches) dryArgs.push('--allow-overwrite-seo-patches');
     const result = runCommand('node', dryArgs, { stdio: 'inherit' });
     ensureSuccessfulStart(result, 'Dry-run artykułu');
     return Number(result.status);
-  }
-
-  if (boolOpt(args.status, false)) {
-    const state = readStatus(root, slug);
-    console.log(state ? JSON.stringify(state, null, 2) : `[ARTICLE-ADD] Brak zapisanego stanu dla ${slug}.`);
-    return EXIT_CODES.SUCCESS;
   }
 
   const state = readStatus(root, slug);
@@ -288,8 +334,7 @@ function executeArticleAddCore(args, dependencies = {}) {
     throw contentBlocked('Nie ma aktywnego stagingu AWAITING_REVIEW dla tej wersji JSON-u. Uruchom zwykłe article:add.');
   }
 
-  const assetsDir = path.resolve(args['assets-dir'] || path.dirname(source));
-  const sourcePrepared = inspectPreparedArtifact(source, root);
+  const sourcePrepared = sourcePreparedAtStart;
   let preparedFile = sourcePrepared.ok ? source : expectedPreparedPath(source, args['output-dir']);
   if (sourcePrepared.ok) {
     console.log('[ARTICLE-ADD] Faza 1/3: wejście jest niezmienionym pakietem CONTENT_READY — pomijam ponowne przygotowanie.');
@@ -418,6 +463,7 @@ module.exports = {
   executeArticleAddCore,
   expectedPreparedPath,
   packageHashesMatch,
+  packageAuditAsDryRunReport,
   parseArgs,
   preparedPathFromOutput,
   reviewArtifacts,

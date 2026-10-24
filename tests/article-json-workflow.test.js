@@ -28,6 +28,8 @@ const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure, resetSameDra
 const { assertSeoPatchOverwriteAllowed } = require('../scripts/article-pipeline');
 
 const REPO = path.resolve(__dirname, '..');
+const PASS_PACKAGE_AUDIT = () => ({ exit_code: 0, report_file: '/tmp/package-audit-pass.json', by_owner: { PISARZ: [], ILUSTRATOR: [], CODEX: [] } });
+const SILENT_PACKAGE_AUDIT = () => {};
 
 function withTempDir(fn) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-json-test-'));
@@ -179,11 +181,12 @@ test('article:add counts content blockers from the whole command and stops befor
   };
   const args = { file: source, 'assets-dir': dir, 'output-dir': outputDir };
 
-  assert.equal(executeArticleAdd(args, { root: dir, runCommand }), EXIT_CODES.CONTENT_BLOCKED);
-  assert.equal(executeArticleAdd(args, { root: dir, runCommand }), EXIT_CODES.CONTENT_BLOCKED);
+  const dependencies = { root: dir, runCommand, auditPackage: PASS_PACKAGE_AUDIT, printPackageAuditReport: SILENT_PACKAGE_AUDIT };
+  assert.equal(executeArticleAdd(args, dependencies), EXIT_CODES.CONTENT_BLOCKED);
+  assert.equal(executeArticleAdd(args, dependencies), EXIT_CODES.CONTENT_BLOCKED);
   assert.equal(readAttemptState(dir, slug, sha256File(source)).repair_attempts, 2);
   assert.throws(
-    () => executeArticleAdd(args, { root: dir, runCommand }),
+    () => executeArticleAdd(args, dependencies),
     /Przekroczono limit 2 prób/,
   );
   assert.equal(pipelineCalls, 2);
@@ -200,6 +203,8 @@ test('article:add dry-run forwards the explicit SEO overwrite flag and does not 
     'allow-overwrite-seo-patches': 'true',
   }, {
     root: dir,
+    auditPackage: PASS_PACKAGE_AUDIT,
+    printPackageAuditReport: SILENT_PACKAGE_AUDIT,
     runCommand(_command, args) {
       childArgs = args;
       return { status: EXIT_CODES.CONTENT_BLOCKED, stdout: '', stderr: '' };
@@ -267,6 +272,8 @@ test('changed JSON never silently reuses an older review transaction', () => wit
   })}\n`);
   const status = executeArticleAdd({ file: source }, {
     root: dir,
+    auditPackage: PASS_PACKAGE_AUDIT,
+    printPackageAuditReport: SILENT_PACKAGE_AUDIT,
     runCommand() {
       throw new Error('Nie wolno uruchamiać kolejnego etapu dla zmienionego JSON-u.');
     },
@@ -282,6 +289,8 @@ test('article:add prowadzi poprawny fixture przez przygotowanie i atom publikacy
   fs.writeFileSync(source, `${JSON.stringify({ slug: 'kontrolowany-fixture', title: 'Kontrolowany fixture' })}\n`);
   const calls = [];
   const status = executeArticleAdd({ file: source, 'output-dir': outputDir, 'allow-overwrite-seo-patches': true }, {
+    auditPackage: PASS_PACKAGE_AUDIT,
+    printPackageAuditReport: SILENT_PACKAGE_AUDIT,
     runCommand(command, args) {
       calls.push({ command, args });
       if (args[0] === 'scripts/article-json-workbench.js') {
@@ -312,16 +321,20 @@ test('one-command controller reuses only a hash-identical CONTENT_READY package'
   fs.writeFileSync(image, 'image-v1');
   fs.copyFileSync(image, packagedImage);
   const imageHash = sha256File(image);
-  const json = { slug: 'test', media_manifest: { entries: [{ source_file: 'hero.png', source: { sha256: imageHash }, variants: {} }] } };
+  const json = {
+    slug: 'test',
+    image_prompts_v4: [{ filename_base: 'test-hero-v1', source_file: 'hero.png' }],
+    media_manifest: { entries: [{ source_file: 'hero.png', source: { sha256: imageHash }, variants: {} }] },
+  };
   fs.writeFileSync(source, `${JSON.stringify(json)}\n`);
   fs.writeFileSync(prepared, `${JSON.stringify(json)}\n`);
   const packageState = computePreparedPackageFingerprint(prepared, json);
   const sourcePackage = packageIdentity(source, sourceDir, json);
   fs.writeFileSync(reportPathForJson(prepared), `${JSON.stringify({ status: STATUSES.CONTENT_READY, source_file: source, source_sha256: sha256File(source), source_package_sha256: sourcePackage.hash, source_package_files: sourcePackage.entries, output_file: prepared, output_sha256: sha256File(prepared), package_sha256: packageState.fingerprint, package_files: packageState.entries })}\n`);
   assert.equal(packageHashesMatch(source, sourceDir, prepared), true);
-  fs.writeFileSync(path.join(sourceDir, 'hero.webp'), 'new-variant');
+  fs.writeFileSync(path.join(sourceDir, 'test-hero-v1.webp'), 'new-variant');
   assert.equal(packageHashesMatch(source, sourceDir, prepared), false);
-  fs.rmSync(path.join(sourceDir, 'hero.webp'));
+  fs.rmSync(path.join(sourceDir, 'test-hero-v1.webp'));
   fs.writeFileSync(image, 'image-v2');
   assert.equal(packageHashesMatch(source, sourceDir, prepared), false);
 }));

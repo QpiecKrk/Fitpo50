@@ -70,6 +70,7 @@ function issue(owner, check, code, message, options = {}) {
     path: options.path || jsonPathFromMessage(message),
     message: String(message),
     fix: options.fix || (owner === OWNERS.CODEX ? 'Codex wykonuje deterministyczną poprawkę techniczną.' : 'Uzupełnij wskazane pole zgodnie z komunikatem.'),
+    ...(options.proposedChange ? { proposed_change: options.proposedChange } : {}),
     ...(options.prompt ? { illustrator_prompt: options.prompt } : {}),
   };
 }
@@ -90,7 +91,11 @@ function contractIssues(article) {
     if (!TOP_LEVEL_FIELDS.has(key)) out.push(issue(OWNERS.WRITER, 'CONTRACT_V2', 'FIELD_OUTSIDE_CONTRACT', `Pole ${key} jest poza kontraktem draftu v2.`, { path: `/${key}`, fix: `Usuń pole ${key}; lokalne pola tworzy pipeline.` }));
   }
   for (const field of REQUIRED_TEXT_FIELDS) {
-    if (article?.[field] === null) out.push(issue(OWNERS.WRITER, 'CONTRACT_V2', 'NULL_TEXT_FIELD', `${field} ma null zamiast tekstu.`, { path: `/${field}`, fix: `Wstaw niepusty tekst do ${field}.` }));
+    if (article?.[field] === null) out.push(issue(OWNERS.CODEX, 'CONTRACT_V2', 'NULL_TEXT_FIELD', `${field} ma null zamiast tekstu.`, {
+      path: `/${field}`,
+      fix: `Codex może znormalizować null do pustego tekstu; brak właściwej treści nadal osobno wraca do Pisarza.`,
+      proposedChange: { operation: 'replace', path: `/${field}`, before: null, after: '' },
+    }));
   }
   for (const [collection, allowed] of Object.entries(ARRAY_FIELD_CONTRACTS)) {
     (Array.isArray(article?.[collection]) ? article[collection] : []).forEach((entry, index) => {
@@ -100,13 +105,21 @@ function contractIssues(article) {
         if (!allowed.has(key)) out.push(issue(OWNERS.WRITER, 'CONTRACT_V2', 'FIELD_OUTSIDE_CONTRACT', `${collection}[${index}].${key} jest poza kontraktem draftu v2.`, { path: `/${collection}/${index}/${key}`, fix: `Usuń pole ${key} z ${collection}[${index}].` }));
       }
       for (const key of NESTED_TEXT_FIELDS[collection] || []) {
-        if (entry[key] === null) out.push(issue(OWNERS.WRITER, 'CONTRACT_V2', 'NULL_TEXT_FIELD', `${collection}[${index}].${key} ma null zamiast tekstu.`, { path: `/${collection}/${index}/${key}`, fix: `Wstaw niepusty tekst do ${collection}[${index}].${key}.` }));
+        if (entry[key] === null) out.push(issue(OWNERS.CODEX, 'CONTRACT_V2', 'NULL_TEXT_FIELD', `${collection}[${index}].${key} ma null zamiast tekstu.`, {
+          path: `/${collection}/${index}/${key}`,
+          fix: 'Codex może znormalizować null do pustego tekstu; brak właściwej treści nadal osobno wraca do Pisarza.',
+          proposedChange: { operation: 'replace', path: `/${collection}/${index}/${key}`, before: null, after: '' },
+        }));
       }
     });
   }
   (Array.isArray(article?.evidence_claims) ? article.evidence_claims : []).forEach((claim, index) => {
     if (claim && typeof claim === 'object' && 'text' in claim && !('claim' in claim)) {
-      out.push(issue(OWNERS.WRITER, 'CONTRACT_V2', 'TEXT_INSTEAD_OF_CLAIM', `evidence_claims[${index}] używa text zamiast claim.`, { path: `/evidence_claims/${index}/text`, fix: `Zmień klucz text na claim bez zmiany treści.` }));
+      out.push(issue(OWNERS.CODEX, 'CONTRACT_V2', 'TEXT_INSTEAD_OF_CLAIM', `evidence_claims[${index}] używa text zamiast claim.`, {
+        path: `/evidence_claims/${index}/text`,
+        fix: 'Codex może bez zmiany treści przemianować klucz text na claim.',
+        proposedChange: { operation: 'rename_key', from: `/evidence_claims/${index}/text`, to: `/evidence_claims/${index}/claim`, value: claim.text },
+      }));
     }
   });
   return out;
@@ -118,7 +131,11 @@ function unitIssues(article) {
   function walk(value, pointer) {
     if (typeof value === 'string') {
       const matches = [...value.matchAll(pattern)].map((match) => match[0]);
-      if (matches.length) out.push(issue(OWNERS.WRITER, 'EU_UNITS', 'NON_EU_UNIT', `${pointer}: wykryto niedozwolone jednostki: ${[...new Set(matches)].join(', ')}.`, { path: pointer, fix: 'Przelicz wartości i podaj wyłącznie kg, g, ml, cm, °C lub inne jednostki metryczne.' }));
+      if (matches.length) out.push(issue(OWNERS.CODEX, 'EU_UNITS', 'NON_EU_UNIT', `${pointer}: wykryto niedozwolone jednostki: ${[...new Set(matches)].join(', ')}.`, {
+        path: pointer,
+        fix: 'Codex przygotowuje deterministyczne przeliczenie na jednostki metryczne; propozycja wymaga akceptacji przed zapisem.',
+        proposedChange: { operation: 'convert_to_metric', path: pointer, before: value, after: metricProposal(value) },
+      }));
     } else if (Array.isArray(value)) value.forEach((item, index) => walk(item, `${pointer}/${index}`));
     else if (value && typeof value === 'object') Object.entries(value).forEach(([key, item]) => walk(item, `${pointer}/${key}`));
   }
@@ -126,15 +143,51 @@ function unitIssues(article) {
   return out;
 }
 
+function metricProposal(value) {
+  const rounded = (number) => Number(number.toFixed(1)).toLocaleString('pl-PL');
+  return String(value)
+    .replace(/(\d+(?:[.,]\d+)?)\s*(?:lbs|lb|pounds|pound|funt(?:a|y|ów)?)\b/giu, (_all, amount) => `${rounded(Number(String(amount).replace(',', '.')) * 0.45359237)} kg`)
+    .replace(/(\d+(?:[.,]\d+)?)\s*(?:ounces|ounce|oz|uncj(?:a|e|i|ę|ą)?)\b/giu, (_all, amount) => `${rounded(Number(String(amount).replace(',', '.')) * 28.349523125)} g`)
+    .replace(/(\d+(?:[.,]\d+)?)\s*(?:inches|inch|cal(?:a|e|i)?)\b/giu, (_all, amount) => `${rounded(Number(String(amount).replace(',', '.')) * 2.54)} cm`)
+    .replace(/(\d+(?:[.,]\d+)?)\s*(?:miles|mile|mil(?:a|e|i)?)\b/giu, (_all, amount) => `${rounded(Number(String(amount).replace(',', '.')) * 1.609344)} km`)
+    .replace(/(\d+(?:[.,]\d+)?)\s*°\s*F\b/giu, (_all, amount) => `${rounded((Number(String(amount).replace(',', '.')) - 32) * 5 / 9)} °C`);
+}
+
 function imageIssues(article, assetsDir, dependencies = {}) {
   const out = [];
   const inspect = dependencies.inspectImage || inspectImage;
+  const articleSlug = String(article?.slug || '').trim();
   const intake = inspectArticlePackage(article, assetsDir);
-  intake.issues.WRITER_FIX_REQUIRED.forEach((message) => out.push(issue(OWNERS.WRITER, 'IMAGE_CONTRACT', 'IMAGE_DRAFT_CONTRACT', message)));
+  intake.issues.WRITER_FIX_REQUIRED.forEach((message) => {
+    const technical = /filename_base|source_file|powtórzony filename_base/iu.test(message);
+    out.push(issue(technical ? OWNERS.CODEX : OWNERS.WRITER, 'IMAGE_CONTRACT', technical ? 'IMAGE_FILENAME_CONTRACT' : 'IMAGE_DRAFT_CONTRACT', message, technical ? {
+      fix: 'Codex przygotowuje dokładne przemianowanie pól i plików bez zmiany obrazu; propozycja wymaga akceptacji.',
+      proposedChange: { operation: 'normalize_image_filename', message },
+    } : {}));
+  });
+  (Array.isArray(article?.image_prompts_v4) ? article.image_prompts_v4 : []).forEach((prompt, index) => {
+    const base = String(prompt?.filename_base || '').trim();
+    if (articleSlug && base && base !== articleSlug && !base.startsWith(`${articleSlug}-`)) {
+      const suggestedBase = `${articleSlug}-${base}`;
+      out.push(issue(OWNERS.CODEX, 'IMAGE_CONTRACT', 'IMAGE_FILENAME_OUTSIDE_SLUG', `${base}: filename_base nie należy do sluga ${articleSlug}.`, {
+        path: `/image_prompts_v4/${index}/filename_base`,
+        fix: 'Codex może przemianować bazę, source_file i istniejące warianty bez zmiany zawartości obrazów.',
+        proposedChange: { operation: 'rename_image_set', from: base, to: suggestedBase },
+      }));
+    }
+  });
   intake.issues.ILLUSTRATOR_FIX_REQUIRED.forEach((message) => {
     const prompt = (article.image_prompts_v4 || []).find((item) => message.includes(String(item?.filename_base || '')));
-    out.push(issue(OWNERS.ILLUSTRATOR, 'IMAGE_FILES', 'IMAGE_FILE_MISSING', message, {
-      fix: 'Dostarcz brakujący wariant bez zmiany kadru i tekstu.',
+    const base = String(prompt?.filename_base || '').trim();
+    const missingName = String(message).match(/brak\s+([^\s]+\.(?:jpg|webp|avif))/iu)?.[1] || '';
+    const available = ['jpg', 'webp', 'avif'].map((extension) => `${base}.${extension}`)
+      .filter((name) => base && fs.existsSync(path.join(assetsDir, name)));
+    const convertible = Boolean(missingName && available.length);
+    out.push(issue(convertible ? OWNERS.CODEX : OWNERS.ILLUSTRATOR, 'IMAGE_FILES', convertible ? 'IMAGE_FORMAT_MISSING' : 'IMAGE_FILE_MISSING', message, convertible ? {
+      fix: `Codex może utworzyć ${missingName} z istniejącego zatwierdzonego wariantu ${available[0]} bez zmiany kadru lub treści.`,
+      proposedChange: { operation: 'convert_image', from: available[0], to: missingName },
+    } : {
+      fix: 'Ilustrator dostarcza brakujący obraz źródłowy i komplet wariantów bez zmiany zatwierdzonych danych.',
       prompt: prompt?.prompt_en || `Create the missing exact-format variant for ${prompt?.filename_base || 'the declared article image'}; preserve composition, factual overlay and aspect ratio.`,
     }));
   });
@@ -147,10 +200,10 @@ function imageIssues(article, assetsDir, dependencies = {}) {
       if (!base || !fs.existsSync(file)) continue;
       try { metadata.push({ extension, ...inspect(file) }); }
       catch (error) {
-        out.push(issue(OWNERS.ILLUSTRATOR, 'IMAGE_DIMENSIONS', 'IMAGE_UNREADABLE', `${base}.${extension}: ${error.message || error}`, {
+        out.push(issue(OWNERS.CODEX, 'IMAGE_DIMENSIONS', 'IMAGE_UNREADABLE', `${base}.${extension}: ${error.message || error}`, {
           path: `/image_prompts_v4/${index}`,
-          fix: 'Wyeksportuj poprawny, otwieralny plik obrazu.',
-          prompt: prompt.prompt_en || `Regenerate ${base} as a valid ${extension.toUpperCase()} image while preserving the approved scene and text.`,
+          fix: 'Codex może ponownie zakodować wariant z istniejącego zatwierdzonego mastera; jeśli master także jest uszkodzony, zadanie wraca do Ilustratora.',
+          proposedChange: { operation: 'reencode_image', file: `${base}.${extension}` },
         }));
       }
     }
@@ -167,7 +220,11 @@ function imageIssues(article, assetsDir, dependencies = {}) {
       out.push(issue(OWNERS.ILLUSTRATOR, 'IMAGE_DIMENSIONS', 'IMAGE_BAD_RATIO', `${base}: proporcja ${reference.aspect_ratio} nie zgadza się z ${prompt.aspect_ratio || 'brak deklaracji'} albo layoutem 1.2–2.1.`, { path: `/image_prompts_v4/${index}/aspect_ratio`, prompt: `${prompt.prompt_en || `Regenerate ${base}.`} Use exactly the declared landscape aspect ratio ${prompt.aspect_ratio || '16:9'} without cropping away factual content.` }));
     }
     metadata.slice(1).forEach((item) => {
-      if (item.width !== reference.width || item.height !== reference.height) out.push(issue(OWNERS.ILLUSTRATOR, 'IMAGE_DIMENSIONS', 'IMAGE_VARIANT_SIZE_MISMATCH', `${base}: wariant ${item.extension} ma ${item.width}x${item.height}, a ${reference.extension} ${reference.width}x${reference.height}.`, { path: `/image_prompts_v4/${index}`, prompt: `Re-export ${base}.${item.extension} from the same approved master at ${reference.width}x${reference.height}px; do not alter content.` }));
+      if (item.width !== reference.width || item.height !== reference.height) out.push(issue(OWNERS.CODEX, 'IMAGE_DIMENSIONS', 'IMAGE_VARIANT_SIZE_MISMATCH', `${base}: wariant ${item.extension} ma ${item.width}x${item.height}, a ${reference.extension} ${reference.width}x${reference.height}.`, {
+        path: `/image_prompts_v4/${index}`,
+        fix: `Codex może ponownie wyeksportować ${base}.${item.extension} z zatwierdzonego mastera ${reference.extension} w ${reference.width}x${reference.height}px.`,
+        proposedChange: { operation: 'reexport_image_variant', from: `${base}.${reference.extension}`, to: `${base}.${item.extension}`, width: reference.width, height: reference.height },
+      }));
     });
   }
   return out;
@@ -234,6 +291,12 @@ function finishReport(file, assetsDir, article, issues, blocked, args, dependenc
   const reportDir = path.resolve(args['report-dir'] || process.env.FITPO50_PACKAGE_AUDIT_DIR || path.join(ROOT, 'data', 'reports', 'local', 'package-audit'));
   const grouped = Object.fromEntries(Object.values(OWNERS).map((owner) => [owner, issues.filter((item) => item.owner === owner)]));
   const environmentFailure = grouped.CODEX.some((item) => item.code.endsWith('ENVIRONMENT_FAILURE'));
+  const warnings = (identity.ignored_files || []).map((fileName) => ({
+    code: 'IGNORED_FOREIGN_FILE',
+    path: fileName,
+    message: `Plik nie należy do jawnej paczki artykułu i nie wpływa na SHA-256: ${fileName}`,
+  }));
+  const proposedChanges = grouped.CODEX.flatMap((item) => item.proposed_change ? [{ path: item.path, code: item.code, ...item.proposed_change }] : []);
   const report = {
     version: 1,
     generated_at: new Date().toISOString(),
@@ -246,7 +309,9 @@ function finishReport(file, assetsDir, article, issues, blocked, args, dependenc
     blocked_dependencies: blocked,
     mandatory_visual_review: { status: 'PENDING', scope: 'Wszystkie obrazy we wszystkich formatach AVIF/WebP/JPG, osobny etap tej samej rundy.' },
     by_owner: grouped,
-    summary: { errors: issues.length, writer: grouped.PISARZ.length, illustrator: grouped.ILUSTRATOR.length, codex: grouped.CODEX.length, blocked_dependency: blocked.length },
+    warnings,
+    proposed_changes: proposedChanges,
+    summary: { errors: issues.length, warnings: warnings.length, writer: grouped.PISARZ.length, illustrator: grouped.ILUSTRATOR.length, codex: grouped.CODEX.length, blocked_dependency: blocked.length, proposed_changes: proposedChanges.length },
   };
   fs.mkdirSync(reportDir, { recursive: true });
   const reportFile = path.join(reportDir, `${identity.hash}.json`);
@@ -265,6 +330,11 @@ function printReport(report) {
     });
   }
   report.blocked_dependencies.forEach((item) => console.log(`[BLOCKED_DEPENDENCY] ${item.check} <- ${item.dependency}`));
+  report.warnings.forEach((item) => console.warn(`[WARNING][${item.code}] ${item.message}`));
+  if (report.proposed_changes.length) {
+    console.log(`\n[PROPOSED_CHANGES][AWAITING_APPROVAL] ${report.proposed_changes.length}`);
+    report.proposed_changes.forEach((item) => console.log(`- ${item.path} [${item.code}] ${JSON.stringify(item)}`));
+  }
   console.log(`\n[VISUAL_REVIEW][PENDING] ${report.mandatory_visual_review.scope}`);
   console.log(`[REPORT] ${report.report_file}`);
 }
@@ -279,4 +349,4 @@ if (require.main === module) {
   try { main(); } catch (error) { console.error(`[PACKAGE_AUDIT][FAIL] ${error.message || error}`); process.exitCode = EXIT.ENVIRONMENT; }
 }
 
-module.exports = { EXIT, OWNERS, auditPackage, contractIssues, imageIssues, overlayIssues, parseArgs, unitIssues };
+module.exports = { EXIT, OWNERS, auditPackage, contractIssues, imageIssues, metricProposal, overlayIssues, parseArgs, printReport, unitIssues };

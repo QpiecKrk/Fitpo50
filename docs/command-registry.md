@@ -36,6 +36,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run agent:context` — Bezpośrednia komenda robocza lub odczytowa (node scripts/agent-context.js).
 - [PUBLIC] `npm run aio:full-audit` — Bezpośrednia komenda robocza lub odczytowa (node scripts/growth-tool.js full-audit).
 - [PUBLIC] `npm run article:add` — Jedyne domyślne wejście dla nowego artykułu; przygotowuje draft, zapisuje trwały stan, prowadzi atomowy staging, zatrzymuje się na rzeczywisty review i wznawia tę samą transakcję bez ręcznego składania komend pośrednich.
+- [PUBLIC] `npm run article:cleanup-input` — Na jawne polecenie usuwa wejściową paczkę sluga wyłącznie po zapisanym `AWAITING_LIVE_CONFIRMATION` i zgodnym `LIVE_DEPLOYED_AND_VALIDATED`; nigdy nie uruchamia się automatycznie.
 - [PUBLIC] `npm run package:audit` — Odczytowy audyt całej wejściowej paczki JSON i obrazów; zbiera błędy w jednym raporcie lokalnym według właściciela i nie publikuje ani nie poprawia plików.
 - [PUBLIC] `npm run article:coverage:report` — Informacyjny raport pokrycia produkcyjnego katalogu BlogPosting oraz rozdzielonych statusów preview, publikacji, walidacji, wdrożenia i GSC; nie jest bramką publikacyjną.
 - [PUBLIC] `npm run article:contract:diff` — Bezpośrednia komenda robocza lub odczytowa (node scripts/run-article-contract-diff.js).
