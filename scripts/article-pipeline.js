@@ -45,6 +45,7 @@ const {
   classifyPipelineFailure,
   contentBlocked,
   environmentFailure,
+  statusPath,
   writePipelineStatus,
 } = require('./lib/article-pipeline-status');
 
@@ -333,7 +334,17 @@ async function main() {
   if (!stagingInternal) {
     if (!dryRun) {
       const recovered = recoverInterruptedTransactions(root);
-      recovered.forEach((transactionId) => console.log(`[RECOVERY] Cofnięto przerwaną publikację: ${transactionId}`));
+      recovered.forEach((transactionId) => console.log(`[RECOVERY] Domknięto albo cofnięto przerwaną publikację: ${transactionId}`));
+      if (recovered.length && fs.existsSync(statusPath(root, slug))) {
+        const recoveredStatus = JSON.parse(fs.readFileSync(statusPath(root, slug), 'utf8'));
+        if (
+          recoveredStatus.status === 'SUCCESS'
+          && recovered.includes(String(recoveredStatus.transaction_id || ''))
+        ) {
+          console.log(`[RECOVERY] Transakcja ${recoveredStatus.transaction_id} została wcześniej zatwierdzona; zapisano brakujący status bez ponownego importu.`);
+          return { workingCopy: '', artifactCleanup: recoveredStatus.input_cleanup || null };
+        }
+      }
     }
     const liveArticleExists = fs.existsSync(path.join(root, `${slug}.html`));
     if (liveArticleExists && !force) {
@@ -414,7 +425,37 @@ async function main() {
         transactionId,
       });
       console.log(`[MANIFEST] ${manifest.relative}: ${manifest.payload.operation}, ${manifest.payload.files_count} plików.`);
-      const transaction = beginPromotionTransaction({ sourceRoot: root, stageRoot, candidates, baseline, transactionId });
+      const inputCleanup = {
+        status: 'AWAITING_LIVE_CONFIRMATION',
+        path: input,
+        package_sha256: String(prepared.report?.package_sha256 || ''),
+        package_files: Array.isArray(prepared.report?.package_files) ? prepared.report.package_files : [],
+      };
+      if (!inputCleanup.package_sha256 || !inputCleanup.package_files.length) {
+        throw contentBlocked('Pakiet CONTENT_READY nie zawiera pełnej tożsamości plików wymaganej do bezpiecznego sprzątania po live.');
+      }
+      const successPayload = {
+        version: 1,
+        slug,
+        transaction_id: transactionId,
+        status: 'SUCCESS',
+        exit_code: EXIT_CODES.SUCCESS,
+        updated_at: new Date().toISOString(),
+        next_action: 'AWAIT_SEPARATE_COMMIT_AND_PUSH_COMMAND',
+        input_cleanup: inputCleanup,
+      };
+      const transaction = beginPromotionTransaction({
+        sourceRoot: root,
+        stageRoot,
+        candidates,
+        baseline,
+        transactionId,
+        completion: {
+          relative_path: path.relative(root, statusPath(root, slug)).replace(/\\/g, '/'),
+          payload: successPayload,
+          workspace_path: stageRoot,
+        },
+      });
       try {
         runPostPromotionValidation(root, slug, parsedInput);
         transaction.verify();
@@ -424,6 +465,7 @@ async function main() {
         error.message = `Publikacja cofnięta po błędzie walidacji: ${error.message || error}`;
         throw error;
       }
+      transaction.finalizeCompletion();
       const artifactCleanup = {
         removed: [],
         removed_directories: [],
@@ -431,10 +473,7 @@ async function main() {
       };
       console.log(`[INPUT RETAINED] ${input}: pliki wejściowe wolno posprzątać dopiero po LIVE_DEPLOYED_AND_VALIDATED i jawnym potwierdzeniu Programisty.`);
       console.log(`[PUBLISHED] ${operation}: zatwierdzono atomowo ${transaction.changed.length} plików po PREVIEW_READY i walidacji repo.`);
-      writePipelineStatus(root, slug, 'SUCCESS', {
-        next_action: 'AWAIT_SEPARATE_COMMIT_AND_PUSH_COMMAND',
-        input_cleanup: { status: 'AWAITING_LIVE_CONFIRMATION', path: input },
-      });
+      console.log(`[PIPELINE_STATUS] SUCCESS exit=${EXIT_CODES.SUCCESS} report=${statusPath(root, slug)}`);
       appendTimingReport('article-pipeline-transactional', stepTimings);
       stageStatus = 'COMPLETED';
       return { workingCopy: '', artifactCleanup };

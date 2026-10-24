@@ -4,7 +4,7 @@ const path = require('path');
 const { issuePipelineCapability } = require('./pipeline-capability');
 const { spawnSync } = require('child_process');
 const { categoryFileFromKey, normalizeCategory } = require('./categories');
-const { createManagedTempDir } = require('./temp-workspace');
+const { createManagedTempDir, disposeTempWorkspace, readWorkspaceManifest } = require('./temp-workspace');
 const { validatePreviewReport } = require('./article-preview-report');
 
 const ALLOWED_TOP_LEVEL_DIRECTORIES = new Set(['scripts', 'assets', 'data', '_site', 'src', 'dist', 'templates', 'admin', 'docs', 'sukcesy']);
@@ -408,6 +408,37 @@ function restoreJournal(sourceRoot, transactionRoot, journal) {
   }
 }
 
+function finalizeCommittedJournal(sourceRoot, transactionRoot, journal, options = {}) {
+  const journalPath = path.join(transactionRoot, 'journal.json');
+  const completion = journal.completion;
+  for (const file of journal.files || []) {
+    const live = path.join(sourceRoot, file.path);
+    if (!fs.existsSync(live) || !fs.statSync(live).isFile() || sha256File(live) !== file.after_sha256) {
+      throw new Error(`Nie można domknąć statusu COMMITTED; plik publikacji nie zgadza się z journalem: ${file.path}`);
+    }
+  }
+  if (completion?.relative_path && completion?.payload) {
+    const relative = assertSafeRelative(completion.relative_path);
+    if (!relative.startsWith('data/reports/local/article-pipeline/') || !relative.endsWith('.status.json')) {
+      throw new Error(`Niedozwolony rekord zakończenia transakcji: ${relative}`);
+    }
+    atomicWriteJson(path.join(sourceRoot, relative), completion.payload);
+    completion.status = 'WRITTEN';
+    completion.written_at = new Date().toISOString();
+  }
+  journal.status = 'COMPLETED';
+  journal.completed_at = new Date().toISOString();
+  atomicWriteJson(journalPath, journal);
+  releaseLock(sourceRoot, journal.transaction_id);
+  fs.rmSync(transactionRoot, { recursive: true, force: true });
+  if (options.recovering && completion?.workspace_path && fs.existsSync(completion.workspace_path)) {
+    const manifest = readWorkspaceManifest(completion.workspace_path);
+    if (manifest && path.resolve(String(manifest.project_root || '')) === path.resolve(sourceRoot)) {
+      disposeTempWorkspace(completion.workspace_path, { status: 'COMPLETED' });
+    }
+  }
+}
+
 function recoverInterruptedTransactions(sourceRoot) {
   const transactionsRoot = path.join(sourceRoot, TRANSACTION_DIR);
   const lockPath = path.join(sourceRoot, TRANSACTION_LOCK);
@@ -431,7 +462,12 @@ function recoverInterruptedTransactions(sourceRoot) {
       continue;
     }
     const journal = readJson(journalPath);
-    if (journal.status === 'COMMITTED' || journal.status === 'ROLLED_BACK') {
+    if (journal.status === 'COMMITTED') {
+      finalizeCommittedJournal(sourceRoot, transactionRoot, journal, { recovering: true });
+      recovered.push(journal.transaction_id);
+      continue;
+    }
+    if (journal.status === 'COMPLETED' || journal.status === 'ROLLED_BACK') {
       fs.rmSync(transactionRoot, { recursive: true, force: true });
       continue;
     }
@@ -448,7 +484,7 @@ function recoverInterruptedTransactions(sourceRoot) {
   return recovered;
 }
 
-function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline, transactionId }) {
+function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline, transactionId, completion = null }) {
   assertSafeName(transactionId, 'Identyfikator transakcji');
   const changed = changedFiles(stageRoot, candidates, baseline);
   for (const relative of changed) {
@@ -476,6 +512,7 @@ function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline
       pid: process.pid,
       created_at: new Date().toISOString(),
       status: 'PREPARING',
+      completion: completion ? { ...completion, status: 'PENDING' } : null,
       files: changed.map((relative) => ({
         path: relative,
         before_sha256: baseline.get(relative) || null,
@@ -545,8 +582,15 @@ function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline
       journal.status = 'COMMITTED';
       journal.committed_at = new Date().toISOString();
       atomicWriteJson(journalPath, journal);
-      releaseLock(sourceRoot, transactionId);
-      fs.rmSync(transactionRoot, { recursive: true, force: true });
+      if (!journal.completion) {
+        releaseLock(sourceRoot, transactionId);
+        fs.rmSync(transactionRoot, { recursive: true, force: true });
+      }
+    },
+    finalizeCompletion() {
+      if (!journal.completion) return;
+      if (journal.status !== 'COMMITTED') throw new Error(`Transakcja ${transactionId} nie jest gotowa do zapisania statusu końcowego.`);
+      finalizeCommittedJournal(sourceRoot, transactionRoot, journal);
     },
     rollback,
   };

@@ -198,6 +198,63 @@ test('następne uruchomienie odzyskuje publikację przerwaną po promocji', () =
   assert.equal(fs.existsSync(lockPath), false);
 });
 
+test('recovery domyka status transakcji COMMITTED przerwanej przed zapisem statusu pipeline', () => {
+  const source = temp('fitpo50-recovery-committed-live-');
+  const stage = temp('fitpo50-recovery-committed-stage-');
+  fs.writeFileSync(path.join(source, 'article.html'), 'before');
+  fs.writeFileSync(path.join(stage, 'article.html'), 'after');
+  const relativeStatus = 'data/reports/local/article-pipeline/test.status.json';
+  const payload = {
+    version: 1,
+    slug: 'test',
+    transaction_id: 'committed-status-gap',
+    status: 'SUCCESS',
+    exit_code: 0,
+    input_cleanup: { status: 'AWAITING_LIVE_CONFIRMATION' },
+  };
+  const transaction = beginPromotionTransaction({
+    sourceRoot: source,
+    stageRoot: stage,
+    candidates: ['article.html'],
+    baseline: snapshotCandidates(source, ['article.html']),
+    transactionId: 'committed-status-gap',
+    completion: { relative_path: relativeStatus, payload },
+  });
+  transaction.commit();
+  assert.equal(fs.existsSync(path.join(source, relativeStatus)), false, 'symulowane przerwanie następuje przed finalizeCompletion');
+  const lockPath = path.join(source, '.tmp', 'article-publication.lock');
+  const lock = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+  fs.writeFileSync(lockPath, `${JSON.stringify({ ...lock, pid: 99999999 }, null, 2)}\n`);
+
+  assert.deepEqual(recoverInterruptedTransactions(source), ['committed-status-gap']);
+  assert.equal(fs.readFileSync(path.join(source, 'article.html'), 'utf8'), 'after', 'COMMITTED nie może zostać cofnięte');
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(source, relativeStatus), 'utf8')), payload);
+  assert.equal(fs.existsSync(lockPath), false);
+});
+
+test('recovery nie zapisuje sukcesu COMMITTED, gdy hash promowanego pliku już się nie zgadza', () => {
+  const source = temp('fitpo50-recovery-committed-mismatch-live-');
+  const stage = temp('fitpo50-recovery-committed-mismatch-stage-');
+  fs.writeFileSync(path.join(source, 'article.html'), 'before');
+  fs.writeFileSync(path.join(stage, 'article.html'), 'after');
+  const relativeStatus = 'data/reports/local/article-pipeline/test.status.json';
+  const transaction = beginPromotionTransaction({
+    sourceRoot: source,
+    stageRoot: stage,
+    candidates: ['article.html'],
+    baseline: snapshotCandidates(source, ['article.html']),
+    transactionId: 'committed-hash-mismatch',
+    completion: { relative_path: relativeStatus, payload: { status: 'SUCCESS' } },
+  });
+  transaction.commit();
+  fs.writeFileSync(path.join(source, 'article.html'), 'independent change');
+  const lockPath = path.join(source, '.tmp', 'article-publication.lock');
+  const lock = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+  fs.writeFileSync(lockPath, `${JSON.stringify({ ...lock, pid: 99999999 }, null, 2)}\n`);
+  assert.throws(() => recoverInterruptedTransactions(source), /nie zgadza się z journalem/iu);
+  assert.equal(fs.existsSync(path.join(source, relativeStatus)), false);
+});
+
 test('manifest rozróżnia CREATE i zapisuje dokładne hashe publikowanych plików', () => {
   const source = temp('fitpo50-manifest-live-');
   const stage = temp('fitpo50-manifest-stage-');

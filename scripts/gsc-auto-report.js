@@ -9,6 +9,7 @@ const { API_REPORT_NAME, MANIFEST_NAME, inspectGscInput } = require('./lib/gsc-d
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { DEFAULT_GROWTH_REPORT_DIR, migrateLegacySeoData } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
+const { promoteValidatedGscDataset, recoverGscDatasetPromotion } = require('./lib/gsc-dataset-promotion');
 
 const ROOT = process.cwd();
 const DEFAULT_WORK_DIR = resolveGscWorkDir(ROOT);
@@ -262,7 +263,21 @@ function copyTypedCsvToInput(byType, inputDir) {
 
 function copyCompanionMetadata(files, inputDir) {
   const copied = {};
-  for (const name of [MANIFEST_NAME, API_REPORT_NAME]) {
+  const names = new Set([MANIFEST_NAME, API_REPORT_NAME]);
+  const manifestCandidate = files
+    .filter((file) => path.basename(file) === MANIFEST_NAME)
+    .map((file) => ({ file, stat: fs.statSync(file) }))
+    .sort((a, b) => b.stat.mtimeMs - a.stat.mtimeMs)[0];
+  if (manifestCandidate) {
+    try {
+      const manifest = JSON.parse(fs.readFileSync(manifestCandidate.file, 'utf8'));
+      const pinned = String(manifest?.api_report?.name || '');
+      if (pinned) names.add(pinned);
+    } catch (_error) {
+      // Walidator stagingu zwróci dokładny błąd nieprawidłowego manifestu.
+    }
+  }
+  for (const name of names) {
     const candidates = files
       .filter((file) => path.basename(file) === name)
       .map((file) => ({ file, stat: fs.statSync(file) }))
@@ -595,24 +610,33 @@ async function main() {
   migrateLegacySeoData();
   const args = parseArgs(process.argv.slice(2));
   let tmp = '';
+  let datasetStage = '';
   let tmpStatus = 'FAILED';
   try {
     const inputDir = path.resolve(args.workDir);
-    ensureDir(inputDir);
+    ensureDir(path.dirname(inputDir));
+    const recovered = recoverGscDatasetPromotion(inputDir);
+    if (recovered.recovered) console.log(`[GSC-AUTO] Odzyskano przerwaną promocję zestawu: ${recovered.action}.`);
+    datasetStage = createManagedTempDir({ prefix: 'gsc-dataset-', type: 'gsc-dataset-staging', projectRoot: ROOT });
 
-    const apiRes = tryGenerateCsvFromApi(inputDir);
+    const apiRes = tryGenerateCsvFromApi(datasetStage);
     if (apiRes.ok) {
-      console.log(`[GSC-AUTO] Źródło: GSC API -> ${inputDir}`);
+      assertFreshCompleteInput(datasetStage);
+      const promoted = promoteValidatedGscDataset({ sourceDir: datasetStage, targetDir: inputDir, validate: (directory) => inspectGscInput(directory, { strictPeriods: true }) });
+      console.log(`[GSC-AUTO] Źródło: GSC API -> ${inputDir}; atomowo zatwierdzono ${promoted.files.length} plików.`);
       runWeeklyReport(inputDir, inputDir);
       runFullCoverageMap(inputDir, inputDir);
       runSeoAioMachine(inputDir, inputDir);
       runSeoAioWaveProposal(inputDir);
       finishSuccessfulReports(inputDir, 'gsc_api');
       if (!args.skipPoprawSeo) runPoprawSeo(inputDir);
+      if (args.cleanupRepoArtifacts) cleanupRepoGscArtifacts();
       tmpStatus = 'COMPLETED';
       return;
     }
     console.log(`[GSC-AUTO] GSC API pominięte: ${apiRes.reason}`);
+    disposeTempWorkspace(datasetStage, { status: 'FAILED' });
+    datasetStage = createManagedTempDir({ prefix: 'gsc-dataset-', type: 'gsc-dataset-staging', projectRoot: ROOT });
     tmp = createManagedTempDir({ prefix: 'gsc-auto-', type: 'gsc-auto-input', projectRoot: ROOT });
 
     let sourceLabel = '';
@@ -651,15 +675,17 @@ async function main() {
     }
 
     const sourceFiles = walkFiles(tmp);
-    const copied = copyTypedCsvToInput(typed, inputDir);
-    const metadata = copyCompanionMetadata(sourceFiles, inputDir);
-    console.log(`[GSC-AUTO] Skopiowano CSV do ${inputDir}:`, copied);
+    const copied = copyTypedCsvToInput(typed, datasetStage);
+    const metadata = copyCompanionMetadata(sourceFiles, datasetStage);
+    console.log(`[GSC-AUTO] Skopiowano CSV do stagingu ${datasetStage}:`, copied);
     if (Object.keys(metadata).length) console.log('[GSC-AUTO] Skopiowano metadane:', metadata);
     if (sourceLabel) {
       console.log(`[GSC-AUTO] Źródło: ${sourceLabel}`);
     }
 
-    assertFreshCompleteInput(inputDir);
+    assertFreshCompleteInput(datasetStage);
+    const promoted = promoteValidatedGscDataset({ sourceDir: datasetStage, targetDir: inputDir, validate: (directory) => inspectGscInput(directory, { strictPeriods: true }) });
+    console.log(`[GSC-AUTO] Atomowo zatwierdzono aktywny zestaw GSC: ${promoted.files.length} plików.`);
 
     runWeeklyReport(inputDir, inputDir);
     runFullCoverageMap(inputDir, inputDir);
@@ -667,6 +693,7 @@ async function main() {
     runSeoAioWaveProposal(inputDir);
     finishSuccessfulReports(inputDir, sourceLabel || 'imported_csv');
     if (!args.skipPoprawSeo) runPoprawSeo(inputDir);
+    if (args.cleanupRepoArtifacts) cleanupRepoGscArtifacts();
     tmpStatus = 'COMPLETED';
     return;
   } catch (freshErr) {
@@ -686,10 +713,7 @@ async function main() {
     throw new Error(manualMsg);
   } finally {
     if (tmp) disposeTempWorkspace(tmp, { status: tmpStatus });
-    // Optional only: default GSC mode is read-only report generation outside repo.
-    if (args.cleanupRepoArtifacts) {
-      cleanupRepoGscArtifacts();
-    }
+    if (datasetStage && fs.existsSync(datasetStage)) disposeTempWorkspace(datasetStage, { status: tmpStatus });
   }
 }
 

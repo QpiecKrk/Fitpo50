@@ -5,8 +5,14 @@ const {
   estimatedTrafficGain,
   isNoindexSeoFile,
   metricDelta,
+  nowWarsawIso,
   textContract,
 } = require('../scripts/growth-tool');
+
+test('warszawski dateModified ma właściwy offset niezależnie od strefy procesu', () => {
+  assert.equal(nowWarsawIso(new Date('2026-01-15T12:00:00Z')), '2026-01-15T13:00:00+01:00');
+  assert.equal(nowWarsawIso(new Date('2026-07-15T12:00:00Z')), '2026-07-15T14:00:00+02:00');
+});
 
 test('estimatedTrafficGain normalizes a 90-day GSC range to 30 days', () => {
   const result = estimatedTrafficGain({ impressions: 900, clicks: 15 }, 90);

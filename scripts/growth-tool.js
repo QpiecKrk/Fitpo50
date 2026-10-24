@@ -12,6 +12,7 @@ const {
   resolveSeoStateDir,
 } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
+const { warsawIso } = require('./lib/popraw-seo-approved-patches');
 
 const ROOT = process.cwd();
 const REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
@@ -364,27 +365,7 @@ function readGscContentStrategyReport() {
   };
 }
 
-function nowWarsawIso() {
-  const date = new Date();
-  const parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Europe/Warsaw',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  }).formatToParts(date).reduce((acc, part) => {
-    if (part.type !== 'literal') acc[part.type] = part.value;
-    return acc;
-  }, {});
-  const offsetMinutes = -date.getTimezoneOffset();
-  const offsetHours = Math.trunc(Math.abs(offsetMinutes) / 60);
-  const offsetRest = Math.abs(offsetMinutes) % 60;
-  const sign = offsetMinutes >= 0 ? '+' : '-';
-  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}${sign}${String(offsetHours).padStart(2, '0')}:${String(offsetRest).padStart(2, '0')}`;
-}
+function nowWarsawIso(now = new Date()) { return warsawIso(now); }
 
 function parseDate(input) {
   const date = new Date(String(input || '').trim());
@@ -4288,5 +4269,6 @@ module.exports = {
   estimatedTrafficGain,
   isNoindexSeoFile,
   metricDelta,
+  nowWarsawIso,
   textContract,
 };

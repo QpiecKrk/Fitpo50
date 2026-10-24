@@ -11,5 +11,9 @@ test('lokalna promocja zachowuje paczkę wejściową do potwierdzenia live', () 
   assert.doesNotMatch(promotionBlock, /cleanupPreparedArtifact\s*\(/);
   assert.match(promotionBlock, /AWAITING_LIVE_CONFIRMATION/);
   assert.match(promotionBlock, /LIVE_DEPLOYED_AND_VALIDATED/);
-  assert.match(source, /input_cleanup:\s*\{ status: 'AWAITING_LIVE_CONFIRMATION', path: input \}/);
+  assert.match(source, /status: 'AWAITING_LIVE_CONFIRMATION'/);
+  assert.match(source, /package_sha256:/);
+  assert.match(source, /package_files:/);
+  assert.match(source, /transaction_id: transactionId/);
+  assert.match(source, /recovered\.includes\(String\(recoveredStatus\.transaction_id/);
 });

@@ -21,16 +21,49 @@ function publicFingerprint(siteDir) {
   return sha256(entries.join('\n'));
 }
 
-function changedRootArticles(rootDir) {
-  const result = spawnSync('git', ['status', '--porcelain=v1', '--untracked-files=all'], { cwd: rootDir, encoding: 'utf8' });
-  if (result.status !== 0) return [];
-  const fromStatus = String(result.stdout || '').split('\n').map((line) => line.slice(3).trim()).filter(Boolean);
-  const ahead = spawnSync('git', ['diff', '--name-only', 'origin/main...HEAD', '--', '*.html'], { cwd: rootDir, encoding: 'utf8' });
-  const fromAhead = ahead.status === 0 ? String(ahead.stdout || '').split('\n').map((line) => line.trim()).filter(Boolean) : [];
-  return [...new Set([...fromStatus, ...fromAhead].map((file) => file.replace(/^_site\//, '')))]
+function gitLines(rootDir, args) {
+  const result = spawnSync('git', args, { cwd: rootDir, encoding: 'utf8' });
+  return result.status === 0 ? String(result.stdout || '').split('\n').map((line) => line.trim()).filter(Boolean) : [];
+}
+
+function normalizeDeploymentPath(file) {
+  return String(file || '').replace(/^.* -> /, '').replace(/^_site\//, '').replace(/\\/g, '/');
+}
+
+function changedDeploymentPaths(rootDir, options = {}) {
+  const statusResult = spawnSync('git', ['status', '--porcelain=v1', '--untracked-files=all'], { cwd: rootDir, encoding: 'utf8' });
+  const status = statusResult.status === 0
+    ? String(statusResult.stdout || '').split('\n').filter(Boolean).map((line) => line.slice(3).trim())
+    : [];
+  const ahead = gitLines(rootDir, ['diff', '--name-only', '--no-renames', 'origin/main...HEAD']);
+  const boundary = gitLines(rootDir, ['log', '-1', '--format=%H', '--', 'deployment.json'])[0] || '';
+  const sinceMarker = boundary ? gitLines(rootDir, ['diff', '--name-only', '--no-renames', boundary, '--']) : [];
+  const historical = options.includeSinceMarker ? sinceMarker : [];
+  return [...new Set([...status, ...ahead, ...historical].map(normalizeDeploymentPath).filter(Boolean))];
+}
+
+function blogPostingFiles(rootDir) {
+  const siteDir = path.join(rootDir, '_site');
+  if (!fs.existsSync(siteDir)) return [];
+  return fs.readdirSync(siteDir)
     .filter((file) => /^[^/]+\.html$/i.test(file))
-    .filter((file) => fs.existsSync(path.join(rootDir, '_site', file)))
-    .filter((file) => /"@type"\s*:\s*"BlogPosting"/.test(fs.readFileSync(path.join(rootDir, '_site', file), 'utf8')))
+    .filter((file) => /"@type"\s*:\s*"BlogPosting"/.test(fs.readFileSync(path.join(siteDir, file), 'utf8')));
+}
+
+function ownedArtifactPaths(rootDir, file) {
+  const slug = path.basename(file, '.html');
+  const html = fs.readFileSync(path.join(rootDir, '_site', file), 'utf8');
+  const images = [...html.matchAll(/<(?:source|img)\b[^>]+(?:src|srcset)=["']([^"']+)["']/gi)]
+    .flatMap((match) => match[1].split(',').map((entry) => entry.trim().split(/\s+/)[0]))
+    .filter((value) => value && !/^(?:https?:|data:|\/\/)/i.test(value))
+    .map((value) => value.replace(/^\.?\//, '').split(/[?#]/)[0]);
+  return new Set([file, `assets/pdf/${slug}.pdf`, ...images]);
+}
+
+function changedRootArticles(rootDir) {
+  const changed = new Set(changedDeploymentPaths(rootDir));
+  return blogPostingFiles(rootDir)
+    .filter((file) => [...ownedArtifactPaths(rootDir, file)].some((artifact) => changed.has(artifact)))
     .sort((a, b) => a.localeCompare(b, 'pl'));
 }
 
@@ -54,6 +87,12 @@ function assertArticleInventoryComplete(rootDir, articles) {
     .filter((file) => /"@type"\s*:\s*"BlogPosting"/.test(fs.readFileSync(path.join(rootDir, file), 'utf8')))
     .map((file) => file.slice('_site/'.length))
     .filter((file) => !included.has(file));
+  const changedPaths = new Set(changedDeploymentPaths(rootDir, { includeSinceMarker: true }));
+  for (const file of blogPostingFiles(rootDir)) {
+    if (included.has(file)) continue;
+    const changedArtifacts = [...ownedArtifactPaths(rootDir, file)].filter((artifact) => artifact !== file && changedPaths.has(artifact));
+    if (changedArtifacts.length) missing.push(`${file} (artefakty: ${changedArtifacts.join(', ')})`);
+  }
   if (missing.length) throw new Error(`DEPLOYMENT_ARTICLES_INCOMPLETE: zmienione BlogPosting w _site pominięte w articles: ${missing.join(', ')}. Marker przygotuj przed commitem i jednym pushem treści oraz markera.`);
 }
 
@@ -124,4 +163,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { articleDeploymentEntry, changedRootArticles, prepareDeploymentMarker, publicFingerprint, sha256 };
+module.exports = { articleDeploymentEntry, changedDeploymentPaths, changedRootArticles, prepareDeploymentMarker, publicFingerprint, sha256 };

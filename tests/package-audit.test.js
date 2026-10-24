@@ -9,6 +9,7 @@ const { auditPackage, imageIssues, metricProposal } = require('../scripts/packag
 const { packageIdentity } = require('../scripts/lib/package-identity');
 const { executeArticleAddCore } = require('../scripts/article-add');
 const { cleanupArticleInput } = require('../scripts/article-cleanup-input');
+const { computePreparedPackageFingerprint } = require('../scripts/lib/article-json-artifact');
 const { statusPath } = require('../scripts/lib/article-pipeline-status');
 const { normalizeCloseCode } = require('../scripts/prepush-parallel-checks');
 const { verifyDeployment, sha256 } = require('../scripts/lib/deployment-live-verifier');
@@ -199,21 +200,37 @@ test('article:cleanup-input odmawia bez live i usuwa paczkę dopiero po potwierd
   const packageDir = path.join(root, 'Downloads', 'fitpo50-json-ready', slug);
   const input = path.join(packageDir, `${slug}.fitpo50.json`);
   fs.mkdirSync(packageDir, { recursive: true });
-  fs.writeFileSync(input, JSON.stringify({ slug }));
-  fs.writeFileSync(path.join(packageDir, `${slug}-hero-v1.jpg`), 'image');
+  fs.writeFileSync(input, JSON.stringify({ slug, media_manifest: { entries: [] } }));
+  const identity = computePreparedPackageFingerprint(input);
   const stateFile = statusPath(root, slug);
   fs.mkdirSync(path.dirname(stateFile), { recursive: true });
-  fs.writeFileSync(stateFile, `${JSON.stringify({ version: 1, slug, status: 'SUCCESS', input_cleanup: { status: 'AWAITING_LIVE_CONFIRMATION', path: input } }, null, 2)}\n`);
+  fs.writeFileSync(stateFile, `${JSON.stringify({ version: 1, slug, status: 'SUCCESS', input_cleanup: { status: 'AWAITING_LIVE_CONFIRMATION', path: input, package_sha256: identity.fingerprint, package_files: identity.entries } }, null, 2)}\n`);
   const url = `https://fitpo50.pl/${slug}.html`;
   fs.writeFileSync(path.join(root, 'deployment.json'), `${JSON.stringify({ version: 2, release_id: 'release-1', articles: [{ slug, url }] }, null, 2)}\n`);
   const liveFile = path.join(root, 'data', 'reports', 'local', 'deployment-live-status.json');
   fs.mkdirSync(path.dirname(liveFile), { recursive: true });
   fs.writeFileSync(liveFile, `${JSON.stringify({ status: 'DEPLOYED', release_id: 'release-1', checks: [{ type: 'ARTICLE', url, pass: false }] }, null, 2)}\n`);
+  const securityFile = path.join(root, 'data', 'reports', 'local', 'security-exposure-status.json');
+  fs.writeFileSync(securityFile, `${JSON.stringify({ status: 'SECURITY_EXPOSURE_PASS', release_id: 'release-1' }, null, 2)}\n`);
 
   assert.throws(() => cleanupArticleInput({ root, slug }), /Brak LIVE_DEPLOYED_AND_VALIDATED/iu);
   assert.equal(fs.existsSync(input), true);
 
   fs.writeFileSync(liveFile, `${JSON.stringify({ status: 'LIVE_DEPLOYED_AND_VALIDATED', release_id: 'release-1', checks: [{ type: 'ARTICLE', url, pass: true }] }, null, 2)}\n`);
+
+  fs.writeFileSync(securityFile, `${JSON.stringify({ status: 'SECURITY_EXPOSURE_BLOCKED', release_id: 'release-1' }, null, 2)}\n`);
+  assert.throws(() => cleanupArticleInput({ root, slug }), /Brak SECURITY_EXPOSURE_PASS/iu);
+  assert.equal(fs.existsSync(input), true);
+
+  fs.writeFileSync(securityFile, `${JSON.stringify({ status: 'SECURITY_EXPOSURE_PASS', release_id: 'other-release' }, null, 2)}\n`);
+  assert.throws(() => cleanupArticleInput({ root, slug }), /Raport bezpieczeństwa nie odpowiada/iu);
+  assert.equal(fs.existsSync(input), true);
+
+  fs.writeFileSync(securityFile, `${JSON.stringify({ status: 'SECURITY_EXPOSURE_PASS', release_id: 'release-1' }, null, 2)}\n`);
+  fs.writeFileSync(input, JSON.stringify({ slug, media_manifest: { entries: [] }, changed: true }));
+  assert.throws(() => cleanupArticleInput({ root, slug }), /Paczkę wejściową zmieniono/iu);
+  assert.equal(fs.existsSync(input), true);
+  fs.writeFileSync(input, JSON.stringify({ slug, media_manifest: { entries: [] } }));
 
   const cleaned = cleanupArticleInput({ root, slug });
   assert.equal(cleaned.status, 'CLEANED_AFTER_LIVE_CONFIRMATION');

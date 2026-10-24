@@ -175,6 +175,39 @@ test('deployment marker inventory includes articles from every commit ahead of o
   }
 });
 
+test('zmiana tylko obrazu lub PDF przypisuje właściciela BlogPosting do markera i jego SHA-256', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-marker-artifact-owner-'));
+  try {
+    git(root, 'init');
+    git(root, 'config', 'user.email', 'test@example.com');
+    git(root, 'config', 'user.name', 'Test');
+    const slug = 'artifact-only';
+    const html = `<link rel="canonical" href="https://fitpo50.pl/${slug}.html"><meta property="article:modified_time" content="2026-10-24T10:00:00+02:00"><meta property="article:section" content="ciekawe"><script type="application/ld+json">{"@type":"BlogPosting","dateModified":"2026-10-24T10:00:00+02:00"}</script><picture><img src="./assets/${slug}-hero-v1.webp"></picture>`;
+    fs.mkdirSync(path.join(root, '_site', 'assets', 'data'), { recursive: true });
+    fs.mkdirSync(path.join(root, '_site', 'assets', 'pdf'), { recursive: true });
+    for (const file of ['index.html', 'porady.html', 'ciekawe.html']) fs.writeFileSync(path.join(root, '_site', file), `<a href="${slug}.html">article</a>`);
+    for (const file of ['sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
+    fs.writeFileSync(path.join(root, '_site', 'assets', 'data', 'search-index.json'), `[{"slug":"${slug}.html"}]`);
+    fs.writeFileSync(path.join(root, '_site', `${slug}.html`), html);
+    fs.writeFileSync(path.join(root, '_site', 'assets', `${slug}-hero-v1.webp`), 'old-image');
+    fs.writeFileSync(path.join(root, '_site', 'assets', 'pdf', `${slug}.pdf`), '%PDF-old');
+    fs.writeFileSync(path.join(root, 'deployment.json'), '{"version":2,"articles":[]}\n');
+    git(root, 'add', '.');
+    git(root, 'commit', '-m', 'base release');
+    git(root, 'update-ref', 'refs/remotes/origin/main', git(root, 'rev-parse', 'HEAD'));
+
+    fs.writeFileSync(path.join(root, '_site', 'assets', `${slug}-hero-v1.webp`), 'new-image');
+    fs.writeFileSync(path.join(root, '_site', 'assets', 'pdf', `${slug}.pdf`), '%PDF-new');
+    assert.deepEqual(changedRootArticles(root), [`${slug}.html`]);
+    const marker = prepareDeploymentMarker(root, { releaseId: 'artifact-release' });
+    assert.deepEqual(marker.articles.map((item) => item.slug), [slug]);
+    assert.equal(marker.articles[0].pdf_sha256, require('../scripts/prepare-deployment-marker').sha256(Buffer.from('%PDF-new')));
+    assert.equal(marker.articles[0].images[0].sha256, require('../scripts/prepare-deployment-marker').sha256(Buffer.from('new-image')));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('live verifier only returns final status after remote, marker and all checks pass', () => {
   const baseUrl = 'https://fitpo50.pl';
   const marker = { version: 1, release_id: 'abc', prepared_at: '2026-10-01T10:00:00.000Z', public_fingerprint_sha256: 'f'.repeat(64) };
