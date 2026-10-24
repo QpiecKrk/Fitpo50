@@ -16,6 +16,40 @@ const { validateInput } = require('../scripts/article-dry-run');
 
 const ROOT = path.resolve(__dirname, '..');
 const FIXTURE = path.join(ROOT, 'tests', 'fixtures', 'package-audit', 'multi-error.fitpo50.json');
+const VALID_PACKAGE_DIR = path.join(ROOT, 'tests', 'fixtures', 'package-audit', 'valid-package');
+const VALID_PACKAGE = path.join(VALID_PACKAGE_DIR, 'package-audit-valid.fitpo50.json');
+
+test('kompletna paczka v2 z prawdziwymi obrazami przechodzi package:audit i nie blokuje article:add', () => {
+  const reportDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-package-audit-valid-'));
+  const report = auditPackage({ file: VALID_PACKAGE, 'assets-dir': VALID_PACKAGE_DIR, 'report-dir': reportDir });
+
+  assert.equal(report.status, 'READY_FOR_VISUAL_REVIEW');
+  assert.equal(report.exit_code, 0);
+  assert.equal(report.summary.errors, 0);
+  assert.deepEqual(report.by_owner, { PISARZ: [], ILUSTRATOR: [], CODEX: [] });
+  assert.equal(report.package_files.length, 7, 'JSON oraz dwa komplety JPG/WebP/AVIF');
+
+  let nextStageCalls = 0;
+  const articleStatus = executeArticleAddCore({
+    file: VALID_PACKAGE,
+    'assets-dir': VALID_PACKAGE_DIR,
+    'dry-run': true,
+  }, {
+    root: reportDir,
+    auditPackage: (args, dependencies) => auditPackage({ ...args, 'report-dir': reportDir }, dependencies),
+    printPackageAuditReport: () => {},
+    runCommand(command, args) {
+      nextStageCalls += 1;
+      assert.equal(command, 'node');
+      assert.equal(args[0], 'scripts/article-dry-run.js');
+      return { status: 10, stdout: '', stderr: '' };
+    },
+  });
+
+  assert.equal(articleStatus, 10, 'article:add dochodzi do następnego etapu AWAITING_REVIEW');
+  assert.equal(nextStageCalls, 1, 'package:audit nie zatrzymuje poprawnej paczki');
+  fs.rmSync(reportDir, { recursive: true, force: true });
+});
 
 test('package:audit zwraca wszystkie klasy błędów w jednym raporcie i nie zmienia paczki', () => {
   const reportDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-package-audit-report-'));

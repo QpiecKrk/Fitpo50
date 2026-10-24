@@ -1,0 +1,186 @@
+{
+  "status": "DRAFT",
+  "title": "Codzienny spacer po pięćdziesiątce: spokojny plan na start",
+  "seo_title": "Codzienny spacer po pięćdziesiątce: dobry start",
+  "og_title": "Codzienny spacer po pięćdziesiątce: dobry start",
+  "twitter_title": "Codzienny spacer po pięćdziesiątce: dobry start",
+  "slug": "package-audit-valid",
+  "category": "ciekawe",
+  "meta_description": "Codzienny spacer po pięćdziesiątce może być prostym początkiem ruchu. Zobacz, jak wybrać trasę, tempo oraz wygodną porę bez niepotrzebnej presji.",
+  "og_description": "Codzienny spacer po pięćdziesiątce może być prostym początkiem ruchu. Zobacz, jak wybrać trasę, tempo oraz wygodną porę bez niepotrzebnej presji.",
+  "twitter_description": "Codzienny spacer po pięćdziesiątce może być prostym początkiem ruchu. Zobacz, jak wybrać trasę, tempo oraz wygodną porę bez niepotrzebnej presji.",
+  "schema_blogposting_description": "Codzienny spacer po pięćdziesiątce może być prostym początkiem ruchu. Zobacz, jak wybrać trasę, tempo oraz wygodną porę bez niepotrzebnej presji.",
+  "listing_title": "Codzienny spacer po pięćdziesiątce — prosty plan na start",
+  "listing_desc": "Spokojny sposób wyboru wygodnej trasy, tempa i pory codziennego spaceru bez tworzenia sztucznej presji.",
+  "lead": "Codzienny spacer po pięćdziesiątce nie musi być wyzwaniem sportowym. Wystarczy wygodna trasa, spokojne tempo i pora, którą łatwo utrzymać w zwykłym tygodniu.",
+  "quick_answer": "Jeśli chcesz zacząć spokojnie, wybierz wygodną trasę i tempo pozwalające swobodnie rozmawiać.",
+  "reading_time": "4 min czytania",
+  "hero_motto_html": "<em>Najlepszy plan to taki, do którego chce się wracać.</em>",
+  "search_intent": "how-to",
+  "primary_keyword": "codzienny spacer po pięćdziesiątce",
+  "supporting_keywords": [
+    "spokojny spacer",
+    "plan codziennego ruchu",
+    "wygodna trasa spacerowa"
+  ],
+  "key_takeaways": [
+    "Spokojny spacer można łatwo wpisać w codzienny plan dnia.",
+    "Wygodna trasa ułatwia zachowanie regularności bez zbędnej presji.",
+    "Tempo pozwalające rozmawiać daje prosty punkt odniesienia na start.",
+    "Stała pora wyjścia pomaga zbudować czytelny rytm tygodnia."
+  ],
+  "editorial_notes": {
+    "uncertain_claims": [],
+    "missing_evidence": [],
+    "faq_gaps": [],
+    "medical_risks": [],
+    "assumptions": [],
+    "local_pipeline_tasks": [
+      "ponownie zweryfikuj FAQ",
+      "wykonaj lokalne linkowanie wewnętrzne"
+    ]
+  },
+  "sections": [
+    {
+      "title": "Jak wybrać prosty plan spaceru?",
+      "section_role": "main",
+      "paragraphs_html": [
+        "<p>Najłatwiej zacząć od trasy, którą dobrze znasz i możesz wygodnie skrócić. Wybierz tempo pozwalające swobodnie rozmawiać oraz porę pasującą do zwykłego rytmu dnia.</p>",
+        "<p>Przygotuj wygodne obuwie, sprawdź pogodę i potraktuj wyjście jako spokojny element dnia. Taki układ ułatwia powrót na tę samą trasę bez dodatkowych przygotowań.</p>"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "who-physical-activity",
+      "label": "World Health Organization — Physical activity fact sheet",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/physical-activity",
+      "evidence_level": "official_guidance",
+      "publication_year": 2024,
+      "fallback_url": null,
+      "evidence_scope": "general_activity_guidance",
+      "publication_date": null,
+      "checked_via": "fixture_http",
+      "recheck_after": null,
+      "checked_at": "2026-10-24",
+      "url_status": "reachable",
+      "http_status": 200
+    },
+    {
+      "id": "nhs-exercise",
+      "label": "National Health Service — Exercise and physical activity",
+      "url": "https://www.nhs.uk/live-well/exercise/",
+      "evidence_level": "official_guidance",
+      "publication_year": 2024,
+      "fallback_url": null,
+      "evidence_scope": "general_activity_guidance",
+      "publication_date": null,
+      "checked_via": "fixture_http",
+      "recheck_after": null,
+      "checked_at": "2026-10-24",
+      "url_status": "reachable",
+      "http_status": 200
+    },
+    {
+      "id": "cdc-physical-activity",
+      "label": "Centers for Disease Control and Prevention — About physical activity",
+      "url": "https://www.cdc.gov/physical-activity/php/about/",
+      "evidence_level": "official_guidance",
+      "publication_year": 2024,
+      "fallback_url": null,
+      "evidence_scope": "general_activity_guidance",
+      "publication_date": null,
+      "checked_via": "fixture_http",
+      "recheck_after": null,
+      "checked_at": "2026-10-24",
+      "url_status": "reachable",
+      "http_status": 200
+    },
+    {
+      "id": "gov-profilaktyka",
+      "label": "Ministerstwo Zdrowia — Profilaktyka i zdrowy styl życia",
+      "url": "https://www.gov.pl/web/zdrowie/profilaktyka",
+      "evidence_level": "official_guidance",
+      "publication_year": 2024,
+      "fallback_url": null,
+      "evidence_scope": "general_activity_guidance",
+      "publication_date": null,
+      "checked_via": "fixture_http",
+      "recheck_after": null,
+      "checked_at": "2026-10-24",
+      "url_status": "reachable",
+      "http_status": 200
+    }
+  ],
+  "evidence_claims": [
+    {
+      "claim": "Spokojny spacer można łatwo wpisać w codzienny plan dnia.",
+      "location": "key_takeaways[0]",
+      "claim_type": "general",
+      "source_urls": ["https://www.who.int/news-room/fact-sheets/detail/physical-activity"]
+    },
+    {
+      "claim": "Wygodna trasa ułatwia zachowanie regularności bez zbędnej presji.",
+      "location": "key_takeaways[1]",
+      "claim_type": "general",
+      "source_urls": ["https://www.nhs.uk/live-well/exercise/"]
+    },
+    {
+      "claim": "Tempo pozwalające rozmawiać daje prosty punkt odniesienia na start.",
+      "location": "key_takeaways[2]",
+      "claim_type": "general",
+      "source_urls": ["https://www.cdc.gov/physical-activity/php/about/"]
+    },
+    {
+      "claim": "Stała pora wyjścia pomaga zbudować czytelny rytm tygodnia.",
+      "location": "key_takeaways[3]",
+      "claim_type": "general",
+      "source_urls": ["https://www.gov.pl/web/zdrowie/profilaktyka"]
+    }
+  ],
+  "answer_blocks": [],
+  "faq_research": [],
+  "logic_links": [],
+  "image_prompts_v4": [
+    {
+      "section_ref": "hero",
+      "filename_base": "package-audit-valid-hero-v1",
+      "source_file": "package-audit-valid-hero-v1.jpg",
+      "topic": "Spokojny spacer dorosłej osoby w zielonym parku",
+      "technique": "fotografia redakcyjna",
+      "composition": "Poziomy szeroki kadr z postacią po prawej stronie ścieżki",
+      "purpose": "Obraz otwierający kompletną poprawną paczkę testową",
+      "season_and_time": "pogodny jesienny poranek",
+      "mood": "spokojny i naturalny",
+      "aspect_ratio": "16:9",
+      "prompt_en": "Editorial landscape photograph of an older adult taking a calm walk in a green park, natural daylight, realistic proportions, no text or logos.",
+      "overlay_text_pl": "",
+      "evidence_source_urls": [],
+      "requires_exact_data_render": false,
+      "negative_prompt": "No text, no watermark, no logo, no distorted hands or artificial anatomy.",
+      "alt_pl": "Dorosła osoba idzie spokojnie alejką w zielonym parku.",
+      "caption_pl": "Spokojny spacer na znanej i wygodnej trasie.",
+      "visual_review": {"status": "PENDING_LOCAL_REVIEW"}
+    },
+    {
+      "section_ref": "sekcja-1",
+      "filename_base": "package-audit-valid-sekcja-1-v1",
+      "source_file": "package-audit-valid-sekcja-1-v1.jpg",
+      "topic": "Wygodna parkowa trasa wybrana do codziennego spaceru",
+      "technique": "fotografia redakcyjna",
+      "composition": "Poziomy kadr pokazujący równą alejkę i ławkę po lewej stronie",
+      "purpose": "Ilustracja wyboru prostej i znajomej trasy spacerowej",
+      "season_and_time": "jasne spokojne popołudnie",
+      "mood": "przyjazny i niewymuszony",
+      "aspect_ratio": "16:9",
+      "prompt_en": "Editorial landscape photograph of a comfortable level park path with a bench and soft daylight, realistic natural scene, no text or logos.",
+      "overlay_text_pl": "",
+      "evidence_source_urls": [],
+      "requires_exact_data_render": false,
+      "negative_prompt": "No text, no watermark, no logo, no impossible perspective or artificial objects.",
+      "alt_pl": "Równa parkowa alejka z ławką i drzewami po obu stronach.",
+      "caption_pl": "Znana trasa ułatwia spokojne rozpoczęcie spaceru.",
+      "visual_review": {"status": "PENDING_LOCAL_REVIEW"}
+    }
+  ]
+}

@@ -6,6 +6,7 @@
 - Weryfikacja SHA-256 obrazów na produkcji.
 - Tożsamość paczki obejmująca wszystkie pliki wejściowe.
 - `package:audit`: jeden raport zawierający wszystkie wykrywalne błędy JSON-u i obrazów. Każdy błąd ma wskazywać właściciela poprawki: Pisarz, Ilustrator albo Codex. Dla błędów obrazów raport ma zawierać gotowy prompt naprawczy dla Ilustratora.
+- Propozycje `proposed_changes` przypisane do `CODEX` nie wykonują się automatycznie. Po osobnym potwierdzeniu użytkownika Codex stosuje je istniejącą komendą właściwą dla danej operacji (np. konwersją obrazu) albo wykonuje dokładnie opisaną zmianę ręcznie, a następnie ponawia pełny audyt paczki.
 
 ## Paczka 2 — historia i retencja
 
