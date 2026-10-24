@@ -139,8 +139,11 @@ function inspectTempWorkspace(directory, options = {}) {
   if (!manifest.project_root || (expectedProjectRoot && path.resolve(manifest.project_root) !== expectedProjectRoot)) {
     return { eligible: false, reason: 'FOREIGN_PROJECT', directory, manifest };
   }
-  const ageMs = Math.max(0, nowMs - createdMs);
-  if (manifest.status !== 'COMPLETED') return { eligible: false, reason: manifest.status, directory, manifest, ageMs };
+  const workspaceAgeMs = Math.max(0, nowMs - createdMs);
+  if (manifest.status !== 'COMPLETED') return { eligible: false, reason: manifest.status, directory, manifest, ageMs: workspaceAgeMs };
+  const completedMs = Date.parse(String(manifest.completed_at || ''));
+  if (!Number.isFinite(completedMs)) return { eligible: false, reason: 'MISSING_COMPLETED_AT', directory, manifest, ageMs: workspaceAgeMs };
+  const ageMs = Math.max(0, nowMs - completedMs);
   if (ageMs < minAgeMs) return { eligible: false, reason: 'FRESH', directory, manifest, ageMs };
   const lock = fs.existsSync(lockPath) ? readJsonIfValid(lockPath) : null;
   if (fs.existsSync(lockPath) && !lock) return { eligible: false, reason: 'INVALID_LOCK', directory, manifest, ageMs };

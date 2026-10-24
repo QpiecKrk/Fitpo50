@@ -179,6 +179,9 @@ function inspectGscInput(inputDir, options = {}) {
   const manifest = readJson(manifestPath);
   const apiReport = readJson(apiReportPath);
   let verifiedApiReport = null;
+  if (manifest && !manifest.api_report) {
+    warnings.push(`Manifest wymaga migracji do v2. Uruchom: npm run gsc:data:migrate-v2 -- --input-dir "${resolvedDir}"`);
+  }
   if (manifest?.api_report) {
     const pinnedName = String(manifest.api_report.name || '');
     if (!/^gsc-weekly-report-api-[a-f0-9]{16}\.json$/.test(pinnedName)) {

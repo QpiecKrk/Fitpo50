@@ -7,7 +7,7 @@ Każdy katalog roboczy publikacji, eksportu, workbencha, GSC i renderowania PDF 
 - `.fitpo50-workspace.json` — typ procesu, PID, czas utworzenia, katalog projektu, slug i status,
 - `.fitpo50-workspace.lock` — aktywna blokada procesu.
 
-Status `ACTIVE` oznacza trwającą pracę. `AWAITING_REVIEW` i `AWAITING_LIVE_CONFIRMATION` oznaczają celowo zachowane artefakty nadal potrzebne procesowi; takie katalogi nie są kandydatami do cleanupu. Wznowienie tej samej transakcji przywraca `ACTIVE`. Retencja może usunąć wyłącznie workspace jawnie oznaczony `COMPLETED`; `ACTIVE`, oba statusy oczekiwania i `FAILED` pozostają zachowane niezależnie od wieku. Jeśli proces zostanie przerwany, manifest i lock pozwalają go zdiagnozować bez zgadywania po samej nazwie katalogu.
+Status `ACTIVE` oznacza trwającą pracę. `AWAITING_REVIEW` i `AWAITING_LIVE_CONFIRMATION` oznaczają celowo zachowane artefakty nadal potrzebne procesowi; takie katalogi nie są kandydatami do cleanupu. Wznowienie tej samej transakcji przywraca `ACTIVE`. Retencja może usunąć wyłącznie workspace jawnie oznaczony `COMPLETED`, gdy od prawidłowego `completed_at` minęło co najmniej 12 godzin; brak `completed_at` chroni katalog. `ACTIVE`, oba statusy oczekiwania i `FAILED` pozostają zachowane niezależnie od wieku. Jeśli proces zostanie przerwany, manifest i lock pozwalają go zdiagnozować bez zgadywania po samej nazwie katalogu.
 
 Automatyczne sprzątanie własnego workspace bieżącej operacji nie jest usuwaniem danych użytkownika ani plików repozytorium. Ręczne wywołanie `tmp:cleanup` oraz każdy tryb `--apply` nadal wymagają osobnego „tak” użytkownika; dry-run uruchamiany wewnątrz `prepush:local` jest dozwolony.
 

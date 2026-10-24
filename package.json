@@ -43,6 +43,7 @@
     "gsc:weekly:api:local": "bash scripts/with-local-env.sh node scripts/gsc-weekly-api-report.js",
     "gsc:weekly:report": "node scripts/gsc-weekly-csv-report.js",
     "gsc:data:check": "node scripts/gsc-data-contract.js",
+    "gsc:data:migrate-v2": "node scripts/gsc-data-migrate-v2.js",
     "test:gsc:data-contract": "node --test tests/external-integrations.test.js tests/gsc-data-contract.test.js tests/gsc-workflow-contract.test.js tests/gsc-full-coverage.test.js tests/gsc-generative-ai.test.js",
     "gsc:priority-map": "node scripts/gsc-priority-map.js",
     "gsc:auto": "node scripts/gsc-auto-report.js",

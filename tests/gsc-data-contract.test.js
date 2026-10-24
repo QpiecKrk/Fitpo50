@@ -8,6 +8,7 @@ const {
   validateReportingWindows,
   writeManifestFromApiReport,
 } = require('../scripts/lib/gsc-data-contract');
+const { migrateGscManifestV2, parseArgs: parseMigrationArgs } = require('../scripts/gsc-data-migrate-v2');
 
 function isoDay(offset, now = new Date()) {
   const date = new Date(now);
@@ -45,6 +46,15 @@ function makeDataset() {
   return { dir, report };
 }
 
+function downgradeManifestToV1(dir) {
+  const file = path.join(dir, 'gsc-data-manifest.json');
+  const manifest = JSON.parse(fs.readFileSync(file, 'utf8'));
+  delete manifest.api_report;
+  manifest.version = 1;
+  fs.writeFileSync(file, `${JSON.stringify(manifest, null, 2)}\n`);
+  return file;
+}
+
 test('fresh coherent GSC cohort passes the strict contract', () => {
   const { dir } = makeDataset();
   const result = inspectGscInput(dir, { strictPeriods: true });
@@ -53,6 +63,57 @@ test('fresh coherent GSC cohort passes the strict contract', () => {
   assert.equal(result.periods.status, 'PASS');
   assert.equal(result.cohort.status, 'PASS');
   assert.equal(result.files.query_pages.type, 'query_pages');
+});
+
+test('legacy v1 manifest reports a clear migration warning and repair command', () => {
+  const { dir } = makeDataset();
+  downgradeManifestToV1(dir);
+  const result = inspectGscInput(dir, { strictPeriods: true });
+  assert.equal(result.blocking, false);
+  assert.equal(result.status, 'WARN');
+  assert.ok(result.warnings.some((item) => item.includes('Manifest wymaga migracji do v2.')));
+  assert.ok(result.warnings.some((item) => item.includes('npm run gsc:data:migrate-v2 -- --input-dir')));
+});
+
+test('explicit migration pins a fresh verified API report and leaves an already-v2 manifest unchanged', () => {
+  const { dir } = makeDataset();
+  downgradeManifestToV1(dir);
+  const migrated = migrateGscManifestV2(dir);
+  assert.equal(migrated.status, 'MIGRATED_TO_V2');
+  assert.equal(migrated.changed, true);
+  const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'gsc-data-manifest.json'), 'utf8'));
+  assert.equal(manifest.version, 2);
+  assert.match(manifest.api_report.name, /^gsc-weekly-report-api-[a-f0-9]{16}\.json$/);
+  const before = fs.readFileSync(path.join(dir, 'gsc-data-manifest.json'));
+  assert.deepEqual(migrateGscManifestV2(dir), { status: 'ALREADY_V2', manifest_path: path.join(dir, 'gsc-data-manifest.json'), changed: false });
+  assert.deepEqual(fs.readFileSync(path.join(dir, 'gsc-data-manifest.json')), before);
+});
+
+test('migration refuses REQUEST_FAILED without changing the legacy manifest', () => {
+  const { dir } = makeDataset();
+  const manifestPath = downgradeManifestToV1(dir);
+  fs.writeFileSync(path.join(dir, 'gsc-weekly-report-api.json'), JSON.stringify({ status: 'REQUEST_FAILED', report_kind: 'DIAGNOSTIC' }));
+  const before = fs.readFileSync(manifestPath);
+  assert.throws(() => migrateGscManifestV2(dir), /status=OK_VERIFIED.*report_kind=DATASET/);
+  assert.deepEqual(fs.readFileSync(manifestPath), before);
+});
+
+test('migration refuses CSV files that are 72 hours old or older', () => {
+  const { dir } = makeDataset();
+  const manifestPath = downgradeManifestToV1(dir);
+  const now = new Date();
+  const stale = new Date(now.getTime() - 72 * 3600000);
+  for (const name of ['queries.csv', 'pages.csv', 'query-pages.csv']) fs.utimesSync(path.join(dir, name), stale, stale);
+  const before = fs.readFileSync(manifestPath);
+  assert.throws(() => migrateGscManifestV2(dir, { now }), /migracja wymaga mniej niż 72 h/);
+  assert.deepEqual(fs.readFileSync(manifestPath), before);
+});
+
+test('migration CLI accepts only an explicit input directory argument', () => {
+  assert.equal(parseMigrationArgs([], '/repo').inputDir.endsWith('data/reports/local/gsc-current'), true);
+  assert.equal(parseMigrationArgs(['--input-dir', 'fixture'], '/repo').inputDir, path.resolve('/repo/fixture'));
+  assert.throws(() => parseMigrationArgs(['--input-dir'], '/repo'), /Brak wartości/);
+  assert.throws(() => parseMigrationArgs(['--unknown'], '/repo'), /Nieznany argument/);
 });
 
 test('stale GSC data is blocking even when all CSV files exist', () => {

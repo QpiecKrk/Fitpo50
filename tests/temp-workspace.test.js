@@ -5,7 +5,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { executeCleanup } = require('../scripts/tmp-cleanup');
-const { createManagedTempDir, disposeTempWorkspace, markTempWorkspace, reactivateTempWorkspace, readWorkspaceManifest, resolveWorkspaceProjectRoot } = require('../scripts/lib/temp-workspace');
+const { MANIFEST_NAME, createManagedTempDir, disposeTempWorkspace, markTempWorkspace, reactivateTempWorkspace, readWorkspaceManifest, resolveWorkspaceProjectRoot } = require('../scripts/lib/temp-workspace');
 
 const FIXTURE_ROOTS = [];
 
@@ -119,10 +119,33 @@ test('cleanup nie usuwa workspace FAILED bez jawnego oznaczenia COMPLETED', () =
   assert.equal(fs.existsSync(directory), true);
 });
 
+test('cleanup liczy retencję od completed_at, nie od czasu utworzenia workspace', () => {
+  const { tempRoot, projectRoot } = fixture();
+  const directory = createManagedTempDir({ prefix: 'fitpo50-import-recently-completed-', type: 'article-import', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso(48) });
+  markTempWorkspace(directory, 'COMPLETED');
+  const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
+  assert.equal(result.removed.length, 0);
+  assert.ok(result.skipped.some((item) => item.reason === 'FRESH'));
+  assert.equal(fs.existsSync(directory), true);
+});
+
+test('cleanup chroni COMPLETED bez prawidłowego completed_at', () => {
+  const { tempRoot, projectRoot } = fixture();
+  const directory = createManagedTempDir({ prefix: 'fitpo50-import-no-completed-at-', type: 'article-import', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso(48) });
+  markTempWorkspace(directory, 'COMPLETED');
+  const manifest = readWorkspaceManifest(directory);
+  delete manifest.completed_at;
+  fs.writeFileSync(path.join(directory, MANIFEST_NAME), `${JSON.stringify(manifest, null, 2)}\n`);
+  const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
+  assert.equal(result.removed.length, 0);
+  assert.ok(result.skipped.some((item) => item.reason === 'MISSING_COMPLETED_AT'));
+  assert.equal(fs.existsSync(directory), true);
+});
+
 test('cleanup usuwa wyłącznie stary zarządzany katalog jawnie oznaczony COMPLETED', () => {
   const { tempRoot, projectRoot } = fixture();
   const orphan = createManagedTempDir({ prefix: 'fitpo50-prepush-export-', type: 'prepush-export', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso() });
-  markTempWorkspace(orphan, 'COMPLETED');
+  markTempWorkspace(orphan, 'COMPLETED', { completed_at: oldIso() });
   const unmanaged = fs.mkdtempSync(path.join(tempRoot, 'fitpo50-import-'));
   const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
   assert.deepEqual(result.removed.map((item) => item.directory), [orphan]);
