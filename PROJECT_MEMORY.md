@@ -18,6 +18,8 @@
 - Git sync panelu pozostaje wyłączony. `.htaccess` blokuje dotfiles poza `/.well-known/`, pliki `*.md`, szablon Bento i `admin/init-*.php`.
 - Kody wyjścia: `0` = `READY`, `10` = `AWAITING_REVIEW`, `20` = błąd treści, `30` = błąd środowiska.
 - Raportuj krótko, prosto i bez żargonu; zawsze podaj ryzyko oraz informację, czy zmianę można cofnąć.
+- Nowe artykuły i ich pliki wejściowe używają wyłącznie miar europejskich: `kg`, `g`, `ml`, `cm` i `°C`.
+- Po publikacji pliki robocze wolno skasować dopiero po sygnale Programisty, że artykuł jest live i sprawdzony.
 
 Ten plik zawiera wyłącznie aktualne decyzje. Nie jest kroniką zmian. Szczegółowe kontrakty artykułów są w `ARTICLE_STANDARD.md`, komendy w `docs/command-registry.md`, a monitoring publikacji w `docs/post-publication-monitoring.md`.
 
@@ -73,6 +75,8 @@ Start sesji jest wyłącznie odczytowy. Nie wykonuj wtedy `pull`, `restore`, eks
 - Plik z `Downloads` pozostaje bez zmian. Pipeline pracuje na kontrolowanej kopii i nie archiwizuje zużytego JSON-u w repo.
 - Publikacja rozróżnia `CREATE` i `UPDATE`; istniejący slug wymaga jawnego `--force true`.
 - Pipeline działa fail-fast. Po pierwszym błędzie nie uruchamia etapów zależnych ani mutujących.
+- Audyt wejściowy zbiera wszystkie możliwe do wykrycia błędy, a etap zapisujący działa fail-fast.
+- Pisarz otrzymuje jedną zbiorczą listę błędów treści, źródeł, FAQ i danych na grafikach. Błędy techniczne naprawia Codex.
 - Wewnętrzny importer może zapisywać wyłącznie w aktywnym stagingu z krótkotrwałą capability wystawioną przez kontroler. Podrobienie flagi środowiskowej ani bezpośrednie wywołanie skryptu nie upoważnia do zapisu.
 - Nie wolno publikować bez przejścia logiki, dowodów, FAQ, intencji, linków, mediów, stagingu HTML, PDF i końcowych walidatorów.
 - Finalne źródło prawdy to HTML, media, PDF, listingi, sitemap, indeksy, manifest publikacji i ich odpowiedniki w `_site`.
@@ -118,6 +122,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 
 - Każdy pakiet artykułu ma jeden katalog wejściowy, dokładne nazwy, osobny hero i obrazy sekcji oraz lokalny manifest.
 - Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, nieprawdziwa anatomia lub sprzęt, błędne kadry i ukryte fallbacki są zabronione; sam watermark nie jest przeszkodą. Kanoniczny raport preview `version=3` klasyfikuje tekst jako brak, sam watermark albo treść i wiąże review z hashem pliku, placementem, H2, altem, podpisem oraz kontekstem. Liczby i twierdzenia wymagają transkrypcji i URL-i dowodów. Raporty preview v1/v2 pozostają zamrożonym legacy i nie uzyskują po cichu znaczenia v3.
+- Infografiki zawierające tekst oglądamy we wszystkich dostarczonych formatach.
 - Artykuł ma hero i co najmniej jeden odrębny obraz dla każdej głównej sekcji merytorycznej. Dodatkowe wykresy, infografiki lub sceny są dozwolone jako `sekcja-N-obraz-M`, jeśli wnoszą nową informację. Nie obowiązuje sztywna liczba sekcji ani obrazów: zakres wynika z tematu, a sekcje użytkowe nie są liczone.
 - Po jednoznacznym rozpoznaniu pliku źródłowego pipeline utrwala dokładne `source_file`; wygenerowany wariant JPG nie może później tworzyć fałszywej niejednoznaczności z oryginalnym JPEG.
 - Po zatwierdzonej publikacji brak uprawnień do posprzątania roboczej kopii poza zarządzanym workspace jest ostrzeżeniem, nie fałszywą porażką transakcji. Weryfikacja produkcji czeka na propagację HTML przez CDN i używa release-bound warm-up, ale potwierdza dopiero zwykły publiczny URL.
