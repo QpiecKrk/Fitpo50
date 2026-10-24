@@ -1,0 +1,778 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-10-24T04:07:16.217Z",
+  "reviewed_at": "2026-10-24T04:10:09.000Z",
+  "slug": "podwyzszony-kwas-moczowy-po-50",
+  "html_sha256": "ec70135addc176e41a2569d3cea7014196972f09f413a0f39dd3384995fd6c22",
+  "site_html_sha256": "ec70135addc176e41a2569d3cea7014196972f09f413a0f39dd3384995fd6c22",
+  "pdf_sha256": "dbdf707d49c7feeffadccb7f83b54e005ad3bb7fb09488e8605a19d1b9c912e4",
+  "site_pdf_sha256": "dbdf707d49c7feeffadccb7f83b54e005ad3bb7fb09488e8605a19d1b9c912e4",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-10-24T04:07:16.217Z",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 2
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "podwyzszony-kwas-moczowy-po-50.html",
+      "sha256": "ec70135addc176e41a2569d3cea7014196972f09f413a0f39dd3384995fd6c22",
+      "bytes": 65863
+    },
+    "html_site": {
+      "file": "_site/podwyzszony-kwas-moczowy-po-50.html",
+      "sha256": "ec70135addc176e41a2569d3cea7014196972f09f413a0f39dd3384995fd6c22",
+      "bytes": 65863
+    },
+    "pdf_source": {
+      "file": "assets/pdf/podwyzszony-kwas-moczowy-po-50.pdf",
+      "sha256": "dbdf707d49c7feeffadccb7f83b54e005ad3bb7fb09488e8605a19d1b9c912e4",
+      "bytes": 576496
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/podwyzszony-kwas-moczowy-po-50.pdf",
+      "sha256": "dbdf707d49c7feeffadccb7f83b54e005ad3bb7fb09488e8605a19d1b9c912e4",
+      "bytes": 576496
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/desktop.png",
+      "screenshot_sha256": "f7a6939b4bd15e052ca7cfbc481fe4ba6184734f81145970ce04f4e3d5ab201e",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/mobile.png",
+      "screenshot_sha256": "5153b4a4ca2054fb02c846ef940e7de6a1a36462da0f9c02010b2337bd2af607",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 14 min czytania Aktualizacja: 24.10.2026 Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć Wynik to wskazówka, nie wyrok. Liczy się to, co z nim zrobisz razem z lekarzem.",
+      "alt": "Mężczyzna i kobieta po pięćdziesiątce siedzą przy kuchennym stole i spokojnie czytają wydruk wyników badania krwi.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.avif",
+          "sha256": "1436fc750915b29ac38b7660b831fd6f20784ef4224f4c8c4b71694758602f0e",
+          "bytes": 75037,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp",
+          "sha256": "4d8c0ab30983fd934a41742304973b640b82f22bb2c1280f36662f39c1f7cb1d",
+          "bytes": 86666,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.jpg",
+          "sha256": "4e3323c563c594b66e2b5449bbcbda2aa3ac5d3f298c697b4636fc8594d61cc6",
+          "bytes": 168760,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "b81164226a703cfd66ca28dc0e49caf2c1333988faebeaeac42c41f76e6c8048"
+    },
+    {
+      "placement": "content:2:jaka-jest-norma-kwasu-moczowego-i-od-jakiego-wyn",
+      "role": "content",
+      "heading": "Jaka jest norma kwasu moczowego i od jakiego wyniku mówi się o hiperurykemii?",
+      "context": "Podwyższony kwas moczowy po 50 to wynik, który często pojawia się w badaniach okresowych, ale sam w sobie nie jest diagnozą. Pokazujemy, od jakiej wartości lekarze mówią o hiperurykemii, dlaczego progi w różnych źródłach się różnią, co naprawdę wiadomo o diecie, sercu i nerkach oraz kiedy potrzebne są leki albo pilna wizyta. Szybka odpowiedź Wytyczne ACR nazywają hiperurykemią kwas moczowy we krwi od 6,8 mg/dl (około 400 µmol/l), ale bez napadów dny zwykle nie leczy się go lekami. Leczenie rozważa się, gdy pojawi się dna moczanowa, a celem jest wtedy wynik poniżej 6 mg/dl (360 µmol/l). Pilnie do lekarza idź, gdy staw nagle puchnie i boli, a do tego masz gorączkę. Kluczowe wnioski Próg hiperurykemii zależy od źródła: ACR przyjmuje 6,8 mg/dl, a zakresy laboratoryjne różnią się dla kobiet i m",
+      "alt": "Infografika ze skalą kwasu moczowego i progami: cel leczenia dny poniżej 6 mg/dl, potwierdzenie dny od 6 mg/dl według NICE i hiperurykemia od 6,8 mg/dl według ACR.",
+      "caption": "Progi kliniczne: ACR mówi o hiperurykemii od 6,8 mg/dl, a cel leczenia dny to wynik poniżej 6 mg/dl (360 µmol/l).",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-infografika-progi-kwasu-moczowego-v1.avif",
+          "sha256": "7c853e83f4ecbc3865214f0694468a16f87df77f035fa22eba8fb488b0ada2f6",
+          "bytes": 17855,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-infografika-progi-kwasu-moczowego-v1.webp",
+          "sha256": "f6ba5d7a366446112d918b4f4e808b403b7becd29f46c56a177f2e6dfcec71ff",
+          "bytes": 32270,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-infografika-progi-kwasu-moczowego-v1.jpg",
+          "sha256": "a07ef9c85f05f1fad9f722f5d34de9d41570ead0aff52a14b34361c066d51fd4",
+          "bytes": 88920,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "53f22bfa754f93d56b8bc77fbd29ef085315c9ebcae9dbd546e0be0a8ff260d8"
+    },
+    {
+      "placement": "content:3:dlaczego-kwas-moczowy-rosnie-po-50",
+      "role": "content",
+      "heading": "Dlaczego kwas moczowy rośnie po 50?",
+      "context": "Podwyższony kwas moczowy po 50 to wynik, który często pojawia się w badaniach okresowych, ale sam w sobie nie jest diagnozą. Pokazujemy, od jakiej wartości lekarze mówią o hiperurykemii, dlaczego progi w różnych źródłach się różnią, co naprawdę wiadomo o diecie, sercu i nerkach oraz kiedy potrzebne są leki albo pilna wizyta. Szybka odpowiedź Wytyczne ACR nazywają hiperurykemią kwas moczowy we krwi od 6,8 mg/dl (około 400 µmol/l), ale bez napadów dny zwykle nie leczy się go lekami. Leczenie rozważa się, gdy pojawi się dna moczanowa, a celem jest wtedy wynik poniżej 6 mg/dl (360 µmol/l). Pilnie do lekarza idź, gdy staw nagle puchnie i boli, a do tego masz gorączkę. Kluczowe wnioski Próg hiperurykemii zależy od źródła: ACR przyjmuje 6,8 mg/dl, a zakresy laboratoryjne różnią się dla kobiet i m",
+      "alt": "Kobieta po pięćdziesiątce idzie szybkim krokiem jesienną aleją w parku, w ręce trzyma butelkę wody bez etykiety.",
+      "caption": "Po menopauzie kwas moczowy u kobiet bywa średnio nieco wyższy, a codzienny ruch i woda to zwykłe, bezpieczne nawyki.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-kobieta-po-menopauzie-spacer-v1.avif",
+          "sha256": "0cc1b1517f0217ce1493d67578e1301869f3e1fa25143d2e533ce2d9a34b6e48",
+          "bytes": 83693,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-kobieta-po-menopauzie-spacer-v1.webp",
+          "sha256": "7ff5d9366a18aec540f7173ffb0c46658ac160268fa215e6c9c6cb0d5048a4f4",
+          "bytes": 106550,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-kobieta-po-menopauzie-spacer-v1.jpg",
+          "sha256": "55618616cedb81b40a720bff941566f758afce25290519f7ac9c859c2d25f516",
+          "bytes": 224494,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "26604f99e57cb429f0b4149f36fdb4d1bbd3dd91c667b1000973444aaad05fdd"
+    },
+    {
+      "placement": "content:4:jakie-objawy-daje-podwyzszony-kwas-moczowy-i-kie",
+      "role": "content",
+      "heading": "Jakie objawy daje podwyższony kwas moczowy i kiedy pilnie do lekarza?",
+      "context": "Podwyższony kwas moczowy po 50 to wynik, który często pojawia się w badaniach okresowych, ale sam w sobie nie jest diagnozą. Pokazujemy, od jakiej wartości lekarze mówią o hiperurykemii, dlaczego progi w różnych źródłach się różnią, co naprawdę wiadomo o diecie, sercu i nerkach oraz kiedy potrzebne są leki albo pilna wizyta. Szybka odpowiedź Wytyczne ACR nazywają hiperurykemią kwas moczowy we krwi od 6,8 mg/dl (około 400 µmol/l), ale bez napadów dny zwykle nie leczy się go lekami. Leczenie rozważa się, gdy pojawi się dna moczanowa, a celem jest wtedy wynik poniżej 6 mg/dl (360 µmol/l). Pilnie do lekarza idź, gdy staw nagle puchnie i boli, a do tego masz gorączkę. Kluczowe wnioski Próg hiperurykemii zależy od źródła: ACR przyjmuje 6,8 mg/dl, a zakresy laboratoryjne różnią się dla kobiet i m",
+      "alt": "Mężczyzna około sześćdziesiątki odpoczywa wieczorem na kanapie, stopa uniesiona na poduszce i owinięta ręcznikiem z chłodnym okładem.",
+      "caption": "Nagły ból i obrzęk stawu z gorączką lub dreszczami to sygnał, by pilnie skontaktować się z lekarzem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-stopa-uniesiona-odpoczynek-v1.avif",
+          "sha256": "e7e3d56df89c8e8899cc30a3170b3c4c314a4466f6198067e9d86eedadd862ce",
+          "bytes": 68557,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-stopa-uniesiona-odpoczynek-v1.webp",
+          "sha256": "7eab1cbb0993c00309ba0900bc86a182ae7945ab06aa611e8e5dd5e79697f544",
+          "bytes": 72332,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-stopa-uniesiona-odpoczynek-v1.jpg",
+          "sha256": "78537dee3bdafc0055c9dd92b8928e4a816ab494641459791e25f108eaae276d",
+          "bytes": 168042,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "9dbe96acba2638f975b9ea14653b9e29a74afcbe2511b2deff443e8b24a8d2c7"
+    },
+    {
+      "placement": "content:5:czy-bezobjawowa-hiperurykemie-trzeba-leczyc-leka",
+      "role": "content",
+      "heading": "Czy bezobjawową hiperurykemię trzeba leczyć lekami?",
+      "context": "Podwyższony kwas moczowy po 50 to wynik, który często pojawia się w badaniach okresowych, ale sam w sobie nie jest diagnozą. Pokazujemy, od jakiej wartości lekarze mówią o hiperurykemii, dlaczego progi w różnych źródłach się różnią, co naprawdę wiadomo o diecie, sercu i nerkach oraz kiedy potrzebne są leki albo pilna wizyta. Szybka odpowiedź Wytyczne ACR nazywają hiperurykemią kwas moczowy we krwi od 6,8 mg/dl (około 400 µmol/l), ale bez napadów dny zwykle nie leczy się go lekami. Leczenie rozważa się, gdy pojawi się dna moczanowa, a celem jest wtedy wynik poniżej 6 mg/dl (360 µmol/l). Pilnie do lekarza idź, gdy staw nagle puchnie i boli, a do tego masz gorączkę. Kluczowe wnioski Próg hiperurykemii zależy od źródła: ACR przyjmuje 6,8 mg/dl, a zakresy laboratoryjne różnią się dla kobiet i m",
+      "alt": "Infografika z dwoma blokami prostych postaci: w grupie leczonej dna u mniej niż 1%, w grupie placebo u 5%, i informacją, że 24 osoby leczone przez 3 lata to 1 napad mniej.",
+      "caption": "W 3-letnich próbach dna pojawiła się u mniej niż 1% leczonych i u 5% osób z placebo, więc 24 osoby trzeba leczyć przez 3 lata, by zapobiec jednemu napadowi.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-infografika-leczenie-bezobjawowej-hiperurykemii-v1.avif",
+          "sha256": "ec979442bdeba450eb802c3fa8f7fe5cb71c8bbee17993daa696acd4e556a02f",
+          "bytes": 15473,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-infografika-leczenie-bezobjawowej-hiperurykemii-v1.webp",
+          "sha256": "233981429e9deffbd39a1485ba7448bf9c78c5dc22a94d66f356be090c0849d8",
+          "bytes": 44836,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-infografika-leczenie-bezobjawowej-hiperurykemii-v1.jpg",
+          "sha256": "7350e33103d3c0a5f01c5fa755f8768cba42f6d943a8d9c99218dec85fece2ef",
+          "bytes": 103751,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4fdcd6d92c75ec5875525a058c229d1fd8cb40e24c9e2d651e314ea6f12609aa"
+    },
+    {
+      "placement": "content:6:kwas-moczowy-nerki-serce-i-cisnienie-zwiazek-czy",
+      "role": "content",
+      "heading": "Kwas moczowy, nerki, serce i ciśnienie: związek czy przyczyna?",
+      "context": "Podwyższony kwas moczowy po 50 to wynik, który często pojawia się w badaniach okresowych, ale sam w sobie nie jest diagnozą. Pokazujemy, od jakiej wartości lekarze mówią o hiperurykemii, dlaczego progi w różnych źródłach się różnią, co naprawdę wiadomo o diecie, sercu i nerkach oraz kiedy potrzebne są leki albo pilna wizyta. Szybka odpowiedź Wytyczne ACR nazywają hiperurykemią kwas moczowy we krwi od 6,8 mg/dl (około 400 µmol/l), ale bez napadów dny zwykle nie leczy się go lekami. Leczenie rozważa się, gdy pojawi się dna moczanowa, a celem jest wtedy wynik poniżej 6 mg/dl (360 µmol/l). Pilnie do lekarza idź, gdy staw nagle puchnie i boli, a do tego masz gorączkę. Kluczowe wnioski Próg hiperurykemii zależy od źródła: ACR przyjmuje 6,8 mg/dl, a zakresy laboratoryjne różnią się dla kobiet i m",
+      "alt": "Lekarka mierzy ciśnienie mężczyźnie po sześćdziesiątce siedzącemu przy biurku w gabinecie lekarza rodzinnego.",
+      "caption": "Kwas moczowy wiąże się z ciśnieniem i chorobami serca, ale próby z lekami u osób bez dny nie wykazały korzyści.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-pomiar-cisnienia-u-lekarza-v1.avif",
+          "sha256": "fcba588361d3989592de1011a9f9c75c2c040f46c353b244fc6f197485dbd087",
+          "bytes": 57923,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-pomiar-cisnienia-u-lekarza-v1.webp",
+          "sha256": "50718fcb70369b6383d9a30832a545a5d55c2d729954179fdeb672a5a7bb2efe",
+          "bytes": 61250,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-pomiar-cisnienia-u-lekarza-v1.jpg",
+          "sha256": "7848cc60832a7ef1d7124cb5b162b85069881aac8d9eef577948b10c479b089d",
+          "bytes": 152920,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3c5e54da32ac38f32ce3dafb66a4903d9a7034cc404990d411d2e6434d2055d0"
+    },
+    {
+      "placement": "content:7:ktore-leki-moga-podnosic-kwas-moczowy",
+      "role": "content",
+      "heading": "Które leki mogą podnosić kwas moczowy?",
+      "context": "Podwyższony kwas moczowy po 50 to wynik, który często pojawia się w badaniach okresowych, ale sam w sobie nie jest diagnozą. Pokazujemy, od jakiej wartości lekarze mówią o hiperurykemii, dlaczego progi w różnych źródłach się różnią, co naprawdę wiadomo o diecie, sercu i nerkach oraz kiedy potrzebne są leki albo pilna wizyta. Szybka odpowiedź Wytyczne ACR nazywają hiperurykemią kwas moczowy we krwi od 6,8 mg/dl (około 400 µmol/l), ale bez napadów dny zwykle nie leczy się go lekami. Leczenie rozważa się, gdy pojawi się dna moczanowa, a celem jest wtedy wynik poniżej 6 mg/dl (360 µmol/l). Pilnie do lekarza idź, gdy staw nagle puchnie i boli, a do tego masz gorączkę. Kluczowe wnioski Próg hiperurykemii zależy od źródła: ACR przyjmuje 6,8 mg/dl, a zakresy laboratoryjne różnią się dla kobiet i m",
+      "alt": "Dłonie kobiety zapisują w notesie listę leków, obok leży tygodniowy organizer na tabletki i okulary.",
+      "caption": "Na wizytę warto zabrać listę wszystkich leków, bo NHS wymienia leki moczopędne wśród czynników ryzyka dny.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-lista-lekow-na-wizyte-v1.avif",
+          "sha256": "c445286d9870e8bc24e0272c55c511e85a8f139e5b7c3bd04aedc780b11701f9",
+          "bytes": 86907,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-lista-lekow-na-wizyte-v1.webp",
+          "sha256": "5c4d2e27b9dc6a21f3b83686a10eb1b440e72450e824cce840fa0f2f28925442",
+          "bytes": 97796,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-lista-lekow-na-wizyte-v1.jpg",
+          "sha256": "45c630cec7e7d40c28c40ec0a41698aafbf5f2625d4aee492ce8d2de0106ad6a",
+          "bytes": 208816,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "33b241222d0523fe0e689143f665b883cb632d1610528888bcaeeb54fa1fa972"
+    },
+    {
+      "placement": "content:8:co-w-diecie-podnosi-kwas-moczowy-piwo-fruktoza-m",
+      "role": "content",
+      "heading": "Co w diecie podnosi kwas moczowy: piwo, fruktoza, mięso czy nabiał?",
+      "context": "Podwyższony kwas moczowy po 50 to wynik, który często pojawia się w badaniach okresowych, ale sam w sobie nie jest diagnozą. Pokazujemy, od jakiej wartości lekarze mówią o hiperurykemii, dlaczego progi w różnych źródłach się różnią, co naprawdę wiadomo o diecie, sercu i nerkach oraz kiedy potrzebne są leki albo pilna wizyta. Szybka odpowiedź Wytyczne ACR nazywają hiperurykemią kwas moczowy we krwi od 6,8 mg/dl (około 400 µmol/l), ale bez napadów dny zwykle nie leczy się go lekami. Leczenie rozważa się, gdy pojawi się dna moczanowa, a celem jest wtedy wynik poniżej 6 mg/dl (360 µmol/l). Pilnie do lekarza idź, gdy staw nagle puchnie i boli, a do tego masz gorączkę. Kluczowe wnioski Próg hiperurykemii zależy od źródła: ACR przyjmuje 6,8 mg/dl, a zakresy laboratoryjne różnią się dla kobiet i m",
+      "alt": "Wykres słupkowy ryzyka dny u mężczyzn: piwo 1,49, mocny alkohol 1,15, wino 1,04 bez istotnego związku i nabiał 0,56.",
+      "caption": "W kohorcie mężczyzn z USA każda dzienna porcja piwa wiązała się z ryzykiem dny 1,49, a nabiał z ryzykiem 0,56.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-infografika-napoje-a-ryzyko-dny-v1.avif",
+          "sha256": "4020a9b3edf7c7bafb7a4811bdb5ee83253d60576ca6d69994559bc1f7681ae8",
+          "bytes": 16974,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-infografika-napoje-a-ryzyko-dny-v1.webp",
+          "sha256": "9da71e1904b65c8af2c8e21c36598b114f6a7ba9fa9e0b5624aaead189e26b12",
+          "bytes": 33608,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-infografika-napoje-a-ryzyko-dny-v1.jpg",
+          "sha256": "1d18d3ad1ae98b3f70cb7120f8c1448d01d833694fb1ec8f28306baa9fe9f626",
+          "bytes": 93391,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "992efa8e53a92f78d82cd33a0c00b08b01216204294a29792679379cd61da9d3"
+    },
+    {
+      "placement": "content:9:jak-leczy-sie-dne-i-dlaczego-celem-jest-wynik-po",
+      "role": "content",
+      "heading": "Jak leczy się dnę i dlaczego celem jest wynik poniżej 6 mg/dl?",
+      "context": "Podwyższony kwas moczowy po 50 to wynik, który często pojawia się w badaniach okresowych, ale sam w sobie nie jest diagnozą. Pokazujemy, od jakiej wartości lekarze mówią o hiperurykemii, dlaczego progi w różnych źródłach się różnią, co naprawdę wiadomo o diecie, sercu i nerkach oraz kiedy potrzebne są leki albo pilna wizyta. Szybka odpowiedź Wytyczne ACR nazywają hiperurykemią kwas moczowy we krwi od 6,8 mg/dl (około 400 µmol/l), ale bez napadów dny zwykle nie leczy się go lekami. Leczenie rozważa się, gdy pojawi się dna moczanowa, a celem jest wtedy wynik poniżej 6 mg/dl (360 µmol/l). Pilnie do lekarza idź, gdy staw nagle puchnie i boli, a do tego masz gorączkę. Kluczowe wnioski Próg hiperurykemii zależy od źródła: ACR przyjmuje 6,8 mg/dl, a zakresy laboratoryjne różnią się dla kobiet i m",
+      "alt": "Lekarz reumatolog spokojnie rozmawia przy biurku z pacjentem po sześćdziesiątce, widocznym zza ramienia.",
+      "caption": "O wyborze leku, dawce i badaniach kontrolnych decyduje lekarz, a leczenia dny nie zmienia się samodzielnie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-rozmowa-z-reumatologiem-v1.avif",
+          "sha256": "d69280cac8f91cdfa4a856612a9782eb626935e80533b439c9603c1a201f0b5c",
+          "bytes": 35379,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-rozmowa-z-reumatologiem-v1.webp",
+          "sha256": "2ef12798ef4b137a5a0d466a2c08674b2bb6abc4e4a74e1327936c151044d975",
+          "bytes": 36824,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/podwyzszony-kwas-moczowy-po-50-rozmowa-z-reumatologiem-v1.jpg",
+          "sha256": "8ee20ebd853a765afda6febb2dbdbeddf466ffdda628ed70d2fb14dc6a89f4d9",
+          "bytes": 116055,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e63714aedb10cf4aa077f7fae73334151bdc283afedaf4926bbdc9e7f45f25c8"
+    }
+  ],
+  "pdf": {
+    "pages": 11,
+    "text_coverage": 1,
+    "rendered_pages": 11,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-01.png",
+        "sha256": "cd2ba6978f4b96a21f0779def418d4c416a3b3652cee6a2ac92bb6e430a982c2",
+        "bytes": 702744,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 59,
+          "width": 1067,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-02.png",
+        "sha256": "d826390c97d8e3b62215fca4a07cf0541a1fe5d37ff31e88ebc960a8ed803b93",
+        "bytes": 376564,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-03.png",
+        "sha256": "f041fac2d04f99686ff50b162aec337edd16e8fce3c1b7599175857ab96199c7",
+        "bytes": 764901,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 57,
+          "width": 1068,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-04.png",
+        "sha256": "436d4497ce75fcaebf8d74c181218ce7e581ac83506b1231a22bc150fae54375",
+        "bytes": 553202,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 57,
+          "width": 1064,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-05.png",
+        "sha256": "02f16df9f7f936365268abb9c1bf9437049de5b4f44057f070e483942eef3019",
+        "bytes": 480961,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 71,
+          "width": 1064,
+          "height": 1579
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-06.png",
+        "sha256": "8e1dc8bd732ae0547cbc3f33b687a1f0dc648d10849a1d608c88b030ee73d41e",
+        "bytes": 748188,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1048,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-07.png",
+        "sha256": "b47cf68f4f53583c0cfd58444479f1ee71e58a48d3f6fe5d1c2c63e8ef3ae542",
+        "bytes": 432500,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-08.png",
+        "sha256": "9acfbdaf36eccbcaac0b9731ae812dc4838bf2b4305d6d97d0472415b0e49490",
+        "bytes": 412871,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 57,
+          "width": 1064,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 9,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-09.png",
+        "sha256": "bb3c11aad753f7a16a06b16caf1641a2c79b37e282c49cdb0175b5a973bef878",
+        "bytes": 381643,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 56,
+          "width": 1060,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 10,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-10.png",
+        "sha256": "f72907ef7d7a2aea31f70c38eee7721f38a3002a98e781bd49c05eb25f8eb22c",
+        "bytes": 328572,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1068,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 11,
+        "file": ".tmp/article-preview/podwyzszony-kwas-moczowy-po-50/pdf-pages/page-11.png",
+        "sha256": "6647d8c7be3a14fe0627bc5f4fbf69ccb60c6f1bc1e2ef6cbe6023502698f9e1",
+        "bytes": 427087,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 49,
+          "y": 51,
+          "width": 1078,
+          "height": 1599
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-10-24T04:10:09.000Z",
+    "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image.",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "f7a6939b4bd15e052ca7cfbc481fe4ba6184734f81145970ce04f4e3d5ab201e",
+        "note": "Obejrzano pełny render desktop 1440 px: układ, nagłówki, tabele, obrazy, FAQ, źródła i stopka są kompletne, bez nakładania i ucięć."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "5153b4a4ca2054fb02c846ef940e7de6a1a36462da0f9c02010b2337bd2af607",
+        "note": "Obejrzano pełny render mobile 390 px w 11 kolejnych segmentach: tekst i karty są czytelne, a szeroka tabela pozostaje w kontrolowanym kontenerze."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "b81164226a703cfd66ca28dc0e49caf2c1333988faebeaeac42c41f76e6c8048",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały obraz w podglądzie strony i PDF: odpowiada sekcji, nie ma mylących napisów ani logo, a anatomia i sprzęt są wiarygodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-24T04:10:09.000Z",
+        "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image."
+      },
+      {
+        "placement": "content:2:jaka-jest-norma-kwasu-moczowego-i-od-jakiego-wyn",
+        "inventory_sha256": "53f22bfa754f93d56b8bc77fbd29ef085315c9ebcae9dbd546e0be0a8ff260d8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Kwas moczowy we krwi: progi | Cel leczenia dny: poniżej 6 mg/dl (360 µmol/l) | NICE: od 6 mg/dl (360 µmol/l) przy objawach dny | ACR: od 6,8 mg/dl (około 400 µmol/l) = hiperurykemia | Zakresy norm różnią się między laboratoriami",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC10563586/",
+            "https://www.nice.org.uk/guidance/ng219/chapter/Recommendations",
+            "https://pubmed.ncbi.nlm.nih.gov/27457514/",
+            "https://medlineplus.gov/ency/article/003476.htm"
+          ]
+        },
+        "note": "Obejrzano całą infografikę w stronie i PDF: progi, jednostki, polskie znaki i cztery komunikaty są czytelne oraz zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-24T04:10:09.000Z",
+        "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image."
+      },
+      {
+        "placement": "content:3:dlaczego-kwas-moczowy-rosnie-po-50",
+        "inventory_sha256": "26604f99e57cb429f0b4149f36fdb4d1bbd3dd91c667b1000973444aaad05fdd",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały obraz w podglądzie strony i PDF: odpowiada sekcji, nie ma mylących napisów ani logo, a anatomia i sprzęt są wiarygodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-24T04:10:09.000Z",
+        "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image."
+      },
+      {
+        "placement": "content:4:jakie-objawy-daje-podwyzszony-kwas-moczowy-i-kie",
+        "inventory_sha256": "9dbe96acba2638f975b9ea14653b9e29a74afcbe2511b2deff443e8b24a8d2c7",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały obraz w podglądzie strony i PDF: odpowiada sekcji, nie ma mylących napisów ani logo, a anatomia i sprzęt są wiarygodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-24T04:10:09.000Z",
+        "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image."
+      },
+      {
+        "placement": "content:5:czy-bezobjawowa-hiperurykemie-trzeba-leczyc-leka",
+        "inventory_sha256": "4fdcd6d92c75ec5875525a058c229d1fd8cb40e24c9e2d651e314ea6f12609aa",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Bezobjawowa hiperurykemia: próby trwające 3 lata | Leki: dna u mniej niż 1% | Placebo: dna u 5% osób | 24 osoby leczone przez 3 lata = 1 napad mniej",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC10563586/"
+          ]
+        },
+        "note": "Obejrzano całą infografikę w stronie i PDF: oba odsetki, okres trzech lat i liczba 24 są czytelne oraz zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-24T04:10:09.000Z",
+        "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image."
+      },
+      {
+        "placement": "content:6:kwas-moczowy-nerki-serce-i-cisnienie-zwiazek-czy",
+        "inventory_sha256": "3c5e54da32ac38f32ce3dafb66a4903d9a7034cc404990d411d2e6434d2055d0",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały obraz w podglądzie strony i PDF: odpowiada sekcji, nie ma mylących napisów ani logo, a anatomia i sprzęt są wiarygodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-24T04:10:09.000Z",
+        "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image."
+      },
+      {
+        "placement": "content:7:ktore-leki-moga-podnosic-kwas-moczowy",
+        "inventory_sha256": "33b241222d0523fe0e689143f665b883cb632d1610528888bcaeeb54fa1fa972",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały obraz w podglądzie strony i PDF: odpowiada sekcji, nie ma mylących napisów ani logo, a anatomia i sprzęt są wiarygodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-24T04:10:09.000Z",
+        "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image."
+      },
+      {
+        "placement": "content:8:co-w-diecie-podnosi-kwas-moczowy-piwo-fruktoza-m",
+        "inventory_sha256": "992efa8e53a92f78d82cd33a0c00b08b01216204294a29792679379cd61da9d3",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Ryzyko dny u mężczyzn (ryzyko względne) | Piwo, 1 porcja dziennie: 1,49 | Mocny alkohol, 1 kieliszek dziennie: 1,15 | Wino, 1 porcja dziennie: 1,04 (bez istotnego związku) | Nabiał, najwyższe vs najniższe spożycie: 0,56 | Kohorta ok. 47 tys. mężczyzn z USA, 12 lat",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://pubmed.ncbi.nlm.nih.gov/15094272/",
+            "https://pubmed.ncbi.nlm.nih.gov/15014182/"
+          ]
+        },
+        "note": "Obejrzano cały wykres w stronie i PDF: cztery wartości ryzyka, opis kohorty i okres obserwacji są czytelne oraz zgodne z artykułem.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-24T04:10:09.000Z",
+        "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image."
+      },
+      {
+        "placement": "content:9:jak-leczy-sie-dne-i-dlaczego-celem-jest-wynik-po",
+        "inventory_sha256": "e63714aedb10cf4aa077f7fae73334151bdc283afedaf4926bbdc9e7f45f25c8",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Obejrzano cały obraz w podglądzie strony i PDF: odpowiada sekcji, nie ma mylących napisów ani logo, a anatomia i sprzęt są wiarygodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-10-24T04:10:09.000Z",
+        "review_method": "Rzeczywiste obejrzenie desktopu, mobile w 11 segmentach, wszystkich 9 obrazów oraz 11 stron PDF przez view_image."
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "cd2ba6978f4b96a21f0779def418d4c416a3b3652cee6a2ac92bb6e430a982c2",
+        "note": "Obejrzano całą stronę PDF 1/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "d826390c97d8e3b62215fca4a07cf0541a1fe5d37ff31e88ebc960a8ed803b93",
+        "note": "Obejrzano całą stronę PDF 2/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "f041fac2d04f99686ff50b162aec337edd16e8fce3c1b7599175857ab96199c7",
+        "note": "Obejrzano całą stronę PDF 3/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "436d4497ce75fcaebf8d74c181218ce7e581ac83506b1231a22bc150fae54375",
+        "note": "Obejrzano całą stronę PDF 4/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "02f16df9f7f936365268abb9c1bf9437049de5b4f44057f070e483942eef3019",
+        "note": "Obejrzano całą stronę PDF 5/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "8e1dc8bd732ae0547cbc3f33b687a1f0dc648d10849a1d608c88b030ee73d41e",
+        "note": "Obejrzano całą stronę PDF 6/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "b47cf68f4f53583c0cfd58444479f1ee71e58a48d3f6fe5d1c2c63e8ef3ae542",
+        "note": "Obejrzano całą stronę PDF 7/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "9acfbdaf36eccbcaac0b9731ae812dc4838bf2b4305d6d97d0472415b0e49490",
+        "note": "Obejrzano całą stronę PDF 8/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 9,
+        "status": "VERIFIED",
+        "artifact_sha256": "bb3c11aad753f7a16a06b16caf1641a2c79b37e282c49cdb0175b5a973bef878",
+        "note": "Obejrzano całą stronę PDF 9/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 10,
+        "status": "VERIFIED",
+        "artifact_sha256": "f72907ef7d7a2aea31f70c38eee7721f38a3002a98e781bd49c05eb25f8eb22c",
+        "note": "Obejrzano całą stronę PDF 10/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      },
+      {
+        "page": 11,
+        "status": "VERIFIED",
+        "artifact_sha256": "6647d8c7be3a14fe0627bc5f4fbf69ccb60c6f1bc1e2ef6cbe6023502698f9e1",
+        "note": "Obejrzano całą stronę PDF 11/11: tekst, obrazy, tabele, nagłówki i marginesy są czytelne; brak ucięć oraz nakładania elementów."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 11921,
+    "review_wait_ms": 172783
+  },
+  "errors": []
+}

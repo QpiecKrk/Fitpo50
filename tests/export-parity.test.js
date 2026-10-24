@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 const test = require('node:test');
 
 const { compareExportTrees, isParityManagedPath } = require('../scripts/lib/export-parity');
@@ -90,4 +91,25 @@ test('eksport wyklucza pliki robocze, środowisko Python i fonty przeznaczone wy
   assert.match(script, /--exclude="\*\.py"/);
   assert.match(script, /--exclude="\*\.pyc"/);
   assert.match(script, /--exclude="admin\/\*\.md"/);
+});
+
+test('eksport nie kopiuje .cache, a parity pomija lokalny cache dowodów', () => {
+  const script = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'export_site.sh'), 'utf8');
+  assert.match(script, /--exclude="\.cache\/"/);
+  assert.equal(isParityManagedPath('.cache/article-evidence-urls.json'), false);
+
+  const source = temp();
+  const exported = temp();
+  write(source, 'index.html', 'publiczna strona');
+  write(source, '.cache/article-evidence-urls.json', '{"runtime":true}');
+  const rsync = spawnSync('rsync', ['-a', '--exclude=.cache/', `${source}/`, `${exported}/`], { encoding: 'utf8' });
+  assert.equal(rsync.status, 0, rsync.stderr || rsync.stdout);
+  assert.equal(fs.existsSync(path.join(exported, 'index.html')), true);
+  assert.equal(fs.existsSync(path.join(exported, '.cache')), false);
+
+  write(exported, '.cache/article-evidence-urls.json', '{"stale":true}');
+  const report = compareExportTrees(source, exported);
+  assert.equal(report.ok, true);
+  assert.equal(report.expected_files, 1);
+  assert.equal(report.actual_files, 1);
 });

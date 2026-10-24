@@ -100,6 +100,7 @@ rsync -a \
   --exclude=".github/" \
   --exclude=".codex/" \
   --exclude=".openai/" \
+  --exclude=".cache/" \
   --exclude=".tmp/" \
   --exclude="/.venv/" \
   --exclude="__pycache__/" \

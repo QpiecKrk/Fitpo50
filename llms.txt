@@ -475,3 +475,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce? | FitPo50"
   section: "Ciekawe"
   summary: "Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach."
+- url: https://fitpo50.pl/podwyzszony-kwas-moczowy-po-50.html
+  title: "Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć | FitPo50"
+  section: "Zdrowie"
+  summary: "Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza."

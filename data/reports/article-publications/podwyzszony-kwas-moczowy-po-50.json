@@ -1,0 +1,592 @@
+{
+  "version": 1,
+  "transaction_id": "article-podwyzszony-kwas-moczowy-po-50-1792814794985-79439",
+  "generated_at": "2026-10-24T04:12:34.737Z",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "podwyzszony-kwas-moczowy-po-50",
+  "url": "https://fitpo50.pl/podwyzszony-kwas-moczowy-po-50.html",
+  "manifest_file": "data/reports/article-publications/podwyzszony-kwas-moczowy-po-50.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "podwyzszony-kwas-moczowy-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ec70135addc176e41a2569d3cea7014196972f09f413a0f39dd3384995fd6c22",
+      "bytes": 65863
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "b7554fa54836035c5fb09f818e07a7a4477221977988b4ed76f9cc97fcc5cf2b",
+      "after_sha256": "2782f5d7cf2a7c2385736a58b916681a0704d20015841a0738eca9cb9c6614ef",
+      "bytes": 120026
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "f927191acf945ff3a40b092254dd8a6c900eb75cf2995a0873af862586a111ea",
+      "after_sha256": "3fbeffe839b3d5c4c701d0ef37bb9d4baee853219e3ef72f415273e9fbd1931d",
+      "bytes": 162597
+    },
+    {
+      "path": "zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "3e053ccc7b86ddc5721136588b66bc8ee2f92e4d214096695005cae408472ac8",
+      "after_sha256": "5b8f39b2d5f88e18e668e232ff5110f206167e70b306c0405db9e9c6df2ec5ba",
+      "bytes": 61978
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "5cac014a5431a05ca35cd33a17e3df649f87384f155ca9639a1ecfe255e67f57",
+      "after_sha256": "a5dc0712a9981163c0962fa202e0442d17f19769dfe56b42deef1e625b1fc8c6",
+      "bytes": 20028
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "125c6a3446c28bc19e0d00dcee9eaf8306fb5307df647391d20f60724352b965",
+      "after_sha256": "ceb80931e78891e010c22390f43d4b141677d34f071242a568b88ffd6df8a18d",
+      "bytes": 39265
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "65bb83b12c877bd795cd43462f4337d5ef6e83df7c28fd979cc423ba6d80c7c1",
+      "after_sha256": "e63a208a24fc51fef64be0f6a91cd00b603dbe8d83b761786e19b301e7a57cc9",
+      "bytes": 873671
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "dc30f27ded170df2427e669572fdf2f22a2299f09e4eff6ddcddc7e6c65b4722",
+      "after_sha256": "75783cd16e8fa78b4d68b6d89966a471a365a1c81f9161358ee766b723f17024",
+      "bytes": 915656
+    },
+    {
+      "path": "assets/pdf/podwyzszony-kwas-moczowy-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dbdf707d49c7feeffadccb7f83b54e005ad3bb7fb09488e8605a19d1b9c912e4",
+      "bytes": 576496
+    },
+    {
+      "path": "data/crosslink-suggestions/podwyzszony-kwas-moczowy-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "275b64771c89ba8a4a1d0452948168dace2f792f8a21c08212bd7ccf2f47a46c",
+      "bytes": 1334
+    },
+    {
+      "path": "data/reports/article-preview/podwyzszony-kwas-moczowy-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b0b3f164021bd7f093afb4db5db8f03a8229f412a3f43dc66d424cb40917d64c",
+      "bytes": 40778
+    },
+    {
+      "path": "data/reports/article-preview/podwyzszony-kwas-moczowy-po-50.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4be225682b9b77e6d66aba82d1c86408d06d3e44f974ec30c6616a02a5f5799f",
+      "bytes": 359
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "0d1e49fcef8adef306451ca607823dc7dbfb63ac392d8fafccd599c6dd7efe5b",
+      "after_sha256": "eccc3fb763d436189201b066c32870afb27757091feba5a7fda770186de07ec3",
+      "bytes": 52407
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "f3871c67fafbd7e0fdfd1c5798456e35c5b5b8731df426a028006168a8174183",
+      "after_sha256": "599d16a1d4fc3c762ef0c94f8e5056a8bdb2337433602255e73cd46d54ab0e2b",
+      "bytes": 5360
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "706387df1785ae8514660ce80c0722c981d18051826915745863e18996d97388",
+      "after_sha256": "faaba656739c5a499edecba7dc4f5d8e3264505314eb3dd15e425af5e567cc41",
+      "bytes": 2604
+    },
+    {
+      "path": "data/reports/link-topology-report.json",
+      "action": "UPDATE",
+      "before_sha256": "9ff9c9b0a00d0ab1b6c28b7754c0befa38e256729d05cbe895924da6c110d8f9",
+      "after_sha256": "90f2269d55b9f65341b3d765ca9da76886cfa79924019251507cc1a66a443440",
+      "bytes": 8912
+    },
+    {
+      "path": "data/reports/link-topology-report.md",
+      "action": "UPDATE",
+      "before_sha256": "7873f65de12329ab30c9d59c347033477382304187023488f1a07f605d8daf81",
+      "after_sha256": "535778693493e38d2247c3e416d356a3ac26de5bee9f4f9395f3c2bff417b2c4",
+      "bytes": 4905
+    },
+    {
+      "path": "_site/podwyzszony-kwas-moczowy-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ec70135addc176e41a2569d3cea7014196972f09f413a0f39dd3384995fd6c22",
+      "bytes": 65863
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "b7554fa54836035c5fb09f818e07a7a4477221977988b4ed76f9cc97fcc5cf2b",
+      "after_sha256": "2782f5d7cf2a7c2385736a58b916681a0704d20015841a0738eca9cb9c6614ef",
+      "bytes": 120026
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "f927191acf945ff3a40b092254dd8a6c900eb75cf2995a0873af862586a111ea",
+      "after_sha256": "3fbeffe839b3d5c4c701d0ef37bb9d4baee853219e3ef72f415273e9fbd1931d",
+      "bytes": 162597
+    },
+    {
+      "path": "_site/zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "3e053ccc7b86ddc5721136588b66bc8ee2f92e4d214096695005cae408472ac8",
+      "after_sha256": "5b8f39b2d5f88e18e668e232ff5110f206167e70b306c0405db9e9c6df2ec5ba",
+      "bytes": 61978
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "5cac014a5431a05ca35cd33a17e3df649f87384f155ca9639a1ecfe255e67f57",
+      "after_sha256": "a5dc0712a9981163c0962fa202e0442d17f19769dfe56b42deef1e625b1fc8c6",
+      "bytes": 20028
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "125c6a3446c28bc19e0d00dcee9eaf8306fb5307df647391d20f60724352b965",
+      "after_sha256": "ceb80931e78891e010c22390f43d4b141677d34f071242a568b88ffd6df8a18d",
+      "bytes": 39265
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "65bb83b12c877bd795cd43462f4337d5ef6e83df7c28fd979cc423ba6d80c7c1",
+      "after_sha256": "e63a208a24fc51fef64be0f6a91cd00b603dbe8d83b761786e19b301e7a57cc9",
+      "bytes": 873671
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "dc30f27ded170df2427e669572fdf2f22a2299f09e4eff6ddcddc7e6c65b4722",
+      "after_sha256": "75783cd16e8fa78b4d68b6d89966a471a365a1c81f9161358ee766b723f17024",
+      "bytes": 915656
+    },
+    {
+      "path": "_site/assets/pdf/podwyzszony-kwas-moczowy-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dbdf707d49c7feeffadccb7f83b54e005ad3bb7fb09488e8605a19d1b9c912e4",
+      "bytes": 576496
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/podwyzszony-kwas-moczowy-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "275b64771c89ba8a4a1d0452948168dace2f792f8a21c08212bd7ccf2f47a46c",
+      "bytes": 1334
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1436fc750915b29ac38b7660b831fd6f20784ef4224f4c8c4b71694758602f0e",
+      "bytes": 75037
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1436fc750915b29ac38b7660b831fd6f20784ef4224f4c8c4b71694758602f0e",
+      "bytes": 75037
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4d8c0ab30983fd934a41742304973b640b82f22bb2c1280f36662f39c1f7cb1d",
+      "bytes": 86666
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4d8c0ab30983fd934a41742304973b640b82f22bb2c1280f36662f39c1f7cb1d",
+      "bytes": 86666
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4e3323c563c594b66e2b5449bbcbda2aa3ac5d3f298c697b4636fc8594d61cc6",
+      "bytes": 168760
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4e3323c563c594b66e2b5449bbcbda2aa3ac5d3f298c697b4636fc8594d61cc6",
+      "bytes": 168760
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-infografika-progi-kwasu-moczowego-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7c853e83f4ecbc3865214f0694468a16f87df77f035fa22eba8fb488b0ada2f6",
+      "bytes": 17855
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-infografika-progi-kwasu-moczowego-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7c853e83f4ecbc3865214f0694468a16f87df77f035fa22eba8fb488b0ada2f6",
+      "bytes": 17855
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-infografika-progi-kwasu-moczowego-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f6ba5d7a366446112d918b4f4e808b403b7becd29f46c56a177f2e6dfcec71ff",
+      "bytes": 32270
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-infografika-progi-kwasu-moczowego-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f6ba5d7a366446112d918b4f4e808b403b7becd29f46c56a177f2e6dfcec71ff",
+      "bytes": 32270
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-infografika-progi-kwasu-moczowego-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a07ef9c85f05f1fad9f722f5d34de9d41570ead0aff52a14b34361c066d51fd4",
+      "bytes": 88920
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-infografika-progi-kwasu-moczowego-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a07ef9c85f05f1fad9f722f5d34de9d41570ead0aff52a14b34361c066d51fd4",
+      "bytes": 88920
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-kobieta-po-menopauzie-spacer-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0cc1b1517f0217ce1493d67578e1301869f3e1fa25143d2e533ce2d9a34b6e48",
+      "bytes": 83693
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-kobieta-po-menopauzie-spacer-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0cc1b1517f0217ce1493d67578e1301869f3e1fa25143d2e533ce2d9a34b6e48",
+      "bytes": 83693
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-kobieta-po-menopauzie-spacer-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7ff5d9366a18aec540f7173ffb0c46658ac160268fa215e6c9c6cb0d5048a4f4",
+      "bytes": 106550
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-kobieta-po-menopauzie-spacer-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7ff5d9366a18aec540f7173ffb0c46658ac160268fa215e6c9c6cb0d5048a4f4",
+      "bytes": 106550
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-kobieta-po-menopauzie-spacer-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "55618616cedb81b40a720bff941566f758afce25290519f7ac9c859c2d25f516",
+      "bytes": 224494
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-kobieta-po-menopauzie-spacer-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "55618616cedb81b40a720bff941566f758afce25290519f7ac9c859c2d25f516",
+      "bytes": 224494
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-stopa-uniesiona-odpoczynek-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e7e3d56df89c8e8899cc30a3170b3c4c314a4466f6198067e9d86eedadd862ce",
+      "bytes": 68557
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-stopa-uniesiona-odpoczynek-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e7e3d56df89c8e8899cc30a3170b3c4c314a4466f6198067e9d86eedadd862ce",
+      "bytes": 68557
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-stopa-uniesiona-odpoczynek-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7eab1cbb0993c00309ba0900bc86a182ae7945ab06aa611e8e5dd5e79697f544",
+      "bytes": 72332
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-stopa-uniesiona-odpoczynek-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7eab1cbb0993c00309ba0900bc86a182ae7945ab06aa611e8e5dd5e79697f544",
+      "bytes": 72332
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-stopa-uniesiona-odpoczynek-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "78537dee3bdafc0055c9dd92b8928e4a816ab494641459791e25f108eaae276d",
+      "bytes": 168042
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-stopa-uniesiona-odpoczynek-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "78537dee3bdafc0055c9dd92b8928e4a816ab494641459791e25f108eaae276d",
+      "bytes": 168042
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-infografika-leczenie-bezobjawowej-hiperurykemii-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ec979442bdeba450eb802c3fa8f7fe5cb71c8bbee17993daa696acd4e556a02f",
+      "bytes": 15473
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-infografika-leczenie-bezobjawowej-hiperurykemii-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ec979442bdeba450eb802c3fa8f7fe5cb71c8bbee17993daa696acd4e556a02f",
+      "bytes": 15473
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-infografika-leczenie-bezobjawowej-hiperurykemii-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "233981429e9deffbd39a1485ba7448bf9c78c5dc22a94d66f356be090c0849d8",
+      "bytes": 44836
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-infografika-leczenie-bezobjawowej-hiperurykemii-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "233981429e9deffbd39a1485ba7448bf9c78c5dc22a94d66f356be090c0849d8",
+      "bytes": 44836
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-infografika-leczenie-bezobjawowej-hiperurykemii-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7350e33103d3c0a5f01c5fa755f8768cba42f6d943a8d9c99218dec85fece2ef",
+      "bytes": 103751
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-infografika-leczenie-bezobjawowej-hiperurykemii-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7350e33103d3c0a5f01c5fa755f8768cba42f6d943a8d9c99218dec85fece2ef",
+      "bytes": 103751
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-pomiar-cisnienia-u-lekarza-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fcba588361d3989592de1011a9f9c75c2c040f46c353b244fc6f197485dbd087",
+      "bytes": 57923
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-pomiar-cisnienia-u-lekarza-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fcba588361d3989592de1011a9f9c75c2c040f46c353b244fc6f197485dbd087",
+      "bytes": 57923
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-pomiar-cisnienia-u-lekarza-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "50718fcb70369b6383d9a30832a545a5d55c2d729954179fdeb672a5a7bb2efe",
+      "bytes": 61250
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-pomiar-cisnienia-u-lekarza-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "50718fcb70369b6383d9a30832a545a5d55c2d729954179fdeb672a5a7bb2efe",
+      "bytes": 61250
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-pomiar-cisnienia-u-lekarza-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7848cc60832a7ef1d7124cb5b162b85069881aac8d9eef577948b10c479b089d",
+      "bytes": 152920
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-pomiar-cisnienia-u-lekarza-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7848cc60832a7ef1d7124cb5b162b85069881aac8d9eef577948b10c479b089d",
+      "bytes": 152920
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-lista-lekow-na-wizyte-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c445286d9870e8bc24e0272c55c511e85a8f139e5b7c3bd04aedc780b11701f9",
+      "bytes": 86907
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-lista-lekow-na-wizyte-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c445286d9870e8bc24e0272c55c511e85a8f139e5b7c3bd04aedc780b11701f9",
+      "bytes": 86907
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-lista-lekow-na-wizyte-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c4d2e27b9dc6a21f3b83686a10eb1b440e72450e824cce840fa0f2f28925442",
+      "bytes": 97796
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-lista-lekow-na-wizyte-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c4d2e27b9dc6a21f3b83686a10eb1b440e72450e824cce840fa0f2f28925442",
+      "bytes": 97796
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-lista-lekow-na-wizyte-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "45c630cec7e7d40c28c40ec0a41698aafbf5f2625d4aee492ce8d2de0106ad6a",
+      "bytes": 208816
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-lista-lekow-na-wizyte-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "45c630cec7e7d40c28c40ec0a41698aafbf5f2625d4aee492ce8d2de0106ad6a",
+      "bytes": 208816
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-infografika-napoje-a-ryzyko-dny-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4020a9b3edf7c7bafb7a4811bdb5ee83253d60576ca6d69994559bc1f7681ae8",
+      "bytes": 16974
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-infografika-napoje-a-ryzyko-dny-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4020a9b3edf7c7bafb7a4811bdb5ee83253d60576ca6d69994559bc1f7681ae8",
+      "bytes": 16974
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-infografika-napoje-a-ryzyko-dny-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9da71e1904b65c8af2c8e21c36598b114f6a7ba9fa9e0b5624aaead189e26b12",
+      "bytes": 33608
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-infografika-napoje-a-ryzyko-dny-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9da71e1904b65c8af2c8e21c36598b114f6a7ba9fa9e0b5624aaead189e26b12",
+      "bytes": 33608
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-infografika-napoje-a-ryzyko-dny-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1d18d3ad1ae98b3f70cb7120f8c1448d01d833694fb1ec8f28306baa9fe9f626",
+      "bytes": 93391
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-infografika-napoje-a-ryzyko-dny-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1d18d3ad1ae98b3f70cb7120f8c1448d01d833694fb1ec8f28306baa9fe9f626",
+      "bytes": 93391
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-rozmowa-z-reumatologiem-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d69280cac8f91cdfa4a856612a9782eb626935e80533b439c9603c1a201f0b5c",
+      "bytes": 35379
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-rozmowa-z-reumatologiem-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d69280cac8f91cdfa4a856612a9782eb626935e80533b439c9603c1a201f0b5c",
+      "bytes": 35379
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-rozmowa-z-reumatologiem-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2ef12798ef4b137a5a0d466a2c08674b2bb6abc4e4a74e1327936c151044d975",
+      "bytes": 36824
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-rozmowa-z-reumatologiem-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2ef12798ef4b137a5a0d466a2c08674b2bb6abc4e4a74e1327936c151044d975",
+      "bytes": 36824
+    },
+    {
+      "path": "assets/podwyzszony-kwas-moczowy-po-50-rozmowa-z-reumatologiem-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8ee20ebd853a765afda6febb2dbdbeddf466ffdda628ed70d2fb14dc6a89f4d9",
+      "bytes": 116055
+    },
+    {
+      "path": "_site/assets/podwyzszony-kwas-moczowy-po-50-rozmowa-z-reumatologiem-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8ee20ebd853a765afda6febb2dbdbeddf466ffdda628ed70d2fb14dc6a89f4d9",
+      "bytes": 116055
+    }
+  ],
+  "files_count": 81
+}

@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-10-22T10:51:35.067Z",
+  "updated_at": "2026-10-24T04:12:34.684Z",
   "items": [
+    {
+      "slug": "podwyzszony-kwas-moczowy-po-50",
+      "target_url": "https://fitpo50.pl/podwyzszony-kwas-moczowy-po-50.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/zdrowie.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-10-24T04:12:34.684Z",
+      "transaction_id": "article-podwyzszony-kwas-moczowy-po-50-1792814794985-79439",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "zmiana-czasu-na-zimowy-po-50",
       "target_url": "https://fitpo50.pl/zmiana-czasu-na-zimowy-po-50.html",

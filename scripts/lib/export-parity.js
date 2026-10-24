@@ -22,6 +22,7 @@ function walk(root, relative = '') {
 
 function isParityManagedPath(relative) {
   const normalized = String(relative || '').split(path.sep).join('/');
+  if (normalized.startsWith('.cache/')) return false;
   if (normalized.startsWith('admin/uploads/')) return false;
   if (/^assets\/news\/news_20/i.test(normalized)) return false;
   return true;

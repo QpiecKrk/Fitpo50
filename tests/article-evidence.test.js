@@ -553,6 +553,15 @@ test('MedlinePlus guidance is recognized as a strong US public-health source', (
   assert.equal(result.ok, true, result.errors.join('\n'));
 });
 
+test('NICE guideline is recognized as a strong institutional medical source', () => {
+  const json = validEvidenceJson();
+  json.sources[0].url = 'https://www.nice.org.uk/guidance/ng219/chapter/Recommendations';
+  json.sources[0].evidence_level = 'guideline';
+  json.evidence_claims[0].source_urls = [json.sources[0].url];
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.doesNotMatch(result.errors.join(' '), /wymaga silnego źródła medycznego/);
+});
+
 test('strict autofix never invents quick answers, FAQ, research or sources', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-no-faq-autofix-'));
   try {

@@ -1705,16 +1705,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.avif" type="image/avif">
-          <source srcset="./assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp" alt="" width="1200" height="654" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.avif" type="image/avif">
+          <source srcset="./assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp" alt="" width="1200" height="654" fetchpriority="high" loading="eager" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce?</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="zmiana-czasu-na-zimowy-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="podwyzszony-kwas-moczowy-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2511,10 +2511,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce?',
-        excerpt: 'Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach.',
-        image: './assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp',
-        url: 'zmiana-czasu-na-zimowy-po-50.html'
+        title: 'Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć',
+        excerpt: 'Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza.',
+        image: './assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp',
+        url: 'podwyzszony-kwas-moczowy-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2544,6 +2544,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Zdrowie',
+          title: 'Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć',
+          excerpt: 'Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza.',
+          image: './assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp',
+          url: 'podwyzszony-kwas-moczowy-po-50.html'
+        },
+        {
           category: 'Ciekawe',
           title: 'Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce?',
           excerpt: 'Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach.',
@@ -2556,13 +2563,6 @@
           excerpt: 'Bolą cię mięśnie na statynie? Sprawdzamy, ile tego bólu robi sam lek, a ile nocebo, kiedy zbadać CK, czy koenzym Q10 pomaga i czym zastąpić statyny.',
           image: './assets/statyny-hero-poranek-lydka.webp',
           url: 'statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html'
-        },
-        {
-          category: 'Ruch',
-          title: 'Boli cię krzyż? Leżenie nie leczy. 8 ćwiczeń na 3 etapy bólu',
-          excerpt: 'Leżenie przy bólu krzyża nie przyspiesza powrotu do formy. Sprawdź objawy alarmowe i 8 ćwiczeń na trzy etapy bólu, opisanych krok po kroku, z badaniami.',
-          image: './assets/bol-krzyza-po-50-hero.webp',
-          url: 'bol-krzyza-po-50-lezenie-czy-cwiczenia.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');
