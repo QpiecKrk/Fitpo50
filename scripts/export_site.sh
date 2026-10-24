@@ -44,10 +44,10 @@ run_ts_build() {
 
 run_ts_build
 
-echo "Synchronizuję sitemap.xml z dateModified artykułów..."
+echo "Sprawdzam sitemap.xml względem dateModified artykułów (eksport niczego nie synchronizuje)..."
 (
   cd "$ROOT_DIR"
-  "$NODE_BIN" scripts/sync-sitemap-lastmod.js
+  "$NODE_BIN" scripts/sync-sitemap-lastmod.js --check
 )
 
 run_minification() {

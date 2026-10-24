@@ -130,6 +130,7 @@ function main() {
       }
       if (changes.length > 20) console.error(`- ... oraz ${changes.length - 20} kolejnych zmian`);
       if (!mirrorOk) console.error('- _site/sitemap.xml rozni sie od sitemap.xml');
+      console.error('Uruchom jawnie npm run sitemap:lastmod:sync w etapie publikacyjnym, następnie odśwież eksport i ponów kontrolę.');
       process.exit(1);
     }
     console.log('[PASS] sitemap-lastmod: OK');

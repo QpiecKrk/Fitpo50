@@ -123,6 +123,7 @@ async function main() {
       url: article.url,
       dateModified: article.date_modified,
       pdfUrl: `${args.baseUrl}/${article.pdf_path}`,
+      images: (article.images || []).map((image) => ({ url: `${args.baseUrl}/${image.path}`, expectedSha256: image.sha256 })),
       imageUrls: (article.images || []).map((image) => `${args.baseUrl}/${image.path}`),
       listingUrls: (article.listing_paths || []).map((file) => `${args.baseUrl}/${file}`),
       expectedHtmlSha256: article.html_sha256,

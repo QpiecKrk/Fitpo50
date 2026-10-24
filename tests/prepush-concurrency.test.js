@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { TASKS, executionPlan } = require('../scripts/prepush-parallel-checks');
+const { TASKS, executionPlan, normalizeCloseCode } = require('../scripts/prepush-parallel-checks');
 
 test('każde zadanie prepush jawnie deklaruje odczyt albo zapis', () => {
   for (const [name, task] of Object.entries(TASKS)) assert.ok(['read', 'write'].includes(task.access), name);
@@ -20,4 +20,9 @@ test('zadania zapisujące nie trafiają do puli równoległej', () => {
 
 test('zadanie bez deklaracji dostępu blokuje wykonanie', () => {
   assert.throws(() => executionPlan(['unknown'], { unknown: {} }), /nie deklaruje access/);
+});
+
+test('proces zakończony sygnałem nie jest liczony jako PASS', () => {
+  assert.equal(normalizeCloseCode(null, 'SIGKILL'), 30);
+  assert.equal(normalizeCloseCode(0, null), 0);
 });

@@ -14,6 +14,7 @@ const {
 } = require('./lib/article-json-artifact');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { validateScope } = require('./lib/article-scope-guard');
+const { packageIdentity } = require('./lib/package-identity');
 
 const ROOT = process.cwd();
 
@@ -312,6 +313,7 @@ function main() {
     process.exitCode = 2;
     return;
   }
+  const sourcePackageState = packageIdentity(sourceFile, assetsDir, original);
   const slug = safeSlug(original.slug || fallbackSlug);
   if (!slug) throw new Error('Brak poprawnego slug w JSON-ie i nazwie pliku.');
   const outputDir = args['output-dir'] ? outputBaseDir : path.join(outputBaseDir, slug);
@@ -374,6 +376,8 @@ function main() {
       status_history: statusHistory,
       source_file: sourceFile,
       source_sha256: sha256File(sourceFile),
+      source_package_sha256: sourcePackageState.hash,
+      source_package_files: sourcePackageState.entries,
       output_file: outputFile,
       output_sha256: sha256File(outputFile),
       package_sha256: packageState?.fingerprint || '',

@@ -142,10 +142,15 @@ function runTask(task) {
       resolve({ task, code: 1, error: err.message || String(err) });
     });
 
-    child.on('close', (code) => {
-      resolve({ task, code: Number(code || 0) });
+    child.on('close', (code, signal) => {
+      const normalizedCode = normalizeCloseCode(code, signal);
+      resolve({ task, code: normalizedCode, ...(signal ? { signal } : {}) });
     });
   });
+}
+
+function normalizeCloseCode(code, signal) {
+  return signal || code === null || code === undefined ? 30 : Number(code);
 }
 
 async function main() {
@@ -168,7 +173,7 @@ async function main() {
     console.error(`\n[FAIL] prepush-parallel-checks in ${seconds}s`);
     for (const f of failed) {
       if (f.error) console.error(`- ${f.task}: ${f.error}`);
-      else console.error(`- ${f.task}: exit ${f.code}`);
+      else console.error(`- ${f.task}: ${f.signal ? `sygnał ${f.signal}` : `exit ${f.code}`}`);
     }
     process.exit(1);
   }
@@ -183,4 +188,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { TASKS, changedFiles, executionPlan, parseArgs, resolveRunnableTasks, shouldRunTask };
+module.exports = { TASKS, changedFiles, executionPlan, normalizeCloseCode, parseArgs, resolveRunnableTasks, runTask, shouldRunTask };

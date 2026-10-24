@@ -18,6 +18,7 @@ const {
 const { validatePreviewReport } = require('./lib/article-preview-report');
 const { disposeTempWorkspace, readWorkspaceManifest } = require('./lib/temp-workspace');
 const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure, resetSameDraft } = require('./lib/article-repair-attempts');
+const { packageIdentity } = require('./lib/package-identity');
 
 const ROOT = process.cwd();
 
@@ -86,6 +87,9 @@ function packageHashesMatch(source, sourceAssetsDir, preparedFile) {
   const inspected = inspectPreparedArtifact(preparedFile, ROOT);
   if (!inspected.ok || path.resolve(inspected.report.source_file || '') !== path.resolve(source)) return false;
   if (inspected.report.source_sha256 !== sha256File(source)) return false;
+  const sourceArticle = readJson(source);
+  const currentSourcePackage = packageIdentity(source, sourceAssetsDir, sourceArticle);
+  if (!inspected.report.source_package_sha256 || inspected.report.source_package_sha256 !== currentSourcePackage.hash) return false;
   const entries = Array.isArray(inspected.json?.media_manifest?.entries) ? inspected.json.media_manifest.entries : [];
   if (!entries.length) return false;
   for (const entry of entries) {

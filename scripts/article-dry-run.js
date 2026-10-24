@@ -86,7 +86,7 @@ function parseGateJson(result) {
   try { return JSON.parse(String(result.stdout || '').trim()); } catch (_error) { return null; }
 }
 
-function validateInput(file, assetsDir) {
+function validateInput(file, assetsDir, dependencies = {}) {
   const diagnostics = [];
   let article;
   try { article = JSON.parse(fs.readFileSync(file, 'utf8')); }
@@ -96,12 +96,21 @@ function validateInput(file, assetsDir) {
   intake.issues.WRITER_FIX_REQUIRED.forEach((message) => diagnostics.push(diagnostic('REQUIRES_WRITER', 'WRITER', 'RULE_PACKAGE_WRITER', message)));
   intake.issues.ILLUSTRATOR_FIX_REQUIRED.forEach((message) => diagnostics.push(diagnostic('REQUIRES_WRITER', 'ILLUSTRATOR', 'RULE_PACKAGE_MEDIA', message)));
 
-  const writer = spawnSync('python3', ['docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py', '--allow-verified-review', file], { cwd: ROOT, encoding: 'utf8' });
+  const spawn = dependencies.spawnSync || spawnSync;
+  const writer = spawn('python3', ['docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py', '--allow-verified-review', file], { cwd: ROOT, encoding: 'utf8' });
+  if (writer.error || writer.signal || writer.status === null || writer.status === undefined) {
+    diagnostics.push(diagnostic('FIXABLE_LOCAL', 'ENVIRONMENT', 'RULE_ENVIRONMENT', `Walidator Pythona nie uruchomił się${writer.signal ? ` (sygnał ${writer.signal})` : ''}: ${writer.error?.message || 'brak kodu wyjścia'}.`));
+    return uniqueDiagnostics(diagnostics);
+  }
   String(`${writer.stdout || ''}\n${writer.stderr || ''}`).split('\n').filter((line) => line.startsWith('[FAIL] ') && !/errors=\d+/.test(line)).forEach((line) => {
     diagnostics.push(diagnostic('REQUIRES_WRITER', 'WRITER', 'RULE_DRAFT_CONTRACT', line.slice(7)));
   });
 
-  const gate = spawnSync('node', ['scripts/json-fitpo50-gate-diff.js', '--file', file, '--phase', 'draft', '--json'], { cwd: ROOT, encoding: 'utf8' });
+  if (writer.status !== 0 && !String(`${writer.stdout || ''}\n${writer.stderr || ''}`).includes('[FAIL] ')) {
+    diagnostics.push(diagnostic('FIXABLE_LOCAL', 'ENVIRONMENT', 'RULE_ENVIRONMENT', `Walidator Pythona zakończył się kodem ${writer.status} bez diagnostyki treści.`));
+    return uniqueDiagnostics(diagnostics);
+  }
+  const gate = spawn('node', ['scripts/json-fitpo50-gate-diff.js', '--file', file, '--phase', 'draft', '--json'], { cwd: ROOT, encoding: 'utf8' });
   const gateReport = parseGateJson(gate);
   if (gateReport?.diagnostics) diagnostics.push(...gateReport.diagnostics.map(normalizeGateDiagnostic));
   else if (gate.status !== 0) diagnostics.push(diagnostic('FIXABLE_LOCAL', 'PIPELINE', 'RULE_GATE_EXECUTION', String(gate.stderr || gate.stdout || 'json gate failed')));
@@ -114,9 +123,12 @@ function runDryRun(args, dependencies = {}) {
   const assetsDir = path.resolve(args['assets-dir'] || path.dirname(file));
   const inputHash = fs.existsSync(file) ? sha256File(file) : '';
   if (!fs.existsSync(file)) return { version: 1, status: 'BLOCKED', input_sha256: inputHash, diagnostics: [diagnostic('REQUIRES_WRITER', 'WRITER', 'RULE_FILE_MISSING', `Brak pliku: ${file}`)], summary: { errors: 1, warnings: 0 } };
-  const diagnostics = dependencies.validateInput ? dependencies.validateInput(file, assetsDir) : validateInput(file, assetsDir);
+  const diagnostics = dependencies.validateInput ? dependencies.validateInput(file, assetsDir) : validateInput(file, assetsDir, dependencies);
   const blocking = diagnostics.filter((item) => item.severity === 'ERROR');
-  if (blocking.length) return { version: 1, status: 'BLOCKED', input_sha256: inputHash, diagnostics, summary: { errors: blocking.length, warnings: diagnostics.length - blocking.length } };
+  if (blocking.length) {
+    const environment = blocking.some((item) => item.owner === 'ENVIRONMENT' || item.rule === 'RULE_ENVIRONMENT');
+    return { version: 1, status: environment ? 'ENVIRONMENT_FAILURE' : 'BLOCKED', input_sha256: inputHash, diagnostics, summary: { errors: blocking.length, warnings: diagnostics.length - blocking.length } };
+  }
 
   const spawn = dependencies.spawnSync || spawnSync;
   const workspace = (dependencies.createWorkspace || createManagedTempDir)({ prefix: 'fitpo50-article-dry-run-', type: 'article-dry-run', projectRoot: ROOT });

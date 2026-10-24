@@ -4,7 +4,6 @@ const { spawnSync, spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const {
-  cleanupPreparedArtifact,
   computePreparedPackageFingerprint,
   inspectPreparedArtifact,
   reportPathForJson,
@@ -425,12 +424,17 @@ async function main() {
         error.message = `Publikacja cofnięta po błędzie walidacji: ${error.message || error}`;
         throw error;
       }
-      const artifactCleanup = cleanupPreparedArtifact(input);
-      artifactCleanup.removed.forEach((file) => console.log(`[CLEANUP] Usunięto opublikowany artefakt JSON: ${file}`));
-      artifactCleanup.removed_directories.forEach((directory) => console.log(`[CLEANUP] Usunięto wykorzystany pakiet roboczy JSON i mediów: ${directory}`));
-      artifactCleanup.retained.forEach((item) => console.warn(`[WARN] Opublikowany pakiet roboczy pozostał na dysku (${item.code}): ${item.path}`));
+      const artifactCleanup = {
+        removed: [],
+        removed_directories: [],
+        retained: [{ path: input, code: 'AWAITING_LIVE_CONFIRMATION' }],
+      };
+      console.log(`[INPUT RETAINED] ${input}: pliki wejściowe wolno posprzątać dopiero po LIVE_DEPLOYED_AND_VALIDATED i jawnym potwierdzeniu Programisty.`);
       console.log(`[PUBLISHED] ${operation}: zatwierdzono atomowo ${transaction.changed.length} plików po PREVIEW_READY i walidacji repo.`);
-      writePipelineStatus(root, slug, 'SUCCESS', { next_action: 'AWAIT_SEPARATE_COMMIT_AND_PUSH_COMMAND' });
+      writePipelineStatus(root, slug, 'SUCCESS', {
+        next_action: 'AWAIT_SEPARATE_COMMIT_AND_PUSH_COMMAND',
+        input_cleanup: { status: 'AWAITING_LIVE_CONFIRMATION', path: input },
+      });
       appendTimingReport('article-pipeline-transactional', stepTimings);
       stageStatus = 'COMPLETED';
       return { workingCopy: '', artifactCleanup };

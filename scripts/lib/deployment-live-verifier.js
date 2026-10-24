@@ -77,9 +77,14 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
     const pdf = responses.get(article.pdfUrl);
     if (!pdf || pdf.status !== 200 || !Buffer.from(pdf.body || '').subarray(0, 5).equals(Buffer.from('%PDF-'))) errors.push(`${article.pdfUrl}: brak prawidłowego PDF.`);
     else if (article.expectedPdfSha256 && sha256(pdf.body) !== article.expectedPdfSha256) errors.push(`${article.pdfUrl}: PDF różni się od _site.`);
-    for (const imageUrl of article.imageUrls || []) {
+    const images = Array.isArray(article.images) && article.images.length
+      ? article.images
+      : (article.imageUrls || []).map((url) => ({ url, expectedSha256: '' }));
+    for (const expectedImage of images) {
+      const imageUrl = expectedImage.url;
       const image = responses.get(imageUrl);
       if (!image || image.status !== 200 || Buffer.from(image.body || '').length === 0) errors.push(`${imageUrl}: brak wymaganego obrazu.`);
+      else if (expectedImage.expectedSha256 && sha256(image.body) !== expectedImage.expectedSha256) errors.push(`${imageUrl}: obraz różni się od markera wdrożenia.`);
     }
     for (const listingUrl of article.listingUrls || []) {
       const listing = responses.get(listingUrl);

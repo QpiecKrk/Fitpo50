@@ -113,3 +113,11 @@ test('eksport nie kopiuje .cache, a parity pomija lokalny cache dowodów', () =>
   assert.equal(report.expected_files, 1);
   assert.equal(report.actual_files, 1);
 });
+
+test('eksport tylko sprawdza sitemap lastmod i podaje jawną komendę synchronizacji', () => {
+  const exportScript = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'export_site.sh'), 'utf8');
+  const syncScript = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'sync-sitemap-lastmod.js'), 'utf8');
+  assert.match(exportScript, /sync-sitemap-lastmod\.js --check/);
+  assert.doesNotMatch(exportScript, /sync-sitemap-lastmod\.js\s*\n/);
+  assert.match(syncScript, /npm run sitemap:lastmod:sync/);
+});

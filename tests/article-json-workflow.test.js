@@ -15,6 +15,7 @@ const {
 } = require('../scripts/lib/article-json-artifact');
 const { allocateOutput, buildStageDefinitions, collectChanges, copyMediaPackage, runStagesUntilFailure } = require('../scripts/article-json-workbench');
 const { executeArticleAdd, expectedPreparedPath, packageHashesMatch, preparedPathFromOutput, reviewArtifacts } = require('../scripts/article-add');
+const { packageIdentity } = require('../scripts/lib/package-identity');
 const {
   EXIT_CODES,
   classifyPipelineFailure,
@@ -315,8 +316,12 @@ test('one-command controller reuses only a hash-identical CONTENT_READY package'
   fs.writeFileSync(source, `${JSON.stringify(json)}\n`);
   fs.writeFileSync(prepared, `${JSON.stringify(json)}\n`);
   const packageState = computePreparedPackageFingerprint(prepared, json);
-  fs.writeFileSync(reportPathForJson(prepared), `${JSON.stringify({ status: STATUSES.CONTENT_READY, source_file: source, source_sha256: sha256File(source), output_file: prepared, output_sha256: sha256File(prepared), package_sha256: packageState.fingerprint, package_files: packageState.entries })}\n`);
+  const sourcePackage = packageIdentity(source, sourceDir, json);
+  fs.writeFileSync(reportPathForJson(prepared), `${JSON.stringify({ status: STATUSES.CONTENT_READY, source_file: source, source_sha256: sha256File(source), source_package_sha256: sourcePackage.hash, source_package_files: sourcePackage.entries, output_file: prepared, output_sha256: sha256File(prepared), package_sha256: packageState.fingerprint, package_files: packageState.entries })}\n`);
   assert.equal(packageHashesMatch(source, sourceDir, prepared), true);
+  fs.writeFileSync(path.join(sourceDir, 'hero.webp'), 'new-variant');
+  assert.equal(packageHashesMatch(source, sourceDir, prepared), false);
+  fs.rmSync(path.join(sourceDir, 'hero.webp'));
   fs.writeFileSync(image, 'image-v2');
   assert.equal(packageHashesMatch(source, sourceDir, prepared), false);
 }));
