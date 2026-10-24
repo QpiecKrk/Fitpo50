@@ -17,6 +17,7 @@ const DEPLOYMENT_MANIFEST = path.join(ROOT, 'data', 'reports', 'popraw-seo-deplo
 const RESULT_FILE = path.join(ROOT, 'data', 'reports', 'popraw-seo-apply-result.json');
 const CONFIRMATION = 'APPLY_APPROVED_SEO';
 const { pageKind } = require('./lib/publication-page-kind');
+const { appendDeploymentRegistry } = require('./lib/popraw-seo-deployment-registry');
 const { createStagingWorkspace, snapshotCandidates, beginPromotionTransaction, sha256File, recoverInterruptedTransactions } = require('./lib/article-staging');
 const { disposeTempWorkspace, markTempWorkspace, reactivateTempWorkspace, readWorkspaceManifest } = require('./lib/temp-workspace');
 
@@ -218,7 +219,11 @@ function main() {
         entry.expected_pdf_sha256 = sha256File(path.join(ROOT, 'assets', 'pdf', entry.file.replace(/\.html$/, '.pdf')));
       }
     }
-    atomicWrite(DEPLOYMENT_MANIFEST, `${JSON.stringify(deployment, null, 2)}\n`);
+    const previousRegistry = fs.existsSync(DEPLOYMENT_MANIFEST)
+      ? JSON.parse(fs.readFileSync(DEPLOYMENT_MANIFEST, 'utf8'))
+      : null;
+    const deploymentRegistry = appendDeploymentRegistry(previousRegistry, deployment);
+    atomicWrite(DEPLOYMENT_MANIFEST, `${JSON.stringify(deploymentRegistry, null, 2)}\n`);
     atomicWrite(RESULT_FILE, `${JSON.stringify({
       version: 1,
       status: 'APPLIED_VALIDATED_AWAITING_GIT_PUSH',

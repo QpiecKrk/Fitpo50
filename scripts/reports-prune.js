@@ -6,13 +6,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { assertPathInside, assertProjectRoot } = require('./lib/destructive-path-guard');
-const { defaultGscWorkDir } = require('./lib/gsc-work-dir');
 
 const ROOT = path.resolve(__dirname, '..');
 const DEFAULT_DAYS = 30;
 const SAFE_DATA_REPORT_RX = /^(gsc-|seo-|aeo-|quick-answer-|content-freshness-|cwv-|link-topology-|assets-audit|pipeline-timings|fitpo50-doctor|agent-context|session-start-report|article-guard-blockers|seo-crawl-report).+\.(json|md|txt)$/i;
 const SAFE_GROWTH_REPORT_RX = /^(growth-report|ai-visibility-audit|gsc-refresh|evidence-plan|hubs-report|link-assets|ai-visibility-test|entity-graph|structured-data-score|quick-answer-score|gsc-generative-ai|snippet-controls-audit|post-deploy-kpi-plan|originality-score|topical-authority-map|llms-check|perplexity-monitor|autopilot-plan|popraw-seo|apply-plan|verify)\.(json|md)$|^popraw-seo-decyzje\.md$/i;
-const SAFE_GSC_RX = /^(gsc-|seo-|aeo-|previous-|queries\.csv|pages\.csv|query-pages\.csv|seo-aio-|gsc-submit-queue).+|^(queries|pages|query-pages)\.csv$/i;
 
 function parseArgs(argv) {
   const out = { apply: false, days: DEFAULT_DAYS };
@@ -42,6 +40,12 @@ function trackedSet(root, runner = spawnSync) {
   return new Set(String(result.stdout || '').split('\n').map((item) => item.replace(/\\/g, '/')).filter(Boolean));
 }
 
+function isProtectedGscCurrent(root, absolute) {
+  const protectedRoot = path.join(root, 'data', 'reports', 'local', 'gsc-current');
+  const relative = path.relative(protectedRoot, absolute);
+  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
+}
+
 function collect(directory, safeRx, cutoffMs, tracked, root) {
   if (!fs.existsSync(directory)) return [];
   const safeDirectory = assertPathInside(directory, directory, { allowEqual: true, mustExist: true, type: 'directory' });
@@ -54,6 +58,7 @@ function collect(directory, safeRx, cutoffMs, tracked, root) {
       return { absolute, relative, directory: safeDirectory, safeRx, name: entry.name, ageDays: Math.floor((Date.now() - stat.mtimeMs) / 86400000), size: stat.size, mtimeMs: stat.mtimeMs };
     })
     .filter((item) => item.mtimeMs < cutoffMs)
+    .filter((item) => !isProtectedGscCurrent(root, item.absolute))
     .filter((item) => safeRx.test(item.name))
     .filter((item) => !tracked.has(item.relative));
 }
@@ -62,7 +67,6 @@ function defaultRoots(root) {
   return [
     { directory: path.join(root, 'data', 'reports'), safeRx: SAFE_DATA_REPORT_RX },
     { directory: path.join(root, 'data', 'reports', 'growth'), safeRx: SAFE_GROWTH_REPORT_RX },
-    { directory: defaultGscWorkDir(root), safeRx: SAFE_GSC_RX },
   ];
 }
 
@@ -70,6 +74,7 @@ function validateCandidate(item, cutoffMs, tracked, root) {
   const absolute = assertPathInside(item.directory, item.absolute, { mustExist: true, type: 'file' });
   const stat = fs.statSync(absolute);
   const relative = path.relative(root, absolute).replace(/\\/g, '/');
+  if (isProtectedGscCurrent(root, absolute)) throw new Error(`Odmowa usunięcia aktywnych danych GSC: ${relative}`);
   if (stat.mtimeMs >= cutoffMs) throw new Error(`Kandydat nie spełnia już wieku retencji: ${absolute}`);
   if (!item.safeRx.test(path.basename(absolute))) throw new Error(`Kandydat nie spełnia allowlisty nazwy: ${absolute}`);
   if (tracked.has(relative)) throw new Error(`Odmowa usunięcia śledzonego pliku: ${relative}`);
@@ -118,4 +123,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { DEFAULT_DAYS, executePrune, parseArgs, trackedSet, validateCandidate };
+module.exports = { DEFAULT_DAYS, executePrune, isProtectedGscCurrent, parseArgs, trackedSet, validateCandidate };

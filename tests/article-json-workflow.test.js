@@ -26,6 +26,7 @@ const { buildAboutEntities, normalizeEntities } = require('../scripts/import-art
 const { validateScope } = require('../scripts/lib/article-scope-guard');
 const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure, resetSameDraft } = require('../scripts/lib/article-repair-attempts');
 const { assertSeoPatchOverwriteAllowed } = require('../scripts/article-pipeline');
+const { appendDeploymentRegistry, deploymentEntries, seoPatchesForArticle } = require('../scripts/lib/popraw-seo-deployment-registry');
 
 const REPO = path.resolve(__dirname, '..');
 const PASS_PACKAGE_AUDIT = () => ({ exit_code: 0, report_file: '/tmp/package-audit-pass.json', by_owner: { PISARZ: [], ILUSTRATOR: [], CODEX: [] } });
@@ -81,6 +82,17 @@ test('forced UPDATE blocks registered popraw-seo patches with exit 20 unless exp
     root, slug: 'target', operation: 'CREATE', force: true, allowOverwrite: false,
   }), []);
 }));
+
+test('rejestr popraw-seo zachowuje dwie kolejne fale i chroni artykuły z obu', () => {
+  const first = { version: 1, generated_at: '2026-10-20T10:00:00+02:00', status: 'LIVE_DEPLOYED_AND_VALIDATED', targets: [{ id: 'BOOST 1', file: 'pierwszy.html' }] };
+  const second = { version: 1, generated_at: '2026-10-21T10:00:00+02:00', status: 'COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT', targets: [{ id: 'ROKUJE 2', file: 'drugi.html' }] };
+  const registry = appendDeploymentRegistry(appendDeploymentRegistry(null, first), second);
+  assert.equal(registry.version, 2);
+  assert.deepEqual(deploymentEntries(registry).map((item) => item.targets[0].file), ['pierwszy.html', 'drugi.html']);
+  assert.equal(registry.targets[0].file, 'drugi.html', 'bieżąca fala pozostaje na root dla live verify');
+  assert.equal(seoPatchesForArticle(registry, 'pierwszy')[0].id, 'BOOST 1');
+  assert.equal(seoPatchesForArticle(registry, 'drugi')[0].id, 'ROKUJE 2');
+});
 
 test('entity sameAs accepts only the verified exact pair and preserves name-only Thing', () => {
   assert.deepEqual(normalizeEntities(['Diabetes']), [{ '@type': 'Thing', name: 'Diabetes' }]);

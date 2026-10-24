@@ -46,13 +46,13 @@ test('zagnieżdżony proces dziedziczy główny katalog projektu ze stagingu', (
   disposeTempWorkspace(stage);
 });
 
-test('cleanup jest domyślnie dry-run i nie usuwa starego osieroconego workspace', () => {
+test('cleanup jest domyślnie dry-run i nie kwalifikuje starego aktywnego workspace', () => {
   const { tempRoot, projectRoot } = fixture();
   const directory = createManagedTempDir({ prefix: 'fitpo50-import-', type: 'article-import', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso() });
   const result = executeCleanup({ tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
   assert.equal(result.apply, false);
-  assert.equal(result.candidates.length, 1);
-  assert.equal(result.candidates[0].reason, 'ORPHANED');
+  assert.equal(result.candidates.length, 0);
+  assert.equal(result.skipped[0].reason, 'ACTIVE');
   assert.equal(fs.existsSync(directory), true);
 });
 
@@ -61,7 +61,7 @@ test('cleanup nie usuwa świeżego katalogu z martwym PID-em', () => {
   const directory = createManagedTempDir({ prefix: 'fitpo50-preview-test-', type: 'article-preview', projectRoot, tempRoot, pid: 99999999 });
   const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
   assert.equal(result.removed.length, 0);
-  assert.equal(result.skipped[0].reason, 'FRESH');
+  assert.equal(result.skipped[0].reason, 'ACTIVE');
   assert.equal(fs.existsSync(directory), true);
 });
 
@@ -71,7 +71,7 @@ test('cleanup nie usuwa starego katalogu aktywnego procesu ani drugiej sesji', (
   const second = createManagedTempDir({ prefix: 'fitpo50-preview-other-', type: 'article-preview', projectRoot, tempRoot, pid: process.pid, createdAt: oldIso() });
   const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
   assert.equal(result.removed.length, 0);
-  assert.equal(result.skipped.filter((item) => item.reason === 'ACTIVE_PROCESS').length, 2);
+  assert.equal(result.skipped.filter((item) => item.reason === 'ACTIVE').length, 2);
   assert.equal(fs.existsSync(first), true);
   assert.equal(fs.existsSync(second), true);
 });
@@ -90,9 +90,39 @@ test('cleanup nie usuwa dowodów stagingu oczekujących na visual review, a wzno
   disposeTempWorkspace(directory);
 });
 
-test('cleanup usuwa wyłącznie stary zarządzany katalog z martwym PID-em', () => {
+test('cleanup nie usuwa stagingu AWAITING_LIVE_CONFIRMATION', () => {
+  const { tempRoot, projectRoot } = fixture();
+  const directory = createManagedTempDir({ prefix: 'fitpo50-import-live-', type: 'article-publication-staging', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso() });
+  markTempWorkspace(directory, 'AWAITING_LIVE_CONFIRMATION');
+  const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
+  assert.equal(result.removed.length, 0);
+  assert.ok(result.skipped.some((item) => item.reason === 'AWAITING_LIVE_CONFIRMATION'));
+  assert.equal(fs.existsSync(directory), true);
+});
+
+test('cleanup nie usuwa aktywnego stagingu nawet przy martwym PID i starym mtime', () => {
+  const { tempRoot, projectRoot } = fixture();
+  const directory = createManagedTempDir({ prefix: 'fitpo50-preview-active-', type: 'article-publication-staging', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso() });
+  const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
+  assert.equal(result.removed.length, 0);
+  assert.ok(result.skipped.some((item) => item.reason === 'ACTIVE'));
+  assert.equal(fs.existsSync(directory), true);
+});
+
+test('cleanup nie usuwa workspace FAILED bez jawnego oznaczenia COMPLETED', () => {
+  const { tempRoot, projectRoot } = fixture();
+  const directory = createManagedTempDir({ prefix: 'fitpo50-import-failed-', type: 'article-import', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso() });
+  markTempWorkspace(directory, 'FAILED');
+  const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
+  assert.equal(result.removed.length, 0);
+  assert.ok(result.skipped.some((item) => item.reason === 'FAILED'));
+  assert.equal(fs.existsSync(directory), true);
+});
+
+test('cleanup usuwa wyłącznie stary zarządzany katalog jawnie oznaczony COMPLETED', () => {
   const { tempRoot, projectRoot } = fixture();
   const orphan = createManagedTempDir({ prefix: 'fitpo50-prepush-export-', type: 'prepush-export', projectRoot, tempRoot, pid: 99999999, createdAt: oldIso() });
+  markTempWorkspace(orphan, 'COMPLETED');
   const unmanaged = fs.mkdtempSync(path.join(tempRoot, 'fitpo50-import-'));
   const result = executeCleanup({ apply: true, tempRoot, projectRoot, minAgeMs: 12 * 3600000, systemOnly: true });
   assert.deepEqual(result.removed.map((item) => item.directory), [orphan]);

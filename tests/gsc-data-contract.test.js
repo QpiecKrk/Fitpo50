@@ -72,16 +72,57 @@ test('three loose CSV files without a manifest are not accepted', () => {
   assert.ok(result.errors.some((item) => item.includes('manifestu')));
 });
 
-test('diagnostic report can never pass as a GSC dataset', () => {
+test('later REQUEST_FAILED diagnostic does not invalidate the pinned complete CSV dataset', () => {
   const { dir } = makeDataset();
   fs.writeFileSync(path.join(dir, 'gsc-weekly-report-api.json'), JSON.stringify({
     generated_at: new Date().toISOString(),
     report_kind: 'DIAGNOSTIC',
-    status: 'AUTH_FAILED',
+    status: 'REQUEST_FAILED',
+  }));
+  const result = inspectGscInput(dir, { strictPeriods: true });
+  assert.equal(result.blocking, false);
+  assert.equal(result.status, 'WARN');
+  assert.ok(result.warnings.some((item) => item.includes('nie zastępuje zestawu przypiętego')));
+});
+
+test('diagnostic report without a pinned manifest can never pass as a GSC dataset', () => {
+  const { dir } = makeDataset();
+  fs.unlinkSync(path.join(dir, 'gsc-data-manifest.json'));
+  fs.writeFileSync(path.join(dir, 'gsc-weekly-report-api.json'), JSON.stringify({
+    generated_at: new Date().toISOString(),
+    report_kind: 'DIAGNOSTIC',
+    status: 'REQUEST_FAILED',
   }));
   const result = inspectGscInput(dir, { strictPeriods: true });
   assert.equal(result.blocking, true);
   assert.ok(result.errors.some((item) => item.includes('nie jest zweryfikowanym zestawem danych')));
+});
+
+test('missing CSV still blocks a pinned GSC dataset', () => {
+  const { dir } = makeDataset();
+  fs.unlinkSync(path.join(dir, 'pages.csv'));
+  const result = inspectGscInput(dir, { strictPeriods: true });
+  assert.equal(result.blocking, true);
+  assert.ok(result.errors.some((item) => item.includes('pages: brak pliku')));
+});
+
+test('manifest pins a concrete immutable API report and its SHA-256', () => {
+  const { dir } = makeDataset();
+  const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'gsc-data-manifest.json'), 'utf8'));
+  assert.match(manifest.api_report.name, /^gsc-weekly-report-api-[a-f0-9]{16}\.json$/);
+  const snapshot = path.join(dir, manifest.api_report.name);
+  assert.equal(fs.existsSync(snapshot), true);
+  const actual = require('node:crypto').createHash('sha256').update(fs.readFileSync(snapshot)).digest('hex');
+  assert.equal(manifest.api_report.sha256, actual);
+});
+
+test('changed pinned API report hash blocks the GSC dataset', () => {
+  const { dir } = makeDataset();
+  const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'gsc-data-manifest.json'), 'utf8'));
+  fs.appendFileSync(path.join(dir, manifest.api_report.name), '\n');
+  const result = inspectGscInput(dir, { strictPeriods: true });
+  assert.equal(result.blocking, true);
+  assert.ok(result.errors.some((item) => item.includes('Hash raportu API')));
 });
 
 test('fresh files with an old reporting window are rejected', () => {

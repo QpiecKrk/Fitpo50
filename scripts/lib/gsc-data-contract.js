@@ -56,6 +56,16 @@ function sha256File(filePath) {
   return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
 }
 
+function serializedApiReport(report) {
+  return `${JSON.stringify(report, null, 2)}\n`;
+}
+
+function apiReportSnapshot(report) {
+  const content = serializedApiReport(report);
+  const sha256 = crypto.createHash('sha256').update(content).digest('hex');
+  return { content, sha256, name: `gsc-weekly-report-api-${sha256.slice(0, 16)}.json` };
+}
+
 function readJson(filePath) {
   if (!filePath || !fs.existsSync(filePath)) return null;
   try {
@@ -168,7 +178,26 @@ function inspectGscInput(inputDir, options = {}) {
   const apiReportPath = path.join(resolvedDir, API_REPORT_NAME);
   const manifest = readJson(manifestPath);
   const apiReport = readJson(apiReportPath);
-  if (apiReport && (apiReport.status !== STATUS.OK_VERIFIED || apiReport.report_kind !== 'DATASET')) {
+  let verifiedApiReport = null;
+  if (manifest?.api_report) {
+    const pinnedName = String(manifest.api_report.name || '');
+    if (!/^gsc-weekly-report-api-[a-f0-9]{16}\.json$/.test(pinnedName)) {
+      errors.push('Manifest wskazuje nieprawidłową nazwę konkretnego raportu API.');
+    } else {
+      const pinnedPath = path.join(resolvedDir, pinnedName);
+      if (!fs.existsSync(pinnedPath)) errors.push(`Brak raportu API wskazanego przez manifest: ${pinnedName}.`);
+      else if (sha256File(pinnedPath) !== manifest.api_report.sha256) errors.push(`Hash raportu API ${pinnedName} nie zgadza się z manifestem.`);
+      else {
+        verifiedApiReport = readJson(pinnedPath);
+        if (!verifiedApiReport || verifiedApiReport.status !== STATUS.OK_VERIFIED || verifiedApiReport.report_kind !== 'DATASET') {
+          errors.push(`Raport API wskazany przez manifest nie jest zweryfikowanym zestawem danych: ${pinnedName}.`);
+        }
+      }
+    }
+    if (apiReport && (apiReport.status !== STATUS.OK_VERIFIED || apiReport.report_kind !== 'DATASET')) {
+      warnings.push(`Późniejszy raport diagnostyczny status=${apiReport.status || 'UNKNOWN'} nie zastępuje zestawu przypiętego w manifeście.`);
+    }
+  } else if (apiReport && (apiReport.status !== STATUS.OK_VERIFIED || apiReport.report_kind !== 'DATASET')) {
     errors.push(`Raport API nie jest zweryfikowanym zestawem danych: status=${apiReport.status || 'UNKNOWN'}, kind=${apiReport.report_kind || 'UNKNOWN'}.`);
   }
   if (requireManifest && !manifest) errors.push(`Brak obowiązkowego manifestu ${MANIFEST_NAME}.`);
@@ -192,8 +221,8 @@ function inspectGscInput(inputDir, options = {}) {
   if (manifest?.reporting_windows) {
     reportingWindows = manifest.reporting_windows;
     rangeSource = 'manifest';
-  } else if (apiReport?.reporting_windows) {
-    reportingWindows = apiReport.reporting_windows;
+  } else if ((verifiedApiReport || apiReport)?.reporting_windows) {
+    reportingWindows = (verifiedApiReport || apiReport).reporting_windows;
     rangeSource = 'api_report';
   }
   const rangeContract = reportingWindows
@@ -238,8 +267,8 @@ function inspectGscInput(inputDir, options = {}) {
     blocking: errors.length > 0,
     checked_at: now.toISOString(),
     input_dir: resolvedDir,
-    source: manifest?.source || (apiReport?.status === STATUS.OK_VERIFIED ? 'gsc_api' : 'manual_csv'),
-    property: manifest?.property || apiReport?.property || '',
+    source: manifest?.source || ((verifiedApiReport || apiReport)?.status === STATUS.OK_VERIFIED ? 'gsc_api' : 'manual_csv'),
+    property: manifest?.property || (verifiedApiReport || apiReport)?.property || '',
     freshness: {
       status: freshnessReference && ageHours <= maxAgeHours && futureHours <= 1 ? 'PASS' : 'FAIL',
       generated_at: freshnessReference ? freshnessReference.toISOString() : '',
@@ -288,14 +317,21 @@ function buildManifestFromApiReport(report, outputDir) {
   const potentiallyTruncated = Array.isArray(report?.collection_quality?.potentially_truncated_datasets)
     ? report.collection_quality.potentially_truncated_datasets
     : [];
+  const snapshot = apiReportSnapshot(report);
   return {
-    version: 1,
+    version: 2,
     generated_at: report.generated_at,
     source: 'gsc_api',
     property: report.property,
     data_state: 'final',
     canonical_window: 'day_90',
     reporting_windows: report.reporting_windows,
+    api_report: {
+      name: snapshot.name,
+      sha256: snapshot.sha256,
+      status: report.status,
+      report_kind: report.report_kind,
+    },
     files: fileManifest,
     pagination: {
       datasets: report?.collection_quality?.datasets || [],
@@ -311,7 +347,12 @@ function buildManifestFromApiReport(report, outputDir) {
 
 function writeManifestFromApiReport(report, outputDir) {
   const manifest = buildManifestFromApiReport(report, outputDir);
-  const outputPath = path.join(path.resolve(outputDir), MANIFEST_NAME);
+  const resolvedOutputDir = path.resolve(outputDir);
+  fs.mkdirSync(resolvedOutputDir, { recursive: true });
+  const snapshot = apiReportSnapshot(report);
+  const snapshotPath = path.join(resolvedOutputDir, snapshot.name);
+  fs.writeFileSync(snapshotPath, snapshot.content, 'utf8');
+  const outputPath = path.join(resolvedOutputDir, MANIFEST_NAME);
   fs.writeFileSync(outputPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
   return outputPath;
 }
@@ -320,6 +361,7 @@ module.exports = {
   API_REPORT_NAME,
   DEFAULT_MAX_AGE_HOURS,
   MANIFEST_NAME,
+  apiReportSnapshot,
   buildManifestFromApiReport,
   countCsvRows,
   detectCsvType,

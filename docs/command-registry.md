@@ -99,7 +99,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run quick-answer:backlog` — Bezpośrednia komenda robocza lub odczytowa (node scripts/audit-quick-answer-backlog.js).
 - [PUBLIC] `npm run reading-room:verify` — Bezpośrednia komenda robocza lub odczytowa (node scripts/reading-room-link-verifier.js --diff).
 - [PUBLIC] `npm run reports:prune` — Domyślny dry-run raportów starszych niż 30 dni; pokazuje kandydatów bez kasowania.
-- [PUBLIC] `npm run reports:prune:apply` — Jawnie usuwa wyłącznie nieśledzone raporty z allowlisty po ponownej kontroli Git i ścieżek.
+- [PUBLIC] `npm run reports:prune:apply` — Jawnie usuwa wyłącznie nieśledzone raporty z allowlisty po ponownej kontroli Git i ścieżek; nigdy nie obejmuje aktywnego `data/reports/local/gsc-current`.
 - [PUBLIC] `npm run reports:prune:dry` — Jawny alias odczytowego dry-run raportów.
 - [PUBLIC] `npm run schema:validate` — Bezpośrednia komenda robocza lub odczytowa (node scripts/schema-validator.js --diff).
 - [PUBLIC] `npm run seo:aeo:guard` — Bezpośrednia komenda robocza lub odczytowa (node scripts/seo-aeo-guard.js).
@@ -124,7 +124,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run test:runtime-safety` — Testuje destrukcyjne komendy, workspace tymczasowe, cykl Playwright i bezpieczną równoległość.
 - [PUBLIC] `npm run test:system-contract` — Bezpośrednia komenda robocza lub odczytowa (node --test tests/pipeline-capability.test.js tests/export-parity.test.js tests/command-contract.test.js).
 - [PUBLIC] `npm run tmp:cleanup` — Domyślny odczytowy dry-run bez usuwania katalogów.
-- [PUBLIC] `npm run tmp:cleanup:apply` — Jawne usunięcie wyłącznie zweryfikowanych, osieroconych workspace’ów.
+- [PUBLIC] `npm run tmp:cleanup:apply` — Jawne usunięcie wyłącznie starych, zweryfikowanych workspace’ów oznaczonych `COMPLETED`; aktywne i oczekujące stany są chronione.
 - [PUBLIC] `npm run tmp:cleanup:dry` — Bezpośrednia komenda robocza lub odczytowa (node scripts/tmp-cleanup.js --dry-run).
 - [PUBLIC] `npm run typecheck` — Bezpośrednia komenda robocza lub odczytowa (tsc --noEmit --pretty false).
 - [PUBLIC] `npm run visual:regression:gate` — Bezpośrednia komenda robocza lub odczytowa (node scripts/visual-regression-gate.js).

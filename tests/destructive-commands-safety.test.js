@@ -75,6 +75,22 @@ test('reports prune działa fail-closed przy błędzie Git i ponownie chroni pli
   assert.equal(fs.existsSync(file), true);
 });
 
+test('reports prune nigdy nie kwalifikuje aktywnego data/reports/local/gsc-current', () => {
+  const root = fixtureProject();
+  const gscCurrent = path.join(root, 'data', 'reports', 'local', 'gsc-current');
+  const file = path.join(gscCurrent, 'gsc-old.json');
+  oldFile(file);
+  const result = executePrune({
+    root,
+    roots: [{ directory: gscCurrent, safeRx: /^gsc-.+\.json$/i }],
+    args: { apply: true, days: 30 },
+    loadTracked: () => new Set(),
+  });
+  assert.equal(result.candidates.length, 0);
+  assert.equal(result.removed.length, 0);
+  assert.equal(fs.existsSync(file), true);
+});
+
 test('assets trash retention nie usuwa w dry-run i respektuje 14 dni w apply', () => {
   const root = fixtureProject();
   const trash = path.join(root, 'assets', 'trash');

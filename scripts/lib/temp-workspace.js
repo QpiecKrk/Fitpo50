@@ -6,7 +6,7 @@ const path = require('node:path');
 
 const MANIFEST_NAME = '.fitpo50-workspace.json';
 const LOCK_NAME = '.fitpo50-workspace.lock';
-const WORKSPACE_STATUSES = new Set(['ACTIVE', 'AWAITING_REVIEW', 'COMPLETED', 'FAILED']);
+const WORKSPACE_STATUSES = new Set(['ACTIVE', 'AWAITING_REVIEW', 'AWAITING_LIVE_CONFIRMATION', 'COMPLETED', 'FAILED']);
 
 function atomicWriteJson(filePath, payload) {
   const temporary = `${filePath}.writing-${process.pid}-${Date.now()}`;
@@ -140,13 +140,13 @@ function inspectTempWorkspace(directory, options = {}) {
     return { eligible: false, reason: 'FOREIGN_PROJECT', directory, manifest };
   }
   const ageMs = Math.max(0, nowMs - createdMs);
-  if (manifest.status === 'AWAITING_REVIEW') return { eligible: false, reason: 'AWAITING_REVIEW', directory, manifest, ageMs };
+  if (manifest.status !== 'COMPLETED') return { eligible: false, reason: manifest.status, directory, manifest, ageMs };
   if (ageMs < minAgeMs) return { eligible: false, reason: 'FRESH', directory, manifest, ageMs };
   const lock = fs.existsSync(lockPath) ? readJsonIfValid(lockPath) : null;
   if (fs.existsSync(lockPath) && !lock) return { eligible: false, reason: 'INVALID_LOCK', directory, manifest, ageMs };
   const activePid = Boolean((lock && isProcessAlive(lock.pid)) || (manifest.status === 'ACTIVE' && isProcessAlive(manifest.pid)));
   if (activePid) return { eligible: false, reason: 'ACTIVE_PROCESS', directory, manifest, ageMs };
-  return { eligible: true, reason: manifest.status === 'ACTIVE' ? 'ORPHANED' : manifest.status, directory, manifest, ageMs };
+  return { eligible: true, reason: 'COMPLETED', directory, manifest, ageMs };
 }
 
 module.exports = {
