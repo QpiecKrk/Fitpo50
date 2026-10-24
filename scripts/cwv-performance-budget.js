@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const http = require('http');
 const { chromium } = require('playwright');
 const { withChromium } = require('./lib/playwright-lifecycle');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const SITE_DIR = path.join(ROOT, '_site');
@@ -149,15 +151,15 @@ async function main() {
   const warnCount = rows.filter((r) => r.status_lcp === 'warn' || r.status_cls === 'warn' || r.status_tbt === 'warn').length;
 
   fs.mkdirSync(REPORT_DIR, { recursive: true });
-  const payload = { generated_at: new Date().toISOString(), budgets: BUDGETS, summary: { urls: rows.length, fail: failCount, warn: warnCount }, rows };
-  fs.writeFileSync(OUT_JSON, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  const payload = { generated_at: warsawIso(), budgets: BUDGETS, summary: { urls: rows.length, fail: failCount, warn: warnCount }, rows };
+  atomicWriteFileSync(OUT_JSON, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
 
   const lines = ['# CWV Budget Report', '', `- URLs: **${rows.length}**`, `- FAIL: **${failCount}**`, `- WARN: **${warnCount}**`, '', '| URL | LCP | CLS | TBT | Status |', '|---|---:|---:|---:|---|'];
   rows.forEach((r) => {
     const status = [r.status_lcp, r.status_cls, r.status_tbt].includes('fail') ? 'FAIL' : ([r.status_lcp, r.status_cls, r.status_tbt].includes('warn') ? 'WARN' : 'OK');
     lines.push(`| ${r.url} | ${r.lcp_ms}ms | ${r.cls} | ${r.tbt_ms}ms | ${status} |`);
   });
-  fs.writeFileSync(OUT_MD, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(OUT_MD, `${lines.join('\n')}\n`, 'utf8');
 
   if (failCount > 0) {
     console.log(`[FAIL] cwv-budget: fail=${failCount}, warn=${warnCount}`);

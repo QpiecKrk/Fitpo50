@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { prepareArticleArchitecture } = require('./lib/article-intent-links');
 
@@ -32,7 +33,7 @@ function main() {
   if (!fs.existsSync(file)) throw new Error(`Brak pliku: ${file}`);
   const article = JSON.parse(fs.readFileSync(file, 'utf8'));
   const result = prepareArticleArchitecture(article, { root: process.cwd(), mutate: args.write });
-  if (args.write) fs.writeFileSync(file, `${JSON.stringify(article, null, 2)}\n`, 'utf8');
+  if (args.write) atomicWriteFileSync(file, `${JSON.stringify(article, null, 2)}\n`, 'utf8');
 
   console.log(`[ARTICLE-ARCHITECTURE] inventory=${result.inventory_count}`);
   console.log(`[ARTICLE-ARCHITECTURE] intent=${result.strategy.search_intent || result.strategy.intent || 'MISSING'} primary=${result.strategy.primary || 'MISSING'}`);

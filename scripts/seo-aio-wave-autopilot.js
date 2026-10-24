@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const DEFAULT_WORK_DIR = resolveGscWorkDir(ROOT);
@@ -108,12 +110,12 @@ function ensureDir(dir) {
 
 function writeJson(file, data) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(file, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
 }
 
 function writeText(file, data) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${String(data || '').trimEnd()}\n`, 'utf8');
+  atomicWriteFileSync(file, `${String(data || '').trimEnd()}\n`, 'utf8');
 }
 
 function fileFromUrl(url) {
@@ -170,7 +172,7 @@ function buildProposal(report, args) {
   const linkOperations = buildLinkOperations(cards, args.linksPerTarget);
   const plannedGscQueue = unique(cards.flatMap((card) => card.promotion_urls || []));
   return {
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     status: args.apply ? 'APPLY_REQUESTED' : 'AWAITING_USER_APPROVAL',
     approval_gate: {
       default_behavior: 'proposal_only_no_file_changes',

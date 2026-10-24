@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { pageKind } = require('./lib/publication-page-kind');
 
@@ -134,7 +135,7 @@ function generateIndex() {
 function writeJson(filePath, data) {
   const dir = path.dirname(filePath);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(data), 'utf8');
+  atomicWriteFileSync(filePath, JSON.stringify(data), 'utf8');
 }
 
 function main() {

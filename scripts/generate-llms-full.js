@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { pageKind } = require('./lib/publication-page-kind');
 
@@ -191,7 +192,7 @@ function loadItems(limit) {
 
 function writeOutput(filePath, content) {
   ensureDir(filePath);
-  fs.writeFileSync(filePath, content, 'utf8');
+  atomicWriteFileSync(filePath, content, 'utf8');
 }
 
 function main() {

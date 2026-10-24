@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -349,9 +350,9 @@ for (const hub of hubs) {
   if (selectedFiles && !selectedFiles.includes(hub.file)) continue;
   const canonical = path.join(ROOT, 'templates', 'topic-centers', hub.file);
   const html = fs.existsSync(canonical) ? fs.readFileSync(canonical, 'utf8') : renderHub(hub);
-  fs.writeFileSync(path.join(ROOT, hub.file), html, 'utf8');
+  atomicWriteFileSync(path.join(ROOT, hub.file), html, 'utf8');
   fs.mkdirSync(path.join(ROOT, '_site'), { recursive: true });
-  fs.writeFileSync(path.join(ROOT, '_site', hub.file), html, 'utf8');
+  atomicWriteFileSync(path.join(ROOT, '_site', hub.file), html, 'utf8');
   console.log(`updated ${hub.file}`);
 }
 

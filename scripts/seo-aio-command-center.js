@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const crypto = require('crypto');
 const path = require('path');
 const {
@@ -10,6 +11,7 @@ const {
   selectPriorityWave,
 } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const SITE_ORIGIN = 'https://fitpo50.pl';
@@ -104,12 +106,12 @@ function ensureDir(dir) {
 
 function writeJson(file, data) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(file, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
 }
 
 function writeText(file, data) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${String(data || '').trimEnd()}\n`, 'utf8');
+  atomicWriteFileSync(file, `${String(data || '').trimEnd()}\n`, 'utf8');
 }
 
 function normalizeUrl(input, baseUrl) {
@@ -448,7 +450,7 @@ function buildReport(args) {
   ].flatMap((card) => card.promotion_urls)).slice(0, 120);
 
   return {
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     machine: {
       name: 'FitPo50 SEO -> AEO -> GEO -> AIO Command Center',
       purpose: 'Jedna kolejka decyzyjna: dane GSC + portfolio URL-i + szybkie paczki zmian + promocja + pomiar efektu.',

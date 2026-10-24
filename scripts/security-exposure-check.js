@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
+const { warsawIso } = require('./lib/time');
 
 const SENSITIVE_PATHS = Object.freeze([
   '/README.md', '/DEPLOY.md', '/SEO_AIO_PLAYBOOK.md',
@@ -51,10 +53,10 @@ async function main() {
   const exposed = checks.filter((item) => item.result === 'EXPOSED');
   const inconclusive = checks.filter((item) => item.result === 'INCONCLUSIVE');
   const status = exposed.length ? 'SECURITY_EXPOSURE_BLOCKED' : (inconclusive.length ? 'SECURITY_EXPOSURE_INCONCLUSIVE' : 'SECURITY_EXPOSURE_PASS');
-  const report = { version: 1, status, release_id: marker.release_id, checked_at: new Date().toISOString(), checks, exposed: exposed.map((item) => item.pathname) };
+  const report = { version: 1, status, release_id: marker.release_id, checked_at: warsawIso(), checks, exposed: exposed.map((item) => item.pathname) };
   const file = path.join('data', 'reports', 'local', 'security-exposure-status.json');
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(file, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   console.log(`[${status}] release=${marker.release_id}`);
   exposed.forEach((item) => console.error(`[EXPOSED] ${item.url} HTTP ${item.status}`));
   inconclusive.forEach((item) => console.error(`[INCONCLUSIVE] ${item.url} ${item.error || `HTTP ${item.status}`}`));

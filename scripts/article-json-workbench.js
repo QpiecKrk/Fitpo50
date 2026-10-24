@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
@@ -15,6 +16,7 @@ const {
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { validateScope } = require('./lib/article-scope-guard');
 const { packageIdentity } = require('./lib/package-identity');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 
@@ -113,14 +115,14 @@ function runStagesWithScope(definitions, workingFile, runner = runStage) {
         const scope = validateScope(before, after, { stage: scopeStage(definition.label) });
         stage.modified_keys = scope.modified_keys;
         if (!scope.ok) {
-          fs.writeFileSync(workingFile, beforeText, 'utf8');
+          atomicWriteFileSync(workingFile, beforeText, 'utf8');
           stage.status = 'FAIL';
           stage.exit_code = 20;
           stage.stderr = `BLOCKED: Wykryto nieautoryzowaną modyfikację pól spoza zakresu etapu ${scope.stage}: ${scope.unauthorized_keys.join(', ')}`;
           stage.unauthorized_keys = scope.unauthorized_keys;
         }
       } catch (error) {
-        fs.writeFileSync(workingFile, beforeText, 'utf8');
+        atomicWriteFileSync(workingFile, beforeText, 'utf8');
         stage.status = 'FAIL';
         stage.exit_code = 20;
         stage.stderr = `BLOCKED: Nie można zweryfikować zakresu zmian: ${error.message || error}`;
@@ -193,7 +195,7 @@ function preview(value, max = 180) {
 function writeReports(report, outputFile) {
   const jsonPath = reportPathForJson(outputFile);
   const mdPath = markdownReportPathForJson(outputFile);
-  fs.writeFileSync(jsonPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(jsonPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   const lines = [
     '# FitPo50 — raport przygotowania JSON',
     '',
@@ -258,7 +260,7 @@ function writeReports(report, outputFile) {
   lines.push(report.status === STATUSES.CONTENT_READY
     ? `- Wznów kanoniczny proces tym samym wejściem: \`npm run article:add -- --file "${outputFile}"\``
     : '- Nie publikuj. Usuń wskazane blokery i ponownie uruchom prepare-json.');
-  fs.writeFileSync(mdPath, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(mdPath, `${lines.join('\n')}\n`, 'utf8');
   return { jsonPath, mdPath };
 }
 
@@ -283,7 +285,7 @@ function main() {
     const outputDir = args['output-dir'] ? outputBaseDir : path.join(outputBaseDir, fallbackSlug);
     const blockedOutput = allocateOutput(outputDir, fallbackSlug, String(args['keep-revisions'] || 'false') === 'true');
     fs.copyFileSync(sourceFile, blockedOutput);
-    const generatedAt = new Date().toISOString();
+    const generatedAt = warsawIso();
     const blocker = `Niepoprawna składnia JSON: ${err.message || err}`;
     const report = {
       version: 1,
@@ -291,7 +293,7 @@ function main() {
       status: STATUSES.BLOCKED,
       status_history: [
         { status: STATUSES.DRAFT, at: generatedAt, reason: 'JSON przyjęty jako draft; nie utworzono HTML.' },
-        { status: STATUSES.BLOCKED, at: new Date().toISOString(), reason: blocker },
+        { status: STATUSES.BLOCKED, at: warsawIso(), reason: blocker },
       ],
       source_file: sourceFile,
       source_sha256: sha256File(sourceFile),
@@ -319,7 +321,7 @@ function main() {
   const outputDir = args['output-dir'] ? outputBaseDir : path.join(outputBaseDir, slug);
   const outputFile = allocateOutput(outputDir, slug, String(args['keep-revisions'] || 'false') === 'true');
   const htmlPath = path.join(ROOT, `${slug}.html`);
-  const generatedAt = new Date().toISOString();
+  const generatedAt = warsawIso();
   const statusHistory = [{ status: STATUSES.DRAFT, at: generatedAt, reason: 'JSON przyjęty jako draft; nie utworzono HTML.' }];
   const blockers = [];
   const stages = [];
@@ -351,7 +353,7 @@ function main() {
     if (corrected.media_manifest && typeof corrected.media_manifest === 'object') {
       corrected.media_manifest.source_package_directory = corrected.media_manifest.package_directory || path.basename(assetsDir);
       corrected.media_manifest.package_directory = path.basename(path.dirname(outputFile));
-      fs.writeFileSync(workingFile, `${JSON.stringify(corrected, null, 2)}\n`, 'utf8');
+      atomicWriteFileSync(workingFile, `${JSON.stringify(corrected, null, 2)}\n`, 'utf8');
     }
     fs.copyFileSync(workingFile, outputFile);
     const status = blockers.length ? STATUSES.BLOCKED : STATUSES.CONTENT_READY;
@@ -361,7 +363,7 @@ function main() {
     statusHistory.push({
       status,
       failure_kind: status === STATUSES.CONTENT_READY ? '' : failureKind,
-      at: new Date().toISOString(),
+      at: warsawIso(),
       reason: status === STATUSES.CONTENT_READY
         ? 'Wszystkie bramki treści JSON przeszły; nadal nie utworzono HTML.'
         : blockers[0],

@@ -44,8 +44,12 @@ for relative_path in "${RUNTIME_PATHS[@]}"; do
 done
 (
   cd "$BACKUP_DIR/files"
-  : > "$BACKUP_DIR/SHA256SUMS"
-  while IFS= read -r -d '' backup_file; do shasum -a 256 "$backup_file" >> "$BACKUP_DIR/SHA256SUMS"; done < <(find . -type f -print0 | sort -z)
+  SUMS_TMP="$BACKUP_DIR/.SHA256SUMS.tmp.$$"
+  trap 'rm -f "$SUMS_TMP"' EXIT
+  : > "$SUMS_TMP"
+  while IFS= read -r -d '' backup_file; do shasum -a 256 "$backup_file" >> "$SUMS_TMP"; done < <(find . -type f -print0 | sort -z)
+  mv "$SUMS_TMP" "$BACKUP_DIR/SHA256SUMS"
+  trap - EXIT
   [[ ! -s "$BACKUP_DIR/SHA256SUMS" ]] || shasum -a 256 -c "$BACKUP_DIR/SHA256SUMS"
 )
 

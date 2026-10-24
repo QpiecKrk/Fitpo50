@@ -2,12 +2,14 @@
 /* eslint-disable no-console */
 const crypto = require('crypto');
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { pageKind } = require('./lib/publication-page-kind');
 const { prepareCenterPrint } = require('./lib/topic-center-print');
 const { withChromium } = require('./lib/playwright-lifecycle');
 const { isInsideRoot, validatePreviewReport } = require('./lib/article-preview-report');
+const { warsawIso } = require('./lib/time');
 const {
   CONTRACT,
   applyVisualReview,
@@ -372,13 +374,13 @@ async function main() {
     if (!technical.ok) throw new Error(`Raport techniczny nie pozwala zastosować review:\n- ${technical.errors.join('\n- ')}`);
     const review = JSON.parse(fs.readFileSync(reviewPath, 'utf8'));
     const reviewed = applyVisualReview(technical.report, review);
-    fs.writeFileSync(reportPath, `${JSON.stringify(reviewed, null, 2)}\n`, 'utf8');
+    atomicWriteFileSync(reportPath, `${JSON.stringify(reviewed, null, 2)}\n`, 'utf8');
     const finalValidation = validatePreviewReport(root, slug, { requireRenderFiles: true });
     if (!finalValidation.ok) {
-      fs.writeFileSync(reportPath, `${JSON.stringify({ ...reviewed, status: CONTRACT.pending_status }, null, 2)}\n`, 'utf8');
+      atomicWriteFileSync(reportPath, `${JSON.stringify({ ...reviewed, status: CONTRACT.pending_status }, null, 2)}\n`, 'utf8');
       throw new Error(`Visual review nie przeszedł:\n- ${finalValidation.errors.join('\n- ')}`);
     }
-    fs.writeFileSync(markdownPath, `${[
+    atomicWriteFileSync(markdownPath, `${[
       '# FitPo50 — staging HTML, obrazy i PDF', '',
       `- Status: **${CONTRACT.ready_status}**`,
       `- Technical: **${CONTRACT.technical_status}**`,
@@ -443,7 +445,7 @@ async function main() {
 
   const pdfResult = validatePdfStructure(pdf, semantic.text, semantic.expectedImages, path.join(previewDir, 'pdf-pages'), errors);
   const images = imageArtifacts(root, semantic.images, errors);
-  const generatedAt = new Date().toISOString();
+  const generatedAt = warsawIso();
   const desktopScreenshot = path.join(previewDir, 'desktop.png');
   const mobileScreenshot = path.join(previewDir, 'mobile.png');
   const report = {
@@ -488,7 +490,7 @@ async function main() {
     errors,
   };
   fs.mkdirSync(reportDir, { recursive: true });
-  fs.writeFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   if (!errors.length) {
     const validation = validatePreviewReport(root, slug, { requireReady: false, requireRenderFiles: true });
     if (!validation.ok) errors.push(...validation.errors);
@@ -496,10 +498,10 @@ async function main() {
     report.technical_review.status = errors.length ? 'TECHNICAL_BLOCKED' : CONTRACT.technical_status;
     report.technical_review.errors = [...errors];
     report.errors = errors;
-    fs.writeFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+    atomicWriteFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   }
   const templatePath = path.join(previewDir, 'visual-review-template.json');
-  fs.writeFileSync(templatePath, `${JSON.stringify(createReviewTemplate(report, previousReport), null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(templatePath, `${JSON.stringify(createReviewTemplate(report, previousReport), null, 2)}\n`, 'utf8');
   const markdown = [
     '# FitPo50 — staging HTML i PDF', '',
     `- Status: **${report.status}**`,
@@ -514,7 +516,7 @@ async function main() {
     `- PDF source/_site: ${report.pdf_sha256 === report.site_pdf_sha256 ? '1:1' : 'FAIL'}`,
     ...(errors.length ? ['', '## Blokery', ...errors.map((error) => `- ${error}`)] : []),
   ];
-  fs.writeFileSync(path.join(reportDir, `${slug}.md`), `${markdown.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(path.join(reportDir, `${slug}.md`), `${markdown.join('\n')}\n`, 'utf8');
   if (errors.length) {
     errors.forEach((error) => console.error(`[FAIL] ${error}`));
     process.exitCode = 2;

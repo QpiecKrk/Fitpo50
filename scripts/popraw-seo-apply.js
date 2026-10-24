@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const {
@@ -40,7 +41,7 @@ function parseArgs(argv) {
 function atomicWrite(file, content) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const temp = `${file}.tmp-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(temp, content);
+  atomicWriteFileSync(temp, content);
   fs.renameSync(temp, file);
 }
 
@@ -126,14 +127,14 @@ function main() {
       stageRoot = createStagingWorkspace(ROOT, 'seo');
       console.log(`[STAGING] ${stageRoot}`);
       const stageManifest = path.join(stageRoot, 'seo-input-manifest.json');
-      fs.writeFileSync(stageManifest, JSON.stringify(manifest));
+      atomicWriteFileSync(stageManifest, JSON.stringify(manifest));
       const child = spawnSync('node', ['scripts/popraw-seo-apply.js', '--manifest', stageManifest, '--ids', args.ids, '--confirm', CONFIRMATION, '--stage-internal'], { cwd: stageRoot, stdio: 'inherit', env: { ...process.env, FITPO50_SEO_STAGING: '1' } });
       if (child.status !== 0) throw new Error(`Staging nie przeszedł; źródłowy HTML bez zmian. Podgląd: ${stageRoot}`);
       const hashes = Object.fromEntries(candidates
         .filter((file) => !/data\/reports\/article-preview\/[^/]+\.(?:json|md)$/.test(file))
         .filter((file) => fs.existsSync(path.join(stageRoot, file)))
         .map((file) => [file, sha256File(path.join(stageRoot, file))]));
-      fs.writeFileSync(path.join(stageRoot, 'seo-stage.json'), JSON.stringify({ sourceRoot: ROOT, ids: selectedIds, baseline: [...baseline], hashes }));
+      atomicWriteFileSync(path.join(stageRoot, 'seo-stage.json'), JSON.stringify({ sourceRoot: ROOT, ids: selectedIds, baseline: [...baseline], hashes }));
       markTempWorkspace(stageRoot, 'AWAITING_REVIEW');
       console.log(`[AWAITING_VISUAL_REVIEW] ${stageRoot}`);
       return;

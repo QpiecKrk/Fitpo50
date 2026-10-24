@@ -1,4 +1,5 @@
 const { POLICY, utils, validators } = require('./article-policy');
+const { warsawIso } = require('./time');
 
 const FAQ_SOURCE_TYPES = new Set(POLICY.FAQ_SOURCE_TYPES.allowed_for_new_content);
 const CLAIM_TYPES = new Set(['medical', 'safety', 'statistic', 'price', 'mechanism', 'general']);
@@ -109,7 +110,7 @@ function validateSourceContractFields(source, label) {
   for (const field of ['publication_date', 'recheck_after']) {
     const value = source?.[field];
     if (value !== null && value !== undefined && !isIsoDay(value)) errors.push(`${label}.${field} musi mieć format YYYY-MM-DD albo null.`);
-    if (value !== null && value !== undefined && isIsoDay(value) && String(value) > new Date().toISOString().slice(0, 10)) errors.push(`${label}.${field} nie może być datą z przyszłości.`);
+    if (value !== null && value !== undefined && isIsoDay(value) && String(value) > warsawIso().slice(0, 10)) errors.push(`${label}.${field} nie może być datą z przyszłości.`);
   }
   return errors;
 }
@@ -307,7 +308,7 @@ function validateFaqResearch(json, today, warnings = [], options = {}) {
 function validateArticleEvidence(json, options = {}) {
   const errors = [];
   const warnings = [];
-  const today = String(options.today || new Date().toISOString().slice(0, 10));
+  const today = String(options.today || warsawIso().slice(0, 10));
   const fragments = collectArticleFragments(json);
   const fragmentsByLocation = new Map(fragments.map((item) => [item.location, item]));
   const medicalArticle = isMedicalArticle(json);

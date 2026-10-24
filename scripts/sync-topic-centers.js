@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { renderTopicCentersSection, renderTopicCentersStyles } = require('./lib/topic-centers');
 
@@ -47,7 +48,7 @@ function syncFile(relativePath) {
   if (!fs.existsSync(filePath)) return false;
   const raw = fs.readFileSync(filePath, 'utf8');
   const next = ensureSection(ensureStyles(raw));
-  fs.writeFileSync(filePath, next, 'utf8');
+  atomicWriteFileSync(filePath, next, 'utf8');
   return true;
 }
 

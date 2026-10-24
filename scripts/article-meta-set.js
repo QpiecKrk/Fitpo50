@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { validateArticleHeadContract } = require('./lib/article-head-contract');
 
@@ -181,7 +182,7 @@ function updateFile(filePath, titleBase, description) {
   }
 
   if (out !== original) {
-    fs.writeFileSync(filePath, out, 'utf8');
+    atomicWriteFileSync(filePath, out, 'utf8');
     return true;
   }
   return false;

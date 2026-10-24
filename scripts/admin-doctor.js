@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -53,7 +55,7 @@ function collectPhpFiles(dir) {
 
 function main() {
   fs.mkdirSync(REPORT_DIR, { recursive: true });
-  const now = new Date().toISOString();
+  const now = warsawIso();
   const checks = [];
 
   const trackedPrivate = run('git', ['ls-files', 'admin/config.php', '_site/admin/config.php', '_site/admin/init-db.php', '_site/admin/init-hash.php']);
@@ -108,8 +110,8 @@ function main() {
     '',
   ].join('\n');
 
-  fs.writeFileSync(JSON_PATH, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
-  fs.writeFileSync(MD_PATH, md, 'utf8');
+  atomicWriteFileSync(JSON_PATH, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(MD_PATH, md, 'utf8');
   console.log(`[${status}] admin-doctor -> ${path.relative(ROOT, MD_PATH)}`);
   if (red.length) process.exit(1);
 }

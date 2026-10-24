@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { validators, utils } = require('./lib/article-policy');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -103,7 +105,7 @@ function main() {
     .sort((a, b) => a.wave - b.wave || a.url.localeCompare(b.url));
 
   const report = {
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     total_articles: items.length,
     fail_count: backlog.length,
     fixed_count: items.length - backlog.length,
@@ -111,7 +113,7 @@ function main() {
   };
 
   fs.mkdirSync(REPORT_DIR, { recursive: true });
-  fs.writeFileSync(JSON_OUT, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(JSON_OUT, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 
   const lines = [];
   lines.push('# Quick Answer Backlog');
@@ -126,7 +128,7 @@ function main() {
   for (const item of backlog) {
     lines.push(`| ${item.url} | ${item.category} | ${item.quick_answer_words} | ${item.has_banned_phrase ? 'tak' : 'nie'} | ${item.has_generic_template ? 'tak' : 'nie'} | ${item.has_number_or_condition ? 'tak' : 'nie'} | ${item.wave} | ${item.status} |`);
   }
-  fs.writeFileSync(MD_OUT, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(MD_OUT, `${lines.join('\n')}\n`, 'utf8');
 
   console.log(`[PASS] quick-answer-backlog: fail=${report.fail_count}, fixed=${report.fixed_count}`);
   console.log(`- JSON: ${path.relative(ROOT, JSON_OUT)}`);

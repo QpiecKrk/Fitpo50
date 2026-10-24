@@ -3,12 +3,14 @@
 'use strict';
 
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { inspectArticlePackage } = require('./article-package-intake');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 const { inspectImage } = require('./lib/article-media');
 const { packageIdentity } = require('./lib/package-identity');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = path.resolve(__dirname, '..');
 const OWNERS = Object.freeze({ WRITER: 'PISARZ', ILLUSTRATOR: 'ILUSTRATOR', CODEX: 'CODEX' });
@@ -299,7 +301,7 @@ function finishReport(file, assetsDir, article, issues, blocked, args, dependenc
   const proposedChanges = grouped.CODEX.flatMap((item) => item.proposed_change ? [{ path: item.path, code: item.code, ...item.proposed_change }] : []);
   const report = {
     version: 1,
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     package_sha256: identity.hash,
     package_files: identity.entries,
     input_file: file,
@@ -315,7 +317,7 @@ function finishReport(file, assetsDir, article, issues, blocked, args, dependenc
   };
   fs.mkdirSync(reportDir, { recursive: true });
   const reportFile = path.join(reportDir, `${identity.hash}.json`);
-  (dependencies.writeFileSync || fs.writeFileSync)(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  (dependencies.writeFileSync || atomicWriteFileSync)(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   return { ...report, report_file: reportFile };
 }
 

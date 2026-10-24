@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
+const { warsawIso } = require('./lib/time');
 
 function parseArgs(argv) {
   const out = {};
@@ -109,14 +111,14 @@ function main() {
   }
 
   const payload = {
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     pages_total: pages.size,
     min_inbound: minInbound,
     weak_pages: suggestions,
   };
 
   const jsonPath = path.join(reportDir, 'link-topology-report.json');
-  fs.writeFileSync(jsonPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(jsonPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
 
   const lines = [];
   lines.push('# Link Topology Report');
@@ -139,7 +141,7 @@ function main() {
     }
   }
   const mdPath = path.join(reportDir, 'link-topology-report.md');
-  fs.writeFileSync(mdPath, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(mdPath, `${lines.join('\n')}\n`, 'utf8');
 
   console.log(`[LINK-TOPOLOGY] pages=${pages.size} weak=${suggestions.length}`);
   console.log(`[LINK-TOPOLOGY] report: ${path.relative(root, jsonPath)}`);

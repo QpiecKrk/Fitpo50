@@ -3,9 +3,11 @@
 const { spawn, spawnSync } = require('child_process');
 const readline = require('readline');
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const crypto = require('crypto');
 const path = require('path');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
+const { warsawIso } = require('./lib/time');
 
 function prefixOutput(tag, stream, logger) {
   if (!stream) return;
@@ -37,7 +39,7 @@ function appendTimingReport(scope, totalMs, steps) {
     const reportPath = process.env.FITPO50_PIPELINE_TIMINGS_PATH
       ? path.resolve(process.env.FITPO50_PIPELINE_TIMINGS_PATH)
       : path.join(process.cwd(), 'data', 'reports', 'local', 'pipeline-timings.json');
-    const nowIso = new Date().toISOString();
+    const nowIso = warsawIso();
     const payload = fs.existsSync(reportPath)
       ? JSON.parse(fs.readFileSync(reportPath, 'utf8'))
       : { version: 1, updated_at: nowIso, records: [] };
@@ -51,7 +53,7 @@ function appendTimingReport(scope, totalMs, steps) {
     payload.records = records.slice(-120);
     payload.updated_at = nowIso;
     fs.mkdirSync(path.dirname(reportPath), { recursive: true });
-    fs.writeFileSync(reportPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+    atomicWriteFileSync(reportPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   } catch (_err) {
     // best effort only
   }

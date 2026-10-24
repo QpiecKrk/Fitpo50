@@ -3,6 +3,7 @@
 const { spawnSync, spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const {
   computePreparedPackageFingerprint,
   inspectPreparedArtifact,
@@ -36,6 +37,7 @@ const {
   preparePublicationMonitoring,
 } = require('./lib/post-publication-monitor');
 const { validatePreviewReport } = require('./lib/article-preview-report');
+const { warsawIso } = require('./lib/time');
 const {
   readDeploymentRegistry,
   seoPatchesForArticle,
@@ -142,7 +144,7 @@ function runParallel(label, jobs) {
 
 function appendTimingReport(scope, steps) {
   try {
-    const nowIso = new Date().toISOString();
+    const nowIso = warsawIso();
     const totalMs = steps.reduce((acc, s) => acc + Number(s.durationMs || 0), 0);
     const payload = fs.existsSync(TIMINGS_PATH)
       ? JSON.parse(fs.readFileSync(TIMINGS_PATH, 'utf8'))
@@ -157,7 +159,7 @@ function appendTimingReport(scope, steps) {
     payload.records = records.slice(-120);
     payload.updated_at = nowIso;
     fs.mkdirSync(path.dirname(TIMINGS_PATH), { recursive: true });
-    fs.writeFileSync(TIMINGS_PATH, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+    atomicWriteFileSync(TIMINGS_PATH, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   } catch (_err) {
     // best effort
   }
@@ -235,7 +237,7 @@ function ensureImportCopy(sourcePath, slug, preparedReport) {
     fs.copyFileSync(path.join(path.dirname(sourcePath), name), path.join(importDir, name));
   }
   const packageState = computePreparedPackageFingerprint(target, sourceJson);
-  fs.writeFileSync(reportPathForJson(target), `${JSON.stringify({
+  atomicWriteFileSync(reportPathForJson(target), `${JSON.stringify({
     ...preparedReport,
     output_file: target,
     output_sha256: sha256File(target),
@@ -275,9 +277,9 @@ function writeArticleStageRecord({ stageRoot, sourceRoot, slug, input, candidate
     transaction_id: transactionId,
     operation,
     status: 'AWAITING_VISUAL_REVIEW',
-    created_at: new Date().toISOString(),
+    created_at: warsawIso(),
   };
-  fs.writeFileSync(articleStageRecordPath(stageRoot), `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(articleStageRecordPath(stageRoot), `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   return payload;
 }
 
@@ -440,7 +442,7 @@ async function main() {
         transaction_id: transactionId,
         status: 'SUCCESS',
         exit_code: EXIT_CODES.SUCCESS,
-        updated_at: new Date().toISOString(),
+        updated_at: warsawIso(),
         next_action: 'AWAIT_SEPARATE_COMMIT_AND_PUSH_COMMAND',
         input_cleanup: inputCleanup,
       };

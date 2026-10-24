@@ -1,8 +1,10 @@
 'use strict';
 
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./atomic-file');
 const os = require('node:os');
 const path = require('node:path');
+const { warsawIso } = require('./time');
 
 const MANIFEST_NAME = '.fitpo50-workspace.json';
 const LOCK_NAME = '.fitpo50-workspace.lock';
@@ -10,7 +12,7 @@ const WORKSPACE_STATUSES = new Set(['ACTIVE', 'AWAITING_REVIEW', 'AWAITING_LIVE_
 
 function atomicWriteJson(filePath, payload) {
   const temporary = `${filePath}.writing-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   fs.renameSync(temporary, filePath);
 }
 
@@ -41,8 +43,8 @@ function createManagedTempDir(options = {}) {
       version: 1,
       workspace_type: safeLabel(options.type, 'temporary-workspace'),
       pid,
-      created_at: now.toISOString(),
-      updated_at: now.toISOString(),
+      created_at: warsawIso(now),
+      updated_at: warsawIso(now),
       project_root: projectRoot,
       slug: String(options.slug || '').trim(),
       status: 'ACTIVE',
@@ -90,7 +92,7 @@ function markTempWorkspace(directory, status, extra = {}) {
   const manifestPath = path.join(directory, MANIFEST_NAME);
   const manifest = readWorkspaceManifest(directory);
   if (!manifest) throw new Error(`Brak prawidłowego manifestu workspace: ${directory}`);
-  const now = new Date().toISOString();
+  const now = warsawIso();
   const next = { ...manifest, ...extra, status, updated_at: now };
   if (status === 'COMPLETED' || status === 'FAILED') next.completed_at = next.completed_at || now;
   else delete next.completed_at;
@@ -102,7 +104,7 @@ function markTempWorkspace(directory, status, extra = {}) {
 function reactivateTempWorkspace(directory) {
   const manifest = readWorkspaceManifest(directory);
   if (!manifest || manifest.status !== 'AWAITING_REVIEW') throw new Error(`Workspace nie oczekuje na review: ${directory}`);
-  const now = new Date().toISOString();
+  const now = warsawIso();
   const next = { ...manifest, status: 'ACTIVE', pid: process.pid, updated_at: now };
   atomicWriteJson(path.join(directory, MANIFEST_NAME), next);
   atomicWriteJson(path.join(directory, LOCK_NAME), {

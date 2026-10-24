@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 
 const ROOT = process.cwd();
@@ -20,7 +21,7 @@ function readUtf8(filePath) {
 
 function writeFileAtomic(filePath, content) {
   const tmpPath = `${filePath}.tmp-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(tmpPath, content, 'utf8');
+  atomicWriteFileSync(tmpPath, content, 'utf8');
   fs.renameSync(tmpPath, filePath);
 }
 

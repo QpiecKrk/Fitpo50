@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { prepareArticleMedia } = require('./lib/article-media');
 
@@ -38,7 +39,7 @@ function main() {
     mutate: args.write,
     ensureVariants: args['ensure-variants'],
   });
-  if (args.write) fs.writeFileSync(file, `${JSON.stringify(article, null, 2)}\n`, 'utf8');
+  if (args.write) atomicWriteFileSync(file, `${JSON.stringify(article, null, 2)}\n`, 'utf8');
   console.log(`[ARTICLE-MEDIA] directory=${assetsDir}`);
   console.log(`[ARTICLE-MEDIA] images=${result.entries.length} variants_created=${result.created.length}`);
   result.created.forEach((fileName) => console.log(`[ARTICLE-MEDIA] created=${fileName}`));

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 
 const ROOT = process.cwd();
@@ -54,7 +55,7 @@ function main() {
     const raw = fs.readFileSync(file, 'utf8');
     const patched = patchHtml(raw);
     if (patched !== raw) {
-      fs.writeFileSync(file, patched, 'utf8');
+      atomicWriteFileSync(file, patched, 'utf8');
       changed += 1;
       console.log(`[OK] normalized reading labels: ${path.relative(ROOT, file)}`);
     }

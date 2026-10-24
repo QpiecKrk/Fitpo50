@@ -2,6 +2,7 @@
 'use strict';
 
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
 
 function decodeEntities(value) {
@@ -90,7 +91,7 @@ function syncFile(file) {
   });
 
   if (!updated) throw new Error(`${file}: brak schematu FAQPage.`);
-  fs.writeFileSync(absolute, html);
+  atomicWriteFileSync(absolute, html);
   console.log(`[FAQ-SYNC] ${file}: ${items.length} pytań.`);
 }
 

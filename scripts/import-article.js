@@ -14,6 +14,7 @@
  */
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { validateEntitySameAs } = require('./lib/entity-sameas-policy');
 const { POLICY, utils, validators, enforcers } = require('./lib/article-policy');
@@ -32,6 +33,7 @@ const { capabilityFromEnvironment } = require('./lib/pipeline-capability');
 const { slugify } = require('./lib/slugify');
 const { normalizeInternalHref } = require('./lib/article-normalization');
 const { normalizeSectionRole, validateSectionSchema } = require('./lib/article-section-contract');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
@@ -1470,7 +1472,7 @@ function withSitemapLock(callback) {
 
 function writeFileAtomic(filePath, content) {
   const tmpPath = `${filePath}.tmp-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(tmpPath, content, 'utf8');
+  atomicWriteFileSync(tmpPath, content, 'utf8');
   fs.renameSync(tmpPath, filePath);
 }
 
@@ -1504,7 +1506,7 @@ function updateSitemap(slug, dateIso, dryRun) {
   return withSitemapLock(() => {
     const original = fs.readFileSync(SITEMAP_PATH, 'utf8');
     const url = `https://fitpo50.pl/${slug}.html`;
-    const date = String(dateIso || '').split('T')[0] || new Date().toISOString().slice(0, 10);
+    const date = String(dateIso || '').split('T')[0] || warsawIso().slice(0, 10);
     const result = upsertSitemapXml(original, url, date);
     if (result.changed && !dryRun) {
       writeFileAtomic(SITEMAP_PATH, result.xml);
@@ -1552,10 +1554,10 @@ function updateLlms(slug, title, section, summary, dryRun) {
 
   if (!dryRun) {
     const normalizedContent = singleTrailingNewline(content);
-    fs.writeFileSync(LLMS_PATH, normalizedContent, 'utf8');
+    atomicWriteFileSync(LLMS_PATH, normalizedContent, 'utf8');
     const siteMirror = path.join(ROOT, '_site', 'llms.txt');
     if (fs.existsSync(path.dirname(siteMirror))) {
-      fs.writeFileSync(siteMirror, normalizedContent, 'utf8');
+      atomicWriteFileSync(siteMirror, normalizedContent, 'utf8');
     }
   }
 
@@ -1920,7 +1922,7 @@ function updateSingleFileWithMirror(relPath, updater, dryRun, syncSite) {
   const original = fs.readFileSync(filePath, 'utf8');
   const next = updater(original);
   if (next !== original) {
-    if (!dryRun) fs.writeFileSync(filePath, next, 'utf8');
+    if (!dryRun) atomicWriteFileSync(filePath, next, 'utf8');
     updatedFiles.push(relPath);
   }
 
@@ -1933,7 +1935,7 @@ function updateSingleFileWithMirror(relPath, updater, dryRun, syncSite) {
   const mirrorOriginal = fs.readFileSync(mirrorPath, 'utf8');
   const mirrorNext = updater(mirrorOriginal);
   if (mirrorNext !== mirrorOriginal) {
-    if (!dryRun) fs.writeFileSync(mirrorPath, mirrorNext, 'utf8');
+    if (!dryRun) atomicWriteFileSync(mirrorPath, mirrorNext, 'utf8');
     updatedFiles.push(`_site/${relPath}`);
   }
 
@@ -2015,9 +2017,9 @@ function writeArticleFiles(slug, html, syncSite, dryRun, force) {
   }
 
   if (!dryRun) {
-    fs.writeFileSync(outPath, html, 'utf8');
+    atomicWriteFileSync(outPath, html, 'utf8');
     if (syncSite && fs.existsSync(path.join(ROOT, '_site'))) {
-      fs.writeFileSync(path.join(ROOT, '_site', `${slug}.html`), html, 'utf8');
+      atomicWriteFileSync(path.join(ROOT, '_site', `${slug}.html`), html, 'utf8');
     }
   }
 
@@ -2065,17 +2067,17 @@ function writeCrosslinkSuggestions(payload, dryRun) {
   const outPath = path.join(outDir, `${slug}.json`);
   const payloadOut = {
     slug,
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     suggestions,
   };
 
   if (!dryRun) {
     fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(outPath, `${JSON.stringify(payloadOut, null, 2)}\n`, 'utf8');
+    atomicWriteFileSync(outPath, `${JSON.stringify(payloadOut, null, 2)}\n`, 'utf8');
     const siteDir = path.join(ROOT, '_site', 'data', 'crosslink-suggestions');
     if (fs.existsSync(path.join(ROOT, '_site'))) {
       fs.mkdirSync(siteDir, { recursive: true });
-      fs.writeFileSync(path.join(siteDir, `${slug}.json`), `${JSON.stringify(payloadOut, null, 2)}\n`, 'utf8');
+      atomicWriteFileSync(path.join(siteDir, `${slug}.json`), `${JSON.stringify(payloadOut, null, 2)}\n`, 'utf8');
     }
   }
 
@@ -2084,7 +2086,7 @@ function writeCrosslinkSuggestions(payload, dryRun) {
 
 function normalizePayload(data, cliCategory, options = {}) {
   const now = new Date();
-  const fallbackDate = now.toISOString().slice(0, 10);
+  const fallbackDate = warsawIso(now).slice(0, 10);
 
   const title = String(data.title || '').trim();
   const seoTitleBase = normalizeSeoTitleBase(String(data.seo_title || title).trim() || title);

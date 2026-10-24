@@ -2,6 +2,7 @@
 
 const { spawnSync } = require('child_process');
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { validateArticleContract } = require('./article-contract-check');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
@@ -57,7 +58,7 @@ function validateRaw(raw, file) {
   const tmpDir = createManagedTempDir({ prefix: 'fitpo50-contract-', type: 'article-contract-fixture', projectRoot: process.cwd() });
   const tmpFile = path.join(tmpDir, path.basename(file));
   try {
-    fs.writeFileSync(tmpFile, raw, 'utf8');
+    atomicWriteFileSync(tmpFile, raw, 'utf8');
     return validateArticleContract(tmpFile);
   } finally {
     try {

@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
 const { isEditorialQuery, MIN_CTR_REVIEW_IMPRESSIONS } = require('./lib/gsc-editorial-query');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const DEFAULT_WORK_DIR = resolveGscWorkDir(ROOT);
@@ -449,7 +451,7 @@ function buildAeoOpportunities(report, qpRows) {
 function writeAeoOutputs(aeoReport, outputJsonPath, outputMdPath) {
   fs.mkdirSync(path.dirname(outputJsonPath), { recursive: true });
   fs.mkdirSync(path.dirname(outputMdPath), { recursive: true });
-  fs.writeFileSync(outputJsonPath, `${JSON.stringify(aeoReport, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(outputJsonPath, `${JSON.stringify(aeoReport, null, 2)}\n`, 'utf8');
 
   const lines = [];
   lines.push('# AEO Opportunity Bot');
@@ -475,14 +477,14 @@ function writeAeoOutputs(aeoReport, outputJsonPath, outputMdPath) {
       }
     });
   }
-  fs.writeFileSync(outputMdPath, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(outputMdPath, `${lines.join('\n')}\n`, 'utf8');
 }
 
 function writeOutputs(report, outputJson, outputMd) {
   fs.mkdirSync(path.dirname(outputJson), { recursive: true });
   fs.mkdirSync(path.dirname(outputMd), { recursive: true });
 
-  fs.writeFileSync(outputJson, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(outputJson, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 
   const lines = [];
   lines.push('# GSC Weekly Report (CSV)');
@@ -639,7 +641,7 @@ function writeOutputs(report, outputJson, outputMd) {
   lines.push('');
   lines.push(`Okres raportu: ${toDateLabel(report.generated_at)} (wygenerowano lokalnie)`);
 
-  fs.writeFileSync(outputMd, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(outputMd, `${lines.join('\n')}\n`, 'utf8');
 }
 
 function pickQueryPagesInput(inputDir) {
@@ -659,7 +661,7 @@ function countCsvDataRows(filePath) {
 }
 
 function writeDataContractFailure(args, aeoOutputs, contract) {
-  const generatedAt = new Date().toISOString();
+  const generatedAt = warsawIso();
   const aeoReport = {
     generated_at: generatedAt,
     status: 'INSUFFICIENT_DATA',
@@ -719,14 +721,14 @@ function main() {
   const missingRequired = required.filter((r) => !r.ok).map((r) => r.name);
   if (missingRequired.length) {
     const aeoReport = {
-      generated_at: new Date().toISOString(),
+      generated_at: warsawIso(),
       status: 'INSUFFICIENT_DATA',
       strategic_priority: 'SEO -> AEO -> GEO -> AIO',
       top10_urls: [],
     };
     writeAeoOutputs(aeoReport, aeoOutputs.outputJson, aeoOutputs.outputMd);
     const report = {
-      generated_at: new Date().toISOString(),
+      generated_at: warsawIso(),
       status: 'INSUFFICIENT_DATA',
       reason: `Brak wymaganych plików: ${missingRequired.join(', ')}`,
       inputs: {
@@ -790,7 +792,7 @@ function main() {
     || pickLatestByType(filesMeta, 'query_pages');
 
   const report = {
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     status: 'missing_data',
     inputs: {
       queries: latestQueries ? latestQueries.abs : '',
@@ -831,7 +833,7 @@ function main() {
 
   if (!latestQueries || !latestPages) {
     const aeoReport = {
-      generated_at: new Date().toISOString(),
+      generated_at: warsawIso(),
       status: 'INSUFFICIENT_DATA',
       strategic_priority: 'SEO -> AEO -> GEO -> AIO',
       top10_urls: [],

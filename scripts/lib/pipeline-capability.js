@@ -2,8 +2,10 @@
 
 const crypto = require('node:crypto');
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./atomic-file');
 const path = require('node:path');
 const { readWorkspaceManifest } = require('./temp-workspace');
+const { warsawIso } = require('./time');
 
 const CAPABILITY_RELATIVE_PATH = path.join('.tmp', 'pipeline-capability.json');
 const DEFAULT_TTL_MS = 30 * 60 * 1000;
@@ -14,7 +16,7 @@ function sha256(value) {
 
 function atomicWriteJson(filePath, payload) {
   const temporary = `${filePath}.writing-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, { encoding: 'utf8', mode: 0o600 });
+  atomicWriteFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, { encoding: 'utf8', mode: 0o600 });
   fs.renameSync(temporary, filePath);
   fs.chmodSync(filePath, 0o600);
 }
@@ -100,7 +102,7 @@ function consumePipelineCapability(options = {}) {
   const operation = String(options.operation || '').trim();
   const capabilityPath = path.resolve(options.capabilityPath);
   payload.consumed_operations = [...new Set([...(payload.consumed_operations || []), operation])];
-  payload.last_consumed_at = new Date(options.now === undefined ? Date.now() : Number(options.now)).toISOString();
+  payload.last_consumed_at = warsawIso(new Date(options.now === undefined ? Date.now() : Number(options.now)));
   atomicWriteJson(capabilityPath, payload);
   return payload;
 }

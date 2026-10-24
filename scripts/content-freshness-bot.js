@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -144,7 +146,7 @@ function main() {
     .sort((a, b) => b.priorityScore - a.priorityScore);
 
   const report = {
-    generatedAt: new Date().toISOString(),
+    generatedAt: warsawIso(),
     policy: {
       priority: 'SEO -> AEO -> GEO -> AIO',
       thresholds: {
@@ -167,7 +169,7 @@ function main() {
 
   fs.mkdirSync(REPORT_DIR, { recursive: true });
   const outPath = path.join(REPORT_DIR, 'content-freshness-report.json');
-  fs.writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 
   console.log(`[PASS] content-freshness-bot generated: ${outPath}`);
   console.log(`- artykuly: ${report.totals.articles}`);

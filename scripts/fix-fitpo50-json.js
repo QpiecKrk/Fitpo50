@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { POLICY, validators } = require('./lib/article-policy');
 const { CATEGORY_LANDING_PAGES, isSupportedCategory, normalizeCategory } = require('./lib/categories');
@@ -739,7 +740,7 @@ function main() {
   if (args.write) {
     const backupPath = `${file}.bak`;
     fs.copyFileSync(file, backupPath);
-    fs.writeFileSync(file, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
+    atomicWriteFileSync(file, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
     console.log(`[OK] Backup zapisany: ${path.relative(repoRoot, backupPath)}`);
     if (patchedRaw !== null) {
       console.log('[OK] Zastosowano automatyczną naprawę niedomkniętych cudzysłowów w surowym JSON.');

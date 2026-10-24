@@ -1,11 +1,13 @@
 const crypto = require('crypto');
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./atomic-file');
 const path = require('path');
 const { issuePipelineCapability } = require('./pipeline-capability');
 const { spawnSync } = require('child_process');
 const { categoryFileFromKey, normalizeCategory } = require('./categories');
 const { createManagedTempDir, disposeTempWorkspace, readWorkspaceManifest } = require('./temp-workspace');
 const { validatePreviewReport } = require('./article-preview-report');
+const { warsawIso } = require('./time');
 
 const ALLOWED_TOP_LEVEL_DIRECTORIES = new Set(['scripts', 'assets', 'data', '_site', 'src', 'dist', 'templates', 'admin', 'docs', 'sukcesy']);
 const EXCLUDED_TOP_LEVEL = new Set(['.git', 'node_modules', '.tmp', 'output', 'tmp']);
@@ -207,7 +209,7 @@ function atomicCopy(source, destination) {
 function atomicWriteJson(filePath, payload) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   const temporary = `${filePath}.staging-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   fs.renameSync(temporary, filePath);
 }
 
@@ -331,7 +333,7 @@ function writePublicationManifest({ stageRoot, article, candidates, baseline, tr
   const payload = {
     version: 1,
     transaction_id: transactionId,
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     status: 'PUBLISHED',
     operation,
     slug,
@@ -424,10 +426,10 @@ function finalizeCommittedJournal(sourceRoot, transactionRoot, journal, options 
     }
     atomicWriteJson(path.join(sourceRoot, relative), completion.payload);
     completion.status = 'WRITTEN';
-    completion.written_at = new Date().toISOString();
+    completion.written_at = warsawIso();
   }
   journal.status = 'COMPLETED';
-  journal.completed_at = new Date().toISOString();
+  journal.completed_at = warsawIso();
   atomicWriteJson(journalPath, journal);
   releaseLock(sourceRoot, journal.transaction_id);
   fs.rmSync(transactionRoot, { recursive: true, force: true });
@@ -473,7 +475,7 @@ function recoverInterruptedTransactions(sourceRoot) {
     }
     restoreJournal(sourceRoot, transactionRoot, journal);
     journal.status = 'ROLLED_BACK';
-    journal.recovered_at = new Date().toISOString();
+    journal.recovered_at = warsawIso();
     atomicWriteJson(journalPath, journal);
     recovered.push(journal.transaction_id);
       fs.rmSync(transactionRoot, { recursive: true, force: true });
@@ -496,7 +498,7 @@ function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline
   const lockPath = path.join(sourceRoot, TRANSACTION_LOCK);
   fs.mkdirSync(path.dirname(lockPath), { recursive: true });
   try {
-    fs.writeFileSync(lockPath, `${JSON.stringify({ transaction_id: transactionId, pid: process.pid, created_at: new Date().toISOString() }, null, 2)}\n`, { flag: 'wx' });
+    atomicWriteFileSync(lockPath, `${JSON.stringify({ transaction_id: transactionId, pid: process.pid, created_at: warsawIso() }, null, 2)}\n`, { flag: 'wx' });
   } catch (error) {
     if (error.code === 'EEXIST') throw new Error('Inna publikacja posiada aktywną blokadę transakcji.');
     throw error;
@@ -510,7 +512,7 @@ function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline
       version: 1,
       transaction_id: transactionId,
       pid: process.pid,
-      created_at: new Date().toISOString(),
+      created_at: warsawIso(),
       status: 'PREPARING',
       completion: completion ? { ...completion, status: 'PENDING' } : null,
       files: changed.map((relative) => ({
@@ -531,7 +533,7 @@ function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline
     try {
       restoreJournal(sourceRoot, transactionRoot, journal);
       journal.status = 'ROLLED_BACK';
-      journal.rolled_back_at = new Date().toISOString();
+      journal.rolled_back_at = warsawIso();
       journal.rollback_reason = String(reason || 'publikacja przerwana');
       atomicWriteJson(journalPath, journal);
       fs.rmSync(transactionRoot, { recursive: true, force: true });
@@ -559,7 +561,7 @@ function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline
       }
     }
     journal.status = 'VALIDATING';
-    journal.promoted_at = new Date().toISOString();
+    journal.promoted_at = warsawIso();
     atomicWriteJson(journalPath, journal);
   } catch (error) {
     rollback(error.message || error);
@@ -580,7 +582,7 @@ function beginPromotionTransaction({ sourceRoot, stageRoot, candidates, baseline
     commit() {
       this.verify();
       journal.status = 'COMMITTED';
-      journal.committed_at = new Date().toISOString();
+      journal.committed_at = warsawIso();
       atomicWriteJson(journalPath, journal);
       if (!journal.completion) {
         releaseLock(sourceRoot, transactionId);

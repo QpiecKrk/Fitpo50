@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const targetDir = path.resolve(ROOT, process.argv[2] || '_site');
@@ -100,7 +102,7 @@ function parseSitemapPaths() {
 
 function writeReports(report) {
   fs.mkdirSync(reportDir, { recursive: true });
-  fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   const lines = [];
   lines.push('# SEO Crawl Report');
   lines.push('');
@@ -122,7 +124,7 @@ function writeReports(report) {
     report.warnings.forEach((item) => lines.push(`- ${item}`));
     lines.push('');
   }
-  fs.writeFileSync(reportMdPath, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(reportMdPath, `${lines.join('\n')}\n`, 'utf8');
 }
 
 function main() {
@@ -228,7 +230,7 @@ function main() {
   }
 
   const report = {
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     target_dir: targetDir,
     summary: {
       html_files: htmlFiles.length,

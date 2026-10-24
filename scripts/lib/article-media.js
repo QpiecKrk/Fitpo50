@@ -528,7 +528,7 @@ function prepareArticleMedia(article, options = {}) {
     package_directory: path.basename(assetsDir),
     strict_single_directory: true,
     exact_filename_matching: true,
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     required_variants: REQUIRED_VARIANTS,
     entries,
     diversity: {
@@ -576,3 +576,4 @@ module.exports = {
   validateManifestStructure,
 };
 const { requiresMainSectionContracts } = require('./article-section-contract');
+const { warsawIso } = require('./time');

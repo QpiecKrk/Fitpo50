@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 const { normalizePolishText } = require('./lib/article-normalization');
+const { warsawIso } = require('./lib/time');
 
 function parseArgs(argv) {
   const out = { write: false, timeout: 8000, refresh: false, 'cache-ttl-days': 7 };
@@ -85,7 +87,7 @@ function cachedResult(cache, url, nowMs, ttlDays, requireSuggestions = false) {
 function writeCache(cacheFile, cache) {
   fs.mkdirSync(path.dirname(cacheFile), { recursive: true });
   const temporary = `${cacheFile}.tmp-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(temporary, `${JSON.stringify(cache, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(temporary, `${JSON.stringify(cache, null, 2)}\n`, 'utf8');
   fs.renameSync(temporary, cacheFile);
 }
 
@@ -93,7 +95,7 @@ function classifyHttpStatus(status) {
   const code = Number(status || 0);
   if (code >= 200 && code < 400) return 'reachable';
   if ([401, 403, 405].includes(code)) return 'blocked_by_publisher';
-  if (code === 429 || code >= 500) return 'temporarily_unavailable';
+  if ([408, 429].includes(code) || code >= 500) return 'temporarily_unavailable';
   if ([404, 410].includes(code)) return 'broken';
   return 'broken';
 }
@@ -104,6 +106,7 @@ function isEnvironmentVerificationFailure(result) {
 
 async function requestUrl(url, timeout, options = {}) {
   const captureAutocomplete = options.captureAutocomplete === true;
+  const fetchImpl = options.fetchImpl || fetch;
   const headers = {
     'user-agent': 'Mozilla/5.0 (compatible; FitPo50EvidenceChecker/1.0; +https://fitpo50.pl/)',
     accept: 'text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8',
@@ -113,13 +116,20 @@ async function requestUrl(url, timeout, options = {}) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeout);
     try {
-      return await fetch(url, { method, redirect: 'follow', headers, signal: controller.signal });
+      return await fetchImpl(url, { method, redirect: 'follow', headers, signal: controller.signal });
+    } catch (error) {
+      if (controller.signal.aborted || error?.name === 'AbortError') {
+        throw new Error(`HTTP_TIMEOUT po ${timeout} ms dla ${url}`);
+      }
+      throw error;
     } finally {
       clearTimeout(timer);
     }
   };
   try {
-    let response = await tryMethod(captureAutocomplete ? 'GET' : 'HEAD');
+    const method = captureAutocomplete ? 'GET' : 'HEAD';
+    let response = await tryMethod(method);
+    if (response.status === 408) response = await tryMethod(method);
     if (!captureAutocomplete && [400, 403, 405, 501].includes(response.status)) response = await tryMethod('GET');
     const suggestions = captureAutocomplete && response.status >= 200 && response.status < 300
       ? parseAutocompleteSuggestions(await decodeAutocompleteBody(response))
@@ -197,7 +207,7 @@ async function main() {
     if (!urlToItems.has(url)) urlToItems.set(url, []);
     urlToItems.get(url).push({ item, kind });
   });
-  const today = new Date().toISOString().slice(0, 10);
+  const today = warsawIso().slice(0, 10);
   const cacheFile = path.resolve(process.cwd(), args['cache-file'] || path.join('.cache', 'article-evidence-urls.json'));
   const cache = readCache(cacheFile);
   const nowMs = Date.now();
@@ -230,7 +240,7 @@ async function main() {
     };
     if (result.url_status === 'reachable' && result.http_status >= 200 && result.http_status < 300 && !result.cached) {
       cache.entries[url] = {
-        verified_at: new Date(nowMs).toISOString(),
+        verified_at: warsawIso(new Date(nowMs)),
         url_status: result.url_status,
         http_status: result.http_status,
         final_url: result.final_url,
@@ -252,7 +262,7 @@ async function main() {
     checked_at: today,
     entries: Object.fromEntries(results.map((result) => [result.url, result.verification])),
   };
-  if (args.write) fs.writeFileSync(file, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
+  if (args.write) atomicWriteFileSync(file, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
   const validation = validateArticleEvidence(json, { today });
   if (!validation.ok) {
     console.error('\n[FAIL] Evidence gate');

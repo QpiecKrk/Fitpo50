@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
 const { isEditorialQuery } = require('./lib/gsc-editorial-query');
 const { buildSharedPriorityList } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const DEFAULT_INPUT_DIR = resolveGscWorkDir(ROOT);
@@ -1209,7 +1211,7 @@ function writeOutputs(report, outputDir) {
   fs.mkdirSync(outputDir, { recursive: true });
   const jsonPath = path.join(outputDir, 'gsc-priority-map.json');
   const mdPath = path.join(outputDir, 'gsc-priority-map.md');
-  fs.writeFileSync(jsonPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(jsonPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 
   const lines = [];
   lines.push('# GSC Priority Map — wszystkie URL-e');
@@ -1357,7 +1359,7 @@ function writeOutputs(report, outputDir) {
   lines.push('- Fala 2: P1_GROWTH — rozbudowa intencji, linkowanie z klastra, szybka odpowiedź pod AEO.');
   lines.push('- Fala 3: P1_NO_GSC_DATA_BUILD_DISCOVERY — podpięcie nowych stron pod klastry i kategorie.');
   lines.push('- Fala 4: P2/P3 — utrzymanie, odświeżanie dat, cytowań i linków bez przepalania czasu.');
-  fs.writeFileSync(mdPath, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(mdPath, `${lines.join('\n')}\n`, 'utf8');
 
   return { jsonPath, mdPath };
 }
@@ -1374,7 +1376,7 @@ function main() {
   const gsc = readGsc(args.inputDir);
   const pages = collectPages(args.baseUrl);
   const inspection = readIndexInspection(args.outputDir);
-  const generatedAt = new Date().toISOString();
+  const generatedAt = warsawIso();
   const priorityMap = buildPriorityMap(pages, gsc, generatedAt, args.baseUrl, inspection.byUrl);
   const portfolio = buildPortfolioSections(priorityMap);
   const aiVisibility = readAiVisibility(args.inputDir);

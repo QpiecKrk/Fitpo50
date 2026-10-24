@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { POLICY, utils, validators } = require('./lib/article-policy');
@@ -57,7 +58,7 @@ function readUtf8(relPath) {
 }
 
 function writeUtf8(relPath, value) {
-  fs.writeFileSync(path.join(ROOT, relPath), value, 'utf8');
+  atomicWriteFileSync(path.join(ROOT, relPath), value, 'utf8');
 }
 
 function exists(relPath) {

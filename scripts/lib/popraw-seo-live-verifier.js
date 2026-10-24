@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const { warsawIso } = require('./time');
 
 function normalizeText(value) {
   return String(value || '').replace(/\s+/g, ' ').trim();
@@ -94,7 +95,7 @@ function verifyLiveResponses(manifest, responses) {
   const recrawlUrls = [...new Set((manifest.targets || []).flatMap((target) => target.source_pages_for_recrawl || []))];
   return {
     version: 1,
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     status: errors.length ? 'LIVE_DEPLOYMENT_INCOMPLETE' : 'LIVE_DEPLOYED_AND_VALIDATED',
     approved_ids: manifest.approved_ids || [],
     gsc_url_inspection: errors.length ? [] : inspectionUrls,

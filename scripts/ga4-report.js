@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const os = require('os');
 const path = require('path');
 const crypto = require('crypto');
 const { DEFAULT_GROWTH_REPORT_DIR, migrateLegacySeoData } = require('./lib/seo-priority-list');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -77,12 +79,12 @@ function ensureDir(dir) {
 
 function writeJson(file, payload) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(file, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
 }
 
 function writeText(file, content) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${String(content || '').trimEnd()}\n`, 'utf8');
+  atomicWriteFileSync(file, `${String(content || '').trimEnd()}\n`, 'utf8');
 }
 
 function dateIso(dayOffset) {
@@ -97,7 +99,7 @@ function currentRange(days) {
 }
 
 function nowIso() {
-  return new Date().toISOString();
+  return warsawIso();
 }
 
 function base64url(input) {

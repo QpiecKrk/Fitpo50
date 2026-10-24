@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
@@ -12,7 +13,7 @@ const {
   resolveSeoStateDir,
 } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
-const { warsawIso } = require('./lib/popraw-seo-approved-patches');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
@@ -152,12 +153,12 @@ function writeSeoState(name, value) {
 
 function writeJson(file, payload) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(file, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
 }
 
 function writeText(file, content) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${String(content || '').trimEnd()}\n`, 'utf8');
+  atomicWriteFileSync(file, `${String(content || '').trimEnd()}\n`, 'utf8');
 }
 
 function readTextIfExists(file) {
@@ -4031,7 +4032,7 @@ function applyGrowth(flags) {
     html = `${html.slice(0, index)}${block.html}\n\n${html.slice(index)}`;
   }
   html = updateModifiedDate(html);
-  fs.writeFileSync(abs, html, 'utf8');
+  atomicWriteFileSync(abs, html, 'utf8');
   console.log(`[GROWTH] zapisano: ${file}`);
   return plan;
 }

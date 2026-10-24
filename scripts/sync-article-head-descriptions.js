@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 
 function parseArgs(argv) {
@@ -57,7 +58,7 @@ function updateOne(filePath) {
   }
 
   if (out !== raw) {
-    fs.writeFileSync(filePath, out, 'utf8');
+    atomicWriteFileSync(filePath, out, 'utf8');
     return { filePath, changed: true, reason: 'synced' };
   }
   return { filePath, changed: false, reason: 'already-synced' };

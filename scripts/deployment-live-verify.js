@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { canonicalFromHtml, modifiedDates, sha256, verifyDeployment } = require('./lib/deployment-live-verifier');
-const { publicFingerprint } = require('./prepare-deployment-marker');
+const { assertPreparedPublicationState, extractLocalAssetPaths, publicFingerprint } = require('./prepare-deployment-marker');
 
 function parseArgs(argv) {
   const out = { baseUrl: 'https://fitpo50.pl', retries: 39, delayMs: 15000, timeoutMs: 20000 };
@@ -42,9 +43,7 @@ function localArticlesForCommit(commit, baseUrl) {
     const dates = modifiedDates(html);
     if (!canonical || dates.length !== 1) throw new Error(`${file}: niejednoznaczny canonical lub dateModified.`);
     const slug = path.basename(file, '.html');
-    const imagePaths = [...html.matchAll(/<(?:source|img)\b[^>]+(?:src|srcset)=["']([^"']+)["']/gi)]
-      .flatMap((match) => match[1].split(',').map((entry) => entry.trim().split(/\s+/)[0]))
-      .filter((value) => value && !/^(?:https?:|data:|\/\/)/.test(value))
+    const imagePaths = extractLocalAssetPaths(html)
       .map((value) => new URL(value, canonical).href);
     const exportedHtml = path.join('_site', file);
     const exportedPdf = path.join('_site', 'assets', 'pdf', `${slug}.pdf`);
@@ -116,8 +115,8 @@ async function main() {
   const marker = JSON.parse(fs.readFileSync('deployment.json', 'utf8'));
   const fingerprint = publicFingerprint(path.join(process.cwd(), '_site'));
   if (marker.public_fingerprint_sha256 !== fingerprint) throw new Error('deployment.json nie odpowiada bieżącemu eksportowi _site. Uruchom npm run deployment:prepare.');
+  assertPreparedPublicationState(process.cwd(), marker);
   const expectedCommit = args.commit || git(['rev-parse', 'HEAD']);
-  const remoteCommit = git(['ls-remote', 'origin', 'refs/heads/main']).split(/\s+/)[0] || '';
   const articles = Array.isArray(marker.articles) && marker.version >= 2
     ? marker.articles.map((article) => ({
       url: article.url,
@@ -134,6 +133,7 @@ async function main() {
   let result;
   for (let attempt = 0; attempt <= args.retries; attempt += 1) {
     console.log(`[LIVE] Próba ${attempt + 1}/${args.retries + 1}.`);
+    const remoteCommit = git(['ls-remote', 'origin', 'refs/heads/main']).split(/\s+/)[0] || '';
     const urls = urlsFor(args.baseUrl, articles);
     const responses = await collect(urls, args.timeoutMs);
     result = verifyDeployment({ expectedCommit, remoteCommit, marker, responses, baseUrl: args.baseUrl, baseFiles, articles });
@@ -148,7 +148,7 @@ async function main() {
   }
   const reportDir = path.join('data', 'reports', 'local');
   fs.mkdirSync(reportDir, { recursive: true });
-  fs.writeFileSync(path.join(reportDir, 'deployment-live-status.json'), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(path.join(reportDir, 'deployment-live-status.json'), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
   console.log(`[${result.status}] commit=${expectedCommit} release=${marker.release_id}`);
   if (result.errors.length) result.errors.forEach((error) => console.error(`[BLOCKER] ${error}`));
   if (result.status !== 'LIVE_DEPLOYED_AND_VALIDATED') process.exit(2);

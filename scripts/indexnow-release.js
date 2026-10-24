@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
 const { submitIndexNow } = require('./lib/indexnow-client');
 const { STATUS } = require('./lib/external-integration-status');
+const { warsawIso } = require('./lib/time');
 
 function readJson(file) { return JSON.parse(fs.readFileSync(file, 'utf8')); }
 
@@ -40,7 +42,7 @@ async function main() {
   }
   const result = await submitIndexNow({ host: 'fitpo50.pl', key, keyLocation: String(process.env.INDEXNOW_KEY_LOCATION || '').trim() || undefined, urlList: urls });
   fs.mkdirSync(evidenceDir, { recursive: true });
-  fs.writeFileSync(evidenceFile, `${JSON.stringify({ ...result, release_id: marker.release_id, url_list: urls, submitted_at: new Date().toISOString() }, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(evidenceFile, `${JSON.stringify({ ...result, release_id: marker.release_id, url_list: urls, submitted_at: warsawIso() }, null, 2)}\n`, 'utf8');
   console.log(`[INDEXNOW] ${result.status} release=${marker.release_id} urls=${urls.length}`);
   if (result.status !== STATUS.OK_VERIFIED) process.exit(30);
 }

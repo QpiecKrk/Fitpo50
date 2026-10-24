@@ -31,6 +31,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from generate_article_pdf import BASE_URL, generate_pdf  # noqa: E402
+from lib.atomic_file import atomic_write_text  # noqa: E402
 
 MARKER_START = "<!-- PDF_DOWNLOAD_BUTTON_START -->"
 MARKER_END = "<!-- PDF_DOWNLOAD_BUTTON_END -->"
@@ -166,7 +167,7 @@ def upsert_blogposting_pdf_schema(html_path: Path, slug: str) -> bool:
 
     updated_html = pattern.sub(_replace, html)
     if replacement_done and updated_html != html:
-        html_path.write_text(updated_html, encoding="utf-8")
+        atomic_write_text(html_path, updated_html)
         return True
     return False
 
@@ -214,7 +215,7 @@ def upsert_button(html_path: Path, slug: str, size_kb: int) -> bool:
     )
 
     if updated != html:
-        html_path.write_text(updated, encoding="utf-8")
+        atomic_write_text(html_path, updated)
         return True
     return False
 
@@ -252,7 +253,7 @@ def run(slugs: list[str] | None) -> int:
                 if posting:
                     posting["encoding"] = {"@type": "MediaObject", "contentUrl": urljoin(BASE_URL, f"assets/pdf/{slug}.pdf"), "encodingFormat": "application/pdf"}
                     script.string = json.dumps(data, ensure_ascii=False, indent=2)
-            html_path.write_text(soup.decode(formatter=OrderedFormatter()), encoding="utf-8")
+            atomic_write_text(html_path, soup.decode(formatter=OrderedFormatter()))
             print(f"[OK] centrum {slug}: PDF {size_kb} KB")
             continue
 

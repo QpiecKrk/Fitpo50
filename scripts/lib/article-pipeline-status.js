@@ -1,7 +1,9 @@
 'use strict';
 
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./atomic-file');
 const path = require('node:path');
+const { warsawIso } = require('./time');
 
 const EXIT_CODES = Object.freeze({
   SUCCESS: 0,
@@ -38,12 +40,12 @@ function writePipelineStatus(root, slug, status, details = {}) {
     slug,
     status,
     exit_code: EXIT_CODES[status] ?? EXIT_CODES.ENVIRONMENT_FAILURE,
-    updated_at: new Date().toISOString(),
+    updated_at: warsawIso(),
     ...details,
   };
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const temporary = `${file}.tmp-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   fs.renameSync(temporary, file);
   console.log(`[PIPELINE_STATUS] ${status} exit=${payload.exit_code} report=${file}`);
   if (payload.next_action) console.log(`[NEXT_ACTION] ${payload.next_action}`);

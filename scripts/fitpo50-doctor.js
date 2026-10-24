@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -47,7 +49,7 @@ function readJsonSafe(filePath) {
 
 function main() {
   fs.mkdirSync(REPORT_DIR, { recursive: true });
-  const now = new Date().toISOString();
+  const now = warsawIso();
   const checks = [];
 
   const gitStatus = run('git', ['status', '--short']);
@@ -129,8 +131,8 @@ function main() {
     '',
   ].join('\n');
 
-  fs.writeFileSync(JSON_PATH, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
-  fs.writeFileSync(MD_PATH, md, 'utf8');
+  atomicWriteFileSync(JSON_PATH, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(MD_PATH, md, 'utf8');
   console.log(`[${status}] fitpo50:doctor -> ${path.relative(ROOT, MD_PATH)}`);
   if (red.length) process.exit(1);
 }

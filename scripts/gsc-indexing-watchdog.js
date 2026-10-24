@@ -2,9 +2,11 @@
 /* eslint-disable no-console */
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const crypto = require('crypto');
 const { STATUS, classifyExternalError, redactSecrets } = require('./lib/external-integration-status');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -171,12 +173,12 @@ function ensureDir(filePath) {
 
 function writeJson(filePath, data) {
   ensureDir(filePath);
-  fs.writeFileSync(filePath, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(filePath, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
 }
 
 function writeMd(filePath, lines) {
   ensureDir(filePath);
-  fs.writeFileSync(filePath, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(filePath, `${lines.join('\n')}\n`, 'utf8');
 }
 
 function safeDateMs(input) {
@@ -186,17 +188,17 @@ function safeDateMs(input) {
 
 function loadLog(logFile) {
   if (!fs.existsSync(logFile)) {
-    return { version: 1, updated_at: new Date().toISOString(), items: [] };
+    return { version: 1, updated_at: warsawIso(), items: [] };
   }
   try {
     const parsed = JSON.parse(fs.readFileSync(logFile, 'utf8'));
     return {
       version: 1,
-      updated_at: String(parsed.updated_at || '').trim() || new Date().toISOString(),
+      updated_at: String(parsed.updated_at || '').trim() || warsawIso(),
       items: Array.isArray(parsed.items) ? parsed.items : [],
     };
   } catch (_err) {
-    return { version: 1, updated_at: new Date().toISOString(), items: [] };
+    return { version: 1, updated_at: warsawIso(), items: [] };
   }
 }
 
@@ -285,7 +287,7 @@ function loadInventoryCandidates(file, zeroVisibilityOnly) {
 
 function buildReportSkeleton(siteUrl, logFile, args) {
   return {
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     status: STATUS.OK_VERIFIED,
     property: siteUrl,
     log_file: path.relative(ROOT, logFile),
@@ -436,7 +438,7 @@ async function main() {
       const publishedMs = safeDateMs(publishedAt);
       const crawledAfterPublish = Number.isFinite(crawlMs) && Number.isFinite(publishedMs) && crawlMs >= (publishedMs - 6 * 60 * 60 * 1000);
       const update = bySlug.get(slug) || item;
-      update.last_checked_at = new Date().toISOString();
+      update.last_checked_at = warsawIso();
       update.last_crawl_time = inspection.lastCrawlTime || '';
       update.notes = inspection.coverageState || inspection.indexingState || '';
       const indexed = String(inspection.verdict || '').toUpperCase() === 'PASS'
@@ -489,7 +491,7 @@ async function main() {
         error: classified.message,
       });
       const update = bySlug.get(slug) || item;
-      update.last_checked_at = new Date().toISOString();
+      update.last_checked_at = warsawIso();
       update.status = 'pending';
       update.notes = `inspection_error: ${classified.reason}`;
     }
@@ -504,7 +506,7 @@ async function main() {
 
   if (!inventoryMode) {
     log.items = [...bySlug.values()].sort((a, b) => String(b.last_published_at || '').localeCompare(String(a.last_published_at || '')));
-    log.updated_at = new Date().toISOString();
+    log.updated_at = warsawIso();
     writeJson(args.logFile, log);
   }
   writeJson(args.reportJson, report);

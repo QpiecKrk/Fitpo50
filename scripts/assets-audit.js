@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { assertPathInside, assertProjectRoot } = require('./lib/destructive-path-guard');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = path.resolve(__dirname, '..');
 const ASSETS_DIR = path.join(ROOT, 'assets');
@@ -213,7 +215,7 @@ function main() {
   const { assetFiles, referenced, unused, usedCount } = collectAssetAudit(ROOT);
 
   const summary = {
-    scanned_at: new Date().toISOString(),
+    scanned_at: warsawIso(),
     mode: args.apply ? 'apply' : 'dry-run',
     totals: {
       assets_images_scanned: assetFiles.length,
@@ -235,7 +237,7 @@ function main() {
     const reportsRoot = path.join(ROOT, 'data', 'reports');
     const reportAbs = assertPathInside(reportsRoot, path.resolve(ROOT, args.report));
     ensureDir(path.dirname(reportAbs));
-    fs.writeFileSync(reportAbs, `${JSON.stringify(summary, null, 2)}\n`, 'utf8');
+    atomicWriteFileSync(reportAbs, `${JSON.stringify(summary, null, 2)}\n`, 'utf8');
     console.log(`[ASSETS-AUDIT] report: ${relativeFromRoot(reportAbs)}`);
   }
 

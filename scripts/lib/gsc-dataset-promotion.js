@@ -2,7 +2,9 @@
 
 const crypto = require('node:crypto');
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./atomic-file');
 const path = require('node:path');
+const { warsawIso } = require('./time');
 
 const WORKSPACE_FILES = new Set(['.fitpo50-workspace.json', '.fitpo50-workspace.lock']);
 const PRESERVED_ACTIVE_FILES = new Set(['automation-run-events.json']);
@@ -14,7 +16,7 @@ function sha256File(file) {
 function atomicWriteJson(file, payload) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const temporary = `${file}.writing-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   fs.renameSync(temporary, file);
 }
 
@@ -107,7 +109,7 @@ function promoteValidatedGscDataset({ sourceDir, targetDir, validate, hooks = {}
     status: 'PREPARED',
     target,
     expected_files: expectedFiles,
-    created_at: new Date().toISOString(),
+    created_at: warsawIso(),
   };
   atomicWriteJson(paths.journal, journal);
   try {

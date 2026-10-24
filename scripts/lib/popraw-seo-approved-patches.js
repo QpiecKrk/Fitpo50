@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { pageKind } = require('./publication-page-kind');
 const { validateFaqResearch } = require('./article-evidence');
+const { warsawIso } = require('./time');
 
 const ALLOWED_BASIS = new Set(['GSC_QUERY', 'SOURCE', 'ARTICLE_FACT', 'SAFETY_RULE', 'INTERNAL_LINK_MAP']);
 const GENERIC_PATTERNS = [
@@ -102,7 +103,7 @@ function validateOperationEvidence(operation, label, errors) {
     if (!answerBlocks.some((block) => block.question === question)) errors.push(`${label}: FAQ HTML/schema nie ma odpowiednika w answer_blocks: ${question}`);
   }
   errors.push(...validateFaqResearch({ answer_blocks: answerBlocks, faq_research: operation.faq_research || [] },
-    new Date().toISOString().slice(0, 10)).map((error) => `${label}: ${error}`));
+    warsawIso().slice(0, 10)).map((error) => `${label}: ${error}`));
 }
 
 function localLinkAllowed(root, source, target) {
@@ -189,18 +190,6 @@ function replaceExactlyOnce(html, before, after, label) {
   if (first === -1) throw new Error(`${label}: fragment before nie występuje w pliku.`);
   if (html.indexOf(before, first + before.length) !== -1) throw new Error(`${label}: fragment before występuje więcej niż raz.`);
   return `${html.slice(0, first)}${after}${html.slice(first + before.length)}`;
-}
-
-function warsawIso(now = new Date()) {
-  const parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Europe/Warsaw', year: 'numeric', month: '2-digit', day: '2-digit',
-    hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZoneName: 'longOffset',
-  }).formatToParts(now).reduce((acc, item) => {
-    if (item.type !== 'literal') acc[item.type] = item.value;
-    return acc;
-  }, {});
-  const offset = String(parts.timeZoneName || 'GMT+01:00').replace(/^GMT/, '');
-  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}${offset}`;
 }
 
 function updateModified(html, iso, file) {

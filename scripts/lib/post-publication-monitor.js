@@ -1,8 +1,10 @@
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./atomic-file');
 const path = require('path');
 const { inspectGscInput } = require('./gsc-data-contract');
 const { categoryFileFromKey, normalizeCategory } = require('./categories');
 const { resolveGscWorkDir } = require('./gsc-work-dir');
+const { warsawDay, warsawIso } = require('./time');
 
 const SITE_ORIGIN = 'https://fitpo50.pl';
 const HISTORY_RELATIVE = path.join('data', 'reports', 'published-articles-log.json');
@@ -20,7 +22,7 @@ function readJson(filePath, fallback = null) {
 function atomicWrite(filePath, contents) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   const temporary = `${filePath}.staging-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(temporary, contents, 'utf8');
+  atomicWriteFileSync(temporary, contents, 'utf8');
   fs.renameSync(temporary, filePath);
 }
 
@@ -110,7 +112,7 @@ function pageMetrics(inputDir, url, preferredFile = '') {
 function addUtcDays(iso, days) {
   const date = new Date(iso);
   date.setUTCDate(date.getUTCDate() + days);
-  return date.toISOString().slice(0, 10);
+  return warsawDay(date);
 }
 
 function captureBaseline(inputDir, url, now = new Date()) {
@@ -119,7 +121,7 @@ function captureBaseline(inputDir, url, now = new Date()) {
   const rangeKey = page.window === 'rolling_28_days' ? 'day_28' : 'day_90';
   const metricRange = inspection.periods?.details?.[rangeKey]?.current || null;
   return {
-    captured_at: now.toISOString(),
+    captured_at: warsawIso(now),
     status: inspection.blocking ? 'GSC_INPUT_UNAVAILABLE' : (page.found ? 'GSC_ROW_FOUND' : 'NO_GSC_ROW_AT_PUBLICATION'),
     gsc_generated_at: inspection.freshness?.generated_at || '',
     window: page.window,
@@ -136,7 +138,7 @@ function safeBaseline(inputDir, url, now = new Date()) {
     return captureBaseline(inputDir, url, now);
   } catch (error) {
     return {
-      captured_at: now.toISOString(),
+      captured_at: warsawIso(now),
       status: 'GSC_INPUT_UNAVAILABLE',
       gsc_generated_at: '',
       window: 'unavailable',
@@ -173,14 +175,14 @@ function preparePublicationMonitoring({ stageRoot, article, operation, transacti
   const existing = items.find((item) => item.slug === slug) || {};
   const sourceUrls = sourceUrlsFromStage(stageRoot, slug, categoryFile);
   const checkpoints = {
-    day_7: { due_date: addUtcDays(now.toISOString(), 7), snapshot: null },
-    day_14: { due_date: addUtcDays(now.toISOString(), 14), snapshot: null },
-    day_28: { due_date: addUtcDays(now.toISOString(), 28), snapshot: null },
+    day_7: { due_date: addUtcDays(warsawIso(now), 7), snapshot: null },
+    day_14: { due_date: addUtcDays(warsawIso(now), 14), snapshot: null },
+    day_28: { due_date: addUtcDays(warsawIso(now), 28), snapshot: null },
   };
   const publicationEvent = {
     event_id: transactionId,
     operation,
-    published_at: now.toISOString(),
+    published_at: warsawIso(now),
     baseline,
     checkpoints,
     gsc_submission_urls: [url],
@@ -192,8 +194,8 @@ function preparePublicationMonitoring({ stageRoot, article, operation, transacti
     url,
     operation,
     transaction_id: transactionId,
-    first_published_at: existing.first_published_at || now.toISOString(),
-    last_published_at: now.toISOString(),
+    first_published_at: existing.first_published_at || warsawIso(now),
+    last_published_at: warsawIso(now),
     status: 'PUBLISHED_AWAITING_GSC',
     baseline,
     checkpoints,
@@ -209,7 +211,7 @@ function preparePublicationMonitoring({ stageRoot, article, operation, transacti
   };
   const nextItems = [item, ...items.filter((entry) => entry.slug !== slug)]
     .sort((a, b) => String(b.last_published_at || '').localeCompare(String(a.last_published_at || '')));
-  atomicWriteJson(historyPath, { version: 2, updated_at: now.toISOString(), items: nextItems });
+  atomicWriteJson(historyPath, { version: 2, updated_at: warsawIso(now), items: nextItems });
 
   const queuePath = path.join(stageRoot, QUEUE_JSON_RELATIVE);
   const previousQueue = readJson(queuePath, { version: 1, items: [] });
@@ -219,12 +221,12 @@ function preparePublicationMonitoring({ stageRoot, article, operation, transacti
     target_url: url,
     source_urls: sourceUrls,
     sitemap_url: item.sitemap_url,
-    publication_at: now.toISOString(),
+    publication_at: warsawIso(now),
     transaction_id: transactionId,
     status: 'READY_AFTER_PUBLICATION',
   };
   const nextQueue = [queueItem, ...queueItems.filter((entry) => entry.slug !== slug)];
-  atomicWriteJson(queuePath, { version: 1, updated_at: now.toISOString(), items: nextQueue });
+  atomicWriteJson(queuePath, { version: 1, updated_at: warsawIso(now), items: nextQueue });
   const textLines = nextQueue.flatMap((entry) => [
     `# ${entry.slug} | ${entry.status} | ${entry.publication_at}`,
     entry.target_url,
@@ -299,7 +301,7 @@ function refreshMonitoring({ root, inputDir, outputDir = inputDir, now = new Dat
   const previousBySlug = new Map((previous.items || []).map((item) => [item.slug, item]));
   const inspection = inspectGscInput(inputDir, { strictPeriods: true, now });
   if (inspection.blocking) throw new Error(`Monitoring po publikacji wymaga świeżego kompletu GSC: ${inspection.errors.join('; ')}`);
-  const observedAt = inspection.freshness?.generated_at || now.toISOString();
+  const observedAt = inspection.freshness?.generated_at || warsawIso(now);
   const items = (history.items || []).map((published) => buildMonitoringItem({
     published,
     previous: previousBySlug.get(published.slug) || {},
@@ -309,7 +311,7 @@ function refreshMonitoring({ root, inputDir, outputDir = inputDir, now = new Dat
   }));
   const report = {
     version: 1,
-    generated_at: now.toISOString(),
+    generated_at: warsawIso(now),
     gsc_observed_at: observedAt,
     data_contract: inspection.status,
     attribution_warning: 'GSC udostępnia tu kroczące okno 28 dni. Zmiany względem baseline są sygnałem kierunkowym, nie dowodem wyłącznego wpływu publikacji.',

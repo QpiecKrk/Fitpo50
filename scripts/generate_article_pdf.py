@@ -55,6 +55,7 @@ from fpdf.enums import MethodReturnValue  # type: ignore
 from fpdf.fonts import FontFace  # type: ignore
 from fpdf.html import TextStyle  # type: ignore
 from PIL import Image  # type: ignore
+from lib.atomic_file import atomic_write_text
 
 
 BASE_URL = "https://fitpo50.pl/"
@@ -143,8 +144,8 @@ def write_temp_workspace_owner(directory: Path, input_html: Path) -> None:
         "project_root": project_root,
         "workspace_type": "article-pdf-render",
     }
-    (directory / ".fitpo50-workspace.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (directory / ".fitpo50-workspace.lock").write_text(json.dumps(lock, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(directory / ".fitpo50-workspace.json", json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+    atomic_write_text(directory / ".fitpo50-workspace.lock", json.dumps(lock, ensure_ascii=False, indent=2) + "\n")
 
 
 class FitPo50PDF(FPDF):

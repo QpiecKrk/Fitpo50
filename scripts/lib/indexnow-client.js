@@ -2,6 +2,7 @@
 
 const https = require('https');
 const { STATUS, hashUrlList, redactSecrets } = require('./external-integration-status');
+const { warsawIso } = require('./time');
 
 const ENDPOINT = 'https://api.indexnow.org/indexnow';
 
@@ -9,7 +10,7 @@ function baseEvidence(urlList) {
   const urls = (Array.isArray(urlList) ? urlList : []).map((url) => String(url || '').trim()).filter(Boolean);
   return {
     integration: 'INDEXNOW',
-    attempted_at: new Date().toISOString(),
+    attempted_at: warsawIso(),
     operation: 'SUBMIT_URLS',
     endpoint: ENDPOINT,
     url_count: urls.length,

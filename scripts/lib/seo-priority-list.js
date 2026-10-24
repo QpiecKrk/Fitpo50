@@ -1,6 +1,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const { warsawIso } = require('./time');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const DEFAULT_SEO_STATE_DIR = path.join(ROOT, 'data', 'reports', 'local', 'seo-state');
@@ -144,7 +145,7 @@ function selectPriorityWave(items, options = {}) {
   const rotated = previousSelection.length
     ? previousSelection.filter((saved) => saved.source === 'ROTATION').map((saved) => saved.entry)
     : rotationCandidates.slice(0, rotationSlots);
-  const selectedAt = options.selectedAt || new Date().toISOString();
+  const selectedAt = options.selectedAt || warsawIso();
   if (advanceRotation && !previousSelection.length) {
     for (const entry of rotated) {
       sequence += 1;

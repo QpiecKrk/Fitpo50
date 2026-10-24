@@ -3,6 +3,7 @@
 'use strict';
 
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
 const {
   cleanupPreparedArtifact,
@@ -12,6 +13,7 @@ const {
   safeSlug,
 } = require('./lib/article-json-artifact');
 const { contentBlocked, environmentFailure, statusPath } = require('./lib/article-pipeline-status');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -35,7 +37,7 @@ function readJson(file, label) {
 
 function writeJsonAtomic(file, payload) {
   const temporary = `${file}.tmp-${process.pid}-${Date.now()}`;
-  fs.writeFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(temporary, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   fs.renameSync(temporary, file);
 }
 
@@ -111,7 +113,7 @@ function cleanupArticleInput({ root = ROOT, slug, cleanup = cleanupPreparedArtif
   const result = cleanup(inputPath);
   if (result.retained?.length) throw environmentFailure(`Nie udało się usunąć całej paczki: ${result.retained.map((item) => `${item.path} (${item.code})`).join(', ')}`);
   if (!(result.removed?.length || result.removed_directories?.length)) throw environmentFailure(`Nie usunięto żadnego pliku wejściowego dla ${normalizedSlug}.`);
-  const now = new Date().toISOString();
+  const now = warsawIso();
   const updated = {
     ...state,
     updated_at: now,

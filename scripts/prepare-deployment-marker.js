@@ -2,10 +2,12 @@
 
 const crypto = require('node:crypto');
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { canonicalFromHtml, modifiedDates } = require('./lib/deployment-live-verifier');
 const { categoryFileFromKey, normalizeCategory } = require('./lib/categories');
+const { warsawIso } = require('./lib/time');
 
 function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
@@ -19,6 +21,40 @@ function publicFingerprint(siteDir) {
     return `${relativePath}\0${sha256(fs.readFileSync(absolutePath))}`;
   });
   return sha256(entries.join('\n'));
+}
+
+function walkPublicFiles(directory, relative = '', output = []) {
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const child = relative ? `${relative}/${entry.name}` : entry.name;
+    const absolute = path.join(directory, entry.name);
+    if (entry.isSymbolicLink()) throw new Error(`Eksport publikacji zawiera niedozwolony symlink: ${child}`);
+    if (entry.isDirectory()) walkPublicFiles(absolute, child, output);
+    else if (entry.isFile() && child !== 'deployment.json') output.push(child);
+  }
+  return output;
+}
+
+function publicationStateFingerprint(rootDir) {
+  const siteDir = path.join(rootDir, '_site');
+  const entries = [];
+  for (const relative of walkPublicFiles(siteDir).sort((left, right) => left.localeCompare(right, 'pl'))) {
+    entries.push(`_site/${relative}\0${sha256(fs.readFileSync(path.join(siteDir, relative)))}`);
+    const source = path.join(rootDir, relative);
+    if (fs.existsSync(source) && fs.statSync(source).isFile()) entries.push(`${relative}\0${sha256(fs.readFileSync(source))}`);
+  }
+  return sha256(entries.join('\n'));
+}
+
+function assertPreparedPublicationState(rootDir, marker) {
+  if (!marker?.prepared_from_head || !marker?.publication_state_sha256) {
+    throw new Error('deployment.json nie jest powiązany z HEAD i pełnym stanem publikacji. Uruchom npm run deployment:prepare.');
+  }
+  const current = publicationStateFingerprint(rootDir);
+  if (current !== marker.publication_state_sha256) {
+    const currentHead = gitLines(rootDir, ['rev-parse', 'HEAD'])[0] || 'UNKNOWN';
+    throw new Error(`DEPLOYMENT_PREPARE_STALE: pliki publikacji zmieniły się po przygotowaniu markera (prepared_from_head=${marker.prepared_from_head}, current_head=${currentHead}). Uruchom ponownie prepush:local i deployment:prepare.`);
+  }
+  return true;
 }
 
 function gitLines(rootDir, args) {
@@ -50,13 +86,23 @@ function blogPostingFiles(rootDir) {
     .filter((file) => /"@type"\s*:\s*"BlogPosting"/.test(fs.readFileSync(path.join(siteDir, file), 'utf8')));
 }
 
+function extractLocalAssetPaths(html) {
+  const values = [];
+  for (const tag of String(html || '').matchAll(/<(?:source|img)\b[^>]*>/gi)) {
+    for (const attribute of tag[0].matchAll(/\b(?:src|srcset)\s*=\s*["']([^"']+)["']/gi)) {
+      values.push(...attribute[1].split(',').map((entry) => entry.trim().split(/\s+/)[0]));
+    }
+  }
+  return [...new Set(values
+    .filter((value) => value && !/^(?:https?:|data:|\/\/)/i.test(value))
+    .map((value) => value.replace(/^\.?\//, '').split(/[?#]/)[0])
+    .filter(Boolean))];
+}
+
 function ownedArtifactPaths(rootDir, file) {
   const slug = path.basename(file, '.html');
   const html = fs.readFileSync(path.join(rootDir, '_site', file), 'utf8');
-  const images = [...html.matchAll(/<(?:source|img)\b[^>]+(?:src|srcset)=["']([^"']+)["']/gi)]
-    .flatMap((match) => match[1].split(',').map((entry) => entry.trim().split(/\s+/)[0]))
-    .filter((value) => value && !/^(?:https?:|data:|\/\/)/i.test(value))
-    .map((value) => value.replace(/^\.?\//, '').split(/[?#]/)[0]);
+  const images = extractLocalAssetPaths(html);
   return new Set([file, `assets/pdf/${slug}.pdf`, ...images]);
 }
 
@@ -106,10 +152,7 @@ function articleDeploymentEntry(rootDir, file) {
   const pdfRelative = path.join('assets', 'pdf', `${slug}.pdf`);
   const pdfPath = path.join(rootDir, '_site', pdfRelative);
   if (!fs.existsSync(pdfPath)) throw new Error(`${file}: brak PDF w _site.`);
-  const imagePaths = [...html.matchAll(/<(?:source|img)\b[^>]+(?:src|srcset)=["']([^"']+)["']/gi)]
-    .flatMap((match) => match[1].split(',').map((entry) => entry.trim().split(/\s+/)[0]))
-    .filter((value) => value && !/^(?:https?:|data:|\/\/)/.test(value))
-    .map((value) => value.replace(/^\.\//, ''))
+  const imagePaths = extractLocalAssetPaths(html)
     .filter((value) => fs.existsSync(path.join(rootDir, '_site', value)));
   const section = html.match(/<meta\s+property=["']article:section["']\s+content=["']([^"']+)["']/i)?.[1] || 'ciekawe';
   const categoryFile = categoryFileFromKey(normalizeCategory(section).key);
@@ -142,13 +185,15 @@ function prepareDeploymentMarker(rootDir, options = {}) {
   const marker = {
     version: 2,
     release_id: options.releaseId || crypto.randomUUID(),
-    prepared_at: options.preparedAt || new Date().toISOString(),
+    prepared_at: options.preparedAt || warsawIso(),
+    prepared_from_head: gitLines(rootDir, ['rev-parse', 'HEAD'])[0] || '',
+    publication_state_sha256: publicationStateFingerprint(rootDir),
     public_fingerprint_sha256: publicFingerprint(siteDir),
     articles,
   };
   const serialized = `${JSON.stringify(marker, null, 2)}\n`;
-  fs.writeFileSync(path.join(rootDir, 'deployment.json'), serialized, 'utf8');
-  fs.writeFileSync(path.join(siteDir, 'deployment.json'), serialized, 'utf8');
+  atomicWriteFileSync(path.join(rootDir, 'deployment.json'), serialized, 'utf8');
+  atomicWriteFileSync(path.join(siteDir, 'deployment.json'), serialized, 'utf8');
   return marker;
 }
 
@@ -163,4 +208,14 @@ if (require.main === module) {
   }
 }
 
-module.exports = { articleDeploymentEntry, changedDeploymentPaths, changedRootArticles, prepareDeploymentMarker, publicFingerprint, sha256 };
+module.exports = {
+  articleDeploymentEntry,
+  assertPreparedPublicationState,
+  changedDeploymentPaths,
+  changedRootArticles,
+  extractLocalAssetPaths,
+  prepareDeploymentMarker,
+  publicationStateFingerprint,
+  publicFingerprint,
+  sha256,
+};

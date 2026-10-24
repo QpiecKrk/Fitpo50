@@ -76,7 +76,7 @@ test('publikacja atomowo zapisuje historię, baseline, checkpointy i kolejkę GS
       now: new Date('2026-08-25T12:00:00Z'),
     });
     assert.deepEqual(update.item.publication_events.map((event) => event.event_id), ['monitor-test', 'monitor-test-update']);
-    assert.equal(update.item.first_published_at, '2026-08-24T12:00:00.000Z');
+    assert.equal(update.item.first_published_at, '2026-08-24T14:00:00+02:00');
     for (const relative of [
       'data/reports/published-articles-log.json',
       'data/reports/gsc-after-publication-queue.json',

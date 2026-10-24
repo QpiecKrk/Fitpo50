@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const os = require('os');
 const { spawnSync } = require('child_process');
@@ -10,10 +11,19 @@ const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-works
 const { DEFAULT_GROWTH_REPORT_DIR, migrateLegacySeoData } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 const { promoteValidatedGscDataset, recoverGscDatasetPromotion } = require('./lib/gsc-dataset-promotion');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const DEFAULT_WORK_DIR = resolveGscWorkDir(ROOT);
 const DEFAULT_IMPORT_DIR = process.env.GSC_DOWNLOADS_DIR || DEFAULT_WORK_DIR;
+const DEFAULT_GITHUB_TIMEOUT_MS = 20000;
+
+function githubEnvironmentError(message) {
+  const error = new Error(message);
+  error.exitCode = 30;
+  error.code = 'GITHUB_TIMEOUT';
+  return error;
+}
 
 function loadLocalEnvFromHome() {
   const envFile = path.join(os.homedir(), '.fitpo50-gsc.env');
@@ -47,6 +57,7 @@ function parseArgs(argv) {
     preferGithub: true,
     cleanupRepoArtifacts: String(process.env.GSC_CLEAN_REPO_ARTIFACTS || '').toLowerCase() === 'true',
     skipPoprawSeo: false,
+    githubTimeoutMs: DEFAULT_GITHUB_TIMEOUT_MS,
   };
   for (let i = 0; i < argv.length; i += 1) {
     const t = String(argv[i] || '').trim();
@@ -79,6 +90,10 @@ function parseArgs(argv) {
     if (t === '--skip-popraw-seo') {
       out.skipPoprawSeo = true;
     }
+    if (t === '--github-timeout-ms') {
+      out.githubTimeoutMs = Math.max(1000, Number(argv[i + 1]) || DEFAULT_GITHUB_TIMEOUT_MS);
+      i += 1;
+    }
   }
   return out;
 }
@@ -87,14 +102,21 @@ function run(cmd, args, opts = {}) {
   return spawnSync(cmd, args, { encoding: 'utf8', ...opts });
 }
 
-function httpGetJson(url, headers = {}, redirectsLeft = 5) {
+function httpGetJson(url, headers = {}, redirectsLeft = 5, options = {}) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers }, (res) => {
+    const timeoutMs = Number(options.timeoutMs || DEFAULT_GITHUB_TIMEOUT_MS);
+    const get = options.get || https.get;
+    const req = get(url, { headers }, (res) => {
       const status = Number(res.statusCode || 0);
       const location = res.headers.location;
       if ([301, 302, 303, 307, 308].includes(status) && location && redirectsLeft > 0) {
         res.resume();
-        httpGetJson(location, headers, redirectsLeft - 1).then(resolve).catch(reject);
+        httpGetJson(location, headers, redirectsLeft - 1, options).then(resolve).catch(reject);
+        return;
+      }
+      if (status === 408) {
+        res.resume();
+        reject(githubEnvironmentError(`GITHUB_HTTP_408: ${url}`));
         return;
       }
       const chunks = [];
@@ -112,18 +134,35 @@ function httpGetJson(url, headers = {}, redirectsLeft = 5) {
         }
       });
     });
+    req.setTimeout(timeoutMs, () => req.destroy(githubEnvironmentError(`GITHUB_TIMEOUT po ${timeoutMs} ms: ${url}`)));
     req.on('error', reject);
   });
 }
 
-function httpDownloadFile(url, outFile, headers = {}, redirectsLeft = 5) {
+function httpDownloadFile(url, outFile, headers = {}, redirectsLeft = 5, options = {}) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers }, (res) => {
+    const timeoutMs = Number(options.timeoutMs || DEFAULT_GITHUB_TIMEOUT_MS);
+    const get = options.get || https.get;
+    let temporary = '';
+    let stream;
+    const fail = (error) => {
+      if (stream) stream.destroy();
+      if (temporary) {
+        try { fs.unlinkSync(temporary); } catch (_cleanupError) { /* best effort */ }
+      }
+      reject(error);
+    };
+    const req = get(url, { headers }, (res) => {
       const status = Number(res.statusCode || 0);
       const location = res.headers.location;
       if ([301, 302, 303, 307, 308].includes(status) && location && redirectsLeft > 0) {
         res.resume();
-        httpDownloadFile(location, outFile, headers, redirectsLeft - 1).then(resolve).catch(reject);
+        httpDownloadFile(location, outFile, headers, redirectsLeft - 1, options).then(resolve).catch(reject);
+        return;
+      }
+      if (status === 408) {
+        res.resume();
+        fail(githubEnvironmentError(`GITHUB_HTTP_408: ${url}`));
         return;
       }
       if (status < 200 || status >= 300) {
@@ -132,12 +171,19 @@ function httpDownloadFile(url, outFile, headers = {}, redirectsLeft = 5) {
         res.on('end', () => reject(new Error(`HTTP ${status}: ${Buffer.concat(chunks).toString('utf8').slice(0, 300)}`)));
         return;
       }
-      const ws = fs.createWriteStream(outFile);
-      res.pipe(ws);
-      ws.on('finish', () => ws.close(() => resolve()));
-      ws.on('error', reject);
+      temporary = `${outFile}.download-${process.pid}-${Date.now()}`;
+      stream = fs.createWriteStream(temporary, { flags: 'wx' });
+      res.pipe(stream);
+      res.on('error', fail);
+      stream.on('finish', () => stream.close(() => {
+        fs.renameSync(temporary, outFile);
+        temporary = '';
+        resolve();
+      }));
+      stream.on('error', fail);
     });
-    req.on('error', reject);
+    req.setTimeout(timeoutMs, () => req.destroy(githubEnvironmentError(`GITHUB_TIMEOUT po ${timeoutMs} ms: ${url}`)));
+    req.on('error', fail);
   });
 }
 
@@ -382,13 +428,15 @@ function tryGenerateCsvFromApi(workDir) {
   return { ok: true };
 }
 
-function tryGithubArtifact(repo, artifactName, tempDir) {
-  const ghCheck = run('gh', ['--version']);
+function tryGithubArtifact(repo, artifactName, tempDir, timeoutMs = DEFAULT_GITHUB_TIMEOUT_MS) {
+  const ghCheck = run('gh', ['--version'], { timeout: timeoutMs, killSignal: 'SIGTERM' });
+  if (ghCheck.error?.code === 'ETIMEDOUT') throw githubEnvironmentError(`GITHUB_TIMEOUT po ${timeoutMs} ms: gh --version`);
   if (ghCheck.status !== 0) {
     return { ok: false, reason: 'Brak gh CLI.' };
   }
 
-  const list = run('gh', ['run', 'list', '-R', repo, '-L', '30', '--json', 'databaseId,status,conclusion,headBranch,createdAt']);
+  const list = run('gh', ['run', 'list', '-R', repo, '-L', '30', '--json', 'databaseId,status,conclusion,headBranch,createdAt'], { timeout: timeoutMs, killSignal: 'SIGTERM' });
+  if (list.error?.code === 'ETIMEDOUT') throw githubEnvironmentError(`GITHUB_TIMEOUT po ${timeoutMs} ms: gh run list`);
   if (list.status !== 0) {
     return { ok: false, reason: `gh run list failed: ${list.stderr || list.stdout}` };
   }
@@ -403,7 +451,8 @@ function tryGithubArtifact(repo, artifactName, tempDir) {
   for (const runItem of candidates) {
     const runId = String(runItem.databaseId || '').trim();
     if (!runId) continue;
-    const dl = run('gh', ['run', 'download', runId, '-R', repo, '-n', artifactName, '--dir', tempDir]);
+    const dl = run('gh', ['run', 'download', runId, '-R', repo, '-n', artifactName, '--dir', tempDir], { timeout: timeoutMs, killSignal: 'SIGTERM' });
+    if (dl.error?.code === 'ETIMEDOUT') throw githubEnvironmentError(`GITHUB_TIMEOUT po ${timeoutMs} ms: gh run download ${runId}`);
     if (dl.status === 0) {
       return { ok: true, runId };
     }
@@ -411,7 +460,7 @@ function tryGithubArtifact(repo, artifactName, tempDir) {
   return { ok: false, reason: `Nie znaleziono artefaktu "${artifactName}" w ostatnich sukcesach.` };
 }
 
-async function tryGithubArtifactViaApi(repo, artifactName, tempDir) {
+async function tryGithubArtifactViaApi(repo, artifactName, tempDir, timeoutMs = DEFAULT_GITHUB_TIMEOUT_MS) {
   const token = String(process.env.GITHUB_TOKEN || process.env.GH_TOKEN || '').trim();
   const headers = {
     'User-Agent': 'fitpo50-gsc-auto',
@@ -420,7 +469,7 @@ async function tryGithubArtifactViaApi(repo, artifactName, tempDir) {
   if (token) headers.Authorization = `Bearer ${token}`;
 
   const runsUrl = `https://api.github.com/repos/${repo}/actions/runs?status=success&per_page=30`;
-  const runsPayload = await httpGetJson(runsUrl, headers);
+  const runsPayload = await httpGetJson(runsUrl, headers, 5, { timeoutMs });
   const runs = Array.isArray(runsPayload?.workflow_runs) ? runsPayload.workflow_runs : [];
   if (!runs.length) {
     return { ok: false, reason: 'Brak udanych workflow runs w API.' };
@@ -432,8 +481,9 @@ async function tryGithubArtifactViaApi(repo, artifactName, tempDir) {
     const artifactsUrl = `https://api.github.com/repos/${repo}/actions/runs/${runId}/artifacts?per_page=100`;
     let artifactsPayload;
     try {
-      artifactsPayload = await httpGetJson(artifactsUrl, headers);
-    } catch (_err) {
+      artifactsPayload = await httpGetJson(artifactsUrl, headers, 5, { timeoutMs });
+    } catch (error) {
+      if (error?.exitCode === 30) throw error;
       continue;
     }
     const artifacts = Array.isArray(artifactsPayload?.artifacts) ? artifactsPayload.artifacts : [];
@@ -442,8 +492,9 @@ async function tryGithubArtifactViaApi(repo, artifactName, tempDir) {
 
     const zipPath = path.join(tempDir, `artifact-${runId}.zip`);
     try {
-      await httpDownloadFile(String(artifact.archive_download_url), zipPath, headers);
-    } catch (_err) {
+      await httpDownloadFile(String(artifact.archive_download_url), zipPath, headers, 5, { timeoutMs });
+    } catch (error) {
+      if (error?.exitCode === 30) throw error;
       continue;
     }
     const unzip = run('unzip', ['-o', zipPath, '-d', tempDir]);
@@ -588,16 +639,16 @@ function recordSuccessfulGscRun(workDir, source) {
   const manifest = fs.existsSync(path.join(workDir, MANIFEST_NAME))
     ? JSON.parse(fs.readFileSync(path.join(workDir, MANIFEST_NAME), 'utf8'))
     : {};
-  const generatedAt = String(manifest.generated_at || new Date().toISOString());
+  const generatedAt = String(manifest.generated_at || warsawIso());
   const eventId = `gsc:${generatedAt}`;
   const events = Array.isArray(payload.events) ? payload.events : [];
   if (!events.some((event) => event.id === eventId)) {
-    events.push({ id: eventId, type: 'gsc_run', status: 'SUCCESS', at: new Date().toISOString(), data_generated_at: generatedAt, source });
+    events.push({ id: eventId, type: 'gsc_run', status: 'SUCCESS', at: warsawIso(), data_generated_at: generatedAt, source });
   }
   payload.version = 1;
-  payload.updated_at = new Date().toISOString();
+  payload.updated_at = warsawIso();
   payload.events = events.slice(-200);
-  fs.writeFileSync(eventPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(eventPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
 }
 
 function finishSuccessfulReports(workDir, source) {
@@ -641,19 +692,20 @@ async function main() {
 
     let sourceLabel = '';
     if (args.preferGithub) {
-      const ghRes = tryGithubArtifact(args.repo, args.artifact, tmp);
+      const ghRes = tryGithubArtifact(args.repo, args.artifact, tmp, args.githubTimeoutMs);
       if (ghRes.ok) {
         sourceLabel = `github-artifact:${args.repo}:${args.artifact}`;
       } else {
         console.log(`[GSC-AUTO] GitHub artifact (gh CLI) pominięty: ${ghRes.reason}`);
         try {
-          const apiRes = await tryGithubArtifactViaApi(args.repo, args.artifact, tmp);
+          const apiRes = await tryGithubArtifactViaApi(args.repo, args.artifact, tmp, args.githubTimeoutMs);
           if (apiRes.ok) {
             sourceLabel = `github-artifact-api:${args.repo}:${args.artifact}:run-${apiRes.runId}`;
           } else {
             console.log(`[GSC-AUTO] GitHub artifact (API) pominięty: ${apiRes.reason}`);
           }
         } catch (err) {
+          if (err?.exitCode === 30) throw err;
           console.log(`[GSC-AUTO] GitHub artifact (API) błąd: ${err.message || err}`);
         }
       }
@@ -710,14 +762,27 @@ async function main() {
       'Nastepnie uruchom ponownie: npm run gsc:auto',
       `Szczegoly bledu auto-fetch: ${freshErr && freshErr.message ? freshErr.message : String(freshErr)}`,
     ].join('\n');
-    throw new Error(manualMsg);
+    const wrapped = new Error(manualMsg);
+    wrapped.exitCode = freshErr?.exitCode || 1;
+    throw wrapped;
   } finally {
     if (tmp) disposeTempWorkspace(tmp, { status: tmpStatus });
     if (datasetStage && fs.existsSync(datasetStage)) disposeTempWorkspace(datasetStage, { status: tmpStatus });
   }
 }
 
-main().catch((err) => {
-  console.error(err.message || err);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(err.message || err);
+    process.exit(err?.exitCode || 1);
+  });
+}
+
+module.exports = {
+  DEFAULT_GITHUB_TIMEOUT_MS,
+  githubEnvironmentError,
+  httpDownloadFile,
+  httpGetJson,
+  tryGithubArtifact,
+  tryGithubArtifactViaApi,
+};

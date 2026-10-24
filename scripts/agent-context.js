@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -40,7 +42,7 @@ function exists(relPath) {
 
 function main() {
   fs.mkdirSync(REPORT_DIR, { recursive: true });
-  const now = new Date().toISOString();
+  const now = warsawIso();
   const status = run('git', ['status', '--short']).stdout.split('\n').filter(Boolean);
   const lastCommit = run('git', ['log', '-1', '--oneline']).stdout;
   const branch = run('git', ['branch', '--show-current']).stdout;
@@ -115,8 +117,8 @@ function main() {
     '',
   ].join('\n');
 
-  fs.writeFileSync(JSON_PATH, `${JSON.stringify(context, null, 2)}\n`, 'utf8');
-  fs.writeFileSync(MD_PATH, md, 'utf8');
+  atomicWriteFileSync(JSON_PATH, `${JSON.stringify(context, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(MD_PATH, md, 'utf8');
   console.log(`[PASS] agent-context written: ${path.relative(ROOT, MD_PATH)}, ${path.relative(ROOT, JSON_PATH)}`);
 }
 

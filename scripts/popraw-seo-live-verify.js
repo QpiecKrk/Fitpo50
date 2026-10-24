@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { verifyLiveResponses } = require('./lib/popraw-seo-live-verifier');
 const { deploymentRegistryPath } = require('./lib/popraw-seo-deployment-registry');
@@ -72,7 +73,7 @@ async function collectResponses(manifest, timeoutMs) {
 
 function writeOutputs(result, outputDir) {
   fs.mkdirSync(outputDir, { recursive: true });
-  fs.writeFileSync(path.join(outputDir, 'gsc-live-submit-queue.json'), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(path.join(outputDir, 'gsc-live-submit-queue.json'), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
   const lines = [
     `Status: ${result.status}`,
     '',
@@ -83,7 +84,7 @@ function writeOutputs(result, outputDir) {
     ...(result.source_pages_for_recrawl.length ? result.source_pages_for_recrawl.map((url) => `- ${url}`) : ['- brak']),
     ...(result.errors.length ? ['', 'Blokery:', ...result.errors.map((error) => `- ${error}`)] : []),
   ];
-  fs.writeFileSync(path.join(outputDir, 'gsc-live-submit-queue.txt'), `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(path.join(outputDir, 'gsc-live-submit-queue.txt'), `${lines.join('\n')}\n`, 'utf8');
 }
 
 async function main() {

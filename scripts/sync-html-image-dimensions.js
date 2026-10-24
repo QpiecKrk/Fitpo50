@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
@@ -42,7 +43,7 @@ function updateFile(input) {
     if (out !== tag) changed += 1;
     return out;
   });
-  if (next !== original) fs.writeFileSync(htmlPath, next, 'utf8');
+  if (next !== original) atomicWriteFileSync(htmlPath, next, 'utf8');
   console.log(`[IMAGE-DIMENSIONS] ${input}: ${changed} updated`);
 }
 

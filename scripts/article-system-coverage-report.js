@@ -2,11 +2,13 @@
 'use strict';
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { execFileSync } = require('child_process');
 const { collectPages } = require('./gsc-priority-map');
 const { validatePreviewReport } = require('./lib/article-preview-report');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const SITE_ORIGIN = 'https://fitpo50.pl';
@@ -29,7 +31,7 @@ function relative(root, file) {
 
 function fileObservedAt(file) {
   if (!fs.existsSync(file)) return null;
-  return fs.statSync(file).mtime.toISOString();
+  return warsawIso(fs.statSync(file).mtime);
 }
 
 function gitSnapshot(root) {
@@ -221,7 +223,7 @@ function buildCoverageReport(options = {}) {
   return {
     report_kind: 'ARTICLE_SYSTEM_COVERAGE',
     version: 1,
-    generated_at: now.toISOString(),
+    generated_at: warsawIso(now),
     informational_only: true,
     git,
     catalog: {
@@ -322,8 +324,8 @@ function writeOutputs(report, outputDir = OUTPUT_DIR) {
   fs.mkdirSync(outputDir, { recursive: true });
   const jsonFile = path.join(outputDir, path.basename(JSON_OUTPUT));
   const textFile = path.join(outputDir, path.basename(TEXT_OUTPUT));
-  fs.writeFileSync(jsonFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
-  fs.writeFileSync(textFile, renderText(report), 'utf8');
+  atomicWriteFileSync(jsonFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(textFile, renderText(report), 'utf8');
   return { jsonFile, textFile };
 }
 

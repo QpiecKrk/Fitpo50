@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('node:fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
 const { compareExportTrees } = require('./lib/export-parity');
 
@@ -22,7 +23,7 @@ function main() {
   if (args.report) {
     const output = path.resolve(args.report);
     fs.mkdirSync(path.dirname(output), { recursive: true });
-    fs.writeFileSync(output, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+    atomicWriteFileSync(output, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   }
   for (const group of ['missing', 'extra', 'different']) {
     for (const entry of report[group]) console.error(`[EXPORT-PARITY] ${group.toUpperCase()} ${entry.kind}: ${entry.path}`);

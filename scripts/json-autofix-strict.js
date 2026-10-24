@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 
 function parseArgs(argv) {
@@ -79,7 +80,7 @@ function main() {
     });
   }
 
-  fs.writeFileSync(filePath, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(filePath, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
   console.log('[OK] json-autofix-strict: struktura techniczna bez generowania treści, FAQ i źródeł');
   changes.forEach((change) => console.log(`- ${change}`));
 }

@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const crypto = require('crypto');
 const { writeManifestFromApiReport } = require('./lib/gsc-data-contract');
 const { isEditorialQuery, MIN_CTR_REVIEW_IMPRESSIONS } = require('./lib/gsc-editorial-query');
 const { STATUS, classifyExternalError, redactSecrets } = require('./lib/external-integration-status');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -272,7 +274,7 @@ function writeCsv(filePath, headers, rows) {
     const line = headers.map((h) => csvEscape(row[h])).join(',');
     lines.push(line);
   });
-  fs.writeFileSync(filePath, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(filePath, `${lines.join('\n')}\n`, 'utf8');
 }
 
 function writeCanonicalCsvTriplet(outputCsvDir, data) {
@@ -377,7 +379,7 @@ function writeExtendedSnapshots(outputCsvDir, report) {
     writeCsv(path.join(baseDir, `${type}-28d-current-pages.csv`), ['page', 'clicks', 'impressions', 'ctr', 'position'], dataset.current_pages || []);
     writeCsv(path.join(baseDir, `${type}-28d-previous-pages.csv`), ['page', 'clicks', 'impressions', 'ctr', 'position'], dataset.previous_pages || []);
   }
-  fs.writeFileSync(path.join(baseDir, 'gsc-raw-snapshot.json'), `${JSON.stringify({
+  atomicWriteFileSync(path.join(baseDir, 'gsc-raw-snapshot.json'), `${JSON.stringify({
     generated_at: report.generated_at,
     property: report.property,
     api_limitations: report.api_limitations,
@@ -390,7 +392,7 @@ function writeExtendedSnapshots(outputCsvDir, report) {
 function writeReport(report, outputJson, outputMd) {
   ensureDir(outputJson);
   ensureDir(outputMd);
-  fs.writeFileSync(outputJson, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(outputJson, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 
   const lines = [];
   lines.push('# GSC Weekly Report (API)');
@@ -514,12 +516,12 @@ function writeReport(report, outputJson, outputMd) {
 
   lines.push('');
   lines.push(`Property: ${report.property || '(brak)'}`);
-  fs.writeFileSync(outputMd, `${lines.join('\n')}\n`, 'utf8');
+  atomicWriteFileSync(outputMd, `${lines.join('\n')}\n`, 'utf8');
 }
 
 function diagnosticReport(status, property, details = {}) {
   return {
-    generated_at: new Date().toISOString(),
+    generated_at: warsawIso(),
     report_kind: 'DIAGNOSTIC',
     status,
     reason: details.reason || status,
@@ -868,7 +870,7 @@ async function main() {
     const topP = pageOpportunities[0];
 
     return {
-      generated_at: new Date().toISOString(),
+      generated_at: warsawIso(),
       report_kind: 'DATASET',
       status: STATUS.OK_VERIFIED,
       property,

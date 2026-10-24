@@ -1,11 +1,14 @@
 const crypto = require('crypto');
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./atomic-file');
 const path = require('path');
 const { STATUS } = require('./external-integration-status');
+const { GSC_FRESHNESS_MAX_AGE_HOURS } = require('./gsc-policy');
+const { warsawDay, warsawIso } = require('./time');
 
 const MANIFEST_NAME = 'gsc-data-manifest.json';
 const API_REPORT_NAME = 'gsc-weekly-report-api.json';
-const DEFAULT_MAX_AGE_HOURS = 72;
+const DEFAULT_MAX_AGE_HOURS = GSC_FRESHNESS_MAX_AGE_HOURS;
 const DEFAULT_MAX_COHORT_SPREAD_MINUTES = 30;
 const DEFAULT_MAX_RANGE_LAG_DAYS = 3;
 const REQUIRED_INPUTS = [
@@ -91,7 +94,7 @@ function nextIsoDay(value) {
   const date = parseDate(`${value}T00:00:00Z`);
   if (!date) return '';
   date.setUTCDate(date.getUTCDate() + 1);
-  return date.toISOString().slice(0, 10);
+  return warsawDay(date);
 }
 
 function validateReportingWindows(windows) {
@@ -131,7 +134,7 @@ function resolveRequiredFiles(inputDir) {
 
 function inspectGscInput(inputDir, options = {}) {
   const now = options.now instanceof Date ? options.now : new Date(options.now || Date.now());
-  const maxAgeHours = Number(options.maxAgeHours || process.env.GSC_MAX_INPUT_AGE_HOURS || DEFAULT_MAX_AGE_HOURS);
+  const maxAgeHours = DEFAULT_MAX_AGE_HOURS;
   const maxSpreadMinutes = Number(options.maxCohortSpreadMinutes || process.env.GSC_MAX_COHORT_SPREAD_MINUTES || DEFAULT_MAX_COHORT_SPREAD_MINUTES);
   const maxRangeLagDays = Number(options.maxRangeLagDays || process.env.GSC_MAX_RANGE_LAG_DAYS || DEFAULT_MAX_RANGE_LAG_DAYS);
   const strictPeriods = options.strictPeriods !== false;
@@ -161,7 +164,7 @@ function inspectGscInput(inputDir, options = {}) {
       exists: true,
       rows,
       type,
-      mtime: stat.mtime.toISOString(),
+      mtime: warsawIso(stat.mtime),
       sha256: sha256File(file),
     };
   }
@@ -268,13 +271,13 @@ function inspectGscInput(inputDir, options = {}) {
   return {
     status: errors.length ? 'FAIL' : warnings.length ? 'WARN' : 'PASS',
     blocking: errors.length > 0,
-    checked_at: now.toISOString(),
+    checked_at: warsawIso(now),
     input_dir: resolvedDir,
     source: manifest?.source || ((verifiedApiReport || apiReport)?.status === STATUS.OK_VERIFIED ? 'gsc_api' : 'manual_csv'),
     property: manifest?.property || (verifiedApiReport || apiReport)?.property || '',
     freshness: {
       status: freshnessReference && ageHours <= maxAgeHours && futureHours <= 1 ? 'PASS' : 'FAIL',
-      generated_at: freshnessReference ? freshnessReference.toISOString() : '',
+      generated_at: freshnessReference ? warsawIso(freshnessReference) : '',
       age_hours: Number.isFinite(ageHours) ? Number(ageHours.toFixed(2)) : null,
       max_age_hours: maxAgeHours,
     },
@@ -354,9 +357,9 @@ function writeManifestFromApiReport(report, outputDir) {
   fs.mkdirSync(resolvedOutputDir, { recursive: true });
   const snapshot = apiReportSnapshot(report);
   const snapshotPath = path.join(resolvedOutputDir, snapshot.name);
-  fs.writeFileSync(snapshotPath, snapshot.content, 'utf8');
+  atomicWriteFileSync(snapshotPath, snapshot.content, 'utf8');
   const outputPath = path.join(resolvedOutputDir, MANIFEST_NAME);
-  fs.writeFileSync(outputPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(outputPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
   return outputPath;
 }
 

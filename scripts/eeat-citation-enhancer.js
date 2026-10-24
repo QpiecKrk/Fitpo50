@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 
 function parseArgs(argv) {
@@ -126,7 +127,7 @@ async function main() {
     }
   }
 
-  if (write) fs.writeFileSync(file, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
+  if (write) atomicWriteFileSync(file, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
 
   console.log(`[EEAT] checked=${checked} updated=${updated} write=${write ? 'true' : 'false'}`);
   if (warnings.length) {

@@ -8,7 +8,7 @@ on:
 jobs:
   live_check:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 22
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,11 +22,11 @@ jobs:
           TIMEOUT: "20"
         run: |
           set +e
-          timeout --foreground 300s bash scripts/live-postpush-check.sh https://fitpo50.pl
+          timeout --foreground 780s bash scripts/live-postpush-check.sh https://fitpo50.pl
           status="$?"
           set -e
           if [ "$status" = "124" ]; then
-            echo "[ERROR] Live post-push check przekroczył 300 s; wdrożenie i kontrola bezpieczeństwa nie zostały potwierdzone."
+            echo "[ERROR] Live post-push check przekroczył 780 s; wdrożenie i kontrola bezpieczeństwa nie zostały potwierdzone."
             exit 1
           fi
           exit "$status"

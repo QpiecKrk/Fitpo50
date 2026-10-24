@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
+const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -57,7 +59,7 @@ function main() {
   }
 
   const report = {
-    generatedAt: new Date().toISOString(),
+    generatedAt: warsawIso(),
     maxAgeDays: MAX_AGE_DAYS,
     minFaq: MIN_FAQ,
     totals: {
@@ -71,7 +73,7 @@ function main() {
 
   fs.mkdirSync(REPORT_DIR, { recursive: true });
   const out = path.join(REPORT_DIR, 'faq-refresh-report.json');
-  fs.writeFileSync(out, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  atomicWriteFileSync(out, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 
   console.log(`[PASS] faq-refresh-report generated: ${out}`);
   console.log(`- artykuly: ${files.length}`);
