@@ -17,6 +17,8 @@ const {
   changedRootArticles,
   extractLocalAssetPaths,
   publicationStateFingerprint,
+  publicationStateSnapshot,
+  publicationStateDetailsPath,
 } = require('../scripts/prepare-deployment-marker');
 
 const ROOT = path.join(__dirname, '..');
@@ -37,6 +39,15 @@ function walk(directory, output = []) {
 
 function git(root, ...args) {
   return execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
+}
+
+function writePublicationDetails(root, snapshot) {
+  const file = publicationStateDetailsPath(root);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, `${JSON.stringify({
+    publication_state_sha256: snapshot.fingerprint,
+    files: snapshot.files,
+  })}\n`);
 }
 
 test('atomowy zapis zachowuje poprzedni plik po przerwaniu i wszystkie aktywne skrypty używają helpera', () => {
@@ -159,16 +170,116 @@ test('raporty i marker korzystają ze wspólnego czasu Europe/Warsaw z DST', () 
   assert.match(fs.readFileSync(path.join(ROOT, 'scripts', 'prepare-deployment-marker.js'), 'utf8'), /prepared_at: options\.preparedAt \|\| warsawIso\(\)/);
 });
 
-test('finalizacja odrzuca marker po zmianie plików publikacji od prepare', () => {
+test('finalizacja odrzuca marker po zmianie śledzonego pliku publikacji i wskazuje plik', (t) => {
   const root = temporary('fitpo50-marker-head-');
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  git(root, 'init');
+  git(root, 'config', 'user.email', 'test@example.com');
+  git(root, 'config', 'user.name', 'Test');
   fs.mkdirSync(path.join(root, '_site'));
   fs.writeFileSync(path.join(root, 'index.html'), 'wersja 1');
   fs.writeFileSync(path.join(root, '_site', 'index.html'), 'wersja 1');
-  const marker = { prepared_from_head: 'head-1', publication_state_sha256: publicationStateFingerprint(root) };
+  git(root, 'add', '.');
+  git(root, 'commit', '-m', 'base');
+  const prepared = publicationStateSnapshot(root);
+  const marker = {
+    prepared_from_head: git(root, 'rev-parse', 'HEAD'),
+    publication_state_sha256: prepared.fingerprint,
+  };
+  writePublicationDetails(root, prepared);
   assert.equal(assertPreparedPublicationState(root, marker), true);
   fs.writeFileSync(path.join(root, 'index.html'), 'wersja 2');
   fs.writeFileSync(path.join(root, '_site', 'index.html'), 'wersja 2');
-  assert.throws(() => assertPreparedPublicationState(root, marker), /DEPLOYMENT_PREPARE_STALE/);
+  assert.throws(
+    () => assertPreparedPublicationState(root, marker),
+    (error) => /DEPLOYMENT_PREPARE_STALE/.test(error.message)
+      && /zmienione: .*index\.html/.test(error.message),
+  );
+});
+
+test('fingerprint ignoruje runtime, obejmuje nowe pliki i jest identyczny z czystym checkoutem', (t) => {
+  const root = temporary('fitpo50-marker-files-');
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  git(root, 'init');
+  git(root, 'config', 'user.email', 'test@example.com');
+  git(root, 'config', 'user.name', 'Test');
+  fs.mkdirSync(path.join(root, '_site', 'assets', 'news'), { recursive: true });
+  fs.mkdirSync(path.join(root, 'assets', 'news'), { recursive: true });
+  fs.writeFileSync(path.join(root, '.gitignore'), 'assets/news/news_20*\n_site/assets/news/news_20*\n');
+  fs.writeFileSync(path.join(root, 'index.html'), 'index');
+  fs.writeFileSync(path.join(root, '_site', 'index.html'), 'index');
+  git(root, 'add', '.');
+  git(root, 'commit', '-m', 'base');
+
+  const clean = publicationStateFingerprint(root);
+  for (const prefix of ['assets/news', '_site/assets/news']) {
+    fs.writeFileSync(path.join(root, prefix, 'news_20261025_runtime.jpg'), 'runtime');
+  }
+  assert.equal(publicationStateFingerprint(root), clean, 'ignorowane pliki nie mogą zmieniać fingerprintu');
+
+  fs.writeFileSync(path.join(root, 'nowy-artykul.html'), 'nowy');
+  fs.writeFileSync(path.join(root, '_site', 'nowy-artykul.html'), 'nowy');
+  const withArticle = publicationStateFingerprint(root);
+  assert.notEqual(withArticle, clean, 'nowy nieignorowany artykuł musi wejść do fingerprintu');
+
+  fs.rmSync(path.join(root, 'assets', 'news', 'news_20261025_runtime.jpg'));
+  fs.rmSync(path.join(root, '_site', 'assets', 'news', 'news_20261025_runtime.jpg'));
+  assert.equal(publicationStateFingerprint(root), withArticle, 'czysty checkout bez ignorowanych miniatur ma ten sam fingerprint');
+});
+
+test('DEPLOYMENT_PREPARE_STALE wypisuje brakujące, dodatkowe i zmienione pliki', (t) => {
+  const root = temporary('fitpo50-marker-diff-');
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  git(root, 'init');
+  git(root, 'config', 'user.email', 'test@example.com');
+  git(root, 'config', 'user.name', 'Test');
+  fs.mkdirSync(path.join(root, '_site'));
+  for (const name of ['missing.html', 'changed.html']) {
+    fs.writeFileSync(path.join(root, name), name);
+    fs.writeFileSync(path.join(root, '_site', name), name);
+  }
+  git(root, 'add', '.');
+  git(root, 'commit', '-m', 'base');
+  const prepared = publicationStateSnapshot(root);
+  const marker = {
+    prepared_from_head: git(root, 'rev-parse', 'HEAD'),
+    publication_state_sha256: prepared.fingerprint,
+  };
+  writePublicationDetails(root, prepared);
+  fs.rmSync(path.join(root, '_site', 'missing.html'));
+  fs.writeFileSync(path.join(root, '_site', 'changed.html'), 'changed-v2');
+  fs.writeFileSync(path.join(root, '_site', 'additional.html'), 'additional');
+  assert.throws(
+    () => assertPreparedPublicationState(root, marker),
+    (error) => /brakujące: _site\/missing\.html/.test(error.message)
+      && /dodatkowe: _site\/additional\.html/.test(error.message)
+      && /zmienione: _site\/changed\.html/.test(error.message),
+  );
+});
+
+test('publiczny marker nie ujawnia listy plików, a czysty checkout nadal blokuje zły odcisk', (t) => {
+  const root = temporary('fitpo50-marker-public-');
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  git(root, 'init');
+  git(root, 'config', 'user.email', 'test@example.com');
+  git(root, 'config', 'user.name', 'Test');
+  fs.mkdirSync(path.join(root, '_site'));
+  fs.writeFileSync(path.join(root, 'index.html'), 'index');
+  fs.writeFileSync(path.join(root, '_site', 'index.html'), 'index');
+  git(root, 'add', '.');
+  git(root, 'commit', '-m', 'base');
+  const prepared = publicationStateSnapshot(root);
+  const marker = {
+    prepared_from_head: git(root, 'rev-parse', 'HEAD'),
+    publication_state_sha256: prepared.fingerprint,
+  };
+  fs.writeFileSync(path.join(root, '_site', 'index.html'), 'zmiana');
+  assert.throws(
+    () => assertPreparedPublicationState(root, marker),
+    (error) => /DEPLOYMENT_PREPARE_STALE/.test(error.message)
+      && /szczegóły plików niedostępne/.test(error.message),
+  );
+  assert.equal(Object.hasOwn(marker, 'publication_state_files'), false);
 });
 
 test('kontrola live odświeża origin/main wewnątrz każdej próby', () => {

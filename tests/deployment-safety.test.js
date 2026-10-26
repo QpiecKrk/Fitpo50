@@ -86,6 +86,9 @@ test('deployment marker is identical in source and export', () => {
   const marker = prepareDeploymentMarker(root, { releaseId: 'release-test', preparedAt: '2026-10-01T10:00:00.000Z' });
   assert.equal(marker.release_id, 'release-test');
   assert.equal(fs.readFileSync(path.join(root, 'deployment.json'), 'utf8'), fs.readFileSync(path.join(root, '_site', 'deployment.json'), 'utf8'));
+  assert.equal(Object.hasOwn(marker, 'publication_state_files'), false);
+  assert.doesNotMatch(fs.readFileSync(path.join(root, '_site', 'deployment.json'), 'utf8'), /publication_state_files/);
+  assert.equal(fs.existsSync(path.join(root, '.cache', 'deployment-publication-state.json')), true);
 });
 
 for (const pushFirst of [true, false]) {

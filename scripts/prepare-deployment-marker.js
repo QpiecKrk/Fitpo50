@@ -8,6 +8,9 @@ const { spawnSync } = require('node:child_process');
 const { canonicalFromHtml, modifiedDates } = require('./lib/deployment-live-verifier');
 const { categoryFileFromKey, normalizeCategory } = require('./lib/categories');
 const { warsawIso } = require('./lib/time');
+const { checkNewsFallbackSync } = require('./news-deploy-sync-gate');
+
+const PUBLICATION_STATE_DETAILS = path.join('.cache', 'deployment-publication-state.json');
 
 function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
@@ -23,36 +26,88 @@ function publicFingerprint(siteDir) {
   return sha256(entries.join('\n'));
 }
 
-function walkPublicFiles(directory, relative = '', output = []) {
-  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    const child = relative ? `${relative}/${entry.name}` : entry.name;
-    const absolute = path.join(directory, entry.name);
-    if (entry.isSymbolicLink()) throw new Error(`Eksport publikacji zawiera niedozwolony symlink: ${child}`);
-    if (entry.isDirectory()) walkPublicFiles(absolute, child, output);
-    else if (entry.isFile() && child !== 'deployment.json') output.push(child);
+function gitPublicationPaths(rootDir) {
+  const result = spawnSync('git', [
+    'ls-files', '-z', '--cached', '--others', '--exclude-standard',
+  ], { cwd: rootDir, encoding: null, maxBuffer: 50 * 1024 * 1024 });
+  if (result.status !== 0) {
+    throw new Error(`Nie można ustalić plików publikacji z indeksu Git: ${String(result.stderr || result.stdout || '').trim()}`);
   }
-  return output;
+  return new Set(result.stdout.toString('utf8').split('\0').filter(Boolean).map((file) => file.replace(/\\/g, '/')));
+}
+
+function publicationStateSnapshot(rootDir) {
+  const eligible = gitPublicationPaths(rootDir);
+  const siteFiles = [...eligible]
+    .filter((file) => file.startsWith('_site/') && file !== '_site/deployment.json')
+    .filter((file) => {
+      const absolute = path.join(rootDir, file);
+      if (!fs.existsSync(absolute)) return false;
+      if (fs.lstatSync(absolute).isSymbolicLink()) throw new Error(`Eksport publikacji zawiera niedozwolony symlink: ${file}`);
+      return fs.statSync(absolute).isFile();
+    });
+  const files = [];
+  for (const sitePath of siteFiles) {
+    files.push({ path: sitePath, sha256: sha256(fs.readFileSync(path.join(rootDir, sitePath))) });
+    const sourcePath = sitePath.slice('_site/'.length);
+    const source = path.join(rootDir, sourcePath);
+    if (eligible.has(sourcePath) && fs.existsSync(source) && fs.statSync(source).isFile()) {
+      files.push({ path: sourcePath, sha256: sha256(fs.readFileSync(source)) });
+    }
+  }
+  files.sort((left, right) => left.path.localeCompare(right.path, 'pl'));
+  return {
+    files,
+    fingerprint: sha256(files.map((entry) => `${entry.path}\0${entry.sha256}`).join('\n')),
+  };
 }
 
 function publicationStateFingerprint(rootDir) {
-  const siteDir = path.join(rootDir, '_site');
-  const entries = [];
-  for (const relative of walkPublicFiles(siteDir).sort((left, right) => left.localeCompare(right, 'pl'))) {
-    entries.push(`_site/${relative}\0${sha256(fs.readFileSync(path.join(siteDir, relative)))}`);
-    const source = path.join(rootDir, relative);
-    if (fs.existsSync(source) && fs.statSync(source).isFile()) entries.push(`${relative}\0${sha256(fs.readFileSync(source))}`);
+  return publicationStateSnapshot(rootDir).fingerprint;
+}
+
+function publicationStateDifferences(expectedFiles, actualFiles) {
+  const expected = new Map((expectedFiles || []).map((entry) => [entry.path, entry.sha256]));
+  const actual = new Map((actualFiles || []).map((entry) => [entry.path, entry.sha256]));
+  return {
+    missing: [...expected.keys()].filter((file) => !actual.has(file)).sort((a, b) => a.localeCompare(b, 'pl')),
+    additional: [...actual.keys()].filter((file) => !expected.has(file)).sort((a, b) => a.localeCompare(b, 'pl')),
+    changed: [...expected.keys()].filter((file) => actual.has(file) && actual.get(file) !== expected.get(file)).sort((a, b) => a.localeCompare(b, 'pl')),
+  };
+}
+
+function publicationStateDetailsPath(rootDir) {
+  return path.join(rootDir, PUBLICATION_STATE_DETAILS);
+}
+
+function readPublicationStateDetails(rootDir, fingerprint) {
+  const file = publicationStateDetailsPath(rootDir);
+  if (!fs.existsSync(file)) return null;
+  try {
+    const parsed = JSON.parse(fs.readFileSync(file, 'utf8'));
+    if (parsed.publication_state_sha256 !== fingerprint || !Array.isArray(parsed.files)) return null;
+    return parsed.files;
+  } catch (_error) {
+    return null;
   }
-  return sha256(entries.join('\n'));
 }
 
 function assertPreparedPublicationState(rootDir, marker) {
   if (!marker?.prepared_from_head || !marker?.publication_state_sha256) {
     throw new Error('deployment.json nie jest powiązany z HEAD i pełnym stanem publikacji. Uruchom npm run deployment:prepare.');
   }
-  const current = publicationStateFingerprint(rootDir);
-  if (current !== marker.publication_state_sha256) {
+  const current = publicationStateSnapshot(rootDir);
+  if (current.fingerprint !== marker.publication_state_sha256) {
     const currentHead = gitLines(rootDir, ['rev-parse', 'HEAD'])[0] || 'UNKNOWN';
-    throw new Error(`DEPLOYMENT_PREPARE_STALE: pliki publikacji zmieniły się po przygotowaniu markera (prepared_from_head=${marker.prepared_from_head}, current_head=${currentHead}). Uruchom ponownie prepush:local i deployment:prepare.`);
+    const expectedFiles = readPublicationStateDetails(rootDir, marker.publication_state_sha256);
+    const detail = expectedFiles
+      ? (() => {
+        const differences = publicationStateDifferences(expectedFiles, current.files);
+        const format = (values) => (values.length ? values.join(', ') : '(brak)');
+        return `; brakujące: ${format(differences.missing)}; dodatkowe: ${format(differences.additional)}; zmienione: ${format(differences.changed)}`;
+      })()
+      : '; szczegóły plików niedostępne w tym checkout (lokalny plik diagnostyczny nie jest publikowany)';
+    throw new Error(`DEPLOYMENT_PREPARE_STALE: pliki publikacji zmieniły się po przygotowaniu markera (prepared_from_head=${marker.prepared_from_head}, current_head=${currentHead})${detail}. Uruchom ponownie prepush:local i deployment:prepare.`);
   }
   return true;
 }
@@ -182,29 +237,42 @@ function prepareDeploymentMarker(rootDir, options = {}) {
   if (!fs.existsSync(siteDir)) throw new Error('Brak katalogu _site. Najpierw wykonaj eksport.');
   const articles = changedRootArticles(rootDir).map((file) => articleDeploymentEntry(rootDir, file));
   assertArticleInventoryComplete(rootDir, articles);
+  const publicationState = publicationStateSnapshot(rootDir);
   const marker = {
     version: 2,
     release_id: options.releaseId || crypto.randomUUID(),
     prepared_at: options.preparedAt || warsawIso(),
     prepared_from_head: gitLines(rootDir, ['rev-parse', 'HEAD'])[0] || '',
-    publication_state_sha256: publicationStateFingerprint(rootDir),
+    publication_state_sha256: publicationState.fingerprint,
     public_fingerprint_sha256: publicFingerprint(siteDir),
     articles,
   };
+  fs.mkdirSync(path.dirname(publicationStateDetailsPath(rootDir)), { recursive: true });
+  atomicWriteFileSync(publicationStateDetailsPath(rootDir), `${JSON.stringify({
+    publication_state_sha256: publicationState.fingerprint,
+    files: publicationState.files,
+  }, null, 2)}\n`, 'utf8');
   const serialized = `${JSON.stringify(marker, null, 2)}\n`;
   atomicWriteFileSync(path.join(rootDir, 'deployment.json'), serialized, 'utf8');
   atomicWriteFileSync(path.join(siteDir, 'deployment.json'), serialized, 'utf8');
   return marker;
 }
 
+function runDeploymentPrepare(rootDir, options = {}) {
+  const newsSyncCheck = options.newsSyncCheck || checkNewsFallbackSync;
+  const markerPrepare = options.markerPrepare || prepareDeploymentMarker;
+  newsSyncCheck({ root: rootDir });
+  return markerPrepare(rootDir, options.markerOptions || {});
+}
+
 if (require.main === module) {
   try {
-    const marker = prepareDeploymentMarker(process.cwd());
+    const marker = runDeploymentPrepare(process.cwd());
     console.log(`[DEPLOYMENT PREPARED] ${marker.release_id}`);
     console.log('Marker: deployment.json oraz _site/deployment.json');
   } catch (error) {
     console.error(`[DEPLOYMENT PREPARE][FAIL] ${error.message || error}`);
-    process.exit(1);
+    process.exit(error && Number.isInteger(error.exitCode) ? error.exitCode : 1);
   }
 }
 
@@ -215,7 +283,12 @@ module.exports = {
   changedRootArticles,
   extractLocalAssetPaths,
   prepareDeploymentMarker,
+  runDeploymentPrepare,
   publicationStateFingerprint,
+  publicationStateDifferences,
+  publicationStateSnapshot,
+  publicationStateDetailsPath,
+  readPublicationStateDetails,
   publicFingerprint,
   sha256,
 };
