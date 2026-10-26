@@ -18,6 +18,7 @@ const { categoryPageFromImportCategory } = require('./lib/categories');
 const { normalizeInternalHref } = require('./lib/article-normalization');
 const { pageKind } = require('./lib/publication-page-kind');
 const { validateTopicCenter } = require('./lib/topic-center-contract');
+const { validatePublicNewsCheckout } = require('./lib/news-public-integrity');
 
 const ROOT = process.cwd();
 
@@ -490,48 +491,6 @@ function validateReadingTimeLabels(errors) {
   }
 }
 
-function validatePublishedNewsImages(errors, warnings) {
-  const candidates = ['data/news-live.json', '_site/data/news-live.json'];
-  for (const rel of candidates) {
-    if (!exists(rel)) {
-      warnings.push(`Brak ${rel} — pomijam kontrolę miniatur NEWS.`);
-      continue;
-    }
-    let parsed;
-    try {
-      parsed = readJson(rel);
-    } catch (err) {
-      errors.push(`${rel}: niepoprawny JSON (${err.message})`);
-      continue;
-    }
-
-    const items = Array.isArray(parsed.items) ? parsed.items : [];
-    for (const item of items) {
-      if (!item || item.status !== 'published') continue;
-      const imageBase = String(item.image_base || '').trim();
-      if (!imageBase) continue;
-      const sourceDir = 'assets/news';
-      const siteDir = '_site/assets/news';
-      const hasSourceVariant = ['jpg', 'webp', 'avif'].every((ext) => exists(`${sourceDir}/${imageBase}.${ext}`));
-      const hasSiteVariant = ['jpg', 'webp', 'avif'].every((ext) => exists(`${siteDir}/${imageBase}.${ext}`));
-
-      const title = String(item.title || item.id || '(bez tytułu)');
-      if (rel.startsWith('_site/')) {
-        if (!hasSiteVariant && !hasSourceVariant) {
-          errors.push(`${rel}: BLOKER NEWS: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${siteDir}/ oraz ${sourceDir}/.`);
-        } else if (!hasSiteVariant && hasSourceVariant) {
-          warnings.push(`${rel}: WARN NEWS: opublikowany news "${title}" ma miniatury tylko w ${sourceDir}/ (brak mirroru w ${siteDir}/, akceptowane w CI/gitignore).`);
-        }
-        continue;
-      }
-
-      if (!hasSourceVariant) {
-        errors.push(`${rel}: BLOKER NEWS: opublikowany news "${title}" ma image_base="${imageBase}", ale brak miniatur w ${sourceDir}/.`);
-      }
-    }
-  }
-}
-
 function extractPublishedDateFromLdJson(raw) {
   const scripts = [...String(raw || '').matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
   for (const scriptMatch of scripts) {
@@ -738,7 +697,9 @@ function main() {
     if (rel && !exists(rel)) errors.push(`Brak assetu: ${rel}`);
   }
 
-  validatePublishedNewsImages(errors, warnings);
+  const publicNews = validatePublicNewsCheckout({ root: ROOT });
+  errors.push(...publicNews.errors.map((error) => `BLOKER NEWS: ${error}`));
+  warnings.push(...publicNews.warnings.map((warning) => `WARN NEWS: ${warning}`));
   validateReadingTimeLabels(errors);
   validateAdminBootstrapGuard(errors);
   printAndExit(errors, warnings);

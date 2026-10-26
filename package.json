@@ -108,6 +108,7 @@
     "seo:aeo:guard": "node scripts/seo-aeo-guard.js",
     "quick-answer:backlog": "node scripts/audit-quick-answer-backlog.js",
     "news:integrity": "node scripts/news-integrity-check.js",
+    "news:pull": "node scripts/news-pull.js",
     "assets:mirror:sync": "node scripts/sync-site-assets-mirror.js",
     "assets:mirror:check": "node scripts/sync-site-assets-mirror.js --check",
     "sitemap:lastmod:sync": "node scripts/sync-sitemap-lastmod.js",

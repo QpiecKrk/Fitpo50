@@ -11,4 +11,5 @@ node scripts/deployment-live-verify.js \
   --retries "$RETRIES" \
   --delay-ms "$((DELAY_SECONDS * 1000))" \
   --timeout-ms "$((TIMEOUT_SECONDS * 1000))"
+node scripts/news-public-http-check.js
 node scripts/security-exposure-check.js "$BASE_URL"

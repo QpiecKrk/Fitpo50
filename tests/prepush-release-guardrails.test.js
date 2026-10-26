@@ -37,6 +37,7 @@ test('GitHub live check verifies deployment and security and fails on timeout', 
     assert.equal(result.status, 0, result.stderr || result.stdout);
     assert.deepEqual(fs.readFileSync(log, 'utf8').trim().split('\n'), [
       'scripts/deployment-live-verify.js --base-url https://example.test --retries 2 --delay-ms 4000 --timeout-ms 7000',
+      'scripts/news-public-http-check.js',
       'scripts/security-exposure-check.js https://example.test',
     ]);
     const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/live-postpush-check.yml'), 'utf8');

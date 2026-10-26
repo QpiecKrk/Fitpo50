@@ -5,7 +5,7 @@ const test = require('node:test');
 const { inspectWithCredentialFallback } = require('../scripts/gsc-indexing-watchdog');
 const { isRuntimeNewsThumb } = require('../scripts/sync-site-assets-mirror');
 
-test('runtime NEWS thumbnails ignored by Git do not enter the mirror contract', () => {
+test('runtime NEWS thumbnails are recognized by their generated name', () => {
   assert.equal(isRuntimeNewsThumb('news_20260625_143840_68617897'), true);
   assert.equal(isRuntimeNewsThumb('news_20250101_runtime'), true);
   assert.equal(isRuntimeNewsThumb('news_coffee_minerals_01'), false);

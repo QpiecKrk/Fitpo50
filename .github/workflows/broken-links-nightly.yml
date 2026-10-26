@@ -30,6 +30,9 @@ jobs:
       - name: Full build/export + broken links crawl
         run: npm run check:build-export
 
+      - name: Verify server-managed NEWS thumbnails
+        run: node scripts/news-public-http-check.js
+
       - name: Upload SEO crawl reports
         uses: actions/upload-artifact@v4
         with:

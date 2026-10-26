@@ -2,9 +2,9 @@
 
 const fs = require('fs');
 const path = require('path');
+const { validatePublicNewsCheckout } = require('./lib/news-public-integrity');
 
 const ROOT = process.cwd();
-const IMAGE_EXTS = ['avif', 'webp', 'jpg'];
 
 const REQUIRED_FILES = [
   'data/news-live.json',
@@ -32,14 +32,6 @@ function normalizedJsonString(relPath) {
   return JSON.stringify(readJson(relPath));
 }
 
-function hasAnyVariant(dirRel, imageBase) {
-  return IMAGE_EXTS.some((ext) => exists(`${dirRel}/${imageBase}.${ext}`));
-}
-
-function isRuntimeNewsThumb(imageBase) {
-  return /^news_20/i.test(String(imageBase || '').trim());
-}
-
 function validateFilesPresence() {
   for (const rel of REQUIRED_FILES) {
     if (!exists(rel)) errors.push(`Brak pliku: ${rel}`);
@@ -60,8 +52,22 @@ function validateMirrorSync() {
   }
 }
 
+function validateNoDraftsInPublicMirrors() {
+  for (const rel of ['assets/data/news-fallback.json', '_site/assets/data/news-fallback.json']) {
+    if (!exists(rel)) continue;
+    const items = readJson(rel).items || [];
+    if (items.some((item) => item && String(item.status || '').toLowerCase() === 'draft')) {
+      errors.push(`Prywatny szkic NEWS trafił do publicznego pliku: ${rel}`);
+    }
+  }
+}
+
 function validatePublishedImagesAndFallback() {
-  if (!exists('data/news-live.json') || !exists('assets/data/news-fallback.json')) return;
+  if (!exists('data/news-live.json')) {
+    warnings.push('Brak lokalnego prywatnego data/news-live.json — pełna kontrola NEWS wymaga npm run news:pull.');
+    return;
+  }
+  if (!exists('assets/data/news-fallback.json')) return;
 
   const live = readJson('data/news-live.json');
   const fallback = readJson('assets/data/news-fallback.json');
@@ -77,56 +83,6 @@ function validatePublishedImagesAndFallback() {
     errors.push('Niespojnosc listy opublikowanych newsow: data/news-live.json vs assets/data/news-fallback.json');
   }
 
-  const publishedById = new Map();
-  for (const item of published) {
-    publishedById.set(String(item.id || ''), item);
-  }
-
-  for (const item of published) {
-    const title = String(item.title || item.id || '(bez tytulu)');
-    const imageBase = String(item.image_base || '').trim();
-    if (!imageBase) {
-      errors.push(`Opublikowany news "${title}" nie ma image_base.`);
-      continue;
-    }
-
-    if (!hasAnyVariant('assets/news', imageBase)) {
-      if (isRuntimeNewsThumb(imageBase)) {
-        warnings.push(`Brak runtime miniatur dla "${title}" w assets/news (image_base="${imageBase}") — pomijam jako asset serwerowy.`);
-      } else {
-        errors.push(`Brak miniatur dla "${title}" w assets/news (image_base="${imageBase}").`);
-      }
-    }
-    if (!hasAnyVariant('_site/assets/news', imageBase)) {
-      warnings.push(`Brak miniatur dla "${title}" w _site/assets/news (image_base="${imageBase}").`);
-    }
-  }
-
-  for (const item of fallbackItems) {
-    if (!item) continue;
-    const id = String(item.id || '');
-    const liveItem = publishedById.get(id);
-    if (!liveItem) continue;
-
-    const imageBase = String(liveItem.image_base || '').trim();
-    const image = item.image || {};
-    if (!image || typeof image !== 'object') {
-      errors.push(`Fallback news id="${id}" nie ma obiektu image.`);
-      continue;
-    }
-
-    for (const ext of IMAGE_EXTS) {
-      const expected = `./assets/news/${imageBase}.${ext}`;
-      const got = String(image[ext] || '').trim();
-      if (!got) {
-        errors.push(`Fallback news id="${id}" nie ma image.${ext}.`);
-        continue;
-      }
-      if (got !== expected) {
-        warnings.push(`Fallback news id="${id}" ma image.${ext}="${got}" (oczekiwane: "${expected}").`);
-      }
-    }
-  }
 }
 
 function printAndExit() {
@@ -145,6 +101,10 @@ function printAndExit() {
 function main() {
   validateFilesPresence();
   validateMirrorSync();
+  validateNoDraftsInPublicMirrors();
+  const publicNews = validatePublicNewsCheckout({ root: ROOT });
+  errors.push(...publicNews.errors);
+  warnings.push(...publicNews.warnings);
   validatePublishedImagesAndFallback();
   printAndExit();
 }

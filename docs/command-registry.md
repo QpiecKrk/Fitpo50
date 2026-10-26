@@ -92,6 +92,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run live:postpush:check` — Alias kontroli wdrożenia i ekspozycji (npm run deployment:finalize), bez IndexNow.
 - [PUBLIC] `npm run llms:full` — Bezpośrednia komenda robocza lub odczytowa (node scripts/generate-llms-full.js).
 - [PUBLIC] `npm run news:integrity` — Bezpośrednia komenda robocza lub odczytowa (node scripts/news-integrity-check.js).
+- [PUBLIC] `npm run news:pull` — Pobiera wyłącznie dozwolone dane NEWS przez szyfrowany FTPS, waliduje całą paczkę i atomowo aktualizuje lokalne pliki; `--dry-run` niczego nie zapisuje.
 - [PUBLIC] `npm run popraw-seo` — Tworzy raport i kolejkę SEO bez edycji HTML przed zatwierdzeniem ID.
 - [PUBLIC] `npm run popraw-seo:gsc-local` — Bezpośrednia komenda robocza lub odczytowa (bash scripts/with-local-env.sh node scripts/gsc-auto-report.js).
 - [PUBLIC] `npm run predeploy:check` — Bezpośrednia komenda robocza lub odczytowa (node scripts/predeploy-gate.js).
