@@ -4,6 +4,8 @@
 
 Hostinger automatycznie wdraża gałąź `main`. Po przygotowaniu eksportu należy utworzyć unikalny marker wydania, zatwierdzić go razem z paczką, wykonać push i uruchomić twardą kontrolę produkcji:
 
+Hostinger usuwa z serwera pliki skasowane z Gita; potwierdziła to próba B w commicie `63065e09`. Do czasu Paczki 3 pliki panelu NEWS i ich mirrory muszą pozostać śledzone, ponieważ ich wyjęcie z indeksu skasowałoby dane na serwerze.
+
 ```bash
 ./scripts/export_site.sh
 npm run assets:mirror:sync

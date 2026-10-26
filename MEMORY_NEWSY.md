@@ -54,6 +54,8 @@
 
 ## Operacyjne
 - Nie wykonujemy `git commit` ani `git push` bez wyraźnej komendy użytkownika.
+- Hostinger usuwa pliki skasowane z Gita; potwierdziła to próba B w commicie `63065e09`. Do czasu Paczki 3 `data/news-live.json`, `data/news-backups/*`, `assets/news/*` i ich mirrory w `_site` pozostają śledzone.
+- Śledzony live nie może zawierać szkiców podczas deployu. Przy szkicach `news:pull` zapisuje pełny live tylko w prywatnej kopii poza repo, a lokalnie aktualizuje publiczny fallback i miniatury runtime.
 - Po zmianach frontowych pamiętamy o aktualizacji `_site` przez eksport.
 - Przy każdej zmianie logiki ładowania NEWS trzeba zrobić szybki test ręczny:
   - po odświeżeniu strony bez scrolla widoczne jest tylko pierwsze 5 newsów,

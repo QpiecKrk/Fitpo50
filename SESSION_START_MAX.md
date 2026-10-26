@@ -135,6 +135,7 @@ npm run deployment:finalize
 - Nienaturalnie duży, niezatwierdzony zakres wymaga potwierdzenia. `git push wszystko` zatwierdza cały wcześniej omówiony zakres.
 - Jeśli świadomie zatwierdzony zakres przekracza diff guard, wolno jednorazowo użyć `FITPO50_BYPASS_DIFF_GUARD=1`; pozostałe testy nadal muszą przejść.
 - Hostinger automatycznie wdraża `main`. Marker przygotuj przed commitem; treść i marker trafiają do jednego commita i jednego pusha. Potem uruchom `npm run deployment:finalize`; czekaj na `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie jest częścią pusha i wymaga kolejnego, osobnego „tak” użytkownika.
+- Hostinger usuwa z serwera pliki skasowane z Gita (próba B, commit `63065e09`). Do czasu przeniesienia danych panelu poza katalog deployu w Paczce 3 nie wyjmuj z indeksu Git plików NEWS ani ich mirrorów w `_site`.
 - `PUSHED` oznacza wyłącznie obecność commita na GitHubie. `DEPLOYED` oznacza wykrycie markera na serwerze z niepełną walidacją. Dopiero `LIVE_DEPLOYED_AND_VALIDATED` potwierdza produkcję i pozwala utworzyć listę GSC.
 - `npm run hostinger:clean-repo` jest wycofane. Przy rzeczywistym błędzie integracji zacznij od `npm run hostinger:recovery` w trybie dry-run i stosuj kontrakt z `docs/deployment-status-contract.md`.
 - Ręczny `npm run tmp:cleanup` i każdy tryb apply wymagają osobnego „tak” użytkownika. Wbudowany dry-run w `prepush:local` oraz automatyczne sprzątanie własnego stagingu, locków i workspace bieżącej operacji są dozwolone. `tmp:cleanup:apply` używaj dopiero po przeglądzie listy i odrębnej zgodzie.

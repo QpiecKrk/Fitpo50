@@ -1,6 +1,8 @@
 const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 const test = require('node:test');
 
 const {
@@ -67,4 +69,43 @@ test('PROJECT_MEMORY zawiera nadrzędne twarde zasady i odsyłacze startowe', ()
     const source = fs.readFileSync(path.join(ROOT, file), 'utf8');
     assert.match(source.slice(0, 700), /TWARDE ZASADY.*PROJECT_MEMORY\.md/s, `brak odsyłacza na początku ${file}`);
   }
+});
+
+test('dokumentacja nie odwraca potwierdzonego zachowania deployu Hostingera', () => {
+  const result = spawnSync('git', ['ls-files', '-z'], { cwd: ROOT, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const extensions = new Set(['.md', '.js', '.yml', '.yaml', '.sh']);
+  const forbidden = [
+    new RegExp(['Hostinger', 'nie usuwa'].join('\\s+'), 'i'),
+    new RegExp(['Hostinger', 'does not delete'].join('\\s+'), 'i'),
+    new RegExp(['Hostinger', "doesn't delete"].join('\\s+'), 'i'),
+  ];
+  const violations = result.stdout.split('\0').filter(Boolean).filter((relative) => {
+    if (!extensions.has(path.extname(relative))) return false;
+    const absolute = path.join(ROOT, relative);
+    if (!fs.existsSync(absolute)) return false;
+    const source = fs.readFileSync(absolute, 'utf8');
+    return forbidden.some((pattern) => pattern.test(source));
+  });
+  assert.deepEqual(violations, [], `fałszywa zasada o retencji Hostingera: ${violations.join(', ')}`);
+  for (const relative of ['PROJECT_MEMORY.md', 'AGENTS.md', 'SESSION_START_MAX.md', 'MEMORY_NEWSY.md', 'docs/news-pull.md']) {
+    const source = fs.readFileSync(path.join(ROOT, relative), 'utf8');
+    assert.match(source, /Hostinger usuwa[\s\S]{0,160}(?:63065e09|Paczki 3)/, relative);
+  }
+});
+
+test('pełny obecny inwentarz plików panelu pozostaje w indeksie Git do Paczki 3', () => {
+  const patterns = [
+    'data/news-live.json', 'data/news-backups/*', 'assets/data/news-fallback.json', 'assets/news/*',
+    '_site/data/news-live.json', '_site/data/news-backups/*', '_site/assets/data/news-fallback.json', '_site/assets/news/*',
+  ];
+  const result = spawnSync('git', ['ls-files', ...patterns], { cwd: ROOT, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const files = result.stdout.trim().split('\n').filter(Boolean);
+  assert.equal(files.length, 246, 'zmieniła się liczba śledzonych plików panelu; wymaga to jawnej aktualizacji kontraktu');
+  assert.equal(
+    crypto.createHash('sha256').update(result.stdout).digest('hex'),
+    '0d6598d907401f3625a42ab58a36aec629c9dffe60e490ebed14d7afa49dbc90',
+    'plik panelu zniknął z indeksu Git albo inwentarz zmieniono bez jawnego przeglądu',
+  );
 });

@@ -6,7 +6,7 @@
 - Każda sesja zaczyna się tylko od odczytu: przeczytaj te zasady, pokaż `git status` oraz porównanie `main` z `origin/main`, a potem czekaj na zadanie.
 - Pracuj wyłącznie w zakresie polecenia. Problem poza zakresem zgłoś, ale niczego w nim nie zmieniaj.
 - Deploy: `prepush:local` PASS → `_site` bez plików technicznych → `deployment:prepare` przed commitem → jeden commit z treścią i markerem → jeden push → `deployment:finalize` z `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`.
-- Hostinger nie usuwa z serwera plików skasowanych z repo; usuwany plik publiczny zablokuj w `.htaccess` albo zgłoś do ręcznego usunięcia.
+- Hostinger usuwa z serwera pliki skasowane z Gita (potwierdziła to próba B, commit `63065e09`). Do czasu Paczki 3, czyli przeniesienia danych panelu poza katalog deployu, nie wolno wyjmować z indeksu Git plików panelu: `data/news-live.json`, `data/news-backups/*`, `assets/news/*` ani ich mirrorów w `_site`.
 - Nigdy nie commituj haseł ani `admin/config.php`; sprawdź, że `config.php` jest w `.gitignore`.
 - Z `_site` wykluczaj: `HANDOFF.md`, `requirements*.txt`, fonty PDF, `.venv`, `__pycache__`, pliki `.py`/`.pyc` oraz `admin/*.md`.
 - Artykuł wymaga minimum 4 realnych źródeł z mapowaniem twierdzenie → źródło. Linkowanie wewnętrzne tworzy tylko lokalny pipeline. Publikacja obejmuje kafel strony głównej, `porady.html`, właściwy dział, sitemapę, `llms.txt` i `llms-full.txt`.
