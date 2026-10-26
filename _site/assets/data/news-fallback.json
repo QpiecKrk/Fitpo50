@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-06-25T14:38:45+00:00",
+    "updatedAt": "2026-10-25T22:49:28+00:00",
     "items": [
+        {
+            "id": "news_b3a02cb6a066",
+            "title": "Wodór i długowieczność: ciekawy trop, ale jeszcze nie eliksir młodości",
+            "content_html": "<p><span>Woda wodorowa, czyli </span><span class=\"news-text-tone--4\">woda nasycona</span><span> cząsteczkowym wodorem H₂, faktycznie jest badana pod kątem stresu oksydacyjnego, stanu </span><strong>zapalnego i metabolizmu</strong><span>. To nie jest całkowita internetowa bajka. Problem zaczyna się wtedy, gdy ktoś robi z niej „</span><span class=\"news-text-tone--1\">napój na długowieczność</span><span>” albo obiecuje cofanie starzenia.</span></p><p><br></p><p><span>Przeglądy badań pokazują, że wodór molekularny może działać jako </span><span class=\"news-text-tone--1\">modulator stresu oksydacyjnego</span><span> i procesów zapalnych. Badacze analizują jego wpływ m.in. na szlaki <a href=\"trening-silowy-starzenie-komorkowe-dna.html\">komórkowe</a>, mitochondria, </span><strong>odpowiedź antyoksydacyjną i stan zapalny.</strong><span> W badaniach klinicznych sprawdzano go w różnych obszarach: od metabolizmu, przez regenerację po wysiłku, po choroby neurologiczne.  </span></p><p><br></p><p><span>Ale jest duże „</span><strong>ale</strong><span>”. Wiele badań jest małych, krótkich albo wczesnych. Część wyników wygląda obiecująco, ale nie mamy </span><span class=\"news-text-tone--3\">jeszcze mocnych dowodów,</span><span> że regularne picie wody wodorowej realnie wydłuża życie albo zapobiega chorobom związanym z wiekiem. </span><span class=\"news-text-tone--1\">Systematyczny</span><span> przegląd z 2024 roku podkreśla, że dane sugerują potencjalne działanie </span><span class=\"news-text-tone--2\">przeciwzapalne i antyoksydacyjne</span><span>, ale potrzebne są większe, lepiej zaprojektowane badania u ludzi.  </span></p><p><br></p><p><span>W kontekście „</span><span class=\"news-text-tone--4\">longevity</span><span>” najuczciwiej powiedzieć tak: </span><span class=\"news-text-tone--1\">woda wodorowa</span><span> jest interesującym kierunkiem badań, bo starzenie rzeczywiście wiąże się ze stresem oksydacyjnym, przewlekłym stanem zapalnym i funkcją mitochondriów. </span><span class=\"news-text-tone--1\">Jednak to, że coś wpływa na markery komórkowe</span><span>, nie znaczy automatycznie, że odmładza człowieka. Przegląd dotyczący starzenia wskazuje możliwe mechanizmy, ale to nadal nie jest dowód na efekt przeciwstarzeniowy w praktyce.  </span></p><p><br></p><p><strong>Post jest częściowo prawdziwy. </strong><span class=\"news-text-tone--3\">Wodór molekularny jest badany</span><strong> i może mieć potencjał <a href=\"zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html\">biologiczny</a>. Ale na dziś to bardziej „ciekawy temat naukowy” </strong><span class=\"news-text-tone--1\">niż sprawdzona strategia długowieczności</span><strong>. Jeśli ktoś sprzedaje wodę wodorową jako eliksir młodości, to raczej sprzedaje marzenie w butelce.</strong><br></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20261025_224924_1e6439f2.avif",
+                "webp": "./assets/news/news_20261025_224924_1e6439f2.webp",
+                "jpg": "./assets/news/news_20261025_224924_1e6439f2.jpg",
+                "alt": "Wodór i długowieczność",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Hydrogen Water: Extra Healthy or a Hoax? — systematic review, 2024",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10816294/"
+                },
+                {
+                    "label": "Molecular Hydrogen Therapy — review of clinical studies, 2023",
+                    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10707987/"
+                }
+            ],
+            "updated_at": "2026-10-25T22:49:28+00:00",
+            "published_at": "2026-10-25T22:49:28+00:00",
+            "excerpt": "Woda wodorowa, czyli woda nasycona cząsteczkowym wodorem H₂, faktycznie jest badana pod kątem stresu oksydacyjnego, stanu zapalnego i metabolizmu. To nie jest całkowita internetowa bajka. Problem zaczyna się wtedy, gdy…"
+        },
         {
             "id": "news_5db2815d2283",
             "title": "AI znalazła ukryty sygnał w EKG. Czy może przewidzieć nagłą śmierć sercową?",
