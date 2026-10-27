@@ -457,32 +457,6 @@ function defaultMirrorRunner(root) {
   return result.stdout;
 }
 
-function backupRemoteLiveWithDrafts(stagedLive, options = {}) {
-  const now = options.now || (() => new Date());
-  const backupRoot = options.backupRoot || path.join(os.homedir(), 'fitpo50-backups');
-  fs.mkdirSync(backupRoot, { recursive: true, mode: 0o700 });
-  const createdAt = warsawIso(now());
-  const stamp = createdAt.replace(/[:.]/g, '-');
-  const backupDir = path.join(backupRoot, `news-${stamp}-${crypto.randomBytes(4).toString('hex')}`);
-  fs.mkdirSync(backupDir, { mode: 0o700 });
-  const relative = 'data/news-live.json';
-  const target = path.join(backupDir, relative);
-  const content = fs.readFileSync(stagedLive);
-  fs.mkdirSync(path.dirname(target), { recursive: true, mode: 0o700 });
-  atomicWriteFileSync(target, content);
-  fs.chmodSync(target, 0o600);
-  const hash = crypto.createHash('sha256').update(content).digest('hex');
-  const manifest = {
-    created_at: createdAt,
-    reason: 'DRAFTS_NOT_COPIED_TO_TRACKED_REPOSITORY',
-    files: [{ path: relative, bytes: content.length, sha256: hash }],
-  };
-  const manifestPath = path.join(backupDir, 'manifest.json');
-  atomicWriteFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
-  fs.chmodSync(manifestPath, 0o600);
-  return { backupDir, hash };
-}
-
 function backupStamp(date) {
   return warsawIso(date).replace(/[:.]/g, '-');
 }
@@ -616,33 +590,31 @@ function pullNews(options = {}) {
       ? isGitTracked(root, 'data/news-live.json')
       : Boolean(options.privateStoreTracked);
     const protectedDraftMode = draftCount > 0 && privateStoreTracked;
-    const privateBackup = !dryRun && !backupOnly && protectedDraftMode
-      ? backupRemoteLiveWithDrafts(stagedLive, { now, backupRoot: options.privateBackupRoot })
-      : null;
-
     const publicFiles = [
       { account: 'data', remote: '/news-live.json', relative: 'data/news-live.json', staged: stagedLive, limit: LIMITS.jsonBytes },
       { account: 'assets', remote: '/data/news-fallback.json', relative: 'assets/data/news-fallback.json', staged: stagedFallback, limit: LIMITS.jsonBytes },
       { account: 'data', remote: '/news-live.json', relative: '_site/data/news-live.json', staged: stagedSiteLive, limit: LIMITS.jsonBytes },
       { account: 'assets', remote: '/data/news-fallback.json', relative: '_site/assets/data/news-fallback.json', staged: stagedSiteFallback, limit: LIMITS.jsonBytes },
     ];
-    const remoteFiles = backupOnly
-      ? publicFiles.slice(0, 2)
-      : (protectedDraftMode
-        ? publicFiles.filter((file) => file.relative.includes('news-fallback.json'))
-        : [...publicFiles]);
-    if (backupOnly || !protectedDraftMode) for (const name of plan.backupNames) remoteFiles.push({
+    const backupFiles = plan.backupNames.map((name) => ({
       account: 'data', remote: `/news-backups/${name}`, relative: `data/news-backups/${name}`,
       staged: path.join(staging, 'data/news-backups', name), limit: LIMITS.jsonBytes,
-    });
-    const imageNames = [...validated.requiredImages]
-      .filter((name) => backupOnly || !protectedDraftMode || GENERATED_IMAGE_BASE.test(path.parse(name).name))
-      .sort();
-    for (const name of imageNames) remoteFiles.push({
+    }));
+    const imageFiles = [...validated.requiredImages].sort().map((name) => ({
       account: 'assets', remote: `/news/${name}`, relative: `assets/news/${name}`,
       staged: path.join(staging, 'assets/news', name), limit: LIMITS.imageBytes,
-    });
-    const remainingFiles = remoteFiles.filter((file) => !publicFiles.includes(file));
+    }));
+    const archiveFiles = [...publicFiles.slice(0, 2), ...backupFiles, ...imageFiles];
+    const promotionImages = protectedDraftMode
+      ? imageFiles.filter((file) => GENERATED_IMAGE_BASE.test(path.parse(file.relative).name))
+      : imageFiles;
+    const promotionFiles = protectedDraftMode
+      ? [...publicFiles.filter((file) => file.relative.includes('news-fallback.json')), ...promotionImages]
+      : [...publicFiles, ...promotionImages];
+    const downloadedFiles = backupOnly
+      ? archiveFiles
+      : [...publicFiles, ...backupFiles, ...imageFiles];
+    const remainingFiles = downloadedFiles.filter((file) => !publicFiles.includes(file));
     if (typeof transport.downloadBatch === 'function') {
       for (const account of ['data', 'assets']) {
         for (const limit of [LIMITS.jsonBytes, LIMITS.imageBytes]) {
@@ -656,19 +628,19 @@ function pullNews(options = {}) {
 
     const imageVerification = verifyImages(
       validated.liveItems,
-      new Map(remoteFiles.map((file) => [file.relative, file.staged])),
+      new Map(downloadedFiles.map((file) => [file.relative, file.staged])),
       options.imageInspector || inspectImageFile,
     );
 
     let totalBytes = 0;
-    for (const file of remoteFiles) {
+    for (const file of downloadedFiles) {
       totalBytes += fs.statSync(file.staged).size;
       if (file.relative.endsWith('.json')) parseJsonFile(file.staged, file.relative);
     }
     if (totalBytes > LIMITS.totalBytes) throw new NewsPullError(`Paczka przekracza limit ${LIMITS.totalBytes} B.`, EXIT.DATA);
 
     if (backupOnly) {
-      const backup = createBackupOnly(remoteFiles, { now, backupRoot: options.backupRoot });
+      const backup = createBackupOnly(archiveFiles, { now, backupRoot: options.backupRoot });
       const report = {
         status: 'OK', backup_only: true, dry_run: false,
         news_count: validated.liveItems.length,
@@ -692,12 +664,22 @@ function pullNews(options = {}) {
       const old = previousById.get(String(item.id || ''));
       return old && JSON.stringify(old) !== JSON.stringify(item);
     });
-    const changedFiles = remoteFiles.filter((file) => {
+    const changedFiles = promotionFiles.filter((file) => {
       const local = path.join(root, file.relative);
       return !fs.existsSync(local) || sha256File(local) !== sha256File(file.staged);
     });
     const newImages = changedFiles.filter((file) => file.relative.startsWith('assets/news/') && !fs.existsSync(path.join(root, file.relative)));
     const hashReport = changedFiles.map((file) => ({ path: file.relative, sha256: sha256File(file.staged) }));
+
+    let serverBackup = null;
+    if (!dryRun) {
+      try {
+        serverBackup = createBackupOnly(archiveFiles, { now, backupRoot: options.backupRoot });
+      } catch (error) {
+        if (error instanceof NewsPullError && error.exitCode === EXIT.ENVIRONMENT) throw error;
+        throw new NewsPullError(`Nie udało się zabezpieczyć kopii NEWS przed promocją: ${error.message || error}`, EXIT.ENVIRONMENT);
+      }
+    }
 
     if (!dryRun && changedFiles.length) {
       const stamp = now().toISOString().replace(/[:.]/g, '-');
@@ -722,8 +704,10 @@ function pullNews(options = {}) {
       legacy_images_without_panel_hash: imageVerification.legacyWithoutHashes,
       legacy_images_nonstandard_dimensions: imageVerification.legacyDimensions,
       backup_dir: keepBackup,
-      private_live_backup_dir: privateBackup?.backupDir || null,
-      private_live_sha256: privateBackup?.hash || null,
+      server_backup_dir: serverBackup?.backupDir || null,
+      server_backup_files: serverBackup?.files || [],
+      private_live_backup_dir: protectedDraftMode ? serverBackup?.backupDir || null : null,
+      private_live_sha256: protectedDraftMode ? sha256File(stagedLive) : null,
       privacy_warning: protectedDraftMode
         ? `Na serwerze są wpisy nieopublikowane (${draftCount}). Zaktualizowano wyłącznie publiczny fallback i miniatury news_20*. Pełny plik live zapisano tylko w prywatnej kopii poza repo; szkice nie trafiły do repo.`
         : '',
@@ -759,6 +743,9 @@ function printReport(report) {
   if (report.privacy_warning) console.log(`PRYWATNOŚĆ: ${report.privacy_warning}`);
   if (report.private_live_backup_dir) {
     console.log(`Prywatna kopia pełnego live: ${report.private_live_backup_dir} (SHA-256: ${report.private_live_sha256}).`);
+  }
+  if (report.server_backup_dir) {
+    console.log(`Zweryfikowana kopia serwerowa poza repo: ${report.server_backup_dir} (${report.server_backup_files.length} plików).`);
   }
   if (report.backup_dir) console.log(`Kopia poprzednich plików: ${report.backup_dir}`);
   if (report.dry_run) console.log('Dry-run: nie zmieniono lokalnych plików i nie uruchomiono mirroru.');
@@ -801,7 +788,6 @@ module.exports = {
   verifyImages,
   inspectImageFile,
   buildRemotePlan,
-  backupRemoteLiveWithDrafts,
   createBackupOnly,
   verifyBackupManifest,
   parseArgs,

@@ -170,8 +170,12 @@ test('zerwane pobieranie nie zmienia istniejących plików', (t) => {
 
 test('dwa uruchomienia są idempotentne, a runtime obrazy nie trafiają do _site', (t) => {
   const root = tempRoot(t);
+  const backupRoot = tempRoot(t);
+  let runNumber = 0;
   const run = () => pullNews({
     root,
+    backupRoot,
+    now: () => new Date(`2026-10-27T12:00:0${runNumber++}Z`),
     transport: new FakeTransport(),
     imageInspector: validInspector,
     mirrorRunner: () => mirror(root),
@@ -180,13 +184,53 @@ test('dwa uruchomienia są idempotentne, a runtime obrazy nie trafiają do _site
   if (first.backup_dir) t.after(() => fs.rmSync(first.backup_dir, { recursive: true, force: true }));
   assert.ok(first.changed_files.includes('data/news-live.json'));
   assert.equal(fs.existsSync(path.join(root, `_site/assets/news/${BASE}.avif`)), false);
-  const second = pullNews({ root, transport: new FakeTransport(), imageInspector: validInspector, mirrorRunner: () => mirror(root) });
+  const second = run();
   assert.deepEqual(second.changed_files, []);
   assert.equal(second.backup_dir, null);
+  for (const relative of ['data/news-backups', '_site/data/news-backups']) {
+    const directory = path.join(root, relative);
+    const files = fs.existsSync(directory) ? fs.readdirSync(directory).filter((name) => name !== '.gitkeep') : [];
+    assert.deepEqual(files, [], relative);
+  }
+});
+
+test('zwykły pull archiwizuje pełny zestaw poza repo przed promocją', (t) => {
+  const root = tempRoot(t);
+  const backupRoot = tempRoot(t);
+  const report = pullNews({
+    root,
+    backupRoot,
+    now: () => new Date('2026-10-27T12:00:00Z'),
+    transport: new FakeTransport(),
+    imageInspector: validInspector,
+    mirrorRunner: () => mirror(root),
+  });
+  const manifest = verifyBackupManifest(report.server_backup_dir);
+  assert.ok(manifest.files.some((item) => item.path === 'data/news-backups/news-live-20261025_120000.json'));
+  assert.equal(fs.existsSync(path.join(root, 'data/news-backups/news-live-20261025_120000.json')), false);
+  assert.equal(fs.existsSync(path.join(root, '_site/data/news-backups/news-live-20261025_120000.json')), false);
+});
+
+test('błąd kopii serwerowej kończy się kodem 30 przed promocją', (t) => {
+  const root = tempRoot(t);
+  const blockedBackupRoot = path.join(tempRoot(t), 'nie-katalog');
+  let mirrorCalls = 0;
+  fs.writeFileSync(blockedBackupRoot, 'blokada');
+  assert.throws(() => pullNews({
+    root,
+    backupRoot: blockedBackupRoot,
+    transport: new FakeTransport(),
+    imageInspector: validInspector,
+    mirrorRunner: () => { mirrorCalls += 1; },
+  }), (error) => error.exitCode === EXIT.ENVIRONMENT);
+  assert.equal(mirrorCalls, 0);
+  assert.equal(fs.existsSync(path.join(root, 'data/news-live.json')), false);
+  assert.equal(fs.existsSync(path.join(root, 'data/news-backups/news-live-20261025_120000.json')), false);
 });
 
 test('news:pull pobiera i zabezpiecza wszystkie śledzone publiczne kopie panelu', (t) => {
   const root = tempRoot(t);
+  const backupRoot = tempRoot(t);
   const old = Buffer.from('{"version":1,"items":[]}\n');
   for (const relative of [
     'data/news-live.json',
@@ -200,6 +244,7 @@ test('news:pull pobiera i zabezpiecza wszystkie śledzone publiczne kopie panelu
   }
   const report = pullNews({
     root,
+    backupRoot,
     transport: new FakeTransport(),
     imageInspector: validInspector,
     mirrorRunner: () => mirror(root),
@@ -222,9 +267,11 @@ test('news:pull pobiera i zabezpiecza wszystkie śledzone publiczne kopie panelu
 
 test('dry-run pokazuje zmiany bez zapisu i bez mirroru', (t) => {
   const root = tempRoot(t);
+  const backupRoot = tempRoot(t);
   let mirrorCalls = 0;
   const report = pullNews({
     root,
+    backupRoot,
     dryRun: true,
     transport: new FakeTransport(),
     imageInspector: validInspector,
@@ -233,6 +280,7 @@ test('dry-run pokazuje zmiany bez zapisu i bez mirroru', (t) => {
   assert.ok(report.changed_files.length > 0);
   assert.equal(mirrorCalls, 0);
   assert.equal(fs.existsSync(path.join(root, 'data/news-live.json')), false);
+  assert.deepEqual(fs.readdirSync(backupRoot), []);
 });
 
 test('--backup-only tworzy kompletną zweryfikowaną kopię bez zmiany repo i mirroru', (t) => {
@@ -331,6 +379,7 @@ test('przy szkicach news:pull zachowuje śledzony live i zapisuje prywatną kopi
     transport: new FakeTransport(pkg),
     imageInspector: validInspector,
     privateStoreTracked: true,
+    backupRoot: privateBackupRoot,
     privateBackupRoot,
     mirrorRunner: () => { mirrorCalls += 1; },
   });
@@ -348,8 +397,9 @@ test('przy szkicach news:pull zachowuje śledzony live i zapisuje prywatną kopi
   const backedUpLive = path.join(report.private_live_backup_dir, 'data/news-live.json');
   assert.deepEqual(fs.readFileSync(backedUpLive), pkg.files['/news-live.json']);
   const manifest = JSON.parse(fs.readFileSync(path.join(report.private_live_backup_dir, 'manifest.json'), 'utf8'));
-  assert.equal(manifest.files[0].sha256, crypto.createHash('sha256').update(pkg.files['/news-live.json']).digest('hex'));
-  assert.equal(report.private_live_sha256, manifest.files[0].sha256);
+  const liveManifestEntry = manifest.files.find((item) => item.path === 'data/news-live.json');
+  assert.equal(liveManifestEntry.sha256, crypto.createHash('sha256').update(pkg.files['/news-live.json']).digest('hex'));
+  assert.equal(report.private_live_sha256, liveManifestEntry.sha256);
   assert.match(report.privacy_warning, /szkice nie trafiły do repo/);
 });
 
@@ -389,13 +439,14 @@ test('mirror nie kopiuje obrazów runtime news_20 do eksportu', (t) => {
 
 test('śledzony magazyn bez szkiców jest pobierany i zachowuje format live w obu kopiach', (t) => {
   const root = tempRoot(t);
+  const backupRoot = tempRoot(t);
   const pkg = samplePackage();
   fs.mkdirSync(path.join(root, 'data'), { recursive: true });
   fs.writeFileSync(path.join(root, 'data/news-live.json'), '{}\n');
   assert.equal(spawnSync('git', ['init'], { cwd: root }).status, 0);
   assert.equal(spawnSync('git', ['add', 'data/news-live.json'], { cwd: root }).status, 0);
   const report = pullNews({
-    root, transport: new FakeTransport(pkg), imageInspector: validInspector, mirrorRunner: () => mirror(root),
+    root, backupRoot, transport: new FakeTransport(pkg), imageInspector: validInspector, mirrorRunner: () => mirror(root),
   });
   if (report.backup_dir) t.after(() => fs.rmSync(report.backup_dir, { recursive: true, force: true }));
   assert.equal(report.status, 'OK');
@@ -425,6 +476,7 @@ test('publiczny fallback nie zawiera szkiców także po bezpiecznym pobraniu', (
     transport: new FakeTransport(pkg),
     imageInspector: validInspector,
     mirrorRunner: () => mirror(root),
+    backupRoot: privateBackupRoot,
     privateBackupRoot,
   });
   if (report.backup_dir) t.after(() => fs.rmSync(report.backup_dir, { recursive: true, force: true }));
