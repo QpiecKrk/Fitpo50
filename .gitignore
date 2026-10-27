@@ -51,6 +51,16 @@ _site/sukcesy/*.html
 .env
 .env.local
 .env.*.local
+.env.*
+!.env.example
+config*.php
+!admin/config.example.php
+!_site/admin/config.example.php
+*.pem
+*.key
+*.sql.gz
+*.sql.zip
+*.dump
 node_modules/
 _site/node_modules/
 _site/package-lock.json

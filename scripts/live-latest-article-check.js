@@ -2,7 +2,9 @@
 /* eslint-disable no-console */
 
 const DEFAULT_BASE_URL = 'https://fitpo50.pl';
-const ALLOW_NET_FAILURES = String(process.env.ALLOW_NET_FAILURES || '1') === '1';
+const { EXIT_CODES } = require('./lib/article-pipeline-status');
+
+const ALLOW_NET_FAILURES = process.env.ALLOW_NET_FAILURES === '1';
 
 function parseArgs(argv) {
   const out = {
@@ -144,8 +146,15 @@ async function main() {
 
 main().catch((err) => {
   if (ALLOW_NET_FAILURES && isLikelyNetworkError(err)) {
-    console.log(`[WARN] live-latest-article-check soft-pass (network): ${err.message || err}`);
+    console.warn(
+      '[WARN] NETWORK_FAILURE_BYPASSED_DIAGNOSTIC_ONLY: '
+      + `wynik nie potwierdza produkcji (${err.message || err})`,
+    );
     process.exit(0);
+  }
+  if (isLikelyNetworkError(err)) {
+    console.error(`[ENVIRONMENT_FAILURE] ${err.message || err}`);
+    process.exit(EXIT_CODES.ENVIRONMENT_FAILURE);
   }
   console.error(`[FAIL] ${err.message || err}`);
   process.exit(1);
