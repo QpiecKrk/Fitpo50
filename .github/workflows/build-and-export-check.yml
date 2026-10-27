@@ -6,6 +6,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   build_export:
     runs-on: ubuntu-latest
@@ -19,7 +22,7 @@ jobs:
           node-version: "24"
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Build + smoke on _site (fast)
         run: npm run check:site:fast

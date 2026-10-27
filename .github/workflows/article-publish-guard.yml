@@ -29,6 +29,9 @@ on:
       - 'scripts/article-publish-guard.js'
       - '.github/workflows/article-publish-guard.yml'
 
+permissions:
+  contents: read
+
 jobs:
   article_guard:
     runs-on: ubuntu-latest
