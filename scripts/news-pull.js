@@ -77,15 +77,19 @@ function safeName(name, label) {
 }
 
 function parseArgs(argv) {
-  const args = { dryRun: false, secretsFile: DEFAULT_SECRETS_FILE };
+  const args = { backupOnly: false, dryRun: false, secretsFile: DEFAULT_SECRETS_FILE };
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];
     if (token === '--dry-run') args.dryRun = true;
+    else if (token === '--backup-only') args.backupOnly = true;
     else if (token === '--secrets-file') {
       args.secretsFile = path.resolve(String(argv[index + 1] || ''));
       index += 1;
     } else if (token === '--help' || token === '-h') args.help = true;
     else throw new NewsPullError(`Nieznany argument: ${token}`, EXIT.DATA);
+  }
+  if (args.dryRun && args.backupOnly) {
+    throw new NewsPullError('Opcji --dry-run i --backup-only nie można łączyć.', EXIT.DATA);
   }
   return args;
 }
@@ -479,10 +483,107 @@ function backupRemoteLiveWithDrafts(stagedLive, options = {}) {
   return { backupDir, hash };
 }
 
+function backupStamp(date) {
+  return warsawIso(date).replace(/[:.]/g, '-');
+}
+
+function listFilesRecursive(root, relative = '') {
+  const directory = path.join(root, relative);
+  const files = [];
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const child = relative ? path.posix.join(relative, entry.name) : entry.name;
+    if (entry.isDirectory()) files.push(...listFilesRecursive(root, child));
+    else if (entry.isFile()) files.push(child);
+    else throw new NewsPullError(`Kopia zawiera niedozwolony typ pliku: ${child}`, EXIT.ENVIRONMENT);
+  }
+  return files.sort();
+}
+
+function verifyBackupManifest(backupDir) {
+  const manifestPath = path.join(backupDir, 'manifest.json');
+  const manifest = parseJsonFile(manifestPath, 'manifest.json');
+  if (manifest.version !== 1 || manifest.mode !== 'NEWS_BACKUP_ONLY' || !Array.isArray(manifest.files)) {
+    throw new NewsPullError('Manifest kopii NEWS ma nieprawidłowy kontrakt.', EXIT.ENVIRONMENT);
+  }
+  const expected = [];
+  for (const item of manifest.files) {
+    const relative = String(item?.path || '');
+    if (!relative || relative.includes('..') || path.isAbsolute(relative) || relative.includes('\\')) {
+      throw new NewsPullError(`Manifest kopii zawiera niebezpieczną ścieżkę: ${JSON.stringify(relative)}`, EXIT.ENVIRONMENT);
+    }
+    const file = path.join(backupDir, relative);
+    if (!fs.existsSync(file) || !fs.statSync(file).isFile()) {
+      throw new NewsPullError(`Manifest kopii wskazuje brakujący plik: ${relative}`, EXIT.ENVIRONMENT);
+    }
+    const bytes = fs.statSync(file).size;
+    const hash = sha256File(file);
+    if (bytes !== item.bytes || hash !== item.sha256) {
+      throw new NewsPullError(`Weryfikacja kopii nie powiodła się dla ${relative}.`, EXIT.ENVIRONMENT);
+    }
+    expected.push(relative);
+  }
+  const actual = listFilesRecursive(backupDir).filter((relative) => relative !== 'manifest.json');
+  if (JSON.stringify(expected.sort()) !== JSON.stringify(actual)) {
+    throw new NewsPullError('Manifest kopii nie obejmuje dokładnie całego zestawu plików.', EXIT.ENVIRONMENT);
+  }
+  return manifest;
+}
+
+function createBackupOnly(stagedFiles, options = {}) {
+  const now = options.now || (() => new Date());
+  const backupRoot = options.backupRoot || path.join(os.homedir(), 'fitpo50-backups');
+  fs.mkdirSync(backupRoot, { recursive: true, mode: 0o700 });
+  const stamp = backupStamp(now());
+  const finalDir = path.join(backupRoot, `news-${stamp}`);
+  if (fs.existsSync(finalDir)) {
+    throw new NewsPullError(`Docelowa kopia już istnieje: ${finalDir}`, EXIT.ENVIRONMENT);
+  }
+  const tempDir = fs.mkdtempSync(path.join(backupRoot, `.news-${stamp}.tmp-`));
+  fs.chmodSync(tempDir, 0o700);
+  try {
+    const files = [];
+    for (const item of stagedFiles) {
+      const relative = String(item.relative || '');
+      if (!relative || relative.includes('..') || path.isAbsolute(relative) || relative.includes('\\')) {
+        throw new NewsPullError(`Niebezpieczna ścieżka kopii: ${JSON.stringify(relative)}`, EXIT.ENVIRONMENT);
+      }
+      const target = path.join(tempDir, relative);
+      fs.mkdirSync(path.dirname(target), { recursive: true, mode: 0o700 });
+      fs.copyFileSync(item.staged, target);
+      fs.chmodSync(target, 0o600);
+      files.push({ path: relative, bytes: fs.statSync(target).size, sha256: sha256File(target) });
+    }
+    const manifest = {
+      version: 1,
+      mode: 'NEWS_BACKUP_ONLY',
+      created_at: warsawIso(now()),
+      files: files.sort((left, right) => left.path.localeCompare(right.path)),
+    };
+    const manifestPath = path.join(tempDir, 'manifest.json');
+    atomicWriteFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+    fs.chmodSync(manifestPath, 0o600);
+    verifyBackupManifest(tempDir);
+    for (const directory of [tempDir, ...listFilesRecursive(tempDir)
+      .map((relative) => path.dirname(path.join(tempDir, relative)))]) {
+      if (fs.existsSync(directory) && fs.statSync(directory).isDirectory()) fs.chmodSync(directory, 0o700);
+    }
+    fs.renameSync(tempDir, finalDir);
+    return { backupDir: finalDir, files: manifest.files };
+  } catch (error) {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+    if (error instanceof NewsPullError) throw error;
+    throw new NewsPullError(`Nie udało się utworzyć kompletnej kopii NEWS: ${error.message || error}`, EXIT.ENVIRONMENT);
+  }
+}
+
 function pullNews(options = {}) {
   const root = options.root || ROOT;
   const transport = options.transport;
   const dryRun = Boolean(options.dryRun);
+  const backupOnly = Boolean(options.backupOnly);
+  if (dryRun && backupOnly) {
+    throw new NewsPullError('Opcji --dry-run i --backup-only nie można łączyć.', EXIT.DATA);
+  }
   const now = options.now || (() => new Date());
   const mirrorRunner = options.mirrorRunner || (() => defaultMirrorRunner(root));
   const staging = createManagedTempDir({
@@ -503,8 +604,10 @@ function pullNews(options = {}) {
     // The public_html/data mirror is still managed by Git in the current
     // Hostinger layout. It must remain byte-identical to the panel's
     // news-live.json; it is not another copy of the public fallback format.
-    transport.download('data', '/news-live.json', stagedSiteLive, LIMITS.jsonBytes);
-    transport.download('assets', '/data/news-fallback.json', stagedSiteFallback, LIMITS.jsonBytes);
+    if (!backupOnly) {
+      transport.download('data', '/news-live.json', stagedSiteLive, LIMITS.jsonBytes);
+      transport.download('assets', '/data/news-fallback.json', stagedSiteFallback, LIMITS.jsonBytes);
+    }
     const live = parseJsonFile(stagedLive, 'data/news-live.json');
     const fallback = parseJsonFile(stagedFallback, 'assets/data/news-fallback.json');
     const validated = validatePackage(live, fallback, plan.imageNames);
@@ -513,7 +616,7 @@ function pullNews(options = {}) {
       ? isGitTracked(root, 'data/news-live.json')
       : Boolean(options.privateStoreTracked);
     const protectedDraftMode = draftCount > 0 && privateStoreTracked;
-    const privateBackup = !dryRun && protectedDraftMode
+    const privateBackup = !dryRun && !backupOnly && protectedDraftMode
       ? backupRemoteLiveWithDrafts(stagedLive, { now, backupRoot: options.privateBackupRoot })
       : null;
 
@@ -523,15 +626,17 @@ function pullNews(options = {}) {
       { account: 'data', remote: '/news-live.json', relative: '_site/data/news-live.json', staged: stagedSiteLive, limit: LIMITS.jsonBytes },
       { account: 'assets', remote: '/data/news-fallback.json', relative: '_site/assets/data/news-fallback.json', staged: stagedSiteFallback, limit: LIMITS.jsonBytes },
     ];
-    const remoteFiles = protectedDraftMode
-      ? publicFiles.filter((file) => file.relative.includes('news-fallback.json'))
-      : [...publicFiles];
-    if (!protectedDraftMode) for (const name of plan.backupNames) remoteFiles.push({
+    const remoteFiles = backupOnly
+      ? publicFiles.slice(0, 2)
+      : (protectedDraftMode
+        ? publicFiles.filter((file) => file.relative.includes('news-fallback.json'))
+        : [...publicFiles]);
+    if (backupOnly || !protectedDraftMode) for (const name of plan.backupNames) remoteFiles.push({
       account: 'data', remote: `/news-backups/${name}`, relative: `data/news-backups/${name}`,
       staged: path.join(staging, 'data/news-backups', name), limit: LIMITS.jsonBytes,
     });
     const imageNames = [...validated.requiredImages]
-      .filter((name) => !protectedDraftMode || GENERATED_IMAGE_BASE.test(path.parse(name).name))
+      .filter((name) => backupOnly || !protectedDraftMode || GENERATED_IMAGE_BASE.test(path.parse(name).name))
       .sort();
     for (const name of imageNames) remoteFiles.push({
       account: 'assets', remote: `/news/${name}`, relative: `assets/news/${name}`,
@@ -561,6 +666,24 @@ function pullNews(options = {}) {
       if (file.relative.endsWith('.json')) parseJsonFile(file.staged, file.relative);
     }
     if (totalBytes > LIMITS.totalBytes) throw new NewsPullError(`Paczka przekracza limit ${LIMITS.totalBytes} B.`, EXIT.DATA);
+
+    if (backupOnly) {
+      const backup = createBackupOnly(remoteFiles, { now, backupRoot: options.backupRoot });
+      const report = {
+        status: 'OK', backup_only: true, dry_run: false,
+        news_count: validated.liveItems.length,
+        published_count: validated.fallbackItems.length,
+        ignored_count: plan.ignored.length,
+        ignored: plan.ignored,
+        hashes_verified: true,
+        backup_dir: backup.backupDir,
+        backup_files: backup.files,
+        legacy_images_without_panel_hash: imageVerification.legacyWithoutHashes,
+        legacy_images_nonstandard_dimensions: imageVerification.legacyDimensions,
+      };
+      completed = true;
+      return report;
+    }
 
     const previous = localNews(root);
     const previousById = new Map(previous.map((item) => [String(item.id || ''), item]));
@@ -613,8 +736,14 @@ function pullNews(options = {}) {
 }
 
 function printReport(report) {
-  console.log(`\n[NEWS:PULL][${report.dry_run ? 'DRY-RUN' : 'OK'}]`);
+  console.log(`\n[NEWS:PULL][${report.backup_only ? 'BACKUP-ONLY' : (report.dry_run ? 'DRY-RUN' : 'OK')}]`);
   console.log(`Newsy na serwerze: ${report.news_count}, opublikowane: ${report.published_count}.`);
+  if (report.backup_only) {
+    console.log(`Kompletna kopia: ${report.backup_dir}`);
+    console.log(`Pliki w manifeście: ${report.backup_files.length}. SHA-256: zgodne.`);
+    console.log(`Pominięte ścieżki poza allowlistą: ${report.ignored_count}.`);
+    return;
+  }
   console.log(`Nowe newsy (${report.new_news.length}): ${report.new_news.join(' | ') || 'brak'}`);
   console.log(`Zmienione newsy (${report.changed_news.length}): ${report.changed_news.join(' | ') || 'brak'}`);
   console.log(`Nowe obrazy: ${report.new_images.length}. Zmienione pliki łącznie: ${report.changed_files.length}.`);
@@ -639,11 +768,15 @@ function main() {
   try {
     const args = parseArgs(process.argv.slice(2));
     if (args.help) {
-      console.log('Użycie: npm run news:pull -- [--dry-run] [--secrets-file /ścieżka/news-pull.env]');
+      console.log('Użycie: npm run news:pull -- [--dry-run | --backup-only] [--secrets-file /ścieżka/news-pull.env]');
       return;
     }
     const credentials = readCredentials(args.secretsFile);
-    const report = pullNews({ dryRun: args.dryRun, transport: new FtpsTransport({ credentials }) });
+    const report = pullNews({
+      backupOnly: args.backupOnly,
+      dryRun: args.dryRun,
+      transport: new FtpsTransport({ credentials }),
+    });
     printReport(report);
   } catch (error) {
     const exitCode = error instanceof NewsPullError ? error.exitCode : EXIT.ENVIRONMENT;
@@ -669,6 +802,9 @@ module.exports = {
   inspectImageFile,
   buildRemotePlan,
   backupRemoteLiveWithDrafts,
+  createBackupOnly,
+  verifyBackupManifest,
+  parseArgs,
   atomicPromote,
   pullNews,
 };

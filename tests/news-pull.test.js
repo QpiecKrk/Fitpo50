@@ -11,7 +11,9 @@ const {
   EXIT,
   NewsPullError,
   buildRemotePlan,
+  parseArgs,
   pullNews,
+  verifyBackupManifest,
 } = require('../scripts/news-pull');
 
 const BASE = 'news_20261025_120000_abcdef12';
@@ -231,6 +233,83 @@ test('dry-run pokazuje zmiany bez zapisu i bez mirroru', (t) => {
   assert.ok(report.changed_files.length > 0);
   assert.equal(mirrorCalls, 0);
   assert.equal(fs.existsSync(path.join(root, 'data/news-live.json')), false);
+});
+
+test('--backup-only tworzy kompletną zweryfikowaną kopię bez zmiany repo i mirroru', (t) => {
+  const root = tempRoot(t);
+  const backupRoot = tempRoot(t);
+  const pkg = samplePackage();
+  const before = fs.readdirSync(root).sort();
+  let mirrorCalls = 0;
+  const report = pullNews({
+    root,
+    backupOnly: true,
+    backupRoot,
+    now: () => new Date('2026-10-27T12:00:00Z'),
+    transport: new FakeTransport(pkg),
+    imageInspector: validInspector,
+    mirrorRunner: () => { mirrorCalls += 1; },
+  });
+  assert.equal(report.status, 'OK');
+  assert.equal(report.backup_only, true);
+  assert.equal(mirrorCalls, 0);
+  assert.deepEqual(fs.readdirSync(root).sort(), before);
+  assert.equal(path.basename(report.backup_dir), 'news-2026-10-27T13-00-00+01-00');
+  assert.deepEqual(fs.readdirSync(backupRoot), [path.basename(report.backup_dir)]);
+  assert.equal(fs.statSync(report.backup_dir).mode & 0o777, 0o700);
+  const manifest = verifyBackupManifest(report.backup_dir);
+  assert.deepEqual(manifest.files.map((item) => item.path), [
+    `assets/data/news-fallback.json`,
+    `assets/news/${BASE}.avif`,
+    `assets/news/${BASE}.jpg`,
+    `assets/news/${BASE}.webp`,
+    'data/news-backups/news-live-20261025_120000.json',
+    'data/news-live.json',
+  ]);
+  for (const item of manifest.files) {
+    const file = path.join(report.backup_dir, item.path);
+    const remote = item.path === 'data/news-live.json'
+      ? '/news-live.json'
+      : (item.path === 'assets/data/news-fallback.json'
+        ? '/data/news-fallback.json'
+        : `/${item.path.replace(/^data\//, '') .replace(/^assets\//, '')}`);
+    assert.equal(fs.statSync(file).mode & 0o777, 0o600, item.path);
+    assert.deepEqual(fs.readFileSync(file), pkg.files[remote], item.path);
+    assert.equal(fs.statSync(file).size, item.bytes, item.path);
+    assert.equal(crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'), item.sha256, item.path);
+    let directory = path.dirname(file);
+    while (directory.startsWith(report.backup_dir) && directory !== path.dirname(report.backup_dir)) {
+      assert.equal(fs.statSync(directory).mode & 0o777, 0o700, directory);
+      if (directory === report.backup_dir) break;
+      directory = path.dirname(directory);
+    }
+  }
+  assert.equal(fs.statSync(path.join(report.backup_dir, 'manifest.json')).mode & 0o777, 0o600);
+});
+
+test('--backup-only po zerwanym pobieraniu nie zostawia katalogu docelowego ani tymczasowego', (t) => {
+  const root = tempRoot(t);
+  const backupRoot = tempRoot(t);
+  assert.throws(() => pullNews({
+    root,
+    backupOnly: true,
+    backupRoot,
+    now: () => new Date('2026-10-27T12:00:00Z'),
+    transport: new FakeTransport(samplePackage(), { failAt: 3 }),
+    imageInspector: validInspector,
+  }), (error) => error.exitCode === EXIT.ENVIRONMENT && /Zerwane połączenie/.test(error.message));
+  assert.deepEqual(fs.readdirSync(backupRoot), []);
+  assert.equal(fs.existsSync(path.join(backupRoot, 'news-2026-10-27T13-00-00+01-00')), false);
+});
+
+test('--dry-run i --backup-only razem kończą się błędem danych przed pobieraniem', (t) => {
+  assert.throws(() => parseArgs(['--dry-run', '--backup-only']),
+    (error) => error.exitCode === EXIT.DATA && /nie można łączyć/.test(error.message));
+  const root = tempRoot(t);
+  const transport = new FakeTransport();
+  assert.throws(() => pullNews({ root, dryRun: true, backupOnly: true, transport }),
+    (error) => error.exitCode === EXIT.DATA && /nie można łączyć/.test(error.message));
+  assert.equal(transport.downloads, 0);
 });
 
 test('przy szkicach news:pull zachowuje śledzony live i zapisuje prywatną kopię z SHA-256', (t) => {
