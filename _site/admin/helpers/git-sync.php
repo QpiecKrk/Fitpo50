@@ -29,6 +29,11 @@ function gitAutoSyncFallbackBranch(): string {
  * @return array{status:string,message:string,commit?:string,branch?:string}
  */
 function runGitAutoSync(array $groups, string $actionLabel): array {
+    return [
+        'status' => 'blocked',
+        'message' => 'Publikacja do Git z panelu jest wyłączona. Git obsługuje wyłącznie kontrolowany proces wdrożenia.',
+    ];
+
     if (!gitAutoSyncEnabled()) {
         return ['status' => 'disabled', 'message' => 'Auto-sync Git jest wyłączony. Wymaga jawnego FITPO50_AUTO_GIT_SYNC=1.'];
     }
@@ -253,6 +258,7 @@ function gitSyncResultNote(?array $result): string {
         'ok' => ' Auto-sync Git: OK.',
         'noop' => ' Auto-sync Git: brak zmian do wysłania.',
         'disabled' => ' Auto-sync Git: wyłączony.',
+        'blocked' => ' Publikacja do Git z panelu jest wyłączona.',
         default => '',
     };
 }
@@ -359,6 +365,16 @@ function gitSyncPathRelevant(string $repoRoot, string $path): bool {
  * @return array{stdout:string,stderr:string,exit_code:int}
  */
 function runGitCommand(array $args, string $cwd): array {
+    $subcommand = (string)($args[1] ?? '');
+    $allowedReadOnlySubcommands = ['rev-parse', 'ls-files'];
+    if (($args[0] ?? '') !== 'git' || !in_array($subcommand, $allowedReadOnlySubcommands, true)) {
+        return [
+            'stdout' => '',
+            'stderr' => 'Polecenie Git zapisujące lub spoza allowlisty jest zablokowane przez politykę panelu.',
+            'exit_code' => 126,
+        ];
+    }
+
     $command = implode(' ', array_map(static fn(string $arg): string => escapeshellarg($arg), $args));
 
     $descriptors = [
