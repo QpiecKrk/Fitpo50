@@ -14,8 +14,21 @@ const BASE_URL = 'https://fitpo50.pl';
 const COMMIT = '1'.repeat(40);
 const FALLBACK_PATH = 'assets/data/news-fallback.json';
 const IMAGE_PATH = 'assets/news/news_20261025_test.webp';
+const JPG_PATH = 'assets/news/news_20261025_test.jpg';
 const FALLBACK_BYTES = Buffer.from('{"version":1,"items":[]}\n');
 const IMAGE_BYTES = Buffer.from('runtime-news-image');
+
+function jpegBytes(width, height, variant = 0) {
+  return Buffer.from([
+    0xff, 0xd8,
+    0xff, 0xe0, 0x00, 0x04, variant & 0xff, 0x00,
+    0xff, 0xc0, 0x00, 0x0b, 0x08,
+    (height >> 8) & 0xff, height & 0xff,
+    (width >> 8) & 0xff, width & 0xff,
+    0x01, 0x01, 0x11, 0x00,
+    0xff, 0xd9,
+  ]);
+}
 
 function newsSnapshot() {
   return {
@@ -52,7 +65,7 @@ function responsesFor(currentMarker, overrides = {}) {
   return values;
 }
 
-function verify(currentMarker, responses = responsesFor(currentMarker)) {
+function verify(currentMarker, responses = responsesFor(currentMarker), localNewsFiles = new Map()) {
   const baseFiles = [
     '/', '/porady.html', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/ads.txt', '/assets/data/search-index.json',
   ].map((urlPath) => {
@@ -66,6 +79,7 @@ function verify(currentMarker, responses = responsesFor(currentMarker)) {
     responses,
     baseUrl: BASE_URL,
     baseFiles,
+    readLocalNewsFile: (imagePath) => localNewsFiles.get(imagePath),
   });
 }
 
@@ -103,6 +117,76 @@ test('marker v3 blokuje obraz NEWS z HTTP 404', () => {
   const result = verify(current, responses);
   assert.equal(result.status, 'DEPLOYED');
   assert.ok(result.errors.some((error) => error.includes(IMAGE_PATH) && /HTTP 200/.test(error)));
+});
+
+test('JPG NEWS po przekodowaniu CDN przechodzi przy tych samych wymiarach', () => {
+  const localJpg = jpegBytes(640, 480, 1);
+  const liveJpg = jpegBytes(640, 480, 2);
+  const current = marker();
+  current.news.runtime_images.push({ path: JPG_PATH, sha256: sha256(localJpg) });
+  const responses = responsesFor(current, {
+    [`${BASE_URL}/${JPG_PATH}`]: { status: 200, contentType: 'image/jpeg', body: liveJpg },
+  });
+  const result = verify(current, responses, new Map([[JPG_PATH, localJpg]]));
+  assert.equal(result.status, 'LIVE_DEPLOYED_AND_VALIDATED');
+  assert.equal(result.errors.length, 0);
+});
+
+test('JPG NEWS o innych wymiarach jest blokowany', () => {
+  const localJpg = jpegBytes(640, 480, 1);
+  const liveJpg = jpegBytes(641, 480, 2);
+  const current = marker();
+  current.news.runtime_images.push({ path: JPG_PATH, sha256: sha256(localJpg) });
+  const responses = responsesFor(current, {
+    [`${BASE_URL}/${JPG_PATH}`]: { status: 200, contentType: 'image/jpeg', body: liveJpg },
+  });
+  const result = verify(current, responses, new Map([[JPG_PATH, localJpg]]));
+  assert.equal(result.status, 'DEPLOYED');
+  assert.ok(result.errors.some((error) => error.includes(JPG_PATH) && /wymiar/i.test(error)));
+});
+
+test('odpowiedź HTTP 200 niebędąca JPEG jest blokowana dla JPG NEWS', () => {
+  const localJpg = jpegBytes(640, 480, 1);
+  const current = marker();
+  current.news.runtime_images.push({ path: JPG_PATH, sha256: sha256(localJpg) });
+  const responses = responsesFor(current, {
+    [`${BASE_URL}/${JPG_PATH}`]: { status: 200, contentType: 'text/html; charset=utf-8', body: Buffer.from('<html>error</html>') },
+  });
+  const result = verify(current, responses, new Map([[JPG_PATH, localJpg]]));
+  assert.equal(result.status, 'DEPLOYED');
+  assert.ok(result.errors.some((error) => error.includes(JPG_PATH) && /JPEG|image\/jpeg/i.test(error)));
+});
+
+test('JPG NEWS z HTTP 404 jest blokowany', () => {
+  const localJpg = jpegBytes(640, 480, 1);
+  const current = marker();
+  current.news.runtime_images.push({ path: JPG_PATH, sha256: sha256(localJpg) });
+  const responses = responsesFor(current, {
+    [`${BASE_URL}/${JPG_PATH}`]: { status: 404, contentType: 'image/jpeg', body: Buffer.alloc(0) },
+  });
+  const result = verify(current, responses, new Map([[JPG_PATH, localJpg]]));
+  assert.equal(result.status, 'DEPLOYED');
+  assert.ok(result.errors.some((error) => error.includes(JPG_PATH) && /HTTP 200/.test(error)));
+});
+
+test('zmiana jednego bajtu AVIF i WebP nadal jest blokowana przez SHA-256', () => {
+  const avifPath = 'assets/news/news_20261025_test.avif';
+  const webpPath = 'assets/news/news_20261025_test.webp';
+  const avifBytes = Buffer.from('avif-original');
+  const webpBytes = Buffer.from('webp-original');
+  const current = marker();
+  current.news.runtime_images = [
+    { path: avifPath, sha256: sha256(avifBytes) },
+    { path: webpPath, sha256: sha256(webpBytes) },
+  ];
+  const responses = responsesFor(current, {
+    [`${BASE_URL}/${avifPath}`]: { status: 200, body: Buffer.from('avif-originaL') },
+    [`${BASE_URL}/${webpPath}`]: { status: 200, body: Buffer.from('webp-originaL') },
+  });
+  const result = verify(current, responses);
+  assert.equal(result.status, 'DEPLOYED');
+  assert.ok(result.errors.some((error) => error.includes(avifPath) && /SHA-256|różni/.test(error)));
+  assert.ok(result.errors.some((error) => error.includes(webpPath) && /SHA-256|różni/.test(error)));
 });
 
 test('marker v3 bez sekcji news jest blokowany', () => {

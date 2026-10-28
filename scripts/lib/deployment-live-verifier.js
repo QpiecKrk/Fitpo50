@@ -4,6 +4,38 @@ function sha256(value) {
   return crypto.createHash('sha256').update(Buffer.isBuffer(value) ? value : Buffer.from(String(value || ''))).digest('hex');
 }
 
+function jpegDimensions(value) {
+  const bytes = Buffer.isBuffer(value) ? value : Buffer.from(value || '');
+  if (bytes.length < 4 || bytes[0] !== 0xff || bytes[1] !== 0xd8) return null;
+  let offset = 2;
+  while (offset + 1 < bytes.length) {
+    if (bytes[offset] !== 0xff) { offset += 1; continue; }
+    while (offset < bytes.length && bytes[offset] === 0xff) offset += 1;
+    if (offset >= bytes.length) return null;
+    const marker = bytes[offset];
+    offset += 1;
+    if (marker === 0xd9 || marker === 0xda) return null;
+    if (marker === 0x01 || (marker >= 0xd0 && marker <= 0xd8)) continue;
+    if (offset + 2 > bytes.length) return null;
+    const segmentLength = bytes.readUInt16BE(offset);
+    if (segmentLength < 2 || offset + segmentLength > bytes.length) return null;
+    const isStartOfFrame = (
+      (marker >= 0xc0 && marker <= 0xc3)
+      || (marker >= 0xc5 && marker <= 0xc7)
+      || (marker >= 0xc9 && marker <= 0xcb)
+      || (marker >= 0xcd && marker <= 0xcf)
+    );
+    if (isStartOfFrame) {
+      if (segmentLength < 7) return null;
+      const height = bytes.readUInt16BE(offset + 3);
+      const width = bytes.readUInt16BE(offset + 5);
+      return width > 0 && height > 0 ? { width, height } : null;
+    }
+    offset += segmentLength;
+  }
+  return null;
+}
+
 function canonicalFromHtml(html) {
   return String(html || '').match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i)?.[1]
     || String(html || '').match(/<link\s+href=["']([^"']+)["']\s+rel=["']canonical["']/i)?.[1]
@@ -59,7 +91,7 @@ function expectedNewsFiles(marker, errors) {
   return files;
 }
 
-function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, baseUrl, baseFiles = [], articles = [] }) {
+function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, baseUrl, baseFiles = [], articles = [], readLocalNewsFile = () => undefined }) {
   const errors = [];
   const checks = [];
   const normalizedBase = String(baseUrl || '').replace(/\/$/, '');
@@ -99,9 +131,28 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
     const url = `${normalizedBase}/${expected.path}`;
     const response = responses.get(url);
     const httpOk = Boolean(response && response.status === 200);
-    const hashOk = httpOk && sha256(response.body) === expected.sha256;
     if (!httpOk) errors.push(`${expected.path}: NEWS nie zwrócił HTTP 200.`);
-    else if (!hashOk) errors.push(`${expected.path}: produkcja różni się od SHA-256 zapisanego w markerze.`);
+    if (/^assets\/news\/.+\.jpg$/i.test(expected.path)) {
+      const contentTypeOk = httpOk && /^image\/jpeg(?:\s*;|$)/i.test(String(response.contentType || ''));
+      const liveDimensions = httpOk ? jpegDimensions(response.body) : null;
+      let localDimensions = null;
+      try { localDimensions = jpegDimensions(readLocalNewsFile(expected.path)); } catch { localDimensions = null; }
+      const dimensionsOk = Boolean(
+        liveDimensions && localDimensions
+        && liveDimensions.width === localDimensions.width
+        && liveDimensions.height === localDimensions.height
+      );
+      if (httpOk && !contentTypeOk) errors.push(`${expected.path}: NEWS JPG nie ma content-type image/jpeg.`);
+      if (httpOk && contentTypeOk && !liveDimensions) errors.push(`${expected.path}: odpowiedź nie zawiera prawidłowego pliku JPEG z wymiarami.`);
+      if (httpOk && contentTypeOk && liveDimensions && !localDimensions) errors.push(`${expected.path}: lokalny plik JPEG nie ma prawidłowych wymiarów.`);
+      if (httpOk && contentTypeOk && liveDimensions && localDimensions && !dimensionsOk) {
+        errors.push(`${expected.path}: wymiary produkcji ${liveDimensions.width}x${liveDimensions.height} różnią się od lokalnych ${localDimensions.width}x${localDimensions.height}.`);
+      }
+      checks.push({ type: expected.type, url, pass: httpOk && contentTypeOk && dimensionsOk });
+      continue;
+    }
+    const hashOk = httpOk && sha256(response.body) === expected.sha256;
+    if (httpOk && !hashOk) errors.push(`${expected.path}: produkcja różni się od SHA-256 zapisanego w markerze.`);
     checks.push({ type: expected.type, url, pass: hashOk });
   }
 
@@ -152,4 +203,4 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
   };
 }
 
-module.exports = { canonicalFromHtml, expectedNewsFiles, modifiedDates, sha256, sitemapLastmod, verifyDeployment };
+module.exports = { canonicalFromHtml, expectedNewsFiles, jpegDimensions, modifiedDates, sha256, sitemapLastmod, verifyDeployment };

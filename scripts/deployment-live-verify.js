@@ -93,7 +93,11 @@ async function fetchOne(url, timeoutMs) {
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetch(url, { cache: 'no-store', headers: { 'cache-control': 'no-cache', 'user-agent': 'fitpo50-deployment-verifier/1.0' }, signal: controller.signal });
-    return { status: response.status, body: Buffer.from(await response.arrayBuffer()) };
+    return {
+      status: response.status,
+      contentType: response.headers?.get?.('content-type') || '',
+      body: Buffer.from(await response.arrayBuffer()),
+    };
   } finally { clearTimeout(timer); }
 }
 
@@ -151,7 +155,16 @@ async function main() {
       cacheBustedUrls: cacheBustedNewsUrls,
       releaseId: marker.release_id,
     });
-    result = verifyDeployment({ expectedCommit, remoteCommit, marker, responses, baseUrl: args.baseUrl, baseFiles, articles });
+    result = verifyDeployment({
+      expectedCommit,
+      remoteCommit,
+      marker,
+      responses,
+      baseUrl: args.baseUrl,
+      baseFiles,
+      articles,
+      readLocalNewsFile: (imagePath) => fs.readFileSync(path.join('_site', imagePath)),
+    });
     if (result.status === 'LIVE_DEPLOYED_AND_VALIDATED') break;
     if (attempt < args.retries) {
       if (result.status === 'DEPLOYED') {
