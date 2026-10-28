@@ -28,7 +28,7 @@ mysql --host=DB_HOST --user=DB_USER --password --database=DB_NAME < docs/admin-s
 ```bash
 php -l admin/config.php
 php -r 'require "admin/bootstrap.php"; echo "CONFIG OK\n";'
-php -r 'require "admin/auth.php"; requireAdminTables(["entries","media","failed_logins"]); echo "DB TABLES OK\n";'
+php -r 'require "admin/auth.php"; requireAdminTables(["failed_logins"]); echo "DB TABLES OK\n";'
 ```
 
 Pliki `admin/init-db.php` i `admin/init-hash.php` nie mogą istnieć ani w repozytorium, ani na serwerze.

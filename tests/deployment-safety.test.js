@@ -344,9 +344,9 @@ test('admin setup is CLI-only and public init scripts do not exist', () => {
   assert.match(guide, /php -r/);
   assert.match(guide, /mysql --host=/);
   assert.doesNotMatch(guide, /https?:\/\/admin\.fitpo50\.pl\/init-/);
-  assert.match(schema, /CREATE TABLE IF NOT EXISTS entries/);
-  assert.match(schema, /CREATE TABLE IF NOT EXISTS media/);
   assert.match(schema, /CREATE TABLE IF NOT EXISTS failed_logins/);
+  assert.doesNotMatch(schema, /CREATE TABLE IF NOT EXISTS entries/);
+  assert.doesNotMatch(schema, /CREATE TABLE IF NOT EXISTS media/);
 });
 
 test('admin Git sync is disabled unless explicitly enabled', () => {
