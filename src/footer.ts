@@ -219,7 +219,6 @@
           <li><a href="jedzenie.html">Jedzenie</a></li>
           <li><a href="zdrowie.html">Zdrowie</a></li>
           <li><a href="ciekawe.html">Ciekawe</a></li>
-          <li><a href="dziennik.html">Dziennik</a></li>
           <li><a href="o-mnie.html">O mnie</a></li>
         </ul>
       </section>
