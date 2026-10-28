@@ -512,16 +512,23 @@ function createBackupOnly(stagedFiles, options = {}) {
   if (fs.existsSync(finalDir)) {
     throw new NewsPullError(`Docelowa kopia już istnieje: ${finalDir}`, EXIT.ENVIRONMENT);
   }
-  const tempDir = fs.mkdtempSync(path.join(backupRoot, `.news-${stamp}.tmp-`));
-  fs.chmodSync(tempDir, 0o700);
+  const workspace = createManagedTempDir({
+    tempRoot: backupRoot,
+    prefix: `.news-${stamp}.tmp-`,
+    projectRoot: options.projectRoot || ROOT,
+    type: 'news-backup',
+  });
+  const payload = path.join(workspace, 'payload');
+  let promoted = false;
   try {
+    fs.mkdirSync(payload, { recursive: true, mode: 0o700 });
     const files = [];
     for (const item of stagedFiles) {
       const relative = String(item.relative || '');
       if (!relative || relative.includes('..') || path.isAbsolute(relative) || relative.includes('\\')) {
         throw new NewsPullError(`Niebezpieczna ścieżka kopii: ${JSON.stringify(relative)}`, EXIT.ENVIRONMENT);
       }
-      const target = path.join(tempDir, relative);
+      const target = path.join(payload, relative);
       fs.mkdirSync(path.dirname(target), { recursive: true, mode: 0o700 });
       fs.copyFileSync(item.staged, target);
       fs.chmodSync(target, 0o600);
@@ -533,18 +540,25 @@ function createBackupOnly(stagedFiles, options = {}) {
       created_at: warsawIso(now()),
       files: files.sort((left, right) => left.path.localeCompare(right.path)),
     };
-    const manifestPath = path.join(tempDir, 'manifest.json');
+    const manifestPath = path.join(payload, 'manifest.json');
     atomicWriteFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
     fs.chmodSync(manifestPath, 0o600);
-    verifyBackupManifest(tempDir);
-    for (const directory of [tempDir, ...listFilesRecursive(tempDir)
-      .map((relative) => path.dirname(path.join(tempDir, relative)))]) {
+    verifyBackupManifest(payload);
+    for (const directory of [payload, ...listFilesRecursive(payload)
+      .map((relative) => path.dirname(path.join(payload, relative)))]) {
       if (fs.existsSync(directory) && fs.statSync(directory).isDirectory()) fs.chmodSync(directory, 0o700);
     }
-    fs.renameSync(tempDir, finalDir);
+    fs.renameSync(payload, finalDir);
+    promoted = true;
+    disposeTempWorkspace(workspace, { status: 'COMPLETED' });
     return { backupDir: finalDir, files: manifest.files };
   } catch (error) {
-    fs.rmSync(tempDir, { recursive: true, force: true });
+    if (promoted && fs.existsSync(finalDir)) fs.rmSync(finalDir, { recursive: true, force: true });
+    try {
+      disposeTempWorkspace(workspace, { status: 'FAILED', error });
+    } catch (_cleanupError) {
+      // The original failure remains authoritative; managed cleanup is best-effort here.
+    }
     if (error instanceof NewsPullError) throw error;
     throw new NewsPullError(`Nie udało się utworzyć kompletnej kopii NEWS: ${error.message || error}`, EXIT.ENVIRONMENT);
   }
@@ -640,7 +654,7 @@ function pullNews(options = {}) {
     if (totalBytes > LIMITS.totalBytes) throw new NewsPullError(`Paczka przekracza limit ${LIMITS.totalBytes} B.`, EXIT.DATA);
 
     if (backupOnly) {
-      const backup = createBackupOnly(archiveFiles, { now, backupRoot: options.backupRoot });
+      const backup = createBackupOnly(archiveFiles, { now, backupRoot: options.backupRoot, projectRoot: root });
       const report = {
         status: 'OK', backup_only: true, dry_run: false,
         news_count: validated.liveItems.length,
@@ -674,7 +688,7 @@ function pullNews(options = {}) {
     let serverBackup = null;
     if (!dryRun) {
       try {
-        serverBackup = createBackupOnly(archiveFiles, { now, backupRoot: options.backupRoot });
+        serverBackup = createBackupOnly(archiveFiles, { now, backupRoot: options.backupRoot, projectRoot: root });
       } catch (error) {
         if (error instanceof NewsPullError && error.exitCode === EXIT.ENVIRONMENT) throw error;
         throw new NewsPullError(`Nie udało się zabezpieczyć kopii NEWS przed promocją: ${error.message || error}`, EXIT.ENVIRONMENT);

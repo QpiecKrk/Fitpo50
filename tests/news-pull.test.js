@@ -11,6 +11,7 @@ const {
   EXIT,
   NewsPullError,
   buildRemotePlan,
+  createBackupOnly,
   parseArgs,
   pullNews,
   verifyBackupManifest,
@@ -333,6 +334,77 @@ test('--backup-only tworzy kompletną zweryfikowaną kopię bez zmiany repo i mi
     }
   }
   assert.equal(fs.statSync(path.join(report.backup_dir, 'manifest.json')).mode & 0o777, 0o600);
+});
+
+test('gotowa kopia nie zawiera plików zarządzanego workspace', (t) => {
+  const backupRoot = tempRoot(t);
+  const stagedRoot = tempRoot(t);
+  const staged = path.join(stagedRoot, 'news-live.json');
+  fs.writeFileSync(staged, '{}\n');
+  const result = createBackupOnly([{ relative: 'data/news-live.json', staged }], {
+    backupRoot,
+    projectRoot: stagedRoot,
+    now: () => new Date('2026-10-27T12:00:00Z'),
+  });
+  const copiedPaths = fs.readdirSync(result.backupDir, { recursive: true });
+  assert.equal(copiedPaths.some((relative) => path.basename(relative).startsWith('.fitpo50-workspace.')), false);
+  assert.deepEqual(fs.readdirSync(backupRoot), [path.basename(result.backupDir)]);
+});
+
+test('zarządzana kopia zachowuje uprawnienia 0700 katalogów i 0600 plików', (t) => {
+  const backupRoot = tempRoot(t);
+  const stagedRoot = tempRoot(t);
+  const staged = path.join(stagedRoot, 'news-live.json');
+  fs.writeFileSync(staged, '{}\n');
+  const result = createBackupOnly([{ relative: 'data/news-live.json', staged }], {
+    backupRoot,
+    projectRoot: stagedRoot,
+    now: () => new Date('2026-10-27T12:00:00Z'),
+  });
+  assert.equal(fs.statSync(result.backupDir).mode & 0o777, 0o700);
+  assert.equal(fs.statSync(path.join(result.backupDir, 'data')).mode & 0o777, 0o700);
+  assert.equal(fs.statSync(path.join(result.backupDir, 'data/news-live.json')).mode & 0o777, 0o600);
+  assert.equal(fs.statSync(path.join(result.backupDir, 'manifest.json')).mode & 0o777, 0o600);
+});
+
+test('błąd w trakcie kopii usuwa katalog finalny i zarządzany workspace', (t) => {
+  const backupRoot = tempRoot(t);
+  const stagedRoot = tempRoot(t);
+  const staged = path.join(stagedRoot, 'news-live.json');
+  fs.writeFileSync(staged, '{}\n');
+  const stamp = '2026-10-27T13-00-00+01-00';
+  assert.throws(() => createBackupOnly([
+    { relative: 'data/news-live.json', staged },
+    { relative: 'assets/data/news-fallback.json', staged: path.join(stagedRoot, 'missing.json') },
+  ], {
+    backupRoot,
+    projectRoot: stagedRoot,
+    now: () => new Date('2026-10-27T12:00:00Z'),
+  }), (error) => error.exitCode === EXIT.ENVIRONMENT);
+  assert.equal(fs.existsSync(path.join(backupRoot, `news-${stamp}`)), false);
+  assert.deepEqual(fs.readdirSync(backupRoot).filter((name) => name.startsWith(`.news-${stamp}.tmp-`)), []);
+});
+
+test('dwie kopie z różnymi stemplami nie kolidują', (t) => {
+  const backupRoot = tempRoot(t);
+  const stagedRoot = tempRoot(t);
+  const staged = path.join(stagedRoot, 'news-live.json');
+  fs.writeFileSync(staged, '{}\n');
+  const first = createBackupOnly([{ relative: 'data/news-live.json', staged }], {
+    backupRoot,
+    projectRoot: stagedRoot,
+    now: () => new Date('2026-10-27T12:00:00Z'),
+  });
+  const second = createBackupOnly([{ relative: 'data/news-live.json', staged }], {
+    backupRoot,
+    projectRoot: stagedRoot,
+    now: () => new Date('2026-10-27T12:00:01Z'),
+  });
+  assert.notEqual(first.backupDir, second.backupDir);
+  assert.equal(fs.existsSync(first.backupDir), true);
+  assert.equal(fs.existsSync(second.backupDir), true);
+  assert.equal(verifyBackupManifest(first.backupDir).files.length, 1);
+  assert.equal(verifyBackupManifest(second.backupDir).files.length, 1);
 });
 
 test('--backup-only po zerwanym pobieraniu nie zostawia katalogu docelowego ani tymczasowego', (t) => {
