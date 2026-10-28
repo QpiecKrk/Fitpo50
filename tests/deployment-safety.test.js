@@ -18,6 +18,14 @@ function git(cwd, ...args) {
   return String(result.stdout || '').trim();
 }
 
+function deploymentNewsSnapshot() {
+  return {
+    fallback_path: 'assets/data/news-fallback.json',
+    fallback_sha256: 'a'.repeat(64),
+    runtime_images: [],
+  };
+}
+
 function requestDeniedByHtaccess(source, pathname) {
   const lines = String(source).split(/\r?\n/);
   let requestConditions = [];
@@ -83,8 +91,14 @@ test('deployment marker is identical in source and export', () => {
   for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
   fs.mkdirSync(path.join(root, '_site', 'assets', 'data'), { recursive: true });
   fs.writeFileSync(path.join(root, '_site', 'assets', 'data', 'search-index.json'), '[]');
-  const marker = prepareDeploymentMarker(root, { releaseId: 'release-test', preparedAt: '2026-10-01T10:00:00.000Z' });
+  const marker = prepareDeploymentMarker(root, {
+    releaseId: 'release-test',
+    preparedAt: '2026-10-01T10:00:00.000Z',
+    newsSnapshot: deploymentNewsSnapshot(),
+  });
   assert.equal(marker.release_id, 'release-test');
+  assert.equal(marker.version, 3);
+  assert.equal(marker.news.fallback.sha256, 'a'.repeat(64));
   assert.equal(fs.readFileSync(path.join(root, 'deployment.json'), 'utf8'), fs.readFileSync(path.join(root, '_site', 'deployment.json'), 'utf8'));
   assert.equal(Object.hasOwn(marker, 'publication_state_files'), false);
   assert.doesNotMatch(fs.readFileSync(path.join(root, '_site', 'deployment.json'), 'utf8'), /publication_state_files/);
@@ -125,7 +139,7 @@ for (const pushFirst of [true, false]) {
         assert.equal(fs.readFileSync(path.join(root, 'deployment.json'), 'utf8'), before);
         assert.equal(fs.existsSync(path.join(root, '_site/deployment.json')), false);
       } else {
-        const marker = prepareDeploymentMarker(root);
+        const marker = prepareDeploymentMarker(root, { newsSnapshot: deploymentNewsSnapshot() });
         assert.deepEqual(marker.articles.map((a) => a.file), ['test.html']);
         git(root, 'add', '.');
         git(root, 'commit', '-m', 'content and marker');
@@ -202,7 +216,7 @@ test('zmiana tylko obrazu lub PDF przypisuje właściciela BlogPosting do marker
     fs.writeFileSync(path.join(root, '_site', 'assets', `${slug}-hero-v1.webp`), 'new-image');
     fs.writeFileSync(path.join(root, '_site', 'assets', 'pdf', `${slug}.pdf`), '%PDF-new');
     assert.deepEqual(changedRootArticles(root), [`${slug}.html`]);
-    const marker = prepareDeploymentMarker(root, { releaseId: 'artifact-release' });
+    const marker = prepareDeploymentMarker(root, { releaseId: 'artifact-release', newsSnapshot: deploymentNewsSnapshot() });
     assert.deepEqual(marker.articles.map((item) => item.slug), [slug]);
     assert.equal(marker.articles[0].pdf_sha256, require('../scripts/prepare-deployment-marker').sha256(Buffer.from('%PDF-new')));
     assert.equal(marker.articles[0].images[0].sha256, require('../scripts/prepare-deployment-marker').sha256(Buffer.from('new-image')));

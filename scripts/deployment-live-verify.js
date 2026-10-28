@@ -73,10 +73,18 @@ function expectedBaseFiles(baseUrl) {
   return files.map(([urlPath, localPath]) => ({ url: `${baseUrl}${urlPath}`, sha256: sha256(fs.readFileSync(path.join('_site', localPath))) }));
 }
 
-function urlsFor(baseUrl, articles) {
+function newsUrlsFor(baseUrl, marker) {
+  if (Number(marker?.version || 0) < 3 || !marker?.news) return [];
+  const paths = [marker.news.fallback?.path, ...(marker.news.runtime_images || []).map((entry) => entry?.path)]
+    .filter(Boolean);
+  return [...new Set(paths.map((relative) => `${baseUrl}/${String(relative).replace(/^\/+/, '')}`))];
+}
+
+function urlsFor(baseUrl, articles, newsUrls = []) {
   return [...new Set([
     `${baseUrl}/deployment.json`, `${baseUrl}/`, `${baseUrl}/porady.html`, `${baseUrl}/sitemap.xml`, `${baseUrl}/llms.txt`, `${baseUrl}/llms-full.txt`, `${baseUrl}/ads.txt`, `${baseUrl}/assets/data/search-index.json`,
     ...articles.flatMap((article) => [article.url, article.pdfUrl, ...(article.imageUrls || []), ...(article.listingUrls || [])]),
+    ...newsUrls,
   ])];
 }
 
@@ -89,10 +97,12 @@ async function fetchOne(url, timeoutMs) {
   } finally { clearTimeout(timer); }
 }
 
-async function collect(urls, timeoutMs) {
+async function collect(urls, timeoutMs, options = {}) {
   const responses = new Map();
+  const cacheBustedUrls = options.cacheBustedUrls || new Set();
   await Promise.all(urls.map(async (url) => {
-    try { responses.set(url, await fetchOne(url, timeoutMs)); }
+    const requestUrl = cacheBustedUrls.has(url) ? cacheBustUrl(url, options.releaseId) : url;
+    try { responses.set(url, await fetchOne(requestUrl, timeoutMs)); }
     catch (error) { responses.set(url, { status: 0, body: Buffer.alloc(0), error: String(error.message || error) }); }
   }));
   return responses;
@@ -130,12 +140,17 @@ async function main() {
     }))
     : localArticlesForCommit(expectedCommit, args.baseUrl);
   const baseFiles = expectedBaseFiles(args.baseUrl);
+  const newsUrls = newsUrlsFor(args.baseUrl, marker);
+  const cacheBustedNewsUrls = new Set(newsUrls);
   let result;
   for (let attempt = 0; attempt <= args.retries; attempt += 1) {
     console.log(`[LIVE] Próba ${attempt + 1}/${args.retries + 1}.`);
     const remoteCommit = git(['ls-remote', 'origin', 'refs/heads/main']).split(/\s+/)[0] || '';
-    const urls = urlsFor(args.baseUrl, articles);
-    const responses = await collect(urls, args.timeoutMs);
+    const urls = urlsFor(args.baseUrl, articles, newsUrls);
+    const responses = await collect(urls, args.timeoutMs, {
+      cacheBustedUrls: cacheBustedNewsUrls,
+      releaseId: marker.release_id,
+    });
     result = verifyDeployment({ expectedCommit, remoteCommit, marker, responses, baseUrl: args.baseUrl, baseFiles, articles });
     if (result.status === 'LIVE_DEPLOYED_AND_VALIDATED') break;
     if (attempt < args.retries) {
@@ -161,4 +176,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { cacheBustUrl, isPublicRootHtmlPath };
+module.exports = { cacheBustUrl, collect, isPublicRootHtmlPath, newsUrlsFor };
