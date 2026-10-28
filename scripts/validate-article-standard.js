@@ -654,7 +654,6 @@ function validateFile(filePath) {
     'jedzenie.html',
     'zdrowie.html',
     'ciekawe.html',
-    'dziennik.html',
     'o-mnie.html',
   ]);
   const readingRoomCardRx = /<a\s+href="([^"]+)"\s+class="article-promo-card reveal">/gi;

@@ -24,7 +24,6 @@ const SUPPORT_PAGES = new Set([
   'jedzenie.html',
   'zdrowie.html',
   'ciekawe.html',
-  'dziennik.html',
   'o-mnie.html',
   'polityka-prywatnosci.html',
   'search.html',

@@ -46,7 +46,6 @@ const CATEGORY_LANDING_PAGES = new Set([
   'zdrowie.html',
   'ciekawe.html',
   'mity.html',
-  'dziennik.html',
   'o-mnie.html',
 ]);
 

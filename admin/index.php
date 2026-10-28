@@ -5,7 +5,7 @@ require_once __DIR__ . '/auth.php';
 startSecureSession();
 
 if (!empty($_SESSION['logged_in'])) {
-    header('Location: dashboard.php');
+    header('Location: news-dashboard.php');
 } else {
     header('Location: login.php');
 }

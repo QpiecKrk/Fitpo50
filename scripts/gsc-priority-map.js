@@ -21,7 +21,6 @@ const CORE_PAGES = new Set([
   'jedzenie.html',
   'zdrowie.html',
   'ciekawe.html',
-  'dziennik.html',
   'o-mnie.html',
 ]);
 

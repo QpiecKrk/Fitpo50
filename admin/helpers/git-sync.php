@@ -292,18 +292,6 @@ function resolveGitSyncPaths(string $repoRoot, array $groups): array {
             '_site/assets/news',
             '_site/data/news-backups/.gitkeep',
         ],
-        'sukcesy' => [
-            'calendar-entries.json',
-            'dziennik.html',
-            'moje-sukcesy.html',
-            'sitemap.xml',
-            'sukcesy',
-            '_site/calendar-entries.json',
-            '_site/dziennik.html',
-            '_site/moje-sukcesy.html',
-            '_site/sitemap.xml',
-            '_site/sukcesy',
-        ],
     ];
 
     $paths = [];

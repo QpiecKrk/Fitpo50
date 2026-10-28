@@ -1,11 +1,4 @@
-# Deploy Notes - Moje Sukcesy (Wzmocnienie)
+# Deploy Notes — panel NEWS
 
-Aby zapewnić optymalną wydajność zapytań kalendarza, wykonaj następujące polecenie w bazie danych:
-
-```sql
--- Sprawdź czy indeks już istnieje
-SHOW INDEX FROM entries WHERE Key_name = 'idx_entries_status_date';
-
--- Jeśli powyższe zapytanie nie zwróciło wyników, wykonaj:
-CREATE INDEX idx_entries_status_date ON entries(status, entry_date);
-```
+Moduł „Moje Sukcesy / Dziennik” został usunięty z panelu i strony publicznej.
+Tabele historycznego modułu (`entries`, `media`) pozostają nietknięte w bazie, ale panel NEWS ich nie używa.

@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['logged_in']     = true;
             $_SESSION['last_activity'] = time();
             session_regenerate_id(true);
-            header('Location: ' . ADMIN_URL . 'dashboard.php');
+            header('Location: ' . ADMIN_URL . 'news-dashboard.php');
             exit;
         } else {
             recordFailedLogin($ip);

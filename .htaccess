@@ -30,6 +30,8 @@
   # Directory roots reported by GSC as crawl targets, not user-facing pages
   RewriteRule ^assets/?$ - [G,L]
   RewriteRule ^sukcesy/?$ - [G,L]
+  RewriteRule ^dziennik\.html$ - [G,L]
+  RewriteRule ^moje-sukcesy\.html$ - [G,L]
 </IfModule>
 
 # === Robots hygiene for technical assets ===

@@ -64,7 +64,6 @@ if (empty($sources)) {
       <span class="panel-header__title">Panel redakcyjny</span>
     </div>
     <nav class="panel-header__nav">
-      <a href="dashboard.php" class="panel-nav-link">Wpisy</a>
       <a href="news-dashboard.php" class="panel-nav-link panel-nav-link--active">Newsy</a>
       <a href="logout.php" class="panel-nav-link panel-nav-link--logout">Wyloguj</a>
     </nav>

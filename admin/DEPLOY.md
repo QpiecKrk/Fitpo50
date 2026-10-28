@@ -79,7 +79,7 @@ chmod 600 /home/u542460614/domains/fitpo50.pl/public_html/admin/config.php
 cd /home/u542460614/domains/fitpo50.pl/public_html/admin
 php -l config.php
 php -r 'require "bootstrap.php"; echo "CONFIG OK\n";'
-php -r 'require "auth.php"; requireAdminTables(["entries","media","failed_logins"]); echo "DB TABLES OK\n";'
+php -r 'require "auth.php"; requireAdminTables(["failed_logins"]); echo "DB TABLES OK\n";'
 ```
 
 Jeśli brakuje `config.php`, danych bazy albo tabel, panel pokaże teraz konkretny komunikat zamiast białej strony.
@@ -93,10 +93,8 @@ Przejdź na `https://admin.fitpo50.pl` → Basic Auth → strona logowania PHP.
 **Checklist testowy:**
 - [ ] Logowanie Twoim hasłem działa
 - [ ] 5 złych haseł → blokada na 15 min
-- [ ] Dodanie wpisu (roboczy) — brak fistaszka w kalendarzu
-- [ ] Zmiana na "Opublikowany" → plik HTML wygenerowany + fistaszek w kalendarzu
-- [ ] Edycja wpisu → HTML zaktualizowany
-- [ ] Usunięcie wpisu → HTML usunięty + fistaszek znikł
+- [ ] Dodanie newsa roboczego
+- [ ] Publikacja, edycja i usunięcie newsa działają w panelu NEWS
 - [ ] `https://admin.fitpo50.pl/robots.txt` → `Disallow: /`
 - [ ] `init-hash.php` i `init-db.php` nie istnieją na serwerze
 
@@ -106,22 +104,18 @@ Przejdź na `https://admin.fitpo50.pl` → Basic Auth → strona logowania PHP.
 
 ```
 admin/
-├── index.php              ← przekierowanie login/dashboard
+├── index.php              ← przekierowanie login/news-dashboard
 ├── login.php              ← strona logowania (warstwa 2)
 ├── logout.php             ← wylogowanie
-├── dashboard.php          ← lista wpisów
-├── entry-form.php         ← formularz dodawania/edycji
+├── news-dashboard.php     ← lista newsów
+├── news-form.php          ← formularz dodawania/edycji newsów
 ├── bootstrap.php          ← bezpieczne ładowanie configu i komunikaty awarii
 ├── config.php             ← ⚠️ NIE W REPO — tworzysz ręcznie na serwerze
 ├── auth.php               ← middleware: sesja, PDO, CSRF, rate limit
 ├── actions/
-│   ├── save.php           ← zapis wpisu + generowanie HTML + kalendarz
-│   ├── delete.php         ← usunięcie + cleanup
-│   ├── publish.php        ← publikacja z dashboardu
-│   └── unpublish.php      ← cofnięcie publikacji
-├── templates/
-│   ├── article.php        ← szablon artykułu (zgodny z Porady)
-│   └── day-list.php       ← lista wpisów z jednego dnia
+│   ├── news-save.php      ← zapis newsa
+│   ├── news-delete.php    ← usunięcie newsa
+│   └── news-status.php    ← publikacja lub cofnięcie publikacji newsa
 ├── partials/
 │   └── flash.php          ← komunikaty flash (sukces/błąd)
 ├── assets/
@@ -133,16 +127,6 @@ admin/
 ```
 
 ---
-
-## Integracja z moje-sukcesy.html
-
-PHP automatycznie aktualizuje tablicę `userEntries` w pliku `moje-sukcesy.html` na serwerze.
-
-- **Publikacja wpisu** → dodaje `{ date: "YYYY-MM-DD", url: "https://..." }` do tablicy
-- **Usunięcie wpisu** → usuwa odpowiedni wpis z tablicy
-- **Wiele wpisów jednego dnia** → URL prowadzi do strony listy `wpisy-YYYY-MM-DD.html`
-
-PHP musi mieć uprawnienie zapisu do `moje-sukcesy.html` na serwerze.
 
 ---
 
