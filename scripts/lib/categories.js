@@ -9,13 +9,13 @@ const CATEGORY_DEFINITIONS = {
     key: 'jedzenie',
     label: 'Jedzenie',
     file: 'jedzenie.html',
-    aliases: ['jedzenie', 'dieta'],
+    aliases: ['jedzenie', 'dieta', 'dieta-&-jedzenie', 'jedzenie-&-nawyk'],
   },
   zdrowie: {
     key: 'zdrowie',
     label: 'Zdrowie',
     file: 'zdrowie.html',
-    aliases: ['zdrowie', 'zdrowie-po-50'],
+    aliases: ['zdrowie', 'zdrowie-po-50', 'badania-&-zdrowie'],
   },
   ciekawe: {
     key: 'ciekawe',

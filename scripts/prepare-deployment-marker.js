@@ -209,7 +209,7 @@ function articleDeploymentEntry(rootDir, file) {
   if (!fs.existsSync(pdfPath)) throw new Error(`${file}: brak PDF w _site.`);
   const imagePaths = extractLocalAssetPaths(html)
     .filter((value) => fs.existsSync(path.join(rootDir, '_site', value)));
-  const section = html.match(/<meta\s+property=["']article:section["']\s+content=["']([^"']+)["']/i)?.[1] || 'ciekawe';
+  const section = html.match(/<meta\b(?=[^>]*\bproperty=["']article:section["'])(?=[^>]*\bcontent=["']([^"']+)["'])[^>]*>/i)?.[1] || 'ciekawe';
   const categoryFile = categoryFileFromKey(normalizeCategory(section).key);
   const listingCandidates = ['index.html', 'porady.html', categoryFile, 'assets/data/search-index.json'];
   const listingPaths = listingCandidates.filter((relativePath) => {
