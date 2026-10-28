@@ -232,19 +232,53 @@ function articleDeploymentEntry(rootDir, file) {
   };
 }
 
+function normalizeNewsSnapshot(snapshot) {
+  const fallbackPath = String(snapshot?.fallback_path || '').trim().replace(/\\/g, '/');
+  const fallbackSha256 = String(snapshot?.fallback_sha256 || '').trim().toLowerCase();
+  if (fallbackPath !== 'assets/data/news-fallback.json') {
+    throw new Error('NEWS_SNAPSHOT_INVALID: brak prawidłowego fallback_path assets/data/news-fallback.json.');
+  }
+  if (!/^[a-f0-9]{64}$/.test(fallbackSha256)) {
+    throw new Error('NEWS_SNAPSHOT_INVALID: brak prawidłowego fallback_sha256 w wyniku bramki NEWS.');
+  }
+  if (!Array.isArray(snapshot?.runtime_images)) {
+    throw new Error('NEWS_SNAPSHOT_INVALID: runtime_images musi być tablicą.');
+  }
+  const runtimeImages = snapshot.runtime_images.map((entry) => {
+    const imagePath = String(entry?.path || '').trim().replace(/\\/g, '/');
+    const imageSha256 = String(entry?.sha256 || '').trim().toLowerCase();
+    if (!/^assets\/news\/[A-Za-z0-9_-]+\.(?:avif|webp|jpg)$/i.test(imagePath)) {
+      throw new Error(`NEWS_SNAPSHOT_INVALID: niedozwolona ścieżka obrazu ${imagePath || '(brak)'}.`);
+    }
+    if (!/^[a-f0-9]{64}$/.test(imageSha256)) {
+      throw new Error(`NEWS_SNAPSHOT_INVALID: brak prawidłowego SHA-256 dla ${imagePath}.`);
+    }
+    return { path: imagePath, sha256: imageSha256 };
+  }).sort((left, right) => left.path.localeCompare(right.path, 'pl'));
+  if (new Set(runtimeImages.map((entry) => entry.path)).size !== runtimeImages.length) {
+    throw new Error('NEWS_SNAPSHOT_INVALID: runtime_images zawiera zduplikowane ścieżki.');
+  }
+  return {
+    fallback: { path: fallbackPath, sha256: fallbackSha256 },
+    runtime_images: runtimeImages,
+  };
+}
+
 function prepareDeploymentMarker(rootDir, options = {}) {
   const siteDir = path.join(rootDir, '_site');
   if (!fs.existsSync(siteDir)) throw new Error('Brak katalogu _site. Najpierw wykonaj eksport.');
   const articles = changedRootArticles(rootDir).map((file) => articleDeploymentEntry(rootDir, file));
   assertArticleInventoryComplete(rootDir, articles);
   const publicationState = publicationStateSnapshot(rootDir);
+  const news = normalizeNewsSnapshot(options.newsSnapshot);
   const marker = {
-    version: 2,
+    version: 3,
     release_id: options.releaseId || crypto.randomUUID(),
     prepared_at: options.preparedAt || warsawIso(),
     prepared_from_head: gitLines(rootDir, ['rev-parse', 'HEAD'])[0] || '',
     publication_state_sha256: publicationState.fingerprint,
     public_fingerprint_sha256: publicFingerprint(siteDir),
+    news,
     articles,
   };
   fs.mkdirSync(path.dirname(publicationStateDetailsPath(rootDir)), { recursive: true });
@@ -261,8 +295,9 @@ function prepareDeploymentMarker(rootDir, options = {}) {
 function runDeploymentPrepare(rootDir, options = {}) {
   const newsSyncCheck = options.newsSyncCheck || checkNewsFallbackSync;
   const markerPrepare = options.markerPrepare || prepareDeploymentMarker;
-  newsSyncCheck({ root: rootDir });
-  return markerPrepare(rootDir, options.markerOptions || {});
+  const newsSnapshot = newsSyncCheck({ root: rootDir });
+  normalizeNewsSnapshot(newsSnapshot);
+  return markerPrepare(rootDir, { ...(options.markerOptions || {}), newsSnapshot });
 }
 
 if (require.main === module) {
@@ -283,6 +318,7 @@ module.exports = {
   changedRootArticles,
   extractLocalAssetPaths,
   prepareDeploymentMarker,
+  normalizeNewsSnapshot,
   runDeploymentPrepare,
   publicationStateFingerprint,
   publicationStateDifferences,

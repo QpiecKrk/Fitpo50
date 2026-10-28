@@ -90,6 +90,14 @@ test('bramka NEWS przepuszcza fallback identyczny z panelem', (t) => {
   assert.equal(Object.keys(result.local_hashes).length, 4);
   assert.notEqual(result.remote_hashes.live, result.remote_hashes.fallback);
   assert.equal(result.runtime_images_checked, 3);
+  assert.equal(result.fallback_path, 'assets/data/news-fallback.json');
+  assert.equal(result.fallback_sha256, result.remote_sha256);
+  assert.deepEqual(result.runtime_images.map((image) => image.path), [
+    'assets/news/news_20261025_test.avif',
+    'assets/news/news_20261025_test.jpg',
+    'assets/news/news_20261025_test.webp',
+  ]);
+  assert.ok(result.runtime_images.every((image) => image.sha256 === require('../scripts/news-deploy-sync-gate').sha256(Buffer.from('image'))));
 });
 
 test('bramka NEWS porównuje także śledzony mirror _site/data/news-live.json', (t) => {
@@ -172,9 +180,18 @@ test('bramka NEWS klasyfikuje brak połączenia jako kod 30', (t) => {
 
 test('deployment:prepare uruchamia bramkę NEWS przed zapisem markera', () => {
   const order = [];
+  const snapshot = {
+    fallback_path: 'assets/data/news-fallback.json',
+    fallback_sha256: 'a'.repeat(64),
+    runtime_images: [],
+  };
   const marker = runDeploymentPrepare('/tmp/example', {
-    newsSyncCheck: () => order.push('news-gate'),
-    markerPrepare: () => { order.push('marker'); return { release_id: 'test' }; },
+    newsSyncCheck: () => { order.push('news-gate'); return snapshot; },
+    markerPrepare: (_root, options) => {
+      order.push('marker');
+      assert.equal(options.newsSnapshot, snapshot);
+      return { release_id: 'test' };
+    },
   });
   assert.deepEqual(order, ['news-gate', 'marker']);
   assert.equal(marker.release_id, 'test');

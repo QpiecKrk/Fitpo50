@@ -25,6 +25,40 @@ function sitemapLastmod(xml, url) {
   return block.match(/<lastmod>([^<]+)<\/lastmod>/i)?.[1] || '';
 }
 
+function expectedNewsFiles(marker, errors) {
+  if (Number(marker?.version || 0) < 3) return [];
+  const news = marker?.news;
+  if (!news || typeof news !== 'object') {
+    errors.push('deployment.json v3 nie zawiera wymaganej sekcji news.');
+    return [];
+  }
+  const fallback = news.fallback;
+  const runtimeImages = news.runtime_images;
+  if (!fallback || fallback.path !== 'assets/data/news-fallback.json' || !/^[a-f0-9]{64}$/i.test(String(fallback.sha256 || ''))) {
+    errors.push('deployment.json v3 zawiera nieprawidłowy snapshot news.fallback.');
+  }
+  if (!Array.isArray(runtimeImages)) {
+    errors.push('deployment.json v3 nie zawiera tablicy news.runtime_images.');
+  }
+  const files = [];
+  if (fallback?.path === 'assets/data/news-fallback.json' && /^[a-f0-9]{64}$/i.test(String(fallback.sha256 || ''))) {
+    files.push({ type: 'NEWS_FALLBACK', path: fallback.path, sha256: String(fallback.sha256).toLowerCase() });
+  }
+  for (const entry of Array.isArray(runtimeImages) ? runtimeImages : []) {
+    const imagePath = String(entry?.path || '').replace(/\\/g, '/');
+    const imageSha256 = String(entry?.sha256 || '').toLowerCase();
+    if (!/^assets\/news\/[A-Za-z0-9_-]+\.(?:avif|webp|jpg)$/i.test(imagePath) || !/^[a-f0-9]{64}$/.test(imageSha256)) {
+      errors.push(`deployment.json v3 zawiera nieprawidłowy obraz NEWS: ${imagePath || '(brak ścieżki)'}.`);
+      continue;
+    }
+    files.push({ type: 'NEWS_RUNTIME_IMAGE', path: imagePath, sha256: imageSha256 });
+  }
+  if (new Set(files.map((entry) => entry.path)).size !== files.length) {
+    errors.push('deployment.json v3 zawiera zduplikowane ścieżki NEWS.');
+  }
+  return files;
+}
+
 function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, baseUrl, baseFiles = [], articles = [] }) {
   const errors = [];
   const checks = [];
@@ -59,6 +93,16 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
       if (canonical !== item.canonical) errors.push(`${url}: canonical=${canonical || 'MISSING'}.`);
     }
     checks.push({ type: 'BASE_FILE', url, pass: ok });
+  }
+
+  for (const expected of expectedNewsFiles(marker, errors)) {
+    const url = `${normalizedBase}/${expected.path}`;
+    const response = responses.get(url);
+    const httpOk = Boolean(response && response.status === 200);
+    const hashOk = httpOk && sha256(response.body) === expected.sha256;
+    if (!httpOk) errors.push(`${expected.path}: NEWS nie zwrócił HTTP 200.`);
+    else if (!hashOk) errors.push(`${expected.path}: produkcja różni się od SHA-256 zapisanego w markerze.`);
+    checks.push({ type: expected.type, url, pass: hashOk });
   }
 
   const sitemap = responses.get(`${normalizedBase}/sitemap.xml`);
@@ -108,4 +152,4 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
   };
 }
 
-module.exports = { canonicalFromHtml, modifiedDates, sha256, sitemapLastmod, verifyDeployment };
+module.exports = { canonicalFromHtml, expectedNewsFiles, modifiedDates, sha256, sitemapLastmod, verifyDeployment };

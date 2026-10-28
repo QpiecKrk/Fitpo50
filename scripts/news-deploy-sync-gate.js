@@ -148,9 +148,13 @@ function checkNewsFallbackSync(options = {}) {
         missing,
       );
     }
+    const runtimeImages = [];
     for (const image of checkout.runtimeImages) {
-      transport.download('assets', image.remotePath, path.join(staging, 'news', path.basename(image.relative)), 20 * 1024 * 1024);
+      const target = path.join(staging, 'news', path.basename(image.relative));
+      transport.download('assets', image.remotePath, target, 20 * 1024 * 1024);
+      runtimeImages.push({ path: image.relative, sha256: sha256(fs.readFileSync(target)) });
     }
+    runtimeImages.sort((left, right) => left.path.localeCompare(right.path, 'pl'));
     completed = true;
     return {
       status: 'NEWS_IN_SYNC',
@@ -159,6 +163,9 @@ function checkNewsFallbackSync(options = {}) {
       remote_sha256: remoteHashes.fallback,
       remote_hashes: remoteHashes,
       runtime_images_checked: checkout.runtimeImages.length,
+      fallback_path: FALLBACK_PATH,
+      fallback_sha256: remoteHashes.fallback,
+      runtime_images: runtimeImages,
     };
   } finally {
     disposeTempWorkspace(staging, { status: completed ? 'COMPLETED' : 'FAILED' });
