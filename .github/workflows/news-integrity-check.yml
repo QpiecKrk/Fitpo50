@@ -25,9 +25,11 @@ on:
       - 'scripts/news-integrity-check.js'
       - '.github/workflows/news-integrity-check.yml'
 
+permissions:
+  contents: read
+
 jobs:
   news_integrity:
-    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, '[auto-sync] news status ') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
