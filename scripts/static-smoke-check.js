@@ -20,7 +20,7 @@ function assertFile(rel) {
 }
 
 function main() {
-  const required = ['index.html', 'porady.html', 'zdrowie.html', 'sitemap.xml', 'llms.txt', 'ads.txt'];
+  const required = ['index.html', 'porady.html', 'zdrowie.html', 'sitemap.xml', 'llms.txt'];
   for (const rel of required) assertFile(rel);
   if (errors.length) return fail();
 
@@ -29,7 +29,6 @@ function main() {
   const zdrowie = read('zdrowie.html');
   const sitemap = read('sitemap.xml');
   const llms = read('llms.txt');
-  const ads = read('ads.txt');
 
   const hasPoradyCount = /data-article-count=/i.test(porady);
   const poradyCards = (porady.match(/data-article-item/gi) || []).length;
@@ -39,7 +38,6 @@ function main() {
   if (!/<meta name="robots" content="index,follow">/i.test(zdrowie)) errors.push('zdrowie.html: brak robots index,follow');
   if (!/https:\/\/fitpo50\.pl\//i.test(sitemap)) errors.push('sitemap.xml: brak URL-i fitpo50.pl');
   if (!/https:\/\/fitpo50\.pl\//i.test(llms)) errors.push('llms.txt: brak URL-i fitpo50.pl');
-  if (!/^google\.com,\s*pub-\d+,\s*DIRECT,\s*f08c47fec0942fa0\s*$/im.test(ads)) errors.push('ads.txt: brak prawidłowej linii AdSense');
 
   const urlMatches = [...sitemap.matchAll(/<loc>https:\/\/fitpo50\.pl\/([^<]+)<\/loc>/gi)]
     .map((m) => String(m[1] || '').trim())

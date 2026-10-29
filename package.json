@@ -35,7 +35,7 @@
     "article:head:sync": "node scripts/sync-article-head-descriptions.js",
     "reading-room:verify": "node scripts/reading-room-link-verifier.js --diff",
     "schema:validate": "node scripts/schema-validator.js --diff",
-    "adsense:readiness": "node scripts/adsense-readiness-check.js",
+    "adsense:absence": "node scripts/adsense-absence-check.js",
     "faq:refresh:report": "node scripts/faq-refresh-report.js",
     "content:freshness:report": "node scripts/content-freshness-bot.js",
     "external:config:check": "node scripts/external-config-check.js",

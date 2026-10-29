@@ -56,7 +56,7 @@ function responsesFor(currentMarker, overrides = {}) {
     [`${BASE_URL}/sitemap.xml`, { status: 200, body: '<urlset></urlset>' }],
     [`${BASE_URL}/llms.txt`, { status: 200, body: 'llms' }],
     [`${BASE_URL}/llms-full.txt`, { status: 200, body: 'llms-full' }],
-    [`${BASE_URL}/ads.txt`, { status: 200, body: 'ads' }],
+    [`${BASE_URL}/ads.txt`, { status: 404, body: 'not found' }],
     [`${BASE_URL}/assets/data/search-index.json`, { status: 200, body: '[]' }],
     [`${BASE_URL}/${FALLBACK_PATH}`, { status: 200, body: FALLBACK_BYTES }],
     [`${BASE_URL}/${IMAGE_PATH}`, { status: 200, body: IMAGE_BYTES }],
@@ -67,7 +67,7 @@ function responsesFor(currentMarker, overrides = {}) {
 
 function verify(currentMarker, responses = responsesFor(currentMarker), localNewsFiles = new Map()) {
   const baseFiles = [
-    '/', '/porady.html', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/ads.txt', '/assets/data/search-index.json',
+    '/', '/porady.html', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/assets/data/search-index.json',
   ].map((urlPath) => {
     const url = `${BASE_URL}${urlPath}`;
     return { url, sha256: sha256(responses.get(url).body) };
@@ -226,7 +226,7 @@ test('marker v3 zapisuje identyczny snapshot NEWS w źródle i eksporcie', () =>
       assert.equal(result.status, 0, result.stderr || result.stdout);
     }
     fs.mkdirSync(path.join(root, '_site/assets/data'), { recursive: true });
-    for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt']) {
+    for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt']) {
       fs.writeFileSync(path.join(root, '_site', file), file);
     }
     fs.writeFileSync(path.join(root, '_site/assets/data/search-index.json'), '[]');

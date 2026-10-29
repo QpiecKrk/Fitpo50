@@ -88,7 +88,7 @@ test('deployment marker is identical in source and export', () => {
   git(root, 'config', 'user.name', 'Test');
   git(root, 'commit', '--allow-empty', '-m', 'initial');
   fs.mkdirSync(path.join(root, '_site'));
-  for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
+  for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
   fs.mkdirSync(path.join(root, '_site', 'assets', 'data'), { recursive: true });
   fs.writeFileSync(path.join(root, '_site', 'assets', 'data', 'search-index.json'), '[]');
   const marker = prepareDeploymentMarker(root, {
@@ -117,7 +117,7 @@ for (const pushFirst of [true, false]) {
       git(root, 'config', 'user.name', 'Test');
       git(root, 'checkout', '-b', 'main');
       fs.mkdirSync(path.join(root, '_site/assets/data'), { recursive: true });
-      for (const f of ['index.html', 'porady.html', 'ciekawe.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt', 'assets/data/search-index.json']) {
+      for (const f of ['index.html', 'porady.html', 'ciekawe.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'assets/data/search-index.json']) {
         fs.writeFileSync(path.join(root, '_site', f), 'test.html');
       }
       fs.writeFileSync(path.join(root, 'deployment.json'), '{"version":2,"articles":[]}\n');
@@ -203,7 +203,7 @@ test('zmiana tylko obrazu lub PDF przypisuje właściciela BlogPosting do marker
     fs.mkdirSync(path.join(root, '_site', 'assets', 'data'), { recursive: true });
     fs.mkdirSync(path.join(root, '_site', 'assets', 'pdf'), { recursive: true });
     for (const file of ['index.html', 'porady.html', 'ciekawe.html']) fs.writeFileSync(path.join(root, '_site', file), `<a href="${slug}.html">article</a>`);
-    for (const file of ['sitemap.xml', 'llms.txt', 'llms-full.txt', 'ads.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
+    for (const file of ['sitemap.xml', 'llms.txt', 'llms-full.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
     fs.writeFileSync(path.join(root, '_site', 'assets', 'data', 'search-index.json'), `[{"slug":"${slug}.html"}]`);
     fs.writeFileSync(path.join(root, '_site', `${slug}.html`), html);
     fs.writeFileSync(path.join(root, '_site', 'assets', `${slug}-hero-v1.webp`), 'old-image');
@@ -235,17 +235,25 @@ test('live verifier only returns final status after remote, marker and all check
     [`${baseUrl}/sitemap.xml`, { status: 200, body: '<urlset></urlset>' }],
     [`${baseUrl}/llms.txt`, { status: 200, body: 'ok' }],
     [`${baseUrl}/llms-full.txt`, { status: 200, body: 'full' }],
-    [`${baseUrl}/ads.txt`, { status: 200, body: 'ok' }],
+    [`${baseUrl}/ads.txt`, { status: 404, body: 'not found' }],
     [`${baseUrl}/assets/data/search-index.json`, { status: 200, body: '[]' }],
   ]);
-  const baseFiles = [...responses.entries()].filter(([url]) => url !== `${baseUrl}/deployment.json`).map(([url, response]) => ({ url, sha256: require('../scripts/lib/deployment-live-verifier').sha256(response.body) }));
+  const baseFiles = [...responses.entries()].filter(([url]) => ![`${baseUrl}/deployment.json`, `${baseUrl}/ads.txt`].includes(url)).map(([url, response]) => ({ url, sha256: require('../scripts/lib/deployment-live-verifier').sha256(response.body) }));
   const pass = verifyDeployment({ expectedCommit: '1'.repeat(40), remoteCommit: '1'.repeat(40), marker, responses, baseUrl, baseFiles });
   assert.equal(pass.status, 'LIVE_DEPLOYED_AND_VALIDATED');
   const stale = verifyDeployment({ expectedCommit: '1'.repeat(40), remoteCommit: '2'.repeat(40), marker, responses, baseUrl, baseFiles });
   assert.equal(stale.status, 'NOT_PUSHED');
-  responses.delete(`${baseUrl}/ads.txt`);
-  const incomplete = verifyDeployment({ expectedCommit: '1'.repeat(40), remoteCommit: '1'.repeat(40), marker, responses, baseUrl, baseFiles });
-  assert.equal(incomplete.status, 'DEPLOYED');
+  responses.set(`${baseUrl}/ads.txt`, { status: 200, body: 'stale seller declaration' });
+  const staleAdsTxt = verifyDeployment({ expectedCommit: '1'.repeat(40), remoteCommit: '1'.repeat(40), marker, responses, baseUrl, baseFiles });
+  assert.equal(staleAdsTxt.status, 'DEPLOYED');
+  assert.match(staleAdsTxt.errors.join('\n'), /ads\.txt: oczekiwano HTTP 404\/410.*200/);
+  responses.set(`${baseUrl}/ads.txt`, { status: 403, body: '<title>Bot Verification</title>' });
+  const botVerification = verifyDeployment({ expectedCommit: '1'.repeat(40), remoteCommit: '1'.repeat(40), marker, responses, baseUrl, baseFiles });
+  assert.equal(botVerification.status, 'DEPLOYED');
+  assert.match(botVerification.errors.join('\n'), /ads\.txt: oczekiwano HTTP 404\/410.*403/);
+  responses.set(`${baseUrl}/ads.txt`, { status: 410, body: 'gone' });
+  const gone = verifyDeployment({ expectedCommit: '1'.repeat(40), remoteCommit: '1'.repeat(40), marker, responses, baseUrl, baseFiles });
+  assert.equal(gone.status, 'LIVE_DEPLOYED_AND_VALIDATED');
 });
 
 test('old article HTML, missing PDF and missing image block final live status', () => {
@@ -259,12 +267,12 @@ test('old article HTML, missing PDF and missing image block final live status', 
     [`${baseUrl}/sitemap.xml`, { status: 200, body: '<urlset><url><loc>https://fitpo50.pl/test.html</loc><lastmod>2026-10-01</lastmod></url></urlset>' }],
     [`${baseUrl}/llms.txt`, { status: 200, body: 'ok' }],
     [`${baseUrl}/llms-full.txt`, { status: 200, body: 'full' }],
-    [`${baseUrl}/ads.txt`, { status: 200, body: 'ok' }],
+    [`${baseUrl}/ads.txt`, { status: 404, body: 'not found' }],
     [`${baseUrl}/assets/data/search-index.json`, { status: 200, body: '[]' }],
   ];
   const responses = new Map(baseResponses);
   responses.set(`${baseUrl}/test.html`, { status: 200, body: '<link rel="canonical" href="https://fitpo50.pl/test.html"><meta property="article:modified_time" content="2026-10-01T10:00:00+02:00"><script>{"dateModified":"2026-10-01T10:00:00+02:00"}</script><p>stara treść</p>' });
-  const baseFiles = baseResponses.slice(1).map(([url, response]) => ({ url, sha256: sha256(response.body) }));
+  const baseFiles = baseResponses.slice(1).filter(([url]) => url !== `${baseUrl}/ads.txt`).map(([url, response]) => ({ url, sha256: sha256(response.body) }));
   const result = verifyDeployment({
     expectedCommit: '1'.repeat(40), remoteCommit: '1'.repeat(40), marker, responses, baseUrl, baseFiles,
     articles: [{

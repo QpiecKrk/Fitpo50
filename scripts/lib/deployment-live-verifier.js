@@ -110,7 +110,6 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
     { path: '/sitemap.xml' },
     { path: '/llms.txt' },
     { path: '/llms-full.txt' },
-    { path: '/ads.txt' },
     { path: '/assets/data/search-index.json' },
   ];
   for (const item of requiredBaseFiles) {
@@ -126,6 +125,14 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
     }
     checks.push({ type: 'BASE_FILE', url, pass: ok });
   }
+
+  const removedAdsTxtUrl = `${normalizedBase}/ads.txt`;
+  const removedAdsTxtResponse = responses.get(removedAdsTxtUrl);
+  const adsTxtAbsent = Boolean(removedAdsTxtResponse && [404, 410].includes(removedAdsTxtResponse.status));
+  if (!adsTxtAbsent) {
+    errors.push(`${removedAdsTxtUrl}: oczekiwano HTTP 404/410 po usunięciu AdSense, otrzymano ${removedAdsTxtResponse?.status ?? 'BRAK ODPOWIEDZI'}.`);
+  }
+  checks.push({ type: 'ADS_TXT_ABSENT', url: removedAdsTxtUrl, pass: adsTxtAbsent });
 
   for (const expected of expectedNewsFiles(marker, errors)) {
     const url = `${normalizedBase}/${expected.path}`;

@@ -32,7 +32,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 ### PUBLIC
 
 - [PUBLIC] `npm run admin:doctor` — Bezpośrednia komenda robocza lub odczytowa (node scripts/admin-doctor.js).
-- [PUBLIC] `npm run adsense:readiness` — Bezpośrednia komenda robocza lub odczytowa (node scripts/adsense-readiness-check.js).
+- [PUBLIC] `npm run adsense:absence` — Blokuje publikację kodu AdSense i pliku `ads.txt` w źródle oraz eksporcie (node scripts/adsense-absence-check.js).
 - [PUBLIC] `npm run agent:context` — Bezpośrednia komenda robocza lub odczytowa (node scripts/agent-context.js).
 - [PUBLIC] `npm run aio:full-audit` — Bezpośrednia komenda robocza lub odczytowa (node scripts/growth-tool.js full-audit).
 - [PUBLIC] `npm run article:add` — Jedyne domyślne wejście dla nowego artykułu; przygotowuje draft, zapisuje trwały stan, prowadzi atomowy staging, zatrzymuje się na rzeczywisty review i wznawia tę samą transakcję bez ręcznego składania komend pośrednich.

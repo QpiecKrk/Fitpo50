@@ -15,7 +15,7 @@ const TASKS = {
   'article:guard:diff': { cmd: 'node', args: ['scripts/run-article-guard-diff.js'], match: [/\.html$/i], access: 'read' },
   'article:contract:diff': { cmd: 'node', args: ['scripts/run-article-contract-diff.js'], match: [/\.html$/i], access: 'read' },
   'schema:validate': { cmd: 'node', args: ['scripts/schema-validator.js', '--diff'], match: [/\.html$/i], access: 'read' },
-  'adsense:readiness': { cmd: 'node', args: ['scripts/adsense-readiness-check.js'], always: true, access: 'read' },
+  'adsense:absence': { cmd: 'node', args: ['scripts/adsense-absence-check.js'], always: true, access: 'read' },
   'json:gate:diff': { cmd: 'node', args: ['scripts/json-fitpo50-gate-diff.js'], match: [/\.fitpo50\.json$/i], access: 'read' },
   'date:modified:guard': { cmd: 'node', args: ['scripts/date-modified-guard.js'], match: [/\.html$/i], access: 'read' },
 };

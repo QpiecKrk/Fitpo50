@@ -67,7 +67,6 @@ function expectedBaseFiles(baseUrl) {
     ['/sitemap.xml', 'sitemap.xml'],
     ['/llms.txt', 'llms.txt'],
     ['/llms-full.txt', 'llms-full.txt'],
-    ['/ads.txt', 'ads.txt'],
     ['/assets/data/search-index.json', 'assets/data/search-index.json'],
   ];
   return files.map(([urlPath, localPath]) => ({ url: `${baseUrl}${urlPath}`, sha256: sha256(fs.readFileSync(path.join('_site', localPath))) }));

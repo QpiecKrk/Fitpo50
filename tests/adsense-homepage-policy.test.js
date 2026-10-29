@@ -6,70 +6,57 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 
 const REPO = path.resolve(__dirname, '..');
-const READINESS = path.join(REPO, 'scripts', 'adsense-readiness-check.js');
+const ABSENCE = path.join(REPO, 'scripts', 'adsense-absence-check.js');
 const SMOKE = path.join(REPO, 'scripts', 'static-smoke-check.js');
-const ADS_LINE = 'google.com, pub-4993821807276758, DIRECT, f08c47fec0942fa0';
 const ADS_MARKUP = [
   '<meta name="google-adsense-account" content="ca-pub-4993821807276758">',
   '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758"></script>',
 ].join('\n');
 
-function writeLegacyList(root) {
-  const pages = [];
-  const configDir = path.join(root, 'scripts', 'config');
-  fs.mkdirSync(configDir, { recursive: true });
-  fs.writeFileSync(path.join(configDir, 'adsense-legacy-pages.json'), `${JSON.stringify(pages, null, 2)}\n`);
-  return pages;
-}
-
-function makeReadinessFixture() {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-adsense-policy-'));
+function makeAbsenceFixture() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-adsense-absence-'));
   fs.mkdirSync(path.join(root, '_site'));
-  const legacyPages = writeLegacyList(root);
-  for (const page of legacyPages) {
-    const html = page === 'index.html' ? '<!doctype html><title>Home</title>' : `<!doctype html>${ADS_MARKUP}`;
-    fs.writeFileSync(path.join(root, page), html);
-    fs.writeFileSync(path.join(root, '_site', page), html);
+  for (const rel of ['index.html', 'porady.html']) {
+    const html = `<!doctype html><title>${rel}</title>`;
+    fs.writeFileSync(path.join(root, rel), html);
+    fs.writeFileSync(path.join(root, '_site', rel), html);
   }
-  fs.writeFileSync(path.join(root, 'ads.txt'), `${ADS_LINE}\n`);
-  fs.writeFileSync(path.join(root, '_site', 'ads.txt'), `${ADS_LINE}\n`);
   return root;
 }
 
-function runReadiness(root) {
-  return spawnSync(process.execPath, [READINESS], { cwd: root, encoding: 'utf8' });
+function runAbsence(root) {
+  return spawnSync(process.execPath, [ABSENCE], { cwd: root, encoding: 'utf8' });
 }
 
-test('AdSense readiness allows gradual removal on listed legacy pages and still requires ads.txt', (t) => {
-  const root = makeReadinessFixture();
+test('AdSense absence gate rejects a published ads.txt declaration', (t) => {
+  const root = makeAbsenceFixture();
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  fs.writeFileSync(path.join(root, 'ads.txt'), 'google.com, pub-4993821807276758, DIRECT, f08c47fec0942fa0\n');
+  fs.writeFileSync(path.join(root, '_site', 'ads.txt'), 'google.com, pub-4993821807276758, DIRECT, f08c47fec0942fa0\n');
 
-  let result = runReadiness(root);
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-
-  const article = path.join(root, 'porady.html');
-  fs.writeFileSync(article, '<!doctype html><title>Porady</title>');
-  fs.writeFileSync(path.join(root, '_site', 'porady.html'), '<!doctype html><title>Porady</title>');
-  result = runReadiness(root);
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-
-  fs.writeFileSync(article, `<!doctype html>${ADS_MARKUP}`);
-  fs.writeFileSync(path.join(root, '_site', 'porady.html'), `<!doctype html>${ADS_MARKUP}`);
-  fs.rmSync(path.join(root, 'ads.txt'));
-  result = runReadiness(root);
+  const result = runAbsence(root);
   assert.notEqual(result.status, 0);
-  assert.match(result.stdout, /Brak ads\.txt/);
+  assert.match(result.stdout, /ads\.txt: plik deklarujący sprzedawcę AdSense/);
 });
 
-test('AdSense readiness requires exactly 0 legacy page names', (t) => {
-  const root = makeReadinessFixture();
+test('AdSense absence gate accepts clean source and export without ads.txt', (t) => {
+  const root = makeAbsenceFixture();
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
-  const legacyPath = path.join(root, 'scripts', 'config', 'adsense-legacy-pages.json');
-  fs.writeFileSync(legacyPath, `${JSON.stringify(['unexpected-legacy.html'], null, 2)}\n`);
 
-  const result = runReadiness(root);
+  const result = runAbsence(root);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test('AdSense absence gate rejects AdSense markup in source and export', (t) => {
+  const root = makeAbsenceFixture();
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  fs.writeFileSync(path.join(root, 'outside-policy.html'), `<!doctype html>${ADS_MARKUP}`);
+  fs.writeFileSync(path.join(root, '_site', 'outside-policy.html'), `<!doctype html>${ADS_MARKUP}`);
+
+  const result = runAbsence(root);
   assert.notEqual(result.status, 0);
-  assert.match(result.stdout, /oczekiwano dokładnie 0 pozycji, jest 1/);
+  assert.match(result.stdout, /outside-policy\.html: wykryto zabroniony kod AdSense/);
+  assert.match(result.stdout, /_site\/outside-policy\.html: wykryto zabroniony kod AdSense/);
 });
 
 test('article template and archived standardizer cannot reintroduce AdSense', () => {
@@ -78,19 +65,7 @@ test('article template and archived standardizer cannot reintroduce AdSense', ()
   assert.doesNotMatch(fs.readFileSync(path.join(REPO, 'scripts', 'archive', 'standardize-articles.js'), 'utf8'), forbidden);
 });
 
-test('AdSense readiness rejects AdSense on a page outside the strict legacy list', (t) => {
-  const root = makeReadinessFixture();
-  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
-
-  fs.writeFileSync(path.join(root, 'outside-legacy.html'), `<!doctype html>${ADS_MARKUP}`);
-  fs.writeFileSync(path.join(root, '_site', 'outside-legacy.html'), `<!doctype html>${ADS_MARKUP}`);
-
-  const result = runReadiness(root);
-  assert.notEqual(result.status, 0);
-  assert.match(result.stdout, /outside-legacy\.html: AdSense poza ścisłą listą legacy/);
-});
-
-test('static smoke allows an AdSense-free homepage and still requires ads.txt', (t) => {
+test('static smoke passes without ads.txt', (t) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-static-smoke-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   fs.writeFileSync(path.join(root, 'index.html'), '<!doctype html><title>Home</title>');
@@ -98,13 +73,7 @@ test('static smoke allows an AdSense-free homepage and still requires ads.txt', 
   fs.writeFileSync(path.join(root, 'zdrowie.html'), '<meta name="robots" content="index,follow">');
   fs.writeFileSync(path.join(root, 'sitemap.xml'), '<loc>https://fitpo50.pl/</loc>');
   fs.writeFileSync(path.join(root, 'llms.txt'), 'https://fitpo50.pl/');
-  fs.writeFileSync(path.join(root, 'ads.txt'), `${ADS_LINE}\n`);
 
-  let result = spawnSync(process.execPath, [SMOKE, root], { cwd: REPO, encoding: 'utf8' });
+  const result = spawnSync(process.execPath, [SMOKE, root], { cwd: REPO, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stdout + result.stderr);
-
-  fs.rmSync(path.join(root, 'ads.txt'));
-  result = spawnSync(process.execPath, [SMOKE, root], { cwd: REPO, encoding: 'utf8' });
-  assert.notEqual(result.status, 0);
-  assert.match(result.stdout, /Brak pliku: .*ads\.txt/);
 });
