@@ -1,10 +1,10 @@
 {
   "version": 3,
-  "release_id": "deb4d055-f537-40b5-a48f-81845c956be9",
-  "prepared_at": "2026-10-29T00:02:56+01:00",
-  "prepared_from_head": "16996b00d07ca07c942d063876aa0a7c6b1fe55e",
-  "publication_state_sha256": "6fd27f66999bcf46b6724c839d995a5d8302f1821727ffd464be3520d2663408",
-  "public_fingerprint_sha256": "198c3fbb9a722c18316b403e693ea6c66cf201f66c89d27c0c9e7dd41684df55",
+  "release_id": "b7ea7723-9e5d-47ab-9411-79012851050a",
+  "prepared_at": "2026-10-29T02:49:08+01:00",
+  "prepared_from_head": "5aa13b6824c500626284dc0ef199907fd5fd3ce7",
+  "publication_state_sha256": "abb6e42ca7c8742fa03877550487eff16604dd2501a80e5acf1afa9a17886bda",
+  "public_fingerprint_sha256": "8fc4629d758d9a8e1178246cb6f198bbaa3e5b6d73e95b7bd53f541c455ea90a",
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",

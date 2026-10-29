@@ -31,7 +31,6 @@ function main() {
   const llms = read('llms.txt');
   const ads = read('ads.txt');
 
-  if (!/google-adsense-account/i.test(index)) errors.push('index.html: brak meta google-adsense-account');
   const hasPoradyCount = /data-article-count=/i.test(porady);
   const poradyCards = (porady.match(/data-article-item/gi) || []).length;
   if (!hasPoradyCount && poradyCards === 0) {

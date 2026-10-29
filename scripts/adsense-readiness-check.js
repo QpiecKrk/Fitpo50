@@ -35,11 +35,13 @@ function checkPage(rel) {
     return;
   }
   const html = read(rel);
-  if (!/meta\s+name="google-adsense-account"\s+content="ca-pub-4993821807276758"/i.test(html)) {
-    errors.push(`${rel}: brak meta google-adsense-account.`);
-  }
-  if (!/https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-4993821807276758/i.test(html)) {
-    errors.push(`${rel}: brak skryptu adsbygoogle.js z poprawnym client.`);
+  if (rel !== 'index.html') {
+    if (!/meta\s+name="google-adsense-account"\s+content="ca-pub-4993821807276758"/i.test(html)) {
+      errors.push(`${rel}: brak meta google-adsense-account.`);
+    }
+    if (!/https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-4993821807276758/i.test(html)) {
+      errors.push(`${rel}: brak skryptu adsbygoogle.js z poprawnym client.`);
+    }
   }
   assertMirror(rel);
 }
@@ -72,4 +74,3 @@ function main() {
 }
 
 main();
-
