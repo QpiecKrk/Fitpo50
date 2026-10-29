@@ -34,6 +34,7 @@ function isArticleHtml(file) {
     'o-mnie.html',
     'kontakt.html',
     'narzedzia.html',
+    'polityka-prywatnosci.html',
   ]);
   return !blocked.has(normalized);
 }
@@ -136,4 +137,5 @@ module.exports = {
   extractMetaModified,
   extractSchemaModified,
   hasSubstantiveChange,
+  isArticleHtml,
 };
