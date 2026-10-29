@@ -8,7 +8,7 @@ const errors = [];
 const warnings = [];
 
 const REQUIRED_ADS_TXT_LINE = 'google.com, pub-4993821807276758, DIRECT, f08c47fec0942fa0';
-const LEGACY_COUNT = 114;
+const LEGACY_COUNT = 34;
 const LEGACY_FILE = 'scripts/config/adsense-legacy-pages.json';
 const ADSENSE_MARKER = /google-adsense-account|adsbygoogle(?:\.js)?|pagead2\.googlesyndication\.com|ca-pub-4993821807276758/i;
 const EXPECTED_META = /<meta\b(?=[^>]*\bname="google-adsense-account")(?=[^>]*\bcontent="ca-pub-4993821807276758")[^>]*>/i;

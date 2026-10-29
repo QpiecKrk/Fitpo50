@@ -17,7 +17,7 @@ const ADS_MARKUP = [
 const KEY_PAGES = ['index.html', 'porady.html', 'rusz-sie.html', 'jedzenie.html', 'zdrowie.html', 'ciekawe.html'];
 
 function writeLegacyList(root) {
-  const filler = Array.from({ length: 114 - KEY_PAGES.length }, (_value, index) => `legacy-${String(index + 1).padStart(3, '0')}.html`);
+  const filler = Array.from({ length: 34 - KEY_PAGES.length }, (_value, index) => `legacy-${String(index + 1).padStart(3, '0')}.html`);
   const pages = [...KEY_PAGES, ...filler].sort();
   const configDir = path.join(root, 'scripts', 'config');
   fs.mkdirSync(configDir, { recursive: true });
@@ -64,7 +64,7 @@ test('AdSense readiness allows gradual removal on listed legacy pages and still 
   assert.match(result.stdout, /Brak ads\.txt/);
 });
 
-test('AdSense readiness requires exactly 114 unique legacy page names', (t) => {
+test('AdSense readiness requires exactly 34 unique legacy page names', (t) => {
   const root = makeReadinessFixture();
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const legacyPath = path.join(root, 'scripts', 'config', 'adsense-legacy-pages.json');
@@ -73,7 +73,7 @@ test('AdSense readiness requires exactly 114 unique legacy page names', (t) => {
 
   const result = runReadiness(root);
   assert.notEqual(result.status, 0);
-  assert.match(result.stdout, /oczekiwano dokładnie 114 pozycji, jest 113/);
+  assert.match(result.stdout, /oczekiwano dokładnie 34 pozycji, jest 33/);
 });
 
 test('article template and archived standardizer cannot reintroduce AdSense', () => {
