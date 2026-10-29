@@ -89,8 +89,8 @@ function cleanupHead(headInner) {
     /<link[^>]*href="\.\/article\.css[^\"]*"[^>]*>\s*/gi,
     /<link[^>]*href="\.\/assets\/footer\.css[^\"]*"[^>]*>\s*/gi,
     /<link[^>]*rel="icon"[^>]*>\s*/gi,
-    /<meta[^>]*name="google-adsense-account"[^>]*>\s*/gi,
-    /<script[^>]*src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[\s\S]*?<\/script>\s*/gi
+    /<meta[^>]*content="ca-pub-\d+"[^>]*>\s*/gi,
+    /<script[^>]*src="https:\/\/[^\"]+\/pagead\/js\/[^\"]*[?&]client=ca-pub-\d+[^\"]*"[\s\S]*?<\/script>\s*/gi
   ];
 
   for (const rx of removable) h = h.replace(rx, '');
@@ -103,9 +103,7 @@ function cleanupHead(headInner) {
     '<link rel="stylesheet" href="./article.css?v=1.4">',
     '<link rel="icon" href="./favicon.png" type="image/png">',
     '<link rel="apple-touch-icon" href="./favicon.png">',
-    '<link rel="stylesheet" href="./assets/footer.css?v=1">',
-    '<meta name="google-adsense-account" content="ca-pub-4993821807276758">',
-    '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758" crossorigin="anonymous"></script>'
+    '<link rel="stylesheet" href="./assets/footer.css?v=1">'
   ].join('\n');
 
   h = `${h.trim()}\n\n${styleBlock}\n`;

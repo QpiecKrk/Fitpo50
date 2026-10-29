@@ -14,10 +14,22 @@ const ADS_MARKUP = [
   '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4993821807276758"></script>',
 ].join('\n');
 
+const KEY_PAGES = ['index.html', 'porady.html', 'rusz-sie.html', 'jedzenie.html', 'zdrowie.html', 'ciekawe.html'];
+
+function writeLegacyList(root) {
+  const filler = Array.from({ length: 114 - KEY_PAGES.length }, (_value, index) => `legacy-${String(index + 1).padStart(3, '0')}.html`);
+  const pages = [...KEY_PAGES, ...filler].sort();
+  const configDir = path.join(root, 'scripts', 'config');
+  fs.mkdirSync(configDir, { recursive: true });
+  fs.writeFileSync(path.join(configDir, 'adsense-legacy-pages.json'), `${JSON.stringify(pages, null, 2)}\n`);
+  return pages;
+}
+
 function makeReadinessFixture() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-adsense-policy-'));
   fs.mkdirSync(path.join(root, '_site'));
-  for (const page of ['index.html', 'porady.html', 'rusz-sie.html', 'jedzenie.html', 'zdrowie.html', 'ciekawe.html']) {
+  const legacyPages = writeLegacyList(root);
+  for (const page of legacyPages) {
     const html = page === 'index.html' ? '<!doctype html><title>Home</title>' : `<!doctype html>${ADS_MARKUP}`;
     fs.writeFileSync(path.join(root, page), html);
     fs.writeFileSync(path.join(root, '_site', page), html);
@@ -31,7 +43,7 @@ function runReadiness(root) {
   return spawnSync(process.execPath, [READINESS], { cwd: root, encoding: 'utf8' });
 }
 
-test('AdSense readiness allows the homepage without AdSense but keeps article and ads.txt requirements', (t) => {
+test('AdSense readiness allows gradual removal on listed legacy pages and still requires ads.txt', (t) => {
   const root = makeReadinessFixture();
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
 
@@ -42,8 +54,7 @@ test('AdSense readiness allows the homepage without AdSense but keeps article an
   fs.writeFileSync(article, '<!doctype html><title>Porady</title>');
   fs.writeFileSync(path.join(root, '_site', 'porady.html'), '<!doctype html><title>Porady</title>');
   result = runReadiness(root);
-  assert.notEqual(result.status, 0);
-  assert.match(result.stdout, /porady\.html: brak (meta google-adsense-account|skryptu adsbygoogle)/);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
 
   fs.writeFileSync(article, `<!doctype html>${ADS_MARKUP}`);
   fs.writeFileSync(path.join(root, '_site', 'porady.html'), `<!doctype html>${ADS_MARKUP}`);
@@ -51,6 +62,36 @@ test('AdSense readiness allows the homepage without AdSense but keeps article an
   result = runReadiness(root);
   assert.notEqual(result.status, 0);
   assert.match(result.stdout, /Brak ads\.txt/);
+});
+
+test('AdSense readiness requires exactly 114 unique legacy page names', (t) => {
+  const root = makeReadinessFixture();
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const legacyPath = path.join(root, 'scripts', 'config', 'adsense-legacy-pages.json');
+  const pages = JSON.parse(fs.readFileSync(legacyPath, 'utf8'));
+  fs.writeFileSync(legacyPath, `${JSON.stringify(pages.slice(0, -1), null, 2)}\n`);
+
+  const result = runReadiness(root);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stdout, /oczekiwano dokładnie 114 pozycji, jest 113/);
+});
+
+test('article template and archived standardizer cannot reintroduce AdSense', () => {
+  const forbidden = /adsbygoogle|google-adsense-account|pagead2|googlesyndication/i;
+  assert.doesNotMatch(fs.readFileSync(path.join(REPO, 'article-template-bento.html'), 'utf8'), forbidden);
+  assert.doesNotMatch(fs.readFileSync(path.join(REPO, 'scripts', 'archive', 'standardize-articles.js'), 'utf8'), forbidden);
+});
+
+test('AdSense readiness rejects AdSense on a page outside the strict legacy list', (t) => {
+  const root = makeReadinessFixture();
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+
+  fs.writeFileSync(path.join(root, 'outside-legacy.html'), `<!doctype html>${ADS_MARKUP}`);
+  fs.writeFileSync(path.join(root, '_site', 'outside-legacy.html'), `<!doctype html>${ADS_MARKUP}`);
+
+  const result = runReadiness(root);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stdout, /outside-legacy\.html: AdSense poza ścisłą listą legacy/);
 });
 
 test('static smoke allows an AdSense-free homepage and still requires ads.txt', (t) => {
