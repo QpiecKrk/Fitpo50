@@ -32,7 +32,6 @@ Dodatkowo według zadania:
 
 - artykuły/Porady: `ARTICLE_STANDARD.md` i `MEMORY_PORADY.md`,
 - NEWS: `MEMORY_NEWSY.md`,
-- Moje Sukcesy: `MEMORY_MOJE_SUKCESY.md`,
 - komendy i pipeline: `docs/command-registry.md`,
 - monitoring publikacji: `docs/post-publication-monitoring.md`.
 

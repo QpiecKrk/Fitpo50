@@ -21,7 +21,6 @@ fitpo50.pl/
 ├── dist/           # zbudowane skrypty JS używane przez frontend
 ├── scripts/        # eksport, walidacje, publikacja, maintenance
 ├── src/            # źródła TypeScript
-├── sukcesy/        # dzienne strony "Moje Sukcesy"
 ├── templates/      # szablony pomocnicze
 ├── _site/          # publiczny output do deployu
 └── *.html          # strony publiczne i artykuły
@@ -69,7 +68,7 @@ SKIP_TS_BUILD=1 ./scripts/export_site.sh
 - `index.html` — strona główna
 - `porady.html` — czytelnia i artykuły
 - `jedzenie.html`, `rusz-sie.html`, `zdrowie.html`, `ciekawe.html` — strony kategorii
-- `dziennik.html`, `moje-sukcesy.html` — sekcje dziennikowe
+- historyczne adresy `dziennik.html` i `moje-sukcesy.html` są wycofane i zwracają HTTP 410
 - `admin/` — panel pomocniczy dla wybranych workflow
 
 ## Dodawanie lub aktualizacja artykułu
