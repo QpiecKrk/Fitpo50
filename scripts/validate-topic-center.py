@@ -25,13 +25,15 @@ LEGACY_FAQ_FILES = set(next(
 ))
 
 
-def permits_legacy_manual_research(file):
+def permits_legacy_manual_research(file, changed=False):
+    if changed:
+        return False
     resolved = file.resolve()
     allowed_parent = resolved.parent in {REPO_ROOT, REPO_ROOT / '_site'}
     return allowed_parent and resolved.name in LEGACY_FAQ_FILES
 
 
-def validate(file):
+def validate(file, changed=False):
     soup = BeautifulSoup(file.read_text(), 'html.parser')
     root = file.parent.parent if file.parent.name == '_site' else file.parent
     errors = []
@@ -156,7 +158,7 @@ def validate(file):
         has_legacy_type = LEGACY_FAQ_SOURCE_TYPE in source_types
         check(
             source_types.issubset(FAQ_SOURCE_TYPES)
-            or (has_legacy_type and source_types.issubset(FAQ_SOURCE_TYPES | {LEGACY_FAQ_SOURCE_TYPE}) and permits_legacy_manual_research(file)),
+            or (has_legacy_type and source_types.issubset(FAQ_SOURCE_TYPES | {LEGACY_FAQ_SOURCE_TYPE}) and permits_legacy_manual_research(file, changed)),
             LEGACY_FAQ_BASELINE_ERROR if has_legacy_type else 'Niedozwolony source_type researchu FAQ',
         )
         claims = evidence.get('evidence_claims', [])
@@ -179,9 +181,11 @@ def validate(file):
 
 
 if __name__ == '__main__':
+    changed_mode = '--changed' in sys.argv[1:]
+    names = [name for name in sys.argv[1:] if name != '--changed']
     failed = False
-    for name in sys.argv[1:]:
-        errors = validate(Path(name).resolve())
+    for name in names:
+        errors = validate(Path(name).resolve(), changed=changed_mode)
         print(('FAIL' if errors else 'PASS') + ' topic-center: ' + name)
         for error in errors:
             print(' - ' + error)

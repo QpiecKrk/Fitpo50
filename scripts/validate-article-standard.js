@@ -552,8 +552,10 @@ function isLegacyForTitleGate(raw) {
   return publishedAt < cutoff;
 }
 
-function validateFile(filePath) {
-  if (pageKind(fs.readFileSync(filePath, 'utf8')) === 'topic_center') return validateTopicCenter(filePath);
+function validateFile(filePath, { strictChanged = false } = {}) {
+  if (pageKind(fs.readFileSync(filePath, 'utf8')) === 'topic_center') {
+    return validateTopicCenter(filePath, { changed: strictChanged });
+  }
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
   const warnings = [];
@@ -581,7 +583,7 @@ function validateFile(filePath) {
   validateNoXmlProlog(raw, errors);
   validateNoInvalidSourceClosingTags(raw, errors);
   validateHeadSeoConsistency(raw, errors);
-  validateArticleTitles(raw, errors, { legacy: isLegacyForTitleGate(raw) });
+  validateArticleTitles(raw, errors, { legacy: strictChanged ? false : isLegacyForTitleGate(raw) });
 
   if (/\sstyle\s*=\s*['"]/i.test(raw)) {
     errors.push('Wykryto inline CSS (style="...")');
@@ -719,7 +721,10 @@ function validateFile(filePath) {
   validateBlogPostingAuthorIsPerson(raw, errors);
   validateBlogPostingAboutSameAs(raw, errors);
 
-  return { errors: applyKnownValidationBaseline(filePath, errors, warnings), warnings };
+  return {
+    errors: strictChanged ? errors : applyKnownValidationBaseline(filePath, errors, warnings),
+    warnings,
+  };
 }
 
 function main() {
@@ -741,7 +746,7 @@ function main() {
 
   let hasErrors = false;
   for (const f of articleFiles) {
-    const result = validateFile(path.resolve(process.cwd(), f));
+    const result = validateFile(path.resolve(process.cwd(), f), { strictChanged: explicitMode });
     const errs = result.errors;
     const warns = result.warnings;
     if (errs.length) {

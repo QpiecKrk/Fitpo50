@@ -28,10 +28,8 @@ function isArticleHtml(file) {
   }
 }
 
-function changedHtmlFiles() {
-  const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
-  const out = primary.status === 0 ? primary.stdout : run('git', ['diff', '--name-status', 'HEAD~1..HEAD']).stdout;
-  const files = String(out || '')
+function changedArticleFilesFromNameStatus(output, { isArticle = isArticleHtml } = {}) {
+  const files = String(output || '')
     .split('\n')
     .map((s) => s.trim())
     .filter(Boolean)
@@ -44,8 +42,14 @@ function changedHtmlFiles() {
     .filter((x) => x.file && !String(x.status).startsWith('D'))
     .map((x) => x.file)
     .filter((f) => f.endsWith('.html') && !f.startsWith('admin/'))
-    .filter((f) => isArticleHtml(f));
+    .filter((f) => isArticle(f));
   return [...new Set(files)];
+}
+
+function changedHtmlFiles() {
+  const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
+  const out = primary.status === 0 ? primary.stdout : run('git', ['diff', '--name-status', 'HEAD~1..HEAD']).stdout;
+  return changedArticleFilesFromNameStatus(out);
 }
 
 function originMainRaw(file) {
@@ -87,6 +91,16 @@ function mustFixOnTouchWarnings(currentWarnings) {
   return currentWarnings.filter((warning) => MUST_FIX_ON_TOUCH.some((rx) => rx.test(warning)));
 }
 
+function classifyContractResult(current, previous) {
+  const preExistingErrors = unchangedLegacyErrors(current.errors, previous.errors);
+  const newErrors = newErrorsOnly(current.errors, previous.errors);
+  const blockingErrors = [...new Set([
+    ...current.errors,
+    ...mustFixOnTouchWarnings(current.warnings),
+  ])];
+  return { blockingErrors, newErrors, preExistingErrors };
+}
+
 function main() {
   const files = changedHtmlFiles();
   if (!files.length) {
@@ -99,13 +113,8 @@ function main() {
     const current = validateArticleContract(file);
     const previousRaw = originMainRaw(file);
     const previous = previousRaw ? validateRaw(previousRaw, file) : { errors: [], warnings: [] };
-    const newErrors = newErrorsOnly(current.errors, previous.errors);
-    const currentMustFix = mustFixOnTouchErrors(current.errors);
-    const currentMustFixWarnings = mustFixOnTouchWarnings(current.warnings);
-    const reportableErrors = [...new Set([...newErrors, ...currentMustFix, ...currentMustFixWarnings])];
+    const { blockingErrors: reportableErrors, preExistingErrors: legacyErrors } = classifyContractResult(current, previous);
     const reportable = new Set(reportableErrors);
-    const legacyErrors = unchangedLegacyErrors(current.errors, previous.errors)
-      .filter((error) => !reportable.has(error));
 
     current.warnings
       .filter((warning) => !reportable.has(warning))
@@ -115,11 +124,9 @@ function main() {
       console.log(`✖ ${file}`);
       reportableErrors.forEach((error) => console.log(`  - ${error}`));
       if (legacyErrors.length) {
-        console.log(`  - Pominięto stare błędy bez zmian: ${legacyErrors.length}.`);
+        console.log(`  - Już obecne w origin/main (informacja, nadal blokują): ${legacyErrors.length}.`);
       }
       fail = true;
-    } else if (legacyErrors.length) {
-      console.log(`⚠ ${file}: stare błędy kontraktu bez nowych naruszeń (${legacyErrors.length})`);
     } else {
       console.log(`✔ ${file}`);
     }
@@ -128,4 +135,9 @@ function main() {
   if (fail) process.exit(1);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = {
+  changedArticleFilesFromNameStatus,
+  classifyContractResult,
+};

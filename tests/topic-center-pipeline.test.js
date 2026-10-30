@@ -10,6 +10,66 @@ const { spawnSync } = require('node:child_process');
 
 const REPO = path.resolve(__dirname, '..');
 
+const APPROVED_BASELINE_CEILING = new Map([
+  ['Szybka odpowiedź musi zawierać 1-3 pełne zdania (jest 4).', new Set([
+    'apob-norma-cena-jak-czytac-wynik.html',
+    'co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html',
+    'dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html',
+    'healthspan-nie-lifespan-po-50.html',
+    'hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html',
+    'hrt-mit-badanie-po-50.html',
+    'jak-czytac-etykiety-sklad-produktow-e-numery-inci.html',
+    'jak-pozbyc-sie-oponki-brzusznej-po-50.html',
+    'jak-zaczac-na-silowni-po-50.html',
+    'jak-zaczac-sie-podciagac-po-50.html',
+    'kreatyna-i-bialko-po-50-tce-jak-laczyc.html',
+    'kreatyna-po-50-tce-kompletny-przewodnik.html',
+    'kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html',
+    'markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html',
+    'mira-ai-agent-sor-lepszy-od-lekarzy.html',
+    'mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html',
+    'motywacja-po-50.html',
+    'nordic-walking-jak-zaczac-technika-kije-zdrowie.html',
+    'okulary-do-czytania-trening-akomodacji-oka.html',
+    'optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html',
+    'regeneracja-ukladu-nerwowego-co-mowi-nauka.html',
+    'sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html',
+    'sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html',
+    'sen-po-50.html',
+    'silownia-chroni-serce-przed-zawalem.html',
+    'suplementacja-po-50.html',
+    'szczepionki-covid-skutki-uboczne-mity-i-fakty.html',
+    'trening-silowy-eliksir-mlodosci-po-50.html',
+    'ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html',
+    'waty-apple-watch-moc-zdrowie-po-50.html',
+    'zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html',
+    'zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html',
+  ])],
+  ['FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY', new Set([
+    'centrum-bialka-po-50.html',
+    'centrum-cholesterolu-po-50.html',
+    'centrum-metabolizmu-po-50.html',
+    'centrum-nadcisnienia-po-50.html',
+    'centrum-snu-po-50.html',
+    'centrum-treningu-silowego-po-50.html',
+  ])],
+]);
+
+function baselineGrowthViolations(baseline) {
+  const violations = [];
+  for (const item of baseline.known_errors || []) {
+    const approvedFiles = APPROVED_BASELINE_CEILING.get(item.error);
+    if (!approvedFiles) {
+      violations.push(`new error type: ${item.error}`);
+      continue;
+    }
+    for (const file of item.files || []) {
+      if (!approvedFiles.has(file)) violations.push(`${item.error}: ${file}`);
+    }
+  }
+  return violations;
+}
+
 test('center contract rejects duplicate schema, missing evidence, broken links and FAQ mismatch', () => {
   const repo = path.resolve(__dirname, '..');
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'center-contract-'));
@@ -72,15 +132,25 @@ test('every published topic center is listed in llms.txt and generated llms-full
   }
 });
 
-test('article validation baseline contains exactly 32 legacy articles and six topic centers', () => {
+test('article validation baseline can only shrink from the frozen approved ceiling', () => {
   const baseline = JSON.parse(fs.readFileSync(path.join(REPO, 'scripts/config/article-validation-baseline.json'), 'utf8'));
-  const quickAnswer = baseline.known_errors.find((item) => item.error.startsWith('Szybka odpowiedź'));
-  const manualResearch = baseline.known_errors.find((item) => item.error === 'FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY');
-  assert.equal(quickAnswer.files.length, 32);
-  assert.equal(new Set(quickAnswer.files).size, 32);
-  assert.equal(manualResearch.files.length, 6);
-  assert.equal(new Set(manualResearch.files).size, 6);
-  assert.ok(manualResearch.files.every((file) => /^centrum-.*\.html$/.test(file)));
+  assert.deepEqual(baselineGrowthViolations(baseline), []);
+
+  const removal = structuredClone(baseline);
+  removal.known_errors[0].files.pop();
+  assert.deepEqual(baselineGrowthViolations(removal), []);
+
+  const addition = structuredClone(baseline);
+  addition.known_errors[0].files.push('nowy-artykul.html');
+  assert.match(baselineGrowthViolations(addition).join('\n'), /nowy-artykul\.html/);
+
+  const substitution = structuredClone(baseline);
+  substitution.known_errors[1].files[0] = 'centrum-nowe-po-50.html';
+  assert.match(baselineGrowthViolations(substitution).join('\n'), /centrum-nowe-po-50\.html/);
+
+  const newErrorType = structuredClone(baseline);
+  newErrorType.known_errors.push({ error: 'NOWY_TYP_BŁĘDU', files: ['sen-po-50.html'] });
+  assert.match(baselineGrowthViolations(newErrorType).join('\n'), /new error type: NOWY_TYP_BŁĘDU/);
 });
 
 test('A4 accepts Chromium rounding but rejects Letter, landscape and missing dimensions', () => {
