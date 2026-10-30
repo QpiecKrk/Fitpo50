@@ -6,7 +6,7 @@ const path = require('path');
 const { inspectGscInput } = require('./lib/gsc-data-contract');
 const { isEditorialQuery, MIN_CTR_REVIEW_IMPRESSIONS } = require('./lib/gsc-editorial-query');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
-const { warsawIso } = require('./lib/time');
+const { warsawDay, warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const DEFAULT_WORK_DIR = resolveGscWorkDir(ROOT);
@@ -308,9 +308,11 @@ function pickLatestByType(filesMeta, type) {
 }
 
 function toDateLabel(iso) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toISOString().slice(0, 10);
+  try {
+    return warsawDay(iso);
+  } catch (_error) {
+    return iso;
+  }
 }
 
 function safeUrlToPath(url) {
@@ -1089,4 +1091,6 @@ function main() {
   console.log(`- opportunities: top3_zero=${report.opportunities.top3_zero_click.length}, ctr=${report.opportunities.ctr_problems.length}, cannibalization=${report.opportunities.cannibalization.length}`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { toDateLabel };

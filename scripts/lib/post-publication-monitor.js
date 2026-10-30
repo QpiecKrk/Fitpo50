@@ -4,7 +4,7 @@ const path = require('path');
 const { inspectGscInput } = require('./gsc-data-contract');
 const { categoryFileFromKey, normalizeCategory } = require('./categories');
 const { resolveGscWorkDir } = require('./gsc-work-dir');
-const { warsawDay, warsawIso } = require('./time');
+const { shiftWarsawDay, warsawIso } = require('./time');
 
 const SITE_ORIGIN = 'https://fitpo50.pl';
 const HISTORY_RELATIVE = path.join('data', 'reports', 'published-articles-log.json');
@@ -110,9 +110,7 @@ function pageMetrics(inputDir, url, preferredFile = '') {
 }
 
 function addUtcDays(iso, days) {
-  const date = new Date(iso);
-  date.setUTCDate(date.getUTCDate() + days);
-  return warsawDay(date);
+  return shiftWarsawDay(iso, days);
 }
 
 function captureBaseline(inputDir, url, now = new Date()) {

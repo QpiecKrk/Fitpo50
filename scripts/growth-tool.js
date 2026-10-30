@@ -13,7 +13,7 @@ const {
   resolveSeoStateDir,
 } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
-const { warsawIso } = require('./lib/time');
+const { shiftWarsawDay, warsawIso } = require('./lib/time');
 const { POLICY } = require('./lib/article-policy');
 
 const ROOT = process.cwd();
@@ -373,9 +373,7 @@ function parseDate(input) {
 }
 
 function addDays(date, days) {
-  const next = new Date(date.getTime());
-  next.setUTCDate(next.getUTCDate() + days);
-  return next.toISOString().slice(0, 10);
+  return shiftWarsawDay(date, days);
 }
 
 function extractJsonLdObjects(html) {

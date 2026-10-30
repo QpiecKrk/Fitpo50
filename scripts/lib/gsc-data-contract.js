@@ -4,7 +4,12 @@ const { atomicWriteFileSync } = require('./atomic-file');
 const path = require('path');
 const { STATUS } = require('./external-integration-status');
 const { GSC_FRESHNESS_MAX_AGE_HOURS } = require('./gsc-policy');
-const { warsawDay, warsawIso } = require('./time');
+const {
+  shiftWarsawDay,
+  warsawDay,
+  warsawDayDifference,
+  warsawIso,
+} = require('./time');
 
 const MANIFEST_NAME = 'gsc-data-manifest.json';
 const API_REPORT_NAME = 'gsc-weekly-report-api.json';
@@ -84,17 +89,20 @@ function parseDate(value) {
 }
 
 function dateDiffDaysInclusive(start, end) {
-  const a = parseDate(`${start}T00:00:00Z`);
-  const b = parseDate(`${end}T00:00:00Z`);
-  if (!a || !b || b < a) return 0;
-  return Math.round((b.getTime() - a.getTime()) / 86400000) + 1;
+  try {
+    const difference = warsawDayDifference(start, end);
+    return difference < 0 ? 0 : difference + 1;
+  } catch (_error) {
+    return 0;
+  }
 }
 
 function nextIsoDay(value) {
-  const date = parseDate(`${value}T00:00:00Z`);
-  if (!date) return '';
-  date.setUTCDate(date.getUTCDate() + 1);
-  return warsawDay(date);
+  try {
+    return shiftWarsawDay(value, 1);
+  } catch (_error) {
+    return '';
+  }
 }
 
 function validateReportingWindows(windows) {
@@ -239,12 +247,12 @@ function inspectGscInput(inputDir, options = {}) {
     if (strictPeriods) errors.push(...rangeContract.errors);
     else warnings.push(...rangeContract.errors);
   }
-  const rangeEndDate = rangeContract.current_end ? parseDate(`${rangeContract.current_end}T23:59:59Z`) : null;
-  const rangeLagDays = rangeEndDate ? (now.getTime() - rangeEndDate.getTime()) / 86400000 : Infinity;
-  if (rangeEndDate && rangeLagDays > maxRangeLagDays) {
+  const hasRangeEnd = Boolean(rangeContract.current_end);
+  const rangeLagDays = hasRangeEnd ? warsawDayDifference(rangeContract.current_end, warsawDay(now)) : Infinity;
+  if (hasRangeEnd && rangeLagDays > maxRangeLagDays) {
     errors.push(`Końcowa data GSC jest zbyt stara: ${rangeContract.current_end} (${rangeLagDays.toFixed(1)} dnia; limit ${maxRangeLagDays}).`);
   }
-  if (rangeEndDate && rangeLagDays < -1) {
+  if (hasRangeEnd && rangeLagDays < -1) {
     errors.push(`Końcowa data GSC jest w przyszłości: ${rangeContract.current_end}.`);
   }
 

@@ -7,7 +7,7 @@ const crypto = require('crypto');
 const { writeManifestFromApiReport } = require('./lib/gsc-data-contract');
 const { isEditorialQuery, MIN_CTR_REVIEW_IMPRESSIONS } = require('./lib/gsc-editorial-query');
 const { STATUS, classifyExternalError, redactSecrets } = require('./lib/external-integration-status');
-const { warsawIso } = require('./lib/time');
+const { warsawCompletedRange, warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -101,29 +101,18 @@ function parseOauthRefreshFromEnv() {
   return { clientId, clientSecret, refreshToken };
 }
 
-function dateIso(dayOffset) {
-  const d = new Date();
-  d.setUTCHours(0, 0, 0, 0);
-  d.setUTCDate(d.getUTCDate() + dayOffset);
-  return d.toISOString().slice(0, 10);
-}
-
-function rangePair(days) {
-  const endCurrent = dateIso(-1);
-  const startCurrent = dateIso(-days);
-  const endPrev = dateIso(-(days + 1));
-  const startPrev = dateIso(-(days * 2));
+function rangePair(days, now = new Date()) {
   return {
-    current: { start: startCurrent, end: endCurrent },
-    previous: { start: startPrev, end: endPrev },
+    current: warsawCompletedRange(days, now),
+    previous: warsawCompletedRange(days, now, 1),
   };
 }
 
-function reportingRanges() {
+function reportingRanges(now = new Date()) {
   return {
-    day_7: rangePair(7),
-    day_28: rangePair(28),
-    day_90: rangePair(90),
+    day_7: rangePair(7, now),
+    day_28: rangePair(28, now),
+    day_90: rangePair(90, now),
   };
 }
 

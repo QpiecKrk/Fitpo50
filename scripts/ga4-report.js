@@ -6,7 +6,7 @@ const os = require('os');
 const path = require('path');
 const crypto = require('crypto');
 const { DEFAULT_GROWTH_REPORT_DIR, migrateLegacySeoData } = require('./lib/seo-priority-list');
-const { warsawIso } = require('./lib/time');
+const { warsawCompletedRange, warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -87,15 +87,8 @@ function writeText(file, content) {
   atomicWriteFileSync(file, `${String(content || '').trimEnd()}\n`, 'utf8');
 }
 
-function dateIso(dayOffset) {
-  const d = new Date();
-  d.setUTCHours(0, 0, 0, 0);
-  d.setUTCDate(d.getUTCDate() + dayOffset);
-  return d.toISOString().slice(0, 10);
-}
-
-function currentRange(days) {
-  return { start: dateIso(-days), end: dateIso(-1) };
+function currentRange(days, now = new Date()) {
+  return warsawCompletedRange(days, now);
 }
 
 function nowIso() {
@@ -503,11 +496,15 @@ async function main() {
   if (report.warnings?.length) report.warnings.slice(0, 3).forEach((warning) => console.log(`[GA4][WARN] ${warning}`));
 }
 
-main().catch((err) => {
-  const args = parseArgs(process.argv.slice(2));
-  const report = csvReport(args, err.message || String(err));
-  writeJson(args.outputJson, report);
-  writeMarkdown(report, args.outputMd);
-  console.error(`[GA4][WARN] ${err.message || err}`);
-  process.exit(0);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    const args = parseArgs(process.argv.slice(2));
+    const report = csvReport(args, err.message || String(err));
+    writeJson(args.outputJson, report);
+    writeMarkdown(report, args.outputMd);
+    console.error(`[GA4][WARN] ${err.message || err}`);
+    process.exit(0);
+  });
+}
+
+module.exports = { currentRange };

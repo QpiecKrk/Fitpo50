@@ -7,7 +7,12 @@ const { inspectGscInput } = require('./lib/gsc-data-contract');
 const { isEditorialQuery } = require('./lib/gsc-editorial-query');
 const { buildSharedPriorityList } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
-const { warsawIso } = require('./lib/time');
+const {
+  shiftWarsawDay,
+  warsawDay,
+  warsawDayDifference,
+  warsawIso,
+} = require('./lib/time');
 
 const ROOT = process.cwd();
 const DEFAULT_INPUT_DIR = resolveGscWorkDir(ROOT);
@@ -809,15 +814,15 @@ function parseDate(input) {
 }
 
 function addDays(date, days) {
-  const next = new Date(date.getTime());
-  next.setUTCDate(next.getUTCDate() + days);
-  return next.toISOString().slice(0, 10);
+  return shiftWarsawDay(date, days);
 }
 
 function buildRefreshImpact(page, metrics, generatedAt) {
   const generatedDate = parseDate(generatedAt) || new Date();
   const modifiedDate = parseDate(page.date_modified);
-  const ageDays = modifiedDate ? Math.max(0, Math.floor((generatedDate.getTime() - modifiedDate.getTime()) / 86400000)) : null;
+  const ageDays = modifiedDate
+    ? Math.max(0, warsawDayDifference(warsawDay(modifiedDate), warsawDay(generatedDate)))
+    : null;
   return {
     date_modified: page.date_modified || 'MISSING',
     age_days: ageDays,
