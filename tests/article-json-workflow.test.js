@@ -22,6 +22,8 @@ const {
   contentBlocked,
   statusPath,
 } = require('../scripts/lib/article-pipeline-status');
+const { isSlugPublishedInHead } = require('../scripts/lib/article-publication-state');
+const { disposeTempWorkspace } = require('../scripts/lib/temp-workspace');
 const { buildAboutEntities, normalizeEntities } = require('../scripts/import-article');
 const { validateScope } = require('../scripts/lib/article-scope-guard');
 const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure, resetSameDraft } = require('../scripts/lib/article-repair-attempts');
@@ -46,11 +48,30 @@ test('status lifecycle uses only DRAFT, CONTENT_READY and BLOCKED', () => {
 });
 
 test('pipeline exit codes distinguish success, review, content blockers and environment failures', () => {
-  assert.deepEqual(EXIT_CODES, { SUCCESS: 0, AWAITING_REVIEW: 10, CONTENT_BLOCKED: 20, ENVIRONMENT_FAILURE: 30 });
+  assert.deepEqual(EXIT_CODES, { SUCCESS: 0, AWAITING_REVIEW: 10, AWAITING_MEDIA_REVIEW: 10, CONTENT_BLOCKED: 20, ENVIRONMENT_FAILURE: 30 });
   assert.equal(classifyPipelineFailure(contentBlocked('CONTENT_READY missing')).exitCode, 20);
   assert.equal(classifyPipelineFailure(new Error('CONTENT_READY missing')).exitCode, 30);
   assert.equal(classifyPipelineFailure(new Error('spawn ENOENT')).exitCode, 30);
 });
+
+test('publikację sluga rozstrzyga HEAD, nie sam plik w katalogu roboczym', () => withTempDir((dir) => {
+  assert.equal(spawnSync('git', ['init', '-q'], { cwd: dir }).status, 0);
+  assert.equal(spawnSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.com', 'commit', '--allow-empty', '-qm', 'baseline'], { cwd: dir }).status, 0);
+  fs.writeFileSync(path.join(dir, 'tylko-na-dysku.html'), '<html></html>');
+  assert.equal(isSlugPublishedInHead(dir, 'tylko-na-dysku'), false);
+  spawnSync('git', ['add', 'tylko-na-dysku.html'], { cwd: dir });
+  assert.equal(spawnSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.com', 'commit', '-qm', 'fixture'], { cwd: dir }).status, 0);
+  assert.equal(isSlugPublishedInHead(dir, 'tylko-na-dysku'), true);
+}));
+
+test('brak repozytorium nie jest mylony z nowym slugiem', () => withTempDir((dir) => {
+  assert.throws(() => isSlugPublishedInHead(dir, 'nowy-slug'), /Nie można sprawdzić sluga/);
+}));
+
+test('nieznany status nadal ma kod 30', () => withTempDir((dir) => {
+  const result = require('../scripts/lib/article-pipeline-status').writePipelineStatus(dir, 'stan-testowy', 'NIEZNANY_STAN');
+  assert.equal(result.payload.exit_code, 30);
+}));
 
 test('forced UPDATE blocks registered popraw-seo patches with exit 20 unless explicitly allowed', () => withTempDir((root) => {
   const registryDir = path.join(root, 'data', 'reports');
@@ -292,6 +313,70 @@ test('changed JSON never silently reuses an older review transaction', () => wit
   });
   assert.equal(status, EXIT_CODES.CONTENT_BLOCKED);
   assert.equal(JSON.parse(fs.readFileSync(stateFile, 'utf8')).status, 'AWAITING_REVIEW');
+}));
+
+test('nowy draft zatrzymuje się na AWAITING_MEDIA_REVIEW i bezpiecznie wznawia tę samą transakcję', () => withTempDir((dir) => {
+  const slug = 'nowy-review-trzech-formatow';
+  const source = path.join(dir, `${slug}.fitpo50.json`);
+  const outputDir = path.join(dir, 'ready');
+  const prepared = path.join(outputDir, `${slug}.fitpo50.json`);
+  fs.writeFileSync(source, `${JSON.stringify({
+    slug,
+    image_prompts: [{ section_ref: 'hero', visual_review: { status: 'PENDING_LOCAL_REVIEW' } }],
+  })}\n`);
+  const dependencies = {
+    root: dir,
+    auditPackage: PASS_PACKAGE_AUDIT,
+    printPackageAuditReport: SILENT_PACKAGE_AUDIT,
+    createMediaReviewTemplate: () => ({
+      ok: true,
+      errors: [],
+      template: { version: 1, slug, status: 'AWAITING_MEDIA_REVIEW', images: [] },
+    }),
+    articleOperationInHead: () => 'CREATE',
+    runCommand(_command, args) {
+      if (args[0] === 'scripts/article-json-workbench.js') {
+        assert.ok(args.includes('--media-review-file'));
+        fs.mkdirSync(outputDir, { recursive: true });
+        fs.copyFileSync(source, prepared);
+        return { status: 0, stdout: `[ARTICLE-JSON] status=CONTENT_READY\n[ARTICLE-JSON] JSON: ${prepared}\n`, stderr: '' };
+      }
+      if (args[0] === 'scripts/article-pipeline.js') return { status: 0, stdout: '', stderr: '' };
+      throw new Error(`Nieoczekiwane polecenie: ${args.join(' ')}`);
+    },
+  };
+
+  assert.equal(executeArticleAdd({ file: source, 'output-dir': outputDir }, dependencies), EXIT_CODES.AWAITING_MEDIA_REVIEW);
+  const state = JSON.parse(fs.readFileSync(statusPath(dir, slug), 'utf8'));
+  assert.equal(state.status, 'AWAITING_MEDIA_REVIEW');
+  assert.equal(state.exit_code, 10);
+  assert.equal(fs.existsSync(state.next_args.review_template), true);
+  assert.equal(executeArticleAdd({ file: source, 'output-dir': outputDir }, dependencies), EXIT_CODES.AWAITING_MEDIA_REVIEW);
+
+  const reviewFile = path.join(dir, 'review.json');
+  fs.writeFileSync(reviewFile, '{}\n');
+  assert.equal(executeArticleAdd({ file: source, 'output-dir': outputDir, 'review-file': reviewFile }, dependencies), 0);
+  assert.equal(fs.existsSync(state.next_args.workspace), false, 'ukończony workspace review zostaje bezpiecznie usunięty');
+}));
+
+test('zmiana draftu podczas AWAITING_MEDIA_REVIEW nie używa starego review', () => withTempDir((dir) => {
+  const slug = 'zmieniony-media-review';
+  const source = path.join(dir, `${slug}.fitpo50.json`);
+  fs.writeFileSync(source, `${JSON.stringify({ slug, image_prompts: [{ section_ref: 'hero' }] })}\n`);
+  const dependencies = {
+    root: dir,
+    auditPackage: PASS_PACKAGE_AUDIT,
+    printPackageAuditReport: SILENT_PACKAGE_AUDIT,
+    createMediaReviewTemplate: () => ({ ok: true, errors: [], template: { version: 1, slug, images: [] } }),
+    articleOperationInHead: () => 'CREATE',
+    runCommand() { throw new Error('Nie wolno uruchamiać dalszego etapu.'); },
+  };
+  assert.equal(executeArticleAdd({ file: source }, dependencies), EXIT_CODES.AWAITING_MEDIA_REVIEW);
+  const state = JSON.parse(fs.readFileSync(statusPath(dir, slug), 'utf8'));
+  fs.writeFileSync(source, `${JSON.stringify({ slug, title: 'Nowa wersja', image_prompts: [{ section_ref: 'hero' }] })}\n`);
+  assert.equal(executeArticleAdd({ file: source }, dependencies), EXIT_CODES.CONTENT_BLOCKED);
+  assert.equal(fs.existsSync(state.next_args.workspace), true, 'stary workspace pozostaje do jawnego restartu');
+  disposeTempWorkspace(state.next_args.workspace, { status: 'FAILED' });
 }));
 
 test('article:add prowadzi poprawny fixture przez przygotowanie i atom publikacyjny', () => withTempDir((dir) => {

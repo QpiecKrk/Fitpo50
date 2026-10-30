@@ -1,8 +1,8 @@
 {
   "version": 3,
-  "release_id": "bf234bef-9ad2-41d9-b630-8bf3c0a90e43",
-  "prepared_at": "2026-10-30T02:58:51+01:00",
-  "prepared_from_head": "242d39e70ce4dd9d63cabe1b977c27f50d8cbfe5",
+  "release_id": "a621b629-ff73-4c8e-b001-186bfc97107e",
+  "prepared_at": "2026-10-30T12:46:03+01:00",
+  "prepared_from_head": "7c1851fb166df85e3d230e057aff3e5c57800634",
   "publication_state_sha256": "5b6b0eae0b24b9898c553334ea79cccda4bff8ea56d4f8011d83855a96be1b37",
   "public_fingerprint_sha256": "22dedcbf5ce840f4b65197be6a43294cd0e69d49249cfbcc464a3618eacd9df3",
   "news": {

@@ -20,6 +20,8 @@ Claude nie zna aktualnego serwisu ani danych GSC. Dlatego:
 
 Nie dodawaj pól `internal_link_plan`, `incoming_link_suggestions`, `intent_audit`, `topic_center_assessment`, `topic_center_approval` ani `media_manifest`.
 
+Po przyjęciu nowego draftu lokalny kontroler tworzy zarządzany stan `AWAITING_MEDIA_REVIEW`. Codex ogląda osobno rzeczywiste pliki AVIF, WebP i JPG, wiąże każdą ocenę z SHA-256 wariantu i dopiero wtedy tworzy `media_manifest.version=3`. Pisarz i Ilustrator nadal przekazują wyłącznie pojedyncze `visual_review.status: PENDING_LOCAL_REVIEW`; nie nadają `VERIFIED` i nie dopisują trzech ocen do pliku wejściowego.
+
 ## Minimalna struktura JSON
 
 ```json

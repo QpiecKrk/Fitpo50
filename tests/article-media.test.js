@@ -3,7 +3,13 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
-const { createVariant, prepareArticleMedia, validateManifestStructure } = require('../scripts/lib/article-media');
+const {
+  applyMediaReview,
+  createMediaReviewTemplate,
+  createVariant,
+  prepareArticleMedia,
+  validateManifestStructure,
+} = require('../scripts/lib/article-media');
 
 function makePackage() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-media-test-'));
@@ -95,6 +101,67 @@ function inspector(file) {
     perceptual_hash: `${(index * 32).toString(16).padStart(2, '0')}`.repeat(256),
   };
 }
+
+function verifyTemplate(template, mutate = (value) => value) {
+  const review = JSON.parse(JSON.stringify(template));
+  for (const image of review.images) {
+    for (const extension of ['avif', 'webp', 'jpg']) {
+      image.variants[extension] = mutate({
+        ...image.variants[extension],
+        status: 'VERIFIED',
+        matches_topic: true,
+        no_misleading_text_or_logo: true,
+        anatomy_and_equipment_plausible: true,
+        embedded_text: { kind: 'NONE' },
+        reviewed_by: 'Codex',
+        reviewed_at: '2026-10-30',
+        note: 'Obejrzano rzeczywisty wariant i potwierdzono zgodność obrazu z sekcją.',
+      }, { image, extension });
+    }
+  }
+  return review;
+}
+
+test('nowy artykuł wymaga trzech hash-bound review, a identyczne notatki są dozwolone', () => {
+  const dir = makePackage();
+  const value = article();
+  value.slug = 'nowy-artykul-review-formatow';
+  value.image_prompts.forEach((item) => { item.visual_review = { status: 'PENDING_LOCAL_REVIEW' }; });
+  createFiles(dir, value);
+  const templateResult = createMediaReviewTemplate(value, { assetsDir: dir, inspectImage: inspector });
+  assert.equal(templateResult.ok, true, templateResult.errors.join('\n'));
+  assert.deepEqual(Object.keys(templateResult.template.images[0].variants).sort(), ['avif', 'jpg', 'webp']);
+
+  const missing = verifyTemplate(templateResult.template);
+  delete missing.images[0].variants.avif;
+  assert.equal(applyMediaReview(value, missing, { assetsDir: dir, inspectImage: inspector }).ok, false);
+
+  const wrongHash = verifyTemplate(templateResult.template, (entry, context) => (
+    context.extension === 'webp' ? { ...entry, artifact_sha256: context.image.variants.jpg.artifact_sha256 } : entry
+  ));
+  assert.equal(applyMediaReview(value, wrongHash, { assetsDir: dir, inspectImage: inspector }).ok, false);
+
+  const valid = verifyTemplate(templateResult.template);
+  const applied = applyMediaReview(value, valid, { assetsDir: dir, inspectImage: inspector });
+  assert.equal(applied.ok, true, applied.errors.join('\n'));
+  const prepared = prepareArticleMedia(value, { assetsDir: dir, mutate: true, inspectImage: inspector, operation: 'CREATE' });
+  assert.equal(prepared.ok, true, prepared.errors.join('\n'));
+  assert.equal(value.media_manifest.version, 3);
+  assert.equal(validateManifestStructure(value, { operation: 'CREATE' }).ok, true);
+
+  const changedInspector = (file) => {
+    const inspected = inspector(file);
+    return file.endsWith('.avif') ? { ...inspected, sha256: `${inspected.sha256}-changed` } : inspected;
+  };
+  assert.equal(prepareArticleMedia(value, { assetsDir: dir, inspectImage: changedInspector, operation: 'CREATE' }).ok, false);
+});
+
+test('manifest v2 jest legacy tylko dla opublikowanego sluga', () => {
+  const value = article();
+  value.media_manifest = { version: 2, generated_at: '2026-10-30T10:00:00+01:00', entries: [] };
+  assert.match(validateManifestStructure(value, { operation: 'CREATE' }).errors.join('\n'), /version=3/);
+  assert.doesNotMatch(validateManifestStructure(value, { operation: 'UPDATE' }).errors.join('\n'), /version=3/);
+});
 
 test('tworzy kompletny manifest i mapuje obrazy bez fallbacków', () => {
   const dir = makePackage();

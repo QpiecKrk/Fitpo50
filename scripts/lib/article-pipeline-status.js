@@ -8,6 +8,7 @@ const { warsawIso } = require('./time');
 const EXIT_CODES = Object.freeze({
   SUCCESS: 0,
   AWAITING_REVIEW: 10,
+  AWAITING_MEDIA_REVIEW: 10,
   CONTENT_BLOCKED: 20,
   ENVIRONMENT_FAILURE: 30,
 });

@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { CONTRACT } = require('./article-visual-review');
+const { articleOperationInHead } = require('./article-publication-state');
 
 const SOURCE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
 const REQUIRED_VARIANTS = [...CONTRACT.required_variants];
@@ -216,7 +217,7 @@ function validateExactDataReview(prompt, label, errors) {
   }
 }
 
-function validateDescriptiveFields(prompt, context, placement, errors, articleSourceUrls = new Set()) {
+function validateDescriptiveFields(prompt, context, placement, errors, articleSourceUrls = new Set(), options = {}) {
   const base = String(prompt.filename_base || '').trim();
   const topic = String(prompt.topic || '').trim();
   const technique = String(prompt.technique || '').trim();
@@ -254,6 +255,7 @@ function validateDescriptiveFields(prompt, context, placement, errors, articleSo
   if (!topicTokens.some((token) => contextTokens.has(token))) {
     errors.push(`${base}: temat/alt/podpis nie mają semantycznego związku z ${placement}; obraz może być przypadkowy lub niezwiązany.`);
   }
+  if (options.deferVisualReview === true) return;
   const review = prompt.visual_review || {};
   if (review.status !== VERIFIED_REVIEW || review.matches_topic !== true) {
     errors.push(`${base}: visual_review musi mieć status VERIFIED i matches_topic=true po rzeczywistym obejrzeniu pliku lokalnie.`);
@@ -339,7 +341,34 @@ function exactRatioLabel(width, height) {
   return `${Math.round(width / divisor)}:${Math.round(height / divisor)}`;
 }
 
-function validateManifestStructure(article) {
+function validateVariantReviews(entry, errors) {
+  for (const extension of REQUIRED_VARIANTS) {
+    const variant = entry?.variants?.[extension];
+    const review = entry?.visual_review?.variants?.[extension];
+    const label = `media_manifest ${entry?.placement || 'UNKNOWN'} / ${extension}`;
+    if (!review || typeof review !== 'object') {
+      errors.push(`${label}: brak osobnego visual_review.`);
+      continue;
+    }
+    if (review.status !== VERIFIED_REVIEW) errors.push(`${label}: visual_review.status musi mieć wartość VERIFIED.`);
+    if (!variant?.sha256 || review.artifact_sha256 !== variant.sha256) errors.push(`${label}: artifact_sha256 nie zgadza się z konkretnym plikiem wariantu.`);
+    if (review.matches_topic !== true) errors.push(`${label}: matches_topic musi być jawnie potwierdzone.`);
+    if (String(review.reviewed_by || '').trim().length < 3 || !/^\d{4}-\d{2}-\d{2}/.test(String(review.reviewed_at || ''))) {
+      errors.push(`${label}: review wymaga reviewed_by i reviewed_at.`);
+    }
+    if (String(review.note || '').trim().length < 20) errors.push(`${label}: note musi konkretnie opisać kontrolę tego formatu.`);
+    validateVisualReview(review, label, errors);
+    validateExactDataReview({ ...entry, visual_review: review }, label, errors);
+  }
+}
+
+function operationFor(article, options = {}) {
+  if (options.operation === 'CREATE' || options.operation === 'UPDATE') return options.operation;
+  if (!article?.slug) return 'UPDATE';
+  return articleOperationInHead(options.root || process.cwd(), article?.slug);
+}
+
+function validateManifestStructure(article, options = {}) {
   const errors = [];
   const manifest = article.media_manifest;
   if (!manifest || typeof manifest !== 'object') return { ok: false, errors: ['Brak media_manifest utworzonego lokalnie.'] };
@@ -347,7 +376,9 @@ function validateManifestStructure(article) {
   const articleSourceUrls = new Set((Array.isArray(article.sources) ? article.sources : [])
     .map((source) => normalizedUrl(source?.url))
     .filter(Boolean));
-  if (manifest.version !== 2) errors.push('media_manifest: wymagane version=2 z pełną kontrolą tekstu, anatomii i sprzętu.');
+  const operation = operationFor(article, options);
+  if (operation === 'CREATE' && manifest.version !== 3) errors.push('media_manifest: nowy artykuł wymaga version=3 z osobnym review AVIF/WebP/JPG.');
+  if (operation === 'UPDATE' && ![2, 3].includes(manifest.version)) errors.push('media_manifest: opublikowany artykuł wymaga version=2 albo version=3.');
   const expected = expectedPlacements(article);
   const required = requiredPlacements(article);
   if (entries.length !== expected.length) errors.push(`media_manifest.entries: wymagane ${expected.length}, jest ${entries.length}.`);
@@ -371,12 +402,15 @@ function validateManifestStructure(article) {
       if (variant?.width !== entry?.source?.width || variant?.height !== entry?.source?.height) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: wariant ${extension} ma inne wymiary niż źródło.`);
       if (hammingHex(entry?.source?.perceptual_hash, variant?.perceptual_hash) > 14) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: wariant ${extension} może przedstawiać inny obraz.`);
     });
-    if (entry?.visual_review?.status !== VERIFIED_REVIEW || entry?.visual_review?.matches_topic !== true) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak zatwierdzonej kontroli wizualnej.`);
-    validateVisualReview(entry?.visual_review || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
+    if (manifest.version === 3) validateVariantReviews(entry, errors);
+    else {
+      if (entry?.visual_review?.status !== VERIFIED_REVIEW || entry?.visual_review?.matches_topic !== true) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak zatwierdzonej kontroli wizualnej.`);
+      validateVisualReview(entry?.visual_review || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
+    }
     (Array.isArray(entry?.evidence_source_urls) ? entry.evidence_source_urls : []).forEach((url) => {
       if (!articleSourceUrls.has(normalizedUrl(url))) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: źródło obrazu nie występuje w sources[]: ${url}`);
     });
-    validateExactDataReview(entry || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
+    if (manifest.version !== 3) validateExactDataReview(entry || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
   });
   const hero = entries.find((entry) => entry.placement === 'hero');
   if (hero) {
@@ -411,6 +445,8 @@ function prepareArticleMedia(article, options = {}) {
   const errors = [];
   const warnings = [];
   const created = [];
+  const operation = operationFor(article, options);
+  const requiresVariantReview = operation === 'CREATE';
   if (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory()) {
     return { ok: false, errors: [`Brak jednego katalogu pakietu mediów: ${assetsDir}.`], warnings, entries: [], created };
   }
@@ -449,7 +485,7 @@ function prepareArticleMedia(article, options = {}) {
       errors.push(`${placement}: filename_base musi być dokładną nazwą kebab-case bez rozszerzenia.`);
       continue;
     }
-    validateDescriptiveFields(prompt, placementContext(article, placement), placement, errors, articleSourceUrls);
+    validateDescriptiveFields(prompt, placementContext(article, placement), placement, errors, articleSourceUrls, { deferVisualReview: requiresVariantReview });
     const sourceName = selectSourceFile(prompt, assetsDir, errors);
     if (!sourceName) continue;
     if (mutate) prompt.source_file = sourceName;
@@ -507,6 +543,7 @@ function prepareArticleMedia(article, options = {}) {
         errors.push(error.message || String(error));
       }
     }
+    if (requiresVariantReview && options.allowPendingReview !== true) validateVariantReviews(entry, errors);
     entries.push(entry);
   }
 
@@ -524,7 +561,7 @@ function prepareArticleMedia(article, options = {}) {
   if (entries.length > 1 && new Set(compositions).size === 1) warnings.push('Wszystkie obrazy mają ten sam opis kadru; nie blokuje to spójnej serii, ale rzeczywisty review musi wykluczyć powtarzalne ujęcia.');
 
   const manifest = {
-    version: 2,
+    version: requiresVariantReview ? 3 : 2,
     package_directory: path.basename(assetsDir),
     strict_single_directory: true,
     exact_filename_matching: true,
@@ -566,8 +603,71 @@ function prepareArticleMedia(article, options = {}) {
   return { ok: errors.length === 0, errors, warnings, entries, manifest, created };
 }
 
+function createMediaReviewTemplate(article, options = {}) {
+  const prepared = prepareArticleMedia(article, { ...options, mutate: false, ensureVariants: false, operation: 'CREATE', allowPendingReview: true });
+  const template = {
+    version: 1,
+    slug: String(article?.slug || ''),
+    status: 'AWAITING_MEDIA_REVIEW',
+    images: prepared.entries.map((entry) => ({
+      placement: entry.placement,
+      variants: Object.fromEntries(REQUIRED_VARIANTS.map((extension) => [extension, {
+        status: 'PENDING',
+        artifact_sha256: entry.variants?.[extension]?.sha256 || '',
+        matches_topic: false,
+        no_misleading_text_or_logo: false,
+        anatomy_and_equipment_plausible: false,
+        embedded_text: entry.requires_exact_data_render
+          ? {
+            kind: 'CONTENT',
+            transcription: '',
+            claims_or_numbers_present: true,
+            matches_article_claims: false,
+            evidence_urls: [...entry.evidence_source_urls],
+          }
+          : { kind: 'NONE' },
+        reviewed_by: '',
+        reviewed_at: '',
+        note: '',
+      }])),
+    })),
+  };
+  return { ...prepared, template };
+}
+
+function applyMediaReview(article, submission, options = {}) {
+  const current = createMediaReviewTemplate(article, options);
+  const errors = [...current.errors];
+  if (submission?.version !== 1 || submission?.slug !== current.template.slug) errors.push('Media review ma inną wersję albo slug.');
+  const submitted = new Map((Array.isArray(submission?.images) ? submission.images : []).map((image) => [image?.placement, image]));
+  for (const expected of current.template.images) {
+    const actual = submitted.get(expected.placement);
+    if (!actual) {
+      errors.push(`Media review ${expected.placement}: brak obrazu.`);
+      continue;
+    }
+    const variantNames = Object.keys(actual.variants || {}).sort();
+    if (JSON.stringify(variantNames) !== JSON.stringify([...REQUIRED_VARIANTS].sort())) {
+      errors.push(`Media review ${expected.placement}: wymagane są dokładnie wpisy AVIF, WebP i JPG.`);
+    }
+    const entry = current.entries.find((item) => item.placement === expected.placement);
+    entry.visual_review = { status: VERIFIED_REVIEW, variants: actual.variants || {} };
+    validateVariantReviews(entry, errors);
+  }
+  if (submitted.size !== current.template.images.length) errors.push('Media review zawiera dodatkowy albo powtórzony placement.');
+  if (errors.length) return { ok: false, errors, warnings: current.warnings };
+  const promptByPlacement = new Map(promptMap(article).map((prompt) => [String(prompt.section_ref || '').trim(), prompt]));
+  for (const expected of current.template.images) {
+    const prompt = promptByPlacement.get(expected.placement);
+    prompt.visual_review = { status: VERIFIED_REVIEW, variants: submitted.get(expected.placement).variants };
+  }
+  return { ok: true, errors: [], warnings: current.warnings };
+}
+
 module.exports = {
   REQUIRED_VARIANTS,
+  applyMediaReview,
+  createMediaReviewTemplate,
   createVariant,
   hammingHex,
   inspectImage,

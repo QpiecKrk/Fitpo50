@@ -16,6 +16,7 @@ const {
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { validateScope } = require('./lib/article-scope-guard');
 const { packageIdentity } = require('./lib/package-identity');
+const { applyMediaReview } = require('./lib/article-media');
 const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
@@ -336,11 +337,37 @@ function main() {
   try {
     if (fs.existsSync(htmlPath) && !args.force) {
       blockers.push(`Slug ${slug} już istnieje jako ${htmlPath}. Domyślne force=false blokuje przygotowanie aktualizacji.`);
-    } else {
-      stages.push(...runStagesWithScope(buildStageDefinitions(workingFile, assetsDir, { cacheFile: args['cache-file'], httpFixture: args['http-fixture'] }), workingFile));
-      stages.filter((item) => item.status === 'FAIL').forEach((item) => {
+    }
+    if (!blockers.length) {
+      const definitions = buildStageDefinitions(workingFile, assetsDir, { cacheFile: args['cache-file'], httpFixture: args['http-fixture'] });
+      const mediaIndex = definitions.findIndex((item) => item.label.startsWith('Pakiet mediów:'));
+      const beforeMedia = mediaIndex >= 0 ? definitions.slice(0, mediaIndex) : definitions;
+      const afterMedia = mediaIndex >= 0 ? definitions.slice(mediaIndex) : [];
+      const firstStages = runStagesWithScope(beforeMedia, workingFile);
+      stages.push(...firstStages);
+      firstStages.filter((item) => item.status === 'FAIL').forEach((item) => {
         blockers.push(`${item.label}: ${item.stderr || item.stdout || `exit ${item.exit_code}`}`);
       });
+
+      if (!blockers.length && args['media-review-file']) {
+        const reviewFile = path.resolve(args['media-review-file']);
+        if (!fs.existsSync(reviewFile)) blockers.push(`Brak pliku media review: ${reviewFile}`);
+        else {
+          const workingArticle = parseJson(workingFile);
+          const review = parseJson(reviewFile);
+          const applied = applyMediaReview(workingArticle, review, { assetsDir, operation: 'CREATE', root: ROOT });
+          if (!applied.ok) blockers.push(...applied.errors.map((error) => `Media review: ${error}`));
+          else atomicWriteFileSync(workingFile, `${JSON.stringify(workingArticle, null, 2)}\n`, 'utf8');
+        }
+      }
+
+      if (!blockers.length) {
+        const finalStages = runStagesWithScope(afterMedia, workingFile);
+        stages.push(...finalStages);
+        finalStages.filter((item) => item.status === 'FAIL').forEach((item) => {
+          blockers.push(`${item.label}: ${item.stderr || item.stdout || `exit ${item.exit_code}`}`);
+        });
+      }
     }
 
     let corrected = original;
