@@ -1,5 +1,6 @@
 {
   "medical_source_minimum": 4,
+  "faq_minimum": 0,
   "internal_links_warn_below": 2,
   "faq_source_requirements": {
     "gsc": {

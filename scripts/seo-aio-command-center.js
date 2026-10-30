@@ -12,6 +12,7 @@ const {
 } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 const { warsawIso } = require('./lib/time');
+const { POLICY } = require('./lib/article-policy');
 
 const ROOT = process.cwd();
 const SITE_ORIGIN = 'https://fitpo50.pl';
@@ -258,14 +259,14 @@ function buildEditTasks(item, score) {
   if (!item.aeo_geo_ai?.has_quick_answer) {
     tasks.push('Dodaj lub przebuduj blok Szybka odpowiedź: 45-65 słów, konkret, warunek, bez lania wody.');
   }
-  if (Number(item.aeo_geo_ai?.faq_count || 0) < 4) {
-    tasks.push('Dodaj/odśwież FAQ z query GSC i realnych pytań; minimum 4 pytania, zero generyków.');
+  if (Number(item.aeo_geo_ai?.faq_count || 0) < POLICY.FAQ.MINIMUM) {
+    tasks.push(`Dodaj/odśwież FAQ z query GSC i realnych pytań; minimum ${POLICY.FAQ.MINIMUM} pytań, zero generyków.`);
   }
   if (!item.aeo_geo_ai?.has_faq_schema && Number(item.aeo_geo_ai?.faq_count || 0) > 0) {
     tasks.push('Zsynchronizuj widoczne FAQ z JSON-LD FAQPage.');
   }
-  if (Number(item.aeo_geo_ai?.citation_count || 0) < 4) {
-    tasks.push('Uzupełnij GEO: minimum 4 realne źródła URL wspierające konkretne claimy.');
+  if (Number(item.aeo_geo_ai?.citation_count || 0) < POLICY.WORDS.CITATION_MIN_URLS) {
+    tasks.push(`Uzupełnij GEO: minimum ${POLICY.WORDS.CITATION_MIN_URLS} realne źródła URL wspierające konkretne claimy.`);
   }
   if (Number(item.topology?.inbound_links || 0) < 4 || item.topology?.suggested_sources?.length) {
     tasks.push('Dodaj 2-4 linki kontekstowe z sugerowanych stron źródłowych i użyj anchorów opisujących intencję.');
@@ -623,4 +624,8 @@ function main() {
   if (outputs.mirrorMd) console.log(`[SEO-AIO-MACHINE] mirror: ${outputs.mirrorMd}`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = {
+  buildEditTasks,
+};

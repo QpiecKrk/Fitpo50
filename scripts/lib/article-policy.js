@@ -9,6 +9,9 @@ const { normalizeInternalHref } = require('./article-normalization');
 const ARTICLE_CONTRACT = require('../../docs/skills/fitpo50-article-draft/references/article-contract.json');
 
 const POLICY = {
+  FAQ: {
+    MINIMUM: ARTICLE_CONTRACT.faq_minimum,
+  },
   FAQ_SOURCE_REQUIREMENTS: ARTICLE_CONTRACT.faq_source_requirements,
   FAQ_SOURCE_TYPES: ARTICLE_CONTRACT.faq_source_types,
 

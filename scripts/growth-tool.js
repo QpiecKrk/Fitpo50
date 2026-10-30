@@ -14,6 +14,7 @@ const {
 } = require('./lib/seo-priority-list');
 const { resolveGscWorkDir } = require('./lib/gsc-work-dir');
 const { warsawIso } = require('./lib/time');
+const { POLICY } = require('./lib/article-policy');
 
 const ROOT = process.cwd();
 const REPORT_DIR = process.env.FITPO50_GROWTH_REPORT_DIR
@@ -686,8 +687,8 @@ function scoreArticle(article, gsc) {
   if (!article.has_quick_answer) issues.push('brak szybkiej odpowiedzi');
   if (!article.has_evidence_box) issues.push('brak Evidence Box');
   if (!article.has_doctor_box) issues.push('brak bloku Kiedy do lekarza');
-  if (article.faq_items < 4) issues.push('FAQ ma mniej niż 4 pytania');
-  if (article.citation_count < 4) issues.push('mniej niż 4 źródła zewnętrzne');
+  if (article.faq_items < POLICY.FAQ.MINIMUM) issues.push(`FAQ ma mniej niż ${POLICY.FAQ.MINIMUM} pytań`);
+  if (article.citation_count < POLICY.WORDS.CITATION_MIN_URLS) issues.push(`mniej niż ${POLICY.WORDS.CITATION_MIN_URLS} źródła zewnętrzne`);
   if (article.inbound_link_count < 3) issues.push('słabe linkowanie przychodzące');
   if (article.table_count > article.tables_with_caption) issues.push('tabela bez caption');
   if (!article.pdf_links.length) issues.push('brak PDF do udostępniania');
@@ -735,8 +736,8 @@ function buildActions(article, gsc) {
   const actions = [];
   if (!article.has_evidence_box) actions.push({ type: 'manual-evidence-box', label: 'Przygotuj ręcznie Evidence Box dopasowany do artykułu i pokaż tekst do akceptacji.' });
   if (!article.has_doctor_box) actions.push({ type: 'manual-safety-note', label: 'Jeśli temat tego wymaga, przygotuj ręcznie blok bezpieczeństwa bez generycznego straszenia lekarzem.' });
-  if (article.faq_items < 4) actions.push({ type: 'faq', label: 'Rozbuduj FAQ do minimum 4 konkretnych pytań.' });
-  if (article.citation_count < 4) actions.push({ type: 'citations', label: 'Uzupełnij źródła i przypisz je do konkretnych claimów.' });
+  if (article.faq_items < POLICY.FAQ.MINIMUM) actions.push({ type: 'faq', label: `Rozbuduj FAQ do minimum ${POLICY.FAQ.MINIMUM} konkretnych pytań.` });
+  if (article.citation_count < POLICY.WORDS.CITATION_MIN_URLS) actions.push({ type: 'citations', label: 'Uzupełnij źródła i przypisz je do konkretnych claimów.' });
   if (article.inbound_link_count < 3) actions.push({ type: 'internal-links', label: 'Zaproponuj 2–3 linki kontekstowe i pokaż zdania do akceptacji.' });
   if (!article.pdf_links.length) actions.push({ type: 'pdf', label: 'Zaproponuj PDF/checklistę do link earningu, jeśli pasuje do intencji artykułu.' });
   if (!article.table_count && !shouldSkipShareableTable(article)) actions.push({ type: 'manual-shareable-table', label: 'Zaproponuj cytowalną tabelę HTML tylko jeśli realnie pomaga czytelnikowi.' });
@@ -4108,24 +4109,37 @@ function updateModifiedDate(html) {
     .replace(/(property="article:modified_time"\s+content=")[^"]+(")/i, `$1${now}$2`);
 }
 
+function evaluateGrowthArticle(article) {
+  const failures = [];
+  const warnings = [];
+  if (!article.has_blogposting) failures.push(`${article.file || '(bez nazwy)'}: brak BlogPosting`);
+  if (article.table_count > article.tables_with_caption) failures.push(`${article.file || '(bez nazwy)'}: tabela bez caption`);
+  if (article.internal_link_count < POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) {
+    warnings.push(`${article.file || '(bez nazwy)'}: mniej niż ${POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW} linki wewnętrzne`);
+  }
+  return { failures, warnings };
+}
+
 function verifyGrowth(flags) {
   const data = buildGrowthData();
   const file = flags.file ? String(flags.file).replace(/^\.?\//, '') : '';
   const targets = file ? data.articles.filter((article) => article.file === file) : data.articles.slice(0, 25);
   const failures = [];
+  const warnings = [];
   for (const article of targets) {
-    if (!article.has_blogposting) failures.push(`${article.file}: brak BlogPosting`);
-    if (article.table_count > article.tables_with_caption) failures.push(`${article.file}: tabela bez caption`);
-    if (article.internal_link_count < 4) failures.push(`${article.file}: mniej niż 4 linki wewnętrzne`);
+    const result = evaluateGrowthArticle(article);
+    failures.push(...result.failures);
+    warnings.push(...result.warnings);
   }
   const payload = {
     generated_at: nowWarsawIso(),
     checked: targets.length,
     status: failures.length ? 'FAIL' : 'PASS',
     failures,
+    warnings,
   };
   writeJson(path.join(REPORT_DIR, 'verify.json'), payload);
-  console.log(`[GROWTH] verify: ${payload.status} checked=${payload.checked} failures=${failures.length}`);
+  console.log(`[GROWTH] verify: ${payload.status} checked=${payload.checked} failures=${failures.length} warnings=${warnings.length}`);
   if (payload.status !== 'PASS') process.exitCode = 1;
   return payload;
 }
@@ -4260,14 +4274,17 @@ if (require.main === module) {
 
 module.exports = {
   buildBroadSeoConclusions,
+  buildActions,
   buildCannibalizationMap,
   buildGscAfterChangeQueue,
   buildSeoApprovalWave,
   buildSeoWorkHistory,
   deploymentEvidenceForArticle,
   estimatedTrafficGain,
+  evaluateGrowthArticle,
   isNoindexSeoFile,
   metricDelta,
   nowWarsawIso,
+  scoreArticle,
   textContract,
 };

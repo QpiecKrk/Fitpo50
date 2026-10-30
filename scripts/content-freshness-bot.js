@@ -4,6 +4,7 @@ const fs = require('fs');
 const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { warsawIso } = require('./lib/time');
+const { POLICY } = require('./lib/article-policy');
 
 const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
@@ -99,9 +100,9 @@ function priorityScore({ ageClass, faqCount, sourceCount, linkCount, words }) {
   if (ageClass === 'critical') score += 60;
   if (ageClass === 'unknown') score += 80;
 
-  if (faqCount < 4) score += 20;
-  if (sourceCount < 6) score += 25;
-  if (linkCount < 4) score += 15;
+  if (faqCount < POLICY.FAQ.MINIMUM) score += 20;
+  if (sourceCount < POLICY.WORDS.CITATION_MIN_URLS) score += 25;
+  if (linkCount < POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) score += 15;
   if (words < 450) score += 10;
   return score;
 }
@@ -178,4 +179,8 @@ function main() {
   console.log(`- needsRefreshNow: ${report.totals.needsRefreshNow}`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = {
+  priorityScore,
+};

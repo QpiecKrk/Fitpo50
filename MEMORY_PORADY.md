@@ -29,9 +29,9 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Nie pokazujemy widocznej daty publikacji/aktualizacji na gorze artykulu.
 - Na dole artykulu (nad footerem) zawsze sekcja "Czytelnia" (`.porady-preview.section-padding`) z 3 kafelkami.
 - Naglowek sekcji "Czytelnia" ma byc index-style (`.reading-room__head` + ikona), nie wariant alternatywny.
-- Interlinking w tresci: minimum 4 linki wewnetrzne osadzone w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
+- Interlinking w tresci: liczba linkow wewnetrznych wynika z naturalnego planu; mniej niz 2 daje ostrzezenie, nie blokade. Linki osadzamy w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
 - Crosslinki wewnetrzne dopinamy recznie po imporcie (kontrola redakcyjna); nie przenosimy automatycznie linkow z promptu/modelu.
-- FAQ: importer nigdy nie generuje ani nie dopisuje pytań. Każde istniejące pytanie musi mieć udokumentowane źródło w `faq_research[]` (GSC, PAA, autocomplete albo jawnie opisana analiza). Nie ma sztucznego minimum; przy braku realnych pytań artykuł nie zawiera sekcji ani schema `FAQPage`.
+- FAQ: importer nigdy nie generuje ani nie dopisuje pytań. Każde istniejące pytanie musi mieć udokumentowane źródło w `faq_research[]` (GSC, PAA albo autocomplete). Nie ma sztucznego minimum; przy braku realnych pytań artykuł nie zawiera sekcji ani schema `FAQPage`.
 - Dopuszczamy bardziej wyrazisty styl artykulu (kolory, callouty, typografia, tabele), ale:
   - zachowujemy spojnosc z designem serwisu,
   - trzymamy max 2-3 rodziny fontow na artykul,
@@ -50,7 +50,7 @@ Elementy obowiazkowe (minimum):
 - Pierwszy akapit z `drop-cap`.
 - Co najmniej 2 callouty (`.highlight-box` / modyfikatory) w kluczowych miejscach tekstu.
 - Mocny cytat koncowy (`.article-quote`).
-- Co najmniej 4 kontekstowe linki wewnetrzne osadzone w akapitach.
+- Liczba kontekstowych linkow wewnetrznych wynika z naturalnego planu; mniej niz 2 daje ostrzezenie, nie blokade.
 - Sekcja `Zrodla` + `medical-disclaimer` + `Czytelnia` (3 karty).
 
 Typografia:
