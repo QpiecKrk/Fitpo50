@@ -36,8 +36,8 @@ try {
     echo json_encode(buildPublicNewsPayload($store), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 } catch (Throwable $e) {
     http_response_code(500);
+    error_log('[NEWS_FEED_ERROR] ' . get_class($e));
     echo json_encode([
         'error' => 'NEWS_FEED_ERROR',
-        'message' => $e->getMessage(),
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 }

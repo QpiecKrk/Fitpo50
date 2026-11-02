@@ -10,7 +10,7 @@ const TASKS = {
   'article:validate': { cmd: 'node', args: ['scripts/validate-article-standard.js'], always: true, access: 'read' },
   'predeploy:check': { cmd: 'node', args: ['scripts/predeploy-gate.js'], always: true, access: 'read' },
   'command:contract:check': { cmd: 'node', args: ['scripts/command-contract-check.js'], always: true, access: 'read' },
-  'test:system-contract': { cmd: 'node', args: ['--test', 'tests/pipeline-capability.test.js', 'tests/export-parity.test.js', 'tests/command-contract.test.js', 'tests/retired-module-exposure.test.js', 'tests/navigation-contract.test.js'], always: true, access: 'read' },
+  'test:system-contract': { cmd: 'node', args: ['--test', 'tests/pipeline-capability.test.js', 'tests/export-parity.test.js', 'tests/command-contract.test.js', 'tests/retired-module-exposure.test.js', 'tests/navigation-contract.test.js', 'tests/news-feed-error-leak.test.js'], always: true, access: 'read' },
   'news:integrity': { cmd: 'node', args: ['scripts/news-integrity-check.js'], match: [/^data\/news-live\.json$/, /^assets\/data\/news-fallback\.json$/, /^admin\/news/i], access: 'read' },
   'article:guard:diff': { cmd: 'node', args: ['scripts/run-article-guard-diff.js'], match: [/\.html$/i], access: 'read' },
   'article:contract:diff': { cmd: 'node', args: ['scripts/run-article-contract-diff.js'], match: [/\.html$/i], access: 'read' },
