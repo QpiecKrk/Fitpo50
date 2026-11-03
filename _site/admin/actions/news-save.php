@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../bootstrap.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/news.php';
+require_once __DIR__ . '/../helpers/news-db-write.php';
 require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
@@ -41,6 +42,9 @@ if ($sortOrder < 1 || $sortOrder > 9999) {
 $redirect = $id !== '' ? ('Location: ../news-form.php?id=' . urlencode($id)) : 'Location: ../news-form.php';
 $newUploadedImageBase = null;
 $previousImageBase = null;
+$dbMode = newsStorageMode() === 'db';
+$dbChangeId = null;
+$cacheWarning = null;
 
 try {
     $store = loadNewsStore();
@@ -100,7 +104,9 @@ try {
         $imageHashes = normalizeNewsImageHashes($processed['image_hashes'] ?? null);
         $newUploadedImageBase = $imageBase;
     } elseif ($deleteImage && $imageBase !== '') {
-        deleteNewsImageVariants($imageBase);
+        if (!$dbMode) {
+            deleteNewsImageVariants($imageBase);
+        }
         $imageBase = '';
         $imageHashes = normalizeNewsImageHashes(null);
     }
@@ -141,11 +147,21 @@ try {
             : '',
     ]);
 
-    $store = upsertNewsItem($store, $item);
-    $store['items'] = sortNewsItems($store['items']);
-    saveNewsStore($store);
-    if ($newUploadedImageBase !== null && $previousImageBase !== null && $previousImageBase !== $newUploadedImageBase) {
-        deleteNewsImageVariants($previousImageBase);
+    if ($dbMode) {
+        $write = newsDbWriteMutation($existing === null ? 'create' : 'update', $existing, $item, $now);
+        $dbChangeId = $write['change_id'];
+        if ($previousImageBase !== null && $previousImageBase !== $imageBase
+            && !deleteNewsImageVariants($previousImageBase)) {
+            error_log('[NEWS_DB_IMAGE_ORPHAN] change_id=' . $dbChangeId);
+        }
+        $cacheWarning = newsDbRebuildCacheAfterCommit($dbChangeId);
+    } else {
+        $store = upsertNewsItem($store, $item);
+        $store['items'] = sortNewsItems($store['items']);
+        saveNewsStore($store);
+        if ($newUploadedImageBase !== null && $previousImageBase !== null && $previousImageBase !== $newUploadedImageBase) {
+            deleteNewsImageVariants($previousImageBase);
+        }
     }
 
     $wasPublishedBefore = $existing && ($existing['status'] ?? '') === 'published';
@@ -170,6 +186,9 @@ try {
     if ($gitError !== null) {
         $_SESSION['flash_error'] = $gitError;
     }
+    if ($cacheWarning !== null) {
+        $_SESSION['flash_error'] = $cacheWarning;
+    }
 
     header('Location: ../news-dashboard.php');
     exit;
@@ -178,7 +197,7 @@ try {
     if ($newUploadedImageBase !== null) {
         deleteNewsImageVariants($newUploadedImageBase);
     }
-    $_SESSION['flash_error'] = 'Błąd: ' . $e->getMessage();
+    $_SESSION['flash_error'] = $dbMode ? 'Błąd: NEWS_DB_WRITE_FAILED' : ('Błąd: ' . $e->getMessage());
     header($redirect);
     exit;
 }

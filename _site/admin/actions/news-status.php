@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../bootstrap.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/news.php';
+require_once __DIR__ . '/../helpers/news-db-write.php';
 require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
@@ -24,6 +25,7 @@ if ($id === '') {
 }
 
 try {
+    $dbMode = newsStorageMode() === 'db';
     $store = loadNewsStore();
     $item = findNewsItemById($store, $id);
 
@@ -47,9 +49,16 @@ try {
     $item['updated_at'] = $now;
     $item['published_at'] = $status === 'published' ? ($item['published_at'] ?: $now) : '';
 
-    $store = upsertNewsItem($store, $item);
-    $store['items'] = sortNewsItems($store['items']);
-    saveNewsStore($store);
+    $cacheWarning = null;
+    if ($dbMode) {
+        $operation = $status === 'published' ? 'publish' : 'unpublish';
+        $write = newsDbWriteMutation($operation, findNewsItemById($store, $id), $item, $now);
+        $cacheWarning = newsDbRebuildCacheAfterCommit($write['change_id']);
+    } else {
+        $store = upsertNewsItem($store, $item);
+        $store['items'] = sortNewsItems($store['items']);
+        saveNewsStore($store);
+    }
 
     $gitSync = runGitAutoSync(['news'], 'news status');
 
@@ -60,8 +69,11 @@ try {
     if ($gitError !== null) {
         $_SESSION['flash_error'] = $gitError;
     }
+    if ($cacheWarning !== null) {
+        $_SESSION['flash_error'] = $cacheWarning;
+    }
 } catch (Throwable $e) {
-    $_SESSION['flash_error'] = 'Błąd: ' . $e->getMessage();
+    $_SESSION['flash_error'] = (isset($dbMode) && $dbMode) ? 'Błąd: NEWS_DB_WRITE_FAILED' : ('Błąd: ' . $e->getMessage());
 }
 
 header('Location: ../news-dashboard.php');

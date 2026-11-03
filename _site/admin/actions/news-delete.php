@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../bootstrap.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../helpers/news.php';
+require_once __DIR__ . '/../helpers/news-db-write.php';
 require_once __DIR__ . '/../helpers/git-sync.php';
 requireLogin();
 verifyCsrf();
@@ -19,6 +20,7 @@ if ($id === '') {
 }
 
 try {
+    $dbMode = newsStorageMode() === 'db';
     $store = loadNewsStore();
     $item = findNewsItemById($store, $id);
 
@@ -26,14 +28,21 @@ try {
         throw new RuntimeException('Nie znaleziono newsa do usunięcia.');
     }
 
-    if (!empty($item['image_base'])) {
-        deleteNewsImageVariants($item['image_base']);
-    }
-
     $wasPublished = ($item['status'] ?? '') === 'published';
-
-    $store = deleteNewsItemById($store, $id);
-    saveNewsStore($store);
+    $cacheWarning = null;
+    if ($dbMode) {
+        $write = newsDbWriteMutation('delete', $item, null, date('c'));
+        if (!empty($item['image_base']) && !deleteNewsImageVariants($item['image_base'])) {
+            error_log('[NEWS_DB_IMAGE_ORPHAN] change_id=' . $write['change_id']);
+        }
+        $cacheWarning = newsDbRebuildCacheAfterCommit($write['change_id']);
+    } else {
+        if (!empty($item['image_base'])) {
+            deleteNewsImageVariants($item['image_base']);
+        }
+        $store = deleteNewsItemById($store, $id);
+        saveNewsStore($store);
+    }
 
     $gitSync = $wasPublished
         ? runGitAutoSync(['news'], 'news delete')
@@ -44,8 +53,11 @@ try {
     if ($gitError !== null) {
         $_SESSION['flash_error'] = $gitError;
     }
+    if ($cacheWarning !== null) {
+        $_SESSION['flash_error'] = $cacheWarning;
+    }
 } catch (Throwable $e) {
-    $_SESSION['flash_error'] = 'Błąd: ' . $e->getMessage();
+    $_SESSION['flash_error'] = (isset($dbMode) && $dbMode) ? 'Błąd: NEWS_DB_WRITE_FAILED' : ('Błąd: ' . $e->getMessage());
 }
 
 header('Location: ../news-dashboard.php');

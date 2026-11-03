@@ -1,5 +1,6 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 
@@ -124,14 +125,27 @@ test('getNewsDb jest odrębnym połączeniem fail-closed', () => {
   assert.doesNotMatch(helper, /getMessage\s*\(/);
 });
 
-test('news-db.php nie jest jeszcze dołączany przez kod panelu ani mirror', () => {
-  const roots = [path.join(ROOT, 'admin'), path.join(ROOT, '_site', 'admin')];
-  const consumers = roots
+function newsDbConsumers(roots, relativeRoot = ROOT) {
+  return roots
     .flatMap(listPhpFiles)
     .filter((filePath) => filePath !== HELPER_PATH)
     .filter((filePath) => !/^config.*\.php$/i.test(path.basename(filePath)))
     .filter((filePath) => /(?:require|include)(?:_once)?[\s\S]{0,160}news-db\.php/i.test(fs.readFileSync(filePath, 'utf8')))
-    .map((filePath) => path.relative(ROOT, filePath));
+    .map((filePath) => path.relative(relativeRoot, filePath));
+}
 
-  assert.deepEqual(consumers, []);
+test('news-db.php dołączają wyłącznie dwa zatwierdzone adaptery odczytu', (t) => {
+  const roots = [path.join(ROOT, 'admin'), path.join(ROOT, '_site', 'admin')];
+  const consumers = newsDbConsumers(roots).sort();
+  assert.deepEqual(consumers, [
+    '_site/admin/helpers/news-db-read.php',
+    'admin/helpers/news-db-read.php',
+  ]);
+
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-news-db-consumer-'));
+  t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
+  const badAdmin = path.join(fixture, 'admin');
+  fs.mkdirSync(badAdmin, { recursive: true });
+  fs.writeFileSync(path.join(badAdmin, 'bad.php'), "<?php require_once __DIR__ . '/helpers/news-db.php';\n");
+  assert.deepEqual(newsDbConsumers([badAdmin], fixture), ['admin/bad.php']);
 });

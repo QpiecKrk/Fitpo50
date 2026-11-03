@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 require_once __DIR__ . '/internal-links.php';
+require_once __DIR__ . '/news-db-read.php';
 
 const NEWS_CARD_IMAGE_WIDTH = 640;
 const NEWS_CARD_IMAGE_HEIGHT = 480;
@@ -46,6 +47,13 @@ function defaultNewsStore(): array {
 }
 
 function loadNewsStore(): array {
+    if (newsStorageMode() === 'db') {
+        return loadNewsStoreFromDatabase();
+    }
+    return loadNewsStoreFromFile();
+}
+
+function loadNewsStoreFromFile(): array {
     ensureNewsStorage();
     $file = newsLiveFilePath();
 
@@ -130,6 +138,9 @@ function normalizeNewsImageHashes($raw): array {
 }
 
 function saveNewsStore(array $store, bool $withBackup = true): void {
+    if (newsStorageMode() === 'db') {
+        throw new RuntimeException('NEWS_DB_WRITE_NOT_READY');
+    }
     ensureNewsStorage();
 
     $normalizedItems = [];
@@ -195,7 +206,7 @@ function writeNewsFallbackPayload(array $store): void {
     }
 }
 
-function buildPublicNewsPayload(array $store): array {
+function buildPublicNewsPayload(array $store, ?string $generatedAt = null): array {
     $items = [];
 
     foreach (($store['items'] ?? []) as $rawItem) {
@@ -229,9 +240,39 @@ function buildPublicNewsPayload(array $store): array {
 
     return [
         'version' => 1,
-        'updatedAt' => date('c'),
+        'updatedAt' => $generatedAt ?? date('c'),
         'items' => array_values($items),
     ];
+}
+
+function loadPublicNewsFallbackPayload(): array {
+    $raw = file_get_contents(newsFallbackFilePath());
+    if ($raw === false || trim($raw) === '') {
+        throw new RuntimeException('NEWS_PUBLIC_FALLBACK_UNAVAILABLE');
+    }
+    $payload = json_decode($raw, true);
+    if (!is_array($payload) || ($payload['version'] ?? null) !== 1 || !is_array($payload['items'] ?? null)) {
+        throw new RuntimeException('NEWS_PUBLIC_FALLBACK_INVALID');
+    }
+    return $payload;
+}
+
+function rebuildNewsCacheFromDatabase(): array {
+    ensureNewsStorage();
+    $store = loadNewsStoreFromDatabase();
+    $documents = newsDbCacheDocuments(
+        $store,
+        static fn(array $value): array => buildPublicNewsPayload($value, (string)$value['updatedAt'])
+    );
+    atomicWriteJson(newsLiveFilePath(), $documents['live']);
+    writeNewsLiveMirrorPayload($documents['live']);
+    atomicWriteJson(newsFallbackFilePath(), $documents['fallback']);
+
+    $siteFallback = SITE_ROOT . '_site' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'news-fallback.json';
+    if (is_dir(dirname($siteFallback))) {
+        atomicWriteJson($siteFallback, $documents['fallback']);
+    }
+    return $documents;
 }
 
 function buildPublicImageData(array $item): ?array {
@@ -614,19 +655,21 @@ function createImageResourceFromFile(string $tmp, string $mime) {
     };
 }
 
-function deleteNewsImageVariants(?string $base): void {
+function deleteNewsImageVariants(?string $base): bool {
     $base = trim((string)$base);
     if ($base === '') {
-        return;
+        return true;
     }
 
     $dir = newsAssetsDirPath();
+    $removed = true;
     foreach (['jpg', 'webp', 'avif'] as $ext) {
         $path = $dir . $base . '.' . $ext;
         if (is_file($path)) {
-            @unlink($path);
+            $removed = @unlink($path) && $removed;
         }
     }
+    return $removed;
 }
 
 function newsImageVariantsExist(?string $base): bool {

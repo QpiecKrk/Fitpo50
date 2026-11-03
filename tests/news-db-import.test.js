@@ -18,7 +18,7 @@ function runLibrary(code) {
   return spawnSync('php', [
     '-d', 'display_errors=0',
     '-r',
-    `define('FITPO50_NEWS_DB_IMPORT_LIBRARY', true); require ${phpString(IMPORTER)}; ${code}`,
+    `require ${phpString(IMPORTER)}; ${code}`,
   ], { cwd: ROOT, encoding: 'utf8' });
 }
 

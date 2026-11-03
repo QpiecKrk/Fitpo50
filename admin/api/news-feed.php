@@ -32,8 +32,14 @@ header('Pragma: no-cache');
 header('Expires: 0');
 
 try {
-    $store = loadNewsStore();
-    echo json_encode(buildPublicNewsPayload($store), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    $payload = newsStorageMode() === 'db'
+        ? newsPublicFeedResolve(
+            'loadNewsStoreFromDatabase',
+            'buildPublicNewsPayload',
+            'loadPublicNewsFallbackPayload'
+        )
+        : buildPublicNewsPayload(loadNewsStoreFromFile());
+    echo json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 } catch (Throwable $e) {
     http_response_code(500);
     error_log('[NEWS_FEED_ERROR] ' . get_class($e));
