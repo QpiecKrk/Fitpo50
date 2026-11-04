@@ -206,6 +206,21 @@ function writeNewsFallbackPayload(array $store): void {
     }
 }
 
+function normalizePublicNewsTimestamp(string $value): string {
+    $value = trim($value);
+    if ($value === '') {
+        return '';
+    }
+
+    try {
+        $date = new DateTimeImmutable($value);
+    } catch (Throwable) {
+        throw new RuntimeException('NEWS_PUBLIC_DATE_INVALID');
+    }
+
+    return $date->setTimezone(new DateTimeZone('UTC'))->format('Y-m-d\TH:i:sP');
+}
+
 function buildPublicNewsPayload(array $store, ?string $generatedAt = null): array {
     $items = [];
 
@@ -218,6 +233,9 @@ function buildPublicNewsPayload(array $store, ?string $generatedAt = null): arra
             continue;
         }
 
+        $updatedAt = normalizePublicNewsTimestamp($item['updated_at']);
+        $publishedAt = normalizePublicNewsTimestamp($item['published_at'] ?: $item['updated_at']);
+
         $items[] = [
             'id' => $item['id'],
             'title' => $item['title'],
@@ -225,15 +243,19 @@ function buildPublicNewsPayload(array $store, ?string $generatedAt = null): arra
             'sort_order' => $item['sort_order'],
             'image' => buildPublicImageData($item),
             'sources' => $item['sources'],
-            'updated_at' => $item['updated_at'],
-            'published_at' => $item['published_at'] ?: $item['updated_at'],
+            'updated_at' => $updatedAt,
+            'published_at' => $publishedAt,
             'excerpt' => buildNewsExcerpt($item['content_html']),
         ];
     }
 
     usort($items, static function (array $a, array $b): int {
         if ($a['sort_order'] === $b['sort_order']) {
-            return strcmp($b['published_at'], $a['published_at']);
+            $publishedComparison = strcmp($b['published_at'], $a['published_at']);
+            if ($publishedComparison !== 0) {
+                return $publishedComparison;
+            }
+            return strcmp($a['id'], $b['id']);
         }
         return $a['sort_order'] <=> $b['sort_order'];
     });
@@ -260,10 +282,7 @@ function loadPublicNewsFallbackPayload(): array {
 function rebuildNewsCacheFromDatabase(): array {
     ensureNewsStorage();
     $store = loadNewsStoreFromDatabase();
-    $documents = newsDbCacheDocuments(
-        $store,
-        static fn(array $value): array => buildPublicNewsPayload($value, (string)$value['updatedAt'])
-    );
+    $documents = buildNewsCacheDocumentsFromStore($store);
     atomicWriteJson(newsLiveFilePath(), $documents['live']);
     writeNewsLiveMirrorPayload($documents['live']);
     atomicWriteJson(newsFallbackFilePath(), $documents['fallback']);
@@ -273,6 +292,31 @@ function rebuildNewsCacheFromDatabase(): array {
         atomicWriteJson($siteFallback, $documents['fallback']);
     }
     return $documents;
+}
+
+function buildNewsCacheDocumentsFromStore(array $store): array {
+    $items = [];
+    foreach (($store['items'] ?? []) as $rawItem) {
+        if (!is_array($rawItem)) {
+            continue;
+        }
+        $item = normalizeNewsItem($rawItem);
+        $item['created_at'] = normalizePublicNewsTimestamp($item['created_at']);
+        $item['updated_at'] = normalizePublicNewsTimestamp($item['updated_at']);
+        $item['published_at'] = normalizePublicNewsTimestamp($item['published_at']);
+        $items[] = $item;
+    }
+
+    $cacheStore = [
+        'version' => 1,
+        'updatedAt' => normalizePublicNewsTimestamp((string)($store['updatedAt'] ?? '')),
+        'items' => sortNewsItems($items),
+    ];
+
+    return newsDbCacheDocuments(
+        $cacheStore,
+        static fn(array $value): array => buildPublicNewsPayload($value, (string)$value['updatedAt'])
+    );
 }
 
 function buildPublicImageData(array $item): ?array {
@@ -800,13 +844,21 @@ function sortNewsItems(array $items): array {
 
         // Wewnatrz draftow: najnowszy zapis ma byc zawsze na gorze.
         if ($aNorm['status'] === 'draft' && $bNorm['status'] === 'draft') {
-            return strcmp($bNorm['updated_at'], $aNorm['updated_at']);
+            $updatedComparison = strcmp($bNorm['updated_at'], $aNorm['updated_at']);
+            if ($updatedComparison !== 0) {
+                return $updatedComparison;
+            }
+            return strcmp($aNorm['id'], $bNorm['id']);
         }
 
         if ($aNorm['sort_order'] === $bNorm['sort_order']) {
             $aDate = $aNorm['published_at'] ?: $aNorm['updated_at'];
             $bDate = $bNorm['published_at'] ?: $bNorm['updated_at'];
-            return strcmp($bDate, $aDate);
+            $dateComparison = strcmp($bDate, $aDate);
+            if ($dateComparison !== 0) {
+                return $dateComparison;
+            }
+            return strcmp($aNorm['id'], $bNorm['id']);
         }
 
         return $aNorm['sort_order'] <=> $bNorm['sort_order'];
