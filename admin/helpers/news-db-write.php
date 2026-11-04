@@ -5,10 +5,46 @@ require_once __DIR__ . '/news-db-read.php';
 
 final class NewsDbWriteException extends RuntimeException
 {
-    public function __construct(public readonly string $category, public readonly string $changeId)
-    {
+    public function __construct(
+        public readonly string $category,
+        public readonly string $changeId,
+        public readonly string $stage,
+        public readonly string $sqlState,
+        public readonly int $driverCode,
+        public readonly string $diagnosticCode
+    ) {
         parent::__construct($category);
     }
+}
+
+function newsDbWriteDiagnosticFields(Throwable $error): array
+{
+    $sqlState = 'NA';
+    $driverCode = 0;
+    $diagnosticCode = 'NA';
+
+    if ($error instanceof PDOException) {
+        $errorInfo = is_array($error->errorInfo ?? null) ? $error->errorInfo : [];
+        $candidateState = strtoupper((string)($errorInfo[0] ?? ''));
+        $candidateDriverCode = $errorInfo[1] ?? 0;
+        if (preg_match('/^[A-Z0-9]{5}$/', $candidateState)) {
+            $sqlState = $candidateState;
+        }
+        if (is_int($candidateDriverCode) || ctype_digit((string)$candidateDriverCode)) {
+            $driverCode = (int)$candidateDriverCode;
+        }
+    } elseif ($error instanceof RuntimeException) {
+        $candidateCode = $error->getMessage();
+        if (preg_match('/^[A-Z_]{3,64}$/', $candidateCode)) {
+            $diagnosticCode = $candidateCode;
+        }
+    }
+
+    return [
+        'sqlstate' => $sqlState,
+        'driver_code' => $driverCode,
+        'code' => $diagnosticCode,
+    ];
 }
 
 function newsDbWriteUuid(): string
@@ -84,6 +120,7 @@ function newsDbWriteTransaction(
     $changeId = (string)(($dependencies['uuid'] ?? 'newsDbWriteUuid')());
     $locked = false;
     $begun = false;
+    $stage = 'connect';
     try {
         if (!in_array($operation, $allowed, true)) {
             throw new RuntimeException('OPERATION_INVALID');
@@ -91,24 +128,32 @@ function newsDbWriteTransaction(
         if ($dependencies === null) {
             $dependencies = newsDbWriteDefaultDependencies(getNewsDb());
         }
+        $stage = 'get_lock';
         $locked = (bool)$dependencies['acquire']();
         if (!$locked) {
             throw new RuntimeException('LOCK_UNAVAILABLE');
         }
+        $stage = 'begin';
         $dependencies['begin']();
         $begun = true;
+        $stage = 'locked_state';
         $state = $dependencies['locked_state']();
+        $stage = 'store_check';
         $store = newsDbStoreFromRowsAndJournal($state['rows'], $state['journal']);
         $current = $before === null ? null : findNewsItemById($store, (string)$before['id']);
         if (($before === null && $operation !== 'create') || ($before !== null && $current === null)) {
             throw new RuntimeException('CURRENT_ITEM_MISSING');
         }
-        if ($before !== null && !hash_equals(newsDbImportItemHash($before), newsDbImportItemHash($current))) {
+        if ($before !== null && !hash_equals(newsDbImportItemSha256($before), newsDbImportItemSha256($current))) {
             throw new RuntimeException('STALE_ITEM');
         }
+        $stage = 'apply';
         $dependencies['apply']($operation, $before, $after);
+        $stage = 'rows_after';
         $rowsAfter = $dependencies['rows_after']();
+        $stage = 'snapshot';
         $snapshot = newsDbSnapshotFromRows($rowsAfter, $storeUpdatedAt);
+        $stage = 'journal';
         $payload = [
             'change_id' => $changeId,
             'news_id' => (string)(($after ?? $before)['id'] ?? ''),
@@ -119,6 +164,7 @@ function newsDbWriteTransaction(
             'store_updated_at' => $storeUpdatedAt,
         ];
         $dependencies['journal']($payload);
+        $stage = 'commit';
         $dependencies['commit']();
         $begun = false;
         return $payload;
@@ -126,8 +172,23 @@ function newsDbWriteTransaction(
         if ($begun && isset($dependencies['rollback'])) {
             $dependencies['rollback']();
         }
-        error_log('[NEWS_DB_WRITE_ERROR] ' . get_class($error) . ' change_id=' . $changeId);
-        throw new NewsDbWriteException('NEWS_DB_WRITE_FAILED', $changeId);
+        $diagnostics = newsDbWriteDiagnosticFields($error);
+        error_log(
+            '[NEWS_DB_WRITE_ERROR] class=' . get_class($error)
+            . ' stage=' . $stage
+            . ' sqlstate=' . $diagnostics['sqlstate']
+            . ' driver_code=' . $diagnostics['driver_code']
+            . ' code=' . $diagnostics['code']
+            . ' change_id=' . $changeId
+        );
+        throw new NewsDbWriteException(
+            'NEWS_DB_WRITE_FAILED',
+            $changeId,
+            $stage,
+            $diagnostics['sqlstate'],
+            $diagnostics['driver_code'],
+            $diagnostics['code']
+        );
     } finally {
         if ($locked && isset($dependencies['release'])) {
             try {

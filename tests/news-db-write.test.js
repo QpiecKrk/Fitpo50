@@ -2,12 +2,14 @@
 
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const test = require('node:test');
 
 const ROOT = path.resolve(__dirname, '..');
 const WRITER = path.join(ROOT, 'admin', 'helpers', 'news-db-write.php');
+const PROBE = path.join(ROOT, 'scripts', 'news-db-write-probe.php');
 
 function phpString(value) {
   return `'${String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
@@ -61,7 +63,8 @@ test('każda operacja zapisuje dokładnie jeden journal z poprawnym before/after
   assert.match(source, /before_item_json/);
   assert.match(source, /after_item_json/);
   assert.match(source, /actor_type[\s\S]{0,160}panel/);
-  assert.doesNotMatch(source, /getMessage\s*\(/);
+  assert.match(source, /newsDbWriteDiagnosticFields/);
+  assert.doesNotMatch(source, /errorInfo\s*\[\s*2\s*\]/);
 });
 
 test('awaria DB powoduje rollback i release bez file fallback', () => {
@@ -128,4 +131,126 @@ test('błąd cache po commicie ma jawny kod i nie uruchamia rollbacku', () => {
   const source = fs.readFileSync(WRITER, 'utf8');
   assert.match(source, /CACHE_REBUILD_REQUIRED/);
   assert.match(source, /rebuildNewsCacheFromDatabase/);
+});
+
+test('diagnostyka PDO loguje etap i bezpieczne kody bez komunikatu sterownika', () => {
+  const result = runPhp(`
+    ini_set('error_log', 'php://stderr');
+    require ${phpString(WRITER)};
+    $after = ['id'=>'news_x','title'=>'T','content_html'=>'<p>X</p>','status'=>'draft','sort_order'=>1,'image_base'=>'','image_alt'=>'','image_hashes'=>['jpg'=>'','webp'=>'','avif'=>''],'sources'=>[],'created_at'=>'2026-11-03T12:00:00Z','updated_at'=>'2026-11-03T12:00:00Z','published_at'=>''];
+    $updated = '2026-11-03 12:00:00.000000';
+    $deps = [
+      'uuid'=>fn()=>'44444444-4444-4444-8444-444444444444',
+      'acquire'=>fn()=>true,
+      'begin'=>fn()=>null,
+      'locked_state'=>fn()=>['rows'=>[], 'journal'=>[['journal_id'=>1,'operation'=>'import','snapshot_sha256'=>newsDbSnapshotFromRows([], '2026-11-03 11:00:00.000000'),'store_updated_at'=>'2026-11-03 11:00:00.000000']]],
+      'apply'=>function(){ $error = new PDOException('tajne'); $error->errorInfo = ['23000', 4025, 'tajne']; throw $error; },
+      'rows_after'=>fn()=>[], 'journal'=>fn()=>null, 'commit'=>fn()=>null,
+      'rollback'=>fn()=>null, 'release'=>fn()=>null,
+    ];
+    try { newsDbWriteTransaction('create', null, $after, $updated, $deps); }
+    catch (NewsDbWriteException $e) { echo json_encode(['stage'=>$e->stage,'sqlstate'=>$e->sqlState,'driver_code'=>$e->driverCode]); }
+  `);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.deepEqual(JSON.parse(result.stdout), { stage: 'apply', sqlstate: '23000', driver_code: 4025 });
+  assert.match(result.stderr, /stage=apply/);
+  assert.match(result.stderr, /sqlstate=23000/);
+  assert.match(result.stderr, /driver_code=4025/);
+  assert.doesNotMatch(result.stderr, /tajne/);
+});
+
+test('diagnostyka RuntimeException zapisuje bezpieczny kod STALE_ITEM na etapie store_check', (t) => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-news-db-write-'));
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  const admin = path.join(directory, 'admin');
+  const helpers = path.join(admin, 'helpers');
+  fs.mkdirSync(helpers, { recursive: true });
+  fs.writeFileSync(path.join(admin, 'bootstrap.php'), `<?php define('SITE_ROOT', ${phpString(`${directory}${path.sep}`)});`);
+  for (const name of [
+    'internal-links.php',
+    'news-db.php',
+    'news-db-canonical.php',
+    'news-db-read.php',
+    'news-db-write.php',
+    'news.php',
+  ]) {
+    fs.copyFileSync(path.join(ROOT, 'admin', 'helpers', name), path.join(helpers, name));
+  }
+  const result = runPhp(`
+    ini_set('error_log', 'php://stderr');
+    require ${phpString(path.join(helpers, 'news.php'))};
+    require ${phpString(path.join(helpers, 'news-db-write.php'))};
+    $current = ['id'=>'news_x','title'=>'Serwer','content_html'=>'<p>X</p>','status'=>'draft','sort_order'=>1,'image_base'=>'','image_alt'=>'','image_hashes'=>['jpg'=>'','webp'=>'','avif'=>''],'sources'=>[],'created_at'=>'2026-11-03T12:00:00Z','updated_at'=>'2026-11-03T12:00:00Z','published_at'=>''];
+    $before = $current; $before['title'] = 'Klient';
+    $row = newsDbImportMapItem($current)['row'];
+    $importTime = '2026-11-03 11:00:00.000000';
+    $deps = [
+      'uuid'=>fn()=>'55555555-5555-4555-8555-555555555555',
+      'acquire'=>fn()=>true, 'begin'=>fn()=>null,
+      'locked_state'=>fn()=>['rows'=>[$row], 'journal'=>[['journal_id'=>1,'operation'=>'import','snapshot_sha256'=>newsDbSnapshotFromRows([$row], $importTime),'store_updated_at'=>$importTime]]],
+      'apply'=>fn()=>null, 'rows_after'=>fn()=>[$row], 'journal'=>fn()=>null, 'commit'=>fn()=>null,
+      'rollback'=>fn()=>null, 'release'=>fn()=>null,
+    ];
+    try { newsDbWriteTransaction('update', $before, $before, '2026-11-03 12:00:00.000000', $deps); }
+    catch (NewsDbWriteException $e) { echo json_encode(['stage'=>$e->stage,'code'=>$e->diagnosticCode]); }
+  `);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.deepEqual(JSON.parse(result.stdout), { stage: 'store_check', code: 'STALE_ITEM' });
+  assert.match(result.stderr, /stage=store_check/);
+  assert.match(result.stderr, /code=STALE_ITEM/);
+});
+
+test('probe wymusza błąd commit, wykonuje rollback i raportuje ROLLBACK_OK', () => {
+  assert.equal(fs.existsSync(PROBE), true, 'Brak scripts/news-db-write-probe.php');
+  const result = runPhp(`
+    require ${phpString(PROBE)};
+    $events = [];
+    $importTime = '2026-11-03 11:00:00.000000';
+    $deps = [
+      'uuid'=>fn()=>'66666666-6666-4666-8666-666666666666',
+      'acquire'=>function()use(&$events){$events[]='lock';return true;},
+      'begin'=>function()use(&$events){$events[]='begin';},
+      'locked_state'=>fn()=>['rows'=>[], 'journal'=>[['journal_id'=>1,'operation'=>'import','snapshot_sha256'=>newsDbSnapshotFromRows([], $importTime),'store_updated_at'=>$importTime]]],
+      'apply'=>function()use(&$events){$events[]='apply';},
+      'rows_after'=>fn()=>[newsDbImportMapItem(newsDbWriteProbeDraft('news_probe_test', '2026-11-03T12:00:00Z'))['row']],
+      'journal'=>function()use(&$events){$events[]='journal';},
+      'commit'=>function()use(&$events){$events[]='original_commit_must_not_run';},
+      'rollback'=>function()use(&$events){$events[]='rollback';},
+      'release'=>function()use(&$events){$events[]='release';},
+    ];
+    $counts = fn()=>[40,1];
+    $probe = newsDbWriteProbeExecute($deps, $counts, 'news_probe_test', '2026-11-03T12:00:00Z');
+    echo json_encode(['probe'=>$probe,'events'=>$events]);
+  `);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const output = JSON.parse(result.stdout);
+  assert.equal(output.probe.result, 'ROLLBACK_OK');
+  assert.equal(output.probe.stage, 'commit');
+  assert.deepEqual(output.events, ['lock', 'begin', 'apply', 'journal', 'rollback', 'release']);
+  assert.doesNotMatch(output.events.join(','), /original_commit/);
+});
+
+test('probe odmawia poza CLI, a bez --run pokazuje plan przed ładowaniem konfiguracji', () => {
+  assert.equal(fs.existsSync(PROBE), true, 'Brak scripts/news-db-write-probe.php');
+  const plan = spawnSync('php', [PROBE], { cwd: ROOT, encoding: 'utf8' });
+  assert.equal(plan.status, 10, plan.stderr || plan.stdout);
+  assert.match(plan.stdout, /PROBE_PLAN=/);
+  assert.doesNotMatch(plan.stdout + plan.stderr, /NEWS_DB_CONFIG|DB_CONNECTION/);
+
+  const cgi = spawnSync('php-cgi', [], {
+    cwd: ROOT,
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      SCRIPT_FILENAME: PROBE,
+      REQUEST_METHOD: 'GET',
+      REDIRECT_STATUS: '200',
+      GATEWAY_INTERFACE: 'CGI/1.1',
+    },
+  });
+  assert.equal(cgi.status, 30, cgi.stderr || cgi.stdout);
+  assert.match(cgi.stdout, /PROBE_FAIL: CLI_ONLY/);
+
+  const source = fs.readFileSync(PROBE, 'utf8');
+  assert.ok(source.indexOf("PHP_SAPI !== 'cli'") < source.indexOf("admin/bootstrap.php"));
 });
