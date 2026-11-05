@@ -112,6 +112,81 @@ test('brak zgodnego importu blokuje mutację przed zapisem', () => {
   assert.deepEqual(JSON.parse(result.stdout), ['lock', 'begin', 'select_for_update', 'rollback', 'release']);
 });
 
+test('panelowa ścieżka mutation normalizuje czas DB dla create, update i delete', (t) => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-news-db-mutation-'));
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  const admin = path.join(directory, 'admin');
+  const helpers = path.join(admin, 'helpers');
+  fs.mkdirSync(helpers, { recursive: true });
+  fs.writeFileSync(path.join(admin, 'bootstrap.php'), `<?php define('SITE_ROOT', ${phpString(`${directory}${path.sep}`)});`);
+  for (const name of [
+    'internal-links.php',
+    'news-db.php',
+    'news-db-canonical.php',
+    'news-db-read.php',
+    'news-db-write.php',
+    'news.php',
+  ]) {
+    fs.copyFileSync(path.join(ROOT, 'admin', 'helpers', name), path.join(helpers, name));
+  }
+
+  const result = runPhp(`
+    require ${phpString(path.join(helpers, 'news.php'))};
+    require ${phpString(path.join(helpers, 'news-db-write.php'))};
+    $updatedAt = '2026-11-05T12:34:56+01:00';
+    $importTime = '2026-11-05 10:00:00.000000';
+    $beforeInput = ['id'=>'news_panel','title'=>'Przed','content_html'=>'<p>Treść</p>','status'=>'draft','sort_order'=>1,'image_base'=>'','image_alt'=>'','image_hashes'=>['jpg'=>'','webp'=>'','avif'=>''],'sources'=>[],'created_at'=>'2026-11-05T10:00:00+00:00','updated_at'=>'2026-11-05T10:00:00+00:00','published_at'=>''];
+    $beforeRow = newsDbImportMapItem($beforeInput)['row'];
+    $before = newsDbCanonicalItemFromDatabaseRow($beforeRow);
+    $after = $before;
+    $after['title'] = 'Po';
+    $after['updated_at'] = $updatedAt;
+    $afterRow = newsDbImportMapItem($after)['row'];
+    $makeDeps = static function(array $rowsBefore, array $rowsAfter, string $uuid) use ($importTime): array {
+      return [
+        'uuid'=>fn()=>$uuid,
+        'acquire'=>fn()=>true,
+        'begin'=>fn()=>null,
+        'locked_state'=>fn()=>['rows'=>$rowsBefore,'journal'=>[['journal_id'=>1,'operation'=>'import','snapshot_sha256'=>newsDbSnapshotFromRows($rowsBefore, $importTime),'store_updated_at'=>$importTime]]],
+        'apply'=>fn()=>null,
+        'rows_after'=>fn()=>$rowsAfter,
+        'journal'=>fn()=>null,
+        'commit'=>fn()=>true,
+        'rollback'=>fn()=>null,
+        'release'=>fn()=>null,
+      ];
+    };
+    $results = [
+      newsDbWriteMutation('create', null, $after, $updatedAt, $makeDeps([], [$afterRow], '71111111-1111-4111-8111-111111111111')),
+      newsDbWriteMutation('update', $before, $after, $updatedAt, $makeDeps([$beforeRow], [$afterRow], '72222222-2222-4222-8222-222222222222')),
+      newsDbWriteMutation('delete', $before, null, $updatedAt, $makeDeps([$beforeRow], [], '73333333-3333-4333-8333-333333333333')),
+    ];
+    echo json_encode($results);
+  `);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.doesNotMatch(result.stderr, /Undefined array key|Warning|TypeError/);
+  const payloads = JSON.parse(result.stdout);
+  assert.deepEqual(payloads.map((payload) => payload.operation), ['create', 'update', 'delete']);
+  for (const payload of payloads) {
+    assert.match(payload.store_updated_at, /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}$/);
+  }
+});
+
+test('kod panelu nie używa nieistniejącego klucza db z newsDbImportUtc', () => {
+  const legacyKeyPattern = /newsDbImportUtc\s*\([\s\S]{0,240}?\)\s*\[\s*['"]db['"]\s*\]/;
+  for (const relativeDirectory of ['admin/helpers', 'admin/actions']) {
+    const directory = path.join(ROOT, relativeDirectory);
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      if (!entry.isFile() || !entry.name.endsWith('.php')) {
+        continue;
+      }
+      const relativeFile = path.join(relativeDirectory, entry.name);
+      const source = fs.readFileSync(path.join(ROOT, relativeFile), 'utf8');
+      assert.doesNotMatch(source, legacyKeyPattern, `${relativeFile}: używa nieistniejącego klucza ['db']`);
+    }
+  }
+});
+
 test('akcje zachowują file path, a DB nie pokazuje getMessage i porządkuje obrazy po commicie', () => {
   for (const name of ['news-save.php', 'news-status.php', 'news-delete.php']) {
     const source = fs.readFileSync(path.join(ROOT, 'admin', 'actions', name), 'utf8');

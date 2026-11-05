@@ -200,10 +200,16 @@ function newsDbWriteTransaction(
     }
 }
 
-function newsDbWriteMutation(string $operation, ?array $before, ?array $after, string $updatedAt): array
+function newsDbWriteMutation(
+    string $operation,
+    ?array $before,
+    ?array $after,
+    string $updatedAt,
+    ?array $dependencies = null
+): array
 {
-    $dbTime = newsDbImportUtc($updatedAt, false, 'store_updated_at')['db'];
-    return newsDbWriteTransaction($operation, $before, $after, $dbTime);
+    $dbTime = newsDbImportUtc($updatedAt, false, 'store_updated_at')['database'];
+    return newsDbWriteTransaction($operation, $before, $after, $dbTime, $dependencies);
 }
 
 function newsDbRebuildCacheAfterCommit(string $changeId): ?string
