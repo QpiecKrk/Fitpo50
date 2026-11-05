@@ -81,7 +81,7 @@ if (empty($sources)) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/panel.css?v=20261105-1">
+<link rel="stylesheet" href="assets/panel.css?v=20261105-2">
 </head>
 <body class="panel-body panel-body--news-form">
 
@@ -288,11 +288,18 @@ if (empty($sources)) {
     if (!selectionWithinEditor(selection)) {
       return;
     }
-    savedSelection = selection.getRangeAt(0).cloneRange();
+    const range = selection.getRangeAt(0);
+    if (range.collapsed) {
+      return;
+    }
+    savedSelection = range.cloneRange();
   }
 
   function restoreSelection() {
-    if (!savedSelection) return false;
+    if (!savedSelection || savedSelection.collapsed || !editor.contains(savedSelection.commonAncestorContainer)) {
+      savedSelection = null;
+      return false;
+    }
     const selection = window.getSelection();
     if (!selection) return false;
     selection.removeAllRanges();

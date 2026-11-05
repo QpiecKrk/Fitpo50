@@ -67,6 +67,25 @@ test('pasek zachowuje zaznaczenie przed dotykiem i przywraca je przed fokusem', 
     wrap.indexOf('restoreSelection()') < wrap.indexOf('editor.focus'),
     'Fokus nie może kasować zapamiętanego zakresu przed jego przywróceniem',
   );
+
+  const rememberStart = form.indexOf('function rememberSelection');
+  const rememberEnd = form.indexOf('function restoreSelection', rememberStart);
+  const remember = form.slice(rememberStart, rememberEnd);
+  assert.match(remember, /range\.collapsed[\s\S]{0,80}return/, 'Zwinięty zakres po scrollu nie może zastąpić zaznaczenia');
+  assert.doesNotMatch(form, /(?:scroll|touchmove)[\s\S]{0,160}savedSelection\s*=\s*null/);
+});
+
+test('mobilny pasek mieści formatowanie i osobny rząd czterech kolorów bez przewijania', () => {
+  const css = fs.readFileSync(PANEL_CSS, 'utf8');
+  const mobileStart = css.indexOf('.news-editor-mobile-bar {', css.indexOf('@media'));
+  const mobileEnd = css.indexOf('.news-editor-toolbar--links', mobileStart);
+  const mobileCss = css.slice(mobileStart, mobileEnd);
+  assert.ok(mobileStart >= 0 && mobileEnd > mobileStart, 'Brak mobilnego paska narzędzi');
+  assert.match(mobileCss, /flex-wrap:\s*wrap/);
+  assert.doesNotMatch(mobileCss, /overflow-x:\s*(?:auto|scroll)/);
+  assert.match(mobileCss, /\.news-editor-action:not\(\.news-color-chip\)[\s\S]{0,180}calc\(\(100%\s*-\s*0\.9rem\)\s*\/\s*3\)/);
+  assert.match(mobileCss, /\.news-color-chip[\s\S]{0,220}calc\(\(100%\s*-\s*1\.35rem\)\s*\/\s*4\)/);
+  assert.match(mobileCss, /\.news-color-chip[\s\S]{0,220}min-width:\s*44px/);
 });
 
 test('przyciski mają nazwy kolorów, rozmiar dotykowy i widoczny stan aktywny', () => {
