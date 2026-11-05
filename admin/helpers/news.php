@@ -370,8 +370,19 @@ function sanitizeNewsHtml(string $html): string {
 
     $allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'ul', 'ol', 'li', 'a', 'span'];
     $allowedAttrs = ['href', 'class', 'target', 'rel'];
+    $allowedClasses = [
+        'news-text-tone--1',
+        'news-text-tone--2',
+        'news-text-tone--3',
+        'news-text-tone--4',
+        'news-text-strong-black',
+        'p1',
+        'p2',
+        's1',
+        'Apple-converted-space',
+    ];
 
-    $cleanNode = static function (DOMNode $node) use (&$cleanNode, $allowedTags, $allowedAttrs): void {
+    $cleanNode = static function (DOMNode $node) use (&$cleanNode, $allowedTags, $allowedAttrs, $allowedClasses): void {
         for ($i = $node->childNodes->length - 1; $i >= 0; $i--) {
             $child = $node->childNodes->item($i);
             if (!$child instanceof DOMElement) {
@@ -400,6 +411,19 @@ function sanitizeNewsHtml(string $html): string {
 
                 if ($attrName === 'href' && preg_match('/^(javascript|vbscript|data):/i', $attr->value)) {
                     $child->removeAttribute('href');
+                }
+
+                if ($attrName === 'class') {
+                    $classNames = preg_split('/\s+/u', trim($attr->value)) ?: [];
+                    $safeClassNames = array_values(array_unique(array_filter(
+                        $classNames,
+                        static fn(string $className): bool => in_array($className, $allowedClasses, true)
+                    )));
+                    if ($safeClassNames === []) {
+                        $child->removeAttribute('class');
+                    } else {
+                        $child->setAttribute('class', implode(' ', $safeClassNames));
+                    }
                 }
             }
 

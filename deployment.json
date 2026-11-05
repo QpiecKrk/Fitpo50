@@ -1,14 +1,14 @@
 {
   "version": 3,
-  "release_id": "f42ab4a4-cd35-4530-b83d-c25e44888bcf",
-  "prepared_at": "2026-11-05T10:10:58+01:00",
-  "prepared_from_head": "b4887a3b38b6b02876a9d0031c71c92704afd5e4",
-  "publication_state_sha256": "f61c4ec25e3f06a5ae3a17f89e62007722640c5f1b9fe9e6f871e0f529d8fcea",
-  "public_fingerprint_sha256": "22dedcbf5ce840f4b65197be6a43294cd0e69d49249cfbcc464a3618eacd9df3",
+  "release_id": "703e5279-017a-412a-bb28-7535d1cf46b6",
+  "prepared_at": "2026-11-05T12:57:34+01:00",
+  "prepared_from_head": "f2cf11eed2ded669091409228ef8a203f0f9478b",
+  "publication_state_sha256": "b64ae7c08a637ecc16e29ddc23b2859a7154bd32e7a139e7ba97cb5441744577",
+  "public_fingerprint_sha256": "601f1e84d16022112906ae62b7becc3afa678ac8f7412b0d4de419d3c7a3ed33",
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",
-      "sha256": "569c7780c74c3516ce028d8f99b3f9e0ba91f8a76a3e939883a55956440e7528"
+      "sha256": "442277bccf92b0fbd08fec6157c1fc21caaee4f907e6343385e2b23b5129c784"
     },
     "runtime_images": [
       {

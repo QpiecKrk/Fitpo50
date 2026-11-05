@@ -81,7 +81,7 @@ if (empty($sources)) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/panel.css?v=20260416-6">
+<link rel="stylesheet" href="assets/panel.css?v=20261105-1">
 </head>
 <body class="panel-body panel-body--news-form">
 
@@ -142,10 +142,10 @@ if (empty($sources)) {
                 <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<strong class='news-text-strong-black'>" data-format-close="</strong>" data-active-check="class:news-text-strong-black" title="Czarny bold"><strong>B+</strong></button>
                 <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<em>" data-format-close="</em>" data-active-check="em" title="Kursywa"><em>I</em></button>
 
-                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--1'>" data-format-close="</span>" data-active-check="class:news-text-tone--1" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;background:#E6F6F8;border-color:#0B7285;"></button>
-                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--2'>" data-format-close="</span>" data-active-check="class:news-text-tone--2" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;background:#EAF1FF;border-color:#1D4ED8;"></button>
-                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
-                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--1'>" data-format-close="</span>" data-active-check="class:news-text-tone--1" aria-label="Zielony" title="Zielony"><span class="news-color-chip__swatch" aria-hidden="true"></span><span>Zielony</span></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--2'>" data-format-close="</span>" data-active-check="class:news-text-tone--2" aria-label="Niebieski" title="Niebieski"><span class="news-color-chip__swatch" aria-hidden="true"></span><span>Niebieski</span></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Czerwony" title="Czerwony"><span class="news-color-chip__swatch" aria-hidden="true"></span><span>Czerwony</span></button>
+                <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Żółty" title="Żółty"><span class="news-color-chip__swatch" aria-hidden="true"></span><span>Żółty</span></button>
               </aside>
 
               <div class="news-editor-main">
@@ -167,10 +167,10 @@ if (empty($sources)) {
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<strong>" data-format-close="</strong>" data-active-check="strong" title="Pogrubienie"><strong>B</strong></button>
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<strong class='news-text-strong-black'>" data-format-close="</strong>" data-active-check="class:news-text-strong-black" title="Czarny bold"><strong>B+</strong></button>
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-editor-action" data-format-open="<em>" data-format-close="</em>" data-active-check="em" title="Kursywa"><em>I</em></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--1'>" data-format-close="</span>" data-active-check="class:news-text-tone--1" aria-label="Kolor 1" title="Kolor 1" style="--chip-color:#0B7285;background:#E6F6F8;border-color:#0B7285;"></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--2'>" data-format-close="</span>" data-active-check="class:news-text-tone--2" aria-label="Kolor 2" title="Kolor 2" style="--chip-color:#1D4ED8;background:#EAF1FF;border-color:#1D4ED8;"></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
-              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--1'>" data-format-close="</span>" data-active-check="class:news-text-tone--1" aria-label="Zielony" title="Zielony"><span class="news-color-chip__swatch" aria-hidden="true"></span><span>Zielony</span></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--2'>" data-format-close="</span>" data-active-check="class:news-text-tone--2" aria-label="Niebieski" title="Niebieski"><span class="news-color-chip__swatch" aria-hidden="true"></span><span>Niebieski</span></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Czerwony" title="Czerwony"><span class="news-color-chip__swatch" aria-hidden="true"></span><span>Czerwony</span></button>
+              <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Żółty" title="Żółty"><span class="news-color-chip__swatch" aria-hidden="true"></span><span>Żółty</span></button>
             </div>
             <p id="news-content-error" role="alert"<?= $formErrorField === 'content' ? '' : ' hidden' ?> style="margin:0.45rem 0 0;color:#fff;background:#7f1d1d;padding:0.65rem 0.8rem;border-radius:8px;font-size:1.05rem;font-weight:700;"><?= h($formErrorField === 'content' ? $formErrorMessage : 'Dodaj treść newsa.') ?></p>
             <input type="hidden" id="news-content" name="content" value="<?= h($item['content_html']) ?>">
@@ -307,7 +307,6 @@ if (empty($sources)) {
   }
 
   function wrapSelection(openTag, closeTag) {
-    editor.focus();
     if (!restoreSelection()) {
       rememberSelection();
     }
@@ -328,6 +327,8 @@ if (empty($sources)) {
     document.execCommand('insertHTML', false, openTag + selectedHtml + closeTag);
     syncTextareaFromEditor();
     rememberSelection();
+    editor.focus({ preventScroll: true });
+    restoreSelection();
     updateToolbarState();
   }
 
