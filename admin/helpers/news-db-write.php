@@ -47,6 +47,38 @@ function newsDbWriteDiagnosticFields(Throwable $error): array
     ];
 }
 
+function newsDbWritePanelError(Throwable $error, string $phase): string
+{
+    if ($phase === 'prepare') {
+        return 'NEWS_PREPARE_FAILED';
+    }
+    if ($phase === 'post_commit') {
+        return 'NEWS_POST_COMMIT_FAILED: zapis w bazie został wykonany; nie powtarzaj operacji.';
+    }
+    if ($phase !== 'write' || !$error instanceof NewsDbWriteException) {
+        return 'NEWS_DB_WRITE_UNEXPECTED';
+    }
+
+    $allowedStages = [
+        'connect',
+        'get_lock',
+        'begin',
+        'locked_state',
+        'store_check',
+        'apply',
+        'rows_after',
+        'snapshot',
+        'journal',
+        'commit',
+    ];
+    $stage = in_array($error->stage, $allowedStages, true) ? $error->stage : 'NA';
+    $code = preg_match('/^[A-Z_]{3,64}$/', $error->diagnosticCode) === 1
+        ? $error->diagnosticCode
+        : 'NA';
+
+    return 'NEWS_DB_WRITE_FAILED [stage=' . $stage . '; code=' . $code . ']';
+}
+
 function newsDbWriteUuid(): string
 {
     $bytes = random_bytes(16);

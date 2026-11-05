@@ -45,6 +45,8 @@ $previousImageBase = null;
 $dbMode = newsStorageMode() === 'db';
 $dbChangeId = null;
 $cacheWarning = null;
+$dbPhase = 'prepare';
+$dbCommitted = false;
 
 try {
     $store = loadNewsStore();
@@ -148,7 +150,10 @@ try {
     ]);
 
     if ($dbMode) {
+        $dbPhase = 'write';
         $write = newsDbWriteMutation($existing === null ? 'create' : 'update', $existing, $item, $now);
+        $dbCommitted = true;
+        $dbPhase = 'post_commit';
         $dbChangeId = $write['change_id'];
         if ($previousImageBase !== null && $previousImageBase !== $imageBase
             && !deleteNewsImageVariants($previousImageBase)) {
@@ -194,10 +199,10 @@ try {
     exit;
 
 } catch (Throwable $e) {
-    if ($newUploadedImageBase !== null) {
+    if (!$dbCommitted && $newUploadedImageBase !== null) {
         deleteNewsImageVariants($newUploadedImageBase);
     }
-    $_SESSION['flash_error'] = $dbMode ? 'Błąd: NEWS_DB_WRITE_FAILED' : ('Błąd: ' . $e->getMessage());
+    $_SESSION['flash_error'] = $dbMode ? newsDbWritePanelError($e, $dbPhase) : ('Błąd: ' . $e->getMessage());
     header($redirect);
     exit;
 }

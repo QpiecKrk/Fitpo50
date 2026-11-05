@@ -187,19 +187,67 @@ test('kod panelu nie używa nieistniejącego klucza db z newsDbImportUtc', () =>
   }
 });
 
-test('akcje zachowują file path, a DB nie pokazuje getMessage i porządkuje obrazy po commicie', () => {
+test('panel rozróżnia prepare, write i post_commit bez ujawniania szczegółów wyjątku', () => {
+  const result = runPhp(`
+    require ${phpString(WRITER)};
+    $cases = [
+      newsDbWritePanelError(new RuntimeException('tajna ścieżka /srv/app'), 'prepare'),
+      newsDbWritePanelError(new TypeError('tajny typ'), 'write'),
+      newsDbWritePanelError(new NewsDbWriteException('NEWS_DB_WRITE_FAILED', 'id', 'apply', '23000', 4025, 'STALE_ITEM'), 'write'),
+      newsDbWritePanelError(new NewsDbWriteException('NEWS_DB_WRITE_FAILED', 'id', 'sekret', '23000', 4025, 'sekret'), 'write'),
+      newsDbWritePanelError(new RuntimeException('tajny post commit'), 'post_commit'),
+    ];
+    echo json_encode($cases);
+  `);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.deepEqual(JSON.parse(result.stdout), [
+    'NEWS_PREPARE_FAILED',
+    'NEWS_DB_WRITE_UNEXPECTED',
+    'NEWS_DB_WRITE_FAILED [stage=apply; code=STALE_ITEM]',
+    'NEWS_DB_WRITE_FAILED [stage=NA; code=NA]',
+    'NEWS_POST_COMMIT_FAILED: zapis w bazie został wykonany; nie powtarzaj operacji.',
+  ]);
+  assert.doesNotMatch(result.stdout, /tajna|tajny|\/srv|23000|4025/);
+});
+
+test('akcje DB oznaczają fazy i commit bezpośrednio po udanej mutacji', () => {
   for (const name of ['news-save.php', 'news-status.php', 'news-delete.php']) {
     const source = fs.readFileSync(path.join(ROOT, 'admin', 'actions', name), 'utf8');
     assert.match(source, /newsStorageMode\(\)\s*===\s*['"]db['"]/);
     assert.match(source, /saveNewsStore\(/, `${name}: brak zachowanego file path`);
-    assert.match(source, /\$dbMode[^;]*\?\s*['"]Błąd: NEWS_DB_WRITE_FAILED['"]\s*:\s*\(['"]Błąd: ['"]\s*\.\s*\$e->getMessage\(\)\)/);
+    assert.match(source, /\$dbPhase\s*=\s*['"]prepare['"]/);
+    assert.match(source, /\$dbCommitted\s*=\s*false/);
+    assert.match(source, /\$dbPhase\s*=\s*['"]write['"][\s\S]*newsDbWriteMutation\(/);
+    assert.match(source, /newsDbWriteMutation\([\s\S]{0,300}\$dbCommitted\s*=\s*true[\s\S]{0,120}\$dbPhase\s*=\s*['"]post_commit['"]/);
+    assert.match(source, /newsDbWritePanelError\(\$e,\s*\$dbPhase\)/);
+    assert.match(source, /:\s*\(['"]Błąd: ['"]\s*\.\s*\$e->getMessage\(\)\)/, `${name}: tryb file zmienił obsługę błędu`);
   }
+  for (const name of ['news-status.php', 'news-delete.php']) {
+    const source = fs.readFileSync(path.join(ROOT, 'admin', 'actions', name), 'utf8');
+    assert.match(source, /if\s*\(\$id\s*===\s*['"]['"]\)[\s\S]{0,180}\$dbMode\s*\?\s*['"]NEWS_PREPARE_FAILED['"]\s*:\s*['"]Brak identyfikatora newsa\./);
+  }
+});
+
+test('nowy obraz jest sprzątany przed commitem, ale nigdy po zatwierdzeniu DB', () => {
   const save = fs.readFileSync(path.join(ROOT, 'admin', 'actions', 'news-save.php'), 'utf8');
-  const remove = fs.readFileSync(path.join(ROOT, 'admin', 'actions', 'news-delete.php'), 'utf8');
-  assert.match(save, /NEWS_DB_WRITE_FAILED|newsDbWrite/);
-  assert.match(save, /catch\s*\(Throwable\s+\$e\)[\s\S]*\$newUploadedImageBase[\s\S]*deleteNewsImageVariants\(\$newUploadedImageBase\)/);
+  assert.match(save, /catch\s*\(Throwable\s+\$e\)[\s\S]*!\$dbCommitted[\s\S]*\$newUploadedImageBase[\s\S]*deleteNewsImageVariants\(\$newUploadedImageBase\)/);
   assert.ok(save.indexOf('newsDbWriteMutation') < save.indexOf('deleteNewsImageVariants($previousImageBase)'), 'stary obraz jest usuwany przed commitem DB');
+});
+
+test('delete usuwa obraz dopiero po commicie, a nieudane usunięcie zostawia kod sieroty', () => {
+  const remove = fs.readFileSync(path.join(ROOT, 'admin', 'actions', 'news-delete.php'), 'utf8');
   assert.ok(remove.indexOf('newsDbWrite') < remove.indexOf('deleteNewsImageVariants'), 'delete usuwa obraz przed commitem DB');
+  assert.match(remove, /deleteNewsImageVariants[\s\S]{0,180}NEWS_DB_IMAGE_ORPHAN/);
+});
+
+test('akcje DB zachowują bezpieczne kody cache i obrazu, a panel nie pokazuje diagnostyki SQL', () => {
+  const sources = ['news-save.php', 'news-status.php', 'news-delete.php']
+    .map((name) => fs.readFileSync(path.join(ROOT, 'admin', 'actions', name), 'utf8'));
+  assert.match(sources[0], /NEWS_DB_IMAGE_ORPHAN/);
+  assert.ok(sources.some((source) => source.includes('CACHE_REBUILD_REQUIRED') || source.includes('newsDbRebuildCacheAfterCommit')));
+  for (const source of sources) {
+    assert.doesNotMatch(source, /sqlState|driverCode|errorInfo|SQLSTATE/);
+  }
 });
 
 test('błąd cache po commicie ma jawny kod i nie uruchamia rollbacku', () => {

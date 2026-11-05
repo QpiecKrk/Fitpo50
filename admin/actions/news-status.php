@@ -14,18 +14,21 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $id = trim((string)($_POST['id'] ?? ''));
 $status = (string)($_POST['status'] ?? 'draft');
+$dbMode = newsStorageMode() === 'db';
 if (!in_array($status, ['draft', 'published'], true)) {
     $status = 'draft';
 }
 
 if ($id === '') {
-    $_SESSION['flash_error'] = 'Brak identyfikatora newsa.';
+    $_SESSION['flash_error'] = $dbMode ? 'NEWS_PREPARE_FAILED' : 'Brak identyfikatora newsa.';
     header('Location: ../news-dashboard.php');
     exit;
 }
 
+$dbPhase = 'prepare';
+$dbCommitted = false;
+
 try {
-    $dbMode = newsStorageMode() === 'db';
     $store = loadNewsStore();
     $item = findNewsItemById($store, $id);
 
@@ -52,7 +55,10 @@ try {
     $cacheWarning = null;
     if ($dbMode) {
         $operation = $status === 'published' ? 'publish' : 'unpublish';
+        $dbPhase = 'write';
         $write = newsDbWriteMutation($operation, findNewsItemById($store, $id), $item, $now);
+        $dbCommitted = true;
+        $dbPhase = 'post_commit';
         $cacheWarning = newsDbRebuildCacheAfterCommit($write['change_id']);
     } else {
         $store = upsertNewsItem($store, $item);
@@ -73,7 +79,7 @@ try {
         $_SESSION['flash_error'] = $cacheWarning;
     }
 } catch (Throwable $e) {
-    $_SESSION['flash_error'] = (isset($dbMode) && $dbMode) ? 'Błąd: NEWS_DB_WRITE_FAILED' : ('Błąd: ' . $e->getMessage());
+    $_SESSION['flash_error'] = $dbMode ? newsDbWritePanelError($e, $dbPhase) : ('Błąd: ' . $e->getMessage());
 }
 
 header('Location: ../news-dashboard.php');
