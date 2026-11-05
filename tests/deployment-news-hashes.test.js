@@ -215,7 +215,7 @@ test('deployment:prepare blokuje wynik bramki bez fallback_sha256', () => {
   assert.equal(markerCalled, false);
 });
 
-test('marker v3 zapisuje identyczny snapshot NEWS w źródle i eksporcie', () => {
+test('marker v4 zapisuje identyczny snapshot NEWS w źródle i eksporcie', () => {
   const root = createManagedTempDir({ prefix: 'fitpo50-deployment-news-marker-', projectRoot: process.cwd(), type: 'test' });
   try {
     for (const args of [
@@ -236,7 +236,7 @@ test('marker v3 zapisuje identyczny snapshot NEWS w źródle i eksporcie', () =>
       runtime_images: [{ path: IMAGE_PATH, sha256: sha256(IMAGE_BYTES) }],
     };
     const current = prepareDeploymentMarker(root, { newsSnapshot: snapshot });
-    assert.equal(current.version, 3);
+    assert.equal(current.version, 4);
     assert.deepEqual(current.news, newsSnapshot());
     assert.equal(
       fs.readFileSync(path.join(root, 'deployment.json'), 'utf8'),

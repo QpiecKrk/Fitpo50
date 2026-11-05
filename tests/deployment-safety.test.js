@@ -6,7 +6,7 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { changedRootArticles, prepareDeploymentMarker } = require('../scripts/prepare-deployment-marker');
 const { verifyDeployment } = require('../scripts/lib/deployment-live-verifier');
-const { cacheBustUrl, isPublicRootHtmlPath } = require('../scripts/deployment-live-verify');
+const { cacheBustUrl, isPublicRootHtmlPath, normalizeFinalResult, parseArgs, verificationTargetsForMarker } = require('../scripts/deployment-live-verify');
 const { ADMIN_SENSITIVE_PATHS, SENSITIVE_PATHS, classifyExposureResponse } = require('../scripts/security-exposure-check');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -97,7 +97,7 @@ test('deployment marker is identical in source and export', () => {
     newsSnapshot: deploymentNewsSnapshot(),
   });
   assert.equal(marker.release_id, 'release-test');
-  assert.equal(marker.version, 3);
+  assert.equal(marker.version, 4);
   assert.equal(marker.news.fallback.sha256, 'a'.repeat(64));
   assert.equal(fs.readFileSync(path.join(root, 'deployment.json'), 'utf8'), fs.readFileSync(path.join(root, '_site', 'deployment.json'), 'utf8'));
   assert.equal(Object.hasOwn(marker, 'publication_state_files'), false);
@@ -372,6 +372,57 @@ test('post-push validation never submits IndexNow automatically', () => {
   assert.doesNotMatch(finalize, /run\([^\n]*indexnow-release/);
   assert.doesNotMatch(push, /^\s*npm run indexnow:release\s*$/m);
   assert.match(finalize, /security-exposure-check/);
+});
+
+test('live finalize domyślnie wykonuje najwyżej 5 prób co 15 sekund', () => {
+  const args = parseArgs([]);
+  assert.equal(args.retries, 4);
+  assert.equal(args.delayMs, 15000);
+});
+
+test('live finalize sprawdza tylko marker i jawne cele bieżącego wydania', () => {
+  const baseUrl = 'https://fitpo50.pl';
+  const marker = {
+    version: 4,
+    verification_targets: [
+      { path: 'admin/news-form.php', mode: 'reachable' },
+      { path: 'assets/data/news-fallback.json', mode: 'sha256', sha256: 'a'.repeat(64) },
+    ],
+  };
+  assert.deepEqual(verificationTargetsForMarker(baseUrl, marker), [
+    { url: `${baseUrl}/deployment.json`, mode: 'marker' },
+    { url: `${baseUrl}/admin/news-form.php`, mode: 'reachable' },
+    { url: `${baseUrl}/assets/data/news-fallback.json`, mode: 'sha256', sha256: 'a'.repeat(64) },
+  ]);
+});
+
+test('aktualny marker i oczekujący CDN kończą się informacją, nie błędem wdrożenia', () => {
+  const result = normalizeFinalResult({ status: 'DEPLOYED', errors: ['stary cache'] });
+  assert.equal(result.status, 'CDN_REFRESH_PENDING');
+  assert.deepEqual(result.errors, ['stary cache']);
+  assert.equal(normalizeFinalResult({ status: 'PUSHED', errors: ['stary marker'] }).status, 'PUSHED');
+});
+
+test('marker v4 nie publikuje surowej listy zmienionych plików', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-scoped-marker-'));
+  try {
+    git(root, 'init');
+    git(root, 'config', 'user.email', 'test@example.com');
+    git(root, 'config', 'user.name', 'Test');
+    git(root, 'commit', '--allow-empty', '-m', 'base');
+    fs.mkdirSync(path.join(root, '_site', 'admin'), { recursive: true });
+    for (const file of ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt']) fs.writeFileSync(path.join(root, '_site', file), file);
+    fs.mkdirSync(path.join(root, '_site', 'assets', 'data'), { recursive: true });
+    fs.writeFileSync(path.join(root, '_site', 'assets', 'data', 'search-index.json'), '[]');
+    fs.writeFileSync(path.join(root, '_site', 'admin', 'news-form.php'), '<?php');
+    const marker = prepareDeploymentMarker(root, {
+      changedFiles: ['admin/news-form.php', '_site/admin/news-form.php', 'tests/news-editor-color.test.js'],
+      newsSnapshot: deploymentNewsSnapshot(),
+    });
+    assert.deepEqual(marker.change_scope, ['admin']);
+    assert.equal(Object.hasOwn(marker, 'changed_files'), false);
+    assert.deepEqual(marker.verification_targets, [{ path: 'admin/news-form.php', mode: 'reachable' }]);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
 });
 
 test('recovery dry-run and blocked apply preserve dirty and untracked files', () => {

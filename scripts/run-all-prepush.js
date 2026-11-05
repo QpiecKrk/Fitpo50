@@ -8,6 +8,7 @@ const crypto = require('crypto');
 const path = require('path');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { warsawIso } = require('./lib/time');
+const { classifyChangedFiles, collectChangedFiles } = require('./lib/change-scope');
 
 function prefixOutput(tag, stream, logger) {
   if (!stream) return;
@@ -100,31 +101,60 @@ async function main() {
 
   try {
     timings.push(await runStep('prepush:diff-guard', 'node', ['scripts/prepush-diff-guard.js']));
-    timings.push(await runStep('fitpo50:doctor', 'node', ['scripts/fitpo50-doctor.js']));
+    const fileArgIndex = process.argv.indexOf('--files-json');
+    const explicitFiles = fileArgIndex >= 0 ? JSON.parse(process.argv[fileArgIndex + 1] || '[]') : null;
+    const classification = classifyChangedFiles(explicitFiles || collectChangedFiles());
+    console.log(`[PREPUSH:SCOPE] ${classification.scopes.join('+')} (${classification.files.length} plików)`);
+    if (classification.full) {
+      timings.push(await runStep('fitpo50:doctor', 'node', ['scripts/fitpo50-doctor.js']));
+      const parallel = await Promise.all([
+        runStep('prepush:parallel:checks', 'node', ['scripts/prepush-parallel-checks.js', '--worktree', '--all']),
+        runStep('build', 'npm', ['run', 'build']),
+      ]);
+      timings.push(...parallel);
+    } else {
+      if (classification.scopes.includes('admin')) {
+        timings.push(await runStep('admin:changed', 'node', [
+          'scripts/run-admin-change-checks.js',
+          ...(explicitFiles ? ['--files-json', JSON.stringify(explicitFiles)] : []),
+        ]));
+        timings.push(await runStep('security:exposure', 'node', ['scripts/security-exposure-check.js', 'https://fitpo50.pl']));
+      }
+      if (classification.scopes.includes('news')) {
+        timings.push(await runStep('news:integrity', 'node', ['scripts/news-integrity-check.js']));
+        timings.push(await runStep('assets:mirror:check', 'node', ['scripts/sync-site-assets-mirror.js', '--check']));
+        timings.push(await runStep('news:tests', 'node', ['--test', 'tests/news-public-integrity.test.js', 'tests/news-deploy-sync-gate.test.js']));
+      }
+      if (classification.scopes.includes('articles')) {
+        const articleChecks = await Promise.all([
+          runStep('article:guard:diff', 'node', ['scripts/run-article-guard-diff.js']),
+          runStep('article:contract:diff', 'node', ['scripts/run-article-contract-diff.js']),
+          runStep('schema:validate', 'node', ['scripts/schema-validator.js', '--diff']),
+          runStep('date:modified:guard', 'node', ['scripts/date-modified-guard.js']),
+          runStep('build', 'npm', ['run', 'build']),
+        ]);
+        timings.push(...articleChecks);
+      }
+    }
 
-    const parallel = await Promise.all([
-      runStep('prepush:parallel:checks', 'node', ['scripts/prepush-parallel-checks.js', '--worktree']),
-      runStep('build', 'npm', ['run', 'build']),
-    ]);
-    timings.push(...parallel);
-
-    exportWorkspace = createManagedTempDir({ prefix: 'fitpo50-prepush-export-', type: 'prepush-export', projectRoot: process.cwd() });
-    exportDir = path.join(exportWorkspace, 'site');
-    const sourceSnapshotBeforeExport = repositorySnapshot();
-    timings.push(await runStep('export:fresh(tmp)', 'bash', ['./scripts/export_site.sh', exportDir], {
-      env: { SKIP_TS_BUILD: '1' },
-    }));
-    assertExportDidNotModifySources(sourceSnapshotBeforeExport, repositorySnapshot());
-    timings.push(await runStep('export:parity', 'node', [
-      'scripts/export-parity-check.js',
-      '--expected', exportDir,
-      '--actual', path.resolve('_site'),
-      '--report', path.resolve('data/reports/local/export-parity.json'),
-    ]));
-    timings.push(await runStep('smoke:static(fresh-export)', 'node', ['scripts/static-smoke-check.js', exportDir]));
-    exportStatus = 'COMPLETED';
-
-    timings.push(await runStep('tmp:cleanup:dry', 'node', ['scripts/tmp-cleanup.js', '--dry-run']));
+    if (classification.full || classification.scopes.includes('articles')) {
+      exportWorkspace = createManagedTempDir({ prefix: 'fitpo50-prepush-export-', type: 'prepush-export', projectRoot: process.cwd() });
+      exportDir = path.join(exportWorkspace, 'site');
+      const sourceSnapshotBeforeExport = repositorySnapshot();
+      timings.push(await runStep('export:fresh(tmp)', 'bash', ['./scripts/export_site.sh', exportDir], {
+        env: { SKIP_TS_BUILD: '1' },
+      }));
+      assertExportDidNotModifySources(sourceSnapshotBeforeExport, repositorySnapshot());
+      timings.push(await runStep('export:parity', 'node', [
+        'scripts/export-parity-check.js',
+        '--expected', exportDir,
+        '--actual', path.resolve('_site'),
+        '--report', path.resolve('data/reports/local/export-parity.json'),
+      ]));
+      timings.push(await runStep('smoke:static(fresh-export)', 'node', ['scripts/static-smoke-check.js', exportDir]));
+      exportStatus = 'COMPLETED';
+      timings.push(await runStep('tmp:cleanup:dry', 'node', ['scripts/tmp-cleanup.js', '--dry-run']));
+    }
   } finally {
     if (exportWorkspace) {
       disposeTempWorkspace(exportWorkspace, { status: exportStatus });

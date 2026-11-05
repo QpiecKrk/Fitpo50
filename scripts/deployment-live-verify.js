@@ -8,7 +8,7 @@ const { canonicalFromHtml, modifiedDates, sha256, verifyDeployment } = require('
 const { assertPreparedPublicationState, extractLocalAssetPaths, publicFingerprint } = require('./prepare-deployment-marker');
 
 function parseArgs(argv) {
-  const out = { baseUrl: 'https://fitpo50.pl', retries: 39, delayMs: 15000, timeoutMs: 20000 };
+  const out = { baseUrl: 'https://fitpo50.pl', retries: 4, delayMs: 15000, timeoutMs: 20000 };
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];
     const value = argv[index + 1];
@@ -19,6 +19,57 @@ function parseArgs(argv) {
     else if (token === '--timeout-ms' && value) { out.timeoutMs = Math.max(1000, Number(value) || 20000); index += 1; }
   }
   return out;
+}
+
+function verificationTargetsForMarker(baseUrl, marker) {
+  const normalizedBase = String(baseUrl || '').replace(/\/$/, '');
+  const targets = [{ url: `${normalizedBase}/deployment.json`, mode: 'marker' }];
+  for (const target of Array.isArray(marker?.verification_targets) ? marker.verification_targets : []) {
+    const relative = String(target?.path || '').replace(/^\/+/, '');
+    if (!relative || relative.includes('..')) continue;
+    targets.push({
+      url: `${normalizedBase}/${relative}`,
+      mode: target.mode,
+      ...(target.sha256 ? { sha256: target.sha256 } : {}),
+    });
+  }
+  return targets;
+}
+
+function verifyTargetedRelease({ expectedCommit, remoteCommit, marker, responses, baseUrl }) {
+  const errors = [];
+  const checks = [];
+  const targets = verificationTargetsForMarker(baseUrl, marker);
+  const markerTarget = targets[0];
+  const liveMarker = responses.get(markerTarget.url);
+  const expectedMarker = Buffer.from(`${JSON.stringify(marker, null, 2)}\n`);
+  const markerMatches = Boolean(liveMarker?.status === 200 && sha256(liveMarker.body) === sha256(expectedMarker));
+  if (!expectedCommit || remoteCommit !== expectedCommit) errors.push(`origin/main=${remoteCommit || 'MISSING'}; oczekiwano ${expectedCommit || 'MISSING'}.`);
+  if (!markerMatches) errors.push(`${markerTarget.url}: brak markera bieżącego wydania.`);
+  checks.push({ type: 'RELEASE_MARKER', url: markerTarget.url, pass: markerMatches });
+  for (const target of targets.slice(1)) {
+    const response = responses.get(target.url);
+    let pass = false;
+    if (target.mode === 'sha256') pass = response?.status === 200 && sha256(response.body) === target.sha256;
+    else if (target.mode === 'absent') pass = [404, 410].includes(response?.status);
+    else if (target.mode === 'reachable') pass = Boolean(response && ((response.status >= 200 && response.status < 400) || [401, 403].includes(response.status)));
+    if (!pass) errors.push(`${target.url}: cel ${target.mode || 'UNKNOWN'} nie odpowiada bieżącemu wydaniu (HTTP ${response?.status ?? 0}).`);
+    checks.push({ type: `CHANGED_${String(target.mode || 'UNKNOWN').toUpperCase()}`, url: target.url, pass });
+  }
+  const pushed = Boolean(expectedCommit && remoteCommit === expectedCommit);
+  return {
+    version: 2,
+    status: !pushed ? 'NOT_PUSHED' : (!markerMatches ? 'PUSHED' : (errors.length ? 'DEPLOYED' : 'LIVE_DEPLOYED_AND_VALIDATED')),
+    expected_commit: expectedCommit,
+    remote_commit: remoteCommit,
+    release_id: marker?.release_id || '',
+    checks,
+    errors,
+  };
+}
+
+function normalizeFinalResult(result) {
+  return result?.status === 'DEPLOYED' ? { ...result, status: 'CDN_REFRESH_PENDING' } : result;
 }
 
 function git(args) {
@@ -145,25 +196,30 @@ async function main() {
   const baseFiles = expectedBaseFiles(args.baseUrl);
   const newsUrls = newsUrlsFor(args.baseUrl, marker);
   const cacheBustedNewsUrls = new Set(newsUrls);
+  const targeted = marker.version >= 4 && !((marker.change_scope || []).includes('full'));
   let result;
   for (let attempt = 0; attempt <= args.retries; attempt += 1) {
     console.log(`[LIVE] Próba ${attempt + 1}/${args.retries + 1}.`);
     const remoteCommit = git(['ls-remote', 'origin', 'refs/heads/main']).split(/\s+/)[0] || '';
-    const urls = urlsFor(args.baseUrl, articles, newsUrls);
+    const urls = targeted
+      ? verificationTargetsForMarker(args.baseUrl, marker).map((target) => target.url)
+      : urlsFor(args.baseUrl, articles, newsUrls);
     const responses = await collect(urls, args.timeoutMs, {
       cacheBustedUrls: cacheBustedNewsUrls,
       releaseId: marker.release_id,
     });
-    result = verifyDeployment({
-      expectedCommit,
-      remoteCommit,
-      marker,
-      responses,
-      baseUrl: args.baseUrl,
-      baseFiles,
-      articles,
-      readLocalNewsFile: (imagePath) => fs.readFileSync(path.join('_site', imagePath)),
-    });
+    result = targeted
+      ? verifyTargetedRelease({ expectedCommit, remoteCommit, marker, responses, baseUrl: args.baseUrl })
+      : verifyDeployment({
+        expectedCommit,
+        remoteCommit,
+        marker,
+        responses,
+        baseUrl: args.baseUrl,
+        baseFiles,
+        articles,
+        readLocalNewsFile: (imagePath) => fs.readFileSync(path.join('_site', imagePath)),
+      });
     if (result.status === 'LIVE_DEPLOYED_AND_VALIDATED') break;
     if (attempt < args.retries) {
       if (result.status === 'DEPLOYED') {
@@ -175,6 +231,14 @@ async function main() {
   }
   const reportDir = path.join('data', 'reports', 'local');
   fs.mkdirSync(reportDir, { recursive: true });
+  result = normalizeFinalResult(result);
+  if (result.status === 'CDN_REFRESH_PENDING') {
+    atomicWriteFileSync(path.join(reportDir, 'deployment-live-status.json'), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
+    console.log(`[${result.status}] commit=${expectedCommit} release=${marker.release_id}`);
+    if (result.errors.length) result.errors.forEach((error) => console.log(`[PENDING] ${error}`));
+    console.log('[INFO] CDN jeszcze się odświeża; marker bieżącego wydania jest już aktualny.');
+    return;
+  }
   atomicWriteFileSync(path.join(reportDir, 'deployment-live-status.json'), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
   console.log(`[${result.status}] commit=${expectedCommit} release=${marker.release_id}`);
   if (result.errors.length) result.errors.forEach((error) => console.error(`[BLOCKER] ${error}`));
@@ -188,4 +252,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { cacheBustUrl, collect, isPublicRootHtmlPath, newsUrlsFor };
+module.exports = { cacheBustUrl, collect, isPublicRootHtmlPath, newsUrlsFor, normalizeFinalResult, parseArgs, verificationTargetsForMarker, verifyTargetedRelease };

@@ -9,6 +9,7 @@ const { canonicalFromHtml, modifiedDates } = require('./lib/deployment-live-veri
 const { categoryFileFromKey, normalizeCategory } = require('./lib/categories');
 const { warsawIso } = require('./lib/time');
 const { checkNewsFallbackSync } = require('./news-deploy-sync-gate');
+const { classifyChangedFiles, collectChangedFiles, isArticlePath, isNewsPath, withoutSitePrefix } = require('./lib/change-scope');
 
 const PUBLICATION_STATE_DETAILS = path.join('.cache', 'deployment-publication-state.json');
 
@@ -264,6 +265,33 @@ function normalizeNewsSnapshot(snapshot) {
   };
 }
 
+function deploymentVerificationTargets(rootDir, changedFiles) {
+  const targets = new Map();
+  for (const original of changedFiles || []) {
+    const relative = withoutSitePrefix(original);
+    if (!relative || ['deployment.json', 'data/news-live.json'].includes(relative)) continue;
+    const exported = path.join(rootDir, '_site', relative);
+    const source = path.join(rootDir, relative);
+    const isPublic = fs.existsSync(exported)
+      || relative.startsWith('admin/')
+      || isArticlePath(relative)
+      || isNewsPath(relative)
+      || relative === 'ads.txt';
+    if (!isPublic) continue;
+    if (!fs.existsSync(exported) && !fs.existsSync(source)) {
+      targets.set(relative, { path: relative, mode: 'absent' });
+      continue;
+    }
+    if (/\.php$/i.test(relative)) {
+      targets.set(relative, { path: relative, mode: 'reachable' });
+      continue;
+    }
+    const local = fs.existsSync(exported) ? exported : source;
+    targets.set(relative, { path: relative, mode: 'sha256', sha256: sha256(fs.readFileSync(local)) });
+  }
+  return [...targets.values()].sort((left, right) => left.path.localeCompare(right.path, 'pl'));
+}
+
 function prepareDeploymentMarker(rootDir, options = {}) {
   const siteDir = path.join(rootDir, '_site');
   if (!fs.existsSync(siteDir)) throw new Error('Brak katalogu _site. Najpierw wykonaj eksport.');
@@ -271,13 +299,21 @@ function prepareDeploymentMarker(rootDir, options = {}) {
   assertArticleInventoryComplete(rootDir, articles);
   const publicationState = publicationStateSnapshot(rootDir);
   const news = normalizeNewsSnapshot(options.newsSnapshot);
+  let changedFiles = options.changedFiles;
+  if (!changedFiles) {
+    try { changedFiles = collectChangedFiles(rootDir); }
+    catch (_error) { changedFiles = changedDeploymentPaths(rootDir); }
+  }
+  const changeClassification = classifyChangedFiles(changedFiles);
   const marker = {
-    version: 3,
+    version: 4,
     release_id: options.releaseId || crypto.randomUUID(),
     prepared_at: options.preparedAt || warsawIso(),
     prepared_from_head: gitLines(rootDir, ['rev-parse', 'HEAD'])[0] || '',
     publication_state_sha256: publicationState.fingerprint,
     public_fingerprint_sha256: publicFingerprint(siteDir),
+    change_scope: changeClassification.scopes,
+    verification_targets: deploymentVerificationTargets(rootDir, changedFiles),
     news,
     articles,
   };
@@ -316,6 +352,7 @@ module.exports = {
   assertPreparedPublicationState,
   changedDeploymentPaths,
   changedRootArticles,
+  deploymentVerificationTargets,
   extractLocalAssetPaths,
   prepareDeploymentMarker,
   normalizeNewsSnapshot,
