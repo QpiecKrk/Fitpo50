@@ -30,6 +30,35 @@ if (!empty($_GET['id'])) {
     }
 }
 
+$formOld = $_SESSION['news_form_old'] ?? null;
+unset($_SESSION['news_form_old']);
+$formErrorField = '';
+$formErrorMessage = '';
+$formImageReselect = false;
+$formDeleteImage = false;
+$requestedId = trim((string)($_GET['id'] ?? ''));
+
+if (is_array($formOld) && (string)($formOld['id'] ?? '') === $requestedId) {
+    $item['title'] = (string)($formOld['title'] ?? '');
+    $item['content_html'] = (string)($formOld['content'] ?? '');
+    $oldSortOrder = (int)($formOld['sort_order'] ?? 1);
+    $item['sort_order'] = ($oldSortOrder >= 1 && $oldSortOrder <= 9999) ? $oldSortOrder : 1;
+    $item['image_alt'] = (string)($formOld['image_alt'] ?? '');
+    $labels = (array)($formOld['source_label'] ?? []);
+    $urls = (array)($formOld['source_url'] ?? []);
+    $item['sources'] = [];
+    for ($index = 0, $count = max(count($labels), count($urls)); $index < $count; $index++) {
+        $item['sources'][] = [
+            'label' => (string)($labels[$index] ?? ''),
+            'url' => (string)($urls[$index] ?? ''),
+        ];
+    }
+    $formDeleteImage = !empty($formOld['delete_image']);
+    $formErrorField = (string)($formOld['error_field'] ?? '');
+    $formErrorMessage = (string)($formOld['error_message'] ?? '');
+    $formImageReselect = !empty($formOld['image_reselect']);
+}
+
 $logoUrl = 'assets/logo.jpg?v=2';
 $pageTitle = $editMode ? 'Edytuj news' : 'Dodaj news';
 $httpHost = strtolower((string)($_SERVER['HTTP_HOST'] ?? ''));
@@ -80,7 +109,16 @@ if (empty($sources)) {
       <a href="news-dashboard.php" class="btn-panel btn-panel--outline btn-panel--sm">← Wróć do listy</a>
     </div>
 
-    <form method="POST" action="actions/news-save.php" enctype="multipart/form-data" id="news-form" novalidate>
+    <?php if ($formErrorMessage !== ''): ?>
+      <div role="alert" aria-live="assertive" style="margin:0 0 1rem;padding:1rem 1.1rem;border:2px solid #ef4444;border-radius:12px;background:#3b1118;color:#fff;font-size:1.15rem;line-height:1.5;font-weight:650;">
+        <?= h($formErrorMessage) ?>
+        <?php if ($formImageReselect): ?>
+          <div style="margin-top:0.45rem;">Wybierz zdjęcie ponownie.</div>
+        <?php endif; ?>
+      </div>
+    <?php endif; ?>
+
+    <form method="POST" action="actions/news-save.php" enctype="multipart/form-data" id="news-form">
       <input type="hidden" name="csrf_token" value="<?= h($csrf) ?>">
       <input type="hidden" name="id" value="<?= h($item['id']) ?>">
 
@@ -88,7 +126,11 @@ if (empty($sources)) {
         <div class="form-main">
           <div class="form-group">
             <label for="title" class="form-label">Tytuł <span class="required">*</span></label>
-            <input type="text" id="title" name="title" class="form-input" required value="<?= h($item['title']) ?>" placeholder="np. Zimne kąpiele po treningu mogą hamować efekty">
+            <input type="text" id="title" name="title" class="form-input" required value="<?= h($item['title']) ?>" placeholder="np. Zimne kąpiele po treningu mogą hamować efekty"
+                   aria-invalid="<?= $formErrorField === 'title' ? 'true' : 'false' ?>"<?= $formErrorField === 'title' ? ' aria-describedby="news-title-error" style="border:3px solid #ef4444;outline:2px solid #fff;"' : '' ?>>
+            <?php if ($formErrorField === 'title'): ?>
+              <p id="news-title-error" role="alert" style="margin:0.45rem 0 0;color:#fff;background:#7f1d1d;padding:0.65rem 0.8rem;border-radius:8px;font-size:1.05rem;font-weight:700;"><?= h($formErrorMessage) ?></p>
+            <?php endif; ?>
           </div>
 
           <div class="form-group">
@@ -112,7 +154,11 @@ if (empty($sources)) {
                        class="news-content-editor"
                        contenteditable="true"
                        spellcheck="true"
-                       style="background:#ffffff;color:#102130;"
+                       role="textbox"
+                       aria-required="true"
+                       aria-invalid="<?= $formErrorField === 'content' ? 'true' : 'false' ?>"
+                       aria-describedby="news-content-error"
+                       style="background:#ffffff;color:#102130;<?= $formErrorField === 'content' ? 'border:3px solid #ef4444;outline:2px solid #fff;' : '' ?>"
                        data-placeholder="Wpisz treść newsa i formatuj ją z paska nad edytorem."></div>
                 </div>
               </div>
@@ -126,6 +172,7 @@ if (empty($sources)) {
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--3'>" data-format-close="</span>" data-active-check="class:news-text-tone--3" aria-label="Kolor 3" title="Kolor 3" style="--chip-color:#B45309;background:#FFF4E8;border-color:#B45309;"></button>
               <button type="button" class="btn-panel btn-panel--sm btn-panel--outline news-color-chip news-editor-action" data-format-open="<span class='news-text-tone--4'>" data-format-close="</span>" data-active-check="class:news-text-tone--4" aria-label="Kolor 4" title="Kolor 4" style="--chip-color:#7C3AED;background:#F4EDFF;border-color:#7C3AED;"></button>
             </div>
+            <p id="news-content-error" role="alert"<?= $formErrorField === 'content' ? '' : ' hidden' ?> style="margin:0.45rem 0 0;color:#fff;background:#7f1d1d;padding:0.65rem 0.8rem;border-radius:8px;font-size:1.05rem;font-weight:700;"><?= h($formErrorField === 'content' ? $formErrorMessage : 'Dodaj treść newsa.') ?></p>
             <input type="hidden" id="news-content" name="content" value="<?= h($item['content_html']) ?>">
           </div>
 
@@ -173,14 +220,18 @@ if (empty($sources)) {
                 </picture>
               </div>
               <label class="media-item__delete" style="margin:0.6rem 0 0.8rem;">
-                <input type="checkbox" name="delete_image" value="1"> Usuń obecną miniaturę
+                <input type="checkbox" name="delete_image" value="1"<?= $formDeleteImage ? ' checked' : '' ?>> Usuń obecną miniaturę
               </label>
             <?php endif; ?>
 
             <div class="form-group">
               <label for="news-image" class="form-label">Nowa miniatura</label>
-              <input type="file" id="news-image" name="news_image" class="form-input" accept="image/jpeg,image/png,image/webp,image/avif">
+              <input type="file" id="news-image" name="news_image" class="form-input" accept="image/jpeg,image/png,image/webp,image/avif"
+                     aria-invalid="<?= ($formErrorField === 'news_image' || $formImageReselect) ? 'true' : 'false' ?>"<?= ($formErrorField === 'news_image' || $formImageReselect) ? ' aria-describedby="news-image-error" style="border:3px solid #ef4444;outline:2px solid #fff;"' : '' ?>>
               <p class="form-hint">Po zapisie obraz będzie automatycznie zmniejszony i skonwertowany. Jeśli konwersja nie powiedzie się, zapis zostanie zablokowany.</p>
+              <?php if ($formErrorField === 'news_image' || $formImageReselect): ?>
+                <p id="news-image-error" role="alert" style="margin:0.45rem 0 0;color:#fff;background:#7f1d1d;padding:0.65rem 0.8rem;border-radius:8px;font-size:1.05rem;font-weight:700;"><?= h($formErrorField === 'news_image' ? $formErrorMessage . ' Wybierz zdjęcie ponownie.' : 'Wybierz zdjęcie ponownie.') ?></p>
+              <?php endif; ?>
             </div>
 
             <div class="form-group">
@@ -213,6 +264,7 @@ if (empty($sources)) {
   const addSourceButton = document.getElementById('add-source-btn');
   const sourcesList = document.getElementById('news-sources-list');
   const sourceTemplate = document.getElementById('news-source-template');
+  const contentError = document.getElementById('news-content-error');
   let savedSelection = null;
 
   if (!textarea || !editor) return;
@@ -360,7 +412,12 @@ if (empty($sources)) {
       syncTextareaFromEditor();
       if (!ensureEditorNotEmpty()) {
         event.preventDefault();
-        alert('Treść newsa jest wymagana.');
+        editor.setAttribute('aria-invalid', 'true');
+        editor.style.border = '3px solid #ef4444';
+        if (contentError) {
+          contentError.textContent = 'Dodaj treść newsa.';
+          contentError.hidden = false;
+        }
         editor.focus();
       }
     });

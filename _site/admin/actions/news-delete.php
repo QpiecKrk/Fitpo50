@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $id = trim((string)($_POST['id'] ?? ''));
 $dbMode = newsStorageMode() === 'db';
 if ($id === '') {
-    $_SESSION['flash_error'] = $dbMode ? 'NEWS_PREPARE_FAILED' : 'Brak identyfikatora newsa.';
+    $error = new NewsEditorValidationException('form', 'Wybierz news i spróbuj ponownie.');
+    $_SESSION['flash_error'] = $dbMode ? newsDbWritePanelError($error, 'prepare') : ('Błąd: ' . $error->getMessage());
     header('Location: ../news-dashboard.php');
     exit;
 }
@@ -28,7 +29,7 @@ try {
     $item = findNewsItemById($store, $id);
 
     if (!$item) {
-        throw new RuntimeException('Nie znaleziono newsa do usunięcia.');
+        throw new NewsEditorValidationException('form', 'Odśwież listę newsów i wybierz wpis ponownie.');
     }
 
     $wasPublished = ($item['status'] ?? '') === 'published';

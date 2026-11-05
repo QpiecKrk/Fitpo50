@@ -17,6 +17,38 @@ final class NewsDbWriteException extends RuntimeException
     }
 }
 
+final class NewsEditorValidationException extends RuntimeException
+{
+    public function __construct(
+        public readonly string $field,
+        string $editorMessage,
+        ?Throwable $previous = null
+    ) {
+        parent::__construct($editorMessage, 0, $previous);
+    }
+}
+
+function newsEditorFormState(
+    array $post,
+    NewsEditorValidationException $error,
+    bool $imageSelected,
+    string $safeContent
+): array {
+    return [
+        'id' => (string)($post['id'] ?? ''),
+        'title' => (string)($post['title'] ?? ''),
+        'content' => $safeContent,
+        'sort_order' => (string)($post['sort_order'] ?? '1'),
+        'image_alt' => (string)($post['image_alt'] ?? ''),
+        'source_label' => array_map(static fn($value): string => (string)$value, (array)($post['source_label'] ?? [])),
+        'source_url' => array_map(static fn($value): string => (string)$value, (array)($post['source_url'] ?? [])),
+        'delete_image' => !empty($post['delete_image']),
+        'error_field' => $error->field,
+        'error_message' => $error->getMessage(),
+        'image_reselect' => $imageSelected,
+    ];
+}
+
 function newsDbWriteDiagnosticFields(Throwable $error): array
 {
     $sqlState = 'NA';
@@ -50,7 +82,9 @@ function newsDbWriteDiagnosticFields(Throwable $error): array
 function newsDbWritePanelError(Throwable $error, string $phase): string
 {
     if ($phase === 'prepare') {
-        return 'NEWS_PREPARE_FAILED';
+        return $error instanceof NewsEditorValidationException
+            ? $error->getMessage()
+            : 'NEWS_PREPARE_FAILED';
     }
     if ($phase === 'post_commit') {
         return 'NEWS_POST_COMMIT_FAILED: zapis w bazie został wykonany; nie powtarzaj operacji.';

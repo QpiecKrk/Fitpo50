@@ -20,7 +20,8 @@ if (!in_array($status, ['draft', 'published'], true)) {
 }
 
 if ($id === '') {
-    $_SESSION['flash_error'] = $dbMode ? 'NEWS_PREPARE_FAILED' : 'Brak identyfikatora newsa.';
+    $error = new NewsEditorValidationException('form', 'Wybierz news i spróbuj ponownie.');
+    $_SESSION['flash_error'] = $dbMode ? newsDbWritePanelError($error, 'prepare') : ('Błąd: ' . $error->getMessage());
     header('Location: ../news-dashboard.php');
     exit;
 }
@@ -33,17 +34,17 @@ try {
     $item = findNewsItemById($store, $id);
 
     if (!$item) {
-        throw new RuntimeException('Nie znaleziono newsa do zmiany statusu.');
+        throw new NewsEditorValidationException('form', 'Odśwież listę newsów i wybierz wpis ponownie.');
     }
 
     if ($status === 'published') {
         $imageBase = trim((string)($item['image_base'] ?? ''));
         $imageHashes = normalizeNewsImageHashes($item['image_hashes'] ?? null);
         if ($imageBase !== '' && !newsImageVariantsExistStrict($imageBase)) {
-            throw new RuntimeException('Nie można opublikować: miniatura newsa jest niepełna lub nie istnieje w assets/news (.jpg/.webp/.avif). Dodaj miniaturę ponownie i zapisz.');
+            throw new NewsEditorValidationException('news_image', 'Wgraj miniaturę ponownie; wymagane są warianty JPG, WebP i AVIF.');
         }
         if ($imageBase !== '' && !newsImageHashesMatch($imageBase, $imageHashes)) {
-            throw new RuntimeException('Nie można opublikować: wykryto podmianę miniatury względem zapisanego wzorca. Wgraj miniaturę ponownie i zapisz.');
+            throw new NewsEditorValidationException('news_image', 'Wgraj miniaturę ponownie; zapisane warianty obrazu są niespójne.');
         }
     }
 

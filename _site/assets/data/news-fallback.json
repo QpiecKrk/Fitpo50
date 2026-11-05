@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-11-05T06:13:35+00:00",
+    "updatedAt": "2026-11-05T08:54:45+00:00",
     "items": [
+        {
+            "id": "news_af79649e836f",
+            "title": "Nowe wytyczne leczenia cholesterolu.",
+            "content_html": "<p><span>Polskie Towarzystwo Lipidologiczne opublikowało 2 listopada 2026 r. nowe wytyczne dotyczące leczenia wysokiego cholesterolu. Wśród ważnych <a href=\"zmiana-czasu-na-zimowy-po-50.html\">zmian</a> znalazły się konkretne zalecenia dotyczące codziennej aktywności fizycznej i sposobu odżywiania.</span></p><p><span>Więcej kroków dla zdrowego serca</span></p><p><span>Nowe zalecenia podkreślają znaczenie liczby kroków wykonywanych każdego dnia. <span class=\"news-text-tone--1\">Regularne chodzenie</span>, nawet bez intensywnego treningu, pomaga zmniejszać ryzyko chorób serca i <span class=\"news-text-tone--4\">przedwczesnej śmierci</span>. Korzyści zdrowotne pojawiają się już przy około 4000 kroków dziennie, a większa aktywność może przynosić dodatkowe efekty.</span></p><p><span>Dieta portfolio pomaga obniżyć cholesterol</span></p><p><span>Eksperci szczególnie zwracają uwagę na <span class=\"news-text-tone--2\">dietę portfolio, bogatą w orzechy, rośliny strączkowe, produkty owsiane i błonnik rozpuszczalny</span>. Badania pokazują, że taki sposób odżywiania może obniżyć poziom cholesterolu LDL średnio o około </span><span>17%.</span></p><p><span>Co to oznacza dla osób po 50. roku życia?</span></p><p><span>Nie trzeba od razu biegać maratonów ani stosować restrykcyjnych diet. Regularne spacery, więcej produktów roślinnych i ograniczenie <span class=\"news-text-tone--4\">tłuszczów nasyconych</span> to konkretne działania wspierające zdrowie serca. Przy podwyższonym ryzyku sercowo-naczyniowym zmiany stylu życia powinny uzupełniać, a nie zastępować zalecone leczenie.</span></p>",
+            "sort_order": 1,
+            "image": {
+                "avif": "./assets/news/news_20261105_085359_c7ab2760.avif",
+                "webp": "./assets/news/news_20261105_085359_c7ab2760.webp",
+                "jpg": "./assets/news/news_20261105_085359_c7ab2760.jpg",
+                "alt": "Zdrowa dieta i aktywne spacery po 50. roku życia – profilaktyka wysokiego cholesterolu.",
+                "width": 640,
+                "height": 480
+            },
+            "sources": [
+                {
+                    "label": "Polskie Towarzystwo Lipidologiczne⁠",
+                    "url": "https://ptlipid.pl/"
+                },
+                {
+                    "label": "Madonet",
+                    "url": "https://www.medonet.pl/choroby-od-a-do-z/choroby-ukladu-krazenia/nowe-wytyczne-w-leczeniu-cholesterolu-w-polsce-dwie-zmiany-dla-pacjentow/k3vnhyc"
+                }
+            ],
+            "updated_at": "2026-11-05T08:54:45+00:00",
+            "published_at": "2026-11-05T08:54:45+00:00",
+            "excerpt": "Polskie Towarzystwo Lipidologiczne opublikowało 2 listopada 2026 r. nowe wytyczne dotyczące leczenia wysokiego cholesterolu. Wśród ważnych zmian znalazły się konkretne zalecenia dotyczące codziennej aktywności fizycznej…"
+        },
         {
             "id": "news_5121ecb9f8c0",
             "title": "AI znalazła ukryty sygnał w EKG. Czy może przewidzieć nagłą śmierć sercową?",

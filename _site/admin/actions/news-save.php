@@ -27,7 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $id = trim((string)($_POST['id'] ?? ''));
-$title = trim(strip_tags((string)($_POST['title'] ?? '')));
+$titleInput = (string)($_POST['title'] ?? '');
+$title = trim(strip_tags($titleInput));
 $contentRaw = trim((string)($_POST['content'] ?? ''));
 $currentHref = trim((string)($_POST['current_href'] ?? ''));
 $status = 'draft';
@@ -47,26 +48,29 @@ $dbChangeId = null;
 $cacheWarning = null;
 $dbPhase = 'prepare';
 $dbCommitted = false;
+$hasNewUpload = isset($_FILES['news_image']) && (int)($_FILES['news_image']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
+$contentHtmlForForm = '';
 
 try {
     $store = loadNewsStore();
     $existing = $id !== '' ? findNewsItemById($store, $id) : null;
+    $contentHtmlForForm = sanitizeNewsHtml($contentRaw);
 
     if ($id !== '' && !$existing) {
-        throw new RuntimeException('Nie znaleziono newsa do edycji.');
+        throw new NewsEditorValidationException('form', 'Odśwież listę newsów i wybierz wpis ponownie.');
     }
 
     if ($title === '') {
-        throw new RuntimeException('Tytuł newsa jest wymagany.');
+        throw new NewsEditorValidationException('title', 'Dodaj tytuł newsa.');
     }
 
     if ($contentRaw === '') {
-        throw new RuntimeException('Treść newsa jest wymagana.');
+        throw new NewsEditorValidationException('content', 'Dodaj treść newsa.');
     }
 
-    $contentHtml = sanitizeNewsHtml($contentRaw);
+    $contentHtml = $contentHtmlForForm;
     if ($contentHtml === '') {
-        throw new RuntimeException('Po oczyszczeniu treści news jest pusty.');
+        throw new NewsEditorValidationException('content', 'Dodaj treść newsa.');
     }
 
     $contentPlain = trim(preg_replace('/\s+/u', ' ', strip_tags($contentHtml)) ?? '');
@@ -82,7 +86,7 @@ try {
 
     $linkErrors = validateInternalLinksInNewsHtml($contentHtml);
     if (!empty($linkErrors)) {
-        throw new RuntimeException(implode(' ', $linkErrors));
+        throw new NewsEditorValidationException('content', 'Popraw linki w treści newsa. ' . implode(' ', $linkErrors));
     }
 
     $sourcesResult = normalizeNewsSourcesLenient(
@@ -98,10 +102,12 @@ try {
     $imageBase = $existing['image_base'] ?? '';
     $imageHashes = normalizeNewsImageHashes($existing['image_hashes'] ?? null);
     $previousImageBase = $imageBase !== '' ? $imageBase : null;
-    $hasNewUpload = isset($_FILES['news_image']) && (int)($_FILES['news_image']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
-
     if ($hasNewUpload) {
-        $processed = processNewsImageUpload($_FILES['news_image']);
+        try {
+            $processed = processNewsImageUpload($_FILES['news_image']);
+        } catch (RuntimeException $error) {
+            throw new NewsEditorValidationException('news_image', 'Popraw miniaturę. ' . $error->getMessage(), $error);
+        }
         $imageBase = $processed['image_base'];
         $imageHashes = normalizeNewsImageHashes($processed['image_hashes'] ?? null);
         $newUploadedImageBase = $imageBase;
@@ -114,10 +120,10 @@ try {
     }
 
     if ($imageBase !== '' && !newsImageVariantsExistStrict($imageBase)) {
-        throw new RuntimeException('Miniatura została utracona lub jest niepełna (wymagane .jpg/.webp/.avif w assets/news). Wgraj miniaturę ponownie przed zapisem.');
+        throw new NewsEditorValidationException('news_image', 'Wgraj miniaturę ponownie; wymagane są warianty JPG, WebP i AVIF.');
     }
     if ($imageBase !== '' && !newsImageHashesMatch($imageBase, $imageHashes)) {
-        throw new RuntimeException('Wykryto podmianę miniatury newsa względem zapisanego wzorca. Wgraj miniaturę ponownie i zapisz.');
+        throw new NewsEditorValidationException('news_image', 'Wgraj miniaturę ponownie; zapisane warianty obrazu są niespójne.');
     }
     if ($imageBase !== '') {
         $imageHashes = newsImageVariantHashes($imageBase);
@@ -202,7 +208,11 @@ try {
     if (!$dbCommitted && $newUploadedImageBase !== null) {
         deleteNewsImageVariants($newUploadedImageBase);
     }
-    $_SESSION['flash_error'] = $dbMode ? newsDbWritePanelError($e, $dbPhase) : ('Błąd: ' . $e->getMessage());
+    if ($e instanceof NewsEditorValidationException && $dbPhase === 'prepare') {
+        $_SESSION['news_form_old'] = newsEditorFormState($_POST, $e, $hasNewUpload, $contentHtmlForForm);
+    } else {
+        $_SESSION['flash_error'] = $dbMode ? newsDbWritePanelError($e, $dbPhase) : ('Błąd: ' . $e->getMessage());
+    }
     header($redirect);
     exit;
 }

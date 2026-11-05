@@ -1,14 +1,14 @@
 {
   "version": 3,
-  "release_id": "b1268833-4418-49c6-8c5d-5da98a894131",
-  "prepared_at": "2026-11-05T09:21:40+01:00",
-  "prepared_from_head": "6b2efbd14c89877d69bf27db823db14a8ad4c362",
-  "publication_state_sha256": "8772f079b709896a237ac37d536c07980fe257c14091392a076638562e546311",
+  "release_id": "f42ab4a4-cd35-4530-b83d-c25e44888bcf",
+  "prepared_at": "2026-11-05T10:10:58+01:00",
+  "prepared_from_head": "b4887a3b38b6b02876a9d0031c71c92704afd5e4",
+  "publication_state_sha256": "f61c4ec25e3f06a5ae3a17f89e62007722640c5f1b9fe9e6f871e0f529d8fcea",
   "public_fingerprint_sha256": "22dedcbf5ce840f4b65197be6a43294cd0e69d49249cfbcc464a3618eacd9df3",
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",
-      "sha256": "a960b31a8acf639a4bdfa66419b247210a3c787c45a4c59eb73387ee97451322"
+      "sha256": "569c7780c74c3516ce028d8f99b3f9e0ba91f8a76a3e939883a55956440e7528"
     },
     "runtime_images": [
       {
@@ -58,6 +58,18 @@
       {
         "path": "assets/news/news_20261026_225852_45d19708.webp",
         "sha256": "8538ab30d13eeb63fdbf349013c1c0220f7f2ff1f0eecb95416f6cc8b05cbab7"
+      },
+      {
+        "path": "assets/news/news_20261105_085359_c7ab2760.avif",
+        "sha256": "c630989d2b30564815ff0e44dfe767433ba88fa4f0c3ff4afedfadaffac705c5"
+      },
+      {
+        "path": "assets/news/news_20261105_085359_c7ab2760.jpg",
+        "sha256": "e0ae5dfc68888dcf50be2a6f3ebdf58b4a06e2d54335edea4479b8ddf3b1e45e"
+      },
+      {
+        "path": "assets/news/news_20261105_085359_c7ab2760.webp",
+        "sha256": "03de44c85b02353ab3e35e53b757b868df2ddf7c97f4238df7cbe3313c308443"
       }
     ]
   },

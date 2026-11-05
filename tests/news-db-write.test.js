@@ -187,10 +187,11 @@ test('kod panelu nie używa nieistniejącego klucza db z newsDbImportUtc', () =>
   }
 });
 
-test('panel rozróżnia prepare, write i post_commit bez ujawniania szczegółów wyjątku', () => {
+test('panel pokazuje jawny błąd redakcyjny prepare, ale ukrywa błąd techniczny', () => {
   const result = runPhp(`
     require ${phpString(WRITER)};
     $cases = [
+      newsDbWritePanelError(new NewsEditorValidationException('title', 'Dodaj tytuł newsa.'), 'prepare'),
       newsDbWritePanelError(new RuntimeException('tajna ścieżka /srv/app'), 'prepare'),
       newsDbWritePanelError(new TypeError('tajny typ'), 'write'),
       newsDbWritePanelError(new NewsDbWriteException('NEWS_DB_WRITE_FAILED', 'id', 'apply', '23000', 4025, 'STALE_ITEM'), 'write'),
@@ -201,6 +202,7 @@ test('panel rozróżnia prepare, write i post_commit bez ujawniania szczegółó
   `);
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.deepEqual(JSON.parse(result.stdout), [
+    'Dodaj tytuł newsa.',
     'NEWS_PREPARE_FAILED',
     'NEWS_DB_WRITE_UNEXPECTED',
     'NEWS_DB_WRITE_FAILED [stage=apply; code=STALE_ITEM]',
@@ -208,6 +210,52 @@ test('panel rozróżnia prepare, write i post_commit bez ujawniania szczegółó
     'NEWS_POST_COMMIT_FAILED: zapis w bazie został wykonany; nie powtarzaj operacji.',
   ]);
   assert.doesNotMatch(result.stdout, /tajna|tajny|\/srv|23000|4025/);
+});
+
+test('formularz zachowuje bezpiecznie dane po błędzie tytułu lub treści i wskazuje pole', () => {
+  const save = fs.readFileSync(path.join(ROOT, 'admin', 'actions', 'news-save.php'), 'utf8');
+  const form = fs.readFileSync(path.join(ROOT, 'admin', 'news-form.php'), 'utf8');
+  const result = runPhp(`
+    require ${phpString(WRITER)};
+    $post = [
+      'id'=>'news_x', 'title'=>'', 'content'=>'<script>zle</script><p>Treść</p>',
+      'sort_order'=>'7', 'image_alt'=>'Opis', 'source_label'=>['Nazwa'],
+      'source_url'=>['https://example.com'], 'delete_image'=>'1'
+    ];
+    $state = newsEditorFormState(
+      $post,
+      new NewsEditorValidationException('title', 'Dodaj tytuł newsa.'),
+      true,
+      '<p>Treść</p>'
+    );
+    echo json_encode($state, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+  `);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.deepEqual(JSON.parse(result.stdout), {
+    id: 'news_x',
+    title: '',
+    content: '<p>Treść</p>',
+    sort_order: '7',
+    image_alt: 'Opis',
+    source_label: ['Nazwa'],
+    source_url: ['https://example.com'],
+    delete_image: true,
+    error_field: 'title',
+    error_message: 'Dodaj tytuł newsa.',
+    image_reselect: true,
+  });
+
+  assert.match(save, /new NewsEditorValidationException\(['"]title['"],\s*['"]Dodaj tytuł newsa\./);
+  assert.match(save, /new NewsEditorValidationException\(['"]content['"],\s*['"]Dodaj treść newsa\./);
+  assert.match(save, /\$_SESSION\[['"]news_form_old['"]\]/);
+  assert.match(save, /newsEditorFormState\(\$_POST,\s*\$e,\s*\$hasNewUpload,\s*\$contentHtmlForForm\)/);
+  assert.match(form, /\$_SESSION\[['"]news_form_old['"]\]/);
+  assert.match(form, /unset\(\$_SESSION\[['"]news_form_old['"]\]\)/);
+  assert.match(form, /aria-invalid/);
+  assert.match(form, /role=['"]alert['"]/);
+  assert.match(form, /Wybierz zdjęcie ponownie\./);
+  assert.match(form, /name=['"]title['"][^>]*required/);
+  assert.match(form, /aria-required=['"]true['"]/);
 });
 
 test('akcje DB oznaczają fazy i commit bezpośrednio po udanej mutacji', () => {
@@ -224,7 +272,8 @@ test('akcje DB oznaczają fazy i commit bezpośrednio po udanej mutacji', () => 
   }
   for (const name of ['news-status.php', 'news-delete.php']) {
     const source = fs.readFileSync(path.join(ROOT, 'admin', 'actions', name), 'utf8');
-    assert.match(source, /if\s*\(\$id\s*===\s*['"]['"]\)[\s\S]{0,180}\$dbMode\s*\?\s*['"]NEWS_PREPARE_FAILED['"]\s*:\s*['"]Brak identyfikatora newsa\./);
+    assert.match(source, /if\s*\(\$id\s*===\s*['"]['"]\)[\s\S]{0,220}new NewsEditorValidationException\(['"]form['"]/);
+    assert.match(source, /\$dbMode\s*\?\s*newsDbWritePanelError\(\$error,\s*['"]prepare['"]\)/);
   }
 });
 
