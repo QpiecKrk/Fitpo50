@@ -180,8 +180,6 @@ test('lista promocji obejmuje HTML, PDF, raport i dokładne warianty mediów', (
     'data/reports/published-articles-log.json',
     'data/reports/gsc-after-publication-queue.json',
     'data/reports/gsc-after-publication-queue.txt',
-    'data/reports/link-topology-report.json',
-    'data/reports/link-topology-report.md',
     'assets/data/search-index.json', '_site/assets/data/search-index.json',
     'llms-full.txt', '_site/llms-full.txt',
     'assets/nowy-hero.avif', '_site/assets/nowy-hero.avif',

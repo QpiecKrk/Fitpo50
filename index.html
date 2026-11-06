@@ -1711,16 +1711,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif" type="image/avif">
-          <source srcset="./assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.avif" type="image/avif">
+          <source srcset="./assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Szumy uszne po 50: skąd się biorą i kiedy iść do lekarza</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Skąd biorą się szumy uszne po 50-tce: słuch, ciśnienie, leki, stres. Kiedy to sygnał alarmowy i jak w Polsce dojść do laryngologa i badania słuchu.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="szumy-uszne-po-50-przyczyny.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Czy niejedzenie po 18:00 to najlepszy sposób na chudnięcie?</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Mit, że po 18:00 metabolizm się wyłącza, nie wyjaśnia chudnięcia. Pora jedzenia może coś zmieniać, ale nie przez magiczną godzinę. Sprawdź, co mówią badania.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="niejedzenie-po-18-a-chudniecie-mit.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2517,10 +2517,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Szumy uszne po 50: skąd się biorą i kiedy iść do lekarza',
-        excerpt: 'Skąd biorą się szumy uszne po 50-tce: słuch, ciśnienie, leki, stres. Kiedy to sygnał alarmowy i jak w Polsce dojść do laryngologa i badania słuchu.',
-        image: './assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp',
-        url: 'szumy-uszne-po-50-przyczyny.html'
+        title: 'Czy niejedzenie po 18:00 to najlepszy sposób na chudnięcie?',
+        excerpt: 'Mit, że po 18:00 metabolizm się wyłącza, nie wyjaśnia chudnięcia. Pora jedzenia może coś zmieniać, ale nie przez magiczną godzinę. Sprawdź, co mówią badania.',
+        image: './assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp',
+        url: 'niejedzenie-po-18-a-chudniecie-mit.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2550,6 +2550,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Mity',
+          title: 'Czy niejedzenie po 18:00 to najlepszy sposób na chudnięcie?',
+          excerpt: 'Mit, że po 18:00 metabolizm się wyłącza, nie wyjaśnia chudnięcia. Pora jedzenia może coś zmieniać, ale nie przez magiczną godzinę. Sprawdź, co mówią badania.',
+          image: './assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp',
+          url: 'niejedzenie-po-18-a-chudniecie-mit.html'
+        },
+        {
           category: 'Zdrowie',
           title: 'Szumy uszne po 50: skąd się biorą i kiedy iść do lekarza',
           excerpt: 'Skąd biorą się szumy uszne po 50-tce: słuch, ciśnienie, leki, stres. Kiedy to sygnał alarmowy i jak w Polsce dojść do laryngologa i badania słuchu.',
@@ -2562,13 +2569,6 @@
           excerpt: 'Magnez na nocne skurcze łydek po 50-tce: co mówi Cochrane, jakie leki i choroby bywają w tle, co ma słabe dowody i kiedy iść do lekarza po poradę.',
           image: './assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp',
           url: 'nocne-skurcze-lydek-po-50-magnez.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć',
-          excerpt: 'Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza.',
-          image: './assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp',
-          url: 'podwyzszony-kwas-moczowy-po-50.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

@@ -1,10 +1,10 @@
 {
   "version": 4,
-  "release_id": "afb64401-d23f-4bde-ad0b-0a2da879b8cd",
-  "prepared_at": "2026-11-06T05:40:34+01:00",
-  "prepared_from_head": "20aaa15300d5e133e67511bbbf56d7f2b682da5b",
-  "publication_state_sha256": "f17c4dbaf2d26040ac84ef0315b67d8b47cdf90a2926430acb75ad5c1691aba3",
-  "public_fingerprint_sha256": "ec1ee12324e7b69802480de0c26d85e5f3e95ccad182fead48a0793fbe8e440b",
+  "release_id": "cc1ad195-10d5-4cbc-b936-d79f77d8ee0f",
+  "prepared_at": "2026-11-06T21:38:00+01:00",
+  "prepared_from_head": "05e3591b22d53d338fec3e17ffd974d690351d63",
+  "publication_state_sha256": "de56ef77e9c4452711980d3708bda82c205b7e6b9d1c4f7755e403a2501ff77c",
+  "public_fingerprint_sha256": "a11d008a24e242709599193962a84e5885a58411e6c7b29057d9494f28f2bb22",
   "change_scope": [
     "full"
   ],
@@ -12,157 +12,172 @@
     {
       "path": "assets/data/search-index.json",
       "mode": "sha256",
-      "sha256": "b6b083970bcde93c7e40586a2335846b5607b8906aba55c9cf1d4a4c8b18a94e"
+      "sha256": "81ca674dd3c2027f08df016dad8d012816f022e9a516590e1381a7e9ae6a07ae"
     },
     {
-      "path": "assets/pdf/szumy-uszne-po-50-przyczyny.pdf",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.avif",
       "mode": "sha256",
-      "sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a"
+      "sha256": "f13b02c5da44ae57b32a6d38688aeffd9a7f4fdaa69ec4948827c3666e1abd4b"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.avif",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.jpg",
       "mode": "sha256",
-      "sha256": "da0eb697cd51215c3a5176e770c5227aa58ca48770897895fedd2e52395de1c9"
+      "sha256": "102463e456ca186a6ca26f373b3a70305589b021649b41f4b3a50642957f330f"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.jpg",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp",
       "mode": "sha256",
-      "sha256": "e77c0f0fa11ed382224e049159b09052e361f8c0ce8c3676934524e550eb5f99"
+      "sha256": "2798d80ee0117cabf8c72017e801042230e250e4a0c67ca2186e4dcc46f5bddb"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.webp",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.avif",
       "mode": "sha256",
-      "sha256": "1e84cf20e91a5c5f5fa0dedc710480bfbf47add871a7b8cdd3d059132fe4cd04"
+      "sha256": "4a7575e8db849a4df001be24c05c7735dd0a8647f962b324d2fdc7cfdf7a3545"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.avif",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.jpg",
       "mode": "sha256",
-      "sha256": "5a24881bbf4c65cf48ec29369bf6c26b4b2628935ede1d58b17a8f950006325a"
+      "sha256": "1bfb7f11fae376621e1477ce6a731d464afe37e7b413951f6d65fae0094719b9"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.jpg",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.webp",
       "mode": "sha256",
-      "sha256": "7f977fc9efa5cee54e8d4ac3fd6a8b289c6bbacd4c907ff296d72c912fa6b39e"
+      "sha256": "e051de32862155ba8b6288f675c411264d5c1fc9923f9b19030fcd50a8b33070"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.webp",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.avif",
       "mode": "sha256",
-      "sha256": "c66f70a1d544a0bbf96f2ec6ebee3fdd50633eab5661ab5939e10c0e266affcb"
+      "sha256": "61545276f6a82933c3f1333e8b6925c653168ee9ebe5e0353701ed541943bba5"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.avif",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.jpg",
       "mode": "sha256",
-      "sha256": "aa334839669831293f88510f3f2ebcaa3fe3b67021f51291bdc4df990b0d1c0a"
+      "sha256": "d673885462321df3c3ac9bf70eb1bf8e35f6bf3bb519fe16f60cdc80482c5710"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.jpg",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.webp",
       "mode": "sha256",
-      "sha256": "f3acfa9e31cc85177285d102523c290c3e748a3cb094d34bf635bb8ec8b2d58a"
+      "sha256": "f06c78913cc968d6dada6cb9991d6ee97b25c1544ffeff67d2cd57cb411cca63"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.webp",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.avif",
       "mode": "sha256",
-      "sha256": "5f9f971dbc95ab861979e4572c8ed3f6bb3f59c3faefcdd3fc4421f2156eb87b"
+      "sha256": "74c80e4f0252cd9f5ba52561d75e693088cd00781a25c724cd3c48a212e0b4e6"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.avif",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.jpg",
       "mode": "sha256",
-      "sha256": "aff7edb08d305d678436aa24f6f97881cde56e088d5d6278d0cfaa4927971f2f"
+      "sha256": "2dfa38a42b1d8d88ddd99545390b4200c60041626af695ddc2acb47fcbf92a55"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.jpg",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.webp",
       "mode": "sha256",
-      "sha256": "7caa8324e115a89dd8422ee8721a139907954f0e2d3acbe9660999be6447de62"
+      "sha256": "1b22bd7cdf025c3afce8c6898bde0e71bf2f69b2a27e6edd41110e28548b16e5"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.webp",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.avif",
       "mode": "sha256",
-      "sha256": "034169ff047c698e027db72e4b7547e54ae594434beb0425544d9da945ddf4a7"
+      "sha256": "4751ebdcc6d23ddaa294bdaec977a4c1aa498720a6d3eb5d4a9b826d848983d7"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.jpg",
       "mode": "sha256",
-      "sha256": "2eeb9098516c3586eef00d00f14fe782327b3b791b9d9c8e971e44b8b6029bc0"
+      "sha256": "8cc861a2ed893473661fe02ce8fb623c4ca0df47f7d1fdf9b9e84fe5c9c968a5"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.jpg",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.webp",
       "mode": "sha256",
-      "sha256": "83caf556d2b45f12ff8e1dadc8f466ab6ef096817047126ddcdec0537caa03c8"
+      "sha256": "e1b61924245a859590ccf664457b3f8332b582814f2025f90093e119113c22c6"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.avif",
       "mode": "sha256",
-      "sha256": "c4bb6034c9d027a9332c0b72e6ce6d3cd9f26c716506f616a99156a9bd58ebca"
+      "sha256": "a77db8699c481dd8a117ce6c56b933981fb7dea293be8245062e05056a90b32e"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.avif",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.jpg",
       "mode": "sha256",
-      "sha256": "10b2c643d78e5ff728ea7fece1b8a6de9eae207187cc296ff4a24197f0d3d5e5"
+      "sha256": "ed5938a63d904a64af14743231b99c2dbd89054d085d588ffbaea7ab666675cb"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.jpg",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.webp",
       "mode": "sha256",
-      "sha256": "dca7a62df17ca8764acc4cff31d64d5c96177a8c8db6a680bd3c6fe03f2b5ca7"
+      "sha256": "45e1aac7867415d4c95584e81e475473e9717d963ddeb2706daf5c5846927d8e"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.webp",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.avif",
       "mode": "sha256",
-      "sha256": "b0d20c4c5bd783d7999fdad45e5d4d3a29034534ceeaf23e7250d994dd5e67b8"
+      "sha256": "7036b75d8dca53bf025ff8627bc94b8fd3e6fa1fd39eb6b7cab17f2aff5a5bec"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.avif",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.jpg",
       "mode": "sha256",
-      "sha256": "b56b54fa36b2fb5f4ce91530dcbb7911dd890677aa9ed5e306ec9eccef351c05"
+      "sha256": "d116e253381e477f1d16d9f8a10cc10fab490b4c4cd1f20b78a40cb43c8a0079"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.jpg",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.webp",
       "mode": "sha256",
-      "sha256": "322a7fd5584993e4df80ba1432b86e3d7462675c432ab670606852cfceea5311"
+      "sha256": "1dfe51e2af6e1b51cdce7ad64957fb8ad850e33eb81e7bb317c06e993c936ef1"
     },
     {
-      "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.webp",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.avif",
       "mode": "sha256",
-      "sha256": "ba3c65478031ef38a3193fc86df59296b9cbe4a6ac4528105955819307ca386d"
+      "sha256": "129acc8e41d7d41683d2c6f0a4e2e9c00d49ed15d30a05adbdc527ce7f32665e"
     },
     {
-      "path": "data/crosslink-suggestions/szumy-uszne-po-50-przyczyny.json",
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.jpg",
       "mode": "sha256",
-      "sha256": "9f3f18f936d3dc7de052e6522fba1de4b962877ad5bfcd533ab5bb3bdb9f022b"
+      "sha256": "71dd480d8d27721cbde0f638300c1984eca03ea8596db7669ab2c9fabc29a73d"
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.webp",
+      "mode": "sha256",
+      "sha256": "a282dbc00336e4af87acebaafa84947ffc5dcbb1533ebd363adf6c03301961c3"
+    },
+    {
+      "path": "assets/pdf/niejedzenie-po-18-a-chudniecie-mit.pdf",
+      "mode": "sha256",
+      "sha256": "ee6c3eb09bf3fe0489ea38be40cf354140b4acf7ee3e16c2864f36a197c3d9b6"
+    },
+    {
+      "path": "data/crosslink-suggestions/niejedzenie-po-18-a-chudniecie-mit.json",
+      "mode": "sha256",
+      "sha256": "26f3d1ca751a7b2a3cb329b6123f2600b16c0b4bbfe230c09b1a87fae6554619"
     },
     {
       "path": "index.html",
       "mode": "sha256",
-      "sha256": "1b311e2d77cfa32ffb89f16f5ec20ad8423c358084ba8bec06a531c14e0ffd1e"
+      "sha256": "d317f71bd27b8c07513dd38712bd27fe6ed1ff0aef95c79552af0982b5d6d1ea"
     },
     {
       "path": "llms-full.txt",
       "mode": "sha256",
-      "sha256": "157fbb305f6c2bdbe60f807eb0131a46884c135f76905c71b65da7c48ef0969c"
+      "sha256": "eacc87f6a1b17fd690746e948ae2169030c4388adcd90f2131f8c77910ffd491"
     },
     {
       "path": "llms.txt",
       "mode": "sha256",
-      "sha256": "b099dce725b360f3fe098831300cd3f0e17aa96c9ce3d46de7de95cf664c5246"
+      "sha256": "8d6a44476690e26486312705753398a78ec5575986a3d9ec102ef5c31813d612"
+    },
+    {
+      "path": "mity.html",
+      "mode": "sha256",
+      "sha256": "e37125e3ad04a15502e31fedf1898db0d8682d98e2adb7d3045df5c59f05cae8"
+    },
+    {
+      "path": "niejedzenie-po-18-a-chudniecie-mit.html",
+      "mode": "sha256",
+      "sha256": "7a553a234a0fa368dd896d06984ea7b8fe22dafd1a7d8becf62fcd57fe6253e3"
     },
     {
       "path": "porady.html",
       "mode": "sha256",
-      "sha256": "09de4c8050b510f767291cd784fa6f4c314231cbe24eff2eb7ad3eedbe1284e9"
+      "sha256": "d4e88c5bad770dc67109908eb30b456c12bf0507cdcbf6812c346bd86e2ff6fa"
     },
     {
       "path": "sitemap.xml",
       "mode": "sha256",
-      "sha256": "ba2c4eda9d0e8b2197ea4f1d8e40f3e5acd166e656c7adcb040967337900d65f"
-    },
-    {
-      "path": "szumy-uszne-po-50-przyczyny.html",
-      "mode": "sha256",
-      "sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49"
-    },
-    {
-      "path": "zdrowie.html",
-      "mode": "sha256",
-      "sha256": "46c36246924bb96e0212b3f9455f6799996e26d3428bced90061b6a67641bba3"
+      "sha256": "911dd5972dee33f47faa52098ba480047aa379eb8ffc446666b1716f6d4449cd"
     }
   ],
   "news": {
@@ -235,13 +250,13 @@
   },
   "articles": [
     {
-      "file": "szumy-uszne-po-50-przyczyny.html",
-      "slug": "szumy-uszne-po-50-przyczyny",
-      "url": "https://fitpo50.pl/szumy-uszne-po-50-przyczyny.html",
+      "file": "niejedzenie-po-18-a-chudniecie-mit.html",
+      "slug": "niejedzenie-po-18-a-chudniecie-mit",
+      "url": "https://fitpo50.pl/niejedzenie-po-18-a-chudniecie-mit.html",
       "date_modified": "2026-11-06T09:30:00+01:00",
-      "html_sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49",
-      "pdf_path": "assets/pdf/szumy-uszne-po-50-przyczyny.pdf",
-      "pdf_sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a",
+      "html_sha256": "7a553a234a0fa368dd896d06984ea7b8fe22dafd1a7d8becf62fcd57fe6253e3",
+      "pdf_path": "assets/pdf/niejedzenie-po-18-a-chudniecie-mit.pdf",
+      "pdf_sha256": "ee6c3eb09bf3fe0489ea38be40cf354140b4acf7ee3e16c2864f36a197c3d9b6",
       "images": [
         {
           "path": "assets/logo-fitpo50.png",
@@ -250,6 +265,102 @@
         {
           "path": "assets/logo.jpg",
           "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.avif",
+          "sha256": "f13b02c5da44ae57b32a6d38688aeffd9a7f4fdaa69ec4948827c3666e1abd4b"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.jpg",
+          "sha256": "102463e456ca186a6ca26f373b3a70305589b021649b41f4b3a50642957f330f"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp",
+          "sha256": "2798d80ee0117cabf8c72017e801042230e250e4a0c67ca2186e4dcc46f5bddb"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.avif",
+          "sha256": "4a7575e8db849a4df001be24c05c7735dd0a8647f962b324d2fdc7cfdf7a3545"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.jpg",
+          "sha256": "1bfb7f11fae376621e1477ce6a731d464afe37e7b413951f6d65fae0094719b9"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.webp",
+          "sha256": "e051de32862155ba8b6288f675c411264d5c1fc9923f9b19030fcd50a8b33070"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.avif",
+          "sha256": "61545276f6a82933c3f1333e8b6925c653168ee9ebe5e0353701ed541943bba5"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.jpg",
+          "sha256": "d673885462321df3c3ac9bf70eb1bf8e35f6bf3bb519fe16f60cdc80482c5710"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.webp",
+          "sha256": "f06c78913cc968d6dada6cb9991d6ee97b25c1544ffeff67d2cd57cb411cca63"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.avif",
+          "sha256": "74c80e4f0252cd9f5ba52561d75e693088cd00781a25c724cd3c48a212e0b4e6"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.jpg",
+          "sha256": "2dfa38a42b1d8d88ddd99545390b4200c60041626af695ddc2acb47fcbf92a55"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.webp",
+          "sha256": "1b22bd7cdf025c3afce8c6898bde0e71bf2f69b2a27e6edd41110e28548b16e5"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.avif",
+          "sha256": "4751ebdcc6d23ddaa294bdaec977a4c1aa498720a6d3eb5d4a9b826d848983d7"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.jpg",
+          "sha256": "8cc861a2ed893473661fe02ce8fb623c4ca0df47f7d1fdf9b9e84fe5c9c968a5"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.webp",
+          "sha256": "e1b61924245a859590ccf664457b3f8332b582814f2025f90093e119113c22c6"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.avif",
+          "sha256": "a77db8699c481dd8a117ce6c56b933981fb7dea293be8245062e05056a90b32e"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.jpg",
+          "sha256": "ed5938a63d904a64af14743231b99c2dbd89054d085d588ffbaea7ab666675cb"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.webp",
+          "sha256": "45e1aac7867415d4c95584e81e475473e9717d963ddeb2706daf5c5846927d8e"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.avif",
+          "sha256": "7036b75d8dca53bf025ff8627bc94b8fd3e6fa1fd39eb6b7cab17f2aff5a5bec"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.jpg",
+          "sha256": "d116e253381e477f1d16d9f8a10cc10fab490b4c4cd1f20b78a40cb43c8a0079"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.webp",
+          "sha256": "1dfe51e2af6e1b51cdce7ad64957fb8ad850e33eb81e7bb317c06e993c936ef1"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.avif",
+          "sha256": "129acc8e41d7d41683d2c6f0a4e2e9c00d49ed15d30a05adbdc527ce7f32665e"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.jpg",
+          "sha256": "71dd480d8d27721cbde0f638300c1984eca03ea8596db7669ab2c9fabc29a73d"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.webp",
+          "sha256": "a282dbc00336e4af87acebaafa84947ffc5dcbb1533ebd363adf6c03301961c3"
         },
         {
           "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif",
@@ -276,54 +387,6 @@
           "sha256": "4d8c0ab30983fd934a41742304973b640b82f22bb2c1280f36662f39c1f7cb1d"
         },
         {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.avif",
-          "sha256": "da0eb697cd51215c3a5176e770c5227aa58ca48770897895fedd2e52395de1c9"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.jpg",
-          "sha256": "e77c0f0fa11ed382224e049159b09052e361f8c0ce8c3676934524e550eb5f99"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.webp",
-          "sha256": "1e84cf20e91a5c5f5fa0dedc710480bfbf47add871a7b8cdd3d059132fe4cd04"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.avif",
-          "sha256": "5a24881bbf4c65cf48ec29369bf6c26b4b2628935ede1d58b17a8f950006325a"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.jpg",
-          "sha256": "7f977fc9efa5cee54e8d4ac3fd6a8b289c6bbacd4c907ff296d72c912fa6b39e"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.webp",
-          "sha256": "c66f70a1d544a0bbf96f2ec6ebee3fdd50633eab5661ab5939e10c0e266affcb"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.avif",
-          "sha256": "aa334839669831293f88510f3f2ebcaa3fe3b67021f51291bdc4df990b0d1c0a"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.jpg",
-          "sha256": "f3acfa9e31cc85177285d102523c290c3e748a3cb094d34bf635bb8ec8b2d58a"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.webp",
-          "sha256": "5f9f971dbc95ab861979e4572c8ed3f6bb3f59c3faefcdd3fc4421f2156eb87b"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.avif",
-          "sha256": "aff7edb08d305d678436aa24f6f97881cde56e088d5d6278d0cfaa4927971f2f"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.jpg",
-          "sha256": "7caa8324e115a89dd8422ee8721a139907954f0e2d3acbe9660999be6447de62"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.webp",
-          "sha256": "034169ff047c698e027db72e4b7547e54ae594434beb0425544d9da945ddf4a7"
-        },
-        {
           "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif",
           "sha256": "2eeb9098516c3586eef00d00f14fe782327b3b791b9d9c8e971e44b8b6029bc0"
         },
@@ -334,48 +397,12 @@
         {
           "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp",
           "sha256": "c4bb6034c9d027a9332c0b72e6ce6d3cd9f26c716506f616a99156a9bd58ebca"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.avif",
-          "sha256": "10b2c643d78e5ff728ea7fece1b8a6de9eae207187cc296ff4a24197f0d3d5e5"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.jpg",
-          "sha256": "dca7a62df17ca8764acc4cff31d64d5c96177a8c8db6a680bd3c6fe03f2b5ca7"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.webp",
-          "sha256": "b0d20c4c5bd783d7999fdad45e5d4d3a29034534ceeaf23e7250d994dd5e67b8"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.avif",
-          "sha256": "b56b54fa36b2fb5f4ce91530dcbb7911dd890677aa9ed5e306ec9eccef351c05"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.jpg",
-          "sha256": "322a7fd5584993e4df80ba1432b86e3d7462675c432ab670606852cfceea5311"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.webp",
-          "sha256": "ba3c65478031ef38a3193fc86df59296b9cbe4a6ac4528105955819307ca386d"
-        },
-        {
-          "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.avif",
-          "sha256": "ce9464f3ecb1c509c3094556694a48089dde489d150a5d0cb23e8ff782c305f8"
-        },
-        {
-          "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.jpg",
-          "sha256": "bc5b6124a1ab6cfec9f02431e4e68f33d9c0ea2c33a8f7c540d3984fbd2172bf"
-        },
-        {
-          "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp",
-          "sha256": "fd523383b79c504205e3b821bb54352659ce269bc56cc8e7894ee1887a5d9608"
         }
       ],
       "listing_paths": [
         "index.html",
         "porady.html",
-        "zdrowie.html",
+        "mity.html",
         "assets/data/search-index.json"
       ]
     }

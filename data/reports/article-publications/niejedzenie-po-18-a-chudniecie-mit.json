@@ -1,0 +1,536 @@
+{
+  "version": 1,
+  "transaction_id": "article-niejedzenie-po-18-a-chudniecie-mit-1793996517798-31520",
+  "generated_at": "2026-11-06T21:22:29+01:00",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "niejedzenie-po-18-a-chudniecie-mit",
+  "url": "https://fitpo50.pl/niejedzenie-po-18-a-chudniecie-mit.html",
+  "manifest_file": "data/reports/article-publications/niejedzenie-po-18-a-chudniecie-mit.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "TECHNICAL_PREVIEW_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "niejedzenie-po-18-a-chudniecie-mit.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7a553a234a0fa368dd896d06984ea7b8fe22dafd1a7d8becf62fcd57fe6253e3",
+      "bytes": 48043
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "1b311e2d77cfa32ffb89f16f5ec20ad8423c358084ba8bec06a531c14e0ffd1e",
+      "after_sha256": "d317f71bd27b8c07513dd38712bd27fe6ed1ff0aef95c79552af0982b5d6d1ea",
+      "bytes": 119877
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "09de4c8050b510f767291cd784fa6f4c314231cbe24eff2eb7ad3eedbe1284e9",
+      "after_sha256": "d4e88c5bad770dc67109908eb30b456c12bf0507cdcbf6812c346bd86e2ff6fa",
+      "bytes": 165596
+    },
+    {
+      "path": "mity.html",
+      "action": "UPDATE",
+      "before_sha256": "8366944fc6386b8f607b7261b25a7740830e122f56db016ffc3f3e20a31363ce",
+      "after_sha256": "e37125e3ad04a15502e31fedf1898db0d8682d98e2adb7d3045df5c59f05cae8",
+      "bytes": 39258
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "ba2c4eda9d0e8b2197ea4f1d8e40f3e5acd166e656c7adcb040967337900d65f",
+      "after_sha256": "911dd5972dee33f47faa52098ba480047aa379eb8ffc446666b1716f6d4449cd",
+      "bytes": 20592
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "b099dce725b360f3fe098831300cd3f0e17aa96c9ce3d46de7de95cf664c5246",
+      "after_sha256": "8d6a44476690e26486312705753398a78ec5575986a3d9ec102ef5c31813d612",
+      "bytes": 40286
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "157fbb305f6c2bdbe60f807eb0131a46884c135f76905c71b65da7c48ef0969c",
+      "after_sha256": "eacc87f6a1b17fd690746e948ae2169030c4388adcd90f2131f8c77910ffd491",
+      "bytes": 926720
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "b6b083970bcde93c7e40586a2335846b5607b8906aba55c9cf1d4a4c8b18a94e",
+      "after_sha256": "81ca674dd3c2027f08df016dad8d012816f022e9a516590e1381a7e9ae6a07ae",
+      "bytes": 972412
+    },
+    {
+      "path": "assets/pdf/niejedzenie-po-18-a-chudniecie-mit.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ee6c3eb09bf3fe0489ea38be40cf354140b4acf7ee3e16c2864f36a197c3d9b6",
+      "bytes": 753956
+    },
+    {
+      "path": "data/crosslink-suggestions/niejedzenie-po-18-a-chudniecie-mit.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "26f3d1ca751a7b2a3cb329b6123f2600b16c0b4bbfe230c09b1a87fae6554619",
+      "bytes": 1304
+    },
+    {
+      "path": "data/reports/article-preview/niejedzenie-po-18-a-chudniecie-mit.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5f0193fc69283c251828827996ccf7132d0c794a6d91fe4683a74bf755c7c7f8",
+      "bytes": 24067
+    },
+    {
+      "path": "data/reports/article-preview/niejedzenie-po-18-a-chudniecie-mit.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ce2e2b4c371ecd383dc41b346117739829c8a0505b24f549c6a049eb905ac589",
+      "bytes": 356
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "7f5cb65a0d20ee7ae6d7728ae0d4d8d4a30431e0aafbb1159772dde9cd7d97af",
+      "after_sha256": "0aba832058fc74fef98d7e612d5f58f5311b4c31025c27a1f2d3c90363499cfc",
+      "bytes": 64843
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "eab13ce6500cfb419dc6feabd128f87da9615cb5a2a38fbe024493354d07b58f",
+      "after_sha256": "e35345f26299850450f0b7f796b1706ef4a4c919213d0eef64194b2efafe45d1",
+      "bytes": 6933
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "b87ce56697e4bcbc696d5b29bfa064d702eeb153c29a1113a79bc338fc9827bd",
+      "after_sha256": "f3c2d2654d3d7b0ee6d22775f005470660ba22f1621686ea9a05679e1721b392",
+      "bytes": 3378
+    },
+    {
+      "path": "_site/niejedzenie-po-18-a-chudniecie-mit.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7a553a234a0fa368dd896d06984ea7b8fe22dafd1a7d8becf62fcd57fe6253e3",
+      "bytes": 48043
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "1b311e2d77cfa32ffb89f16f5ec20ad8423c358084ba8bec06a531c14e0ffd1e",
+      "after_sha256": "d317f71bd27b8c07513dd38712bd27fe6ed1ff0aef95c79552af0982b5d6d1ea",
+      "bytes": 119877
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "09de4c8050b510f767291cd784fa6f4c314231cbe24eff2eb7ad3eedbe1284e9",
+      "after_sha256": "d4e88c5bad770dc67109908eb30b456c12bf0507cdcbf6812c346bd86e2ff6fa",
+      "bytes": 165596
+    },
+    {
+      "path": "_site/mity.html",
+      "action": "UPDATE",
+      "before_sha256": "8366944fc6386b8f607b7261b25a7740830e122f56db016ffc3f3e20a31363ce",
+      "after_sha256": "e37125e3ad04a15502e31fedf1898db0d8682d98e2adb7d3045df5c59f05cae8",
+      "bytes": 39258
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "ba2c4eda9d0e8b2197ea4f1d8e40f3e5acd166e656c7adcb040967337900d65f",
+      "after_sha256": "911dd5972dee33f47faa52098ba480047aa379eb8ffc446666b1716f6d4449cd",
+      "bytes": 20592
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "b099dce725b360f3fe098831300cd3f0e17aa96c9ce3d46de7de95cf664c5246",
+      "after_sha256": "8d6a44476690e26486312705753398a78ec5575986a3d9ec102ef5c31813d612",
+      "bytes": 40286
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "157fbb305f6c2bdbe60f807eb0131a46884c135f76905c71b65da7c48ef0969c",
+      "after_sha256": "eacc87f6a1b17fd690746e948ae2169030c4388adcd90f2131f8c77910ffd491",
+      "bytes": 926720
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "b6b083970bcde93c7e40586a2335846b5607b8906aba55c9cf1d4a4c8b18a94e",
+      "after_sha256": "81ca674dd3c2027f08df016dad8d012816f022e9a516590e1381a7e9ae6a07ae",
+      "bytes": 972412
+    },
+    {
+      "path": "_site/assets/pdf/niejedzenie-po-18-a-chudniecie-mit.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ee6c3eb09bf3fe0489ea38be40cf354140b4acf7ee3e16c2864f36a197c3d9b6",
+      "bytes": 753956
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/niejedzenie-po-18-a-chudniecie-mit.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "26f3d1ca751a7b2a3cb329b6123f2600b16c0b4bbfe230c09b1a87fae6554619",
+      "bytes": 1304
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f13b02c5da44ae57b32a6d38688aeffd9a7f4fdaa69ec4948827c3666e1abd4b",
+      "bytes": 83795
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f13b02c5da44ae57b32a6d38688aeffd9a7f4fdaa69ec4948827c3666e1abd4b",
+      "bytes": 83795
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2798d80ee0117cabf8c72017e801042230e250e4a0c67ca2186e4dcc46f5bddb",
+      "bytes": 99362
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2798d80ee0117cabf8c72017e801042230e250e4a0c67ca2186e4dcc46f5bddb",
+      "bytes": 99362
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "102463e456ca186a6ca26f373b3a70305589b021649b41f4b3a50642957f330f",
+      "bytes": 133993
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "102463e456ca186a6ca26f373b3a70305589b021649b41f4b3a50642957f330f",
+      "bytes": 133993
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "74c80e4f0252cd9f5ba52561d75e693088cd00781a25c724cd3c48a212e0b4e6",
+      "bytes": 60681
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "74c80e4f0252cd9f5ba52561d75e693088cd00781a25c724cd3c48a212e0b4e6",
+      "bytes": 60681
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1b22bd7cdf025c3afce8c6898bde0e71bf2f69b2a27e6edd41110e28548b16e5",
+      "bytes": 83208
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1b22bd7cdf025c3afce8c6898bde0e71bf2f69b2a27e6edd41110e28548b16e5",
+      "bytes": 83208
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2dfa38a42b1d8d88ddd99545390b4200c60041626af695ddc2acb47fcbf92a55",
+      "bytes": 158322
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2dfa38a42b1d8d88ddd99545390b4200c60041626af695ddc2acb47fcbf92a55",
+      "bytes": 158322
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7036b75d8dca53bf025ff8627bc94b8fd3e6fa1fd39eb6b7cab17f2aff5a5bec",
+      "bytes": 130044
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7036b75d8dca53bf025ff8627bc94b8fd3e6fa1fd39eb6b7cab17f2aff5a5bec",
+      "bytes": 130044
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1dfe51e2af6e1b51cdce7ad64957fb8ad850e33eb81e7bb317c06e993c936ef1",
+      "bytes": 151014
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1dfe51e2af6e1b51cdce7ad64957fb8ad850e33eb81e7bb317c06e993c936ef1",
+      "bytes": 151014
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d116e253381e477f1d16d9f8a10cc10fab490b4c4cd1f20b78a40cb43c8a0079",
+      "bytes": 192404
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d116e253381e477f1d16d9f8a10cc10fab490b4c4cd1f20b78a40cb43c8a0079",
+      "bytes": 192404
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a77db8699c481dd8a117ce6c56b933981fb7dea293be8245062e05056a90b32e",
+      "bytes": 206954
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a77db8699c481dd8a117ce6c56b933981fb7dea293be8245062e05056a90b32e",
+      "bytes": 206954
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "45e1aac7867415d4c95584e81e475473e9717d963ddeb2706daf5c5846927d8e",
+      "bytes": 272656
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "45e1aac7867415d4c95584e81e475473e9717d963ddeb2706daf5c5846927d8e",
+      "bytes": 272656
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ed5938a63d904a64af14743231b99c2dbd89054d085d588ffbaea7ab666675cb",
+      "bytes": 280658
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ed5938a63d904a64af14743231b99c2dbd89054d085d588ffbaea7ab666675cb",
+      "bytes": 280658
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "61545276f6a82933c3f1333e8b6925c653168ee9ebe5e0353701ed541943bba5",
+      "bytes": 130209
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "61545276f6a82933c3f1333e8b6925c653168ee9ebe5e0353701ed541943bba5",
+      "bytes": 130209
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f06c78913cc968d6dada6cb9991d6ee97b25c1544ffeff67d2cd57cb411cca63",
+      "bytes": 147474
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f06c78913cc968d6dada6cb9991d6ee97b25c1544ffeff67d2cd57cb411cca63",
+      "bytes": 147474
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d673885462321df3c3ac9bf70eb1bf8e35f6bf3bb519fe16f60cdc80482c5710",
+      "bytes": 186225
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d673885462321df3c3ac9bf70eb1bf8e35f6bf3bb519fe16f60cdc80482c5710",
+      "bytes": 186225
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4a7575e8db849a4df001be24c05c7735dd0a8647f962b324d2fdc7cfdf7a3545",
+      "bytes": 67025
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4a7575e8db849a4df001be24c05c7735dd0a8647f962b324d2fdc7cfdf7a3545",
+      "bytes": 67025
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e051de32862155ba8b6288f675c411264d5c1fc9923f9b19030fcd50a8b33070",
+      "bytes": 90316
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e051de32862155ba8b6288f675c411264d5c1fc9923f9b19030fcd50a8b33070",
+      "bytes": 90316
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1bfb7f11fae376621e1477ce6a731d464afe37e7b413951f6d65fae0094719b9",
+      "bytes": 164220
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1bfb7f11fae376621e1477ce6a731d464afe37e7b413951f6d65fae0094719b9",
+      "bytes": 164220
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "129acc8e41d7d41683d2c6f0a4e2e9c00d49ed15d30a05adbdc527ce7f32665e",
+      "bytes": 138631
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "129acc8e41d7d41683d2c6f0a4e2e9c00d49ed15d30a05adbdc527ce7f32665e",
+      "bytes": 138631
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a282dbc00336e4af87acebaafa84947ffc5dcbb1533ebd363adf6c03301961c3",
+      "bytes": 160402
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a282dbc00336e4af87acebaafa84947ffc5dcbb1533ebd363adf6c03301961c3",
+      "bytes": 160402
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "71dd480d8d27721cbde0f638300c1984eca03ea8596db7669ab2c9fabc29a73d",
+      "bytes": 196440
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "71dd480d8d27721cbde0f638300c1984eca03ea8596db7669ab2c9fabc29a73d",
+      "bytes": 196440
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4751ebdcc6d23ddaa294bdaec977a4c1aa498720a6d3eb5d4a9b826d848983d7",
+      "bytes": 143323
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4751ebdcc6d23ddaa294bdaec977a4c1aa498720a6d3eb5d4a9b826d848983d7",
+      "bytes": 143323
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e1b61924245a859590ccf664457b3f8332b582814f2025f90093e119113c22c6",
+      "bytes": 173912
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e1b61924245a859590ccf664457b3f8332b582814f2025f90093e119113c22c6",
+      "bytes": 173912
+    },
+    {
+      "path": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8cc861a2ed893473661fe02ce8fb623c4ca0df47f7d1fdf9b9e84fe5c9c968a5",
+      "bytes": 207863
+    },
+    {
+      "path": "_site/assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8cc861a2ed893473661fe02ce8fb623c4ca0df47f7d1fdf9b9e84fe5c9c968a5",
+      "bytes": 207863
+    }
+  ],
+  "files_count": 75
+}

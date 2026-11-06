@@ -179,8 +179,6 @@ function promotionCandidates(article) {
     path.join('data', 'reports', 'published-articles-log.json'),
     path.join('data', 'reports', 'gsc-after-publication-queue.json'),
     path.join('data', 'reports', 'gsc-after-publication-queue.txt'),
-    path.join('data', 'reports', 'link-topology-report.json'),
-    path.join('data', 'reports', 'link-topology-report.md'),
   ];
   const mirrored = [
     `_site/${slug}.html`,

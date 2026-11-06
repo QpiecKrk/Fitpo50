@@ -1,0 +1,463 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-11-06T21:22:26+01:00",
+  "reviewed_at": null,
+  "slug": "niejedzenie-po-18-a-chudniecie-mit",
+  "html_sha256": "7a553a234a0fa368dd896d06984ea7b8fe22dafd1a7d8becf62fcd57fe6253e3",
+  "site_html_sha256": "7a553a234a0fa368dd896d06984ea7b8fe22dafd1a7d8becf62fcd57fe6253e3",
+  "pdf_sha256": "ee6c3eb09bf3fe0489ea38be40cf354140b4acf7ee3e16c2864f36a197c3d9b6",
+  "site_pdf_sha256": "ee6c3eb09bf3fe0489ea38be40cf354140b4acf7ee3e16c2864f36a197c3d9b6",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-06T21:22:26+01:00",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 1
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "niejedzenie-po-18-a-chudniecie-mit.html",
+      "sha256": "7a553a234a0fa368dd896d06984ea7b8fe22dafd1a7d8becf62fcd57fe6253e3",
+      "bytes": 48043
+    },
+    "html_site": {
+      "file": "_site/niejedzenie-po-18-a-chudniecie-mit.html",
+      "sha256": "7a553a234a0fa368dd896d06984ea7b8fe22dafd1a7d8becf62fcd57fe6253e3",
+      "bytes": 48043
+    },
+    "pdf_source": {
+      "file": "assets/pdf/niejedzenie-po-18-a-chudniecie-mit.pdf",
+      "sha256": "ee6c3eb09bf3fe0489ea38be40cf354140b4acf7ee3e16c2864f36a197c3d9b6",
+      "bytes": 753956
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/niejedzenie-po-18-a-chudniecie-mit.pdf",
+      "sha256": "ee6c3eb09bf3fe0489ea38be40cf354140b4acf7ee3e16c2864f36a197c3d9b6",
+      "bytes": 753956
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/desktop.png",
+      "screenshot_sha256": "ebc21b5d86c20794cbbb0971088c5e684ddc480a14002b2687084e816721dc2c",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/mobile.png",
+      "screenshot_sha256": "25c604fb013d69be43f36ffcb393c88a32ed038622a0d2b867c5bd8a703f2cb2",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "MITY 6 min czytania Aktualizacja: 06.11.2026 Czy niejedzenie po 18:00 to najlepszy sposób na chudnięcie? Godzina 18:00 nie wyłącza metabolizmu. Najpierw patrz, ile zjadasz przez cały dzień.",
+      "alt": "Niski kadr z otwartej szuflady: para po pięćdziesiątce śmieje się w wiosennej kuchni, jedna osoba chowa zegar, druga stawia sałatę",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.avif",
+          "sha256": "f13b02c5da44ae57b32a6d38688aeffd9a7f4fdaa69ec4948827c3666e1abd4b",
+          "bytes": 83795,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp",
+          "sha256": "2798d80ee0117cabf8c72017e801042230e250e4a0c67ca2186e4dcc46f5bddb",
+          "bytes": 99362,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.jpg",
+          "sha256": "102463e456ca186a6ca26f373b3a70305589b021649b41f4b3a50642957f330f",
+          "bytes": 133993,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "c7ed0d308f66fac2f3d76f986c7cf9a26bf71aee18cd351a859d165402d22566"
+    },
+    {
+      "placement": "content:2:dlaczego-zasada-nie-jedz-po-18-00-brzmi-tak-prze",
+      "role": "content",
+      "heading": "Dlaczego zasada „nie jedz po 18:00” brzmi tak przekonująco?",
+      "context": "Zasada „nie jedz po 18:00” brzmi prosto: wieczorem człowiek mniej się rusza, więc każda kaloria ma ponoć iść prosto w tłuszcz. Wiele osób po jej wprowadzeniu naprawdę chudnie, więc łatwo uwierzyć, że zadziałała właśnie ta godzina. Pytanie brzmi, czy metabolizm naprawdę się wtedy wyłącza, czy chudnięcie bierze się z czego innego. Szybka odpowiedź Niejedzenie po 18:00 nie jest najlepszym sposobem na chudnięcie, bo metabolizm nie wyłącza się o tej godzinie. W analizie 29 badań osoby stosujące strategie pory posiłków chudły średnio tylko nieco więcej niż grupa porównawcza, po co najmniej 12 tygodniach. Część osób chudnie po tej zasadzie, bo zjada mniej wieczorem, a nie dlatego, że kalorie po osiemnastej automatycznie stają się tłuszczem. Kluczowe wnioski Metabolizm nie wyłącza się o 18:00. Zeg",
+      "alt": "Dwoje znajomych po pięćdziesiątce rozmawia przy wiosennym stole, jedna osoba odsuwa talerz",
+      "caption": "Dwoje znajomych rozmawia przy wiosennym stole o odsuwanym talerzu i zasadzie niejedzenia po osiemnastej.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.avif",
+          "sha256": "74c80e4f0252cd9f5ba52561d75e693088cd00781a25c724cd3c48a212e0b4e6",
+          "bytes": 60681,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.webp",
+          "sha256": "1b22bd7cdf025c3afce8c6898bde0e71bf2f69b2a27e6edd41110e28548b16e5",
+          "bytes": 83208,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-rozmowa-przy-stole-o-godzinie-v2.jpg",
+          "sha256": "2dfa38a42b1d8d88ddd99545390b4200c60041626af695ddc2acb47fcbf92a55",
+          "bytes": 158322,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "470250212b4fd5f67d72160ace32e48d72d067317bb7fc8d15b9b239990b065e"
+    },
+    {
+      "placement": "content:3:co-naprawde-dzieje-sie-z-metabolizmem-gdy-zapada",
+      "role": "content",
+      "heading": "Co naprawdę dzieje się z metabolizmem, gdy zapada wieczór?",
+      "context": "Zasada „nie jedz po 18:00” brzmi prosto: wieczorem człowiek mniej się rusza, więc każda kaloria ma ponoć iść prosto w tłuszcz. Wiele osób po jej wprowadzeniu naprawdę chudnie, więc łatwo uwierzyć, że zadziałała właśnie ta godzina. Pytanie brzmi, czy metabolizm naprawdę się wtedy wyłącza, czy chudnięcie bierze się z czego innego. Szybka odpowiedź Niejedzenie po 18:00 nie jest najlepszym sposobem na chudnięcie, bo metabolizm nie wyłącza się o tej godzinie. W analizie 29 badań osoby stosujące strategie pory posiłków chudły średnio tylko nieco więcej niż grupa porównawcza, po co najmniej 12 tygodniach. Część osób chudnie po tej zasadzie, bo zjada mniej wieczorem, a nie dlatego, że kalorie po osiemnastej automatycznie stają się tłuszczem. Kluczowe wnioski Metabolizm nie wyłącza się o 18:00. Zeg",
+      "alt": "Para po pięćdziesiątce podlewa wiosenne kwiaty na balkonie wczesnym wieczorem i śmieje się do siebie",
+      "caption": "Wczesnym wieczorem para podlewa kwiaty na balkonie i rozmawia, nadal w ruchu po zachodzie pełnego słońca.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.avif",
+          "sha256": "7036b75d8dca53bf025ff8627bc94b8fd3e6fa1fd39eb6b7cab17f2aff5a5bec",
+          "bytes": 130044,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.webp",
+          "sha256": "1dfe51e2af6e1b51cdce7ad64957fb8ad850e33eb81e7bb317c06e993c936ef1",
+          "bytes": 151014,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-wieczor-na-balkonie-zywe-cialo-v2.jpg",
+          "sha256": "d116e253381e477f1d16d9f8a10cc10fab490b4c4cd1f20b78a40cb43c8a0079",
+          "bytes": 192404,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "55094aeef7816cfebe676f6aaf7a3bc2c05f479ee842b220be36782894d42cad"
+    },
+    {
+      "placement": "content:4:czy-pora-jedzenia-w-ogole-wplywa-na-spalanie-kal",
+      "role": "content",
+      "heading": "Czy pora jedzenia w ogóle wpływa na spalanie kalorii?",
+      "context": "Zasada „nie jedz po 18:00” brzmi prosto: wieczorem człowiek mniej się rusza, więc każda kaloria ma ponoć iść prosto w tłuszcz. Wiele osób po jej wprowadzeniu naprawdę chudnie, więc łatwo uwierzyć, że zadziałała właśnie ta godzina. Pytanie brzmi, czy metabolizm naprawdę się wtedy wyłącza, czy chudnięcie bierze się z czego innego. Szybka odpowiedź Niejedzenie po 18:00 nie jest najlepszym sposobem na chudnięcie, bo metabolizm nie wyłącza się o tej godzinie. W analizie 29 badań osoby stosujące strategie pory posiłków chudły średnio tylko nieco więcej niż grupa porównawcza, po co najmniej 12 tygodniach. Część osób chudnie po tej zasadzie, bo zjada mniej wieczorem, a nie dlatego, że kalorie po osiemnastej automatycznie stają się tłuszczem. Kluczowe wnioski Metabolizm nie wyłącza się o 18:00. Zeg",
+      "alt": "Grupa osób po pięćdziesiątce podaje sobie kolorowe półmiski podczas wiosennego obiadu na tarasie",
+      "caption": "Grupa osób po pięćdziesiątce podaje sobie półmiski podczas wcześniejszego obiadu na wiosennym tarasie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.avif",
+          "sha256": "a77db8699c481dd8a117ce6c56b933981fb7dea293be8245062e05056a90b32e",
+          "bytes": 206954,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.webp",
+          "sha256": "45e1aac7867415d4c95584e81e475473e9717d963ddeb2706daf5c5846927d8e",
+          "bytes": 272656,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-wczesny-obiad-na-tarasie-v2.jpg",
+          "sha256": "ed5938a63d904a64af14743231b99c2dbd89054d085d588ffbaea7ab666675cb",
+          "bytes": 280658,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "2ab83478025a1500b0a67f605342eb6cb6caa8674431827313840436f42effa4"
+    },
+    {
+      "placement": "content:5:co-pokazuja-badania-o-porze-posilkow-i-chudnieci",
+      "role": "content",
+      "heading": "Co pokazują badania o porze posiłków i chudnięciu?",
+      "context": "Zasada „nie jedz po 18:00” brzmi prosto: wieczorem człowiek mniej się rusza, więc każda kaloria ma ponoć iść prosto w tłuszcz. Wiele osób po jej wprowadzeniu naprawdę chudnie, więc łatwo uwierzyć, że zadziałała właśnie ta godzina. Pytanie brzmi, czy metabolizm naprawdę się wtedy wyłącza, czy chudnięcie bierze się z czego innego. Szybka odpowiedź Niejedzenie po 18:00 nie jest najlepszym sposobem na chudnięcie, bo metabolizm nie wyłącza się o tej godzinie. W analizie 29 badań osoby stosujące strategie pory posiłków chudły średnio tylko nieco więcej niż grupa porównawcza, po co najmniej 12 tygodniach. Część osób chudnie po tej zasadzie, bo zjada mniej wieczorem, a nie dlatego, że kalorie po osiemnastej automatycznie stają się tłuszczem. Kluczowe wnioski Metabolizm nie wyłącza się o 18:00. Zeg",
+      "alt": "Dwoje znajomych po pięćdziesiątce rozmawia przy stole i porównuje miskę po obiedzie z pustym talerzem po stronie wieczornej",
+      "caption": "Dwoje znajomych porównuje przy stole, czy większy posiłek jedli w południe, czy wieczorem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.avif",
+          "sha256": "61545276f6a82933c3f1333e8b6925c653168ee9ebe5e0353701ed541943bba5",
+          "bytes": 130209,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.webp",
+          "sha256": "f06c78913cc968d6dada6cb9991d6ee97b25c1544ffeff67d2cd57cb411cca63",
+          "bytes": 147474,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-porownanie-por-posilkow-przy-stole-v2.jpg",
+          "sha256": "d673885462321df3c3ac9bf70eb1bf8e35f6bf3bb519fe16f60cdc80482c5710",
+          "bytes": 186225,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "75de337fafdb6afd67cb6ed96f37ec18fc6c6ca01e9994c02137a118b5f2264d"
+    },
+    {
+      "placement": "content:6:gdzie-jest-ziarno-prawdy-w-micie-o-godzinie-18-0",
+      "role": "content",
+      "heading": "Gdzie jest ziarno prawdy w micie o godzinie 18:00?",
+      "context": "Zasada „nie jedz po 18:00” brzmi prosto: wieczorem człowiek mniej się rusza, więc każda kaloria ma ponoć iść prosto w tłuszcz. Wiele osób po jej wprowadzeniu naprawdę chudnie, więc łatwo uwierzyć, że zadziałała właśnie ta godzina. Pytanie brzmi, czy metabolizm naprawdę się wtedy wyłącza, czy chudnięcie bierze się z czego innego. Szybka odpowiedź Niejedzenie po 18:00 nie jest najlepszym sposobem na chudnięcie, bo metabolizm nie wyłącza się o tej godzinie. W analizie 29 badań osoby stosujące strategie pory posiłków chudły średnio tylko nieco więcej niż grupa porównawcza, po co najmniej 12 tygodniach. Część osób chudnie po tej zasadzie, bo zjada mniej wieczorem, a nie dlatego, że kalorie po osiemnastej automatycznie stają się tłuszczem. Kluczowe wnioski Metabolizm nie wyłącza się o 18:00. Zeg",
+      "alt": "Mężczyzna wstawia resztkę do lodówki, a kobieta w salonie śmieje się i sięga po pilota",
+      "caption": "Mężczyzna chowa resztkę do lodówki, a kobieta w salonie sięga po pilota, żeby wyłączyć telewizor.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.avif",
+          "sha256": "4a7575e8db849a4df001be24c05c7735dd0a8647f962b324d2fdc7cfdf7a3545",
+          "bytes": 67025,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.webp",
+          "sha256": "e051de32862155ba8b6288f675c411264d5c1fc9923f9b19030fcd50a8b33070",
+          "bytes": 90316,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-odstawianie-przekaski-do-lodowki-v2.jpg",
+          "sha256": "1bfb7f11fae376621e1477ce6a731d464afe37e7b413951f6d65fae0094719b9",
+          "bytes": 164220,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "a2d3dcd7e0f58729310e1ff16f4c245d45ffe8c29086965cbdf166ad39f40c87"
+    },
+    {
+      "placement": "content:7:co-naprawde-pomaga-jesli-chcesz-schudnac-zamiast",
+      "role": "content",
+      "heading": "Co naprawdę pomaga, jeśli chcesz schudnąć, zamiast pilnować 18:00?",
+      "context": "Zasada „nie jedz po 18:00” brzmi prosto: wieczorem człowiek mniej się rusza, więc każda kaloria ma ponoć iść prosto w tłuszcz. Wiele osób po jej wprowadzeniu naprawdę chudnie, więc łatwo uwierzyć, że zadziałała właśnie ta godzina. Pytanie brzmi, czy metabolizm naprawdę się wtedy wyłącza, czy chudnięcie bierze się z czego innego. Szybka odpowiedź Niejedzenie po 18:00 nie jest najlepszym sposobem na chudnięcie, bo metabolizm nie wyłącza się o tej godzinie. W analizie 29 badań osoby stosujące strategie pory posiłków chudły średnio tylko nieco więcej niż grupa porównawcza, po co najmniej 12 tygodniach. Część osób chudnie po tej zasadzie, bo zjada mniej wieczorem, a nie dlatego, że kalorie po osiemnastej automatycznie stają się tłuszczem. Kluczowe wnioski Metabolizm nie wyłącza się o 18:00. Zeg",
+      "alt": "Para po pięćdziesiątce wspólnie kroi szczypiorek i rzodkiew przy blacie w wiosennym świetle",
+      "caption": "Para wspólnie kroi szczypiorek i rzodkiew na kolację, patrząc na siebie, a nie na zegar.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.avif",
+          "sha256": "129acc8e41d7d41683d2c6f0a4e2e9c00d49ed15d30a05adbdc527ce7f32665e",
+          "bytes": 138631,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.webp",
+          "sha256": "a282dbc00336e4af87acebaafa84947ffc5dcbb1533ebd363adf6c03301961c3",
+          "bytes": 160402,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-wspolne-gotowanie-wiosennej-kolacji-v2.jpg",
+          "sha256": "71dd480d8d27721cbde0f638300c1984eca03ea8596db7669ab2c9fabc29a73d",
+          "bytes": 196440,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "77997a1b4fd6dc41b95eea930dd44101391cec4cdf07727465d422ce839b9d22"
+    },
+    {
+      "placement": "content:8:kiedy-pora-jedzenia-ma-wieksze-znaczenie-a-kiedy",
+      "role": "content",
+      "heading": "Kiedy pora jedzenia ma większe znaczenie, a kiedy nie warto się nią stresować?",
+      "context": "Zasada „nie jedz po 18:00” brzmi prosto: wieczorem człowiek mniej się rusza, więc każda kaloria ma ponoć iść prosto w tłuszcz. Wiele osób po jej wprowadzeniu naprawdę chudnie, więc łatwo uwierzyć, że zadziałała właśnie ta godzina. Pytanie brzmi, czy metabolizm naprawdę się wtedy wyłącza, czy chudnięcie bierze się z czego innego. Szybka odpowiedź Niejedzenie po 18:00 nie jest najlepszym sposobem na chudnięcie, bo metabolizm nie wyłącza się o tej godzinie. W analizie 29 badań osoby stosujące strategie pory posiłków chudły średnio tylko nieco więcej niż grupa porównawcza, po co najmniej 12 tygodniach. Część osób chudnie po tej zasadzie, bo zjada mniej wieczorem, a nie dlatego, że kalorie po osiemnastej automatycznie stają się tłuszczem. Kluczowe wnioski Metabolizm nie wyłącza się o 18:00. Zeg",
+      "alt": "Dwoje znajomych po pięćdziesiątce w wiosennej kuchni: jedna osoba nakrywa do kolacji, druga rozmawia z nią gestami rąk",
+      "caption": "Dwoje znajomych ustala razem, o której zjedzą spokojną kolację, i rozmawia, czy ta pora ma dziś większe znaczenie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.avif",
+          "sha256": "4751ebdcc6d23ddaa294bdaec977a4c1aa498720a6d3eb5d4a9b826d848983d7",
+          "bytes": 143323,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.webp",
+          "sha256": "e1b61924245a859590ccf664457b3f8332b582814f2025f90093e119113c22c6",
+          "bytes": 173912,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/niejedzenie-po-18-a-chudniecie-mit-ustalanie-pory-kolacji-v2.jpg",
+          "sha256": "8cc861a2ed893473661fe02ce8fb623c4ca0df47f7d1fdf9b9e84fe5c9c968a5",
+          "bytes": 207863,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "42286b871d96ced58a05b45977d0ab2c7a93385a70dc057e44fe4131a46a592a"
+    }
+  ],
+  "pdf": {
+    "pages": 8,
+    "text_coverage": 1,
+    "rendered_pages": 8,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/pdf-pages/page-1.png",
+        "sha256": "d398265532cc0746b1eb0e37b637f2e82eccdc67368c3e9dff197eddd2614d6e",
+        "bytes": 701085,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1062,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/pdf-pages/page-2.png",
+        "sha256": "0148a284fe2c41fcde1daf25159caadded65ab2ec0d3c72ec0cbd945da21e2d6",
+        "bytes": 834778,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 57,
+          "width": 1052,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/pdf-pages/page-3.png",
+        "sha256": "e19a9ae2fa0a8ca20d74f7898e479a88618fd2f8a68c20834c6ece7e1fc331b2",
+        "bytes": 861615,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1065,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/pdf-pages/page-4.png",
+        "sha256": "25b66a4fd8458ed3e52b777f8f602c6f8fd774f2178dc0066124108249b28160",
+        "bytes": 638184,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/pdf-pages/page-5.png",
+        "sha256": "bdcb9bd44135d358eae1cfcc6fea1f449dfc6c77d573c7939580d32840bf759d",
+        "bytes": 891291,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 56,
+          "width": 1066,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/pdf-pages/page-6.png",
+        "sha256": "b6db390e215f159cf5b50f27925d43f8d12878b78105b5fb192a78e400e0273e",
+        "bytes": 600024,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1067,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/pdf-pages/page-7.png",
+        "sha256": "e14b32eb8fadfdeb031adc4c034e514350d4f5e1bf89c251d2ae5f5dfb14dea3",
+        "bytes": 429081,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1065,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/niejedzenie-po-18-a-chudniecie-mit/pdf-pages/page-8.png",
+        "sha256": "35bdea4bd9f7de9e60b10c8e138611ab57d9b1e8679310deef75e0400bc92e3d",
+        "bytes": 26176,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 63,
+          "y": 57,
+          "width": 1053,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 7560,
+    "review_wait_ms": null
+  },
+  "errors": []
+}

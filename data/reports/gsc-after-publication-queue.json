@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-11-06T05:33:55+01:00",
+  "updated_at": "2026-11-06T21:22:29+01:00",
   "items": [
+    {
+      "slug": "niejedzenie-po-18-a-chudniecie-mit",
+      "target_url": "https://fitpo50.pl/niejedzenie-po-18-a-chudniecie-mit.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/mity.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-11-06T21:22:29+01:00",
+      "transaction_id": "article-niejedzenie-po-18-a-chudniecie-mit-1793996517798-31520",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "szumy-uszne-po-50-przyczyny",
       "target_url": "https://fitpo50.pl/szumy-uszne-po-50-przyczyny.html",
