@@ -67,6 +67,14 @@ Na początku nowej sesji:
 
 Start sesji jest wyłącznie odczytowy. Nie wykonuj wtedy `pull`, `restore`, eksportu, synchronizacji ani walidatora zapisującego pliki. Pozostałe dokumenty właściwe dla zadania czytaj po jego otrzymaniu.
 
+## 4A. Sposób współpracy z Grzegorzem
+
+- Grzegorz prowadzi portal sam i nie ma śledzić plików, Git-a ani kolejności technicznej. Codex ustala bezpieczny zakres bieżącego zadania, prowadzi kontrole oraz zatrzymuje publikację przy realnym problemie.
+- W każdej nietrywialnej odpowiedzi roboczej Codex podaje krótko: `teraz`, `gotowe`, `następny krok` oraz — tylko gdy jest potrzebna decyzja — jedno proste polecenie dla Grzegorza. Nie zasypuje go listami plików, chyba że poprosi o nie albo lista jest przyczyną blokady.
+- Nie oznaczaj zadania jako zakończonego po samym commitcie lub pushu. Przy publikacji rozróżniaj: przygotowane lokalnie, wysłane na `main`, oczekiwanie na CDN i potwierdzone live.
+- Aktualne wejście dla artykułu to `npm run publikuj -- <katalog-artykulu>`. Komenda `npm run wyslij` jest planowanym uproszczeniem dla artykułów i powiązanych poprawek kodu, ale nie istnieje jeszcze i nie może być przedstawiana jako dostępna ani wpisywana do rejestru komend przed implementacją.
+- Docelowe `wyslij` ma wziąć wyłącznie zamknięty zakres aktywnego zadania (manifest artykułu oraz bezpośrednio powiązane poprawki pipeline'u i testy), pominąć pliki prywatne oraz niepowiązane, zapytać raz „Commitujemy i wysyłamy? tak/nie”, wykonać jeden commit i jeden zwykły push, a następnie sprawdzić stronę oraz nowe assety na zwykłych publicznych URL-ach. Nie wolno zastępować tego `git add -A`.
+
 ## 5. Publikacja artykułu z JSON-u
 
 - Nowe artykuły, aktualizacje, `popraw-seo` i `napraw paczkę N` przechodzą jeden wspólny, pełny Quality Gate z `ARTICLE_STANDARD.md`. Kontrola zawsze obejmuje całą treść oraz HTML, źródła, FAQ, linki, media, PDF, dane strukturalne, listingi, sitemap i `_site`; nie tylko zmieniony fragment.
@@ -148,6 +156,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - Brak wiersza strony w GSC to `NO_GSC_ROW_AT_PUBLICATION`, a brak danych to `GSC_INPUT_UNAVAILABLE`; nie wolno udawać zera.
 - Kolejka GSC obejmuje target, sitemapę i tylko strony źródłowe, które faktycznie linkują do targetu.
 - Metryki 28-dniowe pokazują kierunek po zmianie, lecz nie dowodzą samodzielnie jej przyczynowości.
+- Po nowym wydaniu CDN może przez krótki czas nie podawać wersjonowanych obrazów lub PDF-u mimo aktualnego markera. `LIVE_DEPLOYED_AND_VALIDATED` wolno raportować dopiero po sprawdzeniu zwykłego URL-a artykułu oraz wszystkich nowych wariantów hero (AVIF/WebP/JPG); status CDN pending nie jest sukcesem.
 
 ## 10. `GSC` i `popraw-seo`
 
