@@ -448,9 +448,10 @@ async function main() {
   const generatedAt = warsawIso();
   const desktopScreenshot = path.join(previewDir, 'desktop.png');
   const mobileScreenshot = path.join(previewDir, 'mobile.png');
+  const standardArticleReady = !center && errors.length === 0;
   const report = {
     version: CONTRACT.version,
-    status: errors.length ? 'BLOCKED' : CONTRACT.pending_status,
+    status: errors.length ? 'BLOCKED' : (standardArticleReady ? CONTRACT.ready_status : CONTRACT.pending_status),
     generated_at: generatedAt,
     reviewed_at: null,
     slug,
@@ -477,7 +478,7 @@ async function main() {
     images,
     pdf: { pages: pdfResult.pages, text_coverage: Number(pdfResult.coverage.toFixed(4)), rendered_pages: pdfResult.renders.length, page_reviews: pdfResult.pageReviews || [] },
     visual_review: {
-      status: CONTRACT.pending_status,
+      status: standardArticleReady ? 'NOT_REQUIRED' : CONTRACT.pending_status,
       reviewed_by: null,
       reviewed_at: null,
       review_method: null,
@@ -494,10 +495,11 @@ async function main() {
   if (!errors.length) {
     const validation = validatePreviewReport(root, slug, { requireReady: false, requireRenderFiles: true });
     if (!validation.ok) errors.push(...validation.errors);
-    report.status = errors.length ? 'BLOCKED' : CONTRACT.pending_status;
+    report.status = errors.length ? 'BLOCKED' : (center ? CONTRACT.pending_status : CONTRACT.ready_status);
     report.technical_review.status = errors.length ? 'TECHNICAL_BLOCKED' : CONTRACT.technical_status;
     report.technical_review.errors = [...errors];
     report.errors = errors;
+    report.visual_review.status = errors.length || center ? CONTRACT.pending_status : 'NOT_REQUIRED';
     atomicWriteFileSync(path.join(reportDir, `${slug}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   }
   const templatePath = path.join(previewDir, 'visual-review-template.json');
@@ -522,8 +524,12 @@ async function main() {
     process.exitCode = 2;
     return;
   }
-  console.log(`[${CONTRACT.pending_status}] ${slug}: ${CONTRACT.technical_status}; wymagany rzeczywisty review.`);
-  console.log(`[REVIEW_TEMPLATE] ${templatePath}`);
+  if (center) {
+    console.log(`[${CONTRACT.pending_status}] ${slug}: ${CONTRACT.technical_status}; wymagany rzeczywisty review.`);
+    console.log(`[REVIEW_TEMPLATE] ${templatePath}`);
+    return;
+  }
+  console.log(`[${CONTRACT.ready_status}] ${slug}: ${CONTRACT.technical_status}; standardowy artykuł nie wymaga osobnego visual review.`);
 }
 
 if (require.main === module) {

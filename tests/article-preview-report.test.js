@@ -100,13 +100,13 @@ function saveReviewed(value, review = verifiedReview(value.report)) {
   return review;
 }
 
-test('TECHNICAL_PASS bez rzeczywistego review nie daje PREVIEW_READY', () => {
+test('standardowy artykuł po TECHNICAL_PASS nie zatrzymuje się na VISUAL_REVIEW_PENDING', () => {
   const value = fixture();
-  const technical = validatePreviewReport(value.root, value.slug, { requireReady: false, requireRenderFiles: true });
-  assert.equal(technical.ok, true, technical.errors.join('\n'));
-  const ready = validatePreviewReport(value.root, value.slug);
-  assert.equal(ready.ok, false);
-  assert.ok(ready.errors.some((error) => /PREVIEW_READY/.test(error)));
+  value.report.status = CONTRACT.ready_status;
+  value.report.visual_review.status = 'NOT_REQUIRED';
+  fs.writeFileSync(value.reportPath, JSON.stringify(value.report));
+  const ready = validatePreviewReport(value.root, value.slug, { requireRenderFiles: true });
+  assert.equal(ready.ok, true, ready.errors.join('\n'));
 });
 
 test('kompletne review desktopu, mobile, każdego obrazu i strony PDF daje PREVIEW_READY', () => {

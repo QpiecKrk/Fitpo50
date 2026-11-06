@@ -134,9 +134,19 @@ function validateV3Report(root, report, options, errors) {
 
   if (options.requireReady !== false) {
     if (report.status !== CONTRACT.ready_status) errors.push(`Raport nie ma statusu ${CONTRACT.ready_status} (${report.status || 'brak'}).`);
-    if (report.visual_review?.status !== CONTRACT.verified_status) errors.push(`Raport nie ma statusu ${CONTRACT.verified_status}.`);
-    const review = reviewEnvelope(report);
-    errors.push(...validateVisualReview(report, review).errors);
+    const visualReviewVerified = report.visual_review?.status === CONTRACT.verified_status;
+    const visualReviewAttempted = visualReviewVerified
+      || Boolean(report.visual_review?.reviewed_by)
+      || Object.keys(report.visual_review?.views || {}).length > 0
+      || (report.visual_review?.images || []).length > 0
+      || (report.visual_review?.pdf_pages || []).length > 0;
+    if (allowsEmptyImageInventory || visualReviewAttempted) {
+      if (!visualReviewVerified) errors.push(`Raport nie ma statusu ${CONTRACT.verified_status}.`);
+      const review = reviewEnvelope(report);
+      errors.push(...validateVisualReview(report, review).errors);
+    } else if (report.visual_review?.status !== 'NOT_REQUIRED') {
+      errors.push('Standardowy artykuł po TECHNICAL_PASS musi mieć visual_review.status=NOT_REQUIRED.');
+    }
   } else if (![CONTRACT.pending_status, CONTRACT.ready_status].includes(report.status)) {
     errors.push(`Raport techniczny ma niepoprawny status ${report.status || 'brak'}.`);
   }
