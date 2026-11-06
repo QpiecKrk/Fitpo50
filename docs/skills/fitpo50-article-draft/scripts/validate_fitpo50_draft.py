@@ -367,7 +367,7 @@ def validate(data: dict[str, Any], allow_verified_review: bool = False) -> tuple
                 errors.append(f"sources[{index}] reachable wymaga liczbowego http_status.")
             elif not 200 <= http_status < 300:
                 errors.append(f"sources[{index}] reachable wymaga końcowego HTTP 2xx po przekierowaniach; otrzymano {http_status}.")
-        if status == "requires_local_verification" and "http_status" in source:
+        if status == "requires_local_verification" and source.get("http_status") is not None:
             errors.append(f"sources[{index}] nieweryfikowane nie może deklarować http_status.")
         elif status == "requires_local_verification":
             warnings.append(f"sources[{index}] wymaga lokalnej weryfikacji URL; wybierz dostępny kanoniczny URL, jeśli to możliwe.")

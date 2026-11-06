@@ -1,7 +1,119 @@
 {
   "version": 2,
-  "updated_at": "2026-11-06T01:55:21+01:00",
+  "updated_at": "2026-11-06T05:33:55+01:00",
   "items": [
+    {
+      "slug": "szumy-uszne-po-50-przyczyny",
+      "url": "https://fitpo50.pl/szumy-uszne-po-50-przyczyny.html",
+      "operation": "CREATE",
+      "transaction_id": "article-szumy-uszne-po-50-przyczyny-1793939581563-75220",
+      "first_published_at": "2026-11-06T05:33:55+01:00",
+      "last_published_at": "2026-11-06T05:33:55+01:00",
+      "status": "PUBLISHED_AWAITING_GSC",
+      "baseline": {
+        "captured_at": "2026-11-06T05:33:55+01:00",
+        "status": "GSC_INPUT_UNAVAILABLE",
+        "gsc_generated_at": "2026-10-23T08:04:59+02:00",
+        "window": "rolling_28_days",
+        "range": {
+          "start": "2026-09-25",
+          "end": "2026-10-22"
+        },
+        "metrics": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": null
+        },
+        "source_file": "web-28-current-pages.csv",
+        "contract_status": "FAIL",
+        "contract_errors": [
+          "Raport API nie jest zweryfikowanym zestawem danych: status=REQUEST_FAILED, kind=DIAGNOSTIC.",
+          "Dane GSC są nieaktualne: 334.5 h, limit 72 h.",
+          "Końcowa data GSC jest zbyt stara: 2026-10-22 (15.0 dnia; limit 3)."
+        ]
+      },
+      "checkpoints": {
+        "day_7": {
+          "due_date": "2026-11-13",
+          "snapshot": null
+        },
+        "day_14": {
+          "due_date": "2026-11-20",
+          "snapshot": null
+        },
+        "day_28": {
+          "due_date": "2026-12-04",
+          "snapshot": null
+        }
+      },
+      "first_impression_after_publication_at": null,
+      "first_click_after_publication_at": null,
+      "indexed_without_impressions_at": null,
+      "gsc_submission_urls": [
+        "https://fitpo50.pl/szumy-uszne-po-50-przyczyny.html"
+      ],
+      "source_urls_for_recrawl": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/zdrowie.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_events": [
+        {
+          "event_id": "article-szumy-uszne-po-50-przyczyny-1793939581563-75220",
+          "operation": "CREATE",
+          "published_at": "2026-11-06T05:33:55+01:00",
+          "baseline": {
+            "captured_at": "2026-11-06T05:33:55+01:00",
+            "status": "GSC_INPUT_UNAVAILABLE",
+            "gsc_generated_at": "2026-10-23T08:04:59+02:00",
+            "window": "rolling_28_days",
+            "range": {
+              "start": "2026-09-25",
+              "end": "2026-10-22"
+            },
+            "metrics": {
+              "clicks": 0,
+              "impressions": 0,
+              "ctr": 0,
+              "position": null
+            },
+            "source_file": "web-28-current-pages.csv",
+            "contract_status": "FAIL",
+            "contract_errors": [
+              "Raport API nie jest zweryfikowanym zestawem danych: status=REQUEST_FAILED, kind=DIAGNOSTIC.",
+              "Dane GSC są nieaktualne: 334.5 h, limit 72 h.",
+              "Końcowa data GSC jest zbyt stara: 2026-10-22 (15.0 dnia; limit 3)."
+            ]
+          },
+          "checkpoints": {
+            "day_7": {
+              "due_date": "2026-11-13",
+              "snapshot": null
+            },
+            "day_14": {
+              "due_date": "2026-11-20",
+              "snapshot": null
+            },
+            "day_28": {
+              "due_date": "2026-12-04",
+              "snapshot": null
+            }
+          },
+          "gsc_submission_urls": [
+            "https://fitpo50.pl/szumy-uszne-po-50-przyczyny.html"
+          ],
+          "source_urls_for_recrawl": [
+            "https://fitpo50.pl/",
+            "https://fitpo50.pl/porady.html",
+            "https://fitpo50.pl/zdrowie.html"
+          ]
+        }
+      ],
+      "signal_definition": "Pierwszy sygnał oznacza pierwszy odczyt, w którym krocząca metryka 28-dniowa przekroczyła baseline; przy baseline równym 0 jest to pierwsze widoczne wyświetlenie lub kliknięcie.",
+      "monitoring_note": "Metryki GSC są kroczącym oknem 28 dni; różnice są sygnałem po publikacji, nie czystą atrybucją efektu."
+    },
     {
       "slug": "nocne-skurcze-lydek-po-50-magnez",
       "url": "https://fitpo50.pl/nocne-skurcze-lydek-po-50-magnez.html",

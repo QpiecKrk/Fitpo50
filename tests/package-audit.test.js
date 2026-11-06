@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
-const { auditPackage, imageIssues, metricProposal } = require('../scripts/package-audit');
+const { auditPackage, imageIssues, metricProposal, unitIssues } = require('../scripts/package-audit');
 const { packageIdentity } = require('../scripts/lib/package-identity');
 const { executeArticleAddCore } = require('../scripts/article-add');
 const { cleanupArticleInput } = require('../scripts/article-cleanup-input');
@@ -19,6 +19,11 @@ const ROOT = path.resolve(__dirname, '..');
 const FIXTURE = path.join(ROOT, 'tests', 'fixtures', 'package-audit', 'multi-error.fitpo50.json');
 const VALID_PACKAGE_DIR = path.join(ROOT, 'tests', 'fixtures', 'package-audit', 'valid-package');
 const VALID_PACKAGE = path.join(VALID_PACKAGE_DIR, 'package-audit-valid.fitpo50.json');
+
+test('NiŚOZ nie jest błędnie rozpoznawane jako angielska jednostka oz', () => {
+  assert.deepEqual(unitIssues({ lead: 'Pomoc zapewniają SOR oraz NiŚOZ.' }), []);
+  assert.equal(unitIssues({ lead: 'Porcja ma 2 oz.' })[0].code, 'NON_EU_UNIT');
+});
 
 test('kompletna paczka v2 z prawdziwymi obrazami przechodzi package:audit i nie blokuje article:add', () => {
   const reportDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-package-audit-valid-'));

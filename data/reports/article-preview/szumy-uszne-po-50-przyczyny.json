@@ -1,0 +1,432 @@
+{
+  "version": 3,
+  "status": "VISUAL_REVIEW_PENDING",
+  "generated_at": "2026-11-06T05:33:51+01:00",
+  "reviewed_at": null,
+  "slug": "szumy-uszne-po-50-przyczyny",
+  "html_sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49",
+  "site_html_sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49",
+  "pdf_sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a",
+  "site_pdf_sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-06T05:33:51+01:00",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 1
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "szumy-uszne-po-50-przyczyny.html",
+      "sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49",
+      "bytes": 56072
+    },
+    "html_site": {
+      "file": "_site/szumy-uszne-po-50-przyczyny.html",
+      "sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49",
+      "bytes": 56072
+    },
+    "pdf_source": {
+      "file": "assets/pdf/szumy-uszne-po-50-przyczyny.pdf",
+      "sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a",
+      "bytes": 444672
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/szumy-uszne-po-50-przyczyny.pdf",
+      "sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a",
+      "bytes": 444672
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/desktop.png",
+      "screenshot_sha256": "aca98d51d85ae08c45abe4d7227881e9cafbbfad6c129914e91bde9b2004947f",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/mobile.png",
+      "screenshot_sha256": "f032e219a1a85964a21c2e8182e88977f3ab44aad4be7e963bd578190e04b7e8",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 12 min czytania Aktualizacja: 06.11.2026 Szumy uszne po 50: skąd się biorą i kiedy iść do lekarza Szum w uchu jest częsty. Najważniejsze, by odróżnić zwykły szum od tego, z którym trzeba szybko iść do lekarza.",
+      "alt": "Kobieta około pięćdziesięciu pięciu lat stoi wieczorem w kuchni z kubkiem herbaty i przykłada dłoń do ucha, jakby nasłuchiwała.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif",
+          "sha256": "2eeb9098516c3586eef00d00f14fe782327b3b791b9d9c8e971e44b8b6029bc0",
+          "bytes": 23086,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp",
+          "sha256": "c4bb6034c9d027a9332c0b72e6ce6d3cd9f26c716506f616a99156a9bd58ebca",
+          "bytes": 30664,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.jpg",
+          "sha256": "83caf556d2b45f12ff8e1dadc8f466ab6ef096817047126ddcdec0537caa03c8",
+          "bytes": 74023,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "0a3bd9a4ac21171694c364c237e0a60836c1f6de7b99b72ae6f819a35633344f"
+    },
+    {
+      "placement": "content:2:czym-sa-szumy-uszne-i-jak-czesto-zdarzaja-sie-po",
+      "role": "content",
+      "heading": "Czym są szumy uszne i jak często zdarzają się po 50?",
+      "context": "Pisk, buczenie albo szum, którego nikt poza Tobą nie słyszy, po pięćdziesiątce zdarza się często. Jeśli szukasz hasła „szumy uszne przyczyny”, ten tekst wyjaśnia, skąd szum się bierze, kiedy jest sygnałem alarmowym i jak w Polsce dojść od lekarza rodzinnego do laryngologa i badania słuchu. Opieramy się na wytycznych NICE i AAO-HNS, przeglądach Cochrane oraz informacjach NFZ i pacjent.gov.pl. Szybka odpowiedź Po 50. roku życia szumy uszne najczęściej wiążą się z niedosłuchem, a rzadko z groźną chorobą. Do lekarza rodzinnego idź, gdy szum trwa, nasila się lub przeszkadza; na SOR, gdy pojawia się z nagłą utratą słuchu, zawrotami głowy, osłabieniem twarzy lub po urazie głowy. Kluczowe wnioski Szum uszny ma 13,7% osób w wieku 45–64 lata i 23,6% osób po 65. roku życia (metaanaliza z 2022 roku). ",
+      "alt": "Infografika z trzema słupkami pokazuje, że odsetek dorosłych z szumami usznymi rośnie w kolejnych, starszych grupach wiekowych.",
+      "caption": "Dane z metaanalizy Jarach i współpracowników: w starszych grupach wiekowych szumy uszne zgłasza więcej osób.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.avif",
+          "sha256": "b56b54fa36b2fb5f4ce91530dcbb7911dd890677aa9ed5e306ec9eccef351c05",
+          "bytes": 9693,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.webp",
+          "sha256": "ba3c65478031ef38a3193fc86df59296b9cbe4a6ac4528105955819307ca386d",
+          "bytes": 16672,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.jpg",
+          "sha256": "322a7fd5584993e4df80ba1432b86e3d7462675c432ab670606852cfceea5311",
+          "bytes": 40363,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "d03683d6ddd0e80de5f37935b0f2412a10f7e7c1cc6f01adb54994eebb88f41b"
+    },
+    {
+      "placement": "content:3:skad-biora-sie-szumy-uszne-po-50",
+      "role": "content",
+      "heading": "Skąd biorą się szumy uszne po 50?",
+      "context": "Pisk, buczenie albo szum, którego nikt poza Tobą nie słyszy, po pięćdziesiątce zdarza się często. Jeśli szukasz hasła „szumy uszne przyczyny”, ten tekst wyjaśnia, skąd szum się bierze, kiedy jest sygnałem alarmowym i jak w Polsce dojść od lekarza rodzinnego do laryngologa i badania słuchu. Opieramy się na wytycznych NICE i AAO-HNS, przeglądach Cochrane oraz informacjach NFZ i pacjent.gov.pl. Szybka odpowiedź Po 50. roku życia szumy uszne najczęściej wiążą się z niedosłuchem, a rzadko z groźną chorobą. Do lekarza rodzinnego idź, gdy szum trwa, nasila się lub przeszkadza; na SOR, gdy pojawia się z nagłą utratą słuchu, zawrotami głowy, osłabieniem twarzy lub po urazie głowy. Kluczowe wnioski Szum uszny ma 13,7% osób w wieku 45–64 lata i 23,6% osób po 65. roku życia (metaanaliza z 2022 roku). ",
+      "alt": "Ilustracja przekroju głowy z ślimakiem ucha wewnętrznego, nerwem słuchowym i podświetlonym obszarem kory słuchowej w mózgu.",
+      "caption": "Według prowadzącej hipotezy uszkodzone ucho wysyła zmieniony sygnał, a szum wytwarza kora słuchowa w mózgu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.avif",
+          "sha256": "10b2c643d78e5ff728ea7fece1b8a6de9eae207187cc296ff4a24197f0d3d5e5",
+          "bytes": 59758,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.webp",
+          "sha256": "b0d20c4c5bd783d7999fdad45e5d4d3a29034534ceeaf23e7250d994dd5e67b8",
+          "bytes": 102274,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.jpg",
+          "sha256": "dca7a62df17ca8764acc4cff31d64d5c96177a8c8db6a680bd3c6fe03f2b5ca7",
+          "bytes": 158885,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "49eebb002088d13ce085c957427f2795815b6c3157b18b5f052c28df75886431"
+    },
+    {
+      "placement": "content:4:czy-cisnienie-leki-i-stres-maja-zwiazek-z-szumam",
+      "role": "content",
+      "heading": "Czy ciśnienie, leki i stres mają związek z szumami usznymi?",
+      "context": "Pisk, buczenie albo szum, którego nikt poza Tobą nie słyszy, po pięćdziesiątce zdarza się często. Jeśli szukasz hasła „szumy uszne przyczyny”, ten tekst wyjaśnia, skąd szum się bierze, kiedy jest sygnałem alarmowym i jak w Polsce dojść od lekarza rodzinnego do laryngologa i badania słuchu. Opieramy się na wytycznych NICE i AAO-HNS, przeglądach Cochrane oraz informacjach NFZ i pacjent.gov.pl. Szybka odpowiedź Po 50. roku życia szumy uszne najczęściej wiążą się z niedosłuchem, a rzadko z groźną chorobą. Do lekarza rodzinnego idź, gdy szum trwa, nasila się lub przeszkadza; na SOR, gdy pojawia się z nagłą utratą słuchu, zawrotami głowy, osłabieniem twarzy lub po urazie głowy. Kluczowe wnioski Szum uszny ma 13,7% osób w wieku 45–64 lata i 23,6% osób po 65. roku życia (metaanaliza z 2022 roku). ",
+      "alt": "Mężczyzna około sześćdziesięciu lat siedzi przy stole i czyta ulotkę leku, obok leży ciśnieniomierz z wygaszonym ekranem.",
+      "caption": "Szum po nowym leku to powód do rozmowy z lekarzem lub farmaceutą, a nie do samodzielnego odstawienia leku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.avif",
+          "sha256": "aff7edb08d305d678436aa24f6f97881cde56e088d5d6278d0cfaa4927971f2f",
+          "bytes": 53127,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.webp",
+          "sha256": "034169ff047c698e027db72e4b7547e54ae594434beb0425544d9da945ddf4a7",
+          "bytes": 87004,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.jpg",
+          "sha256": "7caa8324e115a89dd8422ee8721a139907954f0e2d3acbe9660999be6447de62",
+          "bytes": 135507,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "274dfdf1779450a320e113e7b5ad0ce56f3aeff15b2a0f24a1d1cf88fce5600a"
+    },
+    {
+      "placement": "content:5:szum-w-uchu-jak-bicie-serca-albo-tylko-w-jednym-",
+      "role": "content",
+      "heading": "Szum w uchu jak bicie serca albo tylko w jednym uchu: co to oznacza?",
+      "context": "Pisk, buczenie albo szum, którego nikt poza Tobą nie słyszy, po pięćdziesiątce zdarza się często. Jeśli szukasz hasła „szumy uszne przyczyny”, ten tekst wyjaśnia, skąd szum się bierze, kiedy jest sygnałem alarmowym i jak w Polsce dojść od lekarza rodzinnego do laryngologa i badania słuchu. Opieramy się na wytycznych NICE i AAO-HNS, przeglądach Cochrane oraz informacjach NFZ i pacjent.gov.pl. Szybka odpowiedź Po 50. roku życia szumy uszne najczęściej wiążą się z niedosłuchem, a rzadko z groźną chorobą. Do lekarza rodzinnego idź, gdy szum trwa, nasila się lub przeszkadza; na SOR, gdy pojawia się z nagłą utratą słuchu, zawrotami głowy, osłabieniem twarzy lub po urazie głowy. Kluczowe wnioski Szum uszny ma 13,7% osób w wieku 45–64 lata i 23,6% osób po 65. roku życia (metaanaliza z 2022 roku). ",
+      "alt": "Mężczyzna leży nocą na boku z uchem przy poduszce, ma otwarte oczy i nasłuchuje w ciszy sypialni.",
+      "caption": "Szum, który bije w rytm serca, NHS każe pilnie skonsultować z lekarzem rodzinnym.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.avif",
+          "sha256": "5a24881bbf4c65cf48ec29369bf6c26b4b2628935ede1d58b17a8f950006325a",
+          "bytes": 47123,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.webp",
+          "sha256": "c66f70a1d544a0bbf96f2ec6ebee3fdd50633eab5661ab5939e10c0e266affcb",
+          "bytes": 63080,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.jpg",
+          "sha256": "7f977fc9efa5cee54e8d4ac3fd6a8b289c6bbacd4c907ff296d72c912fa6b39e",
+          "bytes": 118480,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e661b78c93ec1156e4b46739be1102c4722845d8246228ba10f2d4c737e13ba6"
+    },
+    {
+      "placement": "content:6:do-jakiego-lekarza-z-szumami-usznymi-w-polsce",
+      "role": "content",
+      "heading": "Do jakiego lekarza z szumami usznymi w Polsce?",
+      "context": "Pisk, buczenie albo szum, którego nikt poza Tobą nie słyszy, po pięćdziesiątce zdarza się często. Jeśli szukasz hasła „szumy uszne przyczyny”, ten tekst wyjaśnia, skąd szum się bierze, kiedy jest sygnałem alarmowym i jak w Polsce dojść od lekarza rodzinnego do laryngologa i badania słuchu. Opieramy się na wytycznych NICE i AAO-HNS, przeglądach Cochrane oraz informacjach NFZ i pacjent.gov.pl. Szybka odpowiedź Po 50. roku życia szumy uszne najczęściej wiążą się z niedosłuchem, a rzadko z groźną chorobą. Do lekarza rodzinnego idź, gdy szum trwa, nasila się lub przeszkadza; na SOR, gdy pojawia się z nagłą utratą słuchu, zawrotami głowy, osłabieniem twarzy lub po urazie głowy. Kluczowe wnioski Szum uszny ma 13,7% osób w wieku 45–64 lata i 23,6% osób po 65. roku życia (metaanaliza z 2022 roku). ",
+      "alt": "Kobieta około sześćdziesięciu lat w dużych słuchawkach siedzi w kabinie badania słuchu i trzyma przycisk sygnalizacyjny.",
+      "caption": "Audiometria daje wynik w postaci audiogramu; na NFZ zleca ją zwykle laryngolog po skierowaniu z POZ.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.avif",
+          "sha256": "da0eb697cd51215c3a5176e770c5227aa58ca48770897895fedd2e52395de1c9",
+          "bytes": 48957,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.webp",
+          "sha256": "1e84cf20e91a5c5f5fa0dedc710480bfbf47add871a7b8cdd3d059132fe4cd04",
+          "bytes": 69346,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.jpg",
+          "sha256": "e77c0f0fa11ed382224e049159b09052e361f8c0ce8c3676934524e550eb5f99",
+          "bytes": 127274,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "a3b766fb6447f31d593e96eea6504e6b0b4f76c944ec1e0bef049ae5f49956d3"
+    },
+    {
+      "placement": "content:7:co-pomaga-na-szumy-uszne-a-co-ma-slabe-dowody",
+      "role": "content",
+      "heading": "Co pomaga na szumy uszne, a co ma słabe dowody?",
+      "context": "Pisk, buczenie albo szum, którego nikt poza Tobą nie słyszy, po pięćdziesiątce zdarza się często. Jeśli szukasz hasła „szumy uszne przyczyny”, ten tekst wyjaśnia, skąd szum się bierze, kiedy jest sygnałem alarmowym i jak w Polsce dojść od lekarza rodzinnego do laryngologa i badania słuchu. Opieramy się na wytycznych NICE i AAO-HNS, przeglądach Cochrane oraz informacjach NFZ i pacjent.gov.pl. Szybka odpowiedź Po 50. roku życia szumy uszne najczęściej wiążą się z niedosłuchem, a rzadko z groźną chorobą. Do lekarza rodzinnego idź, gdy szum trwa, nasila się lub przeszkadza; na SOR, gdy pojawia się z nagłą utratą słuchu, zawrotami głowy, osłabieniem twarzy lub po urazie głowy. Kluczowe wnioski Szum uszny ma 13,7% osób w wieku 45–64 lata i 23,6% osób po 65. roku życia (metaanaliza z 2022 roku). ",
+      "alt": "Mężczyzna po sześćdziesiątce z aparatem słuchowym rozmawia z przyjacielem na ławce w jesiennym parku — ilustracja sekcji o sposobach radzenia sobie z szumami usznymi.",
+      "caption": "Co pomaga na szumy uszne, a co ma słabe dowody? Sekcję ilustruje rozmowa dwóch mężczyzn w parku; jeden ma aparat słuchowy.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.avif",
+          "sha256": "aa334839669831293f88510f3f2ebcaa3fe3b67021f51291bdc4df990b0d1c0a",
+          "bytes": 45932,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.webp",
+          "sha256": "5f9f971dbc95ab861979e4572c8ed3f6bb3f59c3faefcdd3fc4421f2156eb87b",
+          "bytes": 68758,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.jpg",
+          "sha256": "f3acfa9e31cc85177285d102523c290c3e748a3cb094d34bf635bb8ec8b2d58a",
+          "bytes": 126662,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "842c28da2434a4e238e0fcec4a332434154d8c1367ab5783e6e8ee8ad61e80d0"
+    }
+  ],
+  "pdf": {
+    "pages": 8,
+    "text_coverage": 1,
+    "rendered_pages": 8,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/pdf-pages/page-1.png",
+        "sha256": "1ba597cdb1cbe68ecefb6ae8294094f2d128029c0d49d3be89368357f83a2d50",
+        "bytes": 544792,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1064,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/pdf-pages/page-2.png",
+        "sha256": "e166b1ddbd16fe97886b73b777291931efa44563be6d841e87e8003d4ee05168",
+        "bytes": 425200,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1065,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/pdf-pages/page-3.png",
+        "sha256": "88a842cfc13e992790e828dd294b54af2d243669b7a4b3be813b5cdd2b16e409",
+        "bytes": 633708,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 57,
+          "width": 1055,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/pdf-pages/page-4.png",
+        "sha256": "fb344fe1120cb33836d14ebff8377a32516b0c37df78f21e8e0de42998fee6d3",
+        "bytes": 737662,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/pdf-pages/page-5.png",
+        "sha256": "7981569be2bbfa08271d1551badea2eab5f30027ba8033464bb8876d5edfb91b",
+        "bytes": 628757,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1065,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/pdf-pages/page-6.png",
+        "sha256": "1b297f2b8cca563b876de89ec993e2df9a3fab705b3b2d8fd324581660cda499",
+        "bytes": 689974,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/pdf-pages/page-7.png",
+        "sha256": "a4c99c84e2635828ffc214b05d5a555b32177b9b3804832393c83e3064afa32b",
+        "bytes": 299518,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/szumy-uszne-po-50-przyczyny/pdf-pages/page-8.png",
+        "sha256": "68aa1a7509f85a4d03f368929e8ffa36cc5891abe517b56386779df6aa644adb",
+        "bytes": 449741,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 50,
+          "y": 57,
+          "width": 1075,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 10865,
+    "review_wait_ms": null
+  },
+  "errors": []
+}

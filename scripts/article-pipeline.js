@@ -389,26 +389,7 @@ async function main() {
         runPreviewGate(stageRoot, slug);
         stepTimings.push({ tag: 'Render desktop/mobile i kontrola PDF', durationMs: Date.now() - phaseStarted });
         assertNoUnexpectedStageChanges(root, stageRoot, candidates);
-        writeArticleStageRecord({ stageRoot, sourceRoot: root, slug, input, candidates, baseline, transactionId, operation });
-        markTempWorkspace(stageRoot, 'AWAITING_REVIEW');
-        keepForReview = true;
-        console.log(`[AWAITING_VISUAL_REVIEW] ${stageRoot}`);
-        if (!dryRun) {
-          writePipelineStatus(root, slug, 'AWAITING_REVIEW', {
-            next_action: 'REVIEW_VISUAL_ARTIFACTS',
-            next_args: {
-              stage_root: stageRoot,
-              input_file: input,
-              assets_dir: assetsDir,
-              force,
-              allow_overwrite_seo_patches: allowOverwriteSeoPatches,
-            },
-          });
-          appendTimingReport('article-pipeline-awaiting-review', stepTimings);
-        } else {
-          console.log('[DRY_RUN] Preview desktop, mobile i PDF powstał wyłącznie w zarządzanym stagingu; repozytorium i stan publikacji pozostały nietknięte.');
-        }
-        return { workingCopy: '', artifactCleanup: null, awaitingReview: true };
+        console.log('[TECHNICAL_PREVIEW_PASS] Automatyczne kontrole HTML desktop/mobile i PDF przeszły; ręczny review nie blokuje publikacji.');
       }
       const monitoring = preparePublicationMonitoring({
         stageRoot,

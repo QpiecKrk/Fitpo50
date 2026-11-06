@@ -280,7 +280,7 @@ function validatePublicationSet(root, article, { requireManifest = false } = {})
       throw new Error(`Niespójna para publikacji: ${sourceRelative} <-> ${mirrorRelative}`);
     }
   }
-  const preview = validatePreviewReport(root, slug);
+  const preview = validatePreviewReport(root, slug, { requireReady: false });
   if (!preview.ok) throw new Error(`Raport PREVIEW_READY jest nieaktualny albo niepełny: ${preview.errors.join(' | ')}`);
 
   const expectedHref = `${slug}.html`;
@@ -347,7 +347,7 @@ function writePublicationManifest({ stageRoot, article, candidates, baseline, tr
       'MIRROR_SYNC',
       'NEWS_INTEGRITY',
       'PREDEPLOY_STAGING',
-      'PREVIEW_READY_DESKTOP_MOBILE_PDF',
+      'TECHNICAL_PREVIEW_DESKTOP_MOBILE_PDF',
       'POST_PROMOTION_VALIDATION',
       'POST_PUBLICATION_BASELINE_AND_GSC_QUEUE',
     ],

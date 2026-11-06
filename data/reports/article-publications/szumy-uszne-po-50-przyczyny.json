@@ -1,0 +1,508 @@
+{
+  "version": 1,
+  "transaction_id": "article-szumy-uszne-po-50-przyczyny-1793939581563-75220",
+  "generated_at": "2026-11-06T05:33:55+01:00",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "szumy-uszne-po-50-przyczyny",
+  "url": "https://fitpo50.pl/szumy-uszne-po-50-przyczyny.html",
+  "manifest_file": "data/reports/article-publications/szumy-uszne-po-50-przyczyny.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "TECHNICAL_PREVIEW_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "szumy-uszne-po-50-przyczyny.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49",
+      "bytes": 56072
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "0cb104b46326f8373291b416f3f816594a1b79c729af30d2feaa84517d08304f",
+      "after_sha256": "1b311e2d77cfa32ffb89f16f5ec20ad8423c358084ba8bec06a531c14e0ffd1e",
+      "bytes": 119747
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "55477d14c1f6d4a48e04d8893892936b64330470342b21f8f77fc75c8394d702",
+      "after_sha256": "09de4c8050b510f767291cd784fa6f4c314231cbe24eff2eb7ad3eedbe1284e9",
+      "bytes": 164482
+    },
+    {
+      "path": "zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "c6fc64064ba5cb12377368716aa2bfde1426f51aab1c37e21f7a3fc6f9517500",
+      "after_sha256": "46c36246924bb96e0212b3f9455f6799996e26d3428bced90061b6a67641bba3",
+      "bytes": 63169
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "40691eb02171aebd18818e209ac8003444055b6bd09406a083f54666733d233d",
+      "after_sha256": "ba2c4eda9d0e8b2197ea4f1d8e40f3e5acd166e656c7adcb040967337900d65f",
+      "bytes": 20401
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "4d1ddc3f063e5b9c70c8579ef8d2f66f05a11c8b65358db30f02f4da303e54d7",
+      "after_sha256": "b099dce725b360f3fe098831300cd3f0e17aa96c9ce3d46de7de95cf664c5246",
+      "bytes": 39934
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "fdf9edc15bf51bb064b7659b4b7c7092e7e951d92b519fe048e6d466fedaa462",
+      "after_sha256": "157fbb305f6c2bdbe60f807eb0131a46884c135f76905c71b65da7c48ef0969c",
+      "bytes": 914237
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "f2b7b3fcc34e5ff40f7165831ecd783cab8847bb5188c14d5361f69bbea07dd1",
+      "after_sha256": "b6b083970bcde93c7e40586a2335846b5607b8906aba55c9cf1d4a4c8b18a94e",
+      "bytes": 959377
+    },
+    {
+      "path": "assets/pdf/szumy-uszne-po-50-przyczyny.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a",
+      "bytes": 444672
+    },
+    {
+      "path": "data/crosslink-suggestions/szumy-uszne-po-50-przyczyny.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9f3f18f936d3dc7de052e6522fba1de4b962877ad5bfcd533ab5bb3bdb9f022b",
+      "bytes": 1319
+    },
+    {
+      "path": "data/reports/article-preview/szumy-uszne-po-50-przyczyny.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b9338e9f029266e61b5ff021cf624770494e1cca94e2973ff74d1c1d0436c19c",
+      "bytes": 21485
+    },
+    {
+      "path": "data/reports/article-preview/szumy-uszne-po-50-przyczyny.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "eec3e4187fd8cd4aa72503b0595c535c6e6665ba0bb2f9986977572d62c6b857",
+      "bytes": 366
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "f8b3491497a04dfad024d30a15e28d5c612dd2c6fdf26d9ae1766dfcd943b269",
+      "after_sha256": "7f5cb65a0d20ee7ae6d7728ae0d4d8d4a30431e0aafbb1159772dde9cd7d97af",
+      "bytes": 60684
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "1a5686750b86e97ac2ae4879f7c50439d0b196bebb46802ab456af3ed0c5c46e",
+      "after_sha256": "eab13ce6500cfb419dc6feabd128f87da9615cb5a2a38fbe024493354d07b58f",
+      "bytes": 6402
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "d2d0885fb14574ab9574c03ce27eb499dc4c8668245a1dd3d6f48dfc71a81f0b",
+      "after_sha256": "b87ce56697e4bcbc696d5b29bfa064d702eeb153c29a1113a79bc338fc9827bd",
+      "bytes": 3116
+    },
+    {
+      "path": "data/reports/link-topology-report.json",
+      "action": "UPDATE",
+      "before_sha256": "d3b95d71a4e3b05cf88d1783b60d99bc670ec20e780a2d7b1ad063bc5e8fc5f7",
+      "after_sha256": "364b4e8a386a9bd9364afa9803e3968faa0c129891afd8106cecdf064f71501b",
+      "bytes": 8813
+    },
+    {
+      "path": "data/reports/link-topology-report.md",
+      "action": "UPDATE",
+      "before_sha256": "cc5f9d3559628da1223d03d50fcb53f2a3a32eee5131da95254a9bde91a80450",
+      "after_sha256": "2102fbc5fd79c569aefbc19c003842734e6502d6bd73ad34b5867acb61da92b3",
+      "bytes": 4829
+    },
+    {
+      "path": "_site/szumy-uszne-po-50-przyczyny.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49",
+      "bytes": 56072
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "0cb104b46326f8373291b416f3f816594a1b79c729af30d2feaa84517d08304f",
+      "after_sha256": "1b311e2d77cfa32ffb89f16f5ec20ad8423c358084ba8bec06a531c14e0ffd1e",
+      "bytes": 119747
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "55477d14c1f6d4a48e04d8893892936b64330470342b21f8f77fc75c8394d702",
+      "after_sha256": "09de4c8050b510f767291cd784fa6f4c314231cbe24eff2eb7ad3eedbe1284e9",
+      "bytes": 164482
+    },
+    {
+      "path": "_site/zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "c6fc64064ba5cb12377368716aa2bfde1426f51aab1c37e21f7a3fc6f9517500",
+      "after_sha256": "46c36246924bb96e0212b3f9455f6799996e26d3428bced90061b6a67641bba3",
+      "bytes": 63169
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "40691eb02171aebd18818e209ac8003444055b6bd09406a083f54666733d233d",
+      "after_sha256": "ba2c4eda9d0e8b2197ea4f1d8e40f3e5acd166e656c7adcb040967337900d65f",
+      "bytes": 20401
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "4d1ddc3f063e5b9c70c8579ef8d2f66f05a11c8b65358db30f02f4da303e54d7",
+      "after_sha256": "b099dce725b360f3fe098831300cd3f0e17aa96c9ce3d46de7de95cf664c5246",
+      "bytes": 39934
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "fdf9edc15bf51bb064b7659b4b7c7092e7e951d92b519fe048e6d466fedaa462",
+      "after_sha256": "157fbb305f6c2bdbe60f807eb0131a46884c135f76905c71b65da7c48ef0969c",
+      "bytes": 914237
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "f2b7b3fcc34e5ff40f7165831ecd783cab8847bb5188c14d5361f69bbea07dd1",
+      "after_sha256": "b6b083970bcde93c7e40586a2335846b5607b8906aba55c9cf1d4a4c8b18a94e",
+      "bytes": 959377
+    },
+    {
+      "path": "_site/assets/pdf/szumy-uszne-po-50-przyczyny.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a",
+      "bytes": 444672
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/szumy-uszne-po-50-przyczyny.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9f3f18f936d3dc7de052e6522fba1de4b962877ad5bfcd533ab5bb3bdb9f022b",
+      "bytes": 1319
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2eeb9098516c3586eef00d00f14fe782327b3b791b9d9c8e971e44b8b6029bc0",
+      "bytes": 23086
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2eeb9098516c3586eef00d00f14fe782327b3b791b9d9c8e971e44b8b6029bc0",
+      "bytes": 23086
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c4bb6034c9d027a9332c0b72e6ce6d3cd9f26c716506f616a99156a9bd58ebca",
+      "bytes": 30664
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c4bb6034c9d027a9332c0b72e6ce6d3cd9f26c716506f616a99156a9bd58ebca",
+      "bytes": 30664
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "83caf556d2b45f12ff8e1dadc8f466ab6ef096817047126ddcdec0537caa03c8",
+      "bytes": 74023
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "83caf556d2b45f12ff8e1dadc8f466ab6ef096817047126ddcdec0537caa03c8",
+      "bytes": 74023
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b56b54fa36b2fb5f4ce91530dcbb7911dd890677aa9ed5e306ec9eccef351c05",
+      "bytes": 9693
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b56b54fa36b2fb5f4ce91530dcbb7911dd890677aa9ed5e306ec9eccef351c05",
+      "bytes": 9693
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ba3c65478031ef38a3193fc86df59296b9cbe4a6ac4528105955819307ca386d",
+      "bytes": 16672
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ba3c65478031ef38a3193fc86df59296b9cbe4a6ac4528105955819307ca386d",
+      "bytes": 16672
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "322a7fd5584993e4df80ba1432b86e3d7462675c432ab670606852cfceea5311",
+      "bytes": 40363
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "322a7fd5584993e4df80ba1432b86e3d7462675c432ab670606852cfceea5311",
+      "bytes": 40363
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "10b2c643d78e5ff728ea7fece1b8a6de9eae207187cc296ff4a24197f0d3d5e5",
+      "bytes": 59758
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "10b2c643d78e5ff728ea7fece1b8a6de9eae207187cc296ff4a24197f0d3d5e5",
+      "bytes": 59758
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b0d20c4c5bd783d7999fdad45e5d4d3a29034534ceeaf23e7250d994dd5e67b8",
+      "bytes": 102274
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b0d20c4c5bd783d7999fdad45e5d4d3a29034534ceeaf23e7250d994dd5e67b8",
+      "bytes": 102274
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dca7a62df17ca8764acc4cff31d64d5c96177a8c8db6a680bd3c6fe03f2b5ca7",
+      "bytes": 158885
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dca7a62df17ca8764acc4cff31d64d5c96177a8c8db6a680bd3c6fe03f2b5ca7",
+      "bytes": 158885
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aff7edb08d305d678436aa24f6f97881cde56e088d5d6278d0cfaa4927971f2f",
+      "bytes": 53127
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aff7edb08d305d678436aa24f6f97881cde56e088d5d6278d0cfaa4927971f2f",
+      "bytes": 53127
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "034169ff047c698e027db72e4b7547e54ae594434beb0425544d9da945ddf4a7",
+      "bytes": 87004
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "034169ff047c698e027db72e4b7547e54ae594434beb0425544d9da945ddf4a7",
+      "bytes": 87004
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7caa8324e115a89dd8422ee8721a139907954f0e2d3acbe9660999be6447de62",
+      "bytes": 135507
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7caa8324e115a89dd8422ee8721a139907954f0e2d3acbe9660999be6447de62",
+      "bytes": 135507
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5a24881bbf4c65cf48ec29369bf6c26b4b2628935ede1d58b17a8f950006325a",
+      "bytes": 47123
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5a24881bbf4c65cf48ec29369bf6c26b4b2628935ede1d58b17a8f950006325a",
+      "bytes": 47123
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c66f70a1d544a0bbf96f2ec6ebee3fdd50633eab5661ab5939e10c0e266affcb",
+      "bytes": 63080
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c66f70a1d544a0bbf96f2ec6ebee3fdd50633eab5661ab5939e10c0e266affcb",
+      "bytes": 63080
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7f977fc9efa5cee54e8d4ac3fd6a8b289c6bbacd4c907ff296d72c912fa6b39e",
+      "bytes": 118480
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7f977fc9efa5cee54e8d4ac3fd6a8b289c6bbacd4c907ff296d72c912fa6b39e",
+      "bytes": 118480
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "da0eb697cd51215c3a5176e770c5227aa58ca48770897895fedd2e52395de1c9",
+      "bytes": 48957
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "da0eb697cd51215c3a5176e770c5227aa58ca48770897895fedd2e52395de1c9",
+      "bytes": 48957
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1e84cf20e91a5c5f5fa0dedc710480bfbf47add871a7b8cdd3d059132fe4cd04",
+      "bytes": 69346
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1e84cf20e91a5c5f5fa0dedc710480bfbf47add871a7b8cdd3d059132fe4cd04",
+      "bytes": 69346
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e77c0f0fa11ed382224e049159b09052e361f8c0ce8c3676934524e550eb5f99",
+      "bytes": 127274
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e77c0f0fa11ed382224e049159b09052e361f8c0ce8c3676934524e550eb5f99",
+      "bytes": 127274
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aa334839669831293f88510f3f2ebcaa3fe3b67021f51291bdc4df990b0d1c0a",
+      "bytes": 45932
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "aa334839669831293f88510f3f2ebcaa3fe3b67021f51291bdc4df990b0d1c0a",
+      "bytes": 45932
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5f9f971dbc95ab861979e4572c8ed3f6bb3f59c3faefcdd3fc4421f2156eb87b",
+      "bytes": 68758
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5f9f971dbc95ab861979e4572c8ed3f6bb3f59c3faefcdd3fc4421f2156eb87b",
+      "bytes": 68758
+    },
+    {
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f3acfa9e31cc85177285d102523c290c3e748a3cb094d34bf635bb8ec8b2d58a",
+      "bytes": 126662
+    },
+    {
+      "path": "_site/assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f3acfa9e31cc85177285d102523c290c3e748a3cb094d34bf635bb8ec8b2d58a",
+      "bytes": 126662
+    }
+  ],
+  "files_count": 69
+}

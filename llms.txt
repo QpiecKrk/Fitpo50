@@ -483,3 +483,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Nocne skurcze łydek po 50: dlaczego magnez często nie pomaga | FitPo50"
   section: "Zdrowie"
   summary: "Magnez na nocne skurcze łydek po 50-tce: co mówi Cochrane, jakie leki i choroby bywają w tle, co ma słabe dowody i kiedy iść do lekarza po poradę."
+- url: https://fitpo50.pl/szumy-uszne-po-50-przyczyny.html
+  title: "Szumy uszne po 50: skąd się biorą i kiedy iść do lekarza | FitPo50"
+  section: "Zdrowie"
+  summary: "Skąd biorą się szumy uszne po 50-tce: słuch, ciśnienie, leki, stres. Kiedy to sygnał alarmowy i jak w Polsce dojść do laryngologa i badania słuchu."

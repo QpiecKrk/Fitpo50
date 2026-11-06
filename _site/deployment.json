@@ -1,10 +1,10 @@
 {
   "version": 4,
-  "release_id": "5246a61f-b2f2-4bb6-a9dc-5efc20825082",
-  "prepared_at": "2026-11-06T02:03:19+01:00",
-  "prepared_from_head": "13822b5c9f8c548d67cbd673730e6eb248f7e80c",
-  "publication_state_sha256": "96fd5fe05dcffe859a521ff6ba4655529bfb262327b34a92a11c7db6f799bcd2",
-  "public_fingerprint_sha256": "ccecfee6b03e2b9e14f1224b079a2e47250c3f1ebf1c9105a55dbeb968c3d30a",
+  "release_id": "afb64401-d23f-4bde-ad0b-0a2da879b8cd",
+  "prepared_at": "2026-11-06T05:40:34+01:00",
+  "prepared_from_head": "20aaa15300d5e133e67511bbbf56d7f2b682da5b",
+  "publication_state_sha256": "f17c4dbaf2d26040ac84ef0315b67d8b47cdf90a2926430acb75ad5c1691aba3",
+  "public_fingerprint_sha256": "ec1ee12324e7b69802480de0c26d85e5f3e95ccad182fead48a0793fbe8e440b",
   "change_scope": [
     "full"
   ],
@@ -12,157 +12,157 @@
     {
       "path": "assets/data/search-index.json",
       "mode": "sha256",
-      "sha256": "f2b7b3fcc34e5ff40f7165831ecd783cab8847bb5188c14d5361f69bbea07dd1"
+      "sha256": "b6b083970bcde93c7e40586a2335846b5607b8906aba55c9cf1d4a4c8b18a94e"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.avif",
+      "path": "assets/pdf/szumy-uszne-po-50-przyczyny.pdf",
       "mode": "sha256",
-      "sha256": "0404258ebd290a20bb9ed92f34202d6d2297a13add99e0cda6f06140d616b48e"
+      "sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.jpg",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.avif",
       "mode": "sha256",
-      "sha256": "3782bbdbd6b1c69763c2ed12b13b288b3067feec561f17505cc1e47d49e0eed4"
+      "sha256": "da0eb697cd51215c3a5176e770c5227aa58ca48770897895fedd2e52395de1c9"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.webp",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.jpg",
       "mode": "sha256",
-      "sha256": "d38bc268d1485146b6f1e42255c326a547bc50cfe5bd236fe1ea1f9d152b49b0"
+      "sha256": "e77c0f0fa11ed382224e049159b09052e361f8c0ce8c3676934524e550eb5f99"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.avif",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.webp",
       "mode": "sha256",
-      "sha256": "ac8ca9638b74f6405899f6ecb94195dbc624c8223a65ec809385f0ce86c490f5"
+      "sha256": "1e84cf20e91a5c5f5fa0dedc710480bfbf47add871a7b8cdd3d059132fe4cd04"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.jpg",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.avif",
       "mode": "sha256",
-      "sha256": "5faf1257673978f18f4acb9f1641188ab906899336af3f5510c7af5a5112f399"
+      "sha256": "5a24881bbf4c65cf48ec29369bf6c26b4b2628935ede1d58b17a8f950006325a"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.webp",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.jpg",
       "mode": "sha256",
-      "sha256": "3b401dc139794e47e241689c540bd62eb3ab24e322acb0fe1f0b9bb20a79f6b5"
+      "sha256": "7f977fc9efa5cee54e8d4ac3fd6a8b289c6bbacd4c907ff296d72c912fa6b39e"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.webp",
       "mode": "sha256",
-      "sha256": "8b3d1434a0715a4bfae357022cb283d1914d14a554c5a303aeb9f3ae49f3038e"
+      "sha256": "c66f70a1d544a0bbf96f2ec6ebee3fdd50633eab5661ab5939e10c0e266affcb"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.jpg",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.avif",
       "mode": "sha256",
-      "sha256": "85f8437d789961725ac9c7a6328f41204d6d1e116ea3e611638bbc83616415e5"
+      "sha256": "aa334839669831293f88510f3f2ebcaa3fe3b67021f51291bdc4df990b0d1c0a"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.jpg",
       "mode": "sha256",
-      "sha256": "615079282e76b1d57c12452e29e5038dfd93497b410f72708a7ceca7e1538243"
+      "sha256": "f3acfa9e31cc85177285d102523c290c3e748a3cb094d34bf635bb8ec8b2d58a"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.avif",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.webp",
       "mode": "sha256",
-      "sha256": "4432c2833b3843d45d4f1ac7576c31cb86b5230ec64d82b702f338be55e1356d"
+      "sha256": "5f9f971dbc95ab861979e4572c8ed3f6bb3f59c3faefcdd3fc4421f2156eb87b"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.jpg",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.avif",
       "mode": "sha256",
-      "sha256": "b074930ba7365248ed60ef72b2294806849dc4465368d89d2899cda6670c644d"
+      "sha256": "aff7edb08d305d678436aa24f6f97881cde56e088d5d6278d0cfaa4927971f2f"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.webp",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.jpg",
       "mode": "sha256",
-      "sha256": "7e91ee2f34e55565bc5aba1bdc3a3b60887597138790ee60296091a37518898f"
+      "sha256": "7caa8324e115a89dd8422ee8721a139907954f0e2d3acbe9660999be6447de62"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.avif",
+      "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.webp",
       "mode": "sha256",
-      "sha256": "800c9c8497fcbaaa8ed26166dce28b966448c2151585c804f398daeb9d8f9621"
+      "sha256": "034169ff047c698e027db72e4b7547e54ae594434beb0425544d9da945ddf4a7"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.jpg",
+      "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif",
       "mode": "sha256",
-      "sha256": "560d0e4fadaab6fbe482b858e39dffcb70beba5eba8b7d9ec0e9396651c2895a"
+      "sha256": "2eeb9098516c3586eef00d00f14fe782327b3b791b9d9c8e971e44b8b6029bc0"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.webp",
+      "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.jpg",
       "mode": "sha256",
-      "sha256": "76103d77113de43bc9f83cd86588ec0737e72b04563c83ce024d84f1f2d8cd27"
+      "sha256": "83caf556d2b45f12ff8e1dadc8f466ab6ef096817047126ddcdec0537caa03c8"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.avif",
+      "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp",
       "mode": "sha256",
-      "sha256": "3ced1b684efd6666dfc1b4434d8b5f9e8591113f1ae59096cdea2dc6c468c821"
+      "sha256": "c4bb6034c9d027a9332c0b72e6ce6d3cd9f26c716506f616a99156a9bd58ebca"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.jpg",
+      "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.avif",
       "mode": "sha256",
-      "sha256": "baecccc02fe2948ed3d7201e539ae6302d2f343d7f8736f5003374cb899951fa"
+      "sha256": "10b2c643d78e5ff728ea7fece1b8a6de9eae207187cc296ff4a24197f0d3d5e5"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.webp",
+      "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.jpg",
       "mode": "sha256",
-      "sha256": "64902a30953cf438593e1149f134ed0dea0041ba98b02202939d49618dcb6158"
+      "sha256": "dca7a62df17ca8764acc4cff31d64d5c96177a8c8db6a680bd3c6fe03f2b5ca7"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.avif",
+      "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.webp",
       "mode": "sha256",
-      "sha256": "f97965b964a96708bef7c2d5e1cf8a0b3b97cec339a9edaf9d58869346c1a992"
+      "sha256": "b0d20c4c5bd783d7999fdad45e5d4d3a29034534ceeaf23e7250d994dd5e67b8"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.jpg",
+      "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.avif",
       "mode": "sha256",
-      "sha256": "d4ac6920d791f833b84aa05f8d4773e912b82a178253741a671522c9f898ce8c"
+      "sha256": "b56b54fa36b2fb5f4ce91530dcbb7911dd890677aa9ed5e306ec9eccef351c05"
     },
     {
-      "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.webp",
+      "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.jpg",
       "mode": "sha256",
-      "sha256": "c2f787fc284fe0e1aef50d71dbea1b8b836e6b88c7f92b663ae2cdc1f8279693"
+      "sha256": "322a7fd5584993e4df80ba1432b86e3d7462675c432ab670606852cfceea5311"
     },
     {
-      "path": "assets/pdf/nocne-skurcze-lydek-po-50-magnez.pdf",
+      "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.webp",
       "mode": "sha256",
-      "sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644"
+      "sha256": "ba3c65478031ef38a3193fc86df59296b9cbe4a6ac4528105955819307ca386d"
     },
     {
-      "path": "data/crosslink-suggestions/nocne-skurcze-lydek-po-50-magnez.json",
+      "path": "data/crosslink-suggestions/szumy-uszne-po-50-przyczyny.json",
       "mode": "sha256",
-      "sha256": "cce8d5bfa6ce55503c9950a033d06e6a971e0fff4c7347a69414e85d090c8a86"
+      "sha256": "9f3f18f936d3dc7de052e6522fba1de4b962877ad5bfcd533ab5bb3bdb9f022b"
     },
     {
       "path": "index.html",
       "mode": "sha256",
-      "sha256": "0cb104b46326f8373291b416f3f816594a1b79c729af30d2feaa84517d08304f"
+      "sha256": "1b311e2d77cfa32ffb89f16f5ec20ad8423c358084ba8bec06a531c14e0ffd1e"
     },
     {
       "path": "llms-full.txt",
       "mode": "sha256",
-      "sha256": "fdf9edc15bf51bb064b7659b4b7c7092e7e951d92b519fe048e6d466fedaa462"
+      "sha256": "157fbb305f6c2bdbe60f807eb0131a46884c135f76905c71b65da7c48ef0969c"
     },
     {
       "path": "llms.txt",
       "mode": "sha256",
-      "sha256": "4d1ddc3f063e5b9c70c8579ef8d2f66f05a11c8b65358db30f02f4da303e54d7"
-    },
-    {
-      "path": "nocne-skurcze-lydek-po-50-magnez.html",
-      "mode": "sha256",
-      "sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a"
+      "sha256": "b099dce725b360f3fe098831300cd3f0e17aa96c9ce3d46de7de95cf664c5246"
     },
     {
       "path": "porady.html",
       "mode": "sha256",
-      "sha256": "55477d14c1f6d4a48e04d8893892936b64330470342b21f8f77fc75c8394d702"
+      "sha256": "09de4c8050b510f767291cd784fa6f4c314231cbe24eff2eb7ad3eedbe1284e9"
     },
     {
       "path": "sitemap.xml",
       "mode": "sha256",
-      "sha256": "40691eb02171aebd18818e209ac8003444055b6bd09406a083f54666733d233d"
+      "sha256": "ba2c4eda9d0e8b2197ea4f1d8e40f3e5acd166e656c7adcb040967337900d65f"
+    },
+    {
+      "path": "szumy-uszne-po-50-przyczyny.html",
+      "mode": "sha256",
+      "sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49"
     },
     {
       "path": "zdrowie.html",
       "mode": "sha256",
-      "sha256": "c6fc64064ba5cb12377368716aa2bfde1426f51aab1c37e21f7a3fc6f9517500"
+      "sha256": "46c36246924bb96e0212b3f9455f6799996e26d3428bced90061b6a67641bba3"
     }
   ],
   "news": {
@@ -235,13 +235,13 @@
   },
   "articles": [
     {
-      "file": "nocne-skurcze-lydek-po-50-magnez.html",
-      "slug": "nocne-skurcze-lydek-po-50-magnez",
-      "url": "https://fitpo50.pl/nocne-skurcze-lydek-po-50-magnez.html",
-      "date_modified": "2026-11-05T09:30:00+01:00",
-      "html_sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a",
-      "pdf_path": "assets/pdf/nocne-skurcze-lydek-po-50-magnez.pdf",
-      "pdf_sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644",
+      "file": "szumy-uszne-po-50-przyczyny.html",
+      "slug": "szumy-uszne-po-50-przyczyny",
+      "url": "https://fitpo50.pl/szumy-uszne-po-50-przyczyny.html",
+      "date_modified": "2026-11-06T09:30:00+01:00",
+      "html_sha256": "01511e5f9d0d730196d81d451d71c86a03404755582c8d903183c82597257b49",
+      "pdf_path": "assets/pdf/szumy-uszne-po-50-przyczyny.pdf",
+      "pdf_sha256": "29b51196bd1d84c2ac677a25cf7d76c442b32f0965e7e5110b3648ff6e09b45a",
       "images": [
         {
           "path": "assets/logo-fitpo50.png",
@@ -250,30 +250,6 @@
         {
           "path": "assets/logo.jpg",
           "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.avif",
-          "sha256": "0404258ebd290a20bb9ed92f34202d6d2297a13add99e0cda6f06140d616b48e"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.jpg",
-          "sha256": "3782bbdbd6b1c69763c2ed12b13b288b3067feec561f17505cc1e47d49e0eed4"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.webp",
-          "sha256": "d38bc268d1485146b6f1e42255c326a547bc50cfe5bd236fe1ea1f9d152b49b0"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.avif",
-          "sha256": "ac8ca9638b74f6405899f6ecb94195dbc624c8223a65ec809385f0ce86c490f5"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.jpg",
-          "sha256": "5faf1257673978f18f4acb9f1641188ab906899336af3f5510c7af5a5112f399"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.webp",
-          "sha256": "3b401dc139794e47e241689c540bd62eb3ab24e322acb0fe1f0b9bb20a79f6b5"
         },
         {
           "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif",
@@ -288,54 +264,6 @@
           "sha256": "615079282e76b1d57c12452e29e5038dfd93497b410f72708a7ceca7e1538243"
         },
         {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.avif",
-          "sha256": "4432c2833b3843d45d4f1ac7576c31cb86b5230ec64d82b702f338be55e1356d"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.jpg",
-          "sha256": "b074930ba7365248ed60ef72b2294806849dc4465368d89d2899cda6670c644d"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.webp",
-          "sha256": "7e91ee2f34e55565bc5aba1bdc3a3b60887597138790ee60296091a37518898f"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.avif",
-          "sha256": "800c9c8497fcbaaa8ed26166dce28b966448c2151585c804f398daeb9d8f9621"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.jpg",
-          "sha256": "560d0e4fadaab6fbe482b858e39dffcb70beba5eba8b7d9ec0e9396651c2895a"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.webp",
-          "sha256": "76103d77113de43bc9f83cd86588ec0737e72b04563c83ce024d84f1f2d8cd27"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.avif",
-          "sha256": "3ced1b684efd6666dfc1b4434d8b5f9e8591113f1ae59096cdea2dc6c468c821"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.jpg",
-          "sha256": "baecccc02fe2948ed3d7201e539ae6302d2f343d7f8736f5003374cb899951fa"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.webp",
-          "sha256": "64902a30953cf438593e1149f134ed0dea0041ba98b02202939d49618dcb6158"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.avif",
-          "sha256": "f97965b964a96708bef7c2d5e1cf8a0b3b97cec339a9edaf9d58869346c1a992"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.jpg",
-          "sha256": "d4ac6920d791f833b84aa05f8d4773e912b82a178253741a671522c9f898ce8c"
-        },
-        {
-          "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.webp",
-          "sha256": "c2f787fc284fe0e1aef50d71dbea1b8b836e6b88c7f92b663ae2cdc1f8279693"
-        },
-        {
           "path": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.avif",
           "sha256": "1436fc750915b29ac38b7660b831fd6f20784ef4224f4c8c4b71694758602f0e"
         },
@@ -348,16 +276,88 @@
           "sha256": "4d8c0ab30983fd934a41742304973b640b82f22bb2c1280f36662f39c1f7cb1d"
         },
         {
-          "path": "assets/statyny-hero-poranek-lydka.avif",
-          "sha256": "aa8122c02932e451cf721e48448e7868ff55dce0d81d254aed47fed8b909b5da"
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.avif",
+          "sha256": "da0eb697cd51215c3a5176e770c5227aa58ca48770897895fedd2e52395de1c9"
         },
         {
-          "path": "assets/statyny-hero-poranek-lydka.jpg",
-          "sha256": "aec9fb50678bd7b8f68300fe1fad0f4c063763ebcb7ed9e28aacf9aabd8677aa"
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.jpg",
+          "sha256": "e77c0f0fa11ed382224e049159b09052e361f8c0ce8c3676934524e550eb5f99"
         },
         {
-          "path": "assets/statyny-hero-poranek-lydka.webp",
-          "sha256": "4437451c03f251bcff73926aeaa140dff0477c1cb08070a95a71d70dcff13c06"
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-badanie-sluchu-v1.webp",
+          "sha256": "1e84cf20e91a5c5f5fa0dedc710480bfbf47add871a7b8cdd3d059132fe4cd04"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.avif",
+          "sha256": "5a24881bbf4c65cf48ec29369bf6c26b4b2628935ede1d58b17a8f950006325a"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.jpg",
+          "sha256": "7f977fc9efa5cee54e8d4ac3fd6a8b289c6bbacd4c907ff296d72c912fa6b39e"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-poduszka-noc-v1.webp",
+          "sha256": "c66f70a1d544a0bbf96f2ec6ebee3fdd50633eab5661ab5939e10c0e266affcb"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.avif",
+          "sha256": "aa334839669831293f88510f3f2ebcaa3fe3b67021f51291bdc4df990b0d1c0a"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.jpg",
+          "sha256": "f3acfa9e31cc85177285d102523c290c3e748a3cb094d34bf635bb8ec8b2d58a"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-rozmowa-aparat-v1.webp",
+          "sha256": "5f9f971dbc95ab861979e4572c8ed3f6bb3f59c3faefcdd3fc4421f2156eb87b"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.avif",
+          "sha256": "aff7edb08d305d678436aa24f6f97881cde56e088d5d6278d0cfaa4927971f2f"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.jpg",
+          "sha256": "7caa8324e115a89dd8422ee8721a139907954f0e2d3acbe9660999be6447de62"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-fotografia-ulotka-lek-v1.webp",
+          "sha256": "034169ff047c698e027db72e4b7547e54ae594434beb0425544d9da945ddf4a7"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif",
+          "sha256": "2eeb9098516c3586eef00d00f14fe782327b3b791b9d9c8e971e44b8b6029bc0"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.jpg",
+          "sha256": "83caf556d2b45f12ff8e1dadc8f466ab6ef096817047126ddcdec0537caa03c8"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp",
+          "sha256": "c4bb6034c9d027a9332c0b72e6ce6d3cd9f26c716506f616a99156a9bd58ebca"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.avif",
+          "sha256": "10b2c643d78e5ff728ea7fece1b8a6de9eae207187cc296ff4a24197f0d3d5e5"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.jpg",
+          "sha256": "dca7a62df17ca8764acc4cff31d64d5c96177a8c8db6a680bd3c6fe03f2b5ca7"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-ilustracja-ucho-mozg-v1.webp",
+          "sha256": "b0d20c4c5bd783d7999fdad45e5d4d3a29034534ceeaf23e7250d994dd5e67b8"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.avif",
+          "sha256": "b56b54fa36b2fb5f4ce91530dcbb7911dd890677aa9ed5e306ec9eccef351c05"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.jpg",
+          "sha256": "322a7fd5584993e4df80ba1432b86e3d7462675c432ab670606852cfceea5311"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-infografika-czestosc-wiek-v1.webp",
+          "sha256": "ba3c65478031ef38a3193fc86df59296b9cbe4a6ac4528105955819307ca386d"
         },
         {
           "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.avif",

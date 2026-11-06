@@ -14,7 +14,7 @@ const {
   sha256File,
 } = require('../scripts/lib/article-json-artifact');
 const { allocateOutput, buildStageDefinitions, collectChanges, copyMediaPackage, runStagesUntilFailure } = require('../scripts/article-json-workbench');
-const { executeArticleAdd, expectedPreparedPath, packageHashesMatch, preparedPathFromOutput, reviewArtifacts } = require('../scripts/article-add');
+const { auditMessages, executeArticleAdd, expectedPreparedPath, packageHashesMatch, preparedPathFromOutput, reviewArtifacts } = require('../scripts/article-add');
 const { packageIdentity } = require('../scripts/lib/package-identity');
 const {
   EXIT_CODES,
@@ -33,6 +33,15 @@ const { appendDeploymentRegistry, deploymentEntries, seoPatchesForArticle } = re
 const REPO = path.resolve(__dirname, '..');
 const PASS_PACKAGE_AUDIT = () => ({ exit_code: 0, report_file: '/tmp/package-audit-pass.json', by_owner: { PISARZ: [], ILUSTRATOR: [], CODEX: [] } });
 const SILENT_PACKAGE_AUDIT = () => {};
+
+test('wczesny audyt deduplikuje ten sam błąd z package-audit i evidence', () => {
+  const message = 'image_prompts_v4[6].caption_pl: twierdzenie wymagające dowodu nie ma wpisu w evidence_claims.';
+  const result = auditMessages({ by_owner: { PISARZ: [{ path: '/image_prompts_v4/6/caption_pl', message }] } }, {
+    stdout: '',
+    stderr: `- ${message}\n`,
+  });
+  assert.deepEqual(result, [`/image_prompts_v4/6/caption_pl: ${message}`]);
+});
 
 function withTempDir(fn) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-json-test-'));
@@ -189,6 +198,9 @@ test('repair circuit breaker is hash-bound, ignores new writer versions and supp
   recordRepairFailure(dir, slug, 'hash-a');
   assert.equal(readAttemptState(dir, slug, 'hash-a').repair_attempts, 2);
   assert.equal(readAttemptState(dir, slug, 'hash-b').repair_attempts, 0);
+  recordRepairFailure(dir, slug, 'hash-code', {}, 'pipeline-a');
+  assert.equal(readAttemptState(dir, slug, 'hash-code', 'pipeline-a').repair_attempts, 1);
+  assert.equal(readAttemptState(dir, slug, 'hash-code', 'pipeline-b').repair_attempts, 0);
   resetSameDraft(dir, slug, 'hash-a');
   assert.equal(readAttemptState(dir, slug, 'hash-a').repair_attempts, 0);
 }));
@@ -315,7 +327,7 @@ test('changed JSON never silently reuses an older review transaction', () => wit
   assert.equal(JSON.parse(fs.readFileSync(stateFile, 'utf8')).status, 'AWAITING_REVIEW');
 }));
 
-test('nowy draft zatrzymuje się na AWAITING_MEDIA_REVIEW i bezpiecznie wznawia tę samą transakcję', () => withTempDir((dir) => {
+test('nowy draft przechodzi bez drugiego review obrazów', () => withTempDir((dir) => {
   const slug = 'nowy-review-trzech-formatow';
   const source = path.join(dir, `${slug}.fitpo50.json`);
   const outputDir = path.join(dir, 'ready');
@@ -328,15 +340,10 @@ test('nowy draft zatrzymuje się na AWAITING_MEDIA_REVIEW i bezpiecznie wznawia 
     root: dir,
     auditPackage: PASS_PACKAGE_AUDIT,
     printPackageAuditReport: SILENT_PACKAGE_AUDIT,
-    createMediaReviewTemplate: () => ({
-      ok: true,
-      errors: [],
-      template: { version: 1, slug, status: 'AWAITING_MEDIA_REVIEW', images: [] },
-    }),
     articleOperationInHead: () => 'CREATE',
     runCommand(_command, args) {
       if (args[0] === 'scripts/article-json-workbench.js') {
-        assert.ok(args.includes('--media-review-file'));
+        assert.equal(args.includes('--media-review-file'), false);
         fs.mkdirSync(outputDir, { recursive: true });
         fs.copyFileSync(source, prepared);
         return { status: 0, stdout: `[ARTICLE-JSON] status=CONTENT_READY\n[ARTICLE-JSON] JSON: ${prepared}\n`, stderr: '' };
@@ -346,20 +353,11 @@ test('nowy draft zatrzymuje się na AWAITING_MEDIA_REVIEW i bezpiecznie wznawia 
     },
   };
 
-  assert.equal(executeArticleAdd({ file: source, 'output-dir': outputDir }, dependencies), EXIT_CODES.AWAITING_MEDIA_REVIEW);
-  const state = JSON.parse(fs.readFileSync(statusPath(dir, slug), 'utf8'));
-  assert.equal(state.status, 'AWAITING_MEDIA_REVIEW');
-  assert.equal(state.exit_code, 10);
-  assert.equal(fs.existsSync(state.next_args.review_template), true);
-  assert.equal(executeArticleAdd({ file: source, 'output-dir': outputDir }, dependencies), EXIT_CODES.AWAITING_MEDIA_REVIEW);
-
-  const reviewFile = path.join(dir, 'review.json');
-  fs.writeFileSync(reviewFile, '{}\n');
-  assert.equal(executeArticleAdd({ file: source, 'output-dir': outputDir, 'review-file': reviewFile }, dependencies), 0);
-  assert.equal(fs.existsSync(state.next_args.workspace), false, 'ukończony workspace review zostaje bezpiecznie usunięty');
+  assert.equal(executeArticleAdd({ file: source, 'output-dir': outputDir }, dependencies), 0);
+  assert.equal(fs.existsSync(statusPath(dir, slug)), false);
 }));
 
-test('zmiana draftu podczas AWAITING_MEDIA_REVIEW nie używa starego review', () => withTempDir((dir) => {
+test('zmiana draftu nie wymaga restartu nieistniejącego review obrazów', () => withTempDir((dir) => {
   const slug = 'zmieniony-media-review';
   const source = path.join(dir, `${slug}.fitpo50.json`);
   fs.writeFileSync(source, `${JSON.stringify({ slug, image_prompts: [{ section_ref: 'hero' }] })}\n`);
@@ -367,16 +365,15 @@ test('zmiana draftu podczas AWAITING_MEDIA_REVIEW nie używa starego review', ()
     root: dir,
     auditPackage: PASS_PACKAGE_AUDIT,
     printPackageAuditReport: SILENT_PACKAGE_AUDIT,
-    createMediaReviewTemplate: () => ({ ok: true, errors: [], template: { version: 1, slug, images: [] } }),
     articleOperationInHead: () => 'CREATE',
-    runCommand() { throw new Error('Nie wolno uruchamiać dalszego etapu.'); },
+    runCommand(_command, args) {
+      if (args[0] === 'scripts/article-json-workbench.js') return { status: EXIT_CODES.CONTENT_BLOCKED, stdout: '', stderr: '' };
+      throw new Error('Nieoczekiwany etap.');
+    },
   };
-  assert.equal(executeArticleAdd({ file: source }, dependencies), EXIT_CODES.AWAITING_MEDIA_REVIEW);
-  const state = JSON.parse(fs.readFileSync(statusPath(dir, slug), 'utf8'));
+  assert.equal(executeArticleAdd({ file: source }, dependencies), EXIT_CODES.CONTENT_BLOCKED);
   fs.writeFileSync(source, `${JSON.stringify({ slug, title: 'Nowa wersja', image_prompts: [{ section_ref: 'hero' }] })}\n`);
   assert.equal(executeArticleAdd({ file: source }, dependencies), EXIT_CODES.CONTENT_BLOCKED);
-  assert.equal(fs.existsSync(state.next_args.workspace), true, 'stary workspace pozostaje do jawnego restartu');
-  disposeTempWorkspace(state.next_args.workspace, { status: 'FAILED' });
 }));
 
 test('article:add prowadzi poprawny fixture przez przygotowanie i atom publikacyjny', () => withTempDir((dir) => {

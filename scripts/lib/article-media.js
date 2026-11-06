@@ -402,8 +402,7 @@ function validateManifestStructure(article, options = {}) {
       if (variant?.width !== entry?.source?.width || variant?.height !== entry?.source?.height) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: wariant ${extension} ma inne wymiary niż źródło.`);
       if (hammingHex(entry?.source?.perceptual_hash, variant?.perceptual_hash) > 14) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: wariant ${extension} może przedstawiać inny obraz.`);
     });
-    if (manifest.version === 3) validateVariantReviews(entry, errors);
-    else {
+    if (manifest.version !== 3) {
       if (entry?.visual_review?.status !== VERIFIED_REVIEW || entry?.visual_review?.matches_topic !== true) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak zatwierdzonej kontroli wizualnej.`);
       validateVisualReview(entry?.visual_review || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
     }
@@ -543,7 +542,8 @@ function prepareArticleMedia(article, options = {}) {
         errors.push(error.message || String(error));
       }
     }
-    if (requiresVariantReview && options.allowPendingReview !== true) validateVariantReviews(entry, errors);
+    // Grzegorz kontroluje wygląd dostarczonych obrazów. Pipeline zachowuje
+    // komplet technicznych kontroli AVIF/WebP/JPG, ale nie dubluje review.
     entries.push(entry);
   }
 

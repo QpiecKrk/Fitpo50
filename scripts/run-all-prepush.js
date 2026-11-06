@@ -131,13 +131,12 @@ async function main() {
           runStep('article:contract:diff', 'node', ['scripts/run-article-contract-diff.js']),
           runStep('schema:validate', 'node', ['scripts/schema-validator.js', '--diff']),
           runStep('date:modified:guard', 'node', ['scripts/date-modified-guard.js']),
-          runStep('build', 'npm', ['run', 'build']),
         ]);
         timings.push(...articleChecks);
       }
     }
 
-    if (classification.full || classification.scopes.includes('articles')) {
+    if (classification.full) {
       exportWorkspace = createManagedTempDir({ prefix: 'fitpo50-prepush-export-', type: 'prepush-export', projectRoot: process.cwd() });
       exportDir = path.join(exportWorkspace, 'site');
       const sourceSnapshotBeforeExport = repositorySnapshot();

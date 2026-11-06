@@ -1711,16 +1711,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif" type="image/avif">
-          <source srcset="./assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif" type="image/avif">
+          <source srcset="./assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Nocne skurcze łydek po 50: dlaczego magnez często nie pomaga</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Magnez na nocne skurcze łydek po 50-tce: co mówi Cochrane, jakie leki i choroby bywają w tle, co ma słabe dowody i kiedy iść do lekarza po poradę.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="nocne-skurcze-lydek-po-50-magnez.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Szumy uszne po 50: skąd się biorą i kiedy iść do lekarza</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Skąd biorą się szumy uszne po 50-tce: słuch, ciśnienie, leki, stres. Kiedy to sygnał alarmowy i jak w Polsce dojść do laryngologa i badania słuchu.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="szumy-uszne-po-50-przyczyny.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2517,10 +2517,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Nocne skurcze łydek po 50: dlaczego magnez często nie pomaga',
-        excerpt: 'Magnez na nocne skurcze łydek po 50-tce: co mówi Cochrane, jakie leki i choroby bywają w tle, co ma słabe dowody i kiedy iść do lekarza po poradę.',
-        image: './assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp',
-        url: 'nocne-skurcze-lydek-po-50-magnez.html'
+        title: 'Szumy uszne po 50: skąd się biorą i kiedy iść do lekarza',
+        excerpt: 'Skąd biorą się szumy uszne po 50-tce: słuch, ciśnienie, leki, stres. Kiedy to sygnał alarmowy i jak w Polsce dojść do laryngologa i badania słuchu.',
+        image: './assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp',
+        url: 'szumy-uszne-po-50-przyczyny.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2551,6 +2551,13 @@
       const fallback = [
         {
           category: 'Zdrowie',
+          title: 'Szumy uszne po 50: skąd się biorą i kiedy iść do lekarza',
+          excerpt: 'Skąd biorą się szumy uszne po 50-tce: słuch, ciśnienie, leki, stres. Kiedy to sygnał alarmowy i jak w Polsce dojść do laryngologa i badania słuchu.',
+          image: './assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp',
+          url: 'szumy-uszne-po-50-przyczyny.html'
+        },
+        {
+          category: 'Zdrowie',
           title: 'Nocne skurcze łydek po 50: dlaczego magnez często nie pomaga',
           excerpt: 'Magnez na nocne skurcze łydek po 50-tce: co mówi Cochrane, jakie leki i choroby bywają w tle, co ma słabe dowody i kiedy iść do lekarza po poradę.',
           image: './assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp',
@@ -2562,13 +2569,6 @@
           excerpt: 'Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza.',
           image: './assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp',
           url: 'podwyzszony-kwas-moczowy-po-50.html'
-        },
-        {
-          category: 'Ciekawe',
-          title: 'Zmiana czasu na zimowy 2026: co czuje organizm po 50-tce?',
-          excerpt: 'Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach.',
-          image: './assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp',
-          url: 'zmiana-czasu-na-zimowy-po-50.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

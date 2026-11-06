@@ -11,14 +11,14 @@ function attemptStatePath(root, slug) {
   return path.join(root, 'data', 'reports', 'local', 'article-pipeline', `${slug}.attempts.json`);
 }
 
-function readAttemptState(root, slug, draftHash) {
+function readAttemptState(root, slug, draftHash, pipelineHash = '') {
   try {
     const state = JSON.parse(fs.readFileSync(attemptStatePath(root, slug), 'utf8'));
-    if (state.draft_sha256 === draftHash) return state;
+    if (state.draft_sha256 === draftHash && (!pipelineHash || String(state.pipeline_sha256 || '') === String(pipelineHash))) return state;
   } catch (_error) {
     // Nowy slug albo nowy hash zaczyna od zera.
   }
-  return { version: 1, slug, draft_sha256: draftHash, repair_attempts: 0, history: [] };
+  return { version: 1, slug, draft_sha256: draftHash, pipeline_sha256: pipelineHash, repair_attempts: 0, history: [] };
 }
 
 function writeAttemptState(root, state) {
@@ -30,16 +30,16 @@ function writeAttemptState(root, state) {
   return file;
 }
 
-function recordRepairFailure(root, slug, draftHash, details = {}) {
-  const state = readAttemptState(root, slug, draftHash);
+function recordRepairFailure(root, slug, draftHash, details = {}, pipelineHash = '') {
+  const state = readAttemptState(root, slug, draftHash, pipelineHash);
   state.repair_attempts += 1;
   state.history.push({ at: warsawIso(), result: 'CONTENT_BLOCKED', ...details });
   writeAttemptState(root, state);
   return state;
 }
 
-function resetSameDraft(root, slug, draftHash) {
-  const state = { version: 1, slug, draft_sha256: draftHash, repair_attempts: 0, history: [{ at: warsawIso(), result: 'EXPLICIT_RESTART' }] };
+function resetSameDraft(root, slug, draftHash, pipelineHash = '') {
+  const state = { version: 1, slug, draft_sha256: draftHash, pipeline_sha256: pipelineHash, repair_attempts: 0, history: [{ at: warsawIso(), result: 'EXPLICIT_RESTART' }] };
   writeAttemptState(root, state);
   return state;
 }

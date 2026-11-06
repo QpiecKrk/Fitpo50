@@ -3,6 +3,7 @@
 'use strict';
 
 const fs = require('fs');
+const crypto = require('crypto');
 const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
@@ -65,6 +66,39 @@ function preparedPathFromOutput(output) {
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+function earlyEvidenceAudit(source, args, runCommand = run) {
+  const workspace = createManagedTempDir({
+    prefix: 'fitpo50-early-evidence-',
+    type: 'article-json-workbench',
+    projectRoot: ROOT,
+  });
+  const copy = path.join(workspace, path.basename(source));
+  fs.copyFileSync(source, copy);
+  try {
+    const commandArgs = [
+      'scripts/verify-article-evidence.js', '--file', copy,
+      '--write', 'true', '--refresh', 'true',
+      '--cache-file', path.join(workspace, 'evidence-cache.json'),
+    ];
+    if (args['http-fixture']) commandArgs.push('--http-fixture', path.resolve(args['http-fixture']));
+    return runCommand('node', commandArgs);
+  } finally {
+    disposeTempWorkspace(workspace, { status: 'COMPLETED' });
+  }
+}
+
+function auditMessages(packageReport, evidenceResult) {
+  const messages = Object.values(packageReport.by_owner || {}).flatMap((items) => (items || [])
+    .filter((item) => item && item.message)
+    .map((item) => ({ key: String(item.message), display: `${item.path || '/'}: ${item.message}` })));
+  const evidence = `${evidenceResult?.stdout || ''}\n${evidenceResult?.stderr || ''}`
+    .split('\n').map((line) => line.trim()).filter((line) => line.startsWith('- '))
+    .map((line) => ({ key: line.slice(2), display: line.slice(2) }));
+  const unique = new Map();
+  for (const item of [...messages, ...evidence]) if (!unique.has(item.key)) unique.set(item.key, item.display);
+  return [...unique.values()];
 }
 
 function packageAuditAsDryRunReport(report) {
@@ -337,11 +371,20 @@ function executeArticleAddCore(args, dependencies = {}) {
   }
   const auditAssetsDir = sourcePreparedAtStart.ok ? path.dirname(auditSource) : assetsDir;
   const auditReport = runAudit({ file: auditSource, 'assets-dir': auditAssetsDir }, dependencies.packageAuditDependencies || {});
+  const evidenceResult = dependencies.auditEvidence
+    ? dependencies.auditEvidence(auditSource, args)
+    : (dependencies.runCommand ? { status: 0, stdout: '', stderr: '' } : earlyEvidenceAudit(auditSource, args));
+  const combinedAuditMessages = auditMessages(auditReport, evidenceResult);
   if (!boolOpt(args.json, false)) (dependencies.printPackageAuditReport || printPackageAuditReport)(auditReport);
-  if (auditReport.exit_code !== EXIT_CODES.SUCCESS) {
+  if (auditReport.exit_code !== EXIT_CODES.SUCCESS || evidenceResult.status !== 0) {
+    if (!boolOpt(args.json, false) && combinedAuditMessages.length) {
+      console.error(`[ARTICLE-ADD][EARLY_JSON_AUDIT] ${combinedAuditMessages.length} błędów przed mediami i renderami:`);
+      combinedAuditMessages.forEach((message) => console.error(`- ${message}`));
+    }
     if (boolOpt(args.json, false)) console.log(JSON.stringify(packageAuditAsDryRunReport(auditReport), null, 2));
-    else console.error(`[ARTICLE-ADD][PACKAGE_AUDIT_BLOCKED] Etap zapisu nie został uruchomiony. Raport: ${auditReport.report_file}`);
-    return Number(auditReport.exit_code);
+    else console.error(`[ARTICLE-ADD][PACKAGE_AUDIT_BLOCKED] Etap mediów i renderów nie został uruchomiony. Raport: ${auditReport.report_file}`);
+    if (auditReport.exit_code === EXIT_CODES.ENVIRONMENT_FAILURE || evidenceResult.status === EXIT_CODES.ENVIRONMENT_FAILURE) return EXIT_CODES.ENVIRONMENT_FAILURE;
+    return EXIT_CODES.CONTENT_BLOCKED;
   }
 
   const slug = detectSlug(source);
@@ -386,13 +429,13 @@ function executeArticleAddCore(args, dependencies = {}) {
     console.log('[ARTICLE-ADD] Poprzedni zarządzany workspace został bezpiecznie zakończony na jawne --restart true.');
     resetSameDraft(root, slug, context.sourceSha256);
   } else if (samePendingSource && hasPendingPreviewReview) {
-    return continueAwaitingReview(context, state, args, runCommand);
+    const stageRoot = String(state?.next_args?.stage_root || '');
+    if (stageRoot && fs.existsSync(stageRoot)) disposeTempWorkspace(path.resolve(stageRoot), { status: 'FAILED', error: 'Ręczny preview nie jest już bramką article:add.' });
+    console.log('[ARTICLE-ADD] Pomijam stary stan AWAITING_REVIEW; kontrola techniczna zostanie wykonana ponownie.');
   } else if (samePendingSource && hasPendingMediaReview) {
-    mediaReview = validateAwaitingMediaWorkspace(context, state);
-    if (!args['review-file']) {
-      console.log(`[ARTICLE-ADD] Nadal oczekuje na review AVIF/WebP/JPG: ${mediaReview.reviewTemplate}`);
-      return EXIT_CODES.AWAITING_MEDIA_REVIEW;
-    }
+    const pending = validateAwaitingMediaWorkspace(context, state);
+    disposeTempWorkspace(pending.workspace, { status: 'FAILED', error: 'Ręczny review obrazów nie jest już bramką article:add.' });
+    console.log('[ARTICLE-ADD] Pomijam stary stan AWAITING_MEDIA_REVIEW; Grzegorz kontroluje obrazy przed przekazaniem paczki.');
   } else if (hasPendingReview) {
     console.error('[ARTICLE-ADD] JSON zmienił się podczas oczekiwania na review. Stary workspace pozostaje nienaruszony; po świadomej decyzji uruchom z --restart true.');
     return EXIT_CODES.CONTENT_BLOCKED;
@@ -416,9 +459,6 @@ function executeArticleAddCore(args, dependencies = {}) {
     : 'CREATE';
   if (operation === 'CREATE' && sourceArticle?.media_manifest?.version === 2) {
     throw contentBlocked('Nowy slug nie może wejść z legacy media_manifest.version=2; wymagany jest nowy review AVIF/WebP/JPG i manifest v3.');
-  }
-  if (!sourcePrepared.ok && operation === 'CREATE' && prompts.length && !mediaReview) {
-    return createAwaitingMediaReview(context, assetsDir, dependencies);
   }
   let preparedFile = sourcePrepared.ok ? source : expectedPreparedPath(source, args['output-dir']);
   if (sourcePrepared.ok) {
@@ -451,7 +491,7 @@ function executeArticleAddCore(args, dependencies = {}) {
   if (!preparedFile || !fs.existsSync(preparedFile)) throw environmentFailure('Nie udało się odczytać ścieżki artefaktu CONTENT_READY.');
 
   console.log('[ARTICLE-ADD] Faza 2/3: atomowy staging HTML, mediów, PDF, listingów, sitemap i _site.');
-  console.log('[ARTICLE-ADD] Faza 3/3 zatrzyma się wyłącznie na rzeczywistą kontrolę desktop/mobile/obrazów/PDF.');
+  console.log('[ARTICLE-ADD] Faza 3/3: techniczna kontrola HTML/PDF i lokalne domknięcie bez ręcznego review.');
   const status = publishPrepared({
     preparedFile,
     assetsDir: path.dirname(preparedFile),
@@ -480,7 +520,17 @@ function repairAttemptIdentity(args, root) {
   const source = path.resolve(args.file);
   if (!fs.existsSync(source)) return null;
   try {
-    return { root, slug: detectSlug(source), draftHash: sha256File(source) };
+    const pipelineHash = crypto.createHash('sha256');
+    for (const relative of [
+      'scripts/article-add.js',
+      'scripts/article-json-workbench.js',
+      'scripts/article-pipeline.js',
+      'scripts/lib/article-media.js',
+    ]) {
+      const file = path.join(root, relative);
+      if (fs.existsSync(file)) pipelineHash.update(relative).update(fs.readFileSync(file));
+    }
+    return { root, slug: detectSlug(source), draftHash: sha256File(source), pipelineHash: pipelineHash.digest('hex') };
   } catch (_error) {
     return null;
   }
@@ -490,7 +540,7 @@ function executeArticleAdd(args, dependencies = {}) {
   const root = dependencies.root || ROOT;
   const identity = repairAttemptIdentity(args, root);
   if (identity && !boolOpt(args.restart, false)) {
-    const attempts = readAttemptState(identity.root, identity.slug, identity.draftHash);
+    const attempts = readAttemptState(identity.root, identity.slug, identity.draftHash, identity.pipelineHash);
     if (attempts.repair_attempts >= MAX_REPAIR_ATTEMPTS) {
       throw contentBlocked(`Przekroczono limit ${MAX_REPAIR_ATTEMPTS} prób automatycznej naprawy dla tej wersji draftu. Popraw draft u Pisarza albo użyj jawnego --restart true.`);
     }
@@ -499,12 +549,12 @@ function executeArticleAdd(args, dependencies = {}) {
   try {
     const status = executeArticleAddCore(args, dependencies);
     if (identity && status === EXIT_CODES.CONTENT_BLOCKED) {
-      recordRepairFailure(identity.root, identity.slug, identity.draftHash, { stage: 'article:add' });
+      recordRepairFailure(identity.root, identity.slug, identity.draftHash, { stage: 'article:add' }, identity.pipelineHash);
     }
     return status;
   } catch (error) {
     if (identity && classifyPipelineFailure(error).exitCode === EXIT_CODES.CONTENT_BLOCKED) {
-      recordRepairFailure(identity.root, identity.slug, identity.draftHash, { stage: 'article:add' });
+      recordRepairFailure(identity.root, identity.slug, identity.draftHash, { stage: 'article:add' }, identity.pipelineHash);
     }
     throw error;
   }
@@ -547,10 +597,12 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {
+  auditMessages,
   boolOpt,
   continueAwaitingReview,
   executeArticleAdd,
   executeArticleAddCore,
+  earlyEvidenceAudit,
   expectedPreparedPath,
   createAwaitingMediaReview,
   mediaReviewArtifacts,

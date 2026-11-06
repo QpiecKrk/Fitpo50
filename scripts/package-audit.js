@@ -128,7 +128,7 @@ function contractIssues(article) {
 }
 
 function unitIssues(article) {
-  const pattern = /(?:\b(?:oz|ounce|ounces|lb|lbs|pound|pounds|inch|inches|mile|miles)\b|\buncj(?:a|e|i|ę|ą)?\b|\bfunt(?:a|y|ów)?\b|\bcal(?:a|e|i)?\b|\bmil(?:a|e|i)?\b|°\s*F\b)/giu;
+  const pattern = /(?:(?<![\p{L}\p{N}])oz(?![\p{L}\p{N}])|\b(?:ounce|ounces|lb|lbs|pound|pounds|inch|inches|mile|miles)\b|\buncj(?:a|e|i|ę|ą)?\b|\bfunt(?:a|y|ów)?\b|\bcal(?:a|e|i)?\b|\bmil(?:a|e|i)?\b|°\s*F\b)/giu;
   const out = [];
   function walk(value, pointer) {
     if (typeof value === 'string') {

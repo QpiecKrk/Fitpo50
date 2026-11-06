@@ -65,6 +65,13 @@ test('HTML, sitemap i llms uruchamiają kontrole artykułów', () => {
   assert.equal(result.full, false);
 });
 
+test('szybka ścieżka artykułu nie uruchamia pełnego eksportu ani pełnego builda', () => {
+  const source = require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'scripts', 'run-all-prepush.js'), 'utf8');
+  assert.match(source, /if \(classification\.full\) \{\s*exportWorkspace/);
+  const articleBlock = source.match(/if \(classification\.scopes\.includes\('articles'\)\) \{([\s\S]*?)\n\s*\}/)?.[1] || '';
+  assert.doesNotMatch(articleBlock, /npm[^\n]*build|export:fresh/);
+});
+
 test('infrastruktura i nieznany plik wybierają pełny zestaw fail-safe', () => {
   for (const file of ['package.json', '.htaccess', '.github/workflows/check.yml', 'scripts/predeploy-gate.js', 'nieznany.bin']) {
     const result = classifyChangedFiles([file]);

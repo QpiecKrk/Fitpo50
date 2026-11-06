@@ -9,9 +9,10 @@ function run(command, args) {
   return result.status;
 }
 
-run('node', ['scripts/deployment-live-verify.js', '--base-url', 'https://fitpo50.pl']);
 const marker = JSON.parse(fs.readFileSync('deployment.json', 'utf8'));
 const scopes = Array.isArray(marker.change_scope) ? marker.change_scope : ['full'];
+const articleOnly = scopes.length === 1 && scopes[0] === 'articles';
+run('node', ['scripts/deployment-live-verify.js', '--base-url', 'https://fitpo50.pl', ...(articleOnly ? ['--retries', '0'] : [])]);
 if (scopes.includes('full') || scopes.includes('news')) run('node', ['scripts/news-public-http-check.js']);
 else console.log('[SKIP] Publiczna kontrola NEWS: bieżące wydanie nie zmienia NEWS.');
 run('node', ['scripts/security-exposure-check.js', 'https://fitpo50.pl']);

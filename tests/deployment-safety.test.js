@@ -380,6 +380,11 @@ test('live finalize domyślnie wykonuje najwyżej 5 prób co 15 sekund', () => {
   assert.equal(args.delayMs, 15000);
 });
 
+test('finalize wydania wyłącznie artykułowego nie czeka na CDN', () => {
+  const finalize = fs.readFileSync(path.join(ROOT, 'scripts', 'deployment-finalize.js'), 'utf8');
+  assert.match(finalize, /articleOnly[\s\S]*\['--retries', '0'\]/);
+});
+
 test('live finalize sprawdza tylko marker i jawne cele bieżącego wydania', () => {
   const baseUrl = 'https://fitpo50.pl';
   const marker = {

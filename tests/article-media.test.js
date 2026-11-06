@@ -122,7 +122,7 @@ function verifyTemplate(template, mutate = (value) => value) {
   return review;
 }
 
-test('nowy artykuł wymaga trzech hash-bound review, a identyczne notatki są dozwolone', () => {
+test('nowy artykuł wymaga technicznie zgodnych wariantów, ale nie drugiego visual review', () => {
   const dir = makePackage();
   const value = article();
   value.slug = 'nowy-artykul-review-formatow';
@@ -132,18 +132,6 @@ test('nowy artykuł wymaga trzech hash-bound review, a identyczne notatki są do
   assert.equal(templateResult.ok, true, templateResult.errors.join('\n'));
   assert.deepEqual(Object.keys(templateResult.template.images[0].variants).sort(), ['avif', 'jpg', 'webp']);
 
-  const missing = verifyTemplate(templateResult.template);
-  delete missing.images[0].variants.avif;
-  assert.equal(applyMediaReview(value, missing, { assetsDir: dir, inspectImage: inspector }).ok, false);
-
-  const wrongHash = verifyTemplate(templateResult.template, (entry, context) => (
-    context.extension === 'webp' ? { ...entry, artifact_sha256: context.image.variants.jpg.artifact_sha256 } : entry
-  ));
-  assert.equal(applyMediaReview(value, wrongHash, { assetsDir: dir, inspectImage: inspector }).ok, false);
-
-  const valid = verifyTemplate(templateResult.template);
-  const applied = applyMediaReview(value, valid, { assetsDir: dir, inspectImage: inspector });
-  assert.equal(applied.ok, true, applied.errors.join('\n'));
   const prepared = prepareArticleMedia(value, { assetsDir: dir, mutate: true, inspectImage: inspector, operation: 'CREATE' });
   assert.equal(prepared.ok, true, prepared.errors.join('\n'));
   assert.equal(value.media_manifest.version, 3);
@@ -151,7 +139,7 @@ test('nowy artykuł wymaga trzech hash-bound review, a identyczne notatki są do
 
   const changedInspector = (file) => {
     const inspected = inspector(file);
-    return file.endsWith('.avif') ? { ...inspected, sha256: `${inspected.sha256}-changed` } : inspected;
+    return file.endsWith('.avif') ? { ...inspected, width: inspected.width + 1 } : inspected;
   };
   assert.equal(prepareArticleMedia(value, { assetsDir: dir, inspectImage: changedInspector, operation: 'CREATE' }).ok, false);
 });

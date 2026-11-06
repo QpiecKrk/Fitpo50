@@ -133,6 +133,21 @@ test('Claude draft skill accepts flexible supplemental images and local FAQ/link
   assert.match(result.stdout, /DRAFT_(?:VALID|REVIEW_REQUIRED)/);
 });
 
+test('nieweryfikowane źródło dopuszcza http_status null, ale nie wpisany kod HTTP', () => {
+  const emptyStatus = validDraft();
+  emptyStatus.sources[0].url_status = 'requires_local_verification';
+  emptyStatus.sources[0].http_status = null;
+  const accepted = validate(emptyStatus);
+  assert.equal(accepted.status, 0, `${accepted.stdout}\n${accepted.stderr}`);
+
+  const declaredStatus = validDraft();
+  declaredStatus.sources[0].url_status = 'requires_local_verification';
+  declaredStatus.sources[0].http_status = 403;
+  const rejected = validate(declaredStatus);
+  assert.equal(rejected.status, 1);
+  assert.match(rejected.stdout, /nieweryfikowane nie może deklarować http_status/);
+});
+
 test('exact-data overlay claim still blocks when source_url is absent from sources', () => {
   const draft = validDraft();
   const exact = draft.image_prompts_v4[0];
