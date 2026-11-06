@@ -14,7 +14,7 @@ const {
   sha256File,
 } = require('../scripts/lib/article-json-artifact');
 const { allocateOutput, buildStageDefinitions, collectChanges, copyMediaPackage, runStagesUntilFailure } = require('../scripts/article-json-workbench');
-const { auditMessages, executeArticleAdd, expectedPreparedPath, packageHashesMatch, preparedPathFromOutput, reviewArtifacts } = require('../scripts/article-add');
+const { auditMessages, executeArticleAdd, expectedPreparedPath, packageHashesMatch, preparedPathFromOutput } = require('../scripts/article-add');
 const { packageIdentity } = require('../scripts/lib/package-identity');
 const {
   EXIT_CODES,
@@ -271,6 +271,11 @@ test('content blockers run before media conversion and the final package preflig
   assert.ok(labels.indexOf('Pakiet mediów: nazwy, warianty, jakość i różnorodność') < labels.indexOf('Końcowy preflight pakietu importowego'));
 });
 
+test('wynik wczesnej weryfikacji źródeł usuwa jej drugi przebieg w workbench', () => {
+  const labels = buildStageDefinitions('/tmp/article.json', '/tmp/assets', { preverified: true }).map((item) => item.label);
+  assert.equal(labels.includes('Weryfikacja źródeł, URL-i i pochodzenia FAQ'), false);
+});
+
 test('article:add content gate rejects manual_research before import', () => withTempDir((dir) => {
   const fixture = JSON.parse(fs.readFileSync(
     path.join(REPO, 'tests/fixtures/article-packages/zmiana-czasu-corrected.fitpo50.json'),
@@ -295,18 +300,10 @@ test('one-command controller reads the prepared artifact path from workbench out
   assert.equal(preparedPathFromOutput('[ARTICLE-JSON] status=CONTENT_READY\n[ARTICLE-JSON] JSON: /tmp/gotowy.fitpo50.json\n'), '/tmp/gotowy.fitpo50.json');
 });
 
-test('one-command controller exposes predictable review artifacts', () => {
-  assert.deepEqual(reviewArtifacts('/tmp/stage', 'testowy-artykul'), {
-    stage_root: '/tmp/stage',
-    review_template: '/tmp/stage/.tmp/article-preview/testowy-artykul/visual-review-template.json',
-    desktop: '/tmp/stage/.tmp/article-preview/testowy-artykul/desktop.png',
-    mobile: '/tmp/stage/.tmp/article-preview/testowy-artykul/mobile.png',
-    pdf_pages: '/tmp/stage/.tmp/article-preview/testowy-artykul/pdf-pages',
-  });
-});
-
-test('changed JSON never silently reuses an older review transaction', () => withTempDir((dir) => {
+test('stary stan review nie blokuje nowego jednokrokowego przebiegu', () => withTempDir((dir) => {
   const source = path.join(dir, 'zmieniony-artykul.json');
+  const outputDir = path.join(dir, 'ready');
+  const prepared = path.join(outputDir, 'zmieniony-artykul.fitpo50.json');
   fs.writeFileSync(source, `${JSON.stringify({ slug: 'zmieniony-artykul', title: 'Zmieniony artykuł' })}\n`);
   const stateFile = statusPath(dir, 'zmieniony-artykul');
   fs.mkdirSync(path.dirname(stateFile), { recursive: true });
@@ -315,16 +312,21 @@ test('changed JSON never silently reuses an older review transaction', () => wit
     source_sha256: 'stary-hash',
     next_args: { stage_root: '/tmp/stary-stage', input_file: '/tmp/stary.fitpo50.json' },
   })}\n`);
-  const status = executeArticleAdd({ file: source }, {
+  const status = executeArticleAdd({ file: source, 'output-dir': outputDir }, {
     root: dir,
     auditPackage: PASS_PACKAGE_AUDIT,
     printPackageAuditReport: SILENT_PACKAGE_AUDIT,
-    runCommand() {
-      throw new Error('Nie wolno uruchamiać kolejnego etapu dla zmienionego JSON-u.');
+    runCommand(_command, args) {
+      if (args[0] === 'scripts/article-json-workbench.js') {
+        fs.mkdirSync(outputDir, { recursive: true });
+        fs.copyFileSync(source, prepared);
+        return { status: 0, stdout: `[ARTICLE-JSON] JSON: ${prepared}\n`, stderr: '' };
+      }
+      if (args[0] === 'scripts/article-pipeline.js') return { status: 0, stdout: '', stderr: '' };
+      throw new Error(`Nieoczekiwane polecenie: ${args.join(' ')}`);
     },
   });
-  assert.equal(status, EXIT_CODES.CONTENT_BLOCKED);
-  assert.equal(JSON.parse(fs.readFileSync(stateFile, 'utf8')).status, 'AWAITING_REVIEW');
+  assert.equal(status, EXIT_CODES.SUCCESS);
 }));
 
 test('nowy draft przechodzi bez drugiego review obrazów', () => withTempDir((dir) => {

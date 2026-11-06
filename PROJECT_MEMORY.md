@@ -71,7 +71,7 @@ Start sesji jest wyłącznie odczytowy. Nie wykonuj wtedy `pull`, `restore`, eks
 
 - Nowe artykuły, aktualizacje, `popraw-seo` i `napraw paczkę N` przechodzą jeden wspólny, pełny Quality Gate z `ARTICLE_STANDARD.md`. Kontrola zawsze obejmuje całą treść oraz HTML, źródła, FAQ, linki, media, PDF, dane strukturalne, listingi, sitemap i `_site`; nie tylko zmieniony fragment.
 - JSON od Claude lub innego modelu jest zawsze draftem, nie źródłem prawdy.
-- Korekta JSON-u i publikacja to rozdzielone etapy: `DRAFT` → `CONTENT_READY` → `TECHNICAL_PASS`/`VISUAL_REVIEW_PENDING` → `VISUAL_REVIEW_VERIFIED` → `PREVIEW_READY` → `COMMITTED`; błąd daje `BLOCKED`.
+- Korekta JSON-u i publikacja to rozdzielone etapy: `DRAFT` → `CONTENT_READY` → automatyczny `TECHNICAL_PASS` → `COMMITTED`; błąd daje `BLOCKED`. Obrazy zatwierdza Grzegorz przed przekazaniem paczki, dlatego standardowy artykuł nie zatrzymuje się na osobny review Codexa.
 - Plik z `Downloads` pozostaje bez zmian. Pipeline pracuje na kontrolowanej kopii i nie archiwizuje zużytego JSON-u w repo.
 - Publikacja rozróżnia `CREATE` i `UPDATE`; istniejący slug wymaga jawnego `--force true`.
 - Pipeline działa fail-fast. Po pierwszym błędzie nie uruchamia etapów zależnych ani mutujących.
@@ -121,8 +121,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 ## 8. Obrazy, HTML i PDF
 
 - Każdy pakiet artykułu ma jeden katalog wejściowy, dokładne nazwy, osobny hero i obrazy sekcji oraz lokalny manifest.
-- Każdy publikowany obraz musi zostać rzeczywiście obejrzany. Mylące liczby, niepowiązany tekst, nieprawdziwa anatomia lub sprzęt, błędne kadry i ukryte fallbacki są zabronione; sam watermark nie jest przeszkodą. Kanoniczny raport preview `version=3` klasyfikuje tekst jako brak, sam watermark albo treść i wiąże review z hashem pliku, placementem, H2, altem, podpisem oraz kontekstem. Liczby i twierdzenia wymagają transkrypcji i URL-i dowodów. Raporty preview v1/v2 pozostają zamrożonym legacy i nie uzyskują po cichu znaczenia v3.
-- Infografiki zawierające tekst oglądamy we wszystkich dostarczonych formatach.
+- Grzegorz ogląda i zatwierdza obrazy przed przekazaniem paczki. Codex nie powtarza tej kontroli; pipeline sprawdza nazwy, hashe, komplet AVIF/WebP/JPG, wymiary, deklaracje tekstu, alt i podpis. Mylące liczby, niepowiązany tekst, nieprawdziwa anatomia lub sprzęt oraz ukryte fallbacki pozostają zabronione.
 - Artykuł ma hero i co najmniej jeden odrębny obraz dla każdej głównej sekcji merytorycznej. Dodatkowe wykresy, infografiki lub sceny są dozwolone jako `sekcja-N-obraz-M`, jeśli wnoszą nową informację. Nie obowiązuje sztywna liczba sekcji ani obrazów: zakres wynika z tematu, a sekcje użytkowe nie są liczone.
 - Po jednoznacznym rozpoznaniu pliku źródłowego pipeline utrwala dokładne `source_file`; wygenerowany wariant JPG nie może później tworzyć fałszywej niejednoznaczności z oryginalnym JPEG.
 - Po zatwierdzonej publikacji brak uprawnień do posprzątania roboczej kopii poza zarządzanym workspace jest ostrzeżeniem, nie fałszywą porażką transakcji. Weryfikacja produkcji czeka na propagację HTML przez CDN i używa release-bound warm-up, ale potwierdza dopiero zwykły publiczny URL.
@@ -135,10 +134,9 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - `.sources-list` jest klasą listy `<ol>`, nigdy jej wrappera. Długie URL-e źródeł muszą zawijać się na mobile. Walidatory rozpoznają poprawne znaczniki niezależnie od kolejności atrybutów.
 - Importer nie może upraszczać pierwszego akapitu pod H2 do czystego tekstu: zachowuje istniejące linki, `<strong>`, `<em>` i pozostałe poprawne znaczniki inline. Pierwszy akapit ma działać answer-first: odpowiada bezpośrednio i konkretnie na H2. Zakres 30–70 słów jest zaleceniem, nie samodzielnym blokerem; blokują brak odpowiedzi, generyk, powtórzony lead, niedomknięta myśl i twierdzenie bez dowodu.
 - Limit `<title>` 65 znaków obejmuje także stały dopisek ` | FitPo50`; dlatego `seo_title` bez marki ma maksymalnie 55 znaków. H1 pozostaje niezależnym tytułem artykułu.
-- HTML najpierw powstaje w izolowanym stagingu. Render desktop 1440 px i mobile 390 px musi przejść kontrolę overflow, fontów, proporcji i obrazów.
-- Generator renderów zapisuje tylko `TECHNICAL_PASS` i `VISUAL_REVIEW_PENDING`; nie może sam nadać `reviewed_by`, `reviewed_at` ani `VISUAL_REVIEW_VERIFIED`. `PREVIEW_READY` wymaga rzeczywistego review desktopu, mobile, każdego elementu kanonicznego DOM inventory i każdej strony PDF. Dowody renderów pozostają w zarządzanym stagingu do wznowienia tej samej transakcji, lecz nie trafiają do Git ani publicznego `_site`.
-- PDF powstaje ze stagingowego HTML. Każdą stronę trzeba wyrenderować do obrazu i obejrzeć; sama zgodność tekstowa nie wykrywa osieroconych wierszy ani źle podzielonych źródeł.
-- Kontrola PDF wykonuje się do końca także wtedy, gdy w tym samym przebiegu wykryto osobny błąd HTML lub mobile; raport ma zawierać komplet niezależnych blokerów.
+- HTML najpierw powstaje w izolowanym stagingu. Automatyczny render desktop 1440 px i mobile 390 px sprawdza overflow, fonty, proporcje i ładowanie obrazów.
+- Standardowy artykuł korzystający z niezmienionego szablonu kończy się po automatycznym `TECHNICAL_PASS`; Codex nie wykonuje osobnego przeglądu desktop/mobile/PDF. Ręczny przegląd wraca wyłącznie po zmianie szablonu, CSS albo dodaniu nietypowego komponentu.
+- PDF powstaje ze stagingowego HTML i przechodzi automatyczną kontrolę stron, tekstu, fontów, marginesów oraz ilustracji.
 - Blok źródeł i disclaimer w PDF nie mogą rozpadać się przypadkowo między stronami.
 - HTML i PDF w źródle oraz `_site` muszą być identyczne 1:1.
 

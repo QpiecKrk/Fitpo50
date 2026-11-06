@@ -11,9 +11,10 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 
 ## Kanoniczne wejścia
 
-- Nowy artykuł: `npm run article:add -- --file <draft.fitpo50.json>`. `--dry-run --json` przechodzi kolejne etapy bez promocji do repozytorium i zatrzymuje się na pierwszym blokującym etapie; raportuje zbiorczo problemy wykryte przez ten etap wraz z klasą i ścieżką JSON. Pierwszy etap zbiorczo sprawdza paczkę Pisarza i Ilustratora; linkowanie wewnętrzne pozostaje lokalne. Ta sama komenda rozpoznaje zapisany stan i wznawia istniejący workspace: najpierw `AWAITING_MEDIA_REVIEW` dla osobnego obejrzenia AVIF/WebP/JPG i powiązania każdego review z SHA-256, później `AWAITING_REVIEW` dla desktop/mobile/PDF po stagingu. Oba oczekiwania kończą kodem 10 i przyjmują właściwy `--review-file <review.json>`. `--status true` pokazuje stan bez modyfikacji. Jeśli JSON zmienił się podczas oczekiwania na review, pipeline zachowuje stary workspace i wymaga jawnego `--restart true` przed rozpoczęciem nowej transakcji.
+- Nowy artykuł lokalnie: `npm run article:add -- --file <draft.fitpo50.json>`. Najpierw zbiera błędy JSON-u, źródeł i FAQ, potem jednokrotnie przygotowuje media, HTML, PDF, listingi, sitemapę i `_site`. Ręczny review obrazów oraz desktop/mobile/PDF nie jest osobnym stanem ani bramką wznowienia.
+- Pełna publikacja dla jednej osoby: `npm run publikuj -- <katalog-artykulu>`. Komenda rozpoznaje CREATE/UPDATE, uruchamia `article:add`, przygotowuje marker, pyta raz `Publikujemy? tak/nie`, a po `tak` tworzy jeden commit wyłącznie z manifestu artykułu i markerów, wykonuje jeden push oraz sprawdza zgodność produkcyjnego HTML z `_site`. IndexNow pozostaje osobno.
 - Korekta JSON bez publikacji: `npm run article:prepare-json -- --file <draft.fitpo50.json>`.
-- Gotowy artefakt `CONTENT_READY` również przekazuje się do `article:add`; kontroler rozpoznaje jego status i nie wykonuje ponownie przygotowania JSON-u. Po `AWAITING_MEDIA_REVIEW` i `AWAITING_REVIEW` zapisany stan wskazuje tę samą transakcję.
+- Gotowy artefakt `CONTENT_READY` również przekazuje się do `article:add`; kontroler rozpoznaje identyczny pakiet po SHA-256 i nie wykonuje ponownie przygotowania JSON-u.
 - Pełna bramka przed pushem: `npm run prepush:local`.
 - Pełny eksport i parity: `npm run check:build-export`.
 - Kontrola produkcji bez zgłoszenia URL-i: `npm run deployment:verify`.
@@ -35,7 +36,8 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run adsense:absence` — Blokuje publikację kodu AdSense i pliku `ads.txt` w źródle oraz eksporcie (node scripts/adsense-absence-check.js).
 - [PUBLIC] `npm run agent:context` — Bezpośrednia komenda robocza lub odczytowa (node scripts/agent-context.js).
 - [PUBLIC] `npm run aio:full-audit` — Bezpośrednia komenda robocza lub odczytowa (node scripts/growth-tool.js full-audit).
-- [PUBLIC] `npm run article:add` — Jedyne domyślne wejście dla nowego artykułu; przygotowuje draft, zapisuje trwały stan, prowadzi atomowy staging, zatrzymuje się na rzeczywisty review i wznawia tę samą transakcję bez ręcznego składania komend pośrednich.
+- [PUBLIC] `npm run article:add` — Lokalne wejście dla nowego artykułu: zbiorczy audyt, jednokrotne przygotowanie, atomowy staging i pełne domknięcie bez stanów ręcznego review.
+- [PUBLIC] `npm run publikuj` — Jedno wejście publikacyjne: CREATE/UPDATE, marker, jedno pytanie, ścisły commit z manifestu, push i kontrola zgodności jednego URL-a artykułu; bez IndexNow.
 - [PUBLIC] `npm run article:cleanup-input` — Na jawne polecenie usuwa wejściową paczkę sluga wyłącznie po zapisanym `AWAITING_LIVE_CONFIRMATION` i zgodnym `LIVE_DEPLOYED_AND_VALIDATED`; nigdy nie uruchamia się automatycznie.
 - [PUBLIC] `npm run package:audit` — Odczytowy audyt całej wejściowej paczki JSON i obrazów; zbiera błędy w jednym raporcie lokalnym według właściciela i nie publikuje ani nie poprawia plików.
 - [PUBLIC] `npm run article:coverage:report` — Informacyjny raport pokrycia produkcyjnego katalogu BlogPosting oraz rozdzielonych statusów preview, publikacji, walidacji, wdrożenia i GSC; nie jest bramką publikacyjną.

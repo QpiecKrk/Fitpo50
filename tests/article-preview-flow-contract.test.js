@@ -6,13 +6,13 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const read = (relative) => fs.readFileSync(path.join(ROOT, relative), 'utf8');
 
-test('nowy artykuł i popraw-seo korzystają z jednego preview v3 i tego samego zarządzanego stagingu', () => {
+test('nowy artykuł wykonuje techniczny preview bez stanu ręcznego review, a popraw-seo zachowuje własny workflow', () => {
   const article = read('scripts/article-pipeline.js');
   const seo = read('scripts/popraw-seo-apply.js');
 
   assert.match(article, /runPreviewGate\(stageRoot, slug\)/);
-  assert.match(article, /validatePreviewReport\(stageRoot, slug, \{ requireRenderFiles: true \}\)/);
   assert.match(article, /createStagingWorkspace\(root, slug\)/);
+  assert.doesNotMatch(article, /promote-stage|readArticleStageRecord|AWAITING_VISUAL_REVIEW/);
   assert.match(seo, /article-preview-gate\.js/);
   assert.match(seo, /article-preview-report-check\.js/);
   assert.match(seo, /--require-render-files/);
@@ -46,4 +46,16 @@ test('pipeline nie wysyła IndexNow ani nie uruchamia automatycznego linkera prz
   const release = read('scripts/indexnow-release.js');
   assert.match(release, /LIVE_DEPLOYED_AND_VALIDATED/);
   assert.match(release, /SECURITY_EXPOSURE_PASS/);
+});
+
+test('pipeline artykułu nie uruchamia kontroli NEWS niezwiązanej z artykułem', () => {
+  const pipeline = read('scripts/article-pipeline.js');
+  assert.doesNotMatch(pipeline, /news-integrity-check\.js|NEWS integrity/);
+});
+
+test('article:add nie powtarza kontraktu HTML ani pełnego preflight po przygotowaniu pakietu', () => {
+  const pipeline = read('scripts/article-pipeline.js');
+  assert.equal((pipeline.match(/article-contract-check\.js/g) || []).length, 1);
+  assert.doesNotMatch(pipeline, /Article preflight \(working copy\)/);
+  assert.doesNotMatch(pipeline, /Post-promotion article standard|Post-promotion article contract/);
 });

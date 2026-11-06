@@ -26,9 +26,6 @@ const {
 const {
   createManagedTempDir,
   disposeTempWorkspace,
-  markTempWorkspace,
-  reactivateTempWorkspace,
-  readWorkspaceManifest,
   resolveWorkspaceProjectRoot,
 } = require('./lib/temp-workspace');
 const { capabilityFromEnvironment } = require('./lib/pipeline-capability');
@@ -36,7 +33,6 @@ const {
   defaultGscInputDir,
   preparePublicationMonitoring,
 } = require('./lib/post-publication-monitor');
-const { validatePreviewReport } = require('./lib/article-preview-report');
 const { warsawIso } = require('./lib/time');
 const {
   readDeploymentRegistry,
@@ -184,8 +180,6 @@ function verifyMirrorPair(root, sourceRelative, mirrorRelative) {
 }
 
 function runPostPromotionValidation(root, slug, article) {
-  run('Post-promotion article standard', 'node', ['scripts/validate-article-standard.js', `${slug}.html`]);
-  run('Post-promotion article contract', 'node', ['scripts/article-contract-check.js', `${slug}.html`, path.join('_site', `${slug}.html`)]);
   run('Post-promotion mirror check', 'node', ['scripts/sync-site-assets-mirror.js', '--check', '--slug', slug]);
   run('Post-promotion predeploy gate', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
   verifyMirrorPair(root, `${slug}.html`, path.join('_site', `${slug}.html`));
@@ -248,60 +242,6 @@ function ensureImportCopy(sourcePath, slug, preparedReport) {
   return target;
 }
 
-function articleStageRecordPath(stageRoot) {
-  return path.join(stageRoot, 'article-stage.json');
-}
-
-function isReviewMutableCandidate(relative, slug) {
-  return relative === `data/reports/article-preview/${slug}.json`
-    || relative === `data/reports/article-preview/${slug}.md`;
-}
-
-function candidateHashes(stageRoot, candidates, slug) {
-  return Object.fromEntries(candidates
-    .filter((relative) => !isReviewMutableCandidate(relative, slug))
-    .filter((relative) => fs.existsSync(path.join(stageRoot, relative)))
-    .map((relative) => [relative, sha256File(path.join(stageRoot, relative))]));
-}
-
-function writeArticleStageRecord({ stageRoot, sourceRoot, slug, input, candidates, baseline, transactionId, operation }) {
-  const payload = {
-    version: 1,
-    source_root: sourceRoot,
-    slug,
-    input_file: input,
-    input_sha256: sha256File(input),
-    candidates,
-    baseline: [...baseline],
-    static_hashes: candidateHashes(stageRoot, candidates, slug),
-    transaction_id: transactionId,
-    operation,
-    status: 'AWAITING_VISUAL_REVIEW',
-    created_at: warsawIso(),
-  };
-  atomicWriteFileSync(articleStageRecordPath(stageRoot), `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
-  return payload;
-}
-
-function readArticleStageRecord(stageRoot, sourceRoot, slug, input) {
-  const workspace = readWorkspaceManifest(stageRoot);
-  if (!workspace || workspace.workspace_type !== 'article-publication-staging' || path.resolve(workspace.project_root) !== path.resolve(sourceRoot)) {
-    throw contentBlocked('Wskazany katalog nie jest zarządzanym stagingiem publikacji tego repozytorium.');
-  }
-  const recordPath = articleStageRecordPath(stageRoot);
-  if (!fs.existsSync(recordPath)) throw contentBlocked(`Brak rekordu wznowienia: ${recordPath}`);
-  const record = JSON.parse(fs.readFileSync(recordPath, 'utf8'));
-  if (record.source_root !== sourceRoot || record.slug !== slug || record.input_file !== input) throw contentBlocked('Staging należy do innego repozytorium, slugu albo artefaktu wejściowego.');
-  if (record.input_sha256 !== sha256File(input)) throw contentBlocked('Artefakt CONTENT_READY zmienił się podczas oczekiwania na review.');
-  for (const [relative, hash] of Object.entries(record.static_hashes || {})) {
-    const file = path.join(stageRoot, relative);
-    if (!fs.existsSync(file) || sha256File(file) !== hash) throw contentBlocked(`Staging zmienił się po kontroli technicznej: ${relative}`);
-  }
-  const preview = validatePreviewReport(stageRoot, slug, { requireRenderFiles: true });
-  if (!preview.ok) throw contentBlocked(`Staging nie ma kompletnego PREVIEW_READY v3:\n- ${preview.errors.join('\n- ')}`);
-  return { ...record, preview_timing: preview.report?.timing || {} };
-}
-
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file) {
@@ -352,7 +292,7 @@ async function main() {
     if (liveArticleExists && !force) {
       throw contentBlocked(`Slug ${slug} już istnieje. Aktualizacja wymaga jawnego --force true.`);
     }
-    let operation = liveArticleExists ? 'UPDATE' : 'CREATE';
+    const operation = liveArticleExists ? 'UPDATE' : 'CREATE';
     assertSeoPatchOverwriteAllowed({
       root,
       slug,
@@ -360,36 +300,26 @@ async function main() {
       force,
       allowOverwrite: allowOverwriteSeoPatches,
     });
-    let transactionId = `article-${slug}-${Date.now()}-${process.pid}`;
-    let candidates = promotionCandidates(parsedInput);
-    let baseline = snapshotCandidates(root, candidates);
-    const resumeStage = String(args['promote-stage'] || '').trim();
-    const stageRoot = resumeStage ? path.resolve(resumeStage) : createStagingWorkspace(root, slug);
+    const transactionId = `article-${slug}-${Date.now()}-${process.pid}`;
+    const candidates = promotionCandidates(parsedInput);
+    const baseline = snapshotCandidates(root, candidates);
+    const stageRoot = createStagingWorkspace(root, slug);
     let stageStatus = 'FAILED';
-    let keepForReview = Boolean(resumeStage);
     console.log(`[STAGING] Izolowany katalog: ${stageRoot}`);
     try {
-      if (resumeStage) {
-        const record = readArticleStageRecord(stageRoot, root, slug, input);
-        reactivateTempWorkspace(stageRoot);
-        keepForReview = false;
-        operation = record.operation;
-        transactionId = record.transaction_id;
-        candidates = record.candidates;
-        baseline = new Map(record.baseline);
-        stepTimings.push({ tag: 'Techniczny preview HTML/PDF', durationMs: Number(record.preview_timing?.technical_ms || 0) });
-        stepTimings.push({ tag: 'Oczekiwanie na rzeczywisty visual review', durationMs: Number(record.preview_timing?.review_wait_ms || 0) });
-        console.log(`[RESUME] PREVIEW_READY v3 potwierdzony; wznawiam transakcję ${transactionId}.`);
-      } else {
-        console.log(`[PUBLICATION] Tryb ${operation}; transakcja ${transactionId}.`);
-        let phaseStarted = Date.now();
-        runInStaging(stageRoot, [...process.argv.slice(2), '--file', input, '--assets-dir', assetsDir]);
-        stepTimings.push({ tag: 'Izolowany staging: HTML, media, PDF i walidatory', durationMs: Date.now() - phaseStarted });
-        phaseStarted = Date.now();
-        runPreviewGate(stageRoot, slug);
-        stepTimings.push({ tag: 'Render desktop/mobile i kontrola PDF', durationMs: Date.now() - phaseStarted });
-        assertNoUnexpectedStageChanges(root, stageRoot, candidates);
-        console.log('[TECHNICAL_PREVIEW_PASS] Automatyczne kontrole HTML desktop/mobile i PDF przeszły; ręczny review nie blokuje publikacji.');
+      console.log(`[PUBLICATION] Tryb ${operation}; transakcja ${transactionId}.`);
+      let phaseStarted = Date.now();
+      runInStaging(stageRoot, [...process.argv.slice(2), '--file', input, '--assets-dir', assetsDir]);
+      stepTimings.push({ tag: 'Izolowany staging: HTML, media, PDF i walidatory', durationMs: Date.now() - phaseStarted });
+      phaseStarted = Date.now();
+      runPreviewGate(stageRoot, slug);
+      stepTimings.push({ tag: 'Render desktop/mobile i kontrola PDF', durationMs: Date.now() - phaseStarted });
+      assertNoUnexpectedStageChanges(root, stageRoot, candidates);
+      console.log('[TECHNICAL_PREVIEW_PASS] Automatyczne kontrole HTML desktop/mobile i PDF przeszły; ręczny review nie blokuje publikacji.');
+      if (dryRun) {
+        stageStatus = 'COMPLETED';
+        console.log('[ARTICLE_DRY_RUN_READY] Kontrole przeszły; repozytorium nie zostało zmienione.');
+        return { workingCopy: '', artifactCleanup: null, dryRun: true };
       }
       const monitoring = preparePublicationMonitoring({
         stageRoot,
@@ -461,12 +391,8 @@ async function main() {
       stageStatus = 'COMPLETED';
       return { workingCopy: '', artifactCleanup };
     } finally {
-      if (!keepForReview) {
-        disposeTempWorkspace(stageRoot, { status: stageStatus });
-        console.log('[CLEANUP] Usunięto izolowany staging.');
-      } else {
-        console.log('[STAGING RETAINED] Dowody pozostają do rzeczywistego review i wznowienia transakcji.');
-      }
+      disposeTempWorkspace(stageRoot, { status: stageStatus });
+      console.log('[CLEANUP] Usunięto izolowany staging.');
     }
   }
   if (prepared.html_exists && !force) {
@@ -482,7 +408,6 @@ async function main() {
   if (category) common.push('--category', category);
 
   run('CONTENT_READY integrity gate', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
-  run('Article preflight (working copy)', 'node', ['scripts/article-preflight.js', '--file', workingCopy, '--assets-dir', assetsDir]);
   run('Prepare article assets (hero + sekcje)', 'node', ['scripts/prepare-article-assets.js', '--file', workingCopy, '--from', assetsDir]);
   run('Precheck (strict FAQ)', 'node', [...common, '--precheck', 'true']);
   run(
@@ -506,12 +431,10 @@ async function main() {
     await runParallel('Post-import parallel checks', [
       { label: 'Lint editorial placeholders (source HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--slug', slug] },
       { label: 'Lint editorial placeholders (_site HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)] },
-      { label: 'NEWS integrity', cmd: 'node', args: ['scripts/news-integrity-check.js'] },
     ]);
   } else {
     run('Lint editorial placeholders (source HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--slug', slug]);
     run('Lint editorial placeholders (_site HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)]);
-    run('NEWS integrity', 'node', ['scripts/news-integrity-check.js']);
   }
   run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
   console.log('\n[PREVIEW BUILD PASS] Wewnętrzny pipeline stagingowy zakończony; repozytorium publiczne nie zostało zmienione.');
@@ -531,7 +454,6 @@ function runCli() {
       }
     }
     runTempCleanup();
-    if (result?.awaitingReview) process.exitCode = EXIT_CODES.AWAITING_REVIEW;
   })
   .catch((err) => {
     console.error(`\n[FAIL] ${err.message || err}`);

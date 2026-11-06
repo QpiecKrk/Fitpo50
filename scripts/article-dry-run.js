@@ -147,11 +147,7 @@ function runDryRun(args, dependencies = {}) {
     const pipelineArgs = ['scripts/article-pipeline.js', '--file', prepared, '--assets-dir', path.dirname(prepared), '--force', 'true', '--dry-run', 'true'];
     if (boolOpt(args['allow-overwrite-seo-patches'], false)) pipelineArgs.push('--allow-overwrite-seo-patches');
     const pipeline = spawn('node', pipelineArgs, { cwd: ROOT, encoding: 'utf8' });
-    const stageRoot = String(`${pipeline.stdout || ''}\n${pipeline.stderr || ''}`).match(/^\[AWAITING_VISUAL_REVIEW\] (.+)$/m)?.[1]?.trim() || '';
-    if (pipeline.status === 10 && stageRoot) {
-      keep = true;
-      return { version: 1, status: 'AWAITING_REVIEW', input_sha256: inputHash, diagnostics, artifacts: { stage_root: stageRoot, desktop: path.join(stageRoot, '.tmp', 'article-preview', path.basename(prepared).replace(/\.fitpo50\.json$/i, ''), 'desktop.png'), mobile: path.join(stageRoot, '.tmp', 'article-preview', path.basename(prepared).replace(/\.fitpo50\.json$/i, ''), 'mobile.png'), pdf_pages: path.join(stageRoot, '.tmp', 'article-preview', path.basename(prepared).replace(/\.fitpo50\.json$/i, ''), 'pdf-pages') }, summary: { errors: 0, warnings: diagnostics.length } };
-    }
+    if (pipeline.status === 0) return { version: 1, status: 'READY', input_sha256: inputHash, diagnostics, summary: { errors: 0, warnings: diagnostics.length } };
     diagnostics.push(diagnostic('FIXABLE_LOCAL', pipeline.status === 30 ? 'ENVIRONMENT' : 'PIPELINE', pipeline.status === 30 ? 'RULE_ENVIRONMENT' : 'RULE_STAGING', String(pipeline.stderr || pipeline.stdout || 'staging failed')));
     return { version: 1, status: pipeline.status === 30 ? 'ENVIRONMENT_FAILURE' : 'BLOCKED', input_sha256: inputHash, diagnostics, summary: { errors: diagnostics.length, warnings: 0 } };
   } finally {
@@ -168,7 +164,6 @@ function main() {
 
 function exitCodeForReport(report) {
   if (report?.status === 'PASS' || report?.status === 'READY') return EXIT_CODES.SUCCESS;
-  if (report?.status === 'AWAITING_REVIEW') return EXIT_CODES.AWAITING_REVIEW;
   if (report?.status === 'ENVIRONMENT_FAILURE') return EXIT_CODES.ENVIRONMENT_FAILURE;
   return EXIT_CODES.CONTENT_BLOCKED;
 }

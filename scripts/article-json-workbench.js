@@ -16,7 +16,6 @@ const {
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { validateScope } = require('./lib/article-scope-guard');
 const { packageIdentity } = require('./lib/package-identity');
-const { applyMediaReview } = require('./lib/article-media');
 const { warsawIso } = require('./lib/time');
 
 const ROOT = process.cwd();
@@ -139,19 +138,20 @@ function buildStageDefinitions(workingFile, assetsDir, options = {}) {
   const evidenceArgs = ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true'];
   if (options.cacheFile) evidenceArgs.push('--cache-file', options.cacheFile);
   if (options.httpFixture) evidenceArgs.push('--http-fixture', options.httpFixture);
-  return [
+  const definitions = [
     { label: 'Szybki odbiór paczki Pisarz + Ilustrator', command: 'node', args: ['scripts/article-package-intake.js', '--file', workingFile, '--assets-dir', assetsDir] },
     { label: 'Kontrakt wejściowy treści, FAQ, dowodów i promptów obrazów', command: 'python3', args: ['docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py', '--allow-verified-review', workingFile] },
     { label: 'Kontrola bezpiecznego fixera JSON', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--check', 'true', '--allow-outside-repo', 'true'] },
     { label: 'Normalizacja techniczna bez generowania treści', command: 'node', args: ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json'] },
     { label: 'Lokalna intencja, kanibalizacja, linkowanie i centra', command: 'node', args: ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true'] },
-    { label: 'Weryfikacja źródeł, URL-i i pochodzenia FAQ', command: 'node', args: evidenceArgs },
+    ...(!options.preverified ? [{ label: 'Weryfikacja źródeł, URL-i i pochodzenia FAQ', command: 'node', args: evidenceArgs }] : []),
     { label: 'Pełny preflight treści przed kosztowną obróbką mediów', command: 'node', args: ['scripts/article-preflight.js', '--file', workingFile, '--content-only', 'true'] },
     { label: 'Pakiet mediów: nazwy, warianty, jakość i różnorodność', command: 'node', args: ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'false'] },
     { label: 'Kontrola mapowania dowodów po dodaniu podpisów mediów', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--check', 'true', '--allow-outside-repo', 'true'] },
     { label: 'Bramka kompletnego JSON', command: 'node', args: ['scripts/json-fitpo50-gate-diff.js', '--file', workingFile] },
     { label: 'Końcowy preflight pakietu importowego', command: 'node', args: ['scripts/article-preflight.js', '--file', workingFile, '--assets-dir', assetsDir] },
   ];
+  return definitions;
 }
 
 function valueType(value) {
@@ -335,11 +335,24 @@ function main() {
   const workingFile = path.join(tempDir, `${slug}.fitpo50.json`);
   fs.copyFileSync(sourceFile, workingFile);
   try {
+    let preverified = false;
+    if (args['preverified-file']) {
+      const preverifiedFile = path.resolve(args['preverified-file']);
+      if (!fs.existsSync(preverifiedFile)) throw new Error(`Brak pliku wyniku wczesnej weryfikacji źródeł: ${preverifiedFile}`);
+      const verified = parseJson(preverifiedFile);
+      if (safeSlug(verified.slug || fallbackSlug) !== slug) throw new Error('Wynik wczesnej weryfikacji źródeł należy do innego artykułu.');
+      fs.copyFileSync(preverifiedFile, workingFile);
+      preverified = true;
+    }
     if (fs.existsSync(htmlPath) && !args.force) {
       blockers.push(`Slug ${slug} już istnieje jako ${htmlPath}. Domyślne force=false blokuje przygotowanie aktualizacji.`);
     }
     if (!blockers.length) {
-      const definitions = buildStageDefinitions(workingFile, assetsDir, { cacheFile: args['cache-file'], httpFixture: args['http-fixture'] });
+      const definitions = buildStageDefinitions(workingFile, assetsDir, {
+        cacheFile: args['cache-file'],
+        httpFixture: args['http-fixture'],
+        preverified,
+      });
       const mediaIndex = definitions.findIndex((item) => item.label.startsWith('Pakiet mediów:'));
       const beforeMedia = mediaIndex >= 0 ? definitions.slice(0, mediaIndex) : definitions;
       const afterMedia = mediaIndex >= 0 ? definitions.slice(mediaIndex) : [];
@@ -348,18 +361,6 @@ function main() {
       firstStages.filter((item) => item.status === 'FAIL').forEach((item) => {
         blockers.push(`${item.label}: ${item.stderr || item.stdout || `exit ${item.exit_code}`}`);
       });
-
-      if (!blockers.length && args['media-review-file']) {
-        const reviewFile = path.resolve(args['media-review-file']);
-        if (!fs.existsSync(reviewFile)) blockers.push(`Brak pliku media review: ${reviewFile}`);
-        else {
-          const workingArticle = parseJson(workingFile);
-          const review = parseJson(reviewFile);
-          const applied = applyMediaReview(workingArticle, review, { assetsDir, operation: 'CREATE', root: ROOT });
-          if (!applied.ok) blockers.push(...applied.errors.map((error) => `Media review: ${error}`));
-          else atomicWriteFileSync(workingFile, `${JSON.stringify(workingArticle, null, 2)}\n`, 'utf8');
-        }
-      }
 
       if (!blockers.length) {
         const finalStages = runStagesWithScope(afterMedia, workingFile);

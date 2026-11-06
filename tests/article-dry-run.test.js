@@ -11,8 +11,7 @@ const ROOT = path.resolve(__dirname, '..');
 const FIXTURE = path.join(ROOT, 'tests/fixtures/article-packages/zmiana-czasu-original-invalid.fitpo50.json');
 const CORRECTED_FIXTURE = path.join(ROOT, 'tests/fixtures/article-packages/zmiana-czasu-corrected.fitpo50.json');
 
-test('dry-run exit contract keeps 10 for review and 0 only for ready', () => {
-  assert.equal(exitCodeForReport({ status: 'AWAITING_REVIEW' }), 10);
+test('dry-run kończy się kodem 0 po pełnej kontroli bez ręcznego review', () => {
   assert.equal(exitCodeForReport({ status: 'PASS' }), 0);
   assert.equal(exitCodeForReport({ status: 'READY' }), 0);
   assert.equal(exitCodeForReport({ status: 'BLOCKED' }), 20);
@@ -62,11 +61,10 @@ test('article:add --dry-run returns every fixture problem as structured JSON wit
   assert.ok(report.diagnostics.every((item) => item.path && item.class && item.error_code));
 });
 
-test('dry-run forwards the SEO overwrite exception and reaches review without repository promotion', () => {
+test('dry-run przekazuje wyjątek SEO i kończy READY bez promocji repozytorium', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-dry-run-test-'));
   const input = path.join(temp, 'valid.fitpo50.json');
   const prepared = path.join(temp, 'ready', 'valid.fitpo50.json');
-  const stage = path.join(temp, 'stage');
   fs.mkdirSync(path.dirname(prepared), { recursive: true });
   fs.writeFileSync(input, '{"slug":"valid"}\n');
   fs.writeFileSync(prepared, '{"slug":"valid"}\n');
@@ -78,13 +76,10 @@ test('dry-run forwards the SEO overwrite exception and reaches review without re
     spawnSync(command, args) {
       calls.push(args);
       if (args.some((item) => item.endsWith('article-json-workbench.js'))) return { status: 0, stdout: `[ARTICLE-JSON] JSON: ${prepared}\n`, stderr: '' };
-      return { status: 10, stdout: `[AWAITING_VISUAL_REVIEW] ${stage}\n`, stderr: '' };
+      return { status: 0, stdout: '[ARTICLE_DRY_RUN_READY]\n', stderr: '' };
     },
   });
-  assert.equal(report.status, 'AWAITING_REVIEW');
-  assert.match(report.artifacts.desktop, /desktop\.png$/);
-  assert.match(report.artifacts.mobile, /mobile\.png$/);
-  assert.match(report.artifacts.pdf_pages, /pdf-pages$/);
+  assert.equal(report.status, 'READY');
   assert.ok(calls.some((args) => args.includes('--dry-run')));
   const pipelineArgs = calls.find((args) => args.some((item) => item.endsWith('article-pipeline.js')));
   assert.ok(pipelineArgs.includes('--allow-overwrite-seo-patches'));
@@ -93,6 +88,6 @@ test('dry-run forwards the SEO overwrite exception and reaches review without re
 
 test('dry-run documentation states fail-fast behavior instead of promising the whole chain', () => {
   const registry = fs.readFileSync(path.join(ROOT, 'docs/command-registry.md'), 'utf8');
-  assert.match(registry, /zatrzymuje się na pierwszym blokującym etapie/);
+  assert.match(registry, /Najpierw zbiera błędy JSON-u, źródeł i FAQ/);
   assert.doesNotMatch(registry, /--dry-run --json` przechodzi cały łańcuch/);
 });

@@ -16,12 +16,10 @@ const {
   statusPath,
   writePipelineStatus,
 } = require('./lib/article-pipeline-status');
-const { validatePreviewReport } = require('./lib/article-preview-report');
 const { atomicWriteFileSync } = require('./lib/atomic-file');
-const { createMediaReviewTemplate } = require('./lib/article-media');
 const { articleOperationInHead } = require('./lib/article-publication-state');
-const { createManagedTempDir, disposeTempWorkspace, markTempWorkspace, readWorkspaceManifest } = require('./lib/temp-workspace');
-const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure, resetSameDraft } = require('./lib/article-repair-attempts');
+const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
+const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure } = require('./lib/article-repair-attempts');
 const { packageIdentity } = require('./lib/package-identity');
 const { auditPackage, printReport: printPackageAuditReport } = require('./package-audit');
 
@@ -83,7 +81,9 @@ function earlyEvidenceAudit(source, args, runCommand = run) {
       '--cache-file', path.join(workspace, 'evidence-cache.json'),
     ];
     if (args['http-fixture']) commandArgs.push('--http-fixture', path.resolve(args['http-fixture']));
-    return runCommand('node', commandArgs);
+    const result = runCommand('node', commandArgs);
+    if (result?.status === 0 && fs.existsSync(copy)) result.verifiedJson = fs.readFileSync(copy, 'utf8');
+    return result;
   } finally {
     disposeTempWorkspace(workspace, { status: 'COMPLETED' });
   }
@@ -179,98 +179,6 @@ function readStatus(root, slug) {
   }
 }
 
-function isInside(directory, target) {
-  const relative = path.relative(path.resolve(directory), path.resolve(target));
-  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
-}
-
-function reviewArtifacts(stageRoot, slug) {
-  return {
-    stage_root: stageRoot,
-    review_template: path.join(stageRoot, '.tmp', 'article-preview', slug, 'visual-review-template.json'),
-    desktop: path.join(stageRoot, '.tmp', 'article-preview', slug, 'desktop.png'),
-    mobile: path.join(stageRoot, '.tmp', 'article-preview', slug, 'mobile.png'),
-    pdf_pages: path.join(stageRoot, '.tmp', 'article-preview', slug, 'pdf-pages'),
-  };
-}
-
-function mediaReviewArtifacts(workspace) {
-  return {
-    workspace,
-    review_template: path.join(workspace, 'media-review-template.json'),
-  };
-}
-
-function createAwaitingMediaReview(context, assetsDir, dependencies = {}) {
-  const createTemplate = dependencies.createMediaReviewTemplate || createMediaReviewTemplate;
-  const article = readJson(context.source);
-  const result = createTemplate(article, { assetsDir, root: context.root, operation: 'CREATE' });
-  if (!result.ok) throw contentBlocked(`Nie można utworzyć szablonu kontroli wariantów: ${result.errors.join(' | ')}`);
-  const workspace = createManagedTempDir({
-    prefix: 'fitpo50-media-review-',
-    type: 'article-media-review',
-    projectRoot: context.root,
-    slug: context.slug,
-  });
-  const artifacts = mediaReviewArtifacts(workspace);
-  try {
-    atomicWriteFileSync(artifacts.review_template, `${JSON.stringify(result.template, null, 2)}\n`, 'utf8');
-    markTempWorkspace(workspace, 'AWAITING_REVIEW');
-  } catch (error) {
-    disposeTempWorkspace(workspace, { status: 'FAILED', error: error.message || error });
-    throw error;
-  }
-  writePipelineStatus(context.root, context.slug, 'AWAITING_MEDIA_REVIEW', {
-    source_file: context.source,
-    source_sha256: context.sourceSha256,
-    next_action: 'REVIEW_MEDIA_VARIANTS',
-    next_args: { ...artifacts, assets_dir: assetsDir },
-  });
-  console.log('[ARTICLE-ADD] Otwórz osobno AVIF, WebP i JPG, uzupełnij media-review-template.json i ponów to samo polecenie z --review-file.');
-  return EXIT_CODES.AWAITING_MEDIA_REVIEW;
-}
-
-function validateAwaitingMediaWorkspace(context, state) {
-  const next = state?.next_args || {};
-  const workspace = path.resolve(String(next.workspace || ''));
-  const reviewTemplate = path.resolve(String(next.review_template || ''));
-  if (!next.workspace || !next.review_template || !fs.existsSync(workspace) || !fs.existsSync(reviewTemplate)) {
-    throw contentBlocked('Zapisany stan AWAITING_MEDIA_REVIEW jest niekompletny; brakuje workspace albo szablonu review.');
-  }
-  const manifest = readWorkspaceManifest(workspace);
-  if (!manifest
-    || manifest.workspace_type !== 'article-media-review'
-    || manifest.status !== 'AWAITING_REVIEW'
-    || path.resolve(String(manifest.project_root || '')) !== path.resolve(context.root)
-    || String(manifest.slug || '') !== context.slug) {
-    throw contentBlocked('Zapisany stan nie wskazuje zarządzanego workspace AWAITING_MEDIA_REVIEW dla tego repozytorium i artykułu.');
-  }
-  return { workspace, reviewTemplate, assetsDir: path.resolve(String(next.assets_dir || path.dirname(context.source))) };
-}
-
-function validateAwaitingWorkspace(context, stageRoot, preparedFile) {
-  const manifest = readWorkspaceManifest(stageRoot);
-  if (!manifest
-    || manifest.workspace_type !== 'article-publication-staging'
-    || manifest.status !== 'AWAITING_REVIEW'
-    || path.resolve(String(manifest.project_root || '')) !== path.resolve(context.root)
-    || String(manifest.slug || '') !== context.slug) {
-    throw contentBlocked('Zapisany stan nie wskazuje zarządzanego stagingu AWAITING_REVIEW dla tego repozytorium i artykułu.');
-  }
-  const recordFile = path.join(stageRoot, 'article-stage.json');
-  if (!fs.existsSync(recordFile)) throw contentBlocked(`Brak rekordu wznowienia stagingu: ${recordFile}`);
-  const record = readJson(recordFile);
-  if (path.resolve(String(record.source_root || '')) !== path.resolve(context.root)
-    || String(record.slug || '') !== context.slug
-    || path.resolve(String(record.input_file || '')) !== path.resolve(preparedFile)) {
-    throw contentBlocked('Rekord wznowienia należy do innego repozytorium, slugu albo pakietu CONTENT_READY.');
-  }
-  if (String(record.input_sha256 || '') !== sha256File(preparedFile)) {
-    throw contentBlocked('Pakiet CONTENT_READY zmienił się po utworzeniu stagingu; poprzedniego review nie wolno użyć.');
-  }
-  return { manifest, record };
-}
-
 function printChildOutput(result) {
   if (result?.stdout) process.stdout.write(result.stdout);
   if (result?.stderr) process.stderr.write(result.stderr);
@@ -283,72 +191,20 @@ function ensureSuccessfulStart(result, label) {
   }
 }
 
-function applyReview({ root, slug, stageRoot, reviewFile, runCommand }) {
-  if (!reviewFile) return;
-  const sourceReview = path.resolve(reviewFile);
-  if (!fs.existsSync(sourceReview)) throw contentBlocked(`Brak pliku review: ${sourceReview}`);
-  let managedReview = sourceReview;
-  if (!isInside(stageRoot, sourceReview)) {
-    managedReview = path.join(stageRoot, '.tmp', 'article-preview', slug, 'visual-review-submitted.json');
-    fs.mkdirSync(path.dirname(managedReview), { recursive: true });
-    fs.copyFileSync(sourceReview, managedReview);
-  }
-  const result = runCommand('node', [path.join(root, 'scripts', 'article-preview-gate.js'), '--slug', slug, '--review-file', managedReview], { cwd: stageRoot });
-  printChildOutput(result);
-  ensureSuccessfulStart(result, 'Zastosowanie visual review');
-  if (result.status !== 0) throw contentBlocked(`Visual review nie przeszedł (exit ${result.status}).`);
-}
-
-function publishPrepared({ preparedFile, assetsDir, force, parallelTails, stageRoot, allowOverwriteSeoPatches, runCommand }) {
+function publishPrepared({ preparedFile, assetsDir, force, parallelTails, allowOverwriteSeoPatches, runCommand }) {
   const publishArgs = ['scripts/article-pipeline.js', '--file', preparedFile, '--assets-dir', assetsDir, '--force', force ? 'true' : 'false'];
   if (allowOverwriteSeoPatches) publishArgs.push('--allow-overwrite-seo-patches');
   if (parallelTails !== undefined) publishArgs.push('--parallel-tails', parallelTails ? 'true' : 'false');
-  if (stageRoot) publishArgs.push('--promote-stage', stageRoot);
   const result = runCommand('node', publishArgs, { stdio: 'inherit' });
   ensureSuccessfulStart(result, 'Publikację artykułu');
   return Number(result.status);
-}
-
-function continueAwaitingReview(context, state, args, runCommand) {
-  const next = state?.next_args || {};
-  const stageRoot = path.resolve(String(next.stage_root || ''));
-  const preparedFile = path.resolve(String(next.input_file || ''));
-  if (!String(next.stage_root || '') || !String(next.input_file || '') || !fs.existsSync(stageRoot) || !fs.existsSync(preparedFile)) {
-    throw contentBlocked('Zapisany stan AWAITING_REVIEW jest niekompletny; brakuje stagingu albo artefaktu CONTENT_READY.');
-  }
-  validateAwaitingWorkspace(context, stageRoot, preparedFile);
-  const artifacts = reviewArtifacts(stageRoot, context.slug);
-  if (args['review-file']) applyReview({ ...context, stageRoot, reviewFile: args['review-file'], runCommand });
-  const preview = validatePreviewReport(stageRoot, context.slug, { requireRenderFiles: true });
-  if (!preview.ok) {
-    writePipelineStatus(context.root, context.slug, 'AWAITING_REVIEW', {
-      source_file: context.source,
-      source_sha256: context.sourceSha256,
-      prepared_file: preparedFile,
-      next_action: 'REVIEW_VISUAL_ARTIFACTS',
-      next_args: { ...next, stage_root: stageRoot, input_file: preparedFile },
-      review_artifacts: artifacts,
-    });
-    console.log('[ARTICLE-ADD] Artykuł jest technicznie przygotowany. Obejrzyj desktop, mobile, wszystkie obrazy i wszystkie strony PDF, uzupełnij review_template i ponów to samo polecenie z --review-file.');
-    return EXIT_CODES.AWAITING_REVIEW;
-  }
-  console.log('[ARTICLE-ADD] Visual review jest kompletne; wznawiam dokładnie tę samą transakcję.');
-  return publishPrepared({
-    preparedFile,
-    assetsDir: path.resolve(String(next.assets_dir || path.dirname(preparedFile))),
-    force: boolOpt(next.force, context.force),
-    parallelTails: context.parallelTails,
-    stageRoot,
-    allowOverwriteSeoPatches: boolOpt(next.allow_overwrite_seo_patches, context.allowOverwriteSeoPatches),
-    runCommand,
-  });
 }
 
 function executeArticleAddCore(args, dependencies = {}) {
   const root = dependencies.root || ROOT;
   const runCommand = dependencies.runCommand || run;
   if (args.help || args.h) {
-    console.log('Użycie: npm run article:add -- --file <draft.fitpo50.json> [--assets-dir <katalog>] [--dry-run] [--json] [--force true] [--allow-overwrite-seo-patches] [--review-file <review.json>] [--status true] [--restart true]');
+    console.log('Użycie: npm run article:add -- --file <draft.fitpo50.json> [--assets-dir <katalog>] [--dry-run] [--json] [--force true] [--allow-overwrite-seo-patches] [--status true]');
     return EXIT_CODES.SUCCESS;
   }
   if (!args.file) throw contentBlocked('Podaj --file <draft.fitpo50.json>.');
@@ -383,7 +239,10 @@ function executeArticleAddCore(args, dependencies = {}) {
     }
     if (boolOpt(args.json, false)) console.log(JSON.stringify(packageAuditAsDryRunReport(auditReport), null, 2));
     else console.error(`[ARTICLE-ADD][PACKAGE_AUDIT_BLOCKED] Etap mediów i renderów nie został uruchomiony. Raport: ${auditReport.report_file}`);
-    if (auditReport.exit_code === EXIT_CODES.ENVIRONMENT_FAILURE || evidenceResult.status === EXIT_CODES.ENVIRONMENT_FAILURE) return EXIT_CODES.ENVIRONMENT_FAILURE;
+    if (auditReport.exit_code === EXIT_CODES.ENVIRONMENT_FAILURE
+      || (auditReport.exit_code === EXIT_CODES.SUCCESS && evidenceResult.status === EXIT_CODES.ENVIRONMENT_FAILURE)) {
+      return EXIT_CODES.ENVIRONMENT_FAILURE;
+    }
     return EXIT_CODES.CONTENT_BLOCKED;
   }
 
@@ -408,46 +267,6 @@ function executeArticleAddCore(args, dependencies = {}) {
     return Number(result.status);
   }
 
-  const state = readStatus(root, slug);
-  const hasPendingPreviewReview = state?.status === 'AWAITING_REVIEW';
-  const hasPendingMediaReview = state?.status === 'AWAITING_MEDIA_REVIEW';
-  const hasPendingReview = hasPendingPreviewReview || hasPendingMediaReview;
-  const samePendingSource = hasPendingReview && state.source_sha256 === context.sourceSha256;
-  let mediaReview = null;
-  if (hasPendingReview && boolOpt(args.restart, false)) {
-    if (hasPendingPreviewReview) {
-      const stageRoot = String(state?.next_args?.stage_root || '');
-      const preparedFile = String(state?.next_args?.input_file || '');
-      if (stageRoot && preparedFile && fs.existsSync(stageRoot) && fs.existsSync(preparedFile)) {
-        validateAwaitingWorkspace(context, path.resolve(stageRoot), path.resolve(preparedFile));
-        disposeTempWorkspace(path.resolve(stageRoot), { status: 'FAILED', error: 'Jawny restart article:add.' });
-      }
-    } else {
-      const pending = validateAwaitingMediaWorkspace(context, state);
-      disposeTempWorkspace(pending.workspace, { status: 'FAILED', error: 'Jawny restart article:add.' });
-    }
-    console.log('[ARTICLE-ADD] Poprzedni zarządzany workspace został bezpiecznie zakończony na jawne --restart true.');
-    resetSameDraft(root, slug, context.sourceSha256);
-  } else if (samePendingSource && hasPendingPreviewReview) {
-    const stageRoot = String(state?.next_args?.stage_root || '');
-    if (stageRoot && fs.existsSync(stageRoot)) disposeTempWorkspace(path.resolve(stageRoot), { status: 'FAILED', error: 'Ręczny preview nie jest już bramką article:add.' });
-    console.log('[ARTICLE-ADD] Pomijam stary stan AWAITING_REVIEW; kontrola techniczna zostanie wykonana ponownie.');
-  } else if (samePendingSource && hasPendingMediaReview) {
-    const pending = validateAwaitingMediaWorkspace(context, state);
-    disposeTempWorkspace(pending.workspace, { status: 'FAILED', error: 'Ręczny review obrazów nie jest już bramką article:add.' });
-    console.log('[ARTICLE-ADD] Pomijam stary stan AWAITING_MEDIA_REVIEW; Grzegorz kontroluje obrazy przed przekazaniem paczki.');
-  } else if (hasPendingReview) {
-    console.error('[ARTICLE-ADD] JSON zmienił się podczas oczekiwania na review. Stary workspace pozostaje nienaruszony; po świadomej decyzji uruchom z --restart true.');
-    return EXIT_CODES.CONTENT_BLOCKED;
-  }
-  if (boolOpt(args.restart, false) && !hasPendingReview) {
-    resetSameDraft(root, slug, context.sourceSha256);
-    console.log('[ARTICLE-ADD] Jawny restart wyzerował licznik prób wyłącznie dla tej samej wersji draftu.');
-  }
-  if ((args['review-file'] || boolOpt(args.resume, false)) && !mediaReview) {
-    throw contentBlocked('Nie ma aktywnego stagingu AWAITING_REVIEW dla tej wersji JSON-u. Uruchom zwykłe article:add.');
-  }
-
   const sourcePrepared = sourcePreparedAtStart;
   const sourceArticle = readJson(source);
   const prompts = Array.isArray(sourceArticle.image_prompts_v4)
@@ -468,25 +287,34 @@ function executeArticleAddCore(args, dependencies = {}) {
   } else {
     console.log('[ARTICLE-ADD] Faza 1/3: treść, źródła, FAQ, intencja, linki i media.');
     const prepareArgs = ['scripts/article-json-workbench.js', '--file', source, '--assets-dir', assetsDir, '--force', context.force ? 'true' : 'false'];
-    if (mediaReview) prepareArgs.push('--media-review-file', path.resolve(args['review-file']));
+    let evidenceWorkspace = '';
+    if (evidenceResult.verifiedJson) {
+      evidenceWorkspace = createManagedTempDir({ prefix: 'fitpo50-evidence-proof-', type: 'article-json-workbench', projectRoot: root, slug });
+      const preverifiedFile = path.join(evidenceWorkspace, `${slug}.fitpo50.json`);
+      atomicWriteFileSync(preverifiedFile, evidenceResult.verifiedJson, 'utf8');
+      prepareArgs.push('--preverified-file', preverifiedFile);
+    }
     if (args['output-dir']) prepareArgs.push('--output-dir', path.resolve(args['output-dir']));
     if (args['keep-revisions']) prepareArgs.push('--keep-revisions', args['keep-revisions']);
-    const prepared = runCommand('node', prepareArgs);
+    let prepared;
+    try {
+      prepared = runCommand('node', prepareArgs);
+    } finally {
+      if (evidenceWorkspace) disposeTempWorkspace(evidenceWorkspace, { status: prepared?.status === 0 ? 'COMPLETED' : 'FAILED' });
+    }
     printChildOutput(prepared);
     ensureSuccessfulStart(prepared, 'Przygotowanie JSON-u');
     if (prepared.status !== 0) {
       const isContentFailure = prepared.status === EXIT_CODES.CONTENT_BLOCKED || prepared.status === 2;
-      const failureStatus = mediaReview && isContentFailure ? 'AWAITING_MEDIA_REVIEW' : (isContentFailure ? 'CONTENT_BLOCKED' : 'ENVIRONMENT_FAILURE');
+      const failureStatus = isContentFailure ? 'CONTENT_BLOCKED' : 'ENVIRONMENT_FAILURE';
       writePipelineStatus(root, slug, failureStatus, {
         source_file: source,
         source_sha256: context.sourceSha256,
-        next_action: mediaReview && isContentFailure ? 'REVIEW_MEDIA_VARIANTS' : (isContentFailure ? 'FIX_CONTENT_OR_PACKAGE' : 'FIX_ENVIRONMENT_AND_RETRY'),
-        ...(mediaReview ? { next_args: { ...mediaReviewArtifacts(mediaReview.workspace), assets_dir: mediaReview.assetsDir } } : {}),
+        next_action: isContentFailure ? 'FIX_CONTENT_OR_PACKAGE' : 'FIX_ENVIRONMENT_AND_RETRY',
       });
       return isContentFailure ? EXIT_CODES.CONTENT_BLOCKED : EXIT_CODES.ENVIRONMENT_FAILURE;
     }
     preparedFile = preparedPathFromOutput(prepared.stdout);
-    if (mediaReview) disposeTempWorkspace(mediaReview.workspace, { status: 'COMPLETED' });
   }
   if (!preparedFile || !fs.existsSync(preparedFile)) throw environmentFailure('Nie udało się odczytać ścieżki artefaktu CONTENT_READY.');
 
@@ -500,18 +328,6 @@ function executeArticleAddCore(args, dependencies = {}) {
     allowOverwriteSeoPatches: context.allowOverwriteSeoPatches,
     runCommand,
   });
-  if (status === EXIT_CODES.AWAITING_REVIEW) {
-    const pending = readStatus(root, slug) || {};
-    const stageRoot = String(pending?.next_args?.stage_root || '');
-    writePipelineStatus(root, slug, 'AWAITING_REVIEW', {
-      source_file: source,
-      source_sha256: context.sourceSha256,
-      prepared_file: preparedFile,
-      next_action: 'REVIEW_VISUAL_ARTIFACTS',
-      next_args: pending.next_args || {},
-      review_artifacts: stageRoot ? reviewArtifacts(stageRoot, slug) : {},
-    });
-  }
   return status;
 }
 
@@ -539,10 +355,10 @@ function repairAttemptIdentity(args, root) {
 function executeArticleAdd(args, dependencies = {}) {
   const root = dependencies.root || ROOT;
   const identity = repairAttemptIdentity(args, root);
-  if (identity && !boolOpt(args.restart, false)) {
+  if (identity) {
     const attempts = readAttemptState(identity.root, identity.slug, identity.draftHash, identity.pipelineHash);
     if (attempts.repair_attempts >= MAX_REPAIR_ATTEMPTS) {
-      throw contentBlocked(`Przekroczono limit ${MAX_REPAIR_ATTEMPTS} prób automatycznej naprawy dla tej wersji draftu. Popraw draft u Pisarza albo użyj jawnego --restart true.`);
+      throw contentBlocked(`Przekroczono limit ${MAX_REPAIR_ATTEMPTS} prób automatycznej naprawy dla tej wersji draftu. Zmiana JSON-u albo kodu automatycznie rozpocznie nowy licznik.`);
     }
   }
 
@@ -570,25 +386,11 @@ function main() {
     const failure = classifyPipelineFailure(error);
     console.error(`[ARTICLE-ADD][FAIL] ${error.message || error}`);
     if (slug) {
-      const existing = readStatus(ROOT, slug);
-      if (existing?.status === 'AWAITING_REVIEW' || existing?.status === 'AWAITING_MEDIA_REVIEW') {
-        const mediaPending = existing.status === 'AWAITING_MEDIA_REVIEW';
-        writePipelineStatus(ROOT, slug, existing.status, {
-          source_file: existing.source_file,
-          source_sha256: existing.source_sha256,
-          prepared_file: existing.prepared_file,
-          next_action: mediaPending ? 'REVIEW_MEDIA_VARIANTS' : 'REVIEW_VISUAL_ARTIFACTS',
-          next_args: existing.next_args,
-          ...(mediaPending ? {} : { review_artifacts: existing.review_artifacts }),
-          review_error: String(error.message || error),
-        });
-      } else {
-        writePipelineStatus(ROOT, slug, failure.status, {
-          next_action: failure.nextAction,
-          error_code: failure.code,
-          error: String(error.message || error),
-        });
-      }
+      writePipelineStatus(ROOT, slug, failure.status, {
+        next_action: failure.nextAction,
+        error_code: failure.code,
+        error: String(error.message || error),
+      });
     }
     process.exitCode = failure.exitCode;
   }
@@ -599,18 +401,12 @@ if (require.main === module) main();
 module.exports = {
   auditMessages,
   boolOpt,
-  continueAwaitingReview,
   executeArticleAdd,
   executeArticleAddCore,
   earlyEvidenceAudit,
   expectedPreparedPath,
-  createAwaitingMediaReview,
-  mediaReviewArtifacts,
   packageHashesMatch,
   packageAuditAsDryRunReport,
   parseArgs,
   preparedPathFromOutput,
-  reviewArtifacts,
-  validateAwaitingMediaWorkspace,
-  validateAwaitingWorkspace,
 };

@@ -9,7 +9,7 @@ const { createManagedTempDir, disposeTempWorkspace, readWorkspaceManifest } = re
 const { validatePreviewReport } = require('./article-preview-report');
 const { warsawIso } = require('./time');
 
-const ALLOWED_TOP_LEVEL_DIRECTORIES = new Set(['scripts', 'assets', 'data', '_site', 'src', 'dist', 'templates', 'admin', 'docs', 'sukcesy']);
+const STAGING_DEPENDENCY_DIRECTORIES = new Set(['scripts', 'assets', 'data', '_site', 'templates', 'docs']);
 const EXCLUDED_TOP_LEVEL = new Set(['.git', 'node_modules', '.tmp', 'output', 'tmp']);
 const TRANSACTION_DIR = path.join('.tmp', 'article-publication-transactions');
 const TRANSACTION_LOCK = path.join('.tmp', 'article-publication.lock');
@@ -54,8 +54,14 @@ function isAllowedStagePath(relative, isDirectory) {
   if (!normalized || isSensitiveStagePath(normalized)) return false;
   const top = normalized.split('/')[0];
   if (EXCLUDED_TOP_LEVEL.has(top)) return false;
-  if (normalized.includes('/')) return ALLOWED_TOP_LEVEL_DIRECTORIES.has(top);
-  return isDirectory ? ALLOWED_TOP_LEVEL_DIRECTORIES.has(top) : isAllowedRootFile(top);
+  if (top === 'docs') {
+    return normalized === 'docs'
+      || normalized === 'docs/skills'
+      || normalized === 'docs/skills/fitpo50-article-draft'
+      || normalized.startsWith('docs/skills/fitpo50-article-draft/');
+  }
+  if (normalized.includes('/')) return STAGING_DEPENDENCY_DIRECTORIES.has(top);
+  return isDirectory ? STAGING_DEPENDENCY_DIRECTORIES.has(top) : isAllowedRootFile(top);
 }
 
 function cloneEntry(source, target, relative = '') {

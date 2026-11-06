@@ -57,10 +57,10 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Opis SEO ma 145–160 znaków, kończy się pełnym zdaniem i jest identyczny w meta, Open Graph, Twitter i `BlogPosting.description`.
 - Pytające H2 kończą się `?`; pierwszy akapit pod H2 ma odpowiadać bezpośrednio i konkretnie na pytanie. Zakres 30–70 słów jest zaleceniem, nie samodzielnym blokerem.
 - Liczba linków wewnętrznych wynika z naturalnego planu; mniej niż 2 daje ostrzeżenie, nie blokadę. Linki prowadzą do istniejących stron i używają ścieżek względnych.
-- Obrazy korzystają z `<picture>` z AVIF/WebP/JPG, konkretnym `alt`, wymiarami i kontrolą wizualną. Wymagany jest hero oraz odrębny, merytorycznie trafny obraz dla każdej głównej sekcji treści; sekcje użytkowe nie zwiększają licznika. Watermark sam nie blokuje obrazu. Zmieniony obraz zawsze otrzymuje nową, wersjonowaną nazwę, ponieważ publiczne assety mają cache `immutable`.
+- Obrazy korzystają z `<picture>` z AVIF/WebP/JPG, konkretnym `alt` i wymiarami. Grzegorz zatwierdza obrazy przed przekazaniem paczki; Codex nie powtarza ich ręcznego przeglądu, a pipeline sprawdza kompletność i zgodność techniczną wariantów. Wymagany jest hero oraz odrębny obraz dla każdej głównej sekcji treści. Zmieniony obraz zawsze otrzymuje nową, wersjonowaną nazwę, ponieważ publiczne assety mają cache `immutable`.
 - Tabele są semantycznym HTML z `caption`, `thead`, `tbody` i `scope`.
 - `BlogPosting.citation` jest zgodne 1:1 z wykorzystaną listą źródeł.
-- Publikacja wymaga stagingu desktop/mobile, PDF, obejrzenia wszystkich stron PDF, synchronizacji `_site` oraz pełnych walidatorów.
+- Publikacja wymaga automatycznego stagingu desktop/mobile, technicznej kontroli PDF, synchronizacji `_site` oraz walidatorów. Ręczny przegląd desktop/mobile/PDF jest wymagany tylko po zmianie szablonu, CSS albo dodaniu nietypowego komponentu; standardowy artykuł korzystający z niezmienionego szablonu nie wymaga ponownego oglądania przez Codexa.
 
 ## Zasada naprawy podwójnej
 

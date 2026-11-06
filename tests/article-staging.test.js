@@ -50,7 +50,7 @@ test('staging jest kopią niezależną i pomija .git oraz node_modules', () => {
   assert.equal(fs.existsSync(path.join(stage, 'node_modules')), false);
 });
 
-test('staging nie kopiuje sekretów, bazy admina ani publicznego duplikatu _site/admin', () => {
+test('staging kopiuje tylko zależności artykułu, bez panelu, sekretów i publicznego _site/admin', () => {
   const source = temp('fitpo50-stage-secrets-source-');
   const stage = temp('fitpo50-stage-secrets-target-');
   fs.mkdirSync(path.join(source, 'admin'), { recursive: true });
@@ -66,7 +66,20 @@ test('staging nie kopiuje sekretów, bazy admina ani publicznego duplikatu _site
   assert.equal(fs.existsSync(path.join(stage, 'admin', 'config.php')), false);
   assert.equal(fs.existsSync(path.join(stage, 'admin', 'database.sqlite')), false);
   assert.equal(fs.existsSync(path.join(stage, '_site', 'admin')), false);
-  assert.equal(fs.existsSync(path.join(stage, 'admin', 'bootstrap.php')), true);
+  assert.equal(fs.existsSync(path.join(stage, 'admin', 'bootstrap.php')), false);
+});
+
+test('staging pomija katalogi aplikacji niezwiązane z budową artykułu', () => {
+  const source = temp('fitpo50-stage-sparse-source-');
+  const stage = temp('fitpo50-stage-sparse-target-');
+  for (const directory of ['scripts', 'assets', 'src', 'dist', 'sukcesy']) {
+    fs.mkdirSync(path.join(source, directory), { recursive: true });
+    fs.writeFileSync(path.join(source, directory, 'fixture.js'), directory);
+  }
+  cloneEntry(source, stage);
+  assert.equal(fs.existsSync(path.join(stage, 'scripts', 'fixture.js')), true);
+  assert.equal(fs.existsSync(path.join(stage, 'assets', 'fixture.js')), true);
+  for (const directory of ['src', 'dist', 'sukcesy']) assert.equal(fs.existsSync(path.join(stage, directory)), false, directory);
 });
 
 test('zmiana stagingu spoza manifestu blokuje promocję z nazwą pliku', () => {
