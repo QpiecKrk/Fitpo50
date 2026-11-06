@@ -272,8 +272,11 @@ test('content blockers run before media conversion and the final package preflig
 });
 
 test('wynik wczesnej weryfikacji źródeł usuwa jej drugi przebieg w workbench', () => {
-  const labels = buildStageDefinitions('/tmp/article.json', '/tmp/assets', { preverified: true }).map((item) => item.label);
+  const definitions = buildStageDefinitions('/tmp/article.json', '/tmp/assets', { preverified: true });
+  const labels = definitions.map((item) => item.label);
   assert.equal(labels.includes('Weryfikacja źródeł, URL-i i pochodzenia FAQ'), false);
+  const contract = definitions.find((item) => item.label.startsWith('Kontrakt wejściowy'));
+  assert.ok(contract.args.includes('--allow-local-evidence-verification'));
 });
 
 test('article:add content gate rejects manual_research before import', () => withTempDir((dir) => {

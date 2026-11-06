@@ -144,6 +144,19 @@ test('nowy artykuł wymaga technicznie zgodnych wariantów, ale nie drugiego vis
   assert.equal(prepareArticleMedia(value, { assetsDir: dir, inspectImage: changedInspector, operation: 'CREATE' }).ok, false);
 });
 
+test('purpose może potwierdzić semantyczny związek obrazu z kontekstem artykułu', () => {
+  const dir = makePackage();
+  const value = article();
+  const hero = value.image_prompts[0];
+  hero.topic = 'Para w jasnej kuchni';
+  hero.alt_pl = 'Para po pięćdziesiątce stoi w jasnej kuchni przy otwartej szufladzie';
+  hero.caption_pl = 'Domowa scena pokazuje parę stojącą w jasnej kuchni przy otwartej szufladzie.';
+  hero.purpose = 'Hero otwiera materiał o treningu siłowym po 50 roku życia.';
+  createFiles(dir, value);
+  const result = prepareArticleMedia(value, { assetsDir: dir, inspectImage: inspector, operation: 'CREATE' });
+  assert.equal(result.ok, true, result.errors.join('\n'));
+});
+
 test('manifest v2 jest legacy tylko dla opublikowanego sluga', () => {
   const value = article();
   value.media_manifest = { version: 2, generated_at: '2026-10-30T10:00:00+01:00', entries: [] };

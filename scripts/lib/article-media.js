@@ -251,7 +251,7 @@ function validateDescriptiveFields(prompt, context, placement, errors, articleSo
   });
   if (prompt.requires_exact_data_render === true && !overlay) errors.push(`${base}: grafika wymagająca dokładnych danych musi mieć overlay_text_pl.`);
   const contextTokens = new Set(semanticTokens(context));
-  const topicTokens = semanticTokens(`${topic} ${alt} ${caption}`);
+  const topicTokens = semanticTokens(`${topic} ${purpose} ${alt} ${caption}`);
   if (!topicTokens.some((token) => contextTokens.has(token))) {
     errors.push(`${base}: temat/alt/podpis nie mają semantycznego związku z ${placement}; obraz może być przypadkowy lub niezwiązany.`);
   }

@@ -140,7 +140,7 @@ function buildStageDefinitions(workingFile, assetsDir, options = {}) {
   if (options.httpFixture) evidenceArgs.push('--http-fixture', options.httpFixture);
   const definitions = [
     { label: 'Szybki odbiór paczki Pisarz + Ilustrator', command: 'node', args: ['scripts/article-package-intake.js', '--file', workingFile, '--assets-dir', assetsDir] },
-    { label: 'Kontrakt wejściowy treści, FAQ, dowodów i promptów obrazów', command: 'python3', args: ['docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py', '--allow-verified-review', workingFile] },
+    { label: 'Kontrakt wejściowy treści, FAQ, dowodów i promptów obrazów', command: 'python3', args: ['docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py', '--allow-verified-review', ...(options.preverified ? ['--allow-local-evidence-verification'] : []), workingFile] },
     { label: 'Kontrola bezpiecznego fixera JSON', command: 'node', args: ['scripts/fix-fitpo50-json.js', '--file', workingFile, '--check', 'true', '--allow-outside-repo', 'true'] },
     { label: 'Normalizacja techniczna bez generowania treści', command: 'node', args: ['scripts/json-autofix-strict.js', '--file', workingFile, '--map', 'data/internal-link-map.json'] },
     { label: 'Lokalna intencja, kanibalizacja, linkowanie i centra', command: 'node', args: ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true'] },

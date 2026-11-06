@@ -66,7 +66,7 @@ test('staging kopiuje tylko zależności artykułu, bez panelu, sekretów i publ
   assert.equal(fs.existsSync(path.join(stage, 'admin', 'config.php')), false);
   assert.equal(fs.existsSync(path.join(stage, 'admin', 'database.sqlite')), false);
   assert.equal(fs.existsSync(path.join(stage, '_site', 'admin')), false);
-  assert.equal(fs.existsSync(path.join(stage, 'admin', 'bootstrap.php')), false);
+  assert.equal(fs.existsSync(path.join(stage, 'admin', 'bootstrap.php')), true);
 });
 
 test('staging pomija katalogi aplikacji niezwiązane z budową artykułu', () => {
@@ -79,7 +79,8 @@ test('staging pomija katalogi aplikacji niezwiązane z budową artykułu', () =>
   cloneEntry(source, stage);
   assert.equal(fs.existsSync(path.join(stage, 'scripts', 'fixture.js')), true);
   assert.equal(fs.existsSync(path.join(stage, 'assets', 'fixture.js')), true);
-  for (const directory of ['src', 'dist', 'sukcesy']) assert.equal(fs.existsSync(path.join(stage, directory)), false, directory);
+  assert.equal(fs.existsSync(path.join(stage, 'dist', 'fixture.js')), true);
+  for (const directory of ['src', 'sukcesy']) assert.equal(fs.existsSync(path.join(stage, directory)), false, directory);
 });
 
 test('zmiana stagingu spoza manifestu blokuje promocję z nazwą pliku', () => {

@@ -176,7 +176,11 @@ def locate(data: dict[str, Any], location: str) -> Any:
     return current
 
 
-def validate(data: dict[str, Any], allow_verified_review: bool = False) -> tuple[list[str], list[str]]:
+def validate(
+    data: dict[str, Any],
+    allow_verified_review: bool = False,
+    allow_local_evidence_verification: bool = False,
+) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warnings: list[str] = []
     for field in REQUIRED_TEXT:
@@ -189,6 +193,8 @@ def validate(data: dict[str, Any], allow_verified_review: bool = False) -> tuple
     if not KEBAB.fullmatch(str(data.get("slug", ""))):
         errors.append("slug musi być kebab-case bez polskich znaków.")
     for field in LOCAL_FIELDS & data.keys():
+        if field == "evidence_verification" and allow_local_evidence_verification:
+            continue
         errors.append(f"{field} jest polem lokalnego pipeline i nie może powstać w Claude.")
 
     title = plain_text(data.get("title", ""))
@@ -618,9 +624,10 @@ def validate(data: dict[str, Any], allow_verified_review: bool = False) -> tuple
 def main() -> int:
     args = sys.argv[1:]
     allow_verified_review = "--allow-verified-review" in args
-    args = [arg for arg in args if arg != "--allow-verified-review"]
+    allow_local_evidence_verification = "--allow-local-evidence-verification" in args
+    args = [arg for arg in args if arg not in {"--allow-verified-review", "--allow-local-evidence-verification"}]
     if len(args) != 1:
-        print("Użycie: python3 validate_fitpo50_draft.py [--allow-verified-review] <plik.fitpo50.json>", file=sys.stderr)
+        print("Użycie: python3 validate_fitpo50_draft.py [--allow-verified-review] [--allow-local-evidence-verification] <plik.fitpo50.json>", file=sys.stderr)
         return 2
     try:
         data = json.loads(Path(args[0]).read_text(encoding="utf-8"))
@@ -630,7 +637,11 @@ def main() -> int:
     if not isinstance(data, dict):
         print("[FAIL] Korzeń JSON musi być obiektem.", file=sys.stderr)
         return 2
-    errors, warnings = validate(data, allow_verified_review=allow_verified_review)
+    errors, warnings = validate(
+        data,
+        allow_verified_review=allow_verified_review,
+        allow_local_evidence_verification=allow_local_evidence_verification,
+    )
     for message in warnings:
         print(f"[WARN] {message}")
     for message in errors:

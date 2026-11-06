@@ -9,7 +9,7 @@ const { createManagedTempDir, disposeTempWorkspace, readWorkspaceManifest } = re
 const { validatePreviewReport } = require('./article-preview-report');
 const { warsawIso } = require('./time');
 
-const STAGING_DEPENDENCY_DIRECTORIES = new Set(['scripts', 'assets', 'data', '_site', 'templates', 'docs']);
+const STAGING_DEPENDENCY_DIRECTORIES = new Set(['scripts', 'assets', 'data', '_site', 'templates', 'docs', 'dist']);
 const EXCLUDED_TOP_LEVEL = new Set(['.git', 'node_modules', '.tmp', 'output', 'tmp']);
 const TRANSACTION_DIR = path.join('.tmp', 'article-publication-transactions');
 const TRANSACTION_LOCK = path.join('.tmp', 'article-publication.lock');
@@ -52,6 +52,7 @@ function isAllowedRootFile(name) {
 function isAllowedStagePath(relative, isDirectory) {
   const normalized = String(relative || '').replace(/\\/g, '/').replace(/^\.\//, '');
   if (!normalized || isSensitiveStagePath(normalized)) return false;
+  if (normalized === 'admin' || normalized === 'admin/bootstrap.php') return true;
   const top = normalized.split('/')[0];
   if (EXCLUDED_TOP_LEVEL.has(top)) return false;
   if (top === 'docs') {

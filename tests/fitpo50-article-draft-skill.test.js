@@ -127,6 +127,13 @@ test('local workbench may revalidate a genuinely reviewed package without preten
   assert.equal(validate(draft, ['--allow-verified-review']).status, 0);
 });
 
+test('local workbench may validate its own evidence_verification without allowing the Writer to provide it', () => {
+  const draft = validDraft();
+  draft.evidence_verification = { version: 1, checked_at: '2026-11-06', entries: {} };
+  assert.notEqual(validate(draft).status, 0);
+  assert.equal(validate(draft, ['--allow-local-evidence-verification']).status, 0);
+});
+
 test('Claude draft skill accepts flexible supplemental images and local FAQ/link tasks', () => {
   const result = validate(validDraft());
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
