@@ -12,7 +12,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 ## Kanoniczne wejścia
 
 - Nowy artykuł lokalnie: `npm run article:add -- --file <draft.fitpo50.json>`. Najpierw zbiera błędy JSON-u, źródeł i FAQ, potem jednokrotnie przygotowuje media, HTML, PDF, listingi, sitemapę i `_site`. Ręczny review obrazów oraz desktop/mobile/PDF nie jest osobnym stanem ani bramką wznowienia.
-- Pełna publikacja dla jednej osoby: `npm run publikuj -- <katalog-artykulu>`. Komenda rozpoznaje CREATE/UPDATE, uruchamia `article:add`, przygotowuje marker, pyta raz `Publikujemy? tak/nie`, a po `tak` tworzy jeden commit wyłącznie z manifestu artykułu i markerów, wykonuje jeden push oraz sprawdza zgodność produkcyjnego HTML z `_site`. IndexNow pozostaje osobno.
+- Publikacja dla jednej osoby: `npm run publikuj -- [katalog-artykulu]`. Komenda rozpoznaje CREATE/UPDATE, może wznowić gotowy lokalny artykuł bez ponownego importu, a bez katalogu wykrywa jednoznaczny zakres zmian kodu, testów lub dokumentacji. Po jednym pytaniu `Publikujemy? tak/nie` przygotowuje marker, dodaje wyłącznie zamknięty zakres, tworzy jeden commit i wykonuje jeden zwykły push z hookiem. Dla artykułu sprawdza HTML oraz hero AVIF/WebP/JPG; dla zmian bez artykułu potwierdza push bez kontroli CDN/NEWS. Nie uruchamia dodatkowego `prepush:local`, `deployment:finalize` ani IndexNow.
 - Korekta JSON bez publikacji: `npm run article:prepare-json -- --file <draft.fitpo50.json>`.
 - Gotowy artefakt `CONTENT_READY` również przekazuje się do `article:add`; kontroler rozpoznaje identyczny pakiet po SHA-256 i nie wykonuje ponownie przygotowania JSON-u.
 - Pełna bramka przed pushem: `npm run prepush:local`.
@@ -37,7 +37,7 @@ Ten plik jest kanonicznym rejestrem komend `package.json`. Każda komenda ma dok
 - [PUBLIC] `npm run agent:context` — Bezpośrednia komenda robocza lub odczytowa (node scripts/agent-context.js).
 - [PUBLIC] `npm run aio:full-audit` — Bezpośrednia komenda robocza lub odczytowa (node scripts/growth-tool.js full-audit).
 - [PUBLIC] `npm run article:add` — Lokalne wejście dla nowego artykułu: zbiorczy audyt, jednokrotne przygotowanie, atomowy staging i pełne domknięcie bez stanów ręcznego review.
-- [PUBLIC] `npm run publikuj` — Jedno wejście publikacyjne: CREATE/UPDATE, marker, jedno pytanie, ścisły commit z manifestu, push i kontrola zgodności jednego URL-a artykułu; bez IndexNow.
+- [PUBLIC] `npm run publikuj` — Jedno wejście publikacyjne: automatyczny zakres artykułu lub bezpiecznych zmian kodu/testów/dokumentacji, wznowienie gotowego artykułu bez reimportu, marker, jedno pytanie, dokładny commit, zwykły push i właściwa kontrola efektu; bez `git add -A`, dodatkowego `prepush:local`, `deployment:finalize` i IndexNow.
 - [PUBLIC] `npm run article:cleanup-input` — Na jawne polecenie usuwa wejściową paczkę sluga wyłącznie po zapisanym `AWAITING_LIVE_CONFIRMATION` i zgodnym `LIVE_DEPLOYED_AND_VALIDATED`; nigdy nie uruchamia się automatycznie.
 - [PUBLIC] `npm run package:audit` — Odczytowy audyt całej wejściowej paczki JSON i obrazów; zbiera błędy w jednym raporcie lokalnym według właściciela i nie publikuje ani nie poprawia plików.
 - [PUBLIC] `npm run article:coverage:report` — Informacyjny raport pokrycia produkcyjnego katalogu BlogPosting oraz rozdzielonych statusów preview, publikacji, walidacji, wdrożenia i GSC; nie jest bramką publikacyjną.

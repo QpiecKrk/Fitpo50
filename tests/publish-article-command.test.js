@@ -7,14 +7,19 @@ const path = require('node:path');
 const test = require('node:test');
 const {
   articleAddArgs,
+  articleHeroAssets,
   assertExactCommitFiles,
   assertSafeChanges,
   checkArticle200,
+  checkPublicAssets,
   expectedCommitFiles,
   findArticleJson,
+  preparedArticleTask,
   protectedNewsPath,
   sensitivePath,
   statusEntries,
+  taskCommitFiles,
+  taskSlugFromEntries,
 } = require('../scripts/publish-article');
 
 const publishSource = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'publish-article.js'), 'utf8');
@@ -86,6 +91,51 @@ test('publikuj bierze listę commita wyłącznie z manifestu artykułu i dwóch 
     ...expected.map((file) => ({ code: ' M', file })),
     { code: ' M', file: 'niepowiazany.txt' },
   ], expected), /Nadmiar: niepowiazany\.txt/);
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
+test('publikuj wznawia gotowy artykuł i dopuszcza tylko powiązany kod/test', () => {
+  const expected = ['artykul.html', '_site/artykul.html', 'data/reports/article-publications/artykul.json', 'deployment.json', '_site/deployment.json'];
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-publikuj-resume-'));
+  fs.mkdirSync(path.join(root, 'data', 'reports', 'article-publications'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'data', 'reports', 'article-publications', 'artykul.json'), JSON.stringify({
+    slug: 'artykul',
+    files: [{ path: 'artykul.html' }, { path: '_site/artykul.html' }],
+  }));
+  const entries = expected.map((file) => ({ code: ' M', file })).concat([
+    { code: ' M', file: 'scripts/publish-article.js' },
+    { code: ' M', file: 'tests/publish-article-command.test.js' },
+  ]);
+  assert.equal(preparedArticleTask('artykul', root, []), false);
+  assert.equal(preparedArticleTask('artykul', root, entries.slice(0, 3)), true);
+  assert.deepEqual(taskCommitFiles(entries, expected).sort(), entries.map((entry) => entry.file).sort());
+  assert.equal(taskSlugFromEntries([{ code: ' M', file: 'data/reports/article-publications/artykul.json' }]), 'artykul');
+  assert.throws(() => taskCommitFiles(entries.concat({ code: ' M', file: 'random.txt' }), expected), /Niezwiązane/);
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
+test('publikuj wyciąga z hero dokładnie AVIF/WebP/JPG', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-publikuj-hero-'));
+  fs.mkdirSync(path.join(root, '_site'), { recursive: true });
+  fs.writeFileSync(path.join(root, '_site', 'artykul.html'), '<div class="article-hero"><picture><source srcset="./assets/a.avif" type="image/avif"><source srcset="./assets/a.webp" type="image/webp"><img src="./assets/a.jpg"></picture></div>');
+  assert.deepEqual(articleHeroAssets('artykul', root), ['assets/a.avif', 'assets/a.webp', 'assets/a.jpg']);
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
+test('publikuj sprawdza hash hero bez dodatkowego pipeline’u', async () => {
+  const body = Buffer.from('hero');
+  const hash = require('node:crypto').createHash('sha256').update(body).digest('hex');
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-publikuj-assets-'));
+  fs.mkdirSync(path.join(root, '_site', 'assets'), { recursive: true });
+  fs.writeFileSync(path.join(root, '_site', 'assets', 'a.jpg'), body);
+  await checkPublicAssets(['assets/a.jpg'], {
+    root,
+    requestStatus: async () => ({ status: 200, body }),
+    wait: async () => {},
+    intervalMs: 0,
+    timeoutMs: 100,
+  });
+  assert.equal(hash.length, 64);
   fs.rmSync(root, { recursive: true, force: true });
 });
 

@@ -14,6 +14,8 @@ const IGNORED_LOCAL_PATH = 'docs/fitpo50-modernization-master-plan.md';
 const ARTICLE_CHECK_INTERVAL_MS = 15000;
 const ARTICLE_CHECK_TIMEOUT_MS = 180000;
 const DEPLOYMENT_MARKERS = ['deployment.json', '_site/deployment.json'];
+const RELEASE_SAFE_PREFIXES = ['scripts/', 'tests/', 'docs/'];
+const RELEASE_SAFE_FILES = new Set(['package.json', 'AGENTS.md', 'PROJECT_MEMORY.md']);
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, { cwd: ROOT, stdio: options.capture ? 'pipe' : 'inherit', encoding: 'utf8' });
@@ -56,6 +58,12 @@ function assertSafeChanges(entries) {
   }
 }
 
+function isReleaseSafeTaskFile(file) {
+  const normalized = String(file || '').replace(/\\/g, '/');
+  if (normalized === IGNORED_LOCAL_PATH) return true;
+  return RELEASE_SAFE_FILES.has(normalized) || RELEASE_SAFE_PREFIXES.some((prefix) => normalized.startsWith(prefix));
+}
+
 function articleAddArgs(source, slug, root = ROOT) {
   const args = ['run', 'article:add', '--', '--file', source, '--assets-dir', path.dirname(source)];
   if (fs.existsSync(path.join(root, `${slug}.html`))) args.push('--force', 'true');
@@ -76,6 +84,33 @@ function expectedCommitFiles(slug, root = ROOT) {
   const manifestRelative = path.relative(root, manifestFile).replace(/\\/g, '/');
   const files = manifest.files.map((entry) => String(entry?.path || '').replace(/\\/g, '/')).filter(Boolean);
   return [...new Set([...files, manifestRelative, ...DEPLOYMENT_MARKERS])].sort();
+}
+
+function preparedArticleTask(slug, root = ROOT, entries = []) {
+  const expected = expectedCommitFiles(slug, root).filter((file) => !DEPLOYMENT_MARKERS.includes(file));
+  const actual = new Set(entries.map((entry) => entry.file));
+  return expected.every((file) => actual.has(file));
+}
+
+function taskSlugFromEntries(entries) {
+  const slugs = [...new Set(entries
+    .map((entry) => String(entry.file || '').match(/^data\/reports\/article-publications\/([^/]+)\.json$/)?.[1])
+    .filter(Boolean))];
+  if (slugs.length > 1) throw new Error(`Wykryto więcej niż jeden aktywny artykuł: ${slugs.join(', ')}.`);
+  return slugs[0] || '';
+}
+
+function taskCommitFiles(entries, expected = []) {
+  assertSafeChanges(entries);
+  const actual = entries.filter((entry) => entry.file !== IGNORED_LOCAL_PATH).map((entry) => entry.file).sort();
+  const wanted = [...new Set(expected)].sort();
+  const unexpected = actual.filter((file) => !wanted.includes(file));
+  const missing = wanted.filter((file) => !actual.includes(file));
+  const unsafe = unexpected.filter((file) => !isReleaseSafeTaskFile(file));
+  if (unsafe.length || missing.length) {
+    throw new Error(`Zakres bieżącego zadania jest niejednoznaczny. Niezwiązane: ${unsafe.join(', ') || 'brak'}. Braki: ${missing.join(', ') || 'brak'}.`);
+  }
+  return [...new Set([...wanted, ...unexpected])].sort();
 }
 
 function assertExactCommitFiles(entries, expected) {
@@ -118,6 +153,45 @@ function requestArticleStatus(url) {
   });
 }
 
+function articleHeroAssets(slug, root = ROOT) {
+  const file = path.join(root, '_site', `${slug}.html`);
+  if (!fs.existsSync(file)) throw new Error(`Brak lokalnego HTML-a artykułu: ${file}`);
+  const html = fs.readFileSync(file, 'utf8');
+  const hero = html.match(/<div class="article-hero[\s\S]*?<\/div>/i)?.[0] || '';
+  const paths = [...hero.matchAll(/<(?:source|img)\b[^>]*\bsrc(?:set)?="([^"]+)"/gi)]
+    .map((match) => match[1].split(',')[0].trim().split(/\s+/)[0].replace(/^\.\//, ''))
+    .filter((value) => value.startsWith('assets/'));
+  const unique = [...new Set(paths)];
+  const expected = ['avif', 'webp', 'jpg'].map((extension) => unique.find((value) => value.endsWith(`.${extension}`)));
+  if (expected.some((value) => !value)) throw new Error(`Hero artykułu ${slug} nie ma kompletu AVIF/WebP/JPG.`);
+  return expected;
+}
+
+async function checkPublicAssets(paths, options = {}) {
+  const requestStatus = options.requestStatus ?? requestArticleStatus;
+  const wait = options.wait ?? ((delay) => new Promise((resolve) => setTimeout(resolve, delay)));
+  const intervalMs = options.intervalMs ?? ARTICLE_CHECK_INTERVAL_MS;
+  const timeoutMs = options.timeoutMs ?? ARTICLE_CHECK_TIMEOUT_MS;
+  const root = options.root ?? ROOT;
+  for (const relative of paths) {
+    const local = path.join(root, '_site', relative);
+    const expectedSha256 = crypto.createHash('sha256').update(fs.readFileSync(local)).digest('hex');
+    const startedAt = Date.now();
+    let lastStatus = 0;
+    let lastSha256 = '';
+    do {
+      const response = await requestStatus(`https://fitpo50.pl/${relative}`);
+      lastStatus = Number(response?.status || 0);
+      const body = Buffer.isBuffer(response?.body) ? response.body : Buffer.from(String(response?.body || ''));
+      lastSha256 = body.length ? crypto.createHash('sha256').update(body).digest('hex') : '';
+      if (lastStatus === 200 && lastSha256 === expectedSha256) break;
+      const elapsed = Date.now() - startedAt;
+      if (elapsed >= timeoutMs) throw new Error(`Asset ${relative} nie jest aktualny. Ostatni status: ${lastStatus || 'brak odpowiedzi HTTP'}.`);
+      await wait(Math.min(intervalMs, timeoutMs - elapsed));
+    } while (Date.now() - startedAt < timeoutMs);
+  }
+}
+
 async function checkArticle200(slug, options = {}) {
   const url = `https://fitpo50.pl/${slug}.html`;
   const intervalMs = options.intervalMs ?? ARTICLE_CHECK_INTERVAL_MS;
@@ -148,37 +222,48 @@ async function checkArticle200(slug, options = {}) {
 }
 
 async function main() {
-  const directory = process.argv[2];
-  if (!directory) throw new Error('Użycie: npm run publikuj -- <katalog-artykulu>');
-  const source = findArticleJson(directory);
-  const article = JSON.parse(fs.readFileSync(source, 'utf8'));
-  const slug = String(article.slug || path.basename(source, '.fitpo50.json')).trim();
-  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) throw new Error(`Nieprawidłowy slug: ${slug}`);
-
   const initial = statusEntries(run('git', ['status', '--short'], { capture: true }).stdout);
-  const unexpected = initial.filter((entry) => !(entry.code === '??' && entry.file === IGNORED_LOCAL_PATH));
-  if (unexpected.length) throw new Error(`Przed publikacją repozytorium musi być czyste. Zmiany: ${unexpected.map((entry) => entry.file).join(', ')}`);
-
-  const addArgs = articleAddArgs(source, slug);
-  console.log(`[PUBLIKUJ] Tryb ${addArgs.includes('--force') ? 'UPDATE' : 'CREATE'} dla ${slug}.`);
-  run('npm', addArgs);
-  run('npm', ['run', 'deployment:prepare']);
-
-  const entries = statusEntries(run('git', ['status', '--short'], { capture: true }).stdout);
-  const files = assertExactCommitFiles(entries, expectedCommitFiles(slug));
+  const directory = process.argv[2] || '';
+  let source = directory ? findArticleJson(directory) : '';
+  let slug = source ? String(JSON.parse(fs.readFileSync(source, 'utf8')).slug || path.basename(source, '.fitpo50.json')).trim() : taskSlugFromEntries(initial);
+  const initialTaskFiles = initial.filter((entry) => entry.file !== IGNORED_LOCAL_PATH);
+  if (!source && !slug && !initialTaskFiles.length) throw new Error('Brak aktywnego zadania publikacji.');
+  if (slug && !/^[a-z0-9][a-z0-9-]*$/.test(slug)) throw new Error(`Nieprawidłowy slug: ${slug}`);
+  const prepared = slug && preparedArticleTask(slug, ROOT, initial);
+  if (!prepared && initial.some((entry) => entry.file !== IGNORED_LOCAL_PATH)) {
+    if (!source) throw new Error('Repozytorium ma zmiany, ale nie ma jednoznacznego aktywnego zadania publikacji.');
+    const unsupported = initial.filter((entry) => entry.file !== IGNORED_LOCAL_PATH && !isReleaseSafeTaskFile(entry.file));
+    if (unsupported.length) throw new Error(`Repozytorium ma niezwiązane zmiany: ${unsupported.map((entry) => entry.file).join(', ')}`);
+  }
+  if (!prepared && source) {
+    const addArgs = articleAddArgs(source, slug);
+    console.log(`[PUBLIKUJ] Tryb ${addArgs.includes('--force') ? 'UPDATE' : 'CREATE'} dla ${slug}.`);
+    run('npm', addArgs);
+  } else if (prepared) {
+    console.log(`[PUBLIKUJ] Wznowienie gotowego artykułu ${slug}; pomijam ponowny import.`);
+  }
+  const beforeApproval = statusEntries(run('git', ['status', '--short'], { capture: true }).stdout);
+  const initialExpected = slug ? expectedCommitFiles(slug).filter((file) => !DEPLOYMENT_MARKERS.includes(file)) : [];
+  taskCommitFiles(beforeApproval, initialExpected);
 
   if (!await askToPublish()) {
     console.log('[PUBLIKUJ] Zatrzymano przed commit/push. Zmiany lokalne pozostają bezpiecznie w repozytorium.');
     return;
   }
 
+  run('npm', ['run', 'deployment:prepare']);
+  const entries = statusEntries(run('git', ['status', '--short'], { capture: true }).stdout);
+  const files = taskCommitFiles(entries, slug ? expectedCommitFiles(slug) : DEPLOYMENT_MARKERS);
   run('git', ['add', '--', ...files]);
   assertSafeChanges(statusEntries(run('git', ['diff', '--cached', '--name-status'], { capture: true }).stdout
     .split('\n').filter(Boolean).map((line) => ({ code: line.split(/\s+/)[0], file: line.split(/\s+/).pop() }))));
-  run('git', ['commit', '-m', `feat(article): add ${slug}`]);
+  run('git', ['commit', '-m', slug ? `feat(article): add ${slug}` : 'chore(release): publish current task']);
   run('git', ['push', 'origin', 'main']);
-  await checkArticle200(slug);
-  console.log(`[PUBLIKUJ] PASS: https://fitpo50.pl/${slug}.html zwraca HTTP 200.`);
+  if (slug) {
+    await checkArticle200(slug);
+    await checkPublicAssets(articleHeroAssets(slug));
+    console.log(`[PUBLIKUJ] PASS: strona i hero AVIF/WebP/JPG dla ${slug} są aktualne.`);
+  } else console.log('[PUBLIKUJ] PASS: push przyjęty; zadanie nie zawiera artykułu.');
 }
 
 if (require.main === module) {
@@ -192,10 +277,16 @@ module.exports = {
   articleAddArgs,
   assertExactCommitFiles,
   assertSafeChanges,
+  articleHeroAssets,
   checkArticle200,
+  checkPublicAssets,
   expectedCommitFiles,
   findArticleJson,
+  isReleaseSafeTaskFile,
+  preparedArticleTask,
   protectedNewsPath,
   sensitivePath,
   statusEntries,
+  taskCommitFiles,
+  taskSlugFromEntries,
 };
