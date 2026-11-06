@@ -1,0 +1,670 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-11-05T23:50:48+01:00",
+  "reviewed_at": "2026-11-06T00:53:58.000Z",
+  "slug": "nocne-skurcze-lydek-po-50-magnez",
+  "html_sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a",
+  "site_html_sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a",
+  "pdf_sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644",
+  "site_pdf_sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-05T23:50:48+01:00",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 3
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "nocne-skurcze-lydek-po-50-magnez.html",
+      "sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a",
+      "bytes": 66409
+    },
+    "html_site": {
+      "file": "_site/nocne-skurcze-lydek-po-50-magnez.html",
+      "sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a",
+      "bytes": 66409
+    },
+    "pdf_source": {
+      "file": "assets/pdf/nocne-skurcze-lydek-po-50-magnez.pdf",
+      "sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644",
+      "bytes": 372297
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/nocne-skurcze-lydek-po-50-magnez.pdf",
+      "sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644",
+      "bytes": 372297
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/desktop.png",
+      "screenshot_sha256": "87fb4483a5de295888afd4044a95cff583ed41087833c52439339da3ba6d0a62",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/mobile.png",
+      "screenshot_sha256": "7d39ca1315a905041d7d5c934d407ba7d9ce0a524ee3109305c2e572e82b3c69",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 16 min czytania Aktualizacja: 05.11.2026 Nocne skurcze łydek po 50: dlaczego magnez często nie pomaga Skurcz w nocy to częsta dolegliwość. Liczy się to, co mówią badania, a nie reklama magnezu.",
+      "alt": "Kobieta około pięćdziesiątki siedzi w nocy na brzegu łóżka i trzyma się za łydkę, na szafce świeci mała lampka.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif",
+          "sha256": "8b3d1434a0715a4bfae357022cb283d1914d14a554c5a303aeb9f3ae49f3038e",
+          "bytes": 35482,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp",
+          "sha256": "615079282e76b1d57c12452e29e5038dfd93497b410f72708a7ceca7e1538243",
+          "bytes": 34054,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.jpg",
+          "sha256": "85f8437d789961725ac9c7a6328f41204d6d1e116ea3e611638bbc83616415e5",
+          "bytes": 101470,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3e1f32c3d106e40b90b93f9d5e341d70672fdb36c4734dd9cbbafef59cfecdd7"
+    },
+    {
+      "placement": "content:2:czym-sa-nocne-skurcze-lydek-i-kto-ma-je-po-50",
+      "role": "content",
+      "heading": "Czym są nocne skurcze łydek i kto ma je po 50?",
+      "context": "Nocne skurcze łydek po 50 to częsta dolegliwość, a magnez bywa pierwszym, po co sięgamy. Sprawdzamy, co o nim pokazują Cochrane i badania kliniczne, dlaczego wyniki się różnią, jakie leki i choroby bywają w tle oraz kiedy skurcze wymagają lekarza. Szybka odpowiedź Przegląd Cochrane z 2020 roku nie znalazł istotnej różnicy między magnezem a placebo w nocnych skurczach u starszych dorosłych (średnia wieku 61,6–69,3 roku), więc korzyść z rutynowego brania magnezu jest mało prawdopodobna. U większości osób nie ustala się przyczyny skurczów. Do lekarza idź, gdy skurcz trwa ponad 10 minut bez ustępowania albo skurcze są częste, a po nowym leku zapytaj farmaceutę. Kluczowe wnioski Przegląd Cochrane z 2020 roku nie wykazał, by magnez zmniejszał liczbę nocnych skurczów u starszych dorosłych: różnic",
+      "alt": "Mężczyzna po sześćdziesiątce siedzi wieczorem na sofie i rozciąga łydkę, pociągając stopę ręcznikiem.",
+      "caption": "Napięte, skrócone mięśnie to czynnik ryzyka skurczów, a z wiekiem ścięgna naturalnie się skracają.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.avif",
+          "sha256": "3ced1b684efd6666dfc1b4434d8b5f9e8591113f1ae59096cdea2dc6c468c821",
+          "bytes": 60383,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.webp",
+          "sha256": "64902a30953cf438593e1149f134ed0dea0041ba98b02202939d49618dcb6158",
+          "bytes": 63592,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.jpg",
+          "sha256": "baecccc02fe2948ed3d7201e539ae6302d2f343d7f8736f5003374cb899951fa",
+          "bytes": 156591,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "0d89642a5ed3633e1bd977d36b6a68e24699d680a652e6bed12dc9b6ad4b8108"
+    },
+    {
+      "placement": "content:3:czy-magnez-pomaga-na-nocne-skurcze-lydek-wedlug-",
+      "role": "content",
+      "heading": "Czy magnez pomaga na nocne skurcze łydek według przeglądu Cochrane?",
+      "context": "Nocne skurcze łydek po 50 to częsta dolegliwość, a magnez bywa pierwszym, po co sięgamy. Sprawdzamy, co o nim pokazują Cochrane i badania kliniczne, dlaczego wyniki się różnią, jakie leki i choroby bywają w tle oraz kiedy skurcze wymagają lekarza. Szybka odpowiedź Przegląd Cochrane z 2020 roku nie znalazł istotnej różnicy między magnezem a placebo w nocnych skurczach u starszych dorosłych (średnia wieku 61,6–69,3 roku), więc korzyść z rutynowego brania magnezu jest mało prawdopodobna. U większości osób nie ustala się przyczyny skurczów. Do lekarza idź, gdy skurcz trwa ponad 10 minut bez ustępowania albo skurcze są częste, a po nowym leku zapytaj farmaceutę. Kluczowe wnioski Przegląd Cochrane z 2020 roku nie wykazał, by magnez zmniejszał liczbę nocnych skurczów u starszych dorosłych: różnic",
+      "alt": "Infografika z wynikami przeglądu Cochrane: różnica między magnezem a placebo w liczbie nocnych skurczów łydek jest bardzo mała, a przedział ufności obejmuje brak różnicy.",
+      "caption": "Przegląd Cochrane: w badaniach u starszych dorosłych magnez nie wypadł istotnie lepiej od placebo.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.avif",
+          "sha256": "ac8ca9638b74f6405899f6ecb94195dbc624c8223a65ec809385f0ce86c490f5",
+          "bytes": 13135,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.webp",
+          "sha256": "3b401dc139794e47e241689c540bd62eb3ab24e322acb0fe1f0b9bb20a79f6b5",
+          "bytes": 28184,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.jpg",
+          "sha256": "5faf1257673978f18f4acb9f1641188ab906899336af3f5510c7af5a5112f399",
+          "bytes": 73467,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "c7446fbc61966f8966c21d422b125694b3044fa103b693d7bb8e5fb3984e659e"
+    },
+    {
+      "placement": "content:4:dlaczego-jedno-badanie-z-magnezem-wyszlo-lepiej-",
+      "role": "content",
+      "heading": "Dlaczego jedno badanie z magnezem wyszło lepiej niż Cochrane?",
+      "context": "Nocne skurcze łydek po 50 to częsta dolegliwość, a magnez bywa pierwszym, po co sięgamy. Sprawdzamy, co o nim pokazują Cochrane i badania kliniczne, dlaczego wyniki się różnią, jakie leki i choroby bywają w tle oraz kiedy skurcze wymagają lekarza. Szybka odpowiedź Przegląd Cochrane z 2020 roku nie znalazł istotnej różnicy między magnezem a placebo w nocnych skurczach u starszych dorosłych (średnia wieku 61,6–69,3 roku), więc korzyść z rutynowego brania magnezu jest mało prawdopodobna. U większości osób nie ustala się przyczyny skurczów. Do lekarza idź, gdy skurcz trwa ponad 10 minut bez ustępowania albo skurcze są częste, a po nowym leku zapytaj farmaceutę. Kluczowe wnioski Przegląd Cochrane z 2020 roku nie wykazał, by magnez zmniejszał liczbę nocnych skurczów u starszych dorosłych: różnic",
+      "alt": "Biały słoiczek bez etykiety, otwarty zeszyt z notatkami i kalendarz na kuchennym stole.",
+      "caption": "Jedno badanie z magnezem wypadło lepiej niż przegląd Cochrane, ale ma ograniczenia opisane w tekście.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.avif",
+          "sha256": "800c9c8497fcbaaa8ed26166dce28b966448c2151585c804f398daeb9d8f9621",
+          "bytes": 36748,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.webp",
+          "sha256": "76103d77113de43bc9f83cd86588ec0737e72b04563c83ce024d84f1f2d8cd27",
+          "bytes": 43660,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.jpg",
+          "sha256": "560d0e4fadaab6fbe482b858e39dffcb70beba5eba8b7d9ec0e9396651c2895a",
+          "bytes": 125767,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5d565f0066da166089fb160944029ad4c8c9cfe6e8a5acecc2f8b7dd39af6313"
+    },
+    {
+      "placement": "content:5:czy-niedobor-magnezu-potasu-lub-odwodnienie-to-t",
+      "role": "content",
+      "heading": "Czy niedobór magnezu, potasu lub odwodnienie to typowa przyczyna nocnych skurczów?",
+      "context": "Nocne skurcze łydek po 50 to częsta dolegliwość, a magnez bywa pierwszym, po co sięgamy. Sprawdzamy, co o nim pokazują Cochrane i badania kliniczne, dlaczego wyniki się różnią, jakie leki i choroby bywają w tle oraz kiedy skurcze wymagają lekarza. Szybka odpowiedź Przegląd Cochrane z 2020 roku nie znalazł istotnej różnicy między magnezem a placebo w nocnych skurczach u starszych dorosłych (średnia wieku 61,6–69,3 roku), więc korzyść z rutynowego brania magnezu jest mało prawdopodobna. U większości osób nie ustala się przyczyny skurczów. Do lekarza idź, gdy skurcz trwa ponad 10 minut bez ustępowania albo skurcze są częste, a po nowym leku zapytaj farmaceutę. Kluczowe wnioski Przegląd Cochrane z 2020 roku nie wykazał, by magnez zmniejszał liczbę nocnych skurczów u starszych dorosłych: różnic",
+      "alt": "Szklanka wody na szafce nocnej obok okularów do czytania i książki.",
+      "caption": "Odwodnienie bywa wymieniane jako możliwa przyczyna skurczów, ale źródła nie są w tej sprawie zgodne.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.avif",
+          "sha256": "f97965b964a96708bef7c2d5e1cf8a0b3b97cec339a9edaf9d58869346c1a992",
+          "bytes": 39357,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.webp",
+          "sha256": "c2f787fc284fe0e1aef50d71dbea1b8b836e6b88c7f92b663ae2cdc1f8279693",
+          "bytes": 43650,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.jpg",
+          "sha256": "d4ac6920d791f833b84aa05f8d4773e912b82a178253741a671522c9f898ce8c",
+          "bytes": 130302,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "d205c64e5b72c9a78ff903e6a31dfa24a606418052399c31b4d4c5335c66cb36"
+    },
+    {
+      "placement": "content:6:jakie-leki-i-choroby-bywaja-wiazane-z-nocnymi-sk",
+      "role": "content",
+      "heading": "Jakie leki i choroby bywają wiązane z nocnymi skurczami?",
+      "context": "Nocne skurcze łydek po 50 to częsta dolegliwość, a magnez bywa pierwszym, po co sięgamy. Sprawdzamy, co o nim pokazują Cochrane i badania kliniczne, dlaczego wyniki się różnią, jakie leki i choroby bywają w tle oraz kiedy skurcze wymagają lekarza. Szybka odpowiedź Przegląd Cochrane z 2020 roku nie znalazł istotnej różnicy między magnezem a placebo w nocnych skurczach u starszych dorosłych (średnia wieku 61,6–69,3 roku), więc korzyść z rutynowego brania magnezu jest mało prawdopodobna. U większości osób nie ustala się przyczyny skurczów. Do lekarza idź, gdy skurcz trwa ponad 10 minut bez ustępowania albo skurcze są częste, a po nowym leku zapytaj farmaceutę. Kluczowe wnioski Przegląd Cochrane z 2020 roku nie wykazał, by magnez zmniejszał liczbę nocnych skurczów u starszych dorosłych: różnic",
+      "alt": "Farmaceutka rozmawia w aptece z mężczyzną po sześćdziesiątce, który pokazuje kartkę z listą leków.",
+      "caption": "Przy skurczach po nowym leku warto zapytać farmaceutę lub lekarza, zamiast odstawiać lek samemu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.avif",
+          "sha256": "0404258ebd290a20bb9ed92f34202d6d2297a13add99e0cda6f06140d616b48e",
+          "bytes": 59565,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.webp",
+          "sha256": "d38bc268d1485146b6f1e42255c326a547bc50cfe5bd236fe1ea1f9d152b49b0",
+          "bytes": 63656,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.jpg",
+          "sha256": "3782bbdbd6b1c69763c2ed12b13b288b3067feec561f17505cc1e47d49e0eed4",
+          "bytes": 158062,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4425686600788f39cbf0ea290089cacfef2b26acbe875ff1355ee9ec4aeaad39"
+    },
+    {
+      "placement": "content:7:co-ma-poparcie-w-badaniach-a-co-jest-niepotwierd",
+      "role": "content",
+      "heading": "Co ma poparcie w badaniach, a co jest niepotwierdzone?",
+      "context": "Nocne skurcze łydek po 50 to częsta dolegliwość, a magnez bywa pierwszym, po co sięgamy. Sprawdzamy, co o nim pokazują Cochrane i badania kliniczne, dlaczego wyniki się różnią, jakie leki i choroby bywają w tle oraz kiedy skurcze wymagają lekarza. Szybka odpowiedź Przegląd Cochrane z 2020 roku nie znalazł istotnej różnicy między magnezem a placebo w nocnych skurczach u starszych dorosłych (średnia wieku 61,6–69,3 roku), więc korzyść z rutynowego brania magnezu jest mało prawdopodobna. U większości osób nie ustala się przyczyny skurczów. Do lekarza idź, gdy skurcz trwa ponad 10 minut bez ustępowania albo skurcze są częste, a po nowym leku zapytaj farmaceutę. Kluczowe wnioski Przegląd Cochrane z 2020 roku nie wykazał, by magnez zmniejszał liczbę nocnych skurczów u starszych dorosłych: różnic",
+      "alt": "Kobieta po pięćdziesiątce rozciąga łydkę przy ścianie w salonie, dłonie opiera o ścianę.",
+      "caption": "Rozciąganie łydek to bezpieczna próba, ale dowody na jego skuteczność są ograniczone.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.avif",
+          "sha256": "4432c2833b3843d45d4f1ac7576c31cb86b5230ec64d82b702f338be55e1356d",
+          "bytes": 39080,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.webp",
+          "sha256": "7e91ee2f34e55565bc5aba1bdc3a3b60887597138790ee60296091a37518898f",
+          "bytes": 38400,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.jpg",
+          "sha256": "b074930ba7365248ed60ef72b2294806849dc4465368d89d2899cda6670c644d",
+          "bytes": 119474,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f83ff039ecc9729a57b0fca92bc4bdcc3d26a0149728c77b599d74638ea648ca"
+    }
+  ],
+  "pdf": {
+    "pages": 11,
+    "text_coverage": 1,
+    "rendered_pages": 11,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-01.png",
+        "sha256": "caaa0917039a1187a2cf34236c67202bdd2777acb7d51d0cc7a9e2e1cef3564b",
+        "bytes": 493169,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1052,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-02.png",
+        "sha256": "05db36b2a7eaba2f9dbcdddee68e1600017602d1e2657534fbe6db5a961b1a0a",
+        "bytes": 593882,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-03.png",
+        "sha256": "b6968819f3ce435db04814b45a0d3c8f37340edf21660dbcf1544b862b712f23",
+        "bytes": 351105,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-04.png",
+        "sha256": "d0457dd30cdd49deed3b8c5aef2322f843fcbda982f9131d0d7d9f4252c1cc08",
+        "bytes": 613801,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 57,
+          "width": 1064,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-05.png",
+        "sha256": "128af88a066d728418f08ac29bf0384952139d6d1524e9fb12901090a2f26dad",
+        "bytes": 578786,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1064,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-06.png",
+        "sha256": "940da1d486da1802a7f6dd8ea4a02262e5d79766f157d5119f482dfb3534c8e5",
+        "bytes": 503963,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-07.png",
+        "sha256": "ae05a061acaa7759c04a1931460b5f5865f88b684b34f2f920a1cd18fd9a1cee",
+        "bytes": 555036,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-08.png",
+        "sha256": "d6bf4aeb8cfb295578e1534f4723258796c4248b36872a10d672fad87384e82c",
+        "bytes": 490289,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 9,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-09.png",
+        "sha256": "26a71aae17972f94564277e8275bae5df153a6ea1acebc8792acf690b28df61b",
+        "bytes": 366396,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1064,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 10,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-10.png",
+        "sha256": "cff8ae76aa5f6f3c2e4b87d83f3668f27f734e44039148fcbaf79eca135a11c9",
+        "bytes": 532599,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 50,
+          "y": 57,
+          "width": 1071,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 11,
+        "file": ".tmp/article-preview/nocne-skurcze-lydek-po-50-magnez/pdf-pages/page-11.png",
+        "sha256": "a6d8339de2ad650ffabee42c80fa1d45da80379ce7bb9922c1aa8be20e5ae8ba",
+        "bytes": 44546,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 50,
+          "y": 57,
+          "width": 1066,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Codex",
+    "reviewed_at": "2026-11-06T00:53:58.000Z",
+    "review_method": "Pełny przegląd istniejących renderów desktop, mobile i 11 stron PDF; review obrazów przeniesione z wcześniejszego zatwierdzenia 21/21 bez ponownego oglądania wariantów",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "87fb4483a5de295888afd4044a95cff583ed41087833c52439339da3ba6d0a62",
+        "note": "Obejrzano cały render desktop: układ, tekst, tabele, obrazy, źródła i stopka są kompletne oraz czytelne."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "7d39ca1315a905041d7d5c934d407ba7d9ce0a524ee3109305c2e572e82b3c69",
+        "note": "Obejrzano cały render mobile: treść, tabele przewijane, obrazy, FAQ, źródła i stopka są kompletne oraz czytelne."
+      }
+    },
+    "images": [
+      {
+        "placement": "hero",
+        "inventory_sha256": "3e1f32c3d106e40b90b93f9d5e341d70672fdb36c4734dd9cbbafef59cfecdd7",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Przeniesiono wcześniejszy zatwierdzony przegląd trzech wariantów obrazu; inventory pozostaje zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-11-06T00:53:58.000Z",
+        "review_method": "Pełny przegląd istniejących renderów desktop, mobile i 11 stron PDF; review obrazów przeniesione z wcześniejszego zatwierdzenia 21/21 bez ponownego oglądania wariantów"
+      },
+      {
+        "placement": "content:2:czym-sa-nocne-skurcze-lydek-i-kto-ma-je-po-50",
+        "inventory_sha256": "0d89642a5ed3633e1bd977d36b6a68e24699d680a652e6bed12dc9b6ad4b8108",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Przeniesiono wcześniejszy zatwierdzony przegląd trzech wariantów obrazu; inventory pozostaje zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-11-06T00:53:58.000Z",
+        "review_method": "Pełny przegląd istniejących renderów desktop, mobile i 11 stron PDF; review obrazów przeniesione z wcześniejszego zatwierdzenia 21/21 bez ponownego oglądania wariantów"
+      },
+      {
+        "placement": "content:3:czy-magnez-pomaga-na-nocne-skurcze-lydek-wedlug-",
+        "inventory_sha256": "c7446fbc61966f8966c21d422b125694b3044fa103b693d7bb8e5fb3984e659e",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "CONTENT",
+          "transcription": "Cochrane 2020: magnez a placebo po 4 tygodniach\nRóżnica: −0,18 skurczu tygodniowo\n95% CI od −0,84 do 0,49\nRedukcja skurczów o co najmniej 25%: RR 1,04 (od 0,84 do 1,29)\nPrzedział obejmuje brak różnicy",
+          "claims_or_numbers_present": true,
+          "matches_article_claims": true,
+          "evidence_urls": [
+            "https://www.cochrane.org/evidence/CD009402_magnesium-muscle-cramps"
+          ]
+        },
+        "note": "Przeniesiono wcześniejszy zatwierdzony przegląd infografiki i trzech wariantów; inventory pozostaje zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-11-06T00:53:58.000Z",
+        "review_method": "Pełny przegląd istniejących renderów desktop, mobile i 11 stron PDF; review obrazów przeniesione z wcześniejszego zatwierdzenia 21/21 bez ponownego oglądania wariantów"
+      },
+      {
+        "placement": "content:4:dlaczego-jedno-badanie-z-magnezem-wyszlo-lepiej-",
+        "inventory_sha256": "5d565f0066da166089fb160944029ad4c8c9cfe6e8a5acecc2f8b7dd39af6313",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Przeniesiono wcześniejszy zatwierdzony przegląd trzech wariantów obrazu; inventory pozostaje zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-11-06T00:53:58.000Z",
+        "review_method": "Pełny przegląd istniejących renderów desktop, mobile i 11 stron PDF; review obrazów przeniesione z wcześniejszego zatwierdzenia 21/21 bez ponownego oglądania wariantów"
+      },
+      {
+        "placement": "content:5:czy-niedobor-magnezu-potasu-lub-odwodnienie-to-t",
+        "inventory_sha256": "d205c64e5b72c9a78ff903e6a31dfa24a606418052399c31b4d4c5335c66cb36",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Przeniesiono wcześniejszy zatwierdzony przegląd trzech wariantów obrazu; inventory pozostaje zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-11-06T00:53:58.000Z",
+        "review_method": "Pełny przegląd istniejących renderów desktop, mobile i 11 stron PDF; review obrazów przeniesione z wcześniejszego zatwierdzenia 21/21 bez ponownego oglądania wariantów"
+      },
+      {
+        "placement": "content:6:jakie-leki-i-choroby-bywaja-wiazane-z-nocnymi-sk",
+        "inventory_sha256": "4425686600788f39cbf0ea290089cacfef2b26acbe875ff1355ee9ec4aeaad39",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Przeniesiono wcześniejszy zatwierdzony przegląd trzech wariantów obrazu; inventory pozostaje zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-11-06T00:53:58.000Z",
+        "review_method": "Pełny przegląd istniejących renderów desktop, mobile i 11 stron PDF; review obrazów przeniesione z wcześniejszego zatwierdzenia 21/21 bez ponownego oglądania wariantów"
+      },
+      {
+        "placement": "content:7:co-ma-poparcie-w-badaniach-a-co-jest-niepotwierd",
+        "inventory_sha256": "f83ff039ecc9729a57b0fca92bc4bdcc3d26a0149728c77b599d74638ea648ca",
+        "status": "VERIFIED",
+        "matches_topic": true,
+        "no_misleading_text_or_logo": true,
+        "anatomy_and_equipment_plausible": true,
+        "embedded_text": {
+          "kind": "NONE"
+        },
+        "note": "Przeniesiono wcześniejszy zatwierdzony przegląd trzech wariantów obrazu; inventory pozostaje zgodne.",
+        "reviewed_by": "Codex",
+        "reviewed_at": "2026-11-06T00:53:58.000Z",
+        "review_method": "Pełny przegląd istniejących renderów desktop, mobile i 11 stron PDF; review obrazów przeniesione z wcześniejszego zatwierdzenia 21/21 bez ponownego oglądania wariantów"
+      }
+    ],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "caaa0917039a1187a2cf34236c67202bdd2777acb7d51d0cc7a9e2e1cef3564b",
+        "note": "Strona 1 obejrzana w całości; nagłówek, hero i początek treści są czytelne."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "05db36b2a7eaba2f9dbcdddee68e1600017602d1e2657534fbe6db5a961b1a0a",
+        "note": "Strona 2 obejrzana w całości; tekst, obraz i początek tabeli są czytelne."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "b6968819f3ce435db04814b45a0d3c8f37340edf21660dbcf1544b862b712f23",
+        "note": "Strona 3 obejrzana w całości; tabela i infografika mieszczą się bez ucięcia."
+      },
+      {
+        "page": 4,
+        "status": "VERIFIED",
+        "artifact_sha256": "d0457dd30cdd49deed3b8c5aef2322f843fcbda982f9131d0d7d9f4252c1cc08",
+        "note": "Strona 4 obejrzana w całości; tekst, lista i ilustracja są kompletne oraz czytelne."
+      },
+      {
+        "page": 5,
+        "status": "VERIFIED",
+        "artifact_sha256": "128af88a066d728418f08ac29bf0384952139d6d1524e9fb12901090a2f26dad",
+        "note": "Strona 5 obejrzana w całości; sekcja i ilustracja są kompletne oraz czytelne."
+      },
+      {
+        "page": 6,
+        "status": "VERIFIED",
+        "artifact_sha256": "940da1d486da1802a7f6dd8ea4a02262e5d79766f157d5119f482dfb3534c8e5",
+        "note": "Strona 6 obejrzana w całości; tabela, listy i tekst mieszczą się w granicach strony."
+      },
+      {
+        "page": 7,
+        "status": "VERIFIED",
+        "artifact_sha256": "ae05a061acaa7759c04a1931460b5f5865f88b684b34f2f920a1cd18fd9a1cee",
+        "note": "Strona 7 obejrzana w całości; obraz oraz tabela są kompletne i czytelne."
+      },
+      {
+        "page": 8,
+        "status": "VERIFIED",
+        "artifact_sha256": "d6bf4aeb8cfb295578e1534f4723258796c4248b36872a10d672fad87384e82c",
+        "note": "Strona 8 obejrzana w całości; dalsza część tabeli, obraz i lista są czytelne."
+      },
+      {
+        "page": 9,
+        "status": "VERIFIED",
+        "artifact_sha256": "26a71aae17972f94564277e8275bae5df153a6ea1acebc8792acf690b28df61b",
+        "note": "Strona 9 obejrzana w całości; FAQ i ostrzeżenia są czytelne i nieucięte."
+      },
+      {
+        "page": 10,
+        "status": "VERIFIED",
+        "artifact_sha256": "cff8ae76aa5f6f3c2e4b87d83f3668f27f734e44039148fcbaf79eca135a11c9",
+        "note": "Strona 10 obejrzana w całości; FAQ i pierwsza część źródeł są czytelne."
+      },
+      {
+        "page": 11,
+        "status": "VERIFIED",
+        "artifact_sha256": "a6d8339de2ad650ffabee42c80fa1d45da80379ce7bb9922c1aa8be20e5ae8ba",
+        "note": "Strona 11 obejrzana w całości; końcowe źródło i disclaimer są czytelne."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 14301,
+    "review_wait_ms": 7390000
+  },
+  "errors": []
+}

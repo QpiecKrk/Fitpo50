@@ -501,8 +501,9 @@ def validate(data: dict[str, Any], allow_verified_review: bool = False) -> tuple
             requirement = FAQ_SOURCE_REQUIREMENTS["paa"]
             note = str(item.get("research_note", "")).strip()
             if (requirement["query_required"] and not query) or len(note) < requirement["research_note_min_chars"]:
+                required_fields = "query i research_note" if requirement["query_required"] else "research_note"
                 errors.append(
-                    f"faq_research[{index}]: PAA wymaga query i research_note (min. {requirement['research_note_min_chars']} znaków)."
+                    f"faq_research[{index}]: PAA wymaga {required_fields} (min. {requirement['research_note_min_chars']} znaków)."
                 )
     faq_seen: set[str] = set()
     for index, item in enumerate(faq):

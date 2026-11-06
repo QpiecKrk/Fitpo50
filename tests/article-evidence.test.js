@@ -219,8 +219,8 @@ test('pipeline evidence validator enforces shared GSC and PAA FAQ provenance req
   paa.faq_research[0].source_type = 'paa';
   paa.faq_research[0].research_note = 'krótko';
   result = validateArticleEvidence(paa, { today: TODAY });
-  assert.match(result.errors.join('\n'), /PAA wymaga query i research_note \(min\. 20 znaków\)/);
-  paa.faq_research[0].query = paa.faq_research[0].question;
+  assert.match(result.errors.join('\n'), /PAA wymaga research_note \(min\. 20 znaków\)/);
+  assert.doesNotMatch(result.errors.join('\n'), /PAA wymaga query/);
   paa.faq_research[0].research_note = 'Pytanie potwierdzono w udokumentowanym panelu People Also Ask.';
   result = validateArticleEvidence(paa, { today: TODAY });
   assert.equal(result.ok, true, result.errors.join('\n'));
@@ -251,7 +251,7 @@ test('pipeline rejects manual_research for new FAQ and accepts the three contrac
   assert.equal(validateArticleEvidence(gsc, { today: TODAY }).ok, true);
 
   const paa = validEvidenceJson();
-  Object.assign(paa.faq_research[0], { source_type: 'paa', query: paa.faq_research[0].question, research_note: 'Pytanie potwierdzono w udokumentowanym panelu People Also Ask.' });
+  Object.assign(paa.faq_research[0], { source_type: 'paa', research_note: 'Pytanie potwierdzono w udokumentowanym panelu People Also Ask.' });
   assert.equal(validateArticleEvidence(paa, { today: TODAY }).ok, true);
 });
 
@@ -315,6 +315,20 @@ test('qualified publisher block warns while an unqualified 403 remains blocking'
   unqualified.sources[0].http_status = 403;
   unqualified.evidence_claims[0].source_urls[0] = unqualified.sources[0].url;
   assert.match(validateArticleEvidence(unqualified, { today: TODAY }).errors.join(' '), /nie ma DOI\/PMID/);
+});
+
+test('NHS Inform 403 is a qualified publisher block for an official health source', () => {
+  const json = validEvidenceJson();
+  const url = 'https://www.nhsinform.scot/illnesses-and-conditions/muscle-bone-and-joints/leg-and-foot-problems-and-conditions/leg-cramps';
+  json.sources[0].url = url;
+  json.sources[0].url_status = 'blocked_by_publisher';
+  json.sources[0].http_status = 403;
+  json.sources[0].evidence_level = 'official_guidance';
+  json.evidence_claims[0].source_urls[0] = url;
+
+  const result = validateArticleEvidence(json, { today: TODAY });
+  assert.doesNotMatch(result.errors.join(' '), /wydawca blokuje automat|nie ma DOI\/PMID/);
+  assert.match(result.warnings.join(' '), /nie blokuje transportowo/);
 });
 
 test('local verification manifest validates sources and autocomplete without mutating writer-owned arrays', () => {

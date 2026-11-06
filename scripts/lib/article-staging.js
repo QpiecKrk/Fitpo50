@@ -611,10 +611,26 @@ function promoteStaging({ sourceRoot, stageRoot, candidates, baseline }) {
   return transaction.changed;
 }
 
+function stagingGitEnvironment(stageRoot, runner = spawnSync) {
+  const resolvedStage = path.resolve(stageRoot);
+  const manifest = readWorkspaceManifest(resolvedStage);
+  const projectRoot = manifest?.project_root ? path.resolve(manifest.project_root) : '';
+  if (!projectRoot) throw new Error(`Staging nie wskazuje źródłowego repozytorium Git: ${resolvedStage}`);
+  const result = runner('git', ['rev-parse', '--absolute-git-dir'], { cwd: projectRoot, encoding: 'utf8' });
+  if (result.status !== 0) {
+    const detail = String(result.stderr || result.stdout || `exit ${result.status}`).trim();
+    throw new Error(`Nie można ustalić GIT_DIR źródłowego repozytorium: ${detail}`);
+  }
+  const gitDir = String(result.stdout || '').trim();
+  if (!path.isAbsolute(gitDir)) throw new Error(`Git zwrócił nieprawidłowy GIT_DIR: ${gitDir || 'brak'}`);
+  return { GIT_DIR: gitDir, GIT_WORK_TREE: resolvedStage };
+}
+
 function runInStaging(stageRoot, args) {
   const capability = issuePipelineCapability(stageRoot, {
     operations: ['article-pipeline:staging', 'article-import:write'],
   });
+  const gitEnvironment = stagingGitEnvironment(stageRoot);
   const result = spawnSync('node', ['scripts/article-pipeline.js', ...args, '--staging-internal', 'true'], {
     cwd: stageRoot,
     encoding: 'utf8',
@@ -625,6 +641,7 @@ function runInStaging(stageRoot, args) {
       FITPO50_PIPELINE_CAPABILITY_TOKEN: capability.token,
       FITPO50_PIPELINE_CAPABILITY_FILE: capability.capabilityPath,
       FITPO50_PIPELINE_TIMINGS_PATH: path.join(stageRoot, 'data', 'reports', 'local', 'pipeline-timings.json'),
+      ...gitEnvironment,
     },
   });
   if (result.status !== 0) throw new Error(`Stagingowy pipeline nie przeszedł (exit ${result.status ?? 'unknown'}). Repozytorium nie zostało zmienione.`);
@@ -650,6 +667,7 @@ module.exports = {
   runPreviewGate,
   sha256File,
   snapshotCandidates,
+  stagingGitEnvironment,
   validatePublicationSet,
   writePublicationManifest,
 };

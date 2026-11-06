@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 const test = require('node:test');
 const {
   beginPromotionTransaction,
@@ -13,6 +14,7 @@ const {
   recoverInterruptedTransactions,
   sha256File,
   snapshotCandidates,
+  stagingGitEnvironment,
   validatePublicationSet,
   writePublicationManifest,
 } = require('../scripts/lib/article-staging');
@@ -91,6 +93,26 @@ test('staging publikacyjny ma manifest właściciela i aktywny lock', () => {
   assert.equal(manifest.slug, 'manifest-test');
   assert.equal(manifest.status, 'ACTIVE');
   assert.equal(fs.existsSync(path.join(stage, '.fitpo50-workspace.lock')), true);
+  disposeTempWorkspace(stage);
+});
+
+test('izolowany staging bez .git czyta HEAD źródłowego repo przez bezpieczne środowisko Git', () => {
+  const source = temp('fitpo50-stage-git-source-');
+  assert.equal(spawnSync('git', ['init', '-q'], { cwd: source }).status, 0);
+  assert.equal(spawnSync('git', ['config', 'user.email', 'test@fitpo50.local'], { cwd: source }).status, 0);
+  assert.equal(spawnSync('git', ['config', 'user.name', 'FitPo50 Test'], { cwd: source }).status, 0);
+  fs.writeFileSync(path.join(source, 'published.html'), 'wersja z HEAD');
+  assert.equal(spawnSync('git', ['add', 'published.html'], { cwd: source }).status, 0);
+  assert.equal(spawnSync('git', ['commit', '-q', '-m', 'fixture'], { cwd: source }).status, 0);
+
+  const stage = createStagingWorkspace(source, 'git-context-test');
+  assert.equal(fs.existsSync(path.join(stage, '.git')), false);
+  const result = spawnSync('git', ['cat-file', '-e', 'HEAD:published.html'], {
+    cwd: stage,
+    env: { ...process.env, ...stagingGitEnvironment(stage) },
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 0, String(result.stderr || result.stdout || ''));
   disposeTempWorkspace(stage);
 });
 

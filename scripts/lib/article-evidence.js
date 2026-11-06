@@ -27,7 +27,7 @@ const EVIDENCE_LEVELS = new Set([
 ]);
 const STRONG_SOURCE_HOSTS = [
   'pubmed.ncbi.nlm.nih.gov', 'ncbi.nlm.nih.gov', 'nih.gov', 'cancer.gov', 'who.int', 'cdc.gov',
-  'ema.europa.eu', 'fda.gov', 'gov.pl', 'nhs.uk', 'cochranelibrary.com', 'cochrane.org',
+  'ema.europa.eu', 'fda.gov', 'gov.pl', 'nhs.uk', 'nhsinform.scot', 'cochranelibrary.com', 'cochrane.org',
   'nice.org.uk',
   'escardio.org', 'ptkardio.pl', 'heart.org', 'ahajournals.org', 'acc.org', 'acsm.org',
   'diabetesjournals.org', 'thelancet.com', 'nejm.org', 'jamanetwork.com', 'bmj.com',
@@ -294,7 +294,8 @@ function validateFaqResearch(json, today, warnings = [], options = {}) {
     if (sourceType === 'paa') {
       const requirement = POLICY.FAQ_SOURCE_REQUIREMENTS.paa;
       if ((requirement.query_required && !query) || note.length < requirement.research_note_min_chars) {
-        errors.push(`${label}: PAA wymaga query i research_note (min. ${requirement.research_note_min_chars} znaków).`);
+        const requiredFields = requirement.query_required ? 'query i research_note' : 'research_note';
+        errors.push(`${label}: PAA wymaga ${requiredFields} (min. ${requirement.research_note_min_chars} znaków).`);
       }
     }
   });

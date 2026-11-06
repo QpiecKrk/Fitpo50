@@ -8,7 +8,7 @@
       "impressions_min": 1
     },
     "paa": {
-      "query_required": true,
+      "query_required": false,
       "research_note_min_chars": 20
     }
   },

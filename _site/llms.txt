@@ -479,3 +479,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć | FitPo50"
   section: "Zdrowie"
   summary: "Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza."
+- url: https://fitpo50.pl/nocne-skurcze-lydek-po-50-magnez.html
+  title: "Nocne skurcze łydek po 50: dlaczego magnez często nie pomaga | FitPo50"
+  section: "Zdrowie"
+  summary: "Magnez na nocne skurcze łydek po 50-tce: co mówi Cochrane, jakie leki i choroby bywają w tle, co ma słabe dowody i kiedy iść do lekarza po poradę."

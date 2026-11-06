@@ -162,14 +162,16 @@ test('Claude draft validator enforces shared GSC and PAA FAQ provenance requirem
   const invalid = validDraft();
   invalid.faq_research[0].source_type = 'gsc';
   invalid.faq_research[1].source_type = 'paa';
+  invalid.faq_research[1].research_note = 'krótko';
   const rejected = validate(invalid);
   assert.equal(rejected.status, 1);
   assert.match(rejected.stdout, /GSC wymaga query oraz impressions >= 1/);
-  assert.match(rejected.stdout, /PAA wymaga query i research_note \(min\. 20 znaków\)/);
+  assert.match(rejected.stdout, /PAA wymaga research_note \(min\. 20 znaków\)/);
+  assert.doesNotMatch(rejected.stdout, /PAA wymaga query/);
 
   invalid.faq_research[0].query = invalid.faq_research[0].question;
   invalid.faq_research[0].impressions = 1;
-  invalid.faq_research[1].query = invalid.faq_research[1].question;
+  invalid.faq_research[1].research_note = 'Pytanie potwierdzono w udokumentowanym panelu People Also Ask.';
   const accepted = validate(invalid);
   assert.equal(accepted.status, 0, `${accepted.stdout}\n${accepted.stderr}`);
 });

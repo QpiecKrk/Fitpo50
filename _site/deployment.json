@@ -1,14 +1,170 @@
 {
   "version": 4,
-  "release_id": "0fd0be2b-d9fb-46b0-bd51-5983c7ecc1f4",
-  "prepared_at": "2026-11-05T14:14:14+01:00",
-  "prepared_from_head": "d58d805028fef9746b4d461121a836597eacdc70",
-  "publication_state_sha256": "35211257495afb10ee6d81c4e957749a4833a63759936302aa778a7c029f5017",
-  "public_fingerprint_sha256": "601f1e84d16022112906ae62b7becc3afa678ac8f7412b0d4de419d3c7a3ed33",
+  "release_id": "5246a61f-b2f2-4bb6-a9dc-5efc20825082",
+  "prepared_at": "2026-11-06T02:03:19+01:00",
+  "prepared_from_head": "13822b5c9f8c548d67cbd673730e6eb248f7e80c",
+  "publication_state_sha256": "96fd5fe05dcffe859a521ff6ba4655529bfb262327b34a92a11c7db6f799bcd2",
+  "public_fingerprint_sha256": "ccecfee6b03e2b9e14f1224b079a2e47250c3f1ebf1c9105a55dbeb968c3d30a",
   "change_scope": [
     "full"
   ],
-  "verification_targets": [],
+  "verification_targets": [
+    {
+      "path": "assets/data/search-index.json",
+      "mode": "sha256",
+      "sha256": "f2b7b3fcc34e5ff40f7165831ecd783cab8847bb5188c14d5361f69bbea07dd1"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.avif",
+      "mode": "sha256",
+      "sha256": "0404258ebd290a20bb9ed92f34202d6d2297a13add99e0cda6f06140d616b48e"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.jpg",
+      "mode": "sha256",
+      "sha256": "3782bbdbd6b1c69763c2ed12b13b288b3067feec561f17505cc1e47d49e0eed4"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.webp",
+      "mode": "sha256",
+      "sha256": "d38bc268d1485146b6f1e42255c326a547bc50cfe5bd236fe1ea1f9d152b49b0"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.avif",
+      "mode": "sha256",
+      "sha256": "ac8ca9638b74f6405899f6ecb94195dbc624c8223a65ec809385f0ce86c490f5"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.jpg",
+      "mode": "sha256",
+      "sha256": "5faf1257673978f18f4acb9f1641188ab906899336af3f5510c7af5a5112f399"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.webp",
+      "mode": "sha256",
+      "sha256": "3b401dc139794e47e241689c540bd62eb3ab24e322acb0fe1f0b9bb20a79f6b5"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif",
+      "mode": "sha256",
+      "sha256": "8b3d1434a0715a4bfae357022cb283d1914d14a554c5a303aeb9f3ae49f3038e"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.jpg",
+      "mode": "sha256",
+      "sha256": "85f8437d789961725ac9c7a6328f41204d6d1e116ea3e611638bbc83616415e5"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp",
+      "mode": "sha256",
+      "sha256": "615079282e76b1d57c12452e29e5038dfd93497b410f72708a7ceca7e1538243"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.avif",
+      "mode": "sha256",
+      "sha256": "4432c2833b3843d45d4f1ac7576c31cb86b5230ec64d82b702f338be55e1356d"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.jpg",
+      "mode": "sha256",
+      "sha256": "b074930ba7365248ed60ef72b2294806849dc4465368d89d2899cda6670c644d"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.webp",
+      "mode": "sha256",
+      "sha256": "7e91ee2f34e55565bc5aba1bdc3a3b60887597138790ee60296091a37518898f"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.avif",
+      "mode": "sha256",
+      "sha256": "800c9c8497fcbaaa8ed26166dce28b966448c2151585c804f398daeb9d8f9621"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.jpg",
+      "mode": "sha256",
+      "sha256": "560d0e4fadaab6fbe482b858e39dffcb70beba5eba8b7d9ec0e9396651c2895a"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.webp",
+      "mode": "sha256",
+      "sha256": "76103d77113de43bc9f83cd86588ec0737e72b04563c83ce024d84f1f2d8cd27"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.avif",
+      "mode": "sha256",
+      "sha256": "3ced1b684efd6666dfc1b4434d8b5f9e8591113f1ae59096cdea2dc6c468c821"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.jpg",
+      "mode": "sha256",
+      "sha256": "baecccc02fe2948ed3d7201e539ae6302d2f343d7f8736f5003374cb899951fa"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.webp",
+      "mode": "sha256",
+      "sha256": "64902a30953cf438593e1149f134ed0dea0041ba98b02202939d49618dcb6158"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.avif",
+      "mode": "sha256",
+      "sha256": "f97965b964a96708bef7c2d5e1cf8a0b3b97cec339a9edaf9d58869346c1a992"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.jpg",
+      "mode": "sha256",
+      "sha256": "d4ac6920d791f833b84aa05f8d4773e912b82a178253741a671522c9f898ce8c"
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.webp",
+      "mode": "sha256",
+      "sha256": "c2f787fc284fe0e1aef50d71dbea1b8b836e6b88c7f92b663ae2cdc1f8279693"
+    },
+    {
+      "path": "assets/pdf/nocne-skurcze-lydek-po-50-magnez.pdf",
+      "mode": "sha256",
+      "sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644"
+    },
+    {
+      "path": "data/crosslink-suggestions/nocne-skurcze-lydek-po-50-magnez.json",
+      "mode": "sha256",
+      "sha256": "cce8d5bfa6ce55503c9950a033d06e6a971e0fff4c7347a69414e85d090c8a86"
+    },
+    {
+      "path": "index.html",
+      "mode": "sha256",
+      "sha256": "0cb104b46326f8373291b416f3f816594a1b79c729af30d2feaa84517d08304f"
+    },
+    {
+      "path": "llms-full.txt",
+      "mode": "sha256",
+      "sha256": "fdf9edc15bf51bb064b7659b4b7c7092e7e951d92b519fe048e6d466fedaa462"
+    },
+    {
+      "path": "llms.txt",
+      "mode": "sha256",
+      "sha256": "4d1ddc3f063e5b9c70c8579ef8d2f66f05a11c8b65358db30f02f4da303e54d7"
+    },
+    {
+      "path": "nocne-skurcze-lydek-po-50-magnez.html",
+      "mode": "sha256",
+      "sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a"
+    },
+    {
+      "path": "porady.html",
+      "mode": "sha256",
+      "sha256": "55477d14c1f6d4a48e04d8893892936b64330470342b21f8f77fc75c8394d702"
+    },
+    {
+      "path": "sitemap.xml",
+      "mode": "sha256",
+      "sha256": "40691eb02171aebd18818e209ac8003444055b6bd09406a083f54666733d233d"
+    },
+    {
+      "path": "zdrowie.html",
+      "mode": "sha256",
+      "sha256": "c6fc64064ba5cb12377368716aa2bfde1426f51aab1c37e21f7a3fc6f9517500"
+    }
+  ],
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",
@@ -77,5 +233,151 @@
       }
     ]
   },
-  "articles": []
+  "articles": [
+    {
+      "file": "nocne-skurcze-lydek-po-50-magnez.html",
+      "slug": "nocne-skurcze-lydek-po-50-magnez",
+      "url": "https://fitpo50.pl/nocne-skurcze-lydek-po-50-magnez.html",
+      "date_modified": "2026-11-05T09:30:00+01:00",
+      "html_sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a",
+      "pdf_path": "assets/pdf/nocne-skurcze-lydek-po-50-magnez.pdf",
+      "pdf_sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644",
+      "images": [
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.avif",
+          "sha256": "0404258ebd290a20bb9ed92f34202d6d2297a13add99e0cda6f06140d616b48e"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.jpg",
+          "sha256": "3782bbdbd6b1c69763c2ed12b13b288b3067feec561f17505cc1e47d49e0eed4"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.webp",
+          "sha256": "d38bc268d1485146b6f1e42255c326a547bc50cfe5bd236fe1ea1f9d152b49b0"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.avif",
+          "sha256": "ac8ca9638b74f6405899f6ecb94195dbc624c8223a65ec809385f0ce86c490f5"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.jpg",
+          "sha256": "5faf1257673978f18f4acb9f1641188ab906899336af3f5510c7af5a5112f399"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.webp",
+          "sha256": "3b401dc139794e47e241689c540bd62eb3ab24e322acb0fe1f0b9bb20a79f6b5"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif",
+          "sha256": "8b3d1434a0715a4bfae357022cb283d1914d14a554c5a303aeb9f3ae49f3038e"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.jpg",
+          "sha256": "85f8437d789961725ac9c7a6328f41204d6d1e116ea3e611638bbc83616415e5"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp",
+          "sha256": "615079282e76b1d57c12452e29e5038dfd93497b410f72708a7ceca7e1538243"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.avif",
+          "sha256": "4432c2833b3843d45d4f1ac7576c31cb86b5230ec64d82b702f338be55e1356d"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.jpg",
+          "sha256": "b074930ba7365248ed60ef72b2294806849dc4465368d89d2899cda6670c644d"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.webp",
+          "sha256": "7e91ee2f34e55565bc5aba1bdc3a3b60887597138790ee60296091a37518898f"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.avif",
+          "sha256": "800c9c8497fcbaaa8ed26166dce28b966448c2151585c804f398daeb9d8f9621"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.jpg",
+          "sha256": "560d0e4fadaab6fbe482b858e39dffcb70beba5eba8b7d9ec0e9396651c2895a"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.webp",
+          "sha256": "76103d77113de43bc9f83cd86588ec0737e72b04563c83ce024d84f1f2d8cd27"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.avif",
+          "sha256": "3ced1b684efd6666dfc1b4434d8b5f9e8591113f1ae59096cdea2dc6c468c821"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.jpg",
+          "sha256": "baecccc02fe2948ed3d7201e539ae6302d2f343d7f8736f5003374cb899951fa"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.webp",
+          "sha256": "64902a30953cf438593e1149f134ed0dea0041ba98b02202939d49618dcb6158"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.avif",
+          "sha256": "f97965b964a96708bef7c2d5e1cf8a0b3b97cec339a9edaf9d58869346c1a992"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.jpg",
+          "sha256": "d4ac6920d791f833b84aa05f8d4773e912b82a178253741a671522c9f898ce8c"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.webp",
+          "sha256": "c2f787fc284fe0e1aef50d71dbea1b8b836e6b88c7f92b663ae2cdc1f8279693"
+        },
+        {
+          "path": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.avif",
+          "sha256": "1436fc750915b29ac38b7660b831fd6f20784ef4224f4c8c4b71694758602f0e"
+        },
+        {
+          "path": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.jpg",
+          "sha256": "4e3323c563c594b66e2b5449bbcbda2aa3ac5d3f298c697b4636fc8594d61cc6"
+        },
+        {
+          "path": "assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp",
+          "sha256": "4d8c0ab30983fd934a41742304973b640b82f22bb2c1280f36662f39c1f7cb1d"
+        },
+        {
+          "path": "assets/statyny-hero-poranek-lydka.avif",
+          "sha256": "aa8122c02932e451cf721e48448e7868ff55dce0d81d254aed47fed8b909b5da"
+        },
+        {
+          "path": "assets/statyny-hero-poranek-lydka.jpg",
+          "sha256": "aec9fb50678bd7b8f68300fe1fad0f4c063763ebcb7ed9e28aacf9aabd8677aa"
+        },
+        {
+          "path": "assets/statyny-hero-poranek-lydka.webp",
+          "sha256": "4437451c03f251bcff73926aeaa140dff0477c1cb08070a95a71d70dcff13c06"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.avif",
+          "sha256": "ce9464f3ecb1c509c3094556694a48089dde489d150a5d0cb23e8ff782c305f8"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.jpg",
+          "sha256": "bc5b6124a1ab6cfec9f02431e4e68f33d9c0ea2c33a8f7c540d3984fbd2172bf"
+        },
+        {
+          "path": "assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp",
+          "sha256": "fd523383b79c504205e3b821bb54352659ce269bc56cc8e7894ee1887a5d9608"
+        }
+      ],
+      "listing_paths": [
+        "index.html",
+        "porady.html",
+        "zdrowie.html",
+        "assets/data/search-index.json"
+      ]
+    }
+  ]
 }

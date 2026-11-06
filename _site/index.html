@@ -1711,16 +1711,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.avif" type="image/avif">
-          <source srcset="./assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif" type="image/avif">
+          <source srcset="./assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="podwyzszony-kwas-moczowy-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Nocne skurcze łydek po 50: dlaczego magnez często nie pomaga</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Magnez na nocne skurcze łydek po 50-tce: co mówi Cochrane, jakie leki i choroby bywają w tle, co ma słabe dowody i kiedy iść do lekarza po poradę.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="nocne-skurcze-lydek-po-50-magnez.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2517,10 +2517,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć',
-        excerpt: 'Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza.',
-        image: './assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp',
-        url: 'podwyzszony-kwas-moczowy-po-50.html'
+        title: 'Nocne skurcze łydek po 50: dlaczego magnez często nie pomaga',
+        excerpt: 'Magnez na nocne skurcze łydek po 50-tce: co mówi Cochrane, jakie leki i choroby bywają w tle, co ma słabe dowody i kiedy iść do lekarza po poradę.',
+        image: './assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp',
+        url: 'nocne-skurcze-lydek-po-50-magnez.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2551,6 +2551,13 @@
       const fallback = [
         {
           category: 'Zdrowie',
+          title: 'Nocne skurcze łydek po 50: dlaczego magnez często nie pomaga',
+          excerpt: 'Magnez na nocne skurcze łydek po 50-tce: co mówi Cochrane, jakie leki i choroby bywają w tle, co ma słabe dowody i kiedy iść do lekarza po poradę.',
+          image: './assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp',
+          url: 'nocne-skurcze-lydek-po-50-magnez.html'
+        },
+        {
+          category: 'Zdrowie',
           title: 'Podwyższony kwas moczowy po 50: normy, ryzyko i kiedy leczyć',
           excerpt: 'Podwyższony kwas moczowy po 50 nie zawsze oznacza dnę. Normy w mg/dl i µmol/l, rola diety i leków oraz objawy, przy których trzeba pilnie iść do lekarza.',
           image: './assets/podwyzszony-kwas-moczowy-po-50-hero-wynik-badania-w-kuchni-v1.webp',
@@ -2562,13 +2569,6 @@
           excerpt: 'Zmiana czasu na zimowy 2026: kiedy cofamy zegarki, co mówią badania o śnie, sercu i nastroju po 50-tce i czy Unia zniesie zmiany czasu. Wyjaśniamy na źródłach.',
           image: './assets/zmiana-czasu-na-zimowy-po-50-hero-poranek-zegar-v1.webp',
           url: 'zmiana-czasu-na-zimowy-po-50.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Statyny po 50-tce: bóle mięśni, nocebo i kiedy badać CK',
-          excerpt: 'Bolą cię mięśnie na statynie? Sprawdzamy, ile tego bólu robi sam lek, a ile nocebo, kiedy zbadać CK, czy koenzym Q10 pomaga i czym zastąpić statyny.',
-          image: './assets/statyny-hero-poranek-lydka.webp',
-          url: 'statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

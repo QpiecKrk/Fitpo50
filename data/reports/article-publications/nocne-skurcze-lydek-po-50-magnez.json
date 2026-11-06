@@ -1,0 +1,508 @@
+{
+  "version": 1,
+  "transaction_id": "article-nocne-skurcze-lydek-po-50-magnez-1793918997633-21287",
+  "generated_at": "2026-11-06T01:55:21+01:00",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "nocne-skurcze-lydek-po-50-magnez",
+  "url": "https://fitpo50.pl/nocne-skurcze-lydek-po-50-magnez.html",
+  "manifest_file": "data/reports/article-publications/nocne-skurcze-lydek-po-50-magnez.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "PREVIEW_READY_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "nocne-skurcze-lydek-po-50-magnez.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a",
+      "bytes": 66409
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "611200da528f5281def90af69480aeb3e8e08c63e12737a5503fe441ab27da29",
+      "after_sha256": "0cb104b46326f8373291b416f3f816594a1b79c729af30d2feaa84517d08304f",
+      "bytes": 119759
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "be9da467913ad5b2285cf1ce8f0da2997e0bce724eebe1d8ac3baa4cb2cd9266",
+      "after_sha256": "55477d14c1f6d4a48e04d8893892936b64330470342b21f8f77fc75c8394d702",
+      "bytes": 163380
+    },
+    {
+      "path": "zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "f38d724eb9d0e0872c323a68465d53c131a94e97c7cda06d3de184d14da18b6a",
+      "after_sha256": "c6fc64064ba5cb12377368716aa2bfde1426f51aab1c37e21f7a3fc6f9517500",
+      "bytes": 62417
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "a5dc0712a9981163c0962fa202e0442d17f19769dfe56b42deef1e625b1fc8c6",
+      "after_sha256": "40691eb02171aebd18818e209ac8003444055b6bd09406a083f54666733d233d",
+      "bytes": 20217
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "ceb80931e78891e010c22390f43d4b141677d34f071242a568b88ffd6df8a18d",
+      "after_sha256": "4d1ddc3f063e5b9c70c8579ef8d2f66f05a11c8b65358db30f02f4da303e54d7",
+      "bytes": 39601
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "e63a208a24fc51fef64be0f6a91cd00b603dbe8d83b761786e19b301e7a57cc9",
+      "after_sha256": "fdf9edc15bf51bb064b7659b4b7c7092e7e951d92b519fe048e6d466fedaa462",
+      "bytes": 896482
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "75783cd16e8fa78b4d68b6d89966a471a365a1c81f9161358ee766b723f17024",
+      "after_sha256": "f2b7b3fcc34e5ff40f7165831ecd783cab8847bb5188c14d5361f69bbea07dd1",
+      "bytes": 941191
+    },
+    {
+      "path": "assets/pdf/nocne-skurcze-lydek-po-50-magnez.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644",
+      "bytes": 372297
+    },
+    {
+      "path": "data/crosslink-suggestions/nocne-skurcze-lydek-po-50-magnez.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cce8d5bfa6ce55503c9950a033d06e6a971e0fff4c7347a69414e85d090c8a86",
+      "bytes": 1331
+    },
+    {
+      "path": "data/reports/article-preview/nocne-skurcze-lydek-po-50-magnez.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "97632e8d4d746b98f3e8580808fbc11a82320cf53547fc68e18030d63ac1d56b",
+      "bytes": 32691
+    },
+    {
+      "path": "data/reports/article-preview/nocne-skurcze-lydek-po-50-magnez.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "294492540d19809fa047b649c08adf98178420fc6f5b6348d034d2fdfcd14715",
+      "bytes": 422
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "eccc3fb763d436189201b066c32870afb27757091feba5a7fda770186de07ec3",
+      "after_sha256": "f8b3491497a04dfad024d30a15e28d5c612dd2c6fdf26d9ae1766dfcd943b269",
+      "bytes": 56561
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "599d16a1d4fc3c762ef0c94f8e5056a8bdb2337433602255e73cd46d54ab0e2b",
+      "after_sha256": "1a5686750b86e97ac2ae4879f7c50439d0b196bebb46802ab456af3ed0c5c46e",
+      "bytes": 5889
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "faaba656739c5a499edecba7dc4f5d8e3264505314eb3dd15e425af5e567cc41",
+      "after_sha256": "d2d0885fb14574ab9574c03ce27eb499dc4c8668245a1dd3d6f48dfc71a81f0b",
+      "bytes": 2865
+    },
+    {
+      "path": "data/reports/link-topology-report.json",
+      "action": "UPDATE",
+      "before_sha256": "90f2269d55b9f65341b3d765ca9da76886cfa79924019251507cc1a66a443440",
+      "after_sha256": "d3b95d71a4e3b05cf88d1783b60d99bc670ec20e780a2d7b1ad063bc5e8fc5f7",
+      "bytes": 8813
+    },
+    {
+      "path": "data/reports/link-topology-report.md",
+      "action": "UPDATE",
+      "before_sha256": "535778693493e38d2247c3e416d356a3ac26de5bee9f4f9395f3c2bff417b2c4",
+      "after_sha256": "cc5f9d3559628da1223d03d50fcb53f2a3a32eee5131da95254a9bde91a80450",
+      "bytes": 4829
+    },
+    {
+      "path": "_site/nocne-skurcze-lydek-po-50-magnez.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1297c3c9557d41060e93f80dc04ec1c917ee32ee6ead201aea66546dec2c123a",
+      "bytes": 66409
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "611200da528f5281def90af69480aeb3e8e08c63e12737a5503fe441ab27da29",
+      "after_sha256": "0cb104b46326f8373291b416f3f816594a1b79c729af30d2feaa84517d08304f",
+      "bytes": 119759
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "be9da467913ad5b2285cf1ce8f0da2997e0bce724eebe1d8ac3baa4cb2cd9266",
+      "after_sha256": "55477d14c1f6d4a48e04d8893892936b64330470342b21f8f77fc75c8394d702",
+      "bytes": 163380
+    },
+    {
+      "path": "_site/zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "f38d724eb9d0e0872c323a68465d53c131a94e97c7cda06d3de184d14da18b6a",
+      "after_sha256": "c6fc64064ba5cb12377368716aa2bfde1426f51aab1c37e21f7a3fc6f9517500",
+      "bytes": 62417
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "a5dc0712a9981163c0962fa202e0442d17f19769dfe56b42deef1e625b1fc8c6",
+      "after_sha256": "40691eb02171aebd18818e209ac8003444055b6bd09406a083f54666733d233d",
+      "bytes": 20217
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "ceb80931e78891e010c22390f43d4b141677d34f071242a568b88ffd6df8a18d",
+      "after_sha256": "4d1ddc3f063e5b9c70c8579ef8d2f66f05a11c8b65358db30f02f4da303e54d7",
+      "bytes": 39601
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "e63a208a24fc51fef64be0f6a91cd00b603dbe8d83b761786e19b301e7a57cc9",
+      "after_sha256": "fdf9edc15bf51bb064b7659b4b7c7092e7e951d92b519fe048e6d466fedaa462",
+      "bytes": 896482
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "75783cd16e8fa78b4d68b6d89966a471a365a1c81f9161358ee766b723f17024",
+      "after_sha256": "f2b7b3fcc34e5ff40f7165831ecd783cab8847bb5188c14d5361f69bbea07dd1",
+      "bytes": 941191
+    },
+    {
+      "path": "_site/assets/pdf/nocne-skurcze-lydek-po-50-magnez.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "248a95af8cc04b3cccd92fd335e51d55e1c76a776df43326714d444b0da65644",
+      "bytes": 372297
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/nocne-skurcze-lydek-po-50-magnez.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cce8d5bfa6ce55503c9950a033d06e6a971e0fff4c7347a69414e85d090c8a86",
+      "bytes": 1331
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8b3d1434a0715a4bfae357022cb283d1914d14a554c5a303aeb9f3ae49f3038e",
+      "bytes": 35482
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8b3d1434a0715a4bfae357022cb283d1914d14a554c5a303aeb9f3ae49f3038e",
+      "bytes": 35482
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "615079282e76b1d57c12452e29e5038dfd93497b410f72708a7ceca7e1538243",
+      "bytes": 34054
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "615079282e76b1d57c12452e29e5038dfd93497b410f72708a7ceca7e1538243",
+      "bytes": 34054
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "85f8437d789961725ac9c7a6328f41204d6d1e116ea3e611638bbc83616415e5",
+      "bytes": 101470
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "85f8437d789961725ac9c7a6328f41204d6d1e116ea3e611638bbc83616415e5",
+      "bytes": 101470
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3ced1b684efd6666dfc1b4434d8b5f9e8591113f1ae59096cdea2dc6c468c821",
+      "bytes": 60383
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3ced1b684efd6666dfc1b4434d8b5f9e8591113f1ae59096cdea2dc6c468c821",
+      "bytes": 60383
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64902a30953cf438593e1149f134ed0dea0041ba98b02202939d49618dcb6158",
+      "bytes": 63592
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "64902a30953cf438593e1149f134ed0dea0041ba98b02202939d49618dcb6158",
+      "bytes": 63592
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "baecccc02fe2948ed3d7201e539ae6302d2f343d7f8736f5003374cb899951fa",
+      "bytes": 156591
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-sofa-rozciaganie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "baecccc02fe2948ed3d7201e539ae6302d2f343d7f8736f5003374cb899951fa",
+      "bytes": 156591
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ac8ca9638b74f6405899f6ecb94195dbc624c8223a65ec809385f0ce86c490f5",
+      "bytes": 13135
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ac8ca9638b74f6405899f6ecb94195dbc624c8223a65ec809385f0ce86c490f5",
+      "bytes": 13135
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3b401dc139794e47e241689c540bd62eb3ab24e322acb0fe1f0b9bb20a79f6b5",
+      "bytes": 28184
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3b401dc139794e47e241689c540bd62eb3ab24e322acb0fe1f0b9bb20a79f6b5",
+      "bytes": 28184
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5faf1257673978f18f4acb9f1641188ab906899336af3f5510c7af5a5112f399",
+      "bytes": 73467
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-cochrane-wyniki-infografika-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5faf1257673978f18f4acb9f1641188ab906899336af3f5510c7af5a5112f399",
+      "bytes": 73467
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "800c9c8497fcbaaa8ed26166dce28b966448c2151585c804f398daeb9d8f9621",
+      "bytes": 36748
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "800c9c8497fcbaaa8ed26166dce28b966448c2151585c804f398daeb9d8f9621",
+      "bytes": 36748
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "76103d77113de43bc9f83cd86588ec0737e72b04563c83ce024d84f1f2d8cd27",
+      "bytes": 43660
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "76103d77113de43bc9f83cd86588ec0737e72b04563c83ce024d84f1f2d8cd27",
+      "bytes": 43660
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "560d0e4fadaab6fbe482b858e39dffcb70beba5eba8b7d9ec0e9396651c2895a",
+      "bytes": 125767
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-sloiczek-notatki-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "560d0e4fadaab6fbe482b858e39dffcb70beba5eba8b7d9ec0e9396651c2895a",
+      "bytes": 125767
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f97965b964a96708bef7c2d5e1cf8a0b3b97cec339a9edaf9d58869346c1a992",
+      "bytes": 39357
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f97965b964a96708bef7c2d5e1cf8a0b3b97cec339a9edaf9d58869346c1a992",
+      "bytes": 39357
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c2f787fc284fe0e1aef50d71dbea1b8b836e6b88c7f92b663ae2cdc1f8279693",
+      "bytes": 43650
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c2f787fc284fe0e1aef50d71dbea1b8b836e6b88c7f92b663ae2cdc1f8279693",
+      "bytes": 43650
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d4ac6920d791f833b84aa05f8d4773e912b82a178253741a671522c9f898ce8c",
+      "bytes": 130302
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-szklanka-wody-szafka-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d4ac6920d791f833b84aa05f8d4773e912b82a178253741a671522c9f898ce8c",
+      "bytes": 130302
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0404258ebd290a20bb9ed92f34202d6d2297a13add99e0cda6f06140d616b48e",
+      "bytes": 59565
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0404258ebd290a20bb9ed92f34202d6d2297a13add99e0cda6f06140d616b48e",
+      "bytes": 59565
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d38bc268d1485146b6f1e42255c326a547bc50cfe5bd236fe1ea1f9d152b49b0",
+      "bytes": 63656
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d38bc268d1485146b6f1e42255c326a547bc50cfe5bd236fe1ea1f9d152b49b0",
+      "bytes": 63656
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3782bbdbd6b1c69763c2ed12b13b288b3067feec561f17505cc1e47d49e0eed4",
+      "bytes": 158062
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-apteka-lista-lekow-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3782bbdbd6b1c69763c2ed12b13b288b3067feec561f17505cc1e47d49e0eed4",
+      "bytes": 158062
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4432c2833b3843d45d4f1ac7576c31cb86b5230ec64d82b702f338be55e1356d",
+      "bytes": 39080
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4432c2833b3843d45d4f1ac7576c31cb86b5230ec64d82b702f338be55e1356d",
+      "bytes": 39080
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7e91ee2f34e55565bc5aba1bdc3a3b60887597138790ee60296091a37518898f",
+      "bytes": 38400
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7e91ee2f34e55565bc5aba1bdc3a3b60887597138790ee60296091a37518898f",
+      "bytes": 38400
+    },
+    {
+      "path": "assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b074930ba7365248ed60ef72b2294806849dc4465368d89d2899cda6670c644d",
+      "bytes": 119474
+    },
+    {
+      "path": "_site/assets/nocne-skurcze-lydek-po-50-magnez-rozciaganie-przy-scianie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b074930ba7365248ed60ef72b2294806849dc4465368d89d2899cda6670c644d",
+      "bytes": 119474
+    }
+  ],
+  "files_count": 69
+}
