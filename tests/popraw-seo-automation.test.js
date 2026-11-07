@@ -390,6 +390,50 @@ test('GSC list remains empty until live HTML, canonical, sitemap and PDF all mat
   assert.ok(stalePdf.errors.some((error) => error.includes('PDF nie odpowiada')));
 });
 
+test('source-only link patch validates the changed source, not the unchanged target', () => {
+  const dateModified = '2026-08-25T12:00:00+02:00';
+  const targetUrl = 'https://fitpo50.pl/target.html';
+  const sourceUrl = 'https://fitpo50.pl/source.html';
+  const targetHtml = `<html><head><link rel="canonical" href="${targetUrl}"><script type="application/ld+json">{"dateModified":"2026-08-17T10:00:00+02:00"}</script></head><body>Stary cel</body></html>`;
+  const sourceHtml = `<html><head><meta property="article:modified_time" content="${dateModified}"><link rel="canonical" href="${sourceUrl}"><script type="application/ld+json">{"dateModified":"${dateModified}"}</script></head><body><a href="target.html">Cel</a></body></html>`;
+  const manifest = {
+    status: 'COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT',
+    approved_ids: ['ROKUJE 1'],
+    targets: [{
+      id: 'ROKUJE 1',
+      file: 'target.html',
+      url: targetUrl,
+      target_changed: false,
+      date_modified: dateModified,
+      content_needles: [],
+      expected_html_sha256: sha256(Buffer.from(targetHtml)),
+      pdf_url: 'https://fitpo50.pl/assets/pdf/target.pdf',
+      expected_pdf_sha256: sha256(Buffer.from('%PDF-1.7 target')),
+      source_pages_for_recrawl: [sourceUrl],
+      source_pages: [{
+        file: 'source.html',
+        url: sourceUrl,
+        date_modified: dateModified,
+        expected_html_sha256: sha256(Buffer.from(sourceHtml)),
+        pdf_url: 'https://fitpo50.pl/assets/pdf/source.pdf',
+        expected_pdf_sha256: sha256(Buffer.from('%PDF-1.7 source')),
+        content_needles: ['<a href="target.html">Cel</a>'],
+      }],
+    }],
+  };
+  const responses = new Map([
+    ['https://fitpo50.pl/sitemap.xml', { status: 200, body: Buffer.from(`<urlset><url><loc>${sourceUrl}</loc><lastmod>2026-08-25</lastmod></url></urlset>`) }],
+    [targetUrl, { status: 200, body: Buffer.from(targetHtml) }],
+    [sourceUrl, { status: 200, body: Buffer.from(sourceHtml) }],
+    ['https://fitpo50.pl/assets/pdf/source.pdf', { status: 200, body: Buffer.from('%PDF-1.7 source') }],
+  ]);
+  const result = verifyLiveResponses(manifest, responses);
+  assert.equal(result.status, 'LIVE_DEPLOYED_AND_VALIDATED');
+  assert.deepEqual(result.gsc_url_inspection, [sourceUrl]);
+  assert.deepEqual(result.source_pages_for_recrawl, [sourceUrl]);
+  assert.deepEqual(result.errors, []);
+});
+
 test('sitemap lastmod belongs to the matching URL rather than an earlier entry', () => {
   const { sitemapLastmod } = require('../scripts/lib/popraw-seo-live-verifier');
   const xml = '<urlset><url><loc>https://fitpo50.pl/</loc><lastmod>2026-01-01</lastmod></url><url><loc>https://fitpo50.pl/center.html</loc><lastmod>2026-09-05</lastmod></url></urlset>';

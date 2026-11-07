@@ -302,6 +302,7 @@ function buildDeploymentManifest({ manifest, items, contents, targetFiles, iso }
         id: normalizeId(item.id),
         file,
         url: `https://fitpo50.pl/${file}`,
+        target_changed: item.operations.some((operation) => safeRelativeFile(operation.file || file) === file),
         date_modified: iso,
         content_needles: needles,
         expected_html_sha256: sha256(Buffer.from(contents.get(file), 'utf8')),

@@ -29,6 +29,12 @@ function bodyHash(body) {
   return crypto.createHash('sha256').update(Buffer.isBuffer(body) ? body : String(body || '')).digest('hex');
 }
 
+function targetChanged(target) {
+  if (typeof target?.target_changed === 'boolean') return target.target_changed;
+  return !(Array.isArray(target?.source_pages) && target.source_pages.length > 0
+    && (!Array.isArray(target?.content_needles) || target.content_needles.length === 0));
+}
+
 function verifyLiveResponses(manifest, responses) {
   const errors = [];
   const checks = [];
@@ -38,6 +44,7 @@ function verifyLiveResponses(manifest, responses) {
   const sitemap = responses.get('https://fitpo50.pl/sitemap.xml');
   if (!sitemap || sitemap.status !== 200) errors.push('Produkcja: sitemap.xml nie zwróciła HTTP 200.');
   for (const target of manifest.targets || []) {
+    const changedTarget = targetChanged(target);
     const htmlResponse = responses.get(target.url);
     if (!htmlResponse || htmlResponse.status !== 200) {
       errors.push(`${target.url}: brak HTTP 200.`);
@@ -47,23 +54,28 @@ function verifyLiveResponses(manifest, responses) {
     const canonical = canonicalFromHtml(html);
     if (canonical !== target.url) errors.push(`${target.url}: canonical=${canonical || 'MISSING'}.`);
     const dates = modifiedDates(html);
-    if (!dates.length || dates.some((value) => value !== target.date_modified)) errors.push(`${target.url}: dateModified nie odpowiada zatwierdzonej wersji.`);
-    const exactHash = Boolean(target.expected_html_sha256) && bodyHash(htmlResponse.body) === target.expected_html_sha256;
-    if (!exactHash) {
-      for (const needle of target.content_needles || []) {
-        if (!normalizeText(html).includes(normalizeText(needle))) errors.push(`${target.url}: brak zatwierdzonego fragmentu treści.`);
+    let exactHash = false;
+    if (changedTarget) {
+      if (!dates.length || dates.some((value) => value !== target.date_modified)) errors.push(`${target.url}: dateModified nie odpowiada zatwierdzonej wersji.`);
+      exactHash = Boolean(target.expected_html_sha256) && bodyHash(htmlResponse.body) === target.expected_html_sha256;
+      if (!exactHash) {
+        for (const needle of target.content_needles || []) {
+          if (!normalizeText(html).includes(normalizeText(needle))) errors.push(`${target.url}: brak zatwierdzonego fragmentu treści.`);
+        }
       }
     }
-    checks.push({ url: target.url, type: 'HTML', status: 200, canonical, date_modified: dates[0] || '', exact_hash: exactHash });
-    const pdfResponse = responses.get(target.pdf_url);
-    if (!pdfResponse || pdfResponse.status !== 200 || !Buffer.from(pdfResponse.body || '').subarray(0, 5).equals(Buffer.from('%PDF-'))) {
-      errors.push(`${target.pdf_url}: brak prawidłowego PDF na produkcji.`);
-    } else {
-      if (target.expected_pdf_sha256 && bodyHash(pdfResponse.body) !== target.expected_pdf_sha256) errors.push(`${target.pdf_url}: PDF nie odpowiada zatwierdzonej wersji.`);
-      checks.push({ url: target.pdf_url, type: 'PDF', status: 200 });
+    checks.push({ url: target.url, type: changedTarget ? 'HTML' : 'TARGET_REFERENCE', status: 200, canonical, date_modified: dates[0] || '', exact_hash: exactHash });
+    if (changedTarget) {
+      const pdfResponse = responses.get(target.pdf_url);
+      if (!pdfResponse || pdfResponse.status !== 200 || !Buffer.from(pdfResponse.body || '').subarray(0, 5).equals(Buffer.from('%PDF-'))) {
+        errors.push(`${target.pdf_url}: brak prawidłowego PDF na produkcji.`);
+      } else {
+        if (target.expected_pdf_sha256 && bodyHash(pdfResponse.body) !== target.expected_pdf_sha256) errors.push(`${target.pdf_url}: PDF nie odpowiada zatwierdzonej wersji.`);
+        checks.push({ url: target.pdf_url, type: 'PDF', status: 200 });
+      }
+      const lastmod = sitemap && sitemap.status === 200 ? sitemapLastmod(sitemap.body, target.url) : '';
+      if (lastmod !== String(target.date_modified || '').slice(0, 10)) errors.push(`${target.url}: sitemap lastmod=${lastmod || 'MISSING'}.`);
     }
-    const lastmod = sitemap && sitemap.status === 200 ? sitemapLastmod(sitemap.body, target.url) : '';
-    if (lastmod !== String(target.date_modified || '').slice(0, 10)) errors.push(`${target.url}: sitemap lastmod=${lastmod || 'MISSING'}.`);
     for (const source of target.source_pages || []) {
       const response = responses.get(source.url);
       if (!response || response.status !== 200) {
@@ -91,8 +103,11 @@ function verifyLiveResponses(manifest, responses) {
       checks.push({ url: source.url, type: 'SOURCE_PAGE', status: 200, canonical: sourceCanonical, date_modified: sourceDates[0] || '', exact_hash: sourceExactHash });
     }
   }
-  const inspectionUrls = [...new Set((manifest.targets || []).map((target) => target.url))];
   const recrawlUrls = [...new Set((manifest.targets || []).flatMap((target) => target.source_pages_for_recrawl || []))];
+  const inspectionUrls = [...new Set([
+    ...(manifest.targets || []).filter((target) => targetChanged(target)).map((target) => target.url),
+    ...recrawlUrls,
+  ])];
   return {
     version: 1,
     generated_at: warsawIso(),
