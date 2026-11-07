@@ -1,7 +1,34 @@
 {
     "version": 1,
-    "updatedAt": "2026-11-05T09:27:19+00:00",
+    "updatedAt": "2026-11-07T22:41:27+00:00",
     "items": [
+        {
+            "id": "news_d06c9ba9d664",
+            "title": "Dlaczego statyny powodują bóle mięśni? Naukowcy odkryli możliwą przyczynę",
+            "content_html": "<p><span>Statyny</span> skutecznie obniżają cholesterol i zmniejszają ryzyko zawału serca oraz udaru mózgu. Jednak część pacjentów doświadcza bólu, skurczów i osłabienia mięśni. Naukowcy z Columbia University <span class=\"news-text-tone--1\">odkryli</span> mechanizm, który może wyjaśniać te dolegliwości.</p><strong><p><strong>Winny może być wapń w komórkach mięśniowych.</strong></p><p></p></strong><p><span>Badanie opublikowane w czasopiśmie</span><span> </span><em>Journal of Clinical Investigation</em><span> </span><span>wykazało, że </span><span class=\"news-text-tone--4\">symwastatyna</span><span> może wpływać na białko RyR1, odpowiedzialne za regulację przepływu wapnia w mięśniach. Zaburzenie tego procesu może prowadzić do osłabienia mięśni.</span><br></p><p>Co ciekawe, myszy z określoną mutacją genetyczną były szczególnie podatne na niekorzystne działanie leku. Sugeruje to, że geny mogą mieć znaczenie w nietolerancji statyn.</p><strong class=\"news-text-strong-black\"><p><strong>Co oznacza to dla pacjentów po 50. roku życia?</strong></p><p></p></strong><p><span>Odkrycie może w przyszłości </span><span class=\"news-text-tone--1\">pomóc</span><span> w opracowaniu leków obniżających cholesterol, które będą lepiej tolerowane. Na razie jednak wyniki wymagają dalszego potwierdzenia u ludzi.</span><br></p><p>Osoby odczuwające <a href=\"statyny-po-50-skutki-uboczne-bole-miesni-badanie-ck.html\">bóle mięśni</a> podczas przyjmowania statyn powinny skonsultować się z lekarzem. Możliwe rozwiązania obejmują zmianę dawki, preparatu lub zastosowanie innych leków obniżających LDL. <span>Nie należy samodzielnie przerywać leczenia.</span></p>",
+            "status": "published",
+            "sort_order": 1,
+            "image_base": "news_20261107_224119_cd8372ea",
+            "image_alt": "Ból mięśni podczas leczenia statynami – ilustracja mechanizmu działania wapnia w komórkach mięśniowych.",
+            "image_hashes": {
+                "jpg": "ff2f71db1c49509512d792ae39d33871a889fb16",
+                "webp": "a18b6c32e3444e8038170f40d193b6da9c01ce94",
+                "avif": "118dc21669fcb4511c2ba4c16ec4b572a870207d"
+            },
+            "sources": [
+                {
+                    "label": "Journal of Clinical Investigation",
+                    "url": "https://www.cuimc.columbia.edu/news/how-statins-cause-muscle-aches?utm_source=chatgpt.com"
+                },
+                {
+                    "label": "Columbia University Irving Medical Center",
+                    "url": "https://www.cuimc.columbia.edu/news/how-statins-cause-muscle-aches?utm_source=chatgpt.com"
+                }
+            ],
+            "created_at": "2026-11-07T22:41:19+00:00",
+            "updated_at": "2026-11-07T22:41:27+00:00",
+            "published_at": "2026-11-07T22:41:27+00:00"
+        },
         {
             "id": "news_af79649e836f",
             "title": "Nowe wytyczne leczenia cholesterolu.",

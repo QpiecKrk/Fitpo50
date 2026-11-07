@@ -1,54 +1,24 @@
 {
   "version": 4,
-  "release_id": "5bd6a112-02e1-40f3-9fd7-2eece09adc2d",
-  "prepared_at": "2026-11-07T23:17:07+01:00",
-  "prepared_from_head": "b5fa58270cdbdc94defc2768ded997d321b16309",
-  "publication_state_sha256": "10b67d008b6cfd2eb5e47958770794d9035f8088bc3651d3b4fde30ff471bf8d",
+  "release_id": "7a5e90b1-c728-4396-9e80-b6058d773bd6",
+  "prepared_at": "2026-11-07T23:54:01+01:00",
+  "prepared_from_head": "38b72c9a9b890b6c409d2825c1ffc36b9c89c932",
+  "publication_state_sha256": "6a8b49be6d7684681ba0fbc85c6e8c0f05373bc4beae9c9f4d559c8d555c60cf",
   "public_fingerprint_sha256": "1e54a88a71cdd67edeb259a572eb31f00bf84fdc0f2d089f93ed8e0bc4c54ea6",
   "change_scope": [
-    "full"
+    "news"
   ],
   "verification_targets": [
     {
-      "path": "assets/data/search-index.json",
+      "path": "assets/data/news-fallback.json",
       "mode": "sha256",
-      "sha256": "0b1c8dc164df7fab3f263489f239a745e77f71f7240f121717f2ae4a646c175a"
-    },
-    {
-      "path": "assets/pdf/jedz-wiecej-po-50.pdf",
-      "mode": "sha256",
-      "sha256": "f5d58bfa9d32e7f02db1d28663e79ed688ebbe0d2caa8ff80e24375a413319e5"
-    },
-    {
-      "path": "assets/pdf/tluszcz-trzewny-choroby-jak-walczyc.pdf",
-      "mode": "sha256",
-      "sha256": "a5d38bef2a3cd39ac9939ca4eeab935e26a32cd4f64b34b418c1a5cd11b82e88"
-    },
-    {
-      "path": "jedz-wiecej-po-50.html",
-      "mode": "sha256",
-      "sha256": "863ae8daf898710fc1e7a91430c8e18abf4e427f58b9d8acc1e898e4c3948a20"
-    },
-    {
-      "path": "llms-full.txt",
-      "mode": "sha256",
-      "sha256": "4af48989e1bc8b3ea52c631e4a64405749600ff2362da7931a97def19d5af863"
-    },
-    {
-      "path": "sitemap.xml",
-      "mode": "sha256",
-      "sha256": "edea10b9b2a917e37f2ddbc9b575274202f071135ea37c8473c48dae9c79641d"
-    },
-    {
-      "path": "tluszcz-trzewny-choroby-jak-walczyc.html",
-      "mode": "sha256",
-      "sha256": "1092c44b14d258fd1c9eab7707a8927b4db2aa0dc93a112f2ec053cc0acee829"
+      "sha256": "6f1a30c93220454cd2a0bcd3c2b5c9a4021ba42d22f2172880e372fe7a64a7be"
     }
   ],
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",
-      "sha256": "442277bccf92b0fbd08fec6157c1fc21caaee4f907e6343385e2b23b5129c784"
+      "sha256": "6f1a30c93220454cd2a0bcd3c2b5c9a4021ba42d22f2172880e372fe7a64a7be"
     },
     "runtime_images": [
       {
@@ -110,246 +80,20 @@
       {
         "path": "assets/news/news_20261105_085359_c7ab2760.webp",
         "sha256": "03de44c85b02353ab3e35e53b757b868df2ddf7c97f4238df7cbe3313c308443"
+      },
+      {
+        "path": "assets/news/news_20261107_224119_cd8372ea.avif",
+        "sha256": "deacb623ddb11b257a250eab72ca8f9125f4ad499f4e875a6b4cd9fa323acdb8"
+      },
+      {
+        "path": "assets/news/news_20261107_224119_cd8372ea.jpg",
+        "sha256": "de804dc6f35f17ff3bc4fdc7f914c2fa19c9181d68d1e10b2a480f134340c4f5"
+      },
+      {
+        "path": "assets/news/news_20261107_224119_cd8372ea.webp",
+        "sha256": "ff3fdf09a5d3a659f6fe229cc327c5f5d216618577d719757136a268cb99897d"
       }
     ]
   },
-  "articles": [
-    {
-      "file": "jedz-wiecej-po-50.html",
-      "slug": "jedz-wiecej-po-50",
-      "url": "https://fitpo50.pl/jedz-wiecej-po-50.html",
-      "date_modified": "2026-11-07T23:01:17+01:00",
-      "html_sha256": "863ae8daf898710fc1e7a91430c8e18abf4e427f58b9d8acc1e898e4c3948a20",
-      "pdf_path": "assets/pdf/jedz-wiecej-po-50.pdf",
-      "pdf_sha256": "f5d58bfa9d32e7f02db1d28663e79ed688ebbe0d2caa8ff80e24375a413319e5",
-      "images": [
-        {
-          "path": "assets/dieta-hero.avif",
-          "sha256": "326bb0cf1d80cb94bcefabee066c3c36b8bd03c362619292907cae5acd8b59c8"
-        },
-        {
-          "path": "assets/dieta-hero.jpg",
-          "sha256": "376a50f6a6f2b1e8df0534597f43fb8b83a53accc4a9e4e80c9977c35cc30eee"
-        },
-        {
-          "path": "assets/dieta-hero.webp",
-          "sha256": "c142d72fa89d03e4dde2ab8eff18c41d90c8cc5395d85e09e410f746a5702401"
-        },
-        {
-          "path": "assets/jedz-wiecej-hero.avif",
-          "sha256": "f55c218311790d25f22caead7372a5204e1fa1c52d521a2f8ca8f4ed01704ea7"
-        },
-        {
-          "path": "assets/jedz-wiecej-hero.jpg",
-          "sha256": "cf07423579873db6d9d84bad9b81a11beb06542bb20d12cc6d6f86e3a0f35016"
-        },
-        {
-          "path": "assets/jedz-wiecej-hero.webp",
-          "sha256": "29a865c58239c40c8159d3c1692a5b9cafe0f43bc06c28d39f986a3866721a4b"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-1-20260929.avif",
-          "sha256": "a6456f0c4c8c5e3d5826adec9ed3016947c59bc61cddb1d0140cf8672f7de71c"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-1-20260929.jpg",
-          "sha256": "f74f9f52b33f84c6597a73bd0ba29f5b70a02227c64421259852c6d30fa06eda"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-1-20260929.webp",
-          "sha256": "8c5b4d3a6b61d0630d972a4aaab9a5c6d3c80e183a435921d97c68d5ad1e7a70"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-2-20260929.avif",
-          "sha256": "e545acba70120f59b472077cd9bb412cad8c1af6927714fde44d390eea01a117"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-2-20260929.jpg",
-          "sha256": "a8470f25c284122f1720f86b71e79ab4c915dd6bce35ec2d74ce3e4a215fa90a"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-2-20260929.webp",
-          "sha256": "a0db0755f8d39465f359b1b12403ba65ba3afa846730f9f618a00cfc711334c2"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-3-20260929.avif",
-          "sha256": "87277ca64ec05eae0f794d411f497417c9d755717cab2d3b5fee92a6325f4082"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-3-20260929.jpg",
-          "sha256": "d20e343edd16fc0a328653234abd55b02ae47c6cb42045b23000f7f10b1f6dfb"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-3-20260929.webp",
-          "sha256": "7e734c0561ea590d62f8c60e00929c0229d2901ff908dab3bb5389ed59770e44"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-4-20260929.avif",
-          "sha256": "82556bdfa000d5d955362331f801ba778600df6c0bd979384c81068702156fad"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-4-20260929.jpg",
-          "sha256": "0374559beea25fc6bce0ac8387dc00b48e277c455c49d8d0abaf2a19a51bbb51"
-        },
-        {
-          "path": "assets/jedz-wiecej-po-50-section-4-20260929.webp",
-          "sha256": "7576ad5acc421490c83b010ba9aa272b75a0dcb6e220ecea426c38cb4148cc76"
-        },
-        {
-          "path": "assets/kawa_preworkout_hero.avif",
-          "sha256": "194024349fbc947d7b95fc9bc31938288c706151fd415d33fd619899743870b9"
-        },
-        {
-          "path": "assets/kawa_preworkout_hero.webp",
-          "sha256": "312bb81f67302f1c25fee59f9e11d74d0b7381b889039b21cd702ceb3dad4404"
-        },
-        {
-          "path": "assets/keto-cholesterol-hero.avif",
-          "sha256": "a8a2cb11e728ee529f06cc63fc6652dc9ea5ca7f8a46f4c458fba5f9d0702594"
-        },
-        {
-          "path": "assets/keto-cholesterol-hero.jpg",
-          "sha256": "5ef8fbce17e4778d7370cb2f4c4978d656ac3e8df5851aa9dc041909777d2cf2"
-        },
-        {
-          "path": "assets/keto-cholesterol-hero.webp",
-          "sha256": "90a882b123e66401b5b6c12e0e1414f9dc800638070a108618bc0516f1fe9edc"
-        },
-        {
-          "path": "assets/logo-fitpo50.png",
-          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
-        },
-        {
-          "path": "assets/logo.jpg",
-          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
-        }
-      ],
-      "listing_paths": [
-        "index.html",
-        "porady.html",
-        "jedzenie.html",
-        "assets/data/search-index.json"
-      ]
-    },
-    {
-      "file": "tluszcz-trzewny-choroby-jak-walczyc.html",
-      "slug": "tluszcz-trzewny-choroby-jak-walczyc",
-      "url": "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html",
-      "date_modified": "2026-11-07T23:01:17+01:00",
-      "html_sha256": "1092c44b14d258fd1c9eab7707a8927b4db2aa0dc93a112f2ec053cc0acee829",
-      "pdf_path": "assets/pdf/tluszcz-trzewny-choroby-jak-walczyc.pdf",
-      "pdf_sha256": "a5d38bef2a3cd39ac9939ca4eeab935e26a32cd4f64b34b418c1a5cd11b82e88",
-      "images": [
-        {
-          "path": "assets/etykiety-sklad-produktow-lupa-hero.avif",
-          "sha256": "7dcda889a259e9f0126d76627bd2733ee93a6616db98865ee721d88126275e71"
-        },
-        {
-          "path": "assets/etykiety-sklad-produktow-lupa-hero.jpg",
-          "sha256": "55decaaa4af330fe7c4ce492dc9089913926e9fc211ab4c1e37f31657f0ebc64"
-        },
-        {
-          "path": "assets/etykiety-sklad-produktow-lupa-hero.webp",
-          "sha256": "3188884dc0ae352f13d16115ab75dbeeabfee34f957c50a10415eac4d89e8208"
-        },
-        {
-          "path": "assets/if-50plus-hero.avif",
-          "sha256": "a39ae4bff22936aea356a6f3b40c02cb6179e389a4ce095c2714f2dd0d94b5f9"
-        },
-        {
-          "path": "assets/if-50plus-hero.jpg",
-          "sha256": "4d1bbbb7d4e094c6426c12567a3919d41a6f64907ac448abb6df74cc589ded6b"
-        },
-        {
-          "path": "assets/if-50plus-hero.webp",
-          "sha256": "fb84a63aa89990e40ee56d25452bc7b342bebf7f5c62a5a9b213e174bb8629bd"
-        },
-        {
-          "path": "assets/logo-fitpo50.png",
-          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
-        },
-        {
-          "path": "assets/logo.jpg",
-          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-1-20260929.avif",
-          "sha256": "964534874109f88f66283a0ebbc6b8d2151a0418823ee73dd5f004c036caad75"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-1-20260929.jpg",
-          "sha256": "0cb9d5c0b87883935936b3c9f291c7b3f645c20502b938798bae8dcaa288f68d"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-1-20260929.webp",
-          "sha256": "f0961cf1986c6791159e971c074eadefddea9b616961a33e8a84dec5db092787"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-2-20260929.avif",
-          "sha256": "3daa3045adef8255b4a159d272408627deef10653be2734ca879d4bc1c883130"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-2-20260929.jpg",
-          "sha256": "ad521da7b82dd3e56175b8a1e61f324ffd20e5cfe2312174cf77dec4d1d64396"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-2-20260929.webp",
-          "sha256": "0c4e15a79db013e44b330f44e0b150493b4e1cbcee2b2c0c878ccd50a76d129a"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-3-20260929.avif",
-          "sha256": "a5cf3fd23a990c04f4e61217e7676cb8401adf5d2d5dd3e24ac8f45e024d3573"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-3-20260929.jpg",
-          "sha256": "75e6362c15e02d6a1db1b7c6f2d9fd3d61272b805765f818fe1866a2c682ebf5"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-3-20260929.webp",
-          "sha256": "2057cf15c8d5f50c0dda2d7e540330490245c296fa48590b6e3f8bb19e3622d6"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-4-20260929.avif",
-          "sha256": "25bbf4ef3bb93d4c0d1893c874b783cdd16afb4d60e847c74251017ca901bc44"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-4-20260929.jpg",
-          "sha256": "dc1046ac7cf4ca6905e7014f8665df05019ba0c1cd41c196f87a8e480c7b5dcd"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-4-20260929.webp",
-          "sha256": "f16c99de473c9e2427fe8fa584b28f5dca10f255fe66d012cb44b8cff1949577"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-hero.avif",
-          "sha256": "ff0b48840e637f63638a7393ac1d0108de3906e50254da693d5fd99636a9bee7"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-hero.jpg",
-          "sha256": "96560462f9dc085ff5595d5d05dd8a69ed9b3525bde678587a3a1ae1ad6670b3"
-        },
-        {
-          "path": "assets/tluszcz-trzewny-hero.webp",
-          "sha256": "20ed8a22f3ab88be66c45c8673e3fd49c1d9f87afb38a375ee34fbdf9d8fd4e8"
-        },
-        {
-          "path": "assets/waty-trening-apple-watch-hero.avif",
-          "sha256": "446d2cbc316242a162a34e791ec1565824a2e65f7b339be77269d6e2b695c776"
-        },
-        {
-          "path": "assets/waty-trening-apple-watch-hero.jpg",
-          "sha256": "156966749466dd6247e0beeaf50150b10126d61a24eeafb2a85a596e5c8985b6"
-        },
-        {
-          "path": "assets/waty-trening-apple-watch-hero.webp",
-          "sha256": "ecb77a1fa21fa20b68b6964f9d00c13294fb5acd7b2339eb5c7bff0417523f45"
-        }
-      ],
-      "listing_paths": [
-        "porady.html",
-        "zdrowie.html",
-        "assets/data/search-index.json"
-      ]
-    }
-  ]
+  "articles": []
 }
