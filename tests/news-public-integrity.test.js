@@ -46,6 +46,30 @@ test('wspólna kontrola wymaga obrazów NEWS śledzonych przez Git', (t) => {
   assert.ok(result.errors.some((error) => /news_historyczny\.webp.*nie istnieje w checkout/.test(error)));
 });
 
+test('staging SEO sprawdza śledzenie NEWS w źródłowym checkoutcie Git', (t) => {
+  const source = fixture(t, 'news_historyczny', true);
+  const stage = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-news-stage-'));
+  t.after(() => fs.rmSync(stage, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(stage, 'assets', 'data'), { recursive: true });
+  fs.mkdirSync(path.join(stage, 'assets', 'news'), { recursive: true });
+  fs.copyFileSync(path.join(source, 'assets', 'data', 'news-fallback.json'), path.join(stage, 'assets', 'data', 'news-fallback.json'));
+  for (const ext of ['avif', 'webp', 'jpg']) {
+    fs.copyFileSync(path.join(source, 'assets', 'news', `news_historyczny.${ext}`), path.join(stage, 'assets', 'news', `news_historyczny.${ext}`));
+  }
+  const previousStaging = process.env.FITPO50_SEO_STAGING;
+  const previousSourceRoot = process.env.FITPO50_SOURCE_ROOT;
+  process.env.FITPO50_SEO_STAGING = '1';
+  process.env.FITPO50_SOURCE_ROOT = source;
+  try {
+    assert.deepEqual(validatePublicNewsCheckout({ root: stage }).errors, []);
+  } finally {
+    if (previousStaging === undefined) delete process.env.FITPO50_SEO_STAGING;
+    else process.env.FITPO50_SEO_STAGING = previousStaging;
+    if (previousSourceRoot === undefined) delete process.env.FITPO50_SOURCE_ROOT;
+    else process.env.FITPO50_SOURCE_ROOT = previousSourceRoot;
+  }
+});
+
 test('runtime news_20 nie wymaga pliku w checkout, ale zwraca trzy cele zdalne', (t) => {
   const root = fixture(t);
   const result = validatePublicNewsCheckout({ root });

@@ -1,188 +1,318 @@
 {
-  "version": 1,
-  "generated_at": "2026-10-17T12:40:35+02:00",
+  "version": 2,
+  "generated_at": "2026-11-07T23:01:17+01:00",
   "status": "COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT",
-  "source_report_generated_at": "2026-10-17T11:47:01+02:00",
+  "source_report_generated_at": "2026-11-07T15:23:08+01:00",
   "approved_ids": [
-    "BOOST 1",
-    "BOOST 2",
-    "BOOST 3",
     "ROKUJE 1",
-    "ROKUJE 2",
-    "ROKUJE 3",
-    "ROKUJE 4"
+    "ROKUJE 2"
   ],
   "targets": [
-    {
-      "id": "BOOST 1",
-      "file": "rentgen-tomografia-ct-rezonans-mri-roznice-badania.html",
-      "url": "https://fitpo50.pl/rentgen-tomografia-ct-rezonans-mri-roznice-badania.html",
-      "date_modified": "2026-10-17T12:40:35+02:00",
-      "content_needles": [
-        "<title>Czym różni się rentgen od rezonansu? RTG, CT i MRI | FitPo50</title>",
-        "<meta name=\"description\" content=\"Czym różni się rentgen od rezonansu? Porównaj RTG, tomografię CT i MRI: promieniowanie, zastosowania, kontrast oraz przygotowanie do badania po 50-tce.\">",
-        "<meta property=\"og:description\" content=\"Czym różni się rentgen od rezonansu? Porównaj RTG, tomografię CT i MRI: promieniowanie, zastosowania, kontrast oraz przygotowanie do badania po 50-tce.\">",
-        "<meta name=\"twitter:description\" content=\"Czym różni się rentgen od rezonansu? Porównaj RTG, tomografię CT i MRI: promieniowanie, zastosowania, kontrast oraz przygotowanie do badania po 50-tce.\">",
-        "\"description\": \"Czym różni się rentgen od rezonansu? Porównaj RTG, tomografię CT i MRI: promieniowanie, zastosowania, kontrast oraz przygotowanie do badania po 50-tce.\",",
-        "<meta property=\"og:title\" content=\"Czym różni się rentgen od rezonansu? RTG, CT i MRI\">",
-        "<meta name=\"twitter:title\" content=\"Czym różni się rentgen od rezonansu? RTG, CT i MRI\">",
-        "\"headline\": \"Czym różni się rentgen od rezonansu? Porównanie RTG, CT i MRI\",",
-        "<h1 class=\"article-header__title\">Czym różni się rentgen od rezonansu? Porównanie RTG, CT i MRI</h1>"
-      ],
-      "expected_html_sha256": "f9b4675ad451a270343a8615014b46251f8c9610d098ca2296c7a2b23a31bcf1",
-      "pdf_url": "https://fitpo50.pl/assets/pdf/rentgen-tomografia-ct-rezonans-mri-roznice-badania.pdf",
-      "source_pages_for_recrawl": [],
-      "source_pages": [],
-      "expected_pdf_sha256": "daa585750a0b130c82f5750149df2f23d93ddfff14cf0063e228b74470027af9"
-    },
-    {
-      "id": "BOOST 2",
-      "file": "miesnie-dna-miednicy-trening-core-po-50.html",
-      "url": "https://fitpo50.pl/miesnie-dna-miednicy-trening-core-po-50.html",
-      "date_modified": "2026-10-17T12:40:35+02:00",
-      "content_needles": [
-        "<title>Mięśnie dna miednicy po 50: ćwiczenia i EMG | FitPo50</title>",
-        "<meta name=\"description\" content=\"Mięśnie dna miednicy po 50-tce: sprawdź ćwiczenia, oddech, objawy i zasady odczytu EMG oraz dowiedz się, kiedy potrzebna jest fizjoterapia po 50-tce.\">",
-        "<meta property=\"og:description\" content=\"Mięśnie dna miednicy po 50-tce: sprawdź ćwiczenia, oddech, objawy i zasady odczytu EMG oraz dowiedz się, kiedy potrzebna jest fizjoterapia po 50-tce.\">",
-        "<meta name=\"twitter:description\" content=\"Mięśnie dna miednicy po 50-tce: sprawdź ćwiczenia, oddech, objawy i zasady odczytu EMG oraz dowiedz się, kiedy potrzebna jest fizjoterapia po 50-tce.\">",
-        "\"description\": \"Mięśnie dna miednicy po 50-tce: sprawdź ćwiczenia, oddech, objawy i zasady odczytu EMG oraz dowiedz się, kiedy potrzebna jest fizjoterapia po 50-tce.\",",
-        "<meta property=\"og:title\" content=\"Mięśnie dna miednicy po 50: ćwiczenia i EMG\">",
-        "<meta name=\"twitter:title\" content=\"Mięśnie dna miednicy po 50: ćwiczenia i EMG\">",
-        "\"headline\": \"Mięśnie dna miednicy po 50-tce: ćwiczenia i odczyt wyniku EMG\",",
-        "<h1 class=\"article-header__title\">Mięśnie dna miednicy po 50-tce: ćwiczenia i odczyt wyniku EMG</h1>",
-        "<span class=\"article-kicker-card__date\">Aktualizacja: 17.10.2026</span>",
-        "<h2>Jak czytać wynik EMG i ocenić pracę dna miednicy w przysiadzie?</h2><p>Nie ma jednej uniwersalnej wartości EMG, która oznacza prawidłową pracę dna miednicy. Wynik ocenia się w kontekście spoczynku, skurczu, rozluźnienia i tego samego protokołu pomiaru. Surowych wartości nie należy porównywać między osobami ani urządzeniami, ponieważ wpływają na nie elektrody, ich ułożenie, aparat i cechy badanej osoby.</p><p>EMG pokazuje aktywność elektryczną mięśni, ale samo nie rozpoznaje ich siły ani nie przewiduje skuteczności leczenia. Jest najbardziej użyteczne jako element oceny klinicznej lub biofeedback w powtarzanym pomiarze tej samej osoby. Przysiad może angażować dno miednicy, lecz taki sygnał nie dowodzi, że ćwiczenie wyleczy nietrzymanie moczu.</p>",
-        "\"citation\": [ \"https://www.ejog.org/article/S0301-2115(24)00652-3/abstract\", \"https://pmc.ncbi.nlm.nih.gov/articles/PMC12251402/\", \"https://pmc.ncbi.nlm.nih.gov/articles/PMC9222935/\", \"https://pmc.ncbi.nlm.nih.gov/articles/PMC6915701/\", \"https://pmc.ncbi.nlm.nih.gov/articles/PMC8974352/\", \"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12449232/\", \"https://pubmed.ncbi.nlm.nih.gov/38271065/\", \"https://pubmed.ncbi.nlm.nih.gov/15094544/\", \"https://www.nice.org.uk/guidance/ng210/chapter/recommendations\", \"https://www.ics.org/folder/committees/working-group-documents/terminology-for-pelvic-floor-function-and-dysfunction/d/ics-report-on-the-terminology-for-pelvic-floor-muscle-assessment-2021/download\", \"https://pubmed.ncbi.nlm.nih.gov/19539646/\" ]",
-        "<ol class=\"sources-list\"><li><a href=\"https://www.nice.org.uk/guidance/ng210/chapter/recommendations\" target=\"_blank\" rel=\"noopener noreferrer\">NICE NG210 — zalecenia dotyczące treningu mięśni dna miednicy przy nietrzymaniu moczu</a></li><li><a href=\"https://www.ejog.org/article/S0301-2115(24)00652-3/abstract\" target=\"_blank\" rel=\"noopener noreferrer\">Effect of pelvic floor muscle training on urinary incontinence in postmenopausal women (EJOG, 2024)</a></li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC12251402/\" target=\"_blank\" rel=\"noopener noreferrer\">Training Interventions in Postmenopausal Women to Improve PFM Function – PMC Systematic Review (2025)</a></li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC9222935/\" target=\"_blank\" rel=\"noopener noreferrer\">Breathing, (S)Training and the Pelvic Floor – A Basic Concept (PMC, 2022)</a></li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC6915701/\" target=\"_blank\" rel=\"noopener noreferrer\">Effect of diaphragm and abdominal muscle training on pelvic floor strength – PMC RCT</a></li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8974352/\" target=\"_blank\" rel=\"noopener noreferrer\">Intra-abdominal pressure and pelvic floor health – PMC (2022)</a></li><li><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12449232/\" target=\"_blank\" rel=\"noopener noreferrer\">Effects of PFMT on sexual function in postmenopausal women – meta-analysis (PMC, 2025)</a></li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/38271065/\" target=\"_blank\" rel=\"noopener noreferrer\">Pelvic floor muscle training – QoL in postmenopausal women with genitourinary syndrome (PubMed, 2024)</a></li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/15094544/\" target=\"_blank\" rel=\"noopener noreferrer\">The effects of breath control on intra-abdominal pressure during lifting tasks (PubMed, 2004)</a></li><li><a href=\"https://www.ics.org/folder/committees/working-group-documents/terminology-for-pelvic-floor-function-and-dysfunction/d/ics-report-on-the-terminology-for-pelvic-floor-muscle-assessment-2021/download\" target=\"_blank\" rel=\"noopener noreferrer\">International Continence Society (2021) — terminologia oceny funkcji i dysfunkcji mięśni dna miednicy</a></li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/19539646/\" target=\"_blank\" rel=\"noopener noreferrer\">Auchincloss i McLean (2009) — rzetelność powierzchniowego EMG mięśni dna miednicy</a></li></ol>",
-        "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/emg-dno-miednicy-przysiad-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/emg-dno-miednicy-przysiad-20261017.webp\" type=\"image/webp\"><img src=\"./assets/emg-dno-miednicy-przysiad-20261017.jpg\" alt=\"Kobieta po 50-tce wykonuje przysiad do krzesła podczas oceny aktywności mięśni przez fizjoterapeutkę\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>EMG może wspierać ocenę aktywności mięśni podczas ruchu, ale wynik interpretuje się razem z objawami i badaniem klinicznym.</figcaption></figure>",
-        "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/menopauza-trening-plan-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/menopauza-trening-plan-20261017.webp\" type=\"image/webp\"><img src=\"./assets/menopauza-trening-plan-20261017.jpg\" alt=\"Kobieta po menopauzie zapisuje reakcję na trening siłowy i planuje stopniową progresję\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>Plan treningu po menopauzie warto dopasować do sprawności, objawów i regeneracji zamiast opierać go na jednej obowiązkowej regule czasu.</figcaption></figure>",
-        "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/fizjoterapia-dno-miednicy-konsultacja-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/fizjoterapia-dno-miednicy-konsultacja-20261017.webp\" type=\"image/webp\"><img src=\"./assets/fizjoterapia-dno-miednicy-konsultacja-20261017.jpg\" alt=\"Kobieta po 60-tce rozmawia z fizjoterapeutką o objawach dna miednicy i indywidualnym planie ćwiczeń\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>Ocena objawów, zdolności napięcia i rozluźnienia oraz reakcji na obciążenie pomaga dobrać indywidualny program.</figcaption></figure>",
-        "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/przepona-dno-miednicy-oddech-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/przepona-dno-miednicy-oddech-20261017.webp\" type=\"image/webp\"><img src=\"./assets/przepona-dno-miednicy-oddech-20261017.jpg\" alt=\"Kobieta po 60-tce ćwiczy spokojny oddech pod obserwacją fizjoterapeutki\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>Spokojny oddech pomaga obserwować napięcie i rozluźnienie, ale nie zastępuje indywidualnej oceny dna miednicy.</figcaption></figure>",
-        "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/trening-oddech-obciazenie-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/trening-oddech-obciazenie-20261017.webp\" type=\"image/webp\"><img src=\"./assets/trening-oddech-obciazenie-20261017.jpg\" alt=\"Kobieta po 60-tce wykonuje lekki martwy ciąg z kettlem pod obserwacją trenerki\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>Przy rekreacyjnym dźwiganiu zacznij od obciążenia pozwalającego zachować swobodny oddech i obserwuj objawy.</figcaption></figure>"
-      ],
-      "expected_html_sha256": "fdf54ae3319645a00446571458e0f5331d598226e5d2be2e3639cc03f4bd12b4",
-      "pdf_url": "https://fitpo50.pl/assets/pdf/miesnie-dna-miednicy-trening-core-po-50.pdf",
-      "source_pages_for_recrawl": [],
-      "source_pages": [],
-      "expected_pdf_sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2"
-    },
-    {
-      "id": "BOOST 3",
-      "file": "oponka-zablokowana-powiez.html",
-      "url": "https://fitpo50.pl/oponka-zablokowana-powiez.html",
-      "date_modified": "2026-10-17T12:40:35+02:00",
-      "content_needles": [
-        "<title>Zablokowana powięź a oponka brzuszna: mit | FitPo50</title>",
-        "<meta name=\"description\" content=\"Zablokowana powięź nie tworzy oponki brzusznej ani nie blokuje spalania tłuszczu. Sprawdź, co mówią dowody i co realnie pomaga zmniejszyć obwód pasa.\"/>",
-        "<meta property=\"og:description\" content=\"Zablokowana powięź nie tworzy oponki brzusznej ani nie blokuje spalania tłuszczu. Sprawdź, co mówią dowody i co realnie pomaga zmniejszyć obwód pasa.\"/>",
-        "<meta name=\"twitter:description\" content=\"Zablokowana powięź nie tworzy oponki brzusznej ani nie blokuje spalania tłuszczu. Sprawdź, co mówią dowody i co realnie pomaga zmniejszyć obwód pasa.\"/>",
-        "\"description\": \"Zablokowana powięź nie tworzy oponki brzusznej ani nie blokuje spalania tłuszczu. Sprawdź, co mówią dowody i co realnie pomaga zmniejszyć obwód pasa.\",",
-        "<meta property=\"og:title\" content=\"Zablokowana powięź a oponka brzuszna: mit\"/>",
-        "<meta name=\"twitter:title\" content=\"Zablokowana powięź a oponka brzuszna: mit\"/>",
-        "\"headline\": \"Czy zablokowana powięź powoduje oponkę brzuszną? Mit i fakty\",",
-        "<h1 class=\"article-header__title\">Czy zablokowana powięź powoduje oponkę brzuszną? Mit i fakty</h1>",
-        "<span class=\"article-kicker-card__date\">Aktualizacja: 17.10.2026</span>",
-        "<p>Powięź to sieć tkanki łącznej otaczająca i łącząca struktury ciała. Może uczestniczyć w bólu i ograniczeniu ruchu, lecz określenie „zablokowana powięź” nie jest rozpoznaniem, które tłumaczy miejscowe gromadzenie tłuszczu na brzuchu.</p>",
-        "<p>Tłuszcz to magazyn energii rozłożony po całym ciele. Kiedy w ciągu dnia wydatkujesz więcej energii, niż dostarczasz z jedzeniem, organizm sięga po te zapasy. Kluczowe: sięga po nie systemowo, z różnych miejsc naraz, a o kolejności decydują geny, hormony i płeć, a nie to, którą okolicę masujesz czy ćwiczysz. Zobacz nasz pełny artykuł o tym, <a href=\"jak-pozbyc-sie-oponki-brzusznej-po-50.html\">jak pozbyć się oponki brzusznej po 50-tce</a>.</p>"
-      ],
-      "expected_html_sha256": "5907000a108568902183f895b4b7beb44da1c5da805bf3b6eff607f7c5df7903",
-      "pdf_url": "https://fitpo50.pl/assets/pdf/oponka-zablokowana-powiez.pdf",
-      "source_pages_for_recrawl": [],
-      "source_pages": [],
-      "expected_pdf_sha256": "d3ce8b06702b5097a3bf9f38f8a19cec3cd77ff0ee4afd9468914c583a96f5fe"
-    },
     {
       "id": "ROKUJE 1",
       "file": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
       "url": "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
-      "date_modified": "2026-10-17T12:40:35+02:00",
-      "content_needles": [
-        "<title>Kreatyna a białko po 50-tce: różnice i łączenie | FitPo50</title>",
-        "<meta name=\"description\" content=\"Kreatyna a białko po 50-tce działają inaczej, ale można je łączyć. Sprawdź podaż białka, dawkę kreatyny, korzyści, ograniczenia i bezpieczeństwo.\"/>",
-        "<meta property=\"og:description\" content=\"Kreatyna a białko po 50-tce działają inaczej, ale można je łączyć. Sprawdź podaż białka, dawkę kreatyny, korzyści, ograniczenia i bezpieczeństwo.\"/>",
-        "<meta name=\"twitter:description\" content=\"Kreatyna a białko po 50-tce działają inaczej, ale można je łączyć. Sprawdź podaż białka, dawkę kreatyny, korzyści, ograniczenia i bezpieczeństwo.\"/>",
-        "\"description\": \"Kreatyna a białko po 50-tce działają inaczej, ale można je łączyć. Sprawdź podaż białka, dawkę kreatyny, korzyści, ograniczenia i bezpieczeństwo.\",",
-        "<meta property=\"og:title\" content=\"Kreatyna a białko po 50-tce: różnice i łączenie\"/>",
-        "<meta name=\"twitter:title\" content=\"Kreatyna a białko po 50-tce: różnice i łączenie\"/>",
-        "\"headline\": \"Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie\",",
-        "<h1 class=\"article-header__title\">Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie</h1>"
-      ],
-      "expected_html_sha256": "d89c4af96bb5e210117ec1880d9b76bd98298d276f543e63bbe57a8422ffe5a5",
+      "date_modified": "2026-11-07T23:01:17+01:00",
+      "content_needles": [],
+      "expected_html_sha256": "9fdbe1ab41d8f1abc50ad7359c85eb6d593b71c60eeaa09bb7d6c7b67e04df3e",
       "pdf_url": "https://fitpo50.pl/assets/pdf/kreatyna-i-bialko-po-50-tce-jak-laczyc.pdf",
-      "source_pages_for_recrawl": [],
-      "source_pages": [],
+      "source_pages_for_recrawl": [
+        "https://fitpo50.pl/jedz-wiecej-po-50.html"
+      ],
+      "source_pages": [
+        {
+          "file": "jedz-wiecej-po-50.html",
+          "url": "https://fitpo50.pl/jedz-wiecej-po-50.html",
+          "date_modified": "2026-11-07T23:01:17+01:00",
+          "expected_html_sha256": "5766271e61c07b349fbb4f008bb878eb828bd24fa33a5f86550a23738e13e5f1",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/jedz-wiecej-po-50.pdf",
+          "content_needles": [
+            "<p>„Jedz więcej” nie jest dobrą radą dla każdego. Problemem jest zbyt mała podaż energii lub białka względem potrzeb, zwłaszcza przy chudnięciu, chorobie i treningu. U zdrowych starszych osób często rozważa się 1,0–1,2 g białka/kg masy ciała, ale choroba nerek i inne schorzenia wymagają indywidualnego planu.</p><p>Zobacz także: <a href=\"kreatyna-i-bialko-po-50-tce-jak-laczyc.html\">Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie</a>.</p>"
+          ],
+          "expected_pdf_sha256": "f5d58bfa9d32e7f02db1d28663e79ed688ebbe0d2caa8ff80e24375a413319e5"
+        }
+      ],
       "expected_pdf_sha256": "b9d5ba1dbbbf3ff4c7da73fe11cf52ef2ef4d4300fcd0a6603305d91513ad227"
     },
     {
       "id": "ROKUJE 2",
       "file": "apob-apoa-badania-cholesterol.html",
       "url": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
-      "date_modified": "2026-10-17T12:40:35+02:00",
-      "content_needles": [
-        "<title>ApoB/ApoA1: jak czytać wynik i ocenić ryzyko | FitPo50</title>",
-        "<meta name=\"description\" content=\"Wskaźnik ApoB/ApoA1 zestawia dwa różne białka lipidowe. Sprawdź, jak go obliczyć, interpretować i dlaczego nie zastępuje pełnej oceny ryzyka serca.\">",
-        "<meta property=\"og:description\" content=\"Wskaźnik ApoB/ApoA1 zestawia dwa różne białka lipidowe. Sprawdź, jak go obliczyć, interpretować i dlaczego nie zastępuje pełnej oceny ryzyka serca.\">",
-        "<meta name=\"twitter:description\" content=\"Wskaźnik ApoB/ApoA1 zestawia dwa różne białka lipidowe. Sprawdź, jak go obliczyć, interpretować i dlaczego nie zastępuje pełnej oceny ryzyka serca.\">",
-        "\"description\": \"Wskaźnik ApoB/ApoA1 zestawia dwa różne białka lipidowe. Sprawdź, jak go obliczyć, interpretować i dlaczego nie zastępuje pełnej oceny ryzyka serca.\",",
-        "<meta property=\"og:title\" content=\"ApoB/ApoA1: jak czytać wynik i ocenić ryzyko\">",
-        "<meta name=\"twitter:title\" content=\"ApoB/ApoA1: jak czytać wynik i ocenić ryzyko\">",
-        "\"headline\": \"ApoB/ApoA1 po 50-tce: jak czytać wynik i ocenić ryzyko serca?\",",
-        "<h1 class=\"article-header__title\">ApoB/ApoA1 po 50-tce: jak czytać wynik i ocenić ryzyko serca?</h1>",
-        "<p>Ten tekst wyjaśnia przede wszystkim iloraz ApoB/ApoA1 i jego ograniczenia. Jeśli pytasz, czy badanie ApoB jest refundowane, albo szukasz jednostek i progów ApoB, przejdź do <a href=\"apob-norma-cena-jak-czytac-wynik.html#apob-nfz\">przewodnika po wyniku ApoB i dostępności badania w NFZ</a>.</p>"
-      ],
-      "expected_html_sha256": "e51390efad400df6c2f975c5d53628562b7e2ca6978e158cff52897adb5b4a70",
+      "date_modified": "2026-11-07T23:01:17+01:00",
+      "content_needles": [],
+      "expected_html_sha256": "389cb2a4fe5fa36b3e91e4835ad24d7207acb100af790782eeb454f7d5edcd00",
       "pdf_url": "https://fitpo50.pl/assets/pdf/apob-apoa-badania-cholesterol.pdf",
-      "source_pages_for_recrawl": [],
-      "source_pages": [],
+      "source_pages_for_recrawl": [
+        "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html"
+      ],
+      "source_pages": [
+        {
+          "file": "tluszcz-trzewny-choroby-jak-walczyc.html",
+          "url": "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html",
+          "date_modified": "2026-11-07T23:01:17+01:00",
+          "expected_html_sha256": "16506c1708bfc481f607bd10f3d7893bc9f565519dae832e86cd2bb1e5d5d5a9",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/tluszcz-trzewny-choroby-jak-walczyc.pdf",
+          "content_needles": [
+            "<p>Sam wygląd nie rozstrzyga ryzyka. Wynik warto łączyć z ciśnieniem, glukozą i lipidami, które omawia <a href=\"badania-po-50.html\">przewodnik badań po 50-tce</a>.</p><p>Zobacz także: <a href=\"apob-apoa-badania-cholesterol.html\">ApoB/ApoA1 po 50-tce: jak czytać wynik i ocenić ryzyko serca</a>.</p>"
+          ],
+          "expected_pdf_sha256": "a5d38bef2a3cd39ac9939ca4eeab935e26a32cd4f64b34b418c1a5cd11b82e88"
+        }
+      ],
       "expected_pdf_sha256": "0feb221a1f8049cf3d0280442d1951a1c0683d6f925c87bd989a008c67d54fa3"
+    }
+  ],
+  "deployments": [
+    {
+      "version": 1,
+      "generated_at": "2026-10-17T12:40:35+02:00",
+      "status": "COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT",
+      "source_report_generated_at": "2026-10-17T11:47:01+02:00",
+      "approved_ids": [
+        "BOOST 1",
+        "BOOST 2",
+        "BOOST 3",
+        "ROKUJE 1",
+        "ROKUJE 2",
+        "ROKUJE 3",
+        "ROKUJE 4"
+      ],
+      "targets": [
+        {
+          "id": "BOOST 1",
+          "file": "rentgen-tomografia-ct-rezonans-mri-roznice-badania.html",
+          "url": "https://fitpo50.pl/rentgen-tomografia-ct-rezonans-mri-roznice-badania.html",
+          "date_modified": "2026-10-17T12:40:35+02:00",
+          "content_needles": [
+            "<title>Czym różni się rentgen od rezonansu? RTG, CT i MRI | FitPo50</title>",
+            "<meta name=\"description\" content=\"Czym różni się rentgen od rezonansu? Porównaj RTG, tomografię CT i MRI: promieniowanie, zastosowania, kontrast oraz przygotowanie do badania po 50-tce.\">",
+            "<meta property=\"og:description\" content=\"Czym różni się rentgen od rezonansu? Porównaj RTG, tomografię CT i MRI: promieniowanie, zastosowania, kontrast oraz przygotowanie do badania po 50-tce.\">",
+            "<meta name=\"twitter:description\" content=\"Czym różni się rentgen od rezonansu? Porównaj RTG, tomografię CT i MRI: promieniowanie, zastosowania, kontrast oraz przygotowanie do badania po 50-tce.\">",
+            "\"description\": \"Czym różni się rentgen od rezonansu? Porównaj RTG, tomografię CT i MRI: promieniowanie, zastosowania, kontrast oraz przygotowanie do badania po 50-tce.\",",
+            "<meta property=\"og:title\" content=\"Czym różni się rentgen od rezonansu? RTG, CT i MRI\">",
+            "<meta name=\"twitter:title\" content=\"Czym różni się rentgen od rezonansu? RTG, CT i MRI\">",
+            "\"headline\": \"Czym różni się rentgen od rezonansu? Porównanie RTG, CT i MRI\",",
+            "<h1 class=\"article-header__title\">Czym różni się rentgen od rezonansu? Porównanie RTG, CT i MRI</h1>"
+          ],
+          "expected_html_sha256": "f9b4675ad451a270343a8615014b46251f8c9610d098ca2296c7a2b23a31bcf1",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/rentgen-tomografia-ct-rezonans-mri-roznice-badania.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "daa585750a0b130c82f5750149df2f23d93ddfff14cf0063e228b74470027af9"
+        },
+        {
+          "id": "BOOST 2",
+          "file": "miesnie-dna-miednicy-trening-core-po-50.html",
+          "url": "https://fitpo50.pl/miesnie-dna-miednicy-trening-core-po-50.html",
+          "date_modified": "2026-10-17T12:40:35+02:00",
+          "content_needles": [
+            "<title>Mięśnie dna miednicy po 50: ćwiczenia i EMG | FitPo50</title>",
+            "<meta name=\"description\" content=\"Mięśnie dna miednicy po 50-tce: sprawdź ćwiczenia, oddech, objawy i zasady odczytu EMG oraz dowiedz się, kiedy potrzebna jest fizjoterapia po 50-tce.\">",
+            "<meta property=\"og:description\" content=\"Mięśnie dna miednicy po 50-tce: sprawdź ćwiczenia, oddech, objawy i zasady odczytu EMG oraz dowiedz się, kiedy potrzebna jest fizjoterapia po 50-tce.\">",
+            "<meta name=\"twitter:description\" content=\"Mięśnie dna miednicy po 50-tce: sprawdź ćwiczenia, oddech, objawy i zasady odczytu EMG oraz dowiedz się, kiedy potrzebna jest fizjoterapia po 50-tce.\">",
+            "\"description\": \"Mięśnie dna miednicy po 50-tce: sprawdź ćwiczenia, oddech, objawy i zasady odczytu EMG oraz dowiedz się, kiedy potrzebna jest fizjoterapia po 50-tce.\",",
+            "<meta property=\"og:title\" content=\"Mięśnie dna miednicy po 50: ćwiczenia i EMG\">",
+            "<meta name=\"twitter:title\" content=\"Mięśnie dna miednicy po 50: ćwiczenia i EMG\">",
+            "\"headline\": \"Mięśnie dna miednicy po 50-tce: ćwiczenia i odczyt wyniku EMG\",",
+            "<h1 class=\"article-header__title\">Mięśnie dna miednicy po 50-tce: ćwiczenia i odczyt wyniku EMG</h1>",
+            "<span class=\"article-kicker-card__date\">Aktualizacja: 17.10.2026</span>",
+            "<h2>Jak czytać wynik EMG i ocenić pracę dna miednicy w przysiadzie?</h2><p>Nie ma jednej uniwersalnej wartości EMG, która oznacza prawidłową pracę dna miednicy. Wynik ocenia się w kontekście spoczynku, skurczu, rozluźnienia i tego samego protokołu pomiaru. Surowych wartości nie należy porównywać między osobami ani urządzeniami, ponieważ wpływają na nie elektrody, ich ułożenie, aparat i cechy badanej osoby.</p><p>EMG pokazuje aktywność elektryczną mięśni, ale samo nie rozpoznaje ich siły ani nie przewiduje skuteczności leczenia. Jest najbardziej użyteczne jako element oceny klinicznej lub biofeedback w powtarzanym pomiarze tej samej osoby. Przysiad może angażować dno miednicy, lecz taki sygnał nie dowodzi, że ćwiczenie wyleczy nietrzymanie moczu.</p>",
+            "\"citation\": [ \"https://www.ejog.org/article/S0301-2115(24)00652-3/abstract\", \"https://pmc.ncbi.nlm.nih.gov/articles/PMC12251402/\", \"https://pmc.ncbi.nlm.nih.gov/articles/PMC9222935/\", \"https://pmc.ncbi.nlm.nih.gov/articles/PMC6915701/\", \"https://pmc.ncbi.nlm.nih.gov/articles/PMC8974352/\", \"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12449232/\", \"https://pubmed.ncbi.nlm.nih.gov/38271065/\", \"https://pubmed.ncbi.nlm.nih.gov/15094544/\", \"https://www.nice.org.uk/guidance/ng210/chapter/recommendations\", \"https://www.ics.org/folder/committees/working-group-documents/terminology-for-pelvic-floor-function-and-dysfunction/d/ics-report-on-the-terminology-for-pelvic-floor-muscle-assessment-2021/download\", \"https://pubmed.ncbi.nlm.nih.gov/19539646/\" ]",
+            "<ol class=\"sources-list\"><li><a href=\"https://www.nice.org.uk/guidance/ng210/chapter/recommendations\" target=\"_blank\" rel=\"noopener noreferrer\">NICE NG210 — zalecenia dotyczące treningu mięśni dna miednicy przy nietrzymaniu moczu</a></li><li><a href=\"https://www.ejog.org/article/S0301-2115(24)00652-3/abstract\" target=\"_blank\" rel=\"noopener noreferrer\">Effect of pelvic floor muscle training on urinary incontinence in postmenopausal women (EJOG, 2024)</a></li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC12251402/\" target=\"_blank\" rel=\"noopener noreferrer\">Training Interventions in Postmenopausal Women to Improve PFM Function – PMC Systematic Review (2025)</a></li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC9222935/\" target=\"_blank\" rel=\"noopener noreferrer\">Breathing, (S)Training and the Pelvic Floor – A Basic Concept (PMC, 2022)</a></li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC6915701/\" target=\"_blank\" rel=\"noopener noreferrer\">Effect of diaphragm and abdominal muscle training on pelvic floor strength – PMC RCT</a></li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8974352/\" target=\"_blank\" rel=\"noopener noreferrer\">Intra-abdominal pressure and pelvic floor health – PMC (2022)</a></li><li><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12449232/\" target=\"_blank\" rel=\"noopener noreferrer\">Effects of PFMT on sexual function in postmenopausal women – meta-analysis (PMC, 2025)</a></li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/38271065/\" target=\"_blank\" rel=\"noopener noreferrer\">Pelvic floor muscle training – QoL in postmenopausal women with genitourinary syndrome (PubMed, 2024)</a></li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/15094544/\" target=\"_blank\" rel=\"noopener noreferrer\">The effects of breath control on intra-abdominal pressure during lifting tasks (PubMed, 2004)</a></li><li><a href=\"https://www.ics.org/folder/committees/working-group-documents/terminology-for-pelvic-floor-function-and-dysfunction/d/ics-report-on-the-terminology-for-pelvic-floor-muscle-assessment-2021/download\" target=\"_blank\" rel=\"noopener noreferrer\">International Continence Society (2021) — terminologia oceny funkcji i dysfunkcji mięśni dna miednicy</a></li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/19539646/\" target=\"_blank\" rel=\"noopener noreferrer\">Auchincloss i McLean (2009) — rzetelność powierzchniowego EMG mięśni dna miednicy</a></li></ol>",
+            "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/emg-dno-miednicy-przysiad-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/emg-dno-miednicy-przysiad-20261017.webp\" type=\"image/webp\"><img src=\"./assets/emg-dno-miednicy-przysiad-20261017.jpg\" alt=\"Kobieta po 50-tce wykonuje przysiad do krzesła podczas oceny aktywności mięśni przez fizjoterapeutkę\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>EMG może wspierać ocenę aktywności mięśni podczas ruchu, ale wynik interpretuje się razem z objawami i badaniem klinicznym.</figcaption></figure>",
+            "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/menopauza-trening-plan-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/menopauza-trening-plan-20261017.webp\" type=\"image/webp\"><img src=\"./assets/menopauza-trening-plan-20261017.jpg\" alt=\"Kobieta po menopauzie zapisuje reakcję na trening siłowy i planuje stopniową progresję\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>Plan treningu po menopauzie warto dopasować do sprawności, objawów i regeneracji zamiast opierać go na jednej obowiązkowej regule czasu.</figcaption></figure>",
+            "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/fizjoterapia-dno-miednicy-konsultacja-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/fizjoterapia-dno-miednicy-konsultacja-20261017.webp\" type=\"image/webp\"><img src=\"./assets/fizjoterapia-dno-miednicy-konsultacja-20261017.jpg\" alt=\"Kobieta po 60-tce rozmawia z fizjoterapeutką o objawach dna miednicy i indywidualnym planie ćwiczeń\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>Ocena objawów, zdolności napięcia i rozluźnienia oraz reakcji na obciążenie pomaga dobrać indywidualny program.</figcaption></figure>",
+            "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/przepona-dno-miednicy-oddech-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/przepona-dno-miednicy-oddech-20261017.webp\" type=\"image/webp\"><img src=\"./assets/przepona-dno-miednicy-oddech-20261017.jpg\" alt=\"Kobieta po 60-tce ćwiczy spokojny oddech pod obserwacją fizjoterapeutki\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>Spokojny oddech pomaga obserwować napięcie i rozluźnienie, ale nie zastępuje indywidualnej oceny dna miednicy.</figcaption></figure>",
+            "<figure class=\"inline-figure\"><picture><source srcset=\"./assets/trening-oddech-obciazenie-20261017.avif\" type=\"image/avif\"><source srcset=\"./assets/trening-oddech-obciazenie-20261017.webp\" type=\"image/webp\"><img src=\"./assets/trening-oddech-obciazenie-20261017.jpg\" alt=\"Kobieta po 60-tce wykonuje lekki martwy ciąg z kettlem pod obserwacją trenerki\" loading=\"lazy\" width=\"1536\" height=\"864\"></picture><figcaption>Przy rekreacyjnym dźwiganiu zacznij od obciążenia pozwalającego zachować swobodny oddech i obserwuj objawy.</figcaption></figure>"
+          ],
+          "expected_html_sha256": "fdf54ae3319645a00446571458e0f5331d598226e5d2be2e3639cc03f4bd12b4",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/miesnie-dna-miednicy-trening-core-po-50.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2"
+        },
+        {
+          "id": "BOOST 3",
+          "file": "oponka-zablokowana-powiez.html",
+          "url": "https://fitpo50.pl/oponka-zablokowana-powiez.html",
+          "date_modified": "2026-10-17T12:40:35+02:00",
+          "content_needles": [
+            "<title>Zablokowana powięź a oponka brzuszna: mit | FitPo50</title>",
+            "<meta name=\"description\" content=\"Zablokowana powięź nie tworzy oponki brzusznej ani nie blokuje spalania tłuszczu. Sprawdź, co mówią dowody i co realnie pomaga zmniejszyć obwód pasa.\"/>",
+            "<meta property=\"og:description\" content=\"Zablokowana powięź nie tworzy oponki brzusznej ani nie blokuje spalania tłuszczu. Sprawdź, co mówią dowody i co realnie pomaga zmniejszyć obwód pasa.\"/>",
+            "<meta name=\"twitter:description\" content=\"Zablokowana powięź nie tworzy oponki brzusznej ani nie blokuje spalania tłuszczu. Sprawdź, co mówią dowody i co realnie pomaga zmniejszyć obwód pasa.\"/>",
+            "\"description\": \"Zablokowana powięź nie tworzy oponki brzusznej ani nie blokuje spalania tłuszczu. Sprawdź, co mówią dowody i co realnie pomaga zmniejszyć obwód pasa.\",",
+            "<meta property=\"og:title\" content=\"Zablokowana powięź a oponka brzuszna: mit\"/>",
+            "<meta name=\"twitter:title\" content=\"Zablokowana powięź a oponka brzuszna: mit\"/>",
+            "\"headline\": \"Czy zablokowana powięź powoduje oponkę brzuszną? Mit i fakty\",",
+            "<h1 class=\"article-header__title\">Czy zablokowana powięź powoduje oponkę brzuszną? Mit i fakty</h1>",
+            "<span class=\"article-kicker-card__date\">Aktualizacja: 17.10.2026</span>",
+            "<p>Powięź to sieć tkanki łącznej otaczająca i łącząca struktury ciała. Może uczestniczyć w bólu i ograniczeniu ruchu, lecz określenie „zablokowana powięź” nie jest rozpoznaniem, które tłumaczy miejscowe gromadzenie tłuszczu na brzuchu.</p>",
+            "<p>Tłuszcz to magazyn energii rozłożony po całym ciele. Kiedy w ciągu dnia wydatkujesz więcej energii, niż dostarczasz z jedzeniem, organizm sięga po te zapasy. Kluczowe: sięga po nie systemowo, z różnych miejsc naraz, a o kolejności decydują geny, hormony i płeć, a nie to, którą okolicę masujesz czy ćwiczysz. Zobacz nasz pełny artykuł o tym, <a href=\"jak-pozbyc-sie-oponki-brzusznej-po-50.html\">jak pozbyć się oponki brzusznej po 50-tce</a>.</p>"
+          ],
+          "expected_html_sha256": "5907000a108568902183f895b4b7beb44da1c5da805bf3b6eff607f7c5df7903",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/oponka-zablokowana-powiez.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "d3ce8b06702b5097a3bf9f38f8a19cec3cd77ff0ee4afd9468914c583a96f5fe"
+        },
+        {
+          "id": "ROKUJE 1",
+          "file": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+          "url": "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+          "date_modified": "2026-10-17T12:40:35+02:00",
+          "content_needles": [
+            "<title>Kreatyna a białko po 50-tce: różnice i łączenie | FitPo50</title>",
+            "<meta name=\"description\" content=\"Kreatyna a białko po 50-tce działają inaczej, ale można je łączyć. Sprawdź podaż białka, dawkę kreatyny, korzyści, ograniczenia i bezpieczeństwo.\"/>",
+            "<meta property=\"og:description\" content=\"Kreatyna a białko po 50-tce działają inaczej, ale można je łączyć. Sprawdź podaż białka, dawkę kreatyny, korzyści, ograniczenia i bezpieczeństwo.\"/>",
+            "<meta name=\"twitter:description\" content=\"Kreatyna a białko po 50-tce działają inaczej, ale można je łączyć. Sprawdź podaż białka, dawkę kreatyny, korzyści, ograniczenia i bezpieczeństwo.\"/>",
+            "\"description\": \"Kreatyna a białko po 50-tce działają inaczej, ale można je łączyć. Sprawdź podaż białka, dawkę kreatyny, korzyści, ograniczenia i bezpieczeństwo.\",",
+            "<meta property=\"og:title\" content=\"Kreatyna a białko po 50-tce: różnice i łączenie\"/>",
+            "<meta name=\"twitter:title\" content=\"Kreatyna a białko po 50-tce: różnice i łączenie\"/>",
+            "\"headline\": \"Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie\",",
+            "<h1 class=\"article-header__title\">Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie</h1>"
+          ],
+          "expected_html_sha256": "d89c4af96bb5e210117ec1880d9b76bd98298d276f543e63bbe57a8422ffe5a5",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/kreatyna-i-bialko-po-50-tce-jak-laczyc.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "b9d5ba1dbbbf3ff4c7da73fe11cf52ef2ef4d4300fcd0a6603305d91513ad227"
+        },
+        {
+          "id": "ROKUJE 2",
+          "file": "apob-apoa-badania-cholesterol.html",
+          "url": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
+          "date_modified": "2026-10-17T12:40:35+02:00",
+          "content_needles": [
+            "<title>ApoB/ApoA1: jak czytać wynik i ocenić ryzyko | FitPo50</title>",
+            "<meta name=\"description\" content=\"Wskaźnik ApoB/ApoA1 zestawia dwa różne białka lipidowe. Sprawdź, jak go obliczyć, interpretować i dlaczego nie zastępuje pełnej oceny ryzyka serca.\">",
+            "<meta property=\"og:description\" content=\"Wskaźnik ApoB/ApoA1 zestawia dwa różne białka lipidowe. Sprawdź, jak go obliczyć, interpretować i dlaczego nie zastępuje pełnej oceny ryzyka serca.\">",
+            "<meta name=\"twitter:description\" content=\"Wskaźnik ApoB/ApoA1 zestawia dwa różne białka lipidowe. Sprawdź, jak go obliczyć, interpretować i dlaczego nie zastępuje pełnej oceny ryzyka serca.\">",
+            "\"description\": \"Wskaźnik ApoB/ApoA1 zestawia dwa różne białka lipidowe. Sprawdź, jak go obliczyć, interpretować i dlaczego nie zastępuje pełnej oceny ryzyka serca.\",",
+            "<meta property=\"og:title\" content=\"ApoB/ApoA1: jak czytać wynik i ocenić ryzyko\">",
+            "<meta name=\"twitter:title\" content=\"ApoB/ApoA1: jak czytać wynik i ocenić ryzyko\">",
+            "\"headline\": \"ApoB/ApoA1 po 50-tce: jak czytać wynik i ocenić ryzyko serca?\",",
+            "<h1 class=\"article-header__title\">ApoB/ApoA1 po 50-tce: jak czytać wynik i ocenić ryzyko serca?</h1>",
+            "<p>Ten tekst wyjaśnia przede wszystkim iloraz ApoB/ApoA1 i jego ograniczenia. Jeśli pytasz, czy badanie ApoB jest refundowane, albo szukasz jednostek i progów ApoB, przejdź do <a href=\"apob-norma-cena-jak-czytac-wynik.html#apob-nfz\">przewodnika po wyniku ApoB i dostępności badania w NFZ</a>.</p>"
+          ],
+          "expected_html_sha256": "e51390efad400df6c2f975c5d53628562b7e2ca6978e158cff52897adb5b4a70",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/apob-apoa-badania-cholesterol.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "0feb221a1f8049cf3d0280442d1951a1c0683d6f925c87bd989a008c67d54fa3"
+        },
+        {
+          "id": "ROKUJE 3",
+          "file": "kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
+          "url": "https://fitpo50.pl/kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
+          "date_modified": "2026-10-17T12:40:35+02:00",
+          "content_needles": [
+            "<title>Komora hiperbaryczna: efekty, wskazania i ryzyko | FitPo50</title>",
+            "<meta name=\"description\" content=\"Komora hiperbaryczna ma określone wskazania i ryzyko, a kriokomora to inna procedura. Sprawdź efekty, dowody i pytania przed zakupem pakietu zabiegów.\"/>",
+            "<meta property=\"og:description\" content=\"Komora hiperbaryczna ma określone wskazania i ryzyko, a kriokomora to inna procedura. Sprawdź efekty, dowody i pytania przed zakupem pakietu zabiegów.\"/>",
+            "<meta name=\"twitter:description\" content=\"Komora hiperbaryczna ma określone wskazania i ryzyko, a kriokomora to inna procedura. Sprawdź efekty, dowody i pytania przed zakupem pakietu zabiegów.\"/>",
+            "\"description\": \"Komora hiperbaryczna ma określone wskazania i ryzyko, a kriokomora to inna procedura. Sprawdź efekty, dowody i pytania przed zakupem pakietu zabiegów.\",",
+            "<meta property=\"og:title\" content=\"Komora hiperbaryczna: efekty, wskazania i ryzyko\"/>",
+            "<meta name=\"twitter:title\" content=\"Komora hiperbaryczna: efekty, wskazania i ryzyko\"/>",
+            "\"headline\": \"Komora hiperbaryczna po 50-tce: efekty, wskazania i ryzyko\",",
+            "<h1 class=\"article-header__title\">Komora hiperbaryczna po 50-tce: efekty, wskazania i ryzyko</h1>",
+            "<span class=\"article-kicker-card__date\">Aktualizacja: 17.10.2026</span>",
+            "<link rel=\"preload\" as=\"image\" href=\"./assets/komory-hero-2026.webp\" fetchpriority=\"high\"/>"
+          ],
+          "expected_html_sha256": "26ef2560db35f82b4085c86e071031c0c05042ead29966269441fd0a78809865",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "ac39d9c0dde133354fe6efef9e1a7dd2a75e81a309cba77e0da53dc363228e0d"
+        },
+        {
+          "id": "ROKUJE 4",
+          "file": "wino-i-miesnie-po-50.html",
+          "url": "https://fitpo50.pl/wino-i-miesnie-po-50.html",
+          "date_modified": "2026-10-17T12:40:35+02:00",
+          "content_needles": [
+            "<title>Wino po treningu: mięśnie, sen i regeneracja po 50 | FitPo50</title>",
+            "<meta name=\"description\" content=\"Wino po treningu może wpływać na mięśnie, sen i regenerację. Oddzielamy skutki dużych dawek od jednej lampki i pokazujemy praktyczny test nawyku.\"/>",
+            "<meta property=\"og:description\" content=\"Wino po treningu może wpływać na mięśnie, sen i regenerację. Oddzielamy skutki dużych dawek od jednej lampki i pokazujemy praktyczny test nawyku.\"/>",
+            "<meta name=\"twitter:description\" content=\"Wino po treningu może wpływać na mięśnie, sen i regenerację. Oddzielamy skutki dużych dawek od jednej lampki i pokazujemy praktyczny test nawyku.\"/>",
+            "\"description\": \"Wino po treningu może wpływać na mięśnie, sen i regenerację. Oddzielamy skutki dużych dawek od jednej lampki i pokazujemy praktyczny test nawyku.\",",
+            "<meta property=\"og:title\" content=\"Wino po treningu: mięśnie, sen i regeneracja po 50\"/>",
+            "<meta name=\"twitter:title\" content=\"Wino po treningu: mięśnie, sen i regeneracja po 50\"/>",
+            "\"headline\": \"Wino po treningu po 50-tce: mięśnie, sen i regeneracja mięśni\",",
+            "<h1 class=\"article-header__title\">Wino po treningu po 50-tce: mięśnie, sen i regeneracja mięśni</h1>",
+            "<span class=\"article-kicker-card__date\">Aktualizacja: 17.10.2026</span>",
+            "<h2 id=\"faq-title\">Najczęściej zadawane pytania</h2>"
+          ],
+          "expected_html_sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/wino-i-miesnie-po-50.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164"
+        }
+      ]
     },
     {
-      "id": "ROKUJE 3",
-      "file": "kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
-      "url": "https://fitpo50.pl/kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html",
-      "date_modified": "2026-10-17T12:40:35+02:00",
-      "content_needles": [
-        "<title>Komora hiperbaryczna: efekty, wskazania i ryzyko | FitPo50</title>",
-        "<meta name=\"description\" content=\"Komora hiperbaryczna ma określone wskazania i ryzyko, a kriokomora to inna procedura. Sprawdź efekty, dowody i pytania przed zakupem pakietu zabiegów.\"/>",
-        "<meta property=\"og:description\" content=\"Komora hiperbaryczna ma określone wskazania i ryzyko, a kriokomora to inna procedura. Sprawdź efekty, dowody i pytania przed zakupem pakietu zabiegów.\"/>",
-        "<meta name=\"twitter:description\" content=\"Komora hiperbaryczna ma określone wskazania i ryzyko, a kriokomora to inna procedura. Sprawdź efekty, dowody i pytania przed zakupem pakietu zabiegów.\"/>",
-        "\"description\": \"Komora hiperbaryczna ma określone wskazania i ryzyko, a kriokomora to inna procedura. Sprawdź efekty, dowody i pytania przed zakupem pakietu zabiegów.\",",
-        "<meta property=\"og:title\" content=\"Komora hiperbaryczna: efekty, wskazania i ryzyko\"/>",
-        "<meta name=\"twitter:title\" content=\"Komora hiperbaryczna: efekty, wskazania i ryzyko\"/>",
-        "\"headline\": \"Komora hiperbaryczna po 50-tce: efekty, wskazania i ryzyko\",",
-        "<h1 class=\"article-header__title\">Komora hiperbaryczna po 50-tce: efekty, wskazania i ryzyko</h1>",
-        "<span class=\"article-kicker-card__date\">Aktualizacja: 17.10.2026</span>",
-        "<link rel=\"preload\" as=\"image\" href=\"./assets/komory-hero-2026.webp\" fetchpriority=\"high\"/>"
+      "version": 1,
+      "generated_at": "2026-11-07T23:01:17+01:00",
+      "status": "COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT",
+      "source_report_generated_at": "2026-11-07T15:23:08+01:00",
+      "approved_ids": [
+        "ROKUJE 1",
+        "ROKUJE 2"
       ],
-      "expected_html_sha256": "26ef2560db35f82b4085c86e071031c0c05042ead29966269441fd0a78809865",
-      "pdf_url": "https://fitpo50.pl/assets/pdf/kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.pdf",
-      "source_pages_for_recrawl": [],
-      "source_pages": [],
-      "expected_pdf_sha256": "ac39d9c0dde133354fe6efef9e1a7dd2a75e81a309cba77e0da53dc363228e0d"
-    },
-    {
-      "id": "ROKUJE 4",
-      "file": "wino-i-miesnie-po-50.html",
-      "url": "https://fitpo50.pl/wino-i-miesnie-po-50.html",
-      "date_modified": "2026-10-17T12:40:35+02:00",
-      "content_needles": [
-        "<title>Wino po treningu: mięśnie, sen i regeneracja po 50 | FitPo50</title>",
-        "<meta name=\"description\" content=\"Wino po treningu może wpływać na mięśnie, sen i regenerację. Oddzielamy skutki dużych dawek od jednej lampki i pokazujemy praktyczny test nawyku.\"/>",
-        "<meta property=\"og:description\" content=\"Wino po treningu może wpływać na mięśnie, sen i regenerację. Oddzielamy skutki dużych dawek od jednej lampki i pokazujemy praktyczny test nawyku.\"/>",
-        "<meta name=\"twitter:description\" content=\"Wino po treningu może wpływać na mięśnie, sen i regenerację. Oddzielamy skutki dużych dawek od jednej lampki i pokazujemy praktyczny test nawyku.\"/>",
-        "\"description\": \"Wino po treningu może wpływać na mięśnie, sen i regenerację. Oddzielamy skutki dużych dawek od jednej lampki i pokazujemy praktyczny test nawyku.\",",
-        "<meta property=\"og:title\" content=\"Wino po treningu: mięśnie, sen i regeneracja po 50\"/>",
-        "<meta name=\"twitter:title\" content=\"Wino po treningu: mięśnie, sen i regeneracja po 50\"/>",
-        "\"headline\": \"Wino po treningu po 50-tce: mięśnie, sen i regeneracja mięśni\",",
-        "<h1 class=\"article-header__title\">Wino po treningu po 50-tce: mięśnie, sen i regeneracja mięśni</h1>",
-        "<span class=\"article-kicker-card__date\">Aktualizacja: 17.10.2026</span>",
-        "<h2 id=\"faq-title\">Najczęściej zadawane pytania</h2>"
-      ],
-      "expected_html_sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
-      "pdf_url": "https://fitpo50.pl/assets/pdf/wino-i-miesnie-po-50.pdf",
-      "source_pages_for_recrawl": [],
-      "source_pages": [],
-      "expected_pdf_sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164"
+      "targets": [
+        {
+          "id": "ROKUJE 1",
+          "file": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+          "url": "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
+          "date_modified": "2026-11-07T23:01:17+01:00",
+          "content_needles": [],
+          "expected_html_sha256": "9fdbe1ab41d8f1abc50ad7359c85eb6d593b71c60eeaa09bb7d6c7b67e04df3e",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/kreatyna-i-bialko-po-50-tce-jak-laczyc.pdf",
+          "source_pages_for_recrawl": [
+            "https://fitpo50.pl/jedz-wiecej-po-50.html"
+          ],
+          "source_pages": [
+            {
+              "file": "jedz-wiecej-po-50.html",
+              "url": "https://fitpo50.pl/jedz-wiecej-po-50.html",
+              "date_modified": "2026-11-07T23:01:17+01:00",
+              "expected_html_sha256": "5766271e61c07b349fbb4f008bb878eb828bd24fa33a5f86550a23738e13e5f1",
+              "pdf_url": "https://fitpo50.pl/assets/pdf/jedz-wiecej-po-50.pdf",
+              "content_needles": [
+                "<p>„Jedz więcej” nie jest dobrą radą dla każdego. Problemem jest zbyt mała podaż energii lub białka względem potrzeb, zwłaszcza przy chudnięciu, chorobie i treningu. U zdrowych starszych osób często rozważa się 1,0–1,2 g białka/kg masy ciała, ale choroba nerek i inne schorzenia wymagają indywidualnego planu.</p><p>Zobacz także: <a href=\"kreatyna-i-bialko-po-50-tce-jak-laczyc.html\">Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie</a>.</p>"
+              ],
+              "expected_pdf_sha256": "f5d58bfa9d32e7f02db1d28663e79ed688ebbe0d2caa8ff80e24375a413319e5"
+            }
+          ],
+          "expected_pdf_sha256": "b9d5ba1dbbbf3ff4c7da73fe11cf52ef2ef4d4300fcd0a6603305d91513ad227"
+        },
+        {
+          "id": "ROKUJE 2",
+          "file": "apob-apoa-badania-cholesterol.html",
+          "url": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
+          "date_modified": "2026-11-07T23:01:17+01:00",
+          "content_needles": [],
+          "expected_html_sha256": "389cb2a4fe5fa36b3e91e4835ad24d7207acb100af790782eeb454f7d5edcd00",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/apob-apoa-badania-cholesterol.pdf",
+          "source_pages_for_recrawl": [
+            "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html"
+          ],
+          "source_pages": [
+            {
+              "file": "tluszcz-trzewny-choroby-jak-walczyc.html",
+              "url": "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html",
+              "date_modified": "2026-11-07T23:01:17+01:00",
+              "expected_html_sha256": "16506c1708bfc481f607bd10f3d7893bc9f565519dae832e86cd2bb1e5d5d5a9",
+              "pdf_url": "https://fitpo50.pl/assets/pdf/tluszcz-trzewny-choroby-jak-walczyc.pdf",
+              "content_needles": [
+                "<p>Sam wygląd nie rozstrzyga ryzyka. Wynik warto łączyć z ciśnieniem, glukozą i lipidami, które omawia <a href=\"badania-po-50.html\">przewodnik badań po 50-tce</a>.</p><p>Zobacz także: <a href=\"apob-apoa-badania-cholesterol.html\">ApoB/ApoA1 po 50-tce: jak czytać wynik i ocenić ryzyko serca</a>.</p>"
+              ],
+              "expected_pdf_sha256": "a5d38bef2a3cd39ac9939ca4eeab935e26a32cd4f64b34b418c1a5cd11b82e88"
+            }
+          ],
+          "expected_pdf_sha256": "0feb221a1f8049cf3d0280442d1951a1c0683d6f925c87bd989a008c67d54fa3"
+        }
+      ]
     }
   ]
 }

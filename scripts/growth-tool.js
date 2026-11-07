@@ -26,6 +26,10 @@ const SEO_STATE_DIR = resolveSeoStateDir();
 const SITE_ORIGIN = 'https://fitpo50.pl';
 const SEO_GAIN_WAVE_SIZE = 3;
 const SEO_ROTATION_WAVE_SIZE = 2;
+const SIMPLE_SEO_MAIN_SIZE = 5;
+const SIMPLE_SEO_SECONDARY_SIZE = 10;
+const SIMPLE_SEO_FRESH_DAYS = 30;
+const SIMPLE_SEO_RULES_VERSION = 1;
 const TEMPORARILY_IGNORED_SEO_FILES = new Set([
   'narzedzia.html',
 ]);
@@ -1154,6 +1158,7 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
   const links = linkAnalysis.accepted;
   const url = cardAbsoluteUrl(card);
   const gsc = approvalGscSnapshot(card);
+  const readyProposal = buildReadySeoProposal(card, articleByFile?.get?.(file), links, articleByFile);
   return {
     id: `${kind} ${index}`,
     kind,
@@ -1165,7 +1170,9 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     decision: card?.editorial_decision || '',
     diagnosis: card?.diagnosis || card?.type || '',
     required_action: card?.required_action || null,
-    execution_status: isRecentlyTouched(file, articleByFile, 14) ? 'COOLDOWN_MONITORUJ' : 'READY_FOR_APPROVAL',
+    execution_status: isRecentlyTouched(file, articleByFile, 14)
+      ? 'COOLDOWN_MONITORUJ'
+      : (proposalReadyStatus(readyProposal?.status) ? 'READY_FOR_APPROVAL' : String(readyProposal?.status || 'NOT_READY')),
     query: card?.keyword_plan?.primary_source === 'ARTICLE_TOPIC_FALLBACK' ? '' : card?.keyword_plan?.primary || '',
     query_source: card?.keyword_plan?.primary_source || 'UNSPECIFIED',
     reason: approvalReason(card, kind),
@@ -1180,6 +1187,8 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     current_meta_description: articleByFile?.get?.(file)?.meta_description || '',
     proposed_title: cleanStrategyDraftValue(card?.proposed_title || ''),
     proposed_meta_description: cleanStrategyDraftValue(card?.proposed_meta_description || ''),
+    ready_proposal: readyProposal,
+    ready_for_deploy: proposalReadyStatus(readyProposal?.status),
     scores: {
       seo: Number(card?.score?.seo || 0),
       aeo: Number(card?.score?.aeo || 0),
@@ -1197,6 +1206,448 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     },
     gsc_submit_after_change: [url].filter(Boolean),
   };
+}
+
+function proposalActionType(card) {
+  const actionType = String(card?.required_action?.action_type || '').trim();
+  if (actionType) return actionType;
+  if (card?.proposed_title || card?.proposed_meta_description) return 'TITLE_META_CTR';
+  if (card?.internal_link_sources?.length) return 'INTERNAL_LINKING';
+  return 'EDITORIAL_REVIEW';
+}
+
+function proposalParagraphs(file, article = {}) {
+  if (Array.isArray(article?.paragraphs) && article.paragraphs.length) return article.paragraphs;
+  const html = readTextIfExists(path.join(ROOT, normalizeReportFile(file)));
+  return allMatches(html, /<p\b[^>]*>([\s\S]*?)<\/p>/gi)
+    .map(stripTags)
+    .filter((paragraph) => paragraph.length >= 40)
+    .filter((paragraph) => !/\b(?:min|godz)\s+czytania\b|\bAktualizacja:/i.test(paragraph));
+}
+
+function normalizeProposalText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/ł/g, 'l');
+}
+
+function proposalTokens(value) {
+  return normalizeProposalText(value)
+    .split(/[^a-z0-9]+/)
+    .filter((token) => token.length >= 4)
+    .filter((token) => !['jest', 'jestem', 'tego', 'też', 'oraz', 'przez', 'czyli', 'który', 'ktora', 'ktore'].includes(token));
+}
+
+function proposalTokenMatches(normalizedText, token) {
+  if (normalizedText.includes(token)) return true;
+  const stem = token.length >= 6 ? token.slice(0, -1) : token;
+  return stem.length >= 4 && normalizedText.includes(stem);
+}
+
+function proposalRelevantParagraph(paragraphs, query) {
+  const tokens = proposalTokens(query);
+  if (!paragraphs.length) return { text: '', score: 0 };
+  let best = { text: paragraphs[0], score: 0 };
+  for (const paragraph of paragraphs) {
+    const normalized = normalizeProposalText(paragraph);
+    const score = tokens.reduce((sum, token) => sum + (proposalTokenMatches(normalized, token) ? 1 : 0), 0);
+    if (score > best.score) best = { text: paragraph, score };
+  }
+  return best;
+}
+
+function proposalDisplayTitle(article = {}, fallback = '') {
+  const value = String(article?.h1 || article?.title || fallback || '').trim();
+  return value.replace(/\s*\|\s*FitPo50\s*$/i, '').trim();
+}
+
+function proposalComparisonText(value) {
+  return String(value || '').replace(/\s+/g, ' ').trim();
+}
+
+function proposalHasDifference(before = {}, after = {}, fields = []) {
+  return fields.some((field) => proposalComparisonText(before[field]) !== proposalComparisonText(after[field]));
+}
+
+function proposalReadyStatus(status) {
+  return ['READY_DRAFT', 'READY_TEXT', 'READY_LINK'].includes(String(status || ''));
+}
+
+function sourceParagraphHasLink(file, paragraph, targetFile) {
+  const html = readTextIfExists(path.join(ROOT, normalizeReportFile(file)));
+  const targetNeedle = `/${targetFile}`;
+  const escapedTarget = targetNeedle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return [...html.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)].some((match) => {
+    if (proposalComparisonText(stripTags(match[1])) !== proposalComparisonText(paragraph)) return false;
+    return new RegExp(`href=["'][^"']*${escapedTarget}(?:[#?"'])`, 'i').test(match[1]);
+  });
+}
+
+function buildLinkProposal(link, targetArticle, articleByFile) {
+  const sourceFile = normalizeReportFile(link?.from);
+  const targetFile = normalizeReportFile(targetArticle?.file || link?.to);
+  const sourceArticle = articleByFile?.get?.(sourceFile) || {};
+  const targetTitle = proposalDisplayTitle(targetArticle, link?.anchor || targetFile).replace(/[.!?]+$/g, '');
+  const relevant = proposalRelevantParagraph(proposalParagraphs(sourceFile, sourceArticle), targetTitle);
+  const targetTokens = proposalTokens(targetTitle);
+  const sourceNormalized = normalizeProposalText(relevant.text);
+  const targetTopicScore = targetTokens.reduce((sum, token) => sum + (proposalTokenMatches(sourceNormalized, token) ? 1 : 0), 0);
+  const sourceParagraph = relevant.text;
+  const href = `/${targetFile}`;
+  const alreadyPresent = sourceParagraphHasLink(sourceFile, sourceParagraph, targetFile);
+  return {
+    status: alreadyPresent
+      ? 'ALREADY_SATISFIED'
+      : (sourceParagraph && targetTitle && targetTopicScore > 0 ? 'READY_LINK' : 'MISSING_BASIS'),
+    change_type: 'INTERNAL_LINKING',
+    before: {
+      source_file: sourceFile || 'MISSING',
+      target_file: targetFile || 'MISSING',
+      paragraph: sourceParagraph || 'Brak odczytanego akapitu źródłowego.',
+    },
+    after: alreadyPresent
+      ? {
+        already_present: href,
+        action: 'Link już znajduje się we wskazanym akapicie; nie tworzyć ponownej operacji.',
+      }
+      : (sourceParagraph && targetTitle && targetTopicScore > 0
+      ? {
+        exact_text: `Zobacz także: <a href="${href}">${targetTitle}</a>.`,
+        insert_after: 'wskazany akapit, bez zmiany jego istniejących zdań',
+        target: href,
+      }
+      : {
+        missing_basis: targetTopicScore === 0
+          ? `Wskazany akapit źródłowy nie zawiera słów z tematu strony docelowej („${targetTitle}”); nie dodawać linku bez ręcznego potwierdzenia miejsca.`
+          : 'Nie udało się odczytać akapitu źródłowego albo tytułu strony docelowej; nie dodawać linku automatycznie.',
+      }),
+    basis: 'local_article_text_and_internal_link_map',
+  };
+}
+
+function buildContentProposal(card, article = {}) {
+  const query = approvalGscSnapshot(card).query;
+  const paragraphs = proposalParagraphs(article.file, article);
+  const currentLead = paragraphs[0] || '';
+  if (!query) {
+    return {
+      status: 'INSUFFICIENT_DATA',
+      change_type: 'CONTENT_ALIGNMENT',
+      before: {
+        title: String(article?.title || '').trim() || 'MISSING',
+        meta_description: String(article?.meta_description || '').trim() || 'MISSING',
+        lead: currentLead || 'MISSING',
+      },
+      after: {
+        missing_basis: 'GSC nie ujawnia frazy dla tego URL-a, a bez utraconej intencji nie da się bezpiecznie przygotować nowego tekstu.',
+      },
+      basis: 'missing_gsc_query',
+    };
+  }
+  const relevant = proposalRelevantParagraph(paragraphs, query);
+  if (!relevant.text || relevant.score === 0) {
+    return {
+      status: 'INSUFFICIENT_DATA',
+      change_type: 'CONTENT_ALIGNMENT',
+      before: {
+        title: String(article?.title || '').trim() || 'MISSING',
+        meta_description: String(article?.meta_description || '').trim() || 'MISSING',
+        lead: currentLead || 'MISSING',
+      },
+      after: {
+        missing_basis: `Artykuł nie zawiera lokalnego akapitu powiązanego z frazą „${query}”; potrzebna jest weryfikacja intencji, zanim powstanie tekst.`,
+      },
+      basis: 'query_not_supported_by_local_text',
+    };
+  }
+  const normalizedQuery = normalizeProposalText(query);
+  const normalizedRelevant = normalizeProposalText(relevant.text);
+  const queryIsMentioned = normalizedRelevant.includes(normalizedQuery)
+    || proposalTokens(query).every((token) => proposalTokenMatches(normalizedRelevant, token));
+  const action = queryIsMentioned
+    ? 'Użyj poniższego istniejącego akapitu jako bezpośredniej odpowiedzi pod właściwym H2; nie dopisuj nowych faktów.'
+    : `Dopasuj pierwszy akapit do frazy „${query}” wyłącznie przez wyeksponowanie istniejącego zdania poniżej; nie dopisuj nowych twierdzeń.`;
+  const before = {
+    title: String(article?.title || '').trim() || 'MISSING',
+    meta_description: String(article?.meta_description || '').trim() || 'MISSING',
+    lead: currentLead || 'MISSING',
+  };
+  const after = {
+    title: before.title,
+    meta_description: before.meta_description,
+    first_answer: relevant.text,
+    action,
+  };
+  const hasDifference = proposalHasDifference(before, {
+    title: after.title,
+    meta_description: after.meta_description,
+    lead: after.first_answer,
+  }, ['title', 'meta_description', 'lead']);
+  return {
+    status: hasDifference ? 'READY_TEXT' : 'ALREADY_SATISFIED',
+    change_type: 'CONTENT_ALIGNMENT',
+    before,
+    after,
+    basis: 'local_article_text_and_gsc_query',
+  };
+}
+
+function buildReadySeoProposal(card, article = {}, links = [], articleByFile) {
+  const currentTitle = String(article?.title || '').trim();
+  const currentMeta = String(article?.meta_description || '').trim();
+  const proposedTitle = cleanStrategyDraftValue(card?.proposed_title || '');
+  const proposedMeta = cleanStrategyDraftValue(card?.proposed_meta_description || '');
+  const link = links[0] || card?.internal_link_sources?.[0] || null;
+  const requiredChange = String(card?.required_action?.required_change || card?.tasks?.[0] || '').trim();
+  if (proposedTitle || proposedMeta) {
+    const before = { title: currentTitle || 'MISSING', meta_description: currentMeta || 'MISSING' };
+    const after = {
+      title: proposedTitle || currentTitle || 'MISSING',
+      meta_description: proposedMeta || currentMeta || 'MISSING',
+    };
+    return {
+      status: proposalHasDifference(before, after, ['title', 'meta_description']) ? 'READY_DRAFT' : 'ALREADY_SATISFIED',
+      change_type: 'TITLE_META_CTR',
+      before,
+      after,
+      basis: 'existing_content_strategy_draft',
+    };
+  }
+  if (link?.from && card?.file) {
+    const targetArticle = articleByFile?.get?.(normalizeReportFile(card.file)) || article;
+    const linkProposals = [link, ...links.slice(1)]
+      .filter((candidate, index, candidates) => candidates.findIndex((item) => item?.from === candidate?.from) === index)
+      .map((candidate) => buildLinkProposal(candidate, targetArticle, articleByFile));
+    return linkProposals.find((proposal) => proposal.status === 'READY_LINK') || linkProposals[0];
+  }
+  const contentProposal = buildContentProposal(card, { ...article, file: card?.file || article?.file });
+  if (contentProposal.status === 'INSUFFICIENT_DATA' && requiredChange
+    && !fs.existsSync(path.join(ROOT, normalizeReportFile(card?.file || article?.file)))) {
+    return {
+      status: 'MISSING_BASIS',
+      change_type: proposalActionType(card),
+      before: {
+        title: currentTitle || 'MISSING',
+        meta_description: currentMeta || 'MISSING',
+      },
+      after: {
+        action: requiredChange,
+        missing_basis: 'Nie znaleziono lokalnego pliku artykułu do odczytu; nie traktować tego jako gotowej propozycji tekstu.',
+      },
+      basis: 'existing_report_action_without_local_article',
+    };
+  }
+  return contentProposal;
+}
+
+function simpleSeoCardKey(item) {
+  return normalizeReportFile(item?.file || item?.path || item?.url);
+}
+
+function simpleSeoPriorityValue(item) {
+  const gain = Number(item?.estimated_click_gain?.clicks_28d
+    ?? item?.estimated_traffic_gain?.estimated_monthly_click_gain);
+  if (Number.isFinite(gain)) return gain;
+  const rank = Number(item?.shared_priority_rank || 0);
+  return rank > 0 ? -rank : 0;
+}
+
+function simpleSeoRemainingBucket(item, articleByFile) {
+  const file = simpleSeoCardKey(item);
+  if (isRecentlyTouched(file, articleByFile, SIMPLE_SEO_FRESH_DAYS)) return 'ŚWIEŻE';
+  const gsc = approvalGscSnapshot(item);
+  const diagnosis = String(item?.diagnosis || item?.type || '');
+  if ((gsc.position > 0 && gsc.position <= 3 && gsc.clicks > 0)
+    || ['VISIBLE_CLICKING', 'P2_SCALE_WINNER', 'LEADER_WINNER'].includes(diagnosis)) return 'DZIAŁA';
+  return 'NISKI SYGNAŁ';
+}
+
+function simpleSeoRemainingReason(item, bucket) {
+  if (bucket === 'DZIAŁA') return 'Stabilna widoczność lub ruch — nie ruszać bez nowego sygnału.';
+  if (bucket === 'ŚWIEŻE') return 'Świeża publikacja albo zmiana — czekamy na stabilne dane GSC.';
+  const diagnosis = String(item?.diagnosis || item?.type || '');
+  if (/CRAWLED_NOT_INDEXED|DISCOVERED_NOT_INDEXED|UNKNOWN_TO_GOOGLE|ZERO_VISIBILITY/.test(diagnosis)) {
+    return 'Najpierw wyjaśnić indeksację/canonical; bez zmiany treści do czasu potwierdzenia widoczności.';
+  }
+  const gsc = approvalGscSnapshot(item);
+  if (gsc.impressions > 0) return 'Ma sygnał GSC, ale jest poza pierwszą 15; wrócić po zakończeniu głównej i drugiej grupy.';
+  const required = String(item?.required_action?.required_change || '').trim();
+  if (required) return required;
+  return 'Brak wystarczającego sygnału GSC do bezpiecznej zmiany.';
+}
+
+function normalizeSimpleSeoSelection(value) {
+  return String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/ł/g, 'l')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function simpleSeoSelectionReady(item) {
+  if (typeof item?.ready_for_deploy === 'boolean') return item.ready_for_deploy;
+  return !['ALREADY_SATISFIED', 'INSUFFICIENT_DATA', 'MISSING_BASIS'].includes(String(item?.ready_proposal?.status || ''));
+}
+
+function resolveSimpleSeoSelection(summary, request) {
+  const main = Array.isArray(summary?.main) ? summary.main : [];
+  const secondary = Array.isArray(summary?.secondary) ? summary.secondary : [];
+  const groups = { glowna: main, druga: secondary };
+  const normalized = normalizeSimpleSeoSelection(request);
+  const showDetails = normalized.startsWith('pokaz szczegoly') || normalized.startsWith('pokaż szczegóły');
+  let selected = [];
+  if (/^popraw grupe glowna$/.test(normalized)) selected = main;
+  else if (/^popraw druga grupe$/.test(normalized)) selected = secondary;
+  else {
+    const requestedCards = [...normalized.matchAll(/\b(glowna|druga)\s+(\d+)\b/g)];
+    selected = requestedCards
+      .map((match) => groups[match[1]]?.[Number(match[2]) - 1])
+      .filter(Boolean);
+    if (!requestedCards.length) {
+      return {
+        status: 'INVALID_SELECTION',
+        reason: 'Nie rozpoznano grupy ani karty. Użyj „popraw grupę główną”, „popraw drugą grupę” albo np. „popraw GŁÓWNA 1, DRUGA 4”.',
+      };
+    }
+    if (selected.length !== requestedCards.length) {
+      return {
+        status: 'INVALID_SELECTION',
+        reason: 'Jedna z podanych kart nie istnieje w bieżącym raporcie; nie tworzę częściowej zgody.',
+      };
+    }
+  }
+  const unique = [...new Map(selected.map((item) => [item.id || item.simple_id, item])).values()];
+  const skipped = unique.filter((item) => !simpleSeoSelectionReady(item));
+  const actionable = showDetails ? unique : unique.filter((item) => simpleSeoSelectionReady(item));
+  if (!showDetails && !actionable.length) {
+    return {
+      status: 'NOT_READY',
+      action: 'APPROVE_IDS',
+      request,
+      ids: [],
+      files: [],
+      skipped: skipped.map((item) => ({
+        simple_id: item.simple_id,
+        id: item.id,
+        file: item.file,
+        status: item.ready_proposal?.status || 'NOT_READY',
+      })),
+      reason: 'Wybrane karty nie mają rzeczywistej zmiany BYŁO → BĘDZIE; nie tworzę pustego manifestu.',
+    };
+  }
+  return {
+    status: skipped.length && !showDetails ? 'OK_WITH_SKIPPED' : 'OK',
+    action: showDetails ? 'SHOW_DETAILS' : 'APPROVE_IDS',
+    request,
+    simple_ids: actionable.map((item) => item.simple_id).filter(Boolean),
+    ids: actionable.map((item) => item.id).filter(Boolean),
+    files: actionable.map((item) => item.file).filter(Boolean),
+    skipped: skipped.map((item) => ({
+      simple_id: item.simple_id,
+      id: item.id,
+      file: item.file,
+      status: item.ready_proposal?.status || 'NOT_READY',
+    })),
+  };
+}
+
+function buildSimpleSeoSelectionContract(summary) {
+  const main = Array.isArray(summary?.main) ? summary.main : [];
+  const secondary = Array.isArray(summary?.secondary) ? summary.secondary : [];
+  return {
+    version: 1,
+    status: 'AWAITING_USER_APPROVAL',
+    commands: {
+      main_group: {
+        phrase: 'popraw grupę główną',
+        simple_ids: main.map((item) => item.simple_id).filter(Boolean),
+        ids: main.map((item) => item.id).filter(Boolean),
+        ready_ids: main.filter(simpleSeoSelectionReady).map((item) => item.id).filter(Boolean),
+        skipped: main.filter((item) => !simpleSeoSelectionReady(item)).map((item) => ({
+          id: item.id,
+          simple_id: item.simple_id,
+          file: item.file,
+          status: item.ready_proposal?.status || 'NOT_READY',
+        })),
+      },
+      secondary_group: {
+        phrase: 'popraw drugą grupę',
+        simple_ids: secondary.map((item) => item.simple_id).filter(Boolean),
+        ids: secondary.map((item) => item.id).filter(Boolean),
+        ready_ids: secondary.filter(simpleSeoSelectionReady).map((item) => item.id).filter(Boolean),
+        skipped: secondary.filter((item) => !simpleSeoSelectionReady(item)).map((item) => ({
+          id: item.id,
+          simple_id: item.simple_id,
+          file: item.file,
+          status: item.ready_proposal?.status || 'NOT_READY',
+        })),
+      },
+    },
+    examples: [
+      'popraw grupę główną',
+      'popraw drugą grupę',
+      'popraw GŁÓWNA 1, GŁÓWNA 3 i DRUGA 4',
+      'pokaż szczegóły GŁÓWNA 2',
+    ],
+    rule: 'Alias grupy rozwija się do konkretnych ID bieżącego raportu; karty bez realnej różnicy są jawnie pomijane, a przekazanie ID do następnego etapu nie tworzy zgody na commit, push, deploy ani IndexNow.',
+  };
+}
+
+function buildSimpleSeoSummary(approvalWave, articleByFile, fullCoverageReport = {}) {
+  const ranked = [
+    ...(approvalWave?.boost || []),
+    ...(approvalWave?.promising || []),
+    ...(approvalWave?.repair || []),
+  ].filter((item) => simpleSeoCardKey(item));
+  const unique = [];
+  const seen = new Set();
+  for (const item of ranked.sort((a, b) => simpleSeoPriorityValue(b) - simpleSeoPriorityValue(a) || simpleSeoCardKey(a).localeCompare(simpleSeoCardKey(b)))) {
+    const key = simpleSeoCardKey(item);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(item);
+  }
+  const main = unique.slice(0, SIMPLE_SEO_MAIN_SIZE);
+  const secondary = unique.slice(SIMPLE_SEO_MAIN_SIZE, SIMPLE_SEO_MAIN_SIZE + SIMPLE_SEO_SECONDARY_SIZE);
+  const selected = new Set([...main, ...secondary].map(simpleSeoCardKey));
+  const allArticles = (Array.isArray(fullCoverageReport?.priority_map) ? fullCoverageReport.priority_map : [])
+    .filter((item) => item?.type === 'article')
+    .map((item) => ({ ...item, file: simpleSeoCardKey(item) }))
+    .filter((item) => item.file && !selected.has(item.file));
+  const remaining = { DZIAŁA: [], ŚWIEŻE: [], 'NISKI SYGNAŁ': [] };
+  for (const item of allArticles) {
+    const bucket = simpleSeoRemainingBucket(item, articleByFile);
+    remaining[bucket].push({
+      file: item.file,
+      url: item.url || `${SITE_ORIGIN}/${item.file}`,
+      reason: simpleSeoRemainingReason(item, bucket),
+      diagnosis: item.diagnosis || item.type || 'UNCLASSIFIED',
+    });
+  }
+  const summary = {
+    version: 1,
+    status: 'AWAITING_USER_APPROVAL',
+    main_group_size: main.length,
+    secondary_group_size: secondary.length,
+    main: main.map((item, index) => ({ ...item, simple_id: `GŁÓWNA ${index + 1}` })),
+    secondary: secondary.map((item, index) => ({ ...item, simple_id: `DRUGA ${index + 1}` })),
+    remaining,
+    rules: {
+      rules_version: SIMPLE_SEO_RULES_VERSION,
+      main_limit: SIMPLE_SEO_MAIN_SIZE,
+      secondary_limit: SIMPLE_SEO_SECONDARY_SIZE,
+      fresh_days: SIMPLE_SEO_FRESH_DAYS,
+      hard_result_after_days: 28,
+      early_checkpoints_days: [7, 14],
+      verdict_statuses: ['WIN', 'PROMISING', 'NEUTRAL', 'REGRESSION', 'NO_DATA'],
+    },
+  };
+  summary.selection = buildSimpleSeoSelectionContract(summary);
+  return summary;
 }
 
 function approvalCardKey(card) {
@@ -1543,6 +1994,53 @@ function metricDelta(baseline, current) {
   };
 }
 
+function kpiDirection(delta) {
+  if (!delta) return 'OCZEKIWANIE';
+  const positive = delta.clicks > 0 || delta.impressions > 0 || delta.position_improvement > 0;
+  const negative = delta.clicks < 0 && delta.impressions < 0 && delta.position_improvement < 0;
+  if (positive) return 'WZROST';
+  if (negative) return 'SPADEK';
+  return 'BEZ_WYRAZNEJ_ZMIANY';
+}
+
+function buildKpiVerdict(baseline, current, ageDays) {
+  const delta = metricDelta(baseline || {}, current || {});
+  const preview = {
+    day_7: ageDays >= 7 ? { status: 'PREVIEW', direction: kpiDirection(delta) } : { status: 'WAITING', direction: 'OCZEKIWANIE' },
+    day_14: ageDays >= 14 ? { status: 'PREVIEW', direction: kpiDirection(delta) } : { status: 'WAITING', direction: 'OCZEKIWANIE' },
+  };
+  if (ageDays === null || ageDays < 28) {
+    return {
+      status: 'WAITING_28_DAYS',
+      hard_verdict: false,
+      preview,
+      delta,
+      rule: '7/14 dni pokazuje wyłącznie kierunek; twardy werdykt dopiero po 28 dniach.',
+    };
+  }
+  const baselineImpressions = Number(baseline?.impressions || 0);
+  const currentImpressions = Number(current?.impressions || 0);
+  if (baselineImpressions + currentImpressions < 30) {
+    return {
+      status: 'NO_DATA',
+      hard_verdict: true,
+      preview,
+      delta,
+      rule: 'Po 28 dniach próba nadal jest zbyt mała do bezpiecznego werdyktu.',
+    };
+  }
+  const regression = delta.clicks < 0 && delta.impressions < 0 && delta.position_improvement < 0;
+  const win = delta.clicks > 0 || (delta.impressions > 0 && delta.position_improvement >= 0);
+  const promising = !win && (delta.impressions > 0 || delta.position_improvement > 0 || delta.clicks > 0);
+  return {
+    status: regression ? 'REGRESSION' : win ? 'WIN' : promising ? 'PROMISING' : 'NEUTRAL',
+    hard_verdict: true,
+    preview,
+    delta,
+    rule: 'Werdykt 28-dniowy opiera się na zmianie kliknięć, wyświetleń i pozycji względem baseline.',
+  };
+}
+
 function buildDeltaCheckpoint(day, ageDays, checkpointDate, baseline, current) {
   if (ageDays < day) return { status: 'WAITING', date: checkpointDate, delta: null };
   return {
@@ -1608,6 +2106,7 @@ function buildSeoWorkHistory(articles, generatedAt, previousHistory, sourceWindo
           day_14: buildDeltaCheckpoint(14, ageDays, checkpoints?.day_14, baseline, current),
           day_28: buildDeltaCheckpoint(28, ageDays, checkpoints?.day_28, baseline, current),
         },
+        kpi_verdict: buildKpiVerdict(baseline, current, ageDays),
         change_detected_this_run: changeDetected,
         change_events: changeEvents.slice(-24),
         cooldown_until: modified ? addDays(modified, 14) : null,
@@ -1620,6 +2119,7 @@ function buildSeoWorkHistory(articles, generatedAt, previousHistory, sourceWindo
     .sort((a, b) => a.age_days - b.age_days);
 
   return {
+    rules_version: SIMPLE_SEO_RULES_VERSION,
     generated_at: generatedAt,
     purpose: 'Trwała pamięć każdego URL-a: baseline, zmiany dateModified, snapshoty oraz checkpointy 7/14/28 dni.',
     cooldown_days: 14,
@@ -2030,6 +2530,7 @@ function buildUnifiedInsights() {
     || readJsonIfExists(path.join(REPORT_DIR, 'popraw-seo-kanibalizacja.json'));
   const generatedAt = nowWarsawIso();
   const approvalWave = buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindowDays, fullCoverageReport);
+  const simpleSeoSummary = buildSimpleSeoSummary(approvalWave, articleByFile, fullCoverageReport);
   const historyArticles = (fullCoverageReport?.priority_map || [])
     .filter((item) => item?.type === 'article')
     .map((item) => {
@@ -2174,6 +2675,7 @@ function buildUnifiedInsights() {
       core_support: firstCardsByType(cards, ['P2_CORE_SUPPORT_LINKING'], 8),
     },
     approval_wave: approvalWave,
+    simple_seo_summary: simpleSeoSummary,
     broad_seo_conclusions: broadSeoConclusions,
     seo_work_history: seoWorkHistory,
     gsc_after_change_queue: afterChangeGscQueue,
@@ -2891,6 +3393,11 @@ function buildPostDeploymentKpiPlan() {
           ai_clicks: Number(ai?.clicks || 0),
         },
         checkpoints: buildKpiCheckpoints(article.date_modified),
+        verdict: {
+          status: 'WAITING_FOR_POST_DEPLOY_DATA',
+          hard_verdict: false,
+          rule: 'Baseline nie jest werdyktem; po zmianie potrzebny jest nowy odczyt GSC w checkpointach 7/14/28.',
+        },
         metrics_to_collect: [
           'GSC Web: clicks, impressions, CTR, average position, query changes',
           'GSC Generative AI: impressions by page, country, device, feature, if report is available',
@@ -2904,6 +3411,12 @@ function buildPostDeploymentKpiPlan() {
     generated_at: nowWarsawIso(),
     status: 'TRACK_7_14_28',
     ai_report_status: generativeAi.status,
+    verdict_rules: {
+      rules_version: SIMPLE_SEO_RULES_VERSION,
+      preview_days: [7, 14],
+      hard_verdict_day: 28,
+      statuses: ['WIN', 'PROMISING', 'NEUTRAL', 'REGRESSION', 'NO_DATA'],
+    },
     candidates,
   };
   writeJson(path.join(REPORT_DIR, 'post-deploy-kpi-plan.json'), report);
@@ -2935,6 +3448,7 @@ function writePostDeploymentKpiMarkdown(report, file) {
     lines.push(`- baseline Web: impr ${item.baseline.impressions}, klik ${item.baseline.clicks}, CTR ${item.baseline.ctr}%, poz ${item.baseline.position}`);
     lines.push(`- baseline AI: impressions ${item.baseline.ai_impressions}, clicks ${item.baseline.ai_clicks}`);
     lines.push(`- checkpointy: ${item.checkpoints ? Object.values(item.checkpoints).join(' / ') : 'brak dateModified'}`);
+    lines.push(`- werdykt: ${item.verdict?.status || 'NO_DATA'}; 7/14 dni: ${item.verdict?.preview?.day_7?.direction || 'OCZEKIWANIE'} / ${item.verdict?.preview?.day_14?.direction || 'OCZEKIWANIE'}`);
     lines.push(`- decyzja po 28 dniach: ${item.decision_after_28_days}`);
     lines.push('');
   });
@@ -3214,14 +3728,16 @@ function buildPoprawSeo() {
       'Zbudowano kolejkę Perplexity Monitor.',
       'Zbudowano plan autopilota bez zapisu w artykułach.',
       'Połączono raporty GSC/SEO/AEO/GEO/AIO i wyciągnięto kluczowe wnioski.',
+      'Utworzono prosty widok decyzyjny: GŁÓWNA 5, DRUGA 10, DZIAŁA, ŚWIEŻE i NISKI SYGNAŁ.',
       'Uwzględniono zewnętrzny raport GSC content strategy, jeśli istnieje w data/reports/local/gsc-current albo pod GSC_CONTENT_STRATEGY_REPORT.',
       'Zbudowano paczkę do zatwierdzenia: BOOST dla stron blisko wzrostu, NAPRAWA dla stron słabych lub bez widoczności oraz ROKUJE dla stron z potencjałem po liderach.',
       'Utworzono pełny koszyk MONITORING dla URL-i w cooldownie i działających stron, których nie należy teraz przepisywać.',
     ],
     unified_insights: unifiedInsights,
     approval_wave: unifiedInsights.approval_wave,
+    simple_seo_summary: unifiedInsights.simple_seo_summary,
     chosen_articles: autopilot.chosen_articles,
-    approval_needed: 'Zatwierdź konkretne ID, np. popraw BOOST 1, popraw ROKUJE 1 albo popraw BOOST 1 NAPRAWA 2. Fala ROKUJE ma zawsze 3 pozycje według zysku i 2 rotacyjne spoza top 20; model pilotażu 4 / 20 jest wyłącznie historyczny. Agent przygotuje konkretne teksty i niezmienny manifest patchy, zastosuje go atomowo i zwaliduje, po czym zaraportuje wynik. Commit, push, deploy i IndexNow wymagają osobnego „tak” użytkownika w czacie po tym raporcie; akceptacja ID ani raportu nie są taką zgodą.',
+    approval_needed: 'Możesz napisać „popraw grupę główną”, „popraw drugą grupę” albo wskazać karty, np. „popraw GŁÓWNA 1, GŁÓWNA 3 i DRUGA 4”. System rozwinie alias do konkretnych ID bieżącego raportu i przekaże je do następnego etapu przygotowania manifestu. Commit, push, deploy i IndexNow wymagają osobnego „tak” użytkownika w czacie po raporcie; akceptacja grupy ani raportu nie są taką zgodą.',
     safe_next_commands: [
       'npm run popraw-seo',
       'Po akceptacji ID: manifest -> popraw-seo:apply -> walidacja -> raport -> osobne „tak” użytkownika -> commit/push/deploy; IndexNow tylko po osobnym „tak”.',
@@ -3245,6 +3761,7 @@ function buildPoprawSeo() {
       ['llms_check', 'llms-check.md'],
       ['perplexity_monitor', 'perplexity-monitor.md'],
       ['autopilot_plan', 'autopilot-plan.md'],
+      ['simple_decision_sheet', 'popraw-seo-prosty.md'],
       ['decision_sheet', 'popraw-seo-decyzje.md'],
       ['unified_insights', 'popraw-seo-insights.md'],
       ['promising_pages', 'popraw-seo-rokuje.md'],
@@ -3304,6 +3821,7 @@ function buildPoprawSeo() {
   writeSeoState('popraw-seo-kanibalizacja.json', unifiedInsights.cannibalization_map);
   writeCannibalizationMarkdown(unifiedInsights.cannibalization_map, path.join(REPORT_DIR, 'popraw-seo-kanibalizacja.md'));
   writeJson(path.join(REPORT_DIR, 'popraw-seo.json'), command);
+  writeSimpleSeoDecisionMarkdown(command.simple_seo_summary, command.generated_at, path.join(REPORT_DIR, 'popraw-seo-prosty.md'));
   writePoprawSeoMarkdown(command, path.join(REPORT_DIR, 'popraw-seo.md'));
   writePoprawSeoDecisionMarkdown(command, path.join(REPORT_DIR, 'popraw-seo-decyzje.md'));
   return command;
@@ -3473,10 +3991,81 @@ function writePoprawSeoDecisionMarkdown(command, file) {
   writeText(file, lines.join('\n'));
 }
 
+function appendSimpleSeoCardMarkdown(lines, item) {
+  const proposal = item.ready_proposal || {};
+  lines.push(`### ${item.simple_id || item.id}: ${item.file}`);
+  lines.push(`- URL: ${item.url}`);
+  lines.push(`- GSC: query "${item.gsc?.query || 'brak ujawnionej frazy'}"; wyświetlenia ${item.gsc?.impressions || 0}; kliknięcia ${item.gsc?.clicks || 0}; CTR ${item.gsc?.ctr || 0}%; pozycja ${item.gsc?.position || 0}`);
+  lines.push(`- powód wyboru: ${item.reason || item.required_action?.required_change || item.diagnosis || 'brak opisu'}`);
+  lines.push(`- propozycja (${proposal.change_type || 'EDITORIAL_REVIEW'}, ${proposal.status || 'INSUFFICIENT_DATA'}):`);
+  lines.push(`  - BYŁO: ${typeof proposal.before === 'string' ? proposal.before : JSON.stringify(proposal.before || {})}`);
+  lines.push(`  - BĘDZIE: ${typeof proposal.after === 'string' ? proposal.after : JSON.stringify(proposal.after || {})}`);
+  lines.push(`- gotowe do wdrożenia: ${item.ready_for_deploy ? 'TAK' : 'NIE'}`);
+  lines.push(`- podstawa: ${proposal.basis || 'insufficient_data'}`);
+  lines.push('');
+}
+
+function appendSimpleSeoSummaryMarkdown(lines, summary) {
+  if (!summary) return;
+  lines.push('## Prosty Widok Decyzyjny');
+  lines.push(`- GŁÓWNA: ${summary.main_group_size || 0} artykułów; DRUGA: ${summary.secondary_group_size || 0} artykułów.`);
+  lines.push('- Karta jest gotowa do wdrożenia tylko wtedy, gdy BYŁO i BĘDZIE różnią się rzeczywiście. `ALREADY_SATISFIED` oznacza brak zmiany i nie tworzy patcha.');
+  if (summary.selection?.commands) {
+    lines.push('');
+    lines.push('### Proste polecenia zatwierdzające');
+    lines.push(`- \`popraw grupę główną\` → ${summary.selection.commands.main_group.ids.join(', ') || 'brak ID'}`);
+    lines.push(`- \`popraw drugą grupę\` → ${summary.selection.commands.secondary_group.ids.join(', ') || 'brak ID'}`);
+    lines.push(`- gotowe ID głównej: ${summary.selection.commands.main_group.ready_ids.join(', ') || 'brak'}`);
+    lines.push(`- pominięte ID głównej: ${summary.selection.commands.main_group.skipped.map((item) => `${item.id} (${item.status})`).join(', ') || 'brak'}`);
+    lines.push(`- gotowe ID drugiej: ${summary.selection.commands.secondary_group.ready_ids.join(', ') || 'brak'}`);
+    lines.push(`- pominięte ID drugiej: ${summary.selection.commands.secondary_group.skipped.map((item) => `${item.id} (${item.status})`).join(', ') || 'brak'}`);
+    lines.push('- Dla wybranych kart: `popraw GŁÓWNA 1, GŁÓWNA 3 i DRUGA 4`.');
+    lines.push('- Sam alias grupy rozwija się tylko do ID raportu i przekazuje wybór do następnego etapu; nie oznacza zgody na commit, push, deploy ani IndexNow.');
+  }
+  lines.push('');
+  lines.push('### GŁÓWNA 5');
+  if (summary.main?.length) summary.main.forEach((item) => appendSimpleSeoCardMarkdown(lines, item));
+  else lines.push('- Brak kandydatów z wystarczającą podstawą GSC.\n');
+  lines.push('### DRUGA 10');
+  if (summary.secondary?.length) summary.secondary.forEach((item) => appendSimpleSeoCardMarkdown(lines, item));
+  else lines.push('- Brak kolejnych kandydatów z wystarczającą podstawą GSC.\n');
+  lines.push('### Pozostałe artykuły');
+  for (const bucket of ['DZIAŁA', 'ŚWIEŻE', 'NISKI SYGNAŁ']) {
+    const items = summary.remaining?.[bucket] || [];
+    lines.push(`#### ${bucket} (${items.length})`);
+    if (!items.length) {
+      lines.push('- brak');
+      continue;
+    }
+    items.forEach((item) => lines.push(`- ${item.file} — ${item.reason}`));
+  }
+  lines.push('');
+}
+
+function writeSimpleSeoDecisionMarkdown(summary, generatedAt, file) {
+  const lines = [
+    '# Popraw SEO — Prosty Raport Decyzyjny',
+    '',
+    `Wygenerowano: ${generatedAt}`,
+    '',
+    'Status: AWAITING_USER_APPROVAL',
+    '',
+    'To jest skrócony raport dla osoby prowadzącej portal. Szczegóły techniczne pozostają w pozostałych raportach growth.',
+    '',
+  ];
+  appendSimpleSeoSummaryMarkdown(lines, summary);
+  lines.push('## Następny krok');
+  lines.push('- Napisz `popraw grupę główną`, `popraw drugą grupę` albo wskaż konkretne gotowe ID.');
+  lines.push('- Karty oznaczone `ALREADY_SATISFIED`, `INSUFFICIENT_DATA` albo `MISSING_BASIS` nie tworzą patcha.');
+  lines.push('- Commit, push, deploy i IndexNow wymagają osobnej zgody.');
+  writeText(file, lines.join('\n'));
+}
+
 function writePoprawSeoMarkdown(command, file) {
   const lines = ['# Popraw SEO — Plan Do Zatwierdzenia', '', `Wygenerowano: ${command.generated_at}`, '', `Status: ${command.status}`, ''];
   const insights = command.unified_insights || {};
   const approval = command.approval_wave || insights.approval_wave || {};
+  appendSimpleSeoSummaryMarkdown(lines, command.simple_seo_summary || insights.simple_seo_summary);
   if (Array.isArray(insights.ignored_today) && insights.ignored_today.length) {
     lines.push(`Pominięte dziś: ${insights.ignored_today.join(', ')}`);
     lines.push('');
@@ -3749,6 +4338,7 @@ function writeSeoWorkHistoryMarkdown(history, file) {
     lines.push(`   - dataModified: ${item.date_modified}; wiek: ${item.age_days} dni; status: ${item.status}`);
     lines.push(`   - baseline: impr ${item.baseline.impressions}; klik ${item.baseline.clicks}; CTR ${item.baseline.ctr}%; poz ${item.baseline.position}`);
     lines.push(`   - obecnie: impr ${item.current.impressions}; klik ${item.current.clicks}; CTR ${item.current.ctr}%; poz ${item.current.position}`);
+    lines.push(`   - werdykt KPI: ${item.kpi_verdict?.status || 'NO_DATA'}; 7/14 dni: ${item.kpi_verdict?.preview?.day_7?.direction || 'OCZEKIWANIE'} / ${item.kpi_verdict?.preview?.day_14?.direction || 'OCZEKIWANIE'}; twardy wynik po 28 dniach`);
     lines.push(`   - checkpointy: ${item.checkpoints ? Object.values(item.checkpoints).join(' / ') : 'brak dateModified'}`);
     for (const [label, checkpoint] of Object.entries(item.delta_tracker || {})) {
       if (checkpoint.status !== 'READY') {
@@ -4276,6 +4866,9 @@ module.exports = {
   buildCannibalizationMap,
   buildGscAfterChangeQueue,
   buildSeoApprovalWave,
+  buildSimpleSeoSummary,
+  resolveSimpleSeoSelection,
+  buildKpiVerdict,
   buildSeoWorkHistory,
   deploymentEvidenceForArticle,
   estimatedTrafficGain,

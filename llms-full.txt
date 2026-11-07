@@ -2,7 +2,7 @@
 
 source: https://fitpo50.pl/
 language: pl-PL
-generated_at: 2026-11-06T08:30:00.000Z
+generated_at: 2026-11-07T22:01:17.000Z
 articles_count: 115
 
 ## Otyłość sarkopeniczna: mięśnie, tłuszcz i diagnoza
@@ -1168,6 +1168,8 @@ Opis: Niedojadanie po 50-tce może pogarszać regenerację i utrudniać ochronę
 ## Szybka odpowiedź
 
 „Jedz więcej” nie jest dobrą radą dla każdego. Problemem jest zbyt mała podaż energii lub białka względem potrzeb, zwłaszcza przy chudnięciu, chorobie i treningu. U zdrowych starszych osób często rozważa się 1,0–1,2 g białka/kg masy ciała, ale choroba nerek i inne schorzenia wymagają indywidualnego planu.
+
+Zobacz także: Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie.
 
 ## Kluczowe wnioski
 
@@ -3007,6 +3009,8 @@ Po 50-tce tłuszcz trzewny otacza narządy jamy brzusznej i jest silniej związa
 Tkanka podskórna leży pod skórą, a trzewna w jamie brzusznej wokół narządów. Ilość tłuszczu trzewnego ocenia się najdokładniej metodami obrazowymi używanymi w badaniach, natomiast w domu można śledzić obwód pasa w tych samych warunkach.
 
  Tkanka podskórna leży pod skórą, a trzewna w jamie brzusznej wokół narządów. Sam wygląd nie rozstrzyga ryzyka. Wynik warto łączyć z ciśnieniem, glukozą i lipidami, które omawia przewodnik badań po 50-tce.
+
+Zobacz także: ApoB/ApoA1 po 50-tce: jak czytać wynik i ocenić ryzyko serca.
 
 ## Jak prawidłowo mierzyć obwód pasa?
 

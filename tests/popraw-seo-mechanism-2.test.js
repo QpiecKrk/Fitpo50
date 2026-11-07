@@ -6,7 +6,10 @@ const path = require('node:path');
 const {
   buildCannibalizationMap,
   buildGscAfterChangeQueue,
+  buildKpiVerdict,
   buildSeoApprovalWave,
+  buildSimpleSeoSummary,
+  resolveSimpleSeoSelection,
   buildSeoWorkHistory,
 } = require('../scripts/growth-tool');
 const { classifyPriority } = require('../scripts/gsc-priority-map');
@@ -181,6 +184,154 @@ test('MECHANIZM 2 ranks ROKUJE deterministically for the 3 plus 2 wave contract'
   assert.equal(wave.promising[0].file, 'rokuje-26.html');
   assert.equal(wave.promising[3].file, 'rokuje-23.html');
   assert.equal(wave.promising[23].file, 'rokuje-03.html');
+});
+
+test('prosty raport wybiera GŁÓWNA 5, DRUGA 10 i podaje powód dla pozostałych', () => {
+  const items = Array.from({ length: 20 }, (_, index) => article(
+    `summary-${String(index + 1).padStart(2, '0')}.html`,
+    'CTR_GAP_TOP10',
+    { query: `temat ${index + 1}`, clicks: index + 1, impressions: 500 - index * 10, ctr: 1, position: 8 },
+  ));
+  const articleByFile = new Map(items.map((item) => [item.path, {
+    title: `Tytuł ${item.path}`,
+    meta_description: `Opis ${item.path}`,
+    paragraphs: [`Odpowiedź dla ${item.keywords.primary} — konkretna informacja dla czytelnika.`],
+    date_modified: '2026-01-01T08:00:00+01:00',
+  }]));
+  const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: items });
+  const summary = buildSimpleSeoSummary(wave, articleByFile, { priority_map: items });
+
+  assert.equal(summary.main_group_size, 5);
+  assert.equal(summary.secondary_group_size, 10);
+  assert.equal(summary.main.length, 5);
+  assert.equal(summary.secondary.length, 10);
+  assert.ok([...summary.main, ...summary.secondary].every((item) => item.ready_proposal?.status !== 'INSUFFICIENT_DATA'));
+  assert.equal(summary.remaining['NISKI SYGNAŁ'].length, 5);
+  assert.ok(summary.remaining['NISKI SYGNAŁ'].every((item) => item.reason));
+});
+
+test('prosty raport oznacza kartę bez różnicy BYŁO/BĘDZIE jako już spełnioną', () => {
+  const file = 'sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html';
+  const item = article(file, 'POSITION_11_30', {
+    query: 'sakady',
+    clicks: 1,
+    impressions: 80,
+    ctr: 1.25,
+    position: 15,
+  });
+  const articleByFile = new Map([[file, {
+    file,
+    title: 'Sakady i supresja sakadyczna: jak widzi mózg | FitPo50',
+    meta_description: 'Sakady szybko przenoszą wzrok, a supresja sakadyczna ogranicza część informacji podczas ruchu oczu. Poznaj mechanizm oraz objawy wymagające pilnej kontroli.',
+    paragraphs: ['Sakady to szybkie ruchy oczu przenoszące punkt spojrzenia. W ich pobliżu czułość wzrokowa na część bodźców spada, co nazywa się supresją sakadyczną.'],
+    date_modified: '2026-01-01T08:00:00+01:00',
+  }]]);
+  const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: [item] });
+  const summary = buildSimpleSeoSummary(wave, articleByFile, { priority_map: [item] });
+  const proposal = summary.main[0].ready_proposal;
+
+  assert.equal(proposal.status, 'ALREADY_SATISFIED');
+  assert.equal(summary.main[0].ready_for_deploy, false);
+  assert.match(proposal.after.first_answer, /Sakady to szybkie ruchy oczu/);
+});
+
+test('prosty raport pozostawia READY_TEXT tylko przy rzeczywistej różnicy akapitu', () => {
+  const file = 'sakady-different.html';
+  const item = article(file, 'POSITION_11_30', {
+    query: 'sakady',
+    clicks: 1,
+    impressions: 80,
+    ctr: 1.25,
+    position: 15,
+  });
+  const articleByFile = new Map([[file, {
+    file,
+    title: 'Sakady: jak widzi mózg | FitPo50',
+    meta_description: 'Opis o sakadach.',
+    paragraphs: ['Wstęp bez odpowiedzi na frazę.', 'Sakady to szybkie ruchy oczu przenoszące punkt spojrzenia.'],
+    date_modified: '2026-01-01T08:00:00+01:00',
+  }]]);
+  const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: [item] });
+  const summary = buildSimpleSeoSummary(wave, articleByFile, { priority_map: [item] });
+  const proposal = summary.main[0].ready_proposal;
+
+  assert.equal(proposal.status, 'READY_TEXT');
+  assert.equal(summary.main[0].ready_for_deploy, true);
+  assert.match(proposal.after.first_answer, /Sakady to szybkie ruchy oczu/);
+});
+
+test('prosty raport rozwija polecenia grupowe do bieżących ID bez częściowej zgody', () => {
+  const items = Array.from({ length: 16 }, (_, index) => article(
+    `selection-${String(index + 1).padStart(2, '0')}.html`,
+    'POSITION_11_30',
+    { query: `temat ${index + 1}`, clicks: index + 1, impressions: 500 - index * 10, ctr: 1, position: 8 },
+  ));
+  const articleByFile = new Map(items.map((item) => [item.path, {
+    title: `Tytuł ${item.path}`,
+    meta_description: `Opis ${item.path}`,
+    paragraphs: ['Wstęp ogólny bez bezpośredniej odpowiedzi.', `Odpowiedź dla ${item.gsc.query} — konkretna informacja dla czytelnika.`],
+    date_modified: '2026-01-01T08:00:00+01:00',
+  }]));
+  const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: items });
+  const summary = buildSimpleSeoSummary(wave, articleByFile, { priority_map: items });
+  const main = resolveSimpleSeoSelection(summary, 'popraw grupę główną');
+  const selected = resolveSimpleSeoSelection(summary, 'popraw GŁÓWNA 1, GŁÓWNA 3 i DRUGA 4');
+  const invalid = resolveSimpleSeoSelection(summary, 'popraw GŁÓWNA 99, DRUGA 1');
+
+  assert.equal(main.status, 'OK');
+  assert.equal(main.action, 'APPROVE_IDS');
+  assert.equal(main.ids.length, 5);
+  assert.equal(selected.status, 'OK');
+  assert.equal(selected.ids.length, 3);
+  assert.equal(invalid.status, 'INVALID_SELECTION');
+});
+
+test('polecenie grupowe jawnie pomija karty bez realnej zmiany', () => {
+  const items = Array.from({ length: 5 }, (_, index) => article(
+    `skip-${index + 1}.html`,
+    'POSITION_11_30',
+    { query: `temat ${index + 1}`, clicks: 1, impressions: 100, ctr: 1, position: 12 },
+  ));
+  const articleByFile = new Map(items.map((item) => [item.path, {
+    title: `Tytuł ${item.path}`,
+    meta_description: `Opis ${item.path}`,
+    paragraphs: ['Wstęp ogólny bez bezpośredniej odpowiedzi.', `Odpowiedź dla ${item.gsc.query} — konkretna informacja dla czytelnika.`],
+    date_modified: '2026-01-01T08:00:00+01:00',
+  }]));
+  const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: items });
+  const summary = buildSimpleSeoSummary(wave, articleByFile, { priority_map: items });
+  summary.main[0].ready_for_deploy = false;
+  summary.main[0].ready_proposal = { status: 'ALREADY_SATISFIED' };
+  const selected = resolveSimpleSeoSelection(summary, 'popraw grupę główną');
+
+  assert.equal(selected.status, 'OK_WITH_SKIPPED');
+  assert.equal(selected.ids.length, 4);
+  assert.equal(selected.skipped.length, 1);
+  assert.equal(selected.skipped[0].status, 'ALREADY_SATISFIED');
+});
+
+test('KPI używa podglądu 7/14 dni i twardego werdyktu po 28 dniach', () => {
+  const win = buildKpiVerdict(
+    { clicks: 2, impressions: 100, ctr: 2, position: 20 },
+    { clicks: 5, impressions: 160, ctr: 3.13, position: 15 },
+    28,
+  );
+  const waiting = buildKpiVerdict(
+    { clicks: 2, impressions: 100, ctr: 2, position: 20 },
+    { clicks: 3, impressions: 110, ctr: 2.73, position: 19 },
+    14,
+  );
+  const noData = buildKpiVerdict(
+    { clicks: 0, impressions: 0, ctr: 0, position: 0 },
+    { clicks: 0, impressions: 0, ctr: 0, position: 0 },
+    28,
+  );
+
+  assert.equal(win.status, 'WIN');
+  assert.equal(win.hard_verdict, true);
+  assert.equal(waiting.status, 'WAITING_28_DAYS');
+  assert.equal(waiting.preview.day_14.direction, 'WZROST');
+  assert.equal(noData.status, 'NO_DATA');
 });
 
 test('MECHANIZM 2 keeps history, baseline and 7/14/28 checkpoints for every URL', () => {

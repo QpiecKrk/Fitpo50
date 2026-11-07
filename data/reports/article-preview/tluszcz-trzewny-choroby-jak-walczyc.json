@@ -1,35 +1,306 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T13:01:01.401Z",
+  "generated_at": "2026-11-07T23:01:30+01:00",
+  "reviewed_at": null,
   "slug": "tluszcz-trzewny-choroby-jak-walczyc",
-  "html_sha256": "2ccf0b09582a8033384645e2d98e6c5ee0dcc633d4b4d208426ddec36c00bafb",
-  "site_html_sha256": "2ccf0b09582a8033384645e2d98e6c5ee0dcc633d4b4d208426ddec36c00bafb",
-  "pdf_sha256": "83eb470cf9c6958e60037dca950c293466de67746e002ca5fe3ea83f6214dc3c",
-  "site_pdf_sha256": "83eb470cf9c6958e60037dca950c293466de67746e002ca5fe3ea83f6214dc3c",
+  "html_sha256": "1092c44b14d258fd1c9eab7707a8927b4db2aa0dc93a112f2ec053cc0acee829",
+  "site_html_sha256": "1092c44b14d258fd1c9eab7707a8927b4db2aa0dc93a112f2ec053cc0acee829",
+  "pdf_sha256": "a5d38bef2a3cd39ac9939ca4eeab935e26a32cd4f64b34b418c1a5cd11b82e88",
+  "site_pdf_sha256": "a5d38bef2a3cd39ac9939ca4eeab935e26a32cd4f64b34b418c1a5cd11b82e88",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-07T23:01:30+01:00",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "tluszcz-trzewny-choroby-jak-walczyc.html",
+      "sha256": "1092c44b14d258fd1c9eab7707a8927b4db2aa0dc93a112f2ec053cc0acee829",
+      "bytes": 29225
+    },
+    "html_site": {
+      "file": "_site/tluszcz-trzewny-choroby-jak-walczyc.html",
+      "sha256": "1092c44b14d258fd1c9eab7707a8927b4db2aa0dc93a112f2ec053cc0acee829",
+      "bytes": 29225
+    },
+    "pdf_source": {
+      "file": "assets/pdf/tluszcz-trzewny-choroby-jak-walczyc.pdf",
+      "sha256": "a5d38bef2a3cd39ac9939ca4eeab935e26a32cd4f64b34b418c1a5cd11b82e88",
+      "bytes": 321456
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/tluszcz-trzewny-choroby-jak-walczyc.pdf",
+      "sha256": "a5d38bef2a3cd39ac9939ca4eeab935e26a32cd4f64b34b418c1a5cd11b82e88",
+      "bytes": 321456
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/tluszcz-trzewny-choroby-jak-walczyc/desktop.png",
+      "screenshot_sha256": "551b6e2ca363dc42e1f0cf859f4b1fb177cef3594d2d7b7238a4ec5e20f40e34",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/tluszcz-trzewny-choroby-jak-walczyc/mobile.png",
+      "screenshot_sha256": "075c94156f938dad80bb24ede534ad606cc0758ccdb8a788046976d41eee4a17",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 12 min czytania Tłuszcz trzewny po 50-tce: jak ocenić ryzyko i go zmniejszyć? \"Możesz ważyć tyle co 20 lat temu i nadal mieć za dużo tłuszczu, który niszczy Twoje narządy.\"",
+      "alt": "Mężczyzna po 50-tce mierzy obwód talii centymetrem, skupiona mina",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-hero.avif",
+          "sha256": "ff0b48840e637f63638a7393ac1d0108de3906e50254da693d5fd99636a9bee7",
+          "bytes": 52945,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-hero.webp",
+          "sha256": "20ed8a22f3ab88be66c45c8673e3fd49c1d9f87afb38a375ee34fbdf9d8fd4e8",
+          "bytes": 91082,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-hero.jpg",
+          "sha256": "96560462f9dc085ff5595d5d05dd8a69ed9b3525bde678587a3a1ae1ad6670b3",
+          "bytes": 188659,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "11e2630adf7aeb46f78b35f88aa94c7ed844e65ae4c3226b980196daed7e3222"
+    },
+    {
+      "placement": "content:2:czym-tluszcz-trzewny-rozni-sie-od-podskornego",
+      "role": "content",
+      "heading": "Czym tłuszcz trzewny różni się od podskórnego?",
+      "context": "Szybka odpowiedź Po 50-tce tłuszcz trzewny otacza narządy jamy brzusznej i jest silniej związany z ryzykiem metabolicznym niż tłuszcz podskórny, ale domowy pomiar pasa nie pokazuje jego dokładnej ilości. Najlepiej udokumentowane działania obejmują regularny ruch, trening siłowy, żywienie tworzące możliwy do utrzymania deficyt energii, sen i ograniczenie alkoholu. Kluczowe wnioski Obwód pasa jest wskaźnikiem przesiewowym i trendem, nie obrazem tkanki z CT lub MRI. Różne rodzaje treningu mogą zmniejszać tłuszcz trzewny; nie istnieje ćwiczenie spalające go miejscowo. Menopauza może zmieniać rozmieszczenie tłuszczu, ale nie unieważnia reakcji na ruch i bilans energii. Nagłe powiększanie brzucha z bólem, dusznością lub obrzękami wymaga diagnostyki. Czym tłuszcz trzewny różni się od podskórnego?",
+      "alt": "Anatomiczny przekrój brzucha pokazujący położenie tłuszczu trzewnego",
+      "caption": "Tkanka podskórna leży pod skórą, a trzewna w jamie brzusznej wokół narządów.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-1-20260929.avif",
+          "sha256": "964534874109f88f66283a0ebbc6b8d2151a0418823ee73dd5f004c036caad75",
+          "bytes": 36003,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-1-20260929.webp",
+          "sha256": "f0961cf1986c6791159e971c074eadefddea9b616961a33e8a84dec5db092787",
+          "bytes": 35750,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-1-20260929.jpg",
+          "sha256": "0cb9d5c0b87883935936b3c9f291c7b3f645c20502b938798bae8dcaa288f68d",
+          "bytes": 77440,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5e6bdad041d9817537a4a1173e29c917df85a635a860bb0d222e8fb10df6cb2b"
+    },
+    {
+      "placement": "content:3:jak-prawidlowo-mierzyc-obwod-pasa",
+      "role": "content",
+      "heading": "Jak prawidłowo mierzyć obwód pasa?",
+      "context": "Szybka odpowiedź Po 50-tce tłuszcz trzewny otacza narządy jamy brzusznej i jest silniej związany z ryzykiem metabolicznym niż tłuszcz podskórny, ale domowy pomiar pasa nie pokazuje jego dokładnej ilości. Najlepiej udokumentowane działania obejmują regularny ruch, trening siłowy, żywienie tworzące możliwy do utrzymania deficyt energii, sen i ograniczenie alkoholu. Kluczowe wnioski Obwód pasa jest wskaźnikiem przesiewowym i trendem, nie obrazem tkanki z CT lub MRI. Różne rodzaje treningu mogą zmniejszać tłuszcz trzewny; nie istnieje ćwiczenie spalające go miejscowo. Menopauza może zmieniać rozmieszczenie tłuszczu, ale nie unieważnia reakcji na ruch i bilans energii. Nagłe powiększanie brzucha z bólem, dusznością lub obrzękami wymaga diagnostyki. Czym tłuszcz trzewny różni się od podskórnego?",
+      "alt": "Kobieta po pięćdziesiątce prawidłowo mierzy obwód pasa",
+      "caption": "Używaj tej samej nieelastycznej taśmy, stań swobodnie i mierz po spokojnym wydechu w miejscu zgodnym z wybranym protokołem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-2-20260929.avif",
+          "sha256": "3daa3045adef8255b4a159d272408627deef10653be2734ca879d4bc1c883130",
+          "bytes": 80267,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-2-20260929.webp",
+          "sha256": "0c4e15a79db013e44b330f44e0b150493b4e1cbcee2b2c0c878ccd50a76d129a",
+          "bytes": 93786,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-2-20260929.jpg",
+          "sha256": "ad521da7b82dd3e56175b8a1e61f324ffd20e5cfe2312174cf77dec4d1d64396",
+          "bytes": 208200,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5c56f85df92845bf1e28d038ba4f431ec1de11dbaab59f703e644a28fe5b49f7"
+    },
+    {
+      "placement": "content:4:ktory-rodzaj-ruchu-dziala-najlepiej",
+      "role": "content",
+      "heading": "Który rodzaj ruchu działa najlepiej?",
+      "context": "Szybka odpowiedź Po 50-tce tłuszcz trzewny otacza narządy jamy brzusznej i jest silniej związany z ryzykiem metabolicznym niż tłuszcz podskórny, ale domowy pomiar pasa nie pokazuje jego dokładnej ilości. Najlepiej udokumentowane działania obejmują regularny ruch, trening siłowy, żywienie tworzące możliwy do utrzymania deficyt energii, sen i ograniczenie alkoholu. Kluczowe wnioski Obwód pasa jest wskaźnikiem przesiewowym i trendem, nie obrazem tkanki z CT lub MRI. Różne rodzaje treningu mogą zmniejszać tłuszcz trzewny; nie istnieje ćwiczenie spalające go miejscowo. Menopauza może zmieniać rozmieszczenie tłuszczu, ale nie unieważnia reakcji na ruch i bilans energii. Nagłe powiększanie brzucha z bólem, dusznością lub obrzękami wymaga diagnostyki. Czym tłuszcz trzewny różni się od podskórnego?",
+      "alt": "Kobieta po pięćdziesiątce ćwiczy na rowerze stacjonarnym",
+      "caption": "Metaanalizy randomizowanych badań wskazują, że trening aerobowy, oporowy, łączony i interwałowy mogą zmniejszać tłuszcz trzewny u osób z nadwagą lub otyłością.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-3-20260929.avif",
+          "sha256": "a5cf3fd23a990c04f4e61217e7676cb8401adf5d2d5dd3e24ac8f45e024d3573",
+          "bytes": 66648,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-3-20260929.webp",
+          "sha256": "2057cf15c8d5f50c0dda2d7e540330490245c296fa48590b6e3f8bb19e3622d6",
+          "bytes": 65806,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-3-20260929.jpg",
+          "sha256": "75e6362c15e02d6a1db1b7c6f2d9fd3d61272b805765f818fe1866a2c682ebf5",
+          "bytes": 129509,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f49a52d89c1b770017f55c0f35bdc628697378601100c802e104f934bbc145b8"
+    },
+    {
+      "placement": "content:5:co-poza-treningiem-pomaga-zmniejszyc-pas",
+      "role": "content",
+      "heading": "Co poza treningiem pomaga zmniejszyć pas?",
+      "context": "Szybka odpowiedź Po 50-tce tłuszcz trzewny otacza narządy jamy brzusznej i jest silniej związany z ryzykiem metabolicznym niż tłuszcz podskórny, ale domowy pomiar pasa nie pokazuje jego dokładnej ilości. Najlepiej udokumentowane działania obejmują regularny ruch, trening siłowy, żywienie tworzące możliwy do utrzymania deficyt energii, sen i ograniczenie alkoholu. Kluczowe wnioski Obwód pasa jest wskaźnikiem przesiewowym i trendem, nie obrazem tkanki z CT lub MRI. Różne rodzaje treningu mogą zmniejszać tłuszcz trzewny; nie istnieje ćwiczenie spalające go miejscowo. Menopauza może zmieniać rozmieszczenie tłuszczu, ale nie unieważnia reakcji na ruch i bilans energii. Nagłe powiększanie brzucha z bólem, dusznością lub obrzękami wymaga diagnostyki. Czym tłuszcz trzewny różni się od podskórnego?",
+      "alt": "Spokojny sen jako element regeneracji i kontroli masy ciała",
+      "caption": "Zmiana diety działa przez całkowity bilans energii i możliwość utrzymania planu, nie przez pojedynczy produkt.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-4-20260929.avif",
+          "sha256": "25bbf4ef3bb93d4c0d1893c874b783cdd16afb4d60e847c74251017ca901bc44",
+          "bytes": 68497,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-4-20260929.webp",
+          "sha256": "f16c99de473c9e2427fe8fa584b28f5dca10f255fe66d012cb44b8cff1949577",
+          "bytes": 67560,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/tluszcz-trzewny-choroby-jak-walczyc-section-4-20260929.jpg",
+          "sha256": "dc1046ac7cf4ca6905e7014f8665df05019ba0c1cd41c196f87a8e480c7b5dcd",
+          "bytes": 120243,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "2b8d3bb48223635d26b7f9d99ec8946d9c52c839815a5ce571830fd704b30300"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/tluszcz-trzewny-choroby-jak-walczyc/pdf-pages/page-1.png",
+        "sha256": "a4dccd57be045257fd1a582fa1c6862c49e4f4634389116457f0aad0853b18f0",
+        "bytes": 554418,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1011,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/tluszcz-trzewny-choroby-jak-walczyc/pdf-pages/page-2.png",
+        "sha256": "90d6b55bdc034b5d833a2950de7025e7d4b81d83575678be1a4e32513a034ce8",
+        "bytes": 585555,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 56,
+          "width": 1033,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/tluszcz-trzewny-choroby-jak-walczyc/pdf-pages/page-3.png",
+        "sha256": "2d7bb1ab06503729350dd1bd70121400ebdd79e77dc2081f21690eb2e771f9e1",
+        "bytes": 794716,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 57,
+          "width": 1050,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/tluszcz-trzewny-choroby-jak-walczyc/pdf-pages/page-4.png",
+        "sha256": "5295a72031bb2404d1d2ba1a89f8fa019d0bd6477ad3dbed797120d03c3ba4e0",
+        "bytes": 223658,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 62,
+          "width": 1078,
+          "height": 1588
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4260,
+    "review_wait_ms": null
   },
   "errors": []
 }

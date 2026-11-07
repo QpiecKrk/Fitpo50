@@ -38,6 +38,10 @@ function safeRelativeFile(value) {
   return normalized;
 }
 
+function normalizedPatchText(value) {
+  return String(value || '').replace(/\s+/g, ' ').trim();
+}
+
 function validateBasis(basis, label, errors) {
   if (!Array.isArray(basis) || !basis.length) {
     errors.push(`${label}: brak basis[].`);
@@ -77,12 +81,18 @@ function validateOperationEvidence(operation, label, errors) {
   const text = (html) => {
     return String(html || '').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
   };
+  const linkOnlySourcePage = String(operation.scope || '').trim() === 'source_page'
+    && String(operation.before || '').split(String(operation.before || '')).length === 2
+    && String(operation.after || '').includes(String(operation.before || ''))
+    && /^\s*<p>\s*(?:Zobacz także|Czytaj także|Sprawdź także):\s*<a\b[^>]*href=["'][^"']+["'][^>]*>[^<]+<\/a>\.\s*<\/p>\s*$/i.test(
+      String(operation.after || '').replace(String(operation.before || ''), ''),
+    );
   const hasSource = (operation.basis || []).some((basis) => {
     if (basis.type !== 'SOURCE') return false;
     try { return ['https:', 'http:'].includes(new URL(basis.url || basis.value).protocol); } catch (_) { return false; }
   });
   const changedStructuredContent = /<script\b/i.test(String(operation.after)) && operation.after !== operation.before;
-  if ((text(operation.after) !== text(operation.before) || changedStructuredContent) && !hasSource) {
+  if ((text(operation.after) !== text(operation.before) || changedStructuredContent) && !hasSource && !linkOnlySourcePage) {
     errors.push(`${label}: zmieniona treść wymaga SOURCE basis z URL; sama fraza GSC nie jest dowodem twierdzenia.`);
   }
   const after = String(operation.after || '');
@@ -106,7 +116,11 @@ function validateOperationEvidence(operation, label, errors) {
     warsawIso().slice(0, 10)).map((error) => `${label}: ${error}`));
 }
 
-function localLinkAllowed(root, source, target) {
+function localLinkAllowed(root, source, target, operation = {}) {
+  const explicitMapBasis = (operation.basis || []).some((basis) => basis.type === 'INTERNAL_LINK_MAP'
+    && String(basis.value || '').includes(source)
+    && String(basis.value || '').includes(target));
+  if (explicitMapBasis) return true;
   const file = path.join(root, 'data', 'crosslink-suggestions', source.replace(/\.html$/, '.json'));
   if (fs.existsSync(file)) {
     const map = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -154,23 +168,38 @@ function validatePatchManifest(manifest, root, selectedIds) {
     (item.operations || []).forEach((operation, index) => {
       const label = `${id}.operations[${index}]`;
       const file = safeRelativeFile(operation.file || target);
+      const scope = String(operation.scope || '').trim();
+      const sourcePageOperation = scope === 'source_page';
       if (!file) errors.push(`${label}: nieprawidłowy file.`);
       else touched.add(file);
       if (targetOwners.has(file) && targetOwners.get(file) !== id) errors.push(`${label}: operation.file ${file} należy do ${targetOwners.get(file)}, nie ${id}.`);
+      if (scope && !['target', 'source_page'].includes(scope)) errors.push(`${label}: scope musi być target albo source_page.`);
+      if (sourcePageOperation) {
+        const operationTarget = safeRelativeFile(operation.target_file);
+        if (!operationTarget || operationTarget !== target) errors.push(`${label}: source_page wymaga target_file równego item.file (${target || 'MISSING'}).`);
+        if (file === target) errors.push(`${label}: source_page musi wskazywać inny plik niż docelowy artykuł.`);
+        if (!hrefTargets(operation.after).includes(target)) errors.push(`${label}: source_page musi zawierać link do docelowego artykułu ${target}.`);
+      } else if (scope === 'target' && file !== target) {
+        errors.push(`${label}: scope=target musi wskazywać item.file ${target}.`);
+      } else if (file !== target) {
+        errors.push(`${label}: operacja na stronie źródłowej wymaga scope=source_page i target_file.`);
+      }
       if (/<!doctype\s+html\b|<html\b/i.test(String(operation.before) + String(operation.after))) errors.push(`${label}: podmiana całego dokumentu jest zabroniona.`);
       if (operation.type !== 'replace_exact') errors.push(`${label}: dozwolone jest wyłącznie replace_exact.`);
       if (typeof operation.before !== 'string' || !operation.before) errors.push(`${label}: brak dokładnego before.`);
+      if (normalizedPatchText(operation.before) === normalizedPatchText(operation.after)) errors.push(`${label}: before i after nie zawierają rzeczywistej różnicy.`);
       validateAfterText(operation.after, label, errors);
       validateBasis(operation.basis, label, errors);
       validateOperationEvidence(operation, label, errors);
       if (String(operation.reason || '').trim().length < 12) errors.push(`${label}: reason jest zbyt ogólny.`);
       hrefTargets(operation.after).forEach((href) => {
         if (!safeRelativeFile(href) || !fs.existsSync(path.join(root, href))) errors.push(`${label}: link prowadzi do nieistniejącego celu ${href}.`);
-        if (!hrefTargets(operation.before).includes(href) && !localLinkAllowed(root, file, href)) errors.push(`${label}: link ${file} -> ${href} nie pochodzi z mapy lokalnego pipeline'u.`);
+        if (!hrefTargets(operation.before).includes(href) && !localLinkAllowed(root, file, href, operation)) errors.push(`${label}: link ${file} -> ${href} nie pochodzi z mapy lokalnego pipeline'u.`);
       });
     });
-    if (target && !(item.operations || []).some((operation) => safeRelativeFile(operation.file || target) === target)) {
-      errors.push(`${id}: pakiet nie zawiera żadnej konkretnej zmiany w docelowym artykule ${target}.`);
+    if (target && !(item.operations || []).some((operation) => safeRelativeFile(operation.file || target) === target)
+      && !(item.operations || []).some((operation) => String(operation.scope || '').trim() === 'source_page')) {
+      errors.push(`${id}: pakiet nie zawiera zmiany w artykule ${target} ani jawnego linkowania source_page do tego celu.`);
     }
   });
   const hashes = manifest.source_hashes;
@@ -211,6 +240,7 @@ function updateModified(html, iso, file) {
 function buildPatchedFiles(manifest, items, root, iso) {
   const contents = new Map();
   const targetFiles = new Set();
+  const changedFiles = new Set();
   items.forEach((item) => {
     const target = safeRelativeFile(item.file);
     targetFiles.add(target);
@@ -218,18 +248,27 @@ function buildPatchedFiles(manifest, items, root, iso) {
       const file = safeRelativeFile(operation.file || target);
       const current = contents.has(file) ? contents.get(file) : fs.readFileSync(path.join(root, file), 'utf8');
       contents.set(file, replaceExactlyOnce(current, operation.before, operation.after, `${normalizeId(item.id)}.operations[${index}]`));
+      changedFiles.add(file);
     });
   });
-  const articleFiles = new Set(targetFiles);
-  for (const file of contents.keys()) {
+  targetFiles.forEach((file) => {
+    if (!contents.has(file)) contents.set(file, fs.readFileSync(path.join(root, file), 'utf8'));
+  });
+  const articleFiles = new Set();
+  for (const file of changedFiles) {
     const source = fs.readFileSync(path.join(root, file), 'utf8');
     if (pageKind(source) !== 'unsupported') articleFiles.add(file);
   }
-  articleFiles.forEach((file) => {
+  changedFiles.forEach((file) => {
     const current = contents.has(file) ? contents.get(file) : fs.readFileSync(path.join(root, file), 'utf8');
     contents.set(file, updateModified(current, iso, file));
   });
-  return { contents, targetFiles: [...targetFiles], articleFiles: [...articleFiles] };
+  return {
+    contents,
+    targetFiles: [...targetFiles],
+    changedFiles: [...changedFiles],
+    articleFiles: [...articleFiles],
+  };
 }
 
 function normalizedNeedle(value) {

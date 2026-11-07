@@ -16,8 +16,11 @@ function isRuntimeNewsThumb(value) {
 }
 
 function isGitTracked(root, relative) {
+  const gitRoot = process.env.FITPO50_SEO_STAGING === '1' && process.env.FITPO50_SOURCE_ROOT
+    ? path.resolve(process.env.FITPO50_SOURCE_ROOT)
+    : root;
   return spawnSync('git', ['ls-files', '--error-unmatch', '--', relative], {
-    cwd: root,
+    cwd: gitRoot,
     encoding: 'utf8',
     timeout: 10_000,
   }).status === 0;

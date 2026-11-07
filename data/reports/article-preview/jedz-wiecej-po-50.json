@@ -1,35 +1,306 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:56:22.291Z",
+  "generated_at": "2026-11-07T23:01:23+01:00",
+  "reviewed_at": null,
   "slug": "jedz-wiecej-po-50",
-  "html_sha256": "ff986d9b271c5eaa41ea3c70df3e7bb79a65b96eb37482388a1ffada5e9be865",
-  "site_html_sha256": "ff986d9b271c5eaa41ea3c70df3e7bb79a65b96eb37482388a1ffada5e9be865",
-  "pdf_sha256": "6fb96c9b9c26464952b65c350f8951e814be58b35b8aee9bf85a31be3d85bb25",
-  "site_pdf_sha256": "6fb96c9b9c26464952b65c350f8951e814be58b35b8aee9bf85a31be3d85bb25",
+  "html_sha256": "863ae8daf898710fc1e7a91430c8e18abf4e427f58b9d8acc1e898e4c3948a20",
+  "site_html_sha256": "863ae8daf898710fc1e7a91430c8e18abf4e427f58b9d8acc1e898e4c3948a20",
+  "pdf_sha256": "f5d58bfa9d32e7f02db1d28663e79ed688ebbe0d2caa8ff80e24375a413319e5",
+  "site_pdf_sha256": "f5d58bfa9d32e7f02db1d28663e79ed688ebbe0d2caa8ff80e24375a413319e5",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-07T23:01:23+01:00",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "jedz-wiecej-po-50.html",
+      "sha256": "863ae8daf898710fc1e7a91430c8e18abf4e427f58b9d8acc1e898e4c3948a20",
+      "bytes": 27582
+    },
+    "html_site": {
+      "file": "_site/jedz-wiecej-po-50.html",
+      "sha256": "863ae8daf898710fc1e7a91430c8e18abf4e427f58b9d8acc1e898e4c3948a20",
+      "bytes": 27582
+    },
+    "pdf_source": {
+      "file": "assets/pdf/jedz-wiecej-po-50.pdf",
+      "sha256": "f5d58bfa9d32e7f02db1d28663e79ed688ebbe0d2caa8ff80e24375a413319e5",
+      "bytes": 513535
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/jedz-wiecej-po-50.pdf",
+      "sha256": "f5d58bfa9d32e7f02db1d28663e79ed688ebbe0d2caa8ff80e24375a413319e5",
+      "bytes": 513535
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/jedz-wiecej-po-50/desktop.png",
+      "screenshot_sha256": "b424c243f35bdff9a46b4db7950a2777ab1eb8dec27cbc76a0c8db4c8308f1d3",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/jedz-wiecej-po-50/mobile.png",
+      "screenshot_sha256": "22602cb7b44c7addc21d515f584397a3cb105421063a690b2f7731b5055a3e53",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "JEDZENIE 10 min czytania Niedojadanie po 50-tce: objawy, białko, mięśnie i regeneracja DIETA ODCHUDZA. TRENING DECYDUJE CO ZOSTAJE.",
+      "alt": "Zbyt mały posiłek obok hantla jako symbol błędu niedojadania",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-hero.avif",
+          "sha256": "f55c218311790d25f22caead7372a5204e1fa1c52d521a2f8ca8f4ed01704ea7",
+          "bytes": 105423,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-hero.webp",
+          "sha256": "29a865c58239c40c8159d3c1692a5b9cafe0f43bc06c28d39f986a3866721a4b",
+          "bytes": 189228,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-hero.jpg",
+          "sha256": "cf07423579873db6d9d84bad9b81a11beb06542bb20d12cc6d6f86e3a0f35016",
+          "bytes": 444140,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6698f3361f7b0c886ff61097f1f48dd8d1da8ebd029cb7e1dd83b610c74d82f4"
+    },
+    {
+      "placement": "content:2:kiedy-jedzenie-jest-naprawde-zbyt-male",
+      "role": "content",
+      "heading": "Kiedy jedzenie jest naprawdę zbyt małe?",
+      "context": "Szybka odpowiedź „Jedz więcej” nie jest dobrą radą dla każdego. Problemem jest zbyt mała podaż energii lub białka względem potrzeb, zwłaszcza przy chudnięciu, chorobie i treningu. U zdrowych starszych osób często rozważa się 1,0–1,2 g białka/kg masy ciała, ale choroba nerek i inne schorzenia wymagają indywidualnego planu. Zobacz także: Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie. Kluczowe wnioski Niedojadania nie rozpoznaje się wyłącznie po uczuciu głodu. Orientacyjny cel białka zależy od zdrowia, aktywności i masy ciała użytej do obliczeń. Spadek masy bez planu, osłabienie i gorsze gojenie wymagają oceny, a nie automatycznego dokładania odżywki. Redukcja masy powinna chronić mięśnie przez białko, trening oporowy i rozsądne tempo. Kiedy jedzenie jest naprawdę zbyt małe? Syg",
+      "alt": "Mężczyzna po treningu patrzy na zbyt mały posiłek",
+      "caption": "Sygnałem może być niezamierzony spadek masy, osłabienie, pogorszenie wyników treningowych, dłuższa regeneracja albo coraz luźniejsze ubrania.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-po-50-section-1-20260929.avif",
+          "sha256": "a6456f0c4c8c5e3d5826adec9ed3016947c59bc61cddb1d0140cf8672f7de71c",
+          "bytes": 167735,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-po-50-section-1-20260929.webp",
+          "sha256": "8c5b4d3a6b61d0630d972a4aaab9a5c6d3c80e183a435921d97c68d5ad1e7a70",
+          "bytes": 188280,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-po-50-section-1-20260929.jpg",
+          "sha256": "f74f9f52b33f84c6597a73bd0ba29f5b70a02227c64421259852c6d30fa06eda",
+          "bytes": 319541,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "fc3cc3c76015fd7597ca5d4cf3c4a160035d480e6ca20ec642309a54bedc23e3"
+    },
+    {
+      "placement": "content:3:ile-bialka-moze-potrzebowac-osoba-po-50-tce",
+      "role": "content",
+      "heading": "Ile białka może potrzebować osoba po 50-tce?",
+      "context": "Szybka odpowiedź „Jedz więcej” nie jest dobrą radą dla każdego. Problemem jest zbyt mała podaż energii lub białka względem potrzeb, zwłaszcza przy chudnięciu, chorobie i treningu. U zdrowych starszych osób często rozważa się 1,0–1,2 g białka/kg masy ciała, ale choroba nerek i inne schorzenia wymagają indywidualnego planu. Zobacz także: Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie. Kluczowe wnioski Niedojadania nie rozpoznaje się wyłącznie po uczuciu głodu. Orientacyjny cel białka zależy od zdrowia, aktywności i masy ciała użytej do obliczeń. Spadek masy bez planu, osłabienie i gorsze gojenie wymagają oceny, a nie automatycznego dokładania odżywki. Redukcja masy powinna chronić mięśnie przez białko, trening oporowy i rozsądne tempo. Kiedy jedzenie jest naprawdę zbyt małe? Syg",
+      "alt": "Różnorodne pełnowartościowe źródła białka",
+      "caption": "Wytyczne ESPEN dla starszych osób wskazują co najmniej 1,0 g białka/kg masy ciała dziennie, a u zdrowych starszych dorosłych często 1,0–1,2 g/kg.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-po-50-section-2-20260929.avif",
+          "sha256": "e545acba70120f59b472077cd9bb412cad8c1af6927714fde44d390eea01a117",
+          "bytes": 222974,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-po-50-section-2-20260929.webp",
+          "sha256": "a0db0755f8d39465f359b1b12403ba65ba3afa846730f9f618a00cfc711334c2",
+          "bytes": 245470,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-po-50-section-2-20260929.jpg",
+          "sha256": "a8470f25c284122f1720f86b71e79ab4c915dd6bce35ec2d74ce3e4a215fa90a",
+          "bytes": 390124,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "dd83d5442e9d186811db736173c03e2c123be3169a9978fa5876a771ee4ccf2f"
+    },
+    {
+      "placement": "content:4:jak-zwiekszyc-wartosc-posilku-bez-ogromnej-porcj",
+      "role": "content",
+      "heading": "Jak zwiększyć wartość posiłku bez ogromnej porcji?",
+      "context": "Szybka odpowiedź „Jedz więcej” nie jest dobrą radą dla każdego. Problemem jest zbyt mała podaż energii lub białka względem potrzeb, zwłaszcza przy chudnięciu, chorobie i treningu. U zdrowych starszych osób często rozważa się 1,0–1,2 g białka/kg masy ciała, ale choroba nerek i inne schorzenia wymagają indywidualnego planu. Zobacz także: Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie. Kluczowe wnioski Niedojadania nie rozpoznaje się wyłącznie po uczuciu głodu. Orientacyjny cel białka zależy od zdrowia, aktywności i masy ciała użytej do obliczeń. Spadek masy bez planu, osłabienie i gorsze gojenie wymagają oceny, a nie automatycznego dokładania odżywki. Redukcja masy powinna chronić mięśnie przez białko, trening oporowy i rozsądne tempo. Kiedy jedzenie jest naprawdę zbyt małe? Syg",
+      "alt": "Kobieta wzbogaca posiłek oliwą orzechami jogurtem i serem",
+      "caption": "Gdy apetyt jest mały, zwiększ gęstość odżywczą: do owsianki dodaj jogurt lub skyr, do zupy soczewicę albo mięso, a do kanapki jajko, twaróg lub rybę.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-po-50-section-3-20260929.avif",
+          "sha256": "87277ca64ec05eae0f794d411f497417c9d755717cab2d3b5fee92a6325f4082",
+          "bytes": 149784,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-po-50-section-3-20260929.webp",
+          "sha256": "7e734c0561ea590d62f8c60e00929c0229d2901ff908dab3bb5389ed59770e44",
+          "bytes": 173770,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-po-50-section-3-20260929.jpg",
+          "sha256": "d20e343edd16fc0a328653234abd55b02ae47c6cb42045b23000f7f10b1f6dfb",
+          "bytes": 310767,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "dc108207e9aab15dbf0f60fbf1c9708113909a9c88de556159b9336a9f5126cd"
+    },
+    {
+      "placement": "content:5:jak-chudnac-i-jednoczesnie-chronic-miesnie",
+      "role": "content",
+      "heading": "Jak chudnąć i jednocześnie chronić mięśnie?",
+      "context": "Szybka odpowiedź „Jedz więcej” nie jest dobrą radą dla każdego. Problemem jest zbyt mała podaż energii lub białka względem potrzeb, zwłaszcza przy chudnięciu, chorobie i treningu. U zdrowych starszych osób często rozważa się 1,0–1,2 g białka/kg masy ciała, ale choroba nerek i inne schorzenia wymagają indywidualnego planu. Zobacz także: Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie. Kluczowe wnioski Niedojadania nie rozpoznaje się wyłącznie po uczuciu głodu. Orientacyjny cel białka zależy od zdrowia, aktywności i masy ciała użytej do obliczeń. Spadek masy bez planu, osłabienie i gorsze gojenie wymagają oceny, a nie automatycznego dokładania odżywki. Redukcja masy powinna chronić mięśnie przez białko, trening oporowy i rozsądne tempo. Kiedy jedzenie jest naprawdę zbyt małe? Syg",
+      "alt": "Aktywna para przygotowuje zbilansowany posiłek po treningu",
+      "caption": "Deficyt energii powinien być na tyle umiarkowany, aby można było trenować, spać i dostarczać potrzebne składniki.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/jedz-wiecej-po-50-section-4-20260929.avif",
+          "sha256": "82556bdfa000d5d955362331f801ba778600df6c0bd979384c81068702156fad",
+          "bytes": 190867,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/jedz-wiecej-po-50-section-4-20260929.webp",
+          "sha256": "7576ad5acc421490c83b010ba9aa272b75a0dcb6e220ecea426c38cb4148cc76",
+          "bytes": 202694,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/jedz-wiecej-po-50-section-4-20260929.jpg",
+          "sha256": "0374559beea25fc6bce0ac8387dc00b48e277c455c49d8d0abaf2a19a51bbb51",
+          "bytes": 345444,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "1030f34a4e8cffa6733eaefdff8b7a5f479a06fbcefbb6f6ca3c71ba6938be3c"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/jedz-wiecej-po-50/pdf-pages/page-1.png",
+        "sha256": "79f5f28487b2fb13dd5579c6b6a7757882081b5f25120cd249f8aad3bc2404ab",
+        "bytes": 682095,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1042,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/jedz-wiecej-po-50/pdf-pages/page-2.png",
+        "sha256": "4617eaf3b244e7f7a14130126d4b97b0d33d11070b1072d2f08185709d5440ee",
+        "bytes": 1065091,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 56,
+          "width": 1063,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/jedz-wiecej-po-50/pdf-pages/page-3.png",
+        "sha256": "90a1487b740a628f85318d68909c236d95cc19677c85000969426b3c4e193de3",
+        "bytes": 1001441,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/jedz-wiecej-po-50/pdf-pages/page-4.png",
+        "sha256": "3592cfd1b7aa0c461ba80e1bcaf6caa6adaf23539c3e72766a108c22874c79b4",
+        "bytes": 179596,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1022,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4789,
+    "review_wait_ms": null
   },
   "errors": []
 }

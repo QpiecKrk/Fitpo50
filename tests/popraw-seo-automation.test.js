@@ -248,7 +248,9 @@ test('a source article receiving a link also gets dateModified and PDF/live obli
   manifest.source_hashes['source.html'] = sha256(Buffer.from(source));
   manifest.items[0].operations.push({
     type: 'replace_exact',
+    scope: 'source_page',
     file: 'source.html',
+    target_file: 'a.html',
     before: '<p>Akapit strony źródłowej.</p>',
     after: '<p>Akapit strony źródłowej prowadzi do <a href="a.html">konkretnego planu marszu interwałowego</a>.</p>',
     reason: 'Naturalne wsparcie głównego URL-a dla tej samej intencji.',
@@ -264,6 +266,89 @@ test('a source article receiving a link also gets dateModified and PDF/live obli
   assert.match(patched.contents.get('source.html'), /2026-08-25T12:00:00\+02:00/);
   const deployment = buildDeploymentManifest({ manifest, items: validation.items, contents: patched.contents, targetFiles: patched.targetFiles, iso });
   assert.equal(deployment.targets[0].source_pages[0].pdf_url, 'https://fitpo50.pl/assets/pdf/source.pdf');
+});
+
+test('source-only internal-link patch keeps the target unchanged and records exact file scope', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-seo-source-only-'));
+  const target = articleHtml().replaceAll('a.html', 'target.html');
+  const source = articleHtml().replaceAll('a.html', 'source.html').replace('Stary konkretny akapit.', 'Akapit strony źródłowej.');
+  fs.writeFileSync(path.join(root, 'target.html'), target);
+  fs.writeFileSync(path.join(root, 'source.html'), source);
+  fs.mkdirSync(path.join(root, 'data/crosslink-suggestions'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'data/crosslink-suggestions/source.json'), JSON.stringify({ slug: 'source', suggestions: [{ href: 'target.html' }] }));
+  const manifest = {
+    version: 1,
+    status: 'AWAITING_USER_APPROVAL',
+    source_hashes: { 'source.html': sha256(Buffer.from(source)) },
+    items: [{
+      id: 'ROKUJE 1',
+      file: 'target.html',
+      operations: [{
+        type: 'replace_exact',
+        scope: 'source_page',
+        file: 'source.html',
+        target_file: 'target.html',
+        before: '<p>Akapit strony źródłowej.</p>',
+        after: '<p>Akapit strony źródłowej prowadzi do <a href="target.html">konkretnego artykułu.</a></p>',
+        reason: 'Naturalne linkowanie ze wskazanej strony źródłowej do celu.',
+        basis: [
+          { type: 'INTERNAL_LINK_MAP', value: 'source.html wspiera właściciela intencji target.html' },
+          { type: 'SOURCE', value: 'https://example.org/research' },
+        ],
+      }],
+    }],
+  };
+  const validation = validatePatchManifest(manifest, root, ['ROKUJE 1']);
+  assert.deepEqual(validation.errors, []);
+  const patched = buildPatchedFiles(manifest, validation.items, root, '2026-08-25T12:00:00+02:00');
+  assert.deepEqual(patched.targetFiles, ['target.html']);
+  assert.deepEqual(patched.changedFiles, ['source.html']);
+  assert.deepEqual(patched.articleFiles, ['source.html']);
+  assert.equal(patched.contents.get('target.html'), target);
+  assert.match(patched.contents.get('source.html'), /2026-08-25T12:00:00\+02:00/);
+  const deployment = buildDeploymentManifest({ manifest, items: validation.items, contents: patched.contents, targetFiles: patched.targetFiles, iso: '2026-08-25T12:00:00+02:00' });
+  assert.equal(deployment.targets[0].file, 'target.html');
+  assert.equal(deployment.targets[0].source_pages[0].file, 'source.html');
+  const manifestPath = path.join(root, 'source-only.json');
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+  const beforeSource = fs.readFileSync(path.join(root, 'source.html'), 'utf8');
+  const dryRun = spawnSync('node', [path.resolve(ROOT, 'scripts/popraw-seo-apply.js'), '--manifest', manifestPath, '--ids', 'ROKUJE 1', '--dry-run'], { cwd: root, encoding: 'utf8' });
+  assert.equal(dryRun.status, 0, dryRun.stderr || dryRun.stdout);
+  assert.match(dryRun.stdout, /DRY-RUN PASS/);
+  assert.equal(fs.readFileSync(path.join(root, 'source.html'), 'utf8'), beforeSource);
+});
+
+test('source-page link-only patch accepts an explicit internal map without SOURCE basis', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-seo-link-only-'));
+  const target = articleHtml().replaceAll('a.html', 'target.html');
+  const source = articleHtml().replaceAll('a.html', 'source.html').replace('<p>Stary konkretny akapit.</p>', '<p>Istniejący akapit źródłowy.</p>');
+  fs.writeFileSync(path.join(root, 'target.html'), target);
+  fs.writeFileSync(path.join(root, 'source.html'), source);
+  const manifest = {
+    version: 1,
+    status: 'AWAITING_USER_APPROVAL',
+    source_hashes: { 'source.html': sha256(Buffer.from(source)) },
+    items: [{
+      id: 'ROKUJE 1',
+      file: 'target.html',
+      operations: [{
+        type: 'replace_exact',
+        scope: 'source_page',
+        file: 'source.html',
+        target_file: 'target.html',
+        before: '<p>Istniejący akapit źródłowy.</p>',
+        after: '<p>Istniejący akapit źródłowy.</p><p>Zobacz także: <a href="target.html">Docelowy artykuł</a>.</p>',
+        reason: 'Linkowanie kontekstowe do zatwierdzonego artykułu docelowego.',
+        basis: [
+          { type: 'GSC_QUERY', value: 'zatwierdzona fraza: 80 wyświetleń' },
+          { type: 'INTERNAL_LINK_MAP', value: 'source.html -> target.html: lokalna mapa intencji' },
+        ],
+      }],
+    }],
+  };
+  assert.deepEqual(validatePatchManifest(manifest, root, ['ROKUJE 1']).errors, []);
+  manifest.items[0].operations[0].after = '<p>Istniejący akapit źródłowy.</p><p>Nowe twierdzenie medyczne bez źródła.</p><p>Zobacz także: <a href="target.html">Docelowy artykuł</a>.</p>';
+  assert.ok(validatePatchManifest(manifest, root, ['ROKUJE 1']).errors.some((error) => error.includes('SOURCE')));
 });
 
 test('GSC list remains empty until live HTML, canonical, sitemap and PDF all match', () => {

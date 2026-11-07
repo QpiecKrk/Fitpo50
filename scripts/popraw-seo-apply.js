@@ -78,7 +78,7 @@ function syncMirrorFile(relative) {
   atomicWrite(target, fs.readFileSync(source));
 }
 
-function candidateFiles(touched, articleFiles) {
+function candidateFiles(touched, articleFiles, targetFiles = []) {
   const files = new Set([path.join(ROOT, 'assets', 'topic-center-contract.css'), path.join(ROOT, '_site', 'assets', 'topic-center-contract.css'), DEPLOYMENT_MANIFEST, RESULT_FILE, path.join(ROOT, 'sitemap.xml'), path.join(ROOT, '_site', 'sitemap.xml')]);
   for (const file of ['llms.txt', 'llms-full.txt', 'assets/data/search-index.json']) {
     files.add(path.join(ROOT, file));
@@ -97,6 +97,12 @@ function candidateFiles(touched, articleFiles) {
     files.add(path.join(ROOT, '_site', 'assets', 'pdf', `${slug}.pdf`));
     files.add(path.join(ROOT, 'data', 'reports', 'article-preview', `${slug}.json`));
     files.add(path.join(ROOT, 'data', 'reports', 'article-preview', `${slug}.md`));
+  });
+  targetFiles.forEach((relative) => {
+    const slug = relative.replace(/\.html$/, '');
+    files.add(path.join(ROOT, relative));
+    files.add(mirrorPath(relative));
+    files.add(path.join(ROOT, 'assets', 'pdf', `${slug}.pdf`));
   });
   return [...files];
 }
@@ -119,7 +125,7 @@ function main() {
   if (args.internal && process.env.FITPO50_SEO_STAGING !== '1') throw new Error('Prywatny tryb stagingu wymaga kontrolera.');
   if (!args.internal) {
     recoverInterruptedTransactions(ROOT);
-    const candidates = candidateFiles(validation.touched, patched.articleFiles).map((file) => path.relative(ROOT, file));
+    const candidates = candidateFiles(validation.touched, patched.articleFiles, patched.targetFiles).map((file) => path.relative(ROOT, file));
     let stageRoot = args.promoteStage;
     let baseline;
     if (!stageRoot) {
@@ -128,7 +134,7 @@ function main() {
       console.log(`[STAGING] ${stageRoot}`);
       const stageManifest = path.join(stageRoot, 'seo-input-manifest.json');
       atomicWriteFileSync(stageManifest, JSON.stringify(manifest));
-      const child = spawnSync('node', ['scripts/popraw-seo-apply.js', '--manifest', stageManifest, '--ids', args.ids, '--confirm', CONFIRMATION, '--stage-internal'], { cwd: stageRoot, stdio: 'inherit', env: { ...process.env, FITPO50_SEO_STAGING: '1' } });
+      const child = spawnSync('node', ['scripts/popraw-seo-apply.js', '--manifest', stageManifest, '--ids', args.ids, '--confirm', CONFIRMATION, '--stage-internal'], { cwd: stageRoot, stdio: 'inherit', env: { ...process.env, FITPO50_SEO_STAGING: '1', FITPO50_SOURCE_ROOT: ROOT } });
       if (child.status !== 0) throw new Error(`Staging nie przeszedł; źródłowy HTML bez zmian. Podgląd: ${stageRoot}`);
       const hashes = Object.fromEntries(candidates
         .filter((file) => !/data\/reports\/article-preview\/[^/]+\.(?:json|md)$/.test(file))
@@ -167,9 +173,9 @@ function main() {
     disposeTempWorkspace(stageRoot, { status: 'COMPLETED' });
     return;
   }
-  const state = snapshot(candidateFiles(validation.touched, patched.articleFiles));
+  const state = snapshot(candidateFiles(validation.touched, patched.articleFiles, patched.targetFiles));
   try {
-    for (const [relative, content] of patched.contents.entries()) atomicWrite(path.join(ROOT, relative), content);
+    for (const relative of patched.changedFiles) atomicWrite(path.join(ROOT, relative), patched.contents.get(relative));
     const slugs = patched.articleFiles.map((file) => file.replace(/\.html$/, ''));
     run('PDF ze zmienionego HTML', 'python3', ['scripts/sync_article_pdfs_and_buttons.py', ...slugs.flatMap((slug) => ['--slug', slug])]);
     if (fs.existsSync(path.join(ROOT, 'assets', 'topic-center-contract.css'))) syncMirrorFile('assets/topic-center-contract.css');
@@ -211,7 +217,7 @@ function main() {
     const deployment = buildDeploymentManifest({
       manifest,
       items: validation.items,
-      contents: new Map(patched.articleFiles.map((file) => [file, fs.readFileSync(path.join(ROOT, file), 'utf8')])),
+      contents: new Map(patched.contents),
       targetFiles: patched.targetFiles,
       iso,
     });
