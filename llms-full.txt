@@ -2,7 +2,7 @@
 
 source: https://fitpo50.pl/
 language: pl-PL
-generated_at: 2026-11-07T22:01:17.000Z
+generated_at: 2026-11-08T05:55:47.000Z
 articles_count: 115
 
 ## Otyłość sarkopeniczna: mięśnie, tłuszcz i diagnoza
@@ -3607,6 +3607,8 @@ Najbardziej wiarygodny efekt to poprawa siły i funkcji: łatwiejsze wstawanie, 
 
  Siła ma praktyczne znaczenie wtedy, gdy ułatwia wstawanie, chodzenie, przenoszenie i zachowanie samodzielności.
 W tym samym przeglądzie wyniki dotyczące masy mięśniowej były mniej jednoznaczne niż wyniki siły i sprawności. To ważna korekta marketingowego hasła „odbudujesz mięśnie w kilka miesięcy”. Efekt zależy od programu, wyjściowego stanu, podaży energii i białka oraz regularności.
+
+Zobacz także: Mięśnie dna miednicy po 50-tce: ćwiczenia i odczyt wyniku EMG.
 
 Jeżeli problemem jest jednocześnie mała siła i nadmiar tkanki tłuszczowej, zobacz wyjaśnienie otyłości sarkopenicznej.
 

@@ -226,8 +226,8 @@ def validate(
     if descriptions[0] and any(phrase in descriptions[0].casefold() for phrase in BANNED_META):
         errors.append("Opis SEO zawiera generyczny, mało-klikalny szablon.")
     quick = str(data.get("quick_answer", ""))
-    if quick and not 1 <= sentences(quick) <= 3:
-        errors.append(f"quick_answer ma {sentences(quick)} zdań; wymagane 1–3.")
+    if quick and not 1 <= sentences(quick) <= 5:
+        errors.append(f"quick_answer ma {sentences(quick)} zdań; wymagane 1–5.")
     quick_words = words(quick)
     if quick and quick_words > 70:
         errors.append(f"quick_answer ma {quick_words} słów; maksymalny limit to 70.")

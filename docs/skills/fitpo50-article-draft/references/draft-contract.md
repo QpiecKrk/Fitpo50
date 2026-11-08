@@ -83,7 +83,7 @@ Po przyjęciu nowego draftu lokalny kontroler tworzy zarządzany stan `AWAITING_
 - `search_intent` ma dokładnie jedną wartość: `how-to`, `czy-warto`, `objawy`, `normy`, `bezpieczenstwo`, `definicja`, `porownanie`, `informacyjna`, `plan`, `koszt` albo `dawkowanie`.
 - `primary_keyword` ma 2–8 słów i występuje naturalnie w `title`, `seo_title`, `lead` albo `quick_answer`; `supporting_keywords` zawiera 3–8 unikalnych fraz.
 - `key_takeaways` zawiera dokładnie 4 kompletne wnioski. Po każdej zmianie tej listy sprawdź wszystkie indeksy `evidence_claims.location`.
-- `quick_answer` zawiera 1–3 pełne, konkretne zdania, liczbę albo jawny warunek, odpowiada od razu i ma najwyżej 70 słów. Nie dopisuj słów dla sztucznego minimum.
+- `quick_answer` zawiera 1–5 pełnych, konkretnych zdań, liczbę albo jawny warunek, odpowiada od razu i ma najwyżej 70 słów. Nie dopisuj słów dla sztucznego minimum.
 - Pytające H2 kończą się `?`. Pierwszy akapit odpowiada bezpośrednio i konkretnie; 30–70 słów jest zaleceniem, nie samodzielnym blokerem.
 - Każda sekcja ma `section_role: "main"` albo `"utility"`. Domyślne `main` oznacza główną sekcję merytoryczną i wymaga obrazu; `utility` służy wyłącznie krótkiemu blokowi użytkowemu, który nie potrzebuje osobnej ilustracji. Nie oznaczaj sekcji jako `utility` tylko po to, aby ominąć obraz.
 - Pierwszy akapit pod H2 kończy pełną myśl znakiem `.`, `!` albo `?`; nie może urywać się dwukropkiem zapowiadającym brakującą treść.

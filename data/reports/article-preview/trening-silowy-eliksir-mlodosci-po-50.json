@@ -1,35 +1,353 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T19:08:11.582Z",
+  "generated_at": "2026-11-08T06:55:54+01:00",
+  "reviewed_at": null,
   "slug": "trening-silowy-eliksir-mlodosci-po-50",
-  "html_sha256": "f0f89250aff4e3509f23df42503d5576577934e04272a4a5f404dc7af48d883c",
-  "site_html_sha256": "f0f89250aff4e3509f23df42503d5576577934e04272a4a5f404dc7af48d883c",
-  "pdf_sha256": "3aca9eea923762b203b71c6d92b101638d7ee87debc270a6d6dce0aafa46409a",
-  "site_pdf_sha256": "3aca9eea923762b203b71c6d92b101638d7ee87debc270a6d6dce0aafa46409a",
+  "html_sha256": "39b6a4a324286f59ee6e7831de1e6df954f14ad55c6ee1273b68434526bcf028",
+  "site_html_sha256": "39b6a4a324286f59ee6e7831de1e6df954f14ad55c6ee1273b68434526bcf028",
+  "pdf_sha256": "adcb93363f435a920237d3fc07c5b1c2f08a3d9002210a9ac7380abe5cce9d7b",
+  "site_pdf_sha256": "adcb93363f435a920237d3fc07c5b1c2f08a3d9002210a9ac7380abe5cce9d7b",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-08T06:55:54+01:00",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "trening-silowy-eliksir-mlodosci-po-50.html",
+      "sha256": "39b6a4a324286f59ee6e7831de1e6df954f14ad55c6ee1273b68434526bcf028",
+      "bytes": 33805
+    },
+    "html_site": {
+      "file": "_site/trening-silowy-eliksir-mlodosci-po-50.html",
+      "sha256": "39b6a4a324286f59ee6e7831de1e6df954f14ad55c6ee1273b68434526bcf028",
+      "bytes": 33805
+    },
+    "pdf_source": {
+      "file": "assets/pdf/trening-silowy-eliksir-mlodosci-po-50.pdf",
+      "sha256": "adcb93363f435a920237d3fc07c5b1c2f08a3d9002210a9ac7380abe5cce9d7b",
+      "bytes": 580329
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/trening-silowy-eliksir-mlodosci-po-50.pdf",
+      "sha256": "adcb93363f435a920237d3fc07c5b1c2f08a3d9002210a9ac7380abe5cce9d7b",
+      "bytes": 580329
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/trening-silowy-eliksir-mlodosci-po-50/desktop.png",
+      "screenshot_sha256": "170817d38d310ac476365b9f0b5affdc941d973a2c48fc268463f16e43e5509d",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/trening-silowy-eliksir-mlodosci-po-50/mobile.png",
+      "screenshot_sha256": "d769ae57c81ac5e2b32176d35b99236faca8be08c1e593339ed7951387eba2e8",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "RUCH 9 min czytania Aktualizacja: 30.09.2026 Trening siłowy po 50: hormony, siła i metabolizm mięśni Ciężary po 50-tce to nie ryzyko, ale inwestycja w długowieczność Zobacz też: trening siłowy i starzenie komórkowe.",
+      "alt": "Osoba po 50. roku życia wykonuje trening siłowy z hantlami w profesjonalnej siłowni",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-hormony-50-hero-v2.avif",
+          "sha256": "3335ffc485af0fb676c1ec506e66451a7db829fb4f506c33047313ce4d5b0a21",
+          "bytes": 42763,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-silowy-hormony-50-hero-v2.webp",
+          "sha256": "af9200807ae4777b9bc608eeeb7d35b753f52b9bac48fa35f275c6f806bcdc44",
+          "bytes": 51156,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-hormony-50-hero-v2.jpg",
+          "sha256": "3de67f5b42a90a0513fedf2a9de61a92ca01bd2f2b722b9b65d9d17efa9fdb63",
+          "bytes": 133426,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6edd5d59b875627fe60b85c6c0b837b578599a6e3dfad8177eafe053d6dc2fcf"
+    },
+    {
+      "placement": "content:2:czy-trening-silowy-naprawde-odmladza-hormony",
+      "role": "content",
+      "heading": "Czy trening siłowy naprawdę „odmładza hormony”?",
+      "context": "Trening siłowy nie cofa metryki i nie „ustawia hormonów” jak terapia. Może jednak poprawić siłę, sprawność, tolerancję wysiłku i zdolność wykonywania codziennych zadań. Po 50-tce właśnie te efekty są ważniejsze niż krótkotrwały skok hormonu wzrostu, testosteronu, kortyzolu lub BDNF po pojedynczej sesji. Szybka odpowiedź Trening oporowy jest jednym z najlepiej udokumentowanych sposobów poprawy siły i sprawności w późniejszym wieku. Nie jest hormonalnym odmładzaniem. Dla początkującej osoby praktycznym startem są 2 sesje całego ciała tygodniowo, spokojna progresja i kilka powtórzeń pozostawionych w zapasie. Choroby oraz objawy wysiłkowe wymagają dopasowania planu. Kluczowe wnioski Postęp wynika z regularnego bodźca i regeneracji, a nie z maksymalizacji krótkiego „piku” hormonów. Najpewniejsz",
+      "alt": "Kobieta i mężczyzna po 50-tce wykonują kontrolowany trening siłowy pod opieką trenerki",
+      "caption": "Trening uruchamia wiele szlaków adaptacji; pojedynczy pomiar hormonu nie opisuje długoterminowego efektu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-eliksir-hormones-20260930.avif",
+          "sha256": "fa16172a8c8382adb614c6ae0d3d31af349476c9a0563867afce1c873e6f794e",
+          "bytes": 98369,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-silowy-eliksir-hormones-20260930.webp",
+          "sha256": "ab3380d8ad82ca134b04a1052d1100b1e77666131d2d72534dd68655f534f009",
+          "bytes": 158088,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-eliksir-hormones-20260930.jpg",
+          "sha256": "fd9f1aa07bdd692103e014d06fe4976754ff35fbb62420359225342b3305b200",
+          "bytes": 296415,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "f3d0fb7b229ed04f73eea8c62a95d55cb6c90169baee86e1d492172ec60ef99d"
+    },
+    {
+      "placement": "content:3:co-trening-oporowy-daje-miesniom-i-codziennej-sp",
+      "role": "content",
+      "heading": "Co trening oporowy daje mięśniom i codziennej sprawności?",
+      "context": "Trening siłowy nie cofa metryki i nie „ustawia hormonów” jak terapia. Może jednak poprawić siłę, sprawność, tolerancję wysiłku i zdolność wykonywania codziennych zadań. Po 50-tce właśnie te efekty są ważniejsze niż krótkotrwały skok hormonu wzrostu, testosteronu, kortyzolu lub BDNF po pojedynczej sesji. Szybka odpowiedź Trening oporowy jest jednym z najlepiej udokumentowanych sposobów poprawy siły i sprawności w późniejszym wieku. Nie jest hormonalnym odmładzaniem. Dla początkującej osoby praktycznym startem są 2 sesje całego ciała tygodniowo, spokojna progresja i kilka powtórzeń pozostawionych w zapasie. Choroby oraz objawy wysiłkowe wymagają dopasowania planu. Kluczowe wnioski Postęp wynika z regularnego bodźca i regeneracji, a nie z maksymalizacji krótkiego „piku” hormonów. Najpewniejsz",
+      "alt": "Kobieta ćwiczy wstawanie z krzesła z fizjoterapeutką i samodzielnie wnosi zakupy po schodach",
+      "caption": "Siła ma praktyczne znaczenie wtedy, gdy ułatwia wstawanie, chodzenie, przenoszenie i zachowanie samodzielności.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-eliksir-function-20260930.avif",
+          "sha256": "db06ab3daf26079c8e95f5203e2ab53cd4c0be468e5621137795ff41bcda9286",
+          "bytes": 106139,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-silowy-eliksir-function-20260930.webp",
+          "sha256": "850ddccf5ba8e9e4e4685d04e98b4499e17eb97c395c1684532edf089deec025",
+          "bytes": 171440,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-eliksir-function-20260930.jpg",
+          "sha256": "f3f20d524be560bbb50c8694f53c007cf91db174cea375475679fc6502a7e705",
+          "bytes": 308323,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "9e879cec70053d786d1143545ade0d71240e6b54c8d2af2b19255c4048179beb"
+    },
+    {
+      "placement": "content:4:jak-trening-silowy-wspiera-metabolizm",
+      "role": "content",
+      "heading": "Jak trening siłowy wspiera metabolizm?",
+      "context": "Trening siłowy nie cofa metryki i nie „ustawia hormonów” jak terapia. Może jednak poprawić siłę, sprawność, tolerancję wysiłku i zdolność wykonywania codziennych zadań. Po 50-tce właśnie te efekty są ważniejsze niż krótkotrwały skok hormonu wzrostu, testosteronu, kortyzolu lub BDNF po pojedynczej sesji. Szybka odpowiedź Trening oporowy jest jednym z najlepiej udokumentowanych sposobów poprawy siły i sprawności w późniejszym wieku. Nie jest hormonalnym odmładzaniem. Dla początkującej osoby praktycznym startem są 2 sesje całego ciała tygodniowo, spokojna progresja i kilka powtórzeń pozostawionych w zapasie. Choroby oraz objawy wysiłkowe wymagają dopasowania planu. Kluczowe wnioski Postęp wynika z regularnego bodźca i regeneracji, a nie z maksymalizacji krótkiego „piku” hormonów. Najpewniejsz",
+      "alt": "Kobieta po 50-tce trenuje z hantlem, a ilustracja pokazuje wychwyt glukozy przez mięśnie",
+      "caption": "Mięśnie uczestniczą w gospodarce glukozą, ale trening jest częścią planu obejmującego również dietę, sen i leczenie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-eliksir-metabolism-20260930.avif",
+          "sha256": "7b05375b64d0fe49933221d46a663ec84ad77a888d355bff25b86a5114525c42",
+          "bytes": 132093,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-silowy-eliksir-metabolism-20260930.webp",
+          "sha256": "00419a625e53549352ff29c6ecc8097fab0ba6482761736253cc7e9fd7b2d532",
+          "bytes": 212312,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-eliksir-metabolism-20260930.jpg",
+          "sha256": "e4fca66b93bca7fc138e12a51bd4b2b6549c4765207977aa24cc60381cec12f3",
+          "bytes": 351201,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6a31042fdc3c59f7befa1d8d804e43c46ea3996a65b588d4b54272459a2e675b"
+    },
+    {
+      "placement": "content:5:czy-trening-silowy-wydluza-zycie",
+      "role": "content",
+      "heading": "Czy trening siłowy wydłuża życie?",
+      "context": "Trening siłowy nie cofa metryki i nie „ustawia hormonów” jak terapia. Może jednak poprawić siłę, sprawność, tolerancję wysiłku i zdolność wykonywania codziennych zadań. Po 50-tce właśnie te efekty są ważniejsze niż krótkotrwały skok hormonu wzrostu, testosteronu, kortyzolu lub BDNF po pojedynczej sesji. Szybka odpowiedź Trening oporowy jest jednym z najlepiej udokumentowanych sposobów poprawy siły i sprawności w późniejszym wieku. Nie jest hormonalnym odmładzaniem. Dla początkującej osoby praktycznym startem są 2 sesje całego ciała tygodniowo, spokojna progresja i kilka powtórzeń pozostawionych w zapasie. Choroby oraz objawy wysiłkowe wymagają dopasowania planu. Kluczowe wnioski Postęp wynika z regularnego bodźca i regeneracji, a nie z maksymalizacji krótkiego „piku” hormonów. Najpewniejsz",
+      "alt": "Grupa osób po 50-tce łączy trening oporowy z marszem i codzienną aktywnością",
+      "caption": "Długoterminowe zdrowie wiąże się z całym wzorcem aktywności, a nie z jedną magiczną dawką treningu siłowego.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/trening-silowy-eliksir-health-20260930.avif",
+          "sha256": "4abef76a19e00e8f2c86d0e0f97ed390f04dea25b64a78b69951b9e60ee4f0e6",
+          "bytes": 137505,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/trening-silowy-eliksir-health-20260930.webp",
+          "sha256": "baee3697e4a064ed2ed90130a11b6cd36ecb64597d2fcfbfb07b25295062ef02",
+          "bytes": 221250,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/trening-silowy-eliksir-health-20260930.jpg",
+          "sha256": "48a07b25f0b16ad4b2cfcd2b5e43e074d3c213c34bd6a81517b0e7881e1460d3",
+          "bytes": 354199,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3c8c33b986f1dd3431ec2af02416e482b1fdcfe33a9bb93fc20a39b29b276aad"
+    },
+    {
+      "placement": "content:6:jak-bezpiecznie-zaczac-trening-po-50-tce",
+      "role": "content",
+      "heading": "Jak bezpiecznie zacząć trening po 50-tce?",
+      "context": "Trening siłowy nie cofa metryki i nie „ustawia hormonów” jak terapia. Może jednak poprawić siłę, sprawność, tolerancję wysiłku i zdolność wykonywania codziennych zadań. Po 50-tce właśnie te efekty są ważniejsze niż krótkotrwały skok hormonu wzrostu, testosteronu, kortyzolu lub BDNF po pojedynczej sesji. Szybka odpowiedź Trening oporowy jest jednym z najlepiej udokumentowanych sposobów poprawy siły i sprawności w późniejszym wieku. Nie jest hormonalnym odmładzaniem. Dla początkującej osoby praktycznym startem są 2 sesje całego ciała tygodniowo, spokojna progresja i kilka powtórzeń pozostawionych w zapasie. Choroby oraz objawy wysiłkowe wymagają dopasowania planu. Kluczowe wnioski Postęp wynika z regularnego bodźca i regeneracji, a nie z maksymalizacji krótkiego „piku” hormonów. Najpewniejsz",
+      "alt": "Trenerka pomaga kobiecie po 50-tce bezpiecznie wykonać siad do ławki",
+      "caption": "Dobry start polega na nauce ruchu i stopniowej progresji, a nie na testowaniu maksymalnego ciężaru.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bezpieczny-start-trening-silowy-50.avif",
+          "sha256": "43257de964649c1874bab81bdbe0d425176abe8800c0fa032e662a507420305f",
+          "bytes": 45681,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bezpieczny-start-trening-silowy-50.webp",
+          "sha256": "0fd750a347244e4c475273ebcf999f4f9ab7c054b11788246919584c4fe47735",
+          "bytes": 94772,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bezpieczny-start-trening-silowy-50.jpg",
+          "sha256": "3aa254f3f5844526f96b73c8d2b50a07c7be2255929d9ce332e889a75465400c",
+          "bytes": 187082,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "be40526a8b26a0d65c0c7ba17b0e62b9a6ce8027bff28fb1eaf470ecad44bad2"
+    }
+  ],
   "pdf": {
     "pages": 5,
     "text_coverage": 1,
-    "rendered_pages": 5
+    "rendered_pages": 5,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/trening-silowy-eliksir-mlodosci-po-50/pdf-pages/page-1.png",
+        "sha256": "08053f2e64ae3166f07181f4e7b017ea713d39989362dd016c0183d5e41c4866",
+        "bytes": 538666,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1048,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/trening-silowy-eliksir-mlodosci-po-50/pdf-pages/page-2.png",
+        "sha256": "cc6a9b858a213dcda4250a5053bb8368b6444aacaef5a5f8e61caa850d25fa8e",
+        "bytes": 1059473,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 56,
+          "width": 1068,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/trening-silowy-eliksir-mlodosci-po-50/pdf-pages/page-3.png",
+        "sha256": "0ef1d2326b93eb1c0bb96e06439771e01f0da3d33d5da6a5c228ce390a184c6d",
+        "bytes": 1211367,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 57,
+          "width": 1056,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/trening-silowy-eliksir-mlodosci-po-50/pdf-pages/page-4.png",
+        "sha256": "0bd0557fb9c6db08f54341f4837dffae30db038d681150d2d4ac36bb74d366d6",
+        "bytes": 577796,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/trening-silowy-eliksir-mlodosci-po-50/pdf-pages/page-5.png",
+        "sha256": "6d98a8c74f88f857147f48a24ffa64b36e5918105caaeec679d3f77041f46afb",
+        "bytes": 201267,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1062,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 5920,
+    "review_wait_ms": null
   },
   "errors": []
 }

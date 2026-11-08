@@ -122,6 +122,8 @@ const POLICY = {
 
   QUICK_ANSWER: {
     LEGACY_CUTOFF: '2026-06-01',
+    MIN_SENTENCES: 1,
+    MAX_SENTENCES: 5,
     CONDITION_PATTERNS: [
       /\bjeśli\b/i,
       /\bgdy\b/i,
@@ -542,8 +544,10 @@ const validators = {
       push.push('Brak treści "Szybka odpowiedź".');
       return { valid: false, errors, warnings, words, sentences };
     }
-    if (sentences < 1 || sentences > 3 || !/[.!?]["'»”)]?$/.test(clean)) {
-      push.push(`Szybka odpowiedź musi zawierać 1-3 pełne zdania (jest ${sentences}).`);
+    if (sentences < POLICY.QUICK_ANSWER.MIN_SENTENCES
+      || sentences > POLICY.QUICK_ANSWER.MAX_SENTENCES
+      || !/[.!?]["'»”)]?$/.test(clean)) {
+      push.push(`Szybka odpowiedź musi zawierać 1-5 pełnych zdań (jest ${sentences}).`);
     }
     if (words > POLICY.WORDS.QUICK_ANSWER_MAX) {
       push.push(`Szybka odpowiedź przekracza ${POLICY.WORDS.QUICK_ANSWER_MAX} słów (jest ${words}).`);

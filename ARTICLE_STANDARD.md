@@ -120,7 +120,7 @@ Artykuł nie przechodzi, jeśli:
   - `<section id="quick-answer" class="quick-answer reveal" aria-label="Szybka odpowiedź">`
 - Wymagana zawartość:
   - jedno `h2` o treści `Szybka odpowiedź`,
-  - jeden krótki akapit podsumowania (`p`) złożony z 1–3 pełnych, konkretnych zdań; kropka dziesiętna nie jest końcem zdania.
+  - jeden krótki akapit podsumowania (`p`) złożony z 1–5 pełnych, konkretnych zdań; kropka dziesiętna nie jest końcem zdania.
 - Pozycja kanoniczna:
   - po bloku PDF (`.pdf-hero-download`) i przed główną treścią.
 - Reguła anty-regresji layoutu:

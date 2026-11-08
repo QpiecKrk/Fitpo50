@@ -44,17 +44,13 @@ test('globalny diff gate nie traktuje celowo błędnych fixture jako draftów pu
   assert.match(source, /!isTestFixture\(file\)/);
 });
 
-test('baseline zwalnia tylko dokładnie znany błąd przypisany do konkretnego pliku', () => {
+test('usunięty baseline 1-3 nie zwalnia już starego błędu quick answer', () => {
   const known = 'Szybka odpowiedź musi zawierać 1-3 pełne zdania (jest 4).';
   const newError = 'Nowy błąd walidacji.';
   const warnings = [];
-  const remaining = applyKnownValidationBaseline(
-    'co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html',
-    [known, newError],
-    warnings,
-  );
-  assert.deepEqual(remaining, [newError]);
-  assert.deepEqual(warnings, [`[KNOWN-BASELINE] ${known}`]);
+  const remaining = applyKnownValidationBaseline('trening-silowy-eliksir-mlodosci-po-50.html', [known, newError], warnings);
+  assert.deepEqual(remaining, [known, newError]);
+  assert.deepEqual(warnings, []);
 
   const otherFileWarnings = [];
   assert.deepEqual(applyKnownValidationBaseline('nowy-artykul.html', [known], otherFileWarnings), [known]);

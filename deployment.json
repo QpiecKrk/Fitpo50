@@ -1,18 +1,38 @@
 {
   "version": 4,
-  "release_id": "7a5e90b1-c728-4396-9e80-b6058d773bd6",
-  "prepared_at": "2026-11-07T23:54:01+01:00",
-  "prepared_from_head": "38b72c9a9b890b6c409d2825c1ffc36b9c89c932",
-  "publication_state_sha256": "6a8b49be6d7684681ba0fbc85c6e8c0f05373bc4beae9c9f4d559c8d555c60cf",
-  "public_fingerprint_sha256": "1e54a88a71cdd67edeb259a572eb31f00bf84fdc0f2d089f93ed8e0bc4c54ea6",
+  "release_id": "770c642e-53fb-4484-95d7-3f087569e80b",
+  "prepared_at": "2026-11-08T07:00:40+01:00",
+  "prepared_from_head": "aafe227db533130ab9a3a260f41a8c89bbd7af26",
+  "publication_state_sha256": "0a5158f9146a70b0095c6cffe6a1ba06a43309d8a3240c9098fc226c1b93d69d",
+  "public_fingerprint_sha256": "49fc420e869bdcd75176054bd339b452f9fc1483e25e0eafb13350cbc9efe82e",
   "change_scope": [
-    "news"
+    "full"
   ],
   "verification_targets": [
     {
-      "path": "assets/data/news-fallback.json",
+      "path": "assets/data/search-index.json",
       "mode": "sha256",
-      "sha256": "6f1a30c93220454cd2a0bcd3c2b5c9a4021ba42d22f2172880e372fe7a64a7be"
+      "sha256": "987a5bf7a75c2a1ce9b8a961068f61a8ad9d0c37a1b271953a9728ebaa732747"
+    },
+    {
+      "path": "assets/pdf/trening-silowy-eliksir-mlodosci-po-50.pdf",
+      "mode": "sha256",
+      "sha256": "adcb93363f435a920237d3fc07c5b1c2f08a3d9002210a9ac7380abe5cce9d7b"
+    },
+    {
+      "path": "llms-full.txt",
+      "mode": "sha256",
+      "sha256": "cce69b49186dcaff4f203df943de8eae342cb95969894ffb88bae605db6b7fff"
+    },
+    {
+      "path": "sitemap.xml",
+      "mode": "sha256",
+      "sha256": "7402d10cd4daa6da81235eb0b4adcb97c6c349a166c74d26b1308ea77d0947fb"
+    },
+    {
+      "path": "trening-silowy-eliksir-mlodosci-po-50.html",
+      "mode": "sha256",
+      "sha256": "39b6a4a324286f59ee6e7831de1e6df954f14ad55c6ee1273b68434526bcf028"
     }
   ],
   "news": {
@@ -95,5 +115,138 @@
       }
     ]
   },
-  "articles": []
+  "articles": [
+    {
+      "file": "trening-silowy-eliksir-mlodosci-po-50.html",
+      "slug": "trening-silowy-eliksir-mlodosci-po-50",
+      "url": "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
+      "date_modified": "2026-11-08T06:55:47+01:00",
+      "html_sha256": "39b6a4a324286f59ee6e7831de1e6df954f14ad55c6ee1273b68434526bcf028",
+      "pdf_path": "assets/pdf/trening-silowy-eliksir-mlodosci-po-50.pdf",
+      "pdf_sha256": "adcb93363f435a920237d3fc07c5b1c2f08a3d9002210a9ac7380abe5cce9d7b",
+      "images": [
+        {
+          "path": "assets/bezpieczny-start-trening-silowy-50.avif",
+          "sha256": "43257de964649c1874bab81bdbe0d425176abe8800c0fa032e662a507420305f"
+        },
+        {
+          "path": "assets/bezpieczny-start-trening-silowy-50.jpg",
+          "sha256": "3aa254f3f5844526f96b73c8d2b50a07c7be2255929d9ce332e889a75465400c"
+        },
+        {
+          "path": "assets/bezpieczny-start-trening-silowy-50.webp",
+          "sha256": "0fd750a347244e4c475273ebcf999f4f9ab7c054b11788246919584c4fe47735"
+        },
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        },
+        {
+          "path": "assets/peptydy-lancuch-aminokwasow-molekularny-hero.avif",
+          "sha256": "4c43a534cddc6c2036c3322169e681a333980d3bbd7b37ff09ca2cf79c48ae2d"
+        },
+        {
+          "path": "assets/peptydy-lancuch-aminokwasow-molekularny-hero.jpg",
+          "sha256": "10f569e1c9e3f4c099d0fd3089f74b6834fdecb506741209590ed2e904329a0a"
+        },
+        {
+          "path": "assets/peptydy-lancuch-aminokwasow-molekularny-hero.webp",
+          "sha256": "85caf826b3a9aba618e78b909c4b2b71d919a91257618fa4c1806f9a8f87a63e"
+        },
+        {
+          "path": "assets/sakady-mozg-oko-sciezki-sakad-hero.avif",
+          "sha256": "313bec693ab4ec715dd3f554ecbc0ec599c629bf47bcd6e2d35c84cea05b61dc"
+        },
+        {
+          "path": "assets/sakady-mozg-oko-sciezki-sakad-hero.jpg",
+          "sha256": "08db7de92d4d22aa5a51c37c3d805d3074c1f07351226eda56e46d47b93f6c82"
+        },
+        {
+          "path": "assets/sakady-mozg-oko-sciezki-sakad-hero.webp",
+          "sha256": "b3800b0b8a027fb1ca135efb325b75d9a4b5af661632087a4c8b9fcee756c59f"
+        },
+        {
+          "path": "assets/trening-silowy-dna-hero.avif",
+          "sha256": "92eb49eae288dc6b74cba9026afb6b8c08081dba9e9bb63cbb1a9d247e9e0510"
+        },
+        {
+          "path": "assets/trening-silowy-dna-hero.jpg",
+          "sha256": "2aebab6fe911cb3514d3510c3ae8afb0269717f17c40d8ed91507f2f526fba45"
+        },
+        {
+          "path": "assets/trening-silowy-dna-hero.webp",
+          "sha256": "feababb892340f8ee9f563ecab0520edd65e0cba366ef3468c9be13d1281d778"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-function-20260930.avif",
+          "sha256": "db06ab3daf26079c8e95f5203e2ab53cd4c0be468e5621137795ff41bcda9286"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-function-20260930.jpg",
+          "sha256": "f3f20d524be560bbb50c8694f53c007cf91db174cea375475679fc6502a7e705"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-function-20260930.webp",
+          "sha256": "850ddccf5ba8e9e4e4685d04e98b4499e17eb97c395c1684532edf089deec025"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-health-20260930.avif",
+          "sha256": "4abef76a19e00e8f2c86d0e0f97ed390f04dea25b64a78b69951b9e60ee4f0e6"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-health-20260930.jpg",
+          "sha256": "48a07b25f0b16ad4b2cfcd2b5e43e074d3c213c34bd6a81517b0e7881e1460d3"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-health-20260930.webp",
+          "sha256": "baee3697e4a064ed2ed90130a11b6cd36ecb64597d2fcfbfb07b25295062ef02"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-hormones-20260930.avif",
+          "sha256": "fa16172a8c8382adb614c6ae0d3d31af349476c9a0563867afce1c873e6f794e"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-hormones-20260930.jpg",
+          "sha256": "fd9f1aa07bdd692103e014d06fe4976754ff35fbb62420359225342b3305b200"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-hormones-20260930.webp",
+          "sha256": "ab3380d8ad82ca134b04a1052d1100b1e77666131d2d72534dd68655f534f009"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-metabolism-20260930.avif",
+          "sha256": "7b05375b64d0fe49933221d46a663ec84ad77a888d355bff25b86a5114525c42"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-metabolism-20260930.jpg",
+          "sha256": "e4fca66b93bca7fc138e12a51bd4b2b6549c4765207977aa24cc60381cec12f3"
+        },
+        {
+          "path": "assets/trening-silowy-eliksir-metabolism-20260930.webp",
+          "sha256": "00419a625e53549352ff29c6ecc8097fab0ba6482761736253cc7e9fd7b2d532"
+        },
+        {
+          "path": "assets/trening-silowy-hormony-50-hero-v2.avif",
+          "sha256": "3335ffc485af0fb676c1ec506e66451a7db829fb4f506c33047313ce4d5b0a21"
+        },
+        {
+          "path": "assets/trening-silowy-hormony-50-hero-v2.jpg",
+          "sha256": "3de67f5b42a90a0513fedf2a9de61a92ca01bd2f2b722b9b65d9d17efa9fdb63"
+        },
+        {
+          "path": "assets/trening-silowy-hormony-50-hero-v2.webp",
+          "sha256": "af9200807ae4777b9bc608eeeb7d35b753f52b9bac48fa35f275c6f806bcdc44"
+        }
+      ],
+      "listing_paths": [
+        "porady.html",
+        "rusz-sie.html",
+        "assets/data/search-index.json"
+      ]
+    }
+  ]
 }

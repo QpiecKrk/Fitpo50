@@ -1,64 +1,38 @@
 {
   "version": 2,
-  "generated_at": "2026-11-07T23:01:17+01:00",
+  "generated_at": "2026-11-08T06:55:47+01:00",
   "status": "COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT",
   "source_report_generated_at": "2026-11-07T15:23:08+01:00",
   "approved_ids": [
-    "ROKUJE 1",
-    "ROKUJE 2"
+    "BOOST 2"
   ],
   "targets": [
     {
-      "id": "ROKUJE 1",
-      "file": "kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
-      "url": "https://fitpo50.pl/kreatyna-i-bialko-po-50-tce-jak-laczyc.html",
-      "date_modified": "2026-11-07T23:01:17+01:00",
+      "id": "BOOST 2",
+      "file": "miesnie-dna-miednicy-trening-core-po-50.html",
+      "url": "https://fitpo50.pl/miesnie-dna-miednicy-trening-core-po-50.html",
+      "target_changed": false,
+      "date_modified": "2026-11-08T06:55:47+01:00",
       "content_needles": [],
-      "expected_html_sha256": "9fdbe1ab41d8f1abc50ad7359c85eb6d593b71c60eeaa09bb7d6c7b67e04df3e",
-      "pdf_url": "https://fitpo50.pl/assets/pdf/kreatyna-i-bialko-po-50-tce-jak-laczyc.pdf",
+      "expected_html_sha256": "a25e39ba0c0989d5d7cef207ffa383c0bbc5228458630ec305ce0bf7250388b8",
+      "pdf_url": "https://fitpo50.pl/assets/pdf/miesnie-dna-miednicy-trening-core-po-50.pdf",
       "source_pages_for_recrawl": [
-        "https://fitpo50.pl/jedz-wiecej-po-50.html"
+        "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html"
       ],
       "source_pages": [
         {
-          "file": "jedz-wiecej-po-50.html",
-          "url": "https://fitpo50.pl/jedz-wiecej-po-50.html",
-          "date_modified": "2026-11-07T23:01:17+01:00",
-          "expected_html_sha256": "5766271e61c07b349fbb4f008bb878eb828bd24fa33a5f86550a23738e13e5f1",
-          "pdf_url": "https://fitpo50.pl/assets/pdf/jedz-wiecej-po-50.pdf",
+          "file": "trening-silowy-eliksir-mlodosci-po-50.html",
+          "url": "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
+          "date_modified": "2026-11-08T06:55:47+01:00",
+          "expected_html_sha256": "1f3676fb840a9fc424a9d6836f726dac4f558701c351030ea396e6abc984efab",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/trening-silowy-eliksir-mlodosci-po-50.pdf",
           "content_needles": [
-            "<p>„Jedz więcej” nie jest dobrą radą dla każdego. Problemem jest zbyt mała podaż energii lub białka względem potrzeb, zwłaszcza przy chudnięciu, chorobie i treningu. U zdrowych starszych osób często rozważa się 1,0–1,2 g białka/kg masy ciała, ale choroba nerek i inne schorzenia wymagają indywidualnego planu.</p><p>Zobacz także: <a href=\"kreatyna-i-bialko-po-50-tce-jak-laczyc.html\">Kreatyna a białko po 50-tce: różnice, dawkowanie i łączenie</a>.</p>"
+            "<p>W tym samym przeglądzie wyniki dotyczące masy mięśniowej były mniej jednoznaczne niż wyniki siły i sprawności. To ważna korekta marketingowego hasła „odbudujesz mięśnie w kilka miesięcy”. Efekt zależy od programu, wyjściowego stanu, podaży energii i białka oraz regularności.</p><p>Zobacz także: <a href=\"miesnie-dna-miednicy-trening-core-po-50.html\">Mięśnie dna miednicy po 50-tce: ćwiczenia i odczyt wyniku EMG</a>.</p>"
           ],
-          "expected_pdf_sha256": "f5d58bfa9d32e7f02db1d28663e79ed688ebbe0d2caa8ff80e24375a413319e5"
+          "expected_pdf_sha256": "adcb93363f435a920237d3fc07c5b1c2f08a3d9002210a9ac7380abe5cce9d7b"
         }
       ],
-      "expected_pdf_sha256": "b9d5ba1dbbbf3ff4c7da73fe11cf52ef2ef4d4300fcd0a6603305d91513ad227"
-    },
-    {
-      "id": "ROKUJE 2",
-      "file": "apob-apoa-badania-cholesterol.html",
-      "url": "https://fitpo50.pl/apob-apoa-badania-cholesterol.html",
-      "date_modified": "2026-11-07T23:01:17+01:00",
-      "content_needles": [],
-      "expected_html_sha256": "389cb2a4fe5fa36b3e91e4835ad24d7207acb100af790782eeb454f7d5edcd00",
-      "pdf_url": "https://fitpo50.pl/assets/pdf/apob-apoa-badania-cholesterol.pdf",
-      "source_pages_for_recrawl": [
-        "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html"
-      ],
-      "source_pages": [
-        {
-          "file": "tluszcz-trzewny-choroby-jak-walczyc.html",
-          "url": "https://fitpo50.pl/tluszcz-trzewny-choroby-jak-walczyc.html",
-          "date_modified": "2026-11-07T23:01:17+01:00",
-          "expected_html_sha256": "16506c1708bfc481f607bd10f3d7893bc9f565519dae832e86cd2bb1e5d5d5a9",
-          "pdf_url": "https://fitpo50.pl/assets/pdf/tluszcz-trzewny-choroby-jak-walczyc.pdf",
-          "content_needles": [
-            "<p>Sam wygląd nie rozstrzyga ryzyka. Wynik warto łączyć z ciśnieniem, glukozą i lipidami, które omawia <a href=\"badania-po-50.html\">przewodnik badań po 50-tce</a>.</p><p>Zobacz także: <a href=\"apob-apoa-badania-cholesterol.html\">ApoB/ApoA1 po 50-tce: jak czytać wynik i ocenić ryzyko serca</a>.</p>"
-          ],
-          "expected_pdf_sha256": "a5d38bef2a3cd39ac9939ca4eeab935e26a32cd4f64b34b418c1a5cd11b82e88"
-        }
-      ],
-      "expected_pdf_sha256": "0feb221a1f8049cf3d0280442d1951a1c0683d6f925c87bd989a008c67d54fa3"
+      "expected_pdf_sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2"
     }
   ],
   "deployments": [
@@ -311,6 +285,44 @@
             }
           ],
           "expected_pdf_sha256": "0feb221a1f8049cf3d0280442d1951a1c0683d6f925c87bd989a008c67d54fa3"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "generated_at": "2026-11-08T06:55:47+01:00",
+      "status": "COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT",
+      "source_report_generated_at": "2026-11-07T15:23:08+01:00",
+      "approved_ids": [
+        "BOOST 2"
+      ],
+      "targets": [
+        {
+          "id": "BOOST 2",
+          "file": "miesnie-dna-miednicy-trening-core-po-50.html",
+          "url": "https://fitpo50.pl/miesnie-dna-miednicy-trening-core-po-50.html",
+          "target_changed": false,
+          "date_modified": "2026-11-08T06:55:47+01:00",
+          "content_needles": [],
+          "expected_html_sha256": "a25e39ba0c0989d5d7cef207ffa383c0bbc5228458630ec305ce0bf7250388b8",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/miesnie-dna-miednicy-trening-core-po-50.pdf",
+          "source_pages_for_recrawl": [
+            "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html"
+          ],
+          "source_pages": [
+            {
+              "file": "trening-silowy-eliksir-mlodosci-po-50.html",
+              "url": "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
+              "date_modified": "2026-11-08T06:55:47+01:00",
+              "expected_html_sha256": "1f3676fb840a9fc424a9d6836f726dac4f558701c351030ea396e6abc984efab",
+              "pdf_url": "https://fitpo50.pl/assets/pdf/trening-silowy-eliksir-mlodosci-po-50.pdf",
+              "content_needles": [
+                "<p>W tym samym przeglądzie wyniki dotyczące masy mięśniowej były mniej jednoznaczne niż wyniki siły i sprawności. To ważna korekta marketingowego hasła „odbudujesz mięśnie w kilka miesięcy”. Efekt zależy od programu, wyjściowego stanu, podaży energii i białka oraz regularności.</p><p>Zobacz także: <a href=\"miesnie-dna-miednicy-trening-core-po-50.html\">Mięśnie dna miednicy po 50-tce: ćwiczenia i odczyt wyniku EMG</a>.</p>"
+              ],
+              "expected_pdf_sha256": "adcb93363f435a920237d3fc07c5b1c2f08a3d9002210a9ac7380abe5cce9d7b"
+            }
+          ],
+          "expected_pdf_sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2"
         }
       ]
     }

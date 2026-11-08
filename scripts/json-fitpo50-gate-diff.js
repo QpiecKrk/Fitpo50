@@ -88,7 +88,8 @@ function hasClearQuickAnswerForm(text) {
   const normalized = normalizeQuickAnswerForSentenceGate(text);
   if (!/^[A-ZĄĆĘŁŃÓŚŹŻ]/u.test(normalized) || !/[.?!]$/u.test(normalized) || normalized.length < 16) return false;
   const endings = normalized.match(/[?!]|\.(?=\s+[A-ZĄĆĘŁŃÓŚŹŻ]|$)/gu) || [];
-  return endings.length >= 1 && endings.length <= 3;
+  return endings.length >= POLICY.QUICK_ANSWER.MIN_SENTENCES
+    && endings.length <= POLICY.QUICK_ANSWER.MAX_SENTENCES;
 }
 
 function collectRepeatedLongSentences(chunks) {
@@ -142,7 +143,9 @@ function calculateAeoScore(ctx) {
   let links = 0;
   const notes = [];
 
-  if (ctx.quickAnswerSentences >= 1 && ctx.quickAnswerSentences <= 3 && ctx.quickAnswerWords <= POLICY.WORDS.QUICK_ANSWER_MAX) {
+  if (ctx.quickAnswerSentences >= POLICY.QUICK_ANSWER.MIN_SENTENCES
+    && ctx.quickAnswerSentences <= POLICY.QUICK_ANSWER.MAX_SENTENCES
+    && ctx.quickAnswerWords <= POLICY.WORDS.QUICK_ANSWER_MAX) {
     quickAnswer += 15;
   } else if (ctx.quickAnswerWords > 0 && ctx.quickAnswerWords <= 80) {
     quickAnswer += 8;

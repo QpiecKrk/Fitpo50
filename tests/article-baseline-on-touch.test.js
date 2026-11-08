@@ -9,17 +9,24 @@ const { validateTopicCenter } = require('../scripts/lib/topic-center-contract');
 const contractDiff = require('../scripts/run-article-contract-diff');
 
 const ROOT = path.resolve(__dirname, '..');
-const KNOWN_QUICK_ANSWER_ERROR = 'Szybka odpowiedź musi zawierać 1-3 pełne zdania (jest 4).';
+test('four-sentence GŁÓWNA 5 quick answer passes global and changed HTML validation', () => {
+  const quickAnswerLimit = /Szybka odpowiedź musi zawierać 1-5 pełnych zdań/;
+  const article = path.join(ROOT, 'trening-silowy-eliksir-mlodosci-po-50.html');
+  const globalAudit = validateFile(article);
+  const changedAudit = validateFile(article, { strictChanged: true });
 
-test('changed article cannot use the known-error baseline, while the global audit still can', () => {
+  assert.equal(globalAudit.errors.some((error) => quickAnswerLimit.test(error)), false);
+  assert.equal(changedAudit.errors.some((error) => quickAnswerLimit.test(error)), false);
+  assert.equal(globalAudit.warnings.some((warning) => quickAnswerLimit.test(warning)), false);
+});
+
+test('changed article still accepts four sentences after the 1-5 contract change', () => {
   const article = path.join(ROOT, 'co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html');
   const globalAudit = validateFile(article);
   const changedAudit = validateFile(article, { strictChanged: true });
 
-  assert.equal(globalAudit.errors.includes(KNOWN_QUICK_ANSWER_ERROR), false);
-  assert.ok(globalAudit.warnings.includes(`[KNOWN-BASELINE] ${KNOWN_QUICK_ANSWER_ERROR}`));
-  assert.ok(changedAudit.errors.includes(KNOWN_QUICK_ANSWER_ERROR));
-  assert.equal(changedAudit.warnings.some((warning) => warning.startsWith('[KNOWN-BASELINE]')), false);
+  assert.equal(globalAudit.errors.some((error) => /Szybka odpowiedź musi zawierać 1-5 pełnych zdań/.test(error)), false);
+  assert.equal(changedAudit.errors.some((error) => /Szybka odpowiedź musi zawierać 1-5 pełnych zdań/.test(error)), false);
 });
 
 test('changed topic center cannot use the manual_research baseline', () => {

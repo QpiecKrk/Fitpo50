@@ -58,6 +58,30 @@ test('quick answer nie traktuje polskich skrótów ani liczb dziesiętnych jako 
   assert.deepEqual(JSON.parse(python.stdout), expected);
 });
 
+test('quick answer ma granice 1–5 zdań w HTML i drafcie Pisarza', () => {
+  const one = 'Jeśli masz 50 lat, zacznij od celu.';
+  const five = 'Jeśli masz 50 lat, zacznij od celu. Oceń źródło. Sprawdź ograniczenia. Zapisz pytania. Omów decyzję.';
+  const six = `${five} Nie zmieniaj leczenia samodzielnie.`;
+  assert.equal(validators.validateQuickAnswer(one, { mode: 'strict' }).valid, true);
+  assert.equal(validators.validateQuickAnswer(five, { mode: 'strict' }).valid, true);
+  assert.equal(validators.validateQuickAnswer('', { mode: 'strict' }).valid, false);
+  assert.equal(validators.validateQuickAnswer(six, { mode: 'strict' }).valid, false);
+
+  const python = spawnSync('python3', ['-c', [
+    'import importlib.util, json, sys',
+    'spec = importlib.util.spec_from_file_location("draft_validator", sys.argv[1])',
+    'module = importlib.util.module_from_spec(spec)',
+    'spec.loader.exec_module(module)',
+    'print(json.dumps([module.sentences(item) for item in json.loads(sys.stdin.read())]))',
+  ].join('; '), DRAFT_VALIDATOR], {
+    cwd: ROOT,
+    encoding: 'utf8',
+    input: JSON.stringify([one, five, six, '']),
+  });
+  assert.equal(python.status, 0, python.stderr);
+  assert.deepEqual(JSON.parse(python.stdout), [1, 5, 6, 0]);
+});
+
 test('validateSeoDescriptionLength accepts valid SEO description', () => {
   const desc = 'Badanie ApoB (Apolipoproteina B) to najlepszy marker ryzyka miażdżycy po 50-tce. Sprawdź normy, cenę i dlaczego warto je zrobić zamiast LDL dziś.';
   const result = validators.validateSeoDescriptionLength(desc);

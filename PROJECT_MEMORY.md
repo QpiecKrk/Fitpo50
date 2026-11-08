@@ -113,7 +113,7 @@ Szczegółowy kontrakt znajduje się w `ARTICLE_STANDARD.md`.
 - W tematach medycznych co najmniej dwa źródła i minimum 67% źródeł muszą mieć odpowiednią siłę naukową lub instytucjonalną.
 - Źródła rozróżniają: `broken` dla 404/410, `blocked_by_publisher` dla 401/403/405, `temporarily_unavailable` dla 429 i 5xx oraz `verification_failed` dla DNS, timeoutu, TLS i błędu połączenia. Po ponownej próbie GET odpowiedź 403/405 jest ostrzeżeniem, jeśli źródło ma DOI/PMID albo domenę urzędową lub naukową; tylko takie źródło liczy się wtedy do minimum czterech. 404/410 blokuje jako martwy adres, a błąd środowiska kończy kodem 30 bez zapisu JSON-u. Sam HTTP 200 nie potwierdza tezy.
 - FAQ nowego artykułu powstaje wyłącznie z realnego GSC, PAA albo autocomplete. Jego liczba wynika z researchu i może wynosić zero; pipeline ponownie je weryfikuje i nigdy nie wymyśla brakujących pytań. `manual_research` jest zabronione w nowych i zmienianych materiałach; sześć opublikowanych centrów pozostaje wyłącznie nieedytowanym wyjątkiem baseline.
-- `quick_answer` ma 1–3 pełne, konkretne zdania, najwyżej 70 słów i nie może być generycznym wstępem.
+- `quick_answer` ma 1–5 pełnych, konkretnych zdań, najwyżej 70 słów i nie może być generycznym wstępem.
 
 ## 7. Intencja, linkowanie i centra
 
@@ -229,7 +229,7 @@ Publikacja `czy-jajka-podnosza-cholesterol.html` z 2026-08-25 potwierdziła dzia
 - brak opakowania tabel i innych bloków w `<p>`,
 - poprawną normalizację polskiego `ł` w anchorach,
 - brak samokanibalizacji przy `UPDATE`,
-- quick answer 1–3 zdania z poprawną obsługą liczb dziesiętnych,
+- quick answer 1–5 zdań z poprawną obsługą liczb dziesiętnych,
 - jednoznaczne rozpoznanie kategorii po usunięciu draftu,
 - odrzucanie mylących obrazów,
 - obowiązkowy render i kontrolę wszystkich stron PDF,

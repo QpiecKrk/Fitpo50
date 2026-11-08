@@ -610,8 +610,10 @@ test('JSON fixer never wraps semantic block content inside a paragraph', () => {
 test('quick answer gate accepts a concise multi-sentence paragraph and decimal values', () => {
   assert.equal(hasClearQuickAnswerForm('Jajka mogą zmieniać LDL. W badaniu różnica wyniosła 8.14 mg/dl. Decyzję oprzyj na swoim wyniku.'), true);
   assert.equal(hasClearQuickAnswerForm('Dr. Kowalski nie zastępuje konsultacji. Jeśli wynik rośnie, omów go z lekarzem.'), true);
+  assert.equal(hasClearQuickAnswerForm('Pierwsze zdanie. Drugie zdanie. Trzecie zdanie. Czwarte zdanie. Piąte zdanie.'), true);
+  assert.equal(hasClearQuickAnswerForm(''), false);
   assert.equal(hasClearQuickAnswerForm('urwany fragment bez końca'), false);
-  assert.equal(hasClearQuickAnswerForm('Pierwsze. Drugie. Trzecie. Czwarte.'), false);
+  assert.equal(hasClearQuickAnswerForm('Pierwsze. Drugie. Trzecie. Czwarte. Piąte. Szóste.'), false);
 });
 
 test('base JSON fixer preserves missing evidence as blockers instead of fabricating content', () => {

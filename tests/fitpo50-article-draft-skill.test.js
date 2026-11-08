@@ -174,6 +174,25 @@ test('Claude draft validator nie liczy skrótów i liczb dziesiętnych jako zda�
   assert.doesNotMatch(result.stdout, /quick_answer ma .* zdań/);
 });
 
+test('Claude draft validator przyjmuje 1–5 zdań i odrzuca 0 oraz 6', () => {
+  const accepted = validDraft();
+  accepted.quick_answer = 'Jeśli masz 50 lat, zacznij od celu. Oceń źródło. Sprawdź ograniczenia. Zapisz pytania. Omów decyzję.';
+  const acceptedResult = validate(accepted);
+  assert.equal(acceptedResult.status, 0, `${acceptedResult.stdout}\n${acceptedResult.stderr}`);
+
+  const empty = validDraft();
+  empty.quick_answer = '';
+  const emptyResult = validate(empty);
+  assert.equal(emptyResult.status, 1);
+  assert.match(emptyResult.stdout, /quick_answer/);
+
+  const rejected = validDraft();
+  rejected.quick_answer = `${accepted.quick_answer} Nie zmieniaj leczenia samodzielnie.`;
+  const rejectedResult = validate(rejected);
+  assert.equal(rejectedResult.status, 1);
+  assert.match(rejectedResult.stdout, /quick_answer ma 6 zdań; wymagane 1–5/);
+});
+
 test('Claude draft skill accepts documented FAQ and leaves local verification to the pipeline', () => {
   const draft = validDraft();
   const result = validate(draft);

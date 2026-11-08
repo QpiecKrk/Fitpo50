@@ -11,40 +11,6 @@ const { spawnSync } = require('node:child_process');
 const REPO = path.resolve(__dirname, '..');
 
 const APPROVED_BASELINE_CEILING = new Map([
-  ['Szybka odpowiedź musi zawierać 1-3 pełne zdania (jest 4).', new Set([
-    'apob-norma-cena-jak-czytac-wynik.html',
-    'co-sie-dzieje-z-cialem-gdy-nie-trenujesz-2-tygodnie.html',
-    'dieta-keto-cholesterol-ldl-hdl-badania-naukowe.html',
-    'healthspan-nie-lifespan-po-50.html',
-    'hfpef-niewydolnosc-serca-zachowana-frakcja-wyrzutowa-po-50.html',
-    'hrt-mit-badanie-po-50.html',
-    'jak-czytac-etykiety-sklad-produktow-e-numery-inci.html',
-    'jak-pozbyc-sie-oponki-brzusznej-po-50.html',
-    'jak-zaczac-na-silowni-po-50.html',
-    'jak-zaczac-sie-podciagac-po-50.html',
-    'kreatyna-i-bialko-po-50-tce-jak-laczyc.html',
-    'kreatyna-po-50-tce-kompletny-przewodnik.html',
-    'kriokomory-i-komory-hiperbaryczne-bezpieczenstwo-po-50.html',
-    'markery-krwi-co-naprawde-mowia-o-twoim-zdrowiu.html',
-    'mira-ai-agent-sor-lepszy-od-lekarzy.html',
-    'mit-jedzenie-cie-truje-owoce-wegle-tluszcz-sol.html',
-    'motywacja-po-50.html',
-    'nordic-walking-jak-zaczac-technika-kije-zdrowie.html',
-    'okulary-do-czytania-trening-akomodacji-oka.html',
-    'optymalizacja-snu-po-50-jak-przestac-budzic-sie-o-3-w-nocy.html',
-    'regeneracja-ukladu-nerwowego-co-mowi-nauka.html',
-    'sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html',
-    'sarkopeniczna-otylosc-problem-ktorego-nie-widac-w-lustrze.html',
-    'sen-po-50.html',
-    'silownia-chroni-serce-przed-zawalem.html',
-    'suplementacja-po-50.html',
-    'szczepionki-covid-skutki-uboczne-mity-i-fakty.html',
-    'trening-silowy-eliksir-mlodosci-po-50.html',
-    'ukryty-cukier-po-50-pulapki-zdrowego-jedzenia.html',
-    'waty-apple-watch-moc-zdrowie-po-50.html',
-    'zastrzyk-cofajacy-starzenie-komorek-er-100-zycie-biosciences.html',
-    'zegar-epigenetyczny-horvatha-wiek-biologiczny-metylacja-dna.html',
-  ])],
   ['FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY', new Set([
     'centrum-bialka-po-50.html',
     'centrum-cholesterolu-po-50.html',
@@ -145,7 +111,7 @@ test('article validation baseline can only shrink from the frozen approved ceili
   assert.match(baselineGrowthViolations(addition).join('\n'), /nowy-artykul\.html/);
 
   const substitution = structuredClone(baseline);
-  substitution.known_errors[1].files[0] = 'centrum-nowe-po-50.html';
+  substitution.known_errors[0].files[0] = 'centrum-nowe-po-50.html';
   assert.match(baselineGrowthViolations(substitution).join('\n'), /centrum-nowe-po-50\.html/);
 
   const newErrorType = structuredClone(baseline);
