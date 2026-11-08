@@ -9,6 +9,15 @@ const path = require('path');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { warsawIso } = require('./lib/time');
 const { classifyChangedFiles, collectChangedFiles } = require('./lib/change-scope');
+const { compareExportTrees } = require('./lib/export-parity');
+
+const PIPELINE_TESTS_BY_FILE = Object.freeze({
+  'scripts/fitpo50-doctor.js': ['tests/prepush-release-guardrails.test.js'],
+  'scripts/lib/change-scope.js': ['tests/prepush-concurrency.test.js'],
+  'scripts/prepare-deployment-marker.js': ['tests/deployment-safety.test.js', 'tests/news-deploy-sync-gate.test.js'],
+  'scripts/run-all-prepush.js': ['tests/prepush-concurrency.test.js', 'tests/prepush-release-guardrails.test.js'],
+  'scripts/export_site.sh': ['tests/prepush-release-guardrails.test.js'],
+});
 
 function prefixOutput(tag, stream, logger) {
   if (!stream) return;
@@ -91,6 +100,46 @@ function assertExportDidNotModifySources(before, after) {
   }
 }
 
+function exportImpact(report) {
+  return [...new Set([
+    ...(report?.missing || []).map((entry) => entry.path),
+    ...(report?.extra || []).map((entry) => entry.path),
+    ...(report?.different || []).map((entry) => entry.path),
+  ])].sort();
+}
+
+function assertExportProbeClean(report) {
+  if (report.ok) return;
+  const paths = exportImpact(report);
+  throw new Error(`Eksport ujawnił różnice publiczne (${paths.length}):${paths.length ? `\n- ${paths.join('\n- ')}` : ' brak listy'}. Zaktualizuj jawny zakres publiczny i uruchom ponownie.`);
+}
+
+async function runPipelineChecks(classification, timings) {
+  const pipelineFiles = [
+    ...(classification.buckets?.pipeline || []),
+    ...(classification.buckets?.export_probe || []),
+  ];
+  const testFiles = [...new Set([
+    ...pipelineFiles.filter((file) => /^tests\/[^/]+\.test\.js$/i.test(file)),
+    ...pipelineFiles.flatMap((file) => PIPELINE_TESTS_BY_FILE[file] || []),
+  ])].sort();
+  if (testFiles.length) {
+    timings.push(await runStep('pipeline:tests', 'node', ['--test', ...testFiles]));
+  }
+  const jsFiles = pipelineFiles
+    .filter((file) => /^scripts\/.*\.js$/i.test(file));
+  if (jsFiles.length) {
+    const checks = await Promise.all(jsFiles.map((file) => runStep(`pipeline:syntax:${file}`, 'node', ['--check', file])));
+    timings.push(...checks);
+  }
+  const shellFiles = pipelineFiles
+    .filter((file) => /^scripts\/.*\.sh$/i.test(file));
+  if (shellFiles.length) {
+    const checks = await Promise.all(shellFiles.map((file) => runStep(`pipeline:shell:${file}`, 'bash', ['-n', file])));
+    timings.push(...checks);
+  }
+}
+
 async function main() {
   const started = Date.now();
   const timings = [];
@@ -103,8 +152,22 @@ async function main() {
     timings.push(await runStep('prepush:diff-guard', 'node', ['scripts/prepush-diff-guard.js']));
     const fileArgIndex = process.argv.indexOf('--files-json');
     const explicitFiles = fileArgIndex >= 0 ? JSON.parse(process.argv[fileArgIndex + 1] || '[]') : null;
-    const classification = classifyChangedFiles(explicitFiles || collectChangedFiles());
+    let classification = classifyChangedFiles(explicitFiles || collectChangedFiles());
     console.log(`[PREPUSH:SCOPE] ${classification.scopes.join('+')} (${classification.files.length} plików)`);
+    if (classification.requiresExportProbe) {
+      exportWorkspace = createManagedTempDir({ prefix: 'fitpo50-prepush-export-probe-', type: 'prepush-export-probe', projectRoot: process.cwd() });
+      exportDir = path.join(exportWorkspace, 'site');
+      const sourceSnapshotBeforeExport = repositorySnapshot();
+      timings.push(await runStep('export:probe(tmp)', 'bash', ['./scripts/export_site.sh', exportDir], {
+        env: { SKIP_TS_BUILD: '1' },
+      }));
+      assertExportDidNotModifySources(sourceSnapshotBeforeExport, repositorySnapshot());
+      const probe = compareExportTrees(exportDir, path.resolve('_site'));
+      assertExportProbeClean(probe);
+      exportStatus = 'COMPLETED';
+      classification = { ...classification, requiresExportProbe: false };
+      console.log('[PREPUSH:IMPACT] eksport nie ujawnił różnic publicznych; zakres pozostaje pipeline.');
+    }
     if (classification.full) {
       timings.push(await runStep('fitpo50:doctor', 'node', ['scripts/fitpo50-doctor.js', '--skip-release-overlaps']));
       const parallel = await Promise.all([
@@ -134,10 +197,13 @@ async function main() {
         ]);
         timings.push(...articleChecks);
       }
+      if (classification.scopes.includes('pipeline')) {
+        await runPipelineChecks(classification, timings);
+      }
     }
 
     if (classification.full) {
-      exportWorkspace = createManagedTempDir({ prefix: 'fitpo50-prepush-export-', type: 'prepush-export', projectRoot: process.cwd() });
+      exportWorkspace = exportWorkspace || createManagedTempDir({ prefix: 'fitpo50-prepush-export-', type: 'prepush-export', projectRoot: process.cwd() });
       exportDir = path.join(exportWorkspace, 'site');
       const sourceSnapshotBeforeExport = repositorySnapshot();
       timings.push(await runStep('export:fresh(tmp)', 'bash', ['./scripts/export_site.sh', exportDir], {
@@ -152,6 +218,16 @@ async function main() {
       ]));
       timings.push(await runStep('smoke:static(fresh-export)', 'node', ['scripts/static-smoke-check.js', exportDir]));
       exportStatus = 'COMPLETED';
+      timings.push(await runStep('tmp:cleanup:dry', 'node', ['scripts/tmp-cleanup.js', '--dry-run']));
+    }
+    if (exportWorkspace && !classification.full) {
+      timings.push(await runStep('export:parity', 'node', [
+        'scripts/export-parity-check.js',
+        '--expected', exportDir,
+        '--actual', path.resolve('_site'),
+        '--report', path.resolve('data/reports/local/export-parity.json'),
+      ]));
+      timings.push(await runStep('smoke:static(fresh-export)', 'node', ['scripts/static-smoke-check.js', exportDir]));
       timings.push(await runStep('tmp:cleanup:dry', 'node', ['scripts/tmp-cleanup.js', '--dry-run']));
     }
   } finally {

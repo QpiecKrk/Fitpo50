@@ -12,6 +12,12 @@ const ADMIN_TESTS = new Set([
   'tests/news-feed-error-leak.test.js',
   'tests/retired-module-exposure.test.js',
 ]);
+const PIPELINE_ONLY_FILES = new Set([
+  'scripts/fitpo50-doctor.js',
+  'scripts/lib/change-scope.js',
+  'scripts/prepare-deployment-marker.js',
+  'scripts/run-all-prepush.js',
+]);
 
 function normalize(file) {
   return String(file || '').replace(/^.* -> /, '').replace(/\\/g, '/').replace(/^\.\//, '').trim();
@@ -70,23 +76,49 @@ function isInfrastructurePath(file) {
     || value.startsWith('scripts/');
 }
 
+function isPipelineOnlyPath(file) {
+  const value = withoutSitePrefix(file);
+  return !ADMIN_TESTS.has(value) && (PIPELINE_ONLY_FILES.has(value)
+    || value.startsWith('tests/')
+    || value.startsWith('docs/'));
+}
+
+function requiresExportProbe(file) {
+  return withoutSitePrefix(file) === 'scripts/export_site.sh';
+}
+
 function classifyChangedFiles(files) {
   const normalized = [...new Set((files || []).map(normalize).filter(Boolean))]
     .filter((file) => !MARKER_PATHS.has(file))
     .sort();
-  const buckets = { admin: [], news: [], articles: [], full: [] };
+  const buckets = { admin: [], news: [], articles: [], pipeline: [], export_probe: [], full: [] };
   for (const file of normalized) {
-    if (isInfrastructurePath(file)) buckets.full.push(file);
+    if (requiresExportProbe(file)) buckets.export_probe.push(file);
     else if (isNewsPath(file)) buckets.news.push(file);
     else if (isAdminPath(file) || ADMIN_TESTS.has(file)) buckets.admin.push(file);
+    else if (isPipelineOnlyPath(file)) buckets.pipeline.push(file);
+    else if (isInfrastructurePath(file)) buckets.full.push(file);
     else if (isArticlePath(file)) buckets.articles.push(file);
     else buckets.full.push(file);
   }
   if (buckets.full.length || normalized.length === 0) {
-    return { files: normalized, scopes: ['full'], full: true, buckets };
+    return {
+      files: normalized,
+      scopes: ['full'],
+      full: true,
+      requiresExportProbe: false,
+      buckets,
+    };
   }
-  const scopes = ['admin', 'news', 'articles'].filter((scope) => buckets[scope].length > 0);
-  return { files: normalized, scopes, full: false, buckets };
+  const scopes = ['admin', 'news', 'articles', 'pipeline']
+    .filter((scope) => buckets[scope].length > 0 || (scope === 'pipeline' && buckets.export_probe.length > 0));
+  return {
+    files: normalized,
+    scopes,
+    full: false,
+    requiresExportProbe: buckets.export_probe.length > 0,
+    buckets,
+  };
 }
 
 function filesForScope(classification, scope) {
@@ -96,12 +128,15 @@ function filesForScope(classification, scope) {
 
 module.exports = {
   ADMIN_TESTS,
+  PIPELINE_ONLY_FILES,
   classifyChangedFiles,
   collectChangedFiles,
   filesForScope,
   isAdminPath,
   isArticlePath,
   isNewsPath,
+  isPipelineOnlyPath,
+  requiresExportProbe,
   normalize,
   withoutSitePrefix,
 };

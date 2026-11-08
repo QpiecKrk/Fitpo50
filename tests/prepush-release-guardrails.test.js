@@ -69,9 +69,10 @@ test('prepush blocks and lists every source file changed by export', () => {
     );
     assert.doesNotThrow(() => assertExportDidNotModifySources(before, new Map(before)));
     const runner = fs.readFileSync(path.join(ROOT, 'scripts', 'run-all-prepush.js'), 'utf8');
-    const beforeIndex = runner.indexOf('const sourceSnapshotBeforeExport = repositorySnapshot()');
-    const exportIndex = runner.indexOf("runStep('export:fresh(tmp)'");
-    const assertionIndex = runner.indexOf('assertExportDidNotModifySources(sourceSnapshotBeforeExport, repositorySnapshot())');
+    const mainSource = runner.slice(runner.indexOf('async function main()'));
+    const beforeIndex = mainSource.lastIndexOf('const sourceSnapshotBeforeExport = repositorySnapshot()');
+    const exportIndex = mainSource.lastIndexOf("runStep('export:fresh(tmp)'");
+    const assertionIndex = mainSource.lastIndexOf('assertExportDidNotModifySources(sourceSnapshotBeforeExport, repositorySnapshot())');
     assert.ok(beforeIndex >= 0 && beforeIndex < exportIndex && exportIndex < assertionIndex);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });

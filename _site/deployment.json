@@ -1,12 +1,12 @@
 {
   "version": 4,
-  "release_id": "98d19b55-c31b-4d58-8d43-2a4729505361",
-  "prepared_at": "2026-11-08T07:58:06+01:00",
-  "prepared_from_head": "fb9386099c96cc0994431b1b6a2287ee59d1dd84",
+  "release_id": "f1011831-0cc8-48a3-b71c-a0da2e78858a",
+  "prepared_at": "2026-11-08T10:14:42+01:00",
+  "prepared_from_head": "7aa8dfc9a6f46f214c5d2845159d5b6c85d92cbc",
   "publication_state_sha256": "0a5158f9146a70b0095c6cffe6a1ba06a43309d8a3240c9098fc226c1b93d69d",
   "public_fingerprint_sha256": "49fc420e869bdcd75176054bd339b452f9fc1483e25e0eafb13350cbc9efe82e",
   "change_scope": [
-    "full"
+    "pipeline"
   ],
   "verification_targets": [],
   "news": {

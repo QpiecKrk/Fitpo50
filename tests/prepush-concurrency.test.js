@@ -79,3 +79,26 @@ test('infrastruktura i nieznany plik wybierają pełny zestaw fail-safe', () => 
     assert.deepEqual(result.scopes, ['full'], file);
   }
 });
+
+test('profil wpływu nie zakłada wyniku eksportu i wymaga sondy dla skryptu eksportu', () => {
+  const result = classifyChangedFiles([
+    'scripts/export_site.sh',
+    'scripts/prepare-deployment-marker.js',
+    'tests/prepush-release-guardrails.test.js',
+  ]);
+  assert.equal(result.full, false);
+  assert.equal(result.requiresExportProbe, true);
+  assert.deepEqual(result.scopes, ['pipeline']);
+  assert.deepEqual(result.buckets.export_probe, ['scripts/export_site.sh']);
+});
+
+test('profil pipeline-only nie uruchamia sondy, gdy zmiana nie dotyka eksportu', () => {
+  const result = classifyChangedFiles([
+    'scripts/prepare-deployment-marker.js',
+    'tests/news-deploy-sync-gate.test.js',
+    'docs/command-registry.md',
+  ]);
+  assert.equal(result.full, false);
+  assert.equal(result.requiresExportProbe, false);
+  assert.deepEqual(result.scopes, ['pipeline']);
+});
