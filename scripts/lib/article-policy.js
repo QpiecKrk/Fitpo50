@@ -190,7 +190,7 @@ const POLICY = {
   },
 
   TITLE_INTENT_TOKENS: [
-    'jak', 'czy', 'co', 'ile', 'kiedy', 'dlaczego', 'norma', 'wynik', 'objawy', 'bezpiecz', 'cena'
+    'jak', 'czy', 'co', 'ile', 'kiedy', 'dlaczego', 'norma', 'normy', 'wynik', 'objawy', 'bezpiecz', 'cena'
   ],
   FAQ_INTENT_TOKENS: [
     'jak', 'czy', 'co', 'ile', 'kiedy', 'dlaczego', 'objawy', 'norma', 'wynik', 'bezpiecz', 'dawka', 'koszt'
@@ -407,7 +407,8 @@ const validators = {
   validateH2Title: (title) => {
     const clean = utils.stripTags(title).trim();
     if (validators.isSkippedH2Title(clean)) return { ok: true };
-    const ok = POLICY.PATTERNS.H2_QUESTION.test(clean);
+    const questionStarter = /^(?:czy|jak|dlaczego|ile|kiedy|co|który|która|które|jakie)\b/iu.test(clean);
+    const ok = !questionStarter || POLICY.PATTERNS.H2_QUESTION.test(clean);
     return { ok, error: ok ? null : `H2 "${clean}" musi kończyć się znakiem zapytania.` };
   },
 

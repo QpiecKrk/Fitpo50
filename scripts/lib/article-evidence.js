@@ -153,6 +153,7 @@ function collectArticleFragments(json) {
     const plain = utils.stripTags(text).replace(/\s+/g, ' ').trim();
     if (plain) fragments.push({ location, text: plain });
   };
+  add('title', json.title);
   add('lead', json.lead);
   add('quick_answer', json.quick_answer || json.quickAnswer);
   add('hero_motto_html', json.hero_motto_html || json.hero_motto);
@@ -195,6 +196,7 @@ function isMedicalArticle(json) {
 }
 
 function fragmentNeedsEvidence(fragment, medicalArticle) {
+  if (fragment?.location === 'title') return false;
   const text = String(fragment?.text || '');
   if (NUMBERED_CLAIM_PATTERN.test(text)) return true;
   if (EVIDENCE_CLAIM_PATTERN.test(text)) return true;

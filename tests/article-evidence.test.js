@@ -451,6 +451,27 @@ test('evidence locations include image alt, caption and overlay text', () => {
   assert.equal(result.ok, true, result.errors.join('\n'));
 });
 
+test('title is a supported evidence location and arbitrary or mismatched locations remain blocking', () => {
+  const json = validEvidenceJson();
+  const url = json.sources[0].url;
+  json.title = 'Badanie wykazało zmniejszenie ryzyka o 20%';
+  json.evidence_claims.push({
+    claim: json.title,
+    location: 'title',
+    claim_type: 'statistic',
+    source_urls: [url],
+  });
+  assert.equal(validateArticleEvidence(json, { today: TODAY }).ok, true);
+
+  const missing = { ...json, evidence_claims: [{ ...json.evidence_claims[0], location: 'slug' }] };
+  assert.match(validateArticleEvidence(missing, { today: TODAY }).errors.join(' '), /location "slug" nie wskazuje istniejącego fragmentu/);
+
+  const mismatch = { ...json, evidence_claims: json.evidence_claims.map((claim, index) => index === 1
+    ? { ...claim, claim: 'Inne twierdzenie bez pokrycia' }
+    : claim) };
+  assert.match(validateArticleEvidence(mismatch, { today: TODAY }).errors.join(' '), /claim nie występuje w przypisanym fragmencie title/);
+});
+
 test('stale or broken source verification is blocking', () => {
   const stale = validEvidenceJson();
   stale.sources[0].checked_at = '2025-01-01';

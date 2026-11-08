@@ -867,7 +867,7 @@ function validateInput(data, opts = {}) {
     const metaNorm = normalizeCmp(metaDescriptionRaw);
     const hasMetaIntent = (POLICY.TITLE_INTENT_TOKENS || []).some((token) => metaNorm.includes(normalizeCmp(token)));
     if (!hasMetaIntent) {
-      errors.push('meta_description: brak wyraźnego tokenu intencji (jak/czy/co/kiedy/ile/norma/wynik).');
+      errors.push('meta_description: brak wyraźnego tokenu intencji (jak/czy/co/kiedy/ile/norma/normy/wynik).');
     }
     const first120 = metaDescriptionRaw.slice(0, 120);
     const hasMetaIntentEarly = (POLICY.TITLE_INTENT_TOKENS || []).some((token) => normalizeCmp(first120).includes(normalizeCmp(token)));

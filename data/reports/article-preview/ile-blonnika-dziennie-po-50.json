@@ -1,0 +1,338 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-11-08T11:16:45+01:00",
+  "reviewed_at": null,
+  "slug": "ile-blonnika-dziennie-po-50",
+  "html_sha256": "9221902a9880a67d4d073e5a0ac634b58314e9074591b322d6f1056b9b0308cc",
+  "site_html_sha256": "9221902a9880a67d4d073e5a0ac634b58314e9074591b322d6f1056b9b0308cc",
+  "pdf_sha256": "dd7483dbdb927251726c812fdd066dc1bf3220f9d9ebf5dbdfbeabdb6833b052",
+  "site_pdf_sha256": "dd7483dbdb927251726c812fdd066dc1bf3220f9d9ebf5dbdfbeabdb6833b052",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-08T11:16:45+01:00",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 4
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "ile-blonnika-dziennie-po-50.html",
+      "sha256": "9221902a9880a67d4d073e5a0ac634b58314e9074591b322d6f1056b9b0308cc",
+      "bytes": 43850
+    },
+    "html_site": {
+      "file": "_site/ile-blonnika-dziennie-po-50.html",
+      "sha256": "9221902a9880a67d4d073e5a0ac634b58314e9074591b322d6f1056b9b0308cc",
+      "bytes": 43850
+    },
+    "pdf_source": {
+      "file": "assets/pdf/ile-blonnika-dziennie-po-50.pdf",
+      "sha256": "dd7483dbdb927251726c812fdd066dc1bf3220f9d9ebf5dbdfbeabdb6833b052",
+      "bytes": 702212
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/ile-blonnika-dziennie-po-50.pdf",
+      "sha256": "dd7483dbdb927251726c812fdd066dc1bf3220f9d9ebf5dbdfbeabdb6833b052",
+      "bytes": 702212
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/ile-blonnika-dziennie-po-50/desktop.png",
+      "screenshot_sha256": "c40608e78c0d9f1a6105d9cf917fe30a97bf9d8dac860bcf40ce1125a1ffc3d6",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/ile-blonnika-dziennie-po-50/mobile.png",
+      "screenshot_sha256": "3501ec53afbde9a669ead117a183e328b3cf515f34927cab260c7f302d3a3f1b",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "JEDZENIE 8 min czytania Aktualizacja: 08.11.2026 Ile błonnika dziennie po 50? Normy i 30 g na talerzu — tabela Najpierw sprawdź swoją grupę wieku, potem porównuj porcje.",
+      "alt": "Akwarela: para przy kuchennym stole przekazuje sobie jabłka i miskę soczewicy; z przodu stoją płatki i migdały.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.avif",
+          "sha256": "63dc1ed67df52ff5dcc0140046c917bb1a2501506929e64ea0dcd9e0e52c388e",
+          "bytes": 107511,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp",
+          "sha256": "2d28b322db5d94a106c7efbc3c2d4038907bc8ddab5f9c8cc6966bd4107d040d",
+          "bytes": 191076,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.jpg",
+          "sha256": "c80fbb16ffe9953d624d6aa75f24cbf11fbb88e7cf297961d9bb2c66bb246ecf",
+          "bytes": 242118,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "59f1c88c199dff586414c63cb7e726c45f7c9020c44fa495436598ddda652215"
+    },
+    {
+      "placement": "content:2:ile-wynosza-polskie-normy-w-twojej-grupie-wieku",
+      "role": "content",
+      "heading": "Ile wynoszą polskie normy w Twojej grupie wieku?",
+      "context": "Ile błonnika dziennie potrzebujesz i jak przełożyć tę liczbę na zwykłe jedzenie? Zamiast zgadywać na podstawie wielkości miski, porównaj ważone porcje. Tabela pomaga wybrać produkty, a przykładowy zestaw pokazuje ich udział w ciągu dnia. Szybka odpowiedź Polskie normy określają wystarczające spożycie błonnika na 25 g dziennie dla kobiet i mężczyzn w wieku 51–65 lat oraz 20 g dla osób w wieku 66 lat i starszych. WHO zaleca dorosłym co najmniej 25 g błonnika naturalnie występującego w żywności dziennie. Około 30 g w tym artykule to przykład z produktów, nie wspólna norma dla wszystkich po pięćdziesiątce. Kluczowe wnioski Polskie normy podają 25 g błonnika dziennie dla wieku 51–65 lat i 20 g od 66 lat; to wystarczające spożycie, nie górny limit. Porcję płatków waż przed przygotowaniem, a socz",
+      "alt": "Akwarela: dwie uśmiechnięte kobiety wspólnie przygotowują śniadanie przy kuchennym oknie.",
+      "caption": "Niższa wartość w normach dla starszej grupy wieku nie oznacza, że po urodzinach trzeba zmniejszyć ilość błonnika w diecie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.avif",
+          "sha256": "d027178eac080278b17acca8807285c9ff5f3847f828931192e4bb18d4a89c35",
+          "bytes": 127030,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.webp",
+          "sha256": "97638accd93edb27fc8c1ff93b086675a07b85dace71c2c1119441bb31bf0299",
+          "bytes": 230652,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.jpg",
+          "sha256": "263c00d1aa0faa793782aa6aafa8b904f9225ed909840645834fdbb2f87f038c",
+          "bytes": 287918,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "c004c215b3aad492086cc1612c1b279f38076f8ca57248706d8f8a3c7467c28c"
+    },
+    {
+      "placement": "content:3:tabela-produktow-porownaj-blonnik-w-swojej-porcj",
+      "role": "content",
+      "heading": "Tabela produktów: porównaj błonnik w swojej porcji?",
+      "context": "Ile błonnika dziennie potrzebujesz i jak przełożyć tę liczbę na zwykłe jedzenie? Zamiast zgadywać na podstawie wielkości miski, porównaj ważone porcje. Tabela pomaga wybrać produkty, a przykładowy zestaw pokazuje ich udział w ciągu dnia. Szybka odpowiedź Polskie normy określają wystarczające spożycie błonnika na 25 g dziennie dla kobiet i mężczyzn w wieku 51–65 lat oraz 20 g dla osób w wieku 66 lat i starszych. WHO zaleca dorosłym co najmniej 25 g błonnika naturalnie występującego w żywności dziennie. Około 30 g w tym artykule to przykład z produktów, nie wspólna norma dla wszystkich po pięćdziesiątce. Kluczowe wnioski Polskie normy podają 25 g błonnika dziennie dla wieku 51–65 lat i 20 g od 66 lat; to wystarczające spożycie, nie górny limit. Porcję płatków waż przed przygotowaniem, a socz",
+      "alt": "Akwarela: para odmierza suche płatki i odkłada odsączoną kaszę obok wagi z niewidocznym wyświetlaczem.",
+      "caption": "Porcję płatków liczymy na sucho, a kaszy po ugotowaniu — tylko wtedy masa pasuje do wybranego wiersza tabeli.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.avif",
+          "sha256": "a782cc61982d23b56c8a7ac6f72a60e981d5c86ab55367e196d419f8f395df02",
+          "bytes": 136644,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.webp",
+          "sha256": "f94b9a0eb2029134fa947d57c8863a1a3456b56894f79bdf16971e8e6de3ccdf",
+          "bytes": 249820,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.jpg",
+          "sha256": "cc3643b3a6e32d0458e864e87c78969512c28df509f3d6870d2010ef614fdb89",
+          "bytes": 305415,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5615aeec6148b7487c71cd97e7d96cb753e0d9b016b60a816e86c2ef56d202d9"
+    },
+    {
+      "placement": "content:4:przyklad-dnia-jak-zebrac-okolo-30-g-blonnika",
+      "role": "content",
+      "heading": "Przykład dnia: jak zebrać około 30 g błonnika?",
+      "context": "Ile błonnika dziennie potrzebujesz i jak przełożyć tę liczbę na zwykłe jedzenie? Zamiast zgadywać na podstawie wielkości miski, porównaj ważone porcje. Tabela pomaga wybrać produkty, a przykładowy zestaw pokazuje ich udział w ciągu dnia. Szybka odpowiedź Polskie normy określają wystarczające spożycie błonnika na 25 g dziennie dla kobiet i mężczyzn w wieku 51–65 lat oraz 20 g dla osób w wieku 66 lat i starszych. WHO zaleca dorosłym co najmniej 25 g błonnika naturalnie występującego w żywności dziennie. Około 30 g w tym artykule to przykład z produktów, nie wspólna norma dla wszystkich po pięćdziesiątce. Kluczowe wnioski Polskie normy podają 25 g błonnika dziennie dla wieku 51–65 lat i 20 g od 66 lat; to wystarczające spożycie, nie górny limit. Porcję płatków waż przed przygotowaniem, a socz",
+      "alt": "Akwarela: para przekłada soczewicę i brokuł do naczyń; dalej stoją owsianka, jabłko i migdały.",
+      "caption": "Około 30 g błonnika w przykładzie wynika z ważonych porcji podanych w tabeli, nie z oceny wielkości posiłku na ilustracji.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.avif",
+          "sha256": "ff4090f6e12c7a48eb4144c708a33bff1c9a125ae40bed20d2f5682f24a7c6ee",
+          "bytes": 140688,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.webp",
+          "sha256": "b3d640f933a1d61ae16f8de5086709ef3924c6fa87bf2969165c9f5e132bde75",
+          "bytes": 252478,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.jpg",
+          "sha256": "a268355313534c87718cec3efa44fcdbd26e02f339e031d6162194561cc74e3c",
+          "bytes": 309143,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e2e32902b8e5ed397037170cd4043aca33b38b4b25341ae975147907d5b60886"
+    },
+    {
+      "placement": "content:5:wiecej-blonnika-z-rozwaga-plyny-i-wlasne-zalecen",
+      "role": "content",
+      "heading": "Więcej błonnika z rozwagą: płyny i własne zalecenia?",
+      "context": "Ile błonnika dziennie potrzebujesz i jak przełożyć tę liczbę na zwykłe jedzenie? Zamiast zgadywać na podstawie wielkości miski, porównaj ważone porcje. Tabela pomaga wybrać produkty, a przykładowy zestaw pokazuje ich udział w ciągu dnia. Szybka odpowiedź Polskie normy określają wystarczające spożycie błonnika na 25 g dziennie dla kobiet i mężczyzn w wieku 51–65 lat oraz 20 g dla osób w wieku 66 lat i starszych. WHO zaleca dorosłym co najmniej 25 g błonnika naturalnie występującego w żywności dziennie. Około 30 g w tym artykule to przykład z produktów, nie wspólna norma dla wszystkich po pięćdziesiątce. Kluczowe wnioski Polskie normy podają 25 g błonnika dziennie dla wieku 51–65 lat i 20 g od 66 lat; to wystarczające spożycie, nie górny limit. Porcję płatków waż przed przygotowaniem, a socz",
+      "alt": "Akwarela: dwie osoby rozmawiają przy śniadaniu, podając sobie porcję owsianki i dzbanek obok filiżanek.",
+      "caption": "Normy na wodę obejmują także wodę z jedzenia, a nie wyłącznie napoje do wypicia.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.avif",
+          "sha256": "c819b8c7a9ede5200bf0ecf886a635677794b4675ed48aa92f67f5ca13445314",
+          "bytes": 133422,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.webp",
+          "sha256": "39a08751b8396160a02269f33fc6d48a921f7d2eb60f7a029e686383ef34a4ba",
+          "bytes": 239434,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.jpg",
+          "sha256": "3ce54227d233e1b9db2d147931a697e7f620a31a44c6d367a5ce0eb6fefde9b8",
+          "bytes": 299690,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e35fd7dd7434683deda2b512bbe4a018ad36dc1e55d9b1a64f4d2fc36ccca2c1"
+    }
+  ],
+  "pdf": {
+    "pages": 6,
+    "text_coverage": 1,
+    "rendered_pages": 6,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/ile-blonnika-dziennie-po-50/pdf-pages/page-1.png",
+        "sha256": "504573742e0ef191c340e608fb6cd9ab69d50e5b36d87f901058cd31c0edddf5",
+        "bytes": 971095,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1061,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/ile-blonnika-dziennie-po-50/pdf-pages/page-2.png",
+        "sha256": "8393b69966595e5267b4c794b5f35cd4f92f18a49f8aefbe13e88503b75f92b5",
+        "bytes": 738077,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/ile-blonnika-dziennie-po-50/pdf-pages/page-3.png",
+        "sha256": "bc693f37c11c4b79d90702de41f024a8483cbcb126b2daf357480114b9f566e1",
+        "bytes": 810408,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/ile-blonnika-dziennie-po-50/pdf-pages/page-4.png",
+        "sha256": "fc666651deabfbab9cebe6c8f7334278374da4874bc315cbadf01708fc0b4d6a",
+        "bytes": 808373,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/ile-blonnika-dziennie-po-50/pdf-pages/page-5.png",
+        "sha256": "9fe45a9a0b3524ebc0a7e408d98401cc2bf5188024931f429e5582ba0d62ed86",
+        "bytes": 703043,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1067,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/ile-blonnika-dziennie-po-50/pdf-pages/page-6.png",
+        "sha256": "f7f8d7ce94b4c12ea15eb733e9786f827f8f82457f8eee2aaccd42e244ac7e6f",
+        "bytes": 217850,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1064,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 7601,
+    "review_wait_ms": null
+  },
+  "errors": []
+}

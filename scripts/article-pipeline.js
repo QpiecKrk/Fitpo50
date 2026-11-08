@@ -426,7 +426,21 @@ async function main() {
   run('Generate llms-full (source/_site)', 'node', ['scripts/generate-llms-full.js', '--output', path.join('_site', 'llms-full.txt')]);
   run('Article contract check (source/_site)', 'node', ['scripts/article-contract-check.js', `${slug}.html`, path.join('_site', `${slug}.html`)]);
   run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug]);
-  run('Global link topology report', 'node', ['scripts/global-link-topology-optimizer.js', '--min-inbound', '2']);
+  const topologyWorkspace = createManagedTempDir({
+    prefix: `fitpo50-link-topology-${slug}-`,
+    type: 'article-link-topology-report',
+    projectRoot: resolveWorkspaceProjectRoot(root),
+    slug,
+  });
+  try {
+    run('Global link topology report', 'node', [
+      'scripts/global-link-topology-optimizer.js',
+      '--min-inbound', '2',
+      '--report-dir', topologyWorkspace,
+    ]);
+  } finally {
+    disposeTempWorkspace(topologyWorkspace, { status: 'COMPLETED' });
+  }
   if (parallelTails) {
     await runParallel('Post-import parallel checks', [
       { label: 'Lint editorial placeholders (source HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--slug', slug] },

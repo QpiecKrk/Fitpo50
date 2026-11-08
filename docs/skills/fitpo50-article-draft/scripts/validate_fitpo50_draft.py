@@ -176,6 +176,70 @@ def locate(data: dict[str, Any], location: str) -> Any:
     return current
 
 
+def collect_evidence_fragments(data: dict[str, Any]) -> dict[str, str]:
+    fragments: dict[str, str] = {}
+
+    def add(location: str, value: Any) -> None:
+        text = plain_text(value)
+        if text:
+            fragments[location] = text
+
+    add("title", data.get("title"))
+    add("lead", data.get("lead"))
+    add("quick_answer", data.get("quick_answer", data.get("quickAnswer")))
+    add("hero_motto_html", data.get("hero_motto_html", data.get("hero_motto")))
+
+    takeaways = data.get("key_takeaways") if isinstance(data.get("key_takeaways"), list) else []
+    for index, item in enumerate(takeaways):
+        add(f"key_takeaways[{index}]", item)
+
+    prompts = data.get("image_prompts_v4") if isinstance(data.get("image_prompts_v4"), list) else data.get("image_prompts")
+    prompts = prompts if isinstance(prompts, list) else []
+    prompt_placements = {
+        str(prompt.get("section_ref", "")).strip()
+        for prompt in prompts
+        if isinstance(prompt, dict) and str(prompt.get("section_ref", "")).strip()
+    }
+
+    sections = data.get("sections") if isinstance(data.get("sections"), list) else []
+    for section_index, section in enumerate(sections):
+        if not isinstance(section, dict):
+            continue
+        paragraphs = section.get("paragraphs_html") if isinstance(section.get("paragraphs_html"), list) else []
+        for paragraph_index, paragraph in enumerate(paragraphs):
+            add(f"sections[{section_index}].paragraphs_html[{paragraph_index}]", paragraph)
+        items = section.get("list_items") if isinstance(section.get("list_items"), list) else []
+        for item_index, item in enumerate(items):
+            add(f"sections[{section_index}].list_items[{item_index}]", item)
+        info_box = section.get("info_box")
+        if isinstance(info_box, dict):
+            add(f"sections[{section_index}].info_box.content_html", info_box.get("content_html"))
+        image = section.get("image")
+        placement = str(image.get("placement", "")).strip() if isinstance(image, dict) else ""
+        if isinstance(image, dict) and (not placement or placement not in prompt_placements):
+            add(f"sections[{section_index}].image.alt", image.get("alt"))
+            add(f"sections[{section_index}].image.caption", image.get("caption"))
+        images = section.get("images") if isinstance(section.get("images"), list) else []
+        for image_index, item in enumerate(images):
+            if isinstance(item, dict):
+                add(f"sections[{section_index}].images[{image_index}].caption", item.get("caption"))
+
+    answer_blocks = data.get("answer_blocks") if isinstance(data.get("answer_blocks"), list) else []
+    for index, item in enumerate(answer_blocks):
+        if isinstance(item, dict):
+            add(f"answer_blocks[{index}].answer_html", item.get("answer_html", item.get("answer")))
+
+    prompt_key = "image_prompts_v4" if isinstance(data.get("image_prompts_v4"), list) and data["image_prompts_v4"] else "image_prompts"
+    prompt_items = data.get(prompt_key) if isinstance(data.get(prompt_key), list) else []
+    for index, prompt in enumerate(prompt_items):
+        if not isinstance(prompt, dict):
+            continue
+        add(f"{prompt_key}[{index}].alt_pl", prompt.get("alt_pl"))
+        add(f"{prompt_key}[{index}].caption_pl", prompt.get("caption_pl"))
+        add(f"{prompt_key}[{index}].overlay_text_pl", prompt.get("overlay_text_pl"))
+    return fragments
+
+
 def validate(
     data: dict[str, Any],
     allow_verified_review: bool = False,
@@ -399,6 +463,7 @@ def validate(
     claims = data.get("evidence_claims") if isinstance(data.get("evidence_claims"), list) else []
     if not claims:
         errors.append("Brak evidence_claims.")
+    evidence_fragments = collect_evidence_fragments(data)
     used_urls: set[str] = set()
     for index, claim in enumerate(claims):
         if not isinstance(claim, dict):
@@ -407,7 +472,7 @@ def validate(
         statement, location, urls = claim.get("claim"), claim.get("location"), claim.get("source_urls")
         if not isinstance(statement, str) or words(statement) < 5:
             errors.append(f"evidence_claims[{index}].claim musi zawierać co najmniej 5 słów i nazywać konkretne twierdzenie.")
-        located = locate(data, location) if isinstance(location, str) else None
+        located = evidence_fragments.get(location) if isinstance(location, str) else None
         if not isinstance(location, str) or located is None:
             errors.append(f"evidence_claims[{index}].location nie wskazuje istniejącego pola.")
         elif not isinstance(located, str):

@@ -64,6 +64,13 @@ test('sekcja użytkowa nie wymaga pytającego H2 ani osobnego obrazu', () => {
   assert.equal(sectionRequiresAnswerFirstContract({ section_role: 'utility' }), false);
 });
 
+test('wspólna reguła H2 wymaga znaku zapytania tylko od nagłówków będących pytaniami', () => {
+  assert.equal(validators.validateH2Title('Tabela produktów: porównaj błonnik w swojej porcji').ok, true);
+  assert.equal(validators.validateH2Title('Więcej błonnika z rozwagą: płyny i własne zalecenia').ok, true);
+  assert.equal(validators.validateH2Title('Ile błonnika potrzebujesz?').ok, true);
+  assert.equal(validators.validateH2Title('Ile błonnika potrzebujesz').ok, false);
+});
+
 test('wspólna polityka encji blokuje fałszywe sameAs i dopuszcza name-only oraz Q43656', () => {
   assert.deepEqual(validateAboutEntities([{ '@type': 'Thing', name: 'Diabetes' }]), []);
   assert.deepEqual(validateAboutEntities([{ '@type': 'Thing', name: 'Cholesterol', sameAs: 'https://www.wikidata.org/wiki/Q43656' }]), []);

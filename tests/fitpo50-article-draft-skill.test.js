@@ -309,6 +309,31 @@ test('Claude draft skill rejects stale evidence locations and nested semantic bl
   assert.match(result.stdout, /blok semantyczny wewnątrz <p>/);
 });
 
+test('Claude draft skill accepts title evidence but rejects arbitrary metadata and mismatched claims', () => {
+  const accepted = validDraft();
+  accepted.evidence_claims.push({
+    claim: accepted.title,
+    location: 'title',
+    claim_type: 'general',
+    source_urls: [accepted.sources[0].url],
+  });
+  const acceptedResult = validate(accepted);
+  assert.equal(acceptedResult.status, 0, `${acceptedResult.stdout}\n${acceptedResult.stderr}`);
+
+  const arbitrary = validDraft();
+  arbitrary.evidence_claims[0].claim = arbitrary.slug;
+  arbitrary.evidence_claims[0].location = 'slug';
+  const arbitraryResult = validate(arbitrary);
+  assert.equal(arbitraryResult.status, 1);
+  assert.match(arbitraryResult.stdout, /location nie wskazuje istniejącego pola/);
+
+  const mismatch = validDraft();
+  mismatch.evidence_claims[0].location = 'title';
+  const mismatchResult = validate(mismatch);
+  assert.equal(mismatchResult.status, 1);
+  assert.match(mismatchResult.stdout, /claim nie występuje dokładnie we wskazanym location/);
+});
+
 test('Claude draft skill keeps internal linking local and reports unresolved FAQ gaps', () => {
   const draft = validDraft();
   draft.editorial_notes.faq_gaps = ['Czy użytkownicy pytają o czas działania?'];

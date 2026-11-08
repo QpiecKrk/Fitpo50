@@ -1,7 +1,9 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const read = (relative) => fs.readFileSync(path.join(ROOT, relative), 'utf8');
@@ -58,4 +60,20 @@ test('article:add nie powtarza kontraktu HTML ani pełnego preflight po przygoto
   assert.equal((pipeline.match(/article-contract-check\.js/g) || []).length, 1);
   assert.doesNotMatch(pipeline, /Article preflight \(working copy\)/);
   assert.doesNotMatch(pipeline, /Post-promotion article standard|Post-promotion article contract/);
+});
+
+test('raport topologii linków może zapisać wynik poza repozytorium', () => {
+  const reportDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-link-topology-test-'));
+  try {
+    const result = spawnSync('node', [
+      'scripts/global-link-topology-optimizer.js',
+      '--min-inbound', '2',
+      '--report-dir', reportDir,
+    ], { cwd: ROOT, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    assert.equal(fs.existsSync(path.join(reportDir, 'link-topology-report.json')), true);
+    assert.equal(fs.existsSync(path.join(reportDir, 'link-topology-report.md')), true);
+  } finally {
+    fs.rmSync(reportDir, { recursive: true, force: true });
+  }
 });

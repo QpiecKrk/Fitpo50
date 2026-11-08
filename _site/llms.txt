@@ -491,3 +491,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Czy niejedzenie po 18:00 to najlepszy sposób na chudnięcie? | FitPo50"
   section: "Mity"
   summary: "Mit, że po 18:00 metabolizm się wyłącza, nie wyjaśnia chudnięcia. Pora jedzenia może coś zmieniać, ale nie przez magiczną godzinę. Sprawdź, co mówią badania."
+- url: https://fitpo50.pl/ile-blonnika-dziennie-po-50.html
+  title: "Ile błonnika dziennie po 50? Normy i 30 g na talerzu — tabela | FitPo50"
+  section: "Jedzenie"
+  summary: "Sprawdź polskie normy błonnika po 50. roku życia, tabelę produktów i ważonych porcji oraz przykład około 30 g. Zobacz, jak zwiększać ilość błonnika z rozwagą."

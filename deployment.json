@@ -1,14 +1,136 @@
 {
   "version": 4,
-  "release_id": "f1011831-0cc8-48a3-b71c-a0da2e78858a",
-  "prepared_at": "2026-11-08T10:14:42+01:00",
-  "prepared_from_head": "7aa8dfc9a6f46f214c5d2845159d5b6c85d92cbc",
-  "publication_state_sha256": "0a5158f9146a70b0095c6cffe6a1ba06a43309d8a3240c9098fc226c1b93d69d",
-  "public_fingerprint_sha256": "49fc420e869bdcd75176054bd339b452f9fc1483e25e0eafb13350cbc9efe82e",
+  "release_id": "9d84ec4a-dfbb-47eb-86fa-2ab7394795ab",
+  "prepared_at": "2026-11-08T12:55:19+01:00",
+  "prepared_from_head": "70a4898ffc5dec6fb4dbff5e99cf4b94a2c6b2ac",
+  "publication_state_sha256": "7e7492256e9801f6453feb1f0fc1c0f0c240315bb3a3d884907ebb7448871c2b",
+  "public_fingerprint_sha256": "638be1158d4840466c5ab015c2c90f2ce07ff465379cee91fab2d693688baffd",
   "change_scope": [
+    "articles",
     "pipeline"
   ],
-  "verification_targets": [],
+  "verification_targets": [
+    {
+      "path": "assets/data/search-index.json",
+      "mode": "sha256",
+      "sha256": "40fb6bfd33ad2cca73721d8563a10cddeca800978370b1d54affa194aad6f7d7"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.avif",
+      "mode": "sha256",
+      "sha256": "63dc1ed67df52ff5dcc0140046c917bb1a2501506929e64ea0dcd9e0e52c388e"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.jpg",
+      "mode": "sha256",
+      "sha256": "c80fbb16ffe9953d624d6aa75f24cbf11fbb88e7cf297961d9bb2c66bb246ecf"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp",
+      "mode": "sha256",
+      "sha256": "2d28b322db5d94a106c7efbc3c2d4038907bc8ddab5f9c8cc6966bd4107d040d"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.avif",
+      "mode": "sha256",
+      "sha256": "d027178eac080278b17acca8807285c9ff5f3847f828931192e4bb18d4a89c35"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.jpg",
+      "mode": "sha256",
+      "sha256": "263c00d1aa0faa793782aa6aafa8b904f9225ed909840645834fdbb2f87f038c"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.webp",
+      "mode": "sha256",
+      "sha256": "97638accd93edb27fc8c1ff93b086675a07b85dace71c2c1119441bb31bf0299"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.avif",
+      "mode": "sha256",
+      "sha256": "c819b8c7a9ede5200bf0ecf886a635677794b4675ed48aa92f67f5ca13445314"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.jpg",
+      "mode": "sha256",
+      "sha256": "3ce54227d233e1b9db2d147931a697e7f620a31a44c6d367a5ce0eb6fefde9b8"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.webp",
+      "mode": "sha256",
+      "sha256": "39a08751b8396160a02269f33fc6d48a921f7d2eb60f7a029e686383ef34a4ba"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.avif",
+      "mode": "sha256",
+      "sha256": "ff4090f6e12c7a48eb4144c708a33bff1c9a125ae40bed20d2f5682f24a7c6ee"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.jpg",
+      "mode": "sha256",
+      "sha256": "a268355313534c87718cec3efa44fcdbd26e02f339e031d6162194561cc74e3c"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.webp",
+      "mode": "sha256",
+      "sha256": "b3d640f933a1d61ae16f8de5086709ef3924c6fa87bf2969165c9f5e132bde75"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.avif",
+      "mode": "sha256",
+      "sha256": "a782cc61982d23b56c8a7ac6f72a60e981d5c86ab55367e196d419f8f395df02"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.jpg",
+      "mode": "sha256",
+      "sha256": "cc3643b3a6e32d0458e864e87c78969512c28df509f3d6870d2010ef614fdb89"
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.webp",
+      "mode": "sha256",
+      "sha256": "f94b9a0eb2029134fa947d57c8863a1a3456b56894f79bdf16971e8e6de3ccdf"
+    },
+    {
+      "path": "assets/pdf/ile-blonnika-dziennie-po-50.pdf",
+      "mode": "sha256",
+      "sha256": "dd7483dbdb927251726c812fdd066dc1bf3220f9d9ebf5dbdfbeabdb6833b052"
+    },
+    {
+      "path": "ile-blonnika-dziennie-po-50.html",
+      "mode": "sha256",
+      "sha256": "9221902a9880a67d4d073e5a0ac634b58314e9074591b322d6f1056b9b0308cc"
+    },
+    {
+      "path": "index.html",
+      "mode": "sha256",
+      "sha256": "20c7a013e97ffe6a2423fecb444c1039c93dc28ce258a321f515d2304ebd4310"
+    },
+    {
+      "path": "jedzenie.html",
+      "mode": "sha256",
+      "sha256": "5d08b5bbe9d3fda9800c16d84ecc40a068cf84c8b5eeb9a9178e4c0ed25325ed"
+    },
+    {
+      "path": "llms-full.txt",
+      "mode": "sha256",
+      "sha256": "7a31b7e5ed9ca50fd8d8915117578cc4b78d54fd949009b2797ff13d9bde0092"
+    },
+    {
+      "path": "llms.txt",
+      "mode": "sha256",
+      "sha256": "c1a2264348bb94f324369023dcb7ea01b0e90758f24b793c349edafd431ca6ed"
+    },
+    {
+      "path": "porady.html",
+      "mode": "sha256",
+      "sha256": "66446d6867c6181409202262c17641daeafdb3a6dc1633a9f59f0e1ab9faccea"
+    },
+    {
+      "path": "sitemap.xml",
+      "mode": "sha256",
+      "sha256": "250ab06375e773ccc1e4eea829fd8d3197a9123cef4d81dd9db719c1654d252d"
+    }
+  ],
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",
@@ -89,5 +211,127 @@
       }
     ]
   },
-  "articles": []
+  "articles": [
+    {
+      "file": "ile-blonnika-dziennie-po-50.html",
+      "slug": "ile-blonnika-dziennie-po-50",
+      "url": "https://fitpo50.pl/ile-blonnika-dziennie-po-50.html",
+      "date_modified": "2026-11-08T09:30:00+01:00",
+      "html_sha256": "9221902a9880a67d4d073e5a0ac634b58314e9074591b322d6f1056b9b0308cc",
+      "pdf_path": "assets/pdf/ile-blonnika-dziennie-po-50.pdf",
+      "pdf_sha256": "dd7483dbdb927251726c812fdd066dc1bf3220f9d9ebf5dbdfbeabdb6833b052",
+      "images": [
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.avif",
+          "sha256": "63dc1ed67df52ff5dcc0140046c917bb1a2501506929e64ea0dcd9e0e52c388e"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.jpg",
+          "sha256": "c80fbb16ffe9953d624d6aa75f24cbf11fbb88e7cf297961d9bb2c66bb246ecf"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp",
+          "sha256": "2d28b322db5d94a106c7efbc3c2d4038907bc8ddab5f9c8cc6966bd4107d040d"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.avif",
+          "sha256": "d027178eac080278b17acca8807285c9ff5f3847f828931192e4bb18d4a89c35"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.jpg",
+          "sha256": "263c00d1aa0faa793782aa6aafa8b904f9225ed909840645834fdbb2f87f038c"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.webp",
+          "sha256": "97638accd93edb27fc8c1ff93b086675a07b85dace71c2c1119441bb31bf0299"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.avif",
+          "sha256": "c819b8c7a9ede5200bf0ecf886a635677794b4675ed48aa92f67f5ca13445314"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.jpg",
+          "sha256": "3ce54227d233e1b9db2d147931a697e7f620a31a44c6d367a5ce0eb6fefde9b8"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.webp",
+          "sha256": "39a08751b8396160a02269f33fc6d48a921f7d2eb60f7a029e686383ef34a4ba"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.avif",
+          "sha256": "ff4090f6e12c7a48eb4144c708a33bff1c9a125ae40bed20d2f5682f24a7c6ee"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.jpg",
+          "sha256": "a268355313534c87718cec3efa44fcdbd26e02f339e031d6162194561cc74e3c"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.webp",
+          "sha256": "b3d640f933a1d61ae16f8de5086709ef3924c6fa87bf2969165c9f5e132bde75"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.avif",
+          "sha256": "a782cc61982d23b56c8a7ac6f72a60e981d5c86ab55367e196d419f8f395df02"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.jpg",
+          "sha256": "cc3643b3a6e32d0458e864e87c78969512c28df509f3d6870d2010ef614fdb89"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.webp",
+          "sha256": "f94b9a0eb2029134fa947d57c8863a1a3456b56894f79bdf16971e8e6de3ccdf"
+        },
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.avif",
+          "sha256": "f13b02c5da44ae57b32a6d38688aeffd9a7f4fdaa69ec4948827c3666e1abd4b"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.jpg",
+          "sha256": "102463e456ca186a6ca26f373b3a70305589b021649b41f4b3a50642957f330f"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp",
+          "sha256": "2798d80ee0117cabf8c72017e801042230e250e4a0c67ca2186e4dcc46f5bddb"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.avif",
+          "sha256": "8b3d1434a0715a4bfae357022cb283d1914d14a554c5a303aeb9f3ae49f3038e"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.jpg",
+          "sha256": "85f8437d789961725ac9c7a6328f41204d6d1e116ea3e611638bbc83616415e5"
+        },
+        {
+          "path": "assets/nocne-skurcze-lydek-po-50-magnez-noc-lozko-lydka-v1.webp",
+          "sha256": "615079282e76b1d57c12452e29e5038dfd93497b410f72708a7ceca7e1538243"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif",
+          "sha256": "2eeb9098516c3586eef00d00f14fe782327b3b791b9d9c8e971e44b8b6029bc0"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.jpg",
+          "sha256": "83caf556d2b45f12ff8e1dadc8f466ab6ef096817047126ddcdec0537caa03c8"
+        },
+        {
+          "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp",
+          "sha256": "c4bb6034c9d027a9332c0b72e6ce6d3cd9f26c716506f616a99156a9bd58ebca"
+        }
+      ],
+      "listing_paths": [
+        "index.html",
+        "porady.html",
+        "jedzenie.html",
+        "assets/data/search-index.json"
+      ]
+    }
+  ]
 }

@@ -97,10 +97,6 @@ function collectRepeatedLongSentences(chunks) {
   return repeated.map((item) => [item.sentence, item.count]);
 }
 
-function isQuestionHeading(text) {
-  return String(text || '').trim().endsWith('?');
-}
-
 function normalizeLocalHtmlHref(href) {
   return normalizeInternalHref(href);
 }
@@ -309,8 +305,9 @@ function validateFile(file, options = {}) {
   for (let i = 0; i < sections.length; i += 1) {
     const s = sections[i] || {};
     const requiresPrimaryContent = sectionRequiresPrimaryImage(s);
-    if (sectionRequiresQuestionHeading(s) && !isQuestionHeading(String(s.title || s.heading || '').trim())) {
-      errors.push(`${file}: sections[${i}].title musi być pytaniem zakończonym "?".`);
+    if (sectionRequiresQuestionHeading(s)) {
+      const headingValidation = validators.validateH2Title(String(s.title || s.heading || '').trim());
+      if (!headingValidation.ok) errors.push(`${file}: ${headingValidation.error}`);
     }
     const paragraphs = Array.isArray(s.paragraphs_html) ? s.paragraphs_html : [];
     if (paragraphs.length < 2) {

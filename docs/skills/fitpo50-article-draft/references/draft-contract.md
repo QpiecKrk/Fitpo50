@@ -140,7 +140,7 @@ Każda liczba, próg, ryzyko, cena, mechanizm, rekomendacja, kategoryczna teza m
 
 Każde źródło musi być użyte. `logic_links` łączą wniosek z wcześniejszymi przesłankami, gdy relacja nie jest prostym cytowaniem jednego źródła.
 
-Każdy `claim` ma co najmniej 5 słów i jest dokładnym fragmentem finalnej wersji pola wskazanego przez `location`. `location` wskazuje pojedynczy tekst, nie całą listę lub obiekt. Po skróceniu, przeniesieniu albo usunięciu akapitu, sekcji lub wniosku przelicz indeksy i ponownie uruchom walidator; martwe odwołanie, np. `key_takeaways[4]` przy czterech elementach, blokuje draft.
+Każdy `claim` ma co najmniej 5 słów i jest dokładnym fragmentem finalnej wersji pola wskazanego przez `location`. Jeśli dowodowane twierdzenie znajduje się w tytule/H1, `location` może wskazywać `title`; pozostałe dozwolone lokalizacje to wyłącznie pojedyncze fragmenty treści: `lead`, `quick_answer`, `hero_motto_html`, element `key_takeaways[]`, akapit lub element listy w `sections[]`, `sections[].info_box.content_html`, podpis/alt obrazu, `answer_blocks[].answer_html` oraz pola tekstowe `image_prompts[_v4][]`. `location` nie może wskazywać dowolnego pola metadanych, całej listy ani obiektu. Po skróceniu, przeniesieniu albo usunięciu akapitu, sekcji lub wniosku przelicz indeksy i ponownie uruchom walidator; martwe odwołanie, np. `key_takeaways[4]` przy czterech elementach, blokuje draft.
 
 ## FAQ i linkowanie
 

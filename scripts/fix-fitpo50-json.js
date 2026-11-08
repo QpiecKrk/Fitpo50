@@ -503,9 +503,8 @@ function validate(json) {
     for (let i = 0; i < json.sections.length; i += 1) {
       if (normalizeSectionRole(json.sections[i]?.section_role) === 'utility') continue;
       const title = String(json.sections[i]?.title || '').trim();
-      if (!title.endsWith('?')) {
-        errors.push(`sections[${i}].title musi być pytaniem zakończonym "?".`);
-      }
+      const headingValidation = validators.validateH2Title(title);
+      if (!headingValidation.ok) errors.push(`sections[${i}].title: ${headingValidation.error}`);
     }
   }
   if (!Array.isArray(json.sources) || json.sources.length < POLICY.WORDS.CITATION_MIN_URLS) {

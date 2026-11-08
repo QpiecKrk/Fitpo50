@@ -70,7 +70,7 @@ function main() {
   const args = parseArgs(process.argv.slice(2));
   const root = process.cwd();
   const minInbound = Number(args['min-inbound'] || 2);
-  const reportDir = path.join(root, 'data', 'reports');
+  const reportDir = path.resolve(args['report-dir'] || path.join(root, 'data', 'reports'));
   fs.mkdirSync(reportDir, { recursive: true });
 
   const files = findHtmlFiles(root);

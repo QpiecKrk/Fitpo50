@@ -24,6 +24,21 @@ const { packageIdentity } = require('./lib/package-identity');
 const { auditPackage, printReport: printPackageAuditReport } = require('./package-audit');
 
 const ROOT = process.cwd();
+const REPAIR_ATTEMPT_PIPELINE_FILES = Object.freeze([
+  'scripts/article-add.js',
+  'scripts/article-json-workbench.js',
+  'scripts/article-pipeline.js',
+  'scripts/article-preflight.js',
+  'scripts/fix-fitpo50-json.js',
+  'scripts/json-fitpo50-gate-diff.js',
+  'scripts/package-audit.js',
+  'scripts/global-link-topology-optimizer.js',
+  'scripts/lib/article-evidence.js',
+  'scripts/lib/article-policy.js',
+  'scripts/lib/article-media.js',
+  'docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py',
+  'docs/skills/fitpo50-article-draft/references/draft-contract.md',
+]);
 
 function parseArgs(argv) {
   const out = {};
@@ -337,12 +352,7 @@ function repairAttemptIdentity(args, root) {
   if (!fs.existsSync(source)) return null;
   try {
     const pipelineHash = crypto.createHash('sha256');
-    for (const relative of [
-      'scripts/article-add.js',
-      'scripts/article-json-workbench.js',
-      'scripts/article-pipeline.js',
-      'scripts/lib/article-media.js',
-    ]) {
+    for (const relative of REPAIR_ATTEMPT_PIPELINE_FILES) {
       const file = path.join(root, relative);
       if (fs.existsSync(file)) pipelineHash.update(relative).update(fs.readFileSync(file));
     }

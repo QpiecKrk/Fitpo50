@@ -1,0 +1,410 @@
+{
+  "version": 1,
+  "transaction_id": "article-ile-blonnika-dziennie-po-50-1794132968636-51587",
+  "generated_at": "2026-11-08T11:16:49+01:00",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "ile-blonnika-dziennie-po-50",
+  "url": "https://fitpo50.pl/ile-blonnika-dziennie-po-50.html",
+  "manifest_file": "data/reports/article-publications/ile-blonnika-dziennie-po-50.json",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "MIRROR_SYNC",
+    "NEWS_INTEGRITY",
+    "PREDEPLOY_STAGING",
+    "TECHNICAL_PREVIEW_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "ile-blonnika-dziennie-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9221902a9880a67d4d073e5a0ac634b58314e9074591b322d6f1056b9b0308cc",
+      "bytes": 43850
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "d317f71bd27b8c07513dd38712bd27fe6ed1ff0aef95c79552af0982b5d6d1ea",
+      "after_sha256": "20c7a013e97ffe6a2423fecb444c1039c93dc28ce258a321f515d2304ebd4310",
+      "bytes": 119805
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "d4e88c5bad770dc67109908eb30b456c12bf0507cdcbf6812c346bd86e2ff6fa",
+      "after_sha256": "66446d6867c6181409202262c17641daeafdb3a6dc1633a9f59f0e1ab9faccea",
+      "bytes": 166718
+    },
+    {
+      "path": "jedzenie.html",
+      "action": "UPDATE",
+      "before_sha256": "40e5ef56eb23270fa7602d8f28c03f91d26d23cd92493c792f000b4596c73983",
+      "after_sha256": "5d08b5bbe9d3fda9800c16d84ecc40a068cf84c8b5eeb9a9178e4c0ed25325ed",
+      "bytes": 48793
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "7402d10cd4daa6da81235eb0b4adcb97c6c349a166c74d26b1308ea77d0947fb",
+      "after_sha256": "250ab06375e773ccc1e4eea829fd8d3197a9123cef4d81dd9db719c1654d252d",
+      "bytes": 20776
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "8d6a44476690e26486312705753398a78ec5575986a3d9ec102ef5c31813d612",
+      "after_sha256": "c1a2264348bb94f324369023dcb7ea01b0e90758f24b793c349edafd431ca6ed",
+      "bytes": 40639
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "cce69b49186dcaff4f203df943de8eae342cb95969894ffb88bae605db6b7fff",
+      "after_sha256": "7a31b7e5ed9ca50fd8d8915117578cc4b78d54fd949009b2797ff13d9bde0092",
+      "bytes": 937053
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "987a5bf7a75c2a1ce9b8a961068f61a8ad9d0c37a1b271953a9728ebaa732747",
+      "after_sha256": "40fb6bfd33ad2cca73721d8563a10cddeca800978370b1d54affa194aad6f7d7",
+      "bytes": 983073
+    },
+    {
+      "path": "assets/pdf/ile-blonnika-dziennie-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dd7483dbdb927251726c812fdd066dc1bf3220f9d9ebf5dbdfbeabdb6833b052",
+      "bytes": 702212
+    },
+    {
+      "path": "data/crosslink-suggestions/ile-blonnika-dziennie-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8f2a654ecd5f6176b54d404072620a94f250aabc9e82c268863a199929bfd350",
+      "bytes": 1300
+    },
+    {
+      "path": "data/reports/article-preview/ile-blonnika-dziennie-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b9f3678db6f48f1b7770dd99adf6ad04cee57e57f78ab7571947cb6ae277beb2",
+      "bytes": 15782
+    },
+    {
+      "path": "data/reports/article-preview/ile-blonnika-dziennie-po-50.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8bdef61b8c6e0eef3f5b7fbad3b8c44fa3c106c1ec3481335352e036fb77a788",
+      "bytes": 349
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "0aba832058fc74fef98d7e612d5f58f5311b4c31025c27a1f2d3c90363499cfc",
+      "after_sha256": "e3dd3b1fddd64d6f8231fba51b524ea1d6de3b6bb3b6fea23f9f153c0e1dfe22",
+      "bytes": 68452
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "e35345f26299850450f0b7f796b1706ef4a4c919213d0eef64194b2efafe45d1",
+      "after_sha256": "7c921583c5aa59efe9643b8dfab7dec87e7926bb0cc605c29f0292bbb2cba31f",
+      "bytes": 7447
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "f3c2d2654d3d7b0ee6d22775f005470660ba22f1621686ea9a05679e1721b392",
+      "after_sha256": "997d854edd476b6e5f035b231cf638b3851e5ccd9fb6d26faa89c6701bab9d1a",
+      "bytes": 3630
+    },
+    {
+      "path": "_site/ile-blonnika-dziennie-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9221902a9880a67d4d073e5a0ac634b58314e9074591b322d6f1056b9b0308cc",
+      "bytes": 43850
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "d317f71bd27b8c07513dd38712bd27fe6ed1ff0aef95c79552af0982b5d6d1ea",
+      "after_sha256": "20c7a013e97ffe6a2423fecb444c1039c93dc28ce258a321f515d2304ebd4310",
+      "bytes": 119805
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "d4e88c5bad770dc67109908eb30b456c12bf0507cdcbf6812c346bd86e2ff6fa",
+      "after_sha256": "66446d6867c6181409202262c17641daeafdb3a6dc1633a9f59f0e1ab9faccea",
+      "bytes": 166718
+    },
+    {
+      "path": "_site/jedzenie.html",
+      "action": "UPDATE",
+      "before_sha256": "40e5ef56eb23270fa7602d8f28c03f91d26d23cd92493c792f000b4596c73983",
+      "after_sha256": "5d08b5bbe9d3fda9800c16d84ecc40a068cf84c8b5eeb9a9178e4c0ed25325ed",
+      "bytes": 48793
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "7402d10cd4daa6da81235eb0b4adcb97c6c349a166c74d26b1308ea77d0947fb",
+      "after_sha256": "250ab06375e773ccc1e4eea829fd8d3197a9123cef4d81dd9db719c1654d252d",
+      "bytes": 20776
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "8d6a44476690e26486312705753398a78ec5575986a3d9ec102ef5c31813d612",
+      "after_sha256": "c1a2264348bb94f324369023dcb7ea01b0e90758f24b793c349edafd431ca6ed",
+      "bytes": 40639
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "cce69b49186dcaff4f203df943de8eae342cb95969894ffb88bae605db6b7fff",
+      "after_sha256": "7a31b7e5ed9ca50fd8d8915117578cc4b78d54fd949009b2797ff13d9bde0092",
+      "bytes": 937053
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "987a5bf7a75c2a1ce9b8a961068f61a8ad9d0c37a1b271953a9728ebaa732747",
+      "after_sha256": "40fb6bfd33ad2cca73721d8563a10cddeca800978370b1d54affa194aad6f7d7",
+      "bytes": 983073
+    },
+    {
+      "path": "_site/assets/pdf/ile-blonnika-dziennie-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dd7483dbdb927251726c812fdd066dc1bf3220f9d9ebf5dbdfbeabdb6833b052",
+      "bytes": 702212
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/ile-blonnika-dziennie-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8f2a654ecd5f6176b54d404072620a94f250aabc9e82c268863a199929bfd350",
+      "bytes": 1300
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "63dc1ed67df52ff5dcc0140046c917bb1a2501506929e64ea0dcd9e0e52c388e",
+      "bytes": 107511
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "63dc1ed67df52ff5dcc0140046c917bb1a2501506929e64ea0dcd9e0e52c388e",
+      "bytes": 107511
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2d28b322db5d94a106c7efbc3c2d4038907bc8ddab5f9c8cc6966bd4107d040d",
+      "bytes": 191076
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2d28b322db5d94a106c7efbc3c2d4038907bc8ddab5f9c8cc6966bd4107d040d",
+      "bytes": 191076
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c80fbb16ffe9953d624d6aa75f24cbf11fbb88e7cf297961d9bb2c66bb246ecf",
+      "bytes": 242118
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c80fbb16ffe9953d624d6aa75f24cbf11fbb88e7cf297961d9bb2c66bb246ecf",
+      "bytes": 242118
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d027178eac080278b17acca8807285c9ff5f3847f828931192e4bb18d4a89c35",
+      "bytes": 127030
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d027178eac080278b17acca8807285c9ff5f3847f828931192e4bb18d4a89c35",
+      "bytes": 127030
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "97638accd93edb27fc8c1ff93b086675a07b85dace71c2c1119441bb31bf0299",
+      "bytes": 230652
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "97638accd93edb27fc8c1ff93b086675a07b85dace71c2c1119441bb31bf0299",
+      "bytes": 230652
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "263c00d1aa0faa793782aa6aafa8b904f9225ed909840645834fdbb2f87f038c",
+      "bytes": 287918
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-normy-wiek-rozmowa-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "263c00d1aa0faa793782aa6aafa8b904f9225ed909840645834fdbb2f87f038c",
+      "bytes": 287918
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a782cc61982d23b56c8a7ac6f72a60e981d5c86ab55367e196d419f8f395df02",
+      "bytes": 136644
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a782cc61982d23b56c8a7ac6f72a60e981d5c86ab55367e196d419f8f395df02",
+      "bytes": 136644
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f94b9a0eb2029134fa947d57c8863a1a3456b56894f79bdf16971e8e6de3ccdf",
+      "bytes": 249820
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f94b9a0eb2029134fa947d57c8863a1a3456b56894f79bdf16971e8e6de3ccdf",
+      "bytes": 249820
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cc3643b3a6e32d0458e864e87c78969512c28df509f3d6870d2010ef614fdb89",
+      "bytes": 305415
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-tabela-wazenie-produktow-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cc3643b3a6e32d0458e864e87c78969512c28df509f3d6870d2010ef614fdb89",
+      "bytes": 305415
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ff4090f6e12c7a48eb4144c708a33bff1c9a125ae40bed20d2f5682f24a7c6ee",
+      "bytes": 140688
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ff4090f6e12c7a48eb4144c708a33bff1c9a125ae40bed20d2f5682f24a7c6ee",
+      "bytes": 140688
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b3d640f933a1d61ae16f8de5086709ef3924c6fa87bf2969165c9f5e132bde75",
+      "bytes": 252478
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b3d640f933a1d61ae16f8de5086709ef3924c6fa87bf2969165c9f5e132bde75",
+      "bytes": 252478
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a268355313534c87718cec3efa44fcdbd26e02f339e031d6162194561cc74e3c",
+      "bytes": 309143
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-przyklad-dnia-soczewica-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a268355313534c87718cec3efa44fcdbd26e02f339e031d6162194561cc74e3c",
+      "bytes": 309143
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c819b8c7a9ede5200bf0ecf886a635677794b4675ed48aa92f67f5ca13445314",
+      "bytes": 133422
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c819b8c7a9ede5200bf0ecf886a635677794b4675ed48aa92f67f5ca13445314",
+      "bytes": 133422
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "39a08751b8396160a02269f33fc6d48a921f7d2eb60f7a029e686383ef34a4ba",
+      "bytes": 239434
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "39a08751b8396160a02269f33fc6d48a921f7d2eb60f7a029e686383ef34a4ba",
+      "bytes": 239434
+    },
+    {
+      "path": "assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3ce54227d233e1b9db2d147931a697e7f620a31a44c6d367a5ce0eb6fefde9b8",
+      "bytes": 299690
+    },
+    {
+      "path": "_site/assets/ile-blonnika-dziennie-po-50-plyny-spokojna-zmiana-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3ce54227d233e1b9db2d147931a697e7f620a31a44c6d367a5ce0eb6fefde9b8",
+      "bytes": 299690
+    }
+  ],
+  "files_count": 55
+}
