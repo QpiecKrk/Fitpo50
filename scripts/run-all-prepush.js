@@ -106,7 +106,7 @@ async function main() {
     const classification = classifyChangedFiles(explicitFiles || collectChangedFiles());
     console.log(`[PREPUSH:SCOPE] ${classification.scopes.join('+')} (${classification.files.length} plików)`);
     if (classification.full) {
-      timings.push(await runStep('fitpo50:doctor', 'node', ['scripts/fitpo50-doctor.js']));
+      timings.push(await runStep('fitpo50:doctor', 'node', ['scripts/fitpo50-doctor.js', '--skip-release-overlaps']));
       const parallel = await Promise.all([
         runStep('prepush:parallel:checks', 'node', ['scripts/prepush-parallel-checks.js', '--worktree', '--all']),
         runStep('build', 'npm', ['run', 'build']),
@@ -141,7 +141,7 @@ async function main() {
       exportDir = path.join(exportWorkspace, 'site');
       const sourceSnapshotBeforeExport = repositorySnapshot();
       timings.push(await runStep('export:fresh(tmp)', 'bash', ['./scripts/export_site.sh', exportDir], {
-        env: { SKIP_TS_BUILD: '1' },
+        env: { SKIP_TS_BUILD: '1', FITPO50_SKIP_PREDEPLOY: '1' },
       }));
       assertExportDidNotModifySources(sourceSnapshotBeforeExport, repositorySnapshot());
       timings.push(await runStep('export:parity', 'node', [

@@ -6,7 +6,7 @@ const { spawnSync } = require('node:child_process');
 const test = require('node:test');
 const { EXIT, NewsPullError } = require('../scripts/news-pull');
 const { checkNewsFallbackSync } = require('../scripts/news-deploy-sync-gate');
-const { runDeploymentPrepare } = require('../scripts/prepare-deployment-marker');
+const { runDeploymentPrepare, sha256 } = require('../scripts/prepare-deployment-marker');
 
 function git(root, ...args) {
   const result = spawnSync('git', args, { cwd: root, encoding: 'utf8' });
@@ -195,4 +195,27 @@ test('deployment:prepare uruchamia bramkę NEWS przed zapisem markera', () => {
   });
   assert.deepEqual(order, ['news-gate', 'marker']);
   assert.equal(marker.release_id, 'test');
+});
+
+test('deployment:prepare używa zgodnego markera NEWS bez połączenia FTPS dla zakresu bez NEWS', (t) => {
+  const content = payload();
+  const live = livePayload();
+  const root = fixtureRoot(t, content, live);
+  fs.writeFileSync(path.join(root, 'deployment.json'), `${JSON.stringify({
+    news: {
+      fallback: { path: 'assets/data/news-fallback.json', sha256: sha256(content) },
+      runtime_images: [],
+    },
+  })}\n`);
+  let remoteCalled = false;
+  const result = runDeploymentPrepare(root, {
+    markerOptions: { changedFiles: ['zwykly-artykul.html'] },
+    newsSyncCheck: () => {
+      remoteCalled = true;
+      throw new Error('nie powinno łączyć się z panelem dla zakresu bez NEWS');
+    },
+    markerPrepare: (_root, options) => options.newsSnapshot,
+  });
+  assert.equal(remoteCalled, false);
+  assert.equal(result.fallback_sha256, sha256(content));
 });

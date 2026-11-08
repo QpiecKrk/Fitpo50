@@ -100,3 +100,13 @@ test('prepush diff guard counts committed, staged, unstaged and untracked files 
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
+
+test('pełny prepush pomija powtórne kontrole doktora i predeploy przy świeżym eksporcie', () => {
+  const runner = fs.readFileSync(path.join(ROOT, 'scripts', 'run-all-prepush.js'), 'utf8');
+  const doctor = fs.readFileSync(path.join(ROOT, 'scripts', 'fitpo50-doctor.js'), 'utf8');
+  const exporter = fs.readFileSync(path.join(ROOT, 'scripts', 'export_site.sh'), 'utf8');
+  assert.match(runner, /scripts\/fitpo50-doctor\.js', '--skip-release-overlaps'/);
+  assert.match(runner, /FITPO50_SKIP_PREDEPLOY: '1'/);
+  assert.match(doctor, /skipReleaseOverlaps/);
+  assert.match(exporter, /FITPO50_SKIP_PREDEPLOY=1/);
+});

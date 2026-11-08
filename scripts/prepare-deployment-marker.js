@@ -27,6 +27,34 @@ function publicFingerprint(siteDir) {
   return sha256(entries.join('\n'));
 }
 
+function readCachedNewsSnapshot(rootDir) {
+  const markerPath = path.join(rootDir, 'deployment.json');
+  if (!fs.existsSync(markerPath)) return null;
+  let marker;
+  try {
+    marker = JSON.parse(fs.readFileSync(markerPath, 'utf8'));
+  } catch (_error) {
+    return null;
+  }
+  const fallback = marker?.news?.fallback;
+  if (!fallback || !Array.isArray(marker?.news?.runtime_images)) return null;
+  const snapshot = {
+    fallback_path: fallback.path,
+    fallback_sha256: fallback.sha256,
+    runtime_images: marker.news.runtime_images,
+  };
+  const normalized = normalizeNewsSnapshot(snapshot);
+  const fallbackFile = path.join(rootDir, normalized.fallback.path);
+  if (!fs.existsSync(fallbackFile)) {
+    throw new Error(`NEWS_SNAPSHOT_STALE: brak lokalnego ${normalized.fallback.path}.`);
+  }
+  const localHash = sha256(fs.readFileSync(fallbackFile));
+  if (localHash !== normalized.fallback.sha256) {
+    throw new Error(`NEWS_SNAPSHOT_STALE: lokalny ${normalized.fallback.path} różni się od ostatniego markera.`);
+  }
+  return snapshot;
+}
+
 function gitPublicationPaths(rootDir) {
   const result = spawnSync('git', [
     'ls-files', '-z', '--cached', '--others', '--exclude-standard',
@@ -331,9 +359,23 @@ function prepareDeploymentMarker(rootDir, options = {}) {
 function runDeploymentPrepare(rootDir, options = {}) {
   const newsSyncCheck = options.newsSyncCheck || checkNewsFallbackSync;
   const markerPrepare = options.markerPrepare || prepareDeploymentMarker;
-  const newsSnapshot = newsSyncCheck({ root: rootDir });
+  const markerOptions = { ...(options.markerOptions || {}) };
+  let changedFiles = markerOptions.changedFiles;
+  if (!Array.isArray(changedFiles)) {
+    try {
+      changedFiles = collectChangedFiles(rootDir);
+    } catch (_error) {
+      changedFiles = null;
+    }
+  }
+  const classification = Array.isArray(changedFiles)
+    ? classifyChangedFiles(changedFiles)
+    : { full: true, scopes: ['full'] };
+  const newsSnapshot = classification.full || classification.scopes.includes('news')
+    ? newsSyncCheck({ root: rootDir })
+    : (readCachedNewsSnapshot(rootDir) || newsSyncCheck({ root: rootDir }));
   normalizeNewsSnapshot(newsSnapshot);
-  return markerPrepare(rootDir, { ...(options.markerOptions || {}), newsSnapshot });
+  return markerPrepare(rootDir, { ...markerOptions, ...(Array.isArray(changedFiles) ? { changedFiles } : {}), newsSnapshot });
 }
 
 if (require.main === module) {
@@ -362,6 +404,7 @@ module.exports = {
   publicationStateSnapshot,
   publicationStateDetailsPath,
   readPublicationStateDetails,
+  readCachedNewsSnapshot,
   publicFingerprint,
   sha256,
 };

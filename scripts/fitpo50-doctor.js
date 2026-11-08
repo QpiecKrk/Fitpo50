@@ -12,6 +12,7 @@ const ROOT = process.cwd();
 const REPORT_DIR = path.join(ROOT, 'data', 'reports');
 const MD_PATH = path.join(REPORT_DIR, 'fitpo50-doctor.md');
 const JSON_PATH = path.join(REPORT_DIR, 'fitpo50-doctor.json');
+const skipReleaseOverlaps = process.argv.includes('--skip-release-overlaps');
 
 function run(cmd, args) {
   const started = Date.now();
@@ -71,11 +72,16 @@ function main() {
     trackedLlmsFiles.join('\n') || 'none',
   ));
 
-  const mirrorCheck = run('npm', ['run', 'assets:mirror:check']);
-  checks.push(check('Assets mirror check', 'red', mirrorCheck.ok, mirrorCheck.ok ? 'PASS' : (mirrorCheck.stderr || mirrorCheck.stdout)));
+  if (skipReleaseOverlaps) {
+    checks.push(check('Assets mirror check', 'info', true, 'Pominięto: kontrola jest wykonywana przez bieżący pre-push.'));
+    checks.push(check('Predeploy check', 'info', true, 'Pominięto: kontrola jest wykonywana przez bieżący pre-push/eksport.'));
+  } else {
+    const mirrorCheck = run('npm', ['run', 'assets:mirror:check']);
+    checks.push(check('Assets mirror check', 'red', mirrorCheck.ok, mirrorCheck.ok ? 'PASS' : (mirrorCheck.stderr || mirrorCheck.stdout)));
 
-  const predeploy = run('npm', ['run', 'predeploy:check']);
-  checks.push(check('Predeploy check', 'red', predeploy.ok, predeploy.ok ? 'PASS' : (predeploy.stderr || predeploy.stdout)));
+    const predeploy = run('npm', ['run', 'predeploy:check']);
+    checks.push(check('Predeploy check', 'red', predeploy.ok, predeploy.ok ? 'PASS' : (predeploy.stderr || predeploy.stdout)));
+  }
 
   const adminDoctor = run('node', ['scripts/admin-doctor.js']);
   checks.push(check('Admin doctor', 'red', adminDoctor.ok, adminDoctor.ok ? 'PASS' : (adminDoctor.stderr || adminDoctor.stdout)));

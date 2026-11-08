@@ -77,11 +77,15 @@ run_minification() {
   fi
 }
 
-echo "Uruchamiam aktualną walidację predeploy..."
-(
-  cd "$ROOT_DIR"
-  "$NODE_BIN" scripts/predeploy-gate.js --allow-dist-drift
-)
+if [[ "${FITPO50_SKIP_PREDEPLOY:-0}" == "1" ]]; then
+  echo "FITPO50_SKIP_PREDEPLOY=1 -> pomijam predeploy sprawdzony wcześniej przez bieżący pre-push."
+else
+  echo "Uruchamiam aktualną walidację predeploy..."
+  (
+    cd "$ROOT_DIR"
+    "$NODE_BIN" scripts/predeploy-gate.js --allow-dist-drift
+  )
+fi
 
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
