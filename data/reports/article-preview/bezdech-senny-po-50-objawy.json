@@ -1,0 +1,385 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-11-10T08:44:21+01:00",
+  "reviewed_at": null,
+  "slug": "bezdech-senny-po-50-objawy",
+  "html_sha256": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727",
+  "site_html_sha256": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727",
+  "pdf_sha256": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118",
+  "site_pdf_sha256": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-10T08:44:21+01:00",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 3
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "bezdech-senny-po-50-objawy.html",
+      "sha256": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727",
+      "bytes": 49459
+    },
+    "html_site": {
+      "file": "_site/bezdech-senny-po-50-objawy.html",
+      "sha256": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727",
+      "bytes": 49459
+    },
+    "pdf_source": {
+      "file": "assets/pdf/bezdech-senny-po-50-objawy.pdf",
+      "sha256": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118",
+      "bytes": 460023
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/bezdech-senny-po-50-objawy.pdf",
+      "sha256": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118",
+      "bytes": 460023
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/bezdech-senny-po-50-objawy/desktop.png",
+      "screenshot_sha256": "9be065229faabe64224df9ff0bbc0b3f7b3f8da7398aa08cd1ab7d3835bc7d93",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/bezdech-senny-po-50-objawy/mobile.png",
+      "screenshot_sha256": "36479a0cfd1411b001483b1d8b8ec434d3c99718fa4e90b14e9271b80d7fadb1",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 10 min czytania Aktualizacja: 10.11.2026 Bezdech senny po 50: objawy, badania snu i kiedy do lekarza Senność w dzień po „wystarczającej” nocy to sygnał do sprawdzenia, nie do bagatelizowania.",
+      "alt": "Para po pięćdziesiątce w polskim salonie przy herbacie ogląda krótką notatkę przy przedwiosennym świetle z okna.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif",
+          "sha256": "39d89438447064a31a9b51bc1c5fef6a4599cd166d32adc702921f2efa174786",
+          "bytes": 45755,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp",
+          "sha256": "a744a3b49d5241fb63421df3011c13c22666e8419da99b46f1ae6593ffe7b674",
+          "bytes": 75592,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg",
+          "sha256": "3e97c7a25a550a0de8b6c6716c02ea9d9700e227d94aeef31e1e7cf447b828f1",
+          "bytes": 132238,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "b1a10b2ff8079ee8e4fa070453d789d7340afae1af968fb89a3a69226e9c29b6"
+    },
+    {
+      "placement": "content:2:co-to-jest-obturacyjny-bezdech-senny-i-skad-bier",
+      "role": "content",
+      "heading": "Co to jest obturacyjny bezdech senny i skąd bierze się senność?",
+      "context": "Bezdech senny objawy u osób po 50. roku życia bywają mylone ze „zwykłym” chrapaniem albo ze zmęczeniem wieku. Obturacyjny bezdech senny przerywa sen zatrzymaniami lub spłyceniami oddechu i może dawać senność w dzień — także wtedy, gdy w nocy nie pamiętasz wybudzeń. Ten poradnik pokazuje objawy, także nietypowe u kobiet, różnicę między poligrafią a polisomnografią oraz kiedy iść do POZ. Szybka odpowiedź Jeśli po 50. roku życia masz co najmniej dwie cechy z listy NICE — na przykład chrapanie, zauważone przerwy w oddechu i senność w dzień — omów to z lekarzem POZ. Kwestionariusz to tylko sygnał, a rozpoznanie wymaga badania snu; na NFZ polisomnografia jest w leczeniu szpitalnym. Kluczowe wnioski Przy co najmniej dwóch cechach z listy NICE (np. chrapanie, przerwy w oddechu, senność) umów wizyt",
+      "alt": "Dwoje osób po pięćdziesiątce na balkonie bloku rozmawia; jedna ziewa z uśmiechem w przedwiosenne popołudnie.",
+      "caption": "NICE opisuje, że epizody bezdechu i spłycenia mogą prowadzić do przerywanego snu i nadmiernej senności.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.avif",
+          "sha256": "f0b8203ff13e7f3806d2e8b3c8a668299752be6395e0f3a9e95531c58947d9dd",
+          "bytes": 67025,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.webp",
+          "sha256": "b81d73e2746c39ce6415f88a31337a824040ba393c2ceb3752b886c9d59f8f27",
+          "bytes": 104838,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.jpg",
+          "sha256": "ddde8b548bc5c7a8d0d64a8474d4d5e1008de2dd0e5b9cdc9e39197c6b41f8dd",
+          "bytes": 175146,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "7b0a893ddf581ca976b77cf967d5cd9a89a2ce3ab5ecb462d14de0bcc9e146c8"
+    },
+    {
+      "placement": "content:3:objawy-nocne-i-dzienne-takze-nietypowe-u-kobiet",
+      "role": "content",
+      "heading": "Objawy nocne i dzienne — także nietypowe u kobiet",
+      "context": "Bezdech senny objawy u osób po 50. roku życia bywają mylone ze „zwykłym” chrapaniem albo ze zmęczeniem wieku. Obturacyjny bezdech senny przerywa sen zatrzymaniami lub spłyceniami oddechu i może dawać senność w dzień — także wtedy, gdy w nocy nie pamiętasz wybudzeń. Ten poradnik pokazuje objawy, także nietypowe u kobiet, różnicę między poligrafią a polisomnografią oraz kiedy iść do POZ. Szybka odpowiedź Jeśli po 50. roku życia masz co najmniej dwie cechy z listy NICE — na przykład chrapanie, zauważone przerwy w oddechu i senność w dzień — omów to z lekarzem POZ. Kwestionariusz to tylko sygnał, a rozpoznanie wymaga badania snu; na NFZ polisomnografia jest w leczeniu szpitalnym. Kluczowe wnioski Przy co najmniej dwóch cechach z listy NICE (np. chrapanie, przerwy w oddechu, senność) umów wizyt",
+      "alt": "Para po pięćdziesiątce przy kuchennym stole zapisuje listę objawów w notesie przy dziennym świetle.",
+      "caption": "Akademia NFZ wymienia osobno objawy nocne i dzienne; przeglądy wskazują też nieswoiste objawy częstsze u kobiet.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.avif",
+          "sha256": "8ab37b0d64e3177fdef114e0c70da06fc37c33d7411f6c5adc2720eb10e33c65",
+          "bytes": 81104,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.webp",
+          "sha256": "73b3f72700e9983e9ba25b0ecac8800b0191bb97186c8d50bfea0df5614a4d06",
+          "bytes": 140074,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.jpg",
+          "sha256": "9a63e935c8b0fe87b52a1d26458189569fcf40c35e8b81ae5afc0e4dd09d7441",
+          "bytes": 193556,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "a582e387c0ce20da26a4c0e268c700520c2d40d5676437d5831c0b5d0e324501"
+    },
+    {
+      "placement": "content:4:kiedy-umowic-wizyte-a-kiedy-dzialac-pilnie",
+      "role": "content",
+      "heading": "Kiedy umówić wizytę, a kiedy działać pilnie?",
+      "context": "Bezdech senny objawy u osób po 50. roku życia bywają mylone ze „zwykłym” chrapaniem albo ze zmęczeniem wieku. Obturacyjny bezdech senny przerywa sen zatrzymaniami lub spłyceniami oddechu i może dawać senność w dzień — także wtedy, gdy w nocy nie pamiętasz wybudzeń. Ten poradnik pokazuje objawy, także nietypowe u kobiet, różnicę między poligrafią a polisomnografią oraz kiedy iść do POZ. Szybka odpowiedź Jeśli po 50. roku życia masz co najmniej dwie cechy z listy NICE — na przykład chrapanie, zauważone przerwy w oddechu i senność w dzień — omów to z lekarzem POZ. Kwestionariusz to tylko sygnał, a rozpoznanie wymaga badania snu; na NFZ polisomnografia jest w leczeniu szpitalnym. Kluczowe wnioski Przy co najmniej dwóch cechach z listy NICE (np. chrapanie, przerwy w oddechu, senność) umów wizyt",
+      "alt": "Mężczyzna po pięćdziesiątce rozmawia z lekarką w skromnym gabinecie POZ w przedwiosenne popołudnie.",
+      "caption": "NICE zaleca informować o wpływie nadmiernej senności na bezpieczną jazdę; NFZ łączy nieleczony OBS z ryzykiem wypadków.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.avif",
+          "sha256": "8a34cf4af620979e6f06c01a638353763d99094e461e57445552ab329095c847",
+          "bytes": 40480,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.webp",
+          "sha256": "d5e16f72c09e74cae63733dde8570250e651106428100ecea8e0e487380d5a84",
+          "bytes": 62468,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.jpg",
+          "sha256": "c0b6c95a5e979a2b94c45ed16aabb6c4144a13b383073e37dd2c3f242582c9df",
+          "bytes": 135043,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "a301f27debb5f3036e5d364e20dea900eaffc6b946c917f463cfede047602f8d"
+    },
+    {
+      "placement": "content:5:kwestionariusz-poligrafia-i-polisomnografia-czym",
+      "role": "content",
+      "heading": "Kwestionariusz, poligrafia i polisomnografia — czym się różnią?",
+      "context": "Bezdech senny objawy u osób po 50. roku życia bywają mylone ze „zwykłym” chrapaniem albo ze zmęczeniem wieku. Obturacyjny bezdech senny przerywa sen zatrzymaniami lub spłyceniami oddechu i może dawać senność w dzień — także wtedy, gdy w nocy nie pamiętasz wybudzeń. Ten poradnik pokazuje objawy, także nietypowe u kobiet, różnicę między poligrafią a polisomnografią oraz kiedy iść do POZ. Szybka odpowiedź Jeśli po 50. roku życia masz co najmniej dwie cechy z listy NICE — na przykład chrapanie, zauważone przerwy w oddechu i senność w dzień — omów to z lekarzem POZ. Kwestionariusz to tylko sygnał, a rozpoznanie wymaga badania snu; na NFZ polisomnografia jest w leczeniu szpitalnym. Kluczowe wnioski Przy co najmniej dwóch cechach z listy NICE (np. chrapanie, przerwy w oddechu, senność) umów wizyt",
+      "alt": "Lekarka i pacjentka po pięćdziesiątce przy biurku przeglądają prosty nienazwany schemat badania snu.",
+      "caption": "NICE odróżnia poligrafię oddechową (co najmniej 4 kanały) od polisomnografii z oceną snu EEG; AASM: kwestionariusz nie zastępuje badania.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.avif",
+          "sha256": "f7cdb3e44c52d5b22b8aa873646c0c4667bd0d7ae87b141954e4d132ab4f8b1d",
+          "bytes": 49378,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.webp",
+          "sha256": "89d9637029b1eb50b19c60b438f15f7bc4209af3516ea8e379e169dd0cd2ea98",
+          "bytes": 76728,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.jpg",
+          "sha256": "cf82acc4069e135b8f772a3122d10b07080b2d687b947709719a7d50cdeb4afe",
+          "bytes": 139736,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "eee042986b69890d3e8431317dc0ec6fa95e461f078bb6fa1cfb9d47a4daeb8b"
+    },
+    {
+      "placement": "content:6:sciezka-nfz-i-badania-dla-kierowcow",
+      "role": "content",
+      "heading": "Ścieżka NFZ i badania dla kierowców",
+      "context": "Bezdech senny objawy u osób po 50. roku życia bywają mylone ze „zwykłym” chrapaniem albo ze zmęczeniem wieku. Obturacyjny bezdech senny przerywa sen zatrzymaniami lub spłyceniami oddechu i może dawać senność w dzień — także wtedy, gdy w nocy nie pamiętasz wybudzeń. Ten poradnik pokazuje objawy, także nietypowe u kobiet, różnicę między poligrafią a polisomnografią oraz kiedy iść do POZ. Szybka odpowiedź Jeśli po 50. roku życia masz co najmniej dwie cechy z listy NICE — na przykład chrapanie, zauważone przerwy w oddechu i senność w dzień — omów to z lekarzem POZ. Kwestionariusz to tylko sygnał, a rozpoznanie wymaga badania snu; na NFZ polisomnografia jest w leczeniu szpitalnym. Kluczowe wnioski Przy co najmniej dwóch cechach z listy NICE (np. chrapanie, przerwy w oddechu, senność) umów wizyt",
+      "alt": "Para po pięćdziesiątce wychodzi uśmiechnięta z typowej polskiej przychodni w przedwiosenne popołudnie.",
+      "caption": "Akademia NFZ: po objawach konsultacja w POZ i ewentualne skierowanie do poradni pulmonologicznej lub laryngologicznej; ustawa wymaga skierowania do AOS.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.avif",
+          "sha256": "46ff05210c29ecba60cd65564770f9827bef2a6d77f6a9b8933b58d5550064fe",
+          "bytes": 77710,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.webp",
+          "sha256": "f953f9327e5ce15e979a301080c5d03482418c63ebb8721d16f451f26e9803f2",
+          "bytes": 129818,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.jpg",
+          "sha256": "5c1e0aa88963991af61585ecb3d195829f49ae248a54b4470d235ed12f0bfdcd",
+          "bytes": 204875,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e22887dfb8874fc71cc6371c8ebba0ec7ea51f55bb548fb073f3fd867be73d6a"
+    }
+  ],
+  "pdf": {
+    "pages": 7,
+    "text_coverage": 1,
+    "rendered_pages": 7,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/bezdech-senny-po-50-objawy/pdf-pages/page-1.png",
+        "sha256": "40cfeaf09602c11ad408d4425765b7cfd8bee266a104b819a1deccdc4b3680d2",
+        "bytes": 700036,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 59,
+          "width": 1056,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/bezdech-senny-po-50-objawy/pdf-pages/page-2.png",
+        "sha256": "217821fb8ed01dbf92e493fb34b1bd28f8709e11eb8995045d262ed3c77ce60d",
+        "bytes": 616418,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/bezdech-senny-po-50-objawy/pdf-pages/page-3.png",
+        "sha256": "60a43b78026bc9e73c07c8d62780749ff744cd7c07ccaaa2383cf52ceb708431",
+        "bytes": 757009,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/bezdech-senny-po-50-objawy/pdf-pages/page-4.png",
+        "sha256": "37350ede852dce93f7f790b3ceb4478bb77d74297a0720bba578f2ce82221d5c",
+        "bytes": 538080,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/bezdech-senny-po-50-objawy/pdf-pages/page-5.png",
+        "sha256": "ca99615dd5c993640c89adbb97021d92f0f8eb1f0aac48776cf8462daecaa21b",
+        "bytes": 948892,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1048,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/bezdech-senny-po-50-objawy/pdf-pages/page-6.png",
+        "sha256": "4cfbf041f386ed27b37d2471d193b3efdc13d66b9e2b99fd10dbabe4b2d7acfe",
+        "bytes": 262878,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1067,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/bezdech-senny-po-50-objawy/pdf-pages/page-7.png",
+        "sha256": "2a8497e908df0175ac2f6c0cff0fe843817ccb73cd993e86089d627eea307c26",
+        "bytes": 303926,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 50,
+          "y": 51,
+          "width": 1066,
+          "height": 1599
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 10546,
+    "review_wait_ms": null
+  },
+  "errors": []
+}

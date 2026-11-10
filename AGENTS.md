@@ -30,9 +30,10 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 - Nie usuwaj untracked ani produkcyjnych assetów bez sprawdzonej listy i zgody użytkownika.
 - Nie cofaj zmian użytkownika, jeśli nie należą do bieżącego zadania.
 - Nie wykonuj commit/push bez jawnego polecenia.
-- Polecenie `git push` uruchamia pełny workflow opisany w `SESSION_START_MAX.md`.
-- Standardem wdrożenia jest automatyczny deploy Hostinger z `main`: `prepush:local` PASS → kontrola `_site` → `deployment:prepare` przed commitem → jeden commit z treścią i markerem → jeden push → `npm run deployment:finalize`. Produkcję uznaj dopiero przy `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`. IndexNow nie należy do pusha ani finalizacji wdrożenia: uruchamia się go osobno przez `npm run indexnow:release` dopiero po obu statusach.
-- Skrót `npm run publikuj` jest kontrolowanym wyjątkiem dla bieżącego zadania: po jednym pytaniu uruchamia `deployment:prepare`, dokładnie dodaje manifest artykułu albo wykryty zakres zmian kodu/dokumentacji/testów, tworzy jeden commit i wykonuje zwykły push z hookiem. Nie uruchamia dodatkowego `prepush:local` ani `deployment:finalize`, nie używa `git add -A` i nie importuje ponownie gotowego artykułu. Dla artykułu sprawdza stronę oraz hero AVIF/WebP/JPG; dla zmian bez artykułu potwierdza tylko przyjęcie pusha.
+- Zakres kontroli wyznacza istniejący `scripts/lib/change-scope.js` z rzeczywistego wpływu zmian. Artykuł, powiązany kod i testy mogą należeć do jednego zadania; ich zakresy się łączą. NEWS sprawdzaj wyłącznie przy zmianach NEWS lub rzeczywistym wpływie wspólnej infrastruktury. Nie twórz drugiego klasyfikatora ani pełnego audytu z powodu samej nazwy katalogu.
+- Standardem jest automatyczny deploy Hostinger z `main`: lokalny wynik wymaganych kontroli → marker przed commitem → dokładne dodanie plików zadania → jeden commit → zwykły push z hookiem → kontrola zmienionych stron i artefaktów live. Jedna lista plików zadania służy przygotowaniu markera i commita, a hook potwierdza zakres rzeczywiście wysyłanych commitów. Inne lokalne zmiany pozostają poza wydaniem. Produkcję uznaj dopiero przy `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`; dokumentacja bez wpływu publicznego wymaga tylko potwierdzenia pusha. GSC i IndexNow nigdy nie są zgłaszane automatycznie.
+- `npm run publikuj` jest wejściem dla bieżącego zadania. Agent ustala powiązane pliki bez wybierania ich przez Grzegorza. Po jednym pytaniu `Publikujemy? tak/nie` przygotowuje marker, wykonuje dokładne `git add`, jeden commit i zwykły push z hookiem oraz kontrolę efektu właściwą dla zmian. Nie używa `git add -A` ani `git add .`, nie importuje ponownie gotowego artykułu, nie uruchamia dodatkowego `prepush:local` ani osobnej, powtórnej finalizacji. Dla artykułu obejmuje kontrolą HTML i wymagane artefakty, w tym hero AVIF/WebP/JPG; dla dokumentacji nie czeka na CDN.
+- Wynik kontroli wykorzystuj ponownie tylko przy zgodnych parametrach i hashach jej danych, właściwego kodu oraz konfiguracji. Zmiana unieważnia etap i zależne od niego wyniki; sam marker lub wcześniejszy PASS nie wystarcza. Pełny eksport i szersze kontrole wynikają z wpływu zmian, nie z samego polecenia `git push`.
 - Hostinger usuwa z serwera pliki skasowane z Gita (próba B, commit `63065e09`). Dopóki Paczka 3 nie przeniesie danych panelu poza katalog deployu, nie wyjmuj z indeksu Git `data/news-live.json`, `data/news-backups/*`, `assets/news/*` ani ich mirrorów w `_site`.
 - `npm run hostinger:clean-repo` jest wycofane. Awaryjne `hostinger:recovery` zaczyna się od dry-run i nie może usuwać nieznanych plików.
 - Ręczny `tmp:cleanup` i każdy tryb apply wymagają osobnego „tak” użytkownika. Wbudowany `tmp:cleanup --dry-run` w `prepush:local` oraz automatyczne sprzątanie własnego stagingu, locków i workspace bieżącej operacji są dozwolone. Po zgodzie katalogi tymczasowe usuwaj wyłącznie tym mechanizmem: minimum 12 godzin, prawidłowy manifest właściciela, martwy PID i brak aktywnego locka.
@@ -46,22 +47,22 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 
 - Zero generycznych tekstów i placeholderów.
 - Artykuł ma wyczerpać realną intencję czytelnika, ale liczba i długość sekcji wynikają z tematu. Nie dopisuj sekcji, zdań ani obrazów dla sztucznego minimum.
-- JSON zewnętrzny jest draftem; kontrola logiki, dowodów i obrazów jest obowiązkowa.
+- Pisarz odpowiada za logikę treści, dowody, źródła, FAQ i merytoryczne opisy ilustracji, Ilustrator za obrazy, a Grzegorz za ich akceptację oraz ostateczny wygląd. Zwykłe `article:add` odbiera gotową paczkę i sprawdza ją technicznie; nie powtarza kontroli redakcyjnej ani oglądania zdjęć. Wymagania treści poniżej dotyczą przygotowania materiału i jawnie zleconej redakcji.
 - Niejasne odniesienia, niedomknięte metafory i wnioski bez przesłanek blokują publikację.
 - FAQ pochodzi wyłącznie z realnego GSC/PAA/autocomplete; `manual_research` jest zabronione dla nowych pytań.
 - Minimum 4 źródła oznacza źródła rzeczywiste, zweryfikowane i użyte w claimach.
 - Każda liczba, próg, ryzyko, cena, mechanizm i teza medyczna wymaga konkretnego dowodu.
 
-## Quality Gate artykułu
+## Standard artykułu i zakres kontroli
 
-- Ten sam pełny Quality Gate obowiązuje nowe artykuły, aktualizacje, `popraw-seo`, `napraw paczkę N` i import starszego draftu. Wcześniejszy PASS ani mały zakres zmiany nie zwalniają z kontroli całej strony i wszystkich artefaktów.
+- Zwykłe `article:add` wykonuje zbiorczy audyt techniczny JSON-u i plików oraz kontrolę wynikowego HTML/PDF i `_site` dla dodawanego artykułu. Nie ocenia claimów, źródeł, FAQ, intencji SEO, kanibalizacji ani znaczenia obrazów i nie pobiera ich źródeł z internetu. Pełna kontrola redakcyjna jest osobnym zadaniem; `popraw-seo` i `napraw paczkę N` zachowują swój jawnie zlecony zakres redakcyjny. Szczegółowy podział określa początek `ARTICLE_STANDARD.md`.
 - Opis SEO ma 145–160 znaków, kończy się pełnym zdaniem i jest identyczny w meta, Open Graph, Twitter i `BlogPosting.description`.
 - Pytające H2 kończą się `?`; pierwszy akapit pod H2 ma odpowiadać bezpośrednio i konkretnie na pytanie. Zakres 30–70 słów jest zaleceniem, nie samodzielnym blokerem.
 - Liczba linków wewnętrznych wynika z naturalnego planu; mniej niż 2 daje ostrzeżenie, nie blokadę. Linki prowadzą do istniejących stron i używają ścieżek względnych.
 - Obrazy korzystają z `<picture>` z AVIF/WebP/JPG, konkretnym `alt` i wymiarami. Grzegorz zatwierdza obrazy przed przekazaniem paczki; Codex nie powtarza ich ręcznego przeglądu, a pipeline sprawdza kompletność i zgodność techniczną wariantów. Wymagany jest hero oraz odrębny obraz dla każdej głównej sekcji treści. Zmieniony obraz zawsze otrzymuje nową, wersjonowaną nazwę, ponieważ publiczne assety mają cache `immutable`.
 - Tabele są semantycznym HTML z `caption`, `thead`, `tbody` i `scope`.
 - `BlogPosting.citation` jest zgodne 1:1 z wykorzystaną listą źródeł.
-- Publikacja wymaga automatycznego stagingu desktop/mobile, technicznej kontroli PDF, synchronizacji `_site` oraz walidatorów. Ręczny przegląd desktop/mobile/PDF jest wymagany tylko po zmianie szablonu, CSS albo dodaniu nietypowego komponentu; standardowy artykuł korzystający z niezmienionego szablonu nie wymaga ponownego oglądania przez Codexa.
+- Lokalne dodanie obejmuje jeden staging desktop/mobile, techniczną kontrolę PDF i synchronizację `_site` dla artykułu. Commit i push wykorzystują nadal aktualne wyniki zamiast ponawiać budowę. Szersza kontrola zależy od zmiany szablonu, CSS lub wspólnego generatora; ostateczny wygląd i obrazy ocenia Grzegorz.
 
 ## Zasada naprawy podwójnej
 
@@ -73,11 +74,13 @@ To jest wejściowy kontrakt dla agentów pracujących w repozytorium. Nie zapisu
 
 ## Odpowiedzialność przy `article:add`
 
-- Agent może sam poprawić wyłącznie deterministyczną mechanikę bez zmiany znaczenia: normalizację URL-i i pól technicznych, nazwy i warianty plików, manifesty, raporty oraz opakowanie istniejącej frazy linkiem zgodnym z planem.
+- Agent może poprawiać wyłącznie deterministyczną mechanikę bez zmiany znaczenia, na kontrolowanej kopii: pola techniczne, nazwy, manifesty, raporty oraz opakowanie istniejącej frazy linkiem zgodnym z planem. Oryginalny JSON i dostarczone obrazy pozostają bez zmian; brakujące warianty wracają do Ilustratora.
 - Do Pisarza wracają zmiany treści, źródeł, `evidence_claims`, FAQ, `faq_research`, roli niejednoznacznej sekcji oraz merytorycznych opisów ilustracji. Agent nie dodaje ani nie podmienia tych danych.
 - Do Ilustratora wracają brakujące, błędne albo merytorycznie niezgodne obrazy.
 - Do użytkownika wracają świadome wyjątki od standardu, akceptacja obrazów, centra tematyczne oraz decyzje publikacyjne.
 - `article:add --dry-run` nie zużywa próby naprawy i nie zapisuje wejściowego JSON-u ani repozytorium. Maksymalnie dwie próby automatycznej naprawy dotyczą jednego hasha draftu; kod 30 nie zwiększa licznika.
+- Audyt zbiera wszystkie niezależnie wykrywalne błędy techniczne przed zapisem; zależności, których nie można sprawdzić, wymienia jako niesprawdzone. Błędy wynikowe HTML/PDF zbiera w stagingu. Nie wpisuj PASS dla kontroli niewykonanej lub nieobjętej zakresem.
+- FitPo50 prowadzi jedna osoba: korzystaj z istniejących mechanizmów, minimalnych kontroli właściwych dla zmian i planu w Downloads. Po każdej części podaj krótko `gotowe` i `następne`. Sprawdzian uproszczenia wykonamy na innym artykule; zamkniętego błonnika nie importuj ani nie sprawdzaj ponownie w tym zadaniu.
 
 ## `popraw-seo`
 

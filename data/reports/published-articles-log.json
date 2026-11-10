@@ -1,7 +1,115 @@
 {
   "version": 2,
-  "updated_at": "2026-11-08T11:16:49+01:00",
+  "updated_at": "2026-11-10T08:44:24+01:00",
   "items": [
+    {
+      "slug": "bezdech-senny-po-50-objawy",
+      "url": "https://fitpo50.pl/bezdech-senny-po-50-objawy.html",
+      "operation": "CREATE",
+      "transaction_id": "article-bezdech-senny-po-50-objawy-1794296641128-9380",
+      "first_published_at": "2026-11-10T08:44:24+01:00",
+      "last_published_at": "2026-11-10T08:44:24+01:00",
+      "status": "PUBLISHED_AWAITING_GSC",
+      "baseline": {
+        "captured_at": "2026-11-10T08:44:24+01:00",
+        "status": "GSC_INPUT_UNAVAILABLE",
+        "gsc_generated_at": "2026-11-07T13:37:17+01:00",
+        "window": "rolling_28_days",
+        "range": {
+          "start": "2026-10-10",
+          "end": "2026-11-06"
+        },
+        "metrics": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": null
+        },
+        "source_file": "web-28-current-pages.csv",
+        "contract_status": "FAIL",
+        "contract_errors": [
+          "Końcowa data GSC jest zbyt stara: 2026-11-06 (4.0 dnia; limit 3)."
+        ]
+      },
+      "checkpoints": {
+        "day_7": {
+          "due_date": "2026-11-17",
+          "snapshot": null
+        },
+        "day_14": {
+          "due_date": "2026-11-24",
+          "snapshot": null
+        },
+        "day_28": {
+          "due_date": "2026-12-08",
+          "snapshot": null
+        }
+      },
+      "first_impression_after_publication_at": null,
+      "first_click_after_publication_at": null,
+      "indexed_without_impressions_at": null,
+      "gsc_submission_urls": [
+        "https://fitpo50.pl/bezdech-senny-po-50-objawy.html"
+      ],
+      "source_urls_for_recrawl": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/zdrowie.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_events": [
+        {
+          "event_id": "article-bezdech-senny-po-50-objawy-1794296641128-9380",
+          "operation": "CREATE",
+          "published_at": "2026-11-10T08:44:24+01:00",
+          "baseline": {
+            "captured_at": "2026-11-10T08:44:24+01:00",
+            "status": "GSC_INPUT_UNAVAILABLE",
+            "gsc_generated_at": "2026-11-07T13:37:17+01:00",
+            "window": "rolling_28_days",
+            "range": {
+              "start": "2026-10-10",
+              "end": "2026-11-06"
+            },
+            "metrics": {
+              "clicks": 0,
+              "impressions": 0,
+              "ctr": 0,
+              "position": null
+            },
+            "source_file": "web-28-current-pages.csv",
+            "contract_status": "FAIL",
+            "contract_errors": [
+              "Końcowa data GSC jest zbyt stara: 2026-11-06 (4.0 dnia; limit 3)."
+            ]
+          },
+          "checkpoints": {
+            "day_7": {
+              "due_date": "2026-11-17",
+              "snapshot": null
+            },
+            "day_14": {
+              "due_date": "2026-11-24",
+              "snapshot": null
+            },
+            "day_28": {
+              "due_date": "2026-12-08",
+              "snapshot": null
+            }
+          },
+          "gsc_submission_urls": [
+            "https://fitpo50.pl/bezdech-senny-po-50-objawy.html"
+          ],
+          "source_urls_for_recrawl": [
+            "https://fitpo50.pl/",
+            "https://fitpo50.pl/porady.html",
+            "https://fitpo50.pl/zdrowie.html"
+          ]
+        }
+      ],
+      "signal_definition": "Pierwszy sygnał oznacza pierwszy odczyt, w którym krocząca metryka 28-dniowa przekroczyła baseline; przy baseline równym 0 jest to pierwsze widoczne wyświetlenie lub kliknięcie.",
+      "monitoring_note": "Metryki GSC są kroczącym oknem 28 dni; różnice są sygnałem po publikacji, nie czystą atrybucją efektu."
+    },
     {
       "slug": "ile-blonnika-dziennie-po-50",
       "url": "https://fitpo50.pl/ile-blonnika-dziennie-po-50.html",

@@ -55,7 +55,7 @@ test('publikuj poprawnie odczytuje status Git i ignoruje wyłącznie lokalny pla
 });
 
 test('publikuj przygotowuje marker, ale nie uruchamia pełnego prepush ani finalizacji', () => {
-  assert.match(publishSource, /run\('npm', \['run', 'deployment:prepare'\]\)/);
+  assert.match(publishSource, /runCommand\('npm', \['run', 'deployment:prepare', '--', '--files-json', JSON.stringify\(files\)\]\)/);
   assert.doesNotMatch(publishSource, /run\('npm', \['run', 'prepush:local'\]\)/);
   assert.doesNotMatch(publishSource, /run\('npm', \['run', 'deployment:finalize'\]\)/);
 });
@@ -98,19 +98,25 @@ test('publikuj wznawia gotowy artykuł i dopuszcza tylko powiązany kod/test', (
   const expected = ['artykul.html', '_site/artykul.html', 'data/reports/article-publications/artykul.json', 'deployment.json', '_site/deployment.json'];
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-publikuj-resume-'));
   fs.mkdirSync(path.join(root, 'data', 'reports', 'article-publications'), { recursive: true });
+  for (const file of ['artykul.html', '_site/artykul.html']) {
+    fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+    fs.writeFileSync(path.join(root, file), 'fixture');
+  }
   fs.writeFileSync(path.join(root, 'data', 'reports', 'article-publications', 'artykul.json'), JSON.stringify({
     slug: 'artykul',
-    files: [{ path: 'artykul.html' }, { path: '_site/artykul.html' }],
+    status: 'PUBLISHED',
+    files: ['artykul.html', '_site/artykul.html'].map((file) => ({ path: file, after_sha256: require('node:crypto').createHash('sha256').update('fixture').digest('hex') })),
   }));
   const entries = expected.map((file) => ({ code: ' M', file })).concat([
     { code: ' M', file: 'scripts/publish-article.js' },
     { code: ' M', file: 'tests/publish-article-command.test.js' },
   ]);
-  assert.equal(preparedArticleTask('artykul', root, []), false);
+  assert.equal(preparedArticleTask('artykul', root, []), true);
   assert.equal(preparedArticleTask('artykul', root, entries.slice(0, 3)), true);
-  assert.deepEqual(taskCommitFiles(entries, expected).sort(), entries.map((entry) => entry.file).sort());
+  assert.deepEqual(taskCommitFiles(entries, expected), [...expected].sort());
+  assert.deepEqual(taskCommitFiles(entries, expected, ['scripts/publish-article.js', 'tests/publish-article-command.test.js']).sort(), entries.map((entry) => entry.file).sort());
   assert.equal(taskSlugFromEntries([{ code: ' M', file: 'data/reports/article-publications/artykul.json' }]), 'artykul');
-  assert.throws(() => taskCommitFiles(entries.concat({ code: ' M', file: 'random.txt' }), expected), /Niezwiązane/);
+  assert.deepEqual(taskCommitFiles(entries.concat({ code: ' M', file: 'random.txt' }), expected), [...expected].sort());
   fs.rmSync(root, { recursive: true, force: true });
 });
 

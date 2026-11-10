@@ -6,7 +6,6 @@ PUSH_REFS="$(cat)"
 ROOT_DIR="$(git rev-parse --show-toplevel)"
 cd "$ROOT_DIR"
 
-echo "Pre-push: uruchamiam predeploy gate + build/export..."
-node scripts/run-all-prepush.js
+echo "Pre-push: ustalam zakres wysyłanych commitów i wymagane kontrole..."
 printf '%s\n' "$PUSH_REFS" | node scripts/prepush-main-guard.js
 echo "Pre-push: OK."

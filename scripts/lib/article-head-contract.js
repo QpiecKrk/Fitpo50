@@ -35,7 +35,7 @@ function validateArticleHeadContract(raw, opts = {}) {
   if (!title) {
     errors.push('Brak tagu <title>.');
   } else {
-    if (title.length > limits.titleMax) {
+    if (opts.profile !== 'technical' && title.length > limits.titleMax) {
       errors.push(`<title> przekracza ${limits.titleMax} znaków (jest ${title.length}).`);
     }
     if (/\s[–-]\s*\|\s*fitpo50\s*$/i.test(title)) {
@@ -95,10 +95,10 @@ function validateArticleHeadContract(raw, opts = {}) {
   if (!metaDescription) {
     errors.push('Brak <meta name="description">.');
   } else {
-    if (metaDescription.length < limits.descriptionMin || metaDescription.length > limits.descriptionMax) {
+    if (opts.profile !== 'technical' && (metaDescription.length < limits.descriptionMin || metaDescription.length > limits.descriptionMax)) {
       errors.push(`meta description poza zakresem ${limits.descriptionMin}-${limits.descriptionMax} znaków (jest ${metaDescription.length}).`);
     }
-    if (!/[.!?]$/.test(metaDescription)) {
+    if (opts.profile !== 'technical' && !/[.!?]$/.test(metaDescription)) {
       errors.push('meta description wygląda na urwany: powinien kończyć się ".", "!" lub "?".');
     }
   }

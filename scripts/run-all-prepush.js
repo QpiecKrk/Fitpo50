@@ -8,16 +8,10 @@ const crypto = require('crypto');
 const path = require('path');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { warsawIso } = require('./lib/time');
-const { classifyChangedFiles, collectChangedFiles } = require('./lib/change-scope');
+const { assertResolvedScope, classifyChangedFiles, collectChangedFiles } = require('./lib/change-scope');
 const { compareExportTrees } = require('./lib/export-parity');
-
-const PIPELINE_TESTS_BY_FILE = Object.freeze({
-  'scripts/fitpo50-doctor.js': ['tests/prepush-release-guardrails.test.js'],
-  'scripts/lib/change-scope.js': ['tests/prepush-concurrency.test.js'],
-  'scripts/prepare-deployment-marker.js': ['tests/deployment-safety.test.js', 'tests/news-deploy-sync-gate.test.js'],
-  'scripts/run-all-prepush.js': ['tests/prepush-concurrency.test.js', 'tests/prepush-release-guardrails.test.js'],
-  'scripts/export_site.sh': ['tests/prepush-release-guardrails.test.js'],
-});
+const { validationIdentity, readCheckReceipt, writeCheckReceipt } = require('./lib/article-json-artifact');
+const { reusableArticleChecks } = require('./lib/article-staging');
 
 function prefixOutput(tag, stream, logger) {
   if (!stream) return;
@@ -26,11 +20,23 @@ function prefixOutput(tag, stream, logger) {
 }
 
 function runStep(tag, cmd, args, options = {}) {
+  const root = options.root || process.cwd();
+  const receiptFile = path.join(root, 'data/reports/local/validation-results', crypto.createHash('sha256').update(JSON.stringify([tag, cmd, args])).digest('hex') + '.json');
+  const identityFor = () => validationIdentity(root, {
+    ...options.receipt,
+    code: ['scripts/run-all-prepush.js', 'scripts/lib/article-json-artifact.js', ...(options.receipt?.code || [])],
+    parameters: { cmd, args, scope: process.env.FITPO50_CHANGED_FILES_JSON || '', base: process.env.FITPO50_PUSH_BASE || '', nodeOptions: process.env.NODE_OPTIONS || '', ...(options.receipt?.parameters || {}) },
+  });
+  const identity = options.receipt ? identityFor() : '';
+  if (identity && readCheckReceipt(receiptFile, identity)) {
+    console.log(`[REUSED] ${tag}: zgodne dane, kod, konfiguracja i parametry.`);
+    return Promise.resolve({ tag, durationMs: 0, status: 'REUSED', identity });
+  }
   return new Promise((resolve, reject) => {
     const started = Date.now();
     const child = spawn(cmd, args, {
-      cwd: process.cwd(),
-      env: { ...process.env, ...(options.env || {}) },
+      cwd: root,
+      env: { ...process.env, ...(args.includes('--test') ? { FITPO50_CHANGED_FILES_JSON: undefined, FITPO50_PUSH_BASE: undefined } : {}), ...(options.env || {}) },
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     prefixOutput(tag, child.stdout, console.log);
@@ -39,7 +45,15 @@ function runStep(tag, cmd, args, options = {}) {
     child.on('close', (code) => {
       const durationMs = Date.now() - started;
       if (code !== 0) reject(new Error(`${tag}: exit ${code ?? 'unknown'}`));
-      else resolve({ tag, durationMs });
+      else {
+        try {
+          if (identity) {
+            if (identityFor() !== identity) throw new Error(`${tag}: zależności zmieniły się podczas kontroli.`);
+            writeCheckReceipt(receiptFile, identity, { tag });
+          }
+          resolve({ tag, durationMs, status: 'EXECUTED' });
+        } catch (error) { reject(error); }
+      }
     });
   });
 }
@@ -118,18 +132,26 @@ async function runPipelineChecks(classification, timings) {
   const pipelineFiles = [
     ...(classification.buckets?.pipeline || []),
     ...(classification.buckets?.export_probe || []),
+    ...(classification.buckets?.news || []).filter((file) => file.startsWith('scripts/')),
   ];
-  const testFiles = [...new Set([
-    ...pipelineFiles.filter((file) => /^tests\/[^/]+\.test\.js$/i.test(file)),
-    ...pipelineFiles.flatMap((file) => PIPELINE_TESTS_BY_FILE[file] || []),
-  ])].sort();
-  if (testFiles.length) {
-    timings.push(await runStep('pipeline:tests', 'node', ['--test', ...testFiles]));
+  const testFiles = classification.testFiles || [];
+  const controlledTests = new Set(['tests/prepush-concurrency.test.js', 'tests/prepush-release-guardrails.test.js', 'tests/release-scope.test.js', 'tests/publish-article-command.test.js']);
+  const reusable = testFiles.filter((file) => controlledTests.has(file));
+  const ordinary = testFiles.filter((file) => !controlledTests.has(file));
+  if (reusable.length) {
+    const modules = require('./lib/change-scope').MODULES;
+    const code = [...new Set([...reusable, ...modules.filter((module) => module.tests.some((file) => reusable.includes(file))).flatMap((module) => module.files)])];
+    timings.push(await runStep('pipeline:tests:controlled', 'node', ['--test', ...reusable], { receipt: {
+      code, inputs: ['package.json', 'package-lock.json', 'scripts/config', 'tests/fixtures/change-scope-past-releases.json', '.github/workflows/live-postpush-check.yml', 'scripts/live-postpush-check.sh', '.githooks/pre-commit', '.githooks/pre-push', ...(reusable.includes('tests/prepush-concurrency.test.js') ? modules.flatMap((module) => [...module.files, ...module.tests]) : [])],
+    } }));
+  }
+  if (ordinary.length) {
+    timings.push(await runStep('pipeline:tests', 'node', ['--test', ...ordinary]));
   }
   const jsFiles = pipelineFiles
     .filter((file) => /^scripts\/.*\.js$/i.test(file));
   if (jsFiles.length) {
-    const checks = await Promise.all(jsFiles.map((file) => runStep(`pipeline:syntax:${file}`, 'node', ['--check', file])));
+    const checks = await Promise.all(jsFiles.map((file) => runStep(`pipeline:syntax:${file}`, 'node', ['--check', file], { receipt: { code: ['scripts/run-all-prepush.js'], inputs: [file] } })));
     timings.push(...checks);
   }
   const shellFiles = pipelineFiles
@@ -149,11 +171,12 @@ async function main() {
   console.log('Pre-push: start');
 
   try {
-    timings.push(await runStep('prepush:diff-guard', 'node', ['scripts/prepush-diff-guard.js']));
-    const fileArgIndex = process.argv.indexOf('--files-json');
-    const explicitFiles = fileArgIndex >= 0 ? JSON.parse(process.argv[fileArgIndex + 1] || '[]') : null;
-    let classification = classifyChangedFiles(explicitFiles || collectChangedFiles());
+    const explicitFiles = require('./lib/change-scope').selectedFiles();
+    let classification = assertResolvedScope(classifyChangedFiles(explicitFiles || collectChangedFiles()));
+    process.env.FITPO50_CHANGED_FILES_JSON = JSON.stringify(explicitFiles || classification.files);
     console.log(`[PREPUSH:SCOPE] ${classification.scopes.join('+')} (${classification.files.length} plików)`);
+    classification.reasons.forEach((item) => console.log(`[PREPUSH:WHY] ${item.file} -> ${item.scope}: ${item.reason}`));
+    timings.push(await runStep('prepush:diff-guard', 'node', ['scripts/prepush-diff-guard.js']));
     if (classification.requiresExportProbe) {
       exportWorkspace = createManagedTempDir({ prefix: 'fitpo50-prepush-export-probe-', type: 'prepush-export-probe', projectRoot: process.cwd() });
       exportDir = path.join(exportWorkspace, 'site');
@@ -186,20 +209,28 @@ async function main() {
       if (classification.scopes.includes('news')) {
         timings.push(await runStep('news:integrity', 'node', ['scripts/news-integrity-check.js']));
         timings.push(await runStep('assets:mirror:check', 'node', ['scripts/sync-site-assets-mirror.js', '--check']));
-        timings.push(await runStep('news:tests', 'node', ['--test', 'tests/news-public-integrity.test.js', 'tests/news-deploy-sync-gate.test.js']));
       }
       if (classification.scopes.includes('articles')) {
+        if (classification.articleWide) {
+          timings.push(await runStep('article:validate:all', 'node', ['scripts/validate-article-standard.js', '--profile', 'technical']));
+        }
+        const previous = !classification.articleWide && reusableArticleChecks(process.cwd(), explicitFiles || classification.files);
+        const articleStep = (tag, script, args = []) => {
+          if (!previous) return runStep(tag, 'node', [script, ...args]);
+          console.log(`[REUSED] ${tag}: aktualny wynik stagingu HTML/PDF, zgodne dane, kod i konfiguracja.`);
+          return Promise.resolve({ tag, status: 'REUSED', durationMs: 0 });
+        };
         const articleChecks = await Promise.all([
-          runStep('article:guard:diff', 'node', ['scripts/run-article-guard-diff.js']),
-          runStep('article:contract:diff', 'node', ['scripts/run-article-contract-diff.js']),
-          runStep('schema:validate', 'node', ['scripts/schema-validator.js', '--diff']),
+          articleStep('article:guard:diff', 'scripts/run-article-guard-diff.js'),
+          articleStep('article:contract:diff', 'scripts/run-article-contract-diff.js'),
+          articleStep('schema:validate', 'scripts/schema-validator.js', ['--diff']),
           runStep('date:modified:guard', 'node', ['scripts/date-modified-guard.js']),
         ]);
         timings.push(...articleChecks);
       }
-      if (classification.scopes.includes('pipeline')) {
-        await runPipelineChecks(classification, timings);
-      }
+    }
+    if (classification.testFiles.length || classification.buckets.pipeline.length || classification.buckets.export_probe.length) {
+      await runPipelineChecks(classification, timings);
     }
 
     if (classification.full) {
@@ -249,4 +280,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { assertExportDidNotModifySources, changedSnapshotFiles, repositorySnapshot };
+module.exports = { assertExportDidNotModifySources, changedSnapshotFiles, repositorySnapshot, runStep };

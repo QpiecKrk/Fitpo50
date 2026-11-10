@@ -6,7 +6,7 @@ const { POLICY, utils, validators } = require('./lib/article-policy');
 const { validateArticleEvidence } = require('./lib/article-evidence');
 const { validateArticleArchitecture } = require('./lib/article-intent-links');
 const { isSupportedCategory } = require('./lib/categories');
-const { prepareArticleMedia, sectionRequiresPrimaryImage } = require('./lib/article-media');
+const { prepareArticleMedia, sectionRequiresPrimaryImage, validateManifestStructure } = require('./lib/article-media');
 const { normalizeInternalHref } = require('./lib/article-normalization');
 
 const PLACEHOLDER_RX = /(do doprecyzowania|do uzupelnienia|placeholder|\{\{.+?\}\})/i;
@@ -83,6 +83,14 @@ function main() {
   const json = JSON.parse(raw);
   const errors = [];
   const warnings = [];
+
+  if (args.profile === 'technical') {
+    const result = validateManifestStructure(json, { profile: 'technical', operation: 'CREATE' });
+    result.errors.forEach((message) => console.error(`[FAIL] ${message}`));
+    if (!result.ok) process.exitCode = 20;
+    else console.log('[PASS] article-preflight: techniczny manifest; redakcja poza zakresem.');
+    return;
+  }
 
   if (!contentOnly && (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory())) {
     errors.push(`Nie znaleziono katalogu assets-dir: ${assetsDir}`);

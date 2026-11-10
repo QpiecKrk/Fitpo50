@@ -15,6 +15,8 @@ function lines(output) {
 }
 
 function changedFiles(cwd = process.cwd()) {
+  const selected = require('./lib/change-scope').selectedFiles();
+  if (selected) return selected;
   const diff = run('git', ['diff', '--name-only', 'origin/main...HEAD'], cwd);
   if (diff.status !== 0) {
     const msg = String(diff.stderr || diff.stdout || '').trim();

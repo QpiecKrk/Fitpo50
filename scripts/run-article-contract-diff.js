@@ -6,6 +6,7 @@ const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('path');
 const { validateArticleContract } = require('./article-contract-check');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
+const { validationProfileForFile } = require('./lib/article-staging');
 
 const MUST_FIX_ON_TOUCH = [
   /^Niespójny tytuł: <title> \(bez "\| FitPo50"\) != (?:og:title|twitter:title)\.$/,
@@ -47,13 +48,15 @@ function changedArticleFilesFromNameStatus(output, { isArticle = isArticleHtml }
 }
 
 function changedHtmlFiles() {
+  const selected = require('./lib/change-scope').selectedFiles();
+  if (selected) return selected.filter((file) => file.endsWith('.html') && !file.startsWith('admin/') && isArticleHtml(file));
   const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
   const out = primary.status === 0 ? primary.stdout : run('git', ['diff', '--name-status', 'HEAD~1..HEAD']).stdout;
   return changedArticleFilesFromNameStatus(out);
 }
 
 function originMainRaw(file) {
-  const res = run('git', ['show', `origin/main:${file}`]);
+  const res = run('git', ['show', `${process.env.FITPO50_PUSH_BASE || 'origin/main'}:${file}`]);
   if (res.status !== 0) return null;
   return res.stdout;
 }
@@ -110,8 +113,9 @@ function main() {
 
   let fail = false;
   for (const file of files) {
-    const current = validateArticleContract(file);
-    const previousRaw = originMainRaw(file);
+    const profile = validationProfileForFile(file);
+    const current = validateArticleContract(file, { profile });
+    const previousRaw = profile === 'technical' ? null : originMainRaw(file);
     const previous = previousRaw ? validateRaw(previousRaw, file) : { errors: [], warnings: [] };
     const { blockingErrors: reportableErrors, preExistingErrors: legacyErrors } = classifyContractResult(current, previous);
     const reportable = new Set(reportableErrors);

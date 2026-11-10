@@ -530,14 +530,14 @@ function buildAboutEntities({ data, title, category, keyTakeaways, sources }) {
   return [];
 }
 
-function normalizeSections(rawSections) {
+function normalizeSections(rawSections, options = {}) {
   const sections = [];
   for (const entry of normalizeArray(rawSections)) {
     if (!entry || typeof entry !== 'object') continue;
 
     const sectionRole = normalizeSectionRole(entry.section_role);
     const rawTitle = String(entry.title || entry.heading || '').trim();
-    const title = sectionRole === 'utility' ? rawTitle : ensureQuestionHeading(rawTitle);
+    const title = options.profile === 'technical' || sectionRole === 'utility' ? rawTitle : ensureQuestionHeading(rawTitle);
     const blocks = [];
 
     if (entry.content_html) {
@@ -1985,9 +1985,9 @@ function assertNoReadingRoomPlaceholders(html) {
   }
 }
 
-function runValidator(slug, dryRun) {
+function runValidator(slug, dryRun, profile = 'editorial') {
   if (dryRun) return { skipped: true };
-  runCommand('Walidacja standardu artykułu', 'node', ['scripts/validate-article-standard.js', `${slug}.html`]);
+  runCommand('Walidacja standardu artykułu', 'node', ['scripts/validate-article-standard.js', `${slug}.html`, '--profile', profile]);
   return { ok: true };
 }
 
@@ -2085,17 +2085,18 @@ function writeCrosslinkSuggestions(payload, dryRun) {
 }
 
 function normalizePayload(data, cliCategory, options = {}) {
+  const technical = options.profile === 'technical';
   const now = new Date();
   const fallbackDate = warsawIso(now).slice(0, 10);
 
   const title = String(data.title || '').trim();
-  const seoTitleBase = normalizeSeoTitleBase(String(data.seo_title || title).trim() || title);
+  const seoTitleBase = technical ? String(data.seo_title || title).trim() : normalizeSeoTitleBase(String(data.seo_title || title).trim() || title);
   const slug = String(data.slug || '').trim() || slugify(title);
   const category = normalizeCategory(cliCategory || data.category || data.section || 'ciekawe');
 
   const leadRaw = String(data.lead || data.lead_paragraph || data.excerpt || '').trim();
-  const quickAnswer = normalizeQuickAnswer(data.quick_answer || data.quickAnswer || '', leadRaw);
-  const metaDescription = normalizeMetaDescription(data.meta_description || data.description || data.excerpt || leadRaw);
+  const quickAnswer = technical ? String(data.quick_answer || '').trim() : normalizeQuickAnswer(data.quick_answer || data.quickAnswer || '', leadRaw);
+  const metaDescription = technical ? String(data.meta_description || '').trim() : normalizeMetaDescription(data.meta_description || data.description || data.excerpt || leadRaw);
 
   const datePublished = toIsoDateTimeWithTimezone(data.date_published || data.published_at || fallbackDate, '08:00:00');
   const dateModified = toIsoDateTimeWithTimezone(data.date_modified || data.updated_at || fallbackDate, '09:30:00');
@@ -2109,7 +2110,7 @@ function normalizePayload(data, cliCategory, options = {}) {
   const heroMotto = String(data.hero_motto_html || data.hero_motto || data.heroMotto || '').trim();
 
   const keyTakeaways = normalizeKeyTakeaways(data.key_takeaways || data.takeaways || []);
-  const sections = normalizeSections(data.sections || []);
+  const sections = normalizeSections(data.sections || [], options);
   const faqNormalized = normalizeFaq(data.answer_blocks || data.faq || data.faq_items || []);
   const faqResearch = normalizeFaqResearch(data.faq_research || data.faq_sources || []);
   const faqItems = faqNormalized;
@@ -2321,11 +2322,13 @@ async function main() {
     throw new Error('Plik wejściowy musi być JSON (.json / .fitpo50.json).');
   }
 
-  if (!precheckOnly) {
+  const technical = args.profile === 'technical';
+  if (!precheckOnly || technical) {
     const prepared = inspectPreparedArtifact(resolvedInput, ROOT);
     if (!prepared.ok) {
       throw new Error(`Importer wymaga niezmienionego artefaktu CONTENT_READY:\n- ${prepared.errors.join('\n- ')}\nDla draftu uruchom article:add; article:prepare-json służy tylko do korekty bez publikacji.`);
     }
+    if (technical && prepared.report.validation_profile !== 'technical') throw new Error('Brak technicznego raportu przygotowania tej paczki.');
   }
 
   if (!fs.existsSync(TEMPLATE_PATH)) {
@@ -2333,9 +2336,11 @@ async function main() {
   }
 
   const json = parseJsonFile(resolvedInput);
-  const payload = normalizePayload(json, args.category, { faqStrict });
+  const payload = normalizePayload(json, args.category, { faqStrict, profile: args.profile });
   const assetPrep = { notes: [], warnings: [] };
-  const check = validateInput(json, { faqStrict });
+  const check = technical
+    ? { errors: [], autoFixes: [], sections: payload.sections, sources: payload.sources }
+    : validateInput(json, { faqStrict });
   const precheck = buildPrecheckReport({
     inputPath: resolvedInput,
     json,
@@ -2347,6 +2352,7 @@ async function main() {
   printPrecheckReport(precheck);
 
   if (precheckOnly) {
+    if (technical && !precheck.canImport) process.exitCode = 20;
     return;
   }
 
@@ -2399,7 +2405,7 @@ async function main() {
   updatedFiles.push('social title + BreadcrumbList (source/_site)');
 
   if (runValidate) {
-    runValidator(payload.slug, dryRun);
+    runValidator(payload.slug, dryRun, args.profile || 'editorial');
   }
 
   const crosslinkSuggestionsPath = writeCrosslinkSuggestions(payload, dryRun);
@@ -2430,6 +2436,7 @@ if (require.main === module) {
 
 module.exports = {
   buildAboutEntities,
+  buildHtmlFromTemplate,
   buildScholarlyMentions,
   ensureCaptionedTables,
   main,

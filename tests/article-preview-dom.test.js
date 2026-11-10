@@ -2,6 +2,8 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { chromium } = require('playwright');
 const { collectDomInventory } = require('../scripts/article-preview-gate');
+const { prepareCenterPrint } = require('../scripts/lib/topic-center-print');
+const { withChromium } = require('../scripts/lib/playwright-lifecycle');
 
 async function inventory(html, isCenter = false) {
   const browser = await chromium.launch({ headless: true });
@@ -55,4 +57,15 @@ test('topic center używa tego samego inventory DOM dla wszystkich picture w mai
   const result = await inventory(`<main class="hub-shell"><h1>Centrum</h1><section><h2>Moduł?</h2>${picture('center-one')}</section><div>${picture('center-two')}</div></main>`, true);
   assert.equal(result.images.length, 2);
   assert.ok(result.images.every((item) => item.role === 'center'));
+});
+
+test('tekst centrum do kontroli PDF nie zawiera panelu pomijanego w druku', async () => {
+  await withChromium(chromium, async (browser) => {
+    const page = await browser.newPage();
+    await page.setContent('<div class="hub-shell"><main><div class="hub-hero__panel">Panel ukryty w PDF</div><section><p>Właściwa treść centrum.</p></section></main></div>');
+    await prepareCenterPrint(page);
+    const result = await page.evaluate(collectDomInventory, true);
+    assert.match(result.text, /Właściwa treść centrum/);
+    assert.doesNotMatch(result.text, /Panel ukryty w PDF/);
+  });
 });

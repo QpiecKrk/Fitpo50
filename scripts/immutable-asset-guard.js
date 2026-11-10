@@ -41,6 +41,8 @@ function gitDiff(args) {
 }
 
 function changedEntries() {
+  const selected = require('./lib/change-scope').selectedFiles();
+  if (selected) return selected.length ? gitDiff(['diff', '--name-status', '--no-renames', process.env.FITPO50_PUSH_BASE || 'origin/main', 'HEAD', '--', ...selected]) : [];
   return [
     ...gitDiff(['diff', '--name-status', 'origin/main...HEAD']),
     ...gitDiff(['diff', '--cached', '--name-status']),

@@ -2,6 +2,64 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { slugify } = require('./slugify');
+const { atomicWriteFileSync } = require('./atomic-file');
+
+function dependencyFiles(root, entries) {
+  const visited = new Set();
+  const visit = (relative) => {
+    const file = path.resolve(root, relative);
+    const key = path.relative(root, file).replace(/\\/g, '/');
+    if (visited.has(key)) return;
+    visited.add(key);
+    if (!fs.existsSync(file) || !/\.js$/.test(file)) return;
+    for (const match of fs.readFileSync(file, 'utf8').matchAll(/require\(\s*['"](\.[^'"]+)['"]\s*\)/g)) {
+      const base = path.resolve(path.dirname(file), match[1]);
+      const target = [base, `${base}.js`, `${base}.json`, path.join(base, 'index.js')].find((candidate) => fs.existsSync(candidate) && fs.statSync(candidate).isFile());
+      if (target) visit(path.relative(root, target));
+    }
+  };
+  entries.forEach(visit);
+  return [...visited].sort();
+}
+
+function validationIdentity(root, { inputs = [], code = [], parameters = {} }) {
+  const files = [...new Set([...inputs, ...dependencyFiles(root, code)])].sort();
+  const entries = [];
+  const visit = (name) => {
+    const file = path.resolve(root, name);
+    if (fs.existsSync(file) && fs.statSync(file).isDirectory()) {
+      for (const child of fs.readdirSync(file).sort()) visit(path.join(name, child));
+    } else entries.push([name.replace(/\\/g, '/'), fs.existsSync(file) ? sha256File(file) : null]);
+  };
+  files.forEach(visit);
+  return crypto.createHash('sha256').update(JSON.stringify({ version: 1, node: process.version, platform: process.platform, arch: process.arch, parameters, entries })).digest('hex');
+}
+
+function readCheckReceipt(file, identity) {
+  try {
+    const receipt = JSON.parse(fs.readFileSync(file, 'utf8'));
+    return receipt.version === 1 && receipt.status === 'PASS' && receipt.exit_code === 0 && receipt.identity === identity ? receipt : null;
+  } catch (_error) { return null; }
+}
+
+function writeCheckReceipt(file, identity, result = {}) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  atomicWriteFileSync(file, `${JSON.stringify({ ...result, version: 1, status: 'PASS', exit_code: 0, identity })}\n`, 'utf8');
+}
+
+function preparationCodeIdentity(root = path.resolve(__dirname, '../..')) {
+  return validationIdentity(root, {
+    code: ['scripts/article-json-workbench.js', 'scripts/prepare-article-architecture.js', 'scripts/prepare-article-media.js', 'scripts/article-preflight.js', 'scripts/package-audit.js'],
+    inputs: ['package.json', 'package-lock.json', 'scripts/config'],
+    parameters: { profile: 'technical' },
+  });
+}
+
+function preparationIdentity(root, article, sourcePackageHash, parameters = {}) {
+  const inventory = require('./article-intent-links').buildArticleInventory(root)
+    .filter((entry) => entry.file !== `${article.slug}.html`).map((entry) => [entry.file, sha256File(path.join(root, entry.file))]);
+  return crypto.createHash('sha256').update(JSON.stringify({ code: preparationCodeIdentity(), sourcePackageHash, inventory, parameters })).digest('hex');
+}
 
 const STATUSES = Object.freeze({
   DRAFT: 'DRAFT',
@@ -81,6 +139,9 @@ function inspectPreparedArtifact(inputPath, repoRoot = process.cwd()) {
   if (report && report.status !== STATUSES.CONTENT_READY) {
     errors.push(`Status artefaktu to ${report.status || 'MISSING'}, wymagany ${STATUSES.CONTENT_READY}.`);
   }
+  if (report?.validation_profile === 'technical' && report.preparation_code_sha256 !== preparationCodeIdentity()) {
+    errors.push('Kod lub konfiguracja przygotowania zmieniły się; wymagany aktualny raport techniczny.');
+  }
   if (report && fs.existsSync(file)) {
     const actualHash = sha256File(file);
     if (report.output_sha256 !== actualHash) {
@@ -153,6 +214,12 @@ function cleanupPreparedArtifact(inputPath, options = {}) {
 }
 
 module.exports = {
+  dependencyFiles,
+  validationIdentity,
+  readCheckReceipt,
+  writeCheckReceipt,
+  preparationCodeIdentity,
+  preparationIdentity,
   STATUSES,
   cleanupPreparedArtifact,
   computePreparedPackageFingerprint,

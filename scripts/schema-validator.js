@@ -24,6 +24,8 @@ function normalizeRel(value) {
 }
 
 function diffHtmlFiles() {
+  const selected = require('./lib/change-scope').selectedFiles();
+  if (selected) return selected.filter((file) => file.endsWith('.html') && !file.startsWith('_site/') && path.basename(file) !== 'article-template-bento.html' && fs.existsSync(path.join(ROOT, file)));
   const diff = run('git', ['diff', '--name-only', 'origin/main...HEAD']);
   if (diff.status !== 0) {
     throw new Error(String(diff.stderr || diff.stdout || '').trim() || 'git diff failed');

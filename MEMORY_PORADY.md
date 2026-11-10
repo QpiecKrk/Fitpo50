@@ -11,18 +11,16 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 
 - Artykul to pojedyncza strona docelowa.
 - Obowiazuje kanoniczny standard z `ARTICLE_STANDARD.md` (bez recznych wariantow layoutu).
-- Ten sam pelny Quality Gate obowiazuje nowy artykul, import, aktualizacje, `popraw-seo` i `napraw paczke N`. Kontrolujemy cala strone i wszystkie artefakty, a nie tylko zmieniony fragment.
+- Rozdzielamy przygotowanie redakcyjne i techniczne dodanie zgodnie z początkiem `ARTICLE_STANDARD.md`. Pisarz odpowiada za treść, źródła i FAQ, Ilustrator za ilustracje, Grzegorz za akceptację obrazów i wyglądu. Zwykłe `article:add` sprawdza paczkę technicznie bez ponownego badania tych treści; `popraw-seo` i `napraw paczkę N` zachowują własny, jawnie zlecony zakres redakcyjny.
 - Liczba sekcji wynika z tematu i intencji. Artykul ma byc wyczerpujacy i interesujacy, bez generycznych dopiskow ani sztucznego wydluzania.
-- Kanoniczny flow publikacji: `scripts/import-article.js` z plikow `.fitpo50.json` (zawsze z precheck).
+- Kanoniczne wejście lokalne to `article:add` z paczką `.fitpo50.json` i obrazami. Istniejący importer z technicznym precheck jest wewnętrznym etapem kontrolera, nie osobną ręczną ścieżką.
 - Plik `.fitpo50.json` jest wsadem roboczym do importu; po udanej publikacji finalnym zrodlem jest HTML + assety + PDF + indeksy, a JSON nie musi zostawac w repo.
 - Roboczych JSON-ow w `data/import/*.fitpo50.json` nie commitujemy, jesli finalny HTML jest gotowy i JSON blokuje `json:gate:diff`.
 - Regula importera dla "Czytelni": linki z JSON (`related_articles` / `related`) sa ignorowane; importer dobiera 3 karty tylko z lokalnie istniejacych artykulow.
 - `article-template-bento.html` jest wewnętrznym szablonem importera. Nie tworzymy ręcznych artykułów HTML ani alternatywnych szkiców poza workflow JSON-first.
-- Przed oddaniem artykulu uruchamiamy walidator:
-  - `node scripts/validate-article-standard.js <plik.html>`
-- Przed publikacja artykulu obowiazkowo generujemy PDF i podpinamy przycisk hero:
-  - `python3 scripts/sync_article_pdfs_and_buttons.py --slug <slug>`
-  - albo hurtowo: `npm run article:pdf:sync`
+- Audyt wejściowy zbiera wszystkie niezależnie wykrywalne błędy techniczne JSON-u i plików naraz; niesprawdzone zależności są jawne. Jeden staging buduje HTML/PDF, podpina PDF w hero i sprawdza artefakty. Nie dodawaj osobnych ręcznych generacji ani kolejnych bramek redakcyjnych po audycie.
+- Wyniki wykorzystuj ponownie tylko przy zgodnych parametrach i hashach danych, właściwego kodu oraz konfiguracji. Commit i push obejmują pliki zadania, w tym powiązany kod/testy; nie uruchamiają niezwiązanych NEWS ani kontroli całego portalu. Szerszy wpływ szablonu lub eksportu wymaga właściwych dodatkowych kontroli.
+- Powyższy podział jest zatwierdzonym kontraktem; kod i testy wdrażamy w częściach 3–9 planu w Downloads. Test całości wykonamy na innym artykule. Błonnik pozostaje zamknięty.
 - W headerze artykulu pokazujemy tylko:
   - dzial
   - czas czytania
@@ -30,8 +28,8 @@ Ten plik dotyczy tylko modulu "Porady" i klasycznych artykulow publikowanych jak
 - Na dole artykulu (nad footerem) zawsze sekcja "Czytelnia" (`.porady-preview.section-padding`) z 3 kafelkami.
 - Naglowek sekcji "Czytelnia" ma byc index-style (`.reading-room__head` + ikona), nie wariant alternatywny.
 - Interlinking w tresci: liczba linkow wewnetrznych wynika z naturalnego planu; mniej niz 2 daje ostrzezenie, nie blokade. Linki osadzamy w akapitach na naturalnych slowach kluczowych; same linki z bloku "Czytaj tez"/"Czytelnia" nie wystarczaja.
-- Crosslinki wewnetrzne dopinamy recznie po imporcie (kontrola redakcyjna); nie przenosimy automatycznie linkow z promptu/modelu.
-- FAQ: importer nigdy nie generuje ani nie dopisuje pytań. Każde istniejące pytanie musi mieć udokumentowane źródło w `faq_research[]` (GSC, PAA albo autocomplete). Nie ma sztucznego minimum; przy braku realnych pytań artykuł nie zawiera sekcji ani schema `FAQPage`.
+- Linkowanie wewnętrzne przygotowuje lokalny mechanizm z istniejących fraz i rzeczywistych stron. Nie dopisuje treści dla licznika ani nie wprowadza zgadywanych adresów z promptu/modelu. Zmiana innego artykułu wymaga włączenia go do zakresu zadania.
+- FAQ: importer nigdy nie generuje pytań. Za udokumentowane pochodzenie z GSC/PAA/autocomplete odpowiada Pisarz; import nie bada go ponownie. Nie ma sztucznego minimum; bez FAQ nie tworzymy sekcji ani schema `FAQPage`.
 - Dopuszczamy bardziej wyrazisty styl artykulu (kolory, callouty, typografia, tabele), ale:
   - zachowujemy spojnosc z designem serwisu,
   - trzymamy max 2-3 rodziny fontow na artykul,
@@ -87,7 +85,7 @@ Callouty i bloki pomocnicze:
   - praktycznej wskazowki do wdrozenia.
 
 Obrazy i separatory:
-- Wymagany jest osobny hero i odrebny, obejrzany obraz dla kazdej glownej sekcji merytorycznej; sekcje uzytkowe nie sa liczone. Watermark sam w sobie nie blokuje obrazu, ale mylace napisy, liczby, anatomia, sprzet lub kontekst blokuja publikacje. Szczegoly review sa kanonicznie opisane w `ARTICLE_STANDARD.md`: nowy raport preview ma `version=3`, a v1/v2 pozostaja zamrozonym legacy.
+- Wymagany jest osobny hero i odrębny obraz dla każdej głównej sekcji merytorycznej; sekcje użytkowe nie są liczone. Obrazy zatwierdza Grzegorz. Codex kontroluje pliki wyłącznie technicznie i nie wykonuje osobnego review obrazów ani końcowego wyglądu. Kryteria merytoryczne ilustracji z `ARTICLE_STANDARD.md` są odpowiedzialnością Ilustratora i Grzegorza; wcześniejszych raportów nie odtwarzamy jako pozornego nowego review.
 - Gdy w sekcji wystepuja 2+ obrazki pod rzad, grupujemy je:
   - wrapper `.figure-stack`,
   - podpis grupy `.figure-stack__label`,
@@ -107,7 +105,7 @@ Czego nie robimy:
 - Brak upychania 4-5 linkow wewnetrznych w jednym akapicie.
 - Brak "sciany obrazkow" bez odstepu i separatora.
 
-Szybka checklista przed oddaniem artykulu:
+Kryteria wyglądu dla autora i Grzegorza (nie dodatkowy ręczny etap Codexa):
 1. Czy jest hero, drop-cap, co najmniej 2 callouty i mocny cytat?
 2. Czy "Po pierwsze..." / "Cwiczenie 1..." sa wizualnie oznaczone?
 3. Czy linki wewnetrzne sa rozlozone naturalnie po tekscie?

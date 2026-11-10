@@ -495,3 +495,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Ile błonnika dziennie po 50? Normy i 30 g na talerzu — tabela | FitPo50"
   section: "Jedzenie"
   summary: "Sprawdź polskie normy błonnika po 50. roku życia, tabelę produktów i ważonych porcji oraz przykład około 30 g. Zobacz, jak zwiększać ilość błonnika z rozwagą."
+- url: https://fitpo50.pl/bezdech-senny-po-50-objawy.html
+  title: "Bezdech senny po 50: objawy, badania snu i kiedy do lekarza | FitPo50"
+  section: "Zdrowie"
+  summary: "Objawy obturacyjnego bezdechu sennego po 50., także u kobiet: kiedy iść do POZ, czym różnią się poligrafia i polisomnografia oraz kiedy działać pilnie."

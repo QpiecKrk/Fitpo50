@@ -304,8 +304,10 @@ test('manifest rozróżnia CREATE i zapisuje dokładne hashe publikowanych plik�
     candidates,
     baseline,
     transactionId: 'manifest-test',
+    sourcePackageHash: 'b'.repeat(64),
   });
   assert.equal(result.payload.operation, 'CREATE');
+  assert.equal(result.payload.source_package_sha256, 'b'.repeat(64));
   assert.equal(result.payload.files_count, 2);
   assert.deepEqual(result.payload.files.map((file) => file.path), ['fresh.html', '_site/fresh.html']);
   assert.ok(result.payload.files.every((file) => file.action === 'CREATE' && file.after_sha256));

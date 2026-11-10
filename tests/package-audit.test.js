@@ -5,7 +5,10 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
-const { auditPackage, imageIssues, metricProposal, unitIssues } = require('../scripts/package-audit');
+const { spawnSync } = require('node:child_process');
+const { auditPackage, imageIssues, metricProposal, printReport, unitIssues } = require('../scripts/package-audit');
+const { inspectImage } = require('../scripts/lib/article-media');
+const { createManagedTempDir, disposeTempWorkspace } = require('../scripts/lib/temp-workspace');
 const { packageIdentity } = require('../scripts/lib/package-identity');
 const { executeArticleAddCore } = require('../scripts/article-add');
 const { cleanupArticleInput } = require('../scripts/article-cleanup-input');
@@ -19,6 +22,169 @@ const ROOT = path.resolve(__dirname, '..');
 const FIXTURE = path.join(ROOT, 'tests', 'fixtures', 'package-audit', 'multi-error.fitpo50.json');
 const VALID_PACKAGE_DIR = path.join(ROOT, 'tests', 'fixtures', 'package-audit', 'valid-package');
 const VALID_PACKAGE = path.join(VALID_PACKAGE_DIR, 'package-audit-valid.fitpo50.json');
+
+function withTechnicalPackage(callback) {
+  const root = createManagedTempDir({ prefix: 'fitpo50-technical-audit-test-', type: 'article-package-audit-test', projectRoot: ROOT });
+  const assetsDir = path.join(root, 'package');
+  fs.mkdirSync(assetsDir);
+  for (const name of fs.readdirSync(VALID_PACKAGE_DIR)) fs.copyFileSync(path.join(VALID_PACKAGE_DIR, name), path.join(assetsDir, name));
+  const file = path.join(assetsDir, path.basename(VALID_PACKAGE));
+  const args = { file, 'assets-dir': assetsDir, 'report-dir': path.join(root, 'reports'), profile: 'technical' };
+  const article = JSON.parse(fs.readFileSync(file, 'utf8'));
+  try { return callback({ root, assetsDir, file, args, article }); }
+  finally { disposeTempWorkspace(root, { status: 'COMPLETED' }); }
+}
+
+test('technical: poprawna paczka przechodzi bez oceny treści, dowodów, FAQ i review obrazów', () => withTechnicalPackage(({ root, assetsDir, file, args, article }) => {
+  article.sources = [];
+  article.evidence_claims = [{ claim: 'Niezgodna fraza testowa', location: 'nieistniejace.pole', claim_type: 'medical', source_urls: ['https://example.invalid/bez-pobierania'] }];
+  article.answer_blocks = [{ question: 'Pytanie testowe?', answer_html: '<p>Odpowiedź testowa.</p>' }];
+  article.faq_research = [];
+  article.lead = 'Przykład techniczny: 180 pounds.';
+  article.seo_title = 'x'.repeat(100);
+  delete article.search_intent;
+  delete article.primary_keyword;
+  fs.writeFileSync(file, JSON.stringify(article));
+  const before = packageIdentity(file, assetsDir, article);
+  const report = auditPackage(args, { root, spawnSync: () => assert.fail('Profil techniczny nie może uruchamiać walidatora redakcyjnego.') });
+  assert.equal(report.status, 'TECHNICAL_READY');
+  assert.equal(report.exit_code, 0);
+  assert.equal(report.summary.errors, 0);
+  assert.equal(report.package_files.length, 7);
+  assert.equal(report.mandatory_visual_review.status, 'NOT_IN_SCOPE');
+  assert.ok(report.not_in_scope.includes('EVIDENCE_REVIEW'));
+  assert.ok(report.not_in_scope.includes('FAQ_RESEARCH'));
+  assert.equal(report.next_step, 'BUILD_AND_VALIDATE_ARTICLE_IN_STAGING');
+  assert.equal(packageIdentity(file, assetsDir, article).hash, before.hash, 'Audyt nie zmienia JSON-u ani obrazów.');
+  const output = [];
+  const originalLog = console.log;
+  try { console.log = (line) => output.push(line); printReport(report); }
+  finally { console.log = originalLog; }
+  assert.doesNotMatch(output.join('\n'), /VISUAL_REVIEW.*PENDING/);
+}));
+
+test('technical: jeden raport zbiera błędy niezależnych pól, HTML i brakujących wariantów', () => withTechnicalPackage(({ root, file, args, article, assetsDir }) => {
+  delete article.title;
+  article.meta_description = null;
+  article.slug = '../nieprawidlowy';
+  article.category = 'nieznana';
+  article.sections = [null, { title: 12, section_role: 'nieznana', paragraphs_html: [12, '<p><table><tr><td>Test</td></tr></table></p>'] }];
+  article.sources = [{ label: false, url: 'javascript:alert(1)' }];
+  fs.unlinkSync(path.join(assetsDir, `${article.image_prompts_v4[0].filename_base}.webp`));
+  fs.writeFileSync(file, JSON.stringify(article));
+  const report = auditPackage(args, { root });
+  const issues = Object.values(report.by_owner).flat();
+  for (const pointer of ['/title', '/meta_description', '/slug', '/category', '/sections/0', '/sections/1/title', '/sections/1/paragraphs_html/0', '/sections/1/paragraphs_html/1', '/sources/0/label', '/sources/0/url', '/image_prompts_v4/0/webp']) {
+    assert.ok(issues.some((item) => item.path === pointer), `Brak błędu ${pointer}.`);
+  }
+  assert.equal(report.status, 'TECHNICAL_BLOCKED');
+  assert.equal(report.exit_code, 20);
+  assert.deepEqual(report.proposed_changes, [], 'Audyt nie proponuje generowania obrazów ani zmiany treści.');
+}));
+
+test('technical: nieprawidłowe typy kolekcji i korzenia dają raport zamiast wyjątku', () => withTechnicalPackage(({ root, file, args, article }) => {
+  article.sections = {};
+  article.sources = 'lista';
+  article.image_prompts_v4 = null;
+  fs.writeFileSync(file, JSON.stringify(article));
+  const report = auditPackage(args, { root });
+  assert.equal(report.exit_code, 20);
+  assert.equal(report.blocked_dependencies.length, 3);
+  for (const pointer of ['/sections', '/sources', '/image_prompts_v4']) assert.ok(report.by_owner.PISARZ.some((item) => item.path === pointer));
+  for (const value of [null, [], 42]) {
+    fs.writeFileSync(file, JSON.stringify(value));
+    const invalid = auditPackage(args, { root });
+    assert.equal(invalid.exit_code, 20);
+    assert.equal(invalid.by_owner.PISARZ[0].code, 'JSON_ROOT_INVALID');
+    assert.equal(invalid.blocked_dependencies.length, 1);
+  }
+}));
+
+test('technical: błąd składni ma kod 20, brak dostępu do JSON-u kod 30', () => withTechnicalPackage(({ root, file, args }) => {
+  fs.writeFileSync(file, '{');
+  const syntax = auditPackage(args, { root });
+  assert.equal(syntax.exit_code, 20);
+  assert.equal(syntax.by_owner.PISARZ[0].code, 'JSON_PARSE_ERROR');
+  assert.equal(syntax.blocked_dependencies[0].dependency, 'JSON_PARSE');
+  const missing = auditPackage({ ...args, file: path.join(root, 'nie-ma.json') }, { root });
+  assert.equal(missing.exit_code, 30);
+  assert.equal(missing.status, 'ENVIRONMENT_FAILURE');
+  assert.equal(missing.next_step, 'FIX_ENVIRONMENT_AND_REPEAT_AUDIT');
+  assert.equal(missing.by_owner.CODEX[0].code, 'JSON_READ_ENVIRONMENT_FAILURE');
+}));
+
+test('technical: istniejący slug wymaga jawnego force, nieznany profil jest odrzucany', () => withTechnicalPackage(({ root, args, article }) => {
+  fs.writeFileSync(path.join(root, `${article.slug}.html`), '<html></html>');
+  assert.equal(auditPackage(args, { root }).exit_code, 20);
+  assert.equal(auditPackage({ ...args, force: 'true' }, { root }).exit_code, 0);
+  assert.throws(() => auditPackage({ ...args, profile: 'dowolny' }, { root }), /Nieobsługiwany profil/);
+}));
+
+test('technical: błędna ścieżka obrazu blokuje jego odczyt, inne pliki nadal są sprawdzane', () => withTechnicalPackage(({ root, file, args, article, assetsDir }) => {
+  article.image_prompts_v4[0].filename_base = '../spoza-paczki-v1';
+  article.image_prompts_v4[0].source_file = '../spoza-paczki-v1.jpg';
+  fs.writeFileSync(file, JSON.stringify(article));
+  let inspected = 0;
+  const report = auditPackage(args, { root, inspectImage(image) {
+    assert.equal(path.dirname(image), assetsDir);
+    inspected += 1;
+    return { width: 1080, height: 600, aspect_ratio: 1.8 };
+  } });
+  assert.equal(report.exit_code, 20);
+  assert.equal(inspected, 3);
+  assert.ok(report.by_owner.PISARZ.some((item) => item.code === 'IMAGE_FILENAME_INVALID'));
+  assert.ok(report.blocked_dependencies.some((item) => item.dependency === '/image_prompts_v4/0/filename_base'));
+}));
+
+test('technical: wymiary i uszkodzenie wariantu są błędami technicznymi bez konwersji', () => withTechnicalPackage(({ root, args }) => {
+  const report = auditPackage(args, { root, inspectImage(file) {
+    if (file.endsWith('.avif')) throw new Error('Uszkodzony wariant.');
+    return file.endsWith('.webp') ? { width: 900, height: 900, aspect_ratio: 1 } : { width: 1000, height: 500, aspect_ratio: 2 };
+  } });
+  const codes = report.by_owner.ILUSTRATOR.map((item) => item.code);
+  for (const code of ['IMAGE_UNREADABLE', 'IMAGE_TOO_SMALL', 'IMAGE_BAD_RATIO', 'IMAGE_VARIANT_SIZE_MISMATCH']) assert.ok(codes.includes(code), code);
+  assert.equal(report.exit_code, 20);
+  assert.deepEqual(report.proposed_changes, []);
+}));
+
+test('technical: awaria narzędzia odczytu obrazów ma kod środowiska 30', () => withTechnicalPackage(({ root, args }) => {
+  const report = auditPackage(args, { root, inspectImage() {
+    throw Object.assign(new Error('Brak identify.'), { code: 'IMAGE_INSPECT_ENVIRONMENT_FAILURE' });
+  } });
+  assert.equal(report.exit_code, 30);
+  assert.equal(report.status, 'ENVIRONMENT_FAILURE');
+  assert.equal(report.by_owner.CODEX.length, 6);
+}));
+
+test('technical: raport nie nadpisuje redakcyjnego raportu tej samej paczki', () => withTechnicalPackage(({ root, args }) => {
+  const technical = auditPackage(args, { root });
+  const editorial = auditPackage({ ...args, profile: 'editorial' });
+  assert.equal(editorial.exit_code, 0);
+  assert.equal(editorial.status, 'READY_FOR_VISUAL_REVIEW');
+  assert.equal(technical.package_sha256, editorial.package_sha256);
+  assert.notEqual(technical.report_file, editorial.report_file);
+  assert.equal(JSON.parse(fs.readFileSync(technical.report_file, 'utf8')).profile, 'technical');
+}));
+
+test('technical: odczyt obrazu zwraca metadane bez sygnatury wizualnej', () => {
+  const image = path.join(VALID_PACKAGE_DIR, 'package-audit-valid-hero-v1.jpg');
+  const result = inspectImage(image, { technicalOnly: true });
+  assert.ok(result.width >= 1024);
+  assert.ok(result.height >= 560);
+  assert.match(result.sha256, /^[a-f0-9]{64}$/);
+  assert.equal(Object.hasOwn(result, 'perceptual_hash'), false);
+});
+
+test('technical: wejście CLI wybiera profil i zapisuje techniczny raport', () => withTechnicalPackage(({ file, assetsDir, args }) => {
+  const result = spawnSync('node', [
+    'scripts/package-audit.js', '--file', file, '--assets-dir', assetsDir,
+    '--report-dir', args['report-dir'], '--profile', 'technical',
+  ], { cwd: ROOT, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /\[PACKAGE_AUDIT\]\[TECHNICAL_READY\]/);
+  assert.match(result.stdout, /\[VISUAL_REVIEW\]\[NOT_IN_SCOPE\]/);
+  assert.equal(fs.readdirSync(args['report-dir']).filter((name) => name.endsWith('.technical.json')).length, 1);
+}));
 
 test('NiŚOZ nie jest błędnie rozpoznawane jako angielska jednostka oz', () => {
   assert.deepEqual(unitIssues({ lead: 'Pomoc zapewniają SOR oraz NiŚOZ.' }), []);

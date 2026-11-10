@@ -12,7 +12,8 @@ function countMatches(raw, regex) {
   return [...String(raw || '').matchAll(regex)].length;
 }
 
-function validateArticleContract(filePath) {
+function validateArticleContract(filePath, options = {}) {
+  if (options.profile === 'technical') return require('./validate-article-standard').validateFile(filePath, { profile: 'technical', strictChanged: true });
   if (pageKind(fs.readFileSync(filePath, 'utf8')) === 'topic_center') return validateTopicCenter(filePath);
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
@@ -119,6 +120,9 @@ function validateArticleContract(filePath) {
 
 function main() {
   const args = process.argv.slice(2);
+  const profileIndex = args.indexOf('--profile');
+  const profile = profileIndex >= 0 ? args.splice(profileIndex, 2)[1] : 'editorial';
+  if (!['technical', 'editorial'].includes(profile)) throw new Error(`Nieobsługiwany profil: ${profile}`);
   if (!args.length) {
     console.error('Usage: node scripts/article-contract-check.js <file.html> [more files]');
     process.exit(1);
@@ -133,7 +137,7 @@ function main() {
       fail = true;
       continue;
     }
-    const { errors, warnings } = validateArticleContract(filePath);
+    const { errors, warnings } = validateArticleContract(filePath, { profile });
     if (warnings.length) {
       warnings.forEach((w) => console.log(`⚠ ${f}: ${w}`));
     }

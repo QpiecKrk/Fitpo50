@@ -7,6 +7,8 @@ const { spawnSync } = require('node:child_process');
 const { assertPreparedPublicationState, publicFingerprint } = require('./prepare-deployment-marker');
 const { checkNewsFallbackSync } = require('./news-deploy-sync-gate');
 const { NewsPullError } = require('./news-pull');
+const { assertReleaseFiles, assertResolvedScope, classifyChangedFiles, filesFromPushRefs, newsInScope } = require('./lib/change-scope');
+const crypto = require('node:crypto');
 
 const MAIN_REF = 'refs/heads/main';
 const ZERO_SHA = /^0{40,64}$/;
@@ -40,6 +42,7 @@ function evaluatePushRefs({
   assertState,
   publicFingerprintOk,
   newsCheck,
+  changedFiles,
   isMainDeleteAllowed = false,
 }) {
   const refs = normalizedLines(lines).map(parsePushLine);
@@ -73,9 +76,13 @@ function evaluatePushRefs({
       'PUBLIC_FINGERPRINT_STALE: publiczny eksport _site nie zgadza się z deployment.json. Uruchom ponownie prepush:local i deployment:prepare.',
     );
   }
-  newsCheck();
+  const classification = assertResolvedScope(classifyChangedFiles(changedFiles || marker.release_files || []));
+  const requiresNews = changedFiles || marker.release_files
+    ? newsInScope(classification)
+    : true;
+  if (requiresNews) newsCheck();
 
-  return { code: 0, reason: 'MAIN_GUARD_PASS', checkedMainRefs: mainRefs.length };
+  return { code: 0, reason: 'MAIN_GUARD_PASS', checkedMainRefs: mainRefs.length, news: requiresNews ? 'EXECUTED' : 'NOT_IN_SCOPE' };
 }
 
 function runGit(root, args) {
@@ -100,17 +107,37 @@ function main() {
   const root = runGit(process.cwd(), ['rev-parse', '--show-toplevel']);
   const head = runGit(root, ['rev-parse', 'HEAD']);
   const lines = fs.readFileSync(0, 'utf8');
+  const files = filesFromPushRefs(lines, root);
+  const mainRef = normalizedLines(lines).map(parsePushLine).find((ref) => ref.remoteRef === MAIN_REF);
+  if (mainRef) {
+    assertResolvedScope(classifyChangedFiles(files));
+    const marker = readMarkerFromCommit(root, head);
+    assertReleaseFiles(marker, files, (file) => {
+      const blob = spawnSync('git', ['show', `${head}:${file}`], { cwd: root, encoding: null, maxBuffer: 100 * 1024 * 1024 });
+      const hash = blob.status === 0 ? crypto.createHash('sha256').update(blob.stdout).digest('hex') : null;
+      const localHash = fs.existsSync(path.join(root, file)) ? crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex') : null;
+      if (hash !== localHash) throw new Error(`Plik wysyłanego commita różni się od kopii roboczej: ${file}. Kontrola nie sprawdzi innej zawartości.`);
+      return hash;
+    });
+  }
   const result = evaluatePushRefs({
     lines,
+    changedFiles: files,
     head,
     readMarker: (sha) => readMarkerFromCommit(root, sha),
     assertState: (marker) => assertPreparedPublicationState(root, marker),
     publicFingerprintOk: (marker) => (
-      marker.public_fingerprint_sha256 === publicFingerprint(path.join(root, '_site'))
+      marker.public_fingerprint_sha256 === publicFingerprint(path.join(root, '_site'), marker.release_files || null)
     ),
     newsCheck: () => checkNewsFallbackSync({ root }),
     isMainDeleteAllowed: false,
   });
+  if (mainRef) {
+    const checks = spawnSync(process.execPath, ['scripts/run-all-prepush.js', '--files-json', JSON.stringify(files)], {
+      cwd: root, stdio: 'inherit', env: { ...process.env, FITPO50_PUSH_BASE: mainRef.remoteSha },
+    });
+    if (checks.error || checks.status !== 0) throw new PrepushMainGuardError(`Kontrole wysyłanego zakresu zakończyły się kodem ${checks.status ?? 30}.`);
+  }
   console.log(`[PREPUSH:MAIN][PASS] ${result.reason}`);
 }
 

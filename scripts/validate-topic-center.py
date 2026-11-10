@@ -2,6 +2,7 @@
 """Strict content and metadata contract for the existing topic-center layout."""
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -25,12 +26,61 @@ LEGACY_FAQ_FILES = set(next(
 ))
 
 
+def faq_identity(html):
+    soup = BeautifulSoup(html, 'html.parser')
+    articles = soup.select('.hub-faq-list article')
+    section = soup.select('.hub-faq')
+    evidence = soup.select_one('#hub-evidence')
+    if not articles or len(section) != 1 or evidence is None:
+        raise ValueError('Brak FAQ lub jego researchu')
+    research = json.loads(evidence.string or '')['faq_research']
+    faq_nodes = []
+
+    def collect(value):
+        if isinstance(value, dict):
+            if value.get('@type') == 'FAQPage':
+                faq_nodes.append(value)
+            for child in value.values():
+                collect(child)
+        elif isinstance(value, list):
+            for child in value:
+                collect(child)
+
+    for script in soup.select('script[type="application/ld+json"]'):
+        collect(json.loads(script.string or ''))
+    if len(faq_nodes) != 1 or not isinstance(research, list) or len(research) != len(articles):
+        raise ValueError('Niekompletne FAQ lub research')
+    return (str(section[0]), faq_nodes[0], research)
+
+
+def non_list_content(html):
+    soup = BeautifulSoup(html, 'html.parser')
+    main = soup.select_one('main')
+    if main is None:
+        raise ValueError('Brak treści centrum')
+    for node in main.select('#najwazniejsze-artykuly .hub-article-list, #najwazniejsze-artykuly .hub-featured, .hub-actions a[download]'):
+        node.decompose()
+    for link in main.select('a'):
+        link.unwrap()
+    return ' '.join(main.get_text(' ', strip=True).split())
+
+
 def permits_legacy_manual_research(file, changed=False):
-    if changed:
-        return False
     resolved = file.resolve()
     allowed_parent = resolved.parent in {REPO_ROOT, REPO_ROOT / '_site'}
-    return allowed_parent and resolved.name in LEGACY_FAQ_FILES
+    if not allowed_parent or resolved.name not in LEGACY_FAQ_FILES:
+        return False
+    if not changed:
+        return True
+    try:
+        baseline = subprocess.run(
+            ['git', 'show', f'HEAD:{resolved.name}'], cwd=REPO_ROOT,
+            capture_output=True, text=True, check=True,
+        ).stdout
+        current = resolved.read_text(encoding='utf-8')
+        return faq_identity(current) == faq_identity(baseline) and non_list_content(current) == non_list_content(baseline)
+    except (OSError, subprocess.SubprocessError, ValueError, KeyError, TypeError):
+        return False
 
 
 def validate(file, changed=False):

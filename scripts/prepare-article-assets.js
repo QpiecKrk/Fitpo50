@@ -36,7 +36,7 @@ function main() {
   }
   const assetsDir = path.resolve(args.from || path.dirname(file));
   const article = JSON.parse(fs.readFileSync(file, 'utf8'));
-  const result = prepareArticleMedia(article, { assetsDir, mutate: false, ensureVariants: false });
+  const result = prepareArticleMedia(article, { assetsDir, mutate: false, ensureVariants: false, profile: args.profile });
   if (!result.ok) {
     result.errors.forEach((error) => console.error(`[FAIL] ${error}`));
     process.exit(1);

@@ -1,0 +1,455 @@
+{
+  "version": 1,
+  "transaction_id": "article-bezdech-senny-po-50-objawy-1794296641128-9380",
+  "validation_profile": "technical",
+  "generated_at": "2026-11-10T08:44:24+01:00",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "bezdech-senny-po-50-objawy",
+  "source_package_sha256": "1262935ba696c3fa7f654e0dc276c0e7c27ec922c8768f01edf0d7628b4de673",
+  "url": "https://fitpo50.pl/bezdech-senny-po-50-objawy.html",
+  "manifest_file": "data/reports/article-publications/bezdech-senny-po-50-objawy.json",
+  "validation_receipt": "8548c51597a688b18ad462630f0fac58611dbf5c41f462223022a454d9dfbdb4",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "SCHEMA_VALIDATION",
+    "MIRROR_SYNC",
+    "PREDEPLOY_STAGING",
+    "TECHNICAL_PREVIEW_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "bezdech-senny-po-50-objawy.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727",
+      "bytes": 49459
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "20c7a013e97ffe6a2423fecb444c1039c93dc28ce258a321f515d2304ebd4310",
+      "after_sha256": "27bb2ca2a3bb8e80f091d7110cf393131a97b2280445c9c0be6c5da9567afee1",
+      "bytes": 119892
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "66446d6867c6181409202262c17641daeafdb3a6dc1633a9f59f0e1ab9faccea",
+      "after_sha256": "a7ed29a2e69b9fffb2b37d8e6ddf406933a6610401d7c00831b0637d2234f873",
+      "bytes": 167813
+    },
+    {
+      "path": "zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "46c36246924bb96e0212b3f9455f6799996e26d3428bced90061b6a67641bba3",
+      "after_sha256": "269f24fe90fe8dd2ba376378a6f2bdf8e6cc1f0d7c8d1448075f5970e4195089",
+      "bytes": 63922
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "250ab06375e773ccc1e4eea829fd8d3197a9123cef4d81dd9db719c1654d252d",
+      "after_sha256": "390d55d98fe483722150ee26011aa49a96bbf26bdb87de9ef572878b01c08e55",
+      "bytes": 20959
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "c1a2264348bb94f324369023dcb7ea01b0e90758f24b793c349edafd431ca6ed",
+      "after_sha256": "20ac6b8f6cb0b3611636c280c7bf3a1515d36b85f611e4e34576569b460e8b4f",
+      "bytes": 40973
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "7a31b7e5ed9ca50fd8d8915117578cc4b78d54fd949009b2797ff13d9bde0092",
+      "after_sha256": "dd9c1461d1cc2aab4f2110e32bc05f8f141f179e8f0b8cd325267b7f0feb4c5e",
+      "bytes": 949170
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "40fb6bfd33ad2cca73721d8563a10cddeca800978370b1d54affa194aad6f7d7",
+      "after_sha256": "349a6bc968bb1f66b73a7aed0cc159e55e620d5533ec7e121b76d034c7353bcf",
+      "bytes": 995580
+    },
+    {
+      "path": "assets/pdf/bezdech-senny-po-50-objawy.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118",
+      "bytes": 460023
+    },
+    {
+      "path": "data/crosslink-suggestions/bezdech-senny-po-50-objawy.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e0a76aec7b23811f21d042ecb211b96a83a25c388fba565db71c812b9887b63f",
+      "bytes": 1297
+    },
+    {
+      "path": "data/reports/article-preview/bezdech-senny-po-50-objawy.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0746d75d907d507fa9b2116a2a61cabc4056ac0e10cf95a36a52a712f5a8ee9f",
+      "bytes": 18970
+    },
+    {
+      "path": "data/reports/article-preview/bezdech-senny-po-50-objawy.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9b3fc442766dd00a0c60d87560763b62a494d7101daf0a587ed74731fa447b4f",
+      "bytes": 348
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "e3dd3b1fddd64d6f8231fba51b524ea1d6de3b6bb3b6fea23f9f153c0e1dfe22",
+      "after_sha256": "0ae03056ede79b526f2999fe0fa6421893e48e916aa72b69cfc1132e0127a6de",
+      "bytes": 72227
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "7c921583c5aa59efe9643b8dfab7dec87e7926bb0cc605c29f0292bbb2cba31f",
+      "after_sha256": "5205fd01bd6141bef9e4461701e4773ae993bc06daa8da77759d49f2ccf9145c",
+      "bytes": 7956
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "997d854edd476b6e5f035b231cf638b3851e5ccd9fb6d26faa89c6701bab9d1a",
+      "after_sha256": "64effc914130d8f66f9dd45d5b5f03606a1c85c9f2f06f0fefe6d2a10dbba63c",
+      "bytes": 3879
+    },
+    {
+      "path": "_site/bezdech-senny-po-50-objawy.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727",
+      "bytes": 49459
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "20c7a013e97ffe6a2423fecb444c1039c93dc28ce258a321f515d2304ebd4310",
+      "after_sha256": "27bb2ca2a3bb8e80f091d7110cf393131a97b2280445c9c0be6c5da9567afee1",
+      "bytes": 119892
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "66446d6867c6181409202262c17641daeafdb3a6dc1633a9f59f0e1ab9faccea",
+      "after_sha256": "a7ed29a2e69b9fffb2b37d8e6ddf406933a6610401d7c00831b0637d2234f873",
+      "bytes": 167813
+    },
+    {
+      "path": "_site/zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "46c36246924bb96e0212b3f9455f6799996e26d3428bced90061b6a67641bba3",
+      "after_sha256": "269f24fe90fe8dd2ba376378a6f2bdf8e6cc1f0d7c8d1448075f5970e4195089",
+      "bytes": 63922
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "250ab06375e773ccc1e4eea829fd8d3197a9123cef4d81dd9db719c1654d252d",
+      "after_sha256": "390d55d98fe483722150ee26011aa49a96bbf26bdb87de9ef572878b01c08e55",
+      "bytes": 20959
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "c1a2264348bb94f324369023dcb7ea01b0e90758f24b793c349edafd431ca6ed",
+      "after_sha256": "20ac6b8f6cb0b3611636c280c7bf3a1515d36b85f611e4e34576569b460e8b4f",
+      "bytes": 40973
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "7a31b7e5ed9ca50fd8d8915117578cc4b78d54fd949009b2797ff13d9bde0092",
+      "after_sha256": "dd9c1461d1cc2aab4f2110e32bc05f8f141f179e8f0b8cd325267b7f0feb4c5e",
+      "bytes": 949170
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "40fb6bfd33ad2cca73721d8563a10cddeca800978370b1d54affa194aad6f7d7",
+      "after_sha256": "349a6bc968bb1f66b73a7aed0cc159e55e620d5533ec7e121b76d034c7353bcf",
+      "bytes": 995580
+    },
+    {
+      "path": "_site/assets/pdf/bezdech-senny-po-50-objawy.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118",
+      "bytes": 460023
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/bezdech-senny-po-50-objawy.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e0a76aec7b23811f21d042ecb211b96a83a25c388fba565db71c812b9887b63f",
+      "bytes": 1297
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "39d89438447064a31a9b51bc1c5fef6a4599cd166d32adc702921f2efa174786",
+      "bytes": 45755
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "39d89438447064a31a9b51bc1c5fef6a4599cd166d32adc702921f2efa174786",
+      "bytes": 45755
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a744a3b49d5241fb63421df3011c13c22666e8419da99b46f1ae6593ffe7b674",
+      "bytes": 75592
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a744a3b49d5241fb63421df3011c13c22666e8419da99b46f1ae6593ffe7b674",
+      "bytes": 75592
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3e97c7a25a550a0de8b6c6716c02ea9d9700e227d94aeef31e1e7cf447b828f1",
+      "bytes": 132238
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3e97c7a25a550a0de8b6c6716c02ea9d9700e227d94aeef31e1e7cf447b828f1",
+      "bytes": 132238
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f0b8203ff13e7f3806d2e8b3c8a668299752be6395e0f3a9e95531c58947d9dd",
+      "bytes": 67025
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f0b8203ff13e7f3806d2e8b3c8a668299752be6395e0f3a9e95531c58947d9dd",
+      "bytes": 67025
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b81d73e2746c39ce6415f88a31337a824040ba393c2ceb3752b886c9d59f8f27",
+      "bytes": 104838
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b81d73e2746c39ce6415f88a31337a824040ba393c2ceb3752b886c9d59f8f27",
+      "bytes": 104838
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ddde8b548bc5c7a8d0d64a8474d4d5e1008de2dd0e5b9cdc9e39197c6b41f8dd",
+      "bytes": 175146
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ddde8b548bc5c7a8d0d64a8474d4d5e1008de2dd0e5b9cdc9e39197c6b41f8dd",
+      "bytes": 175146
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8ab37b0d64e3177fdef114e0c70da06fc37c33d7411f6c5adc2720eb10e33c65",
+      "bytes": 81104
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8ab37b0d64e3177fdef114e0c70da06fc37c33d7411f6c5adc2720eb10e33c65",
+      "bytes": 81104
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "73b3f72700e9983e9ba25b0ecac8800b0191bb97186c8d50bfea0df5614a4d06",
+      "bytes": 140074
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "73b3f72700e9983e9ba25b0ecac8800b0191bb97186c8d50bfea0df5614a4d06",
+      "bytes": 140074
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9a63e935c8b0fe87b52a1d26458189569fcf40c35e8b81ae5afc0e4dd09d7441",
+      "bytes": 193556
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9a63e935c8b0fe87b52a1d26458189569fcf40c35e8b81ae5afc0e4dd09d7441",
+      "bytes": 193556
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8a34cf4af620979e6f06c01a638353763d99094e461e57445552ab329095c847",
+      "bytes": 40480
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8a34cf4af620979e6f06c01a638353763d99094e461e57445552ab329095c847",
+      "bytes": 40480
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d5e16f72c09e74cae63733dde8570250e651106428100ecea8e0e487380d5a84",
+      "bytes": 62468
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d5e16f72c09e74cae63733dde8570250e651106428100ecea8e0e487380d5a84",
+      "bytes": 62468
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c0b6c95a5e979a2b94c45ed16aabb6c4144a13b383073e37dd2c3f242582c9df",
+      "bytes": 135043
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c0b6c95a5e979a2b94c45ed16aabb6c4144a13b383073e37dd2c3f242582c9df",
+      "bytes": 135043
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f7cdb3e44c52d5b22b8aa873646c0c4667bd0d7ae87b141954e4d132ab4f8b1d",
+      "bytes": 49378
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f7cdb3e44c52d5b22b8aa873646c0c4667bd0d7ae87b141954e4d132ab4f8b1d",
+      "bytes": 49378
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "89d9637029b1eb50b19c60b438f15f7bc4209af3516ea8e379e169dd0cd2ea98",
+      "bytes": 76728
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "89d9637029b1eb50b19c60b438f15f7bc4209af3516ea8e379e169dd0cd2ea98",
+      "bytes": 76728
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cf82acc4069e135b8f772a3122d10b07080b2d687b947709719a7d50cdeb4afe",
+      "bytes": 139736
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "cf82acc4069e135b8f772a3122d10b07080b2d687b947709719a7d50cdeb4afe",
+      "bytes": 139736
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "46ff05210c29ecba60cd65564770f9827bef2a6d77f6a9b8933b58d5550064fe",
+      "bytes": 77710
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "46ff05210c29ecba60cd65564770f9827bef2a6d77f6a9b8933b58d5550064fe",
+      "bytes": 77710
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f953f9327e5ce15e979a301080c5d03482418c63ebb8721d16f451f26e9803f2",
+      "bytes": 129818
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f953f9327e5ce15e979a301080c5d03482418c63ebb8721d16f451f26e9803f2",
+      "bytes": 129818
+    },
+    {
+      "path": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c1e0aa88963991af61585ecb3d195829f49ae248a54b4470d235ed12f0bfdcd",
+      "bytes": 204875
+    },
+    {
+      "path": "_site/assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5c1e0aa88963991af61585ecb3d195829f49ae248a54b4470d235ed12f0bfdcd",
+      "bytes": 204875
+    }
+  ],
+  "files_count": 61
+}

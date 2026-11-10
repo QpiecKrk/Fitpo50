@@ -50,15 +50,16 @@ test('real change-time fixture reports all known intake problems in one dry-run'
   assert.equal(fs.readFileSync(FIXTURE, 'utf8'), before);
 });
 
-test('article:add --dry-run returns every fixture problem as structured JSON with exit 20', () => {
+test('article:add --dry-run returns technical fixture problems without editorial gates', () => {
   const result = spawnSync(process.execPath, [
     'scripts/article-add.js', '--dry-run', '--json', '--file', FIXTURE, '--assets-dir', path.join(ROOT, 'assets'),
   ], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(result.status, 20, `${result.stdout}\n${result.stderr}`);
   const report = JSON.parse(result.stdout);
   assert.equal(report.status, 'BLOCKED');
-  assert.ok(report.summary.errors >= 4);
+  assert.ok(report.summary.errors >= 1);
   assert.ok(report.diagnostics.every((item) => item.path && item.class && item.error_code));
+  assert.ok(report.diagnostics.every((item) => !/evidence|faq|logic_links/i.test(item.path)));
 });
 
 test('dry-run przekazuje wyjątek SEO i kończy READY bez promocji repozytorium', () => {
@@ -88,6 +89,6 @@ test('dry-run przekazuje wyjątek SEO i kończy READY bez promocji repozytorium'
 
 test('dry-run documentation states fail-fast behavior instead of promising the whole chain', () => {
   const registry = fs.readFileSync(path.join(ROOT, 'docs/command-registry.md'), 'utf8');
-  assert.match(registry, /Najpierw zbiera błędy JSON-u, źródeł i FAQ/);
+  assert.match(registry, /Jeden zbiorczy audyt techniczny JSON-u i plików/);
   assert.doesNotMatch(registry, /--dry-run --json` przechodzi cały łańcuch/);
 });

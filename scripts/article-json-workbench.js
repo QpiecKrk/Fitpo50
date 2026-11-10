@@ -12,11 +12,14 @@ const {
   reportPathForJson,
   safeSlug,
   sha256File,
+  preparationCodeIdentity,
+  preparationIdentity,
 } = require('./lib/article-json-artifact');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { validateScope } = require('./lib/article-scope-guard');
 const { packageIdentity } = require('./lib/package-identity');
 const { warsawIso } = require('./lib/time');
+const { auditPackage } = require('./package-audit');
 
 const ROOT = process.cwd();
 
@@ -135,6 +138,11 @@ function runStagesWithScope(definitions, workingFile, runner = runStage) {
 }
 
 function buildStageDefinitions(workingFile, assetsDir, options = {}) {
+  if (options.profile === 'technical') return [
+    { label: 'Lokalne linkowanie bez zmiany treści', command: 'node', args: ['scripts/prepare-article-architecture.js', '--file', workingFile, '--write', 'true', '--profile', 'technical'] },
+    { label: 'Pakiet mediów: techniczny manifest', command: 'node', args: ['scripts/prepare-article-media.js', '--file', workingFile, '--assets-dir', assetsDir, '--write', 'true', '--ensure-variants', 'false', '--profile', 'technical'] },
+    { label: 'Końcowy preflight technicznego manifestu', command: 'node', args: ['scripts/article-preflight.js', '--file', workingFile, '--assets-dir', assetsDir, '--profile', 'technical'] },
+  ];
   const evidenceArgs = ['scripts/verify-article-evidence.js', '--file', workingFile, '--write', 'true'];
   if (options.cacheFile) evidenceArgs.push('--cache-file', options.cacheFile);
   if (options.httpFixture) evidenceArgs.push('--http-fixture', options.httpFixture);
@@ -317,6 +325,7 @@ function main() {
     return;
   }
   const sourcePackageState = packageIdentity(sourceFile, assetsDir, original);
+  const technical = args.profile === 'technical';
   const slug = safeSlug(original.slug || fallbackSlug);
   if (!slug) throw new Error('Brak poprawnego slug w JSON-ie i nazwie pliku.');
   const outputDir = args['output-dir'] ? outputBaseDir : path.join(outputBaseDir, slug);
@@ -347,11 +356,20 @@ function main() {
     if (fs.existsSync(htmlPath) && !args.force) {
       blockers.push(`Slug ${slug} już istnieje jako ${htmlPath}. Domyślne force=false blokuje przygotowanie aktualizacji.`);
     }
+    if (technical) {
+      const audit = args['audit-report'] ? parseJson(path.resolve(args['audit-report'])) : auditPackage({ file: sourceFile, 'assets-dir': assetsDir, profile: 'technical', force: args.force });
+      if (audit.profile !== 'technical' || audit.package_sha256 !== sourcePackageState.hash || audit.exit_code !== 0) {
+        Object.values(audit.by_owner || {}).flat().forEach((item) => blockers.push(`${item.path}: ${item.message}`));
+        if (!blockers.length) blockers.push('Brak aktualnego technicznego PASS dla tej paczki.');
+        stages.push({ label: 'Zbiorczy audyt techniczny', status: 'FAIL', exit_code: audit.exit_code === 30 ? 30 : 20, stdout: '', stderr: blockers.join('\n') });
+      }
+    }
     if (!blockers.length) {
       const definitions = buildStageDefinitions(workingFile, assetsDir, {
         cacheFile: args['cache-file'],
         httpFixture: args['http-fixture'],
         preverified,
+        profile: args.profile,
       });
       const mediaIndex = definitions.findIndex((item) => item.label.startsWith('Pakiet mediów:'));
       const beforeMedia = mediaIndex >= 0 ? definitions.slice(0, mediaIndex) : definitions;
@@ -393,7 +411,7 @@ function main() {
       failure_kind: status === STATUSES.CONTENT_READY ? '' : failureKind,
       at: warsawIso(),
       reason: status === STATUSES.CONTENT_READY
-        ? 'Wszystkie bramki treści JSON przeszły; nadal nie utworzono HTML.'
+        ? (technical ? 'Audyt techniczny i przygotowanie pakietu przeszły; HTML/PDF wymagają stagingu.' : 'Wszystkie bramki treści JSON przeszły; nadal nie utworzono HTML.')
         : blockers[0],
     });
     const packageState = status === STATUSES.CONTENT_READY
@@ -401,6 +419,11 @@ function main() {
       : null;
     const report = {
       version: 2,
+      validation_profile: technical ? 'technical' : 'editorial',
+      ...(technical && status === STATUSES.CONTENT_READY ? {
+        preparation_code_sha256: preparationCodeIdentity(),
+        preparation_identity: preparationIdentity(ROOT, original, sourcePackageState.hash, { force: args.force, keepRevisions: String(args['keep-revisions'] || 'false') === 'true' }),
+      } : {}),
       generated_at: generatedAt,
       status,
       status_history: statusHistory,

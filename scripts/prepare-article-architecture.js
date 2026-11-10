@@ -32,7 +32,7 @@ function main() {
   const file = path.resolve(args.file);
   if (!fs.existsSync(file)) throw new Error(`Brak pliku: ${file}`);
   const article = JSON.parse(fs.readFileSync(file, 'utf8'));
-  const result = prepareArticleArchitecture(article, { root: process.cwd(), mutate: args.write });
+  const result = prepareArticleArchitecture(article, { root: process.cwd(), mutate: args.write, profile: args.profile });
   if (args.write) atomicWriteFileSync(file, `${JSON.stringify(article, null, 2)}\n`, 'utf8');
 
   console.log(`[ARTICLE-ARCHITECTURE] inventory=${result.inventory_count}`);

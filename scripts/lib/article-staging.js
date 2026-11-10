@@ -8,6 +8,47 @@ const { categoryFileFromKey, normalizeCategory } = require('./categories');
 const { createManagedTempDir, disposeTempWorkspace, readWorkspaceManifest } = require('./temp-workspace');
 const { validatePreviewReport } = require('./article-preview-report');
 const { warsawIso } = require('./time');
+const { preparationCodeIdentity, validationIdentity } = require('./article-json-artifact');
+
+const ARTICLE_RECEIPT_CODE = ['scripts/article-pipeline.js', 'scripts/lib/article-staging.js', 'scripts/validate-article-standard.js', 'scripts/article-contract-check.js', 'scripts/schema-validator.js', 'scripts/article-preview-gate.js', 'scripts/run-article-guard-diff.js', 'scripts/article-publish-guard.js', 'scripts/run-article-contract-diff.js'];
+
+function articleValidationIdentity(root, files, profile) {
+  const references = new Set();
+  for (const file of files.filter((name) => /^[^/]+\.html$/.test(name))) {
+    if (!fs.existsSync(path.join(root, file))) continue;
+    const raw = fs.readFileSync(path.join(root, file), 'utf8');
+    if (!/<body[^>]*class=["'][^"']*article-template/i.test(raw)) continue;
+    for (const match of raw.matchAll(/\b(?:href|src|srcset)=["']([^"']+)["']/g)) {
+      const name = match[1].split(',')[0].trim().split(/\s+/)[0].split(/[?#]/)[0].replace(/^\.\//, '').replace(/^\//, '');
+      if (name && !/^(?:https?:|mailto:|tel:|data:|javascript:|\/\/)/i.test(match[1]) && !name.split('/').includes('..')) references.add(name);
+    }
+  }
+  return validationIdentity(root, {
+    code: ARTICLE_RECEIPT_CODE,
+    inputs: [...files, ...references, 'package.json', 'package-lock.json', 'scripts/config', 'article-template-bento.html', 'article.css', 'style.css'],
+    parameters: { profile, preparationCode: preparationCodeIdentity(root), checks: ['article:guard:diff', 'article:contract:diff', 'schema:validate'] },
+  });
+}
+
+function reusableArticleChecks(root, selected) {
+  const publicFiles = selected.filter(require('./change-scope').isArticlePath);
+  const slugs = [...new Set(selected.map((file) => file.match(/^(?:_site\/)?([^/]+)\.html$/)?.[1])
+    .filter(Boolean)
+    .filter((slug) => fs.existsSync(path.join(root, publicationManifestPath(slug)))))];
+  if (!publicFiles.length || !slugs.length) return false;
+  const covered = new Set();
+  for (const slug of slugs) {
+    try {
+      const manifest = readJson(path.join(root, publicationManifestPath(slug)));
+      if (manifest.status !== 'PUBLISHED' || manifest.validation_profile !== 'technical' || !manifest.validation_receipt
+        || !manifest.gates.includes('SCHEMA_VALIDATION')) return false;
+      const files = manifest.files.map((entry) => entry.path);
+      if (manifest.validation_receipt !== articleValidationIdentity(root, files, 'technical')) return false;
+      files.forEach((file) => covered.add(file));
+    } catch (_error) { return false; }
+  }
+  return publicFiles.every((file) => covered.has(file));
+}
 
 const STAGING_DEPENDENCY_DIRECTORIES = new Set(['scripts', 'assets', 'data', '_site', 'templates', 'docs', 'dist']);
 const EXCLUDED_TOP_LEVEL = new Set(['.git', 'node_modules', '.tmp', 'output', 'tmp']);
@@ -317,7 +358,20 @@ function validatePublicationSet(root, article, { requireManifest = false } = {})
   return { slug, categoryFile, files: [...new Set(required)], exactPairs };
 }
 
-function writePublicationManifest({ stageRoot, article, candidates, baseline, transactionId }) {
+function validationProfileForFile(filePath, root = process.cwd()) {
+  const relative = path.relative(fs.realpathSync(root), fs.realpathSync(filePath)).replace(/\\/g, '/');
+  const slug = relative.replace(/^_site\//, '').replace(/\.html$/, '');
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || !relative.endsWith('.html')) return 'editorial';
+  try {
+    const manifest = readJson(path.join(root, publicationManifestPath(slug)));
+    const entry = manifest.files?.find((item) => item.path === relative);
+    return manifest.slug === slug && manifest.status === 'PUBLISHED'
+      && manifest.validation_profile === 'technical' && entry?.after_sha256 === sha256File(filePath)
+      ? 'technical' : 'editorial';
+  } catch (_error) { return 'editorial'; }
+}
+
+function writePublicationManifest({ stageRoot, article, candidates, baseline, transactionId, profile = 'editorial', sourcePackageHash = '' }) {
   const slug = assertSafeName(article?.slug, 'Slug');
   const manifestRelative = publicationManifestPath(slug);
   const files = changedFiles(stageRoot, candidates, baseline)
@@ -338,19 +392,22 @@ function writePublicationManifest({ stageRoot, article, candidates, baseline, tr
   const payload = {
     version: 1,
     transaction_id: transactionId,
+    validation_profile: profile,
     generated_at: warsawIso(),
     status: 'PUBLISHED',
     operation,
     slug,
+    ...(sourcePackageHash ? { source_package_sha256: sourcePackageHash } : {}),
     url: `https://fitpo50.pl/${slug}.html`,
     manifest_file: manifestRelative,
+    ...(profile === 'technical' ? { validation_receipt: articleValidationIdentity(stageRoot, files.map((entry) => entry.path), profile) } : {}),
     gates: [
       'CONTENT_READY',
       'ARTICLE_PREFLIGHT',
       'MEDIA_MANIFEST',
       'ARTICLE_CONTRACT',
+      ...(profile === 'technical' ? ['SCHEMA_VALIDATION'] : []),
       'MIRROR_SYNC',
-      'NEWS_INTEGRITY',
       'PREDEPLOY_STAGING',
       'TECHNICAL_PREVIEW_DESKTOP_MOBILE_PDF',
       'POST_PROMOTION_VALIDATION',
@@ -674,5 +731,8 @@ module.exports = {
   snapshotCandidates,
   stagingGitEnvironment,
   validatePublicationSet,
+  validationProfileForFile,
+  articleValidationIdentity,
+  reusableArticleChecks,
   writePublicationManifest,
 };

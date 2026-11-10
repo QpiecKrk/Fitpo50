@@ -9,6 +9,8 @@ const { inspectArticlePackage } = require('./article-package-intake');
 const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { sha256File } = require('./lib/article-json-artifact');
 const { EXIT_CODES } = require('./lib/article-pipeline-status');
+const { auditPackage } = require('./package-audit');
+const { packageIdentity } = require('./lib/package-identity');
 
 const ROOT = process.cwd();
 
@@ -123,7 +125,24 @@ function runDryRun(args, dependencies = {}) {
   const assetsDir = path.resolve(args['assets-dir'] || path.dirname(file));
   const inputHash = fs.existsSync(file) ? sha256File(file) : '';
   if (!fs.existsSync(file)) return { version: 1, status: 'BLOCKED', input_sha256: inputHash, diagnostics: [diagnostic('REQUIRES_WRITER', 'WRITER', 'RULE_FILE_MISSING', `Brak pliku: ${file}`)], summary: { errors: 1, warnings: 0 } };
-  const diagnostics = dependencies.validateInput ? dependencies.validateInput(file, assetsDir) : validateInput(file, assetsDir, dependencies);
+  const technical = args.profile === 'technical';
+  let audit;
+  let diagnostics;
+  if (technical) {
+    audit = args['audit-report'] ? JSON.parse(fs.readFileSync(path.resolve(args['audit-report']), 'utf8'))
+      : (dependencies.auditPackage || auditPackage)({ ...args, file, 'assets-dir': assetsDir, profile: 'technical' });
+    if (args['audit-report']) audit.report_file = path.resolve(args['audit-report']);
+    const identity = audit.exit_code === 0 ? packageIdentity(file, assetsDir, JSON.parse(fs.readFileSync(file, 'utf8'))) : null;
+    if (audit.profile !== 'technical' || (identity && audit.package_sha256 !== identity.hash)) {
+      throw new Error('Raport audytu technicznego nie odpowiada bieżącej paczce.');
+    }
+    diagnostics = Object.values(audit.by_owner || {}).flat().map((item) => diagnostic(
+      item.owner === 'CODEX' ? 'FIXABLE_LOCAL' : 'REQUIRES_WRITER',
+      audit.exit_code === 30 ? 'ENVIRONMENT' : item.owner,
+      audit.exit_code === 30 ? 'RULE_ENVIRONMENT' : item.code,
+      item.message, item.path,
+    ));
+  } else diagnostics = dependencies.validateInput ? dependencies.validateInput(file, assetsDir) : validateInput(file, assetsDir, dependencies);
   const blocking = diagnostics.filter((item) => item.severity === 'ERROR');
   if (blocking.length) {
     const environment = blocking.some((item) => item.owner === 'ENVIRONMENT' || item.rule === 'RULE_ENVIRONMENT');
@@ -136,6 +155,10 @@ function runDryRun(args, dependencies = {}) {
   try {
     const outputDir = path.join(workspace, 'ready');
     const workbenchArgs = ['scripts/article-json-workbench.js', '--file', file, '--assets-dir', assetsDir, '--output-dir', outputDir, '--cache-file', path.join(workspace, 'evidence-cache.json'), '--force', 'true'];
+    if (technical) {
+      workbenchArgs.push('--profile', 'technical');
+      if (audit.report_file) workbenchArgs.push('--audit-report', audit.report_file);
+    }
     if (args['http-fixture']) workbenchArgs.push('--http-fixture', path.resolve(args['http-fixture']));
     const workbench = spawn('node', workbenchArgs, { cwd: ROOT, encoding: 'utf8' });
     if (workbench.status !== 0) {

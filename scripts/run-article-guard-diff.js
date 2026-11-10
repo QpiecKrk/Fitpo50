@@ -44,6 +44,8 @@ function isArticleHtml(file) {
 }
 
 function readChangedFiles() {
+  const selected = require('./lib/change-scope').selectedFiles();
+  if (selected) return selected.filter((file) => fs.existsSync(file));
   const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
   if (primary.status === 0) return parseNameStatus(primary.stdout);
   const fallback = run('git', ['diff', '--name-status', 'HEAD~1..HEAD']);

@@ -7,7 +7,7 @@ const crypto = require('crypto');
 const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { inspectPreparedArtifact, safeSlug, sha256File } = require('./lib/article-json-artifact');
+const { inspectPreparedArtifact, preparationIdentity, safeSlug, sha256File } = require('./lib/article-json-artifact');
 const {
   EXIT_CODES,
   classifyPipelineFailure,
@@ -18,7 +18,6 @@ const {
 } = require('./lib/article-pipeline-status');
 const { atomicWriteFileSync } = require('./lib/atomic-file');
 const { articleOperationInHead } = require('./lib/article-publication-state');
-const { createManagedTempDir, disposeTempWorkspace } = require('./lib/temp-workspace');
 const { MAX_REPAIR_ATTEMPTS, readAttemptState, recordRepairFailure } = require('./lib/article-repair-attempts');
 const { packageIdentity } = require('./lib/package-identity');
 const { auditPackage, printReport: printPackageAuditReport } = require('./package-audit');
@@ -81,29 +80,6 @@ function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
-function earlyEvidenceAudit(source, args, runCommand = run) {
-  const workspace = createManagedTempDir({
-    prefix: 'fitpo50-early-evidence-',
-    type: 'article-json-workbench',
-    projectRoot: ROOT,
-  });
-  const copy = path.join(workspace, path.basename(source));
-  fs.copyFileSync(source, copy);
-  try {
-    const commandArgs = [
-      'scripts/verify-article-evidence.js', '--file', copy,
-      '--write', 'true', '--refresh', 'true',
-      '--cache-file', path.join(workspace, 'evidence-cache.json'),
-    ];
-    if (args['http-fixture']) commandArgs.push('--http-fixture', path.resolve(args['http-fixture']));
-    const result = runCommand('node', commandArgs);
-    if (result?.status === 0 && fs.existsSync(copy)) result.verifiedJson = fs.readFileSync(copy, 'utf8');
-    return result;
-  } finally {
-    disposeTempWorkspace(workspace, { status: 'COMPLETED' });
-  }
-}
-
 function auditMessages(packageReport, evidenceResult) {
   const messages = Object.values(packageReport.by_owner || {}).flatMap((items) => (items || [])
     .filter((item) => item && item.message)
@@ -162,14 +138,16 @@ function expectedPreparedPath(source, outputDir = '') {
   }
 }
 
-function packageHashesMatch(source, sourceAssetsDir, preparedFile) {
+function packageHashesMatch(source, sourceAssetsDir, preparedFile, profile = '', options = {}) {
   if (!preparedFile || !fs.existsSync(preparedFile)) return false;
   const inspected = inspectPreparedArtifact(preparedFile, ROOT);
   if (!inspected.ok || path.resolve(inspected.report.source_file || '') !== path.resolve(source)) return false;
+  if (profile && inspected.report.validation_profile !== profile) return false;
   if (inspected.report.source_sha256 !== sha256File(source)) return false;
   const sourceArticle = readJson(source);
   const currentSourcePackage = packageIdentity(source, sourceAssetsDir, sourceArticle);
   if (!inspected.report.source_package_sha256 || inspected.report.source_package_sha256 !== currentSourcePackage.hash) return false;
+  if (profile === 'technical' && inspected.report.preparation_identity !== preparationIdentity(options.root || ROOT, sourceArticle, currentSourcePackage.hash, { force: options.force === true, keepRevisions: options.keepRevisions === true })) return false;
   const entries = Array.isArray(inspected.json?.media_manifest?.entries) ? inspected.json.media_manifest.entries : [];
   if (!entries.length) return false;
   for (const entry of entries) {
@@ -223,10 +201,17 @@ function executeArticleAddCore(args, dependencies = {}) {
     return EXIT_CODES.SUCCESS;
   }
   if (!args.file) throw contentBlocked('Podaj --file <draft.fitpo50.json>.');
-  const source = path.resolve(args.file);
+  let source = path.resolve(args.file);
   if (!fs.existsSync(source)) throw contentBlocked(`Brak pliku: ${source}`);
-  const assetsDir = path.resolve(args['assets-dir'] || path.dirname(source));
-  const sourcePreparedAtStart = inspectPreparedArtifact(source, root);
+  let assetsDir = path.resolve(args['assets-dir'] || path.dirname(source));
+  let sourcePreparedAtStart = inspectPreparedArtifact(source, root);
+  if (!sourcePreparedAtStart.ok && sourcePreparedAtStart.report?.validation_profile === 'technical'
+    && sourcePreparedAtStart.errors.length === 1 && sourcePreparedAtStart.errors[0].startsWith('Kod lub konfiguracja przygotowania')
+    && fs.existsSync(sourcePreparedAtStart.report.source_file || '')) {
+    source = path.resolve(sourcePreparedAtStart.report.source_file);
+    assetsDir = path.dirname(source);
+    sourcePreparedAtStart = inspectPreparedArtifact(source, root);
+  }
 
   if (boolOpt(args.status, false)) {
     const statusSlug = detectSlug(source);
@@ -241,24 +226,28 @@ function executeArticleAddCore(args, dependencies = {}) {
     throw environmentFailure('Nie można wykonać obowiązkowego package:audit: pakiet CONTENT_READY nie ma zachowanego źródłowego draftu.');
   }
   const auditAssetsDir = sourcePreparedAtStart.ok ? path.dirname(auditSource) : assetsDir;
-  const auditReport = runAudit({ file: auditSource, 'assets-dir': auditAssetsDir }, dependencies.packageAuditDependencies || {});
-  const evidenceResult = dependencies.auditEvidence
-    ? dependencies.auditEvidence(auditSource, args)
-    : (dependencies.runCommand ? { status: 0, stdout: '', stderr: '' } : earlyEvidenceAudit(auditSource, args));
-  const combinedAuditMessages = auditMessages(auditReport, evidenceResult);
+  const auditReport = runAudit({ file: auditSource, 'assets-dir': auditAssetsDir, profile: 'technical', force: args.force }, { root, ...(dependencies.packageAuditDependencies || {}) });
+  // article:add odbiera paczkę technicznie. Weryfikacja dowodów jest osobnym zadaniem.
+  const combinedAuditMessages = auditMessages(auditReport);
   if (!boolOpt(args.json, false)) (dependencies.printPackageAuditReport || printPackageAuditReport)(auditReport);
-  if (auditReport.exit_code !== EXIT_CODES.SUCCESS || evidenceResult.status !== 0) {
+  if (auditReport.exit_code !== EXIT_CODES.SUCCESS) {
     if (!boolOpt(args.json, false) && combinedAuditMessages.length) {
       console.error(`[ARTICLE-ADD][EARLY_JSON_AUDIT] ${combinedAuditMessages.length} błędów przed mediami i renderami:`);
       combinedAuditMessages.forEach((message) => console.error(`- ${message}`));
     }
     if (boolOpt(args.json, false)) console.log(JSON.stringify(packageAuditAsDryRunReport(auditReport), null, 2));
     else console.error(`[ARTICLE-ADD][PACKAGE_AUDIT_BLOCKED] Etap mediów i renderów nie został uruchomiony. Raport: ${auditReport.report_file}`);
-    if (auditReport.exit_code === EXIT_CODES.ENVIRONMENT_FAILURE
-      || (auditReport.exit_code === EXIT_CODES.SUCCESS && evidenceResult.status === EXIT_CODES.ENVIRONMENT_FAILURE)) {
+    if (auditReport.exit_code === EXIT_CODES.ENVIRONMENT_FAILURE) {
       return EXIT_CODES.ENVIRONMENT_FAILURE;
     }
     return EXIT_CODES.CONTENT_BLOCKED;
+  }
+
+  if (sourcePreparedAtStart.ok && sourcePreparedAtStart.report.validation_profile === 'technical'
+    && !packageHashesMatch(auditSource, auditAssetsDir, source, 'technical', { root, force: boolOpt(args.force, false), keepRevisions: boolOpt(args['keep-revisions'], false) })) {
+    source = auditSource;
+    assetsDir = auditAssetsDir;
+    sourcePreparedAtStart = inspectPreparedArtifact(source, root);
   }
 
   const slug = detectSlug(source);
@@ -273,7 +262,8 @@ function executeArticleAddCore(args, dependencies = {}) {
   };
 
   if (boolOpt(args['dry-run'], false)) {
-    const dryArgs = ['scripts/article-dry-run.js', '--file', source, '--assets-dir', assetsDir];
+    const dryArgs = ['scripts/article-dry-run.js', '--file', source, '--assets-dir', assetsDir, '--profile', 'technical'];
+    if (auditReport.report_file && fs.existsSync(auditReport.report_file)) dryArgs.push('--audit-report', auditReport.report_file);
     if (boolOpt(args.json, false)) dryArgs.push('--json');
     if (args['http-fixture']) dryArgs.push('--http-fixture', path.resolve(args['http-fixture']));
     if (context.allowOverwriteSeoPatches) dryArgs.push('--allow-overwrite-seo-patches');
@@ -282,7 +272,8 @@ function executeArticleAddCore(args, dependencies = {}) {
     return Number(result.status);
   }
 
-  const sourcePrepared = sourcePreparedAtStart;
+  const sourcePrepared = sourcePreparedAtStart.ok && sourcePreparedAtStart.report.validation_profile === 'technical' ? sourcePreparedAtStart : { ok: false };
+  if (sourcePreparedAtStart.ok && !sourcePrepared.ok) throw contentBlocked('Pakiet przygotowano w innym profilu. Podaj oryginalną paczkę, aby przygotować ją technicznie.');
   const sourceArticle = readJson(source);
   const prompts = Array.isArray(sourceArticle.image_prompts_v4)
     ? sourceArticle.image_prompts_v4
@@ -297,26 +288,15 @@ function executeArticleAddCore(args, dependencies = {}) {
   let preparedFile = sourcePrepared.ok ? source : expectedPreparedPath(source, args['output-dir']);
   if (sourcePrepared.ok) {
     console.log('[ARTICLE-ADD] Faza 1/3: wejście jest niezmienionym pakietem CONTENT_READY — pomijam ponowne przygotowanie.');
-  } else if (packageHashesMatch(source, assetsDir, preparedFile)) {
-    console.log('[ARTICLE-ADD] Faza 1/3: REUSED — JSON i obrazy nie zmieniły się od ostatniego CONTENT_READY.');
+  } else if (packageHashesMatch(source, assetsDir, preparedFile, 'technical', { root, force: context.force, keepRevisions: boolOpt(args['keep-revisions'], false) })) {
+    console.log('[ARTICLE-ADD] Faza 1/3: REUSED — zgodne hashe danych, kodu, konfiguracji i parametry przygotowania.');
   } else {
-    console.log('[ARTICLE-ADD] Faza 1/3: treść, źródła, FAQ, intencja, linki i media.');
-    const prepareArgs = ['scripts/article-json-workbench.js', '--file', source, '--assets-dir', assetsDir, '--force', context.force ? 'true' : 'false'];
-    let evidenceWorkspace = '';
-    if (evidenceResult.verifiedJson) {
-      evidenceWorkspace = createManagedTempDir({ prefix: 'fitpo50-evidence-proof-', type: 'article-json-workbench', projectRoot: root, slug });
-      const preverifiedFile = path.join(evidenceWorkspace, `${slug}.fitpo50.json`);
-      atomicWriteFileSync(preverifiedFile, evidenceResult.verifiedJson, 'utf8');
-      prepareArgs.push('--preverified-file', preverifiedFile);
-    }
+    console.log('[ARTICLE-ADD] Faza 1/3: przygotowanie techniczne, lokalne linkowanie i manifest mediów.');
+    const prepareArgs = ['scripts/article-json-workbench.js', '--file', source, '--assets-dir', assetsDir, '--force', context.force ? 'true' : 'false', '--profile', 'technical'];
+    if (auditReport.report_file && fs.existsSync(auditReport.report_file)) prepareArgs.push('--audit-report', auditReport.report_file);
     if (args['output-dir']) prepareArgs.push('--output-dir', path.resolve(args['output-dir']));
     if (args['keep-revisions']) prepareArgs.push('--keep-revisions', args['keep-revisions']);
-    let prepared;
-    try {
-      prepared = runCommand('node', prepareArgs);
-    } finally {
-      if (evidenceWorkspace) disposeTempWorkspace(evidenceWorkspace, { status: prepared?.status === 0 ? 'COMPLETED' : 'FAILED' });
-    }
+    const prepared = runCommand('node', prepareArgs);
     printChildOutput(prepared);
     ensureSuccessfulStart(prepared, 'Przygotowanie JSON-u');
     if (prepared.status !== 0) {
@@ -413,7 +393,6 @@ module.exports = {
   boolOpt,
   executeArticleAdd,
   executeArticleAddCore,
-  earlyEvidenceAudit,
   expectedPreparedPath,
   packageHashesMatch,
   packageAuditAsDryRunReport,

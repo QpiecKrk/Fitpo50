@@ -319,19 +319,20 @@ function validateStrategy(article, errors) {
   return { intent, primary, supporting };
 }
 
-function validateExistingLinks(article, inventory, errors) {
+function validateExistingLinks(article, inventory, errors, options = {}) {
   const validTargets = new Set(inventory.map((item) => item.file));
   const found = [];
   const seenTargets = new Set();
   collectParagraphs(article).forEach((paragraph) => {
     for (const match of paragraph.html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+      if (options.profile === 'technical' && /^(?:https?:\/\/|mailto:|tel:|#)/i.test(match[1])) continue;
       const target = normalizeHref(match[1]);
       const anchor = stripTags(match[2]);
       if (target === `${article.slug}.html`) errors.push(`${paragraph.location}: link nie może prowadzić do bieżącego artykułu (${target}).`);
-      if (seenTargets.has(target)) errors.push(`${paragraph.location}: adres ${target} może wystąpić najwyżej raz w treści artykułu.`);
+      if (options.profile !== 'technical' && seenTargets.has(target)) errors.push(`${paragraph.location}: adres ${target} może wystąpić najwyżej raz w treści artykułu.`);
       seenTargets.add(target);
       if (!validTargets.has(target)) errors.push(`${paragraph.location}: cel linku nie istnieje w lokalnym inventory BlogPosting (${target || match[1]}).`);
-      if (!isNaturalAnchor(anchor)) errors.push(`${paragraph.location}: anchor „${anchor}” jest generyczny albo nienaturalny.`);
+      if (options.profile !== 'technical' && !isNaturalAnchor(anchor)) errors.push(`${paragraph.location}: anchor „${anchor}” jest generyczny albo nienaturalny.`);
       if (/^centrum-/i.test(target)) {
         const approved = article.topic_center_approval?.status === 'APPROVED_BY_USER'
           && article.topic_center_approval?.center_url === target;
@@ -426,8 +427,9 @@ function prepareArticleArchitecture(article, options = {}) {
   const errors = [];
   const warnings = [];
   const inventory = options.inventory || buildArticleInventory(root);
-  const strategy = validateStrategy(article, errors);
-  const existing = validateExistingLinks(article, inventory, errors);
+  const technical = options.profile === 'technical';
+  const strategy = technical ? { primary: String(article.primary_keyword || ''), supporting: article.supporting_keywords || [], intent: article.search_intent || '' } : validateStrategy(article, errors);
+  const existing = validateExistingLinks(article, inventory, errors, options);
   if (Array.isArray(article.internal_link_plan)) {
     errors.push(...validateInternalLinkPlan(article, existing).errors);
   }
@@ -466,7 +468,7 @@ function prepareArticleArchitecture(article, options = {}) {
     ...collectParagraphs(article).map((item) => item.plain),
   ].join(' ');
   const articleTokens = unique(tokens(primaryContent));
-  const cannibalization = detectCannibalization(article, inventory, root);
+  const cannibalization = technical ? [] : detectCannibalization(article, inventory, root);
   const distinction = article.intent_differentiation || {};
   if (cannibalization.length) {
     const compared = normalizeHref(distinction.compared_url || '');
@@ -512,7 +514,7 @@ function prepareArticleArchitecture(article, options = {}) {
     warnings.push(`LOW_CONTEXTUAL_LINK_COUNT: potwierdzono ${usedTargets.size} naturalnych, unikalnych linków; to ostrzeżenie, nie bloker.`);
   }
 
-  const centerAssessment = assessCenter(article);
+  const centerAssessment = technical ? { proposed: false, fit: 'NOT_ASSESSED' } : assessCenter(article);
   const incomingSuggestions = buildIncomingSuggestions(article, inventory, articleTokens);
   if (incomingSuggestions.length < 2) {
     warnings.push(`Znaleziono tylko ${incomingSuggestions.length} mocnych kandydatów do późniejszego linku przychodzącego; nie uzupełniono listy słabymi stronami.`);
@@ -536,7 +538,7 @@ function prepareArticleArchitecture(article, options = {}) {
     article.incoming_link_suggestions = incomingSuggestions;
     article.topic_center_assessment = centerAssessment;
     article.intent_audit = {
-      status: result.ok ? 'PASS' : 'BLOCKED',
+      status: technical ? 'NOT_IN_SCOPE' : (result.ok ? 'PASS' : 'BLOCKED'),
       inventory_count: inventory.length,
       primary_keyword: strategy.primary,
       search_intent: strategy.intent,

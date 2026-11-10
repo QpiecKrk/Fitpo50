@@ -17,6 +17,8 @@ function run(cmd, args) {
 }
 
 function readChangedFiles() {
+  const selected = require('./lib/change-scope').selectedFiles();
+  if (selected) return selected.filter((file) => fs.existsSync(file));
   const diff = run('git', ['diff', '--name-only', 'origin/main...HEAD']);
   if (diff.status !== 0) {
     const msg = String(diff.stderr || diff.stdout || '').trim();

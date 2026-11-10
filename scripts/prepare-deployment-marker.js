@@ -9,7 +9,7 @@ const { canonicalFromHtml, modifiedDates } = require('./lib/deployment-live-veri
 const { categoryFileFromKey, normalizeCategory } = require('./lib/categories');
 const { warsawIso } = require('./lib/time');
 const { checkNewsFallbackSync } = require('./news-deploy-sync-gate');
-const { classifyChangedFiles, collectChangedFiles, isArticlePath, isNewsPath, withoutSitePrefix } = require('./lib/change-scope');
+const { assertResolvedScope, classifyChangedFiles, collectChangedFiles, isArticlePath, isNewsPath, newsInScope, selectedFiles, withoutSitePrefix } = require('./lib/change-scope');
 
 const PUBLICATION_STATE_DETAILS = path.join('.cache', 'deployment-publication-state.json');
 
@@ -17,11 +17,15 @@ function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
 }
 
-function publicFingerprint(siteDir) {
-  const required = ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'assets/data/search-index.json'];
+function publicFingerprint(siteDir, files = null) {
+  const required = files ? files.filter((file) => file.startsWith('_site/') && file !== '_site/deployment.json').map((file) => file.slice(6)).sort()
+    : ['index.html', 'porady.html', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'assets/data/search-index.json'];
   const entries = required.map((relativePath) => {
     const absolutePath = path.join(siteDir, relativePath);
-    if (!fs.existsSync(absolutePath)) throw new Error(`Brak wymaganego pliku eksportu: ${relativePath}`);
+    if (!fs.existsSync(absolutePath)) {
+      if (files) return `${relativePath}\0MISSING`;
+      throw new Error(`Brak wymaganego pliku eksportu: ${relativePath}`);
+    }
     return `${relativePath}\0${sha256(fs.readFileSync(absolutePath))}`;
   });
   return sha256(entries.join('\n'));
@@ -43,15 +47,7 @@ function readCachedNewsSnapshot(rootDir) {
     fallback_sha256: fallback.sha256,
     runtime_images: marker.news.runtime_images,
   };
-  const normalized = normalizeNewsSnapshot(snapshot);
-  const fallbackFile = path.join(rootDir, normalized.fallback.path);
-  if (!fs.existsSync(fallbackFile)) {
-    throw new Error(`NEWS_SNAPSHOT_STALE: brak lokalnego ${normalized.fallback.path}.`);
-  }
-  const localHash = sha256(fs.readFileSync(fallbackFile));
-  if (localHash !== normalized.fallback.sha256) {
-    throw new Error(`NEWS_SNAPSHOT_STALE: lokalny ${normalized.fallback.path} różni się od ostatniego markera.`);
-  }
+  normalizeNewsSnapshot(snapshot);
   return snapshot;
 }
 
@@ -65,8 +61,8 @@ function gitPublicationPaths(rootDir) {
   return new Set(result.stdout.toString('utf8').split('\0').filter(Boolean).map((file) => file.replace(/\\/g, '/')));
 }
 
-function publicationStateSnapshot(rootDir) {
-  const eligible = gitPublicationPaths(rootDir);
+function publicationStateSnapshot(rootDir, selected = null) {
+  const eligible = selected ? new Set(selected) : gitPublicationPaths(rootDir);
   const siteFiles = [...eligible]
     .filter((file) => file.startsWith('_site/') && file !== '_site/deployment.json')
     .filter((file) => {
@@ -125,7 +121,7 @@ function assertPreparedPublicationState(rootDir, marker) {
   if (!marker?.prepared_from_head || !marker?.publication_state_sha256) {
     throw new Error('deployment.json nie jest powiązany z HEAD i pełnym stanem publikacji. Uruchom npm run deployment:prepare.');
   }
-  const current = publicationStateSnapshot(rootDir);
+  const current = publicationStateSnapshot(rootDir, marker.release_files || null);
   if (current.fingerprint !== marker.publication_state_sha256) {
     const currentHead = gitLines(rootDir, ['rev-parse', 'HEAD'])[0] || 'UNKNOWN';
     const expectedFiles = readPublicationStateDetails(rootDir, marker.publication_state_sha256);
@@ -190,8 +186,8 @@ function ownedArtifactPaths(rootDir, file) {
   return new Set([file, `assets/pdf/${slug}.pdf`, ...images]);
 }
 
-function changedRootArticles(rootDir) {
-  const changed = new Set(changedDeploymentPaths(rootDir));
+function changedRootArticles(rootDir, selected = null) {
+  const changed = new Set(selected ? selected.map(normalizeDeploymentPath) : changedDeploymentPaths(rootDir));
   return blogPostingFiles(rootDir)
     .filter((file) => [...ownedArtifactPaths(rootDir, file)].some((artifact) => changed.has(artifact)))
     .sort((a, b) => a.localeCompare(b, 'pl'));
@@ -199,7 +195,13 @@ function changedRootArticles(rootDir) {
 
 // The last committed marker remains a release boundary even after origin/main
 // advances. Do not use origin/main as the only completeness check.
-function assertArticleInventoryComplete(rootDir, articles) {
+function assertArticleInventoryComplete(rootDir, articles, selected = null) {
+  if (selected) {
+    const included = new Set(articles.map((article) => article.file));
+    const missing = changedRootArticles(rootDir, selected).filter((file) => !included.has(file));
+    if (missing.length) throw new Error(`DEPLOYMENT_ARTICLES_INCOMPLETE: ${missing.join(', ')}`);
+    return;
+  }
   const git = (args) => {
     const result = spawnSync('git', args, { cwd: rootDir, encoding: 'utf8' });
     if (result.status !== 0) throw new Error(`Kontrola kompletności markera: git ${args.join(' ')}: ${result.stderr || result.stdout}`);
@@ -240,12 +242,16 @@ function articleDeploymentEntry(rootDir, file) {
     .filter((value) => fs.existsSync(path.join(rootDir, '_site', value)));
   const section = html.match(/<meta\b(?=[^>]*\bproperty=["']article:section["'])(?=[^>]*\bcontent=["']([^"']+)["'])[^>]*>/i)?.[1] || 'ciekawe';
   const categoryFile = categoryFileFromKey(normalizeCategory(section).key);
+  const isTopicCenter = fs.existsSync(path.join(rootDir, 'templates', 'topic-centers', file));
   const listingCandidates = ['index.html', 'porady.html', categoryFile, 'assets/data/search-index.json'];
   const listingPaths = listingCandidates.filter((relativePath) => {
     const listing = path.join(rootDir, '_site', relativePath);
     return fs.existsSync(listing) && fs.readFileSync(listing, 'utf8').includes(file);
   });
-  for (const requiredListing of ['porady.html', categoryFile, 'assets/data/search-index.json']) {
+  const requiredListings = isTopicCenter
+    ? ['assets/data/search-index.json']
+    : ['porady.html', categoryFile, 'assets/data/search-index.json'];
+  for (const requiredListing of requiredListings) {
     if (!listingPaths.includes(requiredListing)) throw new Error(`${file}: eksport nie zawiera artykułu w ${requiredListing}.`);
   }
   return {
@@ -323,23 +329,25 @@ function deploymentVerificationTargets(rootDir, changedFiles) {
 function prepareDeploymentMarker(rootDir, options = {}) {
   const siteDir = path.join(rootDir, '_site');
   if (!fs.existsSync(siteDir)) throw new Error('Brak katalogu _site. Najpierw wykonaj eksport.');
-  const articles = changedRootArticles(rootDir).map((file) => articleDeploymentEntry(rootDir, file));
-  assertArticleInventoryComplete(rootDir, articles);
-  const publicationState = publicationStateSnapshot(rootDir);
+  const releaseFiles = Array.isArray(options.changedFiles) ? selectedFiles(['--files-json', JSON.stringify(options.changedFiles)], {}) : null;
+  const articles = changedRootArticles(rootDir, releaseFiles).map((file) => articleDeploymentEntry(rootDir, file));
+  assertArticleInventoryComplete(rootDir, articles, releaseFiles);
+  const publicationState = publicationStateSnapshot(rootDir, releaseFiles);
   const news = normalizeNewsSnapshot(options.newsSnapshot);
   let changedFiles = options.changedFiles;
   if (!changedFiles) {
     try { changedFiles = collectChangedFiles(rootDir); }
     catch (_error) { changedFiles = changedDeploymentPaths(rootDir); }
   }
-  const changeClassification = classifyChangedFiles(changedFiles);
+  const changeClassification = assertResolvedScope(classifyChangedFiles(changedFiles));
   const marker = {
     version: 4,
     release_id: options.releaseId || crypto.randomUUID(),
     prepared_at: options.preparedAt || warsawIso(),
     prepared_from_head: gitLines(rootDir, ['rev-parse', 'HEAD'])[0] || '',
     publication_state_sha256: publicationState.fingerprint,
-    public_fingerprint_sha256: publicFingerprint(siteDir),
+    public_fingerprint_sha256: publicFingerprint(siteDir, releaseFiles),
+    ...(releaseFiles ? { release_files: releaseFiles, release_file_hashes: Object.fromEntries(releaseFiles.filter((file) => !['deployment.json', '_site/deployment.json'].includes(file)).map((file) => [file, fs.existsSync(path.join(rootDir, file)) ? sha256(fs.readFileSync(path.join(rootDir, file))) : null])) } : {}),
     change_scope: changeClassification.scopes,
     verification_targets: deploymentVerificationTargets(rootDir, changedFiles),
     news,
@@ -369,18 +377,19 @@ function runDeploymentPrepare(rootDir, options = {}) {
     }
   }
   const classification = Array.isArray(changedFiles)
-    ? classifyChangedFiles(changedFiles)
+    ? assertResolvedScope(classifyChangedFiles(changedFiles))
     : { full: true, scopes: ['full'] };
-  const newsSnapshot = classification.full || classification.scopes.includes('news')
-    ? newsSyncCheck({ root: rootDir })
-    : (readCachedNewsSnapshot(rootDir) || newsSyncCheck({ root: rootDir }));
+  const requiresNews = newsInScope(classification);
+  const newsSnapshot = requiresNews ? newsSyncCheck({ root: rootDir }) : readCachedNewsSnapshot(rootDir);
+  if (!newsSnapshot) throw new Error('NEWS_SNAPSHOT_MISSING: brak zapisanego snapshotu NEWS. Zakres bez NEWS nie uruchamia połączenia FTPS; przywróć ostatni marker wydania.');
   normalizeNewsSnapshot(newsSnapshot);
   return markerPrepare(rootDir, { ...markerOptions, ...(Array.isArray(changedFiles) ? { changedFiles } : {}), newsSnapshot });
 }
 
 if (require.main === module) {
   try {
-    const marker = runDeploymentPrepare(process.cwd());
+    const files = selectedFiles();
+    const marker = runDeploymentPrepare(process.cwd(), files ? { markerOptions: { changedFiles: files } } : {});
     console.log(`[DEPLOYMENT PREPARED] ${marker.release_id}`);
     console.log('Marker: deployment.json oraz _site/deployment.json');
   } catch (error) {

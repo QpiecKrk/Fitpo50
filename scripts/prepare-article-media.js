@@ -38,6 +38,7 @@ function main() {
     assetsDir,
     mutate: args.write,
     ensureVariants: args['ensure-variants'],
+    profile: args.profile,
   });
   if (args.write) atomicWriteFileSync(file, `${JSON.stringify(article, null, 2)}\n`, 'utf8');
   console.log(`[ARTICLE-MEDIA] directory=${assetsDir}`);

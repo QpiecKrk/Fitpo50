@@ -1,5 +1,5 @@
 // Shared by the PDF generator and its independent HTML/text comparison gate.
-const OMIT_FROM_PDF = '.hub-actions, .hub-breadcrumb, .hub-kicker, .hub-metrics, .hub-focus-card__icon, .hub-featured__arrow, .hub-article-link__cta, script, style, button';
+const OMIT_FROM_PDF = '.hub-actions, .hub-breadcrumb, .hub-kicker, .hub-hero__panel, .hub-metrics, .hub-focus-card__icon, .hub-featured__arrow, .hub-article-link__cta, script, style, button';
 
 async function prepareCenterPrint(page) {
   await page.evaluate((omit) => {

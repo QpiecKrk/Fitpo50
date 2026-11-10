@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
-const { canonicalFromHtml, modifiedDates, sha256, verifyDeployment } = require('./lib/deployment-live-verifier');
+const { canonicalFromHtml, heroAssetPaths, modifiedDates, sha256, verifyDeployment } = require('./lib/deployment-live-verifier');
 const { assertPreparedPublicationState, extractLocalAssetPaths, publicFingerprint } = require('./prepare-deployment-marker');
 
 function parseArgs(argv) {
@@ -21,12 +21,13 @@ function parseArgs(argv) {
   return out;
 }
 
-function verificationTargetsForMarker(baseUrl, marker) {
+function verificationTargetsForMarker(baseUrl, marker, extraTargets = []) {
   const normalizedBase = String(baseUrl || '').replace(/\/$/, '');
   const targets = [{ url: `${normalizedBase}/deployment.json`, mode: 'marker' }];
-  for (const target of Array.isArray(marker?.verification_targets) ? marker.verification_targets : []) {
+  for (const target of [...(Array.isArray(marker?.verification_targets) ? marker.verification_targets : []), ...extraTargets]) {
     const relative = String(target?.path || '').replace(/^\/+/, '');
     if (!relative || relative.includes('..')) continue;
+    if (targets.some((entry) => entry.url === `${normalizedBase}/${relative}`)) continue;
     targets.push({
       url: `${normalizedBase}/${relative}`,
       mode: target.mode,
@@ -36,10 +37,17 @@ function verificationTargetsForMarker(baseUrl, marker) {
   return targets;
 }
 
-function verifyTargetedRelease({ expectedCommit, remoteCommit, marker, responses, baseUrl }) {
+function articleHeroTargets(marker, siteRoot = path.resolve('_site')) {
+  return (marker.articles || []).flatMap((article) => {
+    const html = fs.readFileSync(path.join(siteRoot, article.file || `${article.slug}.html`), 'utf8');
+    return heroAssetPaths(html).map((file) => ({ path: file, mode: 'sha256', sha256: sha256(fs.readFileSync(path.join(siteRoot, file))) }));
+  });
+}
+
+function verifyTargetedRelease({ expectedCommit, remoteCommit, marker, responses, baseUrl, extraTargets = [] }) {
   const errors = [];
   const checks = [];
-  const targets = verificationTargetsForMarker(baseUrl, marker);
+  const targets = verificationTargetsForMarker(baseUrl, marker, extraTargets);
   const markerTarget = targets[0];
   const liveMarker = responses.get(markerTarget.url);
   const expectedMarker = Buffer.from(`${JSON.stringify(marker, null, 2)}\n`);
@@ -124,6 +132,7 @@ function expectedBaseFiles(baseUrl) {
 }
 
 function newsUrlsFor(baseUrl, marker) {
+  if (!require('./lib/change-scope').newsInScope(marker)) return [];
   if (Number(marker?.version || 0) < 3 || !marker?.news) return [];
   const paths = [marker.news.fallback?.path, ...(marker.news.runtime_images || []).map((entry) => entry?.path)]
     .filter(Boolean);
@@ -177,7 +186,7 @@ function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const marker = JSON.parse(fs.readFileSync('deployment.json', 'utf8'));
-  const fingerprint = publicFingerprint(path.join(process.cwd(), '_site'));
+  const fingerprint = publicFingerprint(path.join(process.cwd(), '_site'), marker.release_files || null);
   if (marker.public_fingerprint_sha256 !== fingerprint) throw new Error('deployment.json nie odpowiada bieżącemu eksportowi _site. Uruchom npm run deployment:prepare.');
   assertPreparedPublicationState(process.cwd(), marker);
   const expectedCommit = args.commit || git(['rev-parse', 'HEAD']);
@@ -193,23 +202,24 @@ async function main() {
       expectedPdfSha256: article.pdf_sha256,
     }))
     : localArticlesForCommit(expectedCommit, args.baseUrl);
-  const baseFiles = expectedBaseFiles(args.baseUrl);
+  const targeted = marker.version >= 4 && !((marker.change_scope || []).includes('full'));
+  const extraTargets = targeted ? articleHeroTargets(marker) : [];
+  const baseFiles = targeted ? [] : expectedBaseFiles(args.baseUrl);
   const newsUrls = newsUrlsFor(args.baseUrl, marker);
   const cacheBustedNewsUrls = new Set(newsUrls);
-  const targeted = marker.version >= 4 && !((marker.change_scope || []).includes('full'));
   let result;
   for (let attempt = 0; attempt <= args.retries; attempt += 1) {
     console.log(`[LIVE] Próba ${attempt + 1}/${args.retries + 1}.`);
     const remoteCommit = git(['ls-remote', 'origin', 'refs/heads/main']).split(/\s+/)[0] || '';
     const urls = targeted
-      ? verificationTargetsForMarker(args.baseUrl, marker).map((target) => target.url)
+      ? verificationTargetsForMarker(args.baseUrl, marker, extraTargets).map((target) => target.url)
       : urlsFor(args.baseUrl, articles, newsUrls);
     const responses = await collect(urls, args.timeoutMs, {
       cacheBustedUrls: cacheBustedNewsUrls,
       releaseId: marker.release_id,
     });
     result = targeted
-      ? verifyTargetedRelease({ expectedCommit, remoteCommit, marker, responses, baseUrl: args.baseUrl })
+      ? verifyTargetedRelease({ expectedCommit, remoteCommit, marker, responses, baseUrl: args.baseUrl, extraTargets })
       : verifyDeployment({
         expectedCommit,
         remoteCommit,
@@ -252,4 +262,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { cacheBustUrl, collect, isPublicRootHtmlPath, newsUrlsFor, normalizeFinalResult, parseArgs, verificationTargetsForMarker, verifyTargetedRelease };
+module.exports = { articleHeroTargets, cacheBustUrl, collect, isPublicRootHtmlPath, newsUrlsFor, normalizeFinalResult, parseArgs, verificationTargetsForMarker, verifyTargetedRelease };

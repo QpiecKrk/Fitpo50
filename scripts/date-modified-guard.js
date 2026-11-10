@@ -8,6 +8,8 @@ function run(cmd, args) {
 }
 
 function changedFiles() {
+  const selected = require('./lib/change-scope').selectedFiles();
+  if (selected) return selected;
   const diff = run('git', ['diff', '--name-only', 'origin/main...HEAD']);
   if (diff.status !== 0) {
     const msg = String(diff.stderr || diff.stdout || '').trim();
@@ -97,7 +99,7 @@ function main() {
 
   const errors = [];
   for (const file of files) {
-    const prevRaw = getFileAtRef('origin/main', file);
+    const prevRaw = getFileAtRef(process.env.FITPO50_PUSH_BASE || 'origin/main', file);
     const nextRaw = getFileAtRef('HEAD', file);
     if (!prevRaw || !nextRaw) continue;
     if (!hasSubstantiveChange(prevRaw, nextRaw)) continue;

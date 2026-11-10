@@ -1,5 +1,14 @@
 const crypto = require('node:crypto');
 
+function heroAssetPaths(html) {
+  const hero = String(html || '').match(/<div class="article-hero[\s\S]*?<\/div>/i)?.[0] || '';
+  const paths = [...hero.matchAll(/<(?:source|img)\b[^>]*\bsrc(?:set)?="([^"]+)"/gi)]
+    .map((match) => match[1].split(',')[0].trim().split(/\s+/)[0].replace(/^\.\//, '')).filter((value) => value.startsWith('assets/'));
+  const expected = ['avif', 'webp', 'jpg'].map((extension) => paths.find((value) => value.endsWith(`.${extension}`)));
+  if (expected.some((value) => !value)) throw new Error('Hero artykułu nie ma kompletu AVIF/WebP/JPG.');
+  return expected;
+}
+
 function sha256(value) {
   return crypto.createHash('sha256').update(Buffer.isBuffer(value) ? value : Buffer.from(String(value || ''))).digest('hex');
 }
@@ -58,6 +67,7 @@ function sitemapLastmod(xml, url) {
 }
 
 function expectedNewsFiles(marker, errors) {
+  if (!require('./change-scope').newsInScope(marker)) return [];
   if (Number(marker?.version || 0) < 3) return [];
   const news = marker?.news;
   if (!news || typeof news !== 'object') {
@@ -210,4 +220,4 @@ function verifyDeployment({ expectedCommit, remoteCommit, marker, responses, bas
   };
 }
 
-module.exports = { canonicalFromHtml, expectedNewsFiles, jpegDimensions, modifiedDates, sha256, sitemapLastmod, verifyDeployment };
+module.exports = { canonicalFromHtml, expectedNewsFiles, heroAssetPaths, jpegDimensions, modifiedDates, sha256, sitemapLastmod, verifyDeployment };

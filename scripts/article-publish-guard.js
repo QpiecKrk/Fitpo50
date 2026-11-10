@@ -16,6 +16,8 @@ const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { pageKind } = require('./lib/publication-page-kind');
+const { assertReleaseFiles } = require('./lib/change-scope');
+const crypto = require('crypto');
 
 const ROOT = process.cwd();
 
@@ -59,7 +61,7 @@ function detectChangedArticles(changedPaths) {
 }
 
 function runValidator(files) {
-  const res = spawnSync('node', ['scripts/validate-article-standard.js', ...files], {
+  const res = spawnSync('node', ['scripts/validate-article-standard.js', '--profile', 'auto', ...files], {
     cwd: ROOT,
     encoding: 'utf8',
   });
@@ -70,6 +72,32 @@ function runValidator(files) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  const staged = process.argv.includes('--staged');
+  if (staged) {
+    const diff = spawnSync('git', ['diff', '--cached', '--name-only', '--no-renames', '-z'], { cwd: ROOT, encoding: 'utf8' });
+    if (diff.status !== 0) throw new Error('Nie można odczytać indeksu Git.');
+    args.changed = diff.stdout.split('\0').filter(Boolean);
+    const hashes = new Map();
+    for (const file of args.changed) {
+      const blob = spawnSync('git', ['show', `:${file}`], { cwd: ROOT, encoding: null, maxBuffer: 100 * 1024 * 1024 });
+      const hash = blob.status === 0 ? crypto.createHash('sha256').update(blob.stdout).digest('hex') : null;
+      const local = fs.existsSync(path.join(ROOT, file)) ? crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, file))).digest('hex') : null;
+      if (hash !== local) throw new Error(`Staged różni się od kopii roboczej: ${file}. Hook nie sprawdzi innej zawartości.`);
+      hashes.set(file, hash);
+    }
+    require('./publish-article').assertSafeChanges(args.changed.map((file) => ({ file, code: hashes.get(file) === null ? 'D' : 'M' })));
+    if (args.changed.some((file) => ['deployment.json', '_site/deployment.json'].includes(file))) {
+      const read = (file) => spawnSync('git', ['show', `:${file}`], { cwd: ROOT, encoding: 'utf8' });
+      const source = read('deployment.json');
+      const mirror = read('_site/deployment.json');
+      if (source.status !== 0 || mirror.status !== 0 || source.stdout !== mirror.stdout) throw new Error('Niezgodne markery staged.');
+      assertReleaseFiles(JSON.parse(source.stdout), args.changed, (file) => hashes.get(file));
+    }
+  }
+  if (require('./lib/article-staging').reusableArticleChecks(ROOT, args.changed)) {
+    console.log('[REUSED] Article publish guard: aktualny wynik stagingu, zgodne dane, kod i konfiguracja.');
+    return;
+  }
   const changedArticles = detectChangedArticles(args.changed);
   if (!changedArticles.length) {
     console.log('[PASS] Article publish guard wrapper: brak zmienionych plikow artykulow.');
@@ -80,7 +108,7 @@ function main() {
   for (const rel of changedArticles) {
     targets.push(rel);
     const mirror = `_site/${rel}`;
-    if (exists(mirror)) targets.push(mirror);
+    if (exists(mirror) && args.changed.includes(mirror)) targets.push(mirror);
   }
 
   const status = runValidator(targets);
@@ -91,4 +119,6 @@ function main() {
   console.log(`\n[PASS] Article publish guard wrapper OK (artykuly: ${changedArticles.length}).`);
 }
 
-main();
+if (require.main === module) {
+  try { main(); } catch (error) { console.error(`[PRECOMMIT][FAIL] ${error.message}`); process.exitCode = 1; }
+}

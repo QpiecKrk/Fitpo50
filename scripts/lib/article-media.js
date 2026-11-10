@@ -34,13 +34,28 @@ function sha256(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 }
 
-function inspectImage(file) {
+function inspectImage(file, options = {}) {
   const identify = spawnSync('identify', ['-format', '%w %h', file], { encoding: 'utf8' });
+  if (identify.error || identify.signal) {
+    const error = new Error(`Nie można uruchomić odczytu obrazu ${path.basename(file)}: ${identify.error?.message || identify.signal}`);
+    error.code = 'IMAGE_INSPECT_ENVIRONMENT_FAILURE';
+    throw error;
+  }
   if (identify.status !== 0) {
     throw new Error(`Nie można odczytać obrazu ${path.basename(file)}: ${String(identify.stderr || identify.stdout || '').trim()}`);
   }
   const match = String(identify.stdout || '').trim().match(/^(\d+)\s+(\d+)$/);
   if (!match) throw new Error(`Niepoprawne wymiary obrazu: ${path.basename(file)}.`);
+  const width = Number(match[1]);
+  const height = Number(match[2]);
+  const metadata = {
+    width,
+    height,
+    aspect_ratio: Number((width / height).toFixed(4)),
+    bytes: fs.statSync(file).size,
+    sha256: sha256(file),
+  };
+  if (options.technicalOnly === true) return metadata;
   const signature = spawnSync('magick', [file, '-auto-orient', '-resize', '16x16!', '-colorspace', 'Gray', '-depth', '8', 'gray:-'], {
     encoding: null,
     maxBuffer: 1024 * 1024,
@@ -48,14 +63,8 @@ function inspectImage(file) {
   if (signature.status !== 0 || !Buffer.isBuffer(signature.stdout) || signature.stdout.length < 128) {
     throw new Error(`Nie można policzyć sygnatury wizualnej: ${path.basename(file)}.`);
   }
-  const width = Number(match[1]);
-  const height = Number(match[2]);
   return {
-    width,
-    height,
-    aspect_ratio: Number((width / height).toFixed(4)),
-    bytes: fs.statSync(file).size,
-    sha256: sha256(file),
+    ...metadata,
     perceptual_hash: signature.stdout.subarray(0, 256).toString('hex'),
   };
 }
@@ -370,6 +379,7 @@ function operationFor(article, options = {}) {
 
 function validateManifestStructure(article, options = {}) {
   const errors = [];
+  const technical = options.profile === 'technical';
   const manifest = article.media_manifest;
   if (!manifest || typeof manifest !== 'object') return { ok: false, errors: ['Brak media_manifest utworzonego lokalnie.'] };
   const entries = Array.isArray(manifest.entries) ? manifest.entries : [];
@@ -390,7 +400,7 @@ function validateManifestStructure(article, options = {}) {
   });
   if (!/^\d{4}-\d{2}-\d{2}T/.test(String(manifest.generated_at || ''))) errors.push('media_manifest: brak poprawnego generated_at.');
   entries.forEach((entry) => {
-    for (const field of ['filename_base', 'topic', 'technique', 'composition', 'purpose', 'source_file', 'alt', 'caption']) {
+    for (const field of technical ? ['filename_base', 'source_file', 'alt', 'caption'] : ['filename_base', 'topic', 'technique', 'composition', 'purpose', 'source_file', 'alt', 'caption']) {
       if (!String(entry?.[field] || '').trim()) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak ${field}.`);
     }
     if (!entry?.source?.sha256 || !entry?.source?.width || !entry?.source?.height) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak metadanych rzeczywistego źródła.`);
@@ -400,16 +410,16 @@ function validateManifestStructure(article, options = {}) {
       if (!variant?.file || !variant?.sha256 || !variant?.width || !variant?.height) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: niepełny wariant ${extension}.`);
       if (variant?.file !== `${entry.filename_base}.${extension}`) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: wariant ${extension} ma inną nazwę niż filename_base.`);
       if (variant?.width !== entry?.source?.width || variant?.height !== entry?.source?.height) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: wariant ${extension} ma inne wymiary niż źródło.`);
-      if (hammingHex(entry?.source?.perceptual_hash, variant?.perceptual_hash) > 14) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: wariant ${extension} może przedstawiać inny obraz.`);
+      if (!technical && hammingHex(entry?.source?.perceptual_hash, variant?.perceptual_hash) > 14) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: wariant ${extension} może przedstawiać inny obraz.`);
     });
-    if (manifest.version !== 3) {
+    if (!technical && manifest.version !== 3) {
       if (entry?.visual_review?.status !== VERIFIED_REVIEW || entry?.visual_review?.matches_topic !== true) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: brak zatwierdzonej kontroli wizualnej.`);
       validateVisualReview(entry?.visual_review || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
     }
-    (Array.isArray(entry?.evidence_source_urls) ? entry.evidence_source_urls : []).forEach((url) => {
+    (Array.isArray(entry?.evidence_source_urls) && !technical ? entry.evidence_source_urls : []).forEach((url) => {
       if (!articleSourceUrls.has(normalizedUrl(url))) errors.push(`media_manifest ${entry?.placement || 'UNKNOWN'}: źródło obrazu nie występuje w sources[]: ${url}`);
     });
-    if (manifest.version !== 3) validateExactDataReview(entry || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
+    if (!technical && manifest.version !== 3) validateExactDataReview(entry || {}, `media_manifest ${entry?.placement || 'UNKNOWN'}`, errors);
   });
   const hero = entries.find((entry) => entry.placement === 'hero');
   if (hero) {
@@ -427,7 +437,7 @@ function validateManifestStructure(article, options = {}) {
     if (image.alt !== entry.alt || image.caption !== entry.caption) errors.push(`${entry.placement}: alt lub podpis sekcji nie zgadza się z media_manifest.`);
     if (Number(image.width) !== Number(entry.source?.width) || Number(image.height) !== Number(entry.source?.height)) errors.push(`${entry.placement}: wymiary sekcji nie zgadzają się z media_manifest.`);
   });
-  for (let left = 0; left < entries.length; left += 1) {
+  for (let left = 0; !technical && left < entries.length; left += 1) {
     for (let right = left + 1; right < entries.length; right += 1) {
       if (entries[left]?.source?.sha256 === entries[right]?.source?.sha256) errors.push(`media_manifest: duplikat 1:1 ${entries[left].source_file} i ${entries[right].source_file}.`);
       else if (hammingHex(entries[left]?.source?.perceptual_hash, entries[right]?.source?.perceptual_hash) <= 3) errors.push(`media_manifest: niemal ten sam kadr ${entries[left].source_file} i ${entries[right].source_file}.`);
@@ -440,12 +450,13 @@ function prepareArticleMedia(article, options = {}) {
   const assetsDir = path.resolve(options.assetsDir || '.');
   const mutate = options.mutate === true;
   const ensureVariants = options.ensureVariants === true;
-  const imageInspector = options.inspectImage || inspectImage;
+  const technical = options.profile === 'technical';
+  const imageInspector = options.inspectImage || ((file) => inspectImage(file, { technicalOnly: technical }));
   const errors = [];
   const warnings = [];
   const created = [];
   const operation = operationFor(article, options);
-  const requiresVariantReview = operation === 'CREATE';
+  const requiresVariantReview = technical || operation === 'CREATE';
   if (!fs.existsSync(assetsDir) || !fs.statSync(assetsDir).isDirectory()) {
     return { ok: false, errors: [`Brak jednego katalogu pakietu mediów: ${assetsDir}.`], warnings, entries: [], created };
   }
@@ -484,7 +495,7 @@ function prepareArticleMedia(article, options = {}) {
       errors.push(`${placement}: filename_base musi być dokładną nazwą kebab-case bez rozszerzenia.`);
       continue;
     }
-    validateDescriptiveFields(prompt, placementContext(article, placement), placement, errors, articleSourceUrls, { deferVisualReview: requiresVariantReview });
+    if (!technical) validateDescriptiveFields(prompt, placementContext(article, placement), placement, errors, articleSourceUrls, { deferVisualReview: requiresVariantReview });
     const sourceName = selectSourceFile(prompt, assetsDir, errors);
     if (!sourceName) continue;
     if (mutate) prompt.source_file = sourceName;
@@ -498,7 +509,7 @@ function prepareArticleMedia(article, options = {}) {
     }
     const declaredRatio = String(prompt.aspect_ratio || '').trim();
     const actualRatioLabel = exactRatioLabel(source.width, source.height);
-    if (mutate && Math.abs(parseRatio(declaredRatio) - source.aspect_ratio) > 0.04) {
+    if (!technical && mutate && Math.abs(parseRatio(declaredRatio) - source.aspect_ratio) > 0.04) {
       warnings.push(`${base}: planowana proporcja ${declaredRatio || 'MISSING'} została zastąpiona rzeczywistą ${actualRatioLabel}; pliku nie przycięto.`);
       prompt.aspect_ratio = actualRatioLabel;
     }
@@ -537,7 +548,7 @@ function prepareArticleMedia(article, options = {}) {
         const variant = imageInspector(variantPath);
         entry.variants[extension] = { file: variantFile, ...variant };
         if (variant.width !== source.width || variant.height !== source.height) errors.push(`${base}: ${variantFile} ma inne wymiary niż źródło.`);
-        if (hammingHex(source.perceptual_hash, variant.perceptual_hash) > 14) errors.push(`${base}: ${variantFile} nie przedstawia tego samego obrazu co source_file; możliwy ukryty fallback.`);
+        if (!technical && hammingHex(source.perceptual_hash, variant.perceptual_hash) > 14) errors.push(`${base}: ${variantFile} nie przedstawia tego samego obrazu co source_file; możliwy ukryty fallback.`);
       } catch (error) {
         errors.push(error.message || String(error));
       }
@@ -547,7 +558,7 @@ function prepareArticleMedia(article, options = {}) {
     entries.push(entry);
   }
 
-  for (let left = 0; left < entries.length; left += 1) {
+  for (let left = 0; !technical && left < entries.length; left += 1) {
     for (let right = left + 1; right < entries.length; right += 1) {
       const a = entries[left];
       const b = entries[right];
@@ -557,8 +568,8 @@ function prepareArticleMedia(article, options = {}) {
   }
   const techniques = entries.map((entry) => normalize(entry.technique)).filter(Boolean);
   const compositions = entries.map((entry) => normalize(entry.composition)).filter(Boolean);
-  if (entries.length > 1 && new Set(techniques).size === 1) warnings.push('Wszystkie obrazy opisano tą samą techniką; spójna seria jest dozwolona, ale obejrzyj kadry pod kątem powtarzalności.');
-  if (entries.length > 1 && new Set(compositions).size === 1) warnings.push('Wszystkie obrazy mają ten sam opis kadru; nie blokuje to spójnej serii, ale rzeczywisty review musi wykluczyć powtarzalne ujęcia.');
+  if (!technical && entries.length > 1 && new Set(techniques).size === 1) warnings.push('Wszystkie obrazy opisano tą samą techniką; spójna seria jest dozwolona, ale obejrzyj kadry pod kątem powtarzalności.');
+  if (!technical && entries.length > 1 && new Set(compositions).size === 1) warnings.push('Wszystkie obrazy mają ten sam opis kadru; nie blokuje to spójnej serii, ale rzeczywisty review musi wykluczyć powtarzalne ujęcia.');
 
   const manifest = {
     version: requiresVariantReview ? 3 : 2,

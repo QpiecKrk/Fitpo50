@@ -1711,16 +1711,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.avif" type="image/avif">
-          <source srcset="./assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif" type="image/avif">
+          <source srcset="./assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Ile błonnika dziennie po 50? Normy i 30 g na talerzu — tabela</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Sprawdź polskie normy błonnika po 50. roku życia, tabelę produktów i ważonych porcji oraz przykład około 30 g. Zobacz, jak zwiększać ilość błonnika z rozwagą.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="ile-blonnika-dziennie-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Bezdech senny po 50: objawy, badania snu i kiedy do lekarza</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Objawy obturacyjnego bezdechu sennego po 50., także u kobiet: kiedy iść do POZ, czym różnią się poligrafia i polisomnografia oraz kiedy działać pilnie.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="bezdech-senny-po-50-objawy.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2517,10 +2517,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Ile błonnika dziennie po 50? Normy i 30 g na talerzu — tabela',
-        excerpt: 'Sprawdź polskie normy błonnika po 50. roku życia, tabelę produktów i ważonych porcji oraz przykład około 30 g. Zobacz, jak zwiększać ilość błonnika z rozwagą.',
-        image: './assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp',
-        url: 'ile-blonnika-dziennie-po-50.html'
+        title: 'Bezdech senny po 50: objawy, badania snu i kiedy do lekarza',
+        excerpt: 'Objawy obturacyjnego bezdechu sennego po 50., także u kobiet: kiedy iść do POZ, czym różnią się poligrafia i polisomnografia oraz kiedy działać pilnie.',
+        image: './assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp',
+        url: 'bezdech-senny-po-50-objawy.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2550,6 +2550,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Zdrowie',
+          title: 'Bezdech senny po 50: objawy, badania snu i kiedy do lekarza',
+          excerpt: 'Objawy obturacyjnego bezdechu sennego po 50., także u kobiet: kiedy iść do POZ, czym różnią się poligrafia i polisomnografia oraz kiedy działać pilnie.',
+          image: './assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp',
+          url: 'bezdech-senny-po-50-objawy.html'
+        },
+        {
           category: 'Jedzenie',
           title: 'Ile błonnika dziennie po 50? Normy i 30 g na talerzu — tabela',
           excerpt: 'Sprawdź polskie normy błonnika po 50. roku życia, tabelę produktów i ważonych porcji oraz przykład około 30 g. Zobacz, jak zwiększać ilość błonnika z rozwagą.',
@@ -2562,13 +2569,6 @@
           excerpt: 'Mit, że po 18:00 metabolizm się wyłącza, nie wyjaśnia chudnięcia. Pora jedzenia może coś zmieniać, ale nie przez magiczną godzinę. Sprawdź, co mówią badania.',
           image: './assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp',
           url: 'niejedzenie-po-18-a-chudniecie-mit.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Szumy uszne po 50: skąd się biorą i kiedy iść do lekarza',
-          excerpt: 'Skąd biorą się szumy uszne po 50-tce: słuch, ciśnienie, leki, stres. Kiedy to sygnał alarmowy i jak w Polsce dojść do laryngologa i badania słuchu.',
-          image: './assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp',
-          url: 'szumy-uszne-po-50-przyczyny.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

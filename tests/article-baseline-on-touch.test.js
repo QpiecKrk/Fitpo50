@@ -3,12 +3,77 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
+const { spawnSync } = require('node:child_process');
+const { createManagedTempDir, disposeTempWorkspace } = require('../scripts/lib/temp-workspace');
 
 const { validateFile } = require('../scripts/validate-article-standard');
 const { validateTopicCenter } = require('../scripts/lib/topic-center-contract');
 const contractDiff = require('../scripts/run-article-contract-diff');
 
 const ROOT = path.resolve(__dirname, '..');
+const CENTERS = ['centrum-bialka-po-50.html', 'centrum-cholesterolu-po-50.html', 'centrum-metabolizmu-po-50.html', 'centrum-nadcisnienia-po-50.html', 'centrum-snu-po-50.html', 'centrum-treningu-silowego-po-50.html'];
+
+function centerFixture(run) {
+  const root = createManagedTempDir({ prefix: 'fitpo50-faq-head-', type: 'center-faq-test', projectRoot: ROOT });
+  const git = (...args) => {
+    const result = spawnSync('git', args, { cwd: root, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    return result.stdout;
+  };
+  try {
+    git('init', '-q'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.test');
+    for (const name of fs.readdirSync(ROOT).filter((file) => file.endsWith('.html') && !CENTERS.includes(file))) {
+      fs.symlinkSync(path.join(ROOT, name), path.join(root, name));
+    }
+    for (const name of CENTERS) {
+      const baseline = spawnSync('git', ['show', `HEAD:${name}`], { cwd: ROOT, encoding: 'utf8' });
+      assert.equal(baseline.status, 0, baseline.stderr);
+      fs.writeFileSync(path.join(root, name), baseline.stdout);
+    }
+    git('add', '--', ...CENTERS); git('commit', '-qm', 'center fixture');
+    return run(root);
+  } finally { disposeTempWorkspace(root, { status: 'COMPLETED' }); }
+}
+
+function centerErrors(root, name) {
+  const python = `import importlib.util,json,pathlib,sys\nspec=importlib.util.spec_from_file_location('validator',sys.argv[1]); m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m); m.REPO_ROOT=pathlib.Path(sys.argv[2]).resolve(); print(json.dumps(m.validate(pathlib.Path(sys.argv[2],sys.argv[3]),changed=True)))`;
+  const result = spawnSync('python3', ['-c', python, path.join(ROOT, 'scripts/validate-topic-center.py'), root, name], { encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  return JSON.parse(result.stdout);
+}
+
+test('sześć centrów: zmiana listy i linków z FAQ identycznym z HEAD przechodzi', () => centerFixture((root) => {
+  for (const name of CENTERS) {
+    const file = path.join(root, name);
+    const html = fs.readFileSync(file, 'utf8');
+    const original = html.match(/class="hub-article-link" href="([^"]+)"/)[1];
+    const target = 'porady.html';
+    const changed = html.replace(`class="hub-article-link" href="${original}"`, `class="hub-article-link" href="${target}"`)
+      .replace(`"url": "https://fitpo50.pl/${original}"`, `"url": "https://fitpo50.pl/${target}"`);
+    assert.notEqual(changed, html);
+    fs.writeFileSync(file, changed);
+    assert.deepEqual(centerErrors(root, name), [], name);
+  }
+}));
+
+test('sześć centrów: zmiana FAQ, JSON-LD lub researchu blokuje wyjątek', () => centerFixture((root) => {
+  for (const name of CENTERS) {
+    const file = path.join(root, name);
+    const html = fs.readFileSync(file, 'utf8');
+    const question = html.match(/<div class="hub-faq-list"><article[^>]*><h3>([^<]+)<\/h3>/)[1];
+    const variants = [
+      html.replace(`<h3>${question}</h3>`, `<h3>${question} Zmiana</h3>`),
+      html.replace(/(<div class="hub-faq-list"><article[^>]*><h3>[^<]+<\/h3><p>)/, '$1Zmiana odpowiedzi. '),
+      html.replace(`"name": "${question}"`, `"name": "${question} Zmiana"`),
+      html.replace('"source_type": "manual_research"', '"source_type": "gsc"'),
+    ];
+    for (const variant of variants) {
+      assert.notEqual(variant, html, name);
+      fs.writeFileSync(file, variant);
+      assert.ok(centerErrors(root, name).some((error) => error.includes('FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY')), name);
+    }
+  }
+}));
 test('four-sentence GŁÓWNA 5 quick answer passes global and changed HTML validation', () => {
   const quickAnswerLimit = /Szybka odpowiedź musi zawierać 1-5 pełnych zdań/;
   const article = path.join(ROOT, 'trening-silowy-eliksir-mlodosci-po-50.html');
@@ -29,13 +94,13 @@ test('changed article still accepts four sentences after the 1-5 contract change
   assert.equal(changedAudit.errors.some((error) => /Szybka odpowiedź musi zawierać 1-5 pełnych zdań/.test(error)), false);
 });
 
-test('changed topic center cannot use the manual_research baseline', () => {
+test('changed topic center retains the manual_research baseline only with identical FAQ', () => {
   const center = path.join(ROOT, 'centrum-snu-po-50.html');
   const globalAudit = validateTopicCenter(center);
   const changedAudit = validateTopicCenter(center, { changed: true });
 
   assert.deepEqual(globalAudit.errors, []);
-  assert.match(changedAudit.errors.join('\n'), /FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY/);
+  assert.deepEqual(changedAudit.errors, []);
 });
 
 test('changed legacy article cannot use the legacy title-date tolerance', () => {

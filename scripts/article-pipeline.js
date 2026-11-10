@@ -179,9 +179,9 @@ function verifyMirrorPair(root, sourceRelative, mirrorRelative) {
   }
 }
 
-function runPostPromotionValidation(root, slug, article) {
-  run('Post-promotion mirror check', 'node', ['scripts/sync-site-assets-mirror.js', '--check', '--slug', slug]);
-  run('Post-promotion predeploy gate', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
+function runPostPromotionValidation(root, slug, article, profile = 'editorial') {
+  run('Post-promotion mirror check', 'node', ['scripts/sync-site-assets-mirror.js', '--check', '--slug', slug, '--profile', profile]);
+  run('Post-promotion predeploy gate', 'node', ['scripts/predeploy-gate.js', '--slug', slug, '--profile', profile]);
   verifyMirrorPair(root, `${slug}.html`, path.join('_site', `${slug}.html`));
   verifyMirrorPair(root, path.join('assets', 'pdf', `${slug}.pdf`), path.join('_site', 'assets', 'pdf', `${slug}.pdf`));
   verifyMirrorPair(root, 'llms-full.txt', path.join('_site', 'llms-full.txt'));
@@ -264,6 +264,9 @@ async function main() {
     throw contentBlocked(`Publikacja wymaga niezmienionego artefaktu CONTENT_READY:\n- ${prepared.errors.join('\n- ')}\nUżyj kanonicznego article:add; article:prepare-json służy tylko do korekty bez publikacji.`);
   }
   const parsedInput = parseJsonWithDiagnostics(input);
+  const profile = prepared.report.validation_profile || 'editorial';
+  if (args.profile && args.profile !== profile) throw contentBlocked('Profil publikacji nie zgadza się z raportem przygotowania.');
+  const technical = profile === 'technical';
 
   const category = args.category ? String(args.category) : '';
   const force = boolOpt(args.force, false);
@@ -336,6 +339,8 @@ async function main() {
         candidates,
         baseline,
         transactionId,
+        profile,
+        sourcePackageHash: prepared.report.source_package_sha256 || '',
       });
       console.log(`[MANIFEST] ${manifest.relative}: ${manifest.payload.operation}, ${manifest.payload.files_count} plików.`);
       const inputCleanup = {
@@ -370,7 +375,7 @@ async function main() {
         },
       });
       try {
-        runPostPromotionValidation(root, slug, parsedInput);
+        runPostPromotionValidation(root, slug, parsedInput, profile);
         transaction.verify();
         transaction.commit();
       } catch (error) {
@@ -404,12 +409,13 @@ async function main() {
   console.log(`[INFO] Working copy JSON: ${workingCopy}`);
   console.log(`[INFO] Source assets dir: ${assetsDir}`);
 
-  const common = ['scripts/import-article.js', '--file', workingCopy, '--faq-strict', 'true'];
+  const common = ['scripts/import-article.js', '--file', workingCopy, '--faq-strict', 'true', '--profile', profile];
   if (category) common.push('--category', category);
 
-  run('CONTENT_READY integrity gate', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
-  run('Prepare article assets (hero + sekcje)', 'node', ['scripts/prepare-article-assets.js', '--file', workingCopy, '--from', assetsDir]);
-  run('Precheck (strict FAQ)', 'node', [...common, '--precheck', 'true']);
+  if (!technical) run('CONTENT_READY integrity gate', 'node', ['scripts/json-fitpo50-gate-diff.js', '--file', workingCopy]);
+  else console.log('[TECHNICAL_INTEGRITY_PASS] CONTENT_READY i hashe paczki sprawdzone; bramki redakcyjne poza zakresem.');
+  run('Prepare article assets (hero + sekcje)', 'node', ['scripts/prepare-article-assets.js', '--file', workingCopy, '--from', assetsDir, '--profile', profile]);
+  run(technical ? 'Precheck techniczny' : 'Precheck (strict FAQ)', 'node', [...common, '--precheck', 'true']);
   run(
     'Import + walidacja + PDF + sync',
     'node',
@@ -424,33 +430,36 @@ async function main() {
   run('Sync meta description across head/schema', 'node', ['scripts/sync-article-head-descriptions.js', '--slug', slug]);
   run('Generate search index (source/_site)', 'node', ['scripts/generate-search-index.js', '--output', path.join('_site', 'assets', 'data', 'search-index.json')]);
   run('Generate llms-full (source/_site)', 'node', ['scripts/generate-llms-full.js', '--output', path.join('_site', 'llms-full.txt')]);
-  run('Article contract check (source/_site)', 'node', ['scripts/article-contract-check.js', `${slug}.html`, path.join('_site', `${slug}.html`)]);
-  run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug]);
-  const topologyWorkspace = createManagedTempDir({
-    prefix: `fitpo50-link-topology-${slug}-`,
-    type: 'article-link-topology-report',
-    projectRoot: resolveWorkspaceProjectRoot(root),
-    slug,
-  });
-  try {
-    run('Global link topology report', 'node', [
-      'scripts/global-link-topology-optimizer.js',
-      '--min-inbound', '2',
-      '--report-dir', topologyWorkspace,
-    ]);
-  } finally {
-    disposeTempWorkspace(topologyWorkspace, { status: 'COMPLETED' });
+  run('Article contract check (source/_site)', 'node', ['scripts/article-contract-check.js', `${slug}.html`, path.join('_site', `${slug}.html`), '--profile', profile]);
+  if (technical) run('Schema validation (article only)', 'node', ['scripts/schema-validator.js', '--diff', '--files-json', JSON.stringify([`${slug}.html`])]);
+  run('Sync assets mirror (_site)', 'node', ['scripts/sync-site-assets-mirror.js', '--slug', slug, '--profile', profile]);
+  if (!technical) {
+    const topologyWorkspace = createManagedTempDir({
+      prefix: `fitpo50-link-topology-${slug}-`,
+      type: 'article-link-topology-report',
+      projectRoot: resolveWorkspaceProjectRoot(root),
+      slug,
+    });
+    try {
+      run('Global link topology report', 'node', [
+        'scripts/global-link-topology-optimizer.js',
+        '--min-inbound', '2',
+        '--report-dir', topologyWorkspace,
+      ]);
+    } finally {
+      disposeTempWorkspace(topologyWorkspace, { status: 'COMPLETED' });
+    }
+    if (parallelTails) {
+      await runParallel('Post-import parallel checks', [
+        { label: 'Lint editorial placeholders (source HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--slug', slug] },
+        { label: 'Lint editorial placeholders (_site HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)] },
+      ]);
+    } else {
+      run('Lint editorial placeholders (source HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--slug', slug]);
+      run('Lint editorial placeholders (_site HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)]);
+    }
   }
-  if (parallelTails) {
-    await runParallel('Post-import parallel checks', [
-      { label: 'Lint editorial placeholders (source HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--slug', slug] },
-      { label: 'Lint editorial placeholders (_site HTML)', cmd: 'node', args: ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)] },
-    ]);
-  } else {
-    run('Lint editorial placeholders (source HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--slug', slug]);
-    run('Lint editorial placeholders (_site HTML)', 'node', ['scripts/lint-editorial-placeholders.js', '--file', path.join('_site', `${slug}.html`)]);
-  }
-  run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug]);
+  run('Predeploy gate (slug)', 'node', ['scripts/predeploy-gate.js', '--slug', slug, '--profile', profile]);
   console.log('\n[PREVIEW BUILD PASS] Wewnętrzny pipeline stagingowy zakończony; repozytorium publiczne nie zostało zmienione.');
   appendTimingReport('article-pipeline-staging-internal', stepTimings);
   return { workingCopy, artifactCleanup: null };

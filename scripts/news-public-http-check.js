@@ -43,6 +43,13 @@ async function checkPublicNewsImagesHttp(options = {}) {
 
 async function main() {
   try {
+    if (process.argv.includes('--release-scope')) {
+      const marker = JSON.parse(require('node:fs').readFileSync(require('node:path').join(process.cwd(), 'deployment.json'), 'utf8'));
+      if (!require('./lib/change-scope').newsInScope(marker)) {
+        console.log('[NOT_IN_SCOPE] NEWS: wydanie nie obejmuje modułu NEWS.');
+        return;
+      }
+    }
     const result = await checkPublicNewsImagesHttp();
     console.log(`[PASS] ${result.status}: ${result.checked} runtime wariantów NEWS zwraca HTTP 200.`);
   } catch (error) {

@@ -66,6 +66,8 @@ function uniqueFiles(files) {
 }
 
 function changedFiles(includeWorktree = false) {
+  const selected = require('./lib/change-scope').selectedFiles();
+  if (selected) return selected;
   const primary = run('git', ['diff', '--name-status', 'origin/main...HEAD']);
   if (primary.status === 0) {
     const files = parseNameStatus(primary.stdout);
@@ -131,7 +133,7 @@ function runTask(task) {
 
     const child = spawn(spec.cmd, spec.args, {
       cwd: process.cwd(),
-      env: process.env,
+      env: { ...process.env, ...(spec.args.includes('--test') ? { FITPO50_CHANGED_FILES_JSON: undefined, FITPO50_PUSH_BASE: undefined } : {}) },
       stdio: ['ignore', 'pipe', 'pipe'],
     });
 

@@ -1,16 +1,19 @@
 # ARTICLE STANDARD (FitPo50)
 
-Ten dokument definiuje kanoniczny standard artykułów. Obowiązuje dla wszystkich nowych publikacji oraz całych artykułów aktualizowanych dowolną ścieżką, w tym przez `popraw-seo` i `napraw paczkę N`, niezależnie od wielkości zmiany.
+Ten dokument definiuje standard przygotowania treści i technicznego dodania artykułów FitPo50. Portal prowadzi jedna osoba; kontrole dobieramy do zadania i rzeczywistego wpływu zmian.
 
-## Pełna walidacja nowych i aktualizowanych artykułów
+## Podział odpowiedzialności i kontroli
 
-- Każdy nowy artykuł i każdy artykuł zmieniany przez import, ręczną aktualizację, `popraw-seo` lub `napraw paczkę N` musi spełnić wszystkie aktualne wymagania tego dokumentu i przejść ten sam pełny zestaw bramek. Dotyczy to całej strony, także niezmienionych sekcji i stron otrzymujących link przychodzący w ramach zatwierdzonej naprawy. Wiek publikacji, wcześniejszy PASS ani drobna korekta title/meta nie zwalniają z żadnej bramki.
-- Zakres obejmuje logikę i kompletność treści; źródła i dowody; bezpieczeństwo; FAQ; SEO; dane strukturalne; techniczną kontrolę wariantów obrazów, wymiarów, altów i podpisów; automatyczny staging desktop/mobile i PDF; listingi, sitemap oraz zgodność z `_site`. Grzegorz zatwierdza obrazy przed przekazaniem paczki, a standardowy, niezmieniony szablon nie wymaga ponownego ręcznego oglądania przez Codexa.
-- Dla istniejącego HTML-a odtwórz roboczy pakiet walidacyjny z aktualnej treści, rzeczywistych mediów i zweryfikowanych źródeł, jeżeli wymaga go bramka nowych artykułów. Nie wymyślaj `evidence_claims`, `faq_research`, wyników kontroli obrazów ani innych deklaracji tylko po to, aby uzyskać PASS. Brak starego JSON-u nie uprawnia do pominięcia preflight treści, dowodów lub architektury.
-- Kontrole treści i dowodów oraz automatyczne walidatory techniczne są obowiązkowe. Ręczny przegląd layoutu jest dodatkowy tylko przy zmianie szablonu, CSS albo nietypowym komponencie.
-- Dla każdego URL-a zapisz wyniki wszystkich bramek, dowody kontroli oraz wersję lub hashe sprawdzonych plików. Brak wykonanej kontroli oznacza etap nieukończony; błąd blokuje publikację. Napraw wykryte problemy w zatwierdzonym zakresie, ponów właściwe kontrole i dopiero po pełnym PASS przejdź do kolejnego etapu. Jeśli naprawa jest zablokowana, podaj konkretną przyczynę; nie osłabiaj wymagań ani nie oznaczaj pominiętej kontroli jako PASS.
-- Walidacja istniejącej strony nie oznacza tworzenia nowego URL-a ani ponownego generowania poprawnych obrazów. Zachowaj tożsamość artykułu i używaj trybu aktualizacji. Niezmienione materiały mogą zostać użyte ponownie, jeśli spełniają aktualne wymagania i zostały objęte kontrolą. Centra tematyczne przechodzą właściwy kontrakt centrów zamiast szablonu zwykłego artykułu.
-- Zatwierdzenie ID lub paczki uruchamia pełny proces naprawy i walidacji; nie stanowi potwierdzenia jakości istniejącej treści.
+- Pisarz odpowiada za logikę, treści zdrowotne, źródła, dowody, FAQ, intencję SEO i opisy ilustracji. Ilustrator odpowiada za zgodność obrazów z materiałem; Grzegorz zatwierdza obrazy i ostateczny wygląd.
+- Zwykłe `article:add` odbiera gotową paczkę i sprawdza ją technicznie: składnia i obsługiwane struktury JSON, pola i typy wymagane przez importer, slug/kategoria/nazwy/ścieżki, konstrukcja HTML w polach, istnienie plików, czytelność i wymiary wariantów AVIF/WebP/JPG oraz kompletność HTML/PDF i `_site`.
+- `article:add`, importer i hooki nie oceniają ponownie claimów, źródeł, pochodzenia FAQ, liczby zdań, intencji SEO, kanibalizacji ani znaczenia obrazów. Nie pobierają źródeł z internetu i nie zmieniają treści JSON-u. Reguły redakcyjne, w tym limity tekstów SEO i wymagania dowodowe, są zadaniem Pisarza oraz jawnie zleconej redakcji, a nie ukrytymi blokerami technicznego dodania.
+- Audyt wejściowy zbiera wszystkie niezależnie wykrywalne błędy techniczne naraz. Niesprawdzone zależności wymienia jawnie. Jednoznaczne reguły wejścia wykorzystuje także importer; staging zbiera błędy wynikowe HTML/PDF, których nie można ustalić przed generowaniem.
+- Pełna kontrola redakcyjna pozostaje osobnym zadaniem. `popraw-seo` i `napraw paczkę N` zachowują swój jawnie zlecony zakres redakcyjny; nie zmieniamy ich mechanizmu w ramach uproszczenia nowego `article:add`.
+- Zachowaj tożsamość istniejącej strony i tryb aktualizacji. Nie wymyślaj dowodów, źródeł, researchu FAQ ani wyników review dla uzyskania PASS. Centra zachowują własny kontrakt.
+- Wynik kontroli opisuje faktycznie wykonany zakres. Techniczny PASS nie potwierdza prawdziwości treści; niewykonanej kontroli redakcyjnej nie oznaczaj jako PASS i nie zamieniaj jej błędu w warning.
+- Aktualny wynik wykorzystuj ponownie tylko przy zgodnych parametrach i hashach danych, właściwego kodu oraz konfiguracji. Zmiana unieważnia wynik etapu i etapów zależnych. Sam marker lub identyczny JSON bez zgodności zależności nie wystarcza.
+
+To zatwierdzony kontrakt uproszczenia. Wdrożenie profilu technicznego, zakresu publikacji i wznowienia w kodzie oraz testy następują w częściach 3–9 planu w Downloads. Sam zapis zasad nie potwierdza gotowości mechanizmu. Sprawdzian wykonamy na innym artykule; błonnik pozostaje zamknięty.
 
 ## 0. Zero Generic Text
 - Każda zmiana w tekście artykułu musi być konkretna, logiczna i oparta o treść artykułu, dane GSC/PAA/autocomplete, sprawdzone źródło, konkretną liczbę/próg albo jasny warunek bezpieczeństwa.
@@ -19,12 +22,12 @@ Ten dokument definiuje kanoniczny standard artykułów. Obowiązuje dla wszystki
 - Jeśli brakuje danych lub źródeł do poprawki, oznacz `INSUFFICIENT_DATA` i zatrzymaj edycję zamiast zgadywać.
 
 ## 0A. Logic Gate
-- Tekst z JSON-a, Claude albo innego modelu zewnętrznego jest tylko draftem. Nie wolno uznać go za gotowy bez kontroli logicznej akapit po akapicie.
+- Przy przygotowaniu lub jawnie zleconej redakcji tekst z JSON-a, Claude albo innego modelu wymaga kontroli logicznej akapit po akapicie. W zwykłym `article:add` odpowiada za nią Pisarz; kontrola techniczna nie powtarza tego zadania.
 - Każdy akapit musi być zrozumiały sam w miejscu, w którym stoi. Jeśli zaczyna się od „ta obietnica”, „ta reklama”, „taki przekaz”, „to zdanie”, „ten wniosek” albo „haczyk jest prosty”, musi w tym samym akapicie jasno nazwać konkretną obietnicę, twierdzenie, mechanizm lub liczbę, do której się odnosi.
 - Metafora lub analogia musi być domknięta mechanizmem. Nie wystarczy napisać, że coś „nie jest korkiem w zlewie”; ten sam fragment musi dopowiedzieć, co naprawdę robi limfa, tłuszcz, energia, deficyt albo inny opisywany mechanizm.
 - Wniosek musi wynikać z poprzedniego zdania, źródła, liczby, warunku bezpieczeństwa albo fizjologii opisanej w tekście. Niedopuszczalne są skoki typu: prawdziwe pojęcie -> fałszywy wniosek bez wyjaśnienia przejścia.
 - Blok „Najważniejsze”, tabela, podpis grafiki, FAQ i quick answer podlegają tej samej kontroli. Krótkie podsumowanie nie może ucinać logiki ani zostawiać czytelnika z pytaniem „jaka obietnica?”, „jaka reklama?”, „dlaczego?”.
-- `article-preflight` ma traktować wykryte skróty logiczne jako błąd blokujący dla nowych JSON-ów.
+- W profilu redakcyjnym `article-preflight` traktuje wykryte skróty logiczne jako błąd. Profil techniczny nie uruchamia tej oceny.
 
 ## 1. Golden template
 - Strona referencyjna (golden): `wydolnosc-vo2max-starzenie-po-50.html`
@@ -77,23 +80,23 @@ Zasada: „zmień raz, zmień wszędzie”.
 ## 7. Kanoniczna procedura dodawania nowego artykułu
 
 - Jedno polecenie użytkownika `dodaj artykuł` uruchamia `npm run article:add -- --file "<draft.fitpo50.json>"`. Obrazy są pobierane z katalogu JSON-u, chyba że agent jawnie poda `--assets-dir`. Paczka wejściowa zawiera już każdy obraz we wszystkich wymaganych formatach AVIF, WebP i JPG; pipeline wyłącznie je sprawdza i nie generuje brakujących wariantów.
-- Pierwsza, tania bramka `article:add` sprawdza całą paczkę Pisarza i Ilustratora jednocześnie. Błędy opisuje jako `WRITER_FIX_REQUIRED` albo `ILLUSTRATOR_FIX_REQUIRED`; linkowanie wewnętrzne i techniczny `media_manifest` tworzy lokalny pipeline.
+- Pierwsza bramka korzysta z technicznego profilu istniejącego `package-audit.js`, zbiera błędy JSON-u i plików naraz i wskazuje odpowiedzialnego autora poprawki. Nie uruchamia kontroli redakcyjnej, źródeł ani oglądania obrazów; lokalny pipeline tworzy techniczny `media_manifest`.
 - Grzegorz zatwierdza obrazy przed przekazaniem paczki. Pipeline nie zatrzymuje nowego slugu na `AWAITING_MEDIA_REVIEW`; sprawdza automatycznie komplet AVIF/WebP/JPG, hashe, wymiary i zgodność wariantów, a następnie tworzy `media_manifest.version=3`.
 - Nie używaj dla draftów starej ręcznej ścieżki generator → osobny importer → osobny PDF → ręczna synchronizacja. Skrypty składowe pozostają wyłącznie implementacją i narzędziami serwisowymi.
-- Faza przygotowania nie dotyka publicznego HTML. Kontrole logiczne, dowody, FAQ, intencję, linki i preflight treści wykonuje przed mediami. Pipeline nie zmienia treści ani podpisów obrazów bez polecenia użytkownika.
-- Dopiero kompletny `CONTENT_READY` uruchamia jeden staging i atom obejmujący HTML, daty ISO 8601, media, PDF, listingi, sitemap, indeksy, `llms.txt`, monitoring i `_site`.
-- Po sukcesie usuń roboczy pakiet JSON; przy `BLOCKED` zachowaj jedną najnowszą wersję do poprawy.
+- Faza przygotowania sprawdza paczkę technicznie i pracuje na kontrolowanej kopii. Nie zmienia wejściowego JSON-u, treści ani podpisów. Linkowanie może wyłącznie opakować istniejącą frazę linkiem do istniejącej strony, bez dopisków dla licznika.
+- Gotowy pakiet roboczy uruchamia jeden staging i atom obejmujący HTML, daty ISO 8601, media, PDF, listingi, sitemap, indeksy, `llms.txt`, monitoring i `_site`. Błędy renderowania trafiają do raportu wynikowego; po audycie nie pojawiają się dodatkowe bramki redakcyjne.
+- Po lokalnym sukcesie zachowaj pakiet do potwierdzenia live i osobnego polecenia sprzątania. Przy `BLOCKED` zachowaj jedną najnowszą wersję do poprawy.
 
 ## 7a. Wewnętrzne fazy bezpiecznego przyjęcia JSON-u
-- JSON od autora lub modelu jest zawsze statusem `DRAFT`, nigdy gotowym artykułem.
-- Korekta i publikacja są oddzielnymi fazami technicznymi, ale pełne `dodaj artykuł` obsługuje je jedną komendą. `article:prepare-json` służy tylko do świadomego zatrzymania po korekcie; `article:publish` jest wewnętrznym silnikiem kontrolera.
+- `DRAFT` oznacza wejście od autora, a `CONTENT_READY` jest dotychczasową nazwą przygotowanego pakietu roboczego. Żadna z tych nazw ani techniczny PASS nie zastępuje oceny merytorycznej Pisarza.
+- Techniczne przygotowanie i lokalne dodanie obsługuje jedno `article:add`. `article:prepare-json` pozostaje świadomie zleconym przygotowaniem; `article:publish` jest wewnętrznym silnikiem kontrolera. Zgoda na commit i push jest osobna.
 - Korekta nie tworzy ani nie modyfikuje HTML. Zapisuje nowy, trwały JSON oraz raport `.fitpo50.report.json` i `.fitpo50.report.md` z pełną listą zmian.
 - Statusy procesu to: `DRAFT`, `CONTENT_READY`, `BLOCKED`.
 - Domyślne `force=false` blokuje kolizję z istniejącym slugiem. `--force true` wymaga świadomego podania i służy wyłącznie kontrolowanej aktualizacji.
 - Publikator przyjmuje tylko artefakt `CONTENT_READY`; sprawdza powiązany raport oraz SHA-256 całej paczki (JSON i wszystkie pliki z `media_manifest`), więc późniejsza zmiana tekstu lub obrazu blokuje import.
 - Zapis importera jest prywatnym etapem kontrolera: wymaga aktywnego manifestu stagingu, krótkotrwałej capability związanej z katalogiem i osobnego uprawnienia operacji. Sama flaga środowiskowa, bezpośrednie wywołanie `import-article.js` albo wskazanie poprawnego `CONTENT_READY` nie wystarcza.
 - Plik wejściowy pozostaje bez zmian. Domyślnie istnieje jeden stabilny pakiet roboczy dla slugu, aktualizowany przy kolejnej próbie; wersje `-r2`, `-r3` powstają wyłącznie po jawnym `--keep-revisions true`.
-- Poprawne kontrole dostępności URL-i są przechowywane w lokalnym, niecommitowanym cache przez 7 dni. Zmienione obrazy odświeżają warianty; niezmienione warianty są używane ponownie. Po nieudanym atomie cały niezmieniony hashami `CONTENT_READY` może zostać użyty ponownie bez fazy przygotowania. Zmiana JSON-u lub któregokolwiek obrazu unieważnia tę pamięć. Tanie bramki treści zawsze uruchamiają się podczas nowego przygotowania.
+- Kontrole dostępności źródeł i ich cache należą do osobnego profilu redakcyjnego. Zwykłe dodanie nie sprawdza ich w sieci i nie generuje dostarczonych wariantów obrazów. Po nieudanym atomie aktualny pakiet może zostać użyty ponownie przy zgodności hashy oraz właściwego kodu, konfiguracji i parametrów kontroli. Zmiana unieważnia tylko właściwy etap i etapy zależne.
 - Po lokalnej promocji pipeline zachowuje wykorzystaną paczkę `CONTENT_READY` ze stanem `AWAITING_LIVE_CONFIRMATION`. Dopiero po potwierdzonym `LIVE_DEPLOYED_AND_VALIDATED` i osobnym poleceniu użytkownika `npm run article:cleanup-input -- --slug <slug>` wolno usunąć wejście; przy błędzie lub `BLOCKED` pozostaje ono do dalszej naprawy.
 - Kontroler kończy kodem `0` po sukcesie, `10` przy `AWAITING_MEDIA_REVIEW` albo późniejszym `AWAITING_REVIEW`, `20` dla blokera treści/paczki i `30` dla awarii środowiska. Raport statusu zawiera strukturalne `next_action` i `next_args`, bez wykonywalnej komendy tekstowej.
 
@@ -104,7 +107,7 @@ Zasada: „zmień raz, zmień wszędzie”.
 - Jeśli przypadek jest wykrywalny maszynowo, dodaj minimalny test regresji lub fixture odtwarzający problem. Test powinien nie przechodzić przed poprawką i przechodzić po niej.
 - Nie wolno: naprawić wyłącznie finalnego HTML-a, dodać wyjątku dla jednego slugu, zmienić błędu na warning ani obniżyć progu jakości tylko po to, aby publikacja przeszła.
 - Jeśli bezpieczna automatyzacja nie jest możliwa, dodaj jednoznaczną ręczną kontrolę do właściwej sekcji tego dokumentu i wskaż ją w raporcie publikacji.
-- Po zmianie uruchom test jednostkowy/regresyjny, `npm run test:pipeline-blockers`, walidację artykułu, mirror i `predeploy:check`. Zadanie jest zakończone dopiero po PASS bieżącego artykułu i zabezpieczenia przyszłych publikacji.
+- Po zmianie uruchom testy zmienionego mechanizmu i kontrole wynikające z jego rzeczywistego wpływu. Nie powtarzaj aktualnych testów ani całego portalu bez nowej przyczyny. Naprawa mechanizmu musi mieć adekwatny dowód; nie wymaga ponownego importu zamkniętego artykułu.
 
 ## 8. Bramka jakości (fail conditions)
 Artykuł nie przechodzi, jeśli:
@@ -176,11 +179,11 @@ Artykuł nie przechodzi, jeśli:
 - Tabele w artykułach mają być dopracowane wizualnie: wrapper `.article-table-wrap`, tabela `.article-table` oraz w razie potrzeby `.article-table--compact`; każda tabela wymaga konkretnego `<caption>`, krótkich komórek, czytelnych nagłówków i nie może być zawinięta w `<p><table>`.
 
 ## 10a. Intent, Linking & Topic Center Contract
-- Przed statusem `CONTENT_READY` JSON musi mieć `search_intent`, jedną `primary_keyword` długości 2-8 słów oraz 3-8 unikalnych `supporting_keywords`.
+- Przy przygotowaniu redakcyjnym Pisarz określa `search_intent`, jedną `primary_keyword` długości 2-8 słów oraz 3-8 unikalnych `supporting_keywords`. Lokalny audyt sprawdza wyłącznie strukturę pól używanych technicznie, bez oceny intencji lub liczby fraz dla wyniku SEO.
 - Claude ani inny model zewnętrzny nie podaje linków wewnętrznych i nie zgaduje slugów. Linkowanie powstaje lokalnie przez `scripts/prepare-article-architecture.js` na podstawie aktualnych artykułów `BlogPosting` w repozytorium.
-- Skill Pisarza `docs/skills/fitpo50-article-draft/` zwraca jeden JSON `DRAFT`, realne źródła, tylko FAQ wynikające 1:1 z GSC/PAA/autocomplete oraz plan obrazów. `manual_research` jest zabronione dla nowych pytań. Brak realnych pytań oznacza puste listy FAQ, nie zgodę na ich wymyślenie. Lokalny pipeline sprawdza dowody i przygotowuje deterministyczne linkowanie, ale nie dopisuje treści ani źródeł.
-- Przed ustaleniem finalnego title/H1 pipeline porównuje frazę główną z tytułami, H1, treścią oraz trwałą mapą właścicieli intencji z `popraw-seo`. Mocny konflikt wymaga jawnego `intent_differentiation`; bez niego JSON pozostaje `BLOCKED`.
-- Przy `UPDATE` własny `${slug}.html` jest wyłączony z listy kandydatów kanibalizacji; pozostałe URL-e o podobnej intencji nadal wymagają decyzji.
+- Skill Pisarza `docs/skills/fitpo50-article-draft/` zwraca jeden JSON `DRAFT`, realne źródła, FAQ wynikające z GSC/PAA/autocomplete oraz plan obrazów. `manual_research` jest zabronione przy tworzeniu pytań; bez realnych pytań FAQ może być puste. Za źródła i pochodzenie FAQ odpowiada Pisarz. Lokalny pipeline przygotowuje linkowanie bez dopisywania treści i bez ponownej kontroli dowodów.
+- Porównanie intencji z tytułami, H1 i mapą właścicieli z `popraw-seo` należy do planowania i jawnej redakcji. Nie jest bramką technicznego dodania; lokalny importer nie zmienia title/H1 z powodu oceny kanibalizacji.
+- W analizie redakcyjnej przy `UPDATE` własny `${slug}.html` jest wyłączony z kandydatów kanibalizacji; konflikt z innymi URL-ami rozstrzygamy w tym zadaniu, nie w technicznym imporcie.
 - Linki wynikające z planu muszą prowadzić do istniejących artykułów, mieć unikalne cele i naturalne anchory obecne już w konkretnych akapitach. Finalny HTML musi odpowiadać `internal_link_plan` co do celu, anchora i lokalizacji; importer nie uruchamia PHP ani alfabetycznego „Zobacz też”. Mniej niż dwa linki daje ostrzeżenie `LOW_CONTEXTUAL_LINK_COUNT`; system nie dopisuje zdania-zapychacza.
 - `internal_link_plan[]` zapisuje target, anchor, dokładną lokalizację i podstawę doboru. `incoming_link_suggestions[]` wskazuje istniejące strony, które po publikacji powinny zostać ręcznie sprawdzone jako źródła linku przychodzącego.
 - Dopasowanie do centrum zapisuje `topic_center_assessment`. Tylko `STRONG` tworzy propozycję `AWAITING_USER_APPROVAL`; nie blokuje zwykłej publikacji i nie zmienia konfiguracji centrum.
@@ -190,15 +193,15 @@ Artykuł nie przechodzi, jeśli:
 - JSON i wszystkie obrazy wejściowe tworzą jeden katalog artykułu. Pipeline nie szuka plików rekurencyjnie, nie normalizuje przybliżonych nazw i nie pobiera zastępstwa z globalnego `assets/`.
 - Wymagany jest dokładnie jeden obraz `hero` oraz co najmniej jeden odrębny obraz dla każdej merytorycznej sekcji głównej. Sekcja może mieć kolejne obrazy, wykresy lub infografiki, gdy wnoszą nową informację; używają placementu `sekcja-N-obraz-M`, gdzie `M >= 2`. Sekcje użytkowe, takie jak szybka odpowiedź, udostępnianie, źródła, disclaimer i czytelnia, nie tworzą zapotrzebowania na osobny obraz. Liczba obrazów wynika z realnej architektury tematu, a nie ze stałego minimum ani maksimum. `filename_base` jest dokładną nazwą kebab-case, a każdy wpis obrazu wymaga konkretnego tematu, techniki, kompozycji, celu, proporcji, altu i podpisu.
 - JSON może oznaczyć sekcję jako `section_role: main|utility`; brak pola oznacza `main`. Tylko rzeczywiście użytkowa sekcja może pominąć osobny obraz. Plan obrazu zachowuje także `season_and_time`, `mood`, `evidence_source_urls` i `requires_exact_data_render`. Wykres lub infografika oznaczona `requires_exact_data_render=true` wymaga dokładnego `overlay_text_pl`, źródeł obecnych w `sources[]` oraz zgodnej transkrypcji podczas kontroli wizualnej.
-- Przed `CONTENT_READY` lokalna kontrola rzeczywistych plików zapisuje `media_manifest`: placement, temat, technikę, cel, nazwę źródła, wymiary, SHA-256, warianty oraz udokumentowany `visual_review`. Nowy artykuł wymaga `media_manifest.version=3` i osobnego review powiązanego hashem z AVIF, WebP i JPG. Opublikowany artykuł z manifestem v2 nie jest migrowany. Manifestu nie generuje Claude.
-- Kontrola wizualna ocenia zgodność obrazu z sekcją, prawdziwość widocznego tekstu i liczb, poprawność anatomii oraz sprzętu, kadr i brak mylących logo. Nowy lub zmieniony przegląd jest częścią raportu preview `version=3`. Każdy obraz deklaruje `embedded_text.kind`: `NONE`, `WATERMARK_ONLY`, `INCIDENTAL_ENVIRONMENT` albo `CONTENT`. Naturalne napisy środowiskowe, takie jak szyld uliczny, wejście do przychodni lub oznaczenie biura, są dozwolone i wspierają realizm, jeśli zostaną odnotowane, nie są reklamą, instrukcją medyczną ani twierdzeniem lub liczbą wymagającą dowodu. Tekst treściowy zawierający liczbę lub twierdzenie wymaga transkrypcji, zgodności z artykułem i URL-i dowodów. Sam watermark nie jest błędem blokującym. Dawne raporty v1/v2 są zamrożonym legacy i nie wolno ich odtwarzać po zmianie HTML albo obrazu.
+- Lokalna kontrola plików zapisuje techniczny `media_manifest`: placement, metadane otrzymane od autora, nazwę źródła, wymiary, SHA-256 i warianty. Zachowujemy istniejącą wersję kontraktu manifestu bez osobnego review Codexa. Nie dopisujemy pozornego potwierdzenia wizualnego. Opublikowany artykuł z manifestem v2 nie jest migrowany. Manifestu nie generuje Claude.
+- Ilustrator i Grzegorz oceniają zgodność obrazu z sekcją, napisy i liczby, anatomię, sprzęt oraz kadr. Przygotowanie redakcyjne może deklarować `embedded_text.kind`: `NONE`, `WATERMARK_ONLY`, `INCIDENTAL_ENVIRONMENT` albo `CONTENT`. Naturalne napisy środowiskowe są dozwolone, jeśli nie reklamują i nie przekazują mylących twierdzeń. Dane na grafice wymagają podstawy u autora. Techniczny import nie wykonuje transkrypcji, oceny merytorycznej ani osobnego wpisu review; nie odtwarza dawnych raportów v1/v2 i nie przypisuje sobie akceptacji Grzegorza.
 - Każdy obraz jest dostarczany w paczce wejściowej jako AVIF, WebP i fallback JPG o zgodnych wymiarach. Pipeline sprawdza kompletność i zgodność wariantów, ale ich nie dorabia. Dla hero zalecane jest co najmniej 1080×600 px, a bezpieczny zakres zaczyna się od 1024×560 px; dla obrazu sekcji zalecane jest 900×500 px, a bezpieczny zakres zaczyna się od 800×450 px. Drobna różnica od zalecenia daje ostrzeżenie, nie samodzielny bloker. Proporcja krajobrazowa nadal musi mieścić się w zakresie 1.2-2.1 i zgadzać z deklaracją.
 - `listing_title` ma bezpieczny zakres 45-80 znaków, z zalecanym celem 55-70. Krótszy lub dłuższy, ale kompletny i czytelny tytuł w bezpiecznym zakresie nie jest samodzielnym blokerem.
 - Zmiany wymiarów, napisów środowiskowych i `listing_title` działają forward-only dla nowych i właśnie edytowanych artykułów. Nie uruchamiają migracji, regeneracji obrazów ani masowej edycji starszych publikacji tylko po to, by dostosować historyczne artefakty do nowszego kontraktu.
 - Obrazy w `assets/` są wysyłane z rocznym cache `immutable`. Zmiana zawartości obrazu wymaga nowej, wersjonowanej nazwy pliku oraz aktualizacji wszystkich odwołań w źródle, metadanych, manifeście mediów i `_site`. Nie wolno nadpisywać istniejącego obrazu pod tym samym publicznym URL-em.
-- Hash i sygnatura wizualna blokują duplikaty 1:1, niemal ten sam kadr oraz wariant przedstawiający inny obraz. Spójna seria może używać tej samej techniki lub stylu; review blokuje powtarzalne kadry, generyczność i obrazy bez wartości, a nie nazwy technik wpisane w manifeście.
+- Hash identyfikuje rzeczywiste pliki i umożliwia kontrolę integralności. Ocenę podobieństwa kadrów, generyczności, wartości i merytorycznej zgodności wariantów wykonują Ilustrator i Grzegorz; techniczny import nie powtarza tej oceny.
 - `alt` i `caption` muszą opisywać realną zawartość oraz mieć związek z konkretną sekcją. Akceptacja wizualna należy do Grzegorza; pipeline nie wymaga od Codexa ponownego wpisu `visual_review.status=VERIFIED`.
-- Obraz z mylącą liczbą, niepowiązanym tekstem, niezgodnym kadrem lub fałszywą pewnością jest odrzucany. Pipeline nie używa go jako fallbacku.
+- Ilustrator i Grzegorz odrzucają obraz z mylącymi danymi lub niezgodnym kadrem przed przekazaniem paczki. Pipeline nie podmienia obrazu na ukryty fallback.
 - Obrazy w treści artykułu mają korzystać ze standardu:
   - `<picture>` + `<source type="image/avif">` + `<source type="image/webp">` + fallback `<img>`.
 - W fallback `<img>` wymagane: poprawny `alt`, `loading="lazy"` oraz prawdziwe `width` i `height` z manifestu.
@@ -215,7 +218,7 @@ Artykuł nie przechodzi, jeśli:
 - PDF powstaje wyłącznie ze stagingowego HTML. Błąd renderowania tabeli lub ilustracji zatrzymuje generowanie; generator nie zamienia tabeli po cichu na tekst rozdzielony kreskami i nie pomija niedziałającego obrazu.
 - Każda strona PDF jest renderowana przez Poppler do PNG. Bramka kontroluje liczbę stron, A4, osadzenie fontów z mapą Unicode, granice każdego słowa, margines treści, komplet ilustracji oraz minimum 98% zgodności tekstu HTML→PDF.
 - Bramka stagingowa zbiera niezależnie błędy HTML i PDF. Wykryty wcześniej błąd mobilny nie może przerwać kontroli struktury, tekstu, obrazów ani renderów PDF.
-- Standardowy PDF przechodzi automatyczną kontrolę kompletności, tekstu, fontów, marginesów i ilustracji. Ręczne oglądanie jest wymagane tylko po zmianie generatora, szablonu lub przy nietypowym komponencie.
+- Standardowy PDF przechodzi automatyczną kontrolę kompletności, tekstu, fontów, marginesów i ilustracji. Zmiana generatora, szablonu lub nietypowy komponent rozszerza adekwatne kontrole techniczne. Ostateczny wygląd ocenia Grzegorz.
 - HTML source i `_site` oraz PDF source i `_site` muszą być identyczne 1:1. Kanoniczny raport `data/reports/article-preview/<slug>.json|md` zapisuje `TECHNICAL_PASS`; standardowy artykuł nie czeka na osobny `VISUAL_REVIEW_VERIFIED`. Rendery pozostają prywatne w zarządzanym stagingu i nie trafiają do Git ani `_site`.
 - Walidatory HTML nie mogą zależeć od kolejności atrybutów w poprawnym znaczniku. Meta, linki, nagłówki, wrappery tabel i pozostałe kontrakty rozpoznają atrybuty po nazwie i wartości.
 - Poprawki `popraw-seo` po akceptacji mogą być wdrażane wyłącznie przez manifest dokładnych operacji `replace_exact` z SHA-256 wersji wejściowej i udokumentowaną podstawą. Automat nie generuje tekstu podczas aplikacji i nie używa generycznych łączników.
@@ -228,11 +231,11 @@ Artykuł nie przechodzi, jeśli:
 - Jedna transakcja obejmuje cały zestaw: HTML artykułu, media AVIF/WebP/JPG, PDF, `index.html`, `porady.html`, stronę kategorii, `sitemap.xml`, `llms.txt`, `llms-full.txt`, indeks wyszukiwarki, raport podglądu, log publikacji oraz odpowiadające pliki w `_site`.
 - Przed pierwszym zapisem powstaje backup wszystkich nadpisywanych plików wraz z SHA-256. Backup pozostaje aktywny aż do zakończenia walidacji już promowanego repozytorium.
 - Transakcja prowadzi dziennik w ignorowanym przez Git katalogu `.tmp/article-publication-transactions`. Po nagłym przerwaniu następne uruchomienie najpierw przywraca stan sprzed publikacji; niezależnie zmieniony plik blokuje automatyczne cofnięcie zamiast zostać nadpisany.
-- Po promocji ponownie przechodzą: standard artykułu, kontrakt source/`_site`, kontrola mirroru, gate `predeploy` i kompletność całego zestawu. Błąd któregokolwiek kroku wywołuje rollback wszystkich plików, w tym usunięcie plików utworzonych przez nieudaną publikację.
+- Po promocji sprawdzamy integralność przeniesionych plików i kompletność zestawu. Wykorzystujemy aktualne wyniki stagingu powiązane z hashami; nie uruchamiamy ponownie zakończonych kontroli dla niezmienionych artefaktów i zależności. Rzeczywisty błąd transakcji wywołuje rollback całego zestawu.
 - Udana transakcja zapisuje `data/reports/article-publications/<slug>.json`. Manifest podaje `CREATE`/`UPDATE`, identyfikator transakcji, wszystkie zmienione pliki, akcję `CREATE`/`UPDATE`, rozmiar oraz hashe przed i po publikacji.
 - Backup i dziennik są usuwane dopiero po zatwierdzeniu lokalnej transakcji. Wykorzystany artefakt `CONTENT_READY` pozostaje do ręcznego `article:cleanup-input`, które wymaga zgodnego dowodu `LIVE_DEPLOYED_AND_VALIDATED` dla sluga. IndexNow pozostaje osobnym etapem po pushu, `LIVE_DEPLOYED_AND_VALIDATED` i `SECURITY_EXPOSURE_PASS`; uruchamia go wyłącznie `npm run indexnow:release`.
 - Półgotowy zestaw nie może być uznany za publikację: brak artykułu w listingu, sitemapie, `llms`, indeksie wyszukiwarki, brak PDF/media albo rozjazd wymaganej pary source/`_site` jest błędem blokującym.
-- Kontrola końcowa tworzy świeży, pełny eksport i porównuje go z `_site` plik po pliku. Osobno raportuje brak, nadmiar i różnicę zawartości w klasach HTML, PDF, dane i assety; synchronizacja wybranych assetów nie może maskować różnicy HTML.
+- Kontrola końcowa obejmuje source/`_site` i pliki należące do zadania. Świeży, pełny eksport oraz szersze parity wykonujemy przy rzeczywistym wpływie na wspólny eksport; sonda porównuje wynik ze stanem sprzed operacji. Synchronizacja assetów nie może maskować różnicy HTML.
 
 ## 12. Schema Citation Contract v2.0 (obowiązkowe)
 - `BlogPosting.citation` musi być zsynchronizowane z listą źródeł w HTML.
@@ -243,6 +246,9 @@ Artykuł nie przechodzi, jeśli:
 - Kategoryczny zakaz dopisywania zmyślonych źródeł tylko po to, by dobić do minimum.
 
 ## 12a. Logic, Evidence & FAQ Contract
+
+To wymagania przygotowania materiału przez Pisarza i osobnego zadania redakcyjnego. Techniczny import oraz hooki nie oceniają ich ponownie.
+
 - W tematach medycznych preferuj w tej kolejności: aktualne wytyczne uznanych towarzystw naukowych i instytucji publicznych, przeglądy systematyczne lub metaanalizy, właściwe badania pierwotne oraz oficjalne rejestry i dokumenty. Źródło komercyjne może potwierdzać wyłącznie własną cenę, skład, instrukcję lub status produktu; nie stanowi samodzielnego dowodu skuteczności, bezpieczeństwa ani mechanizmu medycznego.
 - Autorytet domeny nie zastępuje dopasowania dowodu. Źródło musi dotyczyć tej samej populacji, interwencji, porównania i wyniku, które opisuje twierdzenie, a ograniczenia badania muszą być widoczne w tekście.
 - Kontrola odwołań „poniżej”/„powyżej” obejmuje także sekcję źródeł: odsyłacz musi odpowiadać rzeczywistemu położeniu FAQ w HTML i PDF. Przy zmianie układu użyj jednoznacznej nazwy sekcji.
@@ -266,7 +272,7 @@ Artykuł nie przechodzi, jeśli:
 - Każde źródło musi wspierać co najmniej jedno `evidence_claims`; niewykorzystana, dekoracyjna bibliografia blokuje publikację.
 - Twierdzenia `medical` i ogólne twierdzenia `safety` wymagają silnego źródła naukowego lub instytucjonalnego oraz jawnego `evidence_level`. Wyłącznie modelowo swoista instrukcja obsługi lub konfiguracji urządzenia medycznego może opierać się na `technical_documentation` producenta, jeśli fragment i źródło wskazują ten sam jednoznaczny model; dokumentacja producenta nie potwierdza ogólnej skuteczności ani bezpieczeństwa klinicznego. Dla tematów medycznych minimum 67% źródeł i co najmniej dwa źródła muszą spełniać ten warunek.
 - FAQ nie jest nigdy generowane ani uzupełniane automatycznie przez lokalny pipeline. Liczba pytań wynika z researchu, może wynosić zero, a `answer_blocks[]` i `faq_research[]` zawsze odpowiadają sobie 1:1.
-- Każdy wpis `faq_research[]` nowego materiału wymaga `source_type`: `autocomplete`, `paa` albo `gsc`, a także `checked_at`, `url_status` i `http_status`. `manual_research` jest zabronione w nowych i zmienianych materiałach; sześć opublikowanych centrów pozostaje wyłącznie nieedytowanym wyjątkiem baseline walidatora.
+- Każdy wpis `faq_research[]` nowego materiału wymaga `source_type`: `autocomplete`, `paa` albo `gsc`, a także `checked_at`, `url_status` i `http_status`. `manual_research` jest zabronione przy tworzeniu i redakcji; w sześciu opublikowanych centrach zmiany linków i list artykułów zachowują wyjątek baseline tylko wtedy, gdy FAQ, jego JSON-LD i research są identyczne z HEAD.
 - `gsc` wymaga realnego `query` i `impressions >= 1`; `paa` wymaga `query` i opisu kontroli; `autocomplete` wymaga rzeczywistego endpointu Google Suggest z pytaniem w parametrze `q`.
 - Pytania zawierające sztuczne oznaczenia typu „wariant 2” są błędem blokującym.
 - URL-e sprawdza polecenie: `npm run article:evidence:verify -- --file <plik.fitpo50.json> --write true`.

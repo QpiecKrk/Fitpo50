@@ -1,35 +1,164 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T08:39:49.569Z",
+  "generated_at": "2026-11-10T11:16:06+01:00",
+  "reviewed_at": "2026-11-10T11:28:40+01:00",
   "slug": "centrum-snu-po-50",
-  "html_sha256": "6ec0d6326db25031ceab11730290d8cac7517d6510f7a6798dd843016a11b48f",
-  "site_html_sha256": "6ec0d6326db25031ceab11730290d8cac7517d6510f7a6798dd843016a11b48f",
-  "pdf_sha256": "3e00f1a44c0190565571b76bd3276007c89e0f8ec10042b9aecd6e1eefbdb870",
-  "site_pdf_sha256": "3e00f1a44c0190565571b76bd3276007c89e0f8ec10042b9aecd6e1eefbdb870",
+  "html_sha256": "7572332cf99916e19a95019d57ac66ec9232aef47f6bf2552b9d10557ef1401c",
+  "site_html_sha256": "7572332cf99916e19a95019d57ac66ec9232aef47f6bf2552b9d10557ef1401c",
+  "pdf_sha256": "ec1d5c73e9a6d13bd9b801013377b18e9713b3743e7008b8ef7171296d71653f",
+  "site_pdf_sha256": "ec1d5c73e9a6d13bd9b801013377b18e9713b3743e7008b8ef7171296d71653f",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-10T11:16:06+01:00",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 0
   },
+  "artifacts": {
+    "html_source": {
+      "file": "centrum-snu-po-50.html",
+      "sha256": "7572332cf99916e19a95019d57ac66ec9232aef47f6bf2552b9d10557ef1401c",
+      "bytes": 25944
+    },
+    "html_site": {
+      "file": "_site/centrum-snu-po-50.html",
+      "sha256": "7572332cf99916e19a95019d57ac66ec9232aef47f6bf2552b9d10557ef1401c",
+      "bytes": 25944
+    },
+    "pdf_source": {
+      "file": "assets/pdf/centrum-snu-po-50.pdf",
+      "sha256": "ec1d5c73e9a6d13bd9b801013377b18e9713b3743e7008b8ef7171296d71653f",
+      "bytes": 163845
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/centrum-snu-po-50.pdf",
+      "sha256": "ec1d5c73e9a6d13bd9b801013377b18e9713b3743e7008b8ef7171296d71653f",
+      "bytes": 163845
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/centrum-snu-po-50/desktop.png",
+      "screenshot_sha256": "5a352bdd152c41687c7a636a2c2759414a5a7e98275e111fdb86e4df320cea0b",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/centrum-snu-po-50/mobile.png",
+      "screenshot_sha256": "46eb6b6d7b2aeb55ec77910625ed22839d95aae4c4232986cc777fc536273fcf",
+      "errors": []
+    }
+  },
+  "images": [],
   "pdf": {
     "pages": 3,
-    "text_coverage": 0.9921,
-    "rendered_pages": 3
+    "text_coverage": 1,
+    "rendered_pages": 3,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/centrum-snu-po-50/pdf-pages/page-1.png",
+        "sha256": "75dfcdf6435f3fd71d80689cdd3bdd0d02db84b76cd09a642cc1b08011c9ba4e",
+        "bytes": 279375,
+        "width": 1190,
+        "height": 1684,
+        "content_bounds": {
+          "x": 102,
+          "y": 110,
+          "width": 982,
+          "height": 1542
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/centrum-snu-po-50/pdf-pages/page-2.png",
+        "sha256": "f34942477f8db6d23394c9d57ed860456a8924cc7a9b5e8c1f7d963e334c5435",
+        "bytes": 288934,
+        "width": 1190,
+        "height": 1684,
+        "content_bounds": {
+          "x": 101,
+          "y": 108,
+          "width": 974,
+          "height": 1544
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/centrum-snu-po-50/pdf-pages/page-3.png",
+        "sha256": "b4352e215a61383533c92d1c6dc898e27ccf763cf72083f1e859ac39213cd1fb",
+        "bytes": 134646,
+        "width": 1190,
+        "height": 1684,
+        "content_bounds": {
+          "x": 102,
+          "y": 118,
+          "width": 956,
+          "height": 1534
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "VISUAL_REVIEW_VERIFIED",
+    "reviewed_by": "Grzegorz",
+    "reviewed_at": "2026-11-10T11:28:40+01:00",
+    "review_method": "Przegląd strony desktop i mobile oraz całego PDF przez Grzegorza",
+    "views": {
+      "desktop": {
+        "status": "VERIFIED",
+        "artifact_sha256": "5a352bdd152c41687c7a636a2c2759414a5a7e98275e111fdb86e4df320cea0b",
+        "note": "Widok desktop obejrzany i zaakceptowany przez Grzegorza."
+      },
+      "mobile": {
+        "status": "VERIFIED",
+        "artifact_sha256": "46eb6b6d7b2aeb55ec77910625ed22839d95aae4c4232986cc777fc536273fcf",
+        "note": "Widok mobile obejrzany i zaakceptowany przez Grzegorza."
+      }
+    },
+    "images": [],
+    "pdf_pages": [
+      {
+        "page": 1,
+        "status": "VERIFIED",
+        "artifact_sha256": "75dfcdf6435f3fd71d80689cdd3bdd0d02db84b76cd09a642cc1b08011c9ba4e",
+        "note": "Strona 1 PDF obejrzana i zaakceptowana przez Grzegorza."
+      },
+      {
+        "page": 2,
+        "status": "VERIFIED",
+        "artifact_sha256": "f34942477f8db6d23394c9d57ed860456a8924cc7a9b5e8c1f7d963e334c5435",
+        "note": "Strona 2 PDF obejrzana i zaakceptowana przez Grzegorza."
+      },
+      {
+        "page": 3,
+        "status": "VERIFIED",
+        "artifact_sha256": "b4352e215a61383533c92d1c6dc898e27ccf763cf72083f1e859ac39213cd1fb",
+        "note": "Strona 3 PDF obejrzana i zaakceptowana przez Grzegorza."
+      }
+    ],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 3142,
+    "review_wait_ms": 754000
   },
   "errors": []
 }

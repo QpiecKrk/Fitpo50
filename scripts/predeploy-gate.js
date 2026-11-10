@@ -26,6 +26,7 @@ function parseArgs(argv) {
   const out = { assets: [], allowDistDrift: false, enforceDistFreshness: false };
   for (let i = 0; i < argv.length; i += 1) {
     const t = argv[i];
+    if (t === '--profile') { out.profile = argv[++i]; continue; }
     if (t === '--slug') {
       out.slug = String(argv[i + 1] || '').trim();
       i += 1;
@@ -425,7 +426,7 @@ function assertFileMirror(relPath, errors) {
     errors.push(`Brak pliku mirror: ${mirror}`);
     return;
   }
-  if (readUtf8(relPath) !== readUtf8(mirror)) {
+  if (!fs.readFileSync(path.join(ROOT, relPath)).equals(fs.readFileSync(path.join(ROOT, mirror)))) {
     errors.push(`Niespójnosc source vs _site: ${relPath} != ${mirror}`);
   }
 }
@@ -559,6 +560,26 @@ function main() {
   const args = parseArgs(process.argv.slice(2));
   const errors = [];
   const warnings = [];
+  if (args.profile === 'technical') {
+    const slug = normalizeSlug(args.slug);
+    if (!slug) return printAndExit(['Profil techniczny wymaga --slug.'], warnings);
+    const articleFile = `${slug}.html`;
+    if (!exists(articleFile)) return printAndExit([`Brak pliku: ${articleFile}`], warnings);
+    const contract = require('./validate-article-standard').validateFile(path.join(ROOT, articleFile), { profile: 'technical', strictChanged: true });
+    errors.push(...contract.errors);
+    const category = readUtf8(articleFile).match(/\barticle--(ruch|jedzenie|zdrowie|ciekawe|mity)\b/)?.[1];
+    const categoryPage = categoryPageFromImportCategory(category);
+    for (const file of [articleFile, 'index.html', 'porady.html', categoryPage, 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'assets/data/search-index.json', `assets/pdf/${slug}.pdf`].filter(Boolean)) {
+      if (!exists(file)) errors.push(`Brak pliku: ${file}`);
+      else assertFileMirror(file, errors);
+    }
+    for (const file of ['index.html', 'porady.html', categoryPage].filter(Boolean)) {
+      if (exists(file) && !readUtf8(file).includes(articleFile)) errors.push(`${file} nie zawiera ${articleFile}.`);
+    }
+    if (exists('sitemap.xml') && !hasInSitemap(readUtf8('sitemap.xml'), articleFile)) errors.push(`sitemap.xml nie zawiera ${articleFile}.`);
+    console.log('[SCOPE] Jeden artykuł i jego artefakty; redakcja, NEWS i infrastruktura globalna poza zakresem.');
+    return printAndExit(errors, warnings);
+  }
 
   const requiredFiles = [
     'index.html',

@@ -129,8 +129,13 @@ function main() {
   const slugs = parseSlugs(argv);
   const checkOnly = parseCheckOnly(argv);
   let changed = 0;
-  changed += syncNewsDataMirror(checkOnly);
-  changed += syncNewsThumbnailsMirror(checkOnly);
+  const profileIndex = argv.indexOf('--profile');
+  const technical = profileIndex >= 0 && argv[profileIndex + 1] === 'technical';
+  if (technical && !slugs.length) throw new Error('Techniczna synchronizacja wymaga --slug.');
+  if (!technical) {
+    changed += syncNewsDataMirror(checkOnly);
+    changed += syncNewsThumbnailsMirror(checkOnly);
+  }
   changed += syncPdfMirror(slugs, checkOnly);
 
   if (checkOnly) {

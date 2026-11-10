@@ -125,6 +125,7 @@ function validateQuickAnswerBlock(articleContentHtml, errors, warnings, quickAns
     errors.push('Sekcja .quick-answer nie zawiera akapitu <p>.');
     return;
   }
+  if (quickAnswerMode === 'technical') return;
 
   const leadMatch = articleContentHtml.match(/<p class="drop-cap">([\s\S]*?)<\/p>/i);
   if (leadMatch) {
@@ -469,8 +470,8 @@ function validateBlogPostingAboutSameAs(raw, errors) {
 }
 
 
-function validateHeadSeoConsistency(raw, errors) {
-  const res = validateArticleHeadContract(raw);
+function validateHeadSeoConsistency(raw, errors, profile) {
+  const res = validateArticleHeadContract(raw, { profile });
   errors.push(...res.errors);
 }
 
@@ -552,14 +553,15 @@ function isLegacyForTitleGate(raw) {
   return publishedAt < cutoff;
 }
 
-function validateFile(filePath, { strictChanged = false } = {}) {
+function validateFile(filePath, { strictChanged = false, profile = 'editorial' } = {}) {
   if (pageKind(fs.readFileSync(filePath, 'utf8')) === 'topic_center') {
     return validateTopicCenter(filePath, { changed: strictChanged });
   }
   const raw = fs.readFileSync(filePath, 'utf8');
   const errors = [];
   const warnings = [];
-  const quickAnswerMode = 'strict';
+  const technical = profile === 'technical';
+  const quickAnswerMode = technical ? 'technical' : 'strict';
   const requiredPatterns = [
     { label: 'body.article-template', regex: /<body[^>]*class="[^"]*article-template[^"]*"/i },
     { label: 'body.article--kategoria', regex: /<body[^>]*class="[^"]*article--(ruch|jedzenie|zdrowie|ciekawe|mity)[^"]*"/i },
@@ -582,8 +584,8 @@ function validateFile(filePath, { strictChanged = false } = {}) {
 
   validateNoXmlProlog(raw, errors);
   validateNoInvalidSourceClosingTags(raw, errors);
-  validateHeadSeoConsistency(raw, errors);
-  validateArticleTitles(raw, errors, { legacy: strictChanged ? false : isLegacyForTitleGate(raw) });
+  validateHeadSeoConsistency(raw, errors, profile);
+  if (!technical) validateArticleTitles(raw, errors, { legacy: strictChanged ? false : isLegacyForTitleGate(raw) });
 
   if (/\sstyle\s*=\s*['"]/i.test(raw)) {
     errors.push('Wykryto inline CSS (style="...")');
@@ -698,28 +700,30 @@ function validateFile(filePath, { strictChanged = false } = {}) {
     errors.push('Brak <article class="article-content"> do walidacji AEO/GEO.');
   } else {
     validateQuickAnswerBlock(articleContentHtml, errors, warnings, quickAnswerMode);
-    validateFaqQuestionsQuality(raw, errors);
-    validateQuestionHeadings(articleContentHtml, errors);
     validateInlineFiguresUsePicture(articleContentHtml, errors);
     validateNoAbsoluteInternalLinksInNarrative(articleContentHtml, errors);
-    validateBrokenSentenceArtifacts(articleContentHtml, errors);
-    validateUnlinkedArticlePrompts(articleContentHtml, errors);
-    validateAsideTitlesNotDuplicated(articleContentHtml, errors);
-    validateRepeatedLongSentences(articleContentHtml, errors);
-    validateBannedEditorialPhrases(articleContentHtml, errors);
-    const internalLinks = utils.countInternalHtmlLinks(stripFaqBlock(articleContentHtml));
-    if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) {
-      warnings.push(`Mało linków kontekstowych w treści: ${internalLinks}; to ostrzeżenie, nie bloker.`);
+    if (!technical) {
+      validateFaqQuestionsQuality(raw, errors);
+      validateQuestionHeadings(articleContentHtml, errors);
+      validateBrokenSentenceArtifacts(articleContentHtml, errors);
+      validateUnlinkedArticlePrompts(articleContentHtml, errors);
+      validateAsideTitlesNotDuplicated(articleContentHtml, errors);
+      validateRepeatedLongSentences(articleContentHtml, errors);
+      validateBannedEditorialPhrases(articleContentHtml, errors);
+      const internalLinks = utils.countInternalHtmlLinks(stripFaqBlock(articleContentHtml));
+      if (internalLinks < POLICY.WORDS.INTERNAL_LINKS_WARN_BELOW) {
+        warnings.push(`Mało linków kontekstowych w treści: ${internalLinks}; to ostrzeżenie, nie bloker.`);
+      }
+      validateAnswerFirstParagraphs(articleContentHtml, errors);
     }
-    validateAnswerFirstParagraphs(articleContentHtml, errors);
   }
   validateHeroShareContract(raw, errors);
   validateArticleTables(raw, errors);
   validateSourcesListMarkup(raw, errors);
-  validateCitationsInBlogPosting(raw, errors);
+  if (!technical) validateCitationsInBlogPosting(raw, errors);
   validateSpeakableTargetsQuickAnswer(raw, errors);
   validateBlogPostingAuthorIsPerson(raw, errors);
-  validateBlogPostingAboutSameAs(raw, errors);
+  if (!technical) validateBlogPostingAboutSameAs(raw, errors);
 
   return {
     errors: strictChanged ? errors : applyKnownValidationBaseline(filePath, errors, warnings),
@@ -729,6 +733,9 @@ function validateFile(filePath, { strictChanged = false } = {}) {
 
 function main() {
   const args = process.argv.slice(2);
+  const profileIndex = args.indexOf('--profile');
+  const profile = profileIndex >= 0 ? args.splice(profileIndex, 2)[1] : 'editorial';
+  if (!['technical', 'editorial', 'auto'].includes(profile)) throw new Error(`Nieobsługiwany profil: ${profile}`);
   const explicitMode = args.length > 0;
   let files = explicitMode ? args : getHtmlFiles();
   files = files.filter((f) => fs.existsSync(path.resolve(process.cwd(), f)));
@@ -746,7 +753,9 @@ function main() {
 
   let hasErrors = false;
   for (const f of articleFiles) {
-    const result = validateFile(path.resolve(process.cwd(), f), { strictChanged: explicitMode });
+    const filePath = path.resolve(process.cwd(), f);
+    const fileProfile = profile === 'auto' ? require('./lib/article-staging').validationProfileForFile(filePath) : profile;
+    const result = validateFile(filePath, { strictChanged: explicitMode, profile: fileProfile });
     const errs = result.errors;
     const warns = result.warnings;
     if (errs.length) {
