@@ -1,65 +1,24 @@
 {
   "version": 4,
-  "release_id": "16f2fcfe-7593-471f-8d69-39c25afdcbf1",
-  "prepared_at": "2026-11-10T12:36:36+01:00",
-  "prepared_from_head": "bcdca4f1bd3ecdbff29d62e1eef62b09b3bf83fd",
-  "publication_state_sha256": "b0d031fded54e2155181f8f4ed34b212940e38b99e286b31e83fe1359e090b36",
-  "public_fingerprint_sha256": "46253be8baafd2254c086ec618db8e7f725954c80b021c2fb6e09114c5b6ab7e",
+  "release_id": "bfa8d678-9968-47c6-b5db-3cd5e0108e14",
+  "prepared_at": "2026-11-10T14:37:37+01:00",
+  "prepared_from_head": "7de11cf142bb1aab22f2f26d4849901a817f7440",
+  "publication_state_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "public_fingerprint_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "release_files": [
-    "_site/assets/pdf/centrum-snu-po-50.pdf",
-    "_site/centrum-snu-po-50.html",
     "_site/deployment.json",
-    "_site/llms-full.txt",
-    "assets/pdf/centrum-snu-po-50.pdf",
-    "centrum-snu-po-50.html",
     "deployment.json",
-    "llms-full.txt",
-    "scripts/deployment-live-verify.js",
-    "scripts/lib/deployment-live-verifier.js",
-    "scripts/prepare-deployment-marker.js",
-    "scripts/validate-topic-center.py",
-    "templates/topic-centers/centrum-snu-po-50.html",
-    "tests/article-baseline-on-touch.test.js",
-    "tests/deployment-safety.test.js",
+    "scripts/publish-article.js",
     "tests/publish-resume.test.js"
   ],
   "release_file_hashes": {
-    "_site/assets/pdf/centrum-snu-po-50.pdf": "f8e441d98712561ef2b7da530c2831320fe4c3cde7a5233037fc804a0bee3c3d",
-    "_site/centrum-snu-po-50.html": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af",
-    "_site/llms-full.txt": "3511d65e28899c8c1c4abad19295573bcea2c150eaccab84741ee7e9e4bcb2f4",
-    "assets/pdf/centrum-snu-po-50.pdf": "f8e441d98712561ef2b7da530c2831320fe4c3cde7a5233037fc804a0bee3c3d",
-    "centrum-snu-po-50.html": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af",
-    "llms-full.txt": "3511d65e28899c8c1c4abad19295573bcea2c150eaccab84741ee7e9e4bcb2f4",
-    "scripts/deployment-live-verify.js": "d22a1aedb86a195a9dbb961ed1c9db542c9e70bb46ab60e593ca533677da1af6",
-    "scripts/lib/deployment-live-verifier.js": "b83c204470730a0de933e62225e34b6212b82f064532e4da6a54fa75fcc8c9be",
-    "scripts/prepare-deployment-marker.js": "5736d26b8b7323ad5b7ed1600758be379dd2e4f8f40032315aa4cabb6273aee2",
-    "scripts/validate-topic-center.py": "20c3e456b77fdab1cde51bbd529642e0f2fe0421ca6cc90984cad1a00243c44a",
-    "templates/topic-centers/centrum-snu-po-50.html": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af",
-    "tests/article-baseline-on-touch.test.js": "a921ddd82a6f1f32607906cf1b742eda7b1aca41f08d3d7b7d8b70ce367c00a3",
-    "tests/deployment-safety.test.js": "c1ad02a1ebe0daa462144c0a115c1cb408503ac44383757c544570d31b783559",
-    "tests/publish-resume.test.js": "789749f651ffbc74e308def46765fcdc865d642260007bf94bf4e5fd73aaa355"
+    "scripts/publish-article.js": "a3ba14004498c327c76ea075f885f9b07c61099d2134e21503df42a4f1678eae",
+    "tests/publish-resume.test.js": "5200046d024fde0df79a97135dfd1cab6f32a6e11e58b43e674319ae3645a4ad"
   },
   "change_scope": [
-    "articles",
     "pipeline"
   ],
-  "verification_targets": [
-    {
-      "path": "assets/pdf/centrum-snu-po-50.pdf",
-      "mode": "sha256",
-      "sha256": "f8e441d98712561ef2b7da530c2831320fe4c3cde7a5233037fc804a0bee3c3d"
-    },
-    {
-      "path": "centrum-snu-po-50.html",
-      "mode": "sha256",
-      "sha256": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af"
-    },
-    {
-      "path": "llms-full.txt",
-      "mode": "sha256",
-      "sha256": "3511d65e28899c8c1c4abad19295573bcea2c150eaccab84741ee7e9e4bcb2f4"
-    }
-  ],
+  "verification_targets": [],
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",
@@ -140,29 +99,5 @@
       }
     ]
   },
-  "articles": [
-    {
-      "file": "centrum-snu-po-50.html",
-      "slug": "centrum-snu-po-50",
-      "url": "https://fitpo50.pl/centrum-snu-po-50.html",
-      "date_modified": "2026-11-10T11:14:04+01:00",
-      "html_sha256": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af",
-      "pdf_path": "assets/pdf/centrum-snu-po-50.pdf",
-      "pdf_sha256": "f8e441d98712561ef2b7da530c2831320fe4c3cde7a5233037fc804a0bee3c3d",
-      "images": [
-        {
-          "path": "assets/logo-fitpo50.png",
-          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
-        },
-        {
-          "path": "assets/logo.jpg",
-          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
-        }
-      ],
-      "listing_paths": [
-        "index.html",
-        "assets/data/search-index.json"
-      ]
-    }
-  ]
+  "articles": []
 }

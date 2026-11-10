@@ -418,8 +418,20 @@ async function publishTask(options = {}) {
   let slug = source ? String(JSON.parse(fs.readFileSync(source, 'utf8')).slug || path.basename(source, '.fitpo50.json')).trim()
     : taskSlugFromEntries(taskIndex >= 0 ? initial.filter((entry) => related.includes(entry.file)) : initial);
   if (slug && !/^[a-z0-9][a-z0-9-]*$/.test(slug)) throw new Error(`Nieprawidłowy slug: ${slug}`);
+  const head = git('rev-parse', 'HEAD');
+  if (git('branch', '--show-current') !== 'main') throw new Error('Publikuj wymaga gałęzi main. Nie zmieniam gałęzi automatycznie.');
+  const requestedTaskDiffers = state && (
+    related.some((file) => !(state.task_files || []).includes(file))
+    || (source && (
+      !state.source
+      || path.resolve(state.source) !== path.resolve(source)
+      || sourceHash !== state.source_package_sha256
+    ))
+  );
   const completed = state && ['LIVE_DEPLOYED_AND_VALIDATED', 'PUSHED_NO_PUBLIC_CHANGES', 'NO_CHANGES'].includes(state.status);
-  if (completed) {
+  const committedToMain = requestedTaskDiffers && !completed && state?.commit && remoteHead() === state.commit;
+  if (requestedTaskDiffers && (completed || committedToMain)) state = null;
+  if (completed && state) {
     const changed = initial.some((entry) => (state.task_files || []).includes(entry.file));
     if (!changed && (!source || (source === state.source && sourceHash === state.source_package_sha256)) && related.every((file) => (state.task_files || []).includes(file))) {
       console.log(`[PUBLIKUJ] Wydanie jest zakończone: ${state.status}; commit ${state.commit || 'brak nowych zmian'}.`);
@@ -427,8 +439,6 @@ async function publishTask(options = {}) {
     }
     state = null;
   }
-  const head = git('rev-parse', 'HEAD');
-  if (git('branch', '--show-current') !== 'main') throw new Error('Publikuj wymaga gałęzi main. Nie zmieniam gałęzi automatycznie.');
   if (!state && Number(git('rev-list', '--count', 'origin/main..HEAD')) > 0) {
     const marker = JSON.parse(git('show', `${head}:deployment.json`));
     if (source && !(marker.articles || []).some((article) => article.slug === slug)) throw new Error('Istniejący commit oczekuje na domknięcie i nie obejmuje wskazanego artykułu. Najpierw wznów publikuj bez nowego katalogu.');
@@ -441,7 +451,9 @@ async function publishTask(options = {}) {
   if (state?.commit && state.commit !== head) throw new Error('HEAD nie odpowiada zapisanemu wydaniu. Zachowuję istniejący commit; nie tworzę następnego.');
   if (state && state.source && source && path.resolve(state.source) !== path.resolve(source)) throw new Error('Inne wydanie pozostaje niedokończone. Najpierw wznów je poleceniem publikuj bez nowego katalogu.');
   if (state?.commit && sourceHash && state.source_package_sha256 && sourceHash !== state.source_package_sha256) throw new Error('Paczka zmieniła się po commicie. Zachowuję poprzedni commit do domknięcia; nie podmieniam jego treści.');
-  if (state && related.some((file) => !(state.task_files || []).includes(file))) throw new Error('Nowa lista rozszerza niedokończone wydanie. Nie dołączam zmian automatycznie.');
+  if (state && related.some((file) => !(state.task_files || []).includes(file))) {
+    throw new Error(`Poprzednie wydanie (${state.status || 'nieznany status'}) jest niedokończone. Wznów poprzednie wydanie poleceniem publikuj bez katalogu.`);
+  }
   source = source || state?.source || '';
   slug = slug || state?.slug || '';
   if (state && !state.commit && sourceHash) savePublicationState(root, state, { source_package_sha256: sourceHash });

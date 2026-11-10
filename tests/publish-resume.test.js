@@ -123,6 +123,143 @@ test('wznowienie: nowy katalog nie podmienia zakresu istniejącego commita', () 
   assert.equal(count('push'), 0);
 }));
 
+test('wznowienie: stary stan nie blokuje następnego wydania, a PUSHED można osobno domknąć live', async () => {
+  const statuses = [
+    'LIVE_DEPLOYED_AND_VALIDATED',
+    'PUSHED',
+    'PUSHED_NO_PUBLIC_CHANGES',
+    'NO_CHANGES',
+    'COMMITTED',
+    'APPROVED',
+    'LOCAL_READY',
+  ];
+  const resumeMessage = (status) => `Poprzednie wydanie (${status}) jest niedokończone. Wznów poprzednie wydanie poleceniem publikuj bez katalogu.`;
+  const expected = {
+    LIVE_DEPLOYED_AND_VALIDATED: 'PUSHED_NO_PUBLIC_CHANGES',
+    PUSHED: 'PUSHED_NO_PUBLIC_CHANGES',
+    PUSHED_NO_PUBLIC_CHANGES: 'PUSHED_NO_PUBLIC_CHANGES',
+    NO_CHANGES: 'PUSHED_NO_PUBLIC_CHANGES',
+    COMMITTED: resumeMessage('COMMITTED'),
+    APPROVED: resumeMessage('APPROVED'),
+    LOCAL_READY: resumeMessage('LOCAL_READY'),
+  };
+  const outcomes = {};
+
+  for (const status of statuses) {
+    await fixture(async ({ root, base, options, write, git, setRemote, count }) => {
+      const unfinished = ['COMMITTED', 'APPROVED', 'LOCAL_READY'].includes(status);
+      const hasReleaseCommit = ['PUSHED', 'COMMITTED'].includes(status);
+      let commit = ['LIVE_DEPLOYED_AND_VALIDATED', 'PUSHED_NO_PUBLIC_CHANGES', 'NO_CHANGES'].includes(status) ? base : '';
+      const oldContent = `stare wydanie ${status}`;
+      const marker = {
+        version: 4,
+        release_id: `old-${status}`,
+        prepared_from_head: base,
+        release_files: ['old-release.txt', ...MARKERS],
+        release_file_hashes: { 'old-release.txt': hash(oldContent) },
+        change_scope: ['docs'],
+        verification_targets: [],
+        articles: [],
+      };
+      if (unfinished || status === 'PUSHED') write('old-release.txt', oldContent);
+      if (hasReleaseCommit) {
+        MARKERS.forEach((file) => write(file, JSON.stringify(marker, null, 2) + '\n'));
+        git('add', '--', 'old-release.txt', ...MARKERS);
+        git('commit', '-qm', `old ${status}`);
+        commit = git('rev-parse', 'HEAD').trim();
+        if (status === 'PUSHED') {
+          git('update-ref', 'refs/remotes/origin/main', commit);
+          setRemote(commit);
+        }
+      }
+      savePublicationState(root, {}, {
+        status,
+        approved: status !== 'LOCAL_READY',
+        ...(commit ? { commit } : {}),
+        head_before_commit: base,
+        task_files: ['old-release.txt'],
+        files: ['old-release.txt', ...MARKERS],
+        approved_hashes: { 'old-release.txt': hash(oldContent) },
+        marker,
+      });
+      try {
+        outcomes[status] = (await main(options)).status;
+      } catch (error) {
+        outcomes[status] = error.message;
+      }
+      if (unfinished) {
+        assert.equal(count('commit'), 0);
+        assert.equal(count('push'), 0);
+        assert.equal(readPublicationState(root).status, status);
+        if (status === 'COMMITTED') {
+          assert.equal(readPublicationState(root).commit, commit);
+          assert.equal(git('rev-parse', 'refs/remotes/origin/main').trim(), base);
+        } else {
+          assert.match(git('status', '--short', '--', 'old-release.txt'), /old-release\.txt/);
+        }
+      }
+    });
+  }
+
+  assert.deepEqual(outcomes, expected);
+
+  await fixture(async ({ root, base, options, write }) => {
+    savePublicationState(root, {}, {
+      status: 'LIVE_DEPLOYED_AND_VALIDATED',
+      approved: true,
+      commit: base,
+      task_files: ['old-release.txt'],
+      files: ['old-release.txt', ...MARKERS],
+      marker: { version: 4, release_id: 'old-directory-release' },
+    });
+    write('package/example.fitpo50.json', JSON.stringify({ slug: 'example' }));
+    const source = path.join(root, 'package/example.fitpo50.json');
+    options.argv = [path.dirname(source)];
+    options.ask = async () => false;
+    const executor = options.run;
+    let imports = 0;
+    options.run = (command, args) => {
+      if (command === 'npm' && args[1] === 'article:add') {
+        imports += 1;
+        write('example.html', 'article');
+        write('_site/example.html', 'article');
+        write('data/reports/article-publications/example.json', JSON.stringify({
+          slug: 'example',
+          status: 'PUBLISHED',
+          source_package_sha256: packageIdentity(source, path.dirname(source), { slug: 'example' }).hash,
+          files: ['example.html', '_site/example.html'].map((file) => ({ path: file, after_sha256: hash('article') })),
+        }));
+        return { stdout: '' };
+      }
+      return executor(command, args);
+    };
+    assert.equal((await main(options)).status, 'LOCAL_READY');
+    assert.equal(imports, 1);
+  });
+
+  await fixture(async ({ root, options, git, files, setRemote, count }) => {
+    options.run('npm', ['run', 'deployment:prepare', '--', '--files-json', JSON.stringify([...files, ...MARKERS].sort())]);
+    git('add', '--', ...files, ...MARKERS);
+    git('commit', '-qm', 'pushed release awaiting live');
+    const commit = git('rev-parse', 'HEAD').trim();
+    setRemote(commit);
+    const marker = JSON.parse(fs.readFileSync(path.join(root, 'deployment.json'), 'utf8'));
+    savePublicationState(root, {}, {
+      status: 'PUSHED',
+      approved: true,
+      commit,
+      head_before_commit: marker.prepared_from_head,
+      task_files: files,
+      files: [...files, ...MARKERS].sort(),
+      marker,
+    });
+    const result = await main({ ...options, argv: [] });
+    assert.equal(result.status, 'LIVE_DEPLOYED_AND_VALIDATED');
+    assert.equal(count('push'), 0);
+    assert.equal(count('commit'), 0);
+  }, { publicChange: true });
+});
+
 test('wznowienie: CDN ponawia tylko live; lista GSC powstaje dopiero po wszystkich potwierdzeniach', () => fixture(async ({ root, options, calls, count, asks }) => {
   let verifyCount = 0;
   options.verify = async () => (++verifyCount === 1 ? { status: 'CDN_REFRESH_PENDING', errors: ['stary hero'] } : { status: 'LIVE_DEPLOYED_AND_VALIDATED', security_status: 'SECURITY_EXPOSURE_PASS' });
