@@ -17,6 +17,7 @@ const { articleHeroTargets, verifyTargetedRelease, verificationTargetsForMarker,
 const ROOT = path.resolve(__dirname, '..');
 const MARKERS = ['_site/deployment.json', 'deployment.json'];
 const hash = (data) => crypto.createHash('sha256').update(data).digest('hex');
+const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xc0, 0x00, 0x11, 0x08, 0x00, 0x02, 0x00, 0x03, 0x03, 0x01, 0x11, 0x00, 0x02, 0x11, 0x00, 0x03, 0x11, 0x00, 0xff, 0xd9]);
 
 async function fixture(callback, { publicChange = false } = {}) {
   const root = fs.realpathSync(createManagedTempDir({ prefix: 'fitpo50-resume-', type: 'publish-resume-test', projectRoot: ROOT }));
@@ -294,10 +295,30 @@ test('live: jeden zestaw URL-i obejmuje stronę i wszystkie warianty hero, bez z
   assert.throws(() => heroAssetPaths(html.replace('<source srcset="./assets/a.avif">', '')), /AVIF\/WebP\/JPG/);
 });
 
+test('live: JPG artykułu przechodzi po HTTP, typie i wymiarach, bez porównania SHA', () => {
+  const baseUrl = 'https://fitpo50.pl';
+  const marker = { version: 4, release_id: 'r', verification_targets: [] };
+  const extraTargets = [{ path: 'assets/a.jpg', mode: 'jpeg', width: 3, height: 2 }];
+  const markerBody = Buffer.from(`${JSON.stringify(marker, null, 2)}\n`);
+  const responses = new Map([
+    [`${baseUrl}/deployment.json`, { status: 200, body: markerBody }],
+    [`${baseUrl}/assets/a.jpg`, { status: 200, contentType: 'image/jpeg', body: jpeg }],
+  ]);
+  const result = verifyTargetedRelease({ expectedCommit: 'a', remoteCommit: 'a', marker, extraTargets, responses, baseUrl });
+  assert.equal(result.status, 'LIVE_DEPLOYED_AND_VALIDATED');
+  const wrongSize = Buffer.from(jpeg);
+  wrongSize[8] = 0x03;
+  responses.set(`${baseUrl}/assets/a.jpg`, { status: 200, contentType: 'image/jpeg', body: wrongSize });
+  assert.equal(verifyTargetedRelease({ expectedCommit: 'a', remoteCommit: 'a', marker, extraTargets, responses, baseUrl }).status, 'DEPLOYED');
+});
+
 test('live: cele hero pochodzą z rzeczywistego HTML-a i obejmują też niezmienione warianty', () => fixture(({ root, write }) => {
   const html = '<div class="article-hero"><picture><source srcset="./assets/a.avif"><source srcset="./assets/a.webp"><img src="./assets/a.jpg"></picture></div>';
   write('_site/test.html', html);
   for (const file of ['assets/a.avif', 'assets/a.webp', 'assets/a.jpg']) write(`_site/${file}`, file);
   assert.deepEqual(articleHeroTargets({ articles: [{ file: 'test.html' }] }, path.join(root, '_site')), ['assets/a.avif', 'assets/a.webp', 'assets/a.jpg'].map((file) => ({ path: file, mode: 'sha256', sha256: hash(file) })));
+  write('_site/centrum-testowe.html', '<main>centrum bez hero</main>');
+  write('templates/topic-centers/centrum-testowe.html', 'centrum');
+  assert.deepEqual(articleHeroTargets({ articles: [{ file: 'centrum-testowe.html' }] }, path.join(root, '_site')), []);
   assert.deepEqual(articleHeroTargets({ articles: [] }, path.join(root, '_site')), []);
 }));

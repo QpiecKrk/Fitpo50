@@ -320,6 +320,12 @@ function deploymentVerificationTargets(rootDir, changedFiles) {
       targets.set(relative, { path: relative, mode: 'reachable' });
       continue;
     }
+    // Raport pomocniczy importera jest celowo chroniony na produkcji (HTTP 403),
+    // więc potwierdzamy tylko osiągalność chronionej ścieżki, nie jej zawartość.
+    if (/^data\/crosslink-suggestions\/[^/]+\.json$/i.test(relative)) {
+      targets.set(relative, { path: relative, mode: 'reachable' });
+      continue;
+    }
     const local = fs.existsSync(exported) ? exported : source;
     targets.set(relative, { path: relative, mode: 'sha256', sha256: sha256(fs.readFileSync(local)) });
   }

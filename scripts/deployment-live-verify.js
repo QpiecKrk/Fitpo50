@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const { atomicWriteFileSync } = require('./lib/atomic-file');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
-const { canonicalFromHtml, heroAssetPaths, modifiedDates, sha256, verifyDeployment } = require('./lib/deployment-live-verifier');
+const { canonicalFromHtml, heroAssetPaths, jpegDimensions, modifiedDates, sha256, verifyDeployment } = require('./lib/deployment-live-verifier');
 const { assertPreparedPublicationState, extractLocalAssetPaths, publicFingerprint } = require('./prepare-deployment-marker');
 
 function parseArgs(argv) {
@@ -21,26 +21,36 @@ function parseArgs(argv) {
   return out;
 }
 
-function verificationTargetsForMarker(baseUrl, marker, extraTargets = []) {
+function verificationTargetsForMarker(baseUrl, marker, extraTargets = [], siteRoot = path.resolve('_site')) {
   const normalizedBase = String(baseUrl || '').replace(/\/$/, '');
   const targets = [{ url: `${normalizedBase}/deployment.json`, mode: 'marker' }];
   for (const target of [...(Array.isArray(marker?.verification_targets) ? marker.verification_targets : []), ...extraTargets]) {
     const relative = String(target?.path || '').replace(/^\/+/, '');
     if (!relative || relative.includes('..')) continue;
     if (targets.some((entry) => entry.url === `${normalizedBase}/${relative}`)) continue;
+    const isCrosslinkReport = /^data\/crosslink-suggestions\/[^/]+\.json$/i.test(relative);
+    const localJpeg = /\.jpg$/i.test(relative) && path.join(siteRoot, relative);
+    const localDimensions = localJpeg && fs.existsSync(localJpeg) ? jpegDimensions(fs.readFileSync(localJpeg)) : null;
+    const markerDimensions = target?.mode === 'jpeg' && Number.isInteger(target.width) && Number.isInteger(target.height)
+      ? { width: target.width, height: target.height }
+      : null;
+    const dimensions = localDimensions || markerDimensions;
     targets.push({
       url: `${normalizedBase}/${relative}`,
-      mode: target.mode,
-      ...(target.sha256 ? { sha256: target.sha256 } : {}),
+      mode: isCrosslinkReport ? 'reachable' : (dimensions ? 'jpeg' : target.mode),
+      ...(dimensions ? { width: dimensions.width, height: dimensions.height } : (!isCrosslinkReport && target.sha256 ? { sha256: target.sha256 } : {})),
     });
   }
   return targets;
 }
 
 function articleHeroTargets(marker, siteRoot = path.resolve('_site')) {
+  const root = path.resolve(siteRoot, '..');
   return (marker.articles || []).flatMap((article) => {
-    const html = fs.readFileSync(path.join(siteRoot, article.file || `${article.slug}.html`), 'utf8');
-    return heroAssetPaths(html).map((file) => ({ path: file, mode: 'sha256', sha256: sha256(fs.readFileSync(path.join(siteRoot, file))) }));
+    const file = article.file || `${article.slug}.html`;
+    const html = fs.readFileSync(path.join(siteRoot, file), 'utf8');
+    const isTopicCenter = fs.existsSync(path.join(root, 'templates', 'topic-centers', file));
+    return heroAssetPaths(html, { isTopicCenter }).map((asset) => ({ path: asset, mode: 'sha256', sha256: sha256(fs.readFileSync(path.join(siteRoot, asset))) }));
   });
 }
 
@@ -59,6 +69,13 @@ function verifyTargetedRelease({ expectedCommit, remoteCommit, marker, responses
     const response = responses.get(target.url);
     let pass = false;
     if (target.mode === 'sha256') pass = response?.status === 200 && sha256(response.body) === target.sha256;
+    else if (target.mode === 'jpeg') {
+      const dimensions = response?.status === 200 ? jpegDimensions(response.body) : null;
+      pass = response?.status === 200
+        && /^image\/jpeg(?:\s*;|$)/i.test(String(response.contentType || ''))
+        && dimensions?.width === target.width
+        && dimensions?.height === target.height;
+    }
     else if (target.mode === 'absent') pass = [404, 410].includes(response?.status);
     else if (target.mode === 'reachable') pass = Boolean(response && ((response.status >= 200 && response.status < 400) || [401, 403].includes(response.status)));
     if (!pass) errors.push(`${target.url}: cel ${target.mode || 'UNKNOWN'} nie odpowiada bieżącemu wydaniu (HTTP ${response?.status ?? 0}).`);

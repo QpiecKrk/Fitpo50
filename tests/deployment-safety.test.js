@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
-const { changedRootArticles, prepareDeploymentMarker } = require('../scripts/prepare-deployment-marker');
+const { changedRootArticles, deploymentVerificationTargets, prepareDeploymentMarker } = require('../scripts/prepare-deployment-marker');
 const { verifyDeployment } = require('../scripts/lib/deployment-live-verifier');
 const { cacheBustUrl, isPublicRootHtmlPath, normalizeFinalResult, parseArgs, verificationTargetsForMarker } = require('../scripts/deployment-live-verify');
 const { ADMIN_SENSITIVE_PATHS, SENSITIVE_PATHS, classifyExposureResponse } = require('../scripts/security-exposure-check');
@@ -399,6 +399,20 @@ test('live finalize sprawdza tylko marker i jawne cele bieżącego wydania', () 
     { url: `${baseUrl}/admin/news-form.php`, mode: 'reachable' },
     { url: `${baseUrl}/assets/data/news-fallback.json`, mode: 'sha256', sha256: 'a'.repeat(64) },
   ]);
+});
+
+test('raport crosslink jest celem chronionym, nie publicznym plikiem SHA', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fitpo50-crosslink-target-'));
+  try {
+    const report = 'data/crosslink-suggestions/test.json';
+    fs.mkdirSync(path.join(root, 'data', 'crosslink-suggestions'), { recursive: true });
+    fs.writeFileSync(path.join(root, report), '{}\n');
+    assert.deepEqual(deploymentVerificationTargets(root, [report]), [{ path: report, mode: 'reachable' }]);
+    assert.deepEqual(verificationTargetsForMarker('https://fitpo50.pl', { verification_targets: [{ path: report, mode: 'sha256', sha256: 'a'.repeat(64) }] }), [
+      { url: 'https://fitpo50.pl/deployment.json', mode: 'marker' },
+      { url: `https://fitpo50.pl/${report}`, mode: 'reachable' },
+    ]);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
 });
 
 test('aktualny marker i oczekujący CDN kończą się informacją, nie błędem wdrożenia', () => {

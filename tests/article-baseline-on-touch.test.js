@@ -56,6 +56,33 @@ test('sześć centrów: zmiana listy i linków z FAQ identycznym z HEAD przechod
   }
 }));
 
+test('sześć centrów: licznik artykułów może zmienić się z listą przy identycznym FAQ', () => centerFixture((root) => {
+  for (const name of CENTERS) {
+    const file = path.join(root, name);
+    const html = fs.readFileSync(file, 'utf8');
+    const changed = html.replace(
+      /(<div class="hub-metric"><strong>)\d+(<\/strong><span>artykułów w centrum<\/span><\/div>)/,
+      '$1999$2',
+    );
+    assert.notEqual(changed, html, name);
+    fs.writeFileSync(file, changed);
+    assert.deepEqual(centerErrors(root, name), [], name);
+  }
+}));
+
+test('zmiana innej metryki centrum nadal blokuje wyjątek legacy FAQ', () => centerFixture((root) => {
+  const name = 'centrum-snu-po-50.html';
+  const file = path.join(root, name);
+  const html = fs.readFileSync(file, 'utf8');
+  const changed = html.replace(
+    /(<div class="hub-metric"><strong>)\d+(<\/strong><span>pytania z odpowiedziami<\/span><\/div>)/,
+    '$1999$2',
+  );
+  assert.notEqual(changed, html);
+  fs.writeFileSync(file, changed);
+  assert.ok(centerErrors(root, name).some((error) => error.includes('FAQ_RESEARCH_MANUAL_RESEARCH_LEGACY')));
+}));
+
 test('sześć centrów: zmiana FAQ, JSON-LD lub researchu blokuje wyjątek', () => centerFixture((root) => {
   for (const name of CENTERS) {
     const file = path.join(root, name);

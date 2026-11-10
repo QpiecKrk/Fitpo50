@@ -1,6 +1,7 @@
 const crypto = require('node:crypto');
 
-function heroAssetPaths(html) {
+function heroAssetPaths(html, options = {}) {
+  if (options.isTopicCenter) return [];
   const hero = String(html || '').match(/<div class="article-hero[\s\S]*?<\/div>/i)?.[0] || '';
   const paths = [...hero.matchAll(/<(?:source|img)\b[^>]*\bsrc(?:set)?="([^"]+)"/gi)]
     .map((match) => match[1].split(',')[0].trim().split(/\s+/)[0].replace(/^\.\//, '')).filter((value) => value.startsWith('assets/'));

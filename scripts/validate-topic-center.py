@@ -60,6 +60,12 @@ def non_list_content(html):
         raise ValueError('Brak treści centrum')
     for node in main.select('#najwazniejsze-artykuly .hub-article-list, #najwazniejsze-artykuly .hub-featured, .hub-actions a[download]'):
         node.decompose()
+    # Licznik tej samej listy może zmienić się razem z jej linkami. Nie ukrywamy
+    # innych metryk ani tekstu centrum przed porównaniem z HEAD.
+    for node in main.select('.hub-metric'):
+        label = node.select_one('span')
+        if label and label.get_text(' ', strip=True) == 'artykułów w centrum':
+            node.decompose()
     for link in main.select('a'):
         link.unwrap()
     return ' '.join(main.get_text(' ', strip=True).split())

@@ -1,427 +1,63 @@
 {
   "version": 4,
-  "release_id": "dc6542ef-5d15-4daf-b389-2eb50b0572d2",
-  "prepared_at": "2026-11-10T11:57:15+01:00",
-  "prepared_from_head": "2de1d6290eda93aaaec173d43ae049e13f478185",
-  "publication_state_sha256": "283ae3533aebe41c95e266d7bdb7c6905b67585dda08b313fc98dfdcf0b735d4",
-  "public_fingerprint_sha256": "8721e6b4cf711bdaa180cb230af81d6c4f396a99a267f9c76136e7188034eebe",
+  "release_id": "16f2fcfe-7593-471f-8d69-39c25afdcbf1",
+  "prepared_at": "2026-11-10T12:36:36+01:00",
+  "prepared_from_head": "bcdca4f1bd3ecdbff29d62e1eef62b09b3bf83fd",
+  "publication_state_sha256": "b0d031fded54e2155181f8f4ed34b212940e38b99e286b31e83fe1359e090b36",
+  "public_fingerprint_sha256": "46253be8baafd2254c086ec618db8e7f725954c80b021c2fb6e09114c5b6ab7e",
   "release_files": [
-    ".githooks/pre-commit",
-    ".githooks/pre-push",
-    "AGENTS.md",
-    "ARTICLE_STANDARD.md",
-    "MEMORY_PORADY.md",
-    "PROJECT_MEMORY.md",
-    "_site/assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif",
-    "_site/assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg",
-    "_site/assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp",
-    "_site/assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.avif",
-    "_site/assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.jpg",
-    "_site/assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.webp",
-    "_site/assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.avif",
-    "_site/assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.jpg",
-    "_site/assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.webp",
-    "_site/assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.avif",
-    "_site/assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.jpg",
-    "_site/assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.webp",
-    "_site/assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.avif",
-    "_site/assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.jpg",
-    "_site/assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.webp",
-    "_site/assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.avif",
-    "_site/assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.jpg",
-    "_site/assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.webp",
-    "_site/assets/data/search-index.json",
-    "_site/assets/pdf/bezdech-senny-po-50-objawy.pdf",
     "_site/assets/pdf/centrum-snu-po-50.pdf",
-    "_site/bezdech-senny-po-50-objawy.html",
     "_site/centrum-snu-po-50.html",
-    "_site/data/crosslink-suggestions/bezdech-senny-po-50-objawy.json",
     "_site/deployment.json",
-    "_site/index.html",
     "_site/llms-full.txt",
-    "_site/llms.txt",
-    "_site/porady.html",
-    "_site/sitemap.xml",
-    "_site/zdrowie.html",
-    "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif",
-    "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg",
-    "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp",
-    "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.avif",
-    "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.jpg",
-    "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.webp",
-    "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.avif",
-    "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.jpg",
-    "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.webp",
-    "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.avif",
-    "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.jpg",
-    "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.webp",
-    "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.avif",
-    "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.jpg",
-    "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.webp",
-    "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.avif",
-    "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.jpg",
-    "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.webp",
-    "assets/data/search-index.json",
-    "assets/pdf/bezdech-senny-po-50-objawy.pdf",
     "assets/pdf/centrum-snu-po-50.pdf",
-    "bezdech-senny-po-50-objawy.html",
     "centrum-snu-po-50.html",
-    "data/crosslink-suggestions/bezdech-senny-po-50-objawy.json",
-    "data/reports/article-preview/bezdech-senny-po-50-objawy.json",
-    "data/reports/article-preview/bezdech-senny-po-50-objawy.md",
-    "data/reports/article-preview/centrum-snu-po-50.json",
-    "data/reports/article-preview/centrum-snu-po-50.md",
-    "data/reports/article-publications/bezdech-senny-po-50-objawy.json",
-    "data/reports/gsc-after-publication-queue.json",
-    "data/reports/gsc-after-publication-queue.txt",
-    "data/reports/published-articles-log.json",
     "deployment.json",
-    "docs/command-registry.md",
-    "index.html",
     "llms-full.txt",
-    "llms.txt",
-    "porady.html",
-    "scripts/article-add.js",
-    "scripts/article-contract-check.js",
-    "scripts/article-dry-run.js",
-    "scripts/article-json-workbench.js",
-    "scripts/article-pipeline.js",
-    "scripts/article-preflight.js",
-    "scripts/article-publish-guard.js",
-    "scripts/date-modified-guard.js",
     "scripts/deployment-live-verify.js",
-    "scripts/immutable-asset-guard.js",
-    "scripts/import-article.js",
-    "scripts/json-fitpo50-gate-diff.js",
-    "scripts/lib/article-head-contract.js",
-    "scripts/lib/article-intent-links.js",
-    "scripts/lib/article-json-artifact.js",
-    "scripts/lib/article-media.js",
-    "scripts/lib/article-staging.js",
-    "scripts/lib/change-scope.js",
     "scripts/lib/deployment-live-verifier.js",
-    "scripts/lib/topic-center-print.js",
-    "scripts/live-postpush-check.sh",
-    "scripts/news-public-http-check.js",
-    "scripts/package-audit.js",
-    "scripts/predeploy-gate.js",
-    "scripts/prepare-article-architecture.js",
-    "scripts/prepare-article-assets.js",
-    "scripts/prepare-article-media.js",
     "scripts/prepare-deployment-marker.js",
-    "scripts/prepush-diff-guard.js",
-    "scripts/prepush-main-guard.js",
-    "scripts/prepush-parallel-checks.js",
-    "scripts/publish-article.js",
-    "scripts/run-all-prepush.js",
-    "scripts/run-article-contract-diff.js",
-    "scripts/run-article-guard-diff.js",
-    "scripts/schema-validator.js",
-    "scripts/sync-site-assets-mirror.js",
-    "scripts/validate-article-standard.js",
     "scripts/validate-topic-center.py",
-    "sitemap.xml",
     "templates/topic-centers/centrum-snu-po-50.html",
     "tests/article-baseline-on-touch.test.js",
-    "tests/article-dry-run.test.js",
-    "tests/article-preview-dom.test.js",
-    "tests/article-staging.test.js",
-    "tests/article-technical-flow.test.js",
-    "tests/fixtures/change-scope-past-releases.json",
-    "tests/package-audit.test.js",
-    "tests/prepush-concurrency.test.js",
-    "tests/prepush-release-guardrails.test.js",
-    "tests/publish-article-command.test.js",
-    "tests/publish-resume.test.js",
-    "tests/release-scope.test.js",
-    "tests/validation-reuse.test.js",
-    "zdrowie.html"
+    "tests/deployment-safety.test.js",
+    "tests/publish-resume.test.js"
   ],
   "release_file_hashes": {
-    ".githooks/pre-commit": "bb3afe1565593d67977243040fde1953298ec8524a754a1b7d44513b41bed3b8",
-    ".githooks/pre-push": "e11e2b72bdc0db34e72d063b0331af1c90fb8867f158b7d9f35bd97e4cc78069",
-    "AGENTS.md": "c8f234a73f950e7d9f54aca30f2bf1b47ccf1958c42a0a0135eab65c4ffc48cc",
-    "ARTICLE_STANDARD.md": "7024e31886ad87a0943a4b5596e65319986fc16a37c68bd95fbfb23a6a56785f",
-    "MEMORY_PORADY.md": "1a7c0ec12887069c12d250931718893de52dbb71489d97b89c87e33834f67d33",
-    "PROJECT_MEMORY.md": "822f0287752e59f0907de888c5d7d5fbbe278432ca349554510aa45fbcbe66c8",
-    "_site/assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif": "39d89438447064a31a9b51bc1c5fef6a4599cd166d32adc702921f2efa174786",
-    "_site/assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg": "3e97c7a25a550a0de8b6c6716c02ea9d9700e227d94aeef31e1e7cf447b828f1",
-    "_site/assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp": "a744a3b49d5241fb63421df3011c13c22666e8419da99b46f1ae6593ffe7b674",
-    "_site/assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.avif": "46ff05210c29ecba60cd65564770f9827bef2a6d77f6a9b8933b58d5550064fe",
-    "_site/assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.jpg": "5c1e0aa88963991af61585ecb3d195829f49ae248a54b4470d235ed12f0bfdcd",
-    "_site/assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.webp": "f953f9327e5ce15e979a301080c5d03482418c63ebb8721d16f451f26e9803f2",
-    "_site/assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.avif": "f0b8203ff13e7f3806d2e8b3c8a668299752be6395e0f3a9e95531c58947d9dd",
-    "_site/assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.jpg": "ddde8b548bc5c7a8d0d64a8474d4d5e1008de2dd0e5b9cdc9e39197c6b41f8dd",
-    "_site/assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.webp": "b81d73e2746c39ce6415f88a31337a824040ba393c2ceb3752b886c9d59f8f27",
-    "_site/assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.avif": "8a34cf4af620979e6f06c01a638353763d99094e461e57445552ab329095c847",
-    "_site/assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.jpg": "c0b6c95a5e979a2b94c45ed16aabb6c4144a13b383073e37dd2c3f242582c9df",
-    "_site/assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.webp": "d5e16f72c09e74cae63733dde8570250e651106428100ecea8e0e487380d5a84",
-    "_site/assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.avif": "8ab37b0d64e3177fdef114e0c70da06fc37c33d7411f6c5adc2720eb10e33c65",
-    "_site/assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.jpg": "9a63e935c8b0fe87b52a1d26458189569fcf40c35e8b81ae5afc0e4dd09d7441",
-    "_site/assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.webp": "73b3f72700e9983e9ba25b0ecac8800b0191bb97186c8d50bfea0df5614a4d06",
-    "_site/assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.avif": "f7cdb3e44c52d5b22b8aa873646c0c4667bd0d7ae87b141954e4d132ab4f8b1d",
-    "_site/assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.jpg": "cf82acc4069e135b8f772a3122d10b07080b2d687b947709719a7d50cdeb4afe",
-    "_site/assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.webp": "89d9637029b1eb50b19c60b438f15f7bc4209af3516ea8e379e169dd0cd2ea98",
-    "_site/assets/data/search-index.json": "79bd77c327d26f0b100d3baea20d3bb4e52efc73550b5c2f3c3b8aacbe7c5cc8",
-    "_site/assets/pdf/bezdech-senny-po-50-objawy.pdf": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118",
-    "_site/assets/pdf/centrum-snu-po-50.pdf": "ec1d5c73e9a6d13bd9b801013377b18e9713b3743e7008b8ef7171296d71653f",
-    "_site/bezdech-senny-po-50-objawy.html": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727",
-    "_site/centrum-snu-po-50.html": "7572332cf99916e19a95019d57ac66ec9232aef47f6bf2552b9d10557ef1401c",
-    "_site/data/crosslink-suggestions/bezdech-senny-po-50-objawy.json": "e0a76aec7b23811f21d042ecb211b96a83a25c388fba565db71c812b9887b63f",
-    "_site/index.html": "27bb2ca2a3bb8e80f091d7110cf393131a97b2280445c9c0be6c5da9567afee1",
-    "_site/llms-full.txt": "fe197e19cbcf2ef37e3bd1955e484bfde6a3429e8034831c9a3ddb30c1398dd7",
-    "_site/llms.txt": "20ac6b8f6cb0b3611636c280c7bf3a1515d36b85f611e4e34576569b460e8b4f",
-    "_site/porady.html": "a7ed29a2e69b9fffb2b37d8e6ddf406933a6610401d7c00831b0637d2234f873",
-    "_site/sitemap.xml": "988940bd3961822a237d12f4d356de065c6b6be8a4942d97b81fa974652a1fcd",
-    "_site/zdrowie.html": "269f24fe90fe8dd2ba376378a6f2bdf8e6cc1f0d7c8d1448075f5970e4195089",
-    "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif": "39d89438447064a31a9b51bc1c5fef6a4599cd166d32adc702921f2efa174786",
-    "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg": "3e97c7a25a550a0de8b6c6716c02ea9d9700e227d94aeef31e1e7cf447b828f1",
-    "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp": "a744a3b49d5241fb63421df3011c13c22666e8419da99b46f1ae6593ffe7b674",
-    "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.avif": "46ff05210c29ecba60cd65564770f9827bef2a6d77f6a9b8933b58d5550064fe",
-    "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.jpg": "5c1e0aa88963991af61585ecb3d195829f49ae248a54b4470d235ed12f0bfdcd",
-    "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.webp": "f953f9327e5ce15e979a301080c5d03482418c63ebb8721d16f451f26e9803f2",
-    "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.avif": "f0b8203ff13e7f3806d2e8b3c8a668299752be6395e0f3a9e95531c58947d9dd",
-    "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.jpg": "ddde8b548bc5c7a8d0d64a8474d4d5e1008de2dd0e5b9cdc9e39197c6b41f8dd",
-    "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.webp": "b81d73e2746c39ce6415f88a31337a824040ba393c2ceb3752b886c9d59f8f27",
-    "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.avif": "8a34cf4af620979e6f06c01a638353763d99094e461e57445552ab329095c847",
-    "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.jpg": "c0b6c95a5e979a2b94c45ed16aabb6c4144a13b383073e37dd2c3f242582c9df",
-    "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.webp": "d5e16f72c09e74cae63733dde8570250e651106428100ecea8e0e487380d5a84",
-    "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.avif": "8ab37b0d64e3177fdef114e0c70da06fc37c33d7411f6c5adc2720eb10e33c65",
-    "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.jpg": "9a63e935c8b0fe87b52a1d26458189569fcf40c35e8b81ae5afc0e4dd09d7441",
-    "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.webp": "73b3f72700e9983e9ba25b0ecac8800b0191bb97186c8d50bfea0df5614a4d06",
-    "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.avif": "f7cdb3e44c52d5b22b8aa873646c0c4667bd0d7ae87b141954e4d132ab4f8b1d",
-    "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.jpg": "cf82acc4069e135b8f772a3122d10b07080b2d687b947709719a7d50cdeb4afe",
-    "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.webp": "89d9637029b1eb50b19c60b438f15f7bc4209af3516ea8e379e169dd0cd2ea98",
-    "assets/data/search-index.json": "79bd77c327d26f0b100d3baea20d3bb4e52efc73550b5c2f3c3b8aacbe7c5cc8",
-    "assets/pdf/bezdech-senny-po-50-objawy.pdf": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118",
-    "assets/pdf/centrum-snu-po-50.pdf": "ec1d5c73e9a6d13bd9b801013377b18e9713b3743e7008b8ef7171296d71653f",
-    "bezdech-senny-po-50-objawy.html": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727",
-    "centrum-snu-po-50.html": "7572332cf99916e19a95019d57ac66ec9232aef47f6bf2552b9d10557ef1401c",
-    "data/crosslink-suggestions/bezdech-senny-po-50-objawy.json": "e0a76aec7b23811f21d042ecb211b96a83a25c388fba565db71c812b9887b63f",
-    "data/reports/article-preview/bezdech-senny-po-50-objawy.json": "0746d75d907d507fa9b2116a2a61cabc4056ac0e10cf95a36a52a712f5a8ee9f",
-    "data/reports/article-preview/bezdech-senny-po-50-objawy.md": "9b3fc442766dd00a0c60d87560763b62a494d7101daf0a587ed74731fa447b4f",
-    "data/reports/article-preview/centrum-snu-po-50.json": "3d8c117cb853409a527d4be796f65a8aef77566d5a52d3d874f63404e11ca1c5",
-    "data/reports/article-preview/centrum-snu-po-50.md": "e6124ced57106018dd13c4d50188f61f58b680d1da537e08f3e1f1e876175fad",
-    "data/reports/article-publications/bezdech-senny-po-50-objawy.json": "ad4ff924f2b9f993d402c4936a523db2abd554282f41b298ff3e55a1cf80cc51",
-    "data/reports/gsc-after-publication-queue.json": "5205fd01bd6141bef9e4461701e4773ae993bc06daa8da77759d49f2ccf9145c",
-    "data/reports/gsc-after-publication-queue.txt": "64effc914130d8f66f9dd45d5b5f03606a1c85c9f2f06f0fefe6d2a10dbba63c",
-    "data/reports/published-articles-log.json": "0ae03056ede79b526f2999fe0fa6421893e48e916aa72b69cfc1132e0127a6de",
-    "docs/command-registry.md": "b3360b3dcbf2fe67e6af191a4ae589aa286f5661b16c8c40ce582bb0a2811362",
-    "index.html": "27bb2ca2a3bb8e80f091d7110cf393131a97b2280445c9c0be6c5da9567afee1",
-    "llms-full.txt": "fe197e19cbcf2ef37e3bd1955e484bfde6a3429e8034831c9a3ddb30c1398dd7",
-    "llms.txt": "20ac6b8f6cb0b3611636c280c7bf3a1515d36b85f611e4e34576569b460e8b4f",
-    "porady.html": "a7ed29a2e69b9fffb2b37d8e6ddf406933a6610401d7c00831b0637d2234f873",
-    "scripts/article-add.js": "a1d6be33d376a5a3cdef105f956ef01b883d82286481f96295fd745a9192bec5",
-    "scripts/article-contract-check.js": "31c18f4ac60b23288ffa7a478ebe8d84a58c3992f32348211102dcc8b1540c97",
-    "scripts/article-dry-run.js": "84ada8cd41cfc5d9f172323a8bda5581af04f158f90371095a6b999e62d4a9ee",
-    "scripts/article-json-workbench.js": "1ddb29b00386bfcff4470cbd392e71264079ef14537c6059c16485627491b021",
-    "scripts/article-pipeline.js": "6109ebd403df51bbb71551986f94424ba270692a534988d403118da0c9de2f59",
-    "scripts/article-preflight.js": "372fa4617a61597afe75ca69db63e456763331065ec64ffdccc7899b3100e2c2",
-    "scripts/article-publish-guard.js": "7b46b23401e42bd7ef5682af3dd2f594283ebd1e9b9f2f6cb20bad1bfe3ca338",
-    "scripts/date-modified-guard.js": "3c3119a9142ba06979636759940aae9af0fbbe13e5b593b8d7af45204e00453c",
-    "scripts/deployment-live-verify.js": "067d9fb83588e2b659291b80dad04e037830555d0644194921b6b3b9d82ac00f",
-    "scripts/immutable-asset-guard.js": "584f4a4244e28aca983c998e08d74a1dacd2d3908e7ebc48f7b87a2793db1a65",
-    "scripts/import-article.js": "51b25cbfe68e36862cb59601550f2b307b7e7b85161295d5211fff74cae87a23",
-    "scripts/json-fitpo50-gate-diff.js": "4ffcb607f320d7dcf8cb92be467bb25c3770322c93d259554f9c29b5d1d783d8",
-    "scripts/lib/article-head-contract.js": "a58eea7d9a71d887773d1ac24b27b5a2cf18dec5716ce804ba10ea1851a52a7d",
-    "scripts/lib/article-intent-links.js": "61cb227aa4d526b5a9aa25bb69e2fd8080efb6ad3c53024fe0520c94f649bc7b",
-    "scripts/lib/article-json-artifact.js": "ebeffccfe4d049ff6226fa93587171b51d24a0bd97388cc50030c5cb15c2df46",
-    "scripts/lib/article-media.js": "304148ca77dec6a527af9651ead4ba3e63d202db6932835b2d5dc5b10d67356c",
-    "scripts/lib/article-staging.js": "68d8b2ff1a9f168d199b5be6ba38552845ac786034b38818993b233c05f5bd26",
-    "scripts/lib/change-scope.js": "ef27901deabe6c88de86554cd614046dd6aba921738f41afcf13751bd84fe410",
-    "scripts/lib/deployment-live-verifier.js": "bdb3db6793841eff84fb3eb3cf9bd515b125b2901505f1eadfadbc1edd2fb8bf",
-    "scripts/lib/topic-center-print.js": "4826686f1ef0a9cb02509203f3d5c77ef04b93d3f74f1d3859801c89c8094ce1",
-    "scripts/live-postpush-check.sh": "abdd71ceaa9b088ac109f8c892aa35364eb049e939f665c288c12713a516c689",
-    "scripts/news-public-http-check.js": "d1b9f93ccbb2ccb2d099ab2413d3c6400dfbed1812248ae396e3a5fee7b49215",
-    "scripts/package-audit.js": "9eea8fbdb5ba04541d70397ef20790b867797544a1707a3e0c68fdcd1071d519",
-    "scripts/predeploy-gate.js": "022ca41657d74b88bf6c530e3f3384f12fc5903a5e8838f26027471366a623a4",
-    "scripts/prepare-article-architecture.js": "2c0f90d75df527b6f14d2bc520ba439856944b8f1600cf8a84b16ee70e09d963",
-    "scripts/prepare-article-assets.js": "ff08a4d5b3fdfab1aa9897de031ab28d97e204d9ce9acf73ff107a2d42cb7b31",
-    "scripts/prepare-article-media.js": "b7a060347607243cbb769354af7cdd69303b8d22921ef8d21732aa938cdf5a40",
-    "scripts/prepare-deployment-marker.js": "b81d9e303389024cafe14498cf69324cadc9f06d18364c479f0392681f837aa8",
-    "scripts/prepush-diff-guard.js": "b7434dd69ce95a800a402418c88b0c58d918e3d45f4e575e8c60cc1683165602",
-    "scripts/prepush-main-guard.js": "0332aa5c0959bd8660301b9022fae8aa450501525c5fac3f549f67fb60c78781",
-    "scripts/prepush-parallel-checks.js": "98b29961106ff8f3a34830298b07b0b362edf7a0775d37706435ca79d337b9ab",
-    "scripts/publish-article.js": "5b4119c6afc198fe585bed9e958b234c174376328e19b34e728af668d1df3a10",
-    "scripts/run-all-prepush.js": "6264e234b5bf244664d240edb9b3d9397bf29f0a013110a3382e75b6e3454bd8",
-    "scripts/run-article-contract-diff.js": "eade53283c590caec8c76a08db78bffd680c6d3864a6b7d999035dc31b669278",
-    "scripts/run-article-guard-diff.js": "76ca60ba2a2d9262e106053c53218bb5c978e0d65c258dabe79c8c7cb7ff97a8",
-    "scripts/schema-validator.js": "2c69e5a1076b61969d503252d7bcfb5edd072f657a157a8b9af45fa4e65e5ace",
-    "scripts/sync-site-assets-mirror.js": "3e02e41b3594c7f101711a9d6aa132d34d019f47535105cf5e9f90f6c97919e7",
-    "scripts/validate-article-standard.js": "d045418ea7c239d6a4842de610c2c759fbf77ae613d3b592d9da0fd38121ed5f",
-    "scripts/validate-topic-center.py": "a32d9ff08c672150dce3fe99fb5bbd765bf8aa9256aed443b38dda59e8909edb",
-    "sitemap.xml": "988940bd3961822a237d12f4d356de065c6b6be8a4942d97b81fa974652a1fcd",
-    "templates/topic-centers/centrum-snu-po-50.html": "7572332cf99916e19a95019d57ac66ec9232aef47f6bf2552b9d10557ef1401c",
-    "tests/article-baseline-on-touch.test.js": "470343cd976ad5587b524da6099d1b206e613f0bbd5591c4a97c25c7290a7e38",
-    "tests/article-dry-run.test.js": "28a2f049f3123e506d8a372134010bd0c016f3b929224d9e0d9dc03b1f2e94fd",
-    "tests/article-preview-dom.test.js": "0e2df1b9fb394f4cf032f1f25a8de9233cb98dd31981e5fc2e47e452d4931c8a",
-    "tests/article-staging.test.js": "652ed50d2d9163f6920772dcd36eb55dccb3bc3ab83be798926f86571ce438b7",
-    "tests/article-technical-flow.test.js": "9ecb3ccca441448733efd90008db5305f904d9acd493a07609794a7ebee96951",
-    "tests/fixtures/change-scope-past-releases.json": "b6479804d0f90b242fcfb42d3c19a7cbd7ac7ac82fca722538b785df5f443c75",
-    "tests/package-audit.test.js": "e059e445742bf1b6337e11c0c80e651b58e19bc63ceb551f94dd86008a9a1e63",
-    "tests/prepush-concurrency.test.js": "fe40e9605d03aff36fe15a7f8fa04f26d5790590a8a78e15a8a0d8f3bdc6d68c",
-    "tests/prepush-release-guardrails.test.js": "396964b57520a3c39892eee15ced8569e0d5bcc2db1090dc1d50503d72426214",
-    "tests/publish-article-command.test.js": "7081b14c89d68c85c67466abbdc486de2de094bb6904921de16cc327d94b7c9c",
-    "tests/publish-resume.test.js": "9f38163ea8c74d56e298d80195d8574475d4451b6875bb372ebd53411b68a432",
-    "tests/release-scope.test.js": "ceec8f9184648fe288468244cc233f61ec754afc2a0d9cf2fba6bd0f2ac78f81",
-    "tests/validation-reuse.test.js": "8b2143cbb1101feab01a1795406041f1a52afb86170cfd70b5ea2926285b832b",
-    "zdrowie.html": "269f24fe90fe8dd2ba376378a6f2bdf8e6cc1f0d7c8d1448075f5970e4195089"
+    "_site/assets/pdf/centrum-snu-po-50.pdf": "f8e441d98712561ef2b7da530c2831320fe4c3cde7a5233037fc804a0bee3c3d",
+    "_site/centrum-snu-po-50.html": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af",
+    "_site/llms-full.txt": "3511d65e28899c8c1c4abad19295573bcea2c150eaccab84741ee7e9e4bcb2f4",
+    "assets/pdf/centrum-snu-po-50.pdf": "f8e441d98712561ef2b7da530c2831320fe4c3cde7a5233037fc804a0bee3c3d",
+    "centrum-snu-po-50.html": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af",
+    "llms-full.txt": "3511d65e28899c8c1c4abad19295573bcea2c150eaccab84741ee7e9e4bcb2f4",
+    "scripts/deployment-live-verify.js": "d22a1aedb86a195a9dbb961ed1c9db542c9e70bb46ab60e593ca533677da1af6",
+    "scripts/lib/deployment-live-verifier.js": "b83c204470730a0de933e62225e34b6212b82f064532e4da6a54fa75fcc8c9be",
+    "scripts/prepare-deployment-marker.js": "5736d26b8b7323ad5b7ed1600758be379dd2e4f8f40032315aa4cabb6273aee2",
+    "scripts/validate-topic-center.py": "20c3e456b77fdab1cde51bbd529642e0f2fe0421ca6cc90984cad1a00243c44a",
+    "templates/topic-centers/centrum-snu-po-50.html": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af",
+    "tests/article-baseline-on-touch.test.js": "a921ddd82a6f1f32607906cf1b742eda7b1aca41f08d3d7b7d8b70ce367c00a3",
+    "tests/deployment-safety.test.js": "c1ad02a1ebe0daa462144c0a115c1cb408503ac44383757c544570d31b783559",
+    "tests/publish-resume.test.js": "789749f651ffbc74e308def46765fcdc865d642260007bf94bf4e5fd73aaa355"
   },
   "change_scope": [
     "articles",
-    "pipeline",
-    "docs"
+    "pipeline"
   ],
   "verification_targets": [
     {
-      "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif",
-      "mode": "sha256",
-      "sha256": "39d89438447064a31a9b51bc1c5fef6a4599cd166d32adc702921f2efa174786"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg",
-      "mode": "sha256",
-      "sha256": "3e97c7a25a550a0de8b6c6716c02ea9d9700e227d94aeef31e1e7cf447b828f1"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp",
-      "mode": "sha256",
-      "sha256": "a744a3b49d5241fb63421df3011c13c22666e8419da99b46f1ae6593ffe7b674"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.avif",
-      "mode": "sha256",
-      "sha256": "46ff05210c29ecba60cd65564770f9827bef2a6d77f6a9b8933b58d5550064fe"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.jpg",
-      "mode": "sha256",
-      "sha256": "5c1e0aa88963991af61585ecb3d195829f49ae248a54b4470d235ed12f0bfdcd"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.webp",
-      "mode": "sha256",
-      "sha256": "f953f9327e5ce15e979a301080c5d03482418c63ebb8721d16f451f26e9803f2"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.avif",
-      "mode": "sha256",
-      "sha256": "f0b8203ff13e7f3806d2e8b3c8a668299752be6395e0f3a9e95531c58947d9dd"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.jpg",
-      "mode": "sha256",
-      "sha256": "ddde8b548bc5c7a8d0d64a8474d4d5e1008de2dd0e5b9cdc9e39197c6b41f8dd"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.webp",
-      "mode": "sha256",
-      "sha256": "b81d73e2746c39ce6415f88a31337a824040ba393c2ceb3752b886c9d59f8f27"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.avif",
-      "mode": "sha256",
-      "sha256": "8a34cf4af620979e6f06c01a638353763d99094e461e57445552ab329095c847"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.jpg",
-      "mode": "sha256",
-      "sha256": "c0b6c95a5e979a2b94c45ed16aabb6c4144a13b383073e37dd2c3f242582c9df"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.webp",
-      "mode": "sha256",
-      "sha256": "d5e16f72c09e74cae63733dde8570250e651106428100ecea8e0e487380d5a84"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.avif",
-      "mode": "sha256",
-      "sha256": "8ab37b0d64e3177fdef114e0c70da06fc37c33d7411f6c5adc2720eb10e33c65"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.jpg",
-      "mode": "sha256",
-      "sha256": "9a63e935c8b0fe87b52a1d26458189569fcf40c35e8b81ae5afc0e4dd09d7441"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.webp",
-      "mode": "sha256",
-      "sha256": "73b3f72700e9983e9ba25b0ecac8800b0191bb97186c8d50bfea0df5614a4d06"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.avif",
-      "mode": "sha256",
-      "sha256": "f7cdb3e44c52d5b22b8aa873646c0c4667bd0d7ae87b141954e4d132ab4f8b1d"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.jpg",
-      "mode": "sha256",
-      "sha256": "cf82acc4069e135b8f772a3122d10b07080b2d687b947709719a7d50cdeb4afe"
-    },
-    {
-      "path": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.webp",
-      "mode": "sha256",
-      "sha256": "89d9637029b1eb50b19c60b438f15f7bc4209af3516ea8e379e169dd0cd2ea98"
-    },
-    {
-      "path": "assets/data/search-index.json",
-      "mode": "sha256",
-      "sha256": "79bd77c327d26f0b100d3baea20d3bb4e52efc73550b5c2f3c3b8aacbe7c5cc8"
-    },
-    {
-      "path": "assets/pdf/bezdech-senny-po-50-objawy.pdf",
-      "mode": "sha256",
-      "sha256": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118"
-    },
-    {
       "path": "assets/pdf/centrum-snu-po-50.pdf",
       "mode": "sha256",
-      "sha256": "ec1d5c73e9a6d13bd9b801013377b18e9713b3743e7008b8ef7171296d71653f"
-    },
-    {
-      "path": "bezdech-senny-po-50-objawy.html",
-      "mode": "sha256",
-      "sha256": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727"
+      "sha256": "f8e441d98712561ef2b7da530c2831320fe4c3cde7a5233037fc804a0bee3c3d"
     },
     {
       "path": "centrum-snu-po-50.html",
       "mode": "sha256",
-      "sha256": "7572332cf99916e19a95019d57ac66ec9232aef47f6bf2552b9d10557ef1401c"
-    },
-    {
-      "path": "data/crosslink-suggestions/bezdech-senny-po-50-objawy.json",
-      "mode": "sha256",
-      "sha256": "e0a76aec7b23811f21d042ecb211b96a83a25c388fba565db71c812b9887b63f"
-    },
-    {
-      "path": "index.html",
-      "mode": "sha256",
-      "sha256": "27bb2ca2a3bb8e80f091d7110cf393131a97b2280445c9c0be6c5da9567afee1"
+      "sha256": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af"
     },
     {
       "path": "llms-full.txt",
       "mode": "sha256",
-      "sha256": "fe197e19cbcf2ef37e3bd1955e484bfde6a3429e8034831c9a3ddb30c1398dd7"
-    },
-    {
-      "path": "llms.txt",
-      "mode": "sha256",
-      "sha256": "20ac6b8f6cb0b3611636c280c7bf3a1515d36b85f611e4e34576569b460e8b4f"
-    },
-    {
-      "path": "porady.html",
-      "mode": "sha256",
-      "sha256": "a7ed29a2e69b9fffb2b37d8e6ddf406933a6610401d7c00831b0637d2234f873"
-    },
-    {
-      "path": "sitemap.xml",
-      "mode": "sha256",
-      "sha256": "988940bd3961822a237d12f4d356de065c6b6be8a4942d97b81fa974652a1fcd"
-    },
-    {
-      "path": "zdrowie.html",
-      "mode": "sha256",
-      "sha256": "269f24fe90fe8dd2ba376378a6f2bdf8e6cc1f0d7c8d1448075f5970e4195089"
+      "sha256": "3511d65e28899c8c1c4abad19295573bcea2c150eaccab84741ee7e9e4bcb2f4"
     }
   ],
   "news": {
@@ -506,146 +142,13 @@
   },
   "articles": [
     {
-      "file": "bezdech-senny-po-50-objawy.html",
-      "slug": "bezdech-senny-po-50-objawy",
-      "url": "https://fitpo50.pl/bezdech-senny-po-50-objawy.html",
-      "date_modified": "2026-11-10T09:30:00+01:00",
-      "html_sha256": "cbf46272db132d51c78da905fff140659cba15327a747a199b0e9f274087e727",
-      "pdf_path": "assets/pdf/bezdech-senny-po-50-objawy.pdf",
-      "pdf_sha256": "580a759e1a95eb63fe1765588552d07afbe3855480220c3c235a31b144b63118",
-      "images": [
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif",
-          "sha256": "39d89438447064a31a9b51bc1c5fef6a4599cd166d32adc702921f2efa174786"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg",
-          "sha256": "3e97c7a25a550a0de8b6c6716c02ea9d9700e227d94aeef31e1e7cf447b828f1"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp",
-          "sha256": "a744a3b49d5241fb63421df3011c13c22666e8419da99b46f1ae6593ffe7b674"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.avif",
-          "sha256": "46ff05210c29ecba60cd65564770f9827bef2a6d77f6a9b8933b58d5550064fe"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.jpg",
-          "sha256": "5c1e0aa88963991af61585ecb3d195829f49ae248a54b4470d235ed12f0bfdcd"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-po-wizycie-poz-spacer-przedwioscienny-v1.webp",
-          "sha256": "f953f9327e5ce15e979a301080c5d03482418c63ebb8721d16f451f26e9803f2"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.avif",
-          "sha256": "f0b8203ff13e7f3806d2e8b3c8a668299752be6395e0f3a9e95531c58947d9dd"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.jpg",
-          "sha256": "ddde8b548bc5c7a8d0d64a8474d4d5e1008de2dd0e5b9cdc9e39197c6b41f8dd"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-rozmowa-o-sennosci-na-przedwiosennym-balkonie-v1.webp",
-          "sha256": "b81d73e2746c39ce6415f88a31337a824040ba393c2ceb3752b886c9d59f8f27"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.avif",
-          "sha256": "8a34cf4af620979e6f06c01a638353763d99094e461e57445552ab329095c847"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.jpg",
-          "sha256": "c0b6c95a5e979a2b94c45ed16aabb6c4144a13b383073e37dd2c3f242582c9df"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-wizyta-u-lekarza-poz-omowienie-sennosci-v1.webp",
-          "sha256": "d5e16f72c09e74cae63733dde8570250e651106428100ecea8e0e487380d5a84"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.avif",
-          "sha256": "8ab37b0d64e3177fdef114e0c70da06fc37c33d7411f6c5adc2720eb10e33c65"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.jpg",
-          "sha256": "9a63e935c8b0fe87b52a1d26458189569fcf40c35e8b81ae5afc0e4dd09d7441"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-wspolne-notatki-objawow-przy-kuchennym-stole-v1.webp",
-          "sha256": "73b3f72700e9983e9ba25b0ecac8800b0191bb97186c8d50bfea0df5614a4d06"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.avif",
-          "sha256": "f7cdb3e44c52d5b22b8aa873646c0c4667bd0d7ae87b141954e4d132ab4f8b1d"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.jpg",
-          "sha256": "cf82acc4069e135b8f772a3122d10b07080b2d687b947709719a7d50cdeb4afe"
-        },
-        {
-          "path": "assets/bezdech-senny-po-50-objawy-wyjasnienie-roznicy-badan-snu-bez-sprzedazy-v1.webp",
-          "sha256": "89d9637029b1eb50b19c60b438f15f7bc4209af3516ea8e379e169dd0cd2ea98"
-        },
-        {
-          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.avif",
-          "sha256": "63dc1ed67df52ff5dcc0140046c917bb1a2501506929e64ea0dcd9e0e52c388e"
-        },
-        {
-          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.jpg",
-          "sha256": "c80fbb16ffe9953d624d6aa75f24cbf11fbb88e7cf297961d9bb2c66bb246ecf"
-        },
-        {
-          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp",
-          "sha256": "2d28b322db5d94a106c7efbc3c2d4038907bc8ddab5f9c8cc6966bd4107d040d"
-        },
-        {
-          "path": "assets/logo-fitpo50.png",
-          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
-        },
-        {
-          "path": "assets/logo.jpg",
-          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
-        },
-        {
-          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.avif",
-          "sha256": "f13b02c5da44ae57b32a6d38688aeffd9a7f4fdaa69ec4948827c3666e1abd4b"
-        },
-        {
-          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.jpg",
-          "sha256": "102463e456ca186a6ca26f373b3a70305589b021649b41f4b3a50642957f330f"
-        },
-        {
-          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp",
-          "sha256": "2798d80ee0117cabf8c72017e801042230e250e4a0c67ca2186e4dcc46f5bddb"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.avif",
-          "sha256": "2eeb9098516c3586eef00d00f14fe782327b3b791b9d9c8e971e44b8b6029bc0"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.jpg",
-          "sha256": "83caf556d2b45f12ff8e1dadc8f466ab6ef096817047126ddcdec0537caa03c8"
-        },
-        {
-          "path": "assets/szumy-uszne-po-50-przyczyny-hero-kuchnia-wieczor-v1.webp",
-          "sha256": "c4bb6034c9d027a9332c0b72e6ce6d3cd9f26c716506f616a99156a9bd58ebca"
-        }
-      ],
-      "listing_paths": [
-        "index.html",
-        "porady.html",
-        "zdrowie.html",
-        "assets/data/search-index.json"
-      ]
-    },
-    {
       "file": "centrum-snu-po-50.html",
       "slug": "centrum-snu-po-50",
       "url": "https://fitpo50.pl/centrum-snu-po-50.html",
       "date_modified": "2026-11-10T11:14:04+01:00",
-      "html_sha256": "7572332cf99916e19a95019d57ac66ec9232aef47f6bf2552b9d10557ef1401c",
+      "html_sha256": "7a20e86ccc6e45f9a343b46348e48ee369ce78548aea7d1b6b6298c7117fd9af",
       "pdf_path": "assets/pdf/centrum-snu-po-50.pdf",
-      "pdf_sha256": "ec1d5c73e9a6d13bd9b801013377b18e9713b3743e7008b8ef7171296d71653f",
+      "pdf_sha256": "f8e441d98712561ef2b7da530c2831320fe4c3cde7a5233037fc804a0bee3c3d",
       "images": [
         {
           "path": "assets/logo-fitpo50.png",
