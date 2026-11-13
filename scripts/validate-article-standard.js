@@ -4,7 +4,7 @@ const fs = require('fs');
 const { pageKind } = require('./lib/publication-page-kind');
 const { validateTopicCenter } = require('./lib/topic-center-contract');
 const path = require('path');
-const { validateArticleHeadContract, firstTagAttribute } = require('./lib/article-head-contract');
+const { validateArticleHeadContract, firstTagAttribute, validateBlogPostingAuthor } = require('./lib/article-head-contract');
 const { utils, validators, POLICY } = require('./lib/article-policy');
 const { validateSemanticTableMarkup } = require('./article-preview-gate');
 const { validateAboutEntities } = require('./lib/entity-sameas-policy');
@@ -425,7 +425,7 @@ function validateSpeakableTargetsQuickAnswer(raw, errors) {
   errors.push('Brak schema BlogPosting do walidacji speakable.');
 }
 
-function validateBlogPostingAuthorIsPerson(raw, errors) {
+function validateBlogPostingAuthorContract(raw, errors) {
   const scripts = [...raw.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
   for (const scriptMatch of scripts) {
     const body = String(scriptMatch[1] || '').trim();
@@ -442,19 +442,7 @@ function validateBlogPostingAuthorIsPerson(raw, errors) {
       const isBlogPosting = type === 'BlogPosting' || (Array.isArray(type) && type.includes('BlogPosting'));
       if (!isBlogPosting) continue;
 
-      const author = node.author;
-      if (!author || typeof author !== 'object' || Array.isArray(author)) {
-        errors.push('BlogPosting.author musi być obiektem Person.');
-        return;
-      }
-      const authorType = String(author['@type'] || '').trim();
-      const authorName = String(author.name || '').trim();
-      if (authorType !== 'Person') {
-        errors.push(`BlogPosting.author ma niedozwolony typ "${authorType}" (wymagane Person).`);
-      }
-      if (!authorName || /fitpo50/i.test(authorName)) {
-        errors.push('BlogPosting.author musi wskazywać realnego autora (Person), nie nazwę serwisu.');
-      }
+      errors.push(...validateBlogPostingAuthor(node.author));
       return;
     }
   }
@@ -722,7 +710,7 @@ function validateFile(filePath, { strictChanged = false, profile = 'editorial' }
   validateSourcesListMarkup(raw, errors);
   if (!technical) validateCitationsInBlogPosting(raw, errors);
   validateSpeakableTargetsQuickAnswer(raw, errors);
-  validateBlogPostingAuthorIsPerson(raw, errors);
+  validateBlogPostingAuthorContract(raw, errors);
   if (!technical) validateBlogPostingAboutSameAs(raw, errors);
 
   return {

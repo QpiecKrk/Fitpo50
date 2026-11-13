@@ -17,6 +17,69 @@ function firstTagAttribute(raw, tagName, selectorAttribute, selectorValue, targe
   return '';
 }
 
+function validateBlogPostingAuthor(author) {
+  if (!author || typeof author !== 'object' || Array.isArray(author)) {
+    return ['BlogPosting.author musi być pojedynczym obiektem Person albo zatwierdzoną Organization.'];
+  }
+
+  const authorType = String(author['@type'] || '').trim();
+  const authorName = String(author.name || '');
+  if (authorType === 'Organization') {
+    return authorName === 'Redakcja FitPo50'
+      ? []
+      : ['BlogPosting.author typu Organization jest dozwolony wyłącznie dla dokładnej nazwy „Redakcja FitPo50”.'];
+  }
+  if (authorType !== 'Person') {
+    return [`BlogPosting.author ma niedozwolony typ „${authorType || '(brak)'}” (wymagane Person albo zatwierdzona Organization).`];
+  }
+  if (!authorName.trim() || /fitpo50/i.test(authorName)) {
+    return ['BlogPosting.author typu Person musi wskazywać realnego autora, nie nazwę serwisu.'];
+  }
+  return [];
+}
+
+function formatDisplayDate(value) {
+  const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return match ? `${match[3]}.${match[2]}.${match[1]}` : '';
+}
+
+function outerArticleEnd(raw) {
+  return String(raw || '').lastIndexOf('</article>');
+}
+
+function validateVisibleArticleByline(raw, blogPostingNode) {
+  const errors = [];
+  const meta = String(raw || '').match(/<p\b[^>]*\bclass=["'][^"']*\barticle-kicker-card__meta\b[^"']*["'][^>]*>([\s\S]*?)<\/p>/i);
+  if (!meta) {
+    errors.push('Brak article-kicker-card__meta.');
+  } else if (!/^\s*<span\b[^>]*\bclass=["'][^"']*\barticle-kicker-card__category-pill\b[^"']*["'][^>]*>[\s\S]*?<\/span>\s*<span>[^<]+<\/span>\s*$/i.test(meta[1])) {
+    errors.push('Nagłówek artykułu może zawierać tylko kategorię i czas czytania.');
+  }
+
+  const end = outerArticleEnd(raw);
+  if (end < 0) {
+    errors.push('Brak końca głównego article-content.');
+    return errors;
+  }
+  const content = String(raw).slice(0, end);
+  const byline = content.match(/<div\b[^>]*\bclass=["'][^"']*\barticle-byline\b[^"']*["'][^>]*>[\s\S]*?<\/div>\s*$/i);
+  if (!byline) {
+    errors.push('Brak widocznego podpisu autora i dat na końcu artykułu.');
+    return errors;
+  }
+  const expected = [
+    String(blogPostingNode?.author?.name || ''),
+    `Opublikowano: ${formatDisplayDate(blogPostingNode?.datePublished)}`,
+    `Aktualizacja: ${formatDisplayDate(blogPostingNode?.dateModified)}`,
+  ];
+  const lines = [...byline[0].matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
+    .map((match) => String(match[1]).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim());
+  if (lines.length !== 3 || lines.some((line, index) => line !== expected[index])) {
+    errors.push('Widoczny podpis autora i daty musi mieć trzy zgodne linie na końcu artykułu.');
+  }
+  return errors;
+}
+
 function validateArticleHeadContract(raw, opts = {}) {
   const errors = [];
   const warnings = [];
@@ -127,6 +190,9 @@ function validateArticleHeadContract(raw, opts = {}) {
     if (!dateModified || !POLICY.PATTERNS.ISO_DATE_TZ.test(dateModified)) {
       errors.push('Brak lub niepoprawne BlogPosting.dateModified (wymagane pełne ISO 8601 z TZ).');
     }
+    if (/\barticle-template\b/i.test(raw) || /\barticle-kicker-card__meta\b/i.test(raw)) {
+      errors.push(...validateVisibleArticleByline(raw, blogPostingNode));
+    }
     const speakable = blogPostingNode.speakable && typeof blogPostingNode.speakable === 'object'
       ? blogPostingNode.speakable
       : null;
@@ -171,6 +237,8 @@ function validateArticleHeadFile(filePath, opts = {}) {
 module.exports = {
   firstMatch,
   firstTagAttribute,
+  validateBlogPostingAuthor,
+  validateVisibleArticleByline,
   validateArticleHeadContract,
   validateArticleHeadFile,
 };

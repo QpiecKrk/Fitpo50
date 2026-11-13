@@ -42,7 +42,7 @@
 <title>{{SEO_TITLE}} | FitPo50</title>
 <meta name="description" content="{{META_DESCRIPTION}}">
 <meta name="robots" content="index,follow">
-<meta name="author" content="Grzegorz Kupiec">
+<meta name="author" content="{{AUTHOR_NAME}}">
 <meta property="og:title" content="{{TITLE}}">
 <meta property="og:description" content="{{META_DESCRIPTION}}">
 <meta property="og:type" content="article">
@@ -51,7 +51,7 @@
 <meta property="og:locale" content="pl_PL">
 <meta property="article:published_time" content="{{DATE_PUBLISHED}}">
 <meta property="article:modified_time" content="{{DATE_MODIFIED}}">
-<meta property="article:author" content="Grzegorz Kupiec">
+<meta property="article:author" content="{{AUTHOR_NAME}}">
 <meta property="article:section" content="{{CATEGORY_LABEL}}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{TITLE}}">
@@ -75,12 +75,9 @@
   "datePublished": "{{DATE_PUBLISHED}}",
   "dateModified": "{{DATE_MODIFIED}}",
   "author": {
-    "@type": "Person",
-    "name": "Grzegorz Kupiec",
-    "url": "https://fitpo50.pl/o-mnie.html",
-    "sameAs": [
-      "https://fitpo50.pl/o-mnie.html"
-    ]
+    "@type": "{{AUTHOR_TYPE}}",
+    "name": "{{AUTHOR_NAME}}",
+    "url": "{{AUTHOR_URL}}"
   },
   "publisher": {
     "@type": "Organization",
@@ -137,7 +134,7 @@
   <div class="container article-main-bento">
     <section class="article-intro-grid reveal" aria-label="Wstęp artykułu">
       <div class="article-kicker-card {{CATEGORY_CARD_CLASS}}">
-        <p class="article-kicker-card__meta"><span class="article-kicker-card__category-pill">{{CATEGORY_LABEL}}</span><span>{{READING_TIME}}</span><span class="article-kicker-card__date">Aktualizacja: {{DATE_DISPLAY}}</span></p>
+        <p class="article-kicker-card__meta"><span class="article-kicker-card__category-pill">{{CATEGORY_LABEL}}</span><span>{{READING_TIME}}</span></p>
         <h1 class="article-header__title">{{TITLE}}</h1>
       </div>
 
@@ -199,6 +196,11 @@
 
       <div class="medical-disclaimer">
         <p><strong>Uwaga:</strong> Artykuł ma charakter informacyjny i edukacyjny. Nie zastępuje konsultacji lekarskiej, diagnozy ani leczenia.</p>
+      </div>
+      <div class="article-byline" aria-label="Informacje o artykule">
+        <p>{{AUTHOR_NAME}}</p>
+        <p>Opublikowano: {{DATE_PUBLISHED_DISPLAY}}</p>
+        <p>Aktualizacja: {{DATE_MODIFIED_DISPLAY}}</p>
       </div>
     </article>
   </div>

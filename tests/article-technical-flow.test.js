@@ -13,9 +13,26 @@ const { normalizePayload, buildHtmlFromTemplate } = require('../scripts/import-a
 const { inspectPreparedArtifact } = require('../scripts/lib/article-json-artifact');
 const { publicationManifestPath, validationProfileForFile, sha256File } = require('../scripts/lib/article-staging');
 const { createManagedTempDir, disposeTempWorkspace } = require('../scripts/lib/temp-workspace');
+const { validateBlogPostingAuthor } = require('../scripts/lib/article-head-contract');
 
 const ROOT = path.resolve(__dirname, '..');
 const FIXTURE = path.join(ROOT, 'tests/fixtures/package-audit/valid-package');
+
+test('author contract accepts only a real Person or the exact Redakcja FitPo50 Organization', () => {
+  assert.deepEqual(validateBlogPostingAuthor({ '@type': 'Person', name: 'Jan Kowalski' }), []);
+  assert.deepEqual(validateBlogPostingAuthor({ '@type': 'Organization', name: 'Redakcja FitPo50' }), []);
+
+  for (const invalid of [
+    { '@type': 'Organization', name: 'FitPo50' },
+    { '@type': 'Organization', name: 'Redakcja fitpo50' },
+    { '@type': 'Organization', name: 'Redakcja FitPo50 ' },
+    { '@type': 'Organization', name: '' },
+    null,
+    [],
+  ]) {
+    assert.ok(validateBlogPostingAuthor(invalid).length > 0, JSON.stringify(invalid));
+  }
+});
 
 function withPackage(callback) {
   const workspace = createManagedTempDir({ prefix: 'fitpo50-technical-flow-test-', type: 'article-technical-flow-test', projectRoot: ROOT });
@@ -85,6 +102,23 @@ test('technical flow: rzeczywiste przygotowanie, preflight i precheck importera 
   // Normalny importer dodaje BreadcrumbList w końcowym sync-title-breadcrumbs.
   const html = buildHtmlFromTemplate(fs.readFileSync(path.join(ROOT, 'article-template-bento.html'), 'utf8'), payload)
     .replace('</head>', '<script type="application/ld+json">{"@type":"BreadcrumbList","itemListElement":[]}</script></head>');
+  const displayDate = (iso) => {
+    const [year, month, day] = String(iso).slice(0, 10).split('-');
+    return `${day}.${month}.${year}`;
+  };
+  const blogPosting = [...html.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
+    .map((match) => JSON.parse(match[1]))
+    .find((node) => node['@type'] === 'BlogPosting');
+  assert.deepEqual(blogPosting.author, {
+    '@type': 'Organization',
+    name: 'Redakcja FitPo50',
+    url: 'https://fitpo50.pl/',
+  });
+  assert.match(html, /<meta name="author" content="Redakcja FitPo50">/);
+  assert.match(html, /<meta property="article:author" content="Redakcja FitPo50">/);
+  assert.match(html, /<p class="article-kicker-card__meta"><span class="article-kicker-card__category-pill">[^<]+<\/span><span>[^<]+<\/span><\/p>/);
+  assert.doesNotMatch(html, /article-kicker-card__author|article-kicker-card__date/);
+  assert.match(html, new RegExp(`<div class="article-byline"[^>]*>\\s*<p>Redakcja FitPo50<\\/p>\\s*<p>Opublikowano: ${displayDate(payload.datePublished).replaceAll('.', '\\.')}<\\/p>\\s*<p>Aktualizacja: ${displayDate(payload.dateModified).replaceAll('.', '\\.')}<\\/p>\\s*<\\/div>\\s*<\\/article>`));
   const htmlFile = path.join(workspace, `${article.slug}.html`);
   fs.writeFileSync(htmlFile, html);
   for (const match of html.matchAll(/\b(?:src|href|srcset)="([^"\s,]+)"/g)) {

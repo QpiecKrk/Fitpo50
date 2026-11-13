@@ -5,7 +5,7 @@ const { pageKind } = require('./lib/publication-page-kind');
 const { validateTopicCenter } = require('./lib/topic-center-contract');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { validateArticleHeadContract, firstTagAttribute } = require('./lib/article-head-contract');
+const { validateArticleHeadContract, firstTagAttribute, validateBlogPostingAuthor } = require('./lib/article-head-contract');
 const { POLICY, utils, validators } = require('./lib/article-policy');
 
 function countMatches(raw, regex) {
@@ -72,14 +72,7 @@ function validateArticleContract(filePath, options = {}) {
         min: POLICY.TITLE.JSON_MIN,
         max: POLICY.TITLE.MAX
       });
-      const author = node.author;
-      if (!author || typeof author !== 'object' || Array.isArray(author)) {
-        errors.push('BlogPosting.author musi być obiektem Person.');
-        continue;
-      }
-      if (String(author['@type'] || '').trim() !== 'Person') {
-        errors.push('BlogPosting.author ma typ Organization (wymagane Person).');
-      }
+      errors.push(...validateBlogPostingAuthor(node.author));
     }
   }
 

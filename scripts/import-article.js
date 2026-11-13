@@ -40,11 +40,10 @@ const TEMPLATE_PATH = path.join(ROOT, 'article-template-bento.html');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const SITEMAP_LOCK_DIR = path.join(ROOT, '.tmp', 'sitemap.lock');
 const LLMS_PATH = path.join(ROOT, 'llms.txt');
-const DEFAULT_AUTHOR_PERSON = {
-  '@type': 'Person',
-  name: 'Grzegorz Kupiec',
-  url: 'https://fitpo50.pl/o-mnie.html',
-  sameAs: ['https://fitpo50.pl/o-mnie.html'],
+const DEFAULT_AUTHOR_ORG = {
+  '@type': 'Organization',
+  name: 'Redakcja FitPo50',
+  url: 'https://fitpo50.pl/',
 };
 const DEFAULT_PUBLISHER_ORG = {
   '@type': 'Organization',
@@ -1391,7 +1390,7 @@ function upsertBlogPostingSchema(html, opts) {
 
       node.wordCount = opts.wordCount;
       node.timeRequired = opts.timeRequired;
-      node.author = opts.author || DEFAULT_AUTHOR_PERSON;
+      node.author = opts.author || DEFAULT_AUTHOR_ORG;
       node.publisher = opts.publisher || DEFAULT_PUBLISHER_ORG;
       const cssSelector = buildSpeakableSelectors(opts.hasKeyTakeaways);
       node.speakable = {
@@ -2185,7 +2184,11 @@ function buildHtmlFromTemplate(template, payload) {
     META_DESCRIPTION: payload.metaDescription,
     DATE_PUBLISHED: payload.datePublished,
     DATE_MODIFIED: payload.dateModified,
-    DATE_DISPLAY: formatDateForDisplay(payload.dateModified || payload.datePublished),
+    DATE_PUBLISHED_DISPLAY: formatDateForDisplay(payload.datePublished),
+    DATE_MODIFIED_DISPLAY: formatDateForDisplay(payload.dateModified),
+    AUTHOR_TYPE: DEFAULT_AUTHOR_ORG['@type'],
+    AUTHOR_NAME: DEFAULT_AUTHOR_ORG.name,
+    AUTHOR_URL: DEFAULT_AUTHOR_ORG.url,
     READING_TIME: payload.readingTime,
     TIME_REQUIRED_ISO: payload.timeRequiredIso,
     CATEGORY_LABEL: payload.category.label,
@@ -2250,7 +2253,7 @@ function buildHtmlFromTemplate(template, payload) {
   html = upsertBlogPostingSchema(html, {
     wordCount: payload.wordCount,
     timeRequired: payload.timeRequiredIso,
-    author: DEFAULT_AUTHOR_PERSON,
+    author: DEFAULT_AUTHOR_ORG,
     publisher: DEFAULT_PUBLISHER_ORG,
     about: payload.about,
     mentions: payload.mentions,
