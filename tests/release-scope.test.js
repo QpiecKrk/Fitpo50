@@ -6,7 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
-const { selectedFiles, filesFromPushRefs, assertReleaseFiles } = require('../scripts/lib/change-scope');
+const { selectedFiles, filesFromPushRefs, assertReleaseFiles, classifyChangedFiles } = require('../scripts/lib/change-scope');
 const { taskCommitFiles, preparedArticleTask, statusEntries, main: publish } = require('../scripts/publish-article');
 const { articleDeploymentEntry, prepareDeploymentMarker, assertPreparedPublicationState, publicFingerprint } = require('../scripts/prepare-deployment-marker');
 const { createManagedTempDir, disposeTempWorkspace } = require('../scripts/lib/temp-workspace');
@@ -15,6 +15,17 @@ const { packageIdentity } = require('../scripts/lib/package-identity');
 const ROOT = path.resolve(__dirname, '..');
 const hash = (data) => crypto.createHash('sha256').update(data).digest('hex');
 const markers = ['_site/deployment.json', 'deployment.json'];
+
+test('release scope: tylko znany workflow należy do pipeline, nieznany pozostaje unknown', () => {
+  const result = classifyChangedFiles(['.github/workflows/cwv-nightly.yml']);
+  assert.deepEqual(result.scopes, ['pipeline']);
+  assert.deepEqual(result.buckets.unknown, []);
+  assert.deepEqual(result.testFiles, ['tests/workflow-reliability.test.js']);
+  assert.equal(result.blocked, false);
+  const unknown = classifyChangedFiles(['.github/workflows/check.yml']);
+  assert.deepEqual(unknown.buckets.unknown, ['.github/workflows/check.yml']);
+  assert.equal(unknown.blocked, true);
+});
 
 async function withRepo(callback) {
   const root = createManagedTempDir({ prefix: 'fitpo50-release-scope-', type: 'release-scope-test', projectRoot: ROOT });

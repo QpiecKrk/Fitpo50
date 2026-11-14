@@ -1,28 +1,42 @@
 {
   "version": 4,
-  "release_id": "a2060f3a-94a4-4b8c-9f85-098477346a88",
-  "prepared_at": "2026-11-14T09:15:57+01:00",
-  "prepared_from_head": "c5aba18208c3fa8ffeda22342a9675c3abf42a4e",
-  "publication_state_sha256": "d50dcad6fcf036c4576da6c50968e9bb0c7da7978aabbffae6187268ded8a70e",
-  "public_fingerprint_sha256": "b91559b86cdf363976ec59e4cc73e8333a8036877757ad8d8d31572c69d15fa7",
+  "release_id": "c524229e-1e8e-4135-938b-767eeefd1e93",
+  "prepared_at": "2026-11-14T10:49:54+01:00",
+  "prepared_from_head": "72c9a3d851ddd47eb1f6d5a3c49ab826ad16a8d0",
+  "publication_state_sha256": "f258e08c3d6c792e102883ee006d7bbcbaa4477e1b27cb70ddd0c2c2a1627b53",
+  "public_fingerprint_sha256": "f786621f44056c8e3adfecaabb038af517bd1706363ef9aaeef06a13b10f514b",
   "release_files": [
+    ".github/workflows/cwv-nightly.yml",
+    "_site/article.css",
+    "_site/assets/data/search-index.json",
     "_site/deployment.json",
-    "_site/index.html",
+    "assets/data/search-index.json",
     "deployment.json",
-    "index.html"
+    "scripts/lib/change-scope.js",
+    "tests/release-scope.test.js"
   ],
   "release_file_hashes": {
-    "_site/index.html": "40a458032d1960d27529ef53e44a3c74ccc5ff7c2830b44b0673e586e4f4741f",
-    "index.html": "40a458032d1960d27529ef53e44a3c74ccc5ff7c2830b44b0673e586e4f4741f"
+    ".github/workflows/cwv-nightly.yml": "f844eb3f545e91c5b6dcf9ac732b23463ef5a919571f95d430eed4a36b32f460",
+    "_site/article.css": "5a621a9e7f4fbdec7b0d0326032c45fcd3f41d545583eaa1430b3b3f743a4387",
+    "_site/assets/data/search-index.json": "b574fb7ef8321485f6b345fe4d75cfdd97a03e41e46d29507752b30fc7aa8c56",
+    "assets/data/search-index.json": "b574fb7ef8321485f6b345fe4d75cfdd97a03e41e46d29507752b30fc7aa8c56",
+    "scripts/lib/change-scope.js": "681b495a9fd791a9b319eea6b247543444c5c22f18486ef37469842b19cbf1cd",
+    "tests/release-scope.test.js": "a02164874e16fa98d3c76765a8dfe0c641528ddf2f28f3d2232509f0fb150837"
   },
   "change_scope": [
-    "articles"
+    "articles",
+    "pipeline"
   ],
   "verification_targets": [
     {
-      "path": "index.html",
+      "path": "article.css",
       "mode": "sha256",
-      "sha256": "40a458032d1960d27529ef53e44a3c74ccc5ff7c2830b44b0673e586e4f4741f"
+      "sha256": "5a621a9e7f4fbdec7b0d0326032c45fcd3f41d545583eaa1430b3b3f743a4387"
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "mode": "sha256",
+      "sha256": "b574fb7ef8321485f6b345fe4d75cfdd97a03e41e46d29507752b30fc7aa8c56"
     }
   ],
   "news": {

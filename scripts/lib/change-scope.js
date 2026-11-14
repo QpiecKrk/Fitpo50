@@ -14,6 +14,7 @@ const ADMIN_TESTS = new Set([
 ]);
 // Jawna mapa mechanizmów i ich regresji. Nie wnioskujemy z prefiksu article-*.
 const MODULES = [
+  { files: ['.github/workflows/cwv-nightly.yml'], tests: ['tests/workflow-reliability.test.js'] },
   { files: ['scripts/lib/change-scope.js', 'scripts/run-all-prepush.js'], tests: ['tests/prepush-concurrency.test.js', 'tests/prepush-release-guardrails.test.js', 'tests/release-scope.test.js', 'tests/validation-reuse.test.js'] },
   { files: ['scripts/run-article-guard-diff.js', 'scripts/schema-validator.js', 'scripts/date-modified-guard.js', 'scripts/immutable-asset-guard.js'], tests: ['tests/release-scope.test.js'] },
   { files: ['scripts/deployment-live-verify.js', 'scripts/lib/deployment-live-verifier.js', 'scripts/live-postpush-check.sh'], tests: ['tests/deployment-safety.test.js', 'tests/prepush-release-guardrails.test.js', 'tests/validation-reuse.test.js', 'tests/publish-resume.test.js'] },
