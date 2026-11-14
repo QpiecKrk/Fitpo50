@@ -1,35 +1,557 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:58:53.250Z",
+  "generated_at": "2026-11-14T14:00:27+01:00",
+  "reviewed_at": null,
   "slug": "peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50",
-  "html_sha256": "11e98e1060357fab2d21491e803bf4ad182170d40900ce44c9f1354d5b335e4e",
-  "site_html_sha256": "11e98e1060357fab2d21491e803bf4ad182170d40900ce44c9f1354d5b335e4e",
-  "pdf_sha256": "f25fe8e998f131d261ced5c895c17e1f0e496c6a446e61d1308308e577a08bb4",
-  "site_pdf_sha256": "f25fe8e998f131d261ced5c895c17e1f0e496c6a446e61d1308308e577a08bb4",
+  "html_sha256": "8a06d5eb990c9785be489fecc2bfde11d447e37e6ff656e2e698b481768c76f2",
+  "site_html_sha256": "8a06d5eb990c9785be489fecc2bfde11d447e37e6ff656e2e698b481768c76f2",
+  "pdf_sha256": "5399305c427586774e5d7f1904198875a84ce6adbef139a6d0fb5cf68771a14d",
+  "site_pdf_sha256": "5399305c427586774e5d7f1904198875a84ce6adbef139a6d0fb5cf68771a14d",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-14T14:00:27+01:00",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html",
+      "sha256": "8a06d5eb990c9785be489fecc2bfde11d447e37e6ff656e2e698b481768c76f2",
+      "bytes": 64307
+    },
+    "html_site": {
+      "file": "_site/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html",
+      "sha256": "8a06d5eb990c9785be489fecc2bfde11d447e37e6ff656e2e698b481768c76f2",
+      "bytes": 64307
+    },
+    "pdf_source": {
+      "file": "assets/pdf/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.pdf",
+      "sha256": "5399305c427586774e5d7f1904198875a84ce6adbef139a6d0fb5cf68771a14d",
+      "bytes": 837661
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.pdf",
+      "sha256": "5399305c427586774e5d7f1904198875a84ce6adbef139a6d0fb5cf68771a14d",
+      "bytes": 837661
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/desktop.png",
+      "screenshot_sha256": "ca4e92365d8ff43cf224eea8f34945bbb47b538d8435b150fba66b8c07a1c0f8",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/mobile.png",
+      "screenshot_sha256": "5fce02e1be97743ab15a99ed3f5e45252333537d4cd5ca1dafe8de86a59fb086",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "MITY 11 min czytania Czy warto brać peptydy po 50? Mięśnie oraz bezpieczeństwo Jedna nazwa, trzy różne rzeczy: kolagen, lek i fiolka „do badań”.",
+      "alt": "Uśmiechnięta para po pięćdziesiątce w jasnej kuchni w południe: saszetka proszku i gumy do ćwiczeń, bez fiolek.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-hero-kuchnia-proszek-i-guma-v1.avif",
+          "sha256": "113da252fd282ec5c61f4086120d07ed267bf830cce44ed0415dea80a5694113",
+          "bytes": 46559,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-hero-kuchnia-proszek-i-guma-v1.webp",
+          "sha256": "86266561bcb0e42d1685868599d5e09520e6ec9b33f7464248b5624f27b04474",
+          "bytes": 73008,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-hero-kuchnia-proszek-i-guma-v1.jpg",
+          "sha256": "94fcb9421caf39647c205c10f77af7335a91adc16547759708f11377e088e7bf",
+          "bytes": 131450,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "c2d02cfd86dfe70004b27782f97256bdb2a841883caa085240687319ab141c73"
+    },
+    {
+      "placement": "content:2:czy-warto-brac-peptydy-po-50",
+      "role": "content",
+      "heading": "Czy warto brać peptydy po 50?",
+      "context": "Po 50. roku życia często wraca pytanie, czy warto brać peptydy, i słychać, że odmładzają oraz budują mięśnie, a u mężczyzn mają przywracać testosteron, więc warto brać peptydy z internetu. Słowo „peptyd” to jednak tylko nazwa chemiczna, nie znak jakości. Pod tą samą etykietą mieszają się kolagen z żywności, leki GLP-1 na receptę i fiolki sprzedawane jako substancje „do badań”. Poniżej oddzielamy te trzy grupy i sprawdzamy, czego naprawdę dowodzą badania na ludziach. Szybka odpowiedź Czy warto brać peptydy po 50? Zależy od grupy: kolagen to białko z żywności, leki GLP-1 działają tylko z receptą, a fiolki „do badań”, takie jak BPC-157 czy TB-500, nie mają u ludzi mocnych dowodów, także na to, że przywracają testosteron na stałe. GIS i GIF ostrzegają: nie kupuj, nie stosuj, nie ryzykuj; mięśn",
+      "alt": "Dwoje uśmiechniętych znajomych po pięćdziesiątce rozmawia na słonecznym, nowoczesnym balkonie w południe.",
+      "caption": "GIS i GIF ostrzegają przed syntetycznymi peptydami sprzedawanymi jako odczynniki do badań: nie kupuj, nie stosuj, nie ryzykuj.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-rozmowa-o-ostrzezeniu-v1.avif",
+          "sha256": "3539fb1b3acd2aa1a86f4ae7483ee8d8ee13c4b73b60af2193d6e51a8f3bb3c1",
+          "bytes": 90491,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-rozmowa-o-ostrzezeniu-v1.webp",
+          "sha256": "882fbb6907385037f35191a3dc5dbad45407bb97fb55bad3041be1d06a1bf479",
+          "bytes": 159968,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-rozmowa-o-ostrzezeniu-v1.jpg",
+          "sha256": "59ef3b852e89a74249121ca1ff75bb6755faa499b943489c6c420a69ae79f229",
+          "bytes": 225367,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "464ed997a3a7b135269e4fd2ec9a92a0518a77ff07f02bea68a0b2d07b8df58d"
+    },
+    {
+      "placement": "content:3:jakie-trzy-grupy-kryja-sie-pod-slowem-peptydy",
+      "role": "content",
+      "heading": "Jakie trzy grupy kryją się pod słowem „peptydy”?",
+      "context": "Po 50. roku życia często wraca pytanie, czy warto brać peptydy, i słychać, że odmładzają oraz budują mięśnie, a u mężczyzn mają przywracać testosteron, więc warto brać peptydy z internetu. Słowo „peptyd” to jednak tylko nazwa chemiczna, nie znak jakości. Pod tą samą etykietą mieszają się kolagen z żywności, leki GLP-1 na receptę i fiolki sprzedawane jako substancje „do badań”. Poniżej oddzielamy te trzy grupy i sprawdzamy, czego naprawdę dowodzą badania na ludziach. Szybka odpowiedź Czy warto brać peptydy po 50? Zależy od grupy: kolagen to białko z żywności, leki GLP-1 działają tylko z receptą, a fiolki „do badań”, takie jak BPC-157 czy TB-500, nie mają u ludzi mocnych dowodów, także na to, że przywracają testosteron na stałe. GIS i GIF ostrzegają: nie kupuj, nie stosuj, nie ryzykuj; mięśn",
+      "alt": "Na słonecznym stole miska z jedzeniem, zwykłe zamknięte pudełko i nieoznakowana koperta, bez napisów i bez fiolek.",
+      "caption": "Zatwierdzony lek z grupy GLP-1, taki jak semaglutyd, jest wydawany na receptę i nie uwiarygadnia internetowej fiolki.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-trzy-sciezki-na-stole-v1.avif",
+          "sha256": "3ec361ec5b8bef2c1faf1d89e8e2632ba597e4d85069dde702e58425e0433e3c",
+          "bytes": 81422,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-trzy-sciezki-na-stole-v1.webp",
+          "sha256": "7aeb481dfd230584661ac22f85b49ea7cead1321927d84354c5e8769ce12f75a",
+          "bytes": 143688,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-trzy-sciezki-na-stole-v1.jpg",
+          "sha256": "0ecea6b98b5e3bf5046523e4970369400e808cd929f8f141881afe83285221f5",
+          "bytes": 201648,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "a2745700f3de7ce78b21ebc0d4b964a62da38adf8c391250597c50e4e9622d64"
+    },
+    {
+      "placement": "content:4:co-obietnice-mowia-a-co-pokazuja-badania-na-ludz",
+      "role": "content",
+      "heading": "Co obietnice mówią, a co pokazują badania na ludziach?",
+      "context": "Po 50. roku życia często wraca pytanie, czy warto brać peptydy, i słychać, że odmładzają oraz budują mięśnie, a u mężczyzn mają przywracać testosteron, więc warto brać peptydy z internetu. Słowo „peptyd” to jednak tylko nazwa chemiczna, nie znak jakości. Pod tą samą etykietą mieszają się kolagen z żywności, leki GLP-1 na receptę i fiolki sprzedawane jako substancje „do badań”. Poniżej oddzielamy te trzy grupy i sprawdzamy, czego naprawdę dowodzą badania na ludziach. Szybka odpowiedź Czy warto brać peptydy po 50? Zależy od grupy: kolagen to białko z żywności, leki GLP-1 działają tylko z receptą, a fiolki „do badań”, takie jak BPC-157 czy TB-500, nie mają u ludzi mocnych dowodów, także na to, że przywracają testosteron na stałe. GIS i GIF ostrzegają: nie kupuj, nie stosuj, nie ryzykuj; mięśn",
+      "alt": "Kobieta po pięćdziesiątce w kolorowej koszuli siedzi przy stole w południowym świetle i czyta notatkę, telefon odłożony.",
+      "caption": "Dla najczęściej reklamowanego peptydu „do badań” przegląd z 2026 r. znalazł u ludzi tylko 3 badania, łącznie 30 osób, wszystkie słabej jakości.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-czytanie-przy-stole-v1.avif",
+          "sha256": "24f20ad4e9ae59347229008dbdfa0d61970424bc9a528ca5ebb5685bf4a0ad35",
+          "bytes": 56993,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-czytanie-przy-stole-v1.webp",
+          "sha256": "a7c2f4102d0a086a5090984cef5b089d515edd606fea20edf36f3b86b3f92dc4",
+          "bytes": 91236,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-czytanie-przy-stole-v1.jpg",
+          "sha256": "5df09a2ef8f707793e0a9dc8ebc0ac6d0ba4115205d0a7ebcf33a44eccfd66e0",
+          "bytes": 159842,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "573802ead8a4a0f58dfad1e0137258e6df0e9a34823bfb352944a104bf0dc024"
+    },
+    {
+      "placement": "content:5:co-obietnice-mowia-a-co-pokazuja-badania-na-ludz",
+      "role": "content",
+      "heading": "Co obietnice mówią, a co pokazują badania na ludziach?",
+      "context": "Po 50. roku życia często wraca pytanie, czy warto brać peptydy, i słychać, że odmładzają oraz budują mięśnie, a u mężczyzn mają przywracać testosteron, więc warto brać peptydy z internetu. Słowo „peptyd” to jednak tylko nazwa chemiczna, nie znak jakości. Pod tą samą etykietą mieszają się kolagen z żywności, leki GLP-1 na receptę i fiolki sprzedawane jako substancje „do badań”. Poniżej oddzielamy te trzy grupy i sprawdzamy, czego naprawdę dowodzą badania na ludziach. Szybka odpowiedź Czy warto brać peptydy po 50? Zależy od grupy: kolagen to białko z żywności, leki GLP-1 działają tylko z receptą, a fiolki „do badań”, takie jak BPC-157 czy TB-500, nie mają u ludzi mocnych dowodów, także na to, że przywracają testosteron na stałe. GIS i GIF ostrzegają: nie kupuj, nie stosuj, nie ryzykuj; mięśn",
+      "alt": "Dwa talerze w słonecznym południu: z jednej strony galaretka i rosół, z drugiej twaróg, jajko i owoce, bez napisów.",
+      "caption": "U starszych osób serwatka i białko z grochu pobudzały syntezę białek mięśniowych, a kolagen nie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-kolagen-vs-bialko-na-talerzu-v1.avif",
+          "sha256": "8aa42e3d93cedfbf1a55c2afc32114c1e9ee325fbef7a6bf12411d52736dd1a8",
+          "bytes": 114634,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-kolagen-vs-bialko-na-talerzu-v1.webp",
+          "sha256": "a487cc4ca6d527de442417fe939a9d500ada607d13246f55c893f0e91d855eee",
+          "bytes": 133056,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-kolagen-vs-bialko-na-talerzu-v1.jpg",
+          "sha256": "8337ea7a13f2cb7b9f75bb72541a5d887010b8241dd40f1858ffbac51c6a585b",
+          "bytes": 198990,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "2289a94ed1b00990ae37870400a358de40db3dc047d37456141988d7d2da9075"
+    },
+    {
+      "placement": "content:6:czy-fiolka-do-badan-jest-legalna-i-czysta",
+      "role": "content",
+      "heading": "Czy fiolka „do badań” jest legalna i czysta?",
+      "context": "Po 50. roku życia często wraca pytanie, czy warto brać peptydy, i słychać, że odmładzają oraz budują mięśnie, a u mężczyzn mają przywracać testosteron, więc warto brać peptydy z internetu. Słowo „peptyd” to jednak tylko nazwa chemiczna, nie znak jakości. Pod tą samą etykietą mieszają się kolagen z żywności, leki GLP-1 na receptę i fiolki sprzedawane jako substancje „do badań”. Poniżej oddzielamy te trzy grupy i sprawdzamy, czego naprawdę dowodzą badania na ludziach. Szybka odpowiedź Czy warto brać peptydy po 50? Zależy od grupy: kolagen to białko z żywności, leki GLP-1 działają tylko z receptą, a fiolki „do badań”, takie jak BPC-157 czy TB-500, nie mają u ludzi mocnych dowodów, także na to, że przywracają testosteron na stałe. GIS i GIF ostrzegają: nie kupuj, nie stosuj, nie ryzykuj; mięśn",
+      "alt": "Uśmiechnięty mężczyzna po pięćdziesiątce w słonecznym przedpokoju odkłada nieoznakowaną kopertę i bierze buty treningowe.",
+      "caption": "Tymczasowe odstąpienie od egzekwowania przepisów w USA z października 2026 r. nie jest zatwierdzeniem leku i nie dotyczy Polski.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-odrzuca-nieoznakowana-paczke-v1.avif",
+          "sha256": "fd6d00b579cdbc93e1780073f4d217b0bdc93b0bdebd87b1178edc8aaf680946",
+          "bytes": 50754,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-odrzuca-nieoznakowana-paczke-v1.webp",
+          "sha256": "99899ab944fb7a0354bbe9f58e6529d926d0b47b86b8e135b0f937da3bc8bfb9",
+          "bytes": 84342,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-odrzuca-nieoznakowana-paczke-v1.jpg",
+          "sha256": "d45bd3196d67fc80ef5aa20c4030e28a4a0691bfff287a7c7d8bf3659a69517d",
+          "bytes": 142567,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "3be8407571924f8846812b60305dc6a545fbd7d418197fc2602d337a9f6a9802"
+    },
+    {
+      "placement": "content:7:czy-peptydy-pomagaja-na-silowni-i-kto-naprawde-p",
+      "role": "content",
+      "heading": "Czy peptydy pomagają na siłowni i kto naprawdę powinien je brać?",
+      "context": "Po 50. roku życia często wraca pytanie, czy warto brać peptydy, i słychać, że odmładzają oraz budują mięśnie, a u mężczyzn mają przywracać testosteron, więc warto brać peptydy z internetu. Słowo „peptyd” to jednak tylko nazwa chemiczna, nie znak jakości. Pod tą samą etykietą mieszają się kolagen z żywności, leki GLP-1 na receptę i fiolki sprzedawane jako substancje „do badań”. Poniżej oddzielamy te trzy grupy i sprawdzamy, czego naprawdę dowodzą badania na ludziach. Szybka odpowiedź Czy warto brać peptydy po 50? Zależy od grupy: kolagen to białko z żywności, leki GLP-1 działają tylko z receptą, a fiolki „do badań”, takie jak BPC-157 czy TB-500, nie mają u ludzi mocnych dowodów, także na to, że przywracają testosteron na stałe. GIS i GIF ostrzegają: nie kupuj, nie stosuj, nie ryzykuj; mięśn",
+      "alt": "Na słonecznym blacie w nowoczesnym gabinecie leży nieoznakowana probówka i zamknięta koperta, bez liczb i bez napisów.",
+      "caption": "Wytyczne zalecają rozpoznanie niedoboru testosteronu tylko przy objawach i powtórnie potwierdzonym niskim porannym teście, nie na podstawie hasła z siłowni.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-wynik-badan-bez-liczb-v1.avif",
+          "sha256": "4aa6c83b26f2a2ba210dfb61f87dedbc236c1d686cf1cc99438849ce180aa26d",
+          "bytes": 103310,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-wynik-badan-bez-liczb-v1.webp",
+          "sha256": "39295da6dca250d42c50a81c4d01cb3382382a0f3a27573022fa17ac33b21de6",
+          "bytes": 116422,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-wynik-badan-bez-liczb-v1.jpg",
+          "sha256": "5ff6e85b76aa9a22f1ddc9e2f0289ed8f11dc3f73f239929e1c3c7afb5ec076b",
+          "bytes": 162448,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "10f046efa94c4e99c2d6eade98c9e34114e5c8caaf421d456a53f1f7932c1795"
+    },
+    {
+      "placement": "content:8:czy-peptydy-pomagaja-na-silowni-i-kto-naprawde-p",
+      "role": "content",
+      "heading": "Czy peptydy pomagają na siłowni i kto naprawdę powinien je brać?",
+      "context": "Po 50. roku życia często wraca pytanie, czy warto brać peptydy, i słychać, że odmładzają oraz budują mięśnie, a u mężczyzn mają przywracać testosteron, więc warto brać peptydy z internetu. Słowo „peptyd” to jednak tylko nazwa chemiczna, nie znak jakości. Pod tą samą etykietą mieszają się kolagen z żywności, leki GLP-1 na receptę i fiolki sprzedawane jako substancje „do badań”. Poniżej oddzielamy te trzy grupy i sprawdzamy, czego naprawdę dowodzą badania na ludziach. Szybka odpowiedź Czy warto brać peptydy po 50? Zależy od grupy: kolagen to białko z żywności, leki GLP-1 działają tylko z receptą, a fiolki „do badań”, takie jak BPC-157 czy TB-500, nie mają u ludzi mocnych dowodów, także na to, że przywracają testosteron na stałe. GIS i GIF ostrzegają: nie kupuj, nie stosuj, nie ryzykuj; mięśn",
+      "alt": "Na słonecznym stole miska z jedzeniem i guma do ćwiczeń, a nieoznakowana koperta leży odłożona na brzeg blatu.",
+      "caption": "Obietnica, że fiolka z internetu przywróci testosteron albo dobuduje mięśnie, nie ma mocnych badań na ludziach.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-dementi-obietnic-silownia-v1.avif",
+          "sha256": "812088341a461498a844d99f0103514504bff1f0d594602bf3fbd733ec22ded3",
+          "bytes": 135963,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-dementi-obietnic-silownia-v1.webp",
+          "sha256": "6a8b806d4e30517f1f173be46edbd237ed14795d87a8fdf10eba98f8d5e829d1",
+          "bytes": 164840,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-dementi-obietnic-silownia-v1.jpg",
+          "sha256": "b394391d399a690116b5d59c87d1118a43b4a55fd9a53678688ad81003b0530f",
+          "bytes": 222728,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "18a483eb4d8f041f45014905b10759a5192f42c04fb344dd6888d2b64116b285"
+    },
+    {
+      "placement": "content:9:co-zamiast-fiolki-buduje-miesnie-po-50",
+      "role": "content",
+      "heading": "Co zamiast fiolki buduje mięśnie po 50?",
+      "context": "Po 50. roku życia często wraca pytanie, czy warto brać peptydy, i słychać, że odmładzają oraz budują mięśnie, a u mężczyzn mają przywracać testosteron, więc warto brać peptydy z internetu. Słowo „peptyd” to jednak tylko nazwa chemiczna, nie znak jakości. Pod tą samą etykietą mieszają się kolagen z żywności, leki GLP-1 na receptę i fiolki sprzedawane jako substancje „do badań”. Poniżej oddzielamy te trzy grupy i sprawdzamy, czego naprawdę dowodzą badania na ludziach. Szybka odpowiedź Czy warto brać peptydy po 50? Zależy od grupy: kolagen to białko z żywności, leki GLP-1 działają tylko z receptą, a fiolki „do badań”, takie jak BPC-157 czy TB-500, nie mają u ludzi mocnych dowodów, także na to, że przywracają testosteron na stałe. GIS i GIF ostrzegają: nie kupuj, nie stosuj, nie ryzykuj; mięśn",
+      "alt": "Uśmiechnięta para po pięćdziesiątce ćwiczy z hantlami w jasnej, nowoczesnej siłowni w słoneczne południe.",
+      "caption": "Po pięćdziesiątce mięśnie buduje trening siłowy i białko; wskazówka 1,0–1,2 g na kg pochodzi z wytycznych pisanych głównie dla osób 65+.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-trening-silowy-w-poludnie-v1.avif",
+          "sha256": "1bfa048d577dfd4a4d8f7b1a4c8132d7281c9c300a3895443a96d7d03f531816",
+          "bytes": 81618,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-trening-silowy-w-poludnie-v1.webp",
+          "sha256": "f5d100975af8f9f4a46d10af28904e15886c33fbecf94a834de81627b35e21c4",
+          "bytes": 144774,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-trening-silowy-w-poludnie-v1.jpg",
+          "sha256": "92e87e99d63f623ce06ea17952b331abebdc74b922025aeef04ccc7f0b60d381",
+          "bytes": 217545,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "55cb8a3ae9dc9587e2acfa7dc5e9376a590e0454acfb89cb92f77ddafb711897"
+    },
+    {
+      "placement": "content:10:co-zamiast-fiolki-buduje-miesnie-po-50",
+      "role": "content",
+      "heading": "Co zamiast fiolki buduje mięśnie po 50?",
+      "context": "Po 50. roku życia często wraca pytanie, czy warto brać peptydy, i słychać, że odmładzają oraz budują mięśnie, a u mężczyzn mają przywracać testosteron, więc warto brać peptydy z internetu. Słowo „peptyd” to jednak tylko nazwa chemiczna, nie znak jakości. Pod tą samą etykietą mieszają się kolagen z żywności, leki GLP-1 na receptę i fiolki sprzedawane jako substancje „do badań”. Poniżej oddzielamy te trzy grupy i sprawdzamy, czego naprawdę dowodzą badania na ludziach. Szybka odpowiedź Czy warto brać peptydy po 50? Zależy od grupy: kolagen to białko z żywności, leki GLP-1 działają tylko z receptą, a fiolki „do badań”, takie jak BPC-157 czy TB-500, nie mają u ludzi mocnych dowodów, także na to, że przywracają testosteron na stałe. GIS i GIF ostrzegają: nie kupuj, nie stosuj, nie ryzykuj; mięśn",
+      "alt": "Przy słonecznym oknie lekka sztanga i talerz z prostym posiłkiem, bez ludzi, bez napisów i bez fiolek.",
+      "caption": "Po pięćdziesiątce mięśnie buduje trening siłowy i białko z jedzenia, a nie fiolka „do badań”.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-sztanga-i-posilek-v1.avif",
+          "sha256": "4e561c70011ed48f752455ba1471e922f0d79202bb82b15d7e43a41a91d2860c",
+          "bytes": 143234,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-sztanga-i-posilek-v1.webp",
+          "sha256": "d0ffdeaadc7bd6bb49e8521c7846a325d6c73444194027959c5f039ce0e9ac4d",
+          "bytes": 176126,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-sztanga-i-posilek-v1.jpg",
+          "sha256": "1a93b7331d178dcb1669ebdf16420084ba4967e82497a84e2dd57a0bfc532218",
+          "bytes": 255960,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "cb313a1a53b013ba71a8d4d2a10ed38b5360dcbf655d901575164069f6c5c88c"
+    }
+  ],
   "pdf": {
-    "pages": 5,
+    "pages": 10,
     "text_coverage": 1,
-    "rendered_pages": 5
+    "rendered_pages": 10,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-01.png",
+        "sha256": "19d3131194068d3cf2e66e11ee633650b94082307e95bdf8bf0231f0966c58c2",
+        "bytes": 676491,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1064,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-02.png",
+        "sha256": "01ec392c6dc1b8a396a112350d1c4cc80e9f576abf99712d2002572aec50149d",
+        "bytes": 1078566,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 57,
+          "width": 1067,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-03.png",
+        "sha256": "548cba23a4672b13ffeb299c526bb04a9f06cb7d106fc84b422247a064b0e61e",
+        "bytes": 394433,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-04.png",
+        "sha256": "2a6e1c0c71870aa99524de6c7859ae7ed8beb4b9f0a9119934437475641917e4",
+        "bytes": 961298,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-05.png",
+        "sha256": "2b87aee6028663a8624cbb2d408e677af0e55a20cbc3994caffda8c556bdce98",
+        "bytes": 795389,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-06.png",
+        "sha256": "2316a5ea16c25fb6436875d683b550ff7fec06b120005ac2162221157557005e",
+        "bytes": 760448,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 63,
+          "y": 56,
+          "width": 1049,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-07.png",
+        "sha256": "858efe8ac6d9c4d125083745bfab231fd041699d96fd3ea02f8fa4ec66596b24",
+        "bytes": 847982,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1040,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-08.png",
+        "sha256": "1defd2484f9368f2fc066dc4e245be9aa1dac51b079f961048567bcf9086af9c",
+        "bytes": 309740,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1065,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 9,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-09.png",
+        "sha256": "d8391928b35f169fd8d684aa167c0556e36545460b3f36a88bf895fad3fefd22",
+        "bytes": 657009,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 49,
+          "y": 51,
+          "width": 1077,
+          "height": 1599
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 10,
+        "file": ".tmp/article-preview/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50/pdf-pages/page-10.png",
+        "sha256": "0c174ae0204ce082f0805dc7db37dd8558602ff9c6c1181dc39474d34ea8274f",
+        "bytes": 131773,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 49,
+          "y": 57,
+          "width": 1067,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 9778,
+    "review_wait_ms": null
   },
   "errors": []
 }

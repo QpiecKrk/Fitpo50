@@ -217,9 +217,9 @@ section: "Ciekawe"
   section: "Ruch"
   summary: "Trening siłowy wydłuża telomery i aktywuje miokininy chroniące mózg. Poznaj naukowe dowody na biologiczne odmłodzenie o 4 lata dzięki 60 minutom ćwiczeń"
 - url: https://fitpo50.pl/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html
-  title: "Peptydy po 50-tce. Rewolucja w medycynie czy ryzykowna moda? | FitPo50"
-  section: "Zdrowie"
-  summary: "Peptydy to biologiczne SMS-y do Twoich komórek. Od kolagenu po semaglutyd – sprawdzamy co działa, co jest bezpieczne, a co pozostaje niebezpiecznym"
+  title: "Czy warto brać peptydy po 50? Mięśnie oraz bezpieczeństwo | FitPo50"
+  section: "Mity"
+  summary: "„Peptydy” po 50 to trzy różne rzeczy: kolagen, lek na receptę i fiolka „do badań”. Czego nie pokazują badania na ludziach i co naprawdę buduje mięśnie."
 - url: https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html
   title: "Trening siłowy jako eliksir młodości po 50-tce – praktyczny | FitPo50"
   section: "Ruch"
