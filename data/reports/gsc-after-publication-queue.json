@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-11-10T08:44:24+01:00",
+  "updated_at": "2026-11-14T11:07:47+01:00",
   "items": [
+    {
+      "slug": "wstawanie-w-nocy-do-toalety-po-50",
+      "target_url": "https://fitpo50.pl/wstawanie-w-nocy-do-toalety-po-50.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/zdrowie.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-11-14T11:07:47+01:00",
+      "transaction_id": "article-wstawanie-w-nocy-do-toalety-po-50-1794650847041-19807",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "bezdech-senny-po-50-objawy",
       "target_url": "https://fitpo50.pl/bezdech-senny-po-50-objawy.html",

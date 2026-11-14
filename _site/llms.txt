@@ -499,3 +499,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Bezdech senny po 50: objawy, badania snu i kiedy do lekarza | FitPo50"
   section: "Zdrowie"
   summary: "Objawy obturacyjnego bezdechu sennego po 50., także u kobiet: kiedy iść do POZ, czym różnią się poligrafia i polisomnografia oraz kiedy działać pilnie."
+- url: https://fitpo50.pl/wstawanie-w-nocy-do-toalety-po-50.html
+  title: "Wstawanie w nocy do toalety po 50: kiedy szukać pomocy? | FitPo50"
+  section: "Zdrowie"
+  summary: "Wstawanie w nocy do toalety po 50: poznaj możliwe przyczyny, naucz się prowadzić dzienniczek i sprawdź, kiedy umówić wizytę, a kiedy szukać pilnej pomocy."

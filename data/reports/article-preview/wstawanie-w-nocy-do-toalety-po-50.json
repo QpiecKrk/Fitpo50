@@ -1,0 +1,385 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-11-14T11:07:44+01:00",
+  "reviewed_at": null,
+  "slug": "wstawanie-w-nocy-do-toalety-po-50",
+  "html_sha256": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c",
+  "site_html_sha256": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c",
+  "pdf_sha256": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb",
+  "site_pdf_sha256": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-14T11:07:44+01:00",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 2
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "wstawanie-w-nocy-do-toalety-po-50.html",
+      "sha256": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c",
+      "bytes": 47815
+    },
+    "html_site": {
+      "file": "_site/wstawanie-w-nocy-do-toalety-po-50.html",
+      "sha256": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c",
+      "bytes": 47815
+    },
+    "pdf_source": {
+      "file": "assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf",
+      "sha256": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb",
+      "bytes": 439967
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf",
+      "sha256": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb",
+      "bytes": 439967
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/wstawanie-w-nocy-do-toalety-po-50/desktop.png",
+      "screenshot_sha256": "9f2edf6951c327a079bc061418511ff37715d592835316c13744a9943a934409",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/wstawanie-w-nocy-do-toalety-po-50/mobile.png",
+      "screenshot_sha256": "95e7beabf7940d6d70e906394c08b8e7f8285d482e58a45df7dfefc5344c9c16",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "ZDROWIE 9 min czytania Wstawanie w nocy do toalety po 50: kiedy szukać pomocy? Zapisz, co dzieje się przy pobudce — sama pora nie wyjaśnia przyczyny.",
+      "alt": "Para po pięćdziesiątce w sypialni; kobieta wstaje z łóżka, partner zapala lampkę, a zasłona porusza się przy otwartym oknie.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif",
+          "sha256": "8b52278f2439adaba83a8b8760023d19c68b7b345e9d04e66e4f36d8adea4a18",
+          "bytes": 42652,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp",
+          "sha256": "9ed650e1f4e3f396365cac35d2fa30dbdbaddc959b57e5e4d13e6345f314a16c",
+          "bytes": 67116,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg",
+          "sha256": "f79da394ef884f1243d9710447dd4ac3391c236c5f478a9741a2142bf49414a0",
+          "bytes": 127860,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ba150a73260327a1ae096ee84e812bbd7667552be89fb64fa73aa55511a55042"
+    },
+    {
+      "placement": "content:2:co-liczymy-jako-nykturie-a-czego-nie",
+      "role": "content",
+      "heading": "Co liczymy jako nykturię, a czego nie?",
+      "context": "Wstawanie w nocy do toalety po 50. roku życia łatwo przypisać wiekowi albo prostacie. Zamiast zgadywać, przyjrzyj się temu, co dzieje się ze snem i oddawaniem moczu. Dzienniczek pomoże opisać problem, a tabela objawów podpowie, kiedy nie odkładać pomocy. Szybka odpowiedź Nykturia to oddawanie moczu w głównym okresie snu: po pierwszym zaśnięciu, z powrotem do snu lub zamiarem dalszego spania. Już jeden epizod może spełniać tę definicję, ale sama liczba wizyt nie określa przyczyny ani pilności pomocy. Jeśli problem się utrzymuje lub przeszkadza, umów konsultację; przy objawach alarmowych z tabeli nie czekaj na planową wizytę. Kluczowe wnioski Już jedna wizyta w toalecie podczas głównego okresu snu może być nykturią; nie mówi to jeszcze, co ją powoduje ani czy wymaga leczenia. Zapisuj przez c",
+      "alt": "Kobieta po pięćdziesiątce odkłada torbę obok łóżka, a jej partner zasłania okno w oświetlonej słońcem sypialni.",
+      "caption": "U osoby pracującej zmianowo główny okres snu może przypadać w dzień; definicja nykturii odnosi się do snu, nie zachodu słońca.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.avif",
+          "sha256": "d2b10d2ac4c08ecb9615a9428b03575528e357d4a0a960c93666f4a1467e3378",
+          "bytes": 73173,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.webp",
+          "sha256": "26562f9ad149d8ce0bab119d334bef83124833d988c4b74b97ddceca372e8240",
+          "bytes": 122192,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.jpg",
+          "sha256": "a1248a94568fe8ceffd3dd69129fee10d5709e61a52d61afa32048815e20be7e",
+          "bytes": 195932,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "dcedd5e36b1b67e0822c64b122b3d1dcdbebcd965b4f9a5cda68b918f9f0c1bb"
+    },
+    {
+      "placement": "content:3:kiedy-szukac-pomocy-a-kiedy-umowic-wizyte",
+      "role": "content",
+      "heading": "Kiedy szukać pomocy, a kiedy umówić wizytę?",
+      "context": "Wstawanie w nocy do toalety po 50. roku życia łatwo przypisać wiekowi albo prostacie. Zamiast zgadywać, przyjrzyj się temu, co dzieje się ze snem i oddawaniem moczu. Dzienniczek pomoże opisać problem, a tabela objawów podpowie, kiedy nie odkładać pomocy. Szybka odpowiedź Nykturia to oddawanie moczu w głównym okresie snu: po pierwszym zaśnięciu, z powrotem do snu lub zamiarem dalszego spania. Już jeden epizod może spełniać tę definicję, ale sama liczba wizyt nie określa przyczyny ani pilności pomocy. Jeśli problem się utrzymuje lub przeszkadza, umów konsultację; przy objawach alarmowych z tabeli nie czekaj na planową wizytę. Kluczowe wnioski Już jedna wizyta w toalecie podczas głównego okresu snu może być nykturią; nie mówi to jeszcze, co ją powoduje ani czy wymaga leczenia. Zapisuj przez c",
+      "alt": "Dwie osoby po pięćdziesiątce siedzą przy stole; jedna trzyma telefon, druga towarzyszy jej podczas przygotowania rozmowy.",
+      "caption": "Krew w moczu wymaga pilnej oceny także wtedy, gdy jest jej niewiele; nie czekaj, aż pojawi się ból.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.avif",
+          "sha256": "66099cdc0f593a964ce93690c8aca1094c51e9f8afb75d4b3b6d47f9da708697",
+          "bytes": 43918,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.webp",
+          "sha256": "8b09cd3b37b2dd62ddd0ee13929be27b6445a740e178b044f5b95528e9006af5",
+          "bytes": 67684,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.jpg",
+          "sha256": "09f5fdef12f2bd7b4824a320d8000ea5628851cc56a14f6b76f67cf52d3a8bdd",
+          "bytes": 127115,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e5ae93e6ddc8130931d252db372cfd86b7a23671d6c7f951b4c637f8f3430f41"
+    },
+    {
+      "placement": "content:4:dlaczego-wstajesz-ilosc-moczu-pecherz-czy-sen",
+      "role": "content",
+      "heading": "Dlaczego wstajesz: ilość moczu, pęcherz czy sen?",
+      "context": "Wstawanie w nocy do toalety po 50. roku życia łatwo przypisać wiekowi albo prostacie. Zamiast zgadywać, przyjrzyj się temu, co dzieje się ze snem i oddawaniem moczu. Dzienniczek pomoże opisać problem, a tabela objawów podpowie, kiedy nie odkładać pomocy. Szybka odpowiedź Nykturia to oddawanie moczu w głównym okresie snu: po pierwszym zaśnięciu, z powrotem do snu lub zamiarem dalszego spania. Już jeden epizod może spełniać tę definicję, ale sama liczba wizyt nie określa przyczyny ani pilności pomocy. Jeśli problem się utrzymuje lub przeszkadza, umów konsultację; przy objawach alarmowych z tabeli nie czekaj na planową wizytę. Kluczowe wnioski Już jedna wizyta w toalecie podczas głównego okresu snu może być nykturią; nie mówi to jeszcze, co ją powoduje ani czy wymaga leczenia. Zapisuj przez c",
+      "alt": "Kobieta i mężczyzna po pięćdziesiątce rozmawiają z lekarką przy biurku; przed nimi leży otwarty notes.",
+      "caption": "Leki mogą wpływać na ilość moczu, pracę pęcherza i sen, dlatego ich przegląd jest częścią szukania przyczyny.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.avif",
+          "sha256": "b9f580140db0cd5ac35c5929da8a65f1ae8e156d259ff3d5fe194855c2b2e4d5",
+          "bytes": 51030,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.webp",
+          "sha256": "a59d736ecdd8f468a2c6434135674681546e8bca22c8497961ba882e00eeed70",
+          "bytes": 79856,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.jpg",
+          "sha256": "2024c919c8f730cb67b85206dc14094a89daeb6b09c19ece3c160a105414d71f",
+          "bytes": 154737,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "8d662ee68114b8cc0385f47892cd6abfb24bcc0b77197d050b2edd362a3db4a7"
+    },
+    {
+      "placement": "content:5:jak-prowadzic-dzienniczek-przez-co-najmniej-3-dn",
+      "role": "content",
+      "heading": "Jak prowadzić dzienniczek przez co najmniej 3 dni?",
+      "context": "Wstawanie w nocy do toalety po 50. roku życia łatwo przypisać wiekowi albo prostacie. Zamiast zgadywać, przyjrzyj się temu, co dzieje się ze snem i oddawaniem moczu. Dzienniczek pomoże opisać problem, a tabela objawów podpowie, kiedy nie odkładać pomocy. Szybka odpowiedź Nykturia to oddawanie moczu w głównym okresie snu: po pierwszym zaśnięciu, z powrotem do snu lub zamiarem dalszego spania. Już jeden epizod może spełniać tę definicję, ale sama liczba wizyt nie określa przyczyny ani pilności pomocy. Jeśli problem się utrzymuje lub przeszkadza, umów konsultację; przy objawach alarmowych z tabeli nie czekaj na planową wizytę. Kluczowe wnioski Już jedna wizyta w toalecie podczas głównego okresu snu może być nykturią; nie mówi to jeszcze, co ją powoduje ani czy wymaga leczenia. Zapisuj przez c",
+      "alt": "Mężczyzna po pięćdziesiątce pisze w odwróconym od widza notesie, a partnerka wskazuje kubek na kuchennym stole.",
+      "caption": "Objętość pierwszego oddania moczu po ostatecznym wstaniu pomaga ocenić nocną produkcję moczu, choć nie liczy się jako kolejny epizod nykturii.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.avif",
+          "sha256": "0c37b8faa775f0763b25e3232ea8140a344a4fd0d81dfdebc26a7a51553bf2d6",
+          "bytes": 46410,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.webp",
+          "sha256": "d4b82bff353b93fc84035919dd7e134ca97bd26cbfb0e6c5e4aa5f4674159c9a",
+          "bytes": 72906,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.jpg",
+          "sha256": "dea6353cb3eb4128b2667a2e1964f8c89e8acf2a6a046c8b8a71b95e14f6e643",
+          "bytes": 136175,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "8837555831b35ff3247a1269a6f00fc9a0947313d7e279fac412f6a8396a5e9f"
+    },
+    {
+      "placement": "content:6:co-zmienic-bezpiecznie-i-jak-przygotowac-wizyte",
+      "role": "content",
+      "heading": "Co zmienić bezpiecznie i jak przygotować wizytę?",
+      "context": "Wstawanie w nocy do toalety po 50. roku życia łatwo przypisać wiekowi albo prostacie. Zamiast zgadywać, przyjrzyj się temu, co dzieje się ze snem i oddawaniem moczu. Dzienniczek pomoże opisać problem, a tabela objawów podpowie, kiedy nie odkładać pomocy. Szybka odpowiedź Nykturia to oddawanie moczu w głównym okresie snu: po pierwszym zaśnięciu, z powrotem do snu lub zamiarem dalszego spania. Już jeden epizod może spełniać tę definicję, ale sama liczba wizyt nie określa przyczyny ani pilności pomocy. Jeśli problem się utrzymuje lub przeszkadza, umów konsultację; przy objawach alarmowych z tabeli nie czekaj na planową wizytę. Kluczowe wnioski Już jedna wizyta w toalecie podczas głównego okresu snu może być nykturią; nie mówi to jeszcze, co ją powoduje ani czy wymaga leczenia. Zapisuj przez c",
+      "alt": "Kobieta po pięćdziesiątce wkłada notes i złożoną kartkę do torby, a partner podaje jej etui na okulary.",
+      "caption": "Lek moczopędny może zwiększać ilość moczu właśnie po to, by leczyć inną chorobę; nie odstawiaj go samodzielnie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.avif",
+          "sha256": "7a7a86fc0a5018fe2ad579c5e2ac33e5b894d14e4875e3450227bf656af6c378",
+          "bytes": 52058,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.webp",
+          "sha256": "6179383d479e5cdb6e74abe5edf35c90921146514cd563ec4f9b947659d0c57e",
+          "bytes": 83052,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.jpg",
+          "sha256": "a0a72ee239eac9f22d720ab4fc974df797514c655c0c41b93ec7dbdc8284133a",
+          "bytes": 154762,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e592611ed585e6f596f76463f0de58ddf99da54a1e87e8b56931fd047b4696bb"
+    }
+  ],
+  "pdf": {
+    "pages": 7,
+    "text_coverage": 1,
+    "rendered_pages": 7,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/wstawanie-w-nocy-do-toalety-po-50/pdf-pages/page-1.png",
+        "sha256": "fca12f43f8a905d8cb2fe78863988c9cdfd26e46c5e656edfd423f5e25b07749",
+        "bytes": 664205,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1062,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/wstawanie-w-nocy-do-toalety-po-50/pdf-pages/page-2.png",
+        "sha256": "c8731a0244bcac2a840584ac23a6bc078adad43dc81710494763c15ab76c3aae",
+        "bytes": 637285,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/wstawanie-w-nocy-do-toalety-po-50/pdf-pages/page-3.png",
+        "sha256": "ede99afce86e70862003c28838be30f46e5a98376e95a74f3f846a2d229d728e",
+        "bytes": 633913,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1066,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/wstawanie-w-nocy-do-toalety-po-50/pdf-pages/page-4.png",
+        "sha256": "1e23f999cc6ddee4f9f76dfd9a66f2bb6522161fe4394f54c0038e65195835ea",
+        "bytes": 511949,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/wstawanie-w-nocy-do-toalety-po-50/pdf-pages/page-5.png",
+        "sha256": "9ef7efb42c178a3f565149d281f1b1e61de052c1819f637b650c26384aaf6031",
+        "bytes": 600406,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 56,
+          "width": 1067,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/wstawanie-w-nocy-do-toalety-po-50/pdf-pages/page-6.png",
+        "sha256": "316284e156a9eab0d2a5137f6af77e699ae0ade7f532ea674b46cfc667798ddb",
+        "bytes": 542722,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 56,
+          "width": 1049,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/wstawanie-w-nocy-do-toalety-po-50/pdf-pages/page-7.png",
+        "sha256": "91f1eadfe6621382a530328be73753ee8e5160400f909904e53a5748fa952760",
+        "bytes": 318226,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 50,
+          "y": 51,
+          "width": 1072,
+          "height": 1599
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 8672,
+    "review_wait_ms": null
+  },
+  "errors": []
+}

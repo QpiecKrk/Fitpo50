@@ -1,42 +1,302 @@
 {
   "version": 4,
-  "release_id": "c524229e-1e8e-4135-938b-767eeefd1e93",
-  "prepared_at": "2026-11-14T10:49:54+01:00",
-  "prepared_from_head": "72c9a3d851ddd47eb1f6d5a3c49ab826ad16a8d0",
-  "publication_state_sha256": "f258e08c3d6c792e102883ee006d7bbcbaa4477e1b27cb70ddd0c2c2a1627b53",
-  "public_fingerprint_sha256": "f786621f44056c8e3adfecaabb038af517bd1706363ef9aaeef06a13b10f514b",
+  "release_id": "41cc1082-78fa-4f5a-b54b-727857e5a41d",
+  "prepared_at": "2026-11-14T11:17:47+01:00",
+  "prepared_from_head": "7573f30764a5e7d2f3b62d6bd1d5e922adc0f2ef",
+  "publication_state_sha256": "de646f35dfec556f443ecd71fef53eff6b2125d1362dab23240b6e186917eb69",
+  "public_fingerprint_sha256": "70390207365e10c2a4ff48cab4743d9f8d531a1928ba31d85268ce562418899c",
   "release_files": [
-    ".github/workflows/cwv-nightly.yml",
-    "_site/article.css",
     "_site/assets/data/search-index.json",
+    "_site/assets/pdf/centrum-snu-po-50.pdf",
+    "_site/assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.avif",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.jpg",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.webp",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.avif",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.jpg",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.webp",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.avif",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.jpg",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.webp",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.avif",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.jpg",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.webp",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.avif",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.jpg",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.webp",
+    "_site/centrum-snu-po-50.html",
+    "_site/data/crosslink-suggestions/wstawanie-w-nocy-do-toalety-po-50.json",
     "_site/deployment.json",
+    "_site/index.html",
+    "_site/llms-full.txt",
+    "_site/llms.txt",
+    "_site/porady.html",
+    "_site/sitemap.xml",
+    "_site/wstawanie-w-nocy-do-toalety-po-50.html",
+    "_site/zdrowie.html",
     "assets/data/search-index.json",
+    "assets/pdf/centrum-snu-po-50.pdf",
+    "assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.avif",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.jpg",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.webp",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.avif",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.jpg",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.webp",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.avif",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.jpg",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.webp",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.avif",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.jpg",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.webp",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.avif",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.jpg",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.webp",
+    "centrum-snu-po-50.html",
+    "data/crosslink-suggestions/wstawanie-w-nocy-do-toalety-po-50.json",
+    "data/reports/article-preview/wstawanie-w-nocy-do-toalety-po-50.json",
+    "data/reports/article-preview/wstawanie-w-nocy-do-toalety-po-50.md",
+    "data/reports/article-publications/wstawanie-w-nocy-do-toalety-po-50.json",
+    "data/reports/gsc-after-publication-queue.json",
+    "data/reports/gsc-after-publication-queue.txt",
+    "data/reports/published-articles-log.json",
     "deployment.json",
-    "scripts/lib/change-scope.js",
-    "tests/release-scope.test.js"
+    "index.html",
+    "llms-full.txt",
+    "llms.txt",
+    "porady.html",
+    "sitemap.xml",
+    "templates/topic-centers/centrum-snu-po-50.html",
+    "wstawanie-w-nocy-do-toalety-po-50.html",
+    "zdrowie.html"
   ],
   "release_file_hashes": {
-    ".github/workflows/cwv-nightly.yml": "f844eb3f545e91c5b6dcf9ac732b23463ef5a919571f95d430eed4a36b32f460",
-    "_site/article.css": "5a621a9e7f4fbdec7b0d0326032c45fcd3f41d545583eaa1430b3b3f743a4387",
-    "_site/assets/data/search-index.json": "b574fb7ef8321485f6b345fe4d75cfdd97a03e41e46d29507752b30fc7aa8c56",
-    "assets/data/search-index.json": "b574fb7ef8321485f6b345fe4d75cfdd97a03e41e46d29507752b30fc7aa8c56",
-    "scripts/lib/change-scope.js": "681b495a9fd791a9b319eea6b247543444c5c22f18486ef37469842b19cbf1cd",
-    "tests/release-scope.test.js": "a02164874e16fa98d3c76765a8dfe0c641528ddf2f28f3d2232509f0fb150837"
+    "_site/assets/data/search-index.json": "2be1510a39eb787ea78de39bdf047782498ec17ca667f95d2e59064840c47b15",
+    "_site/assets/pdf/centrum-snu-po-50.pdf": "7e24792ef5b02b92852944839961a56e0915c33c45ec1a901f5584e0d2d508b4",
+    "_site/assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.avif": "0c37b8faa775f0763b25e3232ea8140a344a4fd0d81dfdebc26a7a51553bf2d6",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.jpg": "dea6353cb3eb4128b2667a2e1964f8c89e8acf2a6a046c8b8a71b95e14f6e643",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.webp": "d4b82bff353b93fc84035919dd7e134ca97bd26cbfb0e6c5e4aa5f4674159c9a",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.avif": "d2b10d2ac4c08ecb9615a9428b03575528e357d4a0a960c93666f4a1467e3378",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.jpg": "a1248a94568fe8ceffd3dd69129fee10d5709e61a52d61afa32048815e20be7e",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.webp": "26562f9ad149d8ce0bab119d334bef83124833d988c4b74b97ddceca372e8240",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif": "8b52278f2439adaba83a8b8760023d19c68b7b345e9d04e66e4f36d8adea4a18",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg": "f79da394ef884f1243d9710447dd4ac3391c236c5f478a9741a2142bf49414a0",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp": "9ed650e1f4e3f396365cac35d2fa30dbdbaddc959b57e5e4d13e6345f314a16c",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.avif": "66099cdc0f593a964ce93690c8aca1094c51e9f8afb75d4b3b6d47f9da708697",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.jpg": "09f5fdef12f2bd7b4824a320d8000ea5628851cc56a14f6b76f67cf52d3a8bdd",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.webp": "8b09cd3b37b2dd62ddd0ee13929be27b6445a740e178b044f5b95528e9006af5",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.avif": "7a7a86fc0a5018fe2ad579c5e2ac33e5b894d14e4875e3450227bf656af6c378",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.jpg": "a0a72ee239eac9f22d720ab4fc974df797514c655c0c41b93ec7dbdc8284133a",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.webp": "6179383d479e5cdb6e74abe5edf35c90921146514cd563ec4f9b947659d0c57e",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.avif": "b9f580140db0cd5ac35c5929da8a65f1ae8e156d259ff3d5fe194855c2b2e4d5",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.jpg": "2024c919c8f730cb67b85206dc14094a89daeb6b09c19ece3c160a105414d71f",
+    "_site/assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.webp": "a59d736ecdd8f468a2c6434135674681546e8bca22c8497961ba882e00eeed70",
+    "_site/centrum-snu-po-50.html": "537f280c88783266e3dd839149e853f84a24ca69805252b9681c58a89cea6a1b",
+    "_site/data/crosslink-suggestions/wstawanie-w-nocy-do-toalety-po-50.json": "b277436da96c2b305a6894a1738a91bde3e0f25f71c4ddb881c37f93fb47c26c",
+    "_site/index.html": "611919ef08cf4ae2a576a24133570ce694baea05cc2d254c631aaa0585affae3",
+    "_site/llms-full.txt": "e115614637cf959de8c87798c9a9c800eeb72be1bdd16e149f638f94ed9a190f",
+    "_site/llms.txt": "af068b8404175f6198d3f086292f63cf83141edc49c5b15fd37adcad59e06229",
+    "_site/porady.html": "726c6154449778e04ce68bba2c8d7ad0a486c1c4056f27920c9c08f5d56304ac",
+    "_site/sitemap.xml": "375a80c410d1432c6750a8d047a1eea28d8e0dabe48c02576eb96551fb4ab741",
+    "_site/wstawanie-w-nocy-do-toalety-po-50.html": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c",
+    "_site/zdrowie.html": "66f7853078f393a130419dd1f25af61823bb6b00ef21e024e61c8b060ee7adb0",
+    "assets/data/search-index.json": "2be1510a39eb787ea78de39bdf047782498ec17ca667f95d2e59064840c47b15",
+    "assets/pdf/centrum-snu-po-50.pdf": "7e24792ef5b02b92852944839961a56e0915c33c45ec1a901f5584e0d2d508b4",
+    "assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.avif": "0c37b8faa775f0763b25e3232ea8140a344a4fd0d81dfdebc26a7a51553bf2d6",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.jpg": "dea6353cb3eb4128b2667a2e1964f8c89e8acf2a6a046c8b8a71b95e14f6e643",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.webp": "d4b82bff353b93fc84035919dd7e134ca97bd26cbfb0e6c5e4aa5f4674159c9a",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.avif": "d2b10d2ac4c08ecb9615a9428b03575528e357d4a0a960c93666f4a1467e3378",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.jpg": "a1248a94568fe8ceffd3dd69129fee10d5709e61a52d61afa32048815e20be7e",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.webp": "26562f9ad149d8ce0bab119d334bef83124833d988c4b74b97ddceca372e8240",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif": "8b52278f2439adaba83a8b8760023d19c68b7b345e9d04e66e4f36d8adea4a18",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg": "f79da394ef884f1243d9710447dd4ac3391c236c5f478a9741a2142bf49414a0",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp": "9ed650e1f4e3f396365cac35d2fa30dbdbaddc959b57e5e4d13e6345f314a16c",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.avif": "66099cdc0f593a964ce93690c8aca1094c51e9f8afb75d4b3b6d47f9da708697",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.jpg": "09f5fdef12f2bd7b4824a320d8000ea5628851cc56a14f6b76f67cf52d3a8bdd",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.webp": "8b09cd3b37b2dd62ddd0ee13929be27b6445a740e178b044f5b95528e9006af5",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.avif": "7a7a86fc0a5018fe2ad579c5e2ac33e5b894d14e4875e3450227bf656af6c378",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.jpg": "a0a72ee239eac9f22d720ab4fc974df797514c655c0c41b93ec7dbdc8284133a",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.webp": "6179383d479e5cdb6e74abe5edf35c90921146514cd563ec4f9b947659d0c57e",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.avif": "b9f580140db0cd5ac35c5929da8a65f1ae8e156d259ff3d5fe194855c2b2e4d5",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.jpg": "2024c919c8f730cb67b85206dc14094a89daeb6b09c19ece3c160a105414d71f",
+    "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.webp": "a59d736ecdd8f468a2c6434135674681546e8bca22c8497961ba882e00eeed70",
+    "centrum-snu-po-50.html": "537f280c88783266e3dd839149e853f84a24ca69805252b9681c58a89cea6a1b",
+    "data/crosslink-suggestions/wstawanie-w-nocy-do-toalety-po-50.json": "b277436da96c2b305a6894a1738a91bde3e0f25f71c4ddb881c37f93fb47c26c",
+    "data/reports/article-preview/wstawanie-w-nocy-do-toalety-po-50.json": "30c2ea5e01caecc0deb2ca57b18533e7e6d3ef69cd8bc0072ca9a38bfe36a0ef",
+    "data/reports/article-preview/wstawanie-w-nocy-do-toalety-po-50.md": "01d42d978d8e1b5ba638e3c41b83d54a04ff22abbeb912310840c9e7b1423434",
+    "data/reports/article-publications/wstawanie-w-nocy-do-toalety-po-50.json": "87bb5c8604fdf4969dd19a4f86595c86b1750f23e88cbc0c917d49297299c5de",
+    "data/reports/gsc-after-publication-queue.json": "a434fbd17f7c5f67e29463672af6d3f0368a24ec0dc8439be7c0b74d45cb4838",
+    "data/reports/gsc-after-publication-queue.txt": "08e88ebf3f75669e3831239ed17e10ed414510f6a0e52500cde36e973ea2440a",
+    "data/reports/published-articles-log.json": "745608cb96b2440a9e1bf8f67146f247a810991adc88781d9423958bb216273f",
+    "index.html": "611919ef08cf4ae2a576a24133570ce694baea05cc2d254c631aaa0585affae3",
+    "llms-full.txt": "e115614637cf959de8c87798c9a9c800eeb72be1bdd16e149f638f94ed9a190f",
+    "llms.txt": "af068b8404175f6198d3f086292f63cf83141edc49c5b15fd37adcad59e06229",
+    "porady.html": "726c6154449778e04ce68bba2c8d7ad0a486c1c4056f27920c9c08f5d56304ac",
+    "sitemap.xml": "375a80c410d1432c6750a8d047a1eea28d8e0dabe48c02576eb96551fb4ab741",
+    "templates/topic-centers/centrum-snu-po-50.html": "537f280c88783266e3dd839149e853f84a24ca69805252b9681c58a89cea6a1b",
+    "wstawanie-w-nocy-do-toalety-po-50.html": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c",
+    "zdrowie.html": "66f7853078f393a130419dd1f25af61823bb6b00ef21e024e61c8b060ee7adb0"
   },
   "change_scope": [
-    "articles",
-    "pipeline"
+    "articles"
   ],
   "verification_targets": [
     {
-      "path": "article.css",
-      "mode": "sha256",
-      "sha256": "5a621a9e7f4fbdec7b0d0326032c45fcd3f41d545583eaa1430b3b3f743a4387"
-    },
-    {
       "path": "assets/data/search-index.json",
       "mode": "sha256",
-      "sha256": "b574fb7ef8321485f6b345fe4d75cfdd97a03e41e46d29507752b30fc7aa8c56"
+      "sha256": "2be1510a39eb787ea78de39bdf047782498ec17ca667f95d2e59064840c47b15"
+    },
+    {
+      "path": "assets/pdf/centrum-snu-po-50.pdf",
+      "mode": "sha256",
+      "sha256": "7e24792ef5b02b92852944839961a56e0915c33c45ec1a901f5584e0d2d508b4"
+    },
+    {
+      "path": "assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf",
+      "mode": "sha256",
+      "sha256": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.avif",
+      "mode": "sha256",
+      "sha256": "0c37b8faa775f0763b25e3232ea8140a344a4fd0d81dfdebc26a7a51553bf2d6"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.jpg",
+      "mode": "sha256",
+      "sha256": "dea6353cb3eb4128b2667a2e1964f8c89e8acf2a6a046c8b8a71b95e14f6e643"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.webp",
+      "mode": "sha256",
+      "sha256": "d4b82bff353b93fc84035919dd7e134ca97bd26cbfb0e6c5e4aa5f4674159c9a"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.avif",
+      "mode": "sha256",
+      "sha256": "d2b10d2ac4c08ecb9615a9428b03575528e357d4a0a960c93666f4a1467e3378"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.jpg",
+      "mode": "sha256",
+      "sha256": "a1248a94568fe8ceffd3dd69129fee10d5709e61a52d61afa32048815e20be7e"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.webp",
+      "mode": "sha256",
+      "sha256": "26562f9ad149d8ce0bab119d334bef83124833d988c4b74b97ddceca372e8240"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif",
+      "mode": "sha256",
+      "sha256": "8b52278f2439adaba83a8b8760023d19c68b7b345e9d04e66e4f36d8adea4a18"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg",
+      "mode": "sha256",
+      "sha256": "f79da394ef884f1243d9710447dd4ac3391c236c5f478a9741a2142bf49414a0"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp",
+      "mode": "sha256",
+      "sha256": "9ed650e1f4e3f396365cac35d2fa30dbdbaddc959b57e5e4d13e6345f314a16c"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.avif",
+      "mode": "sha256",
+      "sha256": "66099cdc0f593a964ce93690c8aca1094c51e9f8afb75d4b3b6d47f9da708697"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.jpg",
+      "mode": "sha256",
+      "sha256": "09f5fdef12f2bd7b4824a320d8000ea5628851cc56a14f6b76f67cf52d3a8bdd"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.webp",
+      "mode": "sha256",
+      "sha256": "8b09cd3b37b2dd62ddd0ee13929be27b6445a740e178b044f5b95528e9006af5"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.avif",
+      "mode": "sha256",
+      "sha256": "7a7a86fc0a5018fe2ad579c5e2ac33e5b894d14e4875e3450227bf656af6c378"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.jpg",
+      "mode": "sha256",
+      "sha256": "a0a72ee239eac9f22d720ab4fc974df797514c655c0c41b93ec7dbdc8284133a"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.webp",
+      "mode": "sha256",
+      "sha256": "6179383d479e5cdb6e74abe5edf35c90921146514cd563ec4f9b947659d0c57e"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.avif",
+      "mode": "sha256",
+      "sha256": "b9f580140db0cd5ac35c5929da8a65f1ae8e156d259ff3d5fe194855c2b2e4d5"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.jpg",
+      "mode": "sha256",
+      "sha256": "2024c919c8f730cb67b85206dc14094a89daeb6b09c19ece3c160a105414d71f"
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.webp",
+      "mode": "sha256",
+      "sha256": "a59d736ecdd8f468a2c6434135674681546e8bca22c8497961ba882e00eeed70"
+    },
+    {
+      "path": "centrum-snu-po-50.html",
+      "mode": "sha256",
+      "sha256": "537f280c88783266e3dd839149e853f84a24ca69805252b9681c58a89cea6a1b"
+    },
+    {
+      "path": "data/crosslink-suggestions/wstawanie-w-nocy-do-toalety-po-50.json",
+      "mode": "reachable"
+    },
+    {
+      "path": "index.html",
+      "mode": "sha256",
+      "sha256": "611919ef08cf4ae2a576a24133570ce694baea05cc2d254c631aaa0585affae3"
+    },
+    {
+      "path": "llms-full.txt",
+      "mode": "sha256",
+      "sha256": "e115614637cf959de8c87798c9a9c800eeb72be1bdd16e149f638f94ed9a190f"
+    },
+    {
+      "path": "llms.txt",
+      "mode": "sha256",
+      "sha256": "af068b8404175f6198d3f086292f63cf83141edc49c5b15fd37adcad59e06229"
+    },
+    {
+      "path": "porady.html",
+      "mode": "sha256",
+      "sha256": "726c6154449778e04ce68bba2c8d7ad0a486c1c4056f27920c9c08f5d56304ac"
+    },
+    {
+      "path": "sitemap.xml",
+      "mode": "sha256",
+      "sha256": "375a80c410d1432c6750a8d047a1eea28d8e0dabe48c02576eb96551fb4ab741"
+    },
+    {
+      "path": "wstawanie-w-nocy-do-toalety-po-50.html",
+      "mode": "sha256",
+      "sha256": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c"
+    },
+    {
+      "path": "zdrowie.html",
+      "mode": "sha256",
+      "sha256": "66f7853078f393a130419dd1f25af61823bb6b00ef21e024e61c8b060ee7adb0"
     }
   ],
   "news": {
@@ -119,5 +379,162 @@
       }
     ]
   },
-  "articles": []
+  "articles": [
+    {
+      "file": "centrum-snu-po-50.html",
+      "slug": "centrum-snu-po-50",
+      "url": "https://fitpo50.pl/centrum-snu-po-50.html",
+      "date_modified": "2026-11-14T11:12:00+01:00",
+      "html_sha256": "537f280c88783266e3dd839149e853f84a24ca69805252b9681c58a89cea6a1b",
+      "pdf_path": "assets/pdf/centrum-snu-po-50.pdf",
+      "pdf_sha256": "7e24792ef5b02b92852944839961a56e0915c33c45ec1a901f5584e0d2d508b4",
+      "images": [
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        }
+      ],
+      "listing_paths": [
+        "index.html",
+        "assets/data/search-index.json"
+      ]
+    },
+    {
+      "file": "wstawanie-w-nocy-do-toalety-po-50.html",
+      "slug": "wstawanie-w-nocy-do-toalety-po-50",
+      "url": "https://fitpo50.pl/wstawanie-w-nocy-do-toalety-po-50.html",
+      "date_modified": "2026-11-14T09:30:00+01:00",
+      "html_sha256": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c",
+      "pdf_path": "assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf",
+      "pdf_sha256": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb",
+      "images": [
+        {
+          "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif",
+          "sha256": "39d89438447064a31a9b51bc1c5fef6a4599cd166d32adc702921f2efa174786"
+        },
+        {
+          "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg",
+          "sha256": "3e97c7a25a550a0de8b6c6716c02ea9d9700e227d94aeef31e1e7cf447b828f1"
+        },
+        {
+          "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp",
+          "sha256": "a744a3b49d5241fb63421df3011c13c22666e8419da99b46f1ae6593ffe7b674"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.avif",
+          "sha256": "63dc1ed67df52ff5dcc0140046c917bb1a2501506929e64ea0dcd9e0e52c388e"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.jpg",
+          "sha256": "c80fbb16ffe9953d624d6aa75f24cbf11fbb88e7cf297961d9bb2c66bb246ecf"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp",
+          "sha256": "2d28b322db5d94a106c7efbc3c2d4038907bc8ddab5f9c8cc6966bd4107d040d"
+        },
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.avif",
+          "sha256": "f13b02c5da44ae57b32a6d38688aeffd9a7f4fdaa69ec4948827c3666e1abd4b"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.jpg",
+          "sha256": "102463e456ca186a6ca26f373b3a70305589b021649b41f4b3a50642957f330f"
+        },
+        {
+          "path": "assets/niejedzenie-po-18-a-chudniecie-mit-hero-szuflada-z-zegarem-wiosna-v2.webp",
+          "sha256": "2798d80ee0117cabf8c72017e801042230e250e4a0c67ca2186e4dcc46f5bddb"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.avif",
+          "sha256": "0c37b8faa775f0763b25e3232ea8140a344a4fd0d81dfdebc26a7a51553bf2d6"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.jpg",
+          "sha256": "dea6353cb3eb4128b2667a2e1964f8c89e8acf2a6a046c8b8a71b95e14f6e643"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.webp",
+          "sha256": "d4b82bff353b93fc84035919dd7e134ca97bd26cbfb0e6c5e4aa5f4674159c9a"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.avif",
+          "sha256": "d2b10d2ac4c08ecb9615a9428b03575528e357d4a0a960c93666f4a1467e3378"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.jpg",
+          "sha256": "a1248a94568fe8ceffd3dd69129fee10d5709e61a52d61afa32048815e20be7e"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.webp",
+          "sha256": "26562f9ad149d8ce0bab119d334bef83124833d988c4b74b97ddceca372e8240"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif",
+          "sha256": "8b52278f2439adaba83a8b8760023d19c68b7b345e9d04e66e4f36d8adea4a18"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg",
+          "sha256": "f79da394ef884f1243d9710447dd4ac3391c236c5f478a9741a2142bf49414a0"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp",
+          "sha256": "9ed650e1f4e3f396365cac35d2fa30dbdbaddc959b57e5e4d13e6345f314a16c"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.avif",
+          "sha256": "66099cdc0f593a964ce93690c8aca1094c51e9f8afb75d4b3b6d47f9da708697"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.jpg",
+          "sha256": "09f5fdef12f2bd7b4824a320d8000ea5628851cc56a14f6b76f67cf52d3a8bdd"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.webp",
+          "sha256": "8b09cd3b37b2dd62ddd0ee13929be27b6445a740e178b044f5b95528e9006af5"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.avif",
+          "sha256": "7a7a86fc0a5018fe2ad579c5e2ac33e5b894d14e4875e3450227bf656af6c378"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.jpg",
+          "sha256": "a0a72ee239eac9f22d720ab4fc974df797514c655c0c41b93ec7dbdc8284133a"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.webp",
+          "sha256": "6179383d479e5cdb6e74abe5edf35c90921146514cd563ec4f9b947659d0c57e"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.avif",
+          "sha256": "b9f580140db0cd5ac35c5929da8a65f1ae8e156d259ff3d5fe194855c2b2e4d5"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.jpg",
+          "sha256": "2024c919c8f730cb67b85206dc14094a89daeb6b09c19ece3c160a105414d71f"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.webp",
+          "sha256": "a59d736ecdd8f468a2c6434135674681546e8bca22c8497961ba882e00eeed70"
+        }
+      ],
+      "listing_paths": [
+        "index.html",
+        "porady.html",
+        "zdrowie.html",
+        "assets/data/search-index.json"
+      ]
+    }
+  ]
 }

@@ -1,0 +1,455 @@
+{
+  "version": 1,
+  "transaction_id": "article-wstawanie-w-nocy-do-toalety-po-50-1794650847041-19807",
+  "validation_profile": "technical",
+  "generated_at": "2026-11-14T11:07:47+01:00",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "wstawanie-w-nocy-do-toalety-po-50",
+  "source_package_sha256": "80f946dfc3f1ed7f2c50cea86ac1023f2bdf09beed3b42f457156c71b0f131e1",
+  "url": "https://fitpo50.pl/wstawanie-w-nocy-do-toalety-po-50.html",
+  "manifest_file": "data/reports/article-publications/wstawanie-w-nocy-do-toalety-po-50.json",
+  "validation_receipt": "9236ce185fa8784f80df4cccd8c5844866c3cdc5f79d9bbfd5bd29cefd28a0c6",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "SCHEMA_VALIDATION",
+    "MIRROR_SYNC",
+    "PREDEPLOY_STAGING",
+    "TECHNICAL_PREVIEW_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "wstawanie-w-nocy-do-toalety-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c",
+      "bytes": 47815
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "40a458032d1960d27529ef53e44a3c74ccc5ff7c2830b44b0673e586e4f4741f",
+      "after_sha256": "611919ef08cf4ae2a576a24133570ce694baea05cc2d254c631aaa0585affae3",
+      "bytes": 122288
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "a7ed29a2e69b9fffb2b37d8e6ddf406933a6610401d7c00831b0637d2234f873",
+      "after_sha256": "726c6154449778e04ce68bba2c8d7ad0a486c1c4056f27920c9c08f5d56304ac",
+      "bytes": 168910
+    },
+    {
+      "path": "zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "269f24fe90fe8dd2ba376378a6f2bdf8e6cc1f0d7c8d1448075f5970e4195089",
+      "after_sha256": "66f7853078f393a130419dd1f25af61823bb6b00ef21e024e61c8b060ee7adb0",
+      "bytes": 64680
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "988940bd3961822a237d12f4d356de065c6b6be8a4942d97b81fa974652a1fcd",
+      "after_sha256": "c8b9052b066f73730619f061bc7c33459afd8944ae6bda89a6c4406750aebcba",
+      "bytes": 21149
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "20ac6b8f6cb0b3611636c280c7bf3a1515d36b85f611e4e34576569b460e8b4f",
+      "after_sha256": "af068b8404175f6198d3f086292f63cf83141edc49c5b15fd37adcad59e06229",
+      "bytes": 41313
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "3511d65e28899c8c1c4abad19295573bcea2c150eaccab84741ee7e9e4bcb2f4",
+      "after_sha256": "768e3929046e35027910144304b73a16afacd3f99afac8a1018afacef8c446c5",
+      "bytes": 960535
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "b574fb7ef8321485f6b345fe4d75cfdd97a03e41e46d29507752b30fc7aa8c56",
+      "after_sha256": "e51bab2aa8eae813d2002eb1f4621c16766143817d36c8429528de59037c25cb",
+      "bytes": 1007394
+    },
+    {
+      "path": "assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb",
+      "bytes": 439967
+    },
+    {
+      "path": "data/crosslink-suggestions/wstawanie-w-nocy-do-toalety-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b277436da96c2b305a6894a1738a91bde3e0f25f71c4ddb881c37f93fb47c26c",
+      "bytes": 1291
+    },
+    {
+      "path": "data/reports/article-preview/wstawanie-w-nocy-do-toalety-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "30c2ea5e01caecc0deb2ca57b18533e7e6d3ef69cd8bc0072ca9a38bfe36a0ef",
+      "bytes": 18560
+    },
+    {
+      "path": "data/reports/article-preview/wstawanie-w-nocy-do-toalety-po-50.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "01d42d978d8e1b5ba638e3c41b83d54a04ff22abbeb912310840c9e7b1423434",
+      "bytes": 355
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "0ae03056ede79b526f2999fe0fa6421893e48e916aa72b69cfc1132e0127a6de",
+      "after_sha256": "745608cb96b2440a9e1bf8f67146f247a810991adc88781d9423958bb216273f",
+      "bytes": 76170
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "5205fd01bd6141bef9e4461701e4773ae993bc06daa8da77759d49f2ccf9145c",
+      "after_sha256": "a434fbd17f7c5f67e29463672af6d3f0368a24ec0dc8439be7c0b74d45cb4838",
+      "bytes": 8487
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "64effc914130d8f66f9dd45d5b5f03606a1c85c9f2f06f0fefe6d2a10dbba63c",
+      "after_sha256": "08e88ebf3f75669e3831239ed17e10ed414510f6a0e52500cde36e973ea2440a",
+      "bytes": 4142
+    },
+    {
+      "path": "_site/wstawanie-w-nocy-do-toalety-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f6ae89e2bc883e9a89c59aacde7fea3f20ae8d2955706f8dae04476c31676f8c",
+      "bytes": 47815
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "40a458032d1960d27529ef53e44a3c74ccc5ff7c2830b44b0673e586e4f4741f",
+      "after_sha256": "611919ef08cf4ae2a576a24133570ce694baea05cc2d254c631aaa0585affae3",
+      "bytes": 122288
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "a7ed29a2e69b9fffb2b37d8e6ddf406933a6610401d7c00831b0637d2234f873",
+      "after_sha256": "726c6154449778e04ce68bba2c8d7ad0a486c1c4056f27920c9c08f5d56304ac",
+      "bytes": 168910
+    },
+    {
+      "path": "_site/zdrowie.html",
+      "action": "UPDATE",
+      "before_sha256": "269f24fe90fe8dd2ba376378a6f2bdf8e6cc1f0d7c8d1448075f5970e4195089",
+      "after_sha256": "66f7853078f393a130419dd1f25af61823bb6b00ef21e024e61c8b060ee7adb0",
+      "bytes": 64680
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "988940bd3961822a237d12f4d356de065c6b6be8a4942d97b81fa974652a1fcd",
+      "after_sha256": "c8b9052b066f73730619f061bc7c33459afd8944ae6bda89a6c4406750aebcba",
+      "bytes": 21149
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "20ac6b8f6cb0b3611636c280c7bf3a1515d36b85f611e4e34576569b460e8b4f",
+      "after_sha256": "af068b8404175f6198d3f086292f63cf83141edc49c5b15fd37adcad59e06229",
+      "bytes": 41313
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "3511d65e28899c8c1c4abad19295573bcea2c150eaccab84741ee7e9e4bcb2f4",
+      "after_sha256": "768e3929046e35027910144304b73a16afacd3f99afac8a1018afacef8c446c5",
+      "bytes": 960535
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "b574fb7ef8321485f6b345fe4d75cfdd97a03e41e46d29507752b30fc7aa8c56",
+      "after_sha256": "e51bab2aa8eae813d2002eb1f4621c16766143817d36c8429528de59037c25cb",
+      "bytes": 1007394
+    },
+    {
+      "path": "_site/assets/pdf/wstawanie-w-nocy-do-toalety-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ecfcccc409c28725c08a6eebc98ee1053b607161eef21ec013d63e7d5bce19bb",
+      "bytes": 439967
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/wstawanie-w-nocy-do-toalety-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b277436da96c2b305a6894a1738a91bde3e0f25f71c4ddb881c37f93fb47c26c",
+      "bytes": 1291
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8b52278f2439adaba83a8b8760023d19c68b7b345e9d04e66e4f36d8adea4a18",
+      "bytes": 42652
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8b52278f2439adaba83a8b8760023d19c68b7b345e9d04e66e4f36d8adea4a18",
+      "bytes": 42652
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9ed650e1f4e3f396365cac35d2fa30dbdbaddc959b57e5e4d13e6345f314a16c",
+      "bytes": 67116
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9ed650e1f4e3f396365cac35d2fa30dbdbaddc959b57e5e4d13e6345f314a16c",
+      "bytes": 67116
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f79da394ef884f1243d9710447dd4ac3391c236c5f478a9741a2142bf49414a0",
+      "bytes": 127860
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f79da394ef884f1243d9710447dd4ac3391c236c5f478a9741a2142bf49414a0",
+      "bytes": 127860
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d2b10d2ac4c08ecb9615a9428b03575528e357d4a0a960c93666f4a1467e3378",
+      "bytes": 73173
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d2b10d2ac4c08ecb9615a9428b03575528e357d4a0a960c93666f4a1467e3378",
+      "bytes": 73173
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "26562f9ad149d8ce0bab119d334bef83124833d988c4b74b97ddceca372e8240",
+      "bytes": 122192
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "26562f9ad149d8ce0bab119d334bef83124833d988c4b74b97ddceca372e8240",
+      "bytes": 122192
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a1248a94568fe8ceffd3dd69129fee10d5709e61a52d61afa32048815e20be7e",
+      "bytes": 195932
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-granice-snu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a1248a94568fe8ceffd3dd69129fee10d5709e61a52d61afa32048815e20be7e",
+      "bytes": 195932
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "66099cdc0f593a964ce93690c8aca1094c51e9f8afb75d4b3b6d47f9da708697",
+      "bytes": 43918
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "66099cdc0f593a964ce93690c8aca1094c51e9f8afb75d4b3b6d47f9da708697",
+      "bytes": 43918
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8b09cd3b37b2dd62ddd0ee13929be27b6445a740e178b044f5b95528e9006af5",
+      "bytes": 67684
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8b09cd3b37b2dd62ddd0ee13929be27b6445a740e178b044f5b95528e9006af5",
+      "bytes": 67684
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "09f5fdef12f2bd7b4824a320d8000ea5628851cc56a14f6b76f67cf52d3a8bdd",
+      "bytes": 127115
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-pomoc-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "09f5fdef12f2bd7b4824a320d8000ea5628851cc56a14f6b76f67cf52d3a8bdd",
+      "bytes": 127115
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b9f580140db0cd5ac35c5929da8a65f1ae8e156d259ff3d5fe194855c2b2e4d5",
+      "bytes": 51030
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b9f580140db0cd5ac35c5929da8a65f1ae8e156d259ff3d5fe194855c2b2e4d5",
+      "bytes": 51030
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a59d736ecdd8f468a2c6434135674681546e8bca22c8497961ba882e00eeed70",
+      "bytes": 79856
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a59d736ecdd8f468a2c6434135674681546e8bca22c8497961ba882e00eeed70",
+      "bytes": 79856
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2024c919c8f730cb67b85206dc14094a89daeb6b09c19ece3c160a105414d71f",
+      "bytes": 154737
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-rozmowa-o-przyczynach-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2024c919c8f730cb67b85206dc14094a89daeb6b09c19ece3c160a105414d71f",
+      "bytes": 154737
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0c37b8faa775f0763b25e3232ea8140a344a4fd0d81dfdebc26a7a51553bf2d6",
+      "bytes": 46410
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0c37b8faa775f0763b25e3232ea8140a344a4fd0d81dfdebc26a7a51553bf2d6",
+      "bytes": 46410
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d4b82bff353b93fc84035919dd7e134ca97bd26cbfb0e6c5e4aa5f4674159c9a",
+      "bytes": 72906
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d4b82bff353b93fc84035919dd7e134ca97bd26cbfb0e6c5e4aa5f4674159c9a",
+      "bytes": 72906
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dea6353cb3eb4128b2667a2e1964f8c89e8acf2a6a046c8b8a71b95e14f6e643",
+      "bytes": 136175
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-dzienniczek-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dea6353cb3eb4128b2667a2e1964f8c89e8acf2a6a046c8b8a71b95e14f6e643",
+      "bytes": 136175
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7a7a86fc0a5018fe2ad579c5e2ac33e5b894d14e4875e3450227bf656af6c378",
+      "bytes": 52058
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7a7a86fc0a5018fe2ad579c5e2ac33e5b894d14e4875e3450227bf656af6c378",
+      "bytes": 52058
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6179383d479e5cdb6e74abe5edf35c90921146514cd563ec4f9b947659d0c57e",
+      "bytes": 83052
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6179383d479e5cdb6e74abe5edf35c90921146514cd563ec4f9b947659d0c57e",
+      "bytes": 83052
+    },
+    {
+      "path": "assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a0a72ee239eac9f22d720ab4fc974df797514c655c0c41b93ec7dbdc8284133a",
+      "bytes": 154762
+    },
+    {
+      "path": "_site/assets/wstawanie-w-nocy-do-toalety-po-50-przygotowanie-wizyty-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a0a72ee239eac9f22d720ab4fc974df797514c655c0c41b93ec7dbdc8284133a",
+      "bytes": 154762
+    }
+  ],
+  "files_count": 61
+}
