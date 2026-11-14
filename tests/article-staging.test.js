@@ -25,6 +25,13 @@ const { applyVisualReview, createReviewTemplate, imageInventoryHash } = require(
 
 const FIXTURE_ROOTS = [];
 
+test('UPDATE obejmuje poprzednią kategorię i jej kopię w stagingu', () => {
+  const root = temp('fitpo50-update-category-');
+  fs.writeFileSync(path.join(root, 'testowy.html'), '<body class="article-template article--zdrowie"></body>');
+  const files = promotionCandidates({ slug: 'testowy', category: 'mity' }, root);
+  for (const file of ['zdrowie.html', '_site/zdrowie.html', 'mity.html', '_site/mity.html']) assert.ok(files.includes(file), file);
+});
+
 function temp(prefix) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), prefix));
   FIXTURE_ROOTS.push(root);

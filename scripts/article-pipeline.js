@@ -304,7 +304,7 @@ async function main() {
       allowOverwrite: allowOverwriteSeoPatches,
     });
     const transactionId = `article-${slug}-${Date.now()}-${process.pid}`;
-    const candidates = promotionCandidates(parsedInput);
+    const candidates = promotionCandidates(parsedInput, root);
     const baseline = snapshotCandidates(root, candidates);
     const stageRoot = createStagingWorkspace(root, slug);
     let stageStatus = 'FAILED';

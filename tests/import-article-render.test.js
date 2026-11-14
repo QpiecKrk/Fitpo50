@@ -2,7 +2,29 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
-const { buildScholarlyMentions, normalizePayload, singleTrailingNewline, upsertBlogPostingSchema } = require('../scripts/import-article');
+const { buildScholarlyMentions, normalizePayload, singleTrailingNewline, upsertBlogPostingSchema, existingArticleDetails, removeCategoryListing, upsertPoradyListing } = require('../scripts/import-article');
+
+test('UPDATE zachowuje datę publikacji, a CREATE zachowuje dotychczasową datę', () => {
+  const html = '<body class="article-template article--zdrowie"><script type="application/ld+json">{"@type":"BlogPosting","datePublished":"2026-04-27T08:00:00+02:00"}</script></body>';
+  const previous = existingArticleDetails(html);
+  const data = { slug: 'testowy', title: 'Test', category: 'mity', sections: [], sources: [] };
+  const updated = normalizePayload(data, null, { existingArticle: previous });
+  assert.equal(updated.datePublished, '2026-04-27T08:00:00+02:00');
+  assert.equal(updated.dateModified.slice(0, 10), require('../scripts/lib/time').warsawIso().slice(0, 10));
+  const created = normalizePayload(data, null);
+  assert.equal(created.datePublished.slice(0, 10), require('../scripts/lib/time').warsawIso().slice(0, 10));
+});
+
+test('UPDATE usuwa kartę starej kategorii i aktualizuje kartę porad bez duplikatu', () => {
+  const card = '<a href="testowy.html" class="article-index-card reveal" data-article-item data-category="zdrowie" data-order="3"><span class="article-index-card__label">Zdrowie</span></a>';
+  const html = `<div class="articles-grid-preview carousel-track">${card}</div>`;
+  assert.doesNotMatch(removeCategoryListing(html, 'testowy.html'), /href="testowy.html"/);
+  const ctx = { href: 'testowy.html', categoryKey: 'mity', categoryLabel: 'Mity', title: 'Nowy tytuł', readTime: '11 min czytania', excerpt: 'Opis', searchText: 'opis' };
+  const updated = upsertPoradyListing(html, ctx);
+  assert.equal((updated.match(/href="testowy.html"/g) || []).length, 1);
+  assert.match(updated, /data-category="mity"/);
+  assert.match(updated, /article-index-card__label">Mity/);
+});
 
 test('source with only a publication year never gets an invented January 1 date', () => {
   const [mention] = buildScholarlyMentions([{ label: 'Badanie kohortowe 2024', url: 'https://example.org/study', publication_year: 2024, publication_date: null }]);

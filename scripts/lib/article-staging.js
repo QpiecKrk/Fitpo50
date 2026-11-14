@@ -200,9 +200,13 @@ function mediaPaths(article) {
   return paths;
 }
 
-function promotionCandidates(article) {
+function promotionCandidates(article, root = process.cwd()) {
   const slug = assertSafeName(article?.slug, 'Slug');
   const categoryFile = categoryFileFromKey(normalizeCategory(article?.category || 'ciekawe').key);
+  const existingPath = path.join(root, `${slug}.html`);
+  const previousHtml = fs.existsSync(existingPath) ? fs.readFileSync(existingPath, 'utf8') : '';
+  const previousCategory = previousHtml.match(/<body\b[^>]*\bclass=["'][^"']*\barticle--(ruch|jedzenie|zdrowie|ciekawe|mity)\b/i)?.[1];
+  const previousFile = previousCategory ? categoryFileFromKey(previousCategory) : '';
   const rootFiles = [
     `${slug}.html`,
     'index.html',
@@ -233,7 +237,7 @@ function promotionCandidates(article) {
     path.join('_site', 'assets', 'pdf', `${slug}.pdf`),
     path.join('_site', 'data', 'crosslink-suggestions', `${slug}.json`),
   ];
-  return [...new Set([...rootFiles, ...mirrored, ...mediaPaths(article)].map((item) => item.replace(/\\/g, '/')))];
+  return [...new Set([...rootFiles, ...mirrored, ...(previousFile && previousFile !== categoryFile ? [previousFile, `_site/${previousFile}`] : []), ...mediaPaths(article)].map((item) => item.replace(/\\/g, '/')))];
 }
 
 function snapshotCandidates(root, candidates) {

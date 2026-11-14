@@ -1638,8 +1638,53 @@ function replaceFirstOrWarn(text, rx, replacer, label) {
   return text.replace(rx, replacer);
 }
 
+function listingCardPattern(href) {
+  const escaped = String(href).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`<a\\b(?=[^>]*\\bhref=["'](?:\\./)?${escaped}["'])(?=[^>]*\\bclass=["'][^"']*\\barticle-index-card\\b[^"']*["'])[^>]*>[\\s\\S]*?<\\/a>`, 'gi');
+}
+
+function removeCategoryListing(html, href) {
+  const out = String(html).replace(listingCardPattern(href), '');
+  const cardCount = countMatches(out, /class="article-index-card reveal"/g);
+  return out.replace(/("numberOfItems"\s*:\s*)\d+/, `$1${cardCount}`);
+}
+
+function existingArticleDetails(html) {
+  const category = String(html).match(/<body\b[^>]*\bclass=["'][^"']*\barticle--(ruch|jedzenie|zdrowie|ciekawe|mity)\b/i)?.[1];
+  const found = [];
+  const visit = (node) => {
+    if (Array.isArray(node)) return node.forEach(visit);
+    if (!node || typeof node !== 'object') return;
+    if (node['@type'] === 'BlogPosting' || (Array.isArray(node['@type']) && node['@type'].includes('BlogPosting'))) found.push(node);
+    if (Array.isArray(node['@graph'])) visit(node['@graph']);
+  };
+  for (const match of String(html).matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    try { visit(JSON.parse(match[1])); } catch (_error) { /* Other validators report invalid JSON-LD. */ }
+  }
+  if (!category || found.length !== 1 || !POLICY.PATTERNS.ISO_DATE_TZ.test(String(found[0].datePublished || ''))) {
+    throw new Error('Nie można jednoznacznie odczytać pierwotnej daty publikacji i kategorii aktualizowanego artykułu.');
+  }
+  return { category, datePublished: found[0].datePublished };
+}
+
 function upsertPoradyListing(html, ctx) {
   let out = html;
+  const existingCards = [...out.matchAll(listingCardPattern(ctx.href))];
+  if (existingCards.length > 1) throw new Error(`Powielona karta w porady.html: ${ctx.href}`);
+  if (existingCards.length === 1) {
+    const card = existingCards[0][0];
+    const replaceAttr = (tag, name, value) => tag.replace(new RegExp(`(\\b${name}=")[^"]*(")`, 'i'), `$1${escapeHtmlAttr(value)}$2`);
+    let next = card.replace(/^<a\b[^>]*>/i, (tag) => {
+      let updated = replaceAttr(tag, 'data-category', ctx.categoryKey);
+      updated = replaceAttr(updated, 'data-article-title', ctx.title);
+      updated = replaceAttr(updated, 'data-read-time', ctx.readTime);
+      return replaceAttr(updated, 'data-search-text', ctx.searchText);
+    });
+    for (const [cls, value] of [['article-index-card__label', ctx.categoryLabel], ['article-index-card__meta', ctx.readTime], ['article-index-card__title', ctx.title], ['article-index-card__desc', ctx.excerpt]]) {
+      next = next.replace(new RegExp(`(<(?:span|h3|p)\\b[^>]*class="${cls}"[^>]*>)[\\s\\S]*?(<\\/(?:span|h3|p)>)`, 'i'), (_all, start, end) => `${start}${escapeHtml(value)}${end}`);
+    }
+    out = out.replace(card, next);
+  }
   const hrefNeedle = `href="${ctx.href}"`;
   const hasCard = out.includes(`${hrefNeedle} class="article-index-card reveal"`) || out.includes(`${hrefNeedle}" class="article-index-card reveal"`);
 
@@ -1941,11 +1986,14 @@ function updateSingleFileWithMirror(relPath, updater, dryRun, syncSite) {
   return updatedFiles;
 }
 
-function updateListings(payload, dryRun, syncSite) {
+function updateListings(payload, dryRun, syncSite, previousCategory = '') {
   const ctx = buildListingContext(payload);
   const changed = [];
 
   changed.push(...updateSingleFileWithMirror('porady.html', (html) => upsertPoradyListing(html, ctx), dryRun, syncSite));
+  if (previousCategory && previousCategory !== ctx.categoryKey) {
+    changed.push(...updateSingleFileWithMirror(categoryFileFromKey(previousCategory), (html) => removeCategoryListing(html, ctx.href), dryRun, syncSite));
+  }
   changed.push(...updateSingleFileWithMirror(categoryFileFromKey(ctx.categoryKey), (html) => upsertCategoryListing(html, ctx), dryRun, syncSite));
   changed.push(...updateSingleFileWithMirror('index.html', (html) => upsertIndexListing(html, ctx), dryRun, syncSite));
 
@@ -2097,7 +2145,7 @@ function normalizePayload(data, cliCategory, options = {}) {
   const quickAnswer = technical ? String(data.quick_answer || '').trim() : normalizeQuickAnswer(data.quick_answer || data.quickAnswer || '', leadRaw);
   const metaDescription = technical ? String(data.meta_description || '').trim() : normalizeMetaDescription(data.meta_description || data.description || data.excerpt || leadRaw);
 
-  const datePublished = toIsoDateTimeWithTimezone(data.date_published || data.published_at || fallbackDate, '08:00:00');
+  const datePublished = toIsoDateTimeWithTimezone(data.date_published || data.published_at || options.existingArticle?.datePublished || fallbackDate, '08:00:00');
   const dateModified = toIsoDateTimeWithTimezone(data.date_modified || data.updated_at || fallbackDate, '09:30:00');
 
   const readingTime = normalizeReadingTimeLabel(data.reading_time || data.readingTime, '11 min czytania');
@@ -2339,7 +2387,9 @@ async function main() {
   }
 
   const json = parseJsonFile(resolvedInput);
-  const payload = normalizePayload(json, args.category, { faqStrict, profile: args.profile });
+  const previousPath = path.join(ROOT, `${slugify(String(json.slug || json.title || ''))}.html`);
+  const existingArticle = force && fs.existsSync(previousPath) ? existingArticleDetails(fs.readFileSync(previousPath, 'utf8')) : null;
+  const payload = normalizePayload(json, args.category, { faqStrict, profile: args.profile, existingArticle });
   const assetPrep = { notes: [], warnings: [] };
   const check = technical
     ? { errors: [], autoFixes: [], sections: payload.sections, sources: payload.sources }
@@ -2380,7 +2430,7 @@ async function main() {
 
   const updatedFiles = [];
   if (publish) {
-    const listingFiles = updateListings(payload, dryRun, syncSite);
+    const listingFiles = updateListings(payload, dryRun, syncSite, existingArticle?.category);
     if (listingFiles.length) updatedFiles.push(...listingFiles);
 
     const sitemapResult = updateSitemap(payload.slug, payload.dateModified, dryRun);
@@ -2444,6 +2494,9 @@ module.exports = {
   ensureCaptionedTables,
   main,
   normalizePayload,
+  existingArticleDetails,
+  removeCategoryListing,
+  upsertPoradyListing,
   normalizeFaqResearch,
   normalizeEntities,
   normalizeSections,
