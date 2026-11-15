@@ -1,33 +1,28 @@
 {
   "version": 4,
-  "release_id": "d0220d3f-65b6-4256-a8ab-5337a3736826",
-  "prepared_at": "2026-11-15T12:59:55+01:00",
-  "prepared_from_head": "91cfee1d7f0e8bce9cbc24d961a00848fc61565d",
-  "publication_state_sha256": "991c056f542975af372b4f9c517f68871ea8a9b1a909b5a8fabab08cdbf7e4fa",
-  "public_fingerprint_sha256": "0d9e3919e1c76973726e9ebe546ddce4672da904f7612be26be42f8a6259a175",
+  "release_id": "e66fe8d8-b000-444f-aed7-e121ab169100",
+  "prepared_at": "2026-11-15T13:10:43+01:00",
+  "prepared_from_head": "459095f5cd44b7bd9127ca1bd3faef8bc39eeb51",
+  "publication_state_sha256": "32f23d5daa29dd909e289cc904d4d1647e1151cd8a50565b6b0f336ea43cce7b",
+  "public_fingerprint_sha256": "ec62cfc4381154e08770aa00e9223eff27e22bf55ab159e117e2187754450f04",
   "release_files": [
     "_site/deployment.json",
     "_site/index.html",
     "deployment.json",
-    "index.html",
-    "scripts/publish-article.js",
-    "tests/publishing-engine.test.js"
+    "index.html"
   ],
   "release_file_hashes": {
-    "_site/index.html": "acae85a0b05fb1e83c614b9b1097506e2f1c5ace98b017bef87af50270a324b0",
-    "index.html": "acae85a0b05fb1e83c614b9b1097506e2f1c5ace98b017bef87af50270a324b0",
-    "scripts/publish-article.js": "5ac096fe58e4d787f9d78d883c7758296c06d857f44d49c4b02de9729be59f23",
-    "tests/publishing-engine.test.js": "7077d26b13cbe310200d4e1dddda731e87b358fb1da2d7c5f0247021385bac10"
+    "_site/index.html": "38f35961b662d27bd51eea3c916da817d18eaf41dd863f5865a37d708a06e0f7",
+    "index.html": "38f35961b662d27bd51eea3c916da817d18eaf41dd863f5865a37d708a06e0f7"
   },
   "change_scope": [
-    "articles",
-    "pipeline"
+    "articles"
   ],
   "verification_targets": [
     {
       "path": "index.html",
       "mode": "sha256",
-      "sha256": "acae85a0b05fb1e83c614b9b1097506e2f1c5ace98b017bef87af50270a324b0"
+      "sha256": "38f35961b662d27bd51eea3c916da817d18eaf41dd863f5865a37d708a06e0f7"
     }
   ],
   "news": {
