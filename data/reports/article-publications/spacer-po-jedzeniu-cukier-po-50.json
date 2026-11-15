@@ -1,0 +1,497 @@
+{
+  "version": 1,
+  "transaction_id": "article-spacer-po-jedzeniu-cukier-po-50-1794717558103-45873",
+  "validation_profile": "technical",
+  "generated_at": "2026-11-15T05:39:37+01:00",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "spacer-po-jedzeniu-cukier-po-50",
+  "source_package_sha256": "4b234645f56414f67d11e19d7d8d92b1a7a0718321111889ce0d38c6fd346ce7",
+  "url": "https://fitpo50.pl/spacer-po-jedzeniu-cukier-po-50.html",
+  "manifest_file": "data/reports/article-publications/spacer-po-jedzeniu-cukier-po-50.json",
+  "validation_receipt": "ee6753f314d35cecfe87d6d1cdff4bf9ecf71454e193db27fb6cc1c381f25fc0",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "SCHEMA_VALIDATION",
+    "MIRROR_SYNC",
+    "PREDEPLOY_STAGING",
+    "TECHNICAL_PREVIEW_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "spacer-po-jedzeniu-cukier-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e8f4a05d1245d6f225ff41048e8702b7eea5f112ca8bf9b7225d9c993f01661a",
+      "bytes": 55439
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "e17b756efedcb7cf6673f877d9d0457ef1e6b3e5dff13f6684ab5a893c433d6d",
+      "after_sha256": "dbee5e5c6b71a60c85f755a8af4e424bb9b36096cc7459cefe7b0baf46c0028a",
+      "bytes": 122350
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "9ff56066f23d1714480d5b68bbb6f65b87c07bce863b1a22f610f02273391bec",
+      "after_sha256": "d762bfeb1d95d856b0398087ba4489b1918be1043d76bc4f8764611e649fc171",
+      "bytes": 171154
+    },
+    {
+      "path": "rusz-sie.html",
+      "action": "UPDATE",
+      "before_sha256": "a4b43075d2e52a42b968dbc86b51612315d641e72a6203b834020033ad861abe",
+      "after_sha256": "f1273b170c9e55a6e55b94a655e3f6f5d6f6590e71e5ab72727c6392d7db08ea",
+      "bytes": 48092
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "8afeb85bb0b71cbbde6709280189b3fd25d08b2676112c016bc46042f6dcf5f7",
+      "after_sha256": "9a65f7da667c164771de3718e8a79e1074175c238e972a7513e9f04be39bebc6",
+      "bytes": 21526
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "4ea0e7bb3eb00c8fded24345aff856c9724807fbc99f2f0867fea81181b2a666",
+      "after_sha256": "f73b873fcafe1b408e041d83da2be60d9f2a5224b79c148f27622e8f9d493d8d",
+      "bytes": 42017
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "ad00dd037ac08ff63e4c186b13e16c9b9736f1e390eca66554a13fa05c9f5483",
+      "after_sha256": "2cb0d3da3b9f88474ed7d37a9490245f117f9b962fc53579992aba5e6ee0e7f9",
+      "bytes": 996777
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "ad5c1cfb720973e8911fb4ec1b7fd8a289f8b21daee0d15bb142832543a18898",
+      "after_sha256": "2db3950326a40a2a0c575e53c158ca225bf4cf3b72e6ffb8e33cbb88e3ca3037",
+      "bytes": 1044529
+    },
+    {
+      "path": "assets/pdf/spacer-po-jedzeniu-cukier-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c508d10a0f874a4d186d054e7cbc95e9a264439bb7e759fb253e0491723229c3",
+      "bytes": 612970
+    },
+    {
+      "path": "data/crosslink-suggestions/spacer-po-jedzeniu-cukier-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a035bbe8b0accba7e75b833d1718719a4a1bde7df4eaeb32310004b2651bc650",
+      "bytes": 1283
+    },
+    {
+      "path": "data/reports/article-preview/spacer-po-jedzeniu-cukier-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3d92fbdf5bd72e8140409d19e24d5c41cbb839e4491260bd4af684728da664ea",
+      "bytes": 21093
+    },
+    {
+      "path": "data/reports/article-preview/spacer-po-jedzeniu-cukier-po-50.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "2dc7295370d11104b16c925c45f512a4d8e09edbbfb33d0333a72dd08aada74b",
+      "bytes": 353
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "c577767b99b19b804dba57a057470926a0186b6f0c96b4a1c0f7814c10ccbc8f",
+      "after_sha256": "c6b94e423ad42a04c1a986cbfb810e84e851245875029bbf3a33abc5230fdd36",
+      "bytes": 88061
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "2f718095433c39e6dfbad6fb05408977533040e939796efa5ef34f9ed064bd27",
+      "after_sha256": "39095c4b59a97a3f2271f271b86a566c57b71344090a629e07fb1e8af27c276f",
+      "bytes": 10111
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "eae8da6568065cadb7a460980d68bc045bf16b7628c7a55ae7bc196980af42f6",
+      "after_sha256": "e7f86b937a6f01857ffd1be04ed19739ce922fba191f356dc5141bccd1457595",
+      "bytes": 4951
+    },
+    {
+      "path": "_site/spacer-po-jedzeniu-cukier-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e8f4a05d1245d6f225ff41048e8702b7eea5f112ca8bf9b7225d9c993f01661a",
+      "bytes": 55439
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "e17b756efedcb7cf6673f877d9d0457ef1e6b3e5dff13f6684ab5a893c433d6d",
+      "after_sha256": "dbee5e5c6b71a60c85f755a8af4e424bb9b36096cc7459cefe7b0baf46c0028a",
+      "bytes": 122350
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "9ff56066f23d1714480d5b68bbb6f65b87c07bce863b1a22f610f02273391bec",
+      "after_sha256": "d762bfeb1d95d856b0398087ba4489b1918be1043d76bc4f8764611e649fc171",
+      "bytes": 171154
+    },
+    {
+      "path": "_site/rusz-sie.html",
+      "action": "UPDATE",
+      "before_sha256": "a4b43075d2e52a42b968dbc86b51612315d641e72a6203b834020033ad861abe",
+      "after_sha256": "f1273b170c9e55a6e55b94a655e3f6f5d6f6590e71e5ab72727c6392d7db08ea",
+      "bytes": 48092
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "8afeb85bb0b71cbbde6709280189b3fd25d08b2676112c016bc46042f6dcf5f7",
+      "after_sha256": "9a65f7da667c164771de3718e8a79e1074175c238e972a7513e9f04be39bebc6",
+      "bytes": 21526
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "4ea0e7bb3eb00c8fded24345aff856c9724807fbc99f2f0867fea81181b2a666",
+      "after_sha256": "f73b873fcafe1b408e041d83da2be60d9f2a5224b79c148f27622e8f9d493d8d",
+      "bytes": 42017
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "ad00dd037ac08ff63e4c186b13e16c9b9736f1e390eca66554a13fa05c9f5483",
+      "after_sha256": "2cb0d3da3b9f88474ed7d37a9490245f117f9b962fc53579992aba5e6ee0e7f9",
+      "bytes": 996777
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "ad5c1cfb720973e8911fb4ec1b7fd8a289f8b21daee0d15bb142832543a18898",
+      "after_sha256": "2db3950326a40a2a0c575e53c158ca225bf4cf3b72e6ffb8e33cbb88e3ca3037",
+      "bytes": 1044529
+    },
+    {
+      "path": "_site/assets/pdf/spacer-po-jedzeniu-cukier-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c508d10a0f874a4d186d054e7cbc95e9a264439bb7e759fb253e0491723229c3",
+      "bytes": 612970
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/spacer-po-jedzeniu-cukier-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a035bbe8b0accba7e75b833d1718719a4a1bde7df4eaeb32310004b2651bc650",
+      "bytes": 1283
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "10873f14e611981cca7ad363980f7da0da0805cc287999efe5f631f69d625f40",
+      "bytes": 95255
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "10873f14e611981cca7ad363980f7da0da0805cc287999efe5f631f69d625f40",
+      "bytes": 95255
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d1d20192c91b4d6db1ee0b6ae3497ffac4c9fc12621ebcac8a80c67247e3706b",
+      "bytes": 110552
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "d1d20192c91b4d6db1ee0b6ae3497ffac4c9fc12621ebcac8a80c67247e3706b",
+      "bytes": 110552
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4472c2266a813c09cf263df55b0bc949a0228ecb3b94f4807a4f4a221173d0ff",
+      "bytes": 189980
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4472c2266a813c09cf263df55b0bc949a0228ecb3b94f4807a4f4a221173d0ff",
+      "bytes": 189980
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-talerz-i-buty-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9aa0ff5811d3a388197108423924e8e48fa974d48736233302c9fc8eb78e6d72",
+      "bytes": 147990
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-talerz-i-buty-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "9aa0ff5811d3a388197108423924e8e48fa974d48736233302c9fc8eb78e6d72",
+      "bytes": 147990
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-talerz-i-buty-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a5f6191f788e680ff9bd5de66f396ceb75d324661ba71acf15da60fb527e14fb",
+      "bytes": 181328
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-talerz-i-buty-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a5f6191f788e680ff9bd5de66f396ceb75d324661ba71acf15da60fb527e14fb",
+      "bytes": 181328
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-talerz-i-buty-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e2887dcd8c1e2a569b0d5f39e51e039fb53edba65f124562c091baa5820056b2",
+      "bytes": 255536
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-talerz-i-buty-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e2887dcd8c1e2a569b0d5f39e51e039fb53edba65f124562c091baa5820056b2",
+      "bytes": 255536
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-spacer-po-kolacji-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "24d9e8638eee9ac25cae3bc7e28db04d0a2d291237bc4184d77e0c44644cb474",
+      "bytes": 156612
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-spacer-po-kolacji-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "24d9e8638eee9ac25cae3bc7e28db04d0a2d291237bc4184d77e0c44644cb474",
+      "bytes": 156612
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-spacer-po-kolacji-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bc85e35704fd9a3981592ffd6ac7354a2a148604f5236b2060aae76691afed2d",
+      "bytes": 197584
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-spacer-po-kolacji-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bc85e35704fd9a3981592ffd6ac7354a2a148604f5236b2060aae76691afed2d",
+      "bytes": 197584
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-spacer-po-kolacji-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "775caeadef1190bdc4f1bcbd24b824c64f611aac6b54f107b710980fcb35d353",
+      "bytes": 274280
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-spacer-po-kolacji-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "775caeadef1190bdc4f1bcbd24b824c64f611aac6b54f107b710980fcb35d353",
+      "bytes": 274280
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-start-po-posilku-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b7198f00510dcdbee082a49a822a25cc5281ca0f3b327034559a92d838487dbb",
+      "bytes": 116097
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-start-po-posilku-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b7198f00510dcdbee082a49a822a25cc5281ca0f3b327034559a92d838487dbb",
+      "bytes": 116097
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-start-po-posilku-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5ebdbe0e46ce403b2f4f478ff21cffd187ca686a58e4ea3d0a474494b01dae13",
+      "bytes": 133682
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-start-po-posilku-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "5ebdbe0e46ce403b2f4f478ff21cffd187ca686a58e4ea3d0a474494b01dae13",
+      "bytes": 133682
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-start-po-posilku-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7baa108d1a27fe069aa97929fbd293420698f5e2450369ef01da71c311e536ef",
+      "bytes": 224980
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-start-po-posilku-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7baa108d1a27fe069aa97929fbd293420698f5e2450369ef01da71c311e536ef",
+      "bytes": 224980
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-osoby-okolo-60-lat-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c3a3e73f4e65cf9ac738c0418ea62b26582789cc6ba36ab8ff0c227424f8c4ad",
+      "bytes": 146396
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-osoby-okolo-60-lat-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c3a3e73f4e65cf9ac738c0418ea62b26582789cc6ba36ab8ff0c227424f8c4ad",
+      "bytes": 146396
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-osoby-okolo-60-lat-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dbf942d5941103ef3557ef77c056daa99d611f45bcb6d77ab8ee8f053a1858da",
+      "bytes": 183336
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-osoby-okolo-60-lat-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "dbf942d5941103ef3557ef77c056daa99d611f45bcb6d77ab8ee8f053a1858da",
+      "bytes": 183336
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-osoby-okolo-60-lat-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fa973aa79853e7571451c82184b4b8c00b25c350b891b39ce2727858e735c171",
+      "bytes": 257230
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-osoby-okolo-60-lat-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "fa973aa79853e7571451c82184b4b8c00b25c350b891b39ce2727858e735c171",
+      "bytes": 257230
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-glukometr-i-glukoza-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c809f4bcd102555d881ce4bd72f06da4a550516a2ba1972feef22002e10acfc2",
+      "bytes": 99822
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-glukometr-i-glukoza-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c809f4bcd102555d881ce4bd72f06da4a550516a2ba1972feef22002e10acfc2",
+      "bytes": 99822
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-glukometr-i-glukoza-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "003f95c461462d1895b195f99409c699122d750f0e073bfb9efd8604e463d0a6",
+      "bytes": 116658
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-glukometr-i-glukoza-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "003f95c461462d1895b195f99409c699122d750f0e073bfb9efd8604e463d0a6",
+      "bytes": 116658
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-glukometr-i-glukoza-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1f5aca6a767be16eb61e21770e3abd1f61d8a48477d79345cb6e86c2201635c1",
+      "bytes": 185263
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-glukometr-i-glukoza-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "1f5aca6a767be16eb61e21770e3abd1f61d8a48477d79345cb6e86c2201635c1",
+      "bytes": 185263
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-przerwa-w-siedzeniu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f1b43231ef244336d302efebc42230f9d7fa6ee07fbd7217825d6ef3f42ac592",
+      "bytes": 98012
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-przerwa-w-siedzeniu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "f1b43231ef244336d302efebc42230f9d7fa6ee07fbd7217825d6ef3f42ac592",
+      "bytes": 98012
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-przerwa-w-siedzeniu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4ac261299f04e43bda1e5fd43ab222dcca979a24d127592a69fe0e49c46f7b41",
+      "bytes": 116130
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-przerwa-w-siedzeniu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "4ac261299f04e43bda1e5fd43ab222dcca979a24d127592a69fe0e49c46f7b41",
+      "bytes": 116130
+    },
+    {
+      "path": "assets/spacer-po-jedzeniu-cukier-po-50-przerwa-w-siedzeniu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "074b0baad05dcd1846469f84a5dd8775c48c26972de32f1b588187439e4d918a",
+      "bytes": 186970
+    },
+    {
+      "path": "_site/assets/spacer-po-jedzeniu-cukier-po-50-przerwa-w-siedzeniu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "074b0baad05dcd1846469f84a5dd8775c48c26972de32f1b588187439e4d918a",
+      "bytes": 186970
+    }
+  ],
+  "files_count": 67
+}

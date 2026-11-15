@@ -1711,16 +1711,16 @@
 
       <section id="najnowszy-artykul" class="card sand latest-article" data-title="najnowszy artykul">
         <picture aria-hidden="true">
-          <source id="latestArticleImageAvifSource" srcset="./assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif" type="image/avif">
-          <source srcset="./assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp" type="image/webp">
-          <img class="latest-article__bg" id="latestArticleImage" src="./assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
+          <source id="latestArticleImageAvifSource" srcset="./assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.avif" type="image/avif">
+          <source srcset="./assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.webp" type="image/webp">
+          <img class="latest-article__bg" id="latestArticleImage" src="./assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.webp" alt="" width="1200" height="654" loading="lazy" decoding="async" aria-hidden="true">
         </picture>
         <div class="card-body">
           <div class="latest-article__wrap">
             <span class="latest-article__eyebrow">Nowy artykuł</span>
-            <h4 class="latest-article__title" id="latestArticleTitle">Czy morsowanie jest zdrowe po 50? Serce i pierwsze wejście</h4>
-            <p class="latest-article__excerpt" id="latestArticleExcerpt">Morsowanie po pięćdziesiątce: co dzieje się z sercem i ciśnieniem przy zanurzeniu, jak przygotować pierwsze wejście i kiedy najpierw porozmawiać z lekarzem.</p>
-            <a class="latest-article__cta" id="latestArticleLink" href="czy-morsowanie-jest-zdrowe-po-50.html">Przeczytaj pełny przewodnik →</a>
+            <h4 class="latest-article__title" id="latestArticleTitle">Spacer po jedzeniu a cukier po 50: co naprawdę mówią badania</h4>
+            <p class="latest-article__excerpt" id="latestArticleExcerpt">Krótki spacer po posiłku może łagodzić wzrost cukru. Badania u osób około 60. roku życia: ile minut testowano, kiedy zacząć i kiedy uważać przy insulinie.</p>
+            <a class="latest-article__cta" id="latestArticleLink" href="spacer-po-jedzeniu-cukier-po-50.html">Przeczytaj pełny przewodnik →</a>
           </div>
         </div>
       </section>
@@ -2517,10 +2517,10 @@
 
     async function loadLatestArticle() {
       const fallback = {
-        title: 'Czy morsowanie jest zdrowe po 50? Serce i pierwsze wejście',
-        excerpt: 'Morsowanie po pięćdziesiątce: co dzieje się z sercem i ciśnieniem przy zanurzeniu, jak przygotować pierwsze wejście i kiedy najpierw porozmawiać z lekarzem.',
-        image: './assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp',
-        url: 'czy-morsowanie-jest-zdrowe-po-50.html'
+        title: 'Spacer po jedzeniu a cukier po 50: co naprawdę mówią badania',
+        excerpt: 'Krótki spacer po posiłku może łagodzić wzrost cukru. Badania u osób około 60. roku życia: ile minut testowano, kiedy zacząć i kiedy uważać przy insulinie.',
+        image: './assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.webp',
+        url: 'spacer-po-jedzeniu-cukier-po-50.html'
       };
       latestArticleTitle.textContent = fallback.title;
       latestArticleExcerpt.textContent = fallback.excerpt;
@@ -2550,6 +2550,13 @@
       if (!readingRoomGrid) return;
       const fallback = [
         {
+          category: 'Ruch',
+          title: 'Spacer po jedzeniu a cukier po 50: co naprawdę mówią badania',
+          excerpt: 'Krótki spacer po posiłku może łagodzić wzrost cukru. Badania u osób około 60. roku życia: ile minut testowano, kiedy zacząć i kiedy uważać przy insulinie.',
+          image: './assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.webp',
+          url: 'spacer-po-jedzeniu-cukier-po-50.html'
+        },
+        {
           category: 'Ciekawe',
           title: 'Czy morsowanie jest zdrowe po 50? Serce i pierwsze wejście',
           excerpt: 'Morsowanie po pięćdziesiątce: co dzieje się z sercem i ciśnieniem przy zanurzeniu, jak przygotować pierwsze wejście i kiedy najpierw porozmawiać z lekarzem.',
@@ -2562,13 +2569,6 @@
           excerpt: '„Peptydy” po 50 to trzy różne rzeczy: kolagen, lek na receptę i fiolka „do badań”. Czego nie pokazują badania na ludziach i co naprawdę buduje mięśnie.',
           image: './assets/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50-hero-kuchnia-proszek-i-guma-v1.webp',
           url: 'peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html'
-        },
-        {
-          category: 'Zdrowie',
-          title: 'Wstawanie w nocy do toalety po 50: kiedy szukać pomocy?',
-          excerpt: 'Wstawanie w nocy do toalety po 50: poznaj możliwe przyczyny, naucz się prowadzić dzienniczek i sprawdź, kiedy umówić wizytę, a kiedy szukać pilnej pomocy.',
-          image: './assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp',
-          url: 'wstawanie-w-nocy-do-toalety-po-50.html'
         }
       ];
       readingRoomGrid.innerHTML = fallback.map(createReadingCard).join('');

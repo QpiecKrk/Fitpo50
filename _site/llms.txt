@@ -507,3 +507,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Czy morsowanie jest zdrowe po 50? Serce i pierwsze wejście | FitPo50"
   section: "Ciekawe"
   summary: "Morsowanie po pięćdziesiątce: co dzieje się z sercem i ciśnieniem przy zanurzeniu, jak przygotować pierwsze wejście i kiedy najpierw porozmawiać z lekarzem."
+- url: https://fitpo50.pl/spacer-po-jedzeniu-cukier-po-50.html
+  title: "Spacer po jedzeniu a cukier po 50: co naprawdę mówią badania | FitPo50"
+  section: "Ruch"
+  summary: "Krótki spacer po posiłku może łagodzić wzrost cukru. Badania u osób około 60. roku życia: ile minut testowano, kiedy zacząć i kiedy uważać przy insulinie."

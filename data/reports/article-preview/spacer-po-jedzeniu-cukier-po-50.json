@@ -1,0 +1,432 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-11-15T05:39:33+01:00",
+  "reviewed_at": null,
+  "slug": "spacer-po-jedzeniu-cukier-po-50",
+  "html_sha256": "e8f4a05d1245d6f225ff41048e8702b7eea5f112ca8bf9b7225d9c993f01661a",
+  "site_html_sha256": "e8f4a05d1245d6f225ff41048e8702b7eea5f112ca8bf9b7225d9c993f01661a",
+  "pdf_sha256": "c508d10a0f874a4d186d054e7cbc95e9a264439bb7e759fb253e0491723229c3",
+  "site_pdf_sha256": "c508d10a0f874a4d186d054e7cbc95e9a264439bb7e759fb253e0491723229c3",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-15T05:39:33+01:00",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 1
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "spacer-po-jedzeniu-cukier-po-50.html",
+      "sha256": "e8f4a05d1245d6f225ff41048e8702b7eea5f112ca8bf9b7225d9c993f01661a",
+      "bytes": 55439
+    },
+    "html_site": {
+      "file": "_site/spacer-po-jedzeniu-cukier-po-50.html",
+      "sha256": "e8f4a05d1245d6f225ff41048e8702b7eea5f112ca8bf9b7225d9c993f01661a",
+      "bytes": 55439
+    },
+    "pdf_source": {
+      "file": "assets/pdf/spacer-po-jedzeniu-cukier-po-50.pdf",
+      "sha256": "c508d10a0f874a4d186d054e7cbc95e9a264439bb7e759fb253e0491723229c3",
+      "bytes": 612970
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/spacer-po-jedzeniu-cukier-po-50.pdf",
+      "sha256": "c508d10a0f874a4d186d054e7cbc95e9a264439bb7e759fb253e0491723229c3",
+      "bytes": 612970
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/desktop.png",
+      "screenshot_sha256": "5867020984fea1b2f052cb2a6022b9e91cb5aad9e023cf2e456f1e79ba59378f",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/mobile.png",
+      "screenshot_sha256": "cace4e3a692cf4599d5a5c9e575bc9abda43f2908686ae4a4ad48ba5badcb73c",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "RUCH 11 min czytania Spacer po jedzeniu a cukier po 50: co naprawdę mówią badania Po kolacji efekt bywał większy niż po wcześniejszych posiłkach. Stroju treningowego nie trzeba.",
+      "alt": "Uśmiechnięta para po pięćdziesiątce zakłada kolorowe buty do chodzenia przy stole po kolacji.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.avif",
+          "sha256": "10873f14e611981cca7ad363980f7da0da0805cc287999efe5f631f69d625f40",
+          "bytes": 95255,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.webp",
+          "sha256": "d1d20192c91b4d6db1ee0b6ae3497ffac4c9fc12621ebcac8a80c67247e3706b",
+          "bytes": 110552,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-hero-v1.jpg",
+          "sha256": "4472c2266a813c09cf263df55b0bc949a0228ecb3b94f4807a4f4a221173d0ff",
+          "bytes": 189980,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ec54b889f65df5e93f381e328176ef4353a4aa91be7f3818a461e7379db146dd"
+    },
+    {
+      "placement": "content:2:czym-jest-krotki-spacer-po-jedzeniu-i-czym-nie-j",
+      "role": "content",
+      "heading": "Czym jest krótki spacer po jedzeniu i czym nie jest",
+      "context": "Po 50. roku życia często słyszy się, że po jedzeniu trzeba iść na spacer, bo cukier spadnie. Jak naprawdę jest ze spacerem po jedzeniu a cukrem? Krótki, spokojny marsz po posiłku nie jest treningiem ani tym samym co 10 000 kroków dziennie. W badaniach u osób około 60. roku życia łagodził wzrost cukru po jedzeniu. Nie ma jednak jednego właściwego czasu dla każdego. Przy insulinie albo pochodnych sulfonylomocznika najpierw porozmawiaj z lekarzem. Ten tekst nie zastępuje leczenia ani indywidualnej porady. Szybka odpowiedź Krótki, spokojny spacer po jedzeniu może łagodzić wzrost cukru, ale nie ma jednej liczby minut dla każdego. W badaniach u osób około 60 lat testowano między innymi 10 minut zaraz po posiłku i 15 minut pół godziny po jedzeniu. Jeśli bierzesz insulinę albo pochodne sulfonylomo",
+      "alt": "Puste talerze po kolacji na kolorowym blacie i para wygodnych butów do chodzenia obok stołu.",
+      "caption": "Krótki spacer po posiłku to nie trening i nie to samo co dzienny cel kroków.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-talerz-i-buty-v1.avif",
+          "sha256": "9aa0ff5811d3a388197108423924e8e48fa974d48736233302c9fc8eb78e6d72",
+          "bytes": 147990,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-talerz-i-buty-v1.webp",
+          "sha256": "a5f6191f788e680ff9bd5de66f396ceb75d324661ba71acf15da60fb527e14fb",
+          "bytes": 181328,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-talerz-i-buty-v1.jpg",
+          "sha256": "e2887dcd8c1e2a569b0d5f39e51e039fb53edba65f124562c091baa5820056b2",
+          "bytes": 255536,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "13c3286df0e3abdc7cd5b3e5d2282a73be1f3722272e5e22bcb526fcd3096027"
+    },
+    {
+      "placement": "content:3:co-wykazaly-badania-u-osob-okolo-60-roku-zycia",
+      "role": "content",
+      "heading": "Co wykazały badania u osób około 60. roku życia?",
+      "context": "Po 50. roku życia często słyszy się, że po jedzeniu trzeba iść na spacer, bo cukier spadnie. Jak naprawdę jest ze spacerem po jedzeniu a cukrem? Krótki, spokojny marsz po posiłku nie jest treningiem ani tym samym co 10 000 kroków dziennie. W badaniach u osób około 60. roku życia łagodził wzrost cukru po jedzeniu. Nie ma jednak jednego właściwego czasu dla każdego. Przy insulinie albo pochodnych sulfonylomocznika najpierw porozmawiaj z lekarzem. Ten tekst nie zastępuje leczenia ani indywidualnej porady. Szybka odpowiedź Krótki, spokojny spacer po jedzeniu może łagodzić wzrost cukru, ale nie ma jednej liczby minut dla każdego. W badaniach u osób około 60 lat testowano między innymi 10 minut zaraz po posiłku i 15 minut pół godziny po jedzeniu. Jeśli bierzesz insulinę albo pochodne sulfonylomo",
+      "alt": "Uśmiechnięta kobieta i mężczyzna po pięćdziesiątce idą spokojnym krokiem po osiedlu w złotym świetle jesieni.",
+      "caption": "Spadek o 12% i 22% dotyczy pola pod krzywą wzrostu cukru, nie poziomu u każdego.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-spacer-po-kolacji-v1.avif",
+          "sha256": "24d9e8638eee9ac25cae3bc7e28db04d0a2d291237bc4184d77e0c44644cb474",
+          "bytes": 156612,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-spacer-po-kolacji-v1.webp",
+          "sha256": "bc85e35704fd9a3981592ffd6ac7354a2a148604f5236b2060aae76691afed2d",
+          "bytes": 197584,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-spacer-po-kolacji-v1.jpg",
+          "sha256": "775caeadef1190bdc4f1bcbd24b824c64f611aac6b54f107b710980fcb35d353",
+          "bytes": 274280,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ca63d5fe884f054f6c45fc466149d68de04667cf0bed27edbc5960cdd059e8a4"
+    },
+    {
+      "placement": "content:4:minuty-i-moment-startu-badania-nie-daja-jednej-l",
+      "role": "content",
+      "heading": "Minuty i moment startu: badania nie dają jednej liczby",
+      "context": "Po 50. roku życia często słyszy się, że po jedzeniu trzeba iść na spacer, bo cukier spadnie. Jak naprawdę jest ze spacerem po jedzeniu a cukrem? Krótki, spokojny marsz po posiłku nie jest treningiem ani tym samym co 10 000 kroków dziennie. W badaniach u osób około 60. roku życia łagodził wzrost cukru po jedzeniu. Nie ma jednak jednego właściwego czasu dla każdego. Przy insulinie albo pochodnych sulfonylomocznika najpierw porozmawiaj z lekarzem. Ten tekst nie zastępuje leczenia ani indywidualnej porady. Szybka odpowiedź Krótki, spokojny spacer po jedzeniu może łagodzić wzrost cukru, ale nie ma jednej liczby minut dla każdego. W badaniach u osób około 60 lat testowano między innymi 10 minut zaraz po posiłku i 15 minut pół godziny po jedzeniu. Jeśli bierzesz insulinę albo pochodne sulfonylomo",
+      "alt": "Uśmiechnięta kobieta po pięćdziesiątce zakłada kolorowy płaszcz przy stole po kolacji i spogląda na zegarek.",
+      "caption": "W jednym badaniu start był w ciągu pięciu minut po posiłku, w innym pół godziny później.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-start-po-posilku-v1.avif",
+          "sha256": "b7198f00510dcdbee082a49a822a25cc5281ca0f3b327034559a92d838487dbb",
+          "bytes": 116097,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-start-po-posilku-v1.webp",
+          "sha256": "5ebdbe0e46ce403b2f4f478ff21cffd187ca686a58e4ea3d0a474494b01dae13",
+          "bytes": 133682,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-start-po-posilku-v1.jpg",
+          "sha256": "7baa108d1a27fe069aa97929fbd293420698f5e2450369ef01da71c311e536ef",
+          "bytes": 224980,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e5887f33d5c639c1dcd8eb2571b096af79a996a01f87b794514857cb718f09db"
+    },
+    {
+      "placement": "content:5:dla-kogo-te-wyniki-maja-znaczenie-po-piecdziesia",
+      "role": "content",
+      "heading": "Dla kogo te wyniki mają znaczenie po pięćdziesiątce",
+      "context": "Po 50. roku życia często słyszy się, że po jedzeniu trzeba iść na spacer, bo cukier spadnie. Jak naprawdę jest ze spacerem po jedzeniu a cukrem? Krótki, spokojny marsz po posiłku nie jest treningiem ani tym samym co 10 000 kroków dziennie. W badaniach u osób około 60. roku życia łagodził wzrost cukru po jedzeniu. Nie ma jednak jednego właściwego czasu dla każdego. Przy insulinie albo pochodnych sulfonylomocznika najpierw porozmawiaj z lekarzem. Ten tekst nie zastępuje leczenia ani indywidualnej porady. Szybka odpowiedź Krótki, spokojny spacer po jedzeniu może łagodzić wzrost cukru, ale nie ma jednej liczby minut dla każdego. W badaniach u osób około 60 lat testowano między innymi 10 minut zaraz po posiłku i 15 minut pół godziny po jedzeniu. Jeśli bierzesz insulinę albo pochodne sulfonylomo",
+      "alt": "Trzy uśmiechnięte osoby około sześćdziesiątki idą razem po parkowej alei w złotym świetle jesieni.",
+      "caption": "Najmocniejsze dane dotyczą osób około 60. roku życia, a nie wszystkich po pięćdziesiątce.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-osoby-okolo-60-lat-v1.avif",
+          "sha256": "c3a3e73f4e65cf9ac738c0418ea62b26582789cc6ba36ab8ff0c227424f8c4ad",
+          "bytes": 146396,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-osoby-okolo-60-lat-v1.webp",
+          "sha256": "dbf942d5941103ef3557ef77c056daa99d611f45bcb6d77ab8ee8f053a1858da",
+          "bytes": 183336,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-osoby-okolo-60-lat-v1.jpg",
+          "sha256": "fa973aa79853e7571451c82184b4b8c00b25c350b891b39ce2727858e735c171",
+          "bytes": 257230,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "6350493ee756745ce4f7b56385314b2bdf3f7ee771c74fe6260959aa0e7e73b5"
+    },
+    {
+      "placement": "content:6:insulina-tabletki-i-stopy-kiedy-spacer-wymaga-os",
+      "role": "content",
+      "heading": "Insulina, tabletki i stopy: kiedy spacer wymaga ostrożności",
+      "context": "Po 50. roku życia często słyszy się, że po jedzeniu trzeba iść na spacer, bo cukier spadnie. Jak naprawdę jest ze spacerem po jedzeniu a cukrem? Krótki, spokojny marsz po posiłku nie jest treningiem ani tym samym co 10 000 kroków dziennie. W badaniach u osób około 60. roku życia łagodził wzrost cukru po jedzeniu. Nie ma jednak jednego właściwego czasu dla każdego. Przy insulinie albo pochodnych sulfonylomocznika najpierw porozmawiaj z lekarzem. Ten tekst nie zastępuje leczenia ani indywidualnej porady. Szybka odpowiedź Krótki, spokojny spacer po jedzeniu może łagodzić wzrost cukru, ale nie ma jednej liczby minut dla każdego. W badaniach u osób około 60 lat testowano między innymi 10 minut zaraz po posiłku i 15 minut pół godziny po jedzeniu. Jeśli bierzesz insulinę albo pochodne sulfonylomo",
+      "alt": "Otwarta kieszeń kolorowej kurtki z glukometrem o ciemnym ekranie i tabletkami glukozy bez widocznej marki.",
+      "caption": "Przy insulinie albo pochodnych sulfonylomocznika warto mieć przy sobie glukozę i nie zmieniać dawek samodzielnie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-glukometr-i-glukoza-v1.avif",
+          "sha256": "c809f4bcd102555d881ce4bd72f06da4a550516a2ba1972feef22002e10acfc2",
+          "bytes": 99822,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-glukometr-i-glukoza-v1.webp",
+          "sha256": "003f95c461462d1895b195f99409c699122d750f0e073bfb9efd8604e463d0a6",
+          "bytes": 116658,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-glukometr-i-glukoza-v1.jpg",
+          "sha256": "1f5aca6a767be16eb61e21770e3abd1f61d8a48477d79345cb6e86c2201635c1",
+          "bytes": 185263,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "66e9de6195c8961de4925744b1e566ef4e3001d5b431b6a93e5a717236bc0b0e"
+    },
+    {
+      "placement": "content:7:przerwy-w-siedzeniu-to-nie-to-samo-co-spacer-po-",
+      "role": "content",
+      "heading": "Przerwy w siedzeniu to nie to samo co spacer po talerzu",
+      "context": "Po 50. roku życia często słyszy się, że po jedzeniu trzeba iść na spacer, bo cukier spadnie. Jak naprawdę jest ze spacerem po jedzeniu a cukrem? Krótki, spokojny marsz po posiłku nie jest treningiem ani tym samym co 10 000 kroków dziennie. W badaniach u osób około 60. roku życia łagodził wzrost cukru po jedzeniu. Nie ma jednak jednego właściwego czasu dla każdego. Przy insulinie albo pochodnych sulfonylomocznika najpierw porozmawiaj z lekarzem. Ten tekst nie zastępuje leczenia ani indywidualnej porady. Szybka odpowiedź Krótki, spokojny spacer po jedzeniu może łagodzić wzrost cukru, ale nie ma jednej liczby minut dla każdego. W badaniach u osób około 60 lat testowano między innymi 10 minut zaraz po posiłku i 15 minut pół godziny po jedzeniu. Jeśli bierzesz insulinę albo pochodne sulfonylomo",
+      "alt": "Uśmiechnięty mężczyzna po pięćdziesiątce wstaje z fotela w kolorowym salonie i robi kilka kroków w złotym świetle.",
+      "caption": "Krótki marsz w przerwie od siedzenia to inny nawyk niż spacer tuż po talerzu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-przerwa-w-siedzeniu-v1.avif",
+          "sha256": "f1b43231ef244336d302efebc42230f9d7fa6ee07fbd7217825d6ef3f42ac592",
+          "bytes": 98012,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-przerwa-w-siedzeniu-v1.webp",
+          "sha256": "4ac261299f04e43bda1e5fd43ab222dcca979a24d127592a69fe0e49c46f7b41",
+          "bytes": 116130,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/spacer-po-jedzeniu-cukier-po-50-przerwa-w-siedzeniu-v1.jpg",
+          "sha256": "074b0baad05dcd1846469f84a5dd8775c48c26972de32f1b588187439e4d918a",
+          "bytes": 186970,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "828f780050f2ae19fdbd1fbc821e84b572cd63be03d48af5f0b4136f915f74d7"
+    }
+  ],
+  "pdf": {
+    "pages": 8,
+    "text_coverage": 1,
+    "rendered_pages": 8,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/pdf-pages/page-1.png",
+        "sha256": "63ce37fae96af28536ee27e6e9f115af878ae7241ae3c128b98de1caa5d486ff",
+        "bytes": 727483,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 59,
+          "width": 1059,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/pdf-pages/page-2.png",
+        "sha256": "fea38ef716906ae76ebc5208ccd838f296c34f912dd4d208662b6ca1d31ae147",
+        "bytes": 701288,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/pdf-pages/page-3.png",
+        "sha256": "0a628268a87c5803db32d3a31c3b42eed67884e07a958d6775f5d053291bb526",
+        "bytes": 842497,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1066,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/pdf-pages/page-4.png",
+        "sha256": "705470d58b5ef818d7d099f220d8206fc083223639afd64fe64716896bd684b1",
+        "bytes": 1021761,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 63,
+          "y": 56,
+          "width": 1060,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/pdf-pages/page-5.png",
+        "sha256": "a37c1fdbbccc0512d250d31ffd5431a974beb2901af1cb0870eb2849e0cebc28",
+        "bytes": 662299,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1066,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/pdf-pages/page-6.png",
+        "sha256": "8e101814e46aa5c232c2663c7f2da6ac00fd18dda8cf406aba1e16ed41348bb9",
+        "bytes": 531178,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 63,
+          "y": 56,
+          "width": 1060,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/pdf-pages/page-7.png",
+        "sha256": "b2e50ee355eb0efb405609255e1dfc993eaeebfc5e2ae6e337b05c42b78acfa0",
+        "bytes": 490800,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1066,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 8,
+        "file": ".tmp/article-preview/spacer-po-jedzeniu-cukier-po-50/pdf-pages/page-8.png",
+        "sha256": "1998650e27f32563dcb6928e7097088f520423900613ad52bcc4b72ed6d41187",
+        "bytes": 285421,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 50,
+          "y": 57,
+          "width": 1077,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 8481,
+    "review_wait_ms": null
+  },
+  "errors": []
+}
