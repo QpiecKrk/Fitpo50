@@ -2,7 +2,30 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
-const { buildScholarlyMentions, normalizePayload, singleTrailingNewline, upsertBlogPostingSchema, existingArticleDetails, removeCategoryListing, upsertPoradyListing } = require('../scripts/import-article');
+const {
+  buildSafeRelatedDefaults,
+  buildScholarlyMentions,
+  existingArticleDetails,
+  normalizePayload,
+  removeCategoryListing,
+  singleTrailingNewline,
+  upsertBlogPostingSchema,
+  upsertPoradyListing,
+} = require('../scripts/import-article');
+
+function relatedUrls(options) {
+  return buildSafeRelatedDefaults({
+    data: {},
+    currentSlug: 'testowy-artykul',
+    currentCategory: { key: 'ruch', label: 'Ruch' },
+    readingTime: '10 min',
+    heroImage: 'testowy-hero',
+    heroAlt: 'Testowy hero',
+    metaDescription: 'Testowy opis.',
+    title: 'Testowy artykuł',
+    ...options,
+  }).map((item) => item.url);
+}
 
 test('UPDATE zachowuje datę publikacji, a CREATE zachowuje dotychczasową datę', () => {
   const html = '<body class="article-template article--zdrowie"><script type="application/ld+json">{"@type":"BlogPosting","datePublished":"2026-04-27T08:00:00+02:00"}</script></body>';
@@ -13,6 +36,79 @@ test('UPDATE zachowuje datę publikacji, a CREATE zachowuje dotychczasową datę
   assert.equal(updated.dateModified.slice(0, 10), require('../scripts/lib/time').warsawIso().slice(0, 10));
   const created = normalizePayload(data, null);
   assert.equal(created.datePublished.slice(0, 10), require('../scripts/lib/time').warsawIso().slice(0, 10));
+});
+
+test('related_articles z JSON ustawia pierwsze karty Czytelni po lokalnej weryfikacji', () => {
+  const urls = relatedUrls({
+    data: {
+      related_articles: [
+        { url: 'czy-morsowanie-jest-zdrowe-po-50.html' },
+        { href: 'peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html' },
+      ],
+    },
+  });
+  assert.deepEqual(urls.slice(0, 2), [
+    'czy-morsowanie-jest-zdrowe-po-50.html',
+    'peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html',
+  ]);
+});
+
+test('related_articles odrzuca brakujący URL, kategorię i bieżący artykuł', () => {
+  const currentSlug = 'spacer-po-jedzeniu-cukier-po-50';
+  const urls = relatedUrls({
+    currentSlug,
+    title: 'Spacer po jedzeniu a cukier po 50',
+    data: {
+      related: [
+        { url: 'nie-istnieje-lokalnie.html' },
+        { url: 'ciekawe.html' },
+        { url: `${currentSlug}.html` },
+      ],
+    },
+  });
+  assert.equal(urls.includes('nie-istnieje-lokalnie.html'), false);
+  assert.equal(urls.includes('ciekawe.html'), false);
+  assert.equal(urls.includes(`${currentSlug}.html`), false);
+  assert.equal(urls.length, 3);
+  assert.equal(new Set(urls).size, 3);
+  urls.forEach((href) => assert.equal(fs.existsSync(path.resolve(__dirname, '..', href)), true));
+});
+
+test('karty Czytelni zawsze zawierają trzy różne, istniejące artykuły', () => {
+  const urls = relatedUrls({
+    currentSlug: 'testowy-artykul-z-treningiem',
+    data: {
+      related: [
+        { url: 'ciekawe.html' },
+        { url: 'nie-istnieje-lokalnie.html' },
+      ],
+    },
+  });
+  assert.equal(urls.length, 3);
+  assert.equal(new Set(urls).size, 3);
+  urls.forEach((href) => assert.equal(fs.existsSync(path.resolve(__dirname, '..', href)), true));
+});
+
+test('artykuł z inną kategorią i wspólnymi słowami wyprzedza tę samą kategorię bez wspólnych słów', () => {
+  const urls = relatedUrls({
+    currentSlug: 'nowy-testowy-artykul',
+    currentCategory: { key: 'ruch', label: 'Ruch' },
+    title: 'Szczepionki mRNA COVID a rak po 50',
+  });
+  assert.equal(urls[0], 'szczepionki-mrna-covid-a-rak.html');
+  assert.ok(urls.indexOf('szczepionki-mrna-covid-a-rak.html') < urls.indexOf('spacer-po-jedzeniu-cukier-po-50.html'));
+});
+
+test('przy braku wspólnych słów cele internal_link_plan wyprzedzają kandydatów kategorii', () => {
+  const urls = relatedUrls({
+    currentSlug: 'nowy-testowy-artykul',
+    currentCategory: { key: 'ruch', label: 'Ruch' },
+    title: 'Qzxv plmnr',
+    data: {
+      internal_link_plan: [{ target: 'sen-po-50.html' }],
+    },
+  });
+  assert.equal(urls[0], 'sen-po-50.html');
 });
 
 test('UPDATE usuwa kartę starej kategorii i aktualizuje kartę porad bez duplikatu', () => {

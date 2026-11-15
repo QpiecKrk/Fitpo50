@@ -1,30 +1,26 @@
 {
   "version": 4,
-  "release_id": "e66fe8d8-b000-444f-aed7-e121ab169100",
-  "prepared_at": "2026-11-15T13:10:43+01:00",
-  "prepared_from_head": "459095f5cd44b7bd9127ca1bd3faef8bc39eeb51",
-  "publication_state_sha256": "32f23d5daa29dd909e289cc904d4d1647e1151cd8a50565b6b0f336ea43cce7b",
-  "public_fingerprint_sha256": "ec62cfc4381154e08770aa00e9223eff27e22bf55ab159e117e2187754450f04",
+  "release_id": "06521418-0fd9-45ce-b38d-adbe8575a7be",
+  "prepared_at": "2026-11-15T22:54:54+01:00",
+  "prepared_from_head": "9dd0955a51da870cd3683a01ae9a7eaa8f1d774e",
+  "publication_state_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "public_fingerprint_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "release_files": [
     "_site/deployment.json",
-    "_site/index.html",
     "deployment.json",
-    "index.html"
+    "scripts/import-article.js",
+    "tests/article-technical-flow.test.js",
+    "tests/import-article-render.test.js"
   ],
   "release_file_hashes": {
-    "_site/index.html": "38f35961b662d27bd51eea3c916da817d18eaf41dd863f5865a37d708a06e0f7",
-    "index.html": "38f35961b662d27bd51eea3c916da817d18eaf41dd863f5865a37d708a06e0f7"
+    "scripts/import-article.js": "5f45afd3f91c6cb8602d470274deda20b5b918c31148135e18c92f8a34b8c899",
+    "tests/article-technical-flow.test.js": "821749e665c3f1d46643d8aa7ad0f2b50f926bc50d43a77b60588174e9099aa9",
+    "tests/import-article-render.test.js": "b49f1aaaea805f4aebebf89e687b0c8af49d8962cbc3465d6c92331c6c7251dd"
   },
   "change_scope": [
-    "articles"
+    "pipeline"
   ],
-  "verification_targets": [
-    {
-      "path": "index.html",
-      "mode": "sha256",
-      "sha256": "38f35961b662d27bd51eea3c916da817d18eaf41dd863f5865a37d708a06e0f7"
-    }
-  ],
+  "verification_targets": [],
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",

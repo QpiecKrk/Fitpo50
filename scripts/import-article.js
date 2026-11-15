@@ -739,27 +739,77 @@ function getRelatedCandidatesFromPorady(currentSlug) {
   return [...new Set(hrefs)];
 }
 
-function buildSafeRelatedDefaults({ currentSlug, currentCategory, readingTime, heroImage, heroAlt, metaDescription, title }) {
-  const existingPool = [
-    ...getRelatedCandidatesFromPorady(currentSlug),
-    ...READING_ROOM_FALLBACKS
-      .map((item) => normalizeLocalHtmlHref(item.url))
-      .filter((href) => isUsableRelatedHref(href, currentSlug)),
-  ];
+const RELATED_GENERIC_WORDS = new Set([
+  'badania', 'bardzo', 'bezpiecznie', 'bezpieczenstwo', 'bezpieczny', 'czytaj', 'dawka', 'dieta', 'dla', 'efekty', 'fakty', 'jest', 'jak', 'kiedy', 'kompletny', 'ktory',
+  'mniej', 'nad', 'oraz', 'pierwsze', 'ponad', 'przez', 'przy', 'roku', 'sie', 'swoje',
+  'mowia', 'naprawde', 'objawy', 'piecdziesiatce', 'piecdziesiatka', 'piecdziesiatki', 'przewodnik', 'rodzaje', 'ryzyko', 'tak', 'tego', 'tylko', 'warto', 'wiecej', 'wskazania', 'zanim', 'zdrowie', 'zdrowy',
+]);
 
-  const pool = [...new Set(existingPool)];
+function normalizeRelatedWords(value) {
+  return new Set(String(value || '')
+    .toLocaleLowerCase('pl-PL')
+    .replace(/ł/g, 'l')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .split(/\s+/)
+    .filter((word) => word.length >= 4 && !RELATED_GENERIC_WORDS.has(word)));
+}
+
+function relatedWordScore(currentWords, candidate) {
+  const candidateWords = normalizeRelatedWords(`${candidate?.title || ''} ${(candidate?.href || '').replace(/\.html$/i, '').replace(/-/g, ' ')}`);
+  return [...currentWords].filter((word) => candidateWords.has(word)).length;
+}
+
+function relatedHrefFromJson(item) {
+  if (typeof item === 'string') return normalizeLocalHtmlHref(item);
+  return normalizeLocalHtmlHref(item?.url || item?.href || '');
+}
+
+function buildSafeRelatedDefaults({ data, currentSlug, currentCategory, readingTime, heroImage, heroAlt, metaDescription, title }) {
+  const jsonRelated = normalizeArray(data?.related_articles || data?.related || [])
+    .map(relatedHrefFromJson)
+    // JSON jest źródłem kolejności propozycji, ale każdy URL przechodzi lokalną weryfikację.
+    .filter((href) => isUsableRelatedHref(href, currentSlug));
+  const currentWords = normalizeRelatedWords(`${title} ${String(currentSlug || '').replace(/-/g, ' ')}`);
+  const poradyCandidates = getRelatedCandidatesFromPorady(currentSlug)
+    .map((href, originalIndex) => {
+      const meta = readArticleMetaByHref(href);
+      return {
+        href,
+        originalIndex,
+        sameCategory: meta?.categoryKey === currentCategory.key,
+        score: relatedWordScore(currentWords, meta || { href }),
+      };
+    });
+  const thematicCandidates = poradyCandidates
+    .filter((candidate) => candidate.score > 0)
+    .sort((left, right) => (
+      right.score - left.score
+      || Number(right.sameCategory) - Number(left.sameCategory)
+      || left.originalIndex - right.originalIndex
+    ))
+    .map((candidate) => candidate.href);
+  const internalLinkPlanCandidates = normalizeArray(data?.internal_link_plan || [])
+    .map((item) => normalizeLocalHtmlHref(item?.target || ''))
+    .filter((href) => isUsableRelatedHref(href, currentSlug));
+  const categoryCandidates = poradyCandidates
+    .filter((candidate) => candidate.score === 0)
+    .sort((left, right) => (
+      Number(right.sameCategory) - Number(left.sameCategory)
+      || left.originalIndex - right.originalIndex
+    ))
+    .map((candidate) => candidate.href);
+  const fallbackCandidates = READING_ROOM_FALLBACKS
+    .map((item) => normalizeLocalHtmlHref(item.url))
+    .filter((href) => isUsableRelatedHref(href, currentSlug));
   const selected = [];
-  for (let i = 0; i < 3; i += 1) {
-    // Zasada projektowa: nie ufamy URL-om z JSON related_articles.
-    // Karty Czytelni budujemy wyłącznie z istniejących lokalnie artykułów.
-    const replacement = pool.find((href) => !selected.includes(href));
-    if (replacement) {
-      selected.push(replacement);
-      continue;
-    }
-    const fallback = normalizeLocalHtmlHref(READING_ROOM_FALLBACKS[i]?.url || '');
-    selected.push(fallback || '');
+  for (const href of [...jsonRelated, ...thematicCandidates, ...internalLinkPlanCandidates, ...categoryCandidates, ...fallbackCandidates]) {
+    if (selected.length === 3) break;
+    if (!isUsableRelatedHref(href, currentSlug) || selected.includes(href)) continue;
+    selected.push(href);
   }
+  if (selected.length !== 3) throw new Error('Brakuje trzech różnych, istniejących artykułów do kart Czytelni.');
 
   return selected.map((href, idx) => {
     const fallback = READING_ROOM_FALLBACKS[idx] || READING_ROOM_FALLBACKS[0];
@@ -2027,7 +2077,7 @@ function assertNoReadingRoomPlaceholders(html) {
 
   for (const check of checks) {
     if (check.rx.test(html)) {
-      throw new Error(`${check.msg} Importer ignoruje related_articles z JSON; popraw fallback importera.`);
+      throw new Error(`${check.msg} Importer nie zbudował prawidłowych kart Czytelni.`);
     }
   }
 }
@@ -2163,9 +2213,9 @@ function normalizePayload(data, cliCategory, options = {}) {
   const faqItems = faqNormalized;
   const sources = normalizeSources(data.sources || []);
 
-  // Uwaga: related_articles / related z JSON służy tylko do walidacji komunikatów.
-  // Faktyczne karty Czytelni budujemy wyłącznie z lokalnego katalogu artykułów.
+  // URL-e z related_articles / related są propozycjami kolejności po lokalnej weryfikacji.
   const relatedDefaults = buildSafeRelatedDefaults({
+    data,
     currentSlug: slug,
     currentCategory: category,
     readingTime,
@@ -2489,12 +2539,14 @@ if (require.main === module) {
 
 module.exports = {
   buildAboutEntities,
+  buildSafeRelatedDefaults,
   buildHtmlFromTemplate,
   buildScholarlyMentions,
   ensureCaptionedTables,
   main,
   normalizePayload,
   existingArticleDetails,
+  getRelatedCandidatesFromPorady,
   removeCategoryListing,
   upsertPoradyListing,
   normalizeFaqResearch,

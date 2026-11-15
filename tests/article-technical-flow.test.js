@@ -96,6 +96,17 @@ test('technical flow: rzeczywiste przygotowanie, preflight i precheck importera 
     fs.mkdirSync(path.join(workspace, target), { recursive: true });
     for (const name of fs.readdirSync(assets).filter((name) => /\.(avif|webp|jpg)$/.test(name))) fs.copyFileSync(path.join(assets, name), path.join(workspace, target, name));
   }
+  const relatedFixtures = [
+    ['powiazany-ruch.html', 'ruch', 'Powiązany ruch po 50'],
+    ['powiazane-jedzenie.html', 'jedzenie', 'Powiązane jedzenie po 50'],
+    ['powiazane-zdrowie.html', 'zdrowie', 'Powiązane zdrowie po 50'],
+  ];
+  fs.writeFileSync(path.join(workspace, 'porady.html'), relatedFixtures
+    .map(([href]) => `<a data-article-item href="${href}"></a>`)
+    .join('\n'));
+  relatedFixtures.forEach(([href, category, title]) => {
+    fs.writeFileSync(path.join(workspace, href), `<html><head><meta property="og:title" content="${title}"></head><body class="article--${category}"></body></html>`);
+  });
   const precheck = spawnSync(process.execPath, [path.join(ROOT, 'scripts/import-article.js'), '--file', output, '--profile', 'technical', '--precheck', 'true'], { cwd: workspace, encoding: 'utf8' });
   assert.equal(precheck.status, 0, precheck.stdout + precheck.stderr);
   assert.match(precheck.stdout, /TAK - mogę/);
