@@ -13,12 +13,25 @@ const {
 } = require('../scripts/lib/categories');
 const { ensureCaptionedTables, normalizeSections, normalizeSeoTitleBase, renderFaqList, renderSectionsHtml, upsertSitemapXml } = require('../scripts/import-article');
 const { slugify } = require('../scripts/lib/slugify');
+const { hasTaskContentChangesSinceRelease } = require('../scripts/publish-article');
 
 const ROOT = path.resolve(__dirname, '..');
 const DRAFT_VALIDATOR = path.join(ROOT, 'docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py');
 
 test('wspólny slugifier zachowuje polskie ł jako l', () => {
   assert.equal(slugify('Żołądek i łydka po 50-tce'), 'zoladek-i-lydka-po-50-tce');
+});
+
+test('publikuj rozpoznaje nową zmianę w pliku należącym do wysłanego wydania', () => {
+  const state = {
+    marker: {
+      release_file_hashes: {
+        'index.html': 'poprzedni-hash',
+      },
+    },
+  };
+  assert.equal(hasTaskContentChangesSinceRelease(state, ['index.html'], { 'index.html': 'nowy-hash' }), true);
+  assert.equal(hasTaskContentChangesSinceRelease(state, ['index.html'], { 'index.html': 'poprzedni-hash' }), false);
 });
 
 test('sitemap aktualizuje lastmod istniejącego URL-a i nie tworzy duplikatu', () => {

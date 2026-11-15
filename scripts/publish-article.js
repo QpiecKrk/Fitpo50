@@ -270,6 +270,11 @@ function localHashes(root, files) {
   return Object.fromEntries(files.map((file) => [file, fs.existsSync(path.join(root, file)) ? crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex') : null]));
 }
 
+function hasTaskContentChangesSinceRelease(state, related, currentHashes) {
+  const releaseHashes = state?.marker?.release_file_hashes || {};
+  return related.some((file) => Object.hasOwn(releaseHashes, file) && currentHashes[file] !== releaseHashes[file]);
+}
+
 function acquirePublicationLock(root, alive = isProcessAlive) {
   const file = publicationPaths(root).lock;
   fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -428,9 +433,11 @@ async function publishTask(options = {}) {
       || sourceHash !== state.source_package_sha256
     ))
   );
+  const requestedTaskContentDiffers = state && hasTaskContentChangesSinceRelease(state, related, localHashes(root, related));
+  const requestedNewTask = requestedTaskDiffers || requestedTaskContentDiffers;
   const completed = state && ['LIVE_DEPLOYED_AND_VALIDATED', 'PUSHED_NO_PUBLIC_CHANGES', 'NO_CHANGES'].includes(state.status);
-  const committedToMain = requestedTaskDiffers && !completed && state?.commit && remoteHead() === state.commit;
-  if (requestedTaskDiffers && (completed || committedToMain)) state = null;
+  const committedToMain = requestedNewTask && !completed && state?.commit && remoteHead() === state.commit;
+  if (requestedNewTask && (completed || committedToMain)) state = null;
   if (completed && state) {
     const changed = initial.some((entry) => (state.task_files || []).includes(entry.file));
     if (!changed && (!source || (source === state.source && sourceHash === state.source_package_sha256)) && related.every((file) => (state.task_files || []).includes(file))) {
@@ -577,6 +584,7 @@ module.exports = {
   checkArticle200,
   checkPublicAssets,
   expectedCommitFiles,
+  hasTaskContentChangesSinceRelease,
   findArticleJson,
   isReleaseSafeTaskFile,
   preparedArticleTask,
