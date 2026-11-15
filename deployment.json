@@ -1,32 +1,284 @@
 {
   "version": 4,
-  "release_id": "5715f7f8-2077-49e3-8aa8-48a47e084e96",
-  "prepared_at": "2026-11-14T14:11:52+01:00",
-  "prepared_from_head": "2e194dc5593f566ff2d9f412ef914776d7f2ab09",
-  "publication_state_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "public_fingerprint_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "release_id": "5542794a-843b-4481-8f38-aa7808fce439",
+  "prepared_at": "2026-11-15T01:55:18+01:00",
+  "prepared_from_head": "b57513e500c3c2a43ae358416eaca0538bd697a2",
+  "publication_state_sha256": "6b18c05c9ac79d361d0510d98d9252562e6c5b40dae16184a67851a0b0f3c8be",
+  "public_fingerprint_sha256": "5457fa225e303e6a15c6baf73b5abdc6df55eebd0e3b0a46883d0d75dfde1e11",
   "release_files": [
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.jpg",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.avif",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.jpg",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.webp",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.avif",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.jpg",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.webp",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.avif",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.jpg",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.webp",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.avif",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.jpg",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.webp",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.avif",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.jpg",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.webp",
+    "_site/assets/data/search-index.json",
+    "_site/assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf",
+    "_site/ciekawe.html",
+    "_site/czy-morsowanie-jest-zdrowe-po-50.html",
+    "_site/data/crosslink-suggestions/czy-morsowanie-jest-zdrowe-po-50.json",
     "_site/deployment.json",
+    "_site/index.html",
+    "_site/llms-full.txt",
+    "_site/llms.txt",
+    "_site/porady.html",
+    "_site/sitemap.xml",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.jpg",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.avif",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.jpg",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.webp",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.avif",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.jpg",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.webp",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.avif",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.jpg",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.webp",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.avif",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.jpg",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.webp",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.avif",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.jpg",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.webp",
+    "assets/data/search-index.json",
+    "assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf",
+    "ciekawe.html",
+    "czy-morsowanie-jest-zdrowe-po-50.html",
+    "data/crosslink-suggestions/czy-morsowanie-jest-zdrowe-po-50.json",
+    "data/reports/article-preview/czy-morsowanie-jest-zdrowe-po-50.json",
+    "data/reports/article-preview/czy-morsowanie-jest-zdrowe-po-50.md",
+    "data/reports/article-publications/czy-morsowanie-jest-zdrowe-po-50.json",
+    "data/reports/gsc-after-publication-queue.json",
+    "data/reports/gsc-after-publication-queue.txt",
+    "data/reports/published-articles-log.json",
     "deployment.json",
-    "scripts/article-pipeline.js",
-    "scripts/import-article.js",
-    "scripts/lib/article-staging.js",
-    "scripts/lib/change-scope.js",
-    "tests/article-staging.test.js",
-    "tests/import-article-render.test.js"
+    "index.html",
+    "llms-full.txt",
+    "llms.txt",
+    "porady.html",
+    "sitemap.xml"
   ],
   "release_file_hashes": {
-    "scripts/article-pipeline.js": "18fd54c447f88b60e8e7f1ddb50137c241772cbafb088152b76ad47bc2ef48f0",
-    "scripts/import-article.js": "7afc8a0ae09d0296b9ebb4a99d695a9b669df52d3d46147c319b0af8965e21fb",
-    "scripts/lib/article-staging.js": "701d3a80bab7e37e0416f894c836c06fc284ece9dee5cc871d9c6d5fa2b5ed36",
-    "scripts/lib/change-scope.js": "28bc3d16a287bbbee8acf5f5764e017102467f2fe177b8d2e4c74ec3db190a0b",
-    "tests/article-staging.test.js": "2f206248fea2a658188a869d00ffe48aa05ed222c1a0a0247a24228c01faca79",
-    "tests/import-article-render.test.js": "9f0c95b06d7b5adb1cac7d50837a0925c26db66ef8ec219ce3f048bdb5154c7c"
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif": "ad0e0ecf9674d633d3a9e2a14d27ca0ca06d267924242f9b7a145be5e919c9e0",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.jpg": "ff68e5353c0b8008629706a926b9877c226e75ef330a105b1c43032771e63685",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp": "e7941369a2ad27179a64d280938084fd1ccdf9eedcb0d3e2c0031763b13e7490",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.avif": "02e798af1f6f2976fa4f89f9845978b1ae7de458cfe037a1fe9be3e22093f60a",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.jpg": "8adc9f377554e5c681e22625c7e34587b4ef7171215c740f9a5b27a0ed217038",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.webp": "e01af60c3715b35e1dcd58cb22af1ffd0dced5c27bfd272fe85e7f8e3c4832d5",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.avif": "7d308841b8712d7849df15b6dca7a17fe12954ded37539101ed3767559c7b78e",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.jpg": "b3f7049c71e7f952e91086339603e8cb5f4d865fd56f15a0e00d2284fcf1ca37",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.webp": "113b3c285f8fd3866c6074d5454a9f9e3e58eb504f084fbde7e34ccf7084ef7c",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.avif": "917d5fa6a32111ce90848f0a90015e311d28bd9a6a0ac1a87208619273ed03cf",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.jpg": "6680c6b96e51f22aa863c5a7ef584eb2eb4536d54743f963fa03b2f1500e3d52",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.webp": "47dfdd25ececda3661df2967c5af8de76ece173319bccb26cfc8b04b5b88ffc6",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.avif": "728bd091271d69de66ec27b800a4a30ee7f945d2273e961072447c0438771af0",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.jpg": "c2831eda6e62d510dac17982f7dedfcdd16234ad1f77a8756db75e712ac9dca0",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.webp": "bc030ee86632bde8e9cf7eed1e6e00a1cc19c6b3fac8e0c506947bb8bd3fd56e",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.avif": "8b35e22d04f536583ffbb2ab6739a2e20e6e3ffcb29de33bf9e3a6d856c4dae8",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.jpg": "a6cf0435c76112ba6d89ab09cd38fdf3b04b6a5cddb0a5cf98041def7db202e7",
+    "_site/assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.webp": "7b4128b442f5702e2ce2359cfb07c62672d4fa1e310708762b54b9f7877a2477",
+    "_site/assets/data/search-index.json": "ad5c1cfb720973e8911fb4ec1b7fd8a289f8b21daee0d15bb142832543a18898",
+    "_site/assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c",
+    "_site/ciekawe.html": "842726ba95916c961510a216ab686cfaea6e82411057a571d39bd1dd77b5a68e",
+    "_site/czy-morsowanie-jest-zdrowe-po-50.html": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b",
+    "_site/data/crosslink-suggestions/czy-morsowanie-jest-zdrowe-po-50.json": "089d1b737cafac8dbf3d64e1805c5533ee5c3b6e41c038ea26a3439114e41f9c",
+    "_site/index.html": "e17b756efedcb7cf6673f877d9d0457ef1e6b3e5dff13f6684ab5a893c433d6d",
+    "_site/llms-full.txt": "ad00dd037ac08ff63e4c186b13e16c9b9736f1e390eca66554a13fa05c9f5483",
+    "_site/llms.txt": "4ea0e7bb3eb00c8fded24345aff856c9724807fbc99f2f0867fea81181b2a666",
+    "_site/porady.html": "9ff56066f23d1714480d5b68bbb6f65b87c07bce863b1a22f610f02273391bec",
+    "_site/sitemap.xml": "8afeb85bb0b71cbbde6709280189b3fd25d08b2676112c016bc46042f6dcf5f7",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif": "ad0e0ecf9674d633d3a9e2a14d27ca0ca06d267924242f9b7a145be5e919c9e0",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.jpg": "ff68e5353c0b8008629706a926b9877c226e75ef330a105b1c43032771e63685",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp": "e7941369a2ad27179a64d280938084fd1ccdf9eedcb0d3e2c0031763b13e7490",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.avif": "02e798af1f6f2976fa4f89f9845978b1ae7de458cfe037a1fe9be3e22093f60a",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.jpg": "8adc9f377554e5c681e22625c7e34587b4ef7171215c740f9a5b27a0ed217038",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.webp": "e01af60c3715b35e1dcd58cb22af1ffd0dced5c27bfd272fe85e7f8e3c4832d5",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.avif": "7d308841b8712d7849df15b6dca7a17fe12954ded37539101ed3767559c7b78e",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.jpg": "b3f7049c71e7f952e91086339603e8cb5f4d865fd56f15a0e00d2284fcf1ca37",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.webp": "113b3c285f8fd3866c6074d5454a9f9e3e58eb504f084fbde7e34ccf7084ef7c",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.avif": "917d5fa6a32111ce90848f0a90015e311d28bd9a6a0ac1a87208619273ed03cf",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.jpg": "6680c6b96e51f22aa863c5a7ef584eb2eb4536d54743f963fa03b2f1500e3d52",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.webp": "47dfdd25ececda3661df2967c5af8de76ece173319bccb26cfc8b04b5b88ffc6",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.avif": "728bd091271d69de66ec27b800a4a30ee7f945d2273e961072447c0438771af0",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.jpg": "c2831eda6e62d510dac17982f7dedfcdd16234ad1f77a8756db75e712ac9dca0",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.webp": "bc030ee86632bde8e9cf7eed1e6e00a1cc19c6b3fac8e0c506947bb8bd3fd56e",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.avif": "8b35e22d04f536583ffbb2ab6739a2e20e6e3ffcb29de33bf9e3a6d856c4dae8",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.jpg": "a6cf0435c76112ba6d89ab09cd38fdf3b04b6a5cddb0a5cf98041def7db202e7",
+    "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.webp": "7b4128b442f5702e2ce2359cfb07c62672d4fa1e310708762b54b9f7877a2477",
+    "assets/data/search-index.json": "ad5c1cfb720973e8911fb4ec1b7fd8a289f8b21daee0d15bb142832543a18898",
+    "assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c",
+    "ciekawe.html": "842726ba95916c961510a216ab686cfaea6e82411057a571d39bd1dd77b5a68e",
+    "czy-morsowanie-jest-zdrowe-po-50.html": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b",
+    "data/crosslink-suggestions/czy-morsowanie-jest-zdrowe-po-50.json": "089d1b737cafac8dbf3d64e1805c5533ee5c3b6e41c038ea26a3439114e41f9c",
+    "data/reports/article-preview/czy-morsowanie-jest-zdrowe-po-50.json": "82dce552e8542b32848924cfb01e059da33459433027be6289219cde3d03bf08",
+    "data/reports/article-preview/czy-morsowanie-jest-zdrowe-po-50.md": "c2c329baa769bd21d27f5acd9d58e43c2c5c389a18d219e5ad50eee82f915880",
+    "data/reports/article-publications/czy-morsowanie-jest-zdrowe-po-50.json": "234234f5a51de232c38db0504ddf28791c013bd6f2dcf19b30890d1ad929a8fa",
+    "data/reports/gsc-after-publication-queue.json": "2f718095433c39e6dfbad6fb05408977533040e939796efa5ef34f9ed064bd27",
+    "data/reports/gsc-after-publication-queue.txt": "eae8da6568065cadb7a460980d68bc045bf16b7628c7a55ae7bc196980af42f6",
+    "data/reports/published-articles-log.json": "c577767b99b19b804dba57a057470926a0186b6f0c96b4a1c0f7814c10ccbc8f",
+    "index.html": "e17b756efedcb7cf6673f877d9d0457ef1e6b3e5dff13f6684ab5a893c433d6d",
+    "llms-full.txt": "ad00dd037ac08ff63e4c186b13e16c9b9736f1e390eca66554a13fa05c9f5483",
+    "llms.txt": "4ea0e7bb3eb00c8fded24345aff856c9724807fbc99f2f0867fea81181b2a666",
+    "porady.html": "9ff56066f23d1714480d5b68bbb6f65b87c07bce863b1a22f610f02273391bec",
+    "sitemap.xml": "8afeb85bb0b71cbbde6709280189b3fd25d08b2676112c016bc46042f6dcf5f7"
   },
   "change_scope": [
-    "pipeline"
+    "articles"
   ],
-  "verification_targets": [],
+  "verification_targets": [
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif",
+      "mode": "sha256",
+      "sha256": "ad0e0ecf9674d633d3a9e2a14d27ca0ca06d267924242f9b7a145be5e919c9e0"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.jpg",
+      "mode": "sha256",
+      "sha256": "ff68e5353c0b8008629706a926b9877c226e75ef330a105b1c43032771e63685"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp",
+      "mode": "sha256",
+      "sha256": "e7941369a2ad27179a64d280938084fd1ccdf9eedcb0d3e2c0031763b13e7490"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.avif",
+      "mode": "sha256",
+      "sha256": "02e798af1f6f2976fa4f89f9845978b1ae7de458cfe037a1fe9be3e22093f60a"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.jpg",
+      "mode": "sha256",
+      "sha256": "8adc9f377554e5c681e22625c7e34587b4ef7171215c740f9a5b27a0ed217038"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.webp",
+      "mode": "sha256",
+      "sha256": "e01af60c3715b35e1dcd58cb22af1ffd0dced5c27bfd272fe85e7f8e3c4832d5"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.avif",
+      "mode": "sha256",
+      "sha256": "7d308841b8712d7849df15b6dca7a17fe12954ded37539101ed3767559c7b78e"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.jpg",
+      "mode": "sha256",
+      "sha256": "b3f7049c71e7f952e91086339603e8cb5f4d865fd56f15a0e00d2284fcf1ca37"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.webp",
+      "mode": "sha256",
+      "sha256": "113b3c285f8fd3866c6074d5454a9f9e3e58eb504f084fbde7e34ccf7084ef7c"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.avif",
+      "mode": "sha256",
+      "sha256": "917d5fa6a32111ce90848f0a90015e311d28bd9a6a0ac1a87208619273ed03cf"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.jpg",
+      "mode": "sha256",
+      "sha256": "6680c6b96e51f22aa863c5a7ef584eb2eb4536d54743f963fa03b2f1500e3d52"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.webp",
+      "mode": "sha256",
+      "sha256": "47dfdd25ececda3661df2967c5af8de76ece173319bccb26cfc8b04b5b88ffc6"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.avif",
+      "mode": "sha256",
+      "sha256": "728bd091271d69de66ec27b800a4a30ee7f945d2273e961072447c0438771af0"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.jpg",
+      "mode": "sha256",
+      "sha256": "c2831eda6e62d510dac17982f7dedfcdd16234ad1f77a8756db75e712ac9dca0"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.webp",
+      "mode": "sha256",
+      "sha256": "bc030ee86632bde8e9cf7eed1e6e00a1cc19c6b3fac8e0c506947bb8bd3fd56e"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.avif",
+      "mode": "sha256",
+      "sha256": "8b35e22d04f536583ffbb2ab6739a2e20e6e3ffcb29de33bf9e3a6d856c4dae8"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.jpg",
+      "mode": "sha256",
+      "sha256": "a6cf0435c76112ba6d89ab09cd38fdf3b04b6a5cddb0a5cf98041def7db202e7"
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.webp",
+      "mode": "sha256",
+      "sha256": "7b4128b442f5702e2ce2359cfb07c62672d4fa1e310708762b54b9f7877a2477"
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "mode": "sha256",
+      "sha256": "ad5c1cfb720973e8911fb4ec1b7fd8a289f8b21daee0d15bb142832543a18898"
+    },
+    {
+      "path": "assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf",
+      "mode": "sha256",
+      "sha256": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c"
+    },
+    {
+      "path": "ciekawe.html",
+      "mode": "sha256",
+      "sha256": "842726ba95916c961510a216ab686cfaea6e82411057a571d39bd1dd77b5a68e"
+    },
+    {
+      "path": "czy-morsowanie-jest-zdrowe-po-50.html",
+      "mode": "sha256",
+      "sha256": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b"
+    },
+    {
+      "path": "data/crosslink-suggestions/czy-morsowanie-jest-zdrowe-po-50.json",
+      "mode": "reachable"
+    },
+    {
+      "path": "index.html",
+      "mode": "sha256",
+      "sha256": "e17b756efedcb7cf6673f877d9d0457ef1e6b3e5dff13f6684ab5a893c433d6d"
+    },
+    {
+      "path": "llms-full.txt",
+      "mode": "sha256",
+      "sha256": "ad00dd037ac08ff63e4c186b13e16c9b9736f1e390eca66554a13fa05c9f5483"
+    },
+    {
+      "path": "llms.txt",
+      "mode": "sha256",
+      "sha256": "4ea0e7bb3eb00c8fded24345aff856c9724807fbc99f2f0867fea81181b2a666"
+    },
+    {
+      "path": "porady.html",
+      "mode": "sha256",
+      "sha256": "9ff56066f23d1714480d5b68bbb6f65b87c07bce863b1a22f610f02273391bec"
+    },
+    {
+      "path": "sitemap.xml",
+      "mode": "sha256",
+      "sha256": "8afeb85bb0b71cbbde6709280189b3fd25d08b2676112c016bc46042f6dcf5f7"
+    }
+  ],
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",
@@ -107,5 +359,139 @@
       }
     ]
   },
-  "articles": []
+  "articles": [
+    {
+      "file": "czy-morsowanie-jest-zdrowe-po-50.html",
+      "slug": "czy-morsowanie-jest-zdrowe-po-50",
+      "url": "https://fitpo50.pl/czy-morsowanie-jest-zdrowe-po-50.html",
+      "date_modified": "2026-11-15T09:30:00+01:00",
+      "html_sha256": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b",
+      "pdf_path": "assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf",
+      "pdf_sha256": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c",
+      "images": [
+        {
+          "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.avif",
+          "sha256": "39d89438447064a31a9b51bc1c5fef6a4599cd166d32adc702921f2efa174786"
+        },
+        {
+          "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.jpg",
+          "sha256": "3e97c7a25a550a0de8b6c6716c02ea9d9700e227d94aeef31e1e7cf447b828f1"
+        },
+        {
+          "path": "assets/bezdech-senny-po-50-objawy-hero-list-od-partnera-o-przerwach-w-oddechu-v1.webp",
+          "sha256": "a744a3b49d5241fb63421df3011c13c22666e8419da99b46f1ae6593ffe7b674"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif",
+          "sha256": "ad0e0ecf9674d633d3a9e2a14d27ca0ca06d267924242f9b7a145be5e919c9e0"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.jpg",
+          "sha256": "ff68e5353c0b8008629706a926b9877c226e75ef330a105b1c43032771e63685"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp",
+          "sha256": "e7941369a2ad27179a64d280938084fd1ccdf9eedcb0d3e2c0031763b13e7490"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.avif",
+          "sha256": "02e798af1f6f2976fa4f89f9845978b1ae7de458cfe037a1fe9be3e22093f60a"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.jpg",
+          "sha256": "8adc9f377554e5c681e22625c7e34587b4ef7171215c740f9a5b27a0ed217038"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.webp",
+          "sha256": "e01af60c3715b35e1dcd58cb22af1ffd0dced5c27bfd272fe85e7f8e3c4832d5"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.avif",
+          "sha256": "7d308841b8712d7849df15b6dca7a17fe12954ded37539101ed3767559c7b78e"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.jpg",
+          "sha256": "b3f7049c71e7f952e91086339603e8cb5f4d865fd56f15a0e00d2284fcf1ca37"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.webp",
+          "sha256": "113b3c285f8fd3866c6074d5454a9f9e3e58eb504f084fbde7e34ccf7084ef7c"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.avif",
+          "sha256": "917d5fa6a32111ce90848f0a90015e311d28bd9a6a0ac1a87208619273ed03cf"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.jpg",
+          "sha256": "6680c6b96e51f22aa863c5a7ef584eb2eb4536d54743f963fa03b2f1500e3d52"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.webp",
+          "sha256": "47dfdd25ececda3661df2967c5af8de76ece173319bccb26cfc8b04b5b88ffc6"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.avif",
+          "sha256": "728bd091271d69de66ec27b800a4a30ee7f945d2273e961072447c0438771af0"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.jpg",
+          "sha256": "c2831eda6e62d510dac17982f7dedfcdd16234ad1f77a8756db75e712ac9dca0"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.webp",
+          "sha256": "bc030ee86632bde8e9cf7eed1e6e00a1cc19c6b3fac8e0c506947bb8bd3fd56e"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.avif",
+          "sha256": "8b35e22d04f536583ffbb2ab6739a2e20e6e3ffcb29de33bf9e3a6d856c4dae8"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.jpg",
+          "sha256": "a6cf0435c76112ba6d89ab09cd38fdf3b04b6a5cddb0a5cf98041def7db202e7"
+        },
+        {
+          "path": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.webp",
+          "sha256": "7b4128b442f5702e2ce2359cfb07c62672d4fa1e310708762b54b9f7877a2477"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.avif",
+          "sha256": "63dc1ed67df52ff5dcc0140046c917bb1a2501506929e64ea0dcd9e0e52c388e"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.jpg",
+          "sha256": "c80fbb16ffe9953d624d6aa75f24cbf11fbb88e7cf297961d9bb2c66bb246ecf"
+        },
+        {
+          "path": "assets/ile-blonnika-dziennie-po-50-hero-wspolny-stol-v1.webp",
+          "sha256": "2d28b322db5d94a106c7efbc3c2d4038907bc8ddab5f9c8cc6966bd4107d040d"
+        },
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.avif",
+          "sha256": "8b52278f2439adaba83a8b8760023d19c68b7b345e9d04e66e4f36d8adea4a18"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.jpg",
+          "sha256": "f79da394ef884f1243d9710447dd4ac3391c236c5f478a9741a2142bf49414a0"
+        },
+        {
+          "path": "assets/wstawanie-w-nocy-do-toalety-po-50-hero-v1.webp",
+          "sha256": "9ed650e1f4e3f396365cac35d2fa30dbdbaddc959b57e5e4d13e6345f314a16c"
+        }
+      ],
+      "listing_paths": [
+        "index.html",
+        "porady.html",
+        "ciekawe.html",
+        "assets/data/search-index.json"
+      ]
+    }
+  ]
 }

@@ -1,0 +1,455 @@
+{
+  "version": 1,
+  "transaction_id": "article-czy-morsowanie-jest-zdrowe-po-50-1794703947575-35688",
+  "validation_profile": "technical",
+  "generated_at": "2026-11-15T01:52:43+01:00",
+  "status": "PUBLISHED",
+  "operation": "CREATE",
+  "slug": "czy-morsowanie-jest-zdrowe-po-50",
+  "source_package_sha256": "3c8769e3d1f7a966cab0c41ea769d32249c0ec44a43e92e1a084579640b9a0e4",
+  "url": "https://fitpo50.pl/czy-morsowanie-jest-zdrowe-po-50.html",
+  "manifest_file": "data/reports/article-publications/czy-morsowanie-jest-zdrowe-po-50.json",
+  "validation_receipt": "ee087be09e7efabb705c0338ca071960ca29cb41bba53d94afa2159673712deb",
+  "gates": [
+    "CONTENT_READY",
+    "ARTICLE_PREFLIGHT",
+    "MEDIA_MANIFEST",
+    "ARTICLE_CONTRACT",
+    "SCHEMA_VALIDATION",
+    "MIRROR_SYNC",
+    "PREDEPLOY_STAGING",
+    "TECHNICAL_PREVIEW_DESKTOP_MOBILE_PDF",
+    "POST_PROMOTION_VALIDATION",
+    "POST_PUBLICATION_BASELINE_AND_GSC_QUEUE"
+  ],
+  "files": [
+    {
+      "path": "czy-morsowanie-jest-zdrowe-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b",
+      "bytes": 52820
+    },
+    {
+      "path": "index.html",
+      "action": "UPDATE",
+      "before_sha256": "5cfe8d82c9db5ceb1f6381e6122083e1081e52d301ce87ea2bb4a46a656aa0e5",
+      "after_sha256": "e17b756efedcb7cf6673f877d9d0457ef1e6b3e5dff13f6684ab5a893c433d6d",
+      "bytes": 122472
+    },
+    {
+      "path": "porady.html",
+      "action": "UPDATE",
+      "before_sha256": "3832f18ba34904076b32f22fa69b891459080e0dd2c0988e5fec199efbf84594",
+      "after_sha256": "9ff56066f23d1714480d5b68bbb6f65b87c07bce863b1a22f610f02273391bec",
+      "bytes": 170042
+    },
+    {
+      "path": "ciekawe.html",
+      "action": "UPDATE",
+      "before_sha256": "b1f35577888a2567b4ea1b6d5480f6a7a76b419a684110b70cac98b0ac08e124",
+      "after_sha256": "842726ba95916c961510a216ab686cfaea6e82411057a571d39bd1dd77b5a68e",
+      "bytes": 48256
+    },
+    {
+      "path": "sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "c6d1f3549ba5df487bacbd9094996ded9532729afbf02df114ff0ce4dacc18ae",
+      "after_sha256": "8afeb85bb0b71cbbde6709280189b3fd25d08b2676112c016bc46042f6dcf5f7",
+      "bytes": 21338
+    },
+    {
+      "path": "llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "506ea153882cc0036cb1ff828e3288febbe45347556ee2c0dedd594bb840379c",
+      "after_sha256": "4ea0e7bb3eb00c8fded24345aff856c9724807fbc99f2f0867fea81181b2a666",
+      "bytes": 41671
+    },
+    {
+      "path": "llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "4d458c5be469fa867964492b8ba43170a4521c035ee380a071e1046d29a4f4bd",
+      "after_sha256": "ad00dd037ac08ff63e4c186b13e16c9b9736f1e390eca66554a13fa05c9f5483",
+      "bytes": 983703
+    },
+    {
+      "path": "assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "eabb6d54d492820bc70fc6970f842159fe5f4707aae9ba5191cb5c4c21929fd1",
+      "after_sha256": "ad5c1cfb720973e8911fb4ec1b7fd8a289f8b21daee0d15bb142832543a18898",
+      "bytes": 1031011
+    },
+    {
+      "path": "assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c",
+      "bytes": 485224
+    },
+    {
+      "path": "data/crosslink-suggestions/czy-morsowanie-jest-zdrowe-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "089d1b737cafac8dbf3d64e1805c5533ee5c3b6e41c038ea26a3439114e41f9c",
+      "bytes": 1295
+    },
+    {
+      "path": "data/reports/article-preview/czy-morsowanie-jest-zdrowe-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "82dce552e8542b32848924cfb01e059da33459433027be6289219cde3d03bf08",
+      "bytes": 18859
+    },
+    {
+      "path": "data/reports/article-preview/czy-morsowanie-jest-zdrowe-po-50.md",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c2c329baa769bd21d27f5acd9d58e43c2c5c389a18d219e5ad50eee82f915880",
+      "bytes": 354
+    },
+    {
+      "path": "data/reports/published-articles-log.json",
+      "action": "UPDATE",
+      "before_sha256": "5d2eda4073aa551a79d183acc4a079c14f15454b856e27361991ea2f1d01a31f",
+      "after_sha256": "c577767b99b19b804dba57a057470926a0186b6f0c96b4a1c0f7814c10ccbc8f",
+      "bytes": 84128
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.json",
+      "action": "UPDATE",
+      "before_sha256": "f285a97645ec822d98e91cd69ac505ad22dba9c104ce7fd3c5abd10c5d2eaf02",
+      "after_sha256": "2f718095433c39e6dfbad6fb05408977533040e939796efa5ef34f9ed064bd27",
+      "bytes": 9585
+    },
+    {
+      "path": "data/reports/gsc-after-publication-queue.txt",
+      "action": "UPDATE",
+      "before_sha256": "319ab5e8c618623c64f1f1253c76cd384addc8ffa9c169e0d01f77c1877b0dc1",
+      "after_sha256": "eae8da6568065cadb7a460980d68bc045bf16b7628c7a55ae7bc196980af42f6",
+      "bytes": 4691
+    },
+    {
+      "path": "_site/czy-morsowanie-jest-zdrowe-po-50.html",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b",
+      "bytes": 52820
+    },
+    {
+      "path": "_site/index.html",
+      "action": "UPDATE",
+      "before_sha256": "5cfe8d82c9db5ceb1f6381e6122083e1081e52d301ce87ea2bb4a46a656aa0e5",
+      "after_sha256": "e17b756efedcb7cf6673f877d9d0457ef1e6b3e5dff13f6684ab5a893c433d6d",
+      "bytes": 122472
+    },
+    {
+      "path": "_site/porady.html",
+      "action": "UPDATE",
+      "before_sha256": "3832f18ba34904076b32f22fa69b891459080e0dd2c0988e5fec199efbf84594",
+      "after_sha256": "9ff56066f23d1714480d5b68bbb6f65b87c07bce863b1a22f610f02273391bec",
+      "bytes": 170042
+    },
+    {
+      "path": "_site/ciekawe.html",
+      "action": "UPDATE",
+      "before_sha256": "b1f35577888a2567b4ea1b6d5480f6a7a76b419a684110b70cac98b0ac08e124",
+      "after_sha256": "842726ba95916c961510a216ab686cfaea6e82411057a571d39bd1dd77b5a68e",
+      "bytes": 48256
+    },
+    {
+      "path": "_site/sitemap.xml",
+      "action": "UPDATE",
+      "before_sha256": "c6d1f3549ba5df487bacbd9094996ded9532729afbf02df114ff0ce4dacc18ae",
+      "after_sha256": "8afeb85bb0b71cbbde6709280189b3fd25d08b2676112c016bc46042f6dcf5f7",
+      "bytes": 21338
+    },
+    {
+      "path": "_site/llms.txt",
+      "action": "UPDATE",
+      "before_sha256": "506ea153882cc0036cb1ff828e3288febbe45347556ee2c0dedd594bb840379c",
+      "after_sha256": "4ea0e7bb3eb00c8fded24345aff856c9724807fbc99f2f0867fea81181b2a666",
+      "bytes": 41671
+    },
+    {
+      "path": "_site/llms-full.txt",
+      "action": "UPDATE",
+      "before_sha256": "4d458c5be469fa867964492b8ba43170a4521c035ee380a071e1046d29a4f4bd",
+      "after_sha256": "ad00dd037ac08ff63e4c186b13e16c9b9736f1e390eca66554a13fa05c9f5483",
+      "bytes": 983703
+    },
+    {
+      "path": "_site/assets/data/search-index.json",
+      "action": "UPDATE",
+      "before_sha256": "eabb6d54d492820bc70fc6970f842159fe5f4707aae9ba5191cb5c4c21929fd1",
+      "after_sha256": "ad5c1cfb720973e8911fb4ec1b7fd8a289f8b21daee0d15bb142832543a18898",
+      "bytes": 1031011
+    },
+    {
+      "path": "_site/assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c",
+      "bytes": 485224
+    },
+    {
+      "path": "_site/data/crosslink-suggestions/czy-morsowanie-jest-zdrowe-po-50.json",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "089d1b737cafac8dbf3d64e1805c5533ee5c3b6e41c038ea26a3439114e41f9c",
+      "bytes": 1295
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ad0e0ecf9674d633d3a9e2a14d27ca0ca06d267924242f9b7a145be5e919c9e0",
+      "bytes": 69048
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ad0e0ecf9674d633d3a9e2a14d27ca0ca06d267924242f9b7a145be5e919c9e0",
+      "bytes": 69048
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e7941369a2ad27179a64d280938084fd1ccdf9eedcb0d3e2c0031763b13e7490",
+      "bytes": 126566
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e7941369a2ad27179a64d280938084fd1ccdf9eedcb0d3e2c0031763b13e7490",
+      "bytes": 126566
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ff68e5353c0b8008629706a926b9877c226e75ef330a105b1c43032771e63685",
+      "bytes": 178942
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "ff68e5353c0b8008629706a926b9877c226e75ef330a105b1c43032771e63685",
+      "bytes": 178942
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7d308841b8712d7849df15b6dca7a17fe12954ded37539101ed3767559c7b78e",
+      "bytes": 59668
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7d308841b8712d7849df15b6dca7a17fe12954ded37539101ed3767559c7b78e",
+      "bytes": 59668
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "113b3c285f8fd3866c6074d5454a9f9e3e58eb504f084fbde7e34ccf7084ef7c",
+      "bytes": 103372
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "113b3c285f8fd3866c6074d5454a9f9e3e58eb504f084fbde7e34ccf7084ef7c",
+      "bytes": 103372
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b3f7049c71e7f952e91086339603e8cb5f4d865fd56f15a0e00d2284fcf1ca37",
+      "bytes": 170216
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "b3f7049c71e7f952e91086339603e8cb5f4d865fd56f15a0e00d2284fcf1ca37",
+      "bytes": 170216
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "02e798af1f6f2976fa4f89f9845978b1ae7de458cfe037a1fe9be3e22093f60a",
+      "bytes": 60751
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "02e798af1f6f2976fa4f89f9845978b1ae7de458cfe037a1fe9be3e22093f60a",
+      "bytes": 60751
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e01af60c3715b35e1dcd58cb22af1ffd0dced5c27bfd272fe85e7f8e3c4832d5",
+      "bytes": 108120
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "e01af60c3715b35e1dcd58cb22af1ffd0dced5c27bfd272fe85e7f8e3c4832d5",
+      "bytes": 108120
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8adc9f377554e5c681e22625c7e34587b4ef7171215c740f9a5b27a0ed217038",
+      "bytes": 158851
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8adc9f377554e5c681e22625c7e34587b4ef7171215c740f9a5b27a0ed217038",
+      "bytes": 158851
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "728bd091271d69de66ec27b800a4a30ee7f945d2273e961072447c0438771af0",
+      "bytes": 49651
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "728bd091271d69de66ec27b800a4a30ee7f945d2273e961072447c0438771af0",
+      "bytes": 49651
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bc030ee86632bde8e9cf7eed1e6e00a1cc19c6b3fac8e0c506947bb8bd3fd56e",
+      "bytes": 81516
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "bc030ee86632bde8e9cf7eed1e6e00a1cc19c6b3fac8e0c506947bb8bd3fd56e",
+      "bytes": 81516
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c2831eda6e62d510dac17982f7dedfcdd16234ad1f77a8756db75e712ac9dca0",
+      "bytes": 150854
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "c2831eda6e62d510dac17982f7dedfcdd16234ad1f77a8756db75e712ac9dca0",
+      "bytes": 150854
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "917d5fa6a32111ce90848f0a90015e311d28bd9a6a0ac1a87208619273ed03cf",
+      "bytes": 63948
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "917d5fa6a32111ce90848f0a90015e311d28bd9a6a0ac1a87208619273ed03cf",
+      "bytes": 63948
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "47dfdd25ececda3661df2967c5af8de76ece173319bccb26cfc8b04b5b88ffc6",
+      "bytes": 107022
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "47dfdd25ececda3661df2967c5af8de76ece173319bccb26cfc8b04b5b88ffc6",
+      "bytes": 107022
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6680c6b96e51f22aa863c5a7ef584eb2eb4536d54743f963fa03b2f1500e3d52",
+      "bytes": 161430
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "6680c6b96e51f22aa863c5a7ef584eb2eb4536d54743f963fa03b2f1500e3d52",
+      "bytes": 161430
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8b35e22d04f536583ffbb2ab6739a2e20e6e3ffcb29de33bf9e3a6d856c4dae8",
+      "bytes": 50248
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.avif",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "8b35e22d04f536583ffbb2ab6739a2e20e6e3ffcb29de33bf9e3a6d856c4dae8",
+      "bytes": 50248
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7b4128b442f5702e2ce2359cfb07c62672d4fa1e310708762b54b9f7877a2477",
+      "bytes": 71620
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.webp",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "7b4128b442f5702e2ce2359cfb07c62672d4fa1e310708762b54b9f7877a2477",
+      "bytes": 71620
+    },
+    {
+      "path": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a6cf0435c76112ba6d89ab09cd38fdf3b04b6a5cddb0a5cf98041def7db202e7",
+      "bytes": 140593
+    },
+    {
+      "path": "_site/assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.jpg",
+      "action": "CREATE",
+      "before_sha256": null,
+      "after_sha256": "a6cf0435c76112ba6d89ab09cd38fdf3b04b6a5cddb0a5cf98041def7db202e7",
+      "bytes": 140593
+    }
+  ],
+  "files_count": 61
+}

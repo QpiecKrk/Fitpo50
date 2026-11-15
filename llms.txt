@@ -503,3 +503,7 @@ title: "VO2 Max po 50: Dlaczego wydolność jest ważniejsza niż waga? | FitPo5
   title: "Wstawanie w nocy do toalety po 50: kiedy szukać pomocy? | FitPo50"
   section: "Zdrowie"
   summary: "Wstawanie w nocy do toalety po 50: poznaj możliwe przyczyny, naucz się prowadzić dzienniczek i sprawdź, kiedy umówić wizytę, a kiedy szukać pilnej pomocy."
+- url: https://fitpo50.pl/czy-morsowanie-jest-zdrowe-po-50.html
+  title: "Czy morsowanie jest zdrowe po 50? Serce i pierwsze wejście | FitPo50"
+  section: "Ciekawe"
+  summary: "Morsowanie po pięćdziesiątce: co dzieje się z sercem i ciśnieniem przy zanurzeniu, jak przygotować pierwsze wejście i kiedy najpierw porozmawiać z lekarzem."

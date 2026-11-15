@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated_at": "2026-11-14T14:00:28+01:00",
+  "updated_at": "2026-11-15T01:52:43+01:00",
   "items": [
+    {
+      "slug": "czy-morsowanie-jest-zdrowe-po-50",
+      "target_url": "https://fitpo50.pl/czy-morsowanie-jest-zdrowe-po-50.html",
+      "source_urls": [
+        "https://fitpo50.pl/",
+        "https://fitpo50.pl/porady.html",
+        "https://fitpo50.pl/ciekawe.html"
+      ],
+      "sitemap_url": "https://fitpo50.pl/sitemap.xml",
+      "publication_at": "2026-11-15T01:52:43+01:00",
+      "transaction_id": "article-czy-morsowanie-jest-zdrowe-po-50-1794703947575-35688",
+      "status": "READY_AFTER_PUBLICATION"
+    },
     {
       "slug": "peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50",
       "target_url": "https://fitpo50.pl/peptydy-co-to-jest-rodzaje-bezpieczenstwo-po-50.html",

@@ -1,0 +1,385 @@
+{
+  "version": 3,
+  "status": "PREVIEW_READY",
+  "generated_at": "2026-11-15T01:52:42+01:00",
+  "reviewed_at": null,
+  "slug": "czy-morsowanie-jest-zdrowe-po-50",
+  "html_sha256": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b",
+  "site_html_sha256": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b",
+  "pdf_sha256": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c",
+  "site_pdf_sha256": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-15T01:52:42+01:00",
+    "errors": []
+  },
+  "html": {
+    "semantic_tables": 2
+  },
+  "artifacts": {
+    "html_source": {
+      "file": "czy-morsowanie-jest-zdrowe-po-50.html",
+      "sha256": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b",
+      "bytes": 52820
+    },
+    "html_site": {
+      "file": "_site/czy-morsowanie-jest-zdrowe-po-50.html",
+      "sha256": "3650fa2e2bf1a9a68986fc2a80cadd9791e6bb920fee44c694185fbe1f5a1e0b",
+      "bytes": 52820
+    },
+    "pdf_source": {
+      "file": "assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf",
+      "sha256": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c",
+      "bytes": 485224
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/czy-morsowanie-jest-zdrowe-po-50.pdf",
+      "sha256": "0544814046ae0b2f9c51e87946ab9030c2130058ce8f75867b02bdba95d1652c",
+      "bytes": 485224
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/czy-morsowanie-jest-zdrowe-po-50/desktop.png",
+      "screenshot_sha256": "724f6ac54e53b35d0cdd0141ae430a67b6d1cd22bb245c3d28cf2103163cc7b8",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/czy-morsowanie-jest-zdrowe-po-50/mobile.png",
+      "screenshot_sha256": "b340f465b9a9534bdf1b77802fb1b4a3a4ee968dcc393a3341ee47ea5fdb1bd0",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "CIEKAWE 10 min czytania Czy morsowanie jest zdrowe po 50? Serce i pierwsze wejście Szok zimna przychodzi od razu; na rozmowę z lekarzem nigdy nie jest za wcześnie.",
+      "alt": "Uśmiechnięta kobieta po pięćdziesiątce w kolorowej czapce wchodzi po kolana do jeziora o wschodzie, przyjaciel podaje dłoń.",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.avif",
+          "sha256": "ad0e0ecf9674d633d3a9e2a14d27ca0ca06d267924242f9b7a145be5e919c9e0",
+          "bytes": 69048,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.webp",
+          "sha256": "e7941369a2ad27179a64d280938084fd1ccdf9eedcb0d3e2c0031763b13e7490",
+          "bytes": 126566,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-hero-wejscie-z-linii-wody-o-wschodzie-v1.jpg",
+          "sha256": "ff68e5353c0b8008629706a926b9877c226e75ef330a105b1c43032771e63685",
+          "bytes": 178942,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "60d10da086ce37213cd97709db50506c2610824ae0f4c16b2e2537fe5a4beb0f"
+    },
+    {
+      "placement": "content:2:czy-morsowanie-jest-zdrowe-po-50",
+      "role": "content",
+      "heading": "Czy morsowanie jest zdrowe po 50?",
+      "context": "Po 50. roku życia pytanie, czy morsowanie jest zdrowe, zasługuje na spokojną odpowiedź, nie na obietnicę. Wejście do zimnej wody od razu przyspiesza oddech, tętno i ciśnienie — i właśnie ten pierwszy moment, a nie hartowanie odporności, jest w badaniach opisany najrzetelniej. Jeśli masz chorobę serca lub krążenia, zacznij od rozmowy z lekarzem. A ile minut wytrzymać w wodzie za pierwszym razem? Źródła podają różne liczby, więc dajemy bezpieczny zakres. Szybka odpowiedź Czy morsowanie jest zdrowe po 50? Nie ma mocnych dowodów, że poprawia zdrowie, a szok zimna w pierwszej minucie mocno obciąża serce i podnosi ciśnienie. Jeśli masz chorobę serca lub krążenia albo bierzesz leki na serce lub ciśnienie, najpierw porozmawiaj z lekarzem i pierwszy raz wejdź do wody z kimś, nie po alkoholu, bez ws",
+      "alt": "Troje uśmiechniętych osób po pięćdziesiątce w kolorowych ponchach rozmawia na zaśnieżonym pomoście o poranku.",
+      "caption": "Nie ma jednoznacznych dowodów naukowych potwierdzających korzystny wpływ morsowania na zdrowie, mówił prof. Zdrojewski.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.avif",
+          "sha256": "7d308841b8712d7849df15b6dca7a17fe12954ded37539101ed3767559c7b78e",
+          "bytes": 59668,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.webp",
+          "sha256": "113b3c285f8fd3866c6074d5454a9f9e3e58eb504f084fbde7e34ccf7084ef7c",
+          "bytes": 103372,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-po-wejsciu-poncha-na-brzegu-v1.jpg",
+          "sha256": "b3f7049c71e7f952e91086339603e8cb5f4d865fd56f15a0e00d2284fcf1ca37",
+          "bytes": 170216,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "b1d5e032618bfe7c9b3b5c6560d394411a49df42bca96cb766ba514994ebef25"
+    },
+    {
+      "placement": "content:3:co-sie-dzieje-z-sercem-i-cisnieniem-w-pierwszych",
+      "role": "content",
+      "heading": "Co się dzieje z sercem i ciśnieniem w pierwszych minutach?",
+      "context": "Po 50. roku życia pytanie, czy morsowanie jest zdrowe, zasługuje na spokojną odpowiedź, nie na obietnicę. Wejście do zimnej wody od razu przyspiesza oddech, tętno i ciśnienie — i właśnie ten pierwszy moment, a nie hartowanie odporności, jest w badaniach opisany najrzetelniej. Jeśli masz chorobę serca lub krążenia, zacznij od rozmowy z lekarzem. A ile minut wytrzymać w wodzie za pierwszym razem? Źródła podają różne liczby, więc dajemy bezpieczny zakres. Szybka odpowiedź Czy morsowanie jest zdrowe po 50? Nie ma mocnych dowodów, że poprawia zdrowie, a szok zimna w pierwszej minucie mocno obciąża serce i podnosi ciśnienie. Jeśli masz chorobę serca lub krążenia albo bierzesz leki na serce lub ciśnienie, najpierw porozmawiaj z lekarzem i pierwszy raz wejdź do wody z kimś, nie po alkoholu, bez ws",
+      "alt": "Mężczyzna po pięćdziesiątce stoi w jeziorze po klatkę z głową nad wodą, kobieta w poncho czuwa na brzegu.",
+      "caption": "W wodzie ciśnienie rośnie ostro; po sezonie morsowania ciśnienie spoczynkowe w polskim badaniu nie zmieniło się istotnie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.avif",
+          "sha256": "02e798af1f6f2976fa4f89f9845978b1ae7de458cfe037a1fe9be3e22093f60a",
+          "bytes": 60751,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.webp",
+          "sha256": "e01af60c3715b35e1dcd58cb22af1ffd0dced5c27bfd272fe85e7f8e3c4832d5",
+          "bytes": 108120,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-klatka-nad-woda-oddech-v1.jpg",
+          "sha256": "8adc9f377554e5c681e22625c7e34587b4ef7171215c740f9a5b27a0ed217038",
+          "bytes": 158851,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "e88fc57e5112b1c69979c36d93ecb2f25522911be1729495e3ea3672e422ab5d"
+    },
+    {
+      "placement": "content:4:kiedy-najpierw-porozmawiac-z-lekarzem",
+      "role": "content",
+      "heading": "Kiedy najpierw porozmawiać z lekarzem?",
+      "context": "Po 50. roku życia pytanie, czy morsowanie jest zdrowe, zasługuje na spokojną odpowiedź, nie na obietnicę. Wejście do zimnej wody od razu przyspiesza oddech, tętno i ciśnienie — i właśnie ten pierwszy moment, a nie hartowanie odporności, jest w badaniach opisany najrzetelniej. Jeśli masz chorobę serca lub krążenia, zacznij od rozmowy z lekarzem. A ile minut wytrzymać w wodzie za pierwszym razem? Źródła podają różne liczby, więc dajemy bezpieczny zakres. Szybka odpowiedź Czy morsowanie jest zdrowe po 50? Nie ma mocnych dowodów, że poprawia zdrowie, a szok zimna w pierwszej minucie mocno obciąża serce i podnosi ciśnienie. Jeśli masz chorobę serca lub krążenia albo bierzesz leki na serce lub ciśnienie, najpierw porozmawiaj z lekarzem i pierwszy raz wejdź do wody z kimś, nie po alkoholu, bez ws",
+      "alt": "Uśmiechnięta kobieta po pięćdziesiątce rozmawia z lekarką w jasnym, nowoczesnym gabinecie przy zimowym oknie.",
+      "caption": "Przy chorobie wieńcowej, po zawale, wadach zastawek, zaburzeniach rytmu, niekontrolowanym nadciśnieniu lub po udarze najpierw przychodzi rozmowa z lekarzem.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.avif",
+          "sha256": "728bd091271d69de66ec27b800a4a30ee7f945d2273e961072447c0438771af0",
+          "bytes": 49651,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.webp",
+          "sha256": "bc030ee86632bde8e9cf7eed1e6e00a1cc19c6b3fac8e0c506947bb8bd3fd56e",
+          "bytes": 81516,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-rozmowa-w-nowoczesnym-gabinecie-v1.jpg",
+          "sha256": "c2831eda6e62d510dac17982f7dedfcdd16234ad1f77a8756db75e712ac9dca0",
+          "bytes": 150854,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "b3afd5366cbff1c196689bc97905a21309ab88867b52f5973b4ff66e8a4d0925"
+    },
+    {
+      "placement": "content:5:jak-wyglada-pierwsze-wejscie-do-zimnej-wody",
+      "role": "content",
+      "heading": "Jak wygląda pierwsze wejście do zimnej wody?",
+      "context": "Po 50. roku życia pytanie, czy morsowanie jest zdrowe, zasługuje na spokojną odpowiedź, nie na obietnicę. Wejście do zimnej wody od razu przyspiesza oddech, tętno i ciśnienie — i właśnie ten pierwszy moment, a nie hartowanie odporności, jest w badaniach opisany najrzetelniej. Jeśli masz chorobę serca lub krążenia, zacznij od rozmowy z lekarzem. A ile minut wytrzymać w wodzie za pierwszym razem? Źródła podają różne liczby, więc dajemy bezpieczny zakres. Szybka odpowiedź Czy morsowanie jest zdrowe po 50? Nie ma mocnych dowodów, że poprawia zdrowie, a szok zimna w pierwszej minucie mocno obciąża serce i podnosi ciśnienie. Jeśli masz chorobę serca lub krążenia albo bierzesz leki na serce lub ciśnienie, najpierw porozmawiaj z lekarzem i pierwszy raz wejdź do wody z kimś, nie po alkoholu, bez ws",
+      "alt": "Grupa po pięćdziesiątce rozgrzewa się na śnieżnym brzegu, a kobieta w neoprenowych butach wchodzi wolno do wody.",
+      "caption": "Na pierwsze wejście źródła są zgodne: nie samemu, nie po alkoholu, bez skoku i bez zanurzania głowy; minuty rozgrzewki i czasu w wodzie podają różnie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.avif",
+          "sha256": "917d5fa6a32111ce90848f0a90015e311d28bd9a6a0ac1a87208619273ed03cf",
+          "bytes": 63948,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.webp",
+          "sha256": "47dfdd25ececda3661df2967c5af8de76ece173319bccb26cfc8b04b5b88ffc6",
+          "bytes": 107022,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-rozgrzewka-i-wolne-wejscie-v1.jpg",
+          "sha256": "6680c6b96e51f22aa863c5a7ef584eb2eb4536d54743f963fa03b2f1500e3d52",
+          "bytes": 161430,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ea2c8c68f6279381789ba806d002d0bee5d7e5141a80f30a89bb6d4479d1c0bf"
+    },
+    {
+      "placement": "content:6:czego-badania-jeszcze-nie-potwierdzaja",
+      "role": "content",
+      "heading": "Czego badania jeszcze nie potwierdzają?",
+      "context": "Po 50. roku życia pytanie, czy morsowanie jest zdrowe, zasługuje na spokojną odpowiedź, nie na obietnicę. Wejście do zimnej wody od razu przyspiesza oddech, tętno i ciśnienie — i właśnie ten pierwszy moment, a nie hartowanie odporności, jest w badaniach opisany najrzetelniej. Jeśli masz chorobę serca lub krążenia, zacznij od rozmowy z lekarzem. A ile minut wytrzymać w wodzie za pierwszym razem? Źródła podają różne liczby, więc dajemy bezpieczny zakres. Szybka odpowiedź Czy morsowanie jest zdrowe po 50? Nie ma mocnych dowodów, że poprawia zdrowie, a szok zimna w pierwszej minucie mocno obciąża serce i podnosi ciśnienie. Jeśli masz chorobę serca lub krążenia albo bierzesz leki na serce lub ciśnienie, najpierw porozmawiaj z lekarzem i pierwszy raz wejdź do wody z kimś, nie po alkoholu, bez ws",
+      "alt": "Uśmiechnięty mężczyzna po pięćdziesiątce w kolorowym ręczniku kończy prysznic w jasnej, nowoczesnej łazience.",
+      "caption": "Spadek absencji o 29% po zimnym prysznicu nie opisuje morsowania; liczba dni choroby w tym badaniu się nie zmieniła.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.avif",
+          "sha256": "8b35e22d04f536583ffbb2ab6739a2e20e6e3ffcb29de33bf9e3a6d856c4dae8",
+          "bytes": 50248,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.webp",
+          "sha256": "7b4128b442f5702e2ce2359cfb07c62672d4fa1e310708762b54b9f7877a2477",
+          "bytes": 71620,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/czy-morsowanie-jest-zdrowe-po-50-zimny-prysznic-to-nie-przerebel-v1.jpg",
+          "sha256": "a6cf0435c76112ba6d89ab09cd38fdf3b04b6a5cddb0a5cf98041def7db202e7",
+          "bytes": 140593,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "9fc47e7bd72e404d7b66c01edb887f50e576908d4e145c73bef34cc0910e4a23"
+    }
+  ],
+  "pdf": {
+    "pages": 7,
+    "text_coverage": 1,
+    "rendered_pages": 7,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/czy-morsowanie-jest-zdrowe-po-50/pdf-pages/page-1.png",
+        "sha256": "653116502d51ad6d8d3ce8e86dac76028ce92d749e6c3763d13992c185ea5b67",
+        "bytes": 821840,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1057,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/czy-morsowanie-jest-zdrowe-po-50/pdf-pages/page-2.png",
+        "sha256": "0daa57cd4192a7cd821341662b8cc18aac4bf7d91db63e886aa284134f7a222c",
+        "bytes": 688563,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 57,
+          "width": 1078,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/czy-morsowanie-jest-zdrowe-po-50/pdf-pages/page-3.png",
+        "sha256": "bee190412ecb392725fb128c126325df3fb9ff5c00cba6c04b9aebe347b7dd60",
+        "bytes": 672655,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/czy-morsowanie-jest-zdrowe-po-50/pdf-pages/page-4.png",
+        "sha256": "5d5353f2e7c85ab0fe0ff31192ec7e6be0e813872999c7acd17f97d4ad692007",
+        "bytes": 868687,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 56,
+          "width": 1064,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/czy-morsowanie-jest-zdrowe-po-50/pdf-pages/page-5.png",
+        "sha256": "e532aab594683c95b477ef0c3d224b69d6c66d14081b42dae33453a2befe94a2",
+        "bytes": 517694,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 57,
+          "width": 1062,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 6,
+        "file": ".tmp/article-preview/czy-morsowanie-jest-zdrowe-po-50/pdf-pages/page-6.png",
+        "sha256": "1b4152e33f2d7d248e82fa59e519993b5e2bb7b9af4164c0d7e4625166af203d",
+        "bytes": 296497,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 57,
+          "width": 1061,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 7,
+        "file": ".tmp/article-preview/czy-morsowanie-jest-zdrowe-po-50/pdf-pages/page-7.png",
+        "sha256": "7d597acc25f569e9b52d32c3123eb57e1bed174efd7db1a6596c52001ce49ced",
+        "bytes": 405760,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 50,
+          "y": 51,
+          "width": 1067,
+          "height": 1599
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 7396,
+    "review_wait_ms": null
+  },
+  "errors": []
+}
