@@ -1,35 +1,306 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:59:22.959Z",
+  "generated_at": "2026-11-20T07:23:48+01:00",
+  "reviewed_at": null,
   "slug": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni",
-  "html_sha256": "07679146ce0357151ef90c74fac5f29cb726d79e12f8e6f28c9fcc1a7148c6a3",
-  "site_html_sha256": "07679146ce0357151ef90c74fac5f29cb726d79e12f8e6f28c9fcc1a7148c6a3",
-  "pdf_sha256": "db32d6e9e2870b1b1eb190d28ae7a41201ee594657077e588dec37b0ab47c430",
-  "site_pdf_sha256": "db32d6e9e2870b1b1eb190d28ae7a41201ee594657077e588dec37b0ab47c430",
+  "html_sha256": "39e24f1c1211aa78e1d3e1f5faaf690fc99a489d6514eb2e6e27104d1146b51a",
+  "site_html_sha256": "39e24f1c1211aa78e1d3e1f5faaf690fc99a489d6514eb2e6e27104d1146b51a",
+  "pdf_sha256": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83",
+  "site_pdf_sha256": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-20T07:23:48+01:00",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "sha256": "39e24f1c1211aa78e1d3e1f5faaf690fc99a489d6514eb2e6e27104d1146b51a",
+      "bytes": 30694
+    },
+    "html_site": {
+      "file": "_site/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "sha256": "39e24f1c1211aa78e1d3e1f5faaf690fc99a489d6514eb2e6e27104d1146b51a",
+      "bytes": 30694
+    },
+    "pdf_source": {
+      "file": "assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf",
+      "sha256": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83",
+      "bytes": 408864
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf",
+      "sha256": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83",
+      "bytes": 408864
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni/desktop.png",
+      "screenshot_sha256": "bbd9f177a2be598cc84eb703d2c3974a0d5b3a5629457d072623cc38c8332a59",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni/mobile.png",
+      "screenshot_sha256": "17ea4d057d5b64834f124fcf098129526d9c3b93b3597112bb546a7f1dfa99b5",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "JEDZENIE 11 min czytania Post przerywany po 50-tce: efekty, mięśnie i ryzyko leczenia Okno żywieniowe to nie głodówka, lecz przemyślana strategia. Kluczem jest to, co jesz, gdy zegar pozwala na posiłek.",
+      "alt": "Dojrzały mężczyzna przy stole z zegarkiem i zdrowym posiłkiem — post przerywany po 50-tce",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/if-50plus-hero.avif",
+          "sha256": "a39ae4bff22936aea356a6f3b40c02cb6179e389a4ce095c2714f2dd0d94b5f9",
+          "bytes": 28091,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/if-50plus-hero.webp",
+          "sha256": "fb84a63aa89990e40ee56d25452bc7b342bebf7f5c62a5a9b213e174bb8629bd",
+          "bytes": 55942,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/if-50plus-hero.jpg",
+          "sha256": "4d1bbbb7d4e094c6426c12567a3919d41a6f64907ac448abb6df74cc589ded6b",
+          "bytes": 142623,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "2af625bac5ce905ef91e416068c7339953c6438073514131b3ca3151d25264f4"
+    },
+    {
+      "placement": "content:2:co-pokazuja-badania-porownujace-if-ze-zwykla-die",
+      "role": "content",
+      "heading": "Co pokazują badania porównujące IF ze zwykłą dietą?",
+      "context": "Szybka odpowiedź Post przerywany może być sposobem organizacji posiłków, ale w badaniach zwykle nie daje wyraźnie lepszych efektów niż ciągłe ograniczenie energii. Po 50-tce trzeba szczególnie chronić mięśnie, zmieścić odpowiednią ilość białka i nie zmieniać godzin jedzenia samodzielnie przy lekach na cukrzycę. Metoda ma pasować do zdrowia i codzienności. Kluczowe wnioski IF jest harmonogramem jedzenia, a nie odrębnym składnikiem diety. Duża metaanaliza z 2025 roku wykazała głównie niewielkie różnice względem stałego ograniczenia energii. Wąskie okno może utrudniać dostarczenie energii i białka potrzebnych do ochrony mięśni. Leki obniżające glukozę, ciąża, zaburzenia odżywiania i kruchość wymagają szczególnej ostrożności. Co pokazują badania porównujące IF ze zwykłą dietą? Metaanaliza siec",
+      "alt": "Infografika przedstawiająca trzy warianty postu przerywanego: 16:8, 5:2 i ADF",
+      "caption": "Metaanaliza sieciowa BMJ objęła 99 randomizowanych badań i 6582 dorosłych.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-1-20260929.avif",
+          "sha256": "04af32fa90a76709db77c92932c23874499ce7aa3a4b0bbf5800833d486d45a8",
+          "bytes": 77005,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-1-20260929.webp",
+          "sha256": "fc31e35173e6c8a80ab923fd72503184742d8252adfadb66776bf78bbdb19a3b",
+          "bytes": 84004,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-1-20260929.jpg",
+          "sha256": "bcb0d136d3ff800fd282f08ab4c7a77d30a71a667f9c82a0a279b759032b4b8d",
+          "bytes": 154160,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "4dff01f72492c0774bbe28b902645ab06d023d3cd1fe2b2a158f47804f9f193e"
+    },
+    {
+      "placement": "content:3:dlaczego-miesnie-sa-waznym-ograniczeniem-po-50-t",
+      "role": "content",
+      "heading": "Dlaczego mięśnie są ważnym ograniczeniem po 50-tce?",
+      "context": "Szybka odpowiedź Post przerywany może być sposobem organizacji posiłków, ale w badaniach zwykle nie daje wyraźnie lepszych efektów niż ciągłe ograniczenie energii. Po 50-tce trzeba szczególnie chronić mięśnie, zmieścić odpowiednią ilość białka i nie zmieniać godzin jedzenia samodzielnie przy lekach na cukrzycę. Metoda ma pasować do zdrowia i codzienności. Kluczowe wnioski IF jest harmonogramem jedzenia, a nie odrębnym składnikiem diety. Duża metaanaliza z 2025 roku wykazała głównie niewielkie różnice względem stałego ograniczenia energii. Wąskie okno może utrudniać dostarczenie energii i białka potrzebnych do ochrony mięśni. Leki obniżające glukozę, ciąża, zaburzenia odżywiania i kruchość wymagają szczególnej ostrożności. Co pokazują badania porównujące IF ze zwykłą dietą? Metaanaliza siec",
+      "alt": "Porównanie aktywnej masy mięśniowej i anatomii mięśnia — ryzyko sarkopenii po 50-tce",
+      "caption": "W krótkim oknie jedzenia trudniej czasem zmieścić pełne posiłki i rozłożyć białko.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-2-20260929.avif",
+          "sha256": "b75e0ec2cc3a1af343c69f2e6ea4c58ddd5f3da5280e13a6d3ea74bb702ac90a",
+          "bytes": 73619,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-2-20260929.webp",
+          "sha256": "0073a61194995716db103e2136e10d4121d1eb7941c02bbe112499c6fcc9a17c",
+          "bytes": 78236,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-2-20260929.jpg",
+          "sha256": "ae19eb944c965de05fafcf21caca574ba117bf5b023fda9370fab259e2df8c81",
+          "bytes": 134490,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "b43d31926daeaa20f06b286186d11acd7b1349c4d7e6e1afa7e97d83dc431574"
+    },
+    {
+      "placement": "content:4:kto-nie-powinien-eksperymentowac-samodzielnie",
+      "role": "content",
+      "heading": "Kto nie powinien eksperymentować samodzielnie?",
+      "context": "Szybka odpowiedź Post przerywany może być sposobem organizacji posiłków, ale w badaniach zwykle nie daje wyraźnie lepszych efektów niż ciągłe ograniczenie energii. Po 50-tce trzeba szczególnie chronić mięśnie, zmieścić odpowiednią ilość białka i nie zmieniać godzin jedzenia samodzielnie przy lekach na cukrzycę. Metoda ma pasować do zdrowia i codzienności. Kluczowe wnioski IF jest harmonogramem jedzenia, a nie odrębnym składnikiem diety. Duża metaanaliza z 2025 roku wykazała głównie niewielkie różnice względem stałego ograniczenia energii. Wąskie okno może utrudniać dostarczenie energii i białka potrzebnych do ochrony mięśni. Leki obniżające glukozę, ciąża, zaburzenia odżywiania i kruchość wymagają szczególnej ostrożności. Co pokazują badania porównujące IF ze zwykłą dietą? Metaanaliza siec",
+      "alt": "Infografika: bezwzględne przeciwwskazania i sytuacje wymagające konsultacji przy poście przerywanym",
+      "caption": "Insulina i część leków przeciwcukrzycowych może wywołać hipoglikemię, gdy zmieniają się godziny i ilość posiłków.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-3-20260929.avif",
+          "sha256": "c388a5d49c88f60751a2feb4915723446f5d6dcba4f13024673675c670e4deed",
+          "bytes": 94693,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-3-20260929.webp",
+          "sha256": "14492ebc792d6a8440275605591ba6bdf744af0cc8d70f449658eaf56ecfc4f6",
+          "bytes": 94030,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-3-20260929.jpg",
+          "sha256": "2d179045734b90f0c70299cbf0049c451af045cffb9b9eb7578f2860a807bcd4",
+          "bytes": 186511,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "25775364f8cfe36f52a5a90846e8ead829786c5665aa842a4e12155fd2a38321"
+    },
+    {
+      "placement": "content:5:jak-przetestowac-lagodniejszy-wariant",
+      "role": "content",
+      "heading": "Jak przetestować łagodniejszy wariant?",
+      "context": "Szybka odpowiedź Post przerywany może być sposobem organizacji posiłków, ale w badaniach zwykle nie daje wyraźnie lepszych efektów niż ciągłe ograniczenie energii. Po 50-tce trzeba szczególnie chronić mięśnie, zmieścić odpowiednią ilość białka i nie zmieniać godzin jedzenia samodzielnie przy lekach na cukrzycę. Metoda ma pasować do zdrowia i codzienności. Kluczowe wnioski IF jest harmonogramem jedzenia, a nie odrębnym składnikiem diety. Duża metaanaliza z 2025 roku wykazała głównie niewielkie różnice względem stałego ograniczenia energii. Wąskie okno może utrudniać dostarczenie energii i białka potrzebnych do ochrony mięśni. Leki obniżające glukozę, ciąża, zaburzenia odżywiania i kruchość wymagają szczególnej ostrożności. Co pokazują badania porównujące IF ze zwykłą dietą? Metaanaliza siec",
+      "alt": "Trzy posiłki bogate w białko rozłożone w oknie żywieniowym 8 godzin — plan TRE 16:8",
+      "caption": "Zacznij od regularnej przerwy nocnej, na przykład 12 godzin, bez automatycznego przechodzenia do jednego posiłku dziennie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-4-20260929.avif",
+          "sha256": "73091ee4a8526570d0a81c3589669f312f5c374bf61bd2e91c5cb11d36fe0e3e",
+          "bytes": 152479,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-4-20260929.webp",
+          "sha256": "aded6ff29bbb107d361c06cfff802fbba25e4dd50c8dd4e4c9f6e7050508ad97",
+          "bytes": 149750,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-4-20260929.jpg",
+          "sha256": "6e0c746bb818c4fa450d6422f4cac5384d8d25a443e686b64e2ee78a99a260b9",
+          "bytes": 214959,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "d796dd946ef9064bb82a1436051e7e28af44edf1a3f36bfccddd1088bc280178"
+    }
+  ],
   "pdf": {
     "pages": 4,
     "text_coverage": 1,
-    "rendered_pages": 4
+    "rendered_pages": 4,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni/pdf-pages/page-1.png",
+        "sha256": "9997445653276915cb7f713fcc70ab78e829e4fd71608acadaebbc35f06520f9",
+        "bytes": 571452,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 63,
+          "y": 59,
+          "width": 1062,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni/pdf-pages/page-2.png",
+        "sha256": "e5adfdd8789fc36d41d65021255f48c70b87ff10239590b3da568d0c5851f27d",
+        "bytes": 766455,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 56,
+          "width": 1063,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni/pdf-pages/page-3.png",
+        "sha256": "96508b8a969c4753178fe51e9b46a882bbf0930123efee90a888e1e97b2dc838",
+        "bytes": 812968,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni/pdf-pages/page-4.png",
+        "sha256": "8061634c29c9bff8d1fbedf7d9ea75d13dcd14c52b9a949e9534b52fdcb800f8",
+        "bytes": 193087,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1048,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4357,
+    "review_wait_ms": null
   },
   "errors": []
 }

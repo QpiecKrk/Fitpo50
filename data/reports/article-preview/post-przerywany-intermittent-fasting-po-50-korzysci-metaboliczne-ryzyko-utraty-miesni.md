@@ -1,6 +1,8 @@
 # FitPo50 — staging HTML i PDF
 
 - Status: **PREVIEW_READY**
+- Technical: **TECHNICAL_PASS**
+- Visual: **NOT_REQUIRED**
 - Slug: post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni
 - Render HTML: desktop 1440 px + mobile 390 px
 - Tabele semantyczne: 1

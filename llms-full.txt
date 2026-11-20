@@ -2,7 +2,7 @@
 
 source: https://fitpo50.pl/
 language: pl-PL
-generated_at: 2026-11-15T08:30:00.000Z
+generated_at: 2026-11-20T06:23:34.000Z
 articles_count: 120
 
 ## Otyłość sarkopeniczna: mięśnie, tłuszcz i diagnoza
@@ -410,7 +410,7 @@ Najczęściej: za duża intensywność na start, brak planu, za mało siły i za
 
 ---
 
-## Dieta po 50-tce: zasady, które da się utrzymać
+## Odchudzanie po 50: dieta, białko i realny plan
 URL: https://fitpo50.pl/dieta-po-50.html
 Opis: Dieta po 50-tce bez cudownego jadłospisu: białko, warzywa, błonnik i energia dopasowane do celu. Zobacz talerz, porcje i sygnały do konsultacji dziś.
 
@@ -2554,7 +2554,7 @@ Nie. W unijnej tabeli obejmuje cukry naturalne i dodane łącznie. Listę skład
 
 ---
 
-## Wino po treningu: mięśnie, sen i regeneracja po 50
+## Alkohol po treningu po 50: mięśnie, sen i regeneracja
 URL: https://fitpo50.pl/wino-i-miesnie-po-50.html
 Opis: Wino po treningu może wpływać na mięśnie, sen i regenerację. Oddzielamy skutki dużych dawek od jednej lampki i pokazujemy praktyczny test nawyku.
 
@@ -2891,7 +2891,7 @@ Porównaj podobne produkty na 100 g lub 100 ml, sprawdź pierwsze składniki, al
 
 ---
 
-## Post przerywany po 50-tce: efekty i ryzyko
+## Post przerywany 14/10 po 50: efekty, mięśnie i ryzyko
 URL: https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html
 Opis: Post przerywany po 50-tce może ułatwiać ograniczenie energii, lecz nie ma wyraźnej przewagi nad stałym deficytem. Sprawdź białko, leki i mięśnie.
 

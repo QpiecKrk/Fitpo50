@@ -1,35 +1,353 @@
 {
-  "version": 1,
+  "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-09-30T12:54:14.759Z",
+  "generated_at": "2026-11-20T07:23:55+01:00",
+  "reviewed_at": null,
   "slug": "dieta-po-50",
-  "html_sha256": "bff8cba4de536402e4ab1f8b1f0ca96842bf513e3f9dffdaf169a1786d14dff4",
-  "site_html_sha256": "bff8cba4de536402e4ab1f8b1f0ca96842bf513e3f9dffdaf169a1786d14dff4",
-  "pdf_sha256": "762ec7a93949563011f08b3010a76df6757b13f376e3495972ed5fb89f46c9b4",
-  "site_pdf_sha256": "762ec7a93949563011f08b3010a76df6757b13f376e3495972ed5fb89f46c9b4",
+  "html_sha256": "0f3f0c3705c6bda576d24e3673a13a99c4337d92502190a93c6af5a90154061f",
+  "site_html_sha256": "0f3f0c3705c6bda576d24e3673a13a99c4337d92502190a93c6af5a90154061f",
+  "pdf_sha256": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae",
+  "site_pdf_sha256": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae",
+  "technical_review": {
+    "status": "TECHNICAL_PASS",
+    "completed_at": "2026-11-20T07:23:55+01:00",
+    "errors": []
+  },
   "html": {
-    "desktop": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
-    "mobile": {
-      "bodyOverflow": false,
-      "overflow": [],
-      "tinyText": [],
-      "brokenImages": [],
-      "badDeclaredRatios": [],
-      "fontStatus": "loaded"
-    },
     "semantic_tables": 1
   },
+  "artifacts": {
+    "html_source": {
+      "file": "dieta-po-50.html",
+      "sha256": "0f3f0c3705c6bda576d24e3673a13a99c4337d92502190a93c6af5a90154061f",
+      "bytes": 29073
+    },
+    "html_site": {
+      "file": "_site/dieta-po-50.html",
+      "sha256": "0f3f0c3705c6bda576d24e3673a13a99c4337d92502190a93c6af5a90154061f",
+      "bytes": 29073
+    },
+    "pdf_source": {
+      "file": "assets/pdf/dieta-po-50.pdf",
+      "sha256": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae",
+      "bytes": 583606
+    },
+    "pdf_site": {
+      "file": "_site/assets/pdf/dieta-po-50.pdf",
+      "sha256": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae",
+      "bytes": 583606
+    }
+  },
+  "views": {
+    "desktop": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot_file": ".tmp/article-preview/dieta-po-50/desktop.png",
+      "screenshot_sha256": "1ac483da0c8ee4821a89da786f3762b41c59b1a187b8ceff70bd8ed3fe550afe",
+      "errors": []
+    },
+    "mobile": {
+      "technical_status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot_file": ".tmp/article-preview/dieta-po-50/mobile.png",
+      "screenshot_sha256": "0ed09d8dc2a06f19eb988f443310cbde5b48297f38ee883153be5694e4f6ace0",
+      "errors": []
+    }
+  },
+  "images": [
+    {
+      "placement": "hero",
+      "role": "hero",
+      "heading": "",
+      "context": "JEDZENIE 8 min czytania Dieta po 50-tce: jak jeść dla mięśni, serca oraz sytości? DIETA TO PROJEKT. NAWYK TO TWOJE ŻYCIE.",
+      "alt": "Kawałek ciasta i miara krawiecka na stole - symbol walki przyjemności z kontrolą",
+      "caption": "",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-hero.avif",
+          "sha256": "326bb0cf1d80cb94bcefabee066c3c36b8bd03c362619292907cae5acd8b59c8",
+          "bytes": 75092,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/dieta-hero.webp",
+          "sha256": "c142d72fa89d03e4dde2ab8eff18c41d90c8cc5395d85e09e410f746a5702401",
+          "bytes": 161454,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/dieta-hero.jpg",
+          "sha256": "376a50f6a6f2b1e8df0534597f43fb8b83a53accc4a9e4e80c9977c35cc30eee",
+          "bytes": 384913,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "63338b7e6fe75ce0fcd8c4b0fc3c0de0961b8f136998c70a793a584bc24bd213"
+    },
+    {
+      "placement": "content:2:czy-po-50-tce-metabolizm-nagle-zwalnia",
+      "role": "content",
+      "heading": "Czy po 50-tce metabolizm nagle zwalnia?",
+      "context": "Szybka odpowiedź Dobra dieta po 50-tce nie ma jednej nazwy. Powinna pokrywać zapotrzebowanie na energię i składniki, dostarczać warzyw, owoców, produktów z błonnikiem oraz źródła białka w głównych posiłkach. WHO wskazuje co najmniej 400 g warzyw i owoców oraz 25 g naturalnie występującego błonnika dziennie dla dorosłych, jeśli stan zdrowia na to pozwala. Kluczowe wnioski Wiek nie wyłącza metabolizmu; zmianę masy nadal determinuje bilans energii, choć potrzeby i aktywność mogą się zmieniać. Regularne źródła białka wspierają mięśnie, zwłaszcza razem z treningiem oporowym. Warzywa, owoce, strączki i pełne ziarna pomagają osiągnąć błonnik oraz zwiększyć sytość. Choroba nerek, niezamierzony spadek masy i problemy z połykaniem wymagają indywidualnego planu. Czy po 50-tce metabolizm nagle zwalnia",
+      "alt": "Kobieta po pięćdziesiątce przygotowuje świeży posiłek w domowej kuchni",
+      "caption": "Nie ma jednego dnia, w którym organizm przestaje prawidłowo zużywać energię.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-1-20260929.avif",
+          "sha256": "82d74b9ba986cd12b731d7da842a4b91bca390fd08ecdeb52ebdd28faa7da699",
+          "bytes": 139507,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-1-20260929.webp",
+          "sha256": "f62db1cb442f90941c75a1ffaa898d2e9eb01eac5cfd693a36feecc874726904",
+          "bytes": 157656,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-1-20260929.jpg",
+          "sha256": "6017ab15b0cd96ccea463087f7b99c7237c0590ed75d35e1fb41ffab45ccf3e5",
+          "bytes": 289768,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "ba2f95304a1f79c0b27b8359797f8dd0adacf750bda3a1027ec459826614f4c8"
+    },
+    {
+      "placement": "content:3:ile-bialka-potrzebuje-osoba-po-50-tce",
+      "role": "content",
+      "heading": "Ile białka potrzebuje osoba po 50-tce?",
+      "context": "Szybka odpowiedź Dobra dieta po 50-tce nie ma jednej nazwy. Powinna pokrywać zapotrzebowanie na energię i składniki, dostarczać warzyw, owoców, produktów z błonnikiem oraz źródła białka w głównych posiłkach. WHO wskazuje co najmniej 400 g warzyw i owoców oraz 25 g naturalnie występującego błonnika dziennie dla dorosłych, jeśli stan zdrowia na to pozwala. Kluczowe wnioski Wiek nie wyłącza metabolizmu; zmianę masy nadal determinuje bilans energii, choć potrzeby i aktywność mogą się zmieniać. Regularne źródła białka wspierają mięśnie, zwłaszcza razem z treningiem oporowym. Warzywa, owoce, strączki i pełne ziarna pomagają osiągnąć błonnik oraz zwiększyć sytość. Choroba nerek, niezamierzony spadek masy i problemy z połykaniem wymagają indywidualnego planu. Czy po 50-tce metabolizm nagle zwalnia",
+      "alt": "Różnorodne źródła białka dla osób po pięćdziesiątce",
+      "caption": "Stanowisko grupy ekspertów ESPEN proponuje zdrowym starszym osobom zwykle 1,0–1,2 g białka na kilogram masy ciała dziennie, a w chorobie często więcej po indywidualnej ocenie.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-2-20260929.avif",
+          "sha256": "b45f38379459ee25259716d20e3a1e78a5ce25e2f73c0b2fbb36e054f691ad0a",
+          "bytes": 207164,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-2-20260929.webp",
+          "sha256": "a3e738d2f92b7c40c09e77c27044017c5a5fa0d7b5f3c402a549ec511218aad4",
+          "bytes": 228882,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-2-20260929.jpg",
+          "sha256": "7b4208e454e68841f023ac1300ced783c17785c783cf350cb7a4511cb7b58f90",
+          "bytes": 376665,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "1e3cd0c8152442ace86ce52a69565206b912646fdef1755bc938c37a450e76a7"
+    },
+    {
+      "placement": "content:4:jak-zbudowac-sycacy-talerz-bez-wazenia-wszystkie",
+      "role": "content",
+      "heading": "Jak zbudować sycący talerz bez ważenia wszystkiego?",
+      "context": "Szybka odpowiedź Dobra dieta po 50-tce nie ma jednej nazwy. Powinna pokrywać zapotrzebowanie na energię i składniki, dostarczać warzyw, owoców, produktów z błonnikiem oraz źródła białka w głównych posiłkach. WHO wskazuje co najmniej 400 g warzyw i owoców oraz 25 g naturalnie występującego błonnika dziennie dla dorosłych, jeśli stan zdrowia na to pozwala. Kluczowe wnioski Wiek nie wyłącza metabolizmu; zmianę masy nadal determinuje bilans energii, choć potrzeby i aktywność mogą się zmieniać. Regularne źródła białka wspierają mięśnie, zwłaszcza razem z treningiem oporowym. Warzywa, owoce, strączki i pełne ziarna pomagają osiągnąć błonnik oraz zwiększyć sytość. Choroba nerek, niezamierzony spadek masy i problemy z połykaniem wymagają indywidualnego planu. Czy po 50-tce metabolizm nagle zwalnia",
+      "alt": "Zbilansowany talerz z warzywami ziemniakami i porcją białka",
+      "caption": "Zacznij od warzyw lub owoców, dodaj wyraźne źródło białka, produkt skrobiowy dopasowany do aktywności i niewielką porcję tłuszczu.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-3-20260929.avif",
+          "sha256": "4749d2b9dad7ae5509e0996c2b6c6995ad7e04159ec142977828391f51c415c3",
+          "bytes": 191332,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-3-20260929.webp",
+          "sha256": "fcaf789f32575a35bd6fb9abe549906a0cc51a1ce6521c1cec9570218be8a873",
+          "bytes": 218964,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-3-20260929.jpg",
+          "sha256": "ecb888b88ee6abb228df4af7eb6cca12a447ae8f690ade8c472f25a30d515467",
+          "bytes": 362418,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "209ede2795ed72e8fd9ce3131caa34c29539888efd149908d18e3fe566b2bf75"
+    },
+    {
+      "placement": "content:5:czy-trzeba-rezygnowac-z-pieczywa-ziemniakow-i-ko",
+      "role": "content",
+      "heading": "Czy trzeba rezygnować z pieczywa, ziemniaków i kolacji?",
+      "context": "Szybka odpowiedź Dobra dieta po 50-tce nie ma jednej nazwy. Powinna pokrywać zapotrzebowanie na energię i składniki, dostarczać warzyw, owoców, produktów z błonnikiem oraz źródła białka w głównych posiłkach. WHO wskazuje co najmniej 400 g warzyw i owoców oraz 25 g naturalnie występującego błonnika dziennie dla dorosłych, jeśli stan zdrowia na to pozwala. Kluczowe wnioski Wiek nie wyłącza metabolizmu; zmianę masy nadal determinuje bilans energii, choć potrzeby i aktywność mogą się zmieniać. Regularne źródła białka wspierają mięśnie, zwłaszcza razem z treningiem oporowym. Warzywa, owoce, strączki i pełne ziarna pomagają osiągnąć błonnik oraz zwiększyć sytość. Choroba nerek, niezamierzony spadek masy i problemy z połykaniem wymagają indywidualnego planu. Czy po 50-tce metabolizm nagle zwalnia",
+      "alt": "Kobieta po pięćdziesiątce je zbilansowaną kolację z pieczywem i ziemniakami",
+      "caption": "Nie. Redukcja masy nie wymaga wykluczenia pieczywa ani ziemniaków, a godzina kolacji sama nie rozstrzyga o wyniku.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-4-20260929.avif",
+          "sha256": "95c829f5a293c848d60c90dbb7a9cc26263d7cfeecb7182b08fc5989192c63f0",
+          "bytes": 180200,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-4-20260929.webp",
+          "sha256": "8e34d3358d09ad1a2d6641d4b97ed935268ed9391418e848f6aead90cdd9c021",
+          "bytes": 198768,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-4-20260929.jpg",
+          "sha256": "78e58473e1c300d4fa1891ddabfa67deef16f8620079f4405da724c5225d1c75",
+          "bytes": 334096,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "5e3c50e998f9688b1446d73f93bdddf72be91e5d2ebbc37f406cf67cab7dc86f"
+    },
+    {
+      "placement": "content:6:kiedy-plan-zywienia-powinien-prowadzic-specjalis",
+      "role": "content",
+      "heading": "Kiedy plan żywienia powinien prowadzić specjalista?",
+      "context": "Szybka odpowiedź Dobra dieta po 50-tce nie ma jednej nazwy. Powinna pokrywać zapotrzebowanie na energię i składniki, dostarczać warzyw, owoców, produktów z błonnikiem oraz źródła białka w głównych posiłkach. WHO wskazuje co najmniej 400 g warzyw i owoców oraz 25 g naturalnie występującego błonnika dziennie dla dorosłych, jeśli stan zdrowia na to pozwala. Kluczowe wnioski Wiek nie wyłącza metabolizmu; zmianę masy nadal determinuje bilans energii, choć potrzeby i aktywność mogą się zmieniać. Regularne źródła białka wspierają mięśnie, zwłaszcza razem z treningiem oporowym. Warzywa, owoce, strączki i pełne ziarna pomagają osiągnąć błonnik oraz zwiększyć sytość. Choroba nerek, niezamierzony spadek masy i problemy z połykaniem wymagają indywidualnego planu. Czy po 50-tce metabolizm nagle zwalnia",
+      "alt": "Dietetyczka omawia indywidualny plan żywienia z parą po pięćdziesiątce",
+      "caption": "Niezamierzony spadek masy, trudności z gryzieniem lub połykaniem, uporczywa biegunka, krew w stolcu i objawy niedożywienia wymagają diagnostyki.",
+      "technical_status": "PASS",
+      "variants": {
+        "avif": {
+          "file": "assets/dieta-po-50-section-5-20260929.avif",
+          "sha256": "79b335db6038ec018700e42f7de280e69a927b6e6352ea2a0b4283f566b9a3fc",
+          "bytes": 156455,
+          "status": "PASS"
+        },
+        "webp": {
+          "file": "assets/dieta-po-50-section-5-20260929.webp",
+          "sha256": "f82e313b7791015313dcce08a85c2485d292fcda7c099989d2aff20caeffc64b",
+          "bytes": 167422,
+          "status": "PASS"
+        },
+        "jpg": {
+          "file": "assets/dieta-po-50-section-5-20260929.jpg",
+          "sha256": "f7a3b133f217f3a8019883bc5d11b7403e959b22e9664f888a0cfb65f04e4a28",
+          "bytes": 313720,
+          "status": "PASS"
+        }
+      },
+      "errors": [],
+      "inventory_sha256": "72fff91803638904451139c16c5a4333cbe505d147960f2cf76c283abcd1cb2c"
+    }
+  ],
   "pdf": {
     "pages": 5,
     "text_coverage": 1,
-    "rendered_pages": 5
+    "rendered_pages": 5,
+    "page_reviews": [
+      {
+        "page": 1,
+        "file": ".tmp/article-preview/dieta-po-50/pdf-pages/page-1.png",
+        "sha256": "16df0453bfde3ae304c780f86d1fe7b420a13bac5dc650dda3d457442523f058",
+        "bytes": 681556,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 62,
+          "y": 59,
+          "width": 1064,
+          "height": 1591
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 2,
+        "file": ".tmp/article-preview/dieta-po-50/pdf-pages/page-2.png",
+        "sha256": "9a4b13131155666a404e69c82c30371106d55ec1d437e6afd3810a7f30d0f2f8",
+        "bytes": 1043101,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 59,
+          "y": 56,
+          "width": 1052,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 3,
+        "file": ".tmp/article-preview/dieta-po-50/pdf-pages/page-3.png",
+        "sha256": "7d4bfee2520015cdf8bc2c7e43f0676435f72744b86cdc94e56e3ebb5da33182",
+        "bytes": 1096940,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 60,
+          "y": 56,
+          "width": 1065,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 4,
+        "file": ".tmp/article-preview/dieta-po-50/pdf-pages/page-4.png",
+        "sha256": "9a4ec01488612c5194684f0cba279c7be83476f07655a7afc615e76c38891152",
+        "bytes": 555841,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 56,
+          "y": 56,
+          "width": 1078,
+          "height": 1594
+        },
+        "technical_status": "PASS",
+        "errors": []
+      },
+      {
+        "page": 5,
+        "file": ".tmp/article-preview/dieta-po-50/pdf-pages/page-5.png",
+        "sha256": "aa9f4c9fbdba5d0b44363b340ff01580894428bac76c938c83727ad0f7618f17",
+        "bytes": 117046,
+        "width": 1191,
+        "height": 1684,
+        "content_bounds": {
+          "x": 61,
+          "y": 57,
+          "width": 1059,
+          "height": 1593
+        },
+        "technical_status": "PASS",
+        "errors": []
+      }
+    ]
+  },
+  "visual_review": {
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
+    "errors": []
+  },
+  "timing": {
+    "technical_ms": 4787,
+    "review_wait_ms": null
   },
   "errors": []
 }

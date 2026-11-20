@@ -93,6 +93,30 @@ function articleHtml(dateModified = '2026-08-01T08:00:00+02:00') {
   return `<html><head><meta property="article:modified_time" content="${dateModified}"><link rel="canonical" href="https://fitpo50.pl/a.html"><script type="application/ld+json">{"@type":"BlogPosting","dateModified":"${dateModified}"}</script></head><body><article class="article-content"><p>Stary konkretny akapit.</p></article></body></html>`;
 }
 
+test('patch SEO synchronizes the visible byline update date with dateModified', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'seo-byline-'));
+  const original = articleHtml().replace('</p></article>', '</p><div class="article-byline"><p>Redakcja FitPo50</p><p>Opublikowano: 01.08.2026</p><p>Aktualizacja: 01.08.2026</p></div></article>');
+  fs.writeFileSync(path.join(root, 'a.html'), original);
+  const manifest = {
+    version: 1,
+    status: 'AWAITING_USER_APPROVAL',
+    source_hashes: { 'a.html': sha256(Buffer.from(original)) },
+    items: [{
+      id: 'BOOST 1',
+      file: 'a.html',
+      operations: [{
+        type: 'replace_exact',
+        before: '<p>Stary konkretny akapit.</p>',
+        after: '<p>Nowy konkretny akapit z istniejącą podstawą.</p>',
+        reason: 'Dopasowanie tytułu do istniejącej intencji GSC.',
+        basis: [{ type: 'GSC_QUERY', value: 'konkretna fraza: 80 wyświetleń' }, { type: 'SOURCE', value: 'https://example.org/research' }],
+      }],
+    }],
+  };
+  const patched = buildPatchedFiles(manifest, manifest.items, root, '2026-11-20T12:00:00+01:00');
+  assert.match(patched.contents.get('a.html'), /<p>Aktualizacja: 20\.11\.2026<\/p>/);
+});
+
 function validManifest(root) {
   const original = articleHtml();
   fs.writeFileSync(path.join(root, 'a.html'), original);

@@ -1,16 +1,16 @@
 {
   "version": 3,
   "status": "PREVIEW_READY",
-  "generated_at": "2026-10-17T10:41:22.418Z",
-  "reviewed_at": "2026-10-17T10:46:41.937Z",
+  "generated_at": "2026-11-20T07:23:42+01:00",
+  "reviewed_at": null,
   "slug": "wino-i-miesnie-po-50",
-  "html_sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
-  "site_html_sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
-  "pdf_sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164",
-  "site_pdf_sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164",
+  "html_sha256": "c9a61e88ab2842bce7e18028f4c669fd632d7cbed5236da02dff03e381dd945f",
+  "site_html_sha256": "c9a61e88ab2842bce7e18028f4c669fd632d7cbed5236da02dff03e381dd945f",
+  "pdf_sha256": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284",
+  "site_pdf_sha256": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284",
   "technical_review": {
     "status": "TECHNICAL_PASS",
-    "completed_at": "2026-10-17T10:41:22.418Z",
+    "completed_at": "2026-11-20T07:23:42+01:00",
     "errors": []
   },
   "html": {
@@ -19,23 +19,23 @@
   "artifacts": {
     "html_source": {
       "file": "wino-i-miesnie-po-50.html",
-      "sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
-      "bytes": 35303
+      "sha256": "c9a61e88ab2842bce7e18028f4c669fd632d7cbed5236da02dff03e381dd945f",
+      "bytes": 34986
     },
     "html_site": {
       "file": "_site/wino-i-miesnie-po-50.html",
-      "sha256": "57a08738d37e6c7ebb6f6faa9a59c6fcd62a52068bcf2e180cff17a3263f0a3f",
-      "bytes": 35303
+      "sha256": "c9a61e88ab2842bce7e18028f4c669fd632d7cbed5236da02dff03e381dd945f",
+      "bytes": 34986
     },
     "pdf_source": {
       "file": "assets/pdf/wino-i-miesnie-po-50.pdf",
-      "sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164",
-      "bytes": 590277
+      "sha256": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284",
+      "bytes": 555488
     },
     "pdf_site": {
       "file": "_site/assets/pdf/wino-i-miesnie-po-50.pdf",
-      "sha256": "b2e54080491209497c4254b99f9b53d89cbfcb5535300075c9514101fe2bf164",
-      "bytes": 590277
+      "sha256": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284",
+      "bytes": 555488
     }
   },
   "views": {
@@ -46,7 +46,7 @@
         "height": 1000
       },
       "screenshot_file": ".tmp/article-preview/wino-i-miesnie-po-50/desktop.png",
-      "screenshot_sha256": "328bad0231bd3b031d98aa3705ac190e8f130ba8ab22ff6034bdbae6ce90dde0",
+      "screenshot_sha256": "409c48e9d0fb5e58f0c8f4f80db51055ff4b8cebd6dc04978bc7e02b2b0635c8",
       "errors": []
     },
     "mobile": {
@@ -56,7 +56,7 @@
         "height": 844
       },
       "screenshot_file": ".tmp/article-preview/wino-i-miesnie-po-50/mobile.png",
-      "screenshot_sha256": "fea00f69934564356bbae8941f70f0af78ce203d5b5bddc6a3b7bbfbbeb52ba0",
+      "screenshot_sha256": "38968f307bad0d1e7ba69e1499372da1b794cabebb209d8e413a8511715d3a23",
       "errors": []
     }
   },
@@ -65,7 +65,7 @@
       "placement": "hero",
       "role": "hero",
       "heading": "",
-      "context": "JEDZENIE 9 min czytania Aktualizacja: 17.10.2026 Wino po treningu po 50-tce: mięśnie, sen i regeneracja mięśni Pijesz wino w piątek? Oto co to naprawdę robi Twoim mięśniom następnego dnia.",
+      "context": "JEDZENIE 9 min czytania Wino po treningu po 50-tce: mięśnie, sen i regeneracja mięśni Pijesz wino w piątek? Oto co to naprawdę robi Twoim mięśniom następnego dnia.",
       "alt": "Kieliszek czerwonego wina obok napiętego przedramienia — symbol wyboru między przyjemnością a regeneracją mięśni",
       "caption": "",
       "technical_status": "PASS",
@@ -90,7 +90,7 @@
         }
       },
       "errors": [],
-      "inventory_sha256": "bcea123fdef5fbee5933f822708a735c7393e487d191e683d24c7082d59a8958"
+      "inventory_sha256": "dab18166e31f70096f441793851fe3ca1abcb61706ac2cfd48c52c00be72208f"
     },
     {
       "placement": "content:2:jak-miesien-rosnie-i-co-naprawde-mierzy-synteza-",
@@ -318,8 +318,8 @@
       {
         "page": 1,
         "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-1.png",
-        "sha256": "cd6150bbab7368017b988abb2b9534fb5f858be8271b7e5251a41e1841ccf158",
-        "bytes": 496233,
+        "sha256": "5ab9204d3598342927232da3c1d55456e801ba756599fc30e990f21b84b0388b",
+        "bytes": 501699,
         "width": 1191,
         "height": 1684,
         "content_bounds": {
@@ -334,15 +334,15 @@
       {
         "page": 2,
         "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-2.png",
-        "sha256": "577ee3bb133140bfa26e3e64ef36df7556ec94f4601ffc531543b1195f6565ea",
-        "bytes": 737026,
+        "sha256": "dcda7e432fb527cddfeb7213b57e0fe12cb1da9937565cb733cdbfca372d83ca",
+        "bytes": 739541,
         "width": 1191,
         "height": 1684,
         "content_bounds": {
-          "x": 62,
-          "y": 58,
-          "width": 1044,
-          "height": 1592
+          "x": 59,
+          "y": 57,
+          "width": 1067,
+          "height": 1593
         },
         "technical_status": "PASS",
         "errors": []
@@ -350,15 +350,15 @@
       {
         "page": 3,
         "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-3.png",
-        "sha256": "352f4306035facf1de6d697134b976a7343dc5a3c6a906ab6683da456853ed9d",
-        "bytes": 699065,
+        "sha256": "b0ed6477392b0a251fa0dcffaf965d323b466a82c5a00610bdcbf965e242c0e7",
+        "bytes": 704849,
         "width": 1191,
         "height": 1684,
         "content_bounds": {
-          "x": 61,
-          "y": 58,
-          "width": 1066,
-          "height": 1592
+          "x": 62,
+          "y": 57,
+          "width": 1065,
+          "height": 1593
         },
         "technical_status": "PASS",
         "errors": []
@@ -366,15 +366,15 @@
       {
         "page": 4,
         "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-4.png",
-        "sha256": "e2ff3a3355d336dd099ef59d42942fe878c8712f7394024dc9d42f36abc49c9b",
-        "bytes": 478300,
+        "sha256": "7a22d34c89c453ed9dba767c214056eb2dba186c7821f7d9e6ea118e83140a56",
+        "bytes": 478209,
         "width": 1191,
         "height": 1684,
         "content_bounds": {
-          "x": 62,
-          "y": 58,
-          "width": 1063,
-          "height": 1592
+          "x": 59,
+          "y": 57,
+          "width": 1068,
+          "height": 1593
         },
         "technical_status": "PASS",
         "errors": []
@@ -382,14 +382,14 @@
       {
         "page": 5,
         "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-5.png",
-        "sha256": "7d16a9da80ac862c4f404b591a61011fe490b85131dcecffe3baabb46823d1c4",
-        "bytes": 768837,
+        "sha256": "f94cfae3170fca57bef60a35b99dbae65e598c4e612ca60713a9022a010d5243",
+        "bytes": 769170,
         "width": 1191,
         "height": 1684,
         "content_bounds": {
-          "x": 62,
+          "x": 60,
           "y": 56,
-          "width": 1064,
+          "width": 1046,
           "height": 1594
         },
         "technical_status": "PASS",
@@ -398,15 +398,15 @@
       {
         "page": 6,
         "file": ".tmp/article-preview/wino-i-miesnie-po-50/pdf-pages/page-6.png",
-        "sha256": "6a23ff6d59454eb08c8aa70f887b5d2bd0796c4f0b30dc1bf1aba079ddf12d22",
-        "bytes": 264898,
+        "sha256": "2b5b30fb1adb921ddeb82c12c19ea01f5704215b66b50b4bdc4395b9e119a140",
+        "bytes": 263310,
         "width": 1191,
         "height": 1684,
         "content_bounds": {
           "x": 61,
-          "y": 52,
-          "width": 1047,
-          "height": 1598
+          "y": 51,
+          "width": 1063,
+          "height": 1599
         },
         "technical_status": "PASS",
         "errors": []
@@ -414,193 +414,18 @@
     ]
   },
   "visual_review": {
-    "status": "VISUAL_REVIEW_VERIFIED",
-    "reviewed_by": "Codex",
-    "reviewed_at": "2026-10-17T10:46:41.937Z",
-    "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu.",
-    "views": {
-      "desktop": {
-        "status": "VERIFIED",
-        "artifact_sha256": "328bad0231bd3b031d98aa3705ac190e8f130ba8ab22ff6034bdbae6ce90dde0",
-        "note": "Pełny render desktop obejrzany: układ jest spójny, bez ucięć, nakładania elementów ani poziomego przepełnienia."
-      },
-      "mobile": {
-        "status": "VERIFIED",
-        "artifact_sha256": "fea00f69934564356bbae8941f70f0af78ce203d5b5bddc6a3b7bbfbbeb52ba0",
-        "note": "Pełny render mobile obejrzany: tekst, tabele, obrazy i nawigacja mieszczą się w widoku bez ucięć i nakładania."
-      }
-    },
-    "images": [
-      {
-        "placement": "hero",
-        "inventory_sha256": "bcea123fdef5fbee5933f822708a735c7393e487d191e683d24c7082d59a8958",
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "embedded_text": {
-          "kind": "WATERMARK_ONLY"
-        },
-        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
-        "reviewed_by": "Codex",
-        "reviewed_at": "2026-10-17T10:46:41.937Z",
-        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
-      },
-      {
-        "placement": "content:2:jak-miesien-rosnie-i-co-naprawde-mierzy-synteza-",
-        "inventory_sha256": "06db2a7d835e258d981a95ab2ae0446a3ec49e41c65030470cb7f3c35b5f8910",
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "embedded_text": {
-          "kind": "WATERMARK_ONLY"
-        },
-        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
-        "reviewed_by": "Codex",
-        "reviewed_at": "2026-10-17T10:46:41.937Z",
-        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
-      },
-      {
-        "placement": "content:3:co-naprawde-pokazuje-badanie-z-dawka-1-5-g-kg",
-        "inventory_sha256": "00de8ed1d63562a1c3861fc64fe5532126ea420de4e09cb2226f367106c39688",
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "embedded_text": {
-          "kind": "CONTENT",
-          "transcription": "Symbol nierówności między kieliszkiem a dużą laboratoryjną porcją alkoholu",
-          "claims_or_numbers_present": true,
-          "matches_article_claims": true,
-          "evidence_urls": [
-            "https://pubmed.ncbi.nlm.nih.gov/24533082/"
-          ]
-        },
-        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
-        "reviewed_by": "Codex",
-        "reviewed_at": "2026-10-17T10:46:41.937Z",
-        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
-      },
-      {
-        "placement": "content:4:czy-alkohol-psuje-sen-nawet-w-mniejszej-dawce",
-        "inventory_sha256": "0aafae268595cda97095a57ed0a877003a82348ec6e74962c6dab4fb5eb29d4e",
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "embedded_text": {
-          "kind": "WATERMARK_ONLY"
-        },
-        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
-        "reviewed_by": "Codex",
-        "reviewed_at": "2026-10-17T10:46:41.937Z",
-        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
-      },
-      {
-        "placement": "content:5:czy-trening-jest-stracony-jesli-nastepnego-dnia-",
-        "inventory_sha256": "deaf06e0fb133b069de6083d85da1223aec6be4b18271eb28a3ecb4f82d69488",
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "embedded_text": {
-          "kind": "NONE"
-        },
-        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
-        "reviewed_by": "Codex",
-        "reviewed_at": "2026-10-17T10:46:41.937Z",
-        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
-      },
-      {
-        "placement": "content:6:jak-ograniczyc-koszt-alkoholu-dla-regeneracji",
-        "inventory_sha256": "148a85a716f6ad3049d50dc77846b88ed7ed2d5e23f0b5ff89a36cd07664b2fe",
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "embedded_text": {
-          "kind": "WATERMARK_ONLY"
-        },
-        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
-        "reviewed_by": "Codex",
-        "reviewed_at": "2026-10-17T10:46:41.937Z",
-        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
-      },
-      {
-        "placement": "content:7:jaki-jest-najprostszy-test-na-wlasnej-skorze",
-        "inventory_sha256": "32b755d4fbd5400c526eaf38461c7f833cb0aebccaab362d80454f33d42f6cfe",
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "embedded_text": {
-          "kind": "NONE"
-        },
-        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
-        "reviewed_by": "Codex",
-        "reviewed_at": "2026-10-17T10:46:41.937Z",
-        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
-      },
-      {
-        "placement": "content:8:kiedy-alkohol-przestaje-byc-tylko-tematem-formy",
-        "inventory_sha256": "1e90b53d4e7b96f75bb081eafb87e00006cd086c5b862554dde05253b8670900",
-        "status": "VERIFIED",
-        "matches_topic": true,
-        "no_misleading_text_or_logo": true,
-        "anatomy_and_equipment_plausible": true,
-        "embedded_text": {
-          "kind": "NONE"
-        },
-        "note": "Obraz obejrzany w pełnym kadrze i w kontekście sekcji; temat, proporcje, anatomia oraz sprzęt są wiarygodne i zgodne z artykułem.",
-        "reviewed_by": "Codex",
-        "reviewed_at": "2026-10-17T10:46:41.937Z",
-        "review_method": "Ręczne obejrzenie pełnych renderów desktop 1440 px i mobile 390 px, wszystkich wariantów obrazów oraz każdej strony PDF; sprawdzenie zgodności treści, anatomii, sprzętu, tekstu i układu."
-      }
-    ],
-    "pdf_pages": [
-      {
-        "page": 1,
-        "status": "VERIFIED",
-        "artifact_sha256": "cd6150bbab7368017b988abb2b9534fb5f858be8271b7e5251a41e1841ccf158",
-        "note": "Strona PDF 1 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
-      },
-      {
-        "page": 2,
-        "status": "VERIFIED",
-        "artifact_sha256": "577ee3bb133140bfa26e3e64ef36df7556ec94f4601ffc531543b1195f6565ea",
-        "note": "Strona PDF 2 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
-      },
-      {
-        "page": 3,
-        "status": "VERIFIED",
-        "artifact_sha256": "352f4306035facf1de6d697134b976a7343dc5a3c6a906ab6683da456853ed9d",
-        "note": "Strona PDF 3 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
-      },
-      {
-        "page": 4,
-        "status": "VERIFIED",
-        "artifact_sha256": "e2ff3a3355d336dd099ef59d42942fe878c8712f7394024dc9d42f36abc49c9b",
-        "note": "Strona PDF 4 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
-      },
-      {
-        "page": 5,
-        "status": "VERIFIED",
-        "artifact_sha256": "7d16a9da80ac862c4f404b591a61011fe490b85131dcecffe3baabb46823d1c4",
-        "note": "Strona PDF 5 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
-      },
-      {
-        "page": 6,
-        "status": "VERIFIED",
-        "artifact_sha256": "6a23ff6d59454eb08c8aa70f887b5d2bd0796c4f0b30dc1bf1aba079ddf12d22",
-        "note": "Strona PDF 6 obejrzana w całości: treść i obrazy są czytelne, bez ucięć, pustych bloków ani błędów składu."
-      }
-    ],
+    "status": "NOT_REQUIRED",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_method": null,
+    "views": {},
+    "images": [],
+    "pdf_pages": [],
     "errors": []
   },
   "timing": {
-    "technical_ms": 6222,
-    "review_wait_ms": 319519
+    "technical_ms": 6568,
+    "review_wait_ms": null
   },
   "errors": []
 }

@@ -224,6 +224,10 @@ function replaceExactlyOnce(html, before, after, label) {
 function updateModified(html, iso, file) {
   let metaCount = 0;
   let schemaCount = 0;
+  let bylineCount = 0;
+  const date = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!date) throw new Error(`${file}: dateModified nie zawiera daty ISO.`);
+  const displayDate = `${date[3]}.${date[2]}.${date[1]}`;
   const next = html
     .replace(/(<meta\s+property="article:modified_time"\s+content=")[^"]*(")/i, (_match, start, end) => {
       metaCount += 1;
@@ -232,8 +236,13 @@ function updateModified(html, iso, file) {
     .replace(/("dateModified"\s*:\s*")[^"]*(")/g, (_match, start, end) => {
       schemaCount += 1;
       return `${start}${iso}${end}`;
+    })
+    .replace(/(<div\b[^>]*\bclass=["'][^"']*\barticle-byline\b[^"']*["'][^>]*>[\s\S]*?<p\b[^>]*>\s*Aktualizacja:\s*)[^<]*(<\/p>[\s\S]*?<\/div>)/i, (_match, start, end) => {
+      bylineCount += 1;
+      return `${start}${displayDate}${end}`;
     });
   if (metaCount !== 1 || schemaCount < 1) throw new Error(`${file}: nie udało się jednoznacznie zaktualizować article:modified_time i dateModified.`);
+  if (bylineCount > 1) throw new Error(`${file}: znaleziono więcej niż jeden podpis autora do aktualizacji.`);
   return next;
 }
 

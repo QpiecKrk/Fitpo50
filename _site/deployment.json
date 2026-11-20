@@ -1,26 +1,123 @@
 {
   "version": 4,
-  "release_id": "06521418-0fd9-45ce-b38d-adbe8575a7be",
-  "prepared_at": "2026-11-15T22:54:54+01:00",
-  "prepared_from_head": "9dd0955a51da870cd3683a01ae9a7eaa8f1d774e",
-  "publication_state_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "public_fingerprint_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "release_id": "971d8c6a-837b-415f-8e6e-531bf8d871d9",
+  "prepared_at": "2026-11-20T07:35:24+01:00",
+  "prepared_from_head": "be82107f0450d5332442d2b472f34e6dcf6b087d",
+  "publication_state_sha256": "9acc935e35f0f89e4ee21c7a404f9baf83badd9bb261c2cb320020d4afefae34",
+  "public_fingerprint_sha256": "6418fbc658062731f1d6e449dfdc63cbab0f21617d7597ce3d3854f448caafd3",
   "release_files": [
+    "_site/assets/data/search-index.json",
+    "_site/assets/pdf/dieta-po-50.pdf",
+    "_site/assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf",
+    "_site/assets/pdf/wino-i-miesnie-po-50.pdf",
     "_site/deployment.json",
+    "_site/dieta-po-50.html",
+    "_site/llms-full.txt",
+    "_site/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+    "_site/sitemap.xml",
+    "_site/wino-i-miesnie-po-50.html",
+    "assets/data/search-index.json",
+    "assets/pdf/dieta-po-50.pdf",
+    "assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf",
+    "assets/pdf/wino-i-miesnie-po-50.pdf",
+    "data/reports/article-preview/dieta-po-50.json",
+    "data/reports/article-preview/dieta-po-50.md",
+    "data/reports/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.json",
+    "data/reports/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.md",
+    "data/reports/article-preview/wino-i-miesnie-po-50.json",
+    "data/reports/article-preview/wino-i-miesnie-po-50.md",
+    "data/reports/popraw-seo-deployments.json",
     "deployment.json",
-    "scripts/import-article.js",
-    "tests/article-technical-flow.test.js",
-    "tests/import-article-render.test.js"
+    "dieta-po-50.html",
+    "llms-full.txt",
+    "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+    "scripts/lib/change-scope.js",
+    "scripts/lib/popraw-seo-approved-patches.js",
+    "sitemap.xml",
+    "tests/popraw-seo-automation.test.js",
+    "wino-i-miesnie-po-50.html"
   ],
   "release_file_hashes": {
-    "scripts/import-article.js": "5f45afd3f91c6cb8602d470274deda20b5b918c31148135e18c92f8a34b8c899",
-    "tests/article-technical-flow.test.js": "821749e665c3f1d46643d8aa7ad0f2b50f926bc50d43a77b60588174e9099aa9",
-    "tests/import-article-render.test.js": "b49f1aaaea805f4aebebf89e687b0c8af49d8962cbc3465d6c92331c6c7251dd"
+    "_site/assets/data/search-index.json": "9d8874f9038bc9c88e4fcaef86139824d5b14887adfd298b377942c80476277e",
+    "_site/assets/pdf/dieta-po-50.pdf": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae",
+    "_site/assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83",
+    "_site/assets/pdf/wino-i-miesnie-po-50.pdf": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284",
+    "_site/dieta-po-50.html": "0f3f0c3705c6bda576d24e3673a13a99c4337d92502190a93c6af5a90154061f",
+    "_site/llms-full.txt": "077610bb996b2c96822868fb46acd5e50a21a371a10ef3c413ffe4558422e7ed",
+    "_site/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html": "39e24f1c1211aa78e1d3e1f5faaf690fc99a489d6514eb2e6e27104d1146b51a",
+    "_site/sitemap.xml": "a4ba2c23395b17a3adddcca0b5c0134b7d844d3d01e8a9fe2c981059da1de13d",
+    "_site/wino-i-miesnie-po-50.html": "c9a61e88ab2842bce7e18028f4c669fd632d7cbed5236da02dff03e381dd945f",
+    "assets/data/search-index.json": "9d8874f9038bc9c88e4fcaef86139824d5b14887adfd298b377942c80476277e",
+    "assets/pdf/dieta-po-50.pdf": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae",
+    "assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83",
+    "assets/pdf/wino-i-miesnie-po-50.pdf": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284",
+    "data/reports/article-preview/dieta-po-50.json": "68f8ee638b2a8bf8f7942ba90492553b40bd38a9e1240808986d88885c8ed808",
+    "data/reports/article-preview/dieta-po-50.md": "022a427ebc6dae9db34e7ca1dadf90ad8ec09d404fa325dce4542a61ce0f0cfc",
+    "data/reports/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.json": "1cd596ff54c726ca513ab419f3069405f21cb3f2cd0927cd82f5b1352d26dbbb",
+    "data/reports/article-preview/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.md": "eabf473eecae6aea6f2e8582a3bb5e2199d7301a9fc7bae6d5907cdaf482ebd0",
+    "data/reports/article-preview/wino-i-miesnie-po-50.json": "9654769f90abb22bdc9431bedc010c1ba2c768ed6157567b9db261ac43016134",
+    "data/reports/article-preview/wino-i-miesnie-po-50.md": "8fddf6567aa7117af8ac6f5cce21c9bcf0e3ebe7f560a828c0c235d6d4371723",
+    "data/reports/popraw-seo-deployments.json": "151f5508bbbe4e7f6bb17dc8aa6d7a2fb5db531c03dcddf8d45f02d0ecaf6e11",
+    "dieta-po-50.html": "0f3f0c3705c6bda576d24e3673a13a99c4337d92502190a93c6af5a90154061f",
+    "llms-full.txt": "077610bb996b2c96822868fb46acd5e50a21a371a10ef3c413ffe4558422e7ed",
+    "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html": "39e24f1c1211aa78e1d3e1f5faaf690fc99a489d6514eb2e6e27104d1146b51a",
+    "scripts/lib/change-scope.js": "c7edf120163f84dccf76e8491e4db713db9b9a941c11ced044ee85b05e14b76a",
+    "scripts/lib/popraw-seo-approved-patches.js": "0d0f54502b50538b6eb73a96edbdfa7ad4e999e4e0373250669034be9d921e86",
+    "sitemap.xml": "a4ba2c23395b17a3adddcca0b5c0134b7d844d3d01e8a9fe2c981059da1de13d",
+    "tests/popraw-seo-automation.test.js": "22238844801bbfc9ca2dff1154485cbecc59cf2317b2a59685cf0af03d12b436",
+    "wino-i-miesnie-po-50.html": "c9a61e88ab2842bce7e18028f4c669fd632d7cbed5236da02dff03e381dd945f"
   },
   "change_scope": [
+    "articles",
     "pipeline"
   ],
-  "verification_targets": [],
+  "verification_targets": [
+    {
+      "path": "assets/data/search-index.json",
+      "mode": "sha256",
+      "sha256": "9d8874f9038bc9c88e4fcaef86139824d5b14887adfd298b377942c80476277e"
+    },
+    {
+      "path": "assets/pdf/dieta-po-50.pdf",
+      "mode": "sha256",
+      "sha256": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae"
+    },
+    {
+      "path": "assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf",
+      "mode": "sha256",
+      "sha256": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83"
+    },
+    {
+      "path": "assets/pdf/wino-i-miesnie-po-50.pdf",
+      "mode": "sha256",
+      "sha256": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284"
+    },
+    {
+      "path": "dieta-po-50.html",
+      "mode": "sha256",
+      "sha256": "0f3f0c3705c6bda576d24e3673a13a99c4337d92502190a93c6af5a90154061f"
+    },
+    {
+      "path": "llms-full.txt",
+      "mode": "sha256",
+      "sha256": "077610bb996b2c96822868fb46acd5e50a21a371a10ef3c413ffe4558422e7ed"
+    },
+    {
+      "path": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "mode": "sha256",
+      "sha256": "39e24f1c1211aa78e1d3e1f5faaf690fc99a489d6514eb2e6e27104d1146b51a"
+    },
+    {
+      "path": "sitemap.xml",
+      "mode": "sha256",
+      "sha256": "a4ba2c23395b17a3adddcca0b5c0134b7d844d3d01e8a9fe2c981059da1de13d"
+    },
+    {
+      "path": "wino-i-miesnie-po-50.html",
+      "mode": "sha256",
+      "sha256": "c9a61e88ab2842bce7e18028f4c669fd632d7cbed5236da02dff03e381dd945f"
+    }
+  ],
   "news": {
     "fallback": {
       "path": "assets/data/news-fallback.json",
@@ -101,5 +198,410 @@
       }
     ]
   },
-  "articles": []
+  "articles": [
+    {
+      "file": "dieta-po-50.html",
+      "slug": "dieta-po-50",
+      "url": "https://fitpo50.pl/dieta-po-50.html",
+      "date_modified": "2026-11-20T07:23:34+01:00",
+      "html_sha256": "0f3f0c3705c6bda576d24e3673a13a99c4337d92502190a93c6af5a90154061f",
+      "pdf_path": "assets/pdf/dieta-po-50.pdf",
+      "pdf_sha256": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae",
+      "images": [
+        {
+          "path": "assets/dieta-hero.avif",
+          "sha256": "326bb0cf1d80cb94bcefabee066c3c36b8bd03c362619292907cae5acd8b59c8"
+        },
+        {
+          "path": "assets/dieta-hero.jpg",
+          "sha256": "376a50f6a6f2b1e8df0534597f43fb8b83a53accc4a9e4e80c9977c35cc30eee"
+        },
+        {
+          "path": "assets/dieta-hero.webp",
+          "sha256": "c142d72fa89d03e4dde2ab8eff18c41d90c8cc5395d85e09e410f746a5702401"
+        },
+        {
+          "path": "assets/dieta-po-50-section-1-20260929.avif",
+          "sha256": "82d74b9ba986cd12b731d7da842a4b91bca390fd08ecdeb52ebdd28faa7da699"
+        },
+        {
+          "path": "assets/dieta-po-50-section-1-20260929.jpg",
+          "sha256": "6017ab15b0cd96ccea463087f7b99c7237c0590ed75d35e1fb41ffab45ccf3e5"
+        },
+        {
+          "path": "assets/dieta-po-50-section-1-20260929.webp",
+          "sha256": "f62db1cb442f90941c75a1ffaa898d2e9eb01eac5cfd693a36feecc874726904"
+        },
+        {
+          "path": "assets/dieta-po-50-section-2-20260929.avif",
+          "sha256": "b45f38379459ee25259716d20e3a1e78a5ce25e2f73c0b2fbb36e054f691ad0a"
+        },
+        {
+          "path": "assets/dieta-po-50-section-2-20260929.jpg",
+          "sha256": "7b4208e454e68841f023ac1300ced783c17785c783cf350cb7a4511cb7b58f90"
+        },
+        {
+          "path": "assets/dieta-po-50-section-2-20260929.webp",
+          "sha256": "a3e738d2f92b7c40c09e77c27044017c5a5fa0d7b5f3c402a549ec511218aad4"
+        },
+        {
+          "path": "assets/dieta-po-50-section-3-20260929.avif",
+          "sha256": "4749d2b9dad7ae5509e0996c2b6c6995ad7e04159ec142977828391f51c415c3"
+        },
+        {
+          "path": "assets/dieta-po-50-section-3-20260929.jpg",
+          "sha256": "ecb888b88ee6abb228df4af7eb6cca12a447ae8f690ade8c472f25a30d515467"
+        },
+        {
+          "path": "assets/dieta-po-50-section-3-20260929.webp",
+          "sha256": "fcaf789f32575a35bd6fb9abe549906a0cc51a1ce6521c1cec9570218be8a873"
+        },
+        {
+          "path": "assets/dieta-po-50-section-4-20260929.avif",
+          "sha256": "95c829f5a293c848d60c90dbb7a9cc26263d7cfeecb7182b08fc5989192c63f0"
+        },
+        {
+          "path": "assets/dieta-po-50-section-4-20260929.jpg",
+          "sha256": "78e58473e1c300d4fa1891ddabfa67deef16f8620079f4405da724c5225d1c75"
+        },
+        {
+          "path": "assets/dieta-po-50-section-4-20260929.webp",
+          "sha256": "8e34d3358d09ad1a2d6641d4b97ed935268ed9391418e848f6aead90cdd9c021"
+        },
+        {
+          "path": "assets/dieta-po-50-section-5-20260929.avif",
+          "sha256": "79b335db6038ec018700e42f7de280e69a927b6e6352ea2a0b4283f566b9a3fc"
+        },
+        {
+          "path": "assets/dieta-po-50-section-5-20260929.jpg",
+          "sha256": "f7a3b133f217f3a8019883bc5d11b7403e959b22e9664f888a0cfb65f04e4a28"
+        },
+        {
+          "path": "assets/dieta-po-50-section-5-20260929.webp",
+          "sha256": "f82e313b7791015313dcce08a85c2485d292fcda7c099989d2aff20caeffc64b"
+        },
+        {
+          "path": "assets/jedz-wiecej-hero.avif",
+          "sha256": "f55c218311790d25f22caead7372a5204e1fa1c52d521a2f8ca8f4ed01704ea7"
+        },
+        {
+          "path": "assets/jedz-wiecej-hero.jpg",
+          "sha256": "cf07423579873db6d9d84bad9b81a11beb06542bb20d12cc6d6f86e3a0f35016"
+        },
+        {
+          "path": "assets/jedz-wiecej-hero.webp",
+          "sha256": "29a865c58239c40c8159d3c1692a5b9cafe0f43bc06c28d39f986a3866721a4b"
+        },
+        {
+          "path": "assets/kawa_preworkout_hero.avif",
+          "sha256": "194024349fbc947d7b95fc9bc31938288c706151fd415d33fd619899743870b9"
+        },
+        {
+          "path": "assets/kawa_preworkout_hero.webp",
+          "sha256": "312bb81f67302f1c25fee59f9e11d74d0b7381b889039b21cd702ceb3dad4404"
+        },
+        {
+          "path": "assets/keto-cholesterol-hero.avif",
+          "sha256": "a8a2cb11e728ee529f06cc63fc6652dc9ea5ca7f8a46f4c458fba5f9d0702594"
+        },
+        {
+          "path": "assets/keto-cholesterol-hero.jpg",
+          "sha256": "5ef8fbce17e4778d7370cb2f4c4978d656ac3e8df5851aa9dc041909777d2cf2"
+        },
+        {
+          "path": "assets/keto-cholesterol-hero.webp",
+          "sha256": "90a882b123e66401b5b6c12e0e1414f9dc800638070a108618bc0516f1fe9edc"
+        },
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        }
+      ],
+      "listing_paths": [
+        "porady.html",
+        "jedzenie.html",
+        "assets/data/search-index.json"
+      ]
+    },
+    {
+      "file": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "slug": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni",
+      "url": "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "date_modified": "2026-11-20T07:23:34+01:00",
+      "html_sha256": "39e24f1c1211aa78e1d3e1f5faaf690fc99a489d6514eb2e6e27104d1146b51a",
+      "pdf_path": "assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf",
+      "pdf_sha256": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83",
+      "images": [
+        {
+          "path": "assets/bialko-po-50-related.avif",
+          "sha256": "219cbb9f7c9a37e7b11e1e2cf17c65491ae694037ca3bb3a99b107578af1695a"
+        },
+        {
+          "path": "assets/bialko-po-50-related.jpg",
+          "sha256": "782c23f2b4cf4544519b1655b2e5a53894010143d71e60066493a5df17d81a4d"
+        },
+        {
+          "path": "assets/bialko-po-50-related.webp",
+          "sha256": "f06b31209f935f0e5beedd5a71ccf2c2210258ebd89c78486947abe233dd8b89"
+        },
+        {
+          "path": "assets/if-50plus-hero.avif",
+          "sha256": "a39ae4bff22936aea356a6f3b40c02cb6179e389a4ce095c2714f2dd0d94b5f9"
+        },
+        {
+          "path": "assets/if-50plus-hero.jpg",
+          "sha256": "4d1bbbb7d4e094c6426c12567a3919d41a6f64907ac448abb6df74cc589ded6b"
+        },
+        {
+          "path": "assets/if-50plus-hero.webp",
+          "sha256": "fb84a63aa89990e40ee56d25452bc7b342bebf7f5c62a5a9b213e174bb8629bd"
+        },
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        },
+        {
+          "path": "assets/metabolizm-50-related.avif",
+          "sha256": "909bb9cbbd7c599811142366e2dc13c01d5f91a733755395f7b28db28d27dcab"
+        },
+        {
+          "path": "assets/metabolizm-50-related.jpg",
+          "sha256": "201e1f85c1fee1f76f597d3a25fe7440569b5fe193f47ac5897668a7b2adb939"
+        },
+        {
+          "path": "assets/metabolizm-50-related.webp",
+          "sha256": "c96ce6c7d44b36f4da19a4ec9f173720b467cb475175dbc11bf2711935cdf6a8"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-1-20260929.avif",
+          "sha256": "04af32fa90a76709db77c92932c23874499ce7aa3a4b0bbf5800833d486d45a8"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-1-20260929.jpg",
+          "sha256": "bcb0d136d3ff800fd282f08ab4c7a77d30a71a667f9c82a0a279b759032b4b8d"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-1-20260929.webp",
+          "sha256": "fc31e35173e6c8a80ab923fd72503184742d8252adfadb66776bf78bbdb19a3b"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-2-20260929.avif",
+          "sha256": "b75e0ec2cc3a1af343c69f2e6ea4c58ddd5f3da5280e13a6d3ea74bb702ac90a"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-2-20260929.jpg",
+          "sha256": "ae19eb944c965de05fafcf21caca574ba117bf5b023fda9370fab259e2df8c81"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-2-20260929.webp",
+          "sha256": "0073a61194995716db103e2136e10d4121d1eb7941c02bbe112499c6fcc9a17c"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-3-20260929.avif",
+          "sha256": "c388a5d49c88f60751a2feb4915723446f5d6dcba4f13024673675c670e4deed"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-3-20260929.jpg",
+          "sha256": "2d179045734b90f0c70299cbf0049c451af045cffb9b9eb7578f2860a807bcd4"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-3-20260929.webp",
+          "sha256": "14492ebc792d6a8440275605591ba6bdf744af0cc8d70f449658eaf56ecfc4f6"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-4-20260929.avif",
+          "sha256": "73091ee4a8526570d0a81c3589669f312f5c374bf61bd2e91c5cb11d36fe0e3e"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-4-20260929.jpg",
+          "sha256": "6e0c746bb818c4fa450d6422f4cac5384d8d25a443e686b64e2ee78a99a260b9"
+        },
+        {
+          "path": "assets/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni-section-4-20260929.webp",
+          "sha256": "aded6ff29bbb107d361c06cfff802fbba25e4dd50c8dd4e4c9f6e7050508ad97"
+        },
+        {
+          "path": "assets/sarcopenia-trening-related.avif",
+          "sha256": "84b36879272d03e7798b2ee4c12cf5a841fdfcd9b56eb14c52ca4589f0d117af"
+        },
+        {
+          "path": "assets/sarcopenia-trening-related.jpg",
+          "sha256": "3a2013b066e05d6d98efc12ea7ccea9e75ac803df55084960225d331017af30a"
+        },
+        {
+          "path": "assets/sarcopenia-trening-related.webp",
+          "sha256": "804f00662455b24fc43e455bd4b7139180943f39dc5119aa442ca46939f5ae30"
+        }
+      ],
+      "listing_paths": [
+        "porady.html",
+        "jedzenie.html",
+        "assets/data/search-index.json"
+      ]
+    },
+    {
+      "file": "wino-i-miesnie-po-50.html",
+      "slug": "wino-i-miesnie-po-50",
+      "url": "https://fitpo50.pl/wino-i-miesnie-po-50.html",
+      "date_modified": "2026-11-20T07:23:34+01:00",
+      "html_sha256": "c9a61e88ab2842bce7e18028f4c669fd632d7cbed5236da02dff03e381dd945f",
+      "pdf_path": "assets/pdf/wino-i-miesnie-po-50.pdf",
+      "pdf_sha256": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284",
+      "images": [
+        {
+          "path": "assets/clock_muscle_wine_night.avif",
+          "sha256": "58986848921d1eb993afcaf90c5030eae333149abdc6adddb05586a9097ff138"
+        },
+        {
+          "path": "assets/clock_muscle_wine_night.jpg",
+          "sha256": "cd8b52ae005e07e8afc4c896effe7a202d1b2b2b5905e39311bf368ee0276faa"
+        },
+        {
+          "path": "assets/clock_muscle_wine_night.webp",
+          "sha256": "8acc2fcf2675fa1cef259d7d366a6f9252cccc645da375c2c222732909f3b64d"
+        },
+        {
+          "path": "assets/dieta-hero.avif",
+          "sha256": "326bb0cf1d80cb94bcefabee066c3c36b8bd03c362619292907cae5acd8b59c8"
+        },
+        {
+          "path": "assets/dieta-hero.jpg",
+          "sha256": "376a50f6a6f2b1e8df0534597f43fb8b83a53accc4a9e4e80c9977c35cc30eee"
+        },
+        {
+          "path": "assets/dieta-hero.webp",
+          "sha256": "c142d72fa89d03e4dde2ab8eff18c41d90c8cc5395d85e09e410f746a5702401"
+        },
+        {
+          "path": "assets/jedz-wiecej-hero.avif",
+          "sha256": "f55c218311790d25f22caead7372a5204e1fa1c52d521a2f8ca8f4ed01704ea7"
+        },
+        {
+          "path": "assets/jedz-wiecej-hero.jpg",
+          "sha256": "cf07423579873db6d9d84bad9b81a11beb06542bb20d12cc6d6f86e3a0f35016"
+        },
+        {
+          "path": "assets/jedz-wiecej-hero.webp",
+          "sha256": "29a865c58239c40c8159d3c1692a5b9cafe0f43bc06c28d39f986a3866721a4b"
+        },
+        {
+          "path": "assets/keto-cholesterol-hero.avif",
+          "sha256": "a8a2cb11e728ee529f06cc63fc6652dc9ea5ca7f8a46f4c458fba5f9d0702594"
+        },
+        {
+          "path": "assets/keto-cholesterol-hero.jpg",
+          "sha256": "5ef8fbce17e4778d7370cb2f4c4978d656ac3e8df5851aa9dc041909777d2cf2"
+        },
+        {
+          "path": "assets/keto-cholesterol-hero.webp",
+          "sha256": "90a882b123e66401b5b6c12e0e1414f9dc800638070a108618bc0516f1fe9edc"
+        },
+        {
+          "path": "assets/logo-fitpo50.png",
+          "sha256": "f7d2017595c8e5cc1d9a7a28dc38b388dc2d4c3038fb08e572db8855e623214d"
+        },
+        {
+          "path": "assets/logo.jpg",
+          "sha256": "7236c20e37e07cc287e8ac9b7e15b24f0062b6d632488b90186943d3bc4da9e7"
+        },
+        {
+          "path": "assets/man_friday_wine_gym_saturday.avif",
+          "sha256": "48b5be681cbe0d3272d3c9772f1907a1ce41f02ec21755c34a785f9d927ae504"
+        },
+        {
+          "path": "assets/man_friday_wine_gym_saturday.jpg",
+          "sha256": "8b732921c596dab58ea64a307762fba02fb5753376bc9c53f63a28453391f225"
+        },
+        {
+          "path": "assets/man_friday_wine_gym_saturday.webp",
+          "sha256": "9290e105ffe626b1e40e56715e24ed4cecd2d9d98eac79103b4730bb3bea90c6"
+        },
+        {
+          "path": "assets/weekend_recovery_morning.avif",
+          "sha256": "5af74a60f7668474db51f981975c15ece9a797b50fa3cd7750a2d544ce218141"
+        },
+        {
+          "path": "assets/weekend_recovery_morning.jpg",
+          "sha256": "34062a50031bb0a7254aecdc75467288758008a24a729e44a6863debe1ccea62"
+        },
+        {
+          "path": "assets/weekend_recovery_morning.webp",
+          "sha256": "09de1f71b753332b7f13481d22251fb887516a6f981ff88611cf75748a9afcaa"
+        },
+        {
+          "path": "assets/wino-miesnie-dziennik-test-2026.avif",
+          "sha256": "a704057b03063622c6ea94d6bbd209654837929dfc35715aabc8667d3db4c176"
+        },
+        {
+          "path": "assets/wino-miesnie-dziennik-test-2026.jpg",
+          "sha256": "9a28dcf056f692ef308776bcbcd69875f7071310a083015871f880073531dfee"
+        },
+        {
+          "path": "assets/wino-miesnie-dziennik-test-2026.webp",
+          "sha256": "7e6f577a4212b8fa8e4c1ad20c8ece6c28d15cae8e1f8974d802bcbb464df382"
+        },
+        {
+          "path": "assets/wino-miesnie-parr-dose-2026.avif",
+          "sha256": "1822743a81248c7af6b29c81856a801997d8b4a317ea8130c7cde1c8f56a23a0"
+        },
+        {
+          "path": "assets/wino-miesnie-parr-dose-2026.jpg",
+          "sha256": "cb1b56b8c6c8a6a3d289c0186a9dfa7bde00603323f6e7e76fc0802cded95797"
+        },
+        {
+          "path": "assets/wino-miesnie-parr-dose-2026.webp",
+          "sha256": "170e8c0c77356bb07427cfc23b000115c80f681f827cfcf8f30a2b663d9417e4"
+        },
+        {
+          "path": "assets/wino-miesnie-rozmowa-lekarz-2026.avif",
+          "sha256": "3224abea7d317868e67444759d3328899cae56ee237b28ebb04fdd750eb52ffb"
+        },
+        {
+          "path": "assets/wino-miesnie-rozmowa-lekarz-2026.jpg",
+          "sha256": "d7dfdcc3460bbc3ec474e39abee4a8a72e95a90c6de49a1aaac0abe0f1ef99cb"
+        },
+        {
+          "path": "assets/wino-miesnie-rozmowa-lekarz-2026.webp",
+          "sha256": "b974344c07b46cf184defb47183f639fc8b573ae0c1894e84833485ac756ae81"
+        },
+        {
+          "path": "assets/wino_miesnie_hero.avif",
+          "sha256": "6b23095a45c3c28da068afa727c988afbff0e9086967cc259ad6a2f63ed28dc5"
+        },
+        {
+          "path": "assets/wino_miesnie_hero.jpg",
+          "sha256": "372083b96774032a11e19e5ed6dce570f09e2a2e669982bfbeaedda5bd48b4e8"
+        },
+        {
+          "path": "assets/wino_miesnie_hero.webp",
+          "sha256": "aacbfee1187870cd49e3a0f1a981e6fdab90dd848e91e5e4f9309a919e4bbf6f"
+        },
+        {
+          "path": "assets/woman_wine_weights_choice.avif",
+          "sha256": "d728eb2daf6ff30e39fee8226ae384d5cfb74a1225c082a2ecdc4e1ceb2fdeb1"
+        },
+        {
+          "path": "assets/woman_wine_weights_choice.jpg",
+          "sha256": "35a4eed5a6227e8a80324e03311390f2123980dc936492ed6abb154c624903f1"
+        },
+        {
+          "path": "assets/woman_wine_weights_choice.webp",
+          "sha256": "6b28f5dba039a3b68ed91cb2fb61e0b306489a53c47bf8ff9e1f79a404b09549"
+        }
+      ],
+      "listing_paths": [
+        "porady.html",
+        "jedzenie.html",
+        "assets/data/search-index.json"
+      ]
+    }
+  ]
 }

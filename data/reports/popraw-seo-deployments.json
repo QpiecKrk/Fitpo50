@@ -1,38 +1,66 @@
 {
   "version": 2,
-  "generated_at": "2026-11-08T06:55:47+01:00",
+  "generated_at": "2026-11-20T07:23:34+01:00",
   "status": "COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT",
-  "source_report_generated_at": "2026-11-07T15:23:08+01:00",
+  "source_report_generated_at": "2026-11-19T09:35:21+01:00",
   "approved_ids": [
-    "BOOST 2"
+    "ROKUJE 4",
+    "NAPRAWA 7",
+    "NAPRAWA 6"
   ],
   "targets": [
     {
-      "id": "BOOST 2",
-      "file": "miesnie-dna-miednicy-trening-core-po-50.html",
-      "url": "https://fitpo50.pl/miesnie-dna-miednicy-trening-core-po-50.html",
-      "target_changed": false,
-      "date_modified": "2026-11-08T06:55:47+01:00",
-      "content_needles": [],
-      "expected_html_sha256": "a25e39ba0c0989d5d7cef207ffa383c0bbc5228458630ec305ce0bf7250388b8",
-      "pdf_url": "https://fitpo50.pl/assets/pdf/miesnie-dna-miednicy-trening-core-po-50.pdf",
-      "source_pages_for_recrawl": [
-        "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html"
+      "id": "ROKUJE 4",
+      "file": "wino-i-miesnie-po-50.html",
+      "url": "https://fitpo50.pl/wino-i-miesnie-po-50.html",
+      "target_changed": true,
+      "date_modified": "2026-11-20T07:23:34+01:00",
+      "content_needles": [
+        "<title>Alkohol po treningu po 50: mięśnie, sen i regeneracja | FitPo50</title>",
+        "<meta property=\"og:title\" content=\"Alkohol po treningu po 50: mięśnie, sen i regeneracja\"/>",
+        "<meta name=\"twitter:title\" content=\"Alkohol po treningu po 50: mięśnie, sen i regeneracja\"/>"
       ],
-      "source_pages": [
-        {
-          "file": "trening-silowy-eliksir-mlodosci-po-50.html",
-          "url": "https://fitpo50.pl/trening-silowy-eliksir-mlodosci-po-50.html",
-          "date_modified": "2026-11-08T06:55:47+01:00",
-          "expected_html_sha256": "1f3676fb840a9fc424a9d6836f726dac4f558701c351030ea396e6abc984efab",
-          "pdf_url": "https://fitpo50.pl/assets/pdf/trening-silowy-eliksir-mlodosci-po-50.pdf",
-          "content_needles": [
-            "<p>W tym samym przeglądzie wyniki dotyczące masy mięśniowej były mniej jednoznaczne niż wyniki siły i sprawności. To ważna korekta marketingowego hasła „odbudujesz mięśnie w kilka miesięcy”. Efekt zależy od programu, wyjściowego stanu, podaży energii i białka oraz regularności.</p><p>Zobacz także: <a href=\"miesnie-dna-miednicy-trening-core-po-50.html\">Mięśnie dna miednicy po 50-tce: ćwiczenia i odczyt wyniku EMG</a>.</p>"
-          ],
-          "expected_pdf_sha256": "adcb93363f435a920237d3fc07c5b1c2f08a3d9002210a9ac7380abe5cce9d7b"
-        }
+      "expected_html_sha256": "3ff4fff3d49aa22868ec14fbb0fbd77a73b6ab62ad1f03bb72e100ece03499f9",
+      "pdf_url": "https://fitpo50.pl/assets/pdf/wino-i-miesnie-po-50.pdf",
+      "source_pages_for_recrawl": [],
+      "source_pages": [],
+      "expected_pdf_sha256": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284"
+    },
+    {
+      "id": "NAPRAWA 7",
+      "file": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "url": "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+      "target_changed": true,
+      "date_modified": "2026-11-20T07:23:34+01:00",
+      "content_needles": [
+        "<title>Post przerywany 14/10 po 50: efekty, mięśnie i ryzyko | FitPo50</title>",
+        "<meta property=\"og:title\" content=\"Post przerywany 14/10 po 50: efekty, mięśnie i ryzyko\">",
+        "<meta name=\"twitter:title\" content=\"Post przerywany 14/10 po 50: efekty, mięśnie i ryzyko\">",
+        "<meta property=\"og:image\" content=\"https://fitpo50.pl/assets/if-50plus-hero.jpg\">",
+        "<meta name=\"twitter:image\" content=\"https://fitpo50.pl/assets/if-50plus-hero.jpg\">"
       ],
-      "expected_pdf_sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2"
+      "expected_html_sha256": "646349bcb818fd59ce1395280d6b855752ae6ae1a02684a13141ca522561ce5f",
+      "pdf_url": "https://fitpo50.pl/assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf",
+      "source_pages_for_recrawl": [],
+      "source_pages": [],
+      "expected_pdf_sha256": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83"
+    },
+    {
+      "id": "NAPRAWA 6",
+      "file": "dieta-po-50.html",
+      "url": "https://fitpo50.pl/dieta-po-50.html",
+      "target_changed": true,
+      "date_modified": "2026-11-20T07:23:34+01:00",
+      "content_needles": [
+        "<title>Odchudzanie po 50: dieta, białko i realny plan | FitPo50</title>",
+        "<meta property=\"og:title\" content=\"Odchudzanie po 50: dieta, białko i realny plan\">",
+        "<meta name=\"twitter:title\" content=\"Odchudzanie po 50: dieta, białko i realny plan\">"
+      ],
+      "expected_html_sha256": "a8c747dc8a82bd88f71ce65a8d924019b398c288ef70eb504b6c944577ea2f50",
+      "pdf_url": "https://fitpo50.pl/assets/pdf/dieta-po-50.pdf",
+      "source_pages_for_recrawl": [],
+      "source_pages": [],
+      "expected_pdf_sha256": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae"
     }
   ],
   "deployments": [
@@ -323,6 +351,72 @@
             }
           ],
           "expected_pdf_sha256": "2e5d31e2ac28092df253f87f5c7285767a39c2668d4e5ab64ae9a43dc5d8adf2"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "generated_at": "2026-11-20T07:23:34+01:00",
+      "status": "COMMITTED_LOCALLY_AWAITING_LIVE_DEPLOYMENT",
+      "source_report_generated_at": "2026-11-19T09:35:21+01:00",
+      "approved_ids": [
+        "ROKUJE 4",
+        "NAPRAWA 7",
+        "NAPRAWA 6"
+      ],
+      "targets": [
+        {
+          "id": "ROKUJE 4",
+          "file": "wino-i-miesnie-po-50.html",
+          "url": "https://fitpo50.pl/wino-i-miesnie-po-50.html",
+          "target_changed": true,
+          "date_modified": "2026-11-20T07:23:34+01:00",
+          "content_needles": [
+            "<title>Alkohol po treningu po 50: mięśnie, sen i regeneracja | FitPo50</title>",
+            "<meta property=\"og:title\" content=\"Alkohol po treningu po 50: mięśnie, sen i regeneracja\"/>",
+            "<meta name=\"twitter:title\" content=\"Alkohol po treningu po 50: mięśnie, sen i regeneracja\"/>"
+          ],
+          "expected_html_sha256": "3ff4fff3d49aa22868ec14fbb0fbd77a73b6ab62ad1f03bb72e100ece03499f9",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/wino-i-miesnie-po-50.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "9b3a2db3753099ed59771ea82addb1b2f342a0b8a94bfb3adbce01acdec9a284"
+        },
+        {
+          "id": "NAPRAWA 7",
+          "file": "post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+          "url": "https://fitpo50.pl/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.html",
+          "target_changed": true,
+          "date_modified": "2026-11-20T07:23:34+01:00",
+          "content_needles": [
+            "<title>Post przerywany 14/10 po 50: efekty, mięśnie i ryzyko | FitPo50</title>",
+            "<meta property=\"og:title\" content=\"Post przerywany 14/10 po 50: efekty, mięśnie i ryzyko\">",
+            "<meta name=\"twitter:title\" content=\"Post przerywany 14/10 po 50: efekty, mięśnie i ryzyko\">",
+            "<meta property=\"og:image\" content=\"https://fitpo50.pl/assets/if-50plus-hero.jpg\">",
+            "<meta name=\"twitter:image\" content=\"https://fitpo50.pl/assets/if-50plus-hero.jpg\">"
+          ],
+          "expected_html_sha256": "646349bcb818fd59ce1395280d6b855752ae6ae1a02684a13141ca522561ce5f",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/post-przerywany-intermittent-fasting-po-50-korzysci-metaboliczne-ryzyko-utraty-miesni.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "61f53b5841434382bff2c48565089ecb4f49f481318da6bcb8200129eaf13b83"
+        },
+        {
+          "id": "NAPRAWA 6",
+          "file": "dieta-po-50.html",
+          "url": "https://fitpo50.pl/dieta-po-50.html",
+          "target_changed": true,
+          "date_modified": "2026-11-20T07:23:34+01:00",
+          "content_needles": [
+            "<title>Odchudzanie po 50: dieta, białko i realny plan | FitPo50</title>",
+            "<meta property=\"og:title\" content=\"Odchudzanie po 50: dieta, białko i realny plan\">",
+            "<meta name=\"twitter:title\" content=\"Odchudzanie po 50: dieta, białko i realny plan\">"
+          ],
+          "expected_html_sha256": "a8c747dc8a82bd88f71ce65a8d924019b398c288ef70eb504b6c944577ea2f50",
+          "pdf_url": "https://fitpo50.pl/assets/pdf/dieta-po-50.pdf",
+          "source_pages_for_recrawl": [],
+          "source_pages": [],
+          "expected_pdf_sha256": "f125c1c7866fd805a5266ebdd813796de7e839f37b59205f00bb1012dd4952ae"
         }
       ]
     }
