@@ -41,7 +41,7 @@ const MODULES = [
   { files: ['docs/skills/fitpo50-article-draft/scripts/validate_fitpo50_draft.py'], tests: ['tests/fitpo50-article-draft-skill.test.js'] },
   { files: ['scripts/publish-article.js'], tests: ['tests/publish-article-command.test.js', 'tests/release-scope.test.js', 'tests/publish-resume.test.js'] },
   { files: ['.githooks/pre-push', 'scripts/prepush-main-guard.js', 'scripts/prepush-diff-guard.js', 'scripts/prepush-parallel-checks.js'], tests: ['tests/prepush-main-guard.test.js', 'tests/prepush-concurrency.test.js', 'tests/release-scope.test.js', 'tests/validation-reuse.test.js'] },
-  { files: ['scripts/popraw-seo-apply.js', 'scripts/popraw-seo-live-verify.js', 'scripts/lib/popraw-seo-approved-patches.js', 'scripts/lib/popraw-seo-deployment-registry.js', 'scripts/lib/popraw-seo-live-verifier.js'], tests: ['tests/popraw-seo-automation.test.js', 'tests/popraw-seo-mechanism-2.test.js'] },
+  { files: ['scripts/growth-tool.js', 'scripts/popraw-seo-apply.js', 'scripts/popraw-seo-live-verify.js', 'scripts/lib/popraw-seo-approved-patches.js', 'scripts/lib/popraw-seo-deployment-registry.js', 'scripts/lib/popraw-seo-live-verifier.js'], tests: ['tests/popraw-seo-automation.test.js', 'tests/popraw-seo-mechanism-2.test.js'] },
   { files: ['scripts/news-public-http-check.js'], tests: ['tests/news-public-integrity.test.js', 'tests/news-deploy-sync-gate.test.js', 'tests/validation-reuse.test.js'] },
   { scope: 'news', files: ['scripts/news-integrity-check.js', 'scripts/lib/news-public-integrity.js'], tests: ['tests/news-public-integrity.test.js', 'tests/validation-reuse.test.js'] },
   { scope: 'news', files: ['scripts/news-pull.js'], tests: ['tests/news-pull.test.js'] },

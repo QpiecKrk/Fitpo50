@@ -151,10 +151,15 @@ test('MECHANIZM 2 assigns every article to exactly one of four baskets', () => {
   const priorityMap = [
     article('boost.html', 'CTR_GAP_TOP10', { query: 'boost test', clicks: 0, impressions: 100, ctr: 0, position: 7 }),
     article('rokuje.html', 'POSITION_11_30', { query: 'rokuje test', clicks: 1, impressions: 80, ctr: 1.25, position: 15 }),
-    article('naprawa.html', 'ZERO_VISIBILITY_INDEXED', { clicks: 0, impressions: 0, ctr: 0, position: 0 }),
+    article('naprawa.html', 'ZERO_VISIBILITY_INDEXED', { query: 'naprawa test', clicks: 0, impressions: 0, ctr: 0, position: 0 }),
     { ...article('monitoring.html', 'POSITION_11_30', { query: 'monitoring test', clicks: 2, impressions: 40, ctr: 5, position: 12 }), date_modified: recentDate },
   ];
-  const articleByFile = new Map(priorityMap.map((item) => [item.path, { date_modified: item.date_modified, title: item.path, meta_description: '' }]));
+  const articleByFile = new Map(priorityMap.map((item) => [item.path, {
+    date_modified: item.date_modified,
+    title: item.path,
+    meta_description: '',
+    paragraphs: ['Wstęp bez bezpośredniej odpowiedzi.', `Konkretna odpowiedź na frazę ${item.gsc.query}.`],
+  }]));
   const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: priorityMap });
   const groups = [wave.boost, wave.promising, wave.repair, wave.monitoring];
   const files = groups.flat().map((item) => item.file);
@@ -163,11 +168,48 @@ test('MECHANIZM 2 assigns every article to exactly one of four baskets', () => {
   assert.equal(files.length, 4);
   assert.equal(new Set(files).size, 4);
   assert.deepEqual(wave.coverage_contract.basket_counts, { BOOST: 1, ROKUJE: 1, NAPRAWA: 1, MONITORING: 1 });
-  assert.equal(wave.monitoring[0].execution_status, 'COOLDOWN_MONITORUJ');
+  assert.equal(wave.monitoring[0].execution_status, 'MONITORING');
   assert.equal(wave.rokuje_execution_sequence.gain_size, 3);
   assert.equal(wave.rokuje_execution_sequence.rotation_size, 2);
   assert.equal(wave.rokuje_execution_sequence.approval_gate, 'AWAITING_USER_APPROVAL');
   assert.match(wave.rokuje_execution_sequence.history, /historyczny/);
+});
+
+test('pełna luka trafia do fali, a brak frazy lub nowego tekstu do MONITORING bez patcha', () => {
+  const priorityMap = [
+    article('full-gap.html', 'CTR_GAP_TOP10', { query: 'pełna luka', clicks: 0, impressions: 100, ctr: 0, position: 7 }),
+    article('missing-query.html', 'CTR_GAP_TOP10', { clicks: 0, impressions: 100, ctr: 0, position: 7 }),
+    article('missing-new-text.html', 'POSITION_11_30', { query: 'brak nowego tekstu', clicks: 0, impressions: 80, ctr: 0, position: 15 }),
+  ];
+  const articleByFile = new Map([
+    ['full-gap.html', { title: 'Pełna luka', meta_description: '', paragraphs: ['Wstęp bez odpowiedzi.', 'Pełna luka ma konkretną odpowiedź.'], date_modified: '2026-01-01T08:00:00+01:00' }],
+    ['missing-query.html', { title: 'Brak frazy', meta_description: '', paragraphs: ['Wstęp bez odpowiedzi.', 'Tekst ma konkretną odpowiedź.'], date_modified: '2026-01-01T08:00:00+01:00' }],
+    ['missing-new-text.html', { title: 'Brak nowego tekstu', meta_description: '', paragraphs: ['Brak nowego tekstu jest już odpowiedzią.'], date_modified: '2026-01-01T08:00:00+01:00' }],
+  ]);
+  const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: priorityMap });
+
+  assert.deepEqual(wave.boost.map((item) => item.file), ['full-gap.html']);
+  assert.deepEqual(wave.monitoring.map((item) => item.file).sort(), ['missing-new-text.html', 'missing-query.html']);
+  assert.equal(wave.monitoring.find((item) => item.file === 'missing-query.html').gap.missing, 'GSC_QUERY');
+  assert.equal(wave.monitoring.find((item) => item.file === 'missing-new-text.html').gap.missing, 'NEW_TEXT');
+  assert.ok(wave.monitoring.every((item) => item.ready_for_deploy === false && item.internal_link_suggestions.length === 0));
+});
+
+test('link dobrany tylko przez ogólne słowa frazy GSC trafia do MONITORING', () => {
+  const item = {
+    ...article('target.html', 'CTR_GAP_TOP10', { query: 'jak czytać wyniki emg', clicks: 0, impressions: 100, ctr: 0, position: 7 }),
+    topology: { suggested_sources: [{ from: 'source.html', anchor: 'wyniki', placement: 'Wyniki badania.' }] },
+  };
+  const articleByFile = new Map([
+    ['target.html', { file: 'target.html', title: 'EMG po 50-tce', meta_description: '', paragraphs: ['EMG pomaga ocenić pracę mięśni.'], date_modified: '2026-01-01T08:00:00+01:00' }],
+    ['source.html', { file: 'source.html', title: 'Źródło', meta_description: '', paragraphs: ['Jak czytać wyniki bólu krzyża po treningu — praktyczne wskazówki.'], date_modified: '2026-01-01T08:00:00+01:00' }],
+  ]);
+  const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: [item] });
+
+  assert.equal(wave.boost.length, 0);
+  assert.equal(wave.monitoring.length, 1);
+  assert.equal(wave.monitoring[0].internal_link_suggestions.length, 0);
+  assert.match(wave.monitoring[0].reason, /nie potwierdza frazy GSC/);
 });
 
 test('MECHANIZM 2 ranks ROKUJE deterministically for the 3 plus 2 wave contract', () => {
@@ -176,7 +218,12 @@ test('MECHANIZM 2 ranks ROKUJE deterministically for the 3 plus 2 wave contract'
     'POSITION_11_30',
     { query: `rokuje ${index + 1}`, clicks: 0, impressions: index + 1, ctr: 0, position: 20 },
   ));
-  const articleByFile = new Map(priorityMap.map((item) => [item.path, { date_modified: item.date_modified, title: item.path, meta_description: '' }]));
+  const articleByFile = new Map(priorityMap.map((item) => [item.path, {
+    date_modified: item.date_modified,
+    title: item.path,
+    meta_description: '',
+    paragraphs: ['Wstęp bez bezpośredniej odpowiedzi.', `Konkretna odpowiedź na frazę ${item.gsc.query}.`],
+  }]));
   const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: priorityMap });
 
   assert.equal(wave.promising.length, 26);
@@ -195,7 +242,7 @@ test('prosty raport wybiera GŁÓWNA 5, DRUGA 10 i podaje powód dla pozostałyc
   const articleByFile = new Map(items.map((item) => [item.path, {
     title: `Tytuł ${item.path}`,
     meta_description: `Opis ${item.path}`,
-    paragraphs: [`Odpowiedź dla ${item.keywords.primary} — konkretna informacja dla czytelnika.`],
+    paragraphs: ['Wstęp bez bezpośredniej odpowiedzi.', `Odpowiedź dla ${item.gsc.query} — konkretna informacja dla czytelnika.`],
     date_modified: '2026-01-01T08:00:00+01:00',
   }]));
   const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: items });
@@ -210,7 +257,7 @@ test('prosty raport wybiera GŁÓWNA 5, DRUGA 10 i podaje powód dla pozostałyc
   assert.ok(summary.remaining['NISKI SYGNAŁ'].every((item) => item.reason));
 });
 
-test('prosty raport oznacza kartę bez różnicy BYŁO/BĘDZIE jako już spełnioną', () => {
+test('karta bez różnicy BYŁO/BĘDZIE trafia do MONITORING', () => {
   const file = 'sakady-supresja-sakadyczna-mozg-ukrywa-slepe-chwile.html';
   const item = article(file, 'POSITION_11_30', {
     query: 'sakady',
@@ -227,12 +274,10 @@ test('prosty raport oznacza kartę bez różnicy BYŁO/BĘDZIE jako już spełni
     date_modified: '2026-01-01T08:00:00+01:00',
   }]]);
   const wave = buildSeoApprovalWave([], { action_cards: [] }, articleByFile, 28, { priority_map: [item] });
-  const summary = buildSimpleSeoSummary(wave, articleByFile, { priority_map: [item] });
-  const proposal = summary.main[0].ready_proposal;
-
-  assert.equal(proposal.status, 'ALREADY_SATISFIED');
-  assert.equal(summary.main[0].ready_for_deploy, false);
-  assert.match(proposal.after.first_answer, /Sakady to szybkie ruchy oczu/);
+  assert.equal(wave.promising.length, 0);
+  assert.equal(wave.monitoring.length, 1);
+  assert.equal(wave.monitoring[0].ready_for_deploy, false);
+  assert.match(wave.monitoring[0].reason, /Brak konkretnego nowego tekstu/);
 });
 
 test('prosty raport pozostawia READY_TEXT tylko przy rzeczywistej różnicy akapitu', () => {

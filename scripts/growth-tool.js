@@ -1084,6 +1084,7 @@ function approvalReason(card, kind) {
     return `URL ma ${pageSignal}: ${gsc.impressions} wyświetleń, ${gsc.clicks} kliknięć i pozycję ${gsc.position}. Działanie wynika z diagnozy ${card?.diagnosis || card?.type || 'GSC'}, a brak ujawnionego query nie usuwa strony z kolejki.`;
   }
   if (kind === 'MONITORING') {
+    if (card?.monitoring_reason) return card.monitoring_reason;
     if (isRecentlyTouched(approvalCardKey(card), new Map([[approvalCardKey(card), { date_modified: card?.date_modified }]]), 14)) {
       return `URL jest po świeżej zmianie z ${card?.date_modified || 'nieustaloną datą'}: nie wykonujemy kolejnej edycji przed checkpointem KPI. Obserwujemy wyświetlenia, kliknięcia, CTR i pozycję, a cooldown nie usuwa strony z raportu.`;
     }
@@ -1159,6 +1160,8 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
   const url = cardAbsoluteUrl(card);
   const gsc = approvalGscSnapshot(card);
   const readyProposal = buildReadySeoProposal(card, articleByFile?.get?.(file), links, articleByFile);
+  const gap = evaluateSeoCandidateGap(card, readyProposal);
+  const isMonitoring = kind === 'MONITORING' || !gap.eligible;
   return {
     id: `${kind} ${index}`,
     kind,
@@ -1170,9 +1173,11 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     decision: card?.editorial_decision || '',
     diagnosis: card?.diagnosis || card?.type || '',
     required_action: card?.required_action || null,
-    execution_status: isRecentlyTouched(file, articleByFile, 14)
+    execution_status: isMonitoring
+      ? 'MONITORING'
+      : (isRecentlyTouched(file, articleByFile, 14)
       ? 'COOLDOWN_MONITORUJ'
-      : (proposalReadyStatus(readyProposal?.status) ? 'READY_FOR_APPROVAL' : String(readyProposal?.status || 'NOT_READY')),
+      : 'READY_FOR_APPROVAL'),
     query: card?.keyword_plan?.primary_source === 'ARTICLE_TOPIC_FALLBACK' ? '' : card?.keyword_plan?.primary || '',
     query_source: card?.keyword_plan?.primary_source || 'UNSPECIFIED',
     reason: approvalReason(card, kind),
@@ -1188,7 +1193,8 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     proposed_title: cleanStrategyDraftValue(card?.proposed_title || ''),
     proposed_meta_description: cleanStrategyDraftValue(card?.proposed_meta_description || ''),
     ready_proposal: readyProposal,
-    ready_for_deploy: proposalReadyStatus(readyProposal?.status),
+    ready_for_deploy: !isMonitoring && gap.eligible,
+    gap,
     scores: {
       seo: Number(card?.score?.seo || 0),
       aeo: Number(card?.score?.aeo || 0),
@@ -1197,7 +1203,7 @@ function buildSeoApprovalItem(card, kind, index, articleByFile, sourceWindowDays
     },
     prepare_before_edit: approvalChecklistForCard(card, kind),
     report_tasks: Array.isArray(card?.tasks) ? card.tasks.slice(0, 5) : [],
-    internal_link_suggestions: links,
+    internal_link_suggestions: isMonitoring ? [] : links,
     internal_link_guard: {
       status: links.length ? 'CONTEXT_REVIEW_REQUIRED' : (linkAnalysis.rejected.length ? 'DUPLICATES_REMOVED' : 'NO_CANDIDATES'),
       scanned: linkAnalysis.scanned,
@@ -1275,6 +1281,79 @@ function proposalReadyStatus(status) {
   return ['READY_DRAFT', 'READY_TEXT', 'READY_LINK'].includes(String(status || ''));
 }
 
+function proposalText(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function proposalValueIsPresent(value) {
+  return Boolean(proposalText(value) && proposalText(value) !== 'MISSING');
+}
+
+function proposalTextSupportsQuery(value, query) {
+  const normalized = normalizeProposalText(value);
+  const generic = new Set(['jak', 'czy', 'co', 'po', 'dla', 'oraz', 'wynik', 'wyniki', 'czytac', 'czytanie', 'bezpieczenstwo', 'efekty', 'ryzyko', 'dawka', 'objawy', 'wskazania', 'przewodnik', 'kompletny', 'rodzaje']);
+  const tokens = normalizeProposalText(query)
+    .split(/[^a-z0-9]+/)
+    .filter((token) => token.length >= 2 && !generic.has(token));
+  return Boolean(tokens.length && tokens.every((token) => proposalTokenMatches(normalized, token)));
+}
+
+function evaluateSeoCandidateGap(card, proposal) {
+  const query = approvalGscSnapshot(card).query;
+  if (!query) {
+    return {
+      eligible: false,
+      reason: 'Brak ujawnionej frazy GSC: nie da się wykazać luki ani przygotować bezpiecznej zmiany.',
+      missing: 'GSC_QUERY',
+    };
+  }
+  if (!proposalReadyStatus(proposal?.status)) {
+    const linkBasis = proposal?.change_type === 'INTERNAL_LINKING' ? proposalText(proposal?.after?.missing_basis) : '';
+    return {
+      eligible: false,
+      reason: linkBasis || `Brak konkretnego nowego tekstu (${proposal?.status || 'NOT_READY'}); kandydat pozostaje w monitoringu.`,
+      missing: 'NEW_TEXT',
+    };
+  }
+  if (proposal?.change_type === 'INTERNAL_LINKING') {
+    const currentText = proposalText(proposal?.before?.paragraph);
+    const newText = proposalText(proposal?.after?.exact_text);
+    if (!currentText || !newText) {
+      return {
+        eligible: false,
+        reason: 'Brak konkretnego akapitu źródłowego albo gotowego tekstu linku; nie tworzymy sugestii po samym podobieństwie słów.',
+        missing: !currentText ? 'CURRENT_TEXT' : 'NEW_TEXT',
+      };
+    }
+    if (!proposalTextSupportsQuery(currentText, query)) {
+      return {
+        eligible: false,
+        reason: 'Akapit źródłowy nie potwierdza frazy GSC; link dobrany tylko po podobieństwie słów trafia do monitoringu.',
+        missing: 'CURRENT_TEXT',
+      };
+    }
+    return { eligible: true, query, current_text: currentText, new_text: newText, change_type: proposal.change_type };
+  }
+  const before = proposal?.before || {};
+  const after = proposal?.after || {};
+  const pairs = [
+    ['title', 'title'],
+    ['meta_description', 'meta_description'],
+    ['lead', 'first_answer'],
+  ];
+  const evidence = pairs
+    .map(([currentKey, newKey]) => ({ current: proposalText(before[currentKey]), next: proposalText(after[newKey]) }))
+    .find(({ current, next }) => proposalValueIsPresent(current) && proposalValueIsPresent(next) && proposalComparisonText(current) !== proposalComparisonText(next));
+  if (!evidence) {
+    return {
+      eligible: false,
+      reason: 'Brak pary „obecny tekst → nowy tekst” różniącej się na stronie; kandydat pozostaje w monitoringu.',
+      missing: Object.values(before).some(proposalValueIsPresent) ? 'NEW_TEXT' : 'CURRENT_TEXT',
+    };
+  }
+  return { eligible: true, query, current_text: evidence.current, new_text: evidence.next, change_type: proposal?.change_type || '' };
+}
+
 function sourceParagraphHasLink(file, paragraph, targetFile) {
   const html = readTextIfExists(path.join(ROOT, normalizeReportFile(file)));
   const targetNeedle = `/${targetFile}`;
@@ -1285,13 +1364,13 @@ function sourceParagraphHasLink(file, paragraph, targetFile) {
   });
 }
 
-function buildLinkProposal(link, targetArticle, articleByFile) {
+function buildLinkProposal(link, targetArticle, articleByFile, query) {
   const sourceFile = normalizeReportFile(link?.from);
   const targetFile = normalizeReportFile(targetArticle?.file || link?.to);
   const sourceArticle = articleByFile?.get?.(sourceFile) || {};
   const targetTitle = proposalDisplayTitle(targetArticle, link?.anchor || targetFile).replace(/[.!?]+$/g, '');
-  const relevant = proposalRelevantParagraph(proposalParagraphs(sourceFile, sourceArticle), targetTitle);
-  const targetTokens = proposalTokens(targetTitle);
+  const relevant = proposalRelevantParagraph(proposalParagraphs(sourceFile, sourceArticle), query);
+  const targetTokens = proposalTokens(query);
   const sourceNormalized = normalizeProposalText(relevant.text);
   const targetTopicScore = targetTokens.reduce((sum, token) => sum + (proposalTokenMatches(sourceNormalized, token) ? 1 : 0), 0);
   const sourceParagraph = relevant.text;
@@ -1320,7 +1399,7 @@ function buildLinkProposal(link, targetArticle, articleByFile) {
       }
       : {
         missing_basis: targetTopicScore === 0
-          ? `Wskazany akapit źródłowy nie zawiera słów z tematu strony docelowej („${targetTitle}”); nie dodawać linku bez ręcznego potwierdzenia miejsca.`
+          ? `Wskazany akapit źródłowy nie potwierdza frazy GSC („${query || targetTitle}”); nie dodawać linku bez ręcznego potwierdzenia miejsca.`
           : 'Nie udało się odczytać akapitu źródłowego albo tytułu strony docelowej; nie dodawać linku automatycznie.',
       }),
     basis: 'local_article_text_and_internal_link_map',
@@ -1416,10 +1495,11 @@ function buildReadySeoProposal(card, article = {}, links = [], articleByFile) {
     };
   }
   if (link?.from && card?.file) {
+    const query = approvalGscSnapshot(card).query;
     const targetArticle = articleByFile?.get?.(normalizeReportFile(card.file)) || article;
     const linkProposals = [link, ...links.slice(1)]
       .filter((candidate, index, candidates) => candidates.findIndex((item) => item?.from === candidate?.from) === index)
-      .map((candidate) => buildLinkProposal(candidate, targetArticle, articleByFile));
+      .map((candidate) => buildLinkProposal(candidate, targetArticle, articleByFile, query));
     return linkProposals.find((proposal) => proposal.status === 'READY_LINK') || linkProposals[0];
   }
   const contentProposal = buildContentProposal(card, { ...article, file: card?.file || article?.file });
@@ -1853,21 +1933,36 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
   const promisingCards = [];
   const repairCards = [];
   const monitoringCards = [];
+  const assignCard = (card, basket) => {
+    if (basket === 'MONITORING') {
+      monitoringCards.push(card);
+      return;
+    }
+    const file = approvalCardKey(card);
+    const article = articleByFile?.get?.(file);
+    const proposal = buildReadySeoProposal(card, article, analyzeSourceLinkSuggestions(card, 4).accepted, articleByFile);
+    const gap = evaluateSeoCandidateGap(card, proposal);
+    if (!gap.eligible) {
+      monitoringCards.push({ ...card, monitoring_reason: gap.reason, monitoring_gap: gap });
+      return;
+    }
+    if (basket === 'BOOST') boostCards.push(card);
+    else if (basket === 'NAPRAWA') repairCards.push(card);
+    else promisingCards.push(card);
+  };
   if (fullCoverageItems.length) {
     for (const card of enrichedCards) {
       const basket = seoBasketForCard(card, articleByFile);
-      if (basket === 'BOOST') boostCards.push(card);
-      else if (basket === 'NAPRAWA') repairCards.push(card);
-      else if (basket === 'MONITORING') monitoringCards.push(card);
-      else promisingCards.push(card);
+      assignCard(card, basket);
     }
   } else {
     const legacyBoost = enrichedCards.filter((card) => card.type === 'P0_PUSH_TO_PAGE_ONE');
     const legacyRepair = enrichedCards.filter((card) => ['P1_BUILD_DISCOVERY', 'P1_AEO_UPGRADE'].includes(card.type));
     const excludedKeys = new Set([...legacyBoost, ...legacyRepair].map(approvalCardKey).filter(Boolean));
-    boostCards.push(...legacyBoost);
-    repairCards.push(...legacyRepair);
-    promisingCards.push(...buildPromisingSeoCards(enrichedCards, contentStrategy, excludedKeys, articleByFile));
+    legacyBoost.forEach((card) => assignCard(card, 'BOOST'));
+    legacyRepair.forEach((card) => assignCard(card, 'NAPRAWA'));
+    buildPromisingSeoCards(enrichedCards, contentStrategy, excludedKeys, articleByFile)
+      .forEach((card) => assignCard(card, 'ROKUJE'));
   }
   const allCards = [...boostCards, ...promisingCards, ...repairCards, ...monitoringCards];
   const sharedPriority = hydrateSharedPriorityList(allCards, fullCoverageReport?.shared_priority_list);
@@ -1905,7 +2000,7 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
   const approvalItems = [...boostItems, ...promisingItems, ...repairItems, ...monitoringItems];
   return {
     status: 'AWAITING_USER_APPROVAL',
-    rule: 'Każdy artykuł trafia dokładnie do jednego koszyka: BOOST, ROKUJE, NAPRAWA albo MONITORING. Cooldown przenosi do MONITORING, ale nigdy nie usuwa URL-a z raportu.',
+    rule: 'Do BOOST, ROKUJE i NAPRAWA trafia wyłącznie kandydat z pełną luką: fraza GSC → obecny tekst → konkretny nowy tekst. Brak dowolnego elementu daje MONITORING; cooldown także nie usuwa URL-a z raportu.',
     no_generic_text: true,
     priority_contract: {
       source: 'scripts/lib/seo-priority-list.js',
@@ -1961,9 +2056,9 @@ function buildSeoApprovalWave(cards, contentStrategy, articleByFile, sourceWindo
     monitoring: monitoringItems,
     full_portfolio: allCards.map((card) => ({
       file: approvalCardKey(card),
-      basket: seoBasketForCard(card, articleByFile),
+      basket: monitoringCards.includes(card) ? 'MONITORING' : seoBasketForCard(card, articleByFile),
       diagnosis: card.diagnosis || card.type,
-      required_action: card.required_action?.required_change || card.tasks?.[0] || 'INSUFFICIENT_DATA',
+      required_action: card.monitoring_reason || card.required_action?.required_change || card.tasks?.[0] || 'INSUFFICIENT_DATA',
       cooldown_status: isRecentlyTouched(approvalCardKey(card), articleByFile, 14) ? 'COOLDOWN_MONITORUJ' : 'READY_FOR_APPROVAL',
     })),
   };
@@ -4867,6 +4962,7 @@ module.exports = {
   buildGscAfterChangeQueue,
   buildSeoApprovalWave,
   buildSimpleSeoSummary,
+  evaluateSeoCandidateGap,
   resolveSimpleSeoSelection,
   buildKpiVerdict,
   buildSeoWorkHistory,
